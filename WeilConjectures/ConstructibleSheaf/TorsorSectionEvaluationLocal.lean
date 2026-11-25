@@ -14,8 +14,17 @@ import WeilConjectures.ConstructibleSheaf.TorsorNormalizedGraphEvaluation
 /-!
 # Evaluation on etale objects admitting a torsor section
 
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R.
-(blueprint: lem-weil-pbc-torsor-section-evaluation-local)
+## Implementation details
+
+A map `f` from `W` to the torsor gives a section of `W ×_V c.P` over `W`. Evaluation on its
+graph is injective on equivariant functions (the torsor splits into translates of the graph),
+and graph evaluation after a normalized evaluation is bijective by the constant-coordinate
+description of `F` upstairs. Hence the normalized evaluation itself is bijective. No descent to
+objects without a torsor section is involved.
+
+## References
+
+* [Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R]
 -/
 
 @[expose] public section
@@ -25,25 +34,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 open Etale
 
-/-- Normalized evaluation is bijective on an etale object with a map to the torsor.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R.
-(blueprint: lem-weil-pbc-torsor-section-evaluation-local)
-
-Proof:
-Write Y for the total space of c. Since Y is connected and nonempty, the supplied
-constant trivialization identifies F(Y) with A and identifies the restriction of F
-on Y with the locally constant function sheaf with value F(Y). The map f gives a
-section of W times_V Y over W. The torsor isomorphism splits this product into
-translates of that section, indexed by P. Evaluation on the chosen section therefore
-identifies equivariant locally constant functions with locally constant functions
-on W with value F(Y): extend such a function on each translate using the P action.
-These formulas are inverse, including on the empty W. Under the constant
-trivialization, a section of F(W) is locally a restriction of a section x of F(Y).
-Naturality of alpha along f and diagonal normalization show that its evaluation
-on the chosen section is exactly x on each such open. Equality of locally constant
-functions is local, so alpha is the inverse of the evaluation identification.
-No descent along W times_V Y to an arbitrary W is asserted here; f is essential.
--/
+/-- Normalized evaluation is bijective on an etale object with a map to the torsor. -/
 theorem Scheme.GaloisCover.sectionEvaluation_bijective_of_section
     {V : Scheme.{u}} [ConnectedSpace V] (ℓ : ℕ) [Fact ℓ.Prime]
     (P : Type u) [Group P] [Finite P]

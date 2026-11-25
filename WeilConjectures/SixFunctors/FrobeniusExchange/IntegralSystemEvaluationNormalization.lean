@@ -14,7 +14,26 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
 /-! # Normalized right-derived evaluation of strict integral systems
 
-(blueprint: lem-weil-integral-system-evaluation-normalization).
+If the ordinary evaluation mate of a strict integral system is invertible, then so is its
+canonical right-derived mate.
+
+## Main results
+
+- `integralSystemEvaluationMate_isIso`
+
+## Implementation details
+
+The reference mate is first handled in its native varying-ring module categories
+(`varyingEvaluationMate_isIso`), before specializing the tower; this keeps comparisons of the
+coefficient presentations out of the derived construction. The finite direct-image functor is
+identified with the varying-ring direct image by the ring-sheaf adjunction inverse equation;
+the varying-ring ordinary and derived comparison mates are invertible, and the general
+cochain-normalization argument transfers derived invertibility to the given ordinary mate.
+
+## References
+
+- W. Zheng, 4.10.
+- Stacks Project, Tags 070I, 070K, 07A7.
 -/
 
 @[expose] public noncomputable section
@@ -129,8 +148,8 @@ private theorem varyingDerivedMateIso (R : ℕ → CommRingCat.{u + 1})
   rw [ProEtale.VaryingRing.square_symm]
   exact ProEtale.VaryingRing.evalPMate_isIso R q f n
 
-/-- Transfer the reference mate in its native module categories, before specializing the tower.
-This keeps comparisons of the coefficient presentations out of the derived construction. -/
+/-- For varying-ring modules, an invertible ordinary evaluation mate has an invertible
+right-derived mate. -/
 private theorem varyingEvaluationMate_isIso (R : ℕ → CommRingCat.{u + 1})
     (q : ∀ n, R (n + 1) ⟶ R n) {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     {L : ProEtale.VaryingRing.Modules R q Y ⥤ ProEtale.VaryingRing.Modules R q X}
@@ -177,14 +196,7 @@ private theorem varyingEvaluationMate_isIso (R : ℕ → CommRingCat.{u + 1})
     (varyingDerivedMateIso R q f n)
 
 /-- An ordinary invertible evaluation mate for strict integral systems has an
-invertible canonical right-derived mate for the actual integral pullback models.
-Source: Zheng 4.10; Stacks Tags 070I, 070K and 07A7
-(blueprint: lem-weil-integral-system-evaluation-normalization).
-
-Identify the finite direct-image functor with the varying-ring direct image by the
-ring-sheaf adjunction inverse equation. The varying-ring ordinary and derived
-comparison mates are invertible. The general cochain-normalization argument then
-transfers derived invertibility to the given ordinary invertible mate. -/
+invertible canonical right-derived mate for the integral pullback models. -/
 theorem integralSystemEvaluationMate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     [(integralComparisonSequenceDirectImage l E f).Additive]
     [Abelian.HasKInjectiveResolutions (coefficientSequenceModules l E X)]

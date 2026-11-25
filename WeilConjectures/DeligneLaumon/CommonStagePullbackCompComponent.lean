@@ -14,7 +14,25 @@ import all Mathlib.Logic.Small.Defs
 
 /-! # Common-stage pullback composition component
 
-(blueprint: lem-zl-common-stage-pullback-comp-naturality). -/
+Naturality of the common-stage pullback compositor, via its representatives at fixed
+coefficient stages.
+
+## Implementation details
+
+The final identification in `commonStagePullbackCompComponent_stage_representation` goes through
+a generic transport lemma instantiated in this file (so that every instance term is the one of
+this file) and an opaque boundary for the transported comparisons, to avoid an expensive defeq
+check.
+
+The stage representation itself: the component is represented at `P.stage` by the
+fixed-stage rational compositor; enlarging the representative to `L` applies the coefficient
+transition (`StageSystem.ι_map_eq`), and `rationalPullbackComposition_scalar` carries the
+`P.stage` compositor to the `L` compositor conjugated by the three
+`commonStagePullbackComparison` factors.
+
+## References
+
+* [Stacks Project, Tag 099N] -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -59,13 +77,8 @@ attribute [local irreducible] ScalarLocalization.composition
   completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
   scalarReductionDerivedExistence Scheme.residueField
 
-/-! v4.35 note: the final identification in `commonStagePullbackCompComponent_stage_representation`
-goes through a generic transport lemma instantiated in this file (so that every instance term is
-the one of this file) and an opaque boundary for the transported comparisons; the single defeq of
-the original proof needs about 44 s on v4.35. Statements are unchanged. -/
-
 /-- Generic form of the transport of a compositor square through functors equal to the
-scalar extensions. Source: elementary category theory. -/
+scalar extensions. -/
 private theorem compositor_transport
     {AX AY AZ BX BY BZ : Type*} [Category AX] [Category AY] [Category AZ]
     [Category BX] [Category BY] [Category BZ]
@@ -150,14 +163,9 @@ private theorem stage_square_cancel {C D : Type*} [Category* C] [Category* D] (G
   simp only [Category.assoc, Iso.inv_hom_id_assoc, Functor.map_comp,
     Iso.inv_hom_id_map_assoc, reassoc_of% h]
 
-/-- The conjugated fixed-stage square underlying common-stage naturality.
-Source: Stacks 099N(5), finite-stage cancellation after coefficient compatibility.
-(blueprint: lem-zl-common-stage-pullback-comp-naturality-representative).
-This is the stage-category equality obtained after inserting the three pullback
-comparison isomorphisms; the common-stage wrapper is handled by the parent theorem.
-Proof: cancel the inner comparison of `f ≫ g` at `Q` and the comparison of `f` at the
-pullback of `P`, expand the pullback of the composite map by functoriality, and apply the
-fixed-stage rational naturality. -/
+/-- The conjugated fixed-stage square underlying common-stage naturality: the
+stage-category equality obtained after inserting the three pullback comparison
+isomorphisms. -/
 theorem commonStagePullbackCompComponent_stage_square
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -350,21 +358,9 @@ private theorem commonStagePullbackCompComponent_stage_transport
   exact h
 
 
-/-- The selected common-stage component is represented at every larger coefficient stage.
-Source: Stacks 099N(5), coefficient-compatibility argument in residue-compatible pullback.
-(blueprint: lem-zl-common-stage-pullback-comp-naturality-representative).
-This is the scalar-extension transport of the chosen integral compositor; it is the
-finite-stage calculation used by the naturality proof.
-Proof: by the object representation both sides are arrows of the pair category between the
-same literal objects. The left side is represented at `P.stage` by the localized integral
-compositor at `P.stage`, i.e. by the fixed-stage rational compositor. Enlarging that
-representative to `L` applies the coefficient transition `P.stage ≤ L`
-(StageSystem.ι_map_eq). The recorded transitions are the rational scalar extensions, and
-rationalPullbackComposition_scalar_transport (from integralPullbackComposition_scalar: the
-compositor is pinned by its system-level reduction, on which scalar extension acts
-compatibly) carries the `P.stage` compositor to the `L` compositor conjugated by exactly the
-three `commonStagePullbackComparison` factors; the literal equality transports cancel by
-proof irrelevance. -/
+/-- The selected common-stage component is represented at every larger coefficient stage
+`L`, by the fixed-stage rational compositor at `L` conjugated by the pullback comparison
+isomorphisms. -/
 theorem commonStagePullbackCompComponent_stage_representation
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]

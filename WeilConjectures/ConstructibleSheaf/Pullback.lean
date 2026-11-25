@@ -31,7 +31,6 @@ pullback (`AlgebraicGeometry.Scheme.upperStarConstantSheafIso`). Finiteness is c
 stalks, which pullback preserves (`AlgebraicGeometry.Etale.upperStarCompSheafFiberIso`), and
 a stratification pulls back to a stratification
 (`AlgebraicGeometry.Scheme.Stratification.pullback`).
-(blueprint: `prop-constructible-pullback`)
 
 -/
 
@@ -98,8 +97,7 @@ instance : etalePrecoverage.{u}.IsStableUnderBaseChange :=
   inferInstanceAs (precoverage @Etale).IsStableUnderBaseChange
 
 omit [HasSmallSiteSheafify A] in
-/-- Locally constant sheaves are invariant under isomorphism.
-(blueprint: `lemma-constructible-iso-invariance`) -/
+/-- Locally constant sheaves are invariant under isomorphism. -/
 lemma IsLocallyConstantSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     [IsLocallyConstantSheaf F] : IsLocallyConstantSheaf F' := by
   obtain ⟨⟨𝒰, h𝒰⟩⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := F)
@@ -107,9 +105,7 @@ lemma IsLocallyConstantSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F
     have := h𝒰 j
     Sheaf.isConstant_congr _ ((X.smallEtaleTopology.overPullback A _).mapIso i)⟩⟩⟩
 
-/-- **Pullback of a locally constant sheaf is locally constant**: the pullback of a
-trivialising cover is a trivialising cover.
-(blueprint: `lemma-constructible-pullback-locally-constant`) -/
+/-- **Pullback of a locally constant sheaf is locally constant.** -/
 theorem IsLocallyConstantSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTopology A)
     [IsLocallyConstantSheaf F] : IsLocallyConstantSheaf ((Etale.upperStar A g).obj F) := by
   obtain ⟨⟨𝒰, h𝒰⟩⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := F)
@@ -138,8 +134,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
 omit [HasSmallSiteSheafify A] in
-/-- Finite sheaves are invariant under isomorphism.
-(blueprint: `lemma-constructible-iso-invariance`) -/
+/-- Finite sheaves are invariant under isomorphism. -/
 lemma IsFiniteSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     [IsFiniteSheaf F] : IsFiniteSheaf F' where
   isFinitelyGenerated_sheafFiber Ω _ _ s :=
@@ -147,8 +142,7 @@ lemma IsFiniteSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
       ((pointSmallEtale s).sheafFiber.mapIso i)
 
 omit [HasSmallSiteSheafify A] in
-/-- **Pullback of a finite sheaf is finite**: the stalks of `g^* F` are stalks of `F`.
-(blueprint: `lemma-constructible-pullback-finite`) -/
+/-- **Pullback of a finite sheaf is finite.** -/
 theorem IsFiniteSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTopology A)
     [IsFiniteSheaf F] : IsFiniteSheaf ((Etale.upperStar A g).obj F) where
   isFinitelyGenerated_sheafFiber Ω _ _ s :=
@@ -156,8 +150,7 @@ theorem IsFiniteSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTopology A)
       (s ≫ g)).of_iso ((Etale.upperStarCompSheafFiberIso A g s).app F).symm
 
 omit [HasSmallSiteSheafify A] in
-/-- Finite locally constant sheaves are invariant under isomorphism.
-(blueprint: `lemma-constructible-iso-invariance`) -/
+/-- Finite locally constant sheaves are invariant under isomorphism. -/
 lemma IsFiniteLocallyConstantSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     [IsFiniteLocallyConstantSheaf F] : IsFiniteLocallyConstantSheaf F' where
   toIsLocallyConstantSheaf := IsLocallyConstantSheaf.of_iso i
@@ -175,8 +168,7 @@ end Finite
 section Stratification
 
 /-- The pullback of a stratification of `X` along `g : Y ⟶ X`: the strata are the preimages
-of the strata, with the base changes of the immersions.
-(blueprint: `lemma-constructible-pullback-stratification`) -/
+of the strata, with the base changes of the immersions. -/
 @[simps n stratum domain immersion]
 def Stratification.pullback (S : Stratification X) (g : Y ⟶ X) : Stratification Y where
   n := S.n
@@ -200,8 +192,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
 omit [HasSmallSiteSheafify A] in
-/-- Constructible sheaves are invariant under isomorphism.
-(blueprint: `lemma-constructible-iso-invariance`) -/
+/-- Constructible sheaves are invariant under isomorphism. -/
 lemma IsConstructibleSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     [IsConstructibleSheaf F] : IsConstructibleSheaf F' := by
   obtain ⟨S, hS⟩ := IsConstructibleSheaf.exists_stratification (FA := FA) (CA := CA) (F := F)
@@ -209,9 +200,7 @@ lemma IsConstructibleSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F �
     have := hS j
     IsFiniteLocallyConstantSheaf.of_iso ((Etale.upperStar A (S.immersion j)).mapIso i)⟩
 
-/-- **Pullback of a constructible sheaf is constructible**: the stratification pulls back, and
-the pullback of `F` to a pulled-back stratum is the pullback of the pullback of `F` to the
-stratum. (blueprint: `prop-constructible-pullback`) -/
+/-- **Pullback of a constructible sheaf is constructible.** -/
 theorem IsConstructibleSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTopology A)
     [IsConstructibleSheaf F] : IsConstructibleSheaf ((Etale.upperStar A g).obj F) := by
   obtain ⟨S, hS⟩ := IsConstructibleSheaf.exists_stratification (FA := FA) (CA := CA) (F := F)

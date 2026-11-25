@@ -44,8 +44,7 @@ private theorem constant_tensor (Y : Scheme.{u})
         ((Functor.const Y.Etaleᵒᵖ).obj a) ((Functor.const Y.Etaleᵒᵖ).obj b) ≪≫
       (presheafToSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapIso e)
 
-/-- The tensor product of locally constant module sheaves is locally constant.
-(blueprint: lem-weil-pbc-flc-tensor-locally-constant-part) -/
+/-- The tensor product of locally constant module sheaves is locally constant. -/
 theorem IsLocallyConstantSheaf.tensorObj_part
     (hF : IsLocallyConstantSheaf F) (hG : IsLocallyConstantSheaf G) :
     IsLocallyConstantSheaf (F ⊗ G) := by
@@ -89,8 +88,7 @@ theorem IsLocallyConstantSheaf.tensorObj_part
   have hFG := constant_tensor _ ((Etale.upperStar A f).obj F) ((Etale.upperStar A f).obj G)
   exact Sheaf.isConstant_congr _ (Functor.Monoidal.μIso (Etale.upperStar A f) F G)
 
-/-- The tensor product of finite module sheaves is finite on geometric stalks.
-(blueprint: lem-weil-pbc-flc-tensor-finite-part) -/
+/-- The tensor product of finite module sheaves is finite on geometric stalks. -/
 theorem IsFiniteSheaf.tensorObj_part
     (hF : IsFiniteSheaf F) (hG : IsFiniteSheaf G) :
     IsFiniteSheaf (F ⊗ G) := by

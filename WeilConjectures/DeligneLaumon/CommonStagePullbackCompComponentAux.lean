@@ -15,7 +15,15 @@ import all Mathlib.Logic.Small.Defs
 
 Auxiliary module for CommonStagePullbackCompComponent: naturality of the fixed-stage rational
 compositor on localized representatives.
-(blueprint: lem-zl-common-stage-pullback-comp-naturality-representative). -/
+
+## Implementation details
+
+The proof expands the chosen integral compositor on pure tensors, applies its integral
+naturality, and extends by additivity.
+
+## References
+
+* [Stacks Project, Tag 099N] -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -156,11 +164,7 @@ private theorem rational_naturality
 set_option allowUnsafeReducibility true in
 attribute [local reducible] rationalDerivedPullback
 
-/-- Naturality of the fixed-stage rational compositor on localized representatives.
-Source: Stacks 099N(5), coefficient-compatibility calculation on pure tensors and additivity.
-(blueprint: lem-zl-common-stage-pullback-comp-naturality-representative).
-The proof expands the chosen integral compositor on pure tensors, applies its integral
-naturality, and extends by additivity. -/
+/-- Naturality of the fixed-stage rational compositor on localized representatives. -/
 theorem commonStagePullbackRationalComposition_naturality
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]

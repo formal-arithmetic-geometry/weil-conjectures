@@ -26,7 +26,13 @@ translation `σ̄_c`, `c ∈ k₀`, carries to its image under some `K`-automorp
 (`LaurentSeries.exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single`).
 
 This is the formal local geometry at `∞` behind the ramification of the linear Artin–Schreier
-sheaves at infinity (blueprint `lemma-unramified-at-infinity-no-linear-characters--1`).
+sheaves at infinity.
+
+## Implementation details
+
+The scalar towers `k₀ → k̄ → k̄((t))` and `k₀ → k̄ → k̄⟦t⟧` are stated with the scalar actions
+coming from the algebra structures, since the instance found by unification is slow to compare
+with them.
 -/
 
 @[expose] public section
@@ -141,7 +147,7 @@ lemma affineLine.homOfVector_appTop_appTop (v : A) (c : k₀) :
 end GeometricPoint
 
 /-- The scalar tower `k₀ → k̄ → k̄((t))`, stated with the scalar actions coming from the algebra
-structures (the instance found by unification is slow to compare with them). -/
+structures. -/
 instance _root_.LaurentSeries.isScalarTower_algebraicClosure :
     @IsScalarTower k₀ (AlgebraicClosure k₀) (LaurentSeries (AlgebraicClosure k₀)) Algebra.toSMul
       Algebra.toSMul Algebra.toSMul :=
@@ -245,8 +251,7 @@ theorem laurentPoint_one_comp_geometricFiberMap_affineChart :
     congr 2
 
 /-- The point `z = t` of `ℙ¹_{k̄}` factors through the geometric fiber of every open `W ⊆ ℙ¹`
-containing `∞`, that is, with `𝔸¹ ∪ W = ℙ¹`: its closed point maps to `∞`, and every open of
-the local scheme `Spec k̄⟦t⟧` containing the closed point is everything. -/
+containing `∞`, that is, with `𝔸¹ ∪ W = ℙ¹`. -/
 theorem exists_comp_geometricFiberMap_eq_powerSeriesInfinityPoint
     (W : (ProjectiveLine (Spec (.of k₀))).Opens)
     (hW : (ProjectiveLine.affineChart (Spec (.of k₀))).opensRange ⊔ W = ⊤) :

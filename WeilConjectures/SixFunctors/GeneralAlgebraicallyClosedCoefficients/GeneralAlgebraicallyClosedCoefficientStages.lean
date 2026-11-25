@@ -12,10 +12,24 @@ import Mathlib.CategoryTheory.Whiskering
 
 /-! # Normalized scalar stages for algebraically closed coefficients
 
-The scalar-stage part of the intrinsic common-stage construction is isolated here
-so that normalization and pair-category constructions compile independently.
-Source: the scalar-stage steps of blueprint order 1462
-(blueprint: lem-general-algebraically-closed-coefficient-stages).
+For a prime `l` and an algebraic closure `Ω` of `ℚ_l`, this file defines the rational
+constructible stage `Stage l Ω Y E` attached to each finite subextension `E` of `Ω`, the scalar
+extension transitions between stages with their shift comparisons and associators, and the
+resulting stage system.
+
+## Main definitions
+
+* `Stage`: the rational constructible stage for a finite coefficient field.
+* `transition`, `associator`, `unitor`: scalar extension and its coherence isomorphisms.
+* `stageSystem`: the stage system determined by the transitions and associators.
+
+## Implementation details
+
+The scalar-stage part of the intrinsic common-stage construction is isolated here so that
+normalization and pair-category constructions compile independently. The scalar transitions
+are defined with the redundant characteristic parameter set to `0`; results available for a
+finite-field datum are transported along `scalarExtension_parameter_independent`, using an
+auxiliary datum with base field `ZMod p` for a prime `p > l`.
 -/
 
 @[expose] public section
@@ -168,67 +182,48 @@ variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- The specified raw rational stage, using its equivalent small coefficient model.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The specified raw rational stage, using its equivalent small coefficient model. -/
 noncomputable def Stage (E : Index l Ω) :=
   sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y
 
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The existing rational stage structure, on the named coefficient model. -/
 noncomputable instance stageCategory (E : Index l Ω) :
     Category (Stage l Ω Y E) :=
   inferInstanceAs (Category (sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y))
 
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The existing rational stage structure, on the named coefficient model. -/
 noncomputable instance stagePreadditive (E : Index l Ω) :
     Preadditive (Stage l Ω Y E) :=
   inferInstanceAs (Preadditive
     (sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y))
 
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The existing rational stage structure, on the named coefficient model. -/
 noncomputable instance stageZero (E : Index l Ω) :
     HasZeroObject (Stage l Ω Y E) :=
   sfRationalConstructibleZero l (Coefficient.{u} l Ω E) Y
 
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The existing rational stage structure, on the named coefficient model. -/
 noncomputable instance stageShift (E : Index l Ω) :
     HasShift (Stage l Ω Y E) ℤ :=
   sfRationalConstructibleShift l (Coefficient.{u} l Ω E) Y
 
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The existing rational stage structure, on the named coefficient model. -/
 noncomputable instance stageShiftAdditive (E : Index l Ω) (n : ℤ) :
     (shiftFunctor (Stage l Ω Y E) n).Additive :=
   sfRationalConstructibleShiftAdditive l (Coefficient.{u} l Ω E) Y n
 
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The existing rational stage structure, on the named coefficient model. -/
 noncomputable instance stagePretriangulated (E : Index l Ω) :
     Pretriangulated (Stage l Ω Y E) :=
   sfRationalConstructiblePretriangulated l (Coefficient.{u} l Ω E) Y
 
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The existing rational stage structure, on the named coefficient model. -/
 noncomputable instance stageTriangulated (E : Index l Ω) :
     IsTriangulated (Stage l Ω Y E) :=
   sfRationalConstructibleTriangulated l (Coefficient.{u} l Ω E) Y
 
-/-- The characteristic parameter affects only preservation proofs, not scalar extension.
-This identifies the datum-free transition with every allowed specialization before
-forming the common-stage system, without choosing a finite-field datum.
-Source: blueprint order 1821, scalar-transition clause
-(blueprint: lem-general-algebraically-closed-coefficient-stages).
-Proof: unfold sfConstructibleIntegralScalarExtension. For either parameter its object
-is the same ambient completed extension with a proof of the same intrinsic predicate.
-Proof irrelevance identifies these subtype objects; the full-subcategory morphism maps
-are the same ambient maps. Functor extensionality gives the first equality. Substitute
-that equality in sfRationalScalarExtension_existsUnique: the two specifications have
-the same object formula and the same image of every pure tensor. Uniqueness gives the
-second equality. The argument includes identity coefficient maps and zero objects and
-uses no geometric hypothesis on Y. -/
+/-- The integral and rational scalar extension functors do not depend on the characteristic
+parameter `p` (with `l ≠ p`). -/
 theorem scalarExtension_parameter_independent
     (l : ℕ) [Fact l.Prime] (p q : ℕ) (hp : l ≠ p) (hq : l ≠ q)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -243,16 +238,13 @@ theorem scalarExtension_parameter_independent
       unfold sfRationalScalarExtension
       exact ⟨rfl, rfl⟩
 
-/-- The actual completed rational scalar transition, with both coefficient identifications.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The actual completed rational scalar transition, with both coefficient identifications. -/
 noncomputable def transition (E L : Index l Ω) (h : E ≤ L) :
     Stage l Ω Y E ⥤ Stage l Ω Y L :=
   sfRationalScalarExtension l (Coefficient.{u} l Ω E) Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime))
     (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h)
 
-/-- The datum-free restricted completed integral tensor transition.
-Only its preservation proof uses the zero instance of the redundant parameter.
-Source: blueprint order 1821 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The datum-free restricted completed integral tensor transition. -/
 noncomputable abbrev integralTransition (E L : Index l Ω) (h : E ≤ L) :=
   sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
     (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
@@ -261,17 +253,9 @@ noncomputable abbrev integralTransition (E L : Index l Ω) (h : E ≤ L) :=
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
-/-- The integral transition inherits the ordinary tensor shift through its canonical
-quotient-completion comparison, not through an arbitrary exact-functor witness.
-Source: blueprint order 1462, exact transition clause
-(blueprint: lem-general-algebraically-closed-coefficient-stages).
-Proof: conjugate the ordinary derived tensor shift by sfIntegralOrdinaryComparison.
-The full intrinsic subcategory inherits the ambient shift. The inclusion's shift
-comparisons identify its shifted objects with ambient shifts on both sides. Full
-faithfulness lifts each component and its inverse. Naturality, the zero equation and
-the addition equation follow from the ordinary ones by cancellation of the comparisons.
-The formula fixes all components,
-so extensionality of natural isomorphisms and proof irrelevance prove uniqueness. -/
+/-- The integral scalar extension has a unique shift comparison whose image in the ambient
+derived category is the ordinary derived tensor shift conjugated by the quotient-completion
+comparison `sfIntegralOrdinaryComparison`. -/
 theorem integralScalarCommShift_existsUnique
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -303,8 +287,7 @@ theorem integralScalarCommShift_existsUnique
     ((sfIntegralConstructible l E Y).ι ⋙ integralOrdinaryDerivedScalar l E L ι Y)
     (sfIntegralOrdinaryComparison l E L ι Y).symm
 
-/-- The fixed ordinary-to-completed normalization of the integral transition shift.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The fixed ordinary-to-completed normalization of the integral transition shift. -/
 noncomputable instance integralTransitionCommShift (E L : Index l Ω) (h : E ≤ L) :
     (integralTransition l Ω Y E L h).CommShift ℤ :=
   (integralScalarCommShift_existsUnique l (Coefficient.{u} l Ω E)
@@ -332,14 +315,8 @@ variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (Y : AlgebraicGeometry.Scheme.{u})
 
 set_option linter.unusedSectionVars false in
-/-- The proof parameter in preservation cannot change the tensor functor.
-Source: blueprint order 1821, scalar transitions
-(blueprint: lem-general-algebraically-closed-coefficient-stages).
-Proof: the integral restrictions have the same ambient object and arrow maps;
-only their membership proofs differ, hence they agree by proof irrelevance.
-The two rational functors therefore satisfy the identical exists-unique tensor
-specification of sfRationalScalarExtension_existsUnique. Its uniqueness identifies
-these functors on objects and all pure tensors, hence on every morphism. -/
+/-- The datum-free transition agrees with the transition for any finite-field datum `D`
+with `l ≠ D.p`. -/
 theorem specialization_transition (E L : AlgebraicallyClosedCoefficients.Index l Ω)
     (h : E ≤ L) :
     transition l Ω Y E L h = SfAlgebraicallyClosedCoefficients.transition D l hl Ω Y E L h := by
@@ -399,16 +376,8 @@ private theorem normalized_transitionShift_existsUnique
 end
 
 set_option linter.unusedVariables false in
-/-- The rational transition shift is uniquely fixed by localizing the normalized integral
-shift. Source: blueprint order 1462, exact transition clause
-(blueprint: lem-general-algebraically-closed-coefficient-stages).
-Proof: choose a prime p strictly greater than l and use the concrete datum with base
-field ZMod p. The integral transition and its normalized shift agree with the p=0
-versions by parameter independence and integral normalization uniqueness. Equality
-transport therefore identifies the two rational normalization predicates at shift one.
-Transport the existing finite-field exists-unique theorem along that equality of
-functors and predicates. This proves existence and uniqueness of the full coherent
-integer-shift datum, with precisely the required integral-image normalization. -/
+/-- The rational transition has a unique shift comparison whose shift-one component is the
+localization of the normalized integral shift. -/
 theorem transitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L) :
     ∃! c : (transition l Ω Y E L h).CommShift ℤ,
       (fun [commInst : (transition l Ω Y E L h).CommShift ℤ] ↦
@@ -424,8 +393,7 @@ theorem transitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L) :
     omega
   exact normalized_transitionShift_existsUnique D l hlp Ω Y E L h
 
-/-- The canonical, integral-image-normalized shift comparison of the rational transition.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The canonical, integral-image-normalized shift comparison of the rational transition. -/
 noncomputable instance transitionCommShift (E L : Index l Ω) (h : E ≤ L) :
     (transition l Ω Y E L h).CommShift ℤ :=
   (transitionCommShift_existsUnique l Ω Y E L h).exists.choose
@@ -437,14 +405,8 @@ variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- The normalized scalar shift comparisons agree under specialization.
-Source: blueprint order 1821, exact transitions
-(blueprint: lem-general-algebraically-closed-coefficient-stages).
-Proof: the integral comparison is fixed by the same ordinary tensor shift and
-quotient-completion normalization on every object, independently of the proof
-parameter. Uniqueness identifies the two integral CommShift structures. The
-rational shift comparison is uniquely their localized image at one, with its
-coherent integer iterates, so its uniqueness gives the displayed identification. -/
+/-- The normalized shift comparison of the transition agrees with that of the transition for
+any finite-field datum `D` with `l ≠ D.p`. -/
 theorem specialization_transitionShift
     (E L : AlgebraicallyClosedCoefficients.Index l Ω) (h : E ≤ L) :
     HEq (transitionCommShift l Ω Y E L h)
@@ -495,14 +457,7 @@ section
 attribute [local semireducible] ScalarLocalization.category
 attribute [local irreducible] ScalarLocalization.composition
 
-/-- Exactness for the normalized shift comparison on the recorded intrinsic rational stages.
-Source: blueprint order 1462, exact transition clause
-(blueprint: lem-general-algebraically-closed-coefficient-stages).
-Proof: choose a prime p greater than l and the concrete finite-field datum with
-base ZMod p. Parameter independence identifies the rational scalar functors, and
-specialization_transitionShift identifies their specified CommShift structures.
-Transport the finite-field transitionExact theorem along both equalities. Its
-triangulated-functor assertion is therefore for the prescribed normalized shift. -/
+/-- The transition is a triangulated functor for its normalized shift comparison. -/
 @[instance]
 theorem transitionExact (E L : Index l Ω) (h : E ≤ L) :
     (transition l Ω Y E L h).IsTriangulated := by
@@ -523,10 +478,7 @@ end
 
 set_option linter.unusedSectionVars false in
 
-/-- Additivity of the published intrinsic rational scalar-extension functor.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages).
-Proof: the transition is the published sfRationalScalarExtension. Its named
-additivity instance gives precisely the two equations for the recorded stage Hom groups. -/
+/-- The transition is an additive functor. -/
 @[instance]
 theorem transitionAdditive (E L : Index l Ω) (h : E ≤ L) :
     (transition l Ω Y E L h).Additive := by
@@ -534,9 +486,7 @@ theorem transitionAdditive (E L : Index l Ω) (h : E ≤ L) :
     (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω L)
     (coefficientInclusion l Ω E L h)
 
-/-- Balanced tensor composition followed by the specified coefficient-map equality.
-This helper keeps the ordinary field structures explicit during size transport.
-Source: blueprint order 1821 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- Balanced tensor composition followed by the specified coefficient-map equality. -/
 noncomputable def scalarAssociator
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -553,13 +503,7 @@ noncomputable def scalarAssociator
 
 attribute [local irreducible] scalarAssociator
 
-/-- The scalar associator is fixed by the published balanced-tensor comparison.
-Source: blueprint order 1462, canonical composition clause
-(blueprint: lem-general-algebraically-closed-coefficient-stages).
-Proof: use sfRationalScalarComp, followed by equality transport along the actual
-coefficient-inclusion composition law, exactly scalarAssociator. The stage
-structures are the published rational structures, so this has the asserted endpoints.
-HEq specifies the entire natural isomorphism and hence proves uniqueness. -/
+/-- There is a unique associator for the transitions that agrees with `scalarAssociator`. -/
 theorem associator_existsUnique (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) :
     ∃! a : transition l Ω Y E L h ⋙ transition l Ω Y L M k ≅
         transition l Ω Y E M (h.trans k),
@@ -573,8 +517,7 @@ theorem associator_existsUnique (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M)
     (coefficientInclusion l Ω L M k) (coefficientInclusion l Ω E M (h.trans k))
     ((coefficientInclusion_laws l Ω).2 E L M h k) Y)
 
-/-- The canonical scalar associator, with its tensor-generator normalization.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The canonical scalar associator, with its tensor-generator normalization. -/
 noncomputable def associator (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) :
     transition l Ω Y E L h ⋙ transition l Ω Y L M k ≅
       transition l Ω Y E M (h.trans k) :=
@@ -582,8 +525,7 @@ noncomputable def associator (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) :
 
 attribute [local irreducible] associator
 
-/-- The normalized scalar unit, transported through the coefficient identifications.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The normalized scalar unit, transported through the coefficient identifications. -/
 noncomputable def unitor (E : Index l Ω) : transition l Ω Y E E le_rfl ≅
     𝟭 (Stage l Ω Y E) :=
   eqToIso (congrArg (sfRationalScalarExtension l
@@ -712,13 +654,7 @@ private theorem associator_pentagon
     associator_formula l Ω Y E L N h (k.trans m)]
   exact normalized_pentagon l Ω Y E L M N h k m
 
-/-- The normalized tensor associators satisfy the stage-system cocycle.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages).
-Proof: equality induction on the composite algebra maps reduces the normalized
-scalar pentagon to sfRationalScalar_coherence. The coefficient inclusions compose
-by coefficientInclusion_laws. Their chosen associators equal the normalized tensor
-comparisons by associator_existsUnique. Apply the natural-transformation pentagon
-at K, including repeated fields and identity inclusions. -/
+/-- The normalized tensor associators satisfy the stage-system cocycle. -/
 theorem associator_cocycle
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -736,11 +672,8 @@ theorem associator_cocycle
   simpa only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Category.id_comp] using hc
 
-/-- The tensor transitions and associators uniquely determine the stage system.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages).
-Proof: take T to be transition and assoc to be associator; associator_cocycle is
-precisely the required coherence equation. Conversely the displayed equalities fix
-all data fields of StageSystem; the remaining cocycle proof is proof irrelevant. -/
+/-- There is a unique stage system whose transitions are `transition` and whose associators
+are `associator`. -/
 theorem stageSystem_existsUnique
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -755,20 +688,15 @@ theorem stageSystem_existsUnique
     (fun {E L M} h k ↦ associator l Ω Y E L M h k)
     (fun h k m K ↦ associator_cocycle l Ω Y _ _ _ _ h k m K)
 
-/-- The stage system with exactly the specified tensor functors and associators.
-The uniqueness specification fixes every data field, retaining a small opaque interface
-for later elaboration of dependent representative types.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The stage system with exactly the specified tensor functors and associators. -/
 noncomputable abbrev stageSystem : StageSystem (Stage l Ω Y) :=
   (stageSystem_existsUnique l Ω Y).exists.choose
 
-/-- The existing tensor functor as a transition of the uniquely fixed stage system.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The existing tensor functor as a transition of the uniquely fixed stage system. -/
 noncomputable abbrev stageTransition (E L : Index l Ω) (h : E ≤ L) :=
   (stageSystem l Ω Y).T h
 
-/-- The specified shift comparison transported by equality of the transition functors.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+/-- The specified shift comparison transported by equality of the transition functors. -/
 noncomputable instance stageTransitionCommShift (E L : Index l Ω) (h : E ≤ L) :
     (stageTransition l Ω Y E L h).CommShift ℤ :=
   cast (congrArg (fun F : Stage l Ω Y E ⥤ Stage l Ω Y L ↦ F.CommShift ℤ)
@@ -777,10 +705,7 @@ noncomputable instance stageTransitionCommShift (E L : Index l Ω) (h : E ≤ L)
 
 attribute [local irreducible] stageCategory
 
-/-- Exactness of the prescribed stage transition.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages).
-Proof: stageSystem_existsUnique identifies this functor and its shift comparison
-with the specified tensor extension. Apply transitionExact. -/
+/-- Exactness of the prescribed stage transition. -/
 @[instance]
 theorem stageTransition_exact
     (l : ℕ) [Fact l.Prime]
@@ -792,9 +717,7 @@ theorem stageTransition_exact
     ((stageSystem_existsUnique l Ω Y).exists.choose_spec.1 E L h)
     (transitionCommShift l Ω Y E L h) (transitionExact l Ω Y E L h)
 
-/-- Additivity of the prescribed stage transition.
-Source: blueprint order 1462 (blueprint: lem-general-algebraically-closed-coefficient-stages).
-Proof: equality of functors with transition reduces the claim to transitionAdditive. -/
+/-- Additivity of the prescribed stage transition. -/
 @[instance]
 theorem stageTransition_additive
     (l : ℕ) [Fact l.Prime]

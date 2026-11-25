@@ -10,9 +10,9 @@ import Mathlib.LinearAlgebra.Determinant
 
 /-! # Triangular bases with nonzero diagonal for Weil flags
 
-Source: latest blueprint, thm-zl-real-mixed-by-curves.proof.md, paragraph beginning
-“All these finitely many subschemes”, dimension-zero Jordan filtrations
-(blueprint: lem-zl-condensed-point-weil-flags-triangular-basis).
+Over an algebraically closed field, an invertible operator admits an upper triangular basis
+with unit diagonal. This is used for the dimension-zero Jordan filtrations in the proof that
+real mixed sheaves are detected by curves.
 -/
 
 @[expose] public section
@@ -21,17 +21,7 @@ universe u
 open Module
 namespace WeilConjectures.CondensedWeilPointFlags
 
-/-- An invertible operator has an upper triangular basis with unit diagonal entries.
-Source: latest blueprint, thm-zl-real-mixed-by-curves.proof.md, dimension-zero
-Jordan-filtration sub-step
-(blueprint: lem-zl-condensed-point-weil-flags-triangular-basis).
-
-Proof: the complete invariant flag is constructed by adjoining an eigenvector in
-successive quotients, and a basis adapted to this flag is upper triangular, by the
-source library's triangularization theorem. The determinant of an automorphism is a
-unit. For an upper triangular matrix it is the product of its diagonal entries.
-Every factor of this nonzero product is nonzero, hence a unit in the field.
-The argument includes dimension zero and does not assume diagonalizability. -/
+/-- An invertible operator has an upper triangular basis with unit diagonal entries. -/
 theorem exists_triangular_basis_units {K : Type u} [Field K] [IsAlgClosed K]
     (d : ℕ) (A : (Fin d → K) ≃ₗ[K] (Fin d → K)) :
     ∃ b : Basis (Fin d) K (Fin d → K),

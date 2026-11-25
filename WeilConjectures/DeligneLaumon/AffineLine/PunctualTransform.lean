@@ -19,11 +19,10 @@ Let `G` be a Weil sheaf of finite support on the dual affine line. Its transform
 `π : X' ⟶ 𝔸¹` the projection. After base change to `k̄`, `Z̄` is a finite disjoint union of
 points `ξ`, `X̄'` is a disjoint union of horizontal lines `{ξ} × 𝔸¹`, and on such a line the
 kernel `μ^*ℒ_ψ` restricts to `ℒ_{ψ(ξ x)}`. Hence the underlying geometric sheaf of the transform
-is a finite direct sum of geometric linear characters (blueprint
-`proposition-fourier-transform-middle-extension--1`, Step 2).
+is a finite direct sum of geometric linear characters.
 
 Consequently the transform of an irreducible middle extension `(j_*M)[1]` is never punctual when
-`M` has no linear character as a geometric constituent (Step 3): by Fourier inversion,
+`M` has no linear character as a geometric constituent: by Fourier inversion,
 `(j_*M)[1](-1) ≅ FT_{ψ⁻¹}(G)`, so `M_k̄` is a direct sum of restrictions of linear characters.
 
 ## Main statements
@@ -83,9 +82,9 @@ noncomputable def affineLine.coordOfPoint (t : Spec (.of (AlgebraicClosure k₀)
 omit [Finite k₀] in
 /-- **The kernel along a horizontal line.** Let `i : Z ⟶ 𝔸¹` be a morphism over `k₀`, and
 `X' = Z ×_{𝔸¹} (𝔸¹ × 𝔸¹)` its base change along the first projection, with projections `q` to
-`Z` and `i'` to the plane. A section `σ` of the base change to `k̄` of `X' ⟶ 𝔸¹`
-(the second projection) lying over the geometric point `t` of `Z` is `y ↦ (t, y)`; along it
-the multiplication `μ` becomes the geometric multiplication by the coordinate of `t`. -/
+`Z` and `i'` to the plane. Along a section `σ` of the base change to `k̄` of `X' ⟶ 𝔸¹`
+(the second projection) lying over the geometric point `t` of `Z`, the multiplication `μ`
+becomes the geometric multiplication by the coordinate of `t`. -/
 lemma geometricFiberMap_mul_eq_geometricSMul {Z X' : Scheme.{u}}
     [Z.Over (Spec (CommRingCat.of k₀))] [X'.Over (Spec (CommRingCat.of k₀))]
     (i : Z ⟶ affineLine k₀) [i.IsOver (Spec (CommRingCat.of k₀))] (q : X' ⟶ Z)
@@ -143,8 +142,7 @@ namespace WeilSheaf
 
 variable {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-/-- **The inverse transform of a punctual sheaf, geometrically, explicitly** (blueprint
-`proposition-fourier-transform-middle-extension--1`, Step 2). In the situation of
+/-- **The inverse transform of a punctual sheaf, geometrically, explicitly.** In the situation of
 `AlgebraicGeometry.WeilSheaf.exists_epi_carrier_lowerStar_tensorObj_fourierKernel_inv`, the
 geometric sheaf underlying `π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^*E)` is a finite direct sum
 `⨁ₖ ℒ_{ψ(-ξₖ x)}^{mₖ}` over the geometric points `tₖ` of `Z`, where `ξₖ` is the coordinate of
@@ -252,15 +250,11 @@ theorem exists_iso_carrier_lowerStar_tensorObj_fourierKernel_inv
   choose m e using hk
   exact ⟨n, t, m, ht, ⟨e₁ ≪≫ biproduct.mapIso fun k ↦ (e k).some⟩⟩
 
-/-- **The inverse transform of a punctual sheaf, geometrically** (blueprint
-`proposition-fourier-transform-middle-extension--1`, Step 2). Let `i : Z₀ ⟶ 𝔸¹` be a finite reduced
-`k₀`-scheme over the line and `X' = Z₀ × 𝔸¹`, with projections `q : X' ⟶ Z₀` and `π : X' ⟶ 𝔸¹` and
-`i' = (i ∘ q, π) : X' ⟶ 𝔸¹ × 𝔸¹`. For a Weil sheaf `E` on `Z₀`, the geometric sheaf underlying
-`π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^*E)` is, if nonzero, a quotient of some linear character `ℒ_{ψ(a x)}`
-on `𝔸¹_{k̄}`: `Z̄` is a finite disjoint union of points `ξ`, so the sheaf is the direct sum of its
-restrictions to the lines `{ξ} × 𝔸¹`, on which `i'^*𝓚_{ψ⁻¹}` is `ℒ_{ψ⁻¹(ξ x)}` and `q^*E` is
-constant; and the tensor product `ℒ_{ψ⁻¹(ξ x)} ⊗ ℚ̄_ℓ = 𝓗om(ℒ_{ψ⁻¹(ξ x)}^∨, ℚ̄_ℓ)` is
-`ℒ_{ψ(-ξ x)}`. -/
+/-- **The inverse transform of a punctual sheaf, geometrically.** Let `i : Z₀ ⟶ 𝔸¹` be a finite
+reduced `k₀`-scheme over the line and `X' = Z₀ × 𝔸¹`, with projections `q : X' ⟶ Z₀` and
+`π : X' ⟶ 𝔸¹` and `i' = (i ∘ q, π) : X' ⟶ 𝔸¹ × 𝔸¹`. For a Weil sheaf `E` on `Z₀`, the geometric
+sheaf underlying `π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^*E)` surjects, if nonzero, onto some linear character
+`ℒ_{ψ(a x)}` on `𝔸¹_{k̄}`. -/
 theorem exists_epi_carrier_lowerStar_tensorObj_fourierKernel_inv
     (ψ : AddChar k₀ (PadicAlgCl l)) {Z X' : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
     [IsFinite (Z ↘ Spec (CommRingCat.of k₀))] [IsReduced Z] [X'.Over (Spec (CommRingCat.of k₀))]
@@ -376,8 +370,7 @@ variable (ψ : AddChar k₀ (PadicAlgCl l)) (D : LisseOnDenseOpen k₀ l)
 
 /-- **The geometric sheaf of the middle extension, by inversion.** If the transform of
 `(j_*M)[1]` is a sheaf `G` placed in degree `0`, and `FT_{ψ⁻¹}(G)` is a sheaf `H` placed in degree
-`-1`, then Fourier inversion `(j_*M)[1](-1) ≅ FT_{ψ⁻¹}(FT_ψ((j_*M)[1])) ≅ H[1]` shows that `j_*M`
-and `H` have the same underlying geometric sheaf, the Tate twist being a constant twist. -/
+`-1`, then `j_*M` and `H` have the same underlying geometric sheaf. -/
 theorem nonempty_carrier_directImage_iso_of_iso (hψ : ψ ≠ 1)
     {G H : WeilSheaf k₀ l (affineLine k₀)}
     (e : (fourierTransform ψ).obj D.middleExtension ≅ WeilSheaf.toComplex.obj G)
@@ -398,7 +391,7 @@ theorem nonempty_carrier_directImage_iso_of_iso (hψ : ψ ≠ 1)
     Φ.mapIso (WeilSheaf.toShiftedComplexCompHomologySheafIso.app H)⟩
 
 /-- A quotient `ℒ_{ψ(a x)}` of the geometric sheaf of `j_*M` restricts to a quotient
-`ℒ_{ψ(a x)}|_U` of `M_k̄`, since `j^* j_* M = M`: a linear geometric constituent of `M`. -/
+`ℒ_{ψ(a x)}|_U` of `M_k̄`, a linear geometric constituent of `M`. -/
 theorem hasLinearArtinSchreierConstituent_of_epi {a : AlgebraicClosure k₀}
     (p : D.directImage.obj.carrier ⟶
       (affineLine.geometricSMul k₀ a)^*ᵃ[l].obj (artinSchreier ψ 1).obj.carrier) [Epi p] :
@@ -423,8 +416,8 @@ theorem isZero_of_isZero_carrier_directImage (h : IsZero D.directImage.obj.carri
   have := (ProEtale.adicUpperStarLowerStarAdjunction l jg).isLeftAdjoint
   exact isZero_iff_isZero_carrier.2 (((jg)^*ᵃ[l].map_isZero h).of_iso cD)
 
-/-- The punctual case of `proposition-fourier-transform-middle-extension--1`, Step 3, for an
-explicit presentation `FT_{ψ⁻¹}(G) ≅ (π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^*E))[1]` of the inverse transform. -/
+/-- A punctual transform forces a linear geometric constituent, given an explicit presentation
+`FT_{ψ⁻¹}(G) ≅ (π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^*E))[1]` of the inverse transform. -/
 theorem exists_hasLinearArtinSchreierConstituent_of_iso_of_isPullback (hψ : ψ ≠ 1)
     (hD : ¬ IsZero D.sheaf) (G : WeilSheaf k₀ l (affineLine k₀))
     (e : (fourierTransform ψ).obj D.middleExtension ≅ WeilSheaf.toComplex.obj G)
@@ -450,14 +443,9 @@ theorem exists_hasLinearArtinSchreierConstituent_of_iso_of_isPullback (hψ : ψ 
     hP E fun h ↦ hD (D.isZero_of_isZero_carrier_directImage (h.of_iso c))
   exact ⟨a, D.hasLinearArtinSchreierConstituent_of_epi ψ (c.hom ≫ p)⟩
 
-/-- **A punctual transform forces a linear geometric constituent** (blueprint
-`proposition-fourier-transform-middle-extension--1`, Step 3). If the transform of the middle
-extension `(j_*M)[1]` is a sheaf `G` of finite support in degree `0`, then by Fourier inversion
-`(j_*M)[1](-1) ≅ FT_{ψ⁻¹}(G) ≅ (π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^* i^* G))[1]`, so `j_*M` and
-`π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^* i^* G)` have the same underlying geometric sheaf. The latter surjects onto
-some `ℒ_{ψ(a x)}` if `M ≠ 0`
-(`AlgebraicGeometry.WeilSheaf.exists_epi_carrier_lowerStar_tensorObj_fourierKernel_inv`), and
-restricting along `j` with `j^* j_* M = M` makes `ℒ_{ψ(a x)}|_U` a quotient of `M_k̄`. -/
+/-- **A punctual transform forces a linear geometric constituent.** If `M ≠ 0` and the transform
+of the middle extension `(j_*M)[1]` is a sheaf `G` of finite support in degree `0`, then some
+`ℒ_{ψ(a x)}|_U` is a geometric constituent of `M`. -/
 theorem exists_hasLinearArtinSchreierConstituent_of_iso (hψ : ψ ≠ 1) (hD : ¬ IsZero D.sheaf)
     (G : WeilSheaf k₀ l (affineLine k₀)) (hG : (WeilSheaf.support G).Finite)
     (e : (fourierTransform ψ).obj D.middleExtension ≅ WeilSheaf.toComplex.obj G) :
