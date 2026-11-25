@@ -13,8 +13,19 @@ import WeilConjectures.SixFunctors.IntegralHom.Tensor.IntegralHomTensorExchangeN
 
 /-! # Scalar tensor exchange on K-flat representatives
 
-Source: Stacks Tags 06YY and 08J7, scalar tensor comparison and evaluation.
-(blueprint: lem-sfb-integral-hom-scalar-tensor-exchange-representatives)
+The two normalized scalar tensor comparisons commute with adjunction exchange on K-flat
+representatives.
+
+## Implementation details
+
+The evaluation normalizations identify each adjunction-defined exchange with the signed
+interchange `x ⊗ y ↦ (-1)^(ij) y ⊗ x` in bidegree `(i, j)`, so both composites of the square
+agree on generating tensors; the derived counit normalization squares transport this to the
+displayed square.
+
+## References
+
+* Stacks Project, Tags 06YY, 08J7.
 -/
 
 @[expose] public section
@@ -46,28 +57,7 @@ private theorem exchange_naturality
 attribute [-instance] derivedCategory in
 /-- The two normalized scalar tensor comparisons commute with adjunction exchange
 on K-flat representatives. The two inputs are independent complexes; no internal
-Hom input or evaluation morphism occurs in this square.
-
-Source: Stacks Tags 06YY and 08J7, the K-flat scalar tensor and evaluation
-normalizations in the integral Hom reduction construction.
-(blueprint: lem-sfb-integral-hom-scalar-tensor-exchange-representatives).
-
-Proof: use the representative comparisons to identify the source tensors with the
-signed total tensors of P,Q and Q,P. Identify the reduced inputs with the ordinary
-extensions of P,Q by their derived counits, which are isomorphisms on K-flat
-complexes. Both reduced complexes are K-flat, by the two normalization packets.
-The evaluation normalizations identify each adjunction-defined exchange with the
-signed interchange x tensor y maps to (-1)^(ij) y tensor x in bidegree (i,j).
-The ordinary extension units in both packets send x to 1 tensor x. The scalar
-comparison of m is specified in the inverse direction to the total comparison of b;
-on the unit images its equation sends (1 tensor x) tensor (1 tensor y) to
-1 tensor (x tensor y). Consequently each composite in the displayed square sends
-a generating tensor to the same signed tensor. Scalars and tensor generation give
-the equality in each bidegree, sheafification preserves it, and direct-sum totalization
-makes it an equality of complexes. The two derived counit normalization squares
-transport this equality to the displayed square; cancel their invertible components
-and the representative isomorphisms. No derived internal Hom comparison is used.
-The unit, empty site, zero complexes, and exponent n=0 obey the same formulas. -/
+Hom input or evaluation morphism occurs in this square. -/
 theorem scalarTensorExchange_representatives
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

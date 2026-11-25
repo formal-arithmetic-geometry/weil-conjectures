@@ -13,8 +13,22 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNat
 
 /-! # The Ext-to-abelian-sections part of the comparison
 
-Source: Stacks Project, Tags 015E and 03FD.
-(blueprint: new-module-cohomology-ext-sections-factorization)
+The comparison between module cohomology and Ext-valued cohomology of a scheme factors through
+abelian derived sections: it is the common-resolution section comparison followed by the inverse
+site-section comparison and the terminal Ext-source comparison.
+
+## Main results
+
+- `AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.ext_sections_factorization`
+
+## Implementation details
+
+The proof first evaluates the three-map composite for arbitrary functors, then specializes it to
+the scheme, without unfolding the acyclic-resolution comparison inside the first factor.
+
+## References
+
+- Stacks Project, Tags 015E and 03FD.
 -/
 
 @[expose] public section
@@ -69,20 +83,9 @@ private theorem siteSectionsSourceChange_app
     NatIso.trans_app, comparisonNatIso_symm_app, siteSectionsObjIso,
     extSourceNatIso, NatIso.ofComponents.app]
 
-/-- The fixed module-to-Ext comparison factors through abelian derived sections.
-Source: Stacks Project, Tags 015E and 03FD; the Ext-to-sections half of the defining
-composite in ModuleCohomologyExtResolutionNaturality.
-(blueprint: new-module-cohomology-ext-sections-factorization)
-
-Proof: Unfold the fixed comparison and its natural isomorphism. Its constructor
-composes the common-resolution section comparison, the inverse site-section
-comparison, and the terminal Ext-source comparison. First evaluate this three-map
-composite for arbitrary functors, before specializing to the scheme. Apply that
-component formula and unfold the definition of module cohomology and the Ext-valued
-cohomology type. The inverse site component is siteSectionsObjIso.inv, and the
-terminal component is precompAddEquiv.symm. Their composite gives the asserted
-formula. This never unfolds the acyclic-resolution comparison inside the first
-factor, and includes degree zero, zero coefficients and empty schemes. -/
+/-- The fixed module-to-Ext comparison factors through abelian derived sections: it is the
+resolution section comparison, followed by the inverse of `siteSectionsObjIso` and the inverse
+of precomposition with `terminalSourceIso`. -/
 theorem ext_sections_factorization
     (X : Scheme.{u}) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (p : ℕ)
     (x : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) :

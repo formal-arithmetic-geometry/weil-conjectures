@@ -8,11 +8,7 @@ module
 public import WeilConjectures.SixFunctors.GeneratorReduction.GeneratorReductionData
 import WeilConjectures.SixFunctors.GeneratorReduction.PrimitiveCompletionEffectivity
 import WeilConjectures.SixFunctors.GeneratorReduction.ShortWordIntegralDomain
-/-! # Invertibility of short-word completion transport
-
-Source: blueprint fix-prop-coherence, basic structural maps
-(blueprint: lem-sf-generator-reduction-coherence).
--/
+/-! # Invertibility of short-word completion transport -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

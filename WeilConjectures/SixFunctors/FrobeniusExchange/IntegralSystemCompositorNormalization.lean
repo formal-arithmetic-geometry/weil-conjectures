@@ -12,7 +12,11 @@ public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperation
 
 The two constructions use the same strict coefficient systems and are identified by
 their actual section-normalized direct-image compositors, before exact localization.
-(blueprint: lem-weil-integral-system-compositor-normalization).
+
+## References
+
+* [Stacks, Tags 03D3 and 0D6D]
+* [Zheng, 4.10]
 -/
 
 @[expose] public noncomputable section
@@ -66,14 +70,7 @@ private theorem sequenceComposition_eq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y
         (compositorRings l E) (compositorQuotient l E) f g).choose_spec.1
 
 /-- The actual integral system compositor equals the section-normalized varying-ring
-compositor at the lifted quotient coefficient rings.
-Source: Stacks 0D6D and 03D3; Zheng 4.10
-(blueprint: lem-weil-integral-system-compositor-normalization).
-Proof: the varying-ring ordinary direct-image compositor satisfies the same section
-formula as the integral compositor. Its conjugate is the varying-ring pullback
-compositor by the left-adjoint composition identity. Uniqueness identifies the ordinary
-pullback compositors. Exact localization with the standard composition comparison
-then identifies the displayed derived compositors. -/
+compositor at the lifted quotient coefficient rings. -/
 theorem integralComparisonSystemComposition_eq_varyingRing
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     integralComparisonSystemComposition l E f g =

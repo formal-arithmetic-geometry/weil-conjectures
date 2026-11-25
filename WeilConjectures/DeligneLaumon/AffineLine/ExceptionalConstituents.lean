@@ -18,8 +18,7 @@ Let `j : U₀ ↪ 𝔸¹` be a dense open immersion and let `M ≅ ℚ̄_ℓ(b)`
 the constant sheaf on `U₀`. The underlying sheaf of the direct image `j_*M` is `j̄_*ℚ̄_ℓ ≅ ℚ̄_ℓ`,
 the constant sheaf extending uniquely across the boundary, so `j_*M` is a constant twist of the
 constant sheaf of the line. Hence `H_c^1(𝔸¹, j_*M) = 0`, since `R Γ_c(𝔸¹, ℚ̄_ℓ) = ℚ̄_ℓ(-1)[-2]`.
-This is the geometrically constant case of Step 4 of the blueprint proof of
-`theorem-weight-bound-affine-line`.
+This is the geometrically constant case of the weight bound on the affine line.
 
 ## Main statements
 
@@ -42,8 +41,7 @@ namespace AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 /-- If the sheaf `M` of `D` is a constant twist `ℚ̄_ℓ(b)` of the constant sheaf of `U₀`, then its
-direct image `j_*M` is a constant twist `ℚ̄_ℓ(c)` of the constant sheaf of the affine line: its
-underlying sheaf is `j̄_*ℚ̄_ℓ ≅ ℚ̄_ℓ`. -/
+direct image `j_*M` is a constant twist `ℚ̄_ℓ(c)` of the constant sheaf of the affine line. -/
 theorem exists_iso_directImage_constantTwist (D : LisseOnDenseOpen k₀ l) {b : (PadicAlgCl l)ˣ}
     (e : D.sheaf ≅ (adicConstant k₀ l D.U).constantTwist b) :
     ∃ c : (PadicAlgCl l)ˣ, Nonempty (D.directImage ≅
@@ -60,8 +58,7 @@ theorem exists_iso_directImage_constantTwist (D : LisseOnDenseOpen k₀ l) {b : 
       Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l D.U)).mapIso e) ≪≫ e₁)
 
 /-- If the sheaf `M` of `D` is a constant twist `ℚ̄_ℓ(b)` of the constant sheaf of `U₀`, then
-`H_c^1(𝔸¹, j_*M) = 0`: `j_*M` is a constant twist `ℚ̄_ℓ(c)` of the constant sheaf of the line,
-and `H_c^1(𝔸¹, ℚ̄_ℓ(c))` is `H_c^1(𝔸¹, ℚ̄_ℓ) = 0` with a rescaled Frobenius. -/
+`H_c^1(𝔸¹, j_*M) = 0`. -/
 theorem subsingleton_compactlySupportedCohomology_one_of_iso_constantTwist
     (D : LisseOnDenseOpen k₀ l) {b : (PadicAlgCl l)ˣ}
     (e : D.sheaf ≅ (adicConstant k₀ l D.U).constantTwist b) :

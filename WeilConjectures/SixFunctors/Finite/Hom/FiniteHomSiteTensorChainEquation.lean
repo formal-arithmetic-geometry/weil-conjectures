@@ -10,7 +10,12 @@ public import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomTensorAssociatorMo
 import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomSiteBetaUnit
 import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomSiteChainGenerators
 
-/-! # The ordinary scalar/site tensor square before localization -/
+/-! # The ordinary scalar/site tensor square before localization
+
+## References
+
+* [Stacks, Tag 07A4]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -35,9 +40,7 @@ attribute [local irreducible] finiteHomEtaleData finiteHomEtaleClosedGeneral
   coefficientFiniteQuotientDerived coefficientFiniteQuotientDerivedExistence
   ProEtale.etaleSheafExtendScalars ProEtale.finiteCoefficientIntrinsicComparison
 
-/-- The route extending the inverse-image tensor map before applying the mate.
-Source: Stacks 07A4; blueprint lemma-change-coefficients-internal-hom--1, final site comparison
-(blueprint: lem-coef-finite-hom-site-tensor-chain-equation). -/
+/-- The route extending the inverse-image tensor map before applying the mate. -/
 @[irreducible] def finiteHomSiteTensorLeftChain
     {n m : ℕ} (h : m ≤ n)
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology
@@ -75,9 +78,7 @@ Source: Stacks 07A4; blueprint lemma-change-coefficients-internal-hom--1, final 
               (.up ℤ)).app Q))
 
 -- Keep the concrete termwise and total tensor models in one definition.
-/-- The route applying the mate before the etale scalar and site tensor maps.
-Source: Stacks 07A4; blueprint lemma-change-coefficients-internal-hom--1, final site comparison
-(blueprint: lem-coef-finite-hom-site-tensor-chain-equation). -/
+/-- The route applying the mate before the etale scalar and site tensor maps. -/
 @[irreducible] def finiteHomSiteTensorRightChain
     {n m : ℕ} (h : m ≤ n)
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology

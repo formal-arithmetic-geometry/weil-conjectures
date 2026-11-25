@@ -156,10 +156,7 @@ private lemma constructible_of_isZero {M : Mod (Sheaf (Scheme.ProEt.topology X) 
     finitelyPresented_of_isZero
       (isZero_mapMod_upperStar_obj _ _ (isZero_mapMod_upperStar_obj R _ hM))⟩⟩
 
-/-- The zero complex is bounded constructible: it is bounded, and its cohomology
-sheaves are zero, which is constructible for the trivial stratification (the cokernel of `R⁰ ⟶ R⁰`).
-This makes `BoundedConstructible R` have a zero object without going through the triangulated
-structure. -/
+/-- The zero complex is bounded constructible. -/
 instance containsZero_boundedConstructible : (boundedConstructible R).ContainsZero where
   exists_zero := ⟨0, isZero_zero _, (mem_boundedConstructible_iff R 0).2
     ⟨⟨0, 0, fun i _ ↦ (DerivedCategory.homologyFunctor _ i).map_isZero (isZero_zero _)⟩,
@@ -255,9 +252,8 @@ variable (X : Scheme.{u})
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- Blueprint `prop-sfb-bounded-constructible-triangulated`, for `𝒪̲_E`: for a finite
-subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the bounded constructible complexes of `𝒪_{E,X}`-modules on a
-topologically noetherian scheme form a triangulated subcategory. -/
+/-- For a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the bounded constructible complexes of
+`𝒪_{E,X}`-modules on a topologically noetherian scheme form a triangulated subcategory. -/
 instance isTriangulated_boundedConstructible_padicIntegersRingObj
     [TopologicalSpace.NoetherianSpace X] (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
@@ -286,10 +282,9 @@ instance isTriangulated_boundedConstructible_padicIntegersRingObj
       ObjectProperty.prop_cokernel _ f hM hN⟩)
     (fun S hS h₁ h₃ ↦ ObjectProperty.prop_X₂_of_shortExact _ hS h₁ h₃)
 
-/-- Blueprint `prop-sfb-bounded-constructible-triangulated`, for `𝒪̲_E` given as the closed unit
-ball of a finite normed extension `E` of `ℚ_ℓ` (`CondensedRing.integralCoeff`): the bounded
-constructible complexes of `𝒪_{E,X}`-modules on a topologically noetherian scheme form a
-triangulated subcategory. -/
+/-- For `𝒪̲_E` given as the closed unit ball of a finite normed extension `E` of `ℚ_ℓ`
+(`CondensedRing.integralCoeff`), the bounded constructible complexes of `𝒪_{E,X}`-modules on a
+topologically noetherian scheme form a triangulated subcategory. -/
 instance isTriangulated_boundedConstructible_integralCoeff
     [TopologicalSpace.NoetherianSpace X] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
@@ -304,9 +299,8 @@ instance isTriangulated_boundedConstructible_integralCoeff
 -- The prime `ℓ` of `E̲` occurs only in the instance `NormedAlgebra ℚ_[ℓ] E`; it is found from the
 -- local instance `Fact ℓ.Prime`, so the synthesis order is not the default one.
 set_option synthInstance.checkSynthOrder false in
-/-- Blueprint `prop-sfb-bounded-constructible-triangulated`, for `E̲`: for a finite
-extension `E` of `ℚ_ℓ`, the bounded constructible complexes of `E_X`-modules on a topologically
-noetherian scheme form a triangulated subcategory. -/
+/-- For a finite extension `E` of `ℚ_ℓ`, the bounded constructible complexes of `E_X`-modules on
+a topologically noetherian scheme form a triangulated subcategory. -/
 instance isTriangulated_boundedConstructible_continuousMapRingObj
     [TopologicalSpace.NoetherianSpace X] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
@@ -316,9 +310,8 @@ instance isTriangulated_boundedConstructible_continuousMapRingObj
     (Profinite.continuousMapRingObj E) (continuous_lf ℓ E) X
   exact isTriangulated_boundedConstructible_of_serre _ hk he
 
-/-- Blueprint `prop-sfb-bounded-constructible-triangulated`, for `ℚ̲̄_ℓ`: the bounded
-constructible complexes of `ℚ̄_{ℓ,X}`-modules on a topologically noetherian scheme form a
-triangulated subcategory. -/
+/-- The bounded constructible complexes of `ℚ̄_{ℓ,X}`-modules on a topologically noetherian
+scheme form a triangulated subcategory. -/
 instance isTriangulated_boundedConstructible_padicAlgClRingObj
     [TopologicalSpace.NoetherianSpace X] :
     (boundedConstructible

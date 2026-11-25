@@ -31,8 +31,7 @@ open CategoryTheory Limits MonoidalCategory MonObj
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `corollary-torsion-jacobian-field-extension--4`: `Pic(C)[n] = J(C)[n](k)`.
-
+/-- `Pic(C)[n] = J(C)[n](k)`.
 Let `C` be a smooth proper connected curve over an algebraically closed field `k` and let `n` be
 invertible in `k`. There is a Jacobian `J` of `C`, a commutative group scheme representing the
 degree-zero Picard functor `Pic⁰_{C/k}` compatibly with the group laws, such that the `n`-torsion
@@ -40,13 +39,7 @@ degree-zero Picard functor `Pic⁰_{C/k}` compatibly with the group laws, such t
 bijection with the `k`-points of the `n`-torsion subgroup scheme `J[n]`
 (`AlgebraicGeometry.torsionSubgroupScheme`): a class `L` corresponds to the `n`-torsion point of
 `J` which the representation attaches to `L`. In particular every class in `Pic(C)[n]` has degree
-zero, i.e. lies in `Pic⁰(C)`.
-
-Proof: `C` is a smooth projective geometrically integral curve, so
-`AlgebraicGeometry.exists_jacobian` gives `J` with `Pic⁰(C) ≅ J(k)` as groups. An `n`-torsion
-class `L` satisfies `n · deg L = 0`, so `deg L = 0` and `L ∈ Pic⁰(C)`; hence
-`Pic(C)[n] = Pic⁰(C)[n] ≅ J(k)[n]`, and `J(k)[n]` is the group of `k`-points of `J[n]`
-(`AlgebraicGeometry.torsionByEquiv`). -/
+zero, i.e. lies in `Pic⁰(C)`. -/
 theorem Scheme.Hom.exists_equiv_ker_powMonoidHom_pic_torsionSubgroupScheme
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f]

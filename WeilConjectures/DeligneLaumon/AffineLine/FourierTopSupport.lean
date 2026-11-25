@@ -14,10 +14,12 @@ public import WeilConjectures.WeilSheaf.SupportSubobject
 
 Let `K` be a Weil complex on the affine line concentrated in degrees `≤ m`. Then `FT_ψ(K)` is
 concentrated in degrees `≤ m + 1`, and its top cohomology sheaf `H = 𝓗^{m+1} FT_ψ(K)` has finite
-support (`AlgebraicGeometry.support_homologySheaf_fourierTransform_finite`, the key step 1(a) of
-blueprint `proposition-fourier-transform-perverse-heart--1`).
+support (`AlgebraicGeometry.support_homologySheaf_fourierTransform_finite`). This is a key step in
+the perverse t-exactness of the Fourier transform.
 
-The blueprint computes the stalk of `H` at a geometric point `ξ` as
+## Implementation details
+
+The classical argument computes the stalk of `H` at a geometric point `ξ` as
 `H²_c(U, F ⊗ ℒ_{ψ(ξ x)})`, the coinvariants of `F ⊗ ℒ_{ψ(ξ x)}`, and counts the linear
 characters which are quotients of `F`. We argue by Fourier inversion instead, which avoids the
 stalks at points which are not `k₀`-rational:
@@ -109,8 +111,7 @@ lemma isGE_shift_toComplex_obj (G : WeilSheaf k₀ l X) (n : ℤ) :
 /-- **The top truncation detects nonzero morphisms to sheaves.** Let
 `F₁ ⟶ F ⟶ F₃ ⟶ F₁[1]` be a distinguished triangle with `F₁ ≤ n - 1` and `F₃ ≅ G[-n]` a Weil
 sheaf placed in degree `n`. A nonzero morphism `β : G ⟶ C` to a complex `C ≥ 0` induces a nonzero
-morphism `F ⟶ F₃ ≅ G[-n] ⟶ C[-n]`: a morphism `F₃ ⟶ C[-n]` vanishing on `F` factors through
-`F₁[1] ≤ n - 2`, hence vanishes. -/
+morphism `F ⟶ F₃ ≅ G[-n] ⟶ C[-n]`. -/
 lemma mor₂_comp_shift_map_ne_zero {F₁ F F₃ C : WeilComplex k₀ l X} (f : F₁ ⟶ F) (g : F ⟶ F₃)
     (h : F₃ ⟶ F₁⟦(1 : ℤ)⟧) (hT : Triangle.mk f g h ∈ distTriang _) (n : ℤ)
     (hF₁ : F₁.obj.IsLE (n - 1)) (hC : C.obj.IsGE 0) {G : WeilSheaf k₀ l X}
@@ -127,7 +128,7 @@ lemma mor₂_comp_shift_map_ne_zero {F₁ F F₃ C : WeilComplex k₀ l X} (f : 
 /-- **Morphisms from a complex `≤ n` to a sheaf placed in degree `n`.** Let
 `K₁ ⟶ K ⟶ K₃ ⟶ K₁[1]` be a distinguished triangle with `K₁ ≤ n - 1` and `K₃ ≅ N[-n]` a Weil sheaf
 placed in degree `n`. A nonzero morphism `K ⟶ B[-n]` to a Weil sheaf placed in degree `n` gives a
-nonzero morphism of Weil sheaves `N ⟶ B`: it vanishes on `K₁`, so factors through `K₃`. -/
+nonzero morphism of Weil sheaves `N ⟶ B`. -/
 lemma exists_ne_zero_of_distTriang {K₁ K K₃ : WeilComplex k₀ l X} (f : K₁ ⟶ K) (g : K ⟶ K₃)
     (h : K₃ ⟶ K₁⟦(1 : ℤ)⟧) (hT : Triangle.mk f g h ∈ distTriang _) (n : ℤ)
     (hK₁ : K₁.obj.IsLE (n - 1)) {N B : WeilSheaf k₀ l X}
@@ -149,8 +150,7 @@ end Orthogonality
 /-- **The restriction to a closed point in the support is nonzero.** Let `j : V₀ ↪ 𝔸¹` be an open
 immersion missing a closed point `x` in the support of a Weil sheaf `G`, and let
 `j_!j^*G ⟶ G ⟶ C ⟶` be a distinguished triangle (for instance the open–closed triangle). Then
-`G ⟶ C` is nonzero: otherwise `G` would be a direct summand of `j_!j^*G`, whose stalk at `x`
-vanishes. -/
+`G ⟶ C` is nonzero. -/
 theorem mor₂_ne_zero_of_mem_support {V : Scheme.{u}} [V.Over (Spec (CommRingCat.of k₀))]
     (j : V ⟶ affineLine k₀) [IsOpenImmersion j] [QuasiCompact j]
     [j.IsOver (Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l (affineLine k₀))
@@ -194,8 +194,7 @@ end WeilComplex
 namespace WeilSheaf
 
 /-- **Morphisms which the transform carries across the t-structure vanish.** A morphism of Weil
-sheaves `Q ⟶ B` on the affine line with `FT_ψ(Q) ≤ -1` and `FT_ψ(B) ≥ 0` vanishes, `FT_ψ` and
-the inclusion of Weil sheaves into Weil complexes being faithful. -/
+sheaves `Q ⟶ B` on the affine line with `FT_ψ(Q) ≤ -1` and `FT_ψ(B) ≥ 0` vanishes. -/
 theorem eq_zero_of_isLE_fourierTransform_of_isGE (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1)
     {Q B : WeilSheaf k₀ l (affineLine k₀)} (f : Q ⟶ B)
     (hQ : ((fourierTransform ψ).obj (toComplex.obj Q)).obj.IsLE (-1))
@@ -207,9 +206,7 @@ theorem eq_zero_of_isLE_fourierTransform_of_isGE (ψ : AddChar k₀ (PadicAlgCl 
 
 /-- **Restriction to a dense open is faithful on morphisms to a sheaf with positive transform.**
 Let `j : U ↪ 𝔸¹` be a dense quasi-compact open immersion and `f : Q ⟶ B` a morphism of Weil
-sheaves with `FT_ψ(B) ≥ 0`. If `j^* f = 0`, then `f = 0`: the image of `f` vanishes on `U`, so
-its transform is `≤ -1`
-(`AlgebraicGeometry.WeilSheaf.exists_isLisse_iso_fourierTransform_of_isZero_upperStar`). -/
+sheaves with `FT_ψ(B) ≥ 0`. If `j^* f = 0`, then `f = 0`. -/
 theorem eq_zero_of_upperStar_map_eq_zero (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1)
     {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ affineLine k₀)
     [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] [IsDominant j]
@@ -238,8 +235,7 @@ theorem eq_zero_of_upperStar_map_eq_zero (ψ : AddChar k₀ (PadicAlgCl l)) (hψ
   calc f = factorThruImage f ≫ image.ι f := (image.fac f).symm
     _ = 0 := by rw [h0, comp_zero]
 
-/-- If `B[1] ≅ FT_{ψ⁻¹}(C)` for a Weil complex `C ≥ 0`, then `FT_ψ(B) ≥ 1`: by Fourier inversion,
-`FT_ψ(B)[1] ≅ FT_ψ(FT_{ψ⁻¹}(C)) ≅ C(-1)`. -/
+/-- If `B[1] ≅ FT_{ψ⁻¹}(C)` for a Weil complex `C ≥ 0`, then `FT_ψ(B) ≥ 1`. -/
 theorem isGE_fourierTransform_toComplex_of_iso (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1)
     {C : WeilComplex k₀ l (affineLine k₀)} (hC : C.obj.IsGE 0)
     {B : WeilSheaf k₀ l (affineLine k₀)}
@@ -267,15 +263,7 @@ attribute [local instance] Abelian.hasFiniteBiproducts
 character quotient**. Let `K ≤ m`, with truncation triangles `F₁ ⟶ FT_ψ(K) ⟶ G[-m-1] ⟶` and
 `K₁ ⟶ K(-1) ⟶ N[-m] ⟶` (`F₁ ≤ m`, `K₁ ≤ m - 1`), and let `x` be a closed point in the support of
 `G`. Then for every dense open `U ⊆ 𝔸¹` there are `a ∈ k̄` minus the coordinate of a geometric
-point over `x` and a nonzero morphism `N|_Ū ⟶ ℒ_{ψ(a x)}|_Ū`.
-
-Let `j : V ↪ 𝔸¹` be the complement of `x` and `i : Z ↪ 𝔸¹` the reduced point `x`. The open–closed
-triangle `j_!j^*G ⟶ G ⟶ i_*i^*G ⟶` has nonzero second morphism, as `x` lies in the support of
-`G`, so the composite `FT_ψ(K) ⟶ G[-m-1] ⟶ (i_*i^*G)[-m-1]` is nonzero. Applying `FT_{ψ⁻¹}` and
-Fourier inversion gives a nonzero morphism `K(-1) ⟶ B[-m]`, where `B[1] = FT_{ψ⁻¹}(i_*i^*G)`, and
-hence a nonzero morphism `N ⟶ B`, still nonzero on `U` since `FT_ψ(B) ≥ 0`. Geometrically `B` is
-a sum of characters `ℒ_{ψ(a x)}` with `-a` the coordinate of a geometric point over `x`
-(`AlgebraicGeometry.WeilSheaf.exists_iso_carrier_lowerStar_tensorObj_fourierKernel_inv`). -/
+point over `x` and a nonzero morphism `N|_Ū ⟶ ℒ_{ψ(a x)}|_Ū`. -/
 theorem exists_isNegCoordOver_ne_zero_of_mem_support (ψ : AddChar k₀ (PadicAlgCl l))
     (hψ : ψ ≠ 1) {K : WeilComplex k₀ l (affineLine k₀)} {m : ℤ}
     {F₁ F₃ : WeilComplex k₀ l (affineLine k₀)} (f : F₁ ⟶ (fourierTransform ψ).obj K)
@@ -405,14 +393,8 @@ theorem exists_isNegCoordOver_ne_zero_of_mem_support (ψ : AddChar k₀ (PadicAl
     rw [hi, Scheme.Opens.range_ι] at hmem
     simpa [V] using hmem
 
-/-- **The top cohomology sheaf of the transform of a complex `≤ m` has finite support** (step 1(a)
-of blueprint `proposition-fourier-transform-perverse-heart--1`). Let `K ≤ m`, so that
-`FT_ψ(K) ≤ m + 1`, and let `N = 𝓗^m(K(-1))`, lisse on a dense open `U`. Each closed point `x` in the
-support of `𝓗^{m+1} FT_ψ(K)` gives a nonzero morphism from `N|_Ū` to a linear character
-`ℒ_{ψ(a x)}|_Ū`, with `-a` the coordinate of a geometric point over `x`
-(`AlgebraicGeometry.exists_isNegCoordOver_ne_zero_of_mem_support`). Distinct points give distinct
-irreducible characters, so there are at most `rank N|_U` of them
-(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.le_finrank_of_ne_zero`). -/
+/-- **The top cohomology sheaf of the transform of a complex `≤ m` has finite support.** If
+`K ≤ m`, then `𝓗^{m+1} FT_ψ(K)` has finite support. -/
 theorem support_homologySheaf_fourierTransform_finite (ψ : AddChar k₀ (PadicAlgCl l))
     (hψ : ψ ≠ 1) {m : ℤ} {K : WeilComplex k₀ l (affineLine k₀)} (hK : K.obj.IsLE m) :
     ((WeilComplex.homologySheaf (m + 1)).obj ((fourierTransform ψ).obj K)).support.Finite := by

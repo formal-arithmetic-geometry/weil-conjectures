@@ -66,7 +66,12 @@ import WeilConjectures.Algebra.Homology.QuasiIsoOfSectionsOfUniverses
 import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.Algebra.Homology.Functor
 
-/-! # Natural Hom models on diagrams of K-injective tensor targets -/
+/-! # Natural Hom models on diagrams of K-injective tensor targets
+
+## References
+
+* Stacks Project, Tags 08J7, 0A95.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -138,20 +143,7 @@ private theorem homDiagram_representatives
   exact ⟨Functor.isoWhiskerLeft (S ⋙ DerivedCategory.Q)
     ((Functor.curry.obj (hom.{t, u} Y R)).mapIso eA.op) ≪≫ cS ≪≫ (asIso b).symm⟩
 
-/-- Tensor diagrams preserving K-injectivity admit natural derived Hom models.
-
-Source: paragraph 1 of the current blueprint `lem-coef-integral-hom-reduction.proof.md`;
-Stacks Tags 08J7 and 0A95 (blueprint: lem-sf-integral-hom-kinjective-tensor-diagram).
-
-Proof: represent K by A and resolve G by the canonical K-injective complex I,
-with the inverse of the localized resolution map as eI. The hypothesis makes
-all I tensor S(v) K-injective. Compare derived Hom on these targets with the
-canonical functorial K-injective resolution, using the natural derived-Hom
-comparison. The resolution maps induce quasi-isomorphisms on Hom(A,-), since
-both targets are K-injective, so their localizations form a natural isomorphism.
-Compose its inverse with the derived-Hom comparison and transport along LA ≅ K.
-Naturality holds on every diagram arrow; empty diagrams and zero inputs require
-no separate choices. No flatness of A or boundedness of S is assumed. -/
+/-- Tensor diagrams preserving K-injectivity admit natural derived Hom models. -/
 theorem integralHom_kInjective_tensor_diagram
     {V : Type*} [Category* V]
     (Y : AlgebraicGeometry.Scheme.{t})

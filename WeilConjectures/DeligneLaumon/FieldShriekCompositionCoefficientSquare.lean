@@ -11,9 +11,13 @@ import WeilConjectures.DeligneLaumon.IntegralCompositionCoefficientSquare
 
 /-! # Coefficient compatibility of normalized compact-support compositors
 
-The scalar square in step 7 of the field shriek composition argument, before descent.
-Source: Stacks 0F7J and Bhatt--Scholze, Definition 6.7.6.
-(blueprint: lem-zl-field-shriek-composition-coefficient-square).
+The scalar square for the normalized compact-support compositors in the field shriek
+composition argument, before descent.
+
+## References
+
+* [Stacks Project, Tag 0F7J]
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6]
 -/
 
 @[expose] public noncomputable section

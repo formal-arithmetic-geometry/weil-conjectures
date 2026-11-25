@@ -25,18 +25,16 @@ import WeilConjectures.AlgebraicGeometry.LisseModuleSheaves
 Let `Λ` be a finite commutative ring. For a finite morphism `h : V ⟶ U` of schemes with `U`
 Noetherian:
 
-- `AlgebraicGeometry.Etale.exists_dense_isFiniteLocallyConstantSheaf_lowerStar` (blueprint
-  `lem-weil-pbc-finite-pushforward-generic-constructible`): over an integral Noetherian affine
-  base, the direct image of a constructible sheaf is finite locally constant on a dense open.
+- `AlgebraicGeometry.Etale.exists_dense_isFiniteLocallyConstantSheaf_lowerStar`: over an
+  integral Noetherian affine base, the direct image of a constructible sheaf is finite locally
+  constant on a dense open.
 - `AlgebraicGeometry.Etale.exists_isOpen_isFiniteLocallyConstantSheaf_upperStar_lowerStar`: the
   resulting Noetherian induction step, every nonempty closed subset of `U` has a nonempty
   relatively open subset along which `h_* E` is finite locally constant.
-- `AlgebraicGeometry.Scheme.IsConstructibleSheaf.lowerStar_of_isFinite` (blueprint
-  `lemma-detection-proper-direct-image--1`): the direct image `h_* E` of a
-  constructible sheaf is constructible.
-- `AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_lowerStar_of_isFinite` (blueprint
-  `lemma-detection-proper-direct-image--1`): conversely, if `h_* F` is constructible and `V`
-  is Noetherian, then `F` is constructible.
+- `AlgebraicGeometry.Scheme.IsConstructibleSheaf.lowerStar_of_isFinite`: the direct image
+  `h_* E` of a constructible sheaf is constructible.
+- `AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_lowerStar_of_isFinite`: conversely, if
+  `h_* F` is constructible and `V` is Noetherian, then `F` is constructible.
 -/
 
 @[expose] public section
@@ -68,8 +66,7 @@ open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `lem-weil-pbc-finite-pushforward-generic-constructible`: Generic finite pushforward
-is constructible.
+/-- Generic finite pushforward is constructible.
 
 Let `S` be an integral Noetherian affine scheme, `g : Z ⟶ S` a finite morphism and `E` a
 constructible sheaf of `Λ`-modules on `Z_ét`. Then there is a dense open `S° ⊆ S` on which the
@@ -202,8 +199,7 @@ theorem Etale.exists_isOpen_isFiniteLocallyConstantSheaf_upperStar_lowerStar {U 
   obtain ⟨s, hs⟩ := hS₀.nonempty
   refine ⟨O ∩ O₃, hO.inter hO₃, hrange ▸ ⟨_, ⟨s, hs⟩, rfl⟩, _, ι, inferInstance, hrange, hF⟩
 
-/-- Blueprint `lemma-detection-proper-direct-image--1`: Finite pushforward
-preserves constructibility on Noetherian schemes.
+/-- Finite pushforward preserves constructibility on Noetherian schemes.
 
 Let `U` be Noetherian, `h : V ⟶ U` finite and `E` a constructible sheaf of `Λ`-modules on
 `V_ét`. Then its direct image `h_* E` is constructible on `U_ét`. -/
@@ -266,8 +262,7 @@ theorem Scheme.IsConstructibleSheaf.lowerStar_of_isFinite {U V : Scheme.{u}} [Is
   choose Y ι hι hrange hF using himm
   exact IsConstructibleSheaf.of_noetherianSpace _ str hlc (by simpa using hcov) hdisj ι hrange hF
 
-/-- Blueprint `lemma-detection-proper-direct-image--1`: Finite direct image reflects
-constructibility.
+/-- Finite direct image reflects constructibility.
 
 Let `p : Z ⟶ S` be a finite morphism of Noetherian schemes and `F` an étale sheaf of
 `Λ`-modules on `Z`. If its direct image `p_* F` is constructible, then `F` is constructible. -/

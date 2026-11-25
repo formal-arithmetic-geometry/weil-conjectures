@@ -9,8 +9,8 @@ public import WeilConjectures.SixFunctors.Supporting.SixFunctorOperationDatumSta
 
 /-! # The proper and open factors of the integral projection
 
-Source: def-exchange-projection, the proper counit mate followed by open projection.
-(blueprint: def-sf-integral-projection-factor-data).
+The exchange projection factors as the proper counit projection mate followed by the proper
+image of the open projection.
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +26,7 @@ variable {D : FiniteFieldDatum.{u}} {B : SixFunctorSpace D → Type v}
   {T : ∀ X, B X ⥤ B X ⥤ B X} {Q : SixFunctorCompactifiedSquare D}
   (A : SixFunctorExchangeData S T Q) (K : B Q.X) (L : B Q.Y)
 
-/-- Source identification followed by the proper counit projection mate.
-Source: def-exchange-projection (blueprint: def-sf-integral-projection-factor-data). -/
+/-- Source identification followed by the proper counit projection mate. -/
 def first :
     ((T Q.Y).obj ((S.support Q.f Q.compactification).obj K)).obj L ⟶
       A.stage.properPush.obj
@@ -38,8 +37,7 @@ def first :
       ((A.stage.properAdjunction.rightAdjointProjectionMap
         A.stage.tensorPullback.hom).app (A.stage.openExtension.obj K)).app L
 
-/-- Proper image of open projection followed by the target support identification.
-Source: def-exchange-projection (blueprint: def-sf-integral-projection-factor-data). -/
+/-- Proper image of open projection followed by the target support identification. -/
 def second :
     A.stage.properPush.obj
         ((A.stage.tensorBar.obj (A.stage.openExtension.obj K)).obj
@@ -51,8 +49,7 @@ def second :
       ((A.stage.tensorX.obj K).obj (A.stage.pull.obj L)) ≫
     eqToHom (by rw [A.tensorX, A.compactSupport, A.pull])
 
-/-- The defining projection is the composite of its proper and open factors.
-Source: def-exchange-projection (blueprint: def-sf-integral-projection-factor-data). -/
+/-- The defining projection is the composite of its proper and open factors. -/
 theorem factorization : A.projectionComponent K L = first A K L ≫ second A K L := by
   simp only [SixFunctorExchangeData.projectionComponent, first, second,
     CategoryTheory.SuppliedExchangeProjection.ExchangeProjectionStage.projection,
@@ -63,9 +60,7 @@ theorem factorization : A.projectionComponent K L = first A K L ≫ second A K L
 
 end General
 
-/-- Paste two coefficient squares along a factorization.
-Source: associativity and functoriality
-(blueprint: def-sf-integral-projection-factor-data). -/
+/-- Paste two coefficient squares along a factorization. -/
 theorem paste {B : Type v} [Category.{w} B] {C : Type v'} [Category.{w'} C]
     (F : B ⥤ C) {A₀ A₁ A₂ : B} {B₀ B₁ B₂ : C}
     (a : A₀ ⟶ A₁) (b : A₁ ⟶ A₂) (c : A₀ ⟶ A₂)

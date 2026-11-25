@@ -16,15 +16,20 @@ public import WeilConjectures.SmoothPurity.Finite.FiniteTorAmplitudeSites
 
 /-! # Finite-free coefficient restriction on entire derived systems
 
-Source: finite-free coefficient tensor in the blueprint coefficient comparison;
-Stacks 07A6, 03DI, 03DJ and 0F7B--0F7F
-(blueprint: lem-coef-finite-free-system-restriction).
+For a finite extension of coefficient fields, we define the restriction of scalars from the
+upper to the lower strict coefficient systems, and the data of its comparisons with the
+geometric operations.
+
+## Implementation details
 
 Natural transformations below live on the ordinary unbounded derived categories
 of strict semilinear systems, before evaluation and inverse limit.
-The data are recorded by (blueprint: def-coef-finite-free-system-data).
 Index n means positive exponent n+1. The upper coefficients are S/pi^(n+1)S,
 including ramification.
+
+## References
+
+* [Stacks, Tags 07A6, 03DI, 03DJ and 0F7B--0F7F]
 -/
 
 @[expose] public noncomputable section
@@ -45,22 +50,16 @@ namespace WeilConjectures.FiniteFreeSystemRestriction
 
 universe v w
 
-/-- Quotient by the indicated uniformizer power, with its actual exponent.
-Source: the coefficient quotient in the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- Quotient by the indicated uniformizer power, with its actual exponent. -/
 abbrev quotient (R : Type (u + 1)) [CommRing R] (pi : R) (n : ℕ) :=
   R ⧸ (Ideal.span {pi}) ^ (n + 1)
 
-/-- The quotient transition is induced by the identity of the integer ring.
-Source: the coefficient quotient in the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- The quotient transition is induced by the identity of the integer ring. -/
 def quotientTransition (R : Type (u + 1)) [CommRing R] (pi : R) (n : ℕ) :
     quotient R pi (n + 1) →+* quotient R pi n :=
   Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ (n + 1)))
 
-/-- Inclusion followed by quotient, with the source uniformizer on both sides.
-Source: the compatible coefficient inclusion in the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- Inclusion followed by quotient, with the source uniformizer on both sides. -/
 def quotientMap {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (f : R →+* S) (pi : R) (n : ℕ) :
     quotient R pi n →+* quotient S (f pi) n :=
@@ -76,44 +75,30 @@ variable (l : ℕ) [Fact l.Prime]
   [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] L]
   (i : E →ₐ[ℚ_[l]] L)
 
-/-- Lower coefficient ring at positive exponent n+1.
-Source: the A tower in the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- Lower coefficient ring at positive exponent n+1. -/
 abbrev A (n : ℕ) : CommRingCat.{u + 1} :=
   CommRingCat.of (Padic.coefficientExtensionRing l E (n + 1))
 
-/-- Upper coefficient ring, using the image of the lower uniformizer.
-Source: the B tower in the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- Upper coefficient ring, using the image of the lower uniformizer. -/
 abbrev B (n : ℕ) : CommRingCat.{u + 1} :=
   CommRingCat.of (quotient (Padic.coefficientExtensionIntegers l L)
     (integralScalarIntegerInclusion l E L i (Padic.coefficientExtensionUniformizer l E)) n)
 
-/-- Actual lower quotient transitions.
-Source: the A tower in the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- Actual lower quotient transitions. -/
 abbrev aTransition (n : ℕ) : A l E (n + 1) ⟶ A l E n :=
   CommRingCat.ofHom (Padic.coefficientExtensionTransition l E (n + 1))
 
-/-- Actual upper quotient transitions, retaining all ramified levels en.
-Source: the B tower in the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- Actual upper quotient transitions, retaining all ramified levels en. -/
 abbrev bTransition (n : ℕ) : B l E L i (n + 1) ⟶ B l E L i n :=
   CommRingCat.ofHom (quotientTransition _ _ n)
 
-/-- The specified compatible inclusion at each positive coefficient level.
-Source: the A-to-B map in the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- The specified compatible inclusion at each positive coefficient level. -/
 abbrev levelMap (n : ℕ) : A l E n ⟶ B l E L i n :=
   CommRingCat.ofHom (quotientMap (integralScalarIntegerInclusion l E L i)
     (Padic.coefficientExtensionUniformizer l E) n)
 
 
-/-- The specified level maps commute with the actual quotient transitions.
-Source: coefficient inclusion in the node
-(blueprint: lem-coef-finite-free-system-restriction).
-Proof: quotient induction reduces both composites to x mapped to the residue of i(x).
-Ring-homomorphism extensionality then gives their equality. -/
+/-- The level maps commute with the quotient transitions. -/
 theorem levelMap_transition (n : ℕ) :
     levelMap l E L i (n + 1) ≫ bTransition l E L i n =
       aTransition l E n ≫ levelMap l E L i n := by
@@ -122,17 +107,13 @@ theorem levelMap_transition (n : ℕ) :
   ext x
   rfl
 
-/-- The level map on constant ring sheaves.
-Source: sectionwise coefficient inclusion in the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- The level map on constant ring sheaves. -/
 abbrev sheafMap (X : Scheme.{u}) (n : ℕ) :
     coefficients (A l E) X n ⟶ coefficients (B l E L i) X n :=
   (constantSheaf.{u, u + 1, u + 1, u + 2}
     (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map (levelMap l E L i n)
 
-/-- The coefficient map on the single ringed sequence site, retaining all transitions.
-Source: proof Step 1 of the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- The coefficient map on the single ringed sequence site, retaining all transitions. -/
 def systemInclusion (X : Scheme.{u}) :
     ringSystem (A l E) (aTransition l E) X ⟶
       ringSystem (B l E L i) (bTransition l E L i) X :=
@@ -146,46 +127,33 @@ def systemInclusion (X : Scheme.{u}) :
           (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map)
           (levelMap_transition l E L i n))
 
-/-- Ordinary termwise restriction along the actual coefficient-system map.
-Source: proof Step 1 of the node, using the dependency's restriction functor
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- Ordinary termwise restriction along the actual coefficient-system map. -/
 abbrev U0 (X : Scheme.{u}) := res.{u + 1, u, u + 1} (systemInclusion l E L i X)
 
-/-- Derived restriction, computed by termwise localization.
-Source: proof Step 5 of the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- Derived restriction, computed by termwise localization. -/
 @[reducible] def U (X : Scheme.{u}) :
     Derived (B l E L i) (bTransition l E L i) X ⥤
       Derived (A l E) (aTransition l E) X :=
   resD.{u + 1, u, u + 1} (systemInclusion l E L i X)
 
-/-- The upper coefficient system considered as an ordinary lower-coefficient system.
-Source: the coefficient system B in the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- The upper coefficient system considered as an ordinary lower-coefficient system. -/
 abbrev coefficientModule (X : Scheme.{u}) :=
   (U0 l E L i X).obj (SheafOfModules.unit
     (ring.{u + 1, u, u + 1} (WeilConjectures.coefficientSequenceTopology (Scheme.ProEt.topology X))
       (ringSystem (B l E L i) (bTransition l E L i) X)))
 
-/-- The upper coefficient system in degree zero, with the restricted action.
-Source: the normalized coefficient system in the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- The upper coefficient system in degree zero, with the restricted action. -/
 abbrev coefficientObject (X : Scheme.{u}) :=
   (DerivedCategory.singleFunctor (Modules (A l E) (aTransition l E) X) 0).obj
     (coefficientModule l E L i X)
 
 /-- The finite-type separated k-schemes occurring in this statement, using the
-standard bundled category of schemes over the field and the existing properties.
-Source: geometric hypotheses of the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+standard bundled category of schemes over the field and the existing properties. -/
 abbrev Spaces (D : FiniteFieldDatum.{u}) :=
   { X : Over (Spec (CommRingCat.of D.k)) //
     IsSeparated X.hom ∧ LocallyOfFiniteType X.hom ∧ QuasiCompact X.hom }
 
-/-- The section-normalized ordinary inverse-image/direct-image scalar square.
-Source: proof Step 6 of the node; the mate equation includes both geometric
-adjunction unit and counit compatibilities
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- The section-normalized ordinary inverse-image/direct-image scalar square. -/
 structure OrdinarySquare {X Y : Scheme.{u}} (f : X ⟶ Y) where
   /-- The direct-image comparison is identity on the same section groups. -/
   push : AlgebraicGeometry.ProEtale.SemilinearProperOpen.push
@@ -208,18 +176,14 @@ structure OrdinarySquare {X Y : Scheme.{u}} (f : X ⟶ Y) where
     (ordinaryAdj (A l E) (aTransition l E) f)
       (TwoSquare.mk _ _ _ _ pull.inv)) = push.hom
 
-/-- The exact pullback comparison on entire derived systems.
-Source: proof Step 8 of the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- The exact pullback comparison on entire derived systems. -/
 def OrdinarySquare.derivedPull {X Y : Scheme.{u}} {f : X ⟶ Y}
     (q : OrdinarySquare l E L i f) :
     P (B l E L i) (bTransition l E L i) f ⋙ U l E L i X ≅
       U l E L i Y ⋙ P (A l E) (aTransition l E) f :=
   Functor.mapDerivedCategorySquareIso q.pull
 
-/-- The derived pushforward comparison is the specified geometric right mate.
-Source: proof Step 8 of the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- The derived pushforward comparison is the specified geometric right mate. -/
 def OrdinarySquare.derivedPush {X Y : Scheme.{u}} {f : X ⟶ Y}
     (q : OrdinarySquare l E L i f) :
     R (B l E L i) (bTransition l E L i) f ⋙ U l E L i Y ⟶
@@ -228,10 +192,7 @@ def OrdinarySquare.derivedPush {X Y : Scheme.{u}} {f : X ⟶ Y}
     (adj (A l E) (aTransition l E) f)
       (TwoSquare.mk _ _ _ _ (q.derivedPull l E L i).inv))
 
-/-- The inverse open-extension comparison is the specified open-adjunction mate.
-Its invertibility is asserted separately, never inferred merely from a mate formula.
-Source: proof Step 9 of the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- The inverse open-extension comparison is the specified open-adjunction mate. -/
 def OrdinarySquare.derivedOpenInv {X Y : Scheme.{u}} {f : X ⟶ Y}
     [IsOpenImmersion f] (q : OrdinarySquare l E L i f) :
     U l E L i X ⋙ J (A l E) (aTransition l E) f ⟶
@@ -240,9 +201,7 @@ def OrdinarySquare.derivedOpenInv {X Y : Scheme.{u}} {f : X ⟶ Y}
     (jAdj (A l E) (aTransition l E) f)).symm
       (TwoSquare.mk _ _ _ _ (q.derivedPull l E L i).hom))
 
-/-- The simultaneous geometric comparisons on the specified finite-type k-schemes.
-Source: geometric comparison clauses of the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- The simultaneous geometric comparisons on the specified finite-type k-schemes. -/
 structure Geometry (D : FiniteFieldDatum.{u}) where
   /-- The comparisons already exist on the abelian system categories. -/
   ordinary : ∀ (X Y : Spaces D) (f : X.val.left ⟶ Y.val.left),
@@ -269,9 +228,7 @@ structure Geometry (D : FiniteFieldDatum.{u}) where
     IsIso (((ordinaryAdj (A l E) (aTransition l E) f).homEquiv _ _).symm
       (coefficient_push X Y f))
 
-/-- The strict-system realization of a fixed compactification h = pj.
-Source: the compact-support clause of the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
+/-- The strict-system realization of a fixed compactification h = pj. -/
 def compact (C : ℕ → CommRingCat.{u + 1}) (t : ∀ n, C (n + 1) ⟶ C n)
     {X W Y : Scheme.{u}} (j : X ⟶ W) (p : W ⟶ Y) [IsOpenImmersion j] :=
   J C t j ⋙ R C t p

@@ -6,8 +6,19 @@ Authors: Bin Wu
 module
 public import WeilConjectures.SixFunctors.IntegralHom.Tensor.IntegralHomTensorSwap
 /-! # Scalar compatibility of the signed chain interchange
-Source: Stacks Tags 06YY and 0FPQ.
-(blueprint: lem-sfb-integral-hom-scalar-tensor-exchange-chain)
+
+We show that the normalized ordinary scalar-extension comparison of total tensors commutes with
+the Koszul-signed interchange `P ⊗ Q ≅ Q ⊗ P`.
+
+## Implementation details
+
+The proof cancels the invertible ordinary comparison and transposes each component through
+ordinary scalar extension; by sheafification and totalization it suffices to check equality on
+pure total-tensor generators, without unfolding the derived constructions.
+
+## References
+
+* Stacks Project, Tags 06YY, 0FPQ.
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -58,13 +69,8 @@ private theorem unit_eq (b : IntegralHomReductionTensorData D l hl E X n)
   erw [b.scalarUnit_normalize]
   exact (Classical.choose_spec (scalarReductionExtension_adjunction l E X n)) M U x
 
--- Compare sheafified total generators without unfolding the derived constructions.
-/-- The normalized ordinary comparison commutes with Koszul interchange.
-Source: Stacks 06YY and 0FPQ. Proof: cancel the invertible ordinary comparison
-and transpose each component through ordinary scalar extension. Pure total-tensor
-generators suffice by sheafification and totalization. Naturality of the scalar
-unit and the two normalized formulas give the same Koszul-signed generator.
-(blueprint: lem-sfb-integral-hom-scalar-tensor-exchange-chain) -/
+/-- The normalized ordinary scalar-extension comparison `β` of total tensors commutes with the
+Koszul-signed interchange: `β ≫ F(swap) ≫ b.total Q P = swap`. -/
 theorem scalarTensorExchange_chain
     (b : IntegralHomReductionTensorData D l hl E X n)
     (P Q : CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ)
