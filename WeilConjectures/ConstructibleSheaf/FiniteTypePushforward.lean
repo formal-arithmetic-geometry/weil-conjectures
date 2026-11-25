@@ -12,7 +12,7 @@ public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 
 A constructible sheaf of modules over a finite ring `Λ` on a scheme of finite type over a field
 embeds into a finite direct sum of pushforwards of constant sheaves with finite values along
-finite morphisms (`proposition-proper-direct-image-finite-coefficients`). A scheme of finite type
+finite morphisms. A scheme of finite type
 over a field is Noetherian, so this is the Noetherian case
 `AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian`; a finitely generated
 module over a finite ring is finite.
@@ -34,13 +34,10 @@ open Scheme Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Finite-pushforward embeddings
-over a field.
-
-Let `X` be of finite type over a field `k` and `F` a constructible sheaf of `Λ`-modules on
-`X_ét`, for a finite ring `Λ`. There are finitely many finite morphisms `hᵢ : Yᵢ ⟶ X`, finite
-`Λ`-modules `Mᵢ` and a monomorphism `F ⟶ ⨁ᵢ (hᵢ)_* Mᵢ`. The blueprint states this for
-`Λ = ℤ/N`, where the `Mᵢ` are finite abelian groups killed by `N`. -/
+/-- **Finite-pushforward embeddings over a field.** Let `X` be of finite type over a field `k`
+and `F` a constructible sheaf of `Λ`-modules on `X_ét`, for a finite ring `Λ`. There are finitely
+many finite morphisms `hᵢ : Yᵢ ⟶ X`, finite `Λ`-modules `Mᵢ` and a monomorphism
+`F ⟶ ⨁ᵢ (hᵢ)_* Mᵢ`. -/
 theorem Etale.exists_mono_biproduct_lowerStar_of_locallyOfFiniteType {k : Type u} [Field k]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :

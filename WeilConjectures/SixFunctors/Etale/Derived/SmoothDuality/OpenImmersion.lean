@@ -12,9 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 /-!
 # Base change of the exceptional inverse image along an open immersion
 
-The open-immersion case of the elementary cases in the proof of blueprint
-`proposition-exceptional-inverse-image-smooth-morphism--6`: for a quasi-compact open immersion
-`j : U ⟶ X` and a cartesian square
+For a quasi-compact open immersion `j : U ⟶ X` and a cartesian square
 
 ```
   U' --g'--> U
@@ -27,7 +25,12 @@ The open-immersion case of the elementary cases in the proof of blueprint
 with `j'` quasi-compact, the canonical base change map `Lg'^* Rj^! ⟶ Rj'^! Lg^*`
 (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`) is an isomorphism.
 
-## Proof
+## Main statements
+
+- `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekAdjunction_unit_of_isOpenImmersion`
+- `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right`
+
+## Implementation details
 
 The extension by zero `Rj'_! ≅ D(j'_!)` is fully faithful, so the unit of `Rj'_! ⊣ Rj'^!` is an
 isomorphism, and then so is `Rj'^!` of its counit. Applying `Rj'^!` to the defining relation
@@ -35,11 +38,6 @@ isomorphism, and then so is `Rj'^!` of its counit. Applying `Rj'^!` to the defin
 `Rj'^! Lg^* ε_K` is one. Through `Rj'^! ≅ D(j'^*)` and the composition of pullbacks along the
 square, this is `Lg'^* Lj^* ε_K`, and `Lj^* ε_K ≅ Rj^! ε_K` is an isomorphism by the triangle
 identity, the unit of `Rj_! ⊣ Rj^!` being an isomorphism as well.
-
-## Main statements
-
-- `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekAdjunction_unit_of_isOpenImmersion`
-- `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right`
 -/
 
 @[expose] public section
@@ -69,8 +67,7 @@ instance isIso_rightDerivedUpperShriekAdjunction_unit_of_isOpenImmersion {U X : 
       (asIso (derivedOpenImmersionLowerShriekUpperStarAdjunction _ j).unit).symm)
 
 /-- Let `L' ⊣ R'` be an adjunction whose unit is an isomorphism. A morphism `β : A ⟶ R' Z` is an
-isomorphism as soon as `R'` of its transpose `L' β ≫ ε'_Z` is one: `R' ε'_Z` is invertible,
-and `R' L' β` is `β` up to the unit. -/
+isomorphism as soon as `R'` of its transpose `L' β ≫ ε'_Z` is one. -/
 lemma _root_.CategoryTheory.Adjunction.isIso_of_isIso_map_comp_counit {C D : Type*}
     [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) [IsIso adj.unit] {A : C}
     {Z : D} (β : A ⟶ R.obj Z) {φ : L.obj A ⟶ Z} (h : L.map β ≫ adj.counit.app Z = φ)

@@ -22,6 +22,15 @@ cut out by the coordinates `t₁, …, t_c`, the adjoint `Λ_B ⟶ Rz^! (Λ(c)[2
 with supports `∂κ(t₁) ∪ ⋯ ∪ ∂κ(t_c)` (`AlgebraicGeometry.Etale.kummerBoundaryProduct`) is an
 isomorphism.
 
+## Main statements
+
+- `AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_of_etale`
+- `AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_zero`
+- `AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_cons_coord`
+- `AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_coord_of_field`
+
+## Implementation details
+
 The proof is an induction on `c`. The empty product is the unit class, which is itself an
 isomorphism. For the step, `𝔸^{c+1}_B ≅ 𝔸¹_{B'}` with `B' = 𝔸^c_B`, the first coordinate becoming
 the coordinate `t` of the affine line (`AlgebraicGeometry.Etale.affineSpaceConsIso`), and the
@@ -30,13 +39,6 @@ is an isomorphism by the rank-one normalisation `HasKummerClass.IsNormalized`, a
 restriction of the second factor to `V(t) ≅ B'` is the product for `B'`, whose adjoint is an
 isomorphism by induction. The cup product criterion
 `AlgebraicGeometry.Etale.isIso_supportedClassMap_cupWithSupports` concludes.
-
-## Main statements
-
-- `AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_of_etale`
-- `AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_zero`
-- `AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_cons_coord`
-- `AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_coord_of_field`
 -/
 
 @[expose] public section
@@ -110,8 +112,7 @@ lemma affineSpaceConsIso_hom_appTop_coord_succ (c : ℕ) (B : Scheme.{u}) (a : F
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- If a class with supports `γ : Λ_X ⟶ Ri_! Ri^! L` is itself an isomorphism, so is its
-adjoint `Λ_Z ⟶ Ri^! L`: `Ri_!` of the adjoint is an isomorphism, as `γ` factors through it via
-the restriction map `Λ_X ⟶ Ri_! Λ_Z`, a reflection into the objects `Ri_! N`. -/
+adjoint `Λ_Z ⟶ Ri^! L`. -/
 lemma isIso_supportedClassMap_of_isIso {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : constantComplex Λ X ⟶
@@ -130,8 +131,7 @@ lemma isIso_supportedClassMap_of_isIso {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClose
   exact isIso_of_reflects_iso _ (R(i)_![ModuleCat.{u + 1} Λ])
 
 /-- If the adjoint of a class with supports `γ` is an isomorphism, so is the adjoint of `γ`
-followed by an isomorphism `f` of the coefficients: the adjoint is natural in the
-coefficients. -/
+followed by an isomorphism `f` of the coefficients. -/
 lemma isIso_supportedClassMap_comp_map {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     {L L' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : constantComplex Λ X ⟶
@@ -147,8 +147,7 @@ lemma isIso_supportedClassMap_comp_map {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClose
   infer_instance
 
 /-- The lift of an isomorphism through the counit of `Ri_! ⊣ Ri^!` along a surjective closed
-immersion `i` (`AlgebraicGeometry.Etale.liftCounitOfRangeEqUniv`) is an isomorphism: the counit
-is one, the open complement of `i` being empty. -/
+immersion `i` (`AlgebraicGeometry.Etale.liftCounitOfRangeEqUniv`) is an isomorphism. -/
 lemma isIso_liftCounitOfRangeEqUniv {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (hi : Set.range i.base = Set.univ)
     {K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (φ : K ⟶ L)
@@ -183,9 +182,7 @@ variable [HasKummerClass Λ]
 
 /-- **Transport of the Thom class property along étale maps.** Let `e : U' ⟶ U` be étale and let
 `f'_a = e^* f_a`. If the adjoint of `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_n)` is an isomorphism, so is the adjoint
-of `∂κ(f'₁) ∪ ⋯ ∪ ∂κ(f'_n)`: the latter is the restriction of the former
-(`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct`), and the restriction of
-supports along an étale map is an isomorphism. -/
+of `∂κ(f'₁) ∪ ⋯ ∪ ∂κ(f'_n)`. -/
 theorem isIso_supportedClassMap_kummerBoundaryProduct_of_etale {U U' : Scheme.{u}}
     [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ U'] (e : U' ⟶ U)
     [AlgebraicGeometry.Etale e] {n : ℕ} (f : Fin n → Γ(U, ⊤)) (f' : Fin n → Γ(U', ⊤))
@@ -204,9 +201,7 @@ theorem isIso_supportedClassMap_kummerBoundaryProduct_of_etale {U U' : Scheme.{u
   infer_instance
 
 /-- **The empty product of Kummer boundaries** is the Thom class of `U ⊆ U`: its adjoint
-`Λ_U ⟶ Ri^! Λ_U(0)[0]` is an isomorphism. The class itself is an isomorphism, being the lift of
-the isomorphism `Λ_U ≅ Λ_U(0)[0]` through the counit of `Ri_! ⊣ Ri^!` along the surjective
-closed immersion `i : V(∅) ⟶ U`. -/
+`Λ_U ⟶ Ri^! Λ_U(0)[0]` is an isomorphism. -/
 theorem isIso_supportedClassMap_kummerBoundaryProduct_zero (U : Scheme.{u})
     [HasInvertibleExponent Λ U] (f : Fin 0 → Γ(U, ⊤)) :
     IsIso (supportedClassMap Λ (U.zeroLocusSubschemeι (Set.range f))
@@ -221,12 +216,7 @@ variable [HasKummerClass.IsNormalized Λ]
 /-- **The induction step for the Thom class.** Let `B'` be separated and locally of finite type
 over a field, `X = 𝔸¹_{B'}` with coordinate `t` and projection `p`, and `g₁, …, g_c` functions
 on `B'` such that the adjoint of `∂κ(g₁) ∪ ⋯ ∪ ∂κ(g_c)` is an isomorphism. Then the adjoint of
-`∂κ(t) ∪ ∂κ(p^* g₁) ∪ ⋯ ∪ ∂κ(p^* g_c)` on `X` is an isomorphism.
-
-This is the cup product criterion
-`AlgebraicGeometry.Etale.isIso_supportedClassMap_cupWithSupports`: the adjoint of `∂κ(t)` is an
-isomorphism by the rank-one normalisation, and the restriction of
-`∂κ(p^* g₁) ∪ ⋯ ∪ ∂κ(p^* g_c)` to `V(t) ≅ B'` is `∂κ(g₁) ∪ ⋯ ∪ ∂κ(g_c)`. -/
+`∂κ(t) ∪ ∂κ(p^* g₁) ∪ ⋯ ∪ ∂κ(p^* g_c)` on `X` is an isomorphism. -/
 theorem isIso_supportedClassMap_kummerBoundaryProduct_cons_coord {k : Type u} [Field k]
     (B' : Scheme.{u}) (aB' : B' ⟶ Spec (.of k)) [IsSeparated aB'] [LocallyOfFiniteType aB']
     [HasInvertibleExponent Λ B'] {c : ℕ} (g₀ : Fin c → Γ(B', ⊤))
@@ -275,18 +265,11 @@ theorem isIso_supportedClassMap_kummerBoundaryProduct_cons_coord {k : Type u} [F
     ← Functor.map_comp, ← Functor.map_comp]
   exact isIso_supportedClassMap_comp_map Λ _ _ _ hcup
 
-/-- Blueprint `proposition-purity-vector-bundles`: `𝔸¹ ⇒ 𝔸ⁿ`: the model purity, clause (i), over a
-field.
-
-For `B` separated and locally of finite type over a field, on which the exponent of `Λ` is
-invertible, and the zero section `z : B ↪ 𝔸^c_B`, cut out by the coordinates `t₁, …, t_c`, the
-adjoint `Λ_B ⟶ Rz^! (Λ(c)[2c])` of `∂κ(t₁) ∪ ⋯ ∪ ∂κ(t_c)`
-(`AlgebraicGeometry.Etale.supportedClassMap`) is an isomorphism.
-
-By induction on `c`, writing `𝔸^{c+1}_B ≅ 𝔸¹_{𝔸^c_B}`
-(`AlgebraicGeometry.Etale.affineSpaceConsIso`) with the first coordinate as the coordinate of
-the affine line; the step is
-`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_cons_coord`. -/
+/-- **The Thom class of the zero section of affine space over a field.** For `B` separated and
+locally of finite type over a field, on which the exponent of `Λ` is invertible, and the zero
+section `z : B ↪ 𝔸^c_B`, cut out by the coordinates `t₁, …, t_c`, the adjoint
+`Λ_B ⟶ Rz^! (Λ(c)[2c])` of `∂κ(t₁) ∪ ⋯ ∪ ∂κ(t_c)` (`AlgebraicGeometry.Etale.supportedClassMap`)
+is an isomorphism. -/
 theorem isIso_supportedClassMap_kummerBoundaryProduct_coord_of_field (c : ℕ) {k : Type u}
     [Field k] (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
     [HasInvertibleExponent Λ B] :

@@ -10,9 +10,15 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.HomDevissage
 /-!
 # Finite coefficient internal Hom preserves constructibility
 
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-sp-grp-ladic-summary/sec-towers-and-integral-coefficients/sk-lem-sp-tower/`
-`thm-coef-finite-hom.proof.md`, Paragraph 1 (blueprint: lem-coef-general-finite-hom-constructible).
+Over a finite or algebraically closed field, internal derived Hom with finite coefficients
+killed by a power of an invertible prime preserves bounded constructibility and finite Tor
+amplitude.
+
+## Implementation details
+
+The result is deduced from the stronger statement for every field with an invertible
+coefficient exponent: if `ell ^ n` annihilates `A`, its image in `Γ(Spec k)` is a unit, and
+transport along the structure map gives the required instance on `X`.
 -/
 
 @[expose] public section
@@ -28,15 +34,6 @@ namespace WeilConjectures
 
 /-- For a finite or algebraically closed field and a finite coefficient ring killed by
 an ell-power, internal derived Hom preserves bounded constructibility and finite Tor amplitude.
-
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
-`sec-sp-grp-ladic-summary/sec-towers-and-integral-coefficients/sk-lem-sp-tower/`
-`thm-coef-finite-hom.proof.md`, Paragraph 1 (blueprint: lem-coef-general-finite-hom-constructible).
-
-The source library proves the stronger result for every field with an invertible coefficient
-exponent.  The hypotheses here provide such an exponent directly: if `ell ^ n` annihilates `A`,
-then its image in `Γ(Spec k)` is a unit because `ell` is a unit in `k`; transport along `aX`
-gives the required instance on `X`.
 -/
 theorem generalFiniteHomConstructible
     {k : Type u} [Field k] (_hk : Finite k ∨ IsAlgClosed k)

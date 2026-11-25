@@ -15,22 +15,23 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Identity
 # The section invariant from the purity of a section
 
 Let `g : V ⟶ B` be smooth of pure relative dimension `c`, with a closed section `s : B ⟶ V`.
-The section invariant `𝒞(g, s) = Ls^* ω_g` (blueprint `lemma-section-normal-bundle--1`) is
-determined by the purity of the section: an isomorphism `Rs^!(Λ_V(c)[2c]) ≅ Λ_B` yields
-`𝒞(g, s) ≅ Λ_B(c)[2c]`.
-
-The dualizing complex `ω_g` is ⊗-invertible (cohomological smoothness), so by the co-projection
-formula for `Rs^!` (blueprint `lem-pur-coprojection`)
-
-`Rs^!(Λ_V(c)[2c]) ⊗ Ls^* ω_g ≅ Rs^!(Λ_V(c)[2c] ⊗ ω_g) ≅ Rs^!(ω_g ⊗ Λ_V(c)[2c])
-  ≅ Rs^! ω_g ⊗ Ls^*(Λ_V(c)[2c])`,
-
-and `Rs^! ω_g = Rs^! Rg^! Λ_B ≅ R(s ≫ g)^! Λ_B = R(𝟙 B)^! Λ_B ≅ Λ_B`.
+The section invariant `𝒞(g, s) = Ls^* ω_g` is determined by the purity of the section: an
+isomorphism `Rs^!(Λ_V(c)[2c]) ≅ Λ_B` yields `𝒞(g, s) ≅ Λ_B(c)[2c]`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_twistShift_of_iso`: purity of the
   section determines the section invariant, `𝒞(g, s) ≅ Λ_B(c)[2c]`.
+
+## Implementation details
+
+The dualizing complex `ω_g` is ⊗-invertible (cohomological smoothness), so by the co-projection
+formula for `Rs^!`
+
+`Rs^!(Λ_V(c)[2c]) ⊗ Ls^* ω_g ≅ Rs^!(Λ_V(c)[2c] ⊗ ω_g) ≅ Rs^!(ω_g ⊗ Λ_V(c)[2c])
+  ≅ Rs^! ω_g ⊗ Ls^*(Λ_V(c)[2c])`,
+
+and `Rs^! ω_g = Rs^! Rg^! Λ_B ≅ R(s ≫ g)^! Λ_B = R(𝟙 B)^! Λ_B ≅ Λ_B`.
 -/
 
 @[expose] public section
@@ -47,15 +48,14 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- The exceptional inverse images along two equal morphisms are isomorphic; this transports
-`Rf^!` along an equation `f = f'` without having to rewrite the instance arguments. -/
+/-- The exceptional inverse images along two equal morphisms are isomorphic. -/
 theorem nonempty_rightDerivedUpperShriek_iso_of_eq {X Y : Scheme.{u}} {f f' : X ⟶ Y}
     [HasCompactification f] [HasCompactification f'] (h : f = f') :
     Nonempty (R(f)^![Λ] ≅ R(f')^![Λ]) := by
   subst h
   exact ⟨Iso.refl _⟩
 
-/-- For a section `s` of `g`, `Rs^! ω_g ≅ Λ_B`: `Rs^! Rg^! ≅ R(s ≫ g)^! = R(𝟙 B)^! ≅ 𝟭`. -/
+/-- For a section `s` of `g`, `Rs^! ω_g ≅ Λ_B`. -/
 theorem nonempty_rightDerivedUpperShriek_dualizingComplex_iso_of_comp_eq_id {V B : Scheme.{u}}
     (g : V ⟶ B) [HasCompactification g] (s : B ⟶ V) [HasCompactification s]
     (hs : s ≫ g = 𝟙 B) :
@@ -68,15 +68,9 @@ theorem nonempty_rightDerivedUpperShriek_dualizingComplex_iso_of_comp_eq_id {V B
 
 variable [HasTateTwist Λ]
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Section invariant
-
-For `g : V ⟶ B` smooth of pure relative dimension `c` with a closed section `s`, purity of
+/-- For `g : V ⟶ B` smooth of pure relative dimension `c` with a closed section `s`, purity of
 the section `Rs^!(Λ_V(c)[2c]) ≅ Λ_B` determines the section invariant:
-`𝒞(g, s) = Ls^* ω_g ≅ Λ_B(c)[2c]`.
-
-The dualizing complex `ω_g` is invertible (`proposition-exceptional-inverse-image-smooth-morphism`),
-and so is `Λ_V(c)[2c]`; the co-projection formula for `Rs^!` (`lem-pur-coprojection`) moves either
-factor of `Λ_V(c)[2c] ⊗ ω_g` out of `Rs^!`, and `Rs^! ω_g ≅ Λ_B` since `s ≫ g = 𝟙 B`. -/
+`𝒞(g, s) = Ls^* ω_g ≅ Λ_B(c)[2c]`. -/
 theorem nonempty_iso_sectionInvariant_twistShift_of_iso {V B : Scheme.{u}} {c : ℕ}
     (g : V ⟶ B) [SmoothOfRelativeDimension c g] [HasCompactification g] (s : B ⟶ V)
     [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) [HasInvertibleExponent Λ V]

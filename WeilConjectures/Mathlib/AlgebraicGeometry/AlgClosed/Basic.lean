@@ -36,24 +36,15 @@ universe u
 
 variable {X Y : Scheme.{u}} {K : Type u} [Field K] [IsAlgClosed K]
 
-/-- Blueprint `corollary-torsion-jacobian-field-extension--3`: Finite schemes over algebraically
-closed fields.
-
-A nonempty finite scheme `X` over an algebraically closed field `K` has a `K`-point: a closed
-point of `X` has residue field `K`. -/
+/-- A nonempty finite scheme `X` over an algebraically closed field `K` has a `K`-point. -/
 theorem exists_comp_eq_id_of_isFinite (f : X ⟶ Spec (.of K)) [IsFinite f] [Nonempty X] :
     ∃ s : Spec (.of K) ⟶ X, s ≫ f = 𝟙 _ := by
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
   obtain ⟨x, -, hx⟩ := isClosed_univ.exists_closed_singleton (X := X) Set.univ_nonempty
   exact ⟨pointOfClosedPoint f x hx, pointOfClosedPoint_comp f x hx⟩
 
-/-- Blueprint `corollary-torsion-jacobian-field-extension--3`: Finite flat surjections are
-surjective on `K`-points.
-
-Let `f : X ⟶ Y` be finite and surjective and `K` algebraically closed. Then every `K`-point
-`y : Spec K ⟶ Y` lifts to a `K`-point of `X`: the fibre `X ×_Y Spec K` is a nonempty finite
-`K`-scheme, so it has a `K`-point by `exists_comp_eq_id_of_isFinite`. (Flatness, assumed in the
-blueprint, is not needed.) -/
+/-- Finite surjections are surjective on `K`-points: if `f : X ⟶ Y` is finite and surjective and
+`K` is algebraically closed, then every `K`-point `y : Spec K ⟶ Y` lifts to a `K`-point of `X`. -/
 theorem exists_comp_eq_of_isFinite_of_surjective (f : X ⟶ Y) [IsFinite f] [Surjective f]
     (y : Spec (.of K) ⟶ Y) : ∃ x : Spec (.of K) ⟶ X, x ≫ f = y := by
   have : Nonempty ↥(pullback f y) :=
@@ -62,8 +53,7 @@ theorem exists_comp_eq_of_isFinite_of_surjective (f : X ⟶ Y) [IsFinite f] [Sur
   exact ⟨s ≫ pullback.fst f y, by rw [Category.assoc, pullback.condition, reassoc_of% hs]⟩
 
 /-- A global function on a reduced scheme `X` locally of finite type over an algebraically closed
-field `K` vanishes if it vanishes at every `K`-point of `X`: the `K`-points are the closed points,
-which are dense in every open subset of the Jacobson space `X`. -/
+field `K` vanishes if it vanishes at every `K`-point of `X`. -/
 theorem eq_zero_of_forall_appTop_eq_zero [IsReduced X] (f : X ⟶ Spec (.of K))
     [LocallyOfFiniteType f] (a : Γ(X, ⊤))
     (h : ∀ p : Spec (.of K) ⟶ X, p ≫ f = 𝟙 _ → p.appTop a = 0) : a = 0 := by

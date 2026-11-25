@@ -19,10 +19,20 @@ public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 /-!
 # Linear-algebra operations on lisse Weil sheaves
 
-The operations of `definition-weil-representation` and `proposition-weights-under-usual-operations`
-on lisse Weil representations: subquotients, finite direct sums, exterior powers and the determinant
-line of a lisse Weil representation are again lisse, and an exterior power of a Weil representation
-whose local characteristic polynomials are those of an `ι`-real one is again `ι`-real.
+The usual linear-algebra operations on lisse Weil representations: subquotients, finite direct
+sums, exterior powers and the determinant line of a lisse Weil representation are again lisse, an
+exterior power of a Weil representation whose local characteristic polynomials are those of an
+`ι`-real one is again `ι`-real, and the dual of a punctually pure representation of weight `w` is
+punctually pure of weight `-w`.
+
+## Main statements
+
+- `AlgebraicGeometry.WeilGroup.IsLisse.subquotient`, `IsLisse.directSum`,
+  `IsLisse.exteriorPower`, `IsLisse.ofCharacter_detCharacter`, `IsLisse.of_equiv`.
+- `AlgebraicGeometry.WeilGroup.IsReal.exteriorPower_of_charpoly_eq`.
+- `AlgebraicGeometry.WeilGroup.IsPunctuallyPure.dual`.
+
+## Implementation details
 
 Lisseness is checked on the coefficients `g ↦ φ (ρ g v)` of the geometric part
 (`AlgebraicGeometry.WeilGroup.IsLisse.continuous_apply` and
@@ -30,13 +40,9 @@ Lisseness is checked on the coefficients `g ↦ φ (ρ g v)` of the geometric pa
 eigenvalues (`AlgebraicGeometry.WeilGroup.IsReal.map_conj_localEigenvalues` and
 `AlgebraicGeometry.WeilGroup.isReal_of_map_conj_localEigenvalues`): `ι P_x` has real
 coefficients exactly when the multiset of complex local eigenvalues is stable under complex
-conjugation.
-
-## Main statements
-
-- `AlgebraicGeometry.WeilGroup.IsLisse.subquotient`, `IsLisse.directSum`,
-  `IsLisse.exteriorPower`, `IsLisse.ofCharacter_detCharacter`, `IsLisse.of_equiv`.
-- `AlgebraicGeometry.WeilGroup.IsReal.exteriorPower_of_charpoly_eq`.
+conjugation. The local eigenvalues of an exterior power are the products of the sub-multisets of
+the local eigenvalues (`LinearMap.charpoly_roots_exteriorPower`), and those of the dual are the
+inverses of those of `ρ`.
 -/
 
 @[expose] public section
@@ -79,8 +85,7 @@ theorem frobeniusWeight_pow (qx : ℕ) (α : E) (n : ℕ) :
   simp only [frobeniusWeight, map_pow, norm_pow, Real.log_pow]
   ring
 
-/-- The weight of an inverse is the negative of the weight; in particular duality negates
-weights (blueprint `proposition-weights-under-usual-operations`). -/
+/-- The weight of an inverse is the negative of the weight. -/
 theorem frobeniusWeight_inv (qx : ℕ) (α : E) :
     frobeniusWeight ι qx α⁻¹ = -frobeniusWeight ι qx α := by
   simp only [frobeniusWeight, map_inv₀, norm_inv, Real.log_inv]
@@ -105,9 +110,8 @@ theorem frobeniusWeight_prod (qx : ℕ) {ι' : Type*} (s : Finset ι') {f : ι' 
   · simp only [Multiset.mem_map, not_exists, not_and]
     exact fun i hi h ↦ hf i hi h
 
-/-- Blueprint `definition-determinant-weight--1`: the real weight character `a ↦ wt_{ι, q}(a)` of
-`definition-determinant-weight--1`, whose determinant weights (`Representation.detWeight`) are the
-determinant weights `dw_ι` of `definition-determinant-weight--1`. -/
+/-- The real weight character `a ↦ wt_{ι, q}(a)`, whose determinant weights
+(`Representation.detWeight`) are the determinant weights `dw_ι`. -/
 noncomputable def weightCharacter (q : ℕ) : Representation.RealCharacter E where
   toFun a := Multiplicative.ofAdd (frobeniusWeight ι q (a : E))
   map_one' := by simp [frobeniusWeight]
@@ -225,7 +229,7 @@ theorem IsLisse.ofCharacter_detCharacter [FiniteDimensional (PadicAlgCl l) V]
     smul_eq_mul]
   exact hdet.mul continuous_const
 
-/-- The dual of a lisse Weil sheaf is lisse: its matrix coefficients are those of `ρ (g⁻¹)`. -/
+/-- The dual of a lisse Weil sheaf is lisse. -/
 theorem IsLisse.dual [FiniteDimensional (PadicAlgCl l) V] (hρ : W.IsLisse l ρ) :
     W.IsLisse l ρ.dual := by
   refine IsLisse.of_continuous_apply fun φ f ↦ ?_
@@ -275,7 +279,7 @@ theorem zero_notMem_map_localEigenvalues (x : C.finitePoints) :
   rintro α hα rfl
   exact zero_notMem_localEigenvalues x hα
 
-/-- Blueprint `definition-weights`: an `ι`-real representation has a conjugation-stable
+/-- An `ι`-real representation has a conjugation-stable
 multiset of complex local eigenvalues at every closed point. -/
 theorem IsReal.map_conj_localEigenvalues (h : W.IsReal l ρ ι) (x : C.finitePoints) :
     ((W.localEigenvalues l ρ x).map ι).map (starRingEnd ℂ) =
@@ -293,8 +297,8 @@ theorem IsReal.map_conj_localEigenvalues (h : W.IsReal l ρ ι) (x : C.finitePoi
     Polynomial.roots_multiset_prod_one_sub_C_mul_X hM] at this
   exact Multiset.map_injective inv_injective this
 
-/-- Blueprint `definition-weights`: a representation whose multisets of complex local
-eigenvalues are stable under complex conjugation is `ι`-real. -/
+/-- A representation whose multisets of complex local eigenvalues are stable under complex
+conjugation is `ι`-real. -/
 theorem isReal_of_map_conj_localEigenvalues
     (h : ∀ x, ((W.localEigenvalues l ρ x).map ι).map (starRingEnd ℂ) =
       (W.localEigenvalues l ρ x).map ι) :
@@ -305,10 +309,8 @@ theorem isReal_of_map_conj_localEigenvalues
     rw [map_localPolynomial, Polynomial.map_multiset_prod_one_sub_C_mul_X, h x]
   simpa [Polynomial.coeff_map] using congrArg (Polynomial.coeff · n) h₁
 
-/-- Blueprint `proposition-weights-under-usual-operations`: if the local characteristic polynomials
-of `σ` are those of an `ι`-real representation `ρ`, then every exterior power of `σ` is `ι`-real:
-its local eigenvalues are the products of the `s`-element sub-multisets of those of `ρ`, by
-`LinearMap.charpoly_roots_exteriorPower`. -/
+/-- If the local characteristic polynomials of `σ` are those of an `ι`-real representation `ρ`,
+then every exterior power of `σ` is `ι`-real. -/
 theorem IsReal.exteriorPower_of_charpoly_eq {σ : Representation (PadicAlgCl l) W.carrier V'}
     (hreal : W.IsReal l ρ ι)
     (h : ∀ x, (σ (W.frobenius x)).charpoly = (ρ (W.frobenius x)).charpoly) (s : ℕ) :
@@ -331,11 +333,8 @@ theorem IsReal.exteriorPower_of_charpoly_eq {σ : Representation (PadicAlgCl l) 
     exact Multiset.map_congr rfl fun t _ ↦ map_multiset_prod (starRingEnd ℂ) t
   rw [hE, hmap, hconj, hreal.map_conj_localEigenvalues ι x]
 
-/-- Blueprint `proposition-weights-under-usual-operations--4`: Weight of the linear dual.
-
-The dual of a sheaf punctually pure of weight `w` is punctually pure of weight `-w`: the
-local eigenvalues of the dual are the inverses of those of `ρ` (`lemma-filtrations-spectra`), and
-inverses have the negative weight (`proposition-weights-under-usual-operations--3`). -/
+/-- Weight of the linear dual: the dual of a sheaf punctually pure of weight `w` is punctually
+pure of weight `-w`. -/
 theorem IsPunctuallyPure.dual {w : ℝ} (h : W.IsPunctuallyPure l ρ ι w) :
     W.IsPunctuallyPure l ρ.dual ι (-w) := by
   intro x γ hγ

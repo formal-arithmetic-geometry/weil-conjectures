@@ -11,7 +11,21 @@ import WeilConjectures.SixFunctors.IntegralHom.IntegralHomProjectionNaturality
 import WeilConjectures.SixFunctors.IntegralHom.Evaluation.IntegralHomEvaluationExt
 import all WeilConjectures.SixFunctors.IntegralHom.Tensor.IntegralTensorUnitSections
 
-/-! # The signed Hom-tensor comparison at the coefficient unit -/
+/-! # The signed Hom-tensor comparison at the coefficient unit
+
+We show that a signed Hom-tensor map `Hom(A, I) ⊗ B ⟶ Hom(A, I ⊗ B)` at the coefficient unit
+`B = R[0]` is the map identified with the identity by the right unitors.
+
+## Implementation details
+
+Equality is tested on all Hom product projections and identity-slice sections. Since the
+coefficient unit sits in degree zero, the sign in the signed formula is one. No injectivity,
+flatness or boundedness is required.
+
+## References
+
+* Stacks Project, Tag 0A8X.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -158,19 +172,8 @@ private theorem signed_unit
   exact congrArg (fun k ↦ (k.f (p + n)).val.app U (evaluate Y R A I n p U v x))
     ui.inv_hom_id
 
-/-- A signed Hom-tensor map at the coefficient unit is the map fixed by the unitors.
-
-Source: the degree-zero coefficient unit in paragraph 1 of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`; Stacks 0A8X
-(blueprint: lem-sf-integral-signed-hom-tensor-unit).
-
-Proof: cancel the inverse right unitor on the source and test equality on all
-Hom product projections and identity-slice sections. Naturality of Hom projections
-moves postcomposition with the target unitor through evaluation. The inverse
-unitor section formula writes each input as v tensor 1. The signed formula has
-coefficient degree zero, so its sign is one. Transport its total degree to n
-explicitly; the resulting evaluation is exactly the inverse target unitor.
-The target unitors cancel. No injectivity, flatness or boundedness is required. -/
+/-- A signed Hom-tensor map at the coefficient unit is the map fixed by the unitors: composed
+with `Hom(A, -)` of the unitor of `I`, it equals the unitor of `Hom(A, I)`. -/
 theorem integral_signedHomTensor_unit
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

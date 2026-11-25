@@ -14,22 +14,18 @@ public import WeilConjectures.WeilSheaf.Defs
 # Lisse Weil sheaves on a dense open of the affine line
 
 This file fixes the conventions of the Deligne–Laumon affine-line estimate
-(`WeilConjectures.DeligneLaumon.AffineLine.Upper`) and of its auxiliary statements, following
-the blueprint subsection `lemma-unramified-at-infinity-no-linear-characters--1`. The `ℓ`-adic
-formalism they are phrased against is the provisional interface of `WeilConjectures.WeilSheaf.Defs`;
-what this block owns is the two conditions on a lisse Weil sheaf on a dense open of the affine line,
-and the bundling of that situation.
+(`WeilConjectures.DeligneLaumon.AffineLine.Upper`) and of its auxiliary statements: two
+conditions on a lisse Weil sheaf on a dense open of the affine line, and the bundling of that
+situation.
 
 The affine line `A₀ = 𝔸¹_{k₀}` is `AlgebraicGeometry.affineLine k₀`, and the dual affine line
 `A'₀` of the Fourier transform is another copy of it. It sits in `ℙ¹_{k₀}` through the standard
 chart `AlgebraicGeometry.ProjectiveLine.affineChart`, `x ↦ [x : 1]`, whose complement is the
 point `∞ = [1 : 0]`.
 
-Both conditions are phrased without the geometric fundamental group, which does not exist in
-the repository yet. Geometric constancy asks that the underlying `ℓ`-adic sheaf be constant,
-a finite sum of copies of `ℚ̄_ℓ`, on every connected open of the geometric fiber
-`Ū = U ⊗ k̄`. Being unramified at infinity asks that the sheaf extend to a lisse Weil sheaf on
-`U₀ ∪ {∞} ⊆ ℙ¹_{k₀}`.
+Geometric constancy asks that the underlying `ℓ`-adic sheaf be constant, a finite sum of copies
+of `ℚ̄_ℓ`, on every connected open of the geometric fiber `Ū = U ⊗ k̄`. Being unramified at
+infinity asks that the sheaf extend to a lisse Weil sheaf on `U₀ ∪ {∞} ⊆ ℙ¹_{k₀}`.
 
 ## Main declarations
 
@@ -39,6 +35,18 @@ a finite sum of copies of `ℚ̄_ℓ`, on every connected open of the geometric 
   together with a lisse Weil sheaf on `U₀`, with its direct image, its extension by zero, its
   boundary sheaf, its curve perverse middle extension and the map
   `j_!M[1] ⟶ j_*M[1]` (`shiftedExtensionByZeroToMiddleExtension`).
+
+## Implementation details
+
+Both conditions are phrased without the geometric fundamental group, which does not exist in
+the repository yet. For `Ū` connected, as for `U` an open of `𝔸¹_{k₀}`, geometric constancy is
+the triviality of the action of `π₁(Ū)` on the stalks; being unramified at infinity is
+equivalent to the inertia group at `∞` acting trivially on the geometric generic fiber. The
+choice of chart `𝔸¹ ↪ ℙ¹` does not matter, since two open immersions of `k₀`-schemes
+`𝔸¹ ↪ ℙ¹` differ by a `k₀`-automorphism of `ℙ¹`.
+
+The situation is bundled in `LisseOnDenseOpen` to avoid carrying six instance arguments through
+every statement, and to keep existential statements producing a new dense open readable.
 -/
 
 @[expose] public section
@@ -63,12 +71,7 @@ variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
 /-- A Weil sheaf `F` on `U` is *geometrically constant* if its underlying `ℓ`-adic sheaf is
 constant on every connected open `V` of the geometric fiber `Ū = U ⊗ k̄`, where `k̄` is an
 algebraic closure of `k₀`: its restriction to `V` is a finite direct sum of copies of the
-constant `ℓ`-adic sheaf `ℚ̄_ℓ`. Its Frobenius module may still be nontrivial. When the connected
-components of `Ū` are open, for instance when `U` is of finite type over `k₀`, this says that
-`F` is constant on each connected component of `Ū`. For `Ū` connected, as for `U` an open of
-`𝔸¹_{k₀}`, it is the constancy of `F` on `Ū`, which motivates the definition: the geometric
-fundamental group `π₁(Ū)` acts trivially on the stalks of `F`.
-(blueprint: `lemma-unramified-at-infinity-no-linear-characters--1`) -/
+constant `ℓ`-adic sheaf `ℚ̄_ℓ`. Its Frobenius module may still be nontrivial. -/
 def IsGeometricallyConstant (F : WeilSheaf k₀ l U) : Prop :=
   ∀ V : (U ↘ Spec (CommRingCat.of k₀)).geometricFiber.Opens, ConnectedSpace V →
     ∃ n : ℕ, Nonempty ((V.ι)^*ᵃ[l].obj F.obj.carrier ≅
@@ -86,11 +89,7 @@ the point `∞`, and the extension is a lisse Weil sheaf `G` on an open `W ⊆ �
   j          W.ι
   ▼          ▼
   𝔸¹ ──ι───▶ ℙ¹
-```
-The choice of chart does not matter: two open immersions `𝔸¹ ↪ ℙ¹` of `k₀`-schemes differ by
-a `k₀`-automorphism of `ℙ¹`. This condition is equivalent to the inertia group at `∞` acting
-trivially on the geometric generic fiber of `F`.
-(blueprint: `lemma-unramified-at-infinity-no-linear-characters--1`) -/
+``` -/
 def IsUnramifiedAtInfinity (F : WeilSheaf k₀ l U) (j : U ⟶ affineLine k₀) [IsOpenImmersion j]
     [j.IsOver (Spec (CommRingCat.of k₀))] : Prop :=
   let ι := ProjectiveLine.affineChart (Spec (CommRingCat.of k₀))
@@ -104,9 +103,7 @@ def IsUnramifiedAtInfinity (F : WeilSheaf k₀ l U) (j : U ⟶ affineLine k₀) 
 end Infinity
 
 /-- The standing situation of the affine-line estimate: a dense open immersion
-`j : U₀ ↪ 𝔸¹_{k₀}` together with a lisse Weil `ℚ̄_ℓ`-sheaf on `U₀`. Bundling the data avoids
-carrying six instance arguments through every statement, and makes the existential statements
-of the block — which produce a new dense open of the dual line — readable. -/
+`j : U₀ ↪ 𝔸¹_{k₀}` together with a lisse Weil `ℚ̄_ℓ`-sheaf on `U₀`. -/
 structure LisseOnDenseOpen (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] where
   /-- The dense open subscheme `U₀`. -/

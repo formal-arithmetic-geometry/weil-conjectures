@@ -11,9 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartClos
 # Constructible sheaves with field coefficients form an abelian category
 
 Let `X` be a noetherian scheme and let `Λ` be the condensed ring `E̲` for a finite extension
-`E / ℚ_ℓ`, or `ℚ̲̄_ℓ`. The individual clauses of blueprint `lemma-constructible-sheaves`, read
-off from `ProEtale.coefficientHeart_closure`: the constructible `Λ_X`-modules are closed in
-`Mod(X_proét, Λ)` under kernels, cokernels and extensions, and form an abelian category.
+`E / ℚ_ℓ`, or `ℚ̲̄_ℓ`. We read off from `ProEtale.coefficientHeart_closure` that the
+constructible `Λ_X`-modules are closed in `Mod(X_proét, Λ)` under kernels, cokernels and
+extensions, and form an abelian category.
 -/
 
 @[expose] public section
@@ -31,8 +31,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u
 
 /-- **Closure under kernels.** On a noetherian scheme `X`, with coefficients `E̲` (`E / ℚ_ℓ`
 finite) or `ℚ̲̄_ℓ`, the kernel in `Mod(X_proét, Λ)` of a morphism of constructible
-`Λ_X`-modules is constructible.
-(blueprint: lemma-constructible-sheaves--1) -/
+`Λ_X`-modules is constructible. -/
 theorem isConstantModelConstructible_kernel
     (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),
       FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨
@@ -48,8 +47,7 @@ theorem isConstantModelConstructible_kernel
 
 /-- **Closure under cokernels.** On a noetherian scheme `X`, with coefficients `E̲`
 (`E / ℚ_ℓ` finite) or `ℚ̲̄_ℓ`, the cokernel in `Mod(X_proét, Λ)` of a morphism of
-constructible `Λ_X`-modules is constructible.
-(blueprint: lemma-constructible-sheaves--2) -/
+constructible `Λ_X`-modules is constructible. -/
 theorem isConstantModelConstructible_cokernel
     (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),
       FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨
@@ -65,8 +63,7 @@ theorem isConstantModelConstructible_cokernel
 
 /-- **Closure under extensions.** On a noetherian scheme `X`, with coefficients `E̲`
 (`E / ℚ_ℓ` finite) or `ℚ̲̄_ℓ`, if `0 → F → M → G → 0` is exact in `Mod(X_proét, Λ)` and `F`
-and `G` are constructible, then `M` is constructible.
-(blueprint: lemma-constructible-sheaves--3) -/
+and `G` are constructible, then `M` is constructible. -/
 theorem isConstantModelConstructible_of_shortExact
     (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),
       FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨
@@ -82,8 +79,7 @@ theorem isConstantModelConstructible_of_shortExact
 
 /-- **Abelian structure.** On a noetherian scheme `X`, with coefficients `E̲` (`E / ℚ_ℓ`
 finite) or `ℚ̲̄_ℓ`, the full subcategory `Cons(X, Λ)` of constructible `Λ_X`-modules admits
-an abelian category structure.
-(blueprint: lemma-constructible-sheaves--4) -/
+an abelian category structure. -/
 theorem nonempty_abelian_constantModelConstructible
     (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),
       FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨

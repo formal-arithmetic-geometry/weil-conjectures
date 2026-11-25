@@ -14,15 +14,22 @@ Let `i : Z ⟶ X` be a closed immersion with Thom frames and `i' : Z' ⟶ X'` it
 an étale morphism `e : X' ⟶ X` (for instance an isomorphism). The restriction of supports of the
 fundamental class `[Z ⊂ X]` (`AlgebraicGeometry.Etale.thomFundamentalClass`) along `e` is the
 fundamental class `[Z' ⊂ X']`
-(`AlgebraicGeometry.Etale.restrictSupportedClass_thomFundamentalClass_of_etale`): a frame
-`(U, e', f)` of
-`i'` is a frame `(U, e' ≫ e, f)` of `i` (`AlgebraicGeometry.Scheme.Hom.EtaleFrame.ofIsPullback`),
-with the same frame class, and restriction of supports along the composite `e' ≫ e` is the
-composite of the restrictions, so the restricted fundamental class has the frame classes as frame
-restrictions, which characterizes `[Z' ⊂ X']` (`HasThomFrames.existsUnique_fundamentalClass`).
-This is the first step of the base change compatibility of the canonical orientation of a smooth
-morphism along an isomorphism of pairs (blueprint `proposition-compatibility-purity-base-change`,
-the Frobenius square).
+(`AlgebraicGeometry.Etale.restrictSupportedClass_thomFundamentalClass_of_etale`). This is the
+first step of the base change compatibility of the canonical orientation of a smooth morphism
+along an isomorphism of pairs.
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.restrictSupportedClass_thomFundamentalClass_of_etale`
+- `AlgebraicGeometry.Etale.thomFundamentalClassMap_eq_supportedClassMap_restrictSupportedClass`
+
+## Implementation details
+
+A frame `(U, e', f)` of `i'` is a frame `(U, e' ≫ e, f)` of `i`
+(`AlgebraicGeometry.Scheme.Hom.EtaleFrame.ofIsPullback`), with the same frame class, and
+restriction of supports along the composite `e' ≫ e` is the composite of the restrictions, so the
+restricted fundamental class has the frame classes as frame restrictions,
+which characterizes `[Z' ⊂ X']` (`HasThomFrames.existsUnique_fundamentalClass`).
 -/
 
 @[expose] public section

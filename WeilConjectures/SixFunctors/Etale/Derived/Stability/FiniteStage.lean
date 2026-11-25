@@ -17,15 +17,19 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Matrix
 
 Let `k` be an algebraically closed field, `Λ` a finite ring whose exponent is invertible on `k`
 (the finite stage `A = A_{E,n}`), and let `f : X ⟶ Y` be a morphism of separated finite-type
-`k`-schemes over `k`. This file proves the Tor interval of clause (v) of
-`proposition-six-operations-dctf`: `Rf^!` sends `Dctf(Y, Λ)` objects of Tor amplitude `[a, b]` to
-Tor amplitude `[a - 2 dim X, b + 2 dim Y]`.
+`k`-schemes over `k`. This file proves that `Rf^!` sends `Dctf(Y, Λ)` objects of Tor amplitude
+`[a, b]` to Tor amplitude `[a - 2 dim X, b + 2 dim Y]`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedUpperShriek_of_verdierDual`
-  (`proposition-six-operations-dctf` (v)): the Tor interval `[a - 2 dim X, b + 2 dim Y]` of
-  `Rf^! K`.
+- `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedUpperShriek_of_verdierDual` : the Tor
+  interval `[a - 2 dim X, b + 2 dim Y]` of `Rf^! K`.
+
+## Implementation details
+
+The proof uses `Rf^! K ≅ 𝔻_X Lf^* 𝔻_Y K`: the duality bound on `Y` gives `𝔻_Y K` the interval
+`[-b - 2 d_Y, -a]`, pullback preserves it, and the duality bound on `X` gives
+`[a - 2 d_X, b + 2 d_Y]`.
 
 The isomorphism `Rf^! K ≅ 𝔻_X Lf^* 𝔻_Y K` it is derived from is
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar`,
@@ -55,15 +59,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [I
   [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX]
   [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] [HasCompactification aY]
 
-/-- Blueprint `proposition-six-operations-dctf`, clause (v), the Tor interval: if `dim X ≤ d_X`,
-`dim Y ≤ d_Y` and `K ∈ Dctf(Y, Λ)` has Tor amplitude in `[a, b]`, then `Rf^! K` has Tor
-amplitude in `[a - 2 d_X, b + 2 d_Y]`.
-
-Indeed `Rf^! K ≅ 𝔻_X Lf^* 𝔻_Y K`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar`);
-the duality bound
-(`lemma-verdier-duality-preserves-constructibility--1`) on `Y` gives `𝔻_Y K` the interval
-`[-b - 2 d_Y, -a]`, pullback preserves it, and the duality bound on `X` gives
+/-- The Tor interval of `Rf^!` on `Dctf`: if `dim X ≤ d_X`, `dim Y ≤ d_Y` and
+`K ∈ Dctf(Y, Λ)` has Tor amplitude in `[a, b]`, then `Rf^! K` has Tor amplitude in
 `[a - 2 d_X, b + 2 d_Y]`. -/
 theorem torAmplitudeIn_rightDerivedUpperShriek_of_verdierDual (f : X ⟶ Y) (hf : f ≫ aY = aX)
     [HasCompactification f] (dX dY : ℕ) (hdX : topologicalKrullDim X ≤ (dX : WithBot ℕ∞))

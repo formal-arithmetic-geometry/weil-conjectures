@@ -18,17 +18,17 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 This file records the preservation statements for the exceptional inverse image `Rf^!` in the
 cases where it is explicit:
 
-- `AlgebraicGeometry.Etale.boundedConstructible_and_torAmplitudeIn_leftDerivedUpperStar`
-  (`proposition-six-operations-dctf--1`): the pullback preserves bounded constructibility and the
+- `AlgebraicGeometry.Etale.boundedConstructible_and_torAmplitudeIn_leftDerivedUpperStar`:
+  the pullback preserves bounded constructibility and the
   Tor amplitude interval;
 - `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_of_isOpenImmersion` and
-  `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_of_isFinite_of_etale`
-  (`theorem-f-shriek-finite-coefficients`): for an open immersion or a finite étale `f`,
-  `Rf^! ≅ f^*` preserves the constructible intervals and the Tor amplitude, and commutes with the
-  reduction of coefficients `K ↦ K ⊗ᴸ (Λ/J)`;
-- `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_of_smoothOfRelativeDimension`
-  (`theorem-f-shriek-finite-coefficients`): for `f` smooth of pure relative dimension `d`, `Rf^!`
-  shifts the constructible interval and the Tor amplitude by `-2d`.
+  `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_of_isFinite_of_etale`:
+  for an open immersion or a finite étale `f`, `Rf^! ≅ f^*` preserves the constructible
+  intervals and the Tor amplitude, and commutes with the reduction of coefficients
+  `K ↦ K ⊗ᴸ (Λ/J)`;
+- `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_of_smoothOfRelativeDimension`:
+  for `f` smooth of pure relative dimension `d`, `Rf^!` shifts the constructible interval and
+  the Tor amplitude by `-2d`.
 
 The reduction of coefficients along `Λ → B = Λ/J` is `AlgebraicGeometry.Etale.reductionModIdeal`,
 `K ↦ K ⊗ᴸ (Λ/J)_X`, read in `D(X_ét, Λ)` (for `Λ = A_{E,n}` and `J = ϖ^m` this is the finite
@@ -55,13 +55,12 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-! ### The pullback -/
 
-/-- Blueprint `proposition-six-operations-dctf--1`: Pullback preserves finite Tor amplitude.
+/-- Pullback preserves finite Tor amplitude.
 
 Let `f : X ⟶ Y` be a morphism of schemes and `K` a bounded constructible complex on `Y_ét` with
 Tor amplitude in `[a, b]`. Then `Lf^* K` is bounded constructible, with homology concentrated in
 `[a, b]` if `K` is, and has Tor amplitude in `[a, b]`; consequently `Lf^*` carries `Dctf(Y, Λ)`
-into `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.constructibleFiniteTor_leftDerivedUpperStar`). The
-pullback of a bounded flat model is a bounded flat model in the same degrees. -/
+into `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.constructibleFiniteTor_leftDerivedUpperStar`). -/
 theorem boundedConstructible_and_torAmplitudeIn_leftDerivedUpperStar {X Y : Scheme.{u}}
     (f : X ⟶ Y) (a b : ℤ) {K : DerivedCategoryModule Λ Y}
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) Y K)
@@ -132,10 +131,9 @@ theorem preservation_of_iso_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y
         ((leftDerivedUpperStarReductionModIdealIso Λ J f).app K).symm ≪≫ (e.app _).symm)
       (hred X (hF K hK))⟩
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation in the open and finite etale
-cases.
+/-- Preservation for the exceptional inverse image, open immersion case.
 
-Open immersion case. Let `f : U ⟶ Y` be a quasi-compact open immersion and `Λ` a finite ring. The
+Let `f : U ⟶ Y` be a quasi-compact open immersion and `Λ` a finite ring. The
 exceptional inverse image `Rf^! ≅ f^*` satisfies `Rf^! D_c^[a, b](Y, Λ) ⊆ D_c^[a, b](U, Λ)` and
 preserves Tor amplitude in `[a, b]`; for every quotient `B = Λ/J` the coefficient comparison
 `(Rf^! K) ⊗ᴸ B ≅ Rf^!(K ⊗ᴸ B)` is an isomorphism, and for `K ∈ Dctf(Y, Λ)` both sides are bounded
@@ -163,11 +161,10 @@ theorem preservation_rightDerivedUpperShriek_of_isOpenImmersion {U Y : Scheme.{u
     (rightDerivedUpperShriekIsoOfIsOpenImmersion Λ f ≪≫
       (leftDerivedUpperStarIsoMapDerivedCategory _ f).symm) J
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation in the open and finite etale
-cases.
+/-- Preservation for the exceptional inverse image, finite étale case.
 
-Finite étale case. Let `f : V ⟶ X` be finite étale and `Λ` a finite ring. The exceptional
-inverse image `Rf^! ≅ f^*` (`lemma-affine-space-etale-localization--4`) satisfies
+Let `f : V ⟶ X` be finite étale and `Λ` a finite ring. The exceptional inverse image
+`Rf^! ≅ f^*` satisfies
 `Rf^! D_c^[a, b](X, Λ) ⊆ D_c^[a, b](V, Λ)` and preserves Tor amplitude in `[a, b]`; for every
 quotient `B = Λ/J` the coefficient comparison `(Rf^! K) ⊗ᴸ B ≅ Rf^!(K ⊗ᴸ B)` is an isomorphism,
 and for `K ∈ Dctf(X, Λ)` both sides are bounded constructible. No bound depends on `Λ`. -/
@@ -216,8 +213,7 @@ lemma exists_flat_rightDerivedUpperShriek_iso_tensor_shift {X Y : Scheme.{u}}
   exact ⟨t.symm ≪≫ ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj _).mapIso eω ≪≫
     ((((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj _).commShiftIso (2 * d : ℤ)).app _)⟩
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: Smooth morphisms satisfy the preservation
-clauses.
+/-- Smooth morphisms satisfy the preservation clauses.
 
 Let `f : X ⟶ Y` be smooth of pure relative dimension `d`, admitting a compactification, and `Λ`
 a finite ring whose exponent is invertible on `Y`. Then `f` satisfies the two preservation
@@ -225,12 +221,7 @@ clauses of exceptional-adjoint admissibility with `c_f^- = c_f^+ = -2d`:
 
 1. constructibility: if `L ∈ D_c^[a, b](Y, Λ)` then `Rf^! L ∈ D_c^[a - 2d, b - 2d](X, Λ)`;
 2. finite Tor amplitude: if `K` has Tor amplitude in `[a, b]`, then `Rf^! K` has Tor amplitude in
-   `[a - 2d, b - 2d]`; in particular `Rf^!` carries `Dctf(Y, Λ)` into `Dctf(X, Λ)`.
-
-By purity `Rf^! K ≅ Lf^* K ⊗ᴸ ω_f` with `ω_f ≅ L[2d]` for a locally constant sheaf `L` of free
-rank-one `Λ`-modules (`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`); tensoring
-with the flat constructible `L` changes neither the constructible interval nor the Tor amplitude,
-and the shift moves both by `-2d`. -/
+   `[a - 2d, b - 2d]`; in particular `Rf^!` carries `Dctf(Y, Λ)` into `Dctf(X, Λ)`. -/
 theorem preservation_rightDerivedUpperShriek_of_smoothOfRelativeDimension {X Y : Scheme.{u}}
     [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
     [SmoothOfRelativeDimension d f] :

@@ -11,20 +11,32 @@ public import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-!
 # Constructing finite pullback refinement trees
 
-Source: Stacks Project, Topology, Tag 09Y4, realized by complementary scheme pullbacks.
-(auxiliary; not a blueprint node)
+Given finitely many partitions of a qcqs scheme `W` into strata, each with a chosen
+open/closed cut, we construct a finite binary tree of complementary open/closed pullbacks
+of `W` whose nonempty leaves factor through one stratum of every partition.
+
+## Main results
+
+* `exists_finite_refinement_tree`: the finite refinement tree, encoded on `Fin N`.
+
+## Implementation details
+
+The tree is built by iterating the complementary open/closed pullback split over the finitely
+many strata, recording the parent, child, compactness, disjointness, covering and
+factorization invariants.
+
+## References
+
+* Stacks Project, Topology, Tag 09Y4.
 -/
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Topology
 namespace AlgebraicGeometry.Scheme
-/-- Finite binary pullback tree construction from already chosen open/closed refinements.
-Source: Stacks Project, Topology, Tag 09Y4.
-(auxiliary; not a blueprint node).
-The proof iterates the complementary open/closed pullback split over the finitely many strata
-and records the parent, child, compactness, disjointness, covering, and factorization invariants.
--/
+/-- Finite binary pullback tree construction from already chosen open/closed refinements:
+there is a finite tree of complementary open/closed pullbacks of `W` whose leaves are disjoint
+and cover `W`, and every nonempty leaf factors through one stratum of every partition. -/
 theorem exists_finite_refinement_tree
     {W : Scheme.{u}} [CompactSpace W] [QuasiSeparatedSpace W]
     (m : ℕ) (n : Fin m → ℕ)

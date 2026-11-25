@@ -12,26 +12,32 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.AffineSpac
 # Affine-space purity: the `Rp^!`-form
 
 Let `Y` be a separated scheme of finite type over a field on which the exponent of the finite
-coefficient ring `Λ` is invertible, and `p_d : 𝔸^d_Y → Y` the projection. This file proves
-clause (ii) of blueprint `proposition-purity-vector-bundles`, `Rp_d^! K ≅ Lp_d^* K (d)[2d]` for
-`K ∈ D^b_{ctf}(Y, Λ)`.
-
-Affine-line purity is read off from the affine-space ambient adjunction
-`Rp_! ⊣ p^*(1)[2]` (`lemma-affine-space-etale-localization--1`,
-`AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`), and the
-general case iterates it through `𝔸^{d+1}_Y = 𝔸¹_{𝔸^d_Y}`
-(`AlgebraicGeometry.AffineSpace.sumIso`).
+coefficient ring `Λ` is invertible, and `p_d : 𝔸^d_Y → Y` the projection. This file proves the
+`Rp^!`-form of affine-space purity, `Rp_d^! K ≅ Lp_d^* K (d)[2d]` for `K ∈ D^b_{ctf}(Y, Λ)`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineLine`: affine-line purity,
   `Rp^! K ≅ Lp^* K (1)[2]`.
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpace`: clause (ii),
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpace`: the `Rp^!`-form,
   affine-space purity `Rp_c^! K ≅ Lp_c^* K (c)[2c]`.
 - `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`: its case `K = Λ_B`,
   `ω_{p_c} ≅ Λ(c)[2c]`.
 - `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`: the section invariant of
   the standard pair, `𝒞(𝔸^c_B → B, 0) ≅ Λ_B(c)[2c]`.
+
+## Implementation details
+
+Affine-line purity is read off from the affine-space ambient adjunction `Rp_! ⊣ p^*(1)[2]`
+(`AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`): `Rp^!` is by
+definition the right adjoint of `Rp_!`, so the two right adjoints agree (for every `K`,
+constructible or not). The general case iterates it through `𝔸^{d+1}_Y = 𝔸¹_{𝔸^d_Y}`
+(`AlgebraicGeometry.AffineSpace.sumIso`), using the composition law for `R(-)^!` and adding up
+the twists.
+
+The comparison maps `γ_{p,K}` (the transpose under `Rp_! ⊣ Rp^!` of the integration map built
+from the projective-line trace) are not constructed, so only the existence of the isomorphisms
+is recorded.
 -/
 
 @[expose] public section
@@ -52,23 +58,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
 
 /-! ### The `Rp^!`-form -/
 
-/-- Blueprint `lemma-affine-space-etale-localization--1`: affine-line purity
-
-For the projection `p : 𝔸¹_Y → Y` of the affine line over a separated scheme of finite type
-over a field, on which the exponent of `Λ` is invertible, and `K ∈ D^b_{ctf}(Y, Λ)`,
-
-`Rp^! K ≅ Lp^* K (1)[2]`.
-
-In the blueprint the isomorphism is the comparison `γ_{p,K}`, the transpose under
-`Rp_! ⊣ Rp^!` of the integration map built from the projective-line trace
-(`definition-trace-map-affine-line`); this comparison is not constructed, so only the
-existence of the isomorphism is recorded.
-
-The proof follows the blueprint: `Rp^!` is by definition the right adjoint of `Rp_!`, and
-`Rp_! ⊣ p^*(1)[2]` is the affine-space ambient adjunction
-(`AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`,
-`lemma-affine-space-etale-localization--1`), so the two right adjoints agree. In particular the
-isomorphism holds for every `K`, constructible or not. -/
+/-- Affine-line purity: for the projection `p : 𝔸¹_Y → Y` of the affine line over a separated
+scheme of finite type over a field, on which the exponent of `Λ` is invertible, and
+`K ∈ D^b_{ctf}(Y, Λ)`, there is an isomorphism `Rp^! K ≅ Lp^* K (1)[2]`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineLine [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k]
     (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
@@ -83,9 +75,8 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLine [HasTateTwist.IsNormaliz
   exact ⟨((rightDerivedUpperShriekAdjunction _ _).rightAdjointUniq adj).app K⟩
 
 omit [HasTateTwist Λ] in
-/-- Blueprint `proposition-purity-vector-bundles`, Step 6: the projection of `𝔸^{d+1}_Y` is that of
-`𝔸¹_{Y'}` followed by that of `Y' = 𝔸^d_Y`, so by the composition law and `Re^! ≅ Le^*` for the
-isomorphism `e : 𝔸^{d+1}_Y ≅ 𝔸¹_{Y'}`, `Rp_{d+1}^! K ≅ Le^* Rp'^! Rp_d^! K`. -/
+/-- With `e : 𝔸^{d+1}_Y ≅ 𝔸¹_{Y'}`, `Y' = 𝔸^d_Y`, and `p' : 𝔸¹_{Y'} → Y'`, there is an
+isomorphism `Rp_{d+1}^! K ≅ Le^* Rp'^! Rp_d^! K`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineSpace_succ (d : ℕ) (Y : Scheme.{u})
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((rightDerivedUpperShriek Λ
@@ -110,8 +101,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpace_succ (d : ℕ) (Y : Sch
   exact ⟨heq.app K ≪≫ comp₁.app K ≪≫ comp₂.app _ ≪≫ (rightDerivedUpperShriekIsoOfIso _ φ).app _⟩
 
 omit [Finite Λ] in
-/-- Blueprint `proposition-purity-vector-bundles`, Step 6: the twists of the two steps add up,
-
+/-- The twists of the two steps add up:
 `Le^* ((Lp'^* (Lp_d^* K (d)[2d]))(1)[2]) ≅ Lp_{d+1}^* K (d + 1)[2(d + 1)]`. -/
 theorem nonempty_iso_leftDerivedUpperStar_affineSpaceSuccIso_twistShift (d : ℕ)
     (Y : Scheme.{u}) [HasInvertibleExponent Λ Y]
@@ -145,22 +135,9 @@ theorem nonempty_iso_leftDerivedUpperStar_affineSpaceSuccIso_twistShift (d : ℕ
     (twistShift Λ _ _).mapIso pb ≪≫
     eqToIso (by push_cast; rfl)⟩
 
-/-- Blueprint `proposition-purity-vector-bundles--1`: affine-space purity
-
-This is clause (ii) of blueprint `proposition-purity-vector-bundles`. For the projection
-`p_d : 𝔸^d_Y → Y`, `d ≥ 0`, of relative affine space over a separated scheme of finite type over a
-field, on which the exponent of `Λ` is invertible, and `K ∈ D^b_{ctf}(Y, Λ)`,
-
-`Rp_d^! K ≅ Lp_d^* K (d)[2d]`;
-
-in particular `ω_{p_d} = Rp_d^! Λ_Y ≅ Λ(d)[2d]`. In the blueprint the isomorphism is the
-comparison `γ_{p_d,K}` (`proposition-purity-vector-bundles--1`), the ordered composite of the
-affine-line comparisons; these are not constructed, so only the existence of the isomorphism
-is recorded.
-
-The proof is Step 6 of the blueprint: write `𝔸^{d+1}_Y = 𝔸¹_{Y'}` with `Y' = 𝔸^d_Y`, apply
-affine-line purity (`lemma-affine-space-etale-localization--1`) over `Y'` to
-`Rp_d^! K ≅ Lp_d^* K (d)[2d]`, which lies in `D^b_{ctf}`, and add up the twists. -/
+/-- Affine-space purity: for the projection `p_d : 𝔸^d_Y → Y` of relative affine space over a
+separated scheme of finite type over a field, on which the exponent of `Λ` is invertible, and
+`K ∈ D^b_{ctf}(Y, Λ)`, there is an isomorphism `Rp_d^! K ≅ Lp_d^* K (d)[2d]`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineSpace [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] (d : ℕ)
     (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
@@ -187,16 +164,9 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpace [HasTateTwist.IsNormali
       ((rightDerivedUpperShriek Λ (𝔸(ULift.{u} (Fin 1);
         𝔸(ULift.{u} (Fin d); Y)) ↘ 𝔸(ULift.{u} (Fin d); Y))).mapIso ih ≪≫ l) ≪≫ s⟩
 
-/-- Blueprint `proposition-purity-vector-bundles--1`: affine-space purity
-
-*The dualizing complex.* For the projection `p_d : 𝔸^d_Y → Y` of relative affine space over
-a separated scheme of finite type over a field, on which the exponent of `Λ` is invertible,
-
-`ω_{p_d} = Rp_d^! Λ_Y ≅ Λ_{𝔸^d_Y}(d)[2d]`.
-
-This is the case `K = Λ_Y` of
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpace`, with
-`Lp_d^* Λ_Y ≅ Λ_{𝔸^d_Y}`; `Λ_Y` lies in `D^b_{ctf}` as the twisting object `Λ_Y(0)`. -/
+/-- The dualizing complex of affine space: for the projection `p_d : 𝔸^d_Y → Y` over a
+separated scheme of finite type over a field, on which the exponent of `Λ` is invertible,
+`ω_{p_d} = Rp_d^! Λ_Y ≅ Λ_{𝔸^d_Y}(d)[2d]`. -/
 theorem nonempty_iso_dualizingComplex_affineSpace [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] (d : ℕ)
     (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
@@ -210,16 +180,8 @@ theorem nonempty_iso_dualizingComplex_affineSpace [HasTateTwist.IsNormalized Λ]
     (twistShift Λ _ d).mapIso ((L(((𝔸(ULift.{u} (Fin d); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).mapIso
       (HasTateTwist.twistObjectZeroIso Y) ≪≫ leftDerivedUpperStarUnitIso _ _)⟩
 
-/-- Blueprint `proposition-smooth-purity-finite-coefficients`: Finite-coefficient smooth purity
-
-*Step 3, the standard pair.* For the projection `π : 𝔸^c_B ⟶ B` of a trivial vector bundle of
-rank `c` with zero section `0`, over a separated scheme of finite type over a field, the
-section invariant is the Tate twist:
-
-`𝒞(π, 0) = L0^* ω_π ≅ L0^* Λ(c)[2c] ≅ Λ_B(c)[2c]`,
-
-by affine-space purity (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`)
-and the compatibility of the twist with pullback. -/
+/-- The section invariant of the standard pair: for the projection `π : 𝔸^c_B ⟶ B` with zero
+section `0`, over a separated scheme of finite type over a field, `𝒞(π, 0) ≅ Λ_B(c)[2c]`. -/
 theorem nonempty_iso_sectionInvariant_affineSpace [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] (c : ℕ)
     (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]

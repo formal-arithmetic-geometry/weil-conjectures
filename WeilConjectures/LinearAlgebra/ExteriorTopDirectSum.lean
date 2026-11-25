@@ -16,8 +16,9 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 /-!
 # Top exterior power of a direct sum
 
-Source: Weil conjectures blueprint, `sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch`,
-proof of (*), determinant paragraph (blueprint: lem-sc-exterior-top-direct-sum).
+For free modules `M` and `N` of ranks `r` and `s`, there is a unique isomorphism
+`⋀^(r+s) (M × N) ≃ ⋀^r M ⊗ ⋀^s N` sending the wedge of `(m_i, 0)` and `(0, n_j)` to the tensor of
+the wedges of the `m_i` and of the `n_j`; it is natural in `M` and `N`.
 
 ## Main statements
 
@@ -34,8 +35,7 @@ open scoped TensorProduct
 namespace exteriorPower
 
 /-- Multiply homogeneous elements after applying the two inclusions into the direct sum.
-The product has degree `r + s` by the exterior-algebra grading.
-(blueprint: lem-sc-exterior-top-direct-sum) -/
+The product has degree `r + s` by the exterior-algebra grading. -/
 private noncomputable def directSumMap
     {R : Type u} [CommRing R]
     {M : Type v} [AddCommGroup M] [Module R M]
@@ -66,10 +66,7 @@ private noncomputable def directSumMap
         apply Subtype.ext
         simp }
 
-/-- Multiplication of the two homogeneous wedges concatenates their factors.
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, determinant paragraph. Apply the
-two inclusions factor by factor and use `ExteriorAlgebra.ιMulti_mul_ιMulti`.
-(blueprint: lem-sc-exterior-top-direct-sum) -/
+/-- Multiplication of the two homogeneous wedges concatenates their factors. -/
 private theorem directSumMap_ιMulti
     {R : Type u} [CommRing R]
     {M : Type v} [AddCommGroup M] [Module R M]
@@ -164,20 +161,9 @@ private theorem tensor_wedge_ext
   intro n
   exact h m n
 
-/-- Source: Weil conjectures blueprint, `theorem-riemann-roch-coherent-serre-duality--1`, proof of
-(*), determinant paragraph (blueprint: lem-sc-exterior-top-direct-sum).
-
-Choose bases of `M` and `N`. The top exterior-power basis lemma
-`lem-weil-pbc-exterior-power-free-basis` gives one-element wedge bases of their top powers
-and of the top power of the concatenated basis of `M × N`.
-The product-basis lemma `lem-sc-tensor-product-free-basis` gives the tensor of the two
-one-element bases as a basis of the tensor product. Sending this tensor basis vector to
-the concatenated wedge basis vector defines an isomorphism with coefficient +1.
-Expand arbitrary vectors in the chosen bases by multilinearity, remove repeated factors
-by alternation, and reorder using anticommutation: the same coefficients occur before
-and after the two inclusions, giving the displayed formula on all pure wedges.
-Pure wedges span exterior powers and pure tensors span the tensor product, so this
-formula determines the isomorphism uniquely and makes it independent of the bases. -/
+/-- For free modules `M` and `N` of ranks `r` and `s`, there is a unique isomorphism
+`⋀^(r+s) (M × N) ≃ ⋀^r M ⊗ ⋀^s N` whose inverse sends `ιMulti m ⊗ ιMulti n` to the wedge of the
+concatenation of `(m i, 0)` and `(0, n j)`. -/
 theorem existsUnique_topDirectSum
     {R : Type u} [CommRing R]
     {M : Type v} [AddCommGroup M] [Module R M]
@@ -200,16 +186,9 @@ theorem existsUnique_topDirectSum
     have h' : e.symm = a := LinearEquiv.toLinearMap_injective h
     exact congrArg LinearEquiv.symm h'
 
-/-- Source: Weil conjectures blueprint, `theorem-riemann-roch-coherent-serre-duality--1`, proof of
-(*), determinant paragraph (blueprint: lem-sc-exterior-top-direct-sum).
-
-Apply isomorphisms `f` and `g` to the pure-wedge characterization of the two isomorphisms.
-Exterior-power maps send each wedge to the wedge of the images, tensor-product maps send
-pure tensors to the tensors of their images, and the inclusions into the direct sum
-commute with `f` and `g`. Thus the naturality square commutes on pure tensors of wedges.
-These span by the exterior-power and tensor-product universal properties, so the square
-commutes everywhere. Taking inverses gives the displayed naturality in the orientation
-from the top exterior power of the direct sum to the tensor product. -/
+/-- The isomorphisms `⋀^(r+s) (M × N) ≃ ⋀^r M ⊗ ⋀^s N` characterized on wedges as in
+`existsUnique_topDirectSum` are natural with respect to isomorphisms `f : M ≃ M'` and
+`g : N ≃ N'`. -/
 theorem topDirectSum_natural
     {R : Type u} [CommRing R]
     {M : Type v} [AddCommGroup M] [Module R M]

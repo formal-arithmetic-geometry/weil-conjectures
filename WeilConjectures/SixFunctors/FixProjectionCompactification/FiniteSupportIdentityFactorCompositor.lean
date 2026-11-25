@@ -8,7 +8,16 @@ module
 public import WeilConjectures.SixFunctors.Supporting.SixFunctorOperationDatumStages
 import WeilConjectures.SixFunctors.FixProjectionCompactification.IdentityFactorCoefficientComparison
 
-/-! # The coefficient compositor on identity-factor compactifications -/
+/-! # The coefficient compositor on identity-factor compactifications
+
+## Implementation details
+
+The proof of `finiteSupportIdentityFactorCompositor` expands
+`sixFunctorFiniteCompositionComparison`, moves the two `refinementFixedWitnessIso` factors to
+the input and output by naturality, and identifies the middle `coherenceProEtaleCompositor`
+with the identity-factor isomorphism via `identityFactorFixedCompositor`; the witness factors
+then cancel against their inverses.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -37,29 +46,10 @@ private theorem identityFactor_witness_cancel
   rw [← Category.assoc, δ.hom.naturality, Category.assoc, ← G.map_comp,
     e.inv_hom_id, G.map_id, Category.comp_id]
 
-/-- The coefficient realization of the witnessed open/proper compositor cancels the
-identity factors. This equation concerns only the canonical coefficient functors and
-an etale-origin witness. It has no supplied finite operations, constructible input,
-operation realization, or integral reduction.
-
-Source: def-sf-operation-stages, composition and proper/open normalizations;
-prop-sf-pf-coherence.proof.md, compatibility with counits and j_!.
-(blueprint: lem-sf-finite-support-identity-factor-compositor).
-
-Proof: expand sixFunctorFiniteCompositionComparison, retaining its two inverse
-refinementFixedWitnessIso factors. By naturality of the three coefficient comparisons,
-move those factors to the input and output. The middle coherenceProEtaleCompositor
-is the etale compositor conjugated by the site comparison and the recorded changes
-of compactification. For the identity-proper compactification of i followed by the
-identity-open compactification of p, its etale proper/open construction is extension
-by zero along i followed by proper image along p. The identity direct-image adjunction
-and identity open-extension unit cancel, using the triangle identities. Transport
-these cancellations through sfIntrinsicCompactSupportComparison: the first is exactly
-sixFunctorOpenCandidateIso and the second is sixFunctorProperCandidateIso. Naturality
-of the proper comparison orders the factors as displayed. The retained witness maps
-then cancel against their inverses. The target compactification is the actual pair
-(i,p), so no change-of-compactification map remains. This argument also applies to
-the zero witness, the empty open, and identity i or p, by the same unit laws. -/
+/-- For an open immersion `i` followed by a proper `p`, the coefficient realization of the
+witnessed open/proper compositor cancels the identity factors: it is identified with the
+composite of `sixFunctorProperCandidateIso`, the image of `sixFunctorOpenCandidateIso`, and
+the compact-support comparison for the factored compactification. -/
 theorem finiteSupportIdentityFactorCompositor
     (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]

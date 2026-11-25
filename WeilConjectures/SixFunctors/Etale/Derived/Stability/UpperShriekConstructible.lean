@@ -12,17 +12,16 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 
 For a separated finite-type morphism `f : X ⟶ Y` over a finite-type `k`-scheme `Y` and a finite
 `Λ` whose exponent is invertible on `Y`, the exceptional inverse image `Rf^!` carries `Dᵇc(Y, Λ)`
-into `Dᵇc(X, Λ)`. This is the bounded constructible half of `theorem-f-shriek-finite-coefficients`
-(iv), without any Tor-amplitude condition, and it is what makes the exceptional adjunction of the
-six-functor datum `def-fix-six-functor-datum` (4) restrict to the bounded constructible
-categories (`fix-prop-adjunctions` (2)).
+into `Dᵇc(X, Λ)`, without any Tor-amplitude condition. This makes the exceptional adjunction of
+the six-functor datum restrict to the bounded constructible categories.
 
-The proof follows the one of clause (iv) with amplitudes
+The proof follows the one with Tor amplitudes
 (`exists_constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_topologicalKrullDim_le`),
 dropping the amplitudes: localise to affine charts `U ↪ 𝔸ⁿ_V ⟶ V`; for an open immersion
 `Rj^! = j^*`; for the smooth projection `Rπ^! K ≅ Lπ^* K ⊗ᴸ L[2n]` with `L` locally constant of
 rank one; for a closed immersion `i` with open complement `j`, the localization triangle
-`Ri_! Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶` and the finiteness theorem for `Rj_*`.
+`Ri_! Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶`, the finiteness theorem for `Rj_*` and
+`Ri^! K ≅ i^* Ri_! Ri^! K`.
 
 ## Main statements
 
@@ -58,8 +57,7 @@ theorem boundedConstructible_rightDerivedUpperShriek_of_isOpenImmersion {U Y : S
     (hK.mapDerivedCategory_upperStar j)
 
 /-- For `f` smooth of pure relative dimension `d` and a finite `Λ` whose exponent is invertible on
-`Y`, `Rf^! K ≅ Lf^* K ⊗ᴸ L[2d]` with `L` flat, locally constant and constructible, so `Rf^!`
-preserves bounded constructibility. -/
+`Y`, `Rf^!` preserves bounded constructibility. -/
 theorem boundedConstructible_rightDerivedUpperShriek_of_smoothOfRelativeDimension
     {X Y : Scheme.{u}} [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
     [SmoothOfRelativeDimension d f]
@@ -80,10 +78,7 @@ theorem boundedConstructible_rightDerivedUpperShriek_of_smoothOfRelativeDimensio
     ((boundedConstructible _ X).le_shift _ _ hMbc)
 
 /-- For a closed immersion `i : Z ⟶ T` into a finite-type `k`-scheme and a finite `Λ` whose
-exponent is invertible on `T`, `Ri^!` preserves bounded constructibility: in the localization
-triangle `Ri_! Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶` for the open complement `j`, the third term is bounded
-constructible by the finiteness theorem, hence so is `Ri_! Ri^! K`, and
-`Ri^! K ≅ i^* Ri_! Ri^! K`. -/
+exponent is invertible on `T`, `Ri^!` preserves bounded constructibility. -/
 theorem boundedConstructible_rightDerivedUpperShriek_of_isClosedImmersion
     {Z T : Scheme.{u}} (aT : T ⟶ Spec (.of k)) [LocallyOfFiniteType aT] [QuasiCompact aT]
     [HasInvertibleExponent Λ T] (i : Z ⟶ T) [IsClosedImmersion i] [HasCompactification i]
@@ -160,9 +155,7 @@ theorem boundedConstructible_rightDerivedUpperShriek_chart {U V Y : Scheme.{u}}
 
 /-- The exceptional inverse image preserves bounded constructibility: for a separated
 finite-type `f : X ⟶ Y` admitting a compactification, over a finite-type `k`-scheme `Y`, and a
-finite `Λ` whose exponent is invertible on `Y`, `Rf^!` carries `Dᵇc(Y, Λ)` into `Dᵇc(X, Λ)`. This
-is the constructibility part of `theorem-f-shriek-finite-coefficients` (iv), with no Tor-amplitude
-condition; it makes `Rf^! : Dᵇc(Y, Λ) ⥤ Dᵇc(X, Λ)` of `def-fix-six-functor-datum` (4) defined. -/
+finite `Λ` whose exponent is invertible on `Y`, `Rf^!` carries `Dᵇc(Y, Λ)` into `Dᵇc(X, Λ)`. -/
 theorem boundedConstructible_rightDerivedUpperShriek {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f]

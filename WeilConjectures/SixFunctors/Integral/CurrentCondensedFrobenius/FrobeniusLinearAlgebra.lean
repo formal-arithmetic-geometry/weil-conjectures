@@ -9,8 +9,10 @@ public import WeilConjectures.ZetaLinearAlgebra.Pairing
 
 /-! # Linear algebra of a perfect Frobenius similitude
 
-Source: current blueprint, `sk-thm-frobenius.proof.md`, final paragraph
-(blueprint: lem-pod-frobenius-linear-consequences).
+For a perfect pairing `p : V × W → R` of finite-dimensional vector spaces and endomorphisms
+`A`, `B` with `p (A x) (B y) = c * p x y` for a nonzero scalar `c`, we show that `B` is
+conjugate to `c` times the transpose of `A⁻¹`, and deduce the consequences for dimensions,
+determinants and eigenvalues.
 -/
 
 @[expose] public noncomputable section
@@ -30,12 +32,8 @@ variable {R : Type u} [Field R] {V : Type v} {W : Type w}
 
 include hc hsim
 omit [Module.Finite R W] in
-/-- The adjoint given by the pairing conjugates the second operator to the
-scaled transpose of the first inverse. Source: Frobenius proof, final paragraph
-(blueprint: lem-pod-frobenius-linear-consequences).
-Proof: the similitude and nonzero scalar imply injectivity; finite dimension
-makes the first operator an equivalence. Substitute its inverse in the
-similitude identity and evaluate the canonical perfect-pairing adjoint. -/
+/-- The operator `A` is invertible, and the adjoint given by the pairing conjugates `B` to
+`c` times the transpose of `A⁻¹`. -/
 theorem inverseTranspose :
     ∃ a : V ≃ₗ[R] V, a.toLinearMap = A ∧
       ∃ adj : W ≃ₗ[R] Module.Dual R V,
@@ -54,12 +52,9 @@ theorem inverseTranspose :
     change p (A (a.symm x)) (B y) = c * p (a.symm x) y at h
     simpa only [show A (a.symm x) = x from a.apply_symm_apply x] using h
 
-/-- The inverse-transpose, dimension, determinant and reciprocal-root conclusions
-of a perfect similitude. Source: Frobenius proof, final paragraph
-(blueprint: lem-pod-frobenius-linear-consequences).
-Proof: use the preceding inverse-transpose calculation. Perfectness gives equal
-ranks; the determinant product and root multiset identities are the existing
-perfect-similitude theorems, including in dimension zero. -/
+/-- For a perfect similitude: `B` is conjugate to `c` times the transpose of `A⁻¹`,
+`dim V = dim W`, `det A * det B = c ^ dim V`, and the eigenvalues of `B` are the
+values `c / α` for the eigenvalues `α` of `A`, with multiplicity. -/
 theorem linearFieldConsequences :
     (∃ a : V ≃ₗ[R] V, a.toLinearMap = A ∧
       ∃ adj : W ≃ₗ[R] Module.Dual R V,

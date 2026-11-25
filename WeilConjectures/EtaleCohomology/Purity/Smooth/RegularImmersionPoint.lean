@@ -26,6 +26,14 @@ of the same codimension, which is the case here although `j_y` is not flat
   of the fundamental class to a base change which is regular of the same codimension.
 - `AlgebraicGeometry.Etale.isPullback_diagonal_pullbackLiftSection`: the section `y` is the
   base change of the diagonal along `j_y`.
+
+## Implementation details
+
+For `restrictSupportedClass_fundamentalClass_of_isPullback`: near a point of `Z'`, a Zariski
+frame `(U, f)` of `i` pulls back to the Zariski frame `(e⁻¹ U, e^* f)` of `i'`, and the product of
+Kummer boundaries of `f` restricts to that of `e^* f`. In the flat version
+`restrictSupportedClass_fundamentalClass_of_flat`, flatness of `e` serves only to make `i'`
+regular.
 -/
 
 @[expose] public section
@@ -68,18 +76,11 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [HasKummerClass.IsNormalized Λ] {X Z : Scheme.{u}} [HasInvertibleExponent Λ X] {k : Type u}
   [Field k] [PerfectField k] (c : ℕ) (i : Z ⟶ X) [IsRegularImmersion c i]
 
-/-- Blueprint `prop-pur-regular-immersion-purity-compatibilities`: Compatibilities of purity for
-regular immersions
-
-**Base change of the fundamental class to a regular immersion of the same codimension**,
+/-- **Base change of the fundamental class to a regular immersion of the same codimension**,
 `[Z' ⊂ X'] = e^* [Z ⊂ X]`: for any `e : X' ⟶ X` with `X'` smooth over `k` whose base change
 `i' : Z' ⟶ X'` of `i` is a regular immersion of the same codimension `c`, with `Z'` regular,
 the restriction of supports along `e` carries the fundamental class of `i` to that of `i'`.
-Near a point of `Z'`, a Zariski frame `(U, f)` of `i` pulls back to the Zariski frame
-`(e⁻¹ U, e^* f)` of `i'`, and the product of Kummer boundaries of `f` restricts to that of
-`e^* f`. This generalizes
-`AlgebraicGeometry.Etale.restrictSupportedClass_fundamentalClass_of_flat`, where flatness of `e`
-serves only to make `i'` regular. -/
+This generalizes `AlgebraicGeometry.Etale.restrictSupportedClass_fundamentalClass_of_flat`. -/
 theorem restrictSupportedClass_fundamentalClass_of_isPullback (aX : X ⟶ Spec (.of k))
     [Smooth aX] (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) {X' Z' : Scheme.{u}}
     (e : X' ⟶ X) [Smooth (e ≫ aX)] (i' : Z' ⟶ X') [IsRegularImmersion c i'] (g : Z' ⟶ Z)

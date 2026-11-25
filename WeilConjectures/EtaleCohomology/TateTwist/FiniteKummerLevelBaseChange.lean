@@ -16,8 +16,7 @@ For `g : X ⟶ Y`, the pullback `g^* μₙ ⟶ μₙ` induces base change maps
 (`AlgebraicGeometry.Etale.upperStarExtendScalarsAlongRootsOfUnity`), and the identification
 `Λ ⊗_ℤ μₙ ≅ μₙ ⊗_{ℤ/n} Λ` commutes with them
 (`AlgebraicGeometry.Etale.upperStar_map_extendScalarsIsoExtendScalarsAlong_hom`): the finite
-Kummer level identification of blueprint `lem-pur-finite-kummer-level` is compatible with base
-change.
+Kummer level identification of the Tate twist is compatible with base change.
 -/
 
 @[expose] public section
@@ -99,10 +98,8 @@ lemma rootsOfUnityModuleSheafHomEquiv_unit_comp {S : Scheme.{u}}
       ((extendScalarsAlongAdjunction Λ (ZMod.castHom (dvd_refl n) Λ) S).homEquiv _ _ k) := by
   rw [← rootsOfUnityModuleSheafHomEquiv_naturality, Adjunction.homEquiv_unit]
 
-/-- Blueprint `lem-pur-finite-kummer-level`: Finite Kummer level of the Tate twist
-
-**Compatibility with base change.** The identification `Λ ⊗_ℤ μₙ ≅ μₙ ⊗_{ℤ/n} Λ` commutes with the
-base change maps along any `g : X ⟶ Y`: the square
+/-- **Compatibility with base change.** The identification `Λ ⊗_ℤ μₙ ≅ μₙ ⊗_{ℤ/n} Λ` commutes
+with the base change maps along any `g : X ⟶ Y`: the square
 
 ```
 g^*(Λ ⊗_ℤ μₙ) ──≅──▶ g^*(μₙ ⊗_{ℤ/n} Λ)
@@ -149,10 +146,8 @@ theorem upperStar_map_extendScalarsIsoExtendScalarsAlong_hom :
     Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
 
 omit [CharP Λ n] in
-/-- Blueprint `lem-pur-finite-kummer-level`: Finite Kummer level of the Tate twist
-
-Compatibility with base change, for the Tate sheaf `Λ(1) = μₙ ⊗ Λ`, `n` the characteristic of `Λ`:
-the identification `Λ(1) ≅ μₙ ⊗_{ℤ/n} Λ` commutes with the base change maps
+/-- Compatibility with base change, for the Tate sheaf `Λ(1) = μₙ ⊗ Λ`, `n` the characteristic
+of `Λ`: the identification `Λ(1) ≅ μₙ ⊗_{ℤ/n} Λ` commutes with the base change maps
 `g^* Λ_Y(1) ⟶ Λ_X(1)` (`AlgebraicGeometry.Etale.upperStarTateSheafToTateSheaf`). -/
 theorem upperStar_map_tateSheafIso_hom :
     haveI : CharP Λ (ringChar Λ) := ringChar.charP Λ

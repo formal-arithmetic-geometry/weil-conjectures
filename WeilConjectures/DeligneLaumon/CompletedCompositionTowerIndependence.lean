@@ -9,8 +9,9 @@ public import WeilConjectures.DeligneLaumon.FieldShriekCompositionNormalization
 
 /-! # Transport of completed tower components to given compactifications
 
-Source: Stacks 0F7J, the six-square comparison of two compactification towers.
-(blueprint: lem-zl-completed-composition-tower-independence).
+## References
+
+* [Stacks Project, Tag 0F7J] (the six-square comparison of two compactification towers)
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +26,7 @@ variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Transport of a single completed tower map to three specified compactifications.
-Every factor is supplied explicitly; no choice of an unproved witness is made.
-Source: Stacks 0F7J (blueprint: lem-zl-completed-composition-tower-independence). -/
+Every factor is supplied explicitly. -/
 def sfCompletedCompositionTransport
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     (cf : Compactification f) (cg : Compactification g) (cfg : Compactification (f ≫ g))

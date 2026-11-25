@@ -18,9 +18,7 @@ invariant `ℱ = Ls̃^* ω_{g̃}` of the pair `(g̃, s̃)`
 `t = 0` is the section invariant of the normal cone with its zero section, and for the
 deformation space of a section constructed in
 `WeilConjectures.AlgebraicGeometry.DeformationToNormalCone` it is pulled back from the base over
-the punctured line, and constant for the standard pair: this is smooth base change for `R^!`
-(`proposition-exceptional-inverse-image-smooth-morphism` (c)) applied to the cartesian squares of
-the deformation.
+the punctured line, and constant for the standard pair.
 
 ## Main statements
 
@@ -28,6 +26,11 @@ the deformation.
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_puncturedLine_familyObject`
 - `AlgebraicGeometry.Etale.nonempty_iso_familyObject_standardPair`
 - `AlgebraicGeometry.Etale.nonempty_iso_familyObject_standardPair_twistShift`
+
+## Implementation details
+
+These statements follow from smooth base change for `R^!` applied to the cartesian squares of the
+deformation.
 -/
 
 @[expose] public section
@@ -50,9 +53,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}} {d : �
   {g : V ⟶ B} {s : B ⟶ V} {N : NormalConeData d s} (D : DeformationToNormalConeData d g s N)
   [HasInvertibleExponent Λ B]
 
-/-- Blueprint `prose-09-12` (1), the fibre over `t = 0`: the restriction of the family
-object along the zero section is the section invariant of the normal cone with its zero
-section,
+/-- The fibre over `t = 0`: the restriction of the family object along the zero section is the
+section invariant of the normal cone with its zero section,
 
 `Li₀^* ℱ ≃ 𝒞(π_N, 0_N)`. -/
 theorem nonempty_iso_leftDerivedUpperStar_zeroSection_familyObject
@@ -77,13 +79,10 @@ variable {d : ℕ} (g : V ⟶ B) [IsSeparated g] [SmoothOfRelativeDimension d g]
   [HasCompactification g] [HasInvertibleExponent Λ V] (s : B ⟶ V) [IsClosedImmersion s]
 
 include d in
-/-- Blueprint `prose-09-12` (3), the punctured trivialisation: over the punctured line
-`j : 𝔾_{m,B} ⊆ 𝔸¹_B` the family object `ℱ = Ls̃^* ω_{g̃}` of the deformation space of `s` is
-pulled back from the base,
+/-- The punctured trivialisation: over the punctured line `j : 𝔾_{m,B} ⊆ 𝔸¹_B` the family object
+`ℱ = Ls̃^* ω_{g̃}` of the deformation space of `s` is pulled back from the base,
 
-`κ° : j^* ℱ ≃ j^* a^* 𝒞(g, s)`, `a : 𝔸¹_B ⟶ B`,
-
-since over `𝔾_{m,B}` the deformation space is `V ×_B 𝔾_{m,B}` with `s̃ = s × 1`. -/
+`κ° : j^* ℱ ≃ j^* a^* 𝒞(g, s)`, `a : 𝔸¹_B ⟶ B`. -/
 theorem nonempty_iso_leftDerivedUpperStar_puncturedLine_familyObject (hs : s ≫ g = 𝟙 B)
     [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
     [HasInvertibleExponent Λ s.ker.deformationSpace] [QuasiSeparatedSpace B] [QuasiCompact g] :
@@ -121,10 +120,8 @@ variable (n : Type u) (B : Scheme.{u}) {d : ℕ} [IsSeparated (𝔸(n; B) ↘ B)
   [HasInvertibleExponent Λ 𝔸(n; B)]
 
 include d in
-/-- Blueprint `prose-09-12` (4), the family object of the standard pair: for the zero section
-`0` of `𝔸^n_B ⟶ B`, the deformation space is `𝔸^n_{𝔸¹_B}`
-(`AlgebraicGeometry.Scheme.Hom.isIso_deformationSpaceToAffineSpace`), so the family object is
-pulled back from the base,
+/-- The family object of the standard pair: for the zero section `0` of `𝔸^n_B ⟶ B`, the family
+object is pulled back from the base,
 
 `ℱ ≃ a^* (0^* ω_{𝔸^n_B / B})`, `a : 𝔸¹_B ⟶ B`. -/
 theorem nonempty_iso_familyObject_standardPair
@@ -157,14 +154,11 @@ theorem nonempty_iso_familyObject_standardPair
   exact ⟨e.symm⟩
 
 end StandardPair
-/-- Blueprint `prose-09-12` (4), the family object of the standard pair, made explicit: for
-the zero section of `𝔸^c_B ⟶ B` over a separated scheme of finite type over a field, the
-family object is the constant Tate twist,
+/-- The family object of the standard pair, made explicit: for the zero section of `𝔸^c_B ⟶ B`
+over a separated scheme of finite type over a field, the family object is the constant Tate
+twist,
 
-`ℱ ≃ a^* (0^* ω_{𝔸^c_B / B}) ≃ a^* Λ_B(c)[2c] ≃ Λ_{𝔸¹_B}(c)[2c]`,
-
-where `0^* ω = Λ(c)[2c]` is vector-bundle purity for the trivial bundle
-(`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`). -/
+`ℱ ≃ a^* (0^* ω_{𝔸^c_B / B}) ≃ a^* Λ_B(c)[2c] ≃ Λ_{𝔸¹_B}(c)[2c]`. -/
 theorem nonempty_iso_familyObject_standardPair_twistShift [HasTateTwist Λ]
     [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] (c : ℕ) (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB]

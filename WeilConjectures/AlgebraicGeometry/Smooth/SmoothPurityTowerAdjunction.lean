@@ -11,24 +11,26 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerCalculus.CoefficientTower
 # The adjunction `Rf_! ⊣ f^!` on constructible towers
 
 Let `E/ℚ_ℓ` be finite and `k` a field in which `ℓ` is invertible. For a smooth morphism
-`f : X ⟶ Y` of separated `k`-schemes of finite type, blueprint `proposition-sp-tower-geometric`
-asserts that the compactly supported direct image `Rf_{!,•}` on constructible towers
-`Dctf(-, 𝒪_E/ℓ^•)` has a right adjoint `f^!_•`, computed level by level by the finite exceptional
-inverse images: at level `n` its counit is the finite counit, so `(f^!_• C_•)_n ≃ f^!_{𝒪_E/ℓⁿ} C_n`.
+`f : X ⟶ Y` of separated `k`-schemes of finite type, we state that the compactly supported
+direct image `Rf_{!,•}` on constructible towers `Dctf(-, 𝒪_E/ℓ^•)` has a right adjoint `f^!_•`,
+computed level by level by the finite exceptional inverse images: at level `n` its counit is the
+finite counit, so `(f^!_• C_•)_n ≃ f^!_{𝒪_E/ℓⁿ} C_n`.
 
 The statement is made in the tower calculus of
 `WeilConjectures.AlgebraicGeometry.SpTowerCalculus.CoefficientTowerShriekInterfaces`: the
 constructible tower categories are `SpTowerCalculus.C`, and `Rf_{!,•}` restricted to them is
 `SpTowerCalculus.restrictedSupport` (for the compactification `c` of `f`). The level `n`
-assertion is phrased with representing pairs (blueprint `definition-representing-objects`): the
+assertion is phrased with representing pairs: the
 level `n` of `f^!_• K_•`, with the level `n` of the counit, represents `Hom(Rf_!(-), K_n)` on
 `D^b_ctf(X, 𝒪_E/ℓ^{n+1})`. By uniqueness of representing pairs this identifies the level with the
 finite exceptional inverse image and the level counit with the finite counit.
 
 ## Main statement
 
-* `AlgebraicGeometry.ProEtale.SpTowerCalculus.exists_adjunction_restrictedSupport`: blueprint
-  `proposition-sp-tower-geometric`.
+* `AlgebraicGeometry.ProEtale.SpTowerCalculus.exists_adjunction_restrictedSupport`: the
+  adjunction `Rf_{!,•} ⊣ f^!_•` on constructible towers, computed level by level.
+
+## Implementation details
 
 The proof (the construction of the trace map of the projective line and the gluing of local
 adjunctions in the topos of towers) is not formalised.
@@ -49,8 +51,7 @@ open Scheme
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Blueprint `proposition-sp-tower-geometric` (and its clause `proposition-sp-tower-geometric--1`):
-**the adjunction `Rf_{!,•} ⊣ f^!_•` on constructible towers** (9.18). For `f : X ⟶ Y` smooth,
+/-- **The adjunction `Rf_{!,•} ⊣ f^!_•` on constructible towers.** For `f : X ⟶ Y` smooth,
 separated and of finite type over a field `k` in which `ℓ` is invertible, and a compactification
 `c` of `f`, the compactly supported direct image on constructible towers has a right adjoint `G`
 whose levels are the finite exceptional inverse images: for every constructible tower `K` on `Y`

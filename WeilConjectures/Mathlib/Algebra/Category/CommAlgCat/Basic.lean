@@ -293,9 +293,7 @@ end Pi
 /-- **Elements of a filtered colimit of commutative algebras come from a stage.** For a filtered
 diagram `F` of commutative `R`-algebras with colimit cocone `c`, the image of `c` in commutative
 rings is still a colimit cocone, and every element of the colimit is `ι_j(a)` for some stage `j`
-and some `a ∈ F(j)`.
-
-(blueprint: `lem-weil-pbc-filtered-colimit-algebras-elementwise`) -/
+and some `a ∈ F(j)`. -/
 theorem isColimit_forget₂_and_exists_rep {J : Type u} [SmallCategory J] [IsFiltered J]
     {F : J ⥤ CommAlgCat.{u} R} {c : Cocone F} (hc : IsColimit c) :
     Nonempty (IsColimit ((forget₂ (CommAlgCat.{u} R) CommRingCat.{u}).mapCocone c)) ∧
