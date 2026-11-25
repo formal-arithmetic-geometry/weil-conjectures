@@ -78,13 +78,13 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # Signed integral pullback shift coordinates and descent
 
-Source: Stacks Project, derived.tex, Tag 014E, and sites-cohomology.tex,
-Tag 0941; trace-definition auxiliary whole-tower comparison, shift clause
-(blueprint: def-fd-integral-pullback-shift-coordinates).
+The finite-level and product shift maps, the Roos endomorphism, and predicates fixing its
+signed cochain shift and its derived descent.
 
-These are the existing finite-level and product shift maps, the actual Roos
-endomorphism, and predicates fixing its signed cochain shift and derived descent.
-No existence or comparison theorem is asserted here.
+## References
+
+* [Stacks Project, Tags 014E, 0941, 099N(5)]
+* [B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, 4.2.8]
 -/
 
 @[expose] public noncomputable section
@@ -101,15 +101,12 @@ namespace WeilConjectures.IntegralCompletedComparison
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Pin the existing countable-product structure to the actual coefficient universe.
-Source: Bhatt--Scholze 4.2.8
-(blueprint: def-fd-integral-pullback-shift-coordinates). -/
+/-- Countable products of integral tower modules in the coefficient universe. -/
 instance (priority := 2500) products (T : Scheme.{u}) :
     HasCountableProducts (integralTowerModules.{u, u} l E T) :=
   integralOperationsCountableProducts.{u, u} l E T
 
-/-- Termwise products of integral complexes in the fixed coefficient universe.
-Source: Stacks 0941 (blueprint: def-fd-integral-pullback-shift-coordinates). -/
+/-- Termwise products of integral complexes in the fixed coefficient universe. -/
 instance (priority := 2500) complexProducts (T : Scheme.{u}) :
     HasCountableProducts (CochainComplex (integralTowerModules.{u, u} l E T) ℤ) where
   out J := by
@@ -120,9 +117,7 @@ instance (priority := 2500) complexProducts (T : Scheme.{u}) :
 
 variable {X Y : Scheme.{u}} (g : X ⟶ Y)
 
-/-- The canonical finite-level termwise shift comparison.
-Source: Stacks 014E, 099N(5)
-(blueprint: def-fd-integral-pullback-shift-coordinates). -/
+/-- The canonical finite-level termwise shift comparison. -/
 def levelShift (P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ) (r : ℤ) (n : ℕ) :
     (integralOperationsPullbackLevel.{u, u} l E g n).obj (P⟦r⟧) ≅
       ((integralOperationsPullbackLevel.{u, u} l E g n).obj P)⟦r⟧ :=
@@ -136,9 +131,7 @@ def levelShift (P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ) (r :
           (completedIntegralCommRingProjectionUnrestricted.{u, u} l E X n)))
           |>.mapCochainComplexShiftIso r).app P
 
-/-- The product of the canonical finite-level shift comparisons.
-Source: Stacks 014E, 0941
-(blueprint: def-fd-integral-pullback-shift-coordinates). -/
+/-- The product of the canonical finite-level shift comparisons. -/
 def productShift (P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ) (r : ℤ) :
     (∏ᶜ fun n : ℕ ↦ ((integralOperationsPullbackTowerFunctor.{u, u} l E g).obj
       (P⟦r⟧)).obj (op n)) ≅
@@ -151,17 +144,14 @@ def productShift (P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ) (r
       (shiftFunctor (CochainComplex (integralTowerModules.{u, u} l E X) ℤ) r)
       (fun n : ℕ ↦ ((integralOperationsPullbackTowerFunctor.{u, u} l E g).obj P).obj (op n))).symm
 
-/-- The endomorphism whose mapping cocone defines integral pullback on a representative.
-Source: Stacks 0941 (blueprint: def-fd-integral-pullback-shift-coordinates). -/
+/-- The endomorphism whose mapping cocone defines integral pullback on a representative. -/
 abbrev roosEnd (P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ) :=
   towerTransitionEndomorphism
     (K := fun n : ℕ ↦ ((integralOperationsPullbackTowerFunctor.{u, u} l E g).obj P).obj (op n))
     (integralOperationsTowerStep ((integralOperationsPullbackTowerFunctor.{u, u} l E g).obj P))
 
-/-- Shift on the actual Roos complex is (x,y) mapped to (x,(-1)^r y) in
-mapping-cocone coordinates, equivalently (y,x) mapped to ((-1)^r y,x).
-Source: Stacks 014E, 0941; the whole-tower comparison shift clause
-(blueprint: def-fd-integral-pullback-shift-coordinates). -/
+/-- The shift on the Roos complex is `(x, y) ↦ (x, (-1)^r y)` in mapping-cocone coordinates,
+equivalently `(y, x) ↦ ((-1)^r y, x)`. -/
 def ShiftCoordinates
     (c : (integralOperationsPullbackComplexFunctor.{u, u} l E g).CommShift ℤ) : Prop :=
   ∀ (P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ) (r : ℤ),
@@ -186,9 +176,7 @@ def ShiftCoordinates
             ((integralOperationsPullbackComplexFunctor.{u, u} l E g).obj P)
             r j (j + r) rfl).inv))
 
-/-- The integral derived shift is the descent of the specified representative shift.
-Source: Stacks 014E, 0941, resolving-class localization
-(blueprint: def-fd-integral-pullback-shift-coordinates). -/
+/-- The integral derived shift is the descent of the specified representative shift. -/
 def ShiftDescent
     (c : (integralOperationsPullbackComplexFunctor.{u, u} l E g).CommShift ℤ)
     (d : (integralDerivedPullback.{u, u} l E g).CommShift ℤ) : Prop :=

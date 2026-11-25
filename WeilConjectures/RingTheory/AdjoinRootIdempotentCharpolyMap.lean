@@ -15,8 +15,13 @@ import Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly
 
 /-! # Reduction of determinant polynomials on the two CRT summands
 
-Source: Stacks Project, Tag 09XI, proof of (3)⇒(1), reduction of characteristic polynomials.
-(blueprint: lem-weil-pbc-adjoinRoot-idempotent-charpoly-map)
+Let `f` be monic with `f mod I = g₀ * h₀` for coprime monic `g₀`, `h₀`, and let `e` be a CRT lift
+of `(1, 0)`. The idempotent characteristic polynomials of multiplication by the root with respect
+to `e` and `1 - e` reduce modulo `I` to `g₀` and `h₀`.
+
+## References
+
+* [Stacks Project, Tag 09XI]
 -/
 
 @[expose] public section
@@ -144,25 +149,10 @@ private theorem root_charpoly {R : Type*} [CommRing R] [Nontrivial R]
         exact (not_le_of_gt hq) ((degree_eq_natDegree hf.ne_zero).symm ▸ hdeg)
   exact (charpoly_leftMulMatrix (AdjoinRoot.powerBasis' hf)).trans hmin.symm
 
-/-- The determinant polynomials reduce to the two prescribed CRT factors.
-Source: Stacks Project, Tag 09XI, proof of (3)⇒(1).
-(blueprint: lem-weil-pbc-adjoinRoot-idempotent-charpoly-map)
-
-Proof: the power basis of the monic quotient is compatible with scalar extension
-A→A/I, giving the quotient by the mapped polynomial. By the coprime factorization,
-Chinese remainders identify it with the product of the quotients by g₀ and h₀.
-Multiplication by the class of X becomes multiplication by X on both factors, and
-the two residue hypotheses make multiplication by e the projection (1,0).
-Multiplication by 1-e is its complementary projection. In the concatenation of the
-power bases of the two quotients, `1-P+(X-T)P` is block diagonal with the
-characteristic matrix for multiplication by X on the first factor and the identity
-on the second. Its determinant is g₀, since the characteristic polynomial of
-multiplication by X on a monic quotient is its defining polynomial. The complementary
-projection gives h₀ in the same way. Determinants commute with coefficient reduction
-and are invariant under change of basis, so these equalities hold for the original
-power-basis matrices. For the zero quotient ring every polynomial equality holds;
-for degree-zero factors the corresponding block is empty and its determinant is one.
-No Jacobson hypothesis or idempotence before reduction is needed for this calculation. -/
+/-- Let `f` be monic with `f mod I = g₀ * h₀` for coprime monic `g₀`, `h₀`, and let `e ∈ A[X]/(f)`
+map to `1` in `(A/I)[X]/(g₀)` and to `0` in `(A/I)[X]/(h₀)`. With `T` and `P` the power-basis
+matrices of multiplication by the root and by `e`, the polynomials `idempotentCharpoly T P` and
+`idempotentCharpoly T (1 - P)` reduce modulo `I` to `g₀` and `h₀`, respectively. -/
 theorem adjoinRoot_idempotentCharpoly_map
     {A : Type u} [CommRing A] (I : Ideal A)
     (f : A[X]) (hf : f.Monic) (g₀ h₀ : (A ⧸ I)[X])

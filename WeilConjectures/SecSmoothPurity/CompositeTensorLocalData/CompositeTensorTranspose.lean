@@ -12,13 +12,12 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 /-!
 # Double transpose of composite tensor-counit maps
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md, second paragraph, sentence
-on transposing the two tensor transformations; Stacks Tag 0037 for adjunction
-transpose conventions (blueprint: lem-pur-composite-tensor-transpose).
-
 The helpers construct the two maps and their proposed common inverse transpose
 using the recorded projection-formula structure and Mathlib's composite adjunction.
+
+## References
+
+* Stacks Tag 0037 (adjunction transpose conventions)
 -/
 
 @[expose] public section
@@ -44,9 +43,7 @@ bijection is requested at an object outside these domains. The three objects `A`
 -/
 
 /-- The finite diagram of functors, Hom bijections and projection isomorphisms used in
-both transposes. The functors are defined only on the indicated full domains.
-Source: blueprint sec-six-functors-basics/sk-prop-cohsm, second paragraph, restricted
-Hom-bijection interpretation (blueprint: lem-pur-composite-tensor-transpose). -/
+both transposes. The functors are defined only on the indicated full domains. -/
 structure CompositeTensorLocalData
     (C : Type uX) [Category.{vX} C] [MonoidalCategory C]
     (D : Type uY) [Category.{vY} D] [MonoidalCategory D]

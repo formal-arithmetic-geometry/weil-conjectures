@@ -23,8 +23,22 @@ import Mathlib.RingTheory.Nilpotent.Basic
 /-!
 # A principal-quotient criterion for an analytically unramified local domain
 
-Source: Stacks Project, Algebra, Lemma Tag 0330
-(blueprint: lem-weil-pbc-analytic-unramified-principal-criterion).
+A Noetherian local domain `A` is analytically unramified if some nonzero `t` in its maximal
+ideal has `A ⧸ (t)` without embedded associated primes, with regular localizations and
+analytically unramified prime quotients at the associated primes.
+
+## Implementation details
+
+The completion `B` of `A` is Noetherian, local and flat over `A`, so `t` is a nonzerodivisor
+on `B`. Each localization `A_p` at an associated prime of `A ⧸ (t)` is a regular local ring
+of dimension one, hence a DVR. Via flat base change of associated primes, the localizations
+of `B` at the associated primes of `B ⧸ tB` are domains. A square-zero element of `B` is then
+divisible by `t` with square-zero quotient, so it lies in every power of `(t)` and vanishes
+by Krull's intersection theorem.
+
+## References
+
+* Stacks Project, Algebra, Lemma Tag 0330.
 -/
 
 @[expose] public section
@@ -80,50 +94,10 @@ private theorem reduced_of_principal_associated_localizations
   rw [Ideal.iInf_pow_eq_bot_of_isLocalRing (I := Ideal.span {x}) hproper] at hm
   exact hm
 
-/-- (blueprint: lem-weil-pbc-analytic-unramified-principal-criterion)
-Stacks Project, Algebra, Lemma Tag 0330: a Noetherian local domain is analytically unramified
-if a nonzero element of its maximal ideal has a quotient without embedded associated primes,
-and the localizations at these primes are regular and the prime quotients analytically unramified.
-
-Proof from the node's eight steps:
-1. The maximal-ideal-adic completion is Noetherian, local and flat over `A`
-   (`lem-weil-pbc-adic-completion-noetherian`, `lem-weil-pbc-local-completion-local-ring`,
-   `lem-weil-pbc-noetherian-completion-flat`). Flatness preserves injectivity of multiplication
-   by the nonzero element `t`, so `t` is a nonzerodivisor on the completion
-   (`def-weil-pbc-flat-ring-map`, `def-weil-pbc-adic-completion`).
-2. Each associated prime of the principal quotient is minimal over `(t)` by hypothesis.
-   The height bound for a one-element ideal gives height at most one; the nonzero element
-   in the domain gives height at least one. Localization has dimension one and is Noetherian
-   (`lem-weil-pbc-noetherian-height-quotient-bound`,
-   `lem-weil-pbc-localization-dimension-chains-below-prime`,
-   `lem-weil-pbc-localization-noetherian`, `def-weil-pbc-localization-at-prime`).
-3. The already-proved `IsRegularLocalRing.isDiscreteValuationRing` turns a regular
-   one-dimensional local ring into a DVR (`lem-sc-regular-dim1-dvr`).
-4. The DVR and analytically unramified prime quotient imply that localizations of the
-   completion at associated primes of the completed prime quotient are DVRs, hence domains
-   (`lem-weil-pbc-codimension-one-analytically-unramified`,
-   `def-weil-pbc-analytically-unramified`).
-5. `associatedPrimes_quotient_map_of_flat` specializes the Bourbaki formula to quotient
-   rings (`lem-weil-pbc-associated-primes-flat-quotient`). It identifies the associated
-   primes of the completed principal quotient
-   with the union of those of the completed prime quotients
-   (`lem-weil-pbc-associated-primes-flat-base-change`,
-   `lem-weil-pbc-noetherian-completion-flat`); tensoring the principal presentation gives
-   the required quotient identification. Thus the completion localized at each such prime
-   is a domain.
-6. A square-zero element `y` of the completion vanishes in these domain localizations.
-   Injection of a module into its localizations at associated primes shows that its class
-   modulo `t` vanishes (`lem-weil-pbc-module-injects-localizations-associated-primes`,
-   `def-weil-pbc-module-localization`, `def-weil-pbc-localization-at-prime`,
-   `lem-weil-pbc-adic-completion-noetherian`). Write `y = t * y'`; cancellation of the
-   nonzerodivisor `t` twice gives that `y'` is square-zero.
-7. Induction puts every square-zero element in every power of `(t)`. Since `(t)` lies in
-   the maximal ideal of the Noetherian local completion, Krull intersection makes it zero
-   (`lem-weil-pbc-krull-intersection-jacobson`, `lem-weil-pbc-local-completion-local-ring`,
-   `lem-weil-pbc-adic-completion-noetherian`).
-8. If a nonzero nilpotent had least vanishing power `n > 1`, its `(n - 1)`-st power would
-   be nonzero and square-zero, a contradiction. Thus the completion is reduced, which is
-   analytic unramifiedness (`def-weil-pbc-analytically-unramified`). -/
+/-- Let `A` be a Noetherian local domain and `t` a nonzero element of its maximal ideal such
+that `A ⧸ (t)` has no embedded associated primes, and for every associated prime `p` of
+`A ⧸ (t)` the localization `A_p` is regular and `p` is analytically unramified. Then `A` is
+analytically unramified. -/
 theorem isAnalyticallyUnramified_of_principal_quotient
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsDomain A]
     (t : A) (ht : t ≠ 0) (htm : t ∈ IsLocalRing.maximalIdeal A)

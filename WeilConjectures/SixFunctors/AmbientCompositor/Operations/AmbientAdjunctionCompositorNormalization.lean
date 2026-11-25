@@ -38,12 +38,20 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Direct.ProEtaleDirectImage
 
 /-! # Adjunction and resolution normalization of ambient compositors
 
-Source: Stacks Project, Tags 0D6E, 09T5, 03D3, 08BJ, 070I and 0DV0
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization).
+This file packages ordinary module operations (inverse image, direct image, extension by
+zero) with their adjunctions, derives the corresponding operations on derived categories,
+and records the normalization and coherence equations relating the induced compositors.
+
+## Implementation details
 
 The records package the published ordinary operations and their equations. Neither
 realization constructs a new module category or chooses a new adjunction. The system
 realization uses the whole ringed diagram category, before evaluation or total limit.
+
+## References
+
+* Stacks Project, Tags 0D6E, 09T5, 03D3, 08BJ, 070I and 0DV0
+* Zheng, 4.1 and 4.10
 -/
 
 @[expose] public noncomputable section
@@ -60,9 +68,7 @@ open AlgebraicGeometry.Scheme
 
 namespace WeilConjectures.AmbientCompositor
 
-/-- A package of existing ordinary operations, with their actual specified adjunctions.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- A package of existing ordinary operations, with their actual specified adjunctions. -/
 structure Operations where
   M : Scheme.{u} → Type (u + 2)
   [category : ∀ X, Category.{u + 1} (M X)]
@@ -94,110 +100,78 @@ attribute [instance] Operations.category Operations.abelian Operations.derived
 namespace Operations
 variable (o : Operations.{u})
 
-/-- The published D operation or its canonical adjunction normalization.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The derived category of the module category over `X`. -/
 abbrev D (X : Scheme.{u}) := DerivedCategory (o.M X)
 
-/-- The published P operation or its canonical adjunction normalization.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The derived inverse image along `f`. -/
 abbrev P {X Y : Scheme.{u}} (f : X ⟶ Y) := (o.pull f).mapDerivedCategory
 
-/-- The published S operation or its canonical adjunction normalization.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The right derived direct image along `f`. -/
 abbrev S {X Y : Scheme.{u}} (f : X ⟶ Y) := (o.push f).rightDerivedFunctor
 
-/-- The published J operation or its canonical adjunction normalization.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The derived extension by zero along an open immersion `j`. -/
 abbrev J {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :=
   (o.extension j).mapDerivedCategory
 
-/-- The published adjunction operation or its canonical adjunction normalization.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The derived adjunction between inverse and direct image along `f`. -/
 def adjunction {X Y : Scheme.{u}} (f : X ⟶ Y) : o.P f ⊣ o.S f :=
   (o.adj f).mapDerivedCategoryRightDerivedAdjunction
 
-/-- The published openAdjunction operation or its canonical adjunction normalization.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The derived adjunction between extension by zero and inverse image along `j`. -/
 def openAdjunction {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     o.J j ⊣ o.P j :=
   SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction (o.openAdj j)
 
-/-- The ordinary direct-image comparison fixed by the specified adjunctions.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The ordinary direct-image comparison fixed by the specified adjunctions. -/
 def ordinaryC {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     o.push f ⋙ o.push g ≅ o.push (f ≫ g) :=
   conjugateIsoEquiv ((o.adj g).comp (o.adj f)) (o.adj (f ≫ g)) (o.pullComp f g)
 
-/-- The ordinary open-extension comparison fixed by successive open adjuncts.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The ordinary open-extension comparison fixed by successive open adjuncts. -/
 def ordinaryE {X Y Z : Scheme.{u}} (j : X ⟶ Y) (b : Y ⟶ Z)
     [IsOpenImmersion j] [IsOpenImmersion b] :
     o.extension j ⋙ o.extension b ≅ o.extension (j ≫ b) :=
   Adjunction.leftAdjointCompIso (o.openAdj j) (o.openAdj b) (o.openAdj (j ≫ b))
     (o.pullComp j b).symm
 
-/-- Localization of the tensor/unit-normalized ordinary inverse-image comparison.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- Localization of the tensor/unit-normalized ordinary inverse-image comparison. -/
 def d {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     o.P g ⋙ o.P f ≅ o.P (f ≫ g) :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (o.pullComp f g).symm
 
-/-- Inverse adjunction conjugate of d, with no new choice of direct image.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The derived direct-image compositor, the inverse adjunction conjugate of `d`. -/
 def c {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     o.S f ⋙ o.S g ≅ o.S (f ≫ g) :=
   (conjugateIsoEquiv (o.adjunction (f ≫ g))
     ((o.adjunction g).comp (o.adjunction f)) (o.d f g)).symm
 
-/-- Inverse open-adjunction conjugate of d.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The derived extension-by-zero compositor, obtained from `d` via the open adjunctions. -/
 def e {X Y Z : Scheme.{u}} (j : X ⟶ Y) (b : Y ⟶ Z)
     [IsOpenImmersion j] [IsOpenImmersion b] : o.J j ⋙ o.J b ≅ o.J (j ≫ b) :=
   Adjunction.leftAdjointCompIso (o.openAdjunction j) (o.openAdjunction b)
     (o.openAdjunction (j ≫ b)) (o.d j b)
 
-/-- The published pId operation or its canonical adjunction normalization.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The identification of the derived inverse image along the identity with the identity. -/
 def pId (X : Scheme.{u}) : o.P (𝟙 X) ≅ 𝟭 (o.D X) :=
   Functor.mapDerivedCategoryNatIso (o.pullId X) ≪≫ Functor.mapDerivedCategoryIdIso _
 
-/-- The published sId operation or its canonical adjunction normalization.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The identification of the derived direct image along the identity with the identity. -/
 def sId (X : Scheme.{u}) : o.S (𝟙 X) ≅ 𝟭 (o.D X) :=
   (conjugateIsoEquiv Adjunction.id (o.adjunction (𝟙 X)) (o.pId X)).symm
 
-/-- The published jId operation or its canonical adjunction normalization.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The identification of derived extension by zero along the identity with the identity. -/
 def jId (X : Scheme.{u}) : o.J (𝟙 X) ≅ 𝟭 (o.D X) :=
   Adjunction.leftAdjointIdIso (o.openAdjunction (𝟙 X)) (o.pId X)
 
-/-- The published jCongr operation or its canonical adjunction normalization.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- Transport of the derived extension by zero along an equality of open immersions. -/
 def jCongr {X Y : Scheme.{u}} {f g : X ⟶ Y}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) : o.J f ≅ o.J g :=
   eqToIso (by cases h; rfl)
 
 end Operations
 
-/-- Finite-level realization using the published intrinsic constant-ring operations.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- Finite-level realization using the published intrinsic constant-ring operations. -/
 def finite (A : Type u) [CommRing A] [Finite A] : Operations.{u} where
   M X := proEtaleRingModules X (proEtaleConstantRing X A)
   pull f := sfIntrinsicPullback A f
@@ -208,9 +182,7 @@ def finite (A : Type u) [CommRing A] [Finite A] : Operations.{u} where
   pullComp f g := sfIntrinsicPullbackComp A f g
   pullId X := sfIntrinsicPullbackId A X
 
-/-- The simultaneous ringed-sequence realization, reusing the published system operations.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The simultaneous ringed-sequence realization, reusing the published system operations. -/
 def systems (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n, C (n + 1) ⟶ C n) : Operations.{u} where
   M X := ProEtale.SemilinearProperOpen.Modules C τ X
   pull f := ProEtale.SemilinearProperOpen.pull C τ f
@@ -222,24 +194,18 @@ def systems (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n, C (n + 1) ⟶ C n) : 
   pullId X := Adjunction.leftAdjointIdIso (ProEtale.SemilinearProperOpen.ordinaryAdj C τ (𝟙 X))
     (ProEtale.SemilinearProperOpen.pushId_existsUnique C τ X).choose
 
-/-- The positive quotient tower, starting at A₁ and retaining the actual quotient maps.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The positive quotient tower, starting at A₁ and retaining the actual quotient maps. -/
 abbrev coefficientTower (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) : CommRingCat.{u + 1} :=
   .of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))
 
-/-- The quotient transitions of the coefficient tower.
-Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- The quotient transitions of the coefficient tower. -/
 def coefficientTransition (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) :
     coefficientTower l E (n + 1) ⟶ coefficientTower l E n :=
   CommRingCat.ofHom (RingHom.ulift (Padic.coefficientExtensionTransition l E (n + 1)))
 
-/-- Both units, counits and Hom bijections are identified by inverse-conjugate comparisons.
-Source: Stacks 0D6E, 09T5, 03D3, 0DV0
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- Both units, counits and Hom bijections are identified by inverse-conjugate comparisons. -/
 structure Normalized
     {A B : Type (u + 2)} [Category.{u + 2} A] [Category.{u + 2} B]
     {Lc Ls : A ⥤ B} {Rc Rs : B ⥤ A} (ac : Lc ⊣ Rc) (as_ : Ls ⊣ Rs)
@@ -252,14 +218,11 @@ structure Normalized
     as_.homEquiv M N h = ac.homEquiv M N (a.hom.app M ≫ h) ≫ b.hom.app N
 
 /-- A scheme over the specified algebraic closure whose structure map is of finite type.
-No separatedness is imposed. Source: the ambient convention of Stacks 0D6E
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+No separatedness is imposed. -/
 abbrev FiniteTypeOver (F : FiniteFieldDatum.{u}) (X : Scheme.{u}) : Prop :=
   ∃ a : X ⟶ Spec (.of F.k), LocallyOfFiniteType a ∧ QuasiCompact a
 
-/-- Every asserted normalization and coherence equation, on the actual derived categories.
-Source: Stacks 0D6E, 09T5, 03D3, 0DV0
-(blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
+/-- Every asserted normalization and coherence equation, on the actual derived categories. -/
 structure Laws (F : FiniteFieldDatum.{u}) (o : Operations.{u}) : Prop where
   direct : ∀ {X Y Z : Scheme.{u}}
     (_hX : FiniteTypeOver F X) (_hY : FiniteTypeOver F Y) (_hZ : FiniteTypeOver F Z)

@@ -15,8 +15,20 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 
 /-! # Fibrewise flatness of an unramified smooth chart
 
-Source: Stacks Project, proof of Lemma 07CH.
-(blueprint: lem-weil-pbc-unramified-smooth-conormal-chart-flat).
+Unramified maps from a polynomial ring into the localized polynomial extension of a smooth
+quotient with matching conormal rank are flat.
+
+## Implementation details
+
+The proof identifies `Ω(B/R)` with `B^n` via the split conormal sequence, deduces from formal
+unramifiedness and the Jacobi-Zariski sequence that `B` is formally smooth over the polynomial
+source, and concludes with Mathlib's smooth-implies-flat theorem. The argument also covers empty
+variable sets and zero localizations.
+
+## References
+
+* Stacks Project, proof of Lemma 07CH, fibrewise flatness paragraph, using Tags 00R4, 00T6,
+  00R7, 00S2 and 031J.
 -/
 
 @[expose] public section
@@ -28,25 +40,7 @@ universe u
 namespace Algebra
 
 /-- Unramified maps from an n-variable polynomial ring into the localized polynomial
-extension of a smooth quotient with conormal rank c are flat.
-
-Source: Stacks Project, proof of Lemma 07CH, fibrewise flatness paragraph, using
-Tags 00R4, 00T6, and 00R7, https://stacks.math.columbia.edu/tag/07CH.
-(blueprint: lem-weil-pbc-unramified-smooth-conormal-chart-flat).
-
-Proof. The split conormal sequence, polynomial-extension decomposition, and
-localization identify Omega(B/R) with B^n, where B = C[y]_g. The polynomial
-source P also has n differential generators. Formal unramifiedness makes
-B tensor_P Omega(P/R) -> Omega(B/R) surjective. A surjective endomorphism
-of a finite free module is injective, so this map is an isomorphism.
-Smoothness of B over R kills H1(L(B/R)); the Jacobi-Zariski sequence
-(Tags 00S2 and 031J) then makes H1(L(B/P)) inject into the kernel of this
-isomorphism, hence zero. Omega(B/P) is already zero by unramifiedness.
-Thus B is formally smooth over P. It is finitely presented over P because
-it is finitely presented over R and P is of finite type over R.
-Smoothness over P follows, and Mathlib's smooth-implies-flat theorem
-finishes. The argument uses the given map theta throughout and applies
-also to empty variable sets and zero localizations. -/
+extension of a smooth quotient with conormal rank c are flat. -/
 theorem flat_of_unramified_smooth_conormal_chart
     (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R)
     [Smooth R (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]

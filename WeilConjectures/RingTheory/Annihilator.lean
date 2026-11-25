@@ -15,9 +15,13 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 # Annihilators under flat base change and localization
 
 - `Module.Flat.annihilator_span_singleton_algebraMap`: for a flat ring map `R → S` and `x ∈ R`,
-  `Ann_S(x) = Ann_R(x) S` (Stacks 07T8, first part).
+  `Ann_S(x) = Ann_R(x) S`.
 - `Module.annihilator_localizedModule_away`: for a finite `A`-module `M` and `f ∈ A`,
   `Ann_{A_f}(M_f) = Ann_A(M) A_f`.
+
+## References
+
+* Stacks Project, Algebra, Lemma Tag 07T8, first part.
 -/
 
 @[expose] public section
@@ -25,8 +29,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 open Module
 
 /-- For a flat ring map `R → S` and `x ∈ R`, the annihilator of `x` in `S` is the extension of
-the annihilator of `x` in `R`: `Ann_S(φ x) = Ann_R(x) S`.
-(blueprint: `lem-weil-pbc-annihilator-element-flat-base-change`) -/
+the annihilator of `x` in `R`: `Ann_S(φ x) = Ann_R(x) S`. -/
 theorem Module.Flat.annihilator_span_singleton_algebraMap {R S : Type*} [CommRing R] [CommRing S]
     [Algebra R S] [Module.Flat R S] (x : R) :
     (Ideal.span {algebraMap R S x}).annihilator =
@@ -52,8 +55,7 @@ theorem Module.Flat.annihilator_span_singleton_algebraMap {R S : Type*} [CommRin
     rw [hr, map_zero]
 
 /-- For a finite `A`-module `M` and `f ∈ A`, the annihilator of the localization `M_f` over `A_f`
-is the extension of the annihilator of `M`: `Ann_{A_f}(M_f) = Ann_A(M) A_f`.
-(blueprint: `lem-weil-pbc-annihilator-localization-finite`) -/
+is the extension of the annihilator of `M`: `Ann_{A_f}(M_f) = Ann_A(M) A_f`. -/
 theorem Module.annihilator_localizedModule_away {A M : Type*} [CommRing A] [AddCommGroup M]
     [Module A M] [Module.Finite A M] (f : A) :
     Module.annihilator (Localization.Away f) (LocalizedModule (Submonoid.powers f) M) =

@@ -34,13 +34,13 @@ RΓ(Y, N) ──▶ N_s̄
 
 whose right arrow, the specialization map, is an isomorphism because the cohomology sheaves of
 `N` are locally constant on the strictly local scheme `Y_(s̄)`, which lies over `Y - z`. Hence the
-upper arrow is zero (blueprint `lemma-cohomology-near-two-transverse-divisors`, last step).
+upper arrow is zero.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.derivedGlobalSectionsRestriction_eq_zero_of_isZero_of_isLocallyConstant`
 
-## Implementation notes
+## Implementation details
 
 Instead of the square above we work with the derived global sections `RΓ(Y, η_t(N))` of the
 units `η_t(N) : N ⟶ Rt_* t^* N`, whose vanishing implies that of the restriction map along `t`.
@@ -80,8 +80,7 @@ lemma derivedGlobalSectionsRestriction_eq_zero_of_map_unit_eq_zero {X X' : Schem
 /-- **Vanishing on the strict localization at a point where the stalks vanish.** Let
 `s : Spec Ω ⟶ S` be a geometric point and `N ∈ D(S_ét, Λ)` whose pullback to every geometric
 point with the same image as `s` vanishes. Then the derived global sections of the unit
-`N ⟶ Rg_* g^* N` along the strict localization `g : S_(s) ⟶ S` vanish: its target is
-`RΓ(S_(s), g^* N) = 0`. -/
+`N ⟶ Rg_* g^* N` along the strict localization `g : S_(s) ⟶ S` vanish. -/
 theorem rightDerivedGlobalSections_map_unit_strictLocalizationToBase_eq_zero {S : Scheme.{u}}
     {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (N : DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -117,9 +116,7 @@ theorem rightDerivedGlobalSections_map_unit_strictLocalizationToBase_eq_zero {S 
 
 /-- **The vanishing of a restriction map only depends on the image point.** Let `t₁`, `t₂` be
 geometric points of `Y` with the same image. If the derived global sections of the unit
-`N ⟶ Rt₂_* t₂^* N` vanish, then so do those of `N ⟶ Rt₁_* t₁^* N`: both geometric points
-become equal after restriction to a common algebraically closed field, and the restriction
-along a morphism of spectra of separably closed fields is an isomorphism. -/
+`N ⟶ Rt₂_* t₂^* N` vanish, then so do those of `N ⟶ Rt₁_* t₁^* N`. -/
 theorem rightDerivedGlobalSections_map_unit_eq_zero_of_apply_eq {Y : Scheme.{u}}
     (N : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     {K₁ K₂ : Type u} [Field K₁] [IsSepClosed K₁] [Field K₂] [IsSepClosed K₂]
@@ -136,10 +133,9 @@ theorem rightDerivedGlobalSections_map_unit_eq_zero_of_apply_eq {Y : Scheme.{u}}
   · exact isIso_rightDerivedGlobalSections_map_unit_of_isIso _ a _ fun n ↦
       isIso_globalSectionsUpperStarMap_of_isSepClosed a _
 
-/-- **Vanishing of restriction maps by generization** (blueprint
-`lemma-cohomology-near-two-transverse-divisors`, the generization square): let `Y` be an irreducible
-scheme, `z` a closed point of `Y` and `N ∈ D(Y_ét, Λ)` such that `N_z̄ = 0` for the geometric points
-`z̄` over `z` and the restriction of `N` to `Y - z` has locally constant cohomology sheaves. Then
+/-- **Vanishing of restriction maps by generization.** Let `Y` be an irreducible scheme, `z` a
+closed point of `Y` and `N ∈ D(Y_ét, Λ)` such that `N_z̄ = 0` for the geometric points `z̄` over `z`
+and the restriction of `N` to `Y - z` has locally constant cohomology sheaves. Then
 for every geometric point `s̄` of `Y` not over `z`, the restriction map `RΓ(Y, N) ⟶ N_s̄` is
 zero. -/
 theorem derivedGlobalSectionsRestriction_eq_zero_of_isZero_of_isLocallyConstant

@@ -11,12 +11,24 @@ import WeilConjectures.SecSmoothPurity.CochainInverseComparison
 
 /-! # Ordinary tensorator for independent site sizes
 
-Source: Stacks Project, Modules on Sites, Tag 03EL.
-(auxiliary; not a blueprint node).
-
 The insertion is constructed on sections by the sheafification of `1 ⊗ m`.
 Scalar extension and the normalized composite tensorator are constructed below.
 The proof uses only tensor preservation of the specified algebraic inverse image.
+
+## Implementation details
+
+Maps out of a sheaf tensor are built by assembling sectionwise tensor maps into a presheaf
+morphism and factoring uniquely through module sheafification. The inverse-image tensor
+comparison is obtained by transposing linear and balanced bilinear maps along the adjunction and
+applying Yoneda; this uses products and Hom bijections only, so neither site's universes need
+agree with `u`.
+
+## References
+
+* [Stacks Project, Tag 03CY](https://stacks.math.columbia.edu/tag/03CY)
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
+* [Stacks Project, Tag 0GMW](https://stacks.math.columbia.edu/tag/0GMW)
 -/
 
 @[expose] public section
@@ -275,8 +287,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
   (R : Sheaf J CommRingCat.{u})
 
-/-- The image of a sectionwise pure tensor in the sheaf tensor.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The image of a sectionwise pure tensor in the sheaf tensor. -/
 private noncomputable def pure (M N : SheafOfModules.{u} (ringSheaf R))
     (W : Cᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) :
     ((monoidalCategory R).tensorObj M N).val.obj W :=
@@ -284,8 +295,7 @@ private noncomputable def pure (M N : SheafOfModules.{u} (ringSheaf R))
     (((PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf R).obj)).unit.app
       (M.val ⊗ N.val)).app W (m ⊗ₜ[R.obj.obj W] n))
 
-/-- Pure tensors commute with restriction. Source: Stacks 03EK
-(auxiliary; not a blueprint node). -/
+/-- Pure tensors commute with restriction. -/
 private theorem pure_restrict (M N : SheafOfModules.{u} (ringSheaf R))
     {W V : Cᵒᵖ} (i : W ⟶ V) (m : M.val.obj W) (n : N.val.obj W) :
     ((monoidalCategory R).tensorObj M N).val.map i (pure R M N W m n) =
@@ -297,23 +307,19 @@ private theorem pure_restrict (M N : SheafOfModules.{u} (ringSheaf R))
   have hu := PresheafOfModules.naturality_apply (adj.unit.app (M.val ⊗ N.val)) i v
   exact hi.symm.trans (congrArg ((tensorObjIsoSheafification M N).inv.val.app V) hu.symm)
 
-/-- The canonical bilinear pairing, as a presheaf morphism.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The canonical bilinear pairing, as a presheaf morphism. -/
 private noncomputable def pureMap (M N : SheafOfModules.{u} (ringSheaf R)) :
     M.val ⊗ N.val ⟶ ((monoidalCategory R).tensorObj M N).val :=
   (PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf R).obj)).unit.app
     (M.val ⊗ N.val) ≫ (tensorObjIsoSheafification M N).inv.val
 
-/-- The linear pairing on sections. Source: Stacks 03EK
-(auxiliary; not a blueprint node). -/
+/-- The linear pairing on sections. -/
 private noncomputable def pureBilin (M N : SheafOfModules.{u} (ringSheaf R)) (W : Cᵒᵖ) :
     M.val.obj W →ₗ[R.obj.obj W] N.val.obj W →ₗ[R.obj.obj W]
       ((monoidalCategory R).tensorObj M N).val.obj W :=
   TensorProduct.curry ((pureMap R M N).app W).hom
 
-/-- A map from a tensor is determined by pure sections. Source: Stacks 03EK
-(auxiliary; not a blueprint node).
-Proof: use the module sheafification adjunction, then sectionwise tensor generation. -/
+/-- A map from a tensor is determined by pure sections. -/
 private theorem pure_hom_ext (M N H : SheafOfModules.{u} (ringSheaf R))
     {f g : (monoidalCategory R).tensorObj M N ⟶ H}
     (h : ∀ W m n, f.val.app W (pure R M N W m n) =
@@ -384,9 +390,7 @@ private lemma tensorIso_natural
     Category.assoc, ← Functor.map_comp, ← tensorHom_def]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The presheaf pairing into the sheaf tensor is natural in both modules.
-Source: Stacks Project, Modules on Sites, Tag 03EK
-(auxiliary; not a blueprint node). -/
+/-- The presheaf pairing into the sheaf tensor is natural in both modules. -/
 private theorem pureMap_natural
     {F F' G G' : SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)}
@@ -413,8 +417,7 @@ private theorem pureMap_natural
   erw [Category.assoc, hval, ← Category.assoc, ← hn]
   rfl
 
-/-- Tensor morphisms act componentwise on pure sections. Source: Stacks 03EK
-(auxiliary; not a blueprint node). -/
+/-- Tensor morphisms act componentwise on pure sections. -/
 private theorem pure_map {M M' N N' : SheafOfModules.{u} (ringSheaf R)}
     (f : M ⟶ M') (g : N ⟶ N') (W : Cᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) :
     ((monoidalCategory R).tensorHom f g).val.app W (pure R M N W m n) =
@@ -508,10 +511,7 @@ private theorem rawPairing_restrict
           (changeOfRingsPresheaf.{vC, uC, u} c ((monoidalCategory A).tensorObj M N))).app V)
         hm).symm.trans h
 
-/-- Existence part of the sheaf tensor universal property.
-(auxiliary; not a blueprint node)
-The sectionwise tensor maps are assembled into a presheaf morphism and uniquely factored
-through module sheafification; this is exactly the existence construction in the source proof. -/
+/-- Existence part of the sheaf tensor universal property. -/
 private theorem tensor_bilinear_exists {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u})
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
@@ -855,19 +855,7 @@ private theorem extendedTensor_hom_ext
   exact (congrArg (fun k ↦ k.hom.app W (pure A M N W m n)) hf).trans
     ((h W m n).trans (congrArg (fun k ↦ k.hom.app W (pure A M N W m n)) hg).symm)
 
-/-- Scalar extension preserves the sheaf tensor product and its normalized pairing.
-Source: Stacks Project, Modules on Sites, Tag 03EL, first and last equalities;
-Tag 0GMW for descent through module sheafification.
-(auxiliary; not a blueprint node).
-
-Proof: Extend the bilinear pairing of the two scalar-extension units to obtain the
-forward map. For the inverse use the sectionwise formula
-(s tensor m) tensor (t tensor n) mapped to st tensor (m tensor n), and extend this
-bilinear map through both sheafifications. The tensor universal property supplies
-the inverse map. Both composites are identities on the generating original pure
-tensors; uniqueness of bilinear extension and of sheafification proves the identities.
-The same generators establish simultaneous naturality. The formula holds by construction.
-No flatness or nonzero-ring hypothesis is used. -/
+/-- Scalar extension preserves the sheaf tensor product and its normalized pairing. -/
 private theorem exists_scalarTensorComparison :
     ∃ e : ∀ M N : SheafOfModules.{u} (ringSheaf A),
         changeOfRings.{vC, uC, u} c ((monoidalCategory A).tensorObj M N) ≅
@@ -941,9 +929,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
   (hobj : ∀ M : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R),
       L.obj M = changeOfRings c (I.modules.obj M))
 
-/-- Scalar-extension insertion on every section, followed by the presentation cast.
-Source: Stacks Project, Modules on Sites, Tag 03CY.
-(auxiliary; not a blueprint node). -/
+/-- Scalar-extension insertion on every section, followed by the presentation cast. -/
 noncomputable def scalarInsertion : ∀ M : SheafOfModules.{u} ((sheafCompose JC (forget₂
   CommRingCat.{u} RingCat.{u})).obj R),
       ((toSheaf ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj RI) ⋙ sheafCompose JD
@@ -979,33 +965,7 @@ noncomputable def scalarInsertion : ∀ M : SheafOfModules.{u} ((sheafCompose JC
   exact q ≫ (toSheaf ((sheafCompose JD (forget₂ CommRingCat RingCat)).obj S) ⋙
     sheafCompose JD (CategoryTheory.forget AddCommGrpCat.{u})).map (eqToHom (hobj M).symm)
 
-/-- A natural tensor isomorphism exists for the constructed scalar insertion.
-Source: Stacks Project, Modules on Sites, Tag 03EL, its three tensor identities.
-(auxiliary; not a blueprint node).
-
-Proof: form the RI-module direct image on uPush of underlying sheaves. Its
-addition and scalar action are induced by the product comparison of uPush and
-the adjoint of I.ringUnderlying. Transpose maps along adj. The equations
-I.moduleAdd and I.moduleSMul, tested on the universal pairs and triples of
-operands, show that transposition restricts to mutually inverse bijections
-of linear maps and of balanced bilinear maps. Apply the sheaf-tensor universal
-property on the two sides of this bijection. Yoneda gives an isomorphism from
-I(M tensor N) to I(M) tensor I(N); evaluation on pure pairings gives its
-formula for every test sheaf Z. Naturality of transposition gives simultaneous
-naturality in M and N. This argument uses products and Hom bijections only,
-so it does not identify either site's object or morphism universe with u.
-
-For scalar extension, the sectionwise maps s tensor (m tensor n) to
-(s tensor m) tensor (1 tensor n), and (s tensor m) tensor (t tensor n)
-to st tensor (m tensor n), are balanced and compatible with restrictions.
-Extend them by the sheafification universal property. Tensor induction shows
-that their composites are identities. Composing this scalar isomorphism with
-the preceding inverse-image isomorphism gives the tensorator. Conjugate by
-hobj; hmap and the two naturality equations give its naturality for L.
-Evaluating both comparisons at inverse images of generalized pure tensors
-gives exactly the displayed equation with the constructed scalarInsertion.
-This result asserts neither existence of the insertion nor uniqueness of the
-comparison, which are proved separately by the importing module. -/
+/-- A natural tensor isomorphism exists for the constructed scalar insertion. -/
 theorem normalizedTensorator_exists
     (uPush : Sheaf JD (Type u) ⥤ Sheaf JC (Type u))
     (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]

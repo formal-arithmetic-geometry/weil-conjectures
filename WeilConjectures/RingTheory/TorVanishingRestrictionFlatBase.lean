@@ -16,8 +16,16 @@ import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Restricting a Tor bound along a flat base map
-Source: Stacks Project, Tag 069C, proof of (3) implies (1), flat base localization.
-(blueprint: lem-pc-tor-vanishing-restriction-flat-base).
+
+## Implementation details
+
+A projective resolution of `N` over `A` extends, by flatness, to a projective resolution of
+`B ⊗_A N` over `B`; tensor associativity and exactness of restriction of scalars compare the two
+Tor computations.
+
+## References
+
+* [Stacks Project, Tag 069C](https://stacks.math.columbia.edu/tag/069C), proof of (3) implies (1)
 -/
 
 @[expose] public section
@@ -28,16 +36,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace ModuleCat
 
-/-- Flat scalar restriction transfers a fixed Tor vanishing test from scalar extension.
-Source: Stacks Project, Tag 069C, proof of (3) implies (1).
-Proof: Resolve N by projective A-modules and extend the resolution to B. Flatness makes
-this an exact projective resolution of B tensor_A N. Tensor associativity identifies its
-B-tensor with L, restricted to A, with the original resolution tensored over A with L.
-Restriction is exact, so it commutes with homology. Symmetry of Tor lets these resolutions
-of the second argument compute the first-variable Tor convention used here. Thus zero Tor
-for (L, B tensor_A N) gives zero Tor for (L restricted to A, N). The argument works also
-in degree zero, for N = 0, and for the zero algebra B; no faithfulness is needed.
-(blueprint: lem-pc-tor-vanishing-restriction-flat-base). -/
+/-- For a flat `A`-algebra `B`, a `B`-module `L` and an `A`-module `N`, vanishing of
+`Tor_j^B(L, B ⊗_A N)` implies vanishing of `Tor_j^A(L, N)`, with `L` viewed as an `A`-module. -/
 theorem isZero_tor_restrictScalars_of_flat
     (A B : Type u) [CommRing A] [CommRing B] [Algebra A B] [Module.Flat A B]
     (L : ModuleCat.{u} B) (N : ModuleCat.{u} A) (j : ℕ)

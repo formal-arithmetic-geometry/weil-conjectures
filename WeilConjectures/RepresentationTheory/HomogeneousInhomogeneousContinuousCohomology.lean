@@ -15,9 +15,13 @@ import WeilConjectures.RepresentationTheory.HomogeneousCochainEvaluationDifferen
 /-!
 # Homogeneous and inhomogeneous continuous cochains
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG,
-section-continuous-group-cohomology, displayed differential; homogeneous change of variables.
-(blueprint: lem-sc-homogeneous-inhomogeneous-continuous-cohomology).
+For a profinite group `G` and a discrete representation `N` with open stabilizers, invariant
+homogeneous continuous cochains are identified with locally constant inhomogeneous cochains,
+compatibly with the differentials.
+
+## References
+
+* [Stacks Project, Tag 0DVG](https://stacks.math.columbia.edu/tag/0DVG)
 -/
 
 @[expose] public section
@@ -29,29 +33,8 @@ open CategoryTheory
 namespace Rep
 
 /-- Invariant homogeneous continuous cochains have locally constant inhomogeneous
-coordinates, and their recursive differential becomes the usual inhomogeneous differential.
-
-Source: Stacks Project, Etale Cohomology, Tag 0DVG,
-section-continuous-group-cohomology, displayed differential; the homogeneous conversion
-in the proof of lem-sc-discrete-resolution-continuous-cohomology.
-(blueprint: lem-sc-homogeneous-inhomogeneous-continuous-cohomology).
-
-Proof: Use the compact-open exponential law for the compact Hausdorff group G to identify
-iterated continuous maps with jointly continuous maps on G^(n+1). Invariants for the
-diagonal action are exactly equivariant homogeneous maps. Evaluate such a map at
-(1,g1,g1*g2,...,g1*...*gn). Conversely send c to the function taking (g0,...,gn) to
-g0 acting on c(g0 inverse*g1,...,g(n-1) inverse*gn). The two maps are inverse by
-equivariance and preserve addition. The open-stabilizer hypothesis makes the action
-G times N to N continuous: near (g,x), keep the discrete coordinate x fixed and restrict
-the group coordinate to the corresponding stabilizer coset. Thus both coordinate
-transformations preserve continuity. Maps into the discrete coefficient space are
-continuous exactly when locally constant. Uncurry and curry along the exponential law
-to return to Mathlib's iterated-map terms. Its recursive differential, constant insertion
-minus the preceding differential applied pointwise, expands inductively to alternating
-omission. After evaluating at cumulative products, the first omission gives the action
-term, internal omissions multiply adjacent arguments, and the last omission drops the
-last argument. Their signs are respectively +1 and (-1)^(k+1), exactly as below.
-For n=0 this gives g acting on m minus m. No resolution or homology assertion is used. -/
+coordinates: there are additive equivalences `t n` with locally constant functions on `Gⁿ`
+under which the homogeneous differential becomes the usual inhomogeneous differential. -/
 theorem exists_homogeneousCochains_inhomogeneous_coordinates
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

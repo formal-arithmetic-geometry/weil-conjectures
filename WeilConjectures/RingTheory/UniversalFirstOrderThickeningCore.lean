@@ -10,38 +10,24 @@ import WeilConjectures.RingTheory.ConormalComplementPolynomialLift
 /-!
 # Existence and lifting for universal first order thickenings
 
-Source: Stacks Project, Algebra, Lemma 04EB (lemma-universal-thickening).
-(blueprint: lem-weil-pbc-ring-universal-first-order-thickening-core).
+We show that a formally unramified algebra admits a universal first order thickening.
+
+## Implementation details
+
+Present `S` as `P/J` with `P` the polynomial algebra on generators indexed by `S`. The conormal
+map `d : J/J² → S ⊗[P] Ω[P/R]` is surjective with free target, so it splits; with `J'` the inverse
+image of the splitting's image, `S' = P/J'` is the thickening. Lifts are adjusted by derivations,
+parametrized by `S`-linear maps out of `S ⊗[P] Ω[P/R]`.
+
+## References
+
+* [Stacks Project, Lemma 04EB](https://stacks.math.columbia.edu/tag/04EB)
 -/
 @[expose] public section
 universe u
 namespace Algebra
-/-- A formally unramified algebra has a square-zero surjection with the universal
-unique lifting property. This component does not assert uniqueness of the thickening.
-Source: Stacks Project, Algebra, Lemma 04EB (lemma-universal-thickening).
-(blueprint: lem-weil-pbc-ring-universal-first-order-thickening-core).
-
-Proof:
-1. Present `S` as `P/J`, where `P` is the polynomial algebra on generators indexed by `S`
-   (def-weil-pbc-mv-polynomial-ring). The presentation map is surjective. Modules killed
-   by `J`, and maps between them, descend to `S`.
-2. The conormal map `d : J/J² → S ⊗[P] Ω[P/R]` is surjective by the differential exact
-   sequence (lem-weil-pbc-jacobi-zariski-differential-maps) and vanishing of `Ω[S/R]`
-   (lem-weil-pbc-formally-unramified-ring-iff-kahler-zero).
-3. The target is free on the differentials of the variables
-   (lem-weil-pbc-polynomial-ring-kahler-basis-any-variables). Choose preimages of this
-   basis to split `d`. Let `J'` be the inverse image in `J` of the splitting's image.
-   Then `J² ⊆ J' ⊆ J`, and `d` restricts to an isomorphism from `J'/J²` to its target.
-4. Set `S' = P/J'`. The induced surjection to `S` has kernel `J/J'`, whose square is zero.
-5. For a square-zero ideal `I` of `A` and `a : S → A/I`, lift the images of the variables
-   to obtain `β : P → A`. Other lifts differ from `β` by an `R`-derivation into `I`:
-   square-zero makes the difference satisfy Leibniz, and conversely adding a derivation
-   preserves multiplication. By def-weil-pbc-kahler-differentials these are parametrized
-   by `S`-linear maps `φ : S ⊗[P] Ω[P/R] → I`.
-6. The obstruction to annihilating `J'` is the `S`-linear map `βbar : J'/J² → I`.
-   The modified lift annihilates `J'` exactly when `βbar + φ ∘ d = 0` on `J'/J²`.
-   Since the restriction of `d` is an isomorphism, exactly one `φ` satisfies this.
-   Factoring this lift through `P/J'` gives the required unique lift. -/
+/-- A formally unramified algebra admits a surjection with square-zero kernel having the
+universal unique lifting property. Uniqueness of the thickening is not asserted here. -/
 theorem exists_universalFirstOrderThickening_core
     (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]
     [FormallyUnramified R S] :
