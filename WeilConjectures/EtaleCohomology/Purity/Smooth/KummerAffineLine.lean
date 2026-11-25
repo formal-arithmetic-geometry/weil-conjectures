@@ -121,9 +121,8 @@ instance : Finite ((forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj
 
 variable [IsAlgClosed k]
 
-/-- **The affine line is acyclic** (blueprint `thm-pur-kummer-affine-line` (1)):
-`Hᵠ(𝔸¹_k, Λ) = 0` for `q ≠ 0`, for `k` algebraically closed and `Λ` finite with invertible
-exponent. -/
+/-- **The affine line is acyclic**: `Hᵠ(𝔸¹_k, Λ) = 0` for `q ≠ 0`, for `k` algebraically closed
+and `Λ` finite with invertible exponent. -/
 theorem isZero_cohomology_affineLine (q : ℤ) (hq : q ≠ 0) :
     IsZero ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(ULift.{u} (Fin 1); Spec (.of k)) q).obj
       (constantComplex Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k)))) := by
@@ -136,8 +135,7 @@ theorem isZero_cohomology_affineLine (q : ℤ) (hq : q ≠ 0) :
       (AffineSpace.subsingleton_sheafH_constantSheaf_line _ hn hA q (by exact_mod_cast hq))
 
 omit [Finite Λ] in
-/-- **Cohomological dimension of `𝔾_{m,k}`** (blueprint `thm-pur-kummer-affine-line` (2)):
-`Hᵠ(𝔾_{m,k}, Λ) = 0` for `q ∉ {0, 1}`. -/
+/-- **Cohomological dimension of `𝔾_{m,k}`**: `Hᵠ(𝔾_{m,k}, Λ) = 0` for `q ∉ {0, 1}`. -/
 theorem isZero_cohomology_multiplicativeGroup {G : Scheme.{u}}
     (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k))) [IsOpenImmersion j]
     (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1))
@@ -158,8 +156,7 @@ theorem isZero_cohomology_multiplicativeGroup {G : Scheme.{u}}
 end Field
 
 
-/-- The constant sheaf functor to sheaves of `Λ`-modules on a nonempty scheme is faithful on
-`Λ`: a scalar endomorphism of `Λ` whose constant sheaf is zero is zero. -/
+/-- A morphism of `Λ`-modules whose constant étale sheaf on a nonempty scheme is zero is zero. -/
 lemma eq_zero_of_constantSheaf_map_eq_zero {X : Scheme.{u}} [Nonempty X]
     {M N : ModuleCat.{u + 1} Λ} (g : M ⟶ N)
     (h : (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map g = 0) : g = 0 := by
@@ -175,9 +172,7 @@ lemma eq_zero_of_constantSheaf_map_eq_zero {X : Scheme.{u}} [Nonempty X]
 variable [Finite Λ]
 
 /-- **Global sections of the constant sheaf `Λ` on a connected scheme**: the unit
-`Λ ⟶ Γ(X, Λ_X)` is bijective. It is injective since the constant sheaf functor is faithful, and
-both sides have the same finite cardinality by the corresponding statement for abelian groups
-(`AlgebraicGeometry.Scheme.bijective_toSheafify_app_terminal`). -/
+`Λ ⟶ Γ(X, Λ_X)` is bijective. -/
 theorem bijective_constantSheafΓAdj_unit_app (X : Scheme.{u}) [ConnectedSpace X] :
     Function.Bijective ((constantSheafΓAdj X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).unit.app
       (ModuleCat.of Λ Λ)) := by
@@ -265,13 +260,13 @@ lemma connectedSpace_of_range_eq_compl_zeroSection {G : Scheme.{u}}
   have := isIntegral_of_isAffine_of_isDomain G
   infer_instance
 
-/-- Blueprint `thm-pur-kummer-affine-line` (1), degree zero: `H⁰(𝔸¹_k, Λ) = Λ`. -/
+/-- `H⁰(𝔸¹_k, Λ) = Λ`. -/
 theorem nonempty_iso_cohomology_zero_affineLine :
     Nonempty ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(ULift.{u} (Fin 1); Spec (.of k)) 0).obj
       (constantComplex Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k))) ≅ ModuleCat.of Λ Λ) :=
   ⟨cohomologyZeroConstantComplexIso Λ _⟩
 
-/-- Blueprint `thm-pur-kummer-affine-line` (2), degree zero: `H⁰(𝔾_{m,k}, Λ) = Λ`. -/
+/-- `H⁰(𝔾_{m,k}, Λ) = Λ`. -/
 theorem nonempty_iso_cohomology_zero_multiplicativeGroup {G : Scheme.{u}}
     (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k))) [IsOpenImmersion j]
     (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1))

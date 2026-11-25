@@ -13,8 +13,12 @@ import WeilConjectures.RingTheory.EtaleResidueTriplesLocalizedStrictHenselizatio
 
 /-! # Local-base presentation of a residue-triple colimit
 
-Source: Stacks Project, Tag 04GW (lemma-strict-henselization-different).
-(blueprint: lem-sbc-etale-triples-localized-strict-henselization)
+Any realization of the colimit of pointed étale triples over `R` at a prime `p` is an
+algebraic strict henselization of the localization `R_p`.
+
+## References
+
+* [Stacks: Tag 04GW](https://stacks.math.columbia.edu/tag/04GW)
 -/
 
 @[expose] public section
@@ -23,27 +27,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Any realization of the residue-triple colimit is an algebraic strict henselization
-of the prime localization, with the prescribed structural map from R.
-Source: Stacks Project, Tag 04GW (lemma-strict-henselization-different).
-(blueprint: lem-sbc-etale-triples-localized-strict-henselization)
-
-Proof: Write A = R_p. Every element outside p becomes invertible in the triple colimit,
-because the pointed principal localization adjoining its inverse is an etale triple.
-Thus the structural R-map extends uniquely to A. Base change from R to A preserves the
-pointed triple colimit: every finitely presented etale A-algebra descends after inverting
-one element outside p, as do each morphism and each equality of morphisms. Including
-those principal localizations in the R-triple diagram makes these descents cofinal.
-Identify the residue field of A with the scheme residue field at p and transport the
-given separable closure K through that isomorphism, obtaining L. Over the local base A,
-a pointed etale algebra S -> L determines the triple with prime ker(S -> L) and its
-unique residue-field embedding; conversely a triple gives that map by evaluation.
-These constructions are inverse up to natural isomorphism and preserve structural maps.
-The transported universal ring cocone is universal in A-algebras: its descended maps
-respect A since they respect R and the inverted elements. Transport its vertex through
-e to C and use hbase to identify the R-map with b. This supplies the A-algebra structure,
-the residue-field scalar tower on L, and the cocone required by IsStrictHenselization.
-The ring C is given; no ring is selected from an unproved existence statement. -/
+/-- Any realization `C` of the colimit of pointed étale triples over `(R, p, K)` is an
+algebraic strict henselization of the prime localization `R_p`, for an `R_p`-algebra structure
+on `C` extending the given structural map `b : R ⟶ C`. -/
 theorem etaleResidueTriples_localized_isStrictHenselization
     (R : CommRingCat.{u}) (p : Spec R)
     (K : Type u) [Field K]

@@ -21,9 +21,21 @@ import WeilConjectures.RingTheory.FilteredColimitNormalRing
 /-!
 # Local filtered colimits of etale algebras over normal domains
 
-Source: Stacks Project, Tag 06DI, proof of normality of strict henselizations,
-with Tags 033C, 037D, 00GV, 00U2 and 00D7
-(blueprint: lem-weil-pbc-etale-colimit-normal-local-domain).
+A local filtered colimit of étale algebras over a normal domain is a normal domain, and the
+structure map from the base is injective.
+
+## Implementation details
+
+Each diagram ring is normal since normality ascends along étale (smooth) maps, so the colimit
+ring is normal; a local normal ring is a normal domain since it agrees with its localization at
+the maximal ideal. For injectivity, each diagram ring is flat over the domain `A`, so a nonzero
+element of `A` acts injectively; if it died in the colimit, it would die at some stage, forcing
+that stage, and hence the colimit, to be the zero ring.
+
+## References
+
+* Stacks Project, Tag 06DI (normality of strict henselizations)
+* Stacks Project, Tags 033C, 037D, 00GV, 00U2, 00D7
 -/
 
 @[expose] public section
@@ -110,28 +122,7 @@ private theorem localNormalDomain (R : Type v) [CommRing R] [IsLocalRing R]
   exact ⟨MulEquiv.isDomain _ e.toMulEquiv, IsIntegrallyClosed.of_equiv e.symm⟩
 
 /-- A local filtered colimit of etale algebras over a normal domain is an integrally
-closed domain, and its structure map is injective. Source: Stacks Project, Tag 06DI,
-normality implication, and Tags 00U2 and 00D7 for injectivity
-(blueprint: lem-weil-pbc-etale-colimit-normal-local-domain).
-
-Proof:
-1. By `lem-weil-pbc-filtered-colimit-algebras-elementwise`, the algebra colimit is also
-   the colimit of the underlying commutative rings, with the same coprojections.
-2. Each diagram ring is normal by `lem-weil-pbc-etale-over-normal-ring-normal`:
-   etale maps are smooth, and normality ascends along smooth maps (Tag 033C).
-3. By `lem-weil-pbc-filtered-colimit-normal-ring`, the colimit ring is normal (Tag 037D).
-4. A local normal ring is a normal domain: localization at its maximal ideal is
-   isomorphic to the ring since every denominator outside that ideal is a unit.
-   Thus the domain and integral-closedness properties of that localization transfer back
-   (`def-weil-pbc-normal-ring`, Tag 00GV).
-5. By `lem-weil-pbc-etale-algebra-flat` and `def-weil-pbc-flat-ring-map`, each diagram
-   ring is flat over the domain A. Multiplication by any nonzero element of A is
-   injective on A, hence on each diagram ring by tensoring with that flat algebra.
-6. If a nonzero element of A dies in the colimit, choose an object of the nonempty
-   filtered category. By `lem-weil-pbc-filtered-colimit-rings-zero`, its image dies
-   at some later stage. Injectivity of multiplication forces that stage to be the zero
-   ring, so its unital coprojection forces the colimit to be zero, contradicting locality.
-   Hence the structure map is injective. -/
+closed domain, and its structure map is injective. -/
 theorem isDomain_isIntegrallyClosed_injective_of_etale_colimit
     (A : Type u) [CommRing A] [IsDomain A]
     (hA : ∀ (p : Ideal A) [p.IsPrime],

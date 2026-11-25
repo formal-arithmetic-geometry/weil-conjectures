@@ -16,8 +16,20 @@ import WeilConjectures.RingTheory.CompletionClosedFiber
 /-!
 # Regularity of completion maps for characteristic-zero discrete valuation rings
 
-Source: Stacks Project, More on Algebra, Proposition Tag 07PX, proof of (3) and (4);
-Algebra, Lemma Tag 00PD (blueprint: lem-weil-pbc-dvr-completion-regular).
+The completion map `A ⟶ Â` of a discrete valuation ring `A` at its maximal ideal is regular if
+the fraction field of `A` has characteristic zero.
+
+## Implementation details
+
+The map is flat, and its only fibres are the generic fibre
+(`AdicCompletion.isGeometricallyRegular_genericFiber_of_isDiscreteValuationRing_of_charZero`)
+and the closed fibre (`AdicCompletion.isGeometricallyRegular_closedFiber`), both geometrically
+regular.
+
+## References
+
+* Stacks Project, More on Algebra, Proposition Tag 07PX, proof of (3) and (4).
+* Stacks Project, Algebra, Lemma Tag 00PD.
 -/
 
 @[expose] public section
@@ -26,24 +38,8 @@ universe u v
 
 namespace AdicCompletion
 
-/-- The canonical maximal-ideal-adic completion map of a discrete valuation ring (a Noetherian
-local domain of dimension one with principal maximal ideal, Stacks Algebra Tag 00PD; Mathlib's
-`IsDiscreteValuationRing`) is regular if its fraction field has characteristic zero.
-Source: Stacks Project, More on Algebra, Proposition Tag 07PX, proof of (3) and (4), using
-Algebra, Lemma Tag 00PD (blueprint: lem-weil-pbc-dvr-completion-regular).
-
-Proof:
-1. The completion map is flat by Mathlib's Noetherian completion instance.
-2. A nonzero prime of a DVR is maximal (the principal ideal domain theorem), hence
-   equals its unique maximal ideal. Thus the primes are zero and the maximal ideal.
-3. `isGeometricallyRegular_genericFiber_of_isDiscreteValuationRing_of_charZero`
-   identifies the generic fibre with a field, using the completion-DVR theorem and
-   the source library's fraction-field base-change lemma. Purely inseparable
-   extensions in characteristic zero are trivial, so this fibre is geometrically regular.
-4. `isGeometricallyRegular_closedFiber` identifies the closed fibre with the residue
-   field as an algebra over itself, using the completion evaluation quotient and the
-   quotient-tensor equivalence. Every field base change is again a field.
-5. Combine flatness and the two fibres using the definition of a regular ring map. -/
+/-- The completion map `A ⟶ Â` of a discrete valuation ring `A` at its maximal ideal is regular
+if the fraction field of `A` has characteristic zero. -/
 theorem isRegular_algebraMap_of_isDiscreteValuationRing_of_charZero
     (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
     (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] [CharZero K] :
