@@ -32,23 +32,25 @@ import WeilConjectures.DeligneLaumon.CommonStagePullbackCompNaturality
 
 /-! # Ambient equivariant ind-sheaves for the recorded common-stage Weil heart
 
-Source: blueprint main-20261015, chap-The-Deligne-Laumon-theorem-in-general,
-sk-l-dl-general-composition, lem-zl-composition-weight-bound.proof.md,
-first paragraph; SGA 4, XVII, sheaf resolutions
-(blueprint: def-zl-weil-ind-sheaf-category).
-
-The underlying constructible heart is the existing common-stage heart. Ind-objects
-are formed before taking Frobenius fixed pairs, retaining arbitrary Frobenius orbits.
-The actual Weil heart embeds fully faithfully. All inverse-image comparisons are
-normalized by the existing integral pullback composition and the Yoneda Kan unit.
+This file provides the pullback functoriality on geometric fibres used for the common-stage
+Weil heart: common-stage pullback along base-changed morphisms, its normalized composition
+isomorphism, and the Frobenius-equivariance square of pullback.
 
 ## Main definitions
 
-- `zlIndWeilHeart`.
-- `zlWeilIndEmbedding`.
-- `zlIndWeilPull`.
-- `zlIndWeilPush`.
-- `zlIndWeilOpenShriek`.
+- `zlPull`: pullback on geometric fibres along a morphism defined over `k₀`.
+- `zlPullComp`: the normalized composition isomorphism for common-stage pullback.
+- `zlFrobeniusSquare`: the commutation of pullback with geometric Frobenius pullback.
+
+## Implementation details
+
+All inverse-image comparisons are normalized by the existing integral pullback composition.
+The object comparison for common-stage pullback is an equality, never a chosen automorphism.
+
+## References
+
+* SGA 4, XVII
+* Stacks Project, Tag 099N(5)
 -/
 
 @[expose] public noncomputable section
@@ -67,15 +69,13 @@ attribute [local irreducible] Scheme.residueField
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
 variable (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- The base-changed morphism, with the fixed closure of the finite field.
-Source: blueprint composition proof, first paragraph
-(blueprint: def-zl-weil-ind-sheaf-category). -/
+/-- The base change of a morphism `f₀` over `k₀` to the fixed algebraic closure `k` of the
+finite field. -/
 def zlFiberMap {X₀ Y₀ : Over (Spec (.of D.k₀))} (f₀ : X₀ ⟶ Y₀) :=
   ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left
 
-/-- Pullback on geometric fibres, using exactly the recorded common-stage functor.
-Source: blueprint composition proof, first paragraph
-(blueprint: def-zl-weil-ind-sheaf-category). -/
+/-- Pullback on geometric fibres along a morphism `f₀` over `k₀`, given by the common-stage
+derived pullback along its base change. -/
 def zlPull {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) :=
@@ -83,9 +83,7 @@ def zlPull {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (fun x ↦ sfWeilPrimeInvertible D l hl X₀ x)
     (fun y ↦ sfWeilPrimeInvertible D l hl Y₀ y)
 
-/-- The prescribed integral pullback composition, normalized by finite reductions.
-Source: Stacks 099N(5), composition proof, first paragraph
-(blueprint: def-zl-weil-ind-sheaf-category). -/
+/-- The integral pullback composition isomorphism, normalized by finite reductions. -/
 def zlIntegralPullComp (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] {X Y Z : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -93,12 +91,8 @@ def zlIntegralPullComp (E : Type u) [Field E] [Algebra (Padic l) E]
     [∀ z : Z, Invertible (l : Z.residueField z)] (f : X ⟶ Y) (g : Y ⟶ Z) :=
   (integralPullbackComposition l E).choose f g
 
-/-- The literal integral-representative formula for common-stage pullback.
-Source: blueprint rational and common-stage pullback prescription
-(blueprint: def-zl-weil-ind-sheaf-category).
-Proof: expand commonStageDerivedPullback_existsUnique on objects, and then the
-object clause of rationalDerivedPullback_existsUnique. Both identifications are
-literal equalities; apply eqToIso. -/
+/-- Common-stage pullback of the rationalization of an integral constructible complex `K` is
+equal to the rationalization of the integral pullback of `K`. -/
 theorem zlStagePull_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -117,9 +111,7 @@ theorem zlStagePull_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact congrArg (GeneralAlgebraicallyClosedCoefficients.inclusion L).obj
     ((rationalDerivedPullback_existsUnique l _ f).exists.choose_spec.2.1 _)
 
-/-- The object comparison is an equality comparison, never a chosen automorphism.
-Source: blueprint common-stage pullback prescription
-(blueprint: def-zl-weil-ind-sheaf-category). -/
+/-- The isomorphism induced by the equality `zlStagePull_eq`. -/
 def zlStagePullIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -134,15 +126,8 @@ attribute [local irreducible] commonStageDerivedPullback rationalDerivedPullback
   completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
   scalarReductionDerivedExistence
 
-/-- Descent of the normalized integral composition comparison.
-Source: Stacks 099N(5); blueprint common-stage prescription
-(blueprint: def-zl-weil-ind-sheaf-category).
-Proof: localize integralPullbackComposition, including its finite-reduction
-normalization, on pure tensors. Its scalar compatibility descends this comparison
-through the common-stage inclusions. The displayed equation specifies every
-component, since every pair is an integral rationalized representative. Thus
-naturality and uniqueness descend from the integral comparison, not from an
-arbitrary natural isomorphism. -/
+/-- There is a unique composition isomorphism for common-stage pullback whose components on
+rationalized integral objects are induced by the integral pullback composition. -/
 theorem zlPullComp_existsUnique {X Y Z : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -200,21 +185,14 @@ end CompositionProof
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The uniquely normalized common-stage composition isomorphism.
-Source: Stacks 099N(5), blueprint composition proof
-(blueprint: def-zl-weil-ind-sheaf-category). -/
+/-- The uniquely normalized common-stage composition isomorphism. -/
 def zlPullComp {X Y Z : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
     [∀ z : Z, Invertible (l : Z.residueField z)] (f : X ⟶ Y) (g : Y ⟶ Z) :=
   (zlPullComp_existsUnique l Ω f g).exists.choose
 
-/-- Geometric Frobenius is natural for a morphism defined over k₀.
-Source: blueprint finite-field geometric fibre and composition proof
-(blueprint: def-zl-weil-ind-sheaf-category).
-Proof: both maps are base changes of f₀ and the inverse q-power automorphism of
-the chosen closure. Their equality follows from the pullback universal property;
-semilinearity does not require either Frobenius to be k-linear. -/
+/-- Geometric Frobenius is natural for a morphism defined over `k₀`. -/
 theorem zlFrobenius_naturality {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) :
@@ -226,9 +204,8 @@ theorem zlFrobenius_naturality {X₀ Y₀ : Over (Spec (.of D.k₀))}
   · simp [zlFiberMap, FiniteFieldDatum.geometricFrobenius,
       FiniteFieldDatum.galoisMap, Over.pullback_map_left, baseChangeMap, Category.assoc]
 
-/-- The canonical pullback square, composed from normalized composition comparisons.
-Source: blueprint Frobenius equivariance of pullback
-(blueprint: def-zl-weil-ind-sheaf-category). -/
+/-- Pullback on geometric fibres commutes with Frobenius pullback, via the normalized
+composition isomorphisms. -/
 def zlFrobeniusSquare {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) :

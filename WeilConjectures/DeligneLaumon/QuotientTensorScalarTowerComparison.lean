@@ -34,10 +34,17 @@ import all WeilConjectures.Algebra.Homology.Ringed.RingedTensorComplexConstraint
 
 /-! # Total tensor and ordinary scalar reduction, with their actual units
 
-Source: Stacks Project, Tags 03EK, 06YY and 012Z.
-(blueprint: lem-a1-quotient-tensor-scalar-tower-comparison).
-The proof first constructs the balanced scalar comparison on sheaves, then lifts it
-through degree-zero totalization, and checks the transition and unit formulas.
+This file compares the total tensor product with ordinary scalar reduction, together with
+their units.
+
+## Implementation details
+
+The balanced scalar comparison is first constructed on sheaves, then lifted through degree-zero
+totalization, and finally the transition and unit formulas are checked.
+
+## References
+
+* Stacks Project, Tags 03EK, 06YY, 012Z
 -/
 
 -- After pruning, this module only keeps private declarations.

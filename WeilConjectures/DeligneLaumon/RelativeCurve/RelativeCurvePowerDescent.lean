@@ -9,11 +9,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.LinearAlgebra.Eigenspace.Basic
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
-/-! Descent of a punctual bound from a positive Frobenius power.
+/-!
+# Descent of a punctual bound from a positive Frobenius power
 
-Source: `lemma-weight-bound-constant-extension`, used in proof step 6 of
-`theorem-pure-lisse-sheaves-over-relative--1` (blueprint:
-theorem-pure-lisse-sheaves-over-relative--1).
+A bound on the absolute values of the eigenvalues of a positive power of an operator
+descends to a bound for the operator itself.
 -/
 
 @[expose] public noncomputable section
@@ -23,15 +23,9 @@ open CategoryTheory
 
 namespace WeilConjectures.RelativeCurve
 
-/-- A bound for a positive power of an operator descends to the operator.
-Source: the power-descent step of `theorem-pure-lisse-sheaves-over-relative--1`
-(blueprint: lem-zl-relative-curve-power-descent).
-
-Proof: alpha^e is an eigenvalue of A^e. The embedding and norm preserve powers.
-Commuting real powers identifies the right side with the e-th power of q^(b/2).
-Both bases are nonnegative, so monotonicity of a positive integral power gives the bound.
-This also covers zero eigenvalues and q=0.
--/
+/-- A bound for a positive power of an operator descends to the operator: if
+`‖ι α‖ ≤ (q ^ e) ^ (b / 2)` for every eigenvalue `α` of `A ^ e`, then `‖ι α‖ ≤ q ^ (b / 2)`
+for every eigenvalue `α` of `A`. -/
 theorem power_bound_descent {K : Type u} [Field K]
     (V : ModuleCat K) (A : Module.End K V) (ι : K →+* ℂ)
     (q e : ℕ) (he : e ≠ 0) (b : ℝ)
