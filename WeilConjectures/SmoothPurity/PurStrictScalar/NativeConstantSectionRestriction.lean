@@ -13,8 +13,9 @@ import all WeilConjectures.SixFunctors.Coefficient.CoefficientRingedSequenceSite
 
 /-! # The explicit constant section tower and its scalar-restriction interface
 
-Source: Stacks Project, Modules on Sites, Tags 03CZ and 03DA; Cohomology on Sites, 0940.
-(blueprint: def-pur-native-constant-section-restriction).
+## References
+
+* [Stacks Project, Tags 03CZ, 03DA and 0940]
 -/
 
 @[expose] public noncomputable section
@@ -32,8 +33,7 @@ namespace WeilConjectures.PurStrictScalar
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The actual horizontal map between two vertical inclusions.
-Source: Stacks 0940 (blueprint: def-pur-native-constant-section-restriction). -/
+/-- The actual horizontal map between two vertical inclusions. -/
 def nativeSectionVertical {C : Type c} [Category.{d} C]
     {m n : ℕ} (h : n ≤ m) : Prod.sectR n C ⟶ Prod.sectR m C where
   app U := Prod.mkHom (homOfLE h) (𝟙 U)
@@ -44,16 +44,12 @@ def nativeSectionVertical {C : Type c} [Category.{d} C]
     · change f ≫ 𝟙 V = 𝟙 U ≫ f
       simp
 
-/-- Explicit section construction and its coefficient compatibility.
-Source: Stacks 03CZ, 03DA and 0940
-(blueprint: def-pur-native-constant-section-restriction). -/
+/-- The constant quotient ring map into the `n`th level of the sequence-site ring. -/
 def nativeConstantLevelMap (W : Scheme.{u}) (n : ℕ) :=
   integralConstantQuotientOfUniverses l E W n ≫
     eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm
 
-/-- Explicit section construction and its coefficient compatibility.
-Source: Stacks 03CZ, 03DA and 0940
-(blueprint: def-pur-native-constant-section-restriction). -/
+/-- The constant level maps are compatible with the horizontal ring maps. -/
 theorem nativeConstantLevelMap_horizontal (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     nativeConstantLevelMap l E W m ≫
       (Functor.sheafPushforwardContinuousNatTrans (nativeSectionVertical h) RingCat.{u + 1}
@@ -68,8 +64,7 @@ theorem nativeConstantLevelMap_horizontal (W : Scheme.{u}) {m n : ℕ} (h : n �
     (coefficientSequenceEvaluationRing_eq l E W n).symm)
       ((integralConstantConeOfUniverses l E W).w (homOfLE h).op)
 
-/-- Section maps determine a morphism of module sheaves.
-Source: Stacks 03CZ (blueprint: def-pur-native-constant-section-restriction). -/
+/-- Section maps determine a morphism of module sheaves. -/
 theorem nativeSectionHom_ext {C : Type c} [Category.{d} C]
     {J : GrothendieckTopology C} {R : Sheaf J RingCat.{v}}
     {M N : SheafOfModules.{v} R} (f g : M ⟶ N)
@@ -80,9 +75,7 @@ theorem nativeSectionHom_ext {C : Type c} [Category.{d} C]
   apply ModuleCat.hom_ext
   exact LinearMap.ext (h U)
 
-/-- Explicit section construction and its coefficient compatibility.
-Source: Stacks 03CZ, 03DA and 0940
-(blueprint: def-pur-native-constant-section-restriction). -/
+/-- The transition between two level pushforwards induced by a vertical inclusion. -/
 def nativeSectionTowerTransition
     {C : Type c} [Category.{d} C] (J : GrothendieckTopology C)
     (R : Sheaf (coefficientSequenceTopology J) RingCat.{v}) (A : Sheaf J RingCat.{v})
@@ -97,9 +90,8 @@ def nativeSectionTowerTransition
   SheafOfModules.pushforwardNatTrans (ρ m) (nativeSectionVertical h) ≫
     (SheafOfModules.pushforwardCongr (hρ h)).hom
 
-/-- Explicit section construction and its coefficient compatibility.
-Source: Stacks 03CZ, 03DA and 0940
-(blueprint: def-pur-native-constant-section-restriction). -/
+/-- The tower functor sending a module on the sequence site to its tower of level
+pushforwards, with the vertical inclusions as transitions. -/
 def nativeSectionTowerFunctor
     {C : Type c} [Category.{d} C] (J : GrothendieckTopology C)
     (R : Sheaf (coefficientSequenceTopology J) RingCat.{v}) (A : Sheaf J RingCat.{v})
@@ -153,9 +145,7 @@ def nativeSectionTowerFunctor
       funext n
       exact (SheafOfModules.pushforward (ρ n.unop)).map_comp f g }
 
-/-- Explicit section construction and its coefficient compatibility.
-Source: Stacks 03CZ, 03DA and 0940
-(blueprint: def-pur-native-constant-section-restriction). -/
+/-- The constant section tower of a sequence-site module over the integers of `E`. -/
 def nativeConstantSectionTower (W : Scheme.{u}) :
     coefficientSequenceModules.{u, u} l E W ⥤
       Towers (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W :=
@@ -164,9 +154,7 @@ def nativeConstantSectionTower (W : Scheme.{u}) :
       (coefficientSequenceCommRingSheaf l E W)) (integralConstantRingOfUniverses l E W)
     (nativeConstantLevelMap l E W) (fun h ↦ nativeConstantLevelMap_horizontal l E W h)
 
-/-- Explicit section construction and its coefficient compatibility.
-Source: Stacks 03CZ, 03DA and 0940
-(blueprint: def-pur-native-constant-section-restriction). -/
+/-- Pushforward followed by restriction of scalars along `ψ` is pushforward along `ψ ≫ ε`. -/
 def nativePushforwardRestrictIso
     {C : Type c} {D : Type c'} [Category.{d} C] [Category.{d'} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -176,17 +164,13 @@ def nativePushforwardRestrictIso
     SheafOfModules.pushforward.{v} ε ⋙ SheafOfModules.restrictScalars ψ ≅
       SheafOfModules.pushforward.{v} (F := F) (ψ ≫ ε) := Iso.refl _
 
-/-- Explicit section construction and its coefficient compatibility.
-Source: Stacks 03CZ, 03DA and 0940
-(blueprint: def-pur-native-constant-section-restriction). -/
+/-- The quotient map from the integers of `E` to the `n`th compact-support coefficient ring. -/
 def nativeConstantScalarMap (n : ℕ) :
     CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) ⟶
       compactSupportSystemLevel l E n :=
   CommRingCat.ofHom (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))).ulift
 
-/-- Explicit section construction and its coefficient compatibility.
-Source: Stacks 03CZ, 03DA and 0940
-(blueprint: def-pur-native-constant-section-restriction). -/
+/-- The constant quotient maps are compatible with the compact-support system quotients. -/
 theorem nativeConstantScalarMap_compatibility (n : ℕ) :
     nativeConstantScalarMap l E (n + 1) ≫ compactSupportSystemQuotient l E n =
       nativeConstantScalarMap l E n := by
@@ -194,9 +178,8 @@ theorem nativeConstantScalarMap_compatibility (n : ℕ) :
   ext x
   rfl
 
-/-- Explicit section construction and its coefficient compatibility.
-Source: Stacks 03CZ, 03DA and 0940
-(blueprint: def-pur-native-constant-section-restriction). -/
+/-- The `n`th level of the constant section tower is restriction of scalars along the
+constant quotient map at level `n`. -/
 def nativeConstantScalarLevel (W : Scheme.{u}) (n : ℕ) :
     nativeConstantSectionTower l E W ⋙
       (evaluation ℕᵒᵖ (AlgebraicGeometry.ProEtale.StrictTower.Modules
@@ -217,9 +200,8 @@ def nativeConstantScalarLevel (W : Scheme.{u}) (n : ℕ) :
         (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E))
         (nativeConstantScalarMap l E) W n))).symm
 
-/-- Explicit section construction and its coefficient compatibility.
-Source: Stacks 03CZ, 03DA and 0940
-(blueprint: def-pur-native-constant-section-restriction). -/
+/-- The constant section tower as an ordinary scalar restriction for the compact-support
+coefficient system, given its additivity and finite exactness. -/
 def nativeConstantScalarRestriction
     (hadd : ∀ W : Scheme.{u}, (nativeConstantSectionTower l E W).Additive)
     (hlim : ∀ W : Scheme.{u}, PreservesFiniteLimits (nativeConstantSectionTower l E W))

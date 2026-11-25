@@ -14,9 +14,6 @@ import Mathlib.Algebra.Field.ULift
 
 /-!
 # Integral scalar extension preserves intrinsic bounded constructibility
-
-Source: Weil conjectures blueprint, sec-smooth-purity/sk-def-sf-operations,
-order 1460 (blueprint: lem-weil-integral-scalar-extension-constructible).
 -/
 
 @[expose] public section
@@ -63,16 +60,7 @@ private theorem constructible_iff_legacy
       exact ⟨(h n).1, fun i hi ↦ (h n).2 i hi⟩
 
 /-- Completed integral scalar extension preserves the intrinsic bounded constructible
-predicate over arbitrary schemes.
-Source: blueprint order 1460 (blueprint: lem-weil-integral-scalar-extension-constructible).
-Proof: the K-flat augmented-tower definition of completeness is equivalent to the intrinsic
-one, by the canonical tensor counits, normalized units, and pure-tensor transitions.
-Finite-level constructibility and the common cohomological interval are the same in the
-two predicates. Choose an auxiliary finite-field datum of prime characteristic larger
-than l, transfer the input to the legacy predicate, apply the published completed
-scalar-extension preservation theorem, and transfer its output back. The auxiliary
-datum imposes no condition on the scheme and disappears from the conclusion.
--/
+predicate over arbitrary schemes. -/
 theorem sfIntegralScalarExtension_constructible
     (p l : ℕ) [Fact l.Prime] (_hl : l ≠ p)
     (E : Type u) [Field E] [Algebra (Padic l) E]
@@ -98,7 +86,6 @@ theorem sfIntegralScalarExtension_constructible
 
 /-- The completed scalar extension restricted to intrinsic bounded constructible
 objects. Its object map is the ambient extension and its morphism map is inherited.
-Source: blueprint order 1460 (blueprint: lem-weil-integral-scalar-extension-constructible).
 -/
 noncomputable def sfConstructibleIntegralScalarExtension
     (p l : ℕ) [Fact l.Prime] (_hl : l ≠ p)
@@ -114,11 +101,7 @@ noncomputable def sfConstructibleIntegralScalarExtension
     ((sfIntegralConstructible l E Y).ι ⋙ integralScalarExtension l E L ι Y)
     (fun X ↦ sfIntegralScalarExtension_constructible p l _hl E L ι Y X.obj X.property)
 
-/-- The restricted functor is linear for the integral coefficient action.
-Source: blueprint order 1460 (blueprint: lem-weil-integral-scalar-extension-constructible).
-Proof: the ambient completed extension is linear on morphisms; the full-subcategory
-restriction preserves the same equality.
--/
+/-- The restricted functor is linear for the integral coefficient action. -/
 theorem sfConstructibleIntegralScalarExtension_smul
     (p l : ℕ) [Fact l.Prime] (_hl : l ≠ p)
     (E : Type u) [Field E] [Algebra (Padic l) E]

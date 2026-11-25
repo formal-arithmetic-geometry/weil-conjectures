@@ -216,10 +216,6 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 /-!
 # Pullback and symmetry of supported Kummer cup products
 
-Source: Stacks Project, Tags 0FPL, 0FPM, 09XP, 03PL and 0G78; blueprint
-main-20261015, proposition-purity-vector-bundles, unit multiples, permutations and shears
-(blueprint: lem-pur-supported-cup-functoriality).
-
 The Boolean site parameter is false for the small etale site and true for the
 small pro-etale site. All constructions use the published sites, coefficients,
 Kummer classes, exact inverse images and derived tensors.
@@ -231,6 +227,16 @@ Kummer classes, exact inverse images and derived tensors.
 * `FunctorialCupAlgebraLaws`, `FunctorialCupLocalizationLaws`, and
   `FunctorialCupComparisonLaws`: the clauses of the statement.
 * `supportedCupFunctoriality`: all these clauses for both sites.
+
+## Implementation details
+
+The supported restriction map along `D ⊆ C` over `X` restricts each locally constant section
+on `C` to `D`; it is `A`-linear and carries the restricted unit to the restricted unit, and is
+unique because the constant restriction onto the closed direct image is epic.
+
+## References
+
+* [Stacks Project, Tags 03PL, 03Q1, 099R, 09XP, 0FPL, 0FPM and 0G78]
 -/
 
 @[expose] public noncomputable section
@@ -279,28 +285,23 @@ instance functorialCupTopologySheafify (P : PurityFiniteSetting.{u}) (pro : Bool
     (X : Scheme.{u}) : HasDerivedCategory.{u + 1} (P.functorialCupSheaves pro X) :=
   inferInstance
 
-/-- The existing derived category, with its localization shared explicitly.
-Source: supported tensor construction (blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The existing derived category, with its localization shared explicitly. -/
 abbrev FunctorialCupDerived (P : PurityFiniteSetting.{u}) (pro : Bool) (X : Scheme.{u}) :=
   @DerivedCategory (P.functorialCupSheaves pro X) _ _ (P.functorialCupHasDerived pro X)
 
-/-- The existing finite constant module. Source: purity conventions
-(blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The existing finite constant module. -/
 def functorialCupConstant (P : PurityFiniteSetting.{u}) (pro : Bool) (X : Scheme.{u}) :
     P.functorialCupSheaves pro X :=
   match pro with
   | false => P.constantEtale X
   | true => P.constant X
 
-/-- The published comparison inverse image, with its actual exact structure.
-Source: Stacks 099R (blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The published comparison inverse image, with its actual exact structure. -/
 def functorialCupComparisonFunctor (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) :
     P.functorialCupSheaves false X ⥤ P.functorialCupSheaves true X :=
   ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X
 
-/-- The signed finite Tate sheaf at the actual annihilator ell^n. Source: the
-arbitrary-index Kummer prescription in proposition-purity-vector-bundles
-(blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The signed finite Tate sheaf at the actual annihilator ell^n. -/
 def functorialCupTwist (P : PurityFiniteSetting.{u}) (pro : Bool)
     (X : Scheme.{u}) (r : ℤ) : P.functorialCupSheaves pro X :=
   match pro with
@@ -310,25 +311,20 @@ def functorialCupTwist (P : PurityFiniteSetting.{u}) (pro : Bool)
       (Scheme.finiteEtaleTateSheaf P.Coefficient P.diagonalExponent X
         P.diagonalExponent_annihilates r)
 
-/-- The existing degree-zero embedding. Source: supported tensor construction
-(blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The existing degree-zero embedding. -/
 def functorialCupSingle (P : PurityFiniteSetting.{u}) (pro : Bool) (X : Scheme.{u}) :
     P.functorialCupSheaves pro X ⥤ P.FunctorialCupDerived pro X :=
   @DerivedCategory.singleFunctor (P.functorialCupSheaves pro X) _ _
     (P.functorialCupHasDerived pro X) 0
 
-/-- The actual underived direct image of constants from the closed support.
-Source: proposition-purity-vector-bundles, supported-Hom model
-(blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The actual underived direct image of constants from the closed support. -/
 def functorialCupSource (P : PurityFiniteSetting.{u}) (pro : Bool)
     {C X : Scheme.{u}} (i : C ⟶ X) : P.functorialCupSheaves pro X :=
   match pro with
   | false => (Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i).obj (P.constantEtale C)
   | true => (ProEtale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i).obj (P.constant C)
 
-/-- Restriction of local constants, exactly the coefficient map of the supported cup.
-Source: proposition-purity-vector-bundles and the etale coefficient lemma
-(blueprint: lem-pur-supported-cup-functoriality). -/
+/-- Restriction of local constants, exactly the coefficient map of the supported cup. -/
 def functorialCupRestriction (P : PurityFiniteSetting.{u}) (pro : Bool)
     {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
     P.functorialCupConstant pro X ⟶ P.functorialCupSource pro i :=
@@ -346,8 +342,7 @@ def functorialCupTarget (P : PurityFiniteSetting.{u}) (pro : Bool)
     (X : Scheme.{u}) (a r : ℤ) : P.FunctorialCupDerived pro X :=
   ((P.functorialCupSingle pro X).obj (P.functorialCupTwist pro X r))⟦a⟧
 
-/-- The actual exact inverse image of fixed-scalar modules. Source: Stacks 03Q1
-(blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The actual exact inverse image of fixed-scalar modules. -/
 def functorialCupInverseImage (P : PurityFiniteSetting.{u}) (pro : Bool)
     {X Y : Scheme.{u}} (v : Y ⟶ X) :
     P.functorialCupSheaves pro X ⥤ P.functorialCupSheaves pro Y :=
@@ -355,39 +350,32 @@ def functorialCupInverseImage (P : PurityFiniteSetting.{u}) (pro : Bool)
   | false => Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) v
   | true => ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) v
 
-/-- The published sheaf structure, selected by the site. Source: purity conventions
-(blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The published sheaf structure, selected by the site. -/
 @[reducible] instance functorialCupMonoidal (P : PurityFiniteSetting.{u}) (pro : Bool) (X :
     Scheme.{u}) :
     MonoidalCategory (P.functorialCupSheaves pro X) := by infer_instance
 
-/-- The published sheaf structure, selected by the site. Source: purity conventions
-(blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The published sheaf structure, selected by the site. -/
 instance functorialCupMonoidalPreadditive (P : PurityFiniteSetting.{u}) (pro : Bool)
     (X : Scheme.{u}) :
     MonoidalPreadditive (P.functorialCupSheaves pro X) := by infer_instance
 
-/-- The published sheaf structure, selected by the site. Source: purity conventions
-(blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The published sheaf structure, selected by the site. -/
 @[reducible] instance functorialCupSymmetric (P : PurityFiniteSetting.{u}) (pro : Bool) (X :
     Scheme.{u}) :
     SymmetricCategory (P.functorialCupSheaves pro X) := by infer_instance
 
-/-- The published sheaf structure, selected by the site. Source: purity conventions
-(blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The published sheaf structure, selected by the site. -/
 @[reducible] instance functorialCupClosed (P : PurityFiniteSetting.{u}) (pro : Bool) (X :
     Scheme.{u}) :
     MonoidalClosed (P.functorialCupSheaves pro X) := by infer_instance
 
-/-- The published functorial flat resolutions, selected by the site.
-Source: K-flat tensor construction (blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The published functorial flat resolutions, selected by the site. -/
 instance functorialCupFlatResolutions (P : PurityFiniteSetting.{u}) (pro : Bool)
     (X : Scheme.{u}) : Abelian.HasFunctorialFlatResolution (P.functorialCupSheaves pro X) := by
   infer_instance
 
-/-- The coefficient multiplication fixed by restriction and local scalar multiplication.
-Source: proposition-purity-vector-bundles and its etale analogue
-(blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The coefficient multiplication fixed by restriction and local scalar multiplication. -/
 def functorialCupMultiplication (P : PurityFiniteSetting.{u}) (pro : Bool)
     {C D X : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] :
@@ -409,8 +397,7 @@ attribute [local reducible] functorialCupHasDerived
 
 end CoefficientProof
 
-/-- Canonical inverse image of the coefficient unit. Source: constant-sheaf adjunction
-(blueprint: lem-pur-supported-cup-functoriality). -/
+/-- Canonical inverse image of the coefficient unit. -/
 def functorialCupConstantPullback (P : PurityFiniteSetting.{u}) (pro : Bool)
     {X Y : Scheme.{u}} (v : Y ⟶ X) :
     (P.functorialCupInverseImage pro v).obj (P.functorialCupConstant pro X) ≅
@@ -513,12 +500,7 @@ attribute [local reducible] functorialCupCategory functorialCupAbelian
   functorialCupSource functorialCupRestriction functorialCupInverseImage
   functorialCupConstantPullback
 
-/-- Change of closed support over a fixed scheme, uniquely determined on local constants.
-Source: supported functoriality, Steps 2 and 5
-(blueprint: lem-pur-supported-cup-functoriality).
-Proof: the map D to C over X restricts each locally constant section on C to D.
-The sheaf map is A-linear and carries the restricted unit to the restricted unit.
-The constant restriction onto the closed direct image is epic, proving uniqueness. -/
+/-- Change of closed support over a fixed scheme, uniquely determined on local constants. -/
 theorem functorialCupSupportMap_existsUnique (P : PurityFiniteSetting.{u}) (pro : Bool)
     {C D X : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] (g : D ⟶ C) (_h : g ≫ i = j) :
@@ -563,9 +545,7 @@ theorem functorialCupSupportMap_existsUnique (P : PurityFiniteSetting.{u}) (pro 
 
 end SupportMapProof
 
-/-- The actual restriction on closed constant sheaves, fixed by its epic unit map.
-Source: supported functoriality, Steps 2 and 5
-(blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The actual restriction on closed constant sheaves, fixed by its epic unit map. -/
 def functorialCupSupportMap (P : PurityFiniteSetting.{u}) (pro : Bool)
     {C D X : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] (g : D ⟶ C) (h : g ≫ i = j) :
@@ -579,9 +559,7 @@ theorem functorialCupHasExt (P : PurityFiniteSetting.{u}) (pro : Bool) (X : Sche
 
 attribute [local instance] functorialCupHasExt
 
-/-- The identity direct-image unitor of the actual supported coefficient source.
-Source: the full-support normalization
-(blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The identity direct-image unitor of the actual supported coefficient source. -/
 def functorialCupFullSupportIso (P : PurityFiniteSetting.{u}) (pro : Bool)
     (X : Scheme.{u}) :
     P.functorialCupSource pro (𝟙 X) ≅ P.functorialCupConstant pro X :=
@@ -590,8 +568,7 @@ def functorialCupFullSupportIso (P : PurityFiniteSetting.{u}) (pro : Bool)
       (P.constantEtale X)
   | true => (ProEtale.lowerStarId (ModuleCat.{u + 1} P.Coefficient) X).app (P.constant X)
 
-/-- The published exact extension by zero for the complementary open.
-Source: Stacks 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The published exact extension by zero for the complementary open. -/
 def functorialCupOpenExtension (P : PurityFiniteSetting.{u}) (pro : Bool)
     {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
     P.functorialCupSheaves pro i.openComplement.toScheme ⥤ P.functorialCupSheaves pro X :=
@@ -601,15 +578,13 @@ def functorialCupOpenExtension (P : PurityFiniteSetting.{u}) (pro : Bool)
   | true => ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} P.Coefficient)
       i.openComplement.ι
 
-/-- Extension by zero of the actual unit on the open complement.
-Source: Stacks 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+/-- Extension by zero of the actual unit on the open complement. -/
 def functorialCupOpenSource (P : PurityFiniteSetting.{u}) (pro : Bool)
     {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :=
   (P.functorialCupOpenExtension pro i).obj
     (P.functorialCupConstant pro i.openComplement.toScheme)
 
-/-- The adjunction counit, with its canonical constant-sheaf restriction.
-Source: Stacks 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+/-- The adjunction counit, with its canonical constant-sheaf restriction. -/
 def functorialCupOpenInclusion (P : PurityFiniteSetting.{u}) (pro : Bool)
     {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
     P.functorialCupOpenSource pro i ⟶ P.functorialCupConstant pro X :=

@@ -17,7 +17,17 @@ import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarPullbackTowerC
 This is the degreewise component of the normalized scalar pullback chain tower
 identity.  It isolates the finite-level generator and Roos-coordinate calculation
 from the final chain-map extensionality argument.
-(blueprint: lem-pur-integral-scalar-pullback-chain-tower)
+
+## Implementation details
+
+The degreewise identity is the explicit coefficient calculation on finite pullback
+generators, extended through sheafification and the strict reduction tower, followed by the
+unshifted and shifted Roos coordinate formulas. The chain-map identity follows by
+extensionality in the degree index.
+
+## References
+
+* Stacks Project, Tags 07A4 and 08TC
 -/
 
 @[expose] public noncomputable section
@@ -210,19 +220,7 @@ attribute [local irreducible] integralOrdinaryScalarComp scalarPullbackLevel sca
   integralOperationsPullbackTowerFunctor integralOperationsRoos
 
 /--
-Degreewise form of the normalized pullback Roos chain tower identity.
-
-Source: Stacks 07A4, 08TC; the finite-level generator calculation, reduction
-squares, and both Roos product-coordinate calculations in the proof of
-`lem-pur-integral-scalar-pullback-chain-tower`.
-
-The proof is the explicit coefficient calculation on finite pullback generators,
-extended through sheafification and the strict reduction tower, followed by the
-unshifted and shifted Roos coordinate formulas.  This statement is strictly
-smaller than the chain-map identity because it fixes one cochain degree; the
-chain-map result follows by extensionality in the degree index.
-(blueprint: lem-pur-integral-scalar-pullback-chain-tower)
--/
+Degreewise form of the normalized pullback Roos chain tower identity. -/
 theorem integralScalarPullbackChainTower_f {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ) :
     (((integralOrdinaryScalar l L F j X).mapHomologicalComplex (.up ℤ)).map

@@ -12,9 +12,21 @@ import all WeilConjectures.SmoothPurity.Sf.SfCompleteDirectImageReduction
 import WeilConjectures.SmoothPurity.CompletedCoefficientPushforward.CompletedCoefficientPushforwardComparison
 import Mathlib.Data.Nat.Prime.Infinite
 
-/-! Proper direct image preserves derived completeness.
-Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.1.13; Stacks Tags 0E8I and 0F7J.
-(blueprint: lem-qcqs-compact-support-image-complete-proper).
+/-!
+# Proper direct image preserves derived completeness
+
+## Implementation details
+
+The coefficient adjunction identifies the ringed pushforward with
+`sfCompletedModuleDirectImage`. Choosing an auxiliary prime distinct from `l` gives the
+normalized completed-coefficient comparison package, whose `completed_image_complete`
+consequence in `SfCompleteDirectImageReduction` gives completeness of the total right-derived
+image.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Lemmas 6.1.13 and 6.7.7]
+* [Stacks Project, Tags 099N, 0E8I and 0F7J]
 -/
 
 @[expose] public noncomputable section
@@ -43,14 +55,7 @@ set_option linter.unusedSectionVars false in
 attribute [-instance] CompletedCoefficientPushforward.modAbelian
   CompletedCoefficientPushforward.hasDerived in
 /-- The proper direct image of a complete completed-coefficient complex is
-complete. This is the proper factor of the compact-support image argument.
-Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.1.13; Stacks Tags 0E8I and 0F7J.
-Proof: the coefficient adjunction identifies this ringed pushforward with
-sfCompletedModuleDirectImage. Choose an auxiliary prime distinct from l to obtain
-the normalized completed-coefficient comparison package. Its already proved
-completed_image_complete consequence in SfCompleteDirectImageReduction gives
-completeness of this same total right-derived image (Stacks Tag 099N).
-(blueprint: lem-qcqs-compact-support-image-complete-proper). -/
+complete. This is the proper factor of the compact-support image argument. -/
 theorem sfQcqsCompactSupport_proper_complete
     (M : DerivedCategory (scalarReductionSource l E c.Z))
     (hM : IsSfDerivedComplete l E c.Z M) :

@@ -173,13 +173,8 @@ import WeilConjectures.Algebra.Homology.RingedOpenScalar.RingedOpenScalarAdjunct
 
 /-! # Integral compact-support coefficient data
 
-The definitions that other statements use
-(moved out of `IntegralCompactSupportCoefficientComparison`,
-blueprint: def-pur-integral-compact-support-coefficient-data); the lemma's theorems stay there.
-
-Source: Weil blueprint, theorem-smooth-purity-all-admissible-coefficients, Step 3; Bhatt--Scholze,
-Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1)
-(blueprint: def-pur-integral-compact-support-coefficient-data).
+The definitions that other statements use, moved out of
+`IntegralCompactSupportCoefficientComparison`; the theorems stay there.
 
 ## Main statements
 
@@ -191,6 +186,28 @@ Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1)
 * `comparison_projection`, `comparison_commShift`, `comparison_refinement`:
   projection, shift and normalized compactification compatibility.
 * `comparison_identity`, `comparison_composition`: the scalar unit and associativity laws.
+
+## Implementation details
+
+* `openRestrictionMap_isIso`: open extension is identified with an equivalence followed by
+  slice extension, whose unit is invertible because the open object is subterminal. Scalar
+  restriction of an extended object is still extended, so the counit is invertible, and the
+  mate formula expresses the map as a composite of three isomorphisms.
+* `openProjectionInverse_isIso`: the same argument at the derived level, resolving the ambient
+  tensor factor by a flat K-flat complex.
+* `modulePushComposition_existsUnique`: the fibre-product pasting isomorphism identifies test
+  objects of the two direct images, giving a natural linear bijection on sections.
+* `projectionComparisons_existsUnique`: the components are fixed by currying the canonical
+  natural tensor-pullback comparison and the open projection inverse; currying is faithful.
+* `completedPullMap_isIso`, `completedPull_comp`, `completedChange_square`: the
+  profinite-coefficient inverse-image theorem identifies the pullback of the finite quotient
+  system with the source quotient system; the completed projections are jointly monic.
+
+## References
+
+* [Stacks Project, Tags 03D8, 03DI, 03DJ, 07A4, 07A5, 07A6, 0D6D, 0D6E, 0E8I and 0GL6]
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6 and
+  Lemmas 6.7.7, 6.8.2(1)]
 -/
 
 @[expose] public noncomputable section
@@ -211,42 +228,32 @@ attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
   proEtaleRingRestrictionPullbackInv proEtaleCanonicalTensorComparison
 
 /-- Ring sheaves and their inverse-image identifications, used only to organize the
-specified completed and finite coefficient constructions below.
-Source: Bhatt--Scholze, Sections 6.7--6.8
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+specified completed and finite coefficient constructions below. -/
 structure Coefficients where
   ring : ∀ W : Scheme.{u}, Sheaf (ProEt.topology W) CommRingCat.{u + 1}
   pull : ∀ {U V : Scheme.{u}} (g : U ⟶ V),
     (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (ring V) ≅ ring U
 
 /-- A compatible map of these coefficient sheaves. The instances below use the actual
-completed inclusions and quotient maps, rather than supplying an arbitrary map.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+completed inclusions and quotient maps, rather than supplying an arbitrary map. -/
 structure Change (R S : Coefficients.{u}) where
   map : ∀ W : Scheme.{u}, R.ring W ⟶ S.ring W
   square : ∀ {U V : Scheme.{u}} (g : U ⟶ V),
     (R.pull g).hom ≫ map U =
       (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map (map V) ≫ (S.pull g).hom
 
-/-- Exact open extension for the specified coefficient identification.
-Source: Stacks Tags 03DI, 03DJ
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- Exact open extension for the specified coefficient identification. -/
 abbrev openExtension (R : Coefficients.{u}) {U V : Scheme.{u}} (j : U ⟶ V)
     [IsOpenImmersion j] :=
   proEtaleRingOpenExtension j (R.ring V) (R.ring U) (R.pull j)
 
-/-- Its specified adjunction to restriction.
-Source: Stacks Tag 03DI
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- Its specified adjunction to restriction. -/
 def openAdjunction (R : Coefficients.{u}) {U V : Scheme.{u}} (j : U ⟶ V)
     [IsOpenImmersion j] :
     openExtension R j ⊣ proEtaleRingModulePullback j (R.ring V) (R.ring U) (R.pull j) :=
   Adjunction.ofIsRightAdjoint _
 
-/-- The open scalar-restriction mate, determined by the open adjunction units.
-Source: Stacks Tags 03DI, 0E8I
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- The open scalar-restriction mate, determined by the open adjunction units. -/
 def openRestrictionMap {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] :
     proEtaleRingRestrictScalars (a.map U) ⋙ openExtension R j ⟶
@@ -266,16 +273,7 @@ attribute [-instance] WeilConjectures.integralOperationsSiteSmall
   SheafOfModules.localizedSystemRestrictionLimits
   SheafOfModules.localizedSystemRestrictionColimits in
 /-- The open mate is invertible. On extension-by-zero summands both it and its inverse
-are identity on the underlying section; scalar actions agree by the coefficient square.
-Source: Stacks Tag 0E8I
-(blueprint: def-pur-integral-compact-support-coefficient-data).
-Proof: identify open extension with an equivalence followed by slice extension. The
-slice extension has invertible unit because the open object is subterminal, so both
-open extensions are fully faithful. The sectionwise scalar/slice-extension isomorphism
-shows that scalar restriction of an extended object is still extended. The counit on
-this object is therefore invertible. The mate formula expresses the specified map as
-extension of the scalar-restricted unit and the inverse restriction square, followed by
-that counit. All three factors are invertible. -/
+are identity on the underlying section; scalar actions agree by the coefficient square. -/
 theorem openRestrictionMap_isIso {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] :
     IsIso (openRestrictionMap a j) := by
@@ -339,25 +337,19 @@ theorem openRestrictionMap_isIso {R S : Coefficients.{u}} (a : Change R S)
 
 attribute [instance] openRestrictionMap_isIso
 
-/-- Exact descent of the specified open coefficient square.
-Source: Stacks Tag 0E8I
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- Exact descent of the specified open coefficient square. -/
 def openRestriction {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] :=
   Functor.mapDerivedCategorySquareIso (asIso (openRestrictionMap a j))
 
-/-- Separately derived proper image after exact extension by zero.
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- Separately derived proper image after exact extension by zero. -/
 def image (R : Coefficients.{u}) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) :=
   (openExtension R c.i).mapDerivedCategory ⋙
     proEtaleRingDerivedDirectImage c.g (R.ring Y) (R.ring c.Z) (R.pull c.g)
 
 /-- Compact-support restriction: the open comparison followed by the canonical
-K-injective direct-image comparison. This fixes the normalization before transposition.
-Source: Stacks Tags 03DI, 0D6E
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+K-injective direct-image comparison. This fixes the normalization before transposition. -/
 def restriction {R S : Coefficients.{u}} (a : Change R S)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     pbcDerivedRestrict (a.map X) ⋙ image R c ≅
@@ -371,9 +363,7 @@ def restriction {R S : Coefficients.{u}} (a : Change R S)
 
 /-- The scalar comparison is the mate of the specified restriction square under the
 canonical tensor-unit normalized scalar adjunctions. It therefore has precisely source
-C_Y P_R and target P_S C_X.
-Source: Stacks Tags 07A6, 0GL6
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+C_Y P_R and target P_S C_X. -/
 def comparison {R S : Coefficients.{u}} (a : Change R S)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     image R c ⋙ pbcDerivedExtend (a.map Y) ⟶
@@ -382,13 +372,7 @@ def comparison {R S : Coefficients.{u}} (a : Change R S)
     (pbcDerivedScalarAdjunction (a.map Y))).symm
       (TwoSquare.mk _ _ _ _ (restriction a c).hom))
 
-/-- The canonical composition of module direct images, fixed on every section.
-Source: Stacks Tags 03D8, 0D6D
-(blueprint: def-pur-integral-compact-support-coefficient-data).
-Proof: the fibre-product pasting isomorphism identifies test objects of the two
-direct images. Pulling sections across it gives a natural bijection. Coefficient
-compatibility makes it linear. Its inverse uses the inverse pasting isomorphism;
-sectionwise faithfulness proves uniqueness. -/
+/-- The canonical composition of module direct images, fixed on every section. -/
 theorem modulePushComposition_existsUnique (R : Coefficients.{u})
     {U V W : Scheme.{u}} (h : U ⟶ V) (k : V ⟶ W)
     (hc : R.pull (h ≫ k) = proEtaleRingCompositeCoefficients h k
@@ -418,9 +402,7 @@ theorem modulePushComposition_existsUnique (R : Coefficients.{u})
   intro m
   exact (he N T.unop m).trans (hd N T.unop m).symm
 
-/-- Exact derived pullback composition, conjugate to sectionwise direct-image pasting.
-Source: Stacks Tags 03D8, 0D6D
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- Exact derived pullback composition, conjugate to sectionwise direct-image pasting. -/
 def geometricPullComposition (R : Coefficients.{u})
     {U V W : Scheme.{u}} (h : U ⟶ V) (k : V ⟶ W)
     (hc : R.pull (h ≫ k) = proEtaleRingCompositeCoefficients h k
@@ -436,21 +418,15 @@ def geometricPullComposition (R : Coefficients.{u})
       (modulePushComposition_existsUnique R h k hc).exists.choose) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- The fixed geometric pullback, with its original small-site universes.
-Source: Stacks Tag 03D8
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- The fixed geometric pullback, with its original small-site universes. -/
 abbrev pull (R : Coefficients.{u}) {U V : Scheme.{u}} (g : U ⟶ V) :=
   proEtaleRingDerivedPullback g (R.ring V) (R.ring U) (R.pull g)
 
-/-- Separately derived geometric direct image.
-Source: Stacks Tag 07A5
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- Separately derived geometric direct image. -/
 abbrev push (R : Coefficients.{u}) {U V : Scheme.{u}} (g : U ⟶ V) :=
   proEtaleRingDerivedDirectImage g (R.ring V) (R.ring U) (R.pull g)
 
-/-- The exact derived open adjunction, with its inherited unit normalization.
-Source: Stacks Tag 03DI
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- The exact derived open adjunction, with its inherited unit normalization. -/
 def openDerivedAdjunction (R : Coefficients.{u}) {U V : Scheme.{u}}
     (j : U ⟶ V) [IsOpenImmersion j] : (openExtension R j).mapDerivedCategory ⊣ pull R j :=
   let J := openExtension R j
@@ -465,9 +441,7 @@ def openDerivedAdjunction (R : Coefficients.{u}) {U V : Scheme.{u}}
     J.mapDerivedCategory P.mapDerivedCategory
 
 /-- The open projection inverse is the adjoint of the open unit tensored with identity,
-followed by inverse tensor pullback. Its inverse is the canonical open projection map.
-Source: Stacks Tags 03DI, 0E8I
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+followed by inverse tensor pullback. Its inverse is the canonical open projection map. -/
 def openProjectionInverse (R : Coefficients.{u}) {U V : Scheme.{u}}
     (j : U ⟶ V) [IsOpenImmersion j]
     (a : ProEtaleTensorModel U (R.ring U)) (b : ProEtaleTensorModel V (R.ring V))
@@ -579,17 +553,7 @@ attribute [-instance] WeilConjectures.integralOperationsSiteSmall
   SheafOfModules.localizedSystemExtensionColimits SheafOfModules.localizedSystemRestrictionAdditive
   SheafOfModules.localizedSystemRestrictionLimits
   SheafOfModules.localizedSystemRestrictionColimits in
-/-- The open projection inverse is invertible.
-Source: Stacks Tag 0E8I
-(blueprint: def-pur-integral-compact-support-coefficient-data).
-Proof: identify derived open extension with a derived equivalence followed by exact
-slice extension. Its unit is invertible by subterminality. Resolve only the ambient
-tensor factor by a flat K-flat complex; the mixed representative comparison and the
-ordinary slice-extension tensor isomorphism show that tensoring any extended object
-remains in the essential image of extension. Thus the counit on the target tensor is
-invertible. The defining adjunct is invertible, since it is the unit tensored with the
-identity followed by the inverse tensor-pullback comparison. Its transpose is extension
-of that adjunct followed by the invertible counit, hence is invertible. -/
+/-- The open projection inverse is invertible. -/
 theorem openProjectionInverse_isIso (R : Coefficients.{u}) {U V : Scheme.{u}}
     (j : U ⟶ V) [IsOpenImmersion j]
     (a : ProEtaleTensorModel U (R.ring U)) (b : ProEtaleTensorModel V (R.ring V))
@@ -627,9 +591,7 @@ theorem openProjectionInverse_isIso (R : Coefficients.{u}) {U V : Scheme.{u}}
   rw [Adjunction.homEquiv_counit]
   infer_instance
 
-/-- The specified open projection isomorphism.
-Source: Stacks Tag 0E8I
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- The specified open projection isomorphism. -/
 def openProjectionIso (R : Coefficients.{u}) {U V : Scheme.{u}}
     (j : U ⟶ V) [IsOpenImmersion j]
     (a : ProEtaleTensorModel U (R.ring U)) (b : ProEtaleTensorModel V (R.ring V))
@@ -638,16 +600,12 @@ def openProjectionIso (R : Coefficients.{u}) {U V : Scheme.{u}}
   (@asIso _ _ _ _ (openProjectionInverse R j a b M N)
     (openProjectionInverse_isIso R j a b M N)).symm
 
-/-- Curried presentation of the already supplied actual derived tensor model.
-Source: Stacks Tag 07A4
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- Curried presentation of the already supplied actual derived tensor model. -/
 abbrev tensorCurried {W : Scheme.{u}}
     {R : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : ProEtaleTensorModel W R) :=
   Functor.curry.obj a.tensor
 
-/-- The open projection followed by the specified f=pj pullback identification.
-Source: blueprint def-exchange-projection, gamma
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- The open projection followed by the specified f=pj pullback identification. -/
 def projectionOpenFactor (R : Coefficients.{u})
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (a : ProEtaleTensorModel X (R.ring X)) (b : ProEtaleTensorModel c.Z (R.ring c.Z))
@@ -661,10 +619,8 @@ def projectionOpenFactor (R : Coefficients.{u})
         (((geometricPullComposition R c.i c.g hc).symm ≪≫
           eqToIso (congrArg (fun g : X ⟶ Y ↦ pull R g) c.comm.symm)).app N)))
 
-/-- The supplied-domain comparison types of def-exchange-projection, fixed componentwise
-by the canonical tensor-pullback and open projection constructions above.
-Source: blueprint def-exchange-projection, supplied-domain paragraph
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- The supplied-domain comparison types of the exchange projection, fixed componentwise
+by the canonical tensor-pullback and open projection constructions above. -/
 structure ProjectionComparisons (R : Coefficients.{u})
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (a : ProEtaleTensorModel X (R.ring X)) (b : ProEtaleTensorModel c.Z (R.ring c.Z))
@@ -687,14 +643,7 @@ structure ProjectionComparisons (R : Coefficients.{u})
     (openProjection.hom.app M).app N = (projectionOpenFactor R c a b hc M N).hom
 
 set_option linter.unusedVariables false in
-/-- These comparison data exist uniquely, since their components were independently fixed.
-Source: Stacks Tags 07A4, 0E8I
-(blueprint: def-pur-integral-compact-support-coefficient-data).
-Proof: curry the canonical natural tensor-pullback comparison. Naturality of the open
-unit and tensor comparison makes openProjectionInverse natural; its inverse and
-pullback composition remain natural. Curry their composite to obtain gamma.
-The two displayed component identities hold by construction. Natural transformations
-are determined by components, and currying is faithful, so the data are unique. -/
+/-- These comparison data exist uniquely, since their components were independently fixed. -/
 theorem projectionComparisons_existsUnique (R : Coefficients.{u})
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (a : ProEtaleTensorModel X (R.ring X)) (b : ProEtaleTensorModel c.Z (R.ring c.Z))
@@ -758,10 +707,8 @@ theorem projectionComparisons_existsUnique (R : Coefficients.{u})
     cases ho
     rfl
 
-/-- The actual compact-support projection from def-exchange-projection, using its
-existing supplied-domain construction and the uniquely normalized comparison data.
-Source: blueprint def-exchange-projection, projection formula
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- The actual compact-support exchange projection, using its existing supplied-domain
+construction and the uniquely normalized comparison data. -/
 def projectionMap (R : Coefficients.{u})
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (a : ProEtaleTensorModel X (R.ring X)) (b : ProEtaleTensorModel c.Z (R.ring c.Z))
@@ -778,9 +725,7 @@ def projectionMap (R : Coefficients.{u})
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The inverse-image coefficient map adjoint to the canonical completed direct-image map.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- The inverse-image coefficient map adjoint to the canonical completed direct-image map. -/
 def completedPullMap {U V : Scheme.{u}} (g : U ⟶ V) :=
   ((proEtaleSheafAdjunction g CommRingCat.{u + 1}).homEquiv _ _).symm
     (sfCompletedCoefficientMap l E g)
@@ -808,13 +753,7 @@ private theorem completed_hom_ext {W : Scheme.{u}}
   intro n
   exact congrArg H.map (h n.unop)
 
-/-- Canonical inverse image of the completed coefficient sheaf is invertible.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: def-pur-integral-compact-support-coefficient-data).
-Proof: the profinite-coefficient inverse-image theorem identifies the pullback of the
-finite quotient system with the source quotient system, compatibly with projections.
-The inverse limit and its constant-section maps identify its completed comparison
-with the adjoint of sfCompletedCoefficientMap, since every projection agrees. -/
+/-- Canonical inverse image of the completed coefficient sheaf is invertible. -/
 theorem completedPullMap_isIso {U V : Scheme.{u}} (g : U ⟶ V) :
     IsIso (completedPullMap l E g) := by
   have he : completedPullMap l E g = (coefficient_inverse_image_iso l E g).hom := by
@@ -830,18 +769,12 @@ theorem completedPullMap_isIso {U V : Scheme.{u}} (g : U ⟶ V) :
 attribute [instance] completedPullMap_isIso
 
 /-- The specified completed coefficient system, with no identification with a discrete
-constant integral sheaf. Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+constant integral sheaf. -/
 def completed : Coefficients.{u} where
   ring := completedIntegralCommRingSheafUnrestricted l E
   pull g := asIso (completedPullMap l E g)
 
-/-- Completed coefficient inverse-image identifications respect composition.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: def-pur-integral-compact-support-coefficient-data).
-Proof: take adjoints and compose with all finite projections. Both sides become the
-same constant quotient pullback-composition map. Its constant-section normalization
-identifies them, and the completed projections are jointly monic. -/
+/-- Completed coefficient inverse-image identifications respect composition. -/
 theorem completedPull_comp {U V W : Scheme.{u}} (h : U ⟶ V) (k : V ⟶ W) :
     (completed l E).pull (h ≫ k) = proEtaleRingCompositeCoefficients h k
       ((completed l E).ring W) ((completed l E).ring V) ((completed l E).ring U)
@@ -868,12 +801,7 @@ theorem completedPull_comp {U V W : Scheme.{u}} (h : U ⟶ V) (k : V ⟶ W) :
 variable (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (i : E →ₐ[ℚ_[l]] F)
 
-/-- Compatibility of the actual completed coefficient inclusion with inverse image.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: def-pur-integral-compact-support-coefficient-data).
-Proof: take adjoints and compose with each target finite projection. The completed
-structure maps become their constant quotient maps and both routes are induced by
-the same inclusion of integer rings. The inverse-limit projections are jointly monic. -/
+/-- Compatibility of the actual completed coefficient inclusion with inverse image. -/
 theorem completedChange_square {U V : Scheme.{u}} (g : U ⟶ V) :
     ((completed l E).pull g).hom ≫ completedCoefficientMap l E F i U =
       (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map
@@ -902,17 +830,13 @@ theorem completedChange_square {U V : Scheme.{u}} (g : U ⟶ V) :
   rw [completedPull_projection, ← Functor.map_comp_assoc, ← hp, Functor.map_comp]
   simp only [Category.assoc]
 
-/-- The finite quotient coefficient system at the positive exponent n.
-Source: Bhatt--Scholze, Definition 6.7.6
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- The finite quotient coefficient system at the positive exponent n. -/
 def finite (n : ℕ) (hn : 1 ≤ n) : Coefficients.{u} where
   ring W := proEtaleConstantRing W (Padic.coefficientExtensionRing l E n)
   pull g := @sfConstantCoefficientIso _ _ g (Padic.coefficientExtensionRing l E n) _
     (Padic.finite_coefficientExtensionRing l E n hn)
 
-/-- The completed coefficient projection at an arbitrary positive exponent.
-Source: Bhatt--Scholze, Definition 6.7.6
-(blueprint: def-pur-integral-compact-support-coefficient-data). -/
+/-- The completed coefficient projection at an arbitrary positive exponent. -/
 def projection (n : ℕ) (hn : 1 ≤ n) (W : Scheme.{u}) :
     (completed l E).ring W ⟶ (finite l E n hn).ring W :=
   completedIntegralCommRingProjectionUnrestricted l E W (n - 1) ≫

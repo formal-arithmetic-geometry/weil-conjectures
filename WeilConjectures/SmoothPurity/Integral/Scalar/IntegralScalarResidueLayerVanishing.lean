@@ -21,19 +21,13 @@ import Mathlib.Algebra.Field.ULift
 This is the support clause of the residue-layer argument.  It isolates the
 finite-residue scalar-extension and interval comparison from the constructibility
 clause of the parent theorem.
-Source: Stacks, sites-modules, lemma-tensor-product-locally-constant; proetale,
-lemma-constructible-serre; parent finite-filtration argument.
-(blueprint: lem-sf-integral-scalar-residue-layer-vanishing).
 
-Proof: the quotient of two consecutive powers of the target uniformizer is the
-finite target residue field.  Multiplication by the appropriate power of the
-uniformizer identifies the quotient with that residue field; cancellation in the
-DVR proves injectivity.  The coefficient map factors through the source residue
-field.  Balanced tensor associativity identifies the resulting layer complex with
-finite-field scalar extension of the source residue reduction.  Exact finite-field
-scalar extension preserves the given finite local models, and restriction to the
-finite quotient ring preserves those models.  Derived homology agrees with the
-homology of the K-flat representative.
+## Implementation details
+
+Multiplication by a power of the target uniformizer identifies the layer quotient with
+the finite target residue field. The coefficient map factors through the source residue
+field, so balanced tensor associativity identifies the layer complex with finite-field
+scalar extension of the source residue reduction, which is exact.
 -/
 
 @[expose] public noncomputable section
@@ -175,10 +169,7 @@ variable (l : ℕ) [Fact l.Prime]
   (ι : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u})
 
 set_option linter.unusedVariables false in
-/-- The out-of-interval vanishing part of the residue-layer estimate.
-Source: Stacks, sites-modules, lemma-tensor-product-locally-constant; proetale,
-lemma-constructible-serre; parent finite-filtration argument.
-(blueprint: lem-sf-integral-scalar-residue-layer-vanishing). -/
+/-- The out-of-interval vanishing part of the residue-layer estimate. -/
 theorem integralScalarResidueLayer_vanishing
     (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory)

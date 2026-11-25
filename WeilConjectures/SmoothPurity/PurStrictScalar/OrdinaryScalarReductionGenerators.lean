@@ -13,7 +13,17 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Ordinary scalar reduction at one quotient level
 
-Source: Stacks 03EK and 0940.
+## Implementation details
+
+For `ordinaryScalarReduction_hom_ext`, the `n`th evaluation of the quotient-system left adjoint
+is the quotient of `M` by the `n`th positive uniformizer power, which is an epimorphism of
+module sheaves. After constant scalar extension every section is locally a sum of tensors
+`b ⊗ (1 ⊗ x)`, so linearity and separatedness give the extensionality. Neither ramification nor
+any balancing comparison is needed.
+
+## References
+
+* [Stacks Project, Tags 03EK and 0940]
 -/
 
 @[expose] public noncomputable section
@@ -66,18 +76,7 @@ private theorem reductionUnit_epi (W : Scheme.{u}) (M : scalarReductionSource l 
   have : Epi (a ≫ c.hom) := hc.symm ▸ inferInstanceAs (Epi v)
   exact (epi_comp_iff_of_isIso a c.hom).mp inferInstance
 
-/-- The reduction-unit tensor sections jointly detect maps from one source level.
-Source: Stacks 03EK (tensor adjunction and sheafification), 0940 (quotient systems).
-Proof: the nth evaluation of the quotient-system left adjoint is the ordinary
-quotient of M by the nth positive uniformizer power, with quotient map induced
-by the adjunction unit. This quotient map is an epimorphism of underlying module
-sheaves: locally every quotient section lifts to M. After constant scalar
-extension, every section locally is a sum of tensors b tensor (1 tensor x).
-If two module maps agree on these sections for every site object, linearity gives
-agreement on the sums and separatedness gives agreement on the original section.
-Sectionwise extensionality then identifies the maps. This applies to any target
-module and needs neither ramification nor any balancing comparison.
-(blueprint: lem-pur-ordinary-scalar-reduction-generators). -/
+/-- The reduction-unit tensor sections jointly detect maps from one source level. -/
 theorem ordinaryScalarReduction_hom_ext (W : Scheme.{u})
     (M : scalarReductionSource l E W) (n : ℕ)
     (N : Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W)

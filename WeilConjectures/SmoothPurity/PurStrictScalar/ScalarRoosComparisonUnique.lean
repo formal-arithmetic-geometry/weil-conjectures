@@ -57,8 +57,18 @@ import all WeilConjectures.CategoryTheory.ExactDerivedSquare.DerivedExactSquareC
 /-! # Uniqueness of the unit-normalized scalar Roos comparison
 
 This is the unchanged comparison-existence proof extracted from the scalar-limit
-reduction module. Source: Stacks 0941
-(blueprint: lem-pur-scalar-roos-comparison-unique).
+reduction module.
+
+## Implementation details
+
+Exact countable products make the Roos functor invert quasi-isomorphisms. For an injective
+tower, `1 - shift` is split epic degreewise and its kernel inclusion is a quasi-isomorphism;
+`strictRoosComparison` with the universal right-derived unit gives the comparison, and its
+normalization on all resolutions proves uniqueness.
+
+## References
+
+* [Stacks Project, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -82,12 +92,7 @@ attribute [-instance] WeilConjectures.SemilinearSections.abelianSheafify
   WeilConjectures.SemilinearSections.locallyBijective WeilConjectures.SemilinearSections.hasDerived
 
 /-- The shifted-cone/total-limit identification is uniquely fixed by the actual
-ordinary-limit inclusion and the universal derived unit on every tower complex.
-Source: Stacks 0941 (blueprint: lem-pur-scalar-roos-comparison-unique).
-Proof: exact countable products make the Roos functor invert quasi-isomorphisms.
-For an injective tower, 1-shift is split epic degreewise; its kernel inclusion
-(0,x) is a quasi-isomorphism. Apply strictRoosComparison with the universal
-right-derived unit. Its normalization on all resolutions proves uniqueness. -/
+ordinary-limit inclusion and the universal derived unit on every tower complex. -/
 theorem scalarRoosComparison_existsUnique (W : Scheme.{u}) :
     ∃! κ : roosF (A := Modules
         (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) ⋙

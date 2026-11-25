@@ -27,8 +27,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 /-!
 # The finite rank-one Kummer residue
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-a1-kummer,
-`example-closed-support` (blueprint: example-closed-support).
+The local data for the closed-support example on the affine line.
 
 The boundary below is specified by the snake boundary of the actual section complexes
 of every injective resolution. In particular its sign is fixed. Module-valued derived
@@ -45,25 +44,21 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 namespace WeilConjectures.PurityFiniteSetting.RankOne
 
-/-- Evaluation on a site object, the section functor used in the support definition.
-Source: blueprint proof Step 4 (blueprint: example-closed-support). -/
+/-- Evaluation on a site object, the section functor used in the support definition. -/
 abbrev sections {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     (A : Type (u + 1)) [CommRing A] (W : C) :=
   sheafToPresheaf J (ModuleCat.{u + 1} A) ⋙ (evaluation _ _).obj (op W)
 
-/-- The recorded open immersion is the inclusion of its basic open.
-Source: blueprint affine-line datum (blueprint: example-closed-support). -/
+/-- The recorded open immersion is the inclusion of its basic open. -/
 instance openImmersion_isOpenImmersion (Y : Scheme.{u}) :
     IsOpenImmersion (openImmersion Y) :=
   inferInstanceAs (IsOpenImmersion (((Line Y).basicOpen (coordinate Y)).ι))
 
-/-- The standard punctured-line object of the small etale site.
-Source: blueprint proof Step 1 (blueprint: example-closed-support). -/
+/-- The standard punctured-line object of the small etale site. -/
 def openObject (Y : Scheme.{u}) : (Line Y).Etale :=
   Scheme.Etale.mk (openImmersion Y)
 
-/-- Restriction from the affine line to its punctured open, whose complement is the origin.
-Source: blueprint proof Step 4 (blueprint: example-closed-support). -/
+/-- Restriction from the affine line to its punctured open, whose complement is the origin. -/
 def restriction (Y : Scheme.{u}) : openObject Y ⟶ Scheme.Etale.mk (𝟙 (Line Y)) :=
   MorphismProperty.Over.homMk (openImmersion Y)
     (by change openImmersion Y ≫ 𝟙 (Line Y) = openImmersion Y; simp)

@@ -16,7 +16,17 @@ import all WeilConjectures.Algebra.Homology.Signed.SignedLineScalarTensorTower
 
 /-! # Positive powers of a coefficient-identified pullback comparison
 
-Source: Stacks, Modules on Sites, Tag 03EL; coefficient-twist clause 3.
+A comparison of first modules extends to all nonnegative tensor powers.
+
+## Implementation details
+
+The comparison is built recursively: at zero use pullback of the coefficient unit, at one
+use the given comparison, and in general compose the tensor pullback comparison with the
+tensor of the preceding map and the given comparison.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -120,14 +130,7 @@ private theorem powerUnitIso_section (V : Y.ProEt) (a : R.obj.obj (op V)) :
         (SheafOfModules.pullback_unit_pure _ V a)
 
 /-- A comparison of first modules extends to nonnegative powers, with the unit and
-binary tensor formulas. No root sections, local freeness, or negative powers enter.
-Source: Stacks, Modules on Sites, Tag 03EL; coefficient-twist clause 3.
-(blueprint: lem-weil-frobenius-positive-power-transport).
-Proof: use the ordinary tensor pullback comparison and the canonical identification
-between the monoidal tensor and the sheafified sectionwise tensor. Their unit-section
-formulas agree. At zero use pullback of the coefficient unit. At one use e. Recursively
-compose the tensor pullback comparison with the tensor of the preceding map and e.
-The pure-tensor formulas give the two asserted normalizations at every step. -/
+binary tensor formulas. No root sections, local freeness, or negative powers enter. -/
 theorem frobeniusPositivePowerTransport
     (M : proEtaleRingModules Y R) (N : proEtaleRingModules X S)
     (e : (proEtaleRingModulePullback g R S c).obj M ≅ N) :

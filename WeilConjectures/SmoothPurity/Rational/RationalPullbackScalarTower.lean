@@ -10,8 +10,22 @@ public import WeilConjectures.DeligneLaumon.SfScalarExtensionComposition
 
 /-! # The coefficient tower equation for rational pullback
 
-Source: the pullback clause of `scalarOperationsOrdinary_tower`, followed by the
-completed and rational comparison normalizations.
+The pullback clause of `scalarOperationsOrdinary_tower`, followed by the completed and rational
+comparison normalizations.
+
+## Implementation details
+
+Use the pullback clause of `scalarOperationsOrdinary_tower` on `E → L → M` and conjugate its
+ordinary scalar functors by `scalarCompletionIso`; adjacent inverse completion comparisons
+cancel, and the normalization of `sfIntegralScalarComp` identifies the remaining scalar
+associators. Restricting to constructible objects and applying rational localization, the
+component specifications of `rationalPullbackScalarComparison` and `sfRationalScalarComp` and
+the integral-map formula for `rationalDerivedPullback` give the equation. No faithfulness of
+finite reduction is used.
+
+## References
+
+* [Stacks Project, Tags 07A4 and 099N]
 -/
 
 @[expose] public noncomputable section
@@ -300,24 +314,7 @@ private theorem scalar_comp_component (W : Scheme.{u})
 
 end Rational
 
-/-- Rational pullback commutes with a tower of the prescribed scalar extensions.
-Source: `scalarOperationsOrdinary_tower`, pullback clause, and the scalar comparison
-paragraph of prose-03-02; Stacks Project, Tags 07A4 and 099N.
-(blueprint: lem-weil-rational-pullback-scalar-tower).
-
-Proof: use the pullback clause of scalarOperationsOrdinary_tower on E -> L -> M.
-Conjugate its ordinary scalar functors by scalarCompletionIso on the input and on
-its pullback. Naturality moves these completion comparisons through the pullback
-comparison; adjacent inverse completion comparisons cancel. The normalization of
-sfIntegralScalarComp identifies the remaining scalar associators. Restrict this
-identity to constructible objects, using integralPullbackScalarComparison for the
-restricted components. Apply rational localization to the equality. The component
-specifications of rationalPullbackScalarComparison and sfRationalScalarComp identify
-its terms with the displayed ones, and the integral-map formula for
-rationalDerivedPullback identifies the mapped associator. This proves the equation
-for every rational object, since these have unchanged integral objects. No
-faithfulness of finite reduction is used. Repeated fields and identity maps use the
-same equation; zero objects and empty schemes impose no additional condition. -/
+/-- Rational pullback commutes with a tower of the prescribed scalar extensions. -/
 theorem rationalPullbackScalarComparison_tower
     (l : ℕ) [Fact l.Prime]
     (E L M : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

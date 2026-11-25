@@ -56,11 +56,21 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 
 /-! # Normalized finite scalar coordinates on modules and strict towers
 
-Source: Stacks 03CY, 03DB, 03EK, 06YY and 0940; Bhatt--Scholze, Lemma 3.4.12.
-(blueprint: def-pur-finite-scalar-coordinate-data).
-
 These are canonical coordinate constructions used in the proper biproduct formula.
 They do not replace the proved finite-basis theorem on complexes.
+
+## Implementation details
+
+The finite-basis cochain calculation in degree zero yields the ordinary coordinate maps, which
+are determined by the sheafified balanced tensor universal property. They identify restricted
+extension with a finite power, so finite free extension is exact; localizing the ordinary
+coordinates and using the universal scalar counit gives the derived coordinates. Exactness on
+strict towers holds because finite limits and colimits in functor categories are pointwise.
+
+## References
+
+* [Stacks Project, Tags 03CY, 03DB, 03EK, 06YY and 0940]
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 3.4.12]
 -/
 
 @[expose] public noncomputable section
@@ -187,11 +197,7 @@ noncomputable local instance (W : Scheme.{u}) {R : Sheaf (ProEt.topology W) Comm
 
 attribute [local irreducible] CategoryTheory.Limits.limit
 
-/-- The ordinary coordinate isomorphism is uniquely fixed on all local tensors.
-Source: Stacks 03CY, 03EK (blueprint: def-pur-finite-scalar-coordinate-data).
-Proof: the finite-basis cochain calculation in degree zero yields the coordinate maps
-and their inverses. Its formula makes them natural in every module and determines
-them uniquely by the sheafified balanced tensor universal property. -/
+/-- The ordinary coordinate isomorphism is uniquely fixed on all local tensors. -/
 theorem ordinaryCoordinates_existsUnique (W : Scheme.{u})
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S) (d : ℕ)
     (e : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((adicLisseForget W).obj R)) ≅
@@ -209,8 +215,7 @@ theorem ordinaryCoordinates_existsUnique (W : Scheme.{u})
     (pbcExtensionExistence a).choose_spec.choose
     (pbcExtensionExistence a).choose_spec.choose_spec.choose
 
-/-- The unique ordinary finite-basis coordinates, with no independent choices.
-Source: Stacks 03EK (blueprint: def-pur-finite-scalar-coordinate-data). -/
+/-- The unique ordinary finite-basis coordinates, with no independent choices. -/
 def ordinaryCoordinates (W : Scheme.{u})
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S) (d : ℕ)
     (e : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((adicLisseForget W).obj R)) ≅
@@ -220,11 +225,7 @@ def ordinaryCoordinates (W : Scheme.{u})
 
 attribute [local irreducible] reductionChange reductionDerivedChange
 
-/-- A finite free coefficient extension is exact on all module sheaves.
-Source: Stacks 03CY (blueprint: def-pur-finite-scalar-coordinate-data).
-Proof: the ordinary coordinate comparison identifies restricted extension with a
-finite power. Restriction is exact and reflects exactness because its underlying
-abelian sheaf is unchanged. Finite powers in the abelian category are exact. -/
+/-- A finite free coefficient extension is exact on all module sheaves. -/
 theorem finiteScalar_exact (W : Scheme.{u})
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S) (d : ℕ)
     (e : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((adicLisseForget W).obj R)) ≅
@@ -338,12 +339,7 @@ private theorem localizedCoordinates {A B : Type*} [Category A] [Category B]
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso B)
 
-/-- The derived coordinates are uniquely normalized on every cochain counit.
-Source: Stacks 06YY, 03DB (blueprint: def-pur-finite-scalar-coordinate-data).
-Proof: finite freeness makes ordinary extension exact. Localize the ordinary
-coordinates and use the universal scalar counit to identify its derived extension.
-The exact localization preserves finite products. This yields the displayed
-normalization, which determines the natural transformation by universality. -/
+/-- The derived coordinates are uniquely normalized on every cochain counit. -/
 theorem derivedCoordinates_existsUnique (W : Scheme.{u})
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S) (d : ℕ)
     (e : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((adicLisseForget W).obj R)) ≅
@@ -377,8 +373,7 @@ theorem derivedCoordinates_existsUnique (W : Scheme.{u})
     (pbcExtend a) (pbcRestrict a)
     (pbcDerivedExtend a) c d (ordinaryCoordinates W a d e)
 
-/-- Finite-basis derived coordinates with the specified universal counit.
-Source: Stacks 06YY (blueprint: def-pur-finite-scalar-coordinate-data). -/
+/-- Finite-basis derived coordinates with the specified universal counit. -/
 def derivedCoordinates (W : Scheme.{u})
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S) (d : ℕ)
     (e : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((adicLisseForget W).obj R)) ≅
@@ -386,15 +381,12 @@ def derivedCoordinates (W : Scheme.{u})
     pbcDerivedExtend a ⋙ pbcDerivedRestrict a ≅ finitePowerFunctor d :=
   (derivedCoordinates_existsUnique W a d e).exists.choose
 
-/-- Scalar extension on diagrams is additive, pointwise.
-Source: additivity of scalar tensor (blueprint: def-pur-finite-scalar-coordinate-data). -/
+/-- Scalar extension on diagrams is additive, pointwise. -/
 instance scalarTowerExtension_additive (W : Scheme.{u})
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S) :
     ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (pbcExtend a)).Additive := inferInstance
 
-/-- Exactness of finite-free extension on strict towers.
-Source: finite limits and colimits in functor categories are pointwise
-(blueprint: def-pur-finite-scalar-coordinate-data). -/
+/-- Exactness of finite-free extension on strict towers. -/
 theorem scalarTowerExtension_exact (W : Scheme.{u})
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S) (d : ℕ)
     (e : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((adicLisseForget W).obj R)) ≅

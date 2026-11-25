@@ -12,8 +12,19 @@ import Mathlib.RingTheory.Finiteness.Ideal
 
 /-! # The ramified finite quotient square on coefficient sections
 
-Source: the quotient-ideal calculation in Step 1 of
-`lem-pur-finite-quotient-module-balancing`.
+## Implementation details
+
+For `ramifiedQuotient_sectionPushout`, put `r = n + 1`, `A = O_E` and `B = O_F`. Taking `r`th
+powers of the ramification identity gives `(t^r)B = (v^(er))`. For a constant ring sheaf the
+principal quotient map is surjective on sections, with kernel the principal ideal of the
+constant section `t^r`, and likewise for `B` and `v^(er)`. Hence `B_n(U)` is `B(U)` modulo the
+extension of the kernel of `A(U) → A_n(U)`, and the quotient universal property gives the
+pushout. This also covers empty `U`, `n = 0` and `e = 1`; no assertion that evaluation
+preserves arbitrary sheaf colimits is used.
+
+## References
+
+* [Stacks Project, Modules on Sites, Tag 093M]
 -/
 
 @[expose] public section
@@ -286,32 +297,7 @@ private theorem lifted_coefficient_kernel_fg (m : ℕ) :
   exact Submodule.fg_span_singleton _
 
 /-- The square of actual constant-to-finite coefficient maps is a pushout on sections.
-This statement concerns only rings, without a module or a tensor comparison witness.
-
-Source: Step 1 of `lem-pur-finite-quotient-module-balancing`; Stacks Project,
-Modules on Sites, lemmas `lemma-constant-exact`, `lemma-tensor-with-finitely-presented`,
-and `lemma-completion-flat` (Tag 093M); and the constant quotient cone of
-`def-weil-completed-integral-coefficients`.
-(blueprint: lem-pur-ramified-quotient-section-pushout).
-
-Proof: put r=n+1, A=O_E and B=O_F. Taking rth powers of the ramification
-identity gives map(A→B,(t^r))=(v^(er)). The limit-lift equation identifies
-constant-to-completion followed by projection with the constant quotient map.
-For a constant ring sheaf, the principal quotient map is surjective on sections:
-a set-theoretic section of the discrete quotient gives a section after applying
-the constant sheaf functor to sets and its comparison with underlying ring sheaves.
-Its kernel on sections is the principal ideal of the constant section t^r.
-Indeed the same constant-set construction applies to the surjection A→(t^r),
-while preservation of finite limits identifies the latter constant set with the
-kernel of the quotient map. The corresponding assertion holds for B and v^(er).
-The image ideal in B(U) is therefore precisely the kernel of B(U)→B_n(U),
-because the discrete ramification identity writes the two generators as multiples
-of one another and these identities remain true on constant sections. Thus B_n(U)
-is B(U) modulo the extension of the kernel of A(U)→A_n(U). The quotient universal
-property gives the pushout, with lower map the specified ramified quotient lift;
-commutativity is checked on discrete representatives, then sheafified. This also
-works when U is empty (all section rings are zero), n=0, or e=1. No assertion that
-evaluation preserves arbitrary sheaf colimits is used. -/
+This statement concerns only rings, without a module or a tensor comparison witness. -/
 theorem ramifiedQuotient_sectionPushout (W : Scheme.{u}) (e : ℕ)
     (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) (n : ℕ) :
     let g := integralConstantToCompletionOfUniverses l E W ≫

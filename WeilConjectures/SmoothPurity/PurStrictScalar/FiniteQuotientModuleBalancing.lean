@@ -12,8 +12,18 @@ import all WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorCanc
 
 /-! # Tensor balancing for one finite quotient module
 
-Source: Stacks Project, Modules on Sites, Tag 03EK, and tensor/quotient cancellation.
-(blueprint: lem-pur-finite-quotient-module-balancing).
+## Implementation details
+
+Write `A = O_E`, `B = O_F` and `r = n + 1`. The ramification hypothesis gives
+`(t^r)B = (v^(er))`, so `B ⊗_A (A/t^r)` is `B/v^(er)`, compatibly with both quotient maps.
+For a module `M` over the constant sheaf of `A/t^r`, the balanced map sends `b ⊗ x` to
+`bar(b) ⊗ x`, with inverse `bar(b) ⊗ x ↦ b ⊗ x`, well defined since `t^r` annihilates `M`.
+These presheaf maps commute with restriction and descend through module sheafification. Only
+one module and one exponent are involved.
+
+## References
+
+* [Stacks Project, Modules on Sites, Tag 03EK]
 -/
 
 @[expose] public noncomputable section
@@ -147,29 +157,7 @@ variable (l : ℕ) [Fact l.Prime]
   (i : E →ₐ[ℚ_[l]] F)
 
 /-- Tensor cancellation for a single module over a positive finite quotient.
-No naturality or uniqueness of the witnesses is assumed.
-
-Source: Stacks Project, Modules on Sites, Tag 03EK (tensor/restriction adjunction),
-and the quotient tensor calculation in Step 7 of
-`lem-pur-compact-support-strict-scalar-mate`.
-(blueprint: lem-pur-finite-quotient-module-balancing).
-
-Proof: write A = O_E, B = O_F and r = n+1. The ramification hypothesis gives
-(t^r)B = (v^(er)), by taking rth powers of the stated equality of ideals.
-Consequently B tensor_A (A/t^r) is B/v^(er), compatibly with both quotient maps.
-For a module M over the constant sheaf of A/t^r, the balanced map sends b tensor x
-to bar(b) tensor x. Its inverse sends bar(b) tensor x to b tensor x: changing a
-lift by an element of t^r B gives zero since t^r annihilates M. Equivalently use
-the tensor/quotient universal property, without requiring sectionwise lifts of
-arbitrary sheafified sections. These inverse presheaf maps commute with restriction
-and descend through module sheafification. The constant-to-completion map followed
-by the completed quotient projection is the constant quotient map. Transport the
-comparison through the specified ordinary scalar functors using their object
-identifications with sheafified tensors. This gives exactly the displayed formula
-on every original pure tensor. Only this one module and this one exponent are
-involved; no compatibility among independently chosen witnesses is asserted.
-For M = 0 or an empty site object the maps are the unique zero-module maps;
-r and er are positive, so both quotient projections have the stated indices. -/
+No naturality or uniqueness of the witnesses is assumed. -/
 theorem finiteQuotientModuleBalancing_exists (W : Scheme.{u}) (e : ℕ)
     (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) (n : ℕ)
     (M : pbcModules W ((PurCompactSupport.finite l E (n + 1)

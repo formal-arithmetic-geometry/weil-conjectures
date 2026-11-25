@@ -11,8 +11,9 @@ import all WeilConjectures.CategoryTheory.RoosTensor.RoosTensorNormalization
 
 /-! # Tensor normalization for unit-normalized support Roos comparisons
 
-Source: Stacks Tags 03EK and 0941.
-(blueprint: lem-pur-compact-support-scalar-roos-tensor-normalization).
+## References
+
+* [Stacks Project, Tags 03EK and 0941]
 -/
 
 @[expose] public noncomputable section

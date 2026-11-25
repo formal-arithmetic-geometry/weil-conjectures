@@ -16,8 +16,9 @@ import Mathlib.Algebra.Field.ZMod
 
 /-! # Finite shifted Hom over arbitrary algebraically closed base fields
 
-Source: SGA 4½, finiteness theorem; the mapping-limit argument in
-proposition-six-operations-change-coefficients and the existing qcqs shifted-Hom proof.
+## References
+
+* SGA 4½, finiteness theorem
 -/
 
 @[expose] public noncomputable section
@@ -82,21 +83,7 @@ private theorem intrinsic_hom_finite_algClosed
     (eK.homCongr eM))
 
 /-- Finite shifted Hom into every restricted reduction over any algebraically
-closed base field. No separatedness of the structure morphism is assumed.
-
-Source: SGA 4½, finiteness theorem, and the scalar-adjunction proof of
-`lem-sf-integral-reduction-shifted-hom-finite-qcqs`.
-(blueprint: lem-sf-integral-reduction-shifted-hom-finite-alg-closed).
-
-Proof: shift the first integral constructible input. Its residue support, and
-that of the target, bound the Tor amplitudes of all finite reductions by the
-residue Tor theorem. That theorem's auxiliary finite-field datum is unrelated
-to the geometric base: construct one using any prime different from l. The
-finite-ring étale/pro-étale comparison is fully faithful on bounded constructible
-objects and reflects the Tor bounds. Finite-coefficient étale Hom finiteness
-therefore gives a finite Hom set between the two reductions over the given
-algebraically closed field. Transpose by the scalar extension/restriction
-adjunction. This includes index zero, zero objects and empty schemes. -/
+closed base field. No separatedness of the structure morphism is assumed. -/
 theorem integralReduction_shiftedHom_finite_algClosed
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]

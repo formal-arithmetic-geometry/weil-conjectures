@@ -106,14 +106,13 @@ import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTowerCoh
 /-!
 # Realization of integral pullback comparisons
 
-Source: Stacks Project, Tags 099N(2),(5), 0D6D, 06YY and 0941; blueprint
-`sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md`,
-final common-stage transport paragraph
-(blueprint: lem-trf-integral-pullback-comparison-realization).
-
 The sequence site retains the whole quotient diagram. Its pullback is the left
 adjoint of the actual sectionwise direct image. Scalar change is the universal
 derived change of rings for the actual map of quotient coefficient sheaves.
+
+## References
+
+* Stacks Project, Tags 099N(2),(5), 0D6D, 06YY and 0941
 -/
 
 @[expose] public noncomputable section
@@ -137,9 +136,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Apply reduction to the defining pullback realization, then the actual
 whole-system action counit. By integralComparisonReductionCounit_formula this
-is derived coefficient change of the K-injective-normalized epsilon.
-Source: Stacks 099N, 0941
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+is derived coefficient change of the K-injective-normalized epsilon. -/
 def integralComparisonPullbackCounit {Y Z : Scheme.{t}} (f : Z ⟶ Y)
     (SY : CoefficientDerivedSystemCalculus l E Y)
     (SZ : CoefficientDerivedSystemCalculus l E Z)
@@ -151,9 +148,7 @@ def integralComparisonPullbackCounit {Y Z : Scheme.{t}} (f : Z ⟶ Y)
     Functor.whiskerLeft (SY.reduction ⋙ integralComparisonDerivedSequencePullback l E f)
       SZ.adjunction.counit
 
-/-- The scalar analogue of the entire-system counit construction.
-Source: Stacks 06YY, 0941
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+/-- The scalar analogue of the entire-system counit construction. -/
 def integralComparisonScalarCounit (Y : Scheme.{t})
     (SE : CoefficientDerivedSystemCalculus l E Y)
     (SL : CoefficientDerivedSystemCalculus l L Y)
@@ -167,9 +162,7 @@ def integralComparisonScalarCounit (Y : Scheme.{t})
 
 /-- Coherent realization interfaces at one coefficient field. Each constituent
 has the actual representative normalization; effectivity is asserted only on
-the intrinsic constructible-complete domain with ell invertible.
-Source: Stacks 099N(5), 0941
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+the intrinsic constructible-complete domain with ell invertible. -/
 structure IntegralComparisonCoefficientData where
   /-- The published normalized reduction calculus on each small pro-etale site. -/
   system : ∀ X : Scheme.{u}, CoefficientDerivedSystemCalculus l E X
@@ -190,8 +183,7 @@ structure IntegralComparisonCoefficientData where
     IsIso (((system X).adjunction.unit).app K.obj)
 
 /-- The scalar realization, with its entire-system counit invertible on the
-intrinsic constructible domain. Source: Stacks 06YY, 0941
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+intrinsic constructible domain. -/
 structure IntegralComparisonScalarData
     (DE : IntegralComparisonCoefficientData l E) (DL : IntegralComparisonCoefficientData l L) where
   /-- The cochain-normalized scalar realization on every scheme. -/
@@ -204,9 +196,7 @@ structure IntegralComparisonScalarData
 
 /-- One simultaneously normalized system for all finite coefficient extensions.
 Small coefficient models and their embeddings express subextensions of any fixed
-algebraic closure without identifying its universe with the site universe.
-Source: blueprint final common-stage transport paragraph; Stacks 0941
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+algebraic closure without identifying its universe with the site universe. -/
 structure IntegralComparisonSystem (l : ℕ) [Fact l.Prime] where
   /-- All one-field realization data, with the same functors as the dependencies. -/
   coefficient : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E]
@@ -219,9 +209,7 @@ structure IntegralComparisonSystem (l : ℕ) [Fact l.Prime] where
 
 variable (D : IntegralComparisonSystem.{u} l)
 
-/-- Eta is realization of h-star applied to the whole-system counit for k.
-Source: Stacks 099N, 0941
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+/-- Eta is realization of h-star applied to the whole-system counit for k. -/
 def integralComparisonEta {V W Z : Scheme.{u}}
     [∀ v : V, Invertible (l : V.residueField v)]
     [∀ w : W, Invertible (l : W.residueField w)]
@@ -241,9 +229,7 @@ def integralComparisonEta {V W Z : Scheme.{u}}
           ((D.coefficient E).system V) ((D.coefficient E).system W)
           ((D.coefficient E).roos W) ((D.coefficient E).pullback k)).app K.obj)))
 
-/-- Lambda is realization of scalar change of the whole-system pullback counit.
-Source: Stacks 06YY, 099N, 0941
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+/-- Lambda is realization of scalar change of the whole-system pullback counit. -/
 def integralComparisonLambda {X Y : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -263,9 +249,7 @@ def integralComparisonLambda {X Y : Scheme.{u}}
           ((D.coefficient E).roos X) ((D.coefficient E).pullback f)).app K.obj)))
 
 /-- Mu is pullback of the whole-system scalar counit, followed by the inverse
-of the generator-normalized scalar/pullback associator on entire diagrams.
-Source: Stacks 06YY, 099N, 0941
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+of the generator-normalized scalar/pullback associator on entire diagrams. -/
 def integralComparisonMu {X Y : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -288,8 +272,7 @@ def integralComparisonMu {X Y : Scheme.{u}}
         (((D.coefficient E).system Y).reduction.obj K.obj)).symm
 
 /-- The specified integral compositor is Rlim of the finite compositor, followed
-by eta inverse. Source: Stacks 0D6D, 0941
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+by eta inverse. -/
 def integralComparisonComposition {V W Z : Scheme.{u}}
     [∀ v : V, Invertible (l : V.residueField v)]
     [∀ w : W, Invertible (l : W.residueField w)]
@@ -303,9 +286,7 @@ def integralComparisonComposition {V W Z : Scheme.{u}}
         (((D.coefficient E).system V).reduction.obj K.obj)) ≪≫
     (integralComparisonEta l E D h k K).symm
 
-/-- The specified scalar comparison is lambda followed by mu inverse.
-Source: Stacks 06YY, 099N, 0941
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+/-- The specified scalar comparison is lambda followed by mu inverse. -/
 def integralComparisonScalar {X Y : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -314,16 +295,13 @@ def integralComparisonScalar {X Y : Scheme.{u}}
 
 /-- The actual scalar extension on the intrinsic full categories. The auxiliary
 prime-to-characteristic parameter of the existing interface is discharged by
-p=ell+1; this supplies no assumption on schemes or reductions.
-Source: blueprint integral scalar extension, order 1460
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+p=ell+1; this supplies no assumption on schemes or reductions. -/
 def integralComparisonConstructibleScalar (X : Scheme.{u}) :=
   sfConstructibleIntegralScalarExtension (l + 1) l
     (Nat.ne_of_lt (Nat.lt_succ_self l)) E L ι X
 
 /-- The identity pullback is the identity finite diagram followed by the
-inverse derived-completeness unit. Source: Stacks 099N, 0D6D
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+inverse derived-completeness unit. -/
 def integralComparisonUnit (X : Scheme.{u})
     [∀ x : X, Invertible (l : X.residueField x)]
     (K : sfIntegralConstructibleCategory l E X) :
@@ -336,8 +314,7 @@ def integralComparisonUnit (X : Scheme.{u})
     (asIso (((D.coefficient E).system X).adjunction.unit.app K.obj)).symm
 
 /-- Identity scalar extension under ordinary multiplication and the specified
-completion map chi. Source: blueprint scalar-extension unit; Stacks 0941
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+completion map chi. -/
 def integralComparisonScalarUnit (X : Scheme.{u})
     (K : sfIntegralConstructibleCategory l E X) :
     (integralScalarExtension l E E (AlgHom.id ℚ_[l] E) X).obj K.obj ≅ K.obj :=
@@ -348,9 +325,7 @@ variable (M : Type u) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M
   (j : L →ₐ[ℚ_[l]] M)
 
 /-- The integral scalar associator is precisely the ordinary derived tensor
-associator conjugated by the specified completion maps chi.
-Source: blueprint common-stage transport; Stacks 06YY, 0941
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+associator conjugated by the specified completion maps chi. -/
 def integralComparisonScalarAssociator (X : Scheme.{u})
     (K : sfIntegralConstructibleCategory l E X) :
     (integralScalarExtension l L M j X).obj
@@ -367,9 +342,7 @@ end WeilConjectures
 
 namespace WeilConjectures
 
-/-- Composition laws for the specified families, on strict systems and their realization.
-Source: Stacks 0D6D, 0941; blueprint common-stage transport
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+/-- Composition laws for the specified families, on strict systems and their realization. -/
 structure IntegralComparisonCompositionLaws
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -458,9 +431,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) (D : IntegralComparisonSystem.{u} l)
 
-/-- The left side of the scalar/composition equation, in the full constructible category.
-Source: blueprint common-stage transport; Stacks 06YY, 0D6D
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+/-- The left side of the scalar/composition equation, in the full constructible category. -/
 def integralComparisonScalarSquareLeft {V W Z : Scheme.{u}}
     [∀ v : V, Invertible (l : V.residueField v)]
     [∀ w : W, Invertible (l : W.residueField w)]
@@ -477,9 +448,7 @@ def integralComparisonScalarSquareLeft {V W Z : Scheme.{u}}
         ((constructibleIntegralPullback l E k).obj K)).hom ≫
       (integralDerivedPullback l L h).map (integralComparisonScalar l E L ι D k K).hom)
 
-/-- The right side, with the very same source and target integral objects.
-Source: blueprint common-stage transport; Stacks 06YY, 0D6D
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+/-- The right side, with the very same source and target integral objects. -/
 def integralComparisonScalarSquareRight {V W Z : Scheme.{u}}
     [∀ v : V, Invertible (l : V.residueField v)]
     [∀ w : W, Invertible (l : W.residueField w)]
@@ -495,9 +464,7 @@ def integralComparisonScalarSquareRight {V W Z : Scheme.{u}}
         ((integralComparisonConstructibleScalar l E L ι V).obj K)).hom)
 
 /-- All coherence equations for the normalized construction. Equations on systems precede
-realization; the integral equations refer to the displayed counit-built eta, lambda and mu.
-Source: Stacks 099N, 0D6D, 06YY, 0941; blueprint common-stage transport
-(blueprint: lem-trf-integral-pullback-comparison-realization). -/
+realization; the integral equations refer to the displayed counit-built eta, lambda and mu. -/
 structure IntegralComparisonRealizationCoherence
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

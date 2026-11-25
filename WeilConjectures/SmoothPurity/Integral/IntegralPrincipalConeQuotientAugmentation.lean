@@ -15,8 +15,10 @@ import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperation
 
 /-! # The levelwise principal-cone augmentation to integral quotients
 
-Source: Stacks Tags 0A0E, 093M and 0941.
-(blueprint: lem-pur-integral-principal-cone-quotient-augmentation) -/
+## References
+
+* Stacks Project, Tags 0A0E, 093M, 06YP and 0941
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -289,23 +291,7 @@ private theorem levelAugmentation
 
 /-- K-flat tensoring of the regular principal-quotient resolution gives a strict,
 levelwise quasi-isomorphic comparison of augmented towers. The quotient augmentation
-is the actual x mapped to 1 tensor x map, not a freely chosen comparison.
-
-Source: Stacks Tags 0A0E, 093M and 06YP.
-(blueprint: lem-pur-integral-principal-cone-quotient-augmentation).
-
-Proof: completed_exact gives the short exact sequence whose maps are multiplication
-by the actual uniformizer power and the actual completed projection. Apply the
-normalized regular-quotient cone augmentation with its section formula. K-flatness
-makes its component on P a quasi-isomorphism. The section formula for μ identifies
-its positive powers with the scalar endomorphisms used there. The fixed object and map
-identifications of ordinary scalar extension identify the target with IntegralOnSlice
-level n. On each cone summand the adjacent square commutes: on the shifted summand
-both augmentations are zero, and on the unshifted summand quotient transition sends
-1 tensor x to 1 tensor x. Sheafification and equality of maps in every degree prove
-the strict transition equation. The same unshifted formula identifies the composite
-of the cone inclusion with the specified quotient augmentation. This works for zero
-P and for n=0, which denotes the first positive power. -/
+is the actual x mapped to 1 tensor x map, not a freely chosen comparison. -/
 theorem integralPrincipalConeQuotientAugmentation
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : AlgebraicGeometry.Scheme.{t})

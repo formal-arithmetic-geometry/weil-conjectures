@@ -48,13 +48,13 @@ import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorLevelCon
 
 /-! # Finite-level models for normalized integral scalar comparisons
 
-Source: blueprint sec-smooth-purity/sk-def-sf-operations, integral/common-stage paragraph;
-Stacks Tags 07A4, 08J9, 099N
-(blueprint: lem-pur-integral-scalar-finite-comparison-models).
-
 The representative maps below fix the comparisons before any common-stage descent.
 They use arbitrary finite extensions between the small coefficient models, independently
 of the universe containing the algebraic closure.
+
+## References
+
+* Stacks Project, Tags 06YU, 07A4, 08J9, 08TC and 099N
 -/
 
 @[expose] public noncomputable section
@@ -99,9 +99,7 @@ variable (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- The prescribed representative normalization, retained as a named predicate.
-Source: Stacks 07A4, 08J9, 08TC
-(blueprint: lem-pur-integral-scalar-finite-comparison-models). -/
+/-- The prescribed representative normalization, retained as a named predicate. -/
 def scalarPullbackLevelNormalization {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     (α : integralOperationsPullbackLevel l E f n ⋙
@@ -125,13 +123,7 @@ def scalarPullbackLevelNormalization {X Y : AlgebraicGeometry.Scheme.{u}}
             ((integralOrdinaryScalar l E L ι Y).obj (P.X i)) (op V) 1
             (integralOrdinaryTensorSection l E L ι Y (P.X i) (op V) 1 x))
 
-/-- Scalar extension of a finite pullback level, before taking the Roos complex.
-Source: Stacks 07A4, 099N (blueprint: lem-pur-integral-scalar-finite-comparison-models).
-Proof: on the displayed generators send 1 tensor f-star(1 tensor x) to
-f-star(1 tensor (1 tensor x)). Extend by the target completed-ring action. The
-canonical constant-section ring map makes this balanced. Kan extension and
-sheafification give a unique sheaf map. It commutes with the differential and is
-natural in P since the generator formula commutes with every chain map. -/
+/-- Scalar extension of a finite pullback level, before taking the Roos complex. -/
 theorem scalarPullbackLevel_existsUnique {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ) :
     ∃! α : integralOperationsPullbackLevel l E f n ⋙
@@ -156,8 +148,7 @@ theorem scalarPullbackLevel_existsUnique {X Y : AlgebraicGeometry.Scheme.{u}}
     intro V x
     exact (hβ P i V x).trans (hα P i V x).symm
 
-/-- The generator-normalized finite-level scalar pullback map.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-scalar-finite-comparison-models). -/
+/-- The generator-normalized finite-level scalar pullback map. -/
 def scalarPullbackLevel {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     integralOperationsPullbackLevel l E f n ⋙
         (integralOrdinaryScalar l E L ι X).mapHomologicalComplex (ComplexShape.up ℤ) ⟶
@@ -165,9 +156,7 @@ def scalarPullbackLevel {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y) (n : 
         integralOperationsPullbackLevel l L f n :=
   (scalarPullbackLevel_existsUnique l E L ι f n).exists.choose
 
-/-- The prescribed representative normalization, retained as a named predicate.
-Source: Stacks 07A4, 08J9, 08TC
-(blueprint: lem-pur-integral-scalar-finite-comparison-models). -/
+/-- The prescribed representative normalization, retained as a named predicate. -/
 def scalarPullbackTowerNormalization {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y)
     (α : integralOperationsPullbackTowerFunctor l E f ⋙
@@ -179,12 +168,7 @@ def scalarPullbackTowerNormalization {X Y : AlgebraicGeometry.Scheme.{u}}
         (α.app P).app (op n) = (scalarPullbackLevel l E L ι f n).app P
 
 /-- The level maps form the strict tower map; the component equations retain all
-reduction maps, rather than choosing a map between unrelated limits.
-Source: Stacks 07A4, 08TC (blueprint: lem-pur-integral-scalar-finite-comparison-models).
-Proof: the two composites with each consecutive reduction have the same generator
-formula. Uniqueness of the level maps proves the consecutive squares, and induction
-proves all tower squares. Naturality in P is componentwise. This constructs the tower
-transformation, and the component equations give uniqueness. -/
+reduction maps, rather than choosing a map between unrelated limits. -/
 theorem scalarPullbackTower_existsUnique {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) :
     ∃! α : integralOperationsPullbackTowerFunctor l E f ⋙
@@ -203,8 +187,7 @@ theorem scalarPullbackTower_existsUnique {X Y : AlgebraicGeometry.Scheme.{u}}
     (integralScalarPullbackLevelReduction l E L ι f (scalarPullbackLevel l E L ι f)
       (fun n ↦ (scalarPullbackLevel_existsUnique l E L ι f n).exists.choose_spec))
 
-/-- The strict scalar pullback tower map.
-Source: Stacks 08TC (blueprint: lem-pur-integral-scalar-finite-comparison-models). -/
+/-- The strict scalar pullback tower map. -/
 def scalarPullbackTower {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y) :
     integralOperationsPullbackTowerFunctor l E f ⋙
         (Functor.whiskeringRight ℕᵒᵖ _ _).obj
@@ -213,8 +196,7 @@ def scalarPullbackTower {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y) :
         integralOperationsPullbackTowerFunctor l L f :=
   (scalarPullbackTower_existsUnique l E L ι f).exists.choose
 
-/-- The chain comparison is the diagonal Roos map of the prescribed tower map.
-Source: Stacks 07A4, 08TC (blueprint: lem-pur-integral-scalar-finite-comparison-models). -/
+/-- The chain comparison is the diagonal Roos map of the prescribed tower map. -/
 def scalarPullbackChain {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     ((integralOrdinaryScalar l E L ι X).mapHomologicalComplex (ComplexShape.up ℤ)).obj
@@ -226,9 +208,7 @@ def scalarPullbackChain {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y)
       ((integralOperationsPullbackTowerFunctor l E f).obj P) ≫
     integralOperationsRoosMap ((scalarPullbackTower l E L ι f).app P)
 
-/-- The prescribed representative normalization, retained as a named predicate.
-Source: Stacks 07A4, 08J9, 08TC
-(blueprint: lem-pur-integral-scalar-finite-comparison-models). -/
+/-- The prescribed representative normalization, retained as a named predicate. -/
 def scalarTensorLevelNormalization (W : AlgebraicGeometry.Scheme.{u}) (n : ℕ)
     (α : integralOperationsTensorLevel l E W n ⋙
         (integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ) ⟶
@@ -255,13 +235,7 @@ def scalarTensorLevelNormalization (W : AlgebraicGeometry.Scheme.{u}) (n : ℕ)
             ((integralOrdinaryScalar l E L ι W).obj (Q.X q)) U 1
             (integralOrdinaryTensorSection l E L ι W (Q.X q) U 1 y))
 
-/-- Scalar extension of each finite tensor level is fixed on total tensor generators.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-scalar-finite-comparison-models).
-Proof: send 1 tensor ((1 tensor x) tensor (1 tensor y)) to
-(1 tensor (1 tensor x)) tensor (1 tensor (1 tensor y)), and extend by the target
-completed scalar action. Balance follows from the coefficient quotient map. This
-commutes with restrictions and both signed differentials, so extends uniquely
-through sheafification and the direct-sum totalization. -/
+/-- Scalar extension of each finite tensor level is fixed on total tensor generators. -/
 theorem scalarTensorLevel_existsUnique (W : AlgebraicGeometry.Scheme.{u}) (n : ℕ) :
     ∃! α : integralOperationsTensorLevel l E W n ⋙
         (integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ) ⟶
@@ -301,8 +275,7 @@ theorem scalarTensorLevel_existsUnique (W : AlgebraicGeometry.Scheme.{u}) (n : �
       (hα P Q p q U x y).symm).trans
         (congrArg (((α.app (P, Q)).f (p + q)).val.app U) hs.symm))
 
-/-- The normalized finite tensor level map.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-scalar-finite-comparison-models). -/
+/-- The normalized finite tensor level map. -/
 def scalarTensorLevel (W : AlgebraicGeometry.Scheme.{u}) (n : ℕ) :
     integralOperationsTensorLevel l E W n ⋙
         (integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ) ⟶
@@ -311,9 +284,7 @@ def scalarTensorLevel (W : AlgebraicGeometry.Scheme.{u}) (n : ℕ) :
           integralOperationsTensorLevel l L W n :=
   (scalarTensorLevel_existsUnique l E L ι W n).exists.choose
 
-/-- The prescribed representative normalization, retained as a named predicate.
-Source: Stacks 07A4, 08J9, 08TC
-(blueprint: lem-pur-integral-scalar-finite-comparison-models). -/
+/-- The prescribed representative normalization, retained as a named predicate. -/
 def scalarTensorTowerNormalization (W : AlgebraicGeometry.Scheme.{u})
     (α : integralOperationsTensorTowerFunctor l E W ⋙
         (Functor.whiskeringRight ℕᵒᵖ _ _).obj
@@ -324,12 +295,7 @@ def scalarTensorTowerNormalization (W : AlgebraicGeometry.Scheme.{u})
   ∀ (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ),
         (α.app (P, Q)).app (op n) = (scalarTensorLevel l E L ι W n).app (P, Q)
 
-/-- The tensor level maps respect the specified strict reductions.
-Source: Stacks 08TC (blueprint: lem-pur-integral-scalar-finite-comparison-models).
-Proof: both consecutive composites send a total tensor generator to the reduction
-of its two entries. The uniqueness of scalarTensorLevel identifies those composites.
-Iterate consecutive squares for every tower arrow; naturality is componentwise.
-The component equations determine the transformation uniquely. -/
+/-- The tensor level maps respect the specified strict reductions. -/
 theorem scalarTensorTower_existsUnique (W : AlgebraicGeometry.Scheme.{u}) :
     ∃! α : integralOperationsTensorTowerFunctor l E W ⋙
         (Functor.whiskeringRight ℕᵒᵖ _ _).obj
@@ -350,8 +316,7 @@ theorem scalarTensorTower_existsUnique (W : AlgebraicGeometry.Scheme.{u}) :
     (integralScalarTensorLevelReduction l E L ι W (scalarTensorLevel l E L ι W)
       (fun n ↦ (scalarTensorLevel_existsUnique l E L ι W n).exists.choose_spec))
 
-/-- The strict scalar tensor tower map.
-Source: Stacks 08TC (blueprint: lem-pur-integral-scalar-finite-comparison-models). -/
+/-- The strict scalar tensor tower map. -/
 def scalarTensorTower (W : AlgebraicGeometry.Scheme.{u}) :
     integralOperationsTensorTowerFunctor l E W ⋙
         (Functor.whiskeringRight ℕᵒᵖ _ _).obj
@@ -361,8 +326,7 @@ def scalarTensorTower (W : AlgebraicGeometry.Scheme.{u}) :
           integralOperationsTensorTowerFunctor l L W :=
   (scalarTensorTower_existsUnique l E L ι W).exists.choose
 
-/-- The tensor chain map is the diagonal Roos map of that strict tower map.
-Source: Stacks 07A4, 08TC (blueprint: lem-pur-integral-scalar-finite-comparison-models). -/
+/-- The tensor chain map is the diagonal Roos map of that strict tower map. -/
 def scalarTensorChain (W : AlgebraicGeometry.Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ)).obj
@@ -380,14 +344,7 @@ attribute [local irreducible] integralOperationsPullbackComplexFunctor
   integralOperationsTensorComplexFunctor integralOperationsPullbackTowerFunctor
   integralOperationsTensorTowerFunctor scalarPullbackChain scalarTensorChain
 
-/-- Finite free ordinary coefficient extension preserves the good representatives.
-Source: Stacks 06YU, 07A4 (blueprint: lem-pur-integral-scalar-finite-comparison-models).
-Proof: the object and morphism formulas of integralOrdinaryScalarWitness give
-an isomorphism with the concrete changeOfRingsComplex. Convert flatness on the site
-to exactness of tensorRight and apply changeOfRings_isKFlat_of_flat_terms. Tensoring
-the comparison isomorphism transports K-flatness; its degree components transport
-flatness. This general change-of-rings argument needs no finite-free basis and
-imposes no equality of site object and arrow sizes. -/
+/-- Finite free ordinary coefficient extension preserves the good representatives. -/
 theorem scalarGood (W : AlgebraicGeometry.Scheme.{u})
     (P : (integralOperationsGoodComplex l E W).FullSubcategory) :
     integralOperationsGoodComplex l L W
@@ -445,9 +402,7 @@ theorem scalarGood (W : AlgebraicGeometry.Scheme.{u})
       (SheafOfModules.siteSheafTensorRightIso.{u+1, u, u+1} S
         (((F.mapHomologicalComplex (.up ℤ)).obj P.obj).X i)).symm hi
 
-/-- The prescribed representative normalization, retained as a named predicate.
-Source: Stacks 07A4, 08J9, 08TC
-(blueprint: lem-pur-integral-scalar-finite-comparison-models). -/
+/-- The prescribed representative normalization, retained as a named predicate. -/
 def scalarPullbackOrdinaryNormalization {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y)
     (α : integralDerivedPullback l E f ⋙ integralOrdinaryDerivedScalar l E L ι X ≅

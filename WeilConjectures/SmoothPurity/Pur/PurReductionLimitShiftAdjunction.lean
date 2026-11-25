@@ -43,14 +43,19 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionIn
 /-!
 # Shift compatibility of the coefficient reduction/limit adjunction
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors/
-`sk-thm-sf-package/fix-prop-coherence.proof.md`, coefficient-comparison sentence
-(blueprint: lem-pur-reduction-limit-shift-adjunction).
-
 The finite K-flat comparison fixes the reduction shift. The actual resolution
 comparison fixes the limit shift on every K-injective replacement, including
 `j[r]`. The Roos triangles below have this very limit as their first vertex;
 their connecting maps satisfy the signed shift equation for that comparison.
+
+## Implementation details
+
+The total limit carries the canonical composite shift `totalLimitCommShift`, and `S.reduction`
+the left-adjoint mate shift of `S.adjunction`. The finite shifts come from
+`purReductionFiniteShiftNormalization`, and the normalized Roos triangles from
+`purCoefficientRoosShiftNormalization`. Since the adjunction commutes with the shifts by
+construction of the mate, `Adjunction.shift_unit_app` and
+`Adjunction.commShiftIso_hom_app_counit_app_shift` give the unit and counit equations.
 -/
 
 @[expose] public noncomputable section
@@ -81,30 +86,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
 /-- Every supplied coherent coefficient calculus admits the prescribed termwise
-shift comparisons, with its actual unit and counit.
-
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors/
-`sk-thm-sf-package/fix-prop-coherence.proof.md`, coefficient-comparison sentence
-(blueprint: lem-pur-reduction-limit-shift-adjunction).
-
-Proof:
-1. Give the total limit the canonical composite shift `totalLimitCommShift` of
-   lem-pur-sequence-kinjective-comparison-shifts, and give `S.reduction` the
-   left-adjoint mate shift of the actual adjunction `S.adjunction`.
-2. lem-pur-reduction-finite-shift-normalization supplies the finite shifts,
-   `finite_shift_model` and the shift compatibility of every evaluation.
-3. The ringed-site Grothendieck theorem (prop-pur-kinjective-resolutions-exist)
-   and the derived-category product construction give countable products.
-4. lem-pur-coefficient-roos-shift-normalization supplies the replacement-model
-   limit equation, the normalized Roos triangles and their signed shift equations.
-5. The adjunction commutes with the shifts by construction of the mate, so
-   Mathlib's `Adjunction.shift_unit_app` and
-   `Adjunction.commShiftIso_hom_app_counit_app_shift` give the unit and counit
-   equations for every integer r.
-6. At r=0 the comparisons are identities; at r=1 and -1 the first cone
-   coordinate is negated. Signs multiply for repeated shifts. Zero complexes,
-   degree-zero sheaves and the empty scheme require no additional hypothesis.
--/
+shift comparisons, with its actual unit and counit. -/
 theorem purReductionLimitShiftAdjunction
     (S : CoefficientDerivedSystemCalculus l E W)
     (hS : CoefficientDerivedSystemCoherence l E W S) :

@@ -11,13 +11,7 @@ public import WeilConjectures.SmoothPurity.Integral.IntegralOperationsScalarComp
 import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTowerCoherence
 import Mathlib.CategoryTheory.Adjunction.Unique
 
-/-! # The scalar pullback square before total derived limit
-
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md,
-Weil-structures paragraph, scalar compatibility of the pullback comparisons
-(blueprint: lem-sf-integral-scalar-pullback-counit-compatibility).
--/
+/-! # The scalar pullback square before total derived limit -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -55,32 +49,7 @@ private noncomputable def scalarCounitModels
   pullback := fun f ↦ D.pullback f
 
 /-- The prescribed scalar/pullback map satisfies the square of actual counits in
-whole-system reduction coordinates.
-
-Source: the Weil-structures paragraph of
-literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md;
-the pullback equation of lem-pur-scalar-extension-tower-coherence
-(blueprint: lem-sf-integral-scalar-pullback-counit-compatibility).
-
-Proof: choose a flat-term K-flat representative P of K. Its reductions and their
-actual quotient maps form the whole system R_E K. The normalization fields of C
-identify the pullback and scalar realizations with these quotient presentations.
-The four maps below are reduction of the corresponding realization followed by
-the actual reduction/limit counit. On this simultaneous presentation, the scalar
-pullback association sends (x tensor a) tensor b to x tensor iota(a)b; its inverse
-inserts one. The cochain counits are the multiplication maps on the same factors.
-The two sides therefore agree on local homogeneous tensor generators, on both
-Roos coordinates, and with every quotient transition. The completion maps in
-scalarPullbackCompleted are the quotient augmentations with zero shifted
-coordinate, so conjugating the ordinary scalar map by those completion maps gives
-the left side of precisely this square. Localize the strict diagram on the
-K-flat resolving class and use the normalized total-limit/Roos comparisons of C.
-This gives equality in the derived category of entire quotient systems. The
-canonical comparisons between K-flat representatives preserve the diagrams, so
-the equality is independent of the chosen P. No flatness of a ramified finite
-quotient coefficient map is required. Completeness only makes the two completion
-maps invertible, and the supplied proof hF is proof irrelevant. -/
+whole-system reduction coordinates. -/
 theorem integralScalarPullbackCounit_compatibility
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

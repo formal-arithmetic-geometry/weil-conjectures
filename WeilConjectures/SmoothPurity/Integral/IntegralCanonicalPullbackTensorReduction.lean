@@ -12,13 +12,14 @@ public import WeilConjectures.SmoothPurity.Integral.IntegralPullbackTensorCompos
 
 /-! # Coherent reduction of the canonical integral pullback/tensor comparison
 
-Source: Stacks 07A4 and 0941
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
-
 The coherent reduction of the canonical integral comparison is the transported system
 comparison, conjugated by the whole-system pullback comparison of
 `integralPullbackSystemComparison` and by the reduction/tensor comparison built from the
 Roos-normalized tensor realization and the coherent counit.
+
+## References
+
+* Stacks Project, Tags 03D2, 07A4, 099N(5) and 0941
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +39,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E]
 
 /-- The counit of the coherent reduction/limit adjunction is invertible at system tensors
-of reductions of constructible objects.
-Source: Stacks 0941 (blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+of reductions of constructible objects. -/
 theorem integralSystemTensor_counit_isIso (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)]
     (MN : sfIntegralConstructibleCategory l E W × sfIntegralConstructibleCategory l E W) :
@@ -50,9 +50,7 @@ theorem integralSystemTensor_counit_isIso (W : Scheme.{u})
   (pullbackTensorComparisonCounits l E (𝟙 W) MN.1 MN.2).1
 
 /-- Coherent reduction carries the constructible integral tensor to the system tensor,
-through the Roos-normalized tensor realization and the coherent counit.
-Source: Stacks 07A4, 0941
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+through the Roos-normalized tensor realization and the coherent counit. -/
 def integralSystemTensorReduction (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)] :
     constructibleIntegralTensor l E W ⋙
@@ -97,9 +95,7 @@ def integralSystemTensorReduction (W : Scheme.{u})
         exact congrArg (_ ≫ ·) h₂
       exact key)
 
-/-- Components of the transported Roos-normalized pullback realization.
-Source: Stacks 03D2, 0941
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+/-- Components of the transported Roos-normalized pullback realization. -/
 theorem completedQuotientPullbackRealization_hom_app {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategory (scalarReductionSource l E Y)) :
     (CompletedQuotient.completedQuotientPullbackRealization l E f).hom.app K =
@@ -109,9 +105,7 @@ theorem completedQuotientPullbackRealization_hom_app {X Y : Scheme.{u}} (f : X �
   rfl
 
 /-- The whole-system pullback comparison at a constructible object, read in the coherent
-sequence-site derived category.
-Source: Stacks 099N(5), 0941
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+sequence-site derived category. -/
 def integralPullbackSystemComparisonApp {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
@@ -122,9 +116,7 @@ def integralPullbackSystemComparisonApp {X Y : Scheme.{u}} (f : X ⟶ Y)
   ((integralPullbackSystemComparison l E).choose f).app K
 
 /-- The whole-system pullback comparison is the reduction of the Roos-normalized
-realization followed by the coherent counit.
-Source: Stacks 099N(5), 0941
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+realization followed by the coherent counit. -/
 theorem integralPullbackSystemComparisonApp_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
@@ -147,13 +139,7 @@ theorem integralPullbackSystemComparisonApp_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The coherent reduction of the canonical integral pullback/tensor comparison is the
 transported system comparison, conjugated by the whole-system pullback comparisons and the
-reduction/tensor comparisons.
-Source: Stacks 07A4, 0941
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
-Proof: the whole-system pullback comparison is the reduction of the Roos-normalized
-realization followed by the coherent counit (`integralPullbackSystemComparison`). Apply
-`reduction_limitConjugate_eq` to the defining composite of
-`canonicalIntegralPullbackTensor`. -/
+reduction/tensor comparisons. -/
 theorem canonicalIntegralPullbackTensor_systemReduction {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]

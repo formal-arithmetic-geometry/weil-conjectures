@@ -9,15 +9,20 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorConstrai
 import all WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorConstraints
 import WeilConjectures.SmoothPurity.Pullback.PullbackTensorIntegralUnitCoherence
 
-/-! Rational unit coherence for the completed pullback tensor comparison.
+/-!
+# Rational unit coherence for the completed pullback tensor comparison
 
-Source: Stacks Project, Tags 07A4 and 0941; the rational part of
-`lem-pur-pullback-tensor-unit-coherence`.
-(blueprint: lem-pur-pullback-tensor-rational-unit-coherence)
+The rational part of the unit coherence of the pullback tensor comparison.
+
+## Implementation details
 
 The proof localizes the integral unit comparison and transports the normalized
 left and right unitor equations. The localized comparison is unique by the
 same unit cancellation argument.
+
+## References
+
+* [Stacks Project, Tags 07A4 and 0941]
 -/
 
 @[expose] public noncomputable section

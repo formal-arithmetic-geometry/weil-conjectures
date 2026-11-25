@@ -12,7 +12,20 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Factoring the ordinary projection through the constant completed ring
 
-Source: Stacks 0940, section-derived-limits, and 03D7, change of rings.
+## Implementation details
+
+The completed-ring projections form a morphism from the constant completed ring to the quotient
+ring on the sequence site. The first ringed morphism takes identity inverse and direct images on
+sheaves of sets and restriction of scalars along that ring map on modules; the second takes
+constant inverse image and limit direct image, with identity structural ring map. Constant-ring
+module sheaves are realized as towers via the explicit strict-system equivalence, so restriction
+along the quotient ring map gives exactly the recorded coefficient restriction tower. Scalar
+restriction leaves additive sheaves unchanged, which gives both exactness fields. No
+surjectivity or flatness of any quotient map is used.
+
+## References
+
+* [Stacks Project, Tag 0940 (derived limits) and Tag 03D7 (change of rings)]
 -/
 
 @[expose] public noncomputable section
@@ -273,27 +286,7 @@ private def towerEvaluation (n : ℕ) :
           ((Functor.const ℕᵒᵖ).obj (completedIntegralCommRingSheafUnrestricted l E W)) n :=
   NatIso.ofComponents (fun N ↦ Iso.refl _) (by intros; rfl)
 
-/-- The ringed factorization, once the ordinary adjoints have been constructed.
-Source: Stacks 0940, section-derived-limits, and 03D7, change of rings
-(blueprint: lem-pur-sequence-constant-ring-factorization).
-
-Proof: the completed-ring projections form a morphism from the constant completed
-ring to the quotient ring on the sequence site. Take identity inverse and direct
-images on sheaves of sets and restriction along that ring map on modules; this is
-the first ringed morphism. Take constant inverse image and limit direct image,
-with identity structural ring map, for the second. Realize constant-ring module
-sheaves as towers using the explicit strict-system equivalence. Its evaluation
-maps are identities on sections and its horizontal arrows are the original
-restrictions. Restriction along the quotient ring map therefore gives exactly the
-recorded coefficient restriction tower. The second module direct image is its
-inverse limit. The supplied constant-inverse-image comparison identifies the
-original inverse image with the composite; uniqueness of right adjoints gives
-the direct-image comparison. The original coordinate structural-map equation
-proves the ring composition equation by sectionwise extensionality. The original
-limit comparison and the restriction-tower comparison give the module composition
-comparison. Finally scalar restriction leaves additive sheaves unchanged, so
-kernels and sheafified cokernels are unchanged and both exactness fields hold.
-This uses no surjectivity or flatness of any quotient map. -/
+/-- The ringed factorization, once the ordinary adjoints have been constructed. -/
 theorem purSequenceConstantRingFactorization (O : PurSequenceOrdinaryAdjoints l E W) :
     Nonempty (PurSequenceRingedFactorization l E W O) := by
   refine ⟨{

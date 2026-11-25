@@ -12,8 +12,10 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
 /-! # Ordinary tensor chain comparisons and coefficient towers
 
-Source: Stacks 03EL, 07A4; coefficient-comparison coherence in the blueprint.
-(blueprint: lem-pur-integral-scalar-ordinary-tensor-chain-tower). -/
+## References
+
+* Stacks Project, Tags 03EL and 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -183,21 +185,7 @@ private theorem ordinaryTensorTowerAux (W : AlgebraicGeometry.Scheme.{u})
   erw [hk, hk, hk]
   exact (hc P Q p q U x y).symm
 
-/-- Ordinary pure-tensor chain comparisons commute with scalar associators.
-Source: Stacks 03EL, 07A4; blueprint scalar comparison proof step 9
-(blueprint: lem-pur-integral-scalar-ordinary-tensor-chain-tower).
-Proof: the normalization of the ordinary tensor comparison is the map
-s tensor (x tensor y) to (s tensor x) tensor (1 tensor y). For a second
-extension, both routes on c tensor (b tensor (x tensor y)) give
-(c*j(b) tensor x) tensor (1 tensor y). The ordinary scalar associator has
-precisely this multiplication formula. This proves equality first on unit scalar
-generators, then on all scalar generators by linearity, and on all tensor
-generators by balance. The sheafification adjunction extends the equality to
-sheaves. Coproduct injections in each total degree extend it to the total
-complex, and the prescribed chain comparisons already respect the two signed
-differential summands. Thus the degreewise equality proves equality of chain
-maps. This uses no boundedness or flatness assumptions; the zero and identity
-cases are the same multiplication calculation. -/
+/-- Ordinary pure-tensor chain comparisons commute with scalar associators. -/
 theorem integralScalarOrdinaryTensorChainTower (W : AlgebraicGeometry.Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     ((integralOrdinaryScalar l L F j W).mapHomologicalComplex (.up ℤ)).map

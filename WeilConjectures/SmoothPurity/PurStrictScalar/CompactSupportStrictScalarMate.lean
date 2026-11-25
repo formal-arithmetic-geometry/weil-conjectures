@@ -20,8 +20,9 @@ import WeilConjectures.SmoothPurity.PurStrictScalar.StrictProperBiproductCoordin
 
 /-! # Finite scalar proper/open mate on strict compact-support reduction towers
 
-Source: Stacks 07A6, 0B56, 0940 and 0E8I.
-(blueprint: lem-pur-compact-support-strict-scalar-mate).
+## References
+
+* [Stacks Project, Tags 07A6, 0B56, 0940 and 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -56,8 +57,7 @@ variable (l : ℕ) [Fact l.Prime]
   (i : E →ₐ[ℚ_[l]] F)
 
 /-- The canonical pullback/tensor balancing square on whole strict towers, fixed
-by the normalized scalar and geometric composite adjunctions.
-Source: Stacks 07A6, 0B56 (blueprint: lem-pur-compact-support-strict-scalar-mate). -/
+by the normalized scalar and geometric composite adjunctions. -/
 def strictScalarPull {Z W : Scheme.{u}} (g : Z ⟶ W) :
     G (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g ⋙ T l E F i Z ≅
       T l E F i W ⋙ G (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) g :=

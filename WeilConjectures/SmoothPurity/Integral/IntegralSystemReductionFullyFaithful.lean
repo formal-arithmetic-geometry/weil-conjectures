@@ -16,8 +16,10 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # Fully faithful coherent reduction of constructible integral objects
 
-Source: Stacks Project, Tags 099N and 0941; Bhatt--Scholze, Lemma 3.5.7
-(blueprint: lem-pod-integral-system-reduction-fully-faithful).
+## References
+
+* Stacks Project, Tags 099N(2),(5) and 0941
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Lemma 3.5.7
 -/
 
 @[expose] public noncomputable section
@@ -31,32 +33,27 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Positive uniformizer quotients, in the coefficient universe.
-Source: Stacks 099N (blueprint: lem-pod-integral-system-reduction-fully-faithful). -/
+/-- Positive uniformizer quotients, in the coefficient universe. -/
 abbrev integralSystemRings (n : ℕ) : CommRingCat.{u} :=
   CommRingCat.of (Padic.coefficientExtensionRing l E (n + 1))
 
-/-- The actual adjacent quotient maps.
-Source: Stacks 099N (blueprint: lem-pod-integral-system-reduction-fully-faithful). -/
+/-- The actual adjacent quotient maps. -/
 abbrev integralSystemTransition (n : ℕ) :
     integralSystemRings l E (n + 1) ⟶ integralSystemRings l E n :=
   CommRingCat.ofHom (Padic.coefficientExtensionTransition l E (n + 1))
 
-/-- Finiteness of each positive quotient.
-Source: Stacks 099N (blueprint: lem-pod-integral-system-reduction-fully-faithful). -/
+/-- Finiteness of each positive quotient. -/
 instance integralSystemRings_finite (n : ℕ) : Finite (integralSystemRings l E n) :=
   Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))
 
 /-- The already specified reduction, restricted to the actual constructible category.
-The sequence-site presentations agree definitionally, including quotient maps.
-Source: Stacks 0941 (blueprint: lem-pod-integral-system-reduction-fully-faithful). -/
+The sequence-site presentations agree definitionally, including quotient maps. -/
 def integralSystemReduction (X : Scheme.{u}) : sfIntegralConstructibleCategory l E X ⥤
     finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) X :=
   (sfIntegralConstructible l E X).ι ⋙
     (coefficientDerivedSystemEvaluationCalculus l E X).choose.reduction
 
-/-- Evaluation of coherent reduction is the specified derived scalar extension.
-Source: Stacks 099N (blueprint: lem-pod-integral-system-reduction-fully-faithful). -/
+/-- Evaluation of coherent reduction is the specified derived scalar extension. -/
 def integralSystemReductionEvaluation (X : Scheme.{u}) (n : ℕ) :
     integralSystemReduction l E X ⋙
         finiteSystemDerivedEvaluation (integralSystemRings l E) (integralSystemTransition l E) X n ≅
@@ -91,18 +88,7 @@ private theorem restricted_full_faithful
         simp }
   exact ⟨ff.full, ff.faithful⟩
 
-/-- Coherent reduction is fully faithful on derived-complete constructible objects.
-Source: Stacks 099N(2),(5), 0941; Bhatt--Scholze, Lemma 3.5.7
-(blueprint: lem-pod-integral-system-reduction-fully-faithful).
-
-Proof: use the reduction/total-limit adjunction of the coefficient evaluation calculus.
-Its unit projects to the canonical scalar-reduction units. The Roos triangle in
-IsSfDerivedComplete and the strict Roos comparison therefore identify that unit with
-an isomorphism, naturally on the full constructible subcategory. For objects K,L,
-the adjunction identifies Hom(RK,RL) with Hom(K,LRL); compose with the inverse unit
-at L. The triangle identities show that this is inverse to reduction on Hom.
-This proves fullness and faithfulness of the coherent system functor, rather than
-claiming that separate finite evaluations detect equality of derived morphisms. -/
+/-- Coherent reduction is fully faithful on derived-complete constructible objects. -/
 theorem integralSystemReduction_fullyFaithful (X : Scheme.{u})
     [∀ x : X, Invertible (l : X.residueField x)] :
     (integralSystemReduction l E X).Full ∧ (integralSystemReduction l E X).Faithful := by

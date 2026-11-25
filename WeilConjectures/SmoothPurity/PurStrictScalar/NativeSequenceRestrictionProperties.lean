@@ -26,8 +26,17 @@ import WeilConjectures.Algebra.Homology.System.SystemEvaluationTopos
 
 /-! # Right adjointness and inverse-limit acyclicity of native sequence restriction
 
-Source: Stacks Project, Cohomology on Sites, Tags 0940 and 0941.
-(blueprint: lem-pur-native-sequence-restriction-properties).
+## Implementation details
+
+The completion projections form a map from the constant completed ring sheaf to the
+quotient-ring sequence. Under the sequence/strict-system equivalence its restriction functor
+equals native restriction, so the extension/restriction adjunction gives right adjointness, and
+restricted-tower resolution acyclicity transports along the equivalence. No assertion that
+scalar restriction preserves K-injectivity is used.
+
+## References
+
+* [Stacks Project, Cohomology on Sites, Tags 0940 and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -43,18 +52,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGe
 namespace WeilConjectures.PurStrictScalar
 
 /-- Native scalar restriction is right adjoint, and a K-injective resolution of its
-value on a K-injective native complex becomes a quasi-isomorphism after inverse limit.
-Source: Stacks 0940 and 0941
-(blueprint: lem-pur-native-sequence-restriction-properties).
-Proof: the actual completion projections form a map from the constant completed ring
-sheaf to the quotient-ring sequence. Under the sequence/strict-system equivalence,
-its restriction functor equals native restriction: its objects have the prescribed
-restricted actions, and its transitions and morphisms are the original section maps.
-The generic extension/restriction adjunction and the equivalence prove right adjointness.
-The equivalence preserves K-injectivity. Restricted-tower resolution acyclicity therefore
-says that applying inverse limit to any stated resolution gives a quasi-isomorphism.
-Transport this assertion along the functor equality. No assertion that scalar restriction
-preserves K-injectivity is used. -/
+value on a K-injective native complex becomes a quasi-isomorphism after inverse limit. -/
 theorem nativeSequenceRestriction_properties
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u}) :

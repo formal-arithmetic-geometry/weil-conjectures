@@ -11,8 +11,19 @@ import all WeilConjectures.AlgebraicGeometry.Pbc.PbcRationalAutomorphismScalarCo
 
 /-! # Localization of the completed scalar associator
 
-Source: Stacks Tag 07A6, the derived scalar adjunction and its unit normalization.
-(blueprint: lem-pur-completed-scalar-associator-localization).
+## Implementation details
+
+For `completedTensorModel_composition`, each ordinary scalar adjunction is localized and its left
+functor conjugated by `completedTensorModel`; on K-flat complexes the resulting unit satisfies
+the defining equation of `pbcDerivedScalarAdjunction`, so uniqueness identifies the two
+adjunctions. The localized restriction compositor is `pbcDerivedRestrictComp`, and
+`leftAdjointUniq` is characterized by preservation of the unit. All counits used are invertible
+because `completedTensor_exact` holds; there are no boundedness, nonzero-object, or
+nonempty-site assumptions.
+
+## References
+
+* [Stacks Project, Tag 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -113,21 +124,7 @@ private theorem model_composition
   exact NatTrans.congr_app he K
 
 /-- The completed scalar associator agrees with exact localization under the
-counit-normalized models. Source: Stacks Tag 07A6 (lemma-adjoint)
-(blueprint: lem-pur-completed-scalar-associator-localization).
-Proof: localize each ordinary scalar adjunction. Conjugate its left functor by
-completedTensorModel. On a K-flat complex the resulting unit satisfies precisely
-the defining equation of pbcDerivedScalarAdjunction: this follows from
-completedTensorModel_counit and the ordinary adjunction unit. Uniqueness in
-pbcDerivedScalarAdjunction_exists therefore identifies the two adjunctions.
-The ordinary restriction compositor is the identity on sections; its localization
-is by definition pbcDerivedRestrictComp. Localization preserves adjunction
-composition and transport by this compositor, as follows by their unit formulas.
-Finally leftAdjointUniq is characterized by preservation of the unit, so its
-localized ordinary instance is the completed derived instance conjugated by the
-three exact models. This gives the equation below. All comparisons are natural
-and all counits used here are invertible because completedTensor_exact holds;
-there are no boundedness, nonzero-object, or nonempty-site assumptions. -/
+counit-normalized models. -/
 theorem completedTensorModel_composition
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

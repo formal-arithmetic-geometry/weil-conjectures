@@ -11,8 +11,19 @@ import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-! # Finite free coefficients and the direct-image scalar mate
 
-Source: Stacks Project, Tags 0B56 and 07A6; Bhatt--Scholze, Lemma 6.8.2(1).
-(blueprint: lem-pur-finite-free-proper-scalar-comparison).
+## Implementation details
+
+For `properComparison_isIso_of_finiteFree`, the product basis is reindexed by `ULift (Fin d)`
+and `finiteFreeDirectImageCoherence` gives invertibility for the normalized scalar models. The
+iterated-mates identity identifies that geometric mate with the inverse scalar mate of the same
+restriction/direct-image square, and conjugation transports invertibility to
+`properComparison`. Rank zero, the empty scheme and the zero complex are included; neither
+properness nor constructibility, completeness, or finite Tor amplitude is required.
+
+## References
+
+* [Stacks Project, Tags 0B56 and 07A6]
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2(1)]
 -/
 
 @[expose] public section
@@ -56,24 +67,7 @@ private theorem inverseMate_isIso_of_isIso
 namespace WeilConjectures.PurCompactSupport
 
 /-- A globally finite free coefficient extension commutes with derived direct image.
-The arrow is the specified mate, rather than an arbitrary isomorphism of its endpoints.
-
-Source: Stacks Project, Tags 0B56 (projection-formula map) and 07A6 (derived adjunction);
-Bhatt--Scholze, Lemma 6.8.2(1), finite free coefficient argument.
-(blueprint: lem-pur-finite-free-proper-scalar-comparison).
-
-Proof: reindex the displayed product basis by ULift (Fin d) and identify finite
-products with finite coproducts. Apply finiteFreeDirectImageCoherence, which proves
-invertibility for its normalized scalar models by the finite-basis column calculation.
-The iterated-mates identity identifies that theorem's geometric mate with the inverse
-scalar mate of the same restriction/direct-image square. Finally conjugating the
-identity of the right adjoints gives the unique isomorphisms from those scalar
-models to the specified pbcDerivedExtend functors. Naturality of mates under these
-two conjugates identifies the two inverse scalar mates up to these isomorphisms,
-so invertibility transports to properComparison. No equality of derived Hom maps
-is inferred from equality of their reductions. Finite products and the mate identities
-include rank zero, the empty scheme and the zero complex. Neither properness nor
-constructibility, completeness, or finite Tor amplitude is required. -/
+The arrow is the specified mate, rather than an arbitrary isomorphism of its endpoints. -/
 theorem properComparison_isIso_of_finiteFree {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (g : U ⟶ V) (d : ℕ)
     (hfree : Nonempty

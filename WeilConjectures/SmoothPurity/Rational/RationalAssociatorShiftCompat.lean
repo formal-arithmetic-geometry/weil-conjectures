@@ -8,16 +8,26 @@ module
 public import WeilConjectures.SmoothPurity.Sf.SfRationalizationKaroubi
 public import WeilConjectures.DeligneLaumon.SfScalarExtensionComposition
 
-/-! Abstract rational scalar associator compatibility with normalized shifts.
+/-!
+# Abstract rational scalar associator compatibility with normalized shifts
 
-Source: the tensor-generator and localization step of the intrinsic associator-shift
-argument (blueprint: lem-pur-intrinsic-associator-shift-square).
 The abstract coefficient-field statement isolates the only component calculation
 that is expensive when specialized to finite `Shrink` models; the specialization in
 the owning module only transports this statement across the coefficient-inclusion
-equality. The generic localization square below is the one proved privately in
+equality.
+
+## Implementation details
+
+The generic localization square below is the one proved privately in
 `IntrinsicAssociatorShiftSquare`, which cannot be imported here (it imports the
 general-stage specialization, which imports the owning module).
+
+The main statement uses the degree-one localization square on tensor generators. The normalized
+integral compositor is compatible with shifts by ordinary derived tensor functoriality and the
+fully faithful intrinsic inclusion. Every rational object is an integral localization image,
+and the formula for the map of `1 ⊗ f` identifies the rational compositor component with the
+localized integral component. This proves the `CommShiftCore` equation in degree one, and the
+coherence equations extend it to all integers.
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -293,17 +303,7 @@ private theorem rational_map_one_tmul_general
     map_one] at h
   convert h using 1; rfl
 
-/-- The abstract rational scalar associator commutes with normalized integer shifts.
-Source: tensor-generator localization step of the associator shift square
-(blueprint: lem-pur-intrinsic-rational-associator-shift-compat).
-Proof: use the degree-one localization square on tensor generators. The normalized
-integral compositor is compatible with shifts by ordinary derived tensor functoriality
-and the fully faithful intrinsic inclusion. Every rational object is an integral
-localization image, and the rational transition comparison is the localized integral
-comparison. The formula for the map of `1 ⊗ f` identifies the rational compositor
-component with the localized integral component. Localization therefore proves the
-CommShiftCore equation in degree one; the zero, addition and negative-degree
-coherence equations extend it to all integers. -/
+/-- The abstract rational scalar associator commutes with normalized integer shifts. -/
 theorem rational_corrected_comp_commShift
     (p l : ℕ) [Fact l.Prime] (hl : l ≠ p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

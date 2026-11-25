@@ -10,8 +10,11 @@ import WeilConjectures.CategoryTheory.Roos.RoosArithmeticNormalization
 
 /-! # Arithmetic normalization for any unit-normalized support Roos comparison
 
-Source: Stacks Tag 0941, the selection/block model for cofinal restriction.
-(blueprint: lem-pur-compact-support-scalar-roos-normalization).
+The arithmetic normalization uses the selection/block model for cofinal restriction.
+
+## References
+
+* [Stacks Project, Tag 0941]
 -/
 
 @[expose] public noncomputable section

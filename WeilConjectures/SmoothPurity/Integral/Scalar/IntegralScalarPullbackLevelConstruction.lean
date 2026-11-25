@@ -15,8 +15,9 @@ import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarPullbackLe
 
 /-! # Construction of the finite scalar pullback map
 
-Source: Stacks, Modules on Sites, Tags 03CZ and 03EL.
-(blueprint: lem-pur-integral-scalar-pullback-level-construction).
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CZ, 03D7 and 03EL
 -/
 
 @[expose] public noncomputable section
@@ -211,13 +212,7 @@ private theorem pullbackScalarModule_naturality {X Y : AlgebraicGeometry.Scheme.
   erw [scalar_map_tensor, pullbackModuleFunctor_generator, pullbackScalarModule_unit,
     pullbackScalarModule_unit, pullbackModuleFunctor_generator, scalar_map_tensor]
 
-/-- The normalized finite scalar pullback comparison exists.
-Source: Stacks Tags 03CZ and 03D7.
-(blueprint: lem-pur-integral-scalar-pullback-level-construction).
-Proof: apply the finite coefficient pullback mate to the normalized reduction map,
-restrict along the coefficient square, and transpose through ordinary scalar
-extension. Naturality on module maps gives chain maps and naturality on complexes;
-the three adjunction unit equations give the displayed generator formula. -/
+/-- The normalized finite scalar pullback comparison exists. -/
 theorem integralScalarPullbackLevel_exists {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ) :
     ∃ α : integralOperationsPullbackLevel l E f n ⋙

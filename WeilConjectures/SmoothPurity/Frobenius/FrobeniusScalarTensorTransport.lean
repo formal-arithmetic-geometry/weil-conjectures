@@ -38,8 +38,12 @@ import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 /-! # Invertibility of semilinear scalar tensor transport
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL.
-(blueprint: new-weil-frobenius-scalar-tensor-transport).
+Setup for transporting a semilinear additive map of sheaves of modules through scalar
+extension along an isomorphism of schemes.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK and 03EL
 -/
 
 @[expose] public noncomputable section

@@ -9,9 +9,11 @@ public import WeilConjectures.SmoothPurity.PurStrictScalar.CompactSupportScalarL
 
 /-! # Completed descent and projection normalization of the scalar-limit comparison
 
-Source: Stacks Tags 0941, 07A6 and 06YY; Steps 3--6 of the normalized
-compact-support scalar-limit argument.
-(blueprint: lem-pur-compact-support-scalar-limit-completed-comparison).
+Steps 3--6 of the normalized compact-support scalar-limit argument.
+
+## References
+
+* [Stacks Project, Tags 0941, 07A6 and 06YY]
 -/
 
 @[expose] public noncomputable section

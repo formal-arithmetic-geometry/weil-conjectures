@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.IntegralQuotient.IntegralQuotientRe
 
 Restriction from completed to constant coefficients is right adjoint to exact
 scalar extension along the flat constant-to-completed coefficient map.
-(blueprint: lem-pur-compact-support-scalar-limit-restriction-kinjective).
 -/
 
 @[expose] public noncomputable section

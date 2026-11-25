@@ -29,8 +29,19 @@ import WeilConjectures.Tactic.TransportExact
 
 /-! # Signed Roos triangles for the canonical coefficient limit
 
-Source: Stacks 06YY, 07A6 and 0941; current blueprint
-`sk-thm-sf-compatibility/fix-prop-coherence.proof.md`, coefficient comparisons.
+## Implementation details
+
+For `purCoefficientRoosShiftNormalization`, first use a K-injective replacement with injective
+tower terms. The prefix-tower lifting argument splits every transition in each degree, so `1 - s`
+is termwise split epic, its kernel is the actual limit, and the kernel inclusion into
+`Cone(1 - s)[-1]` is a quasi-isomorphism; inverse rotation and localization give the triangle.
+On the shifted cone the map `(y, x) ↦ ((-1)^r y, x)` produces the displayed sign. An arbitrary
+K-injective tower is homotopy equivalent to such a replacement, and limit, evaluation, product
+and the Roos cone preserve tower homotopies.
+
+## References
+
+* [Stacks Project, Tags 014E, 06YY, 07A6 and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -320,31 +331,7 @@ private lemma coefficientRoosTriangle_shift
 -- Elaborating the coefficient sheaf and tower instances unfolds their universe models.
 /-- The canonical coefficient limit admits Roos triangles on every supplied
 K-injective replacement, with the canonical replacement-model shift equation,
-their actual projections and signed shift equations.
-Source: Stacks 0941, proof of lemma-derived-limit-is-ok, and cochain cone convention
-014E, refined by the explicit signed cone calculation
-(blueprint: lem-pur-coefficient-roos-shift-normalization).
-
-Proof: first use a K-injective replacement with injective tower terms. Evaluation
-preserves K-injectivity, and the termwise product is a product after localization.
-The prefix-tower lifting argument splits every transition in each degree. Thus
-1-s is termwise split epic, its kernel is the actual limit, and the kernel
-inclusion (0,x) into Cone(1-s)[-1] is a quasi-isomorphism. Inverse rotation and
-localization give the distinguished triangle. Its first arrow consists of the
-actual limit projections; transport its first vertex along purCoefficientLimitModel.
-On the shifted cone the map (y,x) maps to ((-1)^r y,x). It commutes with the
-kernel inclusion and with the projection to x. Insertion in y gains (-1)^r,
-so the connecting map has exactly the displayed sign and shift commutator.
-For an arbitrary K-injective tower I, compare it to a replacement with injective
-terms. The comparison is a homotopy equivalence. Limit, evaluation, product and
-the Roos cone preserve tower homotopies, so transport these identities back to I.
-The same computation on comparison maps proves naturality and independence.
-Choose the boundary by this natural transport; its shift square holds for every
-shifted replacement, not only selected representatives. The proved canonical
-replacement-shift equation identifies the transported limit shift with the fixed
-one used here. Products need not be exact. Zero shift is identity; r=1 and -1
-negate the first coordinate, and signs multiply for repeated shifts. Zero towers
-and the empty scheme give the zero triangle. -/
+their actual projections and signed shift equations. -/
 theorem purCoefficientRoosShiftNormalization
     [products : HasCountableProducts (DerivedCategory (scalarReductionSource l E W))] :
     letI := SequenceKInjectiveComparison.totalLimitCommShift l E W
