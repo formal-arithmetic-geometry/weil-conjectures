@@ -18,18 +18,17 @@ through the total space, `M''` its base change along `Spec K⟦t⟧ ⟶ Y` for `
 (`NearbyCyclesModel.GenericAut`), acting on the nearby cycles of `M''`
 (`NearbyCyclesModel.baseChangeAut`). With finite coefficients `T̲`, a subgroup of finite index of
 `P'` acts trivially on `Ψ_{M''} C` for every bounded constructible `C`
-(`NearbyCyclesModel.exists_finiteIndex_autAction_baseChangeAut_eq_id_of_finite`).
+(`NearbyCyclesModel.exists_finiteIndex_autAction_baseChangeAut_eq_id_of_finite`). This is the
+finite-coefficient case of the finiteness of the action of `P'` in the generic-slicing
+identification.
 
-Indeed `M''` is a model of finite type over `Spec K⟦t⟧`
-(`NearbyCyclesModel.IsTraitModelOver.baseChange`), so `Ψ_{M''} C` is bounded constructible by
-Deligne's finiteness theorem with finite coefficients
+## Implementation details
+
+`M''` is a model of finite type over `Spec K⟦t⟧` (`NearbyCyclesModel.IsTraitModelOver.baseChange`),
+so `Ψ_{M''} C` is bounded constructible by Deligne's finiteness theorem with finite coefficients
 (`NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel_of_finite`). Its endomorphisms
 then form a finite set (`ProEtale.CondensedRing.finite_hom_of_boundedConstructible_of_finite`), and
 the kernel of the action has finite index (`CategoryTheory.exists_finiteIndex_eq_id_of_finite_end`).
-
-This is the finite-coefficient case of the finiteness of the action of `P'` in the
-generic-slicing identification (blueprint `proposition-external-kunneth-formula-nearby-cycles`,
-"Facts about traits", identification (2); SGA 4½, [Th. finitude], §3.7).
 
 -/
 

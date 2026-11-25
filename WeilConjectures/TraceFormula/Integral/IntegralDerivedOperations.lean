@@ -130,8 +130,11 @@ public import Mathlib.Algebra.Homology.Functor
 
 /-! # Integral derived operations
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemmas 3.4.11, 3.4.12(4), 6.5.9(4);
-Stacks Project, Tag 099N(5) (blueprint: def-pur-integral-derived-operations).
+We define the integral derived pullback and the completed tensor product, as normalized descents
+of their representative constructions, and the derived internal Hom over the completed integral
+coefficient sheaf.
+
+## Implementation details
 
 The coefficient completion, positive finite reductions, K-flat representatives,
 canonical transition maps and Roos complexes are those of the dependency modules.
@@ -139,6 +142,12 @@ The first two functors are their normalized descents, chosen together with their
 representative comparisons, which determine them up to unique compatible isomorphism.
 Internal Hom is the ambient derived internal Hom over the completed coefficient sheaf.
 No derived-completeness or constructibility hypothesis is imposed.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 3.4.10 and Lemmas 3.4.11,
+  3.4.12(4), 6.5.9(4)
+* Stacks Project, Tag 099N
 -/
 
 @[expose] public section
@@ -162,9 +171,7 @@ section PullbackDescent
 attribute [local instance 3000] integralTowerHasDerivedCategory
 
 /-- A completed pullback descent, its representative comparison, and its universal property.
-The record keeps the existing choices together so consumers need not unfold nested existentials.
-Source: Bhatt--Scholze, Lemma 6.5.9(4); Stacks Project, Tag 099N(5)
-(blueprint: def-trf-integral-pullback-descent-model). -/
+The record keeps the existing choices together so consumers need not unfold nested existentials. -/
 structure IntegralPullbackDescent {X Y : AlgebraicGeometry.Scheme.{t}} (f : X ⟶ Y) where
   functor : DerivedCategory (integralTowerModules l E Y) ⥤
     DerivedCategory (integralTowerModules l E X)
@@ -178,9 +185,7 @@ structure IntegralPullbackDescent {X Y : AlgebraicGeometry.Scheme.{t}} (f : X �
       Functor.isoWhiskerLeft (integralOperationsGoodLocalization l E Y) i ≪≫ e = comparison
 
 /-- The existing normalized pullback descent, packaged without making a new choice.
-Its universal property determines the data up to unique compatible isomorphism.
-Source: Bhatt--Scholze, Lemma 6.5.9(4); Stacks Project, Tag 099N(5)
-(blueprint: def-trf-integral-pullback-descent-model). -/
+Its universal property determines the data up to unique compatible isomorphism. -/
 noncomputable def integralPullbackDescent {X Y : AlgebraicGeometry.Scheme.{t}}
     (f : X ⟶ Y) : IntegralPullbackDescent l E f where
   functor := (integralOperationsWellDefined l E f X).2.2.choose
@@ -192,9 +197,7 @@ noncomputable def integralPullbackDescent {X Y : AlgebraicGeometry.Scheme.{t}}
 end PullbackDescent
 
 /-- Completed integral derived pullback: the normalized descent of
-P ↦ Cone(1-s)[-1] on the strict tower Res_n f*(P_n), with n denoting exponent n+1.
-Source: Bhatt--Scholze, Lemma 6.5.9(4); Stacks Project, Tag 099N(5)
-(blueprint: def-pur-integral-derived-operations). -/
+P ↦ Cone(1-s)[-1] on the strict tower Res_n f*(P_n), with n denoting exponent n+1. -/
 noncomputable def integralDerivedPullback {X Y : AlgebraicGeometry.Scheme.{t}}
     (f : X ⟶ Y) :
     DerivedCategory (integralTowerModules.{t, u} l E Y) ⥤
@@ -202,9 +205,7 @@ noncomputable def integralDerivedPullback {X Y : AlgebraicGeometry.Scheme.{t}}
   (integralPullbackDescent l E f).functor
 
 /-- The defining natural comparison on all K-flat representatives with flat terms.
-Together with this comparison, the descent is unique up to unique isomorphism.
-Source: Bhatt--Scholze, Lemma 6.5.9(4); Stacks Project, Tag 099N(5)
-(blueprint: def-pur-integral-derived-operations). -/
+Together with this comparison, the descent is unique up to unique isomorphism. -/
 noncomputable def integralDerivedPullbackComparison {X Y : AlgebraicGeometry.Scheme.{t}}
     (f : X ⟶ Y) :
     integralOperationsGoodLocalization l E Y ⋙ integralDerivedPullback l E f ≅
@@ -212,9 +213,7 @@ noncomputable def integralDerivedPullbackComparison {X Y : AlgebraicGeometry.Sch
   (integralPullbackDescent l E f).comparison
 
 /-- A completed tensor descent, its model comparison, and its universal property.
-The record keeps the data together so consumers do not unfold nested existence proofs.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 3.4.12(4)
-(blueprint: def-pur-integral-derived-operations). -/
+The record keeps the data together so consumers do not unfold nested existence proofs. -/
 structure IntegralCompletedTensorDescent (W : AlgebraicGeometry.Scheme.{t}) where
   functor : (DerivedCategory (integralTowerModules l E W)) ×
     (DerivedCategory (integralTowerModules l E W)) ⥤
@@ -232,9 +231,7 @@ structure IntegralCompletedTensorDescent (W : AlgebraicGeometry.Scheme.{t}) wher
       ((integralOperationsGoodLocalization l E W).prod
         (integralOperationsGoodLocalization l E W)) ι ≪≫ d' = comparison
 
-/-- The existing normalized descent, packaged without making a new choice.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 3.4.12(4)
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The existing normalized descent, packaged without making a new choice. -/
 noncomputable def integralCompletedTensorDescent (W : AlgebraicGeometry.Scheme.{t}) :
     IntegralCompletedTensorDescent l E W where
   functor :=
@@ -247,9 +244,7 @@ noncomputable def integralCompletedTensorDescent (W : AlgebraicGeometry.Scheme.{
 
 /-- The completed tensor product is the normalized descent of the Roos complex
 of Res_n(P_n ⊗ Q_n), with the direct-sum total tensor differential and the
-pure-tensor reduction transitions specified in IntegralOperationsWellDefined.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 3.4.12(4)
-(blueprint: def-pur-integral-derived-operations). -/
+pure-tensor reduction transitions specified in IntegralOperationsWellDefined. -/
 noncomputable def integralCompletedTensor (W : AlgebraicGeometry.Scheme.{t}) :
     (DerivedCategory (integralTowerModules.{t, u} l E W)) ×
       (DerivedCategory (integralTowerModules.{t, u} l E W)) ⥤
@@ -258,9 +253,7 @@ noncomputable def integralCompletedTensor (W : AlgebraicGeometry.Scheme.{t}) :
 
 /-- The defining natural comparison with the finite-tensor Roos construction on
 pairs of K-flat complexes with flat terms. The descent with this comparison
-is unique up to unique compatible isomorphism.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 3.4.12(4)
-(blueprint: def-pur-integral-derived-operations). -/
+is unique up to unique compatible isomorphism. -/
 noncomputable def integralCompletedTensorComparison (W : AlgebraicGeometry.Scheme.{t}) :
     ((integralOperationsGoodLocalization l E W).prod
       (integralOperationsGoodLocalization l E W)) ⋙ integralCompletedTensor l E W ≅
@@ -269,9 +262,7 @@ noncomputable def integralCompletedTensorComparison (W : AlgebraicGeometry.Schem
 
 /-- Integral internal Hom is the ambient derived sheaf Hom over the actual
 completed ring sheaf, computed by a K-injective resolution of its second argument
-among all modules over that sheaf. It is contravariant in its first argument.
-Source: Bhatt--Scholze, Lemma 3.4.11; Stacks Project, Section 08J7
-(blueprint: def-pur-integral-derived-operations). -/
+among all modules over that sheaf. It is contravariant in its first argument. -/
 noncomputable def integralDerivedInternalHom (W : AlgebraicGeometry.Scheme.{t}) :
     (DerivedCategory (integralTowerModules.{t, u} l E W))ᵒᵖ ×
       DerivedCategory (integralTowerModules.{t, u} l E W) ⥤

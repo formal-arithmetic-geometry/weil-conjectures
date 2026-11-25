@@ -11,15 +11,26 @@ import Mathlib.Algebra.CharP.CharAndCard
 /-!
 # Frobenius squares for an open subscheme over a finite field
 
-Source: Weil conjectures blueprint, `sec-trace-formula/sk-d-weil-push`,
-`lem-trf-frobenius-open-square.md`, order 2368; Stacks, Tags 03SM, 01JR and 01JP
-(blueprint: lemma-additivity-open-subscheme-complement--1).
+For an open immersion of models over a finite field, the scheme Frobenius squares and the
+geometric Galois Frobenius squares are cartesian for every iterate.
+
+## Implementation details
 
 The models are arbitrary schemes over the finite base. The scheme Frobenius is written
 using `Over.pullback.map` applied to the existing absolute Frobenius; this is the defining
 expression of `relativeFrobenius` without its unnecessary finite-type interface.
 The Galois maps are the existing unrestricted `galoisMap`. Powers are taken in `End`
 of the category of schemes, so the Galois maps are not assumed to be morphisms over `k`.
+
+The proof that the squares are cartesian checks that the iterated absolute Frobenius raises
+sections to `q`-th powers and fixes the finite base, identifies the model square with a pullback
+of open subschemes, and transports this through base change; the Galois square uses the inverse
+coefficient actions of the geometric Frobenius on the scalar extensions.
+
+## References
+
+* Deligne, *La conjecture de Weil II*, (1.1.14)
+* Stacks Project, Tags 03SM, 0CC7, 01JR, 01JP
 -/
 
 @[expose] public section
@@ -30,12 +41,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace WeilConjectures.FiniteFieldDatum
 
-/-- The characteristic of the finite base vanishes on every scheme over that base.
-Source: Deligne, Weil II (1.1.14), p. 153; Stacks, Tag 03SM
-(blueprint: def-weil-relative-frobenius-geometric-fiber).
-Proof: the base has cardinality p^a with a positive, hence characteristic p.
-The structure morphism induces a unital map from the base field to global sections,
-which takes the equality p = 0 to the asserted equality. This also covers the zero ring. -/
+/-- The characteristic of the finite base vanishes on every scheme over that base. -/
 theorem model_characteristic (D : WeilConjectures.FiniteFieldDatum.{u})
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of D.k₀)) :
     (D.p : Γ(X, ⊤)) = 0 := by
@@ -48,12 +54,7 @@ theorem model_characteristic (D : WeilConjectures.FiniteFieldDatum.{u})
   simpa only [map_natCast, map_zero] using
     congrArg φ.hom (CharP.cast_eq_zero D.k₀ D.p)
 
-/-- The q-power absolute Frobenius of the model is a morphism over the finite base.
-Source: Deligne, Weil II (1.1.14), p. 153; Stacks, Tag 0CC7
-(blueprint: def-weil-relative-frobenius-geometric-fiber).
-Proof: absolute Frobenius is natural in a scheme morphism, by the naturality of taking
-p^a-th powers on sections. On Spec k₀ it is the identity because c^q = c in k₀.
-Use q = p^a to conclude that its composite with f is f. -/
+/-- The `q`-power absolute Frobenius of the model is a morphism over the finite base. -/
 theorem model_frobenius_over (D : WeilConjectures.FiniteFieldDatum.{u})
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of D.k₀)) :
     X.iterateFrobenius D.prime (D.model_characteristic f) D.a ≫ f = f := by
@@ -127,31 +128,7 @@ private theorem semilinear_pow {X S : Scheme.{u}} {f : X ⟶ X} {g : S ⟶ S}
 set_option backward.isDefEq.respectTransparency false in
 /-- The scheme-Frobenius and geometric-Galois-Frobenius squares of an open immersion
 are Cartesian for every nonnegative iterate. The last two identities give semilinearity
-of the Galois maps with respect to the projections to `Spec k`.
-Source: blueprint `sec-trace-formula/sk-d-weil-push/lem-trf-frobenius-open-square.md`,
-order 2368; Stacks, Tags 03SM, 01JR and 01JP
-(blueprint: lemma-additivity-open-subscheme-complement--1).
-
-Proof:
-1. The structure morphisms make `p` vanish on the models, including empty opens.
-   Absolute Frobenius is identity on points and raises sections to `p`-th powers.
-   Its `a`-fold iterate therefore raises sections to `q`-th powers. It restricts
-   to the same Frobenius on the open subscheme and fixes the finite base field.
-2. Its inverse image of the open image of `j₀` is that same open. The inverse-image
-   open fibre-product lemma `lem-weil-pbc-open-preimage-fibre-product` identifies
-   the model square with a pullback, with exactly these restriction maps.
-3. Base change preserves the open immersion by `lem-weil-pbc-open-fibre-product`.
-   Compare the two projections to see that the base-changed square commutes.
-   Given a compatible pair of maps into it, the model square supplies a unique
-   model lift and their common scalar projection supplies the scalar lift.
-   The fibre-product universal property then supplies the unique total lift.
-4. Geometric field Frobenius fixes the base and has an inverse. Functoriality of
-   `Spec` and the fibre product gives inverse coefficient actions on each model's
-   scalar extension. Comparing projections shows they commute with `j`. For a
-   compatible pair `(u,v)`, the unique lift is the inverse Galois iterate after `u`.
-5. The second projection of `id × Spec γ` is the second projection followed by
-   `Spec γ`. Iterating proves the two displayed semilinearity identities.
-All these arguments include the zeroth iterate, where every endomorphism is identity. -/
+of the Galois maps with respect to the projections to `Spec k`. -/
 theorem frobenius_open_square (D : WeilConjectures.FiniteFieldDatum.{u})
     (X₀ Y₀ : Over (Spec (CommRingCat.of D.k₀))) (j₀ : X₀ ⟶ Y₀)
     [IsOpenImmersion j₀.left] (m : ℕ) :

@@ -18,8 +18,8 @@ an open and closed subscheme `B` of the fixed locus, proper over `s`, with under
 the local term along `B` is the integral of a Borel–Moore section `γ` of the point as soon as the
 restriction of the trace class to `B` is the pushforward of `γ` along the point of `B`
 (`Correspondence.localTerm_traceClass_eq_integral_of_restrict_eq`). This is the formal last step
-of the computation of local terms at an isolated fixed point, both on the curve route (blueprint
-`corollary-contracting-local-terms-point`, item 3) and for contracting correspondences. The trace
+of the computation of local terms at an isolated fixed point, both on the curve route and for
+contracting correspondences. The trace
 class of a correspondence vanishes when the pulled back coefficient does
 (`Correspondence.traceClass_eq_zero_of_isZero`).
 

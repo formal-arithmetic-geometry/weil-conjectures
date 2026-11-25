@@ -92,8 +92,15 @@ import all WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 Construct the scalar realization by descent from its actual ordinary quotient tower.
 Normalization tests whole-system coherent simultaneous quotient presentations.
-Source: Stacks 03EK, 03D7, 06YY and 0941.
-(blueprint: lem-trf-primitive-quotient-scalar-model-existence)
+
+## Implementation details
+
+The realization is chosen together with its normalization: a normalization quantified over an
+arbitrary realization would be contradicted by unit twisting.
+
+## References
+
+* Stacks 03EK, 03D7, 06YY and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -136,22 +143,8 @@ private theorem sequenceKFlat_of_evaluations (W : Scheme.{t})
   have ht := hC n _ hZn
   exact (ht i).of_iso (coefficientEvaluationTensorIso l E W n Z C).symm
 
-/- STATEMENT-DISPUTED: the retired primitiveQuotientScalarModelNormalization
-quantified over an arbitrary realization. Unit twisting contradicts that assertion;
-the construction below chooses the realization together with its normalization. -/
-
-/-- The scalar realization is obtained by descending its strict tensor comparison.
-Source: Stacks 03EK, 03D7, 06YY and 0941.
-(blueprint: lem-trf-primitive-quotient-scalar-model-existence).
-Proof: choose the actual ordinary quotient model and its derived comparison with
-SW. Each evaluated quotient of a good complex is K-flat, hence so is its whole
-sequence complex by componentwise tensor and exactness. The scalar cochain counit
-therefore computes on these complexes. Combine this counit with the fixed normalized
-Roos comparison and the ordinary balanced scalar tower isomorphism. Descend the
-resulting natural isomorphism along the good-complex localization. For another
-coherent presentation, use its unique strict quotient isomorphism. Naturality of
-the cochain counit and Roos comparison and cancellation of this strict isomorphism
-give the normalization equation. -/
+/-- Every Roos model `ρW` admits a compatible integral comparison scalar model, obtained by
+descending its strict tensor comparison along the good-complex localization. -/
 theorem primitiveQuotientScalarModelExistence
     (W : Scheme.{t})
     (_hlW : ∀ x : W, IsUnit (l : W.residueField x))

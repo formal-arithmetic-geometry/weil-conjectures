@@ -35,7 +35,20 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.RingTheory.Flat.CategoryTheory
 import all WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 
-/-! # Derived naturality of scalar Roos comparison -/
+/-! # Derived naturality of scalar Roos comparison
+
+A natural ordinary scalar map of whole towers is natural on derived morphisms once the source
+cochain counit becomes invertible after total limit.
+
+## Implementation details
+
+Derived morphisms are represented by right fractions whose intermediate complex is resolved by a
+K-flat complex; no exactness of ordinary system scalar extension is used.
+
+## References
+
+* Stacks Project, Tags 06YY and 0941.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -77,21 +90,8 @@ private theorem scalarRoos_naturality_of_bridge
     bD.inv_hom_id, Category.comp_id] at w'
   simpa only [Functor.map_comp, Category.assoc] using w'
 
-/-- A natural ordinary scalar map of whole towers is natural on derived morphisms
-once the source cochain counit becomes invertible after total limit.
-
-Source: Stacks Project, Tags 06YY and 0941, calculus of fractions and K-flat resolutions.
-(blueprint: lem-trf-scalar-roos-derived-naturality)
-
-Proof: form the natural transformation on complexes by the source Roos bridge,
-the universal scalar counit, the diagonal scalar Roos map, the given tower map,
-and the inverse target bridge. The system scalar counit is a second natural
-transformation to the same functor. Represent a derived morphism by a right
-fraction and resolve its intermediate complex by a K-flat complex. Both the
-localized denominator and the system counit on that resolution are invertible.
-Naturality for the two chain maps in the fraction and cancellation then give
-the displayed equality. No exactness of ordinary system scalar extension is used.
--/
+/-- A natural ordinary scalar map of whole towers is natural on derived morphisms once the source
+cochain counit becomes invertible after total limit. -/
 theorem scalarRoosDerivedNaturality
     (l : ℕ) [Fact l.Prime]
     (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]

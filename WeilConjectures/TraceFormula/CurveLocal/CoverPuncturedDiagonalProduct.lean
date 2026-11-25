@@ -25,8 +25,8 @@ property of the strict localization identifies `T'` with `Q` over `T`
 * `π` is étale over the locus where both `q₁` and `q₂` avoid the closed point of `X_y`
   (`CoverDatum.etale_π`).
 
-This is the local structure behind blueprint `lemma-tangent-cones-on-cover` (ii): `T'` is finite
-flat of rank `e²` over `T`, étale away from `H ∪ V`.
+This is the local structure behind the fact that `T'` is finite flat of rank `e²` over `T`, étale
+away from `H ∪ V`.
 
 -/
 

@@ -30,8 +30,7 @@ automorphism of finite order.
 ## Main results
 
 - `ProEtale.CondensedRing.WeilBoundedConstructible.trace_compactFrobenius_eq_add`: additivity of
-  the trace of `F_c` along an open subscheme and its closed complement, both stable under `Φ`
-  (blueprint `lemma-additivity-open-subscheme-complement`).
+  the trace of `F_c` along an open subscheme and its closed complement, both stable under `Φ`.
 - `ProEtale.CondensedRing.WeilBoundedConstructible.trace_stalkFrobenius_weilUpperStar`: the local
   Frobenius of the restriction of `K` to an open subscheme.
 - `ProEtale.CondensedRing.WeilBoundedConstructible.unit`: the constant Weil object `ℚ̄_ℓ,X`, and
@@ -69,14 +68,10 @@ variable {U Z : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U
   {ΦU : U ⟶ U} {ΦZ : Z ⟶ Z} {j : U ⟶ X} {i : Z ⟶ X} [IsOpenImmersion j.left]
   [IsClosedImmersion i.left]
 
-/-- **Additivity of the compactly supported Frobenius along an open–closed decomposition**
-(blueprint `lemma-additivity-open-subscheme-complement`): for an open subscheme `j : U ⟶ X` with
-closed complement `i : Z ⟶ X`, both stable under the Frobenius, the trace of the Frobenius of
-`RΓ_c(X, K)` is the sum of the traces of the Frobenii of `RΓ_c(U, K|_U)` and `RΓ_c(Z, K|_Z)`,
-the restrictions being the derived pullbacks of Weil objects. It comes from the localization
-triangle `j_! j^* K ⟶ K ⟶ i_* i^* K ⟶`, a triangle of Weil objects, and the additivity of
-traces in distinguished triangles (blueprint `proposition-properties-trace`); no
-invertibility of `φ` is used in the blueprint. -/
+/-- **Additivity of the compactly supported Frobenius along an open–closed decomposition**: for an
+open subscheme `j : U ⟶ X` with closed complement `i : Z ⟶ X`, both stable under the Frobenius, the
+trace of the Frobenius of `RΓ_c(X, K)` is the sum of the traces of the Frobenii of `RΓ_c(U, K|_U)`
+and `RΓ_c(Z, K|_Z)`, the restrictions being the derived pullbacks of Weil objects. -/
 theorem trace_compactFrobenius_eq_add [IsSepClosed k]
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (hj : ΦU ≫ j = j ≫ Φ) (hi : ΦZ ≫ i = i ≫ Φ)
@@ -339,11 +334,10 @@ lemma stalkFrobenius_weilUpperStar_aux {𝒞 : Type*} [Category 𝒞] {S' U' X' 
   exact hcast _ hx _ _ hP _ _ _ _
 
 omit [IsOpenImmersion j.left] in
-/-- The stalks of the restriction of a Weil object to a Frobenius stable subscheme are the
-stalks of the Weil object: for `j : U ⟶ X` with `Φ_U ≫ j = j ≫ Φ` and a rational point `x` of
-`U` fixed by `Φ_{U,m}`, the local Frobenius of `K|_U` at `x` has the trace of the local
-Frobenius of `K` at `x ≫ j` (blueprint `lemma-additivity-open-subscheme-complement`, the stalk
-side). -/
+/-- The stalks of the restriction of a Weil object to a Frobenius stable subscheme are the stalks of
+the Weil object: for `j : U ⟶ X` with `Φ_U ≫ j = j ≫ Φ` and a rational point `x` of `U` fixed by
+`Φ_{U,m}`, the local Frobenius of `K|_U` at `x` has the trace of the local Frobenius of `K` at
+`x ≫ j`. -/
 theorem trace_stalkFrobenius_weilUpperStar (hj : ΦU ≫ j = j ≫ Φ)
     (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) (x : RationalPoint U)
     (hx : x ≫ frobeniusIterate ΦU m = x)

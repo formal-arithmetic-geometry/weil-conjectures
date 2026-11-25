@@ -11,9 +11,8 @@ public import WeilConjectures.PoincareDuality.ProjectionFormulaCoherence
 
 # The exceptional projection morphism along a commutative square
 
-Consequences of the coherence of the projection formula (blueprint `prop-sf-pf-coherence`) used
-for the exceptional Künneth part of identity (a) of the trace-class source exchange (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, Step 3):
+Consequences of the coherence of the projection formula used for the exceptional Künneth part of
+identity (a) of the trace-class source exchange:
 
 - `ProEtale.CondensedRing.exceptionalProjection_comp_square`: for a commutative square
   `q ≫ p' = p ≫ f`, the projection morphisms of `q` and `p'` combine into those of `p` and `f`
@@ -63,10 +62,9 @@ lemma exceptionalProjection_eqToHom {u u' : P ⟶ Y} (h : u = u')
   subst h
   simp
 
-/-- **The exceptional projection morphism along a commutative square** (blueprint
-`prop-sf-pf-coherence`, the associativity pentagon applied to both sides of `q ≫ p' = p ≫ f`):
-`PF_{p'}` followed by `Rp'_! PF_q` is `PF_f` followed by `Rf_! PF_p`, through the composition
-isomorphism `Rq_! ⋙ Rp'_! ≅ Rp_! ⋙ Rf_!` of the square. -/
+/-- **The exceptional projection morphism along a commutative square**: `PF_{p'}` followed by
+`Rp'_! PF_q` is `PF_f` followed by `Rf_! PF_p`, through the composition isomorphism
+`Rq_! ⋙ Rp'_! ≅ Rp_! ⋙ Rf_!` of the square. -/
 theorem exceptionalProjection_comp_square {q : P ⟶ P'} {p : P ⟶ X} {p' : P' ⟶ Y} {f : X ⟶ Y}
     (w : q ≫ p' = p ≫ f) (S : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

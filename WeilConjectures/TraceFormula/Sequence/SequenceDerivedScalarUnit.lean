@@ -36,7 +36,12 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # A component of strict quotient-system coherence
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6D.
+The scalar-pullback comparison for the identity coefficient map is compatible with the scalar unit
+isomorphisms.
+
+## References
+
+* Stacks Project, Tag 0D6D.
 -/
 
 @[expose] public noncomputable section
@@ -96,14 +101,9 @@ private theorem sequencePrimeStalkUnit (l : ℕ) (X : Scheme.{t})
   change (X.residue x).hom (l : X.presheaf.stalk x) ≠ 0
   simpa only [map_natCast] using (isUnit_of_invertible (l : X.residueField x)).ne_zero
 
-/-- Source: Stacks Project, sites-cohomology.tex, Tag 0D6D.
-(blueprint: lem-trf-sequence-derived-scalar-unit).
-Proof: Resolve the input whole quotient system by a flat-term K-flat complex. Geometric pullback
-preserves these complexes. The normalization of the scalar identity comparison is ordinary scalar
-multiplication, and the normalization of the scalar-pullback comparison is the ordinary generator
-interchange. Compose these equations and use the ordinary scalar-unit interchange equation,
-including the canonical functor unitors. Cancel the invertible geometric counit. Naturality and
-the localized resolution isomorphism extend the resulting equality to every input. -/
+/-- The scalar unit square: for `f : X ⟶ Y`, the scalar-pullback comparison along the identity of
+`E` followed by the pulled-back scalar unit isomorphism of `Y` is the scalar unit isomorphism of
+`X`. -/
 theorem sequenceDerivedScalarUnit
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X Y : Scheme.{t}}

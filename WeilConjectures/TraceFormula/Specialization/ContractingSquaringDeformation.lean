@@ -11,14 +11,13 @@ public import Mathlib.Algebra.MvPolynomial.Expand
 /-!
 # The deformation to the normal cone for squaring on the line
 
-The deformation computation of blueprint `example-contracting-squaring`. Let `X = 𝔸^σ` (the
-blueprint case is `σ` a singleton, `X = 𝔸¹ = Spec k[x]`), `Z` the origin with ideal
-`I = (x_i)`. The deformation to the normal cone of `Z` is `Spec` of the extended Rees algebra
-`k[x][t, I t⁻¹]`, and `Ideal.mvPolynomialExtendedReesAlgebraEquiv` identifies it with the
-polynomial ring `k[t][x'_i]` in the coordinates `x'_i = x_i t⁻¹`, so that `x_i = t x'_i`: the
-constant family `𝔸^σ_T`. The first leg `c₁ = id` deforms to the identity
-(`Ideal.extendedReesAlgebraMap_id`). The second leg `c₂(x) = x²` (the ring map
-`MvPolynomial.expand 2`) deforms to `x' ↦ x² / t = t x'²`.
+The deformation computation for the squaring correspondence. Let `X = 𝔸^σ` (the main case is `σ` a
+singleton, `X = 𝔸¹ = Spec k[x]`), `Z` the origin with ideal `I = (x_i)`. The deformation to the
+normal cone of `Z` is `Spec` of the extended Rees algebra `k[x][t, I t⁻¹]`, and
+`Ideal.mvPolynomialExtendedReesAlgebraEquiv` identifies it with the polynomial ring `k[t][x'_i]` in
+the coordinates `x'_i = x_i t⁻¹`, so that `x_i = t x'_i`: the constant family `𝔸^σ_T`. The first leg
+`c₁ = id` deforms to the identity (`Ideal.extendedReesAlgebraMap_id`). The second leg `c₂(x) = x²`
+(the ring map `MvPolynomial.expand 2`) deforms to `x' ↦ x² / t = t x'²`.
 
 ## Main results
 
@@ -46,9 +45,8 @@ lemma map_expand_two_mvPolynomialOrigin_le :
   rw [MvPolynomial.expand_X]
   exact Ideal.pow_mem_of_mem _ (Ideal.subset_span (Set.mem_range_self i)) 2 two_pos
 
-/-- (blueprint `example-contracting-squaring`) The deformation of squaring in the coordinates
-`x'_i = x_i t⁻¹` of the deformation to the normal cone of the origin: the `k[t]`-algebra map
-`k[t][x'_i] ⟶ k[t][x'_i]`, `x'_i ↦ t x'_i²`. -/
+/-- The deformation of squaring in the coordinates `x'_i = x_i t⁻¹` of the deformation to the normal
+cone of the origin: the `k[t]`-algebra map `k[t][x'_i] ⟶ k[t][x'_i]`, `x'_i ↦ t x'_i²`. -/
 noncomputable def squaringDeformation :
     MvPolynomial σ (Polynomial C) →ₐ[Polynomial C] MvPolynomial σ (Polynomial C) :=
   MvPolynomial.aeval fun i ↦ MvPolynomial.C Polynomial.X * MvPolynomial.X i ^ 2
@@ -64,11 +62,10 @@ lemma squaringDeformation_C (p : Polynomial C) :
     squaringDeformation C σ (MvPolynomial.C p) = MvPolynomial.C p := by
   simp [squaringDeformation]
 
-/-- (blueprint `example-contracting-squaring`) **The deformation of squaring.** Identify the
-deformation to the normal cone `k[x][t, I t⁻¹]` of the origin of `𝔸^σ` with the constant family
-`k[t][x'_i]`, `x_i = t x'_i` (`Ideal.mvPolynomialExtendedReesAlgebraEquiv`). Then the map induced
-by squaring `x_i ↦ x_i²` on the deformation is `x'_i ↦ x_i² / t = t x'_i²`, the identity on
-`k[t]`. -/
+/-- **The deformation of squaring.** Identify the deformation to the normal cone `k[x][t, I t⁻¹]` of
+the origin of `𝔸^σ` with the constant family `k[t][x'_i]`, `x_i = t x'_i`
+(`Ideal.mvPolynomialExtendedReesAlgebraEquiv`). Then the map induced by squaring `x_i ↦ x_i²` on the
+deformation is `x'_i ↦ x_i² / t = t x'_i²`, the identity on `k[t]`. -/
 theorem extendedReesAlgebraMap_expand_two_comp_mvPolynomialExtendedReesAlgebraEquiv :
     ((mvPolynomialOrigin C σ).extendedReesAlgebraMap
         (MvPolynomial.expand 2 : MvPolynomial σ C →ₐ[C] _).toRingHom (mvPolynomialOrigin C σ)

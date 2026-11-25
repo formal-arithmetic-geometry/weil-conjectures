@@ -36,7 +36,12 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # A component of strict quotient-system coherence
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6D.
+The scalar-pullback comparisons of the derived sequence functors are compatible with the composition
+isomorphisms of the pullbacks.
+
+## References
+
+* Stacks Project, Tag 0D6D.
 -/
 
 @[expose] public noncomputable section
@@ -145,17 +150,9 @@ private theorem primeStalkUnit (l : ℕ) (X : Scheme.{t})
   change (X.residue x).hom (l : X.presheaf.stalk x) ≠ 0
   simpa only [map_natCast] using (isUnit_of_invertible (l : X.residueField x)).ne_zero
 
-/-- Source: Stacks Project, sites-cohomology.tex, Tag 0D6D.
-(blueprint: lem-trf-sequence-derived-mixed-square).
-Proof: Choose one flat-term K-flat resolution of the entire input quotient system. Exact geometric
-inverse image preserves such complexes, and scalar extension preserves them for arbitrary
-coefficient homomorphisms. The defining cochain counits for each geometric and scalar comparison
-are invertible on this model. Compose their defining normalization equations along the two sides
-of the square. Naturality moves counits across each whiskering, reducing both sides to the
-ordinary scalar-generator interchange equation. Cancel the common target counit, then use
-naturality and cancellation of the localized resolution isomorphism to obtain equality on every
-derived object. All constructions are on the whole sequence site, so no evaluation or limit is
-used. -/
+/-- The mixed square: for `h : Z ⟶ W` and `k : W ⟶ V`, the scalar-pullback comparison along `h ≫ k`
+is the composite of those along `h` and `k`, through the composition isomorphisms of the derived
+sequence pullbacks with coefficients `E` and `L`. -/
 theorem sequenceDerivedMixed
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

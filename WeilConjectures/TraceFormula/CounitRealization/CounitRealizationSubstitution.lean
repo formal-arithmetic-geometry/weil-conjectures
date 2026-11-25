@@ -21,13 +21,31 @@ import WeilConjectures.TraceFormula.Supporting.EffectiveComparisonRealizationMod
 
 /-! # Whole-counit substitution in integral realization
 
-Source: Stacks Project, Tag 0941, lemma-derived-limit-is-ok; Bhatt--Scholze,
-Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7; blueprint main-20261015,
-prop-trf-karoubi-independence, final common-stage transport sentence
-(blueprint: lem-trf-counit-realization-substitution).
+We compare composable words of primitive realized operations (pullback along a morphism of
+schemes and extension of scalars) on entire derived quotient systems with the realization of the
+composite, through the whole-system counit: the comparisons are invertible, natural,
+independent of parenthesization, and compatible with whiskering, and the realized scalar
+associator and unit are the published completed line tensor ones.
+
+## Implementation details
 
 Words retain their parentheses, and all their maps are maps of entire derived
 quotient systems. Inverses are supplied only by the asserted invertibility laws.
+
+The proof of `counitRealizationSubstitution` proceeds by induction on words: primitive
+comparisons are invertible by the normalized reconstruction of the counit, naturality follows from
+that of the primitive models and the whole-system counit, the cut formula gives
+parenthesization independence, and counit naturality with the triangle identities gives the
+reduction comparison. The scalar associator and unit are transported through `e_C` by the scalar
+model squares and the naturality of the system associator and unitor, cancelling the invertible
+`chi` factors; no faithfulness of separate finite reductions, finite Tor-amplitude, or additional
+boundedness is used.
+
+## References
+
+* Stacks Project, Tags 0941, 06YY, 0D6D
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 3.4.10, Proposition 3.5.1 and
+  Lemma 3.5.7
 -/
 
 @[expose] public noncomputable section
@@ -42,9 +60,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace WeilConjectures.CounitRealization
 
-/-- Bundling the finite extensions already defined by the coefficient dependency.
-Source: blueprint coefficient conventions; Stacks 0941
-(blueprint: lem-trf-counit-realization-substitution). -/
+/-- Bundling the finite extensions already defined by the coefficient dependency. -/
 structure Coefficient (l : ℕ) [Fact l.Prime] where
   /-- A finite extension of the specified p-adic field. -/
   carrier : Type u
@@ -59,9 +75,7 @@ attribute [instance] Coefficient.field Coefficient.algebra Coefficient.finite
 
 variable (l : ℕ) [Fact l.Prime]
 
-/-- A coefficient field and an allowed scheme, used only to index composable words.
-Source: the standing scheme hypothesis in Stacks 0941 and the blueprint transport
-(blueprint: lem-trf-counit-realization-substitution). -/
+/-- A coefficient field and an allowed scheme, used only to index composable words. -/
 structure Location where
   /-- The coefficient extension. -/
   coefficient : Coefficient.{u} l
@@ -72,9 +86,7 @@ structure Location where
 
 attribute [instance] Location.invertible
 
-/-- The two primitive operations, with their actual source and target.
-Source: Stacks 0941, 06YY, 0D6D
-(blueprint: lem-trf-counit-realization-substitution). -/
+/-- The two primitive operations, with their actual source and target. -/
 inductive Primitive : Location.{u} l → Location.{u} l → Type (u + 1)
   | pullback (E : Coefficient.{u} l) {X Y : Scheme.{u}}
       [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -84,17 +96,13 @@ inductive Primitive : Location.{u} l → Location.{u} l → Type (u + 1)
       (X : Scheme.{u}) [hX : ∀ x : X, Invertible (l : X.residueField x)] :
       Primitive ⟨E, X, hX⟩ ⟨L, X, hX⟩
 
-/-- A finite composable word, including the empty word and arbitrary parentheses.
-Source: Stacks 0941, substitution expansion
-(blueprint: lem-trf-counit-realization-substitution). -/
+/-- A finite composable word, including the empty word and arbitrary parentheses. -/
 inductive Word : Location.{u} l → Location.{u} l → Type (u + 1)
   | nil (a : Location.{u} l) : Word a a
   | atom {a b : Location.{u} l} : Primitive l a b → Word a b
   | comp {a b c : Location.{u} l} : Word a b → Word b c → Word a c
 
-/-- The supplied normalized models, without any invertibility or coherence conclusions.
-Source: Stacks 0941 and the prescribed realization-model dependency
-(blueprint: lem-trf-counit-realization-substitution). -/
+/-- The supplied normalized models, without any invertibility or coherence conclusions. -/
 structure Models where
   /-- The whole-system adjunction, with its fixed reduction and realization. -/
   system : ∀ a : Location.{u} l,
@@ -115,8 +123,7 @@ structure Models where
 
 variable {l}
 
-/-- Primitive evaluation in the category of entire derived quotient systems.
-Source: Stacks 0941, 06YY (blueprint: lem-trf-counit-realization-substitution). -/
+/-- Primitive evaluation in the category of entire derived quotient systems. -/
 def Primitive.system {a b : Location.{u} l} (O : Primitive l a b) :
     coefficientSequenceDerived l a.coefficient.carrier a.scheme ⥤
       coefficientSequenceDerived l b.coefficient.carrier b.scheme :=
@@ -125,8 +132,7 @@ def Primitive.system {a b : Location.{u} l} (O : Primitive l a b) :
   | @Primitive.scalar _ _ E L ι X hX =>
       integralComparisonDerivedSequenceScalar l E.carrier L.carrier ι X
 
-/-- Primitive evaluation by the recorded completed operations.
-Source: Stacks 0941, 06YY (blueprint: lem-trf-counit-realization-substitution). -/
+/-- Primitive evaluation by the recorded completed operations. -/
 def Primitive.completed {a b : Location.{u} l} (O : Primitive l a b) :
     DerivedCategory (scalarReductionSource l a.coefficient.carrier a.scheme) ⥤
       DerivedCategory (scalarReductionSource l b.coefficient.carrier b.scheme) :=
@@ -134,8 +140,7 @@ def Primitive.completed {a b : Location.{u} l} (O : Primitive l a b) :
   | @Primitive.pullback _ _ E X Y hX hY f => integralDerivedPullback l E.carrier f
   | @Primitive.scalar _ _ E L ι X hX => integralScalarExtensionOfUniverses l E.carrier L.carrier ι X
 
-/-- The prescribed primitive model isomorphism b, with no further choice.
-Source: Stacks 0941 (blueprint: lem-trf-counit-realization-substitution). -/
+/-- The prescribed primitive model isomorphism b, with no further choice. -/
 def Primitive.model (M : Models.{u} l) {a b : Location.{u} l} (O : Primitive l a b) :
     O.completed ≅ (M.system a).reduction ⋙ O.system ⋙
       coefficientSequenceLimit l b.coefficient.carrier b.scheme :=
@@ -143,8 +148,7 @@ def Primitive.model (M : Models.{u} l) {a b : Location.{u} l} (O : Primitive l a
   | @Primitive.pullback _ _ E X Y hX hY f => (M.pullback E f).realization
   | @Primitive.scalar _ _ E L ι X hX => (M.scalar E L ι X).realization
 
-/-- The primitive map r is exactly b followed by L(O(e_C)).
-Source: Stacks 0941 (blueprint: lem-trf-counit-realization-substitution). -/
+/-- The primitive map r is exactly b followed by L(O(e_C)). -/
 def Primitive.comparison (M : Models.{u} l) {a b : Location.{u} l} (O : Primitive l a b)
     (C : coefficientSequenceDerived l a.coefficient.carrier a.scheme) :
     O.completed.obj ((coefficientSequenceLimit l a.coefficient.carrier a.scheme).obj C) ⟶
@@ -153,8 +157,7 @@ def Primitive.comparison (M : Models.{u} l) {a b : Location.{u} l} (O : Primitiv
     (coefficientSequenceLimit l b.coefficient.carrier b.scheme).map
       (O.system.map ((M.system a).adjunction.counit.app C))
 
-/-- Evaluation of a parenthesized word on entire systems.
-Source: Stacks 0941 (blueprint: lem-trf-counit-realization-substitution). -/
+/-- Evaluation of a parenthesized word on entire systems. -/
 def Word.system {a b : Location.{u} l} (w : Word l a b) :
     coefficientSequenceDerived l a.coefficient.carrier a.scheme ⥤
       coefficientSequenceDerived l b.coefficient.carrier b.scheme :=
@@ -163,8 +166,7 @@ def Word.system {a b : Location.{u} l} (w : Word l a b) :
   | .atom O => O.system
   | .comp w v => w.system ⋙ v.system
 
-/-- The corresponding completed word with identical parentheses.
-Source: Stacks 0941 (blueprint: lem-trf-counit-realization-substitution). -/
+/-- The corresponding completed word with identical parentheses. -/
 def Word.completed {a b : Location.{u} l} (w : Word l a b) :
     DerivedCategory (scalarReductionSource l a.coefficient.carrier a.scheme) ⥤
       DerivedCategory (scalarReductionSource l b.coefficient.carrier b.scheme) :=
@@ -173,9 +175,7 @@ def Word.completed {a b : Location.{u} l} (w : Word l a b) :
   | .atom O => O.completed
   | .comp w v => w.completed ⋙ v.completed
 
-/-- Iterating precisely the primitive counit maps: r_vw = v-hat(r_w) followed by r_v.
-Source: Stacks 0941, word substitution
-(blueprint: lem-trf-counit-realization-substitution). -/
+/-- Iterating precisely the primitive counit maps: `r_vw = v-hat(r_w)` followed by `r_v`. -/
 def Word.comparison (M : Models.{u} l) {a b : Location.{u} l} (w : Word l a b)
     (C : coefficientSequenceDerived l a.coefficient.carrier a.scheme) :
     w.completed.obj ((coefficientSequenceLimit l a.coefficient.carrier a.scheme).obj C) ⟶
@@ -186,9 +186,7 @@ def Word.comparison (M : Models.{u} l) {a b : Location.{u} l} (w : Word l a b)
   | .comp w v => v.completed.map (w.comparison M C) ≫ v.comparison M (w.system.obj C)
 
 /-- The domain restriction requires constructible-complete intermediate realizations.
-Normalization of the intermediate systems is a conclusion, not an added assumption.
-Source: Stacks 0941, effective-model domain
-(blueprint: lem-trf-counit-realization-substitution). -/
+Normalization of the intermediate systems is a conclusion, not an added assumption. -/
 def Word.Allowed {a b : Location.{u} l} (w : Word l a b)
     (C : coefficientSequenceDerived l a.coefficient.carrier a.scheme) : Prop :=
   match w with
@@ -202,8 +200,7 @@ def Word.Allowed {a b : Location.{u} l} (w : Word l a b)
   | .comp w v => w.Allowed C ∧ v.Allowed (w.system.obj C)
 
 /-- Transport of an entire-system comparison by the iterated counit maps.
-The explicit invertibility argument is the conclusion of the theorem below.
-Source: Stacks 0941 (blueprint: lem-trf-counit-realization-substitution). -/
+The explicit invertibility argument is the conclusion of the theorem below. -/
 def Word.transport (M : Models.{u} l) {a b : Location.{u} l} (w v : Word l a b)
     (t : w.system ⟶ v.system)
     (C : coefficientSequenceDerived l a.coefficient.carrier a.scheme)
@@ -214,9 +211,7 @@ def Word.transport (M : Models.{u} l) {a b : Location.{u} l} (w v : Word l a b)
     (t.app C) ≫ inv (v.comparison M C)
 
 /-- All specified comparison generators, closed under inverse, composition, and both
-whiskerings. The constraints are the recorded generator-normalized system maps.
-Source: Stacks 0941, 06YY, 0D6D
-(blueprint: lem-trf-counit-realization-substitution). -/
+whiskerings. The constraints are the recorded generator-normalized system maps. -/
 inductive Comparison : {a b : Location.{u} l} → Word l a b → Word l a b → Type (u + 1)
   | pullbackComp (E : Coefficient.{u} l) {X Y Z : Scheme.{u}}
       [∀ x : X, Invertible (l : X.residueField x)]
@@ -256,9 +251,7 @@ inductive Comparison : {a b : Location.{u} l} → Word l a b → Word l a b → 
   | right {a b c : Location.{u} l} (z : Word l a b) {w v : Word l b c} :
       Comparison w v → Comparison (.comp z w) (.comp z v)
 
-/-- Evaluation of the named constraints as isomorphisms of whole-system functors.
-Source: Stacks 0941, 06YY, 0D6D
-(blueprint: lem-trf-counit-realization-substitution). -/
+/-- Evaluation of the named constraints as isomorphisms of whole-system functors. -/
 def Comparison.system {a b : Location.{u} l} {w v : Word l a b}
     (t : Comparison w v) : w.system ≅ v.system :=
   match t with
@@ -279,15 +272,13 @@ def Comparison.system {a b : Location.{u} l} {w v : Word l a b}
   | .left t z => Functor.isoWhiskerRight t.system z.system
   | .right z t => Functor.isoWhiskerLeft z.system t.system
 
-/-- The coherent reduction of the recursive comparison, still an entire-system map.
-Source: Stacks 0941 (blueprint: lem-trf-counit-realization-substitution). -/
+/-- The coherent reduction of the recursive comparison, still an entire-system map. -/
 def Word.reductionComparison (M : Models.{u} l) {a b : Location.{u} l} (w : Word l a b)
     (C : coefficientSequenceDerived l a.coefficient.carrier a.scheme) :=
   (M.system b).reduction.map (w.comparison M C) ≫
     (M.system b).adjunction.counit.app (w.system.obj C)
 
-/-- Primitive whole-counit insertion at an arbitrary completed input.
-Source: Stacks 0941 (blueprint: lem-trf-counit-realization-substitution). -/
+/-- Primitive whole-counit insertion at an arbitrary completed input. -/
 def Primitive.reductionComparison (M : Models.{u} l) {a b : Location.{u} l}
     (O : Primitive l a b)
     (K : DerivedCategory (scalarReductionSource l a.coefficient.carrier a.scheme)) :=
@@ -295,9 +286,7 @@ def Primitive.reductionComparison (M : Models.{u} l) {a b : Location.{u} l}
     (M.system b).adjunction.counit.app (O.system.obj ((M.system a).reduction.obj K))
 
 /-- The word assertions, separated from the scalar formulas only to keep elaboration small.
-Every hypothesis is the stated normalized constructible-complete domain restriction.
-Source: Stacks 0941, whole-counit substitution
-(blueprint: lem-trf-counit-realization-substitution). -/
+Every hypothesis is the stated normalized constructible-complete domain restriction. -/
 structure WordLaws (M : Models.{u} l) : Prop where
   /-- Effectivity concerns the actual canonical counit in the derived system category. -/
   counit : ∀ (a : Location.{u} l)
@@ -377,17 +366,14 @@ structure WordLaws (M : Models.{u} l) : Prop where
       w.completed.map (z.comparison M C) ≫
         w.transport M v t.system.hom (z.system.obj C)
 
-/-- The scalar letter, using the already defined whole-system and completed scalar changes.
-Source: Stacks 06YY (blueprint: lem-trf-counit-realization-substitution). -/
+/-- The scalar letter, using the already defined whole-system and completed scalar changes. -/
 def scalarWord (E L : Coefficient.{u} l) (ι : E.carrier →ₐ[ℚ_[l]] L.carrier)
     (X : Scheme.{u}) [hX : ∀ x : X, Invertible (l : X.residueField x)] :
     Word l ⟨E, X, hX⟩ ⟨L, X, hX⟩ := .atom (.scalar E L ι X)
 
 /-- Scalar normalization means the realized system associator is the ordinary tensor
 associator conjugated by the actual quotient-normalized completion maps chi.
-The published associator and unit definitions expand to exactly that formula.
-Source: Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7
-(blueprint: lem-trf-counit-realization-substitution). -/
+The published associator and unit definitions expand to exactly that formula. -/
 structure ScalarLaws (M : Models.{u} l) : Prop where
   /-- The entire-system associator is the chi-conjugated ordinary derived associator. -/
   associator : ∀ (E L F : Coefficient.{u} l)
@@ -699,45 +685,9 @@ private theorem scalar_laws (M : Models.{u} l) : ScalarLaws M := by
     change _ = χ.hom ≫ χ.inv ≫ (CompletedLineTensor.ordinaryUnit l E.carrier X).hom.app K
     rw [χ.hom_inv_id_assoc]
 
-/-- Whole-counit substitution and scalar normalization for realized operations.
-Source: Stacks 0941, lemma-derived-limit-is-ok; Bhatt--Scholze, Definition 3.4.10,
-Proposition 3.5.1 and Lemma 3.5.7; blueprint main-20261015,
-prop-trf-karoubi-independence, final common-stage transport sentence
-(blueprint: lem-trf-counit-realization-substitution).
-
-Proof, with the scalar representative calculations isolated in their own nodes:
-1. purNormalizedReconstruction gives invertibility of the actual adjunction counit
-on normalized systems, without bounds. The residue-field invertibility hypothesis
-implies the required global invertibility of l by the stalk criterion.
-2. A primitive comparison is its prescribed model followed by L(O(e_C)), hence is
-invertible. effectiveComparisonRealizationModels makes O(R(K)) normalized on the
-constructible-complete domain. Transport normalization along O(e_C); iterate.
-3. Apply naturality of the primitive model and of the whole-system counit to an
-arbitrary derived-system morphism. This proves primitive comparison naturality,
-including inverse arrows, before any separate finite evaluation.
-4. Induct on finite words. The empty comparison is identity. Composition is the
-stated cut formula. Expanding three consecutive blocks proves parenthesization
-independence by associativity and functoriality; repeat for every cut.
-5. For two letters move the first model past the image of the second counit by
-naturality. Counit naturality then identifies insertion at the intermediate object
-with substitution before the next primitive. The triangle identities cancel an
-inserted unit. This gives the coherent reductionComparison equation.
-6. For each named entire-system comparison, conjugate its realization by the two
-word comparisons. Invertibility gives uniqueness. Composition cancels the middle
-comparison and its inverse; inversion reverses all factors.
-7. Naturality applied to t_C gives left whiskering; evaluating at zC and using the
-word cut formula gives right whiskering. Induct to arbitrary further words.
-8. scalarModelAssociativity supplies the ambient scalar normalization square,
-including the original middle whole-system counit. Naturality of the second scalar
-model and the middle counit, then naturality of the system associator, transport
-this square through e_C. Cancel the two invertible chi factors. Their conjugation
-is exactly the published CompletedLineTensor.associator.
-9. scalarModelUnit supplies the ambient identity square with the actual adjunction
-unit. Naturality of the system unitor transports it through e_C. The adjunction
-triangle cancels the unit and realized counit. Cancel chi and expand the published
-CompletedLineTensor.unit. The two scalar nodes carry the strict quotient arguments;
-no faithfulness of separate finite reductions, finite Tor-amplitude, or additional
-boundedness is used. -/
+/-- Whole-counit substitution and scalar normalization for realized operations: word
+comparisons are invertible, natural, independent of parenthesization and compatible with
+whiskering, and the realized scalar associator and unit are the published ones. -/
 theorem counitRealizationSubstitution (l : ℕ) [Fact l.Prime] (M : Models.{u} l) :
     WordLaws M ∧ ScalarLaws M := by
   exact ⟨word_laws M, scalar_laws M⟩

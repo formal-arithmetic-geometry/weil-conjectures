@@ -11,7 +11,12 @@ import all WeilConjectures.SmoothPurity.Finite.FiniteSystemPullbackCoherence
 
 /-! # A component of strict quotient-system coherence
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6D.
+The composition isomorphisms of the derived sequence pullbacks satisfy the associativity coherence
+for three composable morphisms.
+
+## References
+
+* Stacks Project, Tag 0D6D.
 -/
 
 @[expose] public noncomputable section
@@ -218,13 +223,10 @@ private theorem derivedSequenceTransport
   cases e
   exact Functor.mapDerivedCategoryNatIso_refl
 
-/-- Source: Stacks Project, sites-cohomology.tex, Tag 0D6D.
-(blueprint: lem-trf-sequence-derived-associativity).
-Proof: Apply the ordinary three-arrow coherence equation to the exact sequence pullback functors.
-The comparison map of the derived functor construction commutes with composition and equality
-transport. Whisker the ordinary equation with the localization, replace each comparison by its
-defining derived comparison, and cancel the canonical localization isomorphisms. This gives the
-displayed equation with the associativity equality transported in the indicated direction. -/
+/-- Associativity coherence of the composition isomorphisms of the derived sequence pullbacks: for
+`j : Y ⟶ Z`, `h : Z ⟶ W` and `k : W ⟶ V`, the two composites of composition isomorphisms from the
+pullback along `(j ≫ h) ≫ k` to the iterated pullback agree, up to the transport along
+`Category.assoc j h k`. -/
 theorem sequenceDerivedCoherence
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

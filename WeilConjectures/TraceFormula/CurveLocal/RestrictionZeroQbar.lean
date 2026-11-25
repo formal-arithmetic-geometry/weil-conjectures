@@ -15,7 +15,8 @@ public import WeilConjectures.TraceFormula.SupportedRestrictionRational
 
 # The supported restriction is zero for Frobenius, with `ℚ̄_ℓ`-coefficients
 
-This file proves the `ℚ̄_ℓ`-form of blueprint `lemma-vanishing-local-term-zero-stalk`
+This file proves the `ℚ̄_ℓ`-form of the vanishing of the supported restriction at a Frobenius
+fixed point
 (`ProEtale.CondensedRing.Correspondence.upperStar_map_supportedRestriction_frobeniusGraph_eq_zero`)
 from the classical finite-coefficient computation
 (`AlgebraicGeometry.Etale.CurveLocalModel.restrictionZero`):
@@ -214,14 +215,10 @@ has `K_x = 0`. Then the stalk at `z` of the supported restriction
 `ρ_P : Lι^* Rc^! P ⟶ Rd^! LΔ^* P`, `P = K ⊠ D_X K`
 (`Correspondence.FixedLocus.supportedRestriction`), vanishes.
 
-This is the `ℚ̄_ℓ`-form of the blueprint statement: the stalk of `ρ_P` at `z` is the supported
-restriction `ρ_{a,b} : RΓ_a(T, P) ⟶ RΓ_x(b, b^* P)` on the strict localization `T` of `X ⨯ X`
-at `(x, x)`, from the Frobenius graph `a` to the diagonal `b`. The blueprint shows
-`ρ_{a,b} = 0` in `D(A)` for every finite `ℓ`-primary ring `A` (localization to the punctured
-diagonal, covers of degree prime to `ℓ`, and the blowup argument of
-`lemma-vanishing-restrictions-after-blowing-up--1`); the `ℚ̄_ℓ`-form follows by the integral models
-of `lemma-integral-models-rational-frobenius-correspondences`. The coefficient map `v` plays no
-role: `ρ_P` only depends on the correspondence and on `P`. -/
+The stalk of `ρ_P` at `z` is the supported restriction `ρ_{a,b} : RΓ_a(T, P) ⟶ RΓ_x(b, b^* P)` on
+the strict localization `T` of `X ⨯ X` at `(x, x)`, from the Frobenius graph `a` to the diagonal
+`b`. The coefficient map `v` plays no role: `ρ_P` only depends on the correspondence and on
+`P`. -/
 theorem upperStar_map_supportedRestriction_frobeniusGraph_eq_zero [IsAlgClosed k]
     [SmoothOfRelativeDimension 1 X.hom] [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p)
     {m : ℕ} (hm : 1 ≤ m)

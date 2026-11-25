@@ -11,8 +11,13 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 /-!
 # The strict Roos lift of the integral inverse-image comparison
 
-Source: Stacks Project, Tags 03D6, 06YY and 0941
-(blueprint: lem-trf-integral-pullback-reduction-counit).
+The defining Roos lift of the integral inverse-image comparison is the limit lift of the inverse
+image of a strict quotient presentation, followed by the whole-tower tensor unit and the
+normalized pullback tower identification (`inverseImageRoosComparisonComplex_eq_limitToRoos`).
+
+## References
+
+* Stacks Project, Tags 03D6, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -101,19 +106,7 @@ private theorem restrictedSection_naturality
 
 /-- The defining Roos lift of the inverse-image comparison is the limit lift of the
 inverse image of a strict quotient presentation, followed by the whole-tower tensor
-unit and the normalized pullback tower identification.
-
-Source: Stacks Project, Tags 03D6, 06YY and 0941; Steps 3 and 5 of the
-resolution-matching argument (blueprint: lem-trf-integral-pullback-reduction-counit).
-
-Proof: both sides are maps into a Roos cone, so they are determined by their
-unshifted coordinates and their shifted coordinate. The shifted coordinates vanish
-for both. In the unshifted coordinate at level n, the left side is theta_n. On a
-section x over U, the right side sends x to b(x), which is the strict reduction of
-the tensor generator 1 tensor x, then inserts the sequence-pullback generator and
-restricts along the comma arrow of U, and finally applies q. By the generator
-formula for q and naturality of q under restriction this is the restriction of the
-finite pullback generator of 1 tensor x, which is the defining formula of theta_n. -/
+unit and the normalized pullback tower identification. -/
 theorem inverseImageRoosComparisonComplex_eq_limitToRoos
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

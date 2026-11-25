@@ -21,12 +21,11 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingAutInva
 
 # Nearby cycles and the twist by `ℚ̄_ℓ(0)[n]`
 
-Let `M` be a model with nearby cycles `Ψ = Li^* Rj_* Lε^*` on bounded constructible complexes,
-`X` over a field `k` and `X'` over a field `k'`, and let `T = ℚ̄_ℓ,X(0)[n]`,
-`T' = ℚ̄_ℓ,X'(0)[n]` (`ProEtale.CondensedRing.boundedConstructibleTateTwist`). This file provides
-the inputs on the twist `T` of the slice step of nearby duality (blueprint
-`lemma-nearby-duality-slice--1`, the twist (1), "`P` acts trivially on `A(1)[2]`"), in the degree
-`d = 0`, where the comparisons of the Tate twists with the pullbacks are canonical
+Let `M` be a model with nearby cycles `Ψ = Li^* Rj_* Lε^*` on bounded constructible complexes, `X`
+over a field `k` and `X'` over a field `k'`, and let `T = ℚ̄_ℓ,X(0)[n]`, `T' = ℚ̄_ℓ,X'(0)[n]`
+(`ProEtale.CondensedRing.boundedConstructibleTateTwist`). This file provides the inputs on the twist
+`T` of the slice step of nearby duality, in the degree `d = 0`, where the comparisons of the Tate
+twists with the pullbacks are canonical
 (`ProEtale.CondensedRing.leftDerivedUpperStarTateTwistDerivedZeroIso`):
 
 * the isomorphism `κ_A : Ψ (A ⊗ T) ≅ Ψ A ⊗ T'`
@@ -41,6 +40,8 @@ the inputs on the twist `T` of the slice step of nearby duality (blueprint
   `ρ(s)` fixes the specialization map, `σ ∘ ρ(s)_T = σ`
   (`NearbyCyclesModel.zeroTwistSpecializationMap_comp_boundedConstructibleAutAction_app`);
 * `T` is invertible (`ProEtale.CondensedRing.isInvertible_boundedConstructibleTateTwist_zero`).
+
+## Implementation details
 
 The invariance of `σ` is reduced to that of the specialization unit
 (`NearbyCyclesModel.Hom.unit_comp_autAction`): in degree `0` the canonical comparisons of the
@@ -268,8 +269,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X X' : Scheme.{u}} {M : NearbyCyclesModel X X'}
 
 /-- **The action of a self-map of a model commutes with the shifts**:
-`ρ(s)(K[n]) = Ψ(K[n]) ≅ (Ψ K)[n] ⟶ (Ψ K)[n] ≅ Ψ(K[n])`, by the commutation of the pullback
-exchange with the shifts (`NearbyCyclesModel.Hom.commShift_pullbackExchange`). -/
+`ρ(s)(K[n]) = Ψ(K[n]) ≅ (Ψ K)[n] ⟶ (Ψ K)[n] ≅ Ψ(K[n])`. -/
 lemma Hom.autAction_shift_comp (s : M.Hom M (𝟙 X) (𝟙 X')) (n : ℤ)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
@@ -316,8 +316,7 @@ private lemma twistSpecializationMap_tateTwistZero :
     leftDerivedUpperStarTateTwistDerivedZeroIso_eq, unit, Iso.hom_inv_id_assoc]
   rfl
 
-/-- **The action of a self-map fixes the specialization map of `ℚ̄_ℓ(0)`**, since it fixes the
-specialization unit (`NearbyCyclesModel.Hom.unit_comp_autAction`). -/
+/-- **The action of a self-map fixes the specialization map of `ℚ̄_ℓ(0)`**. -/
 lemma twistSpecializationMap_tateTwistZero_comp_autAction (s : M.Hom M (𝟙 X) (𝟙 X')) :
     M.twistSpecializationMap (Profinite.padicAlgClRingObj ℓ)
         (leftDerivedUpperStarTateTwistDerivedZeroIso M.ε ℓ ≪≫
@@ -333,10 +332,7 @@ set_option maxRecDepth 20000 in
 -- the defeq checks of the shifts of the derived categories of module objects are deep, and the
 -- specialization maps and the actions of the model unfold to large terms
 /-- **The action of a self-map fixes the specialization map of `ℚ̄_ℓ(0)[n]`**, on the ambient
-derived categories: the action and the specialization map commute with the shifts
-(`NearbyCyclesModel.Hom.autAction_shift_comp`,
-`NearbyCyclesModel.twistSpecializationMap_shift_comp`), and in degree `0` the action fixes the
-specialization map (`NearbyCyclesModel.twistSpecializationMap_tateTwistZero_comp_autAction`). -/
+derived categories. -/
 lemma twistSpecializationMap_tateTwistZero_shift_comp_autAction (s : M.Hom M (𝟙 X) (𝟙 X'))
     (n : ℤ) :
     (shiftFunctor _ n).map (leftDerivedUpperStarTateTwistDerivedZeroIso M.i ℓ).inv ≫
@@ -410,12 +406,10 @@ noncomputable def zeroTwistSpecializationMap
             (leftDerivedUpperStarTateTwistDerivedZeroIso M.j ℓ).symm) ≪≫
           ((L((M.j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).commShiftIso n).app _).symm))
 
-/-- **Nearby cycles commute with the twist by `ℚ̄_ℓ(0)[n]`** (blueprint
-`lemma-nearby-duality-slice--1`, the twist (1)): `κ_A : Ψ (A ⊗ ℚ̄_ℓ,X(0)[n]) ≅ Ψ A ⊗ ℚ̄_ℓ,X'(0)[n]`,
-the isomorphism `NearbyCyclesModel.nearbyCyclesTateTwistIso` for `d = 0` and the canonical
-comparisons of `ℚ̄_ℓ(0)` with the pullbacks; `ℚ̄_ℓ(0)` is dualizable on the total space, which
-lives over the trait through `q` (`ProEtale.CondensedRing.isDualizable_tateTwistDerived_of_trait`).
-Its inverse is `μ_{A,T} ∘ (Ψ A ◁ σ)` (`NearbyCyclesModel.zeroTwistIso_inv`). -/
+/-- **Nearby cycles commute with the twist by `ℚ̄_ℓ(0)[n]`**:
+`κ_A : Ψ (A ⊗ ℚ̄_ℓ,X(0)[n]) ≅ Ψ A ⊗ ℚ̄_ℓ,X'(0)[n]`, the isomorphism
+`NearbyCyclesModel.nearbyCyclesTateTwistIso` for `d = 0` and the canonical comparisons of `ℚ̄_ℓ(0)`
+with the pullbacks. Its inverse is `μ_{A,T} ∘ (Ψ A ◁ σ)` (`NearbyCyclesModel.zeroTwistIso_inv`). -/
 noncomputable def zeroTwistIso
     (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (q : M.total ⟶ trait k') (n : ℤ) (A : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -463,9 +457,8 @@ lemma boundedConstructibleTensorMap_associativity_inv
   simp only [boundedConstructibleNearbyCycles_μ] at h
   exact h
 
-/-- **Compatibility of `κ` with the lax tensor map** of nearby cycles, in the form of the
-hypothesis of `CategoryTheory.Verdier.isIso_nearbyDualityMap_of_iso_twist_iff`: it follows from
-the associativity of `μ`, `κ⁻¹` being `μ ∘ (Ψ ◁ σ)`. -/
+/-- **Compatibility of `κ` with the lax tensor map** of nearby cycles, in the form of the hypothesis
+of `CategoryTheory.Verdier.isIso_nearbyDualityMap_of_iso_twist_iff`. -/
 lemma zeroTwistIso_tensor (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (q : M.total ⟶ trait k') (n : ℤ) (A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     boundedConstructibleTensorMap hP A (B ⊗ boundedConstructibleTateTwist ℓ X 0 n) ≫
@@ -493,12 +486,7 @@ lemma Hom.boundedConstructibleAutAction_tensor (s : M.Hom M (𝟙 _) (𝟙 _))
   exact s.autAction_tensor _ A.obj B.obj
 
 
-/-- **The action of a self-map fixes the specialization map of `ℚ̄_ℓ(0)[n]`** (blueprint
-`lemma-nearby-duality-slice--1`, "`P` acts trivially on the twist"): `σ ∘ ρ(s) = σ`. The action
-commutes with the shifts (`NearbyCyclesModel.Hom.autAction_shift_comp`), so does `σ`
-(`NearbyCyclesModel.twistSpecializationMap_shift_comp`), and in degree `0` the specialization
-map is the specialization unit
-(`NearbyCyclesModel.twistSpecializationMap_tateTwistZero_comp_autAction`). -/
+/-- **The action of a self-map fixes the specialization map of `ℚ̄_ℓ(0)[n]`**: `σ ∘ ρ(s) = σ`. -/
 lemma zeroTwistSpecializationMap_comp_boundedConstructibleAutAction_app
     (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (s : M.Hom M (𝟙 _) (𝟙 _)) (n : ℤ) :
@@ -511,12 +499,8 @@ lemma zeroTwistSpecializationMap_comp_boundedConstructibleAutAction_app
     Functor.mapIso_hom, Iso.symm_hom, Category.assoc, boundedConstructibleTateTwist]
   exact twistSpecializationMap_tateTwistZero_shift_comp_autAction (ℓ := ℓ) s n
 
-/-- **`κ` is invariant under the self-maps of the model** (blueprint
-`lemma-nearby-duality-slice--1`, "`P` acts trivially on `A(1)[2]`", for the twist by `ℚ̄_ℓ(0)[n]`):
-`κ_A ∘ ρ(s)_{A ⊗ T} = (ρ(s)_A ▷ T') ∘ κ_A`, by the monoidality of the action
-(`NearbyCyclesModel.Hom.boundedConstructibleAutAction_tensor`) and its triviality on the
-specialization map
-(`NearbyCyclesModel.zeroTwistSpecializationMap_comp_boundedConstructibleAutAction_app`). -/
+/-- **`κ` is invariant under the self-maps of the model**:
+`κ_A ∘ ρ(s)_{A ⊗ T} = (ρ(s)_A ▷ T') ∘ κ_A`. -/
 lemma boundedConstructibleAutAction_app_comp_zeroTwistIso_hom
     (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (q : M.total ⟶ trait k') (s : M.Hom M (𝟙 _) (𝟙 _)) (n : ℤ)

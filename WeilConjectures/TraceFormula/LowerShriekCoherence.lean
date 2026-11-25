@@ -21,11 +21,10 @@ categories `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` (SGA 4, Exposé XVII, §5), stated for th
 (`PF_f : Rf_! K ⊗ᴸ B ⟶ Rf_! (K ⊗ᴸ Lf^* B)`) and the composition isomorphisms
 `ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl`
 (`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`) and `ProEtale.CondensedRing.boundedConstructibleUpperStarComp`
-(`L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`). They are deduced from the clauses of blueprint
-`prop-sf-pf-coherence` stated in `WeilConjectures.PoincareDuality.ProjectionFormulaCoherence`.
+(`L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`). They are deduced from the projection formula coherences stated in
+`WeilConjectures.PoincareDuality.ProjectionFormulaCoherence`.
 
-The companion coherence of compact-support base change with the pasting of cartesian squares
-(blueprint `proposition-composition-base-change-rf-shriek`, clause (2)) is
+The companion coherence of compact-support base change with the pasting of cartesian squares is
 `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert`
 (`WeilConjectures.TraceFormula.BaseChangeCoherence`).
 
@@ -104,15 +103,14 @@ variable {X Y S : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
   [IsSeparated S.hom]
 
-/-- **The projection formula is compatible with composition** (blueprint `prop-sf-pf-coherence`,
-the associativity pentagon; SGA 4, Exposé XVII, 5.2.2): for `f : X ⟶ Y` and `g : Y ⟶ S`, the
-projection morphism of `f ≫ g`, followed by the composition isomorphisms
-`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` and `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`, is the composite
+/-- **The projection formula is compatible with composition** (SGA 4, Exposé XVII, 5.2.2): for
+`f : X ⟶ Y` and `g : Y ⟶ S`, the projection morphism of `f ≫ g`, followed by the composition
+isomorphisms `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` and `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`, is the composite
 ```
 R(f ≫ g)_! K ⊗ B ≅ Rg_! (Rf_! K) ⊗ B --PF_g--> Rg_! (Rf_! K ⊗ Lg^* B)
   --Rg_! PF_f--> Rg_! Rf_! (K ⊗ Lf^* Lg^* B).
 ```
-This is `exceptionalProjection_comp`, with the composition isomorphism moved to the left. -/
+-/
 theorem boundedConstructibleExceptionalProjectionMorphism_comp (f : X ⟶ Y) (g : Y ⟶ S)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(S.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -241,8 +239,8 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_δ (sq : CommSq g' f'
     h₁ h₂ p (boundedConstructiblePullbackSquareComparison _ ℓ sq) e A B
   exact key
 
-/-- **The projection formula is compatible with base change** (blueprint `prop-sf-pf-coherence`,
-the base change square; SGA 4, Exposé XVII, 5.2.2 and 5.2.9), for proper vertical maps: for a
+/-- **The projection formula is compatible with base change** (SGA 4, Exposé XVII, 5.2.2 and
+5.2.9), for proper vertical maps: for a
 cartesian square `g' ≫ f = f' ≫ g` with `f` and `f'` proper, under compact-support base change
 `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!`, the monoidal structures of `Lg^*`, `Lg'^*` and the
 identification `θ : Lg'^* Lf^* ≅ Lf'^* Lg^*`, `Lg^*` of the projection morphism of `f` is the
@@ -254,10 +252,7 @@ Lg^* (Rf_! K ⊗ B) ⟶ Lg^* Rf_! (K ⊗ Lf^* B) ⟶ Rf'_! Lg'^* (K ⊗ Lf^* B)
   ⟶ Rf'_! (Lg'^* K ⊗ Lf'^* Lg^* B).
 ```
 (`CategoryTheory.ProjectionBaseChange.PFBaseChange`, with `K` and `B` the variables of the formula
-and `θ = boundedConstructiblePullbackSquareComparison`). Both projection morphisms are those of
-the adjunctions `Lf^* ⊣ Rf_!` and `Lf'^* ⊣ Rf'_!`
-(`upperStar_map_exceptionalProjection_comp_counit`) and `Ex_!` is the mate of `θ`, so this is
-`CategoryTheory.ProjectionBaseChange.pfBaseChange_of_counit`. -/
+and `θ = boundedConstructiblePullbackSquareComparison`). -/
 theorem boundedConstructibleExceptionalProjectionMorphism_baseChange (sq : IsPullback g' f' f g)
     [IsProper f.left] [IsProper f'.left] :
     ProjectionBaseChange.PFBaseChange

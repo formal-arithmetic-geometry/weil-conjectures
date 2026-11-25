@@ -13,8 +13,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityMap
 
 # Nearby duality restricted to averaging summands
 
-This file contains the formal part of the slice compatibility of nearby duality (blueprint
-`lemma-nearby-duality-slice--1` (2), with `lemma-duality-invariants-pro-p--1`), over abstract
+This file contains the formal part of the slice compatibility of nearby duality, over abstract
 monoidal closed categories.
 
 * **Equivariance** (`CategoryTheory.Verdier.app_comp_nearbyDualityMap_eq`): an endomorphism `σ`
@@ -74,14 +73,13 @@ instance additive_internalHom_flip_obj (ω : U') :
     (MonoidalClosed.internalHom.flip.obj ω : U'ᵒᵖ ⥤ U').Additive where
   map_add {_ _ f g} := pre_add_app f.unop g.unop ω
 
-/-- **Nearby duality restricted to averaging summands** (blueprint `lemma-nearby-duality-slice--1`
-(2), with `lemma-duality-invariants-pro-p--1`). In the situation of
+/-- **Nearby duality restricted to averaging summands**. In the situation of
 `CategoryTheory.Verdier.nearbyDualityMap_restrict` (a monoidal exchange `α : F' Ψ_X ⟶ Ψ_U F`
-compatible with the dualizing maps), let a finite group `Γ` act on `Ψ_U` by monoidal
-endomorphisms `σ a` fixing `θ_U`, with `σ a⁻¹` left inverse to `σ a` on `Ψ_U F M`, and suppose
-that `α` is split at `M` and at `D M` by retractions `rᵢ` with `|Γ| • (rᵢ ≫ α) = ∑ₐ σ a`, `|Γ|`
-being invertible on `Ψ_U F D M`. If the duality maps of `(F', ρ')` at `Ψ_X M`, of `(F, ρ)` at `M`
-and of `(Ψ_U, θ_U)` at `F M` are isomorphisms, then so is `F'(δ_{X,M})`. -/
+compatible with the dualizing maps), let a finite group `Γ` act on `Ψ_U` by monoidal endomorphisms
+`σ a` fixing `θ_U`, with `σ a⁻¹` left inverse to `σ a` on `Ψ_U F M`, and suppose that `α` is split
+at `M` and at `D M` by retractions `rᵢ` with `|Γ| • (rᵢ ≫ α) = ∑ₐ σ a`, `|Γ|` being invertible on
+`Ψ_U F D M`. If the duality maps of `(F', ρ')` at `Ψ_X M`, of `(F, ρ)` at `M` and of `(Ψ_U, θ_U)` at
+`F M` are isomorphisms, then so is `F'(δ_{X,M})`. -/
 theorem isIso_map_nearbyDualityMap_of_averaging
     (hμU : ∀ {A A' B B' : U} (x : A ⟶ A') (y : B ⟶ B'),
       (ΨU.map x ⊗ₘ ΨU.map y) ≫ μU A' B' = μU A B ≫ ΨU.map (x ⊗ₘ y))

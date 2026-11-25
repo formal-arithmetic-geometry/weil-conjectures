@@ -14,8 +14,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 The diagonal comparison and the whole-tower unit of exact inverse image, evaluated on
 the localization of a complex, are the localizations of the corresponding strict maps.
 
-Source: Stacks Project, Tags 03D6 and 0941
-(blueprint: def-trf-integral-tower-inverse-image-unit).
+## References
+
+* Stacks Project, Tags 03D6, 0941
 -/
 
 @[expose] public noncomputable section
@@ -80,12 +81,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
 /-- The diagonal comparison of exact inverse image, on the localization of a complex,
-is the localization of the levelwise identity `compConstIso`.
-Source: Stacks 0941 (blueprint: def-trf-integral-tower-inverse-image-unit).
-
-Proof: the diagonal is the composite of two composition isomorphisms and the
-isomorphism induced by `compConstIso`; each is characterized by its compatibility
-with the factorizations through the localization functors. -/
+is the localization of the levelwise identity `compConstIso`. -/
 theorem integralTowerInverseImageDiagonal_hom_app_factors
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     (integralComparisonConstantTower l E X).map
@@ -105,12 +101,7 @@ theorem integralTowerInverseImageDiagonal_hom_app_factors
   derivedSquare_fac _ _ _ _ (Functor.compConstIso ℕᵒᵖ (inverseImageIntegralModules l E g)) P
 
 /-- The whole-tower unit of exact inverse image, on the localization of a complex of
-quotient systems, is the localization of the strict tensor-unit map.
-Source: Stacks 03D6, 0941 (blueprint: def-trf-integral-tower-inverse-image-unit).
-
-Proof: the derived unit is the composite of two composition isomorphisms and the
-isomorphism induced by the strict unit; each is characterized by its compatibility
-with the factorizations through the localization functors. -/
+quotient systems, is the localization of the strict tensor-unit map. -/
 theorem integralDerivedTowerInverseImageUnit_hom_app_factors
     (C : CochainComplex (coefficientSequenceModules l E Y) ℤ) :
     (integralDerivedTowerInverseImage l E g).map
@@ -128,11 +119,7 @@ theorem integralDerivedTowerInverseImageUnit_hom_app_factors
 
 /-- Exact inverse image of the localization of a strict family from a constant tower
 into a restricted quotient system, followed by the whole-tower unit, is the
-localization of the strict composite family.
-Source: Stacks 03D6, 0941 (blueprint: def-trf-integral-tower-inverse-image-unit).
-
-Proof: compose the diagonal and unit formulas, using naturality of the factor
-isomorphism of the tower inverse image for the strict family. -/
+localization of the strict composite family. -/
 theorem integralTowerInverseImage_strictFamily_factors
     (P : CochainComplex (integralTowerModules l E Y) ℤ)
     (C : CochainComplex (coefficientSequenceModules l E Y) ℤ)

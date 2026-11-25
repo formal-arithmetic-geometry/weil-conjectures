@@ -15,9 +15,8 @@ The vertical axis `{y} × X` and the horizontal axis `X × {y}` of `X ×_k X` ar
 the `k`-point `y` along the two projections (`CurveLocalModel.isPullback_vertical`,
 `CurveLocalModel.isPullback_horizontal`). Hence a point of `T` lies on `V` (resp. `H`) if and
 only if its first (resp. second) coordinate is `y`
-(`CurveLocalModel.mem_range_v_iff`, `CurveLocalModel.mem_range_hH_iff`). Used in blueprint
-`lemma-tangent-cones-on-cover` to see that `T' ∖ (G' ∪ V' ∪ H')` lies over the punctured curve
-in both factors.
+(`CurveLocalModel.mem_range_v_iff`, `CurveLocalModel.mem_range_hH_iff`). This is used to see that
+`T' ∖ (G' ∪ V' ∪ H')` lies over the punctured curve in both factors.
 
 -/
 

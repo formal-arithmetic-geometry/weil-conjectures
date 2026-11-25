@@ -14,9 +14,8 @@ public import WeilConjectures.TraceFormula.ProperCompatibilityExchange
 
 For a proper morphism `f : X ⟶ Y`, `q = f × f` and `K' = Rf_* K`, the kernel pushforward
 `ρ_f : Rq_* (K ⊠ D_X K) ⟶ K' ⊠ D_Y K'` exchanges the evaluation kernels:
-`e_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* e_K` (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, (1)). This file collects the ingredients of the
-proof, which passes to the `LΔ_Y^* ⊣ RΔ_{Y*}` and `Lf^* ⊣ Rf_*` adjoints, where it reduces to the
+`e_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* e_K`. This file collects the ingredients of the proof, which
+passes to the `LΔ_Y^* ⊣ RΔ_{Y*}` and `Lf^* ⊣ Rf_*` adjoints, where it reduces to the
 coherence of the composition isomorphisms of the derived pullbacks with each other and with the
 tensor comparisons (`ProEtale.CondensedRing.upperStarComp_inv_app_comp_prodUpperStarCounit`,
 `ProEtale.CondensedRing.boundedConstructibleUpperStarComp_square_coherence_tensor`).

@@ -14,15 +14,13 @@ public import WeilConjectures.ZetaFunction.Examples
 # The trace formula for the constant Weil object on the projective line
 
 For `X = ℙ¹` over `k = 𝔽_q`, the constant Weil object `ℚ̲̄_ℓ` and `m ≥ 1`, both sides of the
-Grothendieck–Lefschetz trace formula for the `m`-th power of Frobenius are `qᵐ + 1` (blueprint
-`example-frobenius-projective-line`): the points of degree `m` are the `qᵐ + 1` points of
-`ℙ¹(𝔽_{qᵐ})`, each has local term `1`, and the alternating trace of the `m`-th Frobenius on
-`RΓ_c(ℙ¹ ⊗ k̄, ℚ̄_ℓ)` is `qᵐ + 1`.
+Grothendieck–Lefschetz trace formula for the `m`-th power of Frobenius are `qᵐ + 1`: the points of
+degree `m` are the `qᵐ + 1` points of `ℙ¹(𝔽_{qᵐ})`, each has local term `1`, and the alternating
+trace of the `m`-th Frobenius on `RΓ_c(ℙ¹ ⊗ k̄, ℚ̄_ℓ)` is `qᵐ + 1`.
 
 ## Main statements
 
-- `ProEtale.CondensedRing.projectiveLine_weilTraceFormula`: blueprint
-  `example-frobenius-projective-line`, both sides of the trace formula.
+- `ProEtale.CondensedRing.projectiveLine_weilTraceFormula`: both sides of the trace formula.
 
 -/
 
@@ -41,8 +39,8 @@ open Scheme
 
 attribute [local instance] fintypeFrobeniusFixedPoints
 
-/-- Blueprint `example-frobenius-projective-line`: for `X = ℙ¹` over `k = 𝔽_q`, the constant
-Weil object `ℚ̲̄_ℓ` and `m ≥ 1`,
+/-- The trace formula on the projective line: for `X = ℙ¹` over `k = 𝔽_q`, the constant Weil object
+`ℚ̲̄_ℓ` and `m ≥ 1`,
 
 * (local side) each point of degree `m`, that is each fixed point of the `m`-th power of
   Frobenius, has local term `tₘ(ℚ̲̄_ℓ; x̄) = 1`, and there are `qᵐ + 1` of them, the points of

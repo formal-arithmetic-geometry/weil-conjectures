@@ -15,8 +15,15 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstru
 
 /-! # Tensor closure of the finite geometric domain
 
-Source: latest blueprint proposition-six-operations-dctf (ii), proposition-six-operations-dctf--14.
-(blueprint: lem-trf-finite-geometric-tensor-domain).
+The recorded finite intrinsic tensor product preserves the geometric finite-Tor domain: bounded
+constructible complexes of finite Tor-amplitude.
+
+## Implementation details
+
+The proof takes ordinary cochain representatives and a K-flat resolution of the first factor; the
+signed tensor comparison identifies the tensor product of the representatives with the intrinsic
+tensor product, the two finite Tor intervals give their sum interval, and finite-coefficient
+tensor constructibility gives bounded constructibility.
 -/
 
 @[expose] public section
@@ -53,16 +60,7 @@ private theorem sfStabilityFiniteTorOfIso
   intro M P hM f hf hP N i hi
   exact ht.2 M P (hM.map (fun j ↦ j ≪≫ e.symm)) f hf hP N i hi
 
-/-- The recorded finite intrinsic tensor preserves the geometric finite-Tor domain.
-Source: latest blueprint proposition-six-operations-dctf (ii) and
-proposition-six-operations-dctf--14 (blueprint: lem-trf-finite-geometric-tensor-domain).
-
-Proof: take ordinary cochain representatives and a K-flat resolution of the first.
-The signed tensor comparison identifies the tensor on these representatives with the
-specified intrinsic tensor. The two finite Tor intervals give their sum interval,
-and finite-coefficient tensor constructibility gives bounded constructibility.
-Transport these properties along the comparison. Empty schemes, zero objects and
-level one require no additional hypothesis. -/
+/-- The recorded finite intrinsic tensor preserves the geometric finite-Tor domain. -/
 theorem finiteGeometricTensor_domain
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

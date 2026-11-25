@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 
 # Descent of a vanishing along a trace of invertible degree
 
-The formal core of blueprint `lemma-descent-vanishing-finite-etale`: in the derived category of
+The formal core of the descent of vanishing along a finite étale cover: in the derived category of
 `Λ`-modules, consider a commutative square
 ```
 M₁ --r--> M₂
@@ -55,10 +55,9 @@ lemma isIso_smul_id_of_isUnit (K : DerivedCategory (ModuleCat.{v} Λ)) {d : ℤ}
   · ext x
     simp [← hw, smul_smul, ← Int.cast_smul_eq_zsmul Λ]
 
-/-- **Descent of a vanishing along a trace of invertible degree** (blueprint
-`lemma-descent-vanishing-finite-etale`, formal core): for a commutative square
-`r ≫ p₂ = p₁ ≫ r'` and a trace `t` with `p₂ ≫ t = d • 𝟙`, `d` invertible in `Λ`, the vanishing
-of `r'` implies that of `r`. -/
+/-- **Descent of a vanishing along a trace of invertible degree**: for a commutative square
+`r ≫ p₂ = p₁ ≫ r'` and a trace `t` with `p₂ ≫ t = d • 𝟙`, `d` invertible in `Λ`, the vanishing of
+`r'` implies that of `r`. -/
 theorem eq_zero_of_comp_trace_of_isUnit {M₁ M₂ M₁' M₂' : DerivedCategory (ModuleCat.{v} Λ)}
     {r : M₁ ⟶ M₂} {r' : M₁' ⟶ M₂'} {p₁ : M₁ ⟶ M₁'} {p₂ : M₂ ⟶ M₂'} (w : r ≫ p₂ = p₁ ≫ r')
     {t : M₂' ⟶ M₂} {d : ℤ} (ht : p₂ ≫ t = d • 𝟙 M₂) (hd : IsUnit (d : Λ)) (hr' : r' = 0) :

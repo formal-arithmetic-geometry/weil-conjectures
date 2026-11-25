@@ -16,16 +16,14 @@ public import WeilConjectures.TraceFormula.TraceClass
 
 Let `(f, g) : (C, c) ⟶ (D, b)` be a proper pushforward diagram of an endocorrespondence `c` of
 `(X, K)`, with `K' = Rf_* K`, the induced proper map of fixed loci `h : Fix(c) ⟶ Fix(b)` and
-`q = f × f : X ⨯ X ⟶ Y ⨯ Y`. This file defines the remaining maps of blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1` (the trace `τ_f`, the multiplication `μ_f`, the
-composition isomorphism `Ξ` and the exchange `E` are in
+`q = f × f : X ⨯ X ⟶ Y ⨯ Y`. This file defines the remaining maps attached to the diagram (the trace
+`τ_f`, the multiplication `μ_f`, the composition isomorphism `Ξ` and the exchange `E` are in
 `WeilConjectures.TraceFormula.ProperPushforward`):
 
 * the *dual pushforward* `χ_f : Rf_* D_X K ⟶ D_Y K'` (`lowerStarVerdierDualMap`);
 * the *kernel pushforward* `ρ_f = (1 ⊠ χ_f) ∘ Π_f⁻¹ : Rq_* P_X ⟶ P_Y` (`kernelPushforward`), where
   `Π_f : K' ⊠ Rf_* D_X K ⟶ Rq_* (K ⊠ D_X K)` is the Künneth map, an isomorphism by the relative
-  product theorem (`prodLowerStarExternalProduct`, `isIso_prodLowerStarExternalProduct`,
-  blueprint `lemma-kunneth-formula-compact-supports--1`, in
+  product theorem (`prodLowerStarExternalProduct`, `isIso_prodLowerStarExternalProduct`, in
   `WeilConjectures.TraceFormula.ProperKunneth`);
 * the *kernel class* `[u]_P : Rc_! ℚ̄_ℓ,C ⟶ P_X` (`Correspondence.kernelClass`), the exceptional
   adjoint of the mate of `u` followed by the external duality isomorphism;
@@ -33,8 +31,7 @@ composition isomorphism `Ξ` and the exchange `E` are in
   (`Correspondence.FixedLocus.supportIso`);
 
 and the *proper pushforward of the trace class* `h_* Tr_c(u)`
-(`Correspondence.ProperPushforwardDiagram.traceClassPushforward`, blueprint
-`definition-pushforward-correspondence`, `definition-pushforward-correspondence--2`).
+(`Correspondence.ProperPushforwardDiagram.traceClassPushforward`).
 
 -/
 
@@ -63,8 +60,8 @@ variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- The *dual pushforward* `χ_f : Rf_* D_X K ⟶ D_Y (Rf_* K)` along a proper morphism (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, item 4): the tensor–hom transpose of
+/-- The *dual pushforward* `χ_f : Rf_* D_X K ⟶ D_Y (Rf_* K)` along a proper morphism: the tensor–hom
+transpose of
 ```
 Rf_* K ⊗ Rf_* D_X K --μ_f--> Rf_* (K ⊗ D_X K) --Rf_* ev--> Rf_* ω_X --τ_f--> ω_Y.
 ```
@@ -78,8 +75,7 @@ noncomputable def lowerStarVerdierDualMap (f : X ⟶ Y) [IsProper f.left]
     lowerStarDualizingComplexTrace ℓ f)
 
 /-- The *kernel pushforward* `ρ_f = (1 ⊠ χ_f) ∘ Π_f⁻¹ : Rq_* (K ⊠ D_X K) ⟶ K' ⊠ D_Y K'` along a
-proper morphism `f`, `q = f × f`, `K' = Rf_* K` (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, item 5). -/
+proper morphism `f`, `q = f × f`, `K' = Rf_* K`. -/
 noncomputable def kernelPushforward (f : X ⟶ Y) [IsProper f.left]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerStar ℓ (prod.map f f)).obj
@@ -101,9 +97,8 @@ namespace Correspondence
 
 variable (c : Correspondence ℓ K)
 
-/-- The *kernel class* `[u]_P : Rc_! ℚ̄_ℓ,C ⟶ K ⊠ D_X K` of an endocorrespondence (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, item 7): the exceptional adjoint of
-`ℚ̄_ℓ,C --ũ--> 𝓗_c(K) ≅ Rc^! (K ⊠ D_X K)`. -/
+/-- The *kernel class* `[u]_P : Rc_! ℚ̄_ℓ,C ⟶ K ⊠ D_X K` of an endocorrespondence: the exceptional
+adjoint of `ℚ̄_ℓ,C --ũ--> 𝓗_c(K) ≅ Rc^! (K ⊠ D_X K)`. -/
 noncomputable def kernelClass :
     (boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
       externalProduct ℓ K (verdierDual ℓ K) :=
@@ -114,9 +109,8 @@ namespace FixedLocus
 
 variable {c} (F : c.FixedLocus)
 
-/-- The *support isomorphism* `ζ_c : Rι_* ω_Fix(c) ≅ Rc^! RΔ_* ω_X` (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, item 8): the inverse of the right-adjoint form of
-base change in the fixed square followed by `Rd^! ω_X ≅ ω_Fix(c)`. -/
+/-- The *support isomorphism* `ζ_c : Rι_* ω_Fix(c) ≅ Rc^! RΔ_* ω_X`: the inverse of the
+right-adjoint form of base change in the fixed square followed by `Rd^! ω_X ≅ ω_Fix(c)`. -/
 noncomputable def supportIso :
     (boundedConstructibleLowerStar ℓ F.ι).obj (dualizingComplex' ℓ F.F) ≅
       (boundedConstructibleUpperShriek ℓ c.support).obj
@@ -126,8 +120,7 @@ noncomputable def supportIso :
 
 end FixedLocus
 
-/-- By construction, the trace morphism is `ζ_c⁻¹ ∘ Rc^! δ_K ∘ ξ` (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, last paragraph). -/
+/-- By construction, the trace morphism is `ζ_c⁻¹ ∘ Rc^! δ_K ∘ ξ`. -/
 lemma traceMap_eq (F : c.FixedLocus) :
     c.traceMap F = c.verdierDualityIso.hom ≫
       (boundedConstructibleUpperShriek ℓ c.support).map (evaluationKernel ℓ K) ≫
@@ -141,9 +134,8 @@ variable {c} {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact
   (Fb : P.pushforward.FixedLocus)
 
 /-- The *proper pushforward of the trace class* `h_* Tr_c(u) : ℚ̄_ℓ,Fix(b) ⟶ ω_Fix(b)` along the
-induced proper map of fixed loci `h : Fix(c) ⟶ Fix(b)` (blueprint
-`definition-pushforward-correspondence`, `definition-pushforward-correspondence--2`): the
-Borel–Moore pushforward of the trace class. -/
+induced proper map of fixed loci `h : Fix(c) ⟶ Fix(b)`: the Borel–Moore pushforward of the trace
+class. -/
 noncomputable def traceClassPushforward : BorelMooreSection ℓ Fb.F :=
   BorelMooreSection.pushforward (P.fixMap Fc Fb) (c.traceClass Fc)
 

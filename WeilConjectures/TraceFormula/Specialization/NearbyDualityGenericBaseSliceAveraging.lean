@@ -21,12 +21,18 @@ group of Galois automorphisms of the slice model
 the generic-slicing identification `g_s^* Ψ_M ≃ (Ψ_{M''} c^*)^P` of SGA 4½, [Th. finitude], §3
 (Lemme 3.4 and 3.7), with the pro-`p` averaging.
 
+## Implementation details
+
 It is deduced from the same statement for the base change `M_b` of `M` along the slice
 (`NearbyCyclesModel.exists_subgroup_pullbackExchange_baseChangeHom_traitSlice`): the generic slice
 model `M''` and `M_b` have the same total space and geometric generic fibre, and the projection
 `M'' ⟶ M` is the composite of the morphism `κ : M'' ⟶ M_b` with identity components
 (`NearbyCyclesModel.genericSliceToBaseChange`, whose exchange is invertible and intertwines the
 actions of the generic automorphisms) and of the projection `M_b ⟶ M`.
+
+## References
+
+* SGA 4½, [Th. finitude], §3, Lemme 3.4 and 3.7.
 
 -/
 
@@ -237,14 +243,10 @@ private lemma genericSliceAut_autAction_eq_id_of_baseChange
       (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A))
 
 /-- **The slice exchange is an averaging summand** (ambient derived categories): for a bounded
-constructible `A` on `X₁`, there is a subgroup `V` of finite index of the pro-`p` kernel `P'`
-acting trivially on `Ψ_{M''} (c^* A)`, and for every subgroup `U ≤ V` of finite index, the
-pullback exchange `α : p^* Ψ_M A ⟶ Ψ_{M''} (c^* A)` of the projection from the generic slice
-model is split, with `[P' : U]` times its idempotent the sum of the actions of representatives of
-`P' ⧸ U`. Deduced from the same statement for the base change `M_b`
-(`NearbyCyclesModel.exists_subgroup_pullbackExchange_baseChangeHom_traitSlice`): the projection
-`M'' ⟶ M` is the composite of the morphism `κ : M'' ⟶ M_b` with identity components
-(`NearbyCyclesModel.genericSliceToBaseChange`) and of the projection `M_b ⟶ M`. -/
+constructible `A` on `X₁`, there is a subgroup `V` of finite index of the pro-`p` kernel `P'` acting
+trivially on `Ψ_{M''} (c^* A)`, and for every subgroup `U ≤ V` of finite index, the pullback
+exchange `α : p^* Ψ_M A ⟶ Ψ_{M''} (c^* A)` of the projection from the generic slice model is split,
+with `[P' : U]` times its idempotent the sum of the actions of representatives of `P' ⧸ U`. -/
 private theorem exists_subgroup_genericSliceHom_pullbackExchange
     (A : DerivedCategory (Mod (Sheaf (ProEt.topology X₁.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X₁.left)))
@@ -392,22 +394,14 @@ private theorem exists_subgroup_genericSliceExchange
 attribute [-instance] monoidalCategory_boundedConstructible
   ObjectProperty.instMonoidalCategoryStructFullSubcategory
 
-/-- **The slice exchange is an averaging summand at a finite level** (blueprint
-`lemma-nearby-duality-slice--1`, the generic-slicing identification `g_s^* Ψ_M ≃ (Ψ_{M''} c^*)^P`,
-with `lemma-duality-invariants-pro-p--1`; SGA 4½, [Th. finitude], §3). For two bounded constructible
+/-- **The slice exchange is an averaging summand at a finite level**. For two bounded constructible
 complexes `A₁`, `A₂` on `X₁`, the pro-`p` kernel `P` of the map of inertia groups acts on
-`Ψ_{M''} c^* A₁` and `Ψ_{M''} c^* A₂` through a finite quotient `Γ`: there are automorphisms
-`ψ a` of the generic slice model, the identity on the total space, which act on the geometric
-generic point `Spec Ω_K` through automorphisms `σ` over the generic point `η_K` of `Spec K⟦t⟧`
-(the elements of `P` act through `Gal(Ω_K/η_K)`), lifting the elements `a ∈ Γ`, such that
-`α_{Aᵢ}` is split by `rᵢ`
-with `|Γ| • (rᵢ ≫ α_{Aᵢ}) = ∑ₐ ρ(ψ a)` and `ρ(ψ a⁻¹)` inverse to `ρ(ψ a)` on `Ψ_{M''} c^* Aᵢ`.
-The order of `Γ` is invertible, the coefficients being `ℚ̄_ℓ`.
-
-`Γ` is the quotient of the group of generic automorphisms by the normal core `N` of the
-intersection of the subgroups `Vᵢ` of
-`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_subgroup_genericSliceExchange` for `A₁` and
-`A₂`, and `ψ a` is the action (`NearbyCyclesModel.genericSliceAut`) of a representative of `a`. -/
+`Ψ_{M''} c^* A₁` and `Ψ_{M''} c^* A₂` through a finite quotient `Γ`: there are automorphisms `ψ a`
+of the generic slice model, the identity on the total space, which act on the geometric generic
+point `Spec Ω_K` through automorphisms `σ` over the generic point `η_K` of `Spec K⟦t⟧` (the elements
+of `P` act through `Gal(Ω_K/η_K)`), lifting the elements `a ∈ Γ`, such that `α_{Aᵢ}` is split by
+`rᵢ` with `|Γ| • (rᵢ ≫ α_{Aᵢ}) = ∑ₐ ρ(ψ a)` and `ρ(ψ a⁻¹)` inverse to `ρ(ψ a)` on `Ψ_{M''} c^* Aᵢ`.
+The order of `Γ` is invertible, the coefficients being `ℚ̄_ℓ`. -/
 theorem exists_averaging_genericSliceExchange
     (A₁ A₂ : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ∃ (Γ : Type u) (_ : Group Γ) (_ : Fintype Γ)

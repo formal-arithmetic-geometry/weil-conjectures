@@ -13,16 +13,22 @@ import all WeilConjectures.SmoothPurity.Finite.FiniteSystemPullbackCoherence
 
 /-! # Rational scalar extension carries the rational pullback compositor
 
-Source: Stacks Project, Tags 06YY, 07A4, 0941 and 0D6D; Bhatt--Scholze, Lemma 3.5.7
-(blueprint: lem-pod-integral-pullback-composition-scalar).
+For a coefficient inclusion `E ⟶ L`, completed scalar extension carries the specified
+integral composition comparison at `E` to the one at `L`, conjugated by the canonical
+scalar/pullback comparisons.
 
-For a coefficient inclusion E to L, completed scalar extension carries the specified
-integral composition comparison at E to the one at L, conjugated by the canonical
-scalar/pullback comparisons. Both sides are compared after the fully faithful coherent
+## Implementation details
+
+Both sides are compared after the fully faithful coherent
 reduction at L: the system-level composition clause of integralPullbackComposition at
 E and at L, the system scalar comparison, the pullback/scalar square of
 scalarExtensionTowerCoherence, and whole-system mixed coherence.
 The rationalized statement follows by localization on pure tensors.
+
+## References
+
+* Stacks Project, Tags 06YY, 07A4, 0941, 0D6D
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 3.5.7
 -/
 
 @[expose] public noncomputable section
@@ -41,7 +47,7 @@ section RationalScalar
 
 /-- The fixed-stage rational composition comparison at an arbitrary rational object: the
 localized specified integral compositor between the prescribed integral objects.
-Source: Stacks 099N(5) (blueprint: lem-pod-integral-pullback-composition-scalar).
+
 Construction: conjugate the localized integral compositor by the defining object equalities. -/
 def rationalPullbackCompositionIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -59,9 +65,7 @@ def rationalPullbackCompositionIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶
         ((sfRationalConstructibleLocalization l E Y).obj
           ((constructibleIntegralPullback l E g).obj Q.obj))))).symm
 
-/-- The rational compositor is the localized integral compositor up to object equalities.
-Source: Stacks 099N(5) (blueprint: lem-pod-integral-pullback-composition-scalar).
-Proof: the defining eqToHom conjugation. -/
+/-- The rational compositor is the localized integral compositor up to object equalities. -/
 theorem rationalPullbackCompositionIso_heq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -95,13 +99,7 @@ variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L
   (ι : E →ₐ[ℚ_[l]] L)
 
 /-- Rational scalar extension carries the fixed-stage rational compositor at E to the one
-at L, conjugated by the rational scalar/pullback comparisons.
-Source: Stacks 06YY, 07A4, 099N(5)
-(blueprint: lem-pod-integral-pullback-composition-scalar).
-Proof: every factor is the localization of the corresponding integral map, up to the
-prescribed object equalities: scalar extension and pullback act on tensors with one by the
-integral maps, and the rational scalar comparisons are localized integralPullbackScalarComparison.
-Apply integralPullbackComposition_scalar and compose heterogeneous equalities. -/
+at L, conjugated by the rational scalar/pullback comparisons. -/
 theorem rationalPullbackComposition_scalar {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -244,7 +242,7 @@ theorem rationalPullbackComposition_scalar {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g
   exact eq_of_heq (hL.trans ((heq_of_eq hM).trans hR.symm))
 
 /-- Generic form of the transport of a compositor square through functors equal to the
-scalar extensions. Source: elementary category theory. -/
+scalar extensions. -/
 private theorem compositor_transport
     {AX AY AZ BX BY BZ : Type*} [Category AX] [Category AY] [Category AZ]
     [Category BX] [Category BY] [Category BZ]
@@ -278,9 +276,7 @@ private theorem compositor_transport
 
 /-- The rational compositor statement transported through arbitrary functors equal to the
 rational scalar extensions, conjugated by the comparisons built from those equalities.
-This is the form used for the recorded common-stage transitions.
-Source: Stacks 06YY, 099N(5) (blueprint: lem-pod-integral-pullback-composition-scalar).
-Proof: substitute the three equalities and rearrange rationalPullbackComposition_scalar. -/
+This is the form used for the recorded common-stage transitions. -/
 theorem rationalPullbackComposition_scalar_transport {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]

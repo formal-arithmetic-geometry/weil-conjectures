@@ -17,8 +17,7 @@ direct sum of shifts `𝟙⟦n⟧` of the unit
 with inverse `𝟙⟦-n⟧`, and a finite biproduct of dualizable objects is dualizable
 (`CategoryTheory.Limits.Bicone.nonempty_hasRightDual_pt`). Hence every object of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` is
 dualizable (`ProEtale.CondensedRing.nonempty_hasRightDual_point`): the bounded complexes of
-`ℚ̄_ℓ`-vector spaces with finite-dimensional cohomology are the perfect complexes over `ℚ̄_ℓ`
-(blueprint `lemma-perfect-complexes-geometric-point`).
+`ℚ̄_ℓ`-vector spaces with finite-dimensional cohomology are the perfect complexes over `ℚ̄_ℓ`.
 -/
 
 @[expose] public section
@@ -72,10 +71,9 @@ theorem isDualizable_shift_unit_point (n : ℤ) :
   isDualizable_of_tensorIso (shiftUnitTensorShiftUnitIsoPoint ℓ k n (-n) (add_neg_cancel n))
     (shiftUnitTensorShiftUnitIsoPoint ℓ k (-n) n (neg_add_cancel n))
 
-/-- **Every object of the point category is dualizable** (blueprint
-`lemma-perfect-complexes-geometric-point`): over a separably closed field `k`, every object `P` of
-`Dᵇc(s)⟦ℚ̲̄_ℓ⟧` has a right dual. Indeed `P` is a finite direct sum of shifts of the unit
-(`ProEtale.CondensedRing.nonempty_shiftDecomposition_point`), and these are invertible. -/
+/-- **Every object of the point category is dualizable**: over a separably closed field `k`, every
+object `P` of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` has a right dual. Indeed `P` is a finite direct sum of shifts of the
+unit (`ProEtale.CondensedRing.nonempty_shiftDecomposition_point`), and these are invertible. -/
 theorem nonempty_hasRightDual_point [Fact (ringChar k).Prime] [IsSepClosed k]
     (P : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Nonempty (HasRightDual P) :=

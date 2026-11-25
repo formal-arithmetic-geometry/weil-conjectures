@@ -13,8 +13,8 @@ public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroDescent
 
 # The supported restriction is zero for Frobenius
 
-This file proves blueprint `lemma-vanishing-local-term-zero-stalk` on the classical étale models: in
-the strictly local model `T` of a `CurveLocalModel` (the strict localization of `X ×_k X` at
+This file proves the vanishing of the supported restriction on the classical étale models: in the
+strictly local model `T` of a `CurveLocalModel` (the strict localization of `X ×_k X` at
 `(y, y)`, with the graph `G` of `h` and the diagonal `B`), let `L, K ∈ D^b_{ctf}(X, Λ)` with
 `K_ȳ = 0` and `P = (L ⊠ K)|_T`. Then the supported restriction
 ```
@@ -22,18 +22,19 @@ the strictly local model `T` of a `CurveLocalModel` (the strict localization of 
 ```
 is zero in `D(Λ)`
 (`AlgebraicGeometry.Etale.CurveLocalModel.sectionsWithSupportRestriction_eq_zero`).
-In the blueprint `L = 𝔻_X K`; the argument uses only that `L` is constructible of finite
+In the application `L = 𝔻_X K`; the argument uses only that `L` is constructible of finite
 Tor-dimension.
 
-The proof follows the blueprint:
+## Implementation details
+
+The proof proceeds in three steps:
 1. both `RΓ(T, P)` and `RΓ(B, b^* P)` vanish, the schemes being strictly local with closed stalk
-   `L_ȳ ⊗ᴸ K_ȳ = 0` (`lemma-vanishing-local-term-zero-stalk--1` (ii)), so the localization triangles
-   identify `ρ_{a,b}` with the restriction `RΓ(T ∖ G, P) ⟶ RΓ(B ∖ y, b^* P)`, which factors
-   through `RΓ(T ∖ (G ∪ V), P)` (`lemma-vanishing-local-term-zero-stalk--1` (iii));
-2. prime-to-`ℓ` covers (`lemma-tangent-cones-on-cover`) put the curves in the position of
-   `lemma-vanishing-restrictions-after-blowing-up--1`, which kills the restriction upstairs;
+   `L_ȳ ⊗ᴸ K_ȳ = 0`, so the localization triangles identify `ρ_{a,b}` with the restriction
+   `RΓ(T ∖ G, P) ⟶ RΓ(B ∖ y, b^* P)`, which factors through `RΓ(T ∖ (G ∪ V), P)`;
+2. prime-to-`ℓ` covers put the curves in the position of the blow-up restriction vanishing,
+   which kills the restriction upstairs;
 3. the finite étale trace on the punctured diagonal descends the vanishing, the degree being
-   invertible in `Λ` (`lemma-descent-vanishing-finite-etale`).
+   invertible in `Λ`.
 
 -/
 
@@ -51,10 +52,9 @@ open Scheme
 
 variable {k : Type u} [Field k] [IsAlgClosed k] (M : CurveLocalModel k)
 
-/-- **The supported restriction is zero for Frobenius** (blueprint
-`lemma-vanishing-local-term-zero-stalk`): on the classical strictly local model, for a prime `ℓ`
-invertible in `k`, a finite commutative `ℓ`-primary ring `Λ`, `L, K ∈ D^b_{ctf}(X, Λ)` with
-`K_ȳ = 0` and `P = (L ⊠ K)|_T`, the supported restriction
+/-- **The supported restriction is zero for Frobenius**: on the classical strictly local model, for
+a prime `ℓ` invertible in `k`, a finite commutative `ℓ`-primary ring `Λ`, `L, K ∈ D^b_{ctf}(X, Λ)`
+with `K_ȳ = 0` and `P = (L ⊠ K)|_T`, the supported restriction
 `ρ_{a,b} : RΓ_G(T, P) ⟶ RΓ_y(B, b^* P)` is zero in `D(Λ)`. -/
 theorem sectionsWithSupportRestriction_eq_zero (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : (ℓ : k) ≠ 0)
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (hΛ : ∃ n : ℕ, (ℓ : Λ) ^ n = 0)
