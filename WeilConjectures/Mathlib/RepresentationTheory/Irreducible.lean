@@ -19,9 +19,7 @@ the irreducible subquotients. Irreducibility itself is `Representation.IsIrreduc
 
 `Representation.IsConstituent` forgets the multiplicity, being a `Prop`. Invariants of the
 composition factors counted with multiplicity are recorded by
-`Subrepresentation.factorMultiset` (in `WeilConjectures.RepresentationTheory.CompositionFactors`);
-the rank `N_γ` and the weight sum `B_γ` of blueprint `definition-determinant-weight--1` are sums
-over it.
+`Subrepresentation.factorMultiset` (in `WeilConjectures.RepresentationTheory.CompositionFactors`).
 
 ## Main definitions
 
@@ -34,7 +32,7 @@ over it.
 ## Main statements
 
 - `Representation.isIrreducible_iff`: `ρ` is irreducible if and only if `V` is nonzero and its
-  only invariant subspaces are `0` and `V` (blueprint: `def-wf-simple-module`).
+  only invariant subspaces are `0` and `V`.
 - `Subrepresentation.isIrreducible_subquotient_iff`: the subquotient `M ⧸ N` is irreducible if
   and only if `M` covers `N`.
 - `Representation.IsConstituent.exists_covBy`: a constituent is equivalent to the subquotient of
@@ -52,11 +50,8 @@ namespace Representation
 variable {k G V V' : Type*} [Field k] [Monoid G]
   [AddCommGroup V] [Module k V] [AddCommGroup V'] [Module k V']
 
-/-- Blueprint `definition-weil-representation`: Operations, constituents and coinvariants.
-
-`σ.IsConstituent ρ` says that `σ` is a *constituent* of `ρ`: it is irreducible and isomorphic
-to a subquotient of `ρ`. By Jordan-Hölder these are exactly the irreducible successive
-quotients of a composition series of `ρ`. -/
+/-- `σ.IsConstituent ρ` says that `σ` is a *constituent* of `ρ`: it is irreducible and isomorphic
+to a subquotient of `ρ`. -/
 def IsConstituent (σ : Representation k G V') (ρ : Representation k G V) : Prop :=
   σ.IsIrreducible ∧ ∃ N M : Subrepresentation ρ, N ≤ M ∧
     Nonempty (σ.asModule ≃ₗ[MonoidAlgebra k G]
@@ -215,7 +210,7 @@ namespace Representation
 variable {k G V : Type*} [Field k] [Monoid G] [AddCommGroup V] [Module k V]
 
 /-- A representation is irreducible if and only if `V` is nonzero and its only invariant
-subspaces are `0` and `V`. (blueprint: `def-wf-simple-module`) -/
+subspaces are `0` and `V`. -/
 theorem isIrreducible_iff {ρ : Representation k G V} :
     ρ.IsIrreducible ↔
       Nontrivial V ∧ ∀ U : Submodule k V, (∀ g, ∀ v ∈ U, ρ g v ∈ U) → U = ⊥ ∨ U = ⊤ := by
@@ -243,8 +238,7 @@ variable {k G H V W : Type*} [Field k] [Group G] [Group H] [AddCommGroup V] [Mod
 
 /-- **Schur's scalar lemma.** An endomorphism `c` of a finite-dimensional irreducible representation
 over an algebraically closed field commuting with the action is a scalar `a • 1` for a unique
-`a`: an eigenspace of `c` is a nonzero subrepresentation, hence everything.
-(blueprint: `proposition-central-element-arithmetic-monodromy-group--2`) -/
+`a`. -/
 theorem IsIrreducible.existsUnique_eq_smul_id [IsAlgClosed k] [FiniteDimensional k V]
     (hρ : ρ.IsIrreducible) (c : Module.End k V)
     (hc : ∀ g, c ∘ₗ ρ g = ρ g ∘ₗ c) : ∃! a : k, c = a • LinearMap.id := by
@@ -272,7 +266,7 @@ theorem isConstituent_of_equiv_subquotient (hσ : σ.IsIrreducible) {N M : Subre
   ⟨hσ, N, M, h, ⟨e.asModuleLinearEquiv.trans (M.subquotientAsModuleLinearEquiv N)⟩⟩
 
 /-- Restricting an irreducible representation along a surjective homomorphism keeps it
-irreducible: both have the same invariant subspaces. -/
+irreducible. -/
 theorem IsIrreducible.comp (hσ : σ.IsIrreducible) {f : H →* G} (hf : Function.Surjective f) :
     Representation.IsIrreducible (σ.comp f) := by
   rw [isIrreducible_iff] at hσ ⊢
@@ -281,8 +275,7 @@ theorem IsIrreducible.comp (hσ : σ.IsIrreducible) {f : H →* G} (hf : Functio
   exact hU h v hv
 
 /-- A constituent of `ρ` restricted along a surjective homomorphism `f` is a constituent of the
-restriction of `ρ`: subrepresentations of `ρ` are subrepresentations of `ρ ∘ f`, with the same
-subquotients. -/
+restriction of `ρ`. -/
 theorem IsConstituent.comp (hσ : σ.IsConstituent ρ) {f : H →* G} (hf : Function.Surjective f) :
     Representation.IsConstituent (σ.comp f) (ρ.comp f) := by
   obtain ⟨N, M, hNM, ⟨e⟩⟩ := hσ.exists_covBy
@@ -301,9 +294,7 @@ namespace Representation
 variable {k G V : Type*} [Field k] [Group G] [AddCommGroup V] [Module k V]
   {ρ : Representation k G V}
 
-/-- The contragredient of a finite-dimensional irreducible representation is irreducible: the
-annihilator in `V` of an invariant subspace of `V^∨` is invariant, hence `0` or `V`.
-(blueprint: part L3 of `lemma-tensor-exterior-powers-filtered-representations--3`) -/
+/-- The contragredient of a finite-dimensional irreducible representation is irreducible. -/
 theorem IsIrreducible.dual [FiniteDimensional k V] (h : ρ.IsIrreducible) :
     ρ.dual.IsIrreducible := by
   obtain ⟨hV, hU⟩ := isIrreducible_iff.1 h

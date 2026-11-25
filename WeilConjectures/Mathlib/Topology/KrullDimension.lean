@@ -80,8 +80,7 @@ section
 variable {X : Type*} [TopologicalSpace X] [IrreducibleSpace X] [T0Space X]
 
 /-- In an irreducible `T₀` space of dimension at most one, every point outside a
-nonempty open subset `U` is closed: it is not the generic point, so a proper specialization of it
-would give a chain of three irreducible closed subsets. -/
+nonempty open subset `U` is closed. -/
 theorem IsOpen.isClosed_singleton_of_mem_compl (h : topologicalKrullDim X ≤ 1) {U : Set X}
     (hU : IsOpen U) (hne : U.Nonempty) {x : X} (hx : x ∉ U) : IsClosed {x} := by
   obtain ⟨u, hu⟩ := hne
@@ -112,8 +111,7 @@ theorem IsOpen.isClosed_singleton_of_mem_compl (h : topologicalKrullDim X ≤ 1)
   exact absurd h2 (by decide)
 
 /-- In an irreducible quasi-sober noetherian `T₀` space of dimension at most one, the complement
-of a nonempty open subset is finite: it is a closed subset all of whose points are closed, so its
-finitely many irreducible components are points. -/
+of a nonempty open subset is finite. -/
 theorem IsOpen.finite_compl_of_topologicalKrullDim_le_one [QuasiSober X] [NoetherianSpace X]
     (h : topologicalKrullDim X ≤ 1) {U : Set X} (hU : IsOpen U) (hne : U.Nonempty) :
     Uᶜ.Finite := by
@@ -149,8 +147,7 @@ theorem topologicalKrullDim_eq_krullDim_specializationOrder :
   krullDim_eq_of_orderIso irreducibleSetEquivPoints
 
 /-- A surjective specializing map `f : X ⟶ Y` of quasi-sober `T₀` spaces satisfies
-`dim Y ≤ dim X`: a chain of specializations in `Y` lifts to `X`, starting from its generic end.
--/
+`dim Y ≤ dim X`. -/
 theorem topologicalKrullDim_le_of_specializingMap {f : X → Y} (hf : SpecializingMap f)
     (hsurj : Function.Surjective f) : topologicalKrullDim Y ≤ topologicalKrullDim X := by
   rw [topologicalKrullDim_eq_krullDim_specializationOrder,
@@ -191,9 +188,7 @@ section Inducing
 variable {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]
 
 /-- An inducing map with closed range into an irreducible space of finite dimension, whose
-source has the same dimension as the target, is surjective: otherwise a maximal chain of
-irreducible closed subsets of the source, pushed forward and followed by the whole space, would be
-longer than any chain of the target. -/
+source has the same dimension as the target, is surjective. -/
 theorem Topology.IsInducing.surjective_of_topologicalKrullDim_eq [IrreducibleSpace X]
     {f : Y → X} (hf : IsInducing f) (hc : IsClosed (Set.range f))
     (hfin : topologicalKrullDim X ≠ ⊤) (h : topologicalKrullDim Y = topologicalKrullDim X) :
@@ -234,7 +229,7 @@ section DimensionZero
 variable {X : Type*} [TopologicalSpace X]
 
 /-- In a space of dimension at most zero, an inclusion of irreducible closed subsets is an
-equality: a strict inclusion would be a chain of length one. -/
+equality. -/
 theorem IrreducibleCloseds.eq_of_le_of_topologicalKrullDim_le_zero
     (h : topologicalKrullDim X ≤ 0) {A B : IrreducibleCloseds X} (hAB : A ≤ B) : A = B := by
   by_contra hne
@@ -244,10 +239,7 @@ theorem IrreducibleCloseds.eq_of_le_of_topologicalKrullDim_le_zero
   exact absurd h1 (by decide)
 
 /-- **Zero-dimensional closed subsets are finite.** A closed subset `Z` of dimension at most zero
-of a noetherian `T₀` space is a finite set of closed points. This applies to the underlying space
-of a scheme of finite type over a field, which is noetherian.
-
-(blueprint: `lem-sc-dim0-finite`) -/
+of a noetherian `T₀` space is a finite set of closed points. -/
 theorem IsClosed.finite_and_isClosed_singleton_of_topologicalKrullDim_le_zero
     [NoetherianSpace X] [T0Space X] {Z : Set X} (hZ : IsClosed Z)
     (h : topologicalKrullDim Z ≤ 0) : Z.Finite ∧ ∀ z ∈ Z, IsClosed {z} := by
@@ -296,7 +288,7 @@ variable {X : Type*} [TopologicalSpace X] [QuasiSober X] [T0Space X]
 
 attribute [local instance] specializationOrder in
 /-- In a quasi-sober `T₀` space, the dimension of the closure of a point is its height for the
-specialization order: the points of `closure {z}` are exactly the specializations of `z`. -/
+specialization order. -/
 theorem topologicalKrullDim_closure_singleton (z : X) :
     topologicalKrullDim (closure ({z} : Set X)) = height z := by
   have : QuasiSober (closure ({z} : Set X)) :=
@@ -309,7 +301,7 @@ theorem topologicalKrullDim_closure_singleton (z : X) :
 
 attribute [local instance] specializationOrder in
 /-- A quasi-sober `T₀` space of finite positive dimension contains an irreducible closed subset
-of dimension one: the closure of a point of minimal positive height. -/
+of dimension one, namely the closure of a point. -/
 theorem exists_topologicalKrullDim_closure_singleton_eq_one
     (h1 : 1 ≤ topologicalKrullDim X) (htop : topologicalKrullDim X ≠ ⊤) :
     ∃ z : X, topologicalKrullDim (closure ({z} : Set X)) = 1 := by
@@ -350,7 +342,7 @@ theorem topologicalKrullDimAt_eq_of_forall {x : X} {n : WithBot ℕ∞}
   le_antisymm ((iInf₂_le ⊤ trivial).trans (h ⊤ trivial).le) (le_iInf₂ fun U hU ↦ (h U hU).ge)
 
 /-- The local dimension at a point of an open subset `W` agrees with the local dimension in the
-ambient space: the open neighbourhoods of `x` contained in `W` are cofinal. -/
+ambient space. -/
 theorem IsOpen.topologicalKrullDimAt_eq {W : Set X} (hW : IsOpen W) {x : X} (hx : x ∈ W) :
     topologicalKrullDimAt (⟨x, hx⟩ : W) = topologicalKrullDimAt x := by
   apply le_antisymm
@@ -379,8 +371,7 @@ section Specialization
 variable {X : Type*} [TopologicalSpace X] [QuasiSober X] [T0Space X]
 
 /-- Let `W ⊆ Z` be closed subsets of a quasi-sober `T₀` space such that every point of `W` has a
-generalization in `Z \ W`. If `dim Z < d + 1`, then `dim W < d`: a chain of specializations in
-`W` extends in `Z` by such a generalization of its generic end. -/
+generalization in `Z \ W`. If `dim Z < d + 1`, then `dim W < d`. -/
 theorem topologicalKrullDim_lt_of_forall_exists_specializes {Z W : Set X} (hZ : IsClosed Z)
     (hW : IsClosed W) (hWZ : W ⊆ Z) (h : ∀ w ∈ W, ∃ z ∈ Z, z ⤳ w ∧ z ∉ W) {d : ℕ}
     (hd : topologicalKrullDim Z < d + 1) : topologicalKrullDim W < d := by
@@ -406,8 +397,7 @@ theorem topologicalKrullDim_lt_of_forall_exists_specializes {Z W : Set X} (hZ : 
   exact (hlen.trans_lt hd).false
 
 /-- A closed subset `Z` of a noetherian quasi-sober `T₀` space contains a finite set of points
-of which every point of `Z` is a specialization: the generic points of the finitely many
-irreducible closed subsets covering `Z`. -/
+of which every point of `Z` is a specialization. -/
 theorem IsClosed.exists_finite_forall_exists_specializes [NoetherianSpace X] {Z : Set X}
     (hZ : IsClosed Z) : ∃ G : Set X, G.Finite ∧ G ⊆ Z ∧ ∀ z ∈ Z, ∃ ξ ∈ G, ξ ⤳ z := by
   obtain ⟨S, hSf, hSc, hSi, rfl⟩ := NoetherianSpace.exists_finite_set_isClosed_irreducible hZ
@@ -447,8 +437,7 @@ theorem IsClosed.exists_maximal_specializes [NoetherianSpace X] {Z : Set X} (hZ 
 
 attribute [local instance] specializationOrder in
 /-- In a quasi-sober `T₀` space with generic point `x` and of dimension at least `d + 1`, there is
-a proper specialization `w` of `x` whose closure has dimension at least `d`: the penultimate
-point of a chain of length `d + 1`. -/
+a proper specialization `w` of `x` whose closure has dimension at least `d`. -/
 theorem exists_specializes_ne_le_topologicalKrullDim_closure {x : X}
     (hx : closure {x} = Set.univ) {d : ℕ}
     (hd : ((d + 1 : ℕ) : WithBot ℕ∞) ≤ topologicalKrullDim X) :
@@ -463,7 +452,7 @@ theorem exists_specializes_ne_le_topologicalKrullDim_closure {x : X}
 
 attribute [local instance] specializationOrder in
 /-- A quasi-sober `T₀` space of dimension at least `d` contains a point whose closure has
-dimension at least `d`: the generic end of a chain of length `d`. -/
+dimension at least `d`. -/
 theorem exists_le_topologicalKrullDim_closure_singleton {d : ℕ}
     (hd : (d : WithBot ℕ∞) ≤ topologicalKrullDim X) :
     ∃ x : X, (d : WithBot ℕ∞) ≤ topologicalKrullDim (closure {x} : Set X) := by
@@ -482,8 +471,7 @@ theorem Topology.IsEmbedding.topologicalKrullDim_eq_range {X Y : Type*} [Topolog
   IsHomeomorph.topologicalKrullDim_eq _ hf.toHomeomorph.isHomeomorph
 
 /-- A quasi-sober space of positive topological Krull dimension has a point which is not
-closed: the generic point of the larger member of a chain of length one of irreducible closed
-subsets. -/
+closed. -/
 theorem exists_not_isClosed_singleton_of_topologicalKrullDim_pos {X : Type*}
     [TopologicalSpace X] [QuasiSober X] (hX : 0 < topologicalKrullDim X) :
     ∃ x : X, ¬ IsClosed ({x} : Set X) := by

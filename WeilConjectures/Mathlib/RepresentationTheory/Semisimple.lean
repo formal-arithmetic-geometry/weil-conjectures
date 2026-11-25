@@ -17,16 +17,6 @@ public import WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation
 
 A finite-dimensional semisimple representation restricts semisimply to a normal subgroup.
 
-`Representation.IsSemisimpleRepresentation` is an `abbrev` for the class
-`ComplementedLattice (Subrepresentation ρ)`, so the statement is phrased as an instance: the
-semisimplicity of the restriction is then available to instance search.
-
-The proof follows Clifford: inside the lattice of `N`-subrepresentations, the join `T` of all
-simple `N`-subrepresentations is stable under the translations by `G`, which permute the simple
-`N`-subrepresentations. Hence `T` is a `G`-subrepresentation; a `G`-complement of `T` would contain
-a simple `N`-subrepresentation if it were nonzero, so `T` is everything, and a module that is a sum
-of simple submodules is semisimple. No finiteness of `G ⧸ N` is used.
-
 ## Main declarations
 
 * `Representation.isSemisimpleRepresentation_comp_subtype`: **Clifford's theorem**.
@@ -38,14 +28,17 @@ of simple submodules is semisimple. No finiteness of `G ⧸ N` is used.
   representation is semisimple if and only if it is a direct sum of irreducible
   subrepresentations.
 
-## Blueprint
+## Implementation details
 
-`Representation.isSemisimpleRepresentation_comp_subtype` implements part of
-`lemma-restriction-normal-subgroup`, `lemma-restriction-normal-subgroup--1` and
-`lemma-restriction-normal-subgroup--1` (whose finite-index hypothesis is not needed).
-`Representation.IsIrreducible.eq_one_of_isConstituent_trivial` is the case `a = 0` of
-`lemma-unramified-at-infinity-no-linear-characters`.
-`Representation.isSemisimpleRepresentation_iff_exists_iSupIndep` is `def-wf-semisimple-module`.
+`Representation.IsSemisimpleRepresentation` is an `abbrev` for the class
+`ComplementedLattice (Subrepresentation ρ)`, so Clifford's theorem is phrased as an instance: the
+semisimplicity of the restriction is then available to instance search.
+
+The proof follows Clifford: inside the lattice of `N`-subrepresentations, the join `T` of all
+simple `N`-subrepresentations is stable under the translations by `G`, which permute the simple
+`N`-subrepresentations. Hence `T` is a `G`-subrepresentation; a `G`-complement of `T` would contain
+a simple `N`-subrepresentation if it were nonzero, so `T` is everything, and a module that is a sum
+of simple submodules is semisimple. No finiteness of `G ⧸ N` is used.
 -/
 
 @[expose] public section
@@ -57,9 +50,7 @@ variable {k G V : Type*} [Field k] [Group G] [AddCommGroup V] [Module k V]
   (N : Subgroup G) [N.Normal]
 
 /-- **Clifford's theorem**: a finite-dimensional semisimple representation restricts semisimply
-to a normal subgroup, with no finiteness assumption on the quotient.
-(blueprint: `lemma-restriction-normal-subgroup`, `lemma-restriction-normal-subgroup--1`,
-`lemma-restriction-normal-subgroup--1`) -/
+to a normal subgroup, with no finiteness assumption on the quotient. -/
 instance isSemisimpleRepresentation_comp_subtype :
     IsSemisimpleRepresentation (ρ.comp N.subtype) := by
   set σ : Representation k N V := ρ.comp N.subtype
@@ -108,12 +99,7 @@ instance isSemisimpleRepresentation_comp_subtype :
 
 omit [FiniteDimensional k V] [IsSemisimpleRepresentation ρ] in
 /-- A normal subgroup `N` such that the trivial one-dimensional representation is a constituent
-of an irreducible finite-dimensional representation `V` acts trivially on `V`. The restriction
-`V|_N` is semisimple (`Representation.isSemisimpleRepresentation_comp_subtype`), so the
-trivial subquotient `B / A` splits off: a complement `C` of `A` meets the class of `B / A` in a
-nonzero `N`-invariant vector. The `N`-invariants are then nonzero, and they are all of `V`
-(`Representation.IsIrreducible.eq_one_of_invariants_ne_bot`).
-(blueprint: `lemma-unramified-at-infinity-no-linear-characters`, the case `a = 0`) -/
+of an irreducible finite-dimensional representation `V` acts trivially on `V`. -/
 theorem IsIrreducible.eq_one_of_isConstituent_trivial [FiniteDimensional k V] [IsIrreducible ρ]
     (h : (trivial k N k).IsConstituent (ρ.comp N.subtype)) {g : G} (hg : g ∈ N) : ρ g = 1 := by
   refine IsIrreducible.eq_one_of_invariants_ne_bot ρ N ?_ hg
@@ -199,7 +185,7 @@ variable {k G V : Type*} [Field k] [Monoid G] [AddCommGroup V] [Module k V]
 
 /-- A finite-dimensional representation is semisimple if and only if it is a direct sum of
 irreducible subrepresentations: there is a set of irreducible subrepresentations whose underlying
-subspaces are independent and span `V`. (blueprint: `def-wf-semisimple-module`) -/
+subspaces are independent and span `V`. -/
 theorem isSemisimpleRepresentation_iff_exists_iSupIndep [FiniteDimensional k V]
     {ρ : Representation k G V} :
     IsSemisimpleRepresentation ρ ↔ ∃ s : Set (Subrepresentation ρ),

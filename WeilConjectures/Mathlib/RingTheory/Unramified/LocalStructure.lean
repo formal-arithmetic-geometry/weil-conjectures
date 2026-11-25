@@ -27,10 +27,8 @@ namespace Algebra.Etale
 
 variable (R A : Type*) [CommRing R] [CommRing A] [Algebra R A]
 
-/-- An étale algebra `A` over a reduced ring `R` is reduced. The annihilator of a nilpotent
-`x ∈ A` is the unit ideal: every prime `Q` of `A` has a basic open neighbourhood `D(f)` with
-`A[1/f]` standard étale over `R`, hence reduced, so `x` vanishes in `A[1/f]` and some `fⁿ ∉ Q`
-kills `x`. This is a special case of [Stacks 033B]. -/
+/-- An étale algebra `A` over a reduced ring `R` is reduced. This is a special case of
+[Stacks 033B]. -/
 theorem isReduced [IsReduced R] [Etale R A] : IsReduced A := by
   refine ⟨fun x hx ↦ ?_⟩
   suffices h : LinearMap.ker (LinearMap.mulRight A x) = ⊤ by
@@ -49,9 +47,7 @@ end Algebra.Etale
 
 /-- **Étale algebras are Zariski locally standard étale.** Let `B` be an étale `S`-algebra and
 `q` a prime of `B`. Then there are `g ∉ q`, a standard étale pair `P = (f, h)` over `S` and an
-isomorphism of `S`-algebras `B[1/g] ≃ P.Ring = S[t][Y] ⧸ (f, Yh - 1)`. This is mathlib's
-`Algebra.IsEtaleAt.exists_isStandardEtale`.
-(blueprint: `lem-weil-pbc-etale-locally-standard`) -/
+isomorphism of `S`-algebras `B[1/g] ≃ P.Ring = S[t][Y] ⧸ (f, Yh - 1)`. -/
 @[stacks 00UE]
 theorem Algebra.Etale.exists_algEquiv_standardEtalePair_ring (S B : Type*) [CommRing S]
     [CommRing B] [Algebra S B] [Algebra.Etale S B] (q : Ideal B) [q.IsPrime] :

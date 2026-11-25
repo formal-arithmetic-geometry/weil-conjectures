@@ -24,13 +24,10 @@ public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 
 open Polynomial
 
-/-- **Primitive roots of unity.** Let `k` be a separably closed field (for instance an
-algebraically closed one) and let `n` be invertible in `k`. Then `xⁿ - 1` has exactly `n`
-distinct roots in `k`, and there is a primitive `n`-th root of unity `ζ ∈ k`. Its image in any
-field extension `k → K` is again a primitive `n`-th root of unity, which is the compatibility of
-the trivialization `θ_ζ` (`IsPrimitiveRoot.zmodAddEquivRootsOfUnity`) with extension of the base
-field.
-(blueprint: `lem-sc-primitive-root`) -/
+/-- **Primitive roots of unity.** Let `k` be a separably closed field and let `n` be invertible
+in `k`. Then `xⁿ - 1` has exactly `n` distinct roots in `k`, and there is a primitive `n`-th root
+of unity `ζ ∈ k` whose image in any field extension `k → K` is again a primitive `n`-th root of
+unity. -/
 theorem IsSepClosed.exists_isPrimitiveRoot (k : Type*) [Field k] [IsSepClosed k] (n : ℕ)
     [NeZero (n : k)] :
     (nthRoots n (1 : k)).Nodup ∧ (nthRootsFinset n (1 : k)).card = n ∧

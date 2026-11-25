@@ -22,9 +22,8 @@ namespace PowerSeries
 
 variable {R : Type*} [CommSemiring R]
 
-/-- **Formal power series** (blueprint `def-weil-formal-power-series`): an element of `R⟦X⟧` is
-the sequence `(cₙ)_{n ≥ 0}` of its coefficients (`PowerSeries.coeff`), addition is
-coefficientwise, and the coefficient of `X ^ n` in a product is `∑_{i = 0}^{n} cᵢ dₙ₋ᵢ`. -/
+/-- The coefficient of `X ^ n` in a product of formal power series `φ * ψ` is
+`∑_{i = 0}^{n} cᵢ(φ) c_{n - i}(ψ)`. -/
 theorem coeff_mul_eq_sum_range (n : ℕ) (φ ψ : R⟦X⟧) :
     coeff n (φ * ψ) = ∑ i ∈ Finset.range (n + 1), coeff i φ * coeff (n - i) ψ := by
   rw [coeff_mul, Finset.Nat.sum_antidiagonal_eq_sum_range_succ_mk]

@@ -10,9 +10,12 @@ import Mathlib.Analysis.Normed.Ring.InfiniteSum
 
 /-! # Polynomial evaluation excludes boundary cancellation
 
-Source: latest blueprint, sec-purity-real-sheaves/sk-p-real-semi/sk-p-real-semi.proof.md,
-paragraphs 5--6: evaluate B N = D L on the open disc.
-(blueprint: lem-wf-boundary-polynomial-evaluation).
+If polynomials `B, N, D` and a power series `L` over `ℂ` satisfy `B N = D L`, and `L` converges
+absolutely at `z` with nonzero sum while `D(z) ≠ 0`, then `B(z) ≠ 0`.
+
+## Main statements
+
+- `PowerSeries.boundary_polynomial_ne_zero`
 -/
 
 @[expose] public section
@@ -41,10 +44,8 @@ private theorem polynomial_mul_evaluation (L : PowerSeries ℂ) (P : Polynomial 
   rw [← Finset.mem_antidiagonal.mp hp, pow_add, Polynomial.coeff_coe]
   ring
 
-/-- Evaluate the polynomial-series identity using absolute convergence. A product with
-nonzero factors on the right cannot have a zero boundary factor on the left.
-Source: latest blueprint, sk-p-real-semi.proof.md, polynomial identity on the weight disc
-(blueprint: lem-wf-boundary-polynomial-evaluation). -/
+/-- Let `B, N, D` be complex polynomials and `L` a complex power series with `B N = D L`. If `L`
+converges absolutely at `z` with nonzero sum and `D(z) ≠ 0`, then `B(z) ≠ 0`. -/
 theorem boundary_polynomial_ne_zero
     (B N D : Polynomial ℂ) (L : PowerSeries ℂ) (z : ℂ)
     (hidentity : (B * N : Polynomial ℂ) = (D : PowerSeries ℂ) * L)

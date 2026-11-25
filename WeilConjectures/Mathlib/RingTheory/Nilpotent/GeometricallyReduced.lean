@@ -18,6 +18,14 @@ public import WeilConjectures.Mathlib.RingTheory.LocalProperties.Reduced
 Over a perfect field every reduced algebra is geometrically reduced, so the tensor product of two
 reduced algebras is reduced: a product of reduced varieties is reduced.
 
+## Main results
+
+- `isReduced_tensorProduct_of_forall_residueField`
+- `isReduced_tensorProduct_of_field`
+- `isReduced_tensorProduct_of_perfectField`
+
+## Implementation details
+
 The proof reduces to fields. A reduced ring `A` embeds coordinatewise into the product of its
 residue fields, so `A ⊗[k] B` is reduced once every `κ(p) ⊗[k] B` is
 (`isReduced_tensorProduct_of_forall_residueField`); applied on both sides this leaves
@@ -25,16 +33,6 @@ residue fields, so `A ⊗[k] B` is reduced once every `κ(p) ⊗[k] B` is
 separating transcendence basis over the perfect field `k`: `L` is separable algebraic over a
 purely transcendental extension `E`. Then `K ⊗[k] E` is a localization of a polynomial ring over
 `K`, and `K ⊗[k] L` is obtained from it by an unramified base change, so it is reduced.
-
-## Main results
-
-- `isReduced_tensorProduct_of_forall_residueField`
-- `isReduced_tensorProduct_of_field`
-- `isReduced_tensorProduct_of_perfectField`
-
-## Blueprint
-
-- `det-i-geometry`: products of reduced varieties over a perfect field are reduced.
 -/
 
 @[expose] public section
@@ -42,8 +40,7 @@ purely transcendental extension `E`. Then `K ⊗[k] E` is a localization of a po
 open TensorProduct
 
 /-- If `A` is reduced and `κ(p) ⊗[k] B` is reduced for every prime `p` of `A`, then `A ⊗[k] B` is
-reduced: a nilpotent element of `A ⊗[k] B` vanishes in every `κ(p) ⊗[k] B`, and these maps are
-jointly injective since the primes of `A` intersect to `0`. -/
+reduced. -/
 theorem isReduced_tensorProduct_of_forall_residueField {k A B : Type*} [Field k] [CommRing A]
     [CommRing B] [Algebra k A] [Algebra k B] [IsReduced A]
     (h : ∀ p : PrimeSpectrum A, IsReduced (p.asIdeal.ResidueField ⊗[k] B)) :
@@ -73,9 +70,7 @@ theorem isReduced_tensorProduct_adjoin_of_algebraicIndependent {k K F ι : Type*
     (nonZeroDivisors (Algebra.adjoin k (Set.range v)))
 
 /-- Let `k → E → F` be fields with `F` formally unramified and essentially of finite type over
-`E`. If `E ⊗[k] K` is reduced, so is `K ⊗[k] F ≃ (E ⊗[k] K) ⊗[E] F`: by
-`isReduced_tensorProduct_of_forall_residueField` it suffices that each `κ ⊗[E] F` is reduced, and
-it is formally unramified and essentially of finite type over the field `κ`. -/
+`E`. If `E ⊗[k] K` is reduced, so is `K ⊗[k] F`. -/
 theorem isReduced_tensorProduct_of_formallyUnramified {k K E F : Type*} [Field k] [Field K]
     [Field E] [Field F] [Algebra k K] [Algebra k E] [Algebra k F] [Algebra E F]
     [IsScalarTower k E F] [Algebra.FormallyUnramified E F] [Algebra.EssFiniteType E F]
@@ -89,8 +84,7 @@ theorem isReduced_tensorProduct_of_formallyUnramified {k K E F : Type*} [Field k
   exact isReduced_of_injective e e.injective
 
 /-- Over a perfect field `k`, the tensor product of a field `K` with a field `F` essentially of
-finite type over `k` is reduced: `F` is separable algebraic over a purely transcendental extension
-of `k`. -/
+finite type over `k` is reduced. -/
 theorem isReduced_tensorProduct_of_essFiniteType (k K F : Type*) [Field k] [PerfectField k]
     [Field K] [Field F] [Algebra k K] [Algebra k F] [Algebra.EssFiniteType k F] :
     IsReduced (K ⊗[k] F) := by
@@ -115,11 +109,7 @@ theorem isReduced_tensorProduct_of_field (k K L : Type*) [Field k] [PerfectField
   exact isReduced_of_injective
     (Algebra.TensorProduct.map (AlgHom.id k K) (IsScalarTower.toAlgHom k D (FractionRing D)))
     (Module.Flat.lTensor_preserves_injective_linearMap _ (IsFractionRing.injective D _))
-/-- Over a perfect field `k`, the tensor product of two reduced `k`-algebras is reduced.
-(blueprint: `det-i-geometry`)
-
-By `isReduced_tensorProduct_of_forall_residueField`, applied in both factors, this reduces to the
-tensor product of two field extensions, `isReduced_tensorProduct_of_field`. -/
+/-- Over a perfect field `k`, the tensor product of two reduced `k`-algebras is reduced. -/
 theorem isReduced_tensorProduct_of_perfectField (k A B : Type*) [Field k] [PerfectField k]
     [CommRing A] [CommRing B] [Algebra k A] [Algebra k B] [IsReduced A] [IsReduced B] :
     IsReduced (A ⊗[k] B) := by

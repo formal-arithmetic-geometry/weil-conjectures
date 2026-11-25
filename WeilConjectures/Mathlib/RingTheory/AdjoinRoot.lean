@@ -28,8 +28,7 @@ namespace Polynomial.Monic
 /-- Let `f : R[X]` be monic of degree `n`. Then `R[X] ⧸ (f)` has an `R`-basis given by the
 classes of `1, X, …, Xⁿ⁻¹`; in particular it is a finite free `R`-module, and for every ideal `I`
 of `R`, its reduction modulo `I` is `(R ⧸ I)[X] ⧸ (f mod I)`, by an isomorphism sending the class
-of `g` to the class of `g mod I`.
-(blueprint: `lem-weil-pbc-monic-quotient-free`) -/
+of `g` to the class of `g mod I`. -/
 @[stacks 04GG]
 theorem exists_powerBasis_adjoinRoot {R : Type*} [CommRing R] {f : R[X]} (hf : f.Monic) :
     (∃ pb : PowerBasis R (AdjoinRoot f), pb.gen = AdjoinRoot.root f ∧ pb.dim = f.natDegree) ∧

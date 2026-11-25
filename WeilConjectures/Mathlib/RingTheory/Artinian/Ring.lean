@@ -23,13 +23,24 @@ having no nontrivial idempotents it is a single field, finite over `K`, hence eq
 - `IsAlgClosed.finrank_eq_one_of_isReduced`: such an algebra has `finrank K B = 1`.
 - `IsAlgClosed.exists_pow_eq_of_finite`: every unit of a finite algebra over an algebraically
   closed field `K` is an `n`-th power, for `n` invertible in `K`.
+
+## Implementation details
+
+For `IsAlgClosed.exists_pow_eq_of_finite`: the reduced quotient `A ⧸ nilradical A` is a finite
+product of fields, each equal to `k`, so `u` has an `n`-th root there. That root lifts to `A`
+because `A[T]/(Tⁿ - u)` is étale over `A` and the nilradical of the Artinian ring `A` is
+nilpotent.
+
+## References
+
+* `IsAlgClosed.finrank_eq_one_of_isReduced` is the algebraic step of [Stacks, Tag 0BUG]
+  (`Γ(X, 𝒪_X) = k` for `X` proper, geometrically connected and geometrically reduced).
 -/
 
 @[expose] public section
 
 /-- A nontrivial finite reduced algebra `B` over an algebraically closed field `K` whose only
-idempotents are `0` and `1` has dimension `1` over `K`. This is the algebraic step of Stacks
-0BUG (`Γ(X, 𝒪_X) = k` for `X` proper, geometrically connected and geometrically reduced). -/
+idempotents are `0` and `1` has dimension `1` over `K`. -/
 theorem IsAlgClosed.finrank_eq_one_of_isReduced {K B : Type*} [Field K] [IsAlgClosed K]
     [CommRing B] [Algebra K B] [Module.Finite K B] [IsReduced B] [Nontrivial B]
     (hB : ∀ e : B, IsIdempotentElem e → e = 0 ∨ e = 1) : Module.finrank K B = 1 := by
@@ -56,13 +67,7 @@ theorem IsAlgClosed.finrank_eq_one_of_isReduced {K B : Type*} [Field K] [IsAlgCl
 
 open Polynomial in
 /-- Every unit of a finite algebra `A` over an algebraically closed field `k` is an `n`-th power,
-for `n` invertible in `k`.
-
-The reduced quotient `A ⧸ nilradical A` is a finite product of fields, each finite over `k` and
-hence equal to `k`, so `u` has an `n`-th root there. That root lifts to `A` because
-`A[T]/(Tⁿ - u)` is étale over `A` and the nilradical of the Artinian ring `A` is nilpotent.
-This is the input "the units of `𝒪_C(C)` are `n`-divisible for `C` proper" of blueprint
-`proposition-smooth-proper-curves-torsion-prime--2`. -/
+for `n` invertible in `k`. -/
 theorem IsAlgClosed.exists_pow_eq_of_finite {k A : Type*} [Field k] [IsAlgClosed k] [CommRing A]
     [Algebra k A] [Module.Finite k A] {n : ℕ} (hn : (n : k) ≠ 0) (u : Aˣ) :
     ∃ v : Aˣ, v ^ n = u := by

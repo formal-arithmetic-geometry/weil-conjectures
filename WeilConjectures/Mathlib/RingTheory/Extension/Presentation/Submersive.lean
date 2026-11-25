@@ -19,6 +19,12 @@ variable `xᵢ`.
 ## Main definitions
 
 - `Algebra.SquareJacobianPresentation`: a square Jacobian presentation.
+
+## Implementation details
+
+A square Jacobian presentation is recorded as a submersive presentation with relations indexed by
+`ι` whose relation `fᵢ` is paired with the variable `xᵢ` (`map = id`), so that the Jacobian of
+the submersive presentation is the full Jacobian determinant.
 -/
 
 @[expose] public section
@@ -30,12 +36,9 @@ namespace Algebra
 variable (R : Type u) (S : Type v) (ι : Type t) [CommRing R] [CommRing S] [Algebra R S]
   [Finite ι]
 
-/-- A square Jacobian presentation of the `R`-algebra `S` (blueprint
-`proposition-extension-zero-restriction-closed-subscheme`): a presentation
+/-- A square Jacobian presentation of the `R`-algebra `S`: a presentation
 `S = R[xᵢ : i ∈ ι] / (fᵢ : i ∈ ι)` such that the full Jacobian determinant `det (∂fᵢ / ∂xⱼ)` is a
-unit in `S`. It is recorded as a submersive presentation with relations indexed by `ι` whose
-relation `fᵢ` is paired with the variable `xᵢ`, so that the Jacobian of the submersive presentation
-is the full Jacobian determinant. -/
+unit in `S`. -/
 structure SquareJacobianPresentation extends SubmersivePresentation.{t, t} R S ι ι where
   map_eq_id : map = _root_.id
 

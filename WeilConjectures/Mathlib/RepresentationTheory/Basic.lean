@@ -41,11 +41,10 @@ have, alongside `Representation.tprod` and `Representation.dual`:
 * `Representation.hasEigenvalue_dual_iff`: the eigenvalues of `g` on the dual representation are
   those of `g⁻¹`.
 
-## Blueprint
+## Implementation details
 
-`Representation.detCharacter` implements part of `definition-determinant-weight--1`.
-`Representation.exteriorPower` is the exterior power `⋀^s V` of `det-d-linear`, and `⋀^r V` for
-`r = dim V` its determinant representation.
+The name `Representation.exteriorPower` shadows the root namespace `exteriorPower`, whose
+declarations are therefore spelled `_root_.exteriorPower.*` in this file.
 -/
 
 @[expose] public section
@@ -58,8 +57,7 @@ variable {k : Type*} [Field k] {W : Type*} [Group W]
 variable {V : Type*} [AddCommGroup V] [Module k V]
 
 /-- The *determinant character* of a representation `ρ` is the homomorphism `δ(w) = det ρ(w)`,
-valued in the units of `k` because `ρ(w)` is invertible.
-(blueprint: `definition-determinant-weight--1`) -/
+valued in the units of `k` because `ρ(w)` is invertible. -/
 noncomputable def detCharacter (ρ : Representation k W V) : W →* kˣ :=
   (Units.map (LinearMap.det : Module.End k V →* k)).comp (MonoidHom.toHomUnits ρ)
 
@@ -90,8 +88,7 @@ theorem Equiv.detCharacter_eq (e : ρ.Equiv σ) : σ.detCharacter = ρ.detCharac
 end Equiv
 
 /-- The representation induced on the `s`-th exterior power `⋀^s V`, by functoriality of the
-exterior power. The name shadows the root namespace `exteriorPower`, whose declarations are
-therefore spelled `_root_.exteriorPower.*` below. (blueprint: `det-d-linear`) -/
+exterior power. -/
 noncomputable def exteriorPower (ρ : Representation k W V) (s : ℕ) :
     Representation k W ↥(⋀[k]^s V) where
   toFun w := _root_.exteriorPower.map s (ρ w)
@@ -243,8 +240,7 @@ theorem hasEigenvalue_inv {g : G} {α : k} (h : Module.End.HasEigenvalue (ρ g) 
     _ = α⁻¹ • v := by
       rw [← hgv, ← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one, Module.End.one_apply]
 
-/-- The eigenvalues of `g` on the dual representation are those of `g⁻¹` on `V`
-(`lemma-filtrations-spectra`). -/
+/-- The eigenvalues of `g` on the dual representation are those of `g⁻¹` on `V`. -/
 theorem hasEigenvalue_dual_iff [FiniteDimensional k V] {g : G} {α : k} :
     Module.End.HasEigenvalue (ρ.dual g) α ↔ Module.End.HasEigenvalue (ρ g⁻¹) α := by
   have h : ρ.dual g = (ρ g⁻¹).dualMap := by
