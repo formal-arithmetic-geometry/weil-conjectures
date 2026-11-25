@@ -219,7 +219,7 @@ lemma Scheme.Pullback.mem_range_diagonal_of_mem_range {B S : Scheme.{u}} {b : B 
 set_option backward.isDefEq.respectTransparency false in
 /-- Let `b : B ⟶ Y` and `p : P ⟶ Y`, and write `B_P = B ×_Y P`. A point `u` of `B_P ×_P B_P`
 lies on the diagonal of `B_P ⟶ P` if and only if its image in `B ×_Y B` lies on the diagonal of
-`b`: the diagonal of `B_P ⟶ P` is the base change of the diagonal of `b`. -/
+`b`. -/
 lemma Scheme.Pullback.map_fst_mem_range_diagonal_iff {B Y P : Scheme.{u}} (b : B ⟶ Y)
     (p : P ⟶ Y) (u : ↑(pullback (pullback.snd b p) (pullback.snd b p))) :
     pullback.map _ _ b b (pullback.fst b p) (pullback.fst b p) p pullback.condition.symm
@@ -257,9 +257,7 @@ lemma Scheme.Pullback.map_fst_mem_range_diagonal_iff {B Y P : Scheme.{u}} (b : B
 
 /-- **Surjectivity from nonempty geometric fibres.** A morphism `f : X ⟶ Y` such that the
 fibre `X ×_Y Spec Ω` over every geometric point `Spec Ω ⟶ Y`, with `Ω` algebraically closed, is
-nonempty is surjective: a point of the fibre over the geometric point
-`Spec κ(y)ᵃˡᵍ ⟶ Spec κ(y) ⟶ Y` lies over `y`. No finiteness hypothesis on `f` is needed.
-(blueprint: `lem-weil-pbc-surjective-nonempty-fibres`) -/
+nonempty is surjective. -/
 theorem Surjective.of_forall_nonempty_pullback (f : X ⟶ Y)
     (h : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y),
       Nonempty ↥(pullback f y)) : Surjective f := by

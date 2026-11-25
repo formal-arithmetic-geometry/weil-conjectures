@@ -56,11 +56,9 @@ instance isMonHom_mul (f g : M ⟶ N) [IsMonHom f] [IsMonHom g] : IsMonHom (f * 
   rw [Hom.mul_def]
   infer_instance
 
-/-- Blueprint `definition-abelian-variety`: multiplication by `n` is a homomorphism.
-
-A power `f ^ n` of a morphism of monoid objects into a commutative monoid object is a morphism
-of monoid objects. Applied to `f = 𝟙 M` this says that the `n`-fold product `𝟙 M ^ n`, which
-on `X`-points is `x ↦ x ^ n` (`CategoryTheory.MonObj.comp_pow`), is a homomorphism. -/
+/-- A power `f ^ n` of a morphism of monoid objects into a commutative monoid object is a
+morphism of monoid objects. In particular multiplication by `n`, `𝟙 M ^ n`, is a morphism of
+monoid objects. -/
 @[to_additive /-- A multiple `n • f` of a morphism of additive monoid objects into a commutative
 additive monoid object is a morphism of additive monoid objects. -/]
 instance isMonHom_pow (f : M ⟶ N) [IsMonHom f] (n : ℕ) : IsMonHom (f ^ n) := by

@@ -46,12 +46,26 @@ that a scheme representing `sigmaOver P` gives an `S`-scheme representing `P`.
   with small values, covered by representable subfunctors which are representable by open
   immersions, is representable (Stacks, Lemma 01JJ, in the form of Definition 01JI).
 
-## Implementation notes
+## Implementation details
 
 The hypotheses of `isRepresentable_of_isSheaf_over` are stated concretely, in the form of
 Stacks, Definition 01JI: the family `ξ i ∈ P(X i)` is "injective" (`h_{X i} ⟶ P` is a
 monomorphism), the locus where an element of `P(T)` comes from `X i` is an open subscheme of
-`T`, and every point of every `T` lies in such a locus.
+`T`, and every point of every `T` lies in such a locus. In
+`isRepresentable_of_isSheaf_over_of_isAffine` the general case of these hypotheses follows
+from the affine one by covering `T` and `W` by affine opens, using that `P` is a Zariski sheaf.
+
+In `isRepresentable_of_isSheaf_of_zariskiCovers`, subfunctors are `CategoryTheory.Subfunctor`,
+the Zariski sheaf property is `Presheaf.IsSheaf` for `zariskiTopology.over S`, and
+representability by open immersions is `MorphismProperty.relative` for `uliftYoneda`. The proof
+reduces to `isRepresentable_of_isSheaf_over`, applied to the universal elements of the `F i`.
+
+## References
+
+* [Stacks: Definition 01JI](https://stacks.math.columbia.edu/tag/01JI), for `ZariskiCovers`
+  and representability by open immersions.
+* [Stacks: Lemma 01JJ](https://stacks.math.columbia.edu/tag/01JJ), for
+  `isRepresentable_of_isSheaf_over` and `isRepresentable_of_isSheaf_of_zariskiCovers`.
 -/
 
 @[expose] public section
@@ -335,8 +349,7 @@ lemma isRepresentable_of_isRepresentable_sigmaOver [(sigmaOver P).IsRepresentabl
   `W ⟶ X i`;
 * every point `t` of every `T` lies in such an open for some `i`.
 
-Then `P` is representable. This is Stacks, Lemma 01JJ, for schemes over `S`; it is deduced from
-Mathlib's `AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable`. -/
+Then `P` is representable. -/
 theorem isRepresentable_of_isSheaf_over (hP : Presheaf.IsSheaf (zariskiTopology.over S) P)
     {ι : Type u} (X : ι → Over S) (ξ : ∀ i, P.obj (op (X i)))
     (hinj : ∀ i {T : Over S} (a b : T ⟶ X i), P.map a.op (ξ i) = P.map b.op (ξ i) → a = b)
@@ -535,12 +548,11 @@ lemma exists_opens_sigmaOver (hP : Presheaf.IsSheaf (zariskiTopology.over S) P)
 
 end Affine
 
-/-- **Representability is local, over a base, tested on affine schemes.** This is
+/-- **Representability is local, over a base, tested on affine schemes.** The statement of
 `AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over` with each of
 its three hypotheses only required for affine test schemes: the injectivity of `h_{X i} ⟶ P`
 on affine `T`, the openness of the locus where an element of `P(T)` comes from `X i` for affine
-`T`, tested against affine `W ⟶ T`, and the covering condition for affine `T`. Since `P` is a
-Zariski sheaf, the general case follows by covering `T` and `W` by affine opens. -/
+`T`, tested against affine `W ⟶ T`, and the covering condition for affine `T`. -/
 theorem isRepresentable_of_isSheaf_over_of_isAffine
     (hP : Presheaf.IsSheaf (zariskiTopology.over S) P)
     {ι : Type u} (X : ι → Over S) (ξ : ∀ i, P.obj (op (X i)))
@@ -593,9 +605,7 @@ namespace AlgebraicGeometry
 /-- **Subfunctors representable by open immersions.** If the inclusion of a subfunctor
 `F ⊆ P` of a presheaf on `Over S` is representable by open immersions, then for every `T` and
 `x ∈ P(T)` there is an open `U ⊆ T` such that a morphism `a : W ⟶ T` factors through `U` if
-and only if `a^* x ∈ F(W)` (Stacks, Definition 01JI).
-
-(blueprint: `lemma-representability-picard-functor`) -/
+and only if `a^* x ∈ F(W)`. -/
 lemma exists_opens_of_relative_isOpenImmersion {S : Scheme.{u}}
     {P : (Over S)ᵒᵖ ⥤ Type (max w u)} {F : Subfunctor P}
     (hF : (IsOpenImmersion.inverseImage (Over.forget S)).relative uliftYoneda.{w} F.ι)
@@ -629,11 +639,7 @@ lemma exists_opens_of_relative_isOpenImmersion {S : Scheme.{u}}
 /-- **Recognising subfunctors representable by open immersions.** Conversely to
 `AlgebraicGeometry.exists_opens_of_relative_isOpenImmersion`, if for every `T` and
 `x ∈ P(T)` there is an open `U ⊆ T` such that a morphism `a : W ⟶ T` factors through `U` if and
-only if `a^* x ∈ F(W)`, then the inclusion `F ⊆ P` is representable by open immersions: the
-pullback of `F` along `x : h_T ⟶ P` is represented by the open subscheme `U` of `T`
-(Stacks, Definition 01JI).
-
-(blueprint: `lemma-representability-picard-functor`) -/
+only if `a^* x ∈ F(W)`, then the inclusion `F ⊆ P` is representable by open immersions. -/
 lemma relative_isOpenImmersion_of_exists_opens {S : Scheme.{u}}
     {P : (Over S)ᵒᵖ ⥤ Type (max w u)} {F : Subfunctor P}
     (hF : ∀ (T : Over S) (x : P.obj (op T)), ∃ U : T.left.Opens, ∀ (W : Over S) (a : W ⟶ T),
@@ -670,17 +676,15 @@ lemma relative_isOpenImmersion_of_exists_opens {S : Scheme.{u}}
 
 /-- **Covers of a functor.** A family `F i` of subfunctors of a presheaf `P` on `Over S`
 *covers* `P` if every element `x ∈ P(T)` lies locally on `T` in one of the `F i`: every point of
-`T` has an open neighbourhood `U` with `x|_U ∈ F i (U)` for some `i` (Stacks, Definition 01JI).
-
-(blueprint: `lemma-representability-picard-functor`) -/
+`T` has an open neighbourhood `U` with `x|_U ∈ F i (U)` for some `i`. -/
 def ZariskiCovers {S : Scheme.{u}} {P : (Over S)ᵒᵖ ⥤ Type w} {ι : Sort*}
     (F : ι → Subfunctor P) : Prop :=
   ∀ (T : Over S) (x : P.obj (op T)) (t : T.left), ∃ (i : ι) (U : T.left.Opens), t ∈ U ∧
     P.map (Over.homMk U.ι rfl : Over.mk (U.ι ≫ T.hom) ⟶ T).op x ∈
       (F i).obj (op (Over.mk (U.ι ≫ T.hom)))
 
-/-- **The representability criterion for schemes** (Stacks, Lemma 01JJ). Let `P` be a presheaf
-of sets on `Sch/S`, with `u`-small values, such that
+/-- **The representability criterion for schemes.** Let `P` be a presheaf of sets on `Sch/S`,
+with `u`-small values, such that
 
 1. `P` is a Zariski sheaf;
 2. there is a family `(F i)` of subfunctors of `P` such that
@@ -688,15 +692,7 @@ of sets on `Sch/S`, with `u`-small values, such that
    (b) each inclusion `F i ⊆ P` is representable by open immersions,
    (c) the family `F i` covers `P`.
 
-Then `P` is representable by a scheme over `S`. Subfunctors (blueprint `def-pc-subfunctor`) are
-`CategoryTheory.Subfunctor`, the Zariski sheaf property (blueprint
-`def-pc-zariski-sheaf-property`) is `Presheaf.IsSheaf` for `zariskiTopology.over S`, and
-representability by open immersions (blueprint `lemma-representability-picard-functor`) is
-`MorphismProperty.relative` for `uliftYoneda`. The proof reduces to
-`AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over`, applied to the
-universal elements of the `F i`.
-
-(blueprint: `lemma-representability-picard-functor`) -/
+Then `P` is representable by a scheme over `S`. -/
 theorem isRepresentable_of_isSheaf_of_zariskiCovers {S : Scheme.{u}}
     {P : (Over S)ᵒᵖ ⥤ Type (max w u)} [∀ T, Small.{u} (P.obj T)]
     (hP : Presheaf.IsSheaf (Scheme.zariskiTopology.over S) P) {ι : Type u}

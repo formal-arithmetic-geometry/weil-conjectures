@@ -34,12 +34,16 @@ the structural input that makes the Tate module of an abelian variety a free `�
 - `AddMonoidHom.finite_quotient_range_zsmul_of_ker_le`: `A / nA` is finite if `A` maps to a
   finitely generated group with kernel divisible by `n`.
 
-## Implementation notes
+## Implementation details
 
-Instead of the classification of finite abelian `ℓ`-groups used in the blueprint, we choose an
+Instead of using the classification of finite abelian `ℓ`-groups, we choose an
 `𝔽_ℓ`-basis `e` of `D[ℓ]`, lift it along multiplication by `ℓ ^ (n - 1)` to `y` using
 divisibility, and show by induction on `n` that `c ↦ ∑ i, c i • y i` identifies
-`(ℤ / ℓ ^ n) ^ r` with `D[ℓ ^ n]`.
+`(ℤ / ℓ ^ n) ^ r` with `D[ℓ ^ n]`. The case of general `n` follows from the prime power case by
+the Chinese remainder theorem.
+
+`AddSubgroup.natCard_quotient_range_zsmul_mul_eq` is the snake lemma for multiplication by `n`
+on `0 → X → Y → Z → 0`.
 -/
 
 @[expose] public section
@@ -214,13 +218,9 @@ theorem exists_basis_torsionBy (D : Type*) [AddCommGroup D] (ℓ : ℕ) [Fact �
     rfl
   exact ⟨e, fun i ↦ (Submodule.mem_torsionBy_iff _ _).1 (b i).2, he, he'⟩
 
-/-- Blueprint `proposition-integral-tate-module--1`: The torsion of a divisible group.
-
-This is also the blueprint lemma `proposition-integral-tate-module--1`.
-
-Let `D` be a divisible abelian group, let `ℓ` be a prime and suppose that the `ℓ`-torsion of
-`D` is finite of order `ℓ ^ r`. Then for every `n` the `ℓ ^ n`-torsion of `D` is isomorphic
-to `(ℤ / ℓ ^ n) ^ r`. -/
+/-- **The torsion of a divisible group.** Let `D` be a divisible abelian group, let `ℓ` be a
+prime and suppose that the `ℓ`-torsion of `D` is finite of order `ℓ ^ r`. Then for every `n` the
+`ℓ ^ n`-torsion of `D` is isomorphic to `(ℤ / ℓ ^ n) ^ r`. -/
 theorem nonempty_addEquiv_torsionBy_of_natCard_eq (D : Type*) [AddCommGroup D]
     [DivisibleBy D ℤ] (ℓ : ℕ) [Fact ℓ.Prime] (r : ℕ) (hr : Nat.card D[(ℓ : ℤ)] = ℓ ^ r) (n : ℕ) :
     Nonempty (D[((ℓ : ℤ) ^ n)] ≃+ (Fin r → ZMod (ℓ ^ n))) := by
@@ -319,13 +319,9 @@ theorem nonempty_addEquiv_torsionBy_mul_prod (D : Type*) [AddCommGroup D] {a b :
         rw [smul_add, smul_smul, smul_smul, mul_comm (a : ℤ) v, mul_smul v, hy, smul_zero,
           zero_add, mul_comm, ← hz']
 
-/-- The Chinese remainder step of blueprint `proposition-multiplication-n--2`.
-
-Let `D` be a divisible abelian group and suppose that for every prime `ℓ` dividing `n ≠ 0` the
-`ℓ`-torsion of `D` has order `ℓ ^ r`. Then the `n`-torsion of `D` is isomorphic to
-`(ℤ / n) ^ r`: for prime powers this is
-`AddSubgroup.nonempty_addEquiv_torsionBy_of_natCard_eq`, and the general case follows by the
-Chinese remainder theorem. -/
+/-- Let `D` be a divisible abelian group and suppose that for every prime `ℓ` dividing `n ≠ 0`
+the `ℓ`-torsion of `D` has order `ℓ ^ r`. Then the `n`-torsion of `D` is isomorphic to
+`(ℤ / n) ^ r`. -/
 theorem nonempty_addEquiv_torsionBy_of_forall_prime (D : Type*) [AddCommGroup D]
     [DivisibleBy D ℤ] (r : ℕ) {n : ℕ} (hn : n ≠ 0)
     (h : ∀ ℓ : ℕ, ℓ.Prime → ℓ ∣ n → Nat.card D[(ℓ : ℤ)] = ℓ ^ r) :
@@ -360,8 +356,7 @@ variable {G : Type*} [AddCommGroup G]
 /-- **Torsion in a quotient of a divisible group.** Let `Λ` be a subgroup of an abelian group
 `G` on which multiplication by `n` is surjective. Then there is a short exact sequence
 `0 → G[n] / Λ[n] → (G / Λ)[n] → Λ / nΛ → 0`, whose second map sends the class of `g` with
-`n • g ∈ Λ` to the class of `n • g`.
-(blueprint: `proposition-cohomology-smooth-affine-curve--3`) -/
+`n • g ∈ Λ` to the class of `n • g`. -/
 theorem exists_exact_torsionBy_quotient (Λ : AddSubgroup G) (n : ℤ)
     (hG : Function.Surjective (zsmulAddGroupHom (α := G) n)) :
     ∃ (α : G[n] ⧸ Λ.addSubgroupOf G[n] →+ (G ⧸ Λ)[n])
@@ -451,9 +446,7 @@ theorem exists_exact_torsionBy_quotient (Λ : AddSubgroup G) (n : ℤ)
 
 
 /-- Let `Λ` be a finitely generated subgroup of an abelian group `G` on which multiplication by
-`n ≠ 0` is surjective, and assume that `G[n]` is finite. Then `(G / Λ)[n]` is finite: it is an
-extension of the finite group `Λ / nΛ` by a quotient of `G[n]`
-(`AddSubgroup.exists_exact_torsionBy_quotient`). -/
+`n ≠ 0` is surjective, and assume that `G[n]` is finite. Then `(G / Λ)[n]` is finite. -/
 theorem finite_torsionBy_quotient (Λ : AddSubgroup G) {n : ℕ} (hn : n ≠ 0)
     (hG : Function.Surjective (zsmulAddGroupHom (α := G) n)) [Finite G[n]] (hΛ : Λ.FG) :
     Finite (G ⧸ Λ)[n] := by
@@ -483,8 +476,7 @@ end Quotient
 end AddSubgroup
 
 /-- Let `D : A →+ F` be a homomorphism of abelian groups with `F` finitely generated, and `n ≠ 0`.
-If every element of the kernel of `D` is divisible by `n`, then `A / nA` is finite: it embeds
-into `D(A) / n D(A)`, a finitely generated `n`-torsion group. -/
+If every element of the kernel of `D` is divisible by `n`, then `A / nA` is finite. -/
 theorem AddMonoidHom.finite_quotient_range_zsmul_of_ker_le {A F : Type*} [AddCommGroup A]
     [AddCommGroup F] [Module.Finite ℤ F] (D : A →+ F) {n : ℕ} (hn : n ≠ 0)
     (hker : D.ker ≤ (zsmulAddGroupHom (α := A) n).range) :
@@ -553,8 +545,7 @@ theorem natCard_quotient_range_zsmul_eq_relIndex (X : AddSubgroup Y) (n : ℤ) :
 /-- **Multiplicativity of the Herbrand-type quotient of multiplication by `n`.** For a subgroup
 `X` of an abelian group `Y` with quotient `Z = Y ⧸ X` and `n : ℤ`,
 `|X / nX| · |Z / nZ| · |Y[n]| = |Y / nY| · |X[n]| · |Z[n]|` (as natural numbers, with the
-convention that infinite cardinals are `0`). This is the snake lemma for multiplication by `n` on
-`0 → X → Y → Z → 0`. -/
+convention that infinite cardinals are `0`). -/
 theorem natCard_quotient_range_zsmul_mul_eq (X : AddSubgroup Y) (n : ℤ) :
     Nat.card (X ⧸ (zsmulAddGroupHom (α := X) n).range) *
         Nat.card ((Y ⧸ X) ⧸ (zsmulAddGroupHom (α := Y ⧸ X) n).range) *
