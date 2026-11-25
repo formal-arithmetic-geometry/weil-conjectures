@@ -30,14 +30,12 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
 variable {X : Scheme.{u}}
-  [HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
 attribute [local instance] cupRealizationMonoidalCategory cupRealizationSymmetricCategory
   globalPullbackMatesColimits cupRealizationMonoidalPreadditive cupRealizationMonoidalClosed
   cupRealizationHasFunctorialFlatResolution cupRealizationIsGrothendieckAbelian
   cupRealizationDerivedMonoidal cupRealizationQLax
 
-set_option linter.unusedSectionVars false in
 private theorem tensor_hom_ext {M N P : X.Modules} {a b : M ⊗ N ⟶ P}
     (h : ∀ (U : X.Opens) (s : Γ(M, U)) (t : Γ(N, U)),
       a.app U (tmulSection s t) = b.app U (tmulSection s t)) : a = b := by
@@ -50,7 +48,6 @@ private theorem tensor_hom_ext {M N P : X.Modules} {a b : M ⊗ N ⟶ P}
   intro s t
   exact h U.unop s t
 
-set_option linter.unusedSectionVars false in
 private lemma singleTensor_component (F G : SheafOfModules.{u}
     (moduleRings X.toRingedSpace)) :
     HomologicalComplex.ιTensorObj
@@ -77,7 +74,6 @@ private lemma singleTensor_component (F G : SheafOfModules.{u}
   dsimp [HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq]
   simp only [whiskerLeft_id, id_whiskerRight, Category.comp_id, Category.id_comp, tensorHom_id]
 
-set_option linter.unusedSectionVars false in
 /-- A realization respects the coefficient augmentations before localization
 (Stacks, Tag 0FKU). -/
 theorem moduleCup_resolution_augmentation {F G : X.Modules} (D : CupResolutionPairing F G)

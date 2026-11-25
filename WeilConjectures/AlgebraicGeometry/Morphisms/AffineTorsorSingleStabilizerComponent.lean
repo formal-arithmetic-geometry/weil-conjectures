@@ -74,8 +74,6 @@ private theorem descent_section_reconstruction {Y S T V : Scheme.{u}} [Connected
     pullback.lift_fst] using he.symm
 
 
--- The shorter affine argument does not need every torsor hypothesis in this fixed interface.
-set_option linter.unusedVariables false
 /-- The split section labelled `x` descends to the stabilizer quotient: if `K` is the stabilizer
 of `x`, there is a morphism `s` over `Spec R` from the puncture `D(ι g)` of `Spec C^K` to `Y`
 whose composite with the quotient map `q` is the split section labelled `x`. -/
@@ -90,12 +88,12 @@ theorem affine_torsor_single_stabilizer_component_section
     (hne : algebraMap H C (ι g) ≠ 0)
     {Y : Scheme.{u}} (p : Y ⟶ Spec R)
     (j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g))
-    (hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)
+    (_hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)
     [IsFinite j] [Etale j]
-    (hEt : Etale (Scheme.Opens.ι (X := Spec (CommRingCat.of C))
+    (_hEt : Etale (Scheme.Opens.ι (X := Spec (CommRingCat.of C))
       (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫
       Spec.map (CommRingCat.ofHom (algebraMap H C))))
-    (hrot : ∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω),
+    (_hrot : ∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω),
       a.comp (algebraMap H C) = b.comp (algebraMap H C) →
       a (algebraMap H C (ι g)) ≠ 0 →
       ∃! ζ : G, a.comp (ρ ζ).toRingHom = b)

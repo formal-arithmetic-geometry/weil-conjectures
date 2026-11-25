@@ -143,8 +143,6 @@ private theorem comparison_diagram_pair
   simpa only [Iso.symm_hom, Iso.symm_inv, Iso.trans_hom, Iso.trans_inv,
     Iso.app_hom, Iso.app_inv, Category.assoc] using hp
 
--- The existential localization data must remain inline for the following let-bound functors.
-set_option linter.style.haveILetI false in
 -- Instantiating the categorical transport lemma needs many derived-functor type comparisons.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency true in
@@ -217,13 +215,13 @@ theorem open_union_restriction_transport
   have h := open_union_restriction_comparison_diagram.{u, w} X W V
   refine h.imp ?_
   intro hU h
-  letI := hU
+  let := hU
   refine h.imp ?_
   intro hT h
-  letI := hT
+  let := hT
   refine h.imp ?_
   intro hI h
-  letI := hI
+  let := hI
   intro RU RT SU ST tU tT
   refine h.imp ?_
   intro eW h

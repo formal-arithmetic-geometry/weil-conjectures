@@ -207,8 +207,6 @@ private theorem topExterior_generator {X : Scheme.{v}} (M : X.Modules)
   obtain ⟨d⟩ := (exteriorSheaf_local_free_comparison X M r V r e).1
   exact exists_isFreeGenerator_of_iso (d ≪≫ SheafOfModules.freeUniqueIso _)
 
--- The unchanged statement names existential witnesses not used in later conjuncts.
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- A common free chart identifies the sectionwise exterior and tensor constructions
 with their sheaf counterparts, and evaluates a sheaf splitting as a module splitting. -/
@@ -219,10 +217,10 @@ theorem determinant_split_chart_comparison {X : Scheme.{v}}
     (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)
     (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)
     (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g) :
-    ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧
+    ∀ x ∈ U, ∃ (V : X.Opens) (_hVU : V ≤ U), x ∈ V ∧
       ∀ (W : X.Opens), W ≤ V →
-        ∃ (a : Module.Basis (Fin r) (X.presheaf.obj (op W)) (S.X₁.val.obj (op W)))
-          (c : Module.Basis (Fin s) (X.presheaf.obj (op W)) (S.X₃.val.obj (op W)))
+        ∃ (_a : Module.Basis (Fin r) (X.presheaf.obj (op W)) (S.X₁.val.obj (op W)))
+          (_c : Module.Basis (Fin s) (X.presheaf.obj (op W)) (S.X₃.val.obj (op W)))
           (eW : S.X₂.val.obj (op W) ≃ₗ[X.presheaf.obj (op W)]
             (S.X₁.val.obj (op W) × S.X₃.val.obj (op W))),
           (∀ z, eW (S.f.val.app (op W) z) = (z, 0)) ∧

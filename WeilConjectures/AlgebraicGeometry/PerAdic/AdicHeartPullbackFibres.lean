@@ -220,7 +220,7 @@ attribute [instance] Base.isOver Base.finiteTypeLocal Base.finiteTypeCompact Bas
 
 variable {k : Type u} [Field k] (l : ℕ) [Fact l.Prime] [hl : Fact (IsUnit (l : k))]
 
-set_option linter.unusedSectionVars false in
+omit [Fact l.Prime] in
 include hl in
 /-- Finite type over a field gives exactly the hypotheses of the recorded adic categories. -/
 theorem base_properties (W : Base k) :

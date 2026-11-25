@@ -1066,7 +1066,6 @@ variable {B C T U : Type*} [Category B] [Abelian B] [Category C] [Abelian C]
   (DF : DerivedReductionModelData F M) (DG : DerivedReductionModelData G N)
   (e : F ⋙ H ≅ P ⋙ G)
 
-set_option linter.defProp false in
 /-- Counit normalization for an exact square of derived models. -/
 def ModelPullNormalized
     (η : DF.reduction ⋙ H.mapDerivedCategory ≅ P.mapDerivedCategory ⋙ DG.reduction) : Prop :=
@@ -1080,7 +1079,6 @@ def ModelPullNormalized
 
 end ModelPullNormalization
 
-set_option linter.defProp false in
 /-- The strict ordinary comparison and universal counits fix the derived comparison. -/
 def ReductionPullNormalized
     (τ : reduction d V ⋙ exchangeConstantPull (A := A) f ≅

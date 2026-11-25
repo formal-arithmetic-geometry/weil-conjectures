@@ -107,13 +107,12 @@ private theorem pbcRightKanShift_unique
     simpa only [Category.assoc] using (square s hs n X).trans (square t ht n X).symm
   exact pbcKanCommShift_ext s t he
 
-set_option linter.unusedVariables false in
 /-- Universal tensor counits uniquely fix the termwise derived shift comparison. -/
 theorem pbcAmbientScalarShift_exists :
     ∃! q : (pbcEmbeddingAmbientTensor l E F i T).CommShift ℤ,
-      (fun [qInst : (pbcEmbeddingAmbientTensor l E F i T).CommShift ℤ] ↦
+      (fun [_qInst : (pbcEmbeddingAmbientTensor l E F i T).CommShift ℤ] ↦
         NatTrans.CommShift (pbcExtensionCounit (pbcScalarCoefficientMap l E F i T)) ℤ)
-          (qInst := q) := by
+          (_qInst := q) := by
   let φ := pbcScalarCoefficientMap l E F i T
   have := pbcDerivedExtension_universal φ
   have hkan := CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension

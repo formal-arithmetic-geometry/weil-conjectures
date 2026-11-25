@@ -25,7 +25,6 @@ public import WeilConjectures.AlgebraicGeometry.TwoOpenComparisonDiagram
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedVariables false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -70,7 +69,7 @@ The final fields pin both local identifications to the supplied comparisons
 (Stacks, Tags 08DW and 0D5S). -/
 noncomputable def perfectOverlapComparisonDataType
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
-    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)
+    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (_hc : IsColimit c)
     (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i))
     [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t]
     [∀ Z : Scheme.{u},
@@ -78,7 +77,7 @@ noncomputable def perfectOverlapComparisonDataType
     [∀ (Z : Scheme.{u}) (U : Z.Opens),
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
     (j : I) (hij : i ≤ j)
-    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),
+    (_hstage : ∀ (_U _V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),
       ∃ k : I, j ≤ k)
     :
     let Yj := pullback t (Spec.map (R.map (homOfLE hij)))
@@ -88,10 +87,10 @@ noncomputable def perfectOverlapComparisonDataType
       (T' := Over.mk (Spec.map (c.ι.app i)))
       (Over.homMk (Spec.map (c.ι.app j))
         (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)]))
-    ∀ (U V : Yj.Opens) (hcover : U ⊔ V = ⊤)
-      (hU : IsCompact (U : Set Yj)) (hV : IsCompact (V : Set Yj))
+    ∀ (U V : Yj.Opens) (_hcover : U ⊔ V = ⊤)
+      (_hU : IsCompact (U : Set Yj)) (_hV : IsCompact (V : Set Yj))
       (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)
-      (hA : U.toScheme.IsPerfect A) (hB : V.toScheme.IsPerfect B)
+      (_hA : U.toScheme.IsPerfect A) (_hB : V.toScheme.IsPerfect B)
       (E : schemeDerivedCategory X),
     let instP : Category (schemeDerivedCategory (gj ⁻¹ᵁ U).toScheme) := inferInstance
     let instQ : Category (schemeDerivedCategory (gj ⁻¹ᵁ V).toScheme) := inferInstance
@@ -100,11 +99,11 @@ noncomputable def perfectOverlapComparisonDataType
       (schemeOpenRestriction X (gj ⁻¹ᵁ U)).mapDerivedCategory
     let PV : schemeDerivedCategory X ⥤ schemeDerivedCategory (gj ⁻¹ᵁ V).toScheme :=
       (schemeOpenRestriction X (gj ⁻¹ᵁ V)).mapDerivedCategory
-    ∀ (φU : (derivedPullback (gj ∣_ U)).obj A ≅
+    ∀ (_φU : (derivedPullback (gj ∣_ U)).obj A ≅
         PU.obj E)
-      (φV : (derivedPullback (gj ∣_ V)).obj B ≅
+      (_φV : (derivedPullback (gj ∣_ V)).obj B ≅
         PV.obj E),
-    ∀ (k : I) (hjk : j ≤ k), Type (max (u + 1) w) := by
+    ∀ (k : I) (_hjk : j ≤ k), Type (max (u + 1) w) := by
   intro Yj X gj U V hcover hU hV A B hA hB E instP instQ instX PU PV φU φV k hjk
   exact
       let g := baseChangeMap t
@@ -187,7 +186,7 @@ noncomputable def perfectOverlapHomContinuityStatement
     [∀ (Z : Scheme.{u}) (U : Z.Opens),
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
     (j : I) (hij : i ≤ j)
-    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),
+    (hstage : ∀ (_U _V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),
       ∃ k : I, j ≤ k)
     : Prop :=
     let Yj := pullback t (Spec.map (R.map (homOfLE hij)))

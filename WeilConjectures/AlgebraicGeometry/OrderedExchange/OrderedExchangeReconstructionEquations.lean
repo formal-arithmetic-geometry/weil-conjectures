@@ -190,10 +190,9 @@ theorem targetA_delta (K : d.derived X) (hK : d.TowerComplete X K) :
   simp only [Iso.symm_hom, Functor.associator_inv_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
-set_option linter.unusedVariables false in
 /-- For tower-complete `K`, the reconstruction isomorphisms `iotaS`, `iotaT` and `phi` are
 compatible with `rhoM`, `rhoPull`, `beta` and `delta` after applying `lambda` and `rlim`. -/
-theorem reconstructionCoefficientEquations (sq : ChosenCartesianSquare g' f' f g) :
+theorem reconstructionCoefficientEquations (_sq : ChosenCartesianSquare g' f' f g) :
     ∀ (K : d.derived X) (hK : d.TowerComplete X K),
       ((res d Y').map (sourceReconstruction (f := f) (g := g) d K).hom ≫
           (lambda d Y').hom.app

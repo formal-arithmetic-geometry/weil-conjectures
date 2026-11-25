@@ -40,7 +40,6 @@ private theorem fractionRing_away_uniformizer
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-set_option linter.unusedVariables false in
 /-- The explicit generic model is the pullback of the original root-cover morphism. -/
 theorem root_cover_generic_pullback
     {L U : Scheme.{u}} (i : U ⟶ L)

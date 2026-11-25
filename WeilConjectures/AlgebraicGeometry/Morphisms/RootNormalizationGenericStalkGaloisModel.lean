@@ -72,7 +72,6 @@ private theorem basicOpen_pullback_torsor_square
   simp only [Category.comp_id] at he
   simpa only [he] using h
 
-set_option linter.unusedVariables false in
 /-- A root-normalization residue extension has a finite flat Galois integral-closure model. -/
 theorem root_normalization_generic_stalk_galois_model
     {L U : Scheme.{u}} (i : U ⟶ L)
@@ -83,7 +82,7 @@ theorem root_normalization_generic_stalk_galois_model
     (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R)
       (PrimeSpectrum.basicOpen f) = pullback.snd i φ)
     (H : CommRingCat.{u}) [IsNoetherianRing H] (b : R ⟶ H)
-    (hg : IsSMulRegular H (b.hom f))
+    (_hg : IsSMulRegular H (b.hom f))
     [IsDomain (H ⧸ Ideal.span {b.hom f})] :
     let g := b.hom f
     let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)

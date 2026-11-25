@@ -39,8 +39,6 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.unusedVariables false in
-set_option linter.style.haveILetI false in
 /-- Choose common affine residue models and representatives for the finite family. -/
 theorem picard_derived_fibre_residue_bridge
     [∀ Y : Scheme.{v},
@@ -107,7 +105,7 @@ theorem picard_derived_fibre_residue_bridge
   exact (picard_derived_fibre_residue_model_data f Xi fi ui hui L W k w s hw τ).elim
     fun U h ↦ h.elim fun hwU h ↦ h.2.elim fun p h' ↦ h'.elim fun hp h' ↦
       h'.elim fun hpEq h' ↦ h'.elim fun K h' ↦ h'.elim fun C h' ↦ by
-        letI : p.IsPrime := hp
+        let : p.IsPrime := hp
         exact ⟨U, hwU, h.1, p, hp, hpEq, K, C, h'.1, h'.2.1,
           h'.2.2.1.some, fun i ↦ (h'.2.2.2 i).some,
           picard_derived_fibre_residue_bridge_core f Xi fi ui hui L W k w s hw τ

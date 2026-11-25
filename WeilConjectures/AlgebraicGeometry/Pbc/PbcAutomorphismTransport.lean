@@ -203,6 +203,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [hf : IsIso f]
   {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 include hf in
+-- `hf` stays in the statement so the transport definitions below keep `[IsIso f]`.
 set_option linter.unusedSectionVars false in
 /-- The coefficient map is invertible for a scheme isomorphism. -/
 @[instance] theorem pbcIsoCoefficientMap_isIso : IsIso (completedCoefficientMap f d) := by
@@ -901,7 +902,7 @@ def pbcIsoIntegralScalarComparison (h : E ≤ F) :
         pbcIntegralScalarExtension l Ω T hdim hl h :=
   (pbcIsoIntegralScalarComparison_exists l Ω e hdim hl h).exists.choose
 
-set_option linter.unusedSectionVars false in
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian T] in
 /-- Integral localization commutes with the explicitly linear coefficient transport. -/
 theorem pbcIsoRationalization (E : Padic.FiniteCoefficientFields l Ω) :
     pbcRationalization T (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E) ⋙

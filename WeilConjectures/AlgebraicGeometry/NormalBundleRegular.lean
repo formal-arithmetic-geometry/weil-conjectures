@@ -435,6 +435,7 @@ theorem normalBundle_linear (W₁ : X.AffineZariskiSite) (a₁ : Fin c → Γ(X,
   simp only [pullback.lift_fst, pullback.map, Category.comp_id]
   exact appLE_relation _ (pullback.snd _ _) _ _ hF _ _ _ _ _ β hβ _ _
 
+-- `[IsClosedImmersion i]` is required by `normalBundleProj` in the statement itself.
 set_option linter.overlappingInstances false in
 /-- The normal cone `N_{Z/X} = Spec_Z (⨁_{r ≥ 0} I^r / I^{r+1}) ⟶ Z` of a regular closed
 immersion `i : Z ⟶ X` of pure codimension `c` is a vector bundle of rank `c`, with zero section

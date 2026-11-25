@@ -110,7 +110,6 @@ private theorem root_span_comap {H : Type u} [CommRing H]
     rw [← ht, pow_succ]
     exact Ideal.mul_mem_left _ _ (Ideal.subset_span (Set.mem_singleton t))
 
-set_option linter.unusedVariables false in
 /-- The stalk of a root normalization is identified with the corresponding DVR model. -/
 theorem root_normalization_dvr_comparison
     {L U : Scheme.{u}} (i : U ⟶ L)
@@ -149,7 +148,7 @@ theorem root_normalization_dvr_comparison
           ∃ (T : GaloisCover G (Spec (CommRingCat.of (FractionRing B)))),
             let A0 := AdjoinRoot
               ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)
-            let N0 := Spec (CommRingCat.of A0)
+            let _N0 := Spec (CommRingCat.of A0)
             let q0 := Spec.map (CommRingCat.ofHom (algebraMap B A0))
             let j0 := Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B)))
             let a0 := pullback.snd (T.π ≫ j0) q0
