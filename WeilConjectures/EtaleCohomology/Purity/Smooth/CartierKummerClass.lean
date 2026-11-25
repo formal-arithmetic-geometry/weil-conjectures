@@ -22,47 +22,21 @@ public import WeilConjectures.SixFunctors.Integral.Exact
 /-!
 # The cycle class of an effective Cartier divisor via Kummer boundaries
 
-Blueprint `lemma-cycle-class-cartier-divisor`. Let `i : D ⟶ T` be an effective Cartier divisor, that
-is a regular closed immersion of codimension one (`AlgebraicGeometry.IsRegularImmersion 1 i`): near
-every point, `D` is cut out by one non-zero-divisor `f`. On such a chart the Kummer boundary
-`∂κ(f) ∈ H²_{V(f)}(U, Λ(1))` (`AlgebraicGeometry.Etale.kummerBoundary`) is a class supported on
-`D ∩ U`, and changing `f` by a unit does not change it
-(`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec`). The local classes
-glue to a class
+Let `i : D ⟶ T` be an effective Cartier divisor, that is a regular closed immersion of codimension
+one (`AlgebraicGeometry.IsRegularImmersion 1 i`): near every point, `D` is cut out by one
+non-zero-divisor `f`. On such a chart the Kummer boundary `∂κ(f) ∈ H²_{V(f)}(U, Λ(1))`
+(`AlgebraicGeometry.Etale.kummerBoundary`) is a class supported on `D ∩ U`, and changing `f` by a
+unit does not change it
+(`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec`).
+Under a purity hypothesis the local classes glue to a class
 
 `c_D ∈ H²_D(T, Λ(1)) = Hom(Λ_T, Ri_! Ri^! (Λ_T(1)[2]))`,
 
 whose adjoint is the supported Kummer map `Λ_D ⟶ Ri^! (Λ_T(1)[2])`
 (`AlgebraicGeometry.Etale.supportedClassMap`), equivalently `i_* Λ_D ⟶ Λ_T(1)[2]`.
-
-## The purity hypothesis
-
-Gluing morphisms in a derived category along an open cover is not automatic. It is possible
-when the target is a sheaf placed in degree zero
-(`AlgebraicGeometry.Etale.exists_hom_of_isOpenImmersion_cover`). We therefore assume that
-`Ri_! Ri^! (Λ_T(c)[2c])` is isomorphic to a sheaf placed in degree zero
-(`AlgebraicGeometry.Etale.SupportedTatePure`), which for `c = 1` is the semi-purity
-`𝓗⁰_D = 𝓗¹_D = 0` of `Λ(1)` together with the vanishing of the higher local cohomology
-sheaves. This hypothesis is stable under étale base change
-(`AlgebraicGeometry.Etale.SupportedTatePure.of_etale`), and it holds for a regular closed
-immersion of a regular scheme into a scheme smooth over a perfect field, by purity
-(`AlgebraicGeometry.Etale.supportedTatePure_of_smooth`, in
-`WeilConjectures.EtaleCohomology.Purity.Smooth.CartierKummerClassSmooth`); in that case the
-class constructed here is the fundamental class `AlgebraicGeometry.Etale.fundamentalClass`
-(`AlgebraicGeometry.Etale.pureFundamentalClass_eq_fundamentalClass`). As there, the independence
-of the local classes from the choice of equations uses the rank-one normalisation
-`AlgebraicGeometry.Etale.HasKummerClass.IsNormalized`.
-
 Everything is done for regular immersions of any codimension `c`, where the local classes are
 the cup products `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` of the frames (`AlgebraicGeometry.Etale.frameClass`);
-the Cartier case is `c = 1`. The arguments are those of
-`WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion`, with the smoothness and
-regularity hypotheses replaced by the purity hypothesis. That file is not imported: its import
-closure contains the smooth duality of `WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality`,
-which is not needed here.
-
-*Sign.* Forgetting supports, `∂κ(f)` is `c₁(𝒪(-D))`; the blueprint's class `c_D`, whose image is
-`c₁(𝒪(D))`, is `-∂κ(f)` (see `WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineClass`).
+the Cartier case is `c = 1`.
 
 ## Main definitions
 
@@ -80,6 +54,35 @@ which is not needed here.
   the class `c_D` restricts to the Kummer boundary class `∂κ(f)`.
 - `AlgebraicGeometry.Etale.restrictSupportedClass_cartierKummerClass`: base change along any
   `g : T' ⟶ T` for which the pulled-back divisor is again Cartier (with the purity hypothesis).
+
+## Implementation details
+
+Gluing morphisms in a derived category along an open cover is not automatic. It is possible
+when the target is a sheaf placed in degree zero
+(`AlgebraicGeometry.Etale.exists_hom_of_isOpenImmersion_cover`). We therefore assume that
+`Ri_! Ri^! (Λ_T(c)[2c])` is isomorphic to a sheaf placed in degree zero
+(`AlgebraicGeometry.Etale.SupportedTatePure`), which for `c = 1` is the semi-purity
+`𝓗⁰_D = 𝓗¹_D = 0` of `Λ(1)` together with the vanishing of the higher local cohomology
+sheaves. This hypothesis is stable under étale base change
+(`AlgebraicGeometry.Etale.SupportedTatePure.of_etale`), and it holds for a regular closed
+immersion of a regular scheme into a scheme smooth over a perfect field, by purity
+(`AlgebraicGeometry.Etale.supportedTatePure_of_smooth`, in
+`WeilConjectures.EtaleCohomology.Purity.Smooth.CartierKummerClassSmooth`); in that case the
+class constructed here is the fundamental class `AlgebraicGeometry.Etale.fundamentalClass`
+(`AlgebraicGeometry.Etale.pureFundamentalClass_eq_fundamentalClass`). As there, the independence
+of the local classes from the choice of equations uses the rank-one normalisation
+`AlgebraicGeometry.Etale.HasKummerClass.IsNormalized`. Near every point of the divisor there is
+a frame given by a regular sequence on an affine open, and any other frame differs from it by a
+matrix with invertible determinant, under which the frame classes agree; by the purity
+hypothesis the Zariski-local classes then glue.
+
+The arguments are those of `WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion`,
+with the smoothness and regularity hypotheses replaced by the purity hypothesis. That file is not
+imported: its import closure contains the smooth duality of
+`WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality`, which is not needed here.
+
+*Sign.* Forgetting supports, `∂κ(f)` is `c₁(𝒪(-D))`; the class whose image is `c₁(𝒪(D))` is
+`-∂κ(f)` (see `WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineClass`).
 -/
 
 @[expose] public section
@@ -104,9 +107,7 @@ variable [HasTateTwist Λ]
 
 /-- The *purity hypothesis* for a closed immersion `i : Z ⟶ X` in codimension `c`: the object
 `Ri_! Ri^! (Λ_X(c)[2c])` of classes with supports in `Z` is isomorphic to a sheaf placed in
-degree zero. Then classes in `H^{2c}_Z(X, Λ(c))` are sections of a sheaf, so they are determined
-locally and glue along open covers. It holds for regular immersions into schemes smooth over a
-perfect field (`AlgebraicGeometry.Etale.supportedTatePure_of_smooth`). -/
+degree zero. -/
 def SupportedTatePure (c : ℕ) (i : Z ⟶ X) [IsClosedImmersion i] [HasInvertibleExponent Λ X] :
     Prop :=
   ∃ G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),
@@ -115,9 +116,7 @@ def SupportedTatePure (c : ℕ) (i : Z ⟶ X) [IsClosedImmersion i] [HasInvertib
       (DerivedCategory.singleFunctor _ 0).obj G)
 
 variable {Λ} in
-/-- The purity hypothesis is stable under étale base change: the restriction of supports along
-an étale map is an isomorphism (`AlgebraicGeometry.Etale.isIso_supportedRestriction_of_etale`)
-and the pullback of a sheaf placed in degree zero is the sheaf pullback placed in degree zero. -/
+/-- The purity hypothesis is stable under étale base change. -/
 theorem SupportedTatePure.of_etale {c : ℕ} {i : Z ⟶ X} [IsClosedImmersion i]
     [HasInvertibleExponent Λ X] (hP : SupportedTatePure Λ c i) {U Z' : Scheme.{u}}
     (e : U ⟶ X) [AlgebraicGeometry.Etale e] [HasInvertibleExponent Λ U] (i' : Z' ⟶ U)
@@ -142,8 +141,8 @@ variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasInvertibleExpo
 omit [HasKummerClass.IsNormalized Λ] in
 /-- *Uniqueness of the fundamental class under the purity hypothesis.* Two classes in
 `H^{2c}_Z(X, Λ(c))` are equal if every point of `Z` lies in a Zariski frame on which their
-restrictions agree: under `AlgebraicGeometry.Etale.SupportedTatePure` the classes are sections of
-a sheaf, so they are determined by their pullbacks to the geometric points of `X`. -/
+restrictions agree, provided `i` satisfies the purity hypothesis
+`AlgebraicGeometry.Etale.SupportedTatePure`. -/
 theorem eq_of_forall_exists_frameRestriction_eq_of_pure [IsClosedImmersion i]
     (hP : SupportedTatePure Λ c i)
     {γ γ' : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
@@ -186,9 +185,8 @@ theorem eq_of_forall_exists_frameRestriction_eq_of_pure [IsClosedImmersion i]
 
 omit [HasKummerClass.IsNormalized Λ] in
 /-- *Uniqueness of the fundamental class under the purity hypothesis.* Two classes in
-`H^{2c}_Z(X, Λ(c))` whose restrictions to every Zariski frame agree are equal
-(`AlgebraicGeometry.Etale.eq_of_forall_exists_frameRestriction_eq_of_pure`): every point of `Z`
-lies in a Zariski frame (`AlgebraicGeometry.Scheme.Hom.exists_etaleFrame_isOpenImmersion`). -/
+`H^{2c}_Z(X, Λ(c))` whose restrictions to every Zariski frame agree are equal, provided `i` is a
+regular immersion satisfying the purity hypothesis. -/
 theorem eq_of_frameRestriction_eq_of_pure [IsRegularImmersion c i]
     (hP : SupportedTatePure Λ c i)
     {γ γ' : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
@@ -327,18 +325,8 @@ theorem restrictSupportedClass_frameClass_eq_of_pure [IsClosedImmersion i]
 
 /-- **The fundamental class under the purity hypothesis.** Let `i : Z ⟶ X` be a regular closed
 immersion of pure codimension `c` such that `Ri_! Ri^! (Λ_X(c)[2c])` is a sheaf placed in degree
-zero (`AlgebraicGeometry.Etale.SupportedTatePure`). The frame classes
-depend only on `Z_U ⊂ U`, not on the frame, and they glue: there is a unique class
-`[Z ⊂ X] ∈ H^{2c}_Z(X, Λ(c))` whose restriction to every frame is the frame class.
-
-Near every point of `Z` there is a frame given by a regular sequence on an affine open, and any
-other frame differs from it, near `Z`, by a matrix with invertible determinant
-(`RingTheory.Sequence.IsWeaklyRegular.exists_mulVec_isUnit_det`), under which the frame classes
-agree (`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec`); so frame
-classes agree on overlaps
-(`AlgebraicGeometry.Etale.restrictSupportedClass_frameClass_eq_of_pure`). By the purity
-hypothesis the classes are morphisms into a sheaf placed in degree zero, so the Zariski-local
-classes glue (`AlgebraicGeometry.Etale.exists_hom_of_isOpenImmersion_cover`). -/
+zero (`AlgebraicGeometry.Etale.SupportedTatePure`). Then there is a unique class
+`[Z ⊂ X] ∈ H^{2c}_Z(X, Λ(c))` whose restriction to every frame is the frame class. -/
 theorem existsUnique_pureFundamentalClass [IsRegularImmersion c i]
     (hP : SupportedTatePure Λ c i) :
     ∃! γ : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
@@ -504,10 +492,7 @@ theorem frameRestriction_pureFundamentalClass (hP : SupportedTatePure Λ c i)
 
 /-- **Base change of the fundamental class.** For any `e : X' ⟶ X` such that the base change
 `i' : Z' ⟶ X'` of `i` is again a regular immersion of codimension `c` satisfying the purity
-hypothesis, the restriction of supports along `e` carries `[Z ⊂ X]` to `[Z' ⊂ X']`: Zariski
-frames of `i` pull back to Zariski frames of `i'`, and Kummer boundary products are compatible
-with pullback along any morphism
-(`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct`). -/
+hypothesis, the restriction of supports along `e` carries `[Z ⊂ X]` to `[Z' ⊂ X']`. -/
 theorem restrictSupportedClass_pureFundamentalClass (hP : SupportedTatePure Λ c i)
     {X' Z' : Scheme.{u}} [HasInvertibleExponent Λ X'] (e : X' ⟶ X) (i' : Z' ⟶ X')
     [IsRegularImmersion c i'] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
@@ -569,22 +554,17 @@ attribute [local instance] HasInvertibleExponent.opens
 variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] {T D : Scheme.{u}}
   [HasInvertibleExponent Λ T] (i : D ⟶ T) [IsRegularImmersion 1 i]
 
-/-- Blueprint `lemma-cycle-class-cartier-divisor`: A Cartier divisor gives a supported Kummer map
-
-The *class of an effective Cartier divisor* `i : D ⟶ T` (a regular closed immersion of
+/-- The *class of an effective Cartier divisor* `i : D ⟶ T` (a regular closed immersion of
 codimension one), `c_D ∈ H²_D(T, Λ(1)) = Hom(Λ_T, Ri_! Ri^! (Λ_T(1)[2]))`: the Kummer boundaries
 `∂κ(f)` of the local equations `f` of `D`, glued under the purity hypothesis
 (`AlgebraicGeometry.Etale.pureFundamentalClass` with `c = 1`). With the conventions of
-`AlgebraicGeometry.Etale.kummerBoundary` it forgets supports to `c₁(𝒪_T(-D))`, so it is the
-negative of the blueprint's `c_D`. -/
+`AlgebraicGeometry.Etale.kummerBoundary` it forgets supports to `c₁(𝒪_T(-D))`. -/
 noncomputable def cartierKummerClass (hP : SupportedTatePure Λ 1 i) :
     constantComplex Λ T ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
       ((R(i)^![Λ]).obj ((tateObject Λ T 1)⟦2 * ((1 : ℕ) : ℤ)⟧)) :=
   pureFundamentalClass Λ 1 i hP
 
-/-- Blueprint `lemma-cycle-class-cartier-divisor`: A Cartier divisor gives a supported Kummer map
-
-The *supported Kummer map* `Λ_D ⟶ Ri^! (Λ_T(1)[2])` of an effective Cartier divisor
+/-- The *supported Kummer map* `Λ_D ⟶ Ri^! (Λ_T(1)[2])` of an effective Cartier divisor
 `i : D ⟶ T`, the adjoint (`AlgebraicGeometry.Etale.supportedClassMap`) of its class
 `AlgebraicGeometry.Etale.cartierKummerClass`; by `Ri_! ⊣ Ri^!` and `Ri_! ≅ i_*` it is equivalently
 a map `i_* Λ_D ⟶ Λ_T(1)[2]`. -/
@@ -592,7 +572,7 @@ noncomputable def cartierKummerMap (hP : SupportedTatePure Λ 1 i) :
     constantComplex Λ D ⟶ (R(i)^![Λ]).obj ((tateObject Λ T 1)⟦2 * ((1 : ℕ) : ℤ)⟧) :=
   supportedClassMap Λ i (cartierKummerClass Λ i hP)
 
-/-- Blueprint `lemma-cycle-class-cartier-divisor`, local description: on every chart
+/-- On every chart
 `(e : U ⟶ T, f)` of `D`, an étale `e` with a function `f` on `U` cutting out `D ×_T U`, the class
 `c_D` restricts to the Kummer boundary class `∂κ(f) ∪ 1` of `f`
 (`AlgebraicGeometry.Etale.kummerBoundaryProduct` of the one-element tuple). -/
@@ -611,8 +591,8 @@ theorem eq_cartierKummerClass (hP : SupportedTatePure Λ 1 i)
   (existsUnique_pureFundamentalClass Λ 1 i hP).unique hγ
     (frameRestriction_pureFundamentalClass Λ 1 i hP)
 
-/-- Blueprint `lemma-cycle-class-cartier-divisor`, base change: for any `g : T' ⟶ T` along which the
-pulled-back divisor `i' : D' ⟶ T'` is again an effective Cartier divisor satisfying the purity
+/-- **Base change of the Cartier class.** For any `g : T' ⟶ T` along which the pulled-back
+divisor `i' : D' ⟶ T'` is again an effective Cartier divisor satisfying the purity
 hypothesis, the restriction of `c_D` along `g` is `c_{D'}`. -/
 theorem restrictSupportedClass_cartierKummerClass (hP : SupportedTatePure Λ 1 i)
     {T' D' : Scheme.{u}} [HasInvertibleExponent Λ T'] (g : T' ⟶ T) (i' : D' ⟶ T')

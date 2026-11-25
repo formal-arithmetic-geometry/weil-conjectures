@@ -18,17 +18,6 @@ Let `X` be a locally noetherian regular scheme, `j : U ⟶ X` an open immersion 
 and `G` a locally constant sheaf of `Λ`-modules on the small étale site of `X`. Then the unit
 `G ⟶ j_* j^* G` of the adjunction `j^* ⊣ j_*` is an isomorphism.
 
-It is a monomorphism since morphisms into a locally constant sheaf are determined on a dense
-open (`AlgebraicGeometry.Etale.upperStar_map_injective_of_isLocallyConstantSheaf`). It is locally
-surjective: a section of `j_* j^* G` over an étale `V ⟶ X` is a section of `G` over
-`V ×_X U`; near a point of `V`, refine `V` to an étale `W` over which `G` is constant and whose
-underlying scheme is irreducible. Such `W` exist because étale `X`-schemes are again locally
-noetherian with integral local rings, so their points have irreducible open neighbourhoods. Then
-`W ×_X U` is a nonempty open of `W`, hence irreducible, and the sections of a constant sheaf
-over an irreducible étale scheme are the constants
-(`AlgebraicGeometry.Etale.bijective_toSheafify_app_of_irreducibleSpace`); so the section over
-`W ×_X U` is a constant, which is the restriction of the same constant over `W`.
-
 ## Main statements
 
 - `AlgebraicGeometry.Etale.bijective_toSheafify_app_of_irreducibleSpace`: the sections of the
@@ -38,6 +27,19 @@ over an irreducible étale scheme are the constants
   noetherian scheme with integral local rings has an irreducible open neighbourhood.
 - `AlgebraicGeometry.Etale.isIso_unit_upperStarLowerStarAdjunction_of_isRegular`: the unit
   `G ⟶ j_* j^* G` is an isomorphism.
+
+## Implementation details
+
+The unit is a monomorphism since morphisms into a locally constant sheaf are determined on a
+dense open (`AlgebraicGeometry.Etale.upperStar_map_injective_of_isLocallyConstantSheaf`). It is
+locally surjective: a section of `j_* j^* G` over an étale `V ⟶ X` is a section of `G` over
+`V ×_X U`; near a point of `V`, refine `V` to an étale `W` over which `G` is constant and whose
+underlying scheme is irreducible. Such `W` exist because étale `X`-schemes are again locally
+noetherian with integral local rings, so their points have irreducible open neighbourhoods. Then
+`W ×_X U` is a nonempty open of `W`, hence irreducible, and the sections of a constant sheaf
+over an irreducible étale scheme are the constants
+(`AlgebraicGeometry.Etale.bijective_toSheafify_app_of_irreducibleSpace`); so the section over
+`W ×_X U` is a constant, which is the restriction of the same constant over `W`.
 -/
 
 @[expose] public section
@@ -51,9 +53,7 @@ namespace AlgebraicGeometry
 open Scheme
 
 /-- **Irreducible neighbourhoods.** A point of a locally noetherian scheme whose local rings are
-integral domains has an irreducible open neighbourhood: its connected component is open, the
-scheme being locally connected, and a connected locally noetherian scheme with integral local
-rings is irreducible (`AlgebraicGeometry.irreducibleSpace_of_isDomain_stalk`). -/
+integral domains has an irreducible open neighbourhood. -/
 theorem exists_isOpen_irreducibleSpace_of_isDomain_stalk {X : Scheme.{u}} [IsLocallyNoetherian X]
     (h : ∀ x : X, IsDomain (X.presheaf.stalk x)) (x : X) :
     ∃ O : X.Opens, x ∈ O ∧ IrreducibleSpace O := by
@@ -234,8 +234,7 @@ instance isLocallyConstantSheaf_constantSheaf :
 
 /-- **Sections of a constant sheaf over a connected étale scheme.** The sections over an étale
 `X`-scheme with nonempty connected underlying space of the constant étale sheaf of modules `N`
-are the constants: a section is a constant near one point, and then everywhere since the
-locus where two sections of a locally constant sheaf agree is open and closed. -/
+are the constants. -/
 theorem bijective_toSheafify_app_of_preconnectedSpace {W : X.Etale} [PreconnectedSpace W.left]
     [Nonempty W.left] :
     Function.Bijective
@@ -284,10 +283,9 @@ lemma openImmersionRestrictionLowerStarAdjunction_unit_app_hom_app
 
 variable {j} in
 /-- **Local surjectivity of the unit `G ⟶ j_* j^* G`.** Near a point `v` of an étale `X`-scheme
-`V`, a section `σ` of `j_* j^* G` over `V` comes from a section of `G`: on an étale
-neighbourhood `W` of `v` with irreducible underlying space over which `G` is constant, the
-section `σ` restricted to the nonempty open `W ×_X U` of `W`, which is again irreducible, is a
-constant, which extends over `W`. -/
+`V`, a section `σ` of `j_* j^* G` over `V` comes from a section of `G`: there is an étale
+`g : W ⟶ V` whose image contains `v` such that the restriction of `σ` to `W` is the image of a
+section of `G` over `W` under the unit. -/
 lemma exists_openImmersionRestrictionLowerStarAdjunction_unit_app_hom_app_eq
     (hX : ∀ (W : X.Etale) (w : W.left), IsDomain (W.left.presheaf.stalk w))
     [IsLocallyNoetherian X] (hj : Dense (Set.range j.base))
@@ -354,11 +352,11 @@ lemma exists_openImmersionRestrictionLowerStarAdjunction_unit_app_hom_app_eq
   erw [← h₂, hn]
   exact ConcreteCategory.congr_hom (congrArg (fun f ↦ f.hom.app (op P')) e.hom_inv_id) σ'
 
-/-- **Locally constant sheaves extend uniquely over a dense open** (blueprint
-`theorem-purity-real-sheaves-curves`, part (3)). Let `X` be a locally noetherian scheme such that
-the local rings of all étale `X`-schemes are integral domains (for instance a regular scheme),
-`j : U ⟶ X` an open immersion with dense image and `G` a locally constant sheaf of modules on
-the small étale site of `X`. Then the unit `G ⟶ j_* j^* G` is an isomorphism. -/
+/-- **Locally constant sheaves extend uniquely over a dense open.** Let `X` be a locally
+noetherian scheme such that the local rings of all étale `X`-schemes are integral domains (for
+instance a regular scheme), `j : U ⟶ X` an open immersion with dense image and `G` a locally
+constant sheaf of modules on the small étale site of `X`. Then the unit `G ⟶ j_* j^* G` is an
+isomorphism. -/
 theorem isIso_unit_upperStarLowerStarAdjunction_of_isDomain_stalk
     (hX : ∀ (W : X.Etale) (w : W.left), IsDomain (W.left.presheaf.stalk w))
     [IsLocallyNoetherian X] (hj : Dense (Set.range j.base))
@@ -399,8 +397,7 @@ lemma isDomain_stalk_left_of_isRegular [IsRegular X] (W : X.Etale)
 /-- **Locally constant sheaves on a regular scheme extend uniquely over a dense open.** For a
 locally noetherian regular scheme `X`, an open immersion `j : U ⟶ X` with dense image and a
 locally constant sheaf `G` of modules on the small étale site of `X`, the unit
-`G ⟶ j_* j^* G` is an isomorphism: étale `X`-schemes are again regular, so their local rings
-are integral domains. -/
+`G ⟶ j_* j^* G` is an isomorphism. -/
 theorem isIso_unit_upperStarLowerStarAdjunction_of_isRegular [IsLocallyNoetherian X]
     [IsRegular X] (hj : Dense (Set.range j.base))
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf G] :

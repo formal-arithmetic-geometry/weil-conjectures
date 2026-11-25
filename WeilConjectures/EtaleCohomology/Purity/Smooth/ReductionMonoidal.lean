@@ -24,8 +24,7 @@ comparison) gives the comparison `Ψ(M ⊗ᴸ N) ≅ Ψ M ⊗ᴸ Ψ N`
 compatible with the left unitors through the counit `Ψ Λ_X ≅ Λ'_X`
 (`AlgebraicGeometry.Etale.derivedExtendScalarsConstantComplexEtaIso`). These are the first fields
 of `AlgebraicGeometry.Etale.MonoidalSupportedCoefficientChange` for
-`AlgebraicGeometry.Etale.reductionSupportedCoefficientChange` (blueprint
-`proposition-compatibility-purity-change-coefficients`).
+`AlgebraicGeometry.Etale.reductionSupportedCoefficientChange`.
 
 The extension of scalars of sheaves is compatible with the braidings
 (`AlgebraicGeometry.Etale.sheafExtendScalars_map_braiding_hom_δ`), hence so is `Ψ`
@@ -36,6 +35,11 @@ The extension of scalars of sheaves is compatible with the braidings
 
 - `AlgebraicGeometry.Etale.derivedExtendScalarsMonoidal`: the monoidal structure of `Ψ`.
 - `AlgebraicGeometry.Etale.derivedExtendScalarsDerivedTensorIso`: `Ψ(M ⊗ᴸ N) ≅ Ψ M ⊗ᴸ Ψ N`.
+
+## Implementation details
+
+The comonoidal structure of the extension of scalars of sheaves is obtained by doctrinal
+adjunction from the lax monoidal structure of restriction of scalars, which is lax braided.
 -/
 
 @[expose] public section
@@ -65,9 +69,7 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] {ρ : Λ →+* Λ'
   (hρ : Function.Surjective ρ) (ha : RingHom.ker ρ = Ideal.span {a})
 
 /-- Extension of scalars of étale sheaves of modules is compatible with the braidings:
-`(Λ' ⊗_Λ -) β_{F, G} ≫ δ_{G, F} = δ_{F, G} ≫ β_{Λ' ⊗_Λ F, Λ' ⊗_Λ G}`. Its comonoidal structure is
-obtained by doctrinal adjunction from the lax monoidal structure of restriction of scalars,
-which is lax braided. -/
+`(Λ' ⊗_Λ -) β_{F, G} ≫ δ_{G, F} = δ_{F, G} ≫ β_{Λ' ⊗_Λ F, Λ' ⊗_Λ G}`. -/
 lemma sheafExtendScalars_map_braiding_hom_δ (X : Scheme.{u})
     (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     (Sheaf.extendScalars X.smallEtaleTopology ρ).map (β_ F G).hom ≫

@@ -16,7 +16,19 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.WeakContractibleEq
 
 /-! # Common finite-projective charts on each affine open
 
-Source: Bhatt--Scholze, Lemmas 6.5.5--6.5.8 and 6.6.4.
+On every affine open, two finite-Tor integral inputs admit a common finite open–closed tree
+with qcqs pro-étale leaf covers and bounded finite-projective models.
+
+## Implementation details
+
+The tree comes from the residue-lisse tree theorem. At each leaf one chooses a weakly
+contractible affine pro-étale cover and applies the common affine projective-chart theorem to
+both restrictions; strict bounds are translated to termwise vanishing.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Lemmas 6.5.5--6.5.8 and 6.6.4]
+* [Stacks Project, Tag 09C3]
 -/
 
 @[expose] public noncomputable section
@@ -41,30 +53,10 @@ private theorem path_qcqs {T S : Scheme.{u}} {t : QcqsOpenClosedTree T}
   | openBranch _ _ _ _ _ _ ih => exact ih
   | closedBranch _ _ _ _ _ _ ih => exact ih
 
-/-- On every affine open, two finite-Tor integral inputs admit a common finite
-open--closed tree with qcqs pro-etale leaf covers and bounded finite-projective models.
-This is a statement about the two inputs separately, with no tensor or completeness
-claim about an operation on them.
-
-Source: Bhatt--Scholze, proof of Lemma 6.5.5, Lemmas 6.5.6--6.5.8 and 6.6.4;
-Stacks Tag 09C3, lifting finite-projective residue models.
-(blueprint: lem-sf-finite-tor-affine-projective-charts).
-
-Proof: use the integral constructibility components of both hypotheses. Choose the
-finitely many residue-cohomology partitions, pull them back to the affine open,
-and refine them by successive quasi-compact open/complementary closed cuts. The
-residue-lisse tree theorem supplies an actual finite tree, completeness, a bounded
-residue-cohomology interval, and finite module models on every qcqs weakly etale
-leaf object. Its completeness proof uses limit-preserving immersion inverse image
-and the normalized quotient/completion unit comparison; it needs no ambient qcqs
-or invertibility hypothesis. At a leaf choose a weakly contractible affine pro-etale
-cover. Apply the existing common affine projective-chart theorem to both ordinary
-restrictions there. Compose its finite clopen cover with the pro-etale cover; point
-surjectivity follows from the covering property and the union of the clopens.
-Translate strict bounds to termwise vanishing and use uniqueness of total derived
-pullback to obtain precisely the requested representative isomorphisms. The
-projective splittings are those of the common-chart theorem. Empty leaves impose
-no condition, and zero complexes use rank zero. -/
+/-- On every affine open `U` of `X`, two finite-Tor integral inputs `K` and `L` admit a common
+finite open–closed tree on `U` such that every nonempty leaf has a finite family of qcqs
+pro-étale objects jointly covering it, over each of which the pullbacks of `K` and `L` are
+represented by bounded complexes of finite projective modules. -/
 theorem finiteTorAffineProjectiveCharts (X : Scheme.{u})
     (K L : IntegralOnSlice.D.{u, u} l E X none)
     (hK : finiteTorConstructibleIntegral l E X K)

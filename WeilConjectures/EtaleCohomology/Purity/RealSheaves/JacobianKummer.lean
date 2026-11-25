@@ -95,15 +95,10 @@ lemma natCast_pow_ne_zero (hl : (l : K) ≠ 0) (n : ℕ) :
   rw [Nat.cast_pow, ← map_natCast (algebraMap K (AlgebraicClosure K))]
   exact pow_ne_zero _ ((map_ne_zero _).2 hl)
 
-/-- Blueprint `proposition-h-1-curve-tate-module--1`: Kummer identifies curve cohomology
-with the Jacobian torsion.
-
-For a Jacobian torsion datum `d` of `C₀` and a prime `l` invertible in `K`, the isomorphism
+/-- For a Jacobian torsion datum `d` of `C₀` and a prime `l` invertible in `K`, the isomorphism
 `H¹(C, μ_{lⁿ}) ≅ J₀(K̄)[lⁿ]`: the Kummer identification `H¹(C, μ_{lⁿ}) ≅ Pic(C)[lⁿ]`
 (`AlgebraicGeometry.Scheme.kummerTorsionEquiv`) followed by the inverse of the comparison
-isomorphism `J₀(K̄)[lⁿ] ≅ Pic(C)[lⁿ]` of the datum. It is Galois-equivariant
-(`AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv_restrictMuH`) and compatible with the
-transition maps (`AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv_map_rootsOfUnityPowMap`). -/
+isomorphism `J₀(K̄)[lⁿ] ≅ Pic(C)[lⁿ]` of the datum. -/
 noncomputable def kummerEquiv (d : JacobianTorsionDatum p l) (hl : (l : K) ≠ 0) (n : ℕ) :
     Sheaf.H (p.geometricFiber.rootsOfUnitySheaf (l ^ n)) 1 ≃+
       AddSubgroup.torsionBy (Additive (Scheme.specAlgebraicClosure K ⟶ d.J)) ((l : ℤ) ^ n) :=
@@ -116,9 +111,8 @@ lemma equivTorsion_kummerEquiv (d : JacobianTorsionDatum p l) (hl : (l : K) ≠ 
       Scheme.kummerTorsionEquiv (l ^ n) (natCast_pow_ne_zero hl n) x := by
   simp [kummerEquiv]
 
-/-- Blueprint `proposition-h-1-curve-tate-module--1`: the isomorphism
-`H¹(C, μ_{lⁿ}) ≅ J₀(K̄)[lⁿ]` is Galois-equivariant: restriction along the automorphism
-`σ_C = 𝟙 × Spec σ` of `C` corresponds to the action of `σ` on geometric points by
+/-- The isomorphism `H¹(C, μ_{lⁿ}) ≅ J₀(K̄)[lⁿ]` is Galois-equivariant: restriction along the
+automorphism `σ_C = 𝟙 × Spec σ` of `C` corresponds to the action of `σ` on geometric points by
 coordinates. -/
 theorem kummerEquiv_restrictMuH (d : JacobianTorsionDatum p l) (hl : (l : K) ≠ 0) (n : ℕ)
     (σ : Gal(AlgebraicClosure K/K))
@@ -137,10 +131,8 @@ theorem kummerEquiv_restrictMuH (d : JacobianTorsionDatum p l) (hl : (l : K) ≠
     rfl
   rw [key]
 
-/-- Blueprint `proposition-h-1-curve-tate-module--1`: the isomorphisms
-`H¹(C, μ_{lⁿ}) ≅ J₀(K̄)[lⁿ]` are compatible with the transition maps: the map induced by
-`μ_{lⁿ⁺¹} ⟶ μ_{lⁿ}`, `z ↦ z ^ l`, corresponds to multiplication by `l`. Hence they form a
-compatible system identifying `lim_n H¹(C, μ_{lⁿ})` with the Tate module `T_l J`. -/
+/-- The isomorphisms `H¹(C, μ_{lⁿ}) ≅ J₀(K̄)[lⁿ]` are compatible with the transition maps: the
+map induced by `μ_{lⁿ⁺¹} ⟶ μ_{lⁿ}`, `z ↦ z ^ l`, corresponds to multiplication by `l`. -/
 theorem kummerEquiv_map_rootsOfUnityPowMap (d : JacobianTorsionDatum p l) (hl : (l : K) ≠ 0)
     (n : ℕ) (x : Sheaf.H (p.geometricFiber.rootsOfUnitySheaf (l ^ (n + 1))) 1) :
     (d.kummerEquiv hl n
@@ -160,18 +152,13 @@ theorem kummerEquiv_map_rootsOfUnityPowMap (d : JacobianTorsionDatum p l) (hl : 
   rw [key, d.equivTorsion_symm_zsmul, AddEquiv.symm_apply_apply]
 
 variable (p l) in
-/-- Blueprint `proposition-h-1-curve-tate-module--1`: Kummer identifies curve cohomology
-with the Jacobian torsion, through the representing isomorphism of the Jacobian.
-
-There is a Jacobian torsion datum `d` and an injective homomorphism `φ : J₀(K̄) → Pic(C)`
+/-- There is a Jacobian torsion datum `d` and an injective homomorphism `φ : J₀(K̄) → Pic(C)`
 determined by the representing isomorphism `d.representableBy` of the Jacobian (a geometric
 point `x` of `J₀` is the point which it attaches to the class of `φ x`), such that the
 isomorphism `H¹(C, μ_{lⁿ}) ≅ J₀(K̄)[lⁿ]` of `d`
-(`AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv`, Galois-equivariant by
-`AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv_restrictMuH` and compatible with the
-transition maps by `AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv_map_rootsOfUnityPowMap`)
-is the Kummer identification `H¹(C, μ_{lⁿ}) ≅ Pic(C)[lⁿ]`
-(`AlgebraicGeometry.Scheme.kummerTorsionEquiv`) followed by the inverse of `φ`. -/
+(`AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv`) is the Kummer identification
+`H¹(C, μ_{lⁿ}) ≅ Pic(C)[lⁿ]` (`AlgebraicGeometry.Scheme.kummerTorsionEquiv`) followed by the
+inverse of `φ`. -/
 theorem exists_kummerEquiv_eq [SmoothOfRelativeDimension 1 p] (hl : (l : K) ≠ 0) :
     ∃ (d : JacobianTorsionDatum p l)
       (φ : (Scheme.specAlgebraicClosure K ⟶ d.J) →* p.geometricFiber.Pic),

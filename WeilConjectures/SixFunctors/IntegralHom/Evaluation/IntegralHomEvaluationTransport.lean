@@ -12,12 +12,19 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Transport of normalized integral Hom counits
 
-Source: Stacks Project, sites-cohomology.tex, Lemma 08J9.
-(blueprint: lem-sf-integral-hom-evaluation-transport).
+We show that the counits of a supplied tensor presentation are the transport of the counits of
+a native closed structure, naturally in both tensor arguments.
 
-The supplied tensor presentation retains the parameter coherence of tensor-Hom
-currying. Uniqueness of left adjoints therefore compares it with the native closed
-structure, including its counits, naturally in both tensor arguments.
+## Implementation details
+
+The supplied tensor presentation retains the parameter coherence of tensor-Hom currying, so
+uniqueness of left adjoints (applied for each first argument, with the common right adjoint)
+compares it with the native closed structure. The pointwise comparisons are lifted to a
+natural isomorphism of bifunctors through fully faithful currying.
+
+## References
+
+* Stacks Project, Tag 08J9.
 -/
 
 @[expose] public section
@@ -57,18 +64,9 @@ private def parameterLeftAdjointIso {D : Type*} [Category D]
       Adjunction.homEquiv_leftAdjointUniq_hom_app]
     exact (NatTrans.congr_app (b.unit_whiskerRight_map f) L).symm)
 
-/-- The supplied counits are the transport of a closed native counit.
-
-Source: Stacks Project, sites-cohomology.tex, Lemma 08J9, functorial tensor-Hom
-currying. Proof: choose the native closed structure. Its counit compatibility gives
-an adjunction with a parameter for the exchanged tensor. For each first argument,
-use uniqueness of left adjoints with the common recorded right adjoint. Applying
-the source Hom equivalence to the first-variable naturality equation reduces it to
-the parameter unit law for the native adjunction. Thus the pointwise comparisons
-form a natural isomorphism of curried bifunctors. Lift it through fully faithful
-currying. The uniqueness-of-left-adjoints counit identity gives the required
-transport equality. No representative choices or boundedness hypotheses are used.
-(blueprint: lem-sf-integral-hom-evaluation-transport). -/
+/-- The counits of a tensor presentation are the transport of native closed counits: there is a
+closed structure `S` and an isomorphism `e` from the presented tensor to the swapped native
+tensor such that the transported counits agree with the supplied ones. -/
 theorem tensorPresentation_counit_transport (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (a : TensorPresentation.{u, u} X R) :
@@ -118,13 +116,7 @@ theorem tensorPresentation_counit_transport (X : Scheme.{u})
     rw [he', ← hb K W]
     exact Adjunction.leftAdjointUniq_hom_app_counit (a.adjunction K) (B.adj K) W
 
-/-- The transported native counits are natural in the first tensor variable.
-
-Source: Stacks Project, sites-cohomology.tex, Lemma 08J9.  Proof: expand
-`transportedCounit`; naturality of `e` changes the supplied tensor map into the
-swapped native tensor map, and `CoefficientClosedStructure.evaluation_naturality`
-then gives the equality.  This is a purely formal categorical calculation.
-(blueprint: lem-sf-integral-hom-evaluation-transport-naturality). -/
+/-- The transported native counits are natural in the first tensor variable. -/
 theorem transportedCounit_naturality (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (a : TensorPresentation.{u, u} X R)

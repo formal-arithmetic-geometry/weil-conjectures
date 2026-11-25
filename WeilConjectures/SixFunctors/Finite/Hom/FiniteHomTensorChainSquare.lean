@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 
 /-! # General proof tools for the intrinsic scalar tensor composition square
 
-Source: blueprint lemma-change-coefficients-internal-hom--1, successive quotient paragraph.
-The public chain square is the generator calculation used before localization.
+For a chain of scalar changes `A → B → T` of sheaves of rings, the tensor comparisons of the
+extensions of scalars on cochain complexes form a commutative square with the composite
+comparison. This generator calculation is used before localization.
 -/
 
 @[expose] public noncomputable section
@@ -150,9 +151,8 @@ private theorem leftComp_transpose
   rw [(a.comp b).homEquiv_naturality_right, leftComp_unit, Category.assoc,
     ← η.inv.naturality, ← Category.assoc, c.homEquiv_unit]
 
-/-- Localization of a specified counit comparison through the fixed quotient functors.
-This is the literal four-arrow composite used by the finite scalar models.
-Source: blueprint lemma-change-coefficients-internal-hom--1, representative normalization. -/
+/-- The comparison `Q ⋙ F ⟶ E ⋙ Q` on cochain complexes induced by a comparison
+`Qh ⋙ F ⟶ E ⋙ Qh` on the homotopy category, through the fixed quotient functors. -/
 def finiteHomTensorRepresentativeComparison
     {A : Type a₁} {B : Type b₁} [Category.{v₁} A] [Abelian A]
     [Category.{v₂} B] [Abelian B] [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B]
@@ -201,8 +201,8 @@ private def scalarUnitSection
 
 attribute [local irreducible] scalarUnitSection
 
-/-- The termwise image of the ordinary left-adjoint composition mate.
-Source: blueprint lemma-change-coefficients-internal-hom--1, successive quotients. -/
+/-- The termwise image on cochain complexes of the left-adjoint composition isomorphism
+`F ⋙ G ≅ H` determined by `V ⋙ U ≅ W`. -/
 def finiteHomTensorComplexAssociator
     {A B C : Type*} [Category A] [Category B] [Category C]
     [Abelian A] [Abelian B] [Abelian C]
@@ -306,14 +306,9 @@ private theorem total_scalar_unit_ext
   exact hh p q hi V x y
 
 attribute [local semireducible] scalarUnitSection in
-/-- The ordinary scalar tensor square, tested on total pure generators.
-Source: blueprint lemma-change-coefficients-internal-hom--1, successive-quotient tensor square
-(blueprint: lem-coef-finite-hom-tensor-chain-square).
-Proof: apply the composite scalar adjunction in each degree. Pure generators detect
-maps out of the total tensor. Naturality moves the second scalar unit through the
-first tensor comparison. Apply the two generator formulas, tensor naturality, and
-the unit equation for the prescribed associator. The direct generator formula then
-identifies the other composite. -/
+/-- For scalar extensions `F`, `G`, `H` along `f`, `g`, `j` and a comparison `α : F ⋙ G ⟶ H`
+compatible with the units, the tensor comparisons `eF`, `eG`, `eH` (each determined by its
+values on pure generators) form a commutative square with `α`. -/
 theorem finiteHomTensor_chainSquare
     {C : Type a₁} [Category.{v₁} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{max a₁ v₁ u}]

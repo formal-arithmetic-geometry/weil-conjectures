@@ -24,8 +24,17 @@ For a finite commutative ring `Λ` and finitely many finite locally constant she
 `Λ`-modules on a connected scheme `U`, we construct a connected finite étale Galois cover
 of `U` on which all of them become constant with finite values.
 
-Source: Stacks Project, Tags 0DV5, 0DV6 and the proof of 0A3R.
-(blueprint: lemma-tangent-cones-on-cover, lemma-reduction-unipotent-local-system)
+## Implementation details
+
+The underlying sheaf of sets of a finite locally constant sheaf of modules is finite locally
+constant, hence trivialized by a connected Galois cover, and then the module pullback is
+constant (`AlgebraicGeometry.Scheme.module_pullback_isConstant_of_set_pullback`). For finitely
+many sheaves we apply this to their direct sum: each summand pulls back to a retract of a
+constant sheaf on a connected scheme, hence is constant.
+
+## References
+
+* Stacks Project, Tags 0DV5, 0DV6 and the proof of 0A3R.
 -/
 
 @[expose] public section
@@ -36,9 +45,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 open Etale
 
-/-- On a connected scheme, a retract of a constant sheaf of `Λ`-modules is constant: the
-constant sheaf functor is fully faithful, so constancy is the invertibility of the counit,
-and isomorphisms are stable under retracts. -/
+/-- On a connected scheme, a retract of a constant sheaf of `Λ`-modules is constant. -/
 theorem Scheme.isConstant_of_retract {X : Scheme.{u}} [ConnectedSpace X]
     {Λ : Type (u + 1)} [CommRing Λ] {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (h : Retract F G) [G.IsConstant X.smallEtaleTopology] :
@@ -63,13 +70,7 @@ theorem Scheme.finite_of_iso_constantSheaf {X : Scheme.{u}} [Nonempty X]
   exact Module.finite_of_finite Λ
 
 /-- A finite locally constant sheaf of modules over a finite ring is constant, with finite
-value, on a connected finite étale Galois cover. Source: Stacks Project, Tags 0DV5, 0DV6
-and the proof of 0A3R.
-(blueprint: lemma-tangent-cones-on-cover, lemma-reduction-unipotent-local-system)
-
-Proof: the underlying sheaf of sets is finite locally constant, hence trivialized by a
-connected Galois cover; the module pullback is then constant, and its value is finite since
-the pullback is a finite sheaf. -/
+value, on a connected finite étale Galois cover. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_galoisCover_isConstant_upperStar
     {U : Scheme.{u}} [ConnectedSpace U] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf G] :
@@ -89,12 +90,7 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.exists_galoisCover_isConstant_upperS
 attribute [local instance] Abelian.hasFiniteBiproducts in
 /-- Finitely many finite locally constant sheaves of modules over a finite ring on a
 connected scheme are simultaneously constant, with finite values, on one connected finite
-étale Galois cover. Source: Stacks Project, Tags 0DV5, 0DV6 and the proof of 0A3R.
-(blueprint: lemma-tangent-cones-on-cover, lemma-reduction-unipotent-local-system)
-
-Proof: apply `exists_galoisCover_isConstant_upperStar` to the finite direct sum; each
-summand pulls back to a retract of a constant sheaf on a connected scheme, hence is
-constant, and its value is finite. -/
+étale Galois cover. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_galoisCover_trivializing
     {U : Scheme.{u}} [ConnectedSpace U] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     {ι : Type} [Finite ι] (F : ι → Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))

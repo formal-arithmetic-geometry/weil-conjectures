@@ -22,8 +22,7 @@ public import WeilConjectures.SixFunctors.Etale.ZModCoefficients
 
 Let `j : V ⟶ W` and `ι : D ⟶ W` be morphisms of schemes and `ℓ` a prime. If the cohomology
 sheaves of `ι^* Rj_* ℤ/ℓ` (with coefficients `ℤ/ℓ`) are finite locally constant, then so are
-those of `ι^* Rj_* N_V` for every finite module `N` killed by `ℓ` over a finite ring `Λ`
-(blueprint `lemma-cohomology-near-two-transverse-divisors--1`, constant coefficients).
+those of `ι^* Rj_* N_V` for every finite module `N` killed by `ℓ` over a finite ring `Λ`.
 
 Indeed, the underlying abelian sheaf of `ℋⁿ(ι^* Rj_* N_V)` is computed from the underlying
 abelian group of `N`, which is a finite direct sum of copies of `ℤ/ℓ`; so it is a finite direct
@@ -51,8 +50,7 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 /-- A finite abelian group killed by a prime `ℓ` is isomorphic to a finite direct sum of copies
-of `ℤ/ℓ`, being a finite-dimensional vector space over `ZMod ℓ`
-(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
+of `ℤ/ℓ`. -/
 theorem AddCommGrpCat.exists_iso_biproduct_of_nsmul_eq_zero {M : Type (u + 1)} [AddCommGroup M]
     [Finite M] {ℓ : ℕ} [Fact ℓ.Prime] (hM : ∀ m : M, ℓ • m = 0) :
     ∃ r : ℕ, Nonempty (AddCommGrpCat.of M ≅
@@ -68,27 +66,22 @@ namespace AlgebraicGeometry.Etale
 variable {W V D : Scheme.{u}} (j : V ⟶ W) (ι : D ⟶ W)
 
 /-- The functor `A ↦ ι^* ℋⁿ(Rj_* A_V[0])` from abelian groups to abelian étale sheaves on `D`,
-where `A_V` is the constant sheaf on `V` (blueprint
-`lemma-cohomology-near-two-transverse-divisors--1`). It is additive, all its constituents being
-so. -/
+where `A_V` is the constant sheaf on `V`. -/
 noncomputable def upperStarHomologyDirectImageConstant (n : ℤ) :
     AddCommGrpCat.{u + 1} ⥤ Sheaf D.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   constantSheaf V.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
     DerivedCategory.singleFunctor _ 0 ⋙ R((j)_*[AddCommGrpCat.{u + 1}]) ⋙
       DerivedCategory.homologyFunctor _ n ⋙ (ι)^*[AddCommGrpCat.{u + 1}]
 
-/-- The functor `A ↦ ι^* ℋⁿ(Rj_* A_V[0])` is additive
-(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
+/-- The functor `A ↦ ι^* ℋⁿ(Rj_* A_V[0])` is additive. -/
 instance additive_upperStarHomologyDirectImageConstant (n : ℤ) :
     (upperStarHomologyDirectImageConstant j ι n).Additive := by
   dsimp [upperStarHomologyDirectImageConstant]
   infer_instance
 
 /-- For a module `M` over a commutative ring `Λ`, the underlying abelian sheaf of
-`ℋⁿ(Lι^* Rj_* M_V[0])` is `ι^* ℋⁿ(Rj_* A_V[0])` for the underlying abelian group `A` of `M`:
-the derived pullback commutes with cohomology sheaves, and forgetting the module structure
-commutes with pullbacks, higher direct images and constant sheaves
-(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
+`ℋⁿ(Lι^* Rj_* M_V[0])` is `ι^* ℋⁿ(Rj_* A_V[0])` for the underlying abelian group `A` of
+`M`. -/
 theorem nonempty_forget₂_homology_iso_upperStarHomologyDirectImageConstant (n : ℤ)
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ) :
     Nonempty ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
@@ -123,14 +116,8 @@ namespace AlgebraicGeometry.Scheme
 open AlgebraicGeometry.Etale
 
 attribute [local instance] Abelian.hasFiniteBiproducts in
-/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1`, constant coefficients: if
-`ι^* Rj_* ℤ/ℓ` has finite locally constant cohomology sheaves, then so has `ι^* Rj_* N_V` for
-every finite module `N` killed by `ℓ` over a finite ring `Λ`.
-
-The underlying abelian group of `N` is a direct sum of `r` copies of `ℤ/ℓ`, so the underlying
-abelian sheaf of `ℋⁿ(ι^* Rj_* N_V)` is a direct sum of `r` copies of that of
-`ℋⁿ(ι^* Rj_* ℤ/ℓ)`; this identifies the underlying sheaves of sets, and finite local constancy
-of a sheaf of modules over a finite ring is detected on its underlying sheaf of sets. -/
+/-- If `ι^* Rj_* ℤ/ℓ` has finite locally constant cohomology sheaves, then so has
+`ι^* Rj_* N_V` for every finite module `N` killed by `ℓ` over a finite ring `Λ`. -/
 theorem HasFiniteLocallyConstantHomology.constantSheaf_of_constantZModModule
     {W V D : Scheme.{u}} (j : V ⟶ W) (ι : D ⟶ W) (ℓ : ℕ) [Fact ℓ.Prime]
     (h : HasFiniteLocallyConstantHomology D

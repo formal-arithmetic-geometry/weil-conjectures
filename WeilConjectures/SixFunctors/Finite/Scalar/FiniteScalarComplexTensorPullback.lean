@@ -9,8 +9,12 @@ public import WeilConjectures.SixFunctors.Finite.Scalar.FiniteScalarRepresentati
 
 /-! # Typed complex tensor pullback comparisons
 
-Source: Stacks Tags 00YV and 07A6.
-(blueprint: def-sf-finite-scalar-complex-tensor-pullback).
+The comparison between the total tensor product of complexes and its image under an additive
+monoidal left adjoint, specialized to pro-étale pullback.
+
+## References
+
+* [Stacks Project, Tags 00YV, 07A4 and 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -46,9 +50,7 @@ namespace WeilConjectures
 
 attribute [local implicit_reducible] finiteScalarRepresentativeTotalTensor
 
-/-- Uncurry the signed-total comparison before specializing the coefficient categories.
-Source: Stacks Tag 07A4, totalization of the ordinary tensor comparison.
-(blueprint: def-sf-finite-scalar-complex-tensor-pullback). -/
+/-- The uncurried signed-total tensor comparison for an additive monoidal left adjoint `L`. -/
 @[irreducible] def finiteScalarComplexTensorPullbackForFunctor
     {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]
     [Abelian C] [Abelian D]
@@ -68,9 +70,8 @@ Source: Stacks Tag 07A4, totalization of the ordinary tensor comparison.
       (F := curriedTensor C) (F' := curriedTensor D) (G₁ := L) (G₂ := L) (G := L)
       (c₁ := .up ℤ) (c₂ := .up ℤ) (Functor.OplaxMonoidal.δNatTrans L) (.up ℤ))
 
-/-- The uncurried total comparison retains the native complex component.
-Source: the two published bifunctor-comparison component equations, Stacks Tag 07A4.
-(blueprint: def-sf-finite-scalar-complex-tensor-pullback). -/
+/-- The components of the uncurried total comparison are the native complex comparison
+components. -/
 theorem finiteScalarComplexTensorPullbackForFunctor_app
     {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]
     [Abelian C] [Abelian D]
@@ -87,9 +88,8 @@ theorem finiteScalarComplexTensorPullbackForFunctor_app
     Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app]
   exact CategoryTheory.Category.id_comp _
 
-/-- Fix the coefficient-category data of the ordinary pullback tensor comparison.
-Source: Stacks Tag 07A4, ordinary inverse image and tensor products.
-(blueprint: def-sf-finite-scalar-complex-tensor-pullback). -/
+/-- The complex tensor comparison for the pro-étale pullback along `p` with coefficients
+in `B`. -/
 @[irreducible] def finiteScalarFixedComplexTensorPullbackForCoefficients
     (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
     [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]

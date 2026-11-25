@@ -19,6 +19,8 @@ of finite type over an algebraically closed field `k`, the Kummer boundary `∂�
 coordinate of `𝔸¹_Y` is the fundamental class of the zero section `V(t) ≅ Y`: its adjoint
 `Λ_{V(t)} ⟶ Rs^! (Λ(1)[2])` is an isomorphism.
 
+## Implementation details
+
 The adjoint is pushed down to `Y` along `p : 𝔸¹_Y ⟶ Y`. There a class `γ` with supports on
 `V(t)` becomes the morphism `Λ_Y ⟶ Rp_* Rs_! Rs^! (Λ(1)[2])` adjoint to `γ`, and the direct
 image of the localization triangle of `(V(t), 𝔾_{m,Y})` identifies the latter target with
@@ -62,9 +64,7 @@ private lemma Adjunction.homEquiv_comp_apply {C D E : Type*} [Category C] [Categ
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- For a closed immersion `i : Z ⟶ X` and `p : X ⟶ B` with `i ≫ p` invertible, the adjoint
-`Λ_B ⟶ Rp_* Ri_! Λ_Z` of the restriction map `Λ_X ⟶ Ri_! Λ_Z` is an isomorphism: it is the unit
-of the composite adjunction of `p` and of the compactification of `i`, whose left adjoint is
-the derived pullback along the isomorphism `i ≫ p`. -/
+`Λ_B ⟶ Rp_* Ri_! Λ_Z` of the restriction map `Λ_X ⟶ Ri_! Λ_Z` is an isomorphism. -/
 theorem isIso_homEquiv_supportedRestrictionMap {B X Z : Scheme.{u}} (p : X ⟶ B) (i : Z ⟶ X)
     [IsClosedImmersion i] [IsIso (i ≫ p)] :
     IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).homEquiv _ _
@@ -247,7 +247,7 @@ lemma unit_comp_rightDerivedLowerStar_map_unit {X Y G : Scheme.{u}} (p : X ⟶ Y
 set_option maxRecDepth 20000 in
 -- the composites of derived functors between the derived categories of the two bases are large
 include aY in
-/-- The global orientation (`thm-pur-affine-line-orientation`) for a rank-one datum whose Kummer
+/-- The global orientation of the zero section of `𝔸¹_Y`, for a rank-one datum whose Kummer
 class of the coordinate generates over every algebraically closed field, given the cohomology of
 `𝔸¹_k` and `𝔾_{m,k}`: the adjoint `Λ_{V(t)} ⟶ Rs^!(Λ(1)[2])` of the Kummer boundary `∂κ(t)` is
 an isomorphism. -/

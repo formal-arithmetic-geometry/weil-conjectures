@@ -14,7 +14,17 @@ import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionIdIso
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 
-/-! # Coefficient realization respects the two identity-factor unit maps -/
+/-! # Coefficient realization respects the two identity-factor unit maps
+
+## Implementation details
+
+The proof expands the compact-support comparisons into their open and direct-image parts. For
+the proper compactification, the realized identity open unit is identified with the intrinsic
+one by uniqueness of the transported left adjoint; for the open compactification, the realized
+identity direct-image unit is identified with the intrinsic one using the section and
+K-injective normalizations of `sfIntrinsicDerivedDirectImageComparison`. Naturality of the
+proper direct-image comparison then cancels the intermediate realization units.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -449,25 +459,7 @@ private theorem fixedIdentity_app (A : Type u) [CommRing A]
     Category.comp_id]
   rfl
 
-/-- The coefficient comparison commutes with the independent identity-factor unit maps.
-There is no etale-origin condition or geometric composition comparison in this equation.
-
-Source: def-sf-operation-stages, proper/open normalizations; the section and K-injective
-normalizations of sfIntrinsicDerivedDirectImageComparison.
-(blueprint: lem-sf-identity-factor-coefficient-comparison).
-
-Proof: expand the three compact-support comparisons into their open and direct-image
-comparisons. For the proper compactification, the open comparison followed by the
-realization of the fixed-scalar identity open unit is the intrinsic identity open unit;
-this follows by uniqueness of the transported left adjoint and exact-functor descent.
-For the open compactification, the direct-image comparison followed by realization of
-the fixed-scalar identity direct-image unit is the intrinsic identity direct-image unit.
-Indeed both are right-adjoint comparisons for the same realized identity inverse image;
-the section normalization and K-injective normalization identify their underived and
-derived mates. Naturality of the proper direct-image comparison moves the open identity
-map into proper image. Cancel the intermediate realization units. The surviving factors
-are exactly the open and direct-image comparison for the actual pair (i,p). These
-arguments apply to arbitrary inputs, including zero and empty schemes. -/
+/-- The coefficient comparison commutes with the two identity-factor unit maps. -/
 theorem identityFactorCoefficientComparison (A : Type u) [CommRing A] [Finite A]
     {X Z Y : Scheme.{u}} (i : X ⟶ Z) (p : Z ⟶ Y)
     [IsOpenImmersion i] [IsProper p]

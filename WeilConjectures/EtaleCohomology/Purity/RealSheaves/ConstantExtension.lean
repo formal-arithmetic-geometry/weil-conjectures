@@ -11,16 +11,15 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 /-!
 # The Weil group of a curve after a finite constant field extension
 
-Let `p : C₀ ⟶ Spec 𝔽_q` be a geometrically connected curve, `L = 𝔽_{q ^ m}` a finite extension
-of `𝔽_q` of degree `m`, and `C₀' = C₀ ×_{𝔽_q} 𝔽_{q ^ m}`, a geometrically connected curve over
-`𝔽_{q ^ m}` (`AlgebraicGeometry.Scheme.FiniteEtale.constantExtensionHom`). Given Weil groups
-`W` of `C₀` and `W'` of `C₀'` and a path `τ` from the base point of `C₀'` to that of `C₀`, the
-projection `C₀' ⟶ C₀` induces the *natural map* `W(C₀') → W(C₀)`
-(`AlgebraicGeometry.WeilGroup.constantExtensionMap`). This file proves (blueprint
-`lemma-geometric-constituents-after-constant-extension`) that it is a continuous injective
-homomorphism with image `W(C₀)^[m] = deg⁻¹(m ℤ)`, carrying the geometric subgroup `π₁(C)` of
-`W(C₀')` onto that of `W(C₀)`, and that the degree over `𝔽_{q ^ m}` is the degree over `𝔽_q` divided
-by `m`.
+Let `p : C₀ ⟶ Spec 𝔽_q` be a geometrically connected curve, `L = 𝔽_{q ^ m}` a finite extension of
+`𝔽_q` of degree `m`, and `C₀' = C₀ ×_{𝔽_q} 𝔽_{q ^ m}`, a geometrically connected curve over
+`𝔽_{q ^ m}` (`AlgebraicGeometry.Scheme.FiniteEtale.constantExtensionHom`). Given Weil groups `W` of
+`C₀` and `W'` of `C₀'` and a path `τ` from the base point of `C₀'` to that of `C₀`, the projection
+`C₀' ⟶ C₀` induces the *natural map* `W(C₀') → W(C₀)`
+(`AlgebraicGeometry.WeilGroup.constantExtensionMap`). This file proves that it is a continuous
+injective homomorphism with image `W(C₀)^[m] = deg⁻¹(m ℤ)`, carrying the geometric subgroup `π₁(C)`
+of `W(C₀')` onto that of `W(C₀)`, and that the degree over `𝔽_{q ^ m}` is the degree over `𝔽_q`
+divided by `m`.
 
 ## Main definitions
 
@@ -46,8 +45,7 @@ open Scheme.FiniteEtale
 variable {K : Type u} [Field K] {C : Scheme.{u}} (p : C ⟶ Spec (.of K))
   (L : Type u) [Field L] [Algebra K L] [Module.Finite K L] [Algebra.Etale K L]
 
-/-- The constant field extension `C₀ ×_K Spec L` of a curve is a curve over `L`: the projection
-to `C₀` is finite, so it does not increase the dimension. -/
+/-- The constant field extension `C₀ ×_K Spec L` of a curve is a curve over `L`. -/
 instance [IsCurve p] : IsCurve (constantExtensionHom p L) where
   krullDim_le_one :=
     ((constantExtensionProj p L).topologicalKrullDim_le_of_locallyQuasiFinite).trans
@@ -105,10 +103,7 @@ lemma mem_weilGroup_constantExtensionFundamentalGroupMap_iff (g : W'.fundamental
   have := W.connectedSpace
   mem_weilGroup_constantExtension_iff p W'.basePoint τ W.fundamentalGroup W'.fundamentalGroup g n
 
-/-- Blueprint `lemma-geometric-constituents-after-constant-extension`: Weil group after a finite
-constant-field extension.
-
-The natural map `W(C₀') → W(C₀)` from the Weil group of the constant field extension
+/-- The natural map `W(C₀') → W(C₀)` from the Weil group of the constant field extension
 `C₀' = C₀ ×_{𝔽_q} 𝔽_{q ^ m}` over `𝔽_{q ^ m}` to the Weil group of `C₀` over `𝔽_q`, induced by
 the projection `C₀' ⟶ C₀` and a path `τ` between the base points: on the presentations as
 subgroups of `π₁ × ℤ` it is `(g, n) ↦ (ρ g, m n)`, `ρ : π₁(C₀', s') → π₁(C₀, s)` being the map
@@ -143,7 +138,7 @@ lemma deg_constantExtensionMap (w : W'.carrier) :
   rw [W.deg_eq, W'.deg_eq]
   exact congrArg Prod.snd (W.weilGroupEquiv_constantExtensionMap W' τ w)
 
-/-- The natural map is injective, since `π₁(C₀') → π₁(C₀)` is: `C₀' ⟶ C₀` is finite étale. -/
+/-- The natural map is injective. -/
 lemma constantExtensionMap_injective :
     Function.Injective (W.constantExtensionMap W' τ) := by
   have := W.connectedSpace
@@ -201,8 +196,7 @@ lemma pow_finrank_eq_one_iff (x : Multiplicative ℤ) : x ^ Module.finrank K L =
   rw [toAdd_pow, nsmul_eq_mul, toAdd_one, mul_eq_zero] at h'
   exact h'.resolve_left hm
 
-/-- The natural map carries the geometric subgroup `π₁(C)` of `W(C₀')` onto that of `W(C₀)`: both
-are the elements of degree zero. -/
+/-- The natural map carries the geometric subgroup `π₁(C)` of `W(C₀')` onto that of `W(C₀)`. -/
 lemma map_geometric_constantExtensionMap :
     W'.geometric.map (W.constantExtensionMap W' τ) = W.geometric := by
   ext w
@@ -218,7 +212,7 @@ lemma map_geometric_constantExtensionMap :
     rw [MonoidHom.mem_ker, deg_constantExtensionMap, pow_finrank_eq_one_iff] at hw
     exact hw
 
-/-- The natural map is continuous: on the open subgroup `π₁(C)` it is the continuous map `ρ`. -/
+/-- The natural map is continuous. -/
 lemma continuous_constantExtensionMap : Continuous (W.constantExtensionMap W' τ) := by
   have := W.connectedSpace
   refine continuous_of_continuousAt_one _ ?_
@@ -242,10 +236,7 @@ noncomputable def constantExtensionEquiv :
   (MonoidHom.ofInjective (W.constantExtensionMap_injective W' τ)).trans
     (MulEquiv.subgroupCongr (W.range_constantExtensionMap W' τ))
 
-/-- Blueprint `lemma-geometric-constituents-after-constant-extension`: Weil group after a finite
-constant-field extension.
-
-Let `C₀` be a geometically connected curve over `𝔽_q`, `L = 𝔽_{q ^ m}` and
+/-- Let `C₀` be a geometrically connected curve over `𝔽_q`, `L = 𝔽_{q ^ m}` and
 `C₀' = C₀ ×_{𝔽_q} 𝔽_{q ^ m}`, regarded as a curve over `𝔽_{q ^ m}`. Under the natural map
 `W(C₀') → W(C₀)` induced by the projection `C₀' ⟶ C₀` (and a path between the base points, which
 exists by `AlgebraicGeometry.WeilGroup.nonempty_constantExtensionPath`), the Weil group of `C₀'`
@@ -262,10 +253,7 @@ theorem constantExtension :
     W.range_constantExtensionMap W' τ, W.map_geometric_constantExtensionMap W' τ, fun w ↦ ?_⟩
   rw [deg_constantExtensionMap, toAdd_pow, nsmul_eq_mul]
 
-/-- Blueprint `lemma-geometric-constituents-after-constant-extension`: Weil group after a finite
-constant-field extension.
-
-If `s ∈ W(C₀)` has degree one, then `s ^ m` is the image of an element of degree one of the Weil
+/-- If `s ∈ W(C₀)` has degree one, then `s ^ m` is the image of an element of degree one of the Weil
 group of `C₀ ×_{𝔽_q} 𝔽_{q ^ m}` over `𝔽_{q ^ m}`. -/
 theorem exists_constantExtensionMap_eq_pow (s : W.carrier)
     (hs : W.deg s = Multiplicative.ofAdd 1) :
@@ -282,13 +270,9 @@ theorem exists_constantExtensionMap_eq_pow (s : W.carrier)
   exact h
 
 omit [Finite L] in
-/-- Blueprint `situation-weil`: Pointer to the properties of `situation-weil`.
-
-The degree `deg : W(C₀) → ℤ` is a surjective homomorphism with kernel the geometric subgroup
+/-- The degree `deg : W(C₀) → ℤ` is a surjective homomorphism with kernel the geometric subgroup
 `π₁(C)`, and it sends every lift of the geometric Frobenius `Φ` to `1`: an element of `W(C₀)`
-acting on the geometric fibres of the constant covers of `C₀` as `Φ` has degree one
-(`situation-weil`, through
-`AlgebraicGeometry.Scheme.FiniteEtale.exact_weilGroupDeg`). -/
+acting on the geometric fibres of the constant covers of `C₀` as `Φ` has degree one. -/
 theorem exact_deg :
     Function.Surjective W.deg ∧ W.deg.ker = W.geometric ∧
       ∀ w : W.carrier, (∀ (A : FiniteEtaleAlgebra K)

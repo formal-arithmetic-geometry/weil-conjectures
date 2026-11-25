@@ -18,6 +18,10 @@ map `T : H^{2d}(X, Λ) ⟶ Λ` (a trace) such that for every `i + j = 2d` the tr
 `(x, y) ↦ T(x ⌣ y)` is nondegenerate on both sides
 (`AlgebraicGeometry.Etale.TateOrientation.exists_nondegenerate_traceCup`).
 
+This is the finite-level duality in the form needed for the trace–cup structure at `ℚ̄_ℓ`.
+
+## Implementation details
+
 The trace is `z ↦ 1 ≫ (z ≫ γ')^♭`, where `γ' : Λ_X[2d] ≅ Ra^! Λ` is the orientation read through
 `Λ(d) ≅ Λ` over the separably closed `k`, `(-)^♭` is the adjunction `Ra_! ⊣ Ra^!` and
 `1 : Λ ⟶ Ra_! Λ_X` is the unit class (`AlgebraicGeometry.Etale.unitClassCompactSupport`). The
@@ -27,10 +31,6 @@ cup product is the Yoneda product `x ⌣ y = x ≫ y[i]`
 `Hom(Λ, E) × Hom(E, Λ) ⟶ End(Λ)` at `E = Ra_!(Λ_X[i])`, nondegenerate at the separably closed point
 (`AlgebraicGeometry.Etale.nondegenerate_comp_unit_of_isSepClosed_of_injective`), read through the
 bijections `x ↦ 1 ≫ Ra_!(x)` (`La^* ⊣ Ra_*` and `Ra_! ≅ Ra_*`) and `y ↦ (y[i] ≫ γ')^♭`.
-
-This is the finite-level duality of blueprint `theorem-poincare-duality--9` in the form needed for
-the trace–cup structure at `ℚ̄_ℓ` (`corollary-cup-product-pairing--1`,
-`corollary-degreewise-duality-over-fields`).
 -/
 
 @[expose] public section
