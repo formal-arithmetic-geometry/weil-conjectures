@@ -17,9 +17,25 @@ import WeilConjectures.RingTheory.GeometricRegularityFieldIso
 /-!
 # Reduction of polynomial completion fibres to complete local domains
 
-Source: Stacks Project, More on Algebra, proof of Proposition 07PV, paragraph 2;
-Algebra 00E3, 00C9, 00MA, 0325 and 07BH.
-(blueprint: lem-weil-pbc-polynomial-complete-local-fibre-reduction)
+Each fibre of the completion of `S[X]_Q`, for a complete local Noetherian ring `S`, is
+identified with a fibre over a prime lying over zero for a complete local domain quotient of `S`.
+
+## Implementation details
+
+For a prime `r` with `p = r ∩ S`, the quotient `A = S / p` is a complete local domain; localizing
+the coefficient quotient identifies `A[X]_q` with `T / p T`, and completion of a quotient
+identifies its completion with `C / p C`. Since `p` annihilates the residue field, the fibres
+agree. The witness `A` is this actual quotient ring.
+
+## References
+
+* [Stacks, Tag 07PV] (paragraph 2 of the proof)
+* [Stacks, Tag 07PN]
+* [Stacks, Tag 00E3]
+* [Stacks, Tag 00C9]
+* [Stacks, Tag 00MA]
+* [Stacks, Tag 0325]
+* [Stacks, Tag 07BH]
 -/
 
 @[expose] public section
@@ -29,31 +45,7 @@ universe u
 namespace Polynomial
 
 /-- Each fibre of the localized polynomial completion transports to a polynomial
-formal fibre above zero over a complete local domain.
-Source: Stacks Project, proof of Proposition 07PV, paragraph 2, with the quotient
-completion identity in the proof of 07PN.
-(blueprint: lem-weil-pbc-polynomial-complete-local-fibre-reduction)
-
-Proof:
-1. Contract the given prime s of T = S[X]_Q to r in S[X]. Prime correspondence
-   for localization gives r ≤ Q and canonically identifies the residue fields.
-   As all denominators of T act invertibly on both factors, tensoring over S[X]
-   or T gives the same fibre over this identified residue field (00E3, 00C9, 07BH).
-2. Put p = r intersect S and A = S/p. Primality makes A a domain; 0325 makes it
-   a Noetherian complete local ring. The coefficient quotient map S[X] → A[X]
-   is surjective with kernel pS[X]. Its images q and r' of Q and r are maximal
-   and prime respectively; q lies over the maximal ideal of A, r' ≤ q and
-   r' intersects A in zero. Take this actual quotient ring as the witness A.
-3. Localizing the coefficient quotient identifies A[X]_q with T/pT, preserving
-   maximal ideals. Completion of a quotient (00MA) identifies its completion
-   with C/pC, where C is the completion of T. At r the quotient-localization
-   identity identifies the residue field with that of r' as an S[X]-algebra.
-4. Since p annihilates the residue field, tensoring C with it is unchanged by
-   replacing C with C/pC and the base S[X] with A[X]. Tensor associativity and
-   step 1 give an isomorphism of fibres compatible with the residue-field
-   isomorphism. Noetherianity and regularity after every finite purely inseparable
-   field extension transport across these isomorphisms. This is precisely the
-   implication below; no arbitrary object is used in a definition. -/
+formal fibre above zero over a complete local domain. -/
 theorem exists_completeLocalDomain_fibre_reduction
     (S : Type u) [CommRing S] [IsNoetherianRing S] [IsLocalRing S]
     [IsAdicComplete (IsLocalRing.maximalIdeal S) S]

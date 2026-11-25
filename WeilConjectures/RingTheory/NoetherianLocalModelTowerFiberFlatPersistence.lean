@@ -13,8 +13,16 @@ import WeilConjectures.RingTheory.LocalizedBaseChangeQuotientFlat
 /-!
 # Persistence of closed-fibre flatness in a local model tower
 
-Source: Stacks Project, Algebra, proof of Tag 00R7, second paragraph.
-(blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-flat-persistence).
+Closed-fibre flatness at one stage of a Noetherian local model tower persists at later stages.
+
+## Implementation details
+
+Base change, tensor associativity, and localization identify the later fibre module with a
+localization of the base change of the earlier one, and localization preserves flatness.
+
+## References
+
+* [Stacks, Tag 00R7] (second paragraph of the proof)
 -/
 
 @[expose] public section
@@ -23,11 +31,7 @@ universe u v w t
 open scoped TensorProduct
 namespace Module
 
-/-- Fibre flatness persists after a transition in a Noetherian local model tower.
-Source: Stacks Project, Algebra, proof of Tag 00R7, second paragraph.
-Base change, tensor associativity, and localization identify the later fibre module with
-a localization of the base change of the earlier one, and localization preserves flatness.
-(blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-flat-persistence) -/
+/-- Fibre flatness persists after a transition in a Noetherian local model tower. -/
 theorem NoetherianLocalModelTower.fiberFlat_of_le
     {R : Type u} {S : Type v} {S' : Type w} {M : Type t}
     [CommRing R] [CommRing S] [CommRing S'] [IsLocalRing R] [AddCommGroup M]

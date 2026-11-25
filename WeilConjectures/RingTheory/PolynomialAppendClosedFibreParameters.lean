@@ -17,8 +17,22 @@ import Mathlib.Algebra.MvPolynomial.Equiv
 /-!
 # Parameters of the closed fibre of a polynomial append
 
-Source: Stacks Project, Smoothing Ring Maps, Tag 07FH, property (1),
-and Algebra, Tags 00SV (first paragraph), 0H9M and 00OP.
+After appending variables `Y₁, …, Yₑ` to a polynomial ring, the closed fibre of the localization
+at a prime containing all `Yᵢ` is regular local of dimension `e`, with the `Yᵢ` as a regular
+system of parameters.
+
+## Implementation details
+
+Reindex the larger polynomial ring as `P₀[Y₁, …, Yₑ]` and apply
+`exists_polynomial_local_closedFiber_equiv`; the corresponding prime of `κ(p₀)[Yᵢ]` is the
+origin, which is regular local by `polynomial_origin_regularLocal`. The case `e = 0` is included.
+
+## References
+
+* [Stacks, Tag 07FH] (property (1))
+* [Stacks, Tag 00SV] (first paragraph)
+* [Stacks, Tag 0H9M]
+* [Stacks, Tag 00OP]
 -/
 
 @[expose] public section
@@ -27,28 +41,7 @@ set_option autoImplicit false
 universe u
 namespace Algebra
 
-/-- The appended variables are a regular system of parameters of the closed source fibre.
-
-Source: Stacks Project, Smoothing Ring Maps, Tag 07FH, proof of lemma-solution-modulo,
-property (1); Algebra, Tags 00SV (first paragraph), 0H9M and 00OP.
-(blueprint: lem-weil-pbc-polynomial-append-closed-fibre-parameters).
-
-Proof: Reindex the larger polynomial ring as P₀[Y₁,...,Yₑ] using renameEquiv
-and sumAlgEquiv. Transport p₁ to its prime Q in this ring. Its contraction to
-P₀ is p₀, and localization of the reindexing maps the extended maximal ideal
-onto the extended maximal ideal for the coefficient inclusion. Quotienting gives
-an isomorphism of the two closed fibres, with the natural formula on variables.
-Apply exists_polynomial_local_closedFiber_equiv to Q. It gives a prime Qk over
-Q in κ(p₀)[Yᵢ] and a natural isomorphism of the closed fibre with its localization.
-Every Yᵢ belongs to Q, so its coefficientwise image belongs to Qk by contraction.
-The origin ideal is maximal by polynomial_origin_regularLocal; thus Qk equals
-that ideal. Compose the two fibre isomorphisms and check its formula on each
-appended variable. Apply polynomial_origin_regularLocal over κ(p₀) and transport
-regular locality and dimension e along this isomorphism. Map the ideal generated
-by the displayed list; the variable formula identifies it with the origin's
-maximal ideal. Injectivity of mapping ideals by a ring isomorphism gives the
-claimed generation. For e=0 all variable arguments are empty, the origin is the
-zero ideal, and the same proof gives dimension zero and the empty generator list. -/
+/-- The appended variables are a regular system of parameters of the closed source fibre. -/
 theorem polynomial_append_closed_fibre_parameters
     (k : Type u) [Field k] (t e : ℕ)
     (p₀ : Ideal (MvPolynomial (Fin t) k)) [p₀.IsPrime]

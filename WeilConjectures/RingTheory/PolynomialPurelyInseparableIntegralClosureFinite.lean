@@ -18,9 +18,18 @@ import Mathlib.RingTheory.Polynomial.IsIntegral
 /-!
 # Purely inseparable integral closures over polynomial rings
 
-Source: Stacks Project, Algebra, Lemma 10.161.13 (Tag 032O), positive-characteristic
-part of the second assertion.
-(blueprint: lem-weil-pbc-polynomial-purely-inseparable-closure-finite).
+For a Noetherian normal Japanese domain `R` of characteristic `p`, the integral closure of `R[x]`
+in a finite purely inseparable extension of `Frac(R[x])` is finite.
+
+## Implementation details
+
+The extension embeds into `K'(t)` with `t^q = x` and `K'` a finite purely inseparable extension
+of `K = Frac(R)`. The integral closure of `R[x]` in `K'(t)` is `A[t]`, with `A` the integral
+closure of `R` in `K'`, which is finite over `R[x]` since `t^q = x`. The case `q = 1` is included.
+
+## References
+
+* [Stacks, Tag 032O] (positive-characteristic part of the second assertion)
 -/
 
 @[expose] public section
@@ -64,32 +73,7 @@ private theorem finite_adjoin_coefficients_and_integral
     (Subalgebra.inclusion_injective hle)
 
 /-- For a Noetherian normal Japanese domain, the integral closure of its polynomial
-ring in a finite purely inseparable extension of its fraction field is finite.
-Source: Stacks Project, Algebra, Lemma 10.161.13 (Tag 032O), proof of the second assertion.
-(blueprint: lem-weil-pbc-polynomial-purely-inseparable-closure-finite).
-
-Proof: Write K = Frac(R) and x for the polynomial variable. Clearing coefficient
-denominators identifies Frac(R[x]) with K(x): multiply a polynomial in K[x] by the
-product of denominators of its finitely many coefficients to put it in R[x]. The
-inclusion K → K(x) makes K have characteristic p as well. In an algebraic closure of
-L choose a common q = p^e such that the q-th powers of a K(x)-basis of L lie in K(x).
-Write those powers as quotients of polynomials. Adjoin to K the q-th roots of all
-coefficients in these finitely many numerators and denominators, obtaining K'. The
-monomials in these roots with exponents below q span K' over K: the corresponding
-finite-dimensional subalgebra is a domain and thus a field: multiplication by a nonzero
-element is an injective endomorphism of a finite-dimensional K-vector space, hence
-surjective and takes some element to 1. Choose t with t^q = x.
-The injectivity of the iterated Frobenius shows that every basis element lies in K'(t),
-so L embeds in K'(t) over K(x). This last extension is finite by the tower law.
-Let A be the integral closure of R in K'. It is finite over R by the Japanese hypothesis,
-and is normal with fraction field K'. The element t is transcendental over K', since
-otherwise x would be algebraic over K. Hence A[t] is a normal polynomial ring with
-fraction field K'(t). The elements of A and t are integral over R[x], so A[t] is contained
-in the integral closure C of R[x] in K'(t). Conversely each element of C is integral over
-A[t], and normality forces it into A[t]. Thus C = A[t]. If a_j generate A over R, then
-a_j t^r, for 0 ≤ r < q, generate C over R[x], by writing each exponent as qs+r and using
-t^q = x. Finally the integral closure in L embeds as an R[x]-submodule of C; R[x] is
-Noetherian, so that submodule is finite. This includes q = 1 and the trivial extension. -/
+ring in a finite purely inseparable extension of its fraction field is finite. -/
 theorem finite_polynomial_purelyInseparable_integralClosure
     (R : Type u) [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsIntegrallyClosed R]
     (hR : IsN2 R (FractionRing R)) (p : ℕ) [Fact p.Prime]

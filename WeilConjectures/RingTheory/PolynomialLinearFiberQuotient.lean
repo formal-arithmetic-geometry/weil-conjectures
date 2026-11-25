@@ -14,8 +14,18 @@ public import Mathlib.RingTheory.Localization.FractionRing
 /-!
 # Linear polynomial fibres after arbitrary base change
 
-Source: Stacks Project, More on Algebra, Tag 07PU, second paragraph of the proof.
-(blueprint: lem-weil-pbc-polynomial-linear-fibre-quotient)
+If the residue field of a prime `r` of `A[X]` is the fraction field `K` of `A`, then for every
+`A[X]`-algebra `S` the fibre of `r` is the quotient of `K ⊗[A] S` by one linear relation.
+
+## Implementation details
+
+The inverse maps are built from the tensor universal property and descend through the quotient.
+The presentation holds even for the zero ring `S` or a zero fibre; no regularity, completion or
+derivation is involved.
+
+## References
+
+* [Stacks, Tag 07PU] (second paragraph of the proof)
 -/
 
 @[expose] public section
@@ -25,24 +35,9 @@ universe u
 namespace Polynomial
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The fibre of a polynomial prime whose residue field is the coefficient fraction field
-is the quotient of the coefficient generic fibre by the explicit linear relation.
-Source: Stacks Project, More on Algebra, Tag 07PU, second paragraph of the proof.
-(blueprint: lem-weil-pbc-polynomial-linear-fibre-quotient)
-
-Proof:
-Put K = κ(0_A), and identify κ(r) with K by the unique A-algebra isomorphism
-of fraction fields. Let ξ be the image of X under this isomorphism. Put R = K tensor
-with S over A, and Q = R/(1 tensor X - ξ tensor 1). The canonical maps κ(r) to Q
-and S to Q agree on A. They agree on X by the defining relation of Q, so polynomial
-algebra-map extensionality says that they agree on all of A[X]. The tensor universal
-property therefore gives a map κ(r) tensor over A[X] with S to Q. Conversely, the
-fraction-field isomorphism and the canonical map from S give a map from R to that
-fibre. The balancing relation for X kills the displayed generator, so this map
-descends to Q. The maps are inverse: check on pure tensors, using the inverse laws
-of the fraction-field isomorphism, and then use additivity and quotient induction.
-This proves the presentation even for the zero ring S or a zero fibre; no regularity,
-completion or derivation is involved. -/
+/-- The fibre of a polynomial prime whose residue field is the coefficient fraction field `K`
+is the quotient of the coefficient generic fibre `K ⊗[A] S` by the explicit linear relation
+`1 ⊗ X - ξ ⊗ 1`. -/
 theorem linear_fiber_quotient
     (A : Type u) [CommRing A] [IsDomain A]
     (r : Ideal (Polynomial A)) [r.IsPrime] [IsFractionRing A r.ResidueField]

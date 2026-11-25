@@ -19,7 +19,22 @@ import WeilConjectures.RingTheory.UnitMaximalMinorOfDepthZero
 /-!
 # A nonzerodivisor in the maximal minors of an injective matrix
 
-Source: Stacks Project, Algebra, Proposition 00N1, proof of (1) => (2).
+If a matrix over a Noetherian ring defines an injective map of finite free modules, the ideal of
+its maximal minors contains a nonzerodivisor.
+
+## Implementation details
+
+Localizing at each associated prime and applying the depth-zero unit-minor lemma shows that the
+minor ideal avoids every associated prime; prime avoidance then gives a nonzerodivisor.
+
+## References
+
+* [Stacks, Tag 00N1] (proof of (1) ⇒ (2))
+* [Stacks, Tag 00MY]
+* [Stacks, Tag 00MW]
+* [Stacks, Tag 00LC]
+* [Stacks, Tag 00LD]
+* [Stacks, Tag 05BZ]
 -/
 
 @[expose] public section
@@ -54,19 +69,8 @@ private theorem injective_mulVec_localization
     simpa only [Submonoid.smul_def, ← Matrix.mulVec_smul, Matrix.mulVec_zero] using ht
   exact (IsLocalizedModule.eq_zero_iff T (f n)).mpr ⟨t, htw⟩
 
-/-- Source: Stacks Project, Algebra, Proposition 00N1, proof of (1) => (2),
-restricted to the last injective map; Tags 00MY, 00MW, 00LC, 00LD and 05BZ.
-(blueprint: lem-weil-pbc-injective-maximal-minors-nonzerodivisor)
-
-Proof: Localize the injection at each associated prime of R. Localization commutes
-with finite free modules and preserves injectivity. The resulting Noetherian local
-ring has its maximal ideal as an associated prime, so the depth-zero unit-minor
-lemma gives a unit maximal minor. Determinants commute with localization. Thus the
-original minor ideal is not contained in that associated prime. The associated
-primes are finite, so prime avoidance gives an element of the minor ideal outside
-all of them. The zero divisors are their union, so this element is a nonzerodivisor.
-If there are zero columns, the empty minor is one and we take one. For the zero
-ring, one is still a nonzerodivisor by the injectivity definition. -/
+/-- If a `p × n` matrix over a Noetherian ring defines an injective map `R^n → R^p`, then the
+ideal of its maximal minors contains a nonzerodivisor. -/
 theorem exists_nonZeroDivisor_mem_maximal_minors
     {R : Type u} [CommRing R] [IsNoetherianRing R]
     {n p : ℕ} (A : Matrix (Fin p) (Fin n) R)

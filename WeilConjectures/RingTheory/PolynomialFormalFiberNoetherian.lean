@@ -10,18 +10,30 @@ public import WeilConjectures.RingTheory.GRing
 import Mathlib.RingTheory.Polynomial.Basic
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.FibreRingNoetherian
+
+/-!
+# Noetherianity of polynomial formal fibres
+
+The formal fibres of `A[X]_q` over a complete local Noetherian domain `A` are Noetherian.
+
+## Implementation details
+
+The completion of the Noetherian local ring `A[X]_q` is Noetherian, and fibres of a Noetherian
+ring are Noetherian.
+
+## References
+
+* [Stacks, Tag 07PU]
+-/
+
 @[expose] public section
 universe u
 namespace Polynomial
 
 -- The signature also carries hypotheses used by the geometric-regularity component.
 set_option linter.unusedVariables false in
-/-- Noetherianity component of the formal-fibre theorem.
-Source: Stacks Project, More on Algebra, Lemma 07PU.
-(blueprint: lem-weil-pbc-another-helper-g-ring-noetherian-component)
-Proof: localize the polynomial ring at the given maximal ideal, apply the
-Noetherianity theorem for adic completions, and then apply the theorem that a
-fibre of a Noetherian ring is Noetherian. -/
+/-- The formal fibre of `A[X]_q` at a prime, over a complete local Noetherian domain `A`, is
+Noetherian. -/
 theorem formalFiber_isNoetherian (A : Type u) [CommRing A] [IsDomain A]
     [IsNoetherianRing A] [IsLocalRing A]
     [IsAdicComplete (IsLocalRing.maximalIdeal A) A]

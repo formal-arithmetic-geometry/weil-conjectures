@@ -17,8 +17,19 @@ import WeilConjectures.RingTheory.NoetherianLocalModelTowerFiberColimit
 /-!
 # Categorical presentation of the closed-fibre system
 
-Source: Stacks Project, Algebra, Tag 00R7 (lemma-criterion-flatness-fibre),
-the paragraph beginning with the colimit of the maximal ideals.
+The closed fibres `S_i / m_i S_i`, `T_i / m_i T_i` and `N_i / m_i N_i` of a Noetherian local model
+tower form a local Noetherian diagram whose colimit is the closed fibre of the limit.
+
+## Implementation details
+
+The transitions are obtained by quotienting the localization `fibreTransition` and the module
+base change `moduleTransition` by `m_j`. The cocones are colimits: a quotient representative
+mapping to zero is a finite sum of multiples of elements of `m_R`, which descends to a common
+stage by locality and the eventual-equality fields of the tower.
+
+## References
+
+* [Stacks, Tag 00R7] (the paragraph beginning with the colimit of the maximal ideals)
 -/
 
 @[expose] public section
@@ -32,44 +43,7 @@ namespace Module
 
 /-- The closed-fibre quotients form a local Noetherian diagram with localization
 transitions and module base-change transitions, and its colimit is the closed fibre.
-There is no flatness assumption or flat-stage conclusion in this construction lemma.
-
-Source: Stacks Project, Algebra, Tag 00R7 (lemma-criterion-flatness-fibre), the paragraph
-beginning with the colimit of the maximal ideals, before the second use of Tag 00R6.
-(blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-diagram)
-
-Proof:
-1. Put m_i = maximalIdeal R_i, A_i = S_i/m_i S_i, B_i = T_i/m_i T_i, and
-   D_i = B_i tensor over T_i with N_i. Use ULift for the module universe if necessary.
-   Local homomorphisms pull maximal ideals back to maximal ideals. The transition
-   maps therefore descend to these quotients. On D_i send a pure tensor b tensor n
-   to the tensor of the image of b and nmap n. The original system laws, checked
-   on quotient representatives and pure tensors, give functor laws, the commuting
-   ring squares, and semilinearity. The extended ideals lie in the maximal ideals
-   of S_i and T_i, so A_i and B_i are Noetherian local rings, their maps are local,
-   and D_i is finite over B_i by quotient base change of X.finite.
-2. Quotient the localization specified by X.fibreTransition by the image of m_j.
-   Its source is B_i tensor over A_i with A_j: elements of m_i already vanish,
-   and quotienting by m_j in the second factor imposes the remaining relations.
-   Localization commutes with this quotient, giving hloc with the displayed formula.
-   Quotient X.moduleTransition by m_j and use tensor associativity to obtain hbase,
-   with its displayed formula on pure tensors. Tensor over the quotient identifies
-   D_i with A_i tensor over S_i with N_i, compatibly with the A_i action. These
-   identifications are the final stage ring and additive equivalences below.
-3. The limit maps descend to S/m_R S, T/m_R T, and (S/m_R S) tensor over S with M.
-   They give compatible cocones and scalar actions. Every quotient representative
-   comes from a stage, by the tower's surjectivity fields. If a representative maps
-   to zero, express its image as a finite sum of multiples of elements of m_R.
-   Represent those finitely many coefficients and module elements at a common stage.
-   Locality of R_i to R puts each lifted coefficient in m_i. Descend the equality
-   by the tower's eventual-equality fields at a further common stage; there the
-   quotient representative is zero. For module tensors use their identification
-   with the module quotient and the same finite-sum argument. Thus the cocones are
-   colimits. The induced comparison maps are bijective, hence ring and additive
-   equivalences. Their formulas on representatives show that the colimit scalar
-   action restricts along psi to the closed-fibre action. This gives the final
-   limit equivalences and their scalar compatibility. No flatness is used here.
--/
+There is no flatness assumption or flat-stage conclusion. -/
 theorem NoetherianLocalModelTower.exists_fiber_diagram
     {R : Type u} {S : Type v} {S' : Type w} {M : Type t}
     [CommRing R] [CommRing S] [CommRing S'] [IsLocalRing R] [AddCommGroup M]

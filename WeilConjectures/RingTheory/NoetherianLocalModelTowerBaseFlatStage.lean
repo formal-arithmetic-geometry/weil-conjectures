@@ -17,8 +17,18 @@ import WeilConjectures.RingTheory.ColimitEventuallyFlat
 /-!
 # A base-flat stage in a Noetherian local model tower
 
-Source: Stacks Project, Algebra, Tag 00R6, as applied in the proof of Tag 00R7.
-(blueprint: lem-weil-pbc-noetherian-local-model-tower-base-flat-stage).
+If the limit module is flat over the base, some stage module is flat over its stage base ring.
+
+## Implementation details
+
+The ring and module directed systems are converted to functors on the index preorder, whose
+cocones are colimits by the elementwise fields of the tower. Then `RingTheory.exists_flat_stage`
+applies, and the flat stage is transported to the tower's specified base action.
+
+## References
+
+* [Stacks, Tag 00R6]
+* [Stacks, Tag 00R7]
 -/
 
 @[expose] public section
@@ -133,28 +143,8 @@ private noncomputable def group_limit_isColimit
     obtain ⟨j, hij, hxy⟩ := heq i x y h
     exact ⟨j, homOfLE hij, hxy⟩
 
-/-- A flat limit module has a base-flat stage.
-Source: Stacks Project, Algebra, Tag 00R6, as applied in the proof of Tag 00R7.
-(blueprint: lem-weil-pbc-noetherian-local-model-tower-base-flat-stage).
-
-Proof:
-1. Convert the base and top ring directed systems and the module directed system to
-   functors on the index preorder. The directed-system axioms give identity and composition.
-   The compatible ring and module limit maps give cocones, after lifting limit rings to
-   the stage-ring universe as needed.
-2. The elementwise representation and eventual-equality fields of the tower imply these
-   cocones are colimits: every element is represented; two representatives are equal
-   exactly when their images agree at a common later stage. The universal maps from these
-   colimits are therefore bijective ring or additive homomorphisms. Semilinearity and
-   the ring-map squares transport scalar structures and base flatness to the colimits.
-3. Apply `RingTheory.exists_flat_stage`. All stage rings are Noetherian local, all ring
-   maps are local, the stage modules are finite and the module transitions are semilinear.
-   The fields `baseTransition` and `moduleTransition` give precisely its localization
-   and module tensor-isomorphism hypotheses. Transport the resulting flat stage from
-   the restricted action along the base-to-top map to the tower's specified base action;
-   these actions agree by the two stage scalar towers. No persistence or fibre argument
-   is part of this statement, and the zero module is allowed.
--/
+/-- If the limit module is flat over the base, some stage module is flat over its stage base
+ring. -/
 theorem NoetherianLocalModelTower.exists_baseFlat_stage
     {R : Type u} {S : Type v} {S' : Type w} {M : Type t}
     [CommRing R] [CommRing S] [CommRing S'] [AddCommGroup M]

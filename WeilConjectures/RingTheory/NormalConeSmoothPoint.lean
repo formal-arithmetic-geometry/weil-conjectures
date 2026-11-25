@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.Polynomial.Ideal
 /-!
 # The normal cone of a smooth point
 
-The smooth case of blueprint `example-normal-cone-point`: at a smooth point `Z = {y}` of `X` the
+The smooth case of the normal cone at a point: at a smooth point `Z = {y}` of `X` the
 graded algebra `⨁_r I^r / I^{r+1}` is the symmetric algebra of `I / I²`, a polynomial ring over
 `𝒪_Z` in `dim X` variables, so the normal cone `N_Z X` is the tangent space at `y`.
 
@@ -57,10 +57,9 @@ lemma map_span_C_X_mvPolynomialExtendedReesAlgebraEquiv :
   congr 2
   exact Subtype.ext (by simp [mvPolynomialToLaurent_C])
 
-/-- (blueprint `example-normal-cone-point`) **The normal cone of the origin of affine space.**
-For the ideal `I = (x_i)` of the origin in `k[x_i]`, the graded algebra
-`k[x_i][t, I t⁻¹] / (t) = ⨁_r I^r / I^{r+1}` is the polynomial ring `k[x_i]`, `x_i` going to the
-class of `x_i t⁻¹`, i.e. of `x_i ∈ I / I²`. -/
+/-- **The normal cone of the origin of affine space.** For the ideal `I = (x_i)` of the origin in
+`k[x_i]`, the graded algebra `k[x_i][t, I t⁻¹] / (t) = ⨁_r I^r / I^{r+1}` is the polynomial ring
+`k[x_i]`, `x_i` going to the class of `x_i t⁻¹`, i.e. of `x_i ∈ I / I²`. -/
 noncomputable def mvPolynomialOriginReesQuotEquiv :
     MvPolynomial σ C ≃+* (mvPolynomialOrigin C σ).extendedReesAlgebra ⧸
       span {(mvPolynomialOrigin C σ).extendedReesAlgebraT} :=
@@ -103,8 +102,8 @@ lemma mvPolynomialOriginReesQuotEquiv_C (c : C) :
   congr 1
   exact Subtype.ext (by simp [mvPolynomialToLaurent_C])
 
-/-- (blueprint `example-normal-cone-point`) The associated graded ring `⨁_r I^r / I^{r+1}` of the
-ideal `I = (x_i)` of the origin of affine space is a polynomial ring over `k` in the `x_i`. -/
+/-- The associated graded ring `⨁_r I^r / I^{r+1}` of the ideal `I = (x_i)` of the origin of affine
+space is a polynomial ring over `k` in the `x_i`. -/
 theorem nonempty_mvPolynomial_ringEquiv_associatedGraded_mvPolynomialOrigin :
     Nonempty (MvPolynomial σ C ≃+* associatedGraded (mvPolynomialOrigin C σ)) := by
   obtain ⟨e, -⟩ := rees_associatedGraded_chart (mvPolynomialOrigin C σ)
@@ -116,10 +115,9 @@ namespace IsLocalRing
 
 variable (R : Type*) [CommRing R] [IsRegularLocalRing R]
 
-/-- (blueprint `example-normal-cone-point`) **The normal cone at a smooth point.** For a regular
-local ring `R` of dimension `n` with maximal ideal `𝔪`, the graded algebra
-`R[t, 𝔪 t⁻¹] / (t) = ⨁_r 𝔪^r / 𝔪^{r+1}` is a polynomial ring in `n` variables over the residue
-field. -/
+/-- **The normal cone at a smooth point.** For a regular local ring `R` of dimension `n` with
+maximal ideal `𝔪`, the graded algebra `R[t, 𝔪 t⁻¹] / (t) = ⨁_r 𝔪^r / 𝔪^{r+1}` is a polynomial ring
+in `n` variables over the residue field. -/
 theorem exists_mvPolynomial_residueField_equiv_reesQuot :
     ∃ n : ℕ, ringKrullDim R = n ∧ Nonempty (MvPolynomial (Fin n) (ResidueField R) ≃+*
       (maximalIdeal R).extendedReesAlgebra ⧸
@@ -137,9 +135,8 @@ theorem exists_mvPolynomial_residueField_equiv_reesQuot :
     hreg.toIsWeaklyRegular s.card (Finset.length_toList s)
   exact ⟨s.card, hd, ⟨Ideal.mvPolynomialEquivReesQuotOfEq a ha (haspan.trans hrs.1)⟩⟩
 
-/-- (blueprint `example-normal-cone-point`) For a regular local ring `R` of dimension `n`, the
-associated graded ring `⨁_r 𝔪^r / 𝔪^{r+1}` is a polynomial ring in `n` variables over the
-residue field. -/
+/-- For a regular local ring `R` of dimension `n`, the associated graded ring `⨁_r 𝔪^r / 𝔪^{r+1}` is
+a polynomial ring in `n` variables over the residue field. -/
 theorem exists_mvPolynomial_residueField_ringEquiv_associatedGraded :
     ∃ n : ℕ, ringKrullDim R = n ∧
       Nonempty (MvPolynomial (Fin n) (ResidueField R) ≃+*

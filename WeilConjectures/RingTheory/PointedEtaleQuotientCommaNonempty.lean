@@ -14,7 +14,17 @@ import WeilConjectures.RingTheory.PointedEtaleQuotientPointBijective
 
 /-! # Nonemptiness of pointed base-change comma categories
 
-Source: Stacks Project, Tag 04D1; the pointed form of Tag 05WS.
+Every comma category of the pointed étale base-change functor along a surjection is nonempty.
+
+## Implementation details
+
+The coefficient-lift theorem gives an étale `A`-algebra `S` whose reduction is isomorphic to the
+given `B`-algebra `T`; the point-bijection theorem lifts the point of `T` to a point of `S`.
+
+## References
+
+* [Stacks, Tag 04D1]
+* [Stacks, Tag 05WS]
 -/
 
 @[expose] public section
@@ -113,23 +123,8 @@ private theorem comma_nonempty_of_point_surjective
 
 
 
-/-- Every pointed etale B-algebra has a map to a pointed base change.
-Source: Stacks Project, Tag 04D1; step 2 of
-`lem-sbc-pointed-etale-quotient-final`.
-(blueprint: lem-sbc-pointed-etale-quotient-comma-nonempty)
-
-Proof: Identify B with A/ker π. Apply the existing coefficient-lift theorem to
-the underlying B-algebra of T. Its explicit Jacobian quotient S is etale over A,
-and its reduction map is a pushout with π: factor any test cocone through the
-quotient and the specified reduction equivalence. Uniqueness follows from
-surjectivity of reduction. This yields an isomorphism e:H(S) -> T over B.
-
-Maps S -> K correspond bijectively to maps H(S) -> H(K), by the proved
-point-bijection theorem. Lift the point e followed by T -> L and c inverse
-through that bijection, thereby giving S its A-algebra map to K. The equation
-of the lifted point says that e inverse is a pointed map T -> F(S). This is
-the required structured arrow. The lift ring is the genuine coefficient-lift
-quotient already constructed in the library. -/
+/-- Every pointed étale `B`-algebra has a map to a pointed base change of a pointed étale
+`A`-algebra. -/
 theorem pointedEtaleQuotient_comma_nonempty
     (A K B L : Type u) [CommRing A] [IsLocalRing A] [Field K]
     [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]

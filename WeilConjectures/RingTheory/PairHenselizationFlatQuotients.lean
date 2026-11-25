@@ -14,8 +14,19 @@ import WeilConjectures.RingTheory.BijectiveQuotientMapPowOfFlat
 /-!
 # Flatness and ideal-power quotients of a pair henselization
 
-Source: Stacks Project, More on Algebra, Lemma 15.12.2, Tag 0AGU
-(blueprint: lem-weil-pbc-henselization-flat-quotients).
+The structure map of the henselization of a pair `(A, I)` is flat and induces isomorphisms on
+quotients by every positive power of `I`.
+
+## Implementation details
+
+The cocone and its colimit condition are those of `pair_henselization`. Flatness follows from
+`RingHom.Flat.iff_ind_flat`, since the stages are étale; then
+`RingHom.bijective_quotientMap_pow_of_flat` upgrades bijectivity modulo `I` to all powers,
+avoiding colimits of the quotients for each power.
+
+## References
+
+* [Stacks, Tag 0AGU]
 -/
 
 @[expose] public section
@@ -26,26 +37,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace RingTheory
 
-/-- The structure map of the pair henselization is flat and induces isomorphisms on
-quotients by every positive power of the ideal. The cocone and its colimit condition
-are exactly those in `pair_henselization`; its vertex is `Aʰ`, and its map is `η`.
-The extended ideal is `I.map η`, and `Ideal.map_pow` identifies the extension of
-`I ^ n` with `(I.map η) ^ n`.
-Source: Stacks Project, More on Algebra, Lemma 15.12.2, Tag 0AGU
-(blueprint: lem-weil-pbc-henselization-flat-quotients).
-
-Proof:
-1. `pair_henselization` supplies essential smallness and filteredness of the diagram.
-2. Its stages are flat because they are etale. The existing source-library theorem
-   `RingHom.Flat.iff_ind_flat`, together with `ObjectProperty.of_essentiallySmall_index`,
-   gives flatness of the colimit structure map.
-3. `pair_henselization` also supplies a colimit whose quotient map modulo I is bijective.
-   The unique isomorphism between colimits is an A-algebra isomorphism, hence identifies
-   the extended ideals. Its induced quotient equivalence transports this bijectivity
-   to the given colimit.
-4. Apply `RingHom.bijective_quotientMap_pow_of_flat` directly to this flat structure map
-   and its bijective quotient map modulo I. This avoids taking colimits of the quotients
-   separately for each power. -/
+/-- The structure map `η : A → Aʰ` of the pair henselization is flat and induces isomorphisms
+`A / I^n ≅ Aʰ / (I.map η)^n` for every positive `n`. -/
 theorem pair_henselization_flat_quotients (A : Type u) [CommRing A] (I : Ideal A)
     (c : Cocone (ObjectProperty.ι
       (fun B : Under (CommRingCat.of A) ↦

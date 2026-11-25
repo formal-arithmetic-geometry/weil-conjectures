@@ -13,9 +13,17 @@ import Mathlib.RingTheory.KrullDimension.Zero
 /-!
 # Dimension of a localized polynomial ring at a maximal ideal
 
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00OP
-(lemma-dim-affine-space, line 27660) (blueprint:
-lem-weil-pbc-polynomial-ring-maximal-localization-dimension).
+For a field `k`, the localization of `k[X₁, …, Xₙ]` at any maximal ideal has Krull dimension `n`.
+
+## Implementation details
+
+The proof inducts on the number of variables using `finSuccEquiv`,
+`Polynomial.isMaximal_comap_C_of_isJacobsonRing` and `Polynomial.height_eq_height_add_one`. This
+avoids the explicit construction of generators and prime chains in the Stacks Project proof.
+
+## References
+
+* [Stacks, Tag 00OP]
 -/
 
 @[expose] public section
@@ -48,26 +56,6 @@ private theorem height_maximal_eq_numVariables {k : Type u} [Field k] (n : ℕ)
 /--
 For a field `k`, the localization of `k[X₁, …, Xₙ]` at any maximal ideal has
 Krull dimension `n`.
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00OP
-(lemma-dim-affine-space).
-(blueprint: lem-weil-pbc-polynomial-ring-maximal-localization-dimension).
-
-Proof by induction on the number of variables, using Mathlib's polynomial height theorem:
-1. For zero variables the polynomial ring has dimension zero, since `k` is a field.
-   The height of a maximal ideal is at most that dimension, hence is zero.
-2. Identify the polynomial ring in `n + 1` variables with `(MvPolynomial (Fin n) k)[T]`
-   using `finSuccEquiv`. Transport the maximal ideal through this ring equivalence;
-   `RingEquiv.height_map` preserves its height.
-3. The coefficient ring is Noetherian and Jacobson. By
-   `Polynomial.isMaximal_comap_C_of_isJacobsonRing`, the contraction of the transported
-   ideal is maximal. Apply the induction hypothesis to this contraction and then
-   `Polynomial.height_eq_height_add_one` to obtain height `n + 1`.
-4. Finally `IsLocalization.AtPrime.ringKrullDim_eq_height` identifies the dimension of
-   the localization with the height just computed.
-
-The height and contraction lemmas are in Mathlib.RingTheory.KrullDimension.Polynomial
-and Mathlib.RingTheory.Jacobson.Ring, respectively. This avoids the explicit construction
-of generators and prime chains in the source's proof of Tag 00OP.
 -/
 theorem ringKrullDim_localizationAtMaximal {k : Type u} [Field k] (n : ℕ)
     (M : Ideal (MvPolynomial (Fin n) k)) [M.IsMaximal] :

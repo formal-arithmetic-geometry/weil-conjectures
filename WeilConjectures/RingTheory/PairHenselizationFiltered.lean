@@ -11,6 +11,22 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Filtered.Basic
 import WeilConjectures.Mathlib.RingTheory.Etale.Basic
 
+/-!
+# Filteredness of étale algebras trivial modulo an ideal
+
+The category of étale `B`-algebras which are trivial modulo `J` is filtered.
+
+## Implementation details
+
+The identity algebra is an object, `C ⊗[B] D` gives common successors, and for parallel maps
+`f, g : C → D` the algebra `(D ⊗[C] D) ⊗[D ⊗[B] D] D` coequalizes them. All of these are étale
+by base change and cancellation and reduce to `B / J` modulo `J`.
+
+## References
+
+* [Stacks, Tag 0A02]
+-/
+
 @[expose] public section
 
 universe u
@@ -131,23 +147,7 @@ private theorem quotient_tower_bijective_iff (R S T : Type u)
   exact ((Function.Bijective.of_comp_iff' e.bijective qS).symm.trans
     (Function.Bijective.of_comp_iff (e ∘ qS) hS).symm)
 
-/-- Filteredness of the category of etale algebras trivial modulo the ideal.
-Source: Stacks Project, Tag 0A02, directedness paragraph.
-(blueprint: lem-weil-pbc-pair-henselization-filtered).
-
-Proof: Write R = B/J. The identity B-algebra is an object, so the category is nonempty.
-For two objects C and D use C tensor_B D. Base change and composition preserve etaleness,
-and its reduction is (C/JC) tensor_R (D/JD), canonically R. The two factor maps give
-common successors. Every map between etale B-algebras is etale by cancellation.
-For parallel maps f,g : C to D put E = D tensor_(f,C,g) D and
-T = E tensor_(D tensor_B D) D, using multiplication for the last map to D.
-The right factor D to E is a base change of f. The multiplication D tensor_B D to D
-is etale by cancellation, so its base change E to T is etale as well. Thus T is etale
-over B. Reduction of this entire diagram modulo J replaces each algebra by R and each
-map by its identity, whence T/JT is R with the required structure map.
-The map D to T identifies the images of d tensor 1 and 1 tensor d, since both become d
-under multiplication. In E, f(c) tensor 1 equals 1 tensor g(c), so this map coequalizes
-f and g. These three constructions establish all the filteredness axioms. -/
+/-- The category of étale `B`-algebras trivial modulo `J` is filtered. -/
 theorem pair_henselization_filtered (B : Type u) [CommRing B] (J : Ideal B) :
     IsFiltered (ObjectProperty.FullSubcategory
       (fun C : Under (CommRingCat.of B) ↦

@@ -17,8 +17,22 @@ import WeilConjectures.RingTheory.FiniteOverCompleteLocalProduct
 /-!
 # Finite product presentation of extended polynomial formal fibres
 
-Source: Stacks Project, More on Algebra, proof of Lemma 07PU, first paragraph.
-(blueprint: lem-weil-pbc-polynomial-formal-fibre-finite-reduction)
+A finite purely inseparable base change of a nonzero polynomial formal fibre above zero is a
+finite product of linear-residue formal fibres over complete local domains.
+
+## Implementation details
+
+Clearing denominators of generators of `L / K` gives a finite `A`-subalgebra `B` of `L` with
+fraction field `L`, which is complete local (Tag 0325). The kernel `s` of evaluation `B[X] → L`
+has residue field `L`, and Tag 07N9 writes the completion base change as a product over the
+primes above `q`; the factors at primes not containing `s` vanish. The empty product is allowed.
+All rings `Bᵢ` lie in the universe of `L`, as subalgebras of `L`.
+
+## References
+
+* [Stacks, Tag 07PU] (first paragraph of the proof)
+* [Stacks, Tag 0325]
+* [Stacks, Tag 07N9]
 -/
 
 @[expose] public section
@@ -30,35 +44,7 @@ namespace Polynomial
 set_option linter.unusedVariables false in
 /-- A finite purely inseparable base change of a nonzero polynomial formal fibre above
 zero is a finite product of linear-residue formal fibres over complete local domains.
-This is a ring presentation, with no regularity assertion.
-Source: Stacks Project, More on Algebra, proof of Lemma 07PU, first paragraph.
-(blueprint: lem-weil-pbc-polynomial-formal-fibre-finite-reduction)
-
-Proof:
-Fix L/κ(r) as in the statement. Since r is nonzero and above zero, its extension to
-K[X] is a nonzero maximal ideal, where K is the fraction field of A. Thus κ(r), and
-hence L, is finite over K. Choose finitely many generators of L/K. Multiply them by
-a common nonzero coefficient denominator to make them integral over A, by clearing
-the coefficients of their monic equations with successive powers of the denominator.
-Their generated A-subalgebra B inside L is finite over A, a domain, and has fraction
-field L. Tag 0325 makes it Noetherian, local and complete, with its unique maximal
-ideal above that of A. Evaluation B[X] → L sends X to its image in κ(r). Its prime
-kernel s contracts to zero in B; it is nonzero because a nonzero element of r remains
-nonzero under the injective coefficient extension A[X] → B[X]. The image B[X]/s
-contains B inside L, so its fraction field, hence κ(s), is L. The canonical B-algebra
-structure on κ(s) therefore makes it a fraction field of B.
-Apply Tag 07N9 to the finite extension A[X] → B[X] at q. Its completion base change
-is a finite product of the completions at primes qᵢ above q. Each qᵢ is maximal by
-integrality. Its contraction to B is the unique prime above the maximal ideal of A,
-hence the maximal ideal of B. Tensor with L and use associativity and finite-product
-distributivity to identify L ⊗[κ(r)] r.Fiber C with the product of the s-fibres of
-these completions. If s is not contained in qᵢ, an element of s outside qᵢ is both
-zero and invertible in the fibre, so that factor is zero. Removing zero factors from
-a product is a ring isomorphism, with the unique zero coordinate supplied by its
-inverse. Index the remaining finitely many qᵢ by Fin n; for each let Bᵢ be a copy of
-B, sᵢ a copy of s, and retain the indicated qᵢ. All requested structures and ideal
-relations follow from the construction. No factors is permitted: the empty product
-is the zero ring. All rings Bᵢ lie in the universe of L, as subalgebras of L. -/
+This is a ring presentation, with no regularity assertion. -/
 theorem formalFiber_finiteExtension_reduction
     (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsLocalRing A]
     [IsAdicComplete (IsLocalRing.maximalIdeal A) A]

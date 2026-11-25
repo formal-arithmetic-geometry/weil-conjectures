@@ -13,7 +13,20 @@ import WeilConjectures.RingTheory.PointedEtaleQuotientMorphismLift
 
 /-! # Common refinements in pointed base-change comma categories
 
-Source: Stacks Project, Tags 04GW, 04D1 and 05WS.
+Any two objects of a comma category of the pointed étale base-change functor have a common
+successor.
+
+## Implementation details
+
+Filteredness of the source gives a common source `U`; the induced parallel arrows into `F(U)` are
+equalized in the filtered target, and the equalizing morphism is lifted by the relative pointed
+étale lifting lemma.
+
+## References
+
+* [Stacks, Tag 04GW]
+* [Stacks, Tag 04D1]
+* [Stacks, Tag 05WS]
 -/
 
 @[expose] public section
@@ -47,21 +60,7 @@ private theorem common_refinement_of_filtered
     change (b ≫ h) ≫ e.inv = (a ≫ h) ≫ e.inv
     rw [heq]
 
-/-- Two pointed comma objects admit a common successor.
-Source: Stacks Project, Tags 04GW (filteredness) and 04D1 (relative lifting),
-used in the pointed-colimit argument of Tag 05WS.
-(blueprint: lem-sbc-pointed-etale-quotient-comma-refinement)
-
-Proof: Filteredness of the source supplies U and arrows from the sources of X
-and Y. The induced arrows a,b:T -> F(U) are parallel in the target, which is
-also filtered, so find h:F(U) -> V with a followed by h equal to b followed by h.
-Lift h by the relative pointed etale lifting lemma: obtain W, k:U -> W and
-an isomorphism e:F(W) -> V with F(k) followed by e equal to h. Take the comma
-object with source W and arrow T -> F(W) given by a followed by h and e inverse.
-The two source arrows followed by k yield comma morphisms from X and Y. Their
-commuting equations are exactly the equalizing equation and the lifting equation.
-This uses the already proved filteredness theorem and requires no separate
-scheme-level diagonal construction. -/
+/-- Two objects of a pointed base-change comma category admit a common successor. -/
 theorem pointedEtaleQuotient_comma_refinement
     (A K B L : Type u) [CommRing A] [IsLocalRing A] [Field K]
     [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]

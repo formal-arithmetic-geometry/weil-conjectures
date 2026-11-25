@@ -14,7 +14,18 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # The colimit of the explicit closed-fibre system
 
-Source: Stacks Project, Algebra, Tag 00R7, proof by Noetherian approximation.
+The explicit closed-fibre systems of a Noetherian local model tower have the closed fibre as
+colimit, with a unique compatible scalar action.
+
+## Implementation details
+
+The ring comparison comes from `fiberSCoconeIsColimit` and the module comparison from
+`fiber_module_colimit`. Uniqueness of the action holds because every limit scalar and module
+element comes from a common stage, where both semilinearity equations agree.
+
+## References
+
+* [Stacks, Tag 00R7] (proof by Noetherian approximation)
 -/
 
 @[expose] public section
@@ -26,26 +37,8 @@ open scoped TensorProduct
 
 namespace Module
 
-/-- The explicit closed-fibre systems have the expected colimit and scalar action.
-
-Source: Stacks Project, Algebra, Tag 00R7, paragraph beginning with the colimit
-of the maximal ideals, before the second application of Tag 00R6.
-(blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-colimit)
-
-Proof: The middle ring quotient cocone is already proved colimiting in
-fiberSCoconeIsColimit, which constructs fiberAEquiv. The module-only comparison
-fiber_module_colimit supplies an action with semilinear coprojections and an
-additive comparison compatible with this fixed ring equivalence. Package these
-equivalences to obtain the asserted comparison.
-
-For uniqueness, the forgetful functors to types preserve these filtered ring and
-group colimits. Thus every limit scalar and module element comes from a stage.
-Directedness moves both representatives to one common stage. Naturality of the
-coprojections identifies their limit images. Both actions' semilinearity equations
-identify their scalar product with the image of the same stage scalar product.
-Module.ext' and proof irrelevance identify their Module structures. This proves
-uniqueness without using a module comparison or flatness hypothesis.
--/
+/-- The explicit closed-fibre systems have the expected colimit and scalar action, and this
+scalar action is unique. -/
 theorem NoetherianLocalModelTower.fiber_colimit
     {R : Type u} {S : Type v} {S' : Type w} {M : Type t}
     [CommRing R] [CommRing S] [CommRing S'] [IsLocalRing R] [AddCommGroup M]
