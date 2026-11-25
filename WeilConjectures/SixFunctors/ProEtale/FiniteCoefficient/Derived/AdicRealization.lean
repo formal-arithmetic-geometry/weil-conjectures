@@ -29,21 +29,11 @@ comparison functor. This file proves
 * `K_R ⊗ᴸ_R A_n ≅ ν^* K_n` for every `n`, compatibly with the transitions;
 * if all `K_n` lie in a common range of degrees `[a, b]`, so does `K_R`.
 
-The proof strictifies the étale tower into a normalized adic tower of complexes
-(`DerivedCategory.IsNormalizedTower.exists_iso_isNormalizedAdicTower`), which `ν^*` sends to a
-normalized adic tower of pro-étale complexes (`CochainComplex.IsNormalizedAdicTower.map`); for
-such towers the first two statements hold on any site
-(`WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTowerLimit`). The third uses
-the pro-étale site: countable products of sheaves are exact, so the cohomology of `K_R` sits in
-the exact sequences `0 ⟶ R¹lim_n H^{i-1}(K_n) ⟶ Hⁱ(K_R) ⟶ lim_n Hⁱ(K_n) ⟶ 0`; in the top degree
-`b` the transitions `H^b(K_{n+1}) ⟶ H^b(K_n)` are surjective (right exactness of the base change
-in the top degree), and the pro-étale site is covered by weakly contractible objects, so the
-`R¹lim` term vanishes (`AlgebraicGeometry.ProEtale.epi_one_sub_of_epi`). For the derived limit on
-the étale site itself the range statement is false: the `R¹lim` of a tower of surjections of
-étale sheaves need not vanish.
+## Implementation details
 
-The hypotheses of the blueprint that the levels are bounded constructible of finite Tor
-amplitude, with a common Tor amplitude, are not needed.
+The realization is taken on the pro-étale site: for the derived limit on the étale site itself the
+range statement is false, since the `R¹lim` of a tower of surjections of étale sheaves need not
+vanish. The levels need not be bounded constructible of finite Tor amplitude.
 -/
 
 @[expose] public section
@@ -90,17 +80,10 @@ lemma exists_iso_isNormalizedAdicTower_comparison (hϖ : ϖ ∈ nonZeroDivisors 
     Functor.isoWhiskerRight E _, hT.map⟩
 
 /-- *Realization* of a normalized system of étale complexes: let `K_n ∈ D(X_ét, R ⧸ Iⁿ)` be a
-normalized system (`DerivedCategory.IsNormalizedTower`) with `I = (ϖ)`, `ϖ` a nonzerodivisor,
-and let `K_R = R lim_n ν^* K_n` be the derived limit in
-`D(X_proét, R)` of its pullback by the comparison functor `ν^*` (the point of a homotopy limit
-cone `c`). Then
-1. `K_R` is derived complete;
-2. `K_R ⊗ᴸ_R R ⧸ Iⁿ ≅ ν^* K_n` for every `n`, compatibly with the transitions, the legs
-   `K_R ⟶ ν^* K_n` of `c` being the reduction maps followed by these isomorphisms;
-3. if the `K_n` share a range of degrees `[a, b]`, then `K_R` lies in `[a, b]`.
-
-The range statement is false for the derived limit on the étale site, which is why the
-realization is taken on the pro-étale site. -/
+normalized system with `I = (ϖ)`, `ϖ` a nonzerodivisor, and let `K_R = R lim_n ν^* K_n` be the
+derived limit in `D(X_proét, R)` of its pullback by the comparison functor `ν^*`. Then `K_R` is
+derived complete, `K_R ⊗ᴸ_R R ⧸ Iⁿ ≅ ν^* K_n` for every `n` compatibly with the transitions, and
+if the `K_n` share a range of degrees `[a, b]`, then `K_R` lies in `[a, b]`. -/
 theorem derivedComplete_and_exists_iso_of_isNormalizedTower
     (hϖ : ϖ ∈ nonZeroDivisors R) (hI : I = Ideal.span {ϖ})
     (hK : DerivedCategory.IsNormalizedTower X.smallEtaleTopology I K L)

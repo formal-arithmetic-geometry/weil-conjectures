@@ -10,8 +10,9 @@ import WeilConjectures.CategoryTheory.Adjunction.ProperBaseChange.CoefficientExc
 
 /-! # Adjunction algebra for reduction of the exchange arrow
 
-Source: Bhatt--Scholze, Remark 6.8.15, and the calculus of adjunction mates.
-(blueprint: lem-weil-pbc-integral-residue-exchange-algebra)
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15.
 -/
 
 set_option backward.defeqAttrib.useBackward true
@@ -103,18 +104,7 @@ private theorem pull_square (sq : CommSq g' f' f g)
           ((c.pull f).hom.app K))
       (c.comp f' g K) (c.comp g' f K) he)
 
-/-- Coherent reduction pull comparisons transport the actual ambient exchange arrow.
-
-Source: Bhatt--Scholze, Remark 6.8.15, and Mathlib's adjunction mates.
-(blueprint: lem-weil-pbc-integral-residue-exchange-algebra)
-
-Proof. The composition equations for the two paths around the scheme square imply
-its coefficient pull cube, after cancellation of the first composition isomorphism.
-Equality of the composite scheme maps transports the middle comparison by eqToHom
-naturality. Both exchange arrows are mates of these square maps. The push comparisons
-are mates of the inverse pull comparisons. Their counit identities therefore follow
-from mateEquiv_counit. The abstract coefficient-exchange calculation applies. No
-comparison or exchange map is assumed invertible. -/
+/-- Coherent reduction pull comparisons transport the actual ambient exchange arrow. -/
 theorem integralResidue_exchange_square (sq : CommSq g' f' f g)
     (K : residueExchangeDerived (integralCoeff ℓ E) X) :
     (c.pull g).hom.app ((residueExchangeLowerStar (integralCoeff ℓ E) f).obj K) ≫

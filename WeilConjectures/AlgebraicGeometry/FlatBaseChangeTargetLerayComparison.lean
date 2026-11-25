@@ -39,8 +39,6 @@ private theorem equiv_transport_commutative_square
   exact (congrArg b ((hk (e.symm y)).trans
     (congrArg k (e.apply_symm_apply y)))).symm.trans (hb (e.symm y))
 
-set_option linter.style.haveILetI false in
--- Inline the canonical algebra to match the letI in the fixed statement.
 /-- Choose the natural source module/Ext comparison together with the target affine
 Leray equivalence, compatibly with the cohomological pullback. This does not construct
 or assume a source tensor comparison, nor assert invertibility of base change
@@ -81,7 +79,7 @@ theorem exists_flatBaseChange_target_leray_comparison
                  (moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
                    ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p (e0.symm xi)))) := by
   classical
-  letI : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
+  let : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
   intro h N Q
   let c := (restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F
   refine (exists_moduleCohomology_ext_pullback_comparison (B := Γ(S', W)) h p).elim

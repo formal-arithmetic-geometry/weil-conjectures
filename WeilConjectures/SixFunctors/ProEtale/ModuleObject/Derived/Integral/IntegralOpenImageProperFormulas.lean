@@ -27,9 +27,6 @@ import WeilConjectures.AlgebraicGeometry.IntegralOpenDirectImage.IntegralOpenDir
 /-!
 # Integral open direct image and proper formulas
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-pf-adic/_section.md
-(blueprint: lemma-projection-formula-integral-coefficients).
-
 The three statements use internal modules over the pulled-back condensed ring of integers.
 The base change and projection conclusions include membership of both endpoints in the
 localizing closure. Since this is a full subcategory, ambient invertibility then says exactly
@@ -68,19 +65,6 @@ variable {U X : Scheme.{u}} [U.Over (Spec (.of k))] [X.Over (Spec (.of k))]
   [IsSeparated (X ↘ Spec (.of k))]
 
 /-- Quasi-compact open direct image preserves bounded constructible finite-Tor objects.
-Source: blueprint main-20261015, lemma-projection-formula-integral-coefficients, first assertion
-(blueprint: lemma-projection-formula-integral-coefficients).
-
-Proof: the standing finite-type separated hypotheses give qcqs by
-lem-weil-pbc-qcqs-over-affine. Apply clause (2) of
- det-def-localizing-closure-ctf-equals-bc to identify Dctf with Dbc for O_E.
-The proved integer-ring isomorphism identifies the embedded and spectral coefficient
-presentations. Exact scalar restriction preserves bounded constructible cohomology, and
-its derived direct-image comparison transports proposition-direct-image-along-open-immersion--1 back
-to the pulled-back embedded coefficient ring. Its final conclusion places Rj_*K in Dbc(X,O_E); the
-same identification gives Dctf(X,O_E). That detail theorem proves derived completeness by
-Stacks 099L, identifies residue reduction with the direct image of the reduction because
-reduction is a cone, applies torsion open finiteness, then uses the residue criterion 09C1.
 -/
 theorem integralOpenDirectImage (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     [j.IsOver (Spec (.of k))]

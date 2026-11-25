@@ -357,13 +357,12 @@ theorem integralIndConstructibleHeartClosure_of_isNoetherian
   · intro I M c hc hM
     exact ind_coproduct H hfp (constructible_finite_coproduct Λ X) I M c hc hM
 
-set_option linter.unusedVariables false in
 /-- The filtered-colimit closure of integral constructibles is a weak Serre class
 and is closed under ambient small coproducts. This is a statement in the abelian
 module category; it involves neither derived truncations nor localizing subcategories. -/
 theorem integralIndConstructibleHeartClosure
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)
+    (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (_hp₀ : 0 < p₀) (_hpℓ : p₀ ≠ ℓ)
     (X : Scheme.{u}) [X.Over (Spec (.of k))]
     [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
     [QuasiCompact (X ↘ Spec (.of k))] :

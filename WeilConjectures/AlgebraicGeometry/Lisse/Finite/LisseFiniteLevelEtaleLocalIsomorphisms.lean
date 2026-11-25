@@ -23,7 +23,6 @@ set_option genInjectivity false
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genCtorIdx false
-set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -57,7 +56,7 @@ theorem lisse_finite_level_etale_local_isomorphisms
           (adicTowerPullback (W.hom ≫ g)
             ((pbcAdicRings X d).obj (op n))).obj N)) :
     ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ U.left),
-      ∃ (V : U.left.Etale) (v : (pointSmallEtale x).fiber.obj V),
+      ∃ (V : U.left.Etale) (_v : (pointSmallEtale x).fiber.obj V),
         Nonempty ((localIsomorphismRestriction U.left
           (lisseTowerEtaleRing d n) V).obj
             ((normalizationConstant U.left.smallEtaleTopology).obj E) ≅

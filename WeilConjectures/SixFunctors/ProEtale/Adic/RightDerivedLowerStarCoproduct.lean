@@ -18,22 +18,12 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarFil
 
 For a quasi-compact quasi-separated morphism `f : Y ⟶ X`, the derived direct image
 `Rf_* : D(AdicSheaf l Y) ⥤ D(AdicSheaf l X)` commutes with coproducts of uniformly bounded below
-families (`AlgebraicGeometry.ProEtale.preservesColimit_discrete_rightDerivedFunctor_adicLowerStar`,
-blueprint `corollary-continuity-cohomology--2`; SGA 4 VI 5.1).
+families (`AlgebraicGeometry.ProEtale.preservesColimit_discrete_rightDerivedFunctor_adicLowerStar`).
 
-The proof has three steps:
+## References
 
-* the higher direct images `Rᵠf_*` of `ℓ`-adic sheaves commute with direct sums
-  (`AlgebraicGeometry.ProEtale.isIso_sigmaComparison_rightDerived_adicLowerStar`): taking
-  underlying abelian sheaves preserves direct sums, reflects isomorphisms and commutes with
-  `Rᵠf_*` (`AlgebraicGeometry.ProEtale.rightDerivedAdicLowerStarToAbIso`), and the statement for
-  abelian sheaves is
-  `AlgebraicGeometry.ProEtale.preservesColimitsOfShape_discrete_rightDerived_lowerStar`;
-* hence `Rf_*` commutes with direct sums of sheaves placed in degree `0`, by comparing
-  cohomology sheaves, and then with direct sums of uniformly bounded families, by dévissage
-  (`DerivedCategory.isIso_sigmaComparison_of_isGE_of_isLE_of_homologyProperty`);
-* finally the way-out argument `DerivedCategory.isIso_sigmaComparison_of_isGE`, `Rf_*` being
-  left t-exact.
+* SGA 4 VI 5.1
+* Bhatt–Scholze, *The pro-étale topology for schemes*
 -/
 
 @[expose] public section
@@ -110,11 +100,10 @@ lemma isIso_sigmaComparison_rightDerivedFunctor_adicLowerStar_singleFunctor {B :
 
 end
 
-/-- **The derived direct image commutes with bounded below coproducts** (SGA 4 VI 5.1;
-Bhatt–Scholze, *The pro-étale topology for schemes*, the pro-étale topos of a qcqs scheme being
-coherent): for a quasi-compact quasi-separated morphism `f : Y ⟶ X`, the derived direct image
-`Rf_*` of `ℓ`-adic pro-étale sheaves preserves the coproduct of a `ℤ`-indexed family of
-complexes which are uniformly bounded below. -/
+/-- **The derived direct image commutes with bounded below coproducts**: for a quasi-compact
+quasi-separated morphism `f : Y ⟶ X`, the derived direct image `Rf_*` of `ℓ`-adic pro-étale
+sheaves preserves the coproduct of a `ℤ`-indexed family of complexes which are uniformly bounded
+below. -/
 theorem preservesColimit_discrete_rightDerivedFunctor_adicLowerStar {Y X : Scheme.{u}}
     (f : Y ⟶ X)
     [QuasiCompact f] [QuasiSeparated f] (K : ℤ → DerivedCategory (ProEtale.AdicSheaf l Y))

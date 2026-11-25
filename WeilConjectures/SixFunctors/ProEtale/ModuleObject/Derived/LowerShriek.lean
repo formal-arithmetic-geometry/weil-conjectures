@@ -42,7 +42,6 @@ pushforward `g_*` is derived via K-injective resolutions.
   `ProEtale.CondensedRing.rightDerivedLowerShriekPlusCompatibility` : the bounded below
   `Rf_!` is the restriction of the unbounded `Rf_!` along the inclusions
   `DerivedCategory.Plus.ι` of the bounded below derived categories.
-
 -/
 
 @[expose] public section
@@ -68,11 +67,8 @@ variable {f : X ⟶ Y} (c : Compactification f)
 
 /-- The derived lower shriek `Rf_! : D(Mod_{Λ_X}) ⥤ D(Mod_{Λ_Y})` attached to a
 compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on the unbounded derived categories of module
-objects: the functor `Di_!` induced on derived categories by the *exact* extension by zero
-`i_!`, followed by the total right derived pushforward `Rg_*`.
-
-Warning: as in the finite-coefficient case, it is deliberately *not* the total right derived
-functor of the composite `i_! ⋙ g_* = f_!`. -/
+objects: the functor `Di_!` induced on derived categories by the exact extension by zero
+`i_!`, followed by the total right derived pushforward `Rg_*`. -/
 noncomputable abbrev rightDerivedLowerShriekOfCompactification :
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ⥤
       DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})

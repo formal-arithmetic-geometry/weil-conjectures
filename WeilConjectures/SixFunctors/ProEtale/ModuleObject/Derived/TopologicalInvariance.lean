@@ -16,13 +16,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 
 For a finite universal homeomorphism `r : X ⟶ X'` of schemes over `Spec k`, the derived pullback
 `Lr^* : Dᵇc(X') ⥤ Dᵇc(X)` is an equivalence with inverse `Rr_*`: the unit of `Lr^* ⊣ Rr_*` is an
-isomorphism (blueprint `lemma-comparison-via-relative-frobenius--1`).
+isomorphism.
 
 ## Main statements
 
 - `ProEtale.CondensedRing.isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction`: the unit
   `𝟭 ⟶ Lr^* ⋙ Rr_*` is an isomorphism.
-
 -/
 
 @[expose] public section
@@ -51,8 +50,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 omit [IsFinite r.left] in
 /-- **Topological invariance** of the bounded constructible derived category: for a finite
 universal homeomorphism `r`, the unit `𝟭 ⟶ Lr^* ⋙ Rr_*` of the adjunction `Lr^* ⊣ Rr_*` is an
-isomorphism, so that `Lr^*` is an equivalence with inverse `Rr_*` (blueprint
-`lemma-comparison-via-relative-frobenius--1`). -/
+isomorphism, so that `Lr^*` is an equivalence with inverse `Rr_*`. -/
 theorem isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction :
     IsIso (boundedConstructibleUpperStarLowerStarAdjunction ℓ r).unit := by
   have := isEquivalence_upperStar_of_isUniversalHomeomorphism (Profinite.padicAlgClRingObj ℓ) r.left

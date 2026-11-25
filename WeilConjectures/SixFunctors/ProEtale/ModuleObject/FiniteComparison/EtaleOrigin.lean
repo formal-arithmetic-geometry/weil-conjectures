@@ -19,20 +19,16 @@ bounded constructible complex `K` of module objects over `Λ_X = p_X^* T̲` on t
 `T`-modules, it is `D(ν^*) K'` for a bounded constructible complex `K'` of étale sheaves of
 `T`-modules (`ProEtale.isEtaleOrigin_of_isConstructible`).
 
-This is the reading on the étale site of the finite coefficient categories of blueprint
-`definition-constructible-sheaves`, in the form needed for blueprint
-`proposition-six-operations-change-coefficients` (1) for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site.
-
-The proof: the cohomology sheaves of `K` are constructible module objects, so the corresponding
-sheaves of `T`-modules are constructible in the intrinsic sense
-(`ProEtale.isConstructible_finiteCoefficientModEquivalence_functor_obj`), and an intrinsically
-bounded constructible pro-étale complex is of étale origin
-(`ProEtale.DerivedCategory.boundedConstructible_of_boundedConstructibleIntrinsic`).
+This is the reading on the étale site of the finite coefficient categories.
 
 ## Main statements
 
 - `ProEtale.isEtaleOrigin_of_isConstructible`: bounded constructible complexes of module objects
   over `Λ_X` are of étale origin.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Corollary 5.1.6 and Section 6.8.
 -/
 
 @[expose] public section
@@ -54,11 +50,7 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [Dis
 discrete commutative ring `T`, a bounded constructible complex `K` of module objects over
 `Λ_X = p_X^* T̲` on `X_proét` corresponds, under `finiteCoefficientDerivedEquivalence`, to a
 complex of étale origin: `D(ν^*) K'` for a bounded constructible complex `K'` of étale sheaves of
-`T`-modules.
-
-This is blueprint `theorem-comparison-constructible-sheaves` (section `chap-The-pro-etale-site`,
-`theorem-bounded-below-cohomology-comparison`); Bhatt–Scholze, *The pro-étale topology for schemes*,
-Corollary 5.1.6 and Section 6.8. -/
+`T`-modules. -/
 theorem isEtaleOrigin_of_isConstructible
     {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj T) X))}

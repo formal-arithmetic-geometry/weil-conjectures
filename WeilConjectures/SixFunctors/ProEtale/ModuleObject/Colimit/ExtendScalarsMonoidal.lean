@@ -25,8 +25,7 @@ are strong monoidal for the derived tensor products
 `ProEtale.CondensedRing.leftDerivedExtendScalarsPadicAlgClMonoidal`), and so are their
 restrictions to the bounded constructible complexes
 `ProEtale.boundedConstructibleExtendScalars` and `ProEtale.constructibleToPadicAlgCl`
-(blueprint `proposition-six-operations-change-coefficients`, clause (1):
-`(K ⊗ M)_{Λ'} ≅ K_{Λ'} ⊗ M_{Λ'}`). They are moreover braided for the Koszul braidings
+(`(K ⊗ M)_{Λ'} ≅ K_{Λ'} ⊗ M_{Λ'}`). They are moreover braided for the Koszul braidings
 `DerivedCategory.braidedCategory'`.
 
 These are instances of `Functor.leftDerivedFunctorMonoidal`: extension of scalars is strong

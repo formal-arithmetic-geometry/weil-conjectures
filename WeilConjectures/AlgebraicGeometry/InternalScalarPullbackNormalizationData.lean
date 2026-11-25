@@ -24,7 +24,6 @@ module categories; they impose no flatness, boundedness or geometric condition.
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedVariables false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false

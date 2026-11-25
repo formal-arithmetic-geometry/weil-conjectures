@@ -557,7 +557,8 @@ def lisseIntegralUnitDiagram : AdicIntegralDiagram l E Y :=
       map_comp := lisseUnitModuleMap_comp l E _ _ _ }) ⋙
         constantSheaf Y.smallEtaleTopology _
 
--- Keep the existing standing hypotheses of this public interface.
+-- An `omit` would drop `[IsNoetherian Y]`, `[Y.IsSeparated]` and the invertibility
+-- of `l` on `Y` from this public statement.
 set_option linter.unusedSectionVars false in
 /-- The constant coefficient system is lisse. -/
 theorem lisseIntegralUnit_isLisse :
@@ -3530,8 +3531,6 @@ def lisseCoefficientDiagramData : LisseCoefficientDiagramData l Y K := by
     simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
     rfl
 
--- Preserve the standing hypotheses of this public interface.
-set_option linter.unusedSectionVars false in
 /-- The category of pairs `(E,F)`, before identifying scalar extensions. -/
 abbrev LisseCoefficientPairs :=
   Pseudofunctor.Grothendieck (lisseCoefficientDiagramData l Y K).diagram

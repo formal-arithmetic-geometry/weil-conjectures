@@ -21,10 +21,6 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 
 /-!
 # Tensor closure of rational localizing categories
-
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-`sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.md` (blueprint:
-proposition-projection-formula-rational-coefficients--1).
 -/
 
 @[expose] public section
@@ -166,29 +162,8 @@ private theorem constantModel_tensor_transport
 /-- The bounded constructible rational coefficient category is closed under derived tensor,
 and its localizing closure is closed under derived tensor.
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-`sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.md` (blueprint:
-proposition-projection-formula-rational-coefficients--1).
-
-The coefficient hypothesis `hΛ` identifies `Λ` with the condensed ring of `E` or of the
-finite-subextension-valued `Q̄_ℓ` as commutative monoid objects (an isomorphism in `Mon`), so
-the ring structure of `Λ`, not only its underlying abelian sheaf, is the node's.
-
-Proof:
-1. Clause (4) of `finiteCoefficientDescentTwoColimit` identifies the constant-model bounded
-   constructible predicate with the existing bounded-constructible predicate for each finite
-   coefficient field and for `Q̄_ℓ`. Apply `boundedConstructible_tensor_closure` there.
-2. Restriction along the coefficient-ring isomorphism is an exact equivalence. It commutes
-   with cohomology and preserves finite constant local models, so it preserves and reflects
-   constant-model bounded constructibility. Its derived monoidal comparison transports
-   step 1 to `Λ`.
-3. The inverse image of a localizing object property under an exact left adjoint is
-   localizing: exactness supplies triangulated closure, and the left adjoint preserves
-   coproducts. Apply this to tensoring in either variable.
-4. For `B ∈ Dbc`, the objects `A` with `A ⊗ᴸ B ∈ Loc(Dbc)` form a localizing subcategory
-   containing `Dbc` by step 2. Minimality gives the assertion for `A ∈ Loc(Dbc)`.
-   Fixing such an `A`, repeat in the second variable to obtain clause (2).
--/
+The coefficient hypothesis `hΛ` identifies `Λ` with the condensed ring of `E` or of `Q̄_ℓ` as
+commutative monoid objects, so the ring structure of `Λ` is respected. -/
 theorem constantModelBoundedConstructible_derivedTensor
     (ℓ : ℕ) [Fact ℓ.Prime]
     {k : Type u} [Field k] (p : ℕ) [CharP k p] (hpl : p ≠ ℓ)

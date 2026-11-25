@@ -14,8 +14,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProEtale
 /-!
 # A single composition model on the localizing closure
 
-Source: blueprint proposition-composition-base-change-rf-shriek--1, The composition isomorphism
-(blueprint: lem-sfb-localizing-lower-shriek-composition-model).
+For one compactification triple, the composition isomorphism for `Rf_!` exists on the
+localizing closure.
 -/
 
 @[expose] public section
@@ -143,28 +143,7 @@ private theorem exists_interchangeNatTrans
 
 /-- Some compactification triple admits the composition isomorphism in the ambient
 unbounded derived category, with the source restricted to the localizing closure.
-No refinement compatibility or preservation witness is part of this assertion.
-
-Source: blueprint proposition-composition-base-change-rf-shriek--1, The composition isomorphism
-(blueprint: lem-sfb-localizing-lower-shriek-composition-model).
-
-Proof: take dense compactifications f = jp and g = iq by Nagata. Compactify pi as
-ur with u dense. The proper maps r and q compose and the quasi-compact open maps
-j and u compose, giving a compactification of fg. Extension by zero for j sends
-the localizing closure into the closure on its target, by open-immersion preservation.
-Proper/open interchange supplies its normalized map i! Rp* A to Rr* u! A for every
-unbounded A, and makes it invertible on this closure. Its normalization is natural:
-write the normalization as U(m) b = a using the invertible open unit.
-For two arrows from F(A) to G(B) with equal normalized restrictions, insert their
-difference as the off-diagonal block on A ⊞ B. Adding this block to the unique
-normalized component contradicts uniqueness unless the block is zero. Taking
-the two off-diagonal projections equates the original arrows. Naturality of a
-and b now applies this cancellation to the two naturality composites. Thus at
-A = j! K these maps form a natural isomorphism on the source closure. Apply Rq*.
-Transpose the exact open adjunctions
-to identify j! u! with (ju)!, and use the canonical derived direct-image compositor
-to identify Rr* Rq* with R(rq)*. This gives the displayed isomorphism. Only one
-triple is claimed, so no comparison between auxiliary choices is required. -/
+No refinement compatibility or preservation witness is part of this assertion. -/
 theorem exists_localizingLowerShriekComposition_model
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

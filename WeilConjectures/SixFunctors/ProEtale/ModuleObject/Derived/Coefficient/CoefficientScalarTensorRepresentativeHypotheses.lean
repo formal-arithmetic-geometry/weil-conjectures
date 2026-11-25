@@ -5,8 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorRepresentativeData
-/-! # Normalization hypotheses for the scalar tensor representative
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative-internal) -/
+/-! # Normalization hypotheses for the scalar tensor representative -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u

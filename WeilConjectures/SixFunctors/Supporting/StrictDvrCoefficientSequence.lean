@@ -16,9 +16,13 @@ import all WeilConjectures.Algebra.Homology.ProEtaleCoefficients.SuccessiveQuoti
 
 /-! # The residue-kernel coefficient sequence
 
-Source: Stacks Project, Tag 0942, proof of lemma-bounded (1), elementary DVR sequence
-and constant realization, together with Modules on Sites Tags 093J and 03CY.
-(blueprint: lem-sf-strict-dvr-coefficient-sequence)
+## References
+
+* [Stacks, Tag 03CY](https://stacks.math.columbia.edu/tag/03CY)
+* [Stacks, Tag 03DA](https://stacks.math.columbia.edu/tag/03DA)
+* [Stacks, Tag 03DB](https://stacks.math.columbia.edu/tag/03DB)
+* [Stacks, Tag 093J](https://stacks.math.columbia.edu/tag/093J)
+* [Stacks, Tag 0942](https://stacks.math.columbia.edu/tag/0942)
 -/
 
 @[expose] public noncomputable section
@@ -380,14 +384,12 @@ private instance strictDvrAbLocallyBijective :
     (AlgebraicGeometry.Scheme.ProEt.topology X).WEqualsLocallyBijective
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} X
 
-/-- The finite coefficient as a module over the completion.
-Source: Stacks 0942 (blueprint: def-sf-strict-dvr-coefficient-sequence-data). -/
+/-- The finite coefficient as a module over the completion. -/
 abbrev strictDvrFiniteCoefficient (n : ℕ) : scalarReductionSource l E X :=
   (scalarReductionRestriction l E X n).obj
     (SheafOfModules.unit (integralCoefficientSheaf l E X n))
 
-/-- The canonical quotient map with its completed-ring action.
-Source: Stacks 0942 (blueprint: def-sf-strict-dvr-coefficient-sequence-data). -/
+/-- The canonical quotient map with its completed-ring action. -/
 def strictDvrCoefficientQuotient (n : ℕ) :
     strictDvrFiniteCoefficient l E X (n + 1) ⟶ strictDvrFiniteCoefficient l E X n where
   val :=
@@ -501,29 +503,7 @@ private theorem finiteQuotient_projection (N k : ℕ) (h : k ≤ N) :
     (limit.w (integralCoefficientSheafSystem l E X) (homOfLE h).op)
 
 /-- Multiplication by the indicated uniformizer power identifies the residue sheaf with
- the kernel of the next quotient, in modules over the completion.
-
-Source: Stacks Project, Tag 0942, proof of lemma-bounded (1), and Modules on Sites
-Tags 093J, 03CY, 03DA and 03DB.
-(blueprint: lem-sf-strict-dvr-coefficient-sequence)
-
-Proof: In the valuation ring R, put A_m = R/(π^m). Multiplication by π^(n+1)
-induces A_1 → A_(n+2): changing a representative by πs changes its image by
-π^(n+2)s. Cancellation of the nonzero π^(n+1) in the domain R proves injectivity.
-The quotient A_(n+2) → A_(n+1) is surjective and its kernel consists precisely of
-classes of π^(n+1)r. The injection is linear over A_(n+2), with the source action
-through A_1, as is checked by lifting the scalar and the section to R. Lift the
-rings and maps by ULift and apply exact constant module realization over A_(n+2).
-For its universe convention, work first on a small skeleton in the coefficient
-universe and transport module sheaves back along the site equivalence; alternatively
-construct the constant module presheaf sectionwise and use exact module sheafification.
-The constant-module sheafification unit identifies these sheaves with the restrictions
-of the constant quotient ring sheaves; the injection has the asserted formula on
-constant sections. Restrict scalars along the completion projection to A_(n+2).
-The limit projection equations identify the outer actions with their recorded
-completion actions. Restriction preserves exactness, since it leaves the underlying
-abelian sheaves unchanged. The resulting quotient is the explicitly constructed
-strictDvrCoefficientQuotient, and the zero equation and short exactness follow. -/
+ the kernel of the next quotient, in modules over the completion. -/
 theorem strictDvrCoefficientSequence :
     ∃ (a : ∀ n : ℕ, strictDvrFiniteCoefficient l E X 0 ⟶
         strictDvrFiniteCoefficient l E X (n + 1)),

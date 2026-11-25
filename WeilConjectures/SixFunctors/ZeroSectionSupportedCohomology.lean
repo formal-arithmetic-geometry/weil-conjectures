@@ -11,15 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Finite.FiniteExceptionalInverseI
 /-!
 # Cohomology with supports in the zero section
 
-Source: blueprint
-literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-the-trace-map-of-affine-space/sk-prop-an/pur9-def-supported-cohomology.md,
-definition pur9-def-supported-cohomology, order 3244
-(blueprint: pur9-def-supported-cohomology).
-
-The base field is arbitrary of positive characteristic different from l, as required
-by the general-field smooth-purity ruling (2026-11-01). The unused finite/algebraically
-closed restriction of the earlier signature is removed.
+The base field is arbitrary of positive characteristic different from l.
 
 This is the displayed Hom definition on the unbounded intrinsic pro-etale derived
 category. The source object is the constant coefficient ring, placed in degree zero.
@@ -39,12 +31,7 @@ namespace WeilConjectures
 /-- Cohomology supported on the zero section of the relative affine line: morphisms
 from the coefficient unit to the shifted exceptional inverse image. The coefficient
 ring is the actual quotient `O_E / (pi_E^n)`, and the coefficient unit is its constant
-ring sheaf regarded as a module over itself and placed in degree zero.
-
-Source: blueprint
-literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-the-trace-map-of-affine-space/sk-prop-an/pur9-def-supported-cohomology.md,
-definition equation, order 3244 (blueprint: pur9-def-supported-cohomology). -/
+ring sheaf regarded as a module over itself and placed in degree zero. -/
 noncomputable def zeroSectionSupportedCohomology
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)

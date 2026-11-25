@@ -53,8 +53,6 @@ private theorem paste_reduction_squares
   simp only [Iso.trans_hom, Functor.map_comp]
   rw [Category.assoc, hj, ← Category.assoc, hi, Category.assoc]
 
--- Preserve the original names of proof binders inside the theorem statement.
-set_option linter.unusedVariables false in
 /-- Local finite constant diagrams, with descent of an effective algebraic cone.
 This statement constructs the finite normalized algebra tower. It requires only
 separate bounds for each level and constructs no complete algebraic object. Its last
@@ -110,7 +108,7 @@ theorem lisse_tower_local_algebraic_reduction_diagram
               DerivedCategory (ModuleCat.{u + 1} (C ⧸ J ^ (n + 1))))
             (adj : ∀ n : ℕ, L n ⊣ (R n).mapDerivedCategory)
             (e₀ : ∀ n : ℕ, (L n).obj E ≅ K n)
-            (he₀ : ∀ (m n : ℕ) (h : n ≤ m),
+            (_he₀ : ∀ (m n : ℕ) (h : n ≤ m),
               (adj m).unit.app E ≫ (R m).mapDerivedCategory.map (e₀ m).hom ≫
                 (Functor.ofOpSequence
                   (X := fun k : ℕ ↦ (R k).mapDerivedCategory.obj (K k)) s).map
@@ -118,12 +116,12 @@ theorem lisse_tower_local_algebraic_reduction_diagram
               (adj n).unit.app E ≫ (R n).mapDerivedCategory.map (e₀ n).hom),
           ∀ (φ : adicLisseConstantRing U.left (AdicCompletion d.ideal A) ⟶
       adicLisseCompletedRing U.left d.ideal)
-            (hφ : ∀ n : ℕ, φ ≫ limit.π (adicLisseRingSystem U.left d.ideal) (op n) =
+            (_hφ : ∀ n : ℕ, φ ≫ limit.π (adicLisseRingSystem U.left d.ideal) (op n) =
       (constantSheaf (ProEt.topology U.left) CommRingCat.{u + 1}).map
         (CommRingCat.ofHom (AdicCompletion.evalₐ d.ideal (n + 1)).toRingHom))
             (β : (adicTowerInverseImage (U.hom ≫ g)).obj (adicLisseCompletedRing X d.ideal) ⟶
       adicLisseCompletedRing U.left d.ideal)
-            (hβ : ∀ n : ℕ, β ≫ limit.π (adicLisseRingSystem U.left d.ideal) (op n) =
+            (_hβ : ∀ n : ℕ, β ≫ limit.π (adicLisseRingSystem U.left d.ideal) (op n) =
       (adicTowerInverseImage (U.hom ≫ g)).map (limit.π (adicLisseRingSystem X d.ideal) (op n)) ≫
         proEtaleConstantInverseImageMap (U.hom ≫ g) CommRingCat.{u + 1}
           (CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))),

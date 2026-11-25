@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 /-!
 # Finite-level bounded constructibility of compactly supported direct images, pro-étale
 
-At a finite coefficient stage `Λ` (in the blueprint `A_{E,n} = 𝒪_E/ϖⁿ`) whose exponent is
+At a finite coefficient stage `Λ` whose exponent is
 invertible on the base field, the compactly supported direct image on the pro-étale site
 preserves bounded constructibility (of étale origin), and shifts the cohomological interval
 `[a, b]` of a complex to `[a, b + 2e]` when the geometric fibres have dimension at most `e`.
@@ -24,8 +24,7 @@ This is deduced from the étale finiteness theorems through the comparison
 ## Main statements
 
 - `AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerShriek` and
-  `AlgebraicGeometry.ProEtale.constructibleIn_rightDerivedLowerShriek`
-  (`theorem-results-from-etale-theory--3`).
+  `AlgebraicGeometry.ProEtale.constructibleIn_rightDerivedLowerShriek`.
 -/
 
 @[expose] public section
@@ -64,18 +63,11 @@ lemma exists_rightDerivedLowerShriek_obj_iso {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact ⟨K', hK', ⟨e⟩, ⟨(ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).mapIso
     e.symm ≪≫ (rightDerivedLowerShriekComparisonIso (ModuleCat.{u + 1} Λ) f).app L⟩⟩
 
-/-- Blueprint `theorem-results-from-etale-theory--3`: Finite-level bounded
-constructibility for proper support (bounded constructibility).
-
-Let `f : X ⟶ Y` be a separated finite-type morphism (here: one admitting a compactification)
+/-- Let `f : X ⟶ Y` be a separated finite-type morphism (here: one admitting a compactification)
 between finite-type schemes over a field `k`, and let `Λ` be a finite ring whose exponent is
-invertible in `k` (in the blueprint `Λ = A_{E,n}`). Then the compactly supported direct image on
+invertible in `k`. Then the compactly supported direct image on
 the pro-étale site restricts to `Dᵇc_proét(X, Λ) ⥤ Dᵇc_proét(Y, Λ)`. It is triangulated, being
-the restriction of a triangulated functor to triangulated subcategories.
-
-The proof transports the étale statement
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek` along the comparison
-`Rf_!^{proét} ∘ ν_X^* ≅ ν_Y^* ∘ Rf_!^{ét}`. -/
+the restriction of a triangulated functor to triangulated subcategories. -/
 theorem boundedConstructible_rightDerivedLowerShriek [HasInvertibleExponent Λ (Spec (.of k))]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
@@ -90,18 +82,10 @@ theorem boundedConstructible_rightDerivedLowerShriek [HasInvertibleExponent Λ (
     (DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj
       (Etale.boundedConstructible_rightDerivedLowerShriek Λ f aX aY hf K' hK'))
 
-/-- Blueprint `theorem-results-from-etale-theory--3`: Finite-level bounded
-constructibility for proper support (amplitude).
-
-In the situation of `AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerShriek`,
+/-- In the situation of `AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerShriek`,
 if every geometric fibre of `f` has dimension at most `e`, then the compactly supported direct
 image sends `D_c^{[a, b]}(X, Λ)` into `D_c^{[a, b + 2e]}(Y, Λ)`; the bounds only depend on
-`a`, `b` and `e`, not on the compactification, nor on the finite coefficient ring.
-
-The lower bound holds because `Rf_! = Rg_* ∘ Di_!` with `i_!` exact and `Rg_*` left t-exact; the
-upper bound is the dévissage `AlgebraicGeometry.Etale.isLE_rightDerivedLowerShriek_obj` of the
-sheaf case `AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerShriek_singleFunctor`
-(`theorem-results-from-etale-theory`) on the étale site, transported along the comparison. -/
+`a`, `b` and `e`, not on the compactification, nor on the finite coefficient ring. -/
 theorem constructibleIn_rightDerivedLowerShriek [HasInvertibleExponent Λ (Spec (.of k))]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]

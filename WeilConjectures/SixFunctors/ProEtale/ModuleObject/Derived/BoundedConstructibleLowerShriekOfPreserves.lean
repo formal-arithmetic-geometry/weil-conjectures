@@ -11,11 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Compactification.Compactificatio
 /-!
 # Lower shriek on bounded constructible complexes under pushforward preservation
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-open-coefficients/det-def-sfb-dc-lower-shriek-definition.md, defining composite
-and chosen-compactification paragraph
-(blueprint: proposition-construction-independence-rf-shriek).
-
 ## Main definitions
 
 * `boundedConstructibleLowerShriekOfCompactificationOfPreserves`: restricted extension
@@ -48,11 +43,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 bounded constructible full subcategories. Here `c` includes quasi-compactness of the open
 immersion, and its canonical middle scheme and both arrows are over `Spec k`.
 The coefficient hypothesis is preservation by every derived pushforward in the setting,
-with no restriction to the three example coefficient families.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-open-coefficients/det-def-sfb-dc-lower-shriek-definition.md, first displayed composite
-(blueprint: proposition-construction-independence-rf-shriek). -/
+with no restriction to the three example coefficient families. -/
 noncomputable def boundedConstructibleLowerShriekOfCompactificationOfPreserves
     {f : X ⟶ Y} (c : Compactification.BoundaryCompactification f.left) :
     ProEtale.BoundedConstructible (condensedRingObj Λ X.left) ⥤
@@ -60,14 +51,9 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationOfPreserves
   boundedConstructibleOpenImmersionLowerShriek Λ ℓ c.obj.obj.overI ⋙
     boundedConstructibleLowerStarOfPreserves Λ H c.obj.obj.overG
 
-/-- The derived lower shriek is the preceding composite for the chosen compactification
-of the dependency `proposition-construction-independence-rf-shriek`. Both factors already take
-values in the bounded constructible full subcategories, so this construction needs no further
-preservation assertion.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-open-coefficients/det-def-sfb-dc-lower-shriek-definition.md, final paragraph
-(blueprint: proposition-construction-independence-rf-shriek). -/
+/-- The derived lower shriek is the preceding composite for the chosen compactification. Both
+factors already take values in the bounded constructible full subcategories, so this construction
+needs no further preservation assertion. -/
 noncomputable def boundedConstructibleLowerShriekOfPreserves (f : X ⟶ Y) :
     ProEtale.BoundedConstructible (condensedRingObj Λ X.left) ⥤
       ProEtale.BoundedConstructible (condensedRingObj Λ Y.left) :=

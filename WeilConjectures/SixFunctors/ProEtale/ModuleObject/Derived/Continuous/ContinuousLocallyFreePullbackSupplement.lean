@@ -152,8 +152,12 @@ import all WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
 /-! # Pullback and coefficient transport for locally free internal modules
 
 The reusable local-freeness API formerly private to the stratified lattice proof.
-Source: Bhatt--Scholze, Section 6.8; Stacks Project, Tag 03DO.
-(blueprint: lem-weil-pbc-continuous-locally-free-pullback)
+
+## References
+
+* Stacks Project, Tag 03DO
+* Bhatt--Scholze, Section 6.8
+* Stacks Project, Modules on Sites, Tag 03DO
 -/
 
 @[expose] public section
@@ -165,11 +169,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- An internal module is locally finite free when a pro-etale scheme cover makes it finite free.
-Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites, Tag 03DO.
-(blueprint: lem-weil-pbc-continuous-locally-free-pullback)
-
-This is exactly the scheme-cover predicate used by the lattice statements. -/
+/-- An internal module is locally finite free when a pro-etale scheme cover makes it finite free. -/
 abbrev LocallyFree {X : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) : Prop :=
@@ -177,12 +177,7 @@ abbrev LocallyFree {X : Scheme.{u}}
     Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj R)
       (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod R).obj P)
 
-/-- Local finite freeness is invariant under an isomorphism of internal modules.
-Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites, Tag 03DO.
-(blueprint: lem-weil-pbc-continuous-locally-free-pullback)
-
-Use the same cover and apply the existing free_of_iso to its pulled-back
-module isomorphisms. -/
+/-- Local finite freeness is invariant under an isomorphism of internal modules. -/
 lemma locallyFree_of_iso {X : Scheme.{u}}
     {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
     {P Q : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
@@ -191,12 +186,7 @@ lemma locallyFree_of_iso {X : Scheme.{u}}
   exact ⟨C, fun s ↦ ProEtale.free_of_iso (hC s)
     (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod R).mapIso e)⟩
 
-/-- Restriction along an invertible coefficient map preserves local finite freeness.
-Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites, Tag 03DO.
-(blueprint: lem-weil-pbc-continuous-locally-free-pullback)
-
-Use the same cover. On each member apply the existing free_comap and
-free_of_iso to the mapModComapIso comparison. -/
+/-- Restriction along an invertible coefficient map preserves local finite freeness. -/
 lemma locallyFree_comap {X : Scheme.{u}}
     {R T : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [MonObj T]
     (φ : R ⟶ T) [IsMonHom φ] [IsIso φ]
@@ -208,12 +198,7 @@ lemma locallyFree_comap {X : Scheme.{u}}
   exact ProEtale.free_of_iso (ProEtale.free_comap (G.map φ) (hC s))
     ((G.mapModComapIso φ).app P).symm
 
-/-- Inverse image preserves finite free internal modules.
-Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites, Tag 03DO.
-(blueprint: lem-weil-pbc-continuous-locally-free-pullback)
-
-Map the chosen finite biproduct presentation. Additivity preserves this
-biproduct, and strong monoidality identifies the image of the regular module. -/
+/-- Inverse image preserves finite free internal modules. -/
 lemma free_map {X Y : Scheme.{u}} (g : Y ⟶ X)
     {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
     {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
@@ -224,13 +209,7 @@ lemma free_map {X Y : Scheme.{u}} (g : Y ⟶ X)
   exact ⟨n, ⟨(G.mapMod R).mapIso e ≪≫ (G.mapMod R).mapBiproduct _ ≪≫
     Limits.biproduct.mapIso (fun _ ↦ Mod.isoMk (Iso.refl _) (by simp [Mod.act]))⟩⟩
 
-/-- Inverse image preserves local finite freeness over its pulled-back coefficient ring.
-Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites, Tag 03DO.
-(blueprint: lem-weil-pbc-continuous-locally-free-pullback)
-
-Base change the trivializing cover. Freeness is preserved by inverse image;
-the pullback-square equation and mapMod composition isomorphism identify the
-resulting modules with the restrictions of the pulled-back module. -/
+/-- Inverse image preserves local finite freeness over its pulled-back coefficient ring. -/
 lemma locallyFree_map {X Y : Scheme.{u}} (g : Y ⟶ X)
     {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
     {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
@@ -243,13 +222,7 @@ lemma locallyFree_map {X Y : Scheme.{u}} (g : Y ⟶ X)
   rw [Limits.pullback.condition] at h
   exact (ProEtale.free_pullback_comp_iff (Limits.pullback.snd (C.f s) g) g P).mp h
 
-/-- Canonical condensed-coefficient inverse image preserves local finite freeness.
-Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites, Tag 03DO.
-(blueprint: lem-weil-pbc-continuous-locally-free-pullback)
-
-First pull back over the inverse-image coefficient ring. Restriction along
-the inverse condensed coefficient comparison preserves freeness, and the
-extension-of-scalars comparison gives the canonical pullback module. -/
+/-- Canonical condensed-coefficient inverse image preserves local finite freeness. -/
 lemma locallyFree_upperStar
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (g : Y ⟶ X)

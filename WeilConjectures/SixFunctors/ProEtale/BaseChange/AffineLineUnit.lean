@@ -47,10 +47,7 @@ include aY in
 /-- **The affine line is acyclic, on bounded below complexes**: for the affine line
 `p : 𝔸¹_Y ⟶ Y` over a separated `k`-scheme of finite type `Y`, `k` algebraically closed, the
 unit `Λ_Y ⟶ Rp_* p^* Λ_Y` of the bounded below derived adjunction `p^* ⊣ Rp_*` is an
-isomorphism. The unbounded statement is
-`AlgebraicGeometry.Etale.isIso_unit_constantComplex_affineLine`, and the invertibility of a
-unit only depends on the left adjoint, which on bounded below complexes is the restriction of
-the unbounded one. -/
+isomorphism. -/
 theorem isIso_unit_plus_affineLine_singleFunctor_tensorUnit :
     IsIso ((derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ)
       (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).unit.app

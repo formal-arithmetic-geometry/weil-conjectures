@@ -25,8 +25,7 @@ The ingredients are: finite generation of `Hⁿ(S, ℤ_ℓ)` and the Bockstein s
 `Hⁿ(S, ℚ̄_ℓ) = ℚ̄_ℓ ⊗ Hⁿ(S, ℤ_ℓ)`
 (`AlgebraicGeometry.ProEtale.isBaseChange_integralToAdicConstantH`)
 and the linear algebra of `LinearMap.exists_isPerfPair_of_finiteLevel`. This is the transport
-step of blueprint `theorem-poincare-duality--6` (`theorem-poincare-duality--9`), for the constant
-coefficient sheaf.
+step in the proof of Poincaré duality for the constant coefficient sheaf.
 -/
 
 @[expose] public section

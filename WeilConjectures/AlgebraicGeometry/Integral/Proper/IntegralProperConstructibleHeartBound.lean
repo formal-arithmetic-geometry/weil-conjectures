@@ -126,11 +126,10 @@ theorem integralProperConstructibleHeartBound_of_isNoetherian
   apply (T Y).isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
   exact (hb q hq).of_iso ((DerivedCategory.homologyFunctor _ q).mapIso hi)
 
-set_option linter.unusedVariables false in
 /-- Proper direct image of a constructible integral sheaf vanishes above 2d+1. -/
 theorem integralProperConstructibleHeartBound
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)
+    (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (_hp₀ : 0 < p₀) (_hpℓ : p₀ ≠ ℓ)
     (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
     [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
     [QuasiCompact (X ↘ Spec (.of k))]

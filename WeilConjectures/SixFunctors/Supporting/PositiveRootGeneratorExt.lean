@@ -13,8 +13,8 @@ import WeilConjectures.SmoothPurity.Integral.IntegralRootPowerGenerators
 
 /-! # Extensionality on positive root generators
 
-Source: coefficient-twist conventions, first-line inverse image and scalar extension.
--/
+Two morphisms out of a positive root generator agree when they agree on the first-line
+inverse image and its scalar extension. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

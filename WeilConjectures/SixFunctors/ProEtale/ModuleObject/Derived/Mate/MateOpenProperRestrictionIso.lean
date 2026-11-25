@@ -11,7 +11,6 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactific
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # The specified open restriction mate is invertible
-Source: blueprint proposition-composition-base-change-rf-shriek--1, proof (2).
 -/
 
 @[expose] public noncomputable section

@@ -200,11 +200,8 @@ omit ℓ k in
 variable {f g f' g'} in
 /-- The *base-change morphism* `BC_sq : Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` of a commutative square
 `g' ≫ f = f' ≫ g` of schemes on the bounded constructible derived categories of module objects
-over `Λ`, assembled as the composite of the unit insertion, the square transport, and the
-counit contraction (`ℚ̄_ℓ`-coefficient).
-
-Proper base change asserts that this morphism is an isomorphism for a cartesian square with `f`
-proper; no such hypothesis is built into the definition. -/
+over `Λ` (`ℚ̄_ℓ`-coefficient). It is an isomorphism for a cartesian square with `f` proper, but
+no such hypothesis is built into the definition. -/
 noncomputable irreducible_def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
     boundedConstructibleLowerStar ℓ f ⋙ boundedConstructibleUpperStar
       (Profinite.padicAlgClRingObj ℓ) ℓ g ⟶

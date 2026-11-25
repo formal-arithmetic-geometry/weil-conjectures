@@ -12,9 +12,13 @@ import WeilConjectures.SixFunctors.Sf.SfClopenScalarChainComparison
 
 /-! # Scalar extension and actual quotient complexes on a clopen
 
-Source: Stacks Project, Tag 06YY.
-(blueprint: lem-sf-clopen-scalar-quotient-comparison).
+Scalar extension is compatible with the actual quotient complexes on a clopen component.
+
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
+
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -30,37 +34,7 @@ namespace WeilConjectures
 
 /-- Normalized scalar and chain-level quotient comparisons on a clopen component.
 This assertion concerns scalar extension and chain maps only: it does not assert
-naturality of a derived tower, preservation of completeness, or a Tor bound.
-
-Source: Stacks Project, sites-cohomology.tex, Lemma derived-base-change (Tag 06YY),
-Lemma pullback-K-flat, and Lemma pullback-tensor-product; sites.tex, restriction to
-an object. Extracted from the scalar-extension and tensor-formula paragraphs of
-lem-sf-clopen-derived-compatibility
-(blueprint: lem-sf-clopen-scalar-quotient-comparison).
-
-Proof: write T as the disjoint union of U and its open complement, including an
-empty component. The finite-clopen module equivalence identifies restriction with
-projection. Use d.projection to identify the completed-to-finite coefficient map
-with its local counterpart. On presheaf tensor products send s tensor x to
-s tensor x after the coefficient identification d.finite; the balanced relations
-hold by the projection square. The inverse uses the inverse coefficient comparison.
-Continuous restriction commutes with sheafification on the localized site, so these
-maps induce inverse module-sheaf maps and are natural in the module. Apply them
-degreewise to obtain finite_quotient. Restrict scalars along the completed-to-finite
-maps, using the same projection square, to obtain quotient. Their formulas on
-sheafified pure tensors are the two asserted normalization equalities.
-
-Projection in a finite product preserves K-flat complexes and flat terms. The
-ordinary tensor comparison therefore descends through K-flat localization to the
-natural derived comparison reduction. Its square with the universal comparison
-is the derived base-change square. To obtain that square for arbitrary P, first
-check it on K-flat resolutions; naturality of both universal counits and the
-ordinary comparison then gives it after the resolution map, which is inverted
-in the source derived category. Thus no K-flat hypothesis on P is needed.
-
-The two chain coherence equations follow from these pure-tensor formulas and the
-existing formulas for units and transitions; they are proved by the consumer. The
-constructions also apply to an empty component, whose module category is zero. -/
+naturality of a derived tower, preservation of completeness, or a Tor bound. -/
 theorem sf_clopen_scalar_quotient_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (T : Scheme.{t}) (U : T.Opens)

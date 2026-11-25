@@ -12,7 +12,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompCo
 
 set_option linter.privateModule false
 
-/-! Source: blueprint composition isomorphism and its canonicity and associativity. -/
+/-! # Mixed composition and open pasting for derived direct images -/
 
 @[expose] public section
 set_option autoImplicit false

@@ -133,17 +133,8 @@ lemma rightDerivedLowerStarProjectionMap_app_app
   rfl
 
 /-- The transpose along `Lp^* ⊣ Rp_*` of the projection map
-`Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` is the composite
-```
-Lp^*(Rp_*M ⊗ᴸ L) --comparison--> Lp^*Rp_*M ⊗ᴸ Lp^*L
-        \                               |
-         \                              | ε_M ⊗ᴸ 𝟙
-       transpose                        v
-           ---------------------->  M ⊗ᴸ Lp^*L
-```
-where the comparison is `AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison`, the long
-edge is `(homEquiv _ _).symm` of the projection map and `ε` is the counit of
-`AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction`. -/
+`Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` is the composite of the comparison
+`Lp^*(Rp_*M ⊗ᴸ L) ⟶ Lp^*Rp_*M ⊗ᴸ Lp^*L` with the counit `ε_M ⊗ᴸ 𝟙`. -/
 @[simp, reassoc]
 lemma homEquiv_symm_rightDerivedLowerStarProjectionMap
     (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))

@@ -162,14 +162,14 @@ import all WeilConjectures.AlgebraicGeometry.ModuleAbelianUnderivedExchange
 
 /-! # Finite isomorphism exchange and the specified mates
 
-Source: current Weil blueprint, prop-pur-weil-equivariance-compatibilities.proof.md,
-constituent-compatibility assembly; Stacks Tags 09A5, 07A7, 0D6D and 03DI
-(blueprint: lem-pur-isomorphism-finite-mate-normalization).
-
 The proper reindexing map is the published sectionwise fibre-product comparison
 `sfProperOpenDerivedRestriction`. The open reindexing map is constructed from the
 same section comparison by uniqueness of left adjoints, then descended termwise.
 The statement identifies these concrete maps with the specified proper/open mates.
+
+## References
+
+* Stacks Project, Tags `09A5`, `03DI`, `03DJ`, `05RU`, `07A7`, `0D6D`
 -/
 
 @[expose] public noncomputable section
@@ -188,9 +188,7 @@ namespace WeilConjectures.PurityFiniteSetting
 
 attribute [local irreducible] sfIntrinsicModuleEquivalence sfIntrinsicDirectImageComparison
 
-/-- Forget only the chosen Cartesian identification, retaining its projection equations.
-Source: Stacks Tag 09A5, Cartesian reindexing
-(blueprint: lem-pur-isomorphism-finite-mate-normalization). -/
+/-- Forget only the chosen Cartesian identification, retaining its projection equations. -/
 abbrev finiteMateCartesian {X' X Y' Y : Scheme.{u}}
     {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
     (sq : ChosenCartesianSquare g' f' f g) : IsPullback g' f' f g :=
@@ -199,9 +197,7 @@ abbrev finiteMateCartesian {X' X Y' Y : Scheme.{u}}
 /-- The ordinary open reindexing isomorphism. Its right-adjoint comparison is the
 canonical identification of sections on the two fibre products, not a chosen map.
 When the horizontal maps are isomorphisms this is reindexing the zero-extension
-presheaf: it keeps a section over the open and the zero section off the open.
-Source: Stacks Tags 09A5 and 03DI, constituent-compatibility assembly
-(blueprint: lem-pur-isomorphism-finite-mate-normalization). -/
+presheaf: it keeps a section over the open and the zero section off the open. -/
 def finiteMateOpenReindexing (A : Type u) [CommRing A] [Finite A]
     {U' U V' V : Scheme.{u}} (h : U' ⟶ U) (j' : U' ⟶ V')
     (j : U ⟶ V) (b : V' ⟶ V) [IsOpenImmersion j] [IsOpenImmersion j']
@@ -213,9 +209,7 @@ def finiteMateOpenReindexing (A : Type u) [CommRing A] [Finite A]
       ((sfIntrinsicConstantModuleAdjunction h A).comp (sfIntrinsicOpenAdjunction A j'))
 
 /-- Apply the section-normalized open reindexing isomorphism termwise to unbounded
-complexes and localize. All functors here are the published exact functors.
-Source: Stacks Tags 03DJ and 05RU, constituent-compatibility assembly
-(blueprint: lem-pur-isomorphism-finite-mate-normalization). -/
+complexes and localize. All functors here are the published exact functors. -/
 def finiteMateDerivedOpenReindexing (A : Type u) [CommRing A] [Finite A]
     {U' U V' V : Scheme.{u}} (h : U' ⟶ U) (j' : U' ⟶ V')
     (j : U ⟶ V) (b : V' ⟶ V) [IsOpenImmersion j] [IsOpenImmersion j']

@@ -16,9 +16,6 @@ The finite comparison realization of a constant sheaf with value an ordinary mod
 the inverse image from the point of a condensed module `pointConstantModule B eR P`, built
 from the constant condensed sheaf on `P`. This functor sends `B^n` to the free module of
 rank `n`. The finite comparison realization also commutes with inverse image.
-
-Source: blueprint scalar-six-ctf (1), finite coefficient comparison and finite projective
-local models.
 -/
 
 set_option autoImplicit false

@@ -17,11 +17,10 @@ derived functor of sections with support in `Z`. Global derived Hom is
 `RHom_X(A, K) = RΓ(X, RHom(A, K))`.
 
 * `ProEtale.CondensedRing.formalClosedSupport_globalDerivedHom_lowerStar`: naturally in `K`,
-  `RHom_X(i_*N, K) ≅ RHom_Z(N, RΓ_Z K)` (blueprint `lemma-sections-support-closed-subscheme--2`).
+  `RHom_X(i_*N, K) ≅ RHom_Z(N, RΓ_Z K)`.
 * `ProEtale.CondensedRing.formalClosedSupport_globalDerivedHom_lowerShriek`: for an open
   immersion `u : S ⟶ Z` and a finite locally projective `Λ_S`-module `L`, naturally in `K`,
-  `RHom_X(i_*u_!L, K) ≅ RΓ(S, L^∨ ⊗ u^*RΓ_Z K)`
-  (blueprint `lemma-sections-support-closed-subscheme--3`).
+  `RHom_X(i_*u_!L, K) ≅ RΓ(S, L^∨ ⊗ u^*RΓ_Z K)`.
 -/
 
 @[expose] public section
@@ -40,8 +39,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 immersion `i : Z ⟶ X` with quasi-compact open complement `j : U ⟶ X` and `N ∈ D(Z_proét, Λ)`,
 there is an isomorphism `RHom_X(i_*N, K) ≅ RHom_Z(N, RΓ_Z K)` natural in `K ∈ D(X_proét, Λ)`.
 Here global derived Hom is `RΓ(-, RHom(-, -))`, with `RΓ` the right derived functor of global
-sections.
-(blueprint: lemma-sections-support-closed-subscheme--2) -/
+sections. -/
 theorem formalClosedSupport_globalDerivedHom_lowerStar {Z U X : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
@@ -91,8 +89,7 @@ a field `k` of characteristic `p ≠ ℓ`, let `i : Z ⟶ X` be a closed immersi
 complement `j`, let `u : S ⟶ Z` be an open immersion and let `L` be a finite locally projective
 `Λ_S`-module (pro-étale locally a direct summand of a finite free module), with dual
 `L^∨ = Hom(L, Λ_S)`. Then, naturally in `K ∈ D(X_proét, Λ)`, for `a = i ∘ u`,
-`RHom_X(a_!L, K) ≅ RΓ(S, L^∨ ⊗ u^*RΓ_Z K)`.
-(blueprint: lemma-sections-support-closed-subscheme--3) -/
+`RHom_X(a_!L, K) ≅ RΓ(S, L^∨ ⊗ u^*RΓ_Z K)`. -/
 theorem formalClosedSupport_globalDerivedHom_lowerShriek (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ)
     {Z U X : Scheme.{u}} [X.Over (Spec (.of k))]

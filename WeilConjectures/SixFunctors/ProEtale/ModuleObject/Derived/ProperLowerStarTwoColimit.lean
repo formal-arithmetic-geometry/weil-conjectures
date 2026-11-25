@@ -17,11 +17,13 @@ separated `k`-schemes of finite type. If for every finite subextension `E ⊆ �
 derived pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` is a left adjoint, then so is
 `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`
 (`ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_forall`).
-This is the proof of blueprint `theorem-exceptional-inverse-image--17`:
+
+## Implementation details
+
+The proof proceeds as follows:
 
 * `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` is the filtered 2-colimit of the categories `Dᵇc(-)⟦E̲⟧`
-  (`lemma-descent-finite-coefficient-field`,
-  `ProEtale.CondensedRing.boundedConstructibleCocone_isFilteredTwoColimit`);
+  (`ProEtale.CondensedRing.boundedConstructibleCocone_isFilteredTwoColimit`);
 * `Rg_*` commutes with the extensions of scalars, compatibly with the structure isomorphisms of
   the cocones (`ProEtale.CondensedRing.boundedConstructibleLowerStarToPadicAlgClIso_hom_app_eq`);
 * the right adjoints `Rg^!_E` commute with the extensions of scalars `F̲ ⊗ᴸ_{E̲} -` for `E ≤ F`
@@ -68,8 +70,7 @@ noncomputable def boundedConstructibleLowerStarLevelwiseLeftAdjoint :
       with_reducible exact
         isIso_mateEquiv_boundedConstructibleLowerStarExtendScalarsSubfield ℓ h g
 
-/-- Blueprint `theorem-exceptional-inverse-image--17`, from the case of the finite
-subextensions: if for every finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` the derived pushforward
+/-- If for every finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` the derived pushforward
 `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` along a proper `g` is a left adjoint, then so is
 `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`. -/
 theorem isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_forall :

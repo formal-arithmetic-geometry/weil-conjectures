@@ -17,7 +17,6 @@ set_option backward.defeqAttrib.useBackward true
 open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.GeoP1Adjunction
 
-set_option linter.flexible false in
 /-- Transport an adjunction across equivalences, retaining both canonical formulas.
 -/
 theorem transportAdjunction
@@ -59,13 +58,15 @@ theorem transportAdjunction
       ← R'.map_comp, henat f, R'.map_comp]
   refine ⟨b, ?_, ?_⟩
   · intro X
-    simp [b, Adjunction.ofNatIsoRight_unit, Adjunction.ofNatIsoLeft_unit,
-      NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-      a₀, Adjunction.comp_unit_app, Equivalence.toAdjunction_unit,
-      el, er, Iso.trans_hom, Functor.associator_hom_app,
-      Functor.associator_inv_app, Functor.isoWhiskerLeft_hom,
-      Functor.isoWhiskerRight_hom, Functor.leftUnitor_hom_app,
-      Functor.comp_map, Category.assoc, Equivalence.symm_unit]
+    simp only [Functor.id_obj, Functor.comp_obj, Equivalence.symm_inverse,
+      Equivalence.symm_functor, Adjunction.ofNatIsoRight_unit, Adjunction.ofNatIsoLeft_unit,
+      Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+      Functor.whiskerRight_comp, Functor.whiskerRight_twice, Category.assoc,
+      Functor.whiskerLeft_comp, Functor.whiskerLeft_twice, NatTrans.comp_app,
+      Adjunction.comp_unit_app, Equivalence.toAdjunction_unit, Equivalence.symm_unit,
+      Functor.comp_map, Functor.whiskerRight_app, Functor.associator_hom_app, Functor.map_id,
+      Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.leftUnitor_hom_app,
+      Category.comp_id, Category.id_comp, b, a₀, el, er]
     rw [hrnat, hrnat, hrnat]
     simp only [← R'.map_comp]
     rw [F.counit_naturality, F.counit_naturality_assoc, F.functor_unit_comp_assoc]
@@ -76,14 +77,15 @@ theorem transportAdjunction
     rw [← h, ← Category.assoc]
     simp
   · intro Y
-    simp [b, Adjunction.ofNatIsoRight_counit, Adjunction.ofNatIsoLeft_counit,
-      NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-      a₀, Adjunction.comp_counit_app, Equivalence.toAdjunction_counit,
-      el, er, Iso.trans_inv, Functor.associator_hom_app,
-      Functor.associator_inv_app, Functor.isoWhiskerLeft_inv,
-      Functor.isoWhiskerRight_inv, Functor.leftUnitor_inv_app,
-      Functor.map_comp, Functor.comp_map, Category.assoc,
-      Equivalence.symm_counit]
+    simp only [Functor.comp_obj, Functor.id_obj, Equivalence.symm_inverse,
+      Equivalence.symm_functor, Adjunction.ofNatIsoRight_counit, Iso.trans_inv,
+      Functor.isoWhiskerRight_inv, Iso.symm_inv, Category.assoc, Functor.isoWhiskerLeft_inv,
+      Functor.whiskerRight_comp, Functor.whiskerRight_twice, Adjunction.ofNatIsoLeft_counit,
+      Functor.whiskerLeft_comp, Functor.whiskerLeft_twice, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.leftUnitor_inv_app, Functor.map_id,
+      Functor.associator_hom_app, Functor.comp_map, Functor.associator_inv_app,
+      Functor.whiskerLeft_app, Adjunction.comp_counit_app, Equivalence.toAdjunction_counit,
+      Equivalence.symm_counit, Functor.map_comp, Category.id_comp, b, a₀, el, er]
     have hr := r.hom.naturality (F.unit.app Y)
     simp only [Functor.comp_map, Functor.id_obj, Functor.comp_obj] at hr
     have hc1 : r.hom.app Y ≫ R'.map (F.counitInv.app (F.functor.obj Y)) ≫

@@ -12,10 +12,6 @@ public import WeilConjectures.CategoryTheory.SixFunctors.Monoidal
 
 /-!
 # Open inverse image preserves the constructible finite-Tor generators
-
-Source: blueprint main-20261015, proposition-composition-open-restriction-compactifications-f, proof
-step 3; sk-prop-proper-base-change-unbounded-pullback, proof steps 1--5.
-(blueprint: lem-sfb-open-pullback-generators)
 -/
 
 @[expose] public section
@@ -156,27 +152,7 @@ private theorem constructible_of_iso
 
 /-- The exact termwise open pullback preserves the bounded constructible finite-Tor
 generators for every admissible condensed coefficient, including coefficients given up to
-ring-object isomorphism.
-Source: blueprint proposition-composition-open-restriction-compactifications-f, proof step 3; the
-inverse-image localizing argument of sk-prop-proper-base-change-unbounded-pullback.
-(blueprint: lem-sfb-open-pullback-generators).
-
-Proof: Give U its structure morphism j followed by the structure morphism of X. These
-schemes are qcqs: X is separated of finite type over a field, and j is quasi-compact open.
-Exact module inverse image commutes with cohomology, preserves all sums by its direct-image
-adjunction, and is triangulated on the ordinary unbounded derived categories. Pull back
-the finite constructible stratification and each constant-model trivializing cover of a
-Dctf generator. The coefficient compositor identifies each pulled-back model with the
-same finitely presented module on the point, so it stays constructible. Exactness keeps
-its cohomological bounds. The existing upperStar_preservesFlat theorem shows that inverse
-image sends flat modules to flat modules. For a Tor interval [a,b], apply
-DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj: an exact functor preserving flat
-objects sends a flat model supported in [a,b] to one supported in the same interval. Thus
-pullback sends every Dctf generator into Dctf, including when U is empty. The finite presentation
-models are on the point before restriction, so their scalar matrices remain the same
-under the canonical coefficient compositor. This argument applies directly to Λ and
-therefore includes the ring-object isomorphism convention of admissibility.
--/
+ring-object isomorphism. -/
 theorem openPullback_generators
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

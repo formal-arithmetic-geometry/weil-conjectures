@@ -188,7 +188,7 @@ condensed coefficients. Let `γ : Rp_* ⋙ red_Y ≅ red_X ⋙ Rp_*` be the push
 (`boundedConstructibleLowerStarIntegersModPowReduction`), `Rp^!` the right adjoint of
 `Rp_* ≅ Rp_!` on `Dᵇc(-)⟦𝒪_E⟧`, and `H'` any right adjoint of `Rp_*` on `Dᵇc(-)⟦𝒪_E ⧸ ℓⁿ⟧`. Then
 the exceptional comparison `Rp^! ⋙ red_X ⟶ red_Y ⋙ H'`, the mate of `γ⁻¹`, is an isomorphism,
-given the compatibilities of (Pull) with the natural reduction triangles and that restriction
+given the compatibilities of pullback with the natural reduction triangles and that restriction
 of scalars preserves bounded constructible complexes on `X` and `Y`. -/
 theorem isIso_mateEquiv_boundedConstructibleLowerStarIntegersModPowReduction [IsProper p.left]
     (hX : RestrictScalarsIntegersModPowBoundedConstructible ℓ E n X.left)

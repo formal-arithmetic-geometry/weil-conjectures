@@ -26,13 +26,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingProje
 /-!
 # The integral proper projection formula
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-pf-adic/
-sk-thm-sf-pf-adic-projection.md, clauses (1)--(2)
-(blueprint: lemma-projection-formula-integral-coefficients--1).
-
 All operations are the ordinary unbounded module-object derived operations.
 The localizing closures use ambient small sums and the constant-model
-constructibility predicate recorded by definition-constructible-sheaves.
+constructibility predicate recorded for constructible sheaves.
 -/
 
 @[expose] public section
@@ -140,32 +136,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
 
 /-- The bounded integral proper projection formula, tensor closure of the localizing
 categories on every standing scheme, and the projection formula on those closures.
-Source: blueprint sk-thm-sf-pf-adic-projection, clauses (1)--(2)
-(blueprint: lemma-projection-formula-integral-coefficients--1).
-
-Proof:
-1. A standing scheme is quasi-compact and locally Noetherian. The integral
-constructibility comparison identifies the adopted generators with the stated
-constant-model generators. Apply the existing bounded proper projection formula
-in the category of schemes over `Spec k`.
-2. Tensor in either variable is exact and a left adjoint. The inverse image of a
-localizing subcategory under it is therefore localizing. Bounded integral tensor
-closure and two applications of minimality prove tensor closure on the stated
-localizing category, using its existing localizing-closure existence theorem.
-3. Compare the two coproduct-universe conventions. For an existing coproduct,
-its nonzero summands embed into the endomorphism set of its vertex by their
-coordinate idempotents. Thus its nonzero support is Hom-small. Restrict the
-coproduct to this support and shrink it; the omitted zero summands contribute
-unique maps. This identifies the two localizing closures by minimality.
-4. Choose the existing uniform fibre-dimension bound. Field base change does not
-increase the dimension, so the integral proper-direct-sums theorem gives proper
-pushforward stability and preservation of the required coproduct cofans.
-5. Apply the existing two-variable localizing determination theorem to the
-canonical projection map. Its shift compatibility and exactness are those proved
-in the adopted `ProjectionMapShift` implementation. Bounded pullback and tensor
-stability are supplied by `integralTensorInverseImage`; step 1 supplies the
-isomorphism on generators. The resulting map is definitionally the stated
-module-object projection map.
 -/
 theorem integralProperProjectionFormula (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

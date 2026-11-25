@@ -14,7 +14,13 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralProjecti
 /-! # Ramified identification of finite pullback towers
 
 The arithmetic construction and factorization of the normalized finite comparison.
-Source: Stacks 093M, 03EK, 03EL; Bhatt--Scholze 6.8.2(1).
+
+## References
+
+* [Stacks, Tag 093M](https://stacks.math.columbia.edu/tag/093M)
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
+* Bhatt--Scholze 6.8.2(1)
 -/
 
 -- After pruning, this module only keeps private declarations.

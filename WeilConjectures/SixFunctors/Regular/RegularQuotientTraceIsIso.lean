@@ -11,8 +11,17 @@ import WeilConjectures.Algebra.Homology.RegularQuotientCone.RegularQuotientConeA
 
 /-! # Invertibility of the normalized regular quotient coinduction trace
 
-Source: Tags 06YY, 07A6, 0A70, 0BZE, 0BZH and 08FZ; Zheng Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-regular-quotient-trace-is-iso). -/
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks, Tag 0A70](https://stacks.math.columbia.edu/tag/0A70)
+* [Stacks, Tag 0BZE](https://stacks.math.columbia.edu/tag/0BZE)
+* [Stacks, Tag 0BZH](https://stacks.math.columbia.edu/tag/0BZH)
+* [Stacks, Tag 08FZ](https://stacks.math.columbia.edu/tag/08FZ)
+* [Stacks, Tag 0A71](https://stacks.math.columbia.edu/tag/0A71)
+* Zheng Lemma 5.22 and Proposition 5.26
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -21,26 +30,7 @@ universe u
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
 
-/-- The actual quotient-linear cone trace is an isomorphism on unbounded derived categories.
-Source: Stacks Project, Tags 06YY, 07A6, 0A70 and 0A71; the normalized principal quotient
-resolution and evaluation-at-one coinduction counit.
-(blueprint: lem-sf-regular-quotient-trace-is-iso).
-
-Proof: resolve the input by a K-injective complex of injective completed-coefficient
-modules. The already constructed ordinary coinduction counit is the kernel of the
-positive uniformizer scalar. That scalar is surjective on each injective term, so
-these maps form a short exact sequence of complexes. Its connecting triangle identifies
-the scalar cone with restricted coinduction shifted by one. The derived coinduction
-comparison computes coinduction termwise on this resolution. Its counit is the
-localization of the ordinary counit. The cone augmentation adjoint formula, with its
-zero shifted component, identifies the adjoint of the displayed trace with the shifted
-boundary of this same short exact sequence. Consequently the restricted trace is the
-inverse of the preceding cone comparison. Exact restriction detects derived
-isomorphisms, since it preserves homology and reflects ordinary module isomorphisms.
-Thus the quotient-linear trace is invertible on the resolution. Naturality and the
-invertible resolution map give it on the original input; componentwise invertibility
-gives invertibility of the natural transformation. This uses neither boundedness nor
-constructibility and includes n=0 and the empty scheme. -/
+/-- The actual quotient-linear cone trace is an isomorphism on unbounded derived categories. -/
 theorem reductionCoinductionTrace_isIso
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ) :

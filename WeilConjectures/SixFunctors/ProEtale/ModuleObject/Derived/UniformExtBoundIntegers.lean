@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionConstru
 /-!
 # The uniform `Ext` bound for constructible `𝒪_E`-sheaves
 
-Blueprint `sk-lem-int-ext` (2). Let `E ⊆ ℚ̄_ℓ` be a finite subextension of `ℚ_ℓ` with ring of
+Let `E ⊆ ℚ̄_ℓ` be a finite subextension of `ℚ_ℓ` with ring of
 integers `𝒪_E`, uniformizer `ϖ` and residue field `𝔽_E`, and let `X` be a separated scheme of finite
 type over a field `k` of characteristic prime to `ℓ` with `cd_ℓ(k) < ∞`. For every constructible
 `𝒪_{E,X}`-module `M` there is `d` with `Ext^q(M, B) = 0` for `q > d` and every constructible `B`
@@ -208,10 +208,7 @@ omit [Fact (ringChar k ≠ ℓ)] in
 /-- **Torsion targets**: for a separated finite-type scheme `X` over a field `k` with
 `ℓ ≠ char k` and `cd_ℓ(k) < ∞`, and a bounded constructible `𝒪_E`-complex `P`, there is `d` with
 `Hom(P, (K ⊗ᴸ 𝔽_E)[q]) = 0` for `q ≥ d` and every bounded constructible `K` concentrated in
-degrees `≤ 0`, where `K ⊗ᴸ 𝔽_E` is regarded as an `𝒪_E`-complex. By adjunction these are the
-morphisms `P ⊗ᴸ 𝔽_E ⟶ (K ⊗ᴸ 𝔽_E)[q]` of complexes of `𝔽_E`-sheaves, which vanish for `q` large
-uniformly in `K`
-(`ProEtale.DerivedCategory.exists_forall_eq_zero_of_constructibleFiniteTor_of_generation`). -/
+degrees `≤ 0`, where `K ⊗ᴸ 𝔽_E` is regarded as an `𝒪_E`-complex. -/
 theorem exists_forall_eq_zero_shift_comap_derivedExtendScalars_residueField {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [QuasiSeparated aX]
     [IsNoetherian X]
@@ -251,7 +248,7 @@ theorem exists_forall_eq_zero_shift_comap_derivedExtendScalars_residueField {X :
     (residueFieldModuleSheaf X ℓ E).mapDerivedCategory (fun g ↦ hN _ hL hLN g) g
 
 omit [Fact (ringChar k ≠ ℓ)] in
-/-- Blueprint `sk-lem-int-ext` (2): for a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated
+/-- For a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated
 finite-type `k`-scheme `X`, with `ℓ ≠ char k` and `cd_ℓ(k) < ∞`, every constructible
 `𝒪_{E,X}`-module `M` admits `d` with `Ext^q(M, B) = 0` for `q > d` and all constructible `B`. -/
 theorem hasUniformConstructibleExtBound_padicIntegersRingObj_of_hasFiniteCohomologicalDimension

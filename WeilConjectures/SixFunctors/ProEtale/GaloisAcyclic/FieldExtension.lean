@@ -126,11 +126,7 @@ variable {G : Scheme.{u}} (h : G ⟶ Spec (.of L))
 /-- Let `W` be an object of the pro-étale site of an `L`-scheme `G` whose underlying scheme is
 the spectrum of a w-contractible ring. For an algebraic extension `Ω / L` with base change
 `g : G_Ω ⟶ G` and an étale sheaf `F₀` on `G`, the higher derived sections of `g^* ν^* F₀` over
-`W ×_G G_Ω` vanish.
-
-These are the higher étale cohomology groups of `W ×_G G_Ω = W ×_L Ω` with coefficients in
-`F₀`, the cofiltered limit of the `W ×_L K`, `K / L` finite, whose higher étale cohomology
-vanishes since they are spectra of w-contractible rings. -/
+`W ×_G G_Ω` vanish. -/
 theorem isZero_rightDerived_sectionsFunctor_pullback_upperStar_comparisonUpperStar_obj
     [Algebra.IsAlgebraic L Ω] (W : G.ProEt) (R : CommRingCat.{u}) [IsWContractibleRing R]
     (e : W.left ≅ Spec R) (F₀ : Sheaf G.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) :

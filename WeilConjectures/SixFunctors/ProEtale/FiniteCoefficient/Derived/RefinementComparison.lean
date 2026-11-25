@@ -20,7 +20,7 @@ the comparison `α_u : j_{d!} ⟶ Ru_* j_{c!}`
 (`AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekComparison`) is an isomorphism, the
 identity for the identity refinement and transitive. This file transports it to the pro-étale
 site along the comparison functor `ν^*`, on bounded below complexes of étale origin
-`K = ν_X^* L` (blueprint `proposition-construction-independence-rf-shriek--7`):
+`K = ν_X^* L`:
 `j_{d!} ν^* L ≅ Ru_* j_{c!} ν^* L`
 (`AlgebraicGeometry.ProEtale.refinementOpenImmersionLowerShriekProEtaleIso`).
 
@@ -82,25 +82,12 @@ noncomputable def openImmersionLowerShriekComparisonUpperStarDerivedPlusIso {U X
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 
-/-- Blueprint `proposition-construction-independence-rf-shriek--7`: proper–open comparison for
-complexes from the étale site.
-
-For a refinement `r : c.Refinement d` of compactifications of `f : X ⟶ Y` whose square over `X`
-is cartesian, with `u = r.hom : c.Z ⟶ d.Z` proper and `j_c = c.i`, `j_d = d.i` the open
-immersions of `X` (so `u ∘ j_c = j_d`), a finite coefficient ring `Λ` and a bounded below étale
-complex `L` on `X`, the isomorphism of pro-étale complexes `j_{d!} ν^* L ≅ Ru_* j_{c!} ν^* L`,
-natural in `L`. It is obtained, as in the blueprint, by applying the exact functor `ν^*` to the
-étale comparison isomorphism `α_u`
-(`AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekComparison`,
-blueprint `proposition-construction-independence-rf-shriek--7`), and identifying `ν^* j_! ≅ j_! ν^*`
-and `ν^* Ru_* ≅ Ru_* ν^*` (the latter since `u` is quasi-compact and quasi-separated). Its identity
-and composition laws are
-`AlgebraicGeometry.ProEtale.refinementOpenImmersionLowerShriekProEtaleIso_hom_app_id` and
-`AlgebraicGeometry.ProEtale.refinementOpenImmersionLowerShriekProEtaleIso_hom_app_comp`.
-
-The blueprint states this for arbitrary proper `u` between Noetherian schemes; it is formalised
-for refinements of compactifications with `u⁻¹(X) = X`, the setting of the étale comparison in
-this repository. -/
+/-- For a refinement `r : c.Refinement d` of compactifications of `f : X ⟶ Y` whose square over `X`
+is cartesian, with `u = r.hom : c.Z ⟶ d.Z` proper and `j_c = c.i`, `j_d = d.i` the open immersions
+of `X` (so `u ∘ j_c = j_d`), a finite coefficient ring `Λ` and a bounded below étale complex `L` on
+`X`, the isomorphism of pro-étale complexes `j_{d!} ν^* L ≅ Ru_* j_{c!} ν^* L`, natural in `L`. It
+is obtained from the étale comparison isomorphism `α_u`
+(`AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekComparison`) by applying `ν^*`. -/
 noncomputable def refinementOpenImmersionLowerShriekProEtaleIso {c d : Compactification f}
     (r : c.Refinement d) (hr : IsPullback c.i (𝟙 X) r.hom d.i) :
     (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus ⋙
@@ -152,7 +139,7 @@ lemma rightDerivedLowerStarComparisonUpperStarIso_hom_app_id (V : Scheme.{u})
   Functor.rightDerivedFunctorPlusBaseChange_id (Etale.lowerStarId _ V) (ProEtale.lowerStarId _ V)
     _ (lowerStarComparisonUpperStarBaseChange_app_id _ V) M
 
-/-- The identity law of blueprint `proposition-construction-independence-rf-shriek--7`: for the
+/-- The identity law: for the
 identity refinement the pro-étale comparison is the inverse of the identity isomorphism
 `R(𝟙)_* ≅ 𝟭`. -/
 theorem refinementOpenImmersionLowerShriekProEtaleIso_hom_app_id (c : Compactification f)
@@ -221,10 +208,9 @@ lemma rightDerivedLowerStarComparisonUpperStarIso_hom_app_comp {R S T : Scheme.{
   rw [reassoc_of% h]
   simp [← Functor.map_comp_assoc]
 
-/-- The composition law of blueprint `proposition-construction-independence-rf-shriek--7`: for
-refinements `r : c.Refinement d` and `s : d.Refinement e` with cartesian squares, the pro-étale
-comparison along `r.comp s` is the comparison along `s` followed by `R(s)_*` of the comparison
-along `r`, under `R(s)_* R(r)_* ≅ R(r ≫ s)_*`. -/
+/-- The composition law: for refinements `r : c.Refinement d` and `s : d.Refinement e` with
+cartesian squares, the pro-étale comparison along `r.comp s` is the comparison along `s` followed by
+`R(s)_*` of the comparison along `r`, under `R(s)_* R(r)_* ≅ R(r ≫ s)_*`. -/
 theorem refinementOpenImmersionLowerShriekProEtaleIso_hom_app_comp {c d e : Compactification f}
     (r : c.Refinement d) (s : d.Refinement e) (hr : IsPullback c.i (𝟙 X) r.hom d.i)
     (hs : IsPullback d.i (𝟙 X) s.hom e.i)

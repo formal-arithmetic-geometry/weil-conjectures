@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.ModuleObjects.ResidueOrdinary.IntegralResi
 
 /-! # Derived symmetry of component module pullback
 
-Source: Hemo--Richarz--Scholbach, Construction (4.1) and Proposition 4.3(3).
+## References
+
+* Hemo--Richarz--Scholbach, Construction (4.1) and Proposition 4.3(3).
 -/
 
 @[expose] public noncomputable section

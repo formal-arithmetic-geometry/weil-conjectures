@@ -108,7 +108,6 @@ The remaining sorries are those of the module-object formalism
 `WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory`), of the pro-étale
 sheaf categories (`AlgebraicGeometry.ProEtale.hasFunctorialFlatResolution_sheaf`) and of `Ab`
 (`AddCommGrpCat.hasFunctorialFlatResolution`).
-
 -/
 
 @[expose] public section
@@ -267,9 +266,8 @@ instance preservesHomology_mapMod_upperStar :
 
 set_option maxSynthPendingDepth 10 in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Blueprint `lem-sfb-module-mapmod-pullback-kflat`: the pullback
-`mapMod(f^*) : Mod_{Λ_Y} ⥤ Mod_{f^* Λ_Y}` sends K-flat complexes to K-flat complexes. See the
-module docstring for the argument. -/
+/-- The pullback `mapMod(f^*) : Mod_{Λ_Y} ⥤ Mod_{f^* Λ_Y}` sends K-flat complexes to K-flat
+complexes. -/
 instance preservesKFlatComplexes_mapMod_upperStar :
     ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).PreservesKFlatComplexes := by
   exact preservesKFlatComplexes_mapMod_proEtale f (condensedRingObj Λ Y)

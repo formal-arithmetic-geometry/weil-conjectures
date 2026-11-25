@@ -16,7 +16,11 @@ This is the projection and finite-evaluation part of the direct-image Roos
 comparison.  The object and its comparison isomorphism are parameters; the
 statement supplies the simultaneously normalized finite evaluation
 isomorphisms and their actual projection equations.
-(blueprint: stage3-weil-system-direct-image-roos-evaluation)
+
+## References
+
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* Zheng, Construction 4.1, Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -30,15 +34,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Finite evaluations of a chosen direct-image Roos object are compatible with
-the actual total-limit projections.
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks Project, Tag 0941.
-Proof: normalized reconstruction makes the scalar-extension adjunct of each
-actual total-limit projection invertible. Complete the input and transport its
-finite direct-image tower to prove the same for the specified Roos projections.
-Define the finite comparison by the inverse of the first adjunct, scalar
-extension of the given e, and the second adjunct. Naturality of the scalar
-adjunction gives the actual projection equation, including for arbitrary e.
-No completeness, boundedness, constructibility, or geometric hypotheses are imposed. -/
+the actual total-limit projections. -/
 theorem systemDirectImage_roosEvaluation
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [(integralComparisonSequenceDirectImage l E f).Additive]

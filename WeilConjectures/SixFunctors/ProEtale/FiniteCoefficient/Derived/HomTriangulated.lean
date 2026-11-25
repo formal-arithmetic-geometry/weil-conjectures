@@ -23,8 +23,7 @@ into opposite shifts: `RHom(K⟦a⟧, M) ≅ RHom(K, M)⟦-a⟧`.
 
 - `AlgebraicGeometry.ProEtale.exists_distTriang_derivedHom_left`,
   `AlgebraicGeometry.ProEtale.exists_distTriang_derivedHom_right`: `RHom` sends distinguished
-  triangles in either variable to distinguished triangles (blueprint
-  `definition-verdier-dual-evaluation--3` on the pro-étale site).
+  triangles in either variable to distinguished triangles.
 - `AlgebraicGeometry.ProEtale.derivedHomShiftIso`: `RHom(K⟦a⟧, -) ≅ RHom(K, -)⟦-a⟧`.
 -/
 
@@ -76,8 +75,7 @@ instance isTriangulated_derivedTensorObj
   inferInstanceAs
     (((curriedTensor (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))).obj K).IsTriangulated)
 
-/-- Blueprint `definition-verdier-dual-evaluation--3` on the pro-étale site, first variable: for a
-distinguished triangle `K' ⟶ K ⟶ K'' ⟶ K'[1]` of `D(X_proét)` and any `M`, the maps
+/-- For a distinguished triangle `K' ⟶ K ⟶ K'' ⟶ K'[1]` of `D(X_proét)` and any `M`, the maps
 `RHom(K'', M) ⟶ RHom(K, M) ⟶ RHom(K', M)` extend to a distinguished triangle. -/
 theorem exists_distTriang_derivedHom_left
     (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
@@ -93,8 +91,8 @@ theorem exists_distTriang_derivedHom_left
     hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} _
   exact DerivedCategory.exists_distinguished_ihom_pre T hT M
 
-/-- Blueprint `definition-verdier-dual-evaluation--3` on the pro-étale site, second variable: the
-functor `RHom(K, -)` is triangulated, being right adjoint to the triangulated functor `K ⊗ᴸ -`. -/
+/-- The functor `RHom(K, -)` is triangulated, being right adjoint to the triangulated
+functor `K ⊗ᴸ -`. -/
 theorem exists_distTriang_derivedHom_right
     (K : (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))ᵒᵖ)
     (T : Triangle (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)))

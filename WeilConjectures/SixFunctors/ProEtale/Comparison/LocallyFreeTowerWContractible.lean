@@ -109,9 +109,9 @@ theorem nonempty_iso_constantSheaf_upperStar_comparisonUpperStar {S : Scheme.{u}
 tower of étale sheaves of `Λ`-modules on `S` with epimorphic transitions, where each `Lₙ` is
 étale-locally isomorphic to the constant sheaf at a finite module `Mₙ`, and every surjection
 `Mₙ₊₁ ⟶ Mₙ` is the standard map `stdₙ` up to an automorphism of `Mₙ₊₁` (e.g. free modules of
-constant rank over `𝒪_E ⧸ ℓⁿ`, `Module.Basis.exists_basis_map_eq`). Then for every object
-`W ≅ Spec R` of `S_proét`, `R` w-contractible, the tower `W^* ν^* Lₙ` is isomorphic to the
-standard tower of constant sheaves `(Mₙ, stdₙ)`, simultaneously for all `n`. -/
+constant rank over `𝒪_E ⧸ ℓⁿ`). Then for every object `W ≅ Spec R` of `S_proét`, `R`
+w-contractible, the tower `W^* ν^* Lₙ` is isomorphic to the standard tower of constant sheaves
+`(Mₙ, stdₙ)`, simultaneously for all `n`. -/
 theorem nonempty_iso_ofOpSequence_constantSheaf_upperStar_comparisonUpperStar
     {Λ : Type (u + 1)} [CommRing Λ] {S : Scheme.{u}}
     (L : ℕᵒᵖ ⥤ Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))

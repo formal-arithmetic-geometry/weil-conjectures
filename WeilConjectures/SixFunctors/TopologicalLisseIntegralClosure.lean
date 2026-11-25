@@ -8,12 +8,13 @@ module
 public import WeilConjectures.SixFunctors.Integral.IntegralModelsGenerators
 
 /-! Lattice filtration step for topological Noetherian integral generators.
-Source: Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14(2), together with the
-ordered lattice filtration in the topological Noetherian integral-model argument
-(blueprint: lem-sfb-topological-lisse-integral-closure).
 
 The missing argument constructs a finite stratified integral lattice filtration of a
 lisse finite-coefficient module and identifies each quotient with an integral generator.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.13, Proposition 6.8.14(2)
 -/
 
 @[expose] public section
@@ -24,34 +25,7 @@ open AlgebraicGeometry AlgebraicGeometry.ProEtale
 namespace WeilConjectures.SixFunctors
 
 /-- A lisse finite-coefficient extension `v_! t_* L` belongs to the triangulated,
-isomorphism-closed closure of the integral locally free generators.
-
-Source: Bhatt--Scholze, Lemma 6.8.13 (first paragraph) and Proposition 6.8.14(2);
-steps 1 and 3 of the plan of lem-sfb-topological-integral-generators
-(blueprint: lem-sfb-topological-lisse-integral-closure).
-
-Proof:
-1. `T` is topologically Noetherian, as a subspace of `X`. By
-   lem-sfb-topological-stratified-lattices choose an ordered finite stratification
-   `T = ⊔ T_k` with opens `U_k = T_1 ∪ ... ∪ T_k` (`u_k : U_k → T`, `b_k : T_k → T`,
-   `c_k : T_k → U_k` closed) and `O_E`-lattices `L_{0,k} ⊆ b_k^* L` with
-   `E ⊗ L_{0,k} ≅ b_k^* L`.
-2. Put `L_k = u_{k!} u_k^* L`. The open-closed localization sequence
-   (lem-weil-pbc-proetale-ringed-open-closed) makes `L_{k-1} → L_k` monic, and by
-   lem-sfb-open-filtration-successor `L_k / L_{k-1} ≅ u_{k!} c_{k*} (b_k^* L)`, with
-   `L_0 = 0` and `L_m = L`.
-3. `v_!` and `t_*` are exact, so applying them gives a finite filtration of `v_! t_* L`;
-   by the composition comparisons of lem-sfb-topological-locally-closed-extension each
-   quotient is `a_{k!}(b_k^* L)` for the locally closed `a_k : T_k → X`, written as an
-   open immersion followed by a closed immersion (all opens are quasi-compact by
-   lem-sfb-noetherian-space-compact-subsets).
-4. `E_X` is flat over `O_{E,X}` (lemma-comparison-completed-coefficients--2), and the open and
-   closed projection formulas (lem-sfb-condensed-support-projection-formula) give
-   `E ⊗ a_{k!} L_{0,k} ≅ a_{k!}(E ⊗ L_{0,k}) ≅ a_{k!}(b_k^* L)`: each quotient in degree
-   zero is isomorphic to an integral generator.
-5. Each short exact sequence of the filtration is a distinguished triangle
-   (lem-sf-derived-ses-triangle); induction on `k`, starting from the zero object, puts
-   `v_! t_* L [0]` in the closure. -/
+isomorphism-closed closure of the integral locally free generators. -/
 theorem topological_lisse_integral_closure
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]

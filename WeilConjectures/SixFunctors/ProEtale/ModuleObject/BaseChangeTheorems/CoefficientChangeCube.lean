@@ -35,7 +35,7 @@ morphism `BC_sq^Λ'` at `T^X K` are isomorphic arrows: on the ambient derived ca
 bounded constructible derived categories
 (`ProEtale.CondensedRing.nonempty_arrowIso_boundedConstructibleBaseChange_extendScalars`).
 
-This is the formal part of blueprint `lemma-naturality-pasting-comparison`: by the cube law of
+Formally, by the cube law of
 mates (`CategoryTheory.mateEquiv_app_cube`), the compatibility of `derivedPullIso` with the
 pullback square comparisons transposes to the compatibility of the base-change morphisms with
 `derivedPullIso` and `derivedPushHom`, the latter being the mate of the former
@@ -62,12 +62,8 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ
 section Ambient
 
 /-- The comparison isomorphisms `derivedPullIso a : Lh^*_Λ ⋙ T ≅ T ⋙ Lh^*_Λ'` are compatible with
-the composition isomorphisms `L(p ≫ q)^* ≅ Lq^* ⋙ Lp^*`: for composable `p`, `q` and every `M`,
-```
-T L(p ≫ q)^* M ⟶ L(p ≫ q)^* T M ⟶ Lp^* Lq^* T M
-  = T L(p ≫ q)^* M ⟶ T Lp^* Lq^* M ⟶ Lp^* T Lq^* M ⟶ Lp^* Lq^* T M.
-```
--/
+the composition isomorphisms `L(p ≫ q)^* ≅ Lq^* ⋙ Lp^*`: for composable `p`, `q` and every `M`, the
+two resulting maps `T L(p ≫ q)^* M ⟶ Lp^* Lq^* T M` agree. -/
 def DerivedPullIsoCompCoherence : Prop :=
   ∀ ⦃X Y Z : Scheme.{u}⦄ (p : X ⟶ Y) (q : Y ⟶ Z)
     (M : DerivedCategory (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))),

@@ -13,7 +13,11 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.Conde
 
 /-! # Restriction of the internal-module exchange to one base open
 
-Source: Stacks Project, Tags 0D6F and 07A7, and ringed open restriction.
+Restriction of the exchange to a base open, compatible with ringed open restriction.
+
+## References
+
+* Stacks Project, Tags 0D6F and 07A7
 -/
 
 @[expose] public noncomputable section

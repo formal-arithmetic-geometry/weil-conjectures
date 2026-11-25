@@ -105,8 +105,7 @@ variable {W W' Y : Scheme.{u}}
 
 /-- **Deck transformations and the counit.** Let `g : W' ⟶ W` be a morphism over `Y`, that is
 `g ≫ w = w'`, and let `η : G ⟶ g_* G'`. The morphism `σ : w_* G ⟶ w'_* G'` given by `w_* η`
-followed by `w_* g_* ≅ w'_*` (for `w = w'` and `g` a deck transformation, its action on `w_* G`)
-satisfies
+followed by `w_* g_* ≅ w'_*` satisfies
 
 `w'^* σ ≫ ε_{w'} = (w'^* ≅ g^* w^*) ≫ g^* ε_w ≫ η^♭`
 

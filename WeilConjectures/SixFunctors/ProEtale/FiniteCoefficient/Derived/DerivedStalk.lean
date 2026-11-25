@@ -44,13 +44,10 @@ namespace ProEtale
 
 variable {X : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω]
 
-/-- Blueprint `pur9-def-derived-stalk`: Derived geometric stalk.
-
-For a geometric point `x̄ : Spec Ω ⟶ X`, with `Ω` separably closed, the derived geometric
+/-- For a geometric point `x̄ : Spec Ω ⟶ X`, with `Ω` separably closed, the derived geometric
 stalk `K ↦ K_x̄ := RΓ(Spec Ω_proét, Lx̄^* K) : D(X_proét) ⥤ D(A)`: the derived pro-étale
 pullback `L((x̄)^*[A])` along `x̄` followed by the derived pro-étale global sections
-`AlgebraicGeometry.ProEtale.rightDerivedGlobalSections` on `Spec Ω`. The blueprint takes
-`A` to be the category of `A_{E,n}`-modules. -/
+`AlgebraicGeometry.ProEtale.rightDerivedGlobalSections` on `Spec Ω`. -/
 noncomputable def derivedGeometricStalk (x : Spec (.of Ω) ⟶ X) :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤ DerivedCategory A :=
   L((x)^*[A]) ⋙ rightDerivedGlobalSections A (Spec (.of Ω))

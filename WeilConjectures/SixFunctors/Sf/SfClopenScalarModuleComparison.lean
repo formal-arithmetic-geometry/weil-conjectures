@@ -8,9 +8,16 @@ public import WeilConjectures.SixFunctors.Sf.SfClopenRestrictionData
 import all WeilConjectures.SixFunctors.Sf.SfClopenScalarRawRestrictionComparison
 import all WeilConjectures.Algebra.Homology.QuotientIsoTransport.RingIsoQuotientSystemTransport
 /-! # Ordinary scalar extension comparison on a clopen component
-Source: Stacks Project, sites-cohomology.tex, Tag 06YY.
-(blueprint: lem-sf-clopen-scalar-module-comparison).
+
+The ordinary scalar extension of modules commutes with restriction to a clopen component.
+
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
+* [Stacks, Tag 03CY](https://stacks.math.columbia.edu/tag/03CY)
 -/
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -122,23 +129,7 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
 attribute [local irreducible] sfScalarModelIso ordinaryScalarSquare
 
-/-- Restriction commutes with ordinary scalar extension, with its normalized tensor formula.
-
-Source: Stacks Project, sites-modules.tex, Tags 03EL and 03CY;
-sites-cohomology.tex, Tag 06YY.
-(blueprint: lem-sf-clopen-scalar-module-comparison).
-
-Proof: first use cocontinuity of the open-site inclusion to compare the sheafifications
-of the restricted tensor presheaf. Transport this comparison through the object and map
-equations of the recorded ordinary scalar models. Lift the coefficient comparisons to
-commutative-ring sheaf isomorphisms; their square is `d.projection`. The normalized
-scalar square for these ring isomorphisms identifies the restricted scalar model with
-the local scalar model. Transport the latter to the specified scalar-reduction functor
-by its object and map equations. On pure tensors the first comparison preserves the
-coefficient, the scalar square applies the inverse finite coefficient isomorphism, and
-the final transport preserves the sheafification unit. The inverse finite coefficient
-map cancels `d.finite(s)`, giving the displayed formula. Every construction is natural
-in the module and also applies to an empty component and zero rings. -/
+/-- Restriction commutes with ordinary scalar extension, with its normalized tensor formula. -/
 theorem sf_clopen_scalar_module_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (T : Scheme.{t}) (U : T.Opens)

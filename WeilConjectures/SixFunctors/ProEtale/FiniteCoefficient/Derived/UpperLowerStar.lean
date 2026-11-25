@@ -181,51 +181,21 @@ namespace ProEtale
 
 /-- The total left derived functor `Lg^* : D(Y_proét) ⥤ D(Z_proét)` of the pullback `g^*`
 along an arbitrary morphism `g : Z ⟶ Y` on the unbounded derived categories of pro-étale
-sheaves, defined via the K-flat left derivability structure: `Lg^*` is computed by
-applying `g^*` to a K-flat resolution.
-
-It is not a definition of its own: it is the generic `Functor.leftDerivedFunctor`,
-written `L(-)`, applied to the underived pullback `(g)^*[A]`.
-
-Since `g^*` is exact, the counit `Lg^* ∘ Q ⟶ Q ∘ g^*` is in fact an isomorphism
-everywhere; the construction via the derivability structure is uniform in the functor
-and applies verbatim once `g^*` is replaced by a non-exact functor (e.g. the pullback
-of sheaves of modules over a varying sheaf of rings). -/
+sheaves, computed by applying `g^*` to a K-flat resolution. It is the generic
+`Functor.leftDerivedFunctor`, written `L(-)`, applied to the underived pullback `(g)^*[A]`. -/
 noncomputable example :
     DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A) :=
   L((g)^*[A])
 
 /-- The compatibility of the derived pullback with the levelwise functor: the total left
-derived functor `Lg^*`, computed via K-flat resolutions, is canonically isomorphic to
-the functor induced by the exact functor `g^*` on the derived categories.
-
-```
-                          Lg^*
-                   -------------------->
-        D(Y_proét)           ≅            D(Z_proét)
-                   -------------------->
-                       D((g)^*[A])
-```
-
-This is `Functor.leftDerivedFunctorIsoMapDerivedCategory` at `g^*`. -/
+derived functor `Lg^*` is canonically isomorphic to the functor `D((g)^*[A])` induced by the
+exact functor `g^*` on the derived categories. -/
 noncomputable def leftDerivedUpperStarIsoMapDerivedCategory :
     L((g)^*[A]) ≅ D((g)^*[A]) :=
   (g)^*[A].leftDerivedFunctorIsoMapDerivedCategory
 
-/-- The composition isomorphism `L(g₁ ≫ g₂)^* ≅ Lg₂^* ∘ Lg₁^*` of derived pullbacks,
-obtained from the underived composition isomorphism `ProEtale.upperStarComp` and the
-compatibility of left derivation with `mapDerivedCategory` for exact functors.
-
-```
-                    L(g₁ ≫ g₂)^*
-D(R_proét) -----------------------------> D(T_proét)
-      |                                       ^
-      |                                       |
-      +---------> D(S_proét) -----------------+
-          Lg₂^*                  Lg₁^*
-```
--/
+/-- The composition isomorphism `L(g₁ ≫ g₂)^* ≅ Lg₂^* ∘ Lg₁^*` of derived pullbacks. -/
 noncomputable def leftDerivedUpperStarComp {T S R : Scheme.{u}}
     (g₁ : T ⟶ S) (g₂ : S ⟶ R) :
     L((g₁ ≫ g₂)^*[A]) ≅ L((g₂)^*[A]) ⋙ L((g₁)^*[A]) :=
@@ -252,20 +222,7 @@ lemma leftDerivedUpperStarCongr_rfl {X Y : Scheme.{u}} {f : X ⟶ Y} :
 
 /-- The exactness comparison `H^n ∘ g^* ≅ g^* ∘ H^n`: since the underived pullback `g^*`
 on pro-étale sheaves is exact, applying it to the `n`-th homology sheaf of an object of
-the derived category computes the `n`-th homology sheaf of the derived pullback.
-
-```
-                    H^n
-D(Y_proét) -----------------> Sh(Y_proét)
-    |                              |
-  Lg^*                            g^*
-    |                              |
-    v                              v
-D(Z_proét) -----------------> Sh(Z_proét)
-                    H^n
-```
-
-This is `Functor.leftDerivedFunctorHomologyFunctorIso` at `g^*`. -/
+the derived category computes the `n`-th homology sheaf of the derived pullback. -/
 noncomputable def leftDerivedUpperStarHomologyFunctorIso (n : ℤ) :
     DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology Y) A) n ⋙ (g)^*[A] ≅
       L((g)^*[A]) ⋙
@@ -274,20 +231,7 @@ noncomputable def leftDerivedUpperStarHomologyFunctorIso (n : ℤ) :
 
 /-- The single-degree comparison for the derived pullback: since the underived pullback
 `g^*` on pro-étale sheaves is exact, the derived pullback of a sheaf placed in degree `0`
-is the pullback of the sheaf placed in degree `0`, `Lg^*(F[0]) ≅ (g^* F)[0]`.
-
-```
-                     (-)[0]
-Sh(Y_proét) -----------------> D(Y_proét)
-     |                              |
-     g^*                          Lg^*
-     |                              |
-     v                              v
-Sh(Z_proét) -----------------> D(Z_proét)
-                     (-)[0]
-```
-
-This is `Functor.singleFunctorCompLeftDerivedFunctorIso` at `g^*`. -/
+is the pullback of the sheaf placed in degree `0`, `Lg^*(F[0]) ≅ (g^* F)[0]`. -/
 noncomputable def singleFunctorCompLeftDerivedUpperStarIso :
     DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology Y) A) 0 ⋙ L((g)^*[A]) ≅
       (g)^*[A] ⋙ DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology Z) A) 0 :=
@@ -333,14 +277,7 @@ variable [Abelian.HasFunctorialFlatResolution A]
 
 namespace ProEtale
 
-/-- Blueprint `prose-03-02`: Derived direct image; and blueprint
-`prose-03-02`, the derived pullback. The derived direct image
-`Rg_* = R((g)_*[A])` (the generic total right derived functor, computed by K-injective
-resolutions) and the derived pullback `Lg^* = L((g)^*[A])` (computed by K-flat resolutions,
-isomorphic to `D((g)^*[A])` by `leftDerivedUpperStarIsoMapDerivedCategory`) have no
-definitions of their own; this is their adjunction.
-
-The derived adjunction `Lg^* ⊣ Rg_*` between the total derived functors of the
+/-- The derived adjunction `Lg^* ⊣ Rg_*` between the total derived functors of the
 pullback and the pushforward along an arbitrary morphism `g : Z ⟶ Y` on the unbounded
 derived categories of pro-étale sheaves, induced by the adjunction `g^* ⊣ g_*`. -/
 noncomputable def derivedUpperStarLowerStarAdjunction :
@@ -368,21 +305,8 @@ noncomputable def leftDerivedUpperStarSquareIso (sq : CommSq g' f' f g) :
   (leftDerivedUpperStarComp A f' g).symm ≪≫ leftDerivedUpperStarCongr A sq.w.symm ≪≫
     leftDerivedUpperStarComp A g' f
 
-/-- Blueprint `definition-pro-etale-base-change-map--1`: Exchange and projection transformations,
-the direct-image exchange `Ex_*`.
-
-The derived base change map `Lg^* Rf_* ⟶ Rf'_* Lg'^*` of a commutative square
-`g' ≫ f = f' ≫ g` of schemes,
-
-```
-  X' ──g'──▶ X
-  │          │
-  f'         f
-  ▼          ▼
-  Y' ──g───▶ Y
-```
-
-the mate (`CategoryTheory.mateEquiv`), along `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`, of the
+/-- The derived base change map `Lg^* Rf_* ⟶ Rf'_* Lg'^*` of a commutative square
+`g' ≫ f = f' ≫ g` of schemes, the mate along `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*` of the
 isomorphism `leftDerivedUpperStarSquareIso : Lf'^* Lg^* ≃ Lg'^* Lf^*`. The square is not
 required to be Cartesian, and the map is not an isomorphism in general. -/
 noncomputable def derivedBaseChangeMap (sq : CommSq g' f' f g) :

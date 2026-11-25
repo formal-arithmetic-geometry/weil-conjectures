@@ -62,25 +62,7 @@ private theorem transportComposition
   rw [cph]
 
 -- The concrete derived-module functors require more than the default elaboration budget.
-/-- Composition for the specified normalized comparison family.
-
-Source: blueprint proposition-composition-base-change-rf-shriek--1, clause (1), the
-composition-isomorphism and canonicity paragraphs, specialized in
-proposition-construction-independence-rf-shriek step 6. (blueprint:
-lem-sfb-total-derived-compatible-composition).
-
-Proof: specialize localizingClosure_ctf_equals_bc to O_E using the identity
-coefficient isomorphism. Write he for the equality Loc(Dctf) = Loc(Dbc). Use the
-nonrational localizing composition theorem for the integral coefficient O_E,
-transported along he. Its refinement compatibility is for the same canonical open
-unit and proper counit as hn. Pass through common dense refinements to identify its
-comparison family with φ; injectivity of the open adjunction and hn give equality of
-both normalized refinement maps. Equivalently take one composition seed and transport
-it along φ in all three variables. Naturality of φ moves the f-comparison across the
-g-comparison, and the three cocycle equations hc combine the factors. This yields the
-simultaneous comparison equation displayed below. Preservation h supplies membership
-of the middle object, and fullness keeps all morphisms in the original ambient category.
-The construction includes identity maps and empty schemes. -/
+/-- Composition for the specified normalized comparison family. -/
 theorem compatibleComposition
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

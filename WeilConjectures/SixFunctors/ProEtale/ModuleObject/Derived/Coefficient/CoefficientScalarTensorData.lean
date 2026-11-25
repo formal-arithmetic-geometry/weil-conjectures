@@ -36,10 +36,6 @@ public import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIso
 
 /-! # Data for scalar adjunction and tensor realization in the coefficient square
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 07A6; blueprint
-main-20261015, proper-base-change-rational.proof.md (3)
-(blueprint: lem-sfb-coefficient-scalar-tensor-realization).
-
 The section realization retains the ordinary balanced generators, the derived Hom
 bijection, and the signed total representative equation. The pullback path comparison
 is constructed by localization of the ordinary coefficient square, independently of
@@ -52,6 +48,10 @@ the derived direct-image mate. All categories are ordinary unbounded derived cat
 
 The realization theorem remains in `CoefficientScalarTensorRealization`. These
 constructions are shared with its independent section-realization and derived tensor-square lemmas.
+
+## References
+
+* Stacks Project, Tags 03EK, 03EL, 06YY, 07A4, 07A6 and 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -79,9 +79,7 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   (a : R ⟶ S) [IsMonHom a]
   [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))]
 
-/-- The section-ring map of the actual coefficient morphism.
-Source: Stacks 03EK, 07A6
-(blueprint: lem-sfb-coefficient-scalar-tensor-realization). -/
+/-- The section-ring map of the actual coefficient morphism. -/
 abbrev coefficientSectionScalarMap (Z : Scheme.{u}) :
     ModuleRingedComparison.ring R Z ⟶ ModuleRingedComparison.ring S Z :=
   InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u}
@@ -91,9 +89,7 @@ variable [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S Z)]
 
 /-- The canonical scalar/pullback path comparison, obtained by total left derivation
-of the ordinary ring-compatible coefficient square. Thus its direction is P_S T_Y → T_X P_R.
-Source: Stacks 0D6D, 07A4
-(blueprint: lem-sfb-coefficient-scalar-tensor-realization). -/
+of the ordinary ring-compatible coefficient square. Thus its direction is P_S T_Y → T_X P_R. -/
 def coefficientScalarPathIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     internalScalarExtension a Y ⋙ moduleObjectDerivedPullback S f ≅
       moduleObjectDerivedPullback R f ⋙ internalScalarExtension a X :=
@@ -104,10 +100,7 @@ def coefficientScalarPathIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (upperStar S f) (pullIso a f).symm
 
 /-- The actual geometric derived tensor comparison, with its pointwise type displayed.
-This is the comparison used in the module-object projection morphism, without replacing it
-by an unspecified monoidal structure.
-Source: blueprint main-20261015, six-functors basics, module derived push/pull
-(blueprint: lem-sfb-coefficient-scalar-tensor-realization). -/
+This is the comparison used in the module-object projection morphism. -/
 def coefficientGeometricTensorComparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -118,9 +111,7 @@ def coefficientGeometricTensorComparison
   ((leftDerivedUpperStarTensor Λ f).app A).app B
 
 /-- The actual sheafification image of s tensor x, in a normalized section scalar pair.
-The equality transport identifies its extension object with the existing changeOfRings.
-Source: Stacks 03EK
-(blueprint: lem-sfb-coefficient-scalar-tensor-realization). -/
+The equality transport identifies its extension object with the existing changeOfRings. -/
 def coefficientSectionScalarPure (Z : Scheme.{u})
     (b : SheafOfModules.ScalarDerivedPair.{u + 1, u, u + 1, u + 1}
       (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (coefficientSectionScalarMap a Z))
@@ -133,9 +124,7 @@ def coefficientSectionScalarPure (Z : Scheme.{u})
         (s ⊗ₜ[_, ((coefficientSectionScalarMap a Z).hom.app V).hom] x))
 
 /-- The canonical exact scalar-extension comparison on a complex. Its two factors
-are the universal derived-to-exact comparison and the exact localization comparison.
-Source: Stacks 06YY, 07A6
-(blueprint: lem-sfb-coefficient-scalar-tensor-realization). -/
+are the universal derived-to-exact comparison and the exact localization comparison. -/
 def coefficientInternalScalarComplex (Z : Scheme.{u})
     (P : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
     (internalScalarExtension a Z).obj (DerivedCategory.Q.obj P) ⟶
@@ -145,9 +134,7 @@ def coefficientInternalScalarComplex (Z : Scheme.{u})
       (DerivedCategory.Q.obj P) ≫
     (Mod.extendScalars (coefficientMap a Z)).mapDerivedCategoryFactors.hom.app P
 
-/-- Signed direct-sum totalization of the ordinary scalar tensorator.
-Source: Stacks 07A4, constituent maps of 03EL
-(blueprint: lem-sfb-coefficient-scalar-tensor-realization). -/
+/-- Signed direct-sum totalization of the ordinary scalar tensorator. -/
 def coefficientSectionScalarTotal (Z : Scheme.{u})
     (b : SheafOfModules.ScalarDerivedPair.{u + 1, u, u + 1, u + 1}
       (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (coefficientSectionScalarMap a Z))
@@ -173,12 +160,9 @@ def coefficientSectionScalarTotal (Z : Scheme.{u})
       ((b.extension.mapHomologicalComplex (.up ℤ)).obj Q)).symm
 
 /-- The scalar realization clauses, with every operation tied to the actual coefficient
-map. The section pair has the existing universal left-derived and adjunction normalization.
-The ordinary tensorator is pinned on all generalized balanced generators. The derived
-one is pinned separately by its flat-term K-flat representative square, and is then
-identified with the specified internal tensorator. No existence witness is chosen as data.
-Source: Stacks 03EK, 03EL, 06YY, 07A4, 07A6
-(blueprint: lem-sfb-coefficient-scalar-tensor-realization). -/
+map. The section pair has the existing universal left-derived and adjunction normalization,
+the ordinary tensorator is pinned on all generalized balanced generators, and the derived one is
+pinned by its flat-term K-flat representative square. -/
 def CoefficientScalarSectionRealization (Z : Scheme.{u}) : Prop :=
   ∃ b : SheafOfModules.ScalarDerivedPair.{u + 1, u, u + 1, u + 1}
       (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (coefficientSectionScalarMap a Z),

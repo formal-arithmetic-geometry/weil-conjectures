@@ -27,7 +27,7 @@ families of weakly étale morphisms, that is the fpqc coverings by weakly étale
 A sheaf of modules over the constant sheaf `A_Y` is the same as a sheaf with values in
 `ModuleCat A`, which is the form used here.
 
-The size convention of the blueprint is implemented by Lean's universes: schemes live in
+The size convention is implemented by Lean's universes: schemes live in
 `Type u`, coefficient rings in `Type (u + 1)`, sheaves take values in `ModuleCat.{u + 1} A`, and
 the site `Y.ProEt`, which is essentially small in `u + 1`, makes the sheaf category Grothendieck
 abelian (`AlgebraicGeometry.isGrothendieckAbelian_sheaf_proEtTopology`), hence equipped with a
@@ -46,24 +46,12 @@ namespace AlgebraicGeometry.ProEtale
 /-- **The derived category of pro-étale sheaves of `A`-modules.** For a scheme `Y` and a
 commutative ring `A`, `D(Y_proét, A)` is the unbounded derived category of the abelian category
 of sheaves of `A`-modules on the small pro-étale site `Y.ProEt`
-(`AlgebraicGeometry.Scheme.ProEt.topology Y`).
-
-The size convention is realised by universes: schemes in `Type u`, the coefficient ring `A` and
-the values in `ModuleCat.{u + 1} A` in `Type (u + 1)`, the site being essentially small in `u + 1`.
-
-(blueprint: `definition-small-pro-etale-site--1`, `prose-01-10`) -/
+(`AlgebraicGeometry.Scheme.ProEt.topology Y`). -/
 abbrev ModuleDerivedCategory (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] : Type _ :=
   DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A))
 
-/-- Blueprint `def-weil-derived-cohomology-sheaves`: Cohomology sheaves of a derived complex
-
-For a scheme `Y`, a commutative ring `A` and `r : ℤ`, the `r`-th cohomology sheaf functor
-`𝓗^r : D(Y_proét, A) ⥤ Sh(Y_proét, A)`, the homology functor of the standard t-structure
-(`DerivedCategory.homologyFunctor`). Being a functor on the derived category it is invariant
-under quasi-isomorphism (`AlgebraicGeometry.ProEtale.cohomologySheafQIso`); the nonpositive and
-nonnegative parts of the standard t-structure are described by
-`AlgebraicGeometry.ProEtale.isLE_iff_isZero_cohomologySheaf` and
-`AlgebraicGeometry.ProEtale.isGE_iff_isZero_cohomologySheaf`. -/
+/-- For a scheme `Y`, a commutative ring `A` and `r : ℤ`, the `r`-th cohomology sheaf functor
+`𝓗^r : D(Y_proét, A) ⥤ Sh(Y_proét, A)`, the homology functor of the standard t-structure. -/
 noncomputable abbrev cohomologySheaf (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] (r : ℤ) :
     ModuleDerivedCategory Y A ⥤ Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A) :=
   DerivedCategory.homologyFunctor _ r

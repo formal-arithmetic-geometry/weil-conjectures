@@ -29,7 +29,7 @@ the iterates `F_X^{(m + n)} = F_X^{(n)} ∘ F_X^{(m)}`.
 - `AlgebraicGeometry.ProEtale.lowerStarIterateFrobeniusIso`,
   `AlgebraicGeometry.ProEtale.upperStarIterateFrobeniusIso`: `F_{X*} ≅ 𝟭` and `F_X^* ≅ 𝟭`.
 - `AlgebraicGeometry.ProEtale.leftDerivedUpperStarIterateFrobeniusIso`
-  (`lemma-scheme-frobenius-geometric-frobenius--1`): the canonical trivialization `LF_X^* ≅ 𝟭`.
+  : the canonical trivialization `LF_X^* ≅ 𝟭`.
 
 ## Main statements
 
@@ -195,15 +195,9 @@ lemma upperStarIterateFrobeniusIso_add (m : ℕ) :
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
 
-/-- Blueprint `lemma-scheme-frobenius-geometric-frobenius--1`: Canonical trivialization of absolute
-Frobenius pullback.
-
-Let `X` be a scheme in which the prime `p` vanishes. On the small pro-étale site of `X`, the
-derived pullback along the `p ^ n`-power absolute Frobenius `F_X` has a canonical
-trivialization `LF_X^* ≅ 𝟭`: the derived functor of the trivialization `F_X^* ≅ 𝟭` of the
-(exact) pullback, which comes from the relative Frobenius isomorphisms
-`r_V : V ≅ V ×_{X, F_X} X`; on the underived level, its compatibility with the iterates is
-`AlgebraicGeometry.ProEtale.upperStarIterateFrobeniusIso_add`. -/
+/-- Canonical trivialization of absolute Frobenius pullback: on the small pro-étale site of a
+scheme `X` in which the prime `p` vanishes, the derived pullback along the `p ^ n`-power absolute
+Frobenius `F_X` is canonically isomorphic to the identity, `LF_X^* ≅ 𝟭`. -/
 noncomputable def leftDerivedUpperStarIterateFrobeniusIso :
     L((X.iterateFrobenius hp hX n)^*[A]) ≅ 𝟭 _ :=
   Functor.leftDerivedFunctorIdIso (upperStarIterateFrobeniusIso A hp hX n)

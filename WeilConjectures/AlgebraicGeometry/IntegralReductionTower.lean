@@ -27,9 +27,6 @@ compatibility theorem follows from the quotient identity by functoriality.
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.style.haveILetI false
-set_option linter.style.whitespace false
-set_option linter.unusedVariables false
 
 universe u
 

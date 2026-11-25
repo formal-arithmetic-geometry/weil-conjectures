@@ -16,7 +16,12 @@ Restriction of scalars from a finite quotient `A_{n+1}` of the completed coeffic
 sheaf `A` to `A` is fully faithful, since the projection `A → A_{n+1}` is locally surjective.
 Restriction from `A_{k+1}` to `A` factors through restriction to any `A_{N+1}` with `k ≤ N`.
 
-Source: Stacks Project, Tags 03CZ and 03DA (auxiliary; not a blueprint node). -/
+## References
+
+* [Stacks, Tag 03CZ](https://stacks.math.columbia.edu/tag/03CZ)
+* [Stacks, Tag 03DA](https://stacks.math.columbia.edu/tag/03DA)
+* [Stacks, Tag 03CO](https://stacks.math.columbia.edu/tag/03CO)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -27,8 +32,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E]
 
-/-- Restriction of scalars from `A_{n+1}` to the completed coefficient ring is full.
-Source: Stacks Project, Tag 03CZ (auxiliary; not a blueprint node). -/
+/-- Restriction of scalars from `A_{n+1}` to the completed coefficient ring is full. -/
 instance scalarReductionRestriction_full (T : Scheme.{u}) (n : ℕ) :
     (scalarReductionRestriction.{u, u} l E T n).Full where
   map_surjective {M N} g := by
@@ -43,8 +47,7 @@ instance scalarReductionRestriction_full (T : Scheme.{u}) (n : ℕ) :
     apply SheafOfModules.hom_ext
     exact e.apply_symm_apply g.val
 
-/-- Restriction of scalars from `A_{n+1}` to the completed coefficient ring is faithful.
-Source: Stacks Project, Tag 03CZ (auxiliary; not a blueprint node). -/
+/-- Restriction of scalars from `A_{n+1}` to the completed coefficient ring is faithful. -/
 instance scalarReductionRestriction_faithful (T : Scheme.{u}) (n : ℕ) :
     (scalarReductionRestriction.{u, u} l E T n).Faithful where
   map_injective := by
@@ -52,8 +55,7 @@ instance scalarReductionRestriction_faithful (T : Scheme.{u}) (n : ℕ) :
     ext V x
     exact congrArg (fun a ↦ a.val.app V x) h
 
-/-- The surjective transition `A_{N+1} → A_{k+1}` between finite coefficient rings, `k ≤ N`.
-Source: Stacks Project, Tag 03CZ (auxiliary; not a blueprint node). -/
+/-- The surjective transition `A_{N+1} → A_{k+1}` between finite coefficient rings, `k ≤ N`. -/
 def coefficientExtensionRingMap {k N : ℕ} (h : k ≤ N) :
     Padic.coefficientExtensionRing l E (N + 1) →+* Padic.coefficientExtensionRing l E (k + 1) :=
   Ideal.Quotient.factor (Ideal.pow_le_pow_right (by omega))
@@ -62,8 +64,7 @@ theorem coefficientExtensionRingMap_surjective {k N : ℕ} (h : k ≤ N) :
     Function.Surjective (coefficientExtensionRingMap l E h) :=
   Ideal.Quotient.factor_surjective _
 
-/-- The constant-sheaf map induced by `coefficientExtensionRingMap`.
-Source: Stacks Project, Tag 03CZ (auxiliary; not a blueprint node). -/
+/-- The constant-sheaf map induced by `coefficientExtensionRingMap`. -/
 abbrev coefficientExtensionSheafMap (T : Scheme.{u}) {k N : ℕ} (h : k ≤ N) :
     proEtaleConstantRing T (Padic.coefficientExtensionRing l E (N + 1)) ⟶
       proEtaleConstantRing T (Padic.coefficientExtensionRing l E (k + 1)) :=
@@ -71,8 +72,7 @@ abbrev coefficientExtensionSheafMap (T : Scheme.{u}) {k N : ℕ} (h : k ≤ N) :
     (CommRingCat.ofHom (RingHom.ulift.{u + 1, u + 1} (coefficientExtensionRingMap l E h)))
 
 /-- The coordinate projections of the completed coefficient ring are compatible with the
-finite transitions.
-Source: Stacks Project, Tag 03CO (auxiliary; not a blueprint node). -/
+finite transitions. -/
 theorem completedIntegralCommRingProjectionUnrestricted_comp_sheafMap (T : Scheme.{u})
     {k N : ℕ} (h : k ≤ N) :
     completedIntegralCommRingProjectionUnrestricted.{u, u} l E T N ≫
@@ -103,8 +103,7 @@ theorem completedIntegralCommRingProjectionUnrestricted_comp_sheafMap (T : Schem
       (ih (Nat.le_add_right k j))
 
 /-- Restriction from `A_{k+1}` to `A` is restriction from `A_{k+1}` to `A_{N+1}` followed by
-restriction from `A_{N+1}` to `A`.
-Source: Stacks Project, Tag 03DA (auxiliary; not a blueprint node). -/
+restriction from `A_{N+1}` to `A`. -/
 def scalarReductionRestrictionTransitionIso (T : Scheme.{u}) {k N : ℕ} (h : k ≤ N) :
     proEtaleRingRestrictScalars (coefficientExtensionSheafMap l E T h) ⋙
         scalarReductionRestriction.{u, u} l E T N ≅

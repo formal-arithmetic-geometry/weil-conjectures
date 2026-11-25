@@ -24,7 +24,6 @@ universe u
 
 open CategoryTheory
 
-set_option linter.style.haveILetI false in
 /-- The degree-zero lifting step in the comparison of a free complex with a resolution:
 the projectivity lifting for the augmentation. (Stacks, Tag 00LS) -/
 theorem free_complex_base_lift
@@ -35,7 +34,7 @@ theorem free_complex_base_lift
     (hη : Function.Surjective η)
     (hfree : Module.Free R (F 0)) :
     ∃ a₀ : F 0 ⟶ N' 0, a₀ ≫ η = π ≫ φ := by
-  haveI : Module.Projective R (F 0) := Module.Projective.of_free
+  have : Module.Projective R (F 0) := Module.Projective.of_free
   obtain ⟨a, ha⟩ := Module.projective_lifting_property (P := (F 0))
     (M := (N' 0)) (N := N) η.hom (φ.hom.comp π.hom) hη
   refine ⟨ModuleCat.ofHom a, ?_⟩

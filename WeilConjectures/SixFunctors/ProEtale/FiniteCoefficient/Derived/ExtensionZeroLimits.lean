@@ -20,8 +20,7 @@ closed complement `i : Z ⟶ X`. The extension by zero `j_! : D(U_proét) ⥤ D(
 products
 (`AlgebraicGeometry.ProEtale.preservesLimitsOfShape_mapDerivedCategory_openImmersionLowerShriek`)
 and derived limits `R lim` of towers
-(`AlgebraicGeometry.ProEtale.isHomotopyLimit_mapCone_openImmersionLowerShriek`); this is part (2)
-of blueprint `proposition-extension-zero-restriction-closed-subscheme`.
+(`AlgebraicGeometry.ProEtale.isHomotopyLimit_mapCone_openImmersionLowerShriek`).
 
 The pro-étale site has enough weakly contractible objects, so products of pro-étale sheaves of
 modules are exact (`AlgebraicGeometry.ProEtale.hasExactLimitsOfShape_discrete`), and products in
@@ -31,6 +30,10 @@ preserves products of sheaves
 it preserves derived products. The derived limit of a tower is characterised by the Milnor
 triangle `R lim Kₙ ⟶ ∏ Kₙ ──1 - t──▶ ∏ Kₙ ⟶`, which is preserved by any triangulated functor
 preserving countable products.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 3.1.10
 -/
 
 @[expose] public section
@@ -47,7 +50,7 @@ open Scheme
 
 namespace ProEtale
 
-/-- **Bhatt–Scholze, Proposition 3.1.10.** Products of pro-étale sheaves of modules are exact:
+/-- Products of pro-étale sheaves of modules are exact:
 the pro-étale site has enough (affine) weakly contractible objects. -/
 instance hasExactLimitsOfShape_discrete {T : Scheme.{u}} {R : Type (u + 1)} [Ring R]
     (β : Type (u + 1)) :
@@ -69,8 +72,7 @@ lemma preservesLimitsOfShape_discrete_openImmersionLowerShriek
     PreservesProduct.of_iso_comparison _ _
   preservesLimitsOfShape_of_discrete _
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` (subsection
-`lemma-local-cohomology-right-adjoint--1`), part (2), products: let `X` be quasi-compact and
+/-- Let `X` be quasi-compact and
 quasi-separated and `j : U ⟶ X` a quasi-compact open immersion with closed complement `i`. The
 extension by zero `j_! : D(U_proét) ⥤ D(X_proét)` preserves products. -/
 theorem preservesLimitsOfShape_mapDerivedCategory_openImmersionLowerShriek
@@ -79,8 +81,7 @@ theorem preservesLimitsOfShape_mapDerivedCategory_openImmersionLowerShriek
   have := preservesLimitsOfShape_discrete_openImmersionLowerShriek (R := R) i j hij β
   Functor.preservesLimitsOfShape_discrete_mapDerivedCategory _
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` (subsection
-`lemma-local-cohomology-right-adjoint--1`), part (2), derived limits: let `X` be quasi-compact and
+/-- Let `X` be quasi-compact and
 quasi-separated and `j : U ⟶ X` a quasi-compact open immersion with closed complement `i`. The
 extension by zero `j_! : D(U_proét) ⥤ D(X_proét)` preserves derived inverse limits `R lim` of
 towers: it carries a homotopy limit cone (one whose legs fit into a distinguished Milnor triangle
