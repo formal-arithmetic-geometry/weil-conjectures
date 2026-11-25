@@ -9,8 +9,13 @@ public import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingCohere
 
 /-! # Generator formulas for the chain-level system tensor model
 
-Source: Stacks 03D2, 03EK, 03EL, 07A4 and 0941
-(blueprint: stage3-pod-reindexing-coherent-tensor-roos).
+We prove section-level formulas for the total-tensor generators and for restriction to the
+tower, used to compute the chain-level model of the coherent system tensor comparison on
+unit-inserted sections.
+
+## References
+
+* Stacks 03D2, 03EK, 03EL, 06YN, 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +42,7 @@ open MonoidalCategory
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Total-tensor generators are natural for restriction of sections.
-Source: Stacks 03EK and 06YN. -/
+/-- Total-tensor generators are natural for restriction of sections. -/
 theorem coefficientTensorGenerator_val_map
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u + 1}]
@@ -87,8 +91,7 @@ end TotalTensor
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The transported system tensor comparison sends the inverse-image unit of a pure tensor to
-the tensor of the two inverse-image units.
-Source: Stacks 03EL and 07A4. -/
+the tensor of the two inverse-image units. -/
 theorem systemChain_unit_generator {X Y : Scheme.{u}} (g : X ⟶ Y)
     (A B : CochainComplex (coefficientSequenceModules l E Y) ℤ) (p q k : ℤ) (hpq : p + q = k)
     (V : ℕ × Y.ProEt) (x : (A.X p).val.obj (op V)) (y : (B.X q).val.obj (op V)) :
@@ -132,8 +135,7 @@ theorem systemChain_unit_generator {X Y : Scheme.{u}} (g : X ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Restriction to the tower acts on restricted sections as the original map.
-Source: Stacks 0941. -/
+/-- Restriction to the tower acts on restricted sections as the original map. -/
 theorem coefficientSequenceRestriction_map_restrictedSection {W : Scheme.{u}}
     {M N : coefficientSequenceModules l E W} (f : M ⟶ N)
     (n : ℕ) (U : W.ProEtᵒᵖ) (x : M.val.obj (op (n, U.unop))) :
@@ -160,8 +162,7 @@ theorem coefficientSequenceRestriction_map_restrictedSection {W : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- `coefficientSequenceRestriction_map_restrictedSection`, with the concrete-category
-application of the original map.
-Source: Stacks 0941. -/
+application of the original map. -/
 theorem coefficientSequenceRestriction_map_restrictedSection' {W : Scheme.{u}}
     {M N : coefficientSequenceModules l E W} (f : M ⟶ N)
     (n : ℕ) (U : W.ProEtᵒᵖ) (x : M.val.obj (op (n, U.unop))) :
@@ -191,8 +192,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The chain-level model of the system tensor comparison sends the restricted inverse-image
 unit of a tensor of two reduced unit-inserted sections to the tensor of the reindexed reduced
-unit-inserted sections.
-Source: Stacks 03D2, 03EL, 07A4, 0941. -/
+unit-inserted sections. -/
 theorem podChainModel_generator {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (P Q : CochainComplex (scalarReductionSource l E Y) ℤ)
     (βP : (I[g]).obj ((R[Y]).obj P) ≅ (R[X]).obj ((F[g]).obj P))

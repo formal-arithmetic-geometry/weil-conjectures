@@ -9,8 +9,19 @@ public import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorReindexChain
 
 /-! # Explicit tensor Roos chain maps and their localizations
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4, 0941. -/
+The localization of the explicit tensor Roos chain map `podTensorReindexChain`, composed with
+the exact-functor factor, packaged as `podTensorReindexDerived`.
+
+## Implementation details
+
+The localized map is stored in the record `PodTensorReindexDerivedDatum` together with its
+defining equation, and the constructed datum is `@[irreducible]`, so that later files can share
+the map without unfolding it.
+
+## References
+
+* [Stacks, Tags 015F, 07A4, 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -48,10 +59,8 @@ section TensorModelSpecialization
 -- These proofs use only functoriality and never the underlying section construction.
 attribute [local irreducible] isoSectionwiseModuleInverseImage
 
-/-- Localization of the explicit tensor Roos chain map, including the exact-functor factor.
-Source: blueprint Steps 1 and 5; Stacks 015F, 07A4
-(blueprint: def-pod-tensor-reindex-point).
-A named record sharing the localized map and its defining equation. -/
+/-- A localization of the explicit tensor Roos chain map, including the exact-functor factor:
+a morphism in the derived category together with its defining equation. -/
 structure PodTensorReindexDerivedDatum
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [(isoReductionIntegralInverse l E g).Additive]
@@ -71,9 +80,7 @@ structure PodTensorReindexDerivedDatum
   property : val = (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.hom.app _ ≫
     DerivedCategory.Q.map (podTensorReindexChain l E g D T P Q)
 
-/-- The explicit datum described by `PodTensorReindexDerivedDatum`.
-Source: blueprint Steps 1 and 5; Stacks 015F, 07A4
-(blueprint: def-pod-tensor-reindex-point). -/
+/-- The explicit datum described by `PodTensorReindexDerivedDatum`. -/
 @[irreducible] def podTensorReindexDerivedData
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [(isoReductionIntegralInverse l E g).Additive]

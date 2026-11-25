@@ -14,8 +14,20 @@ import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 
 /-! # Tensor composition from localized Roos models
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4, 0941. -/
+We deduce the composition law for tensor reindexing on good representatives from the localized
+Roos composition equation (`podTensorCompositionOnGood`).
+
+## Implementation details
+
+The proof combines the three model squares: naturality of the representative tensor comparison
+gives the final square, compatibility of the exact derived-functor factors gives the two input
+squares, and the localized Roos equation gives the output square; the invertible output
+comparison is then cancelled.
+
+## References
+
+* [Stacks, Tags 015F, 07A4, 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -55,16 +67,9 @@ section TensorModelSpecialization
 attribute [local irreducible] isoSectionwiseModuleInverseImage
 
 -- Keep the three coefficient reindexings together while checking the model squares.
-/-- Tensor composition on good representatives follows from the localized Roos equation.
-Source: blueprint Steps 1 and 5; Stacks 015F, 07A4, 0941
-(blueprint: lem-pod-tensor-composition-on-good).
-Proof: apply the three Model squares. Transport constructibility across the
-factor isomorphisms to apply the intermediate tensor Naturality law. Naturality
-of the representative tensor comparison supplies the final square, while
-compatibility of the exact derived-functor factors supplies the two input squares.
-The assumed localized Roos equation supplies the output square. Cancel the
-invertible comparison at the output; the resulting equation is the tensor
-composition equation on these two good representatives. -/
+/-- For isomorphisms `h : Z ⟶ W` and `f : W ⟶ V`, the tensor reindexing comparisons satisfy the
+composition law on the good representatives `P` and `Q`, provided the localized Roos
+composition equation `PodTensorDerivedComposition` holds for them. -/
 theorem podTensorCompositionOnGood
     (A : PodReindexFamily l E)
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]

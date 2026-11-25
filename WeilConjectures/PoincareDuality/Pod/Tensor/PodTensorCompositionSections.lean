@@ -13,8 +13,24 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # Composition of normalized strict tensor tower maps
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-tower).
+We show that successive strict tensor comparisons along isomorphisms agree on the original
+unit-coefficient generators.
+
+## Main results
+
+* `podTensorCompositionSections`: the sectionwise compatibility of tensor comparisons with
+  composition.
+
+## Implementation details
+
+The proof restricts both original sections along the ordinary compositor, commutes restriction
+with finite reduction units and total tensor inclusions, and applies the two successive tensor
+generator equations. No tower extensionality, inverse comparison, Roos construction or
+localization is involved.
+
+## References
+
+* [Stacks, Tags 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -175,15 +191,7 @@ attribute [local irreducible] integralOperationsTotalTensorSection
   unrestrictedIntegralTensorSection integralOperationsTensorSection
 
 -- The sectionwise tensor calculation keeps three coefficient transports explicit.
-/-- Successive tensor comparisons agree on the original unit-coefficient generators.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-tensor-composition-sections).
-Proof: the ordinary compositor restricts both original sections. Restriction
-commutes with finite reduction units and total tensor inclusions. Apply the two
-successive tensor generator equations. On the other side, the total tensor map
-acts on each factor; naturality of reduction units and the compositor section
-formula give precisely the same two sections. No tower extensionality, inverse
-comparison, Roos construction or localization is involved. -/
+/-- Successive tensor comparisons agree on the original unit-coefficient generators. -/
 theorem podTensorCompositionSections
     (A : PodReindexFamily l E)
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]

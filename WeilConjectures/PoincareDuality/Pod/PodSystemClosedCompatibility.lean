@@ -13,8 +13,17 @@ import WeilConjectures.TraceFormula.Integral.IntegralComparisonSequenceSystems
 
 /-! # Internal Hom compatibility for strict-system reindexing
 
-The proof is the system-level calculation from the automorphism Hom comparison,
-separated after profiling to keep each file within the single-file time limit.
+The evaluation-defined internal Hom comparison for strict derived coefficient systems is
+invertible and preserves evaluation, transposition and composition.
+
+## Implementation details
+
+This system-level calculation from the automorphism Hom comparison is kept in a separate file
+to bound the elaboration time per file.
+
+## References
+
+* Stacks Project, Tags 0941, 0GMX
 -/
 
 @[expose] public noncomputable section
@@ -34,18 +43,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
 
 /-- The evaluation-defined internal Hom comparison for strict derived coefficient
-systems is invertible and preserves evaluation, transposition and composition.
-Source: blueprint proper-duality compatibility proof, Step 5; Stacks 0941 and 0GMX.
-Proof: identify ordinary reindexing with integral comparison pullback using the
-coefficient ring-map equation. The derived identity and composition comparisons
-exhibit pullback by the inverse scheme isomorphism as a quasi-inverse. Closed
-transposition and full faithfulness identify postcomposition by the Hom comparison
-with a bijection on all image test objects. Essential surjectivity then gives a
-bijection on every test object, and Yoneda proves invertibility. The prescribed
-tensorator associativity and unit equations construct a core monoidal structure.
-Its tensor isomorphisms are exactly the prescribed comparisons, so the general
-closed-monoidal evaluation calculation supplies all remaining compatibility laws.
-(blueprint: lem-pod-system-closed-compatibility). -/
+systems is invertible and preserves evaluation, transposition and composition. -/
 theorem podSystemClosedCompatibility :
     (∀ M N, IsIso (coefficientBaseChangeHom
       (pullbackTensorCalculus l E Y).systemClosed (pullbackTensorCalculus l E X).systemClosed

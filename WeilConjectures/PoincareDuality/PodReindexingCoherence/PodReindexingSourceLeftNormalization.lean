@@ -10,9 +10,12 @@ import all WeilConjectures.CategoryTheory.RingedHomUniverses.RingedInternalHomSh
 
 /-! # Left-route normalization of the source-shift square
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X and 08JA.
-This computes the left composite on K-injective Hom models.
-(blueprint: lem-pod-reindexing-source-left-normalization)
+We compute the left composite of the source-shift square on K-injective Hom models
+(`source_left_normalization`), independently of the chain square and of the other route.
+
+## References
+
+* Stacks Project, Tags 0A8X, 08JA
 -/
 
 @[expose] public noncomputable section
@@ -109,37 +112,10 @@ attribute [local irreducible] podReindexingHomModel podReindexingCoefficient
   Padic Padic.coefficientExtensionIntegers
 
 -- The explicit model transports require many dependent functor-map equalities.
-/-- The left route of the source-shift square on localized Hom models.
-
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X and 08JA.
-
-Proof:
-
-1. Write F for the derived reindexing, K for its complex functor, Q for localization, alpha for
-sourceModelInput, beta for sourceModelOutput, and kappa for the recorded Hom model. Alpha is F of
-kappa_(P[a],I)^(-1) followed by the Hom map of Q shift(a)^(-1) in the opposite source. Naturality
-of c.derived along that source map reduces its component at ((QP)[a],QI) to its component at
-(Q(P[a]),QI).
-
-2. Apply Comparison.derived_model at (P[a],I). Cancel F(kappa_(P[a],I)^(-1)) against its
-F(kappa_(P[a],I)) factor. The composite now starts with the localization factor at Hom(P[a],I),
-followed by Q(c.chain(P[a],I)), then the target ordinary-to-derived Hom model and its
-localization-factor transports.
-
-3. Apply LeftNormalization on X to source F(QP), representative KP, and representative isomorphism
-(localizationFactors(P)).symm. Use uniqueness of LeftFormula to identify its chain reindexing with
-the given eX. Invert the normalization equation. Naturality in the target moves
-localizationFactors(I) through sourceShift.inv. Naturality of the ordinary Hom comparison in the
-source moves the map of (complexShift(a)).inv through the Hom model.
-
-4. The shift compatibility of localizationFactors(P) identifies F(Q shift(a)) followed by F
-shift(a) with localization of complexShift(a) followed by Q shift(a). Cancel the resulting inverse
-pairs and beta. What remains, in order, is localizationFactors(Hom(P[a],I)), Q of c.chain(P[a],I)
-followed by Hom((complexShift(a)).inv,id) followed by eX.inv, and Q shift(-a) at Hom(KP,KI). This
-is the asserted left normal form.
-
-This calculates one route, independently of the chain square and of the other route.
-(blueprint: lem-pod-reindexing-source-left-normalization) -/
+/-- The left route of the source-shift square on localized Hom models: for K-injective `I`, the
+composite of `sourceModelInput`, the derived comparison `c.derived`, the shift comparison and
+`sourceShift.inv`, and `sourceModelOutput` equals the localization of `c.chain (P⟦a⟧) I`
+followed by the source-shift map and `eX.inv`, and the shift by `-a`. -/
 theorem source_left_normalization
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

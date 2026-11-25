@@ -17,8 +17,22 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 /-!
 # Injectives and left exact invariants for discrete integer representations
 
-Source: Stacks Project, Injectives, Tag 04JF; Etale Cohomology, Tag 0DVG.
-(blueprint: lem-sc-discrete-integer-invariants-infrastructure).
+The category of discrete integer representations of a topological group has enough
+injectives, and its invariants functor preserves finite limits.
+
+## Main results
+
+* `Rep.discreteInteger_invariants_infrastructure`
+
+## Implementation details
+
+Injectives come from functorial injective embeddings. The invariants functor is right adjoint
+to the trivial-action functor restricted to discrete representations, hence preserves limits.
+Neither compactness of the group nor an abelian structure on the transported category is used.
+
+## References
+
+* [Stacks Project, Tags 04JF and 0DVG]
 -/
 
 @[expose] public section
@@ -30,21 +44,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace Rep
 
 /-- Discrete integer representations have enough injectives, and their invariant functor
-preserves finite limits, after transport along any equivalence of categories.
-
-Source: Stacks Project, Injectives, Tag 04JF; Etale Cohomology, Tag 0DVG,
-final profinite comparison.
-(blueprint: lem-sc-discrete-integer-invariants-infrastructure).
-
-Proof: The functorial injective-embedding theorem for arbitrary rings gives a monomorphism
-M to J(M), with J(M) injective, in the discrete representation category. These are
-injective presentations. EnoughInjectives.of_equivalence transports them across E.
-The functor giving a module its trivial action lands in discrete representations, since
-every element is fixed by the whole group. Restrict the Mathlib trivial-action/invariants
-adjunction along the fully faithful inclusion of the discrete subcategory. Consequently
-its invariants functor is a right adjoint and preserves limits. The equivalence E and
-the underlying additive-group functor also preserve limits, so their composite preserves
-finite limits. Neither compactness nor an abelian structure on A is needed here. -/
+preserves finite limits, after transport along any equivalence of categories. -/
 theorem discreteInteger_invariants_infrastructure
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     (A : Type v) [Category.{w} A]

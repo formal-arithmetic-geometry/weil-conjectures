@@ -12,9 +12,13 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Geometric coherence of the fixed normalized pullback components
 
-Source: trace-definition auxiliary whole-tower argument, as recorded in the parent
-comparison node; Stacks 0941 and 099N
-(blueprint: lem-fd-normalized-pullback-geometry). -/
+Geometric coherence of the fixed normalized pullback components in the whole-tower
+comparison used in the definition of the trace function.
+
+## References
+
+* [Stacks, Tag 0941], [Stacks, Tag 099N]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

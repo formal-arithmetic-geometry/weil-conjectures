@@ -39,8 +39,17 @@ when `a ≠ 0`, while for `a = 0` it is the constant sheaf, whose cohomology is 
 The cohomology `H^q(X, F)` of an étale sheaf `F` of `Λ`-modules is
 `AlgebraicGeometry.Etale.cohomology` applied to `F` placed in degree `0`, the `q`-th cohomology
 of the derived global sections `RΓ(X, F)`.
-The blueprint works with `ℚ̄_ℓ`-coefficients; here the coefficients are a finite domain `Λ` in
-which `q` is invertible, a finite level of the `ℓ`-adic coefficients.
+The coefficients are a finite domain `Λ` in which `q` is invertible, a finite level of the
+`ℓ`-adic coefficients, rather than `ℚ̄_ℓ`.
+
+The constant cohomology of `𝔸¹_Ω` comes from the acyclicity `Rp_* Λ ≅ Λ` of the affine line
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_affineLine`). For `a ≠ 0`, the
+scaling `x ↦ a x` identifies `ℒ_{Ψ, a x}` with the pullback of `ℒ_{Ψ(a ·)}` along the base
+change map `g : 𝔸¹_Ω ⟶ 𝔸¹_k`. The isotypic decomposition `(AS_q)_* Λ ≅ ⨁_b ℒ_{Ψ(b ·)}` pulls
+back along `g` (finite base change) to a decomposition of the pushforward of `Λ` along the
+Artin–Schreier covering of `𝔸¹_Ω`, whose cohomology is that of `Λ` (finite pushforward); so
+`⨁_b H^q(𝔸¹_Ω, g^* ℒ_{Ψ(b ·)}) ≅ H^q(𝔸¹_Ω, Λ)`, and only the trivial character contributes,
+in degree `0`.
 -/
 
 @[expose] public section
@@ -66,9 +75,7 @@ variable (Λ) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
 
 /-- **Constant cohomology of the affine line.** For an algebraically closed field `Ω` of
 characteristic `p` and a finite coefficient ring `Λ` in which `p` is invertible,
-`H^0(𝔸¹_Ω, Λ) ≅ Λ` and `H^q(𝔸¹_Ω, Λ) = 0` for `q ≠ 0`: the affine line is connected, its
-cohomological dimension is one, and `H^1(𝔸¹_Ω, ℤ/n) ≅ Pic(𝔸¹_Ω)[n] = 0` for `n` prime to `p`.
-(blueprint: `lemma-integral-linear-character--2`) -/
+`H^0(𝔸¹_Ω, Λ) ≅ Λ` and `H^q(𝔸¹_Ω, Λ) = 0` for `q ≠ 0`. -/
 theorem cohomology_affineLine_unit [Finite Λ] (p : ℕ) [CharP Ω p] [Invertible (p : Λ)] :
     Nonempty ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω)) 0).obj
         ((DerivedCategory.singleFunctor _ 0).obj (𝟙_ _)) ≅ ModuleCat.of Λ Λ) ∧
@@ -76,11 +83,9 @@ theorem cohomology_affineLine_unit [Finite Λ] (p : ℕ) [CharP Ω p] [Invertibl
         IsZero ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω)) q).obj
           ((DerivedCategory.singleFunctor _ 0).obj (𝟙_ _))) := by
   -- `H^0` is `Λ` as `𝔸¹_Ω` is connected; `H^q = 0` for `q ≥ 2` by the cohomological dimension
-  -- of an affine curve (`theorem-cohomology-curves--2`); and
-  -- `H^1 = 0` by the Kummer sequence (`proposition-cohomology-smooth-affine-curve--2`), the units
-  -- of `Ω[x]` being divisible and `Pic(𝔸¹_Ω) = 0`
-  -- (`proposition-cohomology-smooth-affine-curve--3`). Here these facts enter through the
-  -- acyclicity `Rp_* Λ ≅ Λ` of the affine line of the purity chapter
+  -- of an affine curve; and `H^1 = 0` by the Kummer sequence, the units of `Ω[x]` being
+  -- divisible and `Pic(𝔸¹_Ω) = 0`. Here these facts enter through the acyclicity
+  -- `Rp_* Λ ≅ Λ` of the affine line of the purity chapter
   -- (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_affineLine`).
   have := HasInvertibleExponent.spec_of_charP Λ (Ω := Ω) p
   let S := Spec (CommRingCat.of Ω)
@@ -153,8 +158,7 @@ lemma homOfVector_affineLineLinearFunction (a : k) :
 
 omit [IsAlgClosed Ω] in
 /-- For `a ≠ 0`, the Artin–Schreier sheaf `ℒ_{Ψ, a x}` on `𝔸¹_Ω` is the pullback of
-`ℒ_{Ψ(a ·)}` along the base change map `𝔸¹_Ω ⟶ 𝔸¹_k`, as `[a]^* ℒ_Ψ ≅ ℒ_{Ψ(a ·)}`
-(`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_smul`). -/
+`ℒ_{Ψ(a ·)}` along the base change map `𝔸¹_Ω ⟶ 𝔸¹_k`. -/
 theorem nonempty_iso_artinSchreierSheafOf_affineLineLinearFunction (Ψ : AddChar k Λ) {a : k}
     (ha : a ≠ 0) :
     Nonempty (artinSchreierSheafOf 𝔸(PUnit; Spec (CommRingCat.of Ω)) Ψ
@@ -170,10 +174,7 @@ omit [IsAlgClosed Ω] in
 attribute [local instance] Abelian.hasFiniteBiproducts in
 /-- **The cohomology of `𝔸¹_Ω` splits along the characters of `k`.** For a primitive character
 `Ψ` with values in a domain `Λ`, `⨁_{b ∈ k} H^q(𝔸¹_Ω, g^* ℒ_{Ψ(b ·)}) ≅ H^q(𝔸¹_Ω, Λ)`, where
-`g : 𝔸¹_Ω ⟶ 𝔸¹_k` is the base change map: the isotypic decomposition
-`(AS_q)_* Λ ≅ ⨁_b ℒ_{Ψ(b ·)}` pulls back along `g` to a decomposition of the pushforward of `Λ`
-along the Artin–Schreier map of `𝔸¹_Ω` (finite base change), whose cohomology is that of `Λ`
-(finite pushforward). -/
+`g : 𝔸¹_Ω ⟶ 𝔸¹_k` is the base change map. -/
 theorem nonempty_iso_biproduct_cohomology_affineLine [IsDomain Λ] (Ψ : AddChar k Λ)
     (hΨ : Ψ.IsPrimitive) (q : ℤ) :
     Nonempty ((⨁ fun b : k ↦ (cohomology (ModuleCat.{u + 1} Λ)
@@ -216,11 +217,7 @@ theorem nonempty_iso_biproduct_cohomology_affineLine [IsDomain Λ] (Ψ : AddChar
 
 /-- **Vanishing of the cohomology of a nontrivial Artin–Schreier sheaf on the affine line.**
 For a primitive additive character `Ψ` of `k` with values in a finite domain `Λ` and `a ≠ 0`,
-`H^q(𝔸¹_Ω, ℒ_{Ψ, a x}) = 0` for every `q`. The scaling `x ↦ a x` identifies `ℒ_{Ψ, a x}` with
-`ℒ_{Ψ(a ·), x}`, and `Ψ(a ·)` is a nontrivial character; by the finite pushforward along the
-Artin–Schreier covering `y ↦ y ^ q - y` and the isotypic decomposition, the cohomology of
-`𝔸¹_Ω` with constant coefficients is the direct sum of the cohomology of the `ℒ_{Ψ(b ·), x}`,
-and only the trivial character contributes, in degree `0`. -/
+`H^q(𝔸¹_Ω, ℒ_{Ψ, a x}) = 0` for every `q`. -/
 theorem isZero_cohomology_affineLine_artinSchreierSheafOf [IsDomain Λ] [Finite Λ]
     (Ψ : AddChar k Λ) (hΨ : Ψ.IsPrimitive) {a : k} (ha : a ≠ 0) (q : ℤ) :
     IsZero ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω)) q).obj
@@ -269,8 +266,7 @@ theorem isZero_cohomology_affineLine_artinSchreierSheafOf [IsDomain Λ] [Finite 
 
 /-- **Cohomology of an affine line with an exponential sheaf.** Let `Ψ` be a primitive additive
 character of `k` with values in a finite domain `Λ`, and `a ∈ k`. On `𝔸¹_Ω`,
-`H^q(𝔸¹_Ω, ℒ_{Ψ, a x})` is `Λ` for `q = 0` and `a = 0`, and vanishes otherwise.
-(blueprint: `lemma-integral-linear-character--2`) -/
+`H^q(𝔸¹_Ω, ℒ_{Ψ, a x})` is `Λ` for `q = 0` and `a = 0`, and vanishes otherwise. -/
 theorem cohomology_affineLine_artinSchreierSheafOf [IsDomain Λ] [Finite Λ] (Ψ : AddChar k Λ)
     (hΨ : Ψ.IsPrimitive) (a : k) :
     (a ≠ 0 → ∀ q, IsZero ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω))

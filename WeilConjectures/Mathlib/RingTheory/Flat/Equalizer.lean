@@ -39,9 +39,7 @@ variable {R S : Type*} [CommRing R] [CommRing S] [Algebra R S] [Module.Flat R S]
 
 namespace Ideal
 
-/-- Extension of ideals along a flat ring map commutes with binary intersections. The ideal
-`I ⊓ J` is the kernel of `R → R ⧸ I × R ⧸ J`, and base change along `S` preserves this
-kernel. -/
+/-- Extension of ideals along a flat ring map commutes with binary intersections. -/
 theorem map_inf_of_flat (I J : Ideal R) :
     (I ⊓ J).map (algebraMap R S) = I.map (algebraMap R S) ⊓ J.map (algebraMap R S) := by
   refine le_antisymm (map_inf_le _) fun x hx ↦ ?_
@@ -120,8 +118,7 @@ lemma Module.Flat.of_exact_of_flat_of_flat {R M' M M'' : Type*} [CommRing R]
   rw [h3, map_zero]
 
 /-- **Kernels of surjections of flat modules are flat.** In a short exact sequence
-`0 ⟶ M' ⟶ M ⟶ M'' ⟶ 0` of `R`-modules with `M` and `M''` flat, `M'` is flat.
-(blueprint: `lem-weil-pbc-flat-ses-kernel-flat`) -/
+`0 ⟶ M' ⟶ M ⟶ M'' ⟶ 0` of `R`-modules with `M` and `M''` flat, `M'` is flat. -/
 lemma Module.Flat.of_exact_of_flat_of_flat_right {R M' M M'' : Type*} [CommRing R]
     [AddCommGroup M'] [AddCommGroup M] [AddCommGroup M''] [Module R M'] [Module R M]
     [Module R M''] [Module.Flat R M] [Module.Flat R M''] (f : M' →ₗ[R] M) (g : M →ₗ[R] M'')
@@ -140,10 +137,7 @@ lemma Module.Flat.of_exact_of_flat_of_flat_right {R M' M M'' : Type*} [CommRing 
 /-- **Universal left exactness of a complex of flat modules.** Let `C₀ ⟶ C₁ ⟶ C₂` be a complex
 of `R`-modules with `C₁` and `C₂` flat, which stays exact at `C₁` after tensoring with every
 `R`-module. Then the kernel `Z` of `d₀` stays a submodule of `C₀` after tensoring: for every
-`R`-module `M`, the map `M ⊗ Z ⟶ M ⊗ C₀` is injective.
-
-The cokernel `Q` of `d₀` embeds universally into `C₂`, hence is flat; so is the image of `d₀`,
-as the kernel of `C₁ ⟶ Q`; and `0 ⟶ Z ⟶ C₀ ⟶ im d₀ ⟶ 0` stays exact after tensoring. -/
+`R`-module `M`, the map `M ⊗ Z ⟶ M ⊗ C₀` is injective. -/
 theorem Module.Flat.lTensor_injective_ker_subtype {R : Type u} [CommRing R]
     {C₀ C₁ C₂ : Type*} [AddCommGroup C₀] [AddCommGroup C₁] [AddCommGroup C₂] [Module R C₀]
     [Module R C₁] [Module R C₂] [Module.Flat R C₁] [Module.Flat R C₂] (d₀ : C₀ →ₗ[R] C₁)
@@ -205,8 +199,7 @@ end Quotient
 /-- **Base change of a regular element with flat quotient.** Let `A → B` be a ring map and let
 `f ∈ B` be a non-zerodivisor such that `B ⧸ (f)` is flat over `A` (here presented as a surjection
 `q : B → C` with kernel `(f)`). Then for every `A`-algebra `A'`, the element `f ⊗ 1` is a
-non-zerodivisor of `B ⊗[A] A'`: tensoring the exact sequence `0 → B → B → C → 0` (the first map
-being multiplication by `f`) with `A'` stays exact on the left as `C` is flat over `A`. -/
+non-zerodivisor of `B ⊗[A] A'`. -/
 theorem Algebra.TensorProduct.includeLeftRingHom_mem_nonZeroDivisors_of_flat
     {A B C A' : Type*} [CommRing A] [CommRing B] [CommRing C] [CommRing A'] [Algebra A B]
     [Algebra A A'] (q : B →+* C) (hq : Function.Surjective q) {f : B}

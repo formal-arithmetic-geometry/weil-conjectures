@@ -12,8 +12,12 @@ public import WeilConjectures.PoincareDuality.StrictTensorAugmentation.StrictTen
 
 /-! # Extensionality and generator formulas for the strict reduction tensor equation
 
-Source: Stacks 03EK, 03EL, 07A4 and 0941.
-(blueprint: lem-pod-reduction-reindex-strict-tensor).
+Unit-insertion and transpose formulas for finite and ordinary reduction, degreewise reduction
+evaluations, and extensionality for maps out of reductions of total tensors on generators.
+
+## References
+
+* Stacks Project, Tags 03EK, 03EL, 06YY, 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +34,7 @@ namespace WeilConjectures.PodReductionRepresentatives
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The finite reduction unit inserts the scalar `1`.
-Source: Stacks 06YY. -/
+/-- The finite reduction unit inserts the scalar `1`. -/
 theorem finiteAdjunction_unit_apply (W : Scheme.{u}) (n : ℕ)
     (M : integralTowerModules l E W) (U : W.ProEtᵒᵖ) (x : M.val.obj U) :
     ((pullbackTensorFiniteAdjunction l E W n).unit.app M).val.app U x =
@@ -39,8 +42,7 @@ theorem finiteAdjunction_unit_apply (W : Scheme.{u}) (n : ℕ)
   have h := (scalarReductionExtension_adjunction l E W n).choose_spec M U x
   exact h.trans rfl
 
-/-- The finite reduction transpose evaluates a map on the unit-inserted section.
-Source: Stacks 06YY. -/
+/-- The finite reduction transpose evaluates a map on the unit-inserted section. -/
 theorem finiteAdjunction_homEquiv_apply (W : Scheme.{u}) (n : ℕ)
     (M : integralTowerModules l E W) (N : scalarReductionTarget l E W n)
     (f : (unrestrictedIntegralReductionFunctor l E W n).obj M ⟶ N)
@@ -90,8 +92,7 @@ private theorem ordinaryReduction_homEquiv_apply_eq (W : Scheme.{u}) (n : ℕ)
   exact h
 
 
-/-- Degreewise, the complex-level reduction evaluation is the termwise one.
-Source: Stacks 0941. -/
+/-- Degreewise, the complex-level reduction evaluation is the termwise one. -/
 theorem reductionEvaluationComplex_hom_f (W : Scheme.{u}) (n : ℕ)
     (C : CochainComplex (integralTowerModules l E W) ℤ) (k : ℤ) :
     ((pullbackTensorReductionEvaluationComplex l E W n).hom.app C).f k =
@@ -102,8 +103,7 @@ theorem reductionEvaluationComplex_hom_f (W : Scheme.{u}) (n : ℕ)
     Iso.refl_inv, NatTrans.id_app]
   exact Category.comp_id _
 
-/-- Degreewise, the inverse complex-level reduction evaluation is the termwise inverse.
-Source: Stacks 0941. -/
+/-- Degreewise, the inverse complex-level reduction evaluation is the termwise inverse. -/
 theorem reductionEvaluationComplex_inv_f (W : Scheme.{u}) (n : ℕ)
     (C : CochainComplex (integralTowerModules l E W) ℤ) (k : ℤ) :
     ((pullbackTensorReductionEvaluationComplex l E W n).inv.app C).f k =
@@ -115,8 +115,7 @@ theorem reductionEvaluationComplex_inv_f (W : Scheme.{u}) (n : ℕ)
   exact Category.id_comp _
 
 /-- Maps out of the ordinary reduction of a degree of a total tensor are determined by the
-reductions of unit-inserted pure tensors at every level.
-Source: Stacks 03EK, 06YY and 0941. -/
+reductions of unit-inserted pure tensors at every level. -/
 theorem reduction_total_hom_ext (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (k : ℤ)
     {N : coefficientSequenceModules l E W}

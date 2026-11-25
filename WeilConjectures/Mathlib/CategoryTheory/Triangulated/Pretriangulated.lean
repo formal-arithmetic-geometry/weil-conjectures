@@ -97,8 +97,7 @@ lemma exists_lift_of_mor₁_eq_zero {T T' : Triangle C} (hT : T ∈ distTriang C
 
 /-- Let `φ : T ⟶ T'` and `φ' : T' ⟶ T` be morphisms of distinguished triangles such that the
 composites `φ ≫ φ'` and `φ' ≫ φ` act as the identity on `T.mor₁`, `T.mor₃` (resp. `T'.mor₁`,
-`T'.mor₃`) through their second and third components. Then `φ.hom₁` is an isomorphism: the
-endomorphisms `𝟙 - (φ ≫ φ').hom₁` and `𝟙 - (φ' ≫ φ).hom₁` are of square zero. -/
+`T'.mor₃`) through their second and third components. Then `φ.hom₁` is an isomorphism. -/
 lemma isIso_hom₁_of_comp {T T' : Triangle C} (hT : T ∈ distTriang C)
     (hT' : T' ∈ distTriang C) (φ : T ⟶ T') (φ' : T' ⟶ T)
     (h₂ : T.mor₁ ≫ φ.hom₂ ≫ φ'.hom₂ = T.mor₁) (h₃ : φ.hom₃ ≫ φ'.hom₃ ≫ T.mor₃ = T.mor₃)
@@ -162,8 +161,7 @@ X  ⟶ 0 ⟶ Z  ⟶ X⟦1⟧
 ↓φ₁       ↓φ₃    ↓φ₁⟦1⟧
 X' ⟶ 0 ⟶ Z' ⟶ X'⟦1⟧
 ```
-the first component of `φ` vanishes if and only if the third one does: the third morphisms of
-the triangles are isomorphisms, and they intertwine `φ.hom₃` with `φ.hom₁⟦1⟧'`. -/
+the first component of `φ` vanishes if and only if the third one does. -/
 lemma hom₁_eq_zero_iff_hom₃_eq_zero {T T' : Triangle C} (φ : T ⟶ T')
     (hT : T ∈ distTriang C) (hT' : T' ∈ distTriang C) (h₂ : IsZero T.obj₂)
     (h₂' : IsZero T'.obj₂) : φ.hom₁ = 0 ↔ φ.hom₃ = 0 := by
@@ -188,12 +186,7 @@ variable {D : Type*} [Category* D]
 `K ⟶ L ⟶ R ⟶ K⟦1⟧` be a distinguished triangle whose first vertex `K` lies in the essential
 image of `F` and whose third vertex receives no maps from the shifts of objects of that
 essential image. Then the counit `F G L ⟶ L` and the second map `L ⟶ R` extend to a
-distinguished triangle `F G L ⟶ L ⟶ R ⟶ (F G L)⟦1⟧`.
-
-Indeed `F G L ⟶ L` factors through `K ⟶ L` by a map `b`, and composition with `b` is bijective on
-maps out of the essential image of `F`: composition with `K ⟶ L` is bijective there, by the
-long exact sequence of the triangle, and so is composition with the counit, by full faithfulness
-of `F`. As both ends of `b` lie in the essential image, `b` is an isomorphism. -/
+distinguished triangle `F G L ⟶ L ⟶ R ⟶ (F G L)⟦1⟧`. -/
 theorem exists_distTriang_counit_of_subsingleton {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G)
     (hF : F.FullyFaithful) {T : Triangle C} (hT : T ∈ distTriang C)
     (h₃ : ∀ (M : D) (n : ℤ), Subsingleton ((F.obj M)⟦n⟧ ⟶ T.obj₃))
@@ -257,16 +250,11 @@ open Limits
 variable {C : Type*} [Category* C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
   [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
 
-/-- **Pre-triangulated categories.** A pre-triangulated category (`Pretriangulated C`) is an
-additive category with a shift `[1]` and a class of distinguished triangles satisfying (TR1)
-distinguished triangles are closed under isomorphism, `X ⟶ X ⟶ 0 ⟶ X[1]` is distinguished and
-every morphism is the first arrow of a distinguished triangle; (TR2) a triangle is distinguished
-iff its rotation is; (TR3) a commutative square between the bases of two distinguished
-triangles extends to a morphism of triangles. A triangulated category
-(`CategoryTheory.IsTriangulated`) satisfies moreover the octahedral axiom, and an exact functor
-is a functor commuting with the shift and preserving distinguished triangles
-(`CategoryTheory.Functor.IsTriangulated`, see `Functor.isTriangulated_iff_map_distinguished`).
-(blueprint: `def-weil-triangulated-category`) -/
+/-- **Axioms of a pre-triangulated category.** The distinguished triangles of a pre-triangulated
+category satisfy (TR1): they are closed under isomorphism, `X ⟶ X ⟶ 0 ⟶ X⟦1⟧` is distinguished
+and every morphism is the first arrow of a distinguished triangle; (TR2): a triangle is
+distinguished iff its rotation is; (TR3): a commutative square between the bases of two
+distinguished triangles extends to a morphism of triangles. -/
 theorem tr1_tr2_tr3 :
     (∀ T₁ T₂ : Triangle C, (T₁ ≅ T₂) → T₂ ∈ distTriang C → T₁ ∈ distTriang C) ∧
     (∀ X : C, contractibleTriangle X ∈ distTriang C) ∧

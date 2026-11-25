@@ -33,10 +33,10 @@ a full subcategory `DiscreteModule G` of `Action AddCommGrpCat G`, which is abel
 - `DiscreteModule.H`: the continuous cohomology `Hⁿ(G, M) = Extⁿ(ℤ, M)`, the right derived
   functors of the invariants functor.
 
-## Implementation notes
+## Implementation details
 
-The blueprint (`def-exc-continuous-cohomology`) works with discrete modules over a finite
-coefficient ring `A`. We work with `ℤ`-coefficients throughout: a discrete `A`-module with an
+Continuous cohomology is often defined for discrete modules over a finite coefficient ring `A`.
+We work with `ℤ`-coefficients throughout: a discrete `A`-module with an
 `A`-linear action is in particular a discrete `G`-module, and all statements we need (vanishing of
 cohomology of torsion modules) are about the underlying abelian groups. For a module killed by
 `n`, such as an `A`-module with `n = 0` in `A`, the cohomology groups are killed by `n`
@@ -106,11 +106,7 @@ end Action
 variable (G : Type u) [Group G] [TopologicalSpace G]
 
 /-- The category of discrete `G`-modules: abelian groups with an action of the topological group
-`G` such that every element has an open stabilizer. It is abelian, its invariants functor is
-`DiscreteModule.invariants`, and its cohomology `DiscreteModule.H` is the right derived functor
-of the invariants, computed as `Ext` from the trivial module `ℤ`. We use `ℤ`-coefficients
-instead of the finite coefficient ring `A` of the blueprint; see the implementation notes.
-(blueprint: `def-exc-continuous-cohomology`) -/
+`G` such that every element has an open stabilizer. -/
 abbrev DiscreteModule :=
   (Action.IsDiscreteModule.{max u w} (G := G)).FullSubcategory
 
@@ -446,8 +442,7 @@ def invariantsSubgroup : AddSubgroup M.obj.V where
   neg_mem' hx g := by simp [hx g]
 
 variable (G) in
-/-- The invariants functor `M ↦ Mᴳ` on discrete `G`-modules.
-(blueprint: `def-exc-continuous-cohomology`) -/
+/-- The invariants functor `M ↦ Mᴳ` on discrete `G`-modules. -/
 @[simps obj]
 def invariants : DiscreteModule.{w} G ⥤ AddCommGrpCat.{max u w} where
   obj M := AddCommGrpCat.of (invariantsSubgroup M)
@@ -486,8 +481,7 @@ def homIntTrivialEquiv : (intTrivial G ⟶ M) ≃+ (invariants G).obj M where
 variable (G) in
 /-- The continuous cohomology `Hⁿ(G, M) = Extⁿ(ℤ, M)` of a discrete `G`-module: the right
 derived functors of the invariants functor (`DiscreteModule.H_zero_addEquiv`), computed in the
-derived category of `DiscreteModule G`.
-(blueprint: `def-exc-continuous-cohomology`) -/
+derived category of `DiscreteModule G`. -/
 abbrev H (n : ℕ) : Type (max u w) :=
   Abelian.Ext (intTrivial G) M n
 

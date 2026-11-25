@@ -12,8 +12,20 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # Quotient compatibility of the concrete finite tensor shift maps
 
-Only the two adjacent quotient squares remain here. The finite comparison maps
-are already explicit; their existence is not part of this statement.
+We show that the explicit first- and second-factor finite tensor shift maps commute with the
+adjacent quotient transitions (`podTensorFiniteShiftTransitions`).
+
+## Implementation details
+
+The equality is checked on homogeneous pure tensors in each bidegree. The first-factor shift
+relabels `(p, q)` to `(p + r, q)` with coefficient one, the second-factor shift relabels it to
+`(p, q + r)` with coefficient `(-1)^(p * r)`; since reduction is linear and does not change `p`,
+the same coefficient occurs on both paths. Sheafification and the coproduct inclusions extend
+the equality to all terms.
+
+## References
+
+* [Stacks, Tags 011G, 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -104,27 +116,7 @@ private theorem shift_apply_heq {W : Scheme.{u}}
   rfl
 
 /-- The explicit first- and second-factor finite tensor shifts commute with each
-adjacent quotient transition.
-
-Source: Stacks 011G, 07A4; more-algebra.tex, item-shift-tensor; blueprint
-theorem-poincare-duality-frobenius--2, Steps 1 and 5
-(blueprint: lem-pod-tensor-finite-shift-transitions).
-
-Proof: in each total degree test both composites on a homogeneous pure tensor
-in the (p,q)-summand at level n + 1. The defining tensor-transition formula applies
-the two coefficient reductions to its factors. First identify the two shifted
-coefficient-reduction transitions by their
-scalar-extension generator formulas and the uniqueness of those transitions.
-The first-factor shift relabels
-(p,q) to (p + r,q) with coefficient one, so either order gives that same reduced
-pure tensor. The second-factor shift relabels it to (p,q + r) with coefficient
-(-1)^(p * r). Reduction is linear and p is unchanged by the second-factor shift,
-so the same coefficient occurs on both paths. The ordinary reduction shift and
-restriction shift comparisons have identity components. These observations
-prove equality on presheaf pure tensors. Sheafification and the coproduct
-inclusions extend the equality to every module term, and degreewise
-extensionality gives equality of the cochain maps. The proof works for negative
-shifts, zero complexes and unbounded complexes without any convergence argument. -/
+adjacent quotient transition. -/
 theorem podTensorFiniteShiftTransitions (W : Scheme.{u}) :
     PodTensorFiniteShiftTransitions l E W := by
   have hg := podTensorFiniteSignedShiftGenerators l E W

@@ -11,10 +11,19 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingLimitComplexM
 
 /-! # Constructing the normalized full-limit comparison
 
-Raw comparison data do not normalize the limit map. We construct its replacement
-by descending the specified natural strict Roos comparison, while keeping the
-other raw fields and the completion comparisons fixed.
-(blueprint: lem-pod-reindexing-derived-core-limit-model) -/
+Raw comparison data do not normalize the limit map. We construct a replacement satisfying the
+full-limit-model law, keeping the other raw fields and the completion comparisons fixed.
+
+## Implementation details
+
+The replacement descends the specified strict Roos comparison. The restricted generator law
+identifies the strict restriction comparison with the natural inverse-image unit; composing
+with both normalized Roos models and the exact-functor localization comparisons gives a natural
+isomorphism, which descends uniquely along the localization functor (`descendIso`).
+
+## References
+
+* Stacks 0941 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -51,18 +60,8 @@ private theorem descendIso {A B C : Type*} [Category* A] [Category* B] [Category
   let h := Localization.fullyFaithfulWhiskeringLeft q W C
   exact ⟨h.preimageIso e, fun a ↦ congr_app (h.map_preimage e.hom) a⟩
 
-/-- Construct the limit comparison by descending the full strict Roos map.
-
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 0941. STATEMENT-DISPUTED (old statement, repaired): the assertion for an
-arbitrary raw limit map was false: its sign
-could be changed independently. Here that map is replaced by the descent of the
-specified Roos comparison. The restricted generator law identifies the strict
-restriction comparison with the natural inverse-image unit. Compose this natural
-isomorphism with both normalized Roos models and the exact-functor localization
-comparisons. Fully faithful precomposition with the localization functor descends
-it uniquely; its component formula gives the full-limit-model equation.
-(blueprint: lem-pod-reindexing-derived-core-limit-model) -/
+/-- The limit comparison of raw derived data `Q` can be replaced by one, `L`, for which the
+assembled datum satisfies the full-limit-model law; all other fields of `Q` are kept. -/
 theorem podReindexingDerivedCoreData_limitModel
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

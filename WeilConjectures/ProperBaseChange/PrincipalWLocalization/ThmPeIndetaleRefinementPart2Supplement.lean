@@ -11,8 +11,19 @@ import WeilConjectures.ProperBaseChange.PrincipalWLocalization.ThmPeIndetaleRefi
 
 /-! # Points and components of the principal w-localization
 
-Source: blueprint, proper base change, lemma "Points of the affine w-localization", order 1223
-(blueprint: theorem-existence-contractible-covers--1).
+The primes of the principal w-localization `A_w` of a ring `A` are the pairs of primes
+`y ⊆ x` of `A`; we describe its local rings, connected components and closed points, and show
+that `A_w` is a faithfully flat w-local `A`-algebra.
+
+## Implementation details
+
+The prime-pair bijection and the closed immersions `Spec A_x → Spec A_w` come from
+`primeCharts`. The local rings are identified using that `A_w` is ind-Zariski over `A`. The
+first coordinate is constant on connected components because preimages of basic patch clopens
+are clopen. The closed points are the diagonal pairs `(x, x)`, and the first-coordinate map from
+them to the patch spectrum is a continuous bijection from a compact space onto a Hausdorff one,
+hence a homeomorphism. Faithful flatness follows from flatness of ind-Zariski algebras and
+surjectivity on spectra. The zero ring is covered by the same arguments.
 -/
 
 @[expose] public section
@@ -63,39 +74,8 @@ finite-partition principal w-localization. The closed immersion from `Spec A_x` 
 first-coordinate fibre equips that fibre with its canonical affine scheme structure. Its ring
 map is an `A`-algebra map, so these identifications respect the structural morphism to `Spec A`.
 The homeomorphism on closed points and the continuous first-coordinate map use the patch
-rather than the Zariski topology on `Spec A`.
-
-Source: blueprint order 1223 (blueprint: theorem-existence-contractible-covers--1).
-Proof:
-1. The proved `primeCharts` theorem supplies the prime-pair bijection, contraction formula,
-continuous first coordinate, and the closed immersion of `Spec A_x` onto its first-coordinate
-fibre. Its proof selects factors of each finite stage, uses compactness of the patch spectrum,
-and constructs the explicit surjective evaluation maps.
-2. The colimit presentation by finite products of principal localizations is ind-Zariski.
-The proved upstream `Algebra.IndZariski.bijectiveOnStalks_algebraMap` identifies the local ring
-at a prime with the localization of `A` at its contraction. Its canonical local-ring map fixes
-`A`, hence the inverse bijection gives the required `A`-algebra equivalence.
-3. Preimages of the basic patch clopens are clopen. They force the first coordinate to be
-constant on connected components and on specializations. Every point of a fibre specializes
-to the image of the closed point of `Spec A_x`, namely the diagonal point `(x,x)`. Thus two
-points in the same fibre have the same connected component; distinct fibres are separated by
-a basic patch clopen. This proves the component formula.
-4. A diagonal point is closed because it is the image of the closed point of a local spectrum
-under a closed immersion. Every point specializes to its diagonal point, so these are exactly
-the closed points. The complement of the diagonal is the union, over `f : A`, of the open sets
-where `f` belongs to the first prime and does not belong to the contracted prime. Indeed for
-`y` strictly contained in `x` one can choose `f` in `x` but outside `y`.
-5. The first-coordinate bijection from the closed points to the patch spectrum is continuous.
-Its domain is compact, since the closed points are closed in an affine spectrum. The patch
-spectrum is Hausdorff: distinct primes are separated by the complementary patch clopens
-`D(f)` and `V(f)` for an element on which they differ. A continuous bijection from a compact
-space to a Hausdorff space is a homeomorphism. Its inverse is the diagonal map. The closedness
-and unique closed specialization establish w-locality.
-6. Ind-Zariski algebras are flat by the proved upstream API. The structural spectrum map is
-surjective because of the diagonal points. Mathlib's flat-surjective-spectrum criterion gives
-faithful flatness. All constructions include the empty spectrum of the zero ring; the cut
-partitions omit empty parts and statements quantified over primes are then vacuous.
--/
+rather than the Zariski topology on `Spec A`. Finally, the localization is faithfully flat over
+`A` and w-local. -/
 theorem points (A : Type u) [CommRing A] :
     ∃ e : PrimeSpectrum (algebra A) ≃
         {p : PrimeSpectrum A × PrimeSpectrum A // p.2.asIdeal ≤ p.1.asIdeal},

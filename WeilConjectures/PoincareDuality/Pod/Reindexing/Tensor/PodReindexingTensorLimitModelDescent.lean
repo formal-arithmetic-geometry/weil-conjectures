@@ -13,8 +13,13 @@ import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 
 /-! # Descent of the strict tensor limit model
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4 and 0941.
-(blueprint: stage3-pod-reindexing-tensor-limit-model-descent).
+The strict normalized tensor equation descends along the localizations of good complexes,
+identifying the completed tensor comparison with the limit of the coherent system tensor map
+(dual-Tate compatibility).
+
+## References
+
+* [Stacks, Tags 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -120,17 +125,9 @@ private theorem frameFinish
 The strict normalized tensor equation descends through the product of the two good
 complex localizations. The hypotheses record the pure-tensor generator normalization,
 the strict model equation and its naturality; the conclusion is the component equation
-used by the parent limit-model lemma.
+in the tensor frame of `M` and `N`.
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4, 08TC,
-0941. Construct the natural coherent comparison. Its strict Roos normalization
-and Model identify it with T.tensor on good representatives after cancelling the
-target realization. Choose representatives of the constructible inputs, transport
-constructibility across their isomorphisms, and use Naturality to transport this
-component equality. Postcompose with the target tensor realization to get the frame
-equation. STATEMENT-DISPUTED: the original signature omitted Generators. Simultaneously
-negating T.tower and T.tensor preserves Model and Naturality, but changes the equation.
-(blueprint: stage3-pod-reindexing-tensor-limit-model-descent).
+See [Stacks, Tags 07A4, 08TC, 0941].
 -/
 theorem podReindexing_tensor_limit_model_descent
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

@@ -268,8 +268,7 @@ theorem exists_isOpen_not_dvd_index_pow_mem [CompactSpace G] (ℓ : ℕ) [Fact �
 compact) group, `ℓ` a prime and `M` a finite `ℓ`-primary discrete `G`-module. There is an open
 subgroup `K` of index prime to `ℓ` and a finite filtration `0 = F₀ ≤ F₁ ≤ ⋯ ≤ Fₙ = M` by
 `K`-stable subgroups whose successive quotients `Fᵢ₊₁ / Fᵢ` are trivial `𝔽_ℓ`-modules: they are
-killed by `ℓ` and `K` acts trivially on them.
-(blueprint: `theorem-cohomology-curves`) -/
+killed by `ℓ` and `K` acts trivially on them. -/
 theorem exists_isOpen_not_dvd_index_filtration [CompactSpace G] (ℓ : ℕ) [Fact ℓ.Prime]
     [Finite M.obj.V] (hM : ∀ x : M.obj.V, ∃ j : ℕ, ℓ ^ j • x = 0) :
     ∃ K : Subgroup G, IsOpen (K : Set G) ∧ ¬ ℓ ∣ K.index ∧

@@ -10,8 +10,12 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensor
 
 /-! # Substitution with fixed normalized reindexing primitives
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-reindexing-tensor-substitution). -/
+Completed-operation substitution holds for the fixed normalized reindexing primitives of a
+lawful completion and tensor reindexing (dual-Tate compatibility).
+
+## References
+
+* [Stacks, Tags 07A4, 0941] -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -38,31 +42,9 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Substitute normalized systems using these particular reindexing primitives.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4, 0941 (blueprint: lem-pod-reindexing-tensor-substitution).
-
-Proof: present the completed-operation models on the two Bool locations using
-the fixed calculi podReindexCalculus, the completion comparisons and Roos models
-of D. The canonical closed total-tensor presentations identify their system and
-integral closed structures with those of these calculi. At g use D.pullback;
-its PullbackNormalization is precisely the required representative normalization.
-At other morphisms use the same normalized pullback construction. Thus no
-independently chosen limit or completion maps replace those in D.
-Choose qY and qX by composing the given integral tensor realization with the
-inverse tensor realization of these models. This gives their two HEq equations.
-The primitive pullback formula is realization followed by the full-system
-counit. Substitute D.Counit into this formula and use the right triangle
-identity: F(unit) followed by this primitive comparison is exactly D.limit.
-The completion and Roos coordinate laws supply all other displayed pins.
-Normalized reconstruction makes the counit invertible on normalized systems.
-Tensor and pullback preserve normalization on quotient representatives.
-The expression induction of completed-operation substitution now applies to
-these same primitives: naturality gives ComparisonLaws, induction on the outer
-expression gives SubstitutionLaw, and conjugation by the invertible expression
-comparisons gives StructuralLaw. Keep T.Model and T.Canonical unchanged.
-All steps concern whole systems, work without boundedness, and include an empty
-scheme or empty expression family. -/
+/-- A lawful normalized completion and tensor reindexing satisfies the substitution property
+`PodReindexSubstitution`: normalized systems may be substituted using its particular
+reindexing primitives. -/
 theorem podReindexingTensorSubstitution
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

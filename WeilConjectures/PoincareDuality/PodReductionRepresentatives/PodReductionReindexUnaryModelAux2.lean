@@ -15,8 +15,9 @@ Equal exact functors have the same localization factors up to the equality
 transports, and the coefficient-normalized reindexing functor is the ordinary
 relabelling functor.
 
-Source: blueprint dual-Tate compatibility Steps 2 and 4; Stacks 05RU and 03CO.
-(blueprint: lem-pod-reduction-reindex-unary-model).
+## References
+
+* Stacks Project, Tags 05RU, 03CO, 03D6, 06YY, 03EL, 07A6, 0941
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +34,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme
 namespace WeilConjectures.PodReductionRepresentatives
 
-/-- Equal exact functors have equal localization factors, after the equality transports.
-Source: Stacks 05RU. -/
+/-- Equal exact functors have equal localization factors, after the equality transports. -/
 theorem mapDerivedCategoryFactors_congr {C₁ C₂ : Type*} {_ : Category C₁} {_ : Abelian C₁}
     {_ : HasDerivedCategory C₁} {_ : Category C₂} {_ : Abelian C₂} {_ : HasDerivedCategory C₂}
     (F G : C₁ ⥤ C₂) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
@@ -50,8 +50,7 @@ theorem mapDerivedCategoryFactors_congr {C₁ C₂ : Type*} {_ : Category C₁} 
     simp
   simp [this]
 
-/-- Transporting an exact functor's localization factor gives the factor of the equal functor.
-Source: Stacks 05RU. -/
+/-- Transporting an exact functor's localization factor gives the factor of the equal functor. -/
 private theorem reductionSystemFactorOfIso_mapDerived
     {C₁ C₂ : Type*} {_ : Category C₁} {_ : Abelian C₁} {_ : HasDerivedCategory C₁}
     {_ : Category C₂} {_ : Abelian C₂} {_ : HasDerivedCategory C₂}
@@ -68,8 +67,7 @@ private theorem reductionSystemFactorOfIso_mapDerived
   exact mapDerivedCategoryFactors_congr F G hFG h K
 
 
-/-- The localization factor transported along an equality of derived functors.
-Source: Stacks 05RU. -/
+/-- The localization factor transported along an equality of derived functors. -/
 theorem reductionFactorOfIso_mapDerived {C₁ C₂ : Type*} {_ : Category C₁} {_ : Abelian C₁}
     {_ : HasDerivedCategory C₁} {_ : Category C₂} {_ : Abelian C₂} {_ : HasDerivedCategory C₂}
     (F₁ F₂ : C₁ ⥤ C₂) [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
@@ -90,8 +88,7 @@ theorem reductionFactorOfIso_mapDerived {C₁ C₂ : Type*} {_ : Category C₁} 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The projection-normalized completed coefficient comparison is the ordinary one.
-Source: Stacks 03CO. -/
+/-- The projection-normalized completed coefficient comparison is the ordinary one. -/
 theorem podReindexingCoefficient_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     (sheafCompose (ProEt.topology X)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso
@@ -119,15 +116,13 @@ theorem podReindexingCoefficient_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     exact hn
   · exact (isoReductionCompletedMap_existsUnique l E g).exists.choose_spec
 
-/-- The coefficient-normalized reindexing functor is the ordinary relabelling functor.
-Source: Stacks 03CO and 03D6. -/
+/-- The coefficient-normalized reindexing functor is the ordinary relabelling functor. -/
 theorem podReindexingFunctor_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     podReindexingFunctor l E g none = isoReductionIntegralInverse l E g := by
   simp only [podReindexingFunctor, isoReductionIntegralInverse, podReindexingCoefficient_eq]
 
 
-/-- Generator formulas are compatible with an equality of modules.
-Source: Stacks 06YY. -/
+/-- Generator formulas are compatible with an equality of modules. -/
 theorem reductionEvaluation_eqToHom (W : Scheme.{u}) {M N : scalarReductionSource l E W}
     (h : M = N) (n : ℕ) (U : W.ProEt)
     (c : (integralCoefficientCommRingSheaf l E W n).obj.obj (op U))
@@ -154,9 +149,7 @@ set_option hygiene false in
 local notation "F[" g "]" => podReindexingComplexFunctor l E g none
 
 -- The representative assembles several large localized and sectionwise comparisons.
-/-- The whole-system reduction mate has an ordinary quotient representative.
-Source: blueprint dual-Tate compatibility Steps 1, 2 and 4; Stacks 03EL, 07A6, 0941.
-(blueprint: lem-pod-reduction-reindex-unary-model). -/
+/-- The whole-system reduction mate has an ordinary quotient representative. -/
 theorem unary_model_core {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

@@ -16,9 +16,19 @@ import Mathlib.LinearAlgebra.Basis.VectorSpace
 /-!
 # Invariants of a tensor product with a field extension
 
-Source: Stacks Project, Varieties, proof of Lemma 038B (lemma-closed-fixed-by-Galois),
-computation of the invariant polynomial coefficients
-(blueprint: lem-weil-pbc-tensor-field-extension-galois-invariants).
+If `G` is a group of automorphisms of a field extension `M/k` with fixed field `k`, then
+`a ↦ a ⊗ 1` identifies a `k`-vector space (or `k`-algebra) `A` with the `G`-invariants of
+`A ⊗[k] M`.
+
+## Implementation details
+
+Choosing a `k`-basis `(eᵢ)` of `A`, the tensors `eᵢ ⊗ 1` form an `M`-basis of `A ⊗[k] M`,
+and `id ⊗ τ` acts on coordinates by `τ`. A fixed tensor therefore has coordinates in `k`.
+
+## References
+
+* Stacks Project, Varieties, proof of Lemma 038B, computation of the invariant polynomial
+  coefficients.
 -/
 
 @[expose] public section
@@ -30,23 +40,7 @@ open scoped TensorProduct
 namespace TensorProduct
 
 /-- Extension by `a ↦ a ⊗ 1` embeds a vector space as the invariants of the action on
-its second tensor factor, when the automorphism group's fixed field is the base field.
-Source: Stacks Project, Varieties, proof of Lemma 038B
-(blueprint: lem-weil-pbc-tensor-field-extension-galois-invariants).
-
-Proof:
-1. Choose a `k`-basis `(eᵢ)` of `A` using
-   lem-weil-pbc-vector-space-basis-through-vector with the empty prescribed set.
-2. Scalar extension (def-weil-vector-space-scalar-extension) gives the `M`-basis
-   `(eᵢ ⊗ 1)`, so every tensor has unique finitely supported coordinates in `M`.
-3. The universal property makes `id ⊗ τ` act coordinatewise: its coordinates are `τ(yᵢ)`.
-4. Every `a ⊗ 1` is fixed since each algebra automorphism preserves one.
-5. For a fixed tensor, uniqueness of coordinates gives `τ(yᵢ) = yᵢ` for every `τ`.
-   The fixed-field hypothesis puts each coordinate in the image of `k`. Injectivity of
-   `algebraMap k M` (def-pc-field-extension) preserves finite support. Bilinearity now
-   writes the tensor as `(∑ᵢ cᵢ eᵢ) ⊗ 1`.
-6. If `a ⊗ 1 = 0`, coordinate uniqueness and injectivity of `algebraMap k M` force
-   every coordinate of `a` to vanish, proving injectivity. -/
+its second tensor factor, when the automorphism group's fixed field is the base field. -/
 theorem injective_and_range_eq_invariants
     {k : Type u} {M : Type v} [Field k] [Field M] [Algebra k M]
     (G : Subgroup (M ≃ₐ[k] M))
@@ -110,14 +104,7 @@ end TensorProduct
 namespace Algebra.TensorProduct
 
 /-- For a `k`-algebra, the same invariant set is the image subalgebra `A ⊗ 1`, canonically
-isomorphic to `A` by `a ↦ a ⊗ 1`.
-Source: Stacks Project, Varieties, proof of Lemma 038B
-(blueprint: lem-weil-pbc-tensor-field-extension-galois-invariants).
-
-Proof: apply the six-step basis argument of `TensorProduct.injective_and_range_eq_invariants`
-to the underlying vector space of `A`. The map `includeLeft` is the algebra homomorphism
-`a ↦ a ⊗ 1`, so its image is the invariant set and its injectivity gives an algebra
-isomorphism onto its range. This is the parenthetical clause of the node. -/
+isomorphic to `A` by `a ↦ a ⊗ 1`. -/
 theorem range_eq_invariants_and_equiv
     {k : Type u} {M : Type v} [Field k] [Field M] [Algebra k M]
     (G : Subgroup (M ≃ₐ[k] M))

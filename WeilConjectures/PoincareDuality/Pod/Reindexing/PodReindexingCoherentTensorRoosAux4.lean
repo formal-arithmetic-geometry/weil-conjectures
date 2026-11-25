@@ -15,8 +15,9 @@ The reference strict tower comparison of the coherent system tensor and the fini
 tower sends the restricted generator of two unit-inserted reduced sections to the total
 tensor of the unit-inserted sections.
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 03EK, 07A4, 0941
-(blueprint: stage3-pod-reindexing-coherent-tensor-roos).
+## References
+
+* Stacks 03D2, 03EK, 06YY, 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -36,16 +37,14 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The reduction of a unit-inserted section, read as a section of the coherent reduction.
-Source: Stacks 06YY, 0941. -/
+/-- The reduction of a unit-inserted section, read as a section of the coherent reduction. -/
 abbrev podReducedUnitSection (W : Scheme.{u}) (n : ℕ) (M : integralTowerModules l E W)
     (V : W.ProEt) (x : M.val.obj (op V)) :
     ((pullbackTensorOrdinaryReduction l E W).obj M).val.obj (op (n, V)) :=
   ((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V)
     (unrestrictedIntegralTensorSection l E W n M (op V) 1 x)
 
-/-- Degreewise, the inverse complex-level reduction evaluation is the termwise inverse.
-Source: Stacks 0941. -/
+/-- Degreewise, the inverse complex-level reduction evaluation is the termwise inverse. -/
 theorem podReductionEvaluationComplex_inv_f (W : Scheme.{u}) (n : ℕ)
     (C : CochainComplex (integralTowerModules l E W) ℤ) (k : ℤ) :
     ((pullbackTensorReductionEvaluationComplex l E W n).inv.app C).f k =
@@ -55,8 +54,7 @@ theorem podReductionEvaluationComplex_inv_f (W : Scheme.{u}) (n : ℕ)
     Functor.mapHomologicalComplexCompIso_hom_app_f, Iso.refl_hom, NatTrans.id_app]
   exact Category.id_comp _
 
-/-- The inverse reduction evaluation recovers a unit-inserted section.
-Source: Stacks 06YY, 0941. -/
+/-- The inverse reduction evaluation recovers a unit-inserted section. -/
 theorem podReducedUnitSection_inv (W : Scheme.{u}) (n : ℕ) (M : integralTowerModules l E W)
     (V : W.ProEt) (x : M.val.obj (op V)) :
     (((pullbackTensorReductionEvaluation l E W n).inv.app M).val.app (op V))
@@ -70,8 +68,7 @@ theorem podReducedUnitSection_inv (W : Scheme.{u}) (n : ℕ) (M : integralTowerM
     ((pullbackTensorReductionEvaluation l E W n).hom_inv_id_app M)
 
 /-- The reference strict tensor tower comparison on the restricted generator of two reduced
-unit-inserted sections.
-Source: Stacks 03EK, 07A4, 0941. -/
+unit-inserted sections. -/
 theorem pullbackTensorTensorTower_hom_reducedUnit (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) (p q : ℤ) (V : W.ProEt)
     (x : (P.X p).val.obj (op V)) (y : (Q.X q).val.obj (op V)) :
@@ -119,8 +116,7 @@ theorem pullbackTensorTensorTower_hom_reducedUnit (W : Scheme.{u})
   exact congrArg₂ (integralOperationsTotalTensorSection l E W n P Q p q (op V))
     (podReducedUnitSection_inv l E W n (P.X p) V x) (podReducedUnitSection_inv l E W n (Q.X q) V y)
 
-/-- Unit-inserted reduced sections are compatible with an equality of modules.
-Source: Stacks 06YY. -/
+/-- Unit-inserted reduced sections are compatible with an equality of modules. -/
 theorem podReducedUnitSection_eqToHom (W : Scheme.{u}) {M N : scalarReductionSource l E W}
     (h : M = N) (n : ℕ) (U : W.ProEt) (x : M.val.obj (op U)) (y : N.val.obj (op U))
     (hxy : HEq x y) :
@@ -143,8 +139,7 @@ set_option hygiene false in
 local notation "F[" g "]" => podReindexingComplexFunctor l E g none
 
 /-- The transported unary chain model sends the restricted inverse-image unit of a reduced
-unit-inserted section to the reduced unit-inserted section.
-Source: Stacks 03D2, 06YY, 0941. -/
+unit-inserted section to the reduced unit-inserted section. -/
 theorem podUnaryTransport_generator {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (P : CochainComplex (scalarReductionSource l E Y) ℤ)
     (β : (I[g]).obj ((R[Y]).obj P) ≅ (R[X]).obj ((F[g]).obj P))

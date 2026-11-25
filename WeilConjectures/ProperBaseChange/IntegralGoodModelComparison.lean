@@ -9,8 +9,23 @@ public import WeilConjectures.ProperBaseChange.ProperIntegralOrdinaryData
 
 /-! # Ordinary comparison on good integral representatives
 
-Source: Bhatt--Scholze Remark 6.8.15; Stacks 06YY.
-(blueprint: lem-weil-pbc-integral-good-model-comparison).
+On good integral representatives, the derived pullback followed by the coefficient transport
+is computed by the strict pullback complex followed by the strict coefficient transport.
+
+## Main results
+
+- `pbc_integral_good_model_comparison`
+
+## Implementation details
+
+The comparison is obtained by whiskering the ordinary good-model comparison by the coefficient
+transport, and the exact coefficient factorization by the strict pullback complex functor; its
+components are the composites of the two comparison components.
+
+## References
+
+- Bhatt–Scholze, *The pro-étale topology for schemes*, Remark 6.8.15
+- [Stacks, Tag 06YY]
 -/
 
 @[expose] public noncomputable section
@@ -81,17 +96,10 @@ private theorem ordinaryGoodComparison_hom_app
   erw [Category.id_comp]
   rfl
 
-/-- Compose the ordinary pullback computation and exact coefficient transport
-on good representatives, retaining their prescribed components.
-
-Source: Bhatt--Scholze Remark 6.8.15; Stacks 06YY.
-(blueprint: lem-weil-pbc-integral-good-model-comparison).
-
-Proof: whisker the published ordinary good-model comparison by detailed transport.
-Then whisker its exact coefficient factorization by the strict pullback complex
-functor. Explicit functor associators put both factors in the same association.
-Their components are identities, so the resulting component is exactly the
-composite of the two published comparison components. -/
+/-- On good representatives, the derived pullback along `h` followed by the coefficient
+transport is isomorphic to the strict pullback complex followed by the strict coefficient
+transport, with components the composite of the derived pullback comparison and the
+coefficient transport factorization. -/
 theorem pbc_integral_good_model_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T) :

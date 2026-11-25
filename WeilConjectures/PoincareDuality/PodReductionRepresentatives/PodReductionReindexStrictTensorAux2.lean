@@ -13,8 +13,12 @@ public import WeilConjectures.SmoothPurity.Coefficient.CoefficientTotalTensorMap
 
 /-! # The pure-tensor formula of the strict reduction tensor map
 
-Source: Stacks 03EK, 07A4 and 0941.
-(blueprint: lem-pod-reduction-reindex-strict-tensor).
+We show that the strict reduction tensor map sends the reduction of `1 ⊗ (x ⊗ y)` to the tensor
+product of the reductions of `1 ⊗ x` and `1 ⊗ y`.
+
+## References
+
+* Stacks Project, Tags 03EK, 07A4, 0941, 03CO, 06YY
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +35,7 @@ namespace WeilConjectures.PodReductionRepresentatives
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- An isomorphism of module sheaves is inverse on sections.
-Source: Stacks 03CO. -/
+/-- An isomorphism of module sheaves is inverse on sections. -/
 theorem sheafOfModules_inv_hom_apply {C : Type*} [Category C] {J : GrothendieckTopology C}
     {R : Sheaf J RingCat.{u + 1}} {A B : SheafOfModules.{u + 1} R} (e : A ≅ B) (U : Cᵒᵖ)
     (s : A.val.obj U) : e.inv.val.app U (e.hom.val.app U s) = s := by
@@ -40,23 +43,20 @@ theorem sheafOfModules_inv_hom_apply {C : Type*} [Category C] {J : GrothendieckT
     e.hom_inv_id]
   rfl
 
-/-- Sections of a composite of module-sheaf maps.
-Source: Stacks 03CO. -/
+/-- Sections of a composite of module-sheaf maps. -/
 theorem sheafOfModules_comp_apply {C : Type*} [Category C] {J : GrothendieckTopology C}
     {R : Sheaf J RingCat.{u + 1}} {A B D : SheafOfModules.{u + 1} R} (f : A ⟶ B) (g : B ⟶ D)
     (U : Cᵒᵖ) (s : A.val.obj U) : (f ≫ g).val.app U s = g.val.app U (f.val.app U s) :=
   rfl
 
-/-- A natural isomorphism into module sheaves is inverse on sections.
-Source: Stacks 03CO. -/
+/-- A natural isomorphism into module sheaves is inverse on sections. -/
 theorem sheafOfModules_natIso_inv_hom_apply {C : Type*} [Category C]
     {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u + 1}} {D : Type*} [Category D]
     {F G : D ⥤ SheafOfModules.{u + 1} R} (e : F ≅ G) (X : D) (U : Cᵒᵖ)
     (s : (F.obj X).val.obj U) : (e.inv.app X).val.app U ((e.hom.app X).val.app U s) = s :=
   sheafOfModules_inv_hom_apply (e.app X) U s
 
-/-- The ordinary unit section is the reduction of `1 ⊗ x`.
-Source: Stacks 06YY. -/
+/-- The ordinary unit section is the reduction of `1 ⊗ x`. -/
 theorem scalarUnitSection_eq (W : Scheme.{u}) (n : ℕ)
     (M : integralTowerModules l E W) (U : W.ProEtᵒᵖ) (x : M.val.obj U) :
     coefficientIntegralScalarUnitSection l E W n M U x =
@@ -181,8 +181,7 @@ theorem strictMap_reducedUnit_generator (W : Scheme.{u})
 
 -- The finite component unfolds four transported tensor comparisons.
 /-- The strict reduction tensor map sends the reduction of `1 ⊗ (x ⊗ y)` to the tensor of the
-reductions of `1 ⊗ x` and `1 ⊗ y`.
-Source: Stacks 03EK, 07A4 and 0941. -/
+reductions of `1 ⊗ x` and `1 ⊗ y`. -/
 theorem strictMap_generator (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) (p q k : ℤ)
     (hpq : p + q = k) (V : W.ProEt)

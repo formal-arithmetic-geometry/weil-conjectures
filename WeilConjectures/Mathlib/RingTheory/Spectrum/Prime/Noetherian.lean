@@ -23,22 +23,18 @@ of closed subsets stabilize, and there are finitely many irreducible components.
 - `Ideal.exists_notMem_forall_of_isNoetherianRing`: *Nagata's criterion* for a set of primes of a
   noetherian ring to be open.
 
-## Blueprint
+## References
 
-- `lem-wf-affine-noetherian-components`: affine schemes of finite type are Noetherian with
-  finitely many irreducible components.
+- H. Matsumura, *Commutative Ring Theory*, Theorem 24.2
+- Stacks Project, Tag 0541
 -/
 
 @[expose] public section
 
 namespace PrimeSpectrum
 
-/-- Blueprint `lem-wf-affine-noetherian-components`: the spectrum of a finitely generated algebra
-`A` over a field `k` is a Noetherian space with finitely many irreducible components.
-
-The ring `A` is Noetherian by the Hilbert basis theorem (`Algebra.FiniteType.isNoetherianRing`),
-so `Spec A` is a Noetherian space (`PrimeSpectrum.instNoetherianSpace`), and a Noetherian space
-has finitely many irreducible components. -/
+/-- The spectrum of a finitely generated algebra `A` over a field `k` is a Noetherian space with
+finitely many irreducible components. -/
 theorem finite_irreducibleComponents_of_finiteType (k A : Type*) [Field k] [CommRing A]
     [Algebra k A] [Algebra.FiniteType k A] :
     TopologicalSpace.NoetherianSpace (PrimeSpectrum A) ∧
@@ -64,10 +60,10 @@ lemma IsArtinianRing.card_primeSpectrum_le_finrank (K A : Type*) [Field K] [Comm
       (localization_surjective p.asIdeal.primeCompl (Localization.AtPrime p.asIdeal))
   exact Module.finrank_pos
 
-/-- **Nagata's criterion for openness** (Matsumura, Theorem 24.2; Stacks, Tag 0541). Let `U` be a
-property of primes of a noetherian ring `S` which is stable under generalization and such that
-for each `P` with `U P`, the property holds on a neighbourhood of `P` in `V(P)`. Then `U` holds on a
-neighbourhood `D(g)` of each prime where it holds. -/
+/-- **Nagata's criterion for openness.** Let `U` be a property of primes of a noetherian ring `S`
+which is stable under generalization and such that for each `P` with `U P`, the property holds on
+a neighbourhood of `P` in `V(P)`. Then `U` holds on a neighbourhood `D(g)` of each prime where it
+holds. -/
 theorem Ideal.exists_notMem_forall_of_isNoetherianRing {S : Type*} [CommRing S]
     [IsNoetherianRing S] (U : Ideal S → Prop)
     (hgen : ∀ P Q : Ideal S, P.IsPrime → Q.IsPrime → Q ≤ P → U P → U Q)

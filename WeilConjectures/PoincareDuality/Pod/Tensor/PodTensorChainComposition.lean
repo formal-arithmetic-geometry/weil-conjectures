@@ -10,8 +10,17 @@ public import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorRawComposition
 
 /-! # The tensor Roos chain composition equation
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-tower).
+We state the composition equation for the explicit tensor Roos chain maps of a reindexing
+family, before localization (`PodTensorChainComposition`).
+
+## Implementation details
+
+Both sides use the explicitly constructed chain maps from the tensor tower data; the equation
+involves neither a derived tensor comparison nor constructibility.
+
+## References
+
+* [Stacks, Tags 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -46,11 +55,10 @@ attribute [local implicit_reducible] podGoodReindex integralOperationsTensorComp
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Composition of the specified tensor Roos chain maps before localization.
-Source: blueprint Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: def-pod-tensor-chain-composition).
-Both sides use the explicitly constructed chain maps from the tensor tower data.
-This equation contains neither a derived tensor comparison nor constructibility. -/
+/-- The composition equation for the explicit tensor Roos chain maps before localization: for
+isomorphisms `h : Z ⟶ W` and `f : W ⟶ V`, the chain maps of `f` and `h` compose to that of
+`h ≫ f` on the good representatives `P`, `Q`, through the composition isomorphism of the
+reindexing family `A`. -/
 def PodTensorChainComposition
     (A : PodReindexFamily l E)
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]

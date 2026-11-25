@@ -17,8 +17,7 @@ Let `f : X ⟶ Y` be a proper morphism of separated `k`-schemes of finite type. 
 identification `Rf_! ≅ Rf_*` (`boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl`), the
 exceptional projection morphism `PF_f : Rf_! T ⊗ M ⟶ Rf_! (T ⊗ Lf^* M)` of bounded constructible
 `ℚ̄_ℓ`-complexes is the projection morphism of `Lf^* ⊣ Rf_*`
-(`boundedConstructibleExceptionalProjectionMorphism_comp_lowerShriekIsoLowerStar`,
-blueprint `prop-sf-pf-coherence`).
+(`boundedConstructibleExceptionalProjectionMorphism_comp_lowerShriekIsoLowerStar`).
 
 The proof follows the definition of `Rf_! ≅ Rf_*`: the lower shriek is compared with that of the
 trivial compactification `X ⟶[𝟙] X ⟶[f] Y`, which intertwines the exceptional projection
@@ -123,7 +122,7 @@ lemma homMk_exceptionalProjectionMorphismOfCompactification_ofIsProper
     (fun X' Y' ↦ boundedConstructibleUpperStarId_hom_app_tensor_δ ℓ X X' Y') T M
 
 /-- **The exceptional projection morphism of a proper morphism is the projection morphism of
-`Lf^* ⊣ Rf_*`** (blueprint `prop-sf-pf-coherence`): through `Rf_! ≅ Rf_*`, the exceptional
+`Lf^* ⊣ Rf_*`**: through `Rf_! ≅ Rf_*`, the exceptional
 projection morphism `PF_f : Rf_! T ⊗ M ⟶ Rf_! (T ⊗ Lf^* M)` is the projection morphism
 `Rf_* T ⊗ M ⟶ Rf_* (T ⊗ Lf^* M)`. -/
 theorem boundedConstructibleExceptionalProjectionMorphism_comp_lowerShriekIsoLowerStar

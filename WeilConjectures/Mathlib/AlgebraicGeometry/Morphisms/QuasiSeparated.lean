@@ -56,9 +56,7 @@ lemma Scheme.Opens.quasiCompact_ι {X : Scheme.{u}} [QuasiSeparatedSpace X] (U :
   have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
   inferInstance
 
-/-- Quasi-separatedness of schemes descends along surjective quasi-compact morphisms: the
-intersection of two quasi-compact opens of `Y` is the image of the intersection of their
-quasi-compact preimages. -/
+/-- Quasi-separatedness of schemes descends along surjective quasi-compact morphisms. -/
 lemma quasiSeparatedSpace_of_surjective {X Y : Scheme.{u}} (f : X ⟶ Y) [Surjective f]
     [QuasiCompact f] [QuasiSeparatedSpace X] : QuasiSeparatedSpace Y := by
   refine ⟨fun U V hU hUc hV hVc ↦ ?_⟩
@@ -69,7 +67,7 @@ lemma quasiSeparatedSpace_of_surjective {X Y : Scheme.{u}} (f : X ⟶ Y) [Surjec
   simpa [Set.image_preimage_eq _ f.surjective] using h.image f.continuous
 
 /-- **Intersections of quasi-compact opens**: in a quasi-separated scheme the intersection of two
-quasi-compact open subschemes is quasi-compact. (blueprint: `pqf-lem-qs-intersection-qc`) -/
+quasi-compact open subschemes is quasi-compact. -/
 lemma Scheme.isCompact_inf_of_quasiSeparatedSpace {X : Scheme.{u}} [QuasiSeparatedSpace X]
     {U V : X.Opens} (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X)) :
     IsCompact ((U ⊓ V : X.Opens) : Set X) :=

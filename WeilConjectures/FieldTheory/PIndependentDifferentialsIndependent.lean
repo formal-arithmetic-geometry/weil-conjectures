@@ -13,8 +13,17 @@ import WeilConjectures.FieldTheory.PBasisExtension
 
 /-! # The differentials of a p-independent family are linearly independent
 
-Source: literature/stacks-project/more-algebra.tex, Definition Tag 07P1 and
-Lemma Tag 07P2 (blueprint: lem-weil-pbc-p-independent-differentials-independent).
+If a family in a field `K` of characteristic `p` is p-independent over `k`, then its
+differentials in `Ω[K⁄k]` are linearly independent over `K`.
+
+## Implementation details
+
+The family is extended to a p-basis, whose differentials form a basis of `Ω[K⁄k]`; the
+original differentials are a subfamily of this basis.
+
+## References
+
+* Stacks Project, More on Algebra, Definition Tag 07P1 and Lemma Tag 07P2
 -/
 
 @[expose] public section
@@ -26,19 +35,7 @@ universe u v w
 
 namespace FieldTheory
 
-/-- The differentials of a p-independent family are linearly independent.
-Source: Stacks Project, More on Algebra, Tags 07P1 and 07P2, implication (1) implies (2).
-
-Proof (blueprint: lem-weil-pbc-p-independent-differentials-independent):
-1. Extend the given p-independent family to a p-basis by
-   `lem-weil-pbc-p-independent-extends-to-p-basis`.
-2. Apply `lem-weil-pbc-p-basis-differentials-basis` to obtain a basis of
-   `Ω[K⁄k]` consisting of the differentials of the extended family.
-3. Given a finite linear relation among the original differentials, extend its coefficients
-   by zero on the added indices. This gives a relation among the extended basis, whose
-   coordinate uniqueness forces all coefficients to vanish. Thus the original
-   differentials are linearly independent over `K`.
--/
+/-- The differentials of a p-independent family are linearly independent over `K`. -/
 theorem pIndependent_differentials_linearIndependent
     (p : ℕ) [Fact p.Prime] (k : Type u) (K : Type v)
     [Field k] [Field K] [Algebra k K] [CharP k p] [CharP K p]

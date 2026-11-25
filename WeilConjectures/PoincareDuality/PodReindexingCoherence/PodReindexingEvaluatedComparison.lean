@@ -11,8 +11,22 @@ import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingEvalu
 
 /-! # Evaluation-normalized reindexing comparison
 
-Source: blueprint dual-Tate compatibility, Steps 1, 2 and 4; Stacks 0GMX, 0A8X, 08J9.
-(blueprint: lem-pod-reindexing-evaluated-comparison).
+We construct a reindexing `Comparison` along an isomorphism whose derived and tensor
+comparisons are compatible with evaluation (`evaluated_comparison_exists`).
+
+## Implementation details
+
+The chain comparison reindexes each product factor of the ordinary Hom complex and each
+total-tensor summand; it descends to the derived comparisons via K-injective and K-flat
+representatives. Evaluation is compared on pure tensors using `chain_projection` and
+`tensorChain_pure`, then extended by naturality along resolutions. The construction asserts
+neither the shift squares nor the uniqueness and transpose laws.
+
+## References
+
+* Stacks Project, Tag 0GMX
+* Stacks Project, Tag 0A8X
+* Stacks Project, Tag 08J9
 -/
 
 @[expose] public noncomputable section
@@ -27,25 +41,8 @@ namespace WeilConjectures.PodReindexingCoherence
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Construct the normalized chain, derived and tensor comparisons with their evaluation equation.
-Source: blueprint dual-Tate compatibility, Steps 1--2; Stacks 0GMX, 0A8X, 08J9
-(blueprint: lem-pod-reindexing-evaluated-comparison).
-
-Proof: reindex each product factor of the ordinary Hom complex. Its differential is
-preserved because reindexing is additive and respects both compositions. For K-injective
-targets this is the comparison of the Hom-resolution-model lemma. Descend through
-localization to its specified natural derived comparison. Reindex total-tensor summands;
-pure-tensor sections give the tensorChain comparison. Localize on independent K-flat
-representatives, obtaining tensor with its tensor_model equation. These constructions
-satisfy all four representative normalization fields of Comparison.
-For evaluation take a flat-term K-flat P and a K-injective target I. The one-sided
-chain-transpose lemma applied to the identity of Hom(P,I) gives evaluation on
-Hom(P,I) tensor P by f tensor x maps to f(x), followed by inverse target augmentation.
-After reindexing the two chain evaluations agree on every pure tensor by chain_projection
-and tensorChain_pure. Sheafification and total-summand extensionality give equality of
-chain maps. Localize and cancel the K-flat and K-injective model isomorphisms. Naturality
-along independent resolutions extends the resulting equation to arbitrary derived M,N.
-This construction asserts neither the shift squares nor the uniqueness and transpose laws. -/
+/-- There is a normalized reindexing comparison `c` whose derived Hom and tensor comparisons
+are compatible with the evaluation maps `SY.evaluation` and `SX.evaluation`. -/
 theorem evaluated_comparison_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

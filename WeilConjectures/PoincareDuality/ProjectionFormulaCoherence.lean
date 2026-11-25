@@ -22,16 +22,19 @@ For a proper morphism `f`, the exceptional projection morphism
 
 ## Main statements
 
-- `ProEtale.CondensedRing.upperStar_map_exceptionalProjection_comp_counit`: the clause
-  "identification with the direct-image projection formula through `Rf_! ≅ Rf_*` for proper `f`"
-  of blueprint `prop-sf-pf-coherence` (section `chap-The-six-operations-on-Dbctf`).
-- `ProEtale.CondensedRing.exceptionalProjection_comp`: the clause "the associativity pentagon
-  for composable `f`, `g`, compatible with the composition law" of `prop-sf-pf-coherence`.
-- `ProEtale.CondensedRing.exceptionalProjection_id`: the clause "the identity for `f = id`" of
-  `prop-sf-pf-coherence`.
+- `ProEtale.CondensedRing.upperStar_map_exceptionalProjection_comp_counit`: for proper `f`, the
+  exceptional projection morphism is identified with the direct-image projection formula through
+  `Rf_! ≅ Rf_*`.
+- `ProEtale.CondensedRing.exceptionalProjection_comp`: the associativity pentagon for composable
+  `f`, `g`, compatible with the composition law.
+- `ProEtale.CondensedRing.exceptionalProjection_id`: the exceptional projection morphism of the
+  identity is the identity.
 
-They are proved in `WeilConjectures.PoincareDuality.ProjectionFormulaProper` (the first and the
-last) and `WeilConjectures.PoincareDuality.ProjectionFormulaComposition` (composition).
+## Implementation details
+
+The statements are proved in `WeilConjectures.PoincareDuality.ProjectionFormulaProper` (the
+first and the last) and `WeilConjectures.PoincareDuality.ProjectionFormulaComposition`
+(composition); this file collects them.
 
 -/
 
@@ -53,8 +56,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
 /-- **The exceptional projection morphism of a proper morphism is the projection morphism of
-`Lf^* ⊣ Rf_!`** (blueprint `prop-sf-pf-coherence`, the identification with the direct-image
-projection formula through `Rf_! ≅ Rf_*` for proper `f`): the adjoint of `PF^!_{f,T,M}` for
+`Lf^* ⊣ Rf_!`** (the identification with the direct-image projection formula through
+`Rf_! ≅ Rf_*` for proper `f`): the adjoint of `PF^!_{f,T,M}` for
 `Lf^* ⊣ Rf_!` is the counit at `T` tensored with `Lf^* M`, read through the tensor structure of
 `Lf^*`. -/
 theorem upperStar_map_exceptionalProjection_comp_counit (f : X ⟶ Y) [IsProper f.left]
@@ -75,9 +78,9 @@ theorem upperStar_map_exceptionalProjection_comp_counit (f : X ⟶ Y) [IsProper 
 variable {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
   [IsSeparated Z.hom]
 
-/-- **The exceptional projection morphism is compatible with composition** (blueprint
-`prop-sf-pf-coherence`, the associativity pentagon for composable `f`, `g`, compatible with the
-composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`). -/
+/-- **The exceptional projection morphism is compatible with composition**: the associativity
+pentagon for composable `f`, `g`, compatible with the composition law
+`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`. -/
 theorem exceptionalProjection_comp (f : X ⟶ Y) (g : Y ⟶ Z)
     (T : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -96,8 +99,8 @@ theorem exceptionalProjection_comp (f : X ⟶ Y) (g : Y ⟶ Z)
   boundedConstructibleExceptionalProjectionMorphism_comp_whiskerLeft ℓ f g T M
 
 variable (X) in
-/-- **The exceptional projection morphism of the identity is the identity** (blueprint
-`prop-sf-pf-coherence`, the identity for `f = id`), read through the identity isomorphisms
+/-- **The exceptional projection morphism of the identity is the identity**, read through the
+identity isomorphisms
 `R(𝟙)_! ≅ R(𝟙)_* ≅ 𝟭` and `L(𝟙)^* ≅ 𝟭`. -/
 theorem exceptionalProjection_id (T M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     boundedConstructibleExceptionalProjectionMorphism ℓ (𝟙 X) T M ≫

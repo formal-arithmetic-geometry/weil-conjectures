@@ -121,9 +121,22 @@ import all WeilConjectures.CategoryTheory.RingedHomUniverses.RingedInternalHomSh
 
 /-! # Reindexing, completed coefficients, and Hom resolution models
 
-Source: blueprint `theorem-poincare-duality-frobenius--2`, proof Steps 1--2;
-Stacks Project, Tags 03EL, 0GMX, 0A8X, 0A95 and 08J7
-(blueprint: lem-pod-reindexing-hom-resolution-model).
+For an isomorphism of schemes `g : X ⟶ Y`, reindexing of module sheaves at finite and
+completed coefficient stages is an exact equivalence preserving flat, K-flat and K-injective
+resolutions, and it is compatible with tensor products, Hom complexes and derived internal
+Hom via the specified K-injective resolution model.
+
+## Implementation details
+
+Coefficient isomorphisms are normalized by constant sections at finite levels and by all
+projections of the completed ring. The Hom-complex comparison acts on local families by
+reindexing; it is descended to derived internal Hom through a fixed functorial K-injective
+replacement. No boundedness or exactness of infinite products is used, and the completed
+stage uses ordinary inverse image, without a quotient-tower derived-completion comparison.
+
+## References
+
+* Stacks Project, Tags 03CO, 03EL, 05RU, 079I, 08J7, 09A5, 0A8X, 0A95, 0GMX, 0H7J.
 -/
 
 @[expose] public noncomputable section
@@ -137,18 +150,14 @@ open AlgebraicGeometry.Scheme
 
 namespace WeilConjectures
 
-/-- A positive finite stage (`some n` means exponent n+1), or the completed stage `none`.
-Source: blueprint dual-Tate compatibility, Steps 1--2
-(blueprint: lem-pod-reindexing-hom-resolution-model). -/
+/-- A positive finite stage (`some n` means exponent n+1), or the completed stage `none`. -/
 abbrev podReindexingRing (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u}) :
     Option ℕ → Sheaf (ProEt.topology W) CommRingCat.{u+1}
   | none => completedIntegralCommRingSheafUnrestricted l E W
   | some n => integralCoefficientCommRingSheaf l E W n
 
-/-- The existing module-sheaf category at either coefficient stage.
-Source: blueprint dual-Tate compatibility, Steps 1--2
-(blueprint: lem-pod-reindexing-hom-resolution-model). -/
+/-- The module-sheaf category at either coefficient stage. -/
 abbrev podReindexingModules (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u}) (s : Option ℕ) :=
   SheafOfModules.{u+1} ((sheafCompose (ProEt.topology W)
@@ -158,10 +167,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Constant-sheaf reindexing is natural in the coefficient ring, and its components
-are the specified constant-section maps. Use the canonical comparison commuting
-reindexing with sheafification, then its unit equation and uniqueness on constants.
-Source: Stacks Tags 09A5 and 0H7J
-(blueprint: lem-pod-reindexing-hom-resolution-model). -/
+are the specified constant-section maps. -/
 private theorem podReindexingConstantComparison {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g] :
     ∃ κ : constantSheaf (ProEt.topology Y) CommRingCat.{u+1} ⋙
@@ -220,18 +226,7 @@ private theorem podReindexingConstantNaturality {X Y : Scheme.{u}} (g : X ⟶ Y)
     (κ.hom.naturality f)
 
 /-- The coefficient isomorphisms are uniquely normalized by constant sections at finite
-levels and by all completed-ring projections.
-Source: blueprint dual-Tate compatibility, Steps 1--2; Stacks Tags 03CO and 09A5
-(blueprint: lem-pod-reindexing-hom-resolution-model).
-
-Proof: use the canonical constant coefficient identification for each positive quotient.
-The quotient maps commute with it, since both maps act identically on constant sections.
-Sectionwise reindexing preserves the ring-sheaf inverse limit, giving the completed map.
-Its projections are the prescribed finite maps. Reverse reindexing gives an inverse;
-the composites have every projection equal to the original projection, so limit
-uniqueness makes them identities. The same uniqueness proves uniqueness of this family.
-This is Steps 1--3 of the node, using lem-weil-proetale-isomorphism-inverse-image,
-def-weil-completed-integral-coefficients and def-pur-sheaf-inverse-limit. -/
+levels and by all completed-ring projections. -/
 theorem podReindexingCoefficient_existsUnique {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     ∃! c : ∀ s : Option ℕ,
       (isoSectionwiseInverseImage g CommRingCat.{u+1}).obj (podReindexingRing l E Y s) ≅
@@ -315,15 +310,11 @@ theorem podReindexingCoefficient_existsUnique {X Y : Scheme.{u}} (g : X ⟶ Y) [
     simp only [Functor.map_comp] at h₁ h₂
     exact h₁.trans h₂.symm
 
-/-- The uniquely projection-normalized coefficient identification, including completion.
-Source: blueprint dual-Tate compatibility, Steps 1--2
-(blueprint: lem-pod-reindexing-hom-resolution-model). -/
+/-- The uniquely projection-normalized coefficient identification, including completion. -/
 def podReindexingCoefficient {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :=
   (podReindexingCoefficient_existsUnique l E g).exists.choose
 
-/-- Reindex modules and transport their actions by the specified inverse coefficient map.
-Source: blueprint dual-Tate compatibility, Steps 1--2
-(blueprint: lem-pod-reindexing-hom-resolution-model). -/
+/-- Reindex modules and transport their actions by the specified inverse coefficient map. -/
 abbrev podReindexingFunctor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (s : Option ℕ) :=
   isoSectionwiseModuleInverseImage.{u,u} g
     (RY := (sheafCompose (ProEt.topology Y)
@@ -333,54 +324,44 @@ abbrev podReindexingFunctor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (s : Opti
     ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u+1} RingCat.{u+1})).mapIso
       (podReindexingCoefficient l E g s)).hom
 
-/-- The ordinary unbounded derived category at either stage, with standard localization.
-Source: blueprint dual-Tate compatibility, Steps 1--2
-(blueprint: lem-pod-reindexing-hom-resolution-model). -/
+/-- The ordinary unbounded derived category at either stage, with standard localization. -/
 abbrev podReindexingDerived (W : Scheme.{u}) (s : Option ℕ) :=
   @DerivedCategory (podReindexingModules l E W s) _ _ (HasDerivedCategory.standard.{u+1,u+2} _)
 
-/-- Ordinary completed-ring inverse image, or finite inverse image, by exact termwise descent.
-Source: blueprint dual-Tate compatibility, Steps 1--2
-(blueprint: lem-pod-reindexing-hom-resolution-model). -/
+/-- The derived reindexing functor at either stage (ordinary completed-ring inverse image, or
+finite inverse image), obtained from the exact termwise functor. -/
 abbrev podReindexingDerivedFunctor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (s : Option ℕ) : podReindexingDerived l E Y s ⥤ podReindexingDerived l E X s :=
   letI := HasDerivedCategory.standard.{u+1,u+2} (podReindexingModules l E Y s)
   letI := HasDerivedCategory.standard.{u+1,u+2} (podReindexingModules l E X s)
   (podReindexingFunctor l E g s).mapDerivedCategory
 
-/-- The recorded product Hom complex, without changing its coefficient or site universe.
-Source: Stacks Tag 0A8X (blueprint: lem-pod-reindexing-hom-resolution-model). -/
+/-- The product Hom complex, without changing its coefficient or site universe. -/
 abbrev podReindexingHom (W : Scheme.{u}) (s : Option ℕ) :=
   homComplexFunctor.{u+1,u,u+1,u+1} (J := ProEt.topology W) (R := podReindexingRing l E W s)
 
-/-- The recorded ordinary unbounded derived internal Hom at the chosen coefficient stage.
-Source: Stacks Tag 08J7 (blueprint: lem-pod-reindexing-hom-resolution-model). -/
+/-- The ordinary unbounded derived internal Hom at the chosen coefficient stage. -/
 abbrev podReindexingDerivedHom (W : Scheme.{u}) (s : Option ℕ) :=
   @derivedInternalHomOfUniverses.{u+1,u,u,u+2} _ _ (ProEt.topology W) _ _
     (podReindexingRing l E W s) (HasDerivedCategory.standard.{u+1,u+2} _)
 
-/-- The exact termwise functor on actual cochain complexes.
-Source: blueprint dual-Tate compatibility, Step 1
-(blueprint: lem-pod-reindexing-hom-resolution-model). -/
+/-- The exact termwise reindexing functor on cochain complexes. -/
 abbrev podReindexingComplexFunctor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (s : Option ℕ) :=
   (podReindexingFunctor l E g s).mapHomologicalComplex (ComplexShape.up ℤ)
 
-/-- The existing sheaf tensor product with its right input fixed.
-Source: Stacks Tag 03EL (blueprint: lem-pod-reindexing-hom-resolution-model). -/
+/-- The sheaf tensor product `M ⊗ N`, formed with the right input fixed. -/
 abbrev podReindexingTensor (W : Scheme.{u}) (s : Option ℕ)
     (M N : podReindexingModules l E W s) : podReindexingModules l E W s :=
   (SheafOfModules.siteSheafTensorRight.{u,u+1,u+1,u+1}
     (J := ProEt.topology W) (A := podReindexingRing l E W s) N).obj M
 
-/-- The canonical localization functor with the recorded standard derived-category size.
-Source: Stacks Tag 05RU (blueprint: lem-pod-reindexing-hom-resolution-model). -/
+/-- The canonical localization functor for the standard derived category. -/
 abbrev podReindexingQ (W : Scheme.{u}) (s : Option ℕ) :
     CochainComplex (podReindexingModules l E W s) ℤ ⥤ podReindexingDerived l E W s :=
   @DerivedCategory.Q.{u+2,u+1,u+2} _ _ _ (HasDerivedCategory.standard.{u+1,u+2} _)
 
-/-- Localization intertwines the exact termwise inverse image and its derived functor.
-Source: Stacks Tag 05RU (blueprint: lem-pod-reindexing-hom-resolution-model). -/
+/-- Localization intertwines the exact termwise inverse image and its derived functor. -/
 abbrev podReindexingDerivedFactors {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (s : Option ℕ) :
     podReindexingQ l E Y s ⋙ podReindexingDerivedFunctor l E g s ≅
@@ -389,9 +370,7 @@ abbrev podReindexingDerivedFactors {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     _ _ _ (HasDerivedCategory.standard.{u+1,u+2} _) (podReindexingFunctor l E g s) _ _ _
 
 /-- The canonical Hom resolution comparison: the localization factorization followed by
-inversion of the map induced by I → I₀(I). No arbitrary model isomorphism is selected.
-Source: Stacks Tags 08J7 and 0A95
-(blueprint: lem-pod-reindexing-hom-resolution-model). -/
+inversion of the map induced by `I → I₀(I)`, for `I` K-injective. -/
 def podReindexingHomModel (W : Scheme.{u}) (s : Option ℕ)
     (K I : CochainComplex (podReindexingModules l E W s) ℤ) [I.IsKInjective] :
     (podReindexingDerivedHom l E W s).obj
@@ -431,14 +410,8 @@ attribute [local irreducible] podReindexingCoefficient
   Padic.coefficientExtensionAbsoluteValue
   SheafOfModules.ScalarHomOrdinary.tensorIsoSite
 
-/-- Tensor and ordinary sheaf-Hom comparisons, normalized on local sections.
-Source: the tensor and slice-Hom parts of the proof of
-`lem-pod-reindexing-hom-resolution-model`, Steps 4 and 7--8.
-(blueprint: lem-pod-reindexing-tensor-hom-data).
-
-The proof is the sheafified sectionwise tensor and slice-Hom comparison of
-`inverseImage_tensor_hom_iso`, with the coefficient isomorphism transported by
-`podReindexingCoefficient`; the displayed section equations are the normalizations. -/
+/-- Reindexing admits tensor and ordinary sheaf-Hom comparisons, normalized on local
+sections. -/
 theorem podReindexing_tensor_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -561,8 +534,7 @@ theorem podReindexing_tensor_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
 end
 
 /-- The canonical site round trip: compose the structure maps and cancel g and its inverse.
-The components are identities on the underlying schemes.
-Source: Stacks Tag 09A5 (blueprint: lem-pod-reindexing-hom-resolution-model). -/
+The components are identities on the underlying schemes. -/
 def podReindexingSiteRoundTrip {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     proEtaleIsoPostcompose (inv g) ⋙ proEtaleIsoPostcompose g ≅ 𝟭 Y.ProEt :=
   (MorphismProperty.Over.mapComp (Q := ⊤)
@@ -704,9 +676,7 @@ private theorem podReindexingCoefficientRoundTripWithInverse {X Y : Scheme.{u}}
   exact podReindexingCoefficientRoundTrip l E g s
 
 /-- The derived equivalence obtained from the exact module equivalence. Its unit and
-counit are the localizations of the termwise module unit and counit, by the existing
-Equivalence.mapDerivedCategory construction.
-Source: Stacks Tag 05RU (blueprint: lem-pod-reindexing-hom-resolution-model). -/
+counit are the localizations of the termwise module unit and counit. -/
 def podReindexingLiftedEquivalence {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (s : Option ℕ)
     (e : podReindexingModules l E Y s ≌ podReindexingModules l E X s)
     (hF : e.functor = podReindexingFunctor l E g s)
@@ -943,23 +913,7 @@ private theorem podReindexingModuleRoundTrip {X Y : Scheme.{u}}
     exact hm.trans (hrestrict (inv (inv g)) IsIso.inv_inv (IsIso.inv_hom_id (inv g)))
 
 /-- Coefficient and action round trips, identity shift components, and termwise derived
-unit and counit. The finite-stage functor agrees with the specified finite pullback.
-Source: blueprint dual-Tate compatibility, Steps 1--2; Stacks Tags 09A5 and 05RU
-(blueprint: lem-pod-reindexing-hom-resolution-model).
-
-Proof (node Steps 3 and 11): the finite scalar maps and their reverses are identities
-on constants; the completed composites have the same projections as the canonical
-site round trip, so they are equal by the inverse-limit universal property. Thus
-transporting the scalar action twice restores it. The module unit and counit are the
-original restrictions along the identity-on-schemes site round trips. Apply these
-maps in each cochain degree. Their naturality makes them chain maps and the module
-triangle identities hold degreewise. Localize these termwise maps; exactness inverts
-quasi-isomorphisms and gives the derived equivalence with the displayed unit/counit.
-The shifted term is F(K^(i+n)) and the differential is (-1)^n F(d), so the comparison
-is identity in every degree. Finally the finite coefficient identification is the
-canonical one, hence this is precisely finiteDerivedPullback, whose definition is
-exact termwise inverse image. The completed assertion is ordinary inverse image;
-no quotient-tower derived-completion comparison is invoked. -/
+unit and counit. The finite-stage functor agrees with the specified finite pullback. -/
 theorem podReindexing_roundTrip_shift {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (s : Option ℕ) :
@@ -1005,20 +959,7 @@ theorem podReindexing_roundTrip_shift {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     exact Functor.mapHomologicalComplex_commShiftIso_hom_app_f _ K n i
 
 /-- Exact module equivalence and preservation of resolutions at finite and completed stages.
-The inverse is reverse reindexing, including its transported module action.
-Source: blueprint dual-Tate compatibility, Steps 1--2; Stacks Tags 03EL and 079I
-(blueprint: lem-pod-reindexing-hom-resolution-model).
-
-Proof (node Steps 1--6): postcompose site objects by g and its inverse; the original
-restriction identifications give inverse module functors. They are additive, preserve
-all existing small limits and colimits, and hence are exact. Tensor comparisons on
-pure tensors transport exact tensor functors, so flatness is preserved. The direct-sum
-total tensor comparison transports the test against every acyclic complex, proving
-K-flat preservation. For K-injectivity, transport any map from an acyclic complex to
-I through the inverse equivalence, take its null homotopy, and reindex that homotopy.
-Exactness preserves quasi-isomorphisms, so both sorts of resolution remain resolutions.
-Use lem-weil-proetale-isomorphism-inverse-image, lem-pur-isomorphism-inverse-image-tensor-hom,
-def-pc-flat-sheaf-modules, def-pc-kflat-complex and def-pur-kinjective-complex. -/
+The inverse is reverse reindexing, including its transported module action. -/
 theorem podReindexing_resolution_preservation {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -1127,28 +1068,8 @@ private theorem podReindexingHomModel_inv (W : Scheme.{u}) (s : Option ℕ)
 
 set_option backward.isDefEq.respectTransparency true in
 /-- The actual Hom-complex and derived localization comparisons, with their
-projection, naturality, quasi-isomorphism, and resolution-model laws.
-Source: the Hom-complex and localization parts of the proof of
-`lem-pod-reindexing-hom-resolution-model`, Steps 7--10.
-(blueprint: lem-pod-reindexing-derived-hom-data).
-
-The supplied comparison is required to act on local families by reindexing. Evaluating
-on every site object, slice object and section therefore proves its naturality in
-both module arguments. Exact reindexing preserves integer products. The generic
-product-Hom comparison applies this natural family to each product projection;
-its two-term differential calculation gives an actual natural chain isomorphism.
-Quasi-isomorphism invariance into K-injectives and exact reindexing prove the
-quasi-isomorphism clause.
-
-For descent, use the fixed functorial K-injective replacement on the source site.
-Its augmentation becomes invertible after localization. The ordinary-to-derived
-Hom comparisons on both resolved targets are invertible, since reindexing preserves
-K-injectivity. The generic resolution-descent lemma then gives a natural derived
-isomorphism and its comparison equation. The ordinary comparison is the localized
-augmentation followed by the inverse localization factorization, which is exactly
-`podReindexingHomModel.inv`. Substitute these identities in the descent equation
-and multiply by the source model isomorphism. This gives the displayed formula,
-including the contravariant transport in the first argument. -/
+projection, naturality, quasi-isomorphism, and resolution-model laws, for a sheaf-Hom
+comparison `η` acting on local families by reindexing. -/
 theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -1298,26 +1219,8 @@ theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
 
 -- The theorem combines the two strictly smaller comparison packages above.
 /-- Tensor and Hom comparisons, the actual unbounded product Hom-complex comparison,
-and its natural derived descent with the specified K-injective resolution model.
-Source: blueprint dual-Tate compatibility, Steps 1--2; Stacks Tags 03EL, 0GMX,
-0A8X, 0A95, 079I and 08J7
-(blueprint: lem-pod-reindexing-hom-resolution-model).
-
-Proof (node Steps 4, 7--10): the tensor comparison comes from the sheafified
-sectionwise tensor comparison of lem-pur-isomorphism-inverse-image-tensor-hom;
-it sends s tensor t to Fs tensor Ft. The Hom comparison reindexes maps of slice
-modules, sending f to Ff. For each integer r preserve the product over every integer
-p, then compare its Hom factors. The p-th projection is F of the original projection
-followed by the slice Hom comparison. Naturality and additivity identify the two
-summands d_I f and -(-1)^r f d_K, so these components form an isomorphism of complexes.
-The same computation with b f a proves joint naturality. By lem-pur-rhom-well-defined,
-quasi-isomorphisms in either input induce quasi-isomorphisms when both targets are
-K-injective. Exact reindexing preserves them and K-injectivity (Steps 2 and 6).
-Use prop-pur-kinjective-resolutions-exist, and descend through the localization of
-pairs of complexes used by def-pur-derived-internal-hom. Its factorization comparison
-and the inverse of Hom(K,I→I₀(I)) give podReindexingHomModel; consequently the displayed
-model square commutes. This also proves independence of representatives and resolution.
-No boundedness or exactness of infinite products is used. -/
+and its natural derived descent compatible with the specified K-injective resolution model
+`podReindexingHomModel`. -/
 theorem podReindexing_hom_resolution_model {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

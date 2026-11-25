@@ -9,8 +9,25 @@ public import WeilConjectures.ProperBaseChange.CondensedERealization.CondensedER
 
 /-! # Ordered exchange for a normalized realization system
 
-Source: Bhatt--Scholze, Proposition 6.8.14(2) and Remark 6.8.15.
-(blueprint: lem-weil-pbc-condensed-e-exchange-mate)
+For a commutative square of base schemes, the square of integral pullbacks built from the
+specified integral compositors, and its compatibility with the rational square obtained by
+scalar localization.
+
+## Main definitions
+
+- `integralPullOnOverHom`: integral pullback along a bundled morphism over `Spec k`.
+- `integralSquare`: the square of integral pullbacks attached to a commutative square.
+
+## Implementation details
+
+Morphisms over `Spec k` are bundled as subtypes so that an equality of morphisms transports
+the corresponding pullback functors by `eqToIso`.
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(2) and
+  Remark 6.8.15.
+- Stacks Project, Tag 07A7.
 -/
 
 @[expose] public noncomputable section
@@ -76,16 +93,15 @@ private theorem ulift_localization_module (A : Type*) [CommRing A]
   induction x using OreLocalization.ind with
   | _ b s => simp only [ULift.smul_def, OreLocalization.smul_oreDiv]
 
-/-- Bundle morphisms so equality transports pullbacks. Source: Stacks Tag 07A7.
-(blueprint: lem-weil-pbc-condensed-e-exchange-mate). -/
+/-- Integral pullback along a morphism over `Spec k`, bundled as an element of a subtype. -/
 def integralPullOnOverHom (T U : Base k)
     (h : { h : T.scheme ⟶ U.scheme // h.IsOver (Spec (.of k)) }) :
     Integral l E U.scheme ⥤ Integral l E T.scheme :=
   letI : h.val.IsOver (Spec (.of k)) := h.property
   (D.along T U h.val).pull
 
-/-- The square built from the specified integral compositors. Source: Stacks Tag 07A7.
-(blueprint: lem-weil-pbc-condensed-e-exchange-mate). -/
+/-- The isomorphism of integral pullbacks attached to a commutative square, built from the
+specified integral compositors. -/
 def integralSquare (sq : CommSq g' f' f g) :
     (D.along Y' Y g).pull ⋙ (D.along X' Y' f').pull ≅
       (D.along X Y f).pull ⋙ (D.along X' X g').pull :=

@@ -14,9 +14,6 @@ public import WeilConjectures.WeilObject.Sheaf.StalkUnit
 The constructions are the coefficient unit, its pullback comparison, the counit components,
 and the base-change exchange. They retain the coefficient ring as a parameter so their
 categorical identities can be proved before specializing the coefficients.
-
-Source: blueprint latest, `sec-fourier-transform/sk-lem-as-properties/lem-fd-as-trace.proof.md`,
-first paragraph (blueprint: def-fd-condensed-unit-fibre-maps).
 -/
 
 @[expose] public noncomputable section
@@ -31,27 +28,23 @@ open scoped CategoryTheory.Obj
 
 namespace WeilConjectures.CondensedUnitFibre
 
-/-- The coefficient unit, using the recorded pulled-back condensed ring.
-Source: blueprint finite-fibre paragraph (blueprint: def-fd-condensed-unit-fibre-maps). -/
+/-- The coefficient unit, using the recorded pulled-back condensed ring. -/
 abbrev unit (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (T : Scheme.{u}) :=
   Mod.regular (condensedRingObj Λ T)
 
-/-- The canonical unit comparison, in the direction from the pullback to the unit.
-Source: blueprint finite-fibre paragraph (blueprint: def-fd-condensed-unit-fibre-maps). -/
+/-- The canonical unit comparison, in the direction from the pullback to the unit. -/
 def unitPullback (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {T U : Scheme.{u}} (a : T ⟶ U) :
     (upperStar Λ a).obj (unit Λ U) ≅ unit Λ T :=
   (Functor.Monoidal.εIso (upperStar Λ a)).symm
 
-/-- Direct image of the coefficient unit.
-Source: blueprint finite-fibre paragraph (blueprint: def-fd-condensed-unit-fibre-maps). -/
+/-- Direct image of the coefficient unit. -/
 abbrev push (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {Y X : Scheme.{u}} (f : Y ⟶ X) :=
   (lowerStar Λ f).obj (unit Λ Y)
 
-/-- The counit projection followed by the canonical coefficient-unit comparison.
-Source: blueprint finite-fibre paragraph (blueprint: def-fd-condensed-unit-fibre-maps). -/
+/-- The counit projection followed by the canonical coefficient-unit comparison. -/
 @[irreducible] def component (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {Y X P : Scheme.{u}} (f : Y ⟶ X)
     (x : P ⟶ X) (y : P ⟶ Y) (h : y ≫ f = x) :
@@ -60,8 +53,7 @@ Source: blueprint finite-fibre paragraph (blueprint: def-fd-condensed-unit-fibre
     (unitPullback Λ y).hom
 
 /-- The coefficient-unit exchange attached to a commutative square. For an isomorphism
-square this is the induced Weil structure; for maps of covers it is pullback of functions.
-Source: blueprint finite-fibre paragraph (blueprint: def-fd-condensed-unit-fibre-maps). -/
+square this is the induced Weil structure; for maps of covers it is pullback of functions. -/
 def exchange (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {Y X Y' X' : Scheme.{u}}
     {f : Y ⟶ X} {f' : Y' ⟶ X'} {a : Y' ⟶ Y} {b : X' ⟶ X}
@@ -73,9 +65,7 @@ def exchange (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- The canonical Weil structure on the direct image of the coefficient unit, for a square of
 isomorphisms: the base-change exchange followed by the direct image of the coefficient-unit
-comparison. Its forward map is `exchange Λ sq`.
-Source: blueprint finite-fibre paragraph, induced Weil structure
-(blueprint: def-fd-condensed-unit-fibre-maps). -/
+comparison. Its forward map is `exchange Λ sq`. -/
 def weil (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {Y X : Scheme.{u}} {f : Y ⟶ X} {a : Y ⟶ Y} {b : X ⟶ X}
     [IsIso a] [IsIso b] (sq : CommSq a f f b) :
@@ -83,8 +73,7 @@ def weil (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   (asIso (lowerStarBaseChange Λ sq)).app (unit Λ Y) ≪≫
     (lowerStar Λ f).mapIso (unitPullback Λ a)
 
-/-- The local return operator of the induced coefficient-unit Weil structure.
-Source: blueprint local Frobenius clause (blueprint: def-fd-condensed-unit-fibre-maps). -/
+/-- The local return operator of the induced coefficient-unit Weil structure. -/
 def returnEnd (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {k : Type u} [Field k] [IsSepClosed k]
     {Y X : Scheme.{u}} {f : Y ⟶ X} {a : Y ⟶ Y} {b : X ⟶ X}

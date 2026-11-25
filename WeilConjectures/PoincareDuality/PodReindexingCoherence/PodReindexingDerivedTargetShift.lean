@@ -25,8 +25,27 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 /-! # Target-shift square for normalized reindexing
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-(blueprint: lem-pod-reindexing-derived-target-shift)
+We show that the derived internal Hom comparison of a reindexing `Comparison` along an
+isomorphism of schemes is compatible with the normalized shift in the target variable.
+
+## Main statements
+
+* `WeilConjectures.PodReindexingCoherence.derived_target_shift_square`: the target-shift
+  square for arbitrary objects of the derived category.
+
+## Implementation details
+
+The square is first proved on representatives: the source is represented by a complex and
+the target is resolved by a K-injective complex. Expanding `Comparison.derived_model`, the
+`RightFormula` characterization of the shift identifies the vertical arrows with unsigned
+target reindexing on Hom products, and the `chain_projection` field together with product
+extensionality gives the chain square. Naturality then transports the square to arbitrary
+objects.
+
+## References
+
+* Stacks Project, Tag 0A8X
+* Stacks Project, Tag 08JA
 -/
 
 @[expose] public noncomputable section
@@ -326,16 +345,8 @@ private def comparisonAt {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     exact h)
 
 /--
-The target-shift square for the normalized comparison on localized
-representatives.  Resolve the second representative by a K-injective complex,
-expand `Comparison.derived_model` at the two pairs, and compare every
-Hom-product projection after unsigned target reindexing.  The fixed
-`chain_projection` field identifies the projections, so product extensionality
-and localization yield the displayed equation.  This is the representative
-step of the target-shift argument; the passage to arbitrary objects is a
-separate descent theorem.
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-(blueprint: lem-pod-reindexing-derived-target-shift).
+The target-shift square for the normalized comparison `c.derived`, at localized
+representatives `Q P` and `Q I` with `I` K-injective.
 -/
 private theorem derived_target_shift_model
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -403,20 +414,9 @@ private theorem derived_target_shift_model
     (model_square l E g s SX SY TX TY c P I)
     (model_square l E g s SX SY TX TY c P (I⟦b⟧))
 
-/-- Reindexing respects the normalized target shift of derived internal Hom.
-
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-(blueprint: lem-pod-reindexing-derived-target-shift).
-
-Proof: represent the source by a complex and resolve the target by a K-injective
-complex. Its target shift is again K-injective. Expand `Comparison.derived_model`
-at the two pairs. The `RightNormalization` characterization of `homCommShift`
-identifies the vertical arrows with unsigned target reindexing on Hom products.
-The `chain_projection` field makes these maps commute with sectionwise
-reindexing on each factor; product extensionality proves their chain square.
-Localize and use naturality of the localization factors. Cancel the comparison
-isomorphisms and transport along the representative isomorphisms to obtain the
-square for arbitrary M and N. -/
+/-- Reindexing respects the normalized target shift of derived internal Hom: the
+comparison `c.derived` at `(M, N⟦b⟧)` commutes with the shift isomorphisms of the
+derived internal Hom functors and of the reindexing functor. -/
 theorem derived_target_shift_square
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

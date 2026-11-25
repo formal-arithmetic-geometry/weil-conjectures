@@ -34,9 +34,12 @@ import WeilConjectures.CategoryTheory.ConstantFiniteFreePresentationExtension
 
 /-! # Constant finite free presentations after scalar extension
 
-Source: Stacks Project, Modules on Sites, Tags 03EI, 03DA, 03ER(3), Section 03EK;
-blueprint main-20261015, ctf-equals-bc, Local models
-(blueprint: lem-sfb-constant-finite-free-presentation-extension).
+Private helpers for the extension of scalars of constant finite free presentations of sheaves
+of modules on a site.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EI, 03DA, 03ER(3), Section 03EK.
 -/
 
 @[expose] public noncomputable section

@@ -21,14 +21,19 @@ set_option linter.privateModule false
 /-!
 # Adic systems of finite modules over p-adic coefficient rings
 
-Source: Stacks Project, Tags 09B8, 031D, 031B and 00MA;
-blueprint `proposition-lattices-representations-normal-scheme`, steps 6, 7, 9 and 10
-(auxiliary; not a blueprint node).
+The valuation ring of a finite extension of `ℚ_[l]` is adically complete with respect to its
+maximal ideal.
+
+## Implementation details
 
 Indices `n : ℕ` denote the positive exponent `n + 1`. A module over the coefficient
 quotient is represented by its underlying module over the valuation ring, annihilated
 by the corresponding ideal. Surjectivity and the specified kernel say that the
 transition induces the required quotient isomorphism.
+
+## References
+
+- Stacks Project, Tags 09B8, 031D, 031B and 00MA
 -/
 
 @[expose] public section

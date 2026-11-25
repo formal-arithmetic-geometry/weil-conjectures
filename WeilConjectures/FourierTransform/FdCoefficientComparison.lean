@@ -17,10 +17,6 @@ public import WeilConjectures.CategoryTheory.StageSystem.Functor
 
 /-! # Coherent coefficient comparison data
 
-Source: blueprint main-20261015, sec-fourier-transform/sk-def-trace,
-`def-fd-trace-function.md`, final sentence
-(blueprint: def-fd-coefficient-comparison-datum).
-
 The data use the recorded raw categories and operations. No completion of their
 object sets and no arbitrary replacement comparison is introduced.
 
@@ -51,58 +47,44 @@ open AlgebraicallyClosedCoefficients (Coefficient)
 
 variable (l : ℕ) [Fact l.Prime]
 
-/-- The actual scalar restriction through the quotient-normalized coefficient isomorphism.
-Source: integral characterization, finite projections
-(blueprint: def-fd-coefficient-comparison-datum). -/
+/-- The actual scalar restriction through the quotient-normalized coefficient isomorphism. -/
 def fdCoefficientTransport (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (T : Scheme.{u}) :=
   SheafOfModules.restrictScalars.{u + 1}
     (integralDetailedCoefficientComparison T l E).hom
 
-/-- Exactness uses the recorded ring isomorphism; this is its finite-limit adapter.
-Source: integral characterization, scalar restriction
-(blueprint: def-fd-coefficient-comparison-datum). -/
+/-- Exactness uses the recorded ring isomorphism; this is its finite-limit adapter. -/
 instance fdCoefficientTransportLimits (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (T : Scheme.{u}) :
     PreservesFiniteLimits (fdCoefficientTransport l E T) :=
   (integralDetailedCoefficientRestriction_exact T l E).1
 
-/-- Exactness uses the same ring isomorphism; this is its finite-colimit adapter.
-Source: integral characterization, scalar restriction
-(blueprint: def-fd-coefficient-comparison-datum). -/
+/-- Exactness uses the same ring isomorphism; this is its finite-colimit adapter. -/
 instance fdCoefficientTransportColimits (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (T : Scheme.{u}) :
     PreservesFiniteColimits (fdCoefficientTransport l E T) :=
   (integralDetailedCoefficientRestriction_exact T l E).2
 
-/-- The named scalar restriction retains its existing additive structure.
-Source: integral characterization, exact coefficient transport
-(blueprint: def-fd-coefficient-comparison-datum). -/
+/-- The named scalar restriction retains its existing additive structure. -/
 instance fdCoefficientTransportAdditive (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (T : Scheme.{u}) :
     (fdCoefficientTransport l E T).Additive :=
   inferInstanceAs (SheafOfModules.restrictScalars.{u + 1}
     (integralDetailedCoefficientComparison T l E).hom).Additive
 
-/-- The canonical exact localization comparison of the coefficient transport.
-Source: integral characterization, derived transport
-(blueprint: def-fd-coefficient-comparison-datum). -/
+/-- The canonical exact localization comparison of the coefficient transport. -/
 def fdCoefficientTransportFactors (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (T : Scheme.{u}) :=
   (fdCoefficientTransport l E T).mapDerivedCategoryFactors
 
-/-- Pure tensors in the already defined raw localization, with its original module instances.
-Source: trace-definition final sentence, localized Hom formula
-(blueprint: def-fd-coefficient-comparison-datum). -/
+/-- Pure tensors in the already defined raw localization, with its original module instances. -/
 def fdRawTensor {R : Type u} [CommRing R] {C : Type w} [Category.{v} C]
     [Preadditive C] [Linear R C] (p : R) {K H : C}
     (a : Localization.Away p) (f : K ⟶ H) :
     (ScalarLocalization.localization R C p).obj K ⟶
       (ScalarLocalization.localization R C p).obj H := a ⊗ₜ[R] f
 
-/-- Scalar multiplication in the recorded raw localization, retaining its module instance.
-Source: trace-definition final sentence, common-stage scalar formula
-(blueprint: def-fd-coefficient-comparison-datum). -/
+/-- Scalar multiplication in the recorded raw localization, retaining its module instance. -/
 def fdRawScale {R : Type u} [CommRing R] {C : Type w} [Category.{v} C]
     [Preadditive C] [Linear R C] (p : R) (a : Localization.Away p)
     {K H : ScalarLocalization R C p} (f : K ⟶ H) : K ⟶ H := a • f
@@ -110,9 +92,7 @@ def fdRawScale {R : Type u} [CommRing R] {C : Type w} [Category.{v} C]
 variable (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
 /-- Finite-stage comparison, including its identity on the common integral category and
-on every localized pure tensor. Coefficient-size transport changes only the presentation.
-Source: trace-definition final sentence, proof steps 1--2
-(blueprint: def-fd-coefficient-comparison-datum). -/
+on every localized pure tensor. Coefficient-size transport changes only the presentation. -/
 structure FdRationalStageComparison (T : Scheme.{u}) [IsNoetherian T]
     [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
     [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
@@ -162,9 +142,7 @@ structure FdRationalStageComparison (T : Scheme.{u}) [IsNoetherian T]
 attribute [instance] FdRationalStageComparison.shift FdRationalStageComparison.integral_shift
 
 /-- Ordinary scalar transport fixed on all sheafified tensor generators. Its localization
-will be composed with the specified quotient-map completion map, rather than an arbitrary iso.
-Source: trace-definition final sentence, proof steps 3--4
-(blueprint: def-fd-coefficient-comparison-datum). -/
+will be composed with the specified quotient-map completion map, rather than an arbitrary iso. -/
 structure FdOrdinaryScalarTransport (T : Scheme.{u})
     {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) where
   comparison :
@@ -185,9 +163,7 @@ structure FdOrdinaryScalarTransport (T : Scheme.{u})
         ((integralDetailedCoefficientComparison T l
           (pbcFiniteField.{u} l Ω L)).inv.hom.app U s) x
 
-/-- The tensor-generator comparison on cochain complexes, retaining both composition factors.
-Source: trace-definition final sentence, proof step 3
-(blueprint: def-fd-coefficient-comparison-datum). -/
+/-- The tensor-generator comparison on cochain complexes, retaining both composition factors. -/
 def FdOrdinaryScalarTransport.complex {T : Scheme.{u}}
     {E L : Padic.FiniteCoefficientFields l Ω} {h : E ≤ L}
     (m : FdOrdinaryScalarTransport l Ω T h) :=
@@ -223,9 +199,7 @@ def FdOrdinaryScalarTransport.complex {T : Scheme.{u}}
         (F := H) (G := J) (H := H ⋙ J) (Iso.refl _) (.up ℤ)).symm
 
 /-- The actual scalar comparison chain map: coefficient transport followed by chi.
-Its shifted-product coordinate is zero because chi is the specified quotient map.
-Source: trace-definition final sentence, proof steps 3--4
-(blueprint: def-fd-coefficient-comparison-datum). -/
+Its shifted-product coordinate is zero because chi is the specified quotient map. -/
 def FdOrdinaryScalarTransport.completion {T : Scheme.{u}}
     {E L : Padic.FiniteCoefficientFields l Ω} {h : E ≤ L}
     (m : FdOrdinaryScalarTransport l Ω T h)
@@ -236,9 +210,7 @@ def FdOrdinaryScalarTransport.completion {T : Scheme.{u}}
         (pbcFiniteField.{u} l Ω L) (pbcFiniteFieldInclusion l Ω h) T).app P)
 
 /-- One comparison of the raw systems, including the chi normalization, scalar cocycle,
-shift compatibility, exact pair equivalence and common-stage scalar action.
-Source: trace-definition final sentence, proof steps 1--6
-(blueprint: def-fd-coefficient-comparison-datum). -/
+shift compatibility, exact pair equivalence and common-stage scalar action. -/
 structure FdCoefficientComparison (T : Scheme.{u}) [IsNoetherian T]
     [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
     [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] where

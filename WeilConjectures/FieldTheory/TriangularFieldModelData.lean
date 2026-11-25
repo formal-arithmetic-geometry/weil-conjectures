@@ -18,7 +18,17 @@ import Mathlib.Algebra.Polynomial.Eval.Coeff
 /-!
 # Triangular relations from an algebraic tower
 
-Source: Stacks Project, Algebra, proof of Tag 07BV and Tag 08JZ.
+## Implementation details
+
+Put `F = k(x)` and `Lᵢ = F(bⱼ : j < i)`. The minimal polynomials of the `bᵢ` over `Lᵢ`, with
+coefficients expanded in the preceding product basis, have their `F`-coefficient denominators
+cleared by a single nonzero `h ∈ k[X]`: a coefficient `a / h ^ n` is lifted to `a(X) T ^ n` and
+the leading coefficient to one. The bounded products of the `bᵢ` form an `F`-basis of `Lₘ`
+(power bases combined with `Basis.smulTower`). No kernel equality is asserted here.
+
+## References
+
+* Stacks Project, Algebra, proof of Tag 07BV and Tag 08JZ.
 -/
 
 @[expose] public section
@@ -27,24 +37,10 @@ universe u v
 
 namespace FieldTheory
 
-/-- Construct triangular minimal-polynomial relations and independent bounded products.
-Source: Stacks Project, Algebra, proof of Tag 07BV, first assertion
-(blueprint: lem-weil-pbc-triangular-field-model-data).
-
-Proof: Put F = k(x) and L_i = F(b_j : j < i). The transcendence-basis
-hypothesis makes all b_i algebraic over F. Take their minimal polynomials over
-L_i. Their positive degrees e_i and the simple-extension power bases, multiplied
-using Basis.smulTower, make the bounded products of the b_i an F-basis of L_m,
-hence linearly independent in K. Expand each coefficient in the preceding product
-basis. Replace the preceding generators by polynomial variables. Clear the finite
-set of F-coefficient denominators by a single nonzero product h in k[X]. Lift a/h^n
-to a(X) T^n and lift the leading coefficient as one. This gives monic p_i of
-natDegree e_i. Evaluate the variables at x, h(x) inverse, and b. Algebraic
-independence makes h(x) nonzero; thus the localization equation evaluates to zero,
-and each lifted p_i evaluates to its minimal polynomial at b_i, also zero.
-For m = 0 choose h = 1; the empty product is one and is F-independent. For d = 0,
-F is k. Repeated generators give linear minimal polynomials and inseparability
-requires no change. This construction asserts no kernel equality. -/
+/-- Given a transcendence basis `x` of `K/k` and elements `b`, there are a nonzero
+`h ∈ k[X]`, monic triangular polynomials `p i` of degrees `e i`, and a point `y` (given by
+`x`, `h(x)⁻¹` and `b`) at which all triangular field model equations vanish, such that the
+bounded products `∏ᵢ bᵢ ^ aᵢ` (with `aᵢ < eᵢ`) are linearly independent over `k(x)`. -/
 theorem exists_triangularFieldModel_data
     (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]
     (d : ℕ) (x : Fin d → K) (hx : IsTranscendenceBasis k x)

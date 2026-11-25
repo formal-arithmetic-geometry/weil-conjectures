@@ -13,6 +13,15 @@ import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorFiniteShiftTransition
 
 The quotient squares determine naturality. The tower components are the
 explicit finite comparisons, and the derived fields remain parameters.
+
+## Implementation details
+
+The naturality proofs use only adjacent quotient squares. In the assembled signed
+tensor-shift data every non-proof field is explicit or is a parameter.
+
+## References
+
+* Stacks Project, Tags 011G and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -42,9 +51,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] podTensorFiniteShiftLeft podTensorFiniteShiftRight
 
-/-- A tower isomorphism can be assembled from its components and adjacent squares.
-Source: Mathlib's NatTrans.ofOpSequence and NatIso.ofComponents
-(blueprint: def-pod-tensor-signed-shift-towers). -/
+/-- A tower isomorphism can be assembled from its components and adjacent squares. -/
 def podTowerIsoOfAdjacent {C : Type a} [Category.{b} C] {F G : ℕᵒᵖ ⥤ C}
     (e : ∀ n : ℕ, F.obj (op n) ≅ G.obj (op n))
     (he : ∀ n : ℕ, F.map (homOfLE (n.le_add_right 1)).op ≫ (e n).hom =
@@ -52,10 +59,8 @@ def podTowerIsoOfAdjacent {C : Type a} [Category.{b} C] {F G : ℕᵒᵖ ⥤ C}
   NatIso.ofComponents (fun n ↦ e n.unop)
     (fun f ↦ (NatTrans.ofOpSequence (fun n ↦ (e n).hom) he).naturality f)
 
-/-- Assemble the sign-free finite comparisons into a comparison of strict towers.
-The naturality proof uses only adjacent quotient squares; all components are the
-explicit finite comparisons.
-Source: Stacks 011G and 07A4 (blueprint: def-pod-tensor-signed-shift-towers). -/
+/-- Assemble the sign-free finite comparisons into a comparison of strict towers;
+all components are the explicit finite comparisons. -/
 def podTensorSignedShiftLeftTower (W : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) (r : ℤ) :
     (integralOperationsTensorTowerFunctor l E W).obj (P.obj⟦r⟧, Q.obj) ≅
@@ -67,8 +72,7 @@ def podTensorSignedShiftLeftTower (W : Scheme.{u})
         Functor.comp_map, Functor.flip_obj_map, Functor.ofOpSequence_map_homOfLE_succ]
         using (podTensorFiniteShiftTransitions l E W).1 n P.obj Q.obj r)
 
-/-- Assemble the signed finite comparisons into a comparison of strict towers.
-Source: Stacks 011G and 07A4 (blueprint: def-pod-tensor-signed-shift-towers). -/
+/-- Assemble the signed finite comparisons into a comparison of strict towers. -/
 def podTensorSignedShiftRightTower (W : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) (r : ℤ) :
     (integralOperationsTensorTowerFunctor l E W).obj (P.obj, Q.obj⟦r⟧) ≅
@@ -80,23 +84,19 @@ def podTensorSignedShiftRightTower (W : Scheme.{u})
         Functor.comp_map, Functor.flip_obj_map, Functor.ofOpSequence_map_homOfLE_succ]
         using (podTensorFiniteShiftTransitions l E W).2 n P.obj Q.obj r)
 
-/-- The type of the derived first-factor shift fields, kept separate from strict data.
-Source: Stacks 07A4 (blueprint: def-pod-tensor-signed-shift-towers). -/
+/-- The type of the derived first-factor shift fields, kept separate from strict data. -/
 abbrev PodTensorDerivedShiftLeft (W : Scheme.{u}) :=
   ∀ (M N M' : sfIntegralConstructibleCategory l E W) (r : ℤ) (_e : M'.obj ≅ M.obj⟦r⟧),
     (integralCompletedTensor l E W).obj (M'.obj, N.obj) ≅
       ((integralCompletedTensor l E W).obj (M.obj, N.obj))⟦r⟧
 
-/-- The type of the derived second-factor shift fields.
-Source: Stacks 07A4 (blueprint: def-pod-tensor-signed-shift-towers). -/
+/-- The type of the derived second-factor shift fields. -/
 abbrev PodTensorDerivedShiftRight (W : Scheme.{u}) :=
   ∀ (M N N' : sfIntegralConstructibleCategory l E W) (r : ℤ) (_e : N'.obj ≅ N.obj⟦r⟧),
     (integralCompletedTensor l E W).obj (M.obj, N'.obj) ≅
       ((integralCompletedTensor l E W).obj (M.obj, N.obj))⟦r⟧
 
-/-- Combine the constructed strict data with supplied derived shift fields.
-Every non-proof field is explicit or is a parameter.
-Source: Stacks 011G and 07A4 (blueprint: def-pod-tensor-signed-shift-towers). -/
+/-- Combine the constructed strict data with supplied derived shift fields. -/
 def podTensorSignedShiftOfDerived (W : Scheme.{u})
     (L : PodTensorDerivedShiftLeft l E W) (R : PodTensorDerivedShiftRight l E W) :
     PodTensorSignedShift l E W where
@@ -106,8 +106,7 @@ def podTensorSignedShiftOfDerived (W : Scheme.{u})
   left := L
   right := R
 
-/-- The strict generator formulas are unaffected by the derived fields supplied later.
-Source: Stacks 011G and 07A4 (blueprint: def-pod-tensor-signed-shift-towers). -/
+/-- The strict generator formulas are unaffected by the derived fields supplied later. -/
 theorem podTensorSignedShiftOfDerived_generators (W : Scheme.{u})
     (L : PodTensorDerivedShiftLeft l E W) (R : PodTensorDerivedShiftRight l E W) :
     (podTensorSignedShiftOfDerived l E W L R).Generators l E := by

@@ -54,13 +54,8 @@ import WeilConjectures.NumberTheory.Padics.IntegersCosetBasis
 /-!
 # The two-term resolution of the finite coefficient sheaves
 
-Source: blueprint main-20261015, chap-The-pro-etale-site,
-`sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.md`
-(blueprint: lemma-reduction-derived-nakayama--1).
-
-All coefficients are continuous condensed rings pulled back from the point. A natural
-cone is expressed using the standard cone functor on complexes, with its standard maps.
-The comparison with a functor on the derived category also asserts its descent and naturality.
+We construct the two-term resolution of the finite quotient coefficient sheaves on the
+pro-étale site, used for derived Nakayama arguments.
 
 ## Main definitions
 
@@ -72,6 +67,12 @@ The comparison with a functor on the derived category also asserts its descent a
 
 * `derived_nakayama_resolution`: exactness, the natural cone comparison, and the
   specified quotient-power triangles.
+
+## Implementation details
+
+All coefficients are continuous condensed rings pulled back from the point. A natural
+cone is expressed using the standard cone functor on complexes, with its standard maps.
+The comparison with a functor on the derived category also asserts its descent and naturality.
 -/
 
 @[expose] public noncomputable section
