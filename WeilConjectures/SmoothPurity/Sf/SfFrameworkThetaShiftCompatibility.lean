@@ -20,14 +20,13 @@ set_option linter.privateModule false
 /-!
 # The normalized completed pullback scalar comparison commutes with shifts
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-prop-sf-localization/
-prop-sf-open-closed-triangle-all-stages.proof.md, Weil-structures and rational-stage
-paragraphs; Stacks Tags 011G, 014E, 0941 and 099N(5)
-(blueprint: lem-sf-framework-theta-shift-compatibility).
-
 The shift data below are fixed by the existing signed cochain coordinate and
 representative-descent predicates. Theta is lambda followed by mu inverse for
 the whole-system counit realization, rather than an arbitrary isomorphism.
+
+## References
+
+* Stacks Project, Tags 011G, 014E, 0941 and 099N(5).
 -/
 
 @[expose] public noncomputable section

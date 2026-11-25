@@ -89,8 +89,9 @@ import all WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Levelwise flat models of strict quotient complexes
 
-Source: Stacks Project, Tags 0941, 07A2 and 0G7E.
-(blueprint: lem-pur-strict-quotient-levelwise-flat-models).
+## References
+
+* Stacks Project, Tags 0941, 07A2 and 0G7E.
 -/
 
 @[expose] public noncomputable section
@@ -106,22 +107,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Flat terms and K-flatness on the vertical sequence site can be checked at all
-positive coefficient levels, with their actual coefficient actions.
-
-Source: Stacks 0941, 07A2; the componentwise exactness and tensor argument in
-lem-pur-quotient-expression-strict-kflat-towers, proof steps 7--8.
-(blueprint: lem-pur-strict-quotient-levelwise-flat-models).
-
-Proof: evaluation is exact and commutes with sheaf tensor and coproducts because
-all covers are vertical. A term is flat if its evaluated terms are flat: tensor
-a short exact sequence, evaluate, and use that the evaluations jointly detect
-exactness. Conversely, place the flat system term in degree zero. This single complex
-is K-flat, its evaluation remains K-flat, and the single-complex criterion
-then proves flatness of the evaluated term. For an
-acyclic system test complex, each evaluated total tensor is acyclic by level
-K-flatness, and evaluation jointly detects acyclicity. Conversely lift an acyclic
-level complex by the exact finite-prefix extension, apply system K-flatness, and
-evaluate the total tensor. This uses no flatness of any coefficient quotient. -/
+positive coefficient levels, with their actual coefficient actions. -/
 theorem levelwiseFlatModels (W : Scheme.{t}) (K : Complex l E W) :
     (∀ n : ℕ, Good l E K n) ↔
       CochainComplex.IsKFlatIndependentCoefficients

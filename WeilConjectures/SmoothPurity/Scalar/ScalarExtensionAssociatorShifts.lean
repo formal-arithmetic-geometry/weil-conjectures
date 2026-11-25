@@ -9,7 +9,19 @@ public import WeilConjectures.SmoothPurity.Scalar.ScalarExtensionExact
 public import WeilConjectures.SmoothPurity.Scalar.ScalarExtensionComposition
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
-/-! # Shift compatibility of the normalized coefficient associators -/
+/-! # Shift compatibility of the normalized coefficient associators
+
+The normalized completed tensor associator of rational scalar extensions commutes with all
+integral shifts.
+
+## Implementation details
+
+The ordinary exact derived tensor associator commutes with shift, since its chain-level
+associator is a natural transformation of exact functors. At degree one the rational square is
+the localization image of the integral square; zero, addition and inverse-shift coherence
+extend it to every integer. The completed associator is conjugate to the ordinary one by the
+normalized completion comparisons, which commute with all shifts.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -226,17 +238,7 @@ private theorem rational_comp_commShift :
       rationalOrdinaryScalarExtension, Functor.comp_obj] using
       NatTrans.shift_app_comm α.hom (1 : ℤ) K.obj)
 
-/-- The normalized completed tensor associator preserves the signed integer shift.
-Source: blueprint order 1469, composition of scalar extension, and order 1883,
-exactness of scalar extension (blueprint: lem-weil-scalar-associator-shifts).
-Proof: the ordinary exact derived tensor associator commutes with shift, because
-its chain-level associator is a natural transformation of exact functors. The full
-integral subcategory inherits this equation. At degree one the rational associator
-and shift comparison are the integral maps tensored with one, so their square is
-the localization image of the integral square. Zero, addition and inverse-shift
-coherence extend the square to every integer. Finally the completed associator is
-conjugate to this ordinary associator by the normalized completion comparisons,
-which commute with all shifts by their specification. -/
+/-- The normalized completed tensor associator preserves the signed integer shift. -/
 theorem rationalConstructibleScalarComp_commShift :
     NatTrans.CommShift (rationalConstructibleScalarComp l E L i Y M j D hl).hom ℤ := by
   have : NatTrans.CommShift (rationalOrdinaryComparison D l hl E Y L i).hom ℤ :=

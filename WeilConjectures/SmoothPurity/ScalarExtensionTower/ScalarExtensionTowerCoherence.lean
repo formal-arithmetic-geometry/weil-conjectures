@@ -83,9 +83,6 @@ import all WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTowe
 
 /-! # Scalar extension on strict quotient models
 
-Source: main-20261015 blueprint, prose-03-02, integral operations;
-Stacks Tags 03EL and 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence).
-
 ## Main definitions
 
 * `Comparisons`: the pure-tensor-normalized comparisons on whole quotient systems.
@@ -96,6 +93,22 @@ Stacks Tags 03EL and 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence).
 * `square`, `unit`, `composition`: strict tower coherence before localization.
 * `quotientModels`: the actual quotient representatives and their association formula.
 * `scalarExtensionTowerCoherence`: their identification with the canonical integral maps.
+
+## Implementation details
+
+The strict quotient models are built from flat-term K-flat representatives `P`, `Q` and K-flat
+change of rings; no flatness of `A_m → B_m` is used, so ramified extensions are covered. The
+balanced association `(x ⊗ a) ⊗ b ↦ x ⊗ ι(a) b`, with inverse inserting one, and the signed
+total tensor comparison are checked on homogeneous tensor generators; since coefficient
+reduction is a ring map, they respect every quotient transition, so all coherence equations
+hold as equations of strict systems before localization. Coefficient-extension reduction and
+completed-operation tower substitution identify the realizations with `pullbackReduction`,
+`scalarReduction` and `tensorReduction`, and total derived limit gives the canonical
+`scalarPullbackCompleted` and `scalarTensorCompleted`.
+
+## References
+
+* Stacks Project, Tags 03EL, 06YS, 07A4, 0941, 0G7E.
 -/
 
 @[expose] public noncomputable section
@@ -132,17 +145,8 @@ attribute [local irreducible] scalar_adj comparisons
   integralComparisonSequenceTensorSection integralComparisonSequenceScalarUnit
 
 -- Check all three normalized maps on homogeneous tensor generators.
-/-- Equality before localization, hence for both directions and all quotient transitions.
-Source: blueprint integral operations; Stacks 03EL, 07A4
-(blueprint: lem-pur-scalar-extension-tower-coherence).
-Proof: expand the specified scalar association and the two tensor comparisons on
-b tensor (x tensor y). Both composites give (b tensor x) tensor (1 tensor y).
-The coefficient square commutes on constant sections, hence after sheafification.
-Balancing extends the equality to arbitrary scalars in either factor. Homogeneous
-tensors generate each summand and the direct sum total, proving equality of chain
-maps. Their inverses are equal because the two maps are isomorphisms. Every map
-is a sequence-site module map, so this equality and its inverse retain every
-horizontal quotient transition, as well as vertical restrictions. -/
+/-- The strict scalar-extension square commutes before localization, hence for both directions
+and all quotient transitions. -/
 theorem square {X Y : Scheme.{u}} (f : X ⟶ Y) :
     leftRoute l E L ι f = rightRoute l E L ι f := by
   apply Iso.ext
@@ -203,14 +207,7 @@ theorem square {X Y : Scheme.{u}} (f : X ⟶ Y) :
     scalar_pull_section l E L ι f (Q.X q) m U y]
   rfl
 
-/-- Identity extension is the identity under the actual scalar action unitors.
-Source: node proof step 7; Stacks 03EL
-(blueprint: lem-pur-scalar-extension-tower-coherence).
-Proof: at identity coefficients the scalar-association map multiplies the inserted
-coefficient, exactly the action unitor. On x tensor y the tensor comparison inserts
-one in the second factor. Applying the two action unitors gives x tensor y again.
-These formulas commute with every quotient and restriction, giving the displayed
-identities as strict-system equations. -/
+/-- Identity extension is the identity under the actual scalar action unitors. -/
 theorem unit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     UnitSquare (pull l E f) (scalar l E E (AlgHom.id ℚ_[l] E) Y)
       (scalar l E E (AlgHom.id ℚ_[l] E) X) (kappa l E E (AlgHom.id ℚ_[l] E) f)
@@ -229,19 +226,7 @@ attribute [local irreducible] integralCompletedTensor integralDerivedPullback
   integralComparisonDerivedSequenceScalar integralComparisonDerivedSequencePullback
   pullbackReduction scalarReduction tensorReduction derivedSigma
 
-/-- The normalized realization models exist for the named completed tensor and scalar functors.
-Source: node proof step 8; Stacks 06YS, 07A4, 0941
-(blueprint: lem-pur-scalar-extension-tower-coherence).
-Proof: form the strict quotients of one good representative. For tensor take their
-signed total tensor; for scalar use the actual quotient inclusions. K-flat change
-of rings and closure under total tensor identify these ordinary complexes with
-the derived systems. The coefficient-extension reduction model supplies its
-normalized coherent counit. Completed-operation substitution identifies the tensor
-limit; scalar extension is its defining strict Roos limit. The K-injective-normalized
-Roos bridge identifies these with total derived limit. The generator formulas fix
-all tower identifications. Universal localization gives the displayed realizations
-and their normalization on every whole-system coherent simultaneous presentation.
-The residue-field unit assumption is the invertibility hypothesis of the source. -/
+/-- The normalized realization models exist for the named completed tensor and scalar functors. -/
 theorem realizationModels (W : Bool → Scheme.{u})
     (ME : CompletedOperations.Models.{u, u} l E W) (ML : CompletedOperations.Models.{u, u} l L W)
     (hl : ∀ (a : Bool) (x : W a), IsUnit (l : (W a).residueField x)) :
@@ -275,39 +260,7 @@ private theorem reduction_of_limit_square
 Together with square, unit, composition and the normalized cochain definitions, this
 identifies the actual strict quotient maps and their derived limits, including ramification.
 The displayed equations are in the derived category of whole quotient systems;
-applying total derived limit gives exactly the two stated integral comparisons.
-Source: main-20261015 blueprint, prose-03-02, integral clause;
-Stacks 03EL, 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence).
-Proof:
-1. Use flat-term K-flat representatives P,Q and K-flat change of rings to form
-   P_m,Q_m and their scalar extensions. Total tensor and finite pullback preserve
-   this representative class; no flatness of A_m to B_m is used.
-2. The balanced association (x tensor a) tensor b maps to x tensor iota(a)*b.
-   Its inverse inserts one. The coefficient-extension reduction model identifies
-   these simultaneously with P tensor B_m,Q tensor B_m, including every transition,
-   and makes their coherent systems normalized.
-3. Scalar association defines kappa. Tensor balancing gives its inverse; the
-   constant coefficient square commutes on constant sections and on sheafification.
-4. The signed total tensor comparison defines sigma and c. They preserve each
-   bidegree, so preserve the factor (-1)^p in the second differential summand.
-5. Both routes on b tensor (x tensor y) give (b tensor x) tensor (1 tensor y).
-   Tensor generators, sheafification and direct sums prove the strict square.
-6. Reduction preserves multiplication and one. Thus every map and inverse respects
-   every quotient transition, and these are equations of strict systems.
-7. For identity coefficients multiplication is the action unitor. For E to L to F,
-   the direct coefficient map is the composite. Both successive and direct formulas
-   multiply d*j(b), so the unit and transitivity equations hold strictly.
-8. Apply coefficient-extension reduction and completed-operation tower substitution
-   to these normalized systems. Their defining realizations and the canonical
-   coherent counits are precisely pullbackReduction, scalarReduction and
-   tensorReduction below. The cochain-normalized derivedSigma and the recorded
-   derived kappa are the localizations of the same strict chain maps. Their coherent
-   counit squares give the two equations, with the specified completed comparisons.
-9. Apply total derived limit. Functoriality preserves the square, inverse, units
-   and successive-extension equations. The normalized realizations identify the
-   limit maps with the canonical scalarPullbackCompleted and scalarTensorCompleted;
-   no interchange with arbitrary inverse limits or uniqueness of arbitrary isos is used.
--/
+applying total derived limit gives exactly the two stated integral comparisons. -/
 theorem scalarExtensionTowerCoherence (W : Bool → Scheme.{u})
     (ME : CompletedOperations.Models.{u, u} l E W) (ML : CompletedOperations.Models.{u, u} l L W)
     (SX : IntegralComparisonScalarModel.{u, u} l E L ι (W true) (ME.calculus true) (ML.roos true))
@@ -392,19 +345,7 @@ attribute [local semireducible] coefficientSequenceCommRingSheaf
   coefficientSequenceCommRingPresheaf
 
 /-- Scalar extension of the actual E quotient complex is the actual B quotient complex,
-with the balanced association formula and all quotient transitions retained.
-Source: node proof steps 1--2, 5--6; Stacks 03EL, 0G7E
-(blueprint: lem-pur-scalar-extension-tower-coherence).
-Proof: the coefficient-extension reduction model supplies d and d0. Their finite
-values are P tensor B_m and P tensor A_m with the actual quotient transitions.
-Associate (x tensor a) tensor b to x tensor iota(a)*b; the inverse inserts one.
-Balancing proves inverse identities and naturality. These formulas are chain maps
-and commute with every quotient transition because coefficient reduction is a ring
-map. They therefore glue to the displayed unique strict-system iso. K-flat change
-of rings and closure under total tensor justify every derived interpretation.
-Apply square to these E quotient representatives. The resulting iso equality is
-exactly the stated scalar-extension square, on the actual models, in both directions.
-No flatness of A_m to B_m is required, including in ramified extensions. -/
+with the balanced association formula and all quotient transitions retained. -/
 theorem quotientModels {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_hX : IsUnit (l : Γ(X, ⊤))) (_hY : IsUnit (l : Γ(Y, ⊤)))
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E Y)

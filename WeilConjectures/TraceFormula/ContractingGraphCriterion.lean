@@ -17,8 +17,8 @@ stalk map of `h` at `x` sends the maximal ideal `𝔪` of `𝒪_{X,x}` into `�
 affine scheme `Spec S`, this holds for `Spec φ` at a prime `𝔮` with `φ(φ⁻¹ 𝔮) ⊆ 𝔮²`
 (`Scheme.map_maximalIdeal_stalkMap_SpecMap_le_sq`).
 
-Blueprint `example-contracting-squaring`: the squaring map `x ↦ x²` of the line
-`Spec k[x]` (`specPolynomialOver.squaring`) is contracting at the origin
+Example: the squaring map `x ↦ x²` of the line `Spec k[x]` (`specPolynomialOver.squaring`) is
+contracting at the origin
 (`ProEtale.CondensedRing.Correspondence.isContractingAt_ofGraph_squaring`), so that the local term
 at the origin of its graph correspondence is the trace of the stalk map
 (`ProEtale.CondensedRing.Correspondence.localTerm_traceClass_ofGraph_squaring`).
@@ -82,8 +82,7 @@ instance : QuasiCompact (specPolynomialOver k).hom :=
 instance : IsSeparated (specPolynomialOver k).hom :=
   inferInstanceAs (IsSeparated (Spec.map _))
 
-/-- (blueprint `example-contracting-squaring`) The squaring map `x ↦ x²` of the line `Spec k[x]`,
-induced by `expand k 2 : x ↦ x²`. -/
+/-- The squaring map `x ↦ x²` of the line `Spec k[x]`, induced by `expand k 2 : x ↦ x²`. -/
 noncomputable def specPolynomialOver.squaring : specPolynomialOver k ⟶ specPolynomialOver k :=
   Over.homMk (Spec.map (CommRingCat.ofHom (expand k 2 : k[X] →+* k[X]))) <| by
     change Spec.map _ ≫ Spec.map _ = Spec.map _
@@ -92,8 +91,7 @@ noncomputable def specPolynomialOver.squaring : specPolynomialOver k ⟶ specPol
     ext1
     exact RingHom.ext fun a ↦ expand_C 2 a
 
-/-- (blueprint `example-contracting-squaring`) The origin of the line `Spec k[x]`, given by the
-evaluation `k[x] ⟶ k` at `0`. -/
+/-- The origin of the line `Spec k[x]`, given by the evaluation `k[x] ⟶ k` at `0`. -/
 noncomputable def specPolynomialOver.origin : ProEtale.CondensedRing.RationalPoint
     (specPolynomialOver k) :=
   Over.homMk (Spec.map (CommRingCat.ofHom (evalRingHom (0 : k)))) <| by
@@ -120,8 +118,7 @@ lemma specPolynomialOver.origin_asIdeal :
     ← RingHom.ker_eq_comap_bot,
     ker_evalRingHom, map_zero, sub_zero]
 
-/-- (blueprint `example-contracting-squaring`) The stalk map of squaring at the origin sends the
-maximal ideal into its square. -/
+/-- The stalk map of squaring at the origin sends the maximal ideal into its square. -/
 lemma specPolynomialOver.map_maximalIdeal_stalkMap_squaring_le_sq :
     (maximalIdeal ((specPolynomialOver k).left.presheaf.stalk
         ((squaring k).left ((origin k).left (default : Spec (.of k)))))).map
@@ -148,8 +145,7 @@ section Criterion
 variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
 
-/-- **A criterion for graph correspondences to be contracting** (blueprint
-`example-contracting-squaring`, generalising the Frobenius case
+/-- **A criterion for graph correspondences to be contracting** (generalising the Frobenius case
 `isContractingAt_ofGraph_frobeniusIterate`): the graph correspondence `(𝟙, h)` is contracting at
 a rational point `x` fixed by `h` as soon as the stalk map `h^♯ : 𝒪_{X,x} ⟶ 𝒪_{X,x}` sends the
 maximal ideal `𝔪` into `𝔪²` (the contraction condition with `n = 1`). -/
@@ -172,8 +168,8 @@ end Criterion
 
 variable {K : Dᵇc((specPolynomialOver k).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
 
-/-- (blueprint `example-contracting-squaring`) The graph correspondence of squaring `x ↦ x²` on
-the line `Spec k[x]` is contracting at the origin, for any coefficient map. -/
+/-- The graph correspondence of squaring `x ↦ x²` on the line `Spec k[x]` is contracting at the
+origin, for any coefficient map. -/
 theorem isContractingAt_ofGraph_squaring
     (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (specPolynomialOver.squaring k)).obj K ⟶ K) :
@@ -183,9 +179,8 @@ theorem isContractingAt_ofGraph_squaring
     (specPolynomialOver.origin_comp_squaring k)
     (specPolynomialOver.map_maximalIdeal_stalkMap_squaring_le_sq k)
 
-/-- (blueprint `example-contracting-squaring`) For the graph correspondence of squaring
-`x ↦ x²` on the line, the local term at the origin is the trace of the stalk map:
-`LT_0(u) = tr(u_0 | K_0)`. -/
+/-- For the graph correspondence of squaring `x ↦ x²` on the line, the local term at the origin
+is the trace of the stalk map: `LT_0(u) = tr(u_0 | K_0)`. -/
 theorem localTerm_traceClass_ofGraph_squaring
     (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (specPolynomialOver.squaring k)).obj K ⟶ K)

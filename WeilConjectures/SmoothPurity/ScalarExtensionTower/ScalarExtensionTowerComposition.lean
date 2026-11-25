@@ -11,13 +11,14 @@ import all WeilConjectures.SmoothPurity.Scalar.ScalarExtensionTensorUnit
 
 /-! # Composition of the strict scalar comparisons
 
-Source: Stacks Tags 03EL and 07A4
-(blueprint: stage3-pur-scalar-tower-composition).
-
 The associator multiplies successive coefficients. Checking unit generators through
 the two scalar adjunctions proves both the pullback and the tensor composition equations.
 `WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTowerCoherence`
 publicly re-exports this theorem.
+
+## References
+
+* Stacks Project, Tags 03EL and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -199,16 +200,7 @@ private theorem composition_tensor (F : Type u) [Field F] [Algebra ℚ_[l] F]
       ((scalar l E F (j.comp ι) Y).obj Q) p q V) hP hQ
 
 -- Compare successive scalar extensions on homogeneous tensor generators.
-/-- Direct and successive scalar comparisons agree before passing to derived limits.
-Source: node proof step 7; Stacks 03EL, 07A4
-(blueprint: stage3-pur-scalar-tower-composition).
-Proof: the coefficient map for E to F is the composite of those for E to L and
-L to F. The scalar associator sends d tensor (b tensor x) to d*j(b) tensor x.
-The two pullback routes therefore multiply exactly these coefficients. For tensor,
-both routes send d tensor (b tensor (x tensor y)) to
-(d*j(b) tensor x) tensor (1 tensor y). Balancing, sheafification and direct sums
-extend these equations. Reductions preserve multiplication and one, so these are
-identities of strict systems, including their inverses. -/
+/-- Direct and successive scalar comparisons agree before passing to derived limits. -/
 theorem composition (F : Type u) [Field F] [Algebra ℚ_[l] F]
     [FiniteDimensional ℚ_[l] F] (j : L →ₐ[ℚ_[l]] F)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :

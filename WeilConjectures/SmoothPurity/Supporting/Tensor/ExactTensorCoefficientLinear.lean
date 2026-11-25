@@ -13,7 +13,9 @@ import all WeilConjectures.Algebra.Homology.LineEvaluation.LineEvaluationInverse
 
 /-! # Exact tensor preserves the constant coefficient action
 
-Source: Stacks 03EL and the derived localization construction.
+## References
+
+* Stacks Project, Tag 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -25,14 +27,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- Exact sheaf tensor preserves the recorded constant-section action after deriving.
-Source: Stacks 03EL and Mathlib derived localization
-(blueprint: lem-pur-exact-tensor-coefficient-linear).
-Proof: tensor is linear over global sections. Restrict this action along the constant
-coefficient homomorphism. Transport it through the specified site tensor comparison.
-The recorded derived action is the localization of this sheaf action, by uniqueness
-of the localized central action. The localization universal property therefore sends
-the sheaf scalar equality to the same equality on all derived morphisms. -/
+/-- Exact sheaf tensor preserves the recorded constant-section action after deriving. -/
 theorem exactTensorCoefficientLinear (P : integralTowerModules l E Y)
     [(SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
       (A := completedIntegralCommRingSheafUnrestricted l E Y) P).Additive]

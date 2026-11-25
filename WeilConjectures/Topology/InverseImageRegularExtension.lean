@@ -16,8 +16,20 @@ import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 
 /-! # Extension of the inverse image of a regular module
 
-Source: Stacks Project, Sheaves on Spaces, Tags 008X, 008Y and 008A.
-(blueprint: stage3-inverse-image-regular-extension).
+Extending scalars along the inverse-image unit of the inverse image of the regular module gives
+the regular module of the target ring, with the canonical unit normalization.
+
+## Implementation details
+
+Maps from the extended inverse-image regular module to any module correspond naturally to maps
+from the regular module, by composing the change-of-rings and inverse-image hom equivalences with
+finality of the inverse image on opens. An elementary representable-functor argument then
+produces the isomorphism; this argument keeps the functor abstract to avoid unfolding scalar
+restrictions in the naturality and normalization calculations.
+
+## References
+
+* [Stacks Project, Tags 008X, 008Y and 008A](https://stacks.math.columbia.edu/tag/008X)
 -/
 
 @[expose] public section
@@ -48,8 +60,7 @@ private def isoOfHomEquiv {C : Type*} [Category C] (M N : C)
     simpa using h.symm
 
 /-- A natural hom equivalence and a natural equivalence on sections identify a representing
-module with the regular module. Keeping the functor abstract avoids unfolding scalar restrictions
-in the naturality and normalization calculations. -/
+module with the regular module. -/
 private theorem exists_unitIso_of_sections
     {T T' : TopCat.{u}} {R : T'.Sheaf RingCat.{u}} {S : T.Sheaf RingCat.{u}}
     (H : SheafOfModules.{u} S ⥤ SheafOfModules.{u} R) (F : SheafOfModules.{u} S)
@@ -103,24 +114,7 @@ private theorem exists_unitIso_of_adjunction_sections
   exact exists_unitIso_of_sections (L ⋙ Q) (E.obj I) q hnq se hse
 
 /-- Extending the inverse image of the regular module gives the regular target module,
-with the canonical unit normalization.
-Source: Stacks Project, Sheaves on Spaces, Tags 008X, 008Y and 008A.
-(blueprint: stage3-inverse-image-regular-extension).
-
-Proof: Compose the change-of-rings hom equivalence with the inverse-image
-module hom equivalence. Maps from the regular source module correspond to
-compatible global sections. Precomposition by the inverse-image map on opens
-is a bijection on compatible sections, since that functor is final. Thus maps
-from the extended inverse-image regular module to any B-module correspond,
-naturally in that module, to maps from the regular B-module. The elementary
-representable-functor argument constructs inverse module maps. For their unit
-normalization, the two adjunction section formulas identify the adjunct of
-the forward isomorphism on a with its value on the sheafification of 1 tensor
-the abelian inverse-image unit of a. The hom equivalence sends that isomorphism
-to the identity of the regular B-module, so its adjunct sends 1 to 1.
-Linearity then sends a = a • 1 to t(η_A(a)) • 1 = t(η_A(a)). This applies also
-to zero rings and empty opens, since neither the section equivalence nor the
-identity and linearity calculations use nontriviality or nonemptiness. -/
+with the canonical unit normalization. -/
 theorem inverseImageRegularExtension
     {T T' : TopCat.{u}} (g : T ⟶ T') (A : T'.Sheaf CommRingCat.{u})
     (B : T.Sheaf CommRingCat.{u}) (t : TopCat.Sheaf.inverseImageRing g A ⟶ B) :

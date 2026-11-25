@@ -8,7 +8,20 @@ module
 
 public import WeilConjectures.Topology.ModuleCompatibleFamilyPresheaf
 
-/-! # A step of the compatible-family sheaf construction -/
+/-! # A step of the compatible-family sheaf construction
+
+Coherent families of local module sections form a small type, independently of the universe of
+the cover's index.
+
+## Implementation details
+
+Choosing for each point `x` an index `i(x)` with `x ∈ U i(x)` embeds coherent families into a
+product indexed by the points of `X`; injectivity follows from overlap coherence and separation.
+
+## References
+
+* [Stacks Project, Tag 00AL](https://stacks.math.columbia.edu/tag/00AL)
+-/
 
 @[expose] public section
 
@@ -18,23 +31,7 @@ open CategoryTheory TopologicalSpace Opposite
 
 namespace AlgebraicGeometry
 
-/-- Coherent families are small independently of the cover's index universe.
-Source: Stacks Project, Sheaves, Tag 00AL, first proof (compatible-family equalizer),
-with the point-indexed subcover argument of the parent node.
-(blueprint: lem-weil-pbc-module-compatible-family-small)
-
-Proof: choose for each point x an index i(x) with x in U i(x). Restrict a coherent
-family to its components on V intersect U i(x). This embeds coherent families
-into a product indexed by the points of X, with factors in universe max u v.
-For injectivity, equality of these chosen components implies equality on every
-subopen of each chosen component by restriction coherence. For an arbitrary
-original member U j, the intersections with the chosen members cover every
-W contained in V and U j. Overlap coherence carries equality of the chosen
-components to equality of the j components on these intersections. Separation
-of Fi j then gives equality on W. Thus the map is injective, and small_of_injective
-proves the claim. If X is empty, the product is the singleton empty product;
-separation for the empty cover gives the same injectivity argument. No diagonal
-or cocycle law is used. -/
+/-- Coherent families are small independently of the cover's index universe. -/
 theorem coherent_open_module_small
     (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)
   (Fi : ∀ i : I, SheafOfModules.{max u v} ((moduleRings X).over (U i)))

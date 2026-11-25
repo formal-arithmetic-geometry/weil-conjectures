@@ -15,8 +15,19 @@ import WeilConjectures.CategoryTheory.Abelian.ExtRightDerivedCocycleComparison
 
 /-! # Terminal-section resolution computations and Ext cocycles
 
-Source: Stacks Project, Tags 01FT, 06XR and 01F2, injective-resolution cohomology computation.
-(blueprint: lem-sc-topological-terminal-resolution-ext-comparison)
+Terminal sections and terminal `Ext` cohomology admit comparisons compatible with the homology
+map of any augmented comparison of injective resolutions.
+
+## Implementation details
+
+The sheafification, free abelian and Yoneda adjunctions identify maps from the free terminal sheaf
+with sections at the terminal open, additively and naturally; applying this degreewise to an
+injective resolution and taking homology computes `Ext`. The generator identity `ha` identifies
+sections of `f_*M` on `X` with sections of `M` on `Z`.
+
+## References
+
+* [Stacks Project, Tags 01FT, 06XR and 01F2](https://stacks.math.columbia.edu/tag/01F2)
 -/
 
 @[expose] public section
@@ -109,30 +120,7 @@ private lemma class_map
 
 /-- Terminal sections and terminal Ext cohomology admit comparisons compatible
 with the homology map of any augmented resolution comparison. No spectral object
-or edge map occurs in this statement.
-
-Source: Stacks Project, Tags 01FT, 06XR and 01F2, cohomology of an injective resolution.
-(blueprint: lem-sc-topological-terminal-resolution-ext-comparison)
-
-Proof: Sheafification adjunction, the free abelian adjunction, and Yoneda identify
-Hom from the free terminal sheaf with sections at the terminal open, additively
-and naturally. Apply this identification degreewise to the chosen injective
-resolution, then take homology. Ext computed from that resolution gives x in
-every degree, natural in the sheaf by resolution comparison and homotopy
-independence. The same construction on Z gives the comparison for Z sections.
-The generator identity ha identifies sections of f_*M on X with sections of M
-on Z; the inverse is restriction along the equality f^{-1}(top)=top. This is an
-isomorphism of additive functors. Derive it and compose with the Z comparison to
-obtain zc for the composite f_* followed by X sections. The degreewise Hom/section
-identifications take s composed with phi to z, because a composed with f_*z is
-s composed with phi. Thus the induced homology map sends the represented Ext
-class to I.extMk z. The canonical right-derived resolution comparisons in the
-formula are precisely the endpoint identifications in this computation.
-Naturality of the Hom/section isomorphism and homotopy independence extend the
-calculation from chosen resolutions to every I,J and augmented phi.
-Empty spaces and degree zero require no separate assumption: Yoneda and the
-sheafification adjunction apply there too, and negative resolution degrees are zero.
--/
+or edge map occurs in this statement. -/
 theorem exists_topological_terminal_resolution_ext_comparison
     {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]
     (a : (presheafToSheaf (Opens.grothendieckTopology X)

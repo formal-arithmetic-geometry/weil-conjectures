@@ -18,11 +18,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Basic
 
 /-! # Compact-support system evaluation diagram
 
-Source: Weil conjectures blueprint, `prop-trf-rational-frobenius-integral-model.proof.md`,
-clause (3), second paragraph (blueprint: def-trf-compact-support-system-evaluation-diagram).
 The canonical system operations are supplied by the ordinary semilinear derived-sections
-calculus and the coefficient sequence site.  This module records the comparison before any
-inverse limit is taken.
+calculus and the coefficient sequence site. This module records the comparison of the
+compact-support system evaluations before any inverse limit is taken.
 
 ## Main definitions
 
@@ -36,6 +34,11 @@ inverse limit is taken.
 - `compactSupportSystemSourceTransition` evaluates the actual completed tower.
 - `compactSupportSystemCoefficientMate` and `compactSupportSystemTargetTransition`
   construct the specified coefficient mate and its scalar-adjunction transpose.
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10.
+* Stacks Project, Tags 03D2, 03DI, 03DJ, 015F, 07A4, 0941 and 0D6E
 -/
 
 @[expose] public noncomputable section
@@ -60,26 +63,20 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The actual finite-coefficient sectionwise direct image along `p`.
-Source: the node's proof step 2, Stacks 03D2 and Zheng 4.10
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The actual finite-coefficient sectionwise direct image along `p`. -/
 abbrev compactSupportLevelDirectImage
     {Z Y : Scheme.{t}} (p : Z ⟶ Y) (n : ℕ) :
     normalizedDVRModules l E Z n ⥤ normalizedDVRModules l E Y n :=
   Scheme.coefficientProEtaleModuleDirectImage.{t, u} p
     (CommRingCat.of (ULift.{t+1} (Padic.coefficientExtensionRing l E (n+1))))
 
-/-- The inherited ordinary adjunction for the canonical finite direct image.
-Source: node proof step 2, Stacks 03D2
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The inherited ordinary adjunction for the canonical finite direct image. -/
 instance compactSupportLevelDirectImageRightAdjoint {Z Y : Scheme.{t}} (p : Z ⟶ Y) (n : ℕ) :
     (compactSupportLevelDirectImage l E p n).IsRightAdjoint :=
   Scheme.coefficientProEtaleModuleDirectImage_isRightAdjoint.{t, u} p
     (CommRingCat.of (ULift.{t+1} (Padic.coefficientExtensionRing l E (n+1))))
 
-/-- The actual coefficient inverse image adjoint to the sectionwise direct image.
-Source: the node's proof step 2, Stacks 03D2
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The actual coefficient inverse image adjoint to the sectionwise direct image. -/
 abbrev compactSupportLevelPullback
     {Z Y : Scheme.{t}} (p : Z ⟶ Y) (n : ℕ) :
     normalizedDVRModules l E Y n ⥤ normalizedDVRModules l E Z n :=
@@ -88,9 +85,7 @@ abbrev compactSupportLevelPullback
 
 /-- Normalization of a derived evaluation square on arbitrary K-injective resolutions.
 It specifies the actual localization of the underived comparison, without assuming that
-an exact evaluation or scalar restriction preserves K-injectives.
-Source: node proof step 2, Stacks 0D6E and Zheng 4.10
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+an exact evaluation or scalar restriction preserves K-injectives. -/
 def CompactSupportDerivedSquareNormalization
     {C : Type c₁} {C' : Type c₂} {A : Type d₁} {A' : Type d₂}
     [Category.{v} C] [Category.{v} C'] [Category.{v} A] [Category.{v} A']
@@ -117,9 +112,7 @@ def CompactSupportDerivedSquareNormalization
       G'.rightDerivedFunctor.map (DerivedCategory.Q.map r) ≫
       (G'.rightDerivedFunctorObjQIso I).hom
 
-/-- The canonical derived system adjunction of the actual ordinary inverse/direct image.
-Source: node proof step 2, Stacks 03D2, 07A4
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The canonical derived system adjunction of the actual ordinary inverse/direct image. -/
 def compactSupportCanonicalPAdjunction {Z Y : Scheme.{t}} (p : Z ⟶ Y)
     [(integralComparisonSequenceDirectImage l E p).Additive]
     [Abelian.HasKInjectiveResolutions (coefficientSequenceModules l E Z)] :
@@ -134,9 +127,7 @@ def compactSupportCanonicalPAdjunction {Z Y : Scheme.{t}} (p : Z ⟶ Y)
   (Adjunction.ofIsRightAdjoint
     (integralComparisonSequenceDirectImage l E p)).mapDerivedCategoryRightDerivedAdjunction
 
-/-- The canonical derived finite inverse/direct-image adjunction, with its ordinary units.
-Source: node proof step 2, Stacks 03D2, 07A4
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The canonical derived finite inverse/direct-image adjunction, with its ordinary units. -/
 def compactSupportCanonicalPLevelAdjunction {Z Y : Scheme.{t}} (p : Z ⟶ Y) (n : ℕ)
     [(compactSupportLevelDirectImage l E p n).Additive]
     [Abelian.HasKInjectiveResolutions (normalizedDVRModules l E Z n)]
@@ -154,9 +145,7 @@ def compactSupportCanonicalPLevelAdjunction {Z Y : Scheme.{t}} (p : Z ⟶ Y) (n 
 /-- Presentation data for the actual operations, with no independent geometric functors.
 All fields of this package are existentially supplied by the main theorem. The ordinary
 coefficient comparison is the identity on sections, and its derived comparison is fixed
-on every K-injective resolution. Thus its scalar-adjunction mate is the actual `b`.
-Source: the node's proof steps 1--3, Zheng 4.1 and 4.10
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+on every K-injective resolution. Thus its scalar-adjunction mate is the actual `b`. -/
 class CompactSupportSystemOperationInstances
     {X Z Y : Scheme.{t}} (j : X ⟶ Z) (p : Z ⟶ Y) [IsOpenImmersion j] where
   jOperations : IntegralOpenReduction.Operations l E j
@@ -178,9 +167,7 @@ attribute [instance] CompactSupportSystemOperationInstances.pAdditive
   CompactSupportSystemOperationInstances.pullColimits
 
 /-- The actual quotient adjunctions and ordinary/derived direct-image coefficient squares.
-Their section and resolution normalizations are asserted in the main witness conclusion.
-Source: node statement, coefficient mate b; Zheng 4.10
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+Their section and resolution normalizations are asserted in the main witness conclusion. -/
 class CompactSupportSystemCanonicalOperations
     {X Z Y : Scheme.{t}} (j : X ⟶ Z) (p : Z ⟶ Y) [IsOpenImmersion j] where
   [instances : CompactSupportSystemOperationInstances l E j p]
@@ -199,9 +186,7 @@ class CompactSupportSystemCanonicalOperations
 
 attribute [instance_reducible, instance] CompactSupportSystemCanonicalOperations.instances
 
-/-- The inherited exactness component for the actual finite open operation.
-Source: node proof step 3, Stacks 03DI--03DJ
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The inherited exactness component for the actual finite open operation. -/
 instance compactSupportFiniteExtensionPreservesFiniteLimits
     {X Z : Scheme.{t}} (j : X ⟶ Z) [IsOpenImmersion j]
     (o : IntegralOpenReduction.Operations l E j) (n : ℕ) :
@@ -211,9 +196,7 @@ instance compactSupportFiniteExtensionPreservesFiniteLimits
     (integralCoefficientCommRingSheaf l E Z n) (IntegralOpenReduction.openObject j)
   inferInstance
 
-/-- The inherited exactness component for the actual finite open operation.
-Source: node proof step 3, Stacks 03DI--03DJ
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The inherited exactness component for the actual finite open operation. -/
 instance compactSupportFiniteExtensionPreservesFiniteColimits
     {X Z : Scheme.{t}} (j : X ⟶ Z) [IsOpenImmersion j]
     (o : IntegralOpenReduction.Operations l E j) (n : ℕ) :
@@ -223,9 +206,7 @@ instance compactSupportFiniteExtensionPreservesFiniteColimits
     (integralCoefficientCommRingSheaf l E Z n) (IntegralOpenReduction.openObject j)
   inferInstance
 
-/-- The inherited exactness component for the actual finite open operation.
-Source: node proof step 3, Stacks 03DI--03DJ
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The inherited exactness component for the actual finite open operation. -/
 instance compactSupportFiniteRestrictionAdditive
     {X Z : Scheme.{t}} (j : X ⟶ Z) [IsOpenImmersion j]
     (o : IntegralOpenReduction.Operations l E j) (n : ℕ) :
@@ -235,9 +216,7 @@ instance compactSupportFiniteRestrictionAdditive
     (integralCoefficientCommRingSheaf l E Z n) (IntegralOpenReduction.openObject j)
   inferInstance
 
-/-- The inherited exactness component for the actual finite open operation.
-Source: node proof step 3, Stacks 03DI--03DJ
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The inherited exactness component for the actual finite open operation. -/
 instance compactSupportFiniteRestrictionPreservesFiniteLimits
     {X Z : Scheme.{t}} (j : X ⟶ Z) [IsOpenImmersion j]
     (o : IntegralOpenReduction.Operations l E j) (n : ℕ) :
@@ -247,9 +226,7 @@ instance compactSupportFiniteRestrictionPreservesFiniteLimits
     (integralCoefficientCommRingSheaf l E Z n) (IntegralOpenReduction.openObject j)
   inferInstance
 
-/-- The inherited exactness component for the actual finite open operation.
-Source: node proof step 3, Stacks 03DI--03DJ
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The inherited exactness component for the actual finite open operation. -/
 instance compactSupportFiniteRestrictionPreservesFiniteColimits
     {X Z : Scheme.{t}} (j : X ⟶ Z) [IsOpenImmersion j]
     (o : IntegralOpenReduction.Operations l E j) (n : ℕ) :
@@ -259,18 +236,14 @@ instance compactSupportFiniteRestrictionPreservesFiniteColimits
     (integralCoefficientCommRingSheaf l E Z n) (IntegralOpenReduction.openObject j)
   inferInstance
 
-/-- The exact open extension at a finite level, from the actual slice presentation.
-Source: node proof step 3, Stacks 03DI
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The exact open extension at a finite level, from the actual slice presentation. -/
 def compactSupportCanonicalJLevel
     {X Z : Scheme.{t}} (j : X ⟶ Z) [IsOpenImmersion j]
     (o : IntegralOpenReduction.Operations l E j) (n : ℕ) :
     normalizedDVRDerived l E X n ⥤ normalizedDVRDerived l E Z n :=
   (IntegralOpenReduction.finiteExtension l E j o n).mapDerivedCategory
 
-/-- The finite open adjunction is the descent of the section-normalized slice adjunction.
-Source: node proof step 3, Stacks 03DI, 015F
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The finite open adjunction is the descent of the section-normalized slice adjunction. -/
 def compactSupportCanonicalJLevelAdjunction
     {X Z : Scheme.{t}} (j : X ⟶ Z) [IsOpenImmersion j]
     (o : IntegralOpenReduction.Operations l E j) (n : ℕ) :
@@ -281,18 +254,14 @@ def compactSupportCanonicalJLevelAdjunction
       (SheafOfModules.localizedSystemAdjunction.{t+1, t, max u (t+1)}
         (integralCoefficientCommRingSheaf l E Z n) (IntegralOpenReduction.openObject j)))
 
-/-- Exact open extension on whole systems.
-Source: node proof step 3, Stacks 03DI, 0941
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- Exact open extension on whole systems. -/
 def compactSupportCanonicalJSystem
     {X Z : Scheme.{t}} (j : X ⟶ Z) [IsOpenImmersion j]
     (o : IntegralOpenReduction.Operations l E j) :
     coefficientSequenceDerived l E X ⥤ coefficientSequenceDerived l E Z :=
   IntegralOpenReduction.J l E j o
 
-/-- The canonical localization of the actual ordinary extension evaluation.
-Source: node proof step 3, Stacks 015F, 0941
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The canonical localization of the actual ordinary extension evaluation. -/
 def compactSupportCanonicalJEvaluation {X Z : Scheme.{t}} (j : X ⟶ Z)
     [IsOpenImmersion j] (o : IntegralOpenReduction.Operations l E j) (n : ℕ) :
     compactSupportCanonicalJSystem l E j o ⋙ coefficientSequenceDerivedEvaluation l E Z n ≅
@@ -317,9 +286,7 @@ def compactSupportCanonicalJEvaluation {X Z : Scheme.{t}} (j : X ⟶ Z)
 
 /-- Evaluation presentations for the canonical geometric functors. The right direct-image
 comparison is normalized on arbitrary K-injective resolutions of evaluated systems;
-evaluation itself is not assumed to preserve K-injectivity.
-Source: node proof steps 2--3, Zheng 4.10
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+evaluation itself is not assumed to preserve K-injectivity. -/
 class CompactSupportSystemEvaluationData
     (X Z Y : Scheme.{t}) (j : X ⟶ Z) (p : Z ⟶ Y) [IsOpenImmersion j] where
   [operations : CompactSupportSystemCanonicalOperations l E j p]
@@ -350,9 +317,7 @@ class CompactSupportSystemEvaluationData
 
 attribute [instance_reducible, instance] CompactSupportSystemEvaluationData.operations
 
-/-- Evaluation of the real restricted compact-support system.
-Source: node statement, `ev_n U_Y S_p J_j`
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- Evaluation of the real restricted compact-support system. -/
 def compactSupportSystemSourceLevel
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] (n : ℕ) :
@@ -361,9 +326,7 @@ def compactSupportSystemSourceLevel
     (integralComparisonSequenceDirectImage l E p).rightDerivedFunctor) ⋙
       (coefficientSequenceDerivedRestriction l E Y ⋙ coefficientConstantTowerEvaluation l E Y n)
 
-/-- The finite-level compact-support functor followed by the actual completed restriction.
-Source: node statement, `T_n`
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The finite-level compact-support functor followed by the actual completed restriction. -/
 def compactSupportSystemTargetLevel
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] (n : ℕ) :
@@ -373,9 +336,7 @@ def compactSupportSystemTargetLevel
       ((compactSupportLevelDirectImage l E p n).rightDerivedFunctor ⋙
         coefficientFiniteDerivedRestriction l E Y n)
 
-/-- The canonical composite `ev_n U = Res_n e_n`, direct-image evaluation, open evaluation.
-Source: node statement, definition of `Theta`
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The canonical composite `ev_n U = Res_n e_n`, direct-image evaluation, open evaluation. -/
 def compactSupportSystemEvaluationIso
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] (n : ℕ) :
@@ -396,9 +357,7 @@ by
   simpa only [compactSupportSystemSourceLevel, compactSupportSystemTargetLevel,
     Functor.comp_assoc] using i₁ ≪≫ i₂ ≪≫ i₃
 
-/-- The actual transition of a strict completed-coefficient tower, descended termwise.
-Source: node statement, evaluation of the `ℕᵒᵖ` tower
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The actual transition of a strict completed-coefficient tower, descended termwise. -/
 def compactSupportConstantTowerTransition (W : Scheme.{t}) {m n : ℕ} (h : n ≤ m) :
     coefficientConstantTowerEvaluation l E W m ⟶ coefficientConstantTowerEvaluation l E W n :=
 by
@@ -414,9 +373,7 @@ by
         ((evaluation ℕᵒᵖ (scalarReductionSource l E W)).map (homOfLE h).op)
         (ComplexShape.up ℤ)) DerivedCategory.Q)
 
-/-- The source transition is evaluation of the actual restricted-system tower.
-Source: node statement, tower `U_Y S_p J_j M`
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- The source transition is evaluation of the actual restricted-system tower. -/
 def compactSupportSystemSourceTransition
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] {m n : ℕ} (h : n ≤ m)
@@ -429,9 +386,7 @@ def compactSupportSystemSourceTransition
         ((compactSupportCanonicalJSystem l E j D.operations.instances.jOperations).obj M)))
 
 /-- The coefficient arrow `b` is the adjunction mate of the normalized actual restriction
-square. This is the transpose of the inverse-image coefficient square of Zheng 4.10.
-Source: node statement, `b_(m,n)` and proof step 2
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+square. This is the transpose of the inverse-image coefficient square of Zheng 4.10. -/
 def compactSupportSystemCoefficientMate
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] {m n : ℕ} (h : n ≤ m) :
@@ -442,9 +397,7 @@ def compactSupportSystemCoefficientMate
   ((mateEquiv (D.operations.scalarZ h) (D.operations.scalarY h)).symm
     (TwoSquare.mk _ _ _ _ (D.operations.derivedCoefficientComparison h).hom))
 
-/-- Successive restrictions equal restriction along the actual limit projection.
-Source: node statement, `Res_m Res_(m,n) = Res_n`, proof step 5
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+/-- Successive restrictions equal restriction along the actual limit projection. -/
 def compactSupportSystemRestrictionComp (W : Scheme.{t}) {m n : ℕ} (h : n ≤ m) :
     normalizedDVRRes l E W h ⋙ coefficientFiniteDerivedRestriction l E W m ≅
       coefficientFiniteDerivedRestriction l E W n :=
@@ -453,9 +406,7 @@ def compactSupportSystemRestrictionComp (W : Scheme.{t}) {m n : ℕ} (h : n ≤ 
   Functor.mapDerivedCategoryNatIso (eqToIso (coefficientRestrictionComp l E W h))
 
 /-- The extension-form transition `Rp_n(t^N) ∘ b`, for the actual system `N = J_j M`.
-Its `t^N` is the adjunct of `coefficientSequenceDerivedTransition`, not a free map.
-Source: node statement, displayed transition formula
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+Its `t^N` is the adjunct of `coefficientSequenceDerivedTransition`, not a free map. -/
 def compactSupportSystemExtensionTransition
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] {m n : ℕ} (h : n ≤ m)
@@ -476,9 +427,7 @@ def compactSupportSystemExtensionTransition
         ((compactSupportCanonicalJSystem l E j D.operations.instances.jOperations).obj M)))
 
 /-- The target transition is `Res_m` of the scalar-adjunction transpose of
-`Rp_n(t^N) ∘ b`. The two open-evaluation maps only identify `e_n N` with `j_! e_n M`.
-Source: node statement, displayed transition formula and proof step 4
-(blueprint: def-trf-compact-support-system-evaluation-diagram). -/
+`Rp_n(t^N) ∘ b`. The two open-evaluation maps only identify `e_n N` with `j_! e_n M`. -/
 def compactSupportSystemTargetTransition
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] {m n : ℕ} (h : n ≤ m)

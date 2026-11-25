@@ -8,7 +8,14 @@ module
 
 public import WeilConjectures.Topology.ModuleCompatibleFamilyPresheaf
 
-/-! # A step of the compatible-family sheaf construction -/
+/-! # A step of the compatible-family sheaf construction
+
+The explicit small presheaf of compatible families of local module sections is a sheaf.
+
+## References
+
+* [Stacks Project, Tags 00AL and 00AM](https://stacks.math.columbia.edu/tag/00AL)
+-/
 
 @[expose] public section
 
@@ -169,24 +176,7 @@ private theorem coherent_open_module_type_isSheaf :
 
 end
 
-/-- Componentwise gluing makes the explicitly constructed small presheaf a sheaf.
-Source: Stacks Project, Sheaves, Tags 00AL (first proof) and 00AM.
-(blueprint: lem-weil-pbc-module-compatible-family-sheaf-condition)
-
-Proof: work through the shrinking equivalences. For a covering of V and a
-compatible family of coherent families on its members, fix i and W contained
-in U i and V. Its intersections with the covering members cover W in Over (U i).
-The given families supply compatible local sections there, so the sheaf axiom
-of Fi i yields a unique section on W. Define every component this way.
-Restrictions agree by uniqueness: their values agree on the same induced cover.
-For the overlap equations, naturality of each overlap morphism makes the two
-candidate sections agree on the induced covering of the common subopen;
-separation in Fi j makes them equal. This produces a coherent family on V.
-It restricts to each given family by uniqueness in Fi i, and is itself unique
-by separation in each Fi i. Transport this unique gluing through the shrinking
-equivalences to obtain the sheaf axiom of the displayed presheaf. The argument
-works for the empty cover and requires no cover hypothesis on U, no diagonal
-law, and no cocycle law. -/
+/-- Componentwise gluing makes the explicitly constructed small presheaf a sheaf. -/
 theorem small_coherent_open_module_isSheaf
     (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)
   (Fi : ∀ i : I, SheafOfModules.{max u v} ((moduleRings X).over (U i)))

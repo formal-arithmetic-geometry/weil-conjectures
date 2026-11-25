@@ -18,26 +18,25 @@ public import Mathlib.Topology.WithTopology
 /-!
 # Quasi-compact limits of constructibly closed subsets
 
-Source: Stacks Project, Topology, Tag 0A2V, parts (1) and (2)
-(blueprint: lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact).
+For an inverse system of spectral spaces, compatible constructibly closed subsets have a
+quasi-compact limit.
+
+## Implementation details
+
+In the constructible topology each stage is compact Hausdorff and the transition maps are
+continuous. The compatible families lying in the given subsets form a closed, hence compact,
+subset of the product, and the limit is its continuous image.
+
+## References
+
+* [Stacks Project, Tags 0A2S and 0A2V](https://stacks.math.columbia.edu/tag/0A2V)
 -/
 
 @[expose] public section
 
 universe u v w
 
-/-- A spectral map of spectral spaces is continuous for their constructible topologies.
-Source: Stacks Project, Topology, Lemma 5.23.3, Tag 0A2S, part (1).
-(blueprint: lem-weil-pbc-spectral-map-constructible-continuous)
-
-Proof: For a quasi-compact open `W` in the target, its preimage is open by continuity
-and quasi-compact by the spectral-map hypothesis, hence open in the constructible topology
-of the source (`def-weil-pbc-constructible-topology`). The preimage of the complement of `W`
-is the complement of this quasi-compact open preimage, hence also subbasic and open in the
-constructible topology. These two cases cover the subbasis of the target's constructible
-topology, so the subbasis criterion (`lem-weil-pbc-continuous-iff-subbase`) gives continuity.
-Equivalently, the preimage of every constructibly open subset of the target is constructibly
-open in the source. -/
+/-- A spectral map of spectral spaces is continuous for their constructible topologies. -/
 theorem IsSpectralMap.continuous_constructibleTopology
     {X : Type u} {Y : Type v} [TopologicalSpace X] [TopologicalSpace Y]
     [SpectralSpace X] [SpectralSpace Y] {f : X → Y} (hf : IsSpectralMap f) :
@@ -58,29 +57,7 @@ namespace Topology
 -- These diagram axioms are redundant for compactness; keep the existing interface.
 set_option linter.unusedVariables false in
 /-- For an inverse system of spectral spaces indexed by any preorder, constructibly closed
-compatible subsets have a quasi-compact limit, and the whole limit is quasi-compact.
-Source: Stacks Project, Topology, Tag 0A2V, parts (1) and (2)
-(blueprint: lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact).
-
-Proof outline:
-1. Equip each stage with its constructible topology (def-weil-pbc-constructible-topology).
-   It is compact and Hausdorff by lem-weil-pbc-spectral-constructible-topology-quasi-compact
-   and lem-weil-pbc-spectral-constructible-topology-hausdorff. The transition maps are
-   continuous by lem-weil-pbc-spectral-map-constructible-continuous.
-2. The identity from the constructible topology to the original topology is continuous:
-   compact opens form a basis (def-weil-spectral-space) and are constructibly open.
-3. The product of the constructible spaces is compact by
-   lem-weil-pbc-tychonoff-product-quasi-compact.
-4. Inside this product, families lying in every Z_i and satisfying every compatibility
-   equation form a closed subset: coordinate inverse images of Z_i are closed, and the
-   equations are closed equalizers by lem-weil-pbc-hausdorff-equalizer-closed.
-5. This closed subset is compact by lem-weil-pbc-closed-in-quasi-compact.
-6. Unique realization of compatible families gives a map from this subset to X whose
-   image is exactly the set of points whose projections lie in all Z_i.
-7. Each coordinate of this map is continuous by step 2. The initial topology of X gives
-   its continuity by lem-weil-pbc-initial-topology-continuity.
-8. Its image is compact by lem-weil-pbc-continuous-image-quasi-compact. Taking every Z_i
-   to be the whole stage gives compactness of X as well. -/
+compatible subsets have a quasi-compact limit, and the whole limit is quasi-compact. -/
 theorem isCompact_limit_constructibleClosed
     {I : Type u} [Preorder I] (Y : I → Type v)
     [tY : ∀ i : I, TopologicalSpace (Y i)] [∀ i : I, SpectralSpace (Y i)]

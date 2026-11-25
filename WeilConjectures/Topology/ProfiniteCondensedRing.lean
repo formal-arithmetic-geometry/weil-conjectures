@@ -9,11 +9,16 @@ public import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientCommRing
 /-!
 # Arbitrary condensed rings in the profinite-site universe convention
 
-Source: the blueprint, condensed rings and the tensor-abelian ring-object convention;
-Hemo--Richarz--Scholbach, Section 3 (blueprint: sk-def-sfb-condensed-ring).
+A condensed ring is a ring object of abelian sheaves on the coherent profinite site.
 
-The existing continuous-function, adic and subfield constructions are publicly reexported.
-The abbreviation also admits condensed rings not presented by a topological ring.
+## Implementation details
+
+The existing continuous-function, adic and subfield constructions are publicly reexported. The
+abbreviation also admits condensed rings not presented by a topological ring.
+
+## References
+
+* Hemo, Richarz, Scholbach, *Constructible sheaves on schemes*, Section 3.
 -/
 
 @[expose] public section
@@ -25,11 +30,7 @@ open CategoryTheory
 namespace Profinite
 
 /-- A condensed ring is a ring object of abelian sheaves on the coherent profinite site,
-equivalently a sheaf of rings. Multiplication is tensor multiplication, with integer unit.
-The public imports retain the existing continuous-function sheaves, continuous-map
-postcomposition, adic rings, subfields and valuation subrings. This abbreviation adds
-only the general input type that those constructions inhabit.
-Source: blueprint condensed rings; HRS Section 3 (blueprint: sk-def-sfb-condensed-ring). -/
+equivalently a sheaf of rings. Multiplication is tensor multiplication, with integer unit. -/
 abbrev CondensedRing : Type (u + 2) := Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 end Profinite

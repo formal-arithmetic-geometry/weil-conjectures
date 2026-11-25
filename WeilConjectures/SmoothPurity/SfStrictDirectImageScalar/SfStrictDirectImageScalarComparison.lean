@@ -33,8 +33,7 @@ import WeilConjectures.SmoothPurity.SfStrictDirectImageScalar.SfStrictDirectImag
 
 /-! # Scalar compatibility of the strict-tower direct image
 
-Source: blueprint strict direct-image scalar comparison, Steps 1--8.
-(blueprint: lem-sf-strict-direct-image-scalar-comparison)
+The specified strict-tower direct image is compatible with scalar extension of coefficients.
 -/
 
 @[expose] public noncomputable section

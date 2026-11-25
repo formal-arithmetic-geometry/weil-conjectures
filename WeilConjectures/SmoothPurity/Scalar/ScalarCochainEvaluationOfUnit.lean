@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedCalc
 
 /-! # Scalar cochain counits from the ordinary unit square
 
-Source: Stacks 03D7, 06YY and 07A6.
+An ordinary scalar evaluation comparison preserving the actual units also preserves the
+universal cochain counits.
+
+## References
+
+* Stacks Project, Tags 03D7, 06YY and 07A6.
 -/
 
 @[expose] public noncomputable section
@@ -133,19 +138,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (A : SemilinearSections.ScalarSystems.{c, v, r} J B τ F σ α hα)
 
 /-- An ordinary scalar evaluation comparison preserving the actual units also
-preserves the universal cochain counits.
-Source: Stacks 06YY and 07A6
-(blueprint: stage3-pur-scalar-cochain-unit-descent).
-Proof: for each scalar datum, its normalized transpose formula gives the cochain
-unit formula on K-flat complexes. Both sides are natural transformations out of
-localization Q. Resolve an arbitrary source complex by a K-flat complex and
-cancel its localized augmentation to obtain the unit formula on all complexes.
-The exact-functor localization identities identify the derived restriction square
-with its ordinary cochain square. The assumed ordinary unit equation holds in
-each cochain degree. Localize it and apply the supplied derived transpose identity
-and the two cochain unit formulas. The finite derived adjunction Hom bijection
-then gives the counit equation. No faithfulness of evaluation, coefficient
-flatness, or preservation of K-flatness by evaluation is assumed. -/
+preserves the universal cochain counits. -/
 theorem scalarCochainEvaluation_of_unit (n : ℕ)
     (ρ : A.scalar.model.E ⋙ SemilinearSections.evaluation J F σ n ≅
       SemilinearSections.evaluation J B τ n ⋙ (A.levels n).model.E)

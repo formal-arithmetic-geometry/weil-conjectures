@@ -44,9 +44,6 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 
 /-! # Normalized mixed reduction unit
-
-Source: proposition-six-operations-change-coefficients, tensor reassociation and completed
-comparison (blueprint: def-weil-mixed-reduction-unit).
 -/
 
 @[expose] public noncomputable section
@@ -168,12 +165,8 @@ private theorem mixedReduction_tensor_smul
   exact (congrArg (fun z ↦ a (b z)) ht).trans
     ((congrArg a (b.hom.map_smul s _)).trans (a.hom.map_smul s _))
 
-/-- The ordinary mixed-reduction unit, uniquely prescribed on sheafified tensors.
-Source: proposition-six-operations-change-coefficients, tensor reassociation paragraph
-(blueprint: def-weil-mixed-reduction-unit).
-Proof: send s tensor x to ι_n(s) tensor (1 tensor x). The projection identity
-for integralCompletedScalarMap makes this balanced. It commutes with restrictions;
-sheafification gives the transformation. Pure tensors locally generate, giving uniqueness. -/
+/-- The ordinary mixed-reduction unit, uniquely prescribed on sheafified tensors: it sends
+`s ⊗ x` to `ι_n(s) ⊗ (1 ⊗ x)`. -/
 theorem sfMixedReductionUnit_existsUnique :
     ∃! η : scalarReductionExtension l E W n ⟶
       integralOrdinaryScalar l E L ι W ⋙ scalarReductionExtension l L W n ⋙
@@ -286,14 +279,10 @@ theorem sfMixedReductionUnit_existsUnique :
       (η.app M).val.app U (sfReductionTensor l E W n M U 1 x)
     rw [hτ, map_one, hη]
 
-/-- The actual mixed tensor unit, with no choice of a comparison isomorphism.
-Source: proposition-six-operations-change-coefficients, tensor reassociation paragraph
-(blueprint: def-weil-mixed-reduction-unit). -/
+/-- The actual mixed tensor unit, with no choice of a comparison isomorphism. -/
 def sfMixedReductionUnit := (sfMixedReductionUnit_existsUnique l E L ι W n).exists.choose
 
-/-- The homotopy-level mixed unit, with the tensor composites explicitly associated.
-Source: proposition-six-operations-change-coefficients, tensor reassociation paragraph
-(blueprint: def-weil-mixed-reduction-unit). -/
+/-- The homotopy-level mixed unit, with the tensor composites explicitly associated. -/
 def sfMixedReductionUnitHomotopy :
     (scalarReductionExtension l E W n).mapHomotopyCategory (.up ℤ) ⟶
       (integralOrdinaryScalar l E L ι W).mapHomotopyCategory (.up ℤ) ⋙
@@ -387,14 +376,7 @@ private theorem mixedReductionDerivedComparison_isLeftDerived :
 
 /-- Localization of the tensor-unit map. The equation is on the whole homotopy
 category, including both coordinates of every Roos complex; it is not a choice of
-maps after evaluation of a derived inverse limit.
-Source: proposition-six-operations-change-coefficients, tensor reassociation paragraph
-(blueprint: def-weil-mixed-reduction-unit).
-Proof: ordinary finite free extension is exact, and restriction is exact. Derive
-the ordinary mixed unit using the two universal left-derived tensor counits.
-On K-flat complexes those counits are invertible, so the equation determines the
-map there. K-flat resolutions and the localization universal property give existence,
-naturality and uniqueness on all complexes. -/
+maps after evaluation of a derived inverse limit. -/
 theorem sfMixedReductionDerivedUnit_existsUnique :
     ∃! η : scalarReductionDerivedExtension l E W n ⟶
       integralOrdinaryDerivedScalar l E L ι W ⋙ scalarReductionDerivedExtension l L W n ⋙
@@ -440,16 +422,12 @@ theorem sfMixedReductionDerivedUnit_existsUnique :
       η.app (DerivedCategory.Qh.obj P) ≫ α.app P
     exact (hτ P).trans (hη P).symm
 
-/-- The derived unit is selected from a unique universally normalized transformation.
-Source: proposition-six-operations-change-coefficients, tensor reassociation paragraph
-(blueprint: def-weil-mixed-reduction-unit). -/
+/-- The derived unit is selected from a unique universally normalized transformation. -/
 def sfMixedReductionDerivedUnit :=
   (sfMixedReductionDerivedUnit_existsUnique l E L ι W n).exists.choose
 
 /-- Complete the target of the ordinary tensor-unit map using the prescribed diagonal
-Roos completion map. This retains its quotient augmentation and shifted cone coordinate.
-Source: proposition-six-operations-change-coefficients, completed comparison paragraph
-(blueprint: def-weil-mixed-reduction-unit). -/
+Roos completion map. This retains its quotient augmentation and shifted cone coordinate. -/
 def sfMixedCompletedReductionUnit
     (K : DerivedCategory (scalarReductionSource l E W)) :
     (scalarReductionDerivedExtension l E W n).obj K ⟶

@@ -12,7 +12,19 @@ import WeilConjectures.Topology.ModuleObjectOpenDescentAux
 
 /-! # Effectivity of open-cover descent for sheaves of modules
 
-Source: Stacks Project, Sheaves, Tags 00AL and 00AM.
+Local sheaves of modules on an open cover with overlap isomorphisms satisfying the cocycle
+condition descend to a global sheaf of modules.
+
+## Implementation details
+
+The cocycle condition forces the diagonal overlap maps to be identities, which reduces the
+statement to `module_object_open_descent_aux`. There, after passing to a subcover indexed by the
+points of `X` (to stay in universe `max u v`), the global module has as sections over `W` the
+compatible families of sections of the local modules on `W ∩ U i`.
+
+## References
+
+* [Stacks Project, Tags 00AL and 00AM](https://stacks.math.columbia.edu/tag/00AL)
 -/
 
 @[expose] public section
@@ -23,41 +35,7 @@ open CategoryTheory TopologicalSpace Opposite
 
 namespace AlgebraicGeometry
 
-/-- Local module sheaves with compatible overlap isomorphisms descend to a global module.
-Source: Stacks Project, Sheaves, Lemma 00AL (first proof) and Lemma 00AM.
-(blueprint: lem-weil-pbc-module-object-open-descent).
-
-Proof: First reduce the cover to a small subcover: for each point of X choose one
-cover member containing it. This indexes a covering by a type in universe u, even
-when the original index type lies in a larger universe. Retain the overlap maps
-and cocycle on that subcover. On an open W, form the module of families of sections
-of the local modules on W intersected with these cover members. Scalar action is
-through restriction from O(W), and impose the equations that each overlap map sends
-the restriction of one component to the restriction of the other. These equations
-are linear, so compatible families form a submodule of the product. This product
-and submodule lie in universe max u v. Restriction acts componentwise; naturality
-of the overlap maps preserves compatibility, and functoriality and semilinearity
-follow from those of the local modules.
-
-For any open covering of W, glue each component with the corresponding local
-sheaf axiom. On an overlap, both sides of the compatibility equation restrict to
-the same section on every covering member. Separation of the local target sheaf
-therefore proves compatibility of the glued family. Componentwise uniqueness gives
-uniqueness of the family. Thus these modules and restrictions form a module sheaf H.
-
-For every original index i and W contained in U i, transport the components of a
-family by the overlap maps to Fi i on W intersected with the small cover. The
-cocycle makes these sections compatible, so the sheaf axiom of Fi i glues them on W.
-Conversely, from a section of Fi i on W, restriction followed by the overlap map
-from i to each small-cover index gives a compatible family. The cocycle with all
-three indices equal and invertibility imply that the diagonal overlap map is the
-identity. It follows, using separation, that the two constructions are inverse.
-They are linear and commute with restriction, by uniqueness of gluing; hence they
-form an isomorphism H.over (U i) to Fi i. Finally, the cocycle identifies the two
-routes from a component to Fi j on W contained in U i and U j. Separation on the
-small covering of W gives the required compatibility of these isomorphisms. 
-(blueprint: lem-weil-pbc-module-object-open-descent-diagonal)
--/
+/-- The cocycle condition forces each diagonal overlap map `φij i i` to be the identity. -/
 theorem diagonal_transition_identity
     (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)
     (Fi : ∀ i : I, SheafOfModules.{max u v} ((moduleRings X).over (U i)))
@@ -84,7 +62,8 @@ theorem diagonal_transition_identity
   rw [← Category.assoc, hgf, Category.id_comp] at h
   exact h.symm
 
-/-- (blueprint: lem-weil-pbc-module-object-open-descent) -/
+/-- Local module sheaves on an open cover with overlap isomorphisms satisfying the cocycle
+condition descend to a global module sheaf, compatibly with the overlap isomorphisms. -/
 theorem module_object_open_descent
     (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)
     (hcover : ⨆ i, U i = ⊤) :

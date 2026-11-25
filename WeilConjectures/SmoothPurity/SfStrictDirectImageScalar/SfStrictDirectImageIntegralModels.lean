@@ -9,9 +9,9 @@ public import WeilConjectures.SmoothPurity.SfStrictDirectImageScalar.SfStrictDir
 
 /-! # Normalized strict integral direct-image models
 
-Source: the strict direct-image scalar-comparison proof, Steps 1, 2 and 6;
-Stacks 0D6E and 0A07.
-(blueprint: lem-sf-strict-direct-image-integral-models)
+## References
+
+* Stacks Project, Tags 0D6E and 0A07.
 -/
 
 @[expose] public noncomputable section

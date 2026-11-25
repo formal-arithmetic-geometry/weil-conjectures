@@ -19,9 +19,14 @@ import WeilConjectures.Topology.RingedSpaceRGammaDerivedLimit
 /-!
 # Stalk injectivity for a derived inverse limit
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 0D61,
-lemma-cohomology-derived-limit-injective
-(blueprint: lem-pc-ringed-space-derived-limit-stalk-injective).
+## Implementation details
+
+The projection used is `p` followed by the `n₀`-th product projection; no canonical derived
+limit is chosen.
+
+## References
+
+* Stacks Project, Tags 0D61, 0BKJ and 0D60.
 -/
 
 @[expose] public section
@@ -49,21 +54,7 @@ private theorem tower_limit_projection_injective
 
 -- Transport between derived sections, presheaf evaluation and module stalks needs extra reduction.
 /-- Eventual injectivity of open cohomology and vanishing of its first derived inverse
-limit imply injectivity of the specified projection on cohomology stalks.
-Source: Stacks Project, Cohomology of Sheaves, Tag 0D61,
-lemma-cohomology-derived-limit-injective
-(blueprint: lem-pc-ringed-space-derived-limit-stalk-injective).
-
-Proof:
-1. By lem-pc-ringed-space-sheafification-cohomology (Tag 0BKJ), represent a stalk class
-in the kernel by a class over an open neighborhood. Its image has zero germ, so shrink
-until its image at level n₀ vanishes, then refine to an element of the fundamental system.
-2. Apply lem-pc-ringed-space-rgamma-derived-limit (Tag 0D60). Its Milnor short exact
-sequence has left term zero by hlim. The inverse limit maps injectively to level n₀:
-compatibility and hinj kill all later components, and compatibility kills earlier ones.
-The representative therefore vanishes.
-3. Its germ is zero, giving the claimed injectivity. The projection used throughout
-is p followed by the n₀-th product projection; no canonical derived limit is chosen. -/
+limit imply injectivity of the specified projection on cohomology stalks. -/
 theorem derivedLimit_stalk_injective (X : RingedSpace.{u})
     [HasDerivedCategory.{v} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{w} AddCommGrpCat.{u}]

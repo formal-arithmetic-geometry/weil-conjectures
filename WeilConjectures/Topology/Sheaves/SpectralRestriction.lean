@@ -252,9 +252,7 @@ theorem bijective_app_top_of_bijective_stalk (hT₀ : IsClosed T₀)
 closed subset such that every irreducible closed subset `C ⊆ T` meets `T₀` in a nonempty
 connected set. Then for every sheaf of abelian groups `F` on `T`, the restriction map
 `Γ(T, F) ⟶ Γ(T₀, F|_{T₀})`, the unit of the adjunction `i⁻¹ ⊣ i_*` for the inclusion
-`i : T₀ ⟶ T` evaluated on `T`, is bijective. The blueprint states this for locally constant
-sheaves only; it holds for all abelian sheaves.
-(blueprint: `theorem-comparison-over-henselian-pair-degree`) -/
+`i : T₀ ⟶ T` evaluated on `T`, is bijective. -/
 @[stacks 09ZG]
 theorem bijective_unit_app_top (hT₀ : IsClosed T₀)
     (hC : ∀ C : Set T, IsClosed C → IsIrreducible C → IsConnected (C ∩ T₀))

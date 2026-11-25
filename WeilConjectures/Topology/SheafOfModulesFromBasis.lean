@@ -15,8 +15,20 @@ import WeilConjectures.Topology.SheafOnBasisExtends
 /-!
 # Extending modules from a basis
 
-Source: Stacks Project, Sheaves on Spaces, Section 009H, Tags 009L, 009N, 009T and 009U
-(blueprint: lem-weil-pbc-sheaf-of-modules-from-basis).
+A presheaf of modules on an intersection-closed basis with finite refinements and finite unique
+gluing extends to a sheaf of modules, with its universal property and stalks on the basis.
+
+## Implementation details
+
+The underlying abelian presheaf is first extended using `exists_sheaf_extension_of_basis_gluing`,
+after upgrading finite gluing to gluing on all basis coverings. The scalar action on basis opens
+is transported along the additive identifications and extended as a morphism of sheaves of sets
+from the product of the ring presheaf and the abelian sheaf; each module axiom holds on the
+basis, hence everywhere by uniqueness of the extension of morphisms.
+
+## References
+
+* [Stacks Project, Tags 009L, 009N, 009Q, 009T and 009U](https://stacks.math.columbia.edu/tag/009H)
 -/
 
 @[expose] public section
@@ -27,25 +39,7 @@ open CategoryTheory Opposite TopologicalSpace
 
 namespace TopologicalSpace.Opens
 
-/-- Compatible module structures on basis sections extend to an abelian sheaf.
-Source: Stacks Project, Sheaves on Spaces, Section 009H, Lemma 009T.
-(blueprint: lem-weil-pbc-sheaf-of-modules-from-basis).
-
-Proof:
-For a basis open U transport its scalar action through the additive equivalence j U.
-The restriction compatibility of j and the semilinearity of r make these actions natural
-on the basis. Form the presheaf of sets P(W) = R(W) × A(W). The basis actions define
-compatible maps from P into the underlying sheaf of sets of A. Extend them uniquely
-using `lem-weil-pbc-sheaf-morphism-on-basis`. Naturality gives semilinearity of every
-restriction. For each module axiom, the two sides are natural transformations into the
-underlying sheaf of sets of A, with domain the appropriate product of ring and abelian
-presheaves. Their basis components agree by the module axioms of F, so the transformations
-agree globally by uniqueness of extension. Thus each A(W) is a module over R(W), its
-restrictions are semilinear, and its underlying abelian presheaf remains A. This defines
-E via PresheafOfModules.ofPresheaf and the sheaf condition of A. The additive equivalences
-j become linear equivalences by the defining formula for the transported basis action;
-compatibility with restrictions is unchanged. The assertion uses no covering or stalk
-hypotheses and proves only the scalar-action step of the basis-extension construction. -/
+/-- Compatible module structures on basis sections extend to an abelian sheaf. -/
 private theorem exists_module_structure_on_basis_extension
     (X : TopCat.{u}) (B : Set (Opens X)) (hB : IsBasis B)
     (R : TopCat.Sheaf RingCat.{u} X)
@@ -173,28 +167,7 @@ private theorem exists_module_structure_on_basis_extension
   exact ⟨E, ι, hj⟩
 
 
-/-- Finite gluing on a basis gives a module sheaf with compatible linear identifications.
-Source: Stacks Project, Sheaves on Spaces, Section 009H, Tags 009L, 009N, 009Q and 009T.
-(blueprint: lem-weil-pbc-sheaf-of-modules-from-basis).
-
-Proof:
-1. Regard the additive restriction maps as a functor of abelian groups on the basis.
-   Every basis covering has a finite basis refinement by `hrefine`. Finite unique gluing,
-   including the empty covering, therefore implies unique gluing on every basis covering
-   by `lem-weil-pbc-basis-sheaf-cofinal-coverings` (009L).
-2. Apply `lem-weil-pbc-sheaf-on-basis-extends` (009N/009Q) to this additive functor.
-   It gives an abelian sheaf with additive equivalences on basis opens commuting with
-   restrictions.
-3. On a basis open, transport the scalar action through its additive equivalence.
-   Semilinearity of the original restrictions says these actions are compatible.
-   Apply `lem-weil-pbc-sheaf-morphism-on-basis` to extend the resulting maps of sets
-   from the product of the ring presheaf and the abelian sheaf into the abelian sheaf.
-   Naturality makes all restrictions semilinear. Each module axiom is equality of two
-   natural maps into a sheaf. They agree on every basis open by the module axioms of F,
-   hence agree everywhere by uniqueness of morphism extension (009T).
-   The additive sheaf with these module structures is a sheaf of modules. The original
-   additive equivalences are linear by the transported action and remain compatible
-   with restrictions. This proves existence only; morphisms and stalks are separate. -/
+/-- Finite gluing on a basis gives a module sheaf with compatible linear identifications. -/
 private theorem exists_sheafOfModules_basis_extension
     (X : TopCat.{u}) (B : Set (Opens X)) (hB : IsBasis B)
     (hcap : ∀ U V : B, U.val ⊓ V.val ∈ B)
@@ -431,31 +404,7 @@ private theorem basisModule_stalk_lift
   exact (hg U s).trans (hq U s).symm
 
 /-- A module presheaf on an intersection-closed basis with finite refinements and finite
-unique gluing extends to a sheaf of modules, with its universal property and basis stalks.
-Source: Stacks Project, Sheaves on Spaces, Section 009H, Tags 009L, 009N, 009T and 009U.
-(blueprint: lem-weil-pbc-sheaf-of-modules-from-basis).
-
-Proof:
-1. Finite basis coverings form a cofinal system of coverings by the finite-refinement
-   hypothesis. Apply `lem-weil-pbc-basis-sheaf-cofinal-coverings` (009L) to obtain gluing
-   for all basis coverings, including the empty covering.
-2. Apply `lem-weil-pbc-sheaf-on-basis-extends` (009N and 009Q) to the underlying abelian
-   presheaf to obtain the abelian sheaf and restriction-compatible additive identifications.
-3. Transport scalar multiplication on basis opens along those identifications. Extend the
-   resulting map from the product of the ring presheaf and the abelian sheaf into the sheaf
-   using `lem-weil-pbc-sheaf-morphism-on-basis`. Each module axiom is an equality of maps
-   into a sheaf, true on the basis, hence everywhere by the same lemma. Naturality gives
-   semilinearity of restrictions, and the identifications are linear (009T).
-4. Extend each compatible family of linear maps by the morphism-extension lemma. Compare
-   the two scalar-action maps on the basis to obtain linearity globally. Uniqueness follows
-   from uniqueness for abelian sheaves. Basiswise bijectivity implies an isomorphism; its
-   inverse is linear. Apply this to the inverse identifications of another extension to
-   obtain uniqueness up to unique isomorphism (009U).
-5. By `lem-weil-pbc-stalk-germs-on-basis`, every stalk element has a basis representative,
-   and equal representatives agree after a basis restriction. Thus compatible additive
-   maps on basis neighbourhoods descend uniquely to the stalk. Addition is checked on a
-   common basis neighbourhood. The germ scalar formula from `def-weil-pbc-module-stalk`
-   identifies the module action with the action on this colimit. -/
+unique gluing extends to a sheaf of modules, with its universal property and basis stalks. -/
 theorem exists_sheafOfModules_from_basis
     (X : TopCat.{u}) (B : Set (Opens X)) (hB : IsBasis B)
     (hcap : ∀ U V : B, U.val ⊓ V.val ∈ B)

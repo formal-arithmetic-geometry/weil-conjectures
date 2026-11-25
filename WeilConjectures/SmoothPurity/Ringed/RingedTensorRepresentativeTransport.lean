@@ -7,7 +7,13 @@ module
 public import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoidal
 
 /-! # Transport and normalization of tensor representatives
-Source: Stacks 0FPT, 06YU and 07A4.
+
+Associativity and naturality statements for the fixed simultaneous tensor models of K-flat
+representatives.
+
+## References
+
+* Stacks Project, Tags 0FPT, 06YU and 07A4.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -188,13 +194,7 @@ section RepresentativeComparison
 universe a' b' x' y'
 variable {V : Type a'} [Category.{x'} V] {W : Type b'} [Category.{y'} W]
 
-/-- Transport associativity through four binary representative squares.
-Source: Stacks 0FPT and 07A4
-(blueprint: lem-pur-ringed-tensor-representative-transport).
-Proof: combine the two inner and two outer squares by naturality of the binary
-comparison. The two nested model isomorphisms conjugate the structural associators.
-Naturality of the quotient comparison transports the given chain equality. Cancel
-the source and target nested model isomorphisms to obtain the asserted equation. -/
+/-- Transport associativity through four binary representative squares. -/
 theorem coefficientRepresentativeTensorComparison_associativity
     (q : V ⥤ D) (qU : W ⥤ E') (F : V ⥤ W)
     (A : V × V ⥤ V) (AU : W × W ⥤ W) (α : q ⋙ r ≅ F ⋙ qU)
@@ -379,9 +379,7 @@ private theorem model_iso_naturality
     Functor.comp_map, Functor.prod_map, Prod.mkHom, ObjectProperty.ι,
     inducedFunctor, ObjectProperty.homMk] at h ⊢
   exact h
-/-- Naturality of the fixed simultaneous tensor model in its left input.
-Source: Stacks 06YU (blueprint: lem-pur-ringed-tensor-representative-transport).
-Proof: specialize naturality of the model comparison to the identity in the right input. -/
+/-- Naturality of the fixed simultaneous tensor model in its left input. -/
 theorem coefficientTensorModel_iso_naturality_left
     (P P' Q : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)
@@ -396,9 +394,7 @@ theorem coefficientTensorModel_iso_naturality_left
   rw [CategoryTheory.Functor.map_id] at h
   exact h
 
-/-- Naturality of the fixed simultaneous tensor model in its right input.
-Source: Stacks 06YU (blueprint: lem-pur-ringed-tensor-representative-transport).
-Proof: specialize naturality of the model comparison to the identity in the left input. -/
+/-- Naturality of the fixed simultaneous tensor model in its right input. -/
 theorem coefficientTensorModel_iso_naturality_right
     (P Q Q' : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)
@@ -413,13 +409,7 @@ theorem coefficientTensorModel_iso_naturality_right
   rw [CategoryTheory.Functor.map_id] at h
   exact h
 
-/-- Associator representatives with the simultaneous K-flat comparisons on both sides.
-Source: Stacks 0FPT and 06YU
-(blueprint: lem-pur-ringed-tensor-representative-transport).
-Proof: take the associator supplied by the ringed tensor coherence. The two total
-products of K-flat inputs are K-flat. Its one-K-flat comparisons therefore equal
-the fixed simultaneous model comparisons, by tensorIso_both and proof irrelevance.
-Rewrite these two equalities in the model equation and retain the pure-triple formula. -/
+/-- Associator representatives with the simultaneous K-flat comparisons on both sides. -/
 theorem coefficientTensorModel_associator_representative
     {β : @SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, r} J R))
       _ S.monoidal}

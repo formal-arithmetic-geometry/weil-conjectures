@@ -12,8 +12,11 @@ public import Mathlib.Topology.LocallyConstant.Basic
 /-!
 # Presheaf of locally constant maps
 
-Source: Stacks Project, Sheaves, Example 6.4 and Definition 6.5 (Tag 006W)
-(blueprint: theorem-gabber-affine-proper-base-change).
+The presheaf of locally constant maps into a fixed set.
+
+## References
+
+* [Stacks Project, Tag 006W](https://stacks.math.columbia.edu/tag/006W)
 -/
 
 @[expose] public section
@@ -26,9 +29,7 @@ open CategoryTheory Opposite TopologicalSpace
 
 namespace TopCat
 
-/-- The presheaf assigning to each open the locally constant maps into `R`.
-Source: Stacks Project, Sheaves, Example 6.4 (Tag 006W)
-(blueprint: theorem-gabber-affine-proper-base-change). -/
+/-- The presheaf assigning to each open the locally constant maps into `R`. -/
 def locallyConstantMapsPresheaf (X : TopCat.{u}) (R : Type v) :
     X.Presheaf (Type (max u v)) where
   obj := fun V ↦ LocallyConstant {x : X // x ∈ unop V} R

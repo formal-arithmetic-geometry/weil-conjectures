@@ -11,8 +11,9 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Directed monomorphic cocones that cover all stalks
 
-Source: Stacks Project, Cohomology, Lemma 02UX, first paragraph.
-(blueprint: lem-sc-abelian-sheaf-directed-stalk-colimit).
+## References
+
+* Stacks Project, Tag 02UX.
 -/
 
 @[expose] public section
@@ -21,15 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace TopCat
 
-/-- A directed cocone of subsheaves is a colimit if its maps jointly cover every stalk.
-
-Source: Stacks Project, Cohomology, Lemma 02UX, the stalkwise colimit argument.
-Proof: On each stalk, joint coverage gives surjectivity. For two elements with the same
-image, choose a common stage by directedness. Its map to the target stalk is injective,
-so the elements agree there. This recognizes a filtered colimit of underlying sets.
-Stalks and the forgetful functor preserve the filtered colimit, so the comparison
-from the sheaf colimit is an isomorphism on every stalk and hence an isomorphism.
-(blueprint: lem-sc-abelian-sheaf-directed-stalk-colimit). -/
+/-- A directed cocone of subsheaves is a colimit if its maps jointly cover every stalk. -/
 theorem abelianSheaf_directed_stalk_colimit
     (X : TopCat.{u}) (F : X.Sheaf AddCommGrpCat.{u})
     (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]

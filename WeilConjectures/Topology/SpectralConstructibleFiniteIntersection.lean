@@ -13,13 +13,17 @@ import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
 /-!
 # Finite intersections of constructible subsets of a spectral space
 
-Source: literature/stacks-project/topology.tex, Topology, Lemma 0901 and the
-paragraph before it (blueprint: lem-weil-pbc-spectral-constructible-finite-intersection).
+In a spectral space, a family of constructible subsets with empty intersection has a finite
+subfamily with empty intersection.
 
 ## Main statements
 
 - `finite_subfamily_iInter_eq_empty_of_isConstructible`: a family of constructible
   subsets with empty intersection has a finite subfamily with empty intersection.
+
+## References
+
+* [Stacks Project, Tag 0901](https://stacks.math.columbia.edu/tag/0901)
 -/
 
 @[expose] public section
@@ -29,15 +33,7 @@ universe u v
 open Set Topology
 
 /-- In a spectral space, a family of constructible subsets with empty intersection
-has a finite subfamily with empty intersection.
-
-Source: literature/stacks-project/topology.tex, Topology, Lemma 0901 and the
-paragraph before it (blueprint: lem-weil-pbc-spectral-constructible-finite-intersection).
-Proof: Put the constructible topology on the spectral space. Constructible sets
-are closed there, and that topology is quasi-compact. The complements therefore
-form an open cover, which has a finite subcover; taking complements gives the
-finite subfamily. The empty space is handled by the empty finite subfamily.
--/
+has a finite subfamily with empty intersection. -/
 theorem finite_subfamily_iInter_eq_empty_of_isConstructible
     (T : Type u) [TopologicalSpace T] [SpectralSpace T]
     (A : Type v) (E : A → Set T)

@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps
 
 /-! # Coherent reduction of the regular completed coefficient
 
-Source: Stacks Project, Tags 07A4 and 0941; the coefficient-unit tower.
-(blueprint: lem-pur-regular-coefficient-coherent-reduction).
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -42,21 +43,7 @@ private def imageUnitIso {C D : Type*} [Category* C] [Category* D]
     (μ.app (S.monoidal.tensorUnit, V)).symm ≪≫
     F.mapIso (S.monoidal.leftUnitor V) ≪≫ e
 
-/-- The regular completed sheaf reduces to the actual coherent coefficient-ring unit.
-
-Source: Stacks Project, Tags 07A4 and 0941; the coefficient-unit tower.
-(blueprint: lem-pur-regular-coefficient-coherent-reduction).
-
-Proof: compare the ordinary integral tensor unit with the regular coefficient
-using uniqueness of left adjoints to the fixed internal Hom and the normalized
-ringed-site unit isomorphism. Let V be the reconstructed integral tensor unit.
-Its reduction is the system unit by the invertible coherent reduction counit.
-The reduction functor preserves tensor. Thus reduction of the ordinary integral
-unit is isomorphic to its tensor with reduction(V), then to reduction of the
-tensor of the integral unit with V, then to reduction(V), and hence to the
-system unit. Compose with reduction of the regular-coefficient identification.
-Only isomorphisms of whole coherent systems are used. This argument also
-applies to the zero scheme and needs no bounded Tor-amplitude assumption. -/
+/-- The regular completed sheaf reduces to the actual coherent coefficient-ring unit. -/
 theorem regularCoefficient_coherentReduction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (X : Scheme.{u})

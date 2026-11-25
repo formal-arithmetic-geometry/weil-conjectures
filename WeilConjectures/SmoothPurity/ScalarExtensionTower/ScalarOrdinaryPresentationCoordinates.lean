@@ -62,8 +62,12 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 /-! # Scalar extension of ordinary quotient presentations
 
-Source: Stacks 03EK, 03D7, 06YY and 07A4. The completed-ring tensor association,
-its quotient successors, and its unit formula are proved before applying pullback.
+The completed-ring tensor association, its quotient successors, and its unit formula are proved
+before applying pullback.
+
+## References
+
+* Stacks Project, Tags 03EK, 03D7, 06YY and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -331,20 +335,7 @@ private theorem strictScalarAssociation (Y : Scheme.{u})
   exact WeilConjectures.complexIsoOfSuccessor l L Y F G e he
 
 /-- Scalar extension carries a coherent ordinary quotient presentation to the
-ordinary quotient of completed scalar extension, with its tensor-unit coordinates.
-Source: Stacks 03EK, 03D7, 06YY and 07A4; scalar association in the quotient
-calculation of step 8 of scalar-extension tower coherence.
-(blueprint: lem-trf-scalar-ordinary-presentation-coordinates).
-
-Proof: associate completed scalar extension followed by finite reduction with direct
-finite scalar extension by uniqueness of normalized tensor adjoints. The unit equation
-fixes its tensor generators. Linearity and compatibility of quotient units with the
-successor maps identify the transitions. Compare with finite sequence scalar extension
-and glue the successor squares into a strict sequence isomorphism on complexes.
-Transport it along the given presentation isomorphism. Naturality of the scalar unit
-and the prescribed finite presentation comparisons give the displayed coordinate formula.
-No flatness is used: the same tensor formulas cover zero complexes, n=0, empty sites,
-identity embeddings and ramified coefficient extensions. -/
+ordinary quotient of completed scalar extension, with its tensor-unit coordinates. -/
 theorem scalarOrdinaryPresentationCoordinates (Y : Scheme.{u})
     (A : CoefficientExtensionSystems l E L ι Y)
     (ME : CompletionUnit.OrdinaryModel l E Y)

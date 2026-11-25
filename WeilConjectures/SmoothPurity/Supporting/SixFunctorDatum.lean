@@ -16,9 +16,6 @@ public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 /-!
 # Axiomatized six-functor data
 
-Source: current blueprint main-20261015, chap-The-pro-etale-site,
-sk-def-sf-operations/def-sf-datum, axioms (A1)--(A6) (blueprint: def-sf-datum).
-
 The operation datum fixes the actual coefficient categories and constructions.
 The structures below impose properties on those operations; they do not assert
 that a concrete six-functor datum exists.
@@ -39,17 +36,15 @@ open CategoryTheory.SuppliedExchangeProjection
 open scoped CategoryTheory.Functor
 namespace WeilConjectures
 
-/-- Reassociate the same compactification, transporting only its factorization.
-Source: the associativity convention in A4 (blueprint: def-sf-datum). -/
+/-- Reassociate the same compactification, transporting only its factorization. -/
 def sixFunctorAssocCompactification {D : FiniteFieldDatum.{u}}
     {W X Y Z : SixFunctorSpace D} (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ Z)
     (c : Compactification ((f ≫ g) ≫ h).hom.left) :
     Compactification (f ≫ g ≫ h).hom.left :=
   (congrArg (fun e : W ⟶ Z ↦ e.hom.left) (Category.assoc f g h)) ▸ c
 
-/-- Direct-image composition is the unique right-adjoint mate of pullback composition.
-Consequently the comparison uses the pasted unit and counit, rather than another
-adjunction on the same functors. Source: A1 (blueprint: def-sf-datum). -/
+/-- Direct-image composition is the unique right-adjoint mate of pullback composition,
+using the pasted unit and counit. -/
 def sixFunctorDirectComposition {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     (S : SixFunctorPushStage D B) {X Y Z : SixFunctorSpace D}
@@ -59,8 +54,7 @@ def sixFunctorDirectComposition {D : FiniteFieldDatum.{u}}
       (S.pullComposition f g).symm)
 
 /-- Exceptional composition is the unique right-adjoint mate of the supplied support
-composition; its units and counits are the pasted ones.
-Source: A1 and A4 (blueprint: def-sf-datum). -/
+composition; its units and counits are the pasted ones. -/
 def sixFunctorExceptionalComposition {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     (S : SixFunctorPushStage D B) {X Y Z : SixFunctorSpace D}
@@ -73,9 +67,8 @@ def sixFunctorExceptionalComposition {D : FiniteFieldDatum.{u}}
       (S.composition f g cf cg cfg).symm)
 
 /-- Finite-Tor preservation and the support pentagon. Adjunctions and proper coincidence
-are already fields of S; their composition comparisons are the mates defined above.
-The pentagon is written on components, including the canonical associativity transport.
-Source: A1 and A4 on their displayed domains (blueprint: def-sf-datum). -/
+are already fields of `S`; their composition comparisons are the mates defined above.
+The pentagon is written on components, including the canonical associativity transport. -/
 structure SixFunctorCoherentStage {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     (S : SixFunctorPushStage D B) (P : ∀ X, ObjectProperty (B X)) where
@@ -100,8 +93,7 @@ structure SixFunctorCoherentStage {D : FiniteFieldDatum.{u}}
         (S.composition g h cg ch cgh).hom.app ((S.support f cf).obj K))
 
 /-- The supplied higher-stage exchange and projection maps are invertible on finite-Tor
-inputs; the direct-image exchange has exactly the proper-or-smooth alternative.
-Source: A2 and A3 (blueprint: def-sf-datum). -/
+inputs; the direct-image exchange has exactly the proper-or-smooth alternative. -/
 structure SixFunctorExchangeAxioms {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     {S : SixFunctorPushStage D B} {T : ∀ X, B X ⥤ B X ⥤ B X}
@@ -114,16 +106,14 @@ structure SixFunctorExchangeAxioms {D : FiniteFieldDatum.{u}}
   projection : ∀ (Q : SixFunctorCompactifiedSquare D) (K : B Q.X) (L : B Q.Y),
     P Q.X K → P Q.Y L → IsIso ((A Q).projectionComponent K L)
 
-/-- Restrict an actual coefficient-change functor to the finite-Tor domains.
-Source: A5 on its displayed domains (blueprint: def-sf-datum). -/
+/-- Restrict an actual coefficient-change functor to the finite-Tor domains. -/
 def sixFunctorDomainChange {B : Type a} [Category.{b} B]
     {B' : Type a'} [Category.{b'} B'] (P : ObjectProperty B) (P' : ObjectProperty B')
     (F : B ⥤ B') (h : ∀ K : P.FullSubcategory, P' (F.obj K.obj)) :
     P.FullSubcategory ⥤ P'.FullSubcategory :=
   P'.lift (P.ι ⋙ F) h
 
-/-- The standard localization used by the ambient coefficient categories.
-Source: A6, ordinary derived categories (blueprint: def-sf-datum). -/
+/-- The standard localization used by the ambient coefficient categories. -/
 abbrev sixFunctorRingedModel {C : Type a} [Category.{b} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max a b u}]
     [J.WEqualsLocallyBijective AddCommGrpCat.{max a b u}]

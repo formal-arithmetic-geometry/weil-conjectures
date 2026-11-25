@@ -16,11 +16,9 @@ import WeilConjectures.Topology.TopologicalCocycleNaturality
 universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace CategoryTheory
-/-- Intermediate result.
-   (blueprint: lem-sc-topological-induced-cocycle-formula)
-   Proof: Construct the objectwise additive comparison maps, use homotopy invariance
-   to prove their naturality, assemble them into natural transformations, and transport
-   along hX and hZ. The edge map is constructed, rather than arbitrarily quantified. -/
+/-- There is a natural map `edge` from the cohomology of the direct image `f_*F` to the
+cohomology of `F`, computed on injective-resolution cocycles through any comparison of
+resolutions `J → f_*I`. -/
 theorem topological_induced_cocycle_formula
     {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]
     (HX : ℕ → (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))

@@ -12,9 +12,16 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 /-!
 # Composition of inverse images of sheaves of sets
 
-Source: Stacks Project, Sheaves on Spaces, Lemma 6.21.6 (Tag 008I), with
-Lemma 6.21.2 (Tag 008E).
-(blueprint: lem-weil-pbc-sets-inverse-image-composition)
+Inverse images of sheaves of sets compose by a natural isomorphism.
+
+## Implementation details
+
+The comparison is obtained by composing the adjunctions for the two maps and using the canonical
+pushforward composition isomorphism; uniqueness follows from the composite adjunction.
+
+## References
+
+* [Stacks Project, Tags 008I and 008E](https://stacks.math.columbia.edu/tag/008I)
 -/
 
 @[expose] public section
@@ -25,27 +32,8 @@ open CategoryTheory Opposite TopologicalSpace
 
 namespace TopCat.Sheaf
 
-/-- Source: Stacks Project, Sheaves on Spaces, Lemma 6.21.6 (Tag 008I).
-(blueprint: lem-weil-pbc-sets-inverse-image-composition)
-Inverse images compose by a natural isomorphism whose component at each sheaf is the
-unique sheaf morphism compatible with the adjunction units on every section.
-
-Proof, following the node's five steps:
-1. Direct images compose: their sections, restrictions and maps are evaluated on
-   the same inverse-image opens (def-weil-pbc-topological-inverse-image (1), Tag 008E).
-   In Lean use the canonical pushforward composition isomorphism.
-2. Compose the adjunctions for g and f (def-weil-pbc-composite-adjunction and
-   def-weil-pbc-topological-inverse-image (3)). The composite unit on a section is
-   eta_f applied to eta_g, evaluated on the inverse image under g of the original open.
-3. Equality of sheaf morphisms is sectionwise equality. Thus the displayed condition
-   is precisely R(c) composed with the composite unit equals the unit for f followed by g.
-4. Apply situation-conventions to the two adjunctions and the
-   pushforward composition isomorphism. This gives a natural isomorphism satisfying
-   the unit equation, hence the displayed section equation.
-5. For any competing morphism at a fixed sheaf, situation-conventions
-   for the composite adjunction recovers it from the same unit equation as counit
-   composed with the inverse image of that equation's right-hand side. Therefore
-   it equals the comparison component, even without any naturality assumption. -/
+/-- Inverse images compose by a natural isomorphism whose component at each sheaf is the
+unique sheaf morphism compatible with the adjunction units on every section. -/
 theorem exists_sets_inverseImage_comp
     {X Y Z : TopCat.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ∃ e : pullback (Type u) g ⋙ pullback (Type u) f ≅ pullback (Type u) (f ≫ g),

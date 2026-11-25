@@ -9,7 +9,9 @@ public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerReali
 
 /-! # The defining factors of the reference completed tensor model
 
-Source: Stacks 07A4 and 0941.
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -31,13 +33,7 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
 
 attribute [local irreducible] pullbackTensorReductionModel pullbackTensorSystemModel
   pullbackTensorLimitRoos pullbackTensorTensorTower in
-/-- The hom component of the fixed reference tensor model is its four defining factors.
-Source: Stacks 07A4 and 0941; the definition of the reference tensor realization
-(blueprint: lem-pur-reference-tensor-model-factors).
-
-Proof: expand the four composed isomorphisms, the two functor images and the
-product isomorphism. Their hom components are exactly the four displayed maps.
-No inverse-limit or derived-faithfulness argument is used. -/
+/-- The hom component of the fixed reference tensor model is its four defining factors. -/
 theorem pullbackTensorReferenceTensorModel_hom (W : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) :
     let T := pullbackTensorCalculus l E W

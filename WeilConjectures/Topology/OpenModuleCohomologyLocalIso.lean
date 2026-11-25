@@ -14,8 +14,17 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-! # Open cohomology inverts morphisms that are isomorphisms on the open
 
-Source: Stacks Project, Cohomology, Tag 01E1.
-(blueprint: lem-sc-open-module-cohomology-local-iso)
+Open module cohomology on `U` inverts morphisms of modules whose restriction to `U` is an
+isomorphism.
+
+## Implementation details
+
+Restrictions of injective resolutions to `U` are injective resolutions on the over-site, and
+sections on `U` are sections at the terminal object of the over-site.
+
+## References
+
+* [Stacks Project, Tag 01E1](https://stacks.math.columbia.edu/tag/01E1)
 -/
 
 @[expose] public section
@@ -24,19 +33,7 @@ universe u
 open CategoryTheory TopologicalSpace
 namespace AlgebraicGeometry.RingedSpace
 
-/-- Open cohomology depends only on the restriction of a module morphism.
-Source: Stacks Project, Cohomology, Tag 01E1, restriction of injective resolutions.
-Proof: Choose injective resolutions of M and N and a comparison map lifting f.
-Restrict both resolutions to U. By restrict_injectiveResolution these are injective
-resolutions on the over-site of U. Their restricted comparison map lifts the
-isomorphism R(f), hence is a homotopy equivalence by comparison of injective
-resolutions. Sections on U of the original resolutions are precisely sections at
-the terminal object of these restricted resolutions. Applying this additive
-sections functor preserves the homotopy equivalence. Taking degree p homology
-therefore gives an isomorphism. Naturality of the injective-resolution comparison
-identifies it with the displayed openModuleCohomology map. This also treats the
-empty open and p = 0, without finiteness assumptions.
-(blueprint: lem-sc-open-module-cohomology-local-iso). -/
+/-- Open cohomology depends only on the restriction of a module morphism. -/
 theorem openModuleCohomology_map_isIso_of_overFunctor (X : RingedSpace.{u})
     (U : Opens X) {M N : SheafOfModules.{u} (moduleRings X)} (f : M ⟶ N)
     [IsIso ((SheafOfModules.overFunctor (moduleRings X) U).map f)] (p : ℕ) :

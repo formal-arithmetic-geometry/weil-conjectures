@@ -10,7 +10,21 @@ public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 
-/-! # Comparing topological resolution cocycles -/
+/-! # Comparing topological resolution cocycles
+
+A cocycle on an injective resolution of `f_*F` can be compared with an injective resolution of
+`F` and lifted uniquely to a terminal-section cocycle on the latter.
+
+## Implementation details
+
+Every term of `f_*I` is injective, so the comparison `φ` is constructed degreewise by injectivity
+and exactness of the resolution of `f_*F`. Maps from the free terminal sheaf `KZ` to `I^p`
+correspond bijectively to maps from `KX` to `f_*I^p` via `z ↦ a ≫ f_*z`.
+
+## References
+
+* [Stacks Project, Tags 01F2 and 01DZ](https://stacks.math.columbia.edu/tag/01F2)
+-/
 
 @[expose] public section
 
@@ -57,27 +71,8 @@ private lemma sectionEquiv_apply
         (FreeAbelianGroup.of (𝟙 U))) := by
   rfl
 
-/-- A cocycle on a resolution of f_*F can be compared with a resolution of F
-and lifted uniquely as a terminal-section cocycle on the latter.
-
-Source: Stacks Project, Tag 01F2 and the injective-resolution comparison construction,
-with terminal sections represented by the free abelian terminal sheaf (Tag 01DZ).
-(blueprint: lem-sc-topological-resolution-cocycle-lift)
-
-Proof: Every term of f_*I is injective, since inverse image is exact and left adjoint
-to direct image. Extend f_*(I.ι) across the monomorphism J.ι in degree zero using
-injectivity. Inductively factor the preceding differential through the cokernel of
-the preceding source differential, using exactness of the augmented resolution J;
-extend across its monomorphism into the next term of J using injectivity of the
-corresponding term of f_*I. This constructs phi and its augmentation equation.
-The terminal-section representation gives a bijection between maps KZ -> I^p
-and maps KX -> f_*I^p, realized by z mapping to a composed with f_*z: ha specifies
-this bijection on the sheafification generators, which determine the morphism.
-Apply its inverse to s composed with phi^p to obtain z and the stated equality.
-The chain-map identity and hs make s composed with phi^p a cocycle. Apply the
-same terminal-section bijection in degree p+1 to deduce hz. This argument uses
-no exactness of f_* and works in degree zero and for the zero sheaf.
--/
+/-- A cocycle on a resolution of `f_*F` can be compared with a resolution of `F`
+and lifted uniquely as a terminal-section cocycle on the latter. -/
 theorem exists_topological_resolution_cocycle_lift
     {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]
     (a : (presheafToSheaf (Opens.grothendieckTopology X)

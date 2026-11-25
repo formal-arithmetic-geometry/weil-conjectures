@@ -22,29 +22,24 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace TopCat
 
 /-! # Cohomology commutes with filtered colimits on quasi-compact spaces
-Source: literature/stacks-project/cohomology.tex, Lemma 01FF
-(blueprint: lem-sc-topological-filtered-cohomology).
+
+On a space with a quasi-compact open basis whose pairwise intersections are quasi-compact,
+cohomology over a quasi-compact open commutes with directed colimits.
+
+## Implementation details
+
+Degree zero is `abelianSections_preservesDirectedColimits`; higher degrees follow by induction
+using `preservesColimitsOfShape_rightDerived_succ`, whose acyclicity premise is
+`directedInjective_isZero_rightDerived_sections`, and the `Ext` cohomology functor is identified
+with derived sections by `nonempty_cohomologyPresheafFunctor_eval_iso_rightDerived`.
+
+## References
+
+* [Stacks Project, Tag 01FF](https://stacks.math.columbia.edu/tag/01FF)
 -/
 
 /-- On a space with a quasi-compact open basis whose pairwise intersections are
-quasi-compact, cohomology over a quasi-compact open commutes with directed colimits.
-
-Source: literature/stacks-project/cohomology.tex, Tag 01FF,
-lemma-quasi-separated-cohomology-colimit (abelian sheaves: constant ring sheaf ℤ).
-(blueprint: lem-sc-topological-filtered-cohomology).
-
-Proof:
-1. `abelianSections_preservesDirectedColimits` proves degree-zero preservation by
-   stalk colimits, finite compact refinements, eventual equality, and sheaf gluing.
-2. Induct on the derived degree. At zero use `rightDerivedZeroIsoSelf`. At the
-   successor use `preservesColimitsOfShape_rightDerived_succ`, which packages
-   functorial injective embeddings, exact filtered colimits, and the natural long
-   exact sequences. Its acyclicity premise is precisely
-   `directedInjective_isZero_rightDerived_sections` on the compact open in question.
-3. `nonempty_cohomologyPresheafFunctor_eval_iso_rightDerived` identifies the evaluated
-   Ext cohomology functor naturally with derived sections. Transport the colimit
-   universal property along this isomorphism and identify the resulting universal
-   comparison with the canonical map in the statement. -/
+quasi-compact, cohomology over a quasi-compact open commutes with directed colimits. -/
 theorem topological_filtered_cohomology
     (X : Type u) [TopologicalSpace X]
     (hbas : ∀ (U : Set X), IsOpen U → ∀ x ∈ U, ∃ V : Set X, IsOpen V ∧

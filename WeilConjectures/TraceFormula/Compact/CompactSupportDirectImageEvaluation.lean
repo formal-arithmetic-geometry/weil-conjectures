@@ -11,9 +11,18 @@ import WeilConjectures.TraceFormula.Compact.CompactSupportDirectImageDerivedEval
 
 /-! # Direct-image evaluation for compact support
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 03DI, 03DJ, 07A4, 0941.
-This module specializes the ordinary system calculus to the actual pro-etale functors.
-(blueprint: lem-trf-compact-support-direct-image-evaluation).
+Evaluation of the actual direct-image adjunction, specializing the ordinary system calculus to
+the actual pro-étale functors.
+
+## Implementation details
+
+The ordinary and derived components are supplied by their component theorems and assembled
+here.
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10.
+* [Stacks Project, Tags 03DI, 03DJ, 07A4 and 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -38,13 +47,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Evaluation of the actual direct-image adjunction, including the ordinary
 section formula and the derived arbitrary-resolution formula. No open extension or
-finite-coefficient transition comparison is asserted.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941 and 07A4.
-The ordinary and derived components are supplied by their strictly smaller
-component theorems and assembled here.  The final two equations are exactly the
-mate unit and counit equations from the derived component.
-(blueprint: lem-trf-compact-support-direct-image-evaluation).
--/
+finite-coefficient transition comparison is asserted. The final two equations are the mate unit
+and counit equations. -/
 theorem compactSupportDirectImageEvaluation
     {Z Y : Scheme.{t}} (p : Z ⟶ Y)
     [(integralComparisonSequenceDirectImage l E p).Additive]

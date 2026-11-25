@@ -10,7 +10,12 @@ import all WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import all Mathlib.CategoryTheory.Limits.HasLimits
 
-/-! # Functor naturality of the diagonal Roos comparison -/
+/-! # Functor naturality of the diagonal Roos comparison
+
+## References
+
+* Stacks Project, Tag 0941.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,15 +29,7 @@ universe a b c d
 variable {𝒜 : Type a} [Category.{b} 𝒜] [Abelian 𝒜] [HasCountableProducts 𝒜]
   {ℬ : Type c} [Category.{d} ℬ] [Abelian ℬ] [HasCountableProducts ℬ]
 
-/-- The diagonal Roos comparison is natural in the additive functor.
-Source: Stacks 0941, the two product coordinates of the Roos complex.
-(blueprint: lem-pur-scalar-roos-functor-naturality).
-
-Proof: compose with each projection of the first product. The defining scalar
-Roos formulas and the strict tower-map formula give exactly the naturality
-square of the functor transformation. The shifted product gives the same square
-in degree i-1. Product projections are jointly monic, and the two cocone
-coordinates sum to the identity, so these equations determine the chain map. -/
+/-- The diagonal Roos comparison is natural in the additive functor. -/
 theorem scalarRoos_functor_naturality (F G : 𝒜 ⥤ ℬ) [F.Additive] [G.Additive]
     (α : F ⟶ G) (C : ℕᵒᵖ ⥤ CochainComplex 𝒜 ℤ) :
     (NatTrans.mapHomologicalComplex α (.up ℤ)).app (integralOperationsRoos C) ≫

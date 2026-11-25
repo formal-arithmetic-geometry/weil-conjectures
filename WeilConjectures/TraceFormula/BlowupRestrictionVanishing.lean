@@ -20,14 +20,20 @@ be a bounded complex on `T - (D ∪ H)` with finite locally constant cohomology 
 ```
 RΓ(T - D, i_! E) ⟶ RΓ(B - t, (i_! E)|_{B - t})
 ```
-is zero (blueprint `lemma-vanishing-restrictions-after-blowing-up--1`).
+is zero.
 
 The curves are given by equations `f, g, h ∈ R = 𝒪^{sh}_{S,t}` (`T = Spec R` is the spectrum of a
 two-dimensional regular local ring, a factorial ring, so every curve through `t` is principal),
 with `h ∈ 𝔪 ∖ 𝔪²`; `T - D` and `T - (D ∪ H)` are the basic opens of `f` and `fh`, and `B - t` is
 the punctured spectrum of `R/(g)` (`AlgebraicGeometry.Scheme.puncturedCurveMap`).
 
-Following the blueprint proof, `t` is blown up: in a chart of the blow-up containing all the
+## Main results
+
+- `AlgebraicGeometry.Etale.blowupRestriction_eq_zero`: the blowup restriction vanishing.
+
+## Implementation details
+
+The point `t` is blown up: in a chart of the blow-up containing all the
 relevant points of the exceptional divisor (`AlgebraicGeometry.nonempty_blowupChartData`), the
 complement `Z` of the strict transform of `D` is an étale limit of smooth surfaces
 (`AlgebraicGeometry.Scheme.exists_isEtaleLimitOfSmoothSurfaces_blowupChart`), the exceptional
@@ -35,10 +41,6 @@ divisor `Y` and the strict transform `X` of `H` form a transverse boundary confi
 strict transform of `B` is a finite disjoint union of strictly local curves centred on `Y`;
 the restriction then vanishes by the punctured restriction lemma
 (`AlgebraicGeometry.Etale.blowupRestriction_eq_zero_of_chartData`).
-
-## Main results
-
-- `AlgebraicGeometry.Etale.blowupRestriction_eq_zero`: the blowup restriction vanishing.
 -/
 
 @[expose] public section
@@ -62,7 +64,7 @@ lemma maximalIdeal_le_radical_of_smooth (ht : t ≫ S.hom = 𝟙 _)
   rw [Ideal.span_insert]
   exact hfg.maximalIdeal_le_radical
 
-/-- **Blowup restriction vanishing** (blueprint `lemma-vanishing-restrictions-after-blowing-up--1`).
+/-- **Blowup restriction vanishing**.
 Let `T = Spec R` be the strict localization of a smooth surface `S` over the algebraically closed
 field `k` at a `k`-point `t`, `ℓ` a prime invertible in `k` and `Λ` a finite `ℓ`-primary ring. Let
 `D = V(f)`, `B = V(g)` be curves through `t` (`f, g ≠ 0`, `g ∈ 𝔪`) and `H = V(h)` a regular

@@ -21,8 +21,6 @@ union of the fixed rational points, the Lefschetz–Verdier formula
 as the sum of the local terms, and the graph of the model Frobenius is contracting at its fixed
 points, so that each local term is the trace of the stalk map
 (`ProEtale.CondensedRing.Correspondence.localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt`).
-This is Step 2 of the proof of blueprint `theorem-trace-formula-frobenius-correspondence--1` (on
-`ℙ¹`), for an arbitrary proper scheme.
 
 -/
 
@@ -57,9 +55,9 @@ lemma traceFormulaHolds_congr {Φ Φ' : X ⟶ X} (e : Φ = Φ') [IsProper Φ.lef
 
 namespace Correspondence
 
-/-- **The fixed locus of a Frobenius graph** (blueprint `lemma-frobenius-fixed-scheme--1`): for
-the model Frobenius `Φ` and `m ≥ 1`, the disjoint union `∐ Spec k` of the rational points fixed
-by `Φ_m` is a fixed locus of the graph correspondence `(𝟙, Φ_m)` with any coefficient map. -/
+/-- **The fixed locus of a Frobenius graph**: for the model Frobenius `Φ` and `m ≥ 1`, the
+disjoint union `∐ Spec k` of the rational points fixed by `Φ_m` is a fixed locus of the graph
+correspondence `(𝟙, Φ_m)` with any coefficient map. -/
 noncomputable def ofGraphFixedLocus [IsAlgClosed k] (hΦ : IsModelFrobenius Φ f₀ p) (hm : 1 ≤ m)
     [Finite (FixedPoint Φ m)] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -85,8 +83,7 @@ lemma liftPoint_ofGraphFixedLocus [IsAlgClosed k] (hΦ : IsModelFrobenius Φ f�
 end Correspondence
 
 set_option linter.overlappingInstances false in
-/-- **The trace formula on a proper scheme in degree `m`** (blueprint
-`theorem-trace-formula-frobenius-correspondence--1`, Step 2): for a proper `X` with the model
+/-- **The trace formula on a proper scheme in degree `m`**: for a proper `X` with the model
 Frobenius `Φ` and `m ≥ 1`, the trace formula in degree one holds for `Φ_m`. -/
 theorem traceFormulaHolds_frobeniusIterate_of_isProper [IsAlgClosed k] [IsProper X.hom]
     [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p) [IsProper Φ.left] (hm : 1 ≤ m) :
@@ -114,11 +111,8 @@ theorem traceFormulaHolds_frobeniusIterate_of_isProper [IsAlgClosed k] [IsProper
   rw [Set.mem_singleton_iff, Subsingleton.elim (α := Spec (.of k)) z default]
 
 set_option linter.overlappingInstances false in
-/-- **The trace formula on a proper scheme** (blueprint
-`theorem-trace-formula-frobenius-correspondence--1`, Step 2, from
-`theorem-proper-pushforward-lefschetz-verdier`, `proposition-frobenius-local-term-curve--1` and
-`lemma-frobenius-fixed-scheme--1`): for a proper `X` with the model Frobenius `Φ` of a model over a
-finite field, the trace formula in degree one holds. -/
+/-- **The trace formula on a proper scheme**: for a proper `X` with the model Frobenius `Φ` of a
+model over a finite field, the trace formula in degree one holds. -/
 theorem traceFormulaHolds_of_isProper [IsAlgClosed k] [IsProper X.hom]
     [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p) [IsProper Φ.left] :
     TraceFormulaHolds ℓ Φ := by

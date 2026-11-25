@@ -9,8 +9,9 @@ public import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionT
 
 /-! # Tensor-unit formula for scalar/pullback quotient coordinates
 
-Source: Stacks 06YY, 07A4 and 0941
-(blueprint: stage3-pur-scalar-pullback-roos-coordinates).
+## References
+
+* Stacks Project, Tags 06YY, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +28,7 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- The fixed tensor-unit equation for a strict scalar/pullback quotient comparison.
-Source: Stacks 06YY, 07A4 (blueprint: stage3-pur-scalar-pullback-roos-coordinates). -/
+/-- The fixed tensor-unit equation for a strict scalar/pullback quotient comparison. -/
 def ScalarPullbackQuotientFormula
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : (integralOperationsGoodComplex.{u, u} l E Y).FullSubcategory)

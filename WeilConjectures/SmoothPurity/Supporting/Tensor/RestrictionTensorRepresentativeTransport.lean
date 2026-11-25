@@ -10,12 +10,9 @@ import WeilConjectures.SmoothPurity.Supporting.Tensor.RestrictionTensorRepresent
 
 /-! # Enlargement of restriction tensor representatives
 
-Source: lemma-section-normal-bundle--1, common-stage subargument
-(blueprint: lem-pur-restriction-tensor-representative-transport).
-
-The component calculation from steps 3--5 of the common-stage restriction tensor
-argument. It compares two representatives of a single component; no natural
-transformation or choice of a colimit component is part of the assertion.
+The component calculation of the common-stage restriction tensor argument. It compares two
+representatives of a single component; no natural transformation or choice of a colimit
+component is part of the assertion.
 -/
 
 @[expose] public noncomputable section
@@ -49,17 +46,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The mixed tensor square identifies the class of the compositum representative
-with its class at every larger finite field.
-Source: lemma-section-normal-bundle--1, common-stage subargument, steps 3--5
-(blueprint: lem-pur-restriction-tensor-representative-transport).
-Proof: write c_H as mu_H followed by the tensor of the inverse pullback scalar
-comparisons. At L, tensor comparison naturality moves the scalar extension of
-these inverse comparisons past theta. Cancel the two pullback comparisons in
-the mixed square. The pullback scalar tower equations identify each remaining
-input comparison with the direct one from its original field to L. Naturality
-of mu_L moves both input associators past mu_L. The resulting expression is
-exactly the source and target associator conjugate of c_H. The pair-category
-transport rule therefore identifies the two classes, including L=H. -/
+with its class at every larger finite field. -/
 theorem restrictionTensorRepresentativeTransport
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

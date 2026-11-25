@@ -21,15 +21,22 @@ public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 /-!
 # Ordinary and derived comparison data for completion
 
-Source: blueprint main-20261015, trace formula, rational Frobenius integral model,
-proof (2)--(3); Stacks 07A6, 09T5, 0D6E, 0941 and 08TC. This is the normalization
-refinement of those constructions, not a verbatim assertion of a Stacks tag.
-(blueprint: def-trf-completion-unit-models).
+Ordinary and derived comparison data for the completion of coefficient systems: the
+quotient-system tensor functor with its ordinary adjunction to the inverse limit, and canonical
+derived comparisons for it.
+
+## Implementation details
 
 The auxiliary structures package canonical constructions and their normalization
 conditions. They introduce no alternative tensor, limit, or derived category.
 Their existence and the strict-cone unit formula are stated in separate modules.
 Index n denotes the positive exponent n+1. Site and coefficient universes are independent.
+These are normalization refinements of the Stacks constructions, not verbatim assertions of
+Stacks tags.
+
+## References
+
+* Stacks Project, Tags 03EK, 06YY, 07A6, 09T5, 0D6E, 0941 and 08TC
 -/
 
 @[expose] public noncomputable section
@@ -51,21 +58,17 @@ namespace CompletionUnit
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- Exact restriction of a system complex to its completed-coefficient tower.
-Source: Stacks 0941 (blueprint: def-trf-completion-unit-models). -/
+/-- Exact restriction of a system complex to its completed-coefficient tower. -/
 abbrev tower := (coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)
 
-/-- The ordinary sequence direct image: restriction of rings followed by inverse limit.
-Source: Stacks 07A6, 0941 (blueprint: def-trf-completion-unit-models). -/
+/-- The ordinary sequence direct image: restriction of rings followed by inverse limit. -/
 abbrev ordinaryLimit := coefficientSequenceRestriction l E W ⋙
   (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W)
 
 /-- The quotient-system tensor functor with its ordinary adjunction and actual tensor
 unit. The evaluation isomorphisms identify its components with the recorded scalar
 extension, and `transition` fixes the strict quotient maps, including all levels.
-`unit_tensor` fixes the adjunction itself on sections, rather than only its functors.
-Source: Stacks 03EK, 07A6, 0941 and item proof step 2
-(blueprint: def-trf-completion-unit-models). -/
+`unit_tensor` fixes the adjunction itself on sections, rather than only its functors. -/
 structure OrdinaryModel where
   tensor : scalarReductionSource l E W ⥤ coefficientSequenceModules l E W
   [additive : tensor.Additive]
@@ -94,14 +97,11 @@ structure OrdinaryModel where
 
 attribute [instance] OrdinaryModel.additive
 
-/-- The strict quotient system of a complex is the termwise ordinary tensor functor.
-Source: Stacks 06YY, 0941 (blueprint: def-trf-completion-unit-models). -/
+/-- The strict quotient system of a complex is the termwise ordinary tensor functor. -/
 abbrev OrdinaryModel.quotient (M : OrdinaryModel l E W) :=
   M.tensor.mapHomologicalComplex (.up ℤ)
 
-/-- The ordinary-adjunction transpose, in the canonical termwise-limit coordinates.
-Source: Stacks 07A6 and item proof step 2
-(blueprint: def-trf-completion-unit-models). -/
+/-- The ordinary-adjunction transpose, in the canonical termwise-limit coordinates. -/
 def OrdinaryModel.transpose (M : OrdinaryModel l E W)
     {Q : CochainComplex (scalarReductionSource l E W) ℤ}
     {I : CochainComplex (coefficientSequenceModules l E W) ℤ}
@@ -110,9 +110,7 @@ def OrdinaryModel.transpose (M : OrdinaryModel l E W)
   (M.adjunction.mapHomologicalComplex (.up ℤ)).homEquiv Q I a ≫
     M.limitComparison.hom.app I
 
-/-- The strict quotient augmentation to the ordinary limit; its level maps are z tensor 1.
-Source: Stacks 07A6, 0941 and item proof steps 2, 5
-(blueprint: def-trf-completion-unit-models). -/
+/-- The strict quotient augmentation to the ordinary limit; its level maps are z tensor 1. -/
 def OrdinaryModel.augmentation (M : OrdinaryModel l E W)
     (Q : CochainComplex (scalarReductionSource l E W) ℤ) :
     Q ⟶ limit ((tower l E W).obj ((M.quotient l E W).obj Q)).asFunctor :=
@@ -123,9 +121,7 @@ The limit unit is pinned on every K-injective tower by the existing right-derive
 functor comparison. The Roos isomorphism is normalized on the ordinary inclusion.
 The system unit is the composition comparison for exact restriction and projection.
 Finally `hom_normalization` derives the ordinary Hom correspondence on chain maps.
-These conditions specify comparisons, rather than postulating arbitrary isomorphisms.
-Source: Stacks 09T5, 0D6E, 0941 and item proof steps 3--4, 6
-(blueprint: def-trf-completion-unit-models). -/
+These conditions specify comparisons, rather than postulating arbitrary isomorphisms. -/
 structure DerivedModel (S : CoefficientDerivedSystemCalculus l E W)
     (M : OrdinaryModel l E W) where
   towerLimitComparison :
@@ -181,9 +177,7 @@ structure DerivedModel (S : CoefficientDerivedSystemCalculus l E W)
         systemUnit.app I
 
 /-- The strict cone augmentation is the ordinary-limit lift followed by the existing
-zero-shifted-coordinate Roos inclusion. Thus this is a real chain map by construction.
-Source: Stacks 08TC, 0941 and item proof step 5
-(blueprint: def-trf-completion-unit-models). -/
+zero-shifted-coordinate Roos inclusion. Thus this is a real chain map by construction. -/
 def OrdinaryModel.coneAugmentation (M : OrdinaryModel l E W)
     (Q : CochainComplex (scalarReductionSource l E W) ℤ) :
     Q ⟶ roosF.obj ((tower l E W).obj ((M.quotient l E W).obj Q)) :=
@@ -191,9 +185,7 @@ def OrdinaryModel.coneAugmentation (M : OrdinaryModel l E W)
 
 /-- The normalized Roos comparison to the simultaneous reduction/limit object.
 Both transports are the recorded localization comparison for exact restriction and
-the universal left-derived comparison on the specified K-flat complex.
-Source: Stacks 09T5, 0941 and item proof steps 3, 6
-(blueprint: def-trf-completion-unit-models). -/
+the universal left-derived comparison on the specified K-flat complex. -/
 def DerivedModel.completionComparison
     {S : CoefficientDerivedSystemCalculus l E W} {M : OrdinaryModel l E W}
     (D : DerivedModel l E W S M) (Q : CochainComplex (scalarReductionSource l E W) ℤ)

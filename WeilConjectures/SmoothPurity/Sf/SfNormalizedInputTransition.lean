@@ -9,7 +9,13 @@ public import WeilConjectures.SmoothPurity.Sf.SfDerivedDirectImage
 public import WeilConjectures.SmoothPurity.CompactSupportProperImageTower.CompactSupportProperImageTower
 import WeilConjectures.SmoothPurity.Sf.SfDirectImageInputTransitionAdjacent
 
-/-! # The normalized adjacent input transition -/
+/-! # The normalized adjacent input transition
+
+## References
+
+* Stacks Project, Tags 06YY and 07A6.
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -144,16 +150,7 @@ private theorem adjacentRestrictionComp (n : ℕ) :
   rw [he]
   exact derivedComp_change _ _ _ _ _ (eqIso_comp _ h h₁ h₀)
 
-/-- The normalized finite quotient has the canonical completed coefficient transition.
-Source: Stacks Tags 06YY and 07A6; Bhatt--Scholze, Definition 3.5.2.
-(blueprint: lem-sf-normalized-input-transition).
-Proof: choose a K-flat model of K. The finite scalar-extension adjunction is normalized
-by the tensor unit. Its transpose defining reductionMap is therefore id tensor the
-quotient, whose completed restriction is the canonical quotient transition. The
-normalized restriction compositor is the identity on sections. The same computation
-identifies the quotient-based compact-support transition with the canonical transition
-by sfDirectImageInputTransition_adjacent. Localization through the K-flat models and
-naturality give the identity for K, including the zero object. -/
+/-- The normalized finite quotient has the canonical completed coefficient transition. -/
 theorem sfNormalizedInputTransition
     (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :
     (coefficientFiniteDerivedRestriction l E X (n + 1)).map

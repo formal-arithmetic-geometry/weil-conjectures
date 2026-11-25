@@ -30,11 +30,14 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 /-!
 # Finite and integral derived direct images with canonical quotient comparisons
 
-Source: Weil blueprint, order 1468; Bhatt--Scholze, Sections 6.5 and 6.7;
-Stacks Tags 03DA, 0D6E and 06YY (blueprint: prose-03-02).
 The integral object is presented as a chosen Roos triangle, in accordance with the
 recorded definition of derived limit; the finite comparison is the adjunct of its
 specified projection, rather than a chosen isomorphism of its endpoints.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Sections 6.5 and 6.7.
+* Stacks Project, Tags 03CO, 03DA, 06YY, 07A5, 07A6, 0D6E and 0D6J.
 -/
 
 @[expose] public section
@@ -88,12 +91,7 @@ private theorem constantDirectImage_naturality_ring
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The completed coefficient structure map is uniquely determined by its finite
-projections and the canonical constant-section maps.
-Source: Stacks Tags 03CO and 03DA (blueprint: prose-03-02).
-Proof: direct image is a right adjoint and preserves the inverse limit defining
-completed coefficients. The constant-section maps commute with quotient maps, so
-compose the projections with them and use the universal property of that limit.
-Its projections are jointly monic, which proves uniqueness. -/
+projections and the canonical constant-section maps. -/
 theorem sfCompletedCoefficientMap_existsUnique :
     ∃! φ : completedIntegralCommRingSheafUnrestricted l E Y ⟶
       (proEtaleSheafDirectImage f CommRingCat.{u + 1}).obj
@@ -147,13 +145,11 @@ theorem sfCompletedCoefficientMap_existsUnique :
   ext U x
   exact congrArg (fun a ↦ a.hom.app U x) ((hψ n.unop).trans (hφ n.unop).symm)
 
-/-- The canonical completed-ring map, with its finite-coordinate normalization.
-Source: Stacks Tag 03DA (blueprint: prose-03-02). -/
+/-- The canonical completed-ring map, with its finite-coordinate normalization. -/
 noncomputable def sfCompletedCoefficientMap :=
   (sfCompletedCoefficientMap_existsUnique l E f).exists.choose
 
-/-- Ordinary direct image over completed coefficients, with the canonical ring map.
-Source: Stacks Tag 03DA (blueprint: prose-03-02). -/
+/-- Ordinary direct image over completed coefficients, with the canonical ring map. -/
 noncomputable def sfCompletedModuleDirectImage :
     scalarReductionSource.{u, u} l E X ⥤ scalarReductionSource.{u, u} l E Y :=
   SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange f)
@@ -162,10 +158,7 @@ noncomputable def sfCompletedModuleDirectImage :
     ⟨Functor.whiskerRight (sfCompletedCoefficientMap l E f).hom
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
 
-/-- Completed-coefficient direct image is additive.
-Source: Stacks Tag 03DA (blueprint: prose-03-02).
-Proof: the functor precomposes the underlying sheaf and its linear maps with base
-change. Addition of maps is sectionwise, and scalar restriction respects it. -/
+/-- Completed-coefficient direct image is additive. -/
 theorem sfCompletedModuleDirectImage_additive : (sfCompletedModuleDirectImage l E f).Additive := by
   constructor
   intro M N a b
@@ -174,15 +167,13 @@ theorem sfCompletedModuleDirectImage_additive : (sfCompletedModuleDirectImage l 
 
 attribute [instance] sfCompletedModuleDirectImage_additive
 
-/-- K-injective resolutions for the same completed coefficient module category.
-Source: Stacks Section 07A5 (blueprint: prose-03-02). -/
+/-- K-injective resolutions for the same completed coefficient module category. -/
 noncomputable instance sfCompletedHasKInjectiveResolutions (T : AlgebraicGeometry.Scheme.{u}) :
     Abelian.HasKInjectiveResolutions (scalarReductionSource.{u, u} l E T) :=
   proEtaleRingModules_hasKInjectiveResolutions T
     (completedIntegralCommRingSheafUnrestricted l E T)
 
-/-- The ordinary unbounded derived image for completed coefficients.
-Source: Stacks Section 07A5 (blueprint: prose-03-02). -/
+/-- The ordinary unbounded derived image for completed coefficients. -/
 noncomputable abbrev sfCompletedDerivedDirectImage :
     DerivedCategory (scalarReductionSource.{u, u} l E X) ⥤
       DerivedCategory (scalarReductionSource.{u, u} l E Y) :=
@@ -190,11 +181,7 @@ noncomputable abbrev sfCompletedDerivedDirectImage :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The exact finite-coefficient scalar square, normalized by identity on sections.
-Source: Stacks Tag 0D6E (blueprint: prose-03-02).
-Proof: both functors have sections N(X times_Y V). Compatibility of the completed
-ring map with its finite projection makes their scalar actions identical. Identity
-on sections therefore gives a linear natural isomorphism, uniquely. -/
+/-- The exact finite-coefficient scalar square, normalized by identity on sections. -/
 theorem sfDirectImageRestrictionComparison_existsUnique (n : ℕ) :
     ∃! e : proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 1)) ⋙
           scalarReductionRestriction.{u, u} l E Y n ≅
@@ -266,8 +253,7 @@ theorem sfDirectImageRestrictionComparison_existsUnique (n : ℕ) :
   ext U x
   exact he' M U x
 
-/-- The uniquely normalized underived coefficient comparison.
-Source: Stacks Tag 0D6E (blueprint: prose-03-02). -/
+/-- The uniquely normalized underived coefficient comparison. -/
 noncomputable def sfDirectImageRestrictionComparison (n : ℕ) :=
   (sfDirectImageRestrictionComparison_existsUnique l E f n).exists.choose
 
@@ -644,16 +630,7 @@ private theorem derivedRestrictionSquare_existsUnique
   rw [← d'.hom.naturality, ← d.inv.naturality, hj]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Derived coefficient restriction comparison, normalized on K-injective resolutions.
-Source: Stacks Tags 0D6E and 0D6J (blueprint: prose-03-02).
-Proof: exact restriction descends termwise. Apply canonical ringed-topos composition
-to the two factorizations of the same morphism of ringed topoi. The equality of the
-structural maps follows from the finite-coordinate normalization above. Resolve a
-finite-coefficient K-injective complex after restriction, and compare both total
-right-derived units with the identity-on-sections square. Composition gives the
-stated equation. It uniquely determines the isomorphism on K-injective representatives,
-hence on every derived object and every roof, without assuming restriction preserves
-K-injectives. -/
+/-- Derived coefficient restriction comparison, normalized on K-injective resolutions. -/
 theorem sfDerivedRestrictionComparison_existsUnique (n : ℕ) :
     ∃! e : scalarReductionDerivedRestriction.{u, u} l E X n ⋙
           sfCompletedDerivedDirectImage l E f ≅
@@ -703,26 +680,22 @@ theorem sfDerivedRestrictionComparison_existsUnique (n : ℕ) :
       exact hq)
   exact h
 
-/-- The canonical derived comparison selected by its resolution characterization.
-Source: Stacks Tag 0D6E (blueprint: prose-03-02). -/
+/-- The canonical derived comparison selected by its resolution characterization. -/
 noncomputable def sfDerivedRestrictionComparison (n : ℕ) :=
   (sfDerivedRestrictionComparison_existsUnique l E f n).exists.choose
 
-/-- The finite derived image of the derived reduction of K at exponent n+1.
-Source: blueprint order 1468 (blueprint: prose-03-02). -/
+/-- The finite derived image of the derived reduction of K at exponent n+1. -/
 noncomputable abbrev sfFiniteDerivedDirectImage
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) (n : ℕ) :=
   (proEtaleConstantDerivedDirectImage f (Padic.coefficientExtensionRing l E (n + 1))).obj
     ((scalarReductionDerivedExtension.{u, u} l E X n).obj K)
 
-/-- The restricted finite-image term in the integral tower.
-Source: blueprint order 1468 (blueprint: prose-03-02). -/
+/-- The restricted finite-image term in the integral tower. -/
 noncomputable abbrev sfDirectImageTerm
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) (n : ℕ) :=
   (scalarReductionDerivedRestriction.{u, u} l E Y n).obj (sfFiniteDerivedDirectImage l E f K n)
 
-/-- The coefficient transition, transported through the canonical restriction square.
-Source: blueprint order 1468 (blueprint: prose-03-02). -/
+/-- The coefficient transition, transported through the canonical restriction square. -/
 noncomputable def sfDirectImageTransition
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) (n : ℕ) :
     sfDirectImageTerm l E f K (n + 1) ⟶ sfDirectImageTerm l E f K n :=
@@ -734,9 +707,7 @@ noncomputable def sfDirectImageTransition
 
 /-- The integral direct image is a derived limit with its specified Roos projection.
 Its objects are exactly the chosen derived limits of the finite-image tower; its
-projection supplies the canonical finite-reduction comparison.
-Source: blueprint order 1468; Bhatt--Scholze, Section 6.5
-(blueprint: prose-03-02). -/
+projection supplies the canonical finite-reduction comparison. -/
 structure SfIntegralDirectImage
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X))
     [HasProduct (sfDirectImageTerm l E f K)] where
@@ -746,9 +717,7 @@ structure SfIntegralDirectImage
   roos : IsDerivedLimitTriangle (sfDirectImageTransition l E f K) obj projection boundary
 
 /-- The actual finite-reduction comparison: the scalar-extension adjunct of the
-n-th projection of the specified Roos triangle.
-Source: blueprint order 1468; Stacks Tag 07A6
-(blueprint: prose-03-02). -/
+n-th projection of the specified Roos triangle. -/
 noncomputable def sfDirectImageReductionComparison
     {K : DerivedCategory (scalarReductionSource.{u, u} l E X)}
     [HasProduct (sfDirectImageTerm l E f K)] (L : SfIntegralDirectImage l E f K) (n : ℕ) :

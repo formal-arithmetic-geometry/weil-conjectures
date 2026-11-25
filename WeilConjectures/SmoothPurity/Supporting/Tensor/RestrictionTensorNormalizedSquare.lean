@@ -12,7 +12,7 @@ import all Mathlib.Logic.Small.Defs
 
 /-! # Normalization of the restriction tensor mixed square
 
-Proved helper for restriction tensor representative stage transport.
+A helper for the stage transport of restriction tensor representatives.
 -/
 
 @[expose] public noncomputable section
@@ -95,14 +95,7 @@ private theorem mixed_square_transport
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The given scalar mixed square holds for the normalized stage comparisons.
-
-Source: lemma-section-normal-bundle--1, common-stage subargument, steps 3–5.
-Proof: The stage system transition is equal to the specified scalar extension functor.
-Substitute these two functor equalities in the mixed square. The conjugating eqToIso
-isomorphisms are then reflexive, so whiskering and composition with them cancel.
-The resulting square is the square of the normalized stage comparisons.
-(blueprint: lem-pur-restriction-tensor-normalized-square). -/
+/-- The given scalar mixed square holds for the normalized stage comparisons. -/
 theorem restrictionTensorNormalizedSquare
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

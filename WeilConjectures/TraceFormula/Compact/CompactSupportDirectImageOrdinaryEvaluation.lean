@@ -9,10 +9,18 @@ public import WeilConjectures.TraceFormula.Compact.CompactSupportSystemEvaluatio
 
 /-! # Ordinary direct-image evaluation for compact support
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 0941.
-(blueprint: lem-trf-compact-support-direct-image-ordinary-evaluation).
-
 This is the ordinary sectionwise component of the direct-image evaluation theorem.
+
+## Implementation details
+
+The direct image is computed on the sequence site by restriction along `proEtaleBaseChange p`;
+evaluating at `n` computes the same section as the finite coefficient direct image, and the
+coefficient map is the constant-section map.
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10.
+* [Stacks Project, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -84,16 +92,7 @@ private theorem compactSupportIsoTrans_sections
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The ordinary direct-image comparison is sectionwise the identity.
-
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 0941.
-The direct image is computed on the sequence site by restriction along
-`proEtaleBaseChange p`; evaluating at `n` computes the same section as the finite
-coefficient direct image.  The coefficient map is the constant-section map, so the
-comparison is identity on every section.  This smaller statement supplies exactly
-the ordinary component used by the parent theorem.
-(blueprint: lem-trf-compact-support-direct-image-ordinary-evaluation).
--/
+/-- The ordinary direct-image comparison is sectionwise the identity. -/
 theorem compactSupportDirectImageOrdinaryEvaluation
     {Z Y : Scheme.{t}} (p : Z ⟶ Y) :
     ∃ (ordinary : ∀ n : ℕ,

@@ -13,8 +13,18 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 /-!
 # Tensor products of presheaf module stalks
 
-Source: Stacks Project, Modules, Tag 01CB (lemma-stalk-tensor-product),
-presheaf comparison in the omitted proof; compare the scalar-extension case in Sheaves, Tag 007K.
+Taking the stalk of the sectionwise tensor product of presheaves of modules commutes with tensor
+products.
+
+## Implementation details
+
+The forward comparison is induced by the germ maps through the colimit universal property; the
+inverse is the tensor lift of the pairing of two stalks obtained by representing both germs on a
+common neighbourhood.
+
+## References
+
+* [Stacks Project, Tags 01CB and 007K](https://stacks.math.columbia.edu/tag/01CB)
 -/
 
 @[expose] public section
@@ -30,28 +40,7 @@ namespace PresheafOfModules
 noncomputable section
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Taking the stalk of the sectionwise tensor product commutes with tensor products.
-Source: Stacks Project, Modules, Tag 01CB (lemma-stalk-tensor-product), the presheaf
-comparison in its omitted proof; compare Sheaves, Tag 007K for extension of scalars.
-(blueprint: lem-pc-presheaf-module-stalk-tensor).
-
-Proof:
-1. The two germ maps give a balanced additive pairing on sections of each neighborhood.
-   Lift it to the section tensor product. These additive maps commute with restriction
-   by the tensor restriction formula and `germ_res_apply`; the colimit universal property
-   gives the forward additive comparison `p` on the tensor-presheaf stalk.
-2. Represent two module germs on a common neighborhood and take the germ of their tensor.
-   Equality of germs is equality after restriction to a smaller neighborhood. Apply this
-   separately to both factors, intersect the resulting neighborhoods, and use tensor
-   restrictions to prove that the tensor germ is independent of the representatives.
-3. This defines a pairing on the two stalks. To check additivity, represent the three
-   vectors on a common neighborhood. To check linearity, also represent the scalar on
-   that neighborhood and use `germ_smul`. Thus the pairing is bilinear over the stalk ring.
-4. Its tensor lift `q` is inverse to `p`: on stage pure tensors this is the defining
-   germ formula; in the other direction represent both factors on a common neighborhood.
-   Tensor induction proves the inverse identities on all elements.
-5. Because `q` is linear, its additive inverse `p` is linear as well. The bijective
-   linear map gives the displayed module isomorphism and its germ formula. -/
+/-- Taking the stalk of the sectionwise tensor product commutes with tensor products. -/
 theorem exists_stalk_tensor_iso {X : TopCat.{u}} (R : X.Presheaf CommRingCat.{u})
     (x : X) (F G : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat RingCat)) :
     ∃ e : ModuleCat.of (R.stalk x)

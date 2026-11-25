@@ -28,10 +28,6 @@ public import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensi
 public import WeilConjectures.SmoothPurity.Sf.SfRationalizationKaroubi
 /-! # Scalar comparison for the specified strict-tower direct image
 
-Source: blueprint, sec-smooth-purity/sk-prop-sf-closed-unit,
-rational-stage and algebraically closed-stage scalar comparisons; Stacks 0D6E and 0A07
-(blueprint: lem-sf-strict-direct-image-scalar-comparison).
-
 The statement retains the strict complex diagram, its quotient augmentation, the
 universal derived units, and the tensor-generator normalization of the ambient comparison.
 Its rational categories are the existing raw tensor-Hom localizations.
@@ -44,6 +40,11 @@ Its rational categories are the existing raw tensor-Hom localizations.
 * `HasIntegralLaws` and `HasComparisonLaws` state all normalization and coherence laws.
 
 The existence theorem remains in `SfStrictDirectImageScalarComparison`.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2.
+* Stacks Project, Tags 06YS, 0A07 and 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -63,25 +64,20 @@ namespace WeilConjectures.SfStrictDirectImageScalar
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Good representatives of integral constructible objects, with no chosen resolutions.
-Source: blueprint strict-diagram realization, Stacks 06YS
-(blueprint: lem-sf-strict-direct-image-scalar-comparison). -/
+/-- Good representatives of integral constructible objects, with no chosen resolutions. -/
 def Representatives (W : Scheme.{u}) :
     ObjectProperty (CochainComplex (scalarReductionSource l E W) ℤ) :=
   fun P ↦ integralOperationsGoodComplex l E W P ∧
     sfIntegralConstructible l E W (DerivedCategory.Q.obj P)
 
-/-- The existing localization restricted to these representatives.
-Source: Stacks 06YS (blueprint: lem-sf-strict-direct-image-scalar-comparison). -/
+/-- The existing localization restricted to these representatives. -/
 def representativeLocalization (W : Scheme.{u}) :
     (Representatives l E W).FullSubcategory ⥤ sfIntegralConstructibleCategory l E W :=
   ObjectProperty.lift (sfIntegralConstructible l E W)
     ((Representatives l E W).ι ⋙ DerivedCategory.Q) (fun P ↦ P.property.2)
 
 /-- The actual strict quotient tower on a complex, including its transition maps.
-This is just the existing sequence of natural reduction functors, curried.
-Source: Bhatt--Scholze 3.5.2
-(blueprint: lem-sf-strict-direct-image-scalar-comparison). -/
+This is just the existing sequence of natural reduction functors, curried. -/
 abbrev strictReduction (W : Scheme.{u}) :=
   (Functor.ofOpSequence (X := fun n ↦ unrestrictedIntegralComplexFunctor l E W n)
     (unrestrictedIntegralTransition l E W)).flip
@@ -91,9 +87,7 @@ set_option genInjectivity false in
 /-- A functorial strict-diagram realization with the normalized reconstruction map.
 The diagram is specified before applying its total derived direct image and limit.
 The comparison is fixed on every flat-term K-flat constructible representative by
-its actual augmentation, rather than by its evaluated projections.
-Source: blueprint strict-realization and reconstruction paragraphs; Stacks 0D6E, 0A07
-(blueprint: lem-sf-strict-direct-image-scalar-comparison). -/
+its actual augmentation, rather than by its evaluated projections. -/
 structure IntegralModel {Z X : Scheme.{u}} (f : Z ⟶ X) where
   diagrams : CompletedCoefficientPushforward.ComparisonData l E f
   structureMap : diagrams.structureMap =
@@ -136,9 +130,7 @@ structure IntegralModel {Z X : Scheme.{u}} (f : Z ⟶ X) where
 
 attribute [instance] IntegralModel.additive IntegralModel.linear IntegralModel.shift
 
-/-- The universal unit/counit square specifying the derived ambient comparison.
-Source: blueprint inverse ambient scalar comparison, Stacks 0D6E
-(blueprint: lem-sf-strict-direct-image-scalar-comparison). -/
+/-- The universal unit/counit square specifying the derived ambient comparison. -/
 def IsAmbientNormalization
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
     (ι : E →ₐ[Padic l] L) {Z X : Scheme.{u}} (f : Z ⟶ X)
@@ -173,9 +165,7 @@ set_option genInjectivity false in
 The ordinary comparison is fixed on sheafified tensor generators; the universal
 unit/counit equation fixes its derived comparison. The integral conjugation equation
 uses precisely the recorded quotient-completion maps, and the rational components
-are their literal localized images. No idempotent splittings or fullness claims occur.
-Source: blueprint scalar-comparison and rational-cocycle paragraphs; Stacks 0D6E
-(blueprint: lem-sf-strict-direct-image-scalar-comparison). -/
+are their literal localized images. No idempotent splittings or fullness claims occur. -/
 structure AmbientComparison
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
     (ι : E →ₐ[Padic l] L) {Z X : Scheme.{u}} (f : Z ⟶ X) where
@@ -203,16 +193,12 @@ variable (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l)
 open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion)
 open GeneralAlgebraicallyClosedCoefficients (Stage transition integralTransition associator unitor)
 
-/-- Ordinary completed-coefficient tensor along the specified field inclusion.
-Source: blueprint scalar-comparison formula
-(blueprint: lem-sf-strict-direct-image-scalar-comparison). -/
+/-- Ordinary completed-coefficient tensor along the specified field inclusion. -/
 abbrev scalar (W : Scheme.{u}) (E L : Index l Ω) (h : E ≤ L) :=
   completedDerivedScalarExtension l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
     (coefficientInclusion l Ω E L h) W
 
-/-- The integral scalar unit with the prescribed coefficient-identity transport.
-Source: blueprint identity-extension clause
-(blueprint: lem-sf-strict-direct-image-scalar-comparison). -/
+/-- The integral scalar unit with the prescribed coefficient-identity transport. -/
 def integralUnit (W : Scheme.{u}) (E : Index l Ω) :
     integralTransition l Ω W E E le_rfl ≅ 𝟭 _ :=
   eqToIso (congrArg
@@ -223,9 +209,7 @@ def integralUnit (W : Scheme.{u}) (E : Index l Ω) :
     sfIntegralScalarUnit l (Coefficient.{u} l Ω E) W 0
       (Nat.Prime.ne_zero (Fact.out : l.Prime))
 
-/-- The existing raw localization, with its target named as the finite stage.
-Source: blueprint rationalization paragraph
-(blueprint: lem-sf-strict-direct-image-scalar-comparison). -/
+/-- The existing raw localization, with its target named as the finite stage. -/
 def stageLocalization (W : Scheme.{u}) (E : Index l Ω) :
     sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E) W ⥤ Stage l Ω W E :=
   sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) W
@@ -239,9 +223,7 @@ attribute [local irreducible] integralUnit completedScalarChangeData
 
 set_option genSizeOf false in
 set_option genInjectivity false in
-/-- Restrict the normalized ambient comparison to the specified strict images.
-Source: blueprint integral scalar comparison and identity-extension formula
-(blueprint: lem-sf-strict-direct-image-scalar-comparison). -/
+/-- Restrict the normalized ambient comparison to the specified strict images. -/
 structure IntegralComparisons {Z X : Scheme.{u}} (f : Z ⟶ X)
     where
   ambientData : ∀ (E L : Index l Ω) (h : E ≤ L),
@@ -254,9 +236,7 @@ structure IntegralComparisons {Z X : Scheme.{u}} (f : Z ⟶ X)
 
 set_option genSizeOf false in
 set_option genInjectivity false in
-/-- Raw rationalization of the normalized integral comparison system.
-Source: blueprint rational scalar comparison, shift, unit and cocycle clauses
-(blueprint: lem-sf-strict-direct-image-scalar-comparison). -/
+/-- Raw rationalization of the normalized integral comparison system. -/
 structure Comparisons {Z X : Scheme.{u}} (f : Z ⟶ X)
     (D : IntegralComparisons l Ω f) where
   rational : ∀ E : Index l Ω, Stage l Ω Z E ⥤ Stage l Ω X E

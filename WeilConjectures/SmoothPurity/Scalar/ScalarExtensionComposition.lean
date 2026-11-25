@@ -13,8 +13,19 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
 
 /-! # Composition of rational scalar extensions
 
-Source: Weil conjectures blueprint, sec-smooth-purity/sk-def-sf-operations,
-order 1469 (blueprint: lem-weil-scalar-extension-composition).
+The ordinary, derived, constructible and rational scalar extensions along a tower of
+coefficient fields carry uniquely normalized associators and units, which satisfy the unit
+laws and the pentagon.
+
+## Implementation details
+
+The ordinary associator sends `c ⊗ (b ⊗ x)` to `c * j(b) ⊗ x`, with inverse
+`c ⊗ x ↦ c ⊗ (1 ⊗ x)`; the unit sends `s ⊗ x` to `s * x`. Both are defined on tensor
+generators and extended by sheafification; local tensor generation gives uniqueness. They pass
+to the canonical derived localizations, restrict to the full integral constructible
+subcategories, and are tensored with one to obtain the rational versions. The published
+completed comparisons are obtained by conjugating with the normalized quotient completion
+comparisons.
 -/
 
 @[expose] public section
@@ -114,8 +125,7 @@ private theorem completedScalar_comp
     rw [Category.assoc, quotientScalar_comp]
   · exact (integralCompletedScalarMap_existsUnique l E M (j.comp ι) Y).exists.choose_spec
 
-/-- The sheafified pure tensor in the ordinary finite free scalar extension.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition). -/
+/-- The sheafified pure tensor in the ordinary finite free scalar extension. -/
 noncomputable def integralOrdinaryTensorSection
     (N : integralTowerModules.{u, u} l E Y) (U : Y.ProEtᵒᵖ)
     (s : (completedIntegralCommRingSheafUnrestricted l L Y).obj.obj U) (x : N.val.obj U) :
@@ -548,13 +558,7 @@ private noncomputable def scalarRestrictionUnit :
 
 attribute [local irreducible] integralCompletedScalarMap integralOrdinaryTensorSection
 
-/-- The uniquely normalized ordinary tensor associator.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition).
-Proof: the completed ring inclusions compose since all finite quotient projections
-agree on the integer inclusions. Send c⊗(b⊗x) to c*j(b)⊗x, and send c⊗x to c⊗(1⊗x)
-for the inverse. The balanced relations prove these formulas well defined and mutually
-inverse. They commute with restrictions and module maps. Sheafification gives the
-natural isomorphism, and local tensor generation proves its uniqueness. -/
+/-- The uniquely normalized ordinary tensor associator. -/
 theorem integralOrdinaryScalarComp_existsUnique :
     ∃! a : integralOrdinaryScalar l E L ι Y ⋙ integralOrdinaryScalar l L M j Y ≅
         integralOrdinaryScalar l E M (j.comp ι) Y,
@@ -599,18 +603,13 @@ theorem integralOrdinaryScalarComp_existsUnique :
     (by intros; simpa only [tensorSection_eq] using ha _ _ _)
   simpa only [tensorSection_eq] using h
 
-/-- Tensor associativity, fixed on all pure tensor sections.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition). -/
+/-- Tensor associativity, fixed on all pure tensor sections. -/
 noncomputable def integralOrdinaryScalarComp :
     integralOrdinaryScalar l E L ι Y ⋙ integralOrdinaryScalar l L M j Y ≅
       integralOrdinaryScalar l E M (j.comp ι) Y :=
   (integralOrdinaryScalarComp_existsUnique l E L ι Y M j).exists.choose
 
-/-- The tensor identity comparison is uniquely fixed by multiplication on generators.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition).
-Proof: the completed identity inclusion is the identity by its projections. Thus the
-balanced map s⊗x↦s*x and inverse x↦1⊗x are natural inverse maps. Sheafification and
-local generation give the uniquely specified natural isomorphism. -/
+/-- The tensor identity comparison is uniquely fixed by multiplication on generators. -/
 theorem integralOrdinaryScalarUnit_existsUnique :
     ∃! a : integralOrdinaryScalar l E E (AlgHom.id (Padic l) E) Y ≅
         𝟭 (integralTowerModules.{u, u} l E Y),
@@ -647,15 +646,13 @@ theorem integralOrdinaryScalarUnit_existsUnique :
   intro U x
   rw [tensorSection_eq, ha', hall]
 
-/-- The identity tensor comparison.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition). -/
+/-- The identity tensor comparison. -/
 noncomputable def integralOrdinaryScalarUnit :
     integralOrdinaryScalar l E E (AlgHom.id (Padic l) E) Y ≅
       𝟭 (integralTowerModules.{u, u} l E Y) :=
   (integralOrdinaryScalarUnit_existsUnique l E Y).exists.choose
 
-/-- The associator induced on the canonical derived localizations.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition). -/
+/-- The associator induced on the canonical derived localizations. -/
 noncomputable def integralOrdinaryDerivedScalarComp :
     integralOrdinaryDerivedScalar l E L ι Y ⋙ integralOrdinaryDerivedScalar l L M j Y ≅
       integralOrdinaryDerivedScalar l E M (j.comp ι) Y :=
@@ -663,8 +660,7 @@ noncomputable def integralOrdinaryDerivedScalarComp :
     (integralOrdinaryScalar l L M j Y)) ≪≫
     Functor.mapDerivedCategoryNatIso (integralOrdinaryScalarComp l E L ι Y M j)
 
-/-- The ordinary derived tensor unit, through the fixed derived localization.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition). -/
+/-- The ordinary derived tensor unit, through the fixed derived localization. -/
 noncomputable def integralOrdinaryDerivedScalarUnit :
     integralOrdinaryDerivedScalar l E E (AlgHom.id (Padic l) E) Y ≅
       𝟭 (DerivedCategory (integralTowerModules.{u, u} l E Y)) :=
@@ -974,10 +970,7 @@ private theorem ordinary_derived_pentagon
 
 variable (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-/-- Restriction of the fixed derived associator to the full integral subcategories.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition).
-Proof: all three functors preserve the stated full subcategories. Their inclusion is
-fully faithful, so the ambient derived associator and its inverse lift uniquely. -/
+/-- Restriction of the fixed derived associator to the full integral subcategories. -/
 theorem integralConstructibleScalarComp_existsUnique :
     ∃! a : integralConstructibleScalarExtension D l hl E L ι Y ⋙
         integralConstructibleScalarExtension D l hl L M j Y ≅
@@ -1003,14 +996,11 @@ theorem integralConstructibleScalarComp_existsUnique :
   ext
   exact ha' K
 
-/-- The restricted canonical associator.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition). -/
+/-- The restricted canonical associator. -/
 noncomputable def integralConstructibleScalarComp :=
   (integralConstructibleScalarComp_existsUnique l E L ι Y M j D hl).exists.choose
 
-/-- Restriction of the fixed derived unit to the full integral subcategory.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition).
-Proof: the full inclusion uniquely lifts the ambient derived tensor unit and inverse. -/
+/-- Restriction of the fixed derived unit to the full integral subcategory. -/
 theorem integralConstructibleScalarUnit_existsUnique :
     ∃! a : integralConstructibleScalarExtension D l hl E E (AlgHom.id (Padic l) E) Y ≅
         𝟭 (boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y),
@@ -1035,8 +1025,7 @@ theorem integralConstructibleScalarUnit_existsUnique :
   ext
   exact ha' K
 
-/-- The restricted canonical tensor unit.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition). -/
+/-- The restricted canonical tensor unit. -/
 noncomputable def integralConstructibleScalarUnit :=
   (integralConstructibleScalarUnit_existsUnique l E Y D hl).exists.choose
 
@@ -1136,11 +1125,7 @@ private theorem integral_unit_component
       (integralOrdinaryDerivedScalarUnit l E Y).hom.app K.obj :=
   (integralConstructibleScalarUnit_existsUnique l E Y D hl).exists.choose_spec K
 
-/-- The localized associator, uniquely fixed by the integral tensor associator.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition).
-Proof: tensor each component and inverse with one. The integral naturality equation
-extends to pure rational tensors by scalar compatibility and to sums by additivity.
-Inverse equations persist. Equality of hom components determines a natural isomorphism. -/
+/-- The localized associator, uniquely fixed by the integral tensor associator. -/
 theorem rationalOrdinaryScalarComp_existsUnique :
     ∃! a : rationalOrdinaryScalarExtension D l hl E Y L ι ⋙
         rationalOrdinaryScalarExtension D l hl L Y M j ≅
@@ -1170,15 +1155,11 @@ theorem rationalOrdinaryScalarComp_existsUnique :
   )
   simpa only [heq_iff_eq, ScalarLocalization.localization] using h
 
-/-- The rational scalar associator with the specified integral normalization.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition). -/
+/-- The rational scalar associator with the specified integral normalization. -/
 noncomputable def rationalOrdinaryScalarComp :=
   (rationalOrdinaryScalarComp_existsUnique l E L ι Y M j D hl).exists.choose
 
-/-- The localized unit, uniquely fixed by the integral tensor unit.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition).
-Proof: tensor both components of the integral unit with one. Naturality on pure
-tensors, additivity and the integral inverse equations give the unique unit isomorphism. -/
+/-- The localized unit, uniquely fixed by the integral tensor unit. -/
 theorem rationalOrdinaryScalarUnit_existsUnique :
     ∃! a : rationalOrdinaryScalarExtension D l hl E Y E (AlgHom.id (Padic l) E) ≅
         𝟭 (rationalConstructibleCategory D l hl E Y),
@@ -1202,8 +1183,7 @@ theorem rationalOrdinaryScalarUnit_existsUnique :
   )
   simpa only [heq_iff_eq, ScalarLocalization.localization] using h
 
-/-- The rational scalar unit with the specified integral normalization.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition). -/
+/-- The rational scalar unit with the specified integral normalization. -/
 noncomputable def rationalOrdinaryScalarUnit :=
   (rationalOrdinaryScalarUnit_existsUnique l E Y D hl).exists.choose
 
@@ -1223,13 +1203,7 @@ attribute [local irreducible] integralOrdinaryDerivedScalarComp
   integralOrdinaryDerivedScalarUnit integralConstructibleScalarComp
   integralConstructibleScalarUnit rationalOrdinaryScalarComp rationalOrdinaryScalarUnit
 
-/-- Tensor units and associators obey both unit laws and the pentagon.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition).
-Proof: first check the ordinary sheaf tensor generators. Both unit maps multiply
-1⊗x to x. Both paths around the pentagon multiply the same three coefficients, so
-associativity in the largest completed coefficient ring gives equality. Local tensor
-generation gives the natural transformation equalities. Canonical derived localization,
-full-subcategory restriction, and tensoring Hom maps with one preserve these equations. -/
+/-- Tensor units and associators obey both unit laws and the pentagon. -/
 theorem rationalOrdinaryScalar_coherence :
     (∀ K : rationalConstructibleCategory D l hl E Y,
       (rationalOrdinaryScalarComp l E E (AlgHom.id (Padic l) E) Y L ι D hl).hom.app K =
@@ -1292,8 +1266,7 @@ attribute [local irreducible] rationalScalarExtension rationalOrdinaryScalarExte
 
 /-- The canonical associator of the published rational scalar extensions.
 It is ordinary balanced tensor associativity conjugated by the normalized quotient
-completion comparisons, so it retains the tensor-generator characterization.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition). -/
+completion comparisons, so it retains the tensor-generator characterization. -/
 noncomputable def rationalConstructibleScalarComp :
     rationalScalarExtension D l hl E Y L ι ⋙ rationalScalarExtension D l hl L Y M j ≅
       rationalScalarExtension D l hl E Y M (j.comp ι) :=
@@ -1304,8 +1277,7 @@ noncomputable def rationalConstructibleScalarComp :
     rationalOrdinaryScalarComp l E L ι Y M j D hl ≪≫
     rationalOrdinaryComparison D l hl E Y M (j.comp ι)
 
-/-- The identity-extension comparison, with its actual completeness-unit normalization.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition). -/
+/-- The identity-extension comparison, with its actual completeness-unit normalization. -/
 noncomputable def rationalConstructibleScalarUnit :
     rationalScalarExtension D l hl E Y E (AlgHom.id (Padic l) E) ≅
       𝟭 (rationalConstructibleCategory D l hl E Y) :=
@@ -1434,16 +1406,8 @@ private theorem completed_unit_formula (K : rationalConstructibleCategory D l hl
 attribute [local irreducible] rationalConstructibleScalarComp
   rationalConstructibleScalarUnit
 
-/-- Tensor units and associators obey both unit laws and the pentagon.
-Source: blueprint order 1469 (blueprint: lem-weil-scalar-extension-composition).
-Proof: first check the ordinary sheaf tensor generators. Both unit maps multiply
-1⊗x to x. Both paths around the pentagon multiply the same three coefficients, so
-associativity in the largest completed coefficient ring gives equality. Local tensor
-generation gives the natural transformation equalities. Canonical derived localization,
-full-subcategory restriction, and tensoring Hom maps with one preserve these equations.
-For the published completed functors, expand the conjugations by the normalized
-quotient completion comparisons. Naturality cancels adjacent inverse comparisons,
-leaving the same ordinary tensor equation on both sides. -/
+/-- The published rational scalar extensions' tensor units and associators obey both unit laws
+and the pentagon. -/
 theorem rationalConstructibleScalar_coherence :
     (∀ K : rationalConstructibleCategory D l hl E Y,
       (rationalConstructibleScalarComp l E E (AlgHom.id (Padic l) E) Y L ι D hl).hom.app K =

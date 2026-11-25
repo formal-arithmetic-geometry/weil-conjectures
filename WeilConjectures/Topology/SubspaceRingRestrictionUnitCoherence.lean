@@ -17,11 +17,18 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 /-!
 # Restriction units on subspaces
 
-Source: Stacks Project, Sheaves on Spaces, Tags 008F, 008I and 008P.
-(blueprint: lem-a1-subspace-ring-restriction-unit-coherence)
+For a subspace contained in an open neighbourhood, the inverse-image units of sheaves of sets
+along the subspace inclusion are coherent with ordinary restriction to the open, and with the
+factorization of the inclusion through the neighbourhood.
+
+## Implementation details
 
 The auxiliary maps below are the actual inclusions, adjunction units and ordinary
-restriction maps. The three statements give the ring, set and homeomorphism clauses.
+restriction maps.
+
+## References
+
+* [Stacks Project, Tags 008F, 008I and 008P](https://stacks.math.columbia.edu/tag/008F)
 -/
 
 @[expose] public section
@@ -34,13 +41,11 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace TopCat.Sheaf
 
-/-- Inclusion of an arbitrary subspace, Stacks Tags 008F and 008P.
-(blueprint: lem-a1-subspace-ring-restriction-unit-coherence) -/
+/-- Inclusion of an arbitrary subspace. -/
 def subspaceInclusion {Z : TopCat.{u}} (E : Set Z) : TopCat.of E ⟶ Z :=
   TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩
 
-/-- Factor the subspace inclusion through an open neighbourhood, Stacks Tag 008I.
-(blueprint: lem-a1-subspace-ring-restriction-unit-coherence) -/
+/-- Factor the subspace inclusion through an open neighbourhood. -/
 def subspaceToOpen {Z : TopCat.{u}} (E : Set Z) (V : Opens Z) (h : E ⊆ V) :
     TopCat.of E ⟶ TopCat.of V :=
   TopCat.ofHom ⟨fun x ↦ ⟨x.1, h x.2⟩, continuous_subtype_val.subtype_mk _⟩
@@ -59,8 +64,7 @@ variable [PreservesFilteredColimits (CategoryTheory.forget A)]
 variable [(CategoryTheory.forget A).ReflectsIsomorphisms]
 
 /-- The section map to the whole subspace is the inverse-image unit followed by
-restriction from the inverse-image open to the top open. Stacks Tags 008F and 008P.
-(blueprint: lem-a1-subspace-ring-restriction-unit-coherence) -/
+restriction from the inverse-image open to the top open. -/
 def subspaceSectionMap {Z : TopCat.{u}} (E : Set Z) (G : Z.Sheaf A)
     (V : Opens Z) (h : E ⊆ V) :
     G.obj.obj (op V) ⟶ ((pullback A (subspaceInclusion E)).obj G).obj.obj (op ⊤) :=
@@ -69,9 +73,7 @@ def subspaceSectionMap {Z : TopCat.{u}} (E : Set Z) (G : Z.Sheaf A)
       (homOfLE (fun x _ ↦ h x.2)).op
 
 /-- The unit on an open of an open neighbourhood, evaluated on its preimage in the
-subspace. The last map only identifies the two descriptions of that open.
-Source: Stacks Tags 008F, 008I and 008P.
-(blueprint: lem-a1-subspace-ring-restriction-unit-coherence) -/
+subspace. The last map only identifies the two descriptions of that open. -/
 def subspaceOpenUnit {Z : TopCat.{u}} (E : Set Z) (G : Z.Sheaf A)
     (V : Opens Z) (h : E ⊆ V) (B : Opens (TopCat.of V)) :
     G.obj.obj (op (V.isOpenEmbedding.functor.obj B)) ⟶
@@ -83,8 +85,7 @@ def subspaceOpenUnit {Z : TopCat.{u}} (E : Set Z) (G : Z.Sheaf A)
       (homOfLE (fun x hx ↦ ⟨⟨x.1, h x.2⟩, hx, rfl⟩)).op
 
 /-- Ordinary restriction on global sections to an open subspace, with the ambient
-image of its top open used by Mathlib's restriction functor. Stacks Tag 008F.
-(blueprint: lem-a1-subspace-ring-restriction-unit-coherence) -/
+image of its top open used by Mathlib's restriction functor. -/
 def openRestrictionGlobal {Z : TopCat.{u}} (G : Z.Sheaf A) (V : Opens Z) :
     G.obj.obj (op V) ⟶ ((V.isOpenEmbedding.sheafPullback A).obj G).obj.obj (op ⊤) :=
   G.obj.map (homOfLE (fun _ ⟨y, _, heq⟩ ↦ heq ▸ y.2)).op
@@ -273,24 +274,7 @@ end Coefficients
 set_option linter.unusedVariables false in
 set_option linter.unusedVariables false in
 /-- Open restriction, unique composition through an open neighbourhood and nested
-neighbourhood coherence for sheaves of sets.
-Source: Stacks Project, Sheaves on Spaces, Tags 008F, 008I and 008P.
-(blueprint: lem-a1-subspace-ring-restriction-unit-coherence)
-
-Proof (node steps 1--3): An open A of V is terminal in its ambient neighbourhood
-diagram, so the presheaf inverse image equals ordinary restriction. Sheafification
-fixes it. This gives the first unit formula (def-weil-pbc-topological-inverse-image,
-def-weil-pbc-category-colimit, def-weil-pbc-sheafification). Compose the adjunctions
-for the two inclusions (def-weil-pbc-composite-adjunction). Their composite unit is
-the successive application of the two units. Unit-preserving uniqueness of left
-adjoints (situation-conventions) gives the composition isomorphism;
-the hom bijection for p_V proves uniqueness already for this single G. On B = V
-this is the stated global section formula. For nested neighbourhoods, naturality
-of the unit in opens gives r_W after restriction equals r_V: both inverse-image
-opens are the whole subspace, so the lower restriction is the identity. The set
-comparison is the unit-characterized comparison of
-lem-weil-pbc-sets-inverse-image-composition, by its uniqueness clause. No point,
-nonempty open or nonempty subspace is used. -/
+neighbourhood coherence for sheaves of sets. -/
 theorem subspace_sets_restriction_unit_coherence
     {Z : TopCat.{u}} (E : Set Z) (G : Z.Sheaf (Type u)) :
     (∀ (V B : Opens Z),

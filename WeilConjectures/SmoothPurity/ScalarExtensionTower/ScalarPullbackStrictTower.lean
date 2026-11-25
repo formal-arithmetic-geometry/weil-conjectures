@@ -19,7 +19,12 @@ import all WeilConjectures.TraceFormula.Ordinary.OrdinaryQuotientPullbackSuccess
 import all WeilConjectures.TraceFormula.Ordinary.OrdinaryQuotientPullbackTowerComparison
 import all WeilConjectures.TraceFormula.Integral.IntegralComparisonSequenceSystems
 
-/-! # The strict quotient square for scalar change and pullback -/
+/-! # The strict quotient square for scalar change and pullback
+
+## References
+
+* Stacks Project, Tags 03D3, 06YY and 07A4.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -74,20 +79,7 @@ private theorem strict_pullback_scalar_section (X : Scheme.{u})
     ((scalar_map_tensor l E L ι X g U 1 x).trans
       (congrArg (integralOrdinaryTensorSection l E L ι X N' U 1) h))).trans (ht N' U 1 y)
 
-/-- The strict scalar/pullback quotient square on every level and transition.
-Source: Stacks 03D3, 06YY and 07A4, the nested generator calculation.
-(blueprint: lem-pur-scalar-pullback-strict-tower).
-
-Proof: test each degree and quotient level on 1 tensor f-star(1 tensor x).
-The inverse of qE sends the inner generator to the pullback of the section
-specified by kappa inverse. Naturality of ordinary scalar tensors and the
-normalization of t convert its outer tensor to the completed scalar model.
-The coordinates of a reduce its coefficient modulo l^n. The normalized system
-scalar/pullback associator sends the result to the pullback of the unit scalar
-tensor. The formula hq then gives f-star(1 tensor (1 tensor x)), exactly the
-normalization of scalarPullbackLevel. Three adjunctions and local surjectivity
-of the quotient coefficient map detect equality on these generators. The maps
-are already strict tower maps, so degreewise equality retains all transitions. -/
+/-- The strict scalar/pullback quotient square on every level and transition. -/
 theorem scalarPullbackStrictTower {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
     (C : CochainComplex (coefficientSequenceModules l E Y) ℤ)

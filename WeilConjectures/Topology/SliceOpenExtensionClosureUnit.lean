@@ -16,8 +16,17 @@ import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # The closed-support unit for the slice-site open extension
 
-Source: Stacks Project, Cohomology, Proposition 02UZ, closure-support observation
-(blueprint: lem-sc-slice-open-extension-closure-unit).
+The slice-site extension by zero from an open `U` is supported on the closure of `U`: the unit of
+the adjunction for the inclusion of the closure is an isomorphism on it.
+
+## Implementation details
+
+The extension by zero has zero stalks outside `U`; on the closure, the stalk map of the unit
+followed by the closed-pushforward germ comparison is the inverse-image stalk isomorphism.
+
+## References
+
+* [Stacks Project, Tags 02UZ, 00A5 and 00AE](https://stacks.math.columbia.edu/tag/02UZ)
 -/
 
 @[expose] public section
@@ -30,26 +39,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace TopCat
 
-/-- Source: Stacks Project, Cohomology, Proposition 02UZ, first paragraph;
-Sheaves, Lemmas 00A5 and 00AE.
-(blueprint: lem-sc-slice-open-extension-closure-unit).
-
-Proof: Write G for the displayed sheafification and i for the inclusion
-of the closure of U. If x is outside U, every neighbourhood V of x
-has no inclusion into U. Thus the direct sum defining the presheaf on V
-is zero. Every presheaf stalk element is a germ of such a section, so
-the presheaf stalk is zero. The sheafification unit is an isomorphism
-on stalks, hence G has zero stalks outside U, in particular outside its closure.
-Put F' = i inverse-image G. Outside
-the closure both G and i pushforward F' have zero stalks (the latter by
-the closed-pushforward stalk formula). On the closure, the stalk map of
-the unit followed by the closed-pushforward germ comparison is the
-inverse-image stalk isomorphism. This equality is checked on germs using
-the inverse-image unit formula; germs generate the stalk. The unit is
-therefore an isomorphism on every stalk. The stalkwise isomorphism
-criterion for abelian sheaves makes it an isomorphism of sheaves. The
-argument also covers U empty (G is zero) and dense U (i is an isomorphism).
-No Noetherian assumption is needed. -/
+/-- For an open `U` with closure `i : closure U → X`, the unit `G → i_* i^{-1} G` is an
+isomorphism, where `G` is the slice-site extension by zero of `F|_U`. -/
 theorem slice_open_extension_closure_unit_isIso
     (X : TopCat.{u}) (U : Opens X) (F : TopCat.Sheaf AddCommGrpCat.{u} X) :
     IsIso ((TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u}

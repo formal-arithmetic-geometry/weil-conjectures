@@ -13,8 +13,9 @@ import WeilConjectures.Topology.ConstantSubsheafPositiveRefinement
 
 /-! # Positive constant compact-open components
 
-Source: Stacks Project, Cohomology, Lemma 0A38, first proof paragraph.
-(blueprint: lem-sc-constant-subsheaf-positive-presentation)
+## References
+
+* Stacks Project, Tag 0A38.
 -/
 
 @[expose] public section
@@ -25,14 +26,7 @@ universe u
 
 namespace TopCat.Sheaf
 
-/-- Refine a finite compact-open presentation into positive constant components.
-Source: Stacks Project, Cohomology, Lemma 0A38, first proof paragraph.
-(blueprint: lem-sc-constant-subsheaf-positive-presentation)
-
-Proof: Apply positive clopen refinement to the given finite family and its map g.
-This gives positive components f and a factorization l ≫ Sigma.desc f = g.
-Since g is epi, Mathlib's epi_of_epi_fac makes Sigma.desc f epi. Retain the
-compactness, positivity and unit-value equations from the refinement. -/
+/-- Refine a finite compact-open presentation into positive constant components. -/
 theorem constantSubsheaf_positive_presentation
     (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]
     (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj

@@ -14,8 +14,10 @@ import WeilConjectures.SmoothPurity.Supporting.Scalar.SystemScalarTensorBraiding
 /-!
 # Coherent reduction of the integral braiding scalar-extension square
 
-Source: literature/stacks-project/more-algebra.tex, item-flip-tensor-product
-(blueprint: lem-pur-integral-braiding-scalar-extension-square-reduced).
+## References
+
+* Stacks Project, More on Algebra, the signed flip of tensor products.
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 3.5.7.
 -/
 
 @[expose] public noncomputable section
@@ -32,19 +34,7 @@ namespace WeilConjectures
 
 /--
 The scalar-extension square for the integral braiding becomes equal after coherent
-reduction. This is the finite-stage signed-swap assertion assembled through the
-normalized reduction systems.
-
-Source: literature/stacks-project/more-algebra.tex, item-flip-tensor-product, signed total symmetry;
-Bhatt--Scholze, Lemma 3.5.7.
-Proof: the coherent scalar-tensor normalization supplies the natural comparison
-between scalar extension followed by reduction and reduction followed by scalar
-extension. The whole-system scalar tensorator commutes with signed symmetry, as
-proved on flat-term K-flat representatives and homogeneous tensor generators.
-Apply the categorical reduced-braiding calculation to these equations and the
-defining reduction equations of both integral braidings; then map the result
-through coherent reduction.
-(blueprint: lem-pur-integral-braiding-scalar-extension-square-reduced).
+reduction.
 -/
 theorem reducedIntegralBraidingScalarExtensionSquare
     (l : ℕ) [Fact l.Prime]

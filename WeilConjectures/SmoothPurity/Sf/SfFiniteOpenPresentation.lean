@@ -11,8 +11,10 @@ public import WeilConjectures.SmoothPurity.Sf.SfFiniteOpenCoefficientGenerators
 
 /-! # Finite slice open extension and its coefficient square
 
-Source: Stacks Tags 03DI, 03DJ, 098K and 0E8I; Bhatt--Scholze, Definition 6.7.6.
-(blueprint: lem-sf-finite-open-presentation-coefficients).
+## References
+
+* Stacks Project, Tags 03DI, 03DJ, 098K and 0E8I.
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6.
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +30,7 @@ variable {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
   (o : IntegralOpenReduction.Operations l E j)
 
 /-- Compatibility of a finite open presentation with the actual ordinary coefficient square.
-This compares natural transformations before passage to complexes or derived categories.
-Source: Stacks 03DI, 0E8I
-(blueprint: lem-sf-finite-open-presentation-coefficients). -/
+This compares natural transformations before passage to complexes or derived categories. -/
 def SfFiniteOpenPresentationCompatible
     (e : CompactSupportProperImageTower.OpenData l E j o)
     (ι : ∀ n : ℕ, IntegralOpenReduction.finiteExtension l E j o n ≅
@@ -76,28 +76,7 @@ private theorem finiteExtension_hom_ext (n : ℕ)
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
 
 /-- The finite open comparisons can be chosen to preserve the coefficient squares.
-No derived tower, completion condition, proper map or constructibility is involved.
-
-Source: Stacks Tags 098K, 03DI, 03DJ and 0E8I; the finite open comparison in
-Bhatt--Scholze, Definition 6.7.6.
-(blueprint: lem-sf-finite-open-presentation-coefficients).
-
-Proof: identify open restriction in the slice presentation with intrinsic restriction.
-The slice functor sends an object over the open to that same scheme over X. The two
-coefficient maps agree after precomposition with the constant-presheaf sheafification
-unit, by o.finiteConstants; sheafification uniqueness identifies their scalar actions.
-The equation o.finiteFunctor fixes the module transport, so this gives a natural
-isomorphism of right adjoints. Compose the slice extension/restriction adjunction
-with o.finite.toAdjunction and use uniqueness of left adjoints to obtain ι at each n.
-Choose its right-adjoint comparison to preserve the just-identified sections; the
-left-adjoint unit equation then sends every slice extension summand to the same
-represented section in intrinsic extension. For adjacent coefficients both composites
-in the displayed square send each summand to that represented section: e.sections
-normalizes the slice composite and the unit-normalized sfOpenRestriction normalizes
-the intrinsic composite. The summands generate the extension presheaf. Sheafification
-and naturality therefore give equality on all modules and all morphisms. This also
-works for the empty open, where there are no nonzero extension summands, and for the
-identity open, where the comparison is the transported unit. -/
+No derived tower, completion condition, proper map or constructibility is involved. -/
 theorem sfFiniteOpenPresentation
     (e : CompactSupportProperImageTower.OpenData l E j o) :
     ∃ ι : ∀ n : ℕ, IntegralOpenReduction.finiteExtension l E j o n ≅

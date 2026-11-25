@@ -14,11 +14,9 @@ public import WeilConjectures.Mathlib.Topology.Spectral.Prespectral
 Let `T₁`, `T₂` be disjoint closed subsets of a compact prespectral space `X`. The existence
 lemma `PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ` provides compact opens
 `O₁`, `O₂` covering `X` with `O₁ ∩ T₁ = ∅` and `O₂ ∩ T₂ = ∅`. Choosing such a pair, the
-**constructible separation data** of `(T₁, T₂)` is the pair of complements `(O₁ᶜ, O₂ᶜ)`
-(blueprint: `lemma-extending-isomorphism-over-closure-closed--1`). These are closed subsets with
-compact complements containing `T₁` and `T₂` respectively, and they are disjoint; in a
-spectral (more generally quasi-separated) space they are constructible
-(blueprint: `lemma-extending-isomorphism-over-closure-closed--1`).
+**constructible separation data** of `(T₁, T₂)` is the pair of complements `(O₁ᶜ, O₂ᶜ)`.
+These are closed subsets with compact complements containing `T₁` and `T₂` respectively, and
+they are disjoint; in a spectral (more generally quasi-separated) space they are constructible.
 
 ## Main definitions
 
@@ -39,11 +37,9 @@ namespace PrespectralSpace
 variable {X : Type*} [TopologicalSpace X] [CompactSpace X] [PrespectralSpace X]
   {T₁ T₂ : Set X} (h₁ : IsClosed T₁) (h₂ : IsClosed T₂) (hd : Disjoint T₁ T₂)
 
-/-- **Constructible separation data in a spectral space** (blueprint:
-`lemma-extending-isomorphism-over-closure-closed--1`): for disjoint closed subsets `T₁`, `T₂`,
-select compact opens `(O₁, O₂)` from
-`PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ` (blueprint:
-`lemma-extending-isomorphism-over-closure-closed--1`) and return the complements
+/-- **Constructible separation data in a spectral space**: for disjoint closed subsets `T₁`,
+`T₂`, select compact opens `(O₁, O₂)` from
+`PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ` and return the complements
 `(O₁ᶜ, O₂ᶜ)`. -/
 noncomputable def constructibleSeparation : Set X × Set X :=
   ((exists_isCompact_isOpen_disjoint_union_eq_univ h₁ h₂ hd).choose ᶜ,
@@ -87,10 +83,9 @@ lemma disjoint_constructibleSeparation :
   rw [disjoint_iff_inter_eq_empty, ← compl_compl ((constructibleSeparation h₁ h₂ hd).1 ∩ _),
     compl_inter, (constructibleSeparation_spec_compl h₁ h₂ hd).2.2.2.2.2.2, compl_univ]
 
-/-- **Properties of the constructible separation data** (blueprint:
-`lemma-extending-isomorphism-over-closure-closed--1`): in a compact quasi-separated prespectral
-space (for instance a spectral space), the separation data `(T₁_c, T₂_c)` are closed and
-constructible, contain `T₁` resp. `T₂`, and are disjoint. Complements of compact opens are
+/-- **Properties of the constructible separation data**: in a compact quasi-separated
+prespectral space (for instance a spectral space), the separation data `(T₁_c, T₂_c)` are closed
+and constructible, contain `T₁` resp. `T₂`, and are disjoint. Complements of compact opens are
 constructible since compact opens of a quasi-separated space are retrocompact. -/
 theorem constructibleSeparation_spec [QuasiSeparatedSpace X] :
     IsClosed (constructibleSeparation h₁ h₂ hd).1 ∧

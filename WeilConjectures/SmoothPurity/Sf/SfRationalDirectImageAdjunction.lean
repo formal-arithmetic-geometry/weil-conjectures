@@ -14,8 +14,10 @@ import Mathlib.LinearAlgebra.TensorProduct.Map
 
 /-! # Finite rational derived adjunctions
 
-Source: Bhatt--Scholze 6.7.2, 6.8.14(2), Remark 6.8.15.
-(blueprint: lem-sf-rational-direct-image-adjunctions).
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.7.2, Proposition 6.8.14(2),
+  Remark 6.8.15.
 -/
 
 @[expose] public noncomputable section

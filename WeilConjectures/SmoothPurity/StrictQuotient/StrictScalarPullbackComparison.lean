@@ -9,7 +9,12 @@ public import WeilConjectures.SmoothPurity.StrictQuotient.StrictQuotientExpressi
 import all WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPullbackTensorCoherence
 import all WeilConjectures.SixFunctors.Coefficient.CoefficientRingedSequenceSiteSupplement
 
-/-! # Scalar extension commutes with finite coefficient pullback -/
+/-! # Scalar extension commutes with finite coefficient pullback
+
+## References
+
+* Stacks Project, Tag 03EL.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -286,17 +291,7 @@ private theorem scalar_map_unit (W : Scheme.{t})
     (coefficientFiniteQuotientUnitSection l E W hmn) (D.ordinary_unit hmn) f U x
 
 /-- Scalar extension and the actual finite inverse image commute, with their
-comparison fixed on the scalar and inverse-image unit generators.
-Source: Stacks Project, sites-modules.tex, Tag 03EL.
-(blueprint: lem-pur-strict-scalar-pullback-comparison).
-
-Proof: naturality of the sequence coefficient ring map gives the square of the
-actual quotient ring maps. Composition of module direct images around this square
-identifies restriction followed by direct image with direct image followed by
-restriction. Uniqueness of left adjoints supplies the comparison. Its unit identity
-sends scalar insertion after the mth inverse-image unit to the nth inverse-image
-unit after scalar insertion. Mapping to complexes preserves that formula in each
-degree. This uses no flatness assumption on the input complex or quotient ring. -/
+comparison fixed on the scalar and inverse-image unit generators. -/
 theorem strictScalarPullbackComparison {V W : Scheme.{t}} (g : V ⟶ W)
     (K : Complex l E W) (SW : CoefficientDerivedSystemTensors l E W)
     (DW : CoefficientFiniteQuotientCalculus l E W SW)

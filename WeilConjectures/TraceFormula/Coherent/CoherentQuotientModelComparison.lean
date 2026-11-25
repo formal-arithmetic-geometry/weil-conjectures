@@ -11,8 +11,12 @@ import WeilConjectures.TraceFormula.Coherent.CoherentQuotientOrdinaryLift
 
 /-! # Comparison with a fixed normalized quotient model
 
-Source: Stacks 03D7, 06YY and 0941.
-(blueprint: lem-trf-coherent-quotient-model-comparison)
+Whole-system coherence identifies a strict quotient presentation with a fixed normalized ordinary
+and derived quotient model.
+
+## References
+
+* [Stacks Project, Tags 03D7, 06YY and 0941](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public noncomputable section
@@ -153,19 +157,7 @@ private theorem derivedTranspose (W : Scheme.{t})
       rfl
 
 /-- Whole-system coherence identifies the strict presentation with a fixed
-normalized ordinary and derived quotient model.
-Source: Stacks 06YY (derived adjunction) and 0941 (derived tower limit).
-(blueprint: lem-trf-coherent-quotient-model-comparison).
-
-Proof: the ordinary reconstruction gives a strict isomorphism with the prescribed
-finite comparisons. Normalize the derived constant-tower counit using D.limitUnit
-on K-injective towers; extend the formula to all towers by naturality along a
-K-injective resolution, whose localization is invertible. The ordinary limit
-comparison projections identify the two termwise limit comparisons. The
-normalizations of D then identify the double adjoint transpose of its reduction
-comparison followed by the strict isomorphism with Q(b). Coherence gives the
-same double transpose for e. Injectivity of both adjunction Hom bijections gives
-the equality in the entire derived system category. -/
+normalized ordinary and derived quotient model. -/
 theorem coherentQuotientModelComparison (W : Scheme.{t})
     (S : CoefficientDerivedSystemCalculus l E W) (M : CompletionUnit.OrdinaryModel l E W)
     (D : CompletionUnit.DerivedModel l E W S M)

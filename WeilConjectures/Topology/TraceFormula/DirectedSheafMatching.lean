@@ -10,8 +10,12 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 
 /-! # Matching sections on a locally directed family of opens
 
-Source: Stacks Project, Sheaves, Tags 00AL and 04TN; Constructions, Tag 01LI.
-(blueprint: lem-trf-directed-sheaf-matching-sections)
+Matching families of sections of sheaves on a locally directed family of opens are determined by,
+and extend uniquely from, their component on any member.
+
+## References
+
+* [Stacks Project, Tags 00AL, 04TN and 01LI](https://stacks.math.columbia.edu/tag/00AL)
 -/
 
 @[expose] public section

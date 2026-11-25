@@ -13,9 +13,12 @@ import Mathlib.CategoryTheory.MorphismProperty.Retract
 
 /-! # The scalar-unit equation for rational restriction and pullback
 
-Source: Bhatt--Scholze, Lemma 6.7.2, Proposition 6.8.14(2), Remark 6.8.15;
-step 2 of the finite rational coefficient argument.
-(blueprint: lem-sf-rational-restriction-pullback-unit).
+This is step 2 of the finite rational coefficient argument.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.7.2, Proposition 6.8.14(2),
+  Remark 6.8.15.
 -/
 
 @[expose] public section
@@ -46,21 +49,7 @@ private theorem restrictionUnit_of_retracts
   exact unit_mateEquiv_symm bY bX (TwoSquare.mk _ _ _ _ α) K
 
 /-- Restriction commutes with pullback by an isomorphism satisfying the explicit
-unit equation for the normalized scalar comparison.
-
-Source: Bhatt--Scholze, Lemma 6.7.2, Proposition 6.8.14(2), Remark 6.8.15;
-step 2 of lem-sf-rational-pullback-scalar-right-mate.
-(blueprint: lem-sf-rational-restriction-pullback-unit).
-
-Proof: form delta, the inverse adjunction mate of the specified inverse scalar
-comparison. The trace calculation on scalar-extended inputs proves that delta
-is invertible at every T_Y(M). Every raw rational F-object K is a retract of
-such an input, by finite separability of F/E. Naturality of delta carries this
-object retract to a retract in the arrow category. Isomorphisms are closed under
-retracts, so delta is invertible at K. Pointwise invertibility supplies the natural
-isomorphism e. The identity unit_mateEquiv_symm is exactly the required unit
-equation, so no separate choice or normalization of e is needed. The argument
-applies directly to the supplied bX and bY and uses no geometric right adjoints. -/
+unit equation for the normalized scalar comparison. -/
 theorem rationalRestrictionPullback_unit
     (l : ℕ) [Fact l.Prime]
     (E F : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
