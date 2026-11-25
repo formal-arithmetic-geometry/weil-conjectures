@@ -44,6 +44,7 @@ variable (R A B Rp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
   [HasDerivedCategory.{w} (ModuleCat.{u} Rp)]
 
+-- `tAD` and `tApD` are included for the statement API although the proof does not use them.
 set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

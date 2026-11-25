@@ -496,13 +496,11 @@ lemma MatrixModel.trace_f_eq (m : T.MatrixModel c) {f : ∀ n, T.obj n ⟶ T.obj
       rw [Iso.symm_hom, Iso.comp_inv_eq, Category.assoc, m.Q_map_mapHom_comp hπ hker hV G hG n,
         Iso.inv_hom_id_assoc])
 
--- The compatibility hypothesis `hf` is not needed.
-set_option linter.unusedVariables false in
 include hπ hker hcomplete hsep hc in
 /-- The categorical trace of a lift `V` of a compatible family `f` reduces to the traces of the
 `f n`: there is `r : R` with `tr_R(V ∣ P) = r` and `tr_{A n}(f n ∣ Q n) = r mod ϖⁿ⁺¹` for all `n`.
 -/
-theorem exists_trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCompatible f)
+theorem exists_trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (_hf : T.IsCompatible f)
     {V : c.pt ⟶ c.pt} (hV : T.IsLift c f V) :
     ∃ r : R,
       MonoidalCategory.trace V = (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))
@@ -515,12 +513,11 @@ theorem exists_trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCom
     (m.iso.hom ≫ V ≫ m.iso.inv)
   exact ⟨_, m.trace_eq V G hG, m.trace_f_eq hπ hker hV G hG⟩
 
--- The compatibility hypothesis `hf` is not needed.
-set_option linter.unusedVariables false in
-set_option linter.unusedSectionVars false in
+omit [∀ n, Abelian.HasFunctorialFlatResolution (ModuleCat.{u} (A n))]
+  [∀ n, HasRightDual (T.obj n)] in
 include hπ hker hcomplete hsep hc in
 /-- The categorical trace of a lift of a compatible family does not depend on the lift. -/
-theorem trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCompatible f)
+theorem trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (_hf : T.IsCompatible f)
     {V V' : c.pt ⟶ c.pt} (hV : T.IsLift c f V) (hV' : T.IsLift c f V') :
     MonoidalCategory.trace V = MonoidalCategory.trace V' := by
   obtain ⟨m⟩ := T.nonempty_matrixModel hπ hker hcomplete hsep hc

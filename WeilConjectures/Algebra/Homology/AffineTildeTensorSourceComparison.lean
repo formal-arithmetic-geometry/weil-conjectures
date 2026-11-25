@@ -55,6 +55,7 @@ local instance sourceComparisonPullbackAdditive {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+-- The repeated, partly unused instance binder is part of the theorem signature.
 set_option linter.unusedSectionVars false in
 set_option linter.overlappingInstances false in
 /-- The counit-normalized comparison between the derived tensor source and the derived pullback

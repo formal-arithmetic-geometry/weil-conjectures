@@ -44,6 +44,7 @@ variable (R A B Aq D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} R)]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
+-- The included scalar-tower hypotheses are part of the intended statement.
 set_option linter.unusedSectionVars false in
 include tAD tBD tAqD tBqD tAAqD in
 /-- Comparison square for the characterized localization map. -/

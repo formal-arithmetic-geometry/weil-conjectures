@@ -20,7 +20,6 @@ import all WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 @[expose] public section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.unusedSectionVars false
 universe u v w
 open CategoryTheory CategoryTheory.Limits
 open CategoryTheory.Functor.sheafPullbackConstruction
@@ -58,6 +57,7 @@ variable (hgen : ∀ (M : SheafOfModules.{max u v w} A) (T : Sheaf K (Type (max 
           ((sheafAdjunctionContinuous F AddCommGrpCat.{max u v w} J K).unit.app
             ((toSheaf A).obj M)).hom.app U m)) → a = b)
 include hgen in
+omit [(pushforward.{max u v w} φ).IsRightAdjoint] in
 private theorem linear_of_adjunct_linear
     (M : SheafOfModules.{max u v w} A) (N : SheafOfModules.{max u v w} B)
     (a : InverseImageAction φ M)

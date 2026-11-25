@@ -118,11 +118,7 @@ Site object, site morphism, coefficient and derived morphism universes remain se
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 set_option backward.isDefEq.respectTransparency false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 128
 
 universe u v r wO wS wR wA
@@ -147,6 +143,8 @@ noncomputable abbrev additiveSheaf (O : Sheaf J CommRingCat.{r}) :=
   (sheafCompose J ((forget₂ CommRingCat.{r} RingCat.{r} ⋙
     forget₂ RingCat.{r} AddCommGrpCat.{r}))).obj O
 
+-- Omitting these would drop instance arguments of `sectionMultiplication` and break later proofs.
+set_option linter.unusedSectionVars false in
 /-- Multiplication by a final-object section is uniquely specified on every section. -/
 theorem existsUnique_sectionMultiplication (O : Sheaf J CommRingCat.{r})
     (U : C) (hU : IsTerminal U) (a : O.obj.obj (op U)) :
@@ -783,7 +781,9 @@ noncomputable def c (K : CochainComplex (ModuleCat.{r} R) ℤ) :
       (DerivedCategory.Q.obj K) ≫
     D.pointwiseCounit.app K ≫ DerivedCategory.Q.map (D.tensorSingleIso K).hom
 
-set_option linter.unusedSectionVars false in
+omit [HasDerivedCategory (ringedSiteModules (derivedChangeRingIndependentCoefficients J D.O))]
+    [HasDerivedCategory (ringedSiteModules (derivedChangeRingIndependentCoefficients J D.S))]
+    [HasDerivedCategory (ModuleCat R)] [HasDerivedCategory (ModuleCat D.A)] in
 private theorem tensorSingleIso_naturality
     {K K' : CochainComplex (ModuleCat.{r} R) ℤ} (f : K ⟶ K') :
     (((ModuleCat.mixedTensor D.quotientMap).flip.map₂CochainComplex).map f).app
@@ -800,6 +800,8 @@ private theorem tensorSingleIso_naturality
 
 attribute [local irreducible] tensorSingleIso
 
+omit [HasDerivedCategory (ringedSiteModules (derivedChangeRingIndependentCoefficients J D.O))]
+    [HasDerivedCategory (ringedSiteModules (derivedChangeRingIndependentCoefficients J D.S))] in
 private theorem c_naturality
     {K K' : CochainComplex (ModuleCat.{r} R) ℤ} (f : K ⟶ K') :
     D.c K ≫ DerivedCategory.Q.map
@@ -835,7 +837,7 @@ noncomputable def quotientSection
           ((1 : D.S.obj.obj (op D.U)) ⊗ₜ[D.O.obj.obj (op D.U),
             (D.φ.hom.app (op D.U)).hom] x))
 
-set_option linter.unusedSectionVars false in
+omit [HasDerivedCategory (ModuleCat R)] [HasDerivedCategory (ModuleCat D.A)] in
 set_option backward.isDefEq.respectTransparency false in
 private theorem quotientSection_naturality
     {M N : ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J D.O)}
@@ -899,6 +901,7 @@ private noncomputable def quotientSectionsHom
   rw [h, D.quotient_sections_comm]
   exact e.hom.map_smul _ _
 
+omit [HasDerivedCategory (ModuleCat R)] [HasDerivedCategory (ModuleCat D.A)] in
 private theorem quotientSectionsHom_apply
     (M : ringedSiteModules.{r} D.Omod) (x : M.val.obj (op D.U)) :
     D.quotientSectionsHom M x = D.quotientSection M x := by
@@ -914,6 +917,7 @@ private noncomputable def quotientSectionsTensorHom
   ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
     D.quotientMap (D.quotientSectionsHom M)
 
+omit [HasDerivedCategory (ModuleCat R)] [HasDerivedCategory (ModuleCat D.A)] in
 private theorem quotientSectionsTensorHom_tmul
     (M : ringedSiteModules.{r} D.Omod) (a : D.A) (x : M.val.obj (op D.U)) :
     D.quotientSectionsTensorHom M (a ⊗ₜ[R, D.quotientMap] x) =
@@ -922,6 +926,7 @@ private theorem quotientSectionsTensorHom_tmul
     (show (D.extension.E.obj M).val.obj (op D.U) from D.quotientSectionsHom M x) = _
   rw [quotientSectionsHom_apply]
 
+omit [HasDerivedCategory (ModuleCat R)] [HasDerivedCategory (ModuleCat D.A)] in
 private theorem quotientSection_exact
     (M : ringedSiteModules.{r} D.Omod) (hf : IsFlatOnSite (R := D.O) M) :
     Function.Surjective (D.quotientSection M) ∧
@@ -968,6 +973,7 @@ private theorem quotientSection_exact
       (show M.val.obj (op D.U) from x)
     simpa using hy
 
+omit [HasDerivedCategory (ModuleCat R)] [HasDerivedCategory (ModuleCat D.A)] in
 private theorem quotientSectionsTensorHom_isIso
     (M : ringedSiteModules.{r} D.Omod) (hf : IsFlatOnSite (R := D.O) M) :
     IsIso (D.quotientSectionsTensorHom M) := by
@@ -983,6 +989,7 @@ private theorem quotientSectionsTensorHom_isIso
     simp only [map_one, one_smul] at hx'
     exact (D.quotientSection_exact M hf).2 x hx'
 
+omit [HasDerivedCategory (ModuleCat R)] [HasDerivedCategory (ModuleCat D.A)] in
 /-- The exact-sections quotient identification is uniquely fixed by its section formula. -/
 theorem existsUnique_theta
     (P : CochainComplex
@@ -1030,6 +1037,7 @@ noncomputable def theta
     (hflat : ∀ i : ℤ, IsFlatOnSite (R := D.O) (P.X i)) :=
   (existsUnique_theta D P hflat).exists.choose
 
+omit [HasDerivedCategory (ModuleCat R)] [HasDerivedCategory (ModuleCat D.A)] in
 set_option backward.isDefEq.respectTransparency false in
 private theorem theta_naturality
     {P P' : CochainComplex
@@ -1141,7 +1149,8 @@ noncomputable def resolvedComparison
   (D.G ⋙ D.L).map (inv (DerivedCategory.Q.map p)) ≫
     D.alpha P hP hflat ≫ (D.T ⋙ D.G').map (DerivedCategory.Q.map p)
 
-set_option linter.unusedSectionVars false in
+omit [HasDerivedCategory (ringedSiteModules (derivedChangeRingIndependentCoefficients J D.S))]
+    [HasDerivedCategory (ModuleCat R)] [HasDerivedCategory (ModuleCat D.A)] in
 private theorem common_refinement
     (M P P' : CochainComplex
       (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J D.O)) ℤ)

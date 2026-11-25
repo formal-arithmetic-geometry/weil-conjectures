@@ -55,8 +55,8 @@ variable {D : Type a} [Category.{b} D] [Preadditive D]
       π n p q' hq' ≫ (ihom (L.X p)).map (M.d q' q) -
         n.negOnePow • (π n p' q hp' ≫ (pre (L.d p p')).app (M.X q)))
 
-set_option linter.unusedSectionVars false in
 include hd in
+omit [MonoidalPreadditive D] [HasLimitsOfSize.{0, 0, b, a} D] [HasColimitsOfSize.{0, 0, b, a} D] in
 private lemma homComplex_d_ihomπ_of_smul (n p q : ℤ) (h : p + (n + 1) = q) (h₁ : p + 1 + n = q) :
     K.d n (n + 1) ≫
         ((p * (n + 1)).negOnePow • π (n + 1) p q h) =
@@ -81,13 +81,13 @@ private lemma homComplex_d_ihomπ_of_smul (n p q : ℤ) (h : p + (n + 1) = q) (h
   (hπ n).lift
     (Fan.mk _ fun p ↦ (p * n).negOnePow • internalHomπ (C := D) L M n p (p + n) rfl)
 
-set_option linter.unusedSectionVars false in
+omit [HasColimitsOfSize.{0, 0, b, a} D] in
 private lemma homComplexToInternalHomObjX_π (n p q : ℤ) (h : p + n = q) :
     homComplexToInternalHomObjX L M K π n ≫ internalHomπ (C := D) L M n p q h =
       (p * n).negOnePow • π n p q h :=
   Pi.lift_comp_π _ _
 
-set_option linter.unusedSectionVars false in
+omit [HasColimitsOfSize.{0, 0, b, a} D] in
 private lemma internalHomObjToHomComplexX_π (n p q : ℤ) (h : p + n = q) :
     internalHomObjToHomComplexX L M K π hπ n ≫ π n p q h =
       (p * n).negOnePow • internalHomπ (C := D) L M n p q h := by
@@ -112,6 +112,7 @@ private lemma internalHomObjToHomComplexX_π (n p q : ℤ) (h : p + n = q) :
       Category.id_comp]
 
 include hd in
+omit [HasColimitsOfSize.{0, 0, b, a} D] in
 private lemma homComplexToInternalHomObjX_comm (n m : ℤ) (hnm : n + 1 = m) :
     homComplexToInternalHomObjX L M K π n ≫ (internalHomObj (C := D) L M).d n m =
       K.d n m ≫ homComplexToInternalHomObjX L M K π m := by
@@ -212,7 +213,8 @@ local notation "Mod" => ModuleCategory.{u, c, v} R
       (R.obj ⋙ forget₂ CommRingCat.{max c v u} RingCat.{max c v u})) :=
   CategoryTheory.IsoTensorHom.homObjEquiv.{c, v, u} M P N
 
-set_option linter.unusedSectionVars false in
+omit [HasSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat]
+    [J.HasSheafCompose (forget₂ CommRingCat RingCat)] in
 private lemma presheafHomEquiv_left
     {M P P' N : PresheafOfModules.{max c v u}
       (R.obj ⋙ forget₂ CommRingCat.{max c v u} RingCat.{max c v u})}
@@ -228,7 +230,8 @@ private lemma presheafHomEquiv_left
     g.app (op W.unop.left) (y ⊗ₜ[R.obj.obj (op W.unop.left)] t))
       (PresheafOfModules.naturality_apply f W.unop.hom.op x)
 
-set_option linter.unusedSectionVars false in
+omit [HasSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat]
+    [J.HasSheafCompose (forget₂ CommRingCat RingCat)] in
 private lemma presheafHomEquiv_right
     {M P N N' : PresheafOfModules.{max c v u}
       (R.obj ⋙ forget₂ CommRingCat.{max c v u} RingCat.{max c v u})}
@@ -243,7 +246,8 @@ private lemma presheafHomEquiv_right
   refine ModuleCat.hom_ext (LinearMap.ext fun (y : _ ) ↦ ?_)
   rfl
 
-set_option linter.unusedSectionVars false in
+omit [HasSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat]
+    [J.HasSheafCompose (forget₂ CommRingCat RingCat)] in
 private lemma presheafHomEquiv_pre
     {M M' P N : PresheafOfModules.{max c v u}
       (R.obj ⋙ forget₂ CommRingCat.{max c v u} RingCat.{max c v u})}

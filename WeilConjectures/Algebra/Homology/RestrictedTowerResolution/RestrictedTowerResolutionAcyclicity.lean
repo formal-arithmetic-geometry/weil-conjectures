@@ -151,7 +151,6 @@ The index `n : ℕ` denotes positive level `n+1`. All complexes are unbounded.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -479,6 +478,7 @@ variable {D : Type a₁} [Category.{a₂} D] [Abelian D] [HasDerivedCategory.{q�
 
 -- The comparison needs the adjunction as data, but never computes its unit.
 -- Choice from this proved proposition keeps that construction out of reductions.
+omit [HasDerivedCategory D] [HasDerivedCategory E] in
 private theorem homotopyAdjunction_nonempty
     (F : D ⥤ E) (G : E ⥤ D) [F.Additive] [G.Additive] (adj : F ⊣ G) :
     Nonempty (F.mapHomotopyCategory (.up ℤ) ⊣ G.mapHomotopyCategory (.up ℤ)) :=
@@ -587,6 +587,7 @@ end LocalizationHelpers
 
 variable [HasDerivedCategory.{d} (Modules A)]
 
+omit [HasDerivedCategory (Modules A)] in
 private theorem extensionTower_preserves
     {X Y : CochainComplex (ℕᵒᵖ ⥤ Modules A) ℤ}
     (hX : ∀ n : ℕ, CochainComplex.IsKFlatIndependentCoefficients (R := A)
@@ -619,6 +620,7 @@ private theorem limit_restricted_quasiIso
     CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := A) X
   exact ⟨P, f, hP, hf⟩
 
+omit [EssentiallySmall.{w, v, u} C] [HasDerivedCategory (Modules A)] in
 private theorem projection_naturality
     {S T : CochainComplex (ℕᵒᵖ ⥤ Modules A) ℤ} (f : S ⟶ T) (n : ℕ) :
     (limitComplex A).map f ≫ projection A T n = projection A S n ≫ componentMap A f n := by

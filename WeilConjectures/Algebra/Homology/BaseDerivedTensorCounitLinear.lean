@@ -35,7 +35,8 @@ variable (R : Type uR) (A : Type uA) (B : Type uB) [CommRing R] [CommRing A] [Co
   [HasDerivedCategory.{w} (ModuleCat.{max uR uA uB v} R)]
   [HasDerivedCategory.{w} (ModuleCat.{max uR uA uB v} B)]
 
-set_option linter.unusedSectionVars false in
+omit [HasDerivedCategory.{w} (ModuleCat.{max uR uA uB v} R)]
+  [HasDerivedCategory.{w} (ModuleCat.{max uR uA uB v} B)] in
 private theorem tensorLinearLift
     (M N : ModuleCat.{max uR uA uB v} (A ⊗[R] B))
     (f : (restrictScalars

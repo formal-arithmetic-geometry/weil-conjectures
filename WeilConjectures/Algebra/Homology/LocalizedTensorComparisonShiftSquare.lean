@@ -38,8 +38,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
       (.up ℤ)).obj Q) ⟶ N)
 
--- Preserve the existing derived-category hypothesis even though this reduction does not use it.
-set_option linter.unusedSectionVars false in
+omit [HasDerivedCategory (ModuleCat A)] in
 set_option backward.defeqAttrib.useBackward true in
 /-- The comparison arrows for `U` and its inverse shift are conjugate. -/
 theorem exists_localizedTensorComparison_shift_square

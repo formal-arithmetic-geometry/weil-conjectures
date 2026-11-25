@@ -21,7 +21,6 @@ import Mathlib.CategoryTheory.Sites.CoverPreserving
 @[expose] public noncomputable section
 set_option autoImplicit false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u v w z zv t
@@ -38,6 +37,8 @@ instance systemSequenceEssentiallySmall : EssentiallySmall.{w} (ℕ × C) :=
   EssentiallySmall.mk'
     ((AsSmall.equiv : ℕ ≌ AsSmall.{w} ℕ).prod (equivSmallModel.{w} C))
 
+omit [EssentiallySmall.{w, v, u} C] [J.HasSheafCompose (forget₂ CommRingCat RingCat)]
+    [J.WEqualsLocallyBijective AddCommGrpCat] [HasSheafify J AddCommGrpCat] in
 private theorem sequence_sheaf_of_slices
     (P : (ℕ × C)ᵒᵖ ⥤ Type t)
     (hP : ∀ n : ℕ, Presieve.IsSheaf J ((Prod.sectR n C).op ⋙ P)) :
@@ -74,6 +75,7 @@ private theorem sequence_sheaf_of_slices
     intro Y f hf
     exact hb ((Prod.sectR X.1 C).map f) hf
 
+omit [EssentiallySmall.{w, v, u} C] in
 private theorem sequence_uncurry_slice {D : Type z} [Category.{zv} D]
     (F : ℕᵒᵖ ⥤ Cᵒᵖ ⥤ D) (n : ℕ) :
     (Prod.sectR n C).op ⋙ (prodOpEquiv (C := ℕ) (D := C)).functor ⋙
@@ -91,6 +93,8 @@ def systemSequenceRingPresheaf : (ℕ × C)ᵒᵖ ⥤ CommRingCat.{w} :=
   (prodOpEquiv (C := ℕ) (D := C)).functor ⋙
     Functor.uncurry.obj (B ⋙ sheafToPresheaf J CommRingCat.{w})
 
+omit [EssentiallySmall.{w, v, u} C] [J.HasSheafCompose (forget₂ CommRingCat RingCat)]
+    [J.WEqualsLocallyBijective AddCommGrpCat] [HasSheafify J AddCommGrpCat] in
 /-- Vertical covers glue in each ring sheaf B_n. -/
 theorem systemSequenceRingPresheaf_isSheaf :
     Presheaf.IsSheaf (coefficientSequenceTopology J) (systemSequenceRingPresheaf B) := by
@@ -183,6 +187,7 @@ def systemSequenceModulePresheaf (M : StrictRingSystem B) :
     ext x
     exact CategoryTheory.congr_fun ((systemSequenceAbelianPresheaf B M).map_comp f g) x
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasSheafify J AddCommGrpCat] in
 private theorem systemSequenceModulePresheaf_underlying (M : StrictRingSystem B) :
     (systemSequenceModulePresheaf B M).presheaf = systemSequenceAbelianPresheaf B M := by
   apply CategoryTheory.Functor.ext
@@ -192,6 +197,7 @@ private theorem systemSequenceModulePresheaf_underlying (M : StrictRingSystem B)
   ext x
   rfl
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasSheafify J AddCommGrpCat] in
 /-- The associated module presheaf satisfies descent. -/
 theorem systemSequenceModulePresheaf_isSheaf (M : StrictRingSystem B) :
     Presheaf.IsSheaf (coefficientSequenceTopology J)
@@ -273,6 +279,8 @@ def systemSequenceEvaluation (n : ℕ) : systemSequenceModules B ⥤ systemLevel
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
+omit [J.HasSheafCompose (forget₂ CommRingCat RingCat)]
+    [J.WEqualsLocallyBijective AddCommGrpCat] [HasSheafify J AddCommGrpCat] in
 /-- Horizontal restriction of the sequence ring is the specified coefficient map. -/
 theorem systemSequenceRing_horizontal {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) :
     (derivedChangeRingIndependentCoefficients.{w}

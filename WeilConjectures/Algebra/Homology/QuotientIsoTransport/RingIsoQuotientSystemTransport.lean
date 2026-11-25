@@ -126,9 +126,6 @@ localizations are the recorded library constructions.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.all false
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
@@ -157,6 +154,8 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
 
+omit [EssentiallySmall.{w} C] [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{w}] in
 /-- Use the specified sheafification adjunction directly. -/
 theorem moduleWeakSheafify : HasWeakSheafify J AddCommGrpCat.{w} :=
   HasSheafify.isRightAdjoint
@@ -210,7 +209,7 @@ structure ScalarComparisonData
     (X0 : Sort*)
     (X1 : Sort*)
     (X2 : Sort*)
-    (P : ∀ (restriction : X0) (ordinary : X1) (derived : X2), Prop) where
+    (P : ∀ (_restriction : X0) (_ordinary : X1) (_derived : X2), Prop) where
   restriction : X0
   ordinary : X1
   derived : X2
@@ -269,14 +268,14 @@ abbrev ScalarSquare {R R' S S' : Sheaf J CommRingCat.{w}}
 /-- Abstract comparison data with its specified normalization predicate. -/
 structure ReductionComparisonData
     (X0 : Sort*)
-    (X1 : ∀ (ordinary : X0), Sort*)
-    (X2 : ∀ (ordinary : X0), Sort*)
+    (X1 : ∀ (_ordinary : X0), Sort*)
+    (X2 : ∀ (_ordinary : X0), Sort*)
     (X3 : Sort*)
-    (X4 : ∀ (ordinary : X0) (additive : X1 ordinary) (derived : X3), Sort*)
-    (X5 : ∀ (derived : X3), Sort*)
-    (P : ∀ (ordinary : X0) (additive : X1 ordinary) (evaluation : X2 ordinary)
-      (derived : X3) (counit : X4 ordinary additive derived)
-      (derivedEvaluation : X5 derived), Prop) where
+    (X4 : ∀ (ordinary : X0) (_additive : X1 ordinary) (_derived : X3), Sort*)
+    (X5 : ∀ (_derived : X3), Sort*)
+    (P : ∀ (ordinary : X0) (additive : X1 ordinary) (_evaluation : X2 ordinary)
+      (derived : X3) (_counit : X4 ordinary additive derived)
+      (_derivedEvaluation : X5 derived), Prop) where
   ordinary : X0
   additive : X1 ordinary
   evaluation : X2 ordinary
@@ -358,6 +357,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCateg
   Functor.mapDerivedCategoryNatIso
   DerivedCategory.Q DerivedCategory.Qh DerivedCategory.quotientCompQhIso
 
+omit [EssentiallySmall.{w} C] in
 private theorem derivedSquare_eq {R R' S S' : Sheaf J CommRingCat.{w}}
     (a : R ⟶ R') (b : S ⟶ S') (e : R ≅ S) (e' : R' ≅ S')
     (ρ : restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map a) ⋙
@@ -398,6 +398,8 @@ private def scalarTransportEquivalence {R S : Sheaf J CommRingCat.{w}} (a : R �
     ext U x
     rfl
 
+-- The statement uses the deprecated identity `TwoSquare.natTrans`.
+set_option linter.deprecated false in
 private theorem normalizedComparison_exists
     {A₀ B₀ C₀ D₀ : Type*} [Category A₀] [Category B₀] [Category C₀] [Category D₀]
     {L : A₀ ⥤ B₀} {U : B₀ ⥤ A₀} {L' : C₀ ⥤ D₀} {U' : D₀ ⥤ C₀}
@@ -418,6 +420,8 @@ private def normalizedComparison
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+-- The statement uses the deprecated identity `TwoSquare.natTrans`.
+set_option linter.deprecated false in
 private theorem normalizedComparison_inv
     {A₀ B₀ C₀ D₀ : Type*} [Category A₀] [Category B₀] [Category C₀] [Category D₀]
     {L : A₀ ⥤ B₀} {U : B₀ ⥤ A₀} {L' : C₀ ⥤ D₀} {U' : D₀ ⥤ C₀}
@@ -442,6 +446,8 @@ private def ordinaryScalarSquare {R R' S S' : Sheaf J CommRingCat.{w}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+-- The statement uses the deprecated identity `TwoSquare.natTrans`.
+set_option linter.deprecated false in
 private theorem ordinaryScalarSquare_inv {R R' S S' : Sheaf J CommRingCat.{w}}
     (a : R ⟶ R') (b : S ⟶ S') (e : R ≅ S) (e' : R' ≅ S')
     (h : e.hom ≫ b = a ≫ e'.hom)
@@ -480,9 +486,10 @@ private theorem ordinaryScalarSquare_tmul {R R' S S' : Sheaf J CommRingCat.{w}}
   change (transport e).map (A.ordinaryAdj.unit.app M) ≫ ρ.hom.app (A.model.E.obj M) =
     B.ordinaryAdj.unit.app ((transport e).obj M) ≫
       (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map b)).map
-        ((((mateEquiv A.ordinaryAdj B.ordinaryAdj).symm
-          (scalarRestrictionSquare a b e e' h).hom).natTrans).app M) at hu
-  rw [← ordinaryScalarSquare_inv a b e e' h A B] at hu
+        (((mateEquiv A.ordinaryAdj B.ordinaryAdj).symm
+          (scalarRestrictionSquare a b e e' h).hom).app M) at hu
+  rw [← show ι.inv = (mateEquiv A.ordinaryAdj B.ordinaryAdj).symm
+    (scalarRestrictionSquare a b e e' h).hom from ordinaryScalarSquare_inv a b e e' h A B] at hu
   change (transport e).map (A.ordinaryAdj.unit.app M) ≫ ρ.hom.app (A.model.E.obj M) =
     B.ordinaryAdj.unit.app ((transport e).obj M) ≫
       (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map b)).map
@@ -541,6 +548,8 @@ private theorem invertComparisonForward
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+-- The statement uses the deprecated identity `TwoSquare.natTrans`.
+set_option linter.deprecated false in
 private theorem derivedScalarSquare_inv {R R' S S' : Sheaf J CommRingCat.{w}}
     (a : R ⟶ R') (b : S ⟶ S') (e : R ≅ S) (e' : R' ≅ S')
     (h : e.hom ≫ b = a ≫ e'.hom)
@@ -567,6 +576,8 @@ private theorem derivedScalarSquare_transpose {R R' S S' : Sheaf J CommRingCat.{
 
 attribute [local irreducible] derivedScalarSquare
 
+-- The statement uses the deprecated identity `TwoSquare.natTrans`.
+set_option linter.deprecated false in
 private theorem derivedMate_isoComparison
     {A₀ B₀ C₀ D₀ A₁ B₁ C₁ D₁ : Type*}
     [Category A₀] [Category B₀] [Category C₀] [Category D₀]
@@ -630,6 +641,8 @@ private theorem ordinaryScalarSquare_unit {R R' S S' : Sheaf J CommRingCat.{w}}
   dsimp only [Functor.comp_obj]
   simpa only [Adjunction.homEquiv_id] using ht
 
+-- The statement uses the deprecated identity `TwoSquare.natTrans`.
+set_option linter.deprecated false in
 private theorem derivedMate_cochainIsoComparison
     {A₀ B₀ C₀ D₀ : Type*} [Category A₀] [Category B₀] [Category C₀] [Category D₀]
     [Abelian A₀] [Abelian B₀] [Abelian C₀] [Abelian D₀]

@@ -17,7 +17,6 @@ public import WeilConjectures.Algebra.Homology.System.SystemLevelLeftExtensionBa
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 2048

@@ -48,8 +48,9 @@ universe uC vC r m w z
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace SheafOfModules.CochainUniverseTransport
 set_option autoImplicit false
-set_option linter.checkUnivs false
 
+-- The separate universe parameters are part of the public interface used by callers.
+set_option linter.checkUnivs false in
 /-- Ring-universe transport is the usual sectionwise ULift ring functor. -/
 def ringFunctor : CommRingCat.{r} ⥤ CommRingCat.{max r m w} where
   obj A := CommRingCat.of (ULift.{max m w} A)
@@ -84,6 +85,8 @@ theorem ringFunctor_hasSheafCompose : J.HasSheafCompose (ringFunctor.{r, m, w}) 
   exact (isSheaf_iff_isSheaf_of_type J _).1
     (Presheaf.isSheaf_comp_of_isSheaf J P (CategoryTheory.forget CommRingCat) hP)
 
+-- The separate universe parameters are part of the public interface used by callers.
+set_option linter.checkUnivs false in
 /-- The genuinely constructed coefficient ring in the common ambient universe. -/
 abbrev ring (R : Sheaf J CommRingCat.{r}) : Sheaf J CommRingCat.{max r m w} :=
   (sheafCompose J (ringFunctor.{r, m, w})).obj R
@@ -369,6 +372,8 @@ private theorem tensorDown_factor
       have ha : (ULift.up (x + y) : ULift.{max r w} _) = ULift.up x + ULift.up y := rfl
       simpa only [ha, map_add] using congrArg₂ (· + ·) hx hy
 
+-- The separate universe parameters match the surrounding universe interface.
+set_option linter.checkUnivs false in
 private theorem ulift_preservesSheafification
     [EssentiallySmall.{max r m w} C]
     [J.WEqualsLocallyBijective AddCommGrpCat.{m}] :

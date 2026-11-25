@@ -78,7 +78,6 @@ The argument restricts the set-sheaf adjunction to linear maps.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.all false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -597,6 +596,7 @@ private def directPair {X Y : Sheaf J (Type u)} {T : Sheaf K (Type u)}
        exact Prod.ext (CategoryTheory.congr_fun (x.hom.naturality f) t)
          (CategoryTheory.congr_fun (y.hom.naturality f) t) }⟩
 
+omit [EssentiallySmall.{u, vC, uC} C] [EssentiallySmall.{u, vD, uD} D] in
 private theorem transpose_pair {X Y : Sheaf J (Type u)} {T : Sheaf K (Type u)}
     (x : T ⟶ (F.sheafPushforwardContinuous (Type u) K J).obj X)
     (y : T ⟶ (F.sheafPushforwardContinuous (Type u) K J).obj Y) :
@@ -609,6 +609,7 @@ private theorem transpose_pair {X Y : Sheaf J (Type u)} {T : Sheaf K (Type u)}
   · rw [CartesianMonoidalCategory.lift_snd, ← adj.homEquiv_naturality_right_symm]
     rfl
 
+omit [EssentiallySmall.{u, vC, uC} C] [EssentiallySmall.{u, vD, uD} D] in
 private theorem transpose_binary
     {X Y Z : Sheaf J (Type u)} {T : Sheaf K (Type u)} (op : X ⊗ Y ⟶ Z)
     (x : T ⟶ (F.sheafPushforwardContinuous (Type u) K J).obj X)
@@ -627,6 +628,7 @@ private theorem transpose_binary
   intro U t
   rfl
 
+omit [EssentiallySmall.{u, vC, uC} C] [EssentiallySmall.{u, vD, uD} D] in
 private theorem transpose_constant
     {X : Sheaf J (Type u)} {T : Sheaf K (Type u)}
     (op : 𝟙_ (Sheaf J (Type u)) ⟶ X)
@@ -773,7 +775,7 @@ theorem continuous_ringed_pullback_presentation
   obtain ⟨c, hc⟩ := structural_map J K R S f RI I
   let T := I.modules ⋙ CoefficientOrdinaryProof.tensorFunctor.{u, uC, vC} c
   obtain ⟨am⟩ := supplied_adjunction f RI I c hc
-  letI : T.Additive := am.left_adjoint_additive
+  let : T.Additive := am.left_adjoint_additive
   refine ⟨RI, I, c, T, inferInstance, fun _ ↦ rfl, ?_, ⟨am⟩⟩
   intro M N a
   simp only [eqToHom_refl, Category.id_comp, Category.comp_id]

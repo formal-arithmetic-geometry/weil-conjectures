@@ -49,7 +49,6 @@ right-scalar convention. Normalizations below refer to actual sheafified tensors
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.all false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
@@ -105,7 +104,6 @@ private noncomputable def presheafBasisChart
       change (P.map f r) • e V = M.map f (r • e W)
       rw [M.map_smul, hn])
 
-set_option linter.unusedSectionVars false
 section CoefficientUniverses
 
 variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
@@ -145,6 +143,7 @@ attribute [local irreducible] scalarTensorBinaryIso scalarTensorBinaryForward
   scalarExtensionTowerForward scalarExtensionTowerReverse
 
 omit [UnivLE.{max uC vC, u}]
+  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}]
   [∀ X : C, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
@@ -268,6 +267,10 @@ private noncomputable def positiveComparison
   | 0 => scalarExtensionUnitIso α
   | n + 1 => positiveComparisonSucc α L K b n
 
+omit [UnivLE.{max uC vC, u}]
+  [∀ X : C, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+  [∀ X : C, HasWeakSheafify (J.over X) AddCommGrpCat.{u}]
+  [∀ X : C, (J.over X).HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 private theorem positiveComparison_tmul
     {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (L : ringedSiteModules.{u}
@@ -455,6 +458,7 @@ private theorem tensorUnitChart_tmul
 
 attribute [local irreducible] tensorUnitChart
 
+omit [UnivLE.{max uC vC, u}] in
 private theorem tensorBasis_bijective
     {R : Sheaf J CommRingCat.{u}}
     (M N : ringedSiteModules.{u}
@@ -496,6 +500,7 @@ private theorem tensorBasis_bijective
     exact ht.trans hr
   exact signedIso_basis_bijective.{max uC vC, vC, u} (R := R.over U.unop) q W _ hq
 
+omit [UnivLE.{max uC vC, u}] in
 private theorem positiveBasis_bijective
     {R : Sheaf J CommRingCat.{u}}
     (L : ringedSiteModules.{u}
@@ -545,9 +550,12 @@ private noncomputable def dualBasis
     (homObj M (unit _)).val.obj U :=
   localDual M (basisChart.{uC, vC, u} M U e he).symm
 
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+omit [UnivLE.{max uC vC, u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}]
-  [∀ X : C, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}] in
+  [∀ X : C, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+  [∀ X : C, HasWeakSheafify (J.over X) AddCommGrpCat.{u}]
+  [∀ X : C, (J.over X).HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 private theorem dualBasis_eval
     {R : Sheaf J CommRingCat.{u}}
     (M : ringedSiteModules.{u}
@@ -565,6 +573,8 @@ private theorem dualBasis_eval
 
 attribute [local irreducible] dualBasis
 
+-- `hSliceSheafify` is deliberately included in this statement.
+set_option linter.unusedSectionVars false in
 include hSliceSheafify in
 private theorem dualBasis_bijective
     {R : Sheaf J CommRingCat.{u}}
@@ -609,7 +619,8 @@ private theorem dualBasis_bijective
     rw [hdq, hbq] at hc
     exact hc.symm
 
-omit [∀ X : C, HasWeakSheafify (J.over X) AddCommGrpCat.{u}]
+omit [UnivLE.{max uC vC, u}]
+  [∀ X : C, HasWeakSheafify (J.over X) AddCommGrpCat.{u}]
   [∀ X : C, (J.over X).HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 private theorem extendedBasisIso_inv_apply
     {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
@@ -620,6 +631,8 @@ private theorem extendedBasisIso_inv_apply
     (extendedBasisIso α M q).inv.val.app W r =
       scalarExtensionSection α M (op W.unop.left) r (localBasis M q W) := rfl
 
+-- `hSliceSheafify` is deliberately included in this statement.
+set_option linter.unusedSectionVars false in
 include hSliceSheafify in
 private theorem scalarExtension_basis
     {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
@@ -752,7 +765,6 @@ def SignedLineProductNormalized {R : Sheaf J CommRingCat.{max uC vC u}}
 variable [∀ X : C,
   (J.over X).WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}]
 
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 
 set_option allowUnsafeReducibility true in
@@ -1160,6 +1172,8 @@ attribute [local irreducible] scalarTensorPower signedLinePower
 set_option allowUnsafeReducibility true in
 attribute [local semireducible] scalarTensorPower signedLinePower
 
+omit [∀ X : C,
+  (J.over X).WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}] in
 private theorem signedBasis_bijective
     {R : Sheaf J CommRingCat.{max uC vC u}}
     (L : ringedSiteModules.{max uC vC u}
@@ -1172,6 +1186,8 @@ private theorem signedBasis_bijective
   erw [signed_map_id.{uC, vC, u}] at h
   exact h
 
+omit [∀ X : C,
+  (J.over X).WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}] in
 private theorem signedBasis_transition
     {R : Sheaf J CommRingCat.{max uC vC u}}
     (L : ringedSiteModules.{max uC vC u}
@@ -1307,6 +1323,10 @@ private theorem signedProductChart_bijective
   erw [scalarTensorTmul_naturality] at h
   exact h
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}]
+  [HasWeakSheafify J AddCommGrpCat.{max uC vC u}]
+  [∀ X : C,
+  (J.over X).WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}] in
 private theorem signed_glue
     {R : Sheaf J CommRingCat.{max uC vC u}}
     (M N : ringedSiteModules.{max uC vC u}

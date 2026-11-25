@@ -393,7 +393,7 @@ theorem scalarExact :
     PreservesFiniteColimits (scalars.{c, v, r} a) := by
   exact restrictScalarsExact _
 
-set_option linter.unusedSectionVars false in
+omit [HasSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] in
 /-- Scalar exactness on the slice. -/
 theorem sliceExact :
     PreservesFiniteLimits (sliceScalars.{c, v, r} U a) ∧

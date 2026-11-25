@@ -110,7 +110,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure
 noncomputable section
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward false
-set_option linter.unusedSectionVars false
 set_option genCtorIdx false
 set_option genSizeOf false
 set_option genInjectivity false
@@ -815,6 +814,7 @@ private theorem restrictionMate_isIso :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 include hβ in
+omit [Ua.ReflectsIsomorphisms] in
 private theorem transition_bridge [Ub.Faithful]
     (M₀ : A₀) (M₁ : A₁) (N₀ : B₀) (N₁ : B₁)
     (a₀ : N₀ ⟶ F₀.obj M₀) (a₁ : N₁ ⟶ F₁.obj M₁)
@@ -1271,6 +1271,9 @@ private def freeAdjunction : free R ⊣ underlyingRaw R :=
       intro E M N f g
       exact (freeModule_restrict_naturality R E E (𝟙 E) M N).2 f g }
 
+omit [HasWeakSheafify J₀ CommRingCat] [HasWeakSheafify J₀ (Type w)]
+    [J₀.HasSheafCompose (CategoryTheory.forget CommRingCat)]
+    [J₀.HasSheafCompose (CategoryTheory.forget AddCommGrpCat)] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem free_isFlat (E : Sheaf J₀ (Type w)) :
@@ -1344,6 +1347,12 @@ private def freeImageIso : free R ⋙ F₀ ≅ L₀ ⋙ free R' :=
 
 -- The resolving subcategory carries two dependent monoidal structures.
 include L₀ V₀ adj₀ G₀ a₀ e₀ in
+omit [HasWeakSheafify J₀ CommRingCat] [HasWeakSheafify J₀ (Type w)]
+    [J₀.HasSheafCompose (CategoryTheory.forget CommRingCat)]
+    [J₀.HasSheafCompose (CategoryTheory.forget AddCommGrpCat)]
+    [HasWeakSheafify K₀ CommRingCat] [HasWeakSheafify K₀ (Type w)]
+    [K₀.HasSheafCompose (CategoryTheory.forget CommRingCat)]
+    [K₀.HasSheafCompose (CategoryTheory.forget AddCommGrpCat)] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem exists_adapted_resolution
@@ -1496,6 +1505,7 @@ private def transitionSets
   (coefficientUnderlying (J := J) O ell m).map ((P.strictTransition h).app M) ≫
     (coefficientRestrictionUnderlying (J := J) O ell h).hom.app (M.level n)
 
+omit [HasWeakSheafify J (Type w)] [J.HasSheafCompose (CategoryTheory.forget CommRingCat)] in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 private theorem transitionSets_id
@@ -1506,6 +1516,7 @@ private theorem transitionSets_id
     (P.transitionsNormalized.1 n M)
   exact h.trans (CategoryTheory.Functor.map_id _ _)
 
+omit [HasWeakSheafify J (Type w)] [J.HasSheafCompose (CategoryTheory.forget CommRingCat)] in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 private theorem transitionSets_comp

@@ -23,7 +23,6 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSup
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.unusedSectionVars false
 set_option genSizeOf false
 set_option genInjectivity false
 set_option backward.isDefEq.respectTransparency false
@@ -60,6 +59,11 @@ variable [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
   (t : (ringedSitePullbackFunctor a
     (module_pushforward_isRightAdjoint_of_universes a)).obj P ≅ Q)
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [K.WEqualsLocallyBijective AddCommGrpCat]
+    [HasWeakSheafify J AddCommGrpCat] [HasWeakSheafify K AddCommGrpCat] [HasFiniteLimits C]
+    [HasFiniteLimits D] [PreservesFiniteLimits U]
+    [∀ (V : C), (J.over V).WEqualsLocallyBijective AddCommGrpCat]
+    [∀ (V : D), (K.over V).WEqualsLocallyBijective AddCommGrpCat] in
 private theorem pullback_hom_ext
     (L : ringedSiteModules.{max u v w}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (M : ringedSiteModules.{max u v w}
@@ -83,6 +87,7 @@ private theorem pullback_hom_ext
   exact h V.unop
 
 include hcover in
+omit [∀ (V : D), (K.over V).WEqualsLocallyBijective AddCommGrpCat] in
 /-- Evaluation and tensor recursion determine all signed pullback comparisons. -/
 theorem signedLinePullback_normalized_unique
     (T T' : ∀ d : ℤ, (ringedSitePullbackFunctor a
