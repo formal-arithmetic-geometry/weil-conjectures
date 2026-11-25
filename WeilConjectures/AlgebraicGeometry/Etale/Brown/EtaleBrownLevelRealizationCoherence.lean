@@ -79,7 +79,7 @@ private def brownLevelInverseMateIso
     (a : L ⊣ R) (b : L' ⊣ R') (e : R ⋙ F ≅ G ⋙ R') :
     L ⋙ G ≅ F ⋙ L' := by
   let α := (mateEquiv a b).symm (.mk _ _ _ _ e.hom)
-  letI : IsIso α := isIso_inverseMate_of_equivalences a b e
+  have : IsIso α := isIso_inverseMate_of_equivalences a b e
   exact (asIso α).symm
 
 private theorem brownLevelInverseMateIso_mate
