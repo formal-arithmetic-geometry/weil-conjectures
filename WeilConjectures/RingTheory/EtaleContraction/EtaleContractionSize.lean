@@ -13,7 +13,19 @@ import Mathlib.Algebra.MvPolynomial.Cardinal
 
 /-! # Cardinality of the étale contraction
 
-Source: Stacks Project, Tag 097S (blueprint: lem-weil-pbc-etale-contraction-size).
+The étale contraction of a ring of cardinality at most an infinite cardinal `κ` has cardinality
+at most `κ`.
+
+## Implementation details
+
+Faithfully flat étale representatives are bounded via codes of finite polynomial
+presentations, so there are at most `κ` of them. Each stage of the finite diagram is étale,
+hence finitely generated over the base and of size at most `κ`; the filtered colimit step and
+the countable sequential colimit preserve the bound.
+
+## References
+
+* [Stacks: Tag 097S](https://stacks.math.columbia.edu/tag/097S)
 -/
 
 @[expose] public section
@@ -114,16 +126,8 @@ private theorem step_bound (R : CommRingCat.{u}ᵒᵖ) (κ : Cardinal.{u})
       (finite_families_bound κ hκ (representatives_bound R κ hκ hR))
       (finite_stage_bound R κ hκ hR))
 
-/-- The successive étale contraction preserves an infinite cardinal bound.
-Source: Stacks Project, Tag 097S (blueprint: lem-weil-pbc-etale-contraction-size).
-
-Proof: choose finite polynomial presentations of the faithfully flat étale representatives.
-Equality of presentation codes gives an algebra isomorphism and hence equality in the skeleton,
-so there are at most κ representatives. Their finite subsets have at most κ elements. A stage
-of the finite diagram is étale, since finite tensor coproducts preserve étaleness, and hence
-is finitely generated over the base and has at most κ elements. The filtered colimit step has
-at most κ elements by stage representatives. Induction bounds each successive step, and the
-countable sequential colimit has the same bound. -/
+/-- If `#R ≤ κ` for an infinite cardinal `κ`, then the étale contraction of `R` has
+cardinality at most `κ`. -/
 theorem cardinalMk_le (R : CommRingCat.{u}) (κ : Cardinal.{u})
     (hκ : ℵ₀ ≤ κ) (hR : #R ≤ κ) : #R.etaleContraction ≤ κ := by
   let : PreservesFilteredColimitsOfSize.{0, 0} (forget CommRingCat.{u}) :=

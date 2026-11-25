@@ -15,15 +15,22 @@ import WeilConjectures.RingTheory.EtaleAlgebraLiftReduction
 /-!
 # Étale algebras lift across arbitrary quotients
 
-Source: Stacks Project, Tag 04D1; the Weil conjectures blueprint, chap-Smooth-purity,
-proposition-extension-zero-restriction-closed-subscheme (blueprint:
-proposition-extension-zero-restriction-closed-subscheme).
-
 ## Main statements
 
 - `Algebra.SquareJacobianPresentation.CoefficientLift.etale_and_reduction_equiv`: the explicit
   lifted quotient is étale of finite presentation, and its specified reduction is an isomorphism.
 - `Algebra.exists_etale_coefficientLift`: every étale quotient algebra admits such a lift.
+
+## Implementation details
+
+The lifted relations together with `t * Δ - 1` have Jacobian determinant `Δ²`, a unit in the
+lifted quotient, so the square Jacobian criterion gives étaleness. Modulo the extended ideal,
+`t` is forced to be the inverse of `Δ`, which yields the reduction isomorphism. No step uses
+nilpotence of the ideal.
+
+## References
+
+* [Stacks: Tag 04D1](https://stacks.math.columbia.edu/tag/04D1)
 -/
 
 @[expose] public section
@@ -33,22 +40,7 @@ universe u v
 namespace Algebra
 
 /-- The lifted Jacobian quotient is étale of finite presentation, and the specified reduction
-induces an isomorphism modulo the extended ideal. Source: Stacks Project, Tag 04D1; blueprint
-node `proposition-extension-zero-restriction-closed-subscheme` (blueprint:
-proposition-extension-zero-restriction-closed-subscheme).
-
-Proof:
-1. Regard the lifted relations and `t * Δ - 1` as equations in the old variables and `t`.
-   Their Jacobian matrix has upper-right block zero, upper-left block the original Jacobian,
-   and bottom-right entry `Δ`, so its determinant is `Δ²`. Since `t * Δ = 1` in the quotient,
-   this determinant is a unit. The square Jacobian criterion
-   `proposition-extension-zero-restriction-closed-subscheme` gives étaleness and finite
-   presentation.
-2. Modulo the extended ideal, the coefficient lifts become the original relations. The
-   original determinant is already a unit, so adjoining `t` with `t * Δ - 1 = 0` determines
-   `t` uniquely as its inverse. The universal property of the quotient gives an isomorphism
-   whose composite with the quotient map is precisely the specified `L.reduction` from
-   `proposition-extension-zero-restriction-closed-subscheme`. -/
+induces an isomorphism modulo the extended ideal. -/
 theorem SquareJacobianPresentation.CoefficientLift.etale_and_reduction_equiv
     {A : Type u} [CommRing A] (I : Ideal A)
     {B : Type v} [CommRing B] [Algebra (A ⧸ I) B] {m : ℕ}
@@ -63,20 +55,7 @@ theorem SquareJacobianPresentation.CoefficientLift.etale_and_reduction_equiv
   exact ⟨hef, hfp, e, he⟩
 
 /-- Every étale finite-presentation algebra over an arbitrary quotient admits the explicit
-Jacobian lift and its reduction isomorphism. Source: Stacks Project, Tag 04D1; blueprint node
-`proposition-extension-zero-restriction-closed-subscheme` (blueprint:
-proposition-extension-zero-restriction-closed-subscheme).
-
-Proof:
-1. By `proposition-extension-zero-restriction-closed-subscheme`, the given étale algebra admits a
-square Jacobian
-   presentation. Reindex its finite variables and relations by `Fin m`.
-2. Choose lifts of the coefficients of its finitely many relations along `A → A/I`, giving
-   the data of `proposition-extension-zero-restriction-closed-subscheme`.
-3. Apply the determinant and reduction argument of
-   `SquareJacobianPresentation.CoefficientLift.etale_and_reduction_equiv`. It gives the
-   requested étale finite-presentation lift and the specified reduction isomorphism.
-   No step uses nilpotence of the ideal. -/
+Jacobian lift and its reduction isomorphism. -/
 theorem exists_etale_coefficientLift
     {A : Type u} [CommRing A] (I : Ideal A)
     (B : Type v) [CommRing B] [Algebra (A ⧸ I) B] [Algebra.Etale (A ⧸ I) B] :

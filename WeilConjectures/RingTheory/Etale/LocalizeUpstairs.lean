@@ -11,8 +11,12 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 /-!
 # Étale localization upstairs
 
-Source: literature/stacks-project/more-algebra.tex, Lemma Tag 07M0
-(blueprint: `lem-weil-pbc-etale-localize-upstairs`).
+If every prime containing an ideal `𝔟` has an étale principal neighbourhood, then a single
+principal localization, at an element invertible modulo `𝔟`, is étale.
+
+## References
+
+* Stacks Project, More on Algebra, Lemma Tag 07M0
 -/
 
 @[expose] public section
@@ -23,9 +27,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- If every prime containing an ideal has an étale principal neighborhood, one
-can choose one principal localization that is étale and invertible modulo the
-ideal. Source: Stacks, Tag 07M0 (blueprint: `lem-weil-pbc-etale-localize-upstairs`). -/
+/-- If every prime containing an ideal has an étale principal neighborhood, then
+some element `g` invertible modulo the ideal has an étale principal localization `B_g`. -/
 theorem exists_isUnit_mk_and_etale_away
     {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) (𝔟 : Ideal B)
     (h : ∀ (𝔮 : PrimeSpectrum B), 𝔟 ≤ 𝔮.asIdeal →

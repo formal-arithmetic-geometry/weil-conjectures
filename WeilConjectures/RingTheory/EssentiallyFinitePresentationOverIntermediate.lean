@@ -15,8 +15,10 @@ import Mathlib.RingTheory.Localization.Basic
 /-!
 # Essential finite presentation over an intermediate algebra
 
-Source: Stacks Project, Algebra, proof of Tag 00R7, first paragraph; Definition 00QM and
-Lemma 00F4 (4) (blueprint: lemma-quasi-finite-coordinates--1).
+## References
+
+* Stacks Project, Algebra, proof of Tag 00R7 (first paragraph), Definition 00QM,
+  Lemma 00F4 (4) and Proposition 00CP
 -/
 
 @[expose] public section
@@ -26,8 +28,7 @@ universe u v w p
 namespace RingHom
 
 /-- The finite equations identifying essential generators with their fractions and adjoining
-inverses of their denominators. Source: the localized construction in the proof of Tag 00F4 (4)
-(blueprint: lemma-quasi-finite-coordinates--1). -/
+inverses of their denominators. -/
 private noncomputable def finiteCompatibilityIdeal
     {R : Type u} {S : Type v} {P : Type p}
     [CommRing R] [CommRing S] [CommRing P] [Algebra R S] [Algebra R P]
@@ -40,39 +41,16 @@ private noncomputable def finiteCompatibilityIdeal
       MvPolynomial.C (algebraMap S (TensorProduct R S P) (i : S)) -
         MvPolynomial.C (Algebra.TensorProduct.includeRight (a i)) * MvPolynomial.X i))
 
-/-- The quotient by the finite compatibility equations. This is a concrete construction,
-independent of any existence theorem. Source: the localized proof of Tag 00F4 (4)
-(blueprint: lemma-quasi-finite-coordinates--1). -/
+/-- The quotient by the finite compatibility equations. -/
 private abbrev FiniteCompatibilityQuotient
     {R : Type u} {S : Type v} {P : Type p}
     [CommRing R] [CommRing S] [CommRing P] [Algebra R S] [Algebra R P]
     (U : Submonoid P) (s : Finset S) (a : s → P) (d : s → U) :=
   MvPolynomial s (TensorProduct R S P) ⧸ finiteCompatibilityIdeal (R := R) U s a d
 
-/-- The finite compatibility quotient recovers a localization of `P` after localizing further.
-No finite-presentation assumption on `P` is needed here.
-
-Source: Stacks Project, Algebra, the generator equations in the proof of Tag 00F4 (4),
-and Proposition Tag 00CP (localization universal property); this is steps 3 and 4 of the
-localized argument used in Tag 00R7
-(blueprint: lemma-quasi-finite-coordinates--1).
-
-Proof: Evaluate the tensor coefficients in `T` via `ψ` and `f`, and send each polynomial
-variable to the inverse of `f (d i)`. The compatibility assumption annihilates the second
-family of equations, and the inverse equation annihilates the first. Thus evaluation factors
-through the displayed quotient `Q`. Let `j : P → Q` be the inclusion through the tensor,
-polynomial, and quotient maps, and set `V = U.map j`. Evaluation sends `V` to units, hence
-extends to `Localization V`. Conversely, `P → Localization V` inverts `U`, so the universal
-property gives a map `T → Localization V`. Their composite on `T` fixes `P` and is the
-identity by localization uniqueness. Their composite on `Localization V` fixes `P` and each
-variable, since that variable is the inverse of its denominator in `Q`. The compatibility
-equation then shows that it fixes every member of `s`. Essential generation of `S` says
-that `S` is the localization of `R[s]` at elements mapping to units; agreement on `R` and
-`s` therefore gives agreement on all of `S`, including its denominators. The composite
-fixes both tensor factors, all polynomial variables, the quotient, and finally the inverted
-elements of `V`. The two maps are inverse. Transport the canonical localization structure
-along this equivalence; its structure map is exactly the quotient evaluation map.
--/
+/-- The finite compatibility quotient recovers a localization of `P` after localizing further:
+if `T = U⁻¹P`, `S` is essentially generated over `R` by `s`, and `ψ i = a i / d i` in `T` for
+`i ∈ s`, then `T` is a localization of the finite compatibility quotient, compatibly with `ψ`. -/
 private theorem finiteCompatibilityQuotient_isLocalization
     {R : Type u} {S : Type v} {P : Type p}
     [CommRing R] [CommRing S] [CommRing P] [Algebra R S] [Algebra R P]
@@ -245,37 +223,10 @@ private theorem finiteCompatibilityQuotient_isLocalization
 
 
 
-/-- Essential finite presentation descends to an essentially finite type intermediate algebra.
-The input `P`, `U`, and `f` give a localization presentation of `T` over `R`; `hf` says that
-its `R`-algebra structure is the one induced by `ψ.comp φ`. The output gives a localization
-presentation over `S` with its original structure map `ψ`.
-
-Source: Stacks Project, Algebra, proof of Tag 00R7, first paragraph, using Definition 00QM
-and the localized analogue of Lemma 00F4 (4)
-(blueprint: lemma-quasi-finite-coordinates--1).
-
-Proof:
-1. Choose `S = W⁻¹B` with `B` a finite type `R`-algebra, and generators `b₁, …, bₙ`
-   [def-weil-pbc-essentially-finite-type-algebra, def-weil-pbc-finite-type-algebra].
-   The given presentation is `T = U⁻¹P` [def-weil-pbc-finitely-presented-algebra].
-   Write the image of each `bᵢ` in `T` as `pᵢ/uᵢ` with `uᵢ ∈ U`.
-2. Base change `P` to `A = TensorProduct R S P`, adjoin variables `tᵢ`, and quotient by the finitely
-   many relations `uᵢtᵢ = 1` and `bᵢ ⊗ 1 = (1 ⊗ pᵢ)tᵢ`, obtaining `Q`.
-   Base change and composition preserve finite presentation
-   [lem-weil-pbc-finite-presentation-base-change-composition]; adjoining finitely many
-   variables does too [def-weil-pbc-finitely-presented-algebra], as does quotienting by
-   a finitely generated ideal [lem-weil-pbc-finite-presentation-quotient-fg-ideal].
-   Thus `Q` is a finitely presented `S`-algebra.
-3. Map `Q` to `T` by the given maps on `S` and `P`, and `tᵢ ↦ 1/uᵢ`. The relations
-   hold. The image `V` of `U` in `Q` maps to units, giving `V⁻¹Q → T`
-   [lem-weil-pbc-ring-localization-universal-property].
-4. Conversely `P → V⁻¹Q` inverts `U`, giving `T → V⁻¹Q` by the same universal property.
-   The composite on `T` fixes `P` and its inverted denominators. The other composite
-   fixes `P`, each `tᵢ = uᵢ⁻¹`, and each `bᵢ` by the compatibility relation. It therefore
-   fixes `B`, the inverses of `W`, all of `S`, then `A`, `Q`, and the inverses of `V`
-   [def-weil-pbc-finite-type-algebra, def-weil-pbc-essentially-finite-type-algebra,
-   lem-weil-pbc-ring-localization-universal-property]. These are inverse maps over `S`.
--/
+/-- Essential finite presentation descends to an essentially finite type intermediate algebra:
+if `φ : R → S` is essentially of finite type and `T` is a localization `U⁻¹P` of a finitely
+presented `R`-algebra `P`, with `R`-algebra structure induced by `ψ.comp φ`, then `T` is a
+localization of a finitely presented `S`-algebra `Q`, compatibly with `ψ`. -/
 theorem essentially_finite_presentation_over_intermediate
     {R : Type u} {S : Type v} {T : Type w}
     [CommRing R] [CommRing S] [CommRing T]
