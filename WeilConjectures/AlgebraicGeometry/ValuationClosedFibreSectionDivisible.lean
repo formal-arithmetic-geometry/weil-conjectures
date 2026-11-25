@@ -161,8 +161,6 @@ private theorem closed_fibre_unit_zero_iff (A : Type u) [CommRing A] [IsDomain A
   exact unit_section_zero_iso (pullback.fst f g) (f.fiberι p) (asIso t)
     (by simp [t, Scheme.Hom.fiberι]) L s
 
--- The integral-fibre hypothesis stays in the original interface but is not needed here.
-set_option linter.unusedVariables false in
 /-- A section vanishing on the closed fibre is divisible by a maximal-ideal element,
 assuming the closed fibre is integral. -/
 theorem closed_fibre_section_is_divisible
@@ -170,7 +168,7 @@ theorem closed_fibre_section_is_divisible
     (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of A))
     [IsProper f] [Flat f] [LocallyOfFinitePresentation f]
     (L : X.Modules) [L.IsInvertible]
-    (hX₀ : IsIntegral (Limits.pullback f (Spec.map
+    (_hX₀ : IsIntegral (Limits.pullback f (Spec.map
       (CommRingCat.ofHom (Ideal.Quotient.mk (IsLocalRing.maximalIdeal A))))))
     (s : Γ(L, ⊤))
     (hs : (((Classical.choose (exists_tensorPullbackAdjunction

@@ -50,7 +50,6 @@ open ConstantLeftModuleInverseImage
 are compared after the isomorphism from the constant sheaf on pairs. -/
 section CoefficientConstruction
 set_option backward.isDefEq.respectTransparency false
-set_option linter.unusedSimpArgs false
 variable {C D : Type u} [SmallCategory C] [SmallCategory D]
 variable (J : GrothendieckTopology C) (K : GrothendieckTopology D)
 variable (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))
@@ -260,15 +259,12 @@ private theorem coeffPair_naturality :
       (constantComparison J K L R adj).hom.app (Λ × Λ) ≫ coeffPair K Λ := by
   apply prod.hom_ext
   all_goals
-    simp only [Category.assoc, prod.map_fst, prod.map_snd, prod.map_fst_assoc,
-      prod.map_snd_assoc, prod.lift_fst,
-      prod.lift_snd, prodComparison_fst_assoc, prodComparison_snd_assoc,
-      ← Functor.map_comp_assoc]
+    simp only [Category.assoc, prod.map_fst, prod.map_snd, prodComparison_fst_assoc,
+      prodComparison_snd_assoc, ← Functor.map_comp_assoc]
     dsimp only [coeffPair, normalizedRingComparison, Iso.trans_hom, Iso.symm_hom,
       Iso.app_hom]
     simp only [Category.assoc, prod.lift_fst, prod.lift_snd, prod.lift_fst_assoc,
-      prod.lift_snd_assoc, ← Functor.map_comp_assoc,
-      Iso.inv_hom_id_app, Category.comp_id]
+      prod.lift_snd_assoc, Iso.inv_hom_id_app]
     erw [Category.comp_id]
     rw [constantComparison_naturality_assoc]
     rfl
@@ -298,8 +294,7 @@ private theorem ringOperation_transport
   rw [hm']
   rw [← L.map_comp_assoc, hm]
   dsimp only [normalizedRingComparison, Iso.trans_hom, Iso.symm_hom, Iso.app_hom]
-  simp only [Category.assoc, ← Functor.map_comp_assoc,
-    Iso.inv_hom_id_app, Functor.map_id, Category.id_comp, Category.comp_id]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [Category.comp_id]
   rw [constantComparison_naturality_assoc]
   rfl
@@ -309,7 +304,6 @@ end CoefficientConstruction
 /-! Lift left exact functors to abelian sheaves sectionwise, transport the constant
 scalar endomorphisms, and extend them along ring sheafification. -/
 section TransportConstruction
-set_option linter.unusedSimpArgs false
 open ConstantLeftModuleInverseImage
 attribute [local instance] comp_preservesFiniteLimits
 
@@ -560,7 +554,7 @@ private theorem abCounit_forget (A : Sheaf K AddCommGrpCat.{u}) :
     rw [abUnit_forget]
     dsimp only [abUnitSets, NatTrans.comp_app, Functor.whiskerLeft_app,
       Functor.whiskerRight_app, Functor.rightUnitor_inv_app]
-    simp only [Functor.map_comp, Category.assoc, Functor.map_id, Category.id_comp]
+    simp only [Functor.map_comp, Category.assoc, Category.id_comp]
     rw [← L.map_comp_assoc ((abSheafLiftSetIso J (U K ⋙ R)).inv.app _)
       ((abSheafLiftSetIso J (U K ⋙ R)).hom.app _), Iso.inv_hom_id_app,
       L.map_id, Category.id_comp]
@@ -572,9 +566,8 @@ private theorem abCounit_forget (A : Sheaf K AddCommGrpCat.{u}) :
         (abSheafLiftSetIso K (U J ⋙ L)).inv.app A from
           adj.counit.naturality ((abSheafLiftSetIso K (U J ⋙ L)).inv.app A)]
     dsimp only [eL, Functor.id_obj]
-    simp only [Category.assoc, Category.id_comp, Iso.inv_hom_id_app, Category.comp_id]
-    simp only [Category.assoc, adj.left_triangle_components_assoc,
-      Category.comp_id, Iso.inv_hom_id_app_assoc]
+    simp only [Category.assoc]
+    simp only [adj.left_triangle_components_assoc]
     erw [Category.id_comp]
     rw [Iso.inv_hom_id_app, Category.comp_id]
   right_triangle_components A := by
@@ -594,7 +587,7 @@ private theorem abCounit_forget (A : Sheaf K AddCommGrpCat.{u}) :
     rw [abCounit_forget]
     dsimp only [abCounitSets, NatTrans.comp_app, Functor.whiskerLeft_app,
       Functor.whiskerRight_app, Functor.rightUnitor_hom_app]
-    simp only [Functor.map_comp, Functor.map_id, Category.assoc, Category.comp_id]
+    simp only [Functor.map_comp]
     rw [← R.map_comp_assoc ((abSheafLiftSetIso K (U J ⋙ L)).inv.app _)
       ((abSheafLiftSetIso K (U J ⋙ L)).hom.app _), Iso.inv_hom_id_app,
       R.map_id, Category.id_comp]
@@ -602,8 +595,7 @@ private theorem abCounit_forget (A : Sheaf K AddCommGrpCat.{u}) :
         R.map (L.map ((abSheafLiftSetIso J (U K ⋙ R)).hom.app A)) =
       (abSheafLiftSetIso J (U K ⋙ R)).hom.app A ≫ adj.unit.app _ from
         (adj.unit.naturality ((abSheafLiftSetIso J (U K ⋙ R)).hom.app A)).symm]
-    simp only [Category.assoc, R.map_id, Category.comp_id,
-      adj.right_triangle_components_assoc]
+    simp only [Category.assoc, adj.right_triangle_components_assoc]
     erw [R.map_id, Category.comp_id]
 end AbelianAdjunction
 

@@ -37,7 +37,6 @@ needs the stalkwise description of `g^*` and of the tensor product.
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 
 universe u v
 
@@ -186,6 +185,7 @@ private lemma exists_etale_arrow_range_subset {P : Scheme.{u}} (V : P.Etale) (O 
     MorphismProperty.Over.homMk (V.hom ⁻¹ᵁ O).ι rfl, ⟨x, hx⟩, fun z ↦ z.2, rfl,
     inferInstance⟩
 
+omit [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- The tensor of pulled-back supported sections vanishes off the product support. -/
 theorem exteriorSections_support (F : Sheaf X.smallEtaleTopology C)
     (G : Sheaf Y.smallEtaleTopology C) :
@@ -316,6 +316,7 @@ theorem exteriorSectionsTensor_naturality (T : Scheme.{u})
     ← tensorHom_comp_tensorHom_assoc, Category.assoc]
   congr 1
 
+omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- The pullback and tensor of sections is natural in both sheaves. -/
 @[reassoc]
 theorem exteriorSectionsMap_naturality
@@ -331,6 +332,7 @@ theorem exteriorSectionsMap_naturality
     ← tensorHom_comp_tensorHom, Category.assoc, exteriorSectionsTensor_naturality,
     Category.assoc]
 
+omit [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- The supported exterior product of sections followed by the inclusion of supported
 sections is the pullback and tensor of the two included sections. -/
 @[reassoc]
@@ -350,6 +352,7 @@ theorem exteriorSupportedSections_ΓSupportι
   erw [PreservesKernel.iso_inv_ι]
   exact kernel.lift_ι _ _ _
 
+omit [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- The supported exterior product of sections is natural in both sheaves. -/
 @[reassoc]
 theorem exteriorSupportedSections_naturality
@@ -423,6 +426,7 @@ private noncomputable def exteriorSupportedSectionsComplexF
           (((upperStar C (pullback.snd f g)).mapHomologicalComplex (.up ℤ)).obj Q)
           r s n h))
 
+omit [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 @[reassoc]
 private lemma ι_exteriorSupportedSectionsComplexF
     (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ)
@@ -440,6 +444,7 @@ private lemma ι_exteriorSupportedSectionsComplexF
   unfold exteriorSupportedSectionsComplexF
   refine HomologicalComplex.ι_mapBifunctorDesc _ r s ?_
 
+omit [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- Naturality of the supported exterior product in the first sheaf. -/
 @[reassoc]
 private lemma exteriorSupportedSections_naturality_left'
@@ -451,6 +456,7 @@ private lemma exteriorSupportedSections_naturality_left'
           ((upperStar C (pullback.fst f g)).map a ▷ (upperStar C (pullback.snd f g)).obj G) := by
   simpa using exteriorSupportedSections_naturality C f g i j a (𝟙 G)
 
+omit [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- Naturality of the supported exterior product in the second sheaf. -/
 @[reassoc]
 private lemma exteriorSupportedSections_naturality_right'
@@ -462,6 +468,7 @@ private lemma exteriorSupportedSections_naturality_right'
           ((upperStar C (pullback.fst f g)).obj F ◁ (upperStar C (pullback.snd f g)).map b) := by
   simpa using exteriorSupportedSections_naturality C f g i j (𝟙 F) b
 
+omit [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- The degreewise supported pairings extend uniquely to the signed total complexes. -/
 theorem existsUnique_exteriorSupportedSectionsComplex
     (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ)

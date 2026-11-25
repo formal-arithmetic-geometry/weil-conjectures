@@ -160,7 +160,6 @@ theorem namedOpenAssoc {X Y Z W : Scheme.{u}}
 
 universe v w
 
-set_option linter.checkUnivs false in
 /-- The functor data underlying a proper/open calculus, retaining both universes. -/
 structure ProperOpenInputs (A : Scheme.{u} → Prop) where
   obj : {X : Scheme.{u} // A X} → Type w

@@ -100,9 +100,6 @@ comparisons retain their normalization on ordinary modules and K-injectives.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
--- Avoid replaying the large dependent coefficient transports for tactic linting.
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -293,11 +290,10 @@ private theorem termwiseRightAdjoint_kinjective
     ⟨fun J _ _ ↦ whiskeringRight_preservesColimitsOfShape (C := ℕᵒᵖ) (J := J) E⟩
   exact (adj.whiskerRight ℕᵒᵖ).preservesKInjectiveComplexes
 
-set_option linter.style.haveILetI false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem exchangeTowerModuleRes_kinjective (T : Scheme.{t}) :
     (exchangeTowerModuleRes d T).PreservesKInjectiveComplexes := by
-  letI : IsNoetherianRing A := d.noetherian
+  let : IsNoetherianRing A := d.noetherian
   let c := exchangeScalar d T
   have hc : ∀ n : ℕ, c ≫ (pbcCompletedComparison T d).inv ≫
       limit.π (adicLisseRingSystem T d.ideal) (op n) =

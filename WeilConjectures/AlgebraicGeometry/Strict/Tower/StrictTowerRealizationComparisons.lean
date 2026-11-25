@@ -176,9 +176,6 @@ The strict composite is constructed before applying either Rlim or evaluation.
 set_option autoImplicit false
 -- Finish proof checking before the final axiom scan.
 set_option Elab.async false
--- Avoid repeatedly traversing the large dependent normalized-comparison interfaces.
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency.types false
 universe t uC vC uD vD
@@ -892,8 +889,6 @@ def cbcRealizationTarget (c' : Compactification f') (g' : X' ⟶ X)
 section Evaluation
 open AlgebraicGeometry.ProEtale.ConstantCompactificationExchange
 open AlgebraicGeometry.ProEtale.RelativeCompactSupport
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 attribute [local irreducible] proEtaleRingModuleAdjunctionNormalized
   proEtaleRingModuleUnitSection proEtaleRingCompositeCoefficients
   proEtaleRingDerivedPullbackFactors CochainComplex.IsAcyclicTensorKFlat

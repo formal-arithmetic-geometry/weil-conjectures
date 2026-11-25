@@ -65,9 +65,6 @@ noncomputable def block {A : Type u} [Category.{v} A] [Abelian A]
 
 section Algebra
 
-set_option linter.unusedSimpArgs false
-set_option linter.unusedSectionVars false
-
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
@@ -103,6 +100,7 @@ private lemma segment_succ (T : ℕᵒᵖ ⥤ B) (i l : ℕ) :
   exact Finset.sum_range_succ _ _
 
 -- Reindex the middle object of a composite before simplifying transition maps.
+omit [Preadditive B] in
 private lemma pr_tr_eq (T : ℕᵒᵖ ⥤ B) {i j k : ℕ} (hj : i ≤ j) (hk : i ≤ k)
     (h : j = k) : pr T j ≫ tr T i j hj = pr T k ≫ tr T i k hk := by
   subst k
@@ -173,6 +171,7 @@ private abbrev subTower (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) : ℕᵒᵖ �
   map_id n := by simp
   map_comp f g := by rw [← T.map_comp]; rfl
 
+omit [Preadditive B] in
 private lemma sub_pr_tr_eq (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) {i n m : ℕ}
     (hn : i ≤ φ n) (hm : i ≤ φ m) (h : n = m) :
     pr (subTower T φ) n ≫ tr T i (φ n) hn =
@@ -212,6 +211,7 @@ private noncomputable def contractMap (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) 
     (∏ᶜ fun i : ℕ ↦ T.obj (op i)) ⟶ (∏ᶜ fun i : ℕ ↦ T.obj (op i)) :=
   Pi.lift (fun i ↦ segment T i (φ (ceiling φ i) - i))
 
+omit [Preadditive B] in
 private lemma choose_pr (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) (n : ℕ) :
     chooseMap T φ ≫ pr (subTower T φ) n = pr T (φ n) := Pi.lift_comp_π _ _
 
@@ -219,10 +219,12 @@ private lemma sum_pr (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) (n : ℕ) :
     sumMap T φ ≫ pr (subTower T φ) n =
       segment T (φ n) (φ (n + 1) - φ n) := Pi.lift_comp_π _ _
 
+omit [Preadditive B] in
 private lemma extend_pr (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) (i : ℕ) :
     extendMap T φ ≫ pr T i = pr (subTower T φ) (ceiling φ i) ≫
       tr T i (φ (ceiling φ i)) (ceiling_le φ i) := Pi.lift_comp_π _ _
 
+omit [Preadditive B] in
 private lemma extend_selected (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) (n : ℕ) :
     extendMap T φ ≫ pr T (φ n) = pr (subTower T φ) n := by
   rw [extend_pr]
@@ -254,6 +256,7 @@ private lemma square (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) :
     exact congrArg (fun f ↦ pr T (φ n) - f)
       (pr_tr_eq T _ _ hi)
 
+omit [Preadditive B] in
 private lemma choose_extend (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) :
     extendMap T φ ≫ chooseMap T φ = 𝟙 _ := by
   apply Pi.hom_ext
@@ -367,6 +370,7 @@ private lemma delta_contract (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) :
       rw [hd, segment_first]
       abel
 
+omit [Preadditive B] in
 private lemma choose_natural {T U : ℕᵒᵖ ⥤ B} (f : T ⟶ U) (φ : ℕ ↪o ℕ) :
     Limits.Pi.map (fun n : ℕ ↦ f.app (op n)) ≫ chooseMap U φ =
       chooseMap T φ ≫ Limits.Pi.map (fun n : ℕ ↦ f.app (op (φ n))) := by
@@ -388,10 +392,11 @@ private lemma sum_natural {T U : ℕᵒᵖ ⥤ B} (f : T ⟶ U) (φ : ℕ ↪o �
       segment, Preadditive.comp_sum, Preadditive.sum_comp]
     apply Finset.sum_congr rfl
     intro k hk
-    simp only [← Category.assoc, pr, Pi.map_π, Category.assoc]
+    simp only [pr]
     rw [f.naturality]
     rw [Pi.map_π_assoc]
 
+omit [Preadditive B] in
 private lemma choose_comp (T : ℕᵒᵖ ⥤ B) (φ ψ : ℕ ↪o ℕ) :
     chooseMap T φ ≫ chooseMap (subTower T φ) ψ = chooseMap T (ψ.trans φ) := by
   apply Pi.hom_ext
@@ -440,9 +445,6 @@ private lemma sum_comp (T : ℕᵒᵖ ⥤ B) (φ ψ : ℕ ↪o ℕ) :
 end Algebra
 
 section Complexes
-
-set_option linter.unusedSimpArgs false
-set_option linter.unusedSectionVars false
 
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
@@ -559,7 +561,7 @@ private noncomputable def coneContract (P : CochainComplex A ℤ) (d c e h : P �
     have hp : p = q + 1 := by omega
     subst p
     simp only [Cochain.comp_zero_cochain_v, Cochain.ofHom_v,
-      HomologicalComplex.id_f, Category.comp_id, δ_zero, Cochain.zero_v,
+      HomologicalComplex.id_f, Category.comp_id, δ_zero,
       zero_add, Cochain.add_v, Cochain.zero_cochain_comp_v,
       mappingCone.map, mappingCone.inl_v_desc_f]
     have hh := congrArg (fun f : P ⟶ P ↦ f.f (q + 1)) h₁

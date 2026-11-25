@@ -18,7 +18,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
@@ -91,11 +90,9 @@ theorem derivedRestrictionHomPresheaf_natural
   change a.inv.app A ≫ R.map (d.inv.app A ≫ _ ≫ d.hom.app D) ≫ a.hom.app D =
     c.inv.app _ ≫ T.map (b.inv.app A ≫ _ ≫ b.hom.app D) ≫ c.hom.app _
   apply (cancel_mono (a.inv.app D ≫ R.map (d.inv.app D))).mp
-  simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc,
-    (R.mapIso (d.app D)).hom_inv_id_assoc]
+  simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
   rw [hD]
-  simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc,
-    (T.mapIso (b.app D)).hom_inv_id_assoc]
+  simp only [Iso.hom_inv_id_app_assoc]
   rw [reassoc_of% hA]
   have hn := e.hom.naturality g
   dsimp only [Functor.comp_map] at hn
@@ -103,7 +100,7 @@ theorem derivedRestrictionHomPresheaf_natural
     rw [← R.map_comp, Iso.hom_inv_id_app, R.map_id]
   have hb : T.map (b.hom.app D) ≫ T.map (b.inv.app D) = 𝟙 _ := by
     rw [← T.map_comp, Iso.hom_inv_id_app, T.map_id]
-  simp only [hd, hb, reassoc_of% hb, Category.comp_id, Category.id_comp]
+  simp only [hd, reassoc_of% hb, Category.comp_id]
   exact congrArg (fun k ↦ c.inv.app _ ≫ T.map (b.inv.app A) ≫ k) hn.symm
 
 /-- Restriction of coefficients on actual local derived Hom presheaves, transported by

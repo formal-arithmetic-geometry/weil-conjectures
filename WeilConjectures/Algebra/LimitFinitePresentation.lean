@@ -27,14 +27,13 @@ universe u
 
 namespace Algebra
 
-set_option linter.unusedVariables false in
 /-- Noetherian approximation of a finitely presented ring map: it is a filtered colimit of
 finite-type maps between finite-type `ℤ`-algebras, with the stated pushout squares. -/
 theorem exists_limit_finite_presentation
     {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S)
     (hφ : RingHom.FinitePresentation φ) :
-    ∃ (Λ : Type u) (hpo : Preorder Λ) (hne : Nonempty Λ)
-      (hdir : IsDirected Λ (fun a b => a ≤ b))
+    ∃ (Λ : Type u) (_hpo : Preorder Λ) (_hne : Nonempty Λ)
+      (_hdir : IsDirected Λ (fun a b => a ≤ b))
       (Rfun : Λ ⥤ CommRingCat) (Sfun : Λ ⥤ CommRingCat)
       (η : Rfun ⟶ Sfun) (cR : Cocone Rfun) (cS : Cocone Sfun),
       cR.pt = CommRingCat.of R ∧ cS.pt = CommRingCat.of S ∧

@@ -18,7 +18,6 @@ derived exterior product and the support units are natural in the cochain comple
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 
 universe u v
 
