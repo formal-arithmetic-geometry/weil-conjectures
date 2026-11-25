@@ -14,9 +14,19 @@ import WeilConjectures.RingTheory.PopescuWeakClearRelations
 /-!
 # Clearing a local standard smooth presentation
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07F9,
-`lemma-delocalize-weak`, the denominator-clearing paragraphs.
-(blueprint: lem-weil-pbc-popescu-weak-clear-presentation)
+We clear the coefficients and ideal-membership certificates of a submersive presentation over
+`R_p`, obtaining equations `f_j` over `R` with `s₀ - h * det ∈ (f)` and `s_(j+1) * g_j ∈ (f)`
+for scalars outside `p`.
+
+## Implementation details
+
+This concerns only the base localization and its polynomial presentation; neither a global
+factorization nor a singular ideal is constructed. Empty families use the empty determinant and
+empty products `1`.
+
+## References
+
+* [Stacks, Tag 07F9] (the denominator-clearing paragraphs of the proof)
 -/
 
 @[expose] public section
@@ -28,28 +38,7 @@ namespace Algebra
 open MvPolynomial
 
 /-- Clear the coefficients and ideal-membership certificates of a submersive
-presentation over `Rₚ`. This statement concerns only the base localization and its
-polynomial presentation; it constructs neither a global factorization nor a singular ideal.
-Source: Stacks Project, proof of Tag 07F9 (`lemma-delocalize-weak`), lines 2179–2188.
-(blueprint: lem-weil-pbc-popescu-weak-clear-presentation)
-
-Proof: View the polynomial ring over `Rₚ` as the localization of the polynomial
-ring over `R` at the coefficient images of `R \ p`. Clear the finitely many
-coefficients of each relation of `P`, obtaining `fⱼ` whose coefficient extension
-is a scalar unit times the old relation. These generate the same localized ideal,
-and their Jacobian determinant is the old one multiplied by the product of those
-units, since the scalars have zero partial derivatives. Its image in `D` is a unit.
-Lift an inverse to the localized polynomial ring and express `1` as its product
-with the determinant plus a finite linear combination of the relations. Clear
-all coefficients of this identity and kill its residual localization kernel by
-one further scalar outside `p`. This gives `s₀ - h*det ∈ (f)`.
-For each `gⱼ`, its vanishing in `D` puts its coefficient extension in the ideal
-of the localized relations. Clear the coefficients in this finite ideal-membership
-certificate and again kill the residual kernel by a scalar outside `p`, giving
-`sⱼ₊₁*gⱼ ∈ (f)`. Products of the clearing scalars remain outside the prime.
-The equations `fⱼ` still vanish on `P.val`, since they are scalar multiples of the
-old relations. Empty relation families use the empty determinant `1`; all clearing
-products of empty families are `1`. -/
+presentation over `Rₚ`. -/
 theorem exists_cleared_submersive_presentation
     {R : Type u} [CommRing R] (p : Ideal R) [p.IsPrime]
     {D : Type v} [CommRing D] [Algebra (Localization.AtPrime p) D]

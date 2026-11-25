@@ -7,6 +7,22 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.RingTheory.PopescuResolution
+
+/-!
+# The identity resolution
+
+When the extended singular ideal escapes the prime, the identity factorization resolves Popescu's
+local problem.
+
+## Implementation details
+
+The identity factorization passes through a universe lift, which is an algebra equivalence and
+preserves the singular ideal.
+
+## References
+
+* [Stacks, Situation 07F7] (the definition following it)
+-/
 import WeilConjectures.RingTheory.PopescuIdealCompEquiv
 
 @[expose] public section
@@ -16,9 +32,7 @@ universe u v w
 namespace Algebra
 
 /-- When the extended singular ideal escapes the prime, the identity factorization resolves
-the problem. The universe lift is an algebra equivalence, preserving the singular ideal.
-Source: Stacks Project, Smoothing Ring Maps, definition after Situation 07F7
-(blueprint: lem-weil-pbc-popescu-resolution-identity). -/
+the problem. -/
 theorem canBePopescuResolved_of_ideal_not_le
     {R : Type u} {A : Type v} {Λ : Type w}
     [CommRing R] [CommRing A] [CommRing Λ] [Algebra R A] [Algebra R Λ]

@@ -9,7 +9,22 @@ module
 public import WeilConjectures.RingTheory.PopescuReductionPresentationCore
 import Mathlib.RingTheory.Extension.Presentation.Basic
 
-/-! Lifting a finite polynomial presentation from a reduced standard smooth factor. -/
+/-!
+# Lifting a finite polynomial presentation from a reduced standard smooth factor
+
+Given a factorization of `A/IA → Λ/IΛ` through a standard smooth `R/I`-algebra `C`, we lift a
+finite presentation of `C` over `A/IA` to polynomial equations over `A` and lifts in `Λ`.
+
+## Implementation details
+
+The finite-presentation hypothesis on `A` is essential: an earlier statement without it failed
+for the augmentation from infinitely many polynomial variables.
+
+## References
+
+* [Stacks, Tag 07CK] (steps 3--4 of the proof)
+* [Stacks, Tag 00F4]
+-/
 
 @[expose] public section
 
@@ -19,20 +34,7 @@ open CategoryTheory
 
 namespace Algebra
 
-/-- Lift a finite presentation of the standard smooth reduced factor.
-Source: Stacks Project, Tag 07CK, steps 3--4; Tag 00F4(4).
-
-Regard `C` as an `A/IA`-algebra via `β`. Since `A/IA` is finite type over
-`R/I` and `C` is finitely presented over `R/I`, `C` is finitely presented over
-`A/IA`. Choose a finite presentation. Lift each relation coefficientwise to `A`
-and each generator image under `δ` to `Λ`, using quotient surjectivity. The
-factorization identity identifies evaluation modulo `IΛ` with evaluation in `C`
-followed by `δ`, so each lifted relation evaluates into `IΛ`. The reduced quotient
-is isomorphic to `C` over `R/I`, and standard smoothness transports along this
-isomorphism. The finite-presentation hypothesis on `A` is essential (the old
-statement failed for the augmentation from infinitely many polynomial variables).
-(blueprint: new-lem-popescu-reduction-presentation-from-factor)
--/
+/-- Lift a finite presentation of the standard smooth reduced factor. -/
 theorem exists_popescu_reduction_presentation_of_factor
     (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]
     (I : Ideal R) (A : Type w) [CommRing A] [Algebra R A] [FinitePresentation R A]

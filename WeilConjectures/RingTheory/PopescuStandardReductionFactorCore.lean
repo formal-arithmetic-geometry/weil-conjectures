@@ -16,17 +16,31 @@ import Mathlib.RingTheory.FiniteStability
 import WeilConjectures.RingTheory.PopescuCorrectionReduction
 import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmooth
 
-/-! Finite-presentation factorization used by the reduced Popescu factor. -/
+/-!
+# Finite-presentation factorization used by the reduced Popescu factor
+
+A map from a finitely presented `R`-algebra to `Λ`, with `Λ/IΛ` ind standard smooth over
+`R/I`, factors through a finitely presented `R`-algebra whose reduction modulo `I` is standard
+smooth.
+
+## Implementation details
+
+The stage factorization adapts the ring-colimit argument of
+`Algebra.exists_smooth_factorization_of_ind_smooth` to retain standard smoothness, using a small
+polynomial quotient of the source to handle all source universes.
+
+## References
+
+* [Stacks, Tag 00QO]
+* [Stacks, Tag 07C3]
+* [Stacks, Tag 07CK]
+-/
 @[expose] public section
 universe u v w
 open CategoryTheory
 namespace Algebra
 
-/-- Factor through a stage of the given standard smooth diagram.
-The proof adapts the ring-colimit argument of
-`Algebra.exists_smooth_factorization_of_ind_smooth` to retain standard smoothness,
-using a small polynomial quotient of the source to handle all source universes.
-Source: Stacks Project, Tags 00QO and 07C3. -/
+/-- Factor through a stage of the given standard smooth diagram. -/
 private theorem exists_standard_factor
     {R : Type u} {A : Type w} {L : Type (max u v)}
     [CommRing R] [CommRing A] [CommRing L] [Algebra R A] [Algebra R L]
@@ -110,9 +124,7 @@ private theorem exists_standard_factor
   simpa [g] using hx.symm
 
 /-- Lift a presentation of any finitely presented algebra over the reduced source.
-The quotient of the lifted relations is isomorphic to the given algebra; no smoothness
-or filtered-colimit hypothesis is needed.
-Source: Stacks Project, Tag 07CK (lemma-lift-once), coefficientwise lifting. -/
+The quotient of the lifted relations is isomorphic to the given algebra. -/
 private theorem exists_lifted_presentation
     (R : Type u) [CommRing R] (Λ : Type v) [CommRing Λ] [Algebra R Λ]
     (I : Ideal R) (A : Type w) [CommRing A] [Algebra R A] (φ : A →ₐ[R] Λ)
@@ -166,8 +178,7 @@ private theorem exists_lifted_presentation
     rw [heq]
     exact ⟨e⟩
 
-/-- Express membership in the image ideal of any ring homomorphism as a finite sum.
-Source: Stacks Project, Tag 07CK (lemma-lift-once), the coefficients εᵢⱼ and μᵢⱼ. -/
+/-- Express membership in the image ideal of any ring homomorphism as a finite sum. -/
 private theorem exists_sum_of_mem_ringHom_map
     {R : Type u} [CommRing R] {Λ : Type v} [CommRing Λ]
     (f : R →+* Λ) (I : Ideal R) (x : Λ) (hx : x ∈ I.map f) :
@@ -188,11 +199,7 @@ private theorem exists_sum_of_mem_ringHom_map
   simpa only [mul_comm, Finset.attach_eq_univ] using
     (e.sum_comp (fun a : c.support ↦ c a.val * f a.val)).symm
 
-/-- Finite-presentation factorization through a standard smooth reduction.
-Source: Stacks Project, Tag 07CK, finite-presentation factorization.
-The proof applies the filtered-colimit finite-presentation factorization to the
-reduced map and retains the standard smooth stage and its factor maps.
-(blueprint: new-lem-popescu-reduction-factor-core) -/
+/-- Finite-presentation factorization through a standard smooth reduction. -/
 theorem exists_standardSmooth_reduction_factorization_core
     (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]
     (I : Ideal R)

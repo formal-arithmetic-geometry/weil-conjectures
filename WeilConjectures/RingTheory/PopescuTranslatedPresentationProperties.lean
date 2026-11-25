@@ -14,8 +14,16 @@ import Mathlib.Tactic.Ring
 
 /-! # Applying a quotient section to a Jacobian identity
 
-Source: Stacks Project, Tag 07CR, constant coefficients and the identity for `uπ`.
-(blueprint: lem-weil-pbc-popescu-translated-presentation-properties).
+A section killing the generators of a presentation converts a witnessed Jacobian identity into
+an identity `(1 - π³ t) π = ∑ d_I Δ_I` with constant minors.
+
+## Implementation details
+
+No cancellation of `π` is involved, so `π = 0` and zero divisors are allowed.
+
+## References
+
+* [Stacks, Tag 07CR] (constant coefficients and the identity for `uπ`)
 -/
 
 @[expose] public section
@@ -27,21 +35,7 @@ namespace Algebra
 open MvPolynomial
 
 /-- A section killing the generators converts a witnessed Jacobian identity to constant minors.
-
-Source: Stacks Project, Tag 07CR, the equations preceding the use of Tag 07DQ.
-(blueprint: lem-weil-pbc-popescu-translated-presentation-properties).
-
-Proof: compose evaluation with the quotient map and `ρ`. Since the generators map to
-zero, this composite equals constant evaluation followed by the quotient map of `R`:
-the two algebra homomorphisms agree on constants and variables. Applying it to each
-relation shows its constant coefficient belongs to `(π⁴)`, giving the scalars `a`.
-Apply it to the supplied minor identity. Homomorphisms commute with finite sums,
-products and determinants. Lift each of the finitely many images of `b I` to a scalar
-`d I` in `R`. If `S` is the sum of these scalars times the constant minors, this gives
-`π - S ∈ (π⁴)`, so `π - S = π⁴ t`. Rearrangement gives `(1 - π³ t)π = S`.
-Each minor is one of the stated generators after transposition, which preserves the
-determinant, and an ideal is closed under scalar multiplication and finite sums.
-No cancellation of `π` is involved, including when `π = 0` or is a zero divisor. -/
+-/
 theorem exists_popescu_translated_presentation_properties
     (R : Type u) (A : Type v) [CommRing R] [CommRing A]
     [Algebra R A] (π : R)

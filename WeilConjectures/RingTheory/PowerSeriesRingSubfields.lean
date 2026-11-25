@@ -24,8 +24,21 @@ import WeilConjectures.RingTheory.PowerSeriesSubringIntersection
 /-!
 # Subfields of the fraction field of a power-series polynomial ring
 
-Source: Stacks Project, More on Algebra, Lemmas 07P5 and 07P4
-(blueprint: lem-weil-pbc-power-series-ring-subfields).
+The subfields cut out by finite subsets `J` of a `p`-basis in the fraction field of a
+power-series polynomial ring form a directed family whose intersection is the field of `p`th
+powers.
+
+## Implementation details
+
+The ring `A` is written out as `MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)`. The families
+`kJ`, `AJ` and `KJ` are specified by exact defining conditions: field generation, coefficients
+supported on `p`-divisible exponents, and quotients. No finiteness or intersection conclusion is
+assumed.
+
+## References
+
+* [Stacks, Tag 07P5]
+* [Stacks, Tag 07P4]
 -/
 
 @[expose] public section
@@ -39,48 +52,7 @@ attribute [local instance] ZMod.algebra
 namespace RingTheory
 
 open Classical in
-/-- The subfields cut out by a p-basis in a power-series polynomial ring.
-Source: Stacks Project, More on Algebra, Lemmas 07P5 and 07P4
-(blueprint: lem-weil-pbc-power-series-ring-subfields).
-
-The ring A is written out as `MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)`.
-The families `kJ`, `AJ`, and `KJ` are specified by exact defining conditions:
-field generation, coefficients supported on p-divisible exponents, and quotients.
-No finiteness or intersection conclusion is assumed.
-
-Proof (the eight steps of the node):
-1. A is a domain by `lem-weil-pbc-power-series-domain` and
-   `lem-weil-pbc-polynomial-ring-domain`. Its fraction map is injective. Quotients
-   of elements of a subring form a subfield, since nonzero denominators multiply.
-2. Expand h in polynomial y-monomials with power-series coefficients. Addition
-   is coefficientwise and multiplication is convolution. The coefficient condition
-   defining AJ contains 1 and is closed under addition, negatives and multiplication:
-   sums of p-divisible exponents remain p-divisible and kJ is a subfield.
-3. The p-basis monomials off J span kJ over k^p: this span is a ring, and each
-   element lies in a finite-dimensional subring, where multiplication by a nonzero
-   element is bijective, giving its inverse. Splitting monomial supports into J
-   and its complement gives a kJ-basis of k indexed by bounded monomials on J.
-   Uniqueness of p-basis coordinates gives intersection_J kJ = k^p. Enlarging J
-   removes generators, so kJ is decreasing.
-4. Divide every x- and y-exponent by p with remainder. Group the coefficients
-   using the kJ-basis from step 3. This gives the finite AJ-basis t^E x^e y^g,
-   with E supported on J and all exponents below p. Coefficient comparison proves
-   independence. Thus A is finite over AJ (`def-weil-finitely-generated-module`).
-5. By `lem-weil-pbc-power-series-frobenius-coefficientwise`, Frobenius raises
-   coefficients to p-th powers and multiplies exponents by p. Conversely, taking
-   coefficient roots gives a p-th root of every element supported on p-divisible
-   exponents with coefficients in k^p. Hence a^p and b^p lie in every AJ, giving
-   (a/b)^p in every KJ.
-6. If h in A maps into KJ, clear its denominator to get c*h=a for a,c in AJ,
-   c nonzero. Apply the AJ-linear basis coordinate at the basis vector 1.
-   It gives c*coordinate(h)=a; cancelling c proves h=coordinate(h) in AJ.
-   Thus A intersect KJ = AJ.
-7. Write z in every KJ as f/b^p, with f in A and b nonzero. Since b^p lies in
-   every AJ, step 6 puts f in every AJ. Step 3 puts its coefficients in k^p,
-   and step 5 gives f = h^p. Thus z = (h/b)^p, proving the intersection equality.
-8. The generators of kJ for J union J' lie in both smaller fields. The coefficient
-   conditions imply the same inclusions for AJ, and taking quotients gives the
-   required inclusion for KJ. -/
+/-- The subfields cut out by a p-basis in a power-series polynomial ring. -/
 theorem iInter_frobenius_subfields_mvPolynomial_mvPowerSeries
     (p : ℕ) [Fact p.Prime]
     (k : Type u) [Field k] [CharP k p]

@@ -15,8 +15,20 @@ import WeilConjectures.RingTheory.PopescuLiftSuccessor
 /-!
 # Lifting a Popescu resolution modulo eighth powers
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07F8, in Situation 07F7
-(blueprint: lem-weil-pbc-popescu-lift-solution).
+In Situation 07F7, a resolution of the problem modulo the eighth powers of a list of strictly
+standard elements lifts to a resolution of the original local problem.
+
+## Implementation details
+
+The reduced algebra structures are Mathlib's `Ideal.Quotient.algebraQuotientMapQuotient`
+instances; the reduced map and prime are specified by their compatibility with the quotient
+maps, which determines them uniquely. The finite-presentation witness (true by base change)
+is included only to type the recorded definition of `CanBePopescuResolved`. The annihilator
+equalities are expressed pointwise as equivalences of vanishing products.
+
+## References
+
+* [Stacks, Lemma 07F8], in [Stacks, Situation 07F7]
 -/
 
 @[expose] public section
@@ -50,42 +62,7 @@ local notation "R₀" => R ⧸ J
 local notation "A₀" => A ⧸ J_A
 local notation "Λ₀" => Λ ⧸ J_Λ
 
-/-- A resolution modulo all the eighth powers lifts to the original local problem.
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07F8, Situation 07F7
-(blueprint: lem-weil-pbc-popescu-lift-solution).
-
-The reduced algebra structures are Mathlib's `Ideal.Quotient.algebraQuotientMapQuotient`
-instances; the reduced map and prime are specified by their compatibility with the quotient
-maps, which determines them uniquely; the finite-presentation witness (true by base change)
-is included only to type the recorded definition of `CanBePopescuResolved`.
-The annihilator equalities are expressed pointwise as equivalences of vanishing products.
-
-Proof (the seven steps of the node):
-1. Induct on `r`, with the one-element case as base.
-2. Reduction by an ideal in the inverse image of `q` remains Situation 07F7: the base is
-Noetherian, the algebra finitely presented by base change, and the quotient prime is prime
-(lem-weil-pbc-finite-type-algebra-noetherian, lem-weil-pbc-tensor-quotient-base-change,
-lem-weil-pbc-finite-presentation-base-change-composition). Iterated reductions agree.
-3. Singular ideals map into singular ideals under base change: smooth principal
-localizations remain smooth after base change, and take radicals
-(def-weil-pbc-singular-ideal, lem-weil-pbc-smooth-ring-map-base-change-composition,
-lem-weil-pbc-localization-base-change, lem-weil-pbc-tensor-quotient-base-change).
-4. For one element, apply lem-weil-pbc-popescu-desingularize-lifting-apply (07F0) to a
-resolution of the reduction. Its hypotheses are precisely the two annihilator equalities
-and strict standardness. Obtain a finitely presented factorization through `B`, smooth
-away from `π`, and the stated containment of the reduced singular ideal.
-5. The image of `π` belongs to the singular ideal of `B`, since its localization is smooth
-(lem-weil-pbc-polynomial-ring-smooth, lem-weil-pbc-smooth-ring-map-principal-localization,
-lem-weil-pbc-localization-base-change, lem-weil-pbc-smooth-ring-map-base-change-composition).
-Thus `π^8 Λ` lies in `h_B`, and the radical ideal of the reduced resolution lies in its image.
-6. Lift an element of that ideal outside the quotient prime to show `h_B` is not contained
-in `q`. Step 3 and the reduced resolution imply `h_A ≤ h_B`, giving a resolution
-(def-weil-pbc-popescu-resolution).
-7. For more than one element, first reduce by the first eighth power. The remaining
-annihilator hypotheses identify with the original ones by iterated quotients; strict
-standardness survives by lem-weil-pbc-strictly-standard-base-change (07CC). Apply induction
-to the remaining elements, then the one-element case to lift back to `R`.
--/
+/-- A resolution modulo all the eighth powers lifts to the original local problem. -/
 theorem canBePopescuResolved_of_quotient_eighth_powers
     (α : A →ₐ[R] Λ) (q : PrimeSpectrum Λ) (hr : 1 ≤ r)
     (hπ : ∀ i : Fin r, algebraMap R Λ (π i) ∈ q.asIdeal)

@@ -13,9 +13,12 @@ import Mathlib.RingTheory.MvPolynomial.Localization
 /-!
 # Clearing auxiliary relation certificates
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07F9,
-`lemma-delocalize-weak`, the denominator-clearing paragraphs.
-(blueprint: lem-weil-pbc-popescu-weak-clear-relations)
+For equations `f` generating the localized kernel of a presentation over `R_p`, each auxiliary
+relation `g_j` vanishing in the target satisfies `s_j g_j ∈ (f)` for some `s_j` outside `p`.
+
+## References
+
+* [Stacks, Tag 07F9] (the denominator-clearing paragraphs of the proof)
 -/
 
 @[expose] public section
@@ -26,17 +29,7 @@ namespace Algebra
 
 open MvPolynomial
 
-/-- Clear auxiliary relation certificates for equations generating the localized kernel.
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07F9,
-`lemma-delocalize-weak`, the denominator-clearing paragraphs.
-(blueprint: lem-weil-pbc-popescu-weak-clear-relations)
-
-Proof: The renamed gⱼ evaluates to zero, hence its coefficient extension belongs
-to the kernel, which by hypothesis is the extension of (f). Polynomial scalar
-extension is localization at the constants outside p. The localization criterion
-for ideal membership gives a constant outside p whose product with the renamed
-gⱼ is in (f). Choose one such constant for each j. For t = 0 there is nothing to
-choose. -/
+/-- Clear auxiliary relation certificates for equations generating the localized kernel. -/
 theorem exists_cleared_submersive_relations
     {R : Type u} [CommRing R] (p : Ideal R) [p.IsPrime]
     {D : Type v} [CommRing D] [Algebra (Localization.AtPrime p) D]

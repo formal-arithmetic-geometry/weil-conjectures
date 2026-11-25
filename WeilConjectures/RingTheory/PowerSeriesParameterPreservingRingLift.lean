@@ -17,8 +17,18 @@ import Mathlib.RingTheory.Noetherian.Nilpotent
 
 /-! # Ring lifts with prescribed parameter values
 
-Source: Stacks Project, Tags 07NQ, 07NM and 07NL.
-(blueprint: lem-weil-pbc-power-series-parameter-preserving-ring-lift)
+In a square-zero lifting problem for field or Cohen power series rings, an unrestricted ring
+lift can be chosen to agree with the base map on parameters.
+
+## Implementation details
+
+No linearity over the whole base ring and no closed-fibre assumption is involved.
+
+## References
+
+* [Stacks, Tag 07NQ] (construction of `ψ` before the defect derivation)
+* [Stacks, Tag 07NM]
+* [Stacks, Tag 07NL]
 -/
 
 @[expose] public section
@@ -125,24 +135,7 @@ private theorem adjust_coordinates
     dsimp [z, j']
     rw [dite_eq_left j.isLt]
 
-/-- An unrestricted ring lift can be chosen to agree with the base map on parameters.
-No assertion of linearity over the whole base ring is made.
-Source: Stacks Project, Tag 07NQ, construction of psi before the defect derivation.
-(blueprint: lem-weil-pbc-power-series-parameter-preserving-ring-lift)
-
-Proof: Use the full parameter system i(t),y as power-series coordinates, omitting
-p as a variable in the Cohen case (Tag 07NM). Tag 07NL first supplies a ring lift
-of g over the prime ring. In the field case D is a rational algebra: every nonzero
-integer is invertible modulo J, and invertibility lifts through a square-zero ideal.
-Retain the lifted coefficient map; replace the coordinate values belonging to i(t)
-by their prescribed images under R -> D, and retain the other lifted values.
-The coordinate values are nilpotent, since their k-th powers lie in J and their
-2k-th powers vanish. Their finitely generated ideal is nilpotent. Evaluation of
-series therefore uses finite truncations and gives a ring map. In D/J its values
-on coefficients and coordinates are unchanged, so uniqueness of evaluation makes
-its composite equal to g. The p-coordinate already agrees, since ring maps preserve
-integers. Empty lists require no replacement. No closed-fibre assumption is used.
--/
+/-- An unrestricted ring lift can be chosen to agree with the base map on parameters. -/
 theorem exists_parameterPreserving_ringLift
     (ΛR : Type u) (ΛT : Type v) [CommRing ΛR] [CommRing ΛT] (n m : ℕ)
     [IsRegularLocalRing (MvPowerSeries (Fin n) ΛR)]
