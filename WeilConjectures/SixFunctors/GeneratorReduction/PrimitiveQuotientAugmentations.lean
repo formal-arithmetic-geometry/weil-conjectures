@@ -12,8 +12,23 @@ import WeilConjectures.SixFunctors.GeneratorReduction.FiniteReductionCompletionU
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 /-! # Quotient augmentations of primitive operations
 
-Source: current blueprint fix-prop-coherence, primitive comparisons
-(blueprint: lem-sf-primitive-quotient-augmentations).
+We show that the primitive tensor and pullback comparisons have invertible reductions and that
+their normalized ordinary augmentations realize the reduction-tensor and reduction-pullback
+maps.
+
+## Implementation details
+
+The augmentation equations are first proved on good complexes, using the strict transpose
+calculations in full Roos coordinates, and then extended to all objects via representative
+isomorphisms from the resolving-class localization. Each primitive comparison is
+`completionUnit` followed by a comparison isomorphism; finite scalar extension inverts
+`completionUnit`, so by joint conservativity of the evaluations its reduction is invertible.
+No completeness or boundedness of the inputs, nor invertibility of `l` on the schemes, is
+assumed.
+
+## References
+
+* Stacks Project, Tags 07A4, 07A6, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -146,25 +161,10 @@ private theorem pull_augmentation_onGood
     IntegralOnSlice.qGood, Functor.comp_obj, ObjectProperty.ι_obj] using
     hu'.trans (pullQuotientTranspose_onGood l E system realization f p P).symm
 
-/-- The normalized ordinary tensor augmentation realizes the reduction-tensor map.
-Source: current blueprint, fix-prop-coherence.proof.md, maps-used sentence;
-Stacks Tags 07A4, 07A6 and 0941
-(blueprint: lem-sf-primitive-quotient-augmentations).
-
-Proof: first work on good flat-term K-flat complexes. The strict tensor
-transpose calculation identifies the reconstruction composite in the full reference
-Roos coordinates. Tensor.canonical.2 computes the quotient augmentation in those
-same coordinates. The defining global tensor realization and cancellation of the
-ordinary tensor representative identify these maps. For pullback, the strict
-transpose calculation is combined with Pull.model, naturality of completionUnit,
-and its defining good-representative equation. Cancel the full reference pullback
-Roos isomorphism. Both equations are natural transformations, so representative
-isomorphisms from the resolving-class localization extend them to arbitrary objects.
-Finite scalar extension inverts completionUnit. Naturality of reductionEvaluation
-and joint conservativity imply invertibility of its whole reduction. Both primitive
-comparisons are completionUnit followed by the specified comparison isomorphism,
-so their reductions are invertible too. No completeness or boundedness of the
-inputs, or invertibility of l on the schemes, is assumed. -/
+/-- The primitive tensor and pullback comparisons `χ` have invertible reductions, and the
+normalized ordinary augmentations realize the reduction-tensor and reduction-pullback maps:
+composed with the integral tensor (resp. pullback) model, `χ` equals the adjunction unit
+followed by the limit of the reduction comparison. -/
 theorem primitiveQuotientAugmentations (ringed : IntegralSystemRealization.RingedModels l E)
     (system : IntegralSystemRealization.Operations l E)
     (realization : IntegralSystemRealization.RealizationModel l E system) :

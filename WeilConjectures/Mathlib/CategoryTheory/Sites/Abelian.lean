@@ -58,8 +58,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- The kernel of a morphism `φ : F ⟶ G` in the abelian category of `D`-valued sheaves
 (`CategoryTheory.sheafIsAbelian`) is computed sectionwise: its sections over `U` are the
-kernel of `φ` on sections over `U`, since the inclusion of sheaves into presheaves and the
-evaluations preserve limits. (blueprint: `def-pur-abelian-sheaf-kernel`) -/
+kernel of `φ` on sections over `U`. -/
 noncomputable def Sheaf.kernelObjIso {F G : Sheaf J D} (φ : F ⟶ G) (U : Cᵒᵖ) :
     (kernel φ).obj.obj U ≅ kernel (φ.hom.app U) :=
   PreservesKernel.iso (sheafToPresheaf J D ⋙ (evaluation Cᵒᵖ D).obj U) φ

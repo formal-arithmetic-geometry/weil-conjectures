@@ -13,8 +13,9 @@ import Mathlib.RingTheory.TensorProduct.Basic
 
 /-! # Isomorphism descent from an elementwise ring-colimit criterion
 
-Source: Stacks Project, Algebra, Tag 05N7 (2), (3).
-(blueprint: lem-pc-elementwise-fp-module-equiv-descent)
+## References
+
+* Stacks Project, Algebra, Tag 05N7 (2), (3) and Tag 05LI (3)
 -/
 
 @[expose] public section
@@ -26,9 +27,8 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 /-- Lift a map from a finitely presented module through a directed system with the
-representative and eventual-zero properties. Lift the finite generators together,
-then move to one stage killing the images of the finitely many kernel generators.
-Source: Stacks Project, Algebra Tag 05LI (3). -/
+representative and eventual-zero properties: every linear map `M → P` from a finitely presented
+module factors through some stage `D i`. -/
 private theorem fp_lift
     {R : Type*} [CommRing R] {J : Type*} [Preorder J] [Nonempty J]
     [IsDirected J (· ≤ ·)] (D : J → Type*)
@@ -277,33 +277,10 @@ private theorem eventually_zero_hom
   exact hk (a m) (Finset.mem_image.mpr ⟨m, hm, rfl⟩)
 
 /-- An isomorphism of the limit base changes of two fixed finitely presented
-modules descends to one stage of a directed ring system.
-
-Source: Stacks Project, Algebra, Tag 05N7 (2), (3).
-(blueprint: lem-pc-elementwise-fp-module-equiv-descent)
-
-Proof:
-1. The representative and eventual-zero assumptions identify C as the ring
-   colimit. Define the map to any other cocone on a representative g_j(a).
-   Move two equal representatives to a common stage and apply eventual zero
-   to their difference to prove independence of the representative. Common
-   stages also prove the ring-map laws; representatives prove uniqueness.
-   For a preorder, take its poset reflection and choose representatives;
-   mutually comparable transitions are inverse by identity and composition.
-   Lift rings, indices and modules to one common universe using ULift, so
-   the categorical map-descent theorem applies, and transport back afterward.
-2. Apply Tag 05N7 (2) to the isomorphism and its inverse. Move the two descended
-   maps to a common stage. The canonical tensor comparisons satisfy the
-   unit-tensor equations, so their extensions are the original maps.
-3. The stage modules are finitely presented by base change. Each composite
-   becomes the identity over C. Apply Tag 05N7 (3) to each composite and the
-   appropriate identity, and take a common upper bound for the resulting
-   equalities. Base change preserves composition and identities, so the two
-   stage maps are inverse and define a linear equivalence. Transport back
-   through the universe lifts and poset representatives. No flatness or
-   finite presentation of any ring is needed. The proof also applies to zero
-   rings, zero modules, and empty finite presentations.
--/
+modules descends to one stage of a directed ring system: if `C` is the colimit of the
+directed system of rings `A j` (every element of `C` comes from some stage, and elements
+mapping to zero vanish at a later stage), and `P`, `N` are finitely presented `A i`-modules with
+`C ⊗[A i] P ≃ C ⊗[A i] N`, then `A j ⊗[A i] P ≃ A j ⊗[A i] N` for some `j ≥ i`. -/
 theorem exists_stage_equiv_of_elementwise_colimit
     {J : Type v} [Preorder J] [IsDirectedOrder J]
     (A : J → Type u) [∀ j, CommRing (A j)]

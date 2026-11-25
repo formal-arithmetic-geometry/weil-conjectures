@@ -9,13 +9,17 @@ public import WeilConjectures.PoincareDuality.Pod.Reindexing.Derived.PodReindexi
 import all WeilConjectures.SmoothPurity.Supporting.IsomorphismReductionTower
 import all WeilConjectures.CategoryTheory.Exact.ExactEquivalenceDerivedSquares
 
-/-! Constructing the normalized finite comparison from raw derived data.
+/-! # Constructing the normalized finite comparison from raw derived data
 
-The raw record leaves its finite comparison unconstrained. Replace that field by
-the derived scalar-extension square normalized by its universal counit. Tensor
-generators identify the prescribed strict quotient with the ordinary square,
-which proves the finite-model law without constraining any other field.
-(blueprint: lem-pod-reindexing-derived-core-finite-model) -/
+The raw record leaves its finite comparison unconstrained. We replace that field by a
+comparison satisfying the finite-model law, without changing any other field.
+
+## Implementation details
+
+The new finite comparison is the derived scalar-extension square, normalized by its universal
+counit. Its unit fixes the pure-tensor formula, so tensor generation identifies the prescribed
+strict quotient map with this square degreewise; the universal derived counit then gives the
+finite-model equality on good representatives. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -121,17 +125,8 @@ private theorem finiteSquare (n : ℕ)
   erw [hc]
   exact h.symm
 
-/-- The finite scalar comparison can be chosen with the prescribed quotient normalization.
-
-STATEMENT-DISPUTED (old version): the raw record permits independently changing
-`Q.finite`, so it cannot assert this equality for every such choice.  The corrected
-statement chooses that field and retains all the other fields of Q.
-
-Source: blueprint Steps 1 and 5.  Derive the ordinary scalar-extension square,
-whose unit fixes its pure-tensor formula.  Tensor generation identifies the supplied
-quotient map with this square degreewise.  The universal derived counit then gives
-the finite-model equality on good representatives.
-(blueprint: lem-pod-reindexing-derived-core-finite-model) -/
+/-- The finite scalar comparison of raw derived data `Q` can be replaced by one, `φ`, for
+which the assembled datum satisfies the finite-model law; all other fields of `Q` are kept. -/
 theorem podReindexingDerivedCoreData_finiteModel
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

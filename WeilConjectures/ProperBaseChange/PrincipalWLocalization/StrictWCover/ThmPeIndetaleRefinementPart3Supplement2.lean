@@ -20,9 +20,31 @@ import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 
 /-! # Properties of the strict w-local cover
 
-Source: blueprint, sec-proper-base-change/sk-thm-properbasechange, order 1229;
-Stacks Project, Tag 097X, first paragraph of proof, properties (1), (3), (7), (9)
-(blueprint: theorem-existence-contractible-covers--1).
+We show that the strict w-local cover `algebra A` of a ring `A` is faithfully flat and
+ind-étale over `A`, that its spectrum is w-local with strictly henselian local rings at maximal
+ideals, and that its closed points map onto `Spec A`.
+
+## Main results
+
+- `PrincipalWLocalization.StrictWCover.properties`
+
+## Implementation details
+
+Put `W = A^w`, `E = W^e`, `I` the closed-point ideal of `W` and `T = V(IE)`. The point
+description of `PrincipalWLocalization.points` shows that `V(I)` consists of closed points
+mapping onto `Spec A`. The étale-contraction properties make `W → E` faithfully flat and
+ind-étale with strictly henselian maximal local rings. A prime `q` in `T` contracts to a maximal
+ideal of `W`, hence is maximal (`maximal_of_indEtale`, via
+`Algebra.IndEtale.isSeparable_of_algHom_to_isLocalRing`). The retained-localization properties
+applied to `T` show that the cover is w-local with closed points `T` and unchanged local rings
+there; henselianity and separable closedness are transferred along these local-ring
+isomorphisms. Surjectivity on closed points uses faithful flatness of `E` over `W`. Finally
+`A → W` and `E → algebra A` are ind-Zariski, hence ind-étale, and faithful flatness follows from
+flatness and surjectivity on spectra.
+
+## References
+
+- [Stacks, Tag 097X], first paragraph of the proof, properties (1), (3), (7), (9)
 -/
 
 @[expose] public section
@@ -31,9 +53,7 @@ universe u
 
 namespace PrincipalWLocalization.StrictWCover
 
-/-- A principal ind-Zariski presentation is an ind-etale presentation: principal
-localizations and their finite products are etale, and etaleness respects algebra equivalences.
-Source: the definitions in `IndPrincipalZariski` and Mathlib's etale-localization API. -/
+/-- An ind-principal-Zariski algebra is ind-étale. -/
 private theorem indEtale_of_principal (R S : Type u) [CommRing R] [CommRing S]
     [Algebra R S] (h : Algebra.IsIndPrincipalZariski R S) : Algebra.IndEtale R S := by
   obtain ⟨I, hI, hF, P, hP⟩ := h
@@ -46,12 +66,7 @@ private theorem indEtale_of_principal (R S : Type u) [CommRing R] [CommRing S]
     Algebra.Etale.of_isLocalizationAway (f j)
   exact Algebra.Etale.of_equiv e.symm
 
-/-- A prime over a maximal ideal under an ind-etale map is maximal. Map its quotient
-into its fraction field. The ind-etale local-field image lemma makes every image separable,
-hence integral over the base quotient field. Injectivity reflects integrality, so the domain
-quotient is integral over a field and is itself a field.
-Source: Stacks 097X, first proof paragraph; the source library's
-`Algebra.IndEtale.isSeparable_of_algHom_to_isLocalRing`. -/
+/-- Under an ind-étale algebra map, a prime lying over a maximal ideal is maximal. -/
 private theorem maximal_of_indEtale (R S : Type u) [CommRing R] [CommRing S]
     [Algebra R S] [Algebra.IndEtale R S] (q : Ideal S) [q.IsPrime]
     (hm : (q.comap (algebraMap R S)).IsMaximal) : q.IsMaximal := by
@@ -81,32 +96,9 @@ private theorem maximal_of_indEtale (R S : Type u) [CommRing R] [CommRing S]
   apply (Ideal.Quotient.maximal_ideal_iff_isField_quotient q).mpr
   exact isField_of_isIntegral_of_isField' (Field.toIsField k)
 
-/-- The specified strict w-local cover is faithfully flat and ind-etale over its base,
-its spectrum is w-local, its maximal local rings are strictly henselian, and its closed
-points map onto the whole base spectrum.
-Source: blueprint order 1229; Stacks Project, Tag 097X, first proof paragraph
-(blueprint: theorem-existence-contractible-covers--1).
-
-Proof: Put W = A^w, E = W^e, I the closed-point ideal of W, and T = V(IE).
-The point description of `PrincipalWLocalization.points` shows that V(I) consists of
-closed points and maps onto Spec A, since the diagonal pair (x,x) maps to x.
-The etale-contraction properties make W -> E faithfully flat and ind-etale, with strictly
-henselian maximal local rings. A prime q in T contracts to a maximal ideal m of W.
-Map E/q into its fraction field, with scalars W/m. The source-library lemma
-`Algebra.IndEtale.isSeparable_of_algHom_to_isLocalRing` makes each image of E separable
-over W/m, hence integral. Integrality reflects along the injective fraction-field map.
-Thus the domain E/q is integral over the field W/m, so is itself a field and q is maximal.
-Apply retained-localization properties to this closed set of closed points:
-C_A is w-local, with closed points T and unchanged local rings E_q there. Transfer
-henselianity along these local-ring isomorphisms by unique lifting of residue idempotents
-in finite algebras, and transfer separable closedness by the residue-field isomorphism.
-For every x in Spec A choose a closed point m of W above it. Faithful flatness of E/W
-gives a prime q above m; it contains IE and belongs to T. The retained closed point (q,q)
-therefore maps to x. Finally A -> W and E -> C_A are ind-Zariski, hence ind-etale.
-The source library's ind-etale composition lemma makes the composite ind-etale;
-its weak-etaleness instance gives flatness.
-The closed-point surjectivity just proved implies spectrum surjectivity, so the flat
-surjective-spectrum criterion gives faithful flatness. -/
+/-- The strict w-local cover of `A` is faithfully flat and ind-étale over `A`, it is a w-local
+ring whose localizations at maximal ideals are strictly henselian, and its closed points map
+onto `Spec A`. -/
 theorem properties (A : Type u) [CommRing A] :
     Module.FaithfullyFlat A (algebra A) ∧
     Algebra.IndEtale A (algebra A) ∧

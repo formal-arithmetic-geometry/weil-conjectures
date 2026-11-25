@@ -143,8 +143,13 @@ import WeilConjectures.ProperBaseChange.RealizationScalarFunctor
 
 /-! # Normalized continuous field realization system
 
-Source: Bhatt--Scholze, Proposition 6.8.14(2) and Remark 6.8.15.
-(blueprint: lem-weil-pbc-condensed-e-system)
+An adjunction `F ⊣ G` between `R`-linear categories induces an adjunction between their scalar
+localizations at an element `p : R`.
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(2) and
+  Remark 6.8.15.
 -/
 
 @[expose] public noncomputable section

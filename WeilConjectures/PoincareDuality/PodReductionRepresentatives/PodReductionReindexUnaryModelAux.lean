@@ -19,8 +19,13 @@ compared with the sequence inverse image of the quotient system. The comparison
 is the left-adjoint mate of the whole-tower tensor-unit isomorphism, and it is
 fixed on every quotient unit generator.
 
-Source: blueprint dual-Tate compatibility Steps 2 and 4; Stacks 03EL, 07A4 and 0941.
-(blueprint: lem-pod-reduction-reindex-unary-model).
+## References
+
+* Stacks Project, Tag 03D6
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 06YY
+* Stacks Project, Tag 07A4
+* Stacks Project, Tag 0941
 -/
 
 @[expose] public noncomputable section
@@ -86,8 +91,7 @@ private theorem unaryIso_inv_section
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Inverse image commutes with the ordinary total limit of a quotient system.
-Source: Stacks 03D6 and 0941. -/
+/-- Inverse image commutes with the ordinary total limit of a quotient system. -/
 private def towerLimitSquare {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     CompletionUnit.ordinaryLimit l E Y ⋙ inverseImageIntegralModules l E g ≅
       integralComparisonSequencePullback l E g ⋙ CompletionUnit.ordinaryLimit l E X :=
@@ -104,8 +108,7 @@ private def towerLimitSquare {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
 
 
 -- The section calculation compares two presentations of the same finite quotient.
-/-- The unit of an ordinary quotient model, projected to level `n`, is its unit generator.
-Source: Stacks 06YY, 0941. -/
+/-- The unit of an ordinary quotient model, projected to level `n`, is its unit generator. -/
 theorem unit_projection_section (W : Scheme.{u}) (M : CompletionUnit.OrdinaryModel l E W)
     (N : scalarReductionSource l E W) (n : ℕ) (U : W.ProEtᵒᵖ) (x : N.val.obj U) :
     ((M.adjunction.unit.app N ≫
@@ -134,8 +137,7 @@ theorem unit_projection_section (W : Scheme.{u}) (M : CompletionUnit.OrdinaryMod
       ((M.evaluation n).app N).inv_hom_id).symm
 
 
-/-- The tower limit square, projected to a quotient level, is the tower unit.
-Source: Stacks 03D6 and 0941. -/
+/-- The tower limit square, projected to a quotient level, is the tower unit. -/
 private theorem towerLimitSquare_π {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (M : coefficientSequenceModules l E Y) (n : ℕ) :
     (towerLimitSquare l E g).hom.app M ≫
@@ -155,8 +157,7 @@ private theorem towerLimitSquare_π {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   erw [preservesLimitNatIso_hom_app, limMap_π, preservesLimitIso_hom_π_assoc]
 
 
-/-- Sections of the relabelled map are the original sections over the image site.
-Source: Stacks 03D6. -/
+/-- Sections of the relabelled map are the original sections over the image site. -/
 private theorem inverseImage_map_section {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     {M N : integralTowerModules l E Y} (h : M ⟶ N) (U : X.ProEt)
     (x : M.val.obj (op ((proEtaleIsoPostcompose g).obj U))) :
@@ -226,8 +227,7 @@ private theorem reindex_normalized_aux {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
   exact unaryIso_inv_section (e.app N) (op (n, U)) _ _ ((cast_inj _).mp h)
 
 
-/-- Unit generators are compatible with an equality of modules.
-Source: Stacks 06YY. -/
+/-- Unit generators are compatible with an equality of modules. -/
 private theorem unitSection_eqToHom (W : Scheme.{u}) (M : CompletionUnit.OrdinaryModel l E W)
     {A B : scalarReductionSource l E W} (h : A = B) (n : ℕ) (U : W.ProEtᵒᵖ)
     (x : A.val.obj U) (y : B.val.obj U) (hxy : HEq x y) :
@@ -239,9 +239,7 @@ private theorem unitSection_eqToHom (W : Scheme.{u}) (M : CompletionUnit.Ordinar
   simp
 
 /-- The ordinary quotient system commutes with reindexing along an isomorphism, by a
-comparison fixed on every quotient unit generator.
-Source: blueprint dual-Tate compatibility Steps 2 and 4; Stacks 03D6, 03EL and 0941.
-(blueprint: lem-pod-reduction-reindex-unary-model). -/
+comparison fixed on every quotient unit generator. -/
 theorem reindexNormalized_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (MY : CompletionUnit.OrdinaryModel l E Y) (MX : CompletionUnit.OrdinaryModel l E X) :
     ∃ β : MY.tensor ⋙ integralComparisonSequencePullback l E g ≅
@@ -260,16 +258,14 @@ theorem reindexNormalized_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   exact unitSection_eqToHom l E X MX (Functor.congr_obj hF.symm N) n (op U) x x HEq.rfl
 
 
-/-- The coefficient identification of a quotient level is the identity on sections.
-Source: Stacks 0941. -/
+/-- The coefficient identification of a quotient level is the identity on sections. -/
 private theorem evaluationRing_app (W : Scheme.{u}) (n : ℕ) (V : W.ProEt) :
     (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm).hom.app (op V) = 𝟙 _ := by
   rw [ObjectProperty.eqToHom_hom, eqToHom_app]
   rfl
 
 -- Use the abstract pushforward formula to avoid unfolding the quotient module structure.
-/-- Scalars of a quotient level act through the sequence ring.
-Source: Stacks 0941. -/
+/-- Scalars of a quotient level act through the sequence ring. -/
 private theorem evaluation_smul (W : Scheme.{u}) (n : ℕ) (M : coefficientSequenceModules l E W)
     (V : W.ProEt) (r : (integralCoefficientSheaf l E W n).obj.obj (op V))
     (m : M.val.obj (op (n, V))) :
@@ -299,8 +295,7 @@ private theorem unitSection_tensor_smul (W : Scheme.{u})
     ((f.hom.map_smul a (unrestrictedTowerTensorSection l E W n N (op V) 1 x)).trans
       (evaluation_smul l E W n (M.tensor.obj N) V a _))
 
-/-- The sequence inverse-image generator is semilinear.
-Source: Stacks 03D6 and 0941. -/
+/-- The sequence inverse-image generator is semilinear. -/
 private theorem generator_smul {X Y : Scheme.{u}} (g : X ⟶ Y)
     (N : coefficientSequenceModules l E Y) (n : ℕ) (V : Y.ProEt)
     (b : (coefficientSequenceCommRingSheaf l E Y).obj.obj (op (n, V)))
@@ -314,8 +309,7 @@ private theorem generator_smul {X Y : Scheme.{u}} (g : X ⟶ Y)
     (integralComparisonSequenceDirectImage l E g)).unit.app N).val.app (op (n, V))).hom.map_smul
       b x
 
-/-- Vertical restriction in the sequence ring is restriction in the quotient ring.
-Source: Stacks 0941. -/
+/-- Vertical restriction in the sequence ring is restriction in the quotient ring. -/
 private theorem sequenceRing_vertical (W : Scheme.{u}) (n : ℕ) {U V : W.ProEt} (f : U ⟶ V)
     (r : (coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V))) :
     ((sheafCompose (coefficientSequenceTopology (ProEt.topology W))
@@ -327,8 +321,7 @@ private theorem sequenceRing_vertical (W : Scheme.{u}) (n : ℕ) {U V : W.ProEt}
     sheafToPresheaf (ProEt.topology W) CommRingCat.{u + 1}) n f
   exact congrArg (fun k ↦ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).map k r) h
 
-/-- Reindexing the constant quotient ring along the comma arrow is the constant map.
-Source: Stacks 03D6. -/
+/-- Reindexing the constant quotient ring along the comma arrow is the constant map. -/
 private theorem sequenceRing_comma {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (n : ℕ)
     (U : X.ProEt)
     (a : (integralCoefficientCommRingSheaf l E Y n).obj.obj
@@ -369,8 +362,7 @@ private theorem unaryGenerator_comma_smul {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIs
             ((proEtaleIsoPostcompose g).obj U) x)) (sequenceRing_comma l E g n U a)))
 
 -- Scalar linearity of every map involved, followed by the unit normalization.
-/-- A unit-normalized reindexing comparison is fixed on every scalar tensor generator.
-Source: Stacks 03D6, 06YY and 0941. -/
+/-- A unit-normalized reindexing comparison is fixed on every scalar tensor generator. -/
 theorem reindexNormalized_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (MY : CompletionUnit.OrdinaryModel l E Y) (MX : CompletionUnit.OrdinaryModel l E X)
     (β : MY.tensor ⋙ integralComparisonSequencePullback l E g ≅

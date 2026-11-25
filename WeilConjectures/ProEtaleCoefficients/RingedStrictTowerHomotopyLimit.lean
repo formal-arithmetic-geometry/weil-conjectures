@@ -10,10 +10,10 @@ public import WeilConjectures.CategoryTheory.RingedStrictTowerHomotopyLimit
 /-!
 # Total derived inverse limits of strict towers on a ringed site
 
-Source: Stacks Project, Cohomology on Sites, Tags 0940 and 0941; More on Algebra,
-Tag 0H9L (blueprint: lem-weil-pbc-ringed-strict-tower-homotopy-limit).
+This module re-exports `WeilConjectures.CategoryTheory.RingedStrictTowerHomotopyLimit`, which
+provides `CategoryTheory.ringedStrictTowerHomotopyLimit` and its auxiliary lemmas.
 
-The auxiliary lemmas of this chapter, and the theorem
-`CategoryTheory.ringedStrictTowerHomotopyLimit` they prove, are provided by
-`WeilConjectures.CategoryTheory.RingedStrictTowerHomotopyLimit`, which this module re-exports.
+## References
+
+- [Stacks, Tag 0940], [Stacks, Tag 0941], [Stacks, Tag 0H9L]
 -/

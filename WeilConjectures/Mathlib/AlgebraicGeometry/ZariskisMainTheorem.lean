@@ -20,6 +20,11 @@ immersion (`AlgebraicGeometry.isClosedImmersion_of_injective_of_le_map_maximalId
 Zariski's Main Theorem in the form of a factorization through a finite morphism (Stacks Project
 Tag 05K0) is `AlgebraicGeometry.Scheme.Hom.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite`
 in `WeilConjectures/AlgebraicGeometry/Morphisms/QuasiFiniteFactorization.lean`.
+
+## References
+
+* R. Hartshorne, *Algebraic Geometry*, Proposition II.7.3, compare
+  `isClosedImmersion_of_injective_of_le_map_maximalIdeal`.
 -/
 
 @[expose] public section
@@ -107,7 +112,7 @@ lemma IsAffineOpen.isClosed_singleton_of_isMaximal [JacobsonSpace X] {U : X.Open
 /-- **A criterion for closed immersions.** Let `f : X ⟶ Y` be a proper morphism of schemes over
 an algebraically closed field `k`, with `X` quasi-compact and locally of finite type over `k`. If
 `f` is injective on closed points and unramified at closed points, i.e. `𝔪_{Y, f x}` generates
-`𝔪_{X, x}`, then `f` is a closed immersion (compare Hartshorne II.7.3). -/
+`𝔪_{X, x}`, then `f` is a closed immersion. -/
 theorem isClosedImmersion_of_injective_of_le_map_maximalIdeal {k : Type u} [Field k]
     [IsAlgClosed k] (f : X ⟶ Y) [IsProper f] (fX : X ⟶ Spec (.of k)) [LocallyOfFiniteType fX]
     (fY : Y ⟶ Spec (.of k)) (hf : f ≫ fY = fX) [CompactSpace X]
@@ -224,10 +229,9 @@ theorem isClosedImmersion_of_injective_of_le_map_maximalIdeal {k : Type u} [Fiel
 
 end ClosedImmersion
 
-/-- **Quasi-finite = locally quasi-finite + quasi-compact** (blueprint `pqf-lem-qf-locqf-qc`). A
-morphism is quasi-finite in the sense of blueprint `pqf-def-quasifinite` (of finite type, with
-every point isolated in its fibre) if and only if it is locally quasi-finite (locally of finite
-type and quasi-finite at every point) and quasi-compact. -/
+/-- **Quasi-finite = locally quasi-finite + quasi-compact.** A morphism is locally of finite
+type, locally quasi-finite and quasi-compact if and only if it is locally of finite type,
+quasi-compact, and every point is isolated in its fibre. -/
 theorem Scheme.Hom.locallyQuasiFinite_and_quasiCompact_iff {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (LocallyOfFiniteType f ∧ LocallyQuasiFinite f ∧ QuasiCompact f) ↔
       (LocallyOfFiniteType f ∧ QuasiCompact f ∧ ∀ x : X, IsOpen {f.asFiber x}) := by

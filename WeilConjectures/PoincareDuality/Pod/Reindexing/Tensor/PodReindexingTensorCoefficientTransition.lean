@@ -11,8 +11,23 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensor
 
 /-! # Scalar compatibility of fixed normalized tensor reindexing
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition). -/
+For fixed normalized completion and tensor reindexing comparisons at coefficient fields `E` and
+`L`, there is a coefficient transition along `ι : E →ₐ[ℚ_[l]] L` satisfying all its laws.
+
+## Implementation details
+
+On completed module sheaves, scalar extension commutes with reindexing by balanced tensor
+associativity, normalized to send `a ⊗ x` to the original `a ⊗ x` after the coefficient
+identification. The normalized scalar completion realizations at `X` and `Y` give the source and
+target of the transition. The reduction square is balanced tensor associativity on simultaneous
+quotient resolutions, the limit square is the diagonal scalar comparison on both Roos
+coordinates, and on tensor towers the two scalar/reindexing paths agree on homogeneous pure
+tensors; applying the Roos realization and descending gives the laws.
+
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 07A4, 0941
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -39,28 +54,9 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Scalar transition of fixed normalized completion and tensor comparisons.
-Source: blueprint theorem-poincare-duality-frobenius--2, Step 5;
-Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition).
-
-Proof: retain the supplied completion and tensor comparisons at E and L.
-On completed module sheaves scalar extension
-commutes with reindexing by balanced tensor associativity; normalize it to send
-a tensor x to the original a tensor x after the coefficient identification.
-The inverse is reverse relabelling. Finite free scalar extension preserves
-complete constructibility, including the common finite cohomological interval.
-Use the normalized scalar completion realizations at X and Y for S.source and
-S.target. On simultaneous quotient resolutions the reduction square is balanced
-tensor associativity and sends each generator to the same scalar tensor.
-The corresponding limit square is the diagonal scalar comparison on both Roos
-coordinates; its counit formula gives exactly podScalarLimit. On tensor towers,
-the two scalar/reindexing paths agree on every homogeneous pure tensor, commute
-with transitions, and have the same signed differential. Applying the full Roos
-realization and descending gives S.Laws, with the displayed podScalarReduction
-and podScalarLimit maps, rather than independent finite evaluations. In
-particular E=L and the identity embedding use these same formulas. Empty schemes
-and zero inputs introduce no additional hypotheses. -/
+/-- For fixed normalized completion and tensor reindexing comparisons `D, T` at `E` and
+`D', T'` at `L` along an isomorphism `g`, there exists a coefficient transition along `ι` from
+`D` to `D'` satisfying the transition laws with respect to `T` and `T'`. -/
 theorem podReindexingTensorCoefficientTransition
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

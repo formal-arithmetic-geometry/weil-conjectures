@@ -13,8 +13,20 @@ import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensionConst
 
 /-! # Pure section component of the normalized coefficient transition
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition-core-pure).
+There is a coefficient transition whose ordinary component sends pure tensor sections over a
+reindexed object to the corresponding pure tensor sections.
+
+## Implementation details
+
+The completed coefficient maps commute with reindexing since their composites with every finite
+quotient projection do. The mate of the resulting square under the extension/restriction
+adjunction is an isomorphism, and since the adjunction units are pure tensors with coefficient
+one, the formula follows for coefficient one and then, by linearity, for every coefficient. The
+source and target use the normalized primitive quotient scalar models at `Y` and `X`.
+
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -139,20 +151,9 @@ private theorem transitionOrdinary {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
 
 end
 
-/-- The pure-tensor section law for a normalized coefficient transition.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition-core-pure).
-Proof: the completed coefficient maps commute with reindexing because their
-composites with every finite quotient projection do, by naturality of the constant
-sheaf functor. Transport of restriction of scalars therefore gives a square whose
-components are identity maps on sections. Its mate under extension/restriction
-adjunction is an isomorphism, since both reindexing functors are equivalences.
-The adjunction units are pure tensors with coefficient one, so their mate identity
-proves the desired formula for coefficient one. Linearity and the inverse
-coefficient isomorphism give the formula for every coefficient. Finally use the
-normalized primitive quotient scalar models at X and Y. Constructibility follows
-from completed scalar extension and the completion isomorphism on a complete input.
--/
+/-- The pure-tensor section law: there exists a coefficient transition `S` whose ordinary
+component sends the pure tensor section `a ⊗ x` over the reindexed object to the pure tensor
+section `a ⊗ x` over `Y`. -/
 theorem podReindexingTensorCoefficientTransition_pure
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

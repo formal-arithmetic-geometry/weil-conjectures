@@ -12,10 +12,13 @@ import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingSourc
 
 /-! # The source-shift square on localized representatives
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X and 08JA.
-Two separate normalization calculations reduce the derived square to the proved
-signed source chain square.
-(blueprint: lem-pod-reindexing-source-shift-model)
+We prove the normalized source-shift square of the reindexing comparison on localized
+representatives, with K-injective target (`derived_source_shift_model`). The extension to all
+derived objects is a separate descent argument.
+
+## References
+
+* Stacks Project, Tags 0A8X, 08JA
 -/
 
 @[expose] public noncomputable section
@@ -37,18 +40,8 @@ attribute [local irreducible] sourceModelInput sourceModelOutput podReindexingHo
 
 -- The two normalized derived composites have dependent localization endpoints.
 set_option linter.unusedVariables false in
-/-- The normalized source-shift square on a source complex and a K-injective
-target complex after localization.
-
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-Proof: expand `Comparison.derived_model` at the localized source and target,
-use `LeftNormalization` to identify the source-shift arrow, and compare every
-Hom-product projection using `Comparison.chain_projection`.  The resulting
-chain equality is localized and the comparison and localization isomorphisms
-are cancelled.  This is strictly the representative part of the arbitrary
-object square; its extension to all derived objects is the separate descent
-theorem.
-(blueprint: lem-pod-reindexing-source-shift-model) -/
+/-- The normalized source-shift square for the comparison `c`, on the localization of a source
+complex `P` and a K-injective target complex `I`. -/
 theorem derived_source_shift_model
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

@@ -15,9 +15,24 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Acyclicity of discrete continuous coinduction
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, final profinite comparison;
-the coinduced contraction is an agent-written ingredient
-(blueprint: lem-exc-coinduced-continuous-acyclic).
+For a profinite group `G`, the coinduced module of locally constant functions `G → M` has
+vanishing positive-degree continuous cochain cohomology.
+
+## Main results
+
+- `Rep.coinducedContinuousCochains_isZero`: positive-degree cohomology of the inhomogeneous
+  cochain complex of a coinduced module vanishes.
+
+## Implementation details
+
+The coinduced module and the inhomogeneous complex are specified by linear equivalences and
+equations, independently of their realization. For an `n`-cochain `F` with `n > 0`, the
+contraction `h_n(F)(g_1,...,g_{n-1})(x) = F(x,g_1,...,g_{n-1})(1)` satisfies
+`d h_n F + h_{n+1} d F = F`, so every positive-degree cocycle is a coboundary.
+
+## References
+
+- Stacks Project, Tag 0DVG
 -/
 
 @[expose] public section
@@ -29,26 +44,9 @@ open CategoryTheory CategoryTheory.Limits
 namespace Rep
 
 /-- Discrete coinduced modules have zero positive continuous cochain cohomology.
-The linear equivalence `eD` and `hD` specify the coinduced module of
-`exists_coinduced_discrete_embedding`. Locally constant maps are exactly continuous
-maps with discrete codomain. The equivalences `eK` and equation `hd` specify the
-inhomogeneous complex, independently of its choice of realization. The last summand
-of `hd` omits the last argument; the preceding ones multiply adjacent arguments.
-For `n = 0` the same formula is the action minus the identity.
-
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed differential and
-final profinite comparison (blueprint: lem-exc-coinduced-continuous-acyclic).
-
-Proof: (1) For an n-cochain F, n > 0, define
-h_n(F)(g_1,...,g_{n-1})(x) = F(x,g_1,...,g_{n-1})(1).
-Evaluation and precomposition are linear; `lem-exc-coinduced-homotopy-continuous`
-shows that the result is continuous with values in the discrete coinduced module.
-(2) Expand d h_n F and h_{n+1} d F at a tuple and then at x. Right translation
-makes the surviving term (x F(g_1,...,g_n))(1) equal F(g_1,...,g_n)(x).
-All other terms cancel in pairs, including the first merged and the final terms.
-Thus d h_n F + h_{n+1} d F = F by `lem-exc-coinduced-homotopy-identity`.
-(3) For a positive-degree cocycle d F = 0, this identity reads F = d h_n F.
-Every cocycle is a coboundary, so the positive-degree homology is zero. -/
+Here `eD` and `hD` identify `D` with the module of locally constant functions `G → M` with `G`
+acting by right translation, and `eK` and `hd` identify `K` with the inhomogeneous cochain
+complex of `D`. Then the `q`-th homology of `K` vanishes for all `q > 0`. -/
 theorem coinducedContinuousCochains_isZero
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

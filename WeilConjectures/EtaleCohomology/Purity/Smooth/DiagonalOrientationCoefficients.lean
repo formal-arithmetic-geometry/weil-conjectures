@@ -16,9 +16,7 @@ Let `Λ`, `Λ'` be finite coefficient rings with Tate twist data and let
 `A_{E,n+1} → A_{E,n}`. This file shows that the fundamental class of a closed immersion with
 Thom frames, and hence the purity isomorphism of a section of a smooth morphism out of which
 the canonical orientation `ω_f ≅ Λ_X(d)[2d]`
-(`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`, blueprint
-`proposition-relative-dualizing-complex--1`) is built, is compatible with `Ψ` (blueprint
-`proposition-compatibility-purity-change-coefficients`).
+(`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`) is built, is compatible with `Ψ`.
 
 The change of coefficients is bundled with the comparison data the statement needs
 (`AlgebraicGeometry.Etale.SupportedCoefficientChange`): `Ψ Λ_X ≅ Λ'_X`,
@@ -28,19 +26,6 @@ subject to the evident compatibilities. Such data carry a class with supports
 `γ : Λ_X ⟶ Ri_! Ri^! L` to a class `Ψ γ : Λ'_X ⟶ Ri_! Ri^! L'`
 (`AlgebraicGeometry.Etale.SupportedCoefficientChange.mapSupportedClass`), compatibly with
 restriction of supports along any morphism and with the adjoint `Λ_Z ⟶ Ri^! L` of a class.
-
-The key step is uniqueness-driven: the fundamental class `[Z ⊂ X]` is the unique class
-restricting to the frame classes `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` on every frame
-(`AlgebraicGeometry.Etale.HasThomFrames.existsUnique_fundamentalClass`), so as soon as `Ψ`
-carries the frame classes over `Λ` to the frame classes over `Λ'` (which is where the
-compatibility of the Kummer classes enters), it carries `[Z ⊂ X]` over `Λ` to `[Z ⊂ X]` over
-`Λ'`. Consequently the purity isomorphism `Rs^!(Λ_V(c)[2c]) ≅ Λ_B` of a section is compatible
-with `Ψ`, and so is the canonical orientation `ω_f ≅ Λ_X(d)[2d]`, provided the remaining
-building blocks of its construction are: the smooth base change `𝒞(p₁, Δ) ≅ ω_f`, the
-composition isomorphism `RΔ^! ω_{p₁} ≅ Λ_X`, and the tensor maps of `RΔ^!` entering the section
-invariant (`AlgebraicGeometry.Etale.SupportedCoefficientChange.PreservesSectionInvariantIso`).
-These are hypotheses, as are the compatibilities of the constituents of the purity map in
-`AlgebraicGeometry.Etale.map_smoothPurityIso_hom_comp`.
 
 ## Main definitions
 
@@ -68,6 +53,21 @@ In the namespace `AlgebraicGeometry.Etale.SupportedCoefficientChange`:
 - `map_sectionInvariantTwistShiftIsoOfSection`, `map_dualizingComplexTwistShiftIso`: the section
   invariant isomorphism and the canonical orientation are compatible with the change of
   coefficients.
+
+## Implementation details
+
+The key step is uniqueness-driven: the fundamental class `[Z ⊂ X]` is the unique class
+restricting to the frame classes `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` on every frame
+(`AlgebraicGeometry.Etale.HasThomFrames.existsUnique_fundamentalClass`), so as soon as `Ψ`
+carries the frame classes over `Λ` to the frame classes over `Λ'` (which is where the
+compatibility of the Kummer classes enters), it carries `[Z ⊂ X]` over `Λ` to `[Z ⊂ X]` over
+`Λ'`. Consequently the purity isomorphism `Rs^!(Λ_V(c)[2c]) ≅ Λ_B` of a section is compatible
+with `Ψ`, and so is the canonical orientation `ω_f ≅ Λ_X(d)[2d]`, provided the remaining
+building blocks of its construction are: the smooth base change `𝒞(p₁, Δ) ≅ ω_f`, the
+composition isomorphism `RΔ^! ω_{p₁} ≅ Λ_X`, and the tensor maps of `RΔ^!` entering the section
+invariant (`AlgebraicGeometry.Etale.SupportedCoefficientChange.PreservesSectionInvariantIso`).
+These are hypotheses, as are the compatibilities of the constituents of the purity map in
+`AlgebraicGeometry.Etale.map_smoothPurityIso_hom_comp`.
 -/
 
 @[expose] public section
@@ -98,10 +98,7 @@ section Structure
 variable (Λ Λ' : Type (u + 1)) [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finite Λ']
   [HasTateTwist Λ] [HasTateTwist Λ']
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
-purity
-
-A change of coefficients `Ψ : D(X_ét, Λ) ⥤ D(X_ét, Λ')` (for instance the reduction
+/-- A change of coefficients `Ψ : D(X_ét, Λ) ⥤ D(X_ét, Λ')` (for instance the reduction
 `A_{E,n+1} → A_{E,n}`, i.e. the derived extension of scalars), together with the comparisons
 through which it acts on classes with supports:
 * `Ψ Λ_X ≅ Λ'_X` and `Ψ(Λ_X(m)[2m]) ≅ Λ'_X(m)[2m]`;
@@ -192,8 +189,7 @@ noncomputable def mapSupportedClass {L : 𝐃(X, Λ)} {L' : 𝐃(X, Λ')}
   (Φ.constantComplexIso X).inv ≫ (Φ.functor X).map γ ≫ Φ.supportsMap i τ
 
 /-- The change of coefficients commutes with the adjoint `Hom(Λ_X, Ri_! N) ≅ Hom(Λ_Z, N)`
-(`AlgebraicGeometry.Etale.supportedTranspose`): every `γ : Λ_X ⟶ Ri_! N` is the restriction
-map followed by `Ri_!` of its adjoint, and `Ψ` preserves the restriction map. -/
+(`AlgebraicGeometry.Etale.supportedTranspose`). -/
 @[reassoc]
 lemma supportedTranspose_map {N : 𝐃(Z, Λ)}
     (γ : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj N) :
@@ -241,9 +237,7 @@ variable {U X Z Z' : Scheme.{u}} (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ U) [Is
   [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' U] [HasInvertibleExponent Λ' X]
 
 /-- The comparison of supports `Ψ(Ri_! Ri^! L) ⟶ Ri_! Ri^! L'` commutes with restriction of
-supports along `e` (`AlgebraicGeometry.Etale.supportedRestriction`). Both sides are maps out of
-an object supported on the base change `Z'` of `Z`, so they are determined by their composites
-with the counit, which agree. -/
+supports along `e` (`AlgebraicGeometry.Etale.supportedRestriction`). -/
 lemma map_supportsMap_comp_supportedRestriction (m : ℤ) :
     (L((e)^*[ModuleCat.{u + 1} Λ'])).map (Φ.supportsMap i (Φ.tateShiftIso X m)) ≫
         supportedRestriction Λ' e i i' g hg _ _ (leftDerivedUpperStarTateShiftIso Λ' e m) =
@@ -317,18 +311,12 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finit
 variable {X Z : Scheme.{u}} [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X] {c : ℕ}
   {i : Z ⟶ X} [IsClosedImmersion i]
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
-purity
-
-**The change of coefficients of the fundamental class is the fundamental class.** Let
+/-- **The change of coefficients of the fundamental class is the fundamental class.** Let
 `i : Z ⟶ X` be a closed immersion with Thom frames over `Λ` and `Λ'` and regular Zariski frames,
 `X` locally of finite type over a field. If the change of coefficients carries the frame class
 `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` over `Λ` of every Zariski frame to the frame class over `Λ'` (the
 compatibility of the Kummer classes), then it carries the fundamental class `[Z ⊂ X]` over `Λ`
-to the fundamental class over `Λ'`: the latter is the unique class restricting to the frame
-classes (`AlgebraicGeometry.Etale.HasThomFrames.eq_of_frameRestriction_eq`), and the change of
-coefficients commutes with restriction to frames
-(`AlgebraicGeometry.Etale.SupportedCoefficientChange.frameRestriction_mapSupportedClass`). -/
+to the fundamental class over `Λ'`. -/
 theorem mapSupportedClass_thomFundamentalClass (hT : HasThomFrames Λ c i)
     (hT' : HasThomFrames Λ' c i) (hR : HasRegularZariskiFrames c i) {k : Type u} [Field k]
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
@@ -340,10 +328,7 @@ theorem mapSupportedClass_thomFundamentalClass (hT : HasThomFrames Λ c i)
     rw [frameRestriction_mapSupportedClass, frameRestriction_thomFundamentalClass, hframe F hF,
       frameRestriction_thomFundamentalClass]
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
-purity
-
-**The purity map `cl_i : Λ_Z ⟶ Ri^!(Λ_X(c)[2c])` is compatible with the change of
+/-- **The purity map `cl_i : Λ_Z ⟶ Ri^!(Λ_X(c)[2c])` is compatible with the change of
 coefficients**, for a closed immersion with Thom frames whose frame classes are carried to the
 frame classes:
 
@@ -367,9 +352,7 @@ theorem map_thomFundamentalClassMap (hT : HasThomFrames Λ c i) (hT' : HasThomFr
     supportedClassMap_mapSupportedClass, Iso.hom_inv_id_assoc]
 
 /-- For a closed immersion with Thom frames whose frame classes are carried to the frame
-classes, the comparison `Ψ Ri^! ⟶ Ri^! Ψ` is an isomorphism at `Λ_X(c)[2c]`: up to the
-isomorphisms `cl_i` and `cl'_i`, it is `Ψ Λ_Z ≅ Λ'_Z`
-(`AlgebraicGeometry.Etale.SupportedCoefficientChange.map_thomFundamentalClassMap`). -/
+classes, the comparison `Ψ Ri^! ⟶ Ri^! Ψ` is an isomorphism at `Λ_X(c)[2c]`. -/
 theorem isIso_upperShriekMap_app_of_hasThomFrames (hT : HasThomFrames Λ c i)
     (hT' : HasThomFrames Λ' c i) (hR : HasRegularZariskiFrames c i) {k : Type u} [Field k]
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
@@ -389,10 +372,7 @@ theorem isIso_upperShriekMap_app_of_hasThomFrames (hT : HasThomFrames Λ c i)
     infer_instance
   exact IsIso.of_isIso_comp_right _ ((R(i)^![Λ']).map (Φ.tateShiftIso X c).hom)
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
-purity
-
-**Purity for a section of a smooth morphism is compatible with the change of coefficients.**
+/-- **Purity for a section of a smooth morphism is compatible with the change of coefficients.**
 For `g : V ⟶ B` smooth of relative dimension `c` with a closed section `s`, `B` separated and
 locally of finite type over a field, if the change of coefficients carries the frame classes of
 `s` over `Λ` to those over `Λ'`, then the purity isomorphisms `Rs^!(Λ_V(c)[2c]) ≅ Λ_B`
@@ -473,10 +453,7 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finit
   [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasKummerClass Λ']
   [HasKummerClass.IsNormalized Λ'] (Φ : SupportedCoefficientChange Λ Λ')
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
-purity
-
-**The section invariant isomorphism `𝒞(g, s) ≅ Λ_B(c)[2c]` is compatible with the change of
+/-- **The section invariant isomorphism `𝒞(g, s) ≅ Λ_B(c)[2c]` is compatible with the change of
 coefficients.** Let `g : V ⟶ B` be smooth of relative dimension `c` with a closed section `s`,
 `B` separated and locally of finite type over a field, and `vω : Ψ ω_g ≅ ω'_g` an
 identification of the dualizing complexes. Assume
@@ -517,10 +494,7 @@ theorem map_sectionInvariantTwistShiftIsoOfSection {V B : Scheme.{u}} (c : ℕ) 
     Iso.inv_hom_id, CategoryTheory.Functor.map_id, Category.id_comp, reassoc_of% hτ,
     reassoc_of% (hL vω (Φ.tateShiftIso V c) _ _ _ _ _ _ _ _ hθ hε)]
 
-/-- Blueprint `proposition-relative-dualizing-complex--1`,
-`proposition-compatibility-purity-change-coefficients`
-
-**The canonical orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with the change of
+/-- **The canonical orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with the change of
 coefficients.** Let `f : X ⟶ Y` be smooth separated of relative dimension `d`, `Y` separated and
 locally of finite type over a field, with diagonal `Δ` and first projection
 `p₁ : X ×_Y X ⟶ X`, and let `vω : Ψ ω_f ≅ ω'_f`, `vω₁ : Ψ ω_{p₁} ≅ ω'_{p₁}` identify the
@@ -533,9 +507,7 @@ dualizing complexes. Assume
 * `hL`: the change of coefficients preserves the section invariant construction at `Δ`.
 
 Then the canonical orientations `θ_f` (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`)
-over `Λ` and `Λ'` correspond: `vω ≫ θ'_f = Ψ θ_f ≫ (Ψ(Λ_X(d)[2d]) ≅ Λ'_X(d)[2d])`. This is the
-hypothesis `hθ` of `AlgebraicGeometry.Etale.map_smoothPurityIso_hom_comp` for the canonical
-orientation. -/
+over `Λ` and `Λ'` correspond: `vω ≫ θ'_f = Ψ θ_f ≫ (Ψ(Λ_X(d)[2d]) ≅ Λ'_X(d)[2d])`. -/
 theorem map_dualizingComplexTwistShiftIso {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ)
     [SmoothOfRelativeDimension d f] [HasCompactification f] [IsSeparated f]
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X] {k : Type u} [Field k]

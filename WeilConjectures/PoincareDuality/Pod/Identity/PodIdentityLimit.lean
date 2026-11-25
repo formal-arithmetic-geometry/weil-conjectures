@@ -12,8 +12,12 @@ import WeilConjectures.PoincareDuality.Pod.Identity.PodIdentityDerivedFactors
 
 /-! # Compatibility of normalized ordinary reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4 and 0941.
+We show that the derived total-limit comparison of normalized reindexing along the identity
+is the identity comparison.
+
+## References
+
+* Stacks Project, Tags 03EL, 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -113,16 +117,7 @@ private theorem restricted_roos_identity
     (podRestrictedTower l E C) (D.roos (podRestrictedTower l E C)).hom
     (hf (podRestrictedTower l E C)) (hs (podRestrictedTower l E C))
 
-/-- Identity compatibility for the derived total-limit comparison.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5
-(blueprint: lem-pod-identity-limit).
-
-Proof: use the proved strict restricted-tower identity and both Roos coordinates.
-The source and target normalized Roos models agree on K-injectives; naturality
-along K-injective resolutions makes them equal everywhere. Substitute LimitModel,
-use the derived identity formula on complexes, and cancel the model isomorphism.
-Localization detects equality of natural transformations, giving the result on
-all derived systems. -/
+/-- Identity compatibility for the derived total-limit comparison. -/
 theorem podIdentityLimit (A : PodReindexFamily l E)
     (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
     (hD : PodCompletionReindex.Laws l E (𝟙 W) (A.completion (𝟙 W)))

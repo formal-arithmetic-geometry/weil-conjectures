@@ -14,8 +14,12 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensor
 
 /-! # Completed tensor extension of a normalized completion comparison
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-reindexing-tensor-construction). -/
+A normalized completion comparison along an isomorphism of schemes extends to a comparison of
+completed tensor products satisfying the required laws (dual-Tate compatibility).
+
+## References
+
+* [Stacks, Tags 07A4, 0941] -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -90,25 +94,8 @@ private theorem ordinaryConstructible
     (asIso ((podOrdinaryToCompleted l E g D).app M.obj)).symm
     ((constructibleIntegralPullback l E g).obj M).property
 
-/-- Extend a fixed normalized completion comparison to completed tensor.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-reindexing-tensor-construction).
-
-Proof: on simultaneous flat-term K-flat P,Q, use the quotient maps in D and the
-sectionwise balanced tensor comparison to relabel every (p,q) summand. The two
-orders of applying a quotient transition agree on x tensor y, so these maps
-assemble into an isomorphism of strict towers. The inverse relabels in reverse.
-Both differentials send a generator to dx tensor y + (-1)^p x tensor dy, proving
-that these are chain maps. Their naturality follows on the same generators.
-Reindexing preserves the common cohomological interval and constructibility of
-every finite reduction. The Roos comparison in D and its limit model transport
-derived completeness, so it preserves the complete constructible domain.
-Apply D.roos followed by the tower isomorphism, and descend along the two K-flat
-localizations to define the tensor isomorphism. This gives Model and Naturality.
-The finite generator formula is the canonical finite pullback/tensor map.
-D.Unit and D.Counit compare its whole-system realization with the specified
-completed pullback comparison, proving Canonical before finite evaluation.
-These constructions also apply to zero complexes and empty schemes. -/
+/-- Every lawful normalized completion comparison `D` along an isomorphism `g` extends to a
+lawful comparison of completed tensor products. -/
 theorem podReindexingTensorConstruction
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

@@ -11,7 +11,6 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 The three arrows are the actual unit insertion, square transport and counit contraction.
 Their four endpoints are given directly, without identity or association functor wrappers.
-(blueprint: def-weil-pbc-adjunction-exchange-chain)
 -/
 
 @[expose] public section
@@ -81,8 +80,7 @@ def exchangeChain (a : U ⊣ R) (b : V ⊣ S) (θ : G ⋙ V ⟶ U ⋙ H) (K : D)
   third := S.map (H.map (a.counit.app K))
 
 set_option backward.defeqAttrib.useBackward true in
-/-- The component of the actual adjunction mate is the composite of this diagram.
-Source: Mathlib `mateEquiv`. Proof: expand the mate component and functor composition. -/
+/-- The component at `K` of the mate of `θ` is the composite of `exchangeChain a b θ K`. -/
 theorem mate_eq_exchangeChain_composite (a : U ⊣ R) (b : V ⊣ S)
     (θ : G ⋙ V ⟶ U ⋙ H) (K : D) :
     (mateEquiv a b (TwoSquare.mk _ _ _ _ θ)).app K =

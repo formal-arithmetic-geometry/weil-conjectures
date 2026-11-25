@@ -17,7 +17,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 # The trace isomorphism
 
 Let `k` be an algebraically closed field, `Λ` a finite coefficient ring whose exponent is
-invertible in `k` (the finite stage `A_{E,n}` of the blueprint), and `a : X ⟶ Spec k` smooth,
+invertible in `k` (such as a finite stage `A_{E,n} = 𝒪_E/ϖⁿ`), and `a : X ⟶ Spec k` smooth,
 proper and geometrically connected of pure relative dimension `d`, with a Tate orientation
 `γ : Λ_X(d)[2d] ≅ Ra^! Λ`. The trace isomorphism says:
 
@@ -28,8 +28,7 @@ proper and geometrically connected of pure relative dimension `d`, with a Tate o
 
 The class `[x ⊂ X]` is the image in `H^{2d}(X, Λ(d)) = H^{2d}_c(X, Λ(d))` of the fundamental
 class of the regular closed immersion `x : Spec k ⟶ X` of codimension `d`
-(`AlgebraicGeometry.Etale.fundamentalClass`, `lemma-class-of-point--1`), obtained by forgetting
-supports.
+(`AlgebraicGeometry.Etale.fundamentalClass`), obtained by forgetting supports.
 
 ## Main definitions
 
@@ -49,18 +48,27 @@ supports.
   normalized) orientation the trace sends every point class to `1`. It rests on
   `AlgebraicGeometry.Etale.pointClass_eq` (all `k`-points have the same class) and
   `AlgebraicGeometry.Etale.isIso_traceMap_pointClass` (the trace of a point class is invertible).
-- `AlgebraicGeometry.Etale.traceIsomorphism` (`corollary-cup-product-pairing--1`): the trace
-isomorphism
-  `H^{2d}(X, Λ) ≅ Λ(-d)` and the normalization of the trace by point classes.
+- `AlgebraicGeometry.Etale.traceIsomorphism`: the trace isomorphism `H^{2d}(X, Λ) ≅ Λ(-d)` and
+  the normalization of the trace by point classes.
 
-## Implementation notes
+## Implementation details
 
 *The normalized orientation.* The repository has smooth purity only as the existence of an
 isomorphism `Λ_X(d)[2d] ≅ Ra^! Λ`
 (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`), not the canonical
-orientation built from Kummer classes in `proposition-smooth-purity-finite-coefficients`. The
-normalization is therefore stated as the existence of a Tate orientation whose trace sends all point
-classes to `1`.
+orientation built from Kummer classes. The normalization is therefore stated as the existence of
+a Tate orientation whose trace sends all point classes to `1`. It is proved as follows:
+* all `k`-points have the same class (`AlgebraicGeometry.Etale.pointClass_eq`): the point `y` is
+  the base change of the diagonal along `X ≅ X × {y} ⊆ X × X`, and by proper base change the
+  restriction to `X × {y}` does not depend on `y`, as `H^0(X, Λ) = Λ` for the connected `X`;
+* for any orientation the trace of a point class is invertible
+  (`AlgebraicGeometry.Etale.isIso_traceMap_pointClass`), so rescaling the orientation by its
+  inverse (`AlgebraicGeometry.Etale.TateOrientation.traceMap_trans_mapIso`) normalizes it.
+
+The coefficient ring is assumed self-injective, as the finite stages `A_{E,n} = 𝒪_E/ϖⁿ` are:
+this is what makes the restriction `Ra_* Λ_X ⟶ Λ` to a point independent of the point, and what
+makes evaluation at `1 ∈ H^0_c(X, Λ)` bijective
+(`AlgebraicGeometry.Etale.bijective_comp_unit_rightDerivedLowerStar`).
 
 *Points.* A `k`-point `x` of the smooth `X` is a regular closed immersion of codimension `d`; this
 is taken as an instance argument `[IsRegularImmersion d x]`.
@@ -102,10 +110,9 @@ noncomputable def unitClassCompactSupport :
 
 namespace TateOrientation
 
-/-- Blueprint `corollary-cup-product-pairing--1` (the duality at `i = 0`): for a Tate orientation
-`γ` of a proper morphism `a : X ⟶ Y`, the duality isomorphism in degree `0`,
-`H^{2d}_c(X, Λ(d)) ≃ Hom(Ra_! Λ_X, Λ_Y)`, that is `H^{2d}(X, Λ(d)) ≅ H^0_c(X, Λ)^∨` over a
-separably closed field. It is the composite
+/-- For a Tate orientation `γ` of a proper morphism `a : X ⟶ Y`, the duality isomorphism in
+degree `0`, `H^{2d}_c(X, Λ(d)) ≃ Hom(Ra_! Λ_X, Λ_Y)`, that is
+`H^{2d}(X, Λ(d)) ≅ H^0_c(X, Λ)^∨` over a separably closed field. It is the composite
 ```
 Hom(Λ_Y, (Ra_! Λ_X(d))[2d]) ≃ Hom(Λ_Y, Ra_*(Λ_X(d)[2d]))      (Ra_! ≅ Ra_*)
                             ≃ Hom(Λ_X, Λ_X(d)[2d])            (La^* ⊣ Ra_*, La^* Λ_Y ≅ Λ_X)
@@ -123,8 +130,7 @@ noncomputable def traceDualityEquiv (γ : TateOrientation Λ a d) :
       ((leftDerivedUpperStarConstantComplexIso Λ a).homCongr γ.dualizingComplexIso).trans
         ((rightDerivedUpperShriekAdjunction _ a).homEquiv _ _).symm
 
-/-- Blueprint `corollary-cup-product-pairing--1` (the trace is the map produced by the duality at
-`i = 0`): the trace map `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` of a Tate orientation `γ` of a proper
+/-- The trace map `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` of a Tate orientation `γ` of a proper
 morphism `a` is the duality isomorphism `H^{2d}_c(X, Λ(d)) ≃ Hom(Ra_! Λ_X, Λ_Y)`
 (`AlgebraicGeometry.Etale.TateOrientation.traceDualityEquiv`) followed by evaluation at the
 class `1 ∈ H^0_c(X, Λ)` (`AlgebraicGeometry.Etale.unitClassCompactSupport`). -/
@@ -141,8 +147,7 @@ theorem traceMap_eq_unitClassCompactSupport_comp (γ : TateOrientation Λ a d)
 /-- The trace map `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` of a Tate orientation of a proper morphism is
 bijective if and only if evaluation at `1 ∈ H^0_c(X, Λ)`,
 `Hom(Ra_! Λ_X, Λ_Y) ⟶ Hom(Λ_Y, Λ_Y)`, is bijective, that is if and only if
-`H^0_c(X, Λ)^∨ ⟶ Λ` is: the trace is this evaluation read through the duality at `i = 0`
-(`AlgebraicGeometry.Etale.TateOrientation.traceMap_eq_unitClassCompactSupport_comp`). -/
+`H^0_c(X, Λ)^∨ ⟶ Λ` is. -/
 theorem bijective_traceMap_iff (γ : TateOrientation Λ a d) :
     Function.Bijective γ.traceMap ↔ Function.Bijective
       (fun h : (R(a)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ X) ⟶
@@ -166,14 +171,9 @@ variable [HasTateTwist Λ]
 
 omit [HasInvertibleExponent Λ (Spec (.of k))] [HasInvertibleExponent Λ X]
   [SmoothOfRelativeDimension d a] in
-/-- Blueprint `corollary-cup-product-pairing--1` (the trace isomorphism, twisted form): for `X`
-proper and geometrically connected over the algebraically closed field `k`, a self-injective finite
-coefficient ring `Λ` and any Tate orientation `γ`, the trace map
-`tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` is bijective. Through the duality at `i = 0` it is evaluation at
-`1 ∈ H^0_c(X, Λ)`, `Hom(Ra_! Λ_X, Λ) ⟶ Hom(Λ, Λ)`
-(`AlgebraicGeometry.Etale.TateOrientation.bijective_traceMap_iff`), which is bijective as
-`H^0(X, Λ) = Λ` for the connected `X` and `Λ` is self-injective
-(`AlgebraicGeometry.Etale.bijective_comp_unit_rightDerivedLowerStar`). -/
+/-- For `X` proper and geometrically connected over the algebraically closed field `k`, a
+self-injective finite coefficient ring `Λ` and any Tate orientation `γ`, the trace map
+`tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` is bijective. -/
 theorem bijective_traceMap [Module.Injective Λ Λ] (γ : TateOrientation Λ a d) :
     Function.Bijective γ.traceMap := by
   have : ConnectedSpace X := GeometricallyConnected.connectedSpace_of_subsingleton (f := a)
@@ -199,21 +199,18 @@ theorem bijective_traceMap [Module.Injective Λ Λ] (γ : TateOrientation Λ a d
     rw [Category.assoc, Iso.inv_hom_id_assoc, hg]
 
 omit [SmoothOfRelativeDimension d a] in
-/-- Blueprint `corollary-cup-product-pairing--1` (the trace isomorphism, compactly supported form):
-for `X` smooth, proper and geometrically connected of pure dimension `d` over the algebraically
-closed field `k`, a self-injective finite coefficient ring `Λ` (such as `A_{E,n} = 𝒪_E/ϖⁿ`) and any
-Tate orientation `γ`, the untwisted trace map `tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` is bijective:
-the twisted trace is (`AlgebraicGeometry.Etale.TateOrientation.bijective_traceMap`), and over
-the algebraically closed `k` the Tate twists are trivial
-(`AlgebraicGeometry.Etale.TateOrientation.bijective_untwistedTraceMap_of_bijective_traceMap`). -/
+/-- For `X` smooth, proper and geometrically connected of pure dimension `d` over the
+algebraically closed field `k`, a self-injective finite coefficient ring `Λ` (such as
+`A_{E,n} = 𝒪_E/ϖⁿ`) and any Tate orientation `γ`, the untwisted trace map
+`tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` is bijective. -/
 theorem bijective_untwistedTraceMap [Module.Injective Λ Λ] (γ : TateOrientation Λ a d) :
     Function.Bijective γ.untwistedTraceMap :=
   bijective_untwistedTraceMap_of_bijective_traceMap γ (bijective_traceMap a γ)
 
 omit [SmoothOfRelativeDimension d a] in
-/-- The untwisted trace on ordinary cohomology, `tr^{(-d)}_X : H^{2d}(X, Λ) ⟶ Λ(-d)`, is
-bijective: it is `AlgebraicGeometry.Etale.TateOrientation.untwistedTraceMap` read through
-`H^{2d}(X, Λ) ≃ H^{2d}_c(X, Λ)`. -/
+/-- The untwisted trace on ordinary cohomology, `tr^{(-d)}_X : H^{2d}(X, Λ) ⟶ Λ(-d)`, that is
+`AlgebraicGeometry.Etale.TateOrientation.untwistedTraceMap` read through
+`H^{2d}(X, Λ) ≃ H^{2d}_c(X, Λ)`, is bijective. -/
 theorem bijective_untwistedTraceMap_comp_cohomologyAddEquivCompactSupport
     [Module.Injective Λ Λ] (γ : TateOrientation Λ a d) :
     Function.Bijective (γ.untwistedTraceMap.comp (cohomologyAddEquivCompactSupport a
@@ -241,9 +238,8 @@ noncomputable def pointClass (x : Spec (.of k) ⟶ X) [IsRegularImmersion d x] :
     (rightDerivedLowerStarShiftIsoLowerShriek a (tateObject Λ X d) (2 * d)).hom
 
 omit [HasInvertibleExponent Λ X] [GeometricallyConnected a] [HasKummerClass.IsNormalized Λ] in
-/-- The class of a `k`-point does not depend on the point: the fundamental classes of any two
-`k`-points agree once their supports are forgotten
-(`AlgebraicGeometry.Etale.fundamentalClass_comp_counit_eq_of_section`). -/
+/-- The class of a `k`-point does not depend on the point: any two sections `x`, `y` of `a`
+have the same class `[x ⊂ X] = [y ⊂ X]`. -/
 theorem pointClass_eq [HasKummerClass.IsNormalized Λ] [Module.Injective Λ Λ] [ConnectedSpace X]
     (x y : Spec (.of k) ⟶ X) [IsRegularImmersion d x] [IsRegularImmersion d y]
     (hx : x ≫ a = 𝟙 _) (hy : y ≫ a = 𝟙 _) :
@@ -271,11 +267,7 @@ lemma rightDerivedLowerStarShiftIsoLowerShriek_hom_comp_commShiftIso_inv
 omit [HasInvertibleExponent Λ (Spec (.of k))] [GeometricallyConnected a] in
 omit [GeometricallyConnected a] in
 /-- The trace of the class of a `k`-point is invertible, in a form with an arbitrary unit
-object `U` and identification `e : La^* U ≅ Λ_X`: up to isomorphisms it is the unit of
-`La^* ⋙ Lx^* ⊣ Rx_* ⋙ Ra_*` (whose left adjoint is `L(x ≫ a)^* = 𝟭`), followed by the
-fundamental class `cl_x : Λ ≅ Rx^! Λ_X(d)[2d]` of `x`
-(`AlgebraicGeometry.Etale.isIso_fundamentalClassMap`), the orientation and the counit of
-`Rx_! ⋙ Ra_! ⊣ Ra^! ⋙ Rx^!` (whose left adjoint is `Rx_* ⋙ Ra_* ≅ 𝟭`). -/
+object `U` and identification `e : La^* U ≅ Λ_X`. -/
 theorem isIso_homEquiv_fundamentalClass_comp_smoothTrace (γ : TateOrientation Λ a d)
     (x : Spec (.of k) ⟶ X) [IsRegularImmersion d x] (hx : x ≫ a = 𝟙 _)
     {U : DerivedCategoryModule Λ (Spec (.of k))}
@@ -328,8 +320,7 @@ theorem isIso_homEquiv_fundamentalClass_comp_smoothTrace (γ : TateOrientation �
   infer_instance
 
 omit [GeometricallyConnected a] in
-/-- The trace of the class of a `k`-point is invertible, for every Tate orientation
-(`AlgebraicGeometry.Etale.isIso_homEquiv_fundamentalClass_comp_smoothTrace`). -/
+/-- The trace of the class of a `k`-point is invertible, for every Tate orientation. -/
 theorem isIso_traceMap_pointClass (γ : TateOrientation Λ a d) (x : Spec (.of k) ⟶ X)
     [IsRegularImmersion d x] (hx : x ≫ a = 𝟙 _) : IsIso (γ.traceMap (pointClass a x)) :=
   isIso_homEquiv_fundamentalClass_comp_smoothTrace a γ x hx
@@ -339,7 +330,7 @@ omit [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))] [HasInvertibleExp
   [SmoothOfRelativeDimension d a] [GeometricallyConnected a] [HasKummerClass Λ]
   [HasKummerClass.IsNormalized Λ] in
 /-- Rescaling a Tate orientation `γ` by an automorphism `φ` of `Λ_k` rescales its trace by
-`φ`, by naturality of the counit of `Ra_! ⊣ Ra^!`. -/
+`φ`. -/
 lemma TateOrientation.traceMap_trans_mapIso [HasTateTwist Λ] (γ : TateOrientation Λ a d)
     (φ : 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ≅ 𝟙_ _)
     (c : 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶
@@ -353,24 +344,9 @@ lemma TateOrientation.traceMap_trans_mapIso [HasTateTwist Λ] (γ : TateOrientat
     Iso.trans_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc]
   rw [(rightDerivedUpperShriekAdjunction _ a).counit_naturality]
 
-/-- Blueprint `corollary-cup-product-pairing--1` (normalization of the trace by points): there is a
-Tate orientation `γ` of `a` — the normalized orientation of
-`proposition-smooth-purity-finite-coefficients` — whose trace map `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ`
-sends the class `[x ⊂ X]` of every `k`-point `x` to `1`.
-
-This is not an independent convention. The blueprint derives it from `lemma-class-of-point--1` (c)
-and the compatibility of smooth purity with composition. The repository has smooth purity only as
-the existence of an orientation, and the proof is the following equivalent argument:
-* all `k`-points have the same class (`AlgebraicGeometry.Etale.pointClass_eq`): the point `y` is
-  the base change of the diagonal along `X ≅ X × {y} ⊆ X × X`, and by proper base change the
-  restriction to `X × {y}` does not depend on `y`, as `H^0(X, Λ) = Λ` for the connected `X`;
-* for any orientation the trace of a point class is invertible
-  (`AlgebraicGeometry.Etale.isIso_traceMap_pointClass`), so rescaling the orientation by its
-  inverse (`AlgebraicGeometry.Etale.TateOrientation.traceMap_trans_mapIso`) normalizes it.
-
-The coefficient ring is assumed self-injective, as the finite stages `A_{E,n} = 𝒪_E/ϖⁿ` of the
-blueprint are: this is what makes the restriction `Ra_* Λ_X ⟶ Λ` to a point independent of the
-point. -/
+/-- Normalization of the trace by points: for a self-injective finite coefficient ring `Λ` there
+is a Tate orientation `γ` of `a` whose trace map `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` sends the class
+`[x ⊂ X]` of every `k`-point `x` to `1`. -/
 theorem exists_tateOrientation_traceMap_pointClass [Module.Injective Λ Λ] :
     ∃ γ : TateOrientation Λ a d, ∀ (x : Spec (.of k) ⟶ X) [IsRegularImmersion d x],
       x ≫ a = 𝟙 _ → γ.traceMap (pointClass a x) = 𝟙 _ := by
@@ -386,11 +362,9 @@ theorem exists_tateOrientation_traceMap_pointClass [Module.Injective Λ Λ] :
     simp
   · exact ⟨θ.symm, fun x _ hx ↦ (h ⟨x, ‹_›, hx⟩).elim⟩
 
-/-- Blueprint `corollary-cup-product-pairing--1`: The trace isomorphism.
-
-Let `X` be smooth, proper and geometrically connected of pure dimension `d` over the
-algebraically closed field `k`, and let `Λ` be a self-injective finite coefficient ring whose
-exponent is invertible in `k` (such as `A_{E,n} = 𝒪_E/ϖⁿ`). Then:
+/-- The trace isomorphism. Let `X` be smooth, proper and geometrically connected of pure
+dimension `d` over the algebraically closed field `k`, and let `Λ` be a self-injective finite
+coefficient ring whose exponent is invertible in `k` (such as `A_{E,n} = 𝒪_E/ϖⁿ`). Then:
 
 1. for every Tate orientation `γ : Λ_X(d)[2d] ≅ Ra^! Λ`, the untwisted trace
    `tr^{(-d)}_X : H^{2d}(X, Λ) ⟶ Λ(-d)` is an isomorphism;

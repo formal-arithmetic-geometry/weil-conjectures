@@ -13,7 +13,15 @@ public import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingReduct
 
 /-! # Coherent reduction of the normalized ordinary reindexing tensor comparison
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 03EL, 07A4 and 0941.
+## Implementation details
+
+`PodTensorAugmentationFrame` only records the maps of a reduction/limit tensor square so that
+their types are shared between the two squares; its only compatibility law is the unit law.
+The reduction square itself involves no completed tensor comparison, completeness or Tor bound.
+
+## References
+
+* [Stacks: Tags 03EL, 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -31,9 +39,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The existing tensor realization, displayed in the reindexing calculus.
-Source: Stacks 07A4 and 0941
-(blueprint: lem-pod-reindexing-tensor-limit-model). -/
+/-- The completed tensor product as the limit of the system tensor product of reductions. -/
 @[irreducible] def podReindexingTensorModel (W : Scheme.{u}) :
     integralCompletedTensor l E W ≅
       (podReindexCalculus l E W).reduction.prod
@@ -41,9 +47,8 @@ Source: Stacks 07A4 and 0941
           (podReindexCalculus l E W).systemClosed.tensor ⋙ coefficientSequenceLimit l E W :=
   pullbackTensorIntegralTensorModel l E W
 
-/-- The wrapper changes only the displayed presentation of the tensor realization.
-Source: Stacks 07A4 and 0941
-(blueprint: lem-pod-reindexing-tensor-limit-model). -/
+/-- The inverse of `podReindexingTensorModel` agrees with that of
+`pullbackTensorIntegralTensorModel`. -/
 theorem podReindexingTensorModel_inv_app (W : Scheme.{u})
     (M N : podReindexingDerived l E W none) :
     (podReindexingTensorModel l E W).inv.app (M, N) =
@@ -51,10 +56,8 @@ theorem podReindexingTensorModel_inv_app (W : Scheme.{u})
   unfold podReindexingTensorModel
   rfl
 
-/-- Data for a reduction/limit tensor square, without either compatibility assertion.
-All entries are actual maps; the record only shares their types between the two squares.
-Source: Stacks 07A4 and the reduction/limit adjunction
-(blueprint: lem-pod-reindexing-reduction-tensor-square). -/
+/-- Data for a reduction/limit tensor square: functors, adjunctions, a limit comparison `δ`
+and the maps of the square, subject only to the unit law. -/
 structure PodTensorAugmentationFrame
     (C D A B : Type*) [Category* C] [Category* D] [Category* A] [Category* B] where
   F : C ⥤ D
@@ -83,10 +86,7 @@ structure PodTensorAugmentationFrame
   unit : F.map (adjY.unit.app S) ≫ δ.app (LY.obj S) ≫ RX.map a =
     adjX.unit.app (F.obj S)
 
-/-- The frame is built from the specified comparisons, with the Unit law as its
-only compatibility proof. It makes no tensor compatibility assertion.
-Source: Stacks 07A4 and the reduction/limit adjunction
-(blueprint: lem-pod-reindexing-reduction-tensor-square). -/
+/-- The reduction/limit tensor frame of the reindexing comparisons of `A` at `M`, `N`. -/
 def podReindexingTensorFrame
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (A : PodCompletionReindex l E g) (hA : PodCompletionReindex.Laws l E g A)
@@ -138,29 +138,8 @@ def podReindexingTensorFrame
     dsimp only [Functor.comp_obj, Functor.id_obj] at hu
     exact hu
 
-/-- The ordinary tensor comparison commutes with coherent reduction before applying
-any limit or adjunction unit. No completed tensor comparison occurs in this equation.
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 03EL, 07A4, 0941
-(blueprint: lem-pod-reindexing-reduction-tensor-square).
-
-Proof: choose simultaneous flat-term K-flat representatives P,Q. Use c.tensor_model
-and the reductionTensor_normalization of the recorded coefficient calculus to replace
-both tensor comparisons by their strict signed total-tensor maps. The reduction
-comparison A.reduction is the whole-system adjunction mate, by
-podReindexing_reduction_inv_mate. LimitModel realizes that mate by the actual strict
-Roos map, not by separate derived evaluations. The ordinary quotient unit formulas
-and FiniteModel identify the resulting strict reduction comparison with A.quotient.
-Its QuotientGenerators law
-sends a tensor x to its scalar-reindexed quotient tensor. The system comparison is
-pullbackTensorSystemComparison, whose cochain normalization is the same ordinary
-inverse-image tensor map on the sequence site. On each homogeneous tensor both routes
-send b tensor (x tensor y) to the two reindexed reduced factors, with b on the first
-factor and 1 on the second. Balancing and c.tensorChain_pure prove equality on pure
-tensors; the quotient transition laws give equality as entire system chain maps.
-Descend this equality along the product of the K-flat resolving localizations.
-The equality h only transports the ordinary functor, so introduces no additional map.
-The argument uses neither completeness nor a Tor bound and applies to zero inputs
-and the empty scheme. -/
+/-- The ordinary tensor comparison commutes with coherent reduction, before applying any limit
+or adjunction unit. -/
 theorem podReindexing_reduction_tensor_square
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

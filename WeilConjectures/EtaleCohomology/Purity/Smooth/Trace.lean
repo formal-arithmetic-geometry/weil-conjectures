@@ -16,17 +16,14 @@ composite
 
 `Tr^sm_{f,K} : Rf_! Lf^* K(d)[2d] ⟶ Rf_! Rf^! K ⟶ K`
 
-of `Rf_!` applied to the smooth purity map `γ_{f,K}` and the counit of `Rf_! ⊣ Rf^!`
-(blueprint `definition-trace-map`). By construction it is the adjoint of `γ_{f,K}`, which is
-therefore recovered from it.
+of `Rf_!` applied to the smooth purity map `γ_{f,K}` and the counit of `Rf_! ⊣ Rf^!`. It is
+the adjoint of `γ_{f,K}`, which is therefore recovered from it.
 
 The traces are transitive: for `f : X ⟶ Y`, `g : Y ⟶ Z` smooth of relative dimensions `d`
 and `e`, the trace of `f ≫ g` is the `f`-trace (with the twist `(e)[2e]` already present)
-followed by the `g`-trace, through the composition law `α : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
-(blueprint `proposition-transitivity-trace-map--1`, Step 1). The only input is the
-composition coherence of the purity maps (blueprint
-`proposition-compatibility-purity-composition--1`), with respect to the composition isomorphism
-`R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` conjugate to `α`.
+followed by the `g`-trace, through the composition law `α : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`,
+provided the purity maps satisfy the composition coherence with respect to the composition
+isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` conjugate to `α`.
 
 ## Main definitions
 
@@ -46,19 +43,16 @@ composition coherence of the purity maps (blueprint
   change.
 - `AlgebraicGeometry.Etale.exists_counit_eq_smoothPurityTrace`: the counit `Ra_! ω_X ⟶ Λ` of a
   smooth `a : X ⟶ Spec k` is the smooth trace under a purity identification
-  `Λ_X(d)[2d] ≅ ω_X` (blueprint `corollary-dualizing-complex-smooth-scheme--1`).
+  `Λ_X(d)[2d] ≅ ω_X`.
 
-## Implementation notes
+## Implementation details
 
-The blueprint's purity map `γ_{f,K}` is the canonical map of
-`proposition-smooth-purity-finite-coefficients--1`. In the repository it is
-`AlgebraicGeometry.Etale.smoothPurityIso`, built from the identifications it is composed of, which
-are only known to exist; the trace is therefore defined for an arbitrary isomorphism
-`γ : Lf^* K(d)[2d] ≅ Rf^! K`, the intended one being `smoothPurityIso f K θ φ`. Likewise the
-composition law of `R_!` is only known to exist
+The canonical smooth purity map `γ_{f,K}` is `AlgebraicGeometry.Etale.smoothPurityIso`, built
+from the identifications it is composed of, which are only known to exist; the trace is therefore
+defined for an arbitrary isomorphism `γ : Lf^* K(d)[2d] ≅ Rf^! K`, the intended one being
+`smoothPurityIso f K θ φ`. Likewise the composition law of `R_!` is only known to exist
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`), so it is an argument of the
-transitivity statement, and the composition isomorphism of `R^!` is its conjugate, as in the
-blueprint.
+transitivity statement, and the composition isomorphism of `R^!` is its conjugate.
 -/
 
 @[expose] public section
@@ -81,9 +75,7 @@ section Trace
 
 variable {X Y : Scheme.{u}} (d : ℤ) (f : X ⟶ Y) [HasCompactification f]
 
-/-- Blueprint `definition-trace-map`: Smooth trace
-
-For `f : X ⟶ Y` smooth separated of relative dimension `d`, `K ∈ D(Y_ét, Λ)` and the smooth
+/-- For `f : X ⟶ Y` smooth separated of relative dimension `d`, `K ∈ D(Y_ét, Λ)` and the smooth
 purity map `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K` (`AlgebraicGeometry.Etale.smoothPurityIso`), the
 *smooth trace* is the composite
 
@@ -112,10 +104,7 @@ lemma smoothPurityTrace_eq_homEquiv_symm
   rw [Adjunction.homEquiv_counit]
   rfl
 
-/-- Blueprint `definition-trace-map`: Smooth trace
-
-The purity map is recovered from the smooth trace: it is the adjoint of `Tr^sm_{f,K}` under
-`Rf_! ⊣ Rf^!`. In particular the smooth trace determines the purity map. -/
+/-- The purity map is the adjoint of the smooth trace `Tr^sm_{f,K}` under `Rf_! ⊣ Rf^!`. -/
 lemma homEquiv_smoothPurityTrace
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
@@ -136,9 +125,7 @@ lemma rightDerivedUpperShriekAdjunction_counit_app_eq_smoothPurityTrace
     CategoryTheory.Functor.map_id,
     Category.id_comp]
 
-/-- Blueprint `definition-trace-map`: Smooth trace
-
-The smooth traces of a purity map natural in `K` are natural in `K`: for `u : K ⟶ K'`,
+/-- The smooth traces of a purity map natural in `K` are natural in `K`: for `u : K ⟶ K'`,
 `Tr^sm_{f,K'} ∘ Rf_! Lf^* u(d)[2d] = u ∘ Tr^sm_{f,K}`. -/
 lemma smoothPurityTrace_naturality
     (Γ : L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ twistShift Λ X d ≅ R(f)^![Λ])
@@ -161,10 +148,8 @@ variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f
 
 /-- The composition isomorphism `Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!` of the exceptional inverse image
 conjugate to a composition isomorphism `α : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the compactly
-supported direct image, i.e. the inverse of the blueprint's `c_{g,f}`
-(`theorem-f-shriek-finite-coefficients`). Its defining property is that it identifies the counit
-of `R(f ≫ g)_! ⊣ R(f ≫ g)^!` with that of the composite adjunction
-(`AlgebraicGeometry.Etale.rightDerivedUpperShriekCompIsoOfLowerShriek_hom_app_counit`). -/
+supported direct image. It identifies the counit of `R(f ≫ g)_! ⊣ R(f ≫ g)^!` with that of
+the composite adjunction. -/
 noncomputable def rightDerivedUpperShriekCompIsoOfLowerShriek
     (α : R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
       R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) :
@@ -211,14 +196,12 @@ noncomputable def twistShiftCompIso (d e : ℤ)
     eqToIso (by rw [add_comm]; rfl) ≪≫ (twistShiftTwistShiftIso Λ X e d _).symm ≪≫
     (twistShift Λ X d).mapIso (leftDerivedUpperStarTwistShiftIso Λ f e _).symm
 
-/-- Blueprint `proposition-transitivity-trace-map--1`: Trace normalization and transitivity
-
-**Transitivity of the smooth traces.** Let `f : X ⟶ Y` and `g : Y ⟶ Z` be smooth separated of
+/-- **Transitivity of the smooth traces.** Let `f : X ⟶ Y` and `g : Y ⟶ Z` be smooth separated of
 relative dimensions `d` and `e`, let `α : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` be the composition law of
-`R_!` (`proposition-composition-base-change-rf-shriek--1`), `c_{g,f}⁻¹ : Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!`
-its conjugate (`AlgebraicGeometry.Etale.rightDerivedUpperShriekCompIsoOfLowerShriek`), and let
+`R_!`, `c_{g,f}⁻¹ : Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!` its conjugate
+(`AlgebraicGeometry.Etale.rightDerivedUpperShriekCompIsoOfLowerShriek`), and let
 `Γ_f : Lf^* (-)(d)[2d] ≅ Rf^!`, `γ_{g,K}` and `γ_{f ≫ g,K}` be purity maps satisfying the
-composition coherence `proposition-compatibility-purity-composition--1`:
+composition coherence
 
 `γ_{f ≫ g,K} = c_{g,f}⁻¹ ∘ γ_{f,Rg^! K} ∘ Lf^*(γ_{g,K})(d)[2d]`
 
@@ -319,13 +302,10 @@ lemma rightDerivedLowerShriek_map_upperShriekBaseChangeOfLowerShriek_comp_counit
 
 variable [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ X']
 
-/-- Blueprint `proposition-transitivity-trace-map--1`: Trace normalization and transitivity
-
-**Base change of the smooth traces.** Let `g ≫ f = f' ≫ v` be a cartesian square with `f`
+/-- **Base change of the smooth traces.** Let `g ≫ f = f' ≫ v` be a cartesian square with `f`
 smooth separated of relative dimension `d`, let `β : Lg^* ⋙ Rf'_! ≅ Rf_! ⋙ Lv^*` be the
 compact-support base change, and let the purity maps `γ_{f,K}` and `γ_{f',Lv^* K}` satisfy the
-smooth base-change coherence `proposition-compatibility-purity-base-change--1` with respect to the
-exchange `Lg^* Rf^! ⟶ Rf'^! Lv^*` conjugate to `β`
+smooth base-change coherence with respect to the exchange `Lg^* Rf^! ⟶ Rf'^! Lv^*` conjugate to `β`
 (`AlgebraicGeometry.Etale.upperShriekBaseChangeOfLowerShriek`). Then the smooth trace is
 compatible with the base change: the square
 
@@ -363,10 +343,7 @@ end BaseChange
 
 section DualizingComplex
 
-/-- Blueprint `corollary-dualizing-complex-smooth-scheme--1`: Finite-stage smooth dualizing
-complex
-
-Let `a : X ⟶ Spec k` be smooth separated, locally of finite type, of pure dimension `d`. The
+/-- Let `a : X ⟶ Spec k` be smooth separated, locally of finite type, of pure dimension `d`. The
 dualizing complex `ω_X = Ra^! Λ` has an identification `γ : Λ_X(d)[2d] = La^* Λ(d)[2d] ≅ ω_X`
 coming from finite-coefficient smooth purity
 (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`), and under it the counit

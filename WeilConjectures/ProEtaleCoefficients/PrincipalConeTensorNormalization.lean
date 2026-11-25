@@ -17,8 +17,10 @@ import Mathlib.CategoryTheory.Center.Linear
 
 /-! # Signed principal cones and derived tensor
 
-Source: blueprint, derived Nakayama resolution, On X paragraph.
-(blueprint: lem-pe-principal-cone-tensor-normalization).
+Scalar tools for principal cones on a scheme `X`: the endomorphisms of the monoidal unit of a
+preadditive monoidal category form a commutative ring, and an endomorphism of the regular
+module over the integer ring of `E` gives such a scalar on adic modules over `X`, by pullback
+along the structure map.
 -/
 
 @[expose] public noncomputable section

@@ -17,11 +17,15 @@ public import WeilConjectures.ConstructibleSheaf.Monoidal
 # The Tate twists
 
 Let `Λ` be a commutative ring of positive characteristic `n`. This file constructs the Tate
-twists `Λ_X(m)`, `m ∈ ℤ`, of the blueprint (`definition-tate-twists`) on every scheme
-`X` on which `n` is invertible, and shows that they form a Tate twist datum
-(`AlgebraicGeometry.Etale.HasTateTwist`) for the coefficient ring `Λ`.
+twists `Λ_X(m)`, `m ∈ ℤ`, on every scheme `X` on which `n` is invertible, and shows that they
+form a Tate twist datum (`AlgebraicGeometry.Etale.HasTateTwist`) for the coefficient ring `Λ`.
 
-## Construction
+## Main definitions
+
+- `AlgebraicGeometry.Etale.tateTwistObject`: the twisting objects `Λ_X(m)`.
+- `AlgebraicGeometry.Etale.hasTateTwist`: the Tate twist datum.
+
+## Implementation details
 
 On the universal base `S = Spec ℤ[1/n]` (`AlgebraicGeometry.invertibleExponentBase`) the Tate
 sheaf `Λ_S(1) = μₙ ⊗ Λ` (`AlgebraicGeometry.Etale.tateSheaf`) becomes the constant sheaf `Λ` on
@@ -34,11 +38,6 @@ On a scheme `X` on which `n` is invertible, `Λ_X(m)` is the derived pullback of
 the unique morphism `X ⟶ S` (`AlgebraicGeometry.Etale.tateTwistObject`); all compatibilities
 between the twists of different schemes are then those of the derived pullbacks. On the other
 schemes, which play no role, `Λ_X(m)` is defined to be `Λ_X`.
-
-## Main definitions
-
-- `AlgebraicGeometry.Etale.tateTwistObject`: the twisting objects `Λ_X(m)`.
-- `AlgebraicGeometry.Etale.hasTateTwist`: the Tate twist datum.
 -/
 
 @[expose] public section
@@ -126,9 +125,7 @@ noncomputable def tateIntTensorFamily :=
 
 
 open Classical in
-/-- Blueprint `definition-tate-twists`: Coefficient Tate twists.
-
-The Tate twisting object `Λ_X(m) ∈ D(X_ét, Λ)`: on a scheme `X` on which the characteristic `n`
+/-- The Tate twisting object `Λ_X(m) ∈ D(X_ét, Λ)`: on a scheme `X` on which the characteristic `n`
 of `Λ` is invertible, the derived pullback of `Λ_S(m)`
 (`AlgebraicGeometry.Etale.tateIntTensorFamily`) along the unique morphism `X ⟶ S = Spec ℤ[1/n]`.
 It is the sheaf `(μₙ ⊗ Λ)^{⊗ m}` for `m ≥ 0`, and its dual `Hom((μₙ ⊗ Λ)^{⊗ -m}, Λ)` for
@@ -296,8 +293,7 @@ noncomputable def sheafFiberTateTwistSheafIso (m : ℤ) {Ω : Type u} [Field Ω]
     (pointSmallEtale t).sheafFiber.mapIso (upperStarTateCoverOfTateTwistSheafIso Λ X m) ≪≫
     (pointSmallEtale t).sheafFiberConstantSheafIso (ModuleCat.of Λ Λ)
 
-/-- The sheaf `(μₙ ⊗ Λ)^{⊗ m}` is finite locally constant: it is trivial on the étale cover
-`X ×_S V`, and its stalks are free of rank one. -/
+/-- The sheaf `(μₙ ⊗ Λ)^{⊗ m}` is finite locally constant. -/
 lemma isFiniteLocallyConstantSheaf_tateTwistSheaf (m : ℤ) :
     IsFiniteLocallyConstantSheaf (tateTwistSheaf Λ X m) where
   toIsLocallyConstantSheaf := by
@@ -315,7 +311,7 @@ lemma isFiniteLocallyConstantSheaf_tateTwistSheaf (m : ℤ) :
   toIsFiniteSheaf := ⟨fun _ _ _ s ↦ ((ModuleCat.isFinitelyGenerated_iff _).2
     (inferInstanceAs (Module.Finite Λ Λ))).of_iso (sheafFiberTateTwistSheafIso Λ X m s).symm⟩
 
-/-- The sheaf `(μₙ ⊗ Λ)^{⊗ m}` is flat: `(μₙ ⊗ Λ)^{⊗ -m}` is a tensor inverse. -/
+/-- The sheaf `(μₙ ⊗ Λ)^{⊗ m}` is flat. -/
 lemma flat_tateTwistSheaf (m : ℤ) : ObjectProperty.flat (tateTwistSheaf Λ X m) :=
   ObjectProperty.flat_of_tensorIso (Y := tateTwistSheaf Λ X (-m))
     (Functor.Monoidal.μIso _ _ _ ≪≫
@@ -324,8 +320,7 @@ lemma flat_tateTwistSheaf (m : ℤ) : ObjectProperty.flat (tateTwistSheaf Λ X m
           eqToIso (congrArg (tateSheafTensorInverse Λ).zpow (add_neg_cancel m))) ≪≫
       (Functor.Monoidal.εIso _).symm)
 
-/-- Every Tate twist `Λ_X(m)` lies in `D^b_{ctf}(X, Λ)`: it is a finite locally constant flat
-sheaf placed in degree zero. -/
+/-- Every Tate twist `Λ_X(m)` lies in `D^b_{ctf}(X, Λ)`. -/
 lemma boundedConstructibleFiniteTor_tateTwistObject (m : ℤ) :
     DerivedCategory.boundedConstructibleFiniteTor Λ X (tateTwistObject Λ X m) := by
   have := isFiniteLocallyConstantSheaf_tateTwistSheaf Λ X m
@@ -351,9 +346,7 @@ lemma exists_isLocallyConstantSheaf_tateTwistObject (m : ℤ) :
 
 end Sheaf
 
-/-- Blueprint `definition-tate-twists`: Coefficient Tate twists.
-
-The genuine Tate twist datum of a commutative ring `Λ` of positive characteristic `n`:
+/-- The Tate twist datum of a commutative ring `Λ` of positive characteristic `n`:
 `Λ_X(m) = (μₙ ⊗ Λ)^{⊗ m}` on the schemes `X` on which `n` is invertible
 (`AlgebraicGeometry.Etale.tateTwistObject`), with the identifications coming from the derived
 pullbacks along the morphisms to `Spec ℤ[1/n]`. -/

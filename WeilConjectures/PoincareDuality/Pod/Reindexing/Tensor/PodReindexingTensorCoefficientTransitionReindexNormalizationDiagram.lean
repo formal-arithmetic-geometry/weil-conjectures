@@ -8,10 +8,19 @@ module
 public import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensorDescentDiagram
 import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensorCoefficientTransitionReindexNormalization
 
-/-! # Completed tensor square for scalar/reindexing transitions
+/-! # Reindex normalization in the named tensor descent diagram
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-tensor-reindex-normalization-diagram).
+The reindex normalization of the scalar/reindexing tensor descent, stated on the named functors
+and comparisons of the fixed tensor descent diagram.
+
+## Implementation details
+
+The proof applies the tensor reindexing law to the chosen good constructible pair, cancels the
+associator component and reassociates.
+
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -104,11 +113,9 @@ private theorem associatorComponent
     (Functor.associator F G H).hom.app K ≫ f = f := by
   exact Category.id_comp f
 
-/-- The hα compatibility for the named tensor descent diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: lem-pod-tensor-reindex-normalization-diagram).
-Proof: Apply the tensor Model law to the chosen good constructible pair. The localization and
-  reindexing factors are the specified ones. Cancel the associator component and reassociate. -/
+/-- The reindex normalization (`hα`) of the named tensor descent diagram: the reindexing functor
+applied to the reindexing chain equals the reindexing comparison, the reindexed tensor of the
+pair reindexing factor, and the reindexing comparison at the good reindexed pair. -/
 theorem podTensorReindexRepresentativeNormalizationDiagram
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

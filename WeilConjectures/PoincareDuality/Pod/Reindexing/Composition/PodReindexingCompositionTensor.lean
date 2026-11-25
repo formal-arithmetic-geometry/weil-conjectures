@@ -15,8 +15,21 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Completed-tensor composition for section-normalized ordinary reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4, 0941. -/
+We prove the composition law for the completed-tensor comparisons of a reindexing family whose
+ordinary compositor acts on sections by restriction.
+
+## Implementation details
+
+The proof chooses flat-term K-flat representatives of the two inputs and compares the
+reindexed Roos chain maps on generators: on pure tensors, applying the two reindexings
+successively agrees with applying their composite. Pure tensors generate each tensor module
+before sheafification, and the equalities are compatible with the tower transitions. The result
+is localized and transported along the representative isomorphisms using naturality. It does
+not use faithfulness of finite evaluations or perfection of the inputs.
+
+## References
+
+* Stacks 07A4, 0941 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -107,30 +120,10 @@ private theorem tensor_composition_transport
 end RepresentativeTransport
 
 -- The representative transport involves three derived reindexing functors.
-/-- The completed-tensor equation on complete constructible inputs.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4, 0941 (blueprint: lem-pod-reindexing-composition-tensor-equation).
-
-Proof: choose flat-term K-flat representatives P,Q of the two inputs. Their
-reindexed complexes are good by each completion datum's good field. For each
-positive quotient and each homogeneous summand of the total tensor, Generators
-identifies T.tower with the tensor of the two quotient comparisons. Applying the
-two reindexings successively to a pure tensor gives the same restrictions of
-both factors as applying their composite, because hcomposition is Over.mapComp
-on every original section. QuotientGenerators fixes the coefficient action as
-well. Pure tensors generate each tensor module before sheafification, and the
-maps respect the sheafification units; the generator equalities therefore give
-whole degreewise maps. QuotientTransition shows these equalities commute with
-the strict tower transitions. Apply all product projections and then RoosFst
-and RoosSnd to obtain equality of the entire Roos chain maps, retaining the cone
-shift. Localize this equality and substitute Model for the three tensor maps.
-The representative comparisons and the factors for the intermediate reindexing
-cancel by their inverse equations and naturality. This proves the displayed
-equation on the represented inputs. The Naturality law transports it along the
-two chosen representative isomorphisms to M and N. Neither faithfulness of
-finite evaluations nor perfection of the inputs is used. Zero inputs and empty
-schemes use the same generator argument. This statement does not assert the
-ambient reduction or total-limit composition equation. -/
+/-- The completed-tensor composition equation on complete constructible inputs: for
+isomorphisms `h : Z ⟶ W`, `f : W ⟶ V` and inputs `M`, `N`, the completed-tensor comparison of
+`h ≫ f` agrees with the composite of those of `f` and `h`, up to the derived compositor. Here
+the ordinary compositor is assumed to act on sections by restriction along `Over.mapComp`. -/
 theorem podReindexingCompositionTensor
     (A : PodReindexFamily l E)
     (hcompletion : ∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]

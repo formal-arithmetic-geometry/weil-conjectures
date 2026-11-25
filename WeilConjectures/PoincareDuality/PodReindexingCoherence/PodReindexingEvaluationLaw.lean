@@ -74,8 +74,26 @@ import all WeilConjectures.SixFunctors.Coefficient.Tensor.CoefficientTensorCurry
 
 /-! # Evaluation law for a normalized reindexing comparison
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0GMX, 0A8X, 08J9.
-(blueprint: lem-pod-reindexing-evaluation-law).
+We show that every normalized comparison of closed coefficient structures along an isomorphism
+of schemes is compatible with the evaluation maps.
+
+## Main statements
+
+* `comparison_evaluation_law`: a normalized comparison satisfies the evaluation equation.
+
+## Implementation details
+
+The proof chooses K-flat and K-injective representatives. The chain transpose identifies
+evaluation on a pure tensor with application of the Hom map, and the `chain_projection` and
+`tensorChain_pure` equations identify the two reindexed maps on every pure generator.
+Extensionality after sheafification, then localization and naturality along resolutions, gives
+the law for all derived objects.
+
+## References
+
+* [Stacks Project, Tag 0GMX](https://stacks.math.columbia.edu/tag/0GMX)
+* [Stacks Project, Tag 0A8X](https://stacks.math.columbia.edu/tag/0A8X)
+* [Stacks Project, Tag 08J9](https://stacks.math.columbia.edu/tag/08J9)
 -/
 
 @[expose] public noncomputable section
@@ -492,20 +510,9 @@ private theorem evaluation_representatives {X Y : Scheme.{u}} (g : X ⟶ Y) [IsI
     simp only [k, e', Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc]
     rfl
 
-/--
-Every normalized comparison satisfies the evaluation equation.  This is the
-representative evaluation step, with the comparison itself supplied as input.
-
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0GMX, 0A8X and 08J9
-(blueprint: lem-pod-reindexing-evaluation-law).
-
-Proof: choose flat-term K-flat and K-injective representatives.  The chain
-transpose identifies evaluation on a pure tensor with application of the Hom
-map.  The `chain_projection` and `tensorChain_pure` equations identify the two
-reindexed maps on every pure generator.  Extensionality after sheafification,
-then localization and naturality along resolutions, gives the displayed law for
-all derived objects.
--/
+/-- Every normalized comparison `c` satisfies the evaluation equation: reindexing the
+evaluation map of `SY` agrees with the evaluation map of `SX` precomposed with the tensor and
+derived Hom comparisons of `c`. -/
 theorem comparison_evaluation_law {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

@@ -10,13 +10,18 @@ import all WeilConjectures.SmoothPurity.Finite.FiniteRationalDerivedOperations
 
 /-! # Existence of the rational normalized partial closed datum
 
-Source: Stacks Project, Tag 08J9; the rational localization step in the
-blueprint `lem-pod-derived-automorphism-hom-evaluation`.
-(blueprint: lem-pod-rational-closed-existence)
+Shows that the scalar-localized integral transpose admits a rational partial closed structure
+with the prescribed pure-tensor normalization (`podRationalClosed_exists`).
+
+## Implementation details
 
 The integral transpose is linear by parameter naturality and tensor bilinearity.
 Base change gives the localized transpose and its inverse; tensor-product
 induction proves parameter naturality for all localized morphisms.
+
+## References
+
+* Stacks Project, Tag 08J9
 -/
 
 @[expose] public noncomputable section
@@ -146,19 +151,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The scalar-localized integral transpose admits a rational partial closed
 structure with the prescribed pure-tensor normalization. This is the existence
-part of `podRationalClosed_existsUnique`.
-Source: Stacks Project, Tag 08J9; the assigned localization normalization in
-`lem-pod-derived-automorphism-hom-evaluation` (agent refinement of coefficient transport).
-Proof: apply integral parameter naturality to a scalar multiple of the identity.
-Integral tensor bilinearity identifies the resulting equation with linearity
-of transposition. Tensor this linear equivalence and its inverse with the
-localization ring. Transport the endpoints through the recorded tensor and Hom
-object equalities. On pure tensors, the naturality equation is the integral
-equation multiplied by the two scalars, using the prescribed bilinear tensor
-and composition formulas. Tensor-product induction extends it to arbitrary
-localized arrows. The inverse equivalence has exactly the displayed pure-tensor
-normalization by the base-change formula.
-(blueprint: lem-pod-rational-closed-existence). -/
+part of `podRationalClosed_existsUnique`. -/
 theorem podRationalClosed_exists :
     ∃ S : PodPartialClosed (rationalDerivedTensor l E W)
         (constructibleRationalHomPairs l E W) (rationalDerivedInternalHom l E W),

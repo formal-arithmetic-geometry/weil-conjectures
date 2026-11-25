@@ -9,8 +9,16 @@ public import WeilConjectures.PoincareDuality.PodReindexFamily.PodCompletionRein
 
 /-! # The strict tensor tower composition equation
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-tower).
+The strict tensor-tower square for the ordinary degreewise compositor.
+
+## Implementation details
+
+The equation is stated as a named proposition, before products, Roos cones and
+localization, so that large tower objects stay shared during later proof checks.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941
 -/
 
 @[expose] public noncomputable section
@@ -45,11 +53,7 @@ attribute [local implicit_reducible] podGoodReindex integralOperationsTensorComp
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The strict tensor-tower square for the ordinary degreewise compositor.
-Source: blueprint Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: def-pod-tensor-tower-composition).
-This explicitly names the equation before products, Roos cones and localization.
-The named proposition keeps large tower objects shared during later proof checks. -/
+/-- The strict tensor-tower square for the ordinary degreewise compositor. -/
 def PodTensorTowerComposition
     (A : PodReindexFamily l E)
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]

@@ -19,14 +19,15 @@ Let `X₀` be a smooth separated scheme of finite type and relative dimension `d
 `k₀ = 𝔽_q`, `a : X ⟶ Spec k̄` its geometric fibre and `σ` the geometric Frobenius of `Spec k̄`, so
 that the geometric Galois Frobenius `g` of `X` fits in the cartesian square `g ≫ a = a ≫ σ`
 (`AlgebraicGeometry.Scheme.Hom.isPullback_geometricGaloisFrobenius`). Smooth purity and the smooth
-trace are Weil equivariant (blueprint `proposition-purity-trace-commute-frobenius` of the
-six-functor section, for the Tate datum of `definition-weil-structure--1`, on which geometric
-Frobenius acts by `q⁻ᵈ` on `Λ(d)`). This file records that statement, in the untwisted form in which
-the Frobenius files use it
+trace are Weil equivariant (for the Tate datum on which geometric Frobenius acts by `q⁻ᵈ` on
+`Λ(d)`). This file records that statement, in the untwisted form in which the Frobenius files
+use it
 (`AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing_frobeniusOperator`):
 there are a Tate orientation `γ` of `a` and a Weil datum `τ` on `Λ_{k̄}(-d)`, on whose sections
 Frobenius acts by `q^d`, for which the untwisted smooth trace `(Ra_! Λ_X)[2d] ⟶ Λ_{k̄}(-d)` is a
 morphism of Weil objects.
+
+## Implementation details
 
 The statement is existential: the orientation is built from an untwisted orientation
 `o : Λ_X[2d] ≅ Ra^! Λ` on which geometric Frobenius acts by `q^d`
@@ -55,10 +56,9 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {X₀ : Scheme.{u}} (f : X�
   [HasInvertibleExponent Λ f.geometricFiber]
   [HasCompactification f.geometricFiberToAlgebraicClosure]
 
-/-- Blueprint `proposition-purity-trace-commute-frobenius` (Weil equivariance of purity and
-trace, with the Tate datum `definition-weil-structure--1`), for the geometric fibre
-`a : X ⟶ Spec k̄` of a smooth separated `𝔽_q`-scheme of finite type and relative dimension `d`, in
-untwisted form: there are a Tate orientation `γ` of `a` and a Weil datum `τ` on `Λ_{k̄}(-d)` for the
+/-- **Weil equivariance of the smooth trace**, for the geometric fibre `a : X ⟶ Spec k̄` of a
+smooth separated `𝔽_q`-scheme of finite type and relative dimension `d`, in untwisted form: there
+are a Tate orientation `γ` of `a` and a Weil datum `τ` on `Λ_{k̄}(-d)` for the
 geometric Frobenius of `Spec k̄`, on whose sections Frobenius acts by `q^d`, such that the untwisted
 smooth trace of `γ` is a morphism of Weil objects from the datum induced by the canonical datum of
 `Λ_X` (through `Ra_!` and the shift by `2d`) to `τ`. -/

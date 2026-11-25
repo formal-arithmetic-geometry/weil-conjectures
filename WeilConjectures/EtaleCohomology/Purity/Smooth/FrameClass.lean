@@ -66,10 +66,9 @@ lemma isZero_leftDerivedUpperStar_openComplement_obj_of_range_eq
     (by rw [h, i'.range_eq_compl_range_openComplement_ι]; exact disjoint_compl_left) _
     subset_rfl _
 
-/-- For closed immersions `i`, `i'` with the same range, the counit `Ri_! Ri^! L ⟶ L` lifts
-uniquely through the counit `Ri'_! Ri'^! L ⟶ L`
-(`AlgebraicGeometry.Etale.existsUnique_comp_counit_of_isZero`). It is *defined* as
-`Classical.choose`; uniqueness makes the choice canonical. -/
+/-- For closed immersions `i`, `i'` with the same range, the unique lift
+`Ri_! Ri^! L ⟶ Ri'_! Ri'^! L` of the counit `Ri_! Ri^! L ⟶ L` through the counit
+`Ri'_! Ri'^! L ⟶ L` (`AlgebraicGeometry.Etale.existsUnique_comp_counit_of_isZero`). -/
 noncomputable def supportedTransport (h : Set.range i.base = Set.range i'.base)
     (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L) ⟶ (R(i')_![ModuleCat.{u + 1} Λ]).obj
@@ -90,8 +89,7 @@ lemma supportedTransport_comp_counit (h : Set.range i.base = Set.range i'.base)
     ((rightDerivedUpperShriekAdjunction Λ i).counit.app L)).exists.choose_spec
 
 /-- **Classes with supports only depend on the support.** For closed immersions `i`, `i'` with
-the same range, `Ri_! Ri^! L ≅ Ri'_! Ri'^! L` compatibly with the counits: both lifts are unique,
-and their composites lift the counits to themselves. -/
+the same range, `Ri_! Ri^! L ≅ Ri'_! Ri'^! L` compatibly with the counits. -/
 noncomputable def supportedTransportIso (h : Set.range i.base = Set.range i'.base)
     (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L) ≅ (R(i')_![ModuleCat.{u + 1} Λ]).obj
@@ -117,12 +115,8 @@ section Frame
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [HasKummerClass Λ] [Finite Λ]
 
-/-- Blueprint `proposition-purity-vector-bundles`: Class of a frame
-
-A *frame* at a closed subscheme `z : Z ⟶ V`: an étale `V`-scheme `e : U ⟶ V` together with
-functions `f₁, …, f_c ∈ Γ(U, 𝒪_U)` generating the ideal of `Z ∩ U = Z ×_V U` in `U`. In the
-purity setting `V ⟶ B` is smooth and `Z ⟶ B` is smooth, `Z` of pure codimension `c` in `V`;
-these hypotheses on the ambient family are not needed to define a frame or its class. -/
+/-- A *frame* at a closed subscheme `z : Z ⟶ V`: an étale `V`-scheme `e : U ⟶ V` together with
+functions `f₁, …, f_c ∈ Γ(U, 𝒪_U)` generating the ideal of `Z ∩ U = Z ×_V U` in `U`. -/
 structure PurityFrame {V Z : Scheme.{u}} (z : Z ⟶ V) [IsClosedImmersion z] (c : ℕ) where
   /-- The étale `V`-scheme of the frame. -/
   U : Scheme.{u}
@@ -149,16 +143,13 @@ lemma range_zeroLocusSubschemeι (F : PurityFrame z c) :
     (pullback.snd z F.e).isClosedEmbedding.isClosed_range.closure_eq]
 
 variable (Λ) in
-/-- Blueprint `proposition-purity-vector-bundles`: Class of a frame
-
-The *class of a frame* `(U, f₁, …, f_c)` at `Z`: the cup product with supports of the Kummer
+/-- The *class of a frame* `(U, f₁, …, f_c)` at `Z`: the cup product with supports of the Kummer
 boundaries `α_k = ∂κ(f_k) ∈ H²_{V(f_k)}(U, Λ(1))`,
 
 `cl(f) = α₁ ∪ ⋯ ∪ α_c ∈ H^{2c}_{Z ∩ U}(U, Λ(c)) = Hom(Λ_U, Ri_! Ri^! (Λ_U(c)[2c]))`,
 
 where `i : Z ×_V U ⟶ U` (`AlgebraicGeometry.Etale.kummerBoundaryProduct`, read through
-`V(f₁, …, f_c) = Z ∩ U`, `AlgebraicGeometry.Etale.supportedTransportIso`). Each factor has degree
-two and twist one, and their supports meet in `Z ∩ U`, giving degree `2c` and twist `c`. -/
+`V(f₁, …, f_c) = Z ∩ U`, `AlgebraicGeometry.Etale.supportedTransportIso`). -/
 noncomputable def cl (F : PurityFrame z c) [HasInvertibleExponent Λ V] :
     haveI : HasInvertibleExponent Λ F.U := .of_hom F.e
     constantComplex Λ F.U ⟶ (R(pullback.snd z F.e)_![ModuleCat.{u + 1} Λ]).obj

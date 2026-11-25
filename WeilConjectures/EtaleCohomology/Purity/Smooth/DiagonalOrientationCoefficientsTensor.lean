@@ -20,9 +20,7 @@ the derived extension of scalars). We show that a monoidal change of coefficient
 section invariant construction `Ls^* ω ≅ Ls^* T`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso`), which is the
 hypothesis `hL` of
-`AlgebraicGeometry.Etale.SupportedCoefficientChange.map_dualizingComplexTwistShiftIso`
-(blueprint `proposition-relative-dualizing-complex--1`,
-`proposition-compatibility-purity-change-coefficients`).
+`AlgebraicGeometry.Etale.SupportedCoefficientChange.map_dualizingComplexTwistShiftIso`.
 
 ## Main definitions
 
@@ -119,10 +117,7 @@ end TensorMap
 variable (Λ Λ' : Type (u + 1)) [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finite Λ']
   [HasTateTwist Λ] [HasTateTwist Λ']
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
-purity
-
-A *monoidal* change of coefficients: a change of coefficients with comparisons with `Le^*`,
+/-- A *monoidal* change of coefficients: a change of coefficients with comparisons with `Le^*`,
 `Ri_!` and `Ri^!` (`AlgebraicGeometry.Etale.SupportedCoefficientChange`) together with natural
 isomorphisms `Ψ(M ⊗ᴸ N) ≅ Ψ M ⊗ᴸ Ψ N` compatible with the left unitors (through
 `Ψ Λ_X ≅ Λ'_X`), with the symmetries of `⊗ᴸ` and with the tensor maps
@@ -261,19 +256,12 @@ lemma map_rightDerivedUpperShriekTensorMap_comp {M N : 𝐃(V, Λ)} {M' N' : �
     ← rightDerivedUpperShriekTensorMap_naturality_left_assoc,
     ← rightDerivedUpperShriekTensorMap_naturality_right, NatTrans.naturality_assoc]
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
-purity
-
-**A monoidal change of coefficients preserves the section invariant construction.** For a
+/-- **A monoidal change of coefficients preserves the section invariant construction.** For a
 closed immersion `s : B ⟶ V`, identifications `vω : Ψ ω ≅ ω'`, `vT : Ψ T ≅ T'` of invertible
 objects and corresponding isomorphisms `θ : Rs^! T ≅ Λ_B`, `θ' : Rs^! T' ≅ Λ'_B` and
 `ε : Rs^! ω ≅ Λ_B`, `ε' : Rs^! ω' ≅ Λ'_B`, the isomorphisms `Ls^* ω ≅ Ls^* T`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso`) over `Λ` and
-`Λ'` correspond. After composing with the isomorphism
-`Ls^* T ≅ Λ_B ⊗ Ls^* T ≅ Rs^! ω ⊗ Ls^* T ≅ Rs^!(ω ⊗ T)`, the construction becomes
-`Ls^* ω ≅ Λ_B ⊗ Ls^* ω ≅ Rs^! T ⊗ Ls^* ω ≅ Rs^!(T ⊗ ω) ≅ Rs^!(ω ⊗ T)`; both are composites of
-unitors, of the given isomorphisms, of tensor maps of `Rs^!` and of `Rs^!` of the symmetry,
-each of which is compatible with the change of coefficients. -/
+`Λ'` correspond. -/
 theorem map_leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso {ω T : 𝐃(V, Λ)}
     {ω' T' : 𝐃(V, Λ')} (vω : (Φ.functor V).obj ω ≅ ω') (vT : (Φ.functor V).obj T ≅ T')
     (hω : DerivedCategory.isInvertible Λ V ω) (hT : DerivedCategory.isInvertible Λ V T)
@@ -373,17 +361,11 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finit
   [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasKummerClass Λ']
   [HasKummerClass.IsNormalized Λ'] (Φ : MonoidalSupportedCoefficientChange Λ Λ')
 
-/-- Blueprint `proposition-relative-dualizing-complex--1`,
-`proposition-compatibility-purity-change-coefficients`
-
-**The canonical orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with a monoidal change of
+/-- **The canonical orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with a monoidal change of
 coefficients** (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`), as soon as the change
 of coefficients carries the frame classes of the diagonal over `Λ` to those over `Λ'`
 (`hframe`), and the smooth base change identifications `𝒞(p₁, Δ) ≅ ω_f` (`hC`) and the
-composition isomorphisms `RΔ^! ω_{p₁} ≅ Λ_X` (`hε`) correspond: this is
-`AlgebraicGeometry.Etale.SupportedCoefficientChange.map_dualizingComplexTwistShiftIso`, whose
-remaining hypothesis is
-`AlgebraicGeometry.Etale.MonoidalSupportedCoefficientChange.preservesSectionInvariantIso`. -/
+composition isomorphisms `RΔ^! ω_{p₁} ≅ Λ_X` (`hε`) correspond. -/
 theorem map_dualizingComplexTwistShiftIso {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ)
     [SmoothOfRelativeDimension d f] [HasCompactification f] [IsSeparated f]
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X] {k : Type u} [Field k]
