@@ -191,8 +191,6 @@ private lemma limit_triple_defect_zero
   exact ((Scheme.Modules.pullback π).map_comp _ _).trans hz
 
 set_option backward.isDefEq.respectTransparency false in
--- Keep the original, unused existential proof binder in the theorem signature.
-set_option linter.unusedVariables false in
 /-- Finite-stage vanishing of the canonical triple-overlap defect.  This is the
 finite-presentation zero-map descent part of the persistent overlap argument;
 the remaining transport to arbitrary chosen pullbacks is a separate theorem.
@@ -220,7 +218,7 @@ theorem finitePresentation_overlap_triple_canonical_eventually
           (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj (N a))) →
         (T.pull (p := p₀) (α := fun a ↦ a)
           (fun a ↦ V₀.pullbackHom_map p₀ a)).Coherent →
-        ∃ (l : I) (hkl : k ≤ l), ∀ (m : I) (hkm : k ≤ m), l ≤ m →
+        ∃ (l : I) (_hkl : k ≤ l), ∀ (m : I) (hkm : k ≤ m), l ≤ m →
           let q := overlapStageMap R f hij (hjk.trans hkm)
           let V : (pullback f (Spec.map
               (R.map (homOfLE (hij.trans (hjk.trans hkm)))))).OpenCover.{u} :=

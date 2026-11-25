@@ -160,9 +160,9 @@ private theorem residueCoefficient_square (X : Scheme.{t})
     intro y
     obtain ⟨x, hx⟩ := Ideal.Quotient.mk_surjective y.down
     exact ⟨ULift.up x, congrArg ULift.up hx⟩
-  let : Epi (CommRingCat.ofHom (RingHom.ulift p)) :=
+  have : Epi (CommRingCat.ofHom (RingHom.ulift p)) :=
     ConcreteCategory.epi_of_surjective _ hp
-  let : (constantSheaf (ProEt.topology X) CommRingCat.{t + 1}).IsLeftAdjoint :=
+  have : (constantSheaf (ProEt.topology X) CommRingCat.{t + 1}).IsLeftAdjoint :=
     (constantSheafAdj (ProEt.topology X) CommRingCat.{t + 1}
       terminalIsTerminal).isLeftAdjoint
   have : Epi (adicConstantMap X p) := by
@@ -196,8 +196,6 @@ private def residueRestrictionComparison (X : Scheme.{t})
   exact F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso M).symm ≪≫
     F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage M)
 
--- The existing signature retains hφ, although the comparison does not need it.
-set_option linter.unusedVariables false in
 /-- Reduction of a given constant quotient model is the constant realization of its
 algebraic derived residue, after the specified residue-ring identification. This also
 holds on an empty chart. -/
@@ -206,7 +204,7 @@ theorem finiteQuotient_model_residueComparison
     [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
       completedAdicFiniteCommRing X d n)
-    (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)
+    (_hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)
     (M : DerivedCategory (CompletedAdicModules X d)) (n : ℕ) (W : X.Etale)
     (P : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))) ℤ)
     (e : Nonempty
@@ -239,7 +237,7 @@ theorem finiteQuotient_model_residueComparison
         ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0)
           ((toProEt X).obj W) ((completedAdicDerivedChange X (φ 0)).obj
             (DerivedCategory.Q.obj (finiteModelConstantComplex X _ C)))) := by
-  clear hφ
+  clear _hφ
   let U := (toProEt X).obj W
   let Rn := completedAdicFiniteRing X d n
   let R₀ := completedAdicFiniteRing X d 0

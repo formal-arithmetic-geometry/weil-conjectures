@@ -35,7 +35,6 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /- Reference: Stacks, Tag 0A28. -/
-set_option linter.style.haveILetI false in
 /-- A smooth separated connected curve over an algebraically closed field is proper or affine. -/
 theorem IsConnectedCurve.isProper_or_isAffine
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
@@ -57,8 +56,8 @@ theorem IsConnectedCurve.isProper_or_isAffine
         rw [hS] at hxc
         exact hxc
     have hsurj : Function.Surjective c.i.base := Set.range_eq_univ.mp hrange
-    letI : Surjective c.i := ⟨hsurj⟩
-    haveI : IsIso c.i := (isIso_iff_isOpenImmersion_and_surjective c.i).mpr
+    let : Surjective c.i := ⟨hsurj⟩
+    have : IsIso c.i := (isIso_iff_isOpenImmersion_and_surjective c.i).mpr
       ⟨inferInstance, inferInstance⟩
     rw [c.comm]
     infer_instance

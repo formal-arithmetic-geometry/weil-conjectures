@@ -41,7 +41,6 @@ private lemma schemeMV_composition_postcompose
   simpa only [Category.assoc] using congrArg (fun v ↦ v ≫ R.map t) hc
 
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedVariables false in
 /-- Left-hand composition normalization to the complex-composition composite.
 (Stacks, Tags 08FE, 0D5T, 079V) -/
 theorem schemeMV_composition_left_normalization
@@ -53,7 +52,7 @@ theorem schemeMV_composition_left_normalization
     [∀ T : Y.Opens, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
-    let F := (RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex
+    let _F := (RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex
       (.up ℤ)
     let R := schemeDerivedDirectImage W.ι
     (schemeMVDirectImageLocalization h).app (schemeOpenModuleImageComplex X (h ⁻¹ᵁ W) I) ≫

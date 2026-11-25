@@ -85,7 +85,6 @@ theorem finitePresentation_local_map_pair_eventually_defect_zero
   exact pairDefectZero_of_pairCompatibility _ a b (h m hkm hlm)
 
 
-set_option linter.unusedVariables false in
 /-- One pair of recovered local maps satisfies the overlap equation at every
 sufficiently late stage.
 (Stacks, Tag 01ZR) -/
@@ -110,7 +109,7 @@ theorem finitePresentation_local_map_pair_eventually
       let e := Scheme.Modules.openCoverTensorPullbackComparison p U₀ x
       e.inv.app F ≫ (Scheme.Modules.pullback (U₀.pullbackHom p x)).map (r₀ x) ≫
         e.hom.app G = (Scheme.Modules.pullback ((U₀.pullback₁ p).f x)).map δ) :
-    ∃ (l : I) (hkl : k ≤ l), ∀ (m : I) (hkm : k ≤ m), l ≤ m →
+    ∃ (l : I) (_hkl : k ≤ l), ∀ (m : I) (hkm : k ≤ m), l ≤ m →
       let q := baseChangeMap f
         (T := Over.mk (Spec.map (R.map (homOfLE hik))))
         (T' := Over.mk (Spec.map (R.map (homOfLE (hik.trans hkm)))))

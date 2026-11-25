@@ -174,14 +174,13 @@ private instance modelExtension_faithful {S X : LocallyClosedCoefficients.{u}}
 
 end LocallyClosedCoefficientImmersion
 
-set_option linter.unusedVariables false in
 /-- For a single immersion, the fixed closed-then-open model has the normalized open
 adjunction and the normalized comparison with actual closed direct image. -/
 theorem locallyClosedModel_boundary {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) :
-    (∀ ha : IsOpenImmersion a.hom, ∃ adj : a.modelExtension ⊣ a.pull,
+    (∀ _ha : IsOpenImmersion a.hom, ∃ adj : a.modelExtension ⊣ a.pull,
       LocallyClosedOpenNormalization a.modelExtension a.pull a.modelRestriction adj) ∧
-    (∀ ha : IsClosedImmersion a.hom, ∃ e : a.modelExtension ≅ a.push,
+    (∀ _ha : IsClosedImmersion a.hom, ∃ e : a.modelExtension ≅ a.push,
       LocallyClosedClosedNormalization a.modelExtension a.push a.pull a.modelRestriction
         (proEtaleRingModuleAdjunction a.hom X.ring S.ring a.coefficient).counit e) := by
   let c := a.extensionFactorization.closed

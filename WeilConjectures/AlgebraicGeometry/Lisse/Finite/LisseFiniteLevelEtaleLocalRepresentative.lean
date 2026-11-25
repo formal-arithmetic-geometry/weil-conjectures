@@ -18,7 +18,6 @@ import WeilConjectures.ConstructibleSheaf.InternalHom
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -34,14 +33,14 @@ theorem exists_etale_local_representative_of_proetale_local_iso_sections
     (hD : DerivedCategory.TStructure.t.plus D)
     (hsections : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]
       (x : Spec (.of Ω) ⟶ U.left),
-      ∃ (V : U.left.Etale) (v : (pointSmallEtale x).fiber.obj V),
+      ∃ (V : U.left.Etale) (_v : (pointSmallEtale x).fiber.obj V),
         Nonempty ((derivedLocalIsoPresheaf (ProEt.topology U.left) B
           ((derivedComparison U.left B).obj A)
           ((derivedComparison U.left B).obj D)).obj
             (op ((toProEt U.left).obj V)))) :
     ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]
       (x : Spec (.of Ω) ⟶ U.left),
-      ∃ (V : U.left.Etale) (v : (pointSmallEtale x).fiber.obj V),
+      ∃ (V : U.left.Etale) (_v : (pointSmallEtale x).fiber.obj V),
         Nonempty ((localIsomorphismRestriction U.left B V).obj A ≅
           (localIsomorphismRestriction U.left B V).obj D) := by
   intro Ω instΩ instSep x

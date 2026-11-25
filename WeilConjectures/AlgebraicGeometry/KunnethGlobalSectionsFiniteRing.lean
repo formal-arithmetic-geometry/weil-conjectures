@@ -39,7 +39,6 @@ closure structure (a proposition; any proof gives the same map).
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 
 universe u
 
@@ -70,8 +69,8 @@ theorem isIso_kunnethGlobalSectionsMap_finiteCoefficientRing
       (pullback.fst X.hom Y.hom) (pullback.snd X.hom Y.hom) X.hom Y.hom
       pullback.condition.symm K M) := by
   let Λ := Padic.coefficientExtensionRing l E n
-  letI : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
-  letI : Finite Λ := Padic.finite_coefficientExtensionRing l E n hn
+  let : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
+  have : Finite Λ := Padic.finite_coefficientExtensionRing l E n hn
   have hInv : HasInvertibleExponent Λ (Spec (CommRingCat.of D.k)) := by
     have hdvr := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
     have hm : (l : Padic.coefficientExtensionIntegers l E) ∈
@@ -101,7 +100,7 @@ theorem isIso_kunnethGlobalSectionsMap_finiteCoefficientRing
   have h := isIso_kunnethMap_of_isSepClosed (Λ := Λ) X.hom Y.hom
     (pullback.fst X.hom Y.hom) (pullback.snd X.hom Y.hom)
     (IsPullback.of_hasPullback X.hom Y.hom) K M
-  letI := hInv
+  let := hInv
   unfold kunnethGlobalSectionsMap
   infer_instance
 

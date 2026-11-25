@@ -265,7 +265,6 @@ same Kummer-normalized Chern class. All helpers spell out these canonical arrows
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 
 universe u
 
@@ -565,7 +564,6 @@ private theorem chern_unique (A : Type (u + 1)) [CommRing A] [Finite A]
     (affineTraceProjectiveInvertible N S hS)).unique hc
       (Etale.projectiveLineTraceDatum N hN A hA S hS).chern_spec
 
-set_option linter.flexible false in
 private theorem compared_biprod_square
     {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]
     [Preadditive C] [Preadditive D] [Preadditive E] [Preadditive H]
@@ -587,14 +585,20 @@ private theorem compared_biprod_square
   · simp only [Functor.mapBiprod_inv, biprod.inl_desc_assoc,
       ← Functor.map_comp_assoc, biprod.inl_desc]
     rw [reassoc_of% (α.hom.naturality (biprod.inl : X ⟶ X ⊞ Y))]
-    simp [← Functor.map_comp_assoc]
+    simp only [Functor.comp_obj, biprod.lift_desc, Category.assoc, Preadditive.comp_add,
+      ← Functor.map_comp_assoc, BinaryBicone.inl_fst, CategoryTheory.Functor.map_id,
+      Category.id_comp, BinaryBicone.inl_snd, Functor.map_zero, zero_comp, add_zero,
+      NatIso.cancel_natIso_hom_left]
     rw [← G.map_comp, ← G.map_comp]
     congr 1
     apply biprod.hom_ext <;> simp [← Functor.map_comp_assoc]
   · simp only [Functor.mapBiprod_inv, biprod.inr_desc_assoc,
       ← Functor.map_comp_assoc, biprod.inr_desc]
     rw [reassoc_of% (α.hom.naturality (biprod.inr : Y ⟶ X ⊞ Y))]
-    simp [← Functor.map_comp_assoc]
+    simp only [Functor.comp_obj, biprod.lift_desc, Category.assoc, Preadditive.comp_add,
+      ← Functor.map_comp_assoc, BinaryBicone.inr_fst, Functor.map_zero, zero_comp,
+      BinaryBicone.inr_snd, CategoryTheory.Functor.map_id, Category.id_comp, zero_add,
+      NatIso.cancel_natIso_hom_left]
     rw [← G.map_comp, ← G.map_comp]
     congr 1
     apply biprod.hom_ext <;> simp [← Functor.map_comp_assoc]
@@ -660,13 +664,13 @@ private theorem exactPullComparison_plus (A : Type (u + 1)) [CommRing A]
       (Functor.mapDerivedCategoryNatIso σ).hom := by
     exact (Functor.mapDerivedCategoryNatIso_symm σ.symm).symm
   apply Iso.ext
-  simp only [Iso.app_hom, Iso.app_inv, exactPullComparison, geoP1PullComparison,
+  simp only [Iso.app_hom, exactPullComparison, geoP1PullComparison,
     leftDerivedUpperStarComparisonIso, Iso.trans_hom, Iso.trans_inv,
     Iso.symm_hom, Iso.symm_inv, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, NatTrans.comp_app,
     Functor.mapDerivedCategoryPlusCompatibility, Iso.refl_inv, NatTrans.id_app,
-    Functor.map_comp, Category.assoc, leftDerivedUpperStarIsoMapDerivedCategory,
+    Category.assoc, leftDerivedUpperStarIsoMapDerivedCategory,
     Etale.leftDerivedUpperStarIsoMapDerivedCategory]
   change _ = _ ≫ _ ≫ (Functor.mapDerivedCategoryNatIso σ.symm).inv.app _ ≫ _
   rw [hs]
@@ -714,7 +718,7 @@ private theorem exact_exchangeComparison (A : Type (u + 1)) [CommRing A] [Finite
       (geoP1Pushforward A f').map ((leftDerivedUpperStarComparisonIso g' A).inv.app K)) hb
   dsimp only [geoP1Pushforward, C] at hn
   simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
-    Iso.inv_hom_id_app_assoc, CategoryTheory.Functor.map_id, Category.comp_id] at hn
+    Iso.inv_hom_id_app_assoc, CategoryTheory.Functor.map_id] at hn
   have he := Etale.proper_exchange_plus C sq.toCommSq K
   rw [← Etale.baseChange_eq_derivedBaseChangeMapPlus] at he
   apply (cancel_epi ((geoP1Pullback A g).map ((geoP1Comparison A Y).map r))).mp

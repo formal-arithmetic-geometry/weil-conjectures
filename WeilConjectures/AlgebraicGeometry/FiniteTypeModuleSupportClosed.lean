@@ -38,12 +38,11 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option linter.style.haveILetI false in
 /-- Restriction of a finite type module to an open is finite type. (Stacks, Tag 01B5.) -/
 private theorem isFiniteType_over (X : Scheme.{u}) (F : X.Modules)
     (hF : F.IsFiniteType) (U : X.Opens) : (F.over U).IsFiniteType := by
   classical
-  haveI : F.IsFiniteType := hF
+  have : F.IsFiniteType := hF
   obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData F
   let G := Over.forget U
   let J := Opens.grothendieckTopology X

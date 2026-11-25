@@ -24,8 +24,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
--- The unchanged statement has an unused witness proof and an unused intermediate functor.
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Lifting on a single supplied affine chart persists at every later stage.
@@ -50,13 +48,13 @@ theorem finitePresentation_one_chart_map_lift_eventually
             (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Gj)
     (Uj : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})
     (a : Uj.I₀) (ha : IsAffine (Uj.X a)) :
-    ∃ (k : I) (hjk : j ≤ k), ∀ (j' : I) (hjj' : j ≤ j'), k ≤ j' →
+    ∃ (k : I) (_hjk : j ≤ k), ∀ (j' : I) (hjj' : j ≤ j'), k ≤ j' →
       let A := Scheme.Modules.moduleBaseChange f
             (T := Over.mk (Spec.map (R.map (homOfLE hij))))
             (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj')))))
             (Over.homMk (Spec.map (R.map (homOfLE hjj')))
               (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))
-      let B := Scheme.Modules.moduleBaseChange f
+      let _B := Scheme.Modules.moduleBaseChange f
               (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj')))))
               (T' := Over.mk (c.π.app (op i)))
               (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))
