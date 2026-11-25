@@ -8,7 +8,14 @@ module
 public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Ring.RingEndpointScalarIdentityTransferData
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Ring.RingEndpointScalarIdentityNormalization
 
-/-! # Universe transfer for endpoint scalar identities -/
+/-! # Universe transfer for endpoint scalar identities
+
+This is the normalization substep of endpoint scalar restriction assembly.
+
+## References
+
+* [Zheng, Lemma 5.22 and Proposition 5.26]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,11 +38,7 @@ private noncomputable def scalarFunctorAtClosureIso
   cases s <;> exact I.iso
 
 /-- Transfers the multiplication-normalized identity certificate from an equal-universe
-closure to the original coefficient universes. This is the normalization substep of
-endpoint scalar restriction assembly.
-Source: Zheng, Lemma 5.22 and Proposition 5.26
-(blueprint: lem-sf-ring-endpoint-scalar-identity-transfer).
--/
+closure to the original coefficient universes. -/
 theorem scalarIdentityAtClosure
     (Ψ : Type (max u v)) [Field Ψ] [Algebra (Padic l) Ψ] [IsAlgClosure (Padic l) Ψ]
     (W : Scheme.{max u v}) {s : RingStage.{max u v} l}

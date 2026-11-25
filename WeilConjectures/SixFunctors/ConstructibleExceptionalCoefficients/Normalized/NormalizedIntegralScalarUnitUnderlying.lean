@@ -8,7 +8,19 @@ module
 public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Coefficient.ConstructibleExceptionalCoefficientConstructionData
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Normalized.NormalizedIntegralScalarUnitUnderlyingBridge
 
-/-! # Integral normalization of a restricted scalar unit -/
+/-! # Integral normalization of a restricted scalar unit
+
+## Implementation details
+
+The proof composes `normalized_integral_scalar_unit_underlying_bridge` with the identity clause
+of `CompletedLineTensor.canonical_restriction`.
+
+## References
+
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A6]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -20,15 +32,7 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- Multiplication normalization gives the specified integral scalar-unit arrow.
-Source: exceptional coefficient construction, integral identity clause; Stacks Project,
-Tags 03DA, 06YY and 07A6
-(blueprint: lem-sf-normalized-integral-scalar-unit-underlying).
-
-Proof: apply the intermediate completed-unit comparison supplied by
-`normalized_integral_scalar_unit_underlying_bridge`. The identity clause of
-`CompletedLineTensor.canonical_restriction` identifies that completed unit with the
-intrinsic `sfIntegralScalarUnit` component, and transitivity gives the result. -/
+/-- Multiplication normalization gives the specified integral scalar-unit arrow. -/
 theorem normalized_integral_scalar_unit_underlying
     (E : FieldStage.{max u v} l) (T : Scheme.{max u v})
     (S : Scalar.{u, v} l Ω (s := .integral E) (t := .integral E)

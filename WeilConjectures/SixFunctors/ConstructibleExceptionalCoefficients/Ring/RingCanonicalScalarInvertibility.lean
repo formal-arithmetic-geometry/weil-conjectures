@@ -9,7 +9,22 @@ public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.C
 
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Ring.ExceptionalRingTransportFamily
 
-/-! # Invertibility of canonical ring scalar mates -/
+/-! # Invertibility of canonical ring scalar mates
+
+## Implementation details
+
+For finite generators the finite transported scalar mates are used. For integral reduction the
+normalized system adjunction is reconstructed, and the system proper scalar projection and open
+tensor maps are built before taking the limit; their evaluations are the finite mates, so their
+cones have zero evaluations and they are invertible. Completed extensions use the finite-free
+system comparison and cofinal recovery of the ramified subsequence. Identities and composites
+are handled by induction on `Allowed`. No faithfulness of derived evaluation on morphisms is
+assumed.
+
+## References
+
+* [Zheng, Lemma 5.22, Construction 5.25 and Propositions 5.24 and 5.26]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -277,34 +292,8 @@ private theorem ring_invertibility_from_comparison
     exact mate_transfer A.adjunction B.adjunction adj₀ adj₁ α β x y q₀ hm
 
 /-- The geometric invertibility tests for the canonical scalar comparison and its mate.
-Source: Zheng, Lemma 5.22, Construction 5.25, Propositions 5.24 and 5.26;
-scalar-mates plan steps 2, 3 and 6
-(blueprint: lem-sf-ring-canonical-scalar-invertibility).
-
-Proof: for finite generators take the finite transported scalar mates. The ambient
-proper/open scalar map is their left realization. Compare any supplied adjunctions
-with these by full inclusion on the left and right-adjoint uniqueness on the right;
-the counit equation identifies the right comparison with mateEquiv of inverse q.
-For integral reduction reconstruct the normalized system adjunction from the
-reduction/total-limit equivalence and the actual proper/open system realization.
-Construct the system proper scalar projection and open tensor maps before taking
-limit, and transpose their composite using the system counit. Their evaluations
-are the finite mates by the actual unit and counit comparisons. Their cones have
-zero evaluations, hence they are invertible in the derived system category.
-For completed extension apply the finite-free system comparison and cofinal
-recovery of the ramified subsequence. Reconstruction transports these maps and
-their counit-transpose formula to the integral categories. The simultaneous
-proper/open realization identifies the resulting left map with precisely the
-ambient comparison in the first conclusion. Transfer to arbitrary supplied
-realizations by the unique full-inclusion comparison. Any q satisfying the stated
-normalization is that transferred map, since the target inclusion is faithful;
-its mate is therefore the transferred invertible system mate. For identities
-use tensor multiplication; for composites use tensor associativity and mate
-pasting, inducting on Allowed. The normalized maps are maps of systems before
-evaluation; no faithfulness of derived evaluation on morphisms is assumed.
-The zero case uses zero objects; the positive-index convention includes the
-residue level and never introduces level zero. This statement asserts only
-invertibility and constructs no scalar functor, shift structure or counit datum. -/
+This statement asserts only invertibility and constructs no scalar functor, shift structure
+or counit datum. -/
 theorem ring_canonical_scalar_invertibility
     (D : FiniteFieldDatum.{max u v}) (_hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} (f : X ⟶ Y)

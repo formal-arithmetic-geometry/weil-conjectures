@@ -35,12 +35,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- **The Grothendieck spectral sequence of a composite of direct images.** For morphisms
 `f : X ⟶ Y`, `h : Y ⟶ Z` and an étale sheaf `F` of `Λ`-modules on `X` there is a first quadrant
-spectral sequence `E₂^{p,q} = Rᵖh_* Rᵠf_* F ⟹ Rᵖ⁺ᵠ(f_* ⋙ h_*) F`. The pair `(f_*, h_*)` has
-the acyclicity of the Grothendieck spectral sequence theorem because `f_*` preserves injective
-objects (`AlgebraicGeometry.Etale.preservesInjectiveObjects_lowerStar`). Its compatibility with
+spectral sequence `E₂^{p,q} = Rᵖh_* Rᵠf_* F ⟹ Rᵖ⁺ᵠ(f_* ⋙ h_*) F`. Its compatibility with
 inverse image along a cartesian base change is the general
-`CategoryTheory.Functor.exists_grothendieckSpectralObject_baseChange`.
-(blueprint: `lemma-composition-cancellation`) -/
+`CategoryTheory.Functor.exists_grothendieckSpectralObject_baseChange`. -/
 theorem Etale.exists_grothendieckSpectralSequence_lowerStar {X Y Z : Scheme.{u}} (f : X ⟶ Y)
     (h : Y ⟶ Z) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     ∃ E : E₂CohomologicalSpectralSequenceNat (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)),

@@ -10,7 +10,22 @@ import WeilConjectures.SixFunctors.Exceptional.ExceptionalFiniteOperations
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Integral.ExceptionalIntegralSupportAdjoint
 import Mathlib.CategoryTheory.Triangulated.Subcategory
 
-/-! # Finite and integral operation families for exceptional transport -/
+/-! # Finite and integral operation families for exceptional transport
+
+Finite and integral exceptional operation families with their compact-support left
+realizations exist for every compactification; this is the operation and realization part of
+the coherent transport construction.
+
+## Implementation details
+
+Finite stages use the existing finite exceptional operations; integral stages use preservation
+and right-adjoint existence for the literal compact-support restriction. The stagewise
+witnesses are assembled by cases on `RingStage`. No scalar comparison is used.
+
+## References
+
+* [Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -50,20 +65,7 @@ private theorem ringOperationsCompExact {A B C : Type*} [Category* A] [Category*
 
 set_option linter.unusedVariables false in
 /-- Finite and integral exceptional operation families with their compact-support
-left realizations exist for every compactification. This is the operation and
-realization subargument of the coherent transport construction.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26 (blueprint: lem-sf-exceptional-ring-operations-existence).
-
-Proof: at a finite stage use the existing finite exceptional operations and
-identify their literal compact-support realization with the published finite image.
-At an integral stage use preservation and right-adjoint existence for the literal
-compact-support restriction. Its full faithful ambient inclusion gives the left
-shift and exactness; the adjunction gives right additivity, right shifts, exactness,
-and shift-compatible unit and counit. Choose these already proved stagewise
-existence witnesses and assemble by cases on RingStage. Positive levels are n+1,
-and the existing constructors include empty schemes. No scalar comparison is used.
--/
+left realizations exist for every compactification. -/
 theorem exists_exceptional_ring_operations
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

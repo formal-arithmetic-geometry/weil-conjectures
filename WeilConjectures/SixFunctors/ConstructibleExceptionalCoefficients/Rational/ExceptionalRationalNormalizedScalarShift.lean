@@ -13,7 +13,19 @@ import WeilConjectures.SixFunctors.Integral.IntegralResidueTor
 import WeilConjectures.DeligneLaumon.CompactSupportNormalizedScalarIsomorphisms
 import all WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.ExceptionalScalarMateLocalization
 
-/-! # The scalar shift square after canonical rational normalization -/
+/-! # The scalar shift square after canonical rational normalization
+
+## Implementation details
+
+The rational square is precomposed with integral rationalization, where it becomes the
+localization of the integral square; rationalization is a localization by residue Tor, so the
+invertible shift comparison can be cancelled. `commonStageTransition_eq` and
+`commonComparisonCast` transport the result to the published stage transitions.
+
+## References
+
+* [Zheng, Constructions 6.2 and 6.6]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -192,27 +204,7 @@ private theorem integral_normalized_comparison_shift
 
 /-- The rational scalar comparison commutes with canonically normalized shifts.
 This concerns only one finite coefficient enlargement. It asserts no shift structure,
-exactness, or adjunction on the common-field pair categories.
-Source: Zheng, Constructions 6.2 and 6.6; common-field exactness proof, step 2
-(blueprint: lem-sf-rational-normalized-scalar-shift).
-
-Proof: fix an enlargement i ≤ j and use the integral scalar functors supplied by A.
-Their realizations identify them with the completed scalar extensions, including their
-shift maps. Indeed the realizations commute with shifts, and the full integral
-inclusions reflect the resulting equality. The normalized integral counit comparison
-therefore commutes with the canonical scalar shifts. Precompose the desired rational
-square with integral rationalization at i. The normalization hs identifies the finite
-operation shifts with the localizations of the integral operation shifts. The equation
-P.scalar_normalized identifies the rational comparison with the localized integral
-comparison, while P.action identifies the operation on each localized integral arrow.
-The scalar localization comparisons identify its two scalar sides with the canonical
-rational scalar shifts. The precomposed square is consequently the localization of
-the integral square. Rationalization is a localization by residue Tor, so natural
-transformations out of it are faithful; cancel its invertible shift comparison to
-obtain the square on all rational objects. Finally commonStageTransition_eq and
-commonComparisonCast transport the scalar functors and this square to the published
-stage transitions. This argument applies to every integer shift, including zero and
-negative shifts, and to identity coefficient extensions. -/
+exactness, or adjunction on the common-field pair categories. -/
 theorem rational_common_normalized_scalar_shift
     (c : Compactification f)
     (s : ∀ i : AlgebraicallyClosedCoefficients.Index l Ω,

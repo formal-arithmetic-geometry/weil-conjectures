@@ -11,7 +11,15 @@ import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Normaliz
 import WeilConjectures.SixFunctors.Integral.IntegralResidueTor
 import WeilConjectures.DeligneLaumon.CompactSupportNormalizedScalarIsomorphisms
 
-/-! # Rational scalar composition using only the supplied ring and rational data -/
+/-! # Rational scalar composition using only the supplied ring and rational data
+
+## Implementation details
+
+The integral compact-support scalar cocycle is transported through the specified localization.
+Every rational object is represented by an integral object with the recorded finite Tor
+condition, and the localized action formula identifies each localized integral arrow with the
+rational scalar comparison.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -114,15 +122,6 @@ private def normalizedAssociator {s t r : RingStage.{max u v} l}
 
 /--
 The normalized rational left comparison satisfies scalar composition.
-Source: exceptional inverse-image coefficient construction, rationalization paragraph;
-the rational-arrow localization argument, Steps 1--4
-(blueprint: lem-sf-ring-stage-rational-left-composition).
-
-The proof first transports the integral compact-support scalar cocycle through the
-specified localization. Every rational object is represented by an integral object with
-the recorded finite Tor condition; the localized action formula then identifies each
-localized integral arrow with the displayed rational scalar comparison. Functoriality of
-localization transports the integral composition equation to the claimed equation.
 -/
 theorem ring_stage_rational_left_composition (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}

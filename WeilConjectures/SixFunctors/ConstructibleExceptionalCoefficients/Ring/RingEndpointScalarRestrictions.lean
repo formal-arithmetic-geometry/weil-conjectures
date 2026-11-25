@@ -10,7 +10,22 @@ public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.C
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Ring.ExceptionalRingTransportFamily
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Ring.RingEndpointScalarIdentityTransfer
 
-/-! # Endpoint ring scalar restrictions -/
+/-! # Endpoint ring scalar restrictions
+
+## Implementation details
+
+The endpoint restrictions are obtained from the identity morphism of `W` with its canonical
+proper compactification, so the choice depends only on `W`. The coherent ring-transport-family
+theorem and the integral scalar-mates core supply the scalar restrictions for this
+compactification; multiplication-normalized scalar identities are lifted from the ambient
+identity through the fully faithful inclusion. The equal-universe transport interface is used
+by replacing `Ω` with `ULift Ω`; at finite and integral stages all data are independent of the
+closure and are reused verbatim at the original universes.
+
+## References
+
+* [Zheng, Lemma 5.22 and Propositions 5.24 and 5.26]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -89,33 +104,7 @@ private theorem scalarAtClosure_finiteNormalized
   cases s <;> intro E n a S h hn <;> exact hn
 
 /-- Endpoint restrictions of allowed derived coefficient extensions, independently of
-compactifications and exceptional adjunctions.
-Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26; scalar-mates plan steps 1 and 5
-(blueprint: lem-sf-ring-endpoint-scalar-restrictions).
-
-Proof: use the identity morphism of W and its canonical proper compactification.
-The existing coherent ring-transport-family theorem supplies operations and normalized
-system transport for this compactification. The existing integral scalar-mates core
-then supplies its endpoint scalar restrictions, including the literal finite-target
-restriction, the strict-tower integral restriction, both realization normalizations,
-and shift compatibility. The multiplication-normalized scalar identities are
-constructed by lifting the ambient identity through the fully faithful inclusion.
-
-To use the equal-universe transport interface, replace Ω by ULift Ω and transport
-algebraic closedness along its ring equivalence. At finite and integral stages the
-categories, inclusions, shifts and triangles are independent of the closure. Case
-analysis on the two ring stages therefore reuses the scalar functor, realization,
-shift, additivity and exactness fields verbatim at the original universes. The same
-case analysis transfers the finite equality and its eqToIso normalization, both
-integral equations and the realization shift equation. For an identity map, compose
-the scalar realization with the equality isomorphism to identity extension and the
-ambient multiplication tensor unitor. Full faithfulness lifts this natural
-isomorphism, and its image equation is exactly ScalarIdentity.normalized. Since
-the compactification is always the canonical one of the identity of W, this choice
-requires only W and does not depend on any geometric operation or
-compactification supplied by a caller. The identity morphism is separated and
-proper even when W is not separated over the base; no extra hypothesis is needed.
-Empty W and positive level one are included in the two existing theorems. -/
+compactifications and exceptional adjunctions. -/
 theorem exists_ring_endpoint_scalar_restrictions
     (D : FiniteFieldDatum.{max u v}) (_hl : l ≠ D.p) (W : Scheme.{max u v})
     [W.Over (Spec (.of D.k))]

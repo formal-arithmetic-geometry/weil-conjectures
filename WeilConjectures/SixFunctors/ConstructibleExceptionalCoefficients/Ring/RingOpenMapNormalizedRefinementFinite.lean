@@ -11,7 +11,14 @@ import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.F
 import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDerivedOrigin
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingPullbackComparison
 
-/-! # Finite coefficient normalized refinement comparisons -/
+/-! # Finite coefficient normalized refinement comparisons
+
+## References
+
+* [Zheng, Section 5, Lemma 5.13 and Constructions 5.14–5.15]
+* [Stacks, Tag 0F7B]
+* [Stacks, Tag 0F7I]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,15 +31,7 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- The finite coefficient part of the normalized refinement comparison.
-
-Source: the finite coefficient construction in Zheng Section 5, Lemma 5.13 and
-Constructions 5.14--5.15 (Stacks Tags 0F7B and 0F7I).
-(blueprint: lem-sf-ring-open-map-normalized-refinement-finite).
-
-Proof: construct the comparison from the finite coefficient proper/open refinement
-word. Its transpose is the open adjunction unit after the canonical restriction;
-the finite-Tor and etale-origin calculation makes this word invertible. -/
+/-- The finite coefficient part of the normalized refinement comparison. -/
 theorem exists_normalized_refinement_iso_finite
     (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}

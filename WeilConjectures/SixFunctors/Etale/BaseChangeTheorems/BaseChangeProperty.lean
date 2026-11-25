@@ -53,7 +53,7 @@ as an additive group, `AlgebraicGeometry.Etale.isBaseChangeIso_of_hasTorsionBase
 
 ## Coefficient rings
 
-The blueprint states `IA` for injective sheaves of `𝐅_r`-modules and one prime `r` at a
+The standard argument states `IA` for injective sheaves of `𝐅_r`-modules and one prime `r` at a
 time, and reaches a general torsion coefficient ring by dévissage: `𝐅_r`-modules, then
 `n`-torsion sheaves by induction on the number of prime factors of `n`, then all torsion
 sheaves as a filtered colimit. The sheaf-level dévissage is
@@ -175,18 +175,8 @@ Y' --g---> Y
 
 and every *injective torsion* sheaf `I` of `Λ`-modules on `X_ét`, the higher direct images
 of its pullback vanish: `Rᵠf'_*(g'^{-1} I) = 0` for `q > 0`. Here `Rᵠf'_* G` is the `q`-th
-cohomology sheaf of `Rf'_*` applied to `G` placed in degree `0`.
-
-The restriction to torsion `I` is what makes `PBC(f) ⇒ IA(f)` correct over a coefficient
-ring which is not itself torsion: `PBC(f)` constrains only objects with torsion cohomology.
-For a torsion `Λ` — the case in which the two properties are compared below — every sheaf of
-`Λ`-modules is torsion and the restriction is vacuous.
-
-This is the form in which the proper base change theorem is actually proved: it is a
-vanishing statement about a single sheaf, it composes, it cancels along proper surjections,
-and it can be checked on geometric stalks.
-(blueprint: `definition-injective-acyclicity--1`; the property `IA_r(f)`
-of the latter is the case `Λ = 𝐅_r`, where every sheaf is torsion) -/
+cohomology sheaf of `Rf'_*` applied to `G` placed in degree `0`. For a torsion `Λ` every sheaf
+of `Λ`-modules is torsion and the torsion restriction is vacuous. -/
 def Etale.HasInjectiveAcyclicity (f : X ⟶ Y) : Prop :=
   ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄ (_sq : IsPullback g' f' f g)
     (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), IsTorsionModuleSheaf I → Injective I →
@@ -202,23 +192,18 @@ def Etale.HasInjectiveAcyclicity (f : X ⟶ Y) : Prop :=
 `f : X ⟶ Y`: the property `AlgebraicGeometry.Etale.HasInjectiveAcyclicity` for the coefficient
 ring `ZMod r`, lifted to the coefficient universe of the étale sheaf functors. For `r ≠ 0`
 every sheaf of `ZMod r`-modules is torsion, so this says that the pullback of every injective
-sheaf of `ZMod r`-modules along any base change of `f` has no higher direct images.
-(blueprint: `definition-injective-acyclicity--1`) -/
+sheaf of `ZMod r`-modules along any base change of `f` has no higher direct images. -/
 def Etale.HasPrimeInjectiveAcyclicity (f : X ⟶ Y) (r : ℕ) : Prop :=
   Etale.HasInjectiveAcyclicity (ULift.{u + 1} (ZMod r)) f
 
 /-- **Injective acyclicity for all primes** `IA(f)` of a morphism of schemes `f : X ⟶ Y`: the
 property `IA_r(f)` (`AlgebraicGeometry.Etale.HasPrimeInjectiveAcyclicity`) holds for every
-prime `r`. (blueprint: `definition-injective-acyclicity--1`) -/
+prime `r`. -/
 def Etale.HasAllPrimeInjectiveAcyclicity (f : X ⟶ Y) : Prop :=
   ∀ r : ℕ, r.Prime → Etale.HasPrimeInjectiveAcyclicity f r
 
 /-- **`PBC ⇒ IA`**: a morphism with the base change property for torsion coefficients has
-injective acyclicity. For an injective torsion sheaf `I` on `X`, apply the base change property
-to `I` placed in degree `0`: the source `g^*(Rf_* I[0]) ≅ g^*((f_* I)[0])` has no homology
-outside degree `0` because `I` is injective, hence neither has the target
-`Rf'_*(g'^* I[0]) ≅ Rf'_*((g'^* I)[0])`. No properness is needed.
-(blueprint: `theorem-pbc-injective-acyclicity--1`) -/
+injective acyclicity. No properness is needed. -/
 theorem Etale.HasTorsionBaseChange.hasInjectiveAcyclicity (f : X ⟶ Y)
     (hf : Etale.HasTorsionBaseChange Λ f) : Etale.HasInjectiveAcyclicity Λ f := by
   intro Y' X' g f' g' sq I _ _ q hq
@@ -251,12 +236,7 @@ lemma Etale.HasInjectiveAcyclicity.rightAcyclic {f : X ⟶ Y} (hf : Etale.HasInj
 /-- **`IA ⇒ PBC` given the underived exchange**: if `Λ` is torsion as an additive group, `f` has
 injective acyclicity, and the underived base change map `g^* f_* ⟶ f'_* g'^*` is an isomorphism
 for every cartesian square over `f`, then the derived base change map is an isomorphism on all
-of `D⁺(X_ét, Λ)`. Represent `K` by a bounded below complex `I` of injectives. The derived base
-change map at `I` is computed by the underived base change map `g^* f_* I ⟶ f'_* g'^* I`, a
-termwise isomorphism by hypothesis, followed by the unit `f'_* g'^* I ⟶ Rf'_*(g'^* I)`, which is
-an isomorphism because the terms of `g'^* I` are `f'_*`-acyclic by injective acyclicity
-(`CategoryTheory.Functor.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic`).
-(blueprint: `theorem-pbc-injective-acyclicity--1`) -/
+of `D⁺(X_ét, Λ)`. -/
 theorem Etale.HasInjectiveAcyclicity.hasTorsionBaseChange_of_isIso_baseChangeMap
     (hΛ : IsAddTorsion Λ) (f : X ⟶ Y)
     (hex : ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄
@@ -297,11 +277,7 @@ theorem Etale.HasInjectiveAcyclicity.hasTorsionBaseChange_of_isIso_baseChangeMap
 
 /-- **`IA ⇒ PBC` for a proper morphism and a torsion coefficient ring**: if `Λ` is torsion as an
 additive group and `f` is proper with injective acyclicity, then the derived base change map is
-an isomorphism on all of `D⁺(X_ét, Λ)`. This is
-`AlgebraicGeometry.Etale.HasInjectiveAcyclicity.hasTorsionBaseChange_of_isIso_baseChangeMap`, the
-underived base change map being an isomorphism since `f` is proper
-(`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isProper`).
-(blueprint: `theorem-pbc-injective-acyclicity--1`) -/
+an isomorphism on all of `D⁺(X_ét, Λ)`. -/
 theorem Etale.HasInjectiveAcyclicity.hasTorsionBaseChange (hΛ : IsAddTorsion Λ) (f : X ⟶ Y)
     [IsProper f] (hf : Etale.HasInjectiveAcyclicity Λ f) : Etale.HasTorsionBaseChange Λ f :=
   hf.hasTorsionBaseChange_of_isIso_baseChangeMap Λ hΛ f fun _ _ _ _ _ sq ↦
@@ -320,16 +296,7 @@ Y' --g---> Y
 ```
 
 the derived base change map is an isomorphism on every bounded below complex if and only if
-`Rᵠf'_*(g'^{-1} I) = 0` for `q > 0` and every injective sheaf `I` on `X_ét`.
-
-For `PBC ⇒ IA`, apply `PBC` to the complex `I[0]` concentrated in degree `0`: its source
-`g^*(Rf_* I[0]) = g^*(f_* I)[0]` is again concentrated in degree `0` because `I` is
-injective, hence so is the target `Rf'_*(g'^{-1} I)`, which is the required vanishing. The
-converse resolves a torsion sheaf by injectives, uses `IA` to see that the resolution stays
-`f'_*`-acyclic after base change, and compares the two complexes termwise by the underived
-exchange morphism, which is an isomorphism because at a geometric point of `Y'` both sides
-are sections over the same proper geometric fibre.
-(blueprint: `theorem-pbc-injective-acyclicity`, `theorem-pbc-injective-acyclicity--1`) -/
+`Rᵠf'_*(g'^{-1} I) = 0` for `q > 0` and every injective sheaf `I` on `X_ét`. -/
 @[stacks 0A4B]
 theorem Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity (hΛ : IsAddTorsion Λ)
     (f : X ⟶ Y) [IsProper f] :
