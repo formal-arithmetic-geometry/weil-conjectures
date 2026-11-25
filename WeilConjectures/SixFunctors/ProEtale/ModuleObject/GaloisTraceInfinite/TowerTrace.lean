@@ -30,9 +30,6 @@ the unit of a finite Galois covering is the normalized trace (`CategoryTheory.eq
 
 @[expose] public section
 
--- several lemmas do not need all the instances of the section variables
-set_option linter.unusedSectionVars false
-
 universe u
 
 open CategoryTheory Category Limits
@@ -82,16 +79,19 @@ instance (j : T.J)
     Mono ((T.levelUnit Λ j).app M) :=
   CondensedRing.mono_upperStarLowerStarAdjunction_unit_app Λ (T.g j) M
 
+omit [WeaklyEtale ginf] in
 lemma levelUnit_comp_levelTrace (j : T.J) :
     T.levelUnit Λ j ≫ T.levelTrace Λ j = Fintype.card (T.Γ j) • 𝟙 _ :=
   CondensedRing.unit_comp_galoisTrace Λ (T.g j) (T.ρ_g j) (T.ρ_mul j) (T.isGaloisAction j)
 
+omit [WeaklyEtale ginf] in
 lemma levelTrace_comp_levelUnit (j : T.J) :
     T.levelTrace Λ j ≫ T.levelUnit Λ j = ∑ a, T.levelAction Λ j a :=
   CondensedRing.galoisTrace_comp_unit Λ (T.g j) (T.ρ_g j) (T.ρ_mul j) (T.isGaloisAction j)
 
 variable (M : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
 
+omit [WeaklyEtale ginf] in
 lemma levelAction_app_comp_levelAction_app (j : T.J) (a b : T.Γ j) :
     (T.levelAction Λ j a).app M ≫ (T.levelAction Λ j b).app M = (T.levelAction Λ j (b * a)).app M :=
   CondensedRing.galoisAction_app_comp_galoisAction_app Λ (T.ρ_g j) (T.ρ_mul j) a b M
@@ -145,12 +145,14 @@ noncomputable def normTrace (j : T.J) : (T.levelFunctor Λ j).obj M ⟶ M :=
   haveI := hd j M
   normalizedTrace ((T.levelTrace Λ j).app M) (Fintype.card (T.Γ j))
 
+omit [WeaklyEtale ginf] in
 lemma levelUnit_app_comp_normTrace (j : T.J) :
     (T.levelUnit Λ j).app M ≫ T.normTrace Λ M hd j = 𝟙 M := by
   have := hd j M
   exact comp_normalizedTrace (by
     simpa using congr_app (T.levelUnit_comp_levelTrace Λ j) M)
 
+omit [WeaklyEtale ginf] in
 lemma levelAction_app_comp_normTrace (j : T.J) (a : T.Γ j) :
     (T.levelAction Λ j a).app M ≫ T.normTrace Λ M hd j = T.normTrace Λ M hd j := by
   have := hd j M
@@ -200,6 +202,7 @@ lemma unit_comp_trace (hc : IsColimit (T.moduleCocone Λ M)) :
 
 /-! ### Naturality -/
 
+omit [WeaklyEtale ginf] in
 lemma infTransport_naturality {M M' : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
     (condensedRingObj Λ X)} (φ : M ⟶ M') (j : T.J) :
     T.infTransport Λ M j ≫ (infFunctor Λ ginf).map φ =
@@ -207,6 +210,7 @@ lemma infTransport_naturality {M M' : CategoryTheory.Mod (Sheaf (ProEt.topology 
   unfold infTransport
   exact ((unitTransport Λ (T.π j) (T.π_g j) (T.π_g j)).naturality φ).symm
 
+omit [WeaklyEtale ginf] in
 lemma normTrace_naturality {M M' : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
     (condensedRingObj Λ X)} (φ : M ⟶ M') (j : T.J) :
     (T.levelFunctor Λ j).map φ ≫ T.normTrace Λ M' hd j = T.normTrace Λ M hd j ≫ φ := by
@@ -237,6 +241,7 @@ lemma map_comp_trace {M M' : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u 
     (infFunctor Λ ginf).obj M ⟶ (infFunctor Λ ginf).obj M :=
   (unitTransport Λ σ hσ hσ).app M
 
+omit [WeaklyEtale ginf] in
 lemma infAction_eq (σ : Yinf ⟶ Yinf) (hσ : σ ≫ ginf = ginf) :
     infAction Λ M σ hσ = (unitTransport Λ σ hσ hσ).app M := by
   unfold infAction

@@ -71,7 +71,6 @@ lemma affineLine.frobeniusStr_artinSchreierPushforward :
   exact congrArg ((ProEtale.upperStarIsoLowerStarInv _ _).hom.app _ ≫ ·)
     artinSchreierPushforward_str_hom_hom
 
-set_option linter.flexible false in
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- The pushforward-level identity behind
 `AlgebraicGeometry.affineLine.artinSchreierCounit_frobenius`. -/

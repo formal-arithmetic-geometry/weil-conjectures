@@ -31,9 +31,6 @@ open CategoryTheory Category Limits
 
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
--- several lemmas do not need all the instances of the section variables
-set_option linter.unusedSectionVars false
-
 namespace AlgebraicGeometry.ProEtale.GaloisTower
 
 open Scheme CondensedRing
@@ -49,6 +46,7 @@ instance : (infFunctor Λ ginf).Additive := by
   unfold infFunctor
   infer_instance
 
+omit [WeaklyEtale ginf] in
 lemma transport_naturality {M M' : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
     (condensedRingObj Λ X)} (φ : M ⟶ M') {j j' : T.J} (h : j ≤ j') :
     T.transport Λ M h ≫ (T.levelFunctor Λ j').map φ =

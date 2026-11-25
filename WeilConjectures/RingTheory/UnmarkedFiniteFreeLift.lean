@@ -32,12 +32,11 @@ universe u v w w'
 open CategoryTheory
 namespace DerivedCategory
 
-set_option linter.unusedVariables false in
 /-- A bounded-above finite-free model lifts through the nilpotent quotient, retaining the upper
 bound and finite freeness (without the prescribed derived marking). -/
 theorem exists_unmarked_finiteFree_lift_of_nilpotent
     {R : Type u} [CommRing R] (I : Ideal R)
-    (hnil : ∃ N : ℕ, 1 ≤ N ∧ I ^ N = 0)
+    (_hnil : ∃ N : ℕ, 1 ≤ N ∧ I ^ N = 0)
     (hunits : ∀ x : I, IsUnit (1 + (x : R)))
     [HasDerivedCategory.{w} (ModuleCat.{max u v} R)]
     [HasDerivedCategory.{w'} (ModuleCat.{max u v} (R ⧸ I))]
@@ -55,8 +54,8 @@ theorem exists_unmarked_finiteFree_lift_of_nilpotent
     (hFterms : ∀ i : ℤ, Module.Free (R ⧸ I) (F.X i) ∧ Module.Finite (R ⧸ I) (F.X i))
     (α : L.obj K ≅ Q.obj F) :
     ∃ (P : CochainComplex (ModuleCat.{max u v} R) ℤ)
-      (β : Q.obj P ≅ K)
-      (θ : ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex
+      (_β : Q.obj P ≅ K)
+      (_θ : ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex
         (.up ℤ)).obj P ≅ F),
       P.IsStrictlyLE b ∧
       (∀ i : ℤ, Module.Free R (P.X i) ∧ Module.Finite R (P.X i)) := by

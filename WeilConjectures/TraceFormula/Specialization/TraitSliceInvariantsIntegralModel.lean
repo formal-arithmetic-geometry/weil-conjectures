@@ -216,14 +216,14 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
           ((derivedUpperStarExtendScalarsIso (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
             (baseChangeGaloisModel hM b hb v hv).j).app _).symm))) h
 
-set_option linter.style.whitespace false in
 /-- **`ρ` intertwines the actions, indexed by `Gal(L^sep / L)`**: the exchange of
 `ρ : M'' ⟶ N''_{L^sep}` carries the action of `τ` on the Galois layer to that of the generic
 automorphism `galoisEquiv⁻¹ τ`. -/
 lemma pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (τ : Gal(traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K) /
-      traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K)))
+    (τ : Gal(traitTensorCompositumSep (PowerSeries K) (traitGenericField k')
+      (traitGenericField K)/traitTensorCompositum (PowerSeries K) (traitGenericField k')
+      (traitGenericField K)))
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
     ((baseChangeToGaloisLayer hM b hb v hv).pullbackExchange Λ).app C ≫

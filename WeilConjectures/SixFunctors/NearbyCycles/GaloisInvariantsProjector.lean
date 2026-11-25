@@ -32,9 +32,6 @@ averaging argument itself is the abstract `CategoryTheory.map_comp_eq_of_isColim
 
 @[expose] public section
 
--- several lemmas do not need all the instances of the section variables
-set_option linter.unusedSectionVars false
-
 universe u
 
 open CategoryTheory Limits
@@ -136,6 +133,7 @@ variable {X Yinf : Scheme.{u}} {ginf : Yinf ⟶ X} [WeaklyEtale ginf] (T : Galoi
     (N : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)),
       IsIso (Fintype.card (T.Γ j) • 𝟙 N))
 
+omit [WeaklyEtale ginf] in
 /-- The normalized trace times the order of the Galois group is the trace. -/
 lemma card_smul_normTrace
     (M : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
@@ -261,6 +259,7 @@ lemma derivedTraceIso_hom_comp_derivedTrace_comp_unit :
       CategoryTheory.Functor.map_id]
   simp only [reassoc_of% hcancel, hn, reassoc_of% hR, Iso.hom_inv_id_assoc]
 
+omit [WeaklyEtale ginf] in
 /-- Through `GaloisTower.derivedTraceIso`, the derived unit transports are the levelwise ones. -/
 lemma derivedTraceIso_hom_comp_derivedUnitTransport (σ : Yinf ⟶ Yinf) (hσ : σ ≫ ginf = ginf) :
     (derivedTraceIso Λ K a hK C e).hom ≫ derivedUnitTransport Λ σ hσ hσ C =

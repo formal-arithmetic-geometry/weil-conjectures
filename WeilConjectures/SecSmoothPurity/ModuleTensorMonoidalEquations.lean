@@ -23,7 +23,6 @@ universe w uC vC uD vD uE vE
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace CategoryTheory.CochainPullback
 set_option autoImplicit false
-set_option linter.checkUnivs false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [local irreducible] SheafOfModules.monoidalCategory
