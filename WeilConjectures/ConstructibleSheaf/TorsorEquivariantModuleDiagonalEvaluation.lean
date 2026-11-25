@@ -11,8 +11,17 @@ public import WeilConjectures.ConstructibleSheaf.TorsorAssociatedModule
 /-!
 # Surjectivity of diagonal evaluation of torsor sections
 
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS.
-(blueprint: lem-weil-pbc-torsor-equivariant-module-diagonal-evaluation)
+## Implementation details
+
+The torsor isomorphism composed with the swap identifies `c.P ×_V c.P` with a disjoint union
+of copies of `c.P` indexed by the group, the `g`-th component being `(id, g • id)`. Given a
+value `n`, the section takes the constant value `ρ(g) n` on the `g`-th component; the identity
+`ρ(hg) n = ρ(h) (ρ(g) n)` gives equivariance. No connectedness or nonvanishing hypothesis is
+needed.
+
+## References
+
+* [Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS]
 -/
 
 @[expose] public section
@@ -23,21 +32,7 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.GaloisCover
 
 /-- Every module value occurs as the value of an equivariant section at a
-specified point on the diagonal of the torsor's double overlap.
-Source: Stacks Project, etale-cohomology.tex Tag 0DV5 (3), Tags 0DV6 and 0A3R.
-(blueprint: lem-weil-pbc-torsor-equivariant-module-diagonal-evaluation)
-
-Proof: Compose the torsor isomorphism with interchange of the two factors.
-This identifies c.P times_V c.P with the disjoint union, indexed by the group,
-of copies of c.P, whose g-th component is (identity, g times identity). Given a
-value n, prescribe on this component the constant value rho(g)n. These
-functions are locally constant on the disjoint union; transport them across the
-isomorphism to the double overlap. The second factor action by h carries
-component g to component hg. The representation identity rho(hg)n =
-rho(h)(rho(g)n) proves equivariance. On the identity component, which is the
-diagonal, the value is rho(1)n = n. Thus the section has the requested value at
-the diagonal point. No connectedness or nonzero module hypothesis is needed,
-and the construction works for the trivial group. -/
+specified point on the diagonal of the torsor's double overlap. -/
 theorem equivariantSections_diagonalEvaluation_surjective
     {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]
     (c : Scheme.GaloisCover (ULift.{u + 1} P) V)

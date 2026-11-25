@@ -23,8 +23,23 @@ import WeilConjectures.ConstructibleSheaf.TorsorAssociatedModuleEssentialImage
 /-!
 # Descent equivalence for a connected finite torsor
 
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS.
-(blueprint: lem-weil-pbc-torsor-module-descent-equivalence)
+For a connected finite Galois cover `c.P → V`, representations of the group over `𝔽_ℓ` are
+equivalent to étale sheaves of modules on `V` whose pullback to `c.P` is constant.
+
+## Implementation details
+
+The functor sends a representation `N` to its associated sheaf of equivariant locally constant
+`N`-valued functions on the pulled-back torsor (see `associatedModuleFunctor`). Diagonal
+evaluation identifies its pullback with the constant sheaf, and the trivial rank-one
+representation goes to the constant coefficient sheaf. Fullness and faithfulness use that, by
+connectedness of `c.P`, a map of constant sheaves is a single linear map of values, which is
+equivariant by compatibility with the descent data. Essential surjectivity recovers a
+representation from a trivialization and its descent isomorphism; no finite-dimensionality is
+needed.
+
+## References
+
+* [Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS]
 -/
 
 @[expose] public section
@@ -37,47 +52,7 @@ open Etale
 
 /-- Representations are equivalent to all module sheaves trivialized by a connected
 finite torsor. The underlying functor is additive, its pullback is naturally constant,
-and the trivial rank-one representation descends to the coefficient sheaf.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R; sites.tex, Tags 04TR and 04TS.
-(blueprint: lem-weil-pbc-torsor-module-descent-equivalence)
-
-Proof:
-1. Construct the associated sheaf directly. For a P-representation N, restrict its scalars along
-ULift(F_l) -> F_l. For W etale over V, take the submodule of locally constant sections on W
-times_V c.P with values in this module satisfying s(g*y)=g*s(y). The torsor action and
-representation action make this a submodule. Restriction is restriction of sections. Given a
-matching family on an etale cover of W, glue its sections on the induced cover upstairs;
-uniqueness of gluing preserves equivariance. This proves the sheaf condition. On the pulled-back
-torsor there is a diagonal section, and evaluation at it identifies equivariant sections with
-ordinary constant-sheaf sections. Its inverse extends a section by the group action. These
-formulas commute with restriction and module maps and give the natural pullback isomorphism.
-2. An equivariant linear map acts pointwise on these sections. Pointwise identity, composition
-and addition prove functoriality and additivity. For the trivial rank-one representation the
-equivariance condition is invariance. A locally constant invariant function on W times_V c.P is
-the pullback of a unique locally constant function on W: define it on an etale cover where the
-torsor has a section, and use invariance to make these local definitions independent of the
-section and equal on overlaps. Hence the trivial coefficient representation maps to the constant
-coefficient sheaf.
-3. For a sheaf F whose pullback is constant with value A, choose a trivialization. On the
-components of c.P times_V c.P indexed by P, the transported canonical descent isomorphism is a
-map of constant module sheaves on c.P. Each constant section a has locally constant image;
-connectedness and nonemptiness imply that image is constant. Evaluation at one point recovers a
-linear map on A. Equality of the constant sections implies equality of sheaf maps since sections
-are locally constant sections. The inverse descent map gives invertibility, and the
-triple-overlap cocycle gives the group action (with the projection convention of the
-construction). Transporting scalars back gives a representation. Local evaluation in the
-trivialization identifies its associated sheaf with F, and these local identifications agree by
-the transported descent maps. This proves essential surjectivity without finite-dimensionality.
-4. For a map between two associated sheaves, pull it back and use the natural constant pullback
-identifications. The same connectedness argument shows it is one linear map of values.
-Commutation with the canonical descent maps says precisely that this linear map is
-P-equivariant. Its pointwise map of associated sheaves is the original map, because they agree
-after the etale surjective covering c.P -> V, and uniqueness in the sheaf condition detects that
-equality. This gives full faithfulness. Together with essential surjectivity it yields an
-equivalence with the full subcategory of sheaves having constant pullback; choose its inverse
-and unit and counit from these object and morphism identifications. The underlying functor
-retains its additivity, pullback comparison and trivial coefficient comparison.
-The zero module and the trivial group require no exceptions. -/
+and the trivial rank-one representation descends to the coefficient sheaf. -/
 theorem Scheme.GaloisCover.exists_module_descent_equivalence
     {V : Scheme.{u}} [ConnectedSpace V] (ℓ : ℕ) [Fact ℓ.Prime]
     (P : Type u) [Group P] [Finite P]

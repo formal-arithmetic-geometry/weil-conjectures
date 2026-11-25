@@ -74,9 +74,6 @@ public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
 
 /-! # Signed tensor comparison and coherence on cochain sheaves
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4, and sites-modules.tex,
-Tag 03EL (blueprint: def-pur-cochain-tensor-coherence-data).
-
 The tensor, associator, Koszul symmetry and action unitors below are the existing
 homological-complex constructions. Coefficient arrows are characterized on
 scalar-extension generators, and composition uses the adjunction conjugate.
@@ -85,6 +82,19 @@ The landed side comparison has shared source/target site sizes. The fresh
 `SheafOfModules.CochainTensorComparison` namespace generalizes its identical
 normalizations to independent site sizes. `ofLanded` retains each of its fields
 on the existing range. The published generic signed total maps are reused.
+
+## Implementation details
+
+The module functor and adjunction of an algebraically presented ringed geometric morphism are
+built by transporting module operations along the left-exact inverse image and extending
+scalars by the sheafified tensor construction; no flatness or site-universe equality is used.
+The equation in `CompositePresentation` is the scalar-association formula
+`1 ⊗ x ↦ 1 ⊗ (1 ⊗ x)` on generalized elements, which determines the composite comparison rather
+than merely requiring an arbitrary endomorphism to commute with tensor.
+
+## References
+
+- Stacks Project, Tags 03CY, 03D2, 03D7, 03EL, 07A4 and 0D6D.
 -/
 
 @[expose] public section
@@ -573,15 +583,8 @@ attribute [instance] RingedPullback.additive
 variable {R : Sheaf J CommRingCat.{w}} {S : Sheaf K CommRingCat.{w}}
 
 /-- Every algebraically presented ringed geometric morphism has the module
-functor and adjunction used in RingedPullback; these are presentation data.
-Source: Stacks 03D2, 03CY and 03D7
-(blueprint: def-pur-cochain-tensor-coherence-data).
-Proof: transport module operations along the left-exact inverse image. Extend
-scalars by the existing sheafified tensor construction, on maps by id tensor h.
-Transpose module homomorphisms through the set adjunction and the tensor
-universal property, followed by module sheafification. The resulting natural
-hom bijection gives the right adjoint and adjunction. Left adjoints between
-abelian categories are additive. No flatness or site-universe equality is used. -/
+functor and adjunction used in `RingedPullback`: an additive left adjoint given on objects by
+scalar extension of the module inverse image. -/
 theorem ringedPullbackPresentation_exists
     (uInv : Sheaf J (Type w) ⥤ Sheaf K (Type w))
     (uPush : Sheaf K (Type w) ⥤ Sheaf J (Type w))
@@ -610,8 +613,7 @@ attribute [local semireducible] SheafOfModules.monoidalCategory
 set_option backward.isDefEq.respectTransparency false in
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
-/-- The adjunction-conjugate module comparison for a composite.
-Source: Stacks 0D6D (blueprint: def-pur-cochain-tensor-coherence-data). -/
+/-- The adjunction-conjugate module comparison for a composite. -/
 noncomputable def compositionModule
     {E : Type uE} [Category.{vE} E] [EssentiallySmall.{w} E]
     {H : GrothendieckTopology E}
@@ -621,14 +623,9 @@ noncomputable def compositionModule
     (right : h.V ≅ g.V ⋙ f.V) : h.L ≅ f.L ⋙ g.L :=
   (conjugateIsoEquiv (f.moduleAdj.comp g.moduleAdj) h.moduleAdj).symm right.symm
 
-/-- Presentation of the actual composite, normalized on inverse-image generators.
-The two right-adjoint comparisons give the inverse-image adjunction comparison
-and its module analogue. The equation is the scalar-association formula
-`1 ⊗ x ↦ 1 ⊗ (1 ⊗ x)` on every generalized element; linearity then gives
-`t ⊗ x ↦ t ⊗ (1 ⊗ x)`. It determines the comparison, rather than merely
-requiring an arbitrary endomorphism to commute with tensor.
-Source: Stacks 0D6D and 03EL
-(blueprint: def-pur-cochain-tensor-coherence-data). -/
+/-- Presentation of the actual composite, normalized on inverse-image generators: comparisons
+of the right adjoints on sheaves of sets and on modules, satisfying the scalar-association
+formula `1 ⊗ x ↦ 1 ⊗ (1 ⊗ x)` on every generalized element. -/
 structure CompositePresentation
     {E : Type uE} [Category.{vE} E] [EssentiallySmall.{w} E]
     {H : GrothendieckTopology E}
@@ -647,8 +644,7 @@ structure CompositePresentation
         g.uInv.map (f.uInv.map x ≫ f.I.moduleUnderlying.inv.app M ≫ kf.q M) ≫
           g.I.moduleUnderlying.inv.app (f.L.obj M) ≫ kg.q (f.L.obj M)
 
-/-- Termwise lift of the canonical adjunction/scalar-association comparison.
-Source: Stacks 0D6D (blueprint: def-pur-cochain-tensor-coherence-data). -/
+/-- Termwise lift of the canonical adjunction/scalar-association comparison. -/
 noncomputable def composition
     {E : Type uE} [Category.{vE} E] [EssentiallySmall.{w} E]
     {H : GrothendieckTopology E}

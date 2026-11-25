@@ -9,9 +9,16 @@ public import WeilConjectures.FourierTransform.FdRawLocalization.FdRawLocalizati
 import all WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLocalization
 import Mathlib.CategoryTheory.Localization.Predicate
 
-/-! # Descent of the fixed integral scalar comparison
+/-! # Localizing the integral scalar comparison
 
-Source: trace-definition coefficient-category sentence, raw localization steps 1--3.
+The inverse of an integral scalar comparison descends to a rational comparison between the
+supplied rational functors.
+
+## Implementation details
+
+The rational comparison is obtained with `Localization.liftNatIso`, after identifying the
+localization composed with the supplied rational functor, and with rational scalar extension,
+via the tensor formulas at scalar one.
 -/
 
 @[expose] public noncomputable section
@@ -142,19 +149,10 @@ private theorem rawIsoOriginal_app {E L : Padic.FiniteCoefficientFields l Ω} (h
   rw [← Category.assoc]
   exact comp_eqToHom_heq _ _
 
-/-- Localize the inverse integral scalar comparison before coefficient-presentation transport.
-Source: assigned raw scalar-descent proof, first step
-(blueprint: lem-fd-raw-localized-comparison-exists).
-
-Proof: The stage tensor formula at scalar one identifies Q followed by the supplied
-rational functor with I followed by the PBC localization. The scalar tensor formula
-at one identifies Q followed by rational scalar extension with U followed by Q.
-Whisker the inverse of b by the final localization and compose with these
-identifications and the inverse ordinary-scalar comparison. The source Q is a
-localization, so lift this natural isomorphism with Localization.liftNatIso.
-Its integral component formula cancels the identity associators and equality
-transports, giving exactly the two arrows below. This constructs the isomorphism
-and its naturality and inverse equations; no shift or coherence assertion is used. -/
+/-- An integral comparison `b : I E ⋙ C h ≅ U h ⋙ I L` induces a rational comparison between
+rational scalar extension followed by the supplied rational functor at `L` and the supplied
+rational functor at `E` followed by `T h`, whose component on the localization of `K` is the
+localization of `b.inv.app K` followed by the inverse integral comparison. -/
 theorem rawLocalizedComparisonExists {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
     (b : I l Ω T stage E ⋙ C l Ω T h ≅ U l Ω T h ⋙ I l Ω T stage L) :
     ∃ e : sfRationalScalarExtension l (pbcFiniteField.{u} l Ω E) T 0

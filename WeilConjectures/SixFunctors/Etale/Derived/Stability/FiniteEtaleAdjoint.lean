@@ -13,11 +13,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 For a finite étale morphism `e : V ⟶ X` the direct image `e_*` of étale sheaves is exact, being
 both a left adjoint (of `e^*`, `AlgebraicGeometry.Etale.lowerStarUpperStarAdjunctionOfIsFinite`)
 and a right adjoint (of `e^*`). Consequently `Re_! ≅ Re_* ≅ D(e_*)`, and `D(e_*) ⊣ D(e^*)` on the
-derived categories (`lemma-affine-space-etale-localization--4`).
+derived categories.
 
-The blueprint states the proposition on the small pro-étale sites; the pro-étale direct image along
-a finite étale morphism is not available in the library, and the statement is made on the small
-étale sites, where the exceptional inverse image of the library lives.
+## Implementation details
+
+The statements are made on the small étale sites, where the exceptional inverse image of the
+library lives, rather than on the small pro-étale sites: the pro-étale direct image along a finite
+étale morphism is not available in the library.
 -/
 
 @[expose] public section
@@ -55,27 +57,22 @@ noncomputable def mapDerivedCategoryLowerStarUpperStarAdjunctionOfIsFinite :
   (Etale.lowerStarUpperStarAdjunctionOfIsFinite A e).mapDerivedCategoryAdjunction
 
 /-- For a finite étale `e`, the derived compactly supported direct image is the exact direct
-image, `Re_! ≅ Re_* ≅ D(e_*)`: `e` is proper and `e_*` is exact. -/
+image, `Re_! ≅ Re_* ≅ D(e_*)`. -/
 noncomputable def rightDerivedLowerShriekIsoMapDerivedCategoryOfIsFiniteOfEtale
     [HasCompactification e] : R(e)_![A] ≅ D((e)_*[A]) :=
   rightDerivedLowerShriekIsoRightDerivedLowerStar A e ≪≫
     (e)_*[A].rightDerivedFunctorIsoMapDerivedCategory
 
-/-- Blueprint `lemma-affine-space-etale-localization--4`: The right adjoint for a finite etale
-morphism.
-
-For a finite étale `e`, the compactly supported direct image `Re_! ≅ D(e_*)` is left adjoint to
+/-- For a finite étale `e`, the compactly supported direct image `Re_! ≅ D(e_*)` is left adjoint to
 the pullback `D(e^*)`. -/
 noncomputable def rightDerivedLowerShriekUpperStarAdjunctionOfIsFiniteOfEtale
     [HasCompactification e] : R(e)_![A] ⊣ D((e)^*[A]) :=
   (mapDerivedCategoryLowerStarUpperStarAdjunctionOfIsFinite A e).ofNatIsoLeft
     (rightDerivedLowerShriekIsoMapDerivedCategoryOfIsFiniteOfEtale A e).symm
 
-/-- Blueprint `lemma-affine-space-etale-localization--4`: The right adjoint for a finite etale
-morphism.
-
-Let `e : V ⟶ X` be finite étale. Then the direct image `e_*` is exact, and on the derived
-categories `Re_! ≅ Re_* ≅ D(e_*)` with `D(e_*) ⊣ D(e^*)`, the pullback being the inverse image. -/
+/-- **The right adjoint for a finite étale morphism.** Let `e : V ⟶ X` be finite étale. Then the
+direct image `e_*` is exact, and on the derived categories `Re_! ≅ Re_* ≅ D(e_*)` with
+`D(e_*) ⊣ D(e^*)`, the pullback being the inverse image. -/
 theorem exact_lowerStar_and_rightDerivedLowerShriek_adjunction_of_isFinite_of_etale
     [HasCompactification e] :
     (PreservesFiniteLimits (e)_*[A] ∧ PreservesFiniteColimits (e)_*[A]) ∧

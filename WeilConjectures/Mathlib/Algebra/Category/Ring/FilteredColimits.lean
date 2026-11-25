@@ -112,8 +112,7 @@ lemma subalgebraDesc_val (hP : ⨆ A : {A : Subalgebra ℤ R // P A}, A.1 = ⊤)
 
 /-- If the `ℤ`-subalgebras of a commutative ring `R` satisfying `P` form a nonempty
 directed poset with supremum `⊤`, then `R` is their colimit in `CommRingCat`. This is the
-categorical companion of `Subalgebra.iSupLift`.
-(blueprint: `lem-weil-pbc-directed-subalgebra-ring-colimit`) -/
+categorical companion of `Subalgebra.iSupLift`. -/
 noncomputable def isColimitSubalgebraCocone
     (hP : ⨆ A : {A : Subalgebra ℤ R // P A}, A.1 = ⊤) : IsColimit (subalgebraCocone R P) where
   desc s := ofHom (subalgebraDesc R P hP s)
@@ -365,8 +364,7 @@ noncomputable def adjoinFinsetCocone : Cocone (adjoinFinsetDiagram k K) where
   ι := { app S := ofHom (Algebra.adjoin k (S : Set K)).val.toRingHom }
 
 /-- A `k`-algebra `K` is the filtered colimit in `CommRingCat` of its `k`-subalgebras generated
-by finite subsets: this is checked on underlying types, where every element of `K` lies in the
-subalgebra it generates. -/
+by finite subsets. -/
 noncomputable def isColimitAdjoinFinsetCocone : IsColimit (adjoinFinsetCocone k K) := by
   classical
   have := reflectsColimitsOfShape_of_reflectsIsomorphisms (G := forget CommRingCat.{u})

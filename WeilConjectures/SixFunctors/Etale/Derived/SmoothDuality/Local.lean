@@ -15,8 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 /-!
 # Smooth duality is local: descent and composition
 
-Tools for the proof of orientation-free smooth duality (blueprint
-`proposition-exceptional-inverse-image-smooth-morphism`), whose statement is local on the source:
+Tools for the proof of orientation-free smooth duality, whose statement is local on the source:
 the canonical tensor map `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
 (`AlgebraicGeometry.Etale.dualizingComplexTensorMap`) is an isomorphism and `ω_f` is a shifted
 locally constant sheaf of free rank-one modules.
@@ -133,8 +132,7 @@ def etaleCoverOfJointlySurjective {X : Scheme.{u}} {ι : Type u} {U : ι → Sch
 /-- An object `M ∈ D(X_ét, Λ)` is a *shifted rank-one local system* in degree `-n` if
 `M ≅ L[n]` for a locally constant sheaf `L` of `Λ`-modules placed in degree zero, whose stalk at
 every geometric point is free of rank one. This is the shape of the dualizing complex of a smooth
-morphism of relative dimension `d`, with `n = 2d` (blueprint
-`proposition-exceptional-inverse-image-smooth-morphism`). -/
+morphism of relative dimension `d`, with `n = 2d`. -/
 def IsShiftedRankOneLocalSystem {X : Scheme.{u}}
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ) :
     Prop :=
@@ -281,7 +279,7 @@ theorem nonempty_dualizingComplex_comp_iso_of_unit (a : X ⟶ Y) (b : Y ⟶ Z) (
 
 /-- **Composition of the canonical tensor maps.** For `h = a ≫ b` admitting compactifications:
 if `θ_a` is invertible at every object, `ω_b` is invertible and `θ_b` is invertible at `K`, then
-`θ_h` is invertible at `K` (`lem-pur-co-smooth-composition`, for all coefficients `K`). -/
+`θ_h` is invertible at `K`. -/
 theorem isIso_dualizingComplexTensorMap_comp_of_forall (a : X ⟶ Y) (b : Y ⟶ Z) (h : X ⟶ Z)
     (w : a ≫ b = h) [HasCompactification a] [HasCompactification b] [HasCompactification h]
     (ha : ∀ P, IsIso (dualizingComplexTensorMap Λ a P))

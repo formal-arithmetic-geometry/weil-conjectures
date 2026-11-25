@@ -26,9 +26,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C]
 
 /-- **Extensions.** The `n`-th `Ext`-group `Ext^n(X, Y)` (Mathlib's
 `CategoryTheory.Abelian.Ext`) is in bijection with the group of morphisms `X ⟶ Y[n]` in the
-derived category, and it vanishes for `n ≥ 1` when `X` is projective.
-
-(blueprint: `def-pc-ext`) -/
+derived category, and it vanishes for `n ≥ 1` when `X` is projective. -/
 theorem nonempty_equiv_shiftedHom [HasDerivedCategory.{w} C] (X Y : C) (n : ℕ) :
     Nonempty (Ext.{w} X Y n ≃ ShiftedHom ((singleFunctor C 0).obj X)
       ((singleFunctor C 0).obj Y) (n : ℤ)) ∧

@@ -26,21 +26,19 @@ import WeilConjectures.DeligneLaumon.PointCommonScalarCohomology
 
 /-! # T-exact constructible pullback and geometric-point fibres
 
-Source: Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3),
-Proposition 6.8.14(2) and Remark 6.8.15
-(blueprint: lem-a1-constructible-pullback-t-exact).
+Pullback of constructible complexes is t-exact, with exact induced functors on hearts,
+canonical cohomology comparisons, and compatible geometric-point fibres.
 
-The comparison data below package the clauses of this node. Their cohomology maps
-are explicitly the composites of the truncation comparisons and the shift comparison.
-The scalar square is an equality of those maps, rather than an existence of unrelated
-isomorphisms. The categories and the standard pairs are the recorded intrinsic ones.
+## Implementation details
 
-## Main statements
+The cohomology maps of the comparison data are explicitly the composites of the truncation
+comparisons and the shift comparison. The scalar square is an equality of those maps, rather
+than an existence of unrelated isomorphisms.
 
-- `constructible_pullback_t_exact`: t-exact pullback, exact hearts and canonical cohomology.
-- `constructible_pullback_scalar_compatibility`: finite and common-stage scalar squares.
-- `constructible_pullback_point_fibre`: the point cohomology and degree-zero clauses.
-- `constructible_point_scalar_compatibility`: the point-evaluation scalar squares.
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.8.10,
+  Proposition 6.8.11(3), Proposition 6.8.14(2) and Remark 6.8.15]
 -/
 
 @[expose] public noncomputable section

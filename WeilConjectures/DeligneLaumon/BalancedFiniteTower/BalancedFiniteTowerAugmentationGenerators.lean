@@ -9,11 +9,12 @@ public import WeilConjectures.DeligneLaumon.FinitePullbackStrictTowerData.Finite
 
 /-! # Augmentation on normalized Koszul basis generators
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4 and sites-modules.tex, Tag 03EL.
-(blueprint: lem-a1-balanced-finite-tower-augmentation-generators).
+Compatibility of a normalized Koszul comparison with the augmentation, on the free
+generators in degrees `-1` and `0`.
 
-The proof is the two-generator calculation on the degree minus one and degree
-zero free summands. Extension to all sections is proved in the square module. -/
+## References
+
+* [Stacks Project, Tag 07A4, Tag 03EL] -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

@@ -13,8 +13,13 @@ import Mathlib.RingTheory.Filtration
 
 /-! # Artin--Rees bound for images of reduced kernels
 
-Source: Stacks Project, Lemma 087X, proof of claim (a).
-(blueprint: new-adic-kernel-image-bound).
+We show, using the Artin--Rees lemma, that for a linear map `f : M → N` with `N` finite over a
+Noetherian ring, the elements of `M / I^(m+1) M` coming from `f⁻¹(I^(l+1) N)` are exactly
+those coming from `ker f`, once `l ≥ m + c` for a constant `c`.
+
+## References
+
+* Stacks Project, Lemma 087X, proof of claim (a); Lemma 00IN.
 -/
 
 @[expose] public section
@@ -23,18 +28,9 @@ universe u v w
 
 namespace LinearMap
 
-/-- The image of the preimage of a high ideal power in a fixed quotient is the image
-of the actual kernel, with a bound uniform in the quotient level.
-
-Source: Stacks Project, Lemma 087X, proof of claim (a), and Algebra, Lemma 00IN.
-(blueprint: new-adic-kernel-image-bound).
-
-Proof: Apply Artin--Rees to the range of f in N and obtain c. If f(x) belongs to
-I^(l+1)N, it belongs to I^(l+1-c) range(f), hence has a lift y in I^(l+1-c)M.
-For l >= m+c this lift is in I^(m+1)M. Thus x-y is in ker(f) and has the same
-class as x in M/I^(m+1)M. Conversely every kernel element maps into every ideal
-power. The two inclusions prove the asserted equality. This also treats zero
-modules and the zero and unit ideals, without any nontriviality hypothesis. -/
+/-- Let `R` be Noetherian, `N` a finite `R`-module, `f : M → N` linear and `I` an ideal. There is
+`c` such that for all `m + c ≤ l`, the image of `f⁻¹(I^(l+1) N)` in `M / I^(m+1) M` equals the
+image of `ker f`. -/
 theorem adic_kernel_image_bound {R : Type u} [CommRing R] [IsNoetherianRing R]
     {M : Type v} [AddCommGroup M] [Module R M]
     {N : Type w} [AddCommGroup N] [Module R N] [Module.Finite R N]

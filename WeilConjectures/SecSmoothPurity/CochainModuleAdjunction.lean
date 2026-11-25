@@ -14,8 +14,10 @@ import all WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
 set_option linter.privateModule false
 
 /-! # Module adjunction for an independently sized inverse image
-Source: Stacks Project, Modules on Sites, Tags 03D3 and 03D7.
-(auxiliary; not a blueprint node).
+
+## References
+
+- Stacks Project, Modules on Sites, Tags 03D3 and 03D7.
 -/
 
 @[expose] public section
