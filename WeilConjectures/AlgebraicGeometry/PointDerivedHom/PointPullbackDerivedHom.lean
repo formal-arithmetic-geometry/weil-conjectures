@@ -433,7 +433,8 @@ private lemma restrictionComparisonAux_normalization {X Y : Scheme.{u}} (f : X �
   -- the remaining identities live on objects that agree only up to unfolding `mapMod`
   erw [Category.id_comp, Category.comp_id]
 
-omit [IsCommMonObj Λ] in
+-- `[IsCommMonObj Λ]` must stay: `restrictionComparison` below gets it only from here.
+set_option linter.unusedSectionVars false in
 /-- The ordinary point-composition comparison, including coefficient transport,
 is uniquely determined by its underlying abelian-sheaf map. -/
 theorem restrictionComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
