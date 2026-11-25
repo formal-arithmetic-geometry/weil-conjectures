@@ -19,13 +19,12 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 
-set_option linter.unusedVariables false in
 /-- Two refinements of finite split étale hypercovers of a qcqs scheme are equalized up to
 homotopy by a further étale hypercover (Stacks, Tags 0DAV, 094K and 01GS). -/
 theorem exists_etale_hypercover_homotopy_equalizer
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U V : FiniteSplitEtaleHypercover X) (a b : U.Refinement V) :
-    ∃ (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K)
+    ∃ (K : SimplicialObject X.Etale) (_hK : IsEtaleHypercover K)
       (c : K ⟶ U.simplicial), Nonempty (SimplicialObject.Homotopy (c ≫ a) (c ≫ b)) := by
   refine ⟨SimplicialObject.ordinalPathPullback a b, ?_,
     SimplicialObject.ordinalPathPullbackFst a b,

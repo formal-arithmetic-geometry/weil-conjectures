@@ -13,8 +13,6 @@ public import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.AlgebraicGeometry.EtaleLimitFiniteCechStageData
 import WeilConjectures.AlgebraicGeometry.EtaleLimitFiniteCechColimit
 
-set_option linter.unusedVariables false
-
 /-! # Finite Čech complexes on inverse limits of schemes
 
 ## References
@@ -66,11 +64,11 @@ theorem etale_limit_finite_cech_complex_colimit
       (Uj : ∀ j : {j : I // i₀ ≤ j}, (D.obj (op j.val)).Etale)
       (Vj : ∀ j : {j : I // i₀ ≤ j}, K → (D.obj (op j.val)).Etale)
       (fj : ∀ (j : {j : I // i₀ ≤ j}) (k : K), Vj j k ⟶ Uj j)
-      (eA : ∀ j : {j : I // i₀ ≤ j}, A.obj j ≅
+      (_eA : ∀ j : {j : I // i₀ ≤ j}, A.obj j ≅
         (cechComplexFunctor (fun k : K ↦ Over.mk (fj j k))).obj
           ((Over.forget (Uj j)).op ⋙ (F j.val).obj))
       (cA : Cocone A)
-      (eK : cA.pt ≅ (cechComplexFunctor (fun k : K ↦ Over.mk (f k))).obj
+      (_eK : cA.pt ≅ (cechComplexFunctor (fun k : K ↦ Over.mk (f k))).obj
         ((Over.forget U).op ⋙ L.pt.obj)),
       (∀ j : {j : I // i₀ ≤ j},
         Sieve.ofArrows (Vj j) (fj j) ∈ (D.obj (op j.val)).smallEtaleTopology (Uj j)) ∧

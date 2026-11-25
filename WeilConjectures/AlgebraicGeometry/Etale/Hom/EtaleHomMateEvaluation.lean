@@ -17,7 +17,6 @@ public import WeilConjectures.CategoryTheory.SixFunctors.HomShiftEvaluationNorma
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated MonoidalCategory
 open CategoryTheory.Pretriangulated.Opposite Opposite
 namespace AlgebraicGeometry.Etale
@@ -82,7 +81,7 @@ theorem etaleHom_signedMateEvaluation (M : D)
       (s.commShiftIso n).hom.app (op K) = (n * (n + 1) / 2).negOnePow •
         (ProEtale.siteHomOppositeSourceShift K n).hom.app M) :
     homShiftEvaluationNormalization M s := by
-  letI := s
+  let := s
   unfold homShiftEvaluationNormalization
   intro K n
   rw [hs K n]

@@ -14,8 +14,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleNoetherianClopenAssemblyAppe
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
-set_option linter.unnecessarySimpa false
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
@@ -34,7 +32,7 @@ theorem exists_reduced_stratification_of_integral_affine_generic_reduced
       (∀ a : Fin T.n, IsReduced (T.domain a)) ∧
       ∀ a : Fin T.n, P (T.domain a) (T.immersion a) := by
   classical
-  letI : IsNoetherian Y := {}
+  let : IsNoetherian Y := {}
   have hPartial : ∀ T : TopologicalSpace.Closeds Y,
       Nonempty (ReducedFiniteLocallyClosedStratificationOn Y P T) := by
     intro T
@@ -55,7 +53,7 @@ theorem exists_reduced_stratification_of_integral_affine_generic_reduced
         range_immersion := by intro a; exact Fin.elim0 a
         isReduced := by intro a; exact Fin.elim0 a
         property := by intro a; exact Fin.elim0 a
-        support := by simpa [hT]
+        support := by simp [hT]
         subset := by intro a; exact Fin.elim0 a }⟩
     · obtain ⟨q⟩ :=
         exists_integral_affine_generic_piece_avoiding_components Y P hgeneric T hT
@@ -63,10 +61,10 @@ theorem exists_reduced_stratification_of_integral_affine_generic_reduced
         ⟨(T : Set Y) \ Set.range (q.W.ι ≫ q.j), q.complement_closed⟩
       have hlt : T' < T := q.strict_complement
       obtain ⟨S⟩ := ih T' hlt
-      letI : IsIntegral q.B := q.isIntegral
-      letI : IsImmersion q.j := q.isImmersion
-      letI : Nonempty q.W := q.nonempty
-      letI : IsIntegral q.W.toScheme := isIntegral_of_isOpenImmersion q.W.ι
+      let : IsIntegral q.B := q.isIntegral
+      let : IsImmersion q.j := q.isImmersion
+      let : Nonempty q.W := q.nonempty
+      let : IsIntegral q.W.toScheme := isIntegral_of_isOpenImmersion q.W.ι
       have hUred : IsReduced q.W.toScheme := by
         exact isReduced_of_isIntegral q.W.toScheme
       have hdisj :

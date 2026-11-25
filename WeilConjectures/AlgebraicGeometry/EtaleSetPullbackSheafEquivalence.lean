@@ -17,7 +17,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 * Stacks Project, Tags 04DZ and 03SI
 -/
 
-set_option linter.style.haveILetI false
 @[expose] public section
 universe u w
 open CategoryTheory CategoryTheory.Limits

@@ -15,8 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Mathlib.CategoryTheory.Filtered.Final
 
-set_option linter.unusedVariables false
-
 /-! # Canonical descended finite Čech comparison
 
 ## References
@@ -190,8 +188,8 @@ theorem finite_cech_stage_data_is_colimit
     (L : Cocone G) (hL : IsColimit L)
     (U : c.pt.Etale) [CompactSpace U.left] [QuasiSeparatedSpace U.left]
     (K : Type (u + 1)) [Finite K] (V : K → c.pt.Etale) (f : ∀ k, V k ⟶ U)
-    (hV : ∀ k, CompactSpace (V k).left ∧ QuasiSeparatedSpace (V k).left)
-    (hf : Sieve.ofArrows V f ∈ c.pt.smallEtaleTopology U)
+    (_hV : ∀ k, CompactSpace (V k).left ∧ QuasiSeparatedSpace (V k).left)
+    (_hf : Sieve.ofArrows V f ∈ c.pt.smallEtaleTopology U)
     (i₀ : I) (U₀ : (D.obj (op i₀)).Etale)
     (V₀ : K → (D.obj (op i₀)).Etale) (f₀ : ∀ k, V₀ k ⟶ U₀)
     (eU : (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj U₀ ≅ U)
