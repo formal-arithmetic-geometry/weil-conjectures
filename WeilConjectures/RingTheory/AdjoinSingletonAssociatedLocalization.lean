@@ -20,42 +20,24 @@ import Mathlib.RingTheory.Localization.LocalizationLocalization
 /-!
 # Associated localizations of a fractional monogenic algebra
 
-Source: Stacks Project, Algebra, Tag 0334, Step 5, the comparison with a height-one
-localization of the normal base domain.
-(blueprint: lem-weil-pbc-monogenic-associated-localization).
+Let `R` be a Noetherian normal domain with fraction field `K`, `0 ≠ x ∈ K` and `S = R[x]`. The
+localization of `S_m` at an associated prime of `S_m / x S_m` is isomorphic to the localization
+of `R` at a height-one prime.
+
+## References
+
+* [Stacks Project, Tag 0334], Step 5
+* [Stacks Project, Tag 00PQ], [Stacks Project, Tag 031T], [Stacks Project, Tag 00PD]
 -/
 
 @[expose] public section
 
 universe u v
 
-/-- An associated-prime localization of the principal quotient of a fractional monogenic
-algebra is isomorphic to a height-one localization of the normal base domain.
-No Nagata hypothesis is needed for this comparison.
-
-Source: Stacks Project, Algebra, Tag 0334, Step 5, the paragraphs verifying (2) and (3)(a),
-using Tags 00PQ, 031T and 00PD.
-(blueprint: lem-weil-pbc-monogenic-associated-localization).
-
-Proof:
-1. Put `S = R[x]`, contract `p` to `qS` in `S`, and contract again to `q` in `R`.
-   The associated-contraction theorem identifies `q` as associated to `R/J`,
-   where `J = R ∩ xR`. Its proof identifies `S/xS ≃ R/J` by adjoin induction
-   and the reversed-polynomial integrality argument.
-2. Tag 031T gives `q.height = 1`. Normality localizes, so `B = R_q` is a
-   one-dimensional normal Noetherian local domain, hence a DVR by Tag 00PD.
-3. Put `C = S_qS`. There is a local map `f : B → C` from the contracted primes.
-   Embed `C` into `Frac(R)` by extending the inclusion `S ⊆ K` along the
-   canonical identification `K ≃ Frac(R)`. Every denominator is nonzero,
-   so this extension `g` is injective; its composite with `f` is the fraction
-   field inclusion of `B`. A valuation ring is maximal among local subrings
-   of its fraction field dominating it. Mathlib's
-   `bijective_rangeRestrict_comp_of_valuationRing` therefore makes the map
-   `B → range(g)` bijective. Injectivity of `g` gives `B ≃ C`.
-4. Since `qS ≤ m` and `p` is its extension to `S_m`, iterated localization gives
-   `A_p ≃ S_qS`. Compose with the isomorphism in step 3.
-   If `x` becomes a unit in `S_m`, the principal quotient is zero and there are
-   no associated primes, so the assertion is vacuous. -/
+/-- Let `R` be a Noetherian normal domain with fraction field `K`, `0 ≠ x ∈ K` with `R[x]`
+Noetherian, and `m` a maximal ideal of `R[x]` containing `x`. For every associated prime `p` of
+`R[x]_m / (x)`, the localization of `R[x]_m` at `p` is isomorphic to `R_q` for some height-one
+prime `q` of `R`. -/
 theorem adjoin_singleton_associated_localization
     (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     [IsNoetherianRing R] [Field K] [Algebra R K] [IsFractionRing R K]

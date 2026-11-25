@@ -18,8 +18,7 @@ Let `G` be a commutative group, `k` a nontrivial commutative ring, and suppose t
 homomorphisms `a₁, …, aₙ : G → k` and elements `e₁, …, eₙ ∈ G` with `aᵢ(eⱼ) = δᵢⱼ`. Then
 `Hⁿ(G, k) ≠ 0` for the trivial representation `k`
 (`groupCohomology.not_isZero_of_dualFamily`). This applies to `G ≅ ℤⁿ` and to `G ≅ ⊕_ℕ ℤ` in
-every degree, which is the group-cohomological input `Hⁿ(⊕_ℕ ℤ, Λ) ≠ 0` of blueprint
-`sk-rem-sf-fullcd-scope`.
+every degree; in particular `Hⁿ(⊕_ℕ ℤ, Λ) ≠ 0` for all `n ≥ 1`.
 
 The proof avoids the Künneth formula. The cup product `a₁ ∪ ⋯ ∪ aₙ`, `(g₁, …, gₙ) ↦ ∏ aᵢ(gᵢ)`,
 is a cocycle (a telescoping sum). The alternating pairing
@@ -27,6 +26,9 @@ is a cocycle (a telescoping sum). The alternating pairing
 coboundaries: the inner faces cancel in pairs `σ, σ ∘ (j j+1)` because `G` is commutative,
 and the two outer faces cancel after a cyclic rotation. It takes the value `1` on the cup
 product.
+
+The `Ext`-form `groupCohomology.exists_ext_ne_zero_of_dualFamily` uses the class of the cup
+product computed on the bar resolution (`CategoryTheory.ProjectiveResolution.extMk`).
 -/
 
 @[expose] public section
@@ -204,9 +206,7 @@ theorem altPairing_cupHom {n : ℕ} (e : Fin n → G) (a : Fin n → Additive G 
 
 /-- **Nonvanishing of `Hⁿ(G, k)`.** Let `G` be a commutative group and `k` a nontrivial
 commutative ring. If there are homomorphisms `aᵢ : G → k` and elements `eⱼ ∈ G`, `i, j < n`, with
-`aᵢ(eⱼ) = δᵢⱼ`, then `Hⁿ(G, k) ≠ 0` for the trivial representation `k`: the cup product
-`a₀ ∪ ⋯ ∪ a_{n-1}` is a cocycle whose alternating pairing with the fundamental cycle of the `eⱼ` is
-`1`, while that pairing kills coboundaries. -/
+`aᵢ(eⱼ) = δᵢⱼ`, then `Hⁿ(G, k) ≠ 0` for the trivial representation `k`. -/
 theorem not_isZero_of_dualFamily [Nontrivial k] {n : ℕ} (e : Fin (n + 1) → G)
     (a : Fin (n + 1) → Additive G →+ k)
     (h : ∀ i j, a i (Additive.ofMul (e j)) = if i = j then 1 else 0) :
@@ -234,8 +234,7 @@ theorem not_isZero_of_dualFamily [Nontrivial k] {n : ℕ} (e : Fin (n + 1) → G
   exact one_ne_zero this
 
 /-- `Hⁿ(⊕_ι ℤ, k) ≠ 0` in every positive degree for an infinite index type `ι` and a nontrivial
-commutative ring `k`, with trivial action; in particular `Hⁿ(⊕_ℕ ℤ, Λ) ≠ 0` for `n ≥ 1`, the
-group-cohomological input of blueprint `sk-rem-sf-fullcd-scope`. -/
+commutative ring `k`, with trivial action; in particular `Hⁿ(⊕_ℕ ℤ, Λ) ≠ 0` for `n ≥ 1`. -/
 theorem not_isZero_groupCohomology_finsupp [Nontrivial k] (ι : Type u) [Infinite ι] (n : ℕ) :
     ¬ Limits.IsZero
       (groupCohomology (Rep.trivial k (Multiplicative (ι →₀ ℤ)) k) (n + 1)) := by
@@ -264,9 +263,7 @@ lemma freeLiftLEquiv_d_comp {n : ℕ} (A : Rep.{u} k G)
   rfl
 
 /-- The `Ext`-form of `groupCohomology.not_isZero_of_dualFamily`: for a dual family as there,
-`Extⁿ(k, k) ≠ 0` in `Rep k G`. The class of the cup product, computed on the bar resolution
-(`CategoryTheory.ProjectiveResolution.extMk`), is nonzero: by
-`CategoryTheory.ProjectiveResolution.extMk_eq_zero_iff` it would otherwise be a coboundary. -/
+`Extⁿ(k, k) ≠ 0` in `Rep k G`. -/
 theorem exists_ext_ne_zero_of_dualFamily.{w} [Nontrivial k] [HasExt.{w} (Rep.{u} k G)] {n : ℕ}
     (e : Fin (n + 1) → G) (a : Fin (n + 1) → Additive G →+ k)
     (h : ∀ i j, a i (Additive.ofMul (e j)) = if i = j then 1 else 0) :

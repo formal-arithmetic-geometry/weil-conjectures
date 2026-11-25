@@ -11,9 +11,12 @@ public import WeilConjectures.RepresentationTheory.HomogeneousCochainEvaluation
 /-!
 # The differential in cumulative-product coordinates
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed differential;
-homogeneous change of variables in the parent comparison proof, step 3.
-(blueprint: lem-sc-homogeneous-cochain-evaluation-differential).
+Under the evaluation `Rep.homogeneousCochainEvaluation` at cumulative products, the
+differential of homogeneous continuous cochains becomes the usual inhomogeneous differential.
+
+## References
+
+* [Stacks Project, Tag 0DVG](https://stacks.math.columbia.edu/tag/0DVG)
 -/
 
 @[expose] public section
@@ -57,22 +60,8 @@ private theorem resolutionEval_d (N : TopRep.{max u s} ℤ G) (n : ℕ)
       rw [Fin.succ_succAbove_succ]
     simp [resolutionEval, pow_succ, ht]
 
-/-- Evaluation of the recursive homogeneous differential gives the inhomogeneous formula.
-
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed differential;
-homogeneous conversion in the parent proof, step 3.
-(blueprint: lem-sc-homogeneous-cochain-evaluation-differential).
-
-Proof: Induct on the number of continuous-map variables to expand constant insertion
-minus the preceding differential applied pointwise into the alternating sum of omissions.
-Evaluate at the cumulative products. Omitting coordinate zero gives the tail cumulative
-products multiplied on the left by the first group element. Equivariance changes this
-into the action term. Omitting coordinate k+1 is exactly the cumulative products of the
-contracted tuple, by Fin.partialProd_contractNth. The sign of this omission is
-(-1)^(k+1), including the final omission, whose contraction drops the last argument.
-Separate the initial summand from the finite sum to get the displayed equation. In
-degree zero the two omissions give the action on the coefficient minus that coefficient.
-This calculation requires no open-stabilizer hypothesis or bijectivity assertion. -/
+/-- Evaluation at cumulative products turns the homogeneous differential into the inhomogeneous
+one: `(dx)(g₀, …, gₙ) = g₀ • x(g₁, …, gₙ) + ∑ₖ (-1)^(k+1) x(…, gₖ * gₖ₊₁, …)`. -/
 theorem homogeneousCochainEvaluation_differential [CompactSpace G] [T2Space G]
     (N : TopRep.{max u s} ℤ G) [DiscreteTopology N.V]
     (n : ℕ) (x : (TopRep.homogeneousCochains N).X n) (g : Fin (n + 1) → G) :

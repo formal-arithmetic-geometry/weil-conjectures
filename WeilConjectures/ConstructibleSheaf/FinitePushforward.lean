@@ -37,8 +37,8 @@ its restriction to the generic point [Stacks 09Z5]; the general case descends `C
 Noetherian scheme and pulls the embedding back along the finite base change isomorphism
 `AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isFinite`.
 
-The bounded constructible complexes of the blueprint (`def-weil-pbc-constructible-complexes`)
-are `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible` of
+Bounded constructible complexes are
+`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible` of
 `WeilConjectures.CategoryTheory.DerivedCategory.Constructible`.
 
 ## Main statements
@@ -54,6 +54,23 @@ are `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible` of
   approximation of the embedding.
 - `AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar`: the embedding over a
   quasi-compact quasi-separated base.
+
+## Implementation details
+
+- The statements are proved for an arbitrary noetherian coefficient ring `Λ` and finitely
+  generated values `Mᵢ`, rather than for torsion sheaves over a finite ring; likewise the
+  description of constant sheaves on a normal scheme holds for an arbitrary value `M`, since the
+  strict henselisation of a normal local ring is a normal domain.
+- Finite presentability of constructible sheaves uses a presentation as a cokernel of a map
+  between finite sums of extensions by zero `v_! Λ` along étale maps from affine schemes
+  [Stacks 095N]; these are finitely presentable [Stacks 0738], and finitely presentable objects
+  are closed under finite colimits.
+- For the Noetherian approximation, `U` is written as a cofiltered limit of schemes of finite
+  type over `ℤ` with affine transition maps [Stacks 01ZA] and the finitely many étale objects,
+  sections and relations presenting `C` descend to one stage `U'`; only this stage is recorded,
+  not the inverse system. The embedding is then pulled back along `U ⟶ U'`: pullback is exact,
+  commutes with finite sums and with pushforward along finite morphisms
+  (`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isFinite`), and preserves constant sheaves.
 -/
 
 @[expose] public section
@@ -173,13 +190,7 @@ theorem Etale.isIso_unit_constantSheaf_of_isOpenImmersion_of_genericPoint
 /-- **Constant sheaves on a normal scheme.** Let `Y` be an integral scheme all of whose local
 rings are integrally closed, `g : Spec K ⟶ Y` the inclusion of its generic point and `M` a
 `Λ`-module. Then the unit `M_Y ⟶ g_* g^* M_Y = g_* M_{Spec K}` is an isomorphism; the same
-holds for the inclusion of a nonempty open subscheme.
-
-The blueprint states this for a finite abelian group `E`; the proof (the strict henselisation
-of a normal local ring is a normal domain, so the generic fibre of `Spec 𝒪ˢʰ_{Y,ȳ}` is
-irreducible) applies to an arbitrary value `M`.
-(blueprint: lem-weil-pbc-normal-constant-generic)
--/
+holds for the inclusion of a nonempty open subscheme. -/
 @[stacks 09Z5]
 theorem Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed {Y : Scheme.{u}} [IsIntegral Y]
     (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y)) (M : ModuleCat.{u + 1} Λ) :
@@ -224,15 +235,7 @@ attribute [local instance] Cardinal.fact_isRegular_aleph0 in
 /-- **Constructible sheaves are finitely presentable.** On a quasi-compact quasi-separated
 scheme `X`, with `Λ` Noetherian, a constructible sheaf of `Λ`-modules `F` is a finitely
 presentable object of the category of sheaves: `Hom(F, -)` commutes with filtered colimits
-(indexed by small categories), i.e. every morphism from `F` to a filtered colimit factors
-through a stage, and two such factorisations agree at a later stage.
-
-By Stacks 095N, `F` is a cokernel of a map between finite sums of extensions by zero `v_! Λ`
-along étale maps from affine schemes; these are finitely presentable
-(`AlgebraicGeometry.Etale.isFinitelyPresentable_etaleLowerShriek_constantSheaf`, by Stacks 0738),
-and finitely presentable objects are closed under finite colimits.
-(blueprint: lemma-finiteness-small-etale-topoi--1)
--/
+(indexed by small categories). -/
 @[stacks 09Z4]
 theorem Etale.isFinitelyPresentable_of_isConstructibleSheaf [IsNoetherianRing Λ]
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
@@ -263,9 +266,7 @@ theorem Etale.isFinitelyPresentable_of_isConstructibleSheaf [IsNoetherianRing Λ
 /-- **The finite-pushforward embedding over a Noetherian base.** A constructible sheaf of
 `Λ`-modules `C` on a Noetherian scheme `U` admits a monomorphism
 `C ⟶ ⨁ᵢ (hᵢ)_* Mᵢ` into a finite direct sum of pushforwards of constant sheaves with finitely
-generated values `Mᵢ` along finite morphisms `hᵢ : Vᵢ ⟶ U`, for `Λ` noetherian.
-(blueprint: lemma-finiteness-small-etale-topoi--3)
--/
+generated values `Mᵢ` along finite morphisms `hᵢ : Vᵢ ⟶ U`, for `Λ` noetherian. -/
 @[stacks 09Z6]
 theorem Etale.exists_mono_biproduct_lowerStar_of_isNoetherian [IsNoetherianRing Λ]
     {U : Scheme.{u}} [IsNoetherian U]
@@ -307,11 +308,7 @@ theorem Etale.exists_isNoetherian_upperStar_iso_of_isNoetherian {U : Scheme.{u}}
 
 /-- **Descent of a constructible sheaf to a Noetherian scheme.** A constructible sheaf of
 `Λ`-modules on a quasi-compact quasi-separated scheme `U`, for `Λ` noetherian, is the pullback
-of a constructible sheaf on a Noetherian scheme `U'` along some morphism `U ⟶ U'`: its strata
-are constructible and its finitely generated stalks finitely presented, so write `U` as a
-cofiltered limit of schemes of finite type over `ℤ` with affine transition maps [Stacks 01ZA] and
-descend the finitely many étale objects, sections and relations presenting `C` to one stage.
-This is Step 2 of `lemma-finiteness-small-etale-topoi--3`. -/
+of a constructible sheaf on a Noetherian scheme `U'` along some morphism `U ⟶ U'`. -/
 theorem Etale.exists_isNoetherian_upperStar_iso [IsNoetherianRing Λ] {U : Scheme.{u}}
     [CompactSpace U]
     [QuasiSeparatedSpace U] (C : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -342,11 +339,7 @@ theorem Etale.exists_isNoetherian_upperStar_iso [IsNoetherianRing Λ] {U : Schem
 
 /-- **Pulling back a finite-pushforward embedding.** If `C'` on `U'` embeds into a finite sum
 of pushforwards of constant sheaves along finite, finitely presented morphisms, then so does
-its pullback along any `ν : U ⟶ U'`: pullback is exact, commutes with finite sums, and with
-pushforward along finite morphisms (`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isFinite`),
-and it preserves constant sheaves. 
-(blueprint: lemma-finiteness-small-etale-topoi--3)
--/
+its pullback along any `ν : U ⟶ U'`. -/
 theorem Etale.exists_mono_biproduct_lowerStar_upperStar {U U' : Scheme.{u}} (ν : U ⟶ U')
     (C' : Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {r : ℕ} (V : Fin r → Scheme.{u})
     (h : ∀ i, V i ⟶ U') [∀ i, IsFinite (h i)] [∀ i, LocallyOfFinitePresentation (h i)]
@@ -373,14 +366,7 @@ end Auxiliary
 of `Λ`-modules `C` on a quasi-compact quasi-separated scheme `U` is the pullback
 `ν^* C' ≅ C` of a constructible sheaf `C'` on a Noetherian scheme `U'` along a morphism
 `ν : U ⟶ U'`, and `C'` admits a monomorphism into a finite direct sum of pushforwards of
-constant sheaves with finitely generated values along finite, finitely presented morphisms.
-
-The blueprint takes `U'` to be a stage `U_λ` of an inverse system `U = lim U_λ` of Noetherian
-schemes with affine transition maps; only the stage is used afterwards, so the inverse system
-is not recorded. That the pullback of the embedding is an embedding of `C` is
-`AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar`.
-(blueprint: lemma-finiteness-small-etale-topoi--3)
--/
+constant sheaves with finitely generated values along finite, finitely presented morphisms. -/
 theorem Etale.exists_isNoetherian_mono_biproduct_lowerStar [IsNoetherianRing Λ] {U : Scheme.{u}}
     [CompactSpace U]
     [QuasiSeparatedSpace U] (C : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -400,10 +386,7 @@ theorem Etale.exists_isNoetherian_mono_biproduct_lowerStar [IsNoetherianRing Λ]
 `Λ`-modules `C` on a quasi-compact quasi-separated scheme `U` admits a monomorphism
 `C ⟶ ⨁ᵢ (hᵢ)_* Mᵢ` into a finite direct sum of pushforwards of constant sheaves with finitely
 generated values `Mᵢ` along finite and finitely presented morphisms `hᵢ : Vᵢ ⟶ U`, for `Λ`
-noetherian. The blueprint states this for torsion sheaves, over a finite ring `Λ`, where the
-`Mᵢ` are finite.
-(blueprint: lemma-finiteness-small-etale-topoi--3)
--/
+noetherian. -/
 @[stacks 09Z7]
 theorem Etale.exists_mono_biproduct_lowerStar [IsNoetherianRing Λ] {U : Scheme.{u}}
     [CompactSpace U]

@@ -9,10 +9,15 @@ module
 public import WeilConjectures.LinearAlgebra.IdempotentCharpoly
 import Mathlib.Tactic.NoncommRing
 
-/-! # Multiplicativity of complementary idempotent determinant polynomials
+/-!
+# Multiplicativity of complementary idempotent determinant polynomials
 
-Source: Stacks Project, Tag 09XI, proof of (3)⇒(1).
-(blueprint: lem-weil-pbc-idempotent-charpoly-mul-complement)
+For an idempotent `P` commuting with `T`, the product of `idempotentCharpoly T P` and
+`idempotentCharpoly T (1 - P)` is the characteristic polynomial of `T`.
+
+## References
+
+* [Stacks Project, Tag 09XI](https://stacks.math.columbia.edu/tag/09XI)
 -/
 
 @[expose] public section
@@ -24,10 +29,7 @@ namespace Matrix
 variable {A : Type u} [CommRing A] {n : Type v} [Fintype n] [DecidableEq n]
 
 /-- The two complementary determinant factors multiply to the ambient characteristic
-polynomial. Source: Stacks Project, Tag 09XI, proof of (3)⇒(1).
-(blueprint: lem-weil-pbc-idempotent-charpoly-mul-complement)
-Proof: put Q=1-P. The characteristic matrix commutes with P, P²=P, and PQ=QP=0.
-Thus `(Q+(X-T)P)(P+(X-T)Q)=X-T`. Take determinants. -/
+polynomial. -/
 theorem idempotentCharpoly_mul_complement (T P : Matrix n n A)
     (hP : P * P = P) (hTP : T * P = P * T) :
     idempotentCharpoly T P * idempotentCharpoly T (1 - P) = T.charpoly := by

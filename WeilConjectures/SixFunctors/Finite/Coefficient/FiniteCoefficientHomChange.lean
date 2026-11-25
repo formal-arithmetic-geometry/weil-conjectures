@@ -28,11 +28,14 @@ import all WeilConjectures.SixFunctors.Finite.Hom.FiniteHomTensorAssociatorModel
 
 /-! # Finite coefficient change for internal Hom
 
-Source: blueprint sec-six-functors/sk-prop-sf-biduality-general,
-node lemma-change-coefficients-internal-hom--1 (blueprint:
-lemma-change-coefficients-internal-hom--1). Indices n and m below denote exponents n + 1 and m + 1;
-thus every positive exponent, including the identity quotient, occurs. All comparison maps are
-closed transposes of reduced evaluation, never choices of arbitrary arrows.
+Cocycle conditions for the internal-Hom comparison maps of a chain of coefficient changes, and
+their compatibility with evaluation, transposition and composition.
+
+## Implementation details
+
+Indices `n` and `m` denote exponents `n + 1` and `m + 1`, so every positive exponent, including
+the identity quotient, occurs. All comparison maps are closed transposes of reduced evaluation,
+never choices of arbitrary arrows.
 -/
 
 @[expose] public noncomputable section
@@ -48,9 +51,8 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
-/-- Coherence under composition of coefficient functors, with all three canonical arrows.
-Source: blueprint displayed A to B to C equation (blueprint:
-lemma-change-coefficients-internal-hom--1). -/
+/-- The internal-Hom comparison maps `v`, `w`, `z` of coefficient functors `F`, `G` and
+`J ≅ F ⋙ G` are coherent: `z` is the composite of `G.map v` and `w`, transported along `α`. -/
 def FiniteHomQuotientCocycleAux
     {A B C : Type a} [Category.{b} A] [Category.{b} B] [Category.{b} C]
     (HA : Aᵒᵖ × A ⥤ A) (HB : Bᵒᵖ × B ⥤ B) (HC : Cᵒᵖ × C ⥤ C)
@@ -62,8 +64,8 @@ def FiniteHomQuotientCocycleAux
     G.map (v K M) ≫ w (F.obj K) (F.obj M) ≫
       HC.map (Prod.mkHom (α.inv.app K).op (α.hom.app M))
 
-/-- The cocycle for canonical transposes, with the quotient diagram's data shared.
-Source: blueprint A to B to C equation (blueprint: lemma-change-coefficients-internal-hom--1). -/
+/-- The comparison maps of `S` satisfy the cocycle condition `FiniteHomQuotientCocycleAux`
+for every composite `r ≤ m ≤ n` of quotient maps starting at `h`. -/
 def FiniteHomQuotientClosedData.Cocycle
     {C : ℕ → Type a} [∀ n : ℕ, Category.{b} (C n)]
     {H : ∀ n : ℕ, (C n)ᵒᵖ × C n ⥤ C n}

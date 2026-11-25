@@ -13,8 +13,9 @@ public import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-! # Constant-scalar tensor and inverse-image comparison
 
-Source: Stacks Project, Tags 07A4 and 07A6.
-(blueprint: def-sf-finite-scalar-pullback-comparison).
+## References
+
+* [Stacks, Tags 07A4 and 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -30,9 +31,8 @@ open CategoryTheory.Functor
 
 namespace WeilConjectures
 
-/-- Inverse image comparison determined by the normalized direct-image comparison.
-Source: Stacks Tag 07A6 and uniqueness of adjoints
-(blueprint: def-sf-finite-scalar-pullback-comparison). -/
+/-- The inverse image comparison determined by the normalized direct-image comparison, via
+uniqueness of adjoints. -/
 def finiteScalarPullbackComparison (R : Type u) [CommRing R] [Finite R]
     {X Y : Scheme.{u}} (p : X ⟶ Y) :
     (sfIntrinsicDerivedEquivalence Y R).functor ⋙
@@ -65,9 +65,7 @@ def finiteScalarPullbackComparison (R : Type u) [CommRing R] [Finite R]
   have : IsIso α := isIso_inverseMate_of_equivalences a b r
   exact asIso α
 
-/-- The intrinsic tensor-pullback map in curried bifunctor notation.
-Source: Stacks Tag 07A4
-(blueprint: def-sf-finite-scalar-pullback-comparison). -/
+/-- The intrinsic tensor-pullback map in curried bifunctor notation. -/
 def finiteScalarCurriedTensorPullback (R : Type u) [CommRing R] [Finite R]
     {X Y : Scheme.{u}} (p : X ⟶ Y)
     (aX : ProEtaleTensorModel X (proEtaleConstantRing X R))

@@ -44,12 +44,8 @@ same constituents: the graded pieces of a filtration of `V` determine the consti
 - `Representation.CompositionSeries.constituentsLE_exteriorPower_semisimplification` and its primed
   version: `⋀ⁿ V` and `⋀ⁿ V^ss` have the same constituents.
 
-## Blueprint
-
-- `lemma-tensor-exterior-powers-filtered-representations--2`,
-`lemma-tensor-exterior-powers-filtered-representations--3`: the exterior power of a
-  filtered representation, through its constituents. The full filtration with graded pieces
-  `⨂ᵢ ⋀^{nᵢ} A_i` is in `WeilConjectures.RepresentationTheory.ExteriorPowerFiltration`.
+The full filtration of the exterior power of a filtered representation, with graded pieces
+`⨂ᵢ ⋀^{nᵢ} A_i`, is in `WeilConjectures.RepresentationTheory.ExteriorPowerFiltration`.
 -/
 
 @[expose] public section
@@ -106,8 +102,7 @@ theorem map_mem_countSpan {f : V →ₗ[k] V} (hf : ∀ x ∈ P, f x ∈ P) {j :
 
 /-- **Perturbing a wedge by vectors of `P`.** If `a` has at least `j` entries in `P` on a set `J`
 of indices, and `y` is a family of vectors of `P` vanishing on `J`, then
-`ι(a + y) - ι(a)` lies in the next filtration step `F_{j+1}`: expanding multilinearly, every other
-term has an extra entry in `P`, or a zero entry. -/
+`ι(a + y) - ι(a)` lies in the next filtration step `F_{j+1}`. -/
 theorem ιMulti_add_sub_ιMulti_mem_countSpan {j : ℕ} (a y : Fin n → V) (J : Finset (Fin n))
     (hJ : j ≤ J.card) (haJ : ∀ i ∈ J, a i ∈ P) (hyJ : ∀ i ∈ J, y i = 0) (hy : ∀ i, y i ∈ P) :
     ιMulti k n (a + y) - ιMulti k n a ∈ countSpan P n (j + 1) := by
@@ -217,9 +212,7 @@ noncomputable def toGraded {j l : ℕ} (h : j + l = n) :
   Submodule.mkQ _ ∘ₗ (wedgeSection n s h).codRestrict _ (wedgeSection_mem_countSpan n s h)
 
 variable {s} in
-/-- `u ∧ s(x̄)` exhausts the graded piece `F_j ⧸ F_{j+1}`: a wedge with exactly `j` entries in `P`
-is, modulo `F_{j+1}`, the wedge of these entries with the sections of the classes of the others,
-up to a sign. -/
+/-- The wedges `u ∧ s(x̄)` exhaust the graded piece `F_j ⧸ F_{j+1}`. -/
 theorem toGraded_surjective (hs : ∀ x, P.mkQ (s x) = x) {j l : ℕ} (h : j + l = n) :
     Function.Surjective (toGraded n s h) := by
   classical
@@ -305,8 +298,7 @@ theorem sum_finrank_graded_add [FiniteDimensional k V] (m : ℕ) :
       (Submodule.comapSubtypeEquivOfLe (countSpan_succ_le P n m)).finrank_eq]
 
 /-- **The graded pieces of the filtration of `⋀ⁿ V`**: for a finite-dimensional `V`, the map
-`⋀ʲ P ⊗ ⋀ˡ (V ⧸ P) → F_j ⧸ F_{j+1}` is bijective. It is surjective, and the dimensions agree:
-`∑ⱼ (dim P choose j) (dim V/P choose n - j) = (dim V choose n)` (Vandermonde). -/
+`⋀ʲ P ⊗ ⋀ˡ (V ⧸ P) → F_j ⧸ F_{j+1}` is bijective. -/
 theorem toGraded_bijective [FiniteDimensional k V] (hs : ∀ x, P.mkQ (s x) = x) {j l : ℕ}
     (h : j + l = n) : Function.Bijective (toGraded n s h) := by
   set p := Module.finrank k P
@@ -373,8 +365,7 @@ theorem quotient_apply_mkQ (w : W) (x : V) :
     P.quotient w (P.toSubmodule.mkQ x) = P.toSubmodule.mkQ (ρ w x) :=
   rfl
 
-/-- The map `⋀ʲ P ⊗ ⋀ˡ (V ⧸ P) → F_j ⧸ F_{j+1}` is equivariant: changing `ρ(w) s(x̄)` into
-`s(ρ(w) x̄)` changes the wedge by an element of `F_{j+1}`. -/
+/-- The map `⋀ʲ P ⊗ ⋀ˡ (V ⧸ P) → F_j ⧸ F_{j+1}` is equivariant. -/
 theorem toGraded_comp_map (s : V ⧸ P.toSubmodule →ₗ[k] V) (hs : ∀ x, P.toSubmodule.mkQ (s x) = x)
     {j l : ℕ} (h : j + l = n) (w : W) :
     exteriorPower.toGraded n s h ∘ₗ ((P.toRepresentation.exteriorPower j).tprod
@@ -421,8 +412,7 @@ theorem toGraded_comp_map (s : V ⧸ P.toSubmodule →ₗ[k] V) (hs : ∀ x, P.t
 
 /-- **The graded pieces of the exterior power of a representation.** For a subrepresentation `P`
 of a finite-dimensional representation `ρ`, the `j`-th graded piece `F_j ⧸ F_{j+1}` of the
-filtration of `⋀ⁿ V` is equivalent to `⋀ʲ P ⊗ ⋀ˡ (V ⧸ P)`, `j + l = n`.
-(blueprint: `lemma-tensor-exterior-powers-filtered-representations--2`) -/
+filtration of `⋀ⁿ V` is equivalent to `⋀ʲ P ⊗ ⋀ˡ (V ⧸ P)`, `j + l = n`. -/
 noncomputable def exteriorPowerGradedEquiv [FiniteDimensional k V] {j l : ℕ} (h : j + l = n) :
     ((P.toRepresentation.exteriorPower j).tprod (P.quotient.exteriorPower l)).Equiv
       ((P.exteriorPowerFiltration n j).subquotient (P.exteriorPowerFiltration n (j + 1))) :=
@@ -493,7 +483,7 @@ namespace ConstituentsLE
 variable {V'' : Type*} [AddCommGroup V''] [Module k V''] {τ : Representation k W V''}
 
 /-- The constituents of `⋀ⁿ V` are constituents of the pieces `⋀ʲ P ⊗ ⋀ⁿ⁻ʲ (V ⧸ P)`, for a
-subrepresentation `P`. (blueprint: `lemma-tensor-exterior-powers-filtered-representations--2`) -/
+subrepresentation `P`. -/
 theorem exteriorPower_of_tprod [FiniteDimensional k V] (P : Subrepresentation ρ) (n : ℕ)
     (h : ∀ j ≤ n, ConstituentsLE
       ((P.toRepresentation.exteriorPower j).tprod (P.quotient.exteriorPower (n - j))) τ) :
@@ -528,9 +518,7 @@ theorem exteriorPower_of_subrepresentation [FiniteDimensional k V] [FiniteDimens
 
 /-- The constituents of the exterior powers of a representation with a finite filtration
 `0 = c₀ ≤ c₁ ≤ ⋯ ≤ c_t = A` only depend on the graded pieces: if `d` is another such filtration
-of `B ⊆ V'` with equivalent graded pieces, every constituent of `⋀ⁿ A` is one of `⋀ⁿ B`.
-(blueprint: `lemma-tensor-exterior-powers-filtered-representations--2`,
-`lemma-tensor-exterior-powers-filtered-representations--3`) -/
+of `B ⊆ V'` with equivalent graded pieces, every constituent of `⋀ⁿ A` is one of `⋀ⁿ B`. -/
 theorem exteriorPower_of_chain [FiniteDimensional k V] [FiniteDimensional k V'] {t : ℕ}
     (c : Fin (t + 1) → Subrepresentation ρ) (d : Fin (t + 1) → Subrepresentation σ)
     (hc : ∀ i : Fin t, c i.castSucc ≤ c i.succ) (hd : ∀ i : Fin t, d i.castSucc ≤ d i.succ)
@@ -659,9 +647,7 @@ private theorem exteriorPower_ge_of_eq_top {V' : Type*} [AddCommGroup V'] [Modul
   exact ConstituentsLE.of_equiv (Subrepresentation.topEquiv.exteriorPower n)
 
 /-- **The exterior powers of a representation and of its semisimplification have the same
-constituents**, one direction: every constituent of `⋀ⁿ V` is a constituent of `⋀ⁿ V^ss`.
-(blueprint: `lemma-tensor-exterior-powers-filtered-representations--2`,
-`lemma-tensor-exterior-powers-filtered-representations--3`) -/
+constituents**, one direction: every constituent of `⋀ⁿ V` is a constituent of `⋀ⁿ V^ss`. -/
 theorem constituentsLE_exteriorPower_semisimplification (n : ℕ) :
     ConstituentsLE (ρ.exteriorPower n) (s.semisimplification.exteriorPower n) := by
   have h := ConstituentsLE.exteriorPower_of_chain s.series
@@ -672,9 +658,7 @@ theorem constituentsLE_exteriorPower_semisimplification (n : ℕ) :
     (exteriorPower_ge_of_eq_top (directSumFiltration_eq_top _) n))
 
 /-- **The exterior powers of a representation and of its semisimplification have the same
-constituents**, the other direction: every constituent of `⋀ⁿ V^ss` is a constituent of `⋀ⁿ V`.
-(blueprint: `lemma-tensor-exterior-powers-filtered-representations--2`,
-`lemma-tensor-exterior-powers-filtered-representations--3`) -/
+constituents**, the other direction: every constituent of `⋀ⁿ V^ss` is a constituent of `⋀ⁿ V`. -/
 theorem constituentsLE_exteriorPower_semisimplification' (n : ℕ) :
     ConstituentsLE (s.semisimplification.exteriorPower n) (ρ.exteriorPower n) := by
   have h := ConstituentsLE.exteriorPower_of_chain

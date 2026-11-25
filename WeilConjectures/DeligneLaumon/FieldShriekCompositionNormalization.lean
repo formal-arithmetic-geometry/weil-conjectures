@@ -11,9 +11,18 @@ public import WeilConjectures.Compactification.Refinement
 
 /-! # Proper/open normalization for the compact-support compositor
 
-The completed-ring arrows and the integral normalization predicate from Stacks 0F7J.
-These definitions are shared by construction and coefficient compatibility.
-(blueprint: def-zl-field-shriek-composition-normalization).
+The completed-ring arrows (pullback-square and open-restriction comparisons, the
+proper/open map, the open compositor) and the normalization predicate for refinements of
+compactifications, used to build the compact-support compositor.
+
+## Implementation details
+
+These definitions are shared by the construction of the compositor and by its coefficient
+compatibility.
+
+## References
+
+* [Stacks Project, Tags 0F7J and 0F7B]
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +37,7 @@ section Completed
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The pullback square comparison made from the canonical completed compositors.
-Source: Stacks 0F7J, proper/open square
-(blueprint: lem-zl-field-shriek-composition-qcqs). -/
+/-- The pullback square comparison made from the canonical completed compositors. -/
 def sfCompositionPullSquare {V T Y S : Scheme.{u}}
     (b : V ⟶ T) (r : V ⟶ Y) (p : T ⟶ S) (i : Y ⟶ S)
     (w : b ≫ p = r ≫ i) :
@@ -41,9 +48,7 @@ def sfCompositionPullSquare {V T Y S : Scheme.{u}}
     geometricPullComposition (completed l E) b p (completedPull_comp l E b p)
 
 /-- The open restriction comparison: geometric exchange, then the inverse open unit.
-The unit proof is supplied by the statement, rather than assumed as a geometric
-hypothesis. Source: Stacks 0F7J, proper/open comparison
-(blueprint: lem-zl-field-shriek-composition-qcqs). -/
+The invertibility of the open unit is taken as an argument. -/
 def sfCompositionLambda {V T Y S : Scheme.{u}}
     (b : V ⟶ T) (r : V ⟶ Y) (p : T ⟶ S) (i : Y ⟶ S)
     [IsOpenImmersion b] (w : b ≫ p = r ≫ i)
@@ -62,8 +67,7 @@ def sfCompositionLambda {V T Y S : Scheme.{u}}
             ((completed l E).ring T) ((completed l E).pull p)).counit.app _) ≫
         @inv _ _ _ _ ((openDerivedAdjunction (completed l E) b).unit.app N) hη)
 
-/-- The proper/open map is the specified open adjunct of inverse restriction.
-Source: Stacks 0F7J and 0F7B (blueprint: lem-zl-field-shriek-composition-qcqs). -/
+/-- The proper/open map is the specified open adjunct of inverse restriction. -/
 def sfCompositionGamma {V T Y S : Scheme.{u}}
     (b : V ⟶ T) (r : V ⟶ Y) (p : T ⟶ S) (i : Y ⟶ S)
     [IsOpenImmersion b] [IsOpenImmersion i] (w : b ≫ p = r ≫ i)
@@ -77,8 +81,7 @@ def sfCompositionGamma {V T Y S : Scheme.{u}}
   ((openDerivedAdjunction (completed l E) i).homEquiv _ _).symm
     (@inv _ _ _ _ (sfCompositionLambda l E b r p i w N hη) hLambda)
 
-/-- The normalized open compositor, conjugate to composition of open restriction.
-Source: Stacks 0F7J (blueprint: lem-zl-field-shriek-composition-qcqs). -/
+/-- The normalized open compositor, conjugate to composition of open restriction. -/
 def sfCompositionOpenComp {X V T : Scheme.{u}} (c : X ⟶ V) (b : V ⟶ T)
     [IsOpenImmersion c] [IsOpenImmersion b] :
     (openExtension (completed l E) c).mapDerivedCategory ⋙
@@ -89,8 +92,7 @@ def sfCompositionOpenComp {X V T : Scheme.{u}} (c : X ⟶ V) (b : V ⟶ T)
     (openDerivedAdjunction (completed l E) (c ≫ b))
     (geometricPullComposition (completed l E) c b (completedPull_comp l E c b)).symm
 
-/-- Equality transport for exact completed open extension.
-Source: Stacks 0F7J, a=bc (blueprint: lem-zl-field-shriek-composition-qcqs). -/
+/-- Equality transport for exact completed open extension. -/
 def sfCompositionOpenCongr {X T : Scheme.{u}} {a b : X ⟶ T}
     [IsOpenImmersion a] [IsOpenImmersion b] (w : a = b) :
     (openExtension (completed l E) a).mapDerivedCategory ≅
@@ -98,10 +100,8 @@ def sfCompositionOpenCongr {X T : Scheme.{u}} {a b : X ⟶ T}
   subst b
   exact Iso.refl _
 
-/-- The actual compatible-tower composition, before rationalizing any Hom group.
-The factors are Rq_* Gamma c_!, proper composition, and open composition a=bc.
-Source: Stacks 0F7J, the displayed four equalities
-(blueprint: lem-zl-field-shriek-composition-qcqs). -/
+/-- The compatible-tower composition, before rationalizing any Hom group: the composite
+of `Rq_* Γ c_!`, proper composition, and open composition `a = bc`. -/
 def sfCompletedCompositionOnTower {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     (d : Compactification g) (e : Compactification (f ≫ d.i))
     (K : DerivedCategory (scalarReductionSource l E X))
@@ -124,8 +124,7 @@ def sfCompletedCompositionOnTower {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ 
 
 /-- Normalization of a compactification-refinement comparison. The open adjunct is
 fixed by the proper counit and the open unit, and its inverse is pushed forward
-using the canonical proper compositor. Source: Stacks 0F7J, independence of choices
-(blueprint: lem-zl-field-shriek-composition-qcqs). -/
+using the canonical proper compositor. -/
 def SfCompletedRefinementSpec {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c.Refinement d)
     (K : DerivedCategory (scalarReductionSource l E X))

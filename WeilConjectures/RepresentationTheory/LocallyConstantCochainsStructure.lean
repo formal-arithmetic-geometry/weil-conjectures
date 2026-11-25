@@ -16,8 +16,20 @@ import WeilConjectures.RepresentationTheory.HomogeneousInhomogeneousContinuousCo
 
 /-!
 # Construction of locally constant inhomogeneous cochains
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed differential.
-(blueprint: lem-sc-locally-constant-cochains-structure).
+
+The complex of locally constant inhomogeneous cochains of a discrete `ℤ`-representation of a
+profinite group, as a functor to cochain complexes of abelian groups.
+
+## Implementation details
+
+The action face preserves local constancy because the cochain is locally constant and
+stabilizers are open. The square-zero relation is transported from Mathlib's homogeneous
+cochain complex via `exists_homogeneousCochains_inhomogeneous_coordinates`, after giving the
+coefficient module the discrete topology.
+
+## References
+
+* [Stacks Project, Tag 0DVG](https://stacks.math.columbia.edu/tag/0DVG)
 -/
 
 @[expose] public section
@@ -152,32 +164,11 @@ private noncomputable abbrev lcFunctor
     ext c t
     rfl
 
-/-- The locally constant integer cochain complex has natural additive coordinates.
-
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed differential,
-and the construction part of lem-sc-locally-constant-cochains-exact.
-(blueprint: lem-sc-locally-constant-cochains-structure).
-
-Proof: Take degree n to be the additive group of locally constant functions
-from G^n to the carrier of E(M). Define the differential by the formula below.
-The non-action faces preserve local constancy by continuous precomposition
-with the projections and adjacent multiplication maps. For the action face,
-fix a point (g_0,t). The cochain is constant with value m near t. On the open
-coset g_0 Stab(m), the action on m is constant, so this face is locally constant.
-All faces are additive in the coefficient, and so is their signed sum.
-To prove square-zero, give the coefficient module its discrete topology and regard
-its representation as a topological representation (each action map is continuous).
-Use exists_homogeneousCochains_inhomogeneous_coordinates to identify our explicit
-differential with the differential of Mathlib's homogeneous complex. Apply that
-complex's square-zero equation and transport it through the additive coordinates.
-The coefficient topology does not change the locally constant function type.
-These additive maps and their square-zero relation define the complex.
-Postcompose cochains with E(f). Equivariance gives commutation with the
-action face, and additivity gives commutation with the signed sum, hence
-these are complex morphisms. Identity and composition hold pointwise.
-This defines the functor C on A; take identity additive coordinates e.
-The two required equations are then the definitions of the maps and
-of the differential. This construction does not assert exactness. -/
+/-- For a compact totally disconnected group `G` and an abelian category `A` equivalent to
+discrete `ℤ`-representations of `G`, there is a functor `C` from `A` to cochain complexes of
+abelian groups whose degree `n` term is identified with the locally constant cochains
+`G^n → E M`, compatibly with morphisms, and whose differential is the inhomogeneous
+differential. -/
 theorem exists_locallyConstantCochains_structure
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

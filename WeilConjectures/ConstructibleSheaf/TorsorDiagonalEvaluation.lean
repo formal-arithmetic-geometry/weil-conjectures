@@ -13,8 +13,21 @@ import WeilConjectures.ConstructibleSheaf.ConstantModuleLocallyConstant
 /-!
 # Evaluation on the diagonal section of a torsor
 
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R.
-(blueprint: lem-weil-pbc-torsor-diagonal-evaluation)
+For a finite Galois cover `c.P → V`, evaluating equivariant sections on the graph section
+identifies the restriction to `c.P` of the equivariant module presheaf with the presheaf
+underlying the constant module sheaf.
+
+## Implementation details
+
+For `W` étale over `c.P`, the torsor isomorphism identifies `W ×_V c.P` with a disjoint union
+of copies of `W` indexed by `P`; the inverse of evaluation extends a locally constant function
+`t` on `W` by `ρ(g)(t(w))` on the `g`-translate of the graph. Locally constant functions are
+then identified with sections of the constant module sheaf. This avoids sheafifying the
+equivariant presheaf or invoking inverse image.
+
+## References
+
+* [Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R]
 -/
 
 @[expose] public section
@@ -23,25 +36,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme.GaloisCover
 
-/-- The equivariant presheaf restricted upstairs is the presheaf underlying the
-constant module sheaf, naturally in the representation.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R.
-(blueprint: lem-weil-pbc-torsor-diagonal-evaluation)
-
-Proof: For W etale over c.P, evaluate an equivariant function on the graph of
-W.hom in W times_V c.P. The torsor isomorphism identifies this latter scheme
-with the disjoint union of copies of W indexed by P. The inverse extends a
-locally constant function t on W by the formula rho(g)(t(w)) on the translate
-of the graph by g. These copies are open, so the extension is locally constant;
-the action law proves equivariance. Evaluation and extension are inverse and
-linear, including after scalar restriction. Composition of W with an etale
-map and postcomposition with an intertwiner commute with both formulas.
-Locally constant functions on W are the sections of the constant module sheaf:
-the map from the constant presheaf sends a coefficient to its constant function,
-is locally surjective on its open fibers, and is locally injective (on an empty
-object use the empty covering). Sheafification gives this identification.
-This establishes the stated natural presheaf isomorphism, without sheafifying
-the equivariant presheaf or invoking inverse image. -/
+/-- The equivariant presheaf restricted to `c.P` is the presheaf underlying the
+constant module sheaf, naturally in the representation. -/
 theorem equivariantModulePresheaf_diagonal {V : Scheme.{u}} (ℓ : ℕ)
     {P : Type u} [Group P] [Finite P]
     (c : Scheme.GaloisCover (ULift.{u + 1} P) V) :

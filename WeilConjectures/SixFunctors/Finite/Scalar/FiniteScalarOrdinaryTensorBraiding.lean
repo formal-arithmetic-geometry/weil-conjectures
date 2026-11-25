@@ -12,9 +12,21 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Braiding compatibility of the ordinary scalar tensor comparison
 
-Source: the pure-tensor calculation in the finite intrinsic tensor symmetry proof;
-Stacks Project, Tags 00YV, 06YL and 0FPT.
-(blueprint: lem-sf-finite-scalar-ordinary-tensor-braiding).
+The ordinary tensor comparison of finite scalar realization commutes with the braidings.
+
+## Implementation details
+
+The comparison `finiteScalarOrdinaryTensorIso` is expanded into its four defining natural
+isomorphisms. The fixed-scalar sheafification tensorator is braided; the realization
+factorization isomorphism commutes with the braiding by naturality; encoding fixed-scalar
+presheaves as module presheaves commutes sectionwise with the tensor swap. Finally the
+module-sheafification tensor comparison commutes with the swap: precompose with its adjunction
+unit and evaluate on a pure tensor, where its normalization and `moduleTmul_braiding` send both
+routes to the tensor of the two unit sections in reversed order.
+
+## References
+
+- Stacks Project, Tags 00YV, 06YL, 0FPT, 0GMW.
 -/
 
 @[expose] public section
@@ -101,19 +113,7 @@ private theorem scalar_sheafification_braiding
   exact (CochainPullback.moduleTmul_braiding.{u + 1, u + 1, u}
     (R := R) (S.obj M) (S.obj N) V _ _).symm
 
-/-- The constructed ordinary scalar tensor comparison preserves the sheaf braiding.
-Source: Stacks Tags 00YV and 0GMW; the ordinary pure-tensor comparison in
-lem-sf-finite-intrinsic-tensor-symmetry, proof step 2.
-Proof: expand the comparison as its four defining natural isomorphisms. The
-fixed-scalar sheafification tensorator is braided. The realization factorization
-isomorphism commutes with the braiding by naturality. Encoding fixed-scalar
-presheaves as module presheaves commutes sectionwise with the tensor swap.
-Finally the module-sheafification tensor comparison commutes with the swap:
-precompose with its adjunction unit and evaluate on a pure tensor. Its stated
-normalization and moduleTmul_braiding send both routes to the tensor of the two
-unit sections in reversed order. The sheafification adjunction and the tensor
-universal property detect equality. Compose these four squares.
-(blueprint: lem-sf-finite-scalar-ordinary-tensor-braiding). -/
+/-- The ordinary scalar tensor comparison preserves the sheaf braiding. -/
 theorem finiteScalarOrdinaryTensorIso_braiding
     (X : Scheme.{u}) (B : Type u) [CommRing B] [Finite B]
     (M N : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} B))) :

@@ -13,8 +13,21 @@ import all WeilConjectures.SixFunctors.Finite.Hom.FiniteHomTensorChainSquare
 import all WeilConjectures.SixFunctors.Finite.Hom.FiniteHomTensorAssociatorModel
 
 /-! # Composition of the intrinsic finite scalar tensorators
-Source: blueprint lemma-change-coefficients-internal-hom--1, successive quotient paragraph
-(blueprint: lem-coef-finite-hom-intrinsic-tensor-composition).
+
+The normalized intrinsic finite scalar tensorators commute with the prescribed scalar
+associator for successive scalar extensions.
+
+## Implementation details
+
+The quotient calculus supplies normalized ordinary and derived adjunctions; their unit equation
+is extended from K-flat representatives to every complex by naturality along a K-flat
+resolution. Transposing twice identifies the prescribed derived associator with the
+localization of the ordinary adjunction composition map. The ordinary unit sends successive
+scalar generators to the direct generator, since restriction composition is the identity on
+underlying sections, so the chain tensor square follows from the composite adjunction bijection
+and equality on total pure generators. Pasting the three tensor-model squares with this chain
+square and the associator comparison, cancelling the invertible K-flat comparisons and
+resolving both derived inputs gives the result.
 -/
 
 @[expose] public noncomputable section
@@ -316,20 +329,7 @@ private theorem intrinsic_representatives (n : ℕ) (Y : normalizedDVRDerived l 
 
 end Representatives
 
-/-- The normalized tensorators commute with the prescribed scalar associator.
-Source: blueprint lemma-change-coefficients-internal-hom--1, proof of the successive-quotient tensor
-square (blueprint: lem-coef-finite-hom-intrinsic-tensor-composition).
-
-Proof: the quotient calculus supplies normalized ordinary and derived adjunctions.
-Extend its unit equation from K-flat representatives to every complex by naturality
-along a K-flat resolution. Transpose twice to identify the prescribed derived
-associator with the localization of the ordinary adjunction composition map.
-The ordinary unit sends successive scalar generators to the direct generator,
-since restriction composition is the identity on underlying sections. Thus the
-chain tensor square follows by the composite adjunction bijection and equality
-on total pure generators. Paste the three specified tensor-model squares with
-this chain square and the associator comparison. Cancel the invertible K-flat
-comparisons, resolve both arbitrary derived inputs, and use naturality. -/
+/-- The normalized tensorators commute with the prescribed scalar associator. -/
 theorem finiteHomIntrinsic_tensorComposition
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (X : Scheme.{u})

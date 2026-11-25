@@ -31,10 +31,14 @@ import WeilConjectures.DeligneLaumon.BalancedFiniteTower.BalancedFiniteTowerKosz
 
 /-! # Balanced finite-tower comparison with fixed generators
 
-Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL, with the
-strict-tower refinement in proof steps 1--8
-(blueprint: lem-a1-balanced-finite-tower-generator-comparison).
-The index n : ℕ denotes positive exponent n+1. Ordinary pullback is not assumed exact.
+## Implementation details
+
+The index `n : ℕ` denotes the positive exponent `n + 1`. Ordinary pullback is not assumed
+exact.
+
+## References
+
+* [Stacks Project, Tag 03EK, Tag 03EL]
 -/
 
 @[expose] public noncomputable section

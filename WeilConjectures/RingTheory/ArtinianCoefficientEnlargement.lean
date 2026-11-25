@@ -20,8 +20,21 @@ import Mathlib.FieldTheory.PurelyInseparable.Basic
 /-!
 # Generic Artinian coefficient enlargement
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FI, proof after introducing D.
-(blueprint: lem-weil-pbc-artinian-coefficient-enlargement).
+Given a flat local homomorphism `D → S` of Artinian local rings in characteristic `p`, some
+positive power of any element of `S` is captured by an essentially smooth local Artinian
+enlargement `D'` of `D` mapping flatly to `S`.
+
+## Implementation details
+
+If the residue of `x` is algebraic over the residue field of `D`, some `p`-power of it is
+separable; a finite étale lift of that residue and Frobenius on the nilpotent maximal ideal
+put a positive power of `x` in the image. If the residue is transcendental, `D'` is a
+localization of `D[T]` with `T ↦ x`, and `r = 1`. No invertibility hypothesis on `x` is
+needed.
+
+## References
+
+* Stacks Project, Smoothing Ring Maps, Lemma 07FI, proof after introducing D.
 -/
 
 @[expose] public section
@@ -69,22 +82,10 @@ private theorem essentiallySmooth_of_smooth
     (bot_le : (⊥ : Submonoid S) ≤ IsUnit.submonoid S)).restrictScalars R⟩
 
 
-/-- Capture a power of an element in a flat local Artinian coefficient extension.
-Source: Stacks Project, Lemma 07FI, proof after introducing D.
-(blueprint: lem-weil-pbc-artinian-coefficient-enlargement).
-
-Proof: Regard S as a D-algebra via g, and write F and E for their residue fields.
-If the residue of x is algebraic over F, some p-power is separable over F. Apply the
-separable residue lift to get a finite etale local Artinian D-algebra D' with a local
-flat map g' to S and an element d whose residue is that of x raised to this power.
-The maximal ideal of S is nilpotent. A further p-power therefore annihilates g'(d)
-minus that power of x: Frobenius in characteristic p makes the two powers equal.
-The resulting positive power of x belongs to g'(D'), and finite etale implies smooth,
-hence essentially smooth. If the residue is transcendental, localize D[T] at the
-inverse image of the target maximal ideal. The transcendental localization theorem
-gives the local Artinian essentially smooth extension and its local flat evaluation
-map. The image of T is x itself, so exponent one suffices. The algebraic/transcendental
-dichotomy covers every x, including x=0; no invertibility hypothesis is needed. -/
+/-- Let `g : D → S` be a flat local homomorphism of Artinian local rings, with `S` of prime
+characteristic `p`, and let `x : S`. Then there are `r > 0` and an essentially smooth local
+Artinian `D`-algebra `D'` with a flat local homomorphism `g' : D' → S` extending `g` such that
+`x ^ r` lies in the image of `g'`. -/
 theorem exists_artinian_coefficient_enlargement
     (D : Type u) (S : Type v) [CommRing D] [CommRing S]
     [IsLocalRing D] [IsArtinianRing D] [IsLocalRing S] [IsArtinianRing S]

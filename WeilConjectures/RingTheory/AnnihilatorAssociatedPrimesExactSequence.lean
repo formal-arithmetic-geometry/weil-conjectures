@@ -12,8 +12,18 @@ public import Mathlib.Algebra.Exact.Basic
 /-!
 # Associated primes in a short exact sequence over an arbitrary ring
 
-Source: Stacks Project, Algebra, Lemma 02M3 (lemma-ass), first two assertions
-(blueprint: lem-weil-pbc-associated-primes-exact-sequence).
+For a short exact sequence `0 → M' → M → M'' → 0`, we have
+`Ass(M') ⊆ Ass(M) ⊆ Ass(M') ∪ Ass(M'')`, where associated primes are defined via element
+annihilators.
+
+## Implementation details
+
+The surjectivity hypothesis on `g` is not used in the proof; it is kept as part of short
+exactness.
+
+## References
+
+* Stacks Project, Algebra, Lemma 02M3, first two assertions.
 -/
 
 @[expose] public section
@@ -22,22 +32,10 @@ universe uR uSub uMid uQuot
 
 namespace RingTheory
 
-/-- In a short exact sequence, associated primes of the submodule are associated to the
-middle module, whose associated primes belong to those of either outer module.
-An injective linear map also preserves every element annihilator.
-Source: Stacks Project, Algebra, Lemma 02M3, first two assertions and their proof
-(blueprint: lem-weil-pbc-associated-primes-exact-sequence).
-
-Proof (the three elementary steps of the node):
-1. Linearity gives `a • f z' = f (a • z')`; injectivity makes this zero exactly when
-   `a • z' = 0`. Thus annihilators are equal and the first inclusion follows.
-2. Let `q = Ann(z)` be prime. If some `s ∉ q` has `s • z` in the image of `f`, write
-   it as `f z'`. Primality gives `a * s ∈ q` iff `a ∈ q`, so `Ann(s • z) = q`.
-   Step 1 gives `Ann(z') = q`, placing `q` among the submodule's associated primes.
-3. Otherwise every `s ∉ q` has `s • g z ≠ 0`, by exactness. Elements of `q` kill
-   `g z` by linearity, and no element outside `q` does. Thus `Ann(g z) = q` and
-   `q` is associated to the quotient. The two cases prove the second inclusion.
-No Noetherian assumption is used; surjectivity is retained as part of short exactness. -/
+/-- Let `f : M' → M` and `g : M → M''` form a short exact sequence of modules over a
+commutative ring. Then `f` preserves element annihilators, every associated prime of `M'` is
+associated to `M`, and every associated prime of `M` is associated to `M'` or to `M''`. No
+Noetherian hypothesis is needed. -/
 theorem annihilatorAssociatedPrimes_of_shortExact
     {R : Type uR} [CommRing R]
     {M' : Type uSub} [AddCommGroup M'] [Module R M']

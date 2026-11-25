@@ -16,7 +16,24 @@ import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionUnitCriterion
 
 /-! # Completeness of ordinary pullback on the primitive integral domain
 
-Source: Bhatt--Scholze, Lemma 6.5.5; Stacks Project, Tag 099N.
+We show that the ordinary completed-coefficient pullback of a finite-Tor constructible integral
+complex, or of the tensor unit, along a separated morphism of finite type is derived complete.
+
+## Main results
+
+* `finiteTorOrdinaryPullComplete`: ordinary pullback of a primitive integral input is complete.
+
+## Implementation details
+
+Completeness is detected on an affine open/closed tree. On weakly contractible affine charts
+the input has a bounded finite-projective completed-coefficient model; its pullback is again
+bounded finite-projective, hence complete. The tensor unit is identified with the regular
+coefficient sheaf in degree zero, whose pullback is the target regular sheaf.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemmas 6.5.5 and 6.5.9.
+* Stacks Project, Tag 099N.
 -/
 
 @[expose] public noncomputable section
@@ -30,27 +47,9 @@ namespace WeilConjectures.GeneratorReduction
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Ordinary completed-coefficient pullback of a primitive integral input is complete.
-Source: Bhatt--Scholze, Lemmas 6.5.5 and 6.5.9(5); Stacks Tag 099N(5);
-primitive pullback step of lem-sf-primitive-completion-effectivity.
-(blueprint: lem-sf-finite-tor-ordinary-pull-complete).
-
-Proof: for a finite-Tor constructible input, use affine open covers and a finite
-constructible stratification of the residue complex. On weakly contractible affine
-covers of the strata, lift its finite-projective residue model to a bounded
-finite-projective completed-coefficient model. Pull back this model along f.
-Inverse image followed by coefficient extension preserves finite sums, summands,
-and the coefficient unit, so the pulled model is still bounded finite-projective.
-Its quotient tower has the coefficient quotient transitions. The coefficient unit
-is the limit of its surjective quotient tower; finite sums, summands and finite
-cones preserve derived completeness. Thus the pulled model is complete. Pullback
-commutes with the open-closed triangles, giving completeness on each affine open
-of X and hence on X by locality. For the scalar tensor unit, uniqueness of the
-K-flat tensor presentation identifies it with the regular coefficient sheaf in
-degree zero. Ordinary ringed pullback takes that regular sheaf to the target
-regular sheaf, whose surjective quotient tower proves completeness as above.
-Identity morphisms, empty schemes and zero complexes use the same constructions.
-No equality of derived arrows is inferred from finite evaluations. -/
+/-- Ordinary completed-coefficient pullback along a separated, quasi-compact morphism `f` of
+finite type of a finite-Tor constructible integral complex, or of the tensor unit, is
+derived complete. -/
 theorem finiteTorOrdinaryPullComplete {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hs : IsSeparated f) (ht : LocallyOfFiniteType f) (hq : QuasiCompact f)
     (K : DerivedCategory (scalarReductionSource l E Y))

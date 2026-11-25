@@ -20,7 +20,18 @@ public import WeilConjectures.FourierTransform.Defs
 - `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_baseChange`: the transform commutes
   with base change along `S' ⟶ S`.
 
-See `WeilConjectures.FourierTransform.Properties` for the implementation notes.
+## Implementation details
+
+See also `WeilConjectures.FourierTransform.Properties`.
+
+The base change theorem follows from compact-support base change along the cartesian square
+`W ×_{S'} W' ⟶ V ×_S V'`. Since `R(f)_!` is computed with a chosen compactification, the
+comparison goes through independence of the compactification
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`); this is where `[Finite Λ]` enters.
+For the same reason `[QuasiCompact (pullback.snd π π')]` is assumed: compact-support base change
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`) needs the base changed
+morphism `pullback.snd ρ ρ'` to be quasi-compact, which holds as it is a base change of
+`pullback.snd π π'` (`MorphismProperty.of_isPullback`).
 
 -/
 
@@ -74,19 +85,7 @@ naturally in `K`. Both squares
       S' ──g──▶ S           S' ──g──▶ S
 ```
 
-must be **cartesian**; the statement fails for merely commuting squares.
-
-Class: compactification-dependent; decided by independence of the compactification. The
-blueprint proof is formal: compact-support base change along the cartesian square
-`W ×_{S'} W' ⟶ V ×_S V'`. Here `[Finite Λ]` enters solely through independence of the
-compactification (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), since `R(f)_!` is
-computed with a chosen compactification. The same comparison is why
-`[QuasiCompact (pullback.snd π π')]` is assumed: compact-support base change
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap` needs the base changed
-morphism `f' = pullback.snd ρ ρ'` to be quasi-compact, because it goes through
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, and `f'` is quasi-compact as a base change
-of `pullback.snd π π'` (`MorphismProperty.of_isPullback`).
-(sketch blueprint: `proposition-base-change-fourier-inversion--1`) -/
+must be **cartesian**; the statement fails for merely commuting squares. -/
 theorem nonempty_iso_fourierTransform_baseChange [Finite Λ]
     [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
     [LocallyOfFiniteType (pullback.snd π π')] [QuasiCompact (pullback.snd π π')]
