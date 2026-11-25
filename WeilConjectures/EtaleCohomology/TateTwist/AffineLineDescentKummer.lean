@@ -10,10 +10,11 @@ public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescent
 /-!
 # Descent of the degree-zero and degree-one computations on `𝔾ₘ`
 
-The degree-zero and degree-one computations of blueprint `sk-prop-a1-kummer` for the twist
-`Λ(1) = μₙ ⊗ Λ`, in the form of `WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer`
-(for `π = j ≫ p` with `j : G ⟶ 𝔸¹_B` an open complement of the zero section), over a base `B`
-separated and locally of finite type over an arbitrary field `k`:
+The degree-zero and degree-one computations of the cohomology of `𝔾ₘ` with coefficients in the
+twist `Λ(1) = μₙ ⊗ Λ`, in the form of
+`WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer` (for `π = j ≫ p` with
+`j : G ⟶ 𝔸¹_B` an open complement of the zero section), over a base `B` separated and locally
+of finite type over an arbitrary field `k`:
 
 * the unit `Λ_B(1) ⟶ Rp_* Lp^* Λ_B(1)` of `p : 𝔸¹_B ⟶ B` is an isomorphism
   (`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine_of_field`);
@@ -22,6 +23,8 @@ separated and locally of finite type over an arbitrary field `k`:
 * for every `β : Lπ^* Λ_B ≅ Λ_G`, the adjoint `Λ_B ⟶ Rπ_*(Λ(1)[1])` of the Kummer class `κ(t)`
   is an isomorphism on `H⁰`
   (`AlgebraicGeometry.Etale.isIso_homology_zero_homEquiv_kummerClass_of_field`).
+
+## Implementation details
 
 As in `WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescent`, these are reduced to the
 case of an algebraically closed field and a quasi-compact base by base change to the affine
@@ -48,7 +51,7 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- Isomorphisms between cohomology sheaves in a given degree descend along a jointly surjective
-family of morphisms `u_i : U_i ⟶ X`: the pullbacks commute with the cohomology sheaves. -/
+family of morphisms `u_i : U_i ⟶ X`. -/
 theorem isIso_homology_map_of_jointlySurjective {X : Scheme.{u}} {ι : Type u}
     {U : ι → Scheme.{u}} (u : ∀ i, U i ⟶ X) (hu : ∀ x : X, ∃ (i : ι) (y : U i), (u i).base y = x)
     {M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -103,7 +106,7 @@ variable {B B' G G' : Scheme.{u}} (g : B' ⟶ B)
   [HasInvertibleExponent Λ G']
 
 omit [HasInvertibleExponent Λ G'] in
-/-- Base change of the degree-zero clause: for `g : B' ⟶ B` with base change
+/-- Base change of the degree-zero statement: for `g : B' ⟶ B` with base change
 `G' ⟶ G` of the complements of the zero sections, if the derived base change map of
 `π : G ⟶ B` along `g` is an isomorphism at `Λ_G(1)` and the unit
 `Λ_{B'}(1) ⟶ Rπ'_* Lπ'^* Λ_{B'}(1)` is an isomorphism on `H⁰`, then so is the pullback along
@@ -126,7 +129,7 @@ lemma isIso_homology_zero_map_leftDerivedUpperStar_unit_tateObject
 
 -- the composites of derived functors between the derived categories of the two bases are large
 omit [HasInvertibleExponent Λ B] [HasInvertibleExponent Λ B'] in
-/-- Base change of the degree-one clause: for `g : B' ⟶ B` with base change `q : G' ⟶ G` of
+/-- Base change of the degree-one statement: for `g : B' ⟶ B` with base change `q : G' ⟶ G` of
 the complements of the zero sections, if the derived base change map of `π : G ⟶ B` along `g`
 is an isomorphism at `Λ_G(1)` and, for every identification `β' : Lπ'^* Λ_{B'} ≅ Λ_{G'}`, the
 adjoint `Λ_{B'} ⟶ Rπ'_*(Λ(1)[1])` of the Kummer class `κ(t')` is an isomorphism on `H⁰`, then
@@ -209,8 +212,7 @@ variable [Finite Λ] {k : Type u} [Field k] [IsAlgClosed k]
 include aY in
 /-- Over an algebraically closed field and for `Y` quasi-compact: for every identification
 `β : Lπ^* Λ_Y ≅ Λ_G`, the adjoint `Λ_Y ⟶ Rπ_*(Λ(1)[1])` of the Kummer class `κ(t)` is an
-isomorphism on `H⁰`. This is `AlgebraicGeometry.Etale.isIso_homology_zero_kummerClassAdjoint`
-for an arbitrary identification `β`. -/
+isomorphism on `H⁰`. -/
 theorem isIso_homology_zero_homEquiv_kummerClass_of_quasiCompact [QuasiCompact aY]
     (β : (L((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)^*[ModuleCat.{u + 1} Λ])).obj
         (constantComplex Λ Y) ≅ constantComplex Λ G) :
@@ -229,9 +231,7 @@ theorem isIso_homology_zero_homEquiv_kummerClass_of_quasiCompact [QuasiCompact a
 
 include aY hj in
 /-- Over an algebraically closed field and without quasi-compactness assumption on `Y`: the
-unit `Λ_Y(1) ⟶ Rπ_* Lπ^* Λ_Y(1)` of `π : G ⟶ 𝔸¹_Y ⟶ Y` is an isomorphism on `H⁰`. By étale
-base change this may be checked on the affine opens of `Y`, where it is
-`AlgebraicGeometry.Etale.isIso_homology_zero_unit_tateObject_multiplicativeGroup`. -/
+unit `Λ_Y(1) ⟶ Rπ_* Lπ^* Λ_Y(1)` of `π : G ⟶ 𝔸¹_Y ⟶ Y` is an isomorphism on `H⁰`. -/
 theorem isIso_homology_zero_unit_tateObject_multiplicativeGroup_of_isAlgClosed :
     IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map
       ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
@@ -255,9 +255,7 @@ theorem isIso_homology_zero_unit_tateObject_multiplicativeGroup_of_isAlgClosed :
 include aY in
 /-- Over an algebraically closed field and without quasi-compactness assumption on `Y`: for
 every identification `β : Lπ^* Λ_Y ≅ Λ_G`, the adjoint `Λ_Y ⟶ Rπ_*(Λ(1)[1])` of the Kummer
-class `κ(t)` is an isomorphism on `H⁰`. By étale base change this may be checked on the affine
-opens of `Y`, where it is
-`AlgebraicGeometry.Etale.isIso_homology_zero_homEquiv_kummerClass_of_quasiCompact`. -/
+class `κ(t)` is an isomorphism on `H⁰`. -/
 theorem isIso_homology_zero_homEquiv_kummerClass_of_isAlgClosed
     (β : (L((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)^*[ModuleCat.{u + 1} Λ])).obj
         (constantComplex Λ Y) ≅ constantComplex Λ G) :
@@ -284,9 +282,7 @@ theorem isIso_homology_zero_homEquiv_kummerClass_of_isAlgClosed
 omit [HasInvertibleExponent Λ G] in
 include aY in
 /-- Over an algebraically closed field and without quasi-compactness assumption on `Y`: the unit
-`Λ_Y(1) ⟶ Rp_* Lp^* Λ_Y(1)` of the projection `p : 𝔸¹_Y ⟶ Y` is an isomorphism. By étale base
-change this may be checked on the affine opens of `Y`, where it is
-`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine`. -/
+`Λ_Y(1) ⟶ Rp_* Lp^* Λ_Y(1)` of the projection `p : 𝔸¹_Y ⟶ Y` is an isomorphism. -/
 theorem isIso_unit_tateObject_affineLine_of_isAlgClosed :
     IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
       (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).unit.app (tateObject Λ Y 1)) := by
@@ -314,8 +310,8 @@ variable {k : Type u} [Field k] {B : Scheme.{u}} (aB : B ⟶ Spec (.of k))
 
 omit [NeZero (ringChar Λ)] in
 /-- Isomorphisms between cohomology sheaves descend along the base change
-`B ×_k k̄ ⟶ B` to an algebraic closure `k̄` of `k`, which is surjective. The hypothesis may use
-that the exponent of `Λ` is invertible in `k`, which holds as soon as `B` is nonempty. -/
+`B ×_k k̄ ⟶ B` to an algebraic closure `k̄` of `k`; in the hypothesis the exponent of `Λ` may
+be assumed invertible in `k`. -/
 theorem isIso_homology_map_of_algebraicClosure [HasInvertibleExponent Λ B]
     {M N : _root_.DerivedCategory (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : M ⟶ N) (n : ℤ)
@@ -347,9 +343,7 @@ variable [Finite Λ] [IsSeparated aB] [LocallyOfFiniteType aB] [HasInvertibleExp
 include aB hj in
 /-- Over an arbitrary field: for `B` separated and locally of finite type over a field `k` and
 a quasi-compact open immersion `j : G ⟶ 𝔸¹_B` onto the complement of the zero section, the
-unit `Λ_B(1) ⟶ Rπ_* Lπ^* Λ_B(1)` of `π = j ≫ p` is an isomorphism on `H⁰`. After base change
-to an algebraic closure of `k` this is
-`isIso_homology_zero_unit_tateObject_multiplicativeGroup_of_isAlgClosed`. -/
+unit `Λ_B(1) ⟶ Rπ_* Lπ^* Λ_B(1)` of `π = j ≫ p` is an isomorphism on `H⁰`. -/
 theorem isIso_homology_zero_unit_tateObject_multiplicativeGroup_of_field :
     IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map
       ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
@@ -378,8 +372,7 @@ include aB in
 /-- Over an arbitrary field: for `B` separated and locally of finite type over a field `k`, a
 quasi-compact open immersion `j : G ⟶ 𝔸¹_B` onto the complement of the zero section and every
 identification `β : Lπ^* Λ_B ≅ Λ_G`, the adjoint `Λ_B ⟶ Rπ_*(Λ(1)[1])` of the Kummer class
-`κ(t)` is an isomorphism on `H⁰`. After base change to an algebraic closure of `k` this is
-`isIso_homology_zero_homEquiv_kummerClass_of_isAlgClosed`. -/
+`κ(t)` is an isomorphism on `H⁰`. -/
 theorem isIso_homology_zero_homEquiv_kummerClass_of_field
     (β : (L((j ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B)^*[ModuleCat.{u + 1} Λ])).obj
         (constantComplex Λ B) ≅ constantComplex Λ G) :
@@ -410,9 +403,7 @@ theorem isIso_homology_zero_homEquiv_kummerClass_of_field
 omit [HasInvertibleExponent Λ G] in
 include aB in
 /-- Over an arbitrary field: for `B` separated and locally of finite type over a field `k`, the
-unit `Λ_B(1) ⟶ Rp_* Lp^* Λ_B(1)` of the projection `p : 𝔸¹_B ⟶ B` is an isomorphism. After
-base change to an algebraic closure of `k` this is
-`isIso_unit_tateObject_affineLine_of_isAlgClosed`. -/
+unit `Λ_B(1) ⟶ Rp_* Lp^* Λ_B(1)` of the projection `p : 𝔸¹_B ⟶ B` is an isomorphism. -/
 theorem isIso_unit_tateObject_affineLine_of_field :
     IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
       (𝔸(ULift.{u} (Fin 1); B) ↘ B)).unit.app (tateObject Λ B 1)) := by

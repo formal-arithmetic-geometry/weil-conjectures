@@ -16,8 +16,17 @@ import Mathlib.Algebra.Field.ZMod
 /-!
 # Finite étale trace splitting
 
-Source: Stacks Project, etale-cohomology.tex, Section 03SH (section-trace-method),
-Definition 03SE (definition-trace-map).
+For a finite étale morphism `v : V ⟶ U` of degree `d` prime to `ℓ` and a finite locally
+constant sheaf `G` of `ℤ/ℓℤ`-modules on `U`, the unit `G ⟶ v_* v^* G` admits a retraction,
+obtained from the trace map divided by `d`.
+
+## Main results
+
+- `AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction`
+
+## References
+
+- Stacks Project, Section 03SH (trace method) and Definition 03SE (trace map).
 -/
 
 @[expose] public section
@@ -34,24 +43,9 @@ open Etale
 
 /-- **The adjunction unit splits for a prime-to-ℓ finite étale cover.**
 The coefficient field is `ULift.{u + 1} (ZMod ℓ)`, a universe lift of the prime field
-`ℤ/ℓℤ`.
-
-Source: Stacks Project, `etale-cohomology.tex`, Section 03SH (`section-trace-method`),
-the characterization and restriction/trace composite immediately after Definition 03SE
-(`definition-trace-map`).
-(blueprint: split-locally-constant-retraction)
-
-Proof: Finite étale covers split étale locally as finite disjoint unions of copies of the
-base. At a geometric point the number of summands is the cardinality of the geometric
-fibre, hence d by the hypothesis. On a split cover the unit sends a section to the diagonal
-d-tuple, and the trace sums its entries. These maps are coefficient-linear. The trace is
-unchanged by a permutation of the summands, so the local trace maps agree on overlaps
-and glue to a morphism v_*v*G ⟶ G of coefficient-module sheaves. The composite of the unit
-and trace is multiplication by d on every splitting neighbourhood, hence globally by
-sheaf separatedness. Since ℓ is prime and does not divide d, the scalar d is nonzero and
-invertible in ℤ/ℓℤ and in its universe lift. Multiply the trace by its inverse to obtain r.
-Coefficient-linearity gives unit ≫ r = d⁻¹d times the identity, which is the identity.
-This construction applies also to the zero sheaf and to the degree-one cover. -/
+`ℤ/ℓℤ`. If `v : V ⟶ U` is finite étale with connected `V` and all geometric fibres of
+cardinality `d` with `ℓ ∤ d`, then for every finite locally constant sheaf `G` the unit
+`G ⟶ v_* v^* G` has a retraction `r`. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction
     {U V : Scheme.{u}} (ℓ : ℕ) [Fact ℓ.Prime]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))

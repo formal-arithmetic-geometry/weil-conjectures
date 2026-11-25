@@ -10,7 +10,17 @@ import Mathlib.CategoryTheory.Functor.FullyFaithful
 
 /-! # Adjusting an adjunction coordinate on its coefficient unit
 
-Source: diagonal-tower trace (1), finite coefficient identification.
+Given a natural isomorphism `K ≅ P ⋙ H` with `H` an equivalence out of a monoidal category,
+any prescribed isomorphism at an object sent to the tensor unit can be realized by modifying
+the natural isomorphism.
+
+## Implementation details
+
+The discrepancy on `H(V)` is lifted through the fully faithful functor `H`. Transporting `V`
+to the tensor unit, its automorphism is tensored with every object and conjugated by the left
+unitors; at the unit this recovers the original endomorphism since the two unitors agree.
+Conjugating back to `V` and whiskering with `H` and `P` gives the required natural
+isomorphism.
 -/
 
 @[expose] public noncomputable section
@@ -34,16 +44,9 @@ private theorem extendUnitAutomorphism {D : Type*} [Category D] [MonoidalCategor
   rw [← h, hunit]
   simp only [e, Iso.trans_hom, Iso.symm_hom, Iso.hom_inv_id_assoc]
 
-/-- An equivalence from a monoidal category allows any chosen isomorphism on
-one tensor-unit object to be incorporated into a natural comparison.
-
-Source: diagonal-tower trace (1), choice of coefficient/adjunction coordinates
-(blueprint: lem-sfb-finite-p1-unit-adjustment).
-Proof: lift the discrepancy on H(V) through the fully faithful functor H.
-Transport V to the tensor unit, tensor its automorphism with every object,
-and conjugate by the left unitors. At the unit this is the original
-endomorphism by equality of the two unitors. Conjugate back to V and whisker
-with H and P. Naturality at i gives the prescribed component equation. -/
+/-- If `H` is an equivalence out of a monoidal category and `V ≅ 𝟙_ D`, then any natural
+isomorphism `K ≅ P ⋙ H` can be modified so that its component at `U`, followed by `H.map i`,
+is a prescribed isomorphism `u : K.obj U ≅ H.obj V`. -/
 theorem finiteP1_adjust_coordinate_unit
     {C D E : Type*} [Category C] [Category D] [Category E] [MonoidalCategory D]
     (K : C ⥤ E) (P : C ⥤ D) (H : D ⥤ E) [H.IsEquivalence]

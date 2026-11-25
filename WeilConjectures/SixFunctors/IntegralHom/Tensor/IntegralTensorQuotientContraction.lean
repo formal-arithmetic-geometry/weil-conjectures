@@ -15,8 +15,21 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Ordinary tensor contraction for coefficient quotients
 
-Source: Stacks Project, Modules on Sites, Tag 03CZ, and Cohomology on Sites,
-Tag 07A4; the coefficient calculation in the integral Verdier proof.
+For complexes `P`, `Q` of modules over the completed integral coefficient ring, we construct
+contraction maps `P ⊗ F_n(Q) ⟶ F_n(P ⊗ Q)`, where `F_n` is reduction to the `n`-th coefficient
+level, compatible with the transition maps between levels.
+
+## Implementation details
+
+In bidegree `(i, j)` the contraction is the sheafification of the balanced map
+`x ⊗ (s ⊗ y) ↦ s ⊗ (x ⊗ y)`, summed over `i + j = k`. Since `s` sits in degree zero, the
+signed total differentials commute with these maps. Compatibility with the transition maps is
+checked on pure tensors, using tensor induction, the sheafification adjunction and coproduct
+extensionality.
+
+## References
+
+* Stacks Project, Tags 03CZ, 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -521,24 +534,9 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
-/-- Ordinary total tensor admits the scalar-first contraction for every quotient.
-
-Source: Stacks 03CZ, lemma-adjointness-tensor-restrict, and 07A4,
-lemma-pullback-tensor-product; the coefficient-unit calculation in
-thm-coef-integral-verdier.proof.md.
-
-Proof: in bidegree (i,j) use the balanced map
-x tensor (s tensor y) ↦ s tensor (x tensor y). It is linear over the completed
-coefficient ring and commutes with restriction maps. Sheafify the balanced maps
-and sum over i+j=k. Both differentials act on x and y only; s is in degree zero,
-so the two signed total differentials commute with these maps. This constructs
-b for arbitrary complexes, with the displayed formula. For the last equation,
-precompose with every total summand and both sheafification units. Both routes
-send x tensor (s tensor y) to q(s) tensor (x tensor y), by the defining pure-tensor
-formula of sfReductionTransition. Tensor induction, sheafification adjunction,
-and coproduct extensionality give equality. No flatness or derived category
-occurs, and exponent one, zero complexes, and the empty site cause no exception.
-(blueprint: lem-sf-integral-ordinary-tensor-quotient-contraction). -/
+/-- The ordinary total tensor admits scalar-first contractions for every coefficient quotient:
+maps `b P Q n : P ⊗ F_n(Q) ⟶ F_n(P ⊗ Q)` sending `x ⊗ (s ⊗ y)` to `s ⊗ (x ⊗ y)` on pure
+tensors and compatible with the transition maps `F_{n+1} ⟶ F_n`. -/
 theorem ordinaryTensorQuotient_contractions :
     let R := completedIntegralCommRingSheafUnrestricted l E X
     let F := fun n : ℕ ↦ (sfReductionRestricted l E X n).mapHomologicalComplex (.up ℤ)

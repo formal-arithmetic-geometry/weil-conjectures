@@ -26,8 +26,7 @@ so that `G (U ×_Y X) = ∏_t G (piece_t)`. Finite products commute with the fil
 (`A` satisfies AB5), and the colimit of `G (piece_t)` over the split neighbourhoods is the
 stalk `G_t`, the pieces being cofinal among the pointed étale neighbourhoods of `t`
 (`AlgebraicGeometry.Scheme.Hom.SplitNbhd.initial_pieceFunctor`). The classical argument through the
-strict henselization (blueprint remark `lemma-finite-direct-images--1`) is
-not the one formalised here.
+strict henselization is not the one formalised here.
 
 ## Main definitions
 
@@ -116,8 +115,7 @@ variable (G : Sheaf X.smallEtaleTopology A)
 
 /-- The restriction of germs at `y` of `f_* G` to germs at a geometric point `t` of `X` over
 `y`: a section of `G` over `U ×_Y X` is a section over the pointed étale neighbourhood
-`(U ×_Y X, (u, t))` of `t` (the restriction of stalks of blueprint
-`lemma-finite-direct-images--1`). -/
+`(U ×_Y X, (u, t))` of `t`. -/
 def Etale.stalkRestrict :
     (pointSmallEtale y).sheafFiber.obj ((f)_*[A].obj G) ⟶
       (pointSmallEtale t.1).sheafFiber.obj G :=
@@ -160,11 +158,7 @@ omit [IsFinite f] in
 `AlgebraicGeometry.Etale.stalkRestrict` is the stalk at `s` of the counit
 `f^* f_* G ⟶ G`, read through the identification
 `AlgebraicGeometry.Etale.upperStarCompSheafFiberIso` of `(f^* f_* G)_s` with
-`(f_* G)_{s ≫ f}`.
-
-This bridges the concrete description of the stalk of a direct image, as a colimit along
-base change of pointed étale neighbourhoods, with the adjunction-theoretic description that
-the base change map `AlgebraicGeometry.Etale.baseChangeMap` is built from. -/
+`(f_* G)_{s ≫ f}`. -/
 lemma Etale.stalkRestrict_eq_counit (s : Spec (.of Ω) ⟶ X)
     (G : Sheaf X.smallEtaleTopology A) :
     Etale.stalkRestrict A f (s ≫ f) ⟨s, rfl⟩ G =
@@ -291,8 +285,7 @@ omit [HasSmallSiteSheafify A] in
 lemma Etale.stalkIsoPi_hom (G : Sheaf X.smallEtaleTopology A) :
     (Etale.stalkIsoPi A f y G).hom = Pi.lift fun t ↦ Etale.stalkRestrict A f y t G := rfl
 
-/-- **The geometric stalk formula for a finite direct image** (blueprint
-`lemma-finite-direct-images--1`). For a finite morphism
+/-- **The geometric stalk formula for a finite direct image.** For a finite morphism
 `f : X ⟶ Y` and a geometric point `y` of `Y` with algebraically closed residue field, the
 stalk of `f_* G` at `y` is the finite product of the stalks of `G` at the geometric points of
 `X` over `y`, naturally in the sheaf `G`. -/

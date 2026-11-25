@@ -79,9 +79,20 @@ import WeilConjectures.SixFunctors.CoefficientClosedStructure.CoefficientRingedT
 
 /-! # K-flat computation of the normalized reduction tensor mate
 
-Source: Stacks 03CZ, 06YY and 07A4; integral Hom reduction, paragraphs 1--2.
+The scalar-adjunction tensor mate is represented by the ordinary contraction on K-flat
+representatives, and the normalized reduction tensor mate is invertible on them.
+
+## Implementation details
+
 The representative calculation follows `IntegralTensorRestrictionMateModel`,
-retaining independent site and coefficient universes.
+retaining independent site and coefficient universes. The representative tensor comparison is
+extended in its second argument along the K-flat localization; on homogeneous pure tensors the
+resulting chain map sends `x ⊗ (s ⊗ y)` to `s ⊗ (x ⊗ y)`. The calculation applies separately
+to every level `n` and every normalized comparison, assuming no compatibility between them.
+
+## References
+
+* Stacks Project, Tags 03CZ, 05V4, 06YY, 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -1143,28 +1154,7 @@ attribute [local implicit_reducible] completedIntegralCommRingSheaf
 
 -- Normalize the coefficient wrappers before applying the generic mate calculation.
 /-- The scalar-adjunction tensor mate is represented by the ordinary contraction.
-This is a one-level calculation: no consecutive quotient map occurs in it.
-
-Source: Stacks 03CZ, lemma-adjointness-tensor-restrict; 06YY,
-lemma-derived-base-change; 07A4, lemma-pullback-tensor-product.
-
-Proof: fix the K-flat first factor P. Tensoring with P sends acyclic complexes
-to acyclic complexes, hence preserves quasi-isomorphisms, by the native K-flat
-tensor API. Extend a.representative in the second argument along the K-flat
-localization. This gives e, natural on all complexes, with its prescribed value
-on K-flat Q. To calculate the mate, resolve the restricted extension of Q by a
-K-flat complex S. Use naturality to replace e there by its value on S. Transpose
-through the scalar adjunction. Its ordinary counit multiplies scalar factors.
-ReductionPresentation.normalization fixes the two tensor comparisons on the
-K-flat pairs (P, S) and (P, Q). Cancel these comparisons and the resolution of S.
-On each homogeneous pure tensor the resulting chain map sends
-x tensor (s tensor y) to s tensor (x tensor y). Thus it is b by the tensor
-universal property, sheafification, and total-summand extensionality. Localize
-this identity. The restriction comparison is the exact-restriction factor of
-the scalar counit, giving precisely the displayed equation. The construction
-of e is independent of the coefficient level; the calculation applies separately
-to every n and every normalized m, so it assumes no compatibility between them.
-(blueprint: lem-sf-integral-tensor-restriction-mate-model). -/
+This is a one-level calculation: no consecutive quotient map occurs in it. -/
 private theorem restrictionTensor_mate_model
     (a : TensorPresentation.{t, u} X (completedIntegralCommRingSheaf l E X D hl))
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
@@ -1309,15 +1299,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (X : Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
 -- Elaborating the normalized contraction retains independent coefficient universes.
-/-- The normalized reduction tensor mate is invertible on K-flat representatives.
-Source: Stacks 03CZ, 06YY, 07A4; integral Hom reduction, paragraphs 1--2.
-Proof: extend the representative tensor comparison in its second argument by
-K-flat localization. On complexes, tensor cancellation followed by the normalized
-scalar tensor comparison is an isomorphism. Its local formula sends
-x tensor (s tensor y) to s tensor (x tensor y). The scalar adjunction's normalized
-unit identifies its localization with the tensor mate, after the invertible
-representative comparisons. Cancel these isomorphisms.
-(blueprint: lem-sf-reduction-tensor-strength-kflat-representative). -/
+/-- The normalized reduction tensor mate is invertible on K-flat representatives. -/
 theorem scalarTensorStrength_on_kflat_representatives
     (a : TensorPresentation.{t, u} X (completedIntegralCommRingSheaf l E X D hl))
     (n : ℕ) (m : ReductionPresentation l E X D hl a n)

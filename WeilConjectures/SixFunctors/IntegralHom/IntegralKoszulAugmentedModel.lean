@@ -45,8 +45,18 @@ import Mathlib.CategoryTheory.WithTerminal.Basic
 
 /-! # Unit-normalized tensor representatives of integral reduction towers
 
-Source: the finite-free quotient resolution in the first paragraph of the current
-blueprint `lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 06YY, 08J7 and 07A6.
+The reduction tower on a K-flat resolution has a Koszul tensor model on any representative,
+with the prescribed augmentation at every level.
+
+## Implementation details
+
+The coefficient unit is appended to the Koszul diagram; since its terms are K-flat, tensoring
+with the whole diagram descends through localization, and the right unitor identifies
+evaluation at the added vertex with the localization functor.
+
+## References
+
+* Stacks Project, Tags 06YY, 08J7, 07A6.
 -/
 
 @[expose] public section
@@ -265,18 +275,7 @@ private theorem koszulTensorPresentation_unit
     (congrArg DerivedCategory.Q.map (levelUnit_eq_tensor l E Y N n))
 
 /-- The actual reduction tower on a K-flat resolution has a Koszul tensor model on
-any representative, with the prescribed augmentation at every level.
-
-Source: paragraph 1 of the current blueprint `lem-coef-integral-hom-reduction.proof.md`
-(blueprint: lem-sf-integral-koszul-augmented-model).
-
-Proof: append the coefficient unit to the Koszul diagram. Its terms are K-flat,
-so tensoring with this entire diagram descends through localization. The right
-unitor identifies evaluation at the added vertex with the localization functor.
-Descending that natural isomorphism makes the transported apex equal to e.
-Restrict to the original tower and compose with the comparison preserving the
-actual quotient units on P. Naturality at each added-vertex arrow gives the
-augmentation equation. This requires no flatness of N and works also for N=0. -/
+any representative, with the prescribed augmentation at every level. -/
 theorem integralReductionTower_koszul_augmented_model
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

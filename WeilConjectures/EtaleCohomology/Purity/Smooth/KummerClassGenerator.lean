@@ -305,7 +305,7 @@ variable {G : Scheme.{u}} (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k))) [IsO
   [HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k))]
 
 include hj in
-/-- Blueprint `thm-pur-kummer-affine-line`: Kummer computations on the line and the punctured line.
+/-- **Kummer computations on the line and the punctured line.**
 
 Let `k` be an algebraically closed field and `Λ` a finite coefficient ring whose exponent is
 invertible in `k`, with Tate twist `Λ(1) = μₙ ⊗ Λ` (`n` the characteristic of `Λ`). Let
@@ -316,9 +316,7 @@ invertible in `k`, with Tate twist `Λ(1) = μₙ ⊗ Λ` (`n` the characteristi
 3. `H¹(𝔾_{m,k}, Λ(1)) = Hom(Λ, Λ(1)[1])` is free of rank one over `Λ` on the Kummer class
    `κ(t)` of the coordinate.
 
-In particular all these cohomology groups are finite. The blueprint takes `Λ = A` free over
-`ℤ/ℓ^N`; here `Λ` is any finite commutative ring with invertible exponent, so the statements
-hold after any change of finite coefficients. -/
+In particular all these cohomology groups are finite. -/
 theorem kummer_affineLine_multiplicativeGroup :
     (∀ q : ℤ, q ≠ 0 → IsZero ((cohomology (ModuleCat.{u + 1} Λ)
         𝔸(ULift.{u} (Fin 1); Spec (.of k)) q).obj

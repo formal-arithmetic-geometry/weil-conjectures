@@ -51,7 +51,7 @@ Following the convention of the `SixFunctors` folder, the coefficient category `
 Grothendieck abelian category with small-site sheafification
 (`CategoryTheory.HasSmallSiteSheafify`) and `Hom`-types in the universe `u + 1`, one above
 the universe `u` of the base schemes; the class is what supplies the sheafification used
-to restrict a sheaf to a member of an étale cover, see the implementation notes. The notions
+to restrict a sheaf to a member of an étale cover, see the implementation details. The notions
 involving finiteness require `A` to be moreover concrete, finite generation referring to the
 elements of the underlying type `CategoryTheory.ToType`. This covers sheaves of abelian groups
 (`A = Ab.{u + 1}`) and of `Λ`-modules (`A = ModuleCat.{u + 1} Λ`), for all the coefficient
@@ -66,7 +66,7 @@ the small étale site of `U`. To restrict `F` to a stratum we use the pullback
 `AlgebraicGeometry.Etale.upperStar` of `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs`
 along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale.lowerStar`.
 
-## Implementation notes
+## Implementation details
 
 - The pullback `Etale.upperStar` is defined by left Kan extension along base change
   followed by sheafification. The Kan extensions in question exist for an arbitrary `f`
@@ -81,12 +81,46 @@ along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale
   `CategoryTheory.GrothendieckTopology.hasSheafify_over_smallEtaleTopology` of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, a slice of an
   essentially small site being again essentially small; it is a case of
-  `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` there. This replaces
-  what used to be a `HasWeakSheafify` hypothesis quantified over all schemes and all étale `U`, the
-  quantification being forced by the existential quantifier over stratifications.
+  `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` there. Since the
+  stratification in `IsConstructibleSheaf` is existentially quantified, sheafification has to
+  be available for all schemes, which is what `CategoryTheory.HasSmallSiteSheafify A` provides.
 - Similarly, `CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf` assumes the
   existence of the right Kan extensions along `(Over.forget U).op` needed to compare
-  sheafification on the small étale site with sheafification on its localizations.
+  sheafification on the small étale site with sheafification on its localizations; this always
+  holds mathematically.
+- A stratification records a choice of scheme structure on each stratum via the immersion
+  `S.immersion i : S.domain i ⟶ X`; by topological invariance of the small étale site,
+  constructibility does not depend on this choice.
+- Constructibility of the strata (`Topology.Stratification.isConstructible_stratum`) is part of
+  the definition of a constructible sheaf [Stacks 03RW, 095E]: without it, on a non-noetherian
+  quasi-compact `X` with a non-quasi-compact open `U`, the extension by zero of the constant
+  sheaf on `U` would be constructible, and on `X = Spec ∏ 𝔽₂` the skyscraper sheaf at a closed
+  non-open point would be. On a noetherian scheme every locally closed subset is constructible,
+  see `Stratification.ofNoetherianSpace` and `IsConstructibleSheaf.of_noetherianSpace`.
+- Every sheaf constructible in the present sense is constructible in the affine-local sense of
+  [Stacks 03RW]: the traces of the strata on an affine open `U` form a stratification of `U`
+  (`AlgebraicGeometry.Scheme.Hom.isConstructible_preimage`). For `X` quasi-compact and
+  quasi-separated the converse holds, so the definitions agree with [Stacks 03RW] and
+  [Stacks 095E]: the decompositions of the members of a finite affine open cover, whose members
+  are retrocompact, have a common refinement by constructible locally closed subsets of `X`.
+  For a general `X` the present definition is stronger, as it asks for a single finite
+  stratification of all of `X`. For instance let `Λ` be a nonzero coefficient ring, let `X` be
+  the disjoint union over `n` of the affine spaces `𝔸ⁿ` over a field, each with a flag
+  `𝔸ⁿ = Z₀ ⊃ Z₁ ⊃ ⋯ ⊃ Zₙ` of irreducible closed subsets, and let `F` be on `𝔸ⁿ` the direct sum
+  of the pushforwards of the constant sheaf `Λ` from the `Zᵢ`, so that the stalk of `F` at the
+  generic point of `Zᵢ` is free of rank `i + 1` over `Λ`. A subset of `X` on which `F` is
+  locally constant cannot contain the generic points of two members of a flag, so a
+  stratification trivializing `F` has at least `n + 1` strata meeting `𝔸ⁿ` for every `n`, and
+  there is no finite one; whereas every affine open of `X` meets finitely many `𝔸ⁿ` and `F` is
+  constructible on it in the sense of loc. cit.
+- `IsFiniteSheaf` is phrased via elements of the stalks; for sheaves of modules it is
+  equivalent to the element-free condition of `isFiniteSheaf_iff_exists_epi`, to which the
+  definition can be switched.
+
+## References
+
+* [SGA 4, Exp. IX, §2]
+* [Stacks 03RW], [Stacks 095E], [Stacks 09XZ]
 -/
 
 @[expose] public section
@@ -107,9 +141,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [HasSmallSiteSheafify A]
 
 /-- The pullback of étale sheaves along `f : X ⟶ Y` sends constant sheaves to constant
-sheaves: `constantSheaf ⋙ f^*` and `constantSheaf` are both left adjoint to global
-sections of the pushforward, since base change preserves the terminal object of the
-small étale site (`X ×_Y Y ≅ X`). -/
+sheaves: `constantSheaf ⋙ f^* ≅ constantSheaf`. -/
 def upperStarConstantSheafIso (f : X ⟶ Y) :
     constantSheaf Y.smallEtaleTopology A ⋙ Etale.upperStar A f ≅
       constantSheaf X.smallEtaleTopology A :=
@@ -152,9 +184,7 @@ class IsLocallyConstantSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
 
 omit [HasSmallSiteSheafify A] in
 /-- A constant sheaf on the small étale site is locally constant, trivialized by the
-identity cover. The right Kan extension hypothesis compares sheafification on the small
-étale site with sheafification on its localizations; it always holds mathematically, see
-the module implementation notes. -/
+identity cover. -/
 lemma _root_.CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf
     [∀ (U : X.Etale) (P : (Over U)ᵒᵖ ⥤ A), (Over.forget U).op.HasPointwiseRightKanExtension P]
     {F : Sheaf X.smallEtaleTopology A} (h : F.IsConstant X.smallEtaleTopology) :
@@ -185,14 +215,9 @@ variable {A : Type u'} [Category.{u + 1} A]
 *finite* if the stalk of `F` at every geometric point of `X` is finitely generated
 (`CategoryTheory.ConcreteCategory.IsFinitelyGenerated`): for sheaves of `Λ`-modules the stalks
 are finitely generated `Λ`-modules (`ModuleCat.isFinitelyGenerated_iff`), for sheaves of sets
-they are finite sets (`CategoryTheory.ConcreteCategory.isFinitelyGenerated_iff_finite`). Over a
-finite ring `Λ` this says that the stalks are finite. For sheaves of `Λ`-modules it is
-equivalent to every stalk receiving an epimorphism `Λ^n ⟶ F_s̄` from a finite free module
-(`AlgebraicGeometry.Scheme.isFiniteSheaf_iff_exists_epi`), the element-free form to which this
-definition can be switched. A geometric point `Spec Ω ⟶ X`, with `Ω` a
-separably closed field, induces a point of the small étale site (`Scheme.pointSmallEtale`), and
-the stalk of `F` is its fiber `CategoryTheory.GrothendieckTopology.Point.sheafFiber` at this
-point. -/
+they are finite sets (`CategoryTheory.ConcreteCategory.isFinitelyGenerated_iff_finite`). The
+stalk at a geometric point `s : Spec Ω ⟶ X` is the fiber of `F` at the point
+`Scheme.pointSmallEtale s` of the small étale site. -/
 class IsFiniteSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
   isFinitelyGenerated_sheafFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω]
     (s : Spec (.of Ω) ⟶ X) :
@@ -200,10 +225,7 @@ class IsFiniteSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
 
 /-- **Finite sheaves of modules via epimorphisms from finite free modules.** A sheaf of
 `Λ`-modules on the small étale site of `X` is finite if and only if each of its stalks at a
-geometric point receives an epimorphism `Λ^n ⟶ F_s̄` from a finite free `Λ`-module
-(`ModuleCat.isFinitelyGenerated_iff_exists_epi`). The right-hand side is a definition of
-finiteness that does not refer to elements of the stalks, to which `IsFiniteSheaf` can be
-switched. -/
+geometric point receives an epimorphism `Λ^n ⟶ F_s̄` from a finite free `Λ`-module. -/
 lemma isFiniteSheaf_iff_exists_epi {Λ : Type (u + 1)} [Ring Λ]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsFiniteSheaf F ↔ ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
@@ -222,15 +244,9 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
-/-- Blueprint `definition-lisse-sheaves--1`: Finite locally constant sheaves.
-
-A sheaf `F` on the small étale site of `X` with values in a concrete category is
+/-- A sheaf `F` on the small étale site of `X` with values in a concrete category is
 *finite locally constant* if it is locally constant and finite, that is, with finitely
-generated stalks (`IsFiniteSheaf`). For sheaves of sets,
-equivalently (not proved here), `F` is representable by a scheme finite étale over
-`X`. For sheaves of `Λ`-modules, the blueprint's rank one condition (the local constant values
-can be chosen free of rank one) is, for a locally constant sheaf, the condition that every
-geometric stalk is isomorphic to `Λ` (`AlgebraicGeometry.Scheme.HasRankOneStalks`). -/
+generated stalks (`IsFiniteSheaf`). -/
 class IsFiniteLocallyConstantSheaf (F : Sheaf X.smallEtaleTopology A) : Prop
     extends IsLocallyConstantSheaf F, IsFiniteSheaf F
 
@@ -241,17 +257,8 @@ section Stratification
 /-- A *stratification* of a scheme `X`: a stratification of the underlying topological
 space of `X` (`Topology.Stratification`: a finite partition into *constructible* locally closed
 subsets — `Topology.IsConstructible`, in the Boolean algebra generated by the retrocompact open
-subsets — following [Stacks 09XZ] and [Stacks 03RW]), together with, for each stratum, a
-scheme immersed in `X` with set-theoretic image the stratum. A sheaf on the small étale site
-of `X` is constructible if its pullbacks to the strata of some stratification are finite
-locally constant, see `IsConstructibleSheaf`.
-
-Constructibility of the strata (`Topology.Stratification.isConstructible_stratum`) is part of
-the definition of a constructible sheaf [Stacks 03RW, 095E]: without it, on a non-noetherian
-quasi-compact `X` with a non-quasi-compact open `U`, the extension by zero of the constant sheaf
-on `U` would be constructible, and on `X = Spec ∏ 𝔽₂` the skyscraper sheaf at a closed non-open
-point would be. On a noetherian scheme every locally closed subset is constructible, and
-`Stratification.ofNoetherianSpace` builds a stratification from locally closed strata alone. -/
+subsets), together with, for each stratum, a scheme immersed in `X` with set-theoretic image
+the stratum. -/
 structure Stratification (X : Scheme.{u}) extends Topology.Stratification X where
   /-- The schemes underlying the strata. -/
   domain : Fin n → Scheme.{u}
@@ -263,11 +270,9 @@ structure Stratification (X : Scheme.{u}) extends Topology.Stratification X wher
 attribute [instance] Stratification.isImmersion
 
 /-- **Stratifications of a Noetherian scheme from locally closed strata.** On a Noetherian
-space every locally closed subset is constructible
-(`IsLocallyClosed.isConstructible_of_noetherianSpace`), so a stratification of a scheme `X`
-with Noetherian underlying space — for instance a Noetherian scheme, `IsNoetherian X` — is
-determined by finitely many locally closed strata and the schemes immersed in `X` realizing
-them. -/
+space every locally closed subset is constructible, so a stratification of a scheme `X` with
+Noetherian underlying space is given by finitely many locally closed strata and schemes
+immersed in `X` realizing them. -/
 @[simps n stratum domain immersion]
 def Stratification.ofNoetherianSpace [TopologicalSpace.NoetherianSpace X] (n : ℕ)
     (stratum : Fin n → Set X) (isLocallyClosed_stratum : ∀ i, IsLocallyClosed (stratum i))
@@ -298,59 +303,16 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A]
 
 /-- A sheaf `F` on the small étale site of `X` with values in a concrete category is
 *constructible* if there is a stratification of `X` such that the pullback of `F` to each
-stratum is finite locally constant.
-
-The stratification records a choice of scheme structure on each stratum via the immersion
-`S.immersion i : S.domain i ⟶ X`; by topological invariance of the small étale site the
-condition does not depend on this choice.
-
-The left Kan extensions along base change needed by the pullback `Etale.upperStar` are
-provided by the instance
-`CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize` of
-`WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`. Stating
-`IsFiniteLocallyConstantSheaf` needs sheafification for the localizations of the small
-étale sites of the strata; since the stratification is existentially quantified, this has
-to be available for all schemes, which is what the hypothesis
-`CategoryTheory.HasSmallSiteSheafify A` provides (see the module implementation notes).
-
-The strata are constructible subsets (`Topology.Stratification.isConstructible_stratum`), as
-in [Stacks 03RW]. Every sheaf constructible in the present sense is constructible in the
-affine-local sense of loc. cit.: the traces of the strata on an affine open `U` form a
-stratification of `U` (preimages of constructible subsets along morphisms of schemes are
-constructible, `AlgebraicGeometry.Scheme.Hom.isConstructible_preimage`). For `X`
-quasi-compact and quasi-separated the converse holds, so this global definition agrees with
-[Stacks 03RW] and with [Stacks 095E]: the decompositions of the members of a finite affine open
-cover, whose members are retrocompact, have a common refinement by constructible locally closed
-subsets of `X`. For a general `X` the present definition is stronger: it asks for a single
-finite stratification of all of `X`, whereas loc. cit. lets the decomposition depend on the
-affine open. For instance let `Λ` be a nonzero coefficient ring, let `X` be the disjoint union
-over `n` of the affine spaces `𝔸ⁿ` over a field, each with a flag `𝔸ⁿ = Z₀ ⊃ Z₁ ⊃ ⋯ ⊃ Zₙ` of
-irreducible closed subsets, and let `F` be on `𝔸ⁿ` the direct sum of the pushforwards of the
-constant sheaf `Λ` from the `Zᵢ`, so that the stalk of `F` at the generic point of `Zᵢ` is
-free of rank `i + 1` over `Λ`. A subset of `X` on
-which `F` is locally constant cannot contain the generic points of two members of a flag (the
-later one is a specialization of the earlier one, so every neighbourhood of it in the subset
-contains the earlier one, where the rank differs), so a stratification trivializing `F` has at
-least `n + 1` strata meeting `𝔸ⁿ` for every `n`, and there is no finite one; whereas every
-affine open of `X` meets finitely many `𝔸ⁿ` and `F` is constructible on it in the sense of
-loc. cit. For sheaves of modules over a noetherian ring, the pullbacks to the strata being
-locally constant of finite type, it is the constructibility of sheaves of modules of the Stacks
-project. In the `ℓ`-adic formalism it is applied with `A = ModuleCat Λ` for the coefficient
-stages `Λ` of `definition-constructible-sheaves--6`.
-
-Over a scheme with Noetherian underlying space the constructibility of the strata is automatic,
-see `IsConstructibleSheaf.of_noetherianSpace`. -/
+stratum is finite locally constant. -/
 class IsConstructibleSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
   exists_stratification : ∃ S : Stratification X, ∀ i : Fin S.n,
     IsFiniteLocallyConstantSheaf ((Etale.upperStar A (S.immersion i)).obj F)
 
 omit [HasSmallSiteSheafify A] in
 /-- **Constructibility over a Noetherian scheme from locally closed strata.** A sheaf `F` on a
-scheme `X` with Noetherian underlying space — for instance a Noetherian scheme,
-`IsNoetherian X` — is constructible as soon as, for some finite partition of `X` into locally
-closed subsets realized by schemes `domain i` immersed in `X`, the pullbacks of `F` to the
-`domain i` are finite locally constant: on a Noetherian space every locally closed subset is
-constructible, so no constructibility of the strata has to be checked. -/
+scheme `X` with Noetherian underlying space is constructible as soon as, for some finite
+partition of `X` into locally closed subsets realized by schemes `domain i` immersed in `X`,
+the pullbacks of `F` to the `domain i` are finite locally constant. -/
 theorem IsConstructibleSheaf.of_noetherianSpace [TopologicalSpace.NoetherianSpace X]
     (F : Sheaf X.smallEtaleTopology A) {n : ℕ} (stratum : Fin n → Set X)
     (isLocallyClosed_stratum : ∀ i, IsLocallyClosed (stratum i))

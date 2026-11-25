@@ -48,8 +48,12 @@ set_option linter.privateModule false
 
 /-! # Computing integral reduction on an arbitrary representative
 
-Source: the finite-free quotient resolution in paragraph 1 of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 06YY, 08J7, and 07A6.
+We identify the integral reduction tower of an arbitrary representative with the tower obtained
+by tensoring with the finite-free two-term Koszul resolutions of the finite quotients.
+
+## References
+
+* Stacks Project, Tags 06YY, 08J7, 07A6.
 -/
 
 @[expose] public section

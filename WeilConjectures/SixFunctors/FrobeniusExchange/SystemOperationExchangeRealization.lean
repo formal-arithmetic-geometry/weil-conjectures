@@ -77,10 +77,6 @@ import WeilConjectures.Tactic.RflByKernel
 
 /-! # Simultaneous-system realization of operation exchanges
 
-Source: slopmaster2 blueprint, `def:weil-direct-image-object` and
-`def:weil-compact-support-object`; Deligne, Weil II, (1.1.10)--(1.1.14)
-(blueprint: def-weil-system-operation-exchange-realization).
-
 ## Main definitions and statements
 
 - `finiteExchange`, `finiteTensorExchange`: finite mates for a general commuting square.
@@ -88,6 +84,24 @@ Source: slopmaster2 blueprint, `def:weil-direct-image-object` and
 - `realize`, `integralExchange`, `coefficientExchange`: normalized whole-system realization.
 - `directIntegral`, `compactIntegral`: natural transformations on constructible domains.
 - `directIntegral_reduction`, `compactIntegral_reduction`: the specified counit equations.
+
+## Implementation details
+
+Exchange maps are formed as adjunction mates on whole strict coefficient systems, before any
+finite evaluation or derived inverse limit, and are then realized by reduction, exact scalar
+restriction and the total right-derived inverse limit. The uniqueness of the
+projection-normalized compact-support identification needs finiteness of the shifted Hom
+groups into its finite restricted reductions; over a finite field `K₀` this is the finiteness
+of étale cohomology of constructible complexes, but over an arbitrary field it can fail, so
+`compactRealization` takes its witness from `compactRealization_exists`.
+
+## References
+
+* [P. Deligne, *La conjecture de Weil II*, (1.1.10)--(1.1.14)]
+* [W. Zheng, 4.1 and 4.10]
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, 6.5 and 6.7]
+* [SGA 4½, Th. finitude]
+* [Stacks Project, Tags 03D2, 03DI, 03S6, 06YY, 079P, 0941 and 099N]
 -/
 
 @[expose] public noncomputable section
@@ -139,10 +153,7 @@ private theorem transport_reduction_equation
 
 variable (A : Type u) [CommRing A] [Finite A]
 
-/-- The finite exchange for any commuting square is the specified adjunction mate.
-The four corners and both vertical arrows may differ; only commutativity is used.
-Source: blueprint `def:direct-image-exchange` and `def:weil-direct-image-object`
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The finite exchange for any commuting square is the specified adjunction mate. -/
 def finiteExchange {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
     (gX : X' ⟶ X) (gY : Y' ⟶ Y) (w : gX ≫ f = f' ≫ gY) :
     proEtaleConstantDerivedDirectImage f A ⋙ sfIntrinsicDerivedPullback A gY ⟶
@@ -155,10 +166,7 @@ def finiteExchange {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
         eqToIso (congrArg (fun h ↦ sfIntrinsicDerivedPullback A h) w.symm) ≪≫
         sfIntrinsicDerivedPullbackComp A gX f).hom))
 
-/-- The ambient mate in the recorded tensor-pullback coordinates. Both coordinate
-changes are uniquely fixed by the ordinary units, so this is the ambient ringed mate.
-Source: blueprint `def:direct-image-exchange`
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The ambient mate in the recorded tensor-pullback coordinates. -/
 def finiteTensorExchange {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
     (gX : X' ⟶ X) (gY : Y' ⟶ Y) (w : gX ≫ f = f' ≫ gY) :
     proEtaleConstantDerivedDirectImage f A ⋙ proEtaleConstantRingDerivedPullback A gY ⟶
@@ -186,9 +194,7 @@ private theorem samePush {X Y : Scheme.{u}} (f : X ⟶ Y) :
   rfl
 
 /-- Finite chosen-compactification exchange, literally the proper mate followed
-by proper image of the canonical open-adjunction exchange.
-Source: blueprint `def:weil-compact-support-object`
-(blueprint: def-weil-system-operation-exchange-realization). -/
+by proper image of the canonical open-adjunction exchange. -/
 def finiteCompact (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (gX : X ⟶ X) (gB : c.Z ⟶ c.Z) (gY : Y ⟶ Y)
     (wp : gB ≫ c.g = c.g ≫ gY) (sj : IsPullback gX c.i c.i gB) :
@@ -203,23 +209,14 @@ def finiteCompact (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}} {f : X ⟶ Y}
     whiskerRight (constantOpenSquareExchange l E n hn gX c.i c.i gB sj).hom
       (proEtaleConstantDerivedDirectImage c.g (Padic.coefficientExtensionRing l E n))
 
-/-- Additivity of the sectionwise direct image on the strict varying-ring diagram.
-Source: Zheng 4.1 and 4.10; blueprint `def:weil-direct-image-object`
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: addition is sectionwise, and precomposition and scalar restriction leave
-addition unchanged, at every index and every vertical object. -/
+/-- Additivity of the sectionwise direct image on the strict varying-ring diagram. -/
 theorem systemDirect_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (integralComparisonSequenceDirectImage l E f).Additive := by
   exact (integralComparisonSequenceDirectImage l E f).additive_of_preserves_binary_products
 
 attribute [instance] systemDirect_additive
 
-/-- Strict coefficient systems admit simultaneous K-injective resolutions.
-Source: Zheng 4.10; Stacks 079P, 0941
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: these systems are module sheaves on the small vertical sequence site.
-The Grothendieck module-sheaf theorem gives functorial K-injective resolutions
-in its ordinary unbounded derived category. -/
+/-- Strict coefficient systems admit simultaneous K-injective resolutions. -/
 theorem system_hasKInjectives (X : Scheme.{u}) :
     Abelian.HasKInjectiveResolutions (coefficientSequenceModules l E X) := by
   have : IsGrothendieckAbelian.{u + 1} (coefficientSequenceModules l E X) :=
@@ -228,16 +225,12 @@ theorem system_hasKInjectives (X : Scheme.{u}) :
 
 attribute [instance] system_hasKInjectives
 
-/-- Total right-derived direct image of entire strict semilinear coefficient systems.
-Source: Zheng 4.10; blueprint `def:weil-direct-image-object`
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Total right-derived direct image of entire strict semilinear coefficient systems. -/
 abbrev systemDirect {X Y : Scheme.{u}} (f : X ⟶ Y) :
     coefficientSequenceDerived l E X ⥤ coefficientSequenceDerived l E Y :=
   (integralComparisonSequenceDirectImage l E f).rightDerivedFunctor
 
-/-- The derived adjunction is derived from the actual ordinary system adjunction.
-Source: Zheng 4.10; Stacks 07A4
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The derived adjunction is derived from the actual ordinary system adjunction. -/
 def systemAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     integralComparisonDerivedSequencePullback l E f ⊣ systemDirect l E f :=
   letI : (integralComparisonSequenceDirectImage l E f).leftAdjoint.Additive :=
@@ -249,10 +242,7 @@ def systemAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
   (Adjunction.ofIsRightAdjoint
     (integralComparisonSequenceDirectImage l E f)).mapDerivedCategoryRightDerivedAdjunction
 
-/-- The square comparison on the derived category of whole strict systems.
-It is obtained before evaluation, from the section-normalized ordinary compositor.
-Source: Zheng 4.10; blueprint `def:direct-image-exchange`
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The square comparison on the derived category of whole strict systems. -/
 def systemSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (gX : X ⟶ X) (gY : Y ⟶ Y)
     (w : gX ≫ f = f ≫ gY) :
     integralComparisonDerivedSequencePullback l E gY ⋙
@@ -263,9 +253,7 @@ def systemSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (gX : X ⟶ X) (gY : Y ⟶ Y)
     eqToIso (congrArg (fun h ↦ integralComparisonDerivedSequencePullback l E h) w.symm) ≪≫
     integralComparisonSystemComposition l E gX f
 
-/-- The specified system mate, formed before finite evaluation or derived inverse limit.
-Source: Zheng 4.10; blueprint `def:weil-direct-image-object`
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The specified system mate, formed before finite evaluation or derived inverse limit. -/
 def systemExchange {X Y : Scheme.{u}} (f : X ⟶ Y) (gX : X ⟶ X) (gY : Y ⟶ Y)
     (w : gX ≫ f = f ≫ gY) :
     systemDirect l E f ⋙ integralComparisonDerivedSequencePullback l E gY ⟶
@@ -273,48 +261,34 @@ def systemExchange {X Y : Scheme.{u}} (f : X ⟶ Y) (gX : X ⟶ X) (gY : Y ⟶ Y
   (mateEquiv (systemAdjunction l E f) (systemAdjunction l E f)
     (TwoSquare.mk _ _ _ _ (systemSquare l E f gX gY w).hom))
 
-/-- A simultaneous quotient-complex presentation of the published integral operations.
-Its reduction, total limit and pullback realizations carry the dependency's full
-K-flat quotient-generator and K-injective Roos normalizations.
-Source: Stacks 099N(5), 0941; blueprint `def:weil-direct-image-object`
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- A simultaneous quotient-complex presentation of the published integral operations. -/
 def models : IntegralComparisonCoefficientData l E :=
   ((integralPullbackComparisonRealization l (ULift.{u} ℚ_[l]) (ULift.{u} ℚ_[l])
     (AlgHom.id ℚ_[l] (ULift.{u} ℚ_[l]))).choose).coefficient E
 
-/-- The coherent reduction system of one integral object, including all quotient maps.
-Source: blueprint `def:weil-direct-image-object`, integral paragraph
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The coherent reduction system of one integral object, including all quotient maps. -/
 abbrev reduction (X : Scheme.{u}) := (models l E).system X |>.reduction
 
 /-- Realize an actual system operation by reduction, that operation, exact scalar
-restriction, and total right-derived inverse limit, in that order.
-Source: blueprint `def:weil-direct-image-object`, integral paragraph
-(blueprint: def-weil-system-operation-exchange-realization). -/
+restriction, and total right-derived inverse limit, in that order. -/
 def realize {X Y : Scheme.{u}}
     (H : coefficientSequenceDerived l E X ⥤ coefficientSequenceDerived l E Y) :
     DerivedCategory (scalarReductionSource l E X) ⥤
       DerivedCategory (scalarReductionSource l E Y) :=
   reduction l E X ⋙ H ⋙ coefficientSequenceLimit l E Y
 
-/-- The canonical operation-reduction map is the whole-system adjunction counit.
-Source: blueprint integral operation comparisons
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The canonical operation-reduction map is the whole-system adjunction counit. -/
 def operationReduction {X Y : Scheme.{u}}
     (H : coefficientSequenceDerived l E X ⥤ coefficientSequenceDerived l E Y) :
     realize l E H ⋙ reduction l E Y ⟶ reduction l E X ⋙ H :=
   whiskerLeft (reduction l E X ⋙ H) ((models l E).system Y).adjunction.counit
 
-/-- Integral direct image in the simultaneous-system presentation.
-Source: blueprint `def:weil-direct-image-object`, integral paragraph
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Integral direct image in the simultaneous-system presentation. -/
 def integralDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   realize l E (systemDirect l E f)
 
 /-- The operation comparison on the source is the pullback realization followed
-by pullback of the entire-system counit. It is constructed before evaluation.
-Source: blueprint `def:weil-direct-image-object`, alpha-star
-(blueprint: def-weil-system-operation-exchange-realization). -/
+by pullback of the entire-system counit. -/
 def sourceComparison {X Y : Scheme.{u}}
     (H : coefficientSequenceDerived l E X ⥤ coefficientSequenceDerived l E Y)
     (gY : Y ⟶ Y) :
@@ -329,9 +303,7 @@ def sourceComparison {X Y : Scheme.{u}}
       (coefficientSequenceLimit l E Y)
 
 /-- The canonical reduction comparison for pullback is inverted on the integral
-constructible domain, using the dependency's whole-system effectivity assertion.
-Source: blueprint `def:weil-direct-image-object`, beta-star
-(blueprint: def-weil-system-operation-exchange-realization). -/
+constructible domain. -/
 def reductionPullbackIso {X : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)] (gX : X ⟶ X) :
     (sfIntegralConstructible l E X).ι ⋙ integralDerivedPullback l E gX ⋙
@@ -346,10 +318,7 @@ def reductionPullbackIso {X : Scheme.{u}}
   letI := NatIso.isIso_of_isIso_app t
   exact asIso t
 
-/-- The integral exchange is beta after L of the specified system map after alpha.
-No morphism is chosen from its finite evaluations.
-Source: blueprint `def:weil-direct-image-object`, integral exchange formula
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The integral exchange is beta after L of the specified system map after alpha. -/
 def integralExchange {X Y : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
     (H : coefficientSequenceDerived l E X ⥤ coefficientSequenceDerived l E Y)
@@ -363,9 +332,7 @@ def integralExchange {X Y : Scheme.{u}}
       (coefficientSequenceLimit l E Y) ≫
     whiskerRight (reductionPullbackIso l E gX).inv (H ⋙ coefficientSequenceLimit l E Y)
 
-/-- Counit naturality computes reduction of any realized system exchange.
-Source: the alpha-L(e)-beta definition above and naturality of the adjunction counit
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Counit naturality computes reduction of any realized system exchange. -/
 private theorem integralExchange_reduction {X Y : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
     (H : coefficientSequenceDerived l E X ⥤ coefficientSequenceDerived l E Y)
@@ -397,38 +364,23 @@ private theorem integralExchange_reduction {X Y : Scheme.{u}}
     Functor.mapIso_inv, Functor.comp_map, Iso.app_hom, Iso.app_inv,
     R, L, ε, G, N, β, q, Functor.comp_obj, ObjectProperty.ι_obj] using h
 
-/-- Exact open extension exists on whole strict coefficient systems.
-Source: Zheng 4.1, 4.10; blueprint `def:weil-compact-support-object`
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: localize the vertical sequence site at the open. The direct-sum extension
-presheaf and sheafification give the left adjoint to restriction, independently
-at every quotient index. Its sectionwise units are the actual open units.
-Both kernels and cokernels are computed componentwise, so extension is exact. -/
+/-- Exact open extension exists on whole strict coefficient systems. -/
 theorem systemPullback_isRightAdjoint {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : (integralComparisonSequencePullback l E j).IsRightAdjoint := by
   exact ProEtale.VaryingRing.pull_isRightAdjoint (systemRings l E) (systemQuotient l E) j
 
-/-- The universal ordinary open extension, determined up to its adjunction comparison.
-Source: Zheng 4.1; blueprint `def:weil-compact-support-object`
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The universal ordinary open extension, determined up to its adjunction comparison. -/
 def systemOpen {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   letI := systemPullback_isRightAdjoint l E j
   (integralComparisonSequencePullback l E j).leftAdjoint
 
-/-- The actual system open adjunction, with its canonical unit and counit.
-Source: Zheng 4.1; blueprint `def:weil-compact-support-object`
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The actual system open adjunction, with its canonical unit and counit. -/
 def systemOpenAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     systemOpen l E j ⊣ integralComparisonSequencePullback l E j :=
   letI := systemPullback_isRightAdjoint l E j
   Adjunction.ofIsRightAdjoint (integralComparisonSequencePullback l E j)
 
-/-- Exactness of the specified open extension on strict coefficient systems.
-Source: Zheng 4.1, 4.10; Stacks 03DI, 0941
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: identify this left adjoint with the localized extension presheaf followed
-by sheafification via the unique adjunction-compatible comparison. The open
-extension is exact at every level, hence exact on the abelian system category. -/
+/-- Exactness of the specified open extension on strict coefficient systems. -/
 theorem systemOpen_exact {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (systemOpen l E j).Additive ∧ PreservesFiniteLimits (systemOpen l E j) ∧
       PreservesFiniteColimits (systemOpen l E j) := by
@@ -436,39 +388,29 @@ theorem systemOpen_exact {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
   simpa only [systemOpen, integralComparisonSequencePullback, samePush,
     ProEtale.VaryingRing.extension, ProEtale.VaryingRing.pull] using h
 
-/-- The additive structure from exact system open extension.
-Source: Zheng 4.1 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The additive structure from exact system open extension. -/
 instance systemOpenAdditive {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (systemOpen l E j).Additive := (systemOpen_exact l E j).1
 
-/-- Finite-limit preservation from exact system open extension.
-Source: Zheng 4.1 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Finite-limit preservation from exact system open extension. -/
 instance systemOpenLimits {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     PreservesFiniteLimits (systemOpen l E j) := (systemOpen_exact l E j).2.1
 
-/-- Finite-colimit preservation from exact system open extension.
-Source: Zheng 4.1 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Finite-colimit preservation from exact system open extension. -/
 instance systemOpenColimits {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     PreservesFiniteColimits (systemOpen l E j) := (systemOpen_exact l E j).2.2
 
-/-- Termwise open extension descends exactly to the ordinary derived system category.
-Source: Zheng 4.10 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Termwise open extension descends exactly to the ordinary derived system category. -/
 abbrev systemDerivedOpen {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   (systemOpen l E j).mapDerivedCategory
 
-/-- The derived open adjunction is the exact descent of the ordinary one.
-Source: Zheng 4.10 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The derived open adjunction is the exact descent of the ordinary one. -/
 def systemDerivedOpenAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     systemDerivedOpen l E j ⊣ integralComparisonDerivedSequencePullback l E j :=
   SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction (systemOpenAdjunction l E j)
 
 /-- Ordinary direct image commutes strictly with vertical evaluation. The coefficient
-maps are the same constant sections; both functors evaluate M at (n, X ×_Y U).
-Source: Zheng 4.1, 4.10 (blueprint: def-weil-system-operation-exchange-realization).
-Proof: unfold the two sectionwise pushforwards and vertical evaluation. Their
-base-change functors agree on objects and maps. Their ring maps send each constant
-section to the same section. Module and functor extensionality, followed by proof
-irrelevance for sheaf conditions and ring-map compatibility, gives equality. -/
+maps are the same constant sections; both functors evaluate M at (n, X ×_Y U). -/
 theorem systemDirectEvaluationOrdinary_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     integralComparisonSequenceDirectImage l E f ⋙ coefficientSequenceEvaluation l E Y n =
       coefficientSequenceEvaluation l E X n ⋙
@@ -484,8 +426,7 @@ theorem systemDirectEvaluationOrdinary_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : 
   rw [Category.id_comp, Category.comp_id]
   rfl
 
-/-- Inverse-image evaluation is the conjugate of the actual sectionwise equality.
-Source: Zheng 4.10 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Inverse-image evaluation is the conjugate of the actual sectionwise equality. -/
 def systemPullEvaluationOrdinaryInv {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     coefficientSequenceEvaluation l E Y n ⋙
         sfIntrinsicPullback (Padic.coefficientExtensionRing l E (n + 1)) f ⟶
@@ -496,12 +437,7 @@ def systemPullEvaluationOrdinaryInv {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The section-normalized inverse-image evaluation mate is invertible.
-Source: Zheng 4.1, 4.10 (blueprint: def-weil-system-operation-exchange-realization).
-Proof: the ordinary inverse image on the sequence site is vertical inverse image
-at each level. The displayed mate sends every tensor generator to its identical
-inverse-image generator. The generator map and its inverse preserve vertical
-restriction and quotient transitions, and hence are mutually inverse sheaf maps. -/
+/-- The section-normalized inverse-image evaluation mate is invertible. -/
 theorem systemPullEvaluationOrdinaryInv_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     IsIso (systemPullEvaluationOrdinaryInv l E f n) := by
   let d := eqToIso (systemDirectEvaluationOrdinary_eq l E f n)
@@ -530,8 +466,7 @@ theorem systemPullEvaluationOrdinaryInv_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (
     (sfIntrinsicConstantModuleAdjunction f
       (Padic.coefficientExtensionRing l E (n + 1))) d
 
-/-- Exact descent of the uniquely unit-normalized inverse-image evaluation mate.
-Source: Zheng 4.10 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Exact descent of the uniquely unit-normalized inverse-image evaluation mate. -/
 def systemPullEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     coefficientSequenceDerivedEvaluation l E Y n ⋙
         sfIntrinsicDerivedPullback (Padic.coefficientExtensionRing l E (n + 1)) f ≅
@@ -553,8 +488,7 @@ def systemPullEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     Functor.mapDerivedCategoryNatIso (asIso (systemPullEvaluationOrdinaryInv l E f n)) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Direct-image evaluation is the derived adjunction mate of that same pullback map.
-Source: Zheng 4.10 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Direct-image evaluation is the derived adjunction mate of that same pullback map. -/
 def systemDirectEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     systemDirect l E f ⋙ coefficientSequenceDerivedEvaluation l E Y n ⟶
       coefficientSequenceDerivedEvaluation l E X n ⋙
@@ -569,14 +503,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
   Adjunction.mapDerivedCategoryRightDerivedAdjunction
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The specified direct-image evaluation mate is invertible.
-Source: Zheng 4.10 (blueprint: def-weil-system-operation-exchange-realization).
-Proof: use the simultaneous-resolution calculus of Zheng 4.10 for sectionwise
-system direct image and its finite evaluations. Resolve the whole system in the
-common acyclic class for these section direct images; the same resolution then
-computes each finite direct image. The ordinary sectionwise equality identifies
-their comparison. The evaluated units identify this comparison with the displayed
-mate, proving invertibility. No exactness of finite quotient tensor is required. -/
+/-- The specified direct-image evaluation mate is invertible. -/
 theorem systemDirectEvaluation_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     IsIso (systemDirectEvaluation l E f n) := by
   let a : integralComparisonSequencePullback l E f ⊣
@@ -596,9 +523,7 @@ theorem systemDirectEvaluation_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) 
 
 end EvaluationProof
 
-/-- Open-extension evaluation is the left mate of normalized pullback evaluation.
-Source: Zheng 4.10; Stacks 03DI
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Open-extension evaluation is the left mate of normalized pullback evaluation. -/
 def systemOpenEvaluationInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ) :
     coefficientSequenceDerivedEvaluation l E U n ⋙
         sfIntrinsicDerivedOpen (Padic.coefficientExtensionRing l E (n + 1)) j ⟶
@@ -668,8 +593,8 @@ private theorem ordinaryPullUnit {U X : Scheme.{u}} (j : U ⟶ X) (n : ℕ)
 
 end OrdinarySections
 
-/-- Substitute the two evaluation functor equalities before applying the ordinary
-normalization theorem, avoiding repeated unfolding of sectionwise pushforwards. -/
+/-- The ordinary normalization theorem, with the two evaluation functor equalities
+substituted. -/
 private theorem normalizedFiniteEvaluationWithEqualities
     (R : ℕ → CommRingCat.{u + 1}) (τ : ∀ k, R (k + 1) ⟶ R k)
     {X Y : Scheme.{u}}
@@ -756,16 +681,7 @@ private theorem systemOpenEvaluationOrdinaryInv_isIso {U X : Scheme.{u}} (j : U 
 
 end MateNormalization
 
-/-- The open evaluation mate is invertible with the original open units.
-Source: Zheng 4.10; Stacks 03DI
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: the ordinary direct-image equality is the identity on sections. Its
-inverse-image mate satisfies the specified unit normalization. The ordinary open
-evaluation theorem then gives a counit-normalized isomorphism; its inverse is
-the inverse mate. Uniqueness of left adjoints retains this invertibility for the
-specified finite open adjunction. Exact localization preserves inverse mates,
-and the symmetry formula for the derived square identifies that localized map
-with systemOpenEvaluationInv. This covers empty opens and unbounded complexes. -/
+/-- The open evaluation mate is invertible with the original open units. -/
 theorem systemOpenEvaluationInv_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (n : ℕ) : IsIso (systemOpenEvaluationInv l E j n) := by
   let A := Padic.coefficientExtensionRing l E (n + 1)
@@ -799,9 +715,7 @@ theorem systemOpenEvaluationInv_isIso {U X : Scheme.{u}} (j : U ⟶ X)
 
 end OpenEvaluationProof
 
-/-- Finite evaluation of the actual compact system, fixed by both adjunction mates.
-Source: Bhatt--Scholze 6.7.6; Zheng 4.10
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Finite evaluation of the actual compact system, fixed by both adjunction mates. -/
 def compactFiniteEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (n : ℕ) :
     reduction l E X ⋙ (systemDerivedOpen l E c.i ⋙ systemDirect l E c.g) ⋙
@@ -825,17 +739,14 @@ elaborator's unifier cannot compare their adjunction mates in reasonable time; t
 comparisons are left to the kernel with `exact_by_kernel`. -/
 
 /-- The section-normalized ordinary direct-image evaluation is the native one,
-in finite intrinsic coordinates: both are the identity on sections.
-Source: Zheng 4.1 (blueprint: def-weil-system-operation-exchange-realization). -/
+in finite intrinsic coordinates: both are the identity on sections. -/
 private theorem systemDirectEvaluationOrdinary_eqToIso_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
     (n : ℕ) :
     (eqToIso (systemDirectEvaluationOrdinary_eq l E f n)).hom =
       (compactSupportOrdinaryDirectEvaluation l E f n).hom := by
   exact_by_kernel eqToIso_directEvaluation l E f n (systemDirectEvaluationOrdinary_eq l E f n)
 
-/-- The ordinary pullback evaluation is the native one, in intrinsic coordinates.
-Source: Zheng 4.1; Stacks 03D2
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The ordinary pullback evaluation is the native one, in intrinsic coordinates. -/
 private theorem systemPullEvaluationOrdinaryInv_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     systemPullEvaluationOrdinaryInv l E f n =
       Functor.whiskerLeft (ProEtale.VaryingRing.eval (compactSupportSystemLevel l E)
@@ -847,9 +758,7 @@ private theorem systemPullEvaluationOrdinaryInv_eq {X Y : Scheme.{u}} (f : X ⟶
   rw [systemDirectEvaluationOrdinary_eqToIso_hom]
   exact_by_kernel pullEvaluationMate_eq l E f n
 
-/-- The derived pullback evaluation is the native `evalG`, in intrinsic coordinates.
-Source: Zheng 4.1; Stacks 03D2
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The derived pullback evaluation is the native `evalG`, in intrinsic coordinates. -/
 private theorem systemPullEvaluation_inv_app {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (M : coefficientSequenceDerived l E Y) :
     (ProEtale.VaryingRing.evalG (compactSupportSystemLevel l E)
@@ -862,8 +771,7 @@ private theorem systemPullEvaluation_inv_app {X Y : Scheme.{u}} (f : X ⟶ Y) (n
     (by exact_by_kernel @asIso _ _ _ _ _ (systemPullEvaluationOrdinaryInv_isIso l E f n))
     (by exact_by_kernel systemPullEvaluationOrdinaryInv_eq l E f n) M
 
-/-- The system direct-image evaluation is the native `evalP`, in intrinsic coordinates.
-Source: Zheng 4.10 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The system direct-image evaluation is the native `evalP`, in intrinsic coordinates. -/
 private theorem systemDirectEvaluation_app {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (M : coefficientSequenceDerived l E X) :
     letI := proEtaleConstantModuleDirectImage_additive f
@@ -878,8 +786,7 @@ private theorem systemDirectEvaluation_app {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
     (by exact_by_kernel systemPullEvaluation l E f n)
     (by exact_by_kernel systemPullEvaluation_inv_app l E f n) M
 
-/-- The system open-extension evaluation is the native `evalJ`, in intrinsic coordinates.
-Source: Stacks 03DI; Zheng 4.1 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The system open-extension evaluation is the native `evalJ`, in intrinsic coordinates. -/
 private theorem systemOpenEvaluationInv_inv_app {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (n : ℕ) (M : coefficientSequenceDerived l E U) :
     letI := systemOpenEvaluationInv_isIso l E j n
@@ -899,9 +806,7 @@ private theorem systemOpenEvaluationInv_inv_app {U X : Scheme.{u}} (j : U ⟶ X)
     (by exact_by_kernel (rfl : systemOpenEvaluationInv l E j n = systemOpenEvaluationInv l E j n))
     M
 
-/-- The specified compact-system evaluation is the native compact-support evaluation.
-Source: Bhatt--Scholze 6.7.6; Zheng 4.10
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The specified compact-system evaluation is the native compact-support evaluation. -/
 private theorem compactFiniteEvaluation_hom_app {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (n : ℕ) (K : DerivedCategory (scalarReductionSource l E X)) :
     (compactFiniteEvaluation l E c n).hom.app K =
@@ -927,9 +832,7 @@ private theorem compactFiniteEvaluation_hom_app {X Y : Scheme.{u}} {f : X ⟶ Y}
   simp only [Category.assoc]
   rfl_by_kernel
 
-/-- The inverse open exchange is the left mate of the inverse pullback square.
-Source: Zheng 4.10; blueprint `def:weil-compact-support-object`
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The inverse open exchange is the left mate of the inverse pullback square. -/
 def systemOpenExchangeInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (gU : U ⟶ U) (gX : X ⟶ X) (w : gU ≫ j = j ≫ gX) :
     integralComparisonDerivedSequencePullback l E gU ⋙ systemDerivedOpen l E j ⟶
@@ -939,14 +842,7 @@ def systemOpenExchangeInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The open mate is invertible for a Cartesian open square.
-Source: Stacks 03S6; Zheng 4.10
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: on the localized vertical site the open-adjunction mate is the identity
-on the pulled-back open and the unique map between zero values off that open.
-The Cartesian condition identifies these opens, giving the inverse sectionwise.
-This is a map of whole systems, since both maps commute with quotient restrictions.
-Exact descent gives an inverse in the ordinary derived category before evaluation. -/
+/-- The open mate is invertible for a Cartesian open square. -/
 theorem systemOpenExchangeInv_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (gU : U ⟶ U) (gX : X ⟶ X)
     (sq : IsPullback gU j j gX) :
@@ -955,9 +851,7 @@ theorem systemOpenExchangeInv_isIso {U X : Scheme.{u}} (j : U ⟶ X)
   exact integralInverseOpenMate_isIso l E j gU gX sq
     (systemDerivedOpenAdjunction l E j)
 
-/-- The canonical open-system exchange, inverse to the specified open-adjunction mate.
-Source: Stacks 03S6; Zheng 4.10
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The canonical open-system exchange, inverse to the specified open-adjunction mate. -/
 def systemOpenExchange {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (gU : U ⟶ U) (gX : X ⟶ X) (sq : IsPullback gU j j gX) :
     systemDerivedOpen l E j ⋙ integralComparisonDerivedSequencePullback l E gX ≅
@@ -966,9 +860,7 @@ def systemOpenExchange {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (systemOpenExchangeInv_isIso l E j gU gX sq)).symm
 
 /-- The compactification-relative system composite: proper mate, then proper image
-of open exchange, using the same compactification at every quotient level.
-Source: blueprint `def:weil-compact-support-object`
-(blueprint: def-weil-system-operation-exchange-realization). -/
+of open exchange, using the same compactification at every quotient level. -/
 def systemCompactExchange {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (gX : X ⟶ X) (gB : c.Z ⟶ c.Z) (gY : Y ⟶ Y)
     (wp : gB ≫ c.g = c.g ≫ gY) (sj : IsPullback gX c.i c.i gB) :
@@ -983,24 +875,19 @@ section ScalarSystems
 variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- The scalar realization uses the same single global normalized system as models.
-Source: Stacks 06YY, 0941 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The scalar realization uses the same single global normalized system as models. -/
 def scalarModels : IntegralComparisonScalarData l E L ι (models l E) (models l L) :=
   ((integralPullbackComparisonRealization l (ULift.{u} ℚ_[l]) (ULift.{u} ℚ_[l])
     (AlgHom.id ℚ_[l] (ULift.{u} ℚ_[l]))).choose).scalar E L ι
 
-/-- Coefficient change of direct image is the actual mate of normalized tensor pullback.
-It is formed on whole strict systems, before any evaluation or inverse limit.
-Source: proposition-six-operations-change-coefficients; Zheng 4.10
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Coefficient change of direct image is the actual mate of normalized tensor pullback. -/
 def systemDirectScalar {X Y : Scheme.{u}} (f : X ⟶ Y) :
     systemDirect l E f ⋙ integralComparisonDerivedSequenceScalar l E L ι Y ⟶
       integralComparisonDerivedSequenceScalar l E L ι X ⋙ systemDirect l L f :=
   (mateEquiv (systemAdjunction l E f) (systemAdjunction l L f)
     (TwoSquare.mk _ _ _ _ (integralComparisonSystemScalarPullback l E L ι f).inv))
 
-/-- The inverse open coefficient exchange is the actual left-adjunction mate.
-Source: Zheng 4.1, 4.10 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The inverse open coefficient exchange is the actual left-adjunction mate. -/
 def systemOpenScalarInv {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
     integralComparisonDerivedSequenceScalar l E L ι X ⋙ systemDerivedOpen l L j ⟶
       systemDerivedOpen l E j ⋙ integralComparisonDerivedSequenceScalar l E L ι B :=
@@ -1008,12 +895,7 @@ def systemOpenScalarInv {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
     (systemDerivedOpenAdjunction l L j)).symm
     (TwoSquare.mk _ _ _ _ (integralComparisonSystemScalarPullback l E L ι j).hom))
 
-/-- Tensor extension commutes with the specified exact open extension, componentwise.
-Source: Zheng 4.1, 4.10; Stacks 03DI
-(blueprint: lem-weil-system-open-scalar-inv-app-is-iso).
-The component calculation is the finite coefficient mate calculation; its
-remaining proof is isolated so the natural-transformation statement below is
-obtained by the standard componentwise criterion. -/
+/-- Tensor extension commutes with the specified exact open extension, componentwise. -/
 theorem systemOpenScalarInv_app_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     [IsOpenImmersion j] (K : coefficientSequenceDerived l E X) :
     IsIso ((systemOpenScalarInv l E L ι j).app K) := by
@@ -1021,25 +903,19 @@ theorem systemOpenScalarInv_app_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     (systemDerivedOpenAdjunction l E j) (systemDerivedOpenAdjunction l L j)
   exact @NatIso.isIso_app_of_isIso _ _ _ _ _ _ (systemOpenScalarInv l E L ι j) this K
 
-/-- Tensor extension commutes with the specified exact open extension.
-Source: Zheng 4.1, 4.10; Stacks 03DI
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: apply the componentwise invertibility result to the natural transformation. -/
+/-- Tensor extension commutes with the specified exact open extension. -/
 theorem systemOpenScalarInv_isIso {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
     IsIso (systemOpenScalarInv l E L ι j) := by
   refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ ?_
   intro K
   exact systemOpenScalarInv_app_isIso l E L ι j K
 
-/-- The forward open scalar comparison is the inverse of that specified mate.
-Source: Zheng 4.10 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The forward open scalar comparison is the inverse of that specified mate. -/
 def systemOpenScalar {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :=
   letI := systemOpenScalarInv_isIso l E L ι j
   (asIso (systemOpenScalarInv l E L ι j)).symm
 
-/-- The proper/open scalar comparison uses the same compactification at every level.
-Source: proposition-six-operations-change-coefficients, compact-support paragraph
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The proper/open scalar comparison uses the same compactification at every level. -/
 def systemCompactScalar {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (systemDerivedOpen l E c.i ⋙ systemDirect l E c.g) ⋙
         integralComparisonDerivedSequenceScalar l E L ι Y ⟶
@@ -1048,8 +924,7 @@ def systemCompactScalar {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f
   whiskerLeft (systemDerivedOpen l E c.i) (systemDirectScalar l E L ι c.g) ≫
     whiskerRight (systemOpenScalar l E L ι c.i).hom (systemDirect l L c.g)
 
-/-- Canonical alpha for coefficient change of an actual system operation.
-Source: Stacks 06YY, 0941 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Canonical alpha for coefficient change of an actual system operation. -/
 def scalarSourceComparison {X Y : Scheme.{u}}
     (H : coefficientSequenceDerived l E X ⥤ coefficientSequenceDerived l E Y) :
     realize l E H ⋙ integralScalarExtensionOfUniverses l E L ι Y ⟶
@@ -1062,8 +937,7 @@ def scalarSourceComparison {X Y : Scheme.{u}}
         (integralComparisonDerivedSequenceScalar l E L ι Y))
       (coefficientSequenceLimit l L Y)
 
-/-- Whole-system effectivity of the specified coefficient-reduction counit.
-Source: Stacks 06YY, 0941 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Whole-system effectivity of the specified coefficient-reduction counit. -/
 def scalarReductionIso (X : Scheme.{u}) :
     (sfIntegralConstructible l E X).ι ⋙ integralScalarExtensionOfUniverses l E L ι X ⋙
         reduction l L X ≅
@@ -1077,9 +951,7 @@ def scalarReductionIso (X : Scheme.{u}) :
   letI := NatIso.isIso_of_isIso_app t
   exact asIso t
 
-/-- Realize a specified coefficient-system mate, rather than lift finite evaluations.
-Source: proposition-six-operations-change-coefficients; Stacks 06YY, 0941
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Realize a specified coefficient-system mate, rather than lift finite evaluations. -/
 def coefficientExchange {X Y : Scheme.{u}}
     (H : coefficientSequenceDerived l E X ⥤ coefficientSequenceDerived l E Y)
     (H' : coefficientSequenceDerived l L X ⥤ coefficientSequenceDerived l L Y)
@@ -1110,15 +982,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 include hl xo yo xft xqc yft yqc fo
 
-/-- The integral direct-image construction is the recorded Roos object, not a
-replacement functor inferred from its reductions.
-Source: blueprint integral direct-image paragraph; Stacks 0941
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: evaluate the derived system direct image by the normalized sectionwise
-adjunction. The quotient maps become exactly sfDirectImageTransition. Restrict
-scalars and use the total-limit Roos triangle, with its specified projections.
-This gives the displayed SfIntegralDirectImage presentation with the same object.
-Countable products exist by the completed-module Grothendieck construction. -/
+/-- The integral direct-image construction is the recorded Roos object. -/
 theorem directImage_roos (K : sfIntegralConstructibleCategory l E X) :
     ∃ hprod : HasProduct (sfDirectImageTerm l E f K.obj),
       ∃ M : @SfIntegralDirectImage l _ E _ _ _ X Y f K.obj hprod,
@@ -1139,24 +1003,14 @@ theorem directImage_roos (K : sfIntegralConstructibleCategory l E X) :
   refine ⟨hprod, M, ?_⟩
   rfl
 
-/-- The simultaneous direct-image realization is bounded constructible.
-Source: blueprint integral direct-image paragraph; Bhatt--Scholze 6.5, 6.7
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: derive the actual system direct image on a single system resolution.
-Evaluation is its canonical finite direct image, including the scalar-transition
-mates, by the finite left adjoints to evaluation. Exact scalar restriction and
-the canonical total-limit projections identify the resulting object with the
-Roos triangle of SfIntegralDirectImage. Apply
-lem-sf-integral-direct-image-constructible, including its empty-scheme case. -/
+/-- The simultaneous direct-image realization is bounded constructible. -/
 theorem directImage_constructible (K : sfIntegralConstructibleCategory l E X) :
     sfIntegralConstructible l E Y ((integralDirectImage l E f).obj K.obj) := by
   obtain ⟨hprod, M, hM⟩ := directImage_roos l E K₀ hl f K
   let := hprod
   exact hM ▸ ((sfIntegralDirectImage_constructible K₀ l hl E f K.obj K.property).2.1 M).1
 
-/-- The actual direct-image action on the recorded full constructible categories.
-Source: blueprint integral direct-image paragraph
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The actual direct-image action on the recorded full constructible categories. -/
 def directImageFunctor :
     sfIntegralConstructibleCategory l E X ⥤ sfIntegralConstructibleCategory l E Y :=
   (sfIntegralConstructible l E Y).lift
@@ -1165,12 +1019,7 @@ def directImageFunctor :
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Additivity and constant-coefficient linearity of the actual direct-image action.
-Source: blueprint scalar-localization paragraph
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: reduction, the sectionwise system direct image and exact scalar restriction
-commute with addition and the constant O_E action. Derive these identities and
-pass through the total-limit universal map. The full inclusion reflects them. -/
+/-- Additivity and constant-coefficient linearity of the actual direct-image action. -/
 theorem directImage_linear :
     (directImageFunctor l E K₀ hl f).Additive ∧
       (directImageFunctor l E K₀ hl f).Linear (Padic.coefficientExtensionIntegers l E) := by
@@ -1247,10 +1096,7 @@ variable [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
 /-- Integral direct exchange: the constructed whole-system mate, realized by
-beta, total derived limit and alpha, on its bounded constructible domain.
-The semilinear horizontal arrows have no K₀-linearity assumption.
-Source: blueprint `def:weil-direct-image-object`
-(blueprint: def-weil-system-operation-exchange-realization). -/
+beta, total derived limit and alpha, on its bounded constructible domain. -/
 def directIntegral (gX : X ⟶ X) (gY : Y ⟶ Y) [IsIso gX] [IsIso gY]
     (w : gX ≫ f = f ≫ gY) :
     directImageFunctor l E K₀ hl f ⋙ constructibleIntegralPullback l E gY ⟶
@@ -1264,16 +1110,12 @@ def directIntegral (gX : X ⟶ X) (gY : Y ⟶ Y) [IsIso gX] [IsIso gY]
 
 variable [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
-/-- The actual integral chosen-compactification operation on simultaneous systems.
-Source: blueprint `def:weil-compact-support-object`
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The actual integral chosen-compactification operation on simultaneous systems. -/
 def compactImage (c : Compactification f) :=
   realize l E (systemDerivedOpen l E c.i ⋙ systemDirect l E c.g)
 
 /-- Fix the comparison with the recorded integral Rf_! by its actual Roos projections.
-Both sides use this one compactification and the positive exponent n+1.
-Source: Bhatt--Scholze 6.7.6; sfQcqsCompactSupportRealization normalization
-(blueprint: def-weil-system-operation-exchange-realization). -/
+Both sides use this one compactification and the positive exponent n+1. -/
 def CompactRealizationSpec (c : Compactification f)
     (τ : sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙
         (sfIntegralConstructible l E Y).ι ≅
@@ -1289,14 +1131,7 @@ def CompactRealizationSpec (c : Compactification f)
       (sfCompactSupportFiniteReductionIso l K₀ hl c E K n).hom
 
 /-- There is a projection-normalized identification of the recorded Rf_! with the
-simultaneous system realization, on the entire constructible category.
-Source: Bhatt--Scholze 6.7.6--6.7.7; Stacks 0941
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: the strict reduction comparison of the recorded compact-support functor with the
-native compact-support system has the finite projections of
-sfCompactSupportFiniteReductionIso. The native system is the specified one, and its native
-finite evaluation is compactFiniteEvaluation. Transposing the projection equation under the
-finite scalar adjunction, using the evaluated reduction counit, gives the specification. -/
+simultaneous system realization, on the entire constructible category. -/
 theorem compactRealization_exists (c : Compactification f) :
     ∃ τ : sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙
         (sfIntegralConstructible l E Y).ι ≅
@@ -1317,18 +1152,7 @@ theorem compactRealization_exists (c : Compactification f) :
       exact_by_kernel hγ K n)
 
 /-- Uniqueness of the projection-normalized identification, given that the shifted Hom
-groups from the recorded Rf_! into its finite restricted reductions are finite. Derived
-completeness of the target holds since it is isomorphic to a constructible object.
-Over a finite field `K₀` the finiteness is
-the finiteness of étale cohomology of constructible complexes (SGA 4½, Th. finitude); over an
-arbitrary field it can fail, so no general uniqueness statement is made; `compactRealization`
-takes its witness from `compactRealization_exists`.
-Source: Stacks, Lemma map-into-Rlim
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: both normalizations give the same reduction of each component, after cancelling the
-composite of the inverse reduction evaluation, the operation reduction and the finite
-evaluation, which is invertible since the reduction of `τ` is. Reductions detect maps into a
-derived-complete object with finite shifted reduction Hom groups. -/
+groups from the recorded Rf_! into its finite restricted reductions are finite. -/
 theorem compactRealization_unique_of_finite (c : Compactification f)
     (hfin : ∀ (K : sfIntegralConstructibleCategory l E X) (n : ℕ), Finite
       (((sfCompactSupportFiniteIntegralFunctor l K₀ hl c E).obj K).obj⟦(1 : ℤ)⟧ ⟶
@@ -1361,14 +1185,12 @@ theorem compactRealization_unique_of_finite (c : Compactification f)
     infer_instance
   exact (cancel_mono _).1 h'
 
-/-- The identification determined by the actual integral compact-support projections.
-Source: Bhatt--Scholze 6.7.6 (blueprint: def-weil-system-operation-exchange-realization). -/
+/-- The identification determined by the actual integral compact-support projections. -/
 def compactRealization (c : Compactification f) :=
   (compactRealization_exists l E K₀ hl f c).choose
 
 /-- Alpha-shriek starts at the recorded integral Rf_!, uses its uniquely normalized
-identification, then the actual system pullback realization and counit.
-Source: blueprint alpha-shriek (blueprint: def-weil-system-operation-exchange-realization). -/
+identification, then the actual system pullback realization and counit. -/
 def compactAlpha (c : Compactification f) (gY : Y ⟶ Y) :
     sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙
         (sfIntegralConstructible l E Y).ι ⋙ integralDerivedPullback l E gY ⟶
@@ -1380,8 +1202,7 @@ def compactAlpha (c : Compactification f) (gY : Y ⟶ Y) :
       (sourceComparison l E (systemDerivedOpen l E c.i ⋙ systemDirect l E c.g) gY)
 
 /-- Beta-shriek is the effective pullback counit inverse followed by the inverse
-of that same projection-normalized Rf_! identification, on the pulled input.
-Source: blueprint beta-shriek (blueprint: def-weil-system-operation-exchange-realization). -/
+of that same projection-normalized Rf_! identification, on the pulled input. -/
 def compactBeta (c : Compactification f) (gX : X ⟶ X) :
     (sfIntegralConstructible l E X).ι ⋙ reduction l E X ⋙
         integralComparisonDerivedSequencePullback l E gX ⋙
@@ -1393,9 +1214,7 @@ def compactBeta (c : Compactification f) (gX : X ⟶ X) :
     whiskerLeft (constructibleIntegralPullback l E gX)
       (compactRealization l E K₀ hl f c).inv
 
-/-- Reduction of the recorded operation, transported by the fixed identification.
-Source: blueprint compact operation comparisons
-(blueprint: def-weil-system-operation-exchange-realization). -/
+/-- Reduction of the recorded operation, transported by the fixed identification. -/
 def compactOperationReduction (c : Compactification f) :
     sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙
         (sfIntegralConstructible l E Y).ι ⋙ reduction l E Y ⟶
@@ -1406,9 +1225,7 @@ def compactOperationReduction (c : Compactification f) :
       (operationReduction l E (systemDerivedOpen l E c.i ⋙ systemDirect l E c.g))
 
 /-- Integral compact exchange: proper system mate followed by the system open
-exchange, then the single specified total-limit realization composite.
-Source: blueprint `def:weil-compact-support-object`
-(blueprint: def-weil-system-operation-exchange-realization). -/
+exchange, then the single specified total-limit realization composite. -/
 def compactIntegralAmbient (c : Compactification f)
     (gX : X ⟶ X) (gB : c.Z ⟶ c.Z) (gY : Y ⟶ Y) [IsIso gX] [IsIso gY]
     (wp : gB ≫ c.g = c.g ≫ gY) (sj : IsPullback gX c.i c.i gB) :
@@ -1425,8 +1242,7 @@ def compactIntegralAmbient (c : Compactification f)
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Integral compact exchange on the recorded integral compact-support functor.
-Its underlying map is exactly alpha-shriek, L(e), beta-shriek above.
-Source: blueprint FrEx-shriek (blueprint: def-weil-system-operation-exchange-realization). -/
+Its underlying map is exactly alpha-shriek, L(e), beta-shriek above. -/
 def compactIntegral (c : Compactification f)
     (gX : X ⟶ X) (gB : c.Z ⟶ c.Z) (gY : Y ⟶ Y) [IsIso gX] [IsIso gY]
     (wp : gB ≫ c.g = c.g ≫ gY) (sj : IsPullback gX c.i c.i gB) :
@@ -1448,15 +1264,7 @@ attribute [local implicit_reducible] compactImage realize constructibleIntegralP
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Reduction of the constructed compact exchange is the specified proper/open
-system composite through the same operation and pullback counits.
-Source: blueprint integral compact-support paragraph
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: specialize the general integral exchange counit equation to the proper/open
-system composite. Transport it through the fixed compact realization at the input
-and its pullback. Functoriality cancels the inverse and forward realization at the
-output; naturality of the pullback/reduction counit transports the source.
-The component formulas for compact alpha, beta and operation reduction identify
-this equation with the one displayed here. -/
+system composite through the same operation and pullback counits. -/
 theorem compactIntegral_reduction (c : Compactification f)
     (gX : X ⟶ X) (gB : c.Z ⟶ c.Z) (gY : Y ⟶ Y) [IsIso gX] [IsIso gY]
     (wp : gB ≫ c.g = c.g ≫ gY) (sj : IsPullback gX c.i c.i gB)
