@@ -16,10 +16,9 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 Let `Λ` be an Artinian local ring with residue field `κ`, for instance the finite coefficient
 ring `A_{E,n} = 𝒪_E/ϖⁿ` with `κ = A_{E,1}`, and let `K ∈ D(X_ét, Λ)`. Then `K` has Tor amplitude
-in `[a, b]` if and only if `K ⊗ᴸ κ_X` has cohomology in `[a, b]` (blueprint
-`theorem-f-shriek-finite-coefficients--1`).
+in `[a, b]` if and only if `K ⊗ᴸ κ_X` has cohomology in `[a, b]`.
 
-## Proof
+## Implementation details
 
 One direction is the definition of Tor amplitude, tested against the constant sheaf `κ_X`. For
 the converse, represent `K` by a K-flat complex `P` of flat sheaves, so that `K ⊗ᴸ F` is the
@@ -29,8 +28,8 @@ stalks at the geometric points `x̄`, and the stalk of `P ⊗ F` is `P_x̄ ⊗ F
 degree propagates to exactness of `P_x̄ ⊗ M` for every module `M`
 (`DerivedCategory.exactAt_tensorRight_of_exactAt_tensorRight_residueField`).
 
-The blueprint states the lemma for bounded constructible `K`; neither boundedness nor
-constructibility is needed, and the main statement does not assume them.
+Neither boundedness nor constructibility of `K` is needed, and the main statement does not
+assume them.
 
 ## Main statements
 
@@ -96,9 +95,7 @@ noncomputable abbrev residueFieldSheaf (X : Scheme.{u}) :
     (ModuleCat.of Λ (IsLocalRing.ResidueField Λ))
 
 /-- Let `P` be a complex of flat étale sheaves of `Λ`-modules, `Λ` Artinian local with residue
-field `κ`. If `P ⊗ κ_X` is exact in degree `q`, so is `P ⊗ F` for every sheaf `F`: on stalks at
-a geometric point this is
-`DerivedCategory.exactAt_tensorRight_of_exactAt_tensorRight_residueField`. -/
+field `κ`. If `P ⊗ κ_X` is exact in degree `q`, so is `P ⊗ F` for every sheaf `F`. -/
 lemma exactAt_tensorRight_of_exactAt_tensorRight_residueFieldSheaf
     (P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ)
     (hP : ∀ n, ObjectProperty.flat (P.X n)) (q : ℤ)
@@ -128,16 +125,12 @@ lemma exactAt_tensorRight_of_exactAt_tensorRight_residueFieldSheaf
   exact (_root_.DerivedCategory.exactAt_tensorRight_of_exactAt_tensorRight_residueField Ps hPs q
     hκ' (Φ.sheafFiber.obj F)).of_iso (sheafFiberMapHomologicalComplexTensorRightIso s P F).symm
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients--1`: Testing finite Tor amplitude at the residue
-field.
+/-- Testing finite Tor amplitude at the residue field.
 
 Let `Λ` be an Artinian local ring with residue field `κ` (for instance `A = 𝒪_E/ϖⁿ` and
 `κ = A/(ϖ)`), and let `K ∈ D(X_ét, Λ)`. Then `K` has Tor amplitude in `[a, b]` if and only if
-the derived tensor product `K ⊗ᴸ κ_X` has cohomology in `[a, b]`. Representing `K` by a K-flat
-complex `P` of flat sheaves, the converse direction is checked on the stalks `P_x̄` at the
-geometric points, which are complexes of flat modules over the Artinian local ring `Λ`
-(`AlgebraicGeometry.Etale.exactAt_tensorRight_of_exactAt_tensorRight_residueFieldSheaf`). No
-boundedness or constructibility of `K` is needed. -/
+the derived tensor product `K ⊗ᴸ κ_X` has cohomology in `[a, b]`. No boundedness or constructibility
+of `K` is needed. -/
 theorem torAmplitudeIn_iff_homologyConcentratedIn_tensor_residueField {a b : ℤ}
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     _root_.DerivedCategory.torAmplitudeIn (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) a b
