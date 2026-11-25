@@ -11,9 +11,6 @@ import WeilConjectures.SixFunctors.Common.CommonProjectionTensorComparisonNormal
 
 /-! # Representative compatibility for the common-stage open pullback/tensor square
 
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-common-projection-open-pullback-tensor-forward-compatibility).
-
 This is the concrete compatibility equation needed to apply the generic forward
 transport lemma. -/
 
@@ -73,14 +70,7 @@ attribute [local irreducible] StageSystem.ι StageSystem.PairCategory.mkHom
 set_option allowUnsafeReducibility true in
 attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem
 
-/-- The finite-stage representative equation for the common-stage open square.
-
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-common-projection-open-pullback-tensor-forward-compatibility).
-
-Proof: normalize the rational and common tensorators and pullback comparisons,
-evaluate the canonical common-stage pullback/tensor representative at the included
-pair, and cancel the transition maps and scalar unit. -/
+/-- The finite-stage representative equation for the common-stage open square. -/
 theorem commonProjectionOpenPullbackTensor_forward_compatibility
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C)

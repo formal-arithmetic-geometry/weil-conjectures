@@ -30,8 +30,18 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Natural prescribed evaluation tensor comparison on complexes
 
-Source: Stacks 03EK, 07A4 and 0941.
-(blueprint: lem-coef-normalized-evaluation-tensor-chain).
+We show that the prescribed evaluation tensor maps assemble naturally on all complexes.
+
+## Implementation details
+
+The natural ordinary evaluation tensor isomorphism is totalized; evaluation preserves the
+coproducts in each degree since it is a left adjoint. The generator characterization of
+`coefficientEvaluationTensorIso` identifies each component of the resulting total isomorphism
+with the prescribed map.
+
+## References
+
+* [Stacks, Tags 03EK, 07A4, 0941]
 -/
 
 @[expose] public section
@@ -172,18 +182,7 @@ private theorem evaluationSection_heq (n : ℕ)
   unfold coefficientEvaluationSection
   exact transport_heq _ _
 
-/-- The prescribed evaluation tensor maps assemble naturally on all complexes.
-Source: Stacks 03EK, 07A4 and 0941.
-
-Proof: totalize the natural ordinary evaluation tensor isomorphism. Evaluation
-preserves the coproducts defining each degree because it is a left adjoint; its
-summand formula is compatible with both differentials. Its inverse generator
-formula and inverse cancellation give the forward generator formula. Every
-section transport heterogeneously equal to the identity equals the canonical
-transport, so this formula holds for coefficientEvaluationSection. The unique
-generator characterization of coefficientEvaluationTensorIso identifies each
-component of the natural total isomorphism with that prescribed map.
-(blueprint: lem-coef-normalized-evaluation-tensor-chain). -/
+/-- The prescribed evaluation tensor maps assemble naturally on all complexes. -/
 theorem coefficientNormalizedEvaluationTensorChain (n : ℕ) :
     ∃ b : coefficientTotalTensor.{u, t+1, t}
         (coefficientSequenceTopology (Scheme.ProEt.topology W))
