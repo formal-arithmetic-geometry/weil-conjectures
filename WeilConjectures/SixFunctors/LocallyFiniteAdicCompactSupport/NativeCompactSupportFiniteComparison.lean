@@ -12,7 +12,22 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompact
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompactSupportIntegralLocalization
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompactSupportFiniteScalarCoherence
 
-/-! # Finite-stage native compact-support scalar comparisons -/
+/-! # Finite-stage native compact-support scalar comparisons
+
+## Implementation details
+
+The integral components of the finite-stage comparison are given by the six-arrow formula
+of `IntegralNormalization`: extension by zero, localized direct-image comparison, the
+bounded-push comparison from the finite coefficient field to the algebraic closure, and
+the open scalar change, conjugated by the integral realization isomorphisms and
+`operationTransport`. Integral naturality extends to fractions by inverting the
+uniformizer. The construction stays at finite stages; descent on arbitrary common-field
+Hom classes and preservation of native constructibility are handled separately.
+
+## References
+
+* [Bhatt--Scholze, Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -52,9 +67,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (P : CoefficientConstruction l (ULift.{u} (PadicAlgCl l)) D hl (f := f))
   (c : Compactification f)
 
-/-- Realizations at the three schemes with one compatible family of coefficient maps.
-Source: Bhatt--Scholze, Proposition 6.8.14, and normalized completion inclusions.
-(blueprint: lem-sf-native-compact-support-finite-comparison). -/
+/-- Realizations at the three schemes with one compatible family of coefficient maps. -/
 structure CoefficientFamily [G : NativeGeometry.{u} l] where
   source : Realization l X
   target : Realization l Y
@@ -69,9 +82,7 @@ structure CoefficientFamily [G : NativeGeometry.{u} l] where
   change_middle : ∀ E : Index l (PadicAlgCl l),
     (change E).map c.Z = (middle.coefficient E).integralMap l c.Z
 
-/-- Finite-stage comparisons, natural on rational arrows and compatible with stage changes.
-Source: Bhatt--Scholze, Remark 6.8.15, and the proper/open scalar counit mate.
-(blueprint: lem-sf-native-compact-support-finite-comparison). -/
+/-- Finite-stage comparisons, natural on rational arrows and compatible with stage changes. -/
 structure FiniteComparison [G : NativeGeometry.{u} l]
     (stage : StageAction l D hl P c) (F : CoefficientFamily l c) where
   alpha : ∀ E : Index l (PadicAlgCl l),
@@ -124,39 +135,10 @@ private theorem integralNormalization_of_components [G : NativeGeometry.{u} l]
       ha₅.2.2.2.1.heq, ha₅.2.2.2.2.1.heq, ha₅.2.2.2.2.2.1.heq,
       (congrArg (sections l Y).mapDerivedCategory.map hcomponent).trans ha₅.2.2.2.2.2.2⟩
 
-/-- The proper/open scalar mate is invertible on finite rational constructible inputs.
-Source: Bhatt--Scholze, Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15;
-steps 1--10 of the native compact-support realization plan.
-(blueprint: lem-sf-native-compact-support-finite-comparison).
-
-Proof: choose normalized realizations of X, Y and Z as in the constructible realization
-lemma. At every scheme the completed-integral coefficient map sends an integral function
-to that same locally finite function, so it commutes with pullback. This gives change,
-and its values on X, Y and Z agree with the chosen coefficient presentations.
-For integral K first extend by zero. The open reduction comparison and uniform open
-interval theorem show that this remains complete constructible. The stratified-perfect
-characterization gives boundedness below, and integral residue Tor gives the uniform
-finite-level Tor bounds. The integral compactification-system realization and completed
-direct-image limit comparison identify the recorded integral operation with actual
-proper image of this open extension, with its chosen quotient projections.
-Apply localized direct-image comparison to this bounded-below open object, then the
-bounded-push comparison from the finite coefficient field to the algebraic closure.
-The flat coefficient associator and pasted-mates identity identify their composite with
-the single proper scalar counit mate. Open scalar change is the K-flat tensor map
-b tensor j_!m mapped to j_!(b restricted tensor m), which is invertible.
-Compose these two maps and conjugate by the source and target integral realization
-isomorphisms and operationTransport. The resulting component has exactly the original
-six-arrow formula of
-IntegralNormalization; every factor is invertible. Any comparison
-whose components are these finite-stage components has this formula, giving integral.
-Integral naturality extends to fractions by inverting the uniformizer scalar, giving
-alpha E on the raw rational category. The prescribed P rationalLeft and scalar q identify
-these maps with the recorded operation. The common-field normalizations of both
-realizations, the P coefficient cocycle, finite-free completed scalar comparison and
-pasted counit identities show compatibility with isoToStage: both composites send a
-pure tensor b tensor a tensor m to ba tensor m. Thus transition holds on all rational
-objects. The construction remains at finite stages; descent on arbitrary common-field
-Hom classes and native constructibility preservation are separate arguments. -/
+/-- The proper/open scalar mate is invertible on finite rational constructible inputs: there
+are coefficient realizations at the three schemes and finite-stage comparison isomorphisms,
+compatible with stage changes, whose integral components have the six-arrow formula of
+`IntegralNormalization`. -/
 theorem native_compact_support_finite_comparison [G : NativeGeometry.{u} l]
     (stage : StageAction l D hl P c) :
     ∃ F : CoefficientFamily l c, Nonempty (FiniteComparison l D hl P c stage F) := by

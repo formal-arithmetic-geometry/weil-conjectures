@@ -17,8 +17,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
 
 /-! # Composition of section scalar extension to the closure
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-finite-condensed-section-scalar-composition)
+## References
+
+* [Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2)]
 -/
 
 @[expose] public noncomputable section
@@ -1071,9 +1072,7 @@ variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]
   [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
 
 /-- Section encoding of extension to the condensed algebraic closure, before any
-raw-stage realization or constructibility lift is introduced.
-Source: BS 6.8.2, the section scalar adjunction and the finite coefficient cocone.
-(blueprint: lem-sf-finite-condensed-section-scalar-composition). -/
+raw-stage realization or constructibility lift is introduced. -/
 @[irreducible] def finiteCondensedClosureEncoding (A : FiniteCondensedData l X)
     (E : Index l (PadicAlgCl l)) :
     ProEtale.derivedExtendScalarsToPadicAlgCl X l E ⋙ integralSections l X ≅
@@ -1094,22 +1093,7 @@ Source: BS 6.8.2, the section scalar adjunction and the finite coefficient cocon
     Functor.isoWhiskerRight (eqToIso (finiteCondensedEncoding_functor l X A E)).symm
       (pbcDerivedExtend (A.closure.leg E))
 
-/-- The section scalar mate preserves composition to the closure.
-Source: BS 6.8.2 and tensor transitivity in 6.8.14(2).
-(blueprint: lem-sf-finite-condensed-section-scalar-composition).
-
-Proof in words: express both finite and closure section comparisons as the unique
-inverse mates of the identity-on-sections restriction comparisons. The restriction
-comparisons compose: after applying the section equivalences, both are identity
-linear maps on every section. This equality passes to derived categories by exact
-localization. Horizontal pasting of mates gives the corresponding composition
-identity for extension. The internal tensor compositor is the derived ordinary
-tensor compositor; its unit characterization agrees with the adjunction mate.
-Finally apply associativity of left-adjoint composition to the finite ring
-isomorphisms, their scalar square and the closure cocone. All inverse mates are
-invertible, so cancellation gives the displayed identity. Identity inclusions,
-zero complexes and the empty scheme use the same unit equations.
--/
+/-- The section scalar mate preserves composition to the closure. -/
 theorem finiteCondensedClosureEncoding_comp (A : FiniteCondensedData l X)
     {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (M : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
