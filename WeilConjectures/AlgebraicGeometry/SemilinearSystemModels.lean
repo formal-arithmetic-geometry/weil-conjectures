@@ -188,7 +188,8 @@ abbrev Systems := Mod.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, 
 /-- The derived category `D(S(B))` of strict semilinear systems. -/
 abbrev DS := D.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J B τ)
 
-omit [EssentiallySmall.{r} C] in
+-- `omit` would drop universe `r` from the signature; callers pass universes explicitly.
+set_option linter.unusedSectionVars false in
 /-- The slice inclusion is continuous for the actual vertical topology. -/
 theorem evaluation_continuous (n : ℕ) :
     (Prod.sectR n C).IsContinuous J (coefficientSequenceTopology J) := by

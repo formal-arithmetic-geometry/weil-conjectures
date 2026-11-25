@@ -56,7 +56,7 @@ theorem finite_coproduct_sheaf_core (X : Scheme.{u}) (I : Type v) [Finite I]
         ∀ F : Sheaf (topology X) (Type (max (u + 1) w)),
           Nonempty (Unique (F.obj.obj (op W)))) := by
   classical
-  clear hqc hqs
+  clear _hqc _hqs
   have hopen (i : I) : IsOpenImmersion (ι i).left := by
     rw [← hι i]
     infer_instance

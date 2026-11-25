@@ -199,7 +199,7 @@ theorem smallModel_sourceDerivedSections_naturality_evaluation
       (e₁ V).hom ≫ H.map
         ((NatTrans.mapHomologicalComplex
           ((sheafSections T AddCommGrpCat.{v + 1}).map a.op) (.up ℤ)).app L) := by
-  clear q K
+  clear _q K
   dsimp only
   rw [← cancel_epi (smallModel_sourceClassDerivedHomIso ((strictLocalFreeSheaf T).obj V) L n).hom]
   simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc]
