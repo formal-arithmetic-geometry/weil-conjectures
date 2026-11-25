@@ -21,13 +21,15 @@ public import Mathlib.RingTheory.Ideal.Quotient.Index
 
 /-! # Exact isomorphism transport at integral and field coefficient stages
 
-Source: main-20261015, sec-poincare-duality/sk-lem-finite,
-prop-weil-operations.proof.md, sentence 1, through prose-10-20,
-first paragraph (blueprint: def-pod-isomorphism-field-transport-clauses).
+For an isomorphism of schemes `g`, this file records the properties of pullback along `g` at a
+finite coefficient field (integral and rational stages), the scalar-extension compatibility of
+the inverse equations, and the corresponding clauses at the common algebraically closed stage.
 
-All functors, coefficient maps, scalar comparisons and quotient Hom constructors
-below are the published constructions. The clause records specify comparisons,
-rather than selecting arbitrary inverse equivalences.
+## Implementation details
+
+All functors, coefficient maps, scalar comparisons and quotient Hom constructors are the existing
+constructions. The clause records specify the comparison maps explicitly rather than selecting
+arbitrary inverse equivalences.
 -/
 
 @[expose] public noncomputable section
@@ -53,10 +55,10 @@ namespace WeilConjectures
 open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion)
 open GeneralAlgebraicallyClosedCoefficients (ofHom inclusion)
 
-/-- Clauses at one finite field, retaining the normalized lambda and epsilon and
-localizing the latter on every rational object. Source: the integral and rational
-paragraphs of the inverse automorphism argument
-(blueprint: def-pod-isomorphism-field-transport-clauses). -/
+/-- Properties of pullback along an isomorphism `g` at one finite coefficient field `E`:
+exactness and equivalence at the module, integral and rational stages, together with the
+normalized comparison `lambda` and counit `epsilon`, the latter localized on every rational
+object. -/
 structure IsomorphismFieldTransportStage
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -125,9 +127,8 @@ structure IsomorphismFieldTransportStage
     HEq (rationalEpsilon.hom.app K)
       ((sfRationalConstructibleLocalization l E Y).map (epsilon.hom.app K.obj))
 
-/-- The scalar inverse equation for the prescribed completed scalar/pullback maps.
-Source: scalar paragraph, inverse automorphism argument
-(blueprint: def-pod-isomorphism-field-transport-clauses). -/
+/-- The integral counit of `g` and `inv g` is compatible with scalar extension along
+`ι : E → L` via the integral pullback scalar comparisons. -/
 def isomorphismFieldTransportScalarLaw
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -147,10 +148,8 @@ def isomorphismFieldTransportScalarLaw
       ((integralScalarExtensionOfUniverses l E L ι Y).map
         (pullbackIdentityEpsilon l E g K).hom)
 
-/-- Localization of the inverse/scalar equation on every rational object. Naturality
-of the natural isomorphisms ranges over all localized arrows.
-Source: rational and scalar paragraphs, inverse automorphism argument
-(blueprint: def-pod-isomorphism-field-transport-clauses). -/
+/-- The rational counits `SE.rationalEpsilon` and `SL.rationalEpsilon` are compatible with
+rational scalar extension along `ι : E → L` via the rational pullback scalar comparisons. -/
 def isomorphismFieldTransportRationalScalarLaw
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -173,9 +172,9 @@ def isomorphismFieldTransportRationalScalarLaw
     (sfRationalScalarExtension l E Y 0
       (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).map (SE.rationalEpsilon.hom.app K)
 
-/-- Common-stage clauses use the actual quotient arrows and inclusion of the localized
-finite-stage epsilon. Source: final common-stage paragraphs, inverse automorphism argument
-(blueprint: def-pod-isomorphism-field-transport-clauses). -/
+/-- Properties of common-stage pullback along an isomorphism `g`: it is an exact equivalence,
+compatible with the stage inclusions, given on objects and quotient arrows by the stagewise
+pullbacks, with counit induced by the finite-stage rational counits. -/
 structure IsomorphismFieldTransportCommon
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

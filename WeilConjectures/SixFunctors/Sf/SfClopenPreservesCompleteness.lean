@@ -135,8 +135,10 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # Derived completeness under clopen restriction
 
-Source: Stacks Project, Tags 08TC and 06YY.
-(blueprint: lem-sf-clopen-preserves-completeness).
+## References
+
+* [Stacks, Tag 08TC](https://stacks.math.columbia.edu/tag/08TC)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public noncomputable section
@@ -514,29 +516,7 @@ private instance clopen_additive
   unfold sfClopenDerivedRestriction
   infer_instance
 
-/-- Derived completeness under clopen restriction.
-
-Source: Stacks Project, Tags 08TC and 06YY; the Roos paragraph of
-lem-sf-clopen-derived-compatibility
-(blueprint: lem-sf-clopen-preserves-completeness).
-
-Proof: Choose the K-flat resolution and the specified augmented Roos triangle in the
-global completeness witness. Ordinary module restriction is a right adjoint and
-preserves products. Exact products on the two pro-etale module categories imply
-that localization preserves products, and hence the induced derived restriction
-preserves them as well. Apply the finite-clopen tensor calculus to U and its open
-complement, and then transport along the completed coefficient isomorphism, to
-obtain a restricted K-flat complex. Its identity resolution, together with the
-mapped localization isomorphism, supplies the local representative. The normalized quotient
-comparison commutes with transitions and with x mapping to 1 tensor x. Thus the
-image of the global augmented tower is isomorphic to the local augmented tower.
-Apply the triangulated restriction functor to the Roos triangle and identify its
-two product vertices with the local product using the projection equations. On
-projection n, its middle map is pi_n minus tau_n pi_(n+1), hence exactly the local
-Roos endomorphism. Its first map is the local canonical augmentation, by the unit
-comparison. Transport the connecting map along the product and shift isomorphisms.
-This gives the required local completeness witness with the same auxiliary finite
-field datum. If U is empty, the image triangle is the zero distinguished triangle. -/
+/-- Derived completeness under clopen restriction. -/
 theorem sf_clopen_preserves_completeness
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (T : Scheme.{t}) (U : T.Opens)

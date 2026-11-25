@@ -105,13 +105,10 @@ theorem hasEtaleReductionLowerShriekIso_of_isProper_of_compatible (p : X ⟶ Y) 
 
 variable {ℓ E n} in
 /-- **The étale reduction `f^!` clause for a proper morphism** (`HasEtaleReductionLowerShriekIso`),
-from:
-* the compatibilities of (Pull) for `p` with the natural reduction triangles;
-* restriction of scalars along `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ` preserves bounded constructible complexes on `X`
-  and `Y`;
-* the identification of bounded constructible condensed `𝒪_E ⧸ ℓⁿ`-complexes with bounded
-  constructible étale ones (`EtaleOriginReading` on `X` and `Y`, `BoundedConstructibleOfEtale` on
-  `X`). -/
+under the hypotheses that pullback along `p` is compatible with the unit and with `δ`
+(`IntegersModPowPullUnitCompatible`, `IntegersModPowPullδCompatible`),
+`RestrictScalarsIntegersModPowBoundedConstructible` holds on `X` and `Y`, the étale reading
+`EtaleOriginReading` holds on `X` and `Y`, and `BoundedConstructibleOfEtale` holds on `X`. -/
 theorem hasEtaleReductionLowerShriekIso_of_isProper_of_comparisons (p : X ⟶ Y) [IsProper p.left]
     (hη : IntegersModPowPullUnitCompatible ℓ E n p.left)
     (hδ : IntegersModPowPullδCompatible ℓ E n p.left)

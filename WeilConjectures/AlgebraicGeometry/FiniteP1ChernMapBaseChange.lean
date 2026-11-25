@@ -448,12 +448,10 @@ private theorem chern_square_of_kummer
 
 attribute [local irreducible] AlgebraicGeometry.ProjectiveSpace
 
--- The original interface retains hN; this naturality proof works without positivity.
-set_option linter.unusedVariables false in
 /-- The normalized projective-line Chern maps satisfy the inverse-image square. -/
 theorem ordinaryFiniteP1_chern_map_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
-    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    (N : ℕ) (_hN : 0 < N) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)
     {S' S : Scheme.{u}} (f : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤)))
     (hS' : IsUnit (N : Γ(S', ⊤)))

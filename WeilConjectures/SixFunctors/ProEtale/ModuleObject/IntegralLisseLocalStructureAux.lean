@@ -319,7 +319,7 @@ lemma constRegularEnd_hom (X : Scheme.{u})
   Mod.regularLift_regular_hom_eq_globalSmul _
 
 /-- The pullback of `Λ_X`-modules along `g`, normalized by the inverse of the coefficient
-comparison `α_g : g^* Λ_X ≅ Λ_Y` instead of extension of scalars along it. -/
+comparison `α_g : g^* Λ_X ≅ Λ_Y`. -/
 noncomputable abbrev normalizedUpperStar {X Y : Scheme.{u}} (g : Y ⟶ X) :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ⥤
       Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y) :=

@@ -66,12 +66,7 @@ instance isIso_whiskerLeft_rightDerivedComparisonBaseChange (f : Z ⟶ Y) :
     (isEtaleOrigin_of_isConstructible _ M.property).plusEtaleOrigin
 
 /-- **The étale reading commutes with pullback**: the canonical isomorphism
-`Lf^* ⋙ ρ_Z ≅ ρ_Y ⋙ Lf^*_{ét}`, composite of the compatibility of the inclusion of bounded
-constructible complexes with `Lf^*` (`boundedConstructibleUpperStarCompatibility`), of the
-finite-coefficient comparison `Φ` with `Lf^*`
-(`leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso`) and of the inverse of the base
-change morphism `Lf^* Rν_* ⟶ Rν_* Lf^*` (`rightDerivedComparisonBaseChange`), which is invertible
-on the objects `Φ(M)` of étale origin. -/
+`Lf^* ⋙ ρ_Z ≅ ρ_Y ⋙ Lf^*_{ét}`. -/
 noncomputable def finiteEtaleReadingUpperStarIso (f : Z ⟶ Y) :
     boundedConstructibleUpperStar (Profinite.integersModPowRingObj ℓ E n) ℓ f ⋙
         finiteEtaleReading ℓ E n Z ≅

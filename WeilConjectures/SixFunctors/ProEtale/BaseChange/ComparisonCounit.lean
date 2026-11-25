@@ -10,9 +10,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Compatibility of canonical derived site comparisons
 
-These statements use the defining expressions of the comparison isomorphisms of
-`SixFunctors/ProEtale/BaseChange/SmoothBaseChange.lean`; they are the inputs of
-`AlgebraicGeometry.ProEtale.comparison_derivedBaseChangeMap` there.
+These statements use the defining expressions of the comparison isomorphisms of the smooth base
+change file; they are the inputs of `AlgebraicGeometry.ProEtale.comparison_derivedBaseChangeMap`.
+
+## References
+
+* [Stacks, Tag 0B65](https://stacks.math.columbia.edu/tag/0B65)
 -/
 
 @[expose] public section
@@ -191,16 +194,7 @@ theorem comparison_counit_plus {U V : Scheme.{u}} (f : U ⟶ V)
   rw [mateEquiv_counit]
   simp
 
-/-- The direct-image comparison is the counit mate of the specified pullback comparison.
-Reference: Stacks Project, Tag 0B65.
-
-Proof: the underived direct-image comparison is the inverse mate of the restriction
-comparison. The pullback comparison is the adjoint conjugate of the same restriction
-comparison. The mate counit identity therefore holds on sheaves. Apply it to complexes;
-the defining unit factorization of rightDerivedFunctorPlusBaseChange and uniqueness of
-right derived transformations give the identity on D+. The Plus-to-unbounded compatibility
-isomorphisms transport the two counits to the indicated unbounded counit. This identifies
-these fixed maps, without choosing a new direct-image isomorphism. -/
+/-- The direct-image comparison is the counit mate of the specified pullback comparison. -/
 theorem comparison_counit {U V : Scheme.{u}} (f : U ⟶ V)
     [QuasiCompact f] [QuasiSeparated f]
     (K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

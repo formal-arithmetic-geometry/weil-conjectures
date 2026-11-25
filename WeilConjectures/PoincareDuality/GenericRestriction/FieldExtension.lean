@@ -18,15 +18,14 @@ Let `k ⟶ L` be a field extension, `X` a separated `k`-scheme of finite type an
 with internal homs of bounded constructible `ℚ̄_ℓ`-complexes: the comparison
 `Lπ^* RHom(K, M) ⟶ RHom(Lπ^* K, Lπ^* M)`
 (`ProEtale.CondensedRing.ihomUpperStarComparison`) is an isomorphism
-(`ProEtale.CondensedRing.isIso_ihomUpperStarComparison_of_fieldExtension`). This is the
-internal-hom assertion of blueprint `lemma-restriction-geometric-generic-fibre` (2) for a change of
-the base field; the geometric generic fibre of blueprint `lemma-restriction-geometric-generic-fibre`
-is such a change of base field followed by the weakly étale inclusion of a generic point
+(`ProEtale.CondensedRing.isIso_ihomUpperStarComparison_of_fieldExtension`). The pullback to
+a geometric generic fibre is such a change of base field followed by the weakly étale inclusion
+of a generic point
 (`WeilConjectures.PoincareDuality.GenericRestriction.GenericFibre`).
 
-## Proof
+## Implementation details
 
-As in the blueprint, by noetherian induction on the closed subschemes `Z` of `X`, in the second
+The proof is by noetherian induction on the closed subschemes `Z` of `X`, in the second
 variable `M`. By topological invariance we may replace `Z` by its reduction. On a reduced `Z`,
 `K` is dualizable on a nonempty open `j : U ⟶ Z`
 (`ProEtale.CondensedRing.exists_isOpenImmersion_exactPairing_upperStar`, from generic
@@ -37,6 +36,10 @@ immersions commute with the change of the base field (Stacks 0F1C,
 lemmas of `WeilConjectures.PoincareDuality.GenericRestriction.Comparison` reduce the comparison
 at `(K, M)` to the comparisons on `U` and on the closed complement of `U`, which holds by
 induction.
+
+## References
+
+* [Stacks, Tag 0F1C]
 -/
 
 @[expose] public section
@@ -56,9 +59,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 /-- **Generic dualizability**, in the ambient derived category: a bounded constructible
 `ℚ̄_ℓ`-complex `K` on a nonempty reduced separated `k`-scheme of finite type `Z` has a left dual
-on some nonempty open subscheme `U ⟶ Z`. It is
-`ProEtale.CondensedRing.exists_isOpenImmersion_triangEnvelope_isDualizable`, the dualizable objects
-of the ambient derived category forming a triangulated subcategory stable under retracts. -/
+on some nonempty open subscheme `U ⟶ Z`. -/
 theorem exists_isOpenImmersion_exactPairing_upperStar (Z : Over (Spec (.of k)))
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [IsReduced Z.left]
     [Nonempty Z.left]
@@ -162,9 +163,8 @@ lemma isIso_baseChangeMap_app_of_isPullback_fieldExtension {Z V : Over (Spec (.o
 morphism of separated `k`-schemes of finite type with fully faithful `Rf_*` (an open or a closed
 immersion), and `f' : V_L ⟶ Z_L` its base change along the field extension, again with fully
 faithful `Rf'_*`. If the comparison of `π_V : V_L ⟶ V` is an isomorphism at `(Lf^* K, N)`, then
-the comparison of `π_Z` is an isomorphism at `(K, Rf_* N)`, for bounded constructible `K` and `N`:
-`Rf_*` commutes with the change of the base field
-(`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isPullback_fieldExtension`). -/
+the comparison of `π_Z` is an isomorphism at `(K, Rf_* N)`, for bounded constructible `K` and
+`N`. -/
 lemma isIso_ihomUpperStarComparison_rightDerivedLowerStar_of_fieldExtension
     {Z V : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
     [IsSeparated Z.hom] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
@@ -224,12 +224,7 @@ private lemma isIso_ihomUpperStarComparison_of_isIso_open_closed_of_forall
 
 /-- The noetherian induction behind `isIso_ihomUpperStarComparison_of_fieldExtension`: for a
 closed immersion `c : Z ⟶ X` with image in the closed subset `C` of `X`, the comparison of the
-base change `π_Z : Z_L ⟶ Z` is an isomorphism at bounded constructible `(K, M)`. By topological
-invariance we may replace `Z` by its reduction; for reduced nonempty `Z`, `K` has a left dual on
-a nonempty open subscheme `U` (`exists_isOpenImmersion_exactPairing_upperStar`), and the
-dévissage in the second variable
-(`ProEtale.CondensedRing.isIso_ihomUpperStarComparison_of_isIso_open_closed`) reduces to `U`
-and to the closed complement of `U`, whose image in `X` is strictly smaller. -/
+base change `π_Z : Z_L ⟶ Z` is an isomorphism at bounded constructible `(K, M)`. -/
 theorem isIso_ihomUpperStarComparison_of_fieldExtension_of_range_subset (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     (C : TopologicalSpace.Closeds X.left) :
@@ -314,9 +309,8 @@ theorem isIso_ihomUpperStarComparison_of_fieldExtension_of_range_subset (X : Ove
       N hN (ih _ hlt _ (i ≫ c) subset_rfl (isPullback_fieldExtension_of_isPullback i sqZ sqW) _ _
         (boundedConstructible_leftDerivedUpperStar_obj _ ℓ i ⟨K, hK⟩) hN)
 
-/-- **Internal homs commute with a change of the base field** (blueprint
-`lemma-restriction-geometric-generic-fibre` (2), for the change of the base field `k ⟶ L`): for a
-separated `k`-scheme of finite type `X`, its base change `π : X_L ⟶ X` and bounded constructible
+/-- **Internal homs commute with a change of the base field** `k ⟶ L`: for a separated
+`k`-scheme of finite type `X`, its base change `π : X_L ⟶ X` and bounded constructible
 `ℚ̄_ℓ`-complexes `K` and `M` on `X`, the comparison
 `Lπ^* RHom(K, M) ⟶ RHom(Lπ^* K, Lπ^* M)` is an isomorphism. The extension `L / k` may be
 transcendental and inseparable. -/

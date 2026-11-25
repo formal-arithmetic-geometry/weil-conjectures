@@ -80,7 +80,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ZetaWeil.Profin
 
 /-! # Derived coefficient extension under profinite slice restriction
 
-Source: Hemo--Richarz--Scholbach, (3.1)--(3.2), Remark 3.2; Stacks 06YY and 07A4.
+## References
+
+* Hemo--Richarz--Scholbach, (3.1)--(3.2), Remark 3.2
+* Stacks Project, Tags 06YY and 07A4
 -/
 
 -- After pruning, this module only keeps private declarations.

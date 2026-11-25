@@ -15,8 +15,7 @@ pro-étale sheaves of modules, the sheaf of sections supported on `Z` is
 `𝒢_Z M = ker (M ⟶ j_* j^* M)` (`AlgebraicGeometry.ProEtale.sectionsWithSupport`), and
 `i^! M = i^* 𝒢_Z M` (`AlgebraicGeometry.ProEtale.closedUpperShriek`). This file records that
 `i_* i^! M ≅ 𝒢_Z M` and defines the sheaves which are *flasque for the pair*: those for which
-`I ⟶ j_* j^* I` is an epimorphism. These are the pro-étale forms of blueprint
-`definition-local-cohomology`, whose étale forms are in
+`I ⟶ j_* j^* I` is an epimorphism. These are the pro-étale forms of the notions in
 `WeilConjectures.SixFunctors.OpenClosed.SupportedSections`.
 
 ## Main definitions
@@ -42,9 +41,7 @@ section Flasque
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   {U X : Scheme.{u}} (j : U ⟶ X)
 
-/-- Blueprint `definition-local-cohomology`: Supported sections and flasque objects
-
-A pro-étale sheaf `I` on `X` is *flasque for the pair* `(Z, U)` if the restriction
+/-- A pro-étale sheaf `I` on `X` is *flasque for the pair* `(Z, U)` if the restriction
 `I ⟶ j_* j^* I` to the open part `j : U ⟶ X` is an epimorphism; then
 `0 ⟶ 𝒢_Z I ⟶ I ⟶ j_* j^* I ⟶ 0` is exact, `𝒢_Z I` being the kernel
 (`AlgebraicGeometry.ProEtale.sectionsWithSupport`). -/
@@ -56,9 +53,7 @@ end Flasque
 variable {R : Type (u + 1)} [Ring R] {Z U X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
   (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
 
-/-- Blueprint `definition-local-cohomology`: Supported sections and flasque objects
-
-For a closed immersion `i : Z ⟶ X` with quasi-compact open complement `j`, the pushforward of
+/-- For a closed immersion `i : Z ⟶ X` with quasi-compact open complement `j`, the pushforward of
 `i^! M = i^* 𝒢_Z M` is the sheaf of supported sections: `i_* i^! M ≅ 𝒢_Z M`, through the unit of
 `i^* ⊣ i_*`, which is invertible on sheaves vanishing on `U`
 (`AlgebraicGeometry.ProEtale.isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl`). -/

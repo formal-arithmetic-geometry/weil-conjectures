@@ -17,6 +17,19 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 import WeilConjectures.Topology.ConstructibleIsRetrocompact
 
+/-! # Reassembly of kernel separatedness over a constructible module
+
+Finite-presentation separatedness of ordinary integral quotients, reassembled over a constructible
+module.
+
+## References
+
+* Hemo, Richarz, Scholbach, Proposition 5.1
+* Hemo, Richarz, Scholbach, Proposition 7.6
+* Hemo, Richarz, Scholbach, Theorem 7.7
+* Bhatt, Scholze, Section 6.1
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -27,21 +40,7 @@ open AlgebraicGeometry Scheme
 
 -- Preserve the descriptive hypothesis names inside the supplied finite-presentation criterion.
 set_option linter.unusedVariables false in
-/-- Reassembly of finite-presentation separatedness over a constructible module.
-
-Source: Hemo--Richarz--Scholbach, Propositions 5.1 and 7.6 and Theorem 7.7;
-Bhatt--Scholze, Section 6.1.
-(blueprint: lem-sp-original-integral-ordinary-quotient-kernel-separated-reassembly).
-
-Proof. Constructibility gives a finite stratification and, on each stratum, a
-pro-étale cover on whose charts the pullback of the module is finitely
-presented. Pullback is additive and right exact, so it carries the vanishing
-of every quotient projection to the pulled-back map; the finite-presentation
-separatedness statement then makes the pullback of the map zero on every
-chart. A pro-étale cover detects zero maps, so the restriction to each stratum
-is zero. The strata are constructible, hence retrocompact, so their immersions
-are quasi-compact and jointly surjective; finite quasi-compact detection makes
-the map zero. -/
+/-- Reassembly of finite-presentation separatedness over a constructible module. -/
 theorem originalIntegralOrdinaryQuotientKernel_separated_of_finitePresentation
     (ell : ℕ) [Fact ell.Prime]
     (E : IntermediateField ℚ_[ell] (PadicAlgCl ell))

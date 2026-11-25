@@ -25,8 +25,9 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResidueComparisonInterfa
 
 /-! # Interface for coherent integral residue comparisons
 
-Source: Bhatt--Scholze, Lemma 6.5.9(3), and associativity of derived coefficient change.
-(blueprint: def-weil-pbc-residue-exchange-comparison-interface)
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(3).
 -/
 
 set_option backward.defeqAttrib.useBackward true
@@ -71,9 +72,7 @@ namespace IntegralResiduePullComparisons
 variable {ℓ E} (c : IntegralResiduePullComparisons.{u} ℓ E)
 
 /-- The direct-image comparison is the adjunction mate of the inverse pull comparison.
-This is an actual construction; no direct-image isomorphism is chosen.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), projection comparison by adjunction.
-(blueprint: def-weil-pbc-residue-exchange-comparison-interface). -/
+This is an actual construction; no direct-image isomorphism is chosen. -/
 noncomputable def push {X Y : Scheme.{u}} (f : X ⟶ Y) :
     residueExchangeLowerStar (integralCoeff ℓ E) f ⋙ residueExchangeReduction ℓ E Y ⟶
       residueExchangeReduction ℓ E X ⋙
@@ -85,9 +84,6 @@ noncomputable def push {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (TwoSquare.mk _ _ _ _ (c.pull f).inv))
 
 /-- The defining counit equation for the actual direct-image comparison.
-Source: Mathlib, mateEquiv_counit.
-(blueprint: lem-weil-pbc-integral-residue-push-counit)
-Proof. Apply the counit identity of the mates equivalence to the inverse pull comparison.
 -/
 theorem push_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : residueExchangeDerived (integralCoeff ℓ E) X) :

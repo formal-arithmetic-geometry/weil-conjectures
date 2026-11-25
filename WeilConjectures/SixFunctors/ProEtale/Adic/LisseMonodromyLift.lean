@@ -29,8 +29,7 @@ universal cover at `t`. For a lisse sheaf `G`, restriction along `ξ` identifies
   (`AlgebraicGeometry.ProEtale.liftStalkIso_globalSectionsTransport`).
 
 For `f` the Frobenius and `ψ` the Weil structure this compares the Frobenius at a generic
-geometric point with the Weil fundamental representation (blueprint
-`lemma-boundary-stalk--1`).
+geometric point with the Weil fundamental representation.
 -/
 
 @[expose] public section

@@ -45,7 +45,10 @@ The first strict substep proves the signed representative equation when both
 section complexes are termwise images of internal complexes. The hypotheses in
 `CoefficientScalarTensorRepresentativeBasicData` are exactly the normalized ordinary,
 scalar and derived comparison formulas needed for this restricted case.
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative-internal)
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -75,15 +78,7 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 /-- On reconstructed internal complexes, the normalized ordinary generator equation,
 its signed totalization, and the assumed derived tensor square give the representative
-identity. This is strictly the internal-image case of the main section-complex claim.
-
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, constituent total-complex maps.
-Use the proved ordinary and total-complex squares and the derived tensor counit
-square. The tensor of the two section models is K-flat with flat terms; transport
-these properties across totalComparison and apply hscalar to the tensor model.
-Normalize both localization tensor maps, paste the naturality, scalar and tensor
-squares, and cancel the composite comparison isomorphism.
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative-internal). -/
+identity. -/
 theorem coefficientScalarTensorRepresentative_internal
     (Z : Scheme.{u})
     (d : CoefficientScalarTensorRepresentativeBasicData a Z)

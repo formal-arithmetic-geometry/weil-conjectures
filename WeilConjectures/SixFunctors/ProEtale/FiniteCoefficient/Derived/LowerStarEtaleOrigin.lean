@@ -40,8 +40,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- For `f` quasi-compact and quasi-separated and a bounded below complex `K'` of étale sheaves,
 the pro-étale direct image of `ν^* K'` is `ν^* Rf_* K'`: the component at `K'` of the comparison
-isomorphism `AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonIso'` (blueprint
-`theorem-comparison-direct-images--1`). -/
+isomorphism `AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonIso'`. -/
 noncomputable def rightDerivedLowerStarMapDerivedCategoryObjIso
     (K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (hK' : _root_.DerivedCategory.TStructure.t.plus K') :

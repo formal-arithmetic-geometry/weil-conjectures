@@ -87,8 +87,6 @@ private theorem cokernel_support_ssubset (X : Scheme.{u}) {K F : X.Modules}
     exact hξ
   exact this hQξ
 
--- The residue-field instance is used implicitly by finrank.
-set_option linter.unusedVariables false in
 /-- A nonzero ideal pushforward and a coherent module of generic rank one admit
 monomorphisms from a common module, with coherent cokernels of strictly smaller support.
 No filtration is asserted here. (Stacks, Tag 01YH) -/
@@ -99,7 +97,7 @@ theorem exists_integral_ideal_common_submodule (X W : Scheme.{u})
     (hGann : ∀ a ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk (i.base (genericPoint W))),
       ∀ v : (RingedSpace.moduleStalkFunctor X.toRingedSpace
         (i.base (genericPoint W))).obj G, a • v = 0)
-    (hGrank : ∃ inst : Module (X.residueField (i.base (genericPoint W)))
+    (hGrank : ∃ _inst : Module (X.residueField (i.base (genericPoint W)))
       ((RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint W))).obj G),
       (∀ (a : X.presheaf.stalk (i.base (genericPoint W)))
         (v : (RingedSpace.moduleStalkFunctor X.toRingedSpace

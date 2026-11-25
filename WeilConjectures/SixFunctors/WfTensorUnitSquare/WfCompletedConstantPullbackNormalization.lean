@@ -11,8 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumCompletedS
 import all WeilConjectures.AlgebraicGeometry.Weil.WeilTensorProduct
 
 /-! # Normalized pullback of completed constant modules
-
-Source: the coefficient-normalization step of the Frobenius tensor-unit argument.
 -/
 
 -- After pruning, this module only keeps private declarations.

@@ -208,8 +208,7 @@ end PadicIntegersRingObj
 namespace UnitBallRingObj
 
 /-- The tensor calculation for two constructible sheaves in degree zero, `O̲` coefficients for
-`O` the closed unit ball of a finite normed extension `E` of `ℚ_ℓ`.
-(blueprint: lem-sfb-dc-tensor-single) -/
+`O` the closed unit ball of a finite normed extension `E` of `ℚ_ℓ`. -/
 theorem boundedConstructible_tensor_single
     (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)] {E : Type} [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

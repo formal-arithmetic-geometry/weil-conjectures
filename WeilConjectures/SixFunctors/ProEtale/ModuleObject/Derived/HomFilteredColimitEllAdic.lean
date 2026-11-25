@@ -17,8 +17,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClFl
 /-!
 # Continuity of `Hom` out of constructible sheaves with `ℓ`-adic coefficients
 
-Blueprint `lemma-continuity-ext-out-constructible-complex--1` (1), and `sk-lem-int-ext` (1) for
-`𝒪_E`: for the `ℓ`-adic coefficient rings `Λ = E, 𝒪_E, ℚ̄_ℓ` and a separated finite-type scheme `X`
+For the `ℓ`-adic coefficient rings `Λ = E, 𝒪_E, ℚ̄_ℓ` and a separated finite-type scheme `X`
 over a field, morphisms `C ⟶ B[n]` out of a constructible sheaf `C` into a filtered colimit
 `B = colim Bᵢ` of sheaves factor through some `Bᵢ[n]`:
 
@@ -55,10 +54,9 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- Blueprints `lemma-continuity-ext-out-constructible-complex--1` and `sk-lem-int-ext` (1), lisse
-case for `𝒪_E`: on a scheme with noetherian underlying space, `Hom(L[0], -[n])` commutes with
-filtered colimits for every locally finitely presented `𝒪_{E,X}`-module `L`. Indeed `L` has a
-resolution `0 ⟶ F₁ ⟶ F₀ ⟶ L ⟶ 0` by locally free modules. -/
+/-- Lisse case for `𝒪_E`: on a scheme with noetherian underlying space, `Hom(L[0], -[n])`
+commutes with filtered colimits for every locally finitely presented `𝒪_{E,X}`-module `L`.
+Indeed `L` has a resolution `0 ⟶ F₁ ⟶ F₀ ⟶ L ⟶ 0` by locally free modules. -/
 theorem homCommutesWithFilteredColimits_singleFunctor_padicIntegersRingObj (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
     [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
@@ -83,7 +81,7 @@ theorem homCommutesWithFilteredColimits_singleFunctor_padicIntegersRingObj (E : 
     (homCommutesWithFilteredColimits_singleFunctor_of_isLocallyFree _ X h₁)
     (homCommutesWithFilteredColimits_singleFunctor_of_isLocallyFree _ X h₀)
 
-/-- Blueprint `lemma-continuity-ext-out-constructible-complex--1`, lisse case for `ℚ̄_ℓ`: on a
+/-- Lisse case for `ℚ̄_ℓ`: on a
 scheme with noetherian underlying space, `Hom(L[0], -[n])` commutes with filtered colimits for every
 locally finitely presented `ℚ̄_{ℓ,X}`-module `L`, which is locally free. -/
 theorem homCommutesWithFilteredColimits_singleFunctor_padicAlgClRingObj (X : Scheme.{u})
@@ -100,7 +98,7 @@ theorem homCommutesWithFilteredColimits_singleFunctor_padicAlgClRingObj (X : Sch
 
 variable {k : Type u} [Field k]
 
-/-- Blueprint `lemma-continuity-ext-out-constructible-complex--1` (1), for the coefficient ring `E`
+/-- For the coefficient ring `E`
 of a finite extension `E` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`: `Ext^q(C, -)` out of
 a constructible `E`-sheaf `C` commutes with filtered colimits of sheaves. -/
 theorem hasConstructibleExtContinuity_continuousMapRingObj_of_locallyOfFiniteType (E : Type)
@@ -115,7 +113,7 @@ theorem hasConstructibleExtContinuity_continuousMapRingObj_of_locallyOfFiniteTyp
     (fun _ _ ↦ homCommutesWithFilteredColimits_singleFunctor_continuousMapRingObj ℓ E _)
     X M hM).homFactorsThroughFilteredColimits
 
-/-- Blueprint `sk-lem-int-ext` (1), for the coefficient ring `𝒪_E` of a finite extension
+/-- For the coefficient ring `𝒪_E` of a finite extension
 `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`: `Ext^q(C, -)` out of a
 constructible `𝒪_E`-sheaf `C` commutes with filtered colimits of sheaves. -/
 theorem hasConstructibleExtContinuity_padicIntegersRingObj_of_locallyOfFiniteType (E : Type)
@@ -132,7 +130,7 @@ theorem hasConstructibleExtContinuity_padicIntegersRingObj_of_locallyOfFiniteTyp
     (fun _ _ ↦ homCommutesWithFilteredColimits_singleFunctor_padicIntegersRingObj ℓ E _)
     X M hM).homFactorsThroughFilteredColimits
 
-/-- Blueprint `lemma-continuity-ext-out-constructible-complex--1` (1), for the coefficient ring
+/-- For the coefficient ring
 `ℚ̄_ℓ` and a separated finite-type `k`-scheme `X`: `Ext^q(C, -)` out of a constructible `ℚ̄_ℓ`-sheaf
 `C` commutes with filtered colimits of sheaves. -/
 theorem hasConstructibleExtContinuity_padicAlgClRingObj_of_locallyOfFiniteType {X : Scheme.{u}}

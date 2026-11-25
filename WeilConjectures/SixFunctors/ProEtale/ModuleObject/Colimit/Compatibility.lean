@@ -28,7 +28,7 @@ Let `ℓ` be a prime, `E ≤ F` finite subextensions of `ℚ_ℓ` inside `ℚ̄_
 scheme `X`, to coefficient changes `ι : E_X ⟶ F_X` and `ι : E_X ⟶ ℚ̄_ℓ,X`
 (`ProEtale.coefficientMap`), inducing the derived extensions of scalars
 ```
-T^X_{E,F} = F_X ⊗ᴸ_{E_X} - ,   T^X_{E,Ω} = ℚ̄_ℓ,X ⊗ᴸ_{E_X} - .
+T^X_{E,F} = F_X ⊗ᴸ_{E_X} -,   T^X_{E,Ω} = ℚ̄_ℓ,X ⊗ᴸ_{E_X} -.
 ```
 The comparisons (Pull), (Push) and (Shriek) between these and the derived functors `Lf^*`,
 `Rf_*`, `Rf_!` on module objects are the ones of
@@ -58,7 +58,7 @@ coefficient changes. This file supplies the coefficient-specific input:
   in `WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite`), hence so is
   (Shriek) (`ProEtale.CondensedRing.isIso_derivedLowerShriekHom_app_padicAlgCl_of_isGE`). It is
   not an isomorphism on all unbounded objects, even for proper `f`: `Rf_*` need not commute
-  with direct sums (blueprint `sk-rem-sf-fullcd-scope`), while `ℚ̄_ℓ ≅ ⨁_ℕ E` as `E`-modules.
+  with direct sums, while `ℚ̄_ℓ ≅ ⨁_ℕ E` as `E`-modules.
 
 -/
 

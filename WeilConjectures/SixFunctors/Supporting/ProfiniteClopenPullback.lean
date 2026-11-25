@@ -12,10 +12,12 @@ import Mathlib.Topology.Separation.Regular
 /-!
 # Bijective clopen pullback between profinite spaces
 
-Source: agent consequence of Stacks Project, `topology.tex`, Tag 08ZZ
-(lemma-profinite-refine-open-covering), using its pointwise clopen-basis consequence.
-The criterion below is not the finite-refinement assertion of that tag.
-(blueprint: lem-sfb-profinite-clopen-pullback-bijective-open).
+A continuous map of profinite spaces inducing a bijection on clopen subsets is injective,
+surjective and open.
+
+## References
+
+* [Stacks, Tag 08ZZ](https://stacks.math.columbia.edu/tag/08ZZ)
 -/
 
 @[expose] public section
@@ -25,30 +27,7 @@ universe u v
 /-- A continuous map between compact Hausdorff totally disconnected spaces whose
 inverse image on clopens is bijective is injective, surjective and open. The image of
 each source clopen is the unique target clopen with that inverse image. Empty spaces
-are permitted.
-
-Source: agent separation and finite-subcover consequence of Stacks Project,
-`topology.tex`, Tag 08ZZ (lemma-profinite-refine-open-covering), using its pointwise
-clopen-basis consequence (blueprint: lem-sfb-profinite-clopen-pullback-bijective-open).
-
-Proof for stage 3:
-1. For distinct points of P, Hausdorffness and `lem-weil-pbc-profinite-clopen-basis`
-   give a clopen containing one and excluding the other. Surjectivity of clopen
-   pullback expresses it as an inverse image. Equal images of the two points would
-   give equal membership in that inverse image, a contradiction. Thus h is injective.
-2. If q in Q is outside h(P), Hausdorffness and
-   `lem-weil-pbc-profinite-clopen-basis` give, around every image point, a clopen
-   excluding q. The inverse images of all clopens excluding q cover P. Compactness
-   gives finitely many whose inverse images still cover P. Their union W is clopen,
-   excludes q and has the same inverse image as Q. Injectivity of clopen pullback
-   forces W = Q, a contradiction. The finite subcover may be empty; the argument
-   still applies. Hence h is surjective.
-3. For a source clopen U, surjectivity of clopen pullback gives a target clopen V
-   with inverse image U. Surjectivity of h implies h(U) = V. Injectivity of clopen
-   pullback makes this V unique, proving the image and uniqueness clauses.
-4. By `lem-weil-pbc-profinite-clopen-basis`, each open subset of P is a union of
-   clopens contained in it. Images commute with unions, and step 3 makes the images
-   of those clopens open. Thus h is open, including the empty-union case. -/
+are permitted. -/
 theorem bijective_and_isOpenMap_of_bijective_clopen_preimage
     {P : Type u} {Q : Type v} [TopologicalSpace P] [TopologicalSpace Q]
     [CompactSpace P] [T2Space P] [TotallyDisconnectedSpace P]

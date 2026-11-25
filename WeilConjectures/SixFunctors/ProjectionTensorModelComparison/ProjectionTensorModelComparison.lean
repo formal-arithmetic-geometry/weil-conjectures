@@ -12,8 +12,13 @@ import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionUnitCriterion
 
 /-! # Comparison of normalized quotient tensor models
 
-The private constructible-unit proof is the existing proof from the item, extracted so its
-checking is independent of coefficient transport. No definition or interface is changed.
+Comparison of normalized quotient tensor models, with the constructible-unit argument
+extracted as a private lemma.
+
+## References
+
+* Stacks Project, Tags `06YS`, `06YT`
+* Bhatt--Scholze, 3.4.10 and 6.5.5
 -/
 
 @[expose] public noncomputable section
@@ -94,17 +99,7 @@ private theorem ratio_of_squares {C : Type*} [Category* C] {U A B V W : C}
   rw [← he] at h'
   simpa only [Category.assoc] using h'
 
-/-- The normalized ratio of two tensor models intertwines their actual completion arrows.
-Source: Bhatt--Scholze 3.4.10 and 6.5.5; Stacks 06YS--06YT
-(blueprint: lem-sf-projection-tensor-model-comparison).
-Proof: restrict the derived localization to flat-term K-flat complexes and take its product.
-Fully faithful restriction lifts the ratio of the two representative isomorphisms to an
-isomorphism of the ordinary tensor functors. Its defining equation is the first clause.
-For the second clause, restrict to representatives and cancel the source representative and
-completed target representative. Both remaining maps are the localization of the same chain
-augmentation: tensorCompletionChain_unique identifies them from their two coordinates.
-Faithfulness of restriction proves the global equation. Empty sites and zero summands need
-no separate assumption, since the same universal properties apply. -/
+/-- The normalized ratio of two tensor models intertwines their actual completion arrows. -/
 theorem models_comparison (t s : OpenFactorCoherence.Tensor l E X) :
     ∃ e : t.ordinary.tensor ≅ s.ordinary.tensor,
       (∀ P Q : (proEtaleFlatRepresentatives X

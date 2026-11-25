@@ -14,11 +14,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Localization
 Let `k` be an algebraically closed field with `ringChar k ≠ ℓ`. This file proves that the
 compactly supported direct image `Rf_! = Rg_* ∘ i_!` along a compactification
 `X ⟶[i] Z ⟶[g] Y` of a morphism `f` of finite-type `k`-schemes carries `Dᵇc(X, ℚ̄_ℓ)` into
-`Dᵇc(Y, ℚ̄_ℓ)`, the `ℓ`-adic counterpart of blueprint `sk-prop-sf-finiteness`, i.e. clause (3) of
-`proposition-six-operations-dctf` at the stage `ℚ̄_ℓ`.
-
-As in `WeilConjectures.SixFunctors.ProEtale.Adic.Localization`, `Dᵇc(-, ℚ̄_ℓ)` is realised in the
-Bhatt–Scholze model: it is the full subcategory
+`Dᵇc(Y, ℚ̄_ℓ)`. Here `Dᵇc(-, ℚ̄_ℓ)` is realised in the Bhatt–Scholze model: it is the full
+subcategory
 `AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleAdic ℓ X` of the derived category
 of pro-étale sheaves of modules over the constant `ℓ`-adic sheaf.
 
@@ -54,21 +51,10 @@ lemma boundedConstructibleAdic_mapDerivedCategory_adicOpenImmersionLowerShriek
       ((((j)_!ᵃ[l]).mapDerivedCategoryHomologyFunctorIso n).app K)
       ((hK.2 n).openImmersionLowerShriek j)⟩
 
-/-- Blueprint `proposition-six-operations-dctf` (3), `Rf_!` at the stage `ℚ̄_ℓ`; the `ℓ`-adic
-counterpart of the finite-coefficient `sk-prop-sf-finiteness`.
-
-**Finiteness of compactly supported direct images with `ℚ̄_ℓ`-coefficients.** Let `k` be an
+/-- **Finiteness of compactly supported direct images with `ℚ̄_ℓ`-coefficients.** Let `k` be an
 algebraically closed field with `ringChar k ≠ ℓ`, `Y` quasi-compact and locally of finite type
 over `k`, and `f : X ⟶ Y` with a compactification `c = (X ⟶[i] Z ⟶[g] Y)`. Then
-`Rf_! = Rg_* ∘ i_!` carries `Dᵇc(X, ℚ̄_ℓ)` into `Dᵇc(Y, ℚ̄_ℓ)`: the extension by zero preserves
-`Dᵇc(-, ℚ̄_ℓ)` (`boundedConstructibleAdic_mapDerivedCategory_adicOpenImmersionLowerShriek`, `i`
-being quasi-compact as `Z` is noetherian), and so does `Rg_*`
-(`AlgebraicGeometry.ProEtale.boundedConstructibleAdic_rightDerivedFunctor_adicLowerStar_obj`).
-
-This replaces an earlier statement with *discrete* `ℚ̄_ℓ`-coefficients on the small étale site,
-which is not the `ℓ`-adic statement (for an elliptic curve `E` over `k`, `H¹(E, ℚ̄_ℓ)` vanishes
-with discrete coefficients). The finite-coefficient statement of the blueprint is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`. -/
+`Rf_! = Rg_* ∘ i_!` carries `Dᵇc(X, ℚ̄_ℓ)` into `Dᵇc(Y, ℚ̄_ℓ)`. -/
 theorem boundedConstructibleAdic_rightDerivedLowerShriek {k : Type u} [Field k] [IsAlgClosed k]
     (hk : ringChar k ≠ l) {X Y : Scheme.{u}} (s : Y ⟶ Spec (.of k)) [LocallyOfFiniteType s]
     [QuasiCompact s] {f : X ⟶ Y} (c : Compactification f) {K : DerivedCategory (AdicSheaf l X)}

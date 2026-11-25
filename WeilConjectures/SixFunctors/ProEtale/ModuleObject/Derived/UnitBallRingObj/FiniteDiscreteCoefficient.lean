@@ -75,7 +75,6 @@ There is no derived tensor product or derived hom on `Dᵇc(X)⟦T̲⟧`: the bo
 complexes over a torsion ring are not stable under `- ⊗ᴸ -` and `RHom(-, -)`. For `T = ℤ/4` on a
 geometric point of characteristic `3`, `Tor_i` and `Ext^i` of `ℤ/2` over `ℤ/4` are `ℤ/2` in every
 degree `i ≥ 0`.
-
 -/
 
 @[expose] public section
@@ -153,10 +152,7 @@ set_option linter.unusedSectionVars false in
 /-- **Deligne's finiteness theorem** for `Rf_*`: for `ℓ` invertible in `k` and a finite discrete
 ring `T` in which `ℓ` is nilpotent, the derived pushforward along a morphism of separated
 `k`-schemes of finite type carries bounded constructible complexes of `T`-sheaves to bounded
-constructible complexes (SGA 4½ [Th. finitude], 1.1). It is false for a general condensed ring: for
-the constant discrete ring `𝔽_p` and the affine line over an algebraically closed field of
-characteristic `p`, Artin–Schreier gives `H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which is
-infinite. -/
+constructible complexes. -/
 lemma boundedConstructible_rightDerivedLowerStar_obj
     (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj T⟧) :
     boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj T) Y.left)
@@ -285,10 +281,7 @@ set_option linter.unusedSectionVars false in
 /-- **Deligne's finiteness theorem** for `Rf_*`: for `ℓ` invertible in `k` and the closed unit
 ball `O` of a finite extension `E` of `ℚ_ℓ`, the derived pushforward along a morphism of separated
 `k`-schemes of finite type carries bounded constructible complexes of `O`-sheaves to bounded
-constructible complexes (SGA 4½ [Th. finitude] for torsion coefficients; Bhatt–Scholze,
-Section 6.8, for `O̲`). It is false for a general condensed ring: for the constant discrete ring
-`𝔽_p` and the affine line over an algebraically closed field of characteristic `p`, Artin–Schreier
-gives `H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which is infinite. -/
+constructible complexes. -/
 lemma boundedConstructible_rightDerivedLowerStar_obj
     (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj O⟧) :
     boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj O) Y.left)

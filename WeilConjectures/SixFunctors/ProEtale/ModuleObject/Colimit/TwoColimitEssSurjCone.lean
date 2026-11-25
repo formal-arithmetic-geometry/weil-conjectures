@@ -20,11 +20,10 @@ subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and some bounded constructible `K_E 
 This property is closed under isomorphisms and shifts, and, on a topologically noetherian `X`
 and assuming **(Hom)**-surjectivity, under extensions: if `K' ⟶ K ⟶ K'' ⟶ K'[1]` is
 distinguished and `K'`, `K''` descend, then so does `K`
-(`ProEtale.descendsToPadicSubfield_obj₂`, the cone step of blueprint
-`lemma-descent-finite-coefficient-field--2`). Indeed, the connecting morphism
-`K'' ⟶ K'[1]`, transported, descends by (Hom) to some `δ_H` over a common finite subextension
-`H`, and the cone of `δ_H` is bounded constructible and descends `K` by TR3 and the five lemma
-(`CategoryTheory.Functor.exists_distinguished_iso_obj₂_of_iso`).
+(`ProEtale.descendsToPadicSubfield_obj₂`, the cone step of the descent). Indeed, the connecting
+morphism `K'' ⟶ K'[1]`, transported, descends by (Hom) to some `δ_H` over a common finite
+subextension `H`, and the cone of `δ_H` is bounded constructible and descends `K` by TR3 and the
+five lemma (`CategoryTheory.Functor.exists_distinguished_iso_obj₂_of_iso`).
 
 The extensions of scalars being exact, their left derived functors are isomorphic to the
 triangulated functors `Functor.mapDerivedCategory`
@@ -108,7 +107,7 @@ lemma exists_iso_derivedExtendScalarsToPadicAlgCl_obj_of_le {E H : FiniteInterme
   ⟨ProEtale.boundedConstructible_leftDerivedExtendScalars_obj _ _ _ K' hK',
     ⟨(derivedExtendScalarsCompIso X ℓ h).app K'⟩⟩
 
-/-- **The cone step** of blueprint `lemma-descent-finite-coefficient-field--2`: on a
+/-- **The cone step** of the descent to a finite subextension: on a
 topologically noetherian scheme, assuming (Hom)-surjectivity `hHom`, if `K' ⟶ K ⟶ K'' ⟶ K'[1]`
 is distinguished in `D(ℚ̄_ℓ,X)` and `K'`, `K''` descend to finite subextensions, then so does
 `K`. -/

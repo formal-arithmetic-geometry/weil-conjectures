@@ -29,14 +29,12 @@ The following clauses of the six-functor package, proved in
   `ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl_id_left` and
   `ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl_id_right`: the
   associativity and identity equations of the composition isomorphisms
-  `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` (blueprint `prop-functor-package`, clause (3)).
+  `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_comp`: the
-  identification `Rf_! ≅ Rf_*` of a proper `f` is compatible with composition (blueprint
-  `prop-functor-package`, clause (3)).
+  identification `Rf_! ≅ Rf_*` of a proper `f` is compatible with composition.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv`:
   for a cartesian square whose horizontal maps are proper, `Ex_!` is the mate of the composition
-  isomorphism `Rg'_! ⋙ Rf_! ≅ R(g' ≫ f)_! = R(f' ≫ g)_! ≅ Rf'_! ⋙ Rg_!` (blueprint
-  `proposition-composition-base-change-rf-shriek`, clause (4)).
+  isomorphism `Rg'_! ⋙ Rf_! ≅ R(g' ≫ f)_! = R(f' ≫ g)_! ≅ Rf'_! ⋙ Rg_!`.
 
 ## Main definitions
 
@@ -67,8 +65,8 @@ variable {W X Y Z : Over (Spec (.of k))} [LocallyOfFiniteType W.hom] [QuasiCompa
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
 
-/-- **Associativity of the composition isomorphisms of the lower shriek** (blueprint
-`proposition-composition-base-change-rf-shriek--2`, clause (3)): the two identifications of
+/-- **Associativity of the composition isomorphisms of the lower shriek**:
+the two identifications of
 `R(f ≫ g ≫ h)_!` with `Rf_! ⋙ Rg_! ⋙ Rh_!` agree. -/
 theorem boundedConstructibleLowerShriekComp_padicAlgCl_assoc (f : W ⟶ X) (g : X ⟶ Y)
     (h : Y ⟶ Z) (K : Dᵇc(W.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -81,8 +79,7 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_assoc (f : W ⟶ X) (g : 
           ((boundedConstructibleLowerShriek ℓ f).obj K) :=
   boundedConstructibleLowerShriekComp_padicAlgCl_assoc' ℓ f g h K
 
-/-- **Left identity equation of the composition isomorphisms of the lower shriek** (blueprint
-`proposition-composition-base-change-rf-shriek--3`, clause (3)):
+/-- **Left identity equation of the composition isomorphisms of the lower shriek**:
 `R(𝟙 ≫ f)_! ≅ R(𝟙)_! ⋙ Rf_! ≅ R(𝟙)_* ⋙ Rf_! ≅ Rf_!` is the identity. -/
 theorem boundedConstructibleLowerShriekComp_padicAlgCl_id_left (f : X ⟶ Y)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -93,8 +90,7 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_id_left (f : X ⟶ Y)
       eqToHom (by rw [Category.id_comp]; rfl) :=
   boundedConstructibleLowerShriekComp_padicAlgCl_id_left' ℓ f K
 
-/-- **Right identity equation of the composition isomorphisms of the lower shriek** (blueprint
-`proposition-composition-base-change-rf-shriek--3`, clause (3)):
+/-- **Right identity equation of the composition isomorphisms of the lower shriek**:
 `R(f ≫ 𝟙)_! ≅ Rf_! ⋙ R(𝟙)_! ≅ Rf_! ⋙ R(𝟙)_* ≅ Rf_!` is the identity. -/
 theorem boundedConstructibleLowerShriekComp_padicAlgCl_id_right (f : X ⟶ Y)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -106,8 +102,7 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_id_right (f : X ⟶ Y)
       eqToHom (by rw [Category.comp_id]; rfl) :=
   boundedConstructibleLowerShriekComp_padicAlgCl_id_right' ℓ f K
 
-/-- **The identification `Rf_! ≅ Rf_*` is compatible with composition** (blueprint
-`prop-functor-package`, clause (3)): for proper `f` and `g`,
+/-- **The identification `Rf_! ≅ Rf_*` is compatible with composition**: for proper `f` and `g`,
 `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_! ≅ Rf_* ⋙ Rg_*` is `R(f ≫ g)_! ≅ R(f ≫ g)_* ≅ Rf_* ⋙ Rg_*`. -/
 theorem boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_comp (f : X ⟶ Y) (g : Y ⟶ Z)
     [IsProper f.left] [IsProper g.left] [IsProper (f ≫ g).left]
@@ -157,8 +152,7 @@ noncomputable def boundedConstructibleLowerShriekSquareIso_padicAlgCl (w : g' �
   (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g' f).symm ≪≫ eqToIso (by rw [w]) ≪≫
     boundedConstructibleLowerShriekComp_padicAlgCl ℓ f' g
 
-/-- **`Ex_!` is the mate of the composition isomorphism** (blueprint
-`proposition-composition-base-change-rf-shriek`, clause (4)): for a cartesian square
+/-- **`Ex_!` is the mate of the composition isomorphism**: for a cartesian square
 `sq : g' ≫ f = f' ≫ g` with `g` and `g'` proper, the compact-support base-change morphism
 `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` is the mate, for the adjunctions `Lg'^* ⊣ Rg'_!` and
 `Lg^* ⊣ Rg_!`, of the composition isomorphism

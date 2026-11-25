@@ -14,8 +14,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableShortEx
 
 /-! # The finite direct-image projection as a map of scalar cone triangles
 
-Source: blueprint integral open direct image, Reduction paragraph; Stacks 014A, 06YY.
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 014A](https://stacks.math.columbia.edu/tag/014A)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public noncomputable section
@@ -44,9 +46,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   {U X : Scheme.{u}} (j : U ⟶ X)
 
-/-- The geometric mate of the inverse scalar pullback comparison, at exponent n+1.
-Source: blueprint integral open direct image, Reduction paragraph; Stacks 06YY
-(auxiliary; not a blueprint node). -/
+/-- The geometric mate of the inverse scalar pullback comparison, at exponent n+1. -/
 def integralFiniteProjection (n : ℕ) [IsIso (integralReductionPullbackMap l E j n)]
     (K : DerivedCategory (AdicCompletion.Modules l E U)) :=
   ((CondensedRing.derivedUpperStarLowerStarAdjunction
@@ -299,22 +299,7 @@ private theorem integralLevel_triangle (Y : Scheme.{u}) (n : ℕ)
   exact ⟨_, _, _, triangle_transport T hT a b c⟩
 
 /-- After scalar restriction, the specified projection completes the identity square
-on uniformizer multiplication to a morphism of distinguished triangles.
-Source: blueprint integral open direct image, Reduction paragraph; Stacks 014A, 06YY
-(auxiliary; not a blueprint node).
-
-Proof: the positive-power uniformizer short exact sequence supplied by
-`derived_nakayama_resolution` presents the restricted finite coefficient as a cone
-of a map between tensor units. It is therefore dualizable. The general adjunction
-projection theorem and `internal_scalar_mate_projection` make the finite scalar
-mate invertible. The normalized inverse comparison and two explicit mate-transport
-calculations identify that mate with exactly `integralFiniteProjection`.
-Tensor the same short exact sequence with H to construct its distinguished scalar
-cone triangle. Transport this triangle along the identity on both copies of H and
-along the restricted finite projection c on the third vertex. Set q' = q followed
-by c and delta' = inverse c followed by delta. The triangle isomorphism retains the
-connecting sign, and inverse cancellation gives both displayed squares. Positive
-exponent one, zero complexes, empty schemes and unbounded complexes are covered. -/
+on uniformizer multiplication to a morphism of distinguished triangles. -/
 theorem integral_direct_image_reduction_cone (n : ℕ)
     [IsIso (integralReductionPullbackMap l E j n)]
     (K : DerivedCategory (AdicCompletion.Modules l E U)) :

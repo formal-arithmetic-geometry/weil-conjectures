@@ -38,21 +38,7 @@ private lemma scalarCompNormalization_comparison
   erw [Category.comp_id]
   rfl
 
-/-- The chosen derived scalar transitivity isomorphism respects the resolution counits.
-
-Source: the scalar mate normalization in proof step 2 of
-`lem-sp-original-integral-finite-quotient-mate-transport`, above the direct-image exchange
-of the latest blueprint `def-exchange-projection`.
-
-Proof in words. The underived comparison is uniqueness of left adjoints, so its unit
-identity follows from `unit_leftAdjointUniq_hom_app`. Transport this identity to homotopy
-categories. The exact restriction comparison is normalized on Qh by the localization
-factorization equations. Apply the derived scalar adjunction to the desired equality,
-use the unit identity for the conjugate transitivity map, and move the restriction
-comparison through the counits by naturality. The formulas for the derived scalar units
-then reduce the result to the underived unit identity. No flatness is required.
-The calculation also applies to zero rings and zero complexes.
-(blueprint: lem-sp-scalar-comp-normalization) -/
+/-- The chosen derived scalar transitivity isomorphism respects the resolution counits. -/
 theorem scalarCompNormalization
     {U : Scheme.{u}} {R S T : Sheaf (ProEt.topology U) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]

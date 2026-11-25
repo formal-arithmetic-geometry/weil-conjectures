@@ -88,12 +88,18 @@ instance schemeOpenOverlapRestriction_preservesFiniteColimits
           (Scheme.Modules.overEquiv W)) := comp_preservesFiniteColimits _ _
   comp_preservesFiniteColimits _ _
 
-set_option synthInstance.maxHeartbeats 400000 in
--- Zero preservation of the three-fold transported restriction needs more instance search.
 /-- Additivity structure of canonical open restriction (Stacks, Tag 08BV). -/
 instance schemeOpenOverlapRestriction_additive (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U) :
     (schemeOpenOverlapRestriction X i).Additive :=
-  Functor.additive_of_preserves_binary_products _
+  ⟨by
+    intro A B f g
+    rfl⟩
+
+private lemma schemeOpenOverlapRestriction_additive_eq (X : Scheme.{u}) {W U : X.Opens}
+    (i : W ⟶ U) [(schemeOpenOverlapRestriction X i).PreservesZeroMorphisms] :
+    schemeOpenOverlapRestriction_additive X i =
+      Functor.additive_of_preserves_binary_products _ :=
+  Subsingleton.elim _ _
 
 /-- The canonical composition isomorphism for exact restriction to nested opens (Stacks, Tag 08BV).
 -/

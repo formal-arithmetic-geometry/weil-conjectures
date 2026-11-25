@@ -24,7 +24,9 @@ import WeilConjectures.CategoryTheory.Sites.MonObj
 
 /-! # The abelian monoidal component factorization
 
-Source: Hemo--Richarz--Scholbach, Construction (4.1).
+## References
+
+* Hemo--Richarz--Scholbach, Construction (4.1).
 -/
 
 @[expose] public noncomputable section

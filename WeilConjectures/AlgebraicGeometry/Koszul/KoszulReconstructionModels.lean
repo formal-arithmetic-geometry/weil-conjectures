@@ -256,7 +256,6 @@ private theorem reconstructionQuotientUnit_step (n : ℕ) :
       (1 : (completedAdicFiniteRing T d n).obj.obj U)
   exact map_one _
 
-set_option linter.style.haveILetI false in
 set_option backward.isDefEq.respectTransparency false in
 /-- The ordinary completion unit is determined by all quotient tensor maps. -/
 theorem reconstructionOrdinaryUnit_exists :
@@ -546,7 +545,7 @@ private theorem reconstructionModelUnit_exists :
     apply hu θ
     intro X
     have hX : IsIso (reconstructionModelCounit F LF ε X.obj.as) := by
-      let : IsIso (ε.app ((HomotopyCategory.quotient B (.up ℤ)).obj X.obj.as)) := hε X
+      have : IsIso (ε.app ((HomotopyCategory.quotient B (.up ℤ)).obj X.obj.as)) := hε X
       dsimp only [reconstructionModelCounit]
       infer_instance
     exact (hθ X.obj.as X.property hX).trans (hn X.obj.as X.property hX)
@@ -648,17 +647,16 @@ private theorem reconstructionTensorSquare
   exact ((F.map₂CochainComplex.map h).naturality t).symm
 
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.style.haveILetI false in
 /-- Product maps commute with the actual one-minus-transition endomorphism. -/
 theorem reconstructionKoszulProductMap_comm (r : ℕ) (a : Fin r → A)
     {C D : CochainComplex (CompletedAdicModules T d) ℤ} (h : C ⟶ D) :
     reconstructionKoszulProductMap T d r a h ≫ (-completedAdicKoszulOneSubShift T d r a D) =
       (-completedAdicKoszulOneSubShift T d r a C) ≫
         reconstructionKoszulProductMap T d r a h := by
-  letI : (curriedTensor (CompletedAdicModules T d)).PreservesZeroMorphisms :=
+  let : (curriedTensor (CompletedAdicModules T d)).PreservesZeroMorphisms :=
     SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
       (completedAdicCommRing T d)
-  letI : ∀ M : CompletedAdicModules T d,
+  let : ∀ M : CompletedAdicModules T d,
       ((curriedTensor (CompletedAdicModules T d)).obj M).PreservesZeroMorphisms :=
     fun M ↦ SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
       (completedAdicCommRing T d) M
@@ -846,7 +844,6 @@ private theorem reconstructionCountableProducts_exact :
     infer_instance
   exact hasExactLimitsOfShape_of_preservesEpi B (Discrete ℕ)
 
-set_option linter.style.haveILetI false in
 set_option backward.isDefEq.respectTransparency false in
 /-- The recorded Koszul model and its canonical maps descend through quasi-isomorphisms. -/
 theorem reconstructionKoszulFiberFunctor_inverts (r : ℕ) (a : Fin r → A) :
@@ -855,10 +852,10 @@ theorem reconstructionKoszulFiberFunctor_inverts (r : ℕ) (a : Fin r → A) :
   let B := CompletedAdicModules T d
   let R := completedAdicCommRing T d
   let := SheafOfModules.isMonoidal_W_independentCoefficients R
-  letI : MonoidalCategory B := SheafOfModules.monoidalCategory R
-  letI : (curriedTensor B).PreservesZeroMorphisms :=
+  let : MonoidalCategory B := SheafOfModules.monoidalCategory R
+  let : (curriedTensor B).PreservesZeroMorphisms :=
     SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
-  letI : ∀ M : B, ((curriedTensor B).obj M).PreservesZeroMorphisms :=
+  let : ∀ M : B, ((curriedTensor B).obj M).PreservesZeroMorphisms :=
     fun M ↦ SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R M
   have : HasExactLimitsOfShape (Discrete ℕ) B := reconstructionCountableProducts_exact T d
   intro C D h hh
@@ -870,7 +867,7 @@ theorem reconstructionKoszulFiberFunctor_inverts (r : ℕ) (a : Fin r → A) :
     dsimp only [CategoryTheory.koszulTensorFunctor, Functor.map₂CochainComplex,
       Functor.map₂HomologicalComplex, Functor.flip] at hk
     convert hk using 1 <;> rfl
-  letI := hten
+  let := hten
   have hp : QuasiIso (reconstructionKoszulProductMap T d r a h) := by
     dsimp only [reconstructionKoszulProductMap]
     exact reconstructionProduct_quasiIso _ _ _
@@ -894,17 +891,16 @@ abbrev reconstructionKoszulDerivedFunctor (r : ℕ) (a : Fin r → A) :
   Localization.lift (reconstructionKoszulFiberFunctor T d r a ⋙ DerivedCategory.Q)
     (reconstructionKoszulFiberFunctor_inverts T d r a) DerivedCategory.Q
 
-set_option linter.style.haveILetI false in
 set_option backward.isDefEq.respectTransparency false in
 /-- The existing unit c to (u_C(c),0) is natural for the induced fibre maps. -/
 theorem reconstructionKoszulUnit_naturality (r : ℕ) (a : Fin r → A)
     {C D : CochainComplex (CompletedAdicModules T d) ℤ} (h : C ⟶ D) :
     h ≫ completedAdicKoszulUnitComplex T d r a D =
       completedAdicKoszulUnitComplex T d r a C ≫ reconstructionKoszulFiberMap T d r a h := by
-  letI : (curriedTensor (CompletedAdicModules T d)).PreservesZeroMorphisms :=
+  let : (curriedTensor (CompletedAdicModules T d)).PreservesZeroMorphisms :=
     SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
       (completedAdicCommRing T d)
-  letI : ∀ M : CompletedAdicModules T d,
+  let : ∀ M : CompletedAdicModules T d,
       ((curriedTensor (CompletedAdicModules T d)).obj M).PreservesZeroMorphisms :=
     fun M ↦ SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
       (completedAdicCommRing T d) M

@@ -8,8 +8,10 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Component.ComponentSectionMap
 
 /-! # Scalar normalization for the constructed component section map
-Source: Hemo--Richarz--Scholbach, Remark 3.2 and Proposition 4.3(3)
-(blueprint: lem-zl-component-section-scalar-normalization).
+
+## References
+
+* Hemo--Richarz--Scholbach, Remark 3.2 and Proposition 4.3(3).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

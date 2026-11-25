@@ -294,7 +294,7 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 -- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
-/-- Blueprint `proposition-six-operations-dctf--15`: the bounded constructible complexes of
+/-- The bounded constructible complexes of
 `ℚ̄_ℓ`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{ℚ̄_ℓ,X})` (SGA 4½ [Th. finitude],
 1.6; Bhatt–Scholze, Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a

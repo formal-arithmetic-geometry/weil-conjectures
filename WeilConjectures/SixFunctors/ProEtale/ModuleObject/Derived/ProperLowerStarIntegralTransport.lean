@@ -177,10 +177,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 /-- **Transport of the left adjointness of `Rp_*` along an isomorphism of coefficient fields**:
 if `σ : E₁ ≃+* E₂` is compatible with the embeddings into `ℚ̄_ℓ` and
 `Rp_* : Dᵇc(Z)⟦𝒪̲_{E₂}⟧ ⥤ Dᵇc(Y)⟦𝒪̲_{E₂}⟧` is a left adjoint, then so is
-`Rp_* : Dᵇc(Z)⟦𝒪̲_{E₁}⟧ ⥤ Dᵇc(Y)⟦𝒪̲_{E₁}⟧`. The restriction of scalars along the induced
-isomorphism `𝒪̲_{E₁} ≅ 𝒪̲_{E₂}` is an equivalence of the bounded constructible derived categories
-(`boundedConstructibleComapEquivalence`) commuting with `Rp_*`
-(`rightDerivedLowerStarComapIso`), so the two `Rp_*` are conjugate. -/
+`Rp_* : Dᵇc(Z)⟦𝒪̲_{E₁}⟧ ⥤ Dᵇc(Y)⟦𝒪̲_{E₁}⟧`. -/
 theorem isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_ringEquiv
     (σ : E₁ ≃+* E₂)
     (hσ : ∀ x, algebraMap E₂ (PadicAlgCl ℓ) (σ x) = algebraMap E₁ (PadicAlgCl ℓ) x)

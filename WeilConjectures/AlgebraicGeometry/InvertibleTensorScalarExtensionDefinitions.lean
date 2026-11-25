@@ -14,7 +14,6 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 
 universe uC vC u m
 

@@ -38,11 +38,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 
 /-- *Proper direct image with finite coefficients*, pro-étale side: for a proper morphism
 `p : X ⟶ Y` of finite-type `k`-schemes and a finite `Λ` whose exponent is invertible on `Y`,
-`Rp_*` maps `Dctf(X, Λ)` into `Dctf(Y, Λ)`. An object of `Dctf(X_proét, Λ)` is `ν^* G` with
-`G` in `Dctf(X_ét, Λ)` (the comparison `ν^*` detects Tor amplitude), the direct image of `ν^* G`
-is `ν^* Rp_*^{ét} G` (`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonIso`), and
-`Rp_*^{ét} G` lies in `Dctf(Y_ét, Λ)`
-(`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar_of_isProper`). -/
+`Rp_*` maps `Dctf(X, Λ)` into `Dctf(Y, Λ)`. -/
 theorem constructibleFiniteTor_rightDerivedLowerStar_of_isProper {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] (p : X ⟶ Y) (hp : p ≫ aY = aX) [IsProper p]

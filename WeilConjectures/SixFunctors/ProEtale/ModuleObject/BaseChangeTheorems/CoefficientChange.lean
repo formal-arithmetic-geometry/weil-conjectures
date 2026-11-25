@@ -23,8 +23,7 @@ Let `E ⊆ ℚ̄_ℓ` be a finite subextension of `ℚ_ℓ` with ring of integer
 the composite coefficient map `𝒪_E ⟶ E ⟶ ℚ̄_ℓ` (`ProEtale.boundedConstructibleExtendScalars`
 followed by `ProEtale.constructibleToPadicAlgCl`). For a cartesian square of schemes separated
 and of finite type over the field `k`, the scalar comparisons identify `Φ` of the integral
-base-change morphism `BC_sq` with the `ℚ̄_ℓ`-base-change morphism at `Φ K₀`
-(blueprint `lemma-naturality-pasting-comparison`, section `chap-Smooth-base-change`). Together with
+base-change morphism `BC_sq` with the `ℚ̄_ℓ`-base-change morphism at `Φ K₀`. Together with
 the integral models of `ℚ̄_ℓ`-complexes (`ProEtale.exists_padicAlgCl_iso_integralModel`), this
 reduces the invertibility of a `ℚ̄_ℓ`-base-change morphism to the integral one
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral`).
@@ -39,7 +38,6 @@ base-change morphism to finite coefficients
 Both identifications are proved
 (`ProEtale.CondensedRing.nonempty_arrowIso_boundedConstructibleBaseChange_integralToPadicAlgCl`,
 `ProEtale.CondensedRing.nonempty_arrowIso_derivedReduction_boundedConstructibleBaseChange`).
-
 -/
 
 @[expose] public section
@@ -66,29 +64,13 @@ section Rational
 
 variable (E : FiniteIntermediateField ℓ)
 
-/-- Blueprint `lemma-naturality-pasting-comparison` (section `chap-Smooth-base-change`), its last
-assertion for the coefficient map `𝒪_E ⟶ ℚ̄_ℓ` of `proposition-six-operations-change-coefficients`
-(the composite of the localization `𝒪_E ⟶ E` and the inclusion `E ⟶ ℚ̄_ℓ`): for a cartesian square
-of schemes separated and of finite type over `k`
-
-```
-X' --g'--> X
-|          |
-f'         f
-v          v
-Y' --g---> Y
-```
-
-and `K₀ ∈ Dᵇc(X)⟦𝒪_E⟧`, the scalar comparisons identify the extension of scalars
+/-- Compatibility of base change with the coefficient map `𝒪_E ⟶ ℚ̄_ℓ` (the composite of the
+localization `𝒪_E ⟶ E` and the inclusion `E ⟶ ℚ̄_ℓ`): for a cartesian square
+of schemes separated and of finite type over `k` and `K₀ ∈ Dᵇc(X)⟦𝒪_E⟧`, the scalar
+comparisons identify the extension of scalars
 `ℚ̄_ℓ ⊗ᴸ_{𝒪_E} BC_sq(K₀)` of the integral base-change morphism
 `BC_sq(K₀) : Lg^* Rf_* K₀ ⟶ Rf'_* Lg'^* K₀` with the base-change morphism
-`BC_sq(ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀)` of `Dᵇc(-)⟦ℚ̄_ℓ⟧`, as arrows. This holds for every commutative square.
-It is the composite of the integral stage `𝒪_E ⟶ E`
-(`nonempty_arrowIso_boundedConstructibleBaseChange_integralToRational`) and the rational stage
-`E ⟶ ℚ̄_ℓ` (`nonempty_arrowIso_boundedConstructibleBaseChange_rationalToPadicAlgCl`), whose (Push)
-comparisons are invertible on bounded below complexes
-(`isIso_derivedPushHom_app_padicIntegers_of_isGE`,
-`isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE`). -/
+`BC_sq(ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀)` of `Dᵇc(-)⟦ℚ̄_ℓ⟧`, as arrows. -/
 theorem nonempty_arrowIso_boundedConstructibleBaseChange_integralToPadicAlgCl
     (sq : CommSq g' f' f g) (_hsq : IsPullback g'.left f'.left f.left g.left)
     (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
@@ -106,13 +88,8 @@ theorem nonempty_arrowIso_boundedConstructibleBaseChange_integralToPadicAlgCl
         isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E p K n)
       sq _).some⟩
 
-/-- The invertibility of a `ℚ̄_ℓ`-base-change morphism reduces to the integral one: if the
-base-change morphism `BC_sq` of a cartesian square is invertible on `Dᵇc(-)⟦𝒪_E⟧` for every finite
-subextension `E ⊆ ℚ̄_ℓ`, it is invertible on `Dᵇc(-)⟦ℚ̄_ℓ⟧`. Every bounded constructible
-`ℚ̄_ℓ`-complex is `ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀` for some `E` and some `K₀ ∈ Dᵇc(X)⟦𝒪_E⟧`
-(`ProEtale.exists_padicAlgCl_iso_integralModel`), and the scalar comparisons identify the
-`ℚ̄_ℓ`-base-change morphism at `ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀` with the extension of scalars of the integral one
-(`nonempty_arrowIso_boundedConstructibleBaseChange_integralToPadicAlgCl`). -/
+/-- If the base-change morphism `BC_sq` of a cartesian square is invertible on `Dᵇc(-)⟦𝒪_E⟧` for
+every finite subextension `E ⊆ ℚ̄_ℓ`, it is invertible on `Dᵇc(-)⟦ℚ̄_ℓ⟧`. -/
 theorem isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral
     [TopologicalSpace.NoetherianSpace X.left]
     (sq : CommSq g' f' f g) (hsq : IsPullback g'.left f'.left f.left g.left)
@@ -137,28 +114,12 @@ variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
 -- the bounded constructible and the ambient forms of the exchange morphism are unified
-/-- Blueprint `lemma-naturality-pasting-comparison` (section `chap-Smooth-base-change`), its last
-assertion for the residue map `𝒪_E ⟶ 𝔽_E` to a finite admissible ring of
-`proposition-six-operations-change-coefficients`: for a cartesian square of schemes separated and of
-finite type over `k`
-
-```
-X' --g'--> X
-|          |
-f'         f
-v          v
-Y' --g---> Y
-```
-
-and `K₀ ∈ Dᵇc(X)⟦𝒪_E⟧`, the scalar comparisons identify the first derived reduction
+/-- Compatibility of base change with the residue map `𝒪_E ⟶ 𝔽_E`: for a cartesian square of
+schemes separated and of finite type over `k` and `K₀ ∈ Dᵇc(X)⟦𝒪_E⟧`, the scalar comparisons
+identify the first derived reduction
 `BC_sq(K₀) ⊗ᴸ_{𝒪_E} 𝔽_E` of the integral base-change morphism with the pro-étale base-change
 morphism `g^* Rf_* ⟶ Rf'_* g'^*` with finite coefficients `𝔽_E` at the first derived reduction of
-`K₀` (`ProEtale.derivedReduction`). Here we only record that the two morphisms are isomorphic as
-arrows.
-
-On the ambient derived categories, `BC_sq(K₀)` is the exchange morphism of the pullback
-comparison (`Adjunction.nonempty_arrowIso_map_ι_map_app_of_eq_exchangeRight`), whose first derived
-reduction is computed by `nonempty_arrowIso_derivedReduction_map_exchangeRight`. -/
+`K₀` (`ProEtale.derivedReduction`), as arrows. -/
 theorem nonempty_arrowIso_derivedReduction_boundedConstructibleBaseChange
     (sq : CommSq g' f' f g) (hsq : IsPullback g'.left f'.left f.left g.left)
     (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
@@ -192,11 +153,7 @@ theorem nonempty_arrowIso_derivedReduction_boundedConstructibleBaseChange
 /-- The invertibility of an integral base-change morphism reduces to finite coefficients: for a
 cartesian square with noetherian `Y'` and `K₀ ∈ Dᵇc(X)⟦𝒪_E⟧`, if the pro-étale base-change
 morphism with coefficients `𝔽_E` is invertible at the first derived reduction of `K₀`, then
-`BC_sq(K₀)` is invertible. The scalar comparisons identify the first derived reduction of
-`BC_sq(K₀)` with the former
-(`nonempty_arrowIso_derivedReduction_boundedConstructibleBaseChange`), and a morphism of bounded
-constructible `𝒪_E`-complexes whose first derived reduction is invertible is invertible (derived
-Nakayama, `ProEtale.isIso_of_isIso_derivedReduction_map`). -/
+`BC_sq(K₀)` is invertible. -/
 theorem isIso_boundedConstructibleBaseChange_integral_app_of_reduction [IsNoetherian Y'.left]
     (sq : CommSq g' f' f g) (hsq : IsPullback g'.left f'.left f.left g.left)
     (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧)

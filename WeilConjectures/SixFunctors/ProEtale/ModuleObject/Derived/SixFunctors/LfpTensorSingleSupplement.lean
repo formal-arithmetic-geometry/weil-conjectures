@@ -226,8 +226,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 
 /-! # Local tensor calculations over ell-adic coefficients
 
-Source: Bhatt--Scholze, Proposition 6.8.11(3), using locally finite free resolutions.
-(blueprint: lem-sfb-lfp-tensor-single)
+Tensor products of locally finitely presented ell-adic module sheaves.
+
+## References
+
+* Bhatt--Scholze, Proposition 6.8.11(3)
 -/
 
 @[expose] public section
@@ -357,19 +360,7 @@ private theorem continuous_tensor_single
   exact ⟨DerivedCategory.TStructure.t.isGE_of_ge _ (-1) 0 (by decide), hl⟩
 
 /-- The tensor of two locally finitely presented ell-adic module sheaves has
-no cohomology below degree -1, and its cohomology is locally finitely presented.
-Source: Bhatt--Scholze, Proposition 6.8.11(3), expanded using the library's
-integral locally finite free resolution.
-Proof: in the field cases local triviality makes the first factor locally finite free,
-so the finite free tensor calculation gives the assertion (and a stronger lower bound 0).
-For integral coefficients take the short exact two-term locally finite free resolution
-of the first factor, and tensor its distinguished triangle with the second factor.
-Both resolved terms have cohomology in degree zero and locally finite presentation.
-The rotated triangle gives the lower bound -1. The upper bound 0 is the general
-right t-exactness of derived tensor. Locally finitely presented integral module sheaves
-are closed under kernels, cokernels and extensions; hence their homology property is
-triangulated and the third term has locally finitely presented cohomology.
-(blueprint: lem-sfb-lfp-tensor-single) -/
+no cohomology below degree -1, and its cohomology is locally finitely presented. -/
 theorem lfp_tensor_single (ℓ : ℕ) [Fact ℓ.Prime]
     (F G : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))
@@ -387,8 +378,7 @@ theorem lfp_tensor_single (ℓ : ℕ) [Fact ℓ.Prime]
 
 namespace ContinuousMapRingObj
 
-/-- `lfp_tensor_single` for `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`.
-(blueprint: lem-sfb-lfp-tensor-single) -/
+/-- `lfp_tensor_single` for `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`. -/
 theorem lfp_tensor_single (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (F G : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X))
@@ -406,8 +396,7 @@ end ContinuousMapRingObj
 
 namespace PadicIntegersRingObj
 
-/-- `lfp_tensor_single` for `𝒪̲_E`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`.
-(blueprint: lem-sfb-lfp-tensor-single) -/
+/-- `lfp_tensor_single` for `𝒪̲_E`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`. -/
 theorem lfp_tensor_single (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
     [FiniteDimensional ℚ_[ℓ] E]
@@ -435,7 +424,7 @@ end PadicIntegersRingObj
 namespace UnitBallRingObj
 
 /-- `lfp_tensor_single` for `O̲`, `O` the closed unit ball of a finite normed extension `E`
-of `ℚ_ℓ`. (blueprint: lem-sfb-lfp-tensor-single) -/
+of `ℚ_ℓ`. -/
 theorem lfp_tensor_single (ℓ : ℕ) [Fact ℓ.Prime] {E : Type} [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (O : Subring E) [hO : Fact (∀ x : E, x ∈ O ↔ ‖x‖ ≤ 1)]

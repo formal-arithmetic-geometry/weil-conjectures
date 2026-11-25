@@ -18,14 +18,18 @@ public import WeilConjectures.SixFunctors.ProEtale.IntegralCompletionPresentatio
 
 /-! # Canonical completeness in the completed integral presentation
 
-Source: blueprint main-20261015, integral-criterion-reductions, final sentence;
-Stacks Project, Tags 06YY, 0941, 08TC and 0145
-(blueprint: lem-pe-integral-completion-presentation).
-
 The coefficient identification is normalized by every finite restriction square.
 Finite comparisons retain their finite coefficient action.
 Their restriction squares are normalized on underlying abelian sheaves, and their
 units fix the derived comparisons uniquely. The index n denotes exponent n+1.
+
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* [Stacks, Tag 08TC](https://stacks.math.columbia.edu/tag/08TC)
+* [Stacks, Tag 0145](https://stacks.math.columbia.edu/tag/0145)
+* [Stacks, Tag 05RU](https://stacks.math.columbia.edu/tag/05RU)
 -/
 
 @[expose] public noncomputable section
@@ -47,18 +51,14 @@ namespace AlgebraicGeometry.ProEtale.IntegralPresentation
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) (A : Encoding l E X)
 
-/-- The restriction square for the specified integral and finite coefficient encodings.
-Source: blueprint integral-criterion comparison; Stacks 06YY
-(blueprint: lem-pe-integral-completion-presentation). -/
+/-- The restriction square for the specified integral and finite coefficient encodings. -/
 abbrev RestrictionSquare (n : ℕ) (e : FiniteEncoding l E X n) :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   Mod.comap (AdicCompletion.quotient l E X n) ⋙ A.modules.functor ≅
     e.ordinary.functor ⋙ scalarReductionRestriction.{u, u} l E X n
 
 /-- Localize the actual restriction square; both composition comparisons are Mathlib's
-canonical localization comparisons.
-Source: Stacks 05RU and 06YY
-(blueprint: lem-pe-integral-completion-presentation). -/
+canonical localization comparisons. -/
 def derivedSquare (n : ℕ) (e : FiniteEncoding l E X n)
     (a : RestrictionSquare l E X A n e) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
@@ -73,18 +73,14 @@ def derivedSquare (n : ℕ) (e : FiniteEncoding l E X n)
       (Functor.mapDerivedCategoryCompIso e.ordinary.functor
         (scalarReductionRestriction.{u, u} l E X n)).symm
 
-/-- A comparison in D(R_n), retaining the finite coefficient action.
-Source: Stacks 06YY, derived tensor under an isomorphism of coefficients
-(blueprint: lem-pe-integral-completion-presentation). -/
+/-- A comparison in D(R_n), retaining the finite coefficient action. -/
 abbrev FiniteComparison (n : ℕ) (e : FiniteEncoding l E X n) :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   A.derived.functor ⋙
       scalarReductionDerivedExtension.{u, u} l E X n ≅
     AdicCompletion.derivedReduction l E X n ⋙ e.ordinaryDerived.functor
 
-/-- Restrict a finite comparison to the one completed integral derived category.
-Source: Stacks 06YY; blueprint integral-criterion comparison
-(blueprint: lem-pe-integral-completion-presentation). -/
+/-- Restrict a finite comparison to the one completed integral derived category. -/
 def restrictedComparison (n : ℕ) (e : FiniteEncoding l E X n)
     (a : RestrictionSquare l E X A n e) (b : FiniteComparison l E X A n e)
     (K : DerivedCategory (AdicCompletion.Modules l E X)) :

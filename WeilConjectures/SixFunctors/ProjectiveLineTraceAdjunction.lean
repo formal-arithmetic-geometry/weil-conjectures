@@ -128,23 +128,7 @@ private theorem canonical_presentedFiniteP1TraceAdjunction
     (SfP1Transport.datum_trace A N hA t q e w hY (d Y hY).trace κ)
     (exists_presentedFiniteP1TraceNormalization A N hA t q e w hY (d Y hY))
 
-/-- The normalized finite projective-line trace is the counit of twisted pullback duality.
-Source: blueprint sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, (G6), (G7), both triangle calculations.
-(auxiliary; not a blueprint node)
-
-Proof: take the explicit transported trace-diagonal datum associated to the supported
-class in the diagonal property. The two integral comparisons conjugate the given
-ordinary identities to the compact-support identities. The finite Tate sheaf is a
-lisse line, so the existing diagonal-kernel triangle theorem gives both triangles
-and hence an adjunction with the kernel counit. Direct image along the presentation
-is an equivalence. Lift the discrepancy between its two coefficient identifications
-to an automorphism of the shifted line, and transport the right adjoint through its
-inverse tensor action and the tensor symmetry. Projection naturality gives the kernel
-counit for the adjusted trace. Proper projection coherence, braiding naturality and
-the unitors identify this with the prescribed inverse-projection counit. Every map
-is the constructed map; no arbitrary trace or exceptional base-change map is chosen.
-The constructions apply on unbounded categories and also to empty bases and the zero ring. -/
+/-- The normalized finite projective-line trace is the counit of twisted pullback duality. -/
 theorem exists_presentedFiniteP1TraceAdjunction
     (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

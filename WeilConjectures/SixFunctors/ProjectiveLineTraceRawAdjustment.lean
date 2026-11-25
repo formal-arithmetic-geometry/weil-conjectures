@@ -62,16 +62,7 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] rightDerivedLowerShriekOfCompactification
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- The coefficient adjustment for the explicit projective-line trace composites.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, transport through a presentation.
-(auxiliary; not a blueprint node)
-
-Proof: in the module-valued trace-adjustment formula take B to be the shifted Tate
-line on X and L to be the shifted Tate line on the projective line. Both coefficient
-comparisons are the specified shifted-line pullback comparison. For z use the
-geometric push-pull isomorphism of the presentation; take the splitting trace and the
-constant-complex unit comparison as the last two maps. Substitution gives the formula.
-No property of the supported diagonal class or of either triangle is required. -/
+/-- The coefficient adjustment for the explicit projective-line trace composites. -/
 theorem exists_presentedFiniteP1RawAdjustment
     (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

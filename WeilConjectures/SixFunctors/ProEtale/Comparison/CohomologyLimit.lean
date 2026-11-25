@@ -86,17 +86,8 @@ noncomputable def cohomologyMap (G : Sheaf (ProEt.topology Y) AddCommGrpCat.{u +
   Sheaf.H.mapFunctor _ (upperStarConstantIntIso g) G n
 
 /-- **Naturality of the comparison in the scheme.** For a morphism of schemes `g : Z ⟶ Y` and an
-étale sheaf `G` on `Y`, the square
-
-```
-   Hⁿ(Y_ét, G) ────cohomologyComparison────→ Hⁿ(Y_proét, ν^* G)
-        │                                          │
-        │ Etale.cohomologyMap g                    │ ProEtale.cohomologyMap g, then
-        ↓                                          ↓ g^* ν^* G ≅ ν^* g^* G
-   Hⁿ(Z_ét, g^* G) ──cohomologyComparison──→ Hⁿ(Z_proét, ν^* g^* G)
-```
-
-commutes. -/
+étale sheaf `G` on `Y`, the square of `cohomologyComparison` and the
+cohomology maps of `g` commutes. -/
 lemma cohomologyMap_cohomologyComparison (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
     (n : ℕ) (x : Sheaf.H G n) :
     Sheaf.H.map ((comparisonUpperStarUpperStarIso AddCommGrpCat.{u + 1} g).hom.app G) n

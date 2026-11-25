@@ -13,7 +13,10 @@ import all WeilConjectures.SixFunctors.IntegralSystemRealization.Open.IntegralOp
 
 /-! # Scalar naturality of the canonical inner open-refinement map
 
-Source: Stacks 03DI, 0F7B, 0F7I, 07A6; open-unit and proper-counit mate pasting.
+## References
+
+* Stacks Project, Tags `03DI`, `0F7B`, `0F7I`, `07A6`
+* Zheng, 5.13--5.15
 -/
 
 @[expose] public noncomputable section
@@ -298,27 +301,7 @@ private theorem restrictionAll_open_isIso (R : Coefficients.{u})
   rw [← hθ]
   infer_instance
 
-/-- The inner canonical refinement map commutes with the open and proper scalar mates.
-Source: Stacks 03DI, 0F7B, 0F7I, 07A6; Zheng 5.13--5.15.
-(blueprint: lem-sf-refinement-open-scalar-square).
-
-Proof: transpose the asserted equation under the S-open adjunction for d.i.
-The transpose of refinementOpenMap is the c.i-open unit followed by the inverse
-of refinementRestrictionNat. The scalar proper map transposes to scalar extension
-of the proper counit after scalarPull inverse. The scalar open map is normalized
-by the open unit. The coefficient pullback composition square commutes: take mates
-of the ordinary restriction/direct-image composition square, whose section maps
-are restriction along the same fibre-product associator with unchanged coefficients.
-After this substitution, naturality of scalarPull and the proper counit identify
-the two transposes after postcomposition with refinementRestrictionNat for S.
-That transformation is invertible by exists_refinementRestriction, so cancel it.
-The remaining equality is precisely the open-unit normalization of openComparison;
-the adjunction triangle identities cancel its middle unit and counit. Injectivity
-of the Hom adjunction proves the equation. This calculation uses actual derived
-maps, with no inference from finite reductions and no choice of an exceptional
-operation. It applies to arbitrary unbounded inputs and compatible coefficient
-sheaves. For an empty open or zero object all maps are the unique zero maps; for
-an identity refinement the formula is open coefficient-map naturality. -/
+/-- The inner canonical refinement map commutes with the open and proper scalar mates. -/
 theorem refinementOpenMap_scalar
     {R S : Coefficients.{u}} (a : Change R S)
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f} (r : c.Refinement d)

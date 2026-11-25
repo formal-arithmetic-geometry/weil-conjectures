@@ -33,17 +33,11 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (Ω : Type u) [Field Ω]
 
-/-- **Lisse `ℚ̄_ℓ`-sheaves and continuous representations** (blueprint:
-`proposition-lattices-representations-normal-scheme`, the case `Λ = ℚ̄_ℓ`). On a connected normal
-Noetherian scheme `Y` (its local rings are integrally closed domains; hence `Y` is geometrically
-unibranch), the stalks of lisse `ℓ`-adic sheaves carry a
+/-- **Lisse `ℚ̄_ℓ`-sheaves and continuous representations** (the case `Λ = ℚ̄_ℓ`).
+On a connected normal Noetherian scheme `Y`, the stalks of lisse `ℓ`-adic sheaves carry a
 monodromy along paths of fibre functors, compatible with reparametrisation, pullback, global
 sections and duals, which at every base point `t` identifies lisse sheaves with continuous
-finite-dimensional `ℚ̄_ℓ`-representations of `π₁(Y, t)`.
-
-It is constructed from the universal profinite étale covers `Ỹ_y` of `Y`: the stalk of a lisse
-sheaf at `y` is its space of sections over `Ỹ_y`, on which it is constant, and paths act through
-the transport of the universal covers. -/
+finite-dimensional `ℚ̄_ℓ`-representations of `π₁(Y, t)`. -/
 theorem exists_lisseMonodromy_of_isIntegrallyClosed_stalk [IsLocallyNoetherian Y]
     [CompactSpace Y] [ConnectedSpace Y]
     (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y)) :

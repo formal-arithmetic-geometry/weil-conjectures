@@ -19,11 +19,10 @@ public import WeilConjectures.Tactic.ExactModProofIrrel
 # Compact-support base change respects the coefficient comparisons
 
 Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` with ring of integers `𝒪_E`.
-Blueprint `sk-thm-sf-compatibility`, (7), asserts that the compact-support base-change
-isomorphisms `Ex_! : Rf_! ⋙ Lg^* ≅ Lg'^* ⋙ Rf'_!` of `sk-thm-sf-package`, (2), for the
-coefficients `𝒪_E`, `E` and `ℚ̄_ℓ` commute with the coefficient comparisons of blueprint
-`proposition-six-operations-change-coefficients`. This file states this compatibility for the two
-coefficient changes used to pass from integral to `ℚ̄_ℓ`-coefficients:
+The compact-support base-change
+isomorphisms `Ex_! : Rf_! ⋙ Lg^* ≅ Lg'^* ⋙ Rf'_!` for the
+coefficients `𝒪_E`, `E` and `ℚ̄_ℓ` commute with the coefficient comparisons. This file states this
+compatibility for the two coefficient changes used to pass from integral to `ℚ̄_ℓ`-coefficients:
 
 * `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_toPadicAlgCl`, for the
   inclusion `E ⟶ ℚ̄_ℓ`;
@@ -76,9 +75,7 @@ instance isIso_boundedConstructibleLowerShriekBaseChange_padicSubfield
     IsIso (boundedConstructibleLowerShriekBaseChange_padicSubfield ℓ E sq) :=
   isIso_boundedConstructibleLowerShriekBaseChange ℓ E sq
 
-/-- Blueprint
-`sk-thm-sf-compatibility`, (7): the base-change isomorphism `Ex_!` of `sk-thm-sf-package`, (2),
-commutes with the coefficient comparisons of `proposition-six-operations-change-coefficients`. For a
+/-- The base-change isomorphism `Ex_!` commutes with the coefficient comparisons. For a
 cartesian square and the extension of scalars `T : E ⟶ ℚ̄_ℓ`, the image under `T` of compact-support
 base change `Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` with `E`-coefficients, read through the pullback and
 lower-shriek comparisons of `T`, is compact-support base change with `ℚ̄_ℓ`-coefficients. -/
@@ -107,9 +104,7 @@ theorem boundedConstructibleLowerShriekBaseChange_toPadicAlgCl (sq : IsPullback 
     padicAlgClPushforwardData_lowerShriekOfCompactification] at h' ⊢
   exact_mod_proof_irrel h'
 
-/-- Blueprint
-`sk-thm-sf-compatibility`, (7): the base-change isomorphism `Ex_!` of `sk-thm-sf-package`, (2),
-commutes with the coefficient comparisons of `proposition-six-operations-change-coefficients`. For a
+/-- The base-change isomorphism `Ex_!` commutes with the coefficient comparisons. For a
 cartesian square and the extension of scalars `T : 𝒪_E ⟶ E`, the image under `T` of compact-support
 base change `Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` with `𝒪_E`-coefficients, read through the pullback and
 lower-shriek comparisons of `T`, is compact-support base change with `E`-coefficients. -/

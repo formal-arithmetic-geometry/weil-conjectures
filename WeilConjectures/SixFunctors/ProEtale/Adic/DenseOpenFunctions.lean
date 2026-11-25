@@ -125,12 +125,7 @@ lemma isCompact_preimage_range_inter_of_isAffineOpen {W C U : Scheme.{u}} (f : W
 /-- **Locally finite functions extend uniquely over the preimage of a dense open.** Let
 `f : W ⟶ C` be flat with integral local rings on `W`, `j : U ⟶ C` a quasi-compact open immersion
 with dense image and `ι : W' ⟶ W` an open immersion onto `f⁻¹(j(U))`. Then restriction along `ι`
-is a bijection on locally finite continuous `ℓ`-adic functions.
-
-Every point of `W` generizes into `W'`, the open `j(U)` being dense and quasi-compact and `f`
-lifting generizations; the generizations of a point have a common generization, the local
-rings being domains; and closures of quasi-compact opens in affine opens are detected by
-specializations (`AlgebraicGeometry.Scheme.exists_specializes_of_mem_closure`). -/
+is a bijection on locally finite continuous `ℓ`-adic functions. -/
 theorem bijective_locallyFiniteFunctionsComp_of_isOpenImmersion {W W' C U : Scheme.{u}}
     (f : W ⟶ C) [Flat f] (hW : ∀ w : W, IsDomain (W.presheaf.stalk w)) (j : U ⟶ C)
     [IsOpenImmersion j] [QuasiCompact j] (hj : Dense (Set.range j)) (ι : W' ⟶ W)

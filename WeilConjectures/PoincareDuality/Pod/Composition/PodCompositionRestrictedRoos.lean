@@ -10,7 +10,22 @@ import WeilConjectures.PoincareDuality.Pod.Composition.PodCompositionRestrictedT
 import WeilConjectures.PoincareDuality.Pod.Composition.PodCompositionRoosPasting
 import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingRoosComparison
 
-/-! # Composition on the strict normalized Roos models -/
+/-! # Composition on the strict normalized Roos models
+
+The composition square for completed reindexing, before localization, on every restricted
+strict complex.
+
+## Implementation details
+
+The coordinate normalizations identify every supplied Roos comparison with the canonical
+additive Roos map, since the mapping-cocone identity is the sum of its two coordinate
+inclusions. The square then follows from the restricted-tower composition theorem and pasting
+of additive Roos comparisons; no nonvanishing hypothesis on the complexes is needed.
+
+## References
+
+* [Stacks, Tag 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -50,19 +65,9 @@ private theorem normalized_roos_eq
     (hl.symm.trans (hr.trans (Category.comp_id _)))
 
 section
-/-- The composition square before localization, on every restricted strict complex.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 0941
-(blueprint: lem-pod-composition-restricted-roos).
-
-Proof: the two coordinate normalizations identify every supplied Roos comparison
-with the canonical additive Roos map, since the mapping-cocone identity is the
-sum of its two coordinate inclusions. The restricted-tower composition theorem
-identifies the composite restricted map with the two successive maps. Naturality
-of the additive Roos map moves the first restricted map past the second Roos
-comparison; composition of additive Roos comparisons then yields the single Roos
-comparison followed by the ordinary compositor on the tower. Functoriality of
-the strict Roos construction and the restricted-tower equation identify the
-remaining maps. Every step holds for all complexes, including zero complexes. -/
+/-- The composition square before localization, on every restricted strict complex: the Roos
+and restricted comparisons for `f` and then `h`, preceded by the compositor, agree with those
+for `h ≫ f` followed by the composition map of comparison sequences. -/
 theorem podCompositionRestrictedRoos
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]
     [∀ v : V, Invertible (l : V.residueField v)]

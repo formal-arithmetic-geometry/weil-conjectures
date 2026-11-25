@@ -33,15 +33,15 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 /-!
 # Trace and base-change rearrangement before the first triangle
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-int-restriction,
-`sk-thm-int-restriction-line.proof.md`, (1), first triangle
-(blueprint: lem-sfb-trace-base-change-first).
-
 All operations below are on the ordinary unbounded derived categories of internal
 modules over the pulled-back condensed coefficient ring. The square and tensor
 comparisons, projection maps and source identification are specified constructions.
 The internal-module tensor helpers are owned by this item; the general ringed-topos
 tensor-pullback interface remains publicly imported with its recorded declaration.
+
+## References
+
+* Stacks Project, Tags 07A4, 03EL, 0G7E, 0B56, 07A7 and 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -78,9 +78,7 @@ attribute [local instance] Sheaf.monoidalCategory
 namespace CategoryTheory
 /-- The canonical sheaf symmetry with its canonical braiding named explicitly.
 The record update is definitionally equal to the existing symmetric structure;
-it prevents comparison of two separately generated braiding structures downstream.
-Source: the symmetric monoidal sheafification construction in Mathlib
-(blueprint: lem-sfb-trace-base-change-first). -/
+it prevents comparison of two separately generated braiding structures downstream. -/
 @[instance_reducible]
 def traceSheafSymmetric
     {C : Type u₁} [Category.{v₁} C] (J : GrothendieckTopology C)
@@ -94,8 +92,7 @@ end NamedSheafSymmetry
 attribute [local instance 20000] CategoryTheory.traceSheafSymmetric
 
 namespace CategoryTheory
-/-- The canonical derived Koszul braiding, assembled while the base category is abstract.
-Source: Stacks 07A4 (blueprint: lem-sfb-trace-base-change-first). -/
+/-- The canonical derived Koszul braiding, assembled while the base category is abstract. -/
 def traceCanonicalDerivedBraiding
     {A : Type u₁} [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [HasDerivedCategory.{u + 1} A]
@@ -154,18 +151,11 @@ section OrdinaryPullbackStructures
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- Canonical strong monoidal module inverse image.
-Source: Stacks 03EL (blueprint: lem-sfb-trace-base-change-first). -/
+/-- Canonical strong monoidal module inverse image. -/
 instance condensedUpperStarMonoidal : (upperStar Λ f).Monoidal :=
   monoidal_upperStar Λ f
 
-/-- Module inverse image preserves flat modules.
-Source: Stacks 0G7E (blueprint: lem-sfb-trace-base-change-first).
-Proof: pass through the exact internal-to-sectionwise module equivalence. The
-normalized tensor comparison is the usual scalar-extension comparison there by its
-unit-generator equations. Pullback of a flat sheaf is flat by the local tensor
-criterion, so tensoring with the pulled-back module is exact. Transport back through
-the exact equivalence. This is flatness in the existing monoidal module category. -/
+/-- Module inverse image preserves flat modules. -/
 @[instance] theorem condensedUpperStarPreservesFlat : (upperStar Λ f).PreservesFlat := by
   have hf := inverseImageModule_preservesFlat f (condensedRingObj Λ Y)
     (condensedRingObj Λ X) (asIso (condensedPullbackHom Λ f)).inv
@@ -382,8 +372,7 @@ variable {C : Type u₁} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian
 omit [F.PreservesFlat] in
 /-- The degree-zero unit comparison, packaged before specialization to sheaf modules.
 This is the explicit composite through the exact-functor comparison, the quotient
-factorization and the ordinary unit isomorphism; no data is chosen.
-Source: Stacks 07A4 (blueprint: lem-sfb-trace-base-change-first). -/
+factorization and the ordinary unit isomorphism; no data is chosen. -/
 @[irreducible]
 def traceDegreeZeroUnitIso : F.leftDerivedFunctor.obj (𝟙_ _) ≅ 𝟙_ _ :=
   F.leftDerivedTensorUnitIso
@@ -497,8 +486,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 /-- The ordinary comparison sends the tensor of the two universal pullback sections to
 its universal tensor section; on the regular module it is the coefficient map alpha.
 These are equalities of sheaf maps, so include all local generators, rather than only
-sections over schemes in the image of base change.
-Source: Stacks 03EL (blueprint: lem-sfb-trace-base-change-first). -/
+sections over schemes in the image of base change. -/
 def CondensedTensorNormalization (m : (upperStar Λ f).CoreMonoidal) : Prop :=
   (∀ M N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y),
     (Mod.tensorObjπ M N) ≫ ((upperStarLowerStarAdjunction Λ f).unit.app (M ⊗ N)).hom ≫
@@ -585,8 +573,7 @@ private theorem canonical_tensor_normalization :
 
 end TensorNormalizationProofs
 
-/-- The specified ordinary strong monoidal structure, selected by its unique equations.
-Source: Stacks 03EL (blueprint: lem-sfb-trace-base-change-first). -/
+/-- The specified ordinary strong monoidal structure, selected by its unique equations. -/
 def condensedTensorCore : (upperStar Λ f).CoreMonoidal :=
   Functor.CoreMonoidal.ofOplaxMonoidal (upperStar Λ f)
 
@@ -738,8 +725,7 @@ end CompositionCoherence
 
 attribute [local irreducible] condensedTensorCore condensedUpperStarMonoidal
 
-/-- The adjunction transpose defining projection, expressed over abstract categories.
-Source: Stacks 0B56 (blueprint: lem-sfb-trace-base-change-first). -/
+/-- The adjunction transpose defining projection, expressed over abstract categories. -/
 def traceProjectionFromComparison
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     [MonoidalCategory C] [MonoidalCategory D]
@@ -749,8 +735,7 @@ def traceProjectionFromComparison
   adj.homEquiv (K ⊗ P.obj N) (F.obj K ⊗ N)
     (δ K (P.obj N) ≫ (𝟙 (F.obj K) ⊗ₘ adj.counit.app N))
 
-/-- A square mate, with the canonical adjunctions supplied as data.
-Source: Stacks 07A7 (blueprint: lem-sfb-trace-base-change-first). -/
+/-- A square mate, with the canonical adjunctions supplied as data. -/
 def traceAbstractMate
     {C : Type u₁} {D : Type u₂} {V : Type u₃}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} V]
@@ -791,10 +776,7 @@ private theorem conjugate_transpose
   simp only [Category.assoc, Adjunction.homEquiv_counit]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Canonical tensor comparisons for three fixed functors, with their tensor structures
-stored once. This bundle prevents repeated proof abstraction inside concrete derived tensors.
-Source: Stacks 07A4; derived-completeness implementation notes
-(blueprint: lem-sfb-trace-base-change-first). -/
+/-- Canonical tensor comparisons for three fixed functors, with their tensor structures. -/
 structure TraceComparisonData
     {C : Type u₁} {D : Type u₂} {V : Type u₃}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} V]
@@ -882,8 +864,7 @@ variable {C : Type u₁} [Category.{u + 1} C] [Abelian C]
   (TY : DerivedCategory C)
 
 /-- The existing total-derived tensor, degree-zero unit and Koszul comparisons,
-constructed while the three abelian categories are abstract. No data is chosen.
-Source: Stacks 07A4 (blueprint: lem-sfb-trace-base-change-first). -/
+constructed while the three abelian categories are abstract. No data is chosen. -/
 def derivedTraceComparisonData :
     TraceComparisonData F.leftDerivedFunctor U₁.leftDerivedFunctor U₂.leftDerivedFunctor where
   unitIso := F.traceDegreeZeroUnitIso
@@ -973,8 +954,7 @@ variable {C : Type u₁} [Category.{u + 1} C] [Abelian C]
   (TY : DerivedCategory (Mod C RC))
 
 /-- The canonical derived comparisons for internal modules, with ambient categories
-still abstract. Its fields are exactly those of `derivedTraceComparisonData`.
-Source: Stacks 07A4 (blueprint: lem-sfb-trace-base-change-first). -/
+still abstract. Its fields are exactly those of `derivedTraceComparisonData`. -/
 def moduleTraceComparisonData :
     TraceComparisonData F.leftDerivedFunctor U₁.leftDerivedFunctor U₂.leftDerivedFunctor :=
   derivedTraceComparisonData F U₁ U₂
@@ -984,23 +964,19 @@ end ModuleTraceAssembly
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- The recorded ambient unbounded internal-module derived category.
-Source: blueprint standing setting (blueprint: lem-sfb-trace-base-change-first). -/
+/-- The recorded ambient unbounded internal-module derived category. -/
 abbrev TraceD (Z : Scheme.{u}) :=
   DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
 
-/-- Alias for the total left derived functor of the full module inverse image.
-Source: blueprint standing setting (blueprint: lem-sfb-trace-base-change-first). -/
+/-- Alias for the total left derived functor of the full module inverse image. -/
 def tracePull {Z B : Scheme.{u}} (h : Z ⟶ B) : TraceD Λ B ⥤ TraceD Λ Z :=
   moduleObjectDerivedPullback Λ h
 
-/-- Alias for the total right derived functor of the full module direct image.
-Source: blueprint standing setting (blueprint: lem-sfb-trace-base-change-first). -/
+/-- Alias for the total right derived functor of the full module direct image. -/
 def tracePush {Z B : Scheme.{u}} (h : Z ⟶ B) : TraceD Λ Z ⥤ TraceD Λ B :=
   moduleObjectDerivedPushforward Λ h
 
-/-- The existing canonical adjunction, with its functors named explicitly.
-Source: blueprint derived module adjunction (blueprint: lem-sfb-trace-base-change-first). -/
+/-- The existing canonical adjunction, with its functors named explicitly. -/
 @[irreducible]
 def traceAdjunction {Z B : Scheme.{u}} (h : Z ⟶ B) :
     tracePull Λ h ⊣ tracePush Λ h :=
@@ -1008,14 +984,12 @@ def traceAdjunction {Z B : Scheme.{u}} (h : Z ⟶ B) :
 
 variable {X Y W : Scheme.{u}} (f : X ⟶ Y) (p q : W ⟶ X)
 
-/-- The canonical pullback composition with named functor endpoints.
-Source: Stacks 0D6D (blueprint: lem-sfb-trace-base-change-first). -/
+/-- The canonical pullback composition with named functor endpoints. -/
 def tracePullComp {Z B C : Scheme.{u}} (a : Z ⟶ B) (b : B ⟶ C) :
     tracePull Λ (a ≫ b) ≅ tracePull Λ b ⋙ tracePull Λ a :=
   leftDerivedUpperStarComp Λ a b
 
-/-- The canonical inverse-image square comparison, from the recorded composition maps.
-Source: Stacks 07A7 (blueprint: lem-sfb-trace-base-change-first). -/
+/-- The canonical inverse-image square comparison, from the recorded composition maps. -/
 @[irreducible]
 def tracePullSquare (w : p ≫ f = q ≫ f) :
     tracePull Λ f ⋙ tracePull Λ q ≅ tracePull Λ f ⋙ tracePull Λ p :=
@@ -1024,8 +998,7 @@ def tracePullSquare (w : p ≫ f = q ≫ f) :
       tracePullComp Λ p f
 
 /-- The recorded canonical comparisons for the three pullbacks, stored in one bundle.
-Its fields are the existing derived tensor, degree-zero unit and Koszul symmetry maps.
-Source: Stacks 07A4 (blueprint: lem-sfb-trace-base-change-first). -/
+Its fields are the existing derived tensor, degree-zero unit and Koszul symmetry maps. -/
 def traceNativeComparisonData :
     TraceComparisonData (tracePull Λ f) (tracePull Λ p) (tracePull Λ q) :=
   moduleTraceComparisonData
@@ -1049,8 +1022,7 @@ private theorem trace_square_tensor (w : p ≫ f = q ≫ f) :
     (upperStarComp Λ p f) (upperStarComp Λ q f)
 end SquareCoherence
 
-/-- The base twist R_Y(1)[2], its recorded integral line placed in degree zero.
-Source: definition-tate-twists (blueprint: lem-sfb-trace-base-change-first). -/
+/-- The base twist R_Y(1)[2], its recorded integral line placed in degree zero. -/
 @[irreducible]
 def traceTate (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (Z : Scheme.{u}) : TraceD (Profinite.padicIntegersRingObj ℓ E.1) Z :=

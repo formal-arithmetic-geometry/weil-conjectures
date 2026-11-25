@@ -126,8 +126,6 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullb
 import all WeilConjectures.Algebra.Homology.CanonicalRingedTensorComparison.RingedTopoiCanonicalTensorPullbackSupplement
 
 /-! # Binary tensor compatibility of the scalar associator
-
-Source: lem-coef-integral-finite-extension.proof.md, final paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -601,22 +599,7 @@ private theorem scalarTensor_associator_aux {X : Scheme.{u}}
 end AssociatorProof
 
 /-- The adjunction-normalized scalar associator respects the normalized binary
-scalar/tensor comparisons. No internal Hom, completion, or dualizing objects occur.
-Source: current blueprint, sec-smooth-purity/sk-lem-sp-tower,
-lem-coef-integral-finite-extension.proof.md, final paragraph.
-(blueprint: lem-sf-scalar-tensor-associator)
-
-Proof: choose flat-term K-flat representatives P and Q for K and M. Scalar extension
-preserves these representatives. The scalarTensor normalization identifies its
-map with the balanced tensor map on each total summand. The scalar associator is
-normalized by the identity composition of restriction of scalars. Thus both sides
-send a homogeneous coefficient tensor t tensor (s tensor (p tensor q)) to the same
-balanced tensor over T. Balancing gives equality before sheafification, and the
-signed total maps preserve bidegrees, hence introduce the same signs. Apply
-sheafification and localization and the representative isomorphisms in r, s, t.
-Naturality along the resolving isomorphisms gives the equation on K and M. The
-argument includes zero objects, empty schemes and identity coefficient maps;
-no flatness of the coefficient maps is required. -/
+scalar/tensor comparisons. No internal Hom, completion, or dualizing objects occur. -/
 theorem scalarTensor_associator {X : Scheme.{u}}
     {R S T : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (φ : R ⟶ S) (ψ : S ⟶ T) (χ : R ⟶ T) (h : φ ≫ ψ = χ)

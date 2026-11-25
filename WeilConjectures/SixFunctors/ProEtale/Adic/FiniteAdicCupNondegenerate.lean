@@ -22,8 +22,7 @@ smooth of relative dimension `d`. For `i + j = 2d` the cup product pairing
 (`AlgebraicGeometry.ProEtale.unitShiftAddEquivFiniteAdicH_cupProduct`), whose trace–cup pairing is
 nondegenerate for a Tate orientation of `a`
 (`AlgebraicGeometry.Etale.TateOrientation.exists_nondegenerate_traceCup`); a Tate orientation exists
-by smooth purity (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`,
-`proposition-smooth-purity-finite-coefficients`).
+by smooth purity (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`).
 -/
 
 @[expose] public section

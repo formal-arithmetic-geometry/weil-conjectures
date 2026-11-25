@@ -64,7 +64,6 @@ n + 1 and every tensor product is the ordinary, uncompleted derived tensor produ
 
 @[expose] public noncomputable section
 
-set_option linter.unusedVariables false
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 4096

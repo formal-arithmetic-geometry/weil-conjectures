@@ -51,9 +51,15 @@ import Mathlib.Data.Fintype.Order
 
 /-! # Residue bases on a common clopen partition
 
-Source: Stacks Project, proetale.tex, Tag 09C3, the clopen trivialization in
-`lemma-local-structure-constructible-complex`
-(blueprint: lem-sf-residue-lisse-clopen-bases).
+Residue cohomology of a complex with lisse constructible cohomology admits finite free models
+on the members of a finite clopen partition.
+
+## References
+
+* [Stacks, Tag 08FZ](https://stacks.math.columbia.edu/tag/08FZ)
+* [Stacks, Tag 0946](https://stacks.math.columbia.edu/tag/0946)
+* [Stacks, Tag 098F](https://stacks.math.columbia.edu/tag/098F)
+* [Stacks, Tag 09C3](https://stacks.math.columbia.edu/tag/09C3)
 -/
 
 @[expose] public section
@@ -170,31 +176,7 @@ private theorem residueBasisCompleteIso (X : Scheme.{u})
     exact IsIso.of_isIso_comp_right _ ((completion.{u, u} l E X none).map e.hom)
 
 /-- Choose residue bases on clopen members, preserving completeness and a common Tor interval.
-This asserts only restriction and cohomology data, with no integral complex model.
-
-Source: Stacks Project, proetale.tex, Tags 09C3 and 098F; sites-cohomology.tex,
-Tags 0946 and 08FZ (blueprint: lem-sf-residue-lisse-clopen-bases).
-
-Proof: choose an ordered interval for the finite residue Tor amplitude. Testing with
-its coefficient unit puts all nonzero residue cohomology in this interval. The residue
-ring is a field by the extension-integers DVR theorem. Each cohomology sheaf is lisse
-and constructible, so its locally constant module models are finite-dimensional.
-Apply lem-sf-clopen-lisse-complete-localization to the finite family indexed by the
-integer interval. Its finite disjoint cover has compact, weakly contractible members.
-Its free constant models, the equivalence between the slice site and the member's
-pro-etale site, and exactness of ordinary restriction identify the local cohomology
-with the stated finite free residue sheaves. Choose their finite ranks; extend the
-rank function by zero outside the interval. Exact evaluation on each member makes
-its completed-coefficient unit projective; finite sums are therefore projective.
-The coefficient and quotient-tower comparisons in that localization theorem preserve
-completeness. On a complete object the completed derived pullback along the open
-immersion agrees with this ordinary restriction, since the latter is already complete.
-The same normalized coefficient comparisons commute with residue reduction. Finally,
-exact restriction and exact pullback preserve cohomological vanishing outside the
-interval on every object of each component's pro-etale site. Over the residue field,
-tensor cohomology identifies this boundedness with the required Tor interval. If the base is empty,
-the empty partition gives the assertion. Zero ranks give zero free residue sheaves.
-No basis of integral cohomology and no integral projective model is chosen here. -/
+This asserts only restriction and cohomology data, with no integral complex model. -/
 theorem residue_lisse_clopen_bases
     (S : Scheme.{u}) (hS : IsAffine S)
     (hweak : (Scheme.ProEt.topology S).IsWeaklyContractible.{u + 1}

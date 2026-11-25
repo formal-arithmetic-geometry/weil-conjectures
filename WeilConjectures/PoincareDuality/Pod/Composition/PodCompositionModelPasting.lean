@@ -8,24 +8,25 @@ module
 public import Mathlib.CategoryTheory.Whiskering
 import Mathlib.Tactic.CategoryTheory.Slice
 
-/-! # Pasting normalized comparison models -/
+/-! # Pasting normalized comparison models
+
+A commuting triangle of normalized models gives the composition equation for the original
+comparison maps.
+
+## References
+
+* [Stacks, Tag 0941]
+-/
 
 @[expose] public section
 set_option autoImplicit false
 open CategoryTheory
 namespace WeilConjectures
 
-/-- A commuting triangle of models gives composition for the original comparisons.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 0941
-(blueprint: lem-pod-composition-model-pasting).
-
-Proof: postcompose with the two successive representative isomorphisms and the
-final model isomorphism. Naturality moves the first representative across the
-second comparison. Substitute its model formula and then the first model formula.
-Naturality of the ordinary compositor moves the initial model to the front.
-The strict composition equation and the composite model formula give the other
-path; naturality of the final model and the representative compositor finish.
-All postcomposed factors are isomorphisms, so cancellation proves the equality. -/
+/-- A commuting triangle of models gives composition for the original comparisons: if `bF`,
+`bG`, `bH` agree with the model maps `mF`, `mG`, `mH` along the representative isomorphisms
+and the models satisfy the composition equation `hm`, then
+`k.app _ ≫ G.map (bF.app x) ≫ bG.app _ = bH.app x ≫ R₂.map (s.app x)`. -/
 theorem podCompositionModelPasting
     {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
     [Category C₀] [Category C₁] [Category C₂]

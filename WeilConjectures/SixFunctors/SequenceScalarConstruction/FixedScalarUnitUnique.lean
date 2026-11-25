@@ -11,8 +11,11 @@ import WeilConjectures.SixFunctors.SequenceScalarConstruction.SystemScalarPackag
 
 /-! # Generic normalized scalar comparison
 
-Source: Stacks 03D7, 03EK and 06YY.
-(blueprint: lem-sf-fixed-scalar-unit-unique).
+## References
+
+* [Stacks, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public noncomputable section
@@ -29,13 +32,7 @@ variable {C : Type sa} [Category.{sb} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{sw}] [HasSheafify J AddCommGrpCat.{sw}]
   [EssentiallySmall.{sw} C]
 
-/-- Normalized scalar comparison for fixed cochain models.
-Source: Stacks 03D7, 03EK and 06YY
-(blueprint: lem-sf-fixed-scalar-unit-unique).
-Proof: construct the normalized scalar packages with exactly these cochain models.
-Apply the package-level normalized comparison and its uniqueness. Transport its
-conclusion along the recorded model equalities. This proves the statement before
-specializing to concrete quotient rings, so no concrete coefficient sequence is unfolded. -/
+/-- Normalized scalar comparison for fixed cochain models. -/
 theorem fixedScalarUnitUnique
     {R : Sheaf J CommRingCat.{sw}} {φ : R ⟶ R} (hφ : φ = 𝟙 R)
     (D : SheafOfModules.DerivedChangeOfRingsCochainModel φ) :

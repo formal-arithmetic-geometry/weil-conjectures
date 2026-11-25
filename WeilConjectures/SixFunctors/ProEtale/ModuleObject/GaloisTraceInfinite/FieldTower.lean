@@ -125,11 +125,10 @@ noncomputable def isColimitModuleCocone_galoisTower (T₀ : Type) [TopologicalSp
   (galoisTower Ω h).isColimitModuleCocone _ _
     (nonempty_isColimit_galoisUpperLowerCocone (Ω := Ω) h M.X hM).some
 
-/-- **Galois invariant retraction of the derived unit of an infinite Galois extension** (the
-derived Hochschild–Serre isomorphism for a pro-`p` Galois group, with torsion coefficients in which
-`p` is invertible). Let `Ω/L` be Galois, `h : G ⟶ Spec L`, `g : G ×_L Ω ⟶ G`, `T₀` a finite
-discrete commutative ring in which the degrees of the finite Galois subextensions of `Ω/L` are
-invertible, `Λ = C(-, T₀)`, and `C ∈ D(Mod_{Λ_G})` bounded below of étale origin. Then the derived
+/-- **Galois invariant retraction of the derived unit of an infinite Galois extension**. Let
+`Ω/L` be Galois, `h : G ⟶ Spec L`, `g : G ×_L Ω ⟶ G`, `T₀` a finite discrete commutative ring
+in which the degrees of the finite Galois subextensions of `Ω/L` are invertible, `Λ = C(-, T₀)`,
+and `C ∈ D(Mod_{Λ_G})` bounded below of étale origin. Then the derived
 unit `C ⟶ Rg_* Lg^* C` has a retraction `R` fixed by the derived unit transports along all the
 `Spec σ`, `σ ∈ Gal(Ω/L)`. -/
 theorem exists_invariant_retraction_derivedUnit_galois (T₀ : Type) [TopologicalSpace T₀]

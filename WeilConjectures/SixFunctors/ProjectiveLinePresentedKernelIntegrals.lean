@@ -8,7 +8,8 @@ public import WeilConjectures.AlgebraicGeometry.FiniteP1ArbitraryBaseIntegrals
 public import WeilConjectures.AlgebraicGeometry.SfP1IntegralTransportData
 import WeilConjectures.SixFunctors.ProjectiveLinePresentedIntegrals
 
-/-! # Compact-support integral identities of the explicit projective-line datum -/
+/-! # Compact-support integral identities of the explicit projective-line datum
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -29,15 +30,7 @@ private theorem conjugate_identity
     c.inv ≫ F.map x ≫ c.hom = 𝟙 V := by
   rw [hx, F.map_id, Category.id_comp, c.inv_hom_id]
 
-/-- The explicit transported supported datum has both compact-support integrals equal to one.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the two diagonal integrals.
-(auxiliary; not a blueprint node)
-
-Proof: extract the supported class and the two ordinary integral identities from the
-finite diagonal property. The proved comparison for the constructed datum identifies
-its first and second compact-support integrals with conjugates of these ordinary
-integrals. Each conjugate is identity by functoriality and cancellation of the constant
-comparison isomorphism. This uses the actual constructed trace in both integrals. -/
+/-- The explicit transported supported datum has both compact-support integrals equal to one. -/
 theorem exists_presentedFiniteP1Datum_integrals
     (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

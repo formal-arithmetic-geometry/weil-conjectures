@@ -19,8 +19,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.D
 
 /-!
 # Dualizability of finite locally projective coefficient modules
-
-Source: blueprint main-20261015, stratum Hom lemma, proof step 3.
 -/
 
 @[expose] public section

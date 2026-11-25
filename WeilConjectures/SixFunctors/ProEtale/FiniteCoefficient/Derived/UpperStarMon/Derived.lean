@@ -70,13 +70,7 @@ noncomputable abbrev leftDerivedUpperStarDerivedTensor :
   (Functor.postcompose₂.obj L((g)^*[A])).obj (-⊗ᴸ-(Y)[A])
 
 /-- The counit exhibiting `(K, M) ↦ Lg^*K ⊗ᴸ Lg^*M` as the total left derived functor of
-`(A, B) ↦ g^*A ⊗ g^*B`. On `K, M` in `K(Y_proét)` it is the composite
-```
- Lg^*(Qh K) ⊗ᴸ Lg^*(Qh M) --(counit ⊗ᴸ 1)--> Qh(g^*K) ⊗ᴸ Lg^*(Qh M)
-   --(1 ⊗ᴸ counit)--> Qh(g^*K) ⊗ᴸ Qh(g^*M) --(μ Qh)--> Qh(g^*K ⊗ g^*M)
-```
-of the counits of `Lg^*` on both factors and the lax monoidal structure of
-`Qh : K(Z_proét) ⥤ D(Z_proét)`. -/
+`(A, B) ↦ g^*A ⊗ g^*B`. -/
 noncomputable def derivedTensorLeftDerivedUpperStarCounit :
     (((Functor.whiskeringLeft₂ _).obj (Qh (C := Sheaf (Scheme.ProEt.topology Y) A))).obj Qh).obj
         (derivedTensorLeftDerivedUpperStar A g) ⟶
@@ -91,12 +85,7 @@ noncomputable def derivedTensorLeftDerivedUpperStarCounit :
         ((g)^*[A].mapHomotopyCategory (.up ℤ))).map (μNatTrans Qh)
 
 /-- The counit exhibiting `(K, M) ↦ Lg^*(K ⊗ᴸ M)` as the total left derived functor of
-`(A, B) ↦ g^*(A ⊗ B)`. On `K, M` in `K(Y_proét)` it is the composite
-```
- Lg^*(Qh K ⊗ᴸ Qh M) --(Lg^*(μ Qh))--> Lg^*(Qh (K ⊗ M)) --(counit)--> Qh(g^*(K ⊗ M))
-```
-of `Lg^*` applied to the lax monoidal structure of `Qh : K(Y_proét) ⥤ D(Y_proét)` and the counit
-of `Lg^*`. -/
+`(A, B) ↦ g^*(A ⊗ B)`. -/
 noncomputable def leftDerivedUpperStarDerivedTensorCounit :
     (((Functor.whiskeringLeft₂ _).obj (Qh (C := Sheaf (Scheme.ProEt.topology Y) A))).obj Qh).obj
         (leftDerivedUpperStarDerivedTensor A g) ⟶

@@ -100,17 +100,11 @@ theorem exists_mem_topology_forall_eq_one {ι : Type*} {U : ι → X.Opens} [∀
 
 end Scheme.ProEt
 
-/-- Blueprint `sk-rem-sf-fullcd-scope`: let `E` be an abelian variety of positive dimension over
+/-- Let `E` be an abelian variety of positive dimension over
 an algebraically closed field `k`, with function field `K`. There is a homomorphism `φ` from a
 free abelian group `H` of countable rank to `Gal(Kˢᵉᵖ/K)` such that every object of `E_proét`
 has a covering sieve on whose members `W` the group `H` acts freely on `Hom(T, W)`, for the
-geometric generic point `T`.
-
-Choose a prime `r` invertible in `k` and a finite affine open cover of `E` by opens `U i` with
-units `f i` which are not `r`-th powers in `K`
-(`AlgebraicGeometry.IsAbelianVariety.exists_finite_cover_units_not_pow`); `K ⊇ k` contains the
-`rᵐ`-th roots of unity, so `exists_injective_kummer_free` provides `φ`, and
-`AlgebraicGeometry.Scheme.ProEt.exists_mem_topology_forall_eq_one` the covering sieves. -/
+geometric generic point `T`. -/
 theorem IsAbelianVariety.exists_genericPointSepAction_forall_eq_one {k : Type u} [Field k]
     [IsAlgClosed k] (E : Over (Spec (.of k))) [IsAbelianVariety E]
     (hE : 0 < IsAbelianVariety.dim E) :

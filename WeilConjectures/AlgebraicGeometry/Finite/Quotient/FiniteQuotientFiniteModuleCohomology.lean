@@ -28,8 +28,6 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
--- Retain the published named chart-map binder in the conclusion.
-set_option linter.unusedVariables false in
 /-- The successor quotient has bounded finite etale-local cohomology: each cohomology
 sheaf individually has local models. -/
 theorem finiteQuotient_finiteModule_cohomology_succ
@@ -49,7 +47,7 @@ theorem finiteQuotient_finiteModule_cohomology_succ
     (∀ q : ℤ, q < a ∨ b < q → IsZero
         ((SheafOfModules.overFunctor.{t + 1} R₀ ((toProEt X).obj V)).obj
           ((DerivedCategory.homologyFunctor _ q).obj K))) ∧
-      ∀ (q : ℤ) (W : X.Etale) (g : W ⟶ V),
+      ∀ (q : ℤ) (W : X.Etale) (_g : W ⟶ V),
         ∃ S : Sieve W, S ∈ X.smallEtaleTopology W ∧
           ∀ (Z : X.Etale) (f : Z ⟶ W), S f →
             ∃ N : ModuleCat.{t} B, Module.Finite B N ∧ Nonempty

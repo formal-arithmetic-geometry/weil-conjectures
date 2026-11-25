@@ -44,9 +44,7 @@ the pointwise rank of `ψ` at `t`
 - `AlgebraicGeometry.ProEtale.isAdicLisseSheaf_of_isIso_homology_free` and
   `AlgebraicGeometry.ProEtale.isAdicLisseSheaf_homology_of_locally_free`: on a locally
   Noetherian scheme, a complex which is pro-étale locally a bounded above complex of finite free
-  sheaves has lisse cohomology sheaves. The fibre dimensions of the cohomology descend to the
-  base and are constant along specializations, hence locally constant, and descending
-  induction makes the pointwise ranks of the differentials locally constant.
+  sheaves has lisse cohomology sheaves.
 
 This reduces the local constancy of the higher direct images along a smooth proper morphism to
 the local perfectness of `Rf_* F`, which is not available here.
@@ -527,16 +525,7 @@ open AdicSheaf in
 /-- **Perfect complexes have lisse cohomology on a locally Noetherian scheme.** Let `G n`,
 `n ∈ ℤ`, be sheaves on a locally Noetherian scheme `Y` which, on the members `gᵢ : Uᵢ ⟶ Y` of a
 pro-étale cover, are the homology sheaves of bounded above complexes `Cᵢ` of finite free
-`ℚ̄_ℓ,Uᵢ`-modules. Then every `G n` is lisse.
-
-The dimension of the fibre of `G n` at a geometric point over `u ∈ Uᵢ` is
-`rank Cᵢⁿ - rank dⁿ⁻¹(u) - rank dⁿ(u)`
-(`AlgebraicGeometry.ProEtale.AdicSheaf.finrank_fibre_homology`),
-so this function descends to `Y`. It is constant along specializations, the pointwise ranks of
-the differentials being so and flat morphisms lifting generizations, hence locally constant.
-Descending induction from the top degree shows that the pointwise ranks of the differentials are
-locally constant, and the homology is lisse by
-`AlgebraicGeometry.ProEtale.AdicSheaf.isAdicLisseSheaf_homology_of_isLocallyConstant`. -/
+`ℚ̄_ℓ,Uᵢ`-modules. Then every `G n` is lisse. -/
 theorem isAdicLisseSheaf_of_isIso_homology_free {Y : Scheme.{u}} [IsLocallyNoetherian Y]
     (G : ℤ → AdicSheaf l Y) {ι : Type*} {U : ι → Scheme.{u}} (g : ∀ i, U i ⟶ Y)
     (hg : Presieve.ofArrows U g ∈ Scheme.proetalePrecoverage Y)

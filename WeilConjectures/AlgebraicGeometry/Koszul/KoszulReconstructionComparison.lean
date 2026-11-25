@@ -28,7 +28,6 @@ calculation uses the independent characterization of the quotient completion uni
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
-set_option linter.style.haveILetI false
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -212,7 +211,7 @@ theorem koszulReconstructionComparison (r : ℕ) (a : Fin r → A)
         (reconstructionLimit T d).rightDerivedFunctorUnitQ_naturality f }
   obtain ⟨e, he⟩ := ExactProductsRoos.comparisonIso RF δ (by
     intro I hI
-    letI := hI
+    let := hI
     change IsIso ((reconstructionLimit T d).rightDerivedFunctorUnitQ I)
     rw [Functor.rightDerivedFunctorUnitQ_eq]
     infer_instance)
@@ -233,7 +232,7 @@ theorem koszulReconstructionComparison (r : ℕ) (a : Fin r → A)
     rw [Category.id_comp]
   let γ := reconstructionModelGamma F LF RF (completedAdicReductionData T d).counit
   have hγ (X : P.FullSubcategory) : IsIso (γ.app X.obj) := by
-    letI : IsIso ((completedAdicReductionData T d).counit.app X.obj) :=
+    have : IsIso ((completedAdicReductionData T d).counit.app X.obj) :=
       (completedAdicReductionData T d).isIso_counit X.obj.as X.property
     change IsIso ((reconstructionModelGamma F LF RF
       (completedAdicReductionData T d).counit).app X.obj)
@@ -242,10 +241,10 @@ theorem koszulReconstructionComparison (r : ℕ) (a : Fin r → A)
     infer_instance
   have hαiso (X : P.FullSubcategory) : IsIso (α.app X.obj) := by
     have hx := haug X.obj.as X.property
-    letI : IsIso (e.hom.app (FC.obj X.obj.as)) := inferInstance
-    letI : IsIso (f.hom.app X.obj.as) := inferInstance
-    letI : QuasiIso (aug.app X.obj.as) := hx
-    letI : IsIso (DerivedCategory.Q.map (aug.app X.obj.as)) := inferInstance
+    have : IsIso (e.hom.app (FC.obj X.obj.as)) := inferInstance
+    have : IsIso (f.hom.app X.obj.as) := inferInstance
+    let : QuasiIso (aug.app X.obj.as) := hx
+    have : IsIso (DerivedCategory.Q.map (aug.app X.obj.as)) := inferInstance
     rw [show α.app X.obj = f.hom.app X.obj.as ≫ DerivedCategory.Q.map (aug.app X.obj.as) ≫
       e.hom.app (FC.obj X.obj.as) from hα X.obj.as]
     infer_instance

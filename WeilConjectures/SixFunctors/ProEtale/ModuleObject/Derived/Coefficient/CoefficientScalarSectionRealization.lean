@@ -11,9 +11,13 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Section realization of coefficient scalar extension
 
-Source: Stacks Project, Tags 03EK, 03EL, 06YY, 07A4 and 07A6;
-steps 1--3 of `lem-sfb-coefficient-scalar-tensor-realization`.
-(blueprint: lem-sfb-coefficient-scalar-section-realization).
+Realization of scalar extension, its adjunction and its tensorator by the normalized section
+operations.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK and 03EL
+* Stacks Project, Cohomology on Sites, Tags 06YY, 07A4 and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -465,35 +469,7 @@ private theorem tensor_transport (Z : Scheme.{u})
     (p.app (((derivedTensor R Z).obj M).obj N)) _).symm
 
 /-- Scalar extension, its adjunction and its tensorator realize the normalized section
-operations, including the signed flat-term K-flat representative square.
-
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL; Cohomology on Sites,
-Tags 06YY, 07A4 and 07A6; steps 1--3 of
-`lem-sfb-coefficient-scalar-tensor-realization`.
-(blueprint: lem-sfb-coefficient-scalar-section-realization).
-
-Proof: apply internal_section_scalar_adjunction to the actual coefficient map.
-Its ordinary generator and Hom formulas give the recorded extension and restriction
-isomorphisms. Compare its universal internal derived functor with
-internalScalarExtension by uniqueness of left adjoints. The exact computation
-counit is leftDerivedFunctorIsoMapDerivedCategory followed by mapDerivedCategoryFactors.
-The normalization of the unit identifies the transported adjunction with
-Mod.derivedExtendMapDerivedCategoryAdjunction, and naturality transports the Hom formula.
-Construct the section scalar monoidal structure from scalarExtension_constraint_coherence
-on changeOfRings. Transport it through the object equalities of the normalized scalar
-pair; on generators its oplax map sends s tensor (x tensor y) to
-(s tensor x) tensor (1 tensor y). Transport the fixed internal derived tensor isomorphism
-through the product of the section equivalences to obtain t. Its identification equation
-is the defining transport square. For representative normalization, precompose both
-ordinary comparisons with the balanced tensor coprojection and scalar unit. The internal
-normalization and the preceding generator formula give equal maps on every generalized
-pure tensor. Totalization applies this equation in each bidegree with the same signs.
-Scalar extension preserves the direct sums, so the two total arrows agree. On internal
-flat-term K-flat representatives the fixed derived tensorator is the localization of
-this arrow. Substitute the scalar and tensor computation comparisons and cancel the
-adjacent isomorphisms. Section reconstruction preserves flatness and K-flatness; its
-inverse and the equivalence counit transport this equality to every section pair. These
-are precisely all clauses of the realization predicate. No boundedness is used. -/
+operations, including the signed flat-term K-flat representative square. -/
 theorem coefficientScalarSectionRealization (Z : Scheme.{u}) :
     CoefficientScalarSectionRealization a Z := by
   obtain ⟨b, r, hr, o, ho, hh, F, ε, _, _, adj, hu, q, hq, p, hp, ha⟩ :=

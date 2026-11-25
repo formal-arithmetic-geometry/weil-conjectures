@@ -16,9 +16,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Mate.MateOpenPr
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactification.CompactificationRefinementLocalizing
 
 /-! # The normalized compact-support comparison for an open square
-
-Source: blueprint proposition-composition-open-restriction-compactifications-f, proof (2), and
- proposition-composition-base-change-rf-shriek--1, proof (2)--(3).
 -/
 
 @[expose] public noncomputable section

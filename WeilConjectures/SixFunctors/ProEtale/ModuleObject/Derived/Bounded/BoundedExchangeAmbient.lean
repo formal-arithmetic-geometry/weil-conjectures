@@ -15,10 +15,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBa
 
 /-! # The specified bounded exchange viewed in the ambient category
 
-Source: the defining unit-square-counit formula for boundedConstructibleBaseChange.
 Stated for each coefficient ring with bounded constructible pushforwards: `ℚ̄_ℓ`, a finite
 discrete ring `T` (`FiniteDiscreteRingObj`) and a unit ball `O` (`UnitBallRingObj`).
-(blueprint: lem-weil-pbc-bounded-exchange-ambient)
 -/
 
 set_option backward.defeqAttrib.useBackward true
@@ -249,19 +247,7 @@ section PadicAlgCl
 attribute [local irreducible] Profinite.padicAlgClCondensedRing
 
 /-- Inclusion identifies the specified bounded exchange with the ambient adjunction mate
-(ℚ̄_ℓ-coefficient).
-
-Source: the defining three-step formula in MorphismDefs and Mathlib adjunction restriction.
-(blueprint: lem-weil-pbc-bounded-exchange-ambient)
-
-Proof. Apply injectivity of the ambient f-prime inverse hom equivalence. The existing
-bounded exchange adjunct equation gives the restricted square followed by the pulled
-counit. Fully faithful restriction has the same underlying counit because its
-compatibility isomorphisms are identities. The restricted pull-composition constraints
-likewise have the original underlying components. Equality transport commutes with
-inclusion, so the square comparison has the ambient component. Substituting these
-component identities gives the ambient mate counit equation, hence the desired equality.
-This identification requires no properness and does not assert invertibility. -/
+(ℚ̄_ℓ-coefficient). -/
 theorem boundedConstructibleBaseChange_hom_eq_ambient (sq : CommSq g' f' f g)
     (K : ProEtale.BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X)) :
     ((boundedConstructibleBaseChange ℓ (sq.asOver (Spec (.of k)))).app K).hom =
@@ -283,19 +269,7 @@ variable (T : Type) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T]
   [DiscreteTopology T] [Finite T] [Fact (IsNilpotent (ℓ : T))]
 
 /-- Inclusion identifies the specified bounded exchange with the ambient adjunction mate
-(`T`-coefficient).
-
-Source: the defining three-step formula in MorphismDefs and Mathlib adjunction restriction.
-(blueprint: lem-weil-pbc-bounded-exchange-ambient)
-
-Proof. Apply injectivity of the ambient f-prime inverse hom equivalence. The existing
-bounded exchange adjunct equation gives the restricted square followed by the pulled
-counit. Fully faithful restriction has the same underlying counit because its
-compatibility isomorphisms are identities. The restricted pull-composition constraints
-likewise have the original underlying components. Equality transport commutes with
-inclusion, so the square comparison has the ambient component. Substituting these
-component identities gives the ambient mate counit equation, hence the desired equality.
-This identification requires no properness and does not assert invertibility. -/
+(`T`-coefficient). -/
 theorem boundedConstructibleBaseChange_hom_eq_ambient (sq : CommSq g' f' f g)
     (K : ProEtale.BoundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj.{u} T) X)) :
@@ -318,19 +292,7 @@ variable {E : Type} [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimension
   (O : Subring E) [Fact (∀ x : E, x ∈ O ↔ ‖x‖ ≤ 1)]
 
 /-- Inclusion identifies the specified bounded exchange with the ambient adjunction mate
-(`O`-coefficient).
-
-Source: the defining three-step formula in MorphismDefs and Mathlib adjunction restriction.
-(blueprint: lem-weil-pbc-bounded-exchange-ambient)
-
-Proof. Apply injectivity of the ambient f-prime inverse hom equivalence. The existing
-bounded exchange adjunct equation gives the restricted square followed by the pulled
-counit. Fully faithful restriction has the same underlying counit because its
-compatibility isomorphisms are identities. The restricted pull-composition constraints
-likewise have the original underlying components. Equality transport commutes with
-inclusion, so the square comparison has the ambient component. Substituting these
-component identities gives the ambient mate counit equation, hence the desired equality.
-This identification requires no properness and does not assert invertibility. -/
+(`O`-coefficient). -/
 theorem boundedConstructibleBaseChange_hom_eq_ambient (sq : CommSq g' f' f g)
     (K : ProEtale.BoundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj.{u} O) X)) :

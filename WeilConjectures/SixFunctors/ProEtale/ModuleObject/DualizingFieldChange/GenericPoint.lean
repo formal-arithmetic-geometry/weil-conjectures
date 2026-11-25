@@ -53,36 +53,11 @@ an isomorphism of functors
   field extension followed by the generic point of the line. These are the factorizations of the
   base maps of the slices of a model with a coordinate.
 
-## Proof
-
-*Composition law.* The base change map of a proper `f` is the mate of the inverse proper base
-change isomorphism, i.e. the exchange morphism `CategoryTheory.Adjunction.exchangeRight` of
-`Rf_* ⊣ Rf^!` (`CategoryTheory.Adjunction.exchangeRight_eq_mateEquiv`), and exchange morphisms
-paste (`CategoryTheory.Adjunction.exchangeRight_app_paste`) as soon as the proper base change maps
-do; these are the restrictions of the ambient base change maps, which paste
-(`ProEtale.CondensedRing.pullbackSquareComparison_paste`).
-
-*Along `η`.* `b = i ≫ p` with `i` a closed immersion and `p` smooth proper: weakly étale base
-change of the closed exceptional inverse image
-(`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_weaklyEtale`) and of the smooth
-one (`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_smooth_of_weaklyEtale`),
-composed by `ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_comp_app`.
-
-*Along the field extension.* Over the point `Spec K₀` the base change map at the unit is the
-comparison of the dualizing complexes of the proper scheme `Z₀` up to that of the point
-(`ProEtale.CondensedRing.dualizingComplexBaseChange_eq_comp_upperShriekBaseChangeOfMap`), both
-invertible (`ProEtale.CondensedRing.isIso_dualizingComplexBaseChange_of_fieldExtension`). For any
-`N` on the point, `N` is dualizable, so `Rf^! N ≅ f^* N ⊗ Rf^! ℚ̄_ℓ` and the two sides of
-`γ(N)` are isomorphic (`ProEtale.CondensedRing.upperShriekBaseChangeIsoPoint`); `Rf'_* γ(N)` is
-invertible since pullback from a point commutes with internal homs, and the endomorphism trick
-(`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_iso`) concludes.
-
-## Implementation notes
+## Implementation details
 
 As in `WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Closed`, the
 pasting law on bounded constructible complexes is proved for arbitrary ambient transformations and
 instantiated once with `cast_proofs`, the kernel timing out otherwise.
-
 -/
 
 @[expose] public section
@@ -150,8 +125,7 @@ variable {Z P : Over (Spec (.of k₁))} [LocallyOfFiniteType Z.hom] [QuasiCompac
   {πZ' : Z''.left ⟶ Z'.left}
 
 /-- The horizontal pasting law on bounded constructible complexes, for arbitrary ambient
-transformations `χ₁`, `χ₂`, `χ` satisfying the ambient law; they are kept abstract so that the
-kernel never unfolds the base change morphisms. -/
+transformations `χ₁`, `χ₂`, `χ` satisfying the ambient law. -/
 private lemma liftExchange_paste_horiz_aux
     (χ₁ : R((f.left)_*⟦𝐐⟧) ⋙ L((πP)^*⟦𝐐⟧) ⟶ L((πZ)^*⟦𝐐⟧) ⋙ R((f'.left)_*⟦𝐐⟧))
     (χ₂ : R((f'.left)_*⟦𝐐⟧) ⋙ L((πP')^*⟦𝐐⟧) ⟶ L((πZ')^*⟦𝐐⟧) ⋙ R((f''.left)_*⟦𝐐⟧))
@@ -281,9 +255,9 @@ P'' --πP'--> P' --πP--> P
 ```
 of proper morphisms of schemes of finite type over fields `k₁`, `k₂`, `k₃`, the base change map
 `γ : (πZ' ≫ πZ)^* Rf^! ⟶ Rf''^! (πP' ≫ πP)^*` of the outer square
-(`ProEtale.CondensedRing.upperShriekBaseChangeOfMap`) is, through the composition isomorphisms of
-the pullbacks, `πZ'^*` of the base change map `γ₁` of the right square followed by the base
-change map `γ₂` of the left square at `πP^* K`. -/
+(`ProEtale.CondensedRing.upperShriekBaseChangeOfMap`) is `πZ'^*` of the base change map `γ₁` of the
+right square followed by the base change map `γ₂` of the left square at `πP^* K`, up to the
+composition isomorphisms of the pullbacks. -/
 theorem upperShriekBaseChangeOfMap_app_paste [IsProper f.left] [IsProper f'.left]
     [IsProper f''.left] (sq₁ : IsPullback πZ f'.left f.left πP)
     (sq₂ : IsPullback πZ' f''.left f'.left πP')
@@ -369,10 +343,7 @@ theorem isIso_nearbyDualityMap_upperStarOfMap_id_of_point (N A : Dᵇc((point K�
 /-- **The base change map of `Ra^!` at the unit, for a proper scheme across a field extension**:
 for a proper `K₀`-scheme `Z` with structure morphism `f`, its base change `f' : Z' ⟶ P'` along a
 field extension `L/K₀` (`P' ≅ Spec L` over `L`), the base change map
-`πZ^* Rf^! ℚ̄_ℓ ⟶ Rf'^! πP^* ℚ̄_ℓ` is invertible. It is the comparison of the dualizing complexes
-of `Z` (`ProEtale.CondensedRing.dualizingComplexBaseChange_eq_comp_upperShriekBaseChangeOfMap`),
-up to those of the points, and these are invertible
-(`ProEtale.CondensedRing.isIso_dualizingComplexBaseChange_of_fieldExtension`). -/
+`πZ^* Rf^! ℚ̄_ℓ ⟶ Rf'^! πP^* ℚ̄_ℓ` is invertible. -/
 theorem isIso_upperShriekBaseChangeOfMap_app_unit_point
     (hP : IsPullback πP P'.hom (point K₀).hom (Spec.map (CommRingCat.ofHom (algebraMap K₀ L))))
     (sq : IsPullback πZ f'.left f.left πP) :
@@ -427,14 +398,7 @@ theorem isIso_upperShriekBaseChangeOfMap_app_unit_point
 
 /-- **The two sides of the base change of `Ra^!` across a field extension are isomorphic**: for a
 proper `K₀`-scheme `Z` with structure morphism `f` and its base change `f' : Z' ⟶ P'` along a field
-extension `L/K₀`, every `N` on the point is dualizable, and so is `πP^* N`, so
-`Rf^! N ≅ f^* N ⊗ Rf^! ℚ̄_ℓ`
-(`ProEtale.CondensedRing.isIso_upperShriekUnitTensorMap_of_isDualizable`), whence
-```
-πZ^* Rf^! N ≅ πZ^* f^* N ⊗ πZ^* Rf^! ℚ̄_ℓ ≅ f'^* πP^* N ⊗ Rf'^! ℚ̄_ℓ ≅ Rf'^! πP^* N
-```
-through the base change map at the unit
-(`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_unit_point`). -/
+extension `L/K₀`, and `N` on the point, `πZ^* Rf^! N ≅ Rf'^! πP^* N`. -/
 noncomputable def upperShriekBaseChangeIsoPoint
     (hP : IsPullback πP P'.hom (point K₀).hom (Spec.map (CommRingCat.ofHom (algebraMap K₀ L))))
     (sq : IsPullback πZ f'.left f.left πP) (N : Dᵇc((point K₀).left)⟦𝐐⟧) :
@@ -474,11 +438,7 @@ noncomputable def upperShriekBaseChangeIsoPoint
 /-- **Base change of `Ra^!` for a proper scheme across a field extension**: for a proper
 `K₀`-scheme `Z` with structure morphism `f`, its base change `f' : Z' ⟶ P'` along a field
 extension `L/K₀` (`P' ≅ Spec L` over `L`) and any `N` on the point, the base change map
-`πZ^* Rf^! N ⟶ Rf'^! πP^* N` is invertible: `Rf'_*` of it is invertible since `πP^*` commutes with
-internal homs out of the point
-(`ProEtale.CondensedRing.isIso_lowerStar_map_upperShriekBaseChangeOfMap_app`), and both sides are
-isomorphic (`ProEtale.CondensedRing.upperShriekBaseChangeIsoPoint`), so the endomorphism trick
-applies (`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_iso`). -/
+`πZ^* Rf^! N ⟶ Rf'^! πP^* N` is invertible. -/
 theorem isIso_upperShriekBaseChangeOfMap_app_point
     (hP : IsPullback πP P'.hom (point K₀).hom (Spec.map (CommRingCat.ofHom (algebraMap K₀ L))))
     (sq : IsPullback πZ f'.left f.left πP) (N : Dᵇc((point K₀).left)⟦𝐐⟧) :
@@ -525,10 +485,7 @@ omit [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
 relative dimension `d` (for instance the projection `P × ℙᴺ ⟶ P`), and let `η : Spec K₀ ⟶ P` be
 weakly étale (for instance the inclusion of the generic point of an integral `P`, a localization),
 with cartesian squares `πZ₀ ≫ i = i₀ ≫ πY₀` and `πY₀ ≫ p = p₀ ≫ η` over the point `Spec K₀`. Then
-the base change map `πZ₀^* Rb^! ⟶ Rb₀^! η^*` is invertible
-(`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_weaklyEtale`,
-`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_smooth_of_weaklyEtale` and the
-composition law `ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_comp_app`). -/
+the base change map `πZ₀^* Rb^! ⟶ Rb₀^! η^*` is invertible. -/
 theorem isIso_upperShriekBaseChangeOfMap_app_of_projective_of_weaklyEtale (d : ℕ)
     [SmoothOfRelativeDimension d p.left] [WeaklyEtale η]
     (sqi : IsPullback πZ₀ i₀.left i.left πY₀) (sqp : IsPullback πY₀ p₀.left p.left η)
@@ -549,13 +506,7 @@ smooth of pure relative dimension `d` (`Z` projective over `P`), and let the bas
 extension `L/K₀` followed by a weakly étale `η` (for instance the inclusion of the generic point
 of an integral `P`, `K₀ = κ(P)`). Given the base change `b₀ = i₀ ≫ p₀ : Z₀ ⟶ Y₀ ⟶ Spec K₀` of `b`
 along `η` and the base change `b' : Z' ⟶ P'` of `b₀` along `πP`, the base change map
-`γ : (πZ' ≫ πZ₀)^* Rb^! ⟶ Rb'^! g^*` of the outer square is invertible.
-
-The base change maps paste horizontally
-(`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_paste`): along `η` this is
-`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_projective_of_weaklyEtale`, and
-along the field extension of points it is
-`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_point`. -/
+`γ : (πZ' ≫ πZ₀)^* Rb^! ⟶ Rb'^! g^*` of the outer square is invertible. -/
 theorem isIso_upperShriekBaseChangeOfMap_app_of_projective_of_genericPoint (d : ℕ)
     [SmoothOfRelativeDimension d p.left] [WeaklyEtale η]
     (hP : IsPullback πP P'.hom (point K₀).hom (Spec.map (CommRingCat.ofHom (algebraMap K₀ L))))
@@ -601,18 +552,11 @@ lemma isIso_upperShriekBaseChangeOfMap_congr {f : Z ⟶ P} [IsProper f.left]
 
 omit [IsClosedImmersion i₀.left] [IsProper p₀.left] in
 /-- **Base change of `Rb^!` for a projective morphism along a generic point followed by a field
-extension**, with the intermediate base change constructed: let `b = i ≫ p : Z ⟶ Y ⟶ P` be a
-closed immersion followed by a proper morphism `p` smooth of pure relative dimension `d`, and
-`g = πP ≫ η : P' ⟶ Spec K₀ ⟶ P` the base change `πP` of a field extension `L/K₀` (`P' ≅ Spec L`
-over `L`, `ProEtale.CondensedRing.isPullback_of_isIso_hom`) followed by a weakly étale `η` (for
-instance the inclusion of the generic point, `AlgebraicGeometry.affineLineGenericPoint` or
-`Scheme.fromSpecFunctionField`). Then for every cartesian square `π ≫ b = b' ≫ g` with `b'`
-proper, the base change map `π^* Rb^! ⟶ Rb'^! g^*` is an isomorphism.
-
-The base change `Z₀ ⟶ Y₀ ⟶ Spec K₀` of `b` along `η` is formed by pullbacks, `Z'` is the base
-change of `Z₀` along `πP` by the pasting law of pullbacks, and
-`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_projective_of_genericPoint`
-applies. -/
+extension**: let `b = i ≫ p : Z ⟶ Y ⟶ P` be a closed immersion followed by a proper morphism `p`
+smooth of pure relative dimension `d`, and `g = πP ≫ η : P' ⟶ Spec K₀ ⟶ P` the base change `πP`
+of a field extension `L/K₀` (`P' ≅ Spec L`) followed by a weakly étale `η` (for instance the
+inclusion of the generic point). Then for every cartesian square `π ≫ b = b' ≫ g` with `b'`
+proper, the base change map `π^* Rb^! ⟶ Rb'^! g^*` is an isomorphism. -/
 theorem isIso_upperShriekBaseChangeOfMap_of_projective_of_comp_eq (d : ℕ)
     [SmoothOfRelativeDimension d p.left] (η : Spec (.of K₀) ⟶ P.left) [WeaklyEtale η]
     (hP : IsPullback πP P'.hom (point K₀).hom (Spec.map (CommRingCat.ofHom (algebraMap K₀ L))))

@@ -122,12 +122,9 @@ theorem isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_comp_iff :
     rfl
 
 /-- **Split units along a pro-finite étale cover, from continuity and compatible traces**.
-Let `q : Y ⟶ X` factor as `q = a_i ≫ g_i` for a nonempty family of morphisms `g_i : Y_i ⟶ X`
-(typically finite étale covers of constant nonzero degree `d_i`, so that with `ℚ̲̄_ℓ`-coefficients
-each unit `G ⟶ Rg_i_* Lg_i^* G` is split by the normalised trace `d_i⁻¹ tr_i`). Let
-`F : I ⥤ D(X)` be a diagram with
-`F i = Rg_i_* Lg_i^* G` and a cocone `u` on `F` with apex `Rq_* Lq^* G` whose components are the
-transition maps. Assume
+Let `q : Y ⟶ X` factor as `q = a_i ≫ g_i` for a nonempty family of morphisms `g_i : Y_i ⟶ X`.
+Let `F : I ⥤ D(X)` be a diagram with `F i = Rg_i_* Lg_i^* G` and a cocone `u` on `F` with apex
+`Rq_* Lq^* G` whose components are the transition maps. Assume
 
 * (continuity) `Rq_* Lq^* G` is a weak colimit of `F` for maps to `G`;
 * (compatibility of the normalised traces) there is a cocone `ρ` on `F` with apex `G` whose

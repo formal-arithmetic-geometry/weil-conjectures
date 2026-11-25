@@ -30,9 +30,12 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppl
 
 /-! # Derived coinduction for the actual completed coefficient projection
 
-Source: Stacks Tags 03D7, 079P and 06YY; the internal module-object equalizer adjunction,
-transported by the normalized coefficient encoding.
-(blueprint: lem-sf-regular-quotient-coinduction). -/
+## References
+
+* [Stacks, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks, Tag 079P](https://stacks.math.columbia.edu/tag/079P)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -60,9 +63,7 @@ attribute [local instance] HasDerivedCategory.standard
 
 /-- Exact scalar restriction along a positive completed-coefficient quotient has a right adjoint.
 The ordinary internal-module adjunction is transported through the normalized section-action
-equivalences. Source: Stacks Tags 03D7, 079P and 06YY; the internal module-object equalizer
-adjunction, transported by the normalized coefficient encoding.
-(blueprint: lem-sf-regular-quotient-coinduction). -/
+equivalences. -/
 theorem scalarReductionRestriction_isLeftAdjoint
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ) :
@@ -80,10 +81,7 @@ theorem scalarReductionRestriction_isLeftAdjoint
   exact (Functor.isLeftAdjoint_comp_iff_right (e n).ordinary.functor _).mp h''
 
 /-- The right adjoint to ordinary quotient restriction, uniquely characterized by its adjunction. It
-is transported internal coextension, not an arbitrary module. Source: Stacks Tags 03D7, 079P and
-06YY; the internal module-object equalizer adjunction, transported by the normalized coefficient
-encoding.
-(blueprint: lem-sf-regular-quotient-coinduction). -/
+is transported internal coextension, not an arbitrary module. -/
 def scalarReductionCoinduction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ) :
@@ -91,10 +89,7 @@ def scalarReductionCoinduction
   letI := scalarReductionRestriction_isLeftAdjoint l E T n
   (scalarReductionRestriction.{u, u} l E T n).rightAdjoint
 
-/-- Evaluation adjunction for the actual completed coefficient projection. Source: Stacks Tags 03D7,
-079P and 06YY; the internal module-object equalizer adjunction, transported by the normalized
-coefficient encoding.
-(blueprint: lem-sf-regular-quotient-coinduction). -/
+/-- Evaluation adjunction for the actual completed coefficient projection. -/
 def scalarReductionCoinductionAdjunction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ) :
@@ -102,19 +97,14 @@ def scalarReductionCoinductionAdjunction
   letI := scalarReductionRestriction_isLeftAdjoint l E T n
   Adjunction.ofIsLeftAdjoint _
 
-/-- Coinduction is additive, as the right adjoint of additive exact restriction.
-Source: Stacks Tags 03D7 and 079P.
-(blueprint: lem-sf-regular-quotient-coinduction). -/
+/-- Coinduction is additive, as the right adjoint of additive exact restriction. -/
 instance scalarReductionCoinduction_additive
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ) :
     (scalarReductionCoinduction.{u} l E T n).Additive :=
   (scalarReductionCoinductionAdjunction.{u} l E T n).right_adjoint_additive
 
-/-- Derive ordinary coinduction on K-injective completed-coefficient complexes. Source: Stacks Tags
-03D7, 079P and 06YY; the internal module-object equalizer adjunction, transported by the
-normalized coefficient encoding.
-(blueprint: lem-sf-regular-quotient-coinduction). -/
+/-- Derive ordinary coinduction on K-injective completed-coefficient complexes. -/
 def scalarReductionDerivedCoinduction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ) :
@@ -129,10 +119,7 @@ def scalarReductionDerivedCoinduction
       (completedIntegralCommRingSheafUnrestricted l E T)
   (scalarReductionCoinduction.{u} l E T n).rightDerivedFunctor.{u+2, u+2, u+1, u+1, u+2, u+2}
 
-/-- Exact quotient restriction is left adjoint to its derived coinduction. Source: Stacks Tags 03D7,
-079P and 06YY; the internal module-object equalizer adjunction, transported by the normalized
-coefficient encoding.
-(blueprint: lem-sf-regular-quotient-coinduction). -/
+/-- Exact quotient restriction is left adjoint to its derived coinduction. -/
 def scalarReductionDerivedCoinductionAdjunction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ) :

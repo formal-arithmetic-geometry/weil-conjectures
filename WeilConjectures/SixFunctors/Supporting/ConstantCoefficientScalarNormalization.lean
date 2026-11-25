@@ -13,11 +13,14 @@ import WeilConjectures.SmoothPurity.ConstantScalarUnitQuasiIsomorphism.ConstantS
 
 /-! # Normalized scalar extension of constant coefficient objects
 
-Source: blueprint, ordinary compact cohomology, order 1869, coefficient-object paragraph;
-Bhatt--Scholze, Lemma 6.8.2 (blueprint: lem-weil-constant-coefficient-objects-constructible).
 This supplements the existing constructibility module with the canonical coefficient-unit
 comparison, including its strict-cone normalization, in the intrinsic rational category.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2
 -/
+
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -50,15 +53,7 @@ variable (l : ℕ) [Fact l.Prime]
   (ι : E →ₐ[Padic l] L) (Y : Scheme.{u})
 
 /-- The coefficient-unit inverse is fixed by its quotient coordinates and zero shifted
-component, on the regular module itself.
-Source: blueprint order 1869; Bhatt--Scholze, Lemma 6.8.2
-(blueprint: lem-weil-constant-coefficient-objects-constructible).
-Proof: multiplication identifies each finite scalar extension of the regular module
-with the finite target coefficient module. Send s to 1 tensor pi_n(s) in each factor.
-These maps commute with reductions, hence their product is killed by 1-shift. The strict
-mapping cocone lift with zero shifted component gives eta. The regular module is generated
-locally by one, so these formulas fix the first component in degree zero; the source is
-zero in every other degree. The two cone projections then prove uniqueness. -/
+component, on the regular module itself. -/
 theorem constantCoefficientScalarUnit_existsUnique :
     ∃! η : constantWeilIntegralComplex l L Y ⟶
         (integralScalarComplexFunctor l E L ι Y).obj (constantWeilIntegralComplex l E Y),
@@ -90,20 +85,11 @@ theorem constantCoefficientScalarUnit_existsUnique :
   intro η' hη'
   exact huniq η' ⟨(hunit η').mpr hη'.1, hη'.2⟩
 
-/-- The strict scalar unit, with both cone components determined uniquely.
-Source: blueprint order 1869 (blueprint: lem-weil-constant-coefficient-objects-constructible).
--/
+/-- The strict scalar unit, with both cone components determined uniquely. -/
 def constantCoefficientScalarUnit :=
   (constantCoefficientScalarUnit_existsUnique l E L ι Y).exists.choose
 
-/-- The normalized coefficient-unit map is a quasi-isomorphism.
-Source: blueprint order 1869; Bhatt--Scholze, Lemma 6.8.2
-(blueprint: lem-weil-constant-coefficient-objects-constructible).
-Proof: the finite scalar tower of the regular module is the target quotient tower.
-Its transitions are surjective, locally by lifting coefficients, and its ordinary limit
-is the completed target ring. The surjective-tower derived-limit theorem identifies the
-strict cone with that limit in degree zero. Its comparison is precisely the unit above,
-as the quotient and shifted coordinates agree. Thus its image under Q is invertible. -/
+/-- The normalized coefficient-unit map is a quasi-isomorphism. -/
 theorem constantCoefficientScalarUnit_isIso :
     IsIso (DerivedCategory.Q.map (constantCoefficientScalarUnit l E L ι Y)) := by
   obtain ⟨D, hl⟩ := exists_scalarTestDatum l
@@ -120,9 +106,7 @@ theorem constantCoefficientScalarUnit_isIso :
   infer_instance
 
 /-- The integral beta is the inverse strict unit after the normalized representative
-comparison. Its inverse sends s to the compatible pi_n(s) and zero shifted coordinate.
-Source: blueprint order 1869 (blueprint: lem-weil-constant-coefficient-objects-constructible).
--/
+comparison. Its inverse sends s to the compatible pi_n(s) and zero shifted coordinate. -/
 def constantCoefficientIntegralScalarIso :
     (integralScalarExtensionOfUniverses l E L ι Y).obj
         (integralConstantCoefficientObject l E Y) ≅ integralConstantCoefficientObject l L Y :=
@@ -133,9 +117,7 @@ def constantCoefficientIntegralScalarIso :
 
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 
-/-- Lift the normalized beta to the full intrinsic integral category.
-Source: blueprint order 1869 (blueprint: lem-weil-constant-coefficient-objects-constructible).
--/
+/-- Lift the normalized beta to the full intrinsic integral category. -/
 def constantCoefficientConstructibleScalarIso :
     (sfConstructibleIntegralScalarExtension 0 l
       (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y).obj
@@ -148,13 +130,7 @@ private theorem iso_existsUnique_of_source_eq {C : Type*} [Category C]
   subst X'
   exact ⟨e, HEq.rfl, fun e' he' ↦ Iso.ext (eq_of_heq he')⟩
 
-/-- The rational alpha is uniquely the image of the normalized integral beta.
-Source: blueprint order 1869; Bhatt--Scholze, Lemma 6.8.2
-(blueprint: lem-weil-constant-coefficient-objects-constructible).
-Proof: the prescribed rational scalar functor has the integral scalar object formula.
-Use this equality to identify the source, and apply raw rationalization to beta.
-Its inverse is the rationalization of beta inverse. The displayed hom formula determines
-an isomorphism uniquely since an isomorphism is determined by its hom. -/
+/-- The rational alpha is uniquely the image of the normalized integral beta. -/
 theorem constantCoefficientRationalScalarIso_existsUnique :
     ∃! α : (sfRationalScalarExtension l E Y 0
         (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
@@ -168,9 +144,7 @@ theorem constantCoefficientRationalScalarIso_existsUnique :
     ((sfRationalConstructibleLocalization l L Y).mapIso
       (constantCoefficientConstructibleScalarIso l E L ι Y D hl))
 
-/-- The canonical scalar isomorphism alpha, normalized before rationalization.
-Source: blueprint order 1869 (blueprint: lem-weil-constant-coefficient-objects-constructible).
--/
+/-- The canonical scalar isomorphism alpha, normalized before rationalization. -/
 def constantCoefficientRationalScalarIso :=
   (constantCoefficientRationalScalarIso_existsUnique l E L ι Y D hl).exists.choose
 
