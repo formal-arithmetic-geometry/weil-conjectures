@@ -12,8 +12,21 @@ import WeilConjectures.ConstructibleSheaf.TorsorNormalizedGraphEvaluation
 
 /-! # Ordinary locally constant evaluation on a torsor
 
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R; sites.tex, Example
-constant-sheaf and Tags 04TR and 04TS. Fixed-cover adaptation to arbitrary modules.
+A natural evaluation of sections as locally constant functions on the torsor, normalized on the
+diagonal, is equivariant for the deck action.
+
+## Implementation details
+
+Around any point of `W ×_V c.P`, a section is locally the restriction `q^* a` of a global
+section `a` upstairs; naturality and diagonal normalization give the value `a` there.
+Replacing `q` by its translate `g • q` presents the same section as the restriction of
+`F(g⁻¹)(a)`, which gives the value at the translated point. Only such local constant
+presentations are used, not uniqueness of a trivialization.
+
+## References
+
+* [Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS], adapted to a fixed cover and
+  arbitrary modules.
 -/
 
 @[expose] public section
@@ -74,26 +87,8 @@ private theorem evaluation_of_local_presentation
       exact hΔ a (q.left y)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A natural ordinary evaluation normalized on the diagonal is deck-equivariant.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R; sites.tex, Example
-constant-sheaf and Tags 04TR and 04TS. Fixed-cover adaptation to arbitrary modules.
-(blueprint: lem-weil-pbc-torsor-ordinary-evaluation-equivariant)
-
-Proof: The constant trivialization and connectedness of Y identify the restricted
-sheaf with the locally constant function sheaf valued in F(Y), with restriction of
-a global section a corresponding to the constant function a. Put U=W times_V Y,
-with projections p to W and q to Y, and restrict s to t=p*s. Around any point x of
-U choose an etale neighbourhood T on which t=q*a for some a in F(Y). On the graph
-of q:T to Y, naturality of beta along q and diagonal normalization give value a;
-naturality along p then gives beta_W(s)(x)=a. Etale covers are surjective on points,
-so such neighbourhoods determine all the values of beta. At the translated point
-g*x, use the same T with its Y-map changed from q to g*q. The same section t is now
-the restriction of b=F(g inverse)(a), since (g*q)*b=q*a. Naturality and diagonal
-normalization therefore give beta_W(s)(g*x)=b. This is exactly the action in
-sectionRepresentation, whose scalar restriction does not change underlying values.
-This argument uses only local constant presentations of sections, not uniqueness of
-a chosen trivialization or any equivariance assumption on beta. Empty objects give
-a vacuous assertion; zero coefficients and the identity torsor obey the same formula. -/
+/-- A natural ordinary evaluation normalized on the diagonal is deck-equivariant: its values
+at `g • x` are obtained by applying the action of `g` in `sectionRepresentation`. -/
 theorem Scheme.GaloisCover.ordinarySectionEvaluation_equivariant
     {V : Scheme.{u}} [ConnectedSpace V] (ℓ : ℕ) [Fact ℓ.Prime]
     (P : Type u) [Group P] [Finite P]

@@ -9,6 +9,21 @@ module
 public import WeilConjectures.ConstructibleSheaf.TorsorAssociatedModule
 import WeilConjectures.ConstructibleSheaf.TorsorEquivariantModuleDiagonalEvaluation
 
+/-!
+# Linear recovery from diagonal values over the torsor
+
+## Implementation details
+
+The torsor isomorphism identifies `c.P ×_V c.P` with copies of `c.P` indexed by `P`; on the
+`g`-th copy an equivariant section takes the value `ρ(g)` of its diagonal value, so diagonal
+evaluation is injective. Since `c.P` is connected and nonempty, diagonal values are constant,
+and diagonal evaluation at a point is a linear isomorphism onto the representation. The map `f`
+is the component of `η` conjugated by these isomorphisms.
+
+## References
+
+* [Stacks Project, Tags 0DV5 (3) and 0DV6]
+-/
 
 @[expose] public section
 
@@ -17,28 +32,8 @@ universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.GaloisCover
 
-/-- Recover a unique linear map from the diagonal values of the component of eta
-at the torsor object. No formula on arbitrary etale objects is asserted here.
-Source: Stacks Project, etale-cohomology.tex Tags 0DV5 (3) and 0DV6 (context).
-(blueprint: lem-weil-pbc-torsor-equivariant-module-recover-linear-diagonal)
-
-Proof: The torsor isomorphism, with its factors interchanged, identifies
-c.P times_V c.P with copies of c.P indexed by g in P. On the g-th copy a section
-has the value rho(g) applied to its value on the diagonal. Thus restriction to
-the diagonal determines an equivariant section. Conversely any locally constant
-function t on c.P extends on the g-th copy with value rho(g)t. This extension
-is locally constant because the copies are open, and equivariance follows from
-rho(hg)=rho(h)rho(g). The restriction and extension operations are linear and
-inverse. Every locally constant function on the connected nonempty space c.P
-is constant, so diagonal evaluation gives a linear isomorphism from these sections
-to N, and likewise to N'. Conjugate the linear component eta at Etale.mk c.pi
-by these two isomorphisms to obtain f. At each point x the diagonal evaluations
-are the same constants, so the asserted formula holds for every s and x.
-For uniqueness fix one x, which exists by connectedness. For every n, extend
-the constant diagonal function with value n; evaluating the formulas for two
-candidate maps on this section at x shows equality at n. Linear extensionality
-then gives equality of the maps. The zero module and trivial group work with
-the same construction; ell need not be prime or positive. -/
+/-- If the total space of the torsor is connected, the component of `η` at the torsor object
+acts on diagonal values by a unique linear map `f`. -/
 theorem equivariantModulePresheaf_recoverLinear_diagonal
     {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]
     (c : Scheme.GaloisCover (ULift.{u + 1} P) V) [ConnectedSpace c.P]
