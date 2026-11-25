@@ -14,8 +14,9 @@ set_option linter.privateModule false
 
 /-! # Finite integral coefficient pullback normalization
 
-Source: Stacks Project, sites-modules.tex, Tags 03EK/03EL; proetale.tex, Tag 099N(5).
-(blueprint: lem-a1-finite-integral-coefficient-comparison).
+## References
+
+* Stacks Project, Tags 03EK, 03EL, 099N(5)
 -/
 
 @[expose] public noncomputable section

@@ -14,8 +14,9 @@ set_option linter.privateModule false
 
 /-! # Recoding the normalized strict Roos comparison
 
-Source: Stacks Project, sites-modules.tex, Tags 03EK/03EL; proetale.tex, Tag 099N(5).
-(blueprint: def-a1-strict-integral-roos-transport).
+## References
+
+* Stacks Project, Tags 03EK, 03EL, 099N(5)
 -/
 
 @[expose] public noncomputable section

@@ -9,8 +9,16 @@ public import WeilConjectures.DeligneLaumon.FinitePullbackStrictTower.FinitePull
 
 /-! # Data for the localized strict-tower zigzag
 
-Source: Stacks Project, Tags 099N(5), 0G7E, 06XN, 03EL and 0FNH.
-(blueprint: def-a1-finite-pullback-localized-zigzag-data).
+We record the balanced isomorphism with the original strict-tower endpoints used in the localized
+strict-tower zigzag for finite pullback.
+
+## Implementation details
+
+The finite complex is expressed by its `asFunctor` diagram.
+
+## References
+
+* Stacks Project, Tags 099N(5), 0G7E, 06XN, 03EL, 06YY and 0FNH
 -/
 
 @[expose] public noncomputable section
@@ -50,9 +58,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 variable {X Y : Scheme.{t}} (g : X ⟶ Y)
 
-/-- The given balanced isomorphism with the original strict-tower endpoints.
-Source: Stacks 03EL and 06YY. The finite complex is expressed by its asFunctor diagram.
-(blueprint: def-a1-finite-pullback-localized-zigzag-data). -/
+/-- The isomorphism between the tensor reduction of `G P` and the diagram of the finite complex
+of `P`, given by the component at `P` of the balanced isomorphism `lambda`. -/
 def comparisonBalancedDiagramIso
     (lambda : FinitePullbackStrictTowerData.G l E g ⋙
       FinitePullbackStrictTowerData.reductions l E X ≅ FinitePullbackStrictTowerData.finite l E g)
