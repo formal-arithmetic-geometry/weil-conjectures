@@ -62,6 +62,13 @@ version for morphisms over a base
 the scheme-theoretic analogue of Mathlib's
 `AlgebraicGeometry.ext_of_isDominant_of_isSeparated`, with the reducedness assumption
 on the source dropped.
+
+## Implementation details
+
+Mathlib has no bundled class for "of finite presentation"; a morphism is of finite presentation
+if it is locally of finite presentation, quasi-compact and quasi-separated, and
+`AlgebraicGeometry.Scheme.Hom.diagonal_isClosedImmersion_finitePresentation` states these
+properties separately.
 -/
 
 @[expose] public section
@@ -79,10 +86,7 @@ section Diagonal
 variable {X S : Scheme.{u}} (f : X ⟶ S)
 
 /-- **The diagonal of a separated morphism of finite presentation is a closed immersion of
-finite presentation.**
-
-Mathlib has no bundled class for "of finite presentation"; a morphism is of finite presentation
-if it is locally of finite presentation, quasi-compact and quasi-separated. -/
+finite presentation.** -/
 theorem Scheme.Hom.diagonal_isClosedImmersion_finitePresentation [IsSeparated f]
     [LocallyOfFinitePresentation f] :
     IsClosedImmersion (pullback.diagonal f) ∧
@@ -180,9 +184,7 @@ variable (j₁ j₂)
 
 /-- **Separatedness is detected on an open cover of the source** (Stacks Project
 Tag 0F3U): if `𝒰` is an open cover of `W` and every canonical overlap morphism
-`𝒰ᵢ ×_W 𝒰ⱼ ⟶ 𝒰ᵢ ×_S 𝒰ⱼ` is a closed immersion, then `w : W ⟶ S` is separated. The
-diagonal cases `i = j` say exactly that `𝒰ᵢ ⟶ S` is separated, see
-`AlgebraicGeometry.isClosedImmersion_pullback_map_self`. -/
+`𝒰ᵢ ×_W 𝒰ⱼ ⟶ 𝒰ᵢ ×_S 𝒰ⱼ` is a closed immersion, then `w : W ⟶ S` is separated. -/
 theorem IsSeparated.of_openCover (𝒰 : W.OpenCover)
     (hd : ∀ i j : 𝒰.I₀, IsClosedImmersion (pullback.map (𝒰.f i) (𝒰.f j)
       (𝒰.f i ≫ w) (𝒰.f j ≫ w) (𝟙 (𝒰.X i)) (𝟙 (𝒰.X j)) w (by simp) (by simp))) :
@@ -204,11 +206,9 @@ theorem IsSeparated.of_openCover (𝒰 : W.OpenCover)
   exact (MorphismProperty.arrow_mk_iso_iff @IsClosedImmersion
     (diagonalRestrictChartArrowIso w (𝒰.f i) (𝒰.f j))).mpr (hd i j)
 
-/-- **Separatedness from a two-open cover** (Stacks Project Tag 0F3U; blueprint:
-`lemma:nagata-separated-two-open-cover`): let `W = T₁ ∪ T₂` be a union of two open
-subschemes over `S` such that each `Tᵢ ⟶ S` is separated and the canonical overlap
-morphism `T₁ ×_W T₂ ⟶ T₁ ×_S T₂` is a closed immersion. Then `W ⟶ S` is separated.
-This is the two-element case of `AlgebraicGeometry.IsSeparated.of_openCover`. -/
+/-- **Separatedness from a two-open cover** (Stacks Project Tag 0F3U): let `W = T₁ ∪ T₂` be a
+union of two open subschemes over `S` such that each `Tᵢ ⟶ S` is separated and the canonical
+overlap morphism `T₁ ×_W T₂ ⟶ T₁ ×_S T₂` is a closed immersion. Then `W ⟶ S` is separated. -/
 theorem IsSeparated.of_two_open_cover
     (hcov : Set.range j₁ ∪ Set.range j₂ = Set.univ)
     [IsSeparated (j₁ ≫ w)] [IsSeparated (j₂ ≫ w)]
@@ -345,11 +345,7 @@ section SchemeTheoreticallyDominant
 /-- **Morphisms into a separated target agreeing on a scheme-theoretically dominant
 subscheme are equal.** Suppose `f g : T ⟶ Y` agree over some separated `s : Y ⟶ Z`.
 Then `f = g` as soon as `ι ≫ f = ι ≫ g` for some scheme-theoretically dominant
-`ι : W ⟶ T`.
-
-This is `AlgebraicGeometry.ext_of_isDominant_of_isSeparated` with dominance of `ι`
-strengthened to scheme-theoretic dominance and, in exchange, the reducedness assumption
-on `T` dropped. -/
+`ι : W ⟶ T`. -/
 theorem ext_of_isSchemeTheoreticallyDominant_of_isSeparated {W T Y Z : Scheme.{u}}
     {f g : T ⟶ Y} (s : Y ⟶ Z) [IsSeparated s] (h : f ≫ s = g ≫ s)
     (ι : W ⟶ T) [IsSchemeTheoreticallyDominant ι] (hU : ι ≫ f = ι ≫ g) : f = g := by
@@ -374,11 +370,7 @@ theorem ext_of_isSchemeTheoreticallyDominant_of_isSeparated {W T Y Z : Scheme.{u
 /-- **Morphisms of `S`-schemes into a separated `S`-scheme agreeing on a
 scheme-theoretically dominant subscheme are equal.** For `S`-morphisms `f g : T ⟶ Y`
 into a separated `S`-scheme `Y`, `f = g` as soon as `ι ≫ f = ι ≫ g` for some
-scheme-theoretically dominant `ι : W ⟶ T`.
-
-This is `AlgebraicGeometry.ext_of_isDominant_of_isSeparated'` with dominance of `ι`
-strengthened to scheme-theoretic dominance and, in exchange, the reducedness assumption
-on `T` dropped. -/
+scheme-theoretically dominant `ι : W ⟶ T`. -/
 theorem ext_of_isSchemeTheoreticallyDominant_of_isSeparated' (S : Scheme.{u})
     {T Y : Scheme.{u}} [T.Over S] [Y.Over S] [IsSeparated (Y ↘ S)] {f g : T ⟶ Y}
     [f.IsOver S] [g.IsOver S] {W : Scheme.{u}} (ι : W ⟶ T)
