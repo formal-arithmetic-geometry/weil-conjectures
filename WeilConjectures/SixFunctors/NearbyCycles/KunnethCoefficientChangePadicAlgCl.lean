@@ -44,8 +44,22 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-set_option maxHeartbeats 2000000 in
--- elaborating the Künneth maps of the derived categories of module objects is slow
+/-- The coefficient-changed Künneth arrow over `ℚ̄_ℓ`. -/
+noncomputable def padicAlgClArrow (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f₂')
+    (A₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
+    (B₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y))) :
+    Arrow (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z') Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'))) :=
+  Arrow.mk (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂
+    ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+      X)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
+        (padicIntegersRingObjToContinuousMapRingObj ℓ E) X)).leftDerivedFunctor.obj A₀))
+    ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+      Y)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
+        (padicIntegersRingObjToContinuousMapRingObj ℓ E) Y)).leftDerivedFunctor.obj B₀)))
+
 /-- **The Künneth map and the coefficients `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`**: for models whose `j`s are
 quasi-compact and quasi-separated and bounded below `𝒪_E`-complexes `A₀`, `B₀` such that
 `Lf₁^* A₀ ⊗ᴸ Lf₂^* B₀` is bounded below, `ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} Π_{A₀,B₀}` and the Künneth map
@@ -66,13 +80,7 @@ theorem nonempty_arrowIso_map_map_kunnethMap_padicAlgCl [QuasiCompact M.j] [Quas
         ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
           Z')).leftDerivedFunctor.map
           (kunnethMap (Profinite.padicIntegersRingObj ℓ E.1) φ₁ φ₂ A₀ B₀))) ≅
-      Arrow.mk (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂
-        ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-          X)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
-            (padicIntegersRingObjToContinuousMapRingObj ℓ E) X)).leftDerivedFunctor.obj A₀))
-        ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-          Y)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
-            (padicIntegersRingObjToContinuousMapRingObj ℓ E) Y)).leftDerivedFunctor.obj B₀)))) := by
+      padicAlgClArrow ℓ E φ₁ φ₂ A₀ B₀) := by
   have k := nonempty_arrowIso_map_map_kunnethMap_of_flat_of_flat
     (padicIntegersRingObjToContinuousMapRingObj ℓ E)
     (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
