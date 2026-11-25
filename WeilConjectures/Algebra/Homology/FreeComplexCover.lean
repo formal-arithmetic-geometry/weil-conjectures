@@ -16,8 +16,9 @@ import WeilConjectures.Algebra.Homology.ZeroDifferentialFreeCoproduct
 /-!
 # A free two-term cover of a cochain complex
 
-Source: Stacks Project, Differential Graded Algebra, Lemma 15.60.8 (Tag 09KN),
-proof (blueprint: lem-pc-derived-free-complex-cover).
+## References
+
+* Stacks Project, Differential Graded Algebra, Lemma 15.60.8 (Tag 09KN), proof
 -/
 
 @[expose] public section
@@ -223,14 +224,8 @@ private theorem coverSES_shortExact
   intro n
   exact (coverSplitting M n).shortExact
 
-/-- (blueprint: lem-pc-derived-free-complex-cover) Specialize the construction in
-Stacks, Tag 09KN, to a ring with zero differential. For each element in every degree,
-take a two-term free complex with differential the identity and map its generators
-to that element and its differential. Add a one-term free complex for each cocycle.
-These summands give degreewise and cocycle surjectivity. The upper generators and
-the added cocycle summands form the left, zero-differential subcomplex; the lower
-generators form the zero-differential quotient. Their underlying modules split in
-each degree. -/
+/-- Every cochain complex of modules admits a degreewise surjection from a complex of free
+modules that splits as a zero-differential subcomplex and a zero-differential quotient. -/
 theorem exists_freeComplexCover {A : Type u} [CommRing A]
     (M : CochainComplex (ModuleCat.{u} A) ℤ) :
     ∃ (S : ShortComplex (CochainComplex (ModuleCat.{u} A) ℤ))

@@ -54,8 +54,7 @@ end CategoryTheory.Abelian.Ext
 namespace DiscreteModule
 
 /-- If `r` kills a discrete `G`-module `M`, then `r` kills its cohomology `Hⁿ(G, M)`. In
-particular the cohomology of a module over `ℤ/r` is a `ℤ/r`-module.
-(blueprint: `def-exc-continuous-cohomology`) -/
+particular the cohomology of a module over `ℤ/r` is a `ℤ/r`-module. -/
 lemma zsmul_eq_zero_of_forall_zsmul_eq_zero {G : Type u} [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] {M : DiscreteModule.{w} G} {r : ℤ} (hM : ∀ m : M.obj.V, r • m = 0)
     {n : ℕ} (x : H G M n) : r • x = 0 := by
@@ -409,10 +408,7 @@ lemma unit_comp_coindTrace :
     Nat.card_eq_fintype_card]
 
 /-- **Restriction–corestriction.** Let `K` be an open subgroup of finite index of `G` and `M` a
-discrete `G`-module with `Hⁿ(K, M) = 0`. Then the index `[G : K]` kills `Hⁿ(G, M)`: the unit
-`M ⟶ Coind (Res M)` followed by the trace is multiplication by the index, and
-`Hⁿ(G, Coind (Res M)) ≅ Hⁿ(K, M)` by Shapiro's lemma (the `Ext`-adjunction for the exact
-functors `Res ⊣ Coind`). -/
+discrete `G`-module with `Hⁿ(K, M) = 0`. Then the index `[G : K]` kills `Hⁿ(G, M)`. -/
 theorem index_zsmul_eq_zero (hK : IsOpen (K : Set G)) {n : ℕ}
     (h : Subsingleton (H K ((resSub K).obj M) n)) (x : H G M n) :
     (K.index : ℤ) • x = 0 := by

@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 import WeilConjectures.AlgebraicGeometry.CondensedQbarFieldCoefficientSquare
 
 /-! # Compatibility of bounded coefficient constructions
-Source: RefactorInstruction, Section 4, coefficient realization and geometric fibers.
 -/
 
 @[expose] public section
@@ -229,30 +228,8 @@ private theorem main_of_coeff (ℓ : ℕ) [Fact ℓ.Prime]
   rw [ha] at hh
   exact hh.symm
 
-/-- The specified abelian comparison preserves the scalar action on every module.
-
-Source: Bhatt--Scholze, Example 4.1.10; RefactorInstruction, Section 4,
-geometric-fiber comparison, steps 1--3
-(auxiliary; not a blueprint node).
-
-Proof in words: the comparison is the inverse-image adjunction unit followed by
-restriction along the canonical terminal-object comparison. Both respect the lax
-monoidal maps: use monoidality of the adjunction unit, then naturality of the
-restriction map for the tensor action and tensor unit. Apply this identity to the
-internal action A tensor M -> M. It identifies the evaluated source action with
-the evaluated inverse-image action, with coefficient transported by the evaluation
-comparison on A and by condensedPullbackHom. To identify this coefficient map in
-the fixed Qbar_l coordinates, precompose with the invertible globalCoefficientIso
-and the bounded-presheaf unit at the terminal object. A bounded function on Spec(K)
-is constant, and its pullback to Spec(K') has the same value. The normalized
-profinite-test formula globalCoefficientIso_test identifies both comparisons;
-fieldUnitIso cancels the units, and boundedPointIso evaluates the same constant.
-The resulting coefficient square commutes since all precomposed maps are
-surjective. Restriction along inv(condensedPullbackHom) cancels that coefficient
-map, so the ordinary module action and ULift restriction give the stated scalar
-identity, for every module and every scalar. Identity embeddings, zero modules,
-and transcendental extensions satisfy the same argument; no algebraicity is used.
--/
+/-- The specified abelian comparison preserves the scalar action on every module
+(Bhatt--Scholze, Example 4.1.10). -/
 theorem condensedQbar_field_evaluation_linear (ℓ : ℕ) [Fact ℓ.Prime]
     (K K' : Type u) [Field K] [IsAlgClosed K] [Field K'] [IsAlgClosed K']
     (i : K →+* K')

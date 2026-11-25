@@ -12,9 +12,12 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 import Mathlib.RingTheory.AdicCompletion.Functoriality
 import Mathlib.CategoryTheory.Filtered.Final
 
-/-! # Completed free presentations for adic towers
+/-!
+# Completed free presentations for adic towers
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W.
+## References
+
+* Stacks Project, Cohomology of Schemes, Lemma 087W
 -/
 
 @[expose] public section
@@ -88,30 +91,8 @@ private theorem completion_stabilize (A : Type u) [CommRing A] (I : Ideal A)
   exact hstable (n + k + 1) k (n + k + 1) (by omega) (by omega)
 
 /-- A vector mapping to zero at one tower level can be corrected by a global
-presentation-kernel vector with the same free residue at that level.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W, proof, the surjection
-K → K_n used in the final cokernel calculation.
-(blueprint: lem-weil-pbc-adic-tower-free-kernel-correction).
-
-Proof: Put P = A^d and P_n = P/I^(n+1)P. The map q followed by the nth
-projection factors through P_n: identify the completed free module with a
-finite product of the completed ring, choose representatives of each residue,
-and use the completed scalar equation on each basis vector. Hence the projected
-value depends only on the residue, and the factor is A-linear. The
-tower projections are surjective by recursive lifting along htrans. Hence
-q surjective makes each composite to T_n surjective, and its factor
-P_n → T_n is surjective. The factors commute with transitions, as equality
-can be tested on lifts to the completed free module. Let K_n be their kernels.
-Lift a K_n vector to P_(n+1). Its image in T_(n+1) lies in I^(n+1)T_(n+1).
-Surjectivity of P_(n+1) → T_(n+1) supplies an I^(n+1) correction vector;
-subtracting it proves that K_(n+1) → K_n is surjective. Thus every K_n vector
-lifts to a compatible kernel sequence. The identification of the free
-completion with lim P_n makes that sequence a vector z. Every coordinate
-of q(z) is zero, so limit extensionality and injectivity of e give q(z)=0.
-Apply this to the residue of y, which lies in K_n by the given equation.
-The resulting z has the same nth residue as y. No finite generation of T_n
-or Noetherian hypothesis is used in this correction argument. -/
+presentation-kernel vector with the same free residue at that level. No finite generation of
+the tower terms or Noetherian hypothesis is used. -/
 theorem adicTower_freeKernelCorrection (A : Type u) [CommRing A]
     (I : Ideal A) (T : ℕᵒᵖ ⥤ ModuleCat.{u} A)
     (hzero : ∀ n : ℕ, I ^ (n + 1) • (⊤ : Submodule A (T.obj (op n))) = ⊥)

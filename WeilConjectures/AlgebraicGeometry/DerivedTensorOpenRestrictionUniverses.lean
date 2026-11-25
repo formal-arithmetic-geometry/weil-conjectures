@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictionTotalTensor
 
 /-! # Derived tensor and exact restriction
 
-Source: Stacks Project, Tag 08DX, proof of (1).
-(blueprint: lem-pc-derived-tensor-open-restriction-universes).
+## References
+
+* Stacks Project, Tag 08DX
 -/
 
 @[expose] public section
@@ -51,13 +52,7 @@ private theorem tensor_model_iso (X : Scheme.{u})
   exact ⟨(e.app ⟨PUnit.unit⟩).app ⟨PUnit.unit⟩⟩
 
 /-- Derived tensor commutes with exact open restriction, allowing independent
-localization universes. Source: Stacks Project, Tag 08DX, proof of (1).
-Proof: choose K-flat representatives of the first factor. Open restriction is exact,
-preserves K-flatness and commutes with the sheaf tensor and the coproducts in
-unbounded totalization. The restricted total tensor therefore computes both sides.
-The localization comparison transports this calculation between the independently
-chosen derived categories. This is natural in both factors, and includes empty opens.
-(blueprint: lem-pc-derived-tensor-open-restriction-universes). -/
+localization universes (Stacks, Tag 08DX). -/
 theorem derivedTensor_openRestriction_iso_universes (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wO} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]

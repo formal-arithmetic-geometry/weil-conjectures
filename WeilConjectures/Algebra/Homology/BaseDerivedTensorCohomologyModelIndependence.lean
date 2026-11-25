@@ -10,8 +10,10 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 /-! # Independence of localized tensor cohomology from its universal derived model
 
-Source: Stacks Project, Tag 06Y6.
-(blueprint: lem-pc-base-derived-tensor-cohomology-model-localized-independence). -/
+## References
+
+* Stacks Project, Tag 06Y6.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -59,25 +61,7 @@ private theorem tensorLinearLift
 
 
 /-- Two universal base-derived tensor models have isomorphic localized source
-modules, compatibly with their specified localized comparison maps.
-Source: Stacks Project, more-algebra.tex, Tag 06Y6 (independence of choices).
-(blueprint: lem-pc-base-derived-tensor-cohomology-model-localized-independence).
-
-Proof: uniqueness of total left derived functors gives a natural isomorphism
-between m.derived and n.derived, commuting with their counits. Apply homology to
-its component at the restricted complex M and compose with m.cohomologyIso and
-the inverse of n.cohomologyIso. Naturality at multiplication by a in A and the
-cohomologyIso_smul equations show compatibility with a tensor 1. B-linearity
-shows compatibility with 1 tensor b, hence tensor induction makes this an
-A-tensor-B-linear isomorphism. The comparison_eq equations and counit
-compatibility show it commutes with the ordinary comparison; the ordinaryIso
-maps coincide because their prescribed values on pure tensors agree. Likewise
-the ordinaryToLocalized maps coincide by their values on pure tensors.
-Extend the isomorphism to D. Transpose the desired localized equation through
-the extension/restriction adjunction. Its naturality and the two localized_eq
-identities reduce it to the ordinary comparison equation just proved. There is
-no flatness or K-flatness assumption on M or the ring maps. This argument also
-covers zero rings, zero complexes and every cohomological degree. -/
+modules, compatibly with their specified localized comparison maps. -/
 theorem baseDerivedTensorCohomologyModel_localized_independence
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) D]

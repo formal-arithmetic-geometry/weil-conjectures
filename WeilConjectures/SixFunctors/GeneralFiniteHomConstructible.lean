@@ -10,13 +10,15 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.HomDevissage
 /-!
 # Finite coefficient internal Hom preserves constructibility
 
-Internal derived Hom of bounded constructible objects of finite Tor amplitude is again of this
-kind, for finite coefficients.
+Over a finite or algebraically closed field, internal derived Hom with finite coefficients
+killed by a power of an invertible prime preserves bounded constructibility and finite Tor
+amplitude.
 
 ## Implementation details
 
-The hypotheses provide an invertible coefficient exponent directly: if `ell ^ n` annihilates `A`,
-then its image in `Γ(Spec k)` is a unit because `ell` is a unit in `k`.
+The result is deduced from the stronger statement for every field with an invertible
+coefficient exponent: if `ell ^ n` annihilates `A`, its image in `Γ(Spec k)` is a unit, and
+transport along the structure map gives the required instance on `X`.
 -/
 
 @[expose] public section
@@ -31,7 +33,8 @@ open AlgebraicGeometry
 namespace WeilConjectures
 
 /-- For a finite or algebraically closed field and a finite coefficient ring killed by
-an ell-power, internal derived Hom preserves bounded constructibility and finite Tor amplitude. -/
+an ell-power, internal derived Hom preserves bounded constructibility and finite Tor amplitude.
+-/
 theorem generalFiniteHomConstructible
     {k : Type u} [Field k] (_hk : Finite k ∨ IsAlgClosed k)
     (ell : ℕ) [Fact ell.Prime] (_hell : IsUnit (ell : k))

@@ -28,9 +28,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 
 /-- Exactly the finite completed diagonal Chern equality, with its category
 interfaces shared before the strict comparison argument. This is a definition of
-the equality, not an assertion that it holds.
-Source: diagonal trace proof (2), forgetting the support of the diagonal.
-(blueprint: def-sfb-diagonal-trace-finite-chern-equation). -/
+the equality, not an assertion that it holds. -/
 @[irreducible]
 def finiteChernEquation (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

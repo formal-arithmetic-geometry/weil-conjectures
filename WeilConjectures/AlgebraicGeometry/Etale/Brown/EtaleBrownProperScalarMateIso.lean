@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.Adjunction.MateCube
 
 /-! # Invertibility of the proper Brown scalar mate
 
-Source: Zheng, Constructions 4.1 and 5.14--5.15 and Lemma 5.16;
-Stacks 0F0G, 06YY and 07A4.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Constructions 4.1 and 5.14--5.15 and Lemma 5.16
+* Stacks Project, Tags 0F0G, 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -32,14 +33,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
-/-- The proper geometric mate used by the Brown projection is invertible.
-Source: Zheng, Lemma 5.16; Stacks 0F0G and 07A4.
-(blueprint: lem-pur-etale-brown-proper-scalar-mate-is-iso).
-
-The proof is the finite-coefficient proper projection argument after restriction to
-ordinary scalars. The normalized direct-image comparison and scalar pullback mate
-are isomorphisms; the finite proper projection formula makes the remaining scalar
-mate invertible, and exact restriction of scalars reflects isomorphisms. -/
+/-- The proper geometric mate used by the Brown projection is invertible. -/
 theorem etaleBrownProperScalarMate_isIso
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W) [IsProper g]

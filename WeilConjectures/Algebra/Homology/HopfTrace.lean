@@ -27,8 +27,6 @@ the short exact sequences `0 → Z ^ i → P ^ i → B ^ (i + 1) → 0` and
 `0 → B ^ i → Z ^ i → H ^ i → 0`, which is the content of
 `CategoryTheory.ShortComplex.trace_τ₂_eq_add_trace_homologyMap` for a short complex of vector
 spaces; the contributions of the boundaries then cancel in the alternating sum.
-
-This is the linear algebra behind blueprint `proposition-properties-trace`, item (4).
 -/
 
 @[expose] public section
@@ -169,9 +167,8 @@ lemma trace_restrict_range_d_eq_zero_of_isZero {P : CochainComplex (ModuleCat K)
       infer_instance
   exact LinearMap.trace_eq_zero_of_subsingleton _
 
-/-- **The Hopf trace formula** (blueprint `proposition-properties-trace`, item (4), linear algebra
-part): for a bounded cochain complex `P` of finite dimensional vector spaces over a field `K` and
-a chain endomorphism `v` of `P`,
+/-- **The Hopf trace formula**: for a bounded cochain complex `P` of finite dimensional vector
+spaces over a field `K` and a chain endomorphism `v` of `P`,
 
 `∑ i, (-1) ^ i * Tr (v ^ i ∣ P ^ i) = ∑ i, (-1) ^ i * Tr (H ^ i (v) ∣ H ^ i (P))`. -/
 theorem sum_negOnePow_smul_trace_f_eq_sum_negOnePow_smul_trace_homologyMap

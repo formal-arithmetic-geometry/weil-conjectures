@@ -22,8 +22,19 @@ import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 /-!
 # Tensor products of fields over a separably closed field
 
-Source: Stacks Project, Algebra, Lemma 00I7 (lemma-separably-closed-irreducible),
-specialized to field extensions (blueprint: lem-weil-pbc-field-tensor-irreducible).
+Over a separably closed field `k`, the tensor product `K ⊗[k] L` of two field extensions has a
+unique minimal prime, and its spectrum is irreducible and connected.
+
+## Implementation details
+
+After base change to the algebraic closure of `k`, which is purely inseparable over `k`, the
+spectrum of `K ⊗[k] L` is homeomorphic to that of `R ⊗ S` for the reduced base changes `R`, `S`,
+which are domains. Over an algebraically closed field, a tensor product of domains is a domain:
+reduce to a finite type second factor, using that tensoring with a vector space is injective.
+
+## References
+
+* [Stacks Project, Tag 00I7](https://stacks.math.columbia.edu/tag/00I7)
 -/
 
 @[expose] public section
@@ -82,27 +93,7 @@ private theorem tensor_domain_of_algClosed
 namespace IsSepClosed
 
 /-- Over a separably closed field, the tensor product of two field extensions has a unique
-minimal prime, and its affine spectrum is irreducible and connected.
-Source: Stacks Project, Algebra, Lemma 00I7 (lemma-separably-closed-irreducible)
-(blueprint: lem-weil-pbc-field-tensor-irreducible).
-
-Proof:
-1. Base change to the algebraic closure of `k`, which is purely inseparable over the
-separably closed base. Purely inseparable base change and quotienting by nil ideals
-preserve spectra. The reductions `R`, `S` of the base-changed fields are domains, and
-`Spec (K ⊗[k] L)` is homeomorphic to `Spec (R ⊗[AlgebraicClosure k] S)`.
-2. Over an algebraically closed field, a domain tensored with a finite type domain is a
-domain: specialize basis coordinates at each maximal ideal of the finite type factor.
-Its residue field is the base field by the Nullstellensatz, so a zero product forces one
-specialized factor to vanish. Products of coordinates lie in every maximal ideal and
-hence vanish by Jacobsonness. Nonzero coordinates contradict the domain property.
-3. For arbitrary domains, each pair of tensor elements comes from a finite type
-subalgebra of the second factor. Tensoring that inclusion with the first factor is
-injective, since vector spaces are flat. Step 2 therefore rules out zero divisors;
-nontriviality makes the tensor product a domain.
-4. Transport irreducibility of this domain's spectrum through the homeomorphism of
-Step 1. The original tensor product's nilradical is then prime and is its unique minimal
-prime. An irreducible space is connected. -/
+minimal prime, and its affine spectrum is irreducible and connected. -/
 theorem field_tensor_unique_minimalPrime
     (k : Type u) [Field k] [IsSepClosed k]
     (K : Type v) [Field K] [Algebra k K]

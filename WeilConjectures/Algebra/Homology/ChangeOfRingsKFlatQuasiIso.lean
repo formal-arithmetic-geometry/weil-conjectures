@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-!
 # Change of rings preserves quasi-isomorphisms between K-flat complexes
 
-Source: Stacks Project, Cohomology on Sites, Tag 06YT.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YT, 06YS and 06YY
 -/
 
 @[expose] public section
@@ -29,23 +31,7 @@ namespace SheafOfModules
 set_option hygiene false in
 local notation "𝓡" R => (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R
 
-/-- Termwise extension of scalars preserves quasi-isomorphisms between K-flat complexes.
-Source: Stacks Project, Cohomology on Sites, Tag 06YT, with the second complex the
-new ring in degree zero; Tag 06YY applies this to change of rings.
-
-Proof: Regard O' as an O-module by restriction of scalars and choose a K-flat resolution
-R → O' using Tag 06YS. Its cone is acyclic. Form the natural commuting square of total
-tensor maps with rows R ⊗ P → R ⊗ Q and O' ⊗ P → O' ⊗ Q. The cone of the top map is
-R ⊗ Cone(α), acyclic by K-flatness of R and the signed symmetry of total tensor complexes.
-The cones of the vertical maps are Cone(R → O') ⊗ P and Cone(R → O') ⊗ Q, acyclic by
-K-flatness of P and Q. Tensor commutes with mapping cones, so these three maps are
-quasi-isomorphisms. Applying cohomology to the square shows that its bottom map is an
-isomorphism on cohomology in every degree. Tensoring with O' in degree zero is termwise
-extension of scalars after forgetting the O'-action. The forgetful restriction functor
-is exact and faithful, and reflects vanishing of cohomology, so the same map is a
-quasi-isomorphism as a complex of O'-modules. The supplied object and morphism equalities
-identify E's map of complexes with this map, including the equality transports.
-(blueprint: lem-pur-change-of-rings-kflat-quasi-iso) -/
+/-- Termwise extension of scalars preserves quasi-isomorphisms between K-flat complexes. -/
 theorem changeOfRings_kFlat_quasiIso
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]

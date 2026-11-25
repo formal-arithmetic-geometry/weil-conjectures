@@ -10,8 +10,13 @@ import WeilConjectures.AlgebraicGeometry.Etale.Origin.EtaleOriginScalarPullbackS
 
 /-! # Scalar restriction of the etale-origin projection square
 
-Source: Stacks Project, Tags 0E48 and 0B56. This is a compatibility of specified
-maps for a qcqs morphism; it does not assert a projection formula.
+This is a compatibility of specified maps for a qcqs morphism; it does not assert a
+projection formula.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 0B56, 0E48
+* Stacks Project, Pro-étale Cohomology, Tag 09A6
 -/
 
 @[expose] public noncomputable section
@@ -127,26 +132,8 @@ private theorem etale_projection_counit
 
 /-- The etale projection and the restricted scalar mate give the same square
 through the canonical tensor comparisons and the bounded-below direct-image mates.
-The morphism is only required to be qcqs. In particular, this statement neither
-uses properness nor claims that either projection morphism is invertible.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 0E48,
-remark-compatible-with-diagram, and Tag 0B56, equation-projection-formula-map;
-proetale.tex, Tag 09A6.
-(blueprint: lem-fix-etale-origin-scalar-projection-square).
-
-Proof: identify the two bounded-below included mates with the ambient site
-mate. Transpose the square under the A-geometric adjunction. The ring-sheaf
-restriction counit formula and the scalar-extension mate counit formula compute
-the scalar side. Naturality and the local scalar/tensor pullback square identify
-its initial factors. Tensor-comparison naturality moves the etale geometric
-counit to the other side. The ambient site-mate counit identity and the counit
-formula for the actual etale projection identify the remaining factors.
-Injectivity of the adjunction Hom equivalence gives the displayed square.
-The local pullback square is assembled from the separate tensor-free restriction
-and extension realization cubes and the proved etale scalar/tensor pullback square.
-The bounds on E and H are used only for the two included-mate identifications;
-no bound is imposed on scalar extension of the target direct image.
+The morphism is only required to be qcqs; the statement does not claim that either
+projection morphism is invertible.
 -/
 theorem etaleOriginScalarProjectionSquare
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]

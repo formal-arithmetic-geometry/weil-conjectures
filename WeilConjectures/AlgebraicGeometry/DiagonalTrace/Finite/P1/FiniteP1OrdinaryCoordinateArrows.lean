@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.P1.FiniteP1KummerCoordinates
 
 /-! # Actual finite coordinate images of ordinary P1 and local arrows
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: def-sfb-finite-p1-ordinary-coordinate-arrows).
 -/
 
 @[expose] public noncomputable section
@@ -47,9 +44,7 @@ attribute [local irreducible] Functor.mapDerivedCategory SpTowerP1.nuSingle
   geoP1PullComparison
   Etale.ordinaryFiniteUnitPullback Etale.ordinaryFiniteShiftedLinePullback
 
-/-- The actual original finite coordinate image of an ordinary P1 arrow.
-Source: the specified projective-line endpoint coordinates
-(blueprint: def-sfb-finite-p1-ordinary-coordinate-arrows). -/
+/-- The actual original finite coordinate image of an ordinary P1 arrow. -/
 def finiteP1CoordinateImage (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] {X S : Scheme.{u}}
     (e : X ≅ ProjectiveLine S) (hS : IsUnit (l : Γ(S, ⊤)))
@@ -65,8 +60,7 @@ def finiteP1CoordinateImage (n : ℕ)
     (finiteKummerLineCoordinate l E n e hS c).inv
 
 /-- The actual composite-comparison image of a local ordinary arrow in the
-fixed original finite Hom. Source: single and shift comparison
-(blueprint: def-sfb-finite-p1-ordinary-coordinate-arrows). -/
+fixed original finite Hom. -/
 def finiteP1LocalCoordinateImage (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (X : Scheme.{u}) {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n X hX)

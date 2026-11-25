@@ -26,7 +26,11 @@ direct images of `π^* 𝒢(d)` vanish (relative Serre vanishing), so the cohomo
 The morphism `𝒢 ⟶ π_* π^* 𝒢 ⟶ π_* (π^* 𝒢(d))`, the second map being multiplication by `T_i^d`,
 is an isomorphism over the open subset of `U` over which `T_i` does not vanish.
 
-This is the projective input of [Stacks, Tag 02O6].
+This is the projective input of the finiteness theorem for proper morphisms.
+
+## References
+
+* [Stacks Project, Tag 02O6](https://stacks.math.columbia.edu/tag/02O6)
 -/
 
 @[expose] public section
@@ -136,11 +140,7 @@ variable {A : Type u} [CommRing A] [IsNoetherianRing A]
 
 /-- **The Chow step.** Let `A` be noetherian, `p : Y ⟶ Spec A` proper with `Y` nonempty and `𝒢`
 a coherent `𝒪_Y`-module. There are a coherent `𝒪_Y`-module `𝒢'` with finite cohomology over `A`
-and a morphism `φ : 𝒢 ⟶ 𝒢'` which is an isomorphism over a nonempty open subset of `Y`.
-
-With `π : Y' ⟶ Y` the Chow modification of `p`, `e : Y' ⟶ ℙ(N; Y)` its closed embedding over
-`Y` and `d ≫ 0`, one takes `𝒢' = π_* (π^* 𝒢 ⊗ e^* 𝒪(d))` and for `φ` the composite of the unit
-`𝒢 ⟶ π_* π^* 𝒢` with the pushforward of multiplication by `Tᵢ^d`. -/
+and a morphism `φ : 𝒢 ⟶ 𝒢'` which is an isomorphism over a nonempty open subset of `Y`. -/
 theorem exists_hasFiniteH_hom_isIso_restrict {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p]
     [Nonempty Y] (G : Y.Modules) [SheafOfModules.IsQuasicoherent (R := Y.ringCatSheaf) G]
     [SheafOfModules.IsFinitePresentation (R := Y.ringCatSheaf) G] :

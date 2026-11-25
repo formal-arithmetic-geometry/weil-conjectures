@@ -30,11 +30,9 @@ variable {α : Type*}
 
 namespace Finset
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Selected upper bound of a finite set.
-
-Given a base point `i₀` and selected pairwise upper bounds `d`, the upper bound `u F` of a
-finite set `F` is defined by insertion: `u ∅ = i₀` and `u (F ∪ {i}) = d (u F) i`, the elements
-of `F` being inserted in the order of `Finset.toList`. -/
+/-- Selected upper bound of a finite set. Given a base point `i₀` and selected pairwise upper
+bounds `d`, the upper bound `u F` of a finite set `F` is defined by insertion: `u ∅ = i₀` and
+`u (F ∪ {i}) = d (u F) i`, the elements of `F` being inserted in the order of `Finset.toList`. -/
 noncomputable def directedBound (i₀ : α) (d : α → α → α) (F : Finset α) : α :=
   F.toList.directedBound i₀ d
 
@@ -44,8 +42,7 @@ lemma directedBound_empty (i₀ : α) (d : α → α → α) : directedBound i�
 
 variable [Preorder α] {i₀ : α} {d : α → α → α}
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Property of the selected finite upper
-bound. Every element of `F` lies below the selected upper bound `u F`. -/
+/-- Every element of `F` lies below the selected upper bound `directedBound i₀ d F`. -/
 lemma le_directedBound (hd : ∀ a b, a ≤ d a b ∧ b ≤ d a b) {F : Finset α} {i : α}
     (hi : i ∈ F) : i ≤ directedBound i₀ d F :=
   List.le_directedBound hd (Finset.mem_toList.mpr hi)

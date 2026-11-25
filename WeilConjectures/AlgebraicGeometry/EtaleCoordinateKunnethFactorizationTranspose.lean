@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethRouteEquality
 This is the mate calculation used in the proof of the coordinate Kunneth
 factorization.  It isolates the comparison of the two pullback-counit
 transposes from the final cancellation by the derived adjunction.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -28,18 +27,7 @@ namespace AlgebraicGeometry.Etale.CoordinateTrace
 variable (A : Type (u + 1)) [CommRing A]
 
 /-- The two coordinate routes have the same transpose along `pull f ⊣ push f`.
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, first triangle, coordinate interchange;
-Stacks Tags 07A7, 0B56 and 0D6E.
-
-Proof: expand the two projection maps by their adjunction-mate formulas.  Naturality
-of the derived tensor comparison moves the first pullback through the tensor, while
-the mate equations for `exchange1` and `exchange2` identify the two base-change
-routes.  The tensor comparison for the pullback square then identifies the resulting
-maps, and the counit equation for `directComparison` identifies their direct-image
-targets.  This is the pullback-counit calculation; the final cancellation by the
-adjunction is performed by `coordinateKunnethFactorization_route_eq`.
-(auxiliary; not a blueprint node). -/
+(Stacks, Tags 07A7, 0B56 and 0D6E). -/
 theorem coordinateKunnethFactorization_transpose [Finite A] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)
     (M : DerivedCategoryModule A X) :

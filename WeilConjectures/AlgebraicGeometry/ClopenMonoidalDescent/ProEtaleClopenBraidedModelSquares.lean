@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ClopenMonoidalDescent.ProEtaleClopenBra
 
 /-! # Cancellation of native braided model squares
 
-Source: Stacks Project, Tags 06YU and 0FPT.
-(blueprint: lem-pur-clopen-braided-model-squares).
+## References
+
+* Stacks Project, Tags 06YU, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -70,17 +71,7 @@ private theorem inverse_tensor_square_aux
 end CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent
-/-- The native tensor and unit equations follow by cancellation from a monoidal
-factorization. This is the algebraic square used by the normalization theorem.
-Source: Stacks Project, Tags 06YU and 0FPT.
-(blueprint: lem-pur-clopen-braided-model-squares).
-
-Proof: instantiate the native lax structures and their K-flat isomorphism lemmas. Apply
-monoidality of the factorization and cancel its tensor maps; the cochain tensorator is
-replaced by the supplied summand-normalized comparison. Apply the unit equation similarly,
-then unfold the canonical unit comparison. Every cancelled map is an isomorphism under the
-stated K-flat hypotheses.
--/
+/-- The native tensor and unit equations follow from a monoidal factorization. -/
 theorem clopen_braided_model_squares
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})

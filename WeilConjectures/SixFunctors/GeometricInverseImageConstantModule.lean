@@ -18,14 +18,17 @@ set_option linter.privateModule false
 /-!
 # Geometric inverse image preserves constant module sheaves
 
-The constant module sheaf is represented by `siteConstantModuleFunctorGeneral`. The
-recorded geometric-morphism lift supplies the module inverse image and its underlying
-set comparison; the theorem states the resulting canonical constant-module
-isomorphisms and their naturality in the coefficient module.
+Auxiliary constructions for comparing the inverse image of constant module sheaves along a
+geometric morphism with constant module sheaves, naturally in the coefficient module.
+
+## Implementation details
+
+The constant module sheaf is represented by `siteConstantModuleFunctorGeneral`. The recorded
+geometric-morphism lift supplies the module inverse image and its underlying set comparison.
 
 ## References
 
-* Stacks Project, Tags 0H7J and 00YV
+* Stacks Project, Tags 0H7J, 00YV.
 -/
 
 @[expose] public noncomputable section

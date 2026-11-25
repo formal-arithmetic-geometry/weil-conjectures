@@ -20,7 +20,8 @@ import WeilConjectures.AlgebraicGeometry.GenericTensorNilpotenceDescent
 
 /-! # GenericProductKernelBound
 
-Generic finite-algebra calculation from the smooth purity blueprint.
+Generic finite-algebra calculation: after one principal localization, the reduced generic product
+map is injective.
 -/
 
 @[expose] public section
@@ -32,25 +33,7 @@ universe u v
 open scoped TensorProduct
 
 /-- After one principal localization, every reduced generic product map compatible
-with the fixed generic splitting is injective, including after further localization.
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`,
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
-(blueprint: lem-weil-pbc-generic-product-kernel-bound)
-
-Proof: Put C = (B tensor_A R0)_red. It is a finite R0-module. Tensor
-associativity identifies its generic localization with the source of e: reduction
-commutes with localization, since a fraction is nilpotent if and only if a denominator
-multiple of its numerator is nilpotent. The kernel of the map from C to its generic
-localization is torsion and finitely generated, since R0 is Noetherian. Choose a
-nonzero annihilator for each generator and take their product t (1 for no generators).
-Localizing at any s divisible by t kills the kernel. Localization is exact, so the
-induced map from the localized C to the generic product is injective. Reduction
-commutes with this principal localization and identifies its source with
-(B tensor_A R)_red. The pure-tensor compatibility determines the map f uniquely:
-R-linearity determines all pure tensors and additivity determines their sums; the
-quotient map is surjective. Thus f is the injective induced map. When the generic
-product is zero, the kernel is all of C and the same torsion argument kills C. -/
+with the fixed generic splitting is injective, including after further localization. -/
 theorem exists_generic_product_kernel_bound
     (A : Type u) [CommRing A]
     (B : Type v) [CommRing B] [Algebra A B] [Module.Finite A B]

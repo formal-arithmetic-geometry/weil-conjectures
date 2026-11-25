@@ -238,22 +238,7 @@ private theorem restrictionFunctor_exact :
   exact ⟨preservesFiniteLimits_of_evaluation _ hlim,
     preservesFiniteColimits_of_evaluation _ hcolim⟩
 
-/-- Restriction from the finite integral coefficients to discrete p-adic scalars.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-finite scalar restriction, and `prose-09-21`.
-(blueprint: lem-sfb-diagonal-trace-residue-restriction).
-
-Proof: at level n, restrict the finite coefficient action along the ring map
-Z_l → O_(ULift Q_l)/(l^(n+1)) and its constant-section map. Retain the section
-abelian groups and their restrictions. Compatibility of the quotient maps makes
-horizontal transitions linear and defines the strict tower and its morphisms.
-The residue of z acts as its natural-number representative, since the coefficient
-ring is annihilated by l^(n+1). The construction changes no additive maps, so it
-is additive. Kernels are sectionwise and cokernels are additive sheafifications;
-forgetting to abelian sheaves reflects their universal properties. Hence the
-functor preserves finite limits and finite colimits. This construction requires
-neither Chern data nor any completed projection or derived comparison. -/
+/-- Restriction from the finite integral coefficients to discrete p-adic scalars. -/
 theorem exists_diagonalTraceResidueRestriction (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) : Nonempty (Restriction l (ULift.{u} (Padic l)) T) := by
   refine ⟨{ F := restrictionFunctor l T

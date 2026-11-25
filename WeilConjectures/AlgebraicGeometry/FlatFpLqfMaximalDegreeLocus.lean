@@ -30,28 +30,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.Hom
 
-/-- The maximal fibre degree locus is open, and the restriction to it is finite.
-Source: Stacks Project, More on Morphisms, Tag 07RY, proof, second paragraph.
-(blueprint: lem-weil-pbc-flat-fp-lqf-maximal-degree-locus)
-
-Proof: fix a point of degree `m`. Its finite scheme-theoretic fibre has finitely many
-points. An elementary étale neighbourhood splits the pullback into complementary open
-parts `W` and `V`, with `V` finite over the neighbourhood and `W` having empty fibre at
-its distinguished point (Tag 02LP). Flatness and local finite presentation survive base
-change and restriction to opens, so `V` is finite locally free. Its degree is locally
-constant; shrink the neighbourhood to the degree at the distinguished point. That
- degree is `m`, by invariance of finite fibre degrees under residue-field extension and
-emptiness of the `W` fibre. At any point of the shrunken neighbourhood the degree of the
-whole fibre is the sum of the degrees of the complementary parts. The `V` degree is
-`m` and the whole degree is at most `m`, so the `W` degree is zero. A finite scheme over
-a field with zero-dimensional global sections is empty. Thus every fibre of `W` is
-empty, and `W` is empty. The neighbourhood maps into the degree-`m` locus. Its image is
-open since étale maps are open. These images cover the locus, proving openness.
-Factor the neighbourhood maps through its open subscheme; they remain étale. The
-pullback of the restriction is finite locally free of degree `m` on each member of this
-étale cover. Étale descent gives finite local freeness of degree `m` on the locus, and
-in particular finiteness. The empty locus is covered by the empty family, so this
-argument includes an unattained bound and the empty-base case. -/
+/-- The maximal fibre degree locus is open, and the restriction to it is finite
+(Stacks, Tag 07RY). -/
 theorem exists_isFinite_morphismRestrict_maximal_fiber_degree {X S : Scheme.{u}}
     (f : X ⟶ S) [Flat f] [LocallyOfFinitePresentation f] [IsSeparated f]
     (h_lqf : IsLocallyQuasiFinite f) (m : ℕ) (hm : BoundsFiberDegrees f m) :

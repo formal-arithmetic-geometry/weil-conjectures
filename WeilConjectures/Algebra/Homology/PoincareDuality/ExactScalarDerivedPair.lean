@@ -9,7 +9,9 @@ public import WeilConjectures.CategoryTheory.Scalar.ScalarInternalHomDataSupplem
 
 /-! # Assembling a normalized scalar pair for an exact extension functor
 
-Source: Stacks 07A4, 07A6 and 0D6D.
+## References
+
+* Stacks Project, Tags 07A4, 07A6 and 0D6D
 -/
 
 @[expose] public noncomputable section

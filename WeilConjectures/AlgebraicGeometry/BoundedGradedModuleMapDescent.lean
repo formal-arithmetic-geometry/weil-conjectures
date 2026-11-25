@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.BoundedGradedMapCompatibility
 
 /-! # Descent of bounded graded modules and successive maps
 
-Source: Stacks Project, Tag 01ZR, clauses (1) and (2).
-(blueprint: lem-pc-bounded-graded-module-map-descent)
+## References
+
+* Stacks Project, Tag 01ZR
 -/
 
 @[expose] public section
@@ -28,23 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Descend a bounded graded family and its successive maps, without imposing any
-square-zero equations. Source: Stacks Project, Tag 01ZR, clauses (1) and (2).
-(blueprint: lem-pc-bounded-graded-module-map-descent)
-
-Proof: Only the degrees in the integer interval [a,b] need nonzero models. Apply
-clause (1) of finitePresentation_module_map_descent to these finitely many terms.
-Directedness gives a stage above i and all their stages. Pull their models to that
-stage; tensor pullback preserves finite presentations and zero objects, and the
-composition isomorphism identifies their further pullbacks with the original terms.
-Put zero outside [a,b]. A morphism with a zero source or target is uniquely zero,
-so only the adjacent pairs contained in [a,b] require descending a map. Transport
-those maps through the chosen term isomorphisms and apply clause (2) to these fixed
-models. Choose a common stage above the finitely many map stages and pull all models
-and maps to it. Naturality of pullback composition preserves the prescribed map
-comparisons. Extend the comparisons outside the interval by the unique isomorphisms
-between zero objects. This gives all displayed equalities, including boundary maps.
-There is deliberately no claim that successive maps have zero composite. If a>b,
-every term is zero and stage i with the zero family suffices. -/
+square-zero equations (Stacks, Tag 01ZR). -/
 theorem bounded_graded_module_map_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

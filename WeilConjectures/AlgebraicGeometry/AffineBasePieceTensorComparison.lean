@@ -17,9 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffineBasePieceTensorBaseChange
 /-!
 # Tensor comparison after one affine base change
 
-Source: Stacks Project, Limits, proof of Tag 01ZO (affine reduction),
-Schemes, Tags 01JR and 01I4, and Morphisms, Tag 01T2.
-(blueprint: lem-weil-pbc-affine-base-piece-tensor-comparison).
+## References
+
+* Stacks Project, Tags 01ZO, 01JR, 01I4 and 01T2
 -/
 
 @[expose] public section
@@ -73,32 +73,8 @@ private theorem stageLft {S T : Scheme.{u}} (d : T ⟶ S)
       (IsPullback.of_hasPullback Y₀.hom d)
   exact MorphismProperty.of_isPullback hp inferInstance
 
-/-- An affine finite-type base piece has a single tensor model under further base change.
-
-Source: Stacks Project, Limits, proof of Tag 01ZO (affine reduction),
-Schemes, Tags 01JR and 01I4, and Morphisms, Tag 01T2.
-(blueprint: lem-weil-pbc-affine-base-piece-tensor-comparison).
-
-Proof: Write Y_T = Y₀ ×_S T and X_T = X₀ ×_S T, and let f_T be the base
-change of f₀. Let V_T be the inverse image of V and W_T the inverse image
-of W. The map V_T → V is affine, being a base change of d, so V_T is affine.
-The inverse image U_T = f_T⁻¹(V_T) is affine by the assumed affineness of f_T.
-Set B = Γ(V_T) and C = Γ(U_T). The structure maps V_T → W_T and
-U_T → W_T, followed by e0, induce ring maps aB : R → B and aC : R → C.
-The restricted f_T induces φ : B → C; commutativity over W_T makes it an
-R-algebra map. Local finite type is stable under base change and restriction,
-and the affine-pairs criterion makes φ finite type.
-For t : L → T, pullback pasting identifies the base change of f₀ along t ≫ d
-with that of f_T along t. Restricting to the inverse image of V identifies
-its source and target with U_T ×_W_T t⁻¹(W_T) and V_T ×_W_T t⁻¹(W_T).
-Transport these fibre products along the affine spectrum isomorphisms and e0, e.
-The given compatibility ensures that the map from Spec A to Spec R is the
-specified algebra structure. The affine fibre-product formula gives spectra
-of A ⊗[R] C and A ⊗[R] B. The induced map is Spec(id ⊗ φ), since both
-pullback projections agree, by the tensor inclusion identities. These two
-compatible isomorphisms give the arrow isomorphism. All these identities also
-hold for empty affine opens and zero coordinate rings. There is no diagram,
-limit, colimit, or directedness assumption in this lemma. -/
+/-- An affine finite-type base piece has a single tensor model under further base change
+(Stacks, Tags 01ZO, 01JR, 01I4 and 01T2). -/
 theorem exists_affine_base_piece_tensor_comparison
     {S T : Scheme.{u}} (d : T ⟶ S) [IsAffineHom d]
     (X₀ Y₀ : Over S) (f₀ : X₀ ⟶ Y₀) [LocallyOfFiniteType f₀.left]

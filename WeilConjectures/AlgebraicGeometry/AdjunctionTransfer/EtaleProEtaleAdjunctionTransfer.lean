@@ -19,9 +19,6 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Shift
 
 /-! # Transfer of finite-coefficient adjunctions
-
-Source: blueprint main-20261015, sec-smooth-purity/sk-prop-sp-et-proet,
-node theorem-f-shriek-finite-coefficients (blueprint: theorem-f-shriek-finite-coefficients).
 -/
 
 @[expose] public noncomputable section
@@ -33,17 +30,13 @@ namespace AlgebraicGeometry.ProEtale.AdjunctionTransfer
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
-/-- The recorded finite-value etale constructibility intersected with finite Tor amplitude.
-Source: blueprint theorem-f-shriek-finite-coefficients, definition of Dctf
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+/-- The recorded finite-value etale constructibility intersected with finite Tor amplitude. -/
 abbrev etaleProperty (T : Scheme.{u}) :=
   Etale.DerivedCategory.isBoundedConstructible A T ⊓
     _root_.DerivedCategory.finiteTorAmplitude (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
 
 /-- The bounded etale objects included in the bounded-below derived category.
-The lower bound is read directly from the recorded constructibility predicate.
-Source: blueprint theorem-f-shriek-finite-coefficients, bounded inputs in proof step 1
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+The lower bound is read directly from the recorded constructibility predicate. -/
 def etaleToPlus (T : Scheme.{u}) :
     (etaleProperty A T).FullSubcategory ⥤
       _root_.DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
@@ -52,18 +45,14 @@ def etaleToPlus (T : Scheme.{u}) :
     exact ⟨a, (_root_.DerivedCategory.isGE_iff K a).mpr (fun i hi ↦ h i (Or.inl hi))⟩)
 
 /-- The finite-coefficient pro-etale convention is etale bounded constructible origin,
-intersected with the actual pro-etale Tor test against every degree-zero module sheaf.
-Source: blueprint theorem-f-shriek-finite-coefficients and definition-small-pro-etale-site--1
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+intersected with the actual pro-etale Tor test against every degree-zero module sheaf. -/
 abbrev proEtaleProperty (T : Scheme.{u}) :=
   (Etale.DerivedCategory.isBoundedConstructible A T).map
       (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory ⊓
     _root_.DerivedCategory.finiteTorAmplitude
       (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))
 
-/-- Restrict the specified termwise inverse image, retaining its objects and maps.
-Source: blueprint theorem-f-shriek-finite-coefficients, comparison equivalences
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+/-- Restrict the specified termwise inverse image, retaining its objects and maps. -/
 def comparison (T : Scheme.{u})
     (h : ∀ K, etaleProperty A T K → proEtaleProperty A T
       ((comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory.obj K)) :
@@ -73,9 +62,7 @@ def comparison (T : Scheme.{u})
       (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory)
     (fun K ↦ h K.obj K.property)
 
-/-- The ordinary etale compactification composite, restricted to Dctf.
-Source: blueprint theorem-f-shriek-finite-coefficients, chosen compactification
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+/-- The ordinary etale compactification composite, restricted to Dctf. -/
 def etaleLowerShriek {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (h : ∀ K, etaleProperty A X K → etaleProperty A Y
       ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K)) :
@@ -84,17 +71,13 @@ def etaleLowerShriek {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c)
     (fun K ↦ h K.obj K.property)
 
-/-- Inclusion of the generators in their recorded localizing closure.
-Source: blueprint theorem-f-shriek-finite-coefficients, Brown restriction
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+/-- Inclusion of the generators in their recorded localizing closure. -/
 def toLocalizing (T : Scheme.{u}) :
     (proEtaleProperty A T).FullSubcategory ⥤
       (CategoryTheory.localizingClosure (proEtaleProperty A T)).FullSubcategory :=
   ObjectProperty.ιOfLE (fun K hK _P _hP hgen ↦ hgen K hK)
 
-/-- The compactification functor on the same localizing closures.
-Source: blueprint theorem-f-shriek-finite-coefficients, Brown adjunction
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+/-- The compactification functor on the same localizing closures. -/
 def localizingLowerShriek {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (h : ∀ K, CategoryTheory.localizingClosure (proEtaleProperty A X) K →
       CategoryTheory.localizingClosure (proEtaleProperty A Y)

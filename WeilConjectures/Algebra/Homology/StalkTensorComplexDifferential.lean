@@ -13,8 +13,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 /-!
 # Differential compatibility of the stalk tensor comparison
 
-Source: Stacks Project, Cohomology, Tag 06YB, tensor-stalk identification
-(blueprint: lem-pc-stalk-tensor-complex-differential).
+## References
+
+* Stacks Project, Tag 06YB
 -/
 
 @[expose] public section
@@ -135,20 +136,7 @@ noncomputable local instance stalkTensorDifferentialMonoidal :
     MonoidalCategory (SheafOfModules.{u₁} O) :=
   SheafOfModules.monoidalCategory X.sheaf
 
-/-- Source: Stacks Project, Cohomology, Tag 06YB, tensor-stalk identification,
-third step (blueprint: lem-pc-stalk-tensor-complex-differential).
-
-Proof: conjugating by the degree isomorphism reduces equality to equality after each
-stalked summand injection, since the target degree is a coproduct and the component
-comparisons are isomorphisms. The total differential is the sum of its horizontal
-and vertical parts. On a summand these are the maps induced by `F.d` and `K.d`,
-followed by the next summand injection, with the total-complex signs. Naturality
-of the tensor comparison with respect to `F.d` and the identity identifies the
-horizontal part; naturality with respect to the identity and `K.d` identifies the
-vertical part. The additive functor preserves sums and multiplication by the
-integer signs. The formula for injections also applies to zero injections when
-the degree condition fails, because the functor preserves zero maps. Thus both
-parts agree on every summand, proving the claimed differential compatibility. -/
+/-- The degreewise stalk tensor isomorphisms `e` commute with the total differentials. -/
 theorem stalk_tensor_degree_differential
     [(RingedSpace.moduleStalkFunctor X x).Additive]
     (φ : ∀ A B : SheafOfModules.{u₁} O,

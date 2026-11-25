@@ -84,8 +84,24 @@ import Mathlib.CategoryTheory.Limits.Preserves.Limits
 
 /-! # Resolution normalization for the actual completed-coefficient Roos functor
 
-Source: Stacks Tag 0941, lemma-derived-limit-is-ok.
-(blueprint: lem-weil-pbc-integral-strict-roos-resolution).
+The Roos functor on towers of completed-coefficient modules agrees with the right derived
+limit, with an explicit normalization on every K-injective resolution of a strict tower.
+
+## Main results
+
+* `WeilConjectures.pbc_integral_strict_roos_resolution`
+
+## Implementation details
+
+The proof uses `normalizedRoosIso`, which resolves the whole diagram and inverts the
+zero-coordinate ordinary-limit inclusion, transported along the identity between the shifted
+mapping cone and `integralOperationsRoos`. The ordinary limit of the complex diagram is the
+termwise limit, and its comparison with the derived limit is the universal right-derived unit,
+which on a K-injective complex is inverse to `rightDerivedFunctorObjQIso`.
+
+## References
+
+* Stacks Project, Tag 0941.
 -/
 
 @[expose] public noncomputable section
@@ -104,19 +120,9 @@ attribute [local implicit_reducible] integralOperationsRoos integralOperationsTo
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The literal Roos functor agrees with the canonical right derived limit, with
-normalization on every K-injective resolution of an entire strict tower.
-
-Source: Stacks 0941, proof of lemma-derived-limit-is-ok.
-(blueprint: lem-weil-pbc-integral-strict-roos-resolution).
-
-Proof: use the existing normalizedRoosIso, which resolves the whole diagram and
-inverts the zero-coordinate ordinary-limit inclusion. Transport its source by the
-identity between the shifted mapping cone and integralOperationsRoos. The ordinary
-limit of the complex diagram is canonically the termwise limit. Its comparison
-with the derived limit is the universal right-derived unit. On a K-injective
-complex that unit is inverse to rightDerivedFunctorObjQIso. Naturality along r
-and cancellation of this unit give the displayed equation. The two coordinates
-of the inclusion are respectively the limit projections and zero. -/
+normalization on every K-injective resolution of an entire strict tower: the comparison is
+given by the inclusion of the ordinary limit, whose two mapping-cocone coordinates are the limit
+projections and zero. -/
 theorem pbc_integral_strict_roos_resolution
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (U : Scheme.{u}) :
     ∃ ρ : HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙

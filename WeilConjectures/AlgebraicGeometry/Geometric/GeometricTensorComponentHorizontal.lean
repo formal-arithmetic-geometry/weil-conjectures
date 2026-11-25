@@ -12,8 +12,10 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 
 /-! # Horizontal compatibility of the ordinary geometric tensor comparison
 
-Source: Zheng Construction 4.1; Stacks 03EL.
-(blueprint: lem-coef-geometric-tensor-component-horizontal)
+## References
+
+* Zheng, Construction 4.1
+* Stacks Project, Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -128,9 +130,7 @@ variable (μ : ∀ (n : ℕ) (M N : Mod.{c, v, max c v r} J (B n)),
     ordinaryTensor.{c, v, r} J' (O.coefficients n)
       ((O.inverseImage n).modules.obj M) ((O.inverseImage n).modules.obj N))
 
-/-- The forced component of the system tensor comparison.
-Source: Zheng Construction 4.1; Stacks 03EL.
-(blueprint: lem-coef-geometric-tensor-component-horizontal). -/
+/-- The forced component of the system tensor comparison. -/
 @[irreducible] def geometricTensorComponent (n : ℕ) (M N : Systems.{c, v, max c v r} J B τ) :
     (evaluation.{c, v, max c v r} J' O.coefficients O.coefficientTransition n).obj
         (O.pull.obj (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J)
@@ -347,25 +347,7 @@ private theorem component_hom_ext [PreservesFiniteLimits uInv]
     ((hfg Z (CartesianMonoidalCategory.fst _ _) (CartesianMonoidalCategory.snd _ _)
       z hz V a).trans (congrArg (g.val.app V) hi).symm)
 
-/-- The normalized component maps commute with horizontal restriction.
-Source: Zheng Construction 4.1 (the actual semilinear transitions); Stacks 03EL
-(the bilinear universal property).
-(blueprint: lem-coef-geometric-tensor-component-horizontal).
-
-Proof: identify the underlying sheaf of each evaluated pullback using
-O.ordinaryPullEvaluation and I.moduleUnderlying. Under these identifications,
-O.ordinaryPullTransition and O.restrictionPullback_underlying identify its
-horizontal map with inverse image of the original horizontal map. Apply the
-pure-tensor equation to the universal pair of generalized sections. Restriction
-of scalars changes only the action, so this equation also applies to the
-coefficient-restricted horizontal maps; O.coefficient_compatibility supplies the
-scalar square. Ordinary tensor evaluation is the identity on pure sections.
-Consequently both horizontal composites send the universal pair to the inverse
-image of the tensor of its two horizontal restrictions. Balanced tensor
-universality and sheafification extend the equality from these pairs to the
-whole tensor sheaf. Conjugating back gives the displayed equation of module-sheaf morphisms.
-The argument does not assume flatness of any coefficient transition, nor the
-existence of points, and also applies to zero modules and empty sites. -/
+/-- The normalized component maps commute with horizontal restriction. -/
 theorem geometricTensorComponent_horizontal [PreservesFiniteLimits uInv]
     (hp : ∀ n : ℕ, InverseTensorPure.{c, v, r} J J' uInv
       (B n) (O.coefficients n) (O.inverseImage n) (μ n))

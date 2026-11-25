@@ -19,8 +19,9 @@ import WeilConjectures.AlgebraicGeometry.AffineBasePieceTensorComparison
 /-!
 # Tensor-product presentation of an affine base piece
 
-Source: Stacks Project, Limits, proof of Tag 01ZO, the affine reduction, with
-Tags 01YX and 01YW (blueprint: lem-weil-pbc-affine-base-piece-tensor-presentation).
+## References
+
+* Stacks Project, Tags 01ZO, 01YX and 01YW
 -/
 
 @[expose] public section
@@ -31,32 +32,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Present all base changes of an affine piece by one finite type algebra map.
-
-Source: Stacks Project, Limits, proof of Tag 01ZO, affine reduction, and
-Tags 01YX and 01YW (blueprint: lem-weil-pbc-affine-base-piece-tensor-presentation).
-
-Proof: On the directed upper tail above `k`, pull back `W` along every transition
-to the initial stage. These are affine because the transitions are affine. Use
-their coordinate rings for `F`, with transition maps induced by pullback of
-sections. Restrict the limiting cone to this tail and to these base opens.
-Open pullback pasting and the limit universal property identify its limit with
-the inverse image of `W` in `c.pt`. The Spec adjunction identifies this affine
-limit with Spec of `colimit F`, compatibly with the projection to the `k`-th
-base open. Put `B = Γ(V_k)` and `C = Γ(f_k⁻¹(V_k))`. Both are affine: the
-projection to `V` is affine, and `f_k` is affine. The map `φ : B → C` induced
-by the restriction is finite type, by base change, restriction, and the affine
-criterion for local finite type. The inclusion `V_k → W_k` and its composite
-with this restriction give `aB` and `aC`, and commutativity gives the algebra
-map `φ`. For every later index, paste the original pullback squares and the
-open restriction squares to identify its restriction with the base change of
-`f_k|V_k` along `W_j → W_k`. The affine-spectrum pullback isomorphisms give
-Spec of `id ⊗ φ` on source and target. Their compatibility with the morphism
-follows by equality of both pullback projections. The same construction using
-the affine limit comparison gives the displayed arrow isomorphism at the
-limit. These constructions include empty opens, whose rings are zero rings;
-no nonemptiness of an open or quasi-separatedness of the original base is used.
--/
+/-- Present all base changes of an affine piece by one finite type algebra map
+(Stacks, Tags 01ZO, 01YX and 01YW). -/
 theorem exists_affine_base_piece_tensor_presentation
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

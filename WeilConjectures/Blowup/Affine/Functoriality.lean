@@ -27,11 +27,9 @@ pullback squares.
 ## Main results
 
 - `AlgebraicGeometry.AffineBlowup.hom_id` / `AlgebraicGeometry.AffineBlowup.hom_comp` —
-  functoriality (blueprint: `lemma:nagata-affine-blowup-restrict-cocycle`, in composition
-  form).
+  functoriality.
 - `AlgebraicGeometry.AffineBlowup.hom_toSpec` — compatibility with the structure morphisms.
 - `AlgebraicGeometry.AffineBlowup.isPullback_chart_hom` — the chart squares are pullbacks.
-
 -/
 
 @[expose] public section
@@ -55,8 +53,7 @@ lemma map_mem_reesAlgebra (φ : A →+* B) (h : I.map φ = J) (F : reesAlgebra I
   exact Ideal.mem_map_of_mem φ ((mem_reesAlgebra_iff I (F : A[X])).mp F.2 i)
 
 /-- The graded ring homomorphism `reesGrading I →+*ᵍ reesGrading J` induced by a ring
-homomorphism `φ : A →+* B` with `I.map φ = J`, given by coefficientwise application of `φ`.
-(blueprint: `def:nagata-rees-localization-map`, generalized to arbitrary ring maps) -/
+homomorphism `φ : A →+* B` with `I.map φ = J`, given by coefficientwise application of `φ`. -/
 noncomputable def reesGrading.hom (φ : A →+* B) (h : I.map φ = J) :
     reesGrading I →+*ᵍ reesGrading J where
   toRingHom :=
@@ -146,8 +143,7 @@ lemma reesGrading.irrelevant_le_map_hom (φ : A →+* B) (h : I.map φ = J) :
   exact key i hi b (by rw [Ideal.map_pow, h]; exact hb) hb
 
 /-- Functoriality of the affine blow-up: a ring homomorphism `φ : A →+* B` with
-`I.map φ = J` induces a morphism `AffineBlowup J ⟶ AffineBlowup I`.
-(blueprint: `def:nagata-affine-blowup-restriction-map`, generalized) -/
+`I.map φ = J` induces a morphism `AffineBlowup J ⟶ AffineBlowup I`. -/
 noncomputable def AffineBlowup.hom (φ : A →+* B) (h : I.map φ = J) :
     AffineBlowup J ⟶ AffineBlowup I :=
   Proj.map (reesGrading.hom φ h) (reesGrading.irrelevant_le_map_hom φ h)
@@ -160,8 +156,7 @@ lemma AffineBlowup.hom_congr {φ φ' : A →+* B} (e : φ = φ') (h : I.map φ =
     AffineBlowup.hom φ h = AffineBlowup.hom φ' (e ▸ h) := by
   subst e; rfl
 
-/-- Composition law for `AffineBlowup.hom`.
-(blueprint: `lemma:nagata-affine-blowup-restrict-cocycle`) -/
+/-- Composition law for `AffineBlowup.hom`. -/
 lemma AffineBlowup.hom_comp (φ : A →+* B) (ψ : B →+* C) (h : I.map φ = J) (h' : J.map ψ = K) :
     AffineBlowup.hom (ψ.comp φ) (by rw [← Ideal.map_map, h, h']) =
       AffineBlowup.hom ψ h' ≫ AffineBlowup.hom φ h :=
@@ -174,15 +169,13 @@ lemma AffineBlowup.hom_comp (φ : A →+* B) (ψ : B →+* C) (h : I.map φ = J)
       (reesGrading.irrelevant_le_map_hom ψ h'))
 
 /-- The degree-zero square: the degree-zero component of `reesGrading.hom φ h` intertwines the
-canonical identifications of the degree-zero subrings with the base rings.
-(blueprint: `definition-admissible-blow-up--1`) -/
+canonical identifications of the degree-zero subrings with the base rings. -/
 lemma gradeZeroRingHom_comp_reesGradingZero (φ : A →+* B) (h : I.map φ = J) :
     (reesGrading.hom φ h).gradeZeroRingHom.comp (reesGradingZero I).toRingHom =
       (reesGradingZero J).toRingHom.comp φ :=
   RingHom.ext fun a => Subtype.ext <| Subtype.ext <| by simp
 
-/-- The blow-up square over `Spec` commutes.
-(blueprint: `prop:nagata-affine-blowup-restrict`, compatibility part) -/
+/-- The blow-up square over `Spec` commutes. -/
 @[reassoc]
 lemma AffineBlowup.hom_toSpec (φ : A →+* B) (h : I.map φ = J) :
     AffineBlowup.hom φ h ≫ AffineBlowup.toSpec I =

@@ -14,8 +14,20 @@ import WeilConjectures.FieldTheory.GaloisMatrixCocycleSplit
 /-!
 # Splitting the tensor product of scalar-defect realizations
 
-Source: Stacks Project, Tag 03R7, injectivity argument, and Section 0DVG.
-(blueprint: lem-sc-brauer-scalar-defect-tensor-split).
+If two central simple algebras `A` and `B` have the same scalar-defect class, then `A ⊗ Bᵐᵒᵖ` is
+isomorphic to a matrix algebra over `K`.
+
+## Implementation details
+
+Kronecker products of the matrix lifts of `A` and of the inverse transposes of those of `B`
+realize the descent datum of `A ⊗ Bᵐᵒᵖ`, with scalar defect `c_z / c_w`. Since the two classes
+agree, this ratio is the coboundary of a locally constant scalar cochain `a`; rescaling the lifts
+by `a(g)⁻¹` gives a genuine one-cocycle, which matrix Hilbert 90 trivializes. Taking Galois
+fixed points then gives the matrix algebra over `K`.
+
+## References
+
+* [Stacks Project, Tag 03R7 and Section 0DVG](https://stacks.math.columbia.edu/tag/03R7)
 -/
 
 @[expose] public section
@@ -26,28 +38,8 @@ namespace Field
 
 open scoped TensorProduct
 
-/-- Equal scalar-defect classes split the tensor product with the opposite algebra.
-
-Proof: choose the matrix splittings and locally constant lifts supplied by the two
-scalar-defect realizations. Transpose the second splitting to identify its opposite
-with a matrix algebra, and use the inverse transpose of its lifts. The Kronecker
-product with the first lifts realizes the tensor descent datum, with scalar defect
-`c_z / c_w`. Equality of the two homogeneous cohomology classes says that `z - w`
-is a continuous coboundary. Evaluate a homogeneous one-cochain witnessing this
-boundary at `(1,g)` to obtain a locally constant scalar cochain `a(g)` with
-`c_z(g,h) / c_w(g,h) = a(g) * g(a(h)) / a(g*h)`.
-Rescale the tensor lifts by `a(g)⁻¹`; the new lifts are a genuine general-linear
-one-cocycle. Compactness of the absolute Galois group and local constancy allow
-all lifts, the scalar cochain, and the finitely many splitting coefficients to be
-handled over a common finite Galois extension. Matrix Hilbert 90, equivalently
-finite Galois descent of vector spaces, trivializes this cocycle. Conjugating the
-tensor splitting by the trivializing matrix makes its descent datum coefficientwise
-Galois action. Taking fixed points gives a K-algebra isomorphism from `A ⊗ Bᵐᵒᵖ`
-to a matrix algebra over K. Its size is the product of the two positive splitting
-sizes, hence is nonzero. No Brauer equivalence criterion is used in this step.
-Source: Stacks Project, Tag 03R7, injectivity argument; Section 0DVG for the
-homogeneous-to-inhomogeneous coboundary convention.
-(blueprint: lem-sc-brauer-scalar-defect-tensor-split). -/
+/-- If `A` and `B` have equal scalar-defect classes, then `A ⊗ Bᵐᵒᵖ` is isomorphic to the
+matrix algebra `Mₙ(K)` for some `n ≠ 0`. -/
 theorem tensor_opposite_split_of_brauerScalarDefect_eq (K : Type u) [Field K]
     (A B : CSA.{u, u} K) (x y : GaloisUnitsH2 K)
     (hx : HasBrauerScalarDefect K A x) (hy : HasBrauerScalarDefect K B y)

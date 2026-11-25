@@ -49,10 +49,8 @@ open PodTensorShiftNormalization
 attribute [local irreducible] integralOperationsRoos
 
 -- Keep sharing in the dependent coefficient-category expressions.
-/-- The right-slot source path formula, proved from its model law.
-Use the arbitrary-presentation path calculation.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: lem-pod-tensor-shift-right-paths-t5). -/
+/-- The right-slot source path formula for tensor shifts, for a signed shift satisfying its model
+law. -/
 theorem podTensorShift_rightSourcePath
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

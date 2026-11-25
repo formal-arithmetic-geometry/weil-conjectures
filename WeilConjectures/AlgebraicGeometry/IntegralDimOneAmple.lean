@@ -16,9 +16,9 @@ import WeilConjectures.AlgebraicGeometry.FindGloballyGenerated
 
 /-! # Ample invertible modules on integral curves
 
-Source: Stacks Project, Varieties, Lemma 09ND
-(varieties-lemma-dim-1-noetherian-integral-separated-has-ample).
-(blueprint: lem-sc-integral-dim-one-ample).
+## References
+
+* Stacks Project, Varieties, Lemma 09ND.
 -/
 
 @[expose] public section
@@ -32,20 +32,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- An integral Noetherian separated curve has an ample invertible module.
-Source: Stacks Project, Varieties, Lemma 09ND.
-
-Proof:
-1. Choose a finite cover by nonempty affine opens; each complement is finite
-   by `IsOpen.finite_compl_of_topologicalKrullDim_le_one`.
-2. Apply `lem-sc-find-globally-generated` to each affine open and its finite
-   complement, obtaining a globally generated invertible module and a section
-   with affine principal open equal to that open. The complement points have
-   Noetherian local rings of dimension one: they are not the generic point of
-   the integral curve, and their local dimensions are at most `dim Y = 1`.
-3. The ample criterion `lem-sc-enough-globally-generated-ample` applied to
-   these principal opens gives an ample invertible module.
-(blueprint: lem-sc-integral-dim-one-ample)
--/
+(Stacks, Tag 09ND) -/
 theorem exists_isAmple_of_integral_dim_one
     (Y : Scheme.{u}) [IsIntegral Y] [IsLocallyNoetherian Y] [CompactSpace Y]
     [Y.IsSeparated]

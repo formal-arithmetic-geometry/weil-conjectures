@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.GradedRealizationLocalGeneratorsEpi
 import WeilConjectures.AlgebraicGeometry.AffineModuleFiniteType
 /-! # Homogeneous generators give finite type on the realization
 
-Source: Stacks Project, Tag 0897, finite-type paragraph, with Tags 01SB and 01PB.
-(blueprint: lem-weil-pbc-graded-module-realization-finite-type).
+## References
+
+* [Stacks Project, Tags 0897, 01SB, 01PB]
 -/
 
 @[expose] public section
@@ -27,26 +28,7 @@ namespace AlgebraicGeometry
 
 /-- Any quasi-coherent realization compatible with a locally finite family of
 homogeneous generators is of finite type. No Noetherian or properness assumption is used.
-
-Source: Stacks Project, Tag 0897, finite-type paragraph, with Tags 01SB and 01PB.
-(blueprint: lem-weil-pbc-graded-module-realization-finite-type).
-
-Proof: Near x choose U, degrees d_i and sections s_i from hfinite. Shrink U to an
-affine neighbourhood; its inverse image under pi is affine since pi is a base change
-of a morphism between affine schemes. The sections iota_(d_i)(s_i) are sections of F
-on that inverse image. The coproduct condition means that every pushforward section
-is locally a finite sum of images of homogeneous sections. The spanning condition
-hfinite expresses each such section locally in terms of mu_(d_i)(b)(s_i), with
-coefficients in O_X. The compatibility square turns these expressions into linear
-combinations of the same finite family iota_(d_i)(s_i), now with coefficients in
-pi_* O_Y: multiply the pulled-back O_X coefficients by fB^sharp(b). Thus they generate
-pi_* F as a module over pi_* O_Y near x. Quasi-coherence and localization turn this
-local generation on the affine base into finite generation on its affine inverse
-image: the cokernel of the finite free map vanishes on the affine base cover, hence
-vanishes on the inverse image under the affine module correspondence. The affine
-finite-type correspondence gives F.IsFiniteType there. These inverse images cover Y,
-so finite type is local and gives the result. If the generating family is empty the
-same argument makes the module zero; if X is empty the covering assertion is vacuous. -/
+(Stacks, Tag 0897) -/
 theorem gradedModule_realization_isFiniteType
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     (graded : ℕ → Submodule A B)

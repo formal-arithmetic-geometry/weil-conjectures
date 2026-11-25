@@ -12,9 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalEvaluationComplexSeque
 import WeilConjectures.AlgebraicGeometry.Exact.ExactDerivedTransformation
 import WeilConjectures.AlgebraicGeometry.SixFunctors.PureMultiplicationTriangleAssembly
 
-/-! # Multiplication triangles after evaluating a pure strict reduction
-Source: diagonal tower system proof, steps (2) and (3).
-(blueprint: lem-sfb-diagonal-pure-evaluation-triangle). -/
+/-! # Multiplication triangles after evaluating a pure strict reduction -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -30,9 +28,7 @@ attribute [local irreducible] DerivedCategory.singleFunctors
 
 /-- The canonical evaluation comparison for a supplied pure strict-system isomorphism.
 Its three factors are evaluation, the exact functor's shift comparison, and its single
-comparison. No cohomology identification is chosen.
-Source: exact evaluation comparisons in diagonal tower system proof, step (3)
-(blueprint: lem-sfb-diagonal-pure-evaluation-triangle). -/
+comparison. No cohomology identification is chosen. -/
 @[irreducible] def diagonalPureEvaluationIso
     {A B : Type*} [Category A] [Abelian A] [Category B] [Abelian B]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]
@@ -50,9 +46,7 @@ Source: exact evaluation comparisons in diagonal tower system proof, step (3)
 
 /-- The multiplication-triangle and transition property, kept folded when
 specializing to concrete sheaf categories. This is a proposition containing no
-chosen data.
-Source: diagonal tower proof, steps (2) and (3)
-(blueprint: lem-sfb-diagonal-pure-evaluation-triangle). -/
+chosen data. -/
 @[irreducible] def PureEvaluationTriangle
     {A B : Type*} [Category A] [Abelian A] [Category B] [Abelian B]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]
@@ -219,27 +213,7 @@ private theorem pureEvaluationTriangle_of_resolution
 
 /-- Evaluated reduction is the cofiber of prime-power multiplication, and its
 cofiber boundaries have transition multiplier ell. This statement involves an arbitrary
-integral sheaf M; it uses no roots, Tate line, or Kummer boundary.
-
-Source: diagonal tower system proof, steps (2) and (3), the map of two-term resolutions
-with components (ell,1)
-(blueprint: lem-sfb-diagonal-pure-evaluation-triangle).
-
-Proof: choose a flat-term K-flat resolution P of M[1]. Nonzero integer multiplication
-is monic on every flat term and remains so after the exact p-adic extension.
-The quotient universal property of D.ordinary, together with the canonical equality
-Z_ell/ell^(n+1)=Z/ell^(n+1), identifies its underlying evaluated quotient with the
-integral cokernel of ell^(n+1), carrying the scalar-adjunction unit to the quotient map.
-The resulting degreewise short exact sequence gives the multiplication
-triangle. Uniqueness of pointwise left derived functors makes D's counit invertible
-on P, and the complexes equation of eta identifies the middle arrow with its quotient
-unit. Transport through the resolution and the supplied b. The last arrow is a map
-between single sheaves shifted twice, hence uniquely the shifted image of d_n by full
-faithfulness. For successive levels the map of short exact sequences is (ell,1,quotient).
-Naturality of the short-exact-sequence triangle gives d_(n+1) followed by ell equals
-the underlying transition followed by d_n. The same resolution at every level is
-essential; neither a family of unrelated triangles nor levelwise detection of derived
-morphisms is used. This applies to M=0 and to n=0 without alteration. -/
+integral sheaf M; it uses no roots, Tate line, or Kummer boundary. -/
 theorem diagonal_pure_evaluation_triangle (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]

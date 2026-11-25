@@ -12,8 +12,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-! # Transport of a constant slice presentation to internal modules
 
-Source: Stacks, Tags 03CY and 00YV; the encoding comparison in
-`lem-sfb-discrete-constant-presentation-lifting`, step 1.
+Stacks Project, Tags 03CY and 00YV.
 -/
 
 @[expose] public section
@@ -59,28 +58,8 @@ private noncomputable def free_image
 
 /-- A displayed constant presentation on a slice gives a finite free presentation of
 its internal inverse image on the underlying scheme. This is an encoding comparison;
-it makes no claim that the entries of the internal matrix descend to the condensed point.
-It applies to any condensed coefficient ring, provided the specified constant-ring
-identification on X exists.
-
-Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV; the first step of
-`lem-sfb-discrete-constant-presentation-lifting`.
-(auxiliary; not a blueprint node).
-
-Proof: reconstruct internal modules as sectionwise modules and transport to the
-coefficient-sized site. Restriction along c is an equivalence of module categories.
-Restriction from modules over the constant ring sheaf to fixed k-scalars is the
-constant-ring module equivalence. All three equivalences identify regular modules,
-finite sums and cokernels. Compare the fixed-scalar inverse image with the internal
-inverse image by conjugating the sectionwise direct-image comparison through their
-adjunctions. The coefficient isomorphism in this comparison is the pullback of c;
-it need not be scalar-normalized. Localize at U, using the weakly-etale slice-site
-equivalence and its transport through AsSmall. The resulting equivalence sends the
-internal regular module to the constant regular k-module on the slice. Thus the
-inverse image of the displayed constant finite matrix q is a morphism a between
-internal free modules of the same ranks. Equivalences and constant sheafification
-preserve its cokernel. Apply the inverse equivalence to hN to obtain the asserted
-isomorphism. Zero ranks and the empty scheme use the same finite-colimit argument. -/
+it makes no claim that the entries of the internal matrix descend to the condensed point
+(Stacks, Tags 03CY, 00YV). -/
 theorem constant_slice_internal_presentation
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

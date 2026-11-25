@@ -9,7 +9,12 @@ public import WeilConjectures.PoincareDuality.PodCompletedTensorReindex.PodCompl
 import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingStrictTensorTowersGenerators
 import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingStrictTensorTowersNaturality
 
-/-! # Strict steps in normalized completed tensor reindexing -/
+/-! # Strict steps in normalized completed tensor reindexing
+
+## References
+
+* [Stacks: Tags 07A4, 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -36,22 +41,9 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Reindexing of the strict total-tensor tower, before any derived limit.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-reindexing-strict-tensor-towers).
-
-Proof: at level n use the sectionwise tensor comparison for exact inverse image,
-then apply D.quotient to both factors. On each summand indexed by p+q=i this sends
-x tensor y to D.quotient(x) tensor D.quotient(y). The balanced relation is preserved
-by the projection-fixed coefficient map. The signed total differential commutes
-with this map because the quotient maps are chain maps and reindexing is additive.
-The reverse sectionwise comparison and inverse quotient maps give its inverse.
-The quotient-transition squares in hD make these levelwise isomorphisms commute
-with every tower transition: both orders have the same value on each tensor
-summand. This gives a strict-tower isomorphism, including the zero tower.
-For maps a,b of good representatives the same tensor calculation on each summand
-proves the displayed naturality equation. This construction uses no completion,
-no derived comparison, and no constructibility assertion. -/
+/-- Reindexing of the strict total-tensor tower, before any derived limit: an isomorphism of
+strict towers sending `x ⊗ y` to `D.quotient x ⊗ D.quotient y`, natural in maps `a`, `b` of
+good representatives. -/
 theorem podReindexingStrictTensorTowers
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

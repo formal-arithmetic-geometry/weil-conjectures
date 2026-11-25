@@ -14,8 +14,11 @@ import WeilConjectures.Algebra.Homology.MixedTensorUnderlyingHomology
 
 /-! # Universal derived cohomology comparisons for a fixed balanced tensor complex
 
-Source: Stacks Project, Tags 064L and 06Y6. The K-flat resolution is supplied explicitly.
-(blueprint: new-lem-pc-balanced-tensor-unit-model-comparison).
+The K-flat resolution of the second factor is supplied explicitly.
+
+## References
+
+* Stacks Project, Tags 064L and 06Y6.
 -/
 
 @[expose] public section
@@ -34,30 +37,7 @@ variable (B D : Type u) [CommRing B] [CommRing D] [Algebra R B]
   [HasDerivedCategory.{w} (ModuleCat.{u} R)]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
-/-- Universal model comparisons and naturality for a specified K-flat second factor.
-Source: Stacks Project, Tags 064L and 06Y6; the balanced computation and
-naturality explained by lem-pc-balanced-derived-tensor-model and
-lem-pc-derived-tensor-action-naturality.
-(blueprint: new-lem-pc-balanced-tensor-unit-model-comparison).
-
-Proof: use the quasi-isomorphism f : F -> B[0] to compute Q tensor_R^L B by
-Tot(Q tensor_R F). To compare this computation with L.derived, resolve the
-underlying R-complex of Q by P -> Q. K-flatness of F makes
-Tot(P tensor_R F) -> Tot(Q tensor_R F) a quasi-isomorphism; K-flatness of P makes
-Tot(P tensor_R F) -> Tot(P tensor_R B[0]) a quasi-isomorphism. The last complex
-is the ordinary extension of P to B. The universal counit at P is invertible by
-ModuleCat.scalarExtensionCounit_isIso_of_kFlat (P is K-flat over R). Counit
-naturality for P -> Q then identifies its image
-with L.derived(Q), giving the cohomology comparison. Do the same with
-Aq tensor_A Q and K, using the same F. Multiplication by a on Q acts on all
-these maps; naturality and L.cohomologyIso_smul make the first comparison
-A-linear. The analogous argument using K.cohomologyIso_smul makes the second
-comparison A-linear after restriction from Aq. The displayed pure-tensor formula
-for θ identifies unit followed by θ with tensoring uQ by F. Naturality of the
-resolution comparisons and uniqueness of the universal derived-counit comparison
-therefore identify its cohomology map with localizationModelMap, giving the square.
-There is no assertion about an arbitrary complex with the same cohomology as Q tensor_R F:
-the two complexes in this statement are the specified mixed total tensors. -/
+/-- Universal model comparisons and naturality for a specified K-flat second factor. -/
 theorem exists_balancedTensorUnitModelComparison (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

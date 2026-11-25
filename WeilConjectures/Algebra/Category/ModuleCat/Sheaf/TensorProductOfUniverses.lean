@@ -10,20 +10,20 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 /-!
 # Tensor product and scalar extension with independent universes
 
-Source: Stacks Project, Modules on Sites, Tag 03EK
-(blueprint: def-pur-sheaf-tensor-product).
-
 The recorded monoidal API requires the site, coefficient and module universes to coincide.
 This interface uses the very same tensor product: sectionwise `TensorProduct`, followed by
 module sheafification. Ring and module universes are independent. Scalar extension lands
-in their maximum, because its first factor is the target ring. The old specialized tensor
-and positive-power APIs remain available through the public import.
+in their maximum, because its first factor is the target ring.
 
 ## Main definitions
 
 - `siteSheafTensorRight`: sheafification of the sectionwise tensor functor.
 - `changeOfRingsOfUniverses`: sheafification of sectionwise scalar extension.
 - `changeOfRingsHomOfUniverses`: the induced map on scalar extensions.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EK
 -/
 
 @[expose] public section
@@ -60,11 +60,7 @@ local instance {X Y : Cᵒᵖ} (f : X ⟶ Y) :
   inferInstanceAs (Module (R₁.obj.obj Y) (M.val.obj Y))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The sectionwise tensor restriction exists. Source: Stacks, Tag 03EK
-(blueprint: def-pur-sheaf-tensor-product).
-Proof: send `s ⊗ m` to the tensor of the two restrictions. Additivity and the balanced
-relation follow from additivity and semilinearity of restrictions and naturality of `α`.
-The tensor universal property gives the map, linear over the source section ring. -/
+/-- The sectionwise tensor restriction exists. -/
 theorem exists_changeOfRingsMapMixedUniverses
     {C : Type u₀} [Category.{v₀} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
@@ -112,17 +108,14 @@ theorem exists_changeOfRingsMapMixedUniverses
   · intro s n
     rfl
 
-/-- Restriction on the sectionwise change of rings, characterized on pure tensors.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+/-- Restriction on the sectionwise change of rings, characterized on pure tensors. -/
 noncomputable def changeOfRingsMapOfUniverses {X Y : Cᵒᵖ} (f : X ⟶ Y) :
     (ModuleCat.extendScalars (α.hom.app X).hom).obj (M.val.obj X) ⟶
       (ModuleCat.restrictScalars (R₂.obj.map f).hom).obj
         ((ModuleCat.extendScalars (α.hom.app Y).hom).obj (M.val.obj Y)) :=
   Classical.choose (exists_changeOfRingsMapMixedUniverses α M f)
 
-/-- The restriction map acts on pure tensors by restricting both factors.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product).
-Proof: the map is chosen with exactly this formula in exists_changeOfRingsMapMixedUniverses. -/
+/-- The restriction map acts on pure tensors by restricting both factors. -/
 theorem changeOfRingsMap_tmulOfUniverses {X Y : Cᵒᵖ} (f : X ⟶ Y)
     (s : R₂.obj.obj X) (m : M.val.obj X) :
     changeOfRingsMapOfUniverses α M f (s ⊗ₜ[R₁.obj.obj X, (α.hom.app X).hom] m) =
@@ -130,10 +123,7 @@ theorem changeOfRingsMap_tmulOfUniverses {X Y : Cᵒᵖ} (f : X ⟶ Y)
   exact Classical.choose_spec (exists_changeOfRingsMapMixedUniverses α M f) s m
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Identity restriction for change of rings. Source: Stacks, Tag 03EK
-(blueprint: def-pur-sheaf-tensor-product).
-Proof: the chosen map sends `s ⊗ m` to `s ⊗ m`, since both restrictions are identities.
-The identity comparison has the same action; pure tensors generate the tensor product. -/
+/-- Identity restriction for change of rings. -/
 theorem changeOfRingsMap_idOfUniverses (X : Cᵒᵖ) :
     changeOfRingsMapOfUniverses α M (𝟙 X) =
       (ModuleCat.restrictScalarsId' ((R₂.obj ⋙ forget₂ CommRingCat RingCat).map (𝟙 X)).hom
@@ -145,11 +135,7 @@ theorem changeOfRingsMap_idOfUniverses (X : Cᵒᵖ) :
   simp
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Composition of restrictions for change of rings. Source: Stacks, Tag 03EK
-(blueprint: def-pur-sheaf-tensor-product).
-Proof: on `s ⊗ m`, both sides restrict each factor first along `f` and then along `g`.
-The ring and module presheaf composition laws identify this with restriction along `f ≫ g`.
-The scalar comparison acts identically on elements. Tensor generation gives equality. -/
+/-- Composition of restrictions for change of rings. -/
 theorem changeOfRingsMap_compOfUniverses {X Y Z : Cᵒᵖ} (f : X ⟶ Y) (g : Y ⟶ Z) :
     changeOfRingsMapOfUniverses α M (f ≫ g) = changeOfRingsMapOfUniverses α M f ≫
       (ModuleCat.restrictScalars ((R₂.obj ⋙ forget₂ CommRingCat RingCat).map f).hom).map
@@ -166,8 +152,7 @@ theorem changeOfRingsMap_compOfUniverses {X Y Z : Cᵒᵖ} (f : X ⟶ Y) (g : Y 
   rw [changeOfRingsMap_tmulOfUniverses]
   simp
 
-/-- Sectionwise change of rings with the induced restrictions, before sheafification.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+/-- Sectionwise change of rings with the induced restrictions, before sheafification. -/
 noncomputable def changeOfRingsPresheafOfUniverses : PresheafOfModules.{max u m} (R₂.obj ⋙ forget₂
   CommRingCat RingCat) where
   obj X := (ModuleCat.extendScalars (α.hom.app X).hom).obj (M.val.obj X)
@@ -176,19 +161,14 @@ noncomputable def changeOfRingsPresheafOfUniverses : PresheafOfModules.{max u m}
   map_comp f g := changeOfRingsMap_compOfUniverses α M f g
 
 /-- Change of rings of a sheaf of modules is the sheafification of sectionwise
-extension of scalars, with the target-ring action on the first tensor factor.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+extension of scalars, with the target-ring action on the first tensor factor. -/
 noncomputable def changeOfRingsOfUniverses : SheafOfModules.{max u m} ((sheafCompose J (forget₂
   CommRingCat.{u} RingCat.{u})).obj R₂) :=
   (PresheafOfModules.sheafification (𝟙 (R₂.obj ⋙ forget₂ CommRingCat RingCat))).obj
     (changeOfRingsPresheafOfUniverses α M)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The sectionwise extension of a module morphism commutes with restrictions.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product).
-Proof: on a pure tensor both composites restrict the scalar and apply the original
-module morphism to the restricted module section. Naturality of that morphism and
-linearity identify the results; pure tensors generate each section tensor product. -/
+/-- The sectionwise extension of a module morphism commutes with restrictions. -/
 theorem changeOfRingsHom_naturalityOfUniverses {N : SheafOfModules.{m} ((sheafCompose J (forget₂
   CommRingCat.{u} RingCat.{u})).obj R₁)} (a : M ⟶ N)
     {U V : Cᵒᵖ} (i : U ⟶ V) :
@@ -208,8 +188,7 @@ theorem changeOfRingsHom_naturalityOfUniverses {N : SheafOfModules.{m} ((sheafCo
   congr 1
   exact PresheafOfModules.naturality_apply a.val i m
 
-/-- Change of rings on module morphisms: sheafify the sectionwise map `id ⊗ a`.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+/-- Change of rings on module morphisms: sheafify the sectionwise map `id ⊗ a`. -/
 noncomputable def changeOfRingsHomOfUniverses {N : SheafOfModules.{m} ((sheafCompose J (forget₂
   CommRingCat.{u} RingCat.{u})).obj R₁)} (a : M ⟶ N) :
     changeOfRingsOfUniverses α M ⟶ changeOfRingsOfUniverses α N :=
@@ -233,8 +212,7 @@ local instance (M : PresheafOfModules.{m} (R ⋙ forget₂ CommRingCat RingCat))
         (M.obj Y)) :=
   inferInstanceAs (Module (R.obj Y) (M.obj Y))
 
-/-- Tensor restriction with independent ring and module universes.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+/-- Tensor restriction with independent ring and module universes. -/
 noncomputable def siteTensorRestriction
     (M N : PresheafOfModules.{m} (R ⋙ forget₂ CommRingCat RingCat))
     {X Y : Cᵒᵖ} (f : X ⟶ Y) :
@@ -248,9 +226,7 @@ noncomputable def siteTensorRestriction
       map_add' := map_add _
       map_smul' := (TensorProduct.map (M.restrictₛₗ f) (N.restrictₛₗ f)).map_smulₛₗ }
 
-/-- Tensor restrictions preserve identities.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product).
-Proof: both maps fix every pure tensor, and pure tensors generate. -/
+/-- Tensor restrictions preserve identities. -/
 theorem siteTensorRestriction_id
     (M N : PresheafOfModules.{m} (R ⋙ forget₂ CommRingCat RingCat)) (X : Cᵒᵖ) :
     siteTensorRestriction M N (𝟙 X) =
@@ -265,9 +241,7 @@ theorem siteTensorRestriction_id
   rw [M.map_id, N.map_id]
   rfl
 
-/-- Tensor restrictions preserve composition.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product).
-Proof: evaluate on pure tensors and apply the two module restriction composition laws. -/
+/-- Tensor restrictions preserve composition. -/
 theorem siteTensorRestriction_comp
     (M N : PresheafOfModules.{m} (R ⋙ forget₂ CommRingCat RingCat))
     {X Y Z : Cᵒᵖ} (f : X ⟶ Y) (g : Y ⟶ Z) :
@@ -283,8 +257,7 @@ theorem siteTensorRestriction_comp
     M.map g (M.map f x) ⊗ₜ[R.obj Z] N.map g (N.map f y)
   rw [M.map_comp_apply, N.map_comp_apply]
 
-/-- Sectionwise tensor product in arbitrary site, ring and module universes.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+/-- Sectionwise tensor product in arbitrary site, ring and module universes. -/
 noncomputable def siteTensorPresheaf
     (M N : PresheafOfModules.{m} (R ⋙ forget₂ CommRingCat RingCat)) :
     PresheafOfModules.{m} (R ⋙ forget₂ CommRingCat RingCat) where
@@ -293,9 +266,7 @@ noncomputable def siteTensorPresheaf
   map_id X := siteTensorRestriction_id M N X
   map_comp f g := siteTensorRestriction_comp M N f g
 
-/-- Tensoring a morphism in the first variable commutes with restrictions.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product).
-Proof: on pure tensors this is naturality of the morphism in the first factor. -/
+/-- Tensoring a morphism in the first variable commutes with restrictions. -/
 theorem siteTensorHom_naturality
     {M M' : PresheafOfModules.{m} (R ⋙ forget₂ CommRingCat RingCat)} (f : M ⟶ M')
     (N : PresheafOfModules.{m} (R ⋙ forget₂ CommRingCat RingCat))
@@ -314,8 +285,7 @@ theorem siteTensorHom_naturality
     M'.map i (f.app X x) ⊗ₜ[R.obj Y] N.map i y
   rw [PresheafOfModules.naturality_apply]
 
-/-- Tensor a morphism with the identity on the second factor.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+/-- Tensor a morphism with the identity on the second factor. -/
 noncomputable def siteTensorHom
     {M M' : PresheafOfModules.{m} (R ⋙ forget₂ CommRingCat RingCat)} (f : M ⟶ M')
     (N : PresheafOfModules.{m} (R ⋙ forget₂ CommRingCat RingCat)) :
@@ -324,9 +294,7 @@ noncomputable def siteTensorHom
             (LinearMap.id : N.obj X →ₗ[R.obj X] N.obj X))
   naturality i := siteTensorHom_naturality f N i
 
-/-- Tensoring with a fixed presheaf preserves identity morphisms.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product).
-Proof: the map fixes all pure tensors, hence is the identity. -/
+/-- Tensoring with a fixed presheaf preserves identity morphisms. -/
 theorem siteTensorHom_id
     (M N : PresheafOfModules.{m} (R ⋙ forget₂ CommRingCat RingCat)) :
     siteTensorHom (𝟙 M) N = 𝟙 (siteTensorPresheaf M N) := by
@@ -336,9 +304,7 @@ theorem siteTensorHom_id
   intro x y
   rfl
 
-/-- Tensoring with a fixed presheaf preserves composites.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product).
-Proof: the maps agree on pure tensors by composition in the first factor. -/
+/-- Tensoring with a fixed presheaf preserves composites. -/
 theorem siteTensorHom_comp
     {M M' M'' : PresheafOfModules.{m} (R ⋙ forget₂ CommRingCat RingCat)}
     (f : M ⟶ M') (g : M' ⟶ M'')
@@ -350,8 +316,7 @@ theorem siteTensorHom_comp
   intro x y
   rfl
 
-/-- The sectionwise tensor functor with a fixed right factor.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+/-- The sectionwise tensor functor with a fixed right factor. -/
 noncomputable def siteTensorRight
     (N : PresheafOfModules.{m} (R ⋙ forget₂ CommRingCat RingCat)) :
     PresheafOfModules.{m} (R ⋙ forget₂ CommRingCat RingCat) ⥤
@@ -361,23 +326,18 @@ noncomputable def siteTensorRight
   map_id M := siteTensorHom_id M N
   map_comp f g := siteTensorHom_comp f g N
 
-/-- The identity coefficient map is locally injective in every module universe.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product).
-Proof: its section maps are identity functions, hence injective; use the maximal sieve. -/
+/-- The identity coefficient map is locally injective in every module universe. -/
 theorem siteTensor_identity_locallyInjective {J : GrothendieckTopology C}
     (A : Sheaf J RingCat.{u}) : Presheaf.IsLocallyInjective J (𝟙 A.obj) := by
   infer_instance
 
-/-- The identity coefficient map is locally surjective in every module universe.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product).
-Proof: every section is already in the image, on the maximal covering sieve. -/
+/-- The identity coefficient map is locally surjective in every module universe. -/
 theorem siteTensor_identity_locallySurjective {J : GrothendieckTopology C}
     (A : Sheaf J RingCat.{u}) : Presheaf.IsLocallySurjective J (𝟙 A.obj) := by
   infer_instance
 
 /-- Tensoring module sheaves is forgetting, tensoring sectionwise, then sheafifying.
-This formula does not require equality of site, ring and module universes.
-Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+This formula does not require equality of site, ring and module universes. -/
 noncomputable def siteSheafTensorRight {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
     [J.WEqualsLocallyBijective AddCommGrpCat.{m}] [HasWeakSheafify J AddCommGrpCat.{m}]

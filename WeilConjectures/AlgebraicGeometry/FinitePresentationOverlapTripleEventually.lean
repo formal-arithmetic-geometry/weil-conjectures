@@ -17,8 +17,10 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationOverlapTripleTranspor
 
 /-! # Persistent eventual triple overlap equation
 
-Source: Stacks Project, Tags 01ZR and 05N7.
-(blueprint: lem-pc-fp-overlap-triple-eventually). -/
+## References
+
+* Stacks Project, Tags 01ZR and 05N7.
+-/
 
 @[expose] public section
 
@@ -31,30 +33,7 @@ namespace AlgebraicGeometry
 set_option linter.unusedVariables false in
 /-- The composition defect of a single triple overlap vanishes eventually, and remains
 zero at every later stage.
-Source: Stacks Project, Tag 01ZR (3), finite-type zero-map descent.
-(blueprint: lem-pc-fp-overlap-triple-eventually).
-
-Proof: On the universal threefold overlap at k subtract T13 from T12 composed with T23. Choose the
-usual iterated pullback at k. The source and target are pullbacks of the prescribed finitely
-presented quasi-coherent modules,
-up to the supplied component isomorphism. The source is therefore of finite type.
-The triple overlap is quasi-compact over Spec(R_k): it is the intersection
-of three quasi-compact open charts in a quasi-separated scheme. The identity-base-change
-comparison identifies this defect with a
-map to which finitePresentation_zero_map_descent applies. Naturality of transitions,
-the pullback composition comparisons, and limit coherence show that its limit
-pullback is zero. Zero-map descent gives l. At any m above l the defect is still
-zero since pullback is additive. The canonical chart refinement maps compose,
-by the pullback universal property, and pseudofunctor associativity identifies
-this pullback defect with the composition defect of the prescribed T'.
-At m the resulting iterated pullback is a universal threefold overlap.
-Any supplied sq and sq₃ are uniquely isomorphic to this overlap compatibly with
-all three chart projections. Apply transition naturality along this isomorphism;
-the pseudofunctor comparison maps are isomorphisms, so cancellation transports
-the composition equality to the supplied universal test. Thus the same stage
-works for every choice of sq and sq₃, and the displayed equation holds. This also handles zero
-modules and empty charts;
-the theorem is only invoked for three actual cover indices. -/
+(Stacks, Tag 01ZR) -/
 theorem finitePresentation_overlap_triple_eventually
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

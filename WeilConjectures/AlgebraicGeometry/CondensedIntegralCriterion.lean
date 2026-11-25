@@ -22,8 +22,17 @@ import WeilConjectures.AlgebraicGeometry.Integral.IntegralPointComplexHomology
 
 /-! # The four-way condensed integral constructibility criterion
 
-Source: current blueprint, sec-proetale-coefficients/sk-prop-integral-criterion,
-statement and all four proof paragraphs (blueprint: lem-fix-condensed-integral-criterion).
+For a Noetherian scheme `X` and an object `K` of the derived category of integral pro-étale
+coefficient modules on `X`, the following are equivalent: `K` is bounded constructible; `K` is
+derived complete with bounded constructible reduction; `K` is locally, on the strata of a
+stratification, the pullback of a bounded complex of finite free modules over the condensed
+integer ring on the point; `K` is bounded constructible of finite Tor amplitude.
+
+## Main results
+
+- `AlgebraicGeometry.ProEtale.condensed_integral_criterion`
+
+## Implementation details
 
 All categories and tensors are ordinary unbounded internal-module derived categories.
 A finite free module over the condensed integer ring on the point is a finite sum of
@@ -32,7 +41,9 @@ one-point profinite set, namely the scalar ring O_E. Thus a bounded complex of s
 modules is precisely the continuous scalar realization of a bounded finite free
 O_E-complex. Pulling it from the point gives B_U tensor over constant O_E with that
 scalar complex. The matrices are chosen before the pullback to U, excluding arbitrary
-B_U-valued matrices. This uses the existing finite-free and pullback constructions.
+B_U-valued matrices. The realization functor `condensedIntegralCriterionRealization` gets its
+additive and exact structure from the finite-limit and left-adjoint properties of the inverse
+image from the point.
 -/
 
 @[expose] public section
@@ -48,10 +59,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Canonical scalar-complex realization on a chart: pull back the finite free point
-complex termwise and localize. The additive and exact structures are supplied by the
-existing finite-limit and left-adjoint properties of the inverse image from the point.
-Source: current blueprint proposition-integral-constructibility-criterion, condition (3)
-(blueprint: lem-fix-condensed-integral-criterion). -/
+complex termwise and localize. -/
 noncomputable def condensedIntegralCriterionRealization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :
@@ -258,27 +266,10 @@ private theorem boundedConstructible_of_stratified_point_complexes
     ⟨s, (DerivedCategory.isLE_iff K s).mpr (fun q hq ↦ hz q (Or.inr hq))⟩⟩
 
 -- The explicit comparison types contain the concrete coefficient-category instances.
-/-- The four conditions of the integral criterion are equivalent, including torsion
-scalar models, without a dimension bound or invertibility of the residue characteristic.
-The third entry uses a finite constructible locally closed stratification and the actual
-derived restriction along the composite chart-to-stratum-to-X morphism. Its point complex
-is bounded termwise finite free; its scalar matrices and bounds can depend on the chart.
-Source: current blueprint proposition-integral-constructibility-criterion, conditions (1)--(4)
-(blueprint: lem-fix-condensed-integral-criterion).
-
-Proof, following the updated node:
-1. The internal forward criterion gives completeness and constructible first reduction.
-2. Integral local structure gives the stratification, covers and finite free point
-   complexes. A reflexive comparison identifies their realization with the definition above.
-3. Integral point-complex homology is finitely presented. Exact pullback, the derived
-   homology comparison and homology of Q identify its chart realization with restricted
-   cohomology. These models give constructibility in each degree.
-4. Finite affine refinements of the stratum covers give common lower and upper bounds.
-   Exact restriction and Noetherian stratum detection give global cohomological vanishing
-   outside those bounds, hence boundedness. Finite ranges also handle empty index types.
-5. The integral residue criterion identifies bounded constructibility with its intersection
-   with finite Tor amplitude. The reverse implication is projection. Combine the five
-   implications with tfae_finish. -/
+/-- The four conditions of the integral criterion are equivalent: bounded constructibility,
+derived completeness with bounded constructible reduction, being locally on the strata of a
+stratification the realization of a bounded finite free point complex, and bounded
+constructibility with finite Tor amplitude. -/
 theorem condensed_integral_criterion
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

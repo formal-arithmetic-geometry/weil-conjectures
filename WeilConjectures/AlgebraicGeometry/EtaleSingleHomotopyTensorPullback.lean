@@ -75,18 +75,8 @@ private lemma singleCochainTensorIso_pullback
     CochainComplex.ιTensorObj_whiskerLeft_f]
 
 /-- The single/termwise-pullback comparison preserves the tensor comparison after
-passing to the homotopy category. No flatness hypothesis is required.
-Source: Stacks, Cohomology on Sites, Tags 06YU and 07A4, termwise tensor comparison.
-(auxiliary; not a blueprint node).
-Proof: precompose the cochain equation with the inverse tensorator and the inverse
-single/termwise comparison, and postcompose with the inverse target tensorator.
-Morphisms from a single complex are determined in degree zero. The inverse single
-tensorator in that degree is the (0,0) tensor inclusion; the defining summand
-identity for mapBifunctorComparison gives the ordinary oplax comparison of U.
-The single/termwise comparison has identity degree-zero components, so naturality
-of the tensor inclusion proves the equation. Apply the homotopy quotient. Its
-tensorator is the identity, its functoriality preserves composition and tensor
-morphisms, and its induced oplax comparison is the image of the cochain one. -/
+passing to the homotopy category. No flatness hypothesis is required (Stacks, Tags 06YU and 07A4).
+-/
 theorem singleHomotopyTensorIso_pullback
     (U : C ⥤ D) [U.Additive] [U.Monoidal] [U.IsLeftAdjoint]
     (L M : C) :

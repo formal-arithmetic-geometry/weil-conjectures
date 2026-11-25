@@ -328,21 +328,8 @@ namespace AlgebraicGeometry.ProEtale
 open CategoryTheory Limits
 attribute [local instance] Mod.isGrothendieckAbelian
 
-/-- Internal Hom from a pro-etale locally finite free module preserves small colimits.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), finite locally free calculation.
-(auxiliary; not a blueprint node)
-
-Proof: pullback along a weakly etale morphism commutes with internal Hom. This is
-proved by restriction to the localized site, where internal Hom is computed locally,
-and by comparison of the two right adjoints of module tensor. Each pullback on
-module objects preserves colimits, as the underlying sheaf pullback does and the
-module forgetful functor creates and reflects them. On a covering trivializing P,
-internal Hom is a finite power of the identity, naturally in the input module.
-Finite powers are finite coproducts, which preserve every small colimit. Thus every
-pullback of the canonical colimit comparison is invertible. Covering restrictions
-jointly reflect isomorphisms, first for underlying sheaves and then for module
-objects. The original comparison is therefore invertible. This also treats rank
-zero and empty schemes. -/
+/-- Internal Hom from a pro-etale locally finite free module preserves small colimits
+(Hemo–Richarz–Scholbach, Lemma 5.3(2)). -/
 theorem condensed_locally_free_ihom_preservesColimits {X : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)

@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalCompleteScalarRes
 import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalCompletedDataAssembly
 
 /-! # The completed part of the diagonal limit
-
-Source: the diagonal tower limit proof, paragraph (3).
-(blueprint: lem-sfb-diagonal-limit-completed-data).
 -/
 
 @[expose] public noncomputable section
@@ -25,12 +22,7 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The completed part of the normalized diagonal limit, from the endpoint
-and finite reduction calculations. Source: diagonal tower limit, paragraph (3)
-(blueprint: lem-sfb-diagonal-limit-completed-data).
-Proof: use the endpoint theorem to identify both ordinary and derived limits and
-to obtain completeness. Existing complete-scalar restriction gives a hom-set
-bijection; the categorical assembly theorem lifts the boundary and proves
-uniqueness. The finite-reduction theorem supplies its normalized finite equations. -/
+and finite reduction calculations. -/
 theorem diagonal_limit_completed_data (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ)
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

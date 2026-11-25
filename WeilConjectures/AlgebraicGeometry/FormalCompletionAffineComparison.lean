@@ -24,8 +24,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Affine comparison of the completed arrows
 
-Source: Stacks Project, Lemma 0881, affine identification in its proof, and Lemma 087W.
-(blueprint: lem-weil-pbc-formal-completion-affine-comparison).
+## References
+
+* Stacks Project, Tags 0881 and 087W
 -/
 
 @[expose] public section
@@ -102,38 +103,8 @@ private theorem coherent_affine_sections_shortExact (X : Scheme.{u}) [IsNoetheri
 set_option backward.isDefEq.respectTransparency false in
 /-- The restricted completed arrows identify with adic completions of an original
 short exact module sequence. This is a comparison statement: it asserts neither
-injectivity nor exactness of the completed maps.
-
-Source: Stacks Project, Lemma 0881, the affine identification in its proof;
-Lemma 087W; Algebra, Lemma 00MB (2) supplies the subsequent exactness argument.
-(blueprint: lem-weil-pbc-formal-completion-affine-comparison).
-
-Proof:
-1. Take A to be the ring of sections on U, and J the sections of I on U. The affine
-open of a Noetherian scheme has a Noetherian ring of sections. Restrict S and take
-sections. The coherent inclusion preserves kernels and cokernels, open restriction
-is exact, and affine sections on quasi-coherent modules are exact. Thus the resulting
-module short complex M is short exact. Coherence gives finite sections, in particular
-Module.Finite A M.X₂.
-2. Identify U.toScheme with Spec A by its canonical affine isomorphism. Transport
-formal systems along this isomorphism and use the equivalence of Lemma 087W. Compose
-its functor with the finite-module inclusion and restriction of scalars from the
-completed ring to A, obtaining F. Each constituent preserves zero morphisms.
-The equivalence and full inclusion reflect limits. Scalar restriction creates limits
-and reflects isomorphisms, hence reflects limits. Their composite therefore reflects
-limits of parallel pairs, without any assertion that formal kernels are termwise.
-3. Open restriction commutes with ideal products and their positive powers, and with
-quotient cokernels. Affine sections identify these quotients with Mᵢ/J^(n+1)Mᵢ and
-identify the induced maps with reductions of M.f and M.g. The equality hρ identifies
-these very systems with the underlying systems of V.
-4. The natural limiting cones in the affine equivalence identify F.obj V.Xᵢ with
-AdicCompletion J M.Xᵢ. Mathlib indexes all nonnegative powers; deleting the initial
-zero quotient is cofinal and gives the same limit. Uniqueness of the limit comparison
-gives A-linear equivalences eᵢ. Naturality of the cones, checked on every quotient
-projection, gives the two displayed equations on arrows.
-For J = 0 these are the original modules; for J = A all completions are zero.
-Empty affine opens give the zero ring, and zero modules cause no exceptional case.
--/
+injectivity nor exactness of the completed maps
+(Stacks, Tag 0881; Tag 087W). -/
 theorem formalCompletion_affine_comparison (X : Scheme.{u}) [IsNoetherian X]
     (I : X.IdealSheafData) (h : (completion X I).Additive)
     (U : X.Opens) [IsNoetherian U.toScheme] (hU : IsAffineOpen U)

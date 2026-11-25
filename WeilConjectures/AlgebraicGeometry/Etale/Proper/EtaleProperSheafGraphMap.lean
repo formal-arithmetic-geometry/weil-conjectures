@@ -13,7 +13,13 @@ import all WeilConjectures.AlgebraicGeometry.Cartesian.CartesianSumMateSheafNorm
 import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedProperOpenPastingSupplement
 import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
 
-/-! # The ordinary sheaf graph map for a proper and etale factorization -/
+/-! # The ordinary sheaf graph map for a proper and etale factorization
+
+## References
+
+* Stacks Project, Tags 0F4L, 0F7B
+* SGA 4, Exposé XVII, 6.2.11
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -354,22 +360,7 @@ private theorem properSheaf_graph_map_aux
   simp only [a, Functor.map_comp, Category.assoc]
   rfl
 
-/-- The normalized proper-support map transposes to the ordinary clopen-graph map.
-Source: Stacks Project, Tags 0F7B and 0F4L; SGA 4 XVII 6.2.11.
-(blueprint: lem-pur-proper-sheaf-graph-map).
-
-Proof in words: factor q_* through the direct image of its proper clopen graph,
-identify that direct image with graph extension by zero, and apply the Cartesian
-etale sum mate followed by the canonical composition of open and etale extension.
-The comparison maps commute with this composition: after transposing, their unit
-identities and the conjugate direct-image composition identity reduce the claim
-to the identity of F. Cartesian sum mate normalization and direct-image
-associativity now give the required normalization of the constructed map.
-Extension by zero into direct image is monic, so hτ identifies τ with this map.
-Finally the unit identity for the Cartesian sum mate computes its transpose,
-and left-adjoint uniqueness identifies the remaining unit with open extension
-base change. These categorical identities also cover empty graphs and zero
-coefficients. -/
+/-- The normalized proper-support map transposes to the ordinary clopen-graph map. -/
 theorem properSheaf_graph_map
     (A : Type (u + 1)) [CommRing A]
     {W V Y : Scheme.{u}} (q : W ⟶ V) [IsProper q]

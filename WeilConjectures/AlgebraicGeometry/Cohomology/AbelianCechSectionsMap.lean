@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechComparison
 
 /-! # Section complexes of injective resolutions are functorial
 
-Source: Stacks Project, Tags 01EQ and 01FD.
-(blueprint: def-pc-abelian-cech-sections-map)
+## References
+
+* Stacks Project, Tags 01EQ, 01FD
 -/
 
 @[expose] public section
@@ -21,9 +22,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
-/-- Apply global sections degreewise to a resolution cochain map.
-Source: Stacks Project, Tag 01EQ, section complexes.
-(blueprint: def-pc-abelian-cech-sections-map) -/
+/-- Apply global sections degreewise to a resolution cochain map. -/
 noncomputable def abelianCechSectionsMap
     {X : Scheme.{u}} {F G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}
     {I : InjectiveResolution F} {J : InjectiveResolution G}

@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOpera
 
 /-! # Scalar balance of external cup products
 
-Source: Stacks Project, Varieties, Tag 0BED; Cohomology, Tag 01F7.
-(blueprint: lem-sc-external-cup-scalar-balance).
+## References
+
+* Stacks Project, Tags 0BED and 01F7
 -/
 
 @[expose] public section
@@ -98,17 +99,8 @@ private theorem cup_balance (f : X ⟶ Spec (CommRingCat.of k))
     (Abelian.Ext.mk₀ (scalarTensorCoefficient f F G)) (add_zero (p + q)))
       (ext_tensor_balance _ _ r)
 
-/-- A scalar may be moved between the two arguments of an external cup product.
-Source: Stacks Project, Varieties, Tag 0BED; Cohomology, Tag 01F7.
-(blueprint: lem-sc-external-cup-scalar-balance).
-
-Proof: The cohomology-to-Ext comparison is k-linear. Inverse image is k-linear because
-its right adjoint is sectionwise precomposition, hence linear. Exact-functor transport
-on Ext and Yoneda composition commute with scalars, so both projection pullbacks are
-linear. Tensoring sheaves of k-vector spaces is linear in morphisms. The displayed
-Yoneda formula for the cup product is thus linear in each input; either scalar gives
-scalar multiplication on the same composite. Apply injectivity of the Ext comparison
-to transport this equality back, then substitute the two projection pullbacks. -/
+/-- A scalar may be moved between the two arguments of an external cup product
+(Stacks, Tags 0BED and 01F7). -/
 theorem external_cup_scalar_balance (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) (F : X.Modules) (G : Y.Modules)
     (p q : ℕ) (r : k) (a : scalarCohomology f F p) (b : scalarCohomology g G q) :

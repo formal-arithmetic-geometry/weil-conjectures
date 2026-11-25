@@ -28,7 +28,7 @@ of `K`. An invariant of `Mᴷ` under `τ` is invariant under `G`, as every open 
 `G → M`, by summation along the powers of `τ`; this computes `H¹` through the embedding of `M`
 into its coinduced module, and shows the vanishing of `H²`.
 
-The case `G = ℤ_ℓ`, `χ = id`, `K = 1` is blueprint `lem-exc-procyclic-two-term`.
+The case `G = ℤ_ℓ`, `χ = id`, `K = 1` is treated separately at the end of the file.
 
 ## Main definitions and statements
 
@@ -67,8 +67,7 @@ section averaging
 /-- **Exactness of invariants under a subgroup with finite quotients prime to `ℓ`.** Let `K` be
 a subgroup of the compact group `G` such that `[K : K ∩ U]` is prime to `ℓ` for every open
 subgroup `U`. Then `K`-invariant elements of an `ℓ`-primary discrete module lift along
-surjections to `K`-invariant elements: average an arbitrary lift over the finite quotient
-`K / (K ∩ U)` by which it is acted upon. -/
+surjections to `K`-invariant elements. -/
 lemma exists_fixed_lift {ℓ : ℕ} [Fact ℓ.Prime] (K : Subgroup G)
     (hK : ∀ U : Subgroup G, IsOpen (U : Set G) → ¬ ℓ ∣ U.relIndex K)
     {Y Z : DiscreteModule.{w} G} (p : Y ⟶ Z) (hp : Function.Surjective p.hom.hom.hom)
@@ -183,9 +182,7 @@ lemma eq_top_of_le {U : Subgroup G} (hU : IsOpen (U : Set G)) (hK : χ.toMonoidH
 
 /-- **Summation along `τ`.** Let `f : G → A` be a smooth function invariant under right
 translation by `ker χ`, with `ℓ`-primary values. Then `f = (τ - 1) h` for a smooth function `h`
-invariant under right translation by `ker χ`: put `h x = ∑_{i < a(x)} f(τ ^ i)`, where `a(x)`
-is the residue of `χ x` modulo `ℓ ^ N` for `N` large; the periodicity of `f(τ ^ i)` and the
-`ℓ`-primary values make the full sum over a period vanish. -/
+invariant under right translation by `ker χ`. -/
 lemma exists_mul_sub_eq {A : Type*} [AddCommGroup A] (f : G → A)
     (hf : IsOpen (rightStab G f : Set G)) (hfK : χ.toMonoidHom.ker ≤ rightStab G f)
     (hA : ∀ x, ∃ j : ℕ, ℓ ^ j • f x = 0) :
@@ -615,16 +612,8 @@ variable {ℓ} (M : DiscreteModule.{w} (Multiplicative ℤ_[ℓ]))
 noncomputable abbrev padicIntTauSubOne : M.obj.V →+ M.obj.V :=
   (M.obj.ρ (.ofAdd 1)).asHom.hom - AddMonoidHom.id _
 
-/-- Blueprint `lem-exc-procyclic-two-term`: A two-term computation for a procyclic group,
-vanishing part.
-
-Let `M` be an `ℓ`-primary (e.g. killed by `ℓ ^ s`) discrete continuous module over
-`G = ℤ_ℓ` (written multiplicatively), with topological generator `τ = 1`. Its continuous
-cohomology is computed by the two-term complex `[M --τ-1--> M]` in degrees `0, 1`:
-`H⁰(G, M) = ker(τ - 1)` (`DiscreteModule.HZeroPadicIntAddEquiv`),
-`H¹(G, M) ≃ coker(τ - 1)` (`DiscreteModule.HOnePadicIntAddEquiv`), and `Hᵠ(G, M) = 0` for
-`q ≥ 2` (this statement). This is the case `χ = id` of
-`DiscreteModule.IsEllAdicQuotient.subsingleton_H`. -/
+/-- For an `ℓ`-primary discrete module `M` over `ℤ_ℓ` (written multiplicatively),
+`Hᵠ(ℤ_ℓ, M) = 0` for every `q ≥ 2`. -/
 theorem subsingleton_H_padicInt (hM : IsPrimary ℓ M) {q : ℕ} (hq : 2 ≤ q) :
     Subsingleton (H (Multiplicative ℤ_[ℓ]) M q) :=
   (isEllAdicQuotient_id ℓ).subsingleton_H M hM hq
@@ -634,8 +623,8 @@ lemma mem_ker_id_iff {k : Multiplicative ℤ_[ℓ]} :
     k ∈ (ContinuousMonoidHom.id (Multiplicative ℤ_[ℓ])).toMonoidHom.ker ↔ k = 1 := by
   simp [MonoidHom.mem_ker]
 
-/-- Blueprint `lem-exc-procyclic-two-term`: A two-term computation for a procyclic group,
-degree zero: `H⁰(ℤ_ℓ, M) = ker(τ - 1)`. -/
+/-- For a discrete `ℤ_ℓ`-module `M`, `H⁰(ℤ_ℓ, M) = ker(τ - 1)`, where `τ = 1` is the
+topological generator. -/
 noncomputable def HZeroPadicIntAddEquiv :
     H (Multiplicative ℤ_[ℓ]) M 0 ≃+ (padicIntTauSubOne M).ker :=
   (H_zero_addEquiv M).trans
@@ -657,8 +646,8 @@ noncomputable def fixedAddSubgroupIdAddEquiv :
   right_inv _ := rfl
   map_add' _ _ := rfl
 
-/-- Blueprint `lem-exc-procyclic-two-term`: A two-term computation for a procyclic group,
-degree one: `H¹(ℤ_ℓ, M) ≃ M / (τ - 1) M` for `ℓ`-primary `M`. -/
+/-- For an `ℓ`-primary discrete `ℤ_ℓ`-module `M`, `H¹(ℤ_ℓ, M) ≃ M / (τ - 1) M`, where `τ = 1`
+is the topological generator. -/
 noncomputable def HOnePadicIntAddEquiv (hM : IsPrimary ℓ M) :
     H (Multiplicative ℤ_[ℓ]) M 1 ≃+ M.obj.V ⧸ (padicIntTauSubOne M).range :=
   ((isEllAdicQuotient_id ℓ).HOneAddEquiv hM).trans <|

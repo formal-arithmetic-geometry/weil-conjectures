@@ -13,8 +13,13 @@ import WeilConjectures.Algebra.Homology.AffineScalarLocalizedTensorSquare
 
 /-! # AffineLocalizedTensorStalkSquare
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-localized-tensor-stalk-square). -/
+## References
+
+* Stacks Project, Tag 0DJ8
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 01HV
+* Stacks Project, Tag 01I9
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -30,24 +35,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 set_option linter.unusedVariables false in
-/-- The algebraic localization square before ordinary pullback target coordinates.
-Source: Stacks Project, Tag 0DJ8, displayed affine localization identity;
-Tags 06Y6, 01HV and 01I9.
-(blueprint: lem-pc-affine-localized-tensor-stalk-square).
-
-Proof: exists_affineStalkScalarExtensionCoordinates supplies a chain isomorphism
-chi from scalar extension of C to the stalk of tilde C, its germ formula, and
-additive source coordinates e(U), natural for the map a0 into ordinary homology.
-Compose chi with the supplied tau. Its nested pure-tensor formula follows from
-the two germ formulas. Apply exists_affineScalarLocalizedTensorSquare to this
-algebraic chain isomorphism, obtaining the source isomorphism eU and the
-algebraic cohomology square. Define lU as e(U) followed by the additive equivalence
-of eU. Substitute the exact stalk homology naturality formula, and use
-homologyMap_comp to identify homology(chi followed by tau). Evaluation of the
-algebraic square at e(U)(x) gives the required equation. The scalar-extension
-coordinate argument is proved; the algebraic model-localization square is a
-separate named statement. The argument works for zero complexes and identity
-localizations; a zero fourth ring supplies no prime. -/
+/-- The algebraic localization square before ordinary pullback target coordinates. -/
 theorem exists_affineLocalizedTensorStalkSquare
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']

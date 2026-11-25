@@ -15,8 +15,9 @@ import Mathlib.Algebra.Homology.Functor
 
 /-! # Vertical homology of the affine-open Čech resolution
 
-Source: Stacks Project, Tags 03AZ and 03P2.
-(blueprint: lem-sc-etale-affine-open-cech-resolution-columns)
+## References
+
+* Stacks Project, Tags 03AZ and 03P2
 -/
 
 @[expose] public section
@@ -81,28 +82,7 @@ private theorem cechResolution_columnIso (X : Scheme.{u})
 
 /-- The bottom vertical homology is the sections Čech complex and all positive
 vertical homology rows of the affine-open resolution are zero.
-
-Source: Stacks Project, Tag 03AZ, computation of the vertical cohomology, and
-Tag 03P2, separated-case proof.
-(blueprint: lem-sc-etale-affine-open-cech-resolution-columns)
-
-Proof: In horizontal degree p the vertical complex is the product, over tuples
-of p+1 opens, of the resolution evaluated at i of their categorical product.
-These products are nonempty intersections of opens. The equality hi identifies
-the underlying schemes of their images with the open subschemes of these
-intersections. Iterating IsAffineOpen.inf proves affineness because X is
-separated. The injective-resolution formula for rightDerived identifies the
-positive homology of each evaluated resolution with the corresponding derived
-evaluation of G, zero by hvan. Products of abelian groups are exact, so homology
-commutes with these products: kernels are componentwise and choice supplies
-componentwise preimages for the images. Thus every term of each positive
-vertical-homology row is zero. In degree zero, left exactness of sheaf evaluation
-identifies vertical homology with evaluation of G, naturally for restriction
-maps. Those natural identifications commute with product projections and hence
-with the cofaces and their alternating sums, giving the bottom-row complex
-isomorphism. No covering hypothesis, global cohomology or total complex is used.
-If the family is empty, all tuple products are indexed by the empty set and are
-zero. Repeated opens and empty intersections cause no exception. -/
+(Stacks, Tags 03AZ and 03P2) -/
 theorem etale_affineOpenCech_resolution_columns
     (X : Scheme.{u}) [X.IsSeparated]
     (i : X.Opens ⥤ X.Etale)

@@ -15,7 +15,17 @@ import WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientRealizationCompar
 This isolates the construction of the completed-operation model and all its
 comparison, substitution, and structural laws. The tensor model and canonical
 normalization remain supplied by `PodCompletedTensorReindex.Laws`.
-(blueprint: lem-pod-reindexing-tensor-substitution-core)
+
+## Implementation details
+
+The construction follows the normalized quotient/Roos presentation: it uses the specified
+calculus, completion and pullback data from `D`, transports the canonical closed tensor
+realization to the two integral completed tensors, and proves the primitive comparison,
+substitution and structural laws by the whole-system counit and expression induction.
+
+## References
+
+* [Stacks, Tags 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -29,16 +39,10 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The fixed-model part of normalized reindexing substitution.
-
-The construction follows the normalized quotient/Roos presentation: use the
-specified calculus, completion and pullback data from `D`, transport the
-canonical closed tensor realization to the two integral completed tensors, and
-prove the primitive comparison, substitution, and structural laws by the
-whole-system counit and expression induction. The two tensor-normalization
-fields are deliberately omitted and are supplied by the tensor laws of `T`.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-reindexing-tensor-substitution-core). -/
+/-- The fixed-model part of normalized reindexing substitution: a completed-operation model with
+its tensor realizations, its comparisons with the primitives of `D`, and the comparison,
+substitution and structural laws. It omits the two tensor-normalization fields, which are
+supplied by the tensor laws of `T`. -/
 structure PodReindexingTensorSubstitutionCoreData
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -72,14 +76,8 @@ structure PodReindexingTensorSubstitutionCoreData
 
 -- Preserve the published names of the unused tensor law and existential witness.
 set_option linter.unusedVariables false in
-/-- Core normalized model construction.
-
-The proof is the construction described in the declaration above. Its remaining
-work is strictly below `PodReindexSubstitution`: it constructs the fixed model,
-its realization identifications and all three expression laws, while leaving the
-already supplied tensor `Model` and `Canonical` assertions to the caller.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-reindexing-tensor-substitution-core). -/
+/-- Every lawful normalized completion and tensor reindexing admits core substitution data
+`PodReindexingTensorSubstitutionCoreData`. -/
 theorem podReindexingTensorSubstitutionCore
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

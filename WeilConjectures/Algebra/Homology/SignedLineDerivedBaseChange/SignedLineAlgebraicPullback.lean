@@ -14,7 +14,12 @@ public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.CategoryTheory.Sites.Whiskering
 public import Mathlib.CategoryTheory.Sites.Equivalence
 
-/-! # The algebraic lift determined by pullback units -/
+/-! # The algebraic lift determined by pullback units
+
+## References
+
+* Stacks Project, Tag 03D2
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -41,15 +46,7 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   {R : Sheaf J CommRingCat.{max u v w}}
   {S : Sheaf K CommRingCat.{max u v w}}
 
-/-- Unit-preserving presentations make the existing pullback an algebraic inverse image.
-Source: Stacks Project, Modules on Sites, Tag 03D2.
-(blueprint: lem-pur-signed-line-algebraic-pullback)
-Proof: use the ring presentation and the natural module presentation for the underlying
-isomorphisms. Ring addition and multiplication and module addition and scalar multiplication
-are maps of sheaves of sets. Their compatibility on source units follows from the ring-map
-and module-unit laws. The presentation adjunction tests equality on those units, so these
-operations preserve every generalized graph. Zero follows from z = z + z by cancellation;
-the constant-one graph follows by the same unit test. No choice of algebraic lift is used. -/
+/-- Unit-preserving presentations make the existing pullback an algebraic inverse image. -/
 theorem algebraic_pullback_of_presentations
     (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶
       (U.sheafPushforwardContinuous RingCat J K).obj

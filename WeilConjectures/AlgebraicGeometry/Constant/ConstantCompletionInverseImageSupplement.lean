@@ -563,8 +563,10 @@ public import WeilConjectures.AlgebraicGeometry.ConstantCompletionInverseImage
 Tower restriction, derived limit restriction, inverse-image data and ringed pullbacks.
 
 Part of the split of `WeilConjectures.SixFunctors.Supporting.ConstantCompletionEquivalence`.
-Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
-(blueprint: lem-weil-pbc-constant-completion-equivalence).
+
+## References
+
+* Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY, 0940, 03EK and 0A07.
 -/
 
 @[expose] public noncomputable section
@@ -595,8 +597,7 @@ attribute [local irreducible] quotientPresentation
 
 variable {J A I}
 
-/-- The exact levelwise restriction comparison on strict tower complexes.
-Source: Stacks 0940 (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
+/-- The exact levelwise restriction comparison on strict tower complexes. -/
 def tresFactors {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     (tres φ).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ TQ R ≅ TQ B ⋙ tdres φ :=
   letI := HasDerivedCategory.standard (ℕᵒᵖ ⥤ Mod R)
@@ -625,11 +626,7 @@ end
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Ordinary inverse limits commute with scalar restriction by their coordinate maps.
-Source: Stacks 0940 (blueprint: lem-weil-pbc-constant-completion-equivalence).
-Proof: module restriction preserves limits, computed on underlying additive sheaves.
-The limit comparison is invertible degreewise and commutes with differentials. Its
-coordinate equations determine it uniquely, so this is a canonical chain isomorphism. -/
+/-- Ordinary inverse limits commute with scalar restriction by their coordinate maps. -/
 theorem limitRestriction_existsUnique {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     ∃! e : ordinaryLimit B ⋙ (res φ).mapHomologicalComplex (ComplexShape.up ℤ) ≅
         (tres φ).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ ordinaryLimit R,
@@ -691,8 +688,7 @@ theorem limitRestriction_existsUnique {R B : Sheaf J CommRingCat.{u}} (φ : R �
   intro n
   exact (hg P q n.unop).trans (he P q n.unop).symm
 
-/-- The ordinary limit comparison fixed by its actual projections. Source: Stacks 0940
-(blueprint: lem-weil-pbc-constant-completion-equivalence). -/
+/-- The ordinary limit comparison fixed by its actual projections. -/
 def limitRestriction {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     ordinaryLimit B ⋙ (res φ).mapHomologicalComplex (ComplexShape.up ℤ) ≅
       (tres φ).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ ordinaryLimit R :=
@@ -721,8 +717,7 @@ private theorem extensionTensorComponent_pure {R B : Sheaf J CommRingCat.{u}}
 
 attribute [irreducible] extensionTensorComponent
 
-/-- The pure-tensor comparison is natural in the module argument.
-Source: Stacks 03EK; the component is exists_extensionTensorComparison. -/
+/-- The pure-tensor comparison is natural in the module argument. -/
 private def extensionTensorIso {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     letI := SheafOfModules.monoidalCategory R
     MonoidalCategory.tensorLeft ((res φ).obj (SheafOfModules.unit (siteModuleRings B))) ≅
@@ -745,9 +740,7 @@ private def extensionTensorIso {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
   rw [extensionTensorComponent_pure, extensionTensorComponent_pure]
   exact (tensorSection_map φ f U s m).symm
 
-/-- Flatness of the target ring makes scalar extension exact.
-Source: Stacks 03EK. Identify its restriction with tensoring by the flat target,
-reflect finite limits through restriction, and use the extension adjunction for colimits. -/
+/-- Flatness of the target ring makes scalar extension exact. -/
 private theorem change_exact {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
     (hflat : SheafOfModules.IsFlat
       ((res φ).obj (SheafOfModules.unit (siteModuleRings B)))) :
@@ -870,13 +863,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction identifies total right derived limits of strict towers, canonically.
 The comparison is normalized by the ordinary limit coordinate comparison and both
-right-derived universal transformations. Source: Stacks 0940 and 0A07
-(blueprint: lem-weil-pbc-constant-completion-equivalence).
-Proof: extension of scalars is exact by flat_and_quotients, and restriction is its exact
-right adjoint. This adjunction holds levelwise on strict towers, so the right-adjoint
-K-injective theorem sends a K-injective tower resolution to one over the constant ring.
-Ordinary limits agree by their coordinates. Apply the universal right-derived
-comparisons to obtain the natural isomorphism and its displayed normalization. -/
+right-derived universal transformations. -/
 theorem derivedLimitRestriction (J : GrothendieckTopology C) (A : Type u) [CommRing A]
     [IsNoetherianRing A] (I : Ideal A) :
     ∃ e : rlim (completed J A I) ⋙ dres (coefficientMap J A I) ≅

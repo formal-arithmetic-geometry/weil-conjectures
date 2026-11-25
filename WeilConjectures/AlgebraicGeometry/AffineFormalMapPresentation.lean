@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAnnihilatedLimit
 
 /-! # Affine formal gluing comparison
 
-Source: Stacks Project, Tags 087W, 0888 and 0889(1).
-(blueprint: lem-weil-pbc-affine-formal-map-presentation).
+## References
+
+* Stacks Project, Tags 087W, 0888 and 0889
 -/
 
 @[expose] public section
@@ -65,27 +66,8 @@ private theorem annihilators_of_linear_square
     rw [map_smul, hs, hx]
     exact hz
 
-/-- A completed-module presentation of a formal map, before algebraic gluing.
-
-Source: Stacks Project, Tags 087W, 0888, 00MA and 0889(1).
-(blueprint: lem-weil-pbc-affine-formal-map-presentation).
-
-Proof: the affine coherent tilde presentation gives P and epsilon by the proved
-quasi-coherent counit. The completion base-change unit lemma makes eta the asIso
-of C applied to p ↦ 1 tensor p; its hom equation is reflexive. The torsion-free
-formal-map limit dictionary supplies Q, phi, rho and A-linear comparisons a,b with
-the actual inverse limits of section modules, including their commuting square.
-Apply the fixed-exponent affine-limit implication of Remark 0888 to the top open
-to get the common positive power 2 * t for the section-limit kernel and cokernel.
-For the kernel, a takes every
-kernel vector of phi to a kernel vector of the limit map; injectivity of a then
-reflects annihilation. For the cokernel, b takes each ideal multiple into the
-limit range; surjectivity of a lifts a preimage and injectivity of b reflects the
-range equation. The quotient criterion gives annihilation of the cokernel.
-Assemble these bounds with the presentation witnesses. This is a decomposition:
-only the torsion-free affine dictionary remains open in a new module. No algebraic
-candidate is constructed. The same proof includes I=0, I=A and the zero ring.
--/
+/-- A completed-module presentation of a formal map, before algebraic gluing
+(Stacks, Tags 087W, 0888, 00MA and 0889). -/
 theorem affine_formal_map_presentation
     {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData)
     (H : CoherentModules X) (N : CoherentFormalModule X J)

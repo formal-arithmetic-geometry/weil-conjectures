@@ -11,9 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSmallGenerator
 /-!
 # The affine etale generator separates sheaf maps
 
-Source: Stacks Project, Tags 01DO and 03EW; Mathlib free-Yoneda sheaves and
-affine etale site comparison.
-(blueprint: lem-sc-etale-small-generator-separating)
+## References
+
+* Stacks Project, Tags 01DO and 03EW
 -/
 
 @[expose] public section
@@ -35,15 +35,8 @@ private theorem integer_isSeparator :
     (AddMonoidHom.mk' (fun y ↦ y • x) fun y z ↦ by simp only [add_smul])) 1
   simpa using h
 
-/-- The constructed affine free-Yoneda coproduct separates all large-valued etale sheaves.
-Source: Stacks Project, Tag 03EW (3), and Mathlib.CategoryTheory.Generator.Sheaf.
-(blueprint: lem-sc-etale-small-generator-separating)
-
-Proof: The lifted integer group separates abelian-group maps: evaluation of a map
-from it on 1 detects the image of any chosen element. The free-Yoneda and
-sheafification adjunctions then show that the free sheaves indexed by objects of
-the small model separate sheaf maps. Their coproduct is a separator. Transport this
-property through the small-model and affine-to-etale equivalences. -/
+/-- The constructed affine free-Yoneda coproduct separates all large-valued etale sheaves
+(Stacks, Tag 03EW). -/
 theorem etaleSmallGenerator_isSeparator (X : Scheme.{u}) :
     IsSeparator (etaleSmallGenerator X) := by
   let C := SmallModel.{u} X.AffineEtale

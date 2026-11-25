@@ -18,13 +18,15 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 /-!
 # Sums and truncations for ind-constructible cohomology
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-cor-ambient-ind-derived,
-`sk-cor-ambient-ind-derived-sums.md` and its proof (blueprint: corollary-ambient-ind-derived).
 
 The canonical comparison is written using arbitrary colimit cocones. Its source is a
 coproduct of the cohomology objects and its target is the cohomology of the coproduct;
 `IsColimit.desc` specifies the comparison by the original coprojections. This avoids
 making any additional choice of coproducts or imposing a coproduct-existence hypothesis.
+
+## References
+
+* Stacks Project, Tags 03DB, 07D9 and 0118
 -/
 
 @[expose] public section
@@ -151,32 +153,10 @@ private theorem localizing_of_small_sums
   have hr' := cofanIsColimit (hr.whiskerEquivalence e)
   exact hsum _ _ _ hr' (fun j ↦ hK ((equivShrink J).symm j).val)
 
-/-- All three assertions for a finite subextension E.
-Source: blueprint main-20261015, `sk-cor-ambient-ind-derived-sums.md`, clauses 1--3;
-Stacks Project, Tags 03DB, 07D9 and 0118; the standing separated finite-type
-positive-characteristic field setting of `sk-def-sfb-dc-setting`
-(blueprint: corollary-ambient-ind-derived).
-
-Proof:
-1. The existing module-object Grothendieck instance supplies exact small coproducts
-   and K-injective resolutions. The source-library coproduct-preservation instance
-   for derived homology sends the given colimit cofan to a colimit cocone. Uniqueness
-   of colimits makes the displayed canonical comparison `desc` an isomorphism.
-2. Apply the sum clause of `proposition-ind-constructible-sheaves--3` to that image cofan
-   degree by degree. The empty sum gives membership of zero in IndCons.
-3. Apply the source-library `homologyProperty_truncLE` and `homologyProperty_truncGE`
-   lemmas: truncation retains the old cohomology or replaces it by zero.
-4. Unpack bounded constructibility and use `ObjectProperty.le_ind` on every
-   cohomology object, viewed as its own one-object filtered colimit.
-5. Use `corollary-ambient-ind-derived--1` for triangulatedness. Repleteness follows
-   from the isomorphism-closure instance for the homology predicate. To apply the
-   intersection defining `localizingClosure`, an existing coproduct with larger index
-   set is reduced to small nonzero support: distinct nonzero summands give distinct
-   coordinate idempotents in the locally small endomorphism set of its vertex.
-   Remove the zero summands, shrink the support, and apply step 2. The resulting
-   localizing predicate contains Dbc by step 4. The intersection defining Loc(Dbc)
-   is therefore contained in Dic.
--/
+/-- Ind-constructible cohomology with coefficients in a finite subextension `E`: cohomology
+commutes with small sums; complexes with ind-constructible cohomology are closed under small sums
+and under truncations; bounded constructible complexes have ind-constructible cohomology; and so
+does every object of the localizing subcategory they generate. -/
 theorem indConstructibleDerived_sums_and_truncations
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
@@ -247,32 +227,11 @@ theorem indConstructibleDerived_sums_and_truncations
   · intro K hK
     exact hK _ hlocal hdbc
 
-/-- All three assertions for the finite-subextension-valued condensed algebraic closure.
-Source: blueprint main-20261015, `sk-cor-ambient-ind-derived-sums.md`, clauses 1--3;
-Stacks Project, Tags 03DB, 07D9 and 0118; the standing separated finite-type
-positive-characteristic field setting of `sk-def-sfb-dc-setting`
-(blueprint: corollary-ambient-ind-derived).
-
-Proof:
-1. The existing module-object Grothendieck instance supplies exact small coproducts
-   and K-injective resolutions. The source-library coproduct-preservation instance
-   for derived homology sends the given colimit cofan to a colimit cocone. Uniqueness
-   of colimits makes the displayed canonical comparison `desc` an isomorphism.
-2. Apply the sum clause of `proposition-ind-constructible-sheaves--3` to that image cofan
-   degree by degree. The empty sum gives membership of zero in IndCons.
-3. Apply the source-library `homologyProperty_truncLE` and `homologyProperty_truncGE`
-   lemmas: truncation retains the old cohomology or replaces it by zero.
-4. Unpack bounded constructibility and use `ObjectProperty.le_ind` on every
-   cohomology object, viewed as its own one-object filtered colimit.
-5. Use `corollary-ambient-ind-derived--1` for triangulatedness. Repleteness follows
-   from the isomorphism-closure instance for the homology predicate. To apply the
-   intersection defining `localizingClosure`, an existing coproduct with larger index
-   set is reduced to small nonzero support: distinct nonzero summands give distinct
-   coordinate idempotents in the locally small endomorphism set of its vertex.
-   Remove the zero summands, shrink the support, and apply step 2. The resulting
-   localizing predicate contains Dbc by step 4. The intersection defining Loc(Dbc)
-   is therefore contained in Dic.
--/
+/-- Ind-constructible cohomology with coefficients in the condensed algebraic closure (valued in
+finite subextensions): cohomology commutes with small sums; complexes with ind-constructible
+cohomology are closed under small sums and under truncations; bounded constructible complexes
+have ind-constructible cohomology; and so does every object of the localizing subcategory they
+generate. -/
 theorem indConstructibleDerived_sums_and_truncations_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ)

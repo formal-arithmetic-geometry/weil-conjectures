@@ -76,14 +76,7 @@ private theorem pointEnd_pullback_unit
   convert h using 1 <;> rfl
 
 -- Internal-module coefficient comparisons need additional kernel conversion.
-/-- Constant coefficient multiplication commutes with restriction to a sheet.
-Source: blueprint lemma-artin-schreier-character-sheaf, weighted character averaging
-(blueprint: lem-fd-as-sheet-scalars).
-
-Proof: naturality of the counit and composition comparison moves the scalar
-through stalkLowerStarProj. On regular modules the remaining pullback is the
-same scalar: naturality of upperStarFromPointComp gives its coefficient square,
-and the extension adjunction and unit comparison identify the scalar maps. -/
+/-- Constant coefficient multiplication commutes with restriction to a sheet. -/
 theorem sheetProjection_scalar
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y T : Scheme.{u}}

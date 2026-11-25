@@ -16,8 +16,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 /-!
 # Zeroth hypercohomology on a small ringed site
 
-Source: Stacks Project, Cohomology on Sites, Section 07A5 and Lemma 08JA
-(blueprint: def-pur-ringed-site-zeroth-hypercohomology).
+## References
+
+* Stacks Project, Cohomology on Sites, Section 07A5 and Lemma 08JA
 -/
 
 @[expose] public section
@@ -29,18 +30,7 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 /-- The functor `H⁰(C, -) = H⁰ RΓ(C, -)` on the unbounded derived category of a small
-ringed site. Here `Γ = Hom_O(O, -)` is `preadditiveCoyoneda` at the unit module.
-
-Source: Stacks Project, Cohomology on Sites, Section 07A5 and Lemma 08JA
-(blueprint: def-pur-ringed-site-zeroth-hypercohomology).
-
-The Grothendieck property (`prop-pur-kinjective-resolutions-exist`) is the proved
-`SheafOfModules.isGrothendieckAbelian`, as in `derivedInternalHom`. The existing
-`Functor.rightDerivedFunctorObjQIso` computes `RΓ` on any K-injective representative
-by applying `Γ` termwise. Applying `DerivedCategory.homologyFunctorFactors` gives
-`H⁰(Γ(J))`, with the canonical independence of the representative supplied by the
-right derived functor. The target derived category uses its standard localization;
-its morphism universe has no effect on the resulting abelian group. -/
+ringed site. Here `Γ = Hom_O(O, -)` is `preadditiveCoyoneda` at the unit module. -/
 noncomputable def ringedSiteZerothHypercohomology
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})

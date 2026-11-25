@@ -18,10 +18,6 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Coherent compact-support comparison on coefficient systems
 
-Source: latest blueprint, sec-smooth-purity/sk-lem-sp-field-extension,
-sk-lem-sp-field-extension-towers.proof.md (2), proper/open system comparison
-(blueprint: def-sp-field-shriek-system-models).
-
 All arrows below live in the ordinary derived category of the ringed sequence site.
 The recorded section-preserving equivalence identifies this with the original strict
 tower category. Index n denotes positive exponent n+1. The structures package the
@@ -50,13 +46,10 @@ namespace AlgebraicGeometry.ProEtale.FieldShriekSystem
 
 variable (P : PurityFiniteSetting.{u})
 
-/-- Finite fields in the fixed coefficient closure, with their actual inclusions.
-Source: blueprint (2), E subset F (blueprint: def-sp-field-shriek-system-models). -/
+/-- Finite fields in the fixed coefficient closure, with their actual inclusions. -/
 abbrev Index := Padic.FiniteCoefficientFields P.coefficients.l P.coefficients.Qbar
 
-/-- Canonical quotient and whole-ring-system maps, fixed on every residue class.
-Source: blueprint (2), coefficient square
-(blueprint: def-sp-field-shriek-system-models). -/
+/-- Canonical quotient and whole-ring-system maps, fixed on every residue class. -/
 structure Coefficients (E F : Index P) (h : E ≤ F) where
   quotient : ∀ n : ℕ,
     SpTowerShriek.R P.coefficients.l E.val n →+* SpTowerShriek.R P.coefficients.l F.val n
@@ -72,9 +65,7 @@ structure Coefficients (E F : Index P) (h : E ≤ F) where
       (CommRingCat.ofHom ((ULift.ringEquiv : ULift.{u + 1, u} _ ≃+* _).symm.toRingHom.comp
         ((quotient n).comp (ULift.ringEquiv : ULift.{u + 1, u} _ ≃+* _).toRingHom)))
 
-/-- The actual coefficient morphism on the entire sequence site.
-Source: blueprint (2), simultaneous models
-(blueprint: def-sp-field-shriek-system-models). -/
+/-- The actual coefficient morphism on the entire sequence site. -/
 def coefficientMap {E F : Index P} {h : E ≤ F} (a : Coefficients P E F h)
     (T : Scheme.{u}) :=
   SemilinearSections.systemMap (Scheme.ProEt.topology T)
@@ -83,17 +74,14 @@ def coefficientMap {E F : Index P} {h : E ≤ F} (a : Coefficients P E F h)
     (fun n ↦ (a.tower T).app (op n))
     (fun n ↦ ((a.tower T).naturality (homOfLE (Nat.le_succ n)).op).symm)
 
-/-- Scalar extension is the dependency's universal K-flat normalized scalar extension.
-Source: blueprint (2), C_T (blueprint: def-sp-field-shriek-system-models). -/
+/-- Scalar extension is the dependency's universal K-flat normalized scalar extension. -/
 abbrev Scalars {E F : Index P} {h : E ≤ F} (a : Coefficients P E F h) (T : Scheme.{u}) :=
   SemilinearSections.ScalarData (coefficientMap P a T)
 
 /-- Normalize the geometric/scalar pullback square before localization. The pushforward
 restriction square is literally the identity on sections, and the pullback square is
 its double adjunction mate. The derived square has its cochain normalization, so a
-transformation invisible to evaluations cannot be added.
-Source: blueprint (2), lambda_a on simultaneous models
-(blueprint: def-sp-field-shriek-system-models). -/
+transformation invisible to evaluations cannot be added. -/
 structure PullComparison {E F : Index P} {h : E ≤ F}
     (a : Coefficients P E F h) (bE : SpTowerShriek.Base P.coefficients.l E.val)
     (bF : SpTowerShriek.Base P.coefficients.l F.val)
@@ -131,9 +119,7 @@ structure PullComparison {E F : Index P} {h : E ≤ F}
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex ordinary.hom (.up ℤ)).app K)
 
 /-- All coefficient and operation presentations needed to construct b. Every datum is
-normalized by the recorded universal constructions, not an arbitrary natural map.
-Source: blueprint (2), proper/open construction
-(blueprint: def-sp-field-shriek-system-models). -/
+normalized by the recorded universal constructions, not an arbitrary natural map. -/
 structure Models where
   base : ∀ E : Index P, SpTowerShriek.Base P.coefficients.l E.val
   operations : ∀ E : Index P, SpTowerShriek.Operations P.coefficients.l E.val (base E)
@@ -156,8 +142,7 @@ structure Models where
       ((mateEquiv ((operations E).openOp j).derivedAdjunction
         ((operations F).openOp j).derivedAdjunction).symm (pull E F h j).derived.inv)
 
-/-- The proper coefficient comparison is the actual geometric counit mate.
-Source: blueprint (2), a_h (blueprint: def-sp-field-shriek-system-models). -/
+/-- The proper coefficient comparison is the actual geometric counit mate. -/
 def proper (D : Models P) {E F : Index P} (h : E ≤ F)
     {Z Y : Scheme.{u}} (g : Z ⟶ Y) :=
   (mateEquiv
@@ -166,9 +151,7 @@ def proper (D : Models P) {E F : Index P} (h : E ≤ F)
     (D.pull E F h g).derived.hom)
 
 /-- The specified whole-system b: proper counit mate, followed by proper image of
-open tensor identification. The same compactification occurs on both sides.
-Source: blueprint (2), b_a = Q_B(e_a) a_h J_A
-(blueprint: def-sp-field-shriek-system-models). -/
+open tensor identification. The same compactification occurs on both sides. -/
 def comparison (D : Models P) {E F : Index P} (h : E ≤ F)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     SpTowerShriek.F P.coefficients.l E.val (D.base E) (D.operations E) c ⋙
@@ -182,8 +165,7 @@ def comparison (D : Models P) {E F : Index P} (h : E ≤ F)
       (SpTowerShriek.push P.coefficients.l F.val (D.base F) ((D.operations F).geometry c.g))
 
 /-- The recorded normalized constructible predicate, in the section-preserving
-sequence-site coordinates. Uniform cohomological and Tor bounds are retained.
-Source: blueprint (2), N_A (blueprint: def-sp-field-shriek-system-models). -/
+sequence-site coordinates. Uniform cohomological and Tor bounds are retained. -/
 def normalized (D : Models P) (E : Index P) (T : Scheme.{u}) :
     ObjectProperty (SpTowerShriek.D P.coefficients.l E.val T) :=
   fun K ↦ spNormalizedConstructibleTorTowers P.coefficients.l E.val T

@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Exact-functor factorizations for constant scalar models
 
-Source: Stacks Project, Tags 05RU, 093J, 093M and 06YY.
+## References
+
+* Stacks Project, Tags 05RU, 093J, 093M, 06YY, 03DA, 03CY and 03DJ
 -/
 
 @[expose] public noncomputable section
@@ -137,8 +139,7 @@ variable (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
   (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)
   (f : W ⟶ finitePerfectAdicChartObject V U) (n : ℕ)
 
-/-- The derived constant quotient source before evaluating a complex.
-Source: Stacks Tags 093J and 05RU. -/
+/-- The derived constant quotient source before evaluating a complex. -/
 def finitePerfectAdicScalarModelSource :=
   finitePerfectAdicAlgebraLift (A ⧸ d.ideal ^ (n + 1)) ⋙
     normalizationConstant V.left.smallEtaleTopology ⋙
@@ -164,8 +165,7 @@ instance finitePerfectAdicOrdinaryScalarTarget_colimits :
     PreservesFiniteColimits (finitePerfectAdicOrdinaryScalarTarget X d W n) :=
   (finitePerfectAdicOrdinaryScalarTarget_exact X d W n).2.2
 
-/-- Compose the canonical exact-functor factorization with a specified factorization.
-Source: Stacks Tag 05RU, compatibility of exact localization with composition. -/
+/-- Compose the canonical exact-functor factorization with a specified factorization. -/
 def finitePerfectAdicDerivedFactor
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -178,8 +178,7 @@ def finitePerfectAdicDerivedFactor
     (F ⋙ G).mapDerivedCategory ≅ F.mapDerivedCategory ⋙ J :=
   (mapDerivedCategoryCompIso F G).symm ≪≫ isoWhiskerLeft F.mapDerivedCategory e
 
-/-- The source is the exact derived functor of its explicit ordinary composite.
-Source: Stacks Tag 05RU; exact derived functors commute with composition. -/
+/-- The source is the exact derived functor of its explicit ordinary composite. -/
 def finitePerfectAdicScalarModelSourceFactors :
     (finitePerfectAdicOrdinaryScalarSource X d V U W f n).mapDerivedCategory ≅
       finitePerfectAdicScalarModelSource X d V U W f n := by
@@ -204,22 +203,21 @@ instance finitePerfectAdicScalarModelExtension_colimits :
     PreservesFiniteColimits (completedAdicScalarExtension X d) :=
   (finitePerfectAdicScalarModelExtension_exact X d).2
 
-/-- Ordinary completed realization is left exact. Source: Stacks Tags 093J and 093M. -/
+/-- Ordinary completed realization is left exact. -/
 instance finitePerfectAdicScalarModelOrdinary_limits :
     PreservesFiniteLimits (finitePerfectAdicScalarModelOrdinary X d) := by
   have := (finitePerfectAdicConstant_exact X A).2.1
   unfold finitePerfectAdicScalarModelOrdinary
   infer_instance
 
-/-- Ordinary completed realization is right exact. Source: Stacks Tags 093J and 093M. -/
+/-- Ordinary completed realization is right exact. -/
 instance finitePerfectAdicScalarModelOrdinary_colimits :
     PreservesFiniteColimits (finitePerfectAdicScalarModelOrdinary X d) := by
   have := (finitePerfectAdicConstant_exact X A).2.2
   unfold finitePerfectAdicScalarModelOrdinary
   infer_instance
 
-/-- Compare an exact functor's localization with a specified universal left derived pair.
-Source: Stacks Tag 05RU; uniqueness of left derived functors. -/
+/-- Compare an exact functor's localization with a specified universal left derived pair. -/
 def finitePerfectAdicExactDerivedIso
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]
@@ -234,8 +232,7 @@ def finitePerfectAdicExactDerivedIso
   exact (Functor.leftDerivedUnique E.mapDerivedCategory T ε E.mapDerivedCategoryFactorsh.hom
     (HomotopyCategory.quasiIso C (.up ℤ))).symm
 
-/-- Exact ordinary extension and the specified total derived extension agree.
-Source: Stacks Tags 093M and 05RU; uniqueness of the left derived pair. -/
+/-- Exact ordinary extension and the specified total derived extension agree. -/
 def finitePerfectAdicScalarModelCompletedFactors :
     (finitePerfectAdicScalarModelOrdinary X d).mapDerivedCategory ≅
       finitePerfectAdicDerivedConstant X A ⋙
@@ -254,8 +251,7 @@ def finitePerfectAdicScalarModelCompletedFactors :
   exact (mapDerivedCategoryCompIso (finitePerfectAdicConstant X A) E).symm ≪≫
     isoWhiskerLeft (finitePerfectAdicDerivedConstant X A) e
 
-/-- The completed ordinary target localizes to the model's specified local realization.
-Source: Stacks Tags 05RU and 03DJ. -/
+/-- The completed ordinary target localizes to the model's specified local realization. -/
 def finitePerfectAdicScalarModelTargetFactors :
     (finitePerfectAdicOrdinaryScalarTarget X d W n).mapDerivedCategory ≅
       DerivedCategory.adicLevelRestriction d.ideal n ⋙
@@ -274,8 +270,7 @@ def finitePerfectAdicScalarModelTargetFactors :
     isoWhiskerRight (isoWhiskerLeft R.mapDerivedCategory
       (finitePerfectAdicScalarModelCompletedFactors X d)) O.mapDerivedCategory
 
-/-- The specified source compositor on derived constant complexes.
-Source: Stacks Tags 03DA, 03CY and 06YY. -/
+/-- The specified source compositor on derived constant complexes. -/
 def finitePerfectAdicScalarModelSourceStep :
     DerivedCategory.adicStepRestriction d.ideal n ⋙
         finitePerfectAdicScalarModelSource X d V U W f (n + 1) ≅
@@ -289,23 +284,7 @@ def finitePerfectAdicScalarModelSourceStep :
         (localProEtaleComparisonCoefficients U.hom (RingHom.ulift q))
         (finitePerfectAdicScalarCoherence X d V U W f n)))
 
-/-- Localization of the ordinary source square is its prescribed derived square.
-
-Source: Stacks Project, Tags 05RU and 06YY, exact-functor localization; Tags 03DA and
-03CY for the ordinary coefficient comparisons.
-(blueprint: lem-weil-pbc-finite-perfect-adic-scalar-model-localization).
-
-Proof: expand the ordinary source compositor into coefficient lift, constants,
-comparison inverse image, pro-etale inverse image, and associated scalar realization.
-Each derived comparison in the specified source compositor is the localization of
-that ordinary comparison. Apply functoriality of exact localization to the five
-isomorphisms. Its composition and whiskering identities identify their pasted
-localization with the left side. The four composition isomorphisms in SourceFactors
-cancel the intermediate factorizations. Equivalently, precompose with Q and then
-postcompose with the invertible exact-functor factorizations; the two maps reduce in
-every degree to the same ordinary compositor. Localization detects their equality.
-This is an identity of functors independent of any tower, perfectness, completed
-coefficient comparison, or supplied natural isomorphism between source and target. -/
+/-- Localization of the ordinary source square is its prescribed derived square. -/
 theorem finitePerfectAdicScalarModelSource_localization :
     let Q := ModuleCat.restrictScalars (Ideal.Quotient.factorPowSucc d.ideal (n + 1))
     (mapDerivedCategoryCompIso Q

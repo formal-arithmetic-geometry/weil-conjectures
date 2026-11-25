@@ -15,10 +15,6 @@ import WeilConjectures.AlgebraicGeometry.DensePoints
 
 /-!
 # Local orders at rational points after extension of algebraically closed fields
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proposition-cohomology-smooth-affine-curve, affine-case unit quotient paragraph
-(blueprint: lem-sc-local-dvr-base-change).
 -/
 
 @[expose] public section
@@ -71,29 +67,7 @@ private theorem ord_eq_of_stalk_uniformizer
       Multiplicative.toAdd (z.unzeroD 1)) hfrac
 
 /-- The unique point over a rational closed point has a DVR stalk, and pullback preserves
-normalized orders. Source: blueprint proposition-cohomology-smooth-affine-curve, affine-case unit
-quotient paragraph (blueprint: lem-sc-local-dvr-base-change).
-
-Proof:
-1. Choose an affine neighbourhood Spec A of P. Its residue field is k because P is closed,
-   A is of finite type over the algebraically closed field k. By
-   theorem-finite-etale-covers-proper-henselian--2, points over P correspond to primes of
-   (A/m) tensor_k k' = k'. This field has exactly one prime, giving the unique point P'.
-2. Localize A tensor_k k' at m(A tensor_k k'). This is the corresponding localization of
-   O_{X,P} tensor_k k'. The original stalk is a DVR by
-   lem-sc-smooth-connected-curve-local-rings. Apply lem-sc-dvr-field-extension-order:
-   the new stalk is a DVR, and a uniformizer stays a uniformizer.
-3. The stalk fraction fields are the scheme function fields. Extend the stalk map to
-   their fraction fields; the displayed compatibility specifies exactly the rational
-   pullback. Unit-times-uniformizer factorizations then have the same integer exponent
-   on both sides, giving the equality of Scheme.ord, as used in def-sc-divisor.
-
-The existential integral and locally Noetherian instances only make the function fields
-and Scheme.ord well typed; they follow from the smooth connected finite-type curve
-hypotheses and their base changes. No such hypothesis is imposed on the input.
-Closed points of this finite-type scheme over algebraically closed k are k-rational.
-The pullback ring homomorphism is specified on the entire stalk, whose fraction field is
-X.functionField, so this condition determines the canonical rational pullback uniquely. -/
+normalized orders. -/
 theorem Scheme.local_dvr_base_change
     (k k' : Type u) [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k']
     [Algebra k k'] (X : Scheme.{u}) (s : X ⟶ Spec (.of k))

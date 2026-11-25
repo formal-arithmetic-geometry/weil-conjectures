@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AbelianRawPullbackCoherenceExtend
 
 /-! # Coherence of varying-coefficient raw pullbacks
 
-Source: Stacks Project, Tags 03Q8 and 09Z1.
-(blueprint: lem-sbc-abelian-raw-pullback-coherence).
+## References
+
+* Stacks Project, Tags 03Q8 and 09Z1
 -/
 
 @[expose] public section
@@ -26,36 +27,8 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- Raw pullback obeys coefficient identity, composition and cocone laws.
-Source: Stacks Project, Tag 09Z1 (lemma-relative-colimit), canonical comparison maps;
-Tag 03CB for inverse-image composition.
-(blueprint: lem-sbc-abelian-raw-pullback-coherence).
-
-Proof: First bundle each raw function as a homomorphism: derived inverse image is
-additive, and precomposition/postcomposition with fixed morphisms preserve zero
-and addition. For a restriction map of test objects, naturality of upperStarComp
-moves the source restriction past the composition comparison. Naturality of the
-single-functor comparison moves it past its inverse. Derived pullback preserves
-composition, leaving the restriction in the target followed by the same coefficient
-and shift factors. Thus the component homomorphisms are natural in the test object;
-use them for tau and beta. Their prescribed component equations are reflexivity.
-Expand the five factors in abelianHigherDirectImageRawPullback.
-For identities, D.map_id identifies the scheme arrow with the identity and hphiid
-identifies its coefficient map with upperStarId. The identity coherence of upperStarComp
-cancels the source identity comparison with the single-functor comparison. Naturality
-and shift compatibility of the derived identity comparison cancel the remaining factors.
-For a composite, move the inner factors through the outer derived inverse image using
-map_comp. Naturality of the single-functor comparison cancels its adjacent inverse
-and direct components. Associativity of upperStarComp identifies the two source
-comparisons with the one for the composite. The coefficient comparisons agree by
-hphicomp; shift compatibility combines the two shift factors. This gives equality on
-classes at every test object. Extensionality of group homomorphisms and natural
-transformations gives the stated identity and composition equations. Finally substitute
-hH into the coefficient map for a limit leg. Naturality of colimit.ι H identifies
-H.map f followed by colimit.ι H j with colimit.ι H i. Cancelling eH j and its inverse
-and applying the same composite calculation proves the cocone law. These arguments
-use no limit, qcqs, affineness or continuity assumption; they hold for zero sheaves
-and empty test objects as well as in degree zero. -/
+/-- Raw pullback obeys coefficient identity, composition and cocone laws
+(Stacks, Tags 09Z1 and 03CB). -/
 theorem abelianRawPullback_coherent {S : Scheme.{v}}
     {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S)

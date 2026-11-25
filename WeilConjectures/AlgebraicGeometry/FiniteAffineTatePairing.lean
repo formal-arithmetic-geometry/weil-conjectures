@@ -22,15 +22,8 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace AlgebraicGeometry.Etale
 
 -- Keep the large canonical comparison behind a shared, fully constructed arrow.
-/-- Source: latest blueprint, sec-smooth-purity/sk-lem-sp-reduction/
-sk-lem-sp-reduction-exceptional.proof.md, Charts, ordered Tate factors.
-(blueprint: def-sp-finite-affine-tate-pairing)
-
-Construction: take the product p of finiteEtaleTwistPullbackData at the nonnegative
-exponents r and s, rewrite their sum as the cast of r+s, and reduce the nonnegative
-branch of finiteEtaleTateSheaf. Apply singleFunctorFlatPairing to that ordinary map;
-flatness is supplied by finite_etale_torsion_twist_line. This is exactly the specified
-flat-single pairing, with no choice of additional comparison data. -/
+/-- The canonical degree-zero pairing of finite étale Tate twists, from the twists of
+exponents `r` and `s` to the twist of exponent `r + s`. -/
 @[irreducible] def finiteAffineTatePairing
     (R : Type (u + 1)) [CommRing R] [Finite R]
     (N : ℕ) (hN : 0 < N) (hR : (N : R) = 0)

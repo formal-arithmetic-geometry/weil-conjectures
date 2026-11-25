@@ -48,8 +48,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 variable {ι}
 
 /-- In an exact sequence `A ⟶ B ⟶ C` of Weil sheaves whose outer terms have punctual weights at
-most `v`, so has the middle term: the stalks form an exact sequence of Frobenius modules
-(blueprint: `lemma-weight-bounds-partitions`, step 0, punctual form). -/
+most `v`, so has the middle term. -/
 theorem HasWeightsAtMost.of_exact {S : ShortComplex (WeilSheaf k₀ l X)} (hS : S.Exact) {v : ℝ}
     (h₁ : S.X₁.HasWeightsAtMost ι v) (h₃ : S.X₃.HasWeightsAtMost ι v) :
     S.X₂.HasWeightsAtMost ι v := by
@@ -76,9 +75,7 @@ theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_of_iso {X : Scheme
 
 /-- **Compactly supported cohomology as a direct image to the point.** For a separated
 `k₀`-scheme `X` of finite type and a morphism `f : X ⟶ Spec k₀` over `k₀` (that is, the structure
-morphism), `H_c^0(Spec k₀, Rʳf₀!F) ≅ H_c^r(X, F)` as Frobenius modules: `R(id)₀!` is concentrated
-in degree zero on Weil sheaves, and `R(f ≫ id)₀! ≅ R(id)₀! ∘ Rf₀!` (blueprint:
-`theorem-pure-lisse-sheaves-over-relative--1`, the stalks of `Rʳf₀!F` over a point). -/
+morphism), `H_c^0(Spec k₀, Rʳf₀!F) ≅ H_c^r(X, F)` as Frobenius modules. -/
 theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_zero_higherLowerShriek
     {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
@@ -111,9 +108,7 @@ theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_zero_higherLowerSh
 
 /-- **Compactly supported cohomology along a quasi-finite morphism.** For a separated
 quasi-finite morphism `f : X ⟶ Y` of separated `k₀`-schemes of finite type and a Weil sheaf `F`
-on `X`, `H_c^r(X, F) ≅ H_c^r(Y, f₀!F)` as Frobenius modules, for every `r`: `Rf₀!F` is `f₀!F`
-placed in degree zero, and `R(f ≫ a_Y)₀! ≅ R(a_Y)₀! ∘ Rf₀!` (blueprint:
-`lemma-finite-quasi-finite-direct-images`, `proposition-composition-base-change-rf-shriek--1`). -/
+on `X`, `H_c^r(X, F) ≅ H_c^r(Y, f₀!F)` as Frobenius modules, for every `r`. -/
 theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_higherLowerShriek_zero
     {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
@@ -176,10 +171,8 @@ theorem Scheme.Opens.exists_isClosedImmersion_isFinite_compl {X : Scheme.{u}}
 variable {ι}
 
 /-- **Removing finitely many points.** Let `U` be an open subscheme with finite complement of a
-separated `k₀`-scheme `X` of finite type and let `F` be a Weil sheaf on `X`. For `r > 0`, the
-group `H_c^r(X, F)` is a Frobenius-equivariant quotient of `H_c^r(U, F|_U)`: in the open–closed
-exact sequence the term `H_c^r` of the finite complement vanishes. Hence upper weight bounds pass
-from `H_c^r(U, F|_U)` to `H_c^r(X, F)`. -/
+separated `k₀`-scheme `X` of finite type and let `F` be a Weil sheaf on `X`. For `r > 0`, upper
+weight bounds pass from `H_c^r(U, F|_U)` to `H_c^r(X, F)`. -/
 theorem WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_of_upperStar_of_isOpenImmersion
     {X U : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [U.Over (Spec (CommRingCat.of k₀))]
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]

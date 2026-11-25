@@ -58,30 +58,8 @@ set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry
 
 /-- Existence of a left derived functor of the tensor pullback along a morphism of schemes,
-constructed from K-flat resolutions.
-
-Source: literature/blueprint/master/blueprint/sec-picard-framework/
-  det-thm-picard-semicon/def-pc-derived-pullback.md, node
-  lemma-coherent-base-change-invertible-sheaves--2; the functor is `L g^* = L(g^sharp)^* ∘ g⁻¹`, and
-  on a K-flat resolution `P ⟶ E` it is represented by `𝒪_T ⊗_{g⁻¹𝒪_S} g⁻¹P`.
-The functor `I` is the exact module inverse image, and `E` is the recorded tensor
-pullback, on the shared module-sheaf category instances. The universal property and
-K-flat counit specify the derived composite uniquely up to canonical isomorphism.
-Source: Stacks Project, Cohomology, Tags 06YI and 06YJ.
-Proof (the three steps of the node):
-1. The inverse-image stalk isomorphism (lem-weil-pbc-topological-inverse-image-stalk)
-   and stalkwise exactness show that `I` is exact and preserves quasi-isomorphisms
-   (def-pc-quasi-iso-modules), hence induces a functor on derived categories.
-2. Apply lem-pur-derived-change-of-rings to `tensorPullbackRingMap g`. Compose its
-   derived functor with derived inverse image. Termwise the composite is the recorded
-   `tensorPullback g`; the resolving-class universal property gives the counit below.
-3. Choose a K-flat resolution (lem-pc-kflat-resolution). Inverse image preserves its
-   quasi-isomorphism by step 1 and its K-flatness by lem-pc-kflat-pullback-preservation
-   applied to `(T, g⁻¹𝒪_S) → (S, 𝒪_S)`. The change-of-rings counit is therefore an
-   isomorphism. The canonical comparison for `s : P → G` is the inverse of `L(Q(s))`
-   followed by this counit at `P`. Comparisons between resolutions factor through
-   `L(Q(G))`, so are independent of choices and compatible with composition.
-(blueprint: lemma-coherent-base-change-invertible-sheaves--2). -/
+constructed from K-flat resolutions (Stacks, Tags 06YI and 06YJ). The functor `I` is the
+exact module inverse image, and `E` is the recorded tensor pullback. -/
 theorem exists_derivedPullback {T S : Scheme.{u}} (g : T ⟶ S)
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
@@ -191,9 +169,7 @@ functor `Scheme.Modules.derivedPullback g` of the pullback of modules, transport
 `schemeDerivedCategoryEquiv`. It is isomorphic to `Scheme.Modules.derivedPullback g` across
 these equivalences (`AlgebraicGeometry.derivedPullbackIso`), and it is a left derived functor of
 the tensor pullback whose counit is an isomorphism on K-flat complexes
-(`AlgebraicGeometry.derivedPullback_spec`).
-
-(blueprint: lemma-coherent-base-change-invertible-sheaves--2) -/
+(`AlgebraicGeometry.derivedPullback_spec`). -/
 noncomputable irreducible_def derivedPullback :
     schemeDerivedCategory.{u, w} S ⥤ schemeDerivedCategory.{u, w} T :=
   (schemeDerivedCategoryEquiv S).functor ⋙ Scheme.Modules.derivedPullback g ⋙
@@ -271,12 +247,7 @@ instance : (derivedPullback.{u, w} g).IsLeftDerivedFunctor (derivedPullbackCouni
 /-- **The derived pullback is the left derived functor of the tensor pullback.** For
 `g : T ⟶ S`, `derivedPullback g` is a triangulated left derived functor of the tensor pullback
 `E = Scheme.Modules.tensorPullback g` (with the exact inverse image `I` underlying it), and its
-counit `Lg^*(P) ⟶ E(P)` is an isomorphism for every K-flat complex `P`.
-Proof: `derivedPullback g` and the functor of `exists_derivedPullback` are left derived
-functors of isomorphic functors, as `E ≅ Scheme.Modules.pullback g`; hence they are isomorphic,
-and the properties of the latter transfer.
-
-(blueprint: lemma-coherent-base-change-invertible-sheaves--2) -/
+counit `Lg^*(P) ⟶ E(P)` is an isomorphism for every K-flat complex `P`. -/
 theorem derivedPullback_spec :
     ∃ (I : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
           SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology T)

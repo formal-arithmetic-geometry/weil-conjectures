@@ -69,10 +69,9 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Unbounded derived finite-free scalar coordinates
 
-Source: Stacks Project, Modules on Sites, Tag 03EL; blueprint main-20261015,
-sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients,
-sk-prop-sfb-cartesian-coefficients-finite-free.proof.md.
-(blueprint: lem-sfb-derived-finite-free-scalar-coordinates)
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 015F
 -/
 
 @[expose] public noncomputable section
@@ -119,8 +118,7 @@ theorem coordinateFiniteProductShape {D : Type u} [SmallCategory D]
 
 attribute [local instance 100000] coordinateFiniteProductShape
 
-/-- A tuple of the eight ordinary comparison maps.
-Source: Stacks 03EL (blueprint: lem-sfb-derived-finite-free-scalar-coordinates). -/
+/-- A tuple of the eight ordinary comparison maps. -/
 structure OrdinaryComparisonTuple (A B C D E F G H : Type*) where
   chi : A
   rho : B
@@ -139,9 +137,7 @@ variable {A : Type uA} [Category.{vA} A] [Abelian A]
   [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
   [HasDerivedCategory.{w} A'] [HasDerivedCategory.{w} B']
 
-/-- The three normalized derived comparisons associated to an ordinary coordinate square.
-Source: Stacks 03EL, 06YY, 015F, localization of the ordinary square
-(blueprint: lem-sfb-derived-finite-free-scalar-coordinates). -/
+/-- The three normalized derived comparisons associated to an ordinary coordinate square. -/
 def DerivedCoordinateCompatibility
     (T : A ⥤ B) [T.Additive] (U : B ⥤ A) [U.Additive] (d : ℕ)
     [PreservesFiniteLimits U] [PreservesFiniteColimits U]
@@ -200,17 +196,14 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 attribute [local instance 50000]
   CategoryTheory.hasSheafCompose_of_preservesLimitsOfSize
 
-/-- The basis inclusion, with the finite product serving also as the finite direct sum.
-Source: Stacks 03EL, finite-basis calculation
-(blueprint: lem-sfb-derived-finite-free-scalar-coordinates). -/
+/-- The basis inclusion, with the finite product serving also as the finite direct sum. -/
 def scalarBasisInclusion
     (θ : ∏ᶜ (fun _ : Fin d ↦ unit (ringSheaf R)) ≅
       (restriction.{u, u} a).obj (unit (ringSheaf S))) (i : Fin d) :
     unit (ringSheaf R) ⟶ (restriction.{u, u} a).obj (unit (ringSheaf S)) :=
   Pi.lift (fun j : Fin d ↦ if i = j then 𝟙 _ else 0) ≫ θ.hom
 
-/-- The inverse basis coordinate. Source: Stacks 03EL, finite-basis calculation
-(blueprint: lem-sfb-derived-finite-free-scalar-coordinates). -/
+/-- The inverse basis coordinate. -/
 def scalarBasisCoordinate
     (θ : ∏ᶜ (fun _ : Fin d ↦ unit (ringSheaf R)) ≅
       (restriction.{u, u} a).obj (unit (ringSheaf S))) (i : Fin d) :
@@ -223,9 +216,7 @@ local instance (M : SheafOfModules.{u} (ringSheaf R)) (U : Cᵒᵖ) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The two local formulas, expressed using sheafification images of elementary tensors.
-Source: Stacks 03EL and the blueprint finite-basis calculation
-(blueprint: lem-sfb-derived-finite-free-scalar-coordinates). -/
+/-- The two local formulas, expressed using sheafification images of elementary tensors. -/
 def IsFiniteFreeScalarCoordinateIso
     (θ : ∏ᶜ (fun _ : Fin d ↦ unit (ringSheaf R)) ≅
       (restriction.{u, u} a).obj (unit (ringSheaf S)))
@@ -244,9 +235,7 @@ def IsFiniteFreeScalarCoordinateIso
           (@id ((unit (ringSheaf R)).val.obj U) (1 : R.obj.obj U)))
         ((Pi.π (fun _ : Fin d ↦ M) i).val.app U x)
 
-/-- Counit-normalized coordinates on every unbounded cochain representative.
-Source: Stacks 03EL and blueprint finite-basis calculation
-(blueprint: lem-sfb-derived-finite-free-scalar-coordinates). -/
+/-- Counit-normalized coordinates on every unbounded cochain representative. -/
 def IsDerivedFiniteFreeScalarCoordinateIso
     [HasDerivedCategory.{w} (SheafOfModules.{u} (ringSheaf R))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (ringSheaf S))]
@@ -273,9 +262,7 @@ def IsDerivedFiniteFreeScalarCoordinateIso
           ((Functor.whiskerLeft (Functor.const (Discrete (Fin d)))
             (lim.π ⟨i⟩)).mapHomologicalComplex (.up ℤ)).app K)
 
-/-- Exactness assumptions for the pullback coordinate frame.
-Source: Stacks 03EL, exactness of finite powers
-(blueprint: lem-sfb-derived-finite-free-scalar-coordinates). -/
+/-- Exactness assumptions for the pullback coordinate frame. -/
 structure FiniteFreeCoordinatePullbackExactness
     {C' : Type u} [SmallCategory C'] {J' : GrothendieckTopology C'}
     (g : GeometricMorphism (Sheaf J' (Type u)) (Sheaf J (Type u)))
@@ -299,9 +286,7 @@ structure FiniteFreeCoordinatePullbackExactness
   powerColim : PreservesFiniteColimits (Functor.const (Discrete (Fin d)) ⋙
         (lim : (Discrete (Fin d) ⥤ SheafOfModules.{u} (ringSheaf R')) ⥤ _))
 
-/-- Chosen ordinary inverse-image coordinate maps, with equations stated separately.
-Source: Stacks 03EL, finite-basis calculation
-(blueprint: lem-sfb-derived-finite-free-scalar-coordinates). -/
+/-- Chosen ordinary inverse-image coordinate maps, with equations stated separately. -/
 abbrev FiniteFreeCoordinatePullbackData
     {C' : Type u} [SmallCategory C'] {J' : GrothendieckTopology C'}
     (g : GeometricMorphism (Sheaf J' (Type u)) (Sheaf J (Type u)))
@@ -323,8 +308,7 @@ abbrev FiniteFreeCoordinatePullbackData
         Functor.const (Discrete (Fin d)) ⋙ lim)
 
 /-- Normalization equations for a pullback coordinate frame, verbatim from
-`FiniteFreeCoordinatesInverseImage`. Source: Stacks 03EL
-(blueprint: lem-sfb-derived-finite-free-scalar-coordinates). -/
+`FiniteFreeCoordinatesInverseImage`. -/
 def FiniteFreeCoordinatePullbackLaws
     (θ : ∏ᶜ (fun _ : Fin d ↦ unit (ringSheaf R)) ≅
       (restriction.{u, u} a).obj (unit (ringSheaf S)))
@@ -406,10 +390,7 @@ def FiniteFreeCoordinatePullbackLaws
 
 /-- Inverse image respects the specified coordinate morphisms. Restriction is normalized
 on underlying sheaves, finite sums by their projections, and scalar extension by the
-balanced comparison on arbitrary generalized elements. Thus none of the comparisons
-is an arbitrary isomorphism.
-Source: Stacks 03EL and blueprint finite-basis calculation
-(blueprint: lem-sfb-derived-finite-free-scalar-coordinates). -/
+balanced comparison on arbitrary generalized elements. -/
 def FiniteFreeCoordinatesInverseImage
     (θ : ∏ᶜ (fun _ : Fin d ↦ unit (ringSheaf R)) ≅
       (restriction.{u, u} a).obj (unit (ringSheaf S)))

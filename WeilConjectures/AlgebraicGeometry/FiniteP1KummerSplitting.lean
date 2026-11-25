@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.ProperUnboundedBaseChangeForgetful
 import WeilConjectures.AlgebraicGeometry.ProperUnboundedBaseChangeModN
 
 /-! # The two-component Kummer map and its arbitrary-base naturality
-
-the universal-base argument of lem-sp-tower-p1-arbitrary-base-integrals, steps 1–4.
 -/
 
 @[expose] public noncomputable section
@@ -167,25 +165,7 @@ private theorem finiteP1_isIso_sourceMap (A : Type (u + 1)) [CommRing A] (N : �
     (ordinaryFiniteShiftedLinePullback A N hA t f hS) (ordinaryFiniteUnitPullback A f)
 
 /-- The canonical Kummer maps are invertible and commute with every base change.
-Only the two-component maps occur here; neither traces nor diagonal classes occur.
-lem-sp-tower-p1-arbitrary-base-integrals, proof steps 1–4.
-(auxiliary; not a blueprint node)
-
-Proof: put U = Spec Z[1/N], using finiteP1_exists_noetherianBase. Its normalized datum
-is projectiveLineTraceDatum. The hyperplane has equation t on one standard chart and
-is empty on the other, so it is Cartier over every base and its ideal dual is O(1).
-The scalar Kummer boundary of this line has a unique module-derived realization:
-module cohomology of the constant free rank-one source equals underlying abelian
-cohomology. Define c at every base by this realization. The supported Kummer pullback
-formula applied to the hyperplane, followed by its constant unit, shows that c pulls
-back to c at the new base. The unit component satisfies the exchange-mate unit identity;
-taking adjoints of the Chern pullback equation gives the second component identity.
-Biproduct extensionality gives the displayed square. Proper torsion exchange, twist
-transport, and additive preservation of the biproduct source are isomorphisms. Apply
-the square to S -> U: the upper two-component map is the isomorphism of the normalized
-Noetherian datum, so the lower map is invertible. This applies to every S, and the
-component square already holds for every map between arbitrary bases. The zero ring,
-N = 1 and the empty base give the same identities of their unique arrows. -/
+Only the two-component maps occur here; neither traces nor diagonal classes occur. -/
 theorem exists_ordinaryFiniteP1SplittingMap (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) :
     ∃ c : ∀ (S : Scheme.{u}) (_hS : IsUnit (N : Γ(S, ⊤))),

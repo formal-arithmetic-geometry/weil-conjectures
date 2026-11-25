@@ -11,7 +11,12 @@ public import Mathlib.AlgebraicGeometry.Restrict
 import WeilConjectures.AlgebraicGeometry.FlatModelFiniteFreeConstruction
 import WeilConjectures.AlgebraicGeometry.FlatModelFiniteFreeComparison
 
-/-! # Local nonnegative finite-free replacements of bounded flat complexes -/
+/-! # Local nonnegative finite-free replacements of bounded flat complexes
+
+## References
+
+* Stacks Project, Tags 064U, 0653 and 00NX
+-/
 
 @[expose] public section
 
@@ -23,30 +28,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A bounded nonnegative flat complex with a bounded-above finite-free resolution has,
 near a specified point, a finite-free replacement in the same degree interval. The
-replacement computes the homology of every ordinary scheme pullback of the flat complex.
-This is a general algebraic shortening lemma and has no proper morphism or direct image.
-
-Source: the coherence unit's Mumford-complex step; Stacks Project, Tags 064U, 0653 and 00NX
-(the flat opcycles criterion and finite-projective local freeness).
-Proof:
-1. Work on an affine neighbourhood inside `U`. The bounded flat complex `C` has Tor
-   amplitude `[0,d]`. Its bounded-above free resolution `Q` is K-flat, so the resolution
-   computes tensor with every module, and all negative tensor cohomology vanishes.
-2. Set `M = coker(Q^{-1} -> Q^0)`. The negative part of `Q` resolves `M`, since `C`
-   has no negative cohomology. The negative tensor vanishing shows that `M` is flat;
-   it is finitely presented because `Q^{-1}` and `Q^0` are finite free. Hence `M` is
-   finite projective, and is free on an open neighbourhood of the chosen point.
-3. Replace the negative tail and degree zero by `M` in degree zero and keep degrees
-   `1,...,d`. This quotient complex is quasi-isomorphic to `Q`. On the chosen smaller
-   open its degree-zero term and all higher terms are finite free, and it is zero
-   outside `[0,d]`. Thus it gives `P` with the stated three structural properties.
-4. Both `C` and `P` are bounded flat complexes. Their quasi-isomorphism in the derived
-   category is preserved by derived pullback, which ordinary pullback computes for
-   such complexes. Taking cohomology gives the isomorphisms for every `g` and `q`.
-   Express the smaller neighbourhood as `V <= U` in the ambient scheme to use
-   `T.homOfLE hVU` as its open inclusion. No global triviality is claimed.
-
-(blueprint: lem-pc-flat-model-finite-free-shortening). -/
+replacement computes the homology of every ordinary scheme pullback of the flat complex
+(Stacks, Tags 064U, 0653 and 00NX). -/
 theorem exists_local_finiteFree_shortening {T : Scheme.{u}} (U : T.Opens)
     (C Q : CochainComplex U.toScheme.Modules ℤ) (d : ℕ)
     (hCge : C.IsStrictlyGE 0) (hCle : C.IsStrictlyLE d)

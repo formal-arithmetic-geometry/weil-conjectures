@@ -14,8 +14,20 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
 /-! # Tensor normalization of the reindexing composition
 
-Source: blueprint dual-Tate compatibility, Steps 1, 2 and 4; Stacks 09A5, 07A4, 0FPI.
-(blueprint: lem-pod-reindexing-tensor-compositor).
+For isomorphisms of schemes `g : X ⟶ Y` and `h : Z ⟶ X`, we show that the canonical compositor
+comparing reindexing along `h ≫ g` with the composite of reindexing along `g` and `h` is compatible
+with the derived tensor comparisons (`tensor_compositor_exists`).
+
+## Implementation details
+
+The compositor is `canonicalCompositor`, built from restriction along the site isomorphism
+`siteComp g h`, rather than an arbitrary natural isomorphism. The tensor square is first checked on
+total complexes of K-flat representatives, where both routes send a pure section `x ⊗ y` to the
+tensor product of its restrictions (no signs occur), and is then descended to the derived category.
+
+## References
+
+* Stacks Project, Tags 09A5, 07A4, 0FPI
 -/
 
 @[expose] public noncomputable section
@@ -560,39 +572,9 @@ private theorem tensor_on_representatives {X Y Z : Scheme.{u}}
 -- The representative argument involves three exact derived functors.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
-/-- The canonical site and localized tensor composition comparison.
-Source: blueprint dual-Tate compatibility, Steps 1, 2 and 4; Stacks 09A5, 07A4, 0FPI
-(blueprint: lem-pod-reindexing-tensor-compositor).
-
-Proof: For a module M and a pro-etale object U of Z, define the ordinary comparison by the
-restriction of M along (siteComp g h).inv.app U. Define its inverse using siteComp.hom. The two
-composites are identities by functoriality of restriction and the site isomorphism identities.
-These section maps commute with restriction by naturality of siteComp. They are linear: the
-coefficient restriction along this site map is the identity on the finite-stage constant
-coefficients; at the completed stage the same assertion holds after every quotient projection,
-which jointly detect equality. Thus these maps assemble to the ordinary natural module isomorphism
-and give the required sections field.
-
-For each cochain complex P use this ordinary comparison in degree i. Naturality with respect to
-P.d proves commutation with the differential. The degree field is then the defining equation, and
-naturality in chain maps is inherited degreewise. Both exact reindexing functors invert quasi-
-isomorphisms. Descend this natural chain isomorphism through the localization functor. Whiskering
-with the localization is fully faithful, so the descended isomorphism has exactly the model
-equation with the three recorded podReindexingDerivedFactors. This constructs every field of
-Compositor, without choosing an arbitrary natural isomorphism.
-
-First prove the tensor square on the actual total complexes. In the summand of bidegree (p,q),
-both routes send a pure section x tensor y over U to the tensor of their restrictions along
-siteComp.inv.app U. This uses the tensorChain_pure fields of cg, ch and cgh; there is no
-interchange of degrees and hence no sign. The sheafified pure generators and total-summand
-inclusions detect equality, so the chain square follows. Reindexing along a scheme isomorphism
-preserves K-flat complexes as already recorded in the tensor_model fields. Apply the three
-tensor_model equations to independently K-flat representatives P,Q. Substitute the chain square
-and the compositor model equation, and cancel the comparison isomorphisms. This proves the
-displayed derived tensor square on Q(P),Q(Q). Finally take independent K-flat resolutions of
-arbitrary M,N; naturality of the tensor comparisons and compositor transports that square across
-their invertible augmentations. No Hom equation is assumed or asserted here.
--/
+/-- For isomorphisms `g` and `h`, there is a compositor `k : Compositor l E g h s` such that, for
+all `M N`, the tensor comparison of `h ≫ g` followed by `k ⊗ k` equals `k` on `M ⊗ N` followed by
+the reindexed tensor comparison of `g` and the tensor comparison of `h`. -/
 theorem tensor_compositor_exists {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X) [IsIso g] [IsIso h]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

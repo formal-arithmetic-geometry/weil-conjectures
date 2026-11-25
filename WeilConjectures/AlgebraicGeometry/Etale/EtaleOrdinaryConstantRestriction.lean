@@ -10,7 +10,12 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 import all WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdentities
 import all WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
 
-/-! # Pullback of the constant scalar coefficient -/
+/-! # Pullback of the constant scalar coefficient
+
+## References
+
+* Stacks Project, Tags 03EK and 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -76,11 +81,7 @@ private theorem constantRestriction_unit
     Functor.id_obj, Functor.const_obj_obj,
     Functor.whiskerRight_app, NatTrans.comp_app] using congr_app h (op (⊤_ X.Etale))
 
-/-- Scalar restriction and ordinary constant inverse image commute.
-Source: Stacks Tags 03EK and 07A6 (blueprint: lem-pur-etale-ordinary-constant-restriction).
-Proof: transpose under inverse image and constant sheaf. The restriction square
-has identity direct-image mate; naturality and the constant-adjunction units
-then identify both transposes. -/
+/-- Scalar restriction and ordinary constant inverse image commute. -/
 theorem etaleOrdinaryConstantRestrictionPullback
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (M : ModuleCat.{u + 1} B) :

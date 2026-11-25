@@ -60,12 +60,14 @@ public import WeilConjectures.SecSmoothPurity.NormalizedScalarTensorTransitions
 
 /-! # Normalized scalar tensor transitions
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL, and
-Cohomology on Sites, Tag 07A4.
-(blueprint: lem-pur-normalized-scalar-tensor-transitions).
-
 Scalar tensor comparisons commute with arbitrary semilinear squares. Their
 forward maps insert one and their inverse maps multiply the scalar coefficients.
+
+## References
+
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 -- After pruning, this module only keeps private declarations.

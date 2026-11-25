@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteReduction.FiniteReductionRestrict
 /-!
 # Flat models under surjective extension of constant scalars
 
-Source: Stacks Project, Tag 05V4 and Tag 08G1.
+## References
+
+* Stacks Project, Tags 05V4, 08G1
 -/
 
 @[expose] public noncomputable section

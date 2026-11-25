@@ -12,8 +12,7 @@ public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 
 Let `V` be a Noetherian normal integral scheme with generic point `e : Spec K ⟶ V`. For a finite
 module `M` the natural map `M_V ⟶ e_* M_K` of étale sheaves is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_constantSheaf_toLowerStar_genericPoint`, blueprint
-`proposition-proper-direct-image-finite-coefficients`).
+(`AlgebraicGeometry.Etale.isIso_constantSheaf_toLowerStar_genericPoint`).
 -/
 
 @[expose] public section
@@ -41,10 +40,7 @@ def Etale.constantSheafToLowerStar {V W : Scheme.{u}} (e : W ⟶ V) (M : ModuleC
   (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) e).unit.app _ ≫
     (e)_*[ModuleCat.{u + 1} Λ].map ((upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) e).hom.app M)
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: A generic constant sheaf on a
-normal Noetherian scheme.
-
-Let `V` be a Noetherian normal integral scheme (integral, with integrally closed local rings),
+/-- Let `V` be a Noetherian normal integral scheme (integral, with integrally closed local rings),
 with generic inclusion `e : Spec K ⟶ V`. For a finite `Λ`-module `M` (for instance a finite
 abelian group, `Λ = ℤ/N`), the natural map `M_V ⟶ e_* M_K` of étale sheaves is an
 isomorphism. -/

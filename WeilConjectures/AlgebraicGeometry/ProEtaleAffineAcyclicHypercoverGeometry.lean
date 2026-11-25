@@ -22,7 +22,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 This theorem packages the finite-basis construction, its degreewise coproduct realization,
 and the component evaluation comparisons.  The componentwise lifting theorem then supplies
-weak contractibility. (auxiliary; not a blueprint node)
+weak contractibility.
 -/
 
 @[expose] public section
@@ -268,26 +268,8 @@ private theorem overPost_preservesCoproducts
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Realizing formal families of representables over `T` preserves finite limits.
-Source: Stacks Project, Hypercoverings, Tag 01G2(2) and Tag 0DB1.
-
-Proof: the formal-family Yoneda functor is the ordinary Yoneda functor on formal
-coproducts restricted to singleton families. The coproduct universal property and
-the equivalence between maps from a singleton and pairs `(i, U ⟶ Q_i)` give the
-natural comparison isomorphism. Both ordinary Yoneda and restriction preserve
-limits, so formal-family Yoneda does too, as in Tag 01G2(2).
-
-A formal family over `T` is equivalently a formal family in `C` with a morphism to
-the singleton family `{T}`. Use this equivalence, apply formal-family Yoneda on
-the slice, and then apply sheafification on the slice. These functors preserve
-finite limits. Identify the resulting base with `h_T` by the singleton-coproduct
-isomorphism and the sheafification counit; changing the base along an isomorphism
-also preserves limits. The resulting composite preserves coproducts and agrees
-with sheaf Yoneda on singleton families. Since every formal family is the
-coproduct of its singleton families, the coproduct universal property gives a
-natural isomorphism from this composite to `sheafRealization`. Transporting
-finite-limit preservation along that isomorphism completes the proof.
-(auxiliary; not a blueprint node). -/
+/-- Realizing formal families of representables over `T` preserves finite limits
+(Stacks, Tags 01G2 and 0DB1). -/
 private theorem sheafRealization_preservesFiniteLimits {C : Type (u + 1)} [Category.{u} C]
     [HasPullbacks C] (J : GrothendieckTopology C) [J.Subcanonical] (T : C) :
     PreservesFiniteLimits (sheafRealization J T) := by
@@ -348,15 +330,8 @@ private theorem yoneda_hom_ext_of_cover {C : Type (u + 1)} [Category.{u} C]
   simpa only [J.toGrothendieck.uliftYonedaEquiv_naturality] using
     congrArg J.toGrothendieck.uliftYonedaEquiv (heq i)
 
-/-- Componentwise covering morphisms induce epimorphisms after sheaf realization.
-Source: Stacks Project, Hypercoverings, Tags 01G3 and 0DB1.
-
-Proof: test cancellation on each representable summand of the target. The covering
-hypothesis and separatedness of the testing sheaf reduce equality there to equality on
-all summands mapping to that component. These equalities follow by precomposing the
-assumed equality with the corresponding source coproduct inclusions. Empty covering
-families are allowed: separatedness gives the same conclusion in this case.
-(auxiliary; not a blueprint node). -/
+/-- Componentwise covering morphisms induce epimorphisms after sheaf realization
+(Stacks, Tags 01G3 and 0DB1). -/
 private theorem sheafRealization_map_epi {C : Type (u + 1)} [Category.{u} C]
     (J : Precoverage C) [J.toGrothendieck.Subcanonical] {T : C}
     {X Y : FormalCoproduct.{u + 1} (Over T)} (f : X ⟶ Y)
@@ -475,13 +450,7 @@ private theorem yoneda_epi_of_ulift
   rw [← H.map_comp, ← H.map_comp, hfg]
 
 /-- Finite-basis geometry produces affine terms, component evaluation comparisons, and
-epimorphic matching arrows. Source: Stacks Project, proetale.tex, Tag 09A1 (2), and
-hypercovering.tex, Tags 0DAV, 0DB1, 0DB2
-(auxiliary; not a blueprint node).
-Proof: apply the finite-basis hypercover theorem in the qcqs subsite, then realize finite formal
-coproducts in the full slice. Transport matching epimorphisms and component evaluation
-bijections.
--/
+epimorphic matching arrows (Stacks, Tags 09A1, 0DAV, 0DB1 and 0DB2). -/
 theorem exists_affine_hypercover_geometry
     (X : Scheme.{u}) (W : X.ProEt)
     [CompactSpace W.left] [QuasiSeparatedSpace W.left] :

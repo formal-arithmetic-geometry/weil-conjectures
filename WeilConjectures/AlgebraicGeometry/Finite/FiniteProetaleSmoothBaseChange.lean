@@ -13,10 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 /-!
 # Finite pro-etale smooth base change
 
-Source: Weil conjectures blueprint, sec-smooth-base-change/sk-rem-rest, finite
-pro-etale smooth-base-change paragraph; Stacks Project, Tags 0EYU and 0F09
-(blueprint: theorem-smooth-base-change-all-admissible--1).
-
 The input and output use the recorded continuous-function coefficient module category.
 The ambient ringed mate is computed in fixed-scalar coordinates using the canonical
 realization equivalence. This is the same unit--square--counit mate: realization
@@ -33,6 +29,10 @@ No alternative exchange is chosen and no completion is taken.
 
 - `isIso_finite_proetale_smooth_base_change`: invertibility and the explicit
   conjugation identity for every etale model, in the ringed coefficient category.
+
+## References
+
+* Stacks Project, Tags 0EYU and 0F09
 -/
 
 @[expose] public section

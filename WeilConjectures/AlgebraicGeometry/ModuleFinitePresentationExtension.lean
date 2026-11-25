@@ -15,10 +15,11 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Extension of finitely presented modules and their morphisms
 
-Source: Stacks Project, Properties of Schemes, Lemma 28.23.4, Tag 01PI
-(blueprint: lem-weil-pbc-module-finite-presentation-extension).
-
 Restriction to an open is expressed on the localized site with `SheafOfModules.over`.
+
+## References
+
+* [Stacks, Tag 01PI](https://stacks.math.columbia.edu/tag/01PI)
 -/
 
 @[expose] public section
@@ -73,32 +74,8 @@ private theorem finitePresentation_affine_enlargement
   exact ⟨K, hK, hKfp, ψ, hψW⟩
 
 /-- A morphism from a finitely presented module on a quasi-compact open of a qcqs scheme
-into a quasi-coherent module extends to a finitely presented module on the whole scheme.
-Source: Stacks Project, Properties of Schemes, Lemma 28.23.4, Tag 01PI
-(blueprint: lem-weil-pbc-module-finite-presentation-extension).
-
-Proof:
-1. Extend G and its map quasi-coherently across U using
-   lem-weil-pbc-quasi-coherent-extension-qc-open. This gives a global H with a map
-   to F, an identification H restricted to U with G, and the required map equation.
-2. Induct on finite sets of affine opens. Maintain a global quasi-coherent E,
-   finite presentation on U union those opens, with a map E to H which is an
-   isomorphism on U. The empty case uses H and its identity map. Each intermediate
-   open is compact because U and the affine opens are compact.
-3. To insert V, apply lem-weil-pbc-module-finite-presentation-affine-replacement
-   to E and the previous compact open W. It produces a finitely presented module
-   on V with a map to E restricted to V, isomorphic on W intersect V. Apply
-   lem-weil-pbc-module-finite-presentation-binary-gluing to obtain a finitely
-   presented module on W union V mapping to E there, isomorphic on W.
-4. Extend the glued pair quasi-coherently to X, using the same extension theorem.
-   Transport finite presentation along its restriction identification. Naturality
-   of overFunctorMap shows the extended map remains an isomorphism on W and hence
-   on U. Compose it with the previous map to H to close the induction step.
-5. Compactness of X provides a finite affine subcover, so the growing open is top.
-   Finite presentation on top implies global finite presentation by locality on
-   the singleton top cover. Compose the map to H with its map to F; composing
-   the restriction isomorphism with H restricted to U identified with G gives
-   the asserted identification and morphism equation. -/
+into a quasi-coherent module extends to a finitely presented module on the whole scheme
+(Stacks, Tag 01PI). -/
 theorem exists_finitePresentation_extension
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (U : X.Opens) (hU : IsCompact (U : Set X))

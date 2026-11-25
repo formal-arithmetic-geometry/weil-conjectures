@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteSingleUnitNormaliz
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 import WeilConjectures.AlgebraicGeometry.EtaleProperSectionContraction
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
-
 # The first scalar diagonal integral tensored with any complex
 -/
 @[expose] public noncomputable section
@@ -31,14 +28,7 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFun
   leftDerivedUpperStarCompSectionIso leftDerivedUpperStarComp
   derivedUpperStarLowerStarAdjunction
 
-/-- The first normalized scalar integral gives the tensor integral in the first triangle.
-Source: blueprint thm-amb-p1-adjunction.proof.md, first triangle calculation.
-(auxiliary; not a blueprint node).
-Proof: replace the cached unit comparison by the canonical single-complex comparison
-using its proved defining equation. Apply the proper section projection contraction.
-The component formula for the diagonal tensor isomorphism identifies its inverse
-projection. Cancel the single-unit inverse before its tensor unitor. Functoriality
-and associativity then give exactly the displayed tensor integral. -/
+/-- The first normalized scalar integral gives the tensor integral in the first triangle. -/
 theorem diagonalFirstTensorIntegral
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)

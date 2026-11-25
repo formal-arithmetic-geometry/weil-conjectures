@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphShrinkSidePasting
 
 /-! # Graph comparisons and proper/open interchange
 
-Source: Stacks Project, Tag 0F7J
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 0F7J
 -/
 
 @[expose] public noncomputable section
@@ -98,46 +99,7 @@ private theorem graphComparison_shrink
     hside hmiddle
 
 /-- Product-graph comparisons identify the elementary neighborhood move and intertwine
-proper/open interchange for arbitrary two supplied diagrams.
-
-Source: Stacks Project, Tag 0F7J, independence of choices, final A--F comparison;
-agent product-graph extension (auxiliary; not a blueprint node).
-
-Proof:
-1. For the neighborhood move, fix the auxiliary compactification c. The graph products
-and first neighborhoods agree. The second neighborhoods differ by v times the identity;
-the intersections differ by its pullback. The proper graph maps compose with these opens
-by equality of both projections (locally-closed-graph-model and fibre-product).
-2. Expand both B maps as B₂ inverse, proper image of B₁₂, and B₁. The horizontal exchange
-law compares the side squares; the vertical law compares the graph triangle stacked above
-the side square. Cancel the common side exchange. Naturality moves the graph triangle
-past the remaining side exchange. In the intersections the two smaller graph triangles
-cancel by the horizontal law. Thus B_S equals the specified inverse triangle word times
-B_H. Use proper-open-exchange-cube and extension-zero-composition throughout.
-3. The definition C_SH = B_S B_H inverse gives the first assertion. Composite adjunctions
-and the open triple-composition identity normalize every cancellation, as in
-ringed-derived-monoidal-comparisons.
-4. For two diagrams form Y₀ = Y×_Z Y, T₀, P₀, V₀, W₀ as pairwise products over Z,
-and V_c, W_c as products over Y. The diagonal Y->Y₀ is closed: it is the pullback of
-the closed diagonal of q₁ along i₁×i₁, since i₁ is mono. Hence V_c->V₀ and W_c->W₀
-are proper. The graph lifts into W_c and W₀ are proper by proper-to-separated-target.
-All supporting opens are products or pullbacks of the supplied opens.
-5. Pairwise-product-graph-normalization supplies dν-lambda, tν-lambda, sν-lambda to the
-three common graph words, with C_21 = lambda₂ inverse times lambda₁. Let K be the
-inverse exchange for the Cartesian square W_c->W₀ over V_c->V₀, under Rr₀. Let I₀
-be exchange for the product proper/open square, under Rq₀ and after Je₀ Ra₀.
-6. Expand these three lambda maps by their three-arrow formulas. Insert the intermediate
-opens Vν×_Z Pother and Pν×_Z Vother. The grid consists of Cartesian side squares,
-graph triangles and the supplied squares Qν and Q₀, all with the same normalization.
-7. Evaluate the grid by rows and columns. Vertical and horizontal exchange laws compose
-its cells. For cells meeting at a vertex use whiskerLeft_comp_whiskerRight. Cancel
-opposite graph triangles. The row boundary is sν-lambda Iν; the column boundary is
-I₀ (G₀ K) (dν-lambda F_c) F_dν(tν-lambda), with the square for K in inverse direction.
-This is equality of derived natural transformations, without a stalkwise inference.
-8. Cancel the common I₀(G₀K) for ν = 1,2. Expanding the remaining lambda inverses and
-using naturality yields (C_d21 F_t2) F_d1(C_t21). Substituting all three pairwise
-normalizations gives the second assertion. No Cartesian hypothesis on Qν, map between
-the diagrams, quasi-compactness, Noetherianity, boundedness or constructibility is used. -/
+proper/open interchange for arbitrary two supplied diagrams (Stacks, Tag 0F7J). -/
 theorem etaleGraphComparisonInterchange (A : Type (u + 1)) [CommRing A] [Finite A] :
     (∀ {X Z W : Scheme.{u}} {h : X ⟶ Z} (c : Compactification h)
       (H : EtaleGraphPresentation h) (a' : X ⟶ W) (v : W ⟶ H.U)

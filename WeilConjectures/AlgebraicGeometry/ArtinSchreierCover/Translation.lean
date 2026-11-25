@@ -19,8 +19,6 @@ import WeilConjectures.Mathlib.Algebra.CharP.Algebra
 For a scheme `S` with `p = 0` on `S` and `f ∈ Γ(S, ⊤)`, the cover
 `adjoinRootCover S (T ^ p - T - f)` carries the translations `T ↦ T + a`, `a ∈ 𝔽_p`, which
 preserve the equation since `a ^ p = a`; the inverse of `T ↦ T + a` is `T ↦ T - a`.
-Source: blueprint, lemma-artin-schreier-character-sheaf, step (3);
-lem-sc-field-artin-schreier-kernel.
 -/
 
 @[expose] public section

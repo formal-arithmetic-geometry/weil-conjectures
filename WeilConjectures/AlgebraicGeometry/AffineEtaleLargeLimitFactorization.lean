@@ -9,7 +9,9 @@ import WeilConjectures.AlgebraicGeometry.AffineEtaleLargeLimitEquality
 
 /-! # Factorization of maps from larger affine étale limits
 
-Source: Stacks Project, Tags 01ZC and 099S.
+## References
+
+* Stacks Project, Tags 01ZC and 099S
 -/
 
 @[expose] public section
@@ -23,24 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- Every map from the affine étale inverse limit to an affine étale object
-factors through one stage, even for the larger index universe.
-
-Source: Stacks Project, limits.tex, Proposition 32.6.1 (Tag 01ZC), surjectivity
-in (1) implies (3), and proetale.tex, lemma-limit-pullback (Tag 099S).
-(auxiliary; not a blueprint node).
-
-Proof: Work over X and cover the source by finitely many affine opens mapping into
-an affine chart of X and an affine chart of V. The affine finite-presentation
-calculation lifts the finitely many generators of the target algebra to a common
-stage and kills its finitely many defining relations after refinement. The
-quasi-compact affine source permits finitely many such charts. Refine once more
-so that they cover a stage, then descend the finitely many overlap equations by
-the locally finite-type equality argument of Tag 01ZC. Glue the resulting local
-maps to a stage map over X. All choices of generators, relations, covering charts
-and overlap equations are finite, so the same construction works for I in u+1.
-The resulting scheme map is a morphism of the full pro-étale subcategory of
-schemes over X. For an empty limit, the same quasi-compact covering argument
-produces an empty stage and hence its unique map to V. -/
+factors through one stage, even for the larger index universe (Stacks, Tags 01ZC, 099S). -/
 theorem affineEtale_largeLimit_factorization {X : Scheme.{u}}
     {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ X.ProEt) (haff : ∀ i, IsAffine (D.obj i).left)

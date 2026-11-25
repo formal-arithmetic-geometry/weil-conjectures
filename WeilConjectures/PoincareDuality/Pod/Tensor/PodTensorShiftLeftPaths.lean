@@ -9,7 +9,16 @@ public import WeilConjectures.PoincareDuality.Pod.PodCompletionReindexShifts
 
 import WeilConjectures.PoincareDuality.PodTensorShiftNormalization.PodTensorShiftPathAssembly
 
-/-! # The left source tensor-shift path formula -/
+/-! # The left source tensor-shift path formula
+
+We prove the source path formula for the signed tensor shift in the left slot under reindexing
+along an isomorphism of schemes (`podTensorShift_leftSourcePath`).
+
+## Implementation details
+
+The formula is deduced from the model law of the signed shift via the path calculation for an
+arbitrary presentation.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -49,10 +58,9 @@ open PodTensorShiftNormalization
 attribute [local irreducible] integralOperationsRoos
 
 -- Keep sharing in the dependent coefficient-category expressions.
-/-- The left-slot source path formula, proved from its model law.
-Use the arbitrary-presentation path calculation.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: lem-pod-tensor-shift-left-paths-t5). -/
+/-- The source path formula for the signed tensor shift in the left slot: under reindexing along
+an isomorphism `g`, the source-shift path of the left tensor shift of good representatives `P`,
+`Q` is given by its model formula. -/
 theorem podTensorShift_leftSourcePath
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

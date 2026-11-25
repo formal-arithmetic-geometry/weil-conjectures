@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.P1.FiniteP1LocalCo
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Ordinary.FiniteOrdinaryCoordinateViaSingle
 
 /-! # Actual finite coordinate images of ordinary P1 and local arrows
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-p1-local-coordinate-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -52,12 +49,7 @@ attribute [local irreducible] Functor.mapDerivedCategory SpTowerP1.nuSingle
   Etale.ordinaryFiniteUnitPullback Etale.ordinaryFiniteShiftedLinePullback
 
 /-- The local fixed-Hom coordinate image is successive ordinary coordinate
-transport. Source: exact single comparison and the actual local-image equation
-(blueprint: lem-sfb-finite-p1-local-coordinate-comparison).
-
-Proof: compose finiteP1LocalCoordinateImage_composite with the proved generic
-finiteOrdinaryCoordinateArrow_via_single formula. The successive arrow uses
-exactly the given unit and line fields of c, by their defining equations. -/
+transport. -/
 theorem finiteP1LocalCoordinateImage_ordinary (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (X : Scheme.{u}) {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n X hX)

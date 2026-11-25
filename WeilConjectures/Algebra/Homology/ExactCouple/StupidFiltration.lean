@@ -20,13 +20,13 @@ sequence
 
 `E₁^{r, s} = R^r v(K^s) ⟹ H^{r + s}(R⁺v(K))`
 
-of blueprint `thm-sp-if-e1`, whose differential `d₁ : E₁^{r, s} ⟶ E₁^{r, s + 1}` is
+whose differential `d₁ : E₁^{r, s} ⟶ E₁^{r, s + 1}` is
 `R^r v(d_K)`.
 
 ## The construction
 
-The blueprint constructs this spectral sequence from a Cartan–Eilenberg resolution of `K`,
-filtered by the second degree. We use the equivalent construction by the *stupid filtration*:
+We construct this spectral sequence by the *stupid filtration* (equivalently, from a
+Cartan–Eilenberg resolution of `K` filtered by the second degree):
 the stupid truncations `σ_{≥ s} K` give degreewise split short exact sequences of complexes
 
 `0 ⟶ σ_{≥ s + 1} K ⟶ σ_{≥ s} K ⟶ K^s[-s] ⟶ 0`,
@@ -49,9 +49,6 @@ the stupid filtration of `K`.) The spectral sequence of this couple, starting on
 cohomology `Hⁿ(R⁺v(K))` of the derived functor, filtered by the images of
 `Hⁿ(R⁺v(σ_{≥ s} K))` (`CategoryTheory.Functor.stupidFiltrationExactCouple_convergesTo`). The
 abutment `Hⁿ(R⁺v(K))` only depends on `K` (and not on any choice of resolutions).
-
-In the notation `E₁^{r, s}` of the blueprint, `r = n - s` is the degree of the derived functor
-and `s` is the degree in `K`.
 
 ## Main definitions
 
@@ -439,12 +436,7 @@ noncomputable def stupidFiltrationTower (K : CochainComplex A ℤ) :
 degree `s` and the total degree `n` with `D^{s, n} = Hⁿ(R⁺v(σ_{≥ s} K))` and
 `E^{s, n} = Hⁿ(R⁺v(K^s[-s])) ≅ R^{n - s} v(K^s)`, given by the long exact cohomology sequences of
 the distinguished triangles `R⁺v(σ_{≥ s + 1} K) ⟶ R⁺v(σ_{≥ s} K) ⟶ R⁺v(K^s[-s]) ⟶`.
-Its spectral sequence is `E₁^{r, s} = R^r v(K^s) ⟹ H^{r + s}(R⁺v(K))`.
-
-This replaces the Cartan–Eilenberg resolution filtered by the second degree of the blueprint by
-the stupid filtration of `K`, which gives the same exact couple (see the module docstring).
-
-(blueprint: `thm-sp-if-e1`) -/
+Its spectral sequence is `E₁^{r, s} = R^r v(K^s) ⟹ H^{r + s}(R⁺v(K))`. -/
 noncomputable def stupidFiltrationExactCouple (K : CochainComplex A ℤ) :
     ExactCouple B ((-1, 0) : ℤ × ℤ) (1, 1) 0 :=
   (v.stupidFiltrationTower K).exactCoupleNeg (DerivedCategory.Plus.homologyFunctor B 0)
@@ -452,9 +444,7 @@ noncomputable def stupidFiltrationExactCouple (K : CochainComplex A ℤ) :
 /-- **The spectral sequence `E₁^{r, s} = R^r v(K^s) ⟹ H^{r + s}(R⁺v(K))`**, starting on page
 `1`: the spectral sequence of `CategoryTheory.Functor.stupidFiltrationExactCouple`. Its entry
 of index `(s, n)` (filtration degree `s`, total degree `n`) on page `1` is
-`R^{n - s} v(K^s)` (`CategoryTheory.Functor.stupidFiltrationE₁Iso`).
-
-(blueprint: `thm-sp-if-e1`) -/
+`R^{n - s} v(K^s)` (`CategoryTheory.Functor.stupidFiltrationE₁Iso`). -/
 noncomputable def stupidFiltrationSpectralSequence (K : CochainComplex A ℤ) :
     SpectralSequence B (ExactCouple.pageShape ((-1, 0) : ℤ × ℤ) (1, 1) 0 1) 1 :=
   (v.stupidFiltrationExactCouple K).spectralSequence 1
@@ -517,9 +507,7 @@ lemma homologyRightDerivedSingleIso_symm_trans (t t' n n' : ℤ) (r : ℕ) (h : 
   rw [reassoc_of% e, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app]
 
 /-- **The `E₁`-term of the spectral sequence of the stupid filtration**:
-`E₁^{s, n} ≅ R^r v(K^s)` for `r = n - s`.
-
-(blueprint: `thm-sp-if-e1`) -/
+`E₁^{s, n} ≅ R^r v(K^s)` for `r = n - s`. -/
 noncomputable def stupidFiltrationE₁Iso (K : CochainComplex A ℤ) (s n : ℤ) (r : ℕ)
     (h : n - s = r) :
     (v.stupidFiltrationExactCouple K).E (s, n) ≅ (v.rightDerived r).obj (K.X s) :=
@@ -527,9 +515,7 @@ noncomputable def stupidFiltrationE₁Iso (K : CochainComplex A ℤ) (s n : ℤ)
     (v.rightDerived r).mapIso (K.XIsoOfEq (neg_neg s))
 
 /-- The `E₁`-term `E₁^{s, n}` of the spectral sequence of the stupid filtration vanishes for
-`n < s`.
-
-(blueprint: `thm-sp-if-e1`) -/
+`n < s`. -/
 lemma isZero_stupidFiltrationExactCouple_E (K : CochainComplex A ℤ) (s n : ℤ) (h : n < s) :
     IsZero ((v.stupidFiltrationExactCouple K).E (s, n)) :=
   isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE v
@@ -570,9 +556,7 @@ lemma stupidFiltrationExactCouple_d_eq (K : CochainComplex A ℤ) (s n : ℤ) :
 /-- **The differential `d₁` of the spectral sequence of the stupid filtration.** Under the
 isomorphisms `E₁^{s, n} ≅ R^r v(K^s)` and `E₁^{s + 1, n + 1} ≅ R^r v(K^{s + 1})` (with
 `r = n - s`), the differential `d₁ : E₁^{s, n} ⟶ E₁^{s + 1, n + 1}` of the first page is
-`R^r v(d_K)`, with sign `+1`.
-
-(blueprint: `thm-sp-if-e1`) -/
+`R^r v(d_K)`, with sign `+1`. -/
 theorem stupidFiltrationE₁Iso_inv_comp_d_comp_hom (K : CochainComplex A ℤ) (s n : ℤ) (r : ℕ)
     (h : n - s = r) :
     (v.stupidFiltrationE₁Iso K s n r h).inv ≫
@@ -632,9 +616,7 @@ noncomputable def stupidFiltrationAbutmentFiltration (K : CochainComplex.Plus A)
 /-- **Convergence of the spectral sequence `E₁^{r, s} = R^r v(K^s) ⟹ H^{r + s}(R⁺v(K))`.**
 For a bounded below complex `K`, the spectral sequence of the stupid filtration converges to the
 cohomology `Hⁿ(R⁺v(K))` of the right derived functor of `K` (which does not depend on any
-choices), filtered by the images of the maps `Hⁿ(R⁺v(σ_{≥ p} K)) ⟶ Hⁿ(R⁺v(K))`.
-
-(blueprint: `thm-sp-if-e1`) -/
+choices), filtered by the images of the maps `Hⁿ(R⁺v(σ_{≥ p} K)) ⟶ Hⁿ(R⁺v(K))`. -/
 theorem stupidFiltrationExactCouple_convergesTo (K : CochainComplex.Plus A) :
     (v.stupidFiltrationExactCouple K.obj).ConvergesTo (v.stupidFiltrationAbutmentι K)
       (v.stupidFiltrationAbutmentFiltration K) := by

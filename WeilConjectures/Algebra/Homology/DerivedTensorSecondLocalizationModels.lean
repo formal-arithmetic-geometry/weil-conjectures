@@ -18,9 +18,10 @@ import WeilConjectures.Algebra.Homology.SecondLocalizationNaturality
 import Mathlib.RingTheory.Flat.Localization
 /-! # Localizing the base and second factor of a derived tensor
 
-Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
-second coefficient ring; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-derived-tensor-second-localization-models).
+## References
+
+* Stacks Project, Tag 0DJ8 (localization of the base and second coefficient ring)
+* Stacks Project, Tag 06Y6 (More on Algebra)
 -/
 
 @[expose] public section
@@ -52,24 +53,7 @@ variable (R A B Bp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} Bp)]
 
 include tRB tAD tBD tApD tBpD tBBpD in
-/-- Localization with one factor fixed.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, affine localization identity;
-More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-derived-tensor-second-localization-models).
-
-Proof: compute the derived tensor using a K-flat R-resolution of Q. Since
-B -> Bp is a localization, it is flat, and extending its B-tensor complex
-commutes with homology. The ordinary scalar-extension associator identifies
-the resulting complex with the Bp-tensor of the same resolution. The maps
-commute with multiplication by A and Bp, hence are tensor-algebra linear.
-Tensor associativity identifies their further extensions to D. Naturality
-of flat homology base change proves naturality for chain maps and for scalar
-actions. Apply it to the augmentation of the resolution to prove the comparison
-square. Transport through the unique counit-compatible identifications of
-left-derived functors to the specified models; their cohomology action equations
-preserve A-linearity. Faithful restriction to B and Bp proves the square for the
-characterized g and h. Pure tensors generate each term of the ordinary complex,
-so every tau with the prescribed formula equals the associator used here. -/
+/-- Localization with one factor fixed. -/
 theorem derivedTensor_second_localization_models
     (T : Submonoid B) [IsLocalization T Bp] (i : ℤ) :
     ∃ e : ∀ (Q : CochainComplex (ModuleCat.{u} A) ℤ)

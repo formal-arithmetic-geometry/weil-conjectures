@@ -12,8 +12,26 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Representative factors of the scalar inverse mate
 
-Source: Stacks Tags 00YV and 07A6.
-(blueprint: lem-sf-finite-scalar-pullback-representative-factors).
+We show that the inverse mate comparison for finite-scalar pro-étale pullback has the ordinary
+mate's chain normalization on representative complexes.
+
+## Main results
+
+* `finiteScalarFixedPullbackFactors`: the exact fixed-scalar inverse image computes its total
+  left derived functor.
+* `finiteScalarPullback_representative_factors`: the chain normalization of the inverse mate.
+
+## Implementation details
+
+The ordinary comparison is the inverse mate of the section-normalized ordinary direct-image
+isomorphism. The inverse derived direct-image comparison obeys the same unit equation, first on
+K-injectives and then on all complexes by naturality along K-injective resolutions, so
+uniqueness of the derived mate gives the formula. The two exact-functor factor isomorphisms put
+it in complex coordinates. The statement is unary: no tensor product or tensor model occurs.
+
+## References
+
+* Stacks Project, Tags 00YV, 04JC, 07A6, 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -47,9 +65,7 @@ attribute [local instance 30000] SheafOfModules.instPreadditive
 
 namespace WeilConjectures
 
-/-- The exact fixed-scalar inverse image computes its total left derived functor.
-Source: Stacks Tag 04JC, localization of exact inverse image.
-(blueprint: lem-sf-finite-scalar-pullback-representative-factors). -/
+/-- The exact fixed-scalar inverse image computes its total left derived functor. -/
 @[irreducible] def finiteScalarFixedPullbackFactors
     (R : Type u) [CommRing R] {X Y : Scheme.{u}} (p : X ⟶ Y) :
     DerivedCategory.Q ⋙
@@ -61,22 +77,9 @@ Source: Stacks Tag 04JC, localization of exact inverse image.
       (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).leftDerivedFunctorIsoMapDerivedCategory ≪≫
     (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).mapDerivedCategoryFactors
 
-/-- The inverse mate on derived categories has the ordinary mate's chain normalization.
-This is a unary statement: it involves no tensor product and no tensor model.
-
-Source: Stacks Tags 07A6 and 0D6E, comparison of derived adjunction Hom bijections.
-(blueprint: lem-sf-finite-scalar-pullback-representative-factors).
-
-Proof: write the ordinary comparison as the inverse mate of the section-normalized
-ordinary direct-image isomorphism. Apply the exact-derived mate formula to its
-termwise localization. The inverse derived direct-image comparison obeys the same
-unit equation, first on K-injectives by its definition, and then on every complex
-by naturality along a K-injective resolution. Uniqueness of the derived mate gives
-the displayed formula. The identification of the two constant direct images is
-induced by the coefficient adjunction and is the same in both mate constructions.
-The two exact-functor factor isomorphisms put the formula in complex coordinates.
-There are no boundedness, nonzero-coefficient, or nonempty-site assumptions.
--/
+/-- For an exact functor `L`, the comparison of its left derived functor with
+`L.mapDerivedCategory`, followed by the factorization isomorphism, is the left derived functor
+counit at `Z`. -/
 private theorem exact_factors_eq_counit_local
     {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]
     [Abelian C] [Abelian D]
@@ -110,12 +113,8 @@ private theorem fixedFactors_eq_counit_local
     isoWhiskerLeft_hom, whiskerLeft_app] using exact_factors_eq_counit_local
       (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p) Z
 
-/-- The expanded mate-normalization equation before the paper-level wrappers are folded.
-Source: Stacks Tags 07A6 and 0D6E.
-(blueprint: lem-sf-finite-scalar-pullback-representative-factors-core).
-
-This is the concrete derived-category square obtained from the normalized inverse mate;
-it is the single mate calculation used by the wrapper theorem below. -/
+/-- The mate-normalization equation with the derived counit in place of
+`finiteScalarFixedPullbackFactors`. -/
 private theorem finiteScalarPullback_representative_factors_core
     (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)
     (P : CochainComplex

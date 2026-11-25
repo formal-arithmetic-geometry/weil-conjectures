@@ -18,8 +18,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 /-!
 # The Tor amplitude of the Verdier dual
 
-This file proves the auxiliary statements used for the Tor bound of the Verdier dual
-(`lemma-verdier-duality-preserves-constructibility--1`):
+This file proves the auxiliary statements used for the bound on the Tor amplitude of the Verdier
+dual:
 
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedHom_rightDerivedLowerStar`: the internal hom into
   a direct image, `RHom(K, Rf_* M) ≅ Rf_* RHom(Lf^* K, M)`;
@@ -52,9 +52,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 /-! ### The internal hom into a direct image -/
 
 /-- **The internal hom into a direct image**: for `f : Z ⟶ X` and `K` on `X`,
-`RHom_X(K, Rf_* M) ≅ Rf_* RHom_Z(Lf^* K, M)`. Both sides are right adjoint to functors of
-`T ∈ D(X_ét)`: the left one to `T ↦ Lf^*(K ⊗ᴸ T)`, the right one to `T ↦ Lf^* K ⊗ᴸ Lf^* T`, and
-these agree since `Lf^*` is monoidal. -/
+`RHom_X(K, Rf_* M) ≅ Rf_* RHom_Z(Lf^* K, M)`. -/
 theorem nonempty_iso_derivedHom_rightDerivedLowerStar {Z X : Scheme.{u}} (f : Z ⟶ X)
     (K : DerivedCategoryModule Λ X) (M : DerivedCategoryModule Λ Z) :
     Nonempty (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj
@@ -82,8 +80,7 @@ variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
   [Abelian.HasFunctorialFlatResolution A]
 
 /-- **Tor amplitude is closed under extensions**: in a distinguished triangle
-`X₁ ⟶ X₂ ⟶ X₃ ⟶ X₁⟦1⟧` whose outer terms have Tor amplitude in `[a, b]`, so does `X₂`, the
-derived tensor product with a sheaf being triangulated. -/
+`X₁ ⟶ X₂ ⟶ X₃ ⟶ X₁⟦1⟧` whose outer terms have Tor amplitude in `[a, b]`, so does `X₂`. -/
 lemma torAmplitudeIn_obj₂_of_distTriang' {X : Scheme.{u}}
     (T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))
     (hT : T ∈ distTriang _) {a b : ℤ} (h₁ : torAmplitudeIn A X a b T.obj₁)
@@ -99,10 +96,8 @@ lemma torAmplitudeIn_obj₂_of_distTriang' {X : Scheme.{u}}
     _root_.DerivedCategory.TStructure.t.isLE₂ _ (G.map_distinguished _ hT) _ l₁ l₃⟩
 
 /-- **Tor amplitude descends along a morphism reflecting vanishing**: if `p : U' ⟶ U` is such
-that
-vanishing of homology sheaves can be tested after pullback along `p` (e.g. `p` surjective),
-and `Lp^* N` has Tor amplitude in `[a, b]`, then so does `N`, since
-`p^*(N ⊗ᴸ G) ≅ Lp^* N ⊗ᴸ p^* G`. -/
+that vanishing of homology sheaves can be tested after pullback along `p` (e.g. `p` surjective),
+and `Lp^* N` has Tor amplitude in `[a, b]`, then so does `N`. -/
 lemma torAmplitudeIn_of_leftDerivedUpperStar' {U' U : Scheme.{u}} (p : U' ⟶ U)
     [(p)^*[A].PreservesFlat] (hp : ∀ (M : _root_.DerivedCategory (Sheaf U.smallEtaleTopology A))
       (q : ℤ), IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj (D((p)^*[A]).obj M)) →
@@ -144,10 +139,8 @@ lemma torAmplitudeIn_obj₂_of_distTriang {X : Scheme.{u}}
     torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b T.obj₂ :=
   torAmplitudeIn_obj₂_of_distTriang' (ModuleCat.{u + 1} Λ) T hT h₁ h₃
 
-/-- The internal hom `RHom(K, -)` out of a fixed complex `K` sends distinguished triangles to
-distinguished triangles, being right adjoint to the triangulated `K ⊗ᴸ -`; hence if `RHom(K, -)`
-of the outer terms of a distinguished triangle has Tor amplitude in `[a, b]`, so does
-`RHom(K, -)` of the middle term. -/
+/-- If `RHom(K, -)` of the outer terms of a distinguished triangle has Tor amplitude in `[a, b]`,
+so does `RHom(K, -)` of the middle term. -/
 lemma torAmplitudeIn_derivedHom_obj₂_of_distTriang {X : Scheme.{u}}
     (K : DerivedCategoryModule Λ X) (T : Triangle (DerivedCategoryModule Λ X))
     (hT : T ∈ distTriang _) {a b : ℤ}
@@ -167,7 +160,7 @@ section Descent
 open ZeroObject
 
 /-- A sheaf of `Λ`-modules on the small étale site whose pullback along a surjective morphism
-vanishes is zero: pullbacks along a jointly surjective family reflect isomorphisms. -/
+vanishes is zero. -/
 lemma isZero_of_isZero_upperStar_of_surjective {U' U : Scheme.{u}} (p : U' ⟶ U)
     (hp : Function.Surjective p.base) {F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (h : IsZero ((p)^*[ModuleCat.{u + 1} Λ].obj F)) : IsZero F := by

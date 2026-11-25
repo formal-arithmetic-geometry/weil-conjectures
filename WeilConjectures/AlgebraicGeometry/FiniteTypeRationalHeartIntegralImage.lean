@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 
 /-! # Integral sheaf models for rational direct images
 
-Source: Bhatt--Scholze, Lemmas 6.8.12--6.8.13, Proposition 6.8.14(2),
-and Remark 6.8.15 (auxiliary; not a blueprint node).
+## References
+
+* Bhatt--Scholze, Lemmas 6.8.12--6.8.13, Proposition 6.8.14(2), and Remark 6.8.15
 -/
 
 @[expose] public section
@@ -40,17 +41,7 @@ include k
 set_option linter.unusedSectionVars false in
 /-- A rational constructible sheaf has an ordinary integral model whose direct image
 localizes to the rational direct image. No cohomological upper bound is asserted.
-Source: Bhatt--Scholze, Lemmas 6.8.12--6.8.13, Proposition 6.8.14(2), Remark 6.8.15.
-(auxiliary; not a blueprint node)
-
-Proof. Choose the bounded constructible integral model of F[0]. Exactness of
-localization identifies its zeroth cohomology N with an ordinary integral model
-of F; N is constructible by the definition of bounded constructibility. Place N
-in degree zero, obtaining a bounded constructible integral complex. The qcqs
-localization/direct-image comparison is invertible on this complex. Compose it
-with the derived image of the single-complex localization isomorphism. The
-empty scheme and zero sheaf are included by these same constructions.
--/
+(Bhatt--Scholze, Lemmas 6.8.12--6.8.13, Proposition 6.8.14(2), Remark 6.8.15.) -/
 theorem finiteTypeRationalHeart_integralImage
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E]

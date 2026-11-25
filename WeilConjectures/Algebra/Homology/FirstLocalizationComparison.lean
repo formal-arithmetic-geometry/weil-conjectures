@@ -11,8 +11,11 @@ import WeilConjectures.Algebra.Homology.FirstLocalizationOrdinarySquare
 import WeilConjectures.Algebra.Homology.ScalarExtensionHomologySquare
 /-! # Comparison square for the characterized localization map
 
-Source: Stacks Project, Tag 06Y6; Tag 0DJ8.
-(blueprint: lem-pc-first-localization-comparison). -/
+## References
+
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 0DJ8
+-/
 
 @[expose] public section
 
@@ -43,19 +46,7 @@ variable (R A B Aq D : Type u)
 
 set_option linter.unusedSectionVars false in
 include tAD tBD tAqD tBqD tAAqD in
-/-- Comparison square for the characterized localization map.
-Source: Stacks Project, Tag 06Y6; Tag 0DJ8, affine localization identity.
-(blueprint: lem-pc-first-localization-comparison).
-
-Proof: apply naturality of the universal derived-functor counit to the
-localization unit. The ordinary tensor associativity maps commute with that unit:
-on b tensor x both routes give (1 tensor b) tensor (1 tensor x).
-The same calculation after extension to D gives d tensor (1 tensor x).
-Use comparison_eq on both models, then localized_eq and the extension/restriction
-adjunction to obtain the D-linear equality on generators. Tensor induction proves
-it on every element. Any tau with the given formula equals the associativity map,
-by tensor induction termwise. No flatness of D is needed. For zero complexes or
-zero D all maps are the unique zero map. -/
+/-- Comparison square for the characterized localization map. -/
 theorem firstLocalization_comparison (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

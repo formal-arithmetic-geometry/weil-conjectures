@@ -12,9 +12,12 @@ public import Mathlib.RingTheory.Flat.Basic
 import WeilConjectures.Algebra.Homology.BaseTensorCohomologyFunctor
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
-/-! # The coefficient comparison on K-flat complexes
+/-!
+# The coefficient comparison on K-flat complexes
 
-Source: Stacks Project, Tags 06Y6, 0BYJ, and 0DJ7.
+## References
+
+* Stacks Project, Tag 06Y6 (derived change of rings), Tag 0BYJ (associativity), Tag 0DJ7
 -/
 
 @[expose] public section
@@ -85,35 +88,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
       (.up ℤ)).obj Q) ⟶ N)
 
 omit [HasDerivedCategory (ModuleCat.{u} A)] in
-/-- The localized coefficient comparison is natural on K-flat complexes.
-
-Source: Stacks Project, Tag 06Y6 (derived change of rings), Tag 0BYJ
-(associativity), and perfect.tex, equation-bc before Tag 0DJ7.
-
-Proof: obtain the ordinary tensor-algebra-valued cohomology functor and its
-natural comparison from exists_baseTensorCohomologyFunctor. Transpose the
-A-to-C extension unit through the A-to-E adjunction, where E=A-tensor-R-B, to
-construct the natural ordinary coefficient chain map. Take homology, compose
-with the exact restriction homology isomorphism and the ordinary comparison,
-then transpose through the E-to-C adjunction. This gives the natural comparison
-from the E-to-C extension of the source functor to homology of C-extension.
-The chain coefficient map equals each model's ordinaryToLocalized map on
-pure tensors, hence everywhere. Adjunction naturality, the ordinary comparison
-component equation and localized_eq identify its model component with
-localizedComparison.
-Precompose by tensorRight Q on the K-flat input category. The acyclic-tensor
-hypothesis on Q gives categorical K-flatness through the homotopy acyclic
-criterion and braiding, hence tensorRight Q preserves quasi-isomorphisms.
-The ordinary source functor inverts them, and extension to C preserves
-isomorphisms. For the target, compose the inverse monoidal tensorator of
-C-extension with identity tensor t. Tensorator naturality and whisker exchange
-prove its naturality in the input complex. Take homology and compose with the
-previous comparison. Extend the ordinary model isomorphism to C; associativity
-and the component equation give the displayed equality. No flatness of C, no
-invertibility of t and no K-flatness of N is used. Zero rings, zero complexes and
-unbounded complexes
-are covered by the same maps and tensor generator equations.
-(blueprint: lem-pc-kflat-localized-tensor-comparison-natural). -/
+/-- The localized coefficient comparison is natural on K-flat complexes. -/
 theorem exists_kFlatLocalizedTensorComparison_natural
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)

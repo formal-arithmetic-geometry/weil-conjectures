@@ -14,8 +14,15 @@ import Mathlib.Order.Preorder.Finite
 /-!
 # Filtrations of finite primary modules with a p-group action
 
-Source: Stacks Project, Tags 0GIZ and 0GJ0
-(blueprint: lem-sc-primary-pgroup-filtration).
+## Implementation details
+
+A maximal subgroup attainable as the endpoint of a stable chain with trivial quotients killed
+by `ℓ` exists since `V` is finite; by `exists_primary_invariant_extension` it must be all of `V`.
+
+## References
+
+* [Stacks Project, Tag 0GIZ](https://stacks.math.columbia.edu/tag/0GIZ)
+* [Stacks Project, Tag 0GJ0](https://stacks.math.columbia.edu/tag/0GJ0)
 -/
 
 @[expose] public section
@@ -24,23 +31,9 @@ universe u v
 
 namespace Representation
 
-/-- A finite primary abelian group with a p-group action has a stable filtration
-with trivial quotients killed by the prime.
-
-Proof: Consider the subgroups attainable as endpoints of finite stable chains
-starting at zero with trivial successive quotients killed by ℓ. Zero is
-attainable by a chain of length zero. Since V is finite, its subgroup lattice is
-finite, so an attainable subgroup W maximal for inclusion exists. If W is
-proper, `exists_primary_invariant_extension` supplies a strictly larger stable
-subgroup W' whose quotient by W is trivial and killed by ℓ. Append W' to the
-chain for W, contradicting maximality. Hence the maximal endpoint is the whole
-module. Restrict the resulting natural-number indexed chain to `Fin (n + 1)`.
-The extension argument works also when V is zero, where no extension is needed.
-
-Source: Stacks Project, Etale Cohomology, Lemma 0GIZ (lemma-action-l-group), and
-Lemma 0GJ0 (lemma-pullback-filtered-modules), the finite-module filtration part of the
-proof of theorem-cohomology-curves
-(blueprint: lem-sc-primary-pgroup-filtration). -/
+/-- A finite `ℓ`-primary abelian group with an action of an `ℓ`-group `Q` has a `Q`-stable
+filtration `0 = F 0 ≤ ⋯ ≤ F n = V` whose successive quotients are killed by `ℓ` and carry the
+trivial action. -/
 theorem exists_primary_filtration_of_isPGroup
     (Q : Type u) [Group Q] (ℓ : ℕ) (hℓ : ℓ.Prime) (hQ : IsPGroup ℓ Q)
     (V : Type v) [AddCommGroup V] [Module ℤ V] [Finite V]

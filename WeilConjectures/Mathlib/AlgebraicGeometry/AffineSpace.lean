@@ -70,22 +70,27 @@ over a scheme `S` admits an immersion into a relative affine space `𝔸(Fin n; 
   `r`-fold relative affine line over `S` and its projection to `S`, the composition of the `r`
   affine-line projections.
 - `AlgebraicGeometry.Scheme.Hom.toIteratedAffineLine`: the morphism to the iterated affine line
-  with prescribed coordinates (blueprint
-  `lemma-relative-noether-normalization-over-stratification--1`).
+  with prescribed coordinates.
 - `AlgebraicGeometry.AffineSpace.range_zeroSection`: the image of the zero section is the common
   zero locus of the coordinates.
 - `AlgebraicGeometry.AffineSpace.isAffine_fiber_of_isOpenImmersion`: the fibres of an open
   subscheme of the relative affine line `𝔸¹_Y` over the points of `Y` are affine.
 
-## Blueprint
+## Implementation details
 
-This implements `lemma:nagata-quasi-affine-immersion-affine-space-exists` of the Nagata
-compactification blueprint. Following the Stacks project, the hypotheses are that the
-*scheme* `X` is quasi-affine (`X.IsQuasiAffine`) and that `π` is locally of finite type;
-no hypothesis on `S` is needed. This applies in particular to the case needed for the
-Nagata compactification of an affine morphism, where `X` is affine
-(`lemma:nagata-affine-finite-type-is-quasi-affine` is the Mathlib instance
-`[IsAffine X] : X.IsQuasiAffine`).
+Following the Stacks project, the hypotheses of `exists_immersion_affineSpace_of_quasiAffine`
+are that the *scheme* `X` is quasi-affine (`X.IsQuasiAffine`) and that `π` is locally of finite
+type; no hypothesis on `S` is needed. In particular it applies when `X` is affine, via the
+Mathlib instance `[IsAffine X] : X.IsQuasiAffine`.
+
+The unit section `AffineSpace.oneSection` (`t = 1`) sits alongside `AffineSpace.zeroSection`
+since it is the normalization point of weak `𝔸¹`-invariance. The zero section is a closed
+immersion over an affine base directly, and in general as the base change of the zero section
+over `Spec ℤ`.
+
+## References
+
+* Stacks Project, Tag 04II.
 -/
 
 @[expose] public section
@@ -176,8 +181,7 @@ instance {S T : Scheme.{u}} (f : S ⟶ T) [IsOpenImmersion f] : IsOpenImmersion 
 /-- Let `Y` be an affine scheme over an affine scheme `V` and let `w` be a family of global
 sections of `Y` containing a unit `w j` such that `Γ(Y, ⊤)` is generated, as a ring, by the
 image of `Γ(V, ⊤)` together with the sections `w` and the inverse of `w j`. Then the induced
-morphism `Y ⟶ 𝔸(n; V)` is an immersion; indeed it is a closed immersion into the basic open
-of the `j`-th coordinate. -/
+morphism `Y ⟶ 𝔸(n; V)` is an immersion. -/
 theorem isImmersion_homOfVector {Y V : Scheme.{u}} [IsAffine Y] [IsAffine V]
     (g : Y ⟶ V) (w : n → Γ(Y, ⊤)) (j : n) (hu : IsUnit (w j))
     (hgen : Subring.closure
@@ -390,9 +394,7 @@ theorem exists_immersion_affineSpace_of_quasiAffine' {X S : Scheme.{u}} (π : X 
     infer_instance
 
 /-- **Stacks Tag 04II**: a quasi-affine scheme that is locally of finite type over `S` admits
-an immersion into a relative affine space over `S`. This is
-`lemma:nagata-quasi-affine-immersion-affine-space-exists` of the Nagata compactification
-blueprint. -/
+an immersion into a relative affine space over `S`. -/
 @[stacks 04II]
 theorem exists_immersion_affineSpace_of_quasiAffine {X S : Scheme.{u}} (π : X ⟶ S)
     [X.IsQuasiAffine] [LocallyOfFiniteType π] :
@@ -423,20 +425,18 @@ variable {X S : Scheme.{u}} (π : X ⟶ S) [X.IsQuasiAffine] [LocallyOfFiniteTyp
 
 /-- The dimension `n` of the chosen immersion `ι_X : X ⟶ 𝔸ⁿ_S` of a quasi-affine scheme `X`
 locally of finite type over `S` (selected by
-`AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine`).
-(blueprint: `lemma-affine-covers-dense-intersection--2`) -/
+`AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine`). -/
 noncomputable def Scheme.Hom.affineSpaceImmersionDim : ℕ :=
   (exists_immersion_affineSpace_of_quasiAffine π).choose
 
 /-- **The chosen immersion** `ι_X : X ⟶ 𝔸ⁿ_S` over `S` of a quasi-affine scheme `X` locally of
 finite type over `S` (selected by `AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine`).
-(blueprint: `lemma-affine-covers-dense-intersection--2`) -/
+-/
 noncomputable def Scheme.Hom.affineSpaceImmersion :
     X ⟶ 𝔸(ULift.{u} (Fin π.affineSpaceImmersionDim); S) :=
   (exists_immersion_affineSpace_of_quasiAffine π).choose_spec.choose
 
-/-- **The chosen morphism `ι_X : X ⟶ 𝔸ⁿ_S` is an immersion over `S`.**
-(blueprint: `lemma-affine-covers-dense-intersection--2`) -/
+/-- **The chosen morphism `ι_X : X ⟶ 𝔸ⁿ_S` is an immersion over `S`.** -/
 theorem Scheme.Hom.affineSpaceImmersion_spec :
     π.affineSpaceImmersion ≫ 𝔸(ULift.{u} (Fin π.affineSpaceImmersionDim); S) ↘ S = π ∧
       IsImmersion π.affineSpaceImmersion :=
@@ -695,11 +695,8 @@ end iteratedAffineLine
 
 /-- The morphism `X ⟶ 𝔸ʳ_S` over `g : X ⟶ S` with coordinates `t₁, …, t_r ∈ Γ(X, ⊤)`, as a
 morphism to the iterated affine line: the coordinate `t 0` is the coordinate of the outermost
-affine line.
-
-For `X = Spec B_s` over `S = Spec A_s` this is the map `ν_t : Spec B_s ⟶ 𝔸ᵈ_{D(s)}` of blueprint
-`lemma-relative-noether-normalization-over-stratification--1`, given by `A_s[T₁, …, T_d] → B_s`,
-`Tᵢ ↦ tᵢ`; see `AlgebraicGeometry.Scheme.Hom.toIteratedAffineLine_appTop_comp_evalCoord`. -/
+affine line. On global sections it is given by `Tᵢ ↦ tᵢ`; see
+`AlgebraicGeometry.Scheme.Hom.toIteratedAffineLine_appTop_comp_evalCoord`. -/
 noncomputable def Scheme.Hom.toIteratedAffineLine {X S : Scheme.{u}} (g : X ⟶ S) :
     ∀ {r : ℕ}, (Fin r → Γ(X, ⊤)) → (X ⟶ iteratedAffineLine S r)
   | 0, _ => g
@@ -840,19 +837,8 @@ lemma AffineSpace.zeroSection_comp_over (n : Type u) (S : Scheme.{u}) :
     AffineSpace.zeroSection n S ≫ 𝔸(n; S) ↘ S = 𝟙 S :=
   AffineSpace.homOfVector_over _ _
 
-/-- Blueprint `lemma-section-normal-bundle--1`: The affine line over a base.
-
-The affine line `𝔸¹_Y` over `Y` is `𝔸(ULift (Fin 1); Y)`, with coordinate
-`AffineSpace.coord Y 0`, projection `𝔸(ULift (Fin 1); Y) ↘ Y`, zero section
-`AffineSpace.zeroSection` (`t = 0`) and unit section `AffineSpace.oneSection` (`t = 1`, this
-declaration); the open complement `𝔾_{m,Y}` of the zero section is
-`AlgebraicGeometry.Scheme.Hom.puncturedLine Y`, through which the unit section factors
-(`AlgebraicGeometry.Scheme.Hom.oneSectionToPuncturedLine`).
-
-The unit section `S ⟶ 𝔸(n; S)` of relative affine space: the morphism over `S` all of
-whose coordinates are `1`, i.e. the section `t = 1`. It is the normalization point of weak
-`𝔸¹`-invariance, where a comparison on `𝔸(n; S)` is pinned down by its restriction to
-`t = 1`; this is why it sits here alongside `AffineSpace.zeroSection`. -/
+/-- The unit section `S ⟶ 𝔸(n; S)` of relative affine space: the morphism over `S` all of
+whose coordinates are `1`, i.e. the section `t = 1`. -/
 noncomputable def AffineSpace.oneSection (n : Type u) (S : Scheme.{u}) : S ⟶ 𝔸(n; S) :=
   AffineSpace.homOfVector (𝟙 S) 1
 
@@ -877,19 +863,14 @@ lemma AffineSpace.oneSection_comp_map {n : Type u} {S T : Scheme.{u}} (f : S ⟶
   · simp [AffineSpace.oneSection]
   · simp [AffineSpace.oneSection]
 
-/-- The zero section of relative affine space over an *affine* base is a closed immersion:
-`𝔸(n; S)` is then affine and its global sections are generated by `Γ(S, ⊤)` together with the
-coordinates, which the zero section sends to `0`. -/
+/-- The zero section of relative affine space over an *affine* base is a closed immersion. -/
 instance AffineSpace.isClosedImmersion_zeroSection_of_isAffine (n : Type u) (S : Scheme.{u})
     [IsAffine S] : IsClosedImmersion (AffineSpace.zeroSection n S) := by
   refine AffineSpace.isClosedImmersion_homOfVector _ _ ?_
   rw [Subring.eq_top_iff']
   exact fun x ↦ Subring.subset_closure (Or.inl ⟨x, by simp⟩)
 
-/-- The zero section of relative affine space is a closed immersion. Over an affine base this
-is `AffineSpace.isClosedImmersion_zeroSection_of_isAffine`, and the general case follows
-because the zero section is the base change of the zero section over `Spec ℤ` along the
-structure morphism. -/
+/-- The zero section of relative affine space is a closed immersion. -/
 instance AffineSpace.isClosedImmersion_zeroSection (n : Type u) (S : Scheme.{u}) :
     IsClosedImmersion (AffineSpace.zeroSection n S) := by
   set T : Scheme.{u} := Spec (.of (ULift.{u} ℤ)) with hT
@@ -932,8 +913,7 @@ lemma AffineSpace.range_zeroSection (n : Type u) (S : Scheme.{u}) :
     rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, key]
     exact hp'
 
-/-- The fibre of an open subscheme `U ⊆ 𝔸¹_Y` over any point of `Y` is affine: it is an open
-subscheme of the affine line over a field, whose coordinate ring is a principal ideal domain. -/
+/-- The fibre of an open subscheme `U ⊆ 𝔸¹_Y` over any point of `Y` is affine. -/
 theorem AffineSpace.isAffine_fiber_of_isOpenImmersion {U Y : Scheme.{u}}
     (u : U ⟶ 𝔸(PUnit.{u + 1}; Y)) [IsOpenImmersion u] (y : Y) :
     IsAffine ((u ≫ 𝔸(PUnit.{u + 1}; Y) ↘ Y).fiber y) := by

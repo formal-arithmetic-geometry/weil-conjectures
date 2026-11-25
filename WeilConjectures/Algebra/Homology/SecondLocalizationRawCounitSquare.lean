@@ -8,8 +8,11 @@ module
 
 public import WeilConjectures.Algebra.Homology.SecondLocalizationMap
 /-! # Raw cohomological counit square for second localization
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-second-localization-raw-counit-square). -/
+
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ8.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -169,27 +172,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 include tRB in
-/-- Flat coefficient extension commutes with the raw derived counits on homology.
-Source: Stacks Project, Tag 06Y6, lemma-derived-base-change; Tag 0DJ8.
-(blueprint: lem-pc-second-localization-raw-counit-square).
-
-Proof: install K.universal and apply leftDerived_fac to the lift defining
-secondLocalizationDerivedMap. Its composite with K.counit is L.counit extended
-along B to Bp, followed by the scalar-extension associator. Evaluate this
-identity at the homotopy class of the restriction of Q to R and apply homology.
-Naturality of flatDerivedHomologyIso moves homology of the extended L.counit
-to extension of homology of L.counit. At an ordinary complex the defining
-localization factorization of that isomorphism is precisely mapHomologyIso
-for exact scalar extension, composed with the homotopy/derived homology
-factorization isomorphisms. Transpose along extension/restriction of scalars.
-The unit on complexes is termwise x mapped to 1 tensor x. Naturality of exact
-restriction homology identifies this transpose with homology of the termwise
-unit followed by the scalar-extension associator. That map sends b tensor x
-to image(b) tensor x; tensor induction and hχ identify it with χ. Cancelling
-the exact-restriction homology isomorphism gives the displayed identity.
-This is only the raw counit calculation: it uses neither ordinaryIso,
-cohomologyIso nor comparison of either model. Zero complexes and zero rings
-are covered by tensor induction and the same categorical identities. -/
+/-- Flat coefficient extension commutes with the raw derived counits on homology. -/
 theorem secondLocalization_raw_counit_square
     (hflat : (algebraMap B Bp).Flat) (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)

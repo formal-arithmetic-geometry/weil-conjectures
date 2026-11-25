@@ -13,8 +13,12 @@ import all WeilConjectures.AlgebraicGeometry.PointLanAffineEvaluation
 /-!
 # Continuous coefficient realization in the scheme universe
 
-Source: Hemo--Richarz--Scholbach, Example 3.1. This is the canonical adjoint
-comparison, extending the existing Type 0 ring realization to Type u.
+This is the canonical adjoint comparison, extending the existing Type 0 ring realization
+to Type u.
+
+## References
+
+* Hemo--Richarz--Scholbach, Example 3.1
 -/
 
 @[expose] public section
@@ -31,17 +35,14 @@ attribute [local instance] Profinite.continuousMapRingObjOfUniverseMonObj
 
 namespace AlgebraicGeometry.ProEtale.ContinuousRingUniverse
 
-/-- Naturality of the projection from a profinite test scheme.
-Source: HRS Example 3.1; the canonical test projection.
-(auxiliary; not a blueprint node) -/
+/-- Naturality of the projection from a profinite test scheme (Hemo–Richarz–Scholbach, Example
+3.1). -/
 theorem testProjection_natural (X : Scheme.{u}) {S T : Profinite.{u}} (f : S ⟶ T) :
     (profiniteTestProjection X T).comp ((profiniteToProEtOf X).map f).left.base.hom =
       f.hom.hom.comp (profiniteTestProjection X S) := by
   exact profiniteTestProjection_natural X f
 
-/-- The adjoint comparison given by precomposing a continuous function with the test projection.
-Source: HRS Example 3.1; the point-Lan affine evaluation proof.
-(auxiliary; not a blueprint node) -/
+/-- The adjoint comparison given by precomposing a continuous function with the test projection. -/
 noncomputable def comparisonAdjoint (X : Scheme.{u}) (E : Type u)
     [TopologicalSpace E] [Ring E] [IsTopologicalRing E] :
     Profinite.continuousMapRingObjOfUniverse E ⟶
@@ -64,9 +65,7 @@ noncomputable def comparisonAdjoint (X : Scheme.{u}) (E : Type u)
        simp only [ContinuousMap.comp_assoc]
        erw [testProjection_natural] }⟩
 
-/-- The canonical continuous-ring realization, defined by the point inverse-image adjunction.
-Source: HRS Example 3.1; the point-Lan affine evaluation proof.
-(auxiliary; not a blueprint node) -/
+/-- The canonical continuous-ring realization, defined by the point inverse-image adjunction. -/
 @[irreducible] noncomputable def comparison (X : Scheme.{u}) (E : Type u)
     [TopologicalSpace E] [Ring E] [IsTopologicalRing E] :
     condensedRingObj (Profinite.continuousMapRingObjOfUniverse E) X ⟶
@@ -128,9 +127,7 @@ private lemma comparisonAdjoint_isMonHom (X : Scheme.{u}) (E : Type u)
   erw [← h₁, ← h₂]
   exact Sheaf.isMonHom_sheafCompose_map J (comparisonAdjointRing X E)
 
-/-- The canonical realization preserves the internal ring operations.
-Source: HRS Example 3.1; the point-Lan affine evaluation proof.
-(auxiliary; not a blueprint node) -/
+/-- The canonical realization preserves the internal ring operations. -/
 instance comparison_isMonHom (X : Scheme.{u}) (E : Type u)
     [TopologicalSpace E] [Ring E] [IsTopologicalRing E] :
     IsMonHom (comparison X E) := by
@@ -296,9 +293,7 @@ private lemma comparison_basis_isIso (X : Scheme.{u}) (E : Type u)
   change IsIso ((e.hom.app Λ).hom.app (Opposite.op U) ≫ f.hom.app (Opposite.op U))
   infer_instance
 
-/-- The canonical realization is an isomorphism for totally disconnected topological rings.
-Source: HRS Example 3.1; the point-Lan affine evaluation proof.
-(auxiliary; not a blueprint node) -/
+/-- The canonical realization is an isomorphism for totally disconnected topological rings. -/
 theorem comparison_isIso (X : Scheme.{u}) (T : Type u)
     [TopologicalSpace T] [Ring T] [IsTopologicalRing T] [TotallyDisconnectedSpace T] :
     IsIso (comparison X T) :=

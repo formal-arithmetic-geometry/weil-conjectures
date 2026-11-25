@@ -146,18 +146,9 @@ private theorem generator_scalar
   rw [hη, map_intCast]
   rfl
 
-/-- Let i:D→T be a closed immersion, n>0 and A a finite commutative ring killed by n. The normalized
-integral generator i_*Z_D→forget(i_*A_D) has the unbounded DerivedUnit property
-[def-sp-exact-functor-derived-unit, def-asd-ordinary-finite-p1-kummer-class]. No flatness of A over
-Z/n is assumed.
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (auxiliary; not a blueprint node).
-Proof: Apply the residue-quotient unit theorem to the supported integer/residue exact sequence. The
-existing supported-constant coefficient theorem supplies its normalized derived unit from ULift(Z/n)
-to A. Compose the two Hom bijections, using the derived composition/single coherence. The
-constant-sections adjunction and normalization on generators identify the composed ordinary map with
-the integral generator. Transport across the identity isomorphism between composite and direct
-coefficient forgetting. -/
+/-- Let i:D→T be a closed immersion, n>0 and A a finite commutative ring killed by n. The
+normalized integral generator i_*Z_D→forget(i_*A_D) has the unbounded DerivedUnit property
+(Stacks, Tags 0152, 06YY, 0GLZ). -/
 theorem supported_integral_derived_unit
     (T : Scheme.{u}) (n : ℕ) (hn : 0 < n)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (n : A) = 0)

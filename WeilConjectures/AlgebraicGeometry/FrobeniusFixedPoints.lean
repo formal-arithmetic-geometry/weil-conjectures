@@ -26,11 +26,6 @@ it is determined by its values on finitely many generators of `R`.
   `X` are fixed by `σ`.
 - `AlgebraicGeometry.Scheme.finite_setOf_specAlgebraicClosureMap_frobenius_comp_eq_self`: the
   geometric points of `X` fixed by the arithmetic Frobenius form a finite set.
-
-## Blueprint
-
-These are the finiteness step `A^σ = A₀(k₀)` finite of blueprint
-`proposition-no-frobenius-fixed-vector`.
 -/
 
 @[expose] public section
@@ -46,10 +41,7 @@ variable {K : Type u} [Field K] {Ω : Type u} [Field Ω] [Algebra K Ω]
 /-- Let `X` be a scheme over a finite field `K`, `Spec R → X` an open immersion such that `R` is
 of finite type over `K`, and `σ` an endomorphism of a field extension `Ω` of `K` whose fixed
 points lie in `K`. Then only finitely many `Ω`-points of `X` over `K` lying in the chart
-`Spec R` are fixed by `σ`: such a point is a `K`-algebra map `R → Ω` with values in `K`, so it
-is determined by its values in `K` on finitely many generators of `R`.
-
-This is the chart computation of blueprint `proposition-no-frobenius-fixed-vector`. -/
+`Spec R` are fixed by `σ`. -/
 theorem finite_setOf_spec_map_comp_eq_self_of_isOpenImmersion [Finite K] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of K)) {R : CommRingCat.{u}} (ι : Spec R ⟶ X) [IsOpenImmersion ι]
     [LocallyOfFiniteType (ι ≫ f)] (σ : Ω →+* Ω)
@@ -147,7 +139,7 @@ theorem finite_setOf_spec_map_comp_eq_self [Finite K] {X : Scheme.{u}} (f : X �
   rw [Subsingleton.elim y x, Scheme.Opens.range_ι]
   exact hxV
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector` (finiteness step): the geometric points of a
+/-- the geometric points of a
 quasi-compact scheme `X` locally of finite type over a finite field `K` that are fixed by the
 arithmetic Frobenius `σ : x ↦ x ^ #K` of `K̄` form a finite set (they are the `K`-rational
 points of `X`). -/

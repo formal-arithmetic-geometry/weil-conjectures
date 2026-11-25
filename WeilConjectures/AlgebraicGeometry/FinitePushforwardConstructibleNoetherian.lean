@@ -20,9 +20,9 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 /-!
 # Finite pushforward preserves constructibility over a Noetherian scheme
 
-Source: smooth purity blueprint, unit `sk-prop-sf-cbc`, order 1579;
-Stacks Project, Lemma 59.73.9 (Tag 095R)
-(blueprint: lemma-detection-proper-direct-image--1).
+## References
+
+Stacks Project, Lemma 59.73.9 (Tag 095R).
 -/
 
 @[expose] public section
@@ -52,23 +52,7 @@ private theorem lisse_of_iso {T : Scheme.{u}}
 
 /-- The direct image of a constructible abelian etale sheaf along a finite morphism
 with Noetherian target is constructible. Constructibility is that of the underlying
-set sheaf, with finite geometric stalks on constructible locally closed strata.
-
-Source: smooth purity blueprint, unit `sk-prop-sf-cbc`, order 1579;
-Stacks Project, Tag 095R
-(blueprint: lemma-detection-proper-direct-image--1).
-
-Proof: Apply `isConstructibleEtaleSheafOfSets_of_generic_lisse`, which packages the
-Noetherian induction of steps 2 and 3. For each integral Noetherian affine subscheme S,
-form the Cartesian square V ×_U S. The new finite-stalk pullback lemma of step 1 makes
-the pulled-back abelian sheaf constructible in precisely the set-sheaf sense used here.
-The existing generic finite-pushforward theorem supplies a dense lisse open W of S.
-Finite exchange gives an isomorphism between the abelian pullback of h_*E and this
-base-changed direct image. `etaleInverseImageAlgebraicStructures` identifies underlying
-abelian inverse image with set inverse image. Forget the exchange isomorphism and pull
-it back to W, then transport lissity across the resulting set-sheaf isomorphism. The
-criterion now supplies the finite constructible stratification on U. No Krull dimension
-bound and no identification of finite stalks with finitely generated stalks is used. -/
+set sheaf, with finite geometric stalks on constructible locally closed strata. -/
 theorem isConstructibleEtaleSheafOfSets_lowerStar_of_isNoetherian
     {U V : Scheme.{u}} [IsNoetherian U] (h : V ⟶ U) [IsFinite h]
     (E : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1})

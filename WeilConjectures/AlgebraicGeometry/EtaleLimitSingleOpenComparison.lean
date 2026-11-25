@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenComparisonCertificate
 
 /-! # Comparison for one open in a cofinal tail
 
-Source: Stacks Project, Tag 09YQ, restriction of the coherent-system construction.
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section
@@ -25,31 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Restriction to one quasi-compact open constructs its canonical comparison on the tail.
-
-Source: Stacks Project, Tag 09YQ, coherent systems on inverse limits, and Tag 01F7,
-functoriality of cohomology.
-(blueprint: lem-weil-pbc-etale-limit-single-open-comparison).
-
-Proof: Use the directed tail above i₀. Pull W back along the stage projection to
-D(i₀), e, and O.ι. Restrict D and its cone to these opens. The open limit theorem
-identifies the cone point with the indicated open of c.pt. Affine transition maps
-and affine limit projections imply compactness of the restricted stages; open
-subspaces of quasi-separated schemes are quasi-separated. At the least tail index,
-the restricted stage is canonically isomorphic to W.toScheme, since W ≤ O.
-Pull F and its transition maps back to these opens. Inverse-image composition and
-its coherence give the identity and composition laws; the same comparisons identify
-the pulled-back colimit diagram with the restriction of G. Restriction preserves
-colimits because it is a left adjoint, and the tail inclusion is final. Apply the
-canonical cohomology-diagram construction in degree zero, transporting the limit
-cohomology group through the canonical open and coefficient identifications.
-The system constructor gives the comparison certificate with stage W.toScheme;
-composition with these identifications uses the iso and comp constructors.
-Pullback functoriality and coefficient naturality give the transformation from H
-whose components are exactly the specified restrictions. The canonical cocone
-formula, hB, and composition naturality give the stage-leg equation.
-No injectivity or binary-product comparison is asserted. For W empty the restricted
-schemes and groups are empty and zero; for W = O this is just tail reindexing. -/
+/-- Restriction to one quasi-compact open constructs its canonical comparison on the tail
+(Stacks, Tags 09YQ and 01F7). -/
 theorem etale_limit_single_open_comparison
     (X : Scheme.{u}) (O W : X.Opens)
     (hW : IsCompact (W : Set X)) (hWO : W ≤ O)

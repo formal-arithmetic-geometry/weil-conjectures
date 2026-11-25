@@ -15,13 +15,25 @@ import Mathlib.Algebra.Module.Lattice
 /-!
 # Finite sums of valuation-ring lattices
 
-Source: Stacks Project, Tag 0AUW(3), and the blueprint main-20261015,
-`sk-lem-stratified-lattice-trace.proof.md`, Local computation, second paragraph
-(blueprint: lem-sfb-finite-sum-lattice).
+We show that a finite nonempty sum of full integral lattices in `E^r` has a full integral
+basis, and that integral bases identify lattices topologically with powers of the valuation
+ring.
+
+## Implementation details
 
 All topologies in the statement are explicit: the coefficient field carries the metric
 topology of its recorded absolute value, its powers carry product topologies, and the
 integer ring and lattice submodules carry induced topologies.
+
+The sum is finitely generated and torsion-free over the DVR `𝒪_E`, hence free; clearing
+denominators shows an integral basis is a field basis. The field basis defines an
+`E`-linear automorphism of `E^r`, which is a homeomorphism because finite-dimensional linear
+maps over the complete field `E` are continuous; restricting it gives the lattice
+homeomorphism.
+
+## References
+
+* Stacks Project, Tag 0AUW(3).
 -/
 
 @[expose] public section
@@ -32,27 +44,7 @@ namespace Padic
 
 /-- A finite nonempty sum of full integral lattices has a full integral basis. Every
 full integral basis of the sum or any summand gives a homeomorphism from the power of
-the valuation ring to that submodule with its induced topology.
-
-Source: Stacks Project, Tag 0AUW(3), and blueprint main-20261015,
-`sk-lem-stratified-lattice-trace.proof.md`, Local computation, second paragraph
-(blueprint: lem-sfb-finite-sum-lattice).
-
-Proof: By `lem-weil-l-adic-extension-integers-dvr`, the coefficient ring is a DVR with
-fraction field E. The finite union of the summand bases generates the sum, which is
-torsion-free as a submodule of E^r. Nonemptiness supplies one summand, whose field basis
-shows that the sum spans E^r. Apply `lem-sc-dvr-fg-torsionfree-free` to obtain a finite
-integral basis. It spans over E, and clearing denominators in a field-linear relation
-proves its field-linear independence. Equality of basis cardinalities from
-`def-weil-vector-space-dimension` gives exactly r basis vectors.
-
-For any full integral basis of the sum or a summand, its field basis defines an
-E-linear automorphism of E^r. The recorded absolute value makes E complete and
-nontrivially normed. By `lem-weil-pbc-finite-dimensional-linear-homeomorphism`, this
-automorphism and its inverse are continuous. Restrict them to A^r and the lattice;
-the basis property identifies the image with the lattice. The product of the subspace
-topologies on A is the subspace topology on A^r in E^r, so both restrictions are continuous.
-For r = 0, all modules and coordinate spaces are one-point spaces and the bases are empty. -/
+the valuation ring to that submodule with its induced topology. -/
 theorem finite_sum_lattice
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

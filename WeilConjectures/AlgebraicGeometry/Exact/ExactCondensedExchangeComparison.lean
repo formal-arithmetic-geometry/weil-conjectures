@@ -11,9 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import WeilConjectures.CategoryTheory.ProperBaseChange.ExchangeMateCube
 
-/-! Comparison of total derived and exact condensed exchange.
-Source: blueprint rational proper-base-change proof, exact derived factorization.
-(blueprint: lem-sf-total-derived-exchange-exact-comparison). -/
+/-! Comparison of total derived and exact condensed exchange. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -30,9 +28,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.standard
   Functor.leftDerivedFunctor Mod.monoidalCategory
   Functor.mapDerivedCategoryNatIso
   CondensedRing.upperStar CondensedRing.lowerStar
-/-- The exchange mate formed from exact condensed pullback on the derived category.
-Source: blueprint rational proper-base-change proof, exact derived factorization.
-(blueprint: lem-sf-total-derived-exchange-exact-comparison). -/
+/-- The exchange mate formed from exact condensed pullback on the derived category. -/
 @[irreducible] def exactCondensedExchange (l : ℕ) [Fact l.Prime]
     {X' X Y' Y : Scheme.{u}} {v : X' ⟶ X} {p' : X' ⟶ Y'}
     {p : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq v p' p g) :=
@@ -45,9 +41,7 @@ Source: blueprint rational proper-base-change proof, exact derived factorization
       (Functor.mapDerivedCategorySquareIso
         (NativeEncoding.condensedPullbackSquare l sq)).hom))
 
-/-- The ordinary condensed pullback square for an arbitrary commutative coefficient.
-Source: canonical pullback compositors in the rational base-change argument.
-(blueprint: lem-sf-total-derived-exchange-exact-comparison). -/
+/-- The ordinary condensed pullback square for an arbitrary commutative coefficient. -/
 @[irreducible] def condensedPullbackSquareFor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -59,9 +53,7 @@ Source: canonical pullback compositors in the rational base-change argument.
     eqToIso (congrArg (CondensedRing.upperStar Λ) sq.w.symm) ≪≫
       CondensedRing.upperStarComp Λ v p
 
-/-- The exchange mate formed from exact condensed pullback on the derived category.
-Source: blueprint rational proper-base-change proof, exact derived factorization.
-(blueprint: lem-sf-total-derived-exchange-exact-comparison). -/
+/-- The exchange mate formed from exact condensed pullback on the derived category. -/
 @[irreducible] def exactCondensedExchangeFor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -445,14 +437,7 @@ private theorem totalExchangeFor_eq
 
 attribute [local irreducible] CondensedRing.moduleObjectDerivedExchange
 /-- The canonical comparison from total left derived pullback to exact localization
-identifies their specified exchange arrows.
-Source: blueprint rational proper-base-change proof, exact derived factorization.
-(blueprint: lem-sf-total-derived-exchange-exact-comparison).
-Proof: the canonical comparison respects pullback compositors and equality transport.
-Paste these identities across the commutative square. The total derived adjunction is
-transported from the exact adjunction, so the right mate of each comparison is the
-identity. Taking mates of the cube gives a commuting square with invertible vertical
-maps, hence an isomorphism of exchange arrows. -/
+identifies their specified exchange arrows. -/
 theorem totalDerivedExchange_exact_comparisonFor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -489,9 +474,7 @@ theorem totalDerivedExchange_exact_comparisonFor
     (exactCondensedExchangeFor Λ sq) (totalExchangeFor_eq Λ sq).symm (exactExchangeFor_eq Λ sq).symm
 
 /-- At the canonical bundled coefficient the general exact exchange is the native
-comparison's exact exchange. Source: the two specified compositor formulas.
-(blueprint: lem-sf-total-derived-exchange-exact-comparison).
-Proof: unfold the two ordinary square formulas; their compositors and adjunctions agree. -/
+comparison's exact exchange. -/
 theorem exactCondensedExchangeFor_canonical (l : ℕ) [Fact l.Prime]
     {X' X Y' Y : Scheme.{u}} {v : X' ⟶ X} {p' : X' ⟶ Y'}
     {p : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq v p' p g) :

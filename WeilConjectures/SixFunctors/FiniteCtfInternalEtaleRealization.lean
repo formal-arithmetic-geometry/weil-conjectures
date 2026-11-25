@@ -17,14 +17,32 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 
 /-! # Finite internal-etale realization with fixed Tor intervals
 
-The fixed-scalar presentation of the normalized section-action encoding is used here.
-It is the same intrinsic constant-ring comparison, followed by its fixed-scalar
-coefficient equivalence. No derived category or tensor product is redefined.
+For a finite discrete coefficient ring `A`, this file defines the realization of étale
+derived complexes in the derived category of internal `A`-modules on the pro-étale site, and
+shows that over a field it restricts to an equivalence on bounded constructible complexes of
+each fixed Tor amplitude and commutes with total direct images.
+
+## Main definitions and results
+
+* `internalEtaleRealization`: the realization `E_T⁻¹ ν_T^*`.
+* `finiteCtfInternalEtaleRealization_of_field`, `finiteCtfInternalEtaleRealization`: the
+  equivalence on fixed Tor intervals and the compatibility with direct images.
+
+## Implementation details
+
+The fixed-scalar presentation of the normalized section-action encoding is used here. It is
+the same intrinsic constant-ring comparison, followed by its fixed-scalar coefficient
+equivalence; no derived category or tensor product is redefined.
+
+The equivalence is obtained from bounded constructible descent and the fixed-module Tor
+comparison, using `encoding_constructibility` and `encoding_tensor_tor` to transport along
+the encoding. The direct-image compatibility combines `encodingDerivedPushforwardIso` with
+the fixed-module bounded-below direct-image comparison.
 
 ## References
 
-* Stacks Project, Tags 09AL, 09C2, 09A6
-* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 5.4.3
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 5.4.3.
+* Stacks Project, Tags 09AL, 09C2, 09A6.
 -/
 
 @[expose] public noncomputable section
@@ -38,9 +56,8 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
 
-/-- The specified realization `E_T⁻¹ ν_T^*`, in the fixed-scalar presentation of the
-normalized section-action equivalence. The additional fixed-scalar equivalence cancels
-between `ν_T^*` and `E_T⁻¹`. -/
+/-- The realization `E_T⁻¹ ν_T^*`, in the fixed-scalar presentation of the normalized
+section-action equivalence. -/
 def internalEtaleRealization (A : Type u) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A] (T : Scheme.{u}) (e : Encoding A T) :
     Etale.DerivedCategoryModule (ULift.{u + 1} A) T ⥤
@@ -112,10 +129,10 @@ private theorem ordinaryBC_iff (A : Type u) [CommRing A] [Finite A]
     have hi := DerivedCategory.boundedConstructible_le_boundedConstructibleIntrinsic _ h
     exact ⟨hi.1, fun n ↦ (ordinary_constructible_iff A T _).mpr (hi.2 n)⟩
 
-/-- Finite internal-etale realization restricts to an equivalence for every ordered
-Tor interval and commutes naturally with the specified unbounded total direct images
-on all bounded-below etale inputs. The encodings are normalized section-action
-encodings; thus the assertion applies to each choice of the equivalence. -/
+/-- Over a field `k`, for separated schemes of finite type, the finite internal-étale
+realization restricts to an equivalence between bounded constructible complexes of Tor
+amplitude in `[a, b]` on both sides, for every `a ≤ b`, and commutes naturally with the
+unbounded total direct images on bounded-below étale complexes. -/
 theorem finiteCtfInternalEtaleRealization_of_field
     (k : Type u) [Field k]
     (A : Type u) [CommRing A] [Finite A]

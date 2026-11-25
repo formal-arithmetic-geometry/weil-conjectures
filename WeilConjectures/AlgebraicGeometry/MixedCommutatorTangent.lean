@@ -11,11 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Closed
 /-!
 # Mixed commutators of infinitesimal matrix points
 
-Source: Milne, Algebraic Groups (2017), Chapter 10, differential of multiplication and
-commutator (blueprint: `def-wf-lie-algebra-derivation`).
-
 An arbitrary finite basis identifies GL(V) with the general linear group scheme. The ring
 `DualNumber (DualNumber k)` is k[ε,δ]/(ε²,δ²), with coordinates 1, ε, δ, εδ.
+
+## References
+
+* Milne, Algebraic Groups (2017), Chapter 10.
 -/
 
 @[expose] public section
@@ -109,16 +110,8 @@ private theorem coe_map_dualNumberLift_mixed_dualUnit {n : Type u} [Fintype n] [
 
 /-- Over a field, two infinitesimal points of a closed subgroup of GL(V) base change to
 k[ε,δ]/(ε²,δ²); their commutator is 1 + εδ(XY - YX), and the corresponding dual-number point
-belongs to the subgroup. The finite basis `b` is arbitrary, including the empty basis.
-
-Source: Milne, Algebraic Groups (2017), Chapter 10, differential of multiplication and
-commutator (blueprint: `def-wf-lie-algebra-derivation`).
-
-Proof: base change the two points along the inner and outer dual-number inclusions. Their
-commutator remains a subgroup point by def-sc-group-scheme-subgroup. The inverses of 1 + εX
-and 1 + δY are 1 - εX and 1 - δY. Multiply the four factors using ε² = δ² = 0 to obtain
-1 + εδ(XY - YX). The tangent vectors `x`, `y` of the subgroup have a bracket, whose tangent point
-has matrix `1 + ε(XY - YX)` since the differential of the inclusion preserves brackets. -/
+belongs to the subgroup. The finite basis `b` is arbitrary, including the empty basis
+(Milne, Algebraic Groups, Chapter 10). -/
 theorem mixedCommutator_tangent
     {n : Type u} {V : Type v} [AddCommGroup V] [Module k V]
     [FiniteDimensional k V] [Fintype n] [DecidableEq n] (b : Module.Basis n k V)

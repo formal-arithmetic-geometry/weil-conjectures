@@ -13,9 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFiniteRootNormalization
 
 /-! # Natural cyclic quotient comparison with normalized source and root endpoints
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: def-diagonal-cyclic-evaluation-endpoints).
 -/
 
 @[expose] public noncomputable section
@@ -50,8 +47,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   diagonalSingleLimitComparison diagonalShiftedSingleLimitComparison
 
 /-- The scalar quotient, realized as discrete integral modules. This functor is
-independent of a diagonal class. Source: coefficient changes (1)
-(blueprint: def-diagonal-cyclic-evaluation-endpoints). -/
+independent of a diagonal class. -/
 def cyclicEvaluationFunctor (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
     (eW : CompletedRealization l (diagonalSurface Y)) (p : CyclicCartierFrame l Y n) :
@@ -59,8 +55,7 @@ def cyclicEvaluationFunctor (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
       DerivedCategory (DiagonalMod l (diagonalSurface Y)) :=
   eW.F.mapDerivedCategory ⋙ cyclicFiniteEvaluationFunctor l Y n p
 
-/-- The inverse supported-source comparison for the composite quotient functor.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-evaluation-endpoints). -/
+/-- The inverse supported-source comparison for the composite quotient functor. -/
 def cyclicEvaluationSource (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
     (eW : CompletedRealization l (diagonalSurface Y))
@@ -76,8 +71,7 @@ def cyclicEvaluationSource (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
   completedFunctorSource eW.F (cyclicFiniteEvaluationFunctor l Y n p) sourceIso
     (cyclicFiniteEvaluationSource l Y n p)
 
-/-- The root comparison for the composite quotient functor, including its shift.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-evaluation-endpoints). -/
+/-- The root comparison for the composite quotient functor, including its shift. -/
 def cyclicEvaluationTarget (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
     (eW : CompletedRealization l (diagonalSurface Y)) (p : CyclicCartierFrame l Y n) :

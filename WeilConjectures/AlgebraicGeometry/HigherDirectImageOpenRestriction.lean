@@ -16,8 +16,9 @@ import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
 
 /-! # Ordinary higher direct images commute with open restriction
 
-Source: Stacks Project, Cohomology, Tags 01E1 and 01E5.
-(blueprint: lem-pc-higher-direct-image-open-restriction).
+## References
+
+* Stacks Project, Cohomology, Tags 01E1 and 01E5.
 -/
 
 @[expose] public section
@@ -28,21 +29,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restricting the higher direct image to an open of the target agrees with the
-higher direct image of the restricted module along the restricted morphism.
-Source: Stacks Project, Cohomology, Tags 01E1 and 01E5.
-(blueprint: lem-pc-higher-direct-image-open-restriction).
-
-Proof: Apply the existing ordinary higher-direct-image restriction theorem to the
-cartesian square of the two open inclusions and the restricted morphism. Its
-proof restricts an injective resolution: restriction is exact and preserves
-injectives, direct image commutes with this restriction termwise, and exact
-restriction commutes with homology (Tags 01E1 and 01E5). The source theorem uses
-pullback along the source open inclusion; Mathlib's restrictFunctorIsoPullback
-identifies this pullback with the displayed restriction. Apply the degree-p
-right-derived direct-image functor to this natural isomorphism and compose with
-the source theorem's isomorphism. Enough injectives is supplied on both source
-schemes. There are no affine, quasi-coherence or finiteness hypotheses, and the
-argument includes degree zero and empty opens. -/
+higher direct image of the restricted module along the restricted morphism
+(Stacks, Tags 01E1 and 01E5). -/
 theorem nonempty_higherDirectImage_openRestriction_iso
     {X S : Scheme.{u}} (f : X ⟶ S) (U : S.Opens)
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (p : ℕ) :

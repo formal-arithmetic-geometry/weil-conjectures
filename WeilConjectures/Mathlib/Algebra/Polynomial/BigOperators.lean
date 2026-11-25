@@ -33,8 +33,7 @@ of the zeta function, but neither notion involves anything beyond polynomial alg
 namespace Polynomial
 
 /-- The alternating sum `∑ᵢ (-1)ⁱ deg (P i)` of the degrees of a finite family of polynomials.
-For a family of Weil factors of a zeta function this is the Euler characteristic `χ` (blueprint
-`definition-reciprocal-root`). -/
+For a family of Weil factors of a zeta function this is the Euler characteristic `χ`. -/
 def alternatingNatDegreeSum {R : Type*} [Semiring R] {n : ℕ} (P : Fin (n + 1) → R[X]) : ℤ :=
   ∑ i : Fin (n + 1), (-1) ^ (i : ℕ) * ((P i).natDegree : ℤ)
 
@@ -46,9 +45,8 @@ noncomputable def alternatingProdEval {K : Type*} [Field K] {n : ℕ} (P : Fin (
   ∏ i : Fin (n + 1), (P i).eval t ^ ((-1 : ℤ) ^ ((i : ℕ) + 1))
 
 /-- **Parity of an alternating degree sum with symmetric degrees.** If `deg (P i.rev)` and
-`deg (P i)` agree for every `i`, then all the terms of `∑ᵢ (-1)ⁱ deg (P i)` except the one at
-the unique fixed point `m` of `Fin.rev` cancel in pairs modulo `2`, so the alternating degree
-sum has the same parity as `deg (P m)`. -/
+`deg (P i)` agree for every `i` and `m` is the fixed point of `Fin.rev`, then the alternating
+degree sum `∑ᵢ (-1)ⁱ deg (P i)` has the same parity as `deg (P m)`. -/
 theorem even_alternatingNatDegreeSum_sub_of_natDegree_rev {R : Type*} [Semiring R] {d : ℕ}
     {P : Fin (2 * d + 1) → R[X]} (hrev : ∀ i, (P i.rev).natDegree = (P i).natDegree)
     {m : Fin (2 * d + 1)} (hm : m.rev = m) :

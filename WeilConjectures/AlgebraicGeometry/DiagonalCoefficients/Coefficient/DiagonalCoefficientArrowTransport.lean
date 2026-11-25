@@ -11,8 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 
 These structures group already supplied diagrams and maps; they contain no
 existence assertion or new class equation.
-Source: diagonal tower coefficient changes (1), derived scalar transitivity.
-(blueprint: def-diagonal-coefficient-arrow-transport).
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +25,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- Two successive specified coefficient extensions of an arbitrary diagonal
 arrow. The two ScalarCompatibility structures retain their original full
-normalizations; this record only shares their types.
-Source: coefficient changes (1) (blueprint: def-diagonal-coefficient-arrow-transport). -/
+normalizations; this record only shares their types. -/
 structure CoefficientArrowRoute (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     {I Q : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj I] [IsCommMonObj I] [MonObj Q] [IsCommMonObj Q]
@@ -44,9 +41,7 @@ structure CoefficientArrowRoute (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   second : ScalarCompatibility b Y L M v middle final
 
 /-- The normalized constant and root maps occurring in finite Cartier scalar
-compatibility, without a class equation or a derived-unit assertion.
-Source: Cartier coefficient naturality (4), and coefficient changes (1)
-(blueprint: def-diagonal-coefficient-arrow-transport). -/
+compatibility, without a class equation or a derived-unit assertion. -/
 structure CartierScalarMaps
     {R A : Type (u + 1)} [CommRing R] [CommRing A]
     (φ : R →+* A) (N : ℕ) (hR : (N : R) = 0) (hA : (N : A) = 0)
@@ -72,8 +67,7 @@ structure CartierScalarMaps
         (Scheme.finiteEtaleTateLine (diagonalSurface Y) N A hA)).hom.app V
           (Scheme.finiteEtaleTateOneGenerator A N (diagonalSurface Y) hA V (φ a) z)
 
-/-- The Yoneda square for the supplied coefficient maps, without asserting it.
-Source: coefficient changes (1) (blueprint: def-diagonal-coefficient-arrow-transport). -/
+/-- The Yoneda square for the supplied coefficient maps, without asserting it. -/
 @[irreducible]
 def CartierScalarMaps.Equation
     {R A : Type (u + 1)} [CommRing R] [CommRing A]

@@ -21,12 +21,19 @@ in general, and defines the degreewise Poincaré pairing
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing`
-  (`corollary-degreewise-duality-over-fields--1`): `⟨-, -⟩_i`.
+- `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing`: `⟨-, -⟩_i`.
 - `AlgebraicGeometry.Etale.TateOrientation.untwistedPoincarePairing`,
-  `AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing`
-  (`corollary-degreewise-duality-over-fields--1`): the untwisted pairing
-  `Ra_! K ⊗ᴸ (Ra_* K^∨)[2d] ⟶ Λ_Y(-d)` and its degreewise form.
+  `AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing`: the untwisted
+  pairing `Ra_! K ⊗ᴸ (Ra_* K^∨)[2d] ⟶ Λ_Y(-d)` and its degreewise form.
+
+## Implementation details
+
+The degreewise pairings are the degreewise pairings (`AlgebraicGeometry.Etale.degreewisePairing`)
+of the derived pairings in degrees `i` and `j - 2d`, read through
+`(Ra_* M)[j] ≅ ((Ra_* M)[2d])[j - 2d]` and `Λ_Y[i + (j - 2d)] ≅ Λ_Y`. The untwisted pairing is
+`AlgebraicGeometry.Etale.poincarePairingOfTrace` for the untwisted smooth trace
+`(Ra_! Λ_X)[2d] ⟶ Λ_Y(-d)`, which eliminates the twist `Λ_X(d)` through
+`Λ_Y(d) ⊗ᴸ Λ_Y(-d) ≅ Λ_Y`.
 -/
 
 @[expose] public section
@@ -48,13 +55,11 @@ section Generic
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} {a : X ⟶ Y}
   [HasCompactification a] [QuasiCompact a] {d : ℕ} {g : X ⟶ X} {h : Y ⟶ Y}
 
-/-- Blueprint `theorem-poincare-duality-frobenius`: Frobenius: equivariance, similitudine,
-reciprocity (a).
-
-**The derived Poincaré pairing of a purity isomorphism is a morphism of Weil objects**: the
-form of `AlgebraicGeometry.Etale.TateOrientation.isWeilPairing_poincarePairing` for a purity
-isomorphism `γ : T[2d] ≅ ω_X`, a Weil datum `τ` on `T`, and the pairing
-`AlgebraicGeometry.Etale.poincarePairing`. -/
+/-- **The derived Poincaré pairing of a purity isomorphism is a morphism of Weil objects.** For a
+purity isomorphism `γ : T[2d] ≅ ω_X`, a Weil datum `φ` on `K`, a Weil datum `τ` on `T` for which
+the smooth trace is a morphism of Weil objects, and a datum `ψ` on `K^∨ ⊗ᴸ T` for which the
+twisted evaluation is a Weil pairing, the pairing `AlgebraicGeometry.Etale.poincarePairing` is a
+Weil pairing. -/
 theorem isWeilPairing_poincarePairing (sq : IsPullback g a a h)
     {T : DerivedCategoryModule Λ X}
     (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a) {K : DerivedCategoryModule Λ X}
@@ -111,17 +116,12 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
 omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
-/-- Blueprint `corollary-degreewise-duality-over-fields--1`: Degree of the pairing.
-
-The *degreewise Poincaré pairing* of a Tate orientation `γ`, for `i + j = 2d`,
+/-- The *degreewise Poincaré pairing* of a Tate orientation `γ`, for `i + j = 2d`,
 
 `⟨-, -⟩_i : H^i_c(X, K) × H^j(X, K^∨(d)) ⟶ Λ`,
 
 with `H^i_c(X, K) = Hom(Λ_Y, (Ra_! K)[i])`, `H^j(X, K^∨(d)) = Hom(Λ_Y, (Ra_* K^∨(d))[j])` and
-`Λ = End(Λ_Y)` (for `Y = Spec k`): the degreewise pairing
-(`AlgebraicGeometry.Etale.degreewisePairing`) of the derived Poincaré pairing `β_K` in degrees
-`i` and `j - 2d`, read through `(Ra_* K^∨(d))[j] ≅ ((Ra_* K^∨(d))[2d])[j - 2d]` and
-`Λ_Y[i + (j - 2d)] ≅ Λ_Y`. -/
+`Λ = End(Λ_Y)` (for `Y = Spec k`), induced by the derived Poincaré pairing `β_K`. -/
 noncomputable def degreewisePoincarePairing (γ : TateOrientation Λ a d)
     (K : DerivedCategoryModule Λ X) (i j : ℤ) (hij : i + j = 2 * d) :
     (𝟙_ (DerivedCategoryModule Λ Y) ⟶ ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)⟦i⟧) →ₗ[Λ]
@@ -147,18 +147,13 @@ lemma degreewisePoincarePairing_apply (γ : TateOrientation Λ a d)
         (shiftFunctorZero' (DerivedCategoryModule Λ Y) (i + (j - 2 * d)) (by omega)).hom.app _ :=
   rfl
 
-/-- Blueprint `corollary-degreewise-duality-over-fields--1`: Degree of the pairing.
-
-The *untwisted derived Poincaré pairing* of a Tate orientation `γ`,
+/-- The *untwisted derived Poincaré pairing* of a Tate orientation `γ`,
 
 `β_K^{untw} : Ra_! K ⊗ᴸ (Ra_* K^∨)[2d] ⟶ Λ_Y(-d)`,
 
-that is `RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨)[2d] ⟶ Λ(-d)`: the shift is moved out, then come the
-mixed-support cup product, `Ra_!` of the evaluation `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X` and the untwisted
-smooth trace `(Ra_! Λ_X)[2d] ⟶ Λ_Y(-d)`
-(`AlgebraicGeometry.Etale.TateOrientation.untwistedSmoothTrace`), which eliminates the twist
-`Λ_X(d)` of `β_K` through `Λ_Y(d) ⊗ᴸ Λ_Y(-d) ≅ Λ_Y`; this is
-`AlgebraicGeometry.Etale.poincarePairingOfTrace` for the untwisted smooth trace. -/
+that is `RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨)[2d] ⟶ Λ(-d)`, built from the mixed-support cup product,
+`Ra_!` of the evaluation `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X` and the untwisted smooth trace
+`(Ra_! Λ_X)[2d] ⟶ Λ_Y(-d)`. -/
 noncomputable def untwistedPoincarePairing (γ : TateOrientation Λ a d)
     (K : DerivedCategoryModule Λ X) :
     ((derivedTensor _ Y).obj ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)).obj
@@ -167,16 +162,13 @@ noncomputable def untwistedPoincarePairing (γ : TateOrientation Λ a d)
       tateObject Λ Y (-d) :=
   poincarePairingOfTrace a K (2 * d : ℤ) γ.untwistedSmoothTrace
 
-/-- Blueprint `corollary-degreewise-duality-over-fields--1`: Degree of the pairing.
-
-The *untwisted degreewise Poincaré pairing* of a Tate orientation `γ`, for `i + j = 2d`, the
+/-- The *untwisted degreewise Poincaré pairing* of a Tate orientation `γ`, for `i + j = 2d`, the
 line-valued pairing
 
 `⟨-, -⟩^{untw}_i : H^i_c(X, K) × H^j(X, K^∨) ⟶ Λ(-d)`,
 
-with `Λ(-d) = Hom(Λ_Y, Λ_Y(-d))` for `Y = Spec k`: the degreewise pairing of the untwisted
-derived pairing (`AlgebraicGeometry.Etale.TateOrientation.untwistedPoincarePairing`), read as
-in `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing`. -/
+with `Λ(-d) = Hom(Λ_Y, Λ_Y(-d))` for `Y = Spec k`, induced by the untwisted derived pairing
+(`AlgebraicGeometry.Etale.TateOrientation.untwistedPoincarePairing`). -/
 noncomputable def untwistedDegreewisePoincarePairing (γ : TateOrientation Λ a d)
     (K : DerivedCategoryModule Λ X) (i j : ℤ) (hij : i + j = 2 * d) :
     (𝟙_ (DerivedCategoryModule Λ Y) ⟶ ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)⟦i⟧) →ₗ[Λ]

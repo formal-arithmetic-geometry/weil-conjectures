@@ -15,8 +15,9 @@ import WeilConjectures.Algebra.Homology.KInjectiveResolution
 
 /-! # Support-controlled filtered resolution maps
 
-Source: Stacks Project, Tags 015J, 015K and 0EZM.
-(blueprint: lem-weil-pbc-supported-resolution-maps).
+## References
+
+* Stacks Project, Tags 015J, 015K and 0EZM
 -/
 
 @[expose] public section
@@ -58,49 +59,8 @@ set_option linter.unusedVariables false in
 -- Elaborate the dependent presentation, stable-range and resolution-map families.
 /-- Construct the filtered resolution comparison on every page in the support-controlled
 stable range. The abutment map is expressed on K-injective resolutions; no derived
-adjunction identification, identity law, composition law, or threshold selection is asserted.
-Source: Stacks Project, Tags 015J (first spectral sequence), 015K (filtered functoriality),
-and 0EZM (the common lower-bound argument).
-(blueprint: lem-weil-pbc-supported-resolution-maps).
-
-Proof:
-1. Choose the supported CE resolution before constructing its presentation; an arbitrary
-   existential presentation from exists_etaleHypercohomology_ce_total_maps does not suffice.
-   If K is zero in all degrees, use the zero CE resolution. Otherwise its nonzero degrees
-   have a least element b. Shift K so that b becomes zero, apply
-   exists_cartanEilenberg_resolution, and reindex back. Its zero negative rows then give
-   zero rows below b, hence below every lower bound a of K, simultaneously. Perform the
-   filtered total and page construction on these resolutions. Extend the resolution index
-   by zero; the second filtration L satisfies
-   L^p Tot^i = 0 for p > i and L^p Tot^i = Tot^i
-   for p ≤ a. The signed row comparisons give the displayed E₁ equation.
-2. If r ≥ max(1,q-a+2,n-q+2), then q+r > n+1 and q-r+1 ≤ a.
-   Hence the outer filtration steps in degrees n+1 and n-1 are respectively zero
-   and the whole object. The cycle/boundary formulas are their stationary formulas.
-   Apply stableSubquotient_at_bounds and transport the cohomology image filtration
-   along the specified total-to-derived comparison c. Use the canonical representative
-   quotient comparisons, rather than arbitrary isomorphisms. They depend only on q,n,r,
-   and not on the witness a. Thus eInf is defined for the existential stable-range proof;
-   proof irrelevance handles different witnesses and support bounds.
-3. Exact inverse image and the CE comparison lift yield filtered total maps. Such a map
-   sends a cycle representative in L^q to a cycle in the target L^q, and sends a boundary
-   representative to a boundary. On the stationary quotient its map therefore sends the
-   class of z to the class of its image. The cohomology image restriction sends the same
-   class to the same image class. After quotienting by the next filtration step these
-   maps agree by the cokernel universal property. This gives precisely the displayed
-   cokernel map and proves its compatibility with the stationary comparisons.
-4. For any supplied resolution lift j over v, the CE augmentation is a quasi-isomorphism
-   by cartanEilenberg_augmentation_quasiIso. Precomposition into the target K-injective
-   resolution is injective in the homotopy category, so the CE lift and comparison
-   followed by j are homotopic. Apply Γ and precompose with the sectionwise unit.
-   Its naturality and the finite-diagonal summand formulas identify the two endpoints
-   with the total-section map and the presentation w followed by the supplied w.
-   Homotopic maps have equal homology maps. Using c_formula cancels the source total
-   comparison, giving precisely the displayed conjugate of H(w). Restrict to the image
-   filtration for t and ht; naturality from step 3 gives the final equation for any hc.
-   Empty schemes, zero complexes and bidegrees outside the support are included: all
-   corresponding subquotients are zero and their comparisons are the unique maps.
--/
+adjunction identification, identity law, composition law, or threshold selection is asserted
+(Stacks, Tags 015J, 015K and 0EZM). -/
 theorem exists_etaleHypercohomology_supported_resolution_maps :
     ∃ (D : ∀ (X : Scheme.{u})
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})),

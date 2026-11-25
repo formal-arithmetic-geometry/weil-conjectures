@@ -13,8 +13,6 @@ import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 set_option linter.privateModule false
 
 /-! # Coefficient-normalized abelian component square
-
-Source: Hemo--Richarz--Scholbach, construction (4.1), pp. 8--9.
 -/
 
 @[expose] public noncomputable section

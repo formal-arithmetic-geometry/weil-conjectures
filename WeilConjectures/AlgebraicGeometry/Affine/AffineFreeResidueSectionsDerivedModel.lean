@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineResidueScalarTransport
 import WeilConjectures.AlgebraicGeometry.Affine.AffineKFlatResiduePullbackModel
 /-! # Derived residue model from affine free sections
 
-Source: Stacks Project, Tags 064K, 06YB, 06YI, 06YJ and 0098.
-(blueprint: lem-sc-affine-free-residue-sections-derived-model)
+## References
+
+* Stacks Project, Tags 064K, 06YB, 06YI, 06YJ and 0098
 -/
 
 @[expose] public section
@@ -24,22 +25,7 @@ set_option autoImplicit false
 universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-/-- A K-flat finite free section complex represents the derived residue pullback.
-Source: Stacks Project, Tags 064K, 06YB, 06YI, 06YJ and 0098.
-(blueprint: lem-sc-affine-free-residue-sections-derived-model)
-
-Proof: Transport K across the over-site equivalence to modules on U.toScheme.
-Finite free terms are quasi-coherent. The affine associated-sheaf counit identifies
-this complex with the associated sheaf of its terminal-object section complex;
-naturality gives compatibility with differentials. The section complex is finite free
-termwise. Its K-flatness is supplied as a hypothesis. Apply the affine K-flat pullback
-comparison to the residue point, which factors through U. Derived
-pullback composition and exact open restriction identify the pullback of the
-restricted representative with the pullback of E using he. The coefficient map
-is the residue of the section germ, namely W.evaluation U w hwU. The associated
-sheaf of its termwise scalar extension is therefore the stated representative.
-This comparison is before homology and asserts no finiteness or dimension formula.
-For rank zero and the zero complex the same counit and pullback comparisons apply. -/
+/-- A K-flat finite free section complex represents the derived residue pullback. -/
 theorem affineFree_residueSections_derivedModel
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

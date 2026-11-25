@@ -25,6 +25,14 @@ two Fourier kernels on `V = 𝔸(n; S)`. On the triple product `V ×_S V ×_S V`
   (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_fourierKernel`);
 * the diagonal is the base change of the zero section along the subtraction, so
   `sub^* z_* ≅ Δ_* π^*` (`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_sub`).
+
+## Implementation details
+
+Several auxiliary lemmas are stated for abstract functors and bifunctors, and the convolution
+is unfolded once in the generic setting (`kernelConvolution_eq`), so that the kernel never has
+to unfold the concrete derived functors or the derived tensor product. For the same reason the
+derived tensor product is written with `AlgebraicGeometry.Etale.derivedTensor` rather than
+with `⊗`.
 -/
 
 @[expose] public section
@@ -45,9 +53,7 @@ variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
   [Abelian.HasFunctorialFlatResolution A]
 variable {S V V' V'' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S) (π'' : V'' ⟶ S)
 
-/-- The convolution unfolded, `𝒦' ∗ 𝒦 = Rr₁₃,!(r₁₂^* 𝒦 ⊗ᴸ r₂₃^* 𝒦')`. Rewriting with this lemma,
-proved in the generic setting, spares the kernel from unfolding the convolution of concrete
-coefficients. -/
+/-- The convolution unfolded, `𝒦' ∗ 𝒦 = Rr₁₃,!(r₁₂^* 𝒦 ⊗ᴸ r₂₃^* 𝒦')`. -/
 theorem kernelConvolution_eq [HasCompactification (pullback.tripleProj₁₃ π π' π'')]
     (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A))
     (𝒦' : DerivedCategory (Sheaf (pullback π' π'').smallEtaleTopology A)) :
@@ -65,8 +71,7 @@ section ArtinSchreier
 variable (Λ : Type (u + 1)) [CommRing Λ] {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)]
 
 /-- If the global sections of `Y` have characteristic `p` and there are morphisms `X ⟶ Y` and
-`Y ⟶ X`, then the global sections of `X` have characteristic `p`: `p` vanishes on `X`, which is
-nonempty. -/
+`Y ⟶ X`, then the global sections of `X` have characteristic `p`. -/
 lemma charP_appTop_of_hom {X Y : Scheme.{u}} (f : X ⟶ Y) (s : Y ⟶ X) [CharP Γ(Y, ⊤) p] :
     CharP Γ(X, ⊤) p := by
   have : Nontrivial Γ(Y, ⊤) := CharP.nontrivial_of_char_ne_one (Fact.out : p.Prime).ne_one
@@ -105,9 +110,7 @@ lemma nonempty_iso_artinSchreierSheafZMod_inv (X : Scheme.{u}) [CharP Γ(X, ⊤)
   rw [hΨ]
   exact ⟨(nonempty_iso_artinSchreierSheafOf_neg_inv X _ f).some.symm⟩
 
-/-- For a flat sheaf `F`, if `F ⊗ G ≅ H` as sheaves then `F[0] ⊗ᴸ G[0] ≅ H[0]`.
-The derived tensor product is written with `AlgebraicGeometry.Etale.derivedTensor`, not with
-`⊗`, which the kernel is slow to identify with it. -/
+/-- For a flat sheaf `F`, if `F ⊗ G ≅ H` as sheaves then `F[0] ⊗ᴸ G[0] ≅ H[0]`. -/
 lemma nonempty_iso_derivedTensor_singleFunctor (X : Scheme.{u})
     {F G H : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (hF : ObjectProperty.flat F) (e : Nonempty (F ⊗ G ≅ H)) :
@@ -129,8 +132,7 @@ lemma nonempty_iso_singleFunctor_artinSchreierSheafZMod_tensor (X : Scheme.{u})
   nonempty_iso_derivedTensor_singleFunctor Λ X (flat_artinSchreierSheafZMod Λ X Ψ f)
     (nonempty_iso_artinSchreierSheafZMod_add Λ X Ψ f g)
 
-/-- `T.flip N M ≅ R` from `M ≅ M'`, `N ≅ N'` and `T M' N' ≅ R`, stated for an abstract bifunctor
-so that the kernel never unfolds the concrete derived tensor product. -/
+/-- `T.flip N M ≅ R` from `M ≅ M'`, `N ≅ N'` and `T M' N' ≅ R`, for a bifunctor `T`. -/
 private lemma nonempty_iso_flip_obj_obj {C : Type*} [Category C] (T : C ⥤ C ⥤ C)
     {M M' N N' R : C} (a : M ≅ M') (b : N ≅ N') (t : (T.obj M').obj N' ≅ R) :
     Nonempty ((T.flip.obj N).obj M ≅ R) :=
@@ -178,8 +180,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {p : ℕ} [Fact p.Prime] [Invertible 
 variable (n : Type u) (S : Scheme.{u})
 
 /-- The global sections of the triple product `𝔸(n; S) ×_S 𝔸(n; S) ×_S 𝔸(n; S)` have
-characteristic `p` when those of `𝔸(n; S) ×_S 𝔸(n; S)` do: the projection `r₁₂` and the
-morphism `(x, ξ) ↦ (x, ξ, x)` go back and forth. -/
+characteristic `p` when those of `𝔸(n; S) ×_S 𝔸(n; S)` do. -/
 lemma charP_appTop_tripleProduct [CharP Γ(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) p] :
     CharP Γ(pullback (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))
       (pullback.fst (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)), ⊤) p :=
@@ -191,8 +192,7 @@ variable [Fintype n]
 
 /-- The integrand of the convolution `𝒦_{ψ⁻¹} ∗ 𝒦_ψ` on the triple product with points
 `(x, ξ, y)`: `r₁₂^* 𝒦_ψ ⊗ᴸ r₂₃^* 𝒦_{ψ⁻¹} = ℒ_{ψ(⟨x, ξ⟩ - ⟨ξ, y⟩)}` is the pullback of the
-Fourier kernel `𝒦_ψ` along the shear `(x, ξ, y) ↦ (ξ, x - y)`.
-(sketch blueprint: `proposition-fourier-inversion`) -/
+Fourier kernel `𝒦_ψ` along the shear `(x, ξ, y) ↦ (ξ, x - y)`. -/
 theorem nonempty_iso_fourierKernel_convolution_integrand
     [CharP Γ(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) p] (Ψ : AddChar (ZMod p) Λ) :
     Nonempty ((derivedTensorRight (ModuleCat.{u + 1} Λ)
@@ -218,9 +218,8 @@ theorem nonempty_iso_fourierKernel_convolution_integrand
     (by rw [tripleShear_sub_appTop_stdPairing, sub_eq_add_neg])
 
 omit [Fintype n] in
-/-- The shear `(x, ξ, y) ↦ (ξ, x - y)` exhibits the outer projection `r₁₃` of the triple
-product as the base change of the second projection `p₂` along the subtraction, so by
-compact-support base change `Rr₁₃,! sh^* K ≅ sub^* Rp₂,! K`. -/
+/-- For the shear `sh : (x, ξ, y) ↦ (ξ, x - y)` and the outer projection `r₁₃` of the triple
+product, `Rr₁₃,! sh^* K ≅ sub^* Rp₂,! K`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_tripleProj₁₃_tripleShear [Finite Λ]
     [HasCompactification (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))]
     [HasCompactification
@@ -240,8 +239,7 @@ theorem nonempty_iso_rightDerivedLowerShriek_tripleProj₁₃_tripleShear [Finit
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
   exact ⟨((asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)).app K).symm⟩
 
-/-- `H Y ≅ (F ⋙ G ⋙ H ⋙ [r]) X [-r]` from `F X ≅ X'` and `G X' ≅ Y`, stated for abstract functors
-so that the kernel never unfolds the concrete derived functors. -/
+/-- `H Y ≅ (F ⋙ G ⋙ H ⋙ [r]) X [-r]` from `F X ≅ X'` and `G X' ≅ Y`. -/
 private lemma nonempty_iso_shiftFunctor_comp_obj {C₁ C₂ C₃ D : Type*} [Category C₁]
     [Category C₂] [Category C₃] [Category D] [HasShift D ℤ] (F : C₁ ⥤ C₂) (G : C₂ ⥤ C₃)
     (H : C₃ ⥤ D) {X : C₁} {X' : C₂} {Y : C₃} (a : F.obj X ≅ X') (b : G.obj X' ≅ Y) (r : ℤ) :
@@ -251,8 +249,7 @@ private lemma nonempty_iso_shiftFunctor_comp_obj {C₁ C₂ C₃ D : Type*} [Cat
     ((shiftFunctorCompIsoId D r (-r) (add_neg_cancel r)).app _).symm⟩
 
 /-- `T' (R U) [m][m] ≅ R O [2m]` for a functor `R` commuting with shifts, from
-`R (T U [2m]) ≅ T' (R U) [2m]` and `T U ≅ O`, stated for abstract functors so that the kernel
-never unfolds the concrete derived functors. -/
+`R (T U [2m]) ≅ T' (R U) [2m]` and `T U ≅ O`. -/
 private lemma nonempty_iso_shiftFunctor_shiftFunctor_obj {C D : Type*} [Category C]
     [Category D] [HasShift C ℤ] [HasShift D ℤ] (R : C ⥤ D) [R.CommShift ℤ] (T : C ⥤ C)
     (T' : D ⥤ D) {U O : C} (o : T.obj U ≅ O) (m : ℤ)
@@ -268,7 +265,7 @@ lemma nonempty_iso_tateTwist_obj_unit [HasTateTwist Λ] (X : Scheme.{u}) (m : �
     Nonempty ((tateTwist Λ X m).obj (𝟙_ _) ≅ tateObject Λ X m) :=
   ⟨derivedTensorLeftUnitor _ X _⟩
 
-/-- `Rp₂,! 𝒦_ψ ≅ FT_ψ(Λ)[-r]`, `r = #n`: the transform of `Λ` is `Rp₂,!(p₁^* Λ ⊗ᴸ 𝒦_ψ)[r]`. -/
+/-- `Rp₂,! 𝒦_ψ ≅ FT_ψ(Λ)[-r]`, where `r = #n`. -/
 lemma nonempty_iso_rightDerivedLowerShriek_fourierKernel_affineFourierTransform
     [CharP Γ(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) p]
     [HasCompactification (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))]
@@ -286,7 +283,7 @@ lemma nonempty_iso_rightDerivedLowerShriek_fourierKernel_affineFourierTransform
     (((leftDerivedUpperStarIsoMapDerivedCategory _ _).app _).symm ≪≫
       leftDerivedUpperStarUnitIso _ _) (derivedTensorLeftUnitor _ _ _) (Fintype.card n : ℤ)
 
-/-- `δ₀(-r)[-r][-r] ≅ z_* Λ(-r)[-2r]`, by the projection formula for the zero section `z`. -/
+/-- `δ₀(-r)[-r][-r] ≅ z_* Λ(-r)[-2r]`, for the zero section `z`. -/
 lemma nonempty_iso_shiftFunctor_tateTwist_skyscraperZero [Finite Λ] [HasTateTwist Λ]
     [HasInvertibleExponent Λ S] :
     Nonempty ((shiftFunctor _ (-(Fintype.card n : ℤ))).obj
@@ -302,8 +299,7 @@ lemma nonempty_iso_shiftFunctor_tateTwist_skyscraperZero [Finite Λ] [HasTateTwi
     (tateTwist Λ S (-(Fintype.card n : ℤ))) (tateTwist Λ 𝔸(n; S) (-(Fintype.card n : ℤ)))
     o (-(Fintype.card n : ℤ)) t
 
-/-- `Rp₂,! 𝒦_ψ = FT_ψ(Λ)[-r]` is the skyscraper `z_* Λ(-r)[-2r]` at the origin, `r = #n`, by
-`AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_unit`. -/
+/-- `Rp₂,! 𝒦_ψ = FT_ψ(Λ)[-r]` is the skyscraper `z_* Λ(-r)[-2r]` at the origin, `r = #n`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_fourierKernel [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
     [CharP Γ(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) p]
@@ -321,9 +317,8 @@ theorem nonempty_iso_rightDerivedLowerShriek_fourierKernel [Finite Λ] [HasInver
   exact ⟨e₁ ≪≫ (shiftFunctor _ (-(Fintype.card n : ℤ))).mapIso e ≪≫ e₂⟩
 
 omit [Fintype n] in
-/-- The diagonal is the base change of the zero section along the subtraction
-(`AlgebraicGeometry.AffineSpace.isPullback_diagonal_sub`), so
-`sub^* (Rz_* M)[a] ≅ (RΔ_* π^* M)[a]` by proper base change. -/
+/-- Pulling back along the subtraction turns pushforward along the zero section into
+pushforward along the diagonal: `sub^* (Rz_* M)[a] ≅ (RΔ_* π^* M)[a]`. -/
 theorem nonempty_iso_leftDerivedUpperStar_sub [Finite Λ] (a : ℤ)
     (M : DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((L((sub n S)^*[ModuleCat.{u + 1} Λ])).obj
@@ -340,8 +335,7 @@ theorem nonempty_iso_leftDerivedUpperStar_sub [Finite Λ] (a : ℤ)
       (rightDerivedLowerShriekIsoRightDerivedLowerStar A
         (pullback.diagonal (𝔸(n; S) ↘ S))).app _)⟩
 
-/-- `sub^* (z_* Λ(-r)[-2r]) ≅ Δ_* Λ(-r)[-2r]`, `r = #n`: the diagonal is the fibre of the
-subtraction over the zero section. -/
+/-- `sub^* (z_* Λ(-r)[-2r]) ≅ Δ_* Λ(-r)[-2r]`, `r = #n`. -/
 theorem nonempty_iso_leftDerivedUpperStar_sub_tateObject [Finite Λ] [HasTateTwist Λ]
     [HasInvertibleExponent Λ S] :
     Nonempty ((L((sub n S)^*[ModuleCat.{u + 1} Λ])).obj

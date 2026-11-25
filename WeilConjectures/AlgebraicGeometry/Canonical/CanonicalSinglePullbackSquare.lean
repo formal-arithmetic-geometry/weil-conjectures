@@ -13,8 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.Tensor.TensorSinglePullbackComposit
 
 /-! # Pullback composition compatibility on single modules
 
-Source: Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-canonical-single-pullback-square).
+## References
+
+* Stacks Project, Tag 0D5S
 -/
 
 @[expose] public section
@@ -92,23 +93,7 @@ private theorem singlePullback_congr
     simp [pullbackCongr]
 
 /-- Single pullback comparisons respect a commutative square and a module morphism.
-This concerns only pullback; it involves neither base change nor direct image.
-Source: Stacks Project, Tag 0D5S, and the naturality of left-derived counits.
-(blueprint: lem-pc-canonical-single-pullback-square).
-
-Proof: Evaluate the defining `leftDerivedLift` factorization for the selected
-composition isomorphisms on N[0]. It identifies successive left-derived counits
-with the counit for the composite followed by underived tensor composition.
-Apply this identity to (f', g) and (g', f), transport along h, and cancel the
-invertible derived composition comparison to obtain the square for N.
-Transport tensor pullback to ordinary pullback by the unique left-adjoint
-isomorphisms. Their counit laws identify tensor composition, defined as the mate
-of pushforward composition, with `pullbackComp`; transport along h becomes
-`pullbackCongr h`. Thus the ordinary square comparison is c.inv. Finally,
-naturality of the left-derived counit and of the single-map comparisons for the
-morphism a moves a across the g' comparison, yielding the displayed formula.
-No comparison on a single module is inverted. The argument covers h reflexive,
-identity morphisms, zero a, zero modules and empty schemes without extra assumptions. -/
+This concerns only pullback; it involves neither base change nor direct image. -/
 theorem canonicalSinglePullbackSquare
     {X S X' S' : Scheme.{u}} (f : X ⟶ S)
     (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S')

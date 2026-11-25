@@ -24,11 +24,8 @@ noncomputable local instance TensorResolutionComparisonFormula_localInst1 : Mono
 
 /-- The comparison hom is the four-map zigzag, without unfolding tensor totalizations.
 
-Source: Stacks Tags 06YT and 08DX(2), the specified comparison through a common
-K-flat resolution. This is the defining formula: the first and third homology
-maps are inverted, and the second and fourth are composed in order.
-
-(blueprint: new-h4-qcoh-tensor-comparison-hom-formula) -/
+The first and third homology maps are inverted, and the second and fourth are composed in
+order (Stacks, Tags 06YT and 08DX). -/
 theorem tensorResolutionComparison_hom
     (E K M F N : CochainComplex C ℤ)
     (r : E ⟶ M) (q : K ⟶ M) (s : F ⟶ N)

@@ -16,14 +16,15 @@ import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 
 /-! # Ingredients of the canonical representative square
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5
-(blueprint: lem-pod-tensor-roos-representative-square).
-
 The normalized pullback field of a lawful reindexing package is the fixed completed
 pullback realization. With it, the adjunction calculation of
 `PodTensorRoosRepresentativeSquareMate` identifies the coherent limit/tensor comparison
 with the canonical completed pullback/tensor comparison. A single strict tower map is
 packaged as a tensor reindexing datum, so the strict Roos normalization applies to it.
+
+## References
+
+* Stacks Project, Tags 05RU, 07A4, 0941, 099N.
 -/
 
 @[expose] public noncomputable section
@@ -50,9 +51,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The normalized pullback field of a lawful completion reindexing package is the fixed
-completed pullback realization, by uniqueness of normalized pullback realizations.
-Source: blueprint Steps 1 and 5; Stacks 099N(5), 0941
-(blueprint: lem-pod-tensor-roos-representative-square). -/
+completed pullback realization. -/
 theorem podCompletionReindex_pullback_eq
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D) :
@@ -66,8 +65,7 @@ theorem podCompletionReindex_pullback_eq
     (podReindexCalculus l E Y) D.targetRoos D.sourceRoos α β).1
       ⟨D.pullback, hD.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2⟩
 
-/-- Reindexing the derived functor of an equality of exact functors gives the equality.
-Source: Stacks 05RU. -/
+/-- Reindexing the derived functor of an equality of exact functors gives the equality. -/
 theorem podMapDerivedCategoryNatIso_eqToIso {C D : Type*} [Category C] [Category D]
     [Abelian C] [Abelian D] [HasDerivedCategory C] [HasDerivedCategory D]
     (F G : C ⥤ D) [F.Additive] [G.Additive]
@@ -78,8 +76,7 @@ theorem podMapDerivedCategoryNatIso_eqToIso {C D : Type*} [Category C] [Category
   apply Iso.ext
   exact Functor.mapDerivedCategoryNatIso_refl
 
-/-- The ordinary-to-completed map, written through the fixed completed pullback model.
-Source: blueprint Steps 1 and 5 (blueprint: def-pod-completion-reindex-models). -/
+/-- The ordinary-to-completed map, written through the fixed completed pullback model. -/
 theorem podOrdinaryToCompleted_app_eq
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)
@@ -98,9 +95,7 @@ theorem podOrdinaryToCompleted_app_eq
   rfl
 /-- The coherent limit/tensor comparison, followed by the tensor of the two
 ordinary-to-completed maps, is the ordinary-to-completed map of the tensor followed by
-the canonical completed pullback/tensor comparison.
-Source: blueprint theorem-poincare-duality-frobenius--2, Step 5; Stacks 07A4, 0941
-(blueprint: lem-pod-tensor-roos-representative-square). -/
+the canonical completed pullback/tensor comparison. -/
 theorem podReindexingLimitTensorComparison_canonical
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -135,8 +130,7 @@ theorem podReindexingLimitTensorComparison_canonical
     rfl
   · unfold canonicalIntegralPullbackTensor pullbackTensorReferenceComparison
     rfl
-/-- On complete constructible inputs the ordinary-to-completed map is invertible.
-Source: blueprint Steps 1 and 5 (blueprint: def-pod-completion-reindex-models). -/
+/-- On complete constructible inputs the ordinary-to-completed map is invertible. -/
 theorem podOrdinaryToCompleted_isIso
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)
@@ -161,9 +155,7 @@ theorem podOrdinaryToCompleted_isIso
 
 /-- A strict tensor tower comparison, equal to a prescribed one at one pair of inputs and to
 a chosen generator-normalized comparison elsewhere, packaged with the induced constructible
-tensor comparison.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5
-(blueprint: lem-pod-tensor-roos-representative-square). -/
+tensor comparison. -/
 def podTensorReindexAt
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -197,8 +189,7 @@ def podTensorReindexAt
         (integralCompletedTensor l E X).mapIso
           (Iso.prod (asIso ((podOrdinaryToCompleted l E g D).app M.obj)).symm
             (asIso ((podOrdinaryToCompleted l E g D).app N.obj)).symm) }
-/-- At the prescribed pair, the packaged tower comparison is the prescribed one.
-Source: blueprint lem-pod-tensor-roos-representative-square. -/
+/-- At the prescribed pair, the packaged tower comparison is the prescribed one. -/
 theorem podTensorReindexAt_tower
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -213,8 +204,7 @@ theorem podTensorReindexAt_tower
   unfold podTensorReindexAt
   exact dite_eq_left (And.intro (rfl : P = P) (rfl : Q = Q))
 
-/-- The packaged tower comparison satisfies the generator formula when the prescribed one does.
-Source: blueprint lem-pod-tensor-roos-representative-square. -/
+/-- The packaged tower comparison satisfies the generator formula when the prescribed one does. -/
 theorem podTensorReindexAt_generators
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -281,9 +271,8 @@ private lemma podTensorRepresentative_cancel {C D : Type*} [Category C] [Categor
   simp only [Prod.mkHom, prod_comp, eP.hom_inv_id, eQ.hom_inv_id,
     ← prod_id', T.map_id, Category.id_comp]
 
-/-- The representative square, assembled from the strict Roos normalization and the
-adjunction calculation of the canonical completed comparison.
-Source: blueprint lem-pod-tensor-roos-representative-square. -/
+/-- The canonical representative square holds for a strict tensor tower comparison `τ`
+satisfying the generator formula. -/
 theorem podTensorRoosRepresentativeSquare_of_normalization
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

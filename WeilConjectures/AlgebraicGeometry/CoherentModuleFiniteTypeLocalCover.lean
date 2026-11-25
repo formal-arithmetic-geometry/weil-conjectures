@@ -10,11 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 
 /-! # Finite type from a coherent open cover
 
-Source: Stacks Project, Modules, Definitions 01BV and 01B5.
-(blueprint: lem-weil-pbc-coherent-module-finite-type-local-cover)
-
 Finite local generators on the open subschemes are transported to the corresponding
 slice sites and assembled into local-generators data on the ambient scheme.
+
+## References
+
+* Stacks Project, Tags 01BV and 01B5
 -/
 
 @[expose] public section
@@ -89,19 +90,8 @@ private theorem imageCover (X : Scheme.{u}) (I : Type u)
   exact ⟨hx, ⟨⟨x, hi⟩, hj, rfl⟩⟩
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Finite type is local for an open cover when each restricted module is coherent.
-Source: Stacks Project, Definitions 01BV and 01B5 and Lemma 01B6.
-
-Proof: Coherence gives finite local-generators data on every member of the cover.
-For each generating neighbourhood, identify its scheme with the image open in `X`.
-The open-site equivalences and restriction along that isomorphism identify the two
-restricted modules and their structure modules. Transport the finite generating
-family through this equivalence. Index the resulting neighbourhoods by the pairs
-of a cover member and one of its generating neighbourhoods. Every point belongs
-to one such image, so these opens cover `X`; the transported families are finite.
-This is local-generators data witnessing finite type, including for the empty scheme.
-(blueprint: lem-weil-pbc-coherent-module-finite-type-local-cover)
--/
+/-- Finite type is local for an open cover when each restricted module is coherent
+(Stacks, Tags 01BV, 01B5 and 01B6). -/
 theorem coherent_module_finite_type_local_cover
     (X : Scheme.{u}) (F : X.Modules) (I : Type u)
     (U : I → X.Opens) (hU : ⨆ i, U i = ⊤)

@@ -9,8 +9,11 @@ public import WeilConjectures.Algebra.Homology.LinearScalarCone.LinearScalarCone
 
 /-! # Scalar cones independent of quotient presentations
 
-Source: Stacks 099M, the two-term free resolution of a principal quotient.
-(blueprint: def-sfb-diagonal-scalar-cone).
+The cones are built from the two-term free resolution of a principal quotient.
+
+## References
+
+* [Stacks Project, Tag 099M](https://stacks.math.columbia.edu/tag/099M)
 -/
 
 @[expose] public noncomputable section
@@ -21,8 +24,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (A : Type a) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
 
-/-- The natural-scalar arrow, before taking its cone.
-Source: Stacks 099M (blueprint: def-sfb-diagonal-scalar-cone). -/
+/-- The natural-scalar arrow, before taking its cone. -/
 abbrev diagonalScalarConeArrow (r : ℕ) :
     CochainComplex A ℤ ⥤ Arrow (CochainComplex A ℤ) where
   obj P := Arrow.mk (r • 𝟙 P)
@@ -32,13 +34,11 @@ abbrev diagonalScalarConeArrow (r : ℕ) :
       simp only [Preadditive.nsmul_comp, Preadditive.comp_nsmul,
         Category.id_comp, Category.comp_id])
 
-/-- The functorial two-term scalar cone, before localization.
-Source: Stacks 099M (blueprint: def-sfb-diagonal-scalar-cone). -/
+/-- The functorial two-term scalar cone, before localization. -/
 abbrev diagonalScalarConeComplex (r : ℕ) : CochainComplex A ℤ ⥤ CochainComplex A ℤ :=
   diagonalScalarConeArrow A r ⋙ CochainComplex.ConeCoimage.cone
 
-/-- The natural-power model is the existing integer-linear scalar cone.
-Source: integer scalar action (blueprint: def-sfb-diagonal-scalar-cone). -/
+/-- The natural-power model is the existing integer-linear scalar cone. -/
 def diagonalScalarConeComplexComparison (r : ℕ) :
     CochainComplex.LinearScalarCone.cochain (A := A) (r : ℤ) ≅
       diagonalScalarConeComplex A r :=
@@ -50,8 +50,7 @@ def diagonalScalarConeComplexComparison (r : ℕ) :
       intro P Q f
       ext <;> simp [diagonalScalarConeArrow])) CochainComplex.ConeCoimage.cone
 
-/-- The inclusion in the degree-zero term of the two-term scalar resolution.
-Source: Stacks 099M (blueprint: def-sfb-diagonal-scalar-cone). -/
+/-- The inclusion in the degree-zero term of the two-term scalar resolution. -/
 def diagonalScalarConeComplexUnit (r : ℕ) :
     𝟭 (CochainComplex A ℤ) ⟶ diagonalScalarConeComplex A r where
   app P := CochainComplex.mappingCone.inr _
@@ -59,21 +58,18 @@ def diagonalScalarConeComplexUnit (r : ℕ) :
     dsimp only [Functor.id_map, diagonalScalarConeComplex, diagonalScalarConeArrow]
     simp [CochainComplex.mappingCone.map]
 
-/-- The derived scalar cone, obtained by localization of its explicit complex functor.
-Source: Stacks 099M (blueprint: def-sfb-diagonal-scalar-cone). -/
+/-- The derived scalar cone, obtained by localization of its explicit complex functor. -/
 abbrev diagonalScalarCone (r : ℕ) : DerivedCategory A ⥤ DerivedCategory A :=
   CochainComplex.LinearScalarCone.derived (A := A) (r : ℤ)
 
-/-- The canonical comparison with the explicit complex cone.
-Source: localization universal property (blueprint: def-sfb-diagonal-scalar-cone). -/
+/-- The canonical comparison with the explicit complex cone. -/
 def diagonalScalarConeFactors (r : ℕ) :
     DerivedCategory.Q ⋙ diagonalScalarCone A r ≅
       diagonalScalarConeComplex A r ⋙ DerivedCategory.Q :=
   CochainComplex.LinearScalarCone.comparison (A := A) (r : ℤ) ≪≫
     Functor.isoWhiskerRight (diagonalScalarConeComplexComparison A r) DerivedCategory.Q
 
-/-- The quotient unit in the localized two-term model.
-Source: Stacks 099M (blueprint: def-sfb-diagonal-scalar-cone). -/
+/-- The quotient unit in the localized two-term model. -/
 def diagonalScalarConeUnit (r : ℕ) : 𝟭 (DerivedCategory A) ⟶ diagonalScalarCone A r :=
   (Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Q
     (HomologicalComplex.quasiIso A (.up ℤ)) (DerivedCategory A)).preimage
@@ -81,8 +77,7 @@ def diagonalScalarConeUnit (r : ℕ) : 𝟭 (DerivedCategory A) ⟶ diagonalScal
         Functor.whiskerRight (diagonalScalarConeComplexUnit A r) DerivedCategory.Q ≫
         (diagonalScalarConeFactors A r).inv)
 
-/-- The derived unit is exactly the localization of the degree-zero inclusion.
-Source: localization universal property (blueprint: def-sfb-diagonal-scalar-cone). -/
+/-- The derived unit is exactly the localization of the degree-zero inclusion. -/
 theorem diagonalScalarConeUnit_factors (r : ℕ) (P : CochainComplex A ℤ) :
     (diagonalScalarConeUnit A r).app (DerivedCategory.Q.obj P) ≫
       (diagonalScalarConeFactors A r).hom.app P =

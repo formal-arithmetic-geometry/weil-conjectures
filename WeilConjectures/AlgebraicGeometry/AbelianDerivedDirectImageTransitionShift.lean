@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
 /-! # Shift compatibility of the derived direct-image transition
 
-Source: Stacks Project, Tag 09Z1, derived-adjunction coherence elaboration.
-(blueprint: lem-sbc-abelian-derived-transition-shift).
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section
@@ -163,21 +164,7 @@ noncomputable def abelianDerivedDirectImageTransition {S Y Y' : Scheme.{v}}
       (fun f : Y' ⟶ S => ((f)^*[AddCommGrpCat.{v + 1}]).mapDerivedCategoryPlus)
       w.symm) ≪≫ upperStarPlusComp AddCommGrpCat.{v + 1} a h).hom K K' t
 
-/-- The derived transition commutes with integer shifts. Source: Stacks Project,
-Tag 09Z1, compatibility of comparison morphisms; derived-adjunction coherence.
-(blueprint: lem-sbc-abelian-derived-transition-shift).
-
-Proof: Transport along w to reduce to h' = a ≫ h. The derived adjunction unit
-commutes with shifts, as does its counit, by the existing theorem
-`derivedPlus_upperStarLowerStar_commShift` for h and h'. These equalities descend
-from the termwise adjunction on complexes through the localization factorization. The
-composition comparison of exact pullbacks commutes with shifts because it is
-induced by the termwise comparison, which commutes with shifts in every degree.
-Expand the transition, apply these three identities, and use naturality of the
-shift comparisons to move the coefficient morphism t through. The intermediate
-shift comparisons cancel with their inverses. The two surviving comparisons are
-those of Rh_* and Rh'_* displayed below. This works for arbitrary bounded below
-complexes, including zero complexes, and every integer shift. -/
+/-- The derived transition commutes with integer shifts (Stacks, Tag 09Z1). -/
 theorem abelianDerivedDirectImageTransition_shift {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))

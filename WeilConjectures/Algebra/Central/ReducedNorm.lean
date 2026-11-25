@@ -74,8 +74,7 @@ theorem bot_eq_top_of_isSepClosed (F E : Type*) [Field F] [IsSepClosed F] [Divis
 /-- **Splitting over a separably closed field.** A finite-dimensional central simple algebra `A`
 over `K` becomes a matrix algebra over every separably closed field `F` containing `K`: by
 Wedderburn's theorem `F ⊗[K] A ≅ M_d(E)` for a central division algebra `E` over `F`, and
-`E = F` by the Jacobson–Noether theorem.
-(blueprint: `lemma-cohomology-multiplicative-group--7`) -/
+`E = F` by the Jacobson–Noether theorem. -/
 @[stacks 03R2]
 theorem exists_algEquiv_matrix_of_isSepClosed (K A F : Type*) [Field K] [Ring A] [Algebra K A]
     [Algebra.IsCentral K A] [IsSimpleRing A] [FiniteDimensional K A] [Field F] [IsSepClosed F]
@@ -92,8 +91,7 @@ theorem exists_algEquiv_matrix_of_isSepClosed (K A F : Type*) [Field K] [Ring A]
 
 /-- If `φ : L ⊗[K] A ≃ₐ[L] M_ι(L)` is a splitting and `τ ∈ Gal(L / K)`, then applying `τ`
 entrywise to `φ (1 ⊗ a)` is conjugation by a unit independent of `a`: the twisted splitting
-`τ ∘ φ ∘ (τ⁻¹ ⊗ 1)` differs from `φ` by an automorphism of `M_ι(L)`, which is inner.
-(blueprint: `lemma-cohomology-multiplicative-group--7`) -/
+`τ ∘ φ ∘ (τ⁻¹ ⊗ 1)` differs from `φ` by an automorphism of `M_ι(L)`, which is inner. -/
 theorem exists_unit_map_eq_conj {K L A ι : Type*} [Field K] [Field L] [Algebra K L] [Ring A]
     [Algebra K A] [Fintype ι] [DecidableEq ι] (φ : L ⊗[K] A ≃ₐ[L] Matrix ι ι L)
     (τ : L ≃ₐ[K] L) :
@@ -120,8 +118,7 @@ theorem exists_unit_map_eq_conj {K L A ι : Type*} [Field K] [Field L] [Algebra 
 open MvPolynomial in
 /-- **The reduced norm.** A finite-dimensional central division algebra `D` over `K` has
 dimension `d ^ 2` for some `d > 0`, and in the coordinates of a `K`-basis of `D` there is a form
-of degree `d` over `K`, the reduced norm, vanishing only at `0`.
-(blueprint: `lemma-cohomology-multiplicative-group--7`) -/
+of degree `d` over `K`, the reduced norm, vanishing only at `0`. -/
 theorem exists_isHomogeneous_eval_ne_zero (K D : Type*) [Field K] [DivisionRing D] [Algebra K D]
     [Algebra.IsCentral K D] [FiniteDimensional K D] :
     ∃ d : ℕ, 0 < d ∧ Module.finrank K D = d ^ 2 ∧

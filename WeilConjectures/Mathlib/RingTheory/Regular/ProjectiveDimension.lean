@@ -123,7 +123,7 @@ variable {R : Type u} [CommRing R]
 
 /-- Over a noetherian ring `R`, let `I` be an ideal such that `R ⧸ 𝔭` has finite projective
 dimension for every prime `𝔭 ⊇ I`. Then every finitely generated `R`-module annihilated by `I`
-has finite projective dimension. This follows from the existence of prime filtrations. -/
+has finite projective dimension. -/
 theorem exists_hasProjectiveDimensionLE_of_le_annihilator [IsNoetherianRing R] (I : Ideal R)
     (h : ∀ (p : Ideal R), p.IsPrime → I ≤ p → ∀ (N : Type v) [AddCommGroup N] [Module R N],
       (N ≃ₗ[R] R ⧸ p) → ∃ n : ℕ, HasProjectiveDimensionLE (ModuleCat.of R N) n)
@@ -154,9 +154,7 @@ namespace IsRegularLocalRing
 variable {R : Type u} [CommRing R] [IsRegularLocalRing R] [Small.{v} R]
 
 /-- Over a regular local ring `R`, every module isomorphic to `R ⧸ 𝔭` for a prime `𝔭` has finite
-projective dimension. This is proved by noetherian induction on `𝔭`: for `𝔭 = 𝔪` it follows from
-`projectiveDimension_quotient_maximalIdeal`; otherwise for `y ∈ 𝔪 \ 𝔭` the module `R ⧸ (𝔭, y)`
-has finite projective dimension by the induction hypothesis, and it equals `pd (R ⧸ 𝔭) + 1`. -/
+projective dimension. -/
 theorem exists_hasProjectiveDimensionLE_of_linearEquiv_quotient (p : Ideal R) [p.IsPrime]
     (N : Type v) [AddCommGroup N] [Module R N] (e : N ≃ₗ[R] R ⧸ p) :
     ∃ n : ℕ, HasProjectiveDimensionLE (ModuleCat.of R N) n := by
@@ -370,8 +368,7 @@ namespace IsLocalRing
 variable {R : Type u} [CommRing R] [IsLocalRing R]
 
 /-- **Nagata's lemma.** Let `x ∈ 𝔪 \ 𝔪²` and `R' = R ⧸ (x)`. Then the residue field of `R'` is
-a retract of `R' ⊗[R] 𝔪 = 𝔪 ⧸ x 𝔪`: the element `x` spans a copy of the residue field, and a
-linear form on `𝔪 ⧸ 𝔪²` which is `1` on `x` gives a retraction. -/
+a retract of `R' ⊗[R] 𝔪 = 𝔪 ⧸ x 𝔪`. -/
 theorem nonempty_retract_residueField {x : R} (hx : x ∈ maximalIdeal R)
     (hx2 : x ∉ maximalIdeal R ^ 2) [IsLocalRing (R ⧸ Ideal.span {x})] :
     Nonempty <| Retract (ModuleCat.of (R ⧸ Ideal.span {x}) (ResidueField (R ⧸ Ideal.span {x})))
@@ -414,7 +411,7 @@ theorem nonempty_retract_residueField {x : R} (hx : x ∈ maximalIdeal R)
 variable [IsNoetherianRing R]
 
 /-- For `x ∈ 𝔪`, the maximal ideal of `R` needs at most one generator more than the maximal ideal
-of `R ⧸ (x)`: lifts of generators of the latter together with `x` generate `𝔪`. -/
+of `R ⧸ (x)`. -/
 theorem spanFinrank_maximalIdeal_le_spanFinrank_map_add_one {x : R} (hx : x ∈ maximalIdeal R) :
     (maximalIdeal R).spanFinrank ≤
       ((maximalIdeal R).map (Ideal.Quotient.mk (Ideal.span {x}))).spanFinrank + 1 := by
@@ -538,11 +535,7 @@ theorem of_hasProjectiveDimensionLE_residueField_aux :
     _ ≤ ringKrullDim R := h3
 
 /-- **Serre's theorem.** A noetherian local ring whose residue field has finite projective
-dimension is regular. The proof is by induction on the number of generators of `𝔪`: if every
-element of `𝔪` is a zerodivisor, then some `s ≠ 0` kills `𝔪`, which forces the residue field to be
-free, hence `𝔪 = 0`. Otherwise prime avoidance gives a nonzerodivisor `x ∈ 𝔪 \ 𝔪²`; the residue
-field of `R ⧸ (x)` is a retract of `𝔪 ⧸ x 𝔪`, which has finite projective dimension over
-`R ⧸ (x)` by change of rings, so `R ⧸ (x)` is regular by induction, and so is `R`. -/
+dimension is regular. -/
 @[stacks 00OC "(1) ⇒ (3)"]
 theorem of_hasProjectiveDimensionLE_residueField {R : Type u} [CommRing R] [IsLocalRing R]
     [IsNoetherianRing R] (n : ℕ)
@@ -550,10 +543,7 @@ theorem of_hasProjectiveDimensionLE_residueField {R : Type u} [CommRing R] [IsLo
   of_hasProjectiveDimensionLE_residueField_aux _ R rfl n h
 
 /-- **Regularity descends along flat local homomorphisms.** If `R → S` is a flat local
-homomorphism of noetherian local rings and `S` is regular, then so is `R`: the residue field `κ`
-of `R` has finite projective dimension, since `S ⊗[R] κ` has finite projective dimension over
-the regular ring `S` and projective dimension descends along the faithfully flat map `R → S`.
-(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
+homomorphism of noetherian local rings and `S` is regular, then so is `R`. -/
 @[stacks 00OF]
 theorem of_flat {R S : Type u} [CommRing R] [CommRing S] [IsLocalRing R] [IsNoetherianRing R]
     [IsRegularLocalRing S] [Algebra R S] [IsLocalHom (algebraMap R S)] [Module.Flat R S] :

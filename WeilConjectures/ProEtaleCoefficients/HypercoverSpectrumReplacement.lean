@@ -12,8 +12,25 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.CategoryTheory.SimplicialMatchingObject
 public import WeilConjectures.RingTheory.ProEtale.WContractible
 
-/-! Transporting a hypercover to spectrum representatives.
-(blueprint: det-pe-hypercover-spectrum-replacement) -/
+/-! # Transporting a hypercover to spectrum representatives
+
+## Main results
+
+* `hypercover_spectrum_replacement`: the terms of a hypercover may be replaced by specified
+  isomorphic spectra.
+
+## Implementation details
+
+Each spectrum is given the transported structure map and augmentation, and every simplicial
+operator is conjugated by the chosen isomorphisms. Proper-face cones are transported along the
+induced isomorphism of diagrams, keeping their vertex. Since isomorphisms are singleton covers
+and covers compose, the matching and augmentation arrows remain covers. Empty spectra and the
+zero ring are allowed.
+
+## References
+
+* [Stacks, Tag 09A1]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -43,17 +60,9 @@ private theorem singleton_comp_cover {C : Type*} [Category C]
   exact heq ▸ h
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Replace the terms of a hypercover by specified spectra.
-Source: Stacks Project, Tag 09A1 (2), final finite-disjoint-union step.
-(blueprint: det-pe-hypercover-spectrum-replacement)
-
-Proof: choose the supplied spectrum isomorphisms and give each spectrum the transported
-structure map and augmentation. Conjugate every simplicial operator by these isomorphisms.
-The inverse pairs cancel, proving the functor laws. Transport each proper-face cone along
-the induced isomorphism of diagrams, keeping its vertex. Compose the old matching map with
-the source isomorphism. The projection identities follow from naturality; the transported
-cone is limiting. Isomorphisms are singleton covers and covers compose, so the matching
-and augmentation arrows remain covers. This includes empty spectra and the zero ring.
+/-- The terms of a hypercover by objects isomorphic to spectra of w-contractible rings can be
+replaced by those spectra, keeping a hypercover with limiting matching cones and covering
+matching and augmentation arrows.
 -/
 theorem hypercover_spectrum_replacement (X : Scheme.{u}) (U : X.ProEt)
     (V : SimplicialObject (Over U))

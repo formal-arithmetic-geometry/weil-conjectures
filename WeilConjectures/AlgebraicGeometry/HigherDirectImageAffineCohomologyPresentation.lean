@@ -17,8 +17,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine-local presentation of ordinary higher direct images
 
-Source: Stacks Project, Cohomology, Tags 01E1 and 01E4.
-(blueprint: lem-pc-higher-direct-image-affine-cohomology-presentation).
+## References
+
+* Stacks Project, Cohomology, Tags 01E1 and 01E4.
 -/
 
 @[expose] public section
@@ -31,31 +32,9 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Cohomology on inverse-image opens maps naturally to sections of ordinary higher
- direct image, and these classes detect maps out of that higher direct image on the
- affine basis. No compactness, separation or coproduct hypothesis is needed.
-
-Source: Stacks Project, Cohomology, Tags 01E1 and 01E4.
-(blueprint: lem-pc-higher-direct-image-affine-cohomology-presentation).
-
-Proof: For an open V of Y, restrict an injective module resolution on X to
-U = f^{-1}(V). Open restriction is exact and preserves injectives (01E1). Taking
-sections on U therefore computes the cohomology of the restricted module. The
-resolution comparison identifies this group with the value at V of the presheaf
-H^p(f_*I). Compose with the canonical cocycle-to-cohomology-sheaf map theta and
-with the inverse of the resolution isomorphism H^p(f_*I) = R^p f_*M. A lift of a
-coefficient morphism to injective resolutions commutes with restriction, sections,
-theta and the resolution isomorphisms; homotopic lifts induce equal maps. Thus these
-maps form the displayed natural transformations, independent of resolutions.
-For the detection assertion, the canonical cohomology-presheaf map induces an
-isomorphism on stalks (01E4). Every germ of R^p f_*N is consequently represented
-locally by such a cohomology class. Shrink its representing open to an affine
-neighborhood; restriction of resolutions identifies the restricted class with the
-corresponding class on its inverse image. If the composites with a and b agree on
-all these classes, their maps on every stalk agree. Sheaf morphisms are determined
-by their maps on stalks, hence a = b. For an empty Y this is vacuous because there
-is only one module-sheaf morphism. For p = 0 it is the ordinary sections comparison.
-This statement concerns arbitrary maps out of one higher direct image; it asserts
-no preservation of coproducts. -/
+direct image, and these classes detect maps out of that higher direct image on the
+affine basis. No compactness, separation or coproduct hypothesis is needed
+(Stacks, Tags 01E1 and 01E4). -/
 theorem higherDirectImage_affine_cohomology_presentation
     {X Y : Scheme.{u}} (f : X ⟶ Y) (p : ℕ) :
     ∃ c : ∀ V : Y.Opens,

@@ -12,9 +12,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkChainMapLift
 
 /-! # Lifting a pair of finite free chain maps from a stalk
-
-Source: lem-pc-finite-free-stalk-homotopy-spread, proof steps 1 and 2.
-(blueprint: lem-pc-finite-free-stalk-chain-map-pair-lift)
 -/
 
 @[expose] public section
@@ -24,24 +21,7 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A given pair of chain maps over the stalk lifts, without imposing inverse identities.
-
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, finite matrix extension
-argument, as expanded in lem-pc-finite-free-stalk-homotopy-spread, steps 1 and 2.
-(blueprint: lem-pc-finite-free-stalk-chain-map-pair-lift).
-
-Proof: Choose an affine neighbourhood and bases in every nonzero term. The source
-complex has support [0,d] and the single complex has support {i}. The components
-of the two prescribed chain maps are therefore finitely many matrices. Represent
-each entry in the local ring by a section near y and intersect the neighbourhoods.
-Each chain-map commutativity equation holds in the stalk. There are finitely many
-such matrix equations; the equality criterion for germs makes each hold on a
-smaller neighbourhood. Intersect these again and define all other components by
-the unique maps involving zero objects. This constructs the two chain maps.
-The canonical pullback-composition and restriction-pullback isomorphisms give eP
-and eQ, and the represented entries give the stated exact equalities. No inverse
-or homotopy identity is imposed, and no assumption of homotopy equivalence is used.
-Ranks zero and i outside [0,d] cause only additional zero components. -/
+/-- A given pair of chain maps over the stalk lifts, without imposing inverse identities. -/
 theorem exists_restrict_chainMap_pair_of_stalk
     {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ)
     (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d)

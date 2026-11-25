@@ -58,19 +58,7 @@ variable (C : Type u) [Category.{v} C] [Abelian C] {κ : Type w} [AddCommGroup �
 /-- An *exact couple* `(D, E, α, f, g)` in an abelian category, indexed by an additive group `κ`:
 families of objects `D i`, `E i` and morphisms `α : D i ⟶ D (i + a)`, `f : E i ⟶ D (i + b)`,
 `g : D i ⟶ E (i + c)` such that the composite of two consecutive structure maps vanishes and
-
-`ker (α : D j ⟶ D (j + a)) = im (f : E (j - b) ⟶ D j)`,
-`ker (f : E j ⟶ D (j + b)) = im (g : D (j - c) ⟶ E j)`,
-`ker (g : D j ⟶ E (j + c)) = im (α : D (j - a) ⟶ D j)`.
-
-The morphisms are given between any two indices, and vanish when the indices are not related by
-the corresponding degree.
-
-With `κ = ℤ × ℤ`, `a = (-1, 1)`, `b = (2, -1)` and `c = (0, 0)` these are the exact couples
-of blueprint `def-sp-exact-couple`; the exact couple of a filtered complex has `b = (1, 0)`
-instead.
-
-(blueprint: `def-sp-exact-couple`) -/
+the kernel of each structure map equals the image of the preceding one. -/
 structure ExactCouple (a b c : κ) where
   /-- The objects `D i`. -/
   D : κ → C
@@ -369,9 +357,7 @@ lemma exact_f'_α' (i j k : κ) (hij : i + b = j) (hjk : j + a = k) :
   simp
 
 /-- The **derived couple** of an exact couple: `D' = im α`, `E' = H(E, d)`, `α' = α|_{D'}`,
-`f'([x]) = f x` for `x ∈ ker d`, and `g'(α y) = [g y]`. The degree of `g'` is `c - a`.
-
-(blueprint: `def-sp-exact-couple`) -/
+`f'([x]) = f x` for `x ∈ ker d`, and `g'(α y) = [g y]`. The degree of `g'` is `c - a`. -/
 noncomputable def derived : ExactCouple C a b (c - a) where
   D := X.D'
   E := X.E'
@@ -431,9 +417,7 @@ def pageShape (r₀ r : ℤ) : ComplexShape κ :=
 
 /-- The **spectral sequence of an exact couple**, starting on page `r₀`: its `r`-th page is the
 complex `(E, d)` of the `(r - r₀)`-th derived couple, whose homology is the `E`-object of the
-next derived couple.
-
-(blueprint: `def-sp-exact-couple`) -/
+next derived couple. -/
 noncomputable def spectralSequence (r₀ : ℤ) : SpectralSequence C (pageShape a b c r₀) r₀ where
   page r _ := (X.derivedIter (r - r₀).toNat).dComplex
   iso r r' pq hrr' hr := eqToIso (X.homology_dComplex_derivedIter _ _ (by omega) pq)

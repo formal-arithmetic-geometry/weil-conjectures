@@ -9,10 +9,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
 import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionUnit
 
 /-! # Projection naturality followed by a scalar trace
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -76,20 +72,7 @@ private theorem projection_trace
   simp only [CategoryTheory.Functor.map_id, Category.comp_id]
 
 /-- Naturality and unit normalization of the ordinary projection mate.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, first triangle;
-Stacks Tag 0B56, projection-formula map.
-(auxiliary; not a blueprint node).
-
-Proof: apply naturality in the second argument of rightDerivedLowerStarProjectionMap
-to t:N→A_Y. It reduces the composite to tensoring t with the identity on Rf*M,
-followed by projection at the tensor unit, then Rf* of identity tensor the pullback
-unit comparison and the right unitor. The tensor-unit projection is the right unitor
-followed by Rf* of the inverse right unitor and inverse pullback-unit comparison,
-by rightAdjointProjectionMap_app_app_tensorUnit. The pullback oplax unit is the
-specified leftDerivedUpperStarUnitIso by its normalization on degree-zero complexes.
-The inverse unit comparison and the two right unitors cancel inside Rf*. The remaining
-map is precisely identity tensor t followed by the right unitor. This calculation needs
-no properness or coefficient finiteness. -/
+(Stacks, Tag 0B56) -/
 theorem projectionTraceNormalization {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : DerivedCategoryModule A X) (N : DerivedCategoryModule A Y)
     (t : N ⟶ constantComplex A Y) :

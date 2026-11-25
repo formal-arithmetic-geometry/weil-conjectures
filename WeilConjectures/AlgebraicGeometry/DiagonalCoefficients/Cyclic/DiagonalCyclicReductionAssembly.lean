@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicFrameAssembly
 
 /-! # Normalized Ext assembly with fixed reduction and cone data
-
-Source: diagonal limit (3).
-(blueprint: lem-diagonal-cyclic-reduction-assembly).
 -/
 
 @[expose] public noncomputable section
@@ -50,10 +47,7 @@ attribute [local semireducible] cyclicCompletedQuotient cyclicDiscreteRestrictio
   cyclicFrameAssemblySpec cyclicPointwiseAssemblySpec
 attribute [local irreducible] diagonalSourceLimitMap diagonalTargetLimitMap
 
-/-- The fixed normalized reduction contract follows from the proved frame assembly.
-Source: diagonal limit (3) (blueprint: lem-diagonal-cyclic-reduction-assembly).
-Proof: specialize the pointwise assembly contract to the supplied quotient,
-restriction and strict-system endpoints, leaving the normalization predicates variable. -/
+/-- The fixed normalized reduction contract follows from the proved frame assembly. -/
 theorem cyclicExtAssembly_reduction
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

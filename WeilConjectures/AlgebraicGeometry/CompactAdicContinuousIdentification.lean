@@ -579,26 +579,7 @@ private theorem continuousCompletionIso_constants
 /-- A compact separated principal-adic domain is realized by its positive finite quotient
 constant sheaves, uniquely with the prescribed constant scalars.
 
-Bhatt--Scholze, Lemmas 4.2.12 and 6.8.2(1)
-(auxiliary; not a blueprint node).
-
-Proof: The quotient fibres are open by the given neighborhood basis. Each finite
-quotient's continuous-function sheaf is canonically its constant sheaf, by gluing on
-these open fibres, including the empty object. Compatible residues have a unique lift
-in A: compactness intersects the nested nonempty closed cosets, and the Hausdorff
-neighborhood basis separates points. The coordinate maps and their inverse are
-continuous, since the same cosets are a neighborhood basis. Thus continuous A-valued
-functions are the sectionwise inverse limit of finite continuous quotient functions.
-The canonical continuous-ring realization identifies these functions with the actual
-pulled-back coefficient ring and carries scalar constants to constant functions.
-This constructs the normalized comparison as a ring isomorphism. For uniqueness,
-fix n and restrict a continuous function to the open fibres of its n-th residue.
-On such a fibre choose a scalar lift a. The difference from a is p^(n+1) times a
-continuous function: multiplication by this nonzero power embeds compact A in the
-Hausdorff space A, and its inverse onto its image is continuous. Every normalized
-ring map to the n-th quotient therefore takes the original function to the residue
-of a. Hence two candidates have equal finite projections locally, and thus globally.
-Joint monicity of the limit projections gives equality of the ring isomorphisms. -/
+Bhatt--Scholze, Lemmas 4.2.12 and 6.8.2(1). -/
 theorem compact_adic_continuous_identification
     (A : Type u) [CommRing A] [IsDomain A] [TopologicalSpace A] [IsTopologicalRing A]
     [CompactSpace A] [T2Space A] (p : A) (hp : p ≠ 0)

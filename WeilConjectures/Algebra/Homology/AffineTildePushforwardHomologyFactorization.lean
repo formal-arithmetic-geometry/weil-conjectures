@@ -16,8 +16,11 @@ import all WeilConjectures.Algebra.Homology.MixedTensorUnderlyingHomology
 
 /-! # Composition of the exact homology comparisons in affine pushforward
 
-Source: Stacks Project, Tags 06Z0 and 0AVW.
-(blueprint: lem-pc-affine-tilde-pushforward-homology-factorization). -/
+## References
+
+* Stacks Project, Tag 06Z0
+* Stacks Project, Tag 0AVW
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -38,13 +41,7 @@ local instance (priority := 2000) factorCoordinatesAbelian (Y : Scheme.{u}) :
 attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
   affineTildePushforwardComparison
 
-/-- Inverse homology comparisons compose in the opposite order.
-Source: Mathlib's canonical short-complex homology comparison; Stacks, Tag 06Z0.
-(blueprint: lem-pc-affine-tilde-pushforward-homology-factorization).
-
-Proof: Cancel the forward comparison for the composite functor. Apply the existing
-RingTensorCohomology.mapHomologyIso_hom_comp and cancel the two inverse/forward
-pairs, using functoriality. -/
+/-- Inverse homology comparisons compose in the opposite order. -/
 lemma mapHomologyIso_inv_comp
     {C D E : Type*} [Category C] [Category D] [Category E]
     [HasZeroMorphisms C] [HasZeroMorphisms D] [HasZeroMorphisms E]
@@ -65,29 +62,7 @@ variable [∀ Y : Scheme.{u},
 
 /-- The explicit pushforward cohomology map separates into restriction homology,
 exact tilde homology, the quotient/homology comparison, the ordinary termwise
-comparison and the actual derived unit. No tensor model or derived counit occurs.
-Source: Stacks Project, Tags 06Z0 and 0AVW; definition of the affine pushforward
-cohomology comparison.
-(blueprint: lem-pc-affine-tilde-pushforward-homology-factorization).
-
-Proof: Set F = restrictScalars psi and T = affinePushforwardTilde B. Expand
-affineTildePushforwardCohomologyMap and its comparison-coordinate definition.
-Its first factor is the inverse exact homology comparison for F followed by T.
-For every short complex S, the canonical comparison for F followed by T is
-T applied to the comparison for F, followed by the comparison for T on S.map F.
-To verify this identity, compare the cycles maps using the universal property of
-cycles (their inclusion is monic), then compare the homology maps using the
-universal property of homology (the cycles projection is epic). Invert this
-identity: the inverse comparison for F followed by T equals T applied to the
-inverse comparison for F, followed by the inverse comparison for T on S.map F.
-Apply this with S = Cg.sc i and compose the equality on the right with the
-quotient/homology comparison, homology of the termwise ordinary comparison and
-homology of the right-derived unit. The component inverse of the natural
-quotient/homology isomorphism is its inverse natural transformation's component.
-All remaining factors are exactly those in the defining formula. Compose on
-the left with T.map v and use functoriality to combine its first two maps. This argument
-uses only exactness of restriction and tilde, holds for all unbounded complexes,
-and also applies to the zero complex and to zero rings. -/
+comparison and the actual derived unit. No tensor model or derived counit occurs. -/
 theorem affineTildePushforwardHomologyFactorization
     (D B : Type u) [CommRing D] [CommRing B] (ψ : B →+* D)
     [(affinePushforwardTilde D ⋙

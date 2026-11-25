@@ -13,8 +13,9 @@ import Mathlib.Algebra.Category.Grp.Ulift
 
 /-! # Object cohomology equivalences normalized on cocycles
 
-Source: Stacks Project, Section 01FT and Tag 06XR (1).
-(blueprint: lem-weil-pbc-object-resolution-cocycle-equivalence)
+## References
+
+* [Stacks, Tag 01FT], [Stacks, Tag 06XR]
 -/
 
 @[expose] public section
@@ -313,26 +314,8 @@ private theorem sectionCycleClass_ulift
       rfl
     exact congrArg (fun z ↦ ULift.up ((K.sc q).homologyπ z)) hi
 
-/-- Object cohomology admits an equivalence carrying every Ext cocycle to its section class.
-
-Source: Stacks Project, Section 01FT, equation-cohomology-object-site;
-Tag 06XR (1), lemma-compute-ext-resolutions.
-(blueprint: lem-weil-pbc-object-resolution-cocycle-equivalence)
-
-Proof: Put P(V) equal to the sheafification of the free abelian presheaf on yoneda(V).
-The sheafification adjunction, the free abelian adjunction, and Yoneda identify
-Hom(P(V), A) additively with A(V), by evaluation at the image of the identity generator.
-Naturality in A identifies the Hom cochain complex from P(V) to I with the section
-complex of I. Compute Ext with the supplied injective resolution using
-InjectiveResolution.extAddEquivCohomologyClass. Its formula on extMk identifies
-extMk(a) with the class of a. Pass through the degreewise evaluation identification
-and its homology isomorphism: this sends that class to sheafCocycleSectionClass(a).
-For the integer extension of I, terms in negative degrees are zero, so restriction
-to nonnegative degrees preserves degree-q homology, including q=0. If the Ext
-universe differs from the sheaf morphism universe, first apply the canonical Ext
-universe equivalence, whose formula on extMk preserves this calculation. The
-composite is additive and invertible and gives the stated equivalence and formula.
-Empty sites (no V), zero sheaves, and degree zero require no extra hypotheses. -/
+/-- Object cohomology admits an equivalence carrying every Ext cocycle to its section class
+(Stacks, Tags 01FT, 06XR). -/
 theorem objectCohomology_resolution_cocycle_equivalence
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{v}]

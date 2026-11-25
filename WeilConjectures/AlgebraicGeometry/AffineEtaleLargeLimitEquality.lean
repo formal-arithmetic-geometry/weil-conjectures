@@ -10,7 +10,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Eventual equality of maps from larger affine étale limits
 
-Source: Stacks Project, Tags 01ZC and 099S.
+## References
+
+* Stacks Project, Tags 01ZC and 099S
 -/
 
 @[expose] public section
@@ -155,30 +157,7 @@ private theorem etale_equality_complement {S T Z : Scheme.{u}} [IsAffine Z]
     rw [← hg, Category.assoc, Category.assoc, he]
 
 /-- Equality of two maps from one affine étale stage to an affine étale target
-is witnessed after a refinement of that stage, for the larger index universe.
-
-Source: Stacks Project, limits.tex, Proposition 32.6.1 (Tag 01ZC), injectivity
-in (1) implies (3); compare Mathlib's
-`Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType`.
-(auxiliary; not a blueprint node).
-
-Proof: The relative diagonal of the affine étale target is open and closed.
-Its pullback along the pair of stage maps is their agreement locus. Its
-complement U is closed and open in the affine stage, hence affine. Suppose
-no refinement equalises the maps. Pulling U back along all stages over i gives
-a cofiltered diagram of nonempty affine schemes étale over U.
-
-The images of these schemes in U are nonempty compact opens, hence closed in
-the compact constructible topology. Cofilteredness gives a point in all images.
-Over an algebraic closure of its residue field, the sets of lifts to the stages
-are finite and nonempty: étale geometric fibres are finite, and sections into an
-unramified scheme are determined by their image point. Mathlib's finite
-cofiltered-system theorem, which permits independent index and value universes,
-gives compatible lifts. They form a cone with nonempty vertex Spec Ω. Initiality
-of the category of stages over i and the given limit produce a map Spec Ω → c.
-Its image at stage i lies in U, contradicting equality of the two maps on c.
-Thus some refinement equalises the underlying scheme maps, hence the maps in
-X.ProEt. No size change of a scheme or small-index limit theorem is used. -/
+is witnessed after a refinement of that stage, for the larger index universe (Stacks, Tag 01ZC). -/
 theorem affineEtale_largeLimit_eventualEquality {X : Scheme.{u}}
     {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ X.ProEt) (haff : ∀ i, IsAffine (D.obj i).left)

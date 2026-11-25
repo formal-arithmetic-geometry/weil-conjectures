@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Etale.Graph.EtaleGraphOpenTowerFactor
 
 /-! # Graph compatibility with the open leg
 
-Source: Stacks Project, Tags 0F4L, 0F7B and 0F7J.
+## References
+
+* Stacks Project, Tag 0F4L (graph comparison)
+* Stacks Project, Tags 0F7B, 0F7J (the proper/open composition tower)
 -/
 
 @[expose] public section
@@ -28,27 +31,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   derivedOpenImmersionLowerShriekUpperStarAdjunction mapDerivedUpperStarLowerStarAdjunction
   rightDerivedLowerShriekIso unboundedEtaleLowerShriekCompIso unboundedEtaleLowerShriekCongr
 
-/-- Normalization of the etale-first composition through its open leg.
-This involves only one compact-support composition, and no proper/etale interchange.
-Source: Stacks Project, etale-cohomology.tex Tag 0F4L (graph comparison), and
-more-etale.tex Tags 0F7B and 0F7J (the proper/open composition tower).
-(blueprint: lem-pur-etale-graph-open-tower).
-
-Proof in words:
-Take the tower e over c. The every-tower composition formula writes the left
-side using the compactification e.restrict of v'. Replace its inverse comparison
-by the explicit graph-derived map. On sheaves, extending a sheet section first
-to the clopen graph of v' and then across c.i agrees with extending it to the
-graph of r = v' followed by c.i. Both sections agree on that graph and vanish
-off it. The sheaf axiom, followed by sum-presheaf sheafification, identifies the
-maps. Transposition under the two composite sum/open adjunctions identifies the
-change of factorization with a inverse followed by s. Apply the equality
-termwise, compose with the right-derived direct-image units, and use the unit
-characterization of direct-image composition. The graph-derived component
-formula and homotopy localization give the equality on every unbounded input.
-Finally the normalized refinement equation and the comparison cocycle replace
-the tower's terminal compactification by e.postcomp p. Identity opens reduce to
-the triangle identities; empty graphs and zero coefficients give zero maps. -/
+/-- Normalization of the etale-first composition through its open leg. -/
 theorem etaleGraph_open_tower
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Z' : Scheme.{u}}

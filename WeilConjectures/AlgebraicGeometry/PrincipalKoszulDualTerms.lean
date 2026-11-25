@@ -8,10 +8,12 @@ public import WeilConjectures.Algebra.Homology.PrincipalKoszulQuotientTowers
 public import WeilConjectures.CategoryTheory.RingedKoszulSystem
 import all WeilConjectures.Algebra.Homology.RingedSiteBoundedDualComponents
 
-/-! # Explicit singleton Koszul dual component identifications
+/-!
+# Explicit singleton Koszul dual component identifications
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 0A0E, <https://stacks.math.columbia.edu/tag/0A0E>
 -/
 
 @[expose] public noncomputable section
@@ -21,22 +23,16 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory.PrincipalKoszulDualTerms
 
-/-- The supported upward differential starts in degree zero.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- The supported upward differential starts in degree zero. -/
 theorem zeroOneRel : (ComplexShape.up ℤ).Rel 0 1 := by rfl
 
-/-- The supported upward cone differential starts in degree minus one.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- The supported upward cone differential starts in degree minus one. -/
 theorem negOneZeroRel : (ComplexShape.up ℤ).Rel (-1) 0 := by rfl
 
 attribute [local instance 20000] ringedCompletionHasSheafCompose
 attribute [local irreducible] ringedHomUnitEvaluationIso
 
-/-- Remove a zero left summand using the biproduct projection.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- Remove a zero left summand using the biproduct projection. -/
 def biprodZeroLeftIso {A : Type*} [Category* A] [Preadditive A]
     (X Y : A) [HasBinaryBiproduct X Y] (hX : IsZero X) : X ⊞ Y ≅ Y where
   hom := biprod.snd
@@ -47,9 +43,7 @@ def biprodZeroLeftIso {A : Type*} [Category* A] [Preadditive A]
     · simp
   inv_hom_id := biprod.inr_snd
 
-/-- Remove a zero right summand using the biproduct projection.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- Remove a zero right summand using the biproduct projection. -/
 def biprodZeroRightIso {A : Type*} [Category* A] [Preadditive A]
     (X Y : A) [HasBinaryBiproduct X Y] (hY : IsZero Y) : X ⊞ Y ≅ X where
   hom := biprod.fst
@@ -66,14 +60,10 @@ variable (R : Sheaf J CommRingCat.{u})
 variable (a : (SheafOfModules.unit
   ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).sections)
 
-/-- The actual multiplication chain map whose cone is the principal Koszul complex.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- The actual multiplication chain map whose cone is the principal Koszul complex. -/
 abbrev scalarComplex (m : ℕ) := principalKoszulScalarComplex R a m
 
-/-- The degree-zero cone term, projected to its nonzero summand.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- The degree-zero cone term, projected to its nonzero summand. -/
 def coneZeroTerm (m : ℕ) :
     (principalKoszul R a m).X 0 ≅ SheafOfModules.unit
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) :=
@@ -81,9 +71,7 @@ def coneZeroTerm (m : ℕ) :
     biprodZeroLeftIso _ _ (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 _ 1
       (by decide)) ≪≫ HomologicalComplex.singleObjXSelf (.up ℤ) 0 _
 
-/-- The degree-minus-one cone term, projected to its nonzero summand.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- The degree-minus-one cone term, projected to its nonzero summand. -/
 def coneNegOneTerm (m : ℕ) :
     (principalKoszul R a m).X (-1) ≅ SheafOfModules.unit
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) :=
@@ -91,9 +79,7 @@ def coneNegOneTerm (m : ℕ) :
     biprodZeroRightIso _ _ (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 _ (-1)
       (by decide)) ≪≫ HomologicalComplex.singleObjXSelf (.up ℤ) 0 _
 
-/-- All other cone terms vanish, since both single-complex terms vanish.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- All other cone terms vanish, since both single-complex terms vanish. -/
 theorem coneOtherTerm (m : ℕ) (q : ℤ) (h0 : q ≠ 0) (h1 : q ≠ -1) :
     IsZero ((principalKoszul R a m).X q) := by
   apply HomologicalComplex.homotopyCofiber.isZero_X (scalarComplex R a m) q
@@ -103,27 +89,20 @@ theorem coneOtherTerm (m : ℕ) (q : ℤ) (h0 : q ≠ 0) (h1 : q ≠ -1) :
       change q + 1 = j at hj
       omega)
 
-/-- Remove the right unit from the singleton positive Koszul diagram.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- Remove the right unit from the singleton positive Koszul diagram. -/
 def singletonRemoveUnit (m : ℕ) :
     (ringedKoszulDiagram R 1 (fun _ ↦ ⟨a.val, a.property⟩)).obj m ≅
       ringedKoszulFactor R ⟨a.val, a.property⟩ m :=
   ringedKoszulRightUnitIso R _
 
-/-- Projection to the unique surviving Hom factor is invertible. Its inverse inserts
-a map into that factor and zero elsewhere; the product universal property proves both identities.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- Projection to the unique surviving Hom factor is invertible. -/
 theorem projectionIsIso (L : ringedSiteComplex R) (p q : ℤ) (h : p + q = 0) :
     IsIso (homComplexπ L (ringedSiteRingComplex R) q p 0 h) :=
   RingedSiteBoundedDual.projection_isIso.{u, u, u} R L p q h
 
 attribute [local irreducible] homComplexFunctor homComplexπ
 
-/-- Transport internal Hom by two specified isomorphisms, with explicit forward and inverse maps.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- Transport internal Hom by two specified isomorphisms. -/
 def homObjMapIso
     {A A' B B' : ringedSiteModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)}
@@ -140,9 +119,7 @@ def homObjMapIso
       t.inv_hom_id]
     exact SheafOfModules.homObjMap_id (R := R) (M := A') (N := B')
 
-/-- The canonical Hom-to-single component isomorphism, with its specified projection.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- The canonical Hom-to-single component isomorphism, with its specified projection. -/
 def projectionTermIso (L : ringedSiteComplex R) (p q : ℤ) (h : p + q = 0) :
     (homComplex L (ringedSiteRingComplex R)).X q ≅
       SheafOfModules.homObj (R := R) (L.X p) (SheafOfModules.unit
@@ -152,9 +129,7 @@ def projectionTermIso (L : ringedSiteComplex R) (p q : ℤ) (h : p + q = 0) :
     homObjMapIso R (Iso.refl (L.X p))
       (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _)
 
-/-- Remove the positive tensor unit, project the Hom product and identify its target unit.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- Remove the positive tensor unit, project the Hom product and identify its target unit. -/
 def dualFactorTerm (m : ℕ) (q : ℤ) :
     ((ringedKoszulDualTower R 1 (fun _ ↦ ⟨a.val, a.property⟩)).obj (op m)).X q ≅
       SheafOfModules.homObj (R := R)
@@ -167,9 +142,7 @@ def dualFactorTerm (m : ℕ) (q : ℤ) :
     projectionTermIso R (ringedKoszulFactor R ⟨a.val, a.property⟩ m)
       (-q) q (neg_add_cancel q)
 
-/-- Evaluate the degree-zero rank-one dual at one.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- Evaluate the degree-zero rank-one dual at one. -/
 def dualZeroTerm (m : ℕ) :
     ((ringedKoszulDualTower R 1 (fun _ ↦ ⟨a.val, a.property⟩)).obj (op m)).X 0 ≅
       SheafOfModules.unit
@@ -181,9 +154,7 @@ def dualZeroTerm (m : ℕ) :
         zeroOneRel).symm (Iso.refl _) ≪≫
     SheafOfModules.homObjUnitIso (R := R) _
 
-/-- Evaluate the degree-minus-one rank-one dual at one.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- Evaluate the degree-minus-one rank-one dual at one. -/
 def dualNegOneTerm (m : ℕ) :
     ((ringedKoszulDualTower R 1 (fun _ ↦ ⟨a.val, a.property⟩)).obj (op m)).X (-1) ≅
       SheafOfModules.unit
@@ -195,9 +166,7 @@ def dualNegOneTerm (m : ℕ) :
         zeroOneRel (by decide)).symm (Iso.refl _) ≪≫
     SheafOfModules.homObjUnitIso (R := R) _
 
-/-- Outside degrees minus one and zero the surviving source term is zero, hence so is Hom.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- Outside degrees minus one and zero the surviving source term is zero, hence so is Hom. -/
 theorem dualOtherTerm (m : ℕ) (q : ℤ) (h0 : q ≠ 0) (h1 : q ≠ -1) :
     IsZero (((ringedKoszulDualTower R 1
       (fun _ ↦ ⟨a.val, a.property⟩)).obj (op m)).X q) := by
@@ -208,9 +177,8 @@ theorem dualOtherTerm (m : ℕ) (q : ℤ) (h0 : q ≠ 0) (h1 : q ≠ -1) :
       zeroOneRel (-q) (by omega) (by omega)).op
 
 /-- The explicit degreewise cone-to-dual identification. At the two supported degrees use
-the projection and evaluation maps above; at other degrees use the unique zero-object isomorphism.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+the projection and evaluation maps above; at other degrees use the unique zero-object
+isomorphism. -/
 def finiteDualTerm (m : ℕ) (q : ℤ) :
     (principalKoszul R a m).X q ≅
       ((ringedKoszulDualTower R 1
@@ -227,9 +195,7 @@ def finiteDualTerm (m : ℕ) (q : ℤ) :
         (fun _ ↦ ⟨a.val, a.property⟩)).obj (op m)).XIsoOfEq h1).symm
   else (coneOtherTerm R a m q h0 h1).iso (dualOtherTerm R a m q h0 h1)
 
-/-- The component projection followed by the target single-complex identification.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- The component projection followed by the target single-complex identification. -/
 theorem projectionTermIso_hom (L : ringedSiteComplex R) (p q : ℤ) (h : p + q = 0) :
     (projectionTermIso R L p q h).hom =
       homComplexπ L (ringedSiteRingComplex R) q p 0 h ≫
@@ -238,9 +204,7 @@ theorem projectionTermIso_hom (L : ringedSiteComplex R) (p q : ℤ) (h : p + q =
             (SheafOfModules.unit
               ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))).hom := rfl
 
-/-- The finite dual projection is the component of precomposition, then projection.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- The finite dual projection is the component of precomposition, then projection. -/
 theorem dualFactorTerm_hom (m : ℕ) (q : ℤ) :
     (dualFactorTerm R a m q).hom =
       ((((homComplexFunctor (R := R)).flip.obj (ringedSiteRingComplex R)).map
@@ -248,9 +212,7 @@ theorem dualFactorTerm_hom (m : ℕ) (q : ℤ) :
       (projectionTermIso R (ringedKoszulFactor R ⟨a.val, a.property⟩ m)
         (-q) q (neg_add_cancel q)).hom := rfl
 
-/-- Degree-zero dual evaluation uses precomposition by the specified double-term inverse.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- Degree-zero dual evaluation uses precomposition by the specified double-term inverse. -/
 theorem dualZeroTerm_hom (m : ℕ) :
     (dualZeroTerm R a m).hom =
       (dualFactorTerm R a m 0).hom ≫
@@ -260,9 +222,7 @@ theorem dualZeroTerm_hom (m : ℕ) :
             zeroOneRel).inv (𝟙 _) ≫
           (SheafOfModules.homObjUnitIso (R := R) (SheafOfModules.unit _)).hom := rfl
 
-/-- Degree-minus-one dual evaluation uses the other specified double-term inverse.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node). -/
+/-- Degree-minus-one dual evaluation uses the other specified double-term inverse. -/
 theorem dualNegOneTerm_hom (m : ℕ) :
     (dualNegOneTerm R a m).hom =
       (dualFactorTerm R a m (-1)).hom ≫

@@ -11,7 +11,16 @@ import WeilConjectures.FourierTransform.FdCoefficientScalarLiftNormalization
 
 /-! # Ambient normalization in the canonical coefficient presentation
 
-Source: trace-definition coefficient-category comparison, integral steps 1--6.
+Ambient scalar normalization step of the integral coefficient-category comparison used in the
+definition of the trace function.
+
+## Implementation details
+
+The proof uses `fdCoefficientScalarLift_normalization`. The redundant characteristic
+parameter in the constructibility preservation proof changes neither the objects nor the
+morphisms of the restricted completed extension: unfolding its restriction and discarding the
+proof field by proof irrelevance, its comparison has exactly the canonical
+`integralTransition` target and the same representative normalization.
 -/
 
 @[expose] public noncomputable section
@@ -23,17 +32,10 @@ universe d u w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
-/-- Ambient scalar normalization in the canonical datum-free transition presentation.
-Source: trace-definition coefficient comparison, ambient normalization step
-(blueprint: lem-fd-integral-ambient-scalar-normalization).
-
-Proof: use fdCoefficientScalarLift_normalization. The redundant characteristic
-parameter in the constructibility preservation proof changes neither the objects
-nor the morphisms of the restricted completed extension: unfold its restriction
-and discard the proof field by proof irrelevance. Thus its comparison has exactly
-the canonical integralTransition target, and retains the same representative
-normalization without changing any map.
--/
+/-- Ambient scalar normalization in the canonical datum-free transition presentation: there
+are an ordinary scalar transport and a comparison isomorphism between the ambient scalar
+extension of the integral constructible transport and the transport of `integralTransition`,
+whose components agree (up to `HEq`) with the counit followed by the ordinary completion. -/
 theorem fdIntegralAmbientScalarNormalization
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

@@ -12,6 +12,14 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import Mathlib.Algebra.Homology.TotalComplexSymmetry
 import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
+/-! # Degreewise vanishing of the bounded-above flat tensor product
+
+## References
+
+* Stacks Project, Cohomology on Sites, Lemma 21.17.8 (Tag 06YQ), bounded-above case, proved
+  here by finite-column total comparison
+-/
+
 @[expose] public section
 
 universe u
@@ -24,17 +32,8 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
   {R : Sheaf J CommRingCat.{u}}
 
-/-- The bounded-above flat tensor argument vanishes in one fixed degree.
-This is the bounded-above case in Stacks Project, Cohomology on Sites,
-Lemma 21.17.8 (Tag 06YQ), proved here by finite-column total comparison.
-(blueprint: lem-pc-bounded-above-flat-tensor-acyclic-degree)
-
-Proof: flip the tensor double complex so its columns are A tensored with a term of P.
-Flatness makes these columns acyclic. Both degreewise upper bounds give uniform bounds
-on the flipped double complex. Apply the bounded-above columnwise quasi-isomorphism
-comparison to its map from zero, then transport exactness along the signed flip
-isomorphism of total complexes. The comparison theorem uses finite column truncations
-and their degreewise stabilization, so no spectral-sequence construction is needed. -/
+/-- The bounded-above flat tensor argument vanishes in one fixed degree: for `A` acyclic and
+bounded above and `P` bounded above with flat terms, the total tensor complex is exact at `n`. -/
 theorem isZero_homology_mapBifunctor_of_boundedAbove_flat_sheaf
     (A P : CochainComplex
       (SheafOfModules.{u}

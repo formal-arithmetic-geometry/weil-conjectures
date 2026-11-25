@@ -15,8 +15,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Adic conditions under closed pushforward
 
-Source: Stacks Project, Tags 087T and 088A, and equation 0880.
-(blueprint: lem-weil-pbc-closed-immersion-formal-pushforward-conditions)
+## References
+
+* Stacks Project, Tags 087T, 088A and 0880
 -/
 
 @[expose] public section
@@ -25,20 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Termwise closed pushforward preserves the coherent adic conditions.
-Proof: a closed immersion is finite, so it preserves coherence on each term.
-On an affine open Spec R with inverse image Spec(R/J), ideal multiplication on
-an R/J-module by the image of I is the same as multiplication by I. Thus vanishing
-of the (n+1)-st power product upstairs gives vanishing downstairs. The canonical
-quotient comparison identifies the downstairs quotient of the pushed-forward
-(n+2)-nd term by I^(n+1) with the pushforward of the corresponding upstairs
-quotient. Compose this comparison with the pushed-forward adic isomorphism.
-Its equation with the projection is exactly the pushed-forward transition map,
-by the projection equation for the quotient comparison. These arguments apply
-for every n, and use only positive powers, including n=0 (power one).
-Source: Stacks Project, Tags 087T and 088A, equation 0880.
-(blueprint: lem-weil-pbc-closed-immersion-formal-pushforward-conditions)
--/
+/-- Termwise closed pushforward preserves the coherent adic conditions. -/
 theorem closedImmersion_formal_pushforward_conditions {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] [IsNoetherian X] (I : X.IdealSheafData)
     (G : ℕᵒᵖ ⥤ Z.Modules) (hG : IsCoherentFormalModule (I.comap i) G) :

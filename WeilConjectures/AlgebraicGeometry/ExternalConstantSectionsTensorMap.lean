@@ -13,8 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.PicardConstantTensorBalancedSect
 
 /-! # The ordinary external section map on constant tensor coefficients
 
-Source: Stacks Project, Varieties, Tag 0BED, degree-zero tensor calculation.
-(blueprint: lem-sc-external-constant-sections-tensor-map).
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section
@@ -56,12 +57,8 @@ private theorem externalSectionsComponent_smul
 /-- The external section map on constant tensor coefficients, as an `O_Y`-linear presheaf
 morphism: on an open `V` it is the balanced identification
 `picardConstantTensorBalancedSections` of the constant tensor sections with
-`Γ(X, F) ⊗_k G(V)`, followed by `externalSectionsComponent f g F G V`.
-Source: Stacks Project, Varieties, Tag 0BED, affine-open degree-zero calculation.
-(blueprint: lem-sc-external-constant-sections-tensor-map).
-
-Multiplication on tensor sections and `O_Y`-linearity of the second projection's adjunction
-unit give `O_Y(V)`-linearity, and `externalSectionsComponent_naturality` gives naturality. -/
+`Γ(X, F) ⊗_k G(V)`, followed by `externalSectionsComponent f g F G V`
+(Stacks, Tag 0BED). -/
 noncomputable def externalConstantSectionsTensorMap
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
@@ -111,12 +108,7 @@ theorem externalConstantSectionsTensorMap_app
   rfl
 
 /-- A component of `externalConstantSectionsTensorMap` is bijective exactly when the
-corresponding `k`-linear external section component is bijective.
-Source: Stacks Project, Varieties, Tag 0BED, affine-open degree-zero calculation.
-(blueprint: lem-sc-external-constant-sections-tensor-map).
-
-Proof: the component is the external section component composed with the bijective balanced
-identification. No affine, compactness or quasi-coherence hypothesis is used. -/
+corresponding `k`-linear external section component is bijective (Stacks, Tag 0BED). -/
 theorem externalConstantSectionsTensorMap_app_bijective_iff
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

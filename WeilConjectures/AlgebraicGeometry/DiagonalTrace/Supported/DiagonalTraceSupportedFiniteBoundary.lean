@@ -48,34 +48,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
 /-- Project a normalized strict supported Cartier class, then forget its support.
 The result is the finite Chern arrow. The input is a strict degree-two Ext class
 and an ordinary source cone; there is no completed diagonal arrow or limit-arrow
-characterization in this assertion.
-
-Source: diagonal trace proof (2), finite Cartier normalization and forgetting
-support; diagonal-system proof (4), positive finite reductions; geometric classes
-proof (2)--(3), finite Chern normalization.
-(blueprint: lem-sfb-diagonal-trace-supported-finite-boundary).
-
-Proof: project the ordinary source cone at n. Its generator equation followed by
-DiagonalSourceNormalization identifies this map on the integral supported
-constant with the canonical quotient generator at exponent n+1. The explicit
-completedSupportedUnit carries one to the supported section one. Apply the
-finite-cycle equation to the evaluation of xi, transporting its endpoints by
-the source and root isomorphisms in that equation. The normalization of e fixes
-the target transport on every root. Cartier reduction uniqueness and site
-comparison identify this class with the positive supported Kummer class.
-The supported Kummer Chern realization then identifies its integral adjunct
-after forgetting support with the Kummer Chern class of the dual diagonal ideal,
-namely diagonalPic Y. Apply hc to this Picard class and n. The coefficient-one
-and root-tensor equations of k identify its quotient and root maps with these
-same finite maps; hn fixes the positive Kummer boundary and scalar comparisons.
-The completed coefficient ring is l-regular with actual quotient the finite
-constant ring at exponent n+1. Derived reduction of its unit is therefore the
-finite unit, with adjunct the actual coefficient projection. First use this
-reduction adjunction and then the integral-to-finite scalar-unit Ext bijection
-to conclude equality of coefficient-linear arrows from their integral adjuncts.
-Finally the exact-cone projection identity replaces the source coefficient
-projection by k.unitMap followed by L.projection. These arguments include n=0,
-since its exponent is one, and the empty scheme, where all maps are unique. -/
+characterization in this assertion. -/
 theorem diagonalTrace_supportedFiniteBoundary
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

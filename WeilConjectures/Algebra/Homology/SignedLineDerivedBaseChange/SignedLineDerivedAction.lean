@@ -11,7 +11,17 @@ import WeilConjectures.Algebra.Homology.SignedLineDerivedBaseChange.SignedLinePo
 import WeilConjectures.Algebra.Homology.SignedLineDerivedBaseChange.FlatTensorDerivedAction
 import WeilConjectures.Algebra.Homology.SignedLineDerivedBaseChange.SignedLineLocalizedCoherence
 
-/-! # Derived action of normalized signed comparisons -/
+/-! # Derived action of normalized signed comparisons
+
+## References
+
+* Stacks Project, Tag 015F
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 06YQ
+* Stacks Project, Tag 06YU
+* Stacks Project, Tag 07A4
+* Stacks Project, Tag 0FNY
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -41,28 +51,7 @@ variable
   (P : KFlatFixedTensor.Modules R) (Q : KFlatFixedTensor.Modules S)
   (t : (pull a).obj P ≅ Q)
 
-/-- The normalized signed line family acts canonically on unbounded derived tensor.
-Source: Stacks Project, Tags 03EL, 0FNY, 06YQ, 06YU, 07A4 and 015F;
-Powers and duals, steps 8--11 of the signed-line base-change argument.
-(blueprint: lem-pur-signed-line-derived-action)
-Proof: restriction to a line chart shows that all positive powers and their
-duals are lines. Their evaluation maps are locally multiplication with the
-basis-dual inverse, and glue independently of the basis. Tensoring with each
-signed line is thus an exact equivalence. A flat sheaf concentrated in degree
-zero is K-flat with flat terms. Apply flat_single_derived_normalization to both
-line factors. Compose its localization comparison with collapse to obtain cR
-and cS; the representative equation proves ResolvingNormalization by cancellation.
-The ordinary tensor-pullback comparison followed by T gives gamma with its pure
-tensor formula. Localize its termwise isomorphism using cR and cS and the exact
-pullback factorization to obtain eta. Full faithfulness of whiskering by the
-localization proves the displayed square on every complex and uniqueness of eta.
-The ordinary unit, positive associator and dual evaluation have precisely the
-three pure tensor formulas in DerivedLineConstraints. Localize them to obtain
-the required derived constraints. Their compatibility with gamma follows from
-normalization of T and evaluation. Whiskering by the localization detects the
-three required equalities, proving DerivedFamilyCoherence. Only the degree-zero
-line factors are bounded; the varying complex is arbitrary. Zero rings and empty
-covers satisfy the same local argument. -/
+/-- The normalized signed line family acts canonically on unbounded derived tensor. -/
 theorem signed_line_derived_action
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
     (_hcover : CoverPreserving J K U)

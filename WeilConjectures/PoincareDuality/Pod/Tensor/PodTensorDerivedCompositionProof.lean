@@ -12,8 +12,12 @@ import WeilConjectures.PoincareDuality.Pod.Reindex.PodReindexDerivedFactors
 
 /-! # Composition of normalized strict tensor tower maps
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-tower).
+Localization carries the strict Roos composition equation for normalized strict tensor tower
+maps to the corresponding equation for the derived model maps.
+
+## References
+
+* Stacks Project, Tags 015F, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -48,13 +52,7 @@ attribute [local implicit_reducible] podGoodReindex integralOperationsTensorComp
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Localization carries the strict Roos composition equation to the derived model maps.
-Source: blueprint Steps 1 and 5; Stacks 015F, 07A4, 0941
-(blueprint: lem-pod-tensor-derived-composition).
-Proof: naturality of the exact derived-functor factor moves the first chain map
-past the second factor. Compatibility of the compositor with those factors then
-reduces the desired identity to the localization of the assumed chain equation.
-Functoriality of localization finishes. No tensor Model law is used here. -/
+/-- Localization carries the strict Roos composition equation to the derived model maps. -/
 theorem podTensorDerivedComposition
     (A : PodReindexFamily l E)
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]

@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalCoefficientRouteEndpoints
 
 /-! # Composition of the two supplied scalar delta squares
-
-Source: diagonal tower coefficient changes (1), scalar compatibility and Ext realization.
-(blueprint: lem-diagonal-uniformizer-route-compatibility).
 -/
 
 @[expose] public noncomputable section

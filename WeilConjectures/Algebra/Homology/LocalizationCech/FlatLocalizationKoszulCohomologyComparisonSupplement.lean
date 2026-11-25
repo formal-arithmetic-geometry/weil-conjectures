@@ -34,8 +34,9 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # Flat comparison on torsion Koszul cohomology
 
-Source: Stacks Project, Tags 099H, 0GLY and 05E9
-(blueprint: lem-weil-pbc-flat-localization-koszul-cohomology-comparison).
+## References
+
+* Stacks Project, Tags 099H, 0GLY and 05E9
 -/
 
 -- After pruning, this module only keeps private declarations.

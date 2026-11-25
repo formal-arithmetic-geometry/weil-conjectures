@@ -9,7 +9,16 @@ public import Mathlib.CategoryTheory.Monoidal.Functor
 
 /-! # The finite-Hom monoidality predicate
 
+The predicate `FiniteHomDomainMonoidal` recording strong monoidality with prescribed
+components.
+
+## Implementation details
+
 The predicate is relocated verbatim to let its generic scalar realization compile separately.
+
+## References
+
+- Stacks Project, Tags 07A4, 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -18,10 +27,9 @@ universe a₁ a₂ b₁ b₂
 open CategoryTheory MonoidalCategory
 namespace WeilConjectures
 
-/-- Strong monoidality for fixed tensor, unit and signed symmetry components.
-Heterogeneous equalities identify the components without changing their data.
-Source: blueprint ambient monoidality clause; Stacks 07A4 and 0FPT
-(blueprint: def-coef-finite-hom-monoidal-data). -/
+/-- Strong monoidality of `F` with prescribed tensor, unit and signed symmetry components,
+identified with those of a `CoreMonoidal` structure by heterogeneous equalities, such that `F`
+commutes with the symmetries. -/
 def FiniteHomDomainMonoidal {C : Type a₁} {C' : Type a₂}
     [Category.{b₁} C] [Category.{b₂} C'] [MonoidalCategory C] [MonoidalCategory C']
     (F : C ⥤ C') {V : C → C → Type b₂} (δ : ∀ U V', V U V')

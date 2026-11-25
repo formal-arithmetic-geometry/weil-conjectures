@@ -33,10 +33,9 @@ Zariski-local on the target.
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion_pullbackLift_blowup_comap`
 
-## Blueprint
+## References
 
-Part of `thm:nagata-strict-transform-is-blowup` (Stacks Project Tag 080E),
-closed-immersion half.
+* Stacks Project, Tag 080E (closed-immersion half)
 
 -/
 
@@ -187,11 +186,8 @@ private lemma isClosedImmersion_pullbackLift_restrict (I : X.IdealSheafData) (f 
     (AffineBlowup.isClosedImmersion_pullbackLift _ (I.ideal_comap_appLE f U V hVU).symm)
 
 /-- **The blow-up of a pulled-back ideal is a closed subscheme of the base-changed
-blow-up** (Stacks Project Tag 080E, closed-immersion half; blueprint:
-`thm:nagata-strict-transform-is-blowup`): for `f : Y ⟶ X`, an ideal sheaf `I` on `X`
-and a lift `ρ` of `(I.comap f).blowupMap ≫ f` along `I.blowupMap` — provided by the
-universal property of the blow-up, since the pullback of `I` to the blow-up of
-`I.comap f` is the invertible exceptional ideal — the induced morphism
+blow-up**: for `f : Y ⟶ X`, an ideal sheaf `I` on `X` and a lift `ρ` of
+`(I.comap f).blowupMap ≫ f` along `I.blowupMap`, the induced morphism
 `Bl_{I·O_Y}(Y) ⟶ Y ×_X Bl_I(X)` is a closed immersion. -/
 theorem isClosedImmersion_pullbackLift_blowup_comap (I : X.IdealSheafData) (f : Y ⟶ X)
     {ρ : (I.comap f).blowup ⟶ I.blowup}

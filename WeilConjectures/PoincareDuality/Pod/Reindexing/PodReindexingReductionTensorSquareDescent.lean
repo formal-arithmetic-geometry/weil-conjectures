@@ -18,8 +18,17 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 
 /-! # Descent of the strict reduction/tensor representative square
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4 and 0941.
-(blueprint: lem-pod-reindexing-reduction-tensor-square-descent)
+## Implementation details
+
+The strict pure-tensor calculation on good representatives is transported to arbitrary derived
+objects through the two K-flat localizations. The square uses the canonical normalized system
+comparison and ordinary tensor map rather than arbitrary comparisons `w` and `v`, since no laws
+relating those to the canonical ones would be available. It is stated separately so that the
+representative calculation is not hidden in the derived square theorem.
+
+## References
+
+* [Stacks: Tags 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -118,22 +127,10 @@ private theorem reduction_square_transport
   simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ V.map (Prod.mkHom
       (S.map (F.map eP.hom)) (S.map (F.map eQ.hom)))) hg
 
-/--
-STATEMENT-DISPUTED: The former statement quantified over arbitrary `w` and `v`,
-although no compatibility laws related them to the canonical comparisons were assumed.
-The corrected statement uses the canonical normalized system comparison and ordinary
-tensor map.
-
-The strict pure-tensor calculation descends through the two K-flat localizations.
-The hypothesis is the comparison's sectionwise pure-tensor formula; the conclusion
-is the whole-system square after the reduction and system tensor maps.  The descent
-uses the quotient-generator and transition laws of `A`, the normalized system
-comparison, and full faithfulness of the product localization.  It is stated
-separately so that the representative calculation is not hidden in the derived
-square theorem.
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4 and 0941.
-(blueprint: lem-pod-reindexing-reduction-tensor-square-descent).
--/
+/-- If the tensor-chain comparison of `c` satisfies the sectionwise pure-tensor formula `hPure`,
+then reindexing commutes with reduction and tensor product: the whole-system square built from
+the reduction tensor maps, the system tensor comparison and the reduction comparison of `A`
+commutes for all derived objects `M`, `N`. -/
 theorem podReindexing_reduction_tensor_square_descent
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

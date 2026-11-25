@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalDerivedSourceMaps
 
 /-! # The two extensions of derived source transposes
-
-Source: diagonal tower coefficient changes (1), scalar units and finite constants.
-(blueprint: def-diagonal-derived-source-square-maps).
 -/
 
 @[expose] public noncomputable section
@@ -59,8 +56,7 @@ local elab "typeOf% " t:term:max : term => do
   let e ← Lean.Elab.Term.elabTerm t none
   return ← Lean.Meta.inferType e
 
-/-- The common hom type of the two extended source transposes.
-(blueprint: def-diagonal-derived-source-square-maps). -/
+/-- The common hom type of the two extended source transposes. -/
 def sourceSquareHomType
     (s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight) : Type (u + 1) :=
   typeOf% (q.quotientTranspose ≫
@@ -69,8 +65,7 @@ def sourceSquareHomType
     q.cyclicRight.mapDerivedCategory.map
       ((q.restriction.mapDerivedCategorySingleFunctor 0).hom.app _))
 
-/-- Extend a quotient transpose across the given right comparison and single comparison.
-(blueprint: def-diagonal-derived-source-square-maps). -/
+/-- Extend a quotient transpose across the given right comparison and single comparison. -/
 @[irreducible] def extendQuotientTranspose
     (s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight)
     (f : q.quotientTransposeType) : q.sourceSquareHomType s :=
@@ -79,8 +74,7 @@ def sourceSquareHomType
     q.cyclicRight.mapDerivedCategory.map
       ((q.restriction.mapDerivedCategorySingleFunctor 0).hom.app _)
 
-/-- Extend a cyclic transpose across the supplied source map.
-(blueprint: def-diagonal-derived-source-square-maps). -/
+/-- Extend a cyclic transpose across the supplied source map. -/
 @[irreducible] def extendCyclicTranspose
     (s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight)
     (f : q.cyclicTransposeType) : q.sourceSquareHomType s :=

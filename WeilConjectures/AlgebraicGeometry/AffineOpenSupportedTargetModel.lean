@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineOpenSupportedModelTorsion
 
 /-! # Supported target models on affine opens
 
-Source: Stacks Project, Tags 06Z0, 08EB and 08EJ.
-(blueprint: lem-sc-affine-open-supported-target-model).
+## References
+
+* Stacks Project, Tags 06Z0, 08EB and 08EJ
 -/
 
 @[expose] public section
@@ -23,24 +24,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- A supported quasi-coherent target has a power-torsion affine module preimage.
-Source: Stacks Project, Tag 08EJ, affine paragraph, and Tag 06Z0.
-(blueprint: lem-sc-affine-open-supported-target-model).
-
-Proof: First shift the cohomology support hypothesis using the homology shift
-isomorphism: every cohomology sheaf of E'[k] is isomorphic to a cohomology sheaf of E'.
-Restriction to U and transport to its affine spectrum preserve quasi-coherence and
-identify stalks. Apply the inverse affine derived equivalence to this shifted
-restricted target, giving M and its counit isomorphism. The localized-site transport
-and the comparison Q followed by F with explicit sheafification identify F(M) with
-the restriction of E'[k]; extend the comparison from Q by its localization property.
-Exactness identifies the associated sheaf of H^i(M) with the transported restricted
-cohomology sheaf. All its stalks on D(f|U) vanish by the support hypothesis and the
-zero-locus restriction formula. Thus its sections on D(f|U), the localization of
-H^i(M) at f|U, are zero. The localization zero criterion gives, for each m, an n with
-(f|U)^n m=0. No uniform exponent or finiteness of H^i(M) is claimed. For f=0 take n=1;
-for a unit f the localization vanishing forces H^i(M)=0; the empty open is also
-covered by the zero ring and zero module category. -/
+/-- A supported quasi-coherent target has a power-torsion affine module preimage
+(Stacks, Tags 08EJ and 06Z0). -/
 theorem affine_open_supported_target_model
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

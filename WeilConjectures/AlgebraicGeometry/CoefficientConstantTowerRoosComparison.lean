@@ -14,7 +14,9 @@ set_option linter.privateModule false
 
 /-! # Projection-normalized Roos comparison for completed coefficient towers
 
-Source: Stacks 0941 and the strict Roos comparison.
+## References
+
+* Stacks Project, Tag 0941
 -/
 
 @[expose] public noncomputable section

@@ -7,10 +7,19 @@ module
 
 public import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensorCoefficientTransitionDescentData
 
-/-! # Completed tensor square for scalar/reindexing transitions
+/-! # Scalar normalization for scalar/reindexing tensor descent
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-tensor-scalar-normalization).
+The scalar tensor chain on a pair of good constructible representatives is identified with the
+scalar tensor normalization `scalarTensorOrdinary` and the derived factor maps of scalar
+extension.
+
+## Implementation details
+
+This is the defining unique normalization of `scalarTensorOrdinary` on the chosen good pair.
+
+## References
+
+* Stacks Project, Tags 03EL, 05RU, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -56,10 +65,9 @@ attribute [local implicit_reducible] podOrdinaryReindex podGoodReindex
   podTensorTensorReindexDerivedChain
   podTensorTensorScalarDerivedChain podTensorTensorMixedDerivedChain
 
-/-- A representative step of the scalar/reindexing tensor descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-tensor-scalar-normalization).
-Proof: Use the defining unique normalization of scalarTensorOrdinary on the chosen good pair. -/
+/-- Scalar normalization on representatives: for good constructible `P, Q`, the completed tensor
+comparison followed by the scalar derived chain equals `scalarTensorOrdinary`, the tensor of the
+scalar-extension factor maps, and the completed tensor comparison at the scalar-extended pair. -/
 theorem podTensorScalarRepresentativeNormalization
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

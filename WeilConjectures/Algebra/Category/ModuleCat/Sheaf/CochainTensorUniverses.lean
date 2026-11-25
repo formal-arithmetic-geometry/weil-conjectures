@@ -13,11 +13,12 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # Tensor complexes with independent site universes
 
-Source: Stacks Project, Modules on Sites, Section 03EK.
-(blueprint: def-pur-sheaf-tensor-product)
-
 The tensor is the existing localization tensor, with no restriction equating
 site object, site morphism, and coefficient universes.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EK
 -/
 
 @[expose] public section
@@ -68,12 +69,7 @@ private theorem tensor_W_right
       intro x y
       rfl))).2 hi
 
-/-- Tensoring preserves local equivalences on any essentially small site.
-Source: Stacks 03EK (blueprint: def-pur-sheaf-tensor-product).
-Proof: replace the site by its small model in universe w. The tensor and
-sheafification universal properties commute with this equivalence. On the
-small model local tensoring preserves local equivalences, and transport back
-preserves this assertion. -/
+/-- Tensoring preserves local equivalences on any essentially small site. -/
 @[instance]
 theorem cochainTensorLocalizationIsMonoidal :
     (J.W.inverseImage (PresheafOfModules.toPresheaf.{w}
@@ -89,15 +85,13 @@ theorem cochainTensorLocalizationIsMonoidal :
     { whiskerLeft F _ _ g hg := left F g hg
       whiskerRight f hf G := tensor_W_right R f hf G }
 
-/-- The existing localization tensor, with independent site sizes.
-Source: Stacks 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+/-- The existing localization tensor, with independent site sizes. -/
 noncomputable instance cochainModulesMonoidal :
     MonoidalCategory (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :=
   @monoidalCategory.{vC, uC, w} C _ J _ R _ _ (cochainTensorLocalizationIsMonoidal R)
 
-/-- The existing symmetric structure of the localization tensor.
-Source: Stacks 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+/-- The existing symmetric structure of the localization tensor. -/
 noncomputable instance cochainModulesSymmetric :
     SymmetricCategory (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :=
@@ -125,10 +119,7 @@ private theorem tensorLeft_preserves_smallColimits
     preservesColimits_of_natIso i.symm
   exact (adj.preservesColimitsOfSize_iff (tensorLeft M)).2 this
 
-/-- The sheaf tensor is additive in each variable, independently of site sizes.
-Source: Stacks 03EK (blueprint: def-pur-sheaf-tensor-product).
-Proof: additivity holds sectionwise on pure tensors and descends through the
-additive sheafification functor; the localization tensor has those same maps. -/
+/-- The sheaf tensor is additive in each variable, independently of site sizes. -/
 @[instance]
 theorem cochainModulesPreadditive :
     MonoidalPreadditive (SheafOfModules.{w}
@@ -149,20 +140,14 @@ theorem cochainModulesPreadditive :
       whiskerLeft_add := fun {X Y Z} f g ↦ (tensorLeft X).map_add (f := f) (g := g)
       add_whiskerRight := fun {X Y Z} f g ↦ (tensorRight X).map_add (f := f) (g := g) }
 
-/-- Left tensoring preserves the coproducts used in unbounded total tensor.
-Source: Stacks 03EK (blueprint: def-pur-sheaf-tensor-product).
-Proof: bilinear maps out of a direct sum are families of bilinear maps.
-The tensor universal property and sheafification adjunction identify the
-coproduct comparison with this bijection, so it is invertible. -/
+/-- Left tensoring preserves the coproducts used in unbounded total tensor. -/
 @[instance]
 theorem cochainTensorLeftPreservesColimits
     (M : SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     PreservesColimitsOfSize.{0, 0} (tensorLeft M) := by
   exact tensorLeft_preserves_smallColimits R M
 
-/-- Right tensoring preserves the coproducts used in unbounded total tensor.
-Source: Stacks 03EK (blueprint: def-pur-sheaf-tensor-product).
-Proof: conjugate left tensoring by the existing symmetric braiding. -/
+/-- Right tensoring preserves the coproducts used in unbounded total tensor. -/
 @[instance]
 theorem cochainTensorRightPreservesColimits
     (M : SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :

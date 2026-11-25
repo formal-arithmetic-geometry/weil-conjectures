@@ -16,8 +16,9 @@ import WeilConjectures.Algebra.Homology.InverseImageStalkScalarTransportNaturali
 /-!
 # Scalar transport for inverse-image stalks on ringed spaces
 
-Source: Stacks Project, Sheaves, Tags 008H and 0098.
-(blueprint: lem-pc-ringed-inverse-image-stalk-scalar-transport).
+## References
+
+* Stacks Project, Sheaves, Tags 008H and 0098
 -/
 
 @[expose] public section
@@ -33,23 +34,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Transport tensor scalars through the inverse-image ring and module stalk comparisons.
-Source: Stacks Project, Sheaves, Tag 0098, proof using Tag 008H.
-(blueprint: lem-pc-ringed-inverse-image-stalk-scalar-transport).
-
-Proof: the canonical ring comparison is the presheaf inverse-image stalk map followed
-by the stalk of sheafification. Both factors are isomorphisms. The analogous abelian
-comparison c is an isomorphism, natural in the module. Represent a scalar and vector
-on a common neighborhood. The germ formulas and semilinearity of the inverse-image
-unit show c(r m) = k(r)c(m). Write psi for the stalk of alpha, so rho = psi k.
-The forward balanced tensor map sends b tensor m to b tensor c(m); balancing follows
-from psi(k(r)) = rho(r). The inverse sends b tensor n to b tensor c inverse(n).
-Its balancing follows from c inverse(s n) = k inverse(s)c inverse(n) and
-rho(k inverse(s)) = psi(s). Both maps are linear over the target stalk ring and
-are inverse on pure tensors, hence everywhere. Naturality of c proves the displayed
-square on pure tensors; additive generation gives equality of linear maps.
-There is no flatness assumption. Zero rings and zero modules satisfy the same
-identities; for an empty source space there is no point x. -/
+/-- Transport tensor scalars through the inverse-image ring and module stalk comparisons. -/
 theorem exists_ringed_inverseImage_stalk_scalar_transport
     (X Y : RingedSpace.{u}) (f : X.carrier ⟶ Y.carrier)
     (α : TopCat.Sheaf.inverseImageRing f Y.sheaf ⟶ X.sheaf) (x : X) :

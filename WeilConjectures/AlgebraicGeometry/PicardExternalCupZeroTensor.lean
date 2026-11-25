@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ExternalCupZeroGlobalSections
 
 /-! # Degree-zero external tensor comparison
 
-Source: Stacks Project, Varieties, Tag 0BED, equation-kunneth-on-cech.
-(blueprint: lem-sc-picard-external-cup-zero-tensor).
+## References
+
+* Stacks Project, Varieties, Tag 0BED
 -/
 
 @[expose] public section
@@ -26,29 +27,8 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Global sections of the external tensor product are the tensor of global sections,
-with the identification expressed on degree-zero scalar cohomology.
-Source: Stacks Project, Varieties, Tag 0BED, equation-kunneth-on-cech;
-Cohomology, Tags 01FD, 07MB and 0FKV.
-(blueprint: lem-sc-picard-external-cup-zero-tensor).
-
-Proof: Take a finite affine cover of X. Affine diagonal makes all pairwise
-intersections affine. For each affine open V of Y, the affine pullback and tensor
-section formulas identify sections of the external coefficients on U_i times V
-and (U_i intersect U_j) times V with F(U_i) tensor G(V) and
-F(U_i intersect U_j) tensor G(V). These identifications commute with restriction.
-The sheaf equalizer computes global sections on X times V. Since tensor over the
-field is exact and commutes with the finite products of this cover, that equalizer
-is Gamma(X,F) tensor G(V). These identifications are natural in affine V.
-Now take a finite affine cover of Y. The same equalizer argument, using affine
-pairwise intersections and exact tensor with Gamma(X,F), identifies sections on
-X times Y with Gamma(X,F) tensor Gamma(Y,G). Degree-zero derived global sections
-are ordinary global sections. On pure tensors the affine section formulas send
-s tensor t to the tensor of their projection pullbacks. The Cech/sheaf cup
-compatibility, or the Ext-degree-zero evaluation-at-one comparison, identifies
-this with externalCup. Thus the induced equivalence has the stated pure-tensor
-formula. This argument uses no positive-degree acyclicity, and does not claim
-that the tensor total and the product-cover Cech complex are isomorphic.
-Empty covers and zero modules give zero section spaces on both sides. -/
+with the identification expressed on degree-zero scalar cohomology, sending a pure tensor
+to the product of its projection pullbacks (Stacks, Tag 0BED). -/
 theorem picardExternalCup_zero_tensor
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

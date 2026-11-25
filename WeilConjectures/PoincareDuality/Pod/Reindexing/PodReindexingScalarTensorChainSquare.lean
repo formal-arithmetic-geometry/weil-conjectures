@@ -9,8 +9,9 @@ public import WeilConjectures.PoincareDuality.Pod.PodCompletionReindexCoefficien
 
 /-! # Scalar/reindexing maps before derived localization
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: def-pod-reindexing-tensor-chain-maps).
+## References
+
+* [Stacks: Tags 015F, 03EL, 06YY, 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -45,9 +46,7 @@ attribute [local irreducible] integralOperationsTensorTowerFunctor scalarTensorC
   integralOrdinaryScalar
   completedIntegralCoefficientSheafUnrestricted integralOperationsRoos
 
-/-- The actual relabelling map on Roos tensor complexes, before localization.
-Source: Stacks 07A4, 0941
-(blueprint: def-pod-reindexing-tensor-chain-maps). -/
+/-- The reindexing map on Roos tensor complexes, before localization. -/
 def podReindexTensorChain
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -61,9 +60,7 @@ def podReindexTensorChain
   (D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom ≫
     integralOperationsRoosFunctor.map (T.tower P Q).hom
 
-/-- Apply the fixed ordinary coefficient transition term by term.
-Source: Stacks 015F
-(blueprint: def-pod-reindexing-tensor-chain-maps). -/
+/-- The ordinary coefficient transition of `S`, applied termwise to cochain complexes. -/
 def PodReindexCoefficientTransition.complex
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

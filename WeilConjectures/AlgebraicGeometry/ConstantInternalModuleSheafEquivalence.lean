@@ -10,9 +10,10 @@ import WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
 
 /-! # Encoding internal modules over a constant ring sheaf
 
-Source: Bhatt--Scholze, Section 5.3, and Stacks Project, Tag 093I;
-the tensor and sheafification encoding argument is expanded below
-(auxiliary; not a blueprint node).
+## References
+
+* Bhatt–Scholze, Section 5.3
+* Stacks Project, Tag 093I
 -/
 
 @[expose] public section

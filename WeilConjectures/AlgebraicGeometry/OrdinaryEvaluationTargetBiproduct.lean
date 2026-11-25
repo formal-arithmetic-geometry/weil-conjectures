@@ -13,8 +13,9 @@ public import Mathlib.Data.Int.Interval
 
 /-! # Finite target decomposition
 
-Source: Stacks Project, Tags 08DQ and 08DM.
-(blueprint: lem-pc-ordinary-evaluation-target-biproduct).
+## References
+
+* Stacks Project, Tags 08DQ and 08DM.
 -/
 
 @[expose] public section
@@ -48,19 +49,8 @@ private theorem homObj_isZero_left (X : Scheme.{u}) (U : X.Opens)
   change (φ.app W).hom (0) = 0
   exact map_zero _
 
-/-- The ordinary Hom degree is the finite biproduct of its supported factors.
-Source: Stacks Project, Tag 08DM, proof of `lemma-Rhom-strictly-perfect`,
-finite product versus sum, and Tag 08DQ, Hom sum.
-(blueprint: lem-pc-ordinary-evaluation-target-biproduct).
-
-Proof: homComplex_projections_exists exhibits the displayed projections as a
-product over all integers r. For r outside [a,b], P^r is zero, so internal Hom
-from P^r to F^(r+n) is zero. A map into any such factor is unique. Thus the
-restricted finite fan is still limiting: extend any cone by the unique zero
-maps, lift to the original product, and use its projection extensionality for
-uniqueness. Finite products in this additive category are biproducts. The
-unique limit comparison is an isomorphism and satisfies the projection equations.
-The same construction works for an empty interval and for zero F or empty U. -/
+/-- The ordinary Hom degree is the finite biproduct of its supported factors
+(Stacks, Tags 08DM and 08DQ). -/
 theorem ordinaryEvaluation_target_biproduct (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ) (a b n : ℤ)
     (hbounded : ∀ r : ℤ, r < a ∨ b < r → IsZero (P.X r)) :

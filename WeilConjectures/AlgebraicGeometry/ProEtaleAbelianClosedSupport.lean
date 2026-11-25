@@ -16,8 +16,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-!
 # Closed support for abelian pro-etale sheaves
 
-Source: Stacks Project, Tags 09AA and 09AH
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 09AA and 09AH.
 -/
 
 @[expose] public section
@@ -72,17 +73,8 @@ private theorem abDetectIso {X U Z : Scheme.{u}}
 
 /-- The closed unit is invertible on abelian sheaves whose restriction to the quasi-compact open
 complement vanishes. This is the `Ab` counterpart of base
-`ProEtale.isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl` (stated for modules).
-
-Source: Stacks, Tags 09AA and 09AH
-(auxiliary; not a blueprint node).
-
-Proof: the counit of `i^* ⊣ i_*` is invertible (`isIso_upperStarLowerStarAdjunction_counit`), so
-the closed restriction of the unit is invertible by the adjunction triangle identity. Its open
-restriction is a map between zero objects: its source is zero by hypothesis, and the open
-restriction of a closed direct image is zero (`isZero_upperStar_lowerStar_of_disjoint`). The
-closed immersion and its quasi-compact open complement jointly detect isomorphisms of abelian
-sheaves (`eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp`, applied to kernel and cokernel). -/
+`ProEtale.isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl` (stated for modules)
+(Stacks, Tags 09AA and 09AH). -/
 theorem abelian_closed_support {X U Z : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)
     [IsOpenImmersion j] [QuasiCompact j]

@@ -16,7 +16,8 @@ set_option linter.privateModule false
 
 /-! # Integral intermediate domains
 
-Source: current blueprint fix-prop-coherence, primitive realization step.
+Auxiliary results showing that an integral complex realizing an admissible coefficient system
+(via the reduction/limit adjunction) is a finite-Tor constructible integral complex.
 -/
 
 @[expose] public noncomputable section

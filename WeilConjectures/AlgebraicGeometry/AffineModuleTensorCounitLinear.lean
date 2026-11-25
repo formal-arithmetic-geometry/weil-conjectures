@@ -11,8 +11,9 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import WeilConjectures.AlgebraicGeometry.AffineModuleTensorCounitSmul
 /-! # Linearity of the affine tensor counit
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
-(blueprint: lem-weil-pbc-affine-module-tensor-counit-linear).
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section
@@ -67,23 +68,8 @@ local notation "e₀" =>
     (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).homEquiv A U.sheaf).symm (𝟙 A)
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
-/-- The counit transported by κ is B-linear when F carries its B-action through ε.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
-(blueprint: lem-weil-pbc-affine-module-tensor-counit-linear).
-
-Proof: Let q be the O_U-linear composite κ followed by the pullback counit. By the
-canonical pullback unit formula and hP, q on the sheafification of 1 tensor η(g) is the
-section g of F over the inverse image of its domain: this is the adjunction triangle.
-The underlying inverse-image counit is IA-linear for the action on F through e, by
-the inverse-image module adjunction. Hence tensor evaluation sends c tensor s to
-ε(c) times the inverse-image counit of s; t ε = e makes this balanced over IA. It
-commutes with restriction and induces a B-linear map δ after sheafification. On the
-above unit sections δ agrees with q. Inverse-image unit sections locally generate
-the inverse-image sheaf, and their O_U multiples locally generate the restriction
-of P along b: the pushout identifies it with O_U tensor_{f⁻¹ O_X} I(RF). Therefore
-O_U-linearity extends the equality from those sections to all sections, giving the
-asserted formula for δ. Its formula determines δ uniquely. No affineness or
-quasi-coherence is used. Empty opens and zero rings obey the same balanced identities. -/
+/-- The counit transported by κ is B-linear when F carries its B-action through ε
+(Stacks, Tag 01SB). -/
 theorem affine_module_tensor_counitLinear
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (ε : B ⟶ U.sheaf) (hpush : IsPushout r₀ t₀ b t)

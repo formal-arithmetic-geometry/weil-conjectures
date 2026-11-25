@@ -14,8 +14,18 @@ import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 /-!
 # Linear independence of invariant matrices survives scalar extension
 
-Source: Stacks Project, Tag 03R6, coefficient uniqueness in finite Galois descent.
-(blueprint: lem-sc-matrix-descent-invariants-linear-independent).
+We show that `K`-linearly independent matrices invariant under a twisted Galois action are
+linearly independent over the separable closure (`Field.matrixDescentInvariants_linearIndependent`).
+
+## Implementation details
+
+The proof inducts on finite subfamilies. A dependence over the separable closure has unique
+coefficients; applying the twisted Galois action shows these coefficients are Galois-fixed, hence
+in `K`. Only invertibility of each `b g` is used, not local constancy or a cocycle condition.
+
+## References
+
+* [Stacks Project, Tag 03R6](https://stacks.math.columbia.edu/tag/03R6)
 -/
 
 @[expose] public section
@@ -24,23 +34,8 @@ universe u v
 
 namespace Field
 
-/-- A base-field independent family of twisted invariant matrices remains independent
-in the ambient matrix space over the separable closure.
-
-Proof: it suffices to treat finite subfamilies. Induct on their size. If the last
-vector is in the separable-closure span of the previous ones, its coefficients
-are unique by the inductive independence hypothesis. Apply each twisted Galois
-map to this expansion. Every vector is fixed, and semilinearity applies the
-Galois automorphism to each coefficient, so uniqueness says the coefficients
-are fixed by every automorphism. The fixed field of the separable closure is K.
-The expansion therefore has coefficients in K, contradicting the original
-K-linear independence. The empty family is independent; the argument also
-applies to the zero matrix space when n=0. No local constancy or action law for
-b is needed: only invertibility of each b(g) and invariance of these vectors.
-
-Source: Stacks Project, Tag 03R6, coefficient uniqueness argument of step 4 of
-lem-sc-matrix-descent-scalar-map-bijective.
-(blueprint: lem-sc-matrix-descent-invariants-linear-independent). -/
+/-- A `K`-linearly independent family of matrices invariant under the `b`-twisted Galois action
+remains linearly independent over the separable closure of `K`. -/
 theorem matrixDescentInvariants_linearIndependent (K : Type u) [Field K] (n : ℕ)
     (b : (SeparableClosure K ≃ₐ[K] SeparableClosure K) →
       Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K))

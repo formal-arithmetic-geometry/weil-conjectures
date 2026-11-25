@@ -23,15 +23,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   Adjunction.mapDerivedCategoryRightDerivedAdjunction
   Functor.mapDerivedCategorySingleFunctor Functor.rightDerivedFunctorObjQIso
 
-/-- The varying square on any system object in degree zero.
-
-Source: diagonal tower trace proof (1)--(2), normalized varying restriction.
-(blueprint: lem-sfb-diagonal-trace-varying-single-square).
-
-Proof: restricted-push acyclicity extends the given K-injective normalization to
-all cochain complexes. Evaluate it on the given system object in degree zero.
-Naturality of the cochain units and of the exact single-functor comparisons gives
-precisely the displayed single-object equality. -/
+/-- The varying square on any system object in degree zero. -/
 theorem diagonalTrace_varying_single_square
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X S : Scheme.{u}}

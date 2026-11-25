@@ -12,20 +12,27 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Tensor
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import WeilConjectures.ConstructibleSheaf.ConstantFiniteFreeDualNaturality
 
+/-!
+# Kernels of duals of constant finite free matrices
+
+For a linear map `g : Λ^m → Λ^n`, the kernel of the map induced by `g` on the duals
+`[Λ_X^n, Λ_X] ⟶ [Λ_X^m, Λ_X]` is the constant sheaf on the kernel of the dual map of `g`
+(`AlgebraicGeometry.Scheme.constantFiniteMatrixDualKernelIso_aux`).
+
+## Implementation details
+
+The kernel on the right is the categorical kernel in `ModuleCat`; its identification with
+`LinearMap.ker` via `ModuleCat.kernelIsoKer` is left to the caller.
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory MonoidalCategory Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The finite-free kernel comparison before replacing the categorical module kernel by
-the explicit linear kernel.
-
-Source: `WeilConjectures/ConstructibleSheaf/Monoidal.lean`,
-`IsFiniteLocallyConstantSheaf.ihom_unit` docstring. The proof uses the finite biproduct
-description of free modules, the monoidal constant sheaf functor, and preservation of
-finite kernels. The remaining identification with `LinearMap.ker` is deliberately left
-to `ModuleCat.kernelIsoKer` in the parent theorem.
-(blueprint: lem-weil-pbc-constant-finite-matrix-dual-kernel-aux) -/
+/-- The finite-free kernel comparison, with the categorical module kernel: the kernel of the
+dual of the constant map `Λ_X^m ⟶ Λ_X^n` induced by `g` is the constant sheaf on the kernel of
+the dual map of `g`. -/
 theorem constantFiniteMatrixDualKernelIso_aux
     (X : Scheme.{u}) {Λ : Type (u + 1)} [CommRing Λ]
     (n m : ℕ) (g : (Fin m → Λ) →ₗ[Λ] (Fin n → Λ)) :

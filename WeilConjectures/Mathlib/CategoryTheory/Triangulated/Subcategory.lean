@@ -62,8 +62,7 @@ variable {C D : Type*} [Category* C] [Category* D] [HasZeroObject C] [HasZeroObj
 /-- **Restriction of a triangulated functor to triangulated subcategories.** Let `F : C ⥤ D` be
 a triangulated functor and `S`, `S'` triangulated subcategories of `C`, `D` with `F` sending `S`
 into `S'`. Then the restriction `S ⥤ S'` of `F` (`S'.lift (S.ι ⋙ F) hF`) is triangulated, and
-its composite with the inclusion of `S'` is `S.ι ⋙ F`.
-(blueprint: `situation-conventions`) -/
+its composite with the inclusion of `S'` is `S.ι ⋙ F`. -/
 theorem isTriangulated_lift_ι_comp (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]
     (S : ObjectProperty C) [S.IsTriangulated] (S' : ObjectProperty D) [S'.IsTriangulated]
     (hF : ∀ X : S.FullSubcategory, S' (F.obj X.obj)) :

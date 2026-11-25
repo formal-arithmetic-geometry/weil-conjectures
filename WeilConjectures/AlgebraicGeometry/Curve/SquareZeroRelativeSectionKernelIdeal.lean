@@ -46,14 +46,7 @@ private theorem square_zero_global_kernel {Y Z : Scheme.{u}} (f : Z ⟶ Y)
   simpa only [IdealSheafData.ideal_bot, Pi.bot_apply, Ideal.mem_bot, map_mul, map_zero]
     using hprod
 
-/-- The kernel ideal of the relative restriction map is square-zero.
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
-(blueprint: lem-sc-square-zero-relative-section-kernel-ideal)
-
-Proof: On affine charts the kernel is the quotient ideal `I/J`; its product is
-zero because `I * I ≤ J`. Pulling back to affine charts of an etale object
-preserves this product inclusion, and the sheaf condition glues the resulting
-ideal inclusion. -/
+/-- The kernel ideal of the relative restriction map is square-zero. -/
 theorem relativeSectionKernel_ker_mul_le_bot (X : Scheme.{u})
     (I J : X.IdealSheafData) (hJI : J ≤ I) (hII : I * I ≤ J)
     (V : J.subscheme.Etaleᵒᵖ) :

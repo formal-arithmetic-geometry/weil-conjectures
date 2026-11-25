@@ -11,8 +11,10 @@ public import WeilConjectures.Algebra.Homology.ZigzagModule
 /-!
 # Functoriality of zig-zag modules
 
-Source: Stacks Project, Algebra, Tag 00M1, proof and preceding functoriality paragraph
-(blueprint: lem-weil-pbc-double-complex-zigzag-module-functorial).
+## References
+
+* [Stacks Project, Tag 00M1](https://stacks.math.columbia.edu/tag/00M1), proof and preceding
+  functoriality paragraph
 -/
 
 @[expose] public section
@@ -133,28 +135,7 @@ private lemma map_mk {R : Type u} [CommRing R]
   exact h.symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- (blueprint: lem-weil-pbc-double-complex-zigzag-module-functorial)
-Trivial zig-zags are zig-zags, and the quotient maps are functorial
-(Stacks Project, Algebra, Tag 00M1, proof and preceding paragraph).
-
-Proof, following the four steps of the node:
-(a) For `a = D b`, apply `d` and `δ` to the two adjacent components. The `dd` and
-`δδ` terms vanish; the remaining terms agree by the commuting square. Thus `B ≤ Z`,
-and the intersection with `Z` is `B`.
-(b) Apply the component maps of `Φ` to the zig-zag equalities. Since they commute
-with both differentials, the resulting tuple is a zig-zag. Linearity and the same
-commutation identities give `Φ (D b) = D (Φ b)` componentwise, so boundaries map to
-boundaries. These steps use the double-complex and zig-zag definitions.
-(c) Unfold the existing `zigzagMap` and use `Submodule.mapQ_apply` to obtain the
-representative formula. Every quotient element has a cycle representative by
-`Submodule.mkQ_surjective`, so this formula determines the linear map uniquely.
-(d) Check the total-map composition and identity on `DirectSum.lof` generators.
-For composition, represent a quotient element by a cycle `a`, form its cycle
-images `b` and `c`, and apply the representative formula three times. For identity,
-apply the formula to `a` itself. Surjectivity of the quotient map closes both laws.
-
-In the representative formula, `b` is a cycle whose underlying tuple is `Φ(a)`;
-this avoids choosing a second restriction map or a second quotient definition. -/
+/-- Trivial zig-zags are zig-zags, and the quotient maps are functorial. -/
 theorem zigzagModule_functorial
     {R : Type u} [CommRing R]
     (A B C : HomologicalComplex₂ (ModuleCat.{v} R) (ComplexShape.down ℕ)

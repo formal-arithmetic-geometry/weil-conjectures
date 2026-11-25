@@ -129,7 +129,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 /-! Derived part of the normalized image realization.
 
-(blueprint: lem-pur-etale-brown-image-realization-derived)
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Lemma 5.16
+* Stacks Project, Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -192,11 +194,6 @@ private theorem constant_equivalence
   exact Functor.isEquivalence_of_iso e
 
 /-- Construction of the normalized derived direct-image comparison.
-Source: Zheng, Lemma 5.16; Stacks 07A4.
-(blueprint: lem-pur-etale-brown-image-realization-derived).
-
-The universal right-derived unit determines the comparison and its representative
-equation after transport through the supplied Brown realizations.
 -/
 theorem etaleBrownImageRealization_right_exists
     (O : Type (u + 1)) [CommRing O] (t : O)

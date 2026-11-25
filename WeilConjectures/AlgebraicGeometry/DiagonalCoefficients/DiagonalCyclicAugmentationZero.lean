@@ -14,8 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # The degree-zero cyclic augmentation endpoint -/
 
-/- Repair note: this proved helper is delivered together with its DAG node. -/
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
@@ -497,9 +495,7 @@ private theorem cyclic_augmentation_target_for
   exact hh
 
 /-- The unshifted cyclic target, constructed from exact-single comparisons and the
-specified completed and finite line endpoints.
-Source: coefficient changes (1), root endpoint.
-(blueprint: lem-diagonal-cyclic-augmentation-zero). -/
+specified completed and finite line endpoints. -/
 def cyclicEvaluationTargetZero
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
@@ -521,17 +517,7 @@ attribute [local irreducible] Functor.mapDerivedCategorySingleFunctor
 
 -- Exact-single coherence involves several derived functor compositions.
 /-- The cyclic augmentation followed by the unshifted target has the prescribed
-ordinary underlying root arrow.
-
-Source: coefficient changes (1), root endpoint and scalar adjunction.
-(blueprint: lem-diagonal-cyclic-augmentation-zero).
-
-Proof: transpose the finite scalar endpoint through its defining derived scalar
-adjunction. Compatibility of exact-derived composition and natural isomorphisms
-with single objects computes the finite realization factor. Naturality moves the
-completed line comparison through the scalar unit and the finite comparison.
-The completed realization's underlying comparison on single objects gives the
-remaining ordinary completed line arrow. All factors are the specified maps. -/
+ordinary underlying root arrow. -/
 theorem cyclicEvaluationAugmentation_zeroTarget
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

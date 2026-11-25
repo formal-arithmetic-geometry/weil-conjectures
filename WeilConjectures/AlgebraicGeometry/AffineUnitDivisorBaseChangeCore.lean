@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.LocalDvrBaseChange
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
 /-! # Boundary geometry and forward comparison of unit divisors
-
-Source: blueprint proposition-cohomology-smooth-affine-curve, affine unit quotient paragraph.
 -/
 
 @[expose] public section
@@ -148,26 +146,7 @@ private theorem open_restriction_natural
   rw [hφ' x' _ z hz, ht, rational_pullback_germ X Y π P ρ hρ V t]
   exact Scheme.algebraMap_germ_eq_germToFunctionField Y hxV _
 
-/-- Boundary geometry, compatible rational maps, and preservation of unit orders.
-Source: blueprint proposition-cohomology-smooth-affine-curve, affine unit quotient paragraph.
-(blueprint: lem-sc-affine-unit-divisor-base-change-core).
-
-Proof: put V = c.i(C), a nonempty open in the integral compactification X. Define the
-restriction map as the inverse of c.i.appIso at the top open, followed by
-X.germToFunctionField V; do the same on X'. Naturality of germs and
-Scheme.algebraMap_germ_eq_germToFunctionField prove the stated compatibility. Conversely,
-compatibility determines each map by evaluating at any point of the nonempty open.
-The complement of V is a finite set of closed points: X is a Noetherian integral curve and
-V is nonempty. Each boundary point is k-rational by algebraic closedness and finite type.
-Scheme.local_dvr_base_change constructs its unique rational closed point above it. The
-cartesian open-immersion square says that the complement of V' is the inverse image of
-the complement of V. Hence the unique-fibre assignment is a bijection of the boundaries.
-At corresponding points, Scheme.local_dvr_base_change also constructs the rational
-pullback from the stalk map and proves equality of normalized orders. The two restriction
-maps commute with this rational pullback: compare their germs on the common nonempty open
-and specialize to the generic points. Thus the order comparison applies to the pulled-back
-unit. Use Scheme.div_apply and equality coefficient by coefficient to obtain the Finsupp
-equality. The empty boundary case gives the empty equivalence and zero divisors. -/
+/-- Boundary geometry, compatible rational maps, and preservation of unit orders. -/
 theorem affine_unit_divisor_base_change_core
     (k k' : Type u) [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k']
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]

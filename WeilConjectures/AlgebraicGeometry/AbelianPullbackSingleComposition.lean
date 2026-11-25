@@ -11,8 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.EtalePullbackSingleComp
 
 /-! # Composition of inverse images on single complexes
 
-Source: Stacks Project, Tag 09Z1, derived-adjunction coherence elaboration.
-(blueprint: lem-sbc-abelian-pullback-single-composition).
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section
@@ -24,17 +25,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- The composition comparison of exact derived pullbacks agrees on single complexes
-with the underived comparison. Source: Stacks Project, Tag 09Z1, compatibility of
-comparison morphisms, and the levelwise construction of exact derived inverse image.
-(blueprint: lem-sbc-abelian-pullback-single-composition).
-
-Proof: First transport along w, reducing h' to a ≫ h. Include the bounded below
-categories in the unbounded categories. The single-functor comparisons are induced
-by the termwise single-complex comparisons. Compute the composition comparison on
-that single complex using the localization factorization of both exact functors.
-The two termwise comparisons agree in degree zero with upperStarComp and are
-identities between zero objects in every other degree. Their equality passes to
-localization and then back through the fully faithful bounded below inclusion. -/
+with the underived comparison (Stacks, Tag 09Z1). -/
 theorem abelianPullbackSingleComposition {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (A : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) :

@@ -142,17 +142,7 @@ private theorem completed_smul (l : ℕ) [Fact l.Prime]
     (M.val.obj ((Scheme.proEtaleBaseChange f).op.obj U)).isModule.toSMul z x)
     (completed_constant_sections l f U a)
 
-/-- Constant-scalar restriction commutes with completed direct image, by identity on sections.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-completed coefficient comparison before right derivation.
-(blueprint: lem-sfb-diagonal-trace-completed-scalar-square).
-
-Proof: the completed coefficient map commutes with constant scalars since its composite
-with every finite projection is the constant-sheaf comparison for that quotient.
-Take adjoints and evaluate at constant sections. Thus the identity on the section
-module over each pulled-back chart is linear. It commutes with chart restrictions
-and maps of sheaves, and its inverse is the same identity. -/
+/-- Constant-scalar restriction commutes with completed direct image, by identity on sections. -/
 @[no_expose] def diagonalTraceCompletedScalarSquare (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) :
     diagonalTracePush l f ⋙ diagonalCompletedRestriction l S ≅

@@ -16,9 +16,19 @@ import WeilConjectures.RingTheory.EtaleResidueTriplesExistsColimit
 /-!
 # Filtered colimit of pointed etale algebras
 
-Source: Stacks Project, Algebra, Tag 04GW (lemma-strict-henselization-different),
-and Tag 00D5 (lemma-colimit).
-(blueprint: lem-weil-pbc-etale-triples-filtered-colimit).
+The category of pointed étale residue triples over `(R, p)` with values in a separable closure
+`K` of the residue field is filtered, and its ring diagram has a colimit with compatible maps
+from `R` and to `K`.
+
+## Implementation details
+
+Tensor products supply common successors; for parallel maps `S → S'` the ring
+`(S' ⊗[S] S') ⊗[S' ⊗[R] S'] S'` equalizes them. The category of triples is essentially
+small, since affine étale `R`-schemes form an essentially small category, so the colimit exists.
+
+## References
+
+* Stacks Project, Algebra, Tags 04GW, 00D5
 -/
 
 @[expose] public section
@@ -29,20 +39,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Algebra, Tag 04GW (lemma-strict-henselization-different),
-and Tag 00D5 (lemma-colimit).
-
-Proof: Regard a triple as an etale R-algebra equipped with a map to K, recovering its
-prime as the kernel and its residue embedding by extension to the fraction field.
-The identity R-algebra supplies an object. Tensor products supply common successors.
-For parallel maps S → S', use (S' ⊗[S] S') ⊗[S' ⊗[R] S'] S'; the rightmost map
-from S' equalizes them, is etale, and admits the compatible map to K.
-Finite presentation gives an essentially small category of triples: take a small skeleton
-of affine etale R-schemes and the set of residue embeddings over each object.
-Construct its ring colimit, and transport the colimit along the equivalence with the
-full category. The compatible structural maps R → S and maps S → K give ρ and ψ.
-The universal property gives the two displayed compatibilities.
-(blueprint: lem-weil-pbc-etale-triples-filtered-colimit). -/
+/-- The category of étale residue triples with values in a separable closure `K` is filtered,
+and its ring diagram has a colimit `c` with a map `ρ : R ⟶ c.pt` compatible with the structure
+maps and a map `ψ : c.pt →+* K` compatible with the residue maps of the triples. -/
 theorem etaleResidueTriples_filtered_colimit
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     [Algebra ((Spec R).residueField p) K] [IsSepClosure ((Spec R).residueField p) K] :

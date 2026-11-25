@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.IdentityTangentOperations
 /-!
 # The Lie algebra as the tangent space at the identity
 
-Source: blueprint `proposition-cartier-s-theorem`, third paragraph, and
-`def-wf-lie-algebra-derivation`.
 
 ## Main definitions
 
@@ -32,13 +30,8 @@ namespace AlgebraicGeometry.GrpObj
 
 /-- The Lie algebra identifies linearly with the scheme tangent space at the identity: it is
 `lieEquiv.symm` followed by `identityTangentTransport`. The tangent space is a `k`-module by
-restriction of scalars along the structural residue map.
-Source: blueprint `proposition-cartier-s-theorem`, third paragraph, and
-`def-wf-lie-algebra-derivation`.
-
-Additivity and `k`-linearity are `identity_tangent_transport_operations`, together with
-`lieEquiv_symm_add` and `lieEquiv_symm_smul`. No smoothness, finite type, or
-finite-dimensional assumption is used. -/
+restriction of scalars along the structural residue map. No smoothness, finite type, or
+finite-dimensionality assumption is needed. -/
 def lieIdentityTangentEquiv {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :
     let x := unitSection G (IsLocalRing.closedPoint k)
     let r : k →+* G.left.residueField x :=

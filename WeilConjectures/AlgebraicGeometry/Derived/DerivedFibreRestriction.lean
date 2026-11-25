@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedGlobalGermExchange
 
 /-! # Fibre maps and restriction after an arbitrary base change
 
-Source: Stacks Project, Tags 01F8, 08J6 and 0GJV.
+## References
+
+* Stacks Project, Tags 01F8, 08J6, 0GJV, 03Q1
 -/
 
 @[expose] public section
@@ -165,8 +167,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
-/-- The derived global-section germ, before any direct-image Leray comparison.
-Source: Stacks Project, Tag 03Q1. -/
+/-- The derived global-section germ, before any direct-image Leray comparison. -/
 noncomputable def derivedGlobalGermAt {S : Scheme.{u}}
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ S) :
     (Sheaf.Γ S.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus ⟶
@@ -174,8 +175,7 @@ noncomputable def derivedGlobalGermAt {S : Scheme.{u}}
   Functor.rightDerivedFunctorPlusNatTrans (globalGerm t) ≫
     (Scheme.pointSmallEtale t).sheafFiber.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom
 
-/-- The exact inverse-image stalk comparison, descended to bounded-below complexes.
-Source: Stacks Project, Tag 03Q1 (3). -/
+/-- The exact inverse-image stalk comparison, descended to bounded-below complexes. -/
 noncomputable def derivedPullbackStalkIso {S T : Scheme.{u}} (g : T ⟶ S)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) :
     (upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategoryPlus ⋙
@@ -454,21 +454,7 @@ private theorem globalGermAt_identity {S : Scheme.{u}}
     hgen t (Category.id_comp t)
 
 /-- The two-square fibre map agrees with the germ of the exchanged global sections
-followed by restriction to the geometric fibre.
-Source: Stacks Project, Tag 0GJV, the pullback-of-cohomology identification;
-Tags 01F8 and 08J6, functoriality of derived exchange.
-(blueprint: lem-weil-pbc-derived-fibre-restriction).
-
-Proof: paste the exchange square with the geometric-point square. Horizontal pasting
-expresses the outer exchange as pullback of the first exchange followed by the second,
-with the inverse-image composition comparisons. The inverse-image stalk isomorphism
-identifies the two stalk sources. Naturality of the global germ moves the first
-exchange past that germ. Apply derivedGlobalGerm_exchange to the geometric-point square:
-its right side is the derived inverse-image unit followed by Leray and the target germ.
-The latter is invertible on the geometric base, so it cancels the inverse target germ
-in etaleDerivedFiberMap. The remaining composite is etaleDerivedRestriction of the
-fibre inclusion. Naturality of Leray gives the displayed order of the factors.
-No exactness of sections on the base or strict-local hypothesis is used. -/
+followed by restriction to the geometric fibre. -/
 theorem derivedFiberMap_restriction
     {X X' S T : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ T)
     (g : T ⟶ S) (p : X' ⟶ X) (sq : IsPullback p f' f g)

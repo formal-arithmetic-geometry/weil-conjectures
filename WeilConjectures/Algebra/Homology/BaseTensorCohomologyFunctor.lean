@@ -11,7 +11,9 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelMap
 
 /-! # Functorial base-derived tensor cohomology
 
-Source: Stacks Project, Tags 06Y6 and 0BYJ.
+## References
+
+* Stacks Project, Tags 06Y6 and 0BYJ.
 -/
 
 @[expose] public section
@@ -26,34 +28,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
   [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]
   [HasDerivedCategory (ModuleCat.{u} R)] [HasDerivedCategory (ModuleCat.{u} B)]
 
-/-- The ordinary derived counit is a natural transformation with its tensor-algebra action.
-
-Source: Stacks Project, Tag 06Y6 (derived extension and universal counit), and
-Tag 0BYJ (functorial tensor associativity).
-
-Proof: use exists_baseDerivedTensorCohomologyModelMap to obtain the E-linear map
-on the cohomology of the canonical models for each chain map. The universal
-property of the target model forces the supplied derived natural transformation
-to be the canonical leftDerivedNatTrans induced by the identity. Faithful
-restriction to B and cancellation of cohomologyIso prove uniqueness of the
-E-linear map. Choose these uniquely determined maps. The identity and composition
-laws for leftDerivedNatTrans, its naturality, and the corresponding laws of
-homology give the functor laws after faithful restriction. Its objects are the
-canonical model cohomology objects themselves, so e is the identity isomorphism.
-Exact restriction sends quasi-isomorphisms to quasi-isomorphisms; localization,
-derived extension, and homology then give isomorphisms. The canonical derived
-comparison is also an isomorphism. The model-map equation and faithful
-restriction prove that H inverts quasi-isomorphisms.
-To prove naturality of the ordinary comparison, first check ordinaryIso
-naturality on generators 1 tensor p and extend by tensor induction. Restrict
-the desired cohomology square to B and compose with the inverse exact-restriction
-homology isomorphism. Substitute comparison_eq and the model-map equation.
-Counit compatibility, counit naturality, the two homology factorization
-naturality squares, and the generator square prove the equality. This constructs
-sigma with its actual model.comparison components. No extension to C, tensor
-with a second complex, or localized comparison is constructed here. Zero rings,
-zero complexes, identity maps and unbounded complexes use the same argument.
-(blueprint: lem-pc-base-tensor-cohomology-functor). -/
+/-- The ordinary derived counit is a natural transformation with its tensor-algebra action. -/
 theorem exists_baseTensorCohomologyFunctor (i : ℤ) :
     let m := fun P : CochainComplex (ModuleCat.{u} A) ℤ ↦
       baseDerivedTensorCohomologyModel R A B P C

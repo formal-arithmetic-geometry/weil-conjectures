@@ -20,8 +20,12 @@ import Mathlib.CategoryTheory.Limits.EssentiallySmall
 # Coefficient-universe instances for K-flat complexes
 
 Sheafification of abelian presheaves in a coefficient universe containing the site, as used
-by the K-flatness predicates of `WeilConjectures.Algebra.Homology.KFlat`
-(auxiliary; not a blueprint node).
+by the K-flatness predicates of `WeilConjectures.Algebra.Homology.KFlat`.
+
+## References
+
+* Stacks Project, Modules on Sites, Section 03DA
+* Stacks Project, Cohomology on Sites, Tag 06YN
 -/
 
 @[expose] public section
@@ -38,15 +42,7 @@ variable {C : Type u} [Category.{v} C] [hsmall : EssentiallySmall.{w} C]
   {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{w})
 
-/-- Abelian sheafification exists and is left exact in any universe containing the site.
-Source: Stacks Project, Modules on Sites, Section 03DA, and Cohomology on Sites,
-Definition 06YN (blueprint: def-pc-kflat-complex).
-
-Proof: choose the small model of the site in the coefficient universe, where the usual
-abelian sheafification exists. Conjugate its adjunction by the equivalences of presheaf
-and sheaf categories induced by the small-model equivalence. Equivalences preserve
-finite limits, so the transported left adjoint remains left exact. The adjunction
-determines sheafification up to unique natural isomorphism. -/
+/-- Abelian sheafification exists and is left exact in any universe containing the site. -/
 @[instance]
 theorem hasSheafify_coefficientUniverse : HasSheafify J AddCommGrpCat.{w} := by
   have : PreservesFilteredColimitsOfSize.{w, w}
@@ -56,14 +52,7 @@ theorem hasSheafify_coefficientUniverse : HasSheafify J AddCommGrpCat.{w} := by
   exact hasSheafifyEssentiallySmallSite J AddCommGrpCat.{w}
 
 /-- Locally bijective maps are exactly sheafification equivalences for abelian groups
-in any coefficient universe relative to which the site is essentially small.
-Source: Stacks Project, Modules on Sites, Section 03DA, and Cohomology on Sites,
-Definition 06YN (blueprint: def-pc-kflat-complex).
-
-Proof: replace the site by its small model in the coefficient universe. On that model,
-apply the usual concrete sheafification criterion for abelian groups. Transport the
-criterion back along the dense equivalence; local injectivity and surjectivity and
-sheafification equivalences are invariant under this equivalence. -/
+in any coefficient universe relative to which the site is essentially small. -/
 @[instance]
 theorem wEqualsLocallyBijective_coefficientUniverse :
     J.WEqualsLocallyBijective AddCommGrpCat.{w} := by

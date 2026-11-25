@@ -14,8 +14,9 @@ import WeilConjectures.Algebra.Homology.HomComplexProjections
 
 /-! # The ordinary evaluation differential on one tensor summand
 
-Source: Stacks Project, Tag 08DQ, and Section 20.41.
-(blueprint: lem-pc-ordinary-evaluation-differential-summand).
+## References
+
+* Stacks Project, Tag 08DQ, and Section 20.41.
 -/
 
 @[expose] public section
@@ -45,24 +46,8 @@ private theorem projection_transport (X : Scheme.{u}) (U : X.Opens)
   simp
 
 set_option backward.isDefEq.respectTransparency true in
-/-- On a single tensor summand, evaluation satisfies the projected differential equation.
-Source: Stacks Project, Tag 08DQ, ordinary complex comparison; Section 20.41,
-Hom-complex differential.
-(blueprint: lem-pc-ordinary-evaluation-differential-summand).
-
-Proof: Use the specified component formula for the graded maps e. On the summand
-F^p tensor D^q, the total differential is d_F tensor 1 plus (-1)^p times
-1 tensor d_D. Expand the differential of Hom(P,F) after its rth projection:
-postcomposition with d_F minus (-1)^n precomposition with d_P. For r+q=0,
-only the d_F terms remain; evaluation and the right unit action are natural
-in F, so these terms agree. For r+q=-1, only the d_P terms remain. Expand
-the Hom differential of D=Hom(P,O[0]); the differential of O[0] vanishes,
-so it is -(-1)^q times precomposition with d_P. Naturality in P identifies
-these contributions and (-1)^p (-1)^q=(-1)^(p+q)=(-1)^n gives the sign.
-For every other r+q, both component formulas are zero. The degree transports
-agree by proof irrelevance. These arguments apply to zero terms and empty
-opens; no boundedness or perfectness is used. This is only a calculation on
-one summand and one projection, without assembling the global equation. -/
+/-- On a single tensor summand, evaluation satisfies the projected differential equation
+(Stacks, Tag 08DQ). -/
 theorem ordinaryEvaluation_differential_summand (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ)
     (e : ∀ n : ℤ, (localEvaluationTensor X U P F).X n ⟶

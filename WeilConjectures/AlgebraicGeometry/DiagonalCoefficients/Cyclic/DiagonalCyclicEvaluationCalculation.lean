@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyc
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicLimitClassSolution
 
 /-! # Calculation of cyclic transport with a named equation type
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: lem-diagonal-cyclic-evaluation-calculation).
 -/
 
 @[expose] public noncomputable section
@@ -65,10 +62,7 @@ attribute [local semireducible] cyclicHomEquation finiteCyclicTransportEquation
   cyclicLimitClassSolutionSpec cyclicRepresentativeSolution cyclicNormalizedLimitEquation
   DiagonalTrace.SupportedSourceConeNormalization
 
-/-- The normalized limit presentation supplies the finite transport input.
-Source: diagonal limit (3) (blueprint: lem-diagonal-cyclic-evaluation-calculation).
-Proof: extract the strict class and normalized cone witnesses, then apply
-the proved normalized transport calculation. -/
+/-- The normalized limit presentation supplies the finite transport input. -/
 theorem diagonalCyclicEvaluation_calculation
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]

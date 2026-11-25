@@ -11,8 +11,10 @@ import WeilConjectures.Algebra.Homology.DerivedExtensionRingEquivCounit
 
 /-! # Universal derived extension under coefficient equivalences
 
-Source: Stacks Project, Tags 06Y6 and 05RR.
-(blueprint: lem-pc-derived-extension-ring-equiv-cohomology). -/
+## References
+
+* Stacks Project, Tags 06Y6 and 05RR
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -86,24 +88,7 @@ private theorem exists_scalarExtension_ringEquiv
   exact ⟨t, fun M b x ↦ TensorProduct.congr_tmul c (h M) b x⟩
 
 /-- Universal derived scalar extension, before specifying any extra algebra action,
-commutes with coefficient equivalences, together with its counit on cohomology.
-
-Proof: construct the ordinary scalar-extension isomorphism before deriving.
-The coefficient equivalence eB is eR-semilinear by hRB, and the identity
-additive equivalence from an R-module restricted along eR to itself is also
-eR-semilinear. TensorProduct.congr gives an additive equivalence on tensors.
-Tensor induction proves B0-linearity, so it gives the module isomorphism.
-On b tensor x the formula is eB(b) tensor x. Extension of scalars sends tensors
-to tensors with the input map applied, so this formula also proves naturality.
-Apply the natural isomorphism termwise to get t on complexes. The theorem
-exists_derivedExtension_ringEquiv_counit transports the two universal derived
-functors and their counits through the coefficient equivalences, giving d
-and its cohomology square. Combine t, d, and their two established properties.
-No additional algebra action, model cohomology, or chosen input complex is used.
-The construction includes zero rings and complexes and every degree.
-Source: Stacks Project, Tag 06Y6, Lemma 15.61.1 (independence of choices),
-and Tag 05RR, localization of homotopy categories.
-(blueprint: lem-pc-derived-extension-ring-equiv-cohomology). -/
+commutes with coefficient equivalences, together with its counit on cohomology. -/
 theorem exists_derivedExtension_ringEquiv_cohomology
     {R₀ B₀ R B : Type u}
     [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B]

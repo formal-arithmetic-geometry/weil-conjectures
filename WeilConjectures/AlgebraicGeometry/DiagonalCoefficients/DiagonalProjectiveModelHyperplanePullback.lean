@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModels
 import all WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line.ProjectiveLineAutomorphismHyperplane
 
-/-! # Hyperplane pullback for independently chosen projective-line models -/
+/-! # Hyperplane pullback for independently chosen projective-line models
+
+## References
+
+* EGA II, Remark 4.2.7
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -17,18 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- A Cartesian inverse image of one relative hyperplane class is the other
-relative hyperplane class times a line from the base.
-
-Source: diagonal coefficients (3), the change of projective-line model; EGA II,
-Remark 4.2.7 (blueprint: lem-diagonal-projective-model-hyperplane-pullback).
-
-Proof: the Cartesian square and the old projective model identify the new total
-space with the canonical projective line over the new base. Compare this model
-with the independently chosen new model. Their difference is an automorphism over
-the new base. Such an automorphism preserves O(1) modulo a base line. The canonical
-projective-space base-change map preserves the tautological O(1), so pulling the
-automorphism formula back through the new model gives the claimed factorization.
-The argument also applies to disconnected, nonreduced and empty schemes. -/
+relative hyperplane class times a line from the base. -/
 theorem diagonalProjectiveModel_hyperplanePullback
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (hX : X' ⟶ X) (hS : S' ⟶ S)

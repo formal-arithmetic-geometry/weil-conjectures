@@ -61,7 +61,6 @@ import WeilConjectures.Algebra.Homology.ProjectionCoherence.RingedProjectionCohe
 set_option linter.privateModule false
 
 /-! Canonical tensor constraints for arbitrary recorded representative models.
-(blueprint: lem-sfb-ringed-projection-tensor-constraints)
 -/
 
 @[expose] public section

@@ -16,8 +16,10 @@ import all WeilConjectures.CategoryTheory.GeometricModuleTransport
 The ordinary scalar pullback comparison (`ordinaryPullComparison_existsUnique`).
 
 Part of the split of `Sheaf.Paper.ConstantCompletionEquivalence`.
-Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
-(auxiliary; not a blueprint node).
+
+## References
+
+* Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
 -/
 
 @[expose] public noncomputable section
@@ -321,12 +323,8 @@ private theorem pull_homEquiv {R : Sheaf J CommRingCat.{u}}
   rfl
 
 /-- The unreduced scalar comparison on ordinary modules is fixed by scalar insertion.
-This is exactly u^(-1)M → u^(-1)M tensor the completed coefficient ring after inverse image.
-Source: Stacks 06YY, 099L (auxiliary; not a blueprint node).
-Proof: the finite projections make the coefficient square commute. After identifying
-inverse images of constant coefficients, define q by m ↦ 1 tensor m. It is linear over
-the constant coefficient sheaf, and natural in M. Pure tensors generate after
-sheafification, so the insertion equation determines q uniquely. -/
+This is exactly u^(-1)M → u^(-1)M tensor the completed coefficient ring after inverse image
+(Stacks, Tags 06YY and 099L). -/
 theorem ordinaryPullComparison_existsUnique (A : Type u) [CommRing A] (I : Ideal A) :
     ∃! q : res (coefficientMap J A I) ⋙ pull F (constantMap F A) ⟶
         pull F (completedMap F A I) ⋙ res (coefficientMap J' A I),

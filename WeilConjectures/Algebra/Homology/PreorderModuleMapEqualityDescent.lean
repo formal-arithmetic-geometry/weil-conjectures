@@ -17,8 +17,9 @@ import WeilConjectures.Algebra.FinitePresentationColimit
 
 /-! # Equality descent for module maps over a directed preorder
 
-Source: Stacks Project, Algebra, Tag 05N7 (3).
-(blueprint: lem-pc-preorder-module-map-equality-descent)
+## References
+
+* Stacks Project, Algebra, Tag 05N7 (3)
 -/
 
 @[expose] public section
@@ -65,23 +66,7 @@ private theorem finitePresentation_extendScalars
   change Module.FinitePresentation S (TensorProduct R S M)
   infer_instance
 
-/-- Equality of maps between finitely presented modules is detected at a later stage.
-Source: Stacks Project, Algebra, Tag 05N7 (3).
-
-Proof: Let J be the antisymmetrization of I, and H : J → I a monotone choice
-of representatives. J is a nonempty directed partial order, and H is final because
-every index lies below its representative. Hence c : colimit (H ⋙ F) → colimit F
-is an isomorphism. Extend M,N and f,g from i to the representative p of i. They
-remain finitely presented, and functoriality of the colimit cocone and naturality of
-extendScalarsComp identify their extensions to colimit F with those of f,g. Their
-extensions to colimit (H ⋙ F) also agree: extension along the isomorphism c reflects
-equality, as extension along its inverse and extendScalarsId recover the original
-maps. Apply the equality clause of finitePresentation_descent_directedColimit to
-H ⋙ F at the class of i. Its later quotient index j gives p ≤ H(j), hence i ≤ H(j).
-Naturality of extendScalarsComp identifies the iterated extension of f,g through p
-with direct extension from i to H(j), proving the result. This includes mutually
-comparable distinct indices, equal maps, and zero modules; i ensures nonemptiness.
-(blueprint: lem-pc-preorder-module-map-equality-descent) -/
+/-- Equality of maps between finitely presented modules is detected at a later stage. -/
 theorem eventually_equal_maps_of_directed_preorder_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i : I) (M N : ModuleCat.{u} (F.obj i))

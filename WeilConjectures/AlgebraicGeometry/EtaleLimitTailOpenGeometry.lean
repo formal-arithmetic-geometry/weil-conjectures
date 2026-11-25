@@ -11,7 +11,9 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # The explicit inverse diagram of tail opens
 
-Source: Stacks Project, Tag 09YQ, restriction to inverse-image opens.
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section
@@ -34,16 +36,7 @@ private def tailOverEquivalence {I : Type u} [Preorder I] (i₀ : I) :
   unitIso := NatIso.ofComponents (fun j ↦ eqToIso (by rfl))
   counitIso := NatIso.ofComponents (fun j ↦ Over.isoMk (Iso.refl _))
 
-/-- The explicit tail-open cone is limiting.
-Source: Mathlib `isLimitOpensCone`; Stacks Project, Tag 09YQ.
-(blueprint: lem-weil-pbc-etale-limit-tail-open-geometry).
-
-Proof: The opposite of the tail is equivalent to Over(op i₀). Under this
- equivalence, pull back Mathlib's opens diagram and its limiting cone for
- g₀⁻¹(W). The preimage-of-composition equality identifies every object with
- the displayed tail open. The restrictions have the same composites with
- their open inclusions, so these identifications intertwine the arrows and
- projections. Transport the limit along the diagram and cone isomorphisms. -/
+/-- The explicit tail-open cone is limiting (Stacks, Tag 09YQ). -/
 private theorem tailOpenCone_isLimit {I : Type u} [Preorder I]
     [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)
@@ -79,9 +72,8 @@ private theorem tailOpenCone_isLimit {I : Type u} [Preorder I]
       exact congrArg (fun f ↦ f ≫ c.π.app (op j.unop.val)) hi.symm)
   exact ⟨((IsLimit.postcomposeHomEquiv q _).symm h).ofIsoLimit r⟩
 
-/-- Restricted transition maps are affine base changes of the original transitions.
-Source: Stacks Project, Tag 09YQ; Mathlib stability of affine maps under base change.
-(blueprint: lem-weil-pbc-etale-limit-tail-open-geometry). -/
+/-- Restricted transition maps are affine base changes of the original transitions (Stacks, Tag
+09YQ). -/
 private theorem tailOpenDiagram_affine {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u})
     [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]
@@ -98,15 +90,7 @@ private theorem tailOpenDiagram_affine {I : Type u} [Preorder I]
       rfl
   exact MorphismProperty.of_isPullback hp.flip (inferInstance : IsAffineHom a)
 
-/-- Every stage open is quasi-compact and quasi-separated, and the least is W.
-Source: Stacks Project, Tag 09YQ; affine preimages preserve quasi-compactness.
-(blueprint: lem-weil-pbc-etale-limit-tail-open-geometry).
-
-Proof: The open O⁻¹(W) is isomorphic to W since W ≤ O. Pull it back along e
- and then along each affine transition. Compactness is preserved in each
- step. Quasi-separatedness is inherited by open subspaces. At the least
- index the transition is the identity, so restriction of e followed by
- the preceding open isomorphism identifies the stage with W. -/
+/-- Every stage open is quasi-compact and quasi-separated, and the least is W (Stacks, Tag 09YQ). -/
 private theorem tailOpenDiagram_geometry
     (X : Scheme.{u}) (O W : X.Opens) (hW : IsCompact (W : Set X)) (hWO : W ≤ O)
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
@@ -144,19 +128,8 @@ private theorem tailOpenDiagram_geometry
     exact ⟨(D.obj (op i₀)).isoOfEq heq ≪≫ e.hom.preimageIso _ ≪≫
       Scheme.Opens.isoOfLE hWO⟩
 
-/-- The explicit tail-open diagram retains the geometric hypotheses of a system.
-Source: Stacks Project, Tag 09YQ, restriction to opens; Mathlib `isLimitOpensCone`.
-(blueprint: lem-weil-pbc-etale-limit-tail-open-geometry).
-
-Proof: Identify the opposite tail with Over(op i₀), restrict Mathlib's opens
-cone for (e;O.ι)⁻¹W, and transport across preimage-of-composition isomorphisms.
-This proves the limit assertion. Each transition is a pullback of an affine
-transition of D, hence affine. The open O⁻¹W is isomorphic to W because
-W ≤ O. Its pullback along e is compact, and affine preimages preserve
-compactness at every later stage. Open subspaces of quasi-separated spaces
-are quasi-separated. At the least index the transition is the identity;
-restricting e and using O⁻¹W ≅ W gives the final isomorphism. The empty-open
-and singleton cases satisfy all these constructions without extra hypotheses. -/
+/-- The explicit tail-open diagram retains the geometric hypotheses of a system (Stacks, Tag
+09YQ). -/
 theorem etale_limit_tail_open_geometry
     (X : Scheme.{u}) (O W : X.Opens) (hW : IsCompact (W : Set X)) (hWO : W ≤ O)
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]

@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechNormaliza
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaQuasiIso
 
 /-! # Descent of the coefficient augmentation to homology
-Source: Stacks Project, Tags 03P2 and 01FD. -/
+
+## References
+
+* Stacks Project, Tag 03P2 (Theorem 59.22.4)
+* Stacks Project, Tag 01FD (Lemma 20.15.1)
+-/
 
 @[expose] public section
 
@@ -39,29 +44,7 @@ private theorem mapHomologyIso_inv_π
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
-/-- Beta lifts cycles additively and descends to a bijective additive homology map.
-Source: Stacks Project, Tag 03P2, Theorem 59.22.4, separated-case proof,
-and Tag 01FD, Lemma 20.15.1, the coefficient augmentation.
-(blueprint: lem-pbc-etale-additive-cech-beta-homology)
-
-Proof: Forget module scalars in the ordinary unit Čech complex and apply ULift.
-The structural-function coordinates restrictFunctorΓ identify each lifted
-intersection section with the additive structure sheaf on that open subscheme.
-Their naturality makes the coefficient augmentation into I⁰ commute with the
-Čech differential. Its resolution differential is zero since I.ι is a chain
-map from the single complex. Thus it is a chain map into the total, with
-components given by additiveCechBeta after lifting. It takes cycles to cycles
-and boundaries to boundaries; descend through the homology cokernel to obtain
-b, with the stated representative formula. Each tuple intersection is affine,
-so its positive étale quasi-coherent cohomology vanishes. The column
-augmentations are quasi-isomorphisms, and the first-quadrant criterion applied
-after flipping the double complex gives a quasi-isomorphism on totals. Exact
-forgetting and ULift preserve homology; the finite-product coordinates and
-identity scalar restriction identify the source homology with ordinary unit
-cechOver homology. Thus b is bijective. The cycle map c is additive because
-beta is additive and the inclusion of total cycles is injective. Degree zero
-is the augmented kernel calculation. Empty intersections have zero sections;
-an empty cover forces X empty, so all maps are between zero groups. -/
+/-- Beta lifts cycles additively and descends to a bijective additive homology map. -/
 theorem exists_additiveCechBeta_homology
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     {ι : Type u} [Finite ι] (U : ι → X.Opens)

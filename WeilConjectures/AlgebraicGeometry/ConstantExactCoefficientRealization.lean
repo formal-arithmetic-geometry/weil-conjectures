@@ -10,8 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.ConstantRealizationDerivedScalarExt
 
 /-! # Exact constant coefficient realization and finite quotient normalization
 
-Source: Stacks Project, Tags 093M, 099M and 03EK.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 093M, 099M and 03EK
 -/
 
 @[expose] public noncomputable section
@@ -310,20 +311,8 @@ open FiniteCoefficientRealization
 
 /-- Exact constant realization followed by scalar extension identifies the regular
 module and all finite quotients, with their scalar and quotient unit formulas.
-This is entirely a statement about ordinary modules, without Koszul complexes.
-
-Source: Stacks Project, Tags 093M, 099M and 03EK.
-(auxiliary; not a blueprint node).
-
-Proof: take constant-module sheafification followed by change of rings along
-baseMap. Both functors are exact, the second by flat_and_quotients or the identity
-map. Its regular-module isomorphism is the map given by the global section
-1 tensor 1. The scalar equation is checked on that section. Send a local tensor
-s tensor [a] to pi(s)[a] in the restricted constant quotient. The sectionwise
-surjectivity and kernel formula in flat_and_quotients construct its inverse by
-linear descent; these inverses commute with restrictions. The quotient unit
-formula follows by evaluation at 1. The same argument covers I=0, I=A and zero
-rings, since only quotient universal properties are used. -/
+This is entirely a statement about ordinary modules, without Koszul complexes
+(Stacks, Tags 093M, 099M and 03EK). -/
 theorem constantExactCoefficientRealization
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (b : Bool) :

@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleDiagonalTriangles
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteCounitCoefficient
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceEvaluationNormalization
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
-
 # Triangles from the scalar coordinate integrals, with coefficient transport
 -/
 @[expose] public noncomputable section
@@ -80,15 +77,7 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFun
   derivedUpperStarLowerStarAdjunction
 
 /-- Scalar coordinate traces and their two diagonal integrals imply the transported
-triangles for the prescribed trace counit.
-Source: blueprint thm-amb-p1-adjunction.proof.md, the two triangle calculations.
-(auxiliary; not a blueprint node).
-Proof: apply the even-line coordinate contraction theorem to the two exchange
-identities. Tensor the first scalar section integral by the section projection law.
-The generic supported-diagonal calculations give both triangles for coordinate
-evaluation. The coefficient naturality square and the trace/evaluation comparison
-identify evaluation with the counit transported along the supplied coefficient
-isomorphism. Transport the two triangles along this isomorphism. -/
+triangles for the prescribed trace counit. -/
 theorem evenLineDiagonalUnit_triangles
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]

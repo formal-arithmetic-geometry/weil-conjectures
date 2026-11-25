@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteZeroCokernel
 /-!
 # Finite affine free covers of constructible module sheaves
 
-Source: Stacks Project, Etale Cohomology, Tag 095N, proof of the finite surjection.
-(blueprint: lem-weil-pbc-constructible-module-finite-epimorphism).
+## References
+
+* Stacks Project, Tag 095N
 -/
 
 @[expose] public section
@@ -26,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A zero cokernel map is epi.
-(blueprint: lem-weil-pbc-constructible-module-finite-epimorphism) -/
+/-- A zero cokernel map is epi. -/
 theorem exists_affine_free_etale_epimorphism
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

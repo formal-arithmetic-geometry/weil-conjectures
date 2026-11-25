@@ -20,20 +20,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Generic finite local constancy on every closed subscheme implies constructibility.
-Source: Stacks Project, Tag 09BH, Noetherian-induction step, and Tag 095E
-(blueprint: lem-weil-pbc-constructible-closed-generic-criterion).
-
-Proof: Induct on closed subsets of X, giving each its reduced induced subscheme.
-The empty subset has the empty stratification. For a nonempty closed subset Z,
-apply the hypothesis to obtain a dense open U on which the restriction of F is
-finite locally constant. Its complement is a proper closed subset of Z and thus
-of X. The induction hypothesis supplies a finite stratification of this complement.
-Append U as one stratum. Composition of immersions gives schemes realizing the
-strata in Z, and pullback composition identifies the restrictions. All strata are
-locally closed and therefore constructible in a Noetherian space. Finally apply
-this construction to X itself. Closed subschemes of X are Noetherian, so the
-hypothesis applies at each stage. No assumption on any target sheaf is used. -/
+/-- Generic finite local constancy on every closed subscheme implies constructibility
+(Stacks, Tags 09BH and 095E). -/
 theorem constructible_of_closed_generic
     {X : Scheme.{u}} [IsNoetherian X] {Λ : Type (u + 1)} [CommRing Λ]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

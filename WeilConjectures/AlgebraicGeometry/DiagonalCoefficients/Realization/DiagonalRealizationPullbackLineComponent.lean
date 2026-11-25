@@ -17,24 +17,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
-/-- The canonical derived comparison has the prescribed shifted-line component.
-Source: diagonal coefficient changes paragraph (3), endpoint transport.
-(blueprint: lem-sfb-diagonal-realization-pullback-line-component).
-
-Proof: transport `coeff` to the canonical map using `hc`. At the ordinary
-completed line, cancel the canonical ordinary comparison and apply the upper-star
-adjunction's Hom bijection. Use `diagonalPullbackOrdinaryComparison_transpose` and the
-underlying-sheaf normalization of the ordinary right square. Before localization,
-compose the integral line adjoints with each finite-root projection: the normalization
-in `d` and the realization's line normalization identify both with the canonical
-finite direct-image root map. The limit universal property identifies the integral
-adjoints; localization and faithfulness of forgetting module action give the ordinary
-line equation. Apply the exact-derived single component formula to that equation,
-then shift by two. The canonical comparison commutes with shifts: exact-derived
-squares have their canonical shift structure, and the geometric upper-star comparison
-preserves it by K-flat adjunction transport. Naturality of these shift and single
-comparisons identifies the resulting expression with the displayed equation.
-Finite-root projections are used only on ordinary integral maps. -/
+/-- The canonical derived comparison has the prescribed shifted-line component. -/
 theorem diagonalRealization_pullback_line_component
     (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian X] [IsNoetherian S]

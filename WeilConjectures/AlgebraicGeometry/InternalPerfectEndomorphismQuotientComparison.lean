@@ -50,21 +50,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The actual internal endomorphism tower has the scalar quotient cohomology model,
-including all its quotient arrows.
-
-Source: current blueprint, `proposition-local-structure-integral-constructible-complexes`,
-Compatible isomorphisms, paragraph beginning These Hom groups can be infinite; Stacks Tag 09C5.
-(blueprint: lem-pe-internal-perfect-endomorphism-quotient-comparison).
-
-Proof: apply the actual internal endomorphism/Hom comparison to obtain natural
-bijections with locally constant H^0 of the quotient of moduleHomComplex(P,P).
-Apply the finite-free dual-tensor/Hom isomorphism, in the inverse direction, to
-identify that complex with the explicit dual tensor Q. The induced cokernel
-isomorphisms on scalar quotients commute with quotient transitions: this follows
-after precomposing with the epimorphic cokernel projection. Functoriality of homology
-gives commuting homology isomorphisms. Postcompose the locally constant functions
-with these isomorphisms. The two naturality squares compose to give the displayed
-formula, for every n<=m. No choice of an arbitrary target model enters. -/
+including all its quotient arrows (Stacks, Tag 09C5). -/
 theorem internalPerfectEndomorphism_quotientComparison
     (X : Scheme.{u}) (W : X.ProEt) (_hAffine : IsAffine W.left)
     (_hweak : (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} W)

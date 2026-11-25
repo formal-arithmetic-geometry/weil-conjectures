@@ -14,8 +14,9 @@ import Mathlib.AlgebraicGeometry.StructureSheaf
 
 /-! # Unique gluing on principal affine covers
 
-Source: Stacks Project, Tag 01HV (associated module sheaves).
-(blueprint: lem-pc-localizing-principal-cover-gluing).
+## References
+
+* [Stacks, Tag 01HV](https://stacks.math.columbia.edu/tag/01HV)
 -/
 
 @[expose] public section
@@ -30,28 +31,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- Scalar restriction and localization equivalences require additional elaboration work.
 /-- A localizing module presheaf has unique gluing on every cover of one affine
-open by its principal opens.
-Source: Stacks Project, Tag 01HV, Lemma `lemma-spec-sheaves` (4),(5).
-(blueprint: lem-pc-localizing-principal-cover-gluing).
-
-Proof: Put A = Gamma(T,W) and N = P(W). Restrict scalars on P(D(a)) to A.
-Localization uniqueness gives an A-linear equivalence e(a) from P(D(a)) to
-sections of the associated module sheaf of N on Spec A over D(a), carrying the
-restriction of n to the constant section n. For the maps D(ab) to D(a) and
-D(b), bundle P's restrictions as A-linear maps using map_smul and map_comp.
-The two composites with e(ab) agree on N, hence agree on the localized module:
-in the target multiplication by ab is a unit endomorphism, so multiplication
-by either a or b is a unit, and IsLocalizedModule.ext applies. This proves
-compatibility with both overlap restrictions. The affine principal-cover
-criterion gives Ideal.span(s) = top, hence the same principal opens cover
-Spec A. Transfer the given matching family by e(a), test compatibility on
-D(ab), and glue in the associated module sheaf. Its global sections are N,
-so the glued section comes from n in N. Naturality and injectivity of e(a)
-give all required restrictions of n. Another amalgamation yields another
-global section with the same restrictions, so uniqueness in the associated
-sheaf and the bijectivity of its global constant-section map prove equality.
-For the empty cover the span criterion forces the zero ring, and the sheaf's
-empty-cover gluing proves the same existence and uniqueness with no exception. -/
+open by its principal opens. (Stacks, Tag 01HV) -/
 theorem isSheafFor_principalCover_of_localizing
     (T : Scheme.{u}) (P : _root_.PresheafOfModules.{u} T.ringCatSheaf.obj)
     (W : T.affineOpens)

@@ -13,8 +13,10 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 /-! # Multiplication and unit for a supplied ring inverse image comparison
 
-Source: Stacks Project, Tags 00YV and 03D2.
-(blueprint: lem-weil-pbc-supplied-ring-comparison-operations). -/
+## References
+
+* Stacks Project, Tags 00YV and 03D2
+-/
 
 @[expose] public section
 
@@ -60,22 +62,8 @@ private noncomputable def ringOne.{uC, vC, w} {C : Type uC} [Category.{vC} C]
        ext x
        exact (G.obj.map f).hom.map_one |>.symm }⟩
 
-/-- Source: Stacks Project, Tags 00YV and 03D2, identification of transported
-ring operations by uniqueness of the lifted adjoint.
-(blueprint: lem-weil-pbc-supplied-ring-comparison-operations).
-
-Proof: Define multiplication and one as their sectionwise sheaf maps. Apply
-compatibility to the identity of Lr(O) to express the underlying ring-adjunction
-unit through the set unit and er.inv. Under the set adjunction, the two
-projections of the inverse-image product comparison followed by er.inv become
-the source projections followed by that ring unit. The multiplication transport
-equation therefore becomes the assertion that this unit preserves
-multiplication, checked sectionwise as a ring homomorphism. The constant one
-transport equation similarly becomes preservation of one; there is only one
-map to the terminal object. Cancel er.inv to recover the required equations.
-This is the multiplication and unit part of the argument of
-`etaleInverseImageRingLift`, applied to the supplied lift instead of a chosen
-canonical lift. No choice of a lifted object and no module action is required. -/
+/-- The ring operations on the lifted étale inverse image are identified with the transported
+ones, by uniqueness of the lifted adjoint (Stacks, Tags 00YV and 03D2). -/
 theorem etaleInverseImageRingComparisonOperations (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     [PreservesFiniteLimits (Scheme.etaleSetPullback f)] :

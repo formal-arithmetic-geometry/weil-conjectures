@@ -58,15 +58,8 @@ private noncomputable def isColimitCoeffLegCocone (X : Scheme.{u}) :
     simp [Mod.smulSequenceCompIso, F, coeffLeg]
 
 /-- The restricted rational coefficient module is the localization telescope of the
-regular integral module, with stage `n` dividing the canonical inclusion by `ℓ ^ n`.
-Source: Bhatt--Scholze, Section 6.8 and Proposition 6.8.14(2).
-(auxiliary; not a blueprint node)
-
-Proof. The diagram is base `Mod.smulSequence` of the regular integral module and the nth
-leg is `p_X^*(ℓ⁻ⁿ φ)`, linear by base `Mod.linear_of_isColimit`. On underlying abelian sheaves
-this is the colimit `isColimitCoefficientMapSmulSequenceCocone` (base
-`Mod.isColimitSmulSequenceCoconeMap`), which the forgetful functor reflects. The leg relation
-is base `Mod.pow_sub_nsmul_eq`, and the zeroth leg is `p_X^* φ`. -/
+regular integral module, with stage `n` dividing the canonical inclusion by `ℓ ^ n`
+(Bhatt–Scholze, Section 6.8 and Proposition 6.8.14(2)). -/
 theorem integralCoefficient_localization_telescope (X : Scheme.{u}) :
     ∃ (D : ℕ ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (integralCoeff ℓ E) X)) (c : Cocone D)

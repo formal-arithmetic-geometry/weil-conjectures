@@ -9,7 +9,14 @@ public import WeilConjectures.Algebra.Homology.SignedLineDerivedBaseChange.Signe
 import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSupplement
 import all WeilConjectures.Algebra.Homology.LineEvaluation.LineEvaluationInversePair
 
-/-! # Ordinary constraints for signed tensor powers -/
+/-! # Ordinary constraints for signed tensor powers
+
+## References
+
+* Stacks Project, Tag 03EK
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 0FNY
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -157,15 +164,7 @@ private def ordinary_evaluation (L : KFlatFixedTensor.Modules A) :
     rw [scalarTensor_first_tmul, scalarTensor_first_tmul,
       ordinary_eval_pure, ordinary_eval_pure, map_smul]
 
-/-- The unit, reassociation and evaluation of signed powers have their sectionwise formulas.
-Source: Stacks Project, Modules on Sites, Tags 03EK, 03EL and 0FNY.
-(blueprint: lem-pur-signed-line-ordinary-constraints)
-Proof: sheafify the sectionwise tensor unitor and associator. Their naturality follows
-by generation by pure tensors; for a triple tensor, first pass to a cover on which the
-inner section comes from its presheaf tensor. Evaluation is reassociation, the tensor
-of a functional with its argument, the usual internal-Hom evaluation, and the unitor.
-The sheafification-unit formula gives contraction by the value of that functional.
-Naturality follows from linearity, again checked on local pure tensors. -/
+/-- The unit, reassociation and evaluation of signed powers have their sectionwise formulas. -/
 theorem signed_line_ordinary_constraints (P : KFlatFixedTensor.Modules A) :
   ∃ ordinaryUnit : siteSheafTensorRight (signedLinePower.{u, v, w} P 0) ≅ 𝟭 _,
   ∃ ordinaryProduct : ∀ n : ℕ,

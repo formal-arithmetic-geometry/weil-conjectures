@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.SectionRestrictionSTorsion
 
 /-! # Localization of sections at a section of an invertible module
 
-Source: Stacks Project, Properties, Lemma 01PW (lemma-invert-s-sections), part (2),
-equation module-invert-s (blueprint: lem-sc-p1-invertible-section-localization).
+## References
+
+* Stacks Project, Properties, Lemma 01PW, part (2).
 -/
 
 @[expose] public section
@@ -85,17 +86,7 @@ private theorem fraction_normal_form {X : Scheme.{uL}} (L F : X.Modules)
 /-- Degree-zero section fractions identify canonically with sections on the nonvanishing
 open. The fraction formula is written without choosing an inverse tensor power:
 `e(t/s^n) ⊗ s^n = t|_U`. Scalar compatibility specifies an isomorphism of modules,
-with scalars restricted along `Γ(X, O_X) → Γ(U, O_X)`.
-Source: Stacks Project, Properties, Lemma 01PW (lemma-invert-s-sections), part (2).
-(blueprint: lem-sc-p1-invertible-section-localization).
-
-Step 1: if a fraction restricts to zero, its numerator restricts to zero because `s`
-trivializes `L` on this open. Apply lem-sc-p1-section-restriction-s-torsion to obtain a
-power of `s` killing the numerator; the fraction relations then kill the fraction.
-Step 2: for a section on this open, lem-sc-p1-section-clearing-denominators-qcqs gives a
-nonnegative exponent and a global twisted numerator whose restriction is the section
-multiplied by that power of `s`. This fraction maps to the original section.
-The tensor construction is additive and commutes with scalar restriction. -/
+with scalars restricted along `Γ(X, O_X) → Γ(U, O_X)`. (Stacks, Lemma 01PW) -/
 theorem exists_sectionFraction_nonvanishing_equiv
     (X : Scheme.{uL}) [CompactSpace X] [QuasiSeparatedSpace X]
     (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤))

@@ -53,8 +53,9 @@ Compare the actual completed coefficient presentation with the inverse limit of 
 quotient sheaves, apply the ordinary scalar-extension quotient theorem, and then pass to
 complexes concentrated in degree zero.
 
-Source: Stacks Project, Tags 093M and 099M.
-(blueprint: new-s3-completed-koszul-finite-quotient-comparison).
+## References
+
+* Stacks Project, Tags 093M, 099M, 0921
 -/
 
 @[expose] public noncomputable section
@@ -589,9 +590,7 @@ private lemma quotientUnit_normalization {C : Type*} [Category* C] [MonoidalCate
   rw [whisker_exchange_assoc, leftUnitor_naturality,
     unitors_equal, rightUnitor_naturality_assoc, Iso.inv_hom_id_assoc]
 
-/-- A finite quotient comparison, isolated from exactness of the coefficient functor.
-Source: Stacks Project, Tags 099M, 0921 and 093M.
-(blueprint: new-s3-completed-koszul-finite-quotient-comparison). -/
+/-- A finite quotient comparison, isolated from exactness of the coefficient functor. -/
 theorem completedKoszulFiniteQuotientComparison
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :

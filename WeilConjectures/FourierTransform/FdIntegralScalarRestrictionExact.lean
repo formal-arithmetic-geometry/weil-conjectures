@@ -15,7 +15,27 @@ import all WeilConjectures.FourierTransform.FdIntegralStageExact
 
 /-! # Shifts and exactness of the integral scalar comparison
 
-Source: trace-definition coefficient-category comparison, integral steps 1--6.
+A comparison fixed on good representatives by the actual completion map preserves its
+prescribed shifts, and its two endpoint composites are exact; this is part of the integral
+coefficient-category comparison used in the definition of the trace function.
+
+## Implementation details
+
+The proof of `fdIntegralScalarRestrictionExact` runs as follows. The ordinary model
+`ordinaryTransportModel` gives the exact derived coefficient square, with the prescribed
+ambient shift, and its equation on every cochain representative after the actual
+`ordinary.completion`. Conjugate `b` by the two stage `integral_identity` isomorphisms and this
+square; lift the result through the fully faithful coefficient transport to a comparison `c`
+of the intrinsic ordinary and completed extensions. On each good representative,
+faithfulness, cancellation of the invertible localization factor and the supplied lift
+equation give the defining equation of `sfIntegralOrdinaryComparison`; its uniqueness
+identifies `c` with it. That comparison commutes with all integer shifts; the stage
+`integral_shift_normalization` and the explicit associators make every other factor
+shift-compatible, so `b` commutes with shifts after the target inclusion, and faithfulness
+reflects this to `b`; inversion gives `b` inverse. Scalar restriction is exact, hence so is its
+left adjoint, ambient scalar extension; the inclusion reflects distinguished triangles, so `C`
+is exact and, with `hI`, so is `I` followed by `C`. Transport along the shift-compatible `b`
+gives exactness of `U` followed by `I`. No inclusion is required to be strict.
 -/
 
 @[expose] public noncomputable section
@@ -247,26 +267,7 @@ private theorem scalarShift
   exact NatTrans.CommShift.of_whiskerRight _ (pbcStageInclusion l Ω T L)
 
 /-- A comparison fixed on good representatives by the actual completion map preserves
-its prescribed shifts; its two endpoint composites are exact.
-Source: trace-definition coefficient comparison, integral step 1
-(blueprint: lem-fd-integral-scalar-restriction-exact).
-
-Proof: The proved ordinary model (lem-fd-integral-ordinary-scalar-model) gives the
-exact derived coefficient square, with the prescribed ambient shift, and its equation
-on every cochain representative after the actual ordinary.completion. Conjugate b by
-the two stage integral_identity isomorphisms and this square; lift the result through
-the fully faithful coefficient transport to a comparison c of the intrinsic ordinary
-and completed extensions. On each good representative, faithfulness, cancellation of
-the invertible localization factor and the supplied lift equation give the defining
-equation of sfIntegralOrdinaryComparison; its uniqueness identifies c with it. That
-comparison commutes with all integer shifts; the stage integral_shift_normalization
-and the explicit associators make every other factor shift-compatible, so b commutes
-with shifts after the target inclusion, and faithfulness reflects this to b; inversion
-gives b inverse. Scalar restriction is exact, hence so is its left adjoint, ambient
-scalar extension; the inclusion reflects distinguished triangles, so C is exact and,
-with hI, so is I followed by C. Transport along the shift-compatible b gives exactness
-of U followed by I. No inclusion is required to be strict.
--/
+its prescribed shifts; its two endpoint composites are exact. -/
 theorem fdIntegralScalarRestrictionExact
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

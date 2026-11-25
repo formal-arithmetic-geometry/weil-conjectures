@@ -30,8 +30,18 @@ additive map of `ℤ/n`-modules being `ℤ/n`-linear.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.tateTwistSheafOneIsoQuotientSpanPow`: blueprint
-  `lem-pur-finite-kummer-level`.
+- `AlgebraicGeometry.Etale.tateTwistSheafOneIsoQuotientSpanPow`: for a discrete valuation ring
+  `𝒪_E` with uniformizer `ϖ` of ramification index `e` over `ℓ`, the twist of `A = 𝒪_E / ϖ^{eN}`
+  is `A(1) ≅ μ_{ℓ^N} ⊗_{ℤ/ℓ^N} A`.
+
+## Implementation details
+
+The sheaves here are on the small étale site; the pro-étale form of these isomorphisms is
+transported by the pro-étale comparison (`WeilConjectures.SixFunctors.ProEtale.Comparison`).
+The freeness `A ≅ (ℤ/ℓ^N)^{ef}` is `IsDiscreteValuationRing.free_quotient_span_pow`
+(`WeilConjectures.RingTheory.DiscreteValuationRing.FiniteKummerLevelFree`), and the compatibility
+with base change is `AlgebraicGeometry.Etale.upperStar_map_tateSheafIso_hom`
+(`WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevelBaseChange`).
 -/
 
 @[expose] public section
@@ -245,33 +255,15 @@ variable {R : Type (u + 1)} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R
   (hϖ : Irreducible ϖ) {ℓ : ℕ} (hℓ : ℓ.Prime) {e : ℕ} (he : 0 < e)
   (hℓe : Associated (ℓ : R) (ϖ ^ e)) (N : ℕ)
 
-/-- Blueprint `lem-pur-finite-kummer-level`: Finite Kummer level of the Tate twist
+/-- Finite Kummer level of the Tate twist: let `R = 𝒪_E` be a discrete valuation ring with
+uniformizer `ϖ` and ramification index `e ≥ 1` over the prime `ℓ`, i.e. `ℓ = (unit) · ϖ^e`, and
+let `n = e N`. Then `A = 𝒪_E / ϖ^n` has characteristic `ℓ^N`, and on every scheme `T` on which
+`ℓ` is invertible the finite-level twist `A(1)_T = μ_{ℓ^N} ⊗_ℤ A`
+(`AlgebraicGeometry.Etale.tateTwistSheaf`) is canonically
 
-Let `R = 𝒪_E` be a discrete valuation ring with uniformizer `ϖ` and ramification index `e ≥ 1`
-over the prime `ℓ`, i.e. `ℓ = (unit) · ϖ^e`, and let `n = e N`, so that `N = n / e = n v_ℓ(ϖ)`.
-Then `A = A_{E,n} = 𝒪_E / ϖ^n` has characteristic `ℓ^N` (`ϖ^n 𝒪_E = ℓ^N 𝒪_E`, and `N` is the
-smallest exponent with `ℓ^N A = 0`; this is
-`IsDiscreteValuationRing.ringChar_quotient_span_pow`), and on every scheme `T` on which `ℓ` is
-invertible the finite-level twist `A(1)_T` (`AlgebraicGeometry.Etale.tateTwistSheaf`, the Tate
-sheaf `μ_{ℓ^N} ⊗_ℤ A` of `definition-tate-twists`) is canonically
+`A(1)_T ≅ μ_{ℓ^N,T} ⊗_{ℤ/ℓ^N} A`,
 
-`A(1)_T ≅ μ_{ℓ^N,T} ⊗_{ℤ/ℓ^N} A`
-
-(this definition, an instance of `AlgebraicGeometry.Etale.tateTwistSheafOneIsoExtendScalarsAlong`),
-the tensor product being over `ℤ/ℓ^N`, with `μ_{ℓ^N}` viewed as a sheaf of `ℤ/ℓ^N`-modules.
-Its compatibility with the derived tensor product is
-`AlgebraicGeometry.Etale.tateTwistObjIsoExtendScalarsAlong`, and its compatibility with base
-change is `AlgebraicGeometry.Etale.upperStar_map_tateSheafIso_hom`
-(`WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevelBaseChange`).
-
-The blueprint clause that `A` is free of rank `ef` over `ℤ/ℓ^N`, `A ≅ (ℤ/ℓ^N)^{ef}`, is
-`IsDiscreteValuationRing.free_quotient_span_pow`
-(`WeilConjectures.RingTheory.DiscreteValuationRing.FiniteKummerLevelFree`).
-
-The blueprint states the isomorphism on the small pro-étale site; as throughout the purity
-chapter (`def-pur-conventions`, `AlgebraicGeometry.Etale.tateTwist`) the sheaves here are on the
-small étale site, the pro-étale form being transported by the pro-étale comparison
-(`WeilConjectures.SixFunctors.ProEtale.Comparison`). -/
+with `μ_{ℓ^N}` viewed as a sheaf of `ℤ/ℓ^N`-modules. -/
 noncomputable def tateTwistSheafOneIsoQuotientSpanPow (T : Scheme.{u})
     [HasInvertibleExponent (R ⧸ Ideal.span {ϖ ^ (e * N)}) T] :
     haveI := IsDiscreteValuationRing.charP_quotient_span_pow hϖ hℓ he hℓe N

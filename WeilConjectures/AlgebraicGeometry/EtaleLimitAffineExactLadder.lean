@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
 
 /-! # Exact connecting ladders for affine-stage cohomology
 
-Source: Stacks Project, Tags 09YQ, 09YP, 09YN and 0739.
-(blueprint: lem-weil-pbc-etale-limit-affine-exact-ladder).
+## References
+
+* Stacks Project, Tags 09YQ, 09YP, 09YN and 0739
 -/
 
 @[expose] public section
@@ -68,45 +69,8 @@ private theorem cohomology_middle_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
 
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
-/-- Exact connecting rows and their comparison squares for an affine-stage system.
-
-Source: Stacks Project, Tag 09YP, using 0EXZ and the right-exact rows of 0739;
-scheme-to-affine-site comparison in 0EYL and 04HR.
-(blueprint: lem-weil-pbc-etale-limit-affine-exact-ladder).
-
-Proof: Embed the system F in the injective system E of 0EXZ. At i, form the
-product of the direct images of injective embeddings of F_k over all i → k.
-Adjunction transposes the coefficient transitions followed by these embeddings.
-The identity component makes F_i → E_i monic. Direct images preserve injectives
-because their left adjoints are exact, and products of injectives are injective.
-Their canonical transitions satisfy the two inverse-image coherence laws.
-Take cokernels R_i; exact inverse image and cancellation of the cokernel epis
-supply ρ, its identity and composition equations. Pull E and R to the limit,
-with the composition comparisons, obtaining GE and T. Take their colimits LE
-and K. Exact filtered colimits of abelian sheaves give 0 → L → LE → K → 0.
-
-Form HE from degree-n cohomology of E_i, with transition ψ after pullback, and
-BE with vertex H^n(LE) and the displayed legs. Pullback functoriality and the
-coefficient cocycle prove the diagram and cocone laws. The identity isos give
-eHE and eBE. The degree-n map E_i → R_i induces α_i after eHE. The stage
-connecting map is δ_i, and the corresponding limit maps are α₀ and β.
-Stage injectivity makes δ_i surjective since H^(n+1)(E_i)=0. Exactness of the
-stage sequence gives δ_i α_i=0. Naturality of the long exact sequence under
-exact inverse image gives δ-transition compatibility. Naturality for the
-limit coprojections gives the β-δ and α₀-α squares. Exactness of the limit
-sequence at H^n(K) gives ker β = im α₀, without needing any acyclicity of LE.
-The R comparison legs commute with transitions by pullback composition,
-coefficient naturality, the cocycle for T, and the cocone law for K. All
-comparison diagrams are supplied by the existing canonical cohomology diagram
-theorem. For the quotient system, postcompose cocone naturality with the vertex
-isomorphism, insert the displayed arrow and leg formulas, cancel the source
-object isomorphism, and evaluate on a class. This gives the last comparison
-identity directly, without an affine-site presentation or strictification.
-
-No cohomological continuity in any degree is claimed by this ladder. In
-particular class descent and eventual detection of zero are separate steps.
-For n=0 exactness is at H⁰(K); for an empty scheme all groups are zero.
--/
+/-- Exact connecting rows and their comparison squares for an affine-stage system
+(Stacks, Tags 09YP, 0EXZ, 0739, 0EYL and 04HR). -/
 theorem etale_limit_affine_exact_ladder
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

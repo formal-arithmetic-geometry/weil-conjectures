@@ -10,8 +10,6 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetri
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperFactor.KunnethMapAgrees
 
 /-! # Symmetric normal form for the ordinary Kunneth map
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, first coordinate triangle.
 -/
 
 @[expose] public section
@@ -43,9 +41,7 @@ section ProjectionNaturality
 
 attribute [local irreducible] derivedTensor
 
-/-- Naturality in the outside coefficient of the ordinary projection map.
-Source: the projection factor in the first coordinate triangle
-(auxiliary; not a blueprint node). -/
+/-- Naturality in the outside coefficient of the ordinary projection map. -/
 @[reassoc]
 theorem kunnethProjection_naturality_right {X Y : Scheme.{u}} (f : X ⟶ Y)
     (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C))
@@ -65,15 +61,7 @@ theorem kunnethProjection_naturality_right {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 end ProjectionNaturality
 
-/-- The ordinary Kunneth map in the symmetric projection/exchange normal form.
-Source: the common-counit calculation in the first coordinate triangle
-(auxiliary; not a blueprint node).
-
-Proof: cancel the direct image of the kernel swap. Kunneth tensor symmetry and
-the existing flipped projection/exchange factorization give the two paths.
-Move the kernel swap across the ordinary compositor by naturality. Naturality
-of the canonical signed braiding puts the two projection factors in the stated
-order, and involutivity cancels the two kernel symmetries. -/
+/-- The ordinary Kunneth map in the symmetric projection/exchange normal form. -/
 theorem kunnethMap_symmetricFactorization {S X Y W : Scheme.{u}}
     (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (h : W ⟶ S)
     (hp : p ≫ f = h) (hq : q ≫ g = h)

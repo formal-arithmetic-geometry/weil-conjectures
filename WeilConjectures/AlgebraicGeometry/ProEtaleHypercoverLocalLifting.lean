@@ -10,7 +10,10 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.AlgebraicGeometry.ProEtaleRepresentableEpiLocalLifting
 
 /-! # Local lifting of matching data on a pro-etale hypercover
-Source: Stacks Project, Tags 0186, 00WN, 01GE and 01GW.
+
+## References
+
+* Stacks Project, Tags 0186, 00WN, 01GE and 01GW.
 -/
 
 @[expose] public section
@@ -22,9 +25,8 @@ open scoped Simplicial
 
 namespace AlgebraicGeometry.Scheme.ProEt
 
-/-- The underlying augmentation of a simplicial object in a slice category.
-Source: Stacks Project, Tag 01GE.
-(auxiliary; not a blueprint node). -/
+/-- The underlying augmentation of a simplicial object in a slice category
+(Stacks, Tag 01GE). -/
 def hypercoverUnderlyingAugmentation (X : Scheme.{u}) (W : X.ProEt)
     (U : SimplicialObject (Over W)) :
     U ⋙ Over.forget W ⟶ (Functor.const _).obj W where
@@ -59,24 +61,8 @@ private theorem lower_simplex_eq_of_faces {C : Type*} [Category* C]
   exact hc _ _ (by simp) h θ' (SimplexCategory.δ i)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Epimorphic matching maps supply local lifts of all compatible lower-simplex data.
-Source: Stacks Project, Tags 0186 and 00WN, used in Tags 01GE and 01GW.
-(auxiliary; not a blueprint node).
-
-Proof: regard w:T→W and its compatible lower-simplex maps as objects and morphisms
-of the slice over W. In degree zero lift w locally along U_0→W. In degree one the
-two vertices define a map into the supplied limiting fan. In degree n+2 the
-codimension-one entries satisfy the face-pair equations by compatibility and the
-simplicial identities, so define a map into the supplied limiting multicospan.
-Each matching epimorphism is locally surjective on represented sheaves; pull its
-covering image sieve back along that map, and choose a lift on every member.
-The face projection equations give the prescribed codimension-one maps. Any
-operator from a smaller simplex misses a vertex, hence factors through one of
-these faces (SimplexCategory.eq_comp_δ_of_not_surjective). Compatibility gives
-its prescribed map as well. All lifted maps lie over w, giving the augmentation
-equality. This works for empty test schemes and in degree zero, where the lower
-simplex family is empty. The local-surjectivity step must respect the universe
-of the representable sheaves in the displayed epi hypotheses. -/
+/-- Epimorphic matching maps supply local lifts of all compatible lower-simplex data
+(Stacks, Tags 0186 and 00WN). -/
 theorem hypercover_matching_local_lifting
     (X : Scheme.{u}) (W : X.ProEt) (U : SimplicialObject (Over W))
     (hzero : Epi ((topology X).yoneda.map (U _⦋0⦌).hom))

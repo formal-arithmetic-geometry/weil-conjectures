@@ -8,8 +8,10 @@ public import WeilConjectures.Algebra.Homology.SignedLinePullbackConstruction.In
 public import WeilConjectures.CategoryTheory.SignedLinePullbackConstruction.SheafPullbackUnitPresentation.SignedLineSheafPullbackUnitPresentation
 public import Mathlib.Algebra.Category.Ring.Limits
 /-! # Constructing scalar actions from set inverse-image presentations
-Source: Stacks Project, Modules on Sites, Tag 03D2.
-(blueprint: lem-pur-signed-line-module-action-presentations).
+
+## References
+
+* Stacks Project, Tag 03D2
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -31,15 +33,7 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   {A : Sheaf J RingCat.{max u v w}} {B : Sheaf K RingCat.{max u v w}}
   (φ : A ⟶ (F.sheafPushforwardContinuous RingCat.{max u v w} J K).obj B)
   (M : SheafOfModules.{max u v w} A)
-/-- Transport the scalar operation, and test each module law on products of unit sections.
-Source: Stacks Project, Tag 03D2.
-(blueprint: lem-pur-signed-line-module-action-presentations).
-Proof: transport the source scalar-action morphism using the product of the two
-presentations. Naturality gives semilinear restrictions. Its defining equation on
-units gives unit linearity. Each module axiom is an equality of sheaf maps out of a
-product of one, two or three of the given presentations. Test on source-unit tuples;
-the ring unit preserves addition, multiplication, zero and one, and the abelian unit
-preserves addition and zero. The equations reduce to the source module axioms. -/
+/-- Transport the scalar operation, and test each module law on products of unit sections. -/
 theorem inverseImageAction_of_presentations
     (pr : SheafPullbackUnitPresentation (F := F)
       ((sheafCompose J (CategoryTheory.forget RingCat.{max u v w})).obj A)

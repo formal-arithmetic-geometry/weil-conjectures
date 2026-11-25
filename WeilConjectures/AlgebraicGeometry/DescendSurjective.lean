@@ -17,8 +17,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Surjectivity descends to a finite stage of an inverse limit
 
-Source: Stacks Project, Limits, Lemma 07RR in Situation 081D
-(blueprint: lem-weil-pbc-descend-surjective).
+## References
+
+* Stacks Project, Tags 07RR and 081D
 -/
 
 @[expose] public section
@@ -31,31 +32,7 @@ namespace AlgebraicGeometry
 
 /-- A locally finitely presented morphism between quasi-compact, quasi-separated schemes
 at a stage of an inverse system with affine transitions is surjective at some later stage
-if its base change to the limit is surjective.
-
-Source: Stacks Project, Limits, Lemma 07RR in Situation 081D
-(blueprint: lem-weil-pbc-descend-surjective).
-
-Proof:
-1. Quasi-compactness of X₀ and quasi-separatedness of Y₀ make f₀ quasi-compact
-   (lem-weil-pbc-qcqs-morphism-permanence). Chevalley's theorem gives the constructible
-   image E = f₀(X₀) (lem-weil-pbc-chevalley-constructible-image,
-   def-weil-constructible-subset).
-2. For each base T → S₀, `Scheme.Pullback.range_map` computes the image of the
-   pullback of f₀ directly as the inverse image of E under Y₀ × T → Y₀
-   (def-pc-fibre-product, lem-weil-pbc-base-change-image).
-3. Surjectivity over S therefore implies that Y → Y₀ maps into E
-   (def-weil-surjective-morphism).
-4. Replace the upper tail i ≥ i₀ by its equivalent category `Over (op i₀)`. The
-   whiskered base-change diagram has limit Y and affine transitions
-   (lem-weil-pbc-scheme-over-limit, def-weil-pbc-category-colimit). They are quasi-compact
-   and quasi-separated by affine permanence and composition with Y₀
-   (lem-weil-pbc-affine-morphism-permanence, lem-weil-pbc-qcqs-morphism-permanence).
-5. Transport E along the initial upper-tail projection and apply
-   lem-weil-pbc-limit-contained-in-constructible to obtain a stage i ≥ i₀ whose
-   projection Yᵢ → Y₀ maps into E.
-6. The pullback image formula then says that fᵢ is surjective
-   (def-weil-surjective-morphism). -/
+if its base change to the limit is surjective (Stacks, Tags 07RR and 081D). -/
 theorem exists_surjective_of_isLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

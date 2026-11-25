@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectObjectCompact
 
 /-! # Existence of a single perfect generator
 
-Source: literature/stacks-project/derived-categories-of-schemes.tex, Tag 09IS
-(blueprint: lem-pc-perfect-generator-exists).
+## References
+
+* Stacks Project, Derived Categories of Schemes, Tag 09IS.
 -/
 
 @[expose] public section
@@ -30,23 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- For a quasi-compact and quasi-separated scheme, a single perfect complex generates the
-quasi-coherent derived category. Source: Stacks Project, Tag 09IS
-(blueprint: lem-pc-perfect-generator-exists).
-
-Proof:
-1. Apply `lem-pc-supported-perfect-generator` with support equal to all of X. Its
-complement is empty and hence quasi-compact. The support conditions are vacuous,
-so it gives a perfect quasi-coherent object P and the shifted-Hom detection criterion.
-2. P is compact by `lem-pc-perfect-object-compact`. Apply
-`lem-sc-supported-derived-generated-perfect-core` with the empty open and this same P.
-Its triangulated-closure hypothesis is supplied by step 1; the support conditions again
-are vacuous. Each quasi-coherent E has a tower starting at zero, with transition cones
-coproducts of shifts of P, and a final telescope triangle with E as its third object.
-3. Given an ambient triangulated property Q containing P and closed under Type u
-coproducts, shifts of P and their coproducts satisfy Q. Induct on the tower, using
-closure under middle terms of triangles. Reindex its countable coproduct by ULift ℕ
-in Type u. Both first objects of the telescope triangle then satisfy Q, so E does too.
-The additional retract-closure hypothesis is not needed for this argument. -/
+quasi-coherent derived category (Stacks, Tag 09IS). -/
 theorem exists_perfect_generator (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

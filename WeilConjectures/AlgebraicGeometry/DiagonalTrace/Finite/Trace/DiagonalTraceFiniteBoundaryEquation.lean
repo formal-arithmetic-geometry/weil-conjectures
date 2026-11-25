@@ -45,9 +45,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
 
 /-- The finite supported boundary equation, with its concrete endpoints checked once.
 This is exactly the projected supported-class composite equal to the projected
-coefficient Chern composite; it asserts no normalization by itself.
-Source: diagonal trace proof (2), the finite Cartier/Chern equation.
-(blueprint: def-sfb-diagonal-trace-finite-boundary-equation). -/
+coefficient Chern composite; it asserts no normalization by itself. -/
 @[irreducible]
 def finiteBoundaryEquation
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})

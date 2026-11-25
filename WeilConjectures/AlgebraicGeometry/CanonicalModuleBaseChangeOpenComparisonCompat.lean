@@ -52,9 +52,8 @@ set_option linter.unusedVariables false in
 -- Keep the original universally quantified comparison-proof binder hc0 unchanged.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Compatibility of restriction isomorphisms with the canonical base-change map.
-Source: Stacks Project, Tags 08FE, 08HY, 08IB.
-(blueprint: lem-pc-canonical-module-base-change-open-comparison-compat) -/
+/-- Compatibility of restriction isomorphisms with the canonical base-change map
+(Stacks, Tags 08FE, 08HY and 08IB). -/
 theorem restricted_base_change_compatibility
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

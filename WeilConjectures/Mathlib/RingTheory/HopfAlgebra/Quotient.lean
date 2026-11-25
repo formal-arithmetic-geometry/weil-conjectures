@@ -13,12 +13,8 @@ public import Mathlib.RingTheory.HopfAlgebra.Quotient
 
 If two algebra homomorphisms out of a Hopf algebra `A` vanish on a Hopf ideal `I`, then so does
 their convolution product: both factor through the quotient Hopf algebra `A ⧸ I`, and the
-quotient map is a bialgebra homomorphism.
-
-## Blueprint
-
-- `det-d-geometry`: the points of a closed subgroup scheme `V(I)` of an affine group scheme form a
-  subgroup.
+quotient map is a bialgebra homomorphism. Consequently the points of a closed subgroup scheme
+`V(I)` of an affine group scheme form a subgroup.
 -/
 
 @[expose] public section
@@ -38,7 +34,7 @@ instance bot : (⊥ : Ideal A).IsHopfIdeal R where
   antipode_mem x hx := by simp_all
 
 /-- The convolution product of two algebra homomorphisms vanishing on a Hopf ideal vanishes on
-it. (blueprint: `det-d-geometry`) -/
+it. -/
 theorem convMul_apply_eq_zero {I : Ideal A} [I.IsHopfIdeal R] {f g : A →ₐ[R] B}
     (hf : ∀ a ∈ I, f a = 0) (hg : ∀ a ∈ I, g a = 0) {a : A} (ha : a ∈ I) :
     (toConv f * toConv g) a = 0 := by
@@ -49,8 +45,7 @@ theorem convMul_apply_eq_zero {I : Ideal A} [I.IsHopfIdeal R] {f g : A →ₐ[R]
   have : q a = 0 := Ideal.Quotient.eq_zero_iff_mem.2 ha
   simp [this]
 
-/-- The supremum of a family of Hopf ideals is a Hopf ideal: the counit, coideal and antipode
-conditions are additive. -/
+/-- The supremum of a family of Hopf ideals is a Hopf ideal. -/
 theorem _root_.Ideal.isHopfIdeal_sSup {S : Set (Ideal A)} (hS : ∀ J ∈ S, J.IsHopfIdeal R) :
     (SupSet.sSup S).IsHopfIdeal R := by
   set T := SupSet.sSup S

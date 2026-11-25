@@ -40,20 +40,7 @@ private theorem finitePushUnit_formula
   rfl
 
 /-- The finite-push unit comparison after transporting backwards through the
-varying derived isomorphism.
-
-Source: diagonal tower trace proof (2), ordinary coefficient-unit square;
-geometric classes proof (3), coefficient-pullback unit normalization.
-(blueprint: lem-sfb-diagonal-trace-finite-push-unit-common).
-
-Proof: evaluate the completed exact square on the degree-zero complex of the
-completed coefficient unit.  Expand the coefficient cone comparison and use
-the coefficient-one and coefficient-projection equations.  The
-coefficient-pullback normalization identifies the resulting map with the
-adjunction hom-equivalence, and the limit-square common-unit equation gives
-the displayed equality after composing with the inverse varying comparison.
-The statement is the pre-varying step; composing with the varying isomorphism
-is the final categorical step in the seed theorem. -/
+varying derived isomorphism. -/
 theorem diagonalTrace_finitePush_unit_common
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

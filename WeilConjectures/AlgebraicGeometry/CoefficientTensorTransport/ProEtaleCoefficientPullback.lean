@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplemen
 
 /-! # Normalization of exact derived coefficient pullback
 
-(blueprint: lem-pbc-coefficient-pullback-factorization)
+## References
+
+* Stacks Project, Tags 07A6, 0D6D
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -175,15 +177,13 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
   (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
   (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
 
-/-- Exact derived restriction along the identity, identified with the identity functor.
-Source: functoriality of exact derived functors; Stacks Tag 07A6. -/
+/-- Exact derived restriction along the identity, identified with the identity functor. -/
 def identityRestriction : pbcDerivedRestrict (𝟙 R) ≅
     𝟭 (DerivedCategory (proEtaleRingModules Y R)) :=
   Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
     Functor.mapDerivedCategoryIdIso (proEtaleRingModules Y R)
 
-/-- The canonical pullback comparison, with identity restriction on the base removed.
-Source: Stacks Tags 0D6D and 07A6. -/
+/-- The canonical pullback comparison, with identity restriction on the base removed. -/
 def pullback :
     proEtaleRingDerivedPullback f R S c ⋙ pbcDerivedRestrict c.hom ≅
       proEtaleRingDerivedPullback f R
@@ -200,17 +200,7 @@ namespace AlgebraicGeometry.Scheme.CoefficientTensorTransport
 attribute [local irreducible] CoefficientTensorChain.complexPullback pullback
 
 /-- The canonical derived pullback comparison is the localization of the specified
-ordinary comparison on every complex.
-
-Source: exact derived functor identity, composition and natural-isomorphism
-factorizations; Stacks Tag 07A6.
-(blueprint: lem-pbc-coefficient-pullback-factorization)
-
-Proof: the identity derived comparison agrees with the identity exact-functor
-factorization. Apply mapDerivedCategoryCompIso_fac to both sides of the ordinary
-restriction mate, and mapDerivedCategoryNatIso_fac to that mate. Cancel the two
-composition comparisons. Removing the identity restriction leaves precisely the
-termwise ordinary comparison complexPullback. -/
+ordinary comparison on every complex. -/
 theorem pullback_factors {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -256,9 +246,7 @@ theorem pullback_factors {X Y : Scheme.{u}} (f : X ⟶ Y)
             M.leftUnitor) (.up ℤ)).hom.app P)
   exact exactPullback_factors L U M e P
 
-/-- Product of the two canonical coefficient pullback factorization squares.
-Source: exact-derived factorization, Stacks Tag 07A6.
-(blueprint: lem-pbc-coefficient-pullback-factorization) -/
+/-- Product of the two canonical coefficient pullback factorization squares. -/
 theorem pullback_pair_factors {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

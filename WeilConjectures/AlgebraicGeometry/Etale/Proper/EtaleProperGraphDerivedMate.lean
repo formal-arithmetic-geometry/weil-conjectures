@@ -9,7 +9,12 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 import WeilConjectures.AlgebraicGeometry.ProperGraphTransfer.EtaleProperGraphTransfer
 import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
 
-/-! # Exact derived triangular mates -/
+/-! # Exact derived triangular mates
+
+## References
+
+* Stacks Project, Tag 0F7B
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -212,9 +217,7 @@ private lemma triangle_derivedMate_generic
     (homotopy_triangle_relation I U L R T ai aa e.hom σ hσ J)
 
 /-- Exact localization carries the ordinary triangular adjunction unit relation
-for an ordinary natural transformation to its derived adjunction mate.
-Source: Stacks Project Tag 0F7B, functoriality of the graph adjunct through localization.
-(blueprint: lem-pur-proper-graph-derived-mate). -/
+for an ordinary natural transformation to its derived adjunction mate. -/
 theorem properGraphTriangle_derivedMate
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]

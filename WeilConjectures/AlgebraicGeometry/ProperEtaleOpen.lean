@@ -17,17 +17,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- An open containing the closed fiber of a scheme proper over an adically complete
-base is the whole scheme.
-Source: Stacks Project, Tag 0GS2, complete Noetherian essential-surjectivity paragraph.
-(blueprint: theorem-finite-etale-covers-proper-henselian--2)
-
-Proof: Put h = g ≫ f and let C be the closed complement of W. Properness makes
-h(C) closed; write it as V(K). If x belongs to C, K is contained in the prime h(x),
-which is contained in a maximal ideal m. Thus m belongs to V(K), so h(t) = m for
-some t in C. Completeness gives I ≤ jacobson(0), hence I ≤ m. The quotient spectrum
-has image V(I), and the range of the base-changed projection Y ×_A Spec(A/I) → Y
-is f⁻¹(V(I)). Therefore g(t) is in that range, and the hypothesis puts t in W,
-contradicting t in C. The complement is empty, so W = ⊤. This includes empty X. -/
+base is the whole scheme (Stacks, Tag 0GS2). -/
 theorem proper_closed_fiber_open_eq_top
     {A : Type u} [CommRing A] (I : Ideal A) [IsAdicComplete I A]
     {X Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) (g : X ⟶ Y)

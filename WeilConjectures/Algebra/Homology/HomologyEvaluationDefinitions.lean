@@ -12,8 +12,13 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Shared definitions for homology evaluation
 
-Source: Stacks Project, Tags 0A8X, 08DH and 0BQY.
-(blueprint: lem-sc-homology-evaluation-formal-complex). -/
+## References
+
+* [Stacks Project, Tag 08DH](https://stacks.math.columbia.edu/tag/08DH)
+* [Stacks Project, Tag 08DL](https://stacks.math.columbia.edu/tag/08DL)
+* [Stacks Project, Tag 0A8X](https://stacks.math.columbia.edu/tag/0A8X)
+* [Stacks Project, Tag 0BQY](https://stacks.math.columbia.edu/tag/0BQY)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -21,11 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace CategoryTheory
 
-/-- Restriction to an open scheme followed by an over site preserves zero morphisms.
-Source: Stacks Project, Tag 08DL, termwise restriction.
-(blueprint: lem-sc-homology-evaluation-formal-complex). 
-(blueprint: new-b2-homology-evaluation-definitions)
--/
+/-- Restriction to an open scheme followed by an over site preserves zero morphisms. -/
 theorem moduleOpenOver_preservesZeroMorphisms (X : Scheme.{u})
     (V : X.Opens) (W : V.toScheme.Opens) :
     (Scheme.Modules.restrictFunctor V.ι ⋙
@@ -35,11 +36,7 @@ theorem moduleOpenOver_preservesZeroMorphisms (X : Scheme.{u})
   ext A x
   rfl
 
-/-- Termwise restriction to an open scheme followed by an over site.
-Source: Stacks Project, Tag 08DL, termwise restriction.
-(blueprint: lem-sc-homology-evaluation-formal-complex). 
-(blueprint: new-b2-homology-evaluation-definitions)
--/
+/-- Termwise restriction to an open scheme followed by an over site. -/
 noncomputable def moduleOpenOverComplexFunctor (X : Scheme.{u})
     (V : X.Opens) (W : V.toScheme.Opens) :
     CochainComplex X.Modules ℤ ⥤
@@ -49,11 +46,7 @@ noncomputable def moduleOpenOverComplexFunctor (X : Scheme.{u})
     SheafOfModules.overFunctor V.toScheme.ringCatSheaf W).mapHomologicalComplex
       (ComplexShape.up ℤ)
 
-/-- A complex admits a finite free, zero-differential model by a quasi-isomorphism roof.
-Source: Stacks Project, Tag 0BQY, zero-differential Koszul calculation.
-(blueprint: lem-sc-homology-evaluation-formal-complex). 
-(blueprint: new-b2-homology-evaluation-definitions)
--/
+/-- A complex admits a finite free, zero-differential model by a quasi-isomorphism roof. -/
 def HasFiniteFreeZeroModel
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{u}) (T : CochainComplex (SheafOfModules.{u} R) ℤ) : Prop :=
@@ -65,11 +58,7 @@ def HasFiniteFreeZeroModel
       (∀ k : ℤ, ∃ r : ℕ, Nonempty (E.X k ≅
         SheafOfModules.free (R := R) (ULift.{u} (Fin r))))
 
-/-- The degree component used to evaluate a Hom cocycle on a cycle.
-Source: Stacks Project, Tag 0A8X, product definition of the Hom complex.
-(blueprint: lem-sc-homology-evaluation-formal-complex). 
-(blueprint: new-b2-homology-evaluation-definitions)
--/
+/-- The degree component used to evaluate a Hom cocycle on a cycle. -/
 noncomputable def homologyEvaluationProjection (X : AlgebraicGeometry.Scheme.{u})
     (T J : CochainComplex X.Modules ℤ) (n : ℤ) :
     (homComplex (R := X.sheaf) T J).X n ⟶
@@ -77,11 +66,7 @@ noncomputable def homologyEvaluationProjection (X : AlgebraicGeometry.Scheme.{u}
   (Classical.choose (homComplex_projections_exists.{u, u, u, u}
     (R := X.sheaf))) T J n (-n) 0 (by omega)
 
-/-- Characterization of evaluation on classes by its action on local cycle representatives.
-Source: Stacks Project, Tags 0A8X and 08DH, evaluation of the Hom complex.
-(blueprint: lem-sc-homology-evaluation-formal-complex). 
-(blueprint: new-b2-homology-evaluation-definitions)
--/
+/-- Characterization of evaluation on classes by its action on local cycle representatives. -/
 def IsHomologyEvaluation (X : AlgebraicGeometry.Scheme.{u})
     (T J : CochainComplex X.Modules ℤ) (n : ℤ)
     (e : (homComplex (R := X.sheaf) T J).homology n ⟶

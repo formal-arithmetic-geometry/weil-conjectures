@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedMateEvaluation
 
 /-! # AffineSpectrumPullbackSquareCoherence
 
-Source: Stacks Project, Tags 0D5S and 08HY.
-(blueprint: lem-pc-affine-spectrum-pullback-square-coherence).
+## References
+
+* Stacks Project, Tags 0D5S and 08HY
 -/
 
 @[expose] public section
@@ -253,21 +254,7 @@ private theorem spectrum_square {X X' S S' : Scheme.{u}}
     (Scheme.toSpecΓ_naturality f) (Scheme.toSpecΓ_naturality f')
     (Scheme.toSpecΓ_naturality g) (Scheme.toSpecΓ_naturality g') h h₀ N
 
-/-- The square pullback comparison commutes with forward spectrum coordinates.
-
-Proof: expand q and each forward comparison into c and the equality isomorphisms
-for scheme naturality. Naturality of c moves the arbitrary map k to the right;
-thus it suffices to compare natural transformations at N. Apply the associativity
-law for c to each of the four length-three paths around the commutative prism
-whose vertical maps are toSpecGamma. Scheme.toSpecGamma_naturality identifies
-its four side faces, and h and h0 identify the bottom and top faces. The equality
-isomorphisms are independent of the chosen equality proofs by proof irrelevance.
-Cancel adjacent inverse comparisons. Both composites become the comparison for
-the same length-three scheme map; hence they agree. No direct image, counit or
-base-change mate occurs, and k is arbitrary. Identities and zero objects need
-no separate case.
-Source: Stacks Project, Tags 0D5S and 08HY.
-(blueprint: lem-pc-affine-spectrum-pullback-square-coherence). -/
+/-- The square pullback comparison commutes with forward spectrum coordinates. -/
 theorem affineSpectrum_pullback_square_coherence
     {X X' S S' : Scheme.{u}}
     [IsAffine X] [IsAffine X'] [IsAffine S] [IsAffine S']

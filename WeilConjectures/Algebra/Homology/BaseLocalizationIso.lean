@@ -17,9 +17,10 @@ import WeilConjectures.Algebra.Homology.BaseLocalizationCohomologyAction
 import WeilConjectures.Algebra.Homology.BaseLocalizationDLinearGlue
 /-! # Localizing the base and second factor of a derived tensor
 
-Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
-second coefficient ring; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-base-localization-iso).
+## References
+
+* Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
+  second coefficient ring; More on Algebra, Tag 06Y6.
 -/
 
 @[expose] public section
@@ -50,28 +51,7 @@ variable (R A B Rp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} Rp)]
 
 include tRpA tRpB tAD tBD tApD tBpD in
-/-- The canonical map is invertible after extension to D.
-Source: Stacks Project, Tag 0DJ8, affine localization identity; Tag 06Y6.
-(blueprint: lem-pc-base-localization-iso).
-
-Proof: choose a K-flat Rp-resolution P of the underlying Rp-complex of Q.
-Its restriction to R is K-flat: for an acyclic R-complex F, exact localization
-Rp tensor_R F is acyclic, and tensor associativity identifies its tensor with
-P with F tensor_R P. Both universal derived counits are invertible on these
-K-flat complexes. Naturality with respect to the resolution augmentation,
-which is a quasi-isomorphism both before and after restriction, therefore
-shows that the universal lift defining baseLocalizationDerivedMap is
-invertible at Q. Its counit equation identifies it with the pure-tensor
-localization identity. Naturality for multiplication by a in A and
-cohomologyIso_smul show that the cohomology map intertwines the two A-actions;
-B-linearity is built in. The algebra isomorphism A tensor_Rp B = A tensor_R B
-fixes pure tensors, so the cohomology map is an isomorphism after transporting
-this tensor-algebra action. The maps to D agree on A and B by the scalar-tower
-hypotheses. Extend the transported isomorphism to D. Tensor induction gives
-the displayed generator equation and its uniqueness. For the identity
-localization the universal lift is the unique model comparison. If S contains
-zero, Rp, A, B and D are zero rings and the conclusion is the unique zero-module
-isomorphism. No flatness of D or boundedness of Q is used. -/
+/-- The canonical map is invertible after extension to D. -/
 theorem exists_baseLocalization_iso (S : Submonoid R) [IsLocalization S Rp] (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

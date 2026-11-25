@@ -15,9 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
 /-!
 # Standard generators of the transported polynomial Proj twist
 
-Source: Stacks Project, Constructions, Lemma 01M7 (2),(3), and the chart and
-transition steps of blueprint lem-sc-p1-proj-shifted-free-twist.
-(blueprint: lem-sc-p1-proj-twist-transported-data)
+## References
+
+* Stacks Project, Constructions: Lemma 01M7.
 -/
 
 @[expose] public section
@@ -243,13 +243,7 @@ private theorem polynomial_transition (R : Type v) [CommRing R] (n : Type) (i j 
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The overlap relation for the pulled-back polynomial twist generators.
-Source: Stacks Project, Constructions, Lemma 01M7 (2),(3).
-(blueprint: lem-sc-p1-proj-twist-transported-data).
-This is the chart and integer-power calculation: transport the identity
-`x₀^d = (x₀/x₁)^d x₁^d` through the inverse chart isomorphism and identify
-`x₀/x₁` with the projective-line transition unit using `C.chart_eq`.
--/
+/-- The overlap relation for the pulled-back polynomial twist generators. -/
 private theorem transported_map_g₀ (k : Type v) [Field k] (d : ℤ)
     (C : ProjectiveLine.ProjChartIsomorphism k) :
     let M := twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) d
@@ -311,32 +305,8 @@ private theorem transported_map_g₀ (k : Type v) [Field k] (d : ℤ)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Transporting the polynomial Proj twist to the glued line gives the prescribed
-local generators and transition relation; no comparison with another module is asserted.
-Source: Stacks Project, Constructions, Lemma 01M7 (2),(3), and blueprint
-lem-sc-p1-proj-shifted-free-twist, chart and overlap steps.
-(blueprint: lem-sc-p1-proj-twist-transported-data)
-
-Proof: write P = Proj k[x₀,x₁], Q = P¹_k, and M = O_P(d). On D₊(xᵢ), a section
-of M is locally a homogeneous fraction of degree d. The element xᵢ is a unit in
-the homogeneous localization. Its d-th power therefore makes sense for every integer d.
-Multiplication by xᵢ^(-d) identifies the degree-d part with the degree-zero part,
-with inverse multiplication by xᵢ^d. The fraction descriptions are compatible with
-restriction, so these inverse maps identify M with the structure module on every
-subopen of D₊(xᵢ), and xᵢ^d is its generator.
-The equations C.chart_eq identify D₊(xᵢ) with the i-th standard chart of Q, and
-identify x₁/x₀ with t. Pullback along C.iso.inv preserves these trivializations
-and their free generators.
-The induced structure-ring maps are isomorphisms on corresponding opens. On each of these
-charts it sends the displayed free rank-one module to the free rank-one structure
-module. Take gᵢ to be the image of xᵢ^d under this operation. For every subopen V
-of the i-th chart the pulled-back trivializations give bijectivity of
-a ↦ a • gᵢ|_V (Scheme.Modules.IsFreeGenerator.pullback_unit_app).
-On the overlap, both x₀ and x₁ are units, and the identity
-x₀^d = (x₀/x₁)^d x₁^d holds for all integer d. Transporting this equality along
-the same ring and module maps gives g₀ = transitionUnit(d,0,1) • g₁.
-These sections, the two bijectivity statements, and this equality are exactly the
-five fields of TwistData. At d = 0 the generators are 1; at negative d the same
-argument uses inverse powers of units, so no positivity hypothesis is needed. -/
+local generators and transition relation; no comparison with another module is asserted
+(Stacks, Tag 01M7). -/
 theorem nonempty_twistData_pullback_inv (k : Type v) [Field k]
     (d : ℤ) (C : ProjectiveLine.ProjChartIsomorphism k) :
     Nonempty (ProjectiveLine.TwistData (Spec (.of k)) d

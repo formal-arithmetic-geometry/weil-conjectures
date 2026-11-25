@@ -10,8 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.IntegralResiduePullOrdinaryUnit
 
 /-! # The ordinary balanced scalar tensor square
 
-Source: Bhatt--Scholze, Remark 6.8.15 and Lemma 6.5.9(5), p. 51.
-(auxiliary; not a blueprint node)
+## References
+
+* Bhatt–Scholze, Remark 6.8.15 and Lemma 6.5.9(5).
 -/
 
 @[expose] public section
@@ -211,11 +212,7 @@ private theorem pull_regular_η
   simp only [ρ, asIso_inv, IsIso.inv_inv]
 
 /-- Ordinary pullback of a restricted regular module, using the restriction square
-and the inverse monoidal unit of residue pullback. Naming this construction before
-specializing the coefficients avoids expanding the concrete integral ring instances.
-
-Source: Bhatt--Scholze, Remark 6.8.15; the fixed coefficient identification in the
-proof of Lemma 6.5.9(5). (auxiliary; not a blueprint node) -/
+and the inverse monoidal unit of residue pullback. -/
 @[irreducible] noncomputable def residueOrdinaryRestrictedRegularPullIso
     (Λ A : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] [MonObj A] [IsCommMonObj A]
@@ -254,32 +251,7 @@ attribute [local irreducible] Mod.monoidalCategoryStruct
   Mod.tensorObjπ Mod.extendπ residueOrdinaryUpperStarMonoidal
 
 -- Compare the constructed module maps on their explicit coequalizer presentations.
-/-- The ordinary scalar pull square is the balanced tensor comparison.
-Source: Bhatt--Scholze, Remark 6.8.15 and the ordinary tensor-pullback identity
-in the proof of Lemma 6.5.9(5), p. 51; explicit comparison of the canonical maps.
-(auxiliary; not a blueprint node)
-
-Proof. Write TX, TY for extension, SX, SY for restriction, F for integral
-pullback and G for pullback after the coefficient change. The inverse scalar
-comparison p is determined by the ordinary extension unit identity
-F(etaY) q = etaX SX(p), with q the inverse restriction/pullback comparison.
-Forget module actions and precompose the asserted equality with F applied to
-the coequalizer projection defining TY(M). Under extendComapTensorIso this
-projection is the balanced tensor projection. The defining equation of the
-strong monoidal pullback tensorator identifies its composite with the ambient
-inverse-image tensorator followed by the balanced tensor projection on X.
-Use the extension unit identity to replace p inverse on the unit, then use
-linearity over the residue ring to replace it on the whole coequalizer
-projection: S tensor eta followed by the S-action is precisely that projection.
-The inverse restriction comparison has identity underlying sheaf map after
-the coefficient pullback identifications. The coefficient isomorphism e has
-the same property followed by the inverse monoidal unit on the regular module.
-Its unit cancels the pulled-back regular-module coefficient in the tensorator.
-Consequently both composites on the free tensor presentation are the ambient
-pullback tensorator, the pulled-back coefficient identification, and the same
-balanced projection on X. Equality follows by the epimorphism of that
-projection and faithfulness of forgetting module actions. No flatness or
-nonempty-site hypothesis is used. -/
+/-- The ordinary scalar pull square is the balanced tensor comparison. -/
 theorem residueOrdinaryTensorPull_module
     (Λ A : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] [MonObj A] [IsCommMonObj A]

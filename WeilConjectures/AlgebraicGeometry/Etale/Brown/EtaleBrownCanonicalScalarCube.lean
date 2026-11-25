@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarM
 
 /-! # Scalar mate of the normalized Brown restriction cube
 
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 06YY and 07A4.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 and Lemma 5.16
+* Stacks Project, Tags 03CY, 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -97,26 +99,7 @@ private lemma brown_realization_scalar_mate
 
 -- Compare four independently normalized adjunctions.
 /-- The scalar mate of the exact ordinary restriction square respects normalized
-Brown inverse-image realizations.
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CY, 06YY and 07A4.
-(blueprint: lem-pur-etale-brown-canonical-scalar-cube).
-
-Proof: first compare ordinary restriction and inverse image in the two coefficient
-encodings. After forgetting to set sheaves, the ordinary restriction comparisons
-are identities; the equation for A.restrictInverseUnderlying and the ordinary
-Hom-transpose equations identify the two inverse-image composites on every
-section. Faithfulness of the underlying functor gives the ordinary cube. Apply
-termwise cochain prolongation and exact localization. The representative equations
-for the canonical restriction model, the Brown restriction comparisons, and the
-assumed inverse comparison identify all four localized faces; fully faithful
-precomposition by Q therefore gives the restriction cube on all derived objects.
-Take the scalar-adjunction inverse mates of that cube. The scalar normalization
-of RV and RW identifies their inverse mates with the displayed scalar comparisons.
-The geometric restriction/pullback comparison has inverse mate scalarPullbackIso
-by its canonical normalization. The inverse-mate cube identity now gives the
-ordered equation below, including the exact-to-left-derived pullback comparisons.
-This calculation uses no properness, finiteness or invertibility of any proper
-projection mate, and works for identity maps and zero coefficient rings. -/
+Brown inverse-image realizations. -/
 theorem strictEtaleBrownCanonicalScalarCube
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W)

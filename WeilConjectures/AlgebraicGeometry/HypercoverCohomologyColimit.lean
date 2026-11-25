@@ -8,9 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 
 /-!
-# Blueprint statements
+# Hypercover cohomology and its colimit property
 
-corollary-cohomology-pro-etale-affine.
+Definitions of the cohomology of sections over a finite split étale hypercover, its functoriality
+in refinements, and the predicate saying that a functor is the colimit of these cohomologies.
 -/
 
 @[expose] public section
@@ -24,7 +25,8 @@ namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 variable {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
 variable (A : Type w) [Category.{v} A] [Abelian A]
 
-/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
+/-- The `q`-th cohomology of the alternating coface complex of sections of a sheaf over a
+finite split étale hypercover `U`, as a functor on sheaves. -/
 noncomputable def cohomologyFunctor (U : FiniteSplitEtaleHypercover X) (q : ℕ) :
     Sheaf X.smallEtaleTopology A ⥤ A :=
   sheafToPresheaf X.smallEtaleTopology A ⋙
@@ -32,7 +34,8 @@ noncomputable def cohomologyFunctor (U : FiniteSplitEtaleHypercover X) (q : ℕ)
     AlgebraicTopology.alternatingCofaceMapComplex A ⋙
     HomologicalComplex.homologyFunctor A (ComplexShape.up ℕ) q
 
-/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
+/-- A refinement `U → V` of hypercovers induces a map from the cohomology over `V` to the
+cohomology over `U`. -/
 noncomputable def cohomologyRefinement {U V : FiniteSplitEtaleHypercover X}
     (f : U.Refinement V) (q : ℕ) : cohomologyFunctor A V q ⟶ cohomologyFunctor A U q :=
   whiskerRight
@@ -41,7 +44,8 @@ noncomputable def cohomologyRefinement {U V : FiniteSplitEtaleHypercover X}
     (AlgebraicTopology.alternatingCofaceMapComplex A ⋙
       HomologicalComplex.homologyFunctor A (ComplexShape.up ℕ) q)
 
-/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
+/-- The functor `H` is the colimit of the hypercover cohomologies in degree `q`: homotopic
+refinements induce equal maps, and `H` is the universal compatible cocone. -/
 def IsCohomologyColimit (q : ℕ) (H : Sheaf X.smallEtaleTopology A ⥤ A) : Prop :=
   (∀ (U V : FiniteSplitEtaleHypercover X) (f g : U.Refinement V),
     isRefinementHomotopic f g → cohomologyRefinement A f q = cohomologyRefinement A g q) ∧

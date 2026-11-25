@@ -9,10 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerP1.TowerP1CoefficientCoor
 public import WeilConjectures.AlgebraicGeometry.Geo.GeoP1Cohomology
 
 /-! # Finite coefficient coordinate definitions
-
-Source: blueprint latest, diagonal-tower trace proof (1), identification of
-finite coefficient units and direct images before the Chern-class calculation.
-(blueprint: def-sfb-finite-p1-coefficient-coordinate-definitions).
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +24,7 @@ open SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The inverse of the constant-section-normalized coefficient word.
-Source: diagonal-tower trace (1), constant coefficient identification
-(blueprint: def-sfb-finite-p1-coefficient-coordinate-definitions). -/
+/-- The inverse of the constant-section-normalized coefficient word. -/
 def finiteUnitCoordinate (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT) :
@@ -41,17 +35,13 @@ def finiteUnitCoordinate (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (DerivedCategory.singleFunctor _ 0).mapIso c.unit ≪≫
     (((SpTowerShriek.ev l E T n).mapDerivedCategorySingleFunctor 0).app _).symm).symm
 
-/-- Realize a fixed-scalar object on P¹ on an isomorphic scheme X.
-Source: diagonal-tower trace (1), transport over the base
-(blueprint: def-sfb-finite-p1-coefficient-coordinate-definitions). -/
+/-- Realize a fixed-scalar object on P¹ on an isomorphic scheme X. -/
 abbrev finiteOverRealization (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     {X S : Scheme.{u}} (e : X ≅ ProjectiveLine S) :=
   geoP1Pullback (FiniteRing l E n) e.hom ⋙
     (Scheme.sfIntrinsicModuleEquivalence X (SpTowerShriek.R l E n)).functor.mapDerivedCategory
 
-/-- The normalized source comparison, including pullback along e.
-Source: diagonal-tower trace (1), coefficient units
-(blueprint: def-sfb-finite-p1-coefficient-coordinate-definitions). -/
+/-- The normalized source comparison, including pullback along e. -/
 def finiteOverUnitCoordinate (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     {X S : Scheme.{u}} (e : X ≅ ProjectiveLine S)
     {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))}

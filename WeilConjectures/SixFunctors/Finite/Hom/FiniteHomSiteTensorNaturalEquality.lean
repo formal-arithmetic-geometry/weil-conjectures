@@ -26,9 +26,7 @@ private theorem models_eq
   apply (cancel_mono t.hom).mp
   simpa only [Category.assoc] using hf.trans (h.trans hg.symm)
 
-/-- Whiskering the intrinsic tensor comparison and then the two beta components.
-Source: the categorical composition in the final site-comparison paragraph
-(blueprint: lem-coef-finite-hom-site-tensor-natural-equality). -/
+/-- Whiskering the intrinsic tensor comparison and then the two beta components. -/
 def finiteHomTensorBetaLeftOfComparisons
     {C₁ C₂ D₁ D₂ : Type*} [Category C₁] [Category C₂] [Category D₁] [Category D₂]
     (A : C₁ × C₁ ⥤ C₁) (B : D₁ × D₁ ⥤ D₁) (D : D₂ × D₂ ⥤ D₂)
@@ -38,9 +36,7 @@ def finiteHomTensorBetaLeftOfComparisons
   Functor.whiskerRight α G ≫ Functor.whiskerLeft (U.prod U) τ ≫
     Functor.whiskerRight (NatTrans.prod β β) D
 
-/-- Whiskering beta on the tensor before the etale tensor comparisons.
-Source: the categorical composition in the final site-comparison paragraph
-(blueprint: lem-coef-finite-hom-site-tensor-natural-equality). -/
+/-- Whiskering beta on the tensor before the etale tensor comparisons. -/
 def finiteHomTensorBetaRightOfComparisons
     {C₁ C₂ D₁ D₂ : Type*} [Category C₁] [Category C₂] [Category D₁] [Category D₂]
     (A : C₁ × C₁ ⥤ C₁) (C : C₂ × C₂ ⥤ C₂) (D : D₂ × D₂ ⥤ D₂)
@@ -51,9 +47,7 @@ def finiteHomTensorBetaRightOfComparisons
     Functor.whiskerLeft (F.prod F) γ
 
 -- Comparing the chosen intrinsic closed structures requires a larger kernel budget.
-/-- The route through the intrinsic scalar tensorator, in the direction of beta.
-Source: blueprint lemma-change-coefficients-internal-hom--1, final site-comparison paragraph
-(blueprint: lem-coef-finite-hom-site-tensor-natural-equality). -/
+/-- The route through the intrinsic scalar tensorator, in the direction of beta. -/
 noncomputable def finiteHomSiteTensorBetaLeft
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -72,9 +66,7 @@ noncomputable def finiteHomSiteTensorBetaLeft
     (finiteHomSiteBeta l E X h)
 
 -- Comparing the chosen etale closed structures requires a larger kernel budget.
-/-- The route through the etale scalar tensorator, in the direction of beta.
-Source: blueprint lemma-change-coefficients-internal-hom--1, final site-comparison paragraph
-(blueprint: lem-coef-finite-hom-site-tensor-natural-equality). -/
+/-- The route through the etale scalar tensorator, in the direction of beta. -/
 noncomputable def finiteHomSiteTensorBetaRight
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -19,9 +19,6 @@ import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 
 /-!
 # Finite geometric detection of scalar annihilation
-
-Source: normalization exact-sequence blueprint, finite-coefficient reduction, steps 1 and 3
-of `lem-weil-pbc-finite-coefficient-of-finite-stalks`.
 -/
 
 @[expose] public section
@@ -231,34 +228,7 @@ private theorem finite_range_stalk_annihilator {Λ : Type (u + 1)} [CommRing Λ]
   exact Finset.mem_biUnion.mpr ⟨i, Finset.mem_univ _, h⟩
 
 /-- Finitely many geometric stalks detect scalar annihilation of a constructible module sheaf.
-This does not require finite stalks or a finite coefficient ring.
-
-Source: normalization exact-sequence blueprint, finite-coefficient reduction in
-`lem-weil-pbc-finite-pushforward-finite-stalk-module`; steps 1 and 3 of
-`lem-weil-pbc-finite-coefficient-of-finite-stalks`.
-(blueprint: lem-weil-pbc-constructible-finite-stalk-annihilator-detection)
-
-Proof: Choose the finite stratification witnessing constructibility. Each stratum is a
-subspace of the Noetherian space X, hence compact. Its locally constant restriction has an
-etale trivializing cover; openness of the chart maps and compactness give a finite subcover.
-A geometric point lifts through a chart containing its image. The localized-site equivalence
-identifies the chart restriction with its inverse image; the inverse-image stalk formula and
-constant-sheaf stalk formula identify the stalk with that chart's constant module. Thus the
-annihilators of all geometric stalks on a stratum lie in a finite set of ideals. Every
-algebraic-closure point of X lifts through the immersion of a stratum containing its image.
-The inverse-image stalk formula and the universe-lift isomorphism show that the annihilators
-of F's displayed stalks lie in the finite union of those finite sets.
-
-Enumerate the finite range of the stalk-annihilator function and choose a point x_i realizing
-each ideal in that range. The intersection at these points is contained in the intersection
-at all points of X, since every stalk ideal equals one of the selected ideals. For a scalar
-in the latter intersection, transport annihilation through the universe-lift isomorphism.
-The colimit cocone's naturality shows that its scalar endomorphism on a stalk is the stalk
-of its scalar endomorphism on F. Joint faithfulness of geometric stalks makes that sheaf
-endomorphism zero. Evaluate on each etale object to obtain annihilation of every section.
-For empty X the range is empty, its enumeration has length zero, and joint faithfulness
-applies vacuously. For the zero sheaf each stalk ideal is the unit ideal. No finiteness of
-section modules, or of the coefficient ring, is used. -/
+This does not require finite stalks or a finite coefficient ring. -/
 theorem exists_finite_stalk_annihilator_detection
     (Λ : Type (u + 1)) [CommRing Λ]
     {X : Scheme.{u}} [IsNoetherian X]

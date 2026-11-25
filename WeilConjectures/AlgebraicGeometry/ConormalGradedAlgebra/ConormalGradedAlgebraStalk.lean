@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.FormalAssociatedGradedAffineMultiplicat
 
 /-! # Stalk charts of the conormal algebra
 
-Source: Stacks Project, Divisors, Tag 0633; Algebra, Tag 00CS.
-(blueprint: lem-pur-conormal-graded-algebra-stalk).
+## References
+
+* Stacks Project, Divisors, Tag 0633; Algebra, Tag 00CS.
 -/
 
 @[expose] public section
@@ -189,25 +190,7 @@ private theorem addHom_add_mul {R S : Type*}
   rw [add_mul, map_add, ha, hb, map_add, add_mul]
 
 /-- The affine associated-graded charts induce the associated-graded chart for the
-actual ideal kernel at every point of the closed subscheme.
-Source: Stacks Project, Divisors, Tag 0633; Algebra, Tag 00CS.
-(blueprint: lem-pur-conormal-graded-algebra-stalk).
-
-Proof: Apply the exact module stalk functor to the normalized unit quotients
-`i_* i^*(I^n) = I^n/I I^n`. The stalk range of the ideal inclusion is the actual
-kernel `K` of the structure-stalk map; the image-power calculation identifies the
-stalk of `I^n` with `K^n`, including n=0. Exactness identifies each quotient stalk
-with `K^n/K^(n+1)`, taking every representative germ to its quotient class.
-Pushforward along the closed embedding has the same stalk on its image, so these
-are the stalks of the fixed homogeneous pieces on the closed subscheme. Stalks
-preserve the sheaf coproduct. Hence the coproduct property of `A` assembles the
-piece isomorphisms to an additive isomorphism with the associated-graded direct
-sum. Multiplication of representative germs is the product of their ambient
-representatives; every finite set of germs has a common neighbourhood. The
-multiplication and constants formulas of `A` therefore make this additive
-isomorphism a ring isomorphism. Its restriction to each homogeneous summand is
-the quotient-stalk comparison already constructed, proving the normalized formula.
-No finite generation is used. A vanishing stalk or degree zero causes no exception. -/
+actual ideal kernel at every point of the closed subscheme. -/
 theorem affineData_stalk_chart (A : AffineData i) : ∀ z : Z,
     ∃ e : TopCat.Presheaf.stalk A.algebra.right.obj z ≅
         CommRingCat.of (Ideal.associatedGraded (RingHom.ker (i.stalkMap z).hom)),

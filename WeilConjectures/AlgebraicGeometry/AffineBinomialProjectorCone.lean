@@ -11,8 +11,9 @@ public import Mathlib.Data.Nat.Choose.Basic
 
 /-! # Cancelling the shifted summands of a restricted cone
 
-Source: Stacks Project, Tag 08EK, proof, final paragraph; Derived Categories, Tag 05QT.
-(blueprint: lem-sc-affine-binomial-projector-cone).
+## References
+
+* Stacks Project, Tags 08EK and 05QT
 -/
 
 @[expose] public section
@@ -64,20 +65,8 @@ private theorem exists_projector_triangle (Y : Scheme.{u})
     productTriangle_distinguished T hT, ⟨eZ ≪≫ e₀⟩⟩
 
 /-- The binomial sum of shifts of F admits an endomorphism whose lifted cone restricts
-to F plus F[1]. This is a cone computation, with no affine, support, or perfectness hypothesis.
-Source: Stacks Project, Tag 08EK, proof, final paragraph; Tag 05QT
-(blueprint: lem-sc-affine-binomial-projector-cone).
-
-Proof: in the displayed finite biproduct, the degree-zero summand occurs exactly once,
-because choose(s+1,0)=1. Define the endomorphism to be zero on this summand and identity
-on every other summand, and conjugate by the given restriction isomorphism. Restriction
-is an exact additive functor and commutes with shifts. The equation involving bU
-identifies the first arrow of the restricted triangle, after changing its source by bU,
-with this endomorphism. Split the finite biproduct into the degree-zero summand and
-its complement. The direct sum of the cone triangle of zero on F and the contractible
-identity triangle on the complement is distinguished. Uniqueness of the third object
-of a distinguished triangle with fixed first arrow identifies the restricted cone
-with F plus F[1]. For s=0 the complement is F[1]; the same calculation applies. -/
+to F plus F[1]. This is a cone computation, with no affine, support, or perfectness hypothesis
+(Stacks, Tags 08EK and 05QT). -/
 theorem exists_binomial_projector_cone_restrict (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ V : X.Opens,

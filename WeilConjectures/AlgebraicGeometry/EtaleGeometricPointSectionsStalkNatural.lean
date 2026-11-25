@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 
 /-! # Global sections of the inverse image at a geometric point
 
-Source: Stacks Project, Tag 03Q1 (3), combined with Tag 03P5.
-(blueprint: lem-weil-pbc-geometric-point-sections-stalk-natural).
+## References
+
+* Stacks Project, Tags 03Q1 and 03P5
 -/
 
 @[expose] public section
@@ -25,28 +26,8 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The global-section comparison with the original geometric stalk is natural.
-Source: Stacks Project, Tag 03Q1 (3), and the identity-point case of Tag 03P5.
-(blueprint: lem-weil-pbc-geometric-point-sections-stalk-natural).
-
-Proof:
-1. For each F, apply the inverse-image stalk comparison to s and the identity point.
-   Compose it with the germ of a global section at the identity neighbourhood.
-   The latter is bijective by `Scheme.spec_algClosed_etale_sheaf_constant`, so
-   their composite is bijective. Transport along identity composition to use
-   `Scheme.etaleSetPullback (𝟙 _ ≫ s)` and the stalk at s.
-2. Restrict a unit-pulled section along a. Its germ at the identity neighbourhood
-   equals the germ at the pulled-back pointed neighbourhood, by the stalk colimit
-   relations. The equation on the first projection identifies that lift with
-   the canonical pullback lift; the second projection is identity by the over
-   condition. The stalk comparison's germ formula gives the displayed equation.
-3. Every original stalk element is represented by a section at a pointed
-   neighbourhood. The germ formula and injectivity of the stalk comparison imply
-   that every inverse-image stalk element is a unit-pulled germ. For a sheaf
-   morphism, naturality of the inverse-image unit and of the stalk coprojections
-   therefore proves naturality of the stalk comparison on all elements. The
-   identity-neighbourhood germ is natural as well, so the composite bijections
-   assemble to a natural isomorphism. -/
+/-- The global-section comparison with the original geometric stalk is natural
+(Stacks, Tags 03Q1 and 03P5). -/
 theorem etaleGeometricPointSectionsStalkNatural
     (S : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :

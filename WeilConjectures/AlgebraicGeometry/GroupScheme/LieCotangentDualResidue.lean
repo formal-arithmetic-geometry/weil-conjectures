@@ -13,8 +13,7 @@ open CategoryTheory
 open scoped MonObj
 namespace AlgebraicGeometry.GrpObj
 set_option backward.isDefEq.respectTransparency false
-/-- The structural residue map at the identity is bijective.
-Source: blueprint `proposition-cartier-s-theorem`, the rationality of the identity point. -/
+/-- The structural residue map at the identity is bijective. -/
 theorem identity_residue_rational
     {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :
     let x := unitSection G (IsLocalRing.closedPoint k)

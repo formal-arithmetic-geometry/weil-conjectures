@@ -11,8 +11,9 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 /-!
 # Transition maps of higher direct images of abelian sheaves
 
-Source: Stacks Project, Lemma 59.51.7, Tag 09Z1, canonical comparison
-(blueprint: def-sbc-abelian-higher-direct-image-map).
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section
@@ -27,8 +28,7 @@ namespace AlgebraicGeometry.Etale
 /-- The canonical map `R^p h_* F → R^p h'_* F'` for `a ≫ h = h'` and
 `φ : a⁻¹ F → F'`, on abelian sheaves. It is obtained from the derived adjunction unit,
 the pullback composition isomorphism, the derived adjunction counit, and `φ`, followed
-by degree-`p` homology. Source: Stacks, Tag 09Z1, comparison morphism
-(blueprint: def-sbc-abelian-higher-direct-image-map). -/
+by degree-`p` homology (Stacks, Tag 09Z1). -/
 noncomputable def abelianHigherDirectImageMap {S Y Y' : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})

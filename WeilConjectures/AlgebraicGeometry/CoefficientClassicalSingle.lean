@@ -6,15 +6,17 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.CoefficientBoundedClassicalDescent
 /-! # Classical modules in degree zero
-Source: Stacks Tags 05RU and 099T, degree-zero embedding and continuity.
+
+## References
+
+* Stacks Project, Tags 05RU and 099T
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
-/-- The ordinary degree-n embedding into the standard derived localization.
-Source: Stacks Tag 05RU (auxiliary; not a blueprint node). -/
+/-- The ordinary degree-n embedding into the standard derived localization (Stacks, Tag 05RU). -/
 @[irreducible] def coefficientModelSingle {C : Type w} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w}) (n : ℤ) :
     ConstantCompletion.Mod R ⥤ ConstantCompletion.D R :=
@@ -34,10 +36,7 @@ instance coefficientModelSingle_faithful {C : Type w} [SmallCategory C]
   unfold coefficientModelSingle
   infer_instance
 
-/-- A degree-zero module has cohomology only in the ordered interval [0,0].
-Source: Stacks Tag 05RU (auxiliary; not a blueprint node).
-Proof: the standard single complex is both at least and at most degree zero;
-the homology vanishing lemmas give the two tails. -/
+/-- A degree-zero module has cohomology only in the ordered interval [0,0] (Stacks, Tag 05RU). -/
 theorem coefficientSingle_bounded {C : Type w} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})
     (M : ConstantCompletion.Mod R) :
@@ -50,8 +49,7 @@ theorem coefficientSingle_bounded {C : Type w} [SmallCategory C]
   · exact ((DerivedCategory.singleFunctor _ 0).obj M).isZero_of_isGE 0 q hq
   · exact ((DerivedCategory.singleFunctor _ 0).obj M).isZero_of_isLE 0 q hq
 
-/-- Degree-zero cohomology of a module in degree zero is that same module.
-Source: Stacks Tag 05RU (auxiliary; not a blueprint node). -/
+/-- Degree-zero cohomology of a module in degree zero is that same module (Stacks, Tag 05RU). -/
 def coefficientSingle_homologyIso {C : Type w} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})
     (M : ConstantCompletion.Mod R) :
@@ -70,11 +68,8 @@ private theorem singleHZero {C : Type w} [SmallCategory C]
   · exact ((DerivedCategory.singleFunctor _ 0).obj M).isZero_of_isGE 0 q hq
   · exact ((DerivedCategory.singleFunctor _ 0).obj M).isZero_of_isLE 0 q hq
 
-/-- Cancel degree-zero embeddings to recover full faithfulness of a module functor.
-Source: Stacks Tags 05RU and 09AL (auxiliary; not a blueprint node).
-Proof: the embeddings are fully faithful and their images are bounded. Apply the
-morphism bijection in that image, transfer it through the given natural isomorphism,
-and cancel the target embedding. -/
+/-- Cancel degree-zero embeddings to recover full faithfulness of a module functor
+(Stacks, Tags 05RU and 09AL). -/
 theorem coefficientSingle_full_faithful {C B : Type w} [SmallCategory C] [SmallCategory B]
     {J : GrothendieckTopology C} {K : GrothendieckTopology B}
     (R : Sheaf J CommRingCat.{w}) (S : Sheaf K CommRingCat.{w})
@@ -142,12 +137,8 @@ private theorem continuousZero (X : Scheme.{u})
   exact ((colimit.isColimit (sectionDiagram P E)).isZero_pt hd).isIso
     (hp.obj _) _
 
-/-- A continuous module, placed in degree zero, has continuous cohomology in all degrees.
-Source: Stacks Tags 05RU and 099T (auxiliary; not a blueprint node).
-Proof: degree zero cohomology is naturally the original module, so naturality of the
-continuity map transports its isomorphism. Every other cohomology object is zero;
-the constant-scalar restriction is additive, hence has zero sections there, and the
-colimit of the resulting zero diagram is zero. Its continuity map is an isomorphism. -/
+/-- A continuous module, placed in degree zero, has continuous cohomology in all degrees
+(Stacks, Tags 05RU and 099T). -/
 theorem coefficientSingle_classical (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (F : ConstantCompletion.Mod (ConstantCompletion.constant

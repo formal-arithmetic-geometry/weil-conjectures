@@ -173,30 +173,35 @@ public import WeilConjectures.PoincareDuality.Derived.DerivedAutomorphismHomEval
 
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
 
-Source: Stacks Project, Modules on Sites, Tag 0GMX; the derived and completed
-normalization is the enhancement in the node's sixteen proof steps, supplying
-main-20261015 theorem-poincare-duality-frobenius--2 Steps 1, 2, 4 and 5.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation).
-
-Finite inputs are unbounded. Integral inputs have exactly the recorded
-Hom-constructibility condition. Completed inverse image is constructed from
-all coefficient projections; its comparison with tower pullback uses the
-actual completion unit and a resolution-normalized total-limit comparison.
-System maps and their identities are stated before evaluation or realization.
-Rational maps are localized; algebraically closed maps use every common stage.
+This file constructs the partial closed structure on integral constructible complexes, whose
+transposition is ordinary tensor-Hom transposition precomposed with the completion unit, and
+the resulting integral internal Hom comparison along an isomorphism of schemes.
 
 ## Main definitions
 
-* `podFiniteHomComparison`: transpose of pullback of finite evaluation.
-* `podPartialHomComparison`: the same construction on permitted Hom pairs.
-* `podCompletedRingMap`: completed coefficient transport from all projections.
-* `podCompletedToTower`: the completion-unit comparison with tower pullback.
+* `podCompletedTensorUnit`: the comparison from the ordinary to the completed tensor product.
+* `podIntegralClosed`: the partial closed structure on integral constructible complexes.
+* `podIntegralHomComparison`: the integral internal Hom comparison along an isomorphism.
 
 ## Main statements
 
-* `derivedAutomorphismHomEvaluation`: the four evaluation-defined natural isomorphisms.
-* The `*_laws`, `*_shift`, `*_comp` declarations give all coherent identities.
-* `podHomReductionSquare`: the actual system-level reduction square.
+* `podPartialClosed_ext`: partial closed data are determined by their transpositions.
+* `podIntegralClosed_existsUnique`: the normalized partial closed structure exists and is
+  unique.
+* `podIntegralPairs_pullback`: Hom-constructible pairs are preserved by isomorphism pullback.
+
+## Implementation details
+
+Integral inputs have exactly the recorded Hom-constructibility condition; no perfectness
+assumption is imposed. Maps from the completed tensor product into a complete target are the
+same as maps from the ordinary tensor product, since quotient-tower completion agrees with
+the Koszul reflector; composing with ordinary tensor-Hom transposition gives the closed
+structure.
+
+## References
+
+* [Stacks Project, Tag 0GMX], [Stacks Project, Tag 08J9], [Stacks Project, Tag 099B],
+  [Stacks Project, Tag 0A0E]
 -/
 
 @[expose] public noncomputable section
@@ -226,11 +231,7 @@ private def podClosedTransposeAdditive
   have : (MonoidalCategory.tensorRight M).Additive := (S.adjunction M).left_adjoint_additive
   exact (S.adjunction M).homAddEquiv L N
 
-/-- Partial closed data are determined by their transposition equivalences.
-Source: Stacks 08J9; the structure of def-pod-partial-closed-interfaces.
-Proof: the naturality field is a proposition, so two structures with equal
-transpose families (by function extensionality) are equal.
-(blueprint: stage3-derived-automorphism-continuation-a). -/
+/-- Partial closed data are determined by their transposition equivalences. -/
 theorem podPartialClosed_ext
     {C : Type a} [Category.{b} C] [Preadditive C]
     {T : C × C ⥤ C} {J : ObjectProperty (Cᵒᵖ × C)} {H : J.FullSubcategory ⥤ C}
@@ -249,10 +250,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u})
   [∀ w : W, Invertible (l : W.residueField w)]
 
-/-- The actual ordinary-to-completed tensor unit: reduction's adjunction unit,
-its tensor comparison, and the inverse of the recorded Roos realization.
-Source: node proof step 10, Stacks 099B
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- The ordinary-to-completed tensor unit: the reduction adjunction unit, followed by the
+reduction tensor comparison and the inverse of the integral tensor model. -/
 def podCompletedTensorUnit (M N : DerivedCategory (integralTowerModules l E W)) :
     (pullbackTensorCalculus l E W).integralClosed.tensor.obj (M, N) ⟶
       (integralCompletedTensor l E W).obj (M, N) :=
@@ -261,17 +260,9 @@ def podCompletedTensorUnit (M N : DerivedCategory (integralTowerModules l E W)) 
       ((pullbackTensorCalculus l E W).reductionTensor.hom.app (M, N)) ≫
     (pullbackTensorIntegralTensorModel l E W).inv.app (M, N)
 
-/-- The completed closed adjunction is uniquely normalized by ordinary evaluation
-precomposed with the actual completion unit. No perfectness assumption is imposed.
-Source: node proof steps 10--11, Stacks 099B, 0A0E.
-Proof: the constant/completed coefficient equivalence identifies quotient-tower
-completion with the Koszul reflector, preserving the unit. Maps from the completed
-tensor into the complete target N are therefore exactly maps from the ordinary
-tensor. Compose this bijection with ordinary tensor-Hom transposition. The Hom
-object is constructible by the pair condition, so full-subcategory Hom is unchanged.
-Both bijections are additive and natural. The equation fixes every transpose,
-hence fixes the partial closed data uniquely.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- There is a unique partial closed structure on integral constructible complexes whose
+transposition is ordinary transposition precomposed with the completion unit
+`podCompletedTensorUnit`. -/
 theorem podIntegralClosed_existsUnique :
     ∃! S : PodPartialClosed (constructibleIntegralTensor l E W)
         (constructibleIntegralHomPairs l E W) (constructibleIntegralHom l E W),
@@ -349,8 +340,7 @@ theorem podIntegralClosed_existsUnique :
   apply ObjectProperty.hom_ext
   exact eq_of_heq (hR' L P f)
 
-/-- Completed transposition with its unique ordinary-unit normalization.
-Source: Stacks 099B (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- Completed transposition with its unique ordinary-unit normalization. -/
 def podIntegralClosed := (podIntegralClosed_existsUnique l E W).exists.choose
 end IntegralClosed
 
@@ -361,13 +351,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
-/-- The Hom-constructible domain is preserved by isomorphism pullback.
-Source: node proof steps 3, 8, 11.
-Proof: exact sectionwise reindexing preserves K-injectives, hence the ambient
-Hom complex. Its canonical completion-unit comparison identifies reindexing
-with the recorded tower pullback on complete inputs. The source Hom is
-constructible by hypothesis, and pullback preserves constructibility.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- The Hom-constructible domain is preserved by isomorphism pullback. -/
 theorem podIntegralPairs_pullback
     (P : (constructibleIntegralHomPairs l E Y).FullSubcategory) :
     constructibleIntegralHomPairs l E X
@@ -375,9 +359,8 @@ theorem podIntegralPairs_pullback
         (constructibleIntegralPullback l E g)).obj P.obj) := by
   exact PodCoefficientDescent.integral_pair_permitted l E g P
 
-/-- The integral comparison is the transpose of completed pullback of evaluation.
-Source: node proof steps 10--11, Stacks 0GMX
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- The integral internal Hom comparison: the transpose of completed pullback of
+evaluation. -/
 def podIntegralHomComparison :=
   podPartialHomComparison (podIntegralClosed l E Y) (podIntegralClosed l E X)
     (constructibleIntegralPullback l E g) (podIntegralPairs_pullback l E g)

@@ -47,11 +47,8 @@ as a summand; on the stalks of the cohomology sheaves this forces `N = 0`, the s
 being finite (`AlgebraicGeometry.Etale.isZero_of_iso_singleFunctor_unit_biprod`). The relative
 statement over `T` follows by compact-support base change along `T ⟶ Spec 𝔽_p`.
 
-## Blueprint
-
-This is the vanishing `H^*_c(𝔸¹, ℒ_ψ) = 0` used in the proofs of
-`lemma-fourier-transform-constant-sheaf` and `proposition-fourier-inversion` (blueprint
-`lemma-fourier-transform-constant-sheaf`, `proposition-fourier-inversion`).
+This is the vanishing `H^*_c(𝔸¹, ℒ_ψ) = 0` used in the computation of the Fourier transform of
+the constant sheaf and in Fourier inversion.
 -/
 
 @[expose] public section
@@ -81,7 +78,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 attribute [local instance] preservesBinaryBiproducts_of_preservesBiproducts
 
 /-- Over a finite coefficient ring, the constant sheaf `Λ` cannot be split off from itself
-non-trivially: `Λ_X ≅ Λ_X ⊞ G` forces `G = 0`, as is seen on the stalks, which are finite. -/
+non-trivially: `Λ_X ≅ Λ_X ⊞ G` forces `G = 0`. -/
 theorem isZero_of_iso_unit_biprod [Finite Λ] {X : Scheme.{u}}
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (e : 𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ≅ 𝟙_ _ ⊞ G) : IsZero G := by
@@ -100,9 +97,7 @@ theorem isZero_of_iso_unit_biprod [Finite Λ] {X : Scheme.{u}}
     exact ⟨0, hz.eq_of_src _ _, hz.eq_of_src _ _⟩
   rw [IsZero.iff_id_eq_zero, ← IsIso.hom_inv_id (0 : G ⟶ G), zero_comp]
 
-/-- Over a finite coefficient ring, `Λ_X ≅ Λ_X ⊞ N` in `D(X_ét, Λ)` forces `N = 0`: on the
-cohomology sheaves this is `AlgebraicGeometry.Etale.isZero_of_iso_unit_biprod` in degree `0`,
-and the cohomology of `Λ_X` vanishes in the other degrees. -/
+/-- Over a finite coefficient ring, `Λ_X ≅ Λ_X ⊞ N` in `D(X_ét, Λ)` forces `N = 0`. -/
 theorem isZero_of_iso_singleFunctor_unit_biprod [Finite Λ] {X : Scheme.{u}}
     (N : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (e : (DerivedCategory.singleFunctor _ 0).obj (𝟙_ _) ≅
@@ -121,8 +116,7 @@ theorem isZero_of_iso_singleFunctor_unit_biprod [Finite Λ] {X : Scheme.{u}}
     exact IsZero.of_mono biprod.inr (hz.of_iso e'.symm)
 
 variable (Λ) in
-/-- Tensoring with a Tate twisting object and shifting reflects vanishing: the twisting objects
-are tensor invertible, `Λ_X(d) ⊗ Λ_X(-d) ≅ Λ_X`. -/
+/-- Tensoring with a Tate twisting object and shifting reflects vanishing. -/
 theorem isZero_of_isZero_shift_derivedTensorRight_tateObject [HasTateTwist Λ] {X : Scheme.{u}}
     [HasInvertibleExponent Λ X]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (d a : ℤ)
@@ -148,9 +142,7 @@ section AffineSpace
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- The compactly supported cohomology of affine `d`-space, tensored with `Λ_S(d)` and shifted
-by `2d`, is `Λ_S`: this is the affine-space trace
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_twistShift_affineSpace`, with the
-twist moved out of `Rp_!` by the projection formula. -/
+by `2d`, is `Λ_S`. -/
 theorem nonempty_iso_shift_derivedTensorRight_rightDerivedLowerShriek_affineSpace [Finite Λ]
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] (n : Type u) [Fintype n] (S : Scheme.{u})
     [HasInvertibleExponent Λ S] :
@@ -167,9 +159,7 @@ theorem nonempty_iso_shift_derivedTensorRight_rightDerivedLowerShriek_affineSpac
     (((R(𝔸(n; S) ↘ S)_![ModuleCat.{u + 1} Λ]).commShiftIso
       (2 * (Fintype.card n : ℤ))).app _).symm ≪≫ tr⟩
 
-/-- For a finite morphism `f`, `Rg_!(f_* F) ≅ R(f ≫ g)_! F` on sheaves placed in degree `0`:
-`f_*` is exact, so it is its own derived functor, which is `Rf_!` as `f` is proper, and the
-composition law for `R(-)_!` applies. -/
+/-- For a finite morphism `f`, `Rg_!(f_* F) ≅ R(f ≫ g)_! F` on sheaves placed in degree `0`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_singleFunctor_lowerStar [Finite Λ]
     {X Y S : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] (g : Y ⟶ S) [HasCompactification g]
     [HasCompactification (f ≫ g)] [QuasiCompact (f ≫ g)]
@@ -224,8 +214,7 @@ lemma image_ι_artinSchreierIdempotent_comp_artinSchreierIdempotent (χ χ' : Ad
 
 attribute [local instance] Abelian.hasFiniteBiproducts in
 /-- For a character `Ψ` with `∑_a Ψ(a) = 0`, the components `ℒ_1 ≅ Λ` and `ℒ_Ψ` split off from
-`(AS_q)_* Λ` together: `(AS_q)_* Λ ≅ (Λ ⊞ ℒ_Ψ) ⊞ M` for some `M`, the idempotents `e_1` and
-`e_Ψ` being orthogonal. -/
+`(AS_q)_* Λ` together: `(AS_q)_* Λ ≅ (Λ ⊞ ℒ_Ψ) ⊞ M` for some `M`. -/
 theorem exists_iso_artinSchreierPushforward_biprod (Ψ : AddChar k Λ)
     (hΨ : ∑ a : k, Ψ a = 0) :
     ∃ M, Nonempty (𝒫[Λ, k] ≅ (𝟙_ _ ⊞ artinSchreierSheaf Ψ) ⊞ M) := by
@@ -259,10 +248,7 @@ attribute [local instance] Abelian.hasFiniteBiproducts
   preservesBinaryBiproducts_of_preservesBiproducts in
 /-- **Vanishing of `H^*_c(𝔸¹_k, ℒ_Ψ)`.** For a character `Ψ` of the finite field `k` with
 `∑_a Ψ(a) = 0`, the compactly supported direct image of `ℒ_Ψ` along `π : 𝔸¹_k ⟶ Spec k`
-vanishes. Write `G(K) = (Rπ_! K ⊗ Λ(1))[2]`. By the splitting `(AS_q)_* Λ ≅ (Λ ⊞ ℒ_Ψ) ⊞ M`
-and `Rπ_! (AS_q)_* Λ ≅ R(AS_q ≫ π)_! Λ = Rπ_! Λ`, one gets `G(Λ) ≅ G(Λ) ⊞ G(ℒ_Ψ) ⊞ G(M)`, and
-`G(Λ) ≅ Λ` by the affine-line trace; so `G(ℒ_Ψ) = 0`, whence `Rπ_! ℒ_Ψ = 0`, the twists being
-invertible. -/
+vanishes. -/
 theorem isZero_rightDerivedLowerShriek_artinSchreierSheaf [Finite Λ] [HasTateTwist Λ]
     [HasTateTwist.IsNormalized Λ] [HasInvertibleExponent Λ (Spec (.of k))]
     (Ψ : AddChar k Λ) (hΨ : ∑ a : k, Ψ a = 0) :
@@ -328,8 +314,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {p : ℕ} [Fact p.Prime] [Invertible 
 scheme `T` of characteristic `p`, a finite coefficient ring `Λ` whose exponent is invertible on
 `T`, and an additive character `Ψ` of `𝔽_p` with `Ψ(1) - 1` a unit of `Λ`, the compactly
 supported direct image of the Artin–Schreier sheaf `ℒ_{Ψ, x}` of the coordinate along
-`π : 𝔸¹_T ⟶ T` vanishes.
-(sketch blueprint: `lemma-fourier-transform-constant-sheaf`, proof) -/
+`π : 𝔸¹_T ⟶ T` vanishes. -/
 theorem isZero_rightDerivedLowerShriek_artinSchreierSheafZMod_coord [Finite Λ] [HasTateTwist Λ]
     [HasTateTwist.IsNormalized Λ] (T : Scheme.{u}) [HasInvertibleExponent Λ T]
     [CharP Γ(𝔸(PUnit.{u + 1}; T), ⊤) p] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :

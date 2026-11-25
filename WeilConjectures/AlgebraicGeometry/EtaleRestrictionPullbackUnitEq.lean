@@ -14,8 +14,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 /-!
 # Étale restriction and pullback units
 
-Source: Stacks Project, Sites, Tags 03CF and 03EF (unit-side counterpart).
-(blueprint: lem-weil-pbc-etale-restriction-pullback-unit-eq)
+## References
+
+* Stacks Project, Tags 03CF and 03EF
 -/
 
 @[expose] public section
@@ -91,35 +92,7 @@ private theorem composition_unit
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Unit compatibility for an étale object in a cartesian square.
-Source: Stacks Project, Sites, Tags 03CF and 03EF (unit-side counterpart).
-(blueprint: lem-weil-pbc-etale-restriction-pullback-unit-eq)
-
-Proof (the node's five steps):
-1. Put h = g' ≫ p = p' ≫ g. Form P₀ = W ×ₓ W, P₁ = W ×ₓ Y, Q = W ×ₓ W'.
-   The diagonal δ and the maps θ = (g',id), τ = (δg',id), σ = (ι,id) give
-   φτ = φ'σ = γ = (g',id), for the two pullback-pasting isomorphisms φ, φ'.
-   Use def-pc-fibre-product and lem-weil-pbc-inverse-image-composition (1).
-2. The unit description and naturality of the restriction comparison in
-   lem-weil-pbc-etale-inverse-image-restriction (2), restricted along δ, give
-   (p⁻¹F)(δ)ηₚ(W) = ρF(W)⁻¹. Restricting the analogous formula along σ gives
-   (p'⁻¹g⁻¹F)(σ)ηₚ'(P₁) = ρg⁻¹F(W')⁻¹(g⁻¹F)(ι).
-3. Evaluate the unit equation of lem-weil-pbc-inverse-image-composition (2)
-   for (p,g') at W and restrict along τ. Naturality of c and ηg', and step 2,
-   identify the result with cₚ,g'(W')ηg'(W)ρF(W)⁻¹ = (h⁻¹F)(γ)ηh(W).
-   The value of ηg'(W) here includes restriction along θ.
-4. Apply the same composition unit equation for (g,p') and restrict along σ.
-   The result is c_g,p'(W')ρg⁻¹F(W')⁻¹(g⁻¹F)(ι)ηg(W) = (h⁻¹F)(γ)ηh(W).
-5. Equate steps 3 and 4, cancel c_g,p', and compose with the two restriction
-   comparisons. Evaluating at any section gives the assertion. Étaleness of p'
-   follows from base-change stability and the isomorphism ι, as in
-   situation-conventions (1).
-
-The existential proof hp' records the conclusion that p' is étale before using
-it to type the restriction comparison. The equality of abelian-group homomorphisms
-is the displayed equality for every section a. The maps eW and eW' only remove
-identity composites in the structure maps of the terminal étale objects.
--/
+/-- Unit compatibility for an étale object in a cartesian square (Stacks, Tags 03CF, 03EF). -/
 theorem etale_restriction_pullback_unit_eq
     {X Y W W' : Scheme.{u}}
     (g : Y ⟶ X) (p : W ⟶ X) (g' : W' ⟶ W) (p' : W' ⟶ Y)

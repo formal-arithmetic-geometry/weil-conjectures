@@ -12,8 +12,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Open restriction of additive derived stalk cohomology
 
-Source: Stacks Project, Tags 0098 and 08DW.
-(blueprint: def-pc-open-derived-additive-stalk-iso).
+## References
+
+* Stacks Project, Tags 0098 and 08DW.
 -/
 
 @[expose] public section
@@ -27,15 +28,7 @@ open SingleComplexBaseChange
 
 /-- The additive derived-stalk comparison for an open subscheme, constructed from
 Mathlib's restriction-stalk isomorphism and exact functoriality of localization.
-
-Construction: identify open restriction with restrictFunctor U.ι by overFunctorEquiv.
-After forgetting stalk scalars, restrictStalkNatIso identifies the two exact stalk
-functors. Apply mapDerivedCategoryNatIso and its composition comparisons. Commute
-both exact additive forgetful functors with cohomology by
-mapDerivedCategoryHomologyFunctorIso. This constructs the comparison on the entire
-derived category, not just on chosen representatives.
-Source: Stacks Project, Tags 0098 (stalk restriction) and 08DW (derived restriction).
-(blueprint: def-pc-open-derived-additive-stalk-iso). -/
+(Stacks, Tags 0098 and 08DW) -/
 noncomputable def openDerivedAdditiveStalkIso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -31,37 +31,15 @@ set_option autoImplicit false
 
 /-! # Image of restriction on an ideal twist
 
-Source: Stacks Project, Remark 09NW, the formula IB = (I+J)/J, and Lemma 09NX.
-(blueprint: lem-sc-closed-immersion-disjoint-ideal-twist-image).
+## References
+
+* Stacks Project, Tags 09NW and 09NX
 -/
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The ambient restriction of an ideal twist has the target ideal-product image.
-No zero-intersection hypothesis is needed for this image calculation.
-
-Source: Stacks Project, Remark 09NW, the formula IB = (I+J)/J, and the
-local trivialization argument in Lemma 09NX.
-(blueprint: lem-sc-closed-immersion-disjoint-ideal-twist-image).
-
-Proof: put N = M.tensorPow m and P = (tensorPullback i).obj M tensor-power m.
-1. Base change the closed subscheme defined by I along i. The base-change ideal
-   image theorem and the kernel-comap formula identify image φ with
-   (I.comap i).toModules, compatibly with their inclusions in the structure sheaf.
-2. The existing pullback ideal-product image theorem, applied to the
-   quasi-coherent invertible module N, identifies the image of the pulled-back
-   source inclusion with multiplication by I.comap i on the pullback of N.
-3. Tensor the inverse ideal-image identification with e. Naturality of the left
-   unitor makes this isomorphism commute with multiplication. Postcomposition
-   of Step 2 by e therefore identifies the image with image μ₁.
-4. Naturality of the adjunction unit expresses the original restriction as the
-   unit on image μ followed by pushforward of the map in Step 3. The unit is epi
-   for a closed immersion, so precomposing with it does not change the image.
-5. Closed pushforward preserves cokernels, hence epimorphisms. Apply it to the
-   epi-image factorization and the image isomorphism from Step 3. Precomposition
-   by the pushed epi and then the pushed isomorphism leaves exactly the image
-   of the pushed inclusion image.ι μ₁, as required.
-No zero-intersection or injectivity of the pulled-back ideal is used. The
-argument includes m = 0, the zero and unit ideals, and empty schemes. -/
+No zero-intersection hypothesis is needed for this image calculation (Stacks, Tags 09NW and 09NX).
+-/
 theorem closedImmersion_disjointIdeal_twist_image {Y X : Scheme.{u}} (i : X ⟶ Y)
     [IsClosedImmersion i] (I : Y.IdealSheafData)
     (M : Y.Modules) [M.IsInvertible] (m : ℕ)

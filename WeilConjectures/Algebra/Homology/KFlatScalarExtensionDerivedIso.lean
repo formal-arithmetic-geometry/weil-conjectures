@@ -18,10 +18,12 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.Algebra.Homology.Additive
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
-/-! # Scalar extension homology is invariant among K-flat derived models
+/-!
+# Scalar extension homology is invariant among K-flat derived models
 
-Source: Stacks Project, More on Algebra, Tags 064L and 06Y0.
-(blueprint: lem-sc-kflat-scalar-extension-derived-iso).
+## References
+
+* Stacks Project, More on Algebra, Tags 064L and 06Y0
 -/
 
 @[expose] public section
@@ -83,25 +85,7 @@ private theorem scalarExtension_quasiIso_of_kFlat
       exact congrArg (fun t ↦ (mapBifunctorSingle₂Iso F (𝟙_ (ModuleCat S)) P).hom ≫ t)
         ((NatIso.mapHomologicalComplex unit (.up ℤ)).hom.naturality a).symm))).1 h
 
-/-- Termwise scalar extension of K-flat models respects derived isomorphisms.
-Source: Stacks Project, More on Algebra, Tags 064L and 06Y0.
-(blueprint: lem-sc-kflat-scalar-extension-derived-iso).
-
-Proof: Represent e by a roof P <- L -> Q, with the left leg a quasi-isomorphism.
-Since e is invertible, its right leg is also a quasi-isomorphism: apply Q to both
-legs, use the roof equality and invertibility of e, and reflect quasi-isomorphisms
-through Q. Replace L by a K-flat resolution L' -> L. Both composites are then
-quasi-isomorphisms between K-flat complexes. Extension of scalars along f preserves
-such quasi-isomorphisms (Tag 064L): its cone is acyclic and K-flat, and its tensor
-with S is acyclic by replacing S with a K-flat resolution and using K-flatness in
-both factors. This also follows from mixed total tensor with the complex S in
-degree zero, whose total complex is termwise extension of scalars. The two tensor
-legs therefore induce invertible S-linear homology maps. Compose the inverse of
-the left homology map with the right one. This proves existence independently of
-the selected roof. The hypotheses impose no upper or lower bound and no flatness
-on S over R. Zero complexes, identity maps and zero coefficient rings satisfy the
-same argument. Only the source derived category is needed, so its morphism universe
-can differ from that used for sheaves. -/
+/-- Termwise scalar extension of K-flat models respects derived isomorphisms. -/
 theorem nonempty_kFlat_scalarExtension_homology_linearEquiv
     {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S)
     [HasDerivedCategory.{v} (ModuleCat.{u} R)]

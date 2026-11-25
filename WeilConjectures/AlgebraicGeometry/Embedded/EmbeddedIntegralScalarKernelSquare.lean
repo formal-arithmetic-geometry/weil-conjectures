@@ -11,7 +11,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # The embedded integral constant scalar square
 
-Source: integral-models-stacks, the coefficient comparison preceding Stacks Tag 09C1.
+## References
+* [Stacks Project, Tag 09C1](https://stacks.math.columbia.edu/tag/09C1)
 -/
 
 @[expose] public noncomputable section
@@ -548,19 +549,6 @@ private theorem coefficientMonSquares (X : Scheme.{u})
   exact coefficientSquares X ec e.hom.hom he I J hIJ
 
 /-- The constant scalar square and equality of the transported first residue kernels.
-Source: integral-models-stacks, scalar comparison; Stacks Tag 09C1
-(blueprint: lem-sfb-embedded-integral-scalar-kernel-square).
-
-Proof: evaluate the continuous coefficient isomorphism at the one-point profinite set.
-Naturality for maps from that point identifies its action on constant functions with
-this ring isomorphism. Sheafify the induced constant-ring isomorphism and pull it back
-to X. A ring isomorphism preserves nonunits, hence maximal ideals. The uniformizer
-hypothesis identifies the embedded first quotient ideal with the maximal ideal, and
-the spectral first quotient ideal is its maximal ideal as well. The induced residue
-isomorphism gives a commuting quotient square. Apply constant sheafification, inverse
-image, and the small section-ring functor to that square. Its horizontal maps are
-isomorphisms, so the local characterization of ideal extension identifies the
-transported kernel with the embedded kernel.
 -/
 theorem embeddedIntegralScalarKernelSquare
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

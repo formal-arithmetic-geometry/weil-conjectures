@@ -19,10 +19,13 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.RingTheory.Flat.CategoryTheory
 import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 
-/-! # K-flat resolutions without identifying the site universes
+/-!
+# K-flat resolutions without identifying the site universes
 
-Source: Stacks Project, Cohomology on Sites, Tag 06YS
-(blueprint: lem-pc-kflat-resolution).
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 06YS
+* Stacks Project, Modules on Sites, Tags 03EO and 03EW
 -/
 
 @[expose] public section
@@ -421,12 +424,7 @@ private noncomputable def monoidalClosed_kfi : MonoidalClosed (SheafOfModules.{r
         (G_obj := homObjSmall_kfi A) (tensorHomEquiv_kfi A)
         (fun _ _ _ f g ↦ tensorHomEquiv_whiskerLeft_comp_kfi A f g) }
 
-/-- The sheafified tensor is closed at independent site and coefficient universes.
-Source: Stacks Project, Modules on Sites, Tag 03EO
-(blueprint: lem-pc-sheaf-modules-tensor-closed).
-
-Proof: the already constructed small internal Hom represents the tensor-Hom
-adjunction. Package that adjunction as the existing closed monoidal structure. -/
+/-- The sheafified tensor is closed at independent site and coefficient universes. -/
 theorem nonempty_monoidalClosed_independentCoefficients :
     Nonempty (MonoidalClosed (SheafOfModules.{r} 𝓡)) :=
   ⟨monoidalClosed_kfi⟩
@@ -473,9 +471,7 @@ private noncomputable def tensorSheafificationIso_kfi
     Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _
       (Functor.Monoidal.commTensorRight a F)
 
-/-- The canonical free-presheaf cover gives functorial categorical flat resolutions.
-Source: Stacks Project, Tag 03EW; used for the independent-coefficient K-flat resolution
-(blueprint: lem-pc-kflat-resolution). -/
+/-- The canonical free-presheaf cover gives functorial categorical flat resolutions. -/
 theorem hasFunctorialFlatResolution_kfi : Abelian.HasFunctorialFlatResolution A := by
   let a := PresheafOfModules.sheafification.{r} (𝟙 (O).obj)
   let V := SheafOfModules.forget.{r} O ⋙ PresheafOfModules.restrictScalars (𝟙 (O).obj)
@@ -645,22 +641,7 @@ private theorem flat_epicification_kfi
 
 set_option synthInstance.maxSize 1024 in
 /-- Every complex has a K-flat resolution with flat terms and degreewise epimorphic
-augmentation. The site object and morphism universes are independent.
-Source: Stacks Tag 06YS (blueprint: lem-pc-kflat-resolution).
-Proof:
-1. Choose the strictly compatible bounded-above flat replacement tower of the good
-truncations, with degreewise epimorphic quasi-isomorphisms q_n
-(lem-pc-flat-truncation-tower).
-2. On B, the countable sum of the replacements, let φ be one minus the tower shift and
-let s be the sum of q_n followed by the truncation inclusions. Compatibility gives φ ≫ s = 0.
-The cone desc construction, with shifted component zero and unshifted component s, gives
-f : Cone(φ) ⟶ G. The telescope is K-flat by lem-pc-kflat-closure. Evaluation preserves
-coproducts; their terms and the finite sums forming the cone terms are flat by the same
-closure lemma. Reindex countable sums by ULift into r, without changing the site.
-3. The cone desc restrictions satisfy lem-pc-flat-truncation-telescope-comparison, so f is
-a quasi-isomorphism. In degree i choose n = i.toNat + 1. The truncation inclusion is an
-isomorphism in that degree, so its composite with q_n is epi. This composite factors
-through f in degree i, proving the required degreewise epimorphic augmentation. -/
+augmentation. The site object and morphism universes are independent. -/
 theorem exists_isKFlatResolutionIndependentCoefficients
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     {J : GrothendieckTopology C}

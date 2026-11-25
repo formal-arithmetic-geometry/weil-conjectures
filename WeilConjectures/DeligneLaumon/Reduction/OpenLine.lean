@@ -21,17 +21,16 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 For a nonempty open `C` of the projective line over `k₀` and a lisse Weil sheaf `F` punctually
 pure of weight `w`, the compactly supported cohomology `H_c^r(C, F)` has weights at most `w + r`,
-with no ramification condition at infinity (blueprint: `theorem-weight-bound-curve--2`). It is the
-case `j = 𝟙` of the compact-support upper bound for a middle extension on a smooth geometrically
-connected curve (blueprint: `theorem-weight-bound-curve--1`), the middle extension
+with no ramification condition at infinity. It is the case `j = 𝟙` of the compact-support upper
+bound for a middle extension on a smooth geometrically connected curve, the middle extension
 `(𝟙)_* F` being `F` itself.
 
 ## Main statements
 
-- `AlgebraicGeometry.hasWeightsAtMostOver_compactlySupportedCohomology_of_isCurve`: blueprint
-  `theorem-weight-bound-curve--2`.
-- `AlgebraicGeometry.hasWeightsAtMost_compactlySupportedCohomology_of_projectiveLine`:
-  blueprint `theorem-weight-bound-curve--2`.
+- `AlgebraicGeometry.hasWeightsAtMostOver_compactlySupportedCohomology_of_isCurve`: on a smooth
+  geometrically connected curve, `H_c^r(C, F)` has weights at most `w + r`.
+- `AlgebraicGeometry.hasWeightsAtMost_compactlySupportedCohomology_of_projectiveLine`: the same
+  bound for a nonempty open `C` of the projective line.
 
 ## References
 
@@ -55,10 +54,10 @@ namespace AlgebraicGeometry
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   (ι : PadicAlgCl l →+* ℂ)
 
-/-- **Compact-support upper bound for a middle extension on a curve** (blueprint:
-`theorem-weight-bound-curve--1`): let `j : U ⟶ C` be a dense open immersion of smooth
-geometrically connected curves over `k₀` and let `F` be a lisse Weil sheaf on `U`, punctually
-`ι`-pure of weight `w`. Then `H_c^r(C, j_*F)` has weights at most `w + r` for every `r`. -/
+/-- **Compact-support upper bound for a middle extension on a curve.** Let `j : U ⟶ C` be a dense
+open immersion of smooth geometrically connected curves over `k₀` and let `F` be a lisse Weil
+sheaf on `U`, punctually `ι`-pure of weight `w`. Then `H_c^r(C, j_*F)` has weights at most
+`w + r` for every `r`. -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_directImage_of_isCurve
     {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))]
@@ -162,10 +161,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_directImage_of_isCurve
 
 /-- **Compact-support upper bound on a curve.** Let `C` be a smooth geometrically connected curve
 over `k₀` and let `F` be a lisse Weil sheaf on `C`, punctually `ι`-pure of weight `w`. Then every
-`H_c^r(C, F)` has weights at most `w + r`: this is
-`AlgebraicGeometry.hasWeightsAtMostOver_compactlySupportedCohomology_directImage_of_isCurve` for
-the identity of `C`, whose middle extension `(𝟙 C)_* F` is `F` itself
-(blueprint: `theorem-weight-bound-curve--2`). -/
+`H_c^r(C, F)` has weights at most `w + r`. -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_of_isCurve {C : Scheme.{u}}
     [C.Over (Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
@@ -193,8 +189,7 @@ C --- c ---> ℙ¹_{k₀}
     `--------> Spec k₀
 ```
 
-has weights at most `w + r`, with no ramification restriction at the point at infinity
-(blueprint: `theorem-weight-bound-curve--2`). -/
+has weights at most `w + r`, with no ramification restriction at the point at infinity. -/
 theorem hasWeightsAtMost_compactlySupportedCohomology_of_projectiveLine {C : Scheme.{u}}
     [Nonempty C] [C.Over (Spec (CommRingCat.of k₀))]
     (c : C ⟶ ℙ(ULift.{u} (Fin 2); Spec (CommRingCat.of k₀))) [IsOpenImmersion c]

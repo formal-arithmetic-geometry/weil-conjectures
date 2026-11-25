@@ -27,23 +27,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A finite affine alternating complex gives a bounded flat universal cohomology model.
-Properness and finite presentation are not needed for this construction.
-Source: Stacks Project, Tags 0A1D and 01XK; the construction preceding Tag 0A1H.
-(blueprint: lem-pc-proper-flat-cohomology-model-data).
-Proof: choose an affine neighbourhood U of t. Quasi-compactness gives a finite affine
-cover of its inverse image; separatedness makes all its nonempty finite intersections
-affine. In degree n take the finite direct sum of sections of F on increasing
-(n+1)-tuples of members of the cover, with signed restriction differential, and associate
-sheaves over U. Above the number of cover members there are no such tuples; negative
-terms are zero. The affine local flatness criterion makes the section modules flat over
-Gamma(U,O), so their associated sheaves are flat and quasi-coherent. On any affine new
-base the inverse-image affine cover has section modules obtained by tensoring these
-modules with the new base ring. The alternating complex and its differential therefore
-base-change termwise. Affine acyclicity and Cech comparison identify its homology with
-higher direct images. These identifications are induced by the Cech augmentation and
-hence agree on overlaps, giving the assertion for arbitrary new bases. Transport the
-standard fibre-product result along the unique isomorphism associated to the given
-cartesian square. An empty inverse image uses the zero complex and d=0. -/
+Properness and finite presentation are not needed for this construction
+(Stacks, Tags 0A1D and 01XK). -/
 theorem exists_proper_flat_cohomology_model_data {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules)
     [IsSeparated f] [QuasiCompact f]
     [HasInjectiveResolutions X.Modules] [F.IsQuasicoherent]

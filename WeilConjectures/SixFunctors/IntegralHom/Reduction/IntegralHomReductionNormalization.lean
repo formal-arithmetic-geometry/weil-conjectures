@@ -10,10 +10,20 @@ import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReductionNor
 
 /-! # Normalization component of an integral reduction presentation
 
-This is the sectionwise and derived counit square required by
-`ReductionPresentation.normalization`.
-(blueprint: lem-sf-integral-hom-reduction-normalization).
-(blueprint: lem-sf-integral-hom-models-exist-reduction-normalization).
+We show that for every target tensor presentation there is a reduction presentation with that
+target, i.e. a normalized comparison providing the sectionwise and derived counit square
+required by `ReductionPresentation.normalization`.
+
+## Implementation details
+
+Scalar extension and restriction are applied to K-flat representatives. The ordinary unit is
+`x ↦ 1 ⊗ x`; balanced tensor associativity gives the invertible chain comparison and its
+pure-tensor equation, and the derived counit square follows from the left-derived universal
+property and the canonical tensor pullback.
+
+## References
+
+* Stacks Project, Tags 07A4, 07A6.
 -/
 
 @[expose] public section
@@ -36,14 +46,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] reductionCounit reductionUnit integralDerivedReduction
   integralReductionChangeOfRings
 
-/-- A normalized comparison exists for a fixed target.
-
-Source: Stacks Tags 07A4 and 07A6; blueprint order 2478, proof step 3.
-Proof: apply scalar extension and restriction to K-flat representatives. The
-ordinary unit is `x ↦ 1 ⊗ x`; balanced tensor associativity gives the invertible
-chain comparison and its pure-tensor equation. The derived counit square follows
-from the left-derived universal property and the canonical tensor pullback.
--/
+/-- For a fixed target tensor presentation, there is a reduction presentation (a normalized
+comparison) with that target. -/
 theorem reduction_normalization_exists
     (a : TensorPresentation.{t, u} Y
       (completedIntegralCommRingSheaf l E Y D hl)) (n : ℕ)

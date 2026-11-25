@@ -12,10 +12,9 @@ public import WeilConjectures.Topology.Sheaves.CechComparison
 
 /-! # Refinement of module Cech complexes along a scheme morphism
 
-Source: Stacks Project, Cohomology, Tag 01FD
-(blueprint: def-sc-cech-refinement-cochain-map).
-The component formula fixes the map to pullback of sections followed by restriction;
-it is not an unconstrained map assumed to commute with cohomology comparisons.
+## References
+
+* Stacks Project, Tag 01FD
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
 /-- The inclusion of a refined intersection in the inverse image of its original
-intersection. Covers and index sets need not be finite.
-Source: Stacks, Tag 01FD (blueprint: def-sc-cech-refinement-cochain-map). -/
+intersection. Covers and index sets need not be finite (Stacks, Tag 01FD). -/
 def cechRefinementIntersection {X X' : Scheme.{uR}} (f : X' ⟶ X)
     {ι ι' : Type uR} (U : ι → X.Opens) (U' : ι' → X'.Opens)
     (refine : ι' → ι) (hrefine : ∀ i, U' i ≤ f ⁻¹ᵁ U (refine i))
@@ -42,8 +40,7 @@ def cechRefinementIntersection {X X' : Scheme.{uR}} (f : X' ⟶ X)
     exact hrefine (y j) ((iInf_le (fun j ↦ U' (y j)) j) hx))
 
 /-- The prescribed refinement map on cochains, written on every tuple of indices.
-The canonical tensor-pullback adjunction unit gives pullback of sections.
-Source: Stacks, Tag 01FD (blueprint: def-sc-cech-refinement-cochain-map). -/
+The canonical tensor-pullback adjunction unit gives pullback of sections (Stacks, Tag 01FD). -/
 def IsCechRefinementMap {X X' : Scheme.{uR}} (f : X' ⟶ X)
     {ι ι' : Type uR} (U : ι → X.Opens) (U' : ι' → X'.Opens)
     (refine : ι' → ι) (hrefine : ∀ i, U' i ≤ f ⁻¹ᵁ U (refine i)) (F : X.Modules)
@@ -63,13 +60,7 @@ def IsCechRefinementMap {X X' : Scheme.{uR}} (f : X' ⟶ X)
           (TopCat.Presheaf.cechComplexFunctorXAddEquiv U F.presheafModuleCat n a
             (refine ∘ y)))
 
-/-- Pullback and restriction define a unique refinement cochain map.
-Source: Stacks, Tag 01FD (blueprint: def-sc-cech-refinement-cochain-map).
-Proof: use the specified tuple components and the product universal property to define
-its degree maps. Pullback of sections and restrictions are additive. Each omitted-vertex
-restriction commutes with these maps, so the alternating sums commute with the
- differential. Uniqueness follows by the product projections in every degree.
-No covering hypothesis is needed for the cochain construction. -/
+/-- Pullback and restriction define a unique refinement cochain map (Stacks, Tag 01FD). -/
 theorem exists_unique_cechRefinementMap {X X' : Scheme.{uR}} (f : X' ⟶ X)
     {ι ι' : Type uR} (U : ι → X.Opens) (U' : ι' → X'.Opens)
     (refine : ι' → ι) (hrefine : ∀ i, U' i ≤ f ⁻¹ᵁ U (refine i)) (F : X.Modules) :
@@ -142,8 +133,7 @@ theorem exists_unique_cechRefinementMap {X X' : Scheme.{uR}} (f : X' ⟶ X)
     rfl
 
 /-- The refinement map on cohomology, transported through the canonical homology
-comparison for forgetting scalars on each scheme.
-Source: Stacks, Tag 01FD (blueprint: def-sc-cech-refinement-cochain-map). -/
+comparison for forgetting scalars on each scheme (Stacks, Tag 01FD). -/
 def cechRefinementHomology {X X' : Scheme.{uR}} {f : X' ⟶ X}
     {ι ι' : Type uR} {U : ι → X.Opens} {U' : ι' → X'.Opens} {F : X.Modules}
     (gamma : ((forget₂ (ModuleCat.{uR} Γ(X, ⊤)) AddCommGrpCat.{uR}).mapHomologicalComplex

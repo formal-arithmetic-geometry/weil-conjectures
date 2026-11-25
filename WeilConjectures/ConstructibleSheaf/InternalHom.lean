@@ -20,10 +20,9 @@ Let `Λ` be a commutative ring. For sheaves of `Λ`-modules on the small étale 
 - the constant sheaf functor preserves internal homs out of finitely presented modules
   (`AlgebraicGeometry.Etale.isIso_ihomComparison_constantSheaf_app`): it is monoidal and exact;
 - for `Λ` noetherian, the internal hom `[L, M]` of two finite locally constant sheaves is finite
-  locally constant (`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.ihom`, blueprint
-  `lemma-section-normal-bundle--1`, clause (1)): on a common trivialising cover, pullback
-  commuting with internal homs, it is the constant sheaf at `Hom_Λ(P, Q)` for finitely generated,
-  hence finitely presented, modules `P` and `Q`.
+  locally constant (`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.ihom`): on a common
+  trivialising cover, pullback commuting with internal homs, it is the constant sheaf at
+  `Hom_Λ(P, Q)` for finitely generated, hence finitely presented, modules `P` and `Q`.
 
 We also record two local criteria along an étale cover: a morphism of sheaves whose pullbacks to
 the members of an étale cover are isomorphisms is an isomorphism
@@ -118,16 +117,9 @@ theorem Etale.isIso_ihomComparison_constantSheaf_app (P Q : ModuleCat.{u + 1} Λ
     (constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} Λ) terminalIsTerminal).isLeftAdjoint
   exact ModuleCat.isIso_ihomComparison_app_of_finitePresentation _ P Q
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Rigidity of morphisms of finite locally
-constant sheaves
-
-*The Hom sheaf*, clause (1): for `Λ` noetherian, the internal hom `[L, M]` of two finite
-locally constant sheaves of `Λ`-modules on `X_ét` is finite locally constant. On a common
-trivialising cover, nonempty members, `L` and `M` are the constant sheaves at finitely generated,
-hence finitely presented, modules `P` and `Q`; the pullback commutes with internal homs
-(`AlgebraicGeometry.Etale.isIso_ihomComparison_upperStar`) and so does the constant sheaf
-functor (`AlgebraicGeometry.Etale.isIso_ihomComparison_constantSheaf_app`), so that `[L, M]` is
-there the constant sheaf at the finitely generated module `Hom_Λ(P, Q)`. -/
+/-- **The Hom sheaf of finite locally constant sheaves**: for `Λ` noetherian, the internal hom
+`[L, M]` of two finite locally constant sheaves of `Λ`-modules on `X_ét` is finite locally
+constant. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.ihom [IsNoetherianRing Λ]
     (L M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsFiniteLocallyConstantSheaf L] [IsFiniteLocallyConstantSheaf M] :

@@ -17,10 +17,8 @@ namespace WeilConjectures
 open AlgebraicallyClosedCoefficients
   (Index Coefficient coefficientInclusion coefficientInclusion_laws)
 
-/-- Cache the existing coefficient inclusion with field-induced semiring structures.
-Source: the finite-coefficient models of the current blueprint automorphism pullback;
-`AlgebraicallyClosedCoefficients.coefficientInclusion` is used verbatim.
-(blueprint: def-pod-isomorphism-coefficient-inclusions). -/
+/-- The coefficient inclusion `coefficientInclusion l Ω E L h` for `E ≤ L`, viewed as a
+`ℚ_[l]`-algebra map with the semiring structures induced by the coefficient fields. -/
 def isomorphismCoefficientInclusion
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

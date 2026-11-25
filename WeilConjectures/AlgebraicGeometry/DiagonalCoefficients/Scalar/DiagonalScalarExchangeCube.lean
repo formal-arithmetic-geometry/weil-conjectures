@@ -27,24 +27,7 @@ variable {R T : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 /-- Scalar extension commutes with the normalized geometric exchange mate.
 This is an equality of comparisons on arbitrary derived objects and contains
-no trace, invertibility assertion, or line endpoint.
-
-Source: latest blueprint, diagonal coefficient changes, proof paragraph (3),
-interchange of scalar and geometric adjunction mates.
-(blueprint: lem-diagonal-scalar-exchange-cube).
-
-Proof: transport each right-derived model to its canonical functor using its
-full universal-unit equation. Uniqueness of right derivation identifies the
-normalized restriction square with the geometric mate of exact restriction
-commuting with inverse image. Scalar extension and inverse image have the
-canonical tensor balancing comparison. Its normalization on K-flat complexes
-shows compatibility with composition of two geometric inverse images. Paste
-these two composition equations around the commutative geometric square.
-Apply the interchange identity for adjunction mates in both directions.
-This gives the exchange rectangle with inverse scalar/pullback comparisons;
-cancel those isomorphisms to obtain the displayed orientation. Transport the
-four right-derived models back. The unit equations ensure these transports
-are precisely the eqToIso maps in modelExchange. -/
+no trace, invertibility assertion, or line endpoint. -/
 theorem scalar_model_exchange_cube
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (hX : X' ⟶ X) (hS : S' ⟶ S)

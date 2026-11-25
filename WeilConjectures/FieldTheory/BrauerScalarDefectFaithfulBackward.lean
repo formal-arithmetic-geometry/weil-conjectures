@@ -10,20 +10,29 @@ import Mathlib.RingTheory.MatrixAlgebra
 import Mathlib.LinearAlgebra.Matrix.ToLin
 import WeilConjectures.FieldTheory.CentralSimpleTensorEnd
 import WeilConjectures.FieldTheory.BrauerScalarDefectTensorSplit
+
+/-!
+# Equal scalar-defect classes imply Brauer equivalence
+
+If two central simple algebras `A` and `B` over `K` have the same scalar-defect class in
+`GaloisUnitsH2 K`, then they are Brauer equivalent.
+
+## Implementation details
+
+Equality in cohomology makes the tensor product of `A` with the opposite of `B` split, via
+matrix Hilbert 90 on a finite Galois extension. The isomorphism `Bᵐᵒᵖ ⊗ B ≅ M_m(K)`
+then gives `M_m(A) ≅ A ⊗ (Bᵐᵒᵖ ⊗ B) ≅ (A ⊗ Bᵐᵒᵖ) ⊗ B ≅ M_n(B)`.
+
+## References
+
+* Stacks Project, Theorem 03R7 (injectivity) and Section 0DVG.
+-/
+
 @[expose] public section
 universe u
 namespace Field
-/-- Equal scalar-defect classes imply Brauer equivalence.
-
-Equality in cohomology makes the quotient of the two matrix descent defects a
-scalar coboundary.  Rescaling one lift by its scalar one-cochain gives a genuine
-general-linear cocycle on a finite Galois extension.  Finite Galois descent (the
-matrix form of Hilbert 90) trivializes this cocycle, so the tensor product of `A`
-with the opposite of `B` is an endomorphism algebra.  The central-simple-algebra
-criterion for a split tensor product then gives isomorphic positive matrix
-amplifications of `A` and `B`, namely `IsBrauerEquivalent A B`.  This is the
-injectivity argument in Stacks Project, Theorem 03R7; the cocycle convention is
-that of Section 0DVG. (blueprint: lem-sc-brauer-scalar-defect-faithful-backward). -/
+/-- Central simple algebras `A` and `B` with equal scalar-defect classes are Brauer
+equivalent. -/
 theorem brauerEquivalent_of_brauerScalarDefect_eq (K : Type u) [Field K]
     (A B : CSA.{u, u} K) (x y : GaloisUnitsH2 K)
     (hx : HasBrauerScalarDefect K A x) (hy : HasBrauerScalarDefect K B y)

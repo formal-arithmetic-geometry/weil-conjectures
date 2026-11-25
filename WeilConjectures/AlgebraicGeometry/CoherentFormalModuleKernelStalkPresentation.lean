@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelAffineStalkFi
 
 /-! # Stalk presentations of stabilized kernel images
 
-Source: Stacks Project, Lemma 087X, proof of claims (a) and (b).
-(blueprint: lem-weil-pbc-formal-kernel-stalk-presentation).
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -38,28 +37,7 @@ private theorem intersection_filtration_bound
 
 /-- The stabilized image system has compatible surjective stalk presentations with an
 eventually bounded kernel filtration.
-
-Source: Stacks Project, Lemma 087X, proof of claims (a) and (b).
-(blueprint: lem-weil-pbc-formal-kernel-stalk-presentation).
-
-Proof: On each member of a finite affine cover, use the affine formal-module
- equivalence to represent alpha by a homomorphism of finite modules over the
- completed coordinate ring. Its kernel L is finite since that ring is Noetherian.
- Artin--Rees for the image of this homomorphism identifies the eventual kernel
- images at level m with L/(L intersect I^(m+1)M). The hypothesis hc identifies
- the prescribed stabilized image with this eventual image; hS and naturality
- of j identify S and all its transition maps with these quotient images.
- Artin--Rees for L in M supplies b with L intersect I^(r+b)M contained in I^r L.
- Choose the maximum of these constants over the finite cover. Localize L
- (as a module over the affine coordinate ring) at x to get M. Exactness of
- localization gives surjective maps p_m to S_m with kernels the localizations
- of L intersect I^(m+1)M_source. Their transitions commute, since they are
- induced by the same inclusions of L into the source module. Localization
- of the Artin--Rees containment gives the displayed kernel bound uniformly
- in x. The equation on germs identifies J with the localization of I.
- If I is zero, the presentations are isomorphisms; if it is the unit ideal,
- their targets vanish and the bound is automatic. Zero modules cause no
- exception and the empty cover has maximum zero. -/
+(Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_stalk_presentation
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)

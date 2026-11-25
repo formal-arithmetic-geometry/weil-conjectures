@@ -10,9 +10,10 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 /-! # Morphisms between base-derived tensor cohomology models
 
-Source: Stacks Project, More on Algebra, Tag 06Y6, functoriality of the
-derived tensor product and its commuting coefficient actions.
-(blueprint: lem-pc-base-derived-tensor-cohomology-model-map).
+## References
+
+* Stacks Project, More on Algebra, Tag 06Y6, functoriality of the
+  derived tensor product and its commuting coefficient actions.
 -/
 
 @[expose] public section
@@ -35,20 +36,7 @@ variable (R A B D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Functoriality lifted to the tensor-algebra cohomology objects of any two models.
-Source: Stacks Project, More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-base-derived-tensor-cohomology-model-map).
-
-Proof: the universal counits determine the unique derived-functor isomorphism
-from L.derived to K.derived. Let delta be its forward natural transformation.
-Apply cohomology to L.derived applied to f, then delta, and conjugate by the
-two cohomologyIso isomorphisms. This is a B-linear map. For each a in A,
-f commutes with multiplication by a; naturality of delta and the two
-cohomologyIso_smul equations show that the conjugated map also commutes
-with a tensor 1. Together with B-linearity, this gives linearity for every
-pure tensor a tensor b, and tensor induction gives A tensor_R B-linearity.
-Regard it as a ModuleCat morphism g. Its restriction to B is exactly the
-conjugated map by construction, yielding the stated equation. -/
+/-- Functoriality lifted to the tensor-algebra cohomology objects of any two models. -/
 theorem exists_baseDerivedTensorCohomologyModelMap
     (Q Q' : CochainComplex (ModuleCat.{u} A) ℤ) (f : Q ⟶ Q')
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

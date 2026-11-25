@@ -50,13 +50,19 @@ import all WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 
 /-! # The explicit scalar cone in normalized word coordinates
 
-Source: blueprint main-20261015, sec-poincare-duality/sk-lem-finite,
-prop-weil-operations.proof.md, first sentence through prose-10-20,
-first paragraph; agent-extracted normalization calculation
-(blueprint: lem-pod-explicit-scalar-cone-word-coordinates).
+We express the tensor-and-completion comparison arrow for scalar extension and pullback in two
+word coordinates, built from the whole-system counits and arbitrary normalized primitive models.
 
-Positive exponent n+1 is indexed by n. The two word coordinates use the actual
-whole-system counits and arbitrary supplied normalized primitive models.
+## Implementation details
+
+Positive exponent `n + 1` is indexed by `n`. The main theorem is proved by comparing with one
+simultaneous normalized comparison system `D`: its Roos models agree with the supplied ones
+(checked on K-injective resolutions), any two reduction calculi are compared via
+`leftAdjointUniq`, and primitive uniqueness transports the supplied realizations to those of `D`.
+In `D` the existing completed scalar pullback normalization gives the identity, which is then
+transported back by naturality and cancellation of an isomorphism. These are whole-system
+calculations: no faithfulness of the separate finite levels, flatness of a ramified quotient
+map, or additional Tor bound is used.
 -/
 
 @[expose] public noncomputable section
@@ -78,28 +84,20 @@ variable (l : ℕ) [Fact l.Prime]
   {X Y : AlgebraicGeometry.Scheme.{u}} (g : X ⟶ Y)
   (SEY : CoefficientDerivedSystemCalculus l E Y)
 
-/-- The first whole-system word U_g,E R_E,Y K.
-Source: the node's displayed definitions of C and A
-(blueprint: lem-pod-explicit-scalar-cone-word-coordinates). -/
+/-- The whole-system word `U_{g,E} R_{E,Y} K`: the pullback of the reduction system of `K`. -/
 def pullbackSystem (K : DerivedCategory (integralTowerModules l E Y)) :=
   (integralComparisonDerivedSequencePullback l E g).obj (SEY.reduction.obj K)
 
-/-- The first scalar word S_Y R_E,Y K, before its pullback.
-Source: the node's displayed definitions of C and B
-(blueprint: lem-pod-explicit-scalar-cone-word-coordinates). -/
+/-- The scalar word `S_Y R_{E,Y} K`: the scalar extension of the reduction system of `K`. -/
 def scalarSystem (K : DerivedCategory (integralTowerModules l E Y)) :=
   (integralComparisonDerivedSequenceScalar l E L ι Y).obj (SEY.reduction.obj K)
 
-/-- The source quotient-system word A = S_X U_g,E C.
-Source: the node's displayed definition of A
-(blueprint: lem-pod-explicit-scalar-cone-word-coordinates). -/
+/-- The source quotient-system word `A = S_X U_{g,E} C`. -/
 def sourceSystem (K : DerivedCategory (integralTowerModules l E Y)) :=
   (integralComparisonDerivedSequenceScalar l E L ι X).obj
     (pullbackSystem l E g SEY K)
 
-/-- The target quotient-system word B = U_g,L S_Y C.
-Source: the node's displayed definition of B
-(blueprint: lem-pod-explicit-scalar-cone-word-coordinates). -/
+/-- The target quotient-system word `B = U_{g,L} S_Y C`. -/
 def targetSystem (K : DerivedCategory (integralTowerModules l E Y)) :=
   (integralComparisonDerivedSequencePullback l L g).obj (scalarSystem l E L ι SEY K)
 
@@ -113,10 +111,8 @@ variable (SEX : CoefficientDerivedSystemCalculus l E X)
   (SX : IntegralComparisonScalarModel l E L ι X SEX ρLX)
   (SY : IntegralComparisonScalarModel l E L ι Y SEY ρLY)
 
-/-- beta_A is S-hat_X(b_U,K), then b_S,LUC, then L(S_X(e_UC)).
-This is exactly r_S,UC composed with S-hat_X(b_U,K).
-Source: the node's displayed beta_A and r formulas
-(blueprint: lem-pod-explicit-scalar-cone-word-coordinates). -/
+/-- The source word coordinate `β_A`: the scalar extension of the pullback realization of `K`,
+followed by the scalar realization and the image of the whole-system counit. -/
 def betaA (K : DerivedCategory (integralTowerModules l E Y)) :
     (integralScalarExtensionOfUniverses l E L ι X).obj
         ((integralDerivedPullback l E g).obj K) ⟶
@@ -128,10 +124,8 @@ def betaA (K : DerivedCategory (integralTowerModules l E Y)) :
       ((integralComparisonDerivedSequenceScalar l E L ι X).map
         (SEX.adjunction.counit.app (pullbackSystem l E g SEY K)))
 
-/-- beta_B is U-hat_g,L(b_S,K), then b_U,LSC, then L(U_g,L(e_SC)).
-It retains the entire-system counit of the scalar intermediate system.
-Source: the node's displayed beta_B and r formulas
-(blueprint: lem-pod-explicit-scalar-cone-word-coordinates). -/
+/-- The target word coordinate `β_B`: the pullback of the scalar realization of `K`, followed
+by the pullback realization and the image of the whole-system counit. -/
 def betaB (K : DerivedCategory (integralTowerModules l E Y)) :
     (integralDerivedPullback l L g).obj
         ((integralScalarExtensionOfUniverses l E L ι Y).obj K) ⟶
@@ -234,41 +228,9 @@ private theorem normalized_transport
     _ = p ≫ (k ≫ b.hom) := congrArg (fun z ↦ p ≫ z) hk
     _ = (p ≫ k) ≫ b.hom := (Category.assoc _ _ _).symm
 
-/-- The explicit tensor/completion arrow in the prescribed two word coordinates.
-The five effectivity hypotheses are at C, U_E C, S_Y C, A, and B respectively.
-Each lists normalization, constructible-complete realization, and invertible counit.
-The primitive realization structures impose the simultaneous quotient and Roos
-normalizations; no finite-level flatness or Tor interval is assumed.
-
-Source: blueprint main-20261015, sec-poincare-duality/sk-lem-finite,
-prop-weil-operations.proof.md, first sentence through prose-10-20,
-first paragraph; agent-extracted comparison normalization
-(blueprint: lem-pod-explicit-scalar-cone-word-coordinates).
-
-Proof:
-1. Choose one simultaneous normalized comparison system D. Its Roos models equal
-   the supplied ones: compare on K-injective resolutions using the normalized
-   computes equations, then extend by naturality and cancellation.
-2. Compare any two reduction calculi S,T by leftAdjointUniq. The unit-projection
-   equations identify its finite evaluation maps. Hence whole-system quotient
-   presentations and their coherence transport across this isomorphism. Transport
-   the primitive realization models with them and apply primitive uniqueness.
-   This identifies the supplied realizations with those of D, after applying the
-   system operation and total derived limit to the reduction comparison.
-3. Naturality of the primitive realizations rewrites each word coordinate as its
-   initial realization followed by the image of a reduction/counit composite.
-   Naturality of the actual counit and the leftAdjointUniq counit equation then
-   transport both word coordinates to D, retaining the intermediate counits.
-4. In D the source coordinate is lambda and the target coordinate is mu followed
-   by L(kappa). The existing completed scalar pullback normalization gives
-   alpha ; mu = lambda for the specified tensor-and-completion comparison.
-5. Postcompose the required equality with the invertible image of the initial
-   reduction comparison. Substitute the transported coordinates and use the
-   naturality of kappa. Cancelling this isomorphism proves the equality.
-
-These are whole-system calculations. No faithfulness of the separate finite
-levels, flatness of a ramified quotient map, or additional Tor bound is used.
--/
+/-- The explicit tensor-and-completion comparison arrow, read in the word coordinates `β_A` and
+`β_B`, is the image of the system-level scalar-pullback comparison, provided that `C`, `U_E C`,
+`S_Y C`, `A` and `B` are normalized with constructible completed limits and invertible counits. -/
 theorem explicitScalarConeWordCoordinates
     [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

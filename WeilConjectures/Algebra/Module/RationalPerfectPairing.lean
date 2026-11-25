@@ -32,7 +32,7 @@ cohomology, by the Bockstein sequence
 `ℓ`-power torsion of `Hⁱ⁺¹(X, ℤ_ℓ)` (`LinearMap.exists_eq_pow_smul_of_exact`,
 `LinearMap.pow_smul_mem_range_of_exact`, `Submodule.exists_pow_smul_eq_zero_of_isNoetherian`).
 This is the linear algebra by which the perfectness of the finite-level Poincaré pairings is
-transported to `ℚ̄_ℓ`-coefficients (blueprint `theorem-poincare-duality--6`).
+transported to `ℚ̄_ℓ`-coefficients.
 -/
 
 @[expose] public section
@@ -137,11 +137,7 @@ theorem apply_eq_zero_of_mem_torsion (P : A →ₗ[R] B →ₗ[R] R) {a : A}
 
 /-- **Torsion left kernel.** Let `P : A × B ⟶ R` be a pairing over a Noetherian domain, with
 `A` finitely generated, and `ϖ` a nonzero nonunit. If `ϖᵉ` maps the left kernel of `P` into
-`ϖᵐ A` for some `e < m`, then the left kernel of `P` is torsion.
-
-Indeed the left kernel is saturated, so if it contained a non-torsion element it would contain
-one whose image in the free module `A/torsion` is not divisible by `ϖ`, by Krull's intersection
-theorem; but `ϖᵉ x ∈ ϖᵐ A` forces that image to be divisible by `ϖ^{m-e}`. -/
+`ϖᵐ A` for some `e < m`, then the left kernel of `P` is torsion. -/
 theorem mem_torsion_of_pow_smul_eq [Module.Finite R A] (P : A →ₗ[R] B →ₗ[R] R) {ϖ : R}
     (hϖ : ¬IsUnit ϖ) (hϖ0 : ϖ ≠ 0) {e m : ℕ} (hem : e < m)
     (h : ∀ a, P a = 0 → ∃ a', ϖ ^ e • a = ϖ ^ m • a') {a : A} (ha : P a = 0) :

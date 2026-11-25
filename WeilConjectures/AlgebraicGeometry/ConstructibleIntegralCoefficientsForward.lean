@@ -20,8 +20,9 @@ import Mathlib.GroupTheory.FiniteAbelian.Basic
 
 /-! # Constructibility with integral coefficients: forward implication
 
-Source: Stacks Project Tags 03RW and 095E.
-(blueprint: q1-constructible-integral-coefficients-forward).
+## References
+
+* Stacks Project, Tags 03RW and 095E
 -/
 
 @[expose] public section
@@ -34,9 +35,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The counit of the equivalence between integral modules and abelian groups identifies
 an abelian sheaf with the underlying abelian sheaf of its integral coefficient transport.
-The change to the universe-lifted ring leaves the underlying group unchanged.
-Source: the coefficient comparison in Stacks Project Tag 03RW.
-(blueprint: q1-constructible-integral-coefficients-forward) -/
+The change to the universe-lifted ring leaves the underlying group unchanged (Stacks, Tag 03RW). -/
 private theorem integralAbIso {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙
@@ -51,11 +50,7 @@ private theorem integralAbIso {X : Scheme.{u}}
     (Functor.isoWhiskerLeft F.obj e ≪≫ Functor.rightUnitor F.obj)⟩
 
 /-- Forward direction of `isConstructibleSheaf_integral_iff`.
-The proof follows the constructible stratification comparison: a finitely generated
-integral stalk is torsion by the torsion filtration, hence finite, and forgetting
-module structure preserves local constancy and inverse-image stalks.
-Source: Stacks Project Tags 03RW and 095E; blueprint q1-constructible-integral-coefficients.
-(blueprint: q1-constructible-integral-coefficients-forward) -/
+(Stacks, Tags 03RW and 095E) -/
 theorem isConstructibleSheaf_integral_forward {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hF : X.IsTorsionAbelianSheaf F) :

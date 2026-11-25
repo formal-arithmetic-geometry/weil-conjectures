@@ -11,8 +11,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 /-!
 # Constant pullback composition coherence
 
-Source: Stacks Project, sites.tex, Tag 03CB; cohomology.tex, Tag 01F8.
-(blueprint: lem-weil-pbc-constant-pullback-composition-coherence)
+## References
+
+* Stacks Project, Tags 03CB and 01F8
 -/
 
 @[expose] public section
@@ -25,20 +26,8 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- Constant-sheaf comparison morphisms commute with inverse-image composition.
-Source: Stacks Project, sites.tex, Tag 03CB (composition of inverse images), and
-cohomology.tex, Tag 01F8, applied to the constant sheaf.
-
-Proof: the constant-sheaf comparisons are the unique left-adjoint comparisons for
-constant sheaf followed by inverse image, both left adjoint to global sections.
-The comparison upperStarComp is obtained by conjugating the composition comparison
-for direct images. That comparison on sections over the terminal object is the
-canonical pullback-pasting identification. Thus both displayed maps have the same
-adjoint, namely the identity of the constant coefficient object followed by the
-adjunction unit for the composite. Uniqueness under the adjunction gives equality.
-This is an equality of sheaf morphisms, before applying cohomology in any degree.
-(blueprint: lem-weil-pbc-constant-pullback-composition-coherence)
--/
+/-- Constant-sheaf comparison morphisms commute with inverse-image composition
+(Stacks, Tags 03CB and 01F8). -/
 theorem constantPullbackCompositionCoherence {X Y Z : Scheme.{u}}
     (u : X ⟶ Y) (v : Y ⟶ Z) (M : AddCommGrpCat.{u + 1}) :
     ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (u ≫ v)).inv.app M) ≫

@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.ChernCoeffi
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.FiniteRealization.DiagonalFiniteUnitArrowTransport
 
 /-! # Assembly of the four coefficient adjunct squares
-
-Source: diagonal tower coefficient changes proof (1), reduction of the section class.
 -/
 
 @[expose] public noncomputable section
@@ -82,9 +80,7 @@ variable {B R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   {A : Type (u + 1)} [CommRing A] [Finite A]
   {N : ℕ} {hN : 0 < N} {hA : (N : A) = 0} {hY : IsUnit (N : Γ(Y, ⊤))}
 
-/-- The local arrow through the four coefficient functors.
-Source: coefficient changes (1).
-(blueprint: lem-diagonal-coefficient-adjunct-assembly). -/
+/-- The local arrow through the four coefficient functors. -/
 @[irreducible]
 def ChernCoefficientDiagram.localAdjunctArrow
     (x : ChernCoefficientDiagram l Y B R A N hN hA hY)
@@ -101,13 +97,7 @@ def ChernCoefficientDiagram.localAdjunctArrow
             x.toIntegral.lineP.shift x.b) ≫ x.scalar.lineP.shift x.q) ≫
       x.eP.shiftedLine N hA (x.L (ProjectiveLine Y)) x.lineP)
 
-/-- Four unit squares transport an arbitrary completed arrow and its adjunct.
-Source: coefficient changes (1), functoriality and adjunction naturality.
-(blueprint: lem-diagonal-coefficient-adjunct-assembly).
-Proof: compose the first square with the two scalar-unit mate squares and the finite
-unit square. Naturality transports the local arrow. The composite unit inverse
-and line maps identify the local arrow, and adjunction naturality identifies its
-finite adjunct. -/
+/-- Four unit squares transport an arbitrary completed arrow and its adjunct. -/
 theorem coefficient_adjunct_transport
     (x : ChernCoefficientDiagram l Y B R A N hN hA hY)
     (z : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶

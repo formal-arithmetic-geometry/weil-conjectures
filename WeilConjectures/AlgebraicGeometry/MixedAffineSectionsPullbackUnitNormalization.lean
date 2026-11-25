@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.MixedPullbackSectionsCounitUnit
 import all Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 
 /-! # The target affine model and its pullback unit normalization
-Source: Stacks Project, Tags 06Z0, 08DW(2) and 0D5T.
+
+## References
+
+* Stacks Project, Tags 06Z0, 08DW and 0D5T.
 -/
 
 @[expose] public section
@@ -117,25 +120,8 @@ private theorem mixedSectionsComplexUnit_isIso_of_iso (X : Scheme.{u})
   infer_instance
 
 -- The affine chart and localization factors require larger definitional-equality searches.
-/-- The pullback counit and affine sections comparison normalize the target unit.
-Source: Stacks Project, Tags 06Z0, 08DW(2), 0D5T.
-(blueprint: lem-sc-mixed-affine-pullback-unit-normalization).
-
-Proof: Tilde preserves K-flatness, and exact restriction through the spectrum chart
-preserves it, so C=F(P) is K-flat. Its derived pullback counit is invertible.
-Termwise tensor-pullback/tilde base change and toSpecΓ naturality identify K(C)
-with the affine chart complex of E(P) on T. The affine derived sections comparison
-is thus invertible on K(C), with no boundedness restriction. Define b by taking
-sections of the pullback counit and then the inverse of that sections comparison.
-The pinned derived pullback adjunction unit factors through the counit by
-exists_schemeDerivedAdjunction and derivedη_fac_app. Apply sections, move its unit
-past the ordinary pullback unit by naturality, and substitute the normalized
-mixedGlobalSectionsDirectImageIso derived-unit equation. Naturality of that Leray
-isomorphism at the counit produces the displayed equality. Insert the complex to
-homotopy quotient factor isomorphisms and the exact scalar restriction factor at
-both endpoints. This statement uses neither scalar extension nor any comparison c
-or hc; it computes only the pullback side. Empty schemes and P=0 are covered by
-the same naturality equations, and no equality of localization universes is used. -/
+/-- The pullback counit and affine sections comparison normalize the target unit
+(Stacks, Tags 06Z0, 08DW and 0D5T). -/
 theorem exists_mixedAffineSections_pullback_unit_normalization
     {S T : Scheme.{u}} [IsAffine S] [IsAffine T] (g : T ⟶ S) :
     let F : ModuleCat.{u} Γ(S, ⊤) ⥤

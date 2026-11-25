@@ -15,22 +15,13 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 # Abelian varieties are projective
 
 An abelian variety admits a closed immersion into a projective space over the base field, hence
-carries an ample invertible module (Stacks 0BFA), and
-the symmetrisation `L ⊗ [-1]^* L` of an ample invertible
+carries an ample invertible module, and the symmetrisation `L ⊗ [-1]^* L` of an ample invertible
 module is again ample and is symmetric.
 
 An abelian variety is a group scheme of finite type over `K`, hence quasi-projective: it admits
 an immersion into a projective space over `K`
-(`AlgebraicGeometry.GrpObj.exists_isImmersion_projectiveSpace`, Stacks 0BF7). Being proper, the
-immersion is closed (`AlgebraicGeometry.IsClosedImmersion.of_comp_of_isSeparated`), which is the
-case `S = Spec K` of Stacks 0B45.
-
-`AlgebraicGeometry.IsVeryAmple` is a genuine definition, and so is the tensor product
-`AlgebraicGeometry.Scheme.Modules.tensorObj` (see
-`WeilConjectures.AlgebraicGeometry.Modules.Invertible`), through whose tensor powers ampleness is
-phrased. So `IsAbelianVariety.exists_isAmple` follows from
-`IsAbelianVariety.exists_isClosedImmersion_projectiveSpace`, with `M := j^* 𝒪(1)` and the first
-tensor power, together with the identification `M^{⊗ 1} ≅ M`.
+(`AlgebraicGeometry.GrpObj.exists_isImmersion_projectiveSpace`). Being proper, the immersion is
+closed (`AlgebraicGeometry.IsClosedImmersion.of_comp_of_isSeparated`).
 
 ## Main definitions
 
@@ -45,6 +36,15 @@ tensor power, together with the identification `M^{⊗ 1} ≅ M`.
 - `AlgebraicGeometry.IsAbelianVariety.isAmple_symmetrisation`,
   `AlgebraicGeometry.IsAbelianVariety.nonempty_iso_overPullback_inv_symmetrisation`:
   `L ⊗ [-1]^* L` is ample and symmetric.
+
+## Implementation details
+
+- In `IsAbelianVariety.exists_isClosedImmersion_projectiveSpace` the index type of the
+  projective space is called `α`, since `ι` is the token of the inversion notation `ι[A]`.
+
+## References
+
+* Stacks Project, Tags 0BFA, 0BF7 and 0B45
 -/
 
 @[expose] public section
@@ -65,17 +65,8 @@ noncomputable def Scheme.Modules.symmetrisation {A : Over (Spec (.of K))} [GrpOb
     (L : A.left.Modules) : A.left.Modules :=
   tensorObj L (overPullback ι[A] L)
 
-/-- Abelian
-varieties are projective.
-
-Every abelian variety `A` over a field `K` admits a closed immersion into a projective space
-over `Spec K` compatible with the structure morphisms. The index type of the projective space
-is called `α`; `ι`, the usual name for an index type, is unavailable as an identifier here,
-being the token of the inversion notation `ι[A]`.
-
-The proof follows Stacks 0BFA: `A` is a group scheme of finite type over `K`, so it admits an
-immersion into a projective space over `K` (Stacks 0BF7), and an immersion of the proper
-`K`-scheme `A` into the separated `K`-scheme `ℙ(α; Spec K)` is closed (Stacks 0B45). -/
+/-- Abelian varieties are projective: every abelian variety `A` over a field `K` admits a closed
+immersion into a projective space over `Spec K` compatible with the structure morphisms. -/
 theorem IsAbelianVariety.exists_isClosedImmersion_projectiveSpace (A : Over (Spec (.of K)))
     [GrpObj A] [IsAbelianVariety A] :
     ∃ (α : Type u) (_ : Finite α) (j : A.left ⟶ ℙ(α; Spec (.of K))),
@@ -85,12 +76,7 @@ theorem IsAbelianVariety.exists_isClosedImmersion_projectiveSpace (A : Over (Spe
   have : IsProper (j ≫ ℙ(α; Spec (.of K)) ↘ Spec (.of K)) := hjA ▸ inferInstance
   exact IsClosedImmersion.of_comp_of_isSeparated j (ℙ(α; Spec (.of K)) ↘ Spec (.of K))
 
-/-- Abelian
-varieties are projective.
-
-Being projective, an abelian variety carries an ample invertible `𝒪_A`-module, namely the
-pullback `j^* 𝒪(1)` of the twisting sheaf along a closed immersion `j` into a projective space:
-it is very ample, and equal to its first tensor power. -/
+/-- An abelian variety carries an ample invertible `𝒪_A`-module. -/
 theorem IsAbelianVariety.exists_isAmple (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] :
     ∃ M : A.left.Modules, IsAmple A.hom M := by
@@ -103,11 +89,8 @@ theorem IsAbelianVariety.exists_isAmple (A : Over (Spec (.of K))) [GrpObj A]
   rw [tensorPow_succ, tensorPow_zero]
   exact (ρ_ _).symm
 
-/-- A symmetric ample module.
-
-Let `A` be an abelian variety over `K` and let `L` be an ample invertible `𝒪_A`-module. Then the
-symmetrisation `L ⊗ [-1]^* L` is ample: `[-1]` is an automorphism, so `[-1]^* L` is ample, and a
-tensor product of ample modules is ample (`AlgebraicGeometry.IsAmple.tensorObj`). -/
+/-- Let `A` be an abelian variety over `K` and let `L` be an ample invertible `𝒪_A`-module. Then
+the symmetrisation `L ⊗ [-1]^* L` is ample. -/
 theorem IsAbelianVariety.isAmple_symmetrisation (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] (L : A.left.Modules) (hample : IsAmple A.hom L) :
     IsAmple A.hom L.symmetrisation := by
@@ -118,11 +101,8 @@ theorem IsAbelianVariety.isAmple_symmetrisation (A : Over (Spec (.of K))) [GrpOb
   rw [Over.w ι[A]] at h
   exact hample.tensorObj h
 
-/-- A symmetric ample module.
-
-The symmetrisation `N = L ⊗ [-1]^* L` of an invertible module on an abelian variety is
-*symmetric*, that is `[-1]^* N ≅ N`: since `[-1] ∘ [-1] = id`, one has
-`[-1]^* N ≅ [-1]^* L ⊗ [-1]^* [-1]^* L ≅ [-1]^* L ⊗ L ≅ N`. -/
+/-- The symmetrisation `N = L ⊗ [-1]^* L` of an invertible module on an abelian variety is
+*symmetric*, that is `[-1]^* N ≅ N`. -/
 theorem IsAbelianVariety.nonempty_iso_overPullback_inv_symmetrisation
     (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A] (L : A.left.Modules)
     [L.IsInvertible] :

@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.RingedGeneratingListsLocalEquality
 /-!
 # Strict descent data for sheafified functorial ring complexes
 
-Source: Stacks Project, algebraization.tex, Tag 099E, independence of generating ideals.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 099E.
 -/
 
 @[expose] public noncomputable section
@@ -29,9 +30,7 @@ open CategoryTheory Opposite AlgebraicGeometry
 
 namespace CategoryTheory
 
-/-- The explicit augmented model on a slice with a specified generating list.
-Source: Stacks Project, Tag 099E, K_{U,I}.
-(auxiliary; not a blueprint node). -/
+/-- The explicit augmented model on a slice with a specified generating list. (Stacks, Tag 099E) -/
 abbrev ringFamilySliceModel
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})
@@ -45,22 +44,7 @@ abbrev ringFamilySliceModel
 
 /-- The sheafified ring-family slice complexes carry strict descent data, including their
 augmentations. This assertion involves no Čech complex or derived comparison.
-Source: Stacks Project, Tag 099E, second and third paragraphs.
-(auxiliary; not a blueprint node).
-
-Proof: for two finite generating ideals on slices, their extensions to a common test object
-both generate the same ideal subsheaf. Locally each of the finitely many generators of one
-is a linear combination of the other generators. Refine the finitely many covering sieves
-in both directions. On the resulting covering the two section ideals are equal; they stay
-equal after any further restriction. Consequently the ring-family presheaf complexes and
-their augmentations are literally identified on these restricted sites. Sheafification
-commutes with slice restriction, so these local identities glue to degreewise linear
-isomorphisms of the sheafified complexes. Refining two choices simultaneously shows that
-the resulting maps agree, by separatedness. The same argument for three lists proves the
-cocycle equation. Naturality, the chain equation and augmentation compatibility hold on
-the common refinements as the corresponding equations of the specified ring-family maps;
-separatedness proves them globally. All refinements are finite intersections of covering
-sieves, so no fibre products, points or global finite generating list are required. -/
+(Stacks, Tag 099E) -/
 theorem exists_ringFamily_descentData
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})

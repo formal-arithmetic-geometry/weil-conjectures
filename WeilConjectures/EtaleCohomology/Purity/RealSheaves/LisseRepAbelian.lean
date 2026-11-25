@@ -46,9 +46,7 @@ instance isLisseRep.containsZero : (W.isLisseRep l).ContainsZero where
     exact continuous_const
 
 variable {W l} in
-/-- A direct sum of lisse Weil representations is lisse: a vector `v` of `X ⊞ Y` is
-`inl (fst v) + inr (snd v)`, so every coefficient of `X ⊞ Y` is a sum of coefficients of `X`
-and of `Y`. -/
+/-- A direct sum of lisse Weil representations is lisse. -/
 theorem isLisseRep.biprod {X Y : Rep.{u} (PadicAlgCl l) W.carrier} (hX : W.isLisseRep l X)
     (hY : W.isLisseRep l Y) : W.isLisseRep l (X ⊞ Y) := by
   obtain ⟨_, hρX⟩ := hX
@@ -87,19 +85,11 @@ instance isLisseRep.isClosedUnderFiniteProducts : (W.isLisseRep l).IsClosedUnder
         (isLisseRep.biprod (hF ⟨.left⟩) (hF ⟨.right⟩)))
   .mk'
 
-/-- Blueprint `definition-weil-representation--1` (subsection
-`definition-weil-representation--1`): exactness of the lisse sheaf–representation
-equivalence.
-
-Let `e` be an equivalence between lisse Weil sheaves on `C₀` and lisse Weil representations of
-`W(C₀)`, such as `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse`. A short complex
+/-- Let `e` be an equivalence between lisse Weil sheaves on `C₀` and lisse Weil representations
+of `W(C₀)`, such as `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse`. A short complex
 `0 → ℱ' → ℱ → ℱ'' → 0` of lisse Weil sheaves is short exact in the category of Weil sheaves if
-and only if the corresponding complex `0 → V' → V → V'' → 0` of representations is short exact:
-both categories are abelian full subcategories, closed under kernels, cokernels and finite
-direct sums (`AlgebraicGeometry.WeilSheaf.IsLisse.kernel_cokernel`,
-`AlgebraicGeometry.WeilGroup.isLisseRep.isClosedUnderKernels`), so their inclusions are exact,
-and an equivalence of abelian categories is exact. In particular subobjects, quotients and
-subquotients match on the two sides. -/
+and only if the corresponding complex `0 → V' → V → V'' → 0` of representations is short
+exact. -/
 theorem isLisse_shortExact_iff {C : Scheme.{u}} [C.Over (Spec (.of K))]
     [IsCurve (C ↘ Spec (.of K))] [Fact (ringChar K ≠ l)] {W : WeilGroup (C ↘ Spec (.of K))}
     (e : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse) ≌

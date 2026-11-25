@@ -22,8 +22,15 @@ import WeilConjectures.AlgebraicGeometry.FiniteCoproductLfpQcqs
 import WeilConjectures.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductSections
 import WeilConjectures.AlgebraicGeometry.Morphisms.WeaklyEtale
 
-/-! Single w-contractible affine covers in the pro-etale site.
-(blueprint: det-pe-hypercover-single-cover) -/
+/-! # Single w-contractible affine covers in the pro-etale site
+
+Every quasi-compact object of the pro-etale site of a scheme has a singleton cover by the
+spectrum of a w-contractible ring.
+
+## References
+
+* [Stacks Project, Tags 09A1, 0F4P, 0983 and 0990]
+-/
 
 @[expose] public section
 
@@ -57,20 +64,7 @@ private theorem singleton_comp_cover {C : Type*} [Category C]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Every quasi-compact pro-etale object has a singleton cover by a w-contractible spectrum.
-
-Source: Stacks Project, Tag 09A1 (2), using the affine-cover theorem of Tag 0F4P and
-w-contractible extension theorem of Tags 0983 and 0990.
-(blueprint: det-pe-hypercover-single-cover)
-
-Proof: choose an affine singleton cover A of V by the existing qc affine-cover theorem.
-Apply the proved w-contractible-extension theorem to the ring of global sections of A.
-The resulting ind-etale faithfully flat map gives a weakly etale surjective spectrum map.
-Since both spectra are affine, this is a pro-etale singleton cover. Compose it with the
-inverse of the canonical affine spectrum isomorphism and then with A to V. Precoverage
-composition gives the required cover; weak etaleness composes with A to X. This also works
-for the empty target: its affine coordinate ring and its unital extensions are zero.
--/
+/-- Every quasi-compact pro-etale object has a singleton cover by a w-contractible spectrum. -/
 theorem exists_single_wContractible_affine_cover
     (X : Scheme.{u}) (V : X.ProEt) (hVqc : CompactSpace V.left) :
     ∃ (D : CommRingCat.{u}) (f : Spec D ⟶ X) (hf : WeaklyEtale f)

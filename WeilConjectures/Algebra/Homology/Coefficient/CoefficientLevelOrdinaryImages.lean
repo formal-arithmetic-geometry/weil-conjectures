@@ -51,7 +51,10 @@ import all WeilConjectures.CategoryTheory.GeometricMorphism.GeometricInverseImag
 
 /-! # Ordinary geometric images of strict coefficient systems
 
-Source: Zheng, Construction 4.1; Stacks Project, Tags 03DA and 03DB.
+## References
+
+* Stacks Project, Tags 00YV, 03D2, 03D7, 03DA, 03DB
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 (printed p. 21)
 -/
 
 @[expose] public noncomputable section
@@ -87,9 +90,7 @@ variable {D : Type u'} [Category.{v'} D] [EssentiallySmall.{w} C]
   (L : Sheaf J (Type w) ⥤ Sheaf K (Type w))
   (V : Sheaf K (Type w) ⥤ Sheaf J (Type w)) (adj : L ⊣ V)
 
-/-- Levelwise ordinary lifts, before forming the category of strict systems.
-Source: Stacks 03D7; Zheng Construction 4.1
-(blueprint: lem-pur-coefficient-level-ordinary-images). -/
+/-- Levelwise ordinary lifts, before forming the category of strict systems. -/
 structure CoefficientLevelOrdinaryImage where
   singleton : L.obj ((constantSheaf J (Type w)).obj PUnit) ≅
     (constantSheaf K (Type w)).obj PUnit
@@ -489,24 +490,7 @@ private theorem normalizedRestrictionMates [PreservesFiniteLimits L]
         (e n).hom.app N
     (erw [← Category.assoc, hri h M, ha n]; rfl)
 
-/-- Constant-coefficient level lifts, coherent with scalar restriction.
-Source: Stacks 00YV, 03D2, 03DA, 03DB and 03D7; Zheng Construction 4.1.
-
-Proof: one natural comparison between the constant-set inverse images and the
-constant sets, obtained from the global-section Hom equivalences and uniqueness of
-left adjoints, carries algebraic lifts of every constant quotient ring
-(`coefficientConstantRingImages`); its naturality in ring maps gives the quotient
-squares, and evaluation on the constant singleton fixes every constant generator.
-For each lift, the normalized module right adjoint over V restricts the sheaf
-adjunction to linear maps, with the displayed underlying transpose. Geometric
-inverse images are exact, hence additive, and the right adjoint is additive. For a
-quotient map, the normalized inverse-image scalar-restriction comparison gives
-restrictInverse; its mate under the level adjunctions is restrictRight, invertible
-because its underlying map is the composite of the right-underlying isomorphisms
-and forgetting reflects isomorphisms; faithfulness gives restrictTranspose. These
-comparisons hold for every pair of indices, including equal indices and the zero
-quotient ring.
-(blueprint: lem-pur-coefficient-level-ordinary-images). -/
+/-- Constant-coefficient level lifts, coherent with scalar restriction. -/
 theorem coefficientLevelOrdinaryImage_exists [PreservesFiniteLimits L] :
     Nonempty (CoefficientLevelOrdinaryImage (J := J) (K := K) O ell L V adj) := by
   classical

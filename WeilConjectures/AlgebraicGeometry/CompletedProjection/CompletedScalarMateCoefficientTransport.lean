@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Normalized.NormalizedCoefficientDirectI
 
 /-! # Transport of scalar mates through coefficient isomorphisms
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YY and 07A6.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YY, 07A6, 0D6D and 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -27,9 +29,7 @@ namespace AlgebraicGeometry.Scheme
 namespace CompletedProjection
 
 /-- View an object over the completed ring on X over the literal inverse image of
-that on Y, using the specified completed coefficient isomorphism.
-Source: blueprint order 1275; Stacks 07A6
-(blueprint: lem-pbc-completed-scalar-mate-coefficient-transport). -/
+that on Y, using the specified completed coefficient isomorphism. -/
 abbrev inverseObject {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (K : PerfectProjection.derived d X) :=
@@ -159,30 +159,7 @@ private theorem literalBeta_transpose
 
 /-- The scalar-adjunction mate is invariant under the two coefficient isomorphisms
 and the normalized presentations of ordinary direct image. The arrow on the right
-is the existing scalar mate over literal inverse-image ring sheaves. No tensor
-model, projection-formula arrow, or perfectness hypothesis occurs here.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 07A6; the canonical
-coefficient-change comparisons of Tags 0D6D and 0D6E; blueprint orders 1275-1276.
-(blueprint: lem-pbc-completed-scalar-mate-coefficient-transport).
-
-Proof: put b_T = pbcCompletedComparison T d. The finite-level constant comparisons
-commute with coefficient inverse image, so their limit maps satisfy
-f^{-1}(b_Y);c_f = c_f^0;b_X. Restriction along b_T and c_f^0 is an exact
-equivalence. The coefficient square hc identifies the transported map on X with
-the inverse image of b_Y;phiY, followed by the given target-ring isomorphism c.
-For extension use the unique left-adjoint comparisons of these restriction
-functors, with the tensor-unit normalized scalar adjunctions. For direct image
-use the section-normalized coefficient-change comparison. This gives s and t.
-The equality hF (respectively hG) identifies its ordinary presentation with the
-canonical ringed functor. The normalization hi determines its ordinary comparison
-uniquely: both are identity on sections. The equation he and uniqueness of right
-derivation identify its derived comparison with the canonical one. Consequently
-the transported transpose F(eta_X);e is the transpose of the literal-ring
-scalar mate beta. Adjunction naturality and the triangle identities identify their
-mates, giving the displayed equality. No invertibility of beta is used. Exact
-restriction and flat K-flat resolutions make all comparisons valid for unbounded
-inputs, including zero rings and the empty site. -/
+is the existing scalar mate over literal inverse-image ring sheaves. -/
 theorem completedScalarMateCoefficientTransport
     {X Y : Scheme.{u}} (f : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) [IsIso (completedCoefficientMap f d)]

@@ -218,9 +218,11 @@ import Mathlib.RingTheory.Noetherian.Basic
 import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 import Mathlib.Algebra.Ring.TransferInstance
 
-/-! # Finite reduction and completed scalar restriction
+/-! # Finite reduction and completed scalar restriction.
 
-(blueprint: lem-sfb-diagonal-completed-reduction-restriction).
+## References
+
+* Stacks Project, Tags 099I, 099M
 -/
 
 @[expose] public noncomputable section
@@ -629,18 +631,7 @@ private theorem constantRegularResolution
   exact flat_multiplication_mono _ (hm n) (P.X i) (hf i)
 
 /-- Simultaneous finite reduction commutes with exact completed scalar restriction,
-including its quotient units, on all completed derived objects.
-
-Source: Stacks 099I and 099M; blueprint diagonal tower limit proof, paragraph (3).
-(blueprint: lem-sfb-diagonal-completed-reduction-restriction).
-Proof: construct each ordinary reduction as the cokernel of multiplication by
-ell^(n+1). Exact scalar restriction identifies these cokernels and their quotient
-maps, naturally in the input and compatibly with the quotient transitions. Use
-K-flat resolutions to derive the two simultaneous reduction functors. Restriction
-preserves the regular resolving class, so uniqueness of pointwise left derived
-functors gives the displayed natural isomorphisms. The ordinary cokernel square
-identifies the localized quotient units with each other; descend the square through
-the localization to obtain the stated equation on every derived object. -/
+including its quotient units, on all completed derived objects. -/
 theorem diagonal_completed_reduction_restriction (ℓ : ℕ) [Fact ℓ.Prime]
     (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalMod ℓ W)]

@@ -10,8 +10,6 @@ import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceShiftedR
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.Coefficient.DiagonalTraceCoefficientProjection
 
 /-! # Shifted finite projections of an ordinary derived-limit cone
-
-Source: diagonal tower trace proof (1), projection of the root cone.
 -/
 
 @[expose] public noncomputable section
@@ -71,16 +69,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   Functor.mapDerivedCategorySingleFunctor
 
 /-- The normalized derived-limit projection of a shifted single tower is the
-shift of its actual ordinary projection, with both exact endpoint comparisons.
-Source: diagonal tower trace proof (1), the finite projection of the root cone.
-(blueprint: lem-diagonal-local-shifted-limit-projection).
-Proof: the natural transformation from the complexwise limit to evaluation
-commutes with shifts, as checked componentwise. Normalize its factor through
-the derived-limit unit on the shifted single complex. Shift compatibility of
-that unit moves the shift comparison outside. The unshifted projection is the
-single of the ordinary limit projection; applying the shift functor gives the
-stated result. This treats one finite projection and does not assert that
-finite evaluations detect arbitrary derived morphisms. -/
+shift of its actual ordinary projection, with both exact endpoint comparisons. -/
 theorem local_shifted_limit_projection {B : Type u} [Category.{v} B] [Abelian B]
     [HasLimitsOfShape ℕᵒᵖ B] [HasDerivedCategory B]
     [HasDerivedCategory (ℕᵒᵖ ⥤ B)] (L : DiagonalRlim B)

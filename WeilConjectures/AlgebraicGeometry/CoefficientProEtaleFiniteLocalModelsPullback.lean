@@ -8,7 +8,10 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructiblePr
 import WeilConjectures.CategoryTheory.CoefficientFiniteLocalSystemsPullback
 
 /-! # Finite local systems on coefficient-sized pro-etale sites
-Source: Stacks Tags 03RW and 00VC, inverse image and composition.
+
+## References
+
+* Stacks Project, Tags 03RW and 00VC
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -70,9 +73,7 @@ private def fixedComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
         (Scheme.coefficientProEtaleModelTopology Z) (Scheme.coefficientProEtaleModelTopology X)
   exact ((conjugateIsoEquiv ac (ag.comp af)).symm e.symm).symm
 
-/-- Isomorphisms retain the displayed finite constant models on every slice.
-Source: Stacks Tag 03RW (auxiliary; not a blueprint node).
-Proof: retain the sieve and module and restrict the inverse isomorphism on each slice. -/
+/-- Isomorphisms retain the displayed finite constant models on every slice (Stacks, Tag 03RW). -/
 theorem coefficientProEtale_finite_iso {T : Scheme.{u}}
     (A : Type (max v (u + 1))) [CommRing A]
     {F G : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} T) (ModuleCat A)}
@@ -87,14 +88,8 @@ theorem coefficientProEtale_finite_iso {T : Scheme.{u}}
   exact ((Scheme.coefficientProEtaleModelTopology.{u, v} T).overPullback
     (ModuleCat A) U).mapIso e.symm ≪≫ i
 
-/-- Finite local models on a stratum persist after a further scheme pullback.
-Source: Stacks Tags 03RW and 00VC
-(auxiliary; not a blueprint node).
-Proof: the two coefficient-site equivalences and scheme base change preserve finite
-limits. The general site theorem preserves the same finite local models under inverse
-image. Fibre-product pasting identifies composite base change; its direct-image
-isomorphism has a unique adjunction mate identifying the two inverse images. Restrict
-that isomorphism on every slice and compose with the pulled-back trivialization. -/
+/-- Finite local models on a stratum persist after a further scheme pullback
+(Stacks, Tags 03RW and 00VC). -/
 theorem coefficientProEtale_finite_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (A : Type (max v (u + 1))) [CommRing A]
     (F : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} Z) (ModuleCat A))

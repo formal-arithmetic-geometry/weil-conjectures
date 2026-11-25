@@ -56,15 +56,13 @@ namespace JacobianTorsionDatum
 variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p]
   [Smooth p] [IsProper p] [GeometricallyIntegral p] {l : ℕ} [Fact l.Prime]
 
-/-- Blueprint `proposition-h-1-curve-tate-module--2`: the isomorphisms
-`H¹(C, μ_{lⁿ}) ≅ J₀(K̄)[lⁿ]` of a Jacobian torsion datum
+/-- The isomorphisms `H¹(C, μ_{lⁿ}) ≅ J₀(K̄)[lⁿ]` of a Jacobian torsion datum
 (`AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv`) induce a `ℤ_l`-linear isomorphism
 
 `lim_n H¹(C, μ_{lⁿ}) ≃ T_l J₀`
 
 between the inverse limit of the cohomology groups along `z ↦ z ^ l` and the Tate module of the
-Jacobian, acting coordinatewise. It is Galois-equivariant
-(`AlgebraicGeometry.JacobianTorsionDatum.kummerTateEquiv_restrictMuH`). -/
+Jacobian, acting coordinatewise. -/
 noncomputable def kummerTateEquiv (d : JacobianTorsionDatum p l) (hl : (l : K) ≠ 0) :
     p.geometricFiber.h1RootsOfUnityLimit l ≃ₗ[ℤ_[l]] d.tateModule l where
   toFun x := ⟨fun n ↦ (d.kummerEquiv hl n (x.1 n) :
@@ -129,12 +127,11 @@ lemma restrictMuH_mem_h1RootsOfUnityLimit (d : JacobianTorsionDatum p l) (hl : (
       ← map_zsmul, ← kummerEquiv_map_rootsOfUnityPowMap,
       AddCommGroup.torsionInverseLimit.map_coe_succ x n]
 
-/-- Blueprint `proposition-h-1-curve-tate-module--2`: the isomorphism
-`lim_n H¹(C, μ_{lⁿ}) ≃ T_l J₀` (`AlgebraicGeometry.JacobianTorsionDatum.kummerTateEquiv`) is
-Galois-equivariant: if the family `y` is obtained from `x` by restriction along the automorphism
-`σ_C = 𝟙 × Spec σ` of `C` in each level (which yields a compatible family by
-`AlgebraicGeometry.JacobianTorsionDatum.restrictMuH_mem_h1RootsOfUnityLimit`), then the image
-of `y` is the image of `x` under the Galois representation of `σ` on `T_l J₀`. -/
+/-- The isomorphism `lim_n H¹(C, μ_{lⁿ}) ≃ T_l J₀`
+(`AlgebraicGeometry.JacobianTorsionDatum.kummerTateEquiv`) is Galois-equivariant: if the family
+`y` is obtained from `x` by restriction along the automorphism `σ_C = 𝟙 × Spec σ` of `C` in each
+level, then the image of `y` is the image of `x` under the Galois representation of `σ` on
+`T_l J₀`. -/
 theorem kummerTateEquiv_restrictMuH (d : JacobianTorsionDatum p l) (hl : (l : K) ≠ 0)
     (σ : Gal(AlgebraicClosure K/K)) (x y : p.geometricFiber.h1RootsOfUnityLimit l)
     (hxy : ∀ n, y.1 n =

@@ -34,13 +34,6 @@ dense open subset of its irreducible closure is closed.
   contains every `k`-point of the closure.
 - `AlgebraicGeometry.GeneralLinearGroup.exists_mul_eq_of_commutator_mem`: the central–geometric
   product on `k`-points.
-
-## Blueprint
-
-- `lemma-identity-component`: the central–geometric product.
-- `lemma-connected-components-images-homomorphisms--2`: the image of a regular homomorphism is
-closed (here, for the
-  multiplication map `T × H° ⟶ G°`).
 -/
 
 @[expose] public section
@@ -61,11 +54,7 @@ variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [Field k]
 /-- **A subgroup containing a dense constructible set of its irreducible closure is closed.** Let
 `S` be a subgroup of `GL n k`, `k` algebraically closed, and `Y` a constructible subset of
 `Spec k[GL_n]` with the closure of `S`, whose `k`-points lie in `S`. If this closure is
-irreducible, it contains no other `k`-points than those of `S`.
-
-`Y` contains a dense open subset `U` of the closure `T`; for a `k`-point `x` of `T`, the open
-subsets `U` and `x U⁻¹` of `T` meet in a `k`-point `z`, so that `x = z (z⁻¹ x) ∈ S`.
-(blueprint: `lemma-connected-components-images-homomorphisms--2`) -/
+irreducible, it contains no other `k`-points than those of `S`. -/
 theorem mem_of_mem_closure_of_isConstructible [IsAlgClosed k] {S : Subgroup (GL n k)}
     {Y : Set (PrimeSpectrum (CoordinateRing n k))} (hY : IsConstructible Y)
     (hYS : ∀ y : GL n k, toPrimeSpectrum y ∈ Y → y ∈ S)
@@ -144,9 +133,7 @@ centre `𝔷(𝔤) = Lie Z(G)` and its derived algebra: every `X ∈ 𝔤` is th
 `Z(G)` and an element of any subspace `M` containing the brackets of `𝔤`.
 
 `kⁿ` is a faithful semisimple `𝔤`-module (its `𝔤`-stable subspaces are its `G`-stable ones), so
-`𝔤` has central radical and `𝔤 = 𝔷(𝔤) + [𝔤, 𝔤]`.
-(blueprint: `lemma-identity-component`,
-`proposition-lie-algebras-faithful-semisimple-representation--1`) -/
+`𝔤` has central radical and `𝔤 = 𝔷(𝔤) + [𝔤, 𝔤]`. -/
 theorem lieSubalgebra_le_center_sup [I.IsPrime]
     [hss : Representation.IsSemisimpleRepresentation
       ((toRepresentation n k).comp (zeroLocus I k).subtype)]
@@ -310,12 +297,7 @@ theorem liftQuotient_comp_evalAlgHom_mul (I J : Ideal (CoordinateRing n k)) [I.I
 of `GL_n` over an algebraically closed field of characteristic zero, such that the commutators of
 `G` lie in `H` (over `k[ε₁][ε₂]`) and `G°` acts semisimply on `kⁿ`. Then every point of `G°(k)` is
 a product `t h` of a point `t` of the identity component `T = Z(G°)°` of the centre of `G°` and a
-point `h` of `H°`.
-
-The Lie algebra of `G°` is `Lie T + Lie H°` (`lieSubalgebra_le_center_sup`), so the Zariski closure
-of the subgroup `K = T(k) H°(k)` of `G°(k)` has the Lie algebra of the connected `G°`, hence is
-`G°`; and `K`, the image of the multiplication `T × H° ⟶ G°`, is closed
-(`mem_of_mem_closure_of_isConstructible`). (blueprint: `lemma-identity-component`) -/
+point `h` of `H°`. -/
 theorem exists_mul_eq_of_commutator_mem {I J : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k]
     [J.IsHopfIdeal k] (hIJ : I ≤ J)
     (hcomm : ∀ g ∈ zeroLocus I (DualNumber (DualNumber k)),
@@ -485,7 +467,7 @@ variable [IsAlgClosed k] [CharZero k]
 
 /-- The central–geometric product on `k`-points: every point of `G°` is a product `t h` of a point
 `t` of `Z(G°)°` and a point `h` of `H°`. This is `exists_mul_eq_of_commutator_mem` for the matrices
-of the points. (blueprint: `lemma-identity-component`) -/
+of the points. -/
 theorem exists_mul_eq_of_containsCommutators (h : I ≤ J)
     [IsMonHom.ContainsCommutators (subgroupSchemeHom h)]
     [Representation.IsSemisimpleRepresentation (standardRepresentation (identityComponent I))]
@@ -507,12 +489,7 @@ theorem exists_mul_eq_of_containsCommutators (h : I ≤ J)
 /-- **The central–geometric product.** Let `H = V(J) ⊆ G = V(I)` be closed subgroups of `GL_n` over
 an algebraically closed field of characteristic zero such that `H` contains the commutators of `G`
 and `G°` acts semisimply on `kⁿ`. Then `G° = Z(G°)° H°`: the multiplication morphism
-`Z(G°)° × H° ⟶ G°` is surjective.
-
-Its image contains the closed points of `G°`, which are `k`-points
-(`exists_mul_eq_of_containsCommutators`), and it is constructible (Chevalley); a constructible
-subset of the Jacobson space `G°` containing all its closed points is everything.
-(blueprint: `lemma-identity-component`) -/
+`Z(G°)° × H° ⟶ G°` is surjective. -/
 theorem surjective_mulCenterIdentityComponent (h : I ≤ J)
     [IsMonHom.ContainsCommutators (subgroupSchemeHom h)]
     [Representation.IsSemisimpleRepresentation (standardRepresentation (identityComponent I))] :

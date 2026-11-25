@@ -10,9 +10,9 @@ public import WeilConjectures.CategoryTheory.StrictRoosComparison
 /-!
 # Strict chain-level Roos comparison for an exact product-preserving functor
 
-Source: Stacks Project, Tags 0940 and 0941, and the final paragraph of
-literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md.
+## References
+
+* Stacks Project, Tags 0940, 0941
 -/
 
 @[expose] public noncomputable section
@@ -280,22 +280,8 @@ private theorem diagonal_natural {A B : Type*} [Category* A] [Category* B]
       congrArg (fun t ↦ t ≫ b') hx₂.symm
 
 -- The statement contains simultaneous universe-polymorphic cone comparisons.
-/-- Strict chain-level Roos comparison for an exact product-preserving functor.
-
-Source: Stacks Project, Tags 0940 and 0941, and the final paragraph of
-literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md.
-(auxiliary; not a blueprint node).
-
-Proof in words:
-Take the canonical product comparison degreewise. Its projection identities imply
-that it commutes with differentials and with the tower shift, hence with 1-s.
-The cone comparison for an additive functor, followed by this commuting square,
-and the shift comparison give kappa. Transport by the two object equalities.
-In the signed coordinates its two components are the product comparison, which
-proves the displayed equations. Apply product projections to the two components
-for a strict tower map to obtain naturality. The inverse uses the inverse product
-comparison on both coordinates, so kappa is an isomorphism. -/
+/-- Strict chain-level Roos comparison for an exact product-preserving functor
+(Stacks, Tags 0940, 0941). -/
 theorem exactProductFunctorRoosChainMaps
     {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max uC vC r}]

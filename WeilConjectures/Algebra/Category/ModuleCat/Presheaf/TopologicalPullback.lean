@@ -17,8 +17,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.TopologicalPullbackRe
 /-!
 # Pullback of presheaves of modules along a continuous map
 
-Source: Stacks Project, Sheaves, Tags 008T, 008S and 008U
-(blueprint: lem-pc-presheaf-module-inverse-image-adjunction).
+## References
+
+* Stacks Project, Sheaves, Tags 008T, 008S and 008U
 -/
 
 @[expose] public section
@@ -29,9 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace PresheafOfModules
 
-/-- The section map from an open neighbourhood of `f(U)` into the presheaf pullback.
-Source: Stacks Project, Sheaves, Tag 008T
-(blueprint: lem-pc-presheaf-module-inverse-image-adjunction). -/
+/-- The section map from an open neighbourhood of `f(U)` into the presheaf pullback. -/
 noncomputable def topologicalPullbackSectionMap {X Y : TopCat.{u}} (f : X ⟶ Y)
     (C : Type (u + 1)) [Category.{u} C] [HasColimits C] (G : Y.Presheaf C)
     (U : Opens X) (V : Opens Y) (h : U ≤ (Opens.map f).obj V) :
@@ -43,17 +42,7 @@ noncomputable def topologicalPullbackSectionMap {X Y : TopCat.{u}} (f : X ⟶ Y)
 module over the colimit ring presheaf. The action on sections is uniquely specified by
 the coprojection formula. Direct image restricts scalars through the ring-presheaf unit.
 The abelian-presheaf adjunction then restricts to an adjunction of module presheaves,
-natural in both variables.
-
-Proof (Stacks, Tags 008T, 008S, 008U): the neighbourhoods of `f(U)` form a filtered
-category. Filtered-colimit representatives give a common neighbourhood for finitely
-many ring and module sections, so the sectionwise multiplication is uniquely determined
-and independent of representatives. The module laws, semilinear restrictions, and
-linearity of pulled-back maps follow at that common neighbourhood. Direct image uses
-restriction of scalars along the ring-presheaf unit. The abelian adjunction sends a
-map `ψ` to `f_*ψ ∘ i_G`; the unit is linear, and the converse follows by checking
-linearity on colimit representatives. These checks are compatible with both variables.
-(blueprint: lem-pc-presheaf-module-inverse-image-adjunction) -/
+natural in both variables. -/
 def topologicalPullbackAdjunctionSpec {X Y : TopCat.{u}} (f : X ⟶ Y)
     (O : Y.Presheaf CommRingCat.{u}) : Prop :=
     let R := O ⋙ forget₂ CommRingCat RingCat
@@ -93,25 +82,7 @@ def topologicalPullbackAdjunctionSpec {X Y : TopCat.{u}} (f : X ⟶ Y)
             ((e.app G).inv ≫ (toPresheaf R').map ψ))
 
 /-- The concrete presheaf-module pullback and its adjunction, as specified by
-`topologicalPullbackAdjunctionSpec`.
-
-Source: Stacks Project, Sheaves, Tags 008T, 008S, 008U.
-Proof: Use Mathlib's abstract module pullback and its adjunction. Its forgotten unit
-has a canonical abelian adjunct. `topologicalModulePullbackComparison` proves that
-this comparison is an isomorphism. Naturality of the two Hom equivalences makes these
-comparisons natural in G; taking their inverses gives the required natural isomorphism e.
-The abelian adjunction identity gives the unit formula for e. Naturality then expresses
-the image of a coprojection under e⁻¹ as restriction of the module unit. Linearity of
-that unit and semilinearity of restriction prove the scalar-action formula.
-
-Transport the existing action on P(G)(U) through e to obtain a multiplication on the
-abelian pullback. Its coprojection formula follows from the scalar-action formula and
-the inverse identities. `topologicalPullbackCommonRepresentatives` represents any scalar
-and section at one common neighbourhood, so that formula uniquely determines the action.
-Finally, expand both Hom equivalences as composition with their units. The established
-unit formula makes their underlying abelian maps equal. This proves the required Hom
-formula with the module adjunction already supplied by Mathlib.
-(blueprint: lem-pc-presheaf-module-inverse-image-adjunction) -/
+`topologicalPullbackAdjunctionSpec`. -/
 theorem topologicalPullbackAdjunction {X Y : TopCat.{u}} (f : X ⟶ Y)
     (O : Y.Presheaf CommRingCat.{u}) :
     topologicalPullbackAdjunctionSpec f O := by

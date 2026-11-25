@@ -83,12 +83,7 @@ theorem constantCoeff_eulerFactor (x : C.finitePoints) :
     Polynomial.eval_pow, Polynomial.eval_X, zero_pow (p.degreeOver_ne_zero x.2),
     eval_zero_map_localPolynomial, inv_one]
 
-/-- Blueprint `theorem-trace-formula-euler-product--1`: Cohomology and the Euler series.
-
-The Euler product converges in the product topology of `ℂ⟦X⟧`: the local factor at `x` is
-`1` modulo `T ^ e_x`, and only finitely many closed points have degree below a given bound
-(`AlgebraicGeometry.Scheme.Hom.finite_setOf_degreeOver_le`), so only finitely many factors
-contribute to a fixed coefficient. -/
+/-- The Euler product of the local factors converges in the product topology of `ℂ⟦X⟧`. -/
 theorem multipliable_eulerFactors : Multipliable (W.eulerFactor l ρ ι) := by
   refine PowerSeries.WithPiTopology.multipliable_inv_of_X_pow_dvd_sub_one
     (e := fun x : C.finitePoints ↦ p.degreeOver x.1) (fun x ↦ p.degreeOver_ne_zero x.2)
@@ -106,24 +101,15 @@ theorem multipliable_eulerFactors : Multipliable (W.eulerFactor l ρ ι) := by
   simpa only [Polynomial.coe_sub, Polynomial.coe_one, Polynomial.coe_mul, Polynomial.coe_pow,
     Polynomial.coe_X] using h'
 
-/-- Blueprint `theorem-trace-formula-euler-product--1`: Cohomology and the Euler series.
-
-The Euler series `L_ι(C₀, ρ, T) = ∏_{x ∈ |C₀|} ι P_x(ρ, T ^ e_x)⁻¹` of a Weil representation
+/-- The Euler series `L_ι(C₀, ρ, T) = ∏_{x ∈ |C₀|} ι P_x(ρ, T ^ e_x)⁻¹` of a Weil representation
 `ρ`, the locally finite product over the closed points `x` of the curve of the inverses of the
 local polynomials `P_x(ρ, T)` of `AlgebraicGeometry.WeilGroup.localPolynomial`, transported to
-`ℂ` along `ι` and substituted into `T ^ e_x` for the residue degree `e_x = p.degreeOver x`.
-
-Each factor is a formal power series with constant term `1`, so the product lies in
-`1 + T ℂ⟦X⟧` (`AlgebraicGeometry.WeilGroup.constantCoeff_eulerSeries`); it is taken in the
-product topology on `ℂ⟦X⟧`, in which it converges by
-`AlgebraicGeometry.WeilGroup.multipliable_eulerFactors`. -/
+`ℂ` along `ι` and substituted into `T ^ e_x` for the residue degree `e_x = p.degreeOver x`. The
+product is taken in the product topology on `ℂ⟦X⟧`. -/
 noncomputable def eulerSeries : PowerSeries ℂ :=
   ∏' x : C.finitePoints, W.eulerFactor l ρ ι x
 
-/-- Blueprint `theorem-trace-formula-euler-product--1`: Cohomology and the Euler series.
-
-The Euler series lies in `1 + T ℂ⟦X⟧`: every local factor has constant term `1`, because the
-local polynomial `P_x(ρ, T) = det (1 - T F_x)` does. -/
+/-- The Euler series lies in `1 + T ℂ⟦X⟧`. -/
 theorem constantCoeff_eulerSeries :
     PowerSeries.constantCoeff (W.eulerSeries l ρ ι) = 1 := by
   have h := (W.multipliable_eulerFactors l ρ ι).hasProd.map (PowerSeries.constantCoeff (R := ℂ))

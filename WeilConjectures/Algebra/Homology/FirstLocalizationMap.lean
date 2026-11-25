@@ -13,8 +13,10 @@ import WeilConjectures.Algebra.Homology.FirstLocalizationCohomologyBaseChange
 
 /-! # The characterized first-factor localization morphism
 
-Source: Stacks Project, More on Algebra, Tag 06Y6; perfect.tex, Tag 0DJ8.
-(blueprint: lem-pc-first-localization-map).
+## References
+
+* Stacks Project, Tag 06Y6 (More on Algebra)
+* Stacks Project, Tag 0DJ8, affine localization identity
 -/
 
 @[expose] public section
@@ -33,8 +35,7 @@ namespace RingTensorCohomology
 variable (R A Aq : Type u) [CommRing R] [CommRing A] [CommRing Aq]
   [Algebra R A] [Algebra A Aq] [Algebra R Aq] [IsScalarTower R A Aq]
 
-/-- The localization unit on the underlying R-complex. It sends x to 1 tensor x.
-Source: Stacks Project, Tag 06Y6 (blueprint: lem-pc-first-localization-map). -/
+/-- The localization unit on the underlying R-complex. It sends x to 1 tensor x. -/
 noncomputable def firstLocalizationUnit
     (Q : CochainComplex (ModuleCat.{u} A) ℤ) :
     (restrict R A).obj Q ⟶ (restrict R Aq).obj ((extend A Aq).obj Q) where
@@ -58,8 +59,7 @@ variable (B D : Type u) [CommRing B] [CommRing D] [Algebra R B]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
 /-- Apply derived tensor and cohomology to the first-factor unit, using the unique
-counit-compatible comparison of derived functors.
-Source: Stacks Project, Tag 06Y6 (blueprint: lem-pc-first-localization-map). -/
+counit-compatible comparison of derived functors. -/
 noncomputable def firstLocalizationCohomologyMap
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)
@@ -85,8 +85,7 @@ noncomputable def firstLocalizationCohomologyMap
             ((restrict R Aq).obj ((extend A Aq).obj Q))))) ≫
     (K.cohomologyIso i).inv
 
-/-- The generator formula fixes the localization morphism uniquely.
-Source: Stacks Project, Tag 06Y6 (blueprint: lem-pc-first-localization-map). -/
+/-- The generator formula fixes the localization morphism uniquely. -/
 def IsFirstLocalizationMap
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)
@@ -100,8 +99,7 @@ def IsFirstLocalizationMap
         (firstLocalizationCohomologyMap R A Aq B D Q L K i x)
 
 /-- Equality on the scalar-extension generators proves uniqueness; in particular the
-existence theorem below determines data, rather than an arbitrary witness.
-Source: Stacks Project, Tag 06Y6 (blueprint: lem-pc-first-localization-map). -/
+existence theorem below determines data, rather than an arbitrary witness. -/
 theorem IsFirstLocalizationMap.ext
     {Q : CochainComplex (ModuleCat.{u} A) ℤ}
     {L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D}
@@ -129,22 +127,7 @@ private theorem extendScalars_eqToIso_one_tmul
   rfl
 
 include tAD tBD tAqD tBqD tAAqD in
-/-- The canonical derived localization map becomes invertible after extension to D.
-Source: Stacks Project, Tag 0DJ8, affine localization identity; Tag 06Y6.
-(blueprint: lem-pc-first-localization-map).
-
-Proof: resolve B[0] over R by a K-flat complex F. Tensoring Q with F computes the
-base-derived tensor, with commuting A and B actions. Exact localization in the
-A-variable commutes with total direct sums and differentials, and hence with
-cohomology. It identifies the cohomology for Aq tensor_A Q with localization of
-the cohomology for Q. On cohomology the localization unit is the map constructed
-above: compare the balanced model with each given model using the unique
-counit-compatible derived-functor isomorphism and cohomologyIso_smul. Thus its
-extension to D is the tensor associativity isomorphism, since every s in S is
-already a unit in D. This supplies e and its generator formula; that formula
-determines e uniquely by IsFirstLocalizationMap.ext. No flatness of D, A over R,
-or Q over R is used. Identity localization gives the model comparison; if S
-contains zero then Aq and D are zero, so the isomorphism is between zero modules. -/
+/-- The canonical derived localization map becomes invertible after extension to D. -/
 theorem exists_firstLocalization_iso (S : Submonoid A) [IsLocalization S Aq] (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

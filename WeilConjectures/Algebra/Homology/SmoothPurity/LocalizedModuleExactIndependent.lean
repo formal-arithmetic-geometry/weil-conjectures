@@ -20,8 +20,10 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 /-!
 # Exact localized module adjunction with independent site universes
 
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ
-(blueprint: lem-pur-site-restriction-module-adjunction-exact).
+## References
+
+* Stacks Project, Modules on Sites, Tags 03DI and 03DJ
+* Stacks Project, Tag 015F
 -/
 
 @[expose] public noncomputable section
@@ -39,15 +41,13 @@ namespace SheafOfModules
 variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u + 1}) (U : C)
 
-/-- The existing direct-sum extension presheaf followed by module sheafification.
-Source: Stacks 03DI (blueprint: lem-pur-site-restriction-module-adjunction-exact). -/
+/-- The existing direct-sum extension presheaf followed by module sheafification. -/
 abbrev localizedModuleExtension :=
   extensionByZeroPresheaf.{u + 1}
     ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) U ⋙
       PresheafOfModules.sheafification (𝟙 _)
 
-/-- The existing sectionwise restriction to the slice ring.
-Source: Stacks 03DJ (blueprint: lem-pur-site-restriction-module-adjunction-exact). -/
+/-- The existing sectionwise restriction to the slice ring. -/
 def localizedModuleRestriction :=
   overFunctor.{u + 1}
     ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) U
@@ -236,31 +236,7 @@ private noncomputable def extensionSheafAdjunction
     erw [h]
     exact extensionPresheafHomEquiv_naturality_right R U F G H _ b
 
-/-- Both localized module functors are additive and exact at the original site universes.
-Source: Stacks 03DI and 03DJ
-(blueprint: lem-pur-site-restriction-module-adjunction-exact).
-Proof:
-1. By def-pur-localized-ringed-site, restriction keeps section modules, scalar actions,
-   and restriction maps. Compose def-weil-extension-by-zero-presheaf with
-   def-weil-presheaf-modules-sheafification to obtain the extension functor.
-2. Construct the module Hom equivalence by composing with each direct-sum injection;
-   its inverse uses DirectSum.toModule on the component linear maps. Check naturality
-   and the inverse laws on summand generators. Compose with the sheafification Hom
-   equivalence of lem-pc-sites-module-sheafification-interface to obtain the adjunction.
-3. Forget a short exact complex to abelian sheaves using
-   situation-conventions. Restriction commutes with forgetting
-   sectionwise, so lem-weil-pbc-site-restriction-exact applies. Reflect short exactness
-   through the faithful exact module forgetful functor. Restriction is additive
-   sectionwise; the abelian exactness criteria give both finite preservation clauses.
-4. Direct-sum induction identifies extension followed by forgetting with the abelian
-   extension presheaf. Use lem-pc-sites-module-sheafification-interface to sheafify this
-   comparison. By lem-weil-pbc-site-extension-by-zero-presheaf-adjoint and uniqueness
-   of left adjoints, the abelian extension is the constructed sheaf pullback. Transfer
-   its additivity through the comparison and the faithful module forgetful functor.
-   Apply lem-weil-pbc-site-extension-by-zero-exact, transport the short exact complex
-   along the comparison, and reflect short exactness. The same abelian criteria give
-   the extension's finite-limit and finite-colimit preservation. These comparisons
-   retain the original site and coefficient universes throughout. -/
+/-- Both localized module functors are additive and exact at the original site universes. -/
 theorem localizedModuleExactIndependent :
     (localizedModuleExtension R U).Additive ∧
       PreservesFiniteLimits (localizedModuleExtension R U) ∧
@@ -324,48 +300,37 @@ theorem localizedModuleExactIndependent :
   exact ⟨inferInstance, inferInstance, inferInstance,
     inferInstance, inferInstance, inferInstance⟩
 
-/-- Additivity of extension. Source: Stacks 03DI
-(blueprint: lem-pur-site-restriction-module-adjunction-exact). -/
+/-- Additivity of extension. -/
 instance localizedModuleExtension_additive : (localizedModuleExtension R U).Additive :=
   (localizedModuleExactIndependent R U).1
 
-/-- Left exactness of extension. Source: Stacks 03DI
-(blueprint: lem-pur-site-restriction-module-adjunction-exact). -/
+/-- Left exactness of extension. -/
 instance localizedModuleExtension_limits :
     PreservesFiniteLimits (localizedModuleExtension R U) :=
   (localizedModuleExactIndependent R U).2.1
 
-/-- Right exactness of extension. Source: Stacks 03DI
-(blueprint: lem-pur-site-restriction-module-adjunction-exact). -/
+/-- Right exactness of extension. -/
 instance localizedModuleExtension_colimits :
     PreservesFiniteColimits (localizedModuleExtension R U) :=
   (localizedModuleExactIndependent R U).2.2.1
 
-/-- Additivity of restriction. Source: Stacks 03DJ
-(blueprint: lem-pur-site-restriction-module-adjunction-exact). -/
+/-- Additivity of restriction. -/
 instance localizedModuleRestriction_additive : (localizedModuleRestriction R U).Additive :=
   (localizedModuleExactIndependent R U).2.2.2.1
 
-/-- Left exactness of restriction. Source: Stacks 03DJ
-(blueprint: lem-pur-site-restriction-module-adjunction-exact). -/
+/-- Left exactness of restriction. -/
 instance localizedModuleRestriction_limits :
     PreservesFiniteLimits (localizedModuleRestriction R U) :=
   (localizedModuleExactIndependent R U).2.2.2.2.1
 
-/-- Right exactness of restriction. Source: Stacks 03DJ
-(blueprint: lem-pur-site-restriction-module-adjunction-exact). -/
+/-- Right exactness of restriction. -/
 instance localizedModuleRestriction_colimits :
     PreservesFiniteColimits (localizedModuleRestriction R U) :=
   (localizedModuleExactIndependent R U).2.2.2.2.2
 
 open Classical in
 /-- The canonical adjunction is fixed by insertion into the summand indexed by the
-structure arrow, followed by the sheafification unit.
-Source: Stacks 03DI (blueprint: lem-pur-site-restriction-module-adjunction-exact).
-Proof: a map from the direct sum is a family of maps from its summands. Naturality
-identifies this family with a map on the slice. Sheafification extends this bijection
-to sheaves. Its unit is the displayed insertion, which determines the adjunction
-uniquely since the summands generate the extension presheaf locally. -/
+structure arrow, followed by the sheafification unit. -/
 theorem localizedModuleAdjunctionIndependent_existsUnique :
     ∃! adj : localizedModuleExtension R U ⊣ localizedModuleRestriction R U,
       ∀ (M : Mod (R.over U)) (W : (Over U)ᵒᵖ) (m : M.val.obj W),
@@ -388,15 +353,12 @@ theorem localizedModuleAdjunctionIndependent_existsUnique :
     ext M W m
     exact h' M W m
 
-/-- The uniquely normalized localized module adjunction.
-Source: Stacks 03DI (blueprint: lem-pur-site-restriction-module-adjunction-exact). -/
+/-- The uniquely normalized localized module adjunction. -/
 def localizedModuleAdjunctionIndependent :
     localizedModuleExtension R U ⊣ localizedModuleRestriction R U :=
   Classical.choose (localizedModuleAdjunctionIndependent_existsUnique R U).exists
 
-/-- Its termwise derived adjunction, obtained by localization at quasi-isomorphisms.
-Source: Stacks 015F and 03DI
-(blueprint: lem-pur-site-restriction-module-adjunction-exact). -/
+/-- Its termwise derived adjunction, obtained by localization at quasi-isomorphisms. -/
 def localizedModuleDerivedAdjunction :
     (localizedModuleExtension R U).mapDerivedCategory ⊣
       (localizedModuleRestriction R U).mapDerivedCategory :=

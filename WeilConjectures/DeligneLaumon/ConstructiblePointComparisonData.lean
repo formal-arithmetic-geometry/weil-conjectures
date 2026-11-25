@@ -9,9 +9,12 @@ public import WeilConjectures.DeligneLaumon.ConstructiblePullbackComparisonData
 
 /-! # Constructible point comparison data
 
-The unchanged point-realization definitions and canonical scalar components.
-Source: Bhatt--Scholze 6.8.14(2)
-(blueprint: def-a1-constructible-point-comparison-data).
+Point-realization comparison data for constructible complexes and their canonical scalar
+components.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, 6.8.14(2)]
 -/
 
 @[expose] public noncomputable section

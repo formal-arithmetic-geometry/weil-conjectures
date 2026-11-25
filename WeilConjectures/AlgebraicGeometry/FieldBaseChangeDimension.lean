@@ -98,9 +98,7 @@ theorem topologicalKrullDim_pullback_eq_of_field_of_spec {k K : Type u} [Field k
 /-- **Base change to a field extension preserves dimension.** For a scheme `Z` locally of finite
 type over a field `k` and a field `K` over `k`, `dim (Z ×_k K) = dim Z`; for instance the base
 change `X_K` of a curve `X` over `k` has dimension `1`. On an affine open `Spec A` of `Z` this is
-`dim (A ⊗[k] K) = dim A` (`ringKrullDim_tensorProduct_of_finiteType`).
-
-(blueprint: `lem-pc-dim-base-change`) -/
+`dim (A ⊗[k] K) = dim A` (`ringKrullDim_tensorProduct_of_finiteType`). -/
 theorem topologicalKrullDim_pullback_eq_of_field {Z : Scheme.{u}} {k K : Type u} [Field k]
     [Field K] (p : Z ⟶ Spec (.of k)) [LocallyOfFiniteType p] (q : Spec (.of K) ⟶ Spec (.of k)) :
     topologicalKrullDim (pullback p q : Scheme.{u}) = topologicalKrullDim Z := by
@@ -121,11 +119,7 @@ theorem topologicalKrullDim_pullback_eq_of_field {Z : Scheme.{u}} {k K : Type u}
 
 /-- **Fibres over field-valued points have dimension at most that of the source.** For
 `f : X ⟶ Y` locally of finite type and `s : Spec K ⟶ Y` with `K` a field,
-`dim (X ×_Y Spec K) ≤ dim X`: `s` factors through `Spec κ(y)` for `y` its image point, so
-`X ×_Y Spec K` is the base change of the fibre `f⁻¹(y)` along `κ(y) → K`.
-
-Used for blueprint `sk-prop-sf-fullcd-etale-origin`: the geometric fibres of base changes of `X`
-have dimension at most `dim X`. -/
+`dim (X ×_Y Spec K) ≤ dim X`. -/
 theorem topologicalKrullDim_pullback_le {X Y : Scheme.{u}} (f : X ⟶ Y)
     [LocallyOfFiniteType f] {K : Type u} [Field K] (s : Spec (.of K) ⟶ Y) :
     topologicalKrullDim (Limits.pullback f s : Scheme.{u}) ≤ topologicalKrullDim X := by

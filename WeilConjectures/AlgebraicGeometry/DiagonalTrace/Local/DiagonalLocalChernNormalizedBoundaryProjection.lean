@@ -178,23 +178,7 @@ private theorem completedIntegralProjection_eq_finiteConeChernClass
   transport_exact h
 
 /-- A whole-system normalization implies its integral finite coordinate equation.
-This holds for every strict arrow, independently of Chern or Kummer normalization.
-Source: diagonal tower trace proof (1), projection of the coefficient and root cones.
-(blueprint: lem-diagonal-local-cone-integral-projection).
-
-Proof: postcompose the normalization with the n-th derived-limit projection and the
-exact evaluation/single comparisons. Naturality moves the strict arrow across the
-projection. The exact-cone projection theorem computes the source cone. For the
-shifted target cone, expand exactConeComparison, move the restriction/single
-comparison across the projection, and use local_shifted_limit_projection. This
-gives the single of k.lineProjection, with the exact shift comparisons in place.
-Apply the exact scalar-forgetting functor and its single/shift naturality. The
-line_projection field identifies the target with the actual root-limit projection.
-The coefficient_projection field, followed by integerMap naturality for the ring
-projection, identifies the source with the integer map into the finite ring followed
-by coefficientForget inverse. Apply Ext.homEquiv.symm to this equation, then
-postcompose with the canonical Cartier root map. The calculation works for zero
-arrows, empty schemes, zero coefficient rings, and n=0 since n+1 is positive. -/
+This holds for every strict arrow, independently of Chern or Kummer normalization. -/
 theorem localChern_normalized_boundary_projection
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [DiagonalTraceLocalizations l T]
     (c : Chern l (ULift.{u} (Padic l)) T)

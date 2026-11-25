@@ -13,8 +13,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Properties
 /-!
 # Auxiliary facts on affine curves
 
-Small lemmas used in the covering step of blueprint `lemma-tangent-cones-on-cover`:
-
+Small lemmas used in the covering step of the restriction-zero covers argument:
 * `AlgebraicGeometry.isClosed_singleton_apply_of_comp_eq_id`: rational points of schemes locally
   of finite type over an algebraically closed field are closed points.
 * `AlgebraicGeometry.topologicalKrullDim_eq_ringKrullDim_of_isAffineOpen`: the dimension of a

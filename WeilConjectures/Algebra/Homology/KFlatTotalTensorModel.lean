@@ -19,13 +19,15 @@ public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 /-!
 # Flat-term K-flat total tensor models
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A2 and 07A4;
-Modules on Sites, Tag 0G6Q (auxiliary; not a blueprint node).
-
 The helpers below only specialize existing category and tensor constructions.
 The derived tensor in the conclusion is exactly the localized bifunctor supplied by
 `site_derived_tensor_descent_independentCoefficients`, characterized by its natural
 representative comparison.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A2, 07A4, 06YM;
+  Modules on Sites, Tags 0G6Q, 03EK; Section 03DA
 -/
 
 @[expose] public noncomputable section
@@ -43,13 +45,11 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{r})
 
-/-- Use the recorded small-site sheafification in the coefficient universe.
-Source: Stacks, Section 03DA (auxiliary; not a blueprint node). -/
+/-- Use the recorded small-site sheafification in the coefficient universe. -/
 instance smallSiteHasSheafify : HasSheafify J AddCommGrpCat.{r} :=
   SheafOfModules.hasSheafify_coefficientUniverse.{u, v, r}
 
-/-- Use the recorded locally-bijective criterion in the coefficient universe.
-Source: Stacks, Section 03DA (auxiliary; not a blueprint node). -/
+/-- Use the recorded locally-bijective criterion in the coefficient universe. -/
 instance smallSiteWEqualsLocallyBijective : J.WEqualsLocallyBijective AddCommGrpCat.{r} :=
   SheafOfModules.wEqualsLocallyBijective_coefficientUniverse.{u, v, r}
 
@@ -66,13 +66,11 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{r})
 
-/-- The existing category of module sheaves on the given small site.
-Source: Stacks, Tag 07A2 (blueprint: lem-pur-kflat-total-tensor-model). -/
+/-- The existing category of module sheaves on the given small site. -/
 abbrev Modules := SheafOfModules.{r}
   ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
 
-/-- The canonical monoidal structure with every universe-sensitive instance fixed explicitly.
-Source: Stacks, Tag 03EK (blueprint: lem-pur-kflat-total-tensor-model). -/
+/-- The canonical monoidal structure with every universe-sensitive instance fixed explicitly. -/
 @[instance_reducible]
 def monoidal : MonoidalCategory (Modules R) :=
   @SheafOfModules.monoidalCategory.{v, u, r} C _ J
@@ -82,18 +80,15 @@ def monoidal : MonoidalCategory (Modules R) :=
     (inferInstance : HasWeakSheafify J AddCommGrpCat.{r})
     (SheafOfModules.isMonoidal_W_independentCoefficients.{u, v, r} R)
 
-/-- The existing sheaf tensor, with its canonical monoidal structure explicitly supplied.
-Source: Stacks, Tags 03EK and 07A2 (blueprint: lem-pur-kflat-total-tensor-model). -/
+/-- The existing sheaf tensor, with its canonical monoidal structure explicitly supplied. -/
 def tensor : Modules R ⥤ Modules R ⥤ Modules R :=
   @curriedTensor (Modules R) _ (monoidal R)
 
-/-- Reuse the existing zero-map preservation for the canonical tensor alias.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+/-- Reuse the existing zero-map preservation for the canonical tensor alias. -/
 instance tensor_preservesZeroMorphisms : (tensor R).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients.{u, v, r} R
 
-/-- Reuse zero-map preservation in the second tensor variable.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+/-- Reuse zero-map preservation in the second tensor variable. -/
 instance tensor_obj_preservesZeroMorphisms (M : Modules R) :
     ((tensor R).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients.{u, v, r} R M
@@ -112,14 +107,12 @@ private local instance (I : Type) : HasColimitsOfShape (Discrete I) (Modules R) 
     PresheafOfModules.hasColimitsOfShape _ _
   exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
-/-- Reuse the coproduct totalization of the canonical tensor bicomplex.
-Source: Stacks, Tag 06YM (auxiliary; not a blueprint node). -/
+/-- Reuse the coproduct totalization of the canonical tensor bicomplex. -/
 instance hasTotal (K L : CochainComplex (Modules R) ℤ) :
     CochainComplex.HasMapBifunctor K L (tensor R) := inferInstance
 
 /-- The direct-sum total tensor bifunctor, with the usual cochain Koszul differential.
-This is `CochainComplex.mapBifunctor` on objects, not a new totalization.
-Source: Stacks, Tags 06YM and 07A2 (blueprint: lem-pur-kflat-total-tensor-model). -/
+This is `CochainComplex.mapBifunctor` on objects, not a new totalization. -/
 def total : CochainComplex (Modules R) ℤ × CochainComplex (Modules R) ℤ ⥤
     CochainComplex (Modules R) ℤ :=
   Functor.uncurry.obj ((tensor R).map₂CochainComplex)
@@ -234,29 +227,7 @@ with its natural, summandwise inverse-associator chain isomorphism and its deriv
 All complexes are integer-indexed without any boundedness restriction. The termwise
 flatness clause applies to the direct sum over all pairs of integers with the given sum.
 The last bifunctor is the chosen descent of the total tensor from the cited resolving
-subcategory; its natural comparison determines it up to compatible natural isomorphism.
-
-Source: Stacks Project, Cohomology on Sites, Tags 07A2 and 07A4, and Modules on Sites,
-Tag 0G6Q (blueprint: lem-pur-kflat-total-tensor-model).
-
-Proof plan:
-1. Given an acyclic H, K-flatness of P makes Tot(H tensor P) acyclic, and K-flatness
-   of Q makes Tot(Tot(H tensor P) tensor Q) acyclic (def-pc-kflat-complex).
-   The reassociation in step 4 transfers this acyclicity to Tot(H tensor Tot(P tensor Q)).
-2. Each P^p tensor Q^q is flat: tensoring by it is the composite of the two exact
-   tensor functors, identified by associativity (def-pc-flat-sheaf-modules and
-   lem-pc-sheaf-modules-tensor-closed).
-3. The pairs p+q=i are countable. Their coproduct is flat by lem-pc-kflat-closure.
-   This is precisely the degree i term of the direct-sum total complex.
-4. Distribute tensor through coproducts by the tensor/internal-Hom adjunction
-   (lem-pc-sheaf-modules-tensor-closed), then use the inverse sheaf associator on
-   each triple summand. The three differential components have signs 1, (-1)^a,
-   and (-1)^(a+p) on both sides. Thus reassociation is a chain map with inverse
-   given by the associator. Naturality follows on each summand from its naturality.
-5. Apply the natural resolving-class comparison of lem-weil-pbc-site-derived-tensor-descent
-   to P,Q. Their total is in the same resolving class by steps 1 and 3, so it is an
-   admissible representative for subsequent derived tensor or derived pullback.
--/
+subcategory; its natural comparison determines it up to compatible natural isomorphism. -/
 theorem kFlat_total_tensor_model
     [HasDerivedCategory.{w} (Modules R)]
     (P Q : CochainComplex (Modules R) ℤ)

@@ -16,8 +16,25 @@ import Mathlib.Algebra.Homology.HomologySequenceLemmas
 /-!
 # Continuous cochain delta-functor
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG,
-label section-continuous-group-cohomology (blueprint: lem-exc-continuous-cochains-delta-functor).
+For a profinite group `G` and a finite ring `A`, the continuous inhomogeneous cochains
+`C(Fin n → G, M)` of discrete `A[G]`-modules `M` form a functor to cochain complexes whose
+cohomology is a cohomological delta-functor.
+
+## Main results
+
+* `Rep.continuousCochains_deltaFunctor`
+
+## Implementation details
+
+Each term is the module of continuous maps to the discrete coefficient module; the action,
+projections and adjacent multiplication preserve continuity. Postcomposition by equivariant
+linear maps gives a functor. The short exactness result `continuousCochains_shortExact` is
+transported along the term equivalences, and the homology long exact sequence and its
+naturality give the delta-functor axioms.
+
+## References
+
+* Stacks Project, Tag 0DVG (continuous group cohomology).
 -/
 
 @[expose] public section
@@ -163,19 +180,9 @@ private noncomputable abbrev ccFunctor :
 
 end Construction
 
-/-- Continuous inhomogeneous cochains form a cohomological delta-functor.
-
-Proof: Construct each term as the module of continuous maps to the discrete coefficient
-module. The action, projections and adjacent multiplication preserve continuity, and
-expanding two differentials cancels the terms in pairs. Postcomposition by equivariant
-linear maps commutes with the differential and gives a functor. The short exactness theorem
-`lem-exc-continuous-cochains-short-exact` applies to these complexes: transport its maps
-along their term equivalences. The homology long exact sequence and its naturality give
-all the delta-functor axioms, including additivity and the initial monomorphism.
-
-Source: Stacks Project, Etale Cohomology, Tag 0DVG,
-label section-continuous-group-cohomology; final profinite comparison via coinduction.
-(blueprint: lem-exc-continuous-cochains-delta-functor). -/
+/-- Continuous inhomogeneous cochains form a cohomological delta-functor: there is a functor
+`F` to cochain complexes with terms `C(Fin n → G, M)` and the standard inhomogeneous
+differential, whose homology functors form a cohomological delta-functor. -/
 theorem continuousCochains_deltaFunctor
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

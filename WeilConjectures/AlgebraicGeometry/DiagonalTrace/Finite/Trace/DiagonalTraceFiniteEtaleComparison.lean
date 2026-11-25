@@ -25,8 +25,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 attribute [local irreducible] CategoryTheory.Abelian.Ext Ext.comp Ext.mk₀
   Ext.mk₀CompMk₀ Ext.mapExactFunctor comparisonUpperStar
 
-/-- Transport an Ext class through isomorphisms of its two endpoints.
-Source: functoriality of Ext (blueprint: def-sfb-diagonal-trace-finite-etale-comparison). -/
+/-- Transport an Ext class through isomorphisms of its two endpoints. -/
 def finiteExtEndpointEquiv
     {C : Type*} [Category C] [Abelian C] [HasExt.{wB} C]
     {X X' Y Y' : C} (a : X ≅ X') (b : Y ≅ Y') :
@@ -43,9 +42,7 @@ def finiteExtEndpointEquiv
     simp only [Iso.inv_hom_id, Ext.mk₀CompMk₀_id]
 
 /-- The exact site-comparison equivalence on finite Ext classes.
-Its inverse is determined uniquely by the proved comparison bijection.
-Source: exact étale-to-pro-étale Ext comparison.
-(blueprint: def-sfb-diagonal-trace-finite-etale-comparison). -/
+Its inverse is determined uniquely by the proved comparison bijection. -/
 @[irreducible] def finiteEtaleRawEquiv (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (N : ℕ) (hA : (N : A) = 0) :
     Ext (Etale.ordinaryFiniteConstant A T) (Scheme.finiteEtaleTateLine T N A hA) 2 ≃

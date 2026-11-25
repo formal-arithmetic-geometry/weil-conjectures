@@ -8,6 +8,14 @@ module
 public import WeilConjectures.RingTheory.JacobianPresentationLift
 public import Mathlib.RingTheory.Etale.Basic
 import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
+
+/-! # Étale lifts of square Jacobian presentations
+
+## References
+
+* Stacks Project, Tag 04D1
+-/
+
 @[expose] public section
 universe u v
 namespace Algebra
@@ -34,17 +42,9 @@ private lemma det_option {R : Type*} [CommRing R] {ι : Type*}
   rw [he, Matrix.det_fromBlocks_zero₂₁]
   simp [Matrix.det_unique]
 
-/-- Etaleness and finite presentation of the coefficient lift.
-Source: Stacks Project, Tag 04D1.
-(blueprint: lem-exc-etale-algebra-lift-etale-fp)
-
-Proof: use the quotient presentation with variables and relations indexed by Option (Fin m).
-The old equations have no t term, so their partial derivatives with respect to t vanish. The
-last equation t * Delta - 1 has t derivative Delta. Hence the full Jacobian is block triangular
-with determinant Delta squared. In the quotient t * Delta = 1, making Delta and its square
-units. Pair each old equation with its old variable and the last equation with t. This gives a
-square Jacobian presentation; its etale theorem gives etaleness. Finally an etale algebra is
-finitely presented, by the finite-presentation field of Algebra.Etale. -/
+/-- Etaleness and finite presentation of the coefficient lift: the ring `L.LiftRing` attached to
+a coefficient lift of a square Jacobian presentation over `A ⧸ I` is étale and finitely presented
+over `A`. -/
 theorem coefficientLift_etale_fp
     {A : Type u} [CommRing A] (I : Ideal A)
     {B : Type v} [CommRing B] [Algebra (A ⧸ I) B] {m : ℕ}

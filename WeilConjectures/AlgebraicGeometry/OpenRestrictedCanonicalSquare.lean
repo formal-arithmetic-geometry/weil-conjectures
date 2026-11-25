@@ -17,8 +17,9 @@ import all WeilConjectures.AlgebraicGeometry.OpenRestrictedCounitCompatibility
 
 /-! # Comparison square on literal restrictions
 
-Source: Stacks Project, Tags 0DJ8 and 0DJ9 (locality of the stalk comparison).
-(blueprint: lem-pc-open-restricted-canonical-square).
+## References
+
+* Stacks Project, Tags 0DJ8 and 0DJ9.
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -53,33 +54,7 @@ set_option linter.unusedVariables false in
 -- Preserve the existing named K-flatness binder, unused in the dependent conclusion.
 /-- Compatibility of the two comparison arrows on a literal restriction, using
 only the constructed derived-stalk isomorphism and representing isomorphism.
-Source: Stacks Project, Tag 0DJ8, locality of equation-bc; Tag 0DJ9,
-source-open induction paragraph; Tag 0D5U, exact open restriction.
-(blueprint: lem-pc-open-restricted-canonical-square).
-
-Proof: put j = U.ι, p = pullback.fst g′ j and q = pullback.snd g′ j.
-Both j and p are open immersions, so their stalk ring maps are isomorphisms.
-The pullback condition and stalkMap_comp identify the source and base stalk
-ring maps for the two squares. The scalar-compatible restriction-stalk
-extension isomorphism identifies the stalk complexes of P and its literal
-restriction Q. Transport the universal base-derived tensor functors over
-these ring isomorphisms, then apply cohomology and extension to the final
-stalk ring. This constructs l, including its inverse, independently of
-any invertibility of the comparison arrow. The model equations comparison_eq
-and localized_eq express both comparison arrows as universal derived
-counits followed by scalar-extension adjunction transposes. Their naturality
-under these ring and stalk identifications, and tensorStalkIso, proves their
-commutative square. Exact-restriction homology and restriction-stalk naturality
-identify its right side with the constructed openDerivedStalkIso. The
-universal-counit equation defining the derived composition comparisons
-identifies the bottom transport with openRestrictedCompositionMap. The
-localization factor of exact restriction is precisely
-openRestrictionRepresentativeIso. Thus the equality is the displayed one.
-K-flatness of P computes the original derived pullback; exact open restriction
-preserves K-flatness. The supplied hcQ computes the restricted derived pullback.
-This calculation has no arbitrary represented object or representing isomorphism.
-Empty opens have no z. Top opens, zero complexes and zero rings use the same
-functorial identifications; there is no nonzero or nonempty assumption. -/
+(Stacks, Tags 0DJ8, 0DJ9 and 0D5U) -/
 theorem exists_open_restricted_canonical_square
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -16,17 +16,20 @@ Let `i : Z ⟶ X` be a closed immersion with Thom frames and regular Zariski fra
 (`AlgebraicGeometry.Etale.HasThomFrames`, `AlgebraicGeometry.Etale.HasRegularZariskiFrames`),
 and let `i' : Z' ⟶ X'` be its base change along any `e : X' ⟶ X`, again with such frames. Then the
 restriction of supports along `e` carries the fundamental class `[Z ⊂ X]`
-(`AlgebraicGeometry.Etale.thomFundamentalClass`) to `[Z' ⊂ X']`: a Zariski frame `(U, f)` of `i`
-pulls back to the Zariski frame `(e⁻¹ U, e^* f)` of `i'`, and the product of Kummer boundaries of
-`f` restricts to that of `e^* f`. This is the argument of
-`AlgebraicGeometry.Etale.restrictSupportedClass_fundamentalClass_of_flat`, which needs no
-flatness once the frames of `i'` are given.
+(`AlgebraicGeometry.Etale.thomFundamentalClass`) to `[Z' ⊂ X']`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.restrictSupportedClass_thomFundamentalClass`.
 - `AlgebraicGeometry.Etale.thomFundamentalClassMap_baseChange`: the same for the adjoint
   `cl_i : Λ_Z ⟶ Ri^!(Λ_X(c)[2c])`, through the base change map of `Ri^!`.
+
+## Implementation details
+
+A Zariski frame `(U, f)` of `i` pulls back to the Zariski frame `(e⁻¹ U, e^* f)` of `i'`, and the
+product of Kummer boundaries of `f` restricts to that of `e^* f`. This is the argument of
+`AlgebraicGeometry.Etale.restrictSupportedClass_fundamentalClass_of_flat`, which needs no
+flatness once the frames of `i'` are given.
 -/
 
 @[expose] public section
@@ -49,9 +52,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
 
 attribute [local instance] HasInvertibleExponent.opens
 
-/-- Blueprint `prop-pur-regular-immersion-purity-compatibilities`: base change of the fundamental
-class of a closed immersion with Thom frames, `[Z' ⊂ X'] = e^* [Z ⊂ X]`, along any morphism
-`e : X' ⟶ X` such that the base change `i'` of `i` has Thom frames and regular Zariski frames. -/
+/-- Base change of the fundamental class of a closed immersion with Thom frames,
+`[Z' ⊂ X'] = e^* [Z ⊂ X]`, along any morphism `e : X' ⟶ X` such that the base change `i'` of `i`
+has Thom frames and regular Zariski frames. -/
 theorem restrictSupportedClass_thomFundamentalClass (hT : HasThomFrames Λ c i)
     (hR : HasRegularZariskiFrames c i) {k k' : Type u} [Field k] [Field k']
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] {X' Z' : Scheme.{u}}

@@ -12,12 +12,13 @@ public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 
 /-! # The two augmentations defining an abelian Čech comparison
 
-Source: Stacks Project, Tag 01EQ, proof of Lemma 20.11.2.
-(blueprint: def-pc-abelian-cech-comparison-construction)
-
 The maps below are actual restrictions and resolution augmentations. The final
 predicate characterizes a comparison using Ext cocycles on every injective
 resolution; it contains no connecting-map or degree-zero normalization law.
+
+## References
+
+* Stacks Project, Tag 01EQ (proof of Lemma 20.11.2)
 -/
 
 @[expose] public section
@@ -29,8 +30,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
-/-- Čech cochains preserve zero coefficient morphisms.
-Source: the sectionwise differential of Stacks 01EQ. -/
+/-- Čech cochains preserve zero coefficient morphisms. -/
 private theorem cech_preservesZero {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) :
     (TopCat.Sheaf.cechComplexFunctor U).PreservesZeroMorphisms := by
   constructor
@@ -42,8 +42,7 @@ private theorem cech_preservesZero {X : Scheme.{u}} {ι : Type u} (U : ι → X.
 
 attribute [local instance] cech_preservesZero
 
-/-- Resolution sections at the whole space. Source: Stacks 01EQ.
-(blueprint: def-pc-abelian-cech-comparison-construction) -/
+/-- Resolution sections at the whole space. -/
 noncomputable abbrev abelianCechSections {X : Scheme.{u}}
     {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}
     (I : InjectiveResolution F) : CochainComplex AddCommGrpCat.{u} ℕ :=
@@ -51,8 +50,7 @@ noncomputable abbrev abelianCechSections {X : Scheme.{u}}
     (CategoryTheory.evaluation _ _).obj (op (⊤ : X.Opens))).mapHomologicalComplex
     (.up ℕ)).obj I.cocomplex
 
-/-- The double complex, with Čech degree first. Source: Stacks 01EQ.
-(blueprint: def-pc-abelian-cech-comparison-construction) -/
+/-- The double complex, with Čech degree first. -/
 noncomputable def abelianCechDouble {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}
     (I : InjectiveResolution F) :
@@ -60,9 +58,7 @@ noncomputable def abelianCechDouble {X : Scheme.{u}} {ι : Type u} (U : ι → X
   HomologicalComplex₂.flip
     (((TopCat.Sheaf.cechComplexFunctor U).mapHomologicalComplex (.up ℕ)).obj I.cocomplex)
 
-/-- The restriction augmentation from resolution sections to the total complex.
-Source: Stacks 01EQ, the map alpha.
-(blueprint: def-pc-abelian-cech-comparison-construction) -/
+/-- The restriction augmentation from resolution sections to the total complex. -/
 noncomputable def abelianCechAlpha {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}
     (I : InjectiveResolution F) :
@@ -94,9 +90,7 @@ noncomputable def abelianCechAlpha {X : Scheme.{u}} {ι : Type u} (U : ι → X.
         (homOfLE (le_top (a := ⨅ l, U (y l)))).op s
     rw [← Category.assoc, hc, Category.assoc]
 
-/-- The coefficient augmentation into the total complex.
-Source: Stacks 01EQ, the map beta.
-(blueprint: def-pc-abelian-cech-comparison-construction) -/
+/-- The coefficient augmentation into the total complex. -/
 noncomputable def abelianCechBeta {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}
     (I : InjectiveResolution F) :
@@ -133,10 +127,7 @@ noncomputable def abelianCechBeta {X : Scheme.{u}} {ι : Type u} (U : ι → X.O
 
 /-- A comparison is the quotient of the two augmentations on every resolution.
 The Ext cocycle a corresponds to the section cycle z by the constant-sheaf
-adjunction, evaluated on 1. Thus the equation uses the canonical resolution
-identification, and does not quantify over arbitrary homology isomorphisms.
-Source: Stacks 01EQ, alpha/beta characterization.
-(blueprint: def-pc-abelian-cech-comparison-construction) -/
+adjunction, evaluated on 1; the equation uses this canonical resolution identification. -/
 def IsAbelianCechComparison {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (q : ℕ)
     (c : (TopCat.Sheaf.cechCohomologyFunctor U q).obj F ⟶

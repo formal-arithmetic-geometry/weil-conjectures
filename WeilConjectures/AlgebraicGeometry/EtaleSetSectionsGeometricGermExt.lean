@@ -11,8 +11,9 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-! # Étale set-sheaf sections are determined by geometric germs
 
-Source: Stacks Project, Étale Cohomology, Theorem 03PU, injectivity criterion.
-(blueprint: lem-weil-pbc-sets-sections-geometric-germ-ext).
+## References
+
+* Stacks Project, Tag 03PU
 -/
 
 @[expose] public section
@@ -23,20 +24,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Étale Cohomology, Theorem 03PU (injectivity criterion).
-(blueprint: lem-weil-pbc-sets-sections-geometric-germ-ext).
-
-Proof: For every point v of U choose an algebraic closure Ω of its residue field
-and the resulting geometric point z : Spec Ω → U over v. Composing with U → X
-makes z a pointed étale neighbourhood of a geometric point of X. The hypothesis
-says the two germs at this neighbourhood agree. The category of pointed étale
-neighbourhoods is cofiltered, and equality in its filtered colimit of sets is
-witnessed on a common refinement. Thus there is a pointed étale neighbourhood
-V → U containing a point over v on which the restrictions of a and b agree.
-As v varies these neighbourhoods cover U. The separatedness axiom of G gives
-a = b. If U is empty, its empty covering gives the same conclusion. This argument
-works for Type (u + 1)-valued sheaves: filtered-colimit equality of sets holds
-in that universe as well, with the u-small cofinal model of pointed neighbourhoods. -/
+/-- Two sections of an étale sheaf with equal germs at every geometric point are equal (Stacks,
+Tag 03PU). -/
 theorem etaleSetSection_ext_of_geometric_germs
     (X : Scheme.{u}) (G : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (U : X.Etale) (a b : G.obj.obj (op U))

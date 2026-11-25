@@ -12,7 +12,9 @@ import WeilConjectures.ConstructibleSheaf.OpenClosed
 
 /-! # Perfect local models from an adic constructible residue
 
-Source: Bhatt--Scholze, Proposition 6.6.11, forward implication.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -79,26 +81,7 @@ private theorem noetherian_stratum {X : Scheme.{u}} [IsNoetherian X]
   exact { }
 
 /-- A complete object with bounded constructible etale residue admits finite stratified
-perfect local models.
-Source: Bhatt--Scholze, Proposition 6.6.11, forward implication, and Lemma 6.6.8
-(auxiliary; not a blueprint node).
-
-Proof: Only finitely many residue cohomology sheaves are nonzero. Intersect their finite
-constructible stratifications using the actual scheme fibre products. Pullback of the
-chosen local trivializations makes every cohomology sheaf locally constant of finite
-type on each refined stratum; zero cohomology imposes no extra refinement. Each stratum
-is Noetherian, since its immersion is locally a quotient of a Noetherian affine chart
-and its underlying subspace is quasi-compact. Transport the original ringed-module
-complex to the equivalent small pro-etale site. Restriction of the completion unit to
-immersions and slices preserves completeness, and comparison-pullback identifies the
-residue with the pullback of the restricted etale complex. Over the residue field tensor
-is exact, so the same bounded interval is a Tor interval after restriction. Apply
-adicResidueLissePerfectLift on each stratum. Transport its covering sieve and its local
-isomorphisms back through the small-site equivalence. Its bounded finite-projective
-complex is perfect by the definition of IsPerfectRingComplex, witnessed by itself.
-Composition of inverse images and their finite-projection coefficient comparisons gives
-exactly sfbLocalRestriction and sfbCompletedModel. Assemble the finitely many strata.
-For empty X the empty cover supplies the same assertion. -/
+perfect local models (Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.6.8). -/
 theorem adicConstructible_localModels (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I)

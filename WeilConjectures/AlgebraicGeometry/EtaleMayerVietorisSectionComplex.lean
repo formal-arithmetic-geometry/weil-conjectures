@@ -14,8 +14,9 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 /-!
 # Section complexes for an étale open cover
 
-Source: Stacks Project, Tag 0A50, proof.
-(blueprint: def-weil-pbc-etale-mayer-vietoris-section-complex).
+## References
+
+* Stacks Project, Tag 0A50
 -/
 
 @[expose] public section
@@ -25,13 +26,13 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- Evaluation of an abelian étale sheaf at an étale object.
-Source: Stacks Project, Tag 0A50, proof. -/
+(Stacks, Tag 0A50) -/
 noncomputable abbrev etaleSectionFunctor {X : Scheme.{u}} (W : X.Etale) :=
   sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
     (evaluation _ _).obj (op W)
 
 /-- Restriction on complexes of sections.
-Source: Stacks Project, Tag 0A50, proof. -/
+(Stacks, Tag 0A50) -/
 noncomputable def etaleSectionMap {X : Scheme.{u}} {A B : X.Etale} (f : A ⟶ B)
     (I : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) :
     ((etaleSectionFunctor B).mapHomologicalComplex (.up ℕ)).obj I ⟶
@@ -40,8 +41,7 @@ noncomputable def etaleSectionMap {X : Scheme.{u}} {A B : X.Etale} (f : A ⟶ B)
     (Functor.whiskerLeft (sheafToPresheaf _ _) ((evaluation _ _).map f.op)) _).app I
 
 /-- The restriction-pair and difference short complex of sections of a sheaf complex.
-Source: Stacks Project, Tag 0A50, proof.
-(blueprint: def-weil-pbc-etale-mayer-vietoris-section-complex) -/
+(Stacks, Tag 0A50) -/
 noncomputable def etaleSectionShortComplex {X : Scheme.{u}} (U V : X.Opens)
     (I : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) :
     ShortComplex (CochainComplex AddCommGrpCat.{u + 1} ℕ) := by

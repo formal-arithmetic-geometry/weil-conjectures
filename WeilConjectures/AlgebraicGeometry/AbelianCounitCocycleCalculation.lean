@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AbelianInjectiveCounitCocycle
 
 /-! # The cocycle calculation for an arbitrary abelian injective target
 
-Source: Stacks Project, Tags 01F7 and 06XR.
-(blueprint: new-abelian-counit-cocycle-calculation)
+## References
+
+* Stacks Project, Tags 01F7 and 06XR
 -/
 
 @[expose] public section
@@ -54,25 +55,8 @@ private theorem homotopy_of_comp_quasiIso_nat
 
 
 /-- The inverse-image/coefficient cocycle computation for abelian sheaves.
-It asserts no comparison with a target module resolution.
-
-Source: Stacks Project, Tag 01F7, Lemma 01F8 and equation 01F9; Tag 06XR.
-(blueprint: new-abelian-counit-cocycle-calculation)
-
-Proof: Replace the forgotten source module resolution by an abelian injective
-resolution using its quasi-isomorphic augmentation. The proved comparison
-evaluation identifies the prescribed source normalization after this change.
-Lift the coefficient map from the inverse image of the abelian resolution to
-the given injective target. The original lift and this composite lift have the
-same augmented composite, so they are homotopic, by exactness of inverse image
-and injectivity of the target terms. Their section maps have equal homology.
-For two abelian injective resolutions, the fixed Ext-to-sections normalization
-sends each closed Hom cocycle to its section-homology class. The exact-functor
-cocycle theorem computes inverse image and coefficients, and the constant-sheaf
-adjunction identifies its integer-generator evaluation with the section map.
-Naturality of the adjunction unit factors the replacement section map through
-the source comparison. Combining these homology equalities proves the result.
-The argument includes degree zero, zero sheaves and empty schemes. -/
+It asserts no comparison with a target module resolution (Stacks, Tags 01F7, 01F8, 01F9 and 06XR).
+-/
 theorem abelian_counit_cocycle_calculation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Y.Modules) (F : X.Modules) (J : InjectiveResolution A)
     (c : (invImage f).obj

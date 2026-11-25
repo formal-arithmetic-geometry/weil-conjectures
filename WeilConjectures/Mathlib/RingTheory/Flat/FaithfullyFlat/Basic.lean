@@ -31,8 +31,7 @@ namespace AdjoinRoot
 
 variable {R : Type*} [CommRing R]
 
-/-- For a monic polynomial `f` of nonzero degree, `R[X]/(f)` is faithfully flat over `R`: it is
-free with basis `1, X, …, X^(deg f - 1)`, and nonzero when `R` is. -/
+/-- For a monic polynomial `f` of nonzero degree, `R[X]/(f)` is faithfully flat over `R`. -/
 theorem faithfullyFlat_of_monic {f : R[X]} (hf : f.Monic) (hdeg : f.degree ≠ 0) :
     Module.FaithfullyFlat R (AdjoinRoot f) := by
   let pb := powerBasis' hf
@@ -51,9 +50,7 @@ end AdjoinRoot
 namespace Module.Flat
 
 /-- **Flatness descends along faithfully flat algebras.** If `C` is faithfully flat over `B` and
-flat over `A`, then `B` is flat over `A`: for an injection `N ⟶ P` of `A`-modules, the map
-`B ⊗ N ⟶ B ⊗ P` becomes, after `C ⊗_B -`, the injective map `C ⊗ N ⟶ C ⊗ P`.
-(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
+flat over `A`, then `B` is flat over `A`. -/
 theorem of_flat_of_faithfullyFlat {A B C : Type*} [CommRing A] [CommRing B]
     [CommRing C] [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C]
     [Module.FaithfullyFlat B C] [Module.Flat A C] : Module.Flat A B := by

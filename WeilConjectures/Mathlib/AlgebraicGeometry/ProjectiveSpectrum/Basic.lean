@@ -40,6 +40,12 @@ pulls the section `awayToSection 𝒜 t z` back to `z`
 
 Finally, we record `AlgebraicGeometry.Proj.isIso_toSpecZero`, a criterion for the structure
 morphism `Proj 𝒜 ⟶ Spec 𝒜₀` to be an isomorphism.
+
+## Implementation details
+
+Projective space `ℙⁿ_k` is used through `AlgebraicGeometry.ProjectiveSpace`, the base change of
+`Proj ℤ[x₀, …, xₙ]` (`AlgebraicGeometry.Proj.projectiveSpaceOverAffine`), whose standard opens
+`D₊(xᵢ)` are affine spaces (`AlgebraicGeometry.ProjectiveSpace.standardOpenIso`).
 -/
 
 @[expose] public section
@@ -66,16 +72,8 @@ lemma Proj.basicOpen_add_le (f g : A) :
   rw [not_or, not_not, not_not] at h
   exact hx (add_mem h.1 h.2)
 
-/-- **The scheme `Proj S`.** For a graded ring `S = ⨁ 𝒜 i`, the points of `Proj 𝒜` are the
-homogeneous primes not containing the irrelevant ideal `S₊`, and for `f` homogeneous of positive
-degree the standard open `D₊(f)` is the affine scheme `Spec S₍f₎`, the restriction maps being the
-graded localisation maps (`AlgebraicGeometry.Proj.basicOpenIsoSpec`, `Proj.awayι`).
-
-Projective space `ℙⁿ_k` is used through `AlgebraicGeometry.ProjectiveSpace`, the base change of
-`Proj ℤ[x₀, …, xₙ]` (`AlgebraicGeometry.Proj.projectiveSpaceOverAffine`), whose standard opens
-`D₊(xᵢ)` are affine spaces (`AlgebraicGeometry.ProjectiveSpace.standardOpenIso`).
-
-(blueprint: `def-pc-proj`) -/
+/-- For `f` homogeneous of positive degree, the standard open `D₊(f)` of `Proj 𝒜` is affine and
+isomorphic to `Spec (A_f)₀`. -/
 theorem Proj.isAffineOpen_basicOpen_and_nonempty_iso {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m)
     (hm : 0 < m) : IsAffineOpen (Proj.basicOpen 𝒜 f) ∧
       Nonempty ((Proj.basicOpen 𝒜 f).toScheme ≅ Spec (.of (Away 𝒜 f))) :=
@@ -491,7 +489,7 @@ end Proj
 
 /-- **A criterion for `Proj 𝒜 ⟶ Spec 𝒜₀` to be an isomorphism**: it suffices that a single
 homogeneous element `f` of positive degree has `D₊(f) = Proj 𝒜` and that the canonical map
-`𝒜₀ ⟶ (𝒜_f)₀` is bijective. Indeed `Proj 𝒜 = D₊(f) ≅ Spec (𝒜_f)₀ ≅ Spec 𝒜₀`. -/
+`𝒜₀ ⟶ (𝒜_f)₀` is bijective. -/
 lemma Proj.isIso_toSpecZero {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m)
     (htop : Proj.basicOpen 𝒜 f = ⊤)
     (hbij : Function.Bijective (fromZeroRingHom 𝒜 (Submonoid.powers f))) :

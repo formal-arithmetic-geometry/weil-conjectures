@@ -9,12 +9,14 @@ public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 
 /-! # Coherence of termwise monoidal functors on cochain complexes
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4.
-
 For an additive monoidal functor `G` preserving the coproducts of total tensor products,
 `G.mapCochainComplexMonoidal` makes the termwise functor monoidal. This file records the
 underlying `CoreMonoidal` structure, its value on the total-tensor summands, the Koszul
 braiding compatibility and the compatibility with a compositor.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4
 -/
 
 @[expose] public section
@@ -136,15 +138,7 @@ variable {C D E : Type*} [Category* C] [Category* D] [Category* E]
     (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) G₁₂]
 
 /-- A compositor compatible with the comonoidal structures gives the composition law of
-the termwise comparisons. Writing `G` for the termwise functor on cochain complexes,
-`δ` for the inverse of `mapCochainComplexμIso` and `a` for the termwise compositor:
-```
-  G₁₂(P ⊗ Q) ──────── δ ───────→ G₁₂ P ⊗ G₁₂ Q
-      │ a                              │ a ⊗ a
-      ↓                                ↓
-  G₂ G₁(P ⊗ Q) ─ G₂ δ → G₂(G₁ P ⊗ G₁ Q) ─ δ → G₂ G₁ P ⊗ G₂ G₁ Q
-```
--/
+the termwise comparisons on cochain complexes. -/
 lemma mapCochainComplex_composition (a : G₁₂ ≅ G₁ ⋙ G₂)
     (ha : ∀ M N : C, OplaxMonoidal.δ G₁₂ M N ≫ (a.hom.app M ⊗ₘ a.hom.app N) =
       a.hom.app (M ⊗ N) ≫ G₂.map (OplaxMonoidal.δ G₁ M N) ≫

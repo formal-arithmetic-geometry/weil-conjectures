@@ -14,7 +14,20 @@ import Mathlib.RingTheory.MatrixAlgebra
 /-!
 # Explicit tensor lifts for an opposite factor
 
-Source: Stacks Project, Tag 03R7, tensor computation.
+For invertible matrices `a` and `b`, the lift `a ⊗ (b⁻¹)ᵀ` (reindexed over `Fin (n * m)`)
+describes the Galois conjugation datum of `A ⊗[K] Bᵐᵒᵖ` in terms of those of the central
+simple algebras `A` and `B`.
+
+## Implementation details
+
+Scalar extension is commuted with the tensor product and with opposite algebras; the given
+splittings of `A` and `B` are combined via transposition of the opposite matrix algebra and
+the Kronecker algebra equivalence. Transposition reverses the second conjugation, so its
+conjugator becomes the inverse transpose of the second lift.
+
+## References
+
+* Stacks Project, Tag 03R7, tensor computation in the injectivity argument.
 -/
 
 @[expose] public section
@@ -45,11 +58,8 @@ def tensorOppositeMatrixLift {R : Type*} [CommRing R] {n m : ℕ}
   Units.map (Matrix.reindexRingEquiv R finProdFinEquiv).toMonoidHom
     (a.kronecker (matrixInverseTranspose b))
 
-/-- The matrix lift respects coefficient maps, multiplication, and scalar matrices.
-
-These are the elementary matrix identities used in the tensor-lift construction.
-Source: Mathlib matrix Kronecker and reindexing identities.
-(blueprint: lem-sc-tensor-opposite-matrix-properties). -/
+/-- The matrix lift commutes with coefficient ring maps, is multiplicative, and sends the
+pair of scalar matrices `(c, d)` to the scalar matrix `c / d`. -/
 theorem tensorOppositeMatrixLift_properties {R S : Type*} [CommRing R] [CommRing S]
     {n m : ℕ} (f : R →+* S)
     (a a' : Matrix.GeneralLinearGroup (Fin n) R)
@@ -96,8 +106,7 @@ theorem tensorOppositeMatrixLift_properties {R S : Type*} [CommRing R] [CommRing
     simp only [div_eq_mul_inv, Units.val_mul]
     split_ifs <;> simp_all
 
-/-- Scalar extension distributes over the tensor product of algebras.
-Upgrade Mathlib's linear equivalence by checking one and multiplication on pure tensors. -/
+/-- Scalar extension distributes over the tensor product of algebras. -/
 private def tensorBaseChangeEquiv (K S A B : Type*) [CommRing K] [CommRing S]
     [Ring A] [Ring B] [Algebra K S] [Algebra K A] [Algebra K B] :
     S ⊗[K] (A ⊗[K] B) ≃ₐ[S] (S ⊗[K] A) ⊗[S] (S ⊗[K] B) :=
@@ -123,20 +132,9 @@ private def tensorBaseChangeEquiv (K S A B : Type*) [CommRing K] [CommRing S]
                 TensorProduct.AlgebraTensorModule.distribBaseChange_tmul,
                 mul_comm s t])
 
-/-- The tensor/opposite splitting has the conjugation datum of the explicit tensor lifts.
-
-Proof: commute scalar extension with the tensor product and with opposite algebras.
-Apply the two given matrix splittings, transpose the opposite of the second matrix
-algebra, and apply the Kronecker algebra equivalence. Reindex the product of the two
-finite index sets using finProdFinEquiv. On a pure tensor the coefficient action on
-its image is the Kronecker product of the coefficient actions on its two factors.
-Use the two conjugation hypotheses. Transposition reverses the second conjugation,
-so that its conjugator is the inverse transpose of the second lift. The Kronecker
-multiplication formula gives precisely conjugation by tensorOppositeMatrixLift.
-Extend from pure tensors by additivity and scalar linearity; coefficient automorphisms
-fix the base field, so this extension respects the tensor relations.
-Source: Stacks Project, Tag 03R7, tensor computation in the injectivity argument.
-(blueprint: lem-sc-tensor-opposite-matrix-conjugation). -/
+/-- Given splittings of `A` and `B` over the separable closure whose Galois action is
+conjugation by `a g` and `b g`, there is a splitting of `A ⊗[K] Bᵐᵒᵖ` whose Galois action is
+conjugation by `tensorOppositeMatrixLift (a g) (b g)`. -/
 theorem exists_tensor_opposite_matrix_conjugation (K : Type u) [Field K]
     (A B : CSA.{u, u} K) (n m : ℕ)
     (eA : (SeparableClosure K ⊗[K] A) ≃ₐ[SeparableClosure K]

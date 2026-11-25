@@ -13,11 +13,13 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 import WeilConjectures.Algebra.Homology.HomComplexProjections
 import WeilConjectures.Algebra.Homology.HomComplexMappingConeDifferential
 
-/-! # Internal Hom complexes and mapping cones
+/-!
+# Internal Hom complexes and mapping cones
 
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X (Hom complexes), and
-sites-cohomology.tex, Section 08J7, proof of Lemma 21.35.4.
-(blueprint: lem-sc-hom-complex-mapping-cone).
+## References
+
+* Stacks Project, Tag 0A8X (Hom complexes)
+* Stacks Project, Tag 08J7 (proof of Lemma 21.35.4)
 -/
 
 @[expose] public section
@@ -52,27 +54,7 @@ private lemma homObjMap_zero_right
 
 -- The product comparison unfolds the chosen Hom-complex functor repeatedly.
 set_option backward.isDefEq.respectTransparency false in
-/-- Internal Hom in the second variable commutes with mapping cones.
-
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X (the differential of the
-Hom complex), and Section 08J7, the proof of Lemma 21.35.4.
-(blueprint: lem-sc-hom-complex-mapping-cone).
-
-Proof: in degree `n`, the cone of `Hom(E,f)` is
-`Hom(E,G)^(n+1) ⊞ Hom(E,I)^n`. Its product components are pairs of local maps
-`E^p → G^(p+n+1)` and `E^p → I^(p+n)`. Internal Hom preserves binary
-biproducts in its second variable, so the product universal property identifies
-these pairs with the degree `n` product of maps
-`E^p → G^(p+n+1) ⊞ I^(p+n)`, which is `Hom(E,cone(f))^n`.
-The inverse separates the two components by the biproduct projections.
-The cone differential sends a pair `(a,b)` to `(-d_Hom a, f a + d_Hom b)`.
-Expanding the Hom differential gives in the first component
-`-d_G a + (-1)^(n+1) a d_E`, and in the second
-`f a + d_I b - (-1)^n b d_E`. These are exactly the two components of
-the differential on `Hom(E,cone(f))`, since the cone differential has matrix
-`(-d_G, 0; f, d_I)`. Thus the degreewise maps and their inverses are chain maps.
-Their compositions are identities by the biproduct and product universal
-properties. This argument uses no boundedness or projectivity. -/
+/-- Internal Hom in the second variable commutes with mapping cones. -/
 theorem homComplex_mappingCone_iso
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})

@@ -18,7 +18,7 @@ those of the factors (`CategoryTheory.Adjunction.projectionMorphism_comp`,
 `CategoryTheory.Adjunction.projectionComparison_comp`), and the projection morphism is transported
 along an isomorphism of left adjoints compatible with the comultiplications
 (`CategoryTheory.Adjunction.projectionMorphism_eq_of_iso`). These are the formal parts of the
-composition clause of the coherence of the projection formula (blueprint `prop-sf-pf-coherence`).
+composition clause of the coherence of the projection formula.
 
 -/
 

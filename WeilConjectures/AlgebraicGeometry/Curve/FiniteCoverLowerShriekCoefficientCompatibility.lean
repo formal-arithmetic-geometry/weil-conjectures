@@ -19,8 +19,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-! # Conditional coefficient hypotheses after a finite cover
 
-Source: Stacks Project, Tag 03SD, `lemma-vanishing-easier`, first paragraph;
-Tag 095R, `lemma-finite-pushforward-constructible`.
+## References
+
+* Stacks Project, Tag 03SD (first paragraph of the proof)
+* Stacks Project, Tags 095B, 095R
 -/
 
 @[expose] public section
@@ -73,9 +75,7 @@ private theorem finiteCoverLowerShriek_isZero {R : Type (u + 1)} [CommRing R]
     ((Etale.lowerStar (ModuleCat.{u + 1} R) v).map_isZero
       ((Etale.upperStar (ModuleCat.{u + 1} R) v).map_isZero hG))
 
-/-- Finite etale pushforward preserves finite local constancy. Use the trivial
-stratification on the open and extend by zero over its closed complement.
-Source: Stacks Project, Tags 095B and 095R. -/
+/-- Finite etale pushforward preserves finite local constancy. -/
 theorem finiteCoverLowerShriek_constructible {k : Type u}
     [Field k] [IsAlgClosed k] {X U V : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
@@ -102,9 +102,7 @@ theorem finiteCoverLowerShriek_constructible {k : Type u}
   exact Scheme.IsConstructibleSheaf.openImmersionLowerShriek
     j j.closedComplement j.range_closedComplement H
 
-/-- Torsion substatement retained as a separately reviewable obligation.
-Source: Stacks Project, Tag 03SD.
-(auxiliary lemma; not a blueprint node) -/
+/-- The torsion part of the coefficient hypotheses passes to the finite-cover sheaf. -/
 theorem finiteCoverLowerShriek_torsion {k : Type u}
     [Field k] [IsAlgClosed k] {X U V : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
@@ -172,34 +170,7 @@ theorem finiteCoverLowerShriek_torsion {k : Type u}
       exact ⟨0, Subsingleton.elim _ _⟩
 
 
-/-- The coefficient hypotheses needed for retract descent pass to the finite-cover sheaf.
-This statement contains no cohomology assertions and does not assume a unit retraction.
-
-Source: Stacks Project, Tag 03SD, `lemma-vanishing-easier`, first paragraph;
-Tag 095R, `lemma-finite-pushforward-constructible`.
-(auxiliary lemma; not a blueprint node)
-
-Proof: Write F = j_!G and K = j_!(v_*v^*G). Pullback preserves finite locally constant
-sheaves. A finite etale map is etale-locally a finite disjoint union of copies of its base;
-a common trivializing refinement for the finitely many summands shows that v_*v^*G is
-finite locally constant. This part is already stated as
-`Scheme.finiteLocallyConstant_lowerStar_of_finite_etale`
-(lem-weil-pbc-etale-finite-pushforward-locally-constant), whose finite-ring hypothesis
-holds for R = ULift(ZMod r). The open U is Noetherian because it is open in a finite-type
-curve over a field. Thus v_*v^*G is constructible; extension by zero preserves
-constructibility (equivalently use Tag 095R for finite pushforward).
-Every stalk of every R-module sheaf is killed by r, since r is zero in R.
-If F is zero, the fully faithful extension by zero gives G zero; pullback and direct
-image preserve zero, so K is zero and both torsion implications hold. Otherwise,
-conservativity of geometric stalks gives a nonzero element x in a stalk of F.
-If F is p-primary then p^n kills x for some n. When p differs from r, Bezout for r
-and p^n would give x = 0, a contradiction. Thus p = r, and r itself kills every
-stalk element of K, proving primary torsion with exponent one.
-If F has invertible-order torsion, some positive n invertible on Spec k kills x.
-The same Bezout argument shows r divides n. Writing n = r*m, invertibility of n
-implies invertibility of r in the commutative ring of global sections of Spec k.
-Since r kills every stalk element of K, choosing n = r proves invertible-order torsion.
-These arguments also handle the empty open, empty cover, and zero G. -/
+/-- The coefficient hypotheses needed for retract descent pass to the finite-cover sheaf. -/
 theorem finiteCoverLowerShriek_coefficient_compatibility {k : Type u}
     [Field k] [IsAlgClosed k] {X U V : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]

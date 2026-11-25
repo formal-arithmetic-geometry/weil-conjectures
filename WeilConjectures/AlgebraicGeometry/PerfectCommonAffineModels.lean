@@ -11,8 +11,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Common affine models for two perfect objects
 
-Source: Stacks Project, Tag 08CR, affine localization in the second proof
-(blueprint: lem-pc-perfect-common-affine-models).
+## References
+
+* Stacks Project, Tag 08CR (affine localization in the second proof).
 -/
 
 @[expose] public section
@@ -69,19 +70,7 @@ private theorem restrict_model (X : Scheme.{u})
         F.mapDerivedCategoryFactors.app K⟩
 
 /-- Two perfect objects have strictly perfect representatives on one affine neighbourhood
-of any specified point. Source: Stacks Project, Tag 08CR, second proof, local reduction
-(blueprint: lem-pc-perfect-common-affine-models).
-
-Proof: At the specified point choose the neighbourhoods and strictly perfect complexes
-in the definition of perfectness for E and F. Their intersection is an open neighbourhood.
-Choose an affine open neighbourhood inside this intersection, using the affine basis of
-scheme opens. Restrict both complexes to this smaller open. Restriction preserves zero
-objects, finite free modules and the equation splitting each term off a finite free module;
-thus it preserves strict perfectness, with the same degree bounds. The natural composition
-isomorphism for open restriction, and the comparison between termwise restriction followed
-by Q and derived restriction, transport the original representing isomorphisms to the new
-open. This gives both models on the same affine neighbourhood. No separatedness hypothesis
-is used: the intersection is refined to an affine open, not assumed affine itself. -/
+of any specified point (Stacks, Tag 08CR). -/
 theorem perfect_common_affine_models (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

@@ -12,6 +12,12 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
 
 Proper projection coherence, tensor symmetry and the unitors identify the kernel
 counit with the specified ordinary inverse-projection counit, component by component.
+
+## Implementation details
+
+The comparison uses actual maps on the unbounded derived categories. The final equalities
+are closed by meta-level congruence builders producing kernel-checked proofs without
+unfolding the derived functors.
 -/
 
 @[expose] public section
@@ -613,8 +619,9 @@ private meta def memoTraceProofCongruenceWithFacts
     return result
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- Proper coincidence and tensor symmetry identify the kernel counit with the
-specified inverse ordered-projection counit. -/
+/-- For proper `q`, the kernel counit precomposed with the source tensor symmetry is the
+finite trace counit `finiteP1TraceCounit A q B τ`, when the kernel trace is `τ` transported
+along proper coincidence. -/
 theorem finiteP1TraceCounit_kernel_comparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (q : X ⟶ Y) [IsProper q]

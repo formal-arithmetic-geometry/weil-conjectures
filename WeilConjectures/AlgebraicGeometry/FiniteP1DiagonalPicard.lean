@@ -8,8 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalMaps
 import WeilConjectures.AlgebraicGeometry.P1DiagonalLocalIdeal
 
 /-! # The divisor line of the projective-line diagonal
-
-Source: blueprint lemma-class-diagonal-projective-line, the equation x0*y1-x1*y0.
 -/
 
 @[expose] public noncomputable section
@@ -58,21 +56,7 @@ private lemma pic_map_ofIsInvertible {X Y : Scheme.{u}} (g : X ⟶ Y) (M : Y.Mod
     (Scheme.Modules.pullback g).mapIso (Scheme.Pic.ofIsInvertibleIso M)⟩
 
 /-- Under either projection chart, the dual diagonal ideal is the tensor product
-of the relative hyperplane line and the pullback of the base hyperplane line.
-Source: blueprint lemma-class-diagonal-projective-line, standard-chart calculation;
-lem-sp-finite-p1-diagonal-kummer-component-formula, proof step 1.
-(auxiliary; not a blueprint node)
-
-Proof: on the product chart xi*yj nonzero, the diagonal ideal has the frame
-(x0*y1-x1*y0)/(xi*yj). Its dual frame has transition ratios those of
-p1*O(1) tensor p2*O(1). Map these dual frames to the tensor products of the
-standard hyperplane frames. The ratios agree on all pairwise overlaps, so these
-maps glue to an isomorphism of invertible modules. Pulling this isomorphism
-through either canonical chart identifies one factor with the relative O(1)
-and the other with the pullback of O(1) on the base P. Passing to Picard classes
-gives the equation. Interchanging the factors negates the equation of the
-diagonal, which leaves the divisor line unchanged. The calculation works over
-arbitrary rings, including nonreduced rings and the zero ring. -/
+of the relative hyperplane line and the pullback of the base hyperplane line. -/
 theorem finiteP1_diagonal_picard (S : Scheme.{u})
     (hI : (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible) (a : Bool) :
     letI := hI.isInvertible_dual_toModules

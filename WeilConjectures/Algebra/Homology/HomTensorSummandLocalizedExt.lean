@@ -11,8 +11,11 @@ public import WeilConjectures.Algebra.Homology.HomTensorDegreewise
 /-!
 # Localized tensor-summand extensionality
 
-Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90.
-(blueprint: lem-sc-hom-tensor-summand-localized-ext)
+## References
+
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 03EO](https://stacks.math.columbia.edu/tag/03EO)
+* [Stacks Project, Tag 0A90](https://stacks.math.columbia.edu/tag/0A90)
 -/
 
 @[expose] public section
@@ -207,19 +210,7 @@ local notation "Mod" => SheafOfModules.{max u v}
 
 -- Transposition elaborates localized module structures in two site universes.
 set_option synthInstance.maxSize 256 in
-/-- Morphisms to an internal Hom from a sheaf tensor are determined on localized pure tensors.
-Source: Stacks Project, Modules on Sites, Section 03EK and Tag 03EO.
-(blueprint: lem-sc-hom-tensor-summand-localized-ext)
-
-Proof: Transpose both morphisms using the presheaf tensor-Hom equivalence and
-symmetry. This gives maps from the sheaf tensor to internal Hom from X to N.
-The inverse tensor comparison and the sheafification adjunction reduce their
-equality to maps from the presheaf tensor. Test those on pure tensors. After
-transposition their values at a localized source section are the original maps
-evaluated on the restrictions of those pure tensors. Naturality of the canonical
-section map identifies these restrictions with pure tensors of the restricted
-sections, so the hypothesis proves equality. Both transpositions are injective.
-Zero objects and negative complex degrees play no role in this general assertion. -/
+/-- Morphisms to an internal Hom from a sheaf tensor are determined on localized pure tensors. -/
 theorem homTensorSummandLocalized_ext (A B N X : Mod) :
     letI := SheafOfModules.monoidalCategory R
     ∀ (a b : X ⟶ SheafOfModules.homObj (R := R) (A ⊗ B) N),

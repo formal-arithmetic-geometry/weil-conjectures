@@ -18,8 +18,9 @@ import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
 /-!
 # Support of a constructible etale module sheaf
 
-Source: Stacks Project, Etale Cohomology, Tags 09YS(3), 04FS and 04FN
-(blueprint: lem-weil-pbc-constructible-module-support-constructible).
+## References
+
+* Stacks Project, Tags 09YS, 04FS and 04FN
 -/
 
 @[expose] public section
@@ -55,23 +56,7 @@ private theorem constructible_image_clopen {Y : Type u} [TopologicalSpace Y]
   exact hE.inter (hWc.isConstructible hWo)
 
 /-- The value on a trivializing cover member detects support at every point in its image,
-including after pullback along an arbitrary scheme morphism.
-
-Source: Stacks Project, Etale Cohomology, Tags 09YS(3), 03Q1 and 04FN.
-(blueprint: lem-weil-pbc-constructible-module-support-constructible).
-
-Proof: Fix a point of the covering member and take the geometric point obtained from an
-algebraic closure of its residue field. The finite-locally-constant-values lemma identifies
-the module stalk of the pullback at its image in Y with M i. Forgetting scalars identifies
-its underlying abelian group with the abelian stalk: both are filtered colimits of the same
-sections with scalar multiplication forgotten. The inverse-image stalk comparison identifies
-this with the stalk of the original underlying abelian sheaf at the composite geometric
-point in X. Consequently this stalk is zero exactly when M i is zero (forgetting scalars
-preserves and reflects zero objects). If M i is nonzero this geometric point witnesses
-membership in the support. Conversely independence of the zero-stalk condition for geometric
-points over the same point shows that a zero M i excludes every possible support witness.
-The argument applies separately to every point of every covering member; an empty member
-requires no assertion. -/
+including after pullback along an arbitrary scheme morphism (Stacks, Tags 09YS, 03Q1 and 04FN). -/
 private theorem etaleModuleSupport_on_trivializing_cover
     {X Y : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (f : Y ⟶ X)
@@ -130,38 +115,7 @@ private theorem etaleModuleSupport_on_trivializing_cover
 
 /-- The zero-stalk condition is independent of the geometric point over a point of `X`;
 a single zero stalk excludes that point from the support. The support is constructible.
-Stalks and support are taken for the underlying abelian sheaf.
-
-Source: Stacks Project, Etale Cohomology, Tags 09YS(3), 04FS and 04FN
-(blueprint: lem-weil-pbc-constructible-module-support-constructible).
-
-Proof:
-1. For two geometric points over `x`, embed an algebraic closure of the residue field
-   into both algebraically closed fields. Both stalks are isomorphic to the stalk at
-   that common geometric point by 04FN
-   (`lem-weil-pbc-algebraic-extension-embeds-algebraically-closed` and
-   `lem-weil-pbc-geometric-point-morphism-stalk-bijection`). Thus their zero conditions
-   agree, and one zero stalk implies that `x` is outside the support.
-2. Choose the finite locally closed stratification and trivializing etale covers from
-   `def-weil-pbc-etale-constructible-sheaf`. Each immersion identifies its domain with
-   the corresponding constructible stratum (`definition-constructible-sheaves--2`).
-3. Identify the pullback stalk at a geometric point of a stratum with the original stalk
-   (`lem-weil-pbc-inverse-image-stalk-germ`). Step 1 identifies nonvanishing with membership
-   in the support at the underlying point.
-4. On a stratum, a geometric point lifts to each covering member whose image contains
-   its underlying point (`definition-torsion-sheaves--3`). Its stalk is
-   the constant finite module there (`lem-weil-pbc-finite-locally-constant-module-values`).
-   The support and its complement are the unions of images of covering members with
-   respectively nonzero and zero values. Etale maps are open
-   (`lem-weil-pbc-etale-morphism-open-map`), so both subsets are open in the stratum.
-5. The underlying qcqs scheme is spectral (`lem-weil-pbc-qcqs-scheme-spectral`). A clopen
-   part of a constructible subset is constructible: write it and its complement using
-   quasi-compact open basis members and extract finite subcovers using compactness in
-   the constructible topology (`lem-weil-pbc-spectral-constructible-finite-intersection`).
-   This expresses the part as the intersection of the stratum with finitely many such
-   opens (`def-weil-constructible-subset`).
-6. The support is the finite union of its intersections with the strata, hence is
-   constructible (`def-weil-constructible-subset`). -/
+Stalks and support are taken for the underlying abelian sheaf (Stacks, Tags 09YS, 04FS and 04FN). -/
 theorem constructibleEtaleModuleSupport {X : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] {Λ : Type (u + 1)}
     [CommRing Λ] [Finite Λ] (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

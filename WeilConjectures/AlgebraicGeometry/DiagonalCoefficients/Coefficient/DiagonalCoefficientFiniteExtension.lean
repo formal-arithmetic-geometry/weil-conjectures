@@ -28,9 +28,6 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import WeilConjectures.SmoothPurity.Supporting.SignedLineTensorEquivalence
 
 /-! # The finite coefficient stages of a fixed diagonal diagram
-
-Source: diagonal tower coefficient changes, paragraphs (1)--(2).
-(blueprint: lem-sfb-diagonal-finite-coefficient-extension).
 -/
 
 @[expose] public noncomputable section
@@ -98,36 +95,7 @@ private theorem integralLine_flat (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 attribute [local irreducible] derivedScalars
 
 /-- Extend one fixed Z_l diagram to the integers and the field of a single
-finite subextension. No closure diagram or finite-field transition is asserted.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1) and the rationalization
-part of paragraph (2).
-(blueprint: lem-sfb-diagonal-finite-coefficient-extension).
-
-Proof: Choose an integral basis of O_E over Z_l. It identifies scalar extension
-with a finite direct sum and hence makes it exact. The coefficient and root-limit
-maps have scalar adjoints that are isomorphisms: the coefficient assertion follows
-from the basis and the line assertion from the same basis applied to the root
-limit. Closed-diagonal direct image is exact, so the supported source has the
-same scalar identification. Exact restriction commutes with direct image on
-underlying sheaves; derive this square with its universal-unit normalization.
-Its scalar mate is invertible since additive right-derived direct image preserves
-finite direct sums. Define the new diagonal by conjugating the scalar image of
-the old diagonal with the source and line endpoints. Define each new trace by
-conjugating its scalar image with the scalar/direct-image mate and unit endpoint.
-The normalized supported-source square and naturality carry each integration
-composite to scalar extension of its original identity. Use the canonical
-right-derived models, so their full universal units have the required normalization.
-For rationalization the same construction uses localization at l. The regular
-and shifted root-line objects have common lower bound -2, and all three
-projective-line projections are qcqs. Bounded continuity therefore makes the
-localization/direct-image mates invertible on these lines. Exact filtered
-colimits identify the scalar endpoints with the prescribed rational root line.
-Apply the same formulas for the diagonal, the traces, and the integration
-identities. Every endpoint is the adjoint of the specified coefficient or root
-map, so both resulting ScalarCompatibility records have precisely the required
-normalizations. -/
+finite subextension. No closure diagram or finite-field transition is asserted. -/
 theorem diagonalCoefficient_finiteExtension
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]

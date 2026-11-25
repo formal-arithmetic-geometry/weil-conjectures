@@ -372,31 +372,7 @@ private theorem levelIso_sections
     ((push_sections l (ULift.{u} (Padic l)) b g n M U _).trans
       (eqToHom_heq (rS.underlying (g.push.obj M) n U) x))
 
-/-- The varying direct-image square for any section-preserving residue restrictions.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-ordinary finite-coefficient direct-image comparison before right derivation.
-(blueprint: lem-sfb-diagonal-trace-varying-scalar-square).
-
-Proof: at level n, g.ordinaryPushEvaluation identifies the underlying sheaf with
-evaluation on the pulled-back pro-etale chart. Its normalization is the identity
-on sections, inherited from g.generic.ordinaryPushEvaluation_sections via the
-specified coordinate equalities. The underlying fields of rS and rX identify the
-additive groups on both sides with those same sections. Their scalar equations
-make z act by the same natural-number multiple, the representative of its residue
-modulo l^(n+1). Thus the normalized additive identity is Z_l-linear, with inverse
-the same identity. Its naturality in the chart and in a module follows from the
-restriction and morphism fields of rS and rX and naturality of ordinary evaluation.
-For horizontal arrows apply g.ordinaryUnitTransition to the direct image of a
-system and postcompose with the evaluated system counit. Ordinary unit evaluation
-and the adjunction triangle identities identify its finite transpose with push
-evaluation. Naturality of the counit and of finite transposition then identifies
-the horizontal section maps.
-The transitions fields of rS and rX therefore give horizontal naturality.
-These equations assemble the level isomorphisms into a natural isomorphism of
-strict systems, with the asserted identity on every section. No completed
-coefficients or coefficient cones occur. The argument also covers identity maps,
-empty sites, and level zero (the first positive quotient). -/
+/-- The varying direct-image square for any section-preserving residue restrictions. -/
 @[no_expose] def diagonalTraceVaryingScalarSquare (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     (b : SpTowerShriek.Base l (ULift.{u} (Padic l)))

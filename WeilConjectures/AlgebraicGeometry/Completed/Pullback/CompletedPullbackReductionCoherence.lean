@@ -128,7 +128,9 @@ import all WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicCoeffic
 
 /-! # Coherence of the projection-induced finite reduction arrows
 
-Source: Stacks Tag 099N (5), and the completed-pullback blueprint proof.
+## References
+
+* Stacks Project, Tag 099N (5)
 -/
 
 @[expose] public noncomputable section
@@ -404,17 +406,7 @@ private theorem projection_transition (T : Scheme.{u})
   apply congrArg DerivedCategory.Q.map
   ext i : 1
   exact limit.w (J.X i) (homOfLE h).op
-/-- Invertible finite reduction arrows satisfy all quotient coherence equations.
-
-Source: Stacks Tag 099N (5); completed-pullback reduction, normalization clause
-(blueprint: lem-weil-pbc-completed-pullback-reduction-coherence).
-
-Proof: strict limit projections commute with tower transitions. Combine this with
-finite evaluation compatibility, then transpose the resulting square through the
-scalar adjunctions. The source normalizations are the canonical composites of
-left adjoints; their associativity and identity laws follow from the corresponding
-laws for scalar restriction. Cancel the invertible finite arrows to obtain the
-same laws for the target normalizations. -/
+/-- Invertible finite reduction arrows satisfy all quotient coherence equations. -/
 theorem completedPullbackReduction_coherence
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)))
     (hiso : ∀ n : ℕ, IsIso (completedPullbackReductionArrow g d K n)) :

@@ -23,7 +23,16 @@ Let `k` be a separably closed field, `Λ` a finite field whose characteristic is
 (`AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing`) are perfect: the adjoint
 `H^{2d-i}(X, K^∨(d)) ⟶ H^i_c(X, K)^∨` is an isomorphism.
 
-The proof is the one of the blueprint, read on classes. The derived pairing `β_K` is perfect
+## Main statements
+
+- `AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing`: the
+  degreewise pairings are perfect.
+- `AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing_of_isProper`:
+  the same for `a` proper, with `H^i(X, K)` in place of `H^i_c(X, K)`.
+
+## Implementation details
+
+The derived pairing `β_K` is perfect
 (`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing_of_finite`), so its
 degree-zero part is the composition pairing `⟨x, y⟩ = x ≫ g(y)` for a bijection
 `g : H^{2d-i}(X, K^∨(d)) ≃ Hom((Ra_! K)[i], Λ_s)`
@@ -32,15 +41,6 @@ the composition pairing `Hom(Λ_s, E) × Hom(E, Λ_s) ⟶ End(Λ_s) = Λ` is per
 `E = (Ra_! K)[i]`, whose `H^0` is the finite-dimensional space `H^i_c(X, K)`
 (`AlgebraicGeometry.Etale.nondegenerate_comp_unit_of_isSepClosed`): this is where
 `H^{-i}(C^∨) ≅ H^i(C)^∨` over a field enters.
-
-## Main statements
-
-- `AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing`
-  (`corollary-degreewise-duality-over-fields--1`, `corollary-degreewise-duality-over-fields`): the
-  degreewise pairings are perfect.
-- `AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing_of_isProper`
-  (`theorem-poincare-duality--8`): the same for `a` proper, with `H^i(X, K)` in place of
-  `H^i_c(X, K)`.
 -/
 
 @[expose] public section
@@ -87,28 +87,17 @@ variable [HasTateTwist Λ] {X : Scheme.{u}} {a : X ⟶ Spec (.of k)} [HasCompact
 
 namespace TateOrientation
 
-/-- Blueprint `corollary-degreewise-duality-over-fields--1`: Degreewise perfectness over a
-field (finite-field case). This is also the degreewise part of blueprint
-`corollary-degreewise-duality-over-fields`.
-
-Let `k` be separably closed, `Λ` a finite field (a finite domain) whose characteristic is
-invertible on `X`, `γ` a Tate orientation of `a : X ⟶ Spec k` of relative dimension `d`, with
-`a` locally of finite type, and `K ∈ D^b_{ctf}(X, Λ)`. Then for `i + j = 2d` the degreewise
-Poincaré pairing
+/-- **Degreewise Poincaré duality over a finite field.** Let `k` be separably closed, `Λ` a
+finite field (a finite domain) whose characteristic is invertible on `X`, `γ` a Tate orientation
+of `a : X ⟶ Spec k` of relative dimension `d`, with `a` locally of finite type, and
+`K ∈ D^b_{ctf}(X, Λ)`. Then for `i + j = 2d` the degreewise Poincaré pairing
 
 `⟨-, -⟩_i : H^i_c(X, K) × H^j(X, K^∨(d)) ⟶ Λ`
 
 (`AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing`, with values in
 `End(Λ_s)`, read in `Λ` through any linear isomorphism `ℓ : End(Λ_s) ≃ Λ`) is perfect: its
 adjoint `H^j(X, K^∨(d)) ⟶ H^i_c(X, K)^∨` is an isomorphism of finite-dimensional
-`Λ`-vector spaces.
-
-It follows from the derived Poincaré duality
-(`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing_of_finite`): the
-degree-zero part of a perfect pairing is a composition pairing
-(`AlgebraicGeometry.Etale.IsPerfectPairing.exists_addEquiv_degreeZero`), and over a field the
-composition pairing with the unit of the point category is perfect
-(`AlgebraicGeometry.Etale.nondegenerate_comp_unit_of_isSepClosed`). -/
+`Λ`-vector spaces. -/
 theorem isPerfPair_degreewisePoincarePairing (γ : TateOrientation Λ a d)
     {K : DerivedCategoryModule Λ X} (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K)
     (i j : ℤ) (hij : i + j = 2 * d)
@@ -133,10 +122,7 @@ theorem isPerfPair_degreewisePoincarePairing (γ : TateOrientation Λ a d)
   rfl
 
 omit [LocallyOfFiniteType a] in
-/-- Blueprint `theorem-poincare-duality--8`: Proper Poincaré duality (degreewise form,
-finite-field case).
-
-In the situation of
+/-- **Proper degreewise Poincaré duality over a finite field.** In the situation of
 `AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing`, if moreover `a`
 is proper, then for `i + j = 2d` the degreewise pairing
 

@@ -15,9 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsAcyclic
 /-!
 # Canonical coefficient comparisons for étale inverse and direct images
 
-Source: Stacks Project, Tags 03FD and 0D6J(3); the inverse-image comparison uses
-Mathlib's uniqueness of left adjoints and the sectionwise coextension adjunction.
-(blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons)
+## References
+
+* Stacks Project, Tags 03FD and 0D6J
 -/
 
 @[expose] public section
@@ -32,8 +32,7 @@ namespace AlgebraicGeometry.Etale
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
   {Z W : Scheme.{u}} (f : Z ⟶ W)
 
-/-- Direct image and restriction of scalars commute sectionwise. 
-(blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons)
+/-- Direct image and restriction of scalars commute sectionwise.
 -/
 noncomputable def lowerStarRestrictScalarsIso :
     (f)_*[ModuleCat.{u + 1} Λ'] ⋙ Sheaf.restrictScalars W.smallEtaleTopology φ ≅
@@ -41,8 +40,7 @@ noncomputable def lowerStarRestrictScalarsIso :
   Iso.refl _
 
 /-- Inverse image commutes with restriction of scalars: both composites are left
-adjoint to the same sectionwise composite of direct image and coextension of scalars. 
-(blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons)
+adjoint to the same sectionwise composite of direct image and coextension of scalars.
 -/
 noncomputable def upperStarRestrictScalarsIsoSheaf :
     Sheaf.restrictScalars W.smallEtaleTopology φ ⋙ (f)^*[ModuleCat.{u + 1} Λ] ≅
@@ -53,8 +51,7 @@ noncomputable def upperStarRestrictScalarsIsoSheaf :
     ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') f).comp
       (Sheaf.restrictCoextendScalarsAdj Z.smallEtaleTopology φ))
 
-/-- The inverse-image coefficient comparison on bounded below derived categories. 
-(blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons)
+/-- The inverse-image coefficient comparison on bounded below derived categories.
 -/
 noncomputable def derivedUpperStarRestrictScalarsIso :
     (Sheaf.restrictScalars W.smallEtaleTopology φ).mapDerivedCategoryPlus ⋙
@@ -66,8 +63,7 @@ noncomputable def derivedUpperStarRestrictScalarsIso :
     Functor.mapDerivedCategoryPlusCompIso _ _
 
 /-- The canonical derived direct-image coefficient comparison, defined by the
-universal property of the bounded below right derived functor. 
-(blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons)
+universal property of the bounded below right derived functor.
 -/
 noncomputable def derivedLowerStarRestrictScalarsMap :
     R+((f)_*[ModuleCat.{u + 1} Λ']) ⋙
@@ -77,19 +73,14 @@ noncomputable def derivedLowerStarRestrictScalarsMap :
   Functor.rightDerivedFunctorPlusBaseChange (lowerStarRestrictScalarsIso φ f).hom
 
 /-- The canonical derived direct-image comparison is invertible because restriction
-sends injectives to direct-image acyclics.
-Source: Stacks Project, Tag 0D6J(3), with the acyclicity argument of Tag 03FD.
-Proof: apply the bounded-below derived comparison criterion to the sectionwise
-identity on direct images and to restricted-injective direct-image acyclicity.
-(blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons) -/
+sends injectives to direct-image acyclics (Stacks, Tags 0D6J and 03FD). -/
 theorem isIso_derivedLowerStarRestrictScalarsMap :
     IsIso (derivedLowerStarRestrictScalarsMap φ f) := by
   exact Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic
     (lowerStarRestrictScalarsIso φ f)
     (fun I ↦ rightAcyclic_lowerStar_restrictScalars_obj φ f I)
 
-/-- The canonical derived direct-image coefficient isomorphism. 
-(blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons)
+/-- The canonical derived direct-image coefficient isomorphism.
 -/
 noncomputable def derivedLowerStarRestrictScalarsIso :
     R+((f)_*[ModuleCat.{u + 1} Λ']) ⋙
@@ -102,8 +93,7 @@ noncomputable def derivedLowerStarRestrictScalarsIso :
 variable {X S T Y : Scheme.{u}}
 
 /-- The source comparison before taking homology, assembled from the inverse-image
-comparison and the inverse of the canonical direct-image comparison. 
-(blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons)
+comparison and the inverse of the canonical direct-image comparison.
 -/
 noncomputable def derivedBaseChangeSourceRestrictScalarsIso (p : X ⟶ S) (g : T ⟶ S)
     (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ'))) :
@@ -119,8 +109,7 @@ noncomputable def derivedBaseChangeSourceRestrictScalarsIso (p : X ⟶ S) (g : T
       ((R+((g)_*[ModuleCat.{u + 1} Λ'])).obj K)
 
 /-- The target comparison before taking homology, assembled from the inverse-image
-comparison followed by the inverse of the canonical direct-image comparison. 
-(blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons)
+comparison followed by the inverse of the canonical direct-image comparison.
 -/
 noncomputable def derivedBaseChangeTargetRestrictScalarsIso (e : Y ⟶ T) (h : Y ⟶ X)
     (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ'))) :

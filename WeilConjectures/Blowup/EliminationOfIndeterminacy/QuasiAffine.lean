@@ -15,7 +15,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
 
 Conrad's Theorem 2.4, Case 1: a quasi-affine target of finite type over an affine base
 (`AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffine`).
-(Blueprint: `lemma:nagata-conrad-quasi-affine-affine-base`.)
+
+## References
+
+* Stacks Project, Tag 04II
 -/
 
 @[expose] public section
@@ -32,19 +35,9 @@ section Statement
 variable {X : Scheme.{u}}
 
 /-- **Conrad's Theorem 2.4, Case 1: a quasi-affine target over an affine base**
-(blueprint: `lemma:nagata-conrad-quasi-affine-affine-base`).
 
 Over an affine base, the quasi-affineness of `Y` as a scheme is the same as the
-quasi-affineness of `p` as a morphism, so this is the absolute form of the hypothesis.
-
-The proof embeds `Y` into a relative affine space over `X`
-(`exists_immersion_affineSpace_of_quasiAffine'`, Stacks Tag 04II), extends `f` there by
-`exists_isAdmissible_extend_affineSpace`, makes the preimage of `U` scheme-theoretically
-dense by one further blow-up
-(`IsAdmissible.exists_comp_isSchemeTheoreticallyDominant_preimage`), and descends the
-extension back to `Y` along the closed-immersion part of the immersion, using that a
-morphism agreeing on a scheme-theoretically dense open with one factoring through a closed
-subscheme factors through it as well. -/
+quasi-affineness of `p` as a morphism. -/
 theorem exists_isAdmissible_extend_of_isQuasiAffine [IsAffine X]
     {U : X.Opens} (hU : IsCompact (U : Set X)) {Y : Scheme.{u}} [Y.IsQuasiAffine]
     {p : Y ⟶ X} [LocallyOfFiniteType p]

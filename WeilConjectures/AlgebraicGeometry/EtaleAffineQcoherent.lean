@@ -17,9 +17,9 @@ import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 /-!
 # Étale acyclicity of a quasi-coherent module on an affine scheme
 
-Source: blueprint `lemma-p-torsion-affine-curve-characteristic--4`, order 959;
-Stacks Project, Étale Cohomology, Theorem 03P2 (affine case)
-(blueprint: lemma-p-torsion-affine-curve-characteristic--4).
+## References
+
+* Stacks Project, Tag 03P2
 -/
 
 @[expose] public section
@@ -35,44 +35,7 @@ set_option autoImplicit false
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Higher étale cohomology of the associated quasi-coherent sheaf vanishes on an affine.
-
-Source: Stacks Project, Étale Cohomology, Theorem 03P2 (affine case)
-(blueprint: lemma-p-torsion-affine-curve-characteristic--4).
-Proof:
-1. Take the affine objects of the small étale site and finite jointly surjective affine
-   étale covering families. Iterated fibre products are affine by
-   `lem-weil-pbc-fibre-product-affine-spectra`, and every covering of an affine object
-   admits such a refinement by `lem-weil-pbc-etale-covering-affine-refinement`.
-   These verify conditions (1) and (2) of `lem-weil-pbc-cech-vanishing-criterion`.
-2. On an affine object `u : U ⟶ X`, the module `u^*F` is quasi-coherent by
-   `lem-weil-pbc-module-pullback-quasi-coherent`, and its associated presheaf is a sheaf
-   by `proposition-p-torsion-smooth-proper-curve`. The composition isomorphisms of
-   `lem-pc-module-pullback-identity-composition` identify its restrictions and Čech
-   complex with those of `F_et` over `U`, using `proposition-p-torsion-smooth-proper-curve` and
-   `def-weil-pbc-etale-site`. By `lem-sc-etale-standard-cover-cech`, replace the finite
-   cover by its affine disjoint union `Spec B ⟶ Spec A`, with `A ⟶ B` faithfully flat.
-   With `M = Γ(U,u^*F)`, `lem-weil-pbc-fibre-product-affine-spectra` and
-   `lem-weil-pbc-module-pullback-affine-sections` identify the terms with
-   `M ⊗_A B^{⊗_A(p+1)}`. Pullback coherence identifies the face maps with the Amitsur
-   maps. By `proposition-p-torsion-smooth-proper-curve` the positive Čech cohomology vanishes,
-   verifying condition (3) of `lem-weil-pbc-cech-vanishing-criterion`.
-3. Apply that criterion at the final affine object `X`. Evaluation there is global
-   sections by `def-weil-pbc-global-sections-functor`. An injective resolution is
-   bounded below and K-injective by `prop-weil-pbc-kinjective-resolutions-exist`;
-   thus derived evaluation computes the étale cohomology of
-   `def-weil-pbc-etale-cohomology`, which vanishes in every positive degree.
-
-For every `n`, this gives affine acyclicity in degree `n + 1`: the affine Cech
-criterion and faithfully flat Amitsur exactness establish vanishing in every positive
-degree, and the injective K-injective resolution identifies derived evaluation with
-`Sheaf.H`. (blueprint: lem-sc-etale-affine-qcoherent-succ)
-
-Proof: write `q = n + 1`. The Čech argument above is carried out for the universe
-lift of the sheaf in `etale_affine_qcoherent_ulift`. An injective resolution of the
-sheaf lifts to one of its universe lift, so the lifted cohomology is the lift of the
-cohomology computed by derived evaluation at the terminal affine object. Its vanishing
-therefore gives the vanishing of `Sheaf.H` in degree `n + 1`.
--/
+(Stacks, Tag 03P2) -/
 theorem etale_affine_qcoherent
     (X : Scheme.{u}) [IsAffine X]
     (F : X.Modules) [F.IsQuasicoherent] (q : ℕ) (hq : 0 < q) :

@@ -12,29 +12,29 @@ public import WeilConjectures.Mathlib.Topology.Maps.Basic
 /-!
 # Open immersions respect open immersions on the right
 
-The `MorphismProperty.RespectsRight` instance for open immersions of schemes.
+The `MorphismProperty.RespectsRight` instance for open immersions of schemes, together with
+complements on open immersions.
 
-We also record the structure of **lifts of an open immersion along a partial
-isomorphism**: if `q ≫ π` is an open immersion `j` and `π` is an isomorphism over the
-range of `j`, then `q` factors as an isomorphism onto the full inverse image of the
-range of `j`; in particular `q` is an open immersion
-(`AlgebraicGeometry.isOpenImmersion_of_comp_of_isIso_restrict`) with range the inverse
-image of the range of `j`
-(`AlgebraicGeometry.range_eq_preimage_of_comp_of_isIso_restrict`). These describe the
-embedded copies of preserved opens in admissible blow-ups.
+## Main statements
 
-Finally we record the range of the base change of an open immersion
-(`AlgebraicGeometry.range_snd_of_isPullback`) and the form of
-`AlgebraicGeometry.isIso_morphismRestrict_of_range_eq` in which the modification layer
-produces its data: a partial section `m` of `ψ` whose composite `m ≫ ψ` is an open
-immersion and whose range is the full inverse image of the range of `m ≫ ψ` exhibits
-`ψ` as an isomorphism over that range
-(`AlgebraicGeometry.isIso_morphismRestrict_opensRange_of_range_eq`).
-The `MorphismProperty.RespectsRight` instance for open immersions of schemes, and the
-emptiness of a fibre product over disjoint opens
-(`AlgebraicGeometry.isEmpty_pullback_of_disjoint_range`).
-The lift of a morphism of `S`-schemes along an open immersion of `S`-schemes is a morphism of
-`S`-schemes (`AlgebraicGeometry.IsOpenImmersion.isOver_lift`).
+- `AlgebraicGeometry.isOpenImmersion_of_comp_of_isIso_restrict`,
+  `AlgebraicGeometry.range_eq_preimage_of_comp_of_isIso_restrict`: if `q ≫ π` is an open
+  immersion `j` and `π` is an isomorphism over the range of `j`, then `q` is an open immersion
+  whose range is the full inverse image of the range of `j`.
+- `AlgebraicGeometry.isIso_morphismRestrict_of_range_eq`,
+  `AlgebraicGeometry.isIso_morphismRestrict_opensRange_of_range_eq`: a morphism admitting an open
+  partial section whose range is the full inverse image of an open is an isomorphism over that
+  open.
+- `AlgebraicGeometry.range_snd_of_isPullback`: the range of the base change of an open
+  immersion.
+- `AlgebraicGeometry.isEmpty_pullback_of_disjoint_range`: the fibre product over disjoint opens
+  is empty.
+- `AlgebraicGeometry.IsOpenImmersion.isOver_lift`: the lift of a morphism of `S`-schemes along
+  an open immersion of `S`-schemes is a morphism of `S`-schemes.
+
+## References
+
+* [Stacks: Tag 0F3Z](https://stacks.math.columbia.edu/tag/0F3Z)
 -/
 
 @[expose] public section
@@ -116,10 +116,7 @@ variable {T X : Scheme.{u}} (ψ : T ⟶ X) (V : X.Opens) (v : V.toScheme ⟶ T)
 
 /-- **A morphism with an open section covering the inverse image is an isomorphism over
 the open**: if `v` is an open immersion lifting the inclusion of `V` along `ψ` whose
-range is the whole inverse image of `V`, then `ψ` restricts to an isomorphism over `V`.
-This produces the isomorphism over `V` of the graph extension of a compactification
-(Stacks Project Tag 0F3Z; revised blueprint
-`lemma:nagata-scheme-image-partial-section`). -/
+range is the whole inverse image of `V`, then `ψ` restricts to an isomorphism over `V`. -/
 theorem isIso_morphismRestrict_of_range_eq [IsOpenImmersion v] (hv : v ≫ ψ = V.ι)
     (hrange : ((ψ ⁻¹ᵁ V : T.Opens) : Set T) = Set.range v) : IsIso (ψ ∣_ V) := by
   -- lift `v` to the inverse image of `V`
@@ -178,8 +175,7 @@ section RestrictOfSectionRange
 /-- **A partial section identifies an isomorphism locus**: if `m` is an open immersion
 whose composite `j := m ≫ ψ` is again an open immersion and whose range is the full
 inverse image of the range of `j`, then `ψ` restricts to an isomorphism over the range
-of `j`. This is `AlgebraicGeometry.isIso_morphismRestrict_of_range_eq` in the form in
-which the modification layer produces its data. -/
+of `j`. -/
 theorem isIso_morphismRestrict_opensRange_of_range_eq {W T X : Scheme.{u}} (ψ : T ⟶ X)
     (m : W ⟶ T) [IsOpenImmersion m] [IsOpenImmersion (m ≫ ψ)]
     (hrange : Set.range m = ψ ⁻¹' Set.range (m ≫ ψ)) :

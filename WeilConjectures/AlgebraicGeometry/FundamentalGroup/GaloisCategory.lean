@@ -15,8 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 
 Let `Y` be a scheme. We verify the axioms of a (pre-)Galois category for the category
 `FÉt(Y)` of finite étale `Y`-schemes, and, for connected `Y` and a geometric point `s`, the axioms
-of a fibre functor for the geometric fibre functor `F_s`
-(blueprint `lem-fet-finite-limits`, `lem-fet-galois-category`).
+of a fibre functor for the geometric fibre functor `F_s`.
 
 * Finite limits are computed in schemes.
 * Finite coproducts are disjoint unions.

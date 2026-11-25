@@ -34,13 +34,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `lem-fin-dense-normal-open`: A dense normal open in an integral finite-type scheme.
-
-Every integral scheme `X` locally of finite type over a field `k` has a nonempty (hence dense)
-open subscheme all of whose local rings are integrally closed. Over a nonempty affine open
-`Spec A`, the integral closure of the finitely generated `k`-domain `A` in its fraction field is
-a finite `A`-module (E. Noether), hence has a common denominator `b ≠ 0`, and `A[1/b]` is
-integrally closed. -/
+/-- Every integral scheme `X` locally of finite type over a field `k` has a nonempty (hence
+dense) open subscheme all of whose local rings are integrally closed. -/
 theorem Scheme.exists_nonempty_forall_isIntegrallyClosed_stalk {k : Type u} [Field k]
     (X : Scheme.{u}) [IsIntegral X] (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q] :
     ∃ V : X.Opens, (V : Set X).Nonempty ∧
@@ -104,15 +99,9 @@ theorem finiteDimensional_functionField [IsIntegral P] [IsIntegral X] (f : P ⟶
     f.quasiFinite_stalkSpecializes_comp_stalkMap _ _ hf
   exact Module.Finite.of_quasiFinite
 
-/-- Blueprint `lem-fin-normalization-extends-cover` (finiteness): the normalization of a scheme
-`X` locally of finite type over a field `k` in an integral scheme `P`, along a locally
-quasi-finite morphism `f : P ⟶ X` mapping the generic point of `P` to the generic point of
-`X`, is finite over `X`.
-
-Over a nonempty affine open `Spec A` of `X`, the ring `B = Γ(P, f⁻¹ Spec A)` embeds into the
-function field `L = k(P)`, a finite extension of `K = Frac A = k(X)`; the integral closure of
-`A` in `B` thus embeds into the integral closure of `A` in `L`, a finite `A`-module by
-E. Noether's finiteness theorem, and `A` is Noetherian. -/
+/-- The normalization of a scheme `X` locally of finite type over a field `k` in an integral
+scheme `P`, along a locally quasi-finite morphism `f : P ⟶ X` mapping the generic point of `P`
+to the generic point of `X`, is finite over `X`. -/
 theorem isFinite_fromNormalization_of_apply_genericPoint {k : Type u} [Field k] [IsIntegral P]
     [IsIntegral X] (f : P ⟶ X) [QuasiCompact f] [QuasiSeparated f] [LocallyQuasiFinite f]
     (hf : f (genericPoint P) = genericPoint X) (q : X ⟶ Spec (.of k))
@@ -153,13 +142,9 @@ theorem isFinite_fromNormalization_of_apply_genericPoint {k : Type u} [Field k] 
   refine Module.Finite.of_injective ψ fun x y h ↦ ?_
   exact Subtype.ext (P.germToFunctionField_injective (f ⁻¹ᵁ U) congr($h.1))
 
-/-- Blueprint `lem-fin-normalization-extends-cover` (restriction over `V`): let
-`f = p ≫ kV : P ⟶ X` be an integral morphism `p : P ⟶ V` followed by an open immersion
+/-- Let `f = p ≫ kV : P ⟶ X` be an integral morphism `p : P ⟶ V` followed by an open immersion
 `kV : V ⟶ X`. Then `f.toNormalization : P ⟶ f.normalization` is an open immersion whose image
-is the preimage of `V` in the normalization of `X` in `P`.
-
-Normalization commutes with the smooth base change `kV`, and the normalization of `V` in
-`P ×_X V ≅ P` is trivial since `P ⟶ V` is integral. -/
+is the preimage of `V` in the normalization of `X` in `P`. -/
 theorem isOpenImmersion_toNormalization_comp {V : Scheme.{u}} (p : P ⟶ V) (kV : V ⟶ X)
     [IsIntegralHom p] [IsOpenImmersion kV] [QuasiCompact (p ≫ kV)] [QuasiSeparated (p ≫ kV)] :
     IsOpenImmersion (p ≫ kV).toNormalization ∧ Set.range (p ≫ kV).toNormalization.base =
@@ -191,7 +176,7 @@ theorem isOpenImmersion_toNormalization_comp {V : Scheme.{u}} (p : P ⟶ V) (kV 
 
 end Scheme.Hom
 
-/-- Blueprint `lem-fin-normalization-extends-cover` (the cover is normal integral): a connected
+/-- a connected
 scheme `P`, étale over an integral scheme `V` with integrally closed local rings, and locally
 Noetherian, is integral with integrally closed local rings. -/
 theorem Scheme.isIntegral_and_isIntegrallyClosed_stalk_of_etale {P V : Scheme.{u}} (p : P ⟶ V)
@@ -204,21 +189,13 @@ theorem Scheme.isIntegral_and_isIntegrallyClosed_stalk_of_etale {P V : Scheme.{u
   have : IsReduced P := isReduced_of_isReduced_stalk _
   exact ⟨isIntegral_of_irreducibleSpace_of_isReduced _, fun x ↦ (h x).2⟩
 
-/-- Blueprint `lem-fin-normalization-extends-cover`: Extending a finite cover by normalization.
+/-- Extending a finite cover by normalization.
 
 Let `X` be an integral scheme of finite type over a field `k`, `kV : V ⟶ X` a nonempty open
 subscheme with integrally closed local rings, and `p : P ⟶ V` a connected finite étale cover.
-The normalization of `X` in `P` is Mathlib's relative normalization `Y = (p ≫ kV).normalization`
-(the relative spectrum of the integral closure of `𝒪_X` in `(p ≫ kV)_* 𝒪_P`); since `P` is
-integral, this is the normalization of `X` in the function field `k(P)`, a finite extension of
-`k(X)`. Then `P` is normal integral, `Y ⟶ X` is finite, `Y` is normal integral, and
-`P ⟶ Y` is an open immersion identifying `P ⟶ V` with the restriction of `Y ⟶ X` over `V`.
-
-The hypothesis `QuasiCompact kV` (needed to form the normalization) is automatic: `X` is
-locally Noetherian (`LocallyOfFiniteType.isLocallyNoetherian q`), and open immersions into
-locally Noetherian schemes are quasi-compact. The same statement for the normalization
-`X^{k(P)}` of `X` in the function field of `P` (`def-fin-normalization-extension`) is
-`AlgebraicGeometry.Scheme.normalizationIn_extends_cover`. -/
+Then `P` is normal integral, the normalization `Y = (p ≫ kV).normalization` of `X` in `P` is
+finite normal integral over `X`, and `P ⟶ Y` is an open immersion identifying `P ⟶ V` with the
+restriction of `Y ⟶ X` over `V`. -/
 theorem Scheme.normalization_comp_of_finite_etale {k : Type u} [Field k] {P V X : Scheme.{u}}
     (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q] [IsIntegral X]
     (kV : V ⟶ X) [IsOpenImmersion kV] [QuasiCompact kV] [Nonempty V]

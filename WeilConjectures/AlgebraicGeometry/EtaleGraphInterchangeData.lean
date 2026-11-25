@@ -9,12 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.EtaleProperOpenExchangeCube
 
 /-! # Graph comparisons and proper/open interchange
 
-Source: Stacks Project, more-etale.tex, Tag 0F7J, independence of choices and
-comparison of diagrams A--F; the product-graph extension recorded in the blueprint
-(auxiliary; not a blueprint node).
-
 The auxiliary records only bundle the supplied diagrams. Every arrow is built from the
 recorded graph maps, normalized proper/open exchange, and canonical compositors.
+
+## References
+
+* Stacks Project, Tag 0F7J
 -/
 
 @[expose] public noncomputable section
@@ -31,17 +31,14 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The normalized exchange family supplied by the support and K-injective normalization.
-That normalization determines the family, rather than merely its endpoints.
-Source: Stacks Tag 0F7B(b), as used in the A--F calculation of Tag 0F7J
-(auxiliary; not a blueprint node). -/
+That normalization determines the family, rather than merely its endpoints
+(Stacks, Tags 0F7B and 0F7J). -/
 def etaleGraphNormalizedProperOpenExchange (A : Type (u + 1)) [CommRing A] [Finite A] :
     ProperOpenDerivedComparisonFamily A :=
   Classical.choose (α := ProperOpenDerivedComparisonFamily A)
     (Classical.choose_spec (etaleProperOpenExchangeCube A))
 
-/-- Shrink the middle neighborhood through a supplied proper lift.
-Source: Stacks Tag 0F7J, elementary presentation move in the product-graph extension
-(auxiliary; not a blueprint node). -/
+/-- Shrink the middle neighborhood through a supplied proper lift (Stacks, Tag 0F7J). -/
 def EtaleGraphPresentation.shrink {X Z W : Scheme.{u}} {h : X ⟶ Z}
     (H : EtaleGraphPresentation h) (a' : X ⟶ W) (v : W ⟶ H.U)
     [IsProper a'] [IsOpenImmersion v] (fac : a' ≫ v = H.a) :
@@ -55,9 +52,8 @@ def EtaleGraphPresentation.shrink {X Z W : Scheme.{u}} {h : X ⟶ Z}
 
 /-- The explicit inverse triangle interchange, followed by the open compositor.
 The identity-top proper/open square is Cartesian; its normalized exchange, after
-removing extension by the identity, is exactly the upstream triangle isomorphism.
-Source: Stacks Tag 0F7J, elementary presentation move
-(auxiliary; not a blueprint node). -/
+removing extension by the identity, is exactly the upstream triangle isomorphism (Stacks, Tag 0F7J).
+-/
 def etaleGraphShrinkInterchange (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Z W : Scheme.{u}} {h : X ⟶ Z} (H : EtaleGraphPresentation h)
     (a' : X ⟶ W) (v : W ⟶ H.U) [IsProper a'] [IsOpenImmersion v]
@@ -72,10 +68,8 @@ def etaleGraphShrinkInterchange (A : Type (u + 1)) [CommRing A] [Finite A]
         (mapDerivedCategoryOpenImmersionLowerShriekComp
           (ModuleCat.{u + 1} A) v H.e).symm R((H.p)_*[ModuleCat.{u + 1} A]))
 
-/-- One of the two supplied proper/open diagrams; its square need only commute.
-Source: Stacks Tag 0F7J, two-diagram comparison, with the proper initial factor
-of the product-graph extension
-(auxiliary; not a blueprint node). -/
+/-- One of the two supplied proper/open diagrams; its square need only commute (Stacks, Tag 0F7J).
+-/
 structure EtaleGraphInterchangeDiagram {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) where
   W : Scheme.{u}
   V : Scheme.{u}
@@ -104,9 +98,7 @@ attribute [instance] EtaleGraphInterchangeDiagram.properA EtaleGraphInterchangeD
   EtaleGraphInterchangeDiagram.openE EtaleGraphInterchangeDiagram.openK
   EtaleGraphInterchangeDiagram.openI
 
-/-- The supplied presentation `t = (a,e,r)` of `f`.
-Source: Stacks Tag 0F7J, two-diagram comparison
-(auxiliary; not a blueprint node). -/
+/-- The supplied presentation `t = (a,e,r)` of `f` (Stacks, Tag 0F7J). -/
 def EtaleGraphInterchangeDiagram.sourcePresentation {X Y Z : Scheme.{u}}
     {f : X ⟶ Y} {g : Y ⟶ Z} (d : EtaleGraphInterchangeDiagram f g) :
     EtaleGraphPresentation f where
@@ -117,9 +109,7 @@ def EtaleGraphInterchangeDiagram.sourcePresentation {X Y Z : Scheme.{u}}
   p := d.r
   fac := d.facF
 
-/-- The supplied open-then-proper factorization `(i,q)` of `g`.
-Source: Stacks Tag 0F7J, two-diagram comparison
-(auxiliary; not a blueprint node). -/
+/-- The supplied open-then-proper factorization `(i,q)` of `g` (Stacks, Tag 0F7J). -/
 def EtaleGraphInterchangeDiagram.compactification {X Y Z : Scheme.{u}}
     {f : X ⟶ Y} {g : Y ⟶ Z} (d : EtaleGraphInterchangeDiagram f g) :
     Compactification g where
@@ -130,9 +120,7 @@ def EtaleGraphInterchangeDiagram.compactification {X Y Z : Scheme.{u}}
   isProper := inferInstance
   isOpenImmersion := inferInstance
 
-/-- The supplied presentation `s = (a,ke,qp)` of the composite.
-Source: Stacks Tag 0F7J, two-diagram comparison
-(auxiliary; not a blueprint node). -/
+/-- The supplied presentation `s = (a,ke,qp)` of the composite (Stacks, Tag 0F7J). -/
 def EtaleGraphInterchangeDiagram.compositePresentation {X Y Z : Scheme.{u}}
     {f : X ⟶ Y} {g : Y ⟶ Z} (d : EtaleGraphInterchangeDiagram f g) :
     EtaleGraphPresentation (f ≫ g) where
@@ -149,9 +137,8 @@ def EtaleGraphInterchangeDiagram.compositePresentation {X Y Z : Scheme.{u}}
       _ = f ≫ g := congrArg₂ (fun l m ↦ l ≫ m) d.facF d.facG
 
 /-- The specified word `Rq Γ_Q Je Ra`, including the identity-direct-image normalization,
-open compositor and proper compositor. No isomorphism with bare endpoints is chosen.
-Source: Stacks Tag 0F7J, first paragraph and A--F comparison
-(auxiliary; not a blueprint node). -/
+open compositor and proper compositor. No isomorphism with bare endpoints is chosen
+(Stacks, Tag 0F7J). -/
 def etaleGraphDiagramInterchange (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     (d : EtaleGraphInterchangeDiagram f g) :

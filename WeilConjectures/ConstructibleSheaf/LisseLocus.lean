@@ -44,9 +44,7 @@ section Topology
 variable {X : Type*} [TopologicalSpace X]
 
 /-- In a Noetherian quasi-sober space, a dense open subset `U` contains a generalization of
-every point `x`: the generic point of an irreducible component `T` through `x`. Indeed `T`
-contains a nonempty open subset of `X`, which meets `U`, and an open set meeting `T` contains its
-generic point. -/
+every point `x`. -/
 theorem Dense.exists_specializes_of_isOpen [NoetherianSpace X] [QuasiSober X] {U : Set X}
     (hU : Dense U) (hUo : IsOpen U) (x : X) : ∃ z ∈ U, z ⤳ x := by
   have hT := irreducibleComponent_mem_irreducibleComponents x
@@ -60,9 +58,7 @@ theorem Dense.exists_specializes_of_isOpen [NoetherianSpace X] [QuasiSober X] {U
 
 /-- **The complement of a dense open has smaller dimension.** In a nonempty Noetherian
 quasi-sober `T₀` space of finite Krull dimension, the closed complement of a dense open subset
-`U` has strictly smaller Krull dimension: every point of `Uᶜ` has a generalization in `U`
-(`Dense.exists_specializes_of_isOpen`), so a chain of irreducible closed subsets of `Uᶜ` extends
-by one in `X`. -/
+`U` has strictly smaller Krull dimension. -/
 theorem topologicalKrullDim_compl_lt_of_dense [NoetherianSpace X] [QuasiSober X] [T0Space X]
     [Nonempty X] (hX : topologicalKrullDim X ≠ ⊤) {U : Set X} (hU : Dense U) (hUo : IsOpen U) :
     topologicalKrullDim (Uᶜ : Set X) < topologicalKrullDim X := by
@@ -92,17 +88,10 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
-/-- Blueprint `proposition-purity-lisse-part-fourier-transform`: A lisse locus for a constructible
-sheaf.
-
+/-- **A lisse locus for a constructible sheaf.**
 Let `X` be a nonempty scheme of finite type over a field `k` and `F` a constructible sheaf on
 `X_et`. Then there is an open subscheme `U ⊆ X` with `dim (X \ U) < dim X` on which the
-restriction `F|_U` is lisse, that is, finite locally constant.
-
-(For `X` empty both dimensions are `⊥` and the strict inequality cannot hold, which is why `X`
-is assumed nonempty.) Generic constancy gives a dense open `U` on which `F` is finite locally
-constant, and the complement of a dense open in the Noetherian space `X`, of finite dimension,
-has smaller dimension (`topologicalKrullDim_compl_lt_of_dense`). -/
+restriction `F|_U` is lisse, that is, finite locally constant. -/
 theorem IsConstructibleSheaf.exists_open_topologicalKrullDim_compl_lt {k : Type u} [Field k]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f]
     [Nonempty X] (F : Sheaf X.smallEtaleTopology A) [IsConstructibleSheaf F] :

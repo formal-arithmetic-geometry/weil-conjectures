@@ -47,16 +47,7 @@ private theorem product_zero_of_epi {X : Scheme.{u}} {J F G : X.Modules}
   simpa only [image.fac, comp_zero] using hb
 
 set_option linter.unusedVariables false in
-/-- Cokernel part of the reduction torsion bound.
-Source: Stacks Project, Remark 0888, final commutative algebra argument.
-Proof: the quotient projection H → H/I^(n+1)H followed by the reduced cokernel
-projection kills a, so factors through coker(a). This factor is epic because its
-composite with the original cokernel projection is epic. Ideal annihilation descends
-along epimorphisms: tensoring an epimorphism is epic, and multiplication is natural.
-Thus K^t kills the reduced cokernel. The inclusion K^(2t) → K^t factors the associated
-ideal-product inclusion, proving the claimed bound. Neither coherence nor the
-kernel hypothesis is needed for this component.
-(blueprint: lem-weil-pbc-coherent-map-reduction-torsion-coker) -/
+/-- Cokernel part of the reduction torsion bound (Stacks, Tag 0888). -/
 theorem coherentMap_reduction_torsion_coker
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (F H : CoherentModules X) (a : F ⟶ H) (t : ℕ) (ht : 1 ≤ t)

@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.ExceptionalCoef
 import WeilConjectures.CategoryTheory.SmoothPurity.CompositeLeftUnitCoherence
 import WeilConjectures.CategoryTheory.Tensor.TensorIsoUnitCoherence
 
-/-! # The coefficient unit is preserved by the normalized scalar/pullback square -/
+/-! # The coefficient unit is preserved by the normalized scalar/pullback square
+
+## References
+
+* Stacks Project, Tags 07A4, 0G7E
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -36,15 +41,7 @@ private theorem tensor_naturality_left
   rw [S.map_id, whiskerLeft_id, Category.comp_id] at h
   exact h
 
-/-- Unit compatibility follows from tensor compatibility and the two left-unit laws.
-Source: Stacks 07A4 and 0G7E
-(blueprint: lem-pur-etale-scalar-pullback-unit-coherence).
-Proof: the composite tensor comparisons on Q followed by pullback and on pullback
-followed by Q both satisfy left unitality by pasting the constituent left-unit
-laws. The scalar/pullback tensor square identifies these two tensor comparisons.
-An invertible tensor-compatible natural transformation between these unital
-functors preserves the unit, by tensorIso_preserves_unit. Its unit equation is
-exactly the displayed formula. -/
+/-- The normalized scalar/pullback square preserves the coefficient unit. -/
 theorem etaleScalarPullback_unit
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :

@@ -7,7 +7,18 @@ module
 
 public import WeilConjectures.PoincareDuality.Isomorphism.IsomorphismFieldTransportClauses
 
-/-! # A step of normalized isomorphism transport -/
+/-! # A step of normalized isomorphism transport
+
+The compatibility of the counit of pullback along an isomorphism with scalar extension passes
+from integral to rational coefficients.
+
+## Implementation details
+
+Every rational object is the localization of its integral underlying object, and the rational
+counits and scalar comparisons have the localized integral maps as components. The rational
+equation is obtained by applying the localization functor to the integral one and transporting
+along the object formulas; no integral representative of a rational arrow is chosen.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -43,25 +54,8 @@ private theorem map_heq {C : Type*} [Category* C] {D : Type*} [Category* D]
   cases h
   rfl
 
-/-- The integral inverse/scalar square localizes with its specified components.
-Source: current blueprint sec-six-functors/sk-rem-sf-pf-done/
-lem-fix-weil-operations.proof.md, inverse automorphism paragraph;
-step 4 of lem-pod-isomorphism-field-transport.
-(blueprint: lem-pod-isomorphism-field-transport-rational-scalar).
-
-Proof: every rational object is the localization of its integral underlying object.
-Replace both rational epsilons by their integral localized components, using the
-stage normalization fields. The specified rational scalar comparison has exactly
-the localized integral alpha component. The pure-tensor pullback formula, with
-coefficient one, identifies its image with the localization of the integral
-pullback image. The scalar-extension localization square identifies the right side
-with the localization of the integral scalar image. Apply the localization functor
-to the assumed integral inverse/scalar equation, using preservation of composition.
-The endpoint equalities are precisely those in the prescribed object formulas;
-transporting along them yields the displayed equality. These are component equations
-of the existing natural transformations, whose naturality already covers all
-localized arrows; no choice of an integral representative of a rational arrow is used.
--/
+/-- The integral scalar law `isomorphismFieldTransportScalarLaw` for `ι : E → L` implies the
+rational scalar law `isomorphismFieldTransportRationalScalarLaw`. -/
 theorem isomorphismFieldTransportRationalScalar
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

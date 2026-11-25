@@ -19,15 +19,16 @@ import WeilConjectures.AlgebraicGeometry.SchemeTheoreticSupport
 
 /-! # Support of a finite type module proper over a base
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0CYS, together with
-Morphisms Lemmas 056J, 05JU, Definition 05JV, and Lemma 01QY
-(blueprint: lem-weil-pbc-module-support-proper-over-base).
-
 ## Main statements
 
 * `module_support_proper_over_base` states closedness of the support and the
   characterization of proper support by a proper closed subscheme annihilating
   the module.
+
+## References
+
+* Stacks Project, Cohomology of Schemes, Lemma 0CYS, together with
+  Morphisms Lemmas 056J, 05JU, Definition 05JV, and Lemma 01QY.
 -/
 
 @[expose] public section
@@ -44,28 +45,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 over the base exactly when the module is annihilated by the ideal of a proper closed
 subscheme, equivalently a finite type quasi-coherent pushforward from that subscheme.
 The last conjunct permits taking the scheme-theoretic support: its ideal agrees on
-all affine opens with the annihilator, and its underlying set is exactly the support.
-Source: Stacks Project, Cohomology of Schemes, Lemma 0CYS, and Morphisms Lemmas
-056J, 05JU, Definition 05JV, and Lemma 01QY
-(blueprint: lem-weil-pbc-module-support-proper-over-base).
-Proof, following the node's five steps:
-1. By lem-weil-pbc-finite-type-module-support-closed (056J), support is closed;
-on affine opens it is the zero locus of the annihilator of the section module.
-2. By lem-weil-pbc-scheme-theoretic-support (05JU/05JV), the annihilator is a
-quasi-coherent ideal sheaf. Its closed subscheme has underlying set exactly the
-support and its ideal kills F. This supplies the final conjunct's chosen subscheme.
-3. If support is proper, lem-weil-pbc-closed-subset-proper-over-base-properties (1)
-makes every closed subscheme structure on it proper, including this chosen one.
-4. Conversely, if the ideal of a proper closed subscheme kills F, support lies in
-its image: on the complementary open the ideal contains 1, so all sections, and
-hence all stalks, vanish. That image is proper by the same properties lemma (1),
-and its closed subset Supp(F) is proper by part (2) of that lemma (0CYN).
-5. By lem-weil-pbc-closed-immersion-pushforward-annihilated (01QY), annihilation
-identifies F with the pushforward of its tensor pullback (def-pc-module-pullback),
-which is quasi-coherent and of finite type. Conversely the ideal kills every
-pushforward and this passes along the module isomorphism. Apply this also to the
-scheme-theoretic support selected in step 2.
--/
+all affine opens with the annihilator, and its underlying set is exactly the support
+(Stacks, Tag 0CYS). -/
 theorem module_support_proper_over_base {X S : Scheme.{u}} (f : X ⟶ S)
     [LocallyOfFiniteType f] (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] :
     (∃ Z : TopologicalSpace.Closeds X,

@@ -11,10 +11,12 @@ import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 /-!
 # Restriction of scalars along an isomorphism preserves K-flatness
 
-Source: Stacks Project, Tags 06YN and 03ER.
-
 Restricting the unit along an isomorphism of ring sheaves gives the unit, which is flat, so
 `SheafOfModules.isKFlat_restrictScalars_of_flat` applies.
+
+## References
+
+* Stacks Project, Tags 06YN and 03ER
 -/
 
 @[expose] public section

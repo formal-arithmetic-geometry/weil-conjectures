@@ -8,7 +8,12 @@ module
 public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
-/-! # Additive adjunctions transpose specified cone squares -/
+/-! # Additive adjunctions transpose specified cone squares
+
+## References
+
+* Stacks Project, Derived Categories, Tag 014P (cone formulas)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -17,19 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- Transposing a homotopy square through an additive adjunction preserves its specified
-cone map, using the canonical additive cone comparisons.
-Source: Stacks Project, Derived Categories, Tag 014P (cone formulas), combined with
-the termwise additive adjunction.
-(blueprint: lem-pc-additive-adjunction-cone-square).
-
-Proof: transpose the two chain maps using the termwise adjunction. Apply the left functor
-to the given homotopy, then postcompose with the counit. Naturality of the counit
-identifies its endpoints with the required composites. Its degree-minus-one component
-is the transpose of the original degree-minus-one component. In each degree the cone
-map has diagonal components given by the two chain maps and off-diagonal component
-given by that homotopy. Additivity of the adjunction identifies all three components;
-the canonical cone comparisons identify the two direct sums. Thus the displayed chain
-maps agree, including the homotopy sign. This also applies to zero objects and homotopies. -/
+cone map, using the canonical additive cone comparisons. -/
 theorem additiveAdjunction_cone_square
     {E : Type u} {E' : Type u'} [Category.{v} E] [Category.{v'} E']
     [Preadditive E] [Preadditive E'] [HasBinaryBiproducts E] [HasBinaryBiproducts E']

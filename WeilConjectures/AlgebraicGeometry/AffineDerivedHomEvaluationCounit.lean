@@ -20,7 +20,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # AffineDerivedHomEvaluationCounit
 
-Source: Stacks Project, Duality for Schemes, Section 48.11.
+## References
+
+* Stacks Project, Duality for Schemes, Section 48.11
 -/
 
 @[expose] public section
@@ -145,25 +147,7 @@ private theorem exists_affine_localizedEvaluation {X Y : Scheme.{u}}
 
 /-- The affine algebra-valued derived Hom adjunction, with its evaluation counit.
 This lemma involves neither a quasi-coherent right adjoint of pushforward nor its
-comparison with scalar restriction.
-
-Source: Stacks Project, Tags 0BUZ, 0BV0 and 0AX3
-(blueprint: lem-sc-affine-derived-hom-evaluation-counit).
-
-Proof:
-1. Take the underived sheaf-Hom adjunction and its derived adjunction from
-   `exists_affine_derivedSheafHom_adjunction`. Scalar restriction is exact, so its
-   derived functor L is canonically isomorphic to the chosen rightDerivedFunctor.
-   Transport the adjunction across that isomorphism, obtaining H and adjH.
-2. Compute on a K-injective resolution I of K. After forgetting the algebra action,
-   H(K) is Hom(A,I); identify A with the module f_* O_X by the identity on sections.
-   The localization comparison for derivedInternalHom gives the displayed d.
-3. Hom(O_Y,I) is canonically I, by evaluation at one in every degree. Descend this
-   natural chain isomorphism and the resolution quasi-isomorphism to obtain iota.
-4. Precomposition by O_Y -> A followed by that evaluation sends a local map to its
-   value at one. The derived counit formula of the affine adjunction is the same
-   chain map. Localization and its natural comparison therefore give the equality.
-The argument works for all derived objects, including zero and arbitrary shifts. -/
+comparison with scalar restriction (Stacks, Tags 0BUZ, 0BV0 and 0AX3). -/
 theorem exists_affine_derivedHom_evaluation_counit {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -12,11 +12,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 
 /-! # The full derived finite exceptional Hom comparison
 
-Source: Zheng, Proposition 2.23; blueprint coherent-tower proof, step 5.
-(blueprint: def-sfb-finite-exceptional-derived-hom).
-
 The comparison is defined by closed transposition of the actual proper projection
 map. Its isomorphism theorem does not define its data.
+
+## References
+
+* Zheng, Proposition 2.23 and Construction 4.1
+* Stacks Project, Tags 0B6E, 08J9
 -/
 
 @[expose] public noncomputable section
@@ -30,23 +32,20 @@ namespace AlgebraicGeometry.Etale.FiniteProperQuotient
 variable (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Full A_n-module valued global RHom, with the usual constant/sections adjunction.
-Source: Stacks 0B6E (blueprint: def-sfb-finite-exceptional-derived-hom). -/
+/-- Full A_n-module valued global RHom, with the usual constant/sections adjunction. -/
 def finiteHom (T : Scheme.{u}) (n : ℕ)
     (M : DerivedCategoryModule (Ring l E n) T) :=
   (derivedHom (ModuleCat.{u + 1} (Ring l E n)) T).obj (op M) ⋙
     rightDerivedGlobalSections (ModuleCat.{u + 1} (Ring l E n)) T
 
-/-- The scalar-test functor whose right adjoint is finiteHom.
-Source: Stacks 08J9 (blueprint: def-sfb-finite-exceptional-derived-hom). -/
+/-- The scalar-test functor whose right adjoint is finiteHom. -/
 def finiteTensorTest (T : Scheme.{u}) (n : ℕ)
     (M : DerivedCategoryModule (Ring l E n) T) :=
   (constantSheaf T.smallEtaleTopology
     (ModuleCat.{u + 1} (Ring l E n))).mapDerivedCategory ⋙
       (derivedTensor (ModuleCat.{u + 1} (Ring l E n)) T).obj M
 
-/-- The canonical, fully derived scalar tensor/global Hom adjunction.
-Source: Stacks 08J9 (blueprint: def-sfb-finite-exceptional-derived-hom). -/
+/-- The canonical, fully derived scalar tensor/global Hom adjunction. -/
 def finiteHomAdjunction (T : Scheme.{u}) (n : ℕ)
     (M : DerivedCategoryModule (Ring l E n) T) :
     finiteTensorTest l E T n M ⊣ finiteHom l E T n M :=
@@ -54,8 +53,7 @@ def finiteHomAdjunction (T : Scheme.{u}) (n : ℕ)
     (derivedTensorHomAdjunction (ModuleCat.{u + 1} (Ring l E n)) M)
 
 /-- Proper projection tested on every derived scalar complex. All maps here
-are the actual counit projection and the canonical pullback of constants.
-Source: Zheng 2.23 (blueprint: def-sfb-finite-exceptional-derived-hom). -/
+are the actual counit projection and the canonical pullback of constants. -/
 def finiteHomProjection {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ)
     (M : DerivedCategoryModule (Ring l E n) Z) :
     finiteTensorTest l E Y n ((F l E p n).obj M) ⟶
@@ -71,8 +69,7 @@ def finiteHomProjection {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ)
 
 /-- The inverse-direction finite enriched adjunction map is a genuine mate.
 It is defined for every chosen F_n ⊣ G_n, including a noncanonical presentation
-of that same adjunction. Source: Zheng 2.23
-(blueprint: def-sfb-finite-exceptional-derived-hom). -/
+of that same adjunction. -/
 def finiteHomMate {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ)
     (G : DerivedCategoryModule (Ring l E n) Y ⥤
       DerivedCategoryModule (Ring l E n) Z) (adj : F l E p n ⊣ G)
@@ -82,9 +79,7 @@ def finiteHomMate {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ)
     (finiteHomAdjunction l E Y n ((F l E p n).obj M))
     (finiteHomProjection l E p n M)
 
-/-- Finite global RHom with its original O-action, by the actual quotient map.
-Source: Stacks 0B6E; Zheng, Construction 4.1
-(blueprint: def-sfb-finite-exceptional-derived-hom). -/
+/-- Finite global RHom with its original O-action, by the actual quotient map. -/
 def finiteHomScalars (T : Scheme.{u}) (n : ℕ)
     (M : DerivedCategoryModule (Ring l E n) T) :=
   finiteHom l E T n M ⋙
@@ -93,9 +88,7 @@ def finiteHomScalars (T : Scheme.{u}) (n : ℕ)
         ({(l : Padic.coefficientExtensionIntegers l E) ^ (n + 1)} :
           Set (Padic.coefficientExtensionIntegers l E))))).mapDerivedCategory
 
-/-- The full finite derived Hom bifunctor with the original O-action.
-Source: Stacks 0B6E; Zheng, Proposition 2.23
-(blueprint: def-sfb-finite-exceptional-derived-hom). -/
+/-- The full finite derived Hom bifunctor with the original O-action. -/
 def finiteHomScalarsBifunctor (T : Scheme.{u}) (n : ℕ) :=
   Functor.uncurry.obj (derivedHom (ModuleCat.{u + 1} (Ring l E n)) T) ⋙
     rightDerivedGlobalSections (ModuleCat.{u + 1} (Ring l E n)) T ⋙
@@ -104,9 +97,7 @@ def finiteHomScalarsBifunctor (T : Scheme.{u}) (n : ℕ) :=
         ({(l : Padic.coefficientExtensionIntegers l E) ^ (n + 1)} :
           Set (Padic.coefficientExtensionIntegers l E))))).mapDerivedCategory
 
-/-- The same finite enriched adjunction mate with O-scalars retained.
-Source: Zheng, Proposition 2.23 and Construction 4.1
-(blueprint: def-sfb-finite-exceptional-derived-hom). -/
+/-- The same finite enriched adjunction mate with O-scalars retained. -/
 def finiteHomScalarsMate {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ)
     (G : DerivedCategoryModule (Ring l E n) Y ⥤
       DerivedCategoryModule (Ring l E n) Z) (adj : F l E p n ⊣ G)

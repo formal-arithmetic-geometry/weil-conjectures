@@ -18,8 +18,10 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 The short exact sequence is the kernel sequence of the actual strict reduction map.
 Its normalization, residue balancing and representative independence are proved here;
 only the ordinary flat-tensor kernel identification is delegated to its own module.
-Source: Stacks Project, proetale.tex, Tag 09C2, proof of (1), and Tags 06YS and 06YY.
-(auxiliary; not a blueprint node).
+
+## References
+
+* Stacks Project, Tags 09C2, 06YS and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -142,27 +144,8 @@ private theorem transitionKernel_homology
     (B.sc q).mapHomologyIso U⟩
 
 /--
-The remaining coefficient-kernel part of the normalized adic transition construction.
-
-Source: Stacks Project, proetale.tex, Tag 09C2, proof of (1), using the coefficient
-sequence and K-flat computations of Tags 06YS and 06YY.
-(auxiliary; not a blueprint node).
-
-Proof: Choose a flat-term K-flat representative K of N. The strict reduction successor
-is epic: every coefficient section lifts through the constant quotient factor (a set
-section of the surjective ring map gives a section after constant sheafification),
-and the reductionStep tensor formula and tensor extensionality prove cancellation.
-Its canonical kernel sequence S is therefore short exact. The existing strict-level
-comparison and normalized successor square give the two endpoint isomorphisms and
-identify the localized second arrow with adicFiniteTransition. The coefficient
-module M is explicitly constructed from the kernel of A/J^(n+2) -> A/J^(n+1);
-a proved annihilation statement gives its A/J action. Apply the ordinary flat-tensor
-kernel identification to S.X1. Scalar tensor cancellation, the single-factor total
-tensor comparison and exact restriction on homology identify its homology with the
-tensor test of the residue reduction of K and M. Finally that residue reduction is
-K-flat and represents the same derived object as P; coefficientModelTensorTest_iso
-transports the tensor homology to the supplied P. All constructions include zero
-and unit ideals and the empty site. -/
+The remaining coefficient-kernel part of the normalized adic transition construction
+(Stacks, Tags 09C2, 06YS and 06YY). -/
 theorem adicFiniteTransition_tensor_sequence_core
     (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A) (n : ℕ)

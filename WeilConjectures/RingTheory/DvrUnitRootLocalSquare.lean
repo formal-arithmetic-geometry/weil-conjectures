@@ -16,40 +16,22 @@ import Mathlib.RingTheory.Ideal.GoingUp
 
 /-! # Local DVR square for a root of a unit
 
-Source: Stacks Project, Tag 0BRM, first claim of the proof.
-(blueprint: lem-sbc-dvr-unit-root-local-square) -/
+## References
+
+* Stacks Project, Tag 0BRM (first claim of the proof)
+-/
 
 @[expose] public section
 
 universe u
 namespace RingTheory
 
-/-- The ring construction in the unit-root argument, with a rational root presentation.
-
-Source: Stacks Project, Tag 0BRM, first claim of the proof.
-(blueprint: lem-sbc-dvr-unit-root-local-square)
-
-Proof: Put C = A[X]/(X^e-v) and D = T[X]/(X^e-v_T). The positive exponent
-makes both defining polynomials monic, so the algebras are finite free and
-faithfully flat. The root is a unit since its e-th power is a unit, and e is
-invertible; hence the derivative e*X^(e-1) is a unit in each algebra. Both
-algebras are therefore finite etale over their bases. Choose a maximal ideal
-q of D above the maximal ideal of T, and let p be its inverse image in C.
-The composite A -> T -> D contracts q to the maximal ideal of A because
-A -> T is local. Since C is finite over A, p is maximal. Set A' = C_p and
-T' = D_q. Localization of the map C -> D gives A' -> T'; the square commutes
-and all three maps are local. An etale localization over a DVR is a regular
-local domain of dimension one, hence a DVR: flatness preserves the base
-uniformizer as a nonzerodivisor, and the etale closed fibre is a field, so
-that uniformizer generates the maximal ideal. The residue extension of A'
-over A is finite separable. Faithful flatness of the local map T -> T'
-gives injectivity. The root r in A' satisfies the defining power relation.
-Every element of D is a polynomial in its root with coefficients in T.
-Every element of D_q is a quotient of two such elements with denominator
-outside q, whose image is a unit and thus nonzero in T'. Clearing this
-denominator gives the final polynomial relation. For e=1 this is the
-identity square and the usual constant-polynomial presentation. No
-ramification or residue-separability hypothesis on T/A is used. -/
+/-- The ring construction in the unit-root argument, with a rational root presentation. For a
+DVR `A`, a unit `v` of `A`, `e > 0` a unit in `A` and a DVR `T` local over `A`, there are DVRs
+`A'` over `A` and `T'` over `T` with a commuting square of local maps `A → A' → T'`,
+`A → T → T'`, such that `A'` contains an `e`-th root `r` of `v`, the residue field extension of
+`A'` over `A` is separable, `T → T'` is injective, and every element of `T'` is a quotient of
+polynomials over `T` evaluated at the image of `r`. -/
 theorem dvr_unit_root_local_square
     (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
     (e : ℕ) (hepos : 0 < e) (he : IsUnit (e : A)) (v : Aˣ)

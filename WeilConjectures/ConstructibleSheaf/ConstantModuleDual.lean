@@ -16,9 +16,20 @@ import WeilConjectures.ConstructibleSheaf.ConstantFiniteMatrixDualKernel
 
 /-! # Dual of a finite constant module sheaf
 
-Source: the finite presentation argument in the docstring of
-`WeilConjectures/ConstructibleSheaf/Monoidal.lean`, `IsFiniteLocallyConstantSheaf.ihom_unit`.
-(blueprint: lem-weil-pbc-constant-module-dual)
+Over a noetherian coefficient ring `Λ`, the internal dual of the constant sheaf with value a
+finite `Λ`-module `M` is the constant sheaf with value `Hom_Λ(M, Λ)`.
+
+## Main results
+
+- `AlgebraicGeometry.Scheme.nonempty_constantModuleDualIso`
+
+## Implementation details
+
+The proof chooses a finite presentation `Λᵐ → Λⁿ → M → 0`. The constant sheaf functor is exact
+and monoidal, so it carries this to a presentation by finite free constant sheaves. Applying the
+internal Hom into the unit gives the kernel of the transposed map between the finite free duals,
+which is the constant sheaf on the kernel of the module transpose, i.e. on `Hom_Λ(M, Λ)`. No
+projectivity of `M` is needed.
 -/
 
 @[expose] public section
@@ -28,22 +39,7 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.Scheme
 
 /-- Over a noetherian coefficient ring, dualizing a constant sheaf with a finite module
-value produces the constant sheaf with the module dual as value.
-
-Source: `WeilConjectures/ConstructibleSheaf/Monoidal.lean`,
-`IsFiniteLocallyConstantSheaf.ihom_unit`, finite presentation argument.
-
-Proof: Since Λ is noetherian, the finite module M has a finite presentation
-Λᵐ → Λⁿ → M → 0. The constant sheaf functor is exact and monoidal, so it carries
-this to a presentation by finite free coefficient sheaves. Applying internal Hom
-into the unit gives the kernel of the transposed map between the finite free duals.
-Those duals are again the constant finite free sheaves, and the transposed map is
-the constant sheafification of the module transpose. Constant sheafification
-preserves kernels. In modules the kernel of this transpose is Hom_Λ(M, Λ), by
-applying Hom_Λ(-, Λ) to the presentation. Composing these kernel isomorphisms gives
-the claimed isomorphism. No projectivity of M is assumed; for M = 0 the same
-argument uses a zero presentation, and the empty scheme causes no exception.
-(blueprint: lem-weil-pbc-constant-module-dual) -/
+value produces the constant sheaf with the module dual as value. -/
 theorem nonempty_constantModuleDualIso
     (X : Scheme.{u}) {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]
     (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :

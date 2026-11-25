@@ -13,7 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.UnderivedGlobalGermExchange
 
 /-! # Exchange on pointed representatives
 
-Source: Stacks Project, Tags 03Q1 and 0A3U.
+## References
+
+* Stacks, Tags 03Q1 and 0A3U
 -/
 
 @[expose] public section
@@ -40,25 +42,7 @@ private lemma terminal_evaluation_transport {C : Type u} [Category C]
 set_option maxRecDepth 2048 in
 /-- Exchange on a pointed representative is unit restriction to the geometric fibre,
 followed by the canonical global-section and terminal-germ maps.
-Source: Stacks Project, Tag 03Q1 (3) and Tag 0A3U, the degree-zero compatibility
-calculation in step 3 of `lem-weil-pbc-qcqs-geometric-exchange-factorization`.
-(blueprint: lem-weil-pbc-exchange-pointed-representative).
-
-Proof: the inverse-image stalk unit-germ identity rewrites the source germ followed
-by the inverse stalk comparison as the unit section and its pulled-back germ.
-Naturality of germs moves exchange before this germ. The pushforward unit identity
-`unit_map_baseChangeMap_app` replaces the unit followed by exchange with the unit for
-g' and the pushforward square isomorphism. The marked point gives a section of its
-neighbourhood over Spec Ω; the germ relation replaces its germ by restriction to the
-terminal object followed by the terminal germ. Expand the square's two pullback
-composition isomorphisms. Their composite with this section and the terminal-object
-identification is `geometricFibreSectionLift`: the first projection is f' followed
-by the marked point, the second is g', and the outer second projection is identity.
-The pullback universal property identifies these maps. Applying the sheaf and the
-unit yields `geometricFibreSectionRestriction`. Expanding
-`lowerStarCompGlobalSectionsIso` cancels the global/terminal-section identifications
-and gives exactly the displayed final three factors. This calculation uses only a
-commutative square, with no finiteness or invertibility assumption. -/
+(Stacks, Tags 03Q1 and 0A3U.) -/
 theorem exchange_pointed_representative
     (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}}
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

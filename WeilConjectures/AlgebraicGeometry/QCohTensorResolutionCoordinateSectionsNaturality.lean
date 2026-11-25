@@ -28,18 +28,8 @@ local instance (X : Scheme.{u}) (L : X.Modules) :
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf L
 
 -- The canonical coordinate comparison combines three homology squares.
-/-- The canonical chart coordinates commute with augmented semilinear tensor comparisons.
-
-Source: Stacks Tags 08DX(2), 08DV, 06YT and 01I9.
-
-Proof in words: the affine tensor-homology square uses hb and hk. The common
-K-flat comparison square uses ha and naturality of open restriction. Compose
-them by functoriality and associativity. The factorization formula identifies
-their composite with the canonical coordinate sheaf isomorphism. Apply the
-naturality of the affine sections unit, in tensorResolutionSection_naturality,
-to obtain the displayed equality of sections.
-
-(blueprint: new-g2-existing-qcoh-tensor-resolution-coordinate-naturality) -/
+/-- The canonical chart coordinates commute with augmented semilinear tensor comparisons
+(Stacks, Tags 08DX, 08DV, 06YT, 01I9). -/
 theorem tensorResolutionCoordinateSections_naturality
     (Y : Scheme.{u}) (M N : Y.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent]
     (MA NA : ∀ U : Y.affineOpens, ModuleCat.{u} (Γ(Y, U.1) : Type u))

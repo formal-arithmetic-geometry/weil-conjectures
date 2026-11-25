@@ -24,7 +24,9 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 
 /-! # Tensor comparison for finite intrinsic coefficients
 
-Source: Stacks Project, Tags 00YV, 03EK and 0GMW.
+## References
+
+* Stacks Project, Tags 00YV, 03EK, 0GMW
 -/
 
 @[expose] public noncomputable section
@@ -38,9 +40,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 namespace FiniteCoefficientTotalComparison
 
-/-- The ordinary tensor-comparison type, shared before any site specialization.
-Source: Stacks 03EK and 0GMW
-(blueprint: lem-sf-finite-intrinsic-tensor-generators). -/
+/-- The ordinary tensor-comparison type, shared before any site specialization. -/
 def Ordinary {C D : Type*} [Category C] [Category D]
     [MonoidalCategory C] [MonoidalCategory D] (G : C ⥤ D) : Type _ :=
   tensor C ⋙ G ≅ G.prod G ⋙ tensor D
@@ -92,8 +92,7 @@ private theorem tensorUnitMap_isIso
           adj.counit.app (M ⊗ N)) := by rw [h]; infer_instance
   exact IsIso.of_isIso_comp_right _ (adj.counit.app (M ⊗ N))
 
-/-- The intrinsic module tensor structure, with site and coefficient universes fixed.
-Source: Stacks 03EK (blueprint: lem-sf-finite-intrinsic-tensor-generators). -/
+/-- The intrinsic module tensor structure, with site and coefficient universes fixed. -/
 @[instance_reducible]
 def finiteCoefficientIntrinsicMonoidal : MonoidalCategory
     (Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X A)) :=
@@ -305,8 +304,7 @@ private def comparisonTensorNatIso :
         (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X))
           (intrinsicTensorNatIso X A).symm
 
-/-- Section map through the comparison and module-sheafification units.
-Source: Stacks 00YV (blueprint: lem-sf-finite-intrinsic-tensor-generators). -/
+/-- Section map through the comparison and module-sheafification units. -/
 def finiteCoefficientComparisonSection
     (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))
     (U : X.Etale) (x : M.obj.obj (op U)) :
@@ -357,8 +355,7 @@ private theorem comparisonTensorNatIso_pure
   exact intrinsicTensorIso_pure X A (V.obj M) (V.obj N) (op (X.toProEt.obj U))
     ((u.app M).hom.app (op U) x) ((u.app N).hom.app (op U) y)
 
-/-- Intrinsic pure tensor formed after module sheafification.
-Source: Stacks 03EK (blueprint: lem-sf-finite-intrinsic-tensor-generators). -/
+/-- Intrinsic pure tensor formed after module sheafification. -/
 def finiteCoefficientIntrinsicPure :
     letI := finiteCoefficientIntrinsicMonoidal X A
     ∀ (M N : Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X A))
@@ -372,8 +369,7 @@ def finiteCoefficientIntrinsicPure :
             (Scheme.proEtaleConstantRing X A)).obj)).unit.app
               (M.val ⊗ N.val)).app U (x ⊗ₜ y))
 
-/-- Etale sheaf pure tensor of two sections.
-Source: Stacks 03EK (blueprint: lem-sf-finite-intrinsic-tensor-generators). -/
+/-- Etale sheaf pure tensor of two sections. -/
 def finiteCoefficientEtalePure
     (M N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))
     (U : X.Etale) (x : M.obj.obj (op U)) (y : N.obj.obj (op U)) :
@@ -381,8 +377,7 @@ def finiteCoefficientEtalePure
   (Functor.LaxMonoidal.μ (sheafToPresheaf X.smallEtaleTopology
     (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) M N).app (op U) (x ⊗ₜ y)
 
-/-- The ordinary comparison is normalized on etale pure sections through both units.
-Source: Stacks 00YV and 03EK (blueprint: lem-sf-finite-intrinsic-tensor-generators). -/
+/-- The ordinary comparison is normalized on etale pure sections through both units. -/
 def FiniteCoefficientTensorNormalization :
     letI := finiteCoefficientIntrinsicMonoidal X A
     FiniteCoefficientTotalComparison.Ordinary
@@ -401,15 +396,7 @@ def FiniteCoefficientTensorNormalization :
       (finiteCoefficientComparisonSection X A N U y)
 
 omit [Finite A] in
-/-- The ordinary comparison preserves tensors, with its value on every etale pure tensor.
-Source: Stacks Project, Tags 00YV, 03EK and 0GMW.
-(blueprint: lem-sf-finite-intrinsic-tensor-generators).
-Proof: the strong monoidal etale-to-pro-etale inverse image gives the first
-comparison. Encode fixed-ring presheaves as module presheaves and use the tensor
-comparison for module sheafification along the locally bijective constant-ring
-unit. The lax tensor map of sheaf inclusion becomes invertible after this
-sheafification. Compose these isomorphisms. Naturality of both adjunction units
-and their tensor identities give the displayed formula. -/
+/-- The ordinary comparison preserves tensors, with its value on every etale pure tensor. -/
 theorem finiteCoefficientIntrinsicTensor_generators :
     letI := finiteCoefficientIntrinsicMonoidal X A
     ∃ e, FiniteCoefficientTensorNormalization X A e := by

@@ -19,8 +19,9 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-! # Natural comparison of restriction cohomology and open derived sections
 
-Source: Stacks Project, Cohomology, Tags 01E1 and 01E4.
-(blueprint: lem-pc-open-restriction-module-cohomology).
+## References
+
+* Stacks Project, Tags 01E1 and 01E4.
 -/
 
 @[expose] public section
@@ -195,23 +196,7 @@ private def openDerivedIso (X : Scheme.{u}) (U : X.Opens) (p : ℕ) :
       (InjectiveResolution.desc a _ _) (InjectiveResolution.desc_commutes_zero a _ _))
 
 /-- Open restriction commutes with derived module sections, after forgetting scalars.
-
-Source: Stacks Project, Cohomology, Lemma 20.7.1, Tag 01E1.
-(blueprint: lem-pc-open-restriction-module-cohomology).
-
-Proof: Write R for restriction along U.ι. Open restriction is exact and its exact
-left adjoint is extension by zero, hence R preserves injectives. Transport the
-restricted resolution through Modules.overEquiv U, with overFunctorEquiv identifying
-it with R applied termwise to the original resolution. The restrictAppIso at the
-terminal open identifies its global sections complex with sections on U. Forgetting
-scalars is exact, so its mapHomologyIso identifies the two homology objects. Conjugate
-this comparison by isoRightDerivedObj for the original and restricted resolutions.
-For a coefficient map choose a lift to the original resolutions and restrict it.
-Naturality of restrictAppIso, mapHomologyIso and isoRightDerivedObj proves naturality
-of the conjugated comparison. Applying the same computation to an identity lift
-shows independence of the resolution. All comparison arrows are isomorphisms, so
-these components give a natural isomorphism. Empty U and degree zero are included:
-restriction, evaluation and scalar forgetting use the same definitions there. -/
+(Stacks, Tag 01E1) -/
 theorem nonempty_openRestriction_moduleCohomology_iso
     (X : Scheme.{u}) (U : X.Opens) (p : ℕ) :
     Nonempty ((Scheme.Modules.restrictFunctor U.ι ⋙

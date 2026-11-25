@@ -40,22 +40,8 @@ private lemma chartMate_homEquiv {W X Y : Scheme.{u}} (f : Y ⟶ X)
   rw [← hn]
   rfl
 
-/-- The canonical continuous coefficient chart commutes with scheme direct image.
-
-Source: Bhatt--Scholze, Section 6.8, continuous coefficient realization.
-(auxiliary; not a blueprint node)
-
-Proof: apply the adjunction from condensed coefficients to sheaves over X to the
-asserted equality. The coefficient pushforward is the mate of the inverse-image
-composition isomorphism. Compatibility of units with this composition identifies
-the left adjoint with the adjoint chart over Y, followed by the inverse of the
-pushforward composition comparison. The right adjoint is the chart over X followed
-by the sectionwise continuous-function pushforward. On a relative profinite test
-object, both expressions precompose the same continuous function with the first
-projection from the same iterated scheme pullback. Pullback pasting identifies those
-projections. Thus the adjoints agree on every test object and every section, and
-injectivity of the adjunction Hom equivalence gives the desired equality.
-No total disconnectedness, matrix, module morphism, or cokernel hypothesis is needed. -/
+/-- The canonical continuous coefficient chart commutes with scheme direct image (Bhatt–Scholze,
+Section 6.8). -/
 theorem continuousChart_scheme_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
     (O : Type) [TopologicalSpace O] [Ring O] [IsTopologicalRing O] :
     condensedPushforwardHom (Profinite.continuousMapRingObj O) f ≫

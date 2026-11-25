@@ -103,7 +103,13 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUn
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.CategoryTheory.Sites.CoverPreserving
-/-! # Underlying additive sheaves of scalar restriction and evaluation -/
+/-! # Underlying additive sheaves of scalar restriction and evaluation
+
+## References
+
+* Stacks Project, Tag 03CZ
+* Zheng, 4.1
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe c v r
@@ -112,8 +118,7 @@ namespace WeilConjectures.SemilinearSections
 variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
   (J : GrothendieckTopology C)
 
-/-- Scalar restriction retains the underlying additive sheaf.
-Source: Stacks 03CZ (blueprint: def-sfb-finite-underlying-evaluation). -/
+/-- Scalar restriction retains the underlying additive sheaf. -/
 def restrictionToSheafIso {R R' : Sheaf J CommRingCat.{r}} (φ : R ⟶ R') :
     res.{c, v, r} φ ⋙ SheafOfModules.toSheaf (ring J R) ≅
       SheafOfModules.toSheaf (ring J R') := by
@@ -126,8 +131,7 @@ def restrictionToSheafIso {R R' : Sheaf J CommRingCat.{r}} (φ : R ⟶ R') :
     ext U x
     rfl
 
-/-- Module evaluation retains the additive pushforward along the vertical inclusion.
-Source: Zheng 4.1 (blueprint: def-sfb-finite-underlying-evaluation). -/
+/-- Module evaluation retains the additive pushforward along the vertical inclusion. -/
 def evaluationToSheafIso (B : ℕ → Sheaf J CommRingCat.{r})
     (τ : ∀ n : ℕ, B (n + 1) ⟶ B n) (n : ℕ) :
     evaluation.{c, v, r} J B τ n ⋙ SheafOfModules.toSheaf (ring J (B n)) ≅

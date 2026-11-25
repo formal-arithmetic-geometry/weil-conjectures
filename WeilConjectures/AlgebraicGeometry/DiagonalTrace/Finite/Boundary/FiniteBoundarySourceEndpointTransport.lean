@@ -32,11 +32,8 @@ private theorem finiteBoundarySourceRestriction_inv_section
   change HEq ((eqToHom (r.underlying M n U).symm) x) x
   exact finiteBoundary_cast_heq _ _
 
-/-- Source endpoint transport.  This is the coefficient-one calculation: the
-finite quotient followed by the restricted evaluation comparison is the
-integer coefficient map.  The proof is the coefficient-one section calculation,
-additivity, and the constant-sheaf adjunction.
-(blueprint: lem-diagonal-local-finite-source-endpoint-transport) -/
+/-- Source endpoint transport: the finite quotient followed by the restricted evaluation
+comparison is the integer coefficient map. -/
 theorem finiteBoundary_source_endpoint
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [DiagonalTraceLocalizations l T]
     (c : Chern l (ULift.{u} (Padic l)) T)

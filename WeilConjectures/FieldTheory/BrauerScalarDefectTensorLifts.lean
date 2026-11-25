@@ -12,7 +12,25 @@ import WeilConjectures.FieldTheory.TensorOppositeMatrixLifts
 /-!
 # Tensor lifts with the quotient scalar defect
 
-Source: Stacks Project, Tag 03R7, injectivity argument; Section 0DVG.
+If central simple algebras `A` and `B` have scalar-defect classes `x` and `y`, then
+`A ⊗[K] Bᵐᵒᵖ` admits a splitting over the separable closure with locally constant lifts whose
+scalar defect is the quotient of the two defects.
+
+## Main results
+
+- `Field.exists_tensor_opposite_scalarDefect_lifts`
+
+## Implementation details
+
+The splitting combines the two given splittings with the transpose anti-isomorphism and the
+Kronecker isomorphism, reindexing `Fin n × Fin m` as `Fin (n * m)`. The lifts are Kronecker
+products of the lifts for `A` with the inverse transposes of the lifts for `B`. Only a splitting
+over the separable closure is produced, not one over `K`.
+
+## References
+
+* [Stacks Project, Tag 03R7](https://stacks.math.columbia.edu/tag/03R7), injectivity argument
+* [Stacks Project, Section 0DVG](https://stacks.math.columbia.edu/tag/0DVG)
 -/
 
 @[expose] public section
@@ -23,24 +41,9 @@ namespace Field
 
 open scoped TensorProduct
 
-/-- Tensoring projective lifts with inverse transposes gives the quotient scalar defect.
-
-Proof: unpack both scalar-defect realizations, retaining their actual homogeneous
-cocycles z and w and their projection equations. The transpose anti-isomorphism identifies
-matrices opposite with matrices. Combine it with the second splitting, commute opposite
-with scalar extension, and use the first splitting and the Kronecker matrix isomorphism
-to split the tensor product over the separable closure. Reindex Fin n × Fin m as Fin (n*m).
-For its lifts take the Kronecker product of the first lifts with the inverse transpose
-of the second lifts. Inverse transpose is a group homomorphism on invertible matrices,
-commutes with coefficient automorphisms, and sends scalar u to scalar u inverse.
-Thus the two defect identities multiply to the displayed quotient identity. The
-conjugation identity holds on pure tensors by the two original identities, hence on the
-whole algebra by bilinearity. Local constancy follows by composing the two locally
-constant lifts with inverse transpose and the Kronecker map. The size n*m is nonzero
-because both original sizes are nonzero. This step uses no equality of cohomology classes
-and supplies only a splitting over the separable closure, not a splitting over K.
-Source: Stacks Project, Tag 03R7, direct computation with tensor cocycles.
-(blueprint: lem-sc-brauer-scalar-defect-tensor-lifts). -/
+/-- If `A` and `B` have scalar-defect classes `x` and `y`, represented by cocycles `z` and `w`,
+then `A ⊗[K] Bᵐᵒᵖ` has a splitting over the separable closure with locally constant lifts
+whose scalar defect is the quotient `z / w`. -/
 theorem exists_tensor_opposite_scalarDefect_lifts (K : Type u) [Field K]
     (A B : CSA.{u, u} K) (x y : GaloisUnitsH2 K)
     (hx : HasBrauerScalarDefect K A x) (hy : HasBrauerScalarDefect K B y) :

@@ -19,10 +19,9 @@ import WeilConjectures.Algebra.Homology.TensorHomologyPairing
 /-!
 # Bijectivity of the canonical tensor homology map over a field
 
-Source: Stacks Project, Varieties, Tag 0BED, field-linear Kunneth identification
-at `equation-kunneth-on-cech`, with the complement argument of
-`lem-sc-qcoh-cech-total-tensor-iso`, steps 1 and 2.
-(blueprint: lem-sc-tensor-homology-map-bijective)
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section
@@ -34,32 +33,7 @@ open scoped TensorProduct
 
 namespace HomologicalComplex
 
-/-- Any linear map with the canonical action on tensors of homology classes is bijective.
-Source: Stacks Project, Varieties, Tag 0BED, `equation-kunneth-on-cech`;
-the field-linear complement argument in steps 1 and 2 of the parent node.
-(blueprint: lem-sc-tensor-homology-map-bijective)
-
-Proof: In every degree choose complements Z_A = B_A direct-sum H_A and
-A = Z_A direct-sum C_A, and likewise for B. The restriction of d_A from C_A^p
-to B_A^(p+1) is an isomorphism: its kernel is C_A^p intersect Z_A^p = 0,
-and its image is d_A(A^p) because d_A vanishes on Z_A^p. Consequently A is
-the direct sum of its zero-differential H_A subcomplex and a contractible
-subcomplex E_A with terms B_A direct-sum C_A. The inverse of this restriction,
-extended by zero on C_A, contracts E_A. Make the same decomposition for B.
-Distribute the splittings over each tensor term and each total direct sum.
-The summands E_A tensor H_B and E_A tensor E_B are contracted by h_A tensor 1:
-the mixed terms have coefficients (-1)^(p-1) and (-1)^p, so cancel.
-H_A tensor E_B is contracted by (-1)^p times 1 tensor h_B: the mixed terms
-have coefficients (-1)^p and (-1)^(p+1), so cancel. Hence only H_A tensor H_B
-contributes homology, and its differential is zero. Its degree-n space is the
-direct sum over p+q=n of H_A^p tensor H_B^q. The quotient maps identify H_A^p
-with H^p(A) and H_B^q with H^q(B). Under these identifications the inclusion
-of the surviving summand acts by the representative equation assumed for f.
-All homology classes have cycle representatives, pure tensors span each tensor
-product, and the direct-sum inclusions span the source. Therefore f equals
-this bijective inclusion-induced map, so is injective and surjective.
-The argument uses finite-support direct sums and also covers infinite-dimensional
-vector spaces, negative degrees, and characteristic two. -/
+/-- Any linear map with the canonical action on tensors of homology classes is bijective. -/
 theorem tensor_homology_map_bijective {k : Type u} [Field k]
     (A B : CochainComplex (ModuleCat.{u} k) ℤ)
     (hA : ∃ m : ℤ, ∀ p : ℤ, p < m → IsZero (A.X p))

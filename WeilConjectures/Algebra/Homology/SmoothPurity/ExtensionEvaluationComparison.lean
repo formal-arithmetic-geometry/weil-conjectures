@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Evaluating a normalized derived extension
 
-Source: Stacks 0FND, 09T5 and 06YT.
+## References
+
+* Stacks 0FND, 09T5 and 06YT.
 -/
 
 @[expose] public noncomputable section
@@ -41,18 +43,12 @@ variable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{da} A]
   (τD : R₁.mapDerivedCategory ⋙ GD ⟶
     H.mapDerivedCategory ⋙ R₂.mapDerivedCategory)
 
-/-- The evaluation comparison before proving invertibility is the actual derived mate.
-Source: Stacks 0FND (blueprint: lem-pur-extension-evaluation-comparison). -/
+/-- The evaluation comparison before proving invertibility is the actual derived mate. -/
 def derivedExtensionMate :
     GD ⋙ d₂.derived ⟶ d₁.derived ⋙ H.mapDerivedCategory :=
   ((mateEquiv d₁.adjunction d₂.adjunction).symm (TwoSquare.mk _ _ _ _ τD))
 
-/-- A normalized derived mate has the prescribed cochain comparison.
-Source: Stacks 0FND and 09T5
-(blueprint: lem-pur-extension-evaluation-comparison).
-Proof: the ordinary unit-transpose identity holds degreewise on complexes. Apply
-the categorical derived-mate comparison to the two termwise adjunctions, their
-normalized derived pairs, and the canonical exact-functor factorization isomorphisms. -/
+/-- A normalized derived mate has the prescribed cochain comparison. -/
 theorem derivedExtensionMate_rep
     (τ : R₁ ⋙ G ⟶ H ⋙ R₂)
     (hτ : ∀ K : CochainComplex B ℤ,
@@ -111,12 +107,7 @@ variable
 
 include τ hτ ι hι in
 /-- The evaluation mate is invertible when the two normalized models compute on a
-common resolving class. Source: Stacks 06YT and 09T5
-(blueprint: lem-pur-extension-evaluation-comparison).
-Proof: on a resolving complex its representative formula has invertible factors,
-so cancellation makes the mate invertible. Every complex admits a quasi-isomorphic
-resolving representative, and every derived object is isomorphic to a localized
-complex. Naturality transports invertibility along these two isomorphisms. -/
+common resolving class. -/
 theorem derivedExtensionMate_isIso
     (res : ∀ K : CochainComplex A ℤ,
       ∃ (P : CochainComplex A ℤ) (f : P ⟶ K), p₁ P ∧ QuasiIso f)
@@ -149,8 +140,7 @@ theorem derivedExtensionMate_isIso
   exact NatIso.isIso_of_isIso_app α
 
 /-- The evaluated derived extension is identified with the level derived tensor by
-the inverse of its normalized mate. Source: Stacks 0FND and 06YT
-(blueprint: lem-pur-extension-evaluation-comparison). -/
+the inverse of its normalized mate. -/
 def derivedExtensionEvaluationIso
     (γ : (DerivedCategory.Q (C := A)) ⋙ GD ≅
       G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
@@ -176,10 +166,7 @@ def derivedExtensionEvaluationIso
   have := derivedExtensionMate_isIso d₁ d₂ G H GD γ τD τ hτ ι hι res hp
   exact (asIso (derivedExtensionMate d₁ d₂ H GD τD)).symm
 
-/-- The evaluated derived comparison intertwines the actual adjunction transposes.
-Source: Stacks 0FND (blueprint: lem-pur-extension-evaluation-comparison).
-Proof: the inverse comparison is the mate of the right square by construction.
-Apply the general mate-transpose identity. -/
+/-- The evaluated derived comparison intertwines the actual adjunction transposes. -/
 theorem derivedExtensionEvaluationIso_transpose
     (res : ∀ K : CochainComplex A ℤ,
       ∃ (P : CochainComplex A ℤ) (f : P ⟶ K), p₁ P ∧ QuasiIso f)

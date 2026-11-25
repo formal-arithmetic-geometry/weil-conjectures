@@ -67,26 +67,8 @@ private theorem locallyInjective_zero_of_iso
   simpa using this
 
 /-- Vanishing of positive etale object cohomology on affine opens implies vanishing
-of the corresponding derived direct image along the inclusion of opens.
-Source: Stacks Project, Cohomology on Sites, Tags 072W and 0733(1).
-https://stacks.math.columbia.edu/tag/072W
-(blueprint: lem-sc-etale-positive-direct-image-object-acyclic)
-
-Proof: Choose an injective resolution I of F. The free-abelian representable
-adjunction and the injective-resolution computation of Ext identify the object
-cohomology presheaf with the objectwise homology of I. Precompose by i.op;
-the equality hi identifies i(U) with the canonical etale open object.
-Every open admits an affine open cover, so the hypothesis makes every section
-of this homology presheaf locally zero. Its zero endomorphism is locally
-injective, and hence sheafifies to a monomorphism. Since sheafification is
-additive, that monomorphism is zero, so the sheafification is a zero object.
-Exact sheafification commutes with homology; its counit identifies the
-sheafification of the presheaf complex underlying i_*I with i_*I itself.
-Thus the degree n+1 homology of i_*I is zero. The resolution comparison
-identifies it with R^(n+1)i_*F. If the Ext and section-complex universes differ,
-compare them after ULift; equality of restrictions and zero-object status
-are reflected by ULift. The empty open uses its empty covering, and n+1
-is positive even when n=0. Only this fixed degree is required. -/
+of the corresponding derived direct image along the inclusion of opens
+(Stacks, Tags 072W and 0733). -/
 theorem positiveDirectImageOfObjectAcyclic
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     [i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology]

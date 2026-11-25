@@ -166,9 +166,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
 
 /-! # Base change of one affine coordinate's coefficient descent
-
-Source: vector integration, coefficient recursion in the overlap calculation.
-(blueprint: lem-amb-affine-linear-line-descent-base-change).
 -/
 
 @[expose] public noncomputable section
@@ -415,28 +412,7 @@ attribute [local irreducible] affineLinearLineDescent ordinaryFiniteTensorPullba
   ordinaryFiniteTensorRightMapIso
 
 /-- The single-coordinate descent intertwines its right base-change comparison with
-inverse image of a tensor with the shifted Tate line, naturally in its input.
-Source: blueprint sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md,
-coefficient comparison in the overlap calculation.
-(blueprint: lem-amb-affine-linear-line-descent-base-change).
-
-Proof: expand the one-coordinate right comparison as the affine-chart square
-comparison followed by pullback of the projective-line right comparison. Expand
-line descent as tensor pullback along the chart, inverse-image composition from
-chart followed by projective projection to affine projection, normalized shifted
-line transport, and inverse tensor pullback along the affine projection. Naturality
-of tensor pullback moves the two projective-line comparison factors through the
-chart tensor comparison. Monoidality of the chart square identifies its tensor
-comparison with the comparisons of both factors. Associativity of inverse-image
-composition pastes the projective projection square with the chart square; the
-chart-over-projection identity identifies their composite with the affine square.
-For the line factor, apply the normalized shifted-line square law first to the
-chart square and then to the affine projection square. The intermediate line
-comparisons cancel with their inverses, leaving inverse image of the base's
-normalized line comparison. Apply tensor naturality to the arbitrary input
-isomorphism and cancel the remaining tensor comparison. The resulting expression
-is the right-hand side. All inputs are unbounded derived objects; no finiteness,
-Noetherian hypothesis, positive rank or nonempty scheme is used. -/
+inverse image of a tensor with the shifted Tate line, naturally in its input. -/
 theorem affineLinearLineDescent_baseChange
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

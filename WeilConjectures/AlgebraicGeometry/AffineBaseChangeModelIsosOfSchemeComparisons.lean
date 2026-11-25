@@ -37,11 +37,7 @@ private theorem module_model_acyclic
   exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
     (h _ hL').2
 
-/-- Core categorical construction.
-Source: Stacks Project Tags 08DW, 09RE and 0D5S.
-Proof: use affine K-flat pullback naturality and scalar-extension associativity.
-(blueprint: lem-pc-affine-base-change-model-isos-core).
--/
+/-- Core categorical construction (Stacks, Tags 08DW, 09RE and 0D5S). -/
 theorem affineBaseChangeModelIsosCore
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
@@ -156,7 +152,8 @@ theorem affineBaseChangeModelIsosCore
     hE' hK' σ τ ⟨hgeom.2.2.1, hgeom.2.2.2⟩ d dlim hd hdlim aE aK⟩
 
 
-/-- (blueprint: lem-pc-affine-base-change-model-isos-of-scheme-comparisons) -/
+/-- Compatible derived equivalences on the affine pieces, together with the model complexes,
+give the affine base change model comparison data. -/
 theorem exists_affineBaseChangeModelIsosOfSchemeComparisons
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

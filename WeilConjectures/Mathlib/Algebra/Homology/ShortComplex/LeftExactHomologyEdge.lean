@@ -9,10 +9,20 @@ public import Mathlib.Algebra.Homology.ShortComplex.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
 
-/-! # The homology edge of a left exact functor
+/-!
+# The homology edge of a left exact functor
 
-Source: Stacks Project, cohomology.tex, Tag 0BKJ: the map from cycles to their
-cohomology classes, applied after a functor preserving kernels.
+For a left exact additive functor `F` between abelian categories and a short complex `S`, the
+canonical map `H(F(S)) ⟶ F(H(S))`, induced by the map from cycles to their homology classes.
+
+## Implementation details
+
+Only the preservation of kernels is used: the map out of `H(F(S))` is obtained from the
+universal property of homology as a cokernel.
+
+## References
+
+* [Stacks: Tag 0BKJ]
 -/
 
 @[expose] public section
@@ -25,8 +35,8 @@ namespace CategoryTheory.ShortComplex
 variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
     (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
 
-/-- Kernel preservation identifies the mapped cycle object with the cycles after mapping.
-Source: Stacks, Tag 0BKJ (blueprint: def-weil-pbc-left-exact-homology-edge). -/
+/-- For a left exact functor `F`, the isomorphism `F(Z(S)) ≅ Z(F(S))` between the image of the
+cycles of `S` and the cycles of the image of `S`. -/
 noncomputable def leftExactCyclesIso (S : ShortComplex C) :
     F.obj S.cycles ≅ (S.map F).cycles :=
   (S.map F).isoCyclesOfIsLimit (KernelFork.mapIsLimit _ S.cyclesIsKernel F)
@@ -43,9 +53,7 @@ theorem toCycles_leftExactCyclesIso_inv (S : ShortComplex C) :
   rw [Category.assoc, leftExactCyclesIso_inv_i, toCycles_i, ← F.map_comp, toCycles_i]
   rfl
 
-/-- The canonical homology edge of a left exact additive functor. Only kernels are
-preserved: the map out of homology is supplied by its cokernel universal property.
-Source: Stacks, Tag 0BKJ (blueprint: def-weil-pbc-left-exact-homology-edge). -/
+/-- The canonical homology edge `H(F(S)) ⟶ F(H(S))` of a left exact additive functor `F`. -/
 noncomputable def leftExactHomologyEdge (S : ShortComplex C) :
     (S.map F).homology ⟶ F.obj S.homology :=
   (S.map F).descHomology
@@ -69,8 +77,7 @@ theorem leftExactCyclesIso_inv_naturality {S S' : ShortComplex C} (a : S ⟶ S')
     Category.assoc, ← F.map_comp, cyclesMap_i, F.map_comp,
     ← Category.assoc, leftExactCyclesIso_inv_i]
 
-/-- Naturality of the edge, without assuming that F preserves cokernels.
-Source: Stacks, Tag 0BKJ (blueprint: def-weil-pbc-left-exact-homology-edge). -/
+/-- The homology edge `H(F(S)) ⟶ F(H(S))` is natural in `S`. -/
 @[reassoc]
 theorem leftExactHomologyEdge_naturality {S S' : ShortComplex C} (a : S ⟶ S') :
     homologyMap (F.mapShortComplex.map a) ≫ leftExactHomologyEdge F S' =

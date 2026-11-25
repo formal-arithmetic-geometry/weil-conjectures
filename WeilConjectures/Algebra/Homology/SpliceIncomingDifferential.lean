@@ -11,7 +11,9 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 
 /-! # Splicing a prescribed incoming differential into a cochain complex
 
-Source: Stacks Project, Tag 0BC9, proof, extension of the diagram to the left.
+## References
+
+* Stacks Project, Tag 0BC9
 -/
 
 @[expose] public section
@@ -22,26 +24,7 @@ open CategoryTheory
 
 namespace CochainComplex
 
-/-- Splice an already constructed differential and compatible term comparison into a tail.
-
-Source: Stacks Project, Tag 0BC9, proof, final sentence of the second paragraph
-(blueprint: lem-sc-splice-incoming-differential).
-
-Proof. Replace the term in degree n-1 by M, keeping every other term of C.
-The new outgoing differential is d, transported along the equality (n-1)+1=n.
-All other differentials are the old ones, except the incoming map to M, which is
-zero. The old degree n-2 term is zero by the lower support bound. Composites of
-successive differentials therefore vanish: the only nontrivial new check is hd.
-The identity maps away from n-1 and the zero map in degree n-1 define f, since
-C was zero below n. Define q' by the old comparison away from n-1 and e.hom
-in that degree. The supplied compatibility proves its outgoing square, and its
-incoming square has zero source. The composite comparison equals q degreewise,
-including degree n-1 where the old source is zero. In every unchanged degree
-q' and f have the stated components and are isomorphisms when q is.
-Exactness at n is the assumed exactness of M -> C^n -> C^(n+1), transported
-by the term equalities. For i>n, all three terms and both differentials of the
-short complex computing exactness are unchanged, so exactness transfers. No
-projectivity, quotient-surjectivity, term class, or upper support bound is used. -/
+/-- Splice an already constructed differential and compatible term comparison into a tail. -/
 theorem exists_spliceIncomingDifferential
     {A : Type u₁} [Category.{v₁} A] [Abelian A]
     {B : Type u₂} [Category.{v₂} B] [Abelian B]

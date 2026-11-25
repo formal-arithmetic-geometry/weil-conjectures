@@ -13,15 +13,17 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 /-!
 # The specified boundary exceptional Hom transport
 
-Source: Stacks Project, Tags 0B65 and 0DV0; blueprint boundary-duality discharge,
-ordinary-to-pro-etale realization
-(blueprint: def-weil-boundary-exceptional-comparison-data).
+This is the ordinary-to-pro-etale realization used for boundary duality.
 
 ## Main definitions
 
 - `homTransport`: the specified four-stage Hom transport.
 - `exceptionalOriginMap`: the comparison-unit identification at an etale-origin object.
 - `CounitComparison`: the corresponding transported-counit compatibility property.
+
+## References
+
+* Stacks Project, Tags 0B65, 0DV0, 07A4, 07A6, 099R, 0E48
 -/
 
 @[expose] public noncomputable section
@@ -33,32 +35,26 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale.BoundaryComparison
 
-/-- The existing constant scalar-module coefficient category, at the established site size.
-Source: blueprint ordinary module categories; Stacks 07A4
-(blueprint: def-weil-boundary-exceptional-comparison-data). -/
+/-- The constant scalar-module coefficient category, at the established site size. -/
 abbrev coefficients (A : Type u) [CommRing A] :=
   ModuleCat.{u + 1} (ULift.{u + 1, u} A)
 
-/-- Exact comparison on the ordinary derived categories. Source: Stacks 099R;
-(blueprint: def-weil-boundary-exceptional-comparison-data). -/
+/-- Exact comparison on the ordinary derived categories. -/
 abbrev comparison (C : Type v) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] (T : Scheme.{u}) :=
   (comparisonUpperStar C T).mapDerivedCategory
 
-/-- Ordinary etale direct image. Source: Stacks 07A6;
-(blueprint: def-weil-boundary-exceptional-comparison-data). -/
+/-- Ordinary etale direct image. -/
 abbrev etaleImage (C : Type v) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] {Z T : Scheme.{u}} (i : Z ⟶ T) :=
   (Etale.lowerStar C i).rightDerivedFunctor
 
-/-- Ordinary pro-etale direct image. Source: Stacks 07A6;
-(blueprint: def-weil-boundary-exceptional-comparison-data). -/
+/-- Ordinary pro-etale direct image. -/
 abbrev proetaleImage (C : Type v) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] {Z T : Scheme.{u}} (i : Z ⟶ T) :=
   (lowerStar C i).rightDerivedFunctor
 
-/-- The canonical pullback square, expressed with exact comparison functors.
-Source: Stacks 0E48; (blueprint: def-weil-boundary-exceptional-comparison-data). -/
+/-- The canonical pullback square, expressed with exact comparison functors. -/
 def pullbackSquare (C : Type v) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
     [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
@@ -77,8 +73,7 @@ def pullbackSquare (C : Type v) [Category.{u + 1} C] [Abelian C]
     (Functor.mapDerivedCategoryCompIso E CZ).symm ≪≫
     Functor.isoWhiskerRight E.leftDerivedFunctorIsoMapDerivedCategory.symm (comparison C Z)
 
-/-- The canonical direct-image mate, with its ordinary counit normalization built in.
-Source: Stacks 0B65; (blueprint: def-weil-boundary-exceptional-comparison-data). -/
+/-- The canonical direct-image mate, with its ordinary counit normalization built in. -/
 def directImageMate (C : Type v) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
     [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
@@ -91,17 +86,13 @@ def directImageMate (C : Type v) [Category.{u + 1} C] [Abelian C]
       C i)
     (pullbackSquare C i).hom
 
-/-- The recorded etale exceptional inverse image with the identity-open compactification.
-Source: blueprint finite exceptional inverse image;
-(blueprint: def-weil-boundary-exceptional-comparison-data). -/
+/-- The recorded etale exceptional inverse image with the identity-open compactification. -/
 abbrev etaleExceptional (A : Type u) [CommRing A] [Finite A]
     {Z T : Scheme.{u}} (i : Z ⟶ T) [IsProper i] :=
   letI := (Compactification.ofIsProper i).hasCompactification
   Etale.rightDerivedUpperShriek (ULift.{u + 1, u} A) i
 
-/-- Its actual adjunction, normalized by the identity-open support comparison.
-Source: blueprint ordinary exceptional adjunction; Stacks 0B65
-(blueprint: def-weil-boundary-exceptional-comparison-data). -/
+/-- The ordinary exceptional adjunction, normalized by the identity-open support comparison. -/
 def exceptionalAdjunction (A : Type u) [CommRing A] [Finite A]
     {Z T : Scheme.{u}} (i : Z ⟶ T) [IsProper i] :
     etaleImage (coefficients A) i ⊣ etaleExceptional A i :=
@@ -112,17 +103,13 @@ def exceptionalAdjunction (A : Type u) [CommRing A] [Finite A]
         (coefficients A) i)
 
 /-- The finite exceptional formula, in fixed constant coefficients. Its factors are the
-existing derived functors; only the identity-open compactification instance is installed.
-Source: blueprint finite exceptional inverse image
-(blueprint: def-weil-boundary-exceptional-comparison-data). -/
+existing derived functors; only the identity-open compactification instance is installed. -/
 abbrev proetaleExceptional (A : Type u) [CommRing A] [Finite A]
     {Z T : Scheme.{u}} (i : Z ⟶ T) [IsProper i] :=
   sfFiniteExceptionalFixed A (Compactification.ofIsProper i)
 
 /-- The specified Hom transport: precompose with b, use the comparison adjunction, use
-ordinary exceptional adjunction, then apply C_Z to the resulting morphism.
-Source: Stacks 0DV0 and 0B65; blueprint displayed Hom chain
-(blueprint: def-weil-boundary-exceptional-comparison-data). -/
+ordinary exceptional adjunction, then apply C_Z to the resulting morphism. -/
 def homTransport (A : Type u) [CommRing A] [Finite A]
     {Z T : Scheme.{u}} (i : Z ⟶ T) [IsProper i]
     (H : DerivedCategory.Plus
@@ -139,9 +126,8 @@ def homTransport (A : Type u) [CommRing A] [Finite A]
         (coefficients A) T).homEquiv _ _
         ((directImageMate (coefficients A) i).app H.obj ≫ f)))
 
-/-- The etale exceptional value retains its bounded-below typing from the existing
-finite-coefficient interface. Source: blueprint finite exceptional inverse image
-(blueprint: def-weil-boundary-exceptional-comparison-data). -/
+/-- The etale finite exceptional inverse image, with its bounded-below typing from the
+finite-coefficient interface. -/
 def exceptionalPlus (A : Type u) [CommRing A] [Finite A]
     {Z T : Scheme.{u}} (i : Z ⟶ T) [IsProper i] [CompactSpace T]
     (N : DerivedCategory.Plus
@@ -153,9 +139,7 @@ def exceptionalPlus (A : Type u) [CommRing A] [Finite A]
     Etale.plus_rightDerivedUpperShriek_obj
       (ULift.{u + 1, u} A) i N.obj N.property⟩
 
-/-- The identification C_Z G_e N -> G_p C_T N induced by the actual comparison unit.
-Source: blueprint displayed Hom chain; Stacks 0DV0
-(blueprint: def-weil-boundary-exceptional-comparison-data). -/
+/-- The identification C_Z G_e N -> G_p C_T N induced by the actual comparison unit. -/
 def exceptionalOriginMap (A : Type u) [CommRing A] [Finite A]
     {Z T : Scheme.{u}} (i : Z ⟶ T) [IsProper i]
     (N : DerivedCategory.Plus
@@ -168,9 +152,7 @@ def exceptionalOriginMap (A : Type u) [CommRing A] [Finite A]
 
 /-- The transported exceptional counit is the uniquely specified preimage of the identity,
 written using its etale-origin representative. The identification is exactly the origin-unit
-map, and eta is exactly the inverse of the fixed canonical mate.
-Source: Stacks 0B65 and 0DV0; blueprint counit formula
-(blueprint: def-weil-boundary-exceptional-comparison-data). -/
+map, and eta is exactly the inverse of the fixed canonical mate. -/
 def CounitComparison (A : Type u) [CommRing A] [Finite A]
     {Z T : Scheme.{u}} (i : Z ⟶ T) [IsProper i] [CompactSpace T]
     (N : DerivedCategory.Plus

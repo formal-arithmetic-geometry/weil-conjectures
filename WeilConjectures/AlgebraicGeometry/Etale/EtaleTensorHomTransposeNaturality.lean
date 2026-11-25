@@ -11,7 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Hom.EtaleHomComparisonMode
 
 The unary adjunction version of first-variable naturality, for use without
 unfolding the closed derived structure.
-(blueprint: lem-coef-etale-tensor-hom-transpose-naturality) -/
+
+## References
+
+* Stacks Project, Tag 08J9
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -26,11 +30,7 @@ attribute [local irreducible] _root_.DerivedCategory.monoidalClosed
   _root_.DerivedCategory.instMonoidalCategory
   _root_.DerivedCategory.commShift₂CurriedTensor
 
-/-- Naturality of the derived tensor-Hom transpose in its first variable.
-Source: Stacks Project, Tag 08J9 (`lemma-internal-hom`); Mathlib's parametrized
-adjunction naturality. Proof: apply homEquiv_symm_naturality_one to the published
-parametrized derived tensor-Hom adjunction.
-(blueprint: lem-coef-etale-tensor-hom-transpose-naturality) -/
+/-- Naturality of the derived tensor-Hom transpose in its first variable. -/
 theorem etaleTensorHomTranspose_naturality
     (C : Type*) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]

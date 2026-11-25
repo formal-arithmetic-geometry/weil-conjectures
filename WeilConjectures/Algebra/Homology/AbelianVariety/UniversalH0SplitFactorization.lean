@@ -14,12 +14,14 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 import Mathlib.RingTheory.LocalProperties.Projective
 import WeilConjectures.Algebra.Homology.UniversalH0CokernelLocalFree
 
-/-! Factorization data for a generalized inverse.
+/-!
+# Factorization data for a generalized inverse
 
 This is the algebraic splitting output of the universal rank-one kernel argument.
-The existence of the factorization is the local matrix and projectivity argument
-from Stacks Project, Tags 00O0 and 00NX.
-(blueprint: new-universal-h0-split-factorization)
+
+## References
+
+* Stacks Project, Tags 00O0 and 00NX (local matrix and projectivity argument)
 -/
 
 @[expose] public section
@@ -29,16 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- The local algebra argument supplies a split factorization of the first
- differential through an intermediate projective direct summand.
-
-The proof is the local matrix and projective-cokernel argument of Stacks
-Project, Tags 00O0 and 00NX: localize at primes, reduce the finite projective
-map to an identity block and a zero block using the rank-one residue-kernel
-hypothesis, then use finite presentation and local freeness to obtain a
-projective cokernel. Splitting the quotient and the induced surjection onto
-the image yields the displayed maps and identities.
-(blueprint: new-universal-h0-split-factorization) -/
--- The former identity e ≫ r = 𝟙 (P.X 0) incorrectly made d injective.
+ differential through an intermediate projective direct summand. -/
 theorem universalH0_split_factorization
     (R : Type v) [CommRing R]
     (P : CochainComplex (ModuleCat.{v} R) ℤ)

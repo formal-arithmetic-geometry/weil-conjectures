@@ -13,9 +13,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 
 /-! # The ordinary kernel of consecutive flat coefficient reductions
 
-Source: Stacks Project, proetale.tex, Tag 09C2, proof of (1), and
-sites-cohomology.tex, Tags 06YS and 06YY.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 09C2, 06YS and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -35,17 +35,13 @@ private def adicKernelSectionModule {C : Type w} [SmallCategory C]
 
 attribute [local instance 10000] adicKernelSectionModule
 
-/-- The actual quotient regarded as an A-module.
-Source: Stacks Project, Tag 09C2
-(auxiliary; not a blueprint node). -/
+/-- The actual quotient regarded as an A-module (Stacks, Tag 09C2). -/
 private def adicFiniteUnderlyingCoeffModule (A : Type w) [CommRing A] (J : Ideal A) (n : ℕ) :
     ModuleCat.{w} A :=
   (ModuleCat.restrictScalars (adicFiniteQuotient J n)).obj
     (ModuleCat.of (adicFiniteCoeff J n) (adicFiniteCoeff J n))
 
-/-- The quotient factor, retaining the original scalar action.
-Source: Stacks Project, Tag 09C2
-(auxiliary; not a blueprint node). -/
+/-- The quotient factor, retaining the original scalar action (Stacks, Tag 09C2). -/
 private def adicFiniteUnderlyingCoeffMap (A : Type w) [CommRing A] (J : Ideal A) (n : ℕ) :
     adicFiniteUnderlyingCoeffModule A J (n + 1) ⟶ adicFiniteUnderlyingCoeffModule A J n :=
   ModuleCat.ofHom
@@ -201,21 +197,7 @@ private theorem adicKernel_pure_whisker
     ModuleCat.id_apply] using SheafOfModules.RingedTensor.pure_map R f (𝟙 M) U s m
 
 /-- Tensoring with a constant algebraic quotient is ordinary scalar reduction, naturally
-in the module and compatibly with the specified quotient factor.
-
-Source: Stacks Project, Modules on Sites, Tag 03EK; Cohomology on Sites, Tag 06YY.
-(auxiliary; not a blueprint node).
-
-Proof: constant-module sheafification commutes with restriction of scalars, by its
-adjunction and the scalar square for the constant-ring sheafification units. Its
-value on the regular module is the coefficient-ring unit. Compose these comparisons
-with the extension-tensor comparison. The resulting natural comparison sends a local
-pure tensor s tensor m to s tensor m in scalar extension. Naturality of the constant
-module sheafification unit shows that the algebraic quotient factor acts on its first
-factor as the coefficient-ring transition. The tensor-unit naturality formula then
-shows that the displayed composite sends s tensor m to bar(s) tensor m. This is the
-unique formula defining reductionStep, proving the equality. This argument uses no
-flatness, exactness, kernel or complex, and includes the zero ring and both extreme ideals. -/
+in the module and compatibly with the specified quotient factor (Stacks, Tags 03EK and 06YY). -/
 private theorem adicFiniteReduction_tensor_presentation
     {C : Type w} [SmallCategory C] (T : GrothendieckTopology C)
     (A : Type w) [CommRing A] (J : Ideal A) :
@@ -256,11 +238,8 @@ private theorem adicFiniteReduction_tensor_presentation
   exact (congrArg (fun (x : (finite T A J n).obj.obj U) ↦
     tensorSection (quotient T A J n) M U x m) h).trans ht.symm
 
-/-- Multiplication by the residue ideal kills the concrete transition kernel.
-Source: Stacks Project, Tag 09C2, coefficient sequence in the proof of (1).
-(auxiliary; not a blueprint node).
-Proof: lift the kernel element to J^(n+1). Its product with a member of J lies
-in J^(n+2), hence is zero in the larger quotient. -/
+/-- Multiplication by the residue ideal kills the concrete transition kernel
+(Stacks, Tag 09C2). -/
 theorem adicFiniteCoefficientKernel_annihilated
     (A : Type w) [CommRing A] (J : Ideal A) (n : ℕ) :
     let L := RingHom.ker (adicFiniteFactor J (Nat.le_succ n))
@@ -279,9 +258,8 @@ theorem adicFiniteCoefficientKernel_annihilated
   apply Ideal.Quotient.eq_zero_iff_mem.mpr
   simpa only [← pow_add, Nat.add_comm 1 (n + 1)] using Ideal.mul_mem_mul a.property hb'
 
-/-- The actual successive ideal quotient, with its action of A/J obtained by quotient lift.
-Source: Stacks Project, Tag 09C2, coefficient sequence in the proof of (1).
-(auxiliary; not a blueprint node). -/
+/-- The actual successive ideal quotient, with its action of A/J obtained by quotient lift
+(Stacks, Tag 09C2). -/
 def adicFiniteCoefficientKernelModule
     (A : Type w) [CommRing A] (J : Ideal A) (n : ℕ) : ModuleCat.{w} (adicFiniteCoeff J 0) :=
   let L := RingHom.ker (adicFiniteFactor J (Nat.le_succ n))
@@ -290,9 +268,8 @@ def adicFiniteCoefficientKernelModule
     (adicFiniteCoefficientKernel_annihilated A J n).module
   ModuleCat.of (adicFiniteCoeff J 0) L
 
-/-- Constant-module sheafification of the concrete successive ideal quotient.
-Source: Stacks Project, Tag 09C2, coefficient sequence in the proof of (1).
-(auxiliary; not a blueprint node). -/
+/-- Constant-module sheafification of the concrete successive ideal quotient
+(Stacks, Tag 09C2). -/
 def adicFiniteCoefficientKernelSheaf {C : Type w} [SmallCategory C]
     (T : GrothendieckTopology C) (A : Type w) [CommRing A] (J : Ideal A) (n : ℕ) :
     Mod (constant T (adicFiniteCoeff J 0)) :=
@@ -373,27 +350,8 @@ private def adicFiniteComplexKernel
     exact congrArg (fun a ↦ a.f q) hm
 
 /-- Flat tensor commutes with the concrete consecutive-reduction kernel.
-This statement uses only ordinary module sheaves and complexes.
-
-Source: Stacks Project, Tag 09C2, coefficient sequence in the proof of (1), and
-Modules on Sites, Tags 03CY, 03EK and 03ER.
-(auxiliary; not a blueprint node).
-
-Proof: let L be the kernel of A/J^(n+2) -> A/J^(n+1), with its concrete
-A/J action given above. The algebraic sequence
-0 -> L -> A/J^(n+2) -> A/J^(n+1) -> 0 is exact. The first arrow is inclusion,
-and the second is the quotient factor; its surjectivity follows by lifting a
-representative in A. Constant-module sheafification is exact and commutes with
-restriction of scalars. Thus its first term identifies with restriction of the
-explicit coefficient kernel sheaf. Tensor this sheaf sequence with each flat
-term of K. The extension-tensor comparison identifies the other two terms with
-the ordinary reductions; on a local pure tensor the second arrow sends s tensor x
-to bar(s) tensor x, exactly the defining formula of reductionStep. The kernel
-universal property identifies the first tensor term with the kernel of this map.
-Every comparison is natural in the terms of K, so commutes with differentials;
-the degreewise kernel property is the kernel property in complexes. The argument
-uses termwise flatness only, and works for zero and unit ideals, zero rings,
-empty sites and every complex degree. -/
+This statement uses only ordinary module sheaves and complexes
+(Stacks, Tags 09C2, 03CY, 03EK and 03ER). -/
 theorem adicFiniteTransitionKernel_tensor
     {C : Type w} [SmallCategory C] (T : GrothendieckTopology C)
     (A : Type w) [CommRing A] (J : Ideal A)

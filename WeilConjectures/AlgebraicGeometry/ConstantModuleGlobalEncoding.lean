@@ -12,8 +12,9 @@ import all WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 
 /-! # Global fixed-scalar encoding of internal coefficient modules
 
-Source: Stacks Project, Tags 00YV, 03CY and 04IX.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 00YV, 03CY and 04IX
 -/
 
 @[expose] public section
@@ -305,19 +306,8 @@ private noncomputable def pullbackEncodingComparison
     Functor.isoWhiskerLeft EX.functor (Functor.associator P EY.inverse EY.functor ≪≫
       Functor.isoWhiskerLeft P EY.counitIso ≪≫ P.rightUnitor))
 
-/-- Global encoding, its regular module, and its coordinate-normalized inverse-image comparison.
-
-Source: Stacks Project, Tags 00YV, 03CY and 03D2.
-(auxiliary; not a blueprint node).
-
-Proof: compose sectionModuleEquivalence, AsSmall transport, restriction along c,
-and the constant-ring/fixed-scalar equivalence. The regular module is sent to the
-unit by the section construction, the scalar ring isomorphism and the monoidal
-fixed-scalar equivalence. For inverse image, compare right adjoints on sections:
-the identity additive map is k-linear by the given equation on constant sections.
-Conjugate the two specified adjunctions and apply uniqueness of left adjoints.
-The constructions are explicit; no coordinate or equivalence is chosen from a
-mere unproved existence statement. -/
+/-- Global encoding, its regular module, and its coordinate-normalized inverse-image comparison
+(Stacks, Tags 00YV, 03CY and 03D2). -/
 theorem constant_module_global_encoding
     (X : Scheme.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

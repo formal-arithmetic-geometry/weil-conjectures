@@ -118,11 +118,4 @@ derivation `d : 𝒪_G → e_*𝒪_S` to the point `GrpObj.pointOfDerivation`, `
 The bracket is only defined over a field, where the points over Artinian local `k`-algebras
 are determined by their maps on the local ring at the identity. The base ring of a group scheme
 over an affine base is written `R`; `k` is reserved for a field.
-
-## Blueprint
-
-- `def-wf-lie-algebra-derivation`: the Lie algebra of an algebraic group as its tangent space at the
-  identity.
-- `proposition-cartier-s-theorem`: the Lie algebra clauses of Cartier's theorem.
-- `lemma-stable-subspaces-center`: the Lie algebra of a central subgroup scheme.
 -/

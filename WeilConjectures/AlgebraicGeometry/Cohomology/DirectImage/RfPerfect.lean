@@ -17,24 +17,23 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.OfFlat
 Let `f : X ⟶ S` be quasi-compact and separated with `S = Spec A` affine, `U` a finite cover of
 `X` by affine opens and `ℱ` a quasi-coherent `𝒪_X`-module. Over the affine base, the derived
 direct image `Rf_* ℱ` is represented in `D(A)` by the Čech complex `Č(U, ℱ)`
-(`AlgebraicGeometry.Scheme.Modules.nonempty_homology_cechModuleComplex_linearEquiv`, the
-blueprint's `lemma-coherent-base-change-invertible-sheaves`).
+(`AlgebraicGeometry.Scheme.Modules.nonempty_homology_cechModuleComplex_linearEquiv`).
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Modules.isIso_cechModuleComplexBaseChangeComparison`
-  (`lemma-coherent-base-change-invertible-sheaves--2`): if `ℱ` is flat over `S`, then `Rf_* ℱ` is
+- `AlgebraicGeometry.Scheme.Modules.isIso_cechModuleComplexBaseChangeComparison`: if `ℱ` is flat
+  over `S`, then `Rf_* ℱ` is
   represented by a bounded complex `K` of flat `A`-modules, and for every base change
   `T = Spec B ⟶ S` the canonical base-change map `cechModuleComplexBaseChangeComparison` from the
   derived pullback `Lg^* Rf_* ℱ = B ⊗[A] K` to `Rf_{T*} ℱ_T` is an isomorphism.
-- `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_of_isClosedImmersion`
-  (`lemma-coherent-base-change-invertible-sheaves--1`): for `S` noetherian, `f` projective and `ℱ`
+- `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_of_isClosedImmersion`: for `S`
+  noetherian, `f` projective and `ℱ`
   coherent and flat over `S`, `Rf_* ℱ` is perfect.
-- `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_baseChange_of_isClosedImmersion`
-  (`lemma-coherent-base-change-invertible-sheaves--2`): the derived pullback of `Rf_* ℱ` along
+- `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_baseChange_of_isClosedImmersion`:
+  the derived pullback of `Rf_* ℱ` along
   any `T = Spec B ⟶ S` is perfect and is `Rf_{T*} ℱ_T`.
-- `AlgebraicGeometry.Scheme.Modules.perfect_and_baseChange_cechModuleComplex_of_isProper`
-  (`lemma-coherent-base-change-invertible-sheaves`): the same for `f` proper of finite presentation
+- `AlgebraicGeometry.Scheme.Modules.perfect_and_baseChange_cechModuleComplex_of_isProper`: the same
+  for `f` proper of finite presentation
   and `ℱ` of finite presentation and flat over `S`; it is stated in
   `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange`, downstream of the
   construction of Mumford's complex.
@@ -110,13 +109,7 @@ T --g---> S
 with `T` affine, the canonical base-change map
 (`AlgebraicGeometry.Scheme.Modules.cechModuleComplexBaseChangeComparison`) from this derived
 pullback `Lg^* Rf_* ℱ` to the Čech complex `Č(g'⁻¹ U, g'^* ℱ)` is an isomorphism in `D(B)`; the
-latter represents `Rf_{T*} ℱ_T` since the `g'⁻¹ U` form a finite cover of `Y` by affine opens.
-The proof: the Čech complex of `ℱ_T` is the base change of that of `ℱ`
-(`AlgebraicGeometry.Scheme.Modules.cechModuleComplexBaseChangeIso`), and the truncation stays a
-quasi-isomorphism after base change, the cycles of `Č(U, ℱ)` being flat in degrees `≥ #ι - 1`
-(`AlgebraicGeometry.Scheme.Modules.quasiIso_map_baseChange_ιTruncLE_cechModuleComplex`).
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--2`) -/
+latter represents `Rf_{T*} ℱ_T` since the `g'⁻¹ U` form a finite cover of `Y` by affine opens. -/
 theorem isIso_cechModuleComplexBaseChangeComparison (hℱ : ℱ.IsFlatOver f) {T Y : Scheme.{u}}
     {g : T ⟶ S} {g' : Y ⟶ X} {f' : Y ⟶ T} (H : IsPullback g' f' f g) [IsAffine T]
     [Algebra Γ(S, ⊤) Γ(T, ⊤)] (hg : algebraMap Γ(S, ⊤) Γ(T, ⊤) = g.appTop.hom) :
@@ -186,18 +179,7 @@ noetherian, `f : X ⟶ S` projective, i.e. `f = i ≫ π` for a closed immersion
 `ℱ` a coherent `𝒪_X`-module flat over `S`. Then `Rf_* ℱ`, represented over the affine base by the
 Čech complex `Č(U, ℱ)` of a finite cover `U` of `X` by affine opens
 (`AlgebraicGeometry.Scheme.Modules.nonempty_homology_cechModuleComplex_linearEquiv`), is a perfect
-object of `D(A)`.
-
-The Čech complex is quasi-isomorphic to a bounded complex of flat `A`-modules
-(`AlgebraicGeometry.Scheme.Modules.nonempty_Q_cechModuleComplexTrunc_iso`) whose cohomology
-modules `Γ(S, R^q f_* ℱ)` are finitely generated, hence is perfect
-(`DerivedCategory.isPerfect_of_flat_of_finite_homology`). The finiteness of the cohomology is the
-blueprint's `lem-pc-coherent-hi`
-(`AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage`),
-which covers all proper morphisms; the blueprint quotes `lem-pc-projective-coherent-finiteness`,
-its projective case.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`) -/
+object of `D(A)`. -/
 theorem isPerfect_Q_cechModuleComplex_of_isClosedImmersion [IsLocallyNoetherian S]
     {n : Type u} [Finite n] (i : X ⟶ ℙ(n; S)) [IsClosedImmersion i] (hi : i ≫ ℙ(n; S) ↘ S = f)
     [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) :
@@ -237,12 +219,7 @@ comparison identifies the derived pullback `Lg^* Rf_* ℱ` with `Rf_{T*} ℱ_T`,
 
 Here `Rf_* ℱ` is represented by the bounded complex `K = τ^{≤ #ι - 1} Č(U, ℱ)` of flat
 `A`-modules, so that `Lg^* Rf_* ℱ` is represented by `B ⊗[A] K`, and `Rf_{T*} ℱ_T` by the Čech
-complex `Č(g'⁻¹ U, g'^* ℱ)`; the isomorphism is
-`AlgebraicGeometry.Scheme.Modules.isIso_cechModuleComplexBaseChangeComparison`, and perfectness
-follows from `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_of_isClosedImmersion`
-since base change preserves perfect complexes (`DerivedCategory.isPerfect_Q_obj_baseChange`).
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--2`) -/
+complex `Č(g'⁻¹ U, g'^* ℱ)`. -/
 theorem isPerfect_Q_cechModuleComplex_baseChange_of_isClosedImmersion [IsLocallyNoetherian S]
     {n : Type u} [Finite n] (i : X ⟶ ℙ(n; S)) [IsClosedImmersion i] (hi : i ≫ ℙ(n; S) ↘ S = f)
     [Fintype ι] [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) {T Y : Scheme.{u}}

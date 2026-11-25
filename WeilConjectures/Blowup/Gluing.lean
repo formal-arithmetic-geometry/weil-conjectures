@@ -26,9 +26,8 @@ over `X`, which we reduce to the localization theorem of
 - `AlgebraicGeometry.Scheme.IdealSheafData.blowupFunctor` — the diagram
   `U ↦ AffineBlowup (I.ideal U)` on the affine opens of `X`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.blowup` — the blow-up of `X` along `I`
-  (blueprint: `def:nagata-global-blowup`).
 - `AlgebraicGeometry.Scheme.IdealSheafData.blowupMap` — the structure morphism
-  `I.blowup ⟶ X` (blueprint: `def:nagata-global-blowup-map`).
+  `I.blowup ⟶ X`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.blowupι` — the chart embedding of the affine
   blow-up over an affine open.
 
@@ -36,16 +35,13 @@ over `X`, which we reduce to the localization theorem of
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_blowupι` — over an affine open `U`,
   the blow-up of `X` restricts to the affine blow-up of `U`
-  (blueprint: `prop:nagata-global-blowup-affine-restrict`).
 
-## Implementation notes
+## Implementation details
 
-The blueprint's original roadmap glues over a chosen affine open cover with pairwise basic
-overlap comparisons and explicit cocycle checks. We instead glue over the thin category of
-all affine opens via `Scheme.Cover.RelativeGluingData`, which eliminates the cocycle
-conditions; the overlap content is carried by the functoriality (`AffineBlowup.hom_comp`) and the
+We glue over the thin category of all affine opens via `Scheme.Cover.RelativeGluingData`
+rather than over a chosen affine open cover, which eliminates the cocycle conditions; the
+overlap content is carried by the functoriality (`AffineBlowup.hom_comp`) and the
 equifiberedness of the structure maps.
-
 -/
 
 @[expose] public section
@@ -58,8 +54,7 @@ namespace AlgebraicGeometry.Scheme.IdealSheafData
 
 variable {X : Scheme.{u}} (I : X.IdealSheafData)
 
-/-- The diagram `U ↦ Bl_{I(U)} (Spec Γ(X, U))` over the affine opens of `X`.
-(blueprint: `def:nagata-global-blowup-local-model`) -/
+/-- The diagram `U ↦ Bl_{I(U)} (Spec Γ(X, U))` over the affine opens of `X`. -/
 noncomputable def blowupFunctor : X.affineOpens ⥤ Scheme.{u} where
   obj U := AffineBlowup (I.ideal U)
   map {U V} f :=
@@ -113,9 +108,7 @@ private lemma blowupNatTrans_naturality {U V : X.affineOpens} (hUV : U ≤ V) :
       I.blowupNatTrans.app U ≫ X.homOfLE hUV :=
   I.blowupNatTrans.naturality (homOfLE hUV)
 
-/-- Step A: the equifibered square for a basic-open inclusion of affine opens.
-(blueprint: `def:nagata-global-blowup-overlap-basic-map`,
-`lemma:nagata-global-blowup-overlap-basic`) -/
+/-- Step A: the equifibered square for a basic-open inclusion of affine opens. -/
 lemma isPullback_blowupNatTrans_of_basicOpen {U V : X.affineOpens} (hUV : U ≤ V)
     (f : Γ(X, V.1)) (hU : U.1 = X.basicOpen f) :
     IsPullback (I.blowupFunctor.map (homOfLE hUV)) (I.blowupNatTrans.app U)
@@ -228,8 +221,7 @@ lemma opensRange_blowupFunctor_map {U V : X.affineOpens} (hUV : U ≤ V) :
       show homOfLE hWU ≫ homOfLE hUV = homOfLE hWV from Subsingleton.elim _ _]
     exact hy
 
-/-- The structure maps of the local blow-ups are equifibered.
-(blueprint: `lemma:nagata-global-blowup-glue-data-valid`) -/
+/-- The structure maps of the local blow-ups are equifibered. -/
 lemma blowupNatTrans_equifibered : I.blowupNatTrans.Equifibered := by
   intro U V f
   exact (IsOpenImmersion.isPullback (I.blowupNatTrans.app U) (I.blowupFunctor.map f)
@@ -237,8 +229,7 @@ lemma blowupNatTrans_equifibered : I.blowupNatTrans.Equifibered := by
     (I.blowupNatTrans_naturality (leOfHom f))
     (I.opensRange_blowupFunctor_map (leOfHom f)).symm).flip
 
-/-- The relative gluing datum for the blow-up of `X` along `I`.
-(blueprint: `def:nagata-global-blowup-glue-data`) -/
+/-- The relative gluing datum for the blow-up of `X` along `I`. -/
 noncomputable def blowupGluingData : X.directedAffineCover.RelativeGluingData where
   functor := I.blowupFunctor
   natTrans := I.blowupNatTrans
@@ -250,18 +241,15 @@ instance : (I.blowupFunctor ⋙ Scheme.forget).IsLocallyDirected :=
 instance : Limits.HasColimit I.blowupFunctor :=
   inferInstanceAs (Limits.HasColimit I.blowupGluingData.functor)
 
-/-- The blow-up of `X` along the quasi-coherent ideal `I`.
-(blueprint: `def:nagata-global-blowup`) -/
+/-- The blow-up of `X` along the quasi-coherent ideal `I`. -/
 noncomputable def blowup : Scheme.{u} :=
   I.blowupGluingData.glued
 
-/-- The structure morphism of the blow-up.
-(blueprint: `def:nagata-global-blowup-map`) -/
+/-- The structure morphism of the blow-up. -/
 noncomputable def blowupMap : I.blowup ⟶ X :=
   I.blowupGluingData.toBase
 
-/-- The chart embedding of the affine blow-up over an affine open into the blow-up.
-(blueprint: `def:nagata-global-blowup`, chart embeddings) -/
+/-- The chart embedding of the affine blow-up over an affine open into the blow-up. -/
 noncomputable def blowupι (U : X.affineOpens) :
     AffineBlowup (I.ideal U) ⟶ I.blowup :=
   colimit.ι I.blowupFunctor U
@@ -269,16 +257,13 @@ noncomputable def blowupι (U : X.affineOpens) :
 instance (U : X.affineOpens) : IsOpenImmersion (I.blowupι U) :=
   inferInstanceAs (IsOpenImmersion (colimit.ι I.blowupFunctor U))
 
-/-- The chart embeddings are compatible with the structure morphisms.
-(blueprint: `lemma:nagata-global-blowup-local-maps-agree`,
-`def:nagata-global-blowup-map` defining property) -/
+/-- The chart embeddings are compatible with the structure morphisms. -/
 @[reassoc (attr := simp)]
 lemma blowupι_blowupMap (U : X.affineOpens) :
     I.blowupι U ≫ I.blowupMap = I.blowupNatTrans.app U ≫ U.1.ι :=
   I.blowupGluingData.ι_toBase U
 
-/-- The preimage of an affine open under the blow-up map is the corresponding chart.
-(blueprint: `def:nagata-global-blowup-affine-restriction-map`) -/
+/-- The preimage of an affine open under the blow-up map is the corresponding chart. -/
 lemma blowupMap_preimage (U : X.affineOpens) :
     I.blowupMap ⁻¹ᵁ U.1 = (I.blowupι U).opensRange := by
   have h := I.blowupGluingData.toBase_preimage_eq_opensRange_ι U
@@ -286,8 +271,7 @@ lemma blowupMap_preimage (U : X.affineOpens) :
     Scheme.Opens.opensRange_ι U.1] at h
 
 /-- **Affine restriction of the blow-up**: over an affine open `U`, the blow-up of `X`
-restricts to the affine blow-up of `U`.
-(blueprint: `prop:nagata-global-blowup-affine-restrict`) -/
+restricts to the affine blow-up of `U`. -/
 theorem isPullback_blowupι (U : X.affineOpens) :
     IsPullback (I.blowupNatTrans.app U) (I.blowupι U) U.1.ι I.blowupMap :=
   I.blowupGluingData.isPullback_natTrans_ι_toBase U

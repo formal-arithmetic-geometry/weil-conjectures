@@ -9,24 +9,24 @@ public import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import Mathlib.LinearAlgebra.Pi
 import Mathlib.LinearAlgebra.Projection
 import Mathlib.LinearAlgebra.Basis.VectorSpace
-/-! # Extension of residue cycle comparisons to product terms
-Source: Stacks Project, Tag 0BF2, linear algebra of the Picard comparison.
-(blueprint: lem-sc-residue-cycle-product-comparison)
+/-!
+# Extension of residue cycle comparisons to product terms
+
+Additive comparison maps defined on subspaces `Z i` of `κ ⊗ M i` extend to a single additive map
+on `κ ⊗ ∏ i, M i` along the tensorized coordinate projections.
+
+## References
+
+* [Stacks Project, Tag 0BF2](https://stacks.math.columbia.edu/tag/0BF2)
 -/
 @[expose] public section
 set_option autoImplicit false
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 /-- Extend cycle comparison homomorphisms along tensorized coordinate projections.
-Source: Stacks Project, Tag 0BF2, linear algebra of the Picard comparison.
-(blueprint: lem-sc-residue-cycle-product-comparison)
-
-Proof: Choose a complement of every cycle subspace over the residue field and project
-onto that subspace. Compose with each comparison and the tensorized coordinate
-projection, then take their product. Tensor base change respects composition, so
-the coordinate of every admissible image is its stated cycle. The projection fixes
-that cycle and the given comparison identity proves the product identity. For an
-empty index type the identity is the equality of the unique empty functions. -/
+If each `β i : Z i →+ H i` sends the base change of `b i φ` to `c i` for admissible `φ`, then
+there is `γ : κ ⊗ (∀ i, M i) →+ ∀ i, H i` sending the base change of `LinearMap.pi (b · (φ ·))`
+at `z` to `fun i ↦ c i z`. -/
 theorem residue_cycle_product_comparison
     {R κ : Type*} [CommRing R] [Field κ] [Algebra R κ]
     {ι : Type*} {V : Type*} [AddCommGroup V] [Module R V]

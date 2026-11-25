@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsEqualOpenExistence
 
 /-! # The open locus where two étale sheaf sections agree
 
-Source: Stacks Project, Étale Cohomology, Lemma 59.39.1 (Tag 09XM), applied over an
-étale object of the base scheme (blueprint: lem-weil-pbc-etale-sections-equal-open).
+## References
+
+* Stacks Project, Tag 09XM
 -/
 
 @[expose] public section
@@ -24,27 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Étale Cohomology, Tag 09XM
-(blueprint: lem-weil-pbc-etale-sections-equal-open).
-There is a unique open in the domain of an étale object on which two sections agree,
-characterized by their restrictions along every scheme morphism. Restriction along
-`a` is the inverse-image adjunction unit followed by restriction along `(a, id)`.
-
-Proof:
-1. On the étale site of `V.left`, the presheaf assigning a singleton where the two
-   sections agree and the empty set elsewhere is a subsheaf of the final sheaf.
-   Restriction preserves agreement; the equalizer sheaf axiom of
-   situation-conventions glues the local singleton sections.
-2. By lem-weil-pbc-etale-subsheaf-final-open (Tag 04HV), this subsheaf is represented
-   by an open `W`. It has the required property for étale test objects. Two candidate
-   opens are equal by testing their own open immersions and obtaining both inclusions.
-3. By def-weil-pbc-geometric-stalks and
-   lem-weil-pbc-sets-etale-inverse-image-stalk-germ (Tag 03Q1), a geometric point
-   lies in `W` exactly when the two germs agree. Thus equality after an arbitrary
-   pullback forces every point of the test scheme into `W`, giving factorization.
-   Conversely, unit restriction compatibility from
-   lem-weil-pbc-sets-etale-inverse-image-composition-units pulls equality on `W`
-   back to `W ×_S T`; the map `(a, id)` factors through this fibre product. -/
+/-- There is a unique open in the domain of an étale object on which two sections agree,
+characterized by their restrictions along every scheme morphism (Stacks, Tag 09XM). -/
 theorem existsUnique_etaleSections_equal_open (S : Scheme.{u})
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (V : S.Etale) (s t : F.obj.obj (op V)) :

@@ -14,8 +14,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 /-!
 # Tensor compatibility for étale sum extension
 
-Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/
-thm-asd-smooth-tensor.md, proof paragraph 3 (blueprint: lem-asd-etale-sum-extension-tensor).
+## References
+
+* Stacks Project, Tag 0G7E
 -/
 
 @[expose] public section
@@ -32,11 +33,9 @@ namespace AlgebraicGeometry.Etale
 -- Prefer the direct sheaf-colimit construction when elaborating the derived adjunction.
 attribute [local instance 2000] Sheaf.instHasColimitsOfShape
 
-/-- The canonical tensor comparison for exact, termwise derived inverse image. Transport
-`leftDerivedUpperStarTensorIso` through `leftDerivedUpperStarIsoMapDerivedCategory` in both
-arguments and in the value. Source: Stacks, Tag 0G7E and the tensor comparison in
-lem-weil-pbc-ringed-topoi-derived-tensor-pullback
-(blueprint: lem-asd-etale-sum-extension-tensor). -/
+/-- The canonical tensor comparison for exact, termwise derived inverse image, obtained by
+transporting `leftDerivedUpperStarTensorIso` through `leftDerivedUpperStarIsoMapDerivedCategory`
+in both arguments and in the value. -/
 noncomputable def etaleSumExtensionTensorPullbackIso
     (A : Type (u + 1)) [CommRing A] {V T : Scheme.{u}} (v : V ⟶ T)
     (B C : DerivedCategoryModule A T) :

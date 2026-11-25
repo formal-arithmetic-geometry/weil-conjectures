@@ -9,8 +9,9 @@ public import WeilConjectures.Algebra.Homology.SixFunctors.SemilinearSliceScalar
 
 /-! # Extension of strict coefficient systems to the ambient site
 
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03CY.
-(blueprint: lem-sf-slice-system-extension-construction).
+## References
+
+* Stacks Project, Modules on Sites, Tags 03DI and 03CY.
 -/
 
 @[expose] public noncomputable section
@@ -196,20 +197,7 @@ private theorem extensionFunctor_additive : (extensionFunctor.{c, v, r} B U).Add
   rw [Functor.map_add, Functor.map_add, Functor.map_add]
   rfl
 
-/-- Direct-sum extension and module sheafification extend strict semilinear systems.
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03CY
-(blueprint: lem-sf-slice-system-extension-construction).
-
-Proof: At level n apply the actual localizedSystemExtension for B_n. On the
-extension presheaves send the original summand [x]_f to [t(x)]_f for each system
-transition t. This is semilinear over the corresponding coefficient transition.
-The common abelian sheafification of the source, and uniqueness of its extended
-scalar action, factor this into a module map to the scalar restriction of the
-level-m extension. Identity and composition agree on all summands because those
-of t do; sheafification uniqueness extends their equality. Extend system maps
-in exactly the same way. Their transition squares hold on each summand by the
-original strict morphism square. Identities, composition and additivity follow
-from the same direct-sum formulas and functoriality of module sheafification. -/
+/-- Direct-sum extension and module sheafification extend strict semilinear systems. -/
 theorem exists_sliceSystemExtensionPresentation :
     Nonempty (SliceSystemExtensionPresentation.{c, v, r} B U) := by
   refine ⟨{

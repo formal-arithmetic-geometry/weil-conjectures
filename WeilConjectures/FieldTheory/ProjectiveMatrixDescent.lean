@@ -18,8 +18,23 @@ import WeilConjectures.FieldTheory.MatrixFormCentralSimple
 /-!
 # Descent of a locally constant projective matrix action
 
-Source: Stacks Project, the construction preceding Theorem 03R7.
-(blueprint: lem-sc-projective-matrix-descent).
+A locally constant family `b` of invertible matrices over `Kˢᵉᵖ`, indexed by `Gal(Kˢᵉᵖ/K)` and
+satisfying the cocycle conditions for the conjugation action, descends to a central simple
+`K`-algebra `A` with `Kˢᵉᵖ ⊗[K] A ≅ Mₙ(Kˢᵉᵖ)` compatibly with the twisted Galois action.
+
+## Implementation details
+
+`A` is constructed explicitly as the subalgebra of matrices fixed by the twisted action
+`T_g(M) = b(g) * g(M) * b(g)⁻¹`. By local constancy, `b` factors through a finite Galois
+quotient `Gal(L/K)`, and `A` is the invariant subalgebra of `Mₙ(L)`. Averaging sums
+`∑ g(a) T_g(v)` together with linear independence of characters show that the invariants span
+over `L`, so the multiplication map `L ⊗[K] A → Mₙ(L)` is an isomorphism; this makes `A`
+central simple. The argument needs no division by the order of the Galois group and also
+covers `n = 1` and unnormalized scalar lifts.
+
+## References
+
+* Stacks Project, the construction preceding Theorem 03R7
 -/
 
 @[expose] public section
@@ -30,40 +45,9 @@ namespace Field
 
 open scoped TensorProduct
 
-/-- A locally constant matrix conjugation action descends to a central simple algebra.
-
-Proof: on the matrix algebra put T_g(M) = b(g) * g(M) * b(g)^(-1).
-The two action hypotheses give T_1 = id and T_g T_h = T_(gh). Each T_g is a
-semilinear algebra automorphism by its displayed conjugation formula. Construct
-A as the K-subalgebra of matrices fixed by every T_g, rather than choosing an
-unspecified algebra. Local constancy on the compact Galois group gives finite
-image for b. Choose an open normal subgroup N such that b is constant on its
-cosets, and shrink N to fix all entries of its finitely many values. Let L be
-its finite Galois fixed field. The identity hypothesis implies that b(1) commutes
-with every matrix, hence is scalar. For g in N, b(g) = b(1), hence T_g is entrywise
-g-action. Thus A lies in Matrix (Fin n) (Fin n) L and is exactly the invariants
-of the induced semilinear action of Gamma = Gal(L/K).
-
-For any vector v in that matrix space and a in L, the sum of g(a)T_g(v) over
-Gamma is invariant, by reindexing the sum. If an L-linear functional kills all
-these sums, linear independence of distinct field automorphisms implies it kills
-every T_g(v), hence every v. Thus invariants span over L. Select an L-basis from
-these invariant vectors. An invariant linear combination has coefficients fixed
-by Gamma, hence in K; the selected vectors are therefore also a K-basis of A.
-The explicit multiplication map L tensor_K A to the matrix algebra is now an
-algebra isomorphism. In particular A is finite dimensional. A nonzero two-sided
-ideal extends to a nonzero ideal of the simple matrix algebra and so to the whole
-algebra. Extension of scalars preserves dimensions, forcing the ideal to equal A.
-A central element extends to a scalar matrix, and invariance forces that scalar
-into K. Thus the constructed A is central simple. Nonzero n ensures nontriviality.
-Extend this multiplication isomorphism to Ksep to obtain e. Invariance says
-b(g) * g(e(1 tensor a)) * b(g)^(-1) = e(1 tensor a); multiplying by the inverses
-gives exactly the displayed descent equation. This also handles n = 1 and
-unnormalized scalar lifts, without any division by the order of Gamma.
-
-Source: Stacks Project, the construction preceding Theorem 03R7; the averaging
-and independence argument for finite Galois descent is expanded here.
-(blueprint: lem-sc-projective-matrix-descent). -/
+/-- A locally constant matrix conjugation action descends to a central simple algebra: there
+are a central simple `K`-algebra `A` and an isomorphism `e : Kˢᵉᵖ ⊗[K] A ≃ Mₙ(Kˢᵉᵖ)` with
+`g(e(1 ⊗ a)) = b(g)⁻¹ * e(1 ⊗ a) * b(g)` for all `g` and `a`. -/
 theorem exists_CSA_of_matrix_descent_action (K : Type u) [Field K]
     (n : ℕ) (hn : n ≠ 0)
     (b : (SeparableClosure K ≃ₐ[K] SeparableClosure K) →

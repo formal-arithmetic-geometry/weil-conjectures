@@ -22,8 +22,9 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageAffineBasisVanishing
 
 /-! # Local bounds uniform in the quasi-coherent coefficient module
 
-Source: Stacks Project, Tag 01XJ, finite-cover argument over an affine base.
-(blueprint: lem-pc-local-uniform-higher-direct-image-bound).
+## References
+
+* [Stacks, Tag 01XJ](https://stacks.math.columbia.edu/tag/01XJ)
 -/
 
 @[expose] public section
@@ -60,22 +61,7 @@ private theorem isZero_openCohomology_union
 
 /-- Every point has a neighbourhood with a higher-direct-image bound independent of
 its quasi-coherent coefficient module. The target need not be quasi-compact.
-Source: Stacks Project, Tag 01XJ, proof of (3), affine-base finite-cover argument.
-(blueprint: lem-pc-local-uniform-higher-direct-image-bound).
-
-Proof: Choose an affine neighbourhood U of s and put Y=f^{-1}U, T=U and g=f|_U.
-The scheme Y is quasi-compact and quasi-separated. Apply quasi-compact-open induction
-to P(W): there exists n such that for every quasi-coherent F on Y and every affine
-open V of T, H^p(W intersect g^{-1}V,F) vanishes for p >= n. For affine W take n=1:
-the map W to T is affine, so W intersect g^{-1}V is affine, and affine-open module
-cohomology vanishes. For W=A union B combine bounds a,b,c for A,B,A intersect B.
-Mayer-Vietoris shows vanishing at p=q+1 when the two degree-p terms on A and B and
-the degree-q intersection term vanish. Thus max(max(a,b),c)+1 is a bound.
-At W=Y this gives a bound independent of F and V. Restrict M to Y; it stays
-quasi-coherent. Apply the affine-basis higher-direct-image vanishing criterion,
-which uses the sheafified cohomology presheaf and restriction of injective resolutions.
-Only affine open base changes are needed for this local conclusion; arbitrary affine
-base changes are unnecessary. The empty affine chart and empty Y are included. -/
+(Stacks, Tag 01XJ) -/
 theorem exists_local_uniform_higherDirectImage_bound
     {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] (s : S) :
     ∃ (U : S.Opens) (n : ℕ), s ∈ U ∧

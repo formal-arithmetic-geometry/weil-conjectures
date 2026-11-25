@@ -14,6 +14,10 @@ import all WeilConjectures.CategoryTheory.RoosConeCalculus.RoosConeCalculus
 
 Compose the fixed strict tower comparisons, the supplied signed Roos comparison,
 and localization, retaining their precise components.
+
+## References
+
+* Stacks Project, Tags 011G, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -62,10 +66,7 @@ private theorem signedRoos_unique (ρ σ : PodSignedRoosShift A)
   exact (Category.comp_id _).symm.trans
     (hleft.symm.trans (hright.trans (Category.comp_id _)))
 
-/-- The two prescribed cone-coordinate laws force naturality of the Roos shift.
-Source: Stacks 011G and 0941 (blueprint: lem-pod-tensor-roos-shift-naturality).
-Proof: identify the supplied maps with the native mapping-cocone comparison by
-its two coordinates, then apply the native Roos commShift naturality. -/
+/-- The two prescribed cone-coordinate laws force naturality of the Roos shift. -/
 theorem podTensorSignedRoosShift_naturality (ρ : PodSignedRoosShift A) (hρ : ρ.Laws)
     {C D : ℕᵒᵖ ⥤ CochainComplex A ℤ} (f : C ⟶ D) (r : ℤ) :
     integralOperationsRoosFunctor.map (whiskerRight f (shiftFunctor _ r)) ≫
@@ -117,9 +118,7 @@ theorem podTensorSignedRoosShift_naturality (ρ : PodSignedRoosShift A) (hρ : �
   rw [← he (g⟦r⟧'), ← he g] at h
   exact h
 
-/-- The supplied signed Roos comparison gives a natural shift isomorphism.
-Source: Stacks 011G and 0941 (blueprint: lem-pod-tensor-roos-shift-naturality).
--/
+/-- The supplied signed Roos comparison gives a natural shift isomorphism. -/
 def podTensorRoosShiftIso {A : Type a} [Category.{b} A] [Abelian A]
     [HasCountableProducts A] (ρ : PodSignedRoosShift A) (hρ : ρ.Laws) (r : ℤ) :
     podTensorTowerShift r ⋙ integralOperationsRoosFunctor (A := A) ≅

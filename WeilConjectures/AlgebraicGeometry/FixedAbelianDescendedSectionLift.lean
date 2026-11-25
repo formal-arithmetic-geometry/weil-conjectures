@@ -13,8 +13,11 @@ import all WeilConjectures.AlgebraicGeometry.AbelianPullbackGlobalSectionsCompar
 
 /-! # Fixed-coefficient lifting on a descended qcqs étale object
 
-Source: Stacks Project, Sites Tags 09YM and 09YN, and Étale Cohomology Tag 09YQ.
-(blueprint: lem-weil-pbc-fixed-abelian-descended-section-lift).
+## References
+
+* [Stacks Project, Tag 09YM](https://stacks.math.columbia.edu/tag/09YM)
+* [Stacks Project, Tag 09YN](https://stacks.math.columbia.edu/tag/09YN)
+* [Stacks Project, Tag 09YQ](https://stacks.math.columbia.edu/tag/09YQ)
 -/
 
 @[expose] public section
@@ -30,32 +33,8 @@ private lemma pullbackComp_first {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z
   subst fg
   exact MorphismProperty.Over.pullbackComp_left_fst_fst f g A
 
-/-- A section of the inverse image of one stage sheaf lifts to a later stage.
-Source: Stacks Project, Sites Tag 09YN, proof of lemma-colimit, and Étale
-Cohomology Tag 09YQ, degree-zero affine-site comparison.
-(blueprint: lem-weil-pbc-fixed-abelian-descended-section-lift).
-
-Proof: Restrict the scheme diagram to the directed upper tail of i. Its limit
-is the same scheme, since the tail is cofinal. Present its full affine étale
-sites by the category colimit, using descent of finitely presented objects,
-arrows, and equalities. The affine-site topos equivalence identifies inverse
-images with their affine-site inverse images. The section formula of 09YN
-for the single coefficient sheaf H expresses each inverse-image section as a
-filtered colimit of its stage inverse-image sections. The first-projection
-conditions on gamma and delta, and their equations over the base schemes,
-uniquely identify their composites with the pullback-pasting comparison.
-Uniqueness of adjoints identifies the section-colimit legs with the unit for
-the limit projection followed by the inverse of upperStarComp and restriction
-along that pasting comparison. Thus every affine section has a representative.
-For a qcqs object, choose a finite affine cover and finite affine covers of its
-pairwise intersections. Lift the finitely many sections on the cover to a
-common stage; descend their overlap equalities to one further stage, using
-the eventual equality assertion in the same filtered section colimits. The
-sheaf condition glues the resulting matching family, and separatedness
-identifies its limit image with the original section. The empty cover yields
-the zero section; a nonempty tail supplies its stage. No varying coefficients,
-transition maps between different coefficient sheaves, or sheaf colimit occur
-in this assertion. -/
+/-- A section of the inverse image of one stage sheaf lifts to a later stage. No varying
+coefficients or sheaf colimit occur. (Stacks, Tags 09YN and 09YQ.) -/
 theorem fixed_abelian_descended_section_lift
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

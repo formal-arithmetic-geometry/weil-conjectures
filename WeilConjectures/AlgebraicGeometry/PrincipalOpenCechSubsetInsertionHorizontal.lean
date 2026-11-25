@@ -11,9 +11,10 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetHorizontalFaces
 
 /-! # Horizontal differential of explicit subset insertion
 
-Source: Stacks Project, Tag 08C1 and equation (20.40.0.1) (Tag 08C0),
-and Tag 01FG, ordered-complex differential preceding Definition 20.23.2.
-(blueprint: lem-sc-principal-open-cech-subset-insertion-horizontal).
+## References
+
+* Stacks Project, Tag 08C1 and equation (20.40.0.1) (Tag 08C0).
+* Stacks Project, Tag 01FG (differential of the ordered complex).
 -/
 
 @[expose] public section
@@ -116,28 +117,8 @@ private theorem principalSubsetInsertOne_horizontal
     simp only [Category.assoc, Iso.inv_hom_id_assoc]
   exact principalSubsetHorizontalFaces A r f J hle he n S₀ x hpq'
 
-/-- The horizontal total differential on explicit subset coordinates.
-
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1) (Tag 08C0), and
-Tag 01FG, ordered-complex differential preceding Definition 20.23.2.
-(blueprint: lem-sc-principal-open-cech-subset-insertion-horizontal).
-
-Proof: Expand insertion as its finite sum, and apply Mathlib's `ι_D₁` and
-`d₁_eq` to each summand. Its horizontal sign is one. Extension by zero identifies
-the horizontal map with alternatingCechDifferential, whose target tuple coordinate
-is the signed sum of restrictions from the tuples obtained by deleting one entry.
-Increasing tuples are uniquely determined by their ranges. For the increasing
-enumeration of a target subset S, deleting the position occupied by j gives the
-increasing enumeration of S.erase j. That position is exactly the cardinality of
-the elements of S smaller than j. Section transport commutes with restrictions:
-compose the open equality maps and use functoriality of the presheaf, naturality
-of restriction, and the natural isomorphism overFunctorEquiv. The resulting open
-map is the one from hle, since opens form a thin category. Use he to identify the
-coefficient degrees, and proof irrelevance to identify the equality transports.
-Regroup the finite sums by target subsets, and reassemble the tuple coordinates
-using the total inclusions. For singleton targets the erased set is empty: the
-source column would be negative and is zero by extension. For an empty cover
-all sums are zero. These cover the boundary cases without a coefficient bound. -/
+/-- The horizontal total differential on explicit subset coordinates
+(Stacks, Tags 08C1, 08C0 and 01FG). -/
 theorem principalSubsetInsertion_horizontal
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex (Spec (.of A)).Modules ℤ) :

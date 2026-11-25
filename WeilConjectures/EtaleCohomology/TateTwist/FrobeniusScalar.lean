@@ -23,9 +23,9 @@ the multiplication by a scalar `c_r ∈ Λ`
 `Λ_Y(m) ⊗ Λ_Y(m') ≅ Λ_Y(m + m')` are Weil pairings for the Tate data, these scalars are
 multiplicative, `c_{m + m'} = c_m c_{m'}`; each of them is a unit, so `c_r = c_1 ^ r`.
 
-This is the formal half of the normalization `prose-10-21`: geometric
-Frobenius acts on `Λ(r)` by `q^{-r}`, which comes down to `c_1 = q⁻¹`; that value is computed for
-the genuine Tate twist in `WeilConjectures.EtaleCohomology.TateTwist.FrobeniusNormalization`.
+This is the formal half of the normalization that geometric Frobenius acts on `Λ(r)` by
+`q^{-r}`, which comes down to `c_1 = q⁻¹`; that value is computed for the genuine Tate twist in
+`WeilConjectures.EtaleCohomology.TateTwist.FrobeniusNormalization`.
 
 ## Main definitions
 
@@ -140,9 +140,7 @@ theorem exists_frobeniusOperator_tateWeilDatum_eq_smul (r : ℤ) :
 
 /-- The *Frobenius scalar* `c_r ∈ Λ` of the Tate datum over a separably closed field: the
 Frobenius operator of `τ_r : Lh^* Λ(r) ≅ Λ(r)` on `H⁰(Spec k, Λ(r)) = Hom(Λ, Λ(r))`, a free
-`Λ`-module of rank one, is the multiplication by `c_r`
-(`AlgebraicGeometry.Etale.frobeniusOperator_tateWeilDatum_eq_smul`). For the geometric Frobenius
-of `k̄` over `𝔽_q` it is `q^{-r}` (`prose-10-21`). -/
+`Λ`-module of rank one, is the multiplication by `c_r`. -/
 noncomputable def tateFrobeniusScalar (r : ℤ) : Λ :=
   (exists_frobeniusOperator_tateWeilDatum_eq_smul Λ h r).choose
 
@@ -163,8 +161,7 @@ theorem tateFrobeniusScalar_eq_of_frobeniusOperator_eq_smul {r : ℤ}
   rw [frobeniusOperator_tateWeilDatum_eq_smul] at ha
   exact sub_eq_zero.1 (hx _ (by rw [sub_smul, ha, sub_self]))
 
-/-- The Frobenius scalars are units: the Frobenius operator sends a generator
-`Λ ≅ Λ(r)` of `H⁰(Spec k, Λ(r))` to the isomorphism `ε⁻¹ ≫ Lh^* x ≫ τ_r`. -/
+/-- The Frobenius scalars `c_r` are units. -/
 theorem isUnit_tateFrobeniusScalar (r : ℤ) : IsUnit (tateFrobeniusScalar Λ h r) := by
   obtain ⟨e⟩ := nonempty_tateObject_iso_unit Λ k r
   have hF := frobeniusOperator_tateWeilDatum_eq_smul Λ h r e.inv
@@ -177,10 +174,7 @@ theorem isUnit_tateFrobeniusScalar (r : ℤ) : IsUnit (tateFrobeniusScalar Λ h 
   rw [this]
   infer_instance
 
-/-- **The Frobenius scalars are multiplicative**, `c_{m + m'} = c_m c_{m'}`: the products
-`Λ(m) ⊗ Λ(m') ≅ Λ(m + m')` are Weil pairings
-(`AlgebraicGeometry.Etale.isWeilPairing_tateObjectAddIso`), so their degreewise pairings
-intertwine the Frobenius operators, and the pairing of two generators is a generator. -/
+/-- **The Frobenius scalars are multiplicative**: `c_{m + m'} = c_m c_{m'}`. -/
 theorem tateFrobeniusScalar_add (m m' : ℤ) :
     tateFrobeniusScalar Λ h (m + m') = tateFrobeniusScalar Λ h m * tateFrobeniusScalar Λ h m' := by
   obtain ⟨e⟩ := nonempty_tateObject_iso_unit Λ k m
@@ -244,10 +238,9 @@ theorem tateFrobeniusScalar_eq_zpow (r : ℤ) :
     rw [zpow_sub_one, Units.val_mul, h₁, mul_assoc, ← Units.val_mul, mul_inv_cancel,
       Units.val_one, mul_one]
 
-/-- Blueprint `definition-weil-structure--1` (the formal part of the twist normalization of
-`prose-10-21`): over a separably closed field, the Frobenius operator
-of the Tate datum `τ_r` on `H⁰(Spec k, Λ(r))` is the multiplication by `c_1 ^ r`, for the unit
-`c_1` by which it acts on `Λ(1)`. -/
+/-- Over a separably closed field, the Frobenius operator of the Tate datum `τ_r` on
+`H⁰(Spec k, Λ(r))` is the multiplication by `c_1 ^ r`, for the unit `c_1` by which it acts on
+`Λ(1)`. -/
 theorem frobeniusOperator_tateWeilDatum_eq_zpow_smul (r : ℤ)
     (x : 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ tateObject Λ _ r) :
     frobeniusOperator h (tateWeilDatum Λ h r).hom x =

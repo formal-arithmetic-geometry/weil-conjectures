@@ -15,8 +15,10 @@ import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealization
 
 /-! # Perfect internal-Hom pullback with no module localization choice
-Source: Stacks Project, cohomology.tex, Tags 08I3 and 0FPC.
-(blueprint: lem-sc-mixed-perfect-internal-hom-pullback-isIso).
+
+## References
+
+* Stacks Project, Tags 08I3 and 0FPC.
 -/
 
 @[expose] public section
@@ -57,25 +59,9 @@ private noncomputable def mixedTensorHomCore (S : Scheme.{u}) (K : schemeDerived
           Category.id_comp, Equiv.apply_symm_apply] using
           (he.1 A A K K L L' (𝟙 A) (𝟙 K) c ((e A K L).symm h)).symm }
 
-/-- The evaluation-mate map on sheaf internal Hom is invertible for perfect M.
-It uses no global sections or scalar extension and assumes no flatness or qcqs.
-Source: Stacks Project, cohomology.tex, Remark 08I3 and Example 0FPC.
-(blueprint: lem-sc-mixed-perfect-internal-hom-pullback-isIso).
-
-Proof: locally resolve M by a bounded complex of finite projective modules. The
-canonical tensor-Hom equivalence computes evaluation on this representative.
-RHom(M,N) is N tensored with the finite-projective dual of M, even for unbounded
-N. Termwise pullback preserves finite-projective duals and their evaluation.
-The canonical tensor pullback comparison, normalized to the shared derived
-counit, identifies pullback of this tensor with tensor of the pulled-back factors.
-Consequently the displayed adjunct is the finite-projective tensor-Hom
-isomorphism on every such neighbourhood. Compatibility with restriction and
-cohomology shows it is globally invertible. Equivalently, transport the perfect
-dual's exact evaluation/coevaluation pairing through strong monoidal pullback;
-the triangle identities identify its adjunct with this map. Applying the
-injective tensor-Hom equivalence checks the equality: both evaluations are
-pullback of evaluation preceded by the inverse canonical tensor comparison.
-For M=0 or an empty source the map is the unique isomorphism between zero objects. -/
+/-- The evaluation-mate map on sheaf internal Hom is invertible for perfect `M`.
+It uses no global sections or scalar extension and assumes no flatness or qcqs
+(Stacks, Tags 08I3 and 0FPC). -/
 theorem mixedPerfect_internalHom_pullback_isIso
     {T X : Scheme.{u}} (g : T ⟶ X)
     [∀ U : X.Opens,

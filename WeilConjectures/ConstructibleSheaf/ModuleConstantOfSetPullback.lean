@@ -16,8 +16,22 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
 /-!
 # Recovering constant modules from a constant underlying inverse image
 
-Source: Stacks Project, Tag 0DV5 (2)--(3), Tag 0DV6, and sites-modules Tag 093S.
-(blueprint: lem-weil-pbc-module-constant-of-set-pullback)
+On a connected scheme `X`, the inverse image along `f : X ⟶ U` of a sheaf of modules is
+constant as soon as the inverse image of its underlying sheaf of sets is constant
+(`AlgebraicGeometry.Scheme.module_pullback_isConstant_of_set_pullback`).
+
+## Implementation details
+
+The inverse image of sheaves of modules commutes with the underlying-set functor, so the
+hypothesis makes the underlying sheaf of the module inverse image constant. On a connected
+nonempty scheme the global sections of a constant sheaf of sets are its value, so the
+constant-sheaf functor on sets is fully faithful. Hence the counit of the constant/global
+sections adjunction for modules is an isomorphism after forgetting the module structure, and
+therefore an isomorphism of sheaves of modules.
+
+## References
+
+* Stacks Project, Tag 0DV5 (2)--(3), Tag 0DV6, and Tag 093S.
 -/
 
 @[expose] public section
@@ -102,24 +116,7 @@ private theorem set_constant_sections_bijective (X : Scheme.{u}) [ConnectedSpace
     exact ha
 
 /-- On a connected scheme, a module inverse image is constant when its underlying set
-inverse image is constant. No finiteness or local constancy hypothesis is required.
-Source: Stacks Project, Tag 0DV5 (2)--(3), Tag 0DV6, and sites-modules Tag 093S.
-(blueprint: lem-weil-pbc-module-constant-of-set-pullback)
-
-Proof: inverse image of module sheaves commutes with the underlying-set functor:
-construct inverse image by sheafifying the filtered neighbourhood colimits, whose
-module structures are the colimit module structures. The underlying-set functor
-preserves these filtered colimits and sheafification. Thus the hypothesis makes the
-underlying sheaf of the module inverse image constant. On a connected nonempty scheme,
-global sections of a constant set sheaf are exactly its value: sections are locally
-constant functions and hence constant. Consequently the constant-sheaf functor is
-fully faithful and preserves finite products. Transport addition, zero, negation and
-each scalar multiplication through the underlying constant-sheaf identification;
-full faithfulness makes them operations on its value. Faithfulness gives the module
-axioms. The identification then lifts to a module-sheaf isomorphism from the constant
-sheaf of this module to the inverse image. Equivalently, the constant/global-sections
-counit is an isomorphism after forgetting modules, hence is an isomorphism of module
-sheaves. This also covers the zero module and arbitrary coefficient rings. -/
+inverse image is constant. No finiteness or local constancy hypothesis is required. -/
 theorem module_pullback_isConstant_of_set_pullback
     {U X : Scheme.{u}} [ConnectedSpace X]
     (R : Type (u + 1)) [CommRing R] (f : X ⟶ U)

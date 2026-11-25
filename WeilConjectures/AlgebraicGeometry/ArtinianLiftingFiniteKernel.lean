@@ -13,7 +13,10 @@ import Mathlib.RingTheory.LocalRing.RingHom.Basic
 import WeilConjectures.AlgebraicGeometry.ArtinianIdealLengthOneFiltration
 
 /-! # Extending Artinian lifting tests to arbitrary kernels
-Source: Stacks Project, Algebra, Tag 02HT, proof of (4) implies (1).
+
+## References
+
+* Stacks Project, Tag 02HT
 -/
 
 @[expose] public section
@@ -54,26 +57,8 @@ private theorem factor_kernel_length
     (Ideal.Quotient.mk_surjective (I := I))]
   exact hlen
 
-/-- Length-one lifting tests suffice for a surjection of Artinian local rings.
-
-Source: Stacks Project, Algebra, Tag 02HT, proof of (4) implies (1), the filtration
-of I_N and successive application of the lifting condition.
-(blueprint: lem-weil-pbc-artinian-lifting-finite-kernel).
-
-Proof in words: Filter ker phi by the finite ideal filtration with length-one
-successive quotients. Every filtration ideal lies in the maximal ideal, since
-ker phi does so for a surjection onto a nonzero local ring. Consequently all the
-quotients are nonzero Artinian local rings. Identify the final quotient with B.
-Starting with a, descend through the filtration by applying hlift to each map
-B'/K_i -> B'/K_(i+1). The kernel is K_(i+1)/K_i; restriction along the surjection
-B' -> B'/K_i identifies its submodule lattice, hence preserves its length one.
-Each lifted map still has inverse image maximal ideal q: composing with a
-surjective local map does not change that inverse image. Each application also
-preserves the structural map from R. At the bottom identify B'/0 with B'.
-To use tests in Type (max u v), transport all quotient rings and their maps along
-the ULift ring equivalence, apply hlift, and transport the resulting maps back.
-For a zero kernel use the inverse of the bijective ring map; the filtration then
-has no steps. This theorem chooses maps only in its existential conclusion. -/
+/-- Length-one lifting tests suffice for a surjection of Artinian local rings
+(Stacks, Tag 02HT). -/
 theorem artinian_lifting_finite_kernel
     {R A : Type u} [CommRing R] [CommRing A] [Algebra R A]
     (q : Ideal A) [q.IsPrime]

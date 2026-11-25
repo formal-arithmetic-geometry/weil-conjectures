@@ -11,11 +11,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.ExactRestrictionCompositio
 
 /-! # Normalized scalar composition and uniqueness of adjoints
 
-Source: Stacks Project, Tags 03CZ and 06YY.
-(auxiliary; not a blueprint node).
-
 The private transition calculations also compare ordinary scalar insertion with the
 transpose of the reduced counit, for the explicit tensor successor square.
+
+## References
+
+* Stacks Project, Tags 03CZ and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -170,16 +171,8 @@ private theorem scalar_composition_representative
   erw [hn]
   exact (ordinary_comp_unit f g P).symm
 
-/-- The normalized scalar-composition comparison is the uniqueness comparison of left adjoints.
-Source: Stacks Project, Tags 03CZ and 06YY.
-(auxiliary; not a blueprint node).
-
-Proof: the normalized derived unit computes the Hom equivalence on a K-flat representative
-by the ordinary tensor adjunction followed by resFactors. Apply this twice, using
-preservation of K-flatness by scalar extension and the compatibility of resFactors with
-exact restriction composition. Ordinary balancing preserves insertion of one on pure
-tensors, so these Hom equivalences identify the uniqueness comparison with the K-flat
-normalization defining the chosen balancing. Its uniqueness gives the asserted equality. -/
+/-- The normalized scalar-composition comparison is the uniqueness comparison of left adjoints
+(Stacks, Tags 03CZ and 06YY). -/
 theorem adicFiniteExtendComp_leftAdjointUniq (f : R ⟶ S) (g : S ⟶ V)
     (af : extend f ⊣ dres f) (ag : extend g ⊣ dres g)
     (ah : extend (f ≫ g) ⊣ dres (f ≫ g))

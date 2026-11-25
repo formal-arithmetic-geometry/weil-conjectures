@@ -78,16 +78,7 @@ private theorem ordinary_stratum_restriction
   exact Finite.of_injective e.toLinearEquiv e.toLinearEquiv.injective
 
 /-- Normalized restriction of finite coefficients preserves finite constant local
-models on each specified stratum, without changing that stratum.
-Source: integral-finite-levels, first paragraph, and integral-criterion reductions,
-finite scalar restriction step. (blueprint: lem-pe-finite-scalar-local-transport).
-
-Proof: compare finite constant models to ordinary locally constant sheaves with finite
-stalks. Ordinary restriction preserves their chosen local trivializations and the
-underlying geometric stalk sets on the specified stratum. The normalized coefficient
-square identifies this restriction with internal restriction. Exactness identifies the
-restricted homology with homology after restriction. Apply the sheaf comparison in every
-degree and transport the models across these isomorphisms. -/
+models on each specified stratum, without changing that stratum. -/
 theorem finite_scalar_local_transport
     (A B : Type u) [CommRing A] [CommRing B]
     [TopologicalSpace A] [TopologicalSpace B] [IsTopologicalRing A] [IsTopologicalRing B]

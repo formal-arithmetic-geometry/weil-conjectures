@@ -16,8 +16,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Transport of derived open restriction along an affine presentation
-Source: Stacks Project, Tags 079W and 09IR.
-(blueprint: lem-pc-affine-derived-open-transport).
+
+## References
+
+* Stacks Project, Tags 079W and 09IR
 -/
 
 @[expose] public section
@@ -39,30 +41,8 @@ private noncomputable def moduleIsoEquivalence {S T : Scheme.{u}} (s : S ≅ T) 
 set_option backward.isDefEq.respectTransparency false in
 /-- An isomorphism with a spectrum transports derived restriction, its right adjoint,
 quasi-coherence, perfection, support, and the shift structure. No detector assertion is
-part of this statement: it holds for every derived object on the spectrum.
-Source: Stacks Project, Tag 079W (derived adjunction), and Tag 09IR (affine presentation).
-(blueprint: lem-pc-affine-derived-open-transport).
-
-Proof: Pullback and pushforward along a scheme isomorphism are mutually inverse exact
-functors on module sheaves. Apply them termwise and localize at quasi-isomorphisms.
-The displayed localization comparison specifies its functor as termwise restriction
-along a.inv, so the object transport is fixed by a, rather than by mere existence.
-The resulting equivalence also transports the chosen localization, supplying derived
-categories with the same morphism universe on the spectrum and on all its opens.
-The restriction square commutes by the identification of sections on corresponding
-opens. Open restriction is exact and its underived right adjoint is direct image;
-K-injective resolutions of module sheaves yield its unbounded derived right adjoint
-and adjunction (Tag 079W). Conjugate this adjunction by the two equivalences to obtain
-the adjunction on X. Its unit is the transported unit followed by the invertible
-restriction comparison; hence the units are invertible at corresponding objects
-simultaneously. Exactness gives compatibility with homology and shifts. Stalks at
-corresponding points are isomorphic, so quasi-coherence and vanishing transfer in
-both directions. Finite free local representatives and their retractions transfer,
-which preserves perfection. The termwise functors commute with cochain shifts.
-Their canonical shift isomorphisms
-descend through localization and satisfy the zero and addition coherence identities,
-supplying the displayed CommShift structure. All constructions
-apply to the empty scheme and to the empty and full opens as well. -/
+part of this statement: it holds for every derived object on the spectrum
+(Stacks, Tags 079W and 09IR). -/
 theorem affine_derived_open_transport
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

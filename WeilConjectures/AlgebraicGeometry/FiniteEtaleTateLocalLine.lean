@@ -11,7 +11,10 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
 
 /-! # Local triviality of the finite coefficient line
-Source: Stacks Project, Tag 03PK. (auxiliary; not a blueprint node).
+
+## References
+
+* Stacks Project, Tag 03PK
 -/
 
 @[expose] public section
