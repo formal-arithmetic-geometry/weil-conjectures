@@ -11,7 +11,17 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemClope
 import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemIntrinsicLambdaExpansion
 
 /-! Forward bridge equation for the proper/open lambda word.
-(blueprint: lem-sf-integral-system-proper-open-lambda-bridge). -/
+
+## Implementation details
+
+The word is decomposed into cartesian, restriction, clopen and compositor factors, whose
+bridge squares are pasted. This is only the forward factor identity used by the adjunct
+theorem; it contains no gamma or adjunct normalization.
+
+## References
+
+* [Stacks, Tag 0F7B]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -40,12 +50,7 @@ private theorem BridgeWord.paste {C : Type*} [Category C] (d : BridgeWord C)
       congrArg (· ≫ (d.z ≫ d.w ≫ d.n)) hp
     _ = d.t ≫ d.t' ≫ d.g := by rw [hz]; simp only [Category.assoc]
 
-/-- The chosen proper/open lambda word transports to the intrinsic lambda word.
-Source: Stacks 0F7B and blueprint fix-prop-coherence. The proof decomposes the word
-into cartesian, restriction, clopen, and compositor factors, applies their bridge
-squares, and pastes them. This is strictly the forward factor identity used by the
-assigned adjunct theorem and contains no gamma or adjunct normalization.
-(blueprint: lem-sf-integral-system-proper-open-lambda-bridge). -/
+/-- The chosen proper/open lambda word transports to the intrinsic lambda word. -/
 theorem properOpenLambda_bridge (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)

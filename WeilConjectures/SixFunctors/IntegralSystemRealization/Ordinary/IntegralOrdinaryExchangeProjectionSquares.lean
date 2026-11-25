@@ -11,7 +11,10 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Ordinary.IntegralOr
 
 /-! # Ordinary coefficient squares for exchange and projection
 
-Source: blueprint fix-prop-coherence, the coefficient comparisons of individual maps.
+## References
+
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0E48]
 -/
 
 @[expose] public noncomputable section
@@ -25,20 +28,7 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Ordinary coefficient compatibility for the two geometric adjunction mates.
-Source: blueprint fix-prop-coherence, exchange and projection as normalized mates;
-Stacks Tags 07A7 and 0E48.
-(blueprint: lem-sf-integral-ordinary-exchange-projection-squares).
-
-Proof: exchange is the mate of the specified pullback square. Paste the four
-pullback/reduction comparison squares; composition normalization identifies their
-boundary with ringedSquare and the system square. Transpose through the two
-geometric adjunctions, whose reduction unit and counit diagrams commute. For
-projection, expand rightAdjointProjectionMap into its unit, tensor comparison and
-counit. Reduction preserves the ordinary tensor and its pullback comparison;
-pasting these diagrams gives the displayed projection square. Naturality inserts
-the coefficients of e and t. Both equalities hold without cartesianness or
-invertibility of exchange or projection, on ordinary objects before completion. -/
+/-- Ordinary coefficient compatibility for the two geometric adjunction mates. -/
 theorem ordinaryExchangeProjectionSquares
     (o : Operations l E) (a : AmbientModels l E o)
     {B : Scheme.{u}} {I : Type u} {X : I → Over B}

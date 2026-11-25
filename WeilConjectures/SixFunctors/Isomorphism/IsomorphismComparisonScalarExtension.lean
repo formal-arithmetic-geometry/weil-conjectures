@@ -63,13 +63,14 @@ import WeilConjectures.PoincareDuality.Integral.IntegralPullbackComparisonRealiz
 /-!
 # Coefficient compatibility of the specified integral inverse-image comparison
 
-Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), pp. 50--51.
-The scalar compatibility formula is the agent calculation from the specified
-quotient-cone maps (blueprint: lem-weil-isomorphism-comparison-scalar-extension).
-The ordinary tensor is expressed in its exact finite-free model. Its completion
+The ordinary tensor is expressed in its exact finite-free model, and its completion
 comparison is identified with the specified universal derived-tensor comparison.
 The models are in `IsomorphismComparisonScalarExtensionModel`, the tensor isomorphism and
 the maps α, β in `IsomorphismComparisonScalarExtensionTensor`; this file proves the square.
+
+## References
+
+* [Bhatt--Scholze, Lemma 6.5.9(4)]
 -/
 
 @[expose] public noncomputable section
@@ -781,19 +782,7 @@ private theorem scalarCompletedSquare
 
 end ComparisonSquare
 
-/-- The specified integral comparison commutes with finite coefficient extension.
-Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), pp. 50--51; the compatibility
-itself is the agent calculation of the specified quotient-cone maps
-(blueprint: lem-weil-isomorphism-comparison-scalar-extension).
-Proof: the ordinary tensor unit and the finite scalar-pullback generator formula
-prove the square at every finite level. Product extensionality and the two actual
-Roos cocone coordinates give the strict augmentation square, with zero shifted
-coordinate. On good representatives its localization is the ordinary derived square,
-by the normalizations of the specified comparison and scalarPullbackOrdinary.
-Naturality and good representative isomorphisms give that square on every derived
-object. Finally precompose with the specified completion comparison chi on G_E K.
-Naturality of chi and kappa reduces to the ordinary square. Constructibility makes
-this completion comparison invertible, so it cancels to give the stated identity. -/
+/-- The specified integral comparison commutes with finite coefficient extension. -/
 theorem isomorphismComparison_scalarExtension
     {X Y : AlgebraicGeometry.Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))

@@ -6,7 +6,13 @@ Authors: Bin Wu
 module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralSystemProperOpenTransportCanonicalMate
 
-/-! Intrinsic mate identity for the semilinear proper/open calculus. -/
+/-! Intrinsic mate identity for the semilinear proper/open calculus.
+
+## References
+
+* [Stacks, Tag 0F7B]
+* [Zheng, Construction 4.1 and Lemma 4.10]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -16,11 +22,7 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The intrinsic semilinear gamma is the mate of the intrinsic alpha.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0F7B.
-(blueprint: lem-sf-integral-system-proper-open-transport-core-intrinsic-mate).
-Proof: unfold the intrinsic proper/open gamma and apply the defining mate
-bijection to the intrinsic alpha. -/
+/-- The intrinsic semilinear gamma is the mate of the intrinsic alpha. -/
 theorem integralSystemIntrinsicMate
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)
     (p : V ⟶ Z) (i : W ⟶ Z) [IsOpenImmersion k] [IsOpenImmersion i]

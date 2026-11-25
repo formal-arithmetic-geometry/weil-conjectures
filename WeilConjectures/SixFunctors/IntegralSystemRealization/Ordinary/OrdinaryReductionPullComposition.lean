@@ -11,7 +11,11 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Ordinary quotient pullback and composition
 
-Source: blueprint fix-prop-coherence, maps-used sentence; Stacks 03D7 and 0941.
+## References
+
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 03D8]
 -/
 
 @[expose] public section
@@ -212,21 +216,7 @@ private theorem direct_coherence (o : Operations l E) (a : OrdinaryLimitModel l 
       ((proEtaleBaseChange (f ≫ g)).obj U.unop) _))
   exact direct_projection_coherence l E o a c f g M n.unop U.unop x
 
-/-- Ordinary coefficient reduction preserves the geometric pullback compositor.
-Source: blueprint latest, sec-six-functors/sk-thm-sf-compatibility/
-fix-prop-coherence.proof.md, maps-used sentence; Stacks 03D7, 03D8 and 0941.
-(blueprint: lem-sf-ordinary-reduction-pull-composition).
-
-Proof: take the ordinary right-adjoint conjugates. The ringed direct-image compositor
-is fixed by restriction along pullbackComp, as is c.ordinaryDirect by c.sections.
-Postcompose the two resulting maps into the coefficient limit with each limit projection.
-The equations a.projections give the same finite projection followed by the same
-restriction along pullbackComp on both sides. Naturality of the limit projections
-moves this restriction past the projection. Ordinary limit projections are jointly
-monic, so the direct-image/limit square commutes. Compatibility of adjoint conjugation
-with pasting gives the displayed quotient/pullback square, using c.conjugate.
-This is an equality of ordinary sheaf maps, before complexes or derived localization;
-identity morphisms and zero sheaves are covered by the same projection calculation. -/
+/-- Ordinary coefficient reduction preserves the geometric pullback compositor. -/
 theorem ordinaryReductionPullComposition
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
