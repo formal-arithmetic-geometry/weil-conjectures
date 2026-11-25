@@ -40,15 +40,14 @@ private theorem sections_unique_of_isEmpty {X : Scheme.{u}} (T : X.ProEt)
     Nonempty (Unique (F.obj.obj (op T))) := by
   exact ⟨Types.isTerminalEquivUnique _ (F.isTerminalOfBotCover T (bot_mem_topology T))⟩
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- Sections on a finite disjoint union are the product of the sections on its summands
 (including the empty family). -/
 theorem finite_coproduct_sheaf_core (X : Scheme.{u}) (I : Type v) [Finite I]
     (V : I → X.ProEt) (W : X.ProEt) (ι : ∀ i, V i ⟶ W)
     (e : (∐ fun i ↦ (V i).left) ≅ W.left)
-    (hqc : ∀ i, CompactSpace (V i).left)
-    (hqs : ∀ i, QuasiSeparatedSpace (V i).left)
+    (_hqc : ∀ i, CompactSpace (V i).left)
+    (_hqs : ∀ i, QuasiSeparatedSpace (V i).left)
     (hι : ∀ i, Sigma.ι (fun i ↦ (V i).left) i ≫ e.hom = (ι i).left) :
     (∀ F : Sheaf (topology X) (Type (max (u + 1) w)),
         Function.Bijective (fun s : F.obj.obj (op W) ↦

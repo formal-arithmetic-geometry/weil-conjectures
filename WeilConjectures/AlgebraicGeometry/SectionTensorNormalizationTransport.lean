@@ -83,8 +83,6 @@ private theorem conjugateComparison_eq
 
 attribute [local irreducible] cancelSectionIso
 
-set_option linter.unusedSectionVars false
-
 private def ordinaryRightComparison (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
     tensorRight (B₀ a T) ⋙ (ModuleRingedComparison.equivalence Λ T).functor ≅
       (ModuleRingedComparison.equivalence Λ T).functor ⋙
@@ -146,6 +144,8 @@ private def derivedRightComparison (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}
         (← Lean.Elab.Tactic.getMainGoal).assign hd.toExpr
         Lean.Elab.Tactic.replaceMainGoal [])
 
+omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
+  [IsCommMonObj Λ'] in
 private theorem derivedRightComparison_hom (a : Λ ⟶ Λ') [IsMonHom a]
     (T : Scheme.{u}) (M : DerivedCategory (Modules Λ T)) :
     (derivedRightComparison a T).hom.app M =
@@ -211,6 +211,8 @@ private theorem ordinarySectionComparison_conjugation (a : Λ ⟶ Λ') [IsMonHom
     (ModuleRingedComparison.equivalence Λ' T).functor (extension a T) (V₀ a T)
     s.pair.extension _ _ _ s.ordinary s.restriction t.ordinary (ordinaryRightComparison a T) M
 
+omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
+  [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)] in
 private theorem internal_tensor_generator (a : Λ ⟶ Λ') [IsMonHom a]
     (T : Scheme.{u}) (t : TensorNormalization a T) (M : Modules Λ T)
     (U : T.ProEtᵒᵖ) (z : (condensedRingObj Λ' T).obj.obj U) (x : M.X.obj.obj U) :

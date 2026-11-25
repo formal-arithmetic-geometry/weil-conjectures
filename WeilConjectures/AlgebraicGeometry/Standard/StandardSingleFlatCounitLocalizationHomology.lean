@@ -54,7 +54,6 @@ private theorem mapped_counit_factorization
   rw [hf]
   simp only [Functor.map_comp, Iso.trans_hom, Functor.mapIso_hom, Category.assoc, hc]
 
-set_option linter.unusedVariables false in
 /-- Homology identifications and counit compatibility for fixed stalk data: the stalk at
 `g a` of the chosen presentation complex, transported to the stalk ring of `B`, is bounded
 above, termwise flat, and computes the stalk of the degree-`n` homology of the standard
@@ -66,7 +65,7 @@ theorem standardSingleFlatCounit_localization_homology
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     (M : Y.Modules) [M.IsQuasicoherent] (hM : M.IsFlatOver p) (g : A ⟶ B) (a : A)
     (S : B.Opens) (V : A.Opens) (hS : g a ∈ S) (hV : a ∈ V)
-    (hSaff : IsAffine S.toScheme) (hVaff : IsAffine V.toScheme)
+    (_hSaff : IsAffine S.toScheme) (_hVaff : IsAffine V.toScheme)
     (hVS : V ≤ g ⁻¹ᵁ S)
     (hpres : StandardSingleFlatCounitPresentation (p ∣_ S)
       (M.restrict (p ⁻¹ᵁ S).ι) (g.resLE S V hVS)) :
@@ -90,7 +89,7 @@ theorem standardSingleFlatCounit_localization_homology
     (ε : DerivedCategory.Qh ⋙ LF ⟶
       (ModuleCat.extendScalars (g.stalkMap a).hom).mapHomotopyCategory (.up ℤ) ⋙
         DerivedCategory.Qh)
-    (hLF : LF.IsLeftDerivedFunctor ε
+    (_hLF : LF.IsLeftDerivedFunctor ε
       (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ))),
         ∀ n : ℤ,
           ∃ (eL : (RingedSpace.moduleStalkFunctor A.toRingedSpace a).obj

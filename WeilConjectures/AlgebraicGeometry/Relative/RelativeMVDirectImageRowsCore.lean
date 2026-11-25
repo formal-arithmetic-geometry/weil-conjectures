@@ -39,7 +39,6 @@ private lemma roof_mate_transport {C D : Type*} [Category C] [Category D]
   simpa only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Category.assoc] using
     (adj.homEquiv_naturality_left p (e.hom ≫ a ≫ e'.inv)).symm
 
-set_option linter.unusedVariables false in
 /-- Resolved source and target short exact rows and their vertex comparisons,
 before recording the three mate equations. -/
 theorem relativeMV_direct_image_rows_core
@@ -69,11 +68,11 @@ theorem relativeMV_direct_image_rows_core
       (e₁' : DerivedCategory.Q.obj P'.X₁ ≅ a.right)
       (e₂' : DerivedCategory.Q.obj P'.X₂ ≅ (b U).right ⊞ (b V).right)
       (e₃' : DerivedCategory.Q.obj P'.X₃ ≅ (b (U ⊓ V)).right)
-      (hα : DerivedCategory.Q.map m.τ₁ ≫ η.app P'.X₁ =
+      (_hα : DerivedCategory.Q.map m.τ₁ ≫ η.app P'.X₁ =
         (adj.homEquiv _ _) (e₁.hom ≫ a.hom ≫ e₁'.inv))
-      (hβ : DerivedCategory.Q.map m.τ₂ ≫ η.app P'.X₂ =
+      (_hβ : DerivedCategory.Q.map m.τ₂ ≫ η.app P'.X₂ =
         (adj.homEquiv _ _) (e₂.hom ≫ biprod.map (b U).hom (b V).hom ≫ e₂'.inv))
-      (hγ : DerivedCategory.Q.map m.τ₃ ≫ η.app P'.X₃ =
+      (_hγ : DerivedCategory.Q.map m.τ₃ ≫ η.app P'.X₃ =
         (adj.homEquiv _ _) (e₃.hom ≫ (b (U ⊓ V)).hom ≫ e₃'.inv)),
       P.ShortExact ∧ P'.ShortExact := by
   classical

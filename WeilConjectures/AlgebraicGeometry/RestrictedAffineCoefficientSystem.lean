@@ -24,9 +24,6 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
--- The existential proof witnesses record required properties even though the final
--- morphism equality does not refer to them. Keep the original binder names.
-set_option linter.unusedVariables false in
 /-- Construct the base-changed schemes and their degree-zero coefficient complexes,
 including the coefficient colimit and its restriction comparisons. -/
 theorem exists_restricted_affine_coefficient_system {S : Scheme.{v}}

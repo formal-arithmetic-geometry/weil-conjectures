@@ -102,7 +102,6 @@ namespace AlgebraicGeometry
 attribute [local instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
 
 set_option synthInstance.maxSize 4096
-set_option linter.unusedSectionVars false
 attribute [local irreducible] coefficientQuotientSheaf coefficientQuotientMap
   siteCoefficientTensorAdj
 
@@ -146,6 +145,8 @@ private def insertion {m n : ℕ} (h : n ≤ m)
     (coefficientRestrictionUnderlying (J := T) O t h).hom.app
       ((tensor T h).obj M)
 
+omit [HasWeakSheafify T (Type (u + 1))]
+  [T.HasSheafCompose (CategoryTheory.forget CommRingCat.{u + 1})] in
 private theorem insertion_naturality {m n : ℕ} (h : n ≤ m)
     {M N : coefficientLevelModules (J := T) O t m} (f : M ⟶ N) :
     (underlying T m).map f ≫ insertion T h N =
@@ -158,6 +159,8 @@ private theorem insertion_naturality {m n : ℕ} (h : n ≤ m)
   simp only [Functor.map_comp, Category.assoc] at hu ⊢
   rw [reassoc_of% hu, hr]
 
+omit [HasWeakSheafify T (Type (u + 1))]
+  [T.HasSheafCompose (CategoryTheory.forget CommRingCat.{u + 1})] in
 private theorem insertion_transpose {m n : ℕ} (h : n ≤ m)
     (M : coefficientLevelModules (J := T) O t m)
     (N : coefficientLevelModules (J := T) O t n) (f : (tensor T h).obj M ⟶ N) :
@@ -170,6 +173,8 @@ private theorem insertion_transpose {m n : ℕ} (h : n ≤ m)
 variable [∀ n, HasDerivedCategory.{u + 2} (coefficientLevelModules (J := T) O t n)]
   [HasDerivedCategory.{u + 2} (CoefficientSystem (J := T) O t)]
 
+omit [HasWeakSheafify T (Type (u + 1))]
+  [T.HasSheafCompose (CategoryTheory.forget CommRingCat.{u + 1})] in
 private theorem insertion_unit
     (P : CoefficientEvaluationDerivedPackage (J := T) (O := O) (ell := t))
     (n : ℕ) (M : coefficientLevelModules (J := T) O t n) :
@@ -178,6 +183,8 @@ private theorem insertion_unit
   ext U x
   exact congrArg (fun f ↦ f.hom.app U x) (P.tensorUnit_normalized n M)
 
+omit [HasWeakSheafify T (Type (u + 1))]
+  [T.HasSheafCompose (CategoryTheory.forget CommRingCat.{u + 1})] in
 private theorem insertion_comp
     (P : CoefficientEvaluationDerivedPackage (J := T) (O := O) (ell := t))
     {r m n : ℕ} (h₁ : m ≤ r) (h₂ : n ≤ m)
@@ -203,6 +210,11 @@ private def identityInverse (n : ℕ) :
   moduleZero := fun _ _ _ h ↦ h
   moduleSMul := fun _ _ _ _ _ h ↦ h
 
+omit [HasWeakSheafify T (Type (u + 1))]
+  [T.HasSheafCompose (CategoryTheory.forget CommRingCat.{u + 1})]
+  [T.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u + 1})]
+  [∀ n, HasDerivedCategory.{u + 2} (coefficientLevelModules (J := T) O t n)]
+  [HasDerivedCategory.{u + 2} (CoefficientSystem (J := T) O t)] in
 private theorem scalar_good {m n : ℕ} (h : n ≤ m)
     (P : CochainComplex (coefficientLevelModules (J := T) O t m) ℤ)
     (hk : P.IsKFlatIndependentCoefficients)
@@ -218,6 +230,10 @@ private theorem scalar_good {m n : ℕ} (h : n ≤ m)
     (fun _ ↦ rfl) (by intro M N f; simp only [eqToHom_refl, Category.id_comp,
       Category.comp_id]; rfl) P hk hf
 
+omit [HasWeakSheafify T (Type (u + 1))]
+  [T.HasSheafCompose (CategoryTheory.forget CommRingCat.{u + 1})]
+  [T.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u + 1})]
+  [HasDerivedCategory.{u + 2} (CoefficientSystem (J := T) O t)] in
 private theorem hom_ext_flat (n : ℕ)
     {B : Type*} [Category B]
     {F G : DerivedCategory (coefficientLevelModules (J := T) O t n) ⥤ B} (α β : F ⟶ G)
@@ -269,6 +285,10 @@ variable {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
   (E : CoefficientSystemDerivedImage O t L R adj A PW PV)
 
 -- The nested transpose exposes the underlying sheaf functors through several quotients.
+omit [∀ n, HasDerivedCategory.{u + 2} (coefficientLevelModules (J := J) O t n)]
+  [∀ n, HasDerivedCategory.{u + 2} (coefficientLevelModules (J := K) O t n)]
+  [HasDerivedCategory.{u + 2} (CoefficientSystem (J := J) O t)]
+  [HasDerivedCategory.{u + 2} (CoefficientSystem (J := K) O t)] in
 private theorem insertion_ext {m n : ℕ} (h : n ≤ m)
     (M : coefficientLevelModules (J := J) O t m) (N : coefficientLevelModules (J := K) O t n)
     (f k : (A.lift n).modules.obj ((tensor J h).obj M) ⟶ N)
@@ -294,6 +314,10 @@ private theorem insertion_ext {m n : ℕ} (h : n ≤ m)
   exact congrArg (adj.homEquiv _ _) he
 
 -- The nested transpose exposes the underlying sheaf functors through several quotients.
+omit [∀ n, HasDerivedCategory.{u + 2} (coefficientLevelModules (J := J) O t n)]
+  [∀ n, HasDerivedCategory.{u + 2} (coefficientLevelModules (J := K) O t n)]
+  [HasDerivedCategory.{u + 2} (CoefficientSystem (J := J) O t)]
+  [HasDerivedCategory.{u + 2} (CoefficientSystem (J := K) O t)] in
 private theorem insertion_ext_double {r m n : ℕ} (h₁ : m ≤ r) (h₂ : n ≤ m)
     (M : coefficientLevelModules (J := J) O t r) (N : coefficientLevelModules (J := K) O t n)
     (f k : (A.lift n).modules.obj
@@ -418,6 +442,8 @@ private theorem ordinary_composition {r m n : ℕ} (h₁ : m ≤ r) (h₂ : n �
 
 variable [PreservesFiniteLimits L]
 
+omit [∀ n, HasDerivedCategory.{u + 2} (coefficientLevelModules (J := J) O t n)]
+  [HasDerivedCategory.{u + 2} (CoefficientSystem (J := J) O t)] in
 include PV in
 private theorem inverse_good (n : ℕ)
     (P : CochainComplex (coefficientLevelModules (J := J) O t n) ℤ)

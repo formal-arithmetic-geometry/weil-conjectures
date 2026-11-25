@@ -315,8 +315,6 @@ private theorem relativelyLisse_of_iso {X Y : Scheme.{u}} (h : Y ⟶ X)
   obtain ⟨N, hN, hfin, hlocal⟩ := hmodel V f hf
   exact ⟨N, hN, hfin, lisseLocalModel_of_iso Y _ _ _ _ _ _ e V hlocal⟩
 
--- The original statement names an intentionally unused existential additivity witness.
-set_option linter.unusedVariables false in
 /-- The specified completion scalar maps give an exact relative module realization.
 Finite completion modules become relatively adic-lisse modules. -/
 theorem relative_completed_module_realization_exact
@@ -335,7 +333,7 @@ theorem relative_completed_module_realization_exact
           (CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))) ∧
         let c := completedConstantRealization Y d.ideal φ ⋙ pbcRestrict β ⋙
       pbcRestrict ((adicTowerInverseImage h).map (pbcCompletedComparison X d).inv)
-        ∃ hc : c.Additive,
+        ∃ _hc : c.Additive,
           PreservesFiniteLimits c ∧ PreservesFiniteColimits c ∧
           ∀ N : ModuleCat.{u + 1} (AdicCompletion d.ideal A),
             Module.Finite (AdicCompletion d.ideal A) N →

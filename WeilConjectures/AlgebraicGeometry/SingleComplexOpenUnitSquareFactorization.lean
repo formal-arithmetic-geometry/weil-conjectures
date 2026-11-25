@@ -49,7 +49,6 @@ attribute [local irreducible] singleComplexOpenPullbackIso CategoryTheory.Functo
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option linter.unusedVariables false in
 /-- A separate step of the open counit factorization: normalizing the derived unit
 through the open pullback square. -/
 theorem singleComplexOpen_unit_square_factorization
@@ -61,7 +60,7 @@ theorem singleComplexOpen_unit_square_factorization
       (Scheme.Modules.tensorPullback k).Additive :=
       @Classical.choose _ _ exists_derivedPullbackComposition
     let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
-    let F₀ := RingedSpace.moduleDirectImage (f ∣_ V).toLRSHom.toShHom
+    let _F₀ := RingedSpace.moduleDirectImage (f ∣_ V).toLRSHom.toShHom
     let rY := schemeOpenRestriction Y V
     let rX := schemeOpenRestriction X (f ⁻¹ᵁ V)
     let a := @singleComplexOpenPinnedAdjunction.{u, w} _

@@ -52,9 +52,6 @@ slice restriction. Every comparison is constructed from the existing adjunctions
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
-set_option linter.style.haveILetI false
-set_option linter.unusedSectionVars false
-set_option linter.unusedSimpArgs false
 set_option synthInstance.maxSize 2048
 universe u v d e d₁ e₁
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
@@ -192,7 +189,7 @@ private theorem exactThickAssertion_of_exactFunctor
   let G := F.mapDerivedCategory
   let H := MonoidalClosed.internalHom.flip.obj M
   let J := MonoidalClosed.internalHom.flip.obj (G.obj M)
-  letI := Functor.exactClosedDerivedMonoidal F
+  let := Functor.exactClosedDerivedMonoidal F
   let β : H ⋙ G ⟶ G.op ⋙ J :=
     { app := fun K ↦ Functor.closedComparison G K.unop M
       naturality := fun K L f ↦ by
@@ -200,11 +197,11 @@ private theorem exactThickAssertion_of_exactFunctor
         exact Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app G f.unop M }
   obtain ⟨sH, hH, hsH⟩ := nativeDerivedHom_signed_exact M
   obtain ⟨sJ, hJ, hsJ⟩ := nativeDerivedHom_signed_exact (G.obj M)
-  letI := sH
-  letI := sJ
-  haveI : H.IsTriangulated := hH
-  haveI : J.IsTriangulated := hJ
-  haveI : NatTrans.CommShift β ℤ :=
+  let := sH
+  let := sJ
+  have : H.IsTriangulated := hH
+  have : J.IsTriangulated := hJ
+  have : NatTrans.CommShift β ℤ :=
     Functor.exactDerivedHomComparison_shift F M sH sJ hsH hsJ β (fun _ ↦ rfl)
   exact exactThickAssertion_of_signed G M hsH hsJ b β (fun K ↦ (hb K M).symm)
 
@@ -232,7 +229,7 @@ private theorem comparisonDerivedMonoidal_eq (X : Scheme.{u})
     letI : (comparisonUpperStar B X).Monoidal := siteComparisonMonoidal B X
     siteComparisonDerivedMonoidal B X =
       siteHomExactDerivedMonoidal (comparisonUpperStar B X) := by
-  letI : (comparisonUpperStar B X).Monoidal := siteComparisonMonoidal B X
+  let : (comparisonUpperStar B X).Monoidal := siteComparisonMonoidal B X
   unfold siteHomExactDerivedMonoidal
   exact Functor.exactDerivedMonoidal_eq_of_delta (comparisonUpperStar B X)
     (siteComparisonDerivedMonoidal B X) (siteComparisonDerivedMonoidal_δ B X)
@@ -256,7 +253,7 @@ private theorem siteHomExactThick_generic (V : Type (u + 2)) [Category.{u + 1} V
     (M : DerivedCategory (Sheaf X.smallEtaleTopology V)) :
     siteHomSiteExactThick V X M := by
   unfold siteHomSiteExactThick
-  letI := siteComparisonMonoidal V X
+  let := siteComparisonMonoidal V X
   apply exactThickAssertion_of_exactFunctor
     (C := Sheaf X.smallEtaleTopology V)
     (D := Sheaf (Scheme.ProEt.topology X) V)

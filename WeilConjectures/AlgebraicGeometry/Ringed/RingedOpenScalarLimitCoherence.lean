@@ -176,8 +176,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.all false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option backward.defeqAttrib.useBackward true
@@ -297,6 +295,8 @@ variable {A B C D : Type uA} [Category.{vA} A] [Category.{vA} B]
   (e : JS ⋙ rT ≅ rU ⋙ JR) (d : rT ⋙ qR ≅ qS ⋙ rU)
   (adjS : JS ⊣ qS) (adjR : JR ⊣ qR)
 
+-- The statement uses the deprecated `TwoSquare.natTrans`; dropping it changes the statement.
+set_option linter.deprecated false in
 private theorem inverseMate_of_unit
     (hu : ∀ N : A, rU.map (adjS.unit.app N) ≫ d.inv.app (JS.obj N) ≫
       qR.map (e.hom.app N) = adjR.unit.app (rU.obj N)) :
@@ -316,6 +316,8 @@ private theorem inverseMate_of_unit
   erw [qR.map_id]
   erw [Category.comp_id]
 
+-- The statement uses the deprecated `TwoSquare.natTrans`; dropping it changes the statement.
+set_option linter.deprecated false in
 private theorem equations_of_inverseMate
     (hm : ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans = e.inv) :
     CbcAdjunctionCompatible e d adjS adjR := by
@@ -405,21 +407,22 @@ private theorem equations_derived (he : CbcAdjunctionCompatible e d adjS adjR) :
     CbcAdjunctionCompatible (cbcDerivedSquare JS rT rU JR e) (cbcDerivedSquare rT qR qS rU d)
       (OpenTensorNormalization.exactDerivedAdjunction adjS)
       (OpenTensorNormalization.exactDerivedAdjunction adjR) := by
-  have hm := inverseMate_of_unit e d adjS adjR he.1
+  have hm : (mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv) = e.inv :=
+    inverseMate_of_unit e d adjS adjR he.1
   have : IsIso
-      ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.symm.hom)).natTrans := by
-    change IsIso ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans
+      ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.symm.hom)) := by
+    change IsIso ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv))
     rw [hm]
     infer_instance
   have hiso : asIso
-      ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.symm.hom)).natTrans = e.symm := by
+      ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.symm.hom)) = e.symm := by
     apply Iso.ext
     exact hm
   have hd := (exact_localization_inverse_mate adjS adjR d.symm).2.1
   rw [hiso] at hd
   change ((mateEquiv (OpenTensorNormalization.exactDerivedAdjunction adjS)
       (OpenTensorNormalization.exactDerivedAdjunction adjR)).symm
-      (TwoSquare.mk _ _ _ _ (cbcDerivedSquare qS rU rT qR d.symm).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (cbcDerivedSquare qS rU rT qR d.symm).hom)) =
         (cbcDerivedSquare rU JR JS rT e.symm).hom at hd
   rw [cbcDerivedSquare_symm, cbcDerivedSquare_symm] at hd
   exact equations_of_inverseMate _ _ _ _ hd

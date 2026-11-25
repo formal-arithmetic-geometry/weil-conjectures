@@ -162,7 +162,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.all false
+set_option linter.privateModule false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 universe u uB

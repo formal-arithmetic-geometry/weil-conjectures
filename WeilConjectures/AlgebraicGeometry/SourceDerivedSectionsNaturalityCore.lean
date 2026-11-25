@@ -173,7 +173,6 @@ private theorem sourceFreeSectionsComplexIso_naturality
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 /-- Naturality of evaluation of the Hom complex at the free sheaf generator. -/
 theorem sourceDerivedSections_naturality_evaluation
     {C : Type (v + 1)} [Category.{v} C]
@@ -181,7 +180,7 @@ theorem sourceDerivedSections_naturality_evaluation
     [HasDerivedCategory.{v + 1} (Sheaf T AddCommGrpCat.{v + 1})]
     (K : DerivedCategory.Plus (Sheaf T AddCommGrpCat.{v + 1}))
     (L : CochainComplex (Sheaf T AddCommGrpCat.{v + 1}) ℤ) [L.IsKInjective]
-    (q : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ) {U V : C} (a : U ⟶ V) :
+    (_q : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ) {U V : C} (a : U ⟶ V) :
     let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n
     let e₁ := fun W : C ↦
       (sourceClassDerivedHomIso ((strictLocalFreeSheaf T).obj W) L n).symm ≪≫

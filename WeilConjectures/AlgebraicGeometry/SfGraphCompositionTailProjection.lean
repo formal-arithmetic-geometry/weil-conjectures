@@ -25,7 +25,6 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency.types true
 set_option backward.isDefEq.respectTransparency true
 set_option backward.defeqAttrib.useBackward true
-set_option linter.unusedSimpArgs false
 
 attribute [local implicit_reducible] CategoryTheory.catToReflQuiver
 
@@ -245,7 +244,7 @@ theorem sfGraphCompositionTailIso_projection
   have hp := diagram_projection A cf ch d
     (IsPullback.of_hasPullback d.p d.i).flip M K
   rw [← graphCompositor_normalization A f g cf cg ch] at hp
-  simp only [d, graphDiagram_compactification] at hp
+  simp only [d] at hp
   have hp' := projection_cancel_first_comparison_tensor
     (derivedTensor (ModuleCat.{u + 1} A) Z) K M
     (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj

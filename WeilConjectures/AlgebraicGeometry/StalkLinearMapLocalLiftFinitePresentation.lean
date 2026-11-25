@@ -102,7 +102,6 @@ private theorem lift_of_presentation
     (P.relations.π ≫ CategoryTheory.Limits.kernel.ι P.generators.π)
     P.generators.π (by simp) P.isColimit χ
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- One specified stalk-linear map from a finitely presented source is induced
@@ -115,7 +114,7 @@ theorem exists_local_internalHom_of_stalkLinearMap
     [SheafOfModules.IsFinitePresentation.{u} F] (x : X)
     (χ : (moduleStalkFunctor X x).obj F →ₗ[X.presheaf.stalk x]
       (moduleStalkFunctor X x).obj G) :
-    ∃ (U : Opens X) (hxU : x ∈ U) (φ : (F.homObj G).val.obj (op U)),
+    ∃ (U : Opens X) (_hxU : x ∈ U) (φ : (F.homObj G).val.obj (op U)),
       ∀ (V : Opens X) (i : V ⟶ U) (hxV : x ∈ V) (s : F.val.obj (op V)),
         TopCat.Presheaf.germ G.val.presheaf V x hxV (φ.app (op (Over.mk i)) s) =
           χ (TopCat.Presheaf.germ F.val.presheaf V x hxV s) := by

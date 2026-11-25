@@ -26,7 +26,6 @@ Scalar extension uses the existing sheafified balanced tensor with the scalar fi
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 

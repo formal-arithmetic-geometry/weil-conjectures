@@ -1235,7 +1235,7 @@ end KFlatTransport
 variable {T : Scheme.{u}} (W : T.ProEt) [IsOpenImmersion W.hom]
   {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-set_option linter.unusedSectionVars false in
+omit [IsOpenImmersion W.hom] in
 /-- The canonical finite identifications preserve every quotient map. -/
 theorem cbcQuotientSquare (b a : ℕ) (hab : a ≤ b) :
     CbcOpenRingSquare W (cbcFiniteRestriction W d b) (cbcFiniteRestriction W d a)
@@ -1249,7 +1249,7 @@ theorem cbcQuotientSquare (b a : ℕ) (hab : a ≤ b) :
   rw [finiteSliceMap_eq, finiteSliceMap_eq]
   exact (finiteSliceSystemMap W d).naturality (homOfLE hab).op
 
-set_option linter.unusedSectionVars false in
+omit [IsOpenImmersion W.hom] in
 /-- Completed restriction preserves every finite projection. -/
 theorem cbcProjectionSquare (n : ℕ) :
     CbcOpenRingSquare W (cbcCompletedRestriction W d) (cbcFiniteRestriction W d n)

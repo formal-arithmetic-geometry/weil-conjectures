@@ -40,7 +40,6 @@ private theorem qcoh_openRestriction (Y : Scheme.{u}) (U : Y.Opens)
   exact SheafOfModules.isQuasicoherent_over
     ((DerivedCategory.homologyFunctor _ n).obj E) U
 
-set_option linter.unusedVariables false in
 /-- The single-complex criterion for affine bases suffices for arbitrary bases.
 The extra premise supplies only the affine-base case; it does not assume the original
 conclusion.
@@ -52,10 +51,10 @@ theorem singleComplexBaseChange_targetLocal
       (f₀ : X₀ ⟶ S₀) (f₀' : X₀' ⟶ S₀') (g₀ : S₀' ⟶ S₀) (g₀' : X₀' ⟶ X₀)
       (sq₀ : IsPullback g₀' f₀' f₀ g₀)
       [IsAffine S₀] [IsAffine S₀'] [QuasiCompact f₀] [QuasiSeparated f₀]
-      (K₀ : schemeDerivedCategory X₀) (hK₀ : schemeDerivedQCohProperty X₀ K₀)
-      (K₀' : schemeDerivedCategory X₀') (hK₀' : schemeDerivedQCohProperty X₀' K₀')
+      (K₀ : schemeDerivedCategory X₀) (_hK₀ : schemeDerivedQCohProperty X₀ K₀)
+      (K₀' : schemeDerivedCategory X₀') (_hK₀' : schemeDerivedQCohProperty X₀' K₀')
       (φ₀ : (derivedPullback g₀').obj K₀ ⟶ K₀')
-      (h_stalk₀ : SingleComplexBaseChange.StalkCondition f₀ f₀' g₀ g₀' sq₀ K₀ K₀' φ₀),
+      (_h_stalk₀ : SingleComplexBaseChange.StalkCondition f₀ f₀' g₀ g₀' sq₀ K₀ K₀' φ₀),
       IsIso (schemeDerivedBaseChangeMap f₀ f₀' g₀ g₀' sq₀.w K₀ ≫
         (schemeDerivedDirectImage f₀').map φ₀))
     {X X' S S' : Scheme.{u}}

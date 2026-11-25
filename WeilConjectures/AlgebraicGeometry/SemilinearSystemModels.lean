@@ -167,7 +167,7 @@ private theorem horizontal_map' {C : Type c} [Category.{v} C]
   dsimp
   rw [CategoryTheory.Functor.map_id, Category.comp_id]
 
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r} C] in
 /-- The actual ring presheaf is a sheaf for the vertical sequence topology. -/
 theorem ringPresheaf_isSheaf :
     Presheaf.IsSheaf (coefficientSequenceTopology J) (ringPresheaf.{c, v, r} J B τ) := by
@@ -188,7 +188,7 @@ abbrev Systems := Mod.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, 
 /-- The derived category `D(S(B))` of strict semilinear systems. -/
 abbrev DS := D.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J B τ)
 
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r} C] in
 /-- The slice inclusion is continuous for the actual vertical topology. -/
 theorem evaluation_continuous (n : ℕ) :
     (Prod.sectR n C).IsContinuous J (coefficientSequenceTopology J) := by
@@ -544,6 +544,7 @@ variable (F : ℕ → Sheaf J CommRingCat.{r})
 
 include hα
 
+omit [EssentiallySmall.{r} C] in
 /-- A compatible coefficient map induces the unique sectionwise ring-system map. -/
 theorem systemMap_existsUnique :
     ∃! f : systemRing.{c, v, r} J B τ ⟶ systemRing.{c, v, r} J F σ,

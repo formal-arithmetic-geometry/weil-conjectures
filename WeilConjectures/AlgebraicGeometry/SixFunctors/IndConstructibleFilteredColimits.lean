@@ -130,11 +130,10 @@ private theorem constructible_finite_coproduct
   exact ObjectProperty.prop_colimit (IsConstantModelConstructible Λ X)
     (Discrete.functor B) (fun s ↦ hB s.as)
 
-set_option linter.unusedVariables false in
 /-- For finite `E/ℚ_ℓ`, IndCons is closed under ambient filtered colimits and arbitrary sums. -/
 theorem indConstructible_filteredColimits_and_sums
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ)
+    (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpl : p ≠ ℓ)
     (X : Scheme.{u}) [X.Over (Spec (.of k))]
     [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
     [QuasiCompact (X ↘ Spec (.of k))] :
@@ -191,12 +190,11 @@ theorem indConstructible_filteredColimits_and_sums
     exact ind_coproduct P hfp
       (constructible_finite_coproduct (Profinite.continuousMapRingObj E) X) S B c hc hB
 
-set_option linter.unusedVariables false in
 /-- For the condensed algebraic closure, IndCons is closed under ambient filtered colimits
 and arbitrary sums. -/
 theorem indConstructible_filteredColimits_and_sums_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]
-    (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ)
+    (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpl : p ≠ ℓ)
     (X : Scheme.{u}) [X.Over (Spec (.of k))]
     [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
     [QuasiCompact (X ↘ Spec (.of k))] :
