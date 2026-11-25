@@ -21,20 +21,6 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 /-! Levelwise data for strict étale extension by zero.
 
 This isolates the fixed coefficient-level transport from the subsequent system assembly.
-
-## Implementation details
-
-Each level is the fixed-coefficient open extension by zero, transported along the additive
-equivalence between modules over the constant quotient-ring sheaf and fixed-coefficient module
-sheaves obtained by restriction along the constant-presheaf sheafification unit. The
-restriction isomorphism is the inverse mate of `I.restrictInverse.inv`, which is invertible
-because extension by zero is fully faithful.
-
-## References
-
-* [Stacks Project](https://stacks.math.columbia.edu), Tags 03S2, 03DI, 03DJ
-* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
-  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -400,27 +386,48 @@ private abbrev quotientMap (O : Type (u + 1)) [CommRing O] (t : O)
     {m n : ℕ} (h : n ≤ m) : coefficient O t m →+* coefficient O t n :=
   Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.add_le_add_right h 1))
 
-set_option maxHeartbeats 800000 in
--- Compare the bundled coefficient presentations without unfolding their scalar actions.
+private theorem fixedRestriction_unit_comp (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
+    (t : O) {m n : ℕ} (h : n ≤ m) (U : T.Etaleᵒᵖ) :
+    ((unit T (coefficient O t n)).app U).hom.comp (quotientMap O t h) =
+      ((coefficientQuotientMap (J := T.smallEtaleTopology) O t h).hom.app U).hom.comp
+        ((unit T (coefficient O t m)).app U).hom := by
+  apply RingHom.ext
+  intro a
+  exact ConcreteCategory.congr_hom (congr_app
+    (toSheafify_naturality T.smallEtaleTopology
+      ((Functor.const T.Etaleᵒᵖ).map (CommRingCat.ofHom (quotientMap O t h)))) U) a
+
+private def fixedRestrictionSection (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
+    (t : O) {m n : ℕ} (h : n ≤ m) (M : strictEtaleLevel T O t n) (U : T.Etaleᵒᵖ) :
+    (((coefficientRestriction (J := T.smallEtaleTopology) O t h ⋙
+        fixed T (coefficient O t m)).obj M).obj.obj U) ≅
+      (((fixed T (coefficient O t n) ⋙
+        Sheaf.restrictScalars T.smallEtaleTopology (quotientMap O t h)).obj M).obj.obj U) :=
+  (ModuleCat.restrictScalarsComp'App ((unit T (coefficient O t m)).app U).hom
+    ((coefficientQuotientMap (J := T.smallEtaleTopology) O t h).hom.app U).hom
+    (((unit T (coefficient O t n)).app U).hom.comp (quotientMap O t h))
+    (fixedRestriction_unit_comp T O t h U) (M.val.obj U)).symm ≪≫
+      ModuleCat.restrictScalarsComp'App (quotientMap O t h)
+        ((unit T (coefficient O t n)).app U).hom _ rfl (M.val.obj U)
+
+-- Compare the two scalar restrictions through their composite ring homomorphisms.
 private def fixedRestrictionMap (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     (t : O) {m n : ℕ} (h : n ≤ m) :
     coefficientRestriction (J := T.smallEtaleTopology) O t h ⋙ fixed T (coefficient O t m) ⟶
       fixed T (coefficient O t n) ⋙
         Sheaf.restrictScalars T.smallEtaleTopology (quotientMap O t h) where
-  app M := liftFixedMap T (coefficient O t m) _ _
-    ((coefficientRestrictionUnderlying (J := T.smallEtaleTopology) O t h).hom.app M)
-    (fun _ _ _ ↦ rfl) (fun U a x ↦ by
-      have hunit := ConcreteCategory.congr_hom (congr_app
-        (toSheafify_naturality T.smallEtaleTopology
-          ((Functor.const T.Etaleᵒᵖ).map (CommRingCat.ofHom (quotientMap O t h)))) U) a
-      exact (congrArg (fun b ↦ b • (show M.val.obj U from x)) hunit).symm)
+  app M := ⟨{
+    app := fun U ↦ (fixedRestrictionSection T O t h M U).hom
+    naturality := by
+      intro U V f
+      ext x
+      rfl }⟩
   naturality := by
     intro M N f
     ext U x
     rfl
 
-set_option maxHeartbeats 800000 in
--- Compare the bundled coefficient presentations without unfolding their scalar actions.
+-- The section comparisons are already isomorphisms.
 private def fixedRestriction (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     (t : O) {m n : ℕ} (h : n ≤ m) :
     coefficientRestriction (J := T.smallEtaleTopology) O t h ⋙ fixed T (coefficient O t m) ≅
@@ -428,13 +435,13 @@ private def fixedRestriction (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
         Sheaf.restrictScalars T.smallEtaleTopology (quotientMap O t h) := by
   let α := fixedRestrictionMap T O t h
   have hi (M : strictEtaleLevel T O t n) : IsIso (α.app M) := by
-    have hi' : IsIso ((sheafCompose T.smallEtaleTopology
-        (CategoryTheory.forget (ModuleCat.{u + 1} (coefficient O t m)))).map (α.app M)) := by
-      change IsIso ((coefficientRestrictionUnderlying
-        (J := T.smallEtaleTopology) O t h).hom.app M)
-      infer_instance
-    exact isIso_of_reflects_iso _ (sheafCompose T.smallEtaleTopology
-      (CategoryTheory.forget (ModuleCat.{u + 1} (coefficient O t m))))
+    have (U : T.Etaleᵒᵖ) : IsIso ((α.app M).hom.app U) :=
+      inferInstanceAs (IsIso (fixedRestrictionSection T O t h M U).hom)
+    have : IsIso (α.app M).hom := NatIso.isIso_of_isIso_app _
+    have : IsIso ((sheafToPresheaf T.smallEtaleTopology
+        (ModuleCat.{u + 1} (coefficient O t m))).map (α.app M)) :=
+      inferInstanceAs (IsIso (α.app M).hom)
+    exact isIso_of_reflects_iso _ (sheafToPresheaf T.smallEtaleTopology _)
   let := NatIso.isIso_of_isIso_app α
   exact asIso α
 
@@ -564,6 +571,7 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
   (PX : StrictEtaleEvaluation X O t) (PZ : StrictEtaleEvaluation Z O t)
 
 /-- The levelwise pieces of ordinary strict étale extension by zero.
+Source: Stacks 03S2, 03DI and 03DJ; Zheng, Construction 4.1
 
 The record contains the transported lower-shriek functors, their exact adjunctions,
 and the normalized scalar-restriction mates.  It is strictly below the system theorem:
@@ -582,7 +590,32 @@ structure StrictEtaleLevelOpenData where
 
 attribute [instance] StrictEtaleLevelOpenData.levelAdditive
 
-/-- The levelwise transport data for strict étale extension by zero exists. -/
+/-- The levelwise transport exists.
+Source: Stacks Project 03S2, 03DI and 03DJ; Zheng, Construction 4.1.
+
+Restrict a module along the constant-presheaf sheafification unit to obtain an
+additive equivalence with fixed-coefficient module sheaves. The ring comparison
+`constantCommuteCompose` and `constant_ring_module_sheaves` prove this equivalence.
+Transport the fixed-coefficient open extension by zero and its exact adjunction.
+The addition and scalar graph equations of the supplied lift, together with its
+constant-section normalization, identify its right adjoint with literal open
+restriction. This gives the chosen adjunctions with `(I.lift n).modules`.
+
+Naturality of sheafification identifies scalar restriction through the equivalences
+by the identity on sections. For fixed coefficients, scalar coextension commutes
+with open restriction. Taking its mate twice shows that extension by zero commutes
+with scalar restriction. Transport this isomorphism through the equivalences to
+identify scalar restriction of an extended object with extension of its scalar
+restriction. Extension by zero and its transports are fully faithful. The inverse
+mate of `I.restrictInverse.inv` is a composite of the image of the invertible unit,
+the given inverse-image coefficient isomorphism, and a counit at an object
+isomorphic to an extended object. That counit is invertible by full faithfulness,
+so this exact inverse mate is invertible. Define `restriction` as its isomorphism;
+the inverse law of `mateEquiv` gives `restrictionMate` exactly.
+
+The constructions apply to the zero coefficient ring and to the empty open: the
+same section formulas and Hom transposes give the zero functors and identities.
+No nonzero-ring, regularity or completeness assumption enters the construction. -/
 theorem strictEtaleLevelOpenData_exists :
     Nonempty (StrictEtaleLevelOpenData O t j I) := by
   have (n : ℕ) : (StrictEtaleOpenProof.fixed X
