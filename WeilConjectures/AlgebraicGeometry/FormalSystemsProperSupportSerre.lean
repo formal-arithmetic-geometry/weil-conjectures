@@ -211,8 +211,6 @@ private theorem ideal_product_isZero {X : Scheme.{u}} (J : X.IdealSheafData)
     infer_instance
   exact IsZero.of_mono (Scheme.idealModuleProductι J.toModulesι F) hF
 
--- The original quantified instance binder is used implicitly in the statement.
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The two full subcategories of coherent formal modules in Lemma 0CYV are Serre
@@ -222,7 +220,7 @@ theorem formalSystems_properSupport_serre
     [IsNoetherian S] [LocallyOfFiniteType f] [QuasiCompact f]
     (I : X.IdealSheafData) :
     Nonempty (Abelian (@CoherentFormalModule X (isNoetherian_of_locallyOfFiniteType f) I)) ∧
-    ∀ [Ab : Abelian (@CoherentFormalModule X (isNoetherian_of_locallyOfFiniteType f) I)],
+    ∀ [_Ab : Abelian (@CoherentFormalModule X (isNoetherian_of_locallyOfFiniteType f) I)],
       ObjectProperty.IsSerreClass
         (fun M : @CoherentFormalModule X (isNoetherian_of_locallyOfFiniteType f) I ↦
           Scheme.Modules.HasSupportProperOver f (M.obj.obj (op 0))) ∧

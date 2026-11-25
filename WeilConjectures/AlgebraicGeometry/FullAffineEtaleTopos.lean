@@ -416,14 +416,13 @@ private theorem affineEtale_free_restriction (S : Scheme.{u}) (U : S.FullAffineE
   let i : E.inverse.obj Y ≅ X := (coyoneda.preimageIso e).unop.symm
   exact ⟨(E.counitIso.app Y).symm ≪≫ R.mapIso i⟩
 
-set_option linter.unusedVariables false in
 /-- Cohomology comparison for the restriction equivalence between the small étale site and the
 full affine étale site (Stacks, Cohomology on Sites, Tag 03YU, and Topologies, Tag 04HR). -/
 theorem fullAffineEtale_cohomology_comparison_data (S : Scheme.{u})
     [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
     [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})]
     (U : S.FullAffineEtale) :
-    ∃ e : ∀ p : ℕ,
+    ∃ _e : ∀ p : ℕ,
       ((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
           (fullAffineEtaleTopology S) S.smallEtaleTopology ⋙
         Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) p ⋙

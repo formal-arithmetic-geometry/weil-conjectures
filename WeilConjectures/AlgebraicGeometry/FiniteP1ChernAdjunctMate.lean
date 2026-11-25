@@ -233,14 +233,13 @@ private lemma native_adjunct_square
     (ordinaryFiniteUnitPullback A f').hom (ordinaryFiniteUnitPullback A g').hom
     c c' d (unit_comparison_square A sq) hc
 
-set_option linter.unusedVariables false in
 /-- The Chern-map square transposes to the direct-image adjunct square. -/
 theorem ordinaryFiniteP1_chern_adjunct_of_map_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
-    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    (N : ℕ) (_hN : 0 < N) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)
     {S' S : Scheme.{u}} (f : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤)))
-    (hS' : IsUnit (N : Γ(S', ⊤)))
+    (_hS' : IsUnit (N : Γ(S', ⊤)))
     (c : ordinaryFiniteUnit A (ProjectiveLine S) ⟶
       (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)
     (c' : ordinaryFiniteUnit A (ProjectiveLine S') ⟶

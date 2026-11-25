@@ -28,8 +28,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 attribute [local irreducible] pushforward pushforwardComp pushforwardCongr pushforwardId
 
--- Keep the existing unused let A in the statement without changing its signature.
-set_option linter.unusedVariables false in
 -- The statement elaborates several successive module pushforwards and pullbacks.
 /-- The adjoint of the restricted tensor unit is invertible on a fixed chart.
 (Stacks, Tags 0096, 0097 and 02KH.) -/
@@ -43,7 +41,7 @@ theorem isIso_flatBaseChange_chart_unit_adjoint
     let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ
     let N := (pullback (f ⁻¹ᵁ V).ι).obj F
     let T := baseChangedScheme (S := Γ(S', W)) h
-    let A := baseChangedModule (S := Γ(S', W)) h N
+    let _A := baseChangedModule (S := Γ(S', W)) h N
     let G := (tensorPullback (pullback.snd g f)).obj F
     let U := (pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)
     let L := (pullback.fst g f) ⁻¹ᵁ W

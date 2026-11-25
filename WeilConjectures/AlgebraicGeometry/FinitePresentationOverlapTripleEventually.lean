@@ -30,7 +30,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-set_option linter.unusedVariables false in
 /-- The composition defect of a single triple overlap vanishes eventually, and remains
 zero at every later stage.
 (Stacks, Tag 01ZR) -/
@@ -57,7 +56,7 @@ theorem finitePresentation_overlap_triple_eventually
           (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj (N a))) →
         (T.pull (p := p₀) (α := fun a ↦ a)
           (fun a ↦ V₀.pullbackHom_map p₀ a)).Coherent →
-        ∃ (l : I) (hkl : k ≤ l), ∀ (m : I) (hkm : k ≤ m), l ≤ m →
+        ∃ (l : I) (_hkl : k ≤ l), ∀ (m : I) (hkm : k ≤ m), l ≤ m →
           let q := overlapStageMap R f hij (hjk.trans hkm)
           let V : (pullback f (Spec.map
               (R.map (homOfLE (hij.trans (hjk.trans hkm)))))).OpenCover.{u} :=

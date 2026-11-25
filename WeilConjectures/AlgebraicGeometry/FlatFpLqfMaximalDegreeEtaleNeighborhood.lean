@@ -131,12 +131,11 @@ private theorem isEmpty_fiber_of_finite_degree_zero
   exact Function.isEmpty (g.fiber t).isoSpec.hom
 
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 /-- A point of maximal degree has an étale neighbourhood on which the pullback is finite
 locally free of that degree (Stacks, Tag 07RY). -/
 theorem exists_etale_isFiniteLocallyFreeOfDegree_of_maximal_fiber_degree
     {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [LocallyOfFinitePresentation f]
-    [IsSeparated f] (h_lqf : IsLocallyQuasiFinite f) (m : ℕ)
+    [IsSeparated f] (_h_lqf : IsLocallyQuasiFinite f) (m : ℕ)
     (hm : BoundsFiberDegrees f m) (s : S)
     (hs : (f.fiberToSpecResidueField s).finrankΓ = m) :
     ∃ (T : Scheme.{u}) (φ : T ⟶ S) (t : T), Etale φ ∧ φ t = s ∧

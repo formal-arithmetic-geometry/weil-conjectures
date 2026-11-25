@@ -118,11 +118,6 @@ universal derived counits, or the two coordinates of a strict Roos complex.
 -/
 
 @[expose] public noncomputable section
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false

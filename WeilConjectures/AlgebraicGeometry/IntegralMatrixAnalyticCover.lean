@@ -44,7 +44,6 @@ private theorem cover_of_open_neighborhoods {X : Scheme.{u}}
       Scheme.etalePrecoverage_le_proetalePrecoverage
   exact ⟨V.bind D, fun k ↦ hU k.1 k.2⟩
 
-set_option linter.unusedVariables false in
 /-- After a rational cokernel trivialization, a map between standard finite free modules
 admits analytic pivot charts. (Bhatt--Scholze, Section 6.8) -/
 theorem integralMatrix_analytic_cover (ℓ : ℕ) [Fact ℓ.Prime]
@@ -59,7 +58,7 @@ theorem integralMatrix_analytic_cover (ℓ : ℕ) [Fact ℓ.Prime]
           ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).obj
             (cokernel a)))) :
     ∃ V : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ k,
-      let R := condensedRingObj (integralCoeff ℓ E) (V.X k)
+      let _R := condensedRingObj (integralCoeff ℓ E) (V.X k)
       let T := (ProEtale.upperStar Ab.{u + 1} (V.f k)).mapMod
           (condensedRingObj (integralCoeff ℓ E) X) ⋙
         Mod.comap (inv (condensedPullbackHom (integralCoeff ℓ E) (V.f k)))
