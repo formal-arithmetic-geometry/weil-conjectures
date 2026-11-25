@@ -16,9 +16,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Naturality of the ordinary balanced tensor comparison
 
-## References
-
-* [Stacks, Tag 08DE]
+Source: Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE), proof.
 -/
 
 @[expose] public section
@@ -63,7 +61,31 @@ private def balancedUnit (α : R ⟶ B) (N : SheafOfModules.{u} (𝓡 R)) :
   (PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app
     (changeOfRingsPresheaf.{u, u, u} α N)
 
-set_option maxHeartbeats 800000 in
+private theorem balancedSectionPairing_bilinear
+    {A C : Type u} [CommRing A] [CommRing C] (φ : A →+* C)
+    (M : ModuleCat C) (N : ModuleCat A) (P Q : ModuleCat C)
+    (η : (ModuleCat.extendScalars φ).obj N →ₗ[C] P)
+    (p : TensorProduct C M P →ₗ[C] Q) :
+    IsBilinearMap A (fun (m : (ModuleCat.restrictScalars φ).obj M) (n : N) ↦
+      (show (ModuleCat.restrictScalars φ).obj Q from
+        p ((show M from m) ⊗ₜ[C] η ((1 : C) ⊗ₜ[A, φ] n)))) where
+  add_left := by intros; rw [TensorProduct.add_tmul, map_add]
+  smul_left := by
+    intro r m n
+    change p ((φ r • (show M from m)) ⊗ₜ[C] _) = φ r • _
+    rw [← TensorProduct.smul_tmul', map_smul]
+  add_right := by
+    intros
+    rw [TensorProduct.tmul_add, map_add, TensorProduct.tmul_add, map_add]
+  smul_right := by
+    intro r m n
+    let : Module A C := Module.compHom _ φ
+    change p ((show M from m) ⊗ₜ[C] η ((1 : C) ⊗ₜ[A] (r • n))) = φ r • _
+    rw [TensorProduct.tmul_smul]
+    change p ((show M from m) ⊗ₜ[C] η (φ r • ((1 : C) ⊗ₜ[A, φ] n))) = _
+    rw [map_smul, TensorProduct.tmul_smul (R := C) (R' := C) (M := M) (N := P),
+      map_smul]
+
 -- Bilinearity involves both coefficient-ring actions and the module sheafification unit.
 private def balancedPairing (α : R ⟶ B)
     (M : SheafOfModules.{u} (𝓡 B)) (N : SheafOfModules.{u} (𝓡 R))
@@ -72,34 +94,11 @@ private def balancedPairing (α : R ⟶ B)
       N.val.obj W →ₗ[R.obj.obj W]
         ((restrictScalars (𝓻 α)).obj
           ((monoidalCategory B).tensorObj M (changeOfRings.{u, u, u} α N))).val.obj W :=
-  LinearMap.mk₂ (R.obj.obj W)
-    (fun m n ↦ (balancedPure B M (changeOfRings.{u, u, u} α N)).app W
-      (m ⊗ₜ[B.obj.obj W] (balancedUnit α N).app W
-        ((1 : B.obj.obj W) ⊗ₜ[R.obj.obj W, (α.hom.app W).hom] n)))
-    (by intros; rw [TensorProduct.add_tmul, map_add])
-    (by
-      intro r m n
-      change (balancedPure B M (changeOfRings.{u, u, u} α N)).app W
-        ((α.hom.app W r • (show M.val.obj W from m)) ⊗ₜ[B.obj.obj W] _) = _
-      rw [← TensorProduct.smul_tmul', map_smul]
-      rfl)
-    (by intros; rw [TensorProduct.tmul_add, map_add, TensorProduct.tmul_add, map_add])
-    (by
-      intro r m n
-      let : Module (R.obj.obj W) (B.obj.obj W) := Module.compHom _ (α.hom.app W).hom
-      change (balancedPure B M (changeOfRings.{u, u, u} α N)).app W
-        ((show M.val.obj W from m) ⊗ₜ[B.obj.obj W]
-          (balancedUnit α N).app W
-            ((1 : B.obj.obj W) ⊗ₜ[R.obj.obj W] (r • n))) = _
-      rw [TensorProduct.tmul_smul]
-      change (balancedPure B M (changeOfRings.{u, u, u} α N)).app W
-        ((show M.val.obj W from m) ⊗ₜ[B.obj.obj W]
-          (balancedUnit α N).app W ((α.hom.app W r) •
-            ((1 : B.obj.obj W) ⊗ₜ[R.obj.obj W, (α.hom.app W).hom] n))) = _
-      rw [map_smul, TensorProduct.tmul_smul (R := B.obj.obj W) (R' := B.obj.obj W)
-        (M := M.val.obj W)
-        (N := (changeOfRings.{u, u, u} α N).val.obj W), map_smul]
-      rfl)
+  (balancedSectionPairing_bilinear (α.hom.app W).hom (M.val.obj W) (N.val.obj W)
+    ((changeOfRings.{u, u, u} α N).val.obj W)
+    (((monoidalCategory B).tensorObj M (changeOfRings.{u, u, u} α N)).val.obj W)
+    ((balancedUnit α N).app W).hom
+    ((balancedPure B M (changeOfRings.{u, u, u} α N)).app W).hom).toLinearMap
 
 private theorem balancedPairing_natural (α : R ⟶ B)
     (M : SheafOfModules.{u} (𝓡 B)) (N : SheafOfModules.{u} (𝓡 R))
@@ -175,15 +174,15 @@ private theorem balancedPure_natural
   erw [Category.assoc, hv, ← Category.assoc, ← hn]
   rfl
 
-private theorem balancedPure_tensorHom_app
+private theorem balancedPure_natural_apply
     (R : CategoryTheory.Sheaf (Opens.grothendieckTopology Z) CommRingCat.{u})
     {M M' N N' : SheafOfModules.{u} (𝓡 R)} (f : M ⟶ M') (g : N ⟶ N')
     (W : (Opens Z)ᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) :
     ((monoidalCategory R).tensorHom f g).val.app W
-        ((balancedPure R M N).app W (m ⊗ₜ[R.obj.obj W] n)) =
-      (balancedPure R M' N').app W
-        (f.val.app W m ⊗ₜ[R.obj.obj W] g.val.app W n) :=
-  congrArg (fun t ↦ (t.app W).hom (m ⊗ₜ[R.obj.obj W] n)) (balancedPure_natural R f g)
+      ((balancedPure R M N).app W (m ⊗ₜ[R.obj.obj W] n)) =
+    (balancedPure R M' N').app W (f.val.app W m ⊗ₜ[R.obj.obj W] g.val.app W n) :=
+  congrArg (fun t ↦ (t.app W).hom (m ⊗ₜ[R.obj.obj W] n))
+    (balancedPure_natural R f g)
 
 private theorem balancedPure_ext
     (R : CategoryTheory.Sheaf (Opens.grothendieckTopology Z) CommRingCat.{u})
@@ -219,7 +218,22 @@ private theorem balancedUnit_map (α : R ⟶ B)
   rw [ModuleCat.ExtendScalars.map_tmul] at hx
   exact hx.symm
 
--- Compose the sectionwise naturality equalities without rewriting the nested sheaf terms.
+private theorem balancedPairing_map (α : R ⟶ B)
+    {M M' : SheafOfModules.{u} (𝓡 B)} {N N' : SheafOfModules.{u} (𝓡 R)}
+    (f : M ⟶ M') (g : N ⟶ N')
+    (W : (Opens Z)ᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) :
+    balancedPairing α M' N' W (f.val.app W m) (g.val.app W n) =
+      ((monoidalCategory B).tensorHom f (changeOfRingsHom.{u, u, u} α N g)).val.app W
+        (balancedPairing α M N W m n) := by
+  change (balancedPure B M' (changeOfRings.{u, u, u} α N')).app W
+    (f.val.app W m ⊗ₜ[B.obj.obj W] (balancedUnit α N').app W _) = _
+  change _ =
+    ((monoidalCategory B).tensorHom f (changeOfRingsHom.{u, u, u} α N g)).val.app W
+      ((balancedPure B M (changeOfRings.{u, u, u} α N)).app W
+        (m ⊗ₜ[B.obj.obj W] (balancedUnit α N).app W
+          ((1 : B.obj.obj W) ⊗ₜ[R.obj.obj W,(α.hom.app W).hom] n)))
+  rw [balancedPure_natural_apply, balancedUnit_map]
+-- The tensor calculation compares both sheafification units and both ring actions.
 private theorem balancedMap_natural (α : R ⟶ B)
     {M M' : SheafOfModules.{u} (𝓡 B)} {N N' : SheafOfModules.{u} (𝓡 R)}
     (f : M ⟶ M') (g : N ⟶ N') :
@@ -229,18 +243,15 @@ private theorem balancedMap_natural (α : R ⟶ B)
         ((monoidalCategory B).tensorHom f (changeOfRingsHom.{u, u, u} α N g)) := by
   apply balancedPure_ext R ((restrictScalars (𝓻 α)).obj M) N
   intro W m n
-  refine (congrArg (fun x ↦ (balancedMap α M' N').val.app W x)
-    (balancedPure_tensorHom_app R ((restrictScalars (𝓻 α)).map f) g W m n)).trans ?_
-  refine (balancedMap_pure α M' N' W (f.val.app W m) (g.val.app W n)).trans ?_
-  symm
-  refine (congrArg (fun x ↦
-    ((monoidalCategory B).tensorHom f (changeOfRingsHom.{u, u, u} α N g)).val.app W x)
-      (balancedMap_pure α M N W m n)).trans ?_
-  refine (balancedPure_tensorHom_app B f (changeOfRingsHom.{u, u, u} α N g) W m
-    ((balancedUnit α N).app W
-      ((1 : B.obj.obj W) ⊗ₜ[R.obj.obj W, (α.hom.app W).hom] n))).trans ?_
-  exact congrArg (fun x ↦ (balancedPure B M' (changeOfRings.{u, u, u} α N')).app W
-    (f.val.app W m ⊗ₜ[B.obj.obj W] x)) (balancedUnit_map α g W n)
+  change (balancedMap α M' N').val.app W
+    (((monoidalCategory R).tensorHom ((restrictScalars (𝓻 α)).map f) g).val.app W
+      ((balancedPure R ((restrictScalars (𝓻 α)).obj M) N).app W
+        (m ⊗ₜ[R.obj.obj W] n))) =
+    ((monoidalCategory B).tensorHom f (changeOfRingsHom.{u, u, u} α N g)).val.app W
+      ((balancedMap α M N).val.app W _)
+  rw [balancedPure_natural_apply R ((restrictScalars (𝓻 α)).map f) g,
+    balancedMap_pure, balancedMap_pure]
+  exact balancedPairing_map α f g W m n
 
 private theorem balancedChangeHom_id (α : R ⟶ B) (N : SheafOfModules.{u} (𝓡 R)) :
     changeOfRingsHom.{u, u, u} α N (𝟙 N) = 𝟙 (changeOfRings.{u, u, u} α N) := by
@@ -277,7 +288,28 @@ private theorem inverse_naturality {C : Type*} [Category C]
 namespace AlgebraicGeometry.Scheme
 
 -- Comparing tensors over two rings requires explicit coefficient-forgetting reductions.
-/-- The balanced tensor identity for ordinary module sheaves is natural in both variables. -/
+/-- The balanced tensor identity for ordinary module sheaves is natural in both variables.
+Source: Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE), proof.
+
+Proof: write R = f-inverse O_S and B = O_X. On sections, the balanced map
+M tensor_B (B tensor_R N) -> M restricted to R tensor_R N sends
+m tensor (b tensor n) to (b*m) tensor n. Its inverse sends m tensor n to
+m tensor (1 tensor n). Additivity and the B- and R-balancing relations make
+both maps well defined. Their composites are the identity on pure tensors,
+and pure tensors generate the section tensor products. Both maps commute
+with restrictions. Tensoring with module sheafification agrees with
+sheafifying the tensor presheaf, so replacing the scalar-extension presheaf
+by its sheafification preserves this comparison. Underlying module
+sheafification is abelian sheafification, independent of the coefficient ring.
+The sheafification universal property therefore gives inverse maps of
+abelian sheaves. The construction is natural in each variable:
+a B-linear map commutes with multiplication by b, and an R-linear map
+commutes with forming b tensor n. Transport the second factor along hG;
+hGmap identifies its morphisms with the tensor pullback morphisms. Thus the
+two displayed naturality equalities hold. This works for arbitrary modules,
+including zero modules, zero coefficient rings, and the empty scheme. No
+complex, differential, coproduct, flatness or derived category is involved.
+-/
 theorem exists_relativeTensorPullback_balanced_natural
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
