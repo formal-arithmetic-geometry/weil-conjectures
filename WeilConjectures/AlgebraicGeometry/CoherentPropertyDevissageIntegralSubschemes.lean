@@ -169,7 +169,6 @@ private theorem p_of_filtration {X : Scheme.{u}} [IsLocallyNoetherian X]
     (Subobject.isoOfEq _ _ htop ≪≫ asIso (⊤ : Subobject F).arrow).symm hF (hpc _)
 
 
-set_option linter.unusedVariables false in
 /-- A property satisfying extension, summand, and integral-support devissage hypotheses
 holds for every coherent module on a Noetherian scheme (Stacks, Tag 01YM). -/
 theorem coherent_property_devissage_integral_subschemes
@@ -187,7 +186,7 @@ theorem coherent_property_devissage_integral_subschemes
         (HasBiproduct.of_hasProduct (fun _ : Fin r ↦ F))) → P F)
     (hP_integral : ∀ (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i]
       [IsIntegral Z] (ξ : X)
-      (hclosure : closure ({ξ} : Set X) = Set.range i.base),
+      (_hclosure : closure ({ξ} : Set X) = Set.range i.base),
       ∃ G : X.Modules,
         RingedSpace.IsCoherent X.toRingedSpace G ∧
         ({x : X | ¬ Subsingleton (G.presheaf.stalk x)} = Set.range i.base) ∧

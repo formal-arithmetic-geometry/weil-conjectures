@@ -32,7 +32,6 @@ recorded module gluing. No arbitrary derived equivalence replaces their normaliz
 
 @[expose] public noncomputable section
 
-set_option linter.checkUnivs false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
@@ -47,6 +46,8 @@ open scoped ZeroObject
 
 namespace AlgebraicGeometry.Scheme.ProEt.ClopenLocalization
 
+-- The universes `v` and `w` only occur through `max v w` by design.
+set_option linter.checkUnivs false in
 /-- The recorded module category in a universe containing the small site and index set. -/
 abbrev Modules {X : Scheme.{t}} (R : Sheaf (topology X) RingCat.{u}) :=
   ringedSiteModules.{max v w (t + 1)} R
@@ -878,6 +879,8 @@ instance insertionColimits (i : I) :
     PreservesFiniteColimits (insertion.{t, u, v, w} X I Y j hd hc R hcomm i) :=
   (insertion_exact.{t, u, v, w} X I Y j hd hc R hcomm i).2
 
+-- The universes `v` and `w` only occur through `max v w` by design.
+set_option linter.checkUnivs false in
 /-- The unbounded complexes over the ambient coefficient sheaf. -/
 abbrev Complexes := CochainComplex (Modules.{t, u, v, w} R) ℤ
 
@@ -900,6 +903,8 @@ abbrev homotopyFamily := Functor.pi' (fun i ↦
 abbrev componentQuotient := Functor.pi (fun i ↦ HomotopyCategory.quotient
   (Modules.{t, u, v, w} ((clopenRingRestriction (j i)).obj R)) (.up ℤ))
 
+-- The universes `v` and `w` only occur through `max v w` by design.
+set_option linter.checkUnivs false in
 /-- The ordinary unbounded derived category, in the standard localization universe. -/
 abbrev Derived := DerivedCategory (Modules.{t, u, v, w} R)
 

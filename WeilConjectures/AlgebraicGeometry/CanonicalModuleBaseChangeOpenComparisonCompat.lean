@@ -48,8 +48,6 @@ private theorem canonicalTensorComparison
     erw [Category.assoc, ← Functor.map_comp, ht]
     erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
-set_option linter.unusedVariables false in
--- Keep the original universally quantified comparison-proof binder hc0 unchanged.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Compatibility of restriction isomorphisms with the canonical base-change map
@@ -81,7 +79,7 @@ theorem restricted_base_change_compatibility
         (DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings (pullback fA gA).toRingedSpace)) 0).obj
             ((Scheme.Modules.tensorPullback (pullback.fst fA gA)).obj H))
-    (hc0 : IsDerivedModulePullbackComparison (pullback.fst fA gA) H c0),
+    (_hc0 : IsDerivedModulePullbackComparison (pullback.fst fA gA) H c0),
       ∃ a : R.obj ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj E)) ≅
           (derivedPullback gA).obj ((schemeDerivedDirectImage fA).obj E0),
       ∃ b : R.obj ((schemeDerivedDirectImage f').obj

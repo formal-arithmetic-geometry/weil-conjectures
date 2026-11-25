@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.OpenImmersionCoefficientUnit
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian
 namespace AlgebraicGeometry.Scheme.Modules
@@ -85,7 +84,7 @@ theorem H.openRestrictionData (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.Op
       (((Scheme.ΓSpecIso (.of S)).inv ≫ (baseChangeSnd (S := S) (W.ι ≫ f)).appTop).hom)
     let J := invImage W.ι
     let J' := invImage (H.openBaseChangeInclusion (S := S) f W)
-    ∃ (e : J.obj (H.openFreeSheaf W) ≅ H.openFreeSheaf (⊤ : W.toScheme.Opens))
+    ∃ (_e : J.obj (H.openFreeSheaf W) ≅ H.openFreeSheaf (⊤ : W.toScheme.Opens))
       (d : J.obj F ≅ FW) (c : G ⋙ J' ≅ J ⋙ GW) (d' : J'.obj N ≅ NW),
       (∀ a, J.map (ρ a).asHom ≫ d.hom = d.hom ≫ (ρW a).asHom) ∧
       (∀ a, J'.map (τ a).asHom ≫ d'.hom = d'.hom ≫ (τW a).asHom) ∧

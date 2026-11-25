@@ -15,8 +15,6 @@ structures induced by sheafification of the constant quotient presheaves.
 * Stacks Project, Tags 093M and 0912
 -/
 @[expose] public noncomputable section
-set_option linter.style.haveILetI false
-set_option linter.style.longLine false
 open CategoryTheory CategoryTheory.Limits Opposite
 universe u
 namespace CategoryTheory.ConstantCompletion
@@ -52,7 +50,7 @@ theorem finiteSystem_properties (J : GrothendieckTopology C) (A : Type u)
           e (b ⊗ₜ[A] Ideal.Quotient.mk _ a) = a •
             adicTransition J A (finiteSystemUnder J A I) m (min m n)
               (Nat.min_le_left m n) U b) := by
-  letI : ∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1))
+  let : ∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1))
       (adicTerm J A (finiteSystemUnder J A I) n U) := finiteSystemModule J A I
   have htower : ∀ (n : ℕ) (U : Cᵒᵖ), IsScalarTower A (A ⧸ I ^ (n + 1))
       (adicTerm J A (finiteSystemUnder J A I) n U) := by

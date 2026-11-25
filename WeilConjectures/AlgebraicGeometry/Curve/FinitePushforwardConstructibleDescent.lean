@@ -60,14 +60,12 @@ theorem CurveCoefficientPair.constructible_of_short_exact
       P.F).1.mpr P.isTorsion)
     alpha beta w hshort hmid).2
 
--- Keep the inherited compatibility binder; the counit construction does not need it.
-set_option linter.unusedVariables false in
 /-- The finite direct image supplies a torsion constructible middle term and a short exact
 sequence ending in the original sheaf. -/
 theorem CurveCoefficientPair.finite_pushforward_data
     {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k)
     {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k)) [IsCurve g]
-    (f : P.C ⟶ Y) [IsFinite f] (hf : f ≫ g = P.toSpec)
+    (f : P.C ⟶ Y) [IsFinite f] (_hf : f ≫ g = P.toSpec)
     (hT : Y.IsTorsionAbelianSheaf (Etale.lowerStar AddCommGrpCat.{u + 1} f |>.obj P.F))
     (hC : (fun P : AlgebraicGeometry.CurveCoefficientPair k ↦
     (Scheme.IsConstructibleEtaleSheafOfSets
