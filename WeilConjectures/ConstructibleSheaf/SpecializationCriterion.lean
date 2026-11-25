@@ -308,8 +308,7 @@ lemma isIso_sheafFiber_map_iff {X : Scheme.{u}}
     (hC.of_iso (PreservesCokernel.iso (pointSmallEtale r).sheafFiber ψ).symm)
   exact isIso_of_mono_of_epi _
 
-/-- Blueprint `lem-kun-constant-constructible`: a constant sheaf of finitely generated modules is
-constructible. -/
+/-- A constant sheaf of finitely generated modules is constructible. -/
 lemma isConstructibleSheaf_constantSheaf {X : Scheme.{u}} (M : ModuleCat.{u + 1} Λ)
     [Module.Finite Λ M] :
     IsConstructibleSheaf ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := by

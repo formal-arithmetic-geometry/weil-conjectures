@@ -17,8 +17,28 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
 /-! # Finite-projective charts for ordinary pullback
 
-Source: Bhatt--Scholze, Lemmas 6.5.5--6.5.8; Stacks Tag 09C3.
-(blueprint: lem-sf-finite-tor-pullback-affine-projective-charts)
+Source finite-projective charts give bounded finite-projective models for ordinary pullback
+on a finite tree over every target affine open.
+
+## Implementation details
+
+We apply `affineOpenClosedChartFactorization` to the property that the ordinary restriction of
+`K` has a bounded finite-free-retract cochain model. Its finite qcqs tree and chart covers give
+factorizations through source charts, so only algebraic transport remains. Ordinary pullback
+is exact by the completed coefficient comparison, and its derived counit identifies pullback of
+the source model with its termwise ordinary pullback; this preserves zero terms, finite
+products of the regular coefficient module and the splitting equations. The normalized
+ordinary-pullback comparisons and the `ringedPull` compositor identify this termwise model with
+the chart restriction of `ringedPull f K`. In the tensor-unit case, the native K-flat tensor
+comparison and its unitors identify the unit with the regular coefficient module in degree
+zero, which has a rank-one splitting in degree zero and rank-zero splittings elsewhere. Empty
+leaves impose no model condition. Ordinary pullback is never asserted to preserve infinite
+products, and no assertion is made about completion of the models.
+
+## References
+
+* [Bhatt--Scholze, The pro-étale topology for schemes, Lemmas 6.5.5--6.5.8]
+* [Stacks, Tag 09C3]
 -/
 
 @[expose] public noncomputable section
@@ -141,28 +161,7 @@ private theorem unit_hasProjectiveModel (Y : Scheme.{u}) :
       exact ⟨0, 0, 0, by exact hz.eq_of_src _ _⟩
 
 /-- Source finite-projective charts give bounded finite-projective models for
-ordinary pullback on a finite tree over every target affine open. This assertion constructs
-models and splittings; it makes no assertion about completion of those models.
-
-Source: Bhatt--Scholze, proof of Lemma 6.5.5, Lemmas 6.5.6--6.5.8;
-Stacks proetale.tex, Tag 09C3, lemma-local-structure-constructible-complex.
-(blueprint: lem-sf-finite-tor-pullback-affine-projective-charts).
-
-Proof: apply affineOpenClosedChartFactorization to the property that the ordinary
-restriction of K has a bounded finite-free-retract cochain model. Its finite qcqs
-tree and chart covers give actual factorizations through source charts, so only
-algebraic transport remains. Ordinary pullback is exact by the existing completed
-coefficient comparison, and its derived counit identifies pullback of the source
-model with its termwise ordinary pullback. This preserves zero terms, finite
-products of the regular coefficient module, and the splitting equations.
-The normalized ordinary-pullback comparisons and the ringedPull compositor
-identify this termwise model with the required chart restriction of ringedPull f K.
-In the tensor-unit case, the native K-flat tensor comparison and its unitors identify
-the recorded unit with the regular coefficient module in degree zero. This has
-a rank-one splitting in degree zero and rank-zero splittings elsewhere. Apply
-the same algebraic transport along f and then along the identity pro-etale chart
-over U, using the one-vertex tree. Empty leaves impose no model condition.
-At no point is ordinary pullback asserted to preserve infinite products. -/
+ordinary pullback on a finite tree over every target affine open. -/
 theorem finiteTorPullbackAffineProjectiveCharts
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_hs : IsSeparated f) (_ht : LocallyOfFiniteType f) (_hq : QuasiCompact f)

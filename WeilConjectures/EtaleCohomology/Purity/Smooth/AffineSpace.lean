@@ -17,22 +17,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 
 Let `B` be a scheme on which the exponent of the finite coefficient ring `Λ` is invertible,
 `p_c : 𝔸^c_B → B` the projection and `z : B ↪ 𝔸^c_B` the zero section. This file proves the
-two forms of the model purity of blueprint `proposition-purity-vector-bundles` by iterating the
-affine line:
+two forms of the model purity for affine space by iterating the affine line:
 
 * the `Rz^!`-form (clause (i)): `Rz^! Λ(c)[2c] ≅ Λ_B`;
 * the `Rp_c^!`-form (clause (ii)): `Rp_c^! K ≅ Lp_c^* K (c)[2c]` for `K ∈ D^b_{ctf}(B, Λ)`; its
   inductive steps are here, and the theorem itself, which rests on the affine-space ambient
   adjunction, is in `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpacePurity`.
-
-Both proofs write `𝔸^{c+1}_B = 𝔸¹_{B'}` with `B' = 𝔸^c_B`
-(`AlgebraicGeometry.AffineSpace.sumIso`), under which the zero section of `𝔸^{c+1}_B` is the
-composite of the zero sections of `𝔸^c_B` and of `𝔸¹_{B'}`, and the projection is the
-composite of the projections. The composition law for `R(-)^!`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp`) reduces each step to the
-affine line, where the input is `sk-prop-a1` (for clause (i)) and affine-line purity
-(`lemma-affine-space-etale-localization--1`, for clause (ii)). For clause (i) the twist pulled back
-from `B'` is moved through `Rs'^!` by the co-projection formula for the closed immersion `s'`.
 
 ## Main statements
 
@@ -42,9 +32,18 @@ from `B'` is moved through `Rs'^!` by the co-projection formula for the closed i
   `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_affineSpaceSuccIso_twistShift`: the
   inductive step of clause (ii).
 
-## Implementation notes
+## Implementation details
 
-The comparison maps of the blueprint — the Thom class `th`, the integration map `∫_π` and its
+Both proofs write `𝔸^{c+1}_B = 𝔸¹_{B'}` with `B' = 𝔸^c_B`
+(`AlgebraicGeometry.AffineSpace.sumIso`), under which the zero section of `𝔸^{c+1}_B` is the
+composite of the zero sections of `𝔸^c_B` and of `𝔸¹_{B'}`, and the projection is the
+composite of the projections. The composition law for `R(-)^!`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp`) reduces each step to the
+affine line, where the input is `Rs^! Λ(1)[2] ≅ Λ` for the zero section `s` of `𝔸¹` (clause
+(i)) and affine-line purity (clause (ii)). For clause (i) the twist pulled back from `B'` is moved
+through `Rs'^!` by the co-projection formula for the closed immersion `s'`.
+
+The comparison maps — the Thom class `th`, the integration map `∫_π` and its
 transpose `γ_{π,K}` — are not constructed: the projective-line trace and the Kummer boundary
 with supports they are built from are not available. The isomorphisms are therefore recorded
 as `Nonempty (_ ≅ _)`, and the normalization (iii), the composition law and the
@@ -130,11 +129,8 @@ end Twists
 
 /-! ### The `Rz^!`-form -/
 
-/-- Blueprint `proposition-purity-vector-bundles`, Step 1: twists pulled back from the base pass
-through the zero section `s : Y ↪ 𝔸¹_Y`. With `Λ(1 + m)[2(1 + m)] = Λ(1)[2] ⊗ Λ(m)[2m]`, the
-co-projection formula for the closed immersion `s` and `Rs^! Λ(1)[2] ≅ Λ_Y` (`sk-prop-a1`),
-
-`Rs^! Λ_{𝔸¹_Y}(1 + m)[2(1 + m)] ≅ Rs^! Λ(1)[2] ⊗ Ls^* Λ(m)[2m] ≅ Λ_Y(m)[2m]`. -/
+/-- Twists pulled back from the base pass through the zero section `s : Y ↪ 𝔸¹_Y`:
+`Rs^! Λ_{𝔸¹_Y}(1 + m)[2(1 + m)] ≅ Λ_Y(m)[2m]`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero_shiftTateObject
     [HasTateTwist.IsNormalized Λ]
     (Y : Scheme.{u}) {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k)) [IsSeparated aY]
@@ -182,8 +178,7 @@ lemma affineSpaceSuccIso_hom_over_over (c : ℕ) (B : Scheme.{u}) :
   rw [affineSpaceSuccIso, Iso.trans_hom, Category.assoc, AffineSpace.sumIso_hom_over_over,
     AffineSpace.reindexIso_hom, AffineSpace.reindex_over]
 
-/-- Blueprint `proposition-purity-vector-bundles`, Step 1: the zero section of `𝔸^{c+1}_B` is that
-of `𝔸¹_{B'}` after that of `B' = 𝔸^c_B`, so by the composition law
+/-- Writing the zero section of `𝔸^{c+1}_B` as that of `𝔸¹_{B'}` after that of `B' = 𝔸^c_B`,
 `Rz_{c+1}^! Λ(c+1)[2(c+1)] ≅ Rz_c^! Rs'^! Λ(1 + c)[2(1 + c)]`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_succ (c : ℕ) (B : Scheme.{u})
     [HasInvertibleExponent Λ B] :
@@ -214,8 +209,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_succ (c : ℕ) (B :
           (show ((c + 1 : ℕ) : ℤ) = 1 + c by push_cast; ring))))⟩
 
 /-- The `Rz^!`-form of the model purity with the twisting object in place of the twisted
-constant complex: `Rz^! Λ(c)[2c] ≅ Λ_B`, by induction on `c` (`proposition-purity-vector-bundles`,
-Step 1). -/
+constant complex: `Rz^! Λ(c)[2c] ≅ Λ_B`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_shiftTateObject
     [HasTateTwist.IsNormalized Λ] {k : Type u} [Field k] (c : ℕ)
     (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
@@ -243,20 +237,8 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_shiftTateObject
     exact ⟨t ≪≫
       (R(AffineSpace.zeroSection (ULift.{u} (Fin c)) B)^![Λ]).mapIso w ≪≫ ih⟩
 
-/-- Blueprint `proposition-purity-vector-bundles`: `𝔸¹ ⇒ 𝔸ⁿ`: the model purity
-
-**(i) The `Rz^!`-form.** For the zero section `z : B ↪ 𝔸^c_B` of relative affine `c`-space,
-
-`Rz^! Λ(c)[2c] ≅ Λ_B`,
-
-i.e. `Rz^! Λ ≅ Λ_B(-c)[-2c]`. This is also the isomorphism of blueprint
-`proposition-purity-vector-bundles`; its normalization by the product of the Kummer
-boundaries of the coordinates is not stated, the Kummer boundary with supports being
-unavailable (see the implementation notes).
-
-The proof is Step 1 of the blueprint: write `𝔸^c_B = 𝔸¹_{B'}` with `B' = 𝔸^{c-1}_B`, so that
-`z = s' ∘ z_{c-1}` and `Rz^! ≅ Rz_{c-1}^! Rs'^!`; pass the twist pulled back from `B'` through
-`Rs'^!` and conclude by `sk-prop-a1` and induction on `c`. -/
+/-- Model purity, `Rz^!`-form: for the zero section `z : B ↪ 𝔸^c_B` of relative affine
+`c`-space, `Rz^! Λ(c)[2c] ≅ Λ_B`, i.e. `Rz^! Λ ≅ Λ_B(-c)[-2c]`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] (c : ℕ)
     (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]

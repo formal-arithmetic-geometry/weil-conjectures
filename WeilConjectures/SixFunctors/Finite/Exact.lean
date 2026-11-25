@@ -52,6 +52,12 @@ since that is what the conservativity of the geometric points asks for. This hol
 - `AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory`: its total
   right derived functor is itself, applied levelwise to complexes.
 
+## Implementation details
+
+`AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory` is
+`CategoryTheory.Functor.rightDerivedFunctorIsoMapDerivedCategory` for `f_*`, made available by
+the exactness instance `AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite`.
+
 -/
 
 @[expose] public section
@@ -121,9 +127,8 @@ instance Etale.preservesHomology_lowerStar_of_isFinite : (f)_*[A].PreservesHomol
   Functor.preservesHomology_of_preservesEpis_and_kernels _
 
 include hJ in
-/-- **The direct image along a finite morphism is exact** (blueprint
-`lemma-finite-direct-images--2`): it preserves finite colimits, and it preserves
-finite limits by `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`. -/
+/-- **The direct image along a finite morphism is exact**: it preserves finite colimits, and it
+preserves finite limits by `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`. -/
 instance Etale.preservesFiniteColimits_lowerStar_of_isFinite :
     PreservesFiniteColimits (f)_*[A] :=
   Functor.preservesFiniteColimits_of_preservesHomology _
@@ -136,13 +141,7 @@ variable [HasDerivedCategory (Sheaf X.smallEtaleTopology A)]
 
 include hJ in
 /-- **The right derived functor of a finite direct image is the direct image itself**: since
-`f_*` is exact, its total right derived functor is `f_*` applied levelwise to complexes.
-
-This is definitionally `CategoryTheory.Functor.rightDerivedFunctorIsoMapDerivedCategory` for
-`f_*`; the content is that the exactness instance
-`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite` discharges its
-hypothesis, so that the general isomorphism is available for a finite `f`
-(blueprint `lemma-finite-direct-images--2`). -/
+`f_*` is exact, its total right derived functor is `f_*` applied levelwise to complexes. -/
 def Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory :
     (f)_*[A].rightDerivedFunctor ≅ (f)_*[A].mapDerivedCategory :=
   (f)_*[A].rightDerivedFunctorIsoMapDerivedCategory

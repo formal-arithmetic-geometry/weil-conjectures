@@ -25,8 +25,7 @@ commutation of `Ψ` with the derived pullbacks with `LΔ^* Lp₂^* ≅ 𝟭`. He
 orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with `Ψ` as soon as the frame classes of the
 diagonal (`hframe`), the composition isomorphisms `RΔ^! ω_{p₁} ≅ Λ_X` (`hε`) and the section
 invariant construction (`hL`) are
-(`AlgebraicGeometry.Etale.map_dualizingComplexTwistShiftIso_reduction`, blueprint
-`proposition-compatibility-purity-change-coefficients`).
+(`AlgebraicGeometry.Etale.map_dualizingComplexTwistShiftIso_reduction`).
 -/
 
 @[expose] public section
@@ -95,10 +94,7 @@ theorem map_sectionInvariantDiagonalIso_hom_comp
 variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasKummerClass Λ']
   [HasKummerClass.IsNormalized Λ'] (τ : DerivedExtendScalarsTateShiftData Λ Λ' hρ ha)
 
-/-- Blueprint `proposition-relative-dualizing-complex--1`,
-`proposition-compatibility-purity-change-coefficients`
-
-**The canonical orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with the reduction of
+/-- **The canonical orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with the reduction of
 coefficients.** Let `f : X ⟶ Y` be smooth separated of relative dimension `d`, `Y` separated and
 locally of finite type over a field, and `vω : Ψ ω_f ≅ ω'_f`. Read `Ψ ω_{p₁} ≅ ω'_{p₁}` through
 the smooth base change
@@ -107,10 +103,7 @@ If the derived extension of scalars carries the frame classes of the diagonal ov
 over `Λ'` (`hframe`), the composition isomorphisms `RΔ^! ω_{p₁} ≅ Λ_X` correspond (`hε`), and the
 section invariant construction at the diagonal is preserved (`hL`), then the canonical
 orientations `θ_f` (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`) over `Λ` and `Λ'`
-correspond: `vω ≫ θ'_f = Ψ θ_f ≫ (Ψ(Λ_X(d)[2d]) ≅ Λ'_X(d)[2d])`. The compatibility of the
-smooth base change identifications, a hypothesis of
-`AlgebraicGeometry.Etale.SupportedCoefficientChange.map_dualizingComplexTwistShiftIso`, holds by
-`AlgebraicGeometry.Etale.map_sectionInvariantDiagonalIso_hom_comp`. -/
+correspond: `vω ≫ θ'_f = Ψ θ_f ≫ (Ψ(Λ_X(d)[2d]) ≅ Λ'_X(d)[2d])`. -/
 theorem map_dualizingComplexTwistShiftIso_reduction (d : ℕ) [SmoothOfRelativeDimension d f]
     [IsSeparated f]
     {k : Type u} [Field k]

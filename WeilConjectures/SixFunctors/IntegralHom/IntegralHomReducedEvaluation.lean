@@ -13,8 +13,20 @@ import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralReductionTwoTer
 
 /-! # Completed-ring representatives of reduced evaluation
 
-Source: the finite-free calculation and evaluation sentence of
-`lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2.
+We compute the reduction of the evaluation map of the integral internal Hom on explicit
+completed-ring representatives, via signed chain evaluation.
+
+## Implementation details
+
+The statement only asserts the existence of the identification `s`; it is taken to be the
+transpose `g` of the right-hand side followed by the inverse of an isomorphism `t` into
+`Hom(K, U(F(L)))`, obtained from the two-term free resolution of the restricted quotient and the
+perfect-coefficient signed-action theorem. Both `g` and `t` are invertible by the scalar
+finite-coefficient argument, and the required equality follows by inverse cancellation.
+
+## References
+
+* Stacks Project, Tags 06YY, 07A4, 07A6, 08J7, 08J9, 0A8X.
 -/
 
 @[expose] public section
@@ -50,30 +62,11 @@ attribute [local irreducible] totalTensor homComplexFunctor homModelMap
   scalarReductionExistence scalarReductionDerivedExistence
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The completed-ring reduction of evaluation is computed by signed chain evaluation.
-This holds for an arbitrary K-flat coefficient resolution, with no boundedness
-assumption on it. It contains no finite-coefficient internal Hom or comparison map.
-
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2,
-finite-free construction and compatibility with actual evaluation; Stacks 06YY,
-07A4, 07A6, 08J7, 08J9 and 0A8X
-(blueprint: lem-sf-integral-hom-reduced-evaluation-representative).
-
-Proof: use the scalar tensor-resolution comparison and eI to obtain r.
-Choose the proved two-term free resolution of the restricted quotient. Its
-augmentation and epsilon give a derived isomorphism between Q and that
-resolution. The perfect-coefficient signed-action theorem shows that the
-composite of the localized f and homModelMap is invertible. Transport it by
-eP and r to an isomorphism t into Hom(K, U(F(L))). Independently, the scalar
-finite-coefficient argument shows that the completed-ring transpose g of the
-right-hand side is invertible. Set s = g followed by the inverse of t.
-Then s.hom followed by t is g, by inverse cancellation, and applying the inverse
-Hom-tensor adjunction gives the required equality. The statement only asks
-for the existence of s; it does not prescribe a canonical coefficient-model
-isomorphism. No additional naturality of the family a.adjunction in K is used.
-This reduces the theorem to separate scalar-model and invertibility assertions;
-these three assertions are the remaining named proof obligations. Zero complexes,
-the empty site, n=0 and a zero quotient require no nonvanishing premise. -/
+/-- Given a K-flat representative `P` of `K`, a K-injective representative `I` of `L`, a K-flat
+resolution `Q` of the restricted finite coefficient unit and a signed Hom-tensor map `f`, the
+reduction of the evaluation map `K ⊗ Hom(K, L) ⟶ L` is computed on representatives by `f`
+followed by signed chain evaluation, for suitable identifications `r` and `s`. No boundedness
+of the resolution is assumed. -/
 theorem reduced_evaluation_representative
     (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))
     (n : ℕ) (m : ReductionPresentation l E Y D hl a n)

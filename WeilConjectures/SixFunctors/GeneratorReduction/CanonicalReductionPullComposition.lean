@@ -12,9 +12,19 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
 /-! # Canonical reduction and pullback composition
 
-The comparison is specified on K-flat complexes and by ordinary limit projections.
-Source: blueprint latest, fix-prop-coherence.proof.md, maps-used sentence
-(blueprint: lem-sf-canonical-reduction-pull-composition).
+The canonical quotient/pullback comparison is compatible with the pullback compositors.
+
+## Implementation details
+
+The comparison is specified on K-flat complexes and by ordinary limit projections. The proof
+first compares ordinary direct images followed by the ordinary limit functor, using that limit
+projections are jointly monic, then passes to the pullback side by taking mates along the
+pullback/direct-image and quotient/limit adjunctions. The resulting ordinary equation is applied
+degreewise to a flat-term K-flat resolution and transported along the resolving isomorphism.
+
+## References
+
+* [Stacks, Tags 03D7, 07A6, 0D6D and 0941]
 -/
 
 @[expose] public section
@@ -251,25 +261,7 @@ private theorem on_good
   simpa only [Category.assoc] using congrArg (fun k ↦ k ≫ Q.map e)
     (a.model (f ≫ g) P (pull_good l E (f ≫ g) P)).symm
 
-/-- Canonical quotient/pullback comparison preserves the specified geometric compositor.
-Source: blueprint latest, sec-six-functors/sk-thm-sf-compatibility/
-fix-prop-coherence.proof.md, maps-used sentence; Stacks 03D7, 07A6, 0D6D and 0941.
-(blueprint: lem-sf-canonical-reduction-pull-composition).
-
-Proof: first compare ordinary direct images followed by the ordinary limit functor.
-Postcompose with every limit projection and evaluate on a section of a pro-etale object.
-The two composites are equal: both apply the projection and the same two base-change
-maps. The projection normalization in OrdinaryLimitModel and the section normalization
-of the ringed and sequence direct-image compositors give exactly these two expressions.
-Ordinary limit projections are jointly monic, so the ordinary comparisons paste.
-Conjugate by the ordinary pullback/direct-image and quotient/limit adjunctions. Mates
-preserve pasting; this gives the ordinary reduction/pullback compositor equation.
-Apply it degreewise to a flat-term K-flat complex. The model equations for reductionPull
-and pullComp, and the mapDerivedCategoryCompIso used by ringedPullComp, identify its
-localization with the displayed equation. Such complexes resolve every derived object;
-naturality transports the equality along the resolving isomorphism. This argument uses
-whole complexes and whole strict systems, without equality detection by derived finite
-evaluations. Identity morphisms and zero complexes use the same projection calculation. -/
+/-- The canonical quotient/pullback comparison is compatible with the pullback compositors. -/
 theorem canonicalReductionPullComposition
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

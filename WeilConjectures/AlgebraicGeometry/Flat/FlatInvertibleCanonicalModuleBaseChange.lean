@@ -15,7 +15,12 @@ import WeilConjectures.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback
 For a flat quasi-compact separated morphism `f : X ⟶ S`, a cartesian square along
 `g : S' ⟶ S` and an invertible module `ℒ` on `X`, the base-change map
 `Lg^* Rf_* ℒ ⟶ Rf'_* ℒ_{S'}`, with the ordinary pullback `ℒ_{S'}` as target, is an isomorphism.
-(blueprint: lemma-coherent-base-change-invertible-sheaves--2)
+
+## Implementation details
+
+This follows from `AlgebraicGeometry.exists_isIso_canonicalModuleBaseChange_of_isFlatOver`,
+since `ℒ` is flat over `S`; the comparison `Lg'^* ℒ ⟶ g'^* ℒ` is invertible by flatness of `ℒ`
+over `𝒪_X`.
 -/
 
 @[expose] public section
@@ -35,19 +40,12 @@ theorem tensorPullback_additive {X Y : Scheme.{u}} (g : X ⟶ Y) :
 
 attribute [local instance] tensorPullback_additive
 
-/-- Blueprint `lemma-coherent-base-change-invertible-sheaves--2`: derived base change for a line
-bundle with the pulled-back line bundle as target.
-
-For a flat quasi-compact separated morphism `f : X ⟶ S` (such as `f_T : C_T ⟶ T` for a smooth
-proper curve `C`), a cartesian square with `a = g : S' ⟶ S`, and an invertible module `ℒ` on
+/-- **Derived base change for a line bundle.** For a flat quasi-compact separated morphism
+`f : X ⟶ S`, a cartesian square with `a = g : S' ⟶ S`, and an invertible module `ℒ` on
 `X`, the base-change map `La^* Rf_* ℒ ⟶ Rf'_* ℒ_{S'}` is an isomorphism in the derived category of
 `𝒪_{S'}`-modules. Here `ℒ_{S'}` is the ordinary pullback `g'^* ℒ`, and the base-change map is the
 canonical derived base-change map `La^* Rf_* ℒ ⟶ Rf'_* Lg'^* ℒ` followed by `Rf'_*` of the
-comparison `c : Lg'^* ℒ ⟶ g'^* ℒ`, which is itself an isomorphism since `ℒ` is flat.
-
-Proof: `AlgebraicGeometry.exists_isIso_canonicalModuleBaseChange_of_isFlatOver` applies, since
-`ℒ` is flat over `S`; the comparison `c` is invertible by flatness of `ℒ` over `𝒪_X`. The
-functor `g'^*` is additive since it is a left adjoint. -/
+comparison `c : Lg'^* ℒ ⟶ g'^* ℒ`, which is itself an isomorphism. -/
 theorem exists_isIso_canonicalModuleBaseChange_of_isInvertible
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

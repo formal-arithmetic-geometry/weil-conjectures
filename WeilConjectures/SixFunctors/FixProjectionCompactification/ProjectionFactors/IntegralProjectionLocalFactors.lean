@@ -9,8 +9,9 @@ public import WeilConjectures.SixFunctors.FixProjectionCompactification.Projecti
 
 /-! # The open arrow and support identification before coefficient change
 
-Source: def-exchange-projection and prop-sf-pf-coherence, the open factor.
-(blueprint: def-sf-integral-projection-local-factors).
+The open factor of the integral projection exchange: the open arrow `openMap`, the support
+identification `supportMap`, and the factorization `second_via_openMap` of the second
+projection factor through them.
 -/
 
 @[expose] public noncomputable section
@@ -24,9 +25,7 @@ variable {D : FiniteFieldDatum.{u}} {B : SixFunctorSpace D → Type v}
   {T : ∀ X, B X ⥤ B X ⥤ B X} {Q : SixFunctorCompactifiedSquare D}
   (A : SixFunctorExchangeData S T Q)
 
-/-- The integral open arrow, with its input equality transport made explicit.
-The construction works on any supplied coefficient category.
-Source: def-exchange-projection (blueprint: def-sf-integral-projection-local-factors). -/
+/-- The integral open arrow, with its input equality transport made explicit. -/
 def openMap (K : B Q.X) (L : B Q.Y) :
     ((A.stage.tensorBar.obj (A.stage.openExtension.obj K)).obj
       (A.stage.properPull.obj L)) ⟶
@@ -36,16 +35,14 @@ def openMap (K : B Q.X) (L : B Q.Y) :
       change ((A.stage.tensorX.obj K).obj (A.stage.pull.obj L)) = _
       rw [A.tensorX, A.pull]))
 
-/-- The support identification, after the open factor, on a single input.
-Source: def-exchange-projection (blueprint: def-sf-integral-projection-local-factors). -/
+/-- The support identification, after the open factor, on a single input. -/
 def supportMap (K : B Q.X) :
     A.stage.properPush.obj (A.stage.openExtension.obj K) ⟶
       (S.support Q.f Q.compactification).obj K :=
   A.stage.compactSupportIdentification.inv.app K ≫ eqToHom (by rw [A.compactSupport])
 
-/-- Factor the datum's second projection factor by moving the input equality
-transport through the natural support identification.
-Source: naturality (blueprint: def-sf-integral-projection-local-factors). -/
+/-- The datum's second projection factor is the proper pushforward of `openMap` followed by
+`supportMap`. -/
 theorem second_via_openMap (K : B Q.X) (L : B Q.Y) :
     second A K L = A.stage.properPush.map (openMap A K L) ≫
       supportMap A (((T Q.X).obj K).obj ((S.pull Q.f).obj L)) := by

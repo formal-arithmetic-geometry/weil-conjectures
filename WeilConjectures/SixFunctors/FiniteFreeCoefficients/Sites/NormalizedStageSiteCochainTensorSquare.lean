@@ -17,10 +17,12 @@ public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.Sites.Normalize
 /-!
 # Signed cochain lift of the scalar/site tensor square
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YS, 07A4 and 0G7E;
-finite coefficient scalar/site transport in the blueprint
-lemma-change-coefficients-exceptional-inverse-image--3, Paragraphs 1--3.
-(blueprint: lem-sf-normalized-stage-site-cochain-tensor-square)
+The square comparing scalar extension and the etale-to-pro-etale inverse image with the
+signed total tensor product of cochain complexes commutes before localization.
+
+## References
+
+* [Stacks, Tags 03EL, 06YS, 07A4, 0FPT and 0G7E]
 -/
 
 @[expose] public noncomputable section
@@ -48,9 +50,7 @@ local instance etaleScalarIsLeftAdjoint {A B : Type (u + 1)} [CommRing A] [CommR
     (ProEtale.etaleSheafExtendScalars φ X).IsLeftAdjoint :=
   (ProEtale.etaleSheafExtendScalarsAdjunction φ X).isLeftAdjoint
 
-/-- The termwise canonical scalar/site mate on ordinary cochain complexes.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+/-- The termwise canonical scalar/site mate on ordinary cochain complexes. -/
 abbrev scalarSiteCochain
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (X : Scheme.{u})
@@ -59,17 +59,13 @@ abbrev scalarSiteCochain
     (ProEtale.etaleSheafExtendScalarsCompComparisonUpperStarIso φ X).inv (.up ℤ)).app P
 
 /-- Signed total tensor comparison for the etale-to-pro-etale inverse image.
-Its homogeneous summands are the ordinary site tensor maps.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+Its homogeneous summands are the ordinary site tensor maps. -/
 abbrev siteTensorCochain (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :=
   ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
     (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X)).app P).app Q
 
-/-- Signed total tensor comparison for ordinary etale scalar extension.
-Source: Stacks 07A4, normalized scalar tensor maps
-(blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+/-- Signed total tensor comparison for ordinary etale scalar extension. -/
 abbrev etaleScalarTensorCochain
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (X : Scheme.{u})
@@ -77,9 +73,7 @@ abbrev etaleScalarTensorCochain
   ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
     (ProEtale.etaleSheafExtendScalars φ X)).app P).app Q
 
-/-- Signed total tensor comparison for ordinary pro-etale scalar extension.
-Source: Stacks 07A4, normalized scalar tensor maps
-(blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+/-- Signed total tensor comparison for ordinary pro-etale scalar extension. -/
 abbrev proEtaleScalarTensorCochain
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (X : Scheme.{u})
@@ -107,8 +101,7 @@ variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive 
   [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
 
 /-- On a summand of the signed total tensor, the cochain tensor comparison of an additive
-oplax monoidal functor is its ordinary comparison `δ`.
-Source: Stacks 0FPT (blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+oplax monoidal functor is its ordinary comparison `δ`. -/
 @[reassoc]
 theorem map_ιMapBifunctor_mapHomologicalComplexδ (G : C ⥤ D) [G.Additive] [G.OplaxMonoidal]
     [∀ j, PreservesColimitsOfShape
@@ -125,8 +118,7 @@ theorem map_ιMapBifunctor_mapHomologicalComplexδ (G : C ⥤ D) [G.Additive] [G
 
 omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
 /-- On a summand of the signed total tensor, a tensor product of cochain maps is the
-tensor product of its components.
-Source: Stacks 0FPT (blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+tensor product of its components. -/
 @[reassoc]
 theorem ιMapBifunctor_tensorHom_f {K K' L L' : CochainComplex C ℤ} (f : K ⟶ K')
     (g : L ⟶ L') (p q n : ℤ) (h : ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) (p, q) = n) :
@@ -171,8 +163,7 @@ variable {C C' D D' : Type*} [Category* C] [Category* C'] [Category* D] [Categor
   [∀ (X₁ X₂ X₃ : GradedObject ℤ D'), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
 
 /-- A square of additive oplax monoidal functors whose ordinary tensor comparisons commute
-induces the same square on signed total tensors of cochain complexes.
-Source: Stacks 0FPT (blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+induces the same square on signed total tensors of cochain complexes. -/
 theorem mapHomologicalComplexδ_square (ν : C ⥤ C') (F : C' ⥤ D') (F' : C ⥤ D) (ν' : D ⥤ D')
     [ν.Additive] [F.Additive] [F'.Additive] [ν'.Additive]
     [ν.OplaxMonoidal] [F.OplaxMonoidal] [F'.OplaxMonoidal] [ν'.OplaxMonoidal]
@@ -222,24 +213,8 @@ theorem mapHomologicalComplexδ_square (ν : C ⥤ C') (F : C' ⥤ D') (F' : C �
 
 end SquareOfSummands
 
-/-- The scalar/site square for signed total tensors commutes before localization.
-
-Source: Stacks Project, Cohomology on Sites, Tags 06YS, 07A4 and 0G7E;
-latest blueprint lemma-change-coefficients-exceptional-inverse-image--3, Paragraphs 1--3.
-(blueprint: lem-sf-normalized-stage-site-cochain-tensor-square)
-
-Proof:
-1. In degree n, form the direct sum over p + q = n of the ordinary scalar/site tensor
-maps. All four functors are additive left adjoints and preserve these direct sums.
-The four total comparisons above are exactly this canonical construction, using
-`CochainComplex.mapBifunctor` for the signed total tensor.
-2. Naturality in each variable commutes with the two differentials separately.
-Additivity commutes with the scalar (-1)^p in the second differential, and all maps
-preserve the bidegree, so the Koszul signs on both paths are the same.
-3. On each summand the ordinary sheaf tensor square gives equality: locally each route
-sends b tensor (p tensor q) to (b tensor p) tensor (1 tensor q). The direct-sum universal
-property proves the equality of components, hence of cochain maps.
--/
+/-- The scalar/site square for signed total tensors of cochain complexes commutes before
+localization. -/
 theorem normalized_stage_site_cochain_tensor_square
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (X : Scheme.{u})

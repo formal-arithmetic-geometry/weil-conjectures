@@ -12,10 +12,20 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RankOne
 /-!
 # Rank-one Weil characters on normal curves over a finite field
 
-The blueprint states `proposition-no-fixed-class-degree-one--1` and
-`theorem-rank-one-sheaves-have-finite--1` for a curve `U₀ / 𝔽_q` which is normal,
-geometrically connected, separated, of finite type and pure of dimension one. Such a curve is
-smooth of relative dimension one over the perfect field `𝔽_q`
+We prove the absence of Frobenius-fixed compatible classes in `lim_n H¹(U, ℤ / ℓⁿ)` and the
+finiteness of the geometric image of rank-one Weil characters for a curve `U₀ / 𝔽_q` which is
+normal, geometrically connected, separated, of finite type and pure of dimension one.
+
+## Main statements
+
+- `Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso_of_isIntegrallyClosed_stalk`
+- `AlgebraicGeometry.WeilGroup.eq_one_of_conj_invariant_of_isIntegrallyClosed_stalk`
+- `AlgebraicGeometry.WeilGroup.exists_pow_eq_one_of_continuous_of_isIntegrallyClosed_stalk`
+- `AlgebraicGeometry.WeilGroup.finite_range_of_continuous_of_isIntegrallyClosed_stalk`
+
+## Implementation details
+
+Such a curve is smooth of relative dimension one over the perfect field `𝔽_q`
 (`AlgebraicGeometry.IsCurve.smoothOfRelativeDimension_one_of_isIntegrallyClosed_stalk`), so
 these statements follow from their versions for smooth curves:
 `AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso`,
@@ -28,13 +38,6 @@ these statements follow from their versions for smooth curves:
 Normality is expressed by asking the local rings of `U₀` to be integrally closed domains, pure
 dimension one by `topologicalKrullDim U₀ = 1` (`U₀` being irreducible, as it is connected and
 normal), and separatedness and finite type by `AlgebraicGeometry.IsCurve`.
-
-## Main statements
-
-- `Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso_of_isIntegrallyClosed_stalk`
-- `AlgebraicGeometry.WeilGroup.eq_one_of_conj_invariant_of_isIntegrallyClosed_stalk`
-- `AlgebraicGeometry.WeilGroup.exists_pow_eq_one_of_continuous_of_isIntegrallyClosed_stalk`
-- `AlgebraicGeometry.WeilGroup.finite_range_of_continuous_of_isIntegrallyClosed_stalk`
 -/
 
 @[expose] public section
@@ -49,17 +52,14 @@ namespace Scheme.EtaleTorsor
 
 open FiniteEtale
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: No Frobenius-fixed compatible class
-on an open normal curve.
+/-- No Frobenius-fixed compatible class on an open normal curve.
 
 Let `U₀` be a normal geometrically connected curve of pure dimension one over a finite field
 `K = 𝔽_q` (its local rings are integrally closed domains and `dim U₀ = 1`), let
 `U = U₀ ×_K K̄` be its geometric fibre with geometric point `s` and fundamental group
 `G = π₁(U, s)`, and let `ℓ ≠ char K`. A compatible system of classes
 `(z_n) ∈ lim_n H¹(U, ℤ / ℓⁿ)`, all of which are fixed by the Frobenius, is zero: every torsor
-`t n` has a section. The curve `U₀` is smooth over `K`
-(`AlgebraicGeometry.IsCurve.smoothOfRelativeDimension_one_of_isIntegrallyClosed_stalk`), so this
-is `AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso`. -/
+`t n` has a section. -/
 theorem exists_section_of_isIsomorphic_mapIso_of_isIntegrallyClosed_stalk {K : Type u} [Field K]
     [Finite K] {U : Scheme.{u}} (p : U ⟶ Spec (.of K)) [IsCurve p] [GeometricallyConnected p]
     (hU : ∀ x : U, IsDomain (U.presheaf.stalk x) ∧ IsIntegrallyClosed (U.presheaf.stalk x))
@@ -86,12 +86,8 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of
 
 include hC hdim
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`, the cohomological step, for a
-normal geometrically connected curve `C₀ / 𝔽_q` of pure dimension one: a continuous
-homomorphism `b : π₁(C) → ℤ_ℓ` invariant under conjugation by the Frobenius lift is trivial.
-The curve is smooth
-(`AlgebraicGeometry.IsCurve.smoothOfRelativeDimension_one_of_isIntegrallyClosed_stalk`),
-so this is `AlgebraicGeometry.WeilGroup.eq_one_of_conj_invariant`. -/
+/-- For a normal geometrically connected curve `C₀ / 𝔽_q` of pure dimension one, a continuous
+homomorphism `b : π₁(C) → ℤ_ℓ` invariant under conjugation by the Frobenius lift is trivial. -/
 theorem eq_one_of_conj_invariant_of_isIntegrallyClosed_stalk
     (b : W.geometric →ₜ* Multiplicative ℤ_[l])
     (hb : ∀ g h : W.geometric, (h : W.carrier) = W.frobeniusLift⁻¹ * g * W.frobeniusLift →
@@ -100,8 +96,7 @@ theorem eq_one_of_conj_invariant_of_isIntegrallyClosed_stalk
   have := IsCurve.smoothOfRelativeDimension_one_of_isIntegrallyClosed_stalk p hC hdim
   W.eq_one_of_conj_invariant b hb
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: Finite geometric image of a
-rank-one Weil character on a curve.
+/-- Finite geometric image of a rank-one Weil character on a curve.
 
 Let `C₀ / 𝔽_q` be normal, geometrically connected, separated, of finite type and pure of
 dimension one. A continuous character `χ : W(C₀) → ℚ̄_ℓˣ` has finite geometric image: there is
@@ -113,8 +108,7 @@ theorem exists_pow_eq_one_of_continuous_of_isIntegrallyClosed_stalk
   have := IsCurve.smoothOfRelativeDimension_one_of_isIntegrallyClosed_stalk p hC hdim
   W.exists_pow_eq_one_of_continuous χ hχ
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: Finite geometric image of a
-rank-one Weil character on a curve.
+/-- Finite geometric image of a rank-one Weil character on a curve.
 
 Let `C₀ / 𝔽_q` be normal, geometrically connected, separated, of finite type and pure of
 dimension one. A continuous character `χ : W(C₀) → ℚ̄_ℓˣ` takes finitely many values on

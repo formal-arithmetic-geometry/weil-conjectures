@@ -18,11 +18,10 @@ field `k₀`, `z` a boundary point with closed point `x`, `W` the chosen affine 
 ring `R = Γ(C₀, W)`, `B` the integral closure of `R` in the separable closure `Ω` of `k(C)` and
 `Q` a maximal ideal of `B` over `z`. The ring `A = B_Q^{I_Q}` of inertia invariants gives a
 strictly henselian neighbourhood of the boundary point
-(`AlgebraicGeometry.WeilGroup.BoundaryNeighbourhood`, blueprint
-`lemma-boundary-stalk--1`), provided `Q` is *compatible* with the geometric point
-`x̄ = geometricFiberPointOfFinitePoint x`: the reduction modulo `Q` of the embedding
-`ι : k̄ ↪ Ω` of the geometric generic point (`AlgebraicGeometry.WeilGroup.genericEmb`) induces on
-`κ(x)` the embedding `κ(x) ↪ k̄` of `x̄`
+(`AlgebraicGeometry.WeilGroup.BoundaryNeighbourhood`), provided `Q` is *compatible* with the
+geometric point `x̄ = geometricFiberPointOfFinitePoint x`: the reduction modulo `Q` of the
+embedding `ι : k̄ ↪ Ω` of the geometric generic point (`AlgebraicGeometry.WeilGroup.genericEmb`)
+induces on `κ(x)` the embedding `κ(x) ↪ k̄` of `x̄`
 (`AlgebraicGeometry.WeilGroup.nonempty_boundaryNeighbourhood_of_compatible`). The Frobenius lift
 is given by an element `σ_F` of the decomposition group of `Q` acting on `ι(k̄)` as the
 `deg x`-th power of the geometric Frobenius.
@@ -271,7 +270,7 @@ point: `ι(ι_x(ā)) ≡ a mod Q` for `a ∈ Γ(C, W)`, where `ι : k̄ ↪ Ω` 
 `ι_x : κ(x) ↪ k̄` the embedding of `x̄`. Let `σ_F` be an element of the decomposition group of
 `Q` acting on `ι(k̄)` as the `deg x`-th power of the geometric Frobenius. Then the inertia
 invariants `B_Q^{I_Q}` give a strictly henselian neighbourhood of the boundary point for the
-inertia group of `Q` and `σ_F`. (blueprint `lemma-boundary-stalk--1`) -/
+inertia group of `Q` and `σ_F`. -/
 theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.range j.base)
     (c : BoundaryChart (C ↘ Spec (.of K)) j z) (x : C.finitePoints) (hx : x.1 = z)
     (Q : Ideal (integralClosure Γ(C, c.W) Ω)) [Q.IsMaximal] [Q.LiesOver c.ideal]

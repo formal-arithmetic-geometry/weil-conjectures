@@ -23,7 +23,7 @@ frame `(f, g)` of `Y` (`AlgebraicGeometry.Scheme.Hom.EtaleFrame.inter`), whose c
 Applied to `Z₁ ×_k X₂` and `X₁ ×_k Z₂` in `X₁ ×_k X₂`, whose fundamental classes are the
 pullbacks of `[Z₁ ⊂ X₁]` and `[Z₂ ⊂ X₂]` along the smooth projections
 (`AlgebraicGeometry.Etale.restrictSupportedClass_fundamentalClass_of_smooth`), this gives the
-compatibility with exterior products of clause (d) of blueprint `lemma-class-of-point--1`,
+compatibility of fundamental classes with exterior products,
 `[Z₁ × Z₂ ⊂ X₁ × X₂] = [Z₁ ⊂ X₁] ⊠ [Z₂ ⊂ X₂]`.
 
 ## Main statements
@@ -156,17 +156,10 @@ lemma fundamentalClass_congr [HasInvertibleExponent Λ X] {Z : Scheme.{u}} (c : 
   subst h
   rfl
 
-/-- Blueprint `prop-pur-regular-immersion-purity-compatibilities`: Compatibilities of purity for
-regular immersions
-
-**Transverse intersections: the intersection formula.** Let `i₁ : Y₁ ⟶ X` and `i₂ : Y₂ ⟶ X` be
+/-- **Transverse intersections: the intersection formula.** Let `i₁ : Y₁ ⟶ X` and `i₂ : Y₂ ⟶ X` be
 regular closed immersions of codimensions `c₁` and `c₂` meeting transversally: their
 intersection `Y = Y₁ ×_X Y₂ ⟶ X` is regular of codimension `c₁ + c₂`. Then
-`[Y ⊂ X] = [Y₁ ⊂ X] ∪ [Y₂ ⊂ X]`, with the twist additivity `Λ(c₁) ⊗ Λ(c₂) ≅ Λ(c₁ + c₂)`. This is
-the content of item 2 of the blueprint node (transverse composition): near every point of `Y`,
-frames `f` of `Y₁` and `g` of `Y₂` give the frame `(f, g)` of `Y`, whose class
-`∂κ(f₁) ∪ ⋯ ∪ ∂κ(g_{c₂})` is the cup product of the classes of the two frames
-(`AlgebraicGeometry.Etale.kummerBoundaryProduct_append`). -/
+`[Y ⊂ X] = [Y₁ ⊂ X] ∪ [Y₂ ⊂ X]`, with the twist additivity `Λ(c₁) ⊗ Λ(c₂) ≅ Λ(c₁ + c₂)`. -/
 theorem fundamentalClass_eq_cupWithSupportsTateObject_of_isPullback [HasInvertibleExponent Λ X]
     {Y₁ Y₂ Y : Scheme.{u}} (c₁ c₂ : ℕ) (i₁ : Y₁ ⟶ X) (i₂ : Y₂ ⟶ X) (i : Y ⟶ X)
     [IsRegularImmersion c₁ i₁] [IsRegularImmersion c₂ i₂] [IsRegularImmersion (c₁ + c₂) i]
@@ -234,26 +227,12 @@ theorem fundamentalClass_eq_cupWithSupportsTateObject_of_isPullback [HasInvertib
         Scheme.range_zeroLocusSubschemeι_union]) _ _ _ hp₁ hp₂, e₁, e₂]
   exact kummerBoundaryProduct_append Λ f₁ f₂
 
-/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
-
-Blueprint `prop-pur-regular-immersion-purity-compatibilities` (item 3, cup products).
-
-**(d) Exterior products**,
-`[Z₁ × Z₂ ⊂ X₁ × X₂] = [Z₁ ⊂ X₁] ⊠ [Z₂ ⊂ X₂]`. Let `(X₁, Z₁)` and `(X₂, Z₂)` be pairs as in the
-theorem over the same perfect field `k`, of codimensions `c₁` and `c₂`, let
-`P = X₁ ×_k X₂` with projections `p₁`, `p₂`, let `Z₁ ×_k X₂ ⟶ P` and `X₁ ×_k Z₂ ⟶ P` be the base
-changes of `i₁` and `i₂` along them, and `i₁₂ : Z₁ ×_k Z₂ ⟶ P` the product of `i₁` and `i₂`, the
-closed immersion of their intersection. Then the fundamental class of `i₁₂` is the cup product
-with supports of the restrictions `p₁^* [Z₁ ⊂ X₁]` and `p₂^* [Z₂ ⊂ X₂]`. These restrictions are
-the fundamental classes of `Z₁ ×_k X₂` and `X₁ ×_k Z₂`
-(`AlgebraicGeometry.Etale.restrictSupportedClass_fundamentalClass_of_smooth`), and the
-intersection formula
-(`AlgebraicGeometry.Etale.fundamentalClass_eq_cupWithSupportsTateObject_of_isPullback`) applies.
-
-The hypotheses on the product are derived: `i₁₂` is a regular immersion of codimension
-`c₁ + c₂` (`AlgebraicGeometry.IsRegularImmersion.pullback_map`), `Z₁ ×_k Z₂` is regular
-(`AlgebraicGeometry.isRegularLocalRing_stalk_pullback`), `P` is smooth over `k` and the exponent
-of `Λ` is invertible on `P`. -/
+/-- **Exterior products**, `[Z₁ × Z₂ ⊂ X₁ × X₂] = [Z₁ ⊂ X₁] ⊠ [Z₂ ⊂ X₂]`. Let `(X₁, Z₁)` and
+`(X₂, Z₂)` be regular closed immersions of codimensions `c₁` and `c₂` of regular schemes into
+schemes smooth over the same perfect field `k`, let `P = X₁ ×_k X₂` with projections `p₁`, `p₂`,
+and let `i₁₂ : Z₁ ×_k Z₂ ⟶ P` be the product of `i₁` and `i₂`. Then the fundamental class of
+`i₁₂` is the cup product with supports of the restrictions `p₁^* [Z₁ ⊂ X₁]` and
+`p₂^* [Z₂ ⊂ X₂]`. -/
 theorem fundamentalClass_eq_cupWithSupportsTateObject {X₁ X₂ Z₁ Z₂ : Scheme.{u}} (c₁ c₂ : ℕ)
     (i₁ : Z₁ ⟶ X₁) (i₂ : Z₂ ⟶ X₂) [IsRegularImmersion c₁ i₁] [IsRegularImmersion c₂ i₂]
     (a₁ : X₁ ⟶ Spec (.of k)) (a₂ : X₂ ⟶ Spec (.of k)) [Smooth a₁] [Smooth a₂]
