@@ -26,10 +26,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 
 For a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and `n : ℕ`, the coefficient change
 `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ` sends a bounded constructible `𝒪_E`-complex `K` on the pro-étale site of `X`
-to `K ⊗ᴸ 𝒪_E ⧸ ℓⁿ`. For the finite ring `𝒪_E ⧸ ℓⁿ` the blueprint reads the target on the small
-étale site (`definition-constructible-sheaves`: "for finite `Λ = A_{E,n}`, and only there, the same
-definitions may be read on the small étale site; the comparison `ν_T^*` identifies them with the
-pro-étale categories"). This file defines this étale reading of the reduction,
+to `K ⊗ᴸ 𝒪_E ⧸ ℓⁿ`. For the finite ring `𝒪_E ⧸ ℓⁿ` the target can be read on the small
+étale site, the comparison `ν^*` identifying the étale and pro-étale categories. This file defines
+this étale reading of the reduction,
 ```
 Dᵇc(X)⟦𝒪_E⟧ ⥤ D(X_ét, 𝒪_E ⧸ ℓⁿ),   K ↦ Rν_* (K ⊗ᴸ 𝒪_E ⧸ ℓⁿ),
 ```
@@ -39,24 +38,15 @@ identification of condensed `𝒪_E ⧸ ℓⁿ`-module objects with pro-étale s
 (`AlgebraicGeometry.ProEtale.finiteCoefficientDerivedEquivalence`) and the comparison
 `Rν_* : D(X_proét) ⥤ D(X_ét)`.
 
-It states the coefficient comparisons of blueprint `proposition-six-operations-change-coefficients`
-for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site, that the trace formula uses to
-pass from integral to finite coefficients (blueprint `lemma-vanishing-local-term-zero-stalk`, last
-step). They are compatibilities required from section `chap-Construction-of-f`, each exactly one
-blueprint node:
+It states the coefficient comparisons for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale
+site, that the trace formula uses to pass from integral to finite coefficients:
 
-* `nonempty_etaleReductionUpperStarIso`: pullback (`proposition-six-operations-change-coefficients`,
-(1)), by the
-  canonical isomorphism `etaleReductionUpperStarIso`;
+* `nonempty_etaleReductionUpperStarIso`: pullback, by the canonical isomorphism
+  `etaleReductionUpperStarIso`;
 * `exists_etaleReductionLowerShriekIso`: compactly supported direct image and exceptional
-  inverse image, for proper morphisms (`lemma-change-coefficients-exceptional-inverse-image`, with
-  the comparison `γ^!` of `lemma-change-coefficients-compact-support`), proved in the file
-  `FiniteComparison/EtaleReductionLowerShriekIso.lean`;
-* `nonempty_etaleReductionTensorIso`: tensor product
-(`proposition-six-operations-change-coefficients`, (1));
-* `boundedConstructibleFiniteTor_etaleReduction`: preservation of `Dctf`
-  (`lemma-extension-scalars-preserves-dctf`, (3)).
-
+  inverse image, for proper morphisms;
+* `nonempty_etaleReductionTensorIso`: tensor product;
+* `boundedConstructibleFiniteTor_etaleReduction`: preservation of `Dctf`.
 -/
 
 @[expose] public section
@@ -93,19 +83,8 @@ variable {Z Y : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z
   [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
 /-- **The canonical isomorphism: reduction modulo `ℓⁿ` commutes with pullback**,
-`(f^* K)_{𝒪_E ⧸ ℓⁿ} ≅ f^* (K_{𝒪_E ⧸ ℓⁿ})` (blueprint
-`proposition-six-operations-change-coefficients`, (1), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`,
-read on the étale site, `definition-constructible-sheaves`).
-
-It is the composite of the following canonical isomorphisms: the reduction commutes with
-pullback on the condensed side (`boundedConstructibleUpperStarIntegersModPowReductionIso`), the
-pullback of bounded constructible complexes is computed by the derived pullback
-(`boundedConstructibleUpperStarCompatibility`), the comparison of the two finite-coefficient
-models commutes with pullback (`leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso`),
-and the inverse of the canonical base change morphism `Lf^* Rν_* ⟶ Rν_* Lf^*`
-(`rightDerivedComparisonBaseChange`), which is invertible on complexes of étale origin
-(`isIso_rightDerivedComparisonBaseChange_app`), as the reductions of bounded constructible
-complexes are (`isEtaleOrigin_of_isConstructible`). -/
+`(f^* K)_{𝒪_E ⧸ ℓⁿ} ≅ f^* (K_{𝒪_E ⧸ ℓⁿ})`, for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ` read on the
+étale site. -/
 noncomputable def etaleReductionUpperStarIso (f : Z ⟶ Y) :
     boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
         etaleReduction ℓ E n Z ≅
@@ -148,10 +127,8 @@ noncomputable def etaleReductionUpperStarIso (f : Z ⟶ Y) :
     (asIso (Functor.whiskerLeft P (rightDerivedComparisonBaseChange A f.left))).symm
   exact e₁ ≪≫ e₂ ≪≫ e₃ ≪≫ e₄
 
-/-- Compatibility required from `chap-Construction-of-f` (to be proved there): blueprint
-`proposition-six-operations-change-coefficients`, (1), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`,
-read on the étale site (`definition-constructible-sheaves`). **Reduction modulo `ℓⁿ` commutes with
-pullback**: `(f^* K)_{𝒪_E ⧸ ℓⁿ} ≅ f^* (K_{𝒪_E ⧸ ℓⁿ})`, by the canonical isomorphism
+/-- **Reduction modulo `ℓⁿ` commutes with pullback**, read on the étale site:
+`(f^* K)_{𝒪_E ⧸ ℓⁿ} ≅ f^* (K_{𝒪_E ⧸ ℓⁿ})`, by the canonical isomorphism
 `etaleReductionUpperStarIso`. -/
 theorem nonempty_etaleReductionUpperStarIso (f : Z ⟶ Y) :
     Nonempty (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
@@ -161,11 +138,8 @@ theorem nonempty_etaleReductionUpperStarIso (f : Z ⟶ Y) :
   ⟨etaleReductionUpperStarIso ℓ E n f⟩
 
 omit [Fact (ringChar k).Prime] in
-/-- Blueprint `proposition-six-operations-change-coefficients`, (1), for the coefficient map
-`𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site (`definition-constructible-sheaves`). **Reduction modulo
-`ℓⁿ` commutes with the tensor product**: `(K ⊗ᴸ M)_{𝒪_E ⧸ ℓⁿ} ≅ K_{𝒪_E ⧸ ℓⁿ} ⊗ᴸ M_{𝒪_E ⧸ ℓⁿ}`
-(proved in
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionTensor`). -/
+/-- **Reduction modulo `ℓⁿ` commutes with the tensor product**, read on the étale site:
+`(K ⊗ᴸ M)_{𝒪_E ⧸ ℓⁿ} ≅ K_{𝒪_E ⧸ ℓⁿ} ⊗ᴸ M_{𝒪_E ⧸ ℓⁿ}`. -/
 theorem nonempty_etaleReductionTensorIso (K M : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
     Nonempty ((etaleReduction ℓ E n Y).obj (K ⊗ M) ≅
       ((Etale.derivedTensor (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) Y.left).obj
@@ -174,11 +148,9 @@ theorem nonempty_etaleReductionTensorIso (K M : Dᵇc(Y.left)⟦Profinite.padicI
 
 -- the coefficient hypotheses on `k` are part of the setting of the statement, unused by the proof
 set_option linter.unusedSectionVars false in
-/-- Compatibility required from `chap-Construction-of-f` (to be proved there): blueprint
-`lemma-extension-scalars-preserves-dctf`, (3), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the
-étale site (`definition-constructible-sheaves`). **Reduction modulo `ℓⁿ` preserves `Dctf`**: for a
-bounded constructible `𝒪_E`-complex `K` (for which `Dᵇc = Dctf`, `proposition-ctf-equals-bc`), the
-reduction `K_{𝒪_E ⧸ ℓⁿ}` is bounded constructible of finite Tor amplitude. -/
+/-- **Reduction modulo `ℓⁿ` preserves `Dctf`**, read on the étale site: for a bounded
+constructible `𝒪_E`-complex `K`, the reduction `K_{𝒪_E ⧸ ℓⁿ}` is bounded constructible of finite
+Tor amplitude. -/
 theorem boundedConstructibleFiniteTor_etaleReduction
     (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
     Etale.DerivedCategory.boundedConstructibleFiniteTor (integersModPowCoeff.{u} ℓ E n) Y.left

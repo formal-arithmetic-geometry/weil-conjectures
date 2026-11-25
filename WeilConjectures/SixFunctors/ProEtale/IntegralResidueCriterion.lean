@@ -17,8 +17,10 @@ import WeilConjectures.SixFunctors.ProEtale.InternalResidueStacksComparison
 
 /-! # Integral constructibility detected by the actual residue reduction
 
-Source: Stacks Project, Tags 099L and 09C1; blueprint integral models, clause (2).
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 099L](https://stacks.math.columbia.edu/tag/099L)
+* [Stacks, Tag 09C1](https://stacks.math.columbia.edu/tag/09C1)
 -/
 
 @[expose] public noncomputable section
@@ -46,31 +48,7 @@ local instance criterionAbLocallyBijective (X : Scheme.{u}) :
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify in
-/-- The residue criterion in the internal continuous coefficient presentation.
-Source: blueprint `lemma-integral-models`, clauses (1)--(2); Stacks 099L, 09C1.
-(auxiliary; not a blueprint node).
-
-Proof: the integral coefficient limit identifies the continuous integer sheaf with
-its positive finite-quotient limit. Pass to sectionwise modules and the equivalent
-coefficient-sized small site; these exact equivalences preserve homology, signed tensor
-complexes, and products. The normalized quotient maps identify derived scalar extension
-at each positive level, including the actual quotient actions and tensor units.
-Consequently the canonical augmentation into the Roos complex is the completion unit
-used in integral_constant_completion. Its restriction equivalence identifies completeness
-with the constant-coefficient Stacks completeness condition. At level one, finite discrete
-coefficient comparison identifies finite constant local models and their cohomology on
-both presentations. The residue is a field: the chosen uniformizer generates the maximal
-ideal of the DVR. Every residue module sheaf is flat, as can be checked locally on the
-constant field coefficients. Thus a bounded residue complex has finite Tor amplitude;
-conversely finite Tor amplitude implies boundedness by testing the tensor unit.
-The theorem integral_models_stacks now gives both directions of the displayed criterion.
-Finally a finite constant module over a DVR has a length-one finite free resolution.
-Exact pullback gives Tor interval [-1,0] on every constant local model. Finite constructible
-stratification and open--closed localization detect vanishing of tensor homology against
-any degree-zero module. Induction on a bounded cohomological interval gives [a-1,b] for
-an integral bounded constructible complex with cohomology in [a,b]. Hence all such complexes
-have finite Tor amplitude; the opposite inclusion in the equality is definitional.
-The argument includes zero objects, empty schemes and torsion scalar modules. -/
+/-- The residue criterion in the internal continuous coefficient presentation. -/
 theorem internal_integral_residue_criterion
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

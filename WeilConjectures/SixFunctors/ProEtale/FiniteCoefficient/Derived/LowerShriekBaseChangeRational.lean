@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tri
 Let `E` be a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ` with ring of integers `𝒪_E`. The integral stage
 `D_comp(X_proét, 𝒪_E)` consists of the derived complete objects of `D(X_proét, 𝒪_E)`
 (`DerivedCategoryDerivedCompleteIntegral`), and the rational stage `D_comp(X_proét, E)` is its
-rationalization (`DerivedCategoryDerivedCompleteRational`). Following the blueprint, the
+rationalization (`DerivedCategoryDerivedCompleteRational`). The
 operations of the rational stage are obtained by transport from the integral stage
 (`CategoryTheory.Rationalization.map`): the integral operations, `K ↦ (F K)^` for the plain
 operation `F`, are `𝒪_E`-linear triangulated functors between the integral stages.
@@ -139,14 +139,10 @@ noncomputable abbrev rationalRightDerivedLowerShriek {f : X ⟶ Y} (c : Compacti
     𝐃𝐐(X) ⥤ 𝐃𝐐(Y) :=
   Rationalization.map 𝐌 (integralRightDerivedLowerShriek l E c)
 
-/-- Independence of the integral representative.
-
-Let `K, K' ∈ D_comp(X_proét, 𝒪_E)` be integral complexes representing the same object of the
-rationalized category `D_comp(X_proét, E)`. Then the rationalizations `(Rf_! K) ⊗ E` and
-`(Rf_! K') ⊗ E` of their integral compact-support direct images are canonically isomorphic: the
-integral compact-support direct image is an exact `𝒪_E`-linear functor, so it extends to the
-rationalizations (`CategoryTheory.Rationalization.map`), and the extension identifies both objects
-with its value on the common rationalization. -/
+/-- Independence of the integral representative. Let `K, K' ∈ D_comp(X_proét, 𝒪_E)` be integral
+complexes representing the same object of the rationalized category `D_comp(X_proét, E)`. Then
+the rationalizations `(Rf_! K) ⊗ E` and `(Rf_! K') ⊗ E` of their integral compact-support direct
+images are canonically isomorphic. -/
 theorem nonempty_iso_fromIntegral_integralRightDerivedLowerShriek {f : X ⟶ Y}
     (c : Compactification f) {K K' : 𝐃𝐜(X)}
     (e : (DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).obj K ≅
@@ -203,22 +199,12 @@ noncomputable def rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap
   Rationalization.mapNatTrans 𝐌
     (integralRightDerivedLowerShriekOfCompactificationBaseChangeMap l E sq c)
 
-/-- Compact-support base change over a finite extension.
-
-For a finite extension `E/ℚ_ℓ`, a cartesian square `g' ≫ f = f' ≫ g` with `g` arbitrary and a
-compactification `c` of `f` (`remark-base-change-compactification--1`), and an object of the
-rational stage `D_comp(X_proét, E)` given by an integral lattice `K ∈ D_comp(X_proét, 𝒪_E)` whose
-reductions `K_n = K ⊗ᴸ 𝒪_E/𝔪_Eⁿ` carry étale-origin witnesses, the rational compact-support
-exchange map `Lg^* Rf_! K ⟶ Rf'_! Lg'^* K` is an isomorphism in `D_comp(Y'_proét, E)`. It is
-natural, being a component of a natural transformation, and it does not depend on the lattice:
-it is the component at the rationalization of `K` of a natural transformation of functors on the
-rational stage
-(`AlgebraicGeometry.ProEtale.rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap`).
-
-The isomorphism is transported from the integral one,
-`proposition-composition-base-change-rf-shriek--4`
-(`isIso_completedRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`), along the
-rationalization. -/
+/-- Compact-support base change over a finite extension. For a finite extension `E/ℚ_ℓ`, a
+cartesian square `g' ≫ f = f' ≫ g` with `g` arbitrary, a compactification `c` of `f`, and an
+object of the rational stage `D_comp(X_proét, E)` given by an integral lattice
+`K ∈ D_comp(X_proét, 𝒪_E)` whose reductions `K_n = K ⊗ᴸ 𝒪_E/𝔪_Eⁿ` carry étale-origin
+witnesses, the rational compact-support exchange map `Lg^* Rf_! K ⟶ Rf'_! Lg'^* K` is an
+isomorphism in `D_comp(Y'_proét, E)`. -/
 theorem isIso_rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap_app
     (sq : IsPullback g' f' f g) (c : Compactification f) (K : 𝐃𝐜(X))
     (Kn : ∀ n : ℕ, _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X)

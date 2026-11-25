@@ -501,26 +501,7 @@ private theorem cartesianComparisons_compatible
 
 -- Keep the published preservation and identity hypotheses with their original names.
 set_option linter.unusedVariables false in
-/-- Cartesian base change with the total-derived open adjunction normalization.
-
-Source: blueprint proposition-composition-base-change-rf-shriek--4, proof steps 1--8,
-and proposition-construction-independence-rf-shriek step 7.
-(blueprint: lem-sfb-total-derived-cartesian-compact-support).
-
-Proof: the proper leg of the base-changed compactification is already the literal
-proper pullback. Transport the invertible derived open unit and the Cartesian derived
-counit along leftDerivedUpperStarIsoMapDerivedCategory to prove openExchange invertible.
-The squareTransport formula identifies pushExchange with the ambient proper mate.
-For O_E, Loc(Dbc) equals Loc(Dctf); open extension preserves that category, and admissible
-proper base change makes its proper-exchange components invertible. The component API
-then gives invertibility of baseChange.
-For compatibility choose one common boundary-preserving refinement of c and d.
-Its pullback remains boundary-preserving by inverse images of the open ranges; density
-after pullback is not needed. Use hn before and after pullback and the single-refinement
-normalizedBoundaryExchange equation. The two comparison cocycles and cancellation of
-an invertible common-refinement comparison give the required equation for φ. No choices
-of isomorphisms are made beyond those supplied by hn. Proof irrelevance handles hc and hd.
-This argument includes zero objects and empty opens. -/
+/-- Cartesian base change with the total-derived open adjunction normalization. -/
 theorem cartesianCompactSupport
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

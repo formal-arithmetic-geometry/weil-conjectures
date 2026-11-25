@@ -619,17 +619,7 @@ instance isLocallyInjective_continuousMapLanHom [T2Space T] :
 
 /-- **The pullback of `C(-, T)` from the point is the sheaf `U ↦ C(U, T)`**, for a Hausdorff,
 totally disconnected topological ring `T`: the comparison `ψ_X : p_X^* T̲ ⟶ C(-, T)_X` is an
-isomorphism.
-
-This is Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 4.2.12. The inverse image
-`p_X^*` is the inverse image along the representably flat functor `S ↦ X[S]`, so `ψ_X` is the
-sheafification of the morphism of presheaves `continuousMapLanHom` out of the left Kan extension,
-and it suffices that the latter is locally injective and locally surjective
-(`Functor.sheafPullbackConstruction.isIso_homEquiv_symm_of_isLocallyBijective`). Both are checked
-over affine objects `W`, whose morphisms to `X[S]` are the continuous maps `W → S`
-(`exists_hom_profiniteTestObject`, `hom_ext_profiniteTestObject`): a continuous map `W → T` has
-compact, hence profinite, image `K`, and factors through `X[K]`; a section `g ∘ pr_S ∘ ψ`
-vanishing on `W` comes from `X[g⁻¹(0)]`. -/
+isomorphism. This is Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 4.2.12. -/
 theorem isIso_continuousMapComparison (X : Scheme.{u}) (T : Type) [TopologicalSpace T] [Ring T]
     [IsTopologicalRing T] [T2Space T] [TotallyDisconnectedSpace T] :
     IsIso (continuousMapComparison X T) := by

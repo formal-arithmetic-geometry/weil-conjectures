@@ -11,9 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Projecti
 # The projection formula on the localizing categories `Loc(Dbc)`
 
 Let `Λ` be a commutative condensed ring and `p : X ⟶ Y` a morphism of schemes. This file proves
-the formal part of the projection formula on the localizing categories (blueprint
-`proposition-projection-formula-rational-coefficients--2`,
-`lemma-projection-formula-integral-coefficients--1` (2)): if
+the formal part of the projection formula on the localizing categories: if
 
 * the projection map `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` is an isomorphism for `M` in `Dbc(X, Λ)` and
   `L` in `Dbc(Y, Λ)`,
@@ -25,8 +23,7 @@ then the projection map is an isomorphism for `M` in `Loc(Dbc(X, Λ))` and `L` i
 projection map is compatible with the shifts in each variable
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapShift`), so this is the
 two-variable determination argument
-`CategoryTheory.NatTrans.isIso_app_app_of_localizingClosure` (blueprint
-`lemma-checking-isomorphisms-constructible-complexes--1`).
+`CategoryTheory.NatTrans.isIso_app_app_of_localizingClosure`.
 -/
 
 @[expose] public section
@@ -60,17 +57,9 @@ lemma localizingBoundedConstructible_leftDerivedUpperStar
     (Functor.preservesCoproductsOn_of_preservesColimitsOfShape _ _)
     (fun L' hL' ↦ le_localizingBoundedConstructible Λ X _ (hpull L' hL')) hL
 
-/-- The formal part of blueprint `proposition-projection-formula-rational-coefficients--2` and
-`lemma-projection-formula-integral-coefficients--1` (2), for an arbitrary condensed ring `Λ`: the
-projection formula extends from `Dbc` to `Loc(Dbc)`.
-
-Assume that the projection map `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` is an isomorphism for `M` in
-`Dbc(X, Λ)` and `L` in `Dbc(Y, Λ)`, that `Rp_*` maps `Loc(Dbc(X, Λ))` into `Loc(Dbc(Y, Λ))` and
-preserves direct sums there, that `Lp^*` maps `Dbc(Y, Λ)` into `Dbc(X, Λ)` and that `Dbc(X, Λ)`
-is closed under `⊗ᴸ`. Then the projection map is an isomorphism for `M` in `Loc(Dbc(X, Λ))` and
-`L` in `Loc(Dbc(Y, Λ))`. First fix `L` in `Dbc(Y, Λ)`: both sides are exact functors of `M`
-preserving direct sums on `Loc(Dbc(X, Λ))` and the map is an isomorphism on `Dbc(X, Λ)`, hence on
-`Loc(Dbc(X, Λ))`; then fix `M` in `Loc(Dbc(X, Λ))` and argue in the same way in `L`. -/
+/-- Formal part of the projection formula on the localizing categories, for an arbitrary
+condensed ring `Λ`: if the projection map is an isomorphism on `Dbc` and the usual
+preservation hypotheses hold, then it is an isomorphism on `Loc(Dbc)`. -/
 theorem isIso_projectionMap_of_localizingBoundedConstructible
     (hpush : ∀ M : 𝔻(X), localizingBoundedConstructible Λ X M →
       localizingBoundedConstructible Λ Y (R((p)_*⟦Λ⟧).obj M))

@@ -11,8 +11,11 @@ import WeilConjectures.SixFunctors.Tensor.TensorReductionStrictFiniteEquation
 
 /-! # The coherent reduction tensor map on ordinary quotient representatives
 
-Source: Stacks 07A4, 07A6 and 0941; the simultaneous representative normalization
-of the coefficient-system calculus.
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -41,31 +44,7 @@ private theorem cancel_final_comparison
 /-- The balanced reduction tensor comparison is computed by a strict chain map
 on the fixed ordinary quotient representatives. Its finite components are the
 ordinary scalar tensor comparison. This is an equation in the coherent system
-derived category before applying any limit or adjunction transpose.
-
-Source: Stacks 07A4 and 0941; simultaneous tensor normalization of
-lem-coef-derived-system-evaluation-calculus.
-
-Proof: identify ordinary reduction with extension to the sequence ring by its
-adjunction to the ordinary limit. At each level the balanced rule
-b tensor (x tensor y) maps to (b tensor x) tensor (1 tensor y); tensor
-sheafification and the direct-sum totalization extend it to a cochain map.
-The scalar balancing relations, Leibniz signs and quotient transitions are
-preserved by this rule, so it defines the coherent map psi. Its nth evaluated
-component, under reductionEvaluationComplex and
-coefficientEvaluationTensorIso, is coefficientScalarTensorIso. These identities
-commute with every quotient transition, since on local pure tensors both routes
-reduce the two factors. Transport the simultaneous strict tensor normalization
-to the fixed ordinary representatives using the adjunction-normalized reduction
-models and naturality of the K-flat tensor comparisons. Goodness of P, Q and
-T means these ordinary complexes compute all three derived reductions;
-pullbackTensorReductionGood gives the K-flat system tensor representatives.
-The normalized derived tensor comparison therefore computes the same balanced
-rule, as a map of whole coherent systems. This gives the displayed
-whole coherent-system square, before finite evaluation or taking a limit.
-The second clause records the chain-level finite-component normalization; it is
-stronger than a statement merely about finite derived evaluations.
-(blueprint: lem-coef-tensor-reduction-ordinary-model). -/
+derived category before applying any limit or adjunction transpose. -/
 theorem tensorReduction_ordinaryModel (W : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory)
     (hT : integralOperationsGoodComplex l E W

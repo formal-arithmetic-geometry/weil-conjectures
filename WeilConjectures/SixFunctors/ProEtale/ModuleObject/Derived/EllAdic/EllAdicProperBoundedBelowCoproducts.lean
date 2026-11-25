@@ -18,8 +18,9 @@ import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 
 /-! # Coproduct continuity with a common lower cohomology bound
 
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), and the finite-partial-sum construction.
-(blueprint: lem-sfb-adic-proper-bounded-below-coproducts)
+## References
+
+* Hemo--Richarz--Scholbach, Lemma 5.3(1)
 -/
 
 @[expose] public section
@@ -200,18 +201,7 @@ private theorem continuity_preserves_strictlyGE
   exact preservesColimit_of_preserves_colimit_cocone hc hT
 
 /-- Ordinary qcqs derived pushforward preserves coproducts of complexes with a common
-lower cohomology bound, for arbitrary condensed commutative coefficients.
-
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1).
-(blueprint: lem-sfb-adic-proper-bounded-below-coproducts)
-
-Proof: choose representatives zero below N. Their coproduct is the filtered colimit
-of finite partial sums, all still zero below N. Qcqs continuity preserves that
-filtered colimit after pushforward and each homology functor. Additivity preserves
-the finite partial sums, so the full coproduct comparison is invertible on homology.
-Homology detects isomorphisms. Transport along the chosen representatives; this
-includes the empty family, whose coproduct and all finite partial sums are zero.
--/
+lower cohomology bound, for arbitrary condensed commutative coefficients. -/
 theorem condensed_boundedBelow_preservesCoproduct
     (I : Type (u + 1)) (N : ℤ)
     (K : I → DerivedCategory

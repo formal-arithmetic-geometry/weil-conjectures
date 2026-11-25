@@ -12,7 +12,10 @@ import all WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.SectionDeriv
 
 This isolates the localization normalization and elementary categorical pasting
 lemmas used by the scalar tensor representative argument.
-(blueprint: lem-sfb-coefficient-tensor-localization)
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YU and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -98,13 +101,7 @@ private theorem cancel_tensor_factor
   simp only [← F.map_comp_assoc, prod_comp, Iso.hom_inv_id,
     ← prod_id, F.map_id, Category.id_comp, Iso.hom_inv_id_assoc]
 
-/-- Normalize the section localization tensor map on reconstructed complexes.
-Source: Stacks Project, Cohomology on Sites, Tags 06YU and 07A4.
-The defining formula for qTensor is conjugation of the localized total comparison
-by the two localization isomorphisms and the derived tensor comparison. Compose
-with their forward maps and cancel inverse pairs. Finally replace the section
-cochain tensor comparison by totalComparison, using their proved equality.
-(blueprint: lem-sfb-coefficient-tensor-localization). -/
+/-- Normalize the section localization tensor map on reconstructed complexes. -/
 theorem coefficientTensor_localization
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

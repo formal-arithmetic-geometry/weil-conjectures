@@ -14,8 +14,11 @@ import all WeilConjectures.SmoothPurity.Coefficient.CoefficientEvaluationTensorN
 
 /-! # Signed braiding and the coherent strict tensor tower
 
-Source: Stacks 07A4 and 0941.
-(blueprint: lem-coef-tensor-tower-signed-square). -/
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -211,16 +214,7 @@ private theorem tensorTowerLevel_def
   rfl
 
 -- Assemble the three finite comparison squares without unfolding their choices.
-/-- Coherent signed total interchange commutes with the prescribed strict tower comparison.
-Source: Stacks 07A4 and 0941
-(blueprint: lem-coef-tensor-tower-signed-square).
-Proof: the evaluation comparison sends each homogeneous pure tensor to the tensor
-of its evaluated sections. Its square with the signed swap follows from this
-formula and the Koszul formula, since evaluation preserves integer multiplication.
-The inverse reduction-evaluation maps commute with braiding by naturality. Paste
-these two squares with restriction-evaluation naturality and use the prescribed
-finite component of the strict tower comparison. This works for every unbounded
-complex and does not use flatness or completion. -/
+/-- Coherent signed total interchange commutes with the prescribed strict tower comparison. -/
 theorem coefficientTensorTower_signed_square
     (P Q : CochainComplex (integralTowerModules l E X) ℤ) (n : ℕ) :
     (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map

@@ -16,7 +16,14 @@ import all WeilConjectures.AlgebraicGeometry.CondensedConstructibleSerre
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.DetectionAb
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
-/-! # Derived tensor product of constructible sheaves in degree zero -/
+/-!
+# Derived tensor product of constructible sheaves in degree zero
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.8.10 and
+  Proposition 6.8.11(3)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -29,18 +36,7 @@ open Scheme
 /-- Let `Λ` be a condensed ring such that, on every noetherian scheme, the derived tensor product of
 two locally finitely presented `Λ`-module sheaves placed in degree `0` has no cohomology below
 degree `-1` and locally finitely presented cohomology sheaves. Then the derived tensor product of
-two constructible sheaves placed in degree `0` is bounded constructible (the reduction step of the
-case of single sheaves in blueprint `proposition-six-operations-dctf--14`).
-
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
-
-Proof: the finite-type scheme is noetherian. Refine the constructible stratifications of `F`
-and `G` to a common one on whose strata both restrictions are locally finitely presented.
-Pullback to a stratum is monoidal and exact, so it identifies the restriction of `F ⊗ᴸ G`
-with the derived tensor product of the restrictions, to which the hypothesis applies. The derived
-tensor product of complexes concentrated in degrees `≤ 0` is concentrated in degrees `≤ 0`. The
-strata detect vanishing, so the bounds descend, and the common stratification exhibits every
-cohomology sheaf as constructible. -/
+two constructible sheaves placed in degree `0` is bounded constructible. -/
 theorem boundedConstructible_tensor_single_of_lfp
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
     [IsCommMonObj Λ] {k : Type u} [Field k]
@@ -146,13 +142,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
 /-! ### The coefficient ring `ℚ̲̄_ℓ` -/
 
 /-- The derived tensor product of two constructible `ℚ̄_ℓ`-sheaves placed in degree `0` is bounded
-constructible. This is the case of single sheaves in blueprint
-`proposition-six-operations-dctf--14`.
-
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
-
-Proof: `boundedConstructible_tensor_single_of_lfp`, with the local calculation
-`lfp_tensor_single_padicAlgClRingObj` (local freeness). -/
+constructible. -/
 theorem boundedConstructible_tensor_single
     (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -174,13 +164,7 @@ theorem boundedConstructible_tensor_single
 namespace ContinuousMapRingObj
 
 /-- For a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived tensor product of two constructible
-`E`-sheaves placed in degree `0` is bounded constructible. This is the case of single
-sheaves in blueprint `proposition-six-operations-dctf--14`.
-
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
-
-Proof: `boundedConstructible_tensor_single_of_lfp`, with the local calculation
-`lfp_tensor_single_continuousMapRingObj` (local freeness). -/
+`E`-sheaves placed in degree `0` is bounded constructible. -/
 theorem boundedConstructible_tensor_single (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -204,13 +188,7 @@ end ContinuousMapRingObj
 namespace PadicIntegersRingObj
 
 /-- For a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived tensor product of two constructible
-`𝒪_E`-sheaves placed in degree `0` is bounded constructible. This is the case of single
-sheaves in blueprint `proposition-six-operations-dctf--14`.
-
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
-
-Proof: `boundedConstructible_tensor_single_of_lfp`, with the local calculation
-`lfp_tensor_single_padicIntegersRingObj` (a two-term locally finite free resolution). -/
+`𝒪_E`-sheaves placed in degree `0` is bounded constructible. -/
 theorem boundedConstructible_tensor_single (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
     [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
     (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]

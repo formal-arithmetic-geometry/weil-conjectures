@@ -68,18 +68,7 @@ variable {X : Scheme.{u}} {G G' : Sheaf (Scheme.ProEt.topology X) A} (φ : G ⟶
 
 /-- **Invertibility of `g^* φ` gives invertibility of `φ` at every `V` factoring through
 `g`.** If the structure morphism of a weakly étale `X`-scheme `V` factors through `g`, then
-`V` is the image of the weakly étale `W`-scheme `p` under the localization functor along
-`g`, so the sections of `g^* G` over `p` are the sections of `G` over `V` and likewise for
-`G'`; hence `φ` at `V` is `g^* φ` at `p`.
-
-```
-   V.left ───p───→ W
-       ╲           │
-  V.hom ╲          │ g
-         ↘         ↓
-                   X
-```
--/
+`φ` at `V` is `g^* φ` at the corresponding weakly étale `W`-scheme `p`. -/
 lemma ProEtale.isIso_app_of_isIso_localizationRestriction {W : Scheme.{u}} (g : W ⟶ X)
     [WeaklyEtale g]
     (h : IsIso ((ProEtale.localizationRestriction A g inferInstance).map φ))
@@ -98,19 +87,7 @@ lemma ProEtale.isIso_app_of_isIso_localizationRestriction {W : Scheme.{u}} (g : 
 
 /-- **The restrictions along a pro-étale covering family are jointly conservative.** A
 morphism of sheaves on the small pro-étale site of `X` which becomes invertible after
-restricting along every member of a pro-étale cover of `X` is invertible.
-
-Each weakly étale `X`-scheme `V` is covered by its base changes `V ×_X W i`, and the
-structure morphism of every member of the sieve they generate factors through one of the
-`g i`, where the previous lemma applies.
-
-```
-     V ×_X W i ─────→ W i
-         │            │ g i
-         ↓            ↓
-         V ─────────→ X
-```
--/
+restricting along every member of a pro-étale cover of `X` is invertible. -/
 lemma ProEtale.isIso_of_isIso_localizationRestriction {ι : Type*} {W : ι → Scheme.{u}}
     (g : ∀ i, W i ⟶ X) [∀ i, WeaklyEtale (g i)]
     (hg : Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X)

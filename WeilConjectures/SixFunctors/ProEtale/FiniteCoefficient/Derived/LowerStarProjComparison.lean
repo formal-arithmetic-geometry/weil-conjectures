@@ -21,8 +21,7 @@ Let `g : Z ⟶ Y` be a quasi-compact quasi-separated morphism of schemes. The co
 and, on bounded below complexes, with `Rg_*`. We show that they carry the étale projection map
 `Rg_* M ⊗ᴸ L ⟶ Rg_*(M ⊗ᴸ Lg^* L)` to the pro-étale one: if the former is an isomorphism at
 `(M, L)`, with `M` and `M ⊗ᴸ Lg^* L` bounded below, the latter is an isomorphism at
-`(Lν^* M, Lν^* L)`. This is the step of `sk-thm-sf-pf-proetale` reducing the pro-étale
-projection formula to the étale one.
+`(Lν^* M, Lν^* L)`. This reduces the pro-étale projection formula to the étale one.
 
 ## Main results
 

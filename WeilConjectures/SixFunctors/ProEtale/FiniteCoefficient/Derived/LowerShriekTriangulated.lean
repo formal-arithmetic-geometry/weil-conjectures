@@ -14,8 +14,7 @@ For every compactification `c = (X ⟶[j] X̄ ⟶[f̄] Y)` of a morphism `f`, th
 candidate `Rf^c_! = Rf̄_* j_! : D(X_proét) ⥤ D(Y_proét)`
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification`) is a triangulated
 functor: the functor `D(j_!)` induced by the exact extension by zero is triangulated, and so is
-the total right derived functor `Rf̄_*` (blueprint
-`proposition-construction-independence-rf-shriek--1`). For the chosen compactification this is the
+the total right derived functor `Rf̄_*`. For the chosen compactification this is the
 commutation with shifts `AlgebraicGeometry.ProEtale.commShiftRightDerivedLowerShriek`.
 
 ## Main statements
@@ -47,12 +46,8 @@ noncomputable instance commShiftRightDerivedLowerShriekOfCompactification
     (ProEtale.rightDerivedLowerShriekOfCompactification A c).CommShift ℤ :=
   inferInstanceAs ((D((c.i)_!open[A]) ⋙ R((c.g)_*[A])).CommShift ℤ)
 
-/-- Blueprint `proposition-construction-independence-rf-shriek--1`: Triangulatedness of the
-finite-level compact-support direct image. For every compactification `c = (j, f̄)` of `f`, the
-functor `Rf^c_! = Rf̄_* j_! : D(X_proét) ⥤ D(Y_proét)` preserves shifts
-(`commShiftRightDerivedLowerShriekOfCompactification`) and distinguished triangles: the
-extension by zero `j_!` is exact, so `D(j_!)` is triangulated, and the derived direct image
-`Rf̄_*`, computed by K-injective resolutions, is triangulated. -/
+/-- For every compactification `c = (j, f̄)` of `f`, the functor
+`Rf^c_! = Rf̄_* j_! : D(X_proét) ⥤ D(Y_proét)` is triangulated. -/
 instance isTriangulated_rightDerivedLowerShriekOfCompactification (c : Compactification f) :
     (ProEtale.rightDerivedLowerShriekOfCompactification A c).IsTriangulated :=
   inferInstanceAs ((D((c.i)_!open[A]) ⋙ R((c.g)_*[A])).IsTriangulated)

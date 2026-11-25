@@ -125,16 +125,9 @@ variable {X Y X' Y' X'' Y'' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' 
   {g' : X' ⟶ X} {h : Y'' ⟶ Y'} {h' : X'' ⟶ X'} {f'' : X'' ⟶ Y''}
 
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
-/-- **Pasting law of the derived pullback comparisons**: the comparison of the outer square of
-two horizontally pasted squares is the pasting of their comparisons, through the composition
-isomorphisms `leftDerivedUpperStarComp`. The squares are
-```
-X'' --h'--> X' --g'--> X
- |f''       |f'        |f
- v          v          v
-Y'' --h---> Y' --g---> Y
-```
--/
+/-- **Pasting law of the derived pullback comparisons**: for two horizontally pasted squares
+`X'' → X' → X` over `Y'' → Y' → Y`, the comparison of the outer square is the pasting of their
+comparisons, through the composition isomorphisms `leftDerivedUpperStarComp`. -/
 lemma pullbackSquareComparison_paste (sq₁ : CommSq g' f' f g) (sq₂ : CommSq h' f'' f' h)
     (sq : CommSq (h' ≫ g') f'' f (h ≫ g)) (N : 𝔻(Y)) :
     (L((f'')^*⟦Λ⟧)).map ((leftDerivedUpperStarComp Λ h g).hom.app N) ≫

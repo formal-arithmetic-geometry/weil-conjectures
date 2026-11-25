@@ -14,8 +14,6 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-! # Comparing finite quotients of the two integer-ring presentations
-
-Source: latest blueprint, coefficient biduality proof, paragraph (i).
 -/
 
 @[expose] public noncomputable section
@@ -26,17 +24,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 -- Comparing the chosen DVR presentations requires unfolding the spectral norm data.
 /-- The embedded uniformizer quotient agrees with the finite coefficient ring
-used by the ordinary etale comparison, independently of the uniformizer generator.
-
-Source: latest blueprint, det-pd-biduality-coefficients.proof.md, paragraph (i),
-and the coefficient normalization of lem-integral-coefficient-ext-comparison.
-(blueprint: lem-sf-condensed-verdier-coefficient-comparison).
-
-Proof: the spectral norm on the lifted finite extension is its embedded norm,
-so integerLiftEquiv explicitly identifies the two integer rings. A local ring
-isomorphism carries the maximal ideal onto the maximal ideal. Both uniformizers
-generate those ideals, so it identifies their nth powers. The induced quotient
-ring equivalence is the required one. This includes n=0 and the zero quotient. -/
+used by the ordinary etale comparison, independently of the uniformizer generator. -/
 theorem condensedVerdier_quotient_ringEquiv
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)

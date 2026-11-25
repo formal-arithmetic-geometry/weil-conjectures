@@ -48,8 +48,10 @@ import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 
 /-! # Ordinary coefficient extension on the profinite slice
 
-Source: Hemo--Richarz--Scholbach, (3.1)--(3.2), Remark 3.2;
-Stacks Project, Modules on Sites, Tags 03CY, 03DH and 03EK.
+## References
+
+* Hemo--Richarz--Scholbach, (3.1)--(3.2), Remark 3.2
+* Stacks Project, Modules on Sites, Tags 03CY, 03DH and 03EK
 -/
 
 -- After pruning, this module only keeps private declarations.

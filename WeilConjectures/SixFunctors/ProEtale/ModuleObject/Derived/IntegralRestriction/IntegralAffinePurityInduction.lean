@@ -83,9 +83,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarC
 import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Integral affine-space purity from the projective-line adjunction
-
-Source: current blueprint, sk-thm-int-restriction-line.proof.md, paragraph (2).
-(blueprint: lem-sfb-integral-affine-purity-induction).
 -/
 
 @[expose] public noncomputable section
@@ -846,26 +843,7 @@ private theorem tower_purity (k : Type u) [Field k]
       (pullTwistShift_succ ℓ E f g d)
 
 /-- The standard affine chart and the coordinate tower turn projective-line
-purity into the compact-support adjunction for every affine dimension.
-
-Source: sk-thm-int-restriction-line.proof.md, paragraph (2).
-(blueprint: lem-sfb-integral-affine-purity-induction).
-
-Proof: for A1_T -> T use its standard open immersion into P1_T. This open
-immersion is quasi-compact because its source is quasi-compact and its target
-is quasi-separated. Extension by zero preserves Loc(Dbc). Restrict its adjunction
-with open pullback, then compose it with
-the projective-line adjunction. Cartesian twists identify the right adjoint
-with the prescribed pullback, degree-one twist and shift two. Compactification
-independence transports the left adjoint to any chosen compactification.
-For dimension zero, the affine projection is an isomorphism; the zero tensor
-power and zero shift reduce the assertion to its identity adjunction. At the
-successor use the coordinate isomorphism A^(d+1)_Y = A1_(A^d_Y), compose the
-line adjunction with the induction adjunction, and use pullback composition,
-Cartesian twist comparison, tensor-power addition and shift addition. Both
-shifts are even. Compact-support composition and compactification independence
-identify the composed left adjoint with the displayed one. This proves the
-assertion uniformly over every standing base, including the empty base. -/
+purity into the compact-support adjunction for every affine dimension. -/
 theorem integralAffinePurity_induction
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

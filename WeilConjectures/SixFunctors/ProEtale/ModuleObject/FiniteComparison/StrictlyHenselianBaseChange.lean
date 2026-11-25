@@ -43,9 +43,7 @@ objects over `T̲ = C(-, T)`, `T` a finite discrete ring: in the situation of
 `ProEtale.isIso_leftDerivedUpperStar_map_derivedBaseChangeMap_app_of_isStrictlyHenselianLocalRing`,
 the pullback along `s = Spec b` of the base change morphism `Lι'^* Rt₁_* L ⟶ Rt₂_* Lc^* L`,
 `ι' = Spec ι`, is an isomorphism for every `L` bounded below of étale origin. The schemes and the
-morphisms `ι'`, `s` are given together with equations identifying them with spectra, so that the
-statement applies verbatim to other presentations of them, for instance as the projections of the
-models `NearbyCyclesModel.ofTrait`. -/
+morphisms `ι'`, `s` are given together with equations identifying them with spectra. -/
 theorem isIso_map_baseChangeMap_app_of_isStrictlyHenselianLocalRing
     {R₁ R₂ : Type u} [CommRing R₁] [IsStrictlyHenselianLocalRing R₁] [CommRing R₂]
     [IsStrictlyHenselianLocalRing R₂] (ι : R₁ →+* R₂) [IsLocalHom ι]

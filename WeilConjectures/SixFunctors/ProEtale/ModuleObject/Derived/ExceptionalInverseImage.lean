@@ -10,10 +10,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 
 /-! # Exceptional inverse image for the chosen compactification
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-`sk-thm-existence/def-sfb-dc-upper-shriek-functor.md`
-(blueprint: proposition-composition-open-restriction-compactifications-f--6).
-
 The definition is the restricted pullback along the open leg composed after the chosen right
 adjoint of the restricted proper pushforward along the proper leg of `c_f`.
 -/
@@ -34,11 +30,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- The recorded chosen compactification of a morphism in `Over (Spec k)`, expressed as a
 compactification of its underlying morphism. This only binds the structure morphism instances;
-its value is the compactification of `proposition-construction-independence-rf-shriek`.
-
-Source: blueprint latest, sec-six-functors-basics/sk-thm-existence,
-def-sfb-dc-upper-shriek-functor.md, specified chosen compactification
-(blueprint: proposition-composition-open-restriction-compactifications-f--6). -/
+its value is the chosen compactification `compactificationOverField`. -/
 noncomputable def exceptionalInverseImageCompactification
     {k : Type u} [Field k] {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -52,13 +44,7 @@ noncomputable def exceptionalInverseImageCompactification
   exact (AlgebraicGeometry.compactificationOverField k f.left).obj.obj
 
 /-- The chosen compactification's proper pushforward restricted to bounded constructible
-complexes, using precisely its preservation hypothesis. This is the ObjectProperty.lift
-restriction of proposition-construction-independence-rf-shriek for the particular proper leg used
-here.
-
-Source: blueprint latest, sec-six-functors-basics/sk-thm-existence,
-def-sfb-dc-upper-shriek-functor.md, assumption on Rp_{f*}
-(blueprint: proposition-composition-open-restriction-compactifications-f--6). -/
+complexes, using precisely its preservation hypothesis. -/
 noncomputable def exceptionalInverseImageProperPushforward
     {k : Type u} [Field k] {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -80,11 +66,7 @@ noncomputable def exceptionalInverseImageProperPushforward
 /-- The exceptional inverse image is the compactification-dependent composite evaluated at
 `c_f`: the chosen right adjoint of its restricted proper pushforward followed by the actual
 restricted pullback along its open leg. The right adjoint is chosen by Functor.rightAdjoint
-from the displayed existence assumption; no existence theorem is asserted here.
-
-Source: blueprint latest, sec-six-functors-basics/sk-thm-existence,
-def-sfb-dc-upper-shriek-functor.md, displayed definition
-(blueprint: proposition-composition-open-restriction-compactifications-f--6). -/
+from the displayed existence assumption; no existence theorem is asserted here. -/
 noncomputable def boundedConstructibleUpperShriekOfRightAdjoint
     (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

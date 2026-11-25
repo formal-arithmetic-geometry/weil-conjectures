@@ -13,7 +13,19 @@ import Mathlib.RingTheory.Ideal.Quotient.Index
 
 /-! # Coefficient stages for an arbitrary nonzero nonunit
 
-Source: Zheng, Construction 4.1, printed p. 21; Serre, Local Fields, Chapter II, §2.
+For a nonzero nonunit `t` of the integer ring of a finite extension of `ℚ_l`, the quotients by
+the powers of `(t)` form a system of finite `l`-power-torsion rings with surjective transitions,
+and the `(t)`-adic topology is complete.
+
+## Implementation details
+
+Writing `t` as a unit times a positive power of a uniformizer, `(t)` is a positive power of the
+maximal ideal, so finiteness and completeness reduce to the maximal-adic case.
+
+## References
+
+* Zheng, Construction 4.1, printed p. 21.
+* Serre, *Local Fields*, Chapter II, §2.
 -/
 
 @[expose] public section
@@ -21,17 +33,10 @@ set_option autoImplicit false
 universe u
 namespace Padic
 
-/-- Nonzero nonunits define finite, prime-power-torsion coefficient stages and a complete
-adic topology. Unlike a choice of uniformizer, the parameter may have any positive valuation.
-Source: Zheng, Construction 4.1, printed p. 21; Serre, Local Fields, Chapter II, §2
-(blueprint: lem-pur-nonunit-coefficient-stages).
-
-Proof: write t as a unit times a positive power of a uniformizer pi. Its principal ideal
-is therefore a positive power of the maximal ideal. Finite residue fields and induction on
-ideal powers give finite quotients. Since l belongs to the maximal ideal, l to the power
-r(n+1) belongs to (t)^(n+1). All quotient transitions are surjective on representatives.
-The maximal-adic topology is complete by the finite-module completeness theorem applied
-to O itself. A positive ideal power defines the same topology, so it remains complete. -/
+/-- For a nonzero nonunit `t` of the integer ring `O` of a finite extension of `ℚ_l`, the
+quotients `O / (t)^(n+1)` are finite and killed by a power of `l`, the transition maps between
+them are surjective, and `O` is complete for the `(t)`-adic topology. Unlike a uniformizer, `t`
+may have any positive valuation. -/
 theorem nonunit_coefficient_stages
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]

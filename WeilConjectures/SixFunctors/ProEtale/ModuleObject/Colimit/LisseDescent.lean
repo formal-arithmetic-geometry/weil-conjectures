@@ -17,15 +17,13 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicAlgClSectio
 Let `ℓ` be a prime and `S` a quasi-compact quasi-separated scheme. Every lisse (finite locally
 free) `ℚ̄_ℓ,S`-module `L` is the extension of scalars `ℚ̄_ℓ,S ⊗_{E_S} L_E` of a lisse
 `E_S`-module `L_E`, for some finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`
-(`ProEtale.exists_isLocallyFree_extendScalars_iso`, blueprint
-`lemma-descent-lisse-qbar-sheaves-finite--1` (1)).
+(`ProEtale.exists_isLocallyFree_extendScalars_iso`).
 
 The proof: `S` being quasi-compact, `L` is trivialised on a finite pro-étale cover by affine
 schemes `V_k` (`ProEtale.CondensedRing.exists_finite_affine_cover_isFree_upperStar`). The fibre
 products `V_j ×_S V_k` are quasi-compact and quasi-separated, so the global sections of
 `ℚ̄_ℓ = colim_E E` over them are the filtered colimit of those of the `E`
-(`ProEtale.exists_subfieldToPadicAlgClSection_eq`, blueprint
-`lemma-descent-lisse-qbar-sheaves-finite--1` (2)): the finitely many entries of the transition
+(`ProEtale.exists_subfieldToPadicAlgClSection_eq`): the finitely many entries of the transition
 matrices and of their inverses come from a common `E_{V_j ×_S V_k}`
 (`ProEtale.exists_forall_le_isDefinedOver`). The lattices spanned by the bases then glue to a
 lisse `E_S`-module
@@ -108,10 +106,9 @@ lemma mono_extendRestrictAdjunction_unit_app_padicSubfieldRingObjToPadicAlgCl
         ℓ E))
   (SplitMono.mk _ (by simpa using NatTrans.congr_app h M)).mono
 
-/-- Blueprint `lemma-descent-lisse-qbar-sheaves-finite--1` (1): for a quasi-compact
-quasi-separated scheme `S` and a lisse `ℚ̄_ℓ,S`-module `L`, there are a finite subextension
-`E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a lisse `E_S`-module `L_E` with `ℚ̄_ℓ,S ⊗_{E_S} L_E ≅ L`. See the
-module docstring. -/
+/-- For a quasi-compact quasi-separated scheme `S` and a lisse `ℚ̄_ℓ,S`-module `L`, there are a
+finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a lisse `E_S`-module `L_E` with
+`ℚ̄_ℓ,S ⊗_{E_S} L_E ≅ L`. See the module docstring. -/
 theorem exists_isLocallyFree_extendScalars_iso (S : Scheme.{u}) [CompactSpace S]
     [QuasiSeparatedSpace S]
     (L : Mod (Sheaf (ProEt.topology S) Ab.{u + 1}) (padicAlgClRingObj S ℓ))

@@ -14,8 +14,11 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 
 /-! # Ordinary transpose of the strict balanced tensor map
 
-Source: Stacks 07A4, 07A6 and 0941; the simultaneous representative normalization
-of the coefficient-system calculus.
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -97,24 +100,7 @@ attribute [local implicit_reducible] integralOperationsTensorComplexFunctor
 /-- The ordinary transpose of the balanced scalar tensor chain map has the
 quotient pure-tensor coordinates and zero shifted coordinate in the full Roos
 complex. No derived category, K-flatness or good-representative hypothesis occurs
-in this assertion.
-
-Source: Stacks 07A4, 07A6 and 0941; the ordinary scalar tensor unit formulas.
-
-Proof: project the ordinary adjunction transpose to level n. The defining Hom
-transpose equation of pullbackTensorReductionEvaluation identifies this projection
-with the finite scalar adjunction unit, whose section formula is 1 tensor x.
-The assumed finite chain equation and coefficientScalarTensorIso's pure-tensor
-formula therefore send each homogeneous x tensor y to
-(1 tensor x) tensor (1 tensor y). The ordinary-limit Roos lift has zero shifted
-coordinate. The specified tensor tower comparison has exactly the displayed
-finite components and its Roos map preserves both coordinates. Compare with
-StrictTensorAugmentation.coordinates on pure generators. Tensor sheafification
-and total-summand injections give equality of each product projection; product
-extensionality gives the first coordinate, and both shifted coordinates vanish.
-The two-coordinate mapping-cocone extensionality theorem proves the equality.
-The zero complex, empty site and positive exponent one use these same equations.
-(blueprint: lem-coef-tensor-reduction-ordinary-transpose). -/
+in this assertion. -/
 theorem tensorReduction_ordinaryTranspose (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

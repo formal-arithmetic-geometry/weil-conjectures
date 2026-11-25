@@ -61,7 +61,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 For a closed immersion `i : Z ⟶ X` with quasi-compact open complement `j : V ⟶ X`, the sections
 with support in `Z`, `RΓ_Z M = i^* ker(M ⟶ j_* j^* M)`, give the right adjoint of the exact closed
-direct image `i_*` on condensed module sheaves (Stacks Project, Tags 09AA and 09AH).
+direct image `i_*` on condensed module sheaves.
+
+## References
+
+* Stacks Project, Tags 09AA and 09AH
 -/
 
 @[expose] public noncomputable section
@@ -291,42 +295,7 @@ noncomputable def closedModuleSectionsWithSupport {X Z V : Scheme.{u}}
     pulledBackModuleObjects Λ X ⥤ pulledBackModuleObjects Λ Z :=
   moduleSectionsWithSupport Λ j ⋙ upperStar Λ i
 
-/-- Sections with closed support give the right adjoint to the exact closed direct image
-(Stacks Project, Tags 09AA and 09AH).
-
-Proof plan:
-1. The open complement is quasi-compact by hypothesis; no finiteness over a field is
-   needed. The coefficient comparison alpha is an isomorphism, identifying the recorded module
-   operations with ringed inverse/direct image for the actual pulled-back coefficient ring.
-2. Use the ringed open–closed formalism for exact closed direct image, the closed
-   counit, vanishing of open restriction of closed direct image, and localization. The
-   immersion-limit-preservation node gives exact inverse image. The open-comparison node
-   identifies the open counit with the restriction counit; base-change evaluation makes it
-   invertible. The closed-counit node makes closed direct image fully faithful.
-3. Apply open inverse image to the unit kernel. The triangle identity and the invertible
-   open counit imply this restriction is zero. Localization identifies that kernel with
-   its closed inverse image followed by closed direct image, by the closed unit. Both the
-   kernel construction and this unit are natural in the module. This proves (1).
-4. A map from a closed direct image to M has zero composite with the open unit, hence
-   factors uniquely through its kernel. Full faithfulness of closed direct image then
-   identifies it with a map to the specified closed inverse image of the kernel. The
-   inverse sends this map through the inverse closed unit and the kernel inclusion.
-   Kernel uniqueness proves the inverse identities and naturality, giving the adjunction.
-5. Kernel-map uniqueness gives additivity. Right adjoints preserve small limits
-   (situation-conventions); in particular this gives left exactness.
-6. Exact closed direct image preserves monomorphisms. Apply the generic
-   fact that right adjoints of exact functors preserve injectives to obtain the injective-module
-   assertion.
-7. Lift the additive adjunction termwise and to homotopy categories using
-   termwise adjunction on homotopy categories. Exact closed direct image takes every
-   acyclic complex to an acyclic complex (exact functors preserve homology).
-   Adjunction therefore identifies maps from an acyclic complex to the image of a
-   K-injective complex with zero homotopy classes. This proves K-injectivity, including
-   unbounded complexes, by the definition of K-injective complexes.
-
-The first conjunct is the canonical natural identification of clause (1).
-The existential additive instance only makes the termwise functor on complexes available.
--/
+/-- Sections with closed support give the right adjoint to the exact closed direct image. -/
 theorem formal_closed_support_sheaves
     {X Z V : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i]

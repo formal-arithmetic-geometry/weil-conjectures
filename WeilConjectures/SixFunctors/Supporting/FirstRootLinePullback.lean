@@ -25,7 +25,8 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleRootsOfUnityInverseIma
 
 /-! # Root-normalized first-line inverse image
 
-Source: coefficient-twist conventions, first-line inverse image and scalar extension.
+The inverse image of the first root line, compatible with scalar extension and the
+coefficient-twist conventions.
 -/
 
 @[expose] public noncomputable section

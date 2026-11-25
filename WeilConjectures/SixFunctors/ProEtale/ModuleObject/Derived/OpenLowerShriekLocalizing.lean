@@ -14,14 +14,13 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 Let `Λ` be a commutative condensed ring (the `ℓ`-adic coefficient rings `𝒪̲_E`, `E̲`, `ℚ̲̄_ℓ`,
 for which `Dctf = Dbc`) and `j : U ⟶ X` an open immersion of separated finite-type schemes over
 a field `k`. The extension by zero `j_! = D((j)_!open⟦Λ⟧)` on module objects over `Λ_X` maps
-`Dbc(U, Λ)` into `Dbc(X, Λ)` (the extension-by-zero part of `sk-def-sfb-dc-restricted-functors`,
-`AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_openImmersionLowerShriek_obj`),
+`Dbc(U, Λ)` into `Dbc(X, Λ)`
+(`AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_openImmersionLowerShriek_obj`),
 preserves direct sums (it is left adjoint to `j^*`) and hence maps the localizing closure
 `Loc(Dbc(U, Λ))` into `Loc(Dbc(X, Λ))`
 (`localizingClosure_boundedConstructible_openImmersionLowerShriek` in the namespace
-`AlgebraicGeometry.ProEtale.CondensedRing`,
-blueprint `proposition-proper-direct-image-extension-zero` at the `ℓ`-adic stages; the finite stages
-are `AlgebraicGeometry.ProEtale.localizingClosure_constructibleFiniteTor_openImmersionLowerShriek`).
+`AlgebraicGeometry.ProEtale.CondensedRing`, at the `ℓ`-adic stages; the finite stages are
+`AlgebraicGeometry.ProEtale.localizingClosure_constructibleFiniteTor_openImmersionLowerShriek`).
 -/
 
 @[expose] public section
@@ -52,16 +51,10 @@ instance (J : Type (u + 1)) :
   inferInstance
 
 include ℓ in
-/-- Blueprint `proposition-proper-direct-image-extension-zero`: Extension by zero on the localizing
-categories, at the `ℓ`-adic stages.
-
-For a commutative condensed ring `Λ` (such as `𝒪̲_E`, `E̲` or `ℚ̲̄_ℓ`, for which
-`Dctf(-, Λ) = Dbc(-, Λ)`) and an open immersion `j : U ⟶ X` of separated finite-type
-`k`-schemes, the extension by zero `j_! : D(U_proét, Λ) ⥤ D(X_proét, Λ)` maps `Dbc(U, Λ)` into
-`Dbc(X, Λ)`, preserves direct sums, and maps `Loc(Dbc(U, Λ))` into `Loc(Dbc(X, Λ))`; it is
-exact, being induced by an exact functor. The first assertion is the extension-by-zero part of
-`proposition-proper-direct-image-extension-zero`; the last one follows by
-`proposition-proper-direct-image-extension-zero`. -/
+/-- Extension by zero on the localizing categories, at the `ℓ`-adic stages: for a commutative
+condensed ring `Λ` (such as `𝒪̲_E`, `E̲` or `ℚ̲̄_ℓ`) and an open immersion `j : U ⟶ X` of separated
+finite-type `k`-schemes, `j_!` maps `Dbc(U, Λ)` into `Dbc(X, Λ)`, preserves direct sums, and maps
+`Loc(Dbc(U, Λ))` into `Loc(Dbc(X, Λ))`. -/
 theorem localizingClosure_boundedConstructible_openImmersionLowerShriek :
     boundedConstructible (condensedRingObj Λ U.left) ≤
         (boundedConstructible (condensedRingObj Λ X.left)).inverseImage

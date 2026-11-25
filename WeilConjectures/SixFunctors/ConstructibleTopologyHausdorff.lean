@@ -11,24 +11,18 @@ public import Mathlib.Topology.Spectral.Basic
 /-!
 # The constructible topology of a spectral space is Hausdorff
 
-Source: Stacks Project, Topology, Lemma 5.23.2 (Tag 0901), Hausdorff part
-(blueprint: lem-weil-pbc-spectral-constructible-topology-hausdorff).
+The constructible topology of a spectral space is Hausdorff.
+
+## References
+
+* [Stacks, Tag 0901](https://stacks.math.columbia.edu/tag/0901)
 -/
 
 @[expose] public section
 
 universe u
 
-/-- The constructible topology of a spectral space is Hausdorff.
-Source: Stacks Project, Topology, Lemma 5.23.2 (Tag 0901), first paragraph of the proof
-(blueprint: lem-weil-pbc-spectral-constructible-topology-hausdorff).
-
-Proof outline:
-1. For distinct points `x` and `y`, the `T₀` property supplies an open set containing exactly one
-   of them. The basis of quasi-compact opens supplies a quasi-compact open inside this open set.
-2. This quasi-compact open and its complement are disjoint open neighbourhoods in the
-   constructible topology.
--/
+/-- The constructible topology of a spectral space is Hausdorff. -/
 theorem t2Space_constructibleTopology (X : Type u) [TopologicalSpace X] [SpectralSpace X] :
     @T2Space X (constructibleTopology X) := by
   refine @T2Space.mk X (constructibleTopology X) ?_

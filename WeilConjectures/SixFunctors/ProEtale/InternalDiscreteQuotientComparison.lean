@@ -12,8 +12,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 
 /-! # Comparing discrete quotient coefficients after internal realization
 
-Source: integral-models proof (1), Stacks Tags 00YV and 099I.
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 00YV](https://stacks.math.columbia.edu/tag/00YV)
+* [Stacks, Tag 099I](https://stacks.math.columbia.edu/tag/099I)
 -/
 
 @[expose] public noncomputable section
@@ -240,22 +242,7 @@ private theorem smallIso_naturality (X : Scheme.{u})
   rw [Category.assoc, ← Functor.map_comp, ringIso_naturality, Functor.map_comp]
   simp only [Category.assoc]
 
-/-- Discrete quotient coefficients commute with the actual internal realization.
-
-Source: integral-models proof (1); Stacks Tags 00YV and 099I.
-(auxiliary; not a blueprint node).
-
-Proof: the monoidal constant-sheaf/inverse-image comparison identifies the pullback
-of the underlying abelian ring of the discrete constant sheaf of A with the
-constant abelian ring on the scheme. Reconstructing section rings carries this
-monoidal comparison to a ring-sheaf isomorphism. Precomposition along AsSmall.down
-commutes with constant sheaves, since it is a site equivalence. Apply this to A
-and A/I. The ring equivalence ULift A = A identifies the quotient of ULift A by
-the image of I with ULift (A/I); compose this quotient equivalence with the second
-constant-sheaf comparison. Naturality of constant sheafification, inverse image,
-section-ring reconstruction, and precomposition gives the displayed quotient
-square. No finiteness of A or I, or Noetherian hypothesis on the scheme, is used.
--/
+/-- Discrete quotient coefficients commute with the actual internal realization. -/
 theorem discrete_quotient_comparison (X : Scheme.{u}) (A : Type u) [CommRing A]
     (I : Ideal A) :
     let J := Scheme.coefficientProEtaleModelTopology.{u, u} X

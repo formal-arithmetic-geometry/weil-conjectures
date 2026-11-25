@@ -13,8 +13,10 @@ import all WeilConjectures.SixFunctors.ScalarSixDerivedPullbackNormalization
 
 /-! # Quotient transitions and units under integral direct image
 
-Source: Stacks 099N, 0944; blueprint integral open direct image, Completeness paragraph.
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 099N](https://stacks.math.columbia.edu/tag/099N)
+* [Stacks, Tag 0944](https://stacks.math.columbia.edu/tag/0944)
 -/
 
 @[expose] public noncomputable section
@@ -490,18 +492,14 @@ attribute [-instance] pointReductionMon pointTransitionMon integralComm finiteCo
   integralCommSym finiteCommSym CondensedRing.scalarSixRing_comm
   CondensedRing.scalarSixMap_isMonHom
 
-/-- The existing integral coefficient commutativity for the symmetric sheaf braiding.
-Source: coefficient scalar adjunctions
-(auxiliary; not a blueprint node). -/
+/-- The existing integral coefficient commutativity for the symmetric sheaf braiding. -/
 local instance integralSymmetricComm (Z : Scheme.{u}) :
     @IsCommMonObj (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) _ _
       (ProEtale.sheafSymmetricCategory Z).toBraidedCategory
       (AdicCompletion.ring l E Z) inferInstance := by
   exact AdicCompletion.ringCommutative l E Z
 
-/-- The existing finite coefficient commutativity for the symmetric sheaf braiding.
-Source: coefficient scalar adjunctions
-(auxiliary; not a blueprint node). -/
+/-- The existing finite coefficient commutativity for the symmetric sheaf braiding. -/
 local instance finiteSymmetricComm (Z : Scheme.{u}) (n : ℕ) :
     @IsCommMonObj (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) _ _
       (ProEtale.sheafSymmetricCategory Z).toBraidedCategory
@@ -511,25 +509,7 @@ local instance finiteSymmetricComm (Z : Scheme.{u}) (n : ℕ) :
 /-- Finite quotient projection isomorphisms identify the whole reduction sequence,
 including its transitions and augmentation, before taking any derived limit.
 Assume the specified scalar mates and their finite geometric projections are invertible;
-this statement supplies the remaining transition and unit compatibility.
-Source: Stacks 099N, 0944; blueprint integral open direct image, Completeness paragraph
-(auxiliary; not a blueprint node).
-
-Proof: use the lifted ring of integers with its principal uniformizer ideal. The
-sfb_integral_coefficient_limit identifies its completed coefficient sheaf. Apply the
-normalized internal-to-section-action equivalences at U and X. Scalar restriction
-squares are the identity on underlying sections and their left adjoint comparisons
-send pure tensors to the same pure tensors. The specified finiteProjection maps of
-CompletedDirectImageLimits are therefore the internal finite projection maps.
-Their invertibility is supplied by hproj, proved separately by the scalar cone
-comparison. Restrict finite scalars and identify
-restriction with geometric direct image to obtain a_n in the displayed direction.
-A consecutive quotient sends s tensor m to rho(s) tensor m on both paths; this proves
-the transition equation. Both augmentation paths send m to 1 tensor m; the scalar
-and geometric adjunction triangles prove the displayed unit equation after deriving.
-These equations also follow from towerProjection_properties after transporting its
-normalized evaluation maps. No completeness of K is assumed in this assertion.
-The same formulas hold for n=0, zero complexes, empty schemes and unbounded K. -/
+this statement supplies the remaining transition and unit compatibility. -/
 theorem integral_direct_image_reduction_tower
     (K : DerivedCategory (AdicCompletion.Modules l E U))
     (hχ : ∀ n : ℕ, IsIso (integralReductionPullbackMap l E j n))

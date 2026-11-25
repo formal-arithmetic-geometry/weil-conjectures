@@ -77,22 +77,7 @@ private theorem Qh_mapHomotopyCategoryCompIso_refl_hom_app_comp
   rw [Qh_mapHomotopyCategoryCompIso_refl_hom_app]
   exact Category.id_comp f
 
-/-- The specified nonflat derived scalar pullback comparison has the specified restriction mate.
-
-Source: proof step 2 of `lem-sp-original-integral-finite-quotient-mate-transport`, above
-`def-exchange-projection` in the latest blueprint.
-
-Proof in words. Apply the existing derived mate/counit theorem to the underived identity
-`mateEquiv_pullIso_hom`. The scalar adjunction counits have the required normalization
-on Qh. For the left comparison, expand the chosen construction of the derived scalar
-pullback isomorphism. Derived natural-transformation counit compatibility handles its
-underived comparison factor, and uniqueness of left derived functors handles its two
-exact composition factors. Naturality moves scalar transitivity to the complex input.
-Factor the underived comparison into scalar transitivity and pullIso, apply
-`scalarCompNormalization`, and cancel transitivity with its inverse. The last factor is
-the counit equation for `leftDerivedUpperStarIso`. This one-arrow calculation has no
-properness, constructibility, or nonzero-ring hypothesis.
-(blueprint: lem-sp-derived-upper-star-extend-scalars-mate-normalization) -/
+/-- The specified nonflat derived scalar pullback comparison has the specified restriction mate. -/
 theorem derivedUpperStarExtendScalarsMateNormalization {U V : Scheme.{u}} (h : U ⟶ V) :
     mateEquiv (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a V))
       (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a U))

@@ -13,7 +13,12 @@ import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import WeilConjectures.CategoryTheory.LeftDerivedKanSourceTriangles
 
-/-! # Exactness with the counit-normalized scalar shift -/
+/-! # Exactness with the counit-normalized scalar shift
+
+## References
+
+* Stacks Project, Tags `06XN`, `05SE`
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,17 +27,7 @@ universe u
 namespace WeilConjectures.PurCompactSupport
 attribute [local irreducible] HasDerivedCategory.standard reductionDerivedChange
 
-/-- Derived scalar extension is exact for the shift normalized by its universal counit.
-Source: Stacks Tags 06XN and 05SE.
-(blueprint: lem-sf-canonical-scalar-exact).
-
-Proof: take the resolving class of homotopy objects where the scalar counit is
-invertible. K-flat resolutions show that this class resolves every object. Naturality
-of the counit shows that scalar extension inverts quasi-isomorphisms between objects
-of this class. Its denominator diagrams are therefore essentially constant. The
-shift-compatible Kan comparison maps every distinguished source triangle to a
-distinguished triangle. Every distinguished triangle in the derived category is
-isomorphic to such a source triangle, so exactness follows by transport. -/
+/-- Derived scalar extension is exact for the shift normalized by its universal counit. -/
 theorem canonicalScalarExact {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S) :
     (pbcDerivedExtend φ).IsTriangulated := by

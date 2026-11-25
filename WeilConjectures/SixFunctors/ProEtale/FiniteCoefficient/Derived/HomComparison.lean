@@ -115,13 +115,10 @@ namespace DerivedCategory
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 omit [Finite Λ] in
-/-- Finite Tor amplitude under the site comparison, clause (i).
-
-If a complex `K'` of étale `Λ`-sheaves has Tor amplitude in `[a, b]`, then `ν^* K'` has Tor
-amplitude in `[a, b]` on the pro-étale site: a flat model of `K'` in degrees `[a, b]` is carried
-by the exact functor `ν^*` to a flat model of `ν^* K'`, as `ν^*` preserves flat sheaves
-(`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`). No hypothesis that `K'` be
-bounded constructible or that the exponent of `Λ` be invertible on `X` is needed. -/
+/-- Finite Tor amplitude under the site comparison. If a complex `K'` of étale `Λ`-sheaves has
+Tor amplitude in `[a, b]`, then `ν^* K'` has Tor amplitude in `[a, b]` on the pro-étale site. No
+hypothesis that `K'` be bounded constructible or that the exponent of `Λ` be invertible on `X`
+is needed. -/
 theorem torAmplitudeIn_mapDerivedCategory {X : Scheme.{u}} [IsNoetherianRing Λ]
     {a b : ℤ} {K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hKt : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K') :
@@ -142,14 +139,9 @@ theorem constructibleFiniteTor_mapDerivedCategory {X : Scheme.{u}} [IsNoetherian
 
 variable {Λ} in
 omit [Finite Λ] in
-/-- Site comparison preserves and detects Tor intervals.
-
-Let `K` be a complex of étale sheaves of `Λ`-modules. Then `K` has Tor amplitude in `[a, b]` if
-and only if its pullback `ν^* K` to the pro-étale site has. The pullback is exact, faithful and
-strong monoidal, and it preserves flat sheaves
-(`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`), so this is
-`DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff`. No boundedness hypothesis on `K`
-is needed. -/
+/-- Site comparison preserves and detects Tor intervals: a complex `K` of étale sheaves of
+`Λ`-modules has Tor amplitude in `[a, b]` if and only if its pullback `ν^* K` to the pro-étale
+site has. No boundedness hypothesis on `K` is needed. -/
 theorem torAmplitudeIn_mapDerivedCategory_iff {X : Scheme.{u}} [IsNoetherianRing Λ] (a b : ℤ)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K) ↔
@@ -157,13 +149,10 @@ theorem torAmplitudeIn_mapDerivedCategory_iff {X : Scheme.{u}} [IsNoetherianRing
   _root_.DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff _ a b K
 
 omit [Finite Λ] in
-/-- Finite Tor amplitude under the site comparison, clause (ii).
-
-Let `K'` be a complex of étale `Λ`-sheaves. If `ν^* K'` has Tor amplitude in `[a, b]` on
-`X_proét`, then `K'` has Tor amplitude in `[a, b]` on the étale site.
-This is the reverse implication of `torAmplitudeIn_mapDerivedCategory_iff`; no hypothesis that
-`K'` be bounded below, that `ν^* K'` be bounded constructible or that the exponent of `Λ` be
-invertible on `X` is needed. -/
+/-- Finite Tor amplitude under the site comparison, reverse implication: if `ν^* K'` has Tor
+amplitude in `[a, b]` on `X_proét`, then the complex `K'` of étale `Λ`-sheaves has Tor amplitude
+in `[a, b]` on the étale site. No hypothesis that `K'` be bounded below, that `ν^* K'` be bounded
+constructible or that the exponent of `Λ` be invertible on `X` is needed. -/
 theorem torAmplitudeIn_of_mapDerivedCategory_comparisonUpperStar {X : Scheme.{u}}
     [IsNoetherianRing Λ]
     {a b : ℤ} {K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -230,17 +219,7 @@ lemma isClosedUnderIsomorphisms_plusEtaleOrigin_derivedHom_mapDerivedCategory :
 /-- The generator case of the étale-origin step of the internal-Hom comparison.
 Let `j : U ⟶ Ū` be a quasi-compact open immersion, `g : Ū ⟶ X` a closed immersion with
 quasi-compact open complement `j' : U' ⟶ X`, `L` a lisse flat sheaf on `U` and `M` a bounded
-below étale complex on `X`. Then `RHom(ν^*(Rg_* Rj_! L), ν^* M)` is of étale origin.
-
-Write `ν^* M` as an extension of `Rj'_* ν^* N` by `Rg_* ν^* C` (the closed-support triangle
-`AlgebraicGeometry.ProEtale.DerivedCategory.exists_distTriang_mapDerivedCategory_closedSupport`)
-and `ν^*(Rg_* Rj_! L) ≅ Rg_* j_! ν^* L`. Since `RHom(Rg_* -, Rj'_* -) = 0`,
-```
-RHom(Rg_* j_! ν^* L, ν^* M) ≅ RHom(Rg_* j_! ν^* L, Rg_* ν^* C) ≅ Rg_* Rj_* RHom(ν^* L, j^* ν^* C),
-```
-and `RHom(ν^* L, ν^*(j^* C)) ≅ ν^*(L^∨ ⊗ᴸ j^* C)` as `L` is dualizable
-(`AlgebraicGeometry.ProEtale.plusEtaleOrigin_derivedHom_mapDerivedCategory_of_exactPairing`);
-direct images preserve complexes of étale origin. -/
+below étale complex on `X`. Then `RHom(ν^*(Rg_* Rj_! L), ν^* M)` is of étale origin. -/
 lemma plusEtaleOrigin_derivedHom_mapDerivedCategory_rightDerivedLowerStar_rightDerivedLowerShriek
     {X Ubar U U' : Scheme.{u}} (j : U ⟶ Ubar) [IsOpenImmersion j] [HasCompactification j]
     [QuasiCompact j] (g : Ubar ⟶ X) [IsClosedImmersion g] (j' : U' ⟶ X) [IsOpenImmersion j']
@@ -313,17 +292,10 @@ lemma plusEtaleOrigin_derivedHom_mapDerivedCategory_rightDerivedLowerStar_rightD
 
 end EtaleOrigin
 
-/-- The étale-origin step of the internal-Hom comparison: for `X` of
-finite type over a field, `K ∈ Dctf(X_ét, Λ)` and `M` a bounded below étale complex, the
-pro-étale complex `RHom(ν^* K, ν^* M)` is of étale origin: the counit `ν^* Rν_* R ⟶ R` of the
-comparison adjunction is an isomorphism at `R = RHom(ν^* K, ν^* M)`.
-
-By the generation of `Dctf(X_ét, Λ)` by the complexes `Rg_* Rj_! L`
-(`AlgebraicGeometry.Etale.ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek`), it
-suffices to treat a thick subcategory
-(`isTriangulated_plusEtaleOrigin_derivedHom_mapDerivedCategory`) and the generators
-(`plusEtaleOrigin_derivedHom_mapDerivedCategory_rightDerivedLowerStar_rightDerivedLowerShriek`).
--/
+/-- The étale-origin step of the internal-Hom comparison: for `X` of finite type over a field,
+`K ∈ Dctf(X_ét, Λ)` and `M` a bounded below étale complex, the pro-étale complex
+`RHom(ν^* K, ν^* M)` is of étale origin: the counit `ν^* Rν_* R ⟶ R` of the comparison
+adjunction is an isomorphism at `R = RHom(ν^* K, ν^* M)`. -/
 theorem isIso_derivedComparisonAdjunction_counit_app_derivedHom {k : Type u} [Field k]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -387,20 +359,16 @@ a finite ring whose exponent is invertible on `X`, and let `ν : X_proét ⟶ X_
 comparison.
 
 1. For `K ∈ Dctf(X_ét, Λ)` and `M ∈ Dᵇc(X_ét, Λ)`, `ν^* RHom(K, M) ≅ RHom(ν^* K, ν^* M)`.
-2. Moreover `ν^* ω_X ≅ ω_{X, proét}` for the dualizing complexes `Ra_X^! Λ` of the two sites.
-3. These comparisons identify the Verdier duals and the double-dual maps: for
-   `K ∈ Dctf(X_ét, Λ)`, `ν^* 𝔻_X K ≅ 𝔻_{X, proét} (ν^* K)`, and `ν^* K ≅ 𝔻 𝔻 (ν^* K)` on the
-   pro-étale site. In particular finite-stage Verdier duality on the pro-étale constructible
-   category is transported from étale Verdier duality.
 
-The mathematical statement is that canonical comparison maps are isomorphisms. The map
-`ν^* RHom(K, M) ⟶ RHom(ν^* K, ν^* M)` is the adjoint of
-`ν^* RHom(K, M) ⊗ᴸ ν^* K ≅ ν^* (RHom(K, M) ⊗ᴸ K) ⟶ ν^* M`, built from
-`CategoryTheory.Functor.leftDerivedTensorComparison` of `ν^*` and the evaluation;
-constructing it and proving it is an isomorphism is not done here. Here
-the existence of isomorphisms is stated, and the identification of evaluations and double-dual
-maps is rendered as clause 3. Clauses 2 and 3 are stated whenever the exceptional inverse image
-along `a_X` defining the dualizing complexes is available. -/
+Whenever `a_X` has a compactification (`HasCompactification aX`), so that the dualizing
+complexes `Ra_X^! Λ` of the two sites are defined:
+
+2. `ν^* ω_X ≅ ω_{X, proét}`.
+3. For `K ∈ Dctf(X_ét, Λ)`, `ν^* 𝔻_X K ≅ 𝔻_{X, proét} (ν^* K)` and `ν^* K ≅ 𝔻 𝔻 (ν^* K)` on the
+   pro-étale site.
+
+Only the existence of these isomorphisms is stated, not that they are the canonical
+comparison maps. -/
 theorem nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated {k : Type u} [Field k]
     {p : ℕ} [Fact p.Prime] [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
@@ -486,22 +454,10 @@ theorem nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated {k : Type u} [
   exact ⟨D(ν^*(X)[ModuleCat.{u + 1} Λ]).mapIso b ≪≫ e' ≪≫
     (ProEtale.verdierDual Λ aX).mapIso e.op.symm⟩
 
-/-- Internal-Hom comparison for finite-Tor constructible inputs.
-
-Let `X` be a scheme of finite type over an algebraic closure `k` of `𝔽_p`, let `Λ` be a finite
-ring whose exponent is invertible on `X`, let `K ∈ Dctf(X_ét, Λ)` and `M ∈ Dᵇc(X_ét, Λ)`. Then
-`ν^* RHom(K, M) ≅ RHom(ν^* K, ν^* M)`.
-
-The assertion is local on `X`, and on the separated affine opens of a finite cover it is
-`ProEtale.DerivedCategory.nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated`.
-The local isomorphisms are glued through the comparison adjunction: write
-`R = RHom(ν^* K, ν^* M)`. By the projection formula for `ν`
-(`AlgebraicGeometry.ProEtale.rightDerivedComparisonLowerStarCompDerivedHomIso`) and full
-faithfulness of `ν^*` on bounded below complexes, `Rν_* R ≅ RHom(K, Rν_* ν^* M) ≅ RHom(K, M)`,
-which is bounded below. On each member `U` of the cover, `R|_U ≅ RHom(ν^* K|_U, ν^* M|_U)` is of
-étale origin, so `R` is of étale origin
-(`AlgebraicGeometry.ProEtale.isIso_derivedComparisonAdjunction_counit_app_of_openCover`), and
-`ν^* RHom(K, M) ≅ ν^* Rν_* R ≅ R`. -/
+/-- Internal-Hom comparison for finite-Tor constructible inputs. Let `X` be a scheme of finite
+type over an algebraic closure `k` of `𝔽_p`, let `Λ` be a finite ring whose exponent is
+invertible on `X`, let `K ∈ Dctf(X_ét, Λ)` and `M ∈ Dᵇc(X_ét, Λ)`. Then
+`ν^* RHom(K, M) ≅ RHom(ν^* K, ν^* M)`. -/
 theorem nonempty_iso_mapDerivedCategory_derivedHom {k : Type u} [Field k] {p : ℕ} [Fact p.Prime]
     [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]

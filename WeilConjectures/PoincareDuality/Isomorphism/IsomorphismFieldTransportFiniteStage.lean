@@ -9,7 +9,20 @@ public import WeilConjectures.PoincareDuality.Isomorphism.IsomorphismFieldTransp
 import WeilConjectures.PoincareDuality.Isomorphism.IsomorphismPullbackRawStage
 import WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLocalization
 
-/-! # A step of normalized isomorphism transport -/
+/-! # A step of normalized isomorphism transport
+
+Pullback along an isomorphism of schemes satisfies the transport clauses at one finite
+coefficient field.
+
+## Implementation details
+
+The module inverse images along `g` and `inv g` are equivalences via their section-normalized
+counits. The integral counit is the composite of the normalized comparison `lambda` for `inv g`,
+the inverse image of `lambda` for `g`, and the derived counit; its components are exactly
+`pullbackIdentityEpsilon`. Shifts, linearity and exactness come from
+`isomorphismPullbackRawStage`. The rational pullback is identified with the scalar-localized
+integral pullback, and the rational counit is the localization of the integral one.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -184,27 +197,8 @@ private theorem rationalCounit
 
 end FiniteStage
 
-/-- Normalized inverse transport at one finite coefficient field.
-Source: the inverse automorphism paragraph of the current blueprint,
-sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md;
-steps 1, 2 and 4 of lem-pod-isomorphism-field-transport.
-(blueprint: lem-pod-isomorphism-field-transport-finite-stage).
-
-Proof: the completed coefficient map is the limit lift of its quotient components.
-The module inverse images along g and its inverse have the section-normalized
-counits, and therefore are additive exact equivalences. Derive them termwise.
-Use the normalized inverse-image comparison supplied by isomorphismPullbackRawStage;
-its inverse is pullbackIdentityLambda. Compose lambda for the inverse, inverse image
-of lambda for g, and the section-normalized derived counit. Naturality of these
-three factors gives an integral counit with exactly pullbackIdentityEpsilon as
-component. Exchange g and its inverse to obtain the other counit, hence an equivalence.
-Retain the integral shift, linearity and exactness supplied by the raw-stage theorem.
-Localize both functors and both counits with the identity coefficient map. Balancing
-and tensor induction identify these functors with rationalDerivedPullback on every
-arrow, and localize the integral epsilon components. The localized counits give the
-rational equivalence. Retain the normalized rational shift and exactness of the
-raw-stage theorem. Empty schemes and torsion arrows are included in these arguments.
--/
+/-- Pullback along an isomorphism `g` satisfies the finite-field transport clauses
+`IsomorphismFieldTransportStage` at every finite coefficient field `E`. -/
 theorem isomorphismFieldTransportFiniteStage
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

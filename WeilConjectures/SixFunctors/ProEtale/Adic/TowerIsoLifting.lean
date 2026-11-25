@@ -312,9 +312,7 @@ namespace GrothendieckTopology
 Suppose that `R'` and `G'` are locally isomorphic, that every isomorphism `ψ : R'|_Y ≅ G'|_Y`
 descends to an isomorphism `φ : R|_Y ≅ G|_Y` with `ψ ≫ g = r ≫ φ`, and that every
 automorphism of `R|_Y` locally lifts along `r` to an automorphism of `R'`. Then every
-isomorphism `φ : R|_X ≅ G|_X` locally lifts along `r` and `g` to an isomorphism `R' ≅ G'`:
-locally choose `ψ₀ : R' ≅ G'`, descend it to `φ₀`, and correct `ψ₀` by a local lift of the
-automorphism `φ ≫ φ₀⁻¹` of `R`. -/
+isomorphism `φ : R|_X ≅ G|_X` locally lifts along `r` and `g` to an isomorphism `R' ≅ G'`. -/
 lemma exists_lift_iso_of_descent {R' R G' G : Sheaf J A} (r : R' ⟶ R) (g : G' ⟶ G)
     (hloc : ∀ X : C, ∃ S ∈ J X, ∀ ⦃Y : C⦄ (f : Y ⟶ X), S f →
       Nonempty ((isoPresheaf R' G').obj (op Y)))

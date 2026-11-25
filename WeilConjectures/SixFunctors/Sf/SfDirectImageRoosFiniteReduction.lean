@@ -12,8 +12,16 @@ import all WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 
 /-! # Finite reduction of a direct-image Roos limit for arbitrary input
 
-Source: Stacks 0941, 099N; Bhatt--Scholze, Lemmas 3.5.4--3.5.7 and 6.5.11.
+The direct-image Roos limit of an arbitrary derived object is computed from the finite reductions
+of its completion.
+
+## References
+
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* [Stacks, Tag 099N](https://stacks.math.columbia.edu/tag/099N)
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemmas 3.5.4--3.5.7 and 6.5.11
 -/
+
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -58,22 +66,7 @@ private theorem imageTransition_naturality
 
 /-- Completing the input does not change its finite direct-image tower. Therefore
 the finite projection adjunct of every chosen Roos limit is invertible, even when
-the input is not complete.
-Source: Stacks 0941, 099N; Bhatt--Scholze, Lemmas 3.5.4--3.5.7 and 6.5.11.
-(blueprint: lem-weil-sf-direct-image-roos-finite-reduction).
-
-Proof: complete K using the total limit of its reduction system. Normalized
-reconstruction makes that limit complete and inverts the counit at the reduction
-of K. The adjunction triangle then makes reduction of the completion unit an
-isomorphism. Finite evaluation identifies this with each finite scalar extension
-of the unit. Apply finite direct image and completed restriction to get an
-isomorphism of the two finite-image towers; naturality of the specified restriction
-comparisons proves the transition equations. Transport the given Roos triangle
-along these isomorphisms, keeping its limit object fixed. The complete-input
-direct-image theorem makes every projection adjunct of the transported triangle
-invertible. Naturality of the scalar adjunction identifies it with the old
-projection adjunct followed by the finite-image isomorphism. Cancel that
-isomorphism. This also covers zero complexes, level zero and empty schemes. -/
+the input is not complete. -/
 theorem sfDirectImageRoos_finiteReduction
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X))

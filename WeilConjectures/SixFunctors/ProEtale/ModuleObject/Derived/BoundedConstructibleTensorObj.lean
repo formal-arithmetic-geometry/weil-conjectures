@@ -24,8 +24,7 @@ module objects are the lisse sheaves of Bhatt–Scholze, Definition 6.8.6
 `ProEtale.CondensedRing.tensorHypotheses_continuousMapRingObj`). Then the bounded constructible
 complexes on a scheme `T` with noetherian underlying space are stable under the derived tensor
 product
-(`ProEtale.CondensedRing.boundedConstructible_tensorObj`, blueprint
-`proposition-six-operations-dctf--14` for the field coefficients).
+(`ProEtale.CondensedRing.boundedConstructible_tensorObj`).
 
 ## The argument
 

@@ -101,12 +101,11 @@ private lemma pullbackSquareComparison_hom_app_hom_aux
     (boundedConstructibleUpperStarComp_hom_app_hom Λ ℓ g' f K))
 
 /-- **The base-change morphism under a flat change of coefficients**, on bounded constructible
-complexes. Let `T^X = L(Ext_{a_X})` preserve bounded constructible complexes on `X` and `Y'`, and
-write `T^X : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ'⟧` for its restriction. Assume that `derivedPullIso a` is
-compatible with the composition of derived pullbacks, and that the comparisons
-`derivedPushHom a f` at `K₀` and `derivedPushHom a f'` at `Lg'^* K₀` are invertible. Then
-`T^{Y'}` of the base-change morphism `BC_sq^Λ` at `K₀` and the base-change morphism `BC_sq^Λ'` at
-`T^X K₀` are isomorphic arrows. -/
+complexes. Let `T^X = L(Ext_{a_X})` preserve bounded constructible complexes on `X` and `Y'`.
+Assume that `derivedPullIso a` is compatible with the composition of derived pullbacks, and that
+the comparisons `derivedPushHom a f` at `K₀` and `derivedPushHom a f'` at `Lg'^* K₀` are
+invertible. Then `T^{Y'}` of the base-change morphism `BC_sq^Λ` at `K₀` and the base-change
+morphism `BC_sq^Λ'` at `T^X K₀` are isomorphic arrows. -/
 theorem nonempty_arrowIso_boundedConstructibleBaseChange_extendScalars
     (H : DerivedPullIsoCompCoherence a) (sq : CommSq g' f' f g)
     (hRf : ∀ K : Dᵇc(X.left)⟦Λ⟧, boundedConstructible (condensedRingObj Λ Y.left)

@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.RamifiedPullback.RamifiedFiniteScalarComposit
 
 /-! # Ramified comparison for individual module sheaves
 
-Source: Stacks Project, Tags 03EK and 03EL.
+## References
+
+* Stacks Project, Tags `03EL`, `03EK`
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +28,7 @@ namespace WeilConjectures.RamifiedPullback
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The module functor whose termwise extension is the finite pullback level.
-Source: Stacks 03EL (blueprint: lem-weil-ramified-finite-module-comparison). -/
+/-- The module functor whose termwise extension is the finite pullback level. -/
 abbrev finitePullbackModule {X Y : Scheme.{t}} (g : X ⟶ Y) (n : ℕ) :=
   unrestrictedIntegralReductionFunctor l E Y n ⋙
     integralOperationsLevelPullback l E g n ⋙
@@ -36,8 +37,7 @@ abbrev finitePullbackModule {X Y : Scheme.{t}} (g : X ⟶ Y) (n : ℕ) :=
           (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
             (completedIntegralCommRingProjectionUnrestricted l E X n))
 
-/-- The two finite coefficients in a module pullback generator.
-Source: Stacks 03EL (blueprint: lem-weil-ramified-finite-module-comparison). -/
+/-- The two finite coefficients in a module pullback generator. -/
 abbrev finitePullbackModuleTensor {X Y : Scheme.{t}} (g : X ⟶ Y) (n : ℕ)
     (M : integralTowerModules l E Y) (V : Y.ProEt)
     (a : (integralCoefficientCommRingSheaf l E Y n).obj.obj (op V))
@@ -55,28 +55,7 @@ variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L
   (ι : E →ₐ[ℚ_[l]] L)
 
 /-- Objectwise normalized comparison at one finite level, before naturality,
-complexes, or transition maps.
-Source: Stacks 03EL (lemma-tensor-product-pullback) and 03EK (section-tensor-product).
-(blueprint: lem-weil-ramified-finite-module-comparison).
-
-Proof: Write R and S for the completed E and L coefficient sheaves. Express the
-finite E pullback as g-inverse(M) tensor over g-inverse(R_Y) with the finite E
-coefficient sheaf on X. This identification follows by pulling back the finite
-reduction tensor and cancelling the intermediate finite coefficient ring on Y;
-the forward map multiplies the pulled-back finite coefficient into the X factor,
-and the inverse inserts one. Extend scalars to S_X and reassociate. The given
-coefficientIso on X identifies the last two factors with the finite L quotient.
-On the other side, pull back M tensor over R_Y with S_Y, and tensor with the
-finite L quotient on X. The intermediate g-inverse(S_Y) cancels by multiplication,
-with inverse insertion of one. Composing the first identification with the inverse
-of the second gives the displayed isomorphism for each M. All maps are balanced
-and linear over S_X. The coefficient_formula gives its last factor; naturality of
-constant-ring structure maps with respect to j gives its first finite factor.
-Thus evaluation on the nested tensor generator gives exactly the formula below.
-The two composites are identities on tensors and hence after sheafification.
-No naturality in M, cochain differential, or tower compatibility is asserted here.
-The argument uses ordinary balanced tensors, so applies to zero modules and empty
-sites and requires neither flatness nor a positive ramification index. -/
+complexes, or transition maps. -/
 theorem finiteModuleComparison_exists {X Y : Scheme.{t}} (g : X ⟶ Y)
     (e : ℕ)
     (j : ∀ n : ℕ, Padic.coefficientExtensionRing l E (n + 1) →+*

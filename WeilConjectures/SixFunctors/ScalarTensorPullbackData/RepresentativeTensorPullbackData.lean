@@ -10,8 +10,11 @@ public import WeilConjectures.SixFunctors.Supporting.Tensor.RepresentativeTensor
 
 /-! # Explicit pullback data for a representative tensor cube
 
-Source: Stacks Tags 04VK and 07A4.
-(blueprint: def-sf-representative-tensor-pullback-data).
+## References
+
+* [Stacks, Tag 04VK](https://stacks.math.columbia.edu/tag/04VK)
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
 -/
 
 @[expose] public section
@@ -23,9 +26,7 @@ variable {K H K' H' D E D' E' : Type*}
   [Category K] [Category H] [Category K'] [Category H']
   [Category D] [Category E] [Category D'] [Category E']
 
-/-- The actual pullback functors and comparison maps, before their four laws.
-Source: Stacks Tags 04VK and 07A4.
-(blueprint: def-sf-representative-tensor-pullback-data). -/
+/-- The actual pullback functors and comparison maps, before their four laws. -/
 structure ScalarTensorPullbackData
     (Y : ScalarTensorRepresentativeData K K' D D')
     (X : ScalarTensorRepresentativeData H H' E E')
@@ -44,13 +45,11 @@ namespace ScalarTensorPullbackData
 variable {Y : ScalarTensorRepresentativeData K K' D D'}
   {X : ScalarTensorRepresentativeData H H' E E'}
 
-/-- The fixed-coefficient representative law.
-Source: Stacks Tag 07A4 (blueprint: def-sf-representative-tensor-pullback-data). -/
+/-- The fixed-coefficient representative law. -/
 def fixedLaw (S : ScalarTensorPullbackData Y X) : Prop :=
   S.toTensorFixedPullbackData.law
 
-/-- The intrinsic representative law.
-Source: Stacks Tag 07A4 (blueprint: def-sf-representative-tensor-pullback-data). -/
+/-- The intrinsic representative law. -/
 def intrinsicLaw (S : ScalarTensorPullbackData Y X) : Prop :=
   ∀ (P Q : K') (hp : Y.P' P) (hq : Y.P' Q),
     S.G.map (Y.r'.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)) ≫ S.phiG.app (Y.q'.obj P, Y.q'.obj Q) ≫
@@ -58,25 +57,18 @@ def intrinsicLaw (S : ScalarTensorPullbackData Y X) : Prop :=
       S.g.hom.app (Y.t'.obj (P, Q)) ≫ X.q'.map (S.mG.app (P, Q)) ≫
         X.r'.hom.app (⟨S.B.obj P, S.hB P hp⟩, ⟨S.B.obj Q, S.hB Q hq⟩)
 
-/-- The unary inverse-mate factor law.
-Source: Stacks Tag 07A6 (blueprint: def-sf-representative-tensor-pullback-data). -/
+/-- The unary inverse-mate factor law. -/
 def factorsLaw (S : ScalarTensorPullbackData Y X) : Prop :=
   ∀ P : K,
     X.E.map (S.f.hom.app P) ≫ X.e.hom.app (S.A.obj P) ≫ X.q'.map (S.c.inv.app P) =
       S.alpha.inv.app (Y.q.obj P) ≫ S.G.map (Y.e.hom.app P) ≫ S.g.hom.app (Y.U.obj P)
 
-/-- The ordinary chain tensor law.
-Source: Stacks Tag 07A4 (blueprint: def-sf-representative-tensor-pullback-data). -/
+/-- The ordinary chain tensor law. -/
 def chainLaw (S : ScalarTensorPullbackData Y X) : Prop :=
   tensorOrdinaryPullbackLaw Y.t X.t Y.t' X.t' Y.U X.U S.A S.B S.c
     S.mF Y.b X.b S.mG
 
-/-- Apply the proved categorical cube to the four laws of specified pullback data.
-Source: Stacks Tags 04VK and 07A4.
-(blueprint: def-sf-representative-tensor-pullback-data).
-
-Proof: supply the stored functors and maps and the four stated laws to
-finiteScalarRepresentativeTensorCube. No data are chosen or modified. -/
+/-- Apply the proved categorical cube to the four laws of specified pullback data. -/
 theorem tensorSquare (S : ScalarTensorPullbackData Y X)
     (hf : S.fixedLaw) (hg : S.intrinsicLaw) (hc : S.factorsLaw) (ht : S.chainLaw)
     (P Q : K) (hp : Y.P P) (hq : Y.P Q) :

@@ -84,7 +84,6 @@ sheafification.
   multiplicativity-type assumptions on `P` and `Q` assumed throughout; all of them hold
   for `P = Q = @Etale`. The inequality `hQP : Q ≤ P` is an explicit argument of
   the definitions using continuity.
-
 -/
 
 @[expose] public section
@@ -155,11 +154,7 @@ instance preservesFiniteLimits_lowerStar :
 section Adjunction
 
 /-- The pullback `g^*` along `g : W ⟶ U`: left Kan extension on presheaves followed by
-sheafification, left adjoint to `lowerStar`. The Kan extensions and the sheafification
-are provided by the instances of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension` and
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, the latter for `A` with
-`CategoryTheory.HasSmallSiteSheafify`. -/
+sheafification, left adjoint to `lowerStar`. -/
 noncomputable def upperStar :
     Sheaf (U.smallGrothendieckTopology Q (Q := P)) A ⥤
       Sheaf (W.smallGrothendieckTopology Q (Q := P)) A :=
@@ -178,19 +173,11 @@ instance : (lowerStar A P Q hQP g).IsRightAdjoint :=
   (upperStarLowerStarAdjunction A P Q hQP g).isRightAdjoint
 
 include hQP in
-/-- `g^*` is a left adjoint. Not an instance, since its statement does not determine the
-inequality `hQP : Q ≤ P` entering the adjunction `g^* ⊣ g_*`; for the small étale sites
-the corresponding instance is registered in
-`WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence`. -/
+/-- `g^*` is a left adjoint, with the adjunction `g^* ⊣ g_*` for a given `hQP : Q ≤ P`. -/
 lemma isLeftAdjoint_upperStar : (upperStar A P Q g).IsLeftAdjoint :=
   (upperStarLowerStarAdjunction A P Q hQP g).isLeftAdjoint
 
-/-- `g^*` is left exact as soon as the left Kan extension along the base change functor is:
-`g^*` is the composite of the inclusion of sheaves into presheaves, which preserves finite
-limits, that left Kan extension, and sheafification, which is left exact by
-`HasSheafify`. Unlike `preservesFiniteLimits_lowerStar` this is not automatic; see
-`AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback` for the case of an étale
-morphism, where the Kan extension is precomposition with a right adjoint. -/
+/-- `g^*` is left exact as soon as the left Kan extension along the base change functor is. -/
 instance preservesFiniteLimits_upperStar
     [PreservesFiniteLimits ((MorphismProperty.Over.pullback P ⊤ g).op.lan :
       ((P.Over ⊤ U)ᵒᵖ ⥤ A) ⥤ (P.Over ⊤ W)ᵒᵖ ⥤ A)] :
@@ -234,12 +221,8 @@ section Comp
 variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
 
 /-- The composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` of pushforwards on
-sheaves for the small sites: both sides send a sheaf `G` to the sheaf
-`(V → R) ↦ G(V ×_R T → T)`, up to the pullback pasting isomorphism
-`(V ×_R S) ×_S T ≅ V ×_R T` of `MorphismProperty.Over.pullbackComp`. As in
-`MorphismProperty.Over.pullbackComp`, the composite `h₁ ≫ h₂` is an optional argument, so
-that the isomorphism is also available for a morphism that is merely *equal* to `h₁ ≫ h₂`;
-this is what makes the coherence laws below state the equalities one wants. -/
+sheaves for the small sites. The composite `h₁ ≫ h₂` is an optional argument, so that the
+isomorphism is also available for a morphism that is merely *equal* to `h₁ ≫ h₂`. -/
 noncomputable def lowerStarComp (h₁₂ : T ⟶ R := h₁ ≫ h₂)
     (hh₁₂ : h₁₂ = h₁ ≫ h₂ := by cat_disch) :
     lowerStar A P Q hQP h₁ ⋙ lowerStar A P Q hQP h₂ ≅ lowerStar A P Q hQP h₁₂ :=

@@ -12,7 +12,10 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient
 
 The ordinary scalar tensor square gives equality on every individual summand
 of the unbounded signed direct-sum total complex.
-(blueprint: lem-sfb-coefficient-scalar-tensor-summand)
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -50,15 +53,7 @@ attribute [local irreducible] HomologicalComplex₂.total Mod.inducingFunctorDat
 attribute [local irreducible] coefficientSectionScalarTotal
 
 -- Normalize the four functor images of each total-complex summand.
-/-- The signed scalar tensor square commutes after each coproduct-summand inclusion.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4.
-In degree n, test the maps on each coproduct summand indexed by p+q=n.
-The internal and section total tensor maps restrict to their ordinary tensorators.
-The equivalence comparison restricts to its ordinary comparison and the termwise
-scalar comparison restricts to its component in degrees p and q. Thus the square
-on each summand is exactly the ordinary scalar tensor square. Coproduct
-inclusion is therefore followed by the same map on both sides.
-(blueprint: lem-sfb-coefficient-scalar-tensor-summand). -/
+/-- The signed scalar tensor square commutes after each coproduct-summand inclusion. -/
 theorem coefficientScalarTensor_summand (Z : Scheme.{u})
     (d : CoefficientScalarTensorRepresentativeBasicData a Z)
     (h : CoefficientScalarTensorRepresentativeHypotheses a Z d)

@@ -211,7 +211,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 
 /-! # Conservativity of integral reduction
 
-Source: Bhatt--Scholze, Sections 6.7--6.8 (blueprint: lem-weil-pbc-integral-reduction-conservative).
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.11(3), Sections 6.7--6.8.
 -/
 
 @[expose] public section
@@ -229,23 +231,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
   [FiniteDimensional ℚ_[ℓ] E]
 
 /-- Derived reduction modulo ℓ detects isomorphisms between bounded constructible
-integral complexes. Source: Bhatt--Scholze, Proposition 6.8.11(3) and derived Nakayama
-(blueprint: lem-weil-pbc-integral-reduction-conservative).
-
-Proof in words. The valuation ring of a finite normed extension is a complete discrete
-valuation ring, and ℓ is a positive power of a uniformizer times a unit. On a finite
-stratification the cohomology modules are locally finitely presented. The kernel, cokernel
-and extension closure of these modules makes the cone of φ bounded constructible.
-The integral realization identifies the locally finitely presented internal modules
-with the continuous integral sheaves in Proposition 6.8.11(3); this identification and
-the coefficient-dependent closure assertions must be established, rather than inferred
-from noetherianity alone. Derived reduction carries the cone to zero when the reduced
-map is invertible. The two-term coefficient resolution identifies its restricted
-reduction with the cone of multiplication by ℓ, so multiplication by ℓ is invertible
-on the cone and hence on every cohomology module. Constructible Nakayama makes each
-of those modules zero. The cone is therefore zero,
-so φ is invertible. This argument includes torsion modules, zero complexes, and empty X;
-it uses no properness or exchange hypothesis. -/
+integral complexes. -/
 theorem integralReduction_reflects_isIso (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X]
     {M N : ProEtale.BoundedConstructible (condensedRingObj (integralCoeff ℓ E) X)}

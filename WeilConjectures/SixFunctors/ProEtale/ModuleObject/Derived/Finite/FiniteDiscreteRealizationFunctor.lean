@@ -81,8 +81,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 open Scheme
 
-/-- The actual internal exchange diagram, retaining its four ambient vertices.
-(blueprint: def-weil-pbc-ambient-typed-bounded-exchange). -/
+/-- The actual internal exchange diagram, retaining its four ambient vertices. -/
 noncomputable def coefficientInternalExchangeChain
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (sq : CommSq g' f' f g)
@@ -90,8 +89,7 @@ noncomputable def coefficientInternalExchangeChain
   Adjunction.exchangeChain (residueExchangeAdjunction Λ f)
     (residueExchangeAdjunction Λ f') (residueExchangeSquare Λ sq).hom K
 
-/-- The actual etale exchange diagram, retaining its four vertices.
-(blueprint: def-weil-pbc-ambient-typed-etale-exchange). -/
+/-- The actual etale exchange diagram, retaining its four vertices. -/
 noncomputable def coefficientEtaleExchangeChain (B₀ : Type) [CommRing B₀]
     (sq : CommSq g' f' f g) (L : FiniteDiscreteEtalePlus B₀ X) :
     ExchangeChain (FiniteDiscreteEtalePlus B₀ Y') :=
@@ -103,9 +101,7 @@ noncomputable def coefficientEtaleExchangeChain (B₀ : Type) [CommRing B₀]
     (Etale.pullbackSquareComparison (ModuleCat.{u + 1} (ULift.{u + 1} B₀)) sq).hom L
 
 attribute [local semireducible] residueExchangeUpperStar residueExchangeLowerStar in
-/-- The original bounded exchange with endpoints fixed by its actual exchange diagram.
-Source: boundedConstructibleBaseChange.
-(blueprint: def-weil-pbc-ambient-typed-bounded-exchange). -/
+/-- The original bounded exchange with endpoints fixed by its actual exchange diagram. -/
 noncomputable def coefficientAmbientBoundedExchange
     (T : Type) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T]
     [DiscreteTopology T] [Finite T] [Fact (IsNilpotent (ℓ : T))]
@@ -144,9 +140,7 @@ theorem coefficientAmbientBoundedExchange_factorization
       (residueExchangeAdjunction (Profinite.continuousMapRingObj T) f')
       (residueExchangeSquare (Profinite.continuousMapRingObj T) sq).hom K.obj)
 
-/-- The original etale exchange, with endpoints fixed by its actual exchange diagram.
-Source: Etale.baseChange.
-(blueprint: def-weil-pbc-ambient-typed-etale-exchange). -/
+/-- The original etale exchange, with endpoints fixed by its actual exchange diagram. -/
 noncomputable def coefficientEtaleExchange (B₀ : Type) [CommRing B₀]
     (sq : CommSq g' f' f g) (L : FiniteDiscreteEtalePlus B₀ X) :
     (coefficientEtaleExchangeChain B₀ sq L).obj0 ⟶
@@ -210,8 +204,7 @@ theorem coefficientEtaleExchange_map_factorization (B₀ : Type) [CommRing B₀]
   exact ExchangeChain.mapHom_composite _ F
 
 /-- The shared diagram predicate for the condensed coefficient ring of a finite discrete ring `T`.
-The four vertices, three factors, and both original total exchange maps are retained.
-(blueprint: def-weil-pbc-coefficient-exchange-diagram). -/
+The four vertices, three factors, and both original total exchange maps are retained. -/
 def coefficientExchangeSteps (B₀ : Type) [CommRing B₀]
     (T : Type) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T]
     [DiscreteTopology T] [Finite T] [Fact (IsNilpotent (ℓ : T))]
@@ -240,13 +233,7 @@ def finiteDiscreteExchangeSteps [DiscreteTopology B] [Finite B] [Fact (IsNilpote
     Prop :=
   coefficientExchangeSteps ℓ k B B sq F0 F1
 
-/-- A step comparison identifies the two original specified total arrows.
-Source: the factored comparison and the defining equations for the two typed arrows.
-(blueprint: def-weil-pbc-coefficient-exchange-diagram).
-
-Proof. Apply the generic factored-comparison arrow isomorphism. Rewrite both entire
-arrow objects by the cache equations, retaining the original endpoints as well as
-its morphisms. No component or derived functor is expanded in the consumer. -/
+/-- A step comparison identifies the two original specified total arrows. -/
 theorem finiteDiscreteExchangeSteps_arrowIso
     [DiscreteTopology B] [Finite B] [Fact (IsNilpotent (ℓ : B))]
     (sq : CommSq g' f' f g)

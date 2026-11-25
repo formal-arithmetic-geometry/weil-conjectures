@@ -18,8 +18,7 @@ public import WeilConjectures.CategoryTheory.Sites.WeaklyContractibleProducts
 Let `T` be a tower of complexes of sheaves of `Λ`-modules on the small pro-étale site whose
 transition maps are degreewise epimorphisms. Then the limit `lim Tₙ`, computed degreewise, is
 the derived limit `R lim Tₙ` in the derived category
-(`AlgebraicGeometry.ProEtale.isHomotopyLimit_mapCone_Q_of_epi`, blueprint
-`proposition-milnor-sequence--3`, Stacks 0947, 091J): in each degree,
+(`AlgebraicGeometry.ProEtale.isHomotopyLimit_mapCone_Q_of_epi`): in each degree,
 `0 ⟶ lim Tₙ ⟶ ∏ Tₙ ──1 - t──▶ ∏ Tₙ ⟶ 0` is exact, the surjectivity of `1 - t` being checked on
 sections over the weakly contractible objects, which cover the site and over which epimorphisms
 of sheaves are surjective; and countable products are exact on the pro-étale site (repleteness).
@@ -29,6 +28,11 @@ abelian category with exact countable products and K-injective resolutions, for 
 complexes on which `1 - t` is degreewise an epimorphism. Combined with
 `CategoryTheory.Pretriangulated.IsHomotopyLimit.map`, derived pushforwards then commute with the
 limit (`AlgebraicGeometry.ProEtale.isHomotopyLimit_rightDerivedLowerStar_mapCone_Q_of_epi`).
+
+## References
+
+* [Stacks, Tag 0947](https://stacks.math.columbia.edu/tag/0947)
+* [Stacks, Tag 091J](https://stacks.math.columbia.edu/tag/091J)
 -/
 
 @[expose] public section
@@ -94,10 +98,10 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- **Towers with epimorphic transitions have no derived limit terms** on the pro-étale site
-(blueprint `proposition-milnor-sequence--3`, Stacks 0947, 091J): for a tower of complexes of sheaves
-of `Λ`-modules on `S_proét` with degreewise epimorphic transitions, the degreewise limit is the
-derived limit, i.e. its image in the derived category is a homotopy limit cone. -/
+/-- **Towers with epimorphic transitions have no derived limit terms** on the pro-étale site:
+for a tower of complexes of sheaves of `Λ`-modules on `S_proét` with degreewise epimorphic
+transitions, the degreewise limit is the derived limit, i.e. its image in the derived category is
+a homotopy limit cone. -/
 theorem isHomotopyLimit_mapCone_Q_of_epi
     {T : ℕᵒᵖ ⥤ CochainComplex (Sheaf (Scheme.ProEt.topology S) (ModuleCat.{u + 1} Λ)) ℤ}
     (hT : ∀ (n : ℕ) (i : ℤ), Epi ((T.map (homOfLE n.le_succ).op).f i)) {c : Cone T}

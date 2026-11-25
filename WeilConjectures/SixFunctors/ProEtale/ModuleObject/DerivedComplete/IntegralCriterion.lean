@@ -14,43 +14,16 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionConstru
 # The integral constructibility criterion
 
 Let `E ⊆ ℚ̄_ℓ` be a finite subextension of `ℚ_ℓ` with ring of integers `𝒪_E`, uniformizer `ϖ` and
-residue field `𝔽_E`, and `X` a noetherian scheme. Blueprint
-`proposition-integral-constructibility-criterion` (section `chap-The-pro-etale-site`) characterizes
-the bounded constructible `𝒪_E`-complexes on `X_proét`: a complex `K` is bounded constructible if
-and only if it is derived complete and its first derived reduction `K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` is
-a bounded constructible complex of `𝔽_E`-sheaves (Bhatt–Scholze, *The pro-étale topology for
-schemes*, Proposition 6.8.11; Stacks, Tag 09C7).
+residue field `𝔽_E`, and `X` a noetherian scheme. The integral constructibility criterion
+characterizes the bounded constructible `𝒪_E`-complexes on `X_proét`: a complex `K` is bounded
+constructible if and only if it is derived complete and its first derived reduction
+`K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` is a bounded constructible complex of `𝔽_E`-sheaves
+(Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.8.11; Stacks, Tag 09C7).
 
 The implication (1) ⇒ (2) is proved:
 `ProEtale.derivedCompleteIntegers_of_boundedConstructible` and
 `ProEtale.boundedConstructible_derivedReduction_obj`. This file proves the converse
 (2) ⇒ (1), `ProEtale.boundedConstructible_of_derivedCompleteIntegers`.
-
-## Proof of (2) ⇒ (1)
-
-Regard `K₁` as a complex of `𝒪_{E,X}`-modules (`ProEtale.derivedReductionComap`); it is bounded
-constructible (`ProEtale.boundedConstructible_comap_derivedExtendScalars_of_derivedReduction`),
-with cohomology in some interval `[b - n, b]`. We show by induction on `n` that a derived
-complete `K` whose reduction `K₁` is bounded constructible with cohomology in `[b - n, b]` is
-bounded constructible (`ProEtale.boundedConstructible_of_derivedCompleteIntegers_of_amplitude`).
-The reduction triangle `K --ϖ--> K ⟶ K₁ ⟶` gives exact sequences
-`0 ⟶ coker (ϖ on Hᵠ K) ⟶ Hᵠ K₁ ⟶ ker (ϖ on Hᵠ⁺¹ K) ⟶ 0`.
-
-1. For `q > b` and `q < b - n`, `ϖ` acts surjectively on `Hᵠ K`, which is derived complete;
-   hence `Hᵠ K = 0` by Nakayama's lemma (`ProEtale.isZero_homology_of_derivedCompleteIntegers`).
-2. `M = Hᵇ K` is constructible
-   (`ProEtale.isConstructibleModuleObject_homology_of_derivedCompleteIntegers`): it is derived
-   complete, the cokernel of `ϖ` on it is `Hᵇ K₁` (as `Hᵇ⁺¹ K = 0`), and the kernel of `ϖ` on it
-   is a quotient of `Hᵇ⁻¹ K₁`, so that
-   `ProEtale.isConstructibleModuleObject_of_derivedCompleteIntegers` applies.
-3. If `n = 0`, then `K` has the single cohomology sheaf `M`, and is bounded constructible.
-   Otherwise, consider the truncation triangle `K' ⟶ K ⟶ K'' ⟶` with `K' = τ^{≤ b - 1} K` and
-   `K'' = τ^{≥ b} K = M[-b]`. Then `K''` is derived complete and bounded constructible, so `K'` is
-   derived complete. The reduction `K'₁` is bounded constructible, by two-out-of-three in the
-   reduced triangle `K'₁ ⟶ K₁ ⟶ K''₁ ⟶`, and has cohomology in `[b - n, b - 1]`: `K'₁` lies in
-   degrees `≤ b - 1` and `K''₁` in degrees `≥ b - 1`, by their reduction triangles. By induction
-   `K'` is bounded constructible, hence so is `K`
-   (`ProEtale.boundedConstructible_of_derivedCompleteIntegers_of_triangle`).
 -/
 
 @[expose] public section
@@ -255,10 +228,8 @@ lemma isZero_homology_derivedReductionComap_obj₁ (m : ℕ)
 `K' ⟶ K ⟶ K'' ⟶ K'[1]` with `K'` in degrees `≤ b - 1` and `K''` concentrated in degree `b`
 (for instance the truncation triangle `τ^{≤ b - 1} K ⟶ K ⟶ τ^{≥ b} K ⟶`). Let `K` be derived
 complete with `K₁ = 𝔽_{E,X} ⊗ᴸ K` bounded constructible, with cohomology in degrees
-`[b - (m + 1), b]`. Then `Hᵠ K = 0` for `q > b` and `Hᵇ K` is constructible, so that
-`K'' = (Hᵇ K)[-b]` is derived complete and bounded constructible. Hence `K'` is derived complete,
-and its reduction `K'₁` is bounded constructible with cohomology in degrees `[b - 1 - m, b - 1]`,
-so that `K'` is bounded constructible by the hypothesis `ih`, and so is `K`. -/
+`[b - (m + 1), b]`. Then `K` is bounded constructible, assuming the statement for complexes with
+cohomology in `[b - m, b]` for every `b`. -/
 lemma boundedConstructible_of_derivedCompleteIntegers_of_triangle [IsNoetherian X] (m : ℕ)
     (ih : ∀ (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (b : ℤ),
@@ -288,10 +259,8 @@ lemma boundedConstructible_of_derivedCompleteIntegers_of_triangle [IsNoetherian 
     (derivedCompleteIntegers_shift (derivedCompleteIntegers_obj₃_of_isLE_of_isGE T hT b hK) (-1))
     hK
 
-/-- The inductive step of the integral criterion: apply
-`ProEtale.boundedConstructible_of_derivedCompleteIntegers_of_triangle` to the truncation triangle
-`τ^{≤ b - 1} K ⟶ K ⟶ τ^{≥ b} K ⟶`, where `K` lies in degrees `≤ b` since `Hᵠ K = 0` for
-`q > b`. -/
+/-- The inductive step of the integral criterion for a derived complete complex `K` whose first
+derived reduction is bounded constructible, with cohomology in `[b - (m + 1), b]`. -/
 lemma boundedConstructible_of_derivedCompleteIntegers_succ [IsNoetherian X] (m : ℕ)
     (ih : ∀ (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (b : ℤ),
@@ -349,8 +318,8 @@ lemma boundedConstructible_of_derivedCompleteIntegers_of_amplitude [IsNoetherian
     · exact isConstructibleModuleObject_of_isZero _ (hK₀ i hi)
   | succ m ih => exact boundedConstructible_of_derivedCompleteIntegers_succ m ih K b hK h₁ hb
 
-/-- Blueprint `proposition-integral-constructibility-criterion` (section `chap-The-pro-etale-site`),
-implication (2) ⇒ (1): on a noetherian scheme `X`, a derived complete complex `K` of
+/-- **The integral constructibility criterion**, implication (2) ⇒ (1): on a noetherian scheme
+`X`, a derived complete complex `K` of
 `𝒪_{E,X}`-module objects whose first derived reduction `K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` lies in
 `Dᵇc(X, 𝔽_E)` is bounded constructible (Bhatt–Scholze, Proposition 6.8.11). -/
 theorem boundedConstructible_of_derivedCompleteIntegers {X : Scheme.{u}} [IsNoetherian X]

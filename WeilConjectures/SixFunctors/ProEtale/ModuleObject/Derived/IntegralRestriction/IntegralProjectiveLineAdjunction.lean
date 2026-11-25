@@ -11,9 +11,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralRestric
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 
 /-! # Integral diagonal-kernel adjunction for a projective line
-
-Source: current blueprint, sk-thm-int-restriction-line.proof.md, paragraph (1).
-(blueprint: lem-sfb-integral-projective-line-adjunction).
 -/
 
 @[expose] public noncomputable section
@@ -63,27 +60,7 @@ private theorem diagonalIntegral {C : Type*} [Category C] [MonoidalCategory C]
   simp only [hs, whiskerLeft_id, Category.id_comp, Iso.inv_hom_id]
 
 /-- The projective-line diagonal and its normalized integral trace give the
-adjunction between the two specified restricted functors.
-
-Source: sk-thm-int-restriction-line.proof.md, paragraph (1).
-(blueprint: lem-sfb-integral-projective-line-adjunction).
-
-Proof: write P = P1_Y and W = P times_Y P. Properness of both projections
-and exactness of closed direct image identify the diagonal support with
-Delta_* on the unbounded ambient categories. The integral diagonal tower and
-coefficient extension give delta and the three traces, with both projection
-integrals equal to identity. Tensor the inverse diagonal projection comparison
-with delta and push along p2. Proper exchange and the p2 projection comparison
-identify the result with a natural map M -> q*Rq*M(1)[2]. The counit is inverse
-q-projection followed by identity tensor the q-trace. Trace base change along
-p1 rewrites the first triangle as the pushforward of identity tensor the first
-diagonal integral; section normalization cancels the diagonal projection map.
-It is identity. The second trace-base-change rearrangement and the p2 section
-normalization give identity tensor the second integral, hence identity again.
-The shifts are even, so no Koszul sign remains. The specified preservation
-witnesses restrict these natural transformations to the full localizing
-subcategories. Their naturality and the two triangle identities give an
-adjunction by the unit-counit construction. -/
+adjunction between the two specified restricted functors. -/
 theorem integralProjectiveLine_adjunction
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

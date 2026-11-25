@@ -27,9 +27,8 @@ through the single refinement `j` of the first compactification by the second
 
 ## Compactification coherence
 
-The clauses of blueprint `proposition-construction-independence-rf-shriek` (subsection
-`sk-prop-sf-cbc` of the six-functor chapter) used here, for the lower shriek of bounded
-constructible complexes attached to compactifications (proved in
+The following coherence properties of the lower shriek of bounded constructible complexes
+attached to compactifications are used here (proved in
 `…LowerShriek.RefinementCoherence` through the equalizer of two refinements):
 
 - the comparison of two compactifications through a common refinement does not depend on the
@@ -39,7 +38,6 @@ constructible complexes attached to compactifications (proved in
   (`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans`);
 - the comparisons along refinements are transitive under composition
   (`ProEtale.CondensedRing.boundedConstructibleLowerShriekRefinementIso'_trans`).
-
 -/
 
 @[expose] public section
@@ -66,14 +64,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated Z₁.hom] [LocallyOfFiniteType Z₂.hom] [QuasiCompact Z₂.hom] [IsSeparated Z₂.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- Blueprint `proposition-construction-independence-rf-shriek`, transitivity clause ("these
-transformations are identities for identity refinements and are transitive under
-composition"): for refinements `h : Z ⟶ Z₁` and `h₁ : Z₁ ⟶ Z₂` of factorizations
-`X ⟶[i] Z ⟶[p] Y`, `X ⟶[i₁] Z₁ ⟶[p₁] Y` and `X ⟶[i₂] Z₂ ⟶[p₂] Y`, the comparison along the
-composite `h ≫ h₁` is the composite of the comparisons. The blueprint states the clause for
-refinements of compactifications; it is used here for factorizations with an open immersion
-followed by an arbitrary morphism, such as `U ⟶[j] X ⟶[𝟙] X`, which are compactifications up to
-the identification of the middle object. -/
+/-- Transitivity of the comparisons along refinements: for refinements `h : Z ⟶ Z₁` and
+`h₁ : Z₁ ⟶ Z₂` of factorizations `X ⟶[i] Z ⟶[p] Y`, `X ⟶[i₁] Z₁ ⟶[p₁] Y` and
+`X ⟶[i₂] Z₂ ⟶[p₂] Y`, the comparison along the composite `h ≫ h₁` is the composite of the
+comparisons. -/
 theorem boundedConstructibleLowerShriekRefinementIso'_trans {i : X ⟶ Z} {i₁ : X ⟶ Z₁}
     {i₂ : X ⟶ Z₂} [IsOpenImmersion i.left] [IsOpenImmersion i₁.left] [IsOpenImmersion i₂.left]
     {h : Z ⟶ Z₁} {h₁ : Z₁ ⟶ Z₂} {h₂ : Z ⟶ Z₂} (sq : IsPullback (𝟙 X) i i₁ h)
@@ -92,9 +86,8 @@ variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] {f : X ⟶ Y}
 
-/-- Blueprint `proposition-construction-independence-rf-shriek`, cocycle clause ("the resulting
-comparison is independent of that choice and satisfies the cocycle condition for triples of
-compactifications"), for bounded constructible `ℚ̄_ℓ`-sheaves. -/
+/-- The cocycle condition for the comparisons of the lower shriek of bounded constructible
+`ℚ̄_ℓ`-sheaves attached to triples of compactifications. -/
 theorem boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans
     (c₁ c₂ c₃ : Compactification f.left) :
     boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c₂ ≪≫
@@ -102,12 +95,8 @@ theorem boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans
       boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c₃ :=
   boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans_eq ℓ c₁ c₂ c₃
 
-/-- Blueprint `proposition-construction-independence-rf-shriek`, refinement clause ("for a
-refinement `u : c₁ → c₂`, the canonical transformation between the compact-support candidates is the
-composite of the proper-composition isomorphism with the isomorphism `Ru_* j_{1!} ≅ j_{2!}`";
-"comparison through a common refinement gives a natural isomorphism", independent of the choice
-of the refinement): the comparison of `c₁` with a refinement `c` of `c₁` is the comparison along
-the refinement. -/
+/-- The comparison of `c₁` with a refinement `c` of `c₁` is the comparison along the
+refinement. -/
 theorem boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq
     {c c₁ : Compactification f.left} (r : Compactification.OverRefinement c c₁) :
     haveI := r.isProper

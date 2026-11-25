@@ -29,6 +29,18 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 import WeilConjectures.Topology.ConstructibleIsRetrocompact
 
+/-! # Kernel separatedness of ordinary integral quotients
+
+Ordinary quotient projections jointly detect zero on a constructible integral module.
+
+## References
+
+* Hemo, Richarz, Scholbach, Proposition 5.1
+* Hemo, Richarz, Scholbach, Proposition 7.6
+* Hemo, Richarz, Scholbach, Theorem 7.7
+* Bhatt, Scholze, Section 6.1
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -37,16 +49,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 open AlgebraicGeometry Scheme
 
-/-- Ordinary quotient projections jointly detect zero on a constructible integral module.
-
-Source: Hemo--Richarz--Scholbach, Propositions 5.1 and 7.6 and Theorem 7.7;
-Bhatt--Scholze, Section 6.1.
-(blueprint: lem-sp-original-integral-ordinary-quotient-kernel-separated).
-
-The finite presentation argument on w-contractible affine tests shows that an
-integral section whose image vanishes in every positive ordinary quotient is
-zero. Compactness gives the separatedness assertion on each stratum, and exact
-open/closed localization gives it globally. -/
+/-- Ordinary quotient projections jointly detect zero on a constructible integral module. -/
 theorem originalIntegralOrdinaryQuotientKernel_separated
     (ell : ℕ) [Fact ell.Prime]
     (E : IntermediateField ℚ_[ell] (PadicAlgCl ell))

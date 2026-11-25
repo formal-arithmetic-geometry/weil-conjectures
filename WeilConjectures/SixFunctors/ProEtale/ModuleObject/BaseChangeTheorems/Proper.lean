@@ -42,8 +42,7 @@ subextensions of `ℚ̄_ℓ`.
 The same holds for the condensed ring `𝒪̲_E` (`Profinite.padicIntegersRingObj`) of a finite
 extension `E` of `ℚ_ℓ` embedded in `ℚ̄_ℓ`.
 
-All three are deduced from the torsion case, as in the proof of blueprint
-`theorem-smooth-base-change-all-admissible`.
+All three are deduced from the torsion case.
 A bounded constructible `E`-complex is `E ⊗ᴸ_{𝒪_E} K₀` for a bounded constructible
 `𝒪_E`-complex `K₀` (`ProEtale.exists_boundedConstructibleExtendScalars_obj_iso`), and a bounded
 constructible `ℚ̄_ℓ`-complex is `ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀` for some `E` and `K₀`
@@ -99,24 +98,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- **The proper base change theorem** (blueprint
-`proposition-proper-direct-image-constructible-complexes`) for bounded constructible `𝒪_E`-sheaves,
-`E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ`: for a cartesian square of schemes
-
-```
-X' --g'--> X
-|          |
-f'         f
-v          v
-Y' --g---> Y
-```
-
-with `f` proper, the base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an
-isomorphism of functors `Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y')⟦𝒪̲_E⟧`. By derived Nakayama it suffices that the
-first derived reduction `BC_sq(K₀) ⊗ᴸ_{𝒪_E} 𝔽_E` is invertible
-(`isIso_boundedConstructibleBaseChange_integral_app_of_reduction`); this is the pro-étale
-base-change morphism with coefficients `𝔽_E` at a complex of étale origin, invertible by the
-étale proper base change theorem (`ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`). -/
+/-- **The proper base change theorem** for bounded constructible `𝒪_E`-sheaves,
+`E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ`: for a cartesian square of schemes with `f` proper, the
+base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an isomorphism of functors
+`Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y')⟦𝒪̲_E⟧`. -/
 theorem isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] [IsProper f.left]
@@ -133,8 +118,7 @@ theorem isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers
     (isIso_derivedBaseChangeMap_app_of_isProper _ hsq _
       (boundedConstructible_derivedReduction_obj X.left ℓ E _ K₀.property).plusEtaleOrigin)
 
-/-- **The proper base change theorem** (blueprint
-`proposition-proper-direct-image-constructible-complexes`) for bounded constructible `E`-sheaves,
+/-- **The proper base change theorem** for bounded constructible `E`-sheaves,
 `E` a finite extension of `ℚ_ℓ`: for a cartesian square of schemes
 
 ```
@@ -162,8 +146,7 @@ theorem isIso_boundedConstructibleBaseChange_of_isProper (E : PadicAlgCl.FiniteI
     simp only [MorphismProperty.isomorphisms.iff]
     infer_instance)
 
-/-- **The proper base change theorem** (blueprint
-`proposition-proper-direct-image-constructible-complexes`) for bounded constructible `ℚ̄_ℓ`-sheaves:
+/-- **The proper base change theorem** for bounded constructible `ℚ̄_ℓ`-sheaves:
 for a cartesian square of schemes `sq : IsPullback g' f' f g` with `f` proper, the base-change
 morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an isomorphism of functors
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`, for the condensed ring

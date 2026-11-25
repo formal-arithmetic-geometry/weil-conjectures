@@ -15,9 +15,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Sta
 
 Let `k` be a field, `X` a scheme of finite type over `k`, `i : Z ⟶ X` a closed immersion and
 `j : U ⟶ X` the complementary (quasi-compact) open immersion, and let `Λ` be a finite ring
-killed by an integer invertible in `k`: the finite coefficient stage `A_{E,n}` of blueprint
-`lemma-local-cohomology-right-adjoint--2`. This file proves clauses (1)–(4) of that proposition at
-the finite stage, on the bounded constructible pro-étale complexes `Dᵇc_proét(-, Λ)`:
+killed by an integer invertible in `k`: the finite coefficient stage `A_{E,n}`. This file proves
+the following statements at the finite stage, on the bounded constructible pro-étale complexes
+`Dᵇc_proét(-, Λ)`:
 
 1. `Rj_*` carries `Dᵇc_proét(U, Λ)` into `Dᵇc_proét(X, Λ)`
    (`ProEtale.boundedConstructible_rightDerivedFunctor_lowerStar_of_isOpenImmersion`);
@@ -35,8 +35,7 @@ the finite stage, on the bounded constructible pro-étale complexes `Dᵇc_proé
 4. `Ri^! Rj_* = 0`, and the unit `Q ⟶ Ri^! i_* Q` is an isomorphism
    (`AlgebraicGeometry.ProEtale.isIso_boundedConstructibleClosedUpperShriekAdjunction_unit_app`).
 
-The direct images of bounded constructible complexes are bounded constructible by blueprint
-`proposition-open-direct-image-preserves-finite`
+The direct images of bounded constructible complexes are bounded constructible
 (`AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerStar`).
 -/
 
@@ -103,12 +102,10 @@ lemma nsmul_id_eq_zero (hΛ : (N : Λ) = 0) (M : ModuleCat.{u + 1} Λ) : N • �
 
 include hN hΛ s
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (1) at the finite stage `A_{E,n}`:
-for an open immersion `j : U ⟶ X` into a scheme of finite type over `k` and a finite ring `Λ` killed
-by an integer invertible in `k`, `Rj_*` carries `Dᵇc_proét(U, Λ)` into `Dᵇc_proét(X, Λ)`. This is
-the case of an open immersion of
-`AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerStar`
-(blueprint `proposition-open-direct-image-preserves-finite`). -/
+/-- For an open immersion `j : U ⟶ X` into a scheme of finite type over `k` and a finite ring `Λ`
+killed by an integer invertible in `k`, `Rj_*` carries `Dᵇc_proét(U, Λ)` into `Dᵇc_proét(X, Λ)`.
+This is the case of an open immersion of
+`AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerStar`. -/
 theorem boundedConstructible_rightDerivedFunctor_lowerStar_of_isOpenImmersion
     {G : _root_.DerivedCategory (Sheaf (ProEt.topology U) (ModuleCat.{u + 1} Λ))}
     (hG : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) U G) :
@@ -139,9 +136,8 @@ lemma boundedConstructible_leftDerivedFunctor_upperStar_obj {Y : Scheme.{u}} (g 
     ((leftDerivedUpperStarIsoMapDerivedCategory _ g).app K).symm
     (hK.mapDerivedCategory_upperStar g)
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3) at the finite stage `A_{E,n}`:
-for `K ∈ Dᵇc_proét(X, Λ)`, the first vertex `Ri_* Ri^! K` of the closed-support triangle is bounded
-constructible. The other two vertices `K` and `Rj_* j^* K` are
+/-- For `K ∈ Dᵇc_proét(X, Λ)`, the first vertex `Ri_* Ri^! K` of the closed-support triangle is
+bounded constructible. The other two vertices `K` and `Rj_* j^* K` are
 (`ProEtale.boundedConstructible_rightDerivedFunctor_lowerStar_of_isOpenImmersion`),
 and bounded constructible complexes form a triangulated subcategory
 (`AlgebraicGeometry.ProEtale.DerivedCategory.isTriangulated_boundedConstructible`). -/
@@ -157,12 +153,10 @@ theorem boundedConstructible_rightDerivedFunctor_lowerStar_obj_closedUpperShriek
     (boundedConstructible_rightDerivedFunctor_lowerStar_of_isOpenImmersion j N hN hΛ s
       (boundedConstructible_leftDerivedFunctor_upperStar_obj j hK))
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (2) at the finite stage `A_{E,n}`:
-the right adjoint `Ri^!` of `Ri_*` on the ambient categories
-(`AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`, blueprint
-`lemma-local-cohomology-right-adjoint--1`) carries `Dᵇc_proét(X, Λ)` into `Dᵇc_proét(Z, Λ)`: in the
-closed-support triangle the outer vertices `K` and `Rj_* j^* K` are bounded constructible, hence
-so is `Ri_* Ri^! K`, and `Ri^! K ≅ i^* Ri_* Ri^! K`. -/
+/-- The right adjoint `Ri^!` of `Ri_*` on the ambient categories
+(`AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`) carries `Dᵇc_proét(X, Λ)`
+into `Dᵇc_proét(Z, Λ)`: in the closed-support triangle the outer vertices `K` and `Rj_* j^* K` are
+bounded constructible, hence so is `Ri_* Ri^! K`, and `Ri^! K ≅ i^* Ri_* Ri^! K`. -/
 theorem boundedConstructible_closedUpperShriek_rightDerivedFunctor_obj
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     {K : _root_.DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))}
@@ -174,8 +168,7 @@ theorem boundedConstructible_closedUpperShriek_rightDerivedFunctor_obj
     ((boundedConstructible_rightDerivedFunctor_lowerStar_obj_closedUpperShriek i j N hN hΛ s hij
       hK).mapDerivedCategory_upperStar i)
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3) at the finite stage `A_{E,n}`:
-for `K ∈ Dᵇc_proét(X, Λ)` all three vertices of the closed-support triangle
+/-- For `K ∈ Dᵇc_proét(X, Λ)` all three vertices of the closed-support triangle
 `Ri_* Ri^! K ⟶ K ⟶ Rj_* Lj^* K ⟶` (`AlgebraicGeometry.ProEtale.closedSupportTriangle`) are
 bounded constructible. The triangle is distinguished for a unique third arrow, and functorial in
 `K` (`AlgebraicGeometry.ProEtale.existsUnique_distTriang_closedSupportTriangle`,
@@ -215,9 +208,8 @@ noncomputable def boundedConstructibleClosedUpperShriek
       (closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor)
     (fun K ↦ boundedConstructible_closedUpperShriek_rightDerivedFunctor_obj i j N hN hΛ s hij K.2)
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (2) at the finite stage `A_{E,n}`:
-the direct image `i_* : Dᵇc_proét(Z, Λ) ⥤ Dᵇc_proét(X, Λ)` along a closed immersion has the right
-adjoint `Ri^!`, the restriction of the ambient adjunction
+/-- The direct image `i_* : Dᵇc_proét(Z, Λ) ⥤ Dᵇc_proét(X, Λ)` along a closed immersion has the
+right adjoint `Ri^!`, the restriction of the ambient adjunction
 `AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`. -/
 noncomputable def boundedConstructibleClosedUpperShriekAdjunction
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) :
@@ -227,19 +219,17 @@ noncomputable def boundedConstructibleClosedUpperShriekAdjunction
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _) (Iso.refl _)
     (Iso.refl _)
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (4) at the finite stage `A_{E,n}`:
-the unit `Q ⟶ Ri^! i_* Q` of the adjunction on `Dᵇc_proét`
+/-- The unit `Q ⟶ Ri^! i_* Q` of the adjunction on `Dᵇc_proét`
 (`AlgebraicGeometry.ProEtale.boundedConstructibleClosedUpperShriekAdjunction`) is an
-isomorphism, `i_*` being fully faithful (blueprint `lemma-local-cohomology-right-adjoint--1`,
-`AlgebraicGeometry.ProEtale.isIso_unit_app_boundedConstructible`). -/
+isomorphism, `i_*` being fully faithful
+(`AlgebraicGeometry.ProEtale.isIso_unit_app_boundedConstructible`). -/
 theorem isIso_boundedConstructibleClosedUpperShriekAdjunction_unit_app
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (Q : (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Z).FullSubcategory) :
     IsIso ((boundedConstructibleClosedUpperShriekAdjunction i j N hN hΛ s hij).unit.app Q) :=
   isIso_unit_app_boundedConstructible i _ _ Q
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (4) at the finite stage `A_{E,n}`:
-`Ri^! Rj_* G = 0` for `G ∈ Dᵇc_proét(U, Λ)`; this holds for every `G ∈ D(U_proét, Λ)`
+/-- `Ri^! Rj_* G = 0` for `G ∈ Dᵇc_proét(U, Λ)`; this holds for every `G ∈ D(U_proét, Λ)`
 (`ProEtale.isZero_closedUpperShriek_rightDerivedFunctor_obj_rightDerivedFunctor_lowerStar`). -/
 theorem isZero_boundedConstructibleClosedUpperShriek_obj
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
@@ -253,7 +243,7 @@ theorem isZero_boundedConstructibleClosedUpperShriek_obj
 omit hN hΛ s in
 /-- The bijection `Hom(P, Ri^! K) ≃ Hom(P, Rᵉˣi^! K)` between maps into the right adjoint of
 `Ri_*` (`AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`) and maps into
-the exceptional inverse image `Rᵉˣi^!` of blueprint `theorem-f-shriek-ell-adic-coefficients--4` (vi)
+the exceptional inverse image `Rᵉˣi^!`
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`), for `P` bounded below of étale origin and
 `K` bounded below: both are `Hom(Ri_! P, K)`, as `Ri_! = Ri_*` for a closed immersion
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar`). -/
@@ -290,10 +280,8 @@ lemma closedUpperShriekHomEquivRightDerivedUpperShriek_naturality [HasCompactifi
   simp only [Iso.app_hom]
   rw [← reassoc_of% hθ]
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (2) at the finite stage `A_{E,n}`:
-on `Dᵇc_proét(X, Λ)` the right adjoint `Ri^!` of `Ri_*` is the exceptional inverse image of
-blueprint `theorem-f-shriek-finite-coefficients` (`theorem-f-shriek-ell-adic-coefficients--4` (vi),
-`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`), by uniqueness of right adjoints: both
+/-- On `Dᵇc_proét(X, Λ)` the right adjoint `Ri^!` of `Ri_*` is the exceptional inverse image
+(`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`), by uniqueness of right adjoints: both
 represent `P ↦ Hom(Ri_* P, K)` on the complexes `P` bounded below of étale origin
 (`AlgebraicGeometry.ProEtale.closedUpperShriekHomEquivRightDerivedUpperShriek`), and both objects
 are of this kind. -/

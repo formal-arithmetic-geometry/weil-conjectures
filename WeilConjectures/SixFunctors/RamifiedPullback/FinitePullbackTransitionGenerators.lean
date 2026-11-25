@@ -10,7 +10,10 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralFiniteQu
 
 /-! # Finite pullback transitions on tensor generators
 
-Source: Stacks 093M, 03EK and 03EL; Bhatt--Scholze 6.8.2(1).
+## References
+
+* Stacks Project, Tags `03D2`, `03EK`, `03EL`, `093M`
+* Bhatt--Scholze, 6.8.2(1)
 -/
 
 @[expose] public noncomputable section
@@ -82,21 +85,7 @@ private theorem adjacent {X Y : Scheme.{t}} (g : X ⟶ Y)
   with_unfolding_all rw [hproj]
   rfl
 
-/-- Every composite finite pullback transition reduces both finite coefficients.
-Source: Stacks 03D2, 03EK, 03EL; the transition construction of the integral operations.
-(blueprint: lem-weil-finite-pullback-transition-generators).
-
-Proof: For an adjacent transition its unit equation is the defining equation of
-integralOperationsPullbackTransition. Apply the finite reduction transition formula
-to the inner pure tensor. For the outer coefficient, lift it locally through the
-surjective completed coefficient projection and use completed linearity. The limit
-projection identity replaces that lift's high residue by its low residue. Equality
-of sheaf sections is local, so this gives the adjacent formula without choosing
-any global lift. For equal indices use the functor identity. Induct on b-a for a
-composite transition: the tower functor composes its maps, and both coefficient
-systems compose their quotient reductions. Apply the adjacent formula followed
-by the induction hypothesis. This proves the formula for every cochain degree
-and every input complex, with no boundedness or flatness restriction. -/
+/-- Every composite finite pullback transition reduces both finite coefficients. -/
 theorem pullTensor_transition {X Y : Scheme.{t}} (g : X ⟶ Y)
     (a b : ℕ) (h : a ≤ b) (P : CochainComplex (integralTowerModules l E Y) ℤ)
     (i : ℤ) (V : Y.ProEt)

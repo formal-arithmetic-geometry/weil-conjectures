@@ -25,11 +25,22 @@ public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-! # Normalized coefficient reduction and limit shift data
 
-The canonical helpers and the data record formerly declared in
-`WeilConjectures.SmoothPurity.Pur.PurReductionLimitShiftAdjunction`. The limit model is written with
-its standard composite comparison to avoid expanding large coefficient instances.
-Source: Stacks 07A6, 0941, 08TC and derived.tex 0A8D
-(blueprint: def-coef-reduction-limit-shift-data).
+Canonical helpers and the data record for normalized coefficient reduction and limit shifts.
+
+## Implementation details
+
+The limit model is written with its standard composite comparison to avoid expanding large
+coefficient instances.
+
+## References
+
+* [Stacks, Tag 070H](https://stacks.math.columbia.edu/tag/070H)
+* [Stacks, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks, Tag 08TC](https://stacks.math.columbia.edu/tag/08TC)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* [Stacks, Tag 0A8D](https://stacks.math.columbia.edu/tag/0A8D)
+* [Stacks, Tag 0BK6](https://stacks.math.columbia.edu/tag/0BK6)
+* [Stacks, Tag 0D6E](https://stacks.math.columbia.edu/tag/0D6E)
 -/
 
 @[expose] public noncomputable section
@@ -55,9 +66,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The canonical comparison from the actual sequence limit to the termwise
 limit of a specified K-injective replacement of the restricted sequence.
 It is the exact restriction/localization comparison, followed by `Rlim(j)` and
-`rightDerivedFunctorObjQIso`; no new choice of a derived functor is made.
-Source: Stacks 0941 and 0D6E
-(blueprint: lem-pur-reduction-limit-shift-adjunction). -/
+`rightDerivedFunctorObjQIso`; no new choice of a derived functor is made. -/
 def purCoefficientLimitModel
     (N : CochainComplex (coefficientSequenceModules l E W) ℤ)
     (I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)
@@ -70,9 +79,7 @@ def purCoefficientLimitModel
     (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W) N I j
 
 /-- The shifted replacement map is exactly `j[r]`, with the canonical termwise
-identification `U(N[r]) ≅ (UN)[r]` in its source.
-Source: Stacks 0941, derived.tex 070H
-(blueprint: lem-pur-reduction-limit-shift-adjunction). -/
+identification `U(N[r]) ≅ (UN)[r]` in its source. -/
 def purCoefficientShiftedResolution
     (N : CochainComplex (coefficientSequenceModules l E W) ℤ)
     (I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)
@@ -84,9 +91,7 @@ def purCoefficientShiftedResolution
     (ComplexShape.up ℤ)).commShiftIso r).hom.app N ≫ j⟦r⟧'
 
 /-- The canonical product comparison for the evaluated shifted tower, using
-localization's cochain shift and preservation of products by the shift equivalence.
-Source: Stacks 0941 and derived.tex 0BK6
-(blueprint: lem-pur-reduction-limit-shift-adjunction). -/
+localization's cochain shift and preservation of products by the shift equivalence. -/
 def purCoefficientRoosProductShift
     [HasCountableProducts (DerivedCategory (scalarReductionSource l E W))]
     (I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) (r : ℤ) :
@@ -99,9 +104,7 @@ def purCoefficientRoosProductShift
 
 /-- A Roos triangle whose first vertex is the actual sequence-limit functor,
 computed on a specified simultaneous K-injective tower. Its first arrow is
-normalized by the actual limit-cone projections through `purCoefficientLimitModel`.
-Source: Stacks 0941 and 08TC
-(blueprint: lem-pur-reduction-limit-shift-adjunction). -/
+normalized by the actual limit-cone projections through `purCoefficientLimitModel`. -/
 structure PurCoefficientRoosTriangle
     [HasCountableProducts (DerivedCategory (scalarReductionSource l E W))]
     (N : CochainComplex (coefficientSequenceModules l E W) ℤ)
@@ -127,9 +130,7 @@ attribute [local irreducible] coefficientSequenceLimit coefficientConstantTowerL
 are fixed by the existing K-flat model, not chosen to match reduction afterwards.
 The limit equation uses the fixed resolution comparison for `j` and `j[r]`.
 The Roos connecting-map equation uses that same `limit_shift` and the actual
-limit triangles, with the cochain sign `r.negOnePow`.
-Source: Stacks 07A6, 0941 and derived.tex 0A8D
-(blueprint: lem-pur-reduction-limit-shift-adjunction). -/
+limit triangles, with the cochain sign `r.negOnePow`. -/
 structure PurReductionLimitShiftData
     (S : CoefficientDerivedSystemCalculus l E W) where
   reduction_shift : S.reduction.CommShift ℤ

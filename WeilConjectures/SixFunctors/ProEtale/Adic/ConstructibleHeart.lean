@@ -15,16 +15,16 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 
 Let `X` be a scheme. The bounded constructible derived category `D^b_c(X, ℚ̄_ℓ)`
 (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedAdicConstructible`) inherits the standard
-`t`-structure (blueprint `prop-constructible-truncations`). Its heart
+`t`-structure. Its heart
 `D^{≤ 0}_c ∩ D^{≥ 0}_c` (`AlgebraicGeometry.ProEtale.DerivedCategory.adicConstructibleHeart`)
 consists of the complexes isomorphic to a constructible `ℓ`-adic sheaf placed in degree `0`
 (`AlgebraicGeometry.ProEtale.DerivedCategory.adicConstructibleHeart_iff`), and placing sheaves
 in degree `0` is an equivalence from the abelian category `Sh_c(X, ℚ̄_ℓ)` of constructible
 `ℓ`-adic sheaves onto it (`AlgebraicGeometry.ProEtale.DerivedCategory.adicConstructibleHeartEquiv`).
 
-## Implementation notes
+## Implementation details
 
-The blueprint defines the heart at the stages `E` and `ℚ̄_ℓ`. This file treats the stage `ℚ̄_ℓ`;
+The heart can be defined at the stages `E` and `ℚ̄_ℓ`. This file treats the stage `ℚ̄_ℓ`;
 the stage `E`, in the same Bhatt–Scholze model of sheaves of modules over the constant sheaf
 `E_X : U ↦ C(U, E)`, is
 `AlgebraicGeometry.ProEtale.DerivedCategory.fieldConstructibleHeart`
@@ -41,20 +41,10 @@ namespace AlgebraicGeometry.ProEtale.DerivedCategory
 
 variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 
-/-- Constructible heart.
-
-The heart `D^{≤ 0}_c(X, ℚ̄_ℓ) ∩ D^{≥ 0}_c(X, ℚ̄_ℓ)` of the standard `t`-structure on the
-bounded constructible derived category `D^b_c(X, ℚ̄_ℓ)`, as an object property of
-`D(X_proét, ℚ̄_ℓ)`: the bounded constructible complexes `K` with `τ^{≥ 1} K = 0` and
-`τ^{≤ -1} K = 0`. Its objects are the constructible `ℓ`-adic sheaves placed in degree `0`
-(`AlgebraicGeometry.ProEtale.DerivedCategory.adicConstructibleHeart_iff`); it is equivalent to
-the abelian category `Sh_c(X, ℚ̄_ℓ)` of constructible `ℓ`-adic sheaves
-(`AlgebraicGeometry.ProEtale.DerivedCategory.adicConstructibleHeartEquiv`), whose objects have
-finite-level reductions satisfying the finite-torsion constructibility condition (see
-`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf`).
-
-This is the stage `ℚ̄_ℓ` of the blueprint node; the stage `E` is
-`AlgebraicGeometry.ProEtale.DerivedCategory.fieldConstructibleHeart`. -/
+/-- The constructible heart: the heart `D^{≤ 0}_c(X, ℚ̄_ℓ) ∩ D^{≥ 0}_c(X, ℚ̄_ℓ)` of the standard
+`t`-structure on the bounded constructible derived category `D^b_c(X, ℚ̄_ℓ)`, as an object property
+of `D(X_proét, ℚ̄_ℓ)`. Its objects are the constructible `ℓ`-adic sheaves placed in degree `0`
+(`AlgebraicGeometry.ProEtale.DerivedCategory.adicConstructibleHeart_iff`). -/
 def adicConstructibleHeart : ObjectProperty (_root_.DerivedCategory (AdicSheaf l X)) :=
   boundedAdicConstructible l X ⊓ _root_.DerivedCategory.TStructure.t.le 0 ⊓
     _root_.DerivedCategory.TStructure.t.ge 0

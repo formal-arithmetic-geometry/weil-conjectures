@@ -12,8 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedLiftSections
 
 Let `i : Z = Spec (A ⧸ I) ⟶ X = Spec A` be a closed immersion with quasi-compact open complement.
 The pullback `i^*` of pro-étale sheaves of modules preserves all limits
-(`AlgebraicGeometry.ProEtale.preservesLimitsOfSize_upperStar_closedSpecι`, blueprint
-`proposition-extension-zero-restriction-closed-subscheme`).
+(`AlgebraicGeometry.ProEtale.preservesLimitsOfSize_upperStar_closedSpecι`).
 
 The objects `V = Spec C̄` of `Z_proét` with `C̄` w-contractible and ind-étale over `A ⧸ I` are
 weakly contractible and cover `Z_proét`
@@ -256,18 +255,9 @@ lemma isIso_map_limit_post_of_isClosedLiftBasis
     infer_instance
   exact IsIso.of_isIso_comp_right _ (limit.post (D ⋙ (closedSpecι I)^*[ModuleCat.{u + 1} R]) EV)
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` (subsection
-`proposition-extension-zero-restriction-closed-subscheme`), part (2),
-for `X = Spec A`: let `i : Spec (A ⧸ I) ⟶ Spec A` be a closed immersion with quasi-compact open
-complement `j`. The pullback `i^*` of pro-étale sheaves of modules preserves all small limits.
-(It preserves all colimits, being a left adjoint, and is exact,
-`AlgebraicGeometry.ProEtale.preservesFiniteLimits_upperStar`.)
-
-The comparison map `i^*(lim F) ⟶ lim i^* F` is bijective on sections over the weakly contractible
-basis objects `V = Spec C̄ ≅ v(V) ×_X Z`
-(`AlgebraicGeometry.ProEtale.isIso_map_limit_post_of_isClosedLiftBasis`), which cover
-`Z_proét` (`AlgebraicGeometry.ProEtale.exists_closedLiftBasis_cover`); so its kernel and
-cokernel vanish. -/
+/-- For `X = Spec A`, let `i : Spec (A ⧸ I) ⟶ Spec A` be a closed immersion with quasi-compact
+open complement `j`. The pullback `i^*` of pro-étale sheaves of modules preserves all small
+limits. -/
 theorem preservesLimitsOfSize_upperStar_closedSpecι
     (hij : IsCompl (Set.range (closedSpecι I).base) (Set.range j.base)) :
     PreservesLimitsOfSize.{u + 1, u + 1} ((closedSpecι I)^*[ModuleCat.{u + 1} R]) := by

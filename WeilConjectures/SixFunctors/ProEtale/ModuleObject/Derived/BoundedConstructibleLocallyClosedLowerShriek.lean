@@ -18,7 +18,7 @@ extension by zero is `a_! = Ri_* ∘ j_!`.
   for any commutative condensed ring `Λ`, `a_!` maps bounded constructible complexes to bounded
   constructible complexes.
 * `ProEtale.CondensedRing.boundedConstructible_lowerShriek_padicIntegersRingObj`: the case
-  `Λ = 𝒪_E` (blueprint `lemma-integral-models--5`).
+  `Λ = 𝒪_E`.
 -/
 
 @[expose] public section
@@ -49,8 +49,7 @@ theorem boundedConstructible_rightDerivedLowerStar_openImmersionLowerShriek_obj
 /-- **Integral locally closed extension.** For a locally closed immersion `a = j ≫ i : S ⟶ X`
 (`j` an open immersion, `i` a closed immersion) into a scheme with noetherian underlying space,
 the extension by zero `a_! = Ri_* ∘ j_!` with `𝒪_E`-coefficients sends `Dᵇc(S, 𝒪_E)` into
-`Dᵇc(X, 𝒪_E)`.
-(blueprint: lemma-integral-models--5) -/
+`Dᵇc(X, 𝒪_E)`. -/
 theorem boundedConstructible_lowerShriek_padicIntegersRingObj (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
     {S W X : Scheme.{u}} [TopologicalSpace.NoetherianSpace X]

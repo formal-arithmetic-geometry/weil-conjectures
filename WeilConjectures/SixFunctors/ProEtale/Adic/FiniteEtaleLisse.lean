@@ -138,9 +138,7 @@ theorem IsAdicLisseSheaf.lowerStar_sigmaDesc_id {S : Type u} [Finite S] {W : Sch
 on `X`, `g` is a trivial cover `∐_{s ∈ S} U ⟶ U`
 (`AlgebraicGeometry.Scheme.FiniteEtale.exists_etale_isPullback_sigma`), and by weakly étale
 base change the restriction of `g_* F` is the pushforward of a lisse sheaf along the codiagonal
-(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.lowerStar_sigmaDesc_id`). This is the lissity part
-of the blueprint lemmas `lemma-finite-generically-etale-map-line--2` and
-`lemma-finite-quasi-finite-direct-images--3`. -/
+(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.lowerStar_sigmaDesc_id`). -/
 theorem IsAdicLisseSheaf.lowerStar_of_finite_etale {Y : Scheme.{u}} (g : Y ⟶ X) [IsFinite g]
     [Etale g] {F : AdicSheaf l Y} (hF : IsAdicLisseSheaf F) :
     IsAdicLisseSheaf ((g)_*ᵃ[l].obj F) := by

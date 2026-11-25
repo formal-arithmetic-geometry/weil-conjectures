@@ -31,7 +31,6 @@ isomorphism `e : πₛ^* ℚ̄_ℓ ⟶ ℚ̄_ℓ`.
 * **Finite schemes** (`ProEtale.CondensedRing.isIso_dualizingComplexBaseChange_of_isFinite`): if
   `X` is finite over `k₁`, `φ` is an isomorphism, the finite pushforward `Ra'_*` being
   conservative.
-
 -/
 
 @[expose] public section
@@ -104,14 +103,7 @@ private lemma isIso_lowerStar_map_nearbyDualityMap_aux [IsIso e]
 
 /-- **Global sections of the duality map of the base change**: for the pullback `π^*` with
 dualizing map the comparison `φ : π^* ω_X ⟶ ω_{X'}`, the global sections
-`Ra'_* δ_{π,M} : Ra'_* π^* D_X M ⟶ Ra'_* D_{X'} π^* M` of the duality map are invertible. This is
-`CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper_natTrans` for `G = Ra_*`,
-`G' = Ra'_*`, `Ψ_X = π^*`, `Ψ_Y = πₛ^*` and `χ` the proper base change isomorphism, with the
-compatibility of base change with the lax tensor maps
-(`ProEtale.CondensedRing.boundedConstructibleBaseChangeOfMap_tensor`), the trace compatibility of
-`φ`, global Verdier duality on `X` and `X'`
-(`ProEtale.CondensedRing.isIso_nearbyDualityMap_lowerStar_trace`) and the commutation of `πₛ^*`
-with duals (`ProEtale.CondensedRing.isIso_nearbyDualityMap_upperStarOfMap_point`). -/
+`Ra'_* δ_{π,M} : Ra'_* π^* D_X M ⟶ Ra'_* D_{X'} π^* M` of the duality map are invertible. -/
 theorem isIso_lowerStar_map_nearbyDualityMap_dualizingComplexBaseChange [IsIso e]
     (sq : IsPullback π (toPoint X').left (toPoint X).left πₛ)
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

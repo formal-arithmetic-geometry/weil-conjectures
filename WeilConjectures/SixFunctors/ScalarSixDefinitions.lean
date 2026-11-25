@@ -12,15 +12,20 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 
 /-! # Coefficient change, inverse image and locally closed extension
 
-(1)--(3);
-Stacks Project, Tags 0G7E, 0D6D, 09AA, 09BM, 09BN and 09AH.
-(blueprint: proposition-six-operations-change-coefficients).
-
 The witnesses below include equations, not just existence of unrelated isomorphisms.
 Pullback is exact, so its unbounded derived functor is written as its termwise
 localization. Scalar extension is the ordinary, uncompleted total left derived functor.
 The locally closed functors are the published factorization-independent extensions,
 transported through the fixed internal/sectionwise module equivalence.
+
+## References
+
+* [Stacks, Tag 0G7E](https://stacks.math.columbia.edu/tag/0G7E)
+* [Stacks, Tag 0D6D](https://stacks.math.columbia.edu/tag/0D6D)
+* [Stacks, Tag 09AA](https://stacks.math.columbia.edu/tag/09AA)
+* [Stacks, Tag 09BM](https://stacks.math.columbia.edu/tag/09BM)
+* [Stacks, Tag 09BN](https://stacks.math.columbia.edu/tag/09BN)
+* [Stacks, Tag 09AH](https://stacks.math.columbia.edu/tag/09AH)
 -/
 
 @[expose] public noncomputable section
@@ -46,49 +51,39 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- Bundled parameters for commutative condensed coefficients.
-Source: blueprint coefficient change (blueprint: proposition-six-operations-change-coefficients). -/
+/-- Bundled parameters for commutative condensed coefficients. -/
 abbrev ScalarSixRing := CommMon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- Expose the left functor already specified by an adjunction. This avoids rebuilding
-its K-flat tensor instances when specializing the published scalar adjunction.
-Source: blueprint coefficient change (blueprint: proposition-six-operations-change-coefficients). -/
+its K-flat tensor instances when specializing the published scalar adjunction. -/
 abbrev scalarSixAdjunctionLeft {C : Type u₁} {D : Type u₂}
     [Category.{v₁} C] [Category.{v₂} D] {F : C ⥤ D} {G : D ⥤ C}
     (_adj : F ⊣ G) : C ⥤ D := F
 
-/-- Additivity of the unchanged forward module equivalence.
-Source: internal module operations transport
-(auxiliary; not a blueprint node). -/
+/-- Additivity of the unchanged forward module equivalence. -/
 instance scalarSixEquivalenceAdditive (Λ : ScalarSixRing.{u}) (X : Scheme.{u}) :
     (ModuleRingedComparison.equivalence Λ.X X).functor.Additive :=
   ((InternalModuleOperations.internal_module_operations_transport Λ.X).1 X).1
 
-/-- Additivity of the unchanged inverse module equivalence.
-Source: internal module operations transport
-(auxiliary; not a blueprint node). -/
+/-- Additivity of the unchanged inverse module equivalence. -/
 instance scalarSixEquivalenceInverseAdditive (Λ : ScalarSixRing.{u}) (X : Scheme.{u}) :
     (ModuleRingedComparison.equivalence Λ.X X).inverse.Additive :=
   ((InternalModuleOperations.internal_module_operations_transport Λ.X).1 X).2.1
 
 /-- Ordinary unbounded derived scalar extension, using the published coefficient map
-and the left functor of its derived adjunction (definitionally L(Ext)).
-Source: blueprint clause (1) (blueprint: proposition-six-operations-change-coefficients). -/
+and the left functor of its derived adjunction (definitionally L(Ext)). -/
 def scalarSixChange {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (X : Scheme.{u}) :
     DerivedCategory (ModuleRingedComparison.internalModules Λ.X X) ⥤
       DerivedCategory (ModuleRingedComparison.internalModules Λ'.X X) :=
   scalarSixAdjunctionLeft (Mod.derivedExtendMapDerivedCategoryAdjunction
     (coefficientMap (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom X))
 
-/-- Exact inverse image applied termwise. This is canonically the total derived pullback.
-Source: blueprint clause (1) (blueprint: proposition-six-operations-change-coefficients). -/
+/-- Exact inverse image applied termwise. This is canonically the total derived pullback. -/
 def scalarSixPull (Λ : ScalarSixRing.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   D((f)^*⟦Λ.X⟧)
 
 /-- The canonical non-flat pullback comparison, the scalar-adjunction mate of the
-identity-on-underlying-sheaves restriction comparison `derivedComapUpperStarIso`.
-Source: blueprint proof (1), steps 1--2 (blueprint:
-proposition-six-operations-change-coefficients). -/
+identity-on-underlying-sheaves restriction comparison `derivedComapUpperStarIso`. -/
 def scalarSixPullHom {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     scalarSixPull Λ f ⋙ scalarSixChange a X ⟶
@@ -100,8 +95,7 @@ def scalarSixPullHom {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
       (coefficientMap (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom X))
     (derivedComapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f)
 
-/-- The ordinary, exact inverse-image compositor, localized termwise.
-Source: blueprint clause (1) (blueprint: proposition-six-operations-change-coefficients). -/
+/-- The ordinary, exact inverse-image compositor, localized termwise. -/
 def scalarSixPullComp (Λ : ScalarSixRing.{u}) {X Y W : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ W) :
     scalarSixPull Λ (f ≫ g) ≅ scalarSixPull Λ g ⋙ scalarSixPull Λ f :=
@@ -109,8 +103,7 @@ def scalarSixPullComp (Λ : ScalarSixRing.{u}) {X Y W : Scheme.{u}}
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The tensor associator, fixed as the conjugate of transitivity of exact restriction.
-On K-flat representatives its formula is c tensor (b tensor m) to cb tensor m.
-Source: blueprint proof (3), step 7 (blueprint: proposition-six-operations-change-coefficients). -/
+On K-flat representatives its formula is c tensor (b tensor m) to cb tensor m. -/
 def scalarSixTower {Λ Λ' Λ'' : ScalarSixRing.{u}}
     (a : Λ ⟶ Λ') (b : Λ' ⟶ Λ'') (X : Scheme.{u}) :
     scalarSixChange a X ⋙ scalarSixChange b X ≅ scalarSixChange (a ≫ b) X :=
@@ -127,28 +120,24 @@ def scalarSixTower {Λ Λ' Λ'' : ScalarSixRing.{u}}
       Functor.mapDerivedCategoryNatIso (Mod.comapComp _ _ ) ≪≫
         (Functor.mapDerivedCategoryCompIso _ _).symm)
 
-/-- The fixed section-ring model of a condensed coefficient object.
-Source: blueprint proof step 1 (blueprint: proposition-six-operations-change-coefficients). -/
+/-- The fixed section-ring model of a condensed coefficient object. -/
 abbrev scalarSixSectionRing (Λ : ScalarSixRing.{u}) (X : Scheme.{u}) :=
   ModuleRingedComparison.ring Λ.X X
 
-/-- The fixed exact equivalence on unbounded derived module categories, forward direction.
-Source: blueprint proof step 1 (blueprint: proposition-six-operations-change-coefficients). -/
+/-- The fixed exact equivalence on unbounded derived module categories, forward direction. -/
 abbrev scalarSixForward (Λ : ScalarSixRing.{u}) (X : Scheme.{u}) :
     DerivedCategory (ModuleRingedComparison.internalModules Λ.X X) ⥤
       DerivedCategory (proEtaleRingModules X (scalarSixSectionRing Λ X)) :=
   (ModuleRingedComparison.equivalence Λ.X X).functor.mapDerivedCategory
 
-/-- The inverse of the same equivalence, applied termwise.
-Source: blueprint proof step 1 (blueprint: proposition-six-operations-change-coefficients). -/
+/-- The inverse of the same equivalence, applied termwise. -/
 abbrev scalarSixBackward (Λ : ScalarSixRing.{u}) (X : Scheme.{u}) :
     DerivedCategory (proEtaleRingModules X (scalarSixSectionRing Λ X)) ⥤
       DerivedCategory (ModuleRingedComparison.internalModules Λ.X X) :=
   (ModuleRingedComparison.equivalence Λ.X X).inverse.mapDerivedCategory
 
 /-- Noetherian coefficient object for a finite-type scheme over a field. The two
-Noetherian proofs follow from finite type and quasi-compactness, with no added hypotheses.
-Source: blueprint proof (2), step 3 (blueprint: proposition-six-operations-change-coefficients). -/
+Noetherian proofs follow from finite type and quasi-compactness, with no added hypotheses. -/
 def scalarSixCoefficients (Λ : ScalarSixRing.{u}) {k : Type u} [Field k]
     (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] :
     LocallyClosedCoefficients.{u} where
@@ -158,9 +147,7 @@ def scalarSixCoefficients (Λ : ScalarSixRing.{u}) {k : Type u} [Field k]
   ring := scalarSixSectionRing Λ X.left
 
 /-- Canonical coefficient identifications in the two module presentations. The adjunct
-normalization fixes every section, hence determines the ring isomorphism uniquely.
-Source: blueprint proof steps 1 and 3 (blueprint:
-proposition-six-operations-change-coefficients). -/
+normalization fixes every section, hence determines the ring isomorphism uniquely. -/
 structure ScalarSixGeometry where
   coefficient : ∀ (Λ : ScalarSixRing.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y),
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
@@ -191,8 +178,7 @@ structure ScalarSixGeometry where
         (scalarSixSectionRing Λ X) (coefficient Λ f))
       (.mk _ _ _ _ (pull Λ f).inv)) = (push Λ f).hom
 
-/-- The locally closed coefficient arrow with its canonically normalized coefficient map.
-Source: blueprint clause (2) (blueprint: proposition-six-operations-change-coefficients). -/
+/-- The locally closed coefficient arrow with its canonically normalized coefficient map. -/
 def scalarSixImmersion (G : ScalarSixGeometry.{u}) (Λ : ScalarSixRing.{u})
     {k : Type u} [Field k] {S X : Over (Spec (.of k))}
     [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
@@ -204,34 +190,29 @@ def scalarSixImmersion (G : ScalarSixGeometry.{u}) (Λ : ScalarSixRing.{u})
   immersion := inferInstance
   coefficient := G.coefficient Λ f.left
 
-/-- Expose immersion stability in the over-category at its actual underlying map.
-Source: blueprint clause (2) (blueprint: proposition-six-operations-change-coefficients). -/
+/-- Expose immersion stability in the over-category at its actual underlying map. -/
 instance scalarSixOverCompImmersion {k : Type u} [Field k]
     {T S X : Over (Spec (.of k))} (g : T ⟶ S) (f : S ⟶ X)
     [IsImmersion g.left] [IsImmersion f.left] : IsImmersion (g ≫ f).left :=
   inferInstanceAs (IsImmersion (g.left ≫ f.left))
 
-/-- Expose the published extension's additive structure without unfolding the arrow.
-Source: blueprint clause (2) (blueprint: proposition-six-operations-change-coefficients). -/
+/-- Expose the published extension's additive structure without unfolding the arrow. -/
 instance scalarSixExtensionAdditive (E : LocallyClosedExtensionData.{u})
     {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :
     (E.extension a).Additive := E.additive a
 
-/-- Expose the published extension's exactness, finite-limit half.
-Source: blueprint clause (2) (blueprint: proposition-six-operations-change-coefficients). -/
+/-- Expose the published extension's exactness, finite-limit half. -/
 instance scalarSixExtensionFiniteLimits (E : LocallyClosedExtensionData.{u})
     {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :
     PreservesFiniteLimits (E.extension a) := E.finiteLimits a
 
-/-- Expose the published extension's exactness, finite-colimit half.
-Source: blueprint clause (2) (blueprint: proposition-six-operations-change-coefficients). -/
+/-- Expose the published extension's exactness, finite-colimit half. -/
 instance scalarSixExtensionFiniteColimits (E : LocallyClosedExtensionData.{u})
     {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :
     PreservesFiniteColimits (E.extension a) := E.finiteColimits a
 
 /-- The actual extension by zero on internal-module derived categories, transported
-from the published exact locally closed extension. No choice of a new extension functor.
-Source: blueprint clause (2) (blueprint: proposition-six-operations-change-coefficients). -/
+from the published exact locally closed extension. No choice of a new extension functor. -/
 def scalarSixExtension (E : LocallyClosedExtensionData.{u}) (G : ScalarSixGeometry.{u})
     (Λ : ScalarSixRing.{u}) {k : Type u} [Field k] {S X : Over (Spec (.of k))}
     [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
@@ -242,15 +223,13 @@ def scalarSixExtension (E : LocallyClosedExtensionData.{u}) (G : ScalarSixGeomet
   scalarSixForward Λ S.left ⋙ E.derived (scalarSixImmersion G Λ f) ⋙
     scalarSixBackward Λ X.left
 
-/-- The fixed equivalence on the two ordinary unbounded derived categories.
-Source: blueprint proof step 1 (blueprint: proposition-six-operations-change-coefficients). -/
+/-- The fixed equivalence on the two ordinary unbounded derived categories. -/
 abbrev scalarSixEquivalence (Λ : ScalarSixRing.{u}) (X : Scheme.{u}) :
     DerivedCategory (ModuleRingedComparison.internalModules Λ.X X) ≌
       DerivedCategory (proEtaleRingModules X (scalarSixSectionRing Λ X)) :=
   (ModuleRingedComparison.equivalence Λ.X X).mapDerivedCategory
 
-/-- The localized, adjunction-normalized inverse-image square.
-Source: blueprint proof steps 1--2 (blueprint: proposition-six-operations-change-coefficients). -/
+/-- The localized, adjunction-normalized inverse-image square. -/
 def scalarSixPullSection (G : ScalarSixGeometry.{u}) (Λ : ScalarSixRing.{u})
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     scalarSixPull Λ f ⋙ scalarSixForward Λ X ≅ scalarSixForward Λ Y ⋙
@@ -260,9 +239,10 @@ def scalarSixPullSection (G : ScalarSixGeometry.{u}) (Λ : ScalarSixRing.{u})
     Functor.mapDerivedCategoryNatIso (G.pull Λ f) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Clause (1), with its canonical normalization, and the inverse-image square of (3).
-All coefficient maps are allowed, including non-flat maps.
-Source: blueprint clauses (1), (3) (blueprint: proposition-six-operations-change-coefficients). -/
+/-- Pullback data for change of coefficients: the base-change comparison `theta` between
+pullback and change of coefficients, with its canonical normalization, compatible with composition
+of pullbacks and with composition of coefficient maps.
+All coefficient maps are allowed, including non-flat maps. -/
 structure ScalarSixPullbackData where
   theta : ∀ {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     {X Y : Scheme.{u}} (f : X ⟶ Y),
@@ -286,8 +266,7 @@ structure ScalarSixPullbackData where
         (theta b f).hom.app ((scalarSixChange a Y).obj K) ≫
           (scalarSixPull Λ'' f).map ((scalarSixTower a b Y).hom.app K)
 
-/-- Cancel the fixed presentation equivalence in an open extension comparison.
-Source: functorial transport (auxiliary; not a blueprint node). -/
+/-- Cancel the fixed presentation equivalence in an open extension comparison. -/
 def scalarSixTransportOpen
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     (e : A ≌ C) (e' : B ≌ D) (J : A ⥤ B) (F : C ⥤ D)
@@ -296,8 +275,7 @@ def scalarSixTransportOpen
   Functor.isoWhiskerRight d.symm e'.inverse ≪≫
     Functor.isoWhiskerLeft J e'.unitIso.symm ≪≫ Functor.rightUnitor _
 
-/-- Transport an extension's restriction through the fixed equivalences.
-Source: functorial transport (auxiliary; not a blueprint node). -/
+/-- Transport an extension's restriction through the fixed equivalences. -/
 def scalarSixTransportRestriction
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     (e : A ≌ C) (e' : B ≌ D) (F : C ⥤ D) (R : B ⥤ A) (Q : D ⥤ C)
@@ -312,8 +290,7 @@ def scalarSixTransportRestriction
         Functor.isoWhiskerLeft e.functor rho ≪≫ Functor.rightUnitor _)
       e.inverse ≪≫ e.unitIso.symm
 
-/-- Transport a compositor and cancel the middle presentation equivalence.
-Source: functorial transport (auxiliary; not a blueprint node). -/
+/-- Transport a compositor and cancel the middle presentation equivalence. -/
 def scalarSixTransportComposition
     {A B C A' B' C' : Type*}
     [Category A] [Category B] [Category C] [Category A'] [Category B'] [Category C']
@@ -331,8 +308,7 @@ section Standing
 variable {k : Type u} [Field k]
 
 /-- The ordinary open comparison and its adjunction-mate normalization. These are
-witnesses in the assertion, not an assumed replacement extension functor.
-Source: blueprint proof step 4 (blueprint: proposition-six-operations-change-coefficients). -/
+witnesses in the assertion, not an assumed replacement extension functor. -/
 structure ScalarSixOpenComparison (E : LocallyClosedExtensionData.{u})
     (G : ScalarSixGeometry.{u}) (k : Type u) [Field k] where
   comparison : ∀ (Λ : ScalarSixRing.{u}) {S X : Over (Spec (.of k))}
@@ -359,8 +335,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Transport of the normalized open comparison, using only localization and the
-fixed equivalence unit. Source: blueprint proof step 4
-(blueprint: proposition-six-operations-change-coefficients). -/
+fixed equivalence unit. -/
 def scalarSixOpenIso (O : ScalarSixOpenComparison E G k) (Λ : ScalarSixRing.{u})
     {S X : Over (Spec (.of k))}
     [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
@@ -383,8 +358,7 @@ def scalarSixOpenIso (O : ScalarSixOpenComparison E G k) (Λ : ScalarSixRing.{u}
     D(openImmersionLowerShriek Λ.X j.left) (E.derived (scalarSixImmersion G Λ j)) d
 
 /-- Restriction of the actual extension, transported from the published derived
-restriction and the normalized inverse-image square.
-Source: blueprint proof step 6 (blueprint: proposition-six-operations-change-coefficients). -/
+restriction and the normalized inverse-image square. -/
 def scalarSixRestriction (Λ : ScalarSixRing.{u}) {S X : Over (Spec (.of k))}
     [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
@@ -397,8 +371,7 @@ def scalarSixRestriction (Λ : ScalarSixRing.{u}) {S X : Over (Spec (.of k))}
     (D.restriction (scalarSixImmersion G Λ f))
 
 /-- The extension compositor is the published gamma, with the middle equivalence
-cancelled. The equality argument identifies exactly the canonical coefficient arrows.
-Source: blueprint proof step 6 (blueprint: proposition-six-operations-change-coefficients). -/
+cancelled. The equality argument identifies exactly the canonical coefficient arrows. -/
 def scalarSixExtensionComp (Λ : ScalarSixRing.{u}) {T S X : Over (Spec (.of k))}
     [LocallyOfFiniteType T.hom] [QuasiCompact T.hom]
     [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
@@ -418,8 +391,7 @@ def scalarSixExtensionComp (Λ : ScalarSixRing.{u}) {T S X : Over (Spec (.of k))
 
 /-- Exact closed direct image, applied termwise and transported through the fixed
 module equivalence. Exactness comes from the published closed comparison, rather than
-from a new assumption on the coefficient ring.
-Source: blueprint proof step 5 (blueprint: proposition-six-operations-change-coefficients). -/
+from a new assumption on the coefficient ring. -/
 def scalarSixClosedPush (E : LocallyClosedExtensionData.{u})
     (G : ScalarSixGeometry.{u}) (Λ : ScalarSixRing.{u}) {S X : Over (Spec (.of k))}
     [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
@@ -439,8 +411,7 @@ def scalarSixClosedPush (E : LocallyClosedExtensionData.{u})
     scalarSixBackward Λ X.left
 
 /-- The closed specialization is the localization of the actual closed direct-image
-comparison supplied by the coherence node.
-Source: blueprint clause (2) (blueprint: proposition-six-operations-change-coefficients). -/
+comparison supplied by the coherence node. -/
 def scalarSixClosedIso (Λ : ScalarSixRing.{u}) {S X : Over (Spec (.of k))}
     [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
@@ -463,9 +434,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The published open scalar comparison at the fixed scalar-change functors.
-This is exactly the existing comparison, with its functor types checked once.
-Source: blueprint open comparison
-(auxiliary; not a blueprint node). -/
+This is exactly the existing comparison, with its functor types checked once. -/
 def scalarSixOpenScalarIso {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     {S X : Scheme.{u}} (j : S ⟶ X) [IsOpenImmersion j] :
     D(openImmersionLowerShriek Λ.X j) ⋙ scalarSixChange a X ≅
@@ -480,8 +449,7 @@ attribute [local irreducible] scalarSixExtension scalarSixChange scalarSixPull
   scalarSixRestriction scalarSixExtensionComp scalarSixOpenIso scalarSixClosedIso
   scalarSixClosedPush scalarSixTower
 
-/-- The type of single-arrow immersion comparisons, without an existence assertion.
-Source: blueprint clause (2) (auxiliary; not a blueprint node). -/
+/-- The type of single-arrow immersion comparisons, without an existence assertion. -/
 abbrev ScalarSixImmersionComparisons (E : LocallyClosedExtensionData.{u})
     (G : ScalarSixGeometry.{u}) (k : Type u) [Field k] :=
   ∀ {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') {S X : Over (Spec (.of k))}
@@ -491,8 +459,7 @@ abbrev ScalarSixImmersionComparisons (E : LocallyClosedExtensionData.{u})
       scalarSixExtension E G Λ f ⋙ scalarSixChange a X.left ≅
         scalarSixChange a S.left ⋙ scalarSixExtension E G Λ' f
 
-/-- The type of geometric coefficient-composition identities.
-Source: blueprint clause (2) (auxiliary; not a blueprint node). -/
+/-- The type of geometric coefficient-composition identities. -/
 abbrev ScalarSixImmersionIdentifiers (G : ScalarSixGeometry.{u}) (k : Type u) [Field k] :=
   ∀ (Λ : ScalarSixRing.{u}) {T S X : Over (Spec (.of k))}
       [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [IsSeparated T.hom]
@@ -502,9 +469,7 @@ abbrev ScalarSixImmersionIdentifiers (G : ScalarSixGeometry.{u}) (k : Type u) [F
       scalarSixImmersion G Λ (g ≫ f) =
         (scalarSixImmersion G Λ f).comp (scalarSixImmersion G Λ g)
 
-/-- An unchanged comparison equation, named to keep structure projections compact.
-Source: blueprint clauses (2)--(3)
-(auxiliary; not a blueprint node). -/
+/-- An unchanged comparison equation, named to keep structure projections compact. -/
 def ScalarSixImmersionNormalization (E : LocallyClosedExtensionData.{u}) (D : E.DerivedCoherence)
     (G : ScalarSixGeometry.{u}) (C : ScalarSixPullbackData.{u})
     (k : Type u) [Field k] (O : ScalarSixOpenComparison E G k)
@@ -519,9 +484,7 @@ def ScalarSixImmersionNormalization (E : LocallyClosedExtensionData.{u}) (D : E.
         (C.theta a f.left).inv.app ((scalarSixExtension E G Λ f).obj M) ≫
           (scalarSixChange a S.left).map ((scalarSixRestriction E D G Λ f).hom.app M)
 
-/-- An unchanged comparison equation, named to keep structure projections compact.
-Source: blueprint clauses (2)--(3)
-(auxiliary; not a blueprint node). -/
+/-- An unchanged comparison equation, named to keep structure projections compact. -/
 def ScalarSixImmersionComposition (E : LocallyClosedExtensionData.{u}) (D : E.DerivedCoherence)
     (G : ScalarSixGeometry.{u}) (C : ScalarSixPullbackData.{u})
     (k : Type u) [Field k] (O : ScalarSixOpenComparison E G k)
@@ -543,9 +506,7 @@ def ScalarSixImmersionComposition (E : LocallyClosedExtensionData.{u}) (D : E.De
               (compositionIdentifier Λ' (T := T) (S := S) (X := X) f g)).hom.app
               ((scalarSixChange a T.left).obj M)
 
-/-- An unchanged comparison equation, named to keep structure projections compact.
-Source: blueprint clauses (2)--(3)
-(auxiliary; not a blueprint node). -/
+/-- An unchanged comparison equation, named to keep structure projections compact. -/
 def ScalarSixImmersionOpenValue (E : LocallyClosedExtensionData.{u}) (D : E.DerivedCoherence)
     (G : ScalarSixGeometry.{u}) (C : ScalarSixPullbackData.{u})
     (k : Type u) [Field k] (O : ScalarSixOpenComparison E G k)
@@ -563,9 +524,7 @@ def ScalarSixImmersionOpenValue (E : LocallyClosedExtensionData.{u}) (D : E.Deri
 attribute [local irreducible] ScalarSixImmersionNormalization
   ScalarSixImmersionComposition ScalarSixImmersionOpenValue
 
-/-- An unchanged extension-comparison clause with its witnesses kept explicit.
-Source: blueprint clauses (2)--(3)
-(auxiliary; not a blueprint node). -/
+/-- An unchanged extension-comparison clause with its witnesses kept explicit. -/
 def ScalarSixImmersionTower (E : LocallyClosedExtensionData.{u}) (G : ScalarSixGeometry.{u})
     (k : Type u) [Field k] (beta : ScalarSixImmersionComparisons E G k) : Prop :=
   ∀ {Λ Λ' Λ'' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (b : Λ' ⟶ Λ'') {S X : Over (Spec (.of k))}

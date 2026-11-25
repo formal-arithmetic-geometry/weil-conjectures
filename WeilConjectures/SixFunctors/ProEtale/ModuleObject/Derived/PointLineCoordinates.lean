@@ -8,8 +8,6 @@ module
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
 
 /-! # Independence of coordinates on a trivial line
-
-Source: Step 9 of `lem-pod-condensed-point-sections-transport`.
 -/
 
 @[expose] public section
@@ -20,13 +18,7 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Conjugating an endomorphism of a trivial line to the tensor unit is independent
-of the chosen trivialization.
-Source: blueprint `theorem-poincare-duality-frobenius`, elimination of the twist, and Step 9 of the
-point-section transport argument.
-Proof: endomorphisms of the tensor unit commute, by the naturality of the unit
-endomorphism action. The two conjugates differ by conjugation with an automorphism
-of that unit, which therefore acts trivially.
-(blueprint: lem-pod-point-line-coordinates) -/
+of the chosen trivialization. -/
 theorem point_line_conjugation_independent
     {A : Type*} [Category* A] [MonoidalCategory A]
     {L : A} (f : L ⟶ L) (h h' : L ≅ 𝟙_ A) :

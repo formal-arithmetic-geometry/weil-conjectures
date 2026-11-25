@@ -11,8 +11,9 @@ import WeilConjectures.SixFunctors.PurCompactSupport.ScalarPullCoefficientModule
 
 /-! # Ordinary total tensor and the coefficient square
 
-Source: Stacks Project, Tags 03EL and 07A4.
-(blueprint: lem-sf-scalar-pull-coefficient-total-tensor).
+## References
+
+* Stacks Project, Tags `03EL`, `07A4`
 -/
 
 @[expose] public noncomputable section
@@ -113,26 +114,7 @@ private theorem total_map_ι {W : Scheme.{u}}
   erw [Category.id_comp, Category.id_comp]
 
 /-- The ordinary coefficient square respects signed total tensor.
-There are no derived tensor models, localizations or derived adjunctions in this statement.
-
-Source: Stacks 03EL and 07A4, the pure-tensor calculation before passage to derived categories
-(blueprint: lem-sf-scalar-pull-coefficient-total-tensor).
-
-Proof: first compare the ordinary module maps. The transpose of scalarPullModule
-under the composite adjunction is identity on the underlying direct-image sections.
-Consequently it sends an iterated unit tensor to the corresponding iterated unit
-tensor. ScalarOrdinaryTensor and proEtaleOrdinaryTensorPullback split an inserted
-tensor into its two factors. On pure tensors the two routes insert the same units
-and multiply the same coefficients. Linearity and balancing extend this equality
-to scalar tensors, and the sheafification universal property extends it to module
-sheaves. Invert the four ordinary tensor comparisons to obtain the inverse square.
-In degree n of the direct-sum total, precompose with every (p,q) summand, p+q=n.
-The defining summand formula for tensorPullbackTotal reduces each equality to that
-inverse module square. The coefficient comparison is natural for the summand
-inclusion. Coproduct extensionality proves the degree-n equality; cochain
-extensionality proves the displayed identity. All maps preserve both degrees,
-so there is no permutation and no extra sign. Identity coefficient maps, zero
-rings, zero complexes and nonflat coefficient changes obey the same calculation. -/
+There are no derived tensor models, localizations or derived adjunctions in this statement. -/
 theorem scalarPull_coefficient_total_tensor
     {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (g : U ⟶ V)
