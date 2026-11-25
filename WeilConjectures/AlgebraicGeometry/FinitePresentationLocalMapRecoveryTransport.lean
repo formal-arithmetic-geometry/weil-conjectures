@@ -66,7 +66,6 @@ private theorem recovery_conjugate
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedVariables false in
 /-- Recovery of a global map survives a further factorization of the limit map.
 The three supplied comparisons are required to be the canonical ones.
 (Stacks, Tag 01ZR, Tag 0095, Tag 0096) -/
@@ -95,7 +94,7 @@ theorem finitePresentation_local_maps_recovery_transport
     localMapRecovery b U₀ (A₀.obj F) (A₀.obj G)
       (e₀.inv.app F ≫ φ ≫ e₀.hom.app G) r₀ →
     let U : X₂.OpenCover.{u} := U₀.pullback₁ q
-    let V : Z.OpenCover.{u} := U.pullback₁ p
+    let _V : Z.OpenCover.{u} := U.pullback₁ p
     let Q := modulesPseudofunctor.toDescentData U.f
     let r : ∀ α, (Q.obj (A.obj F)).obj α ⟶ (Q.obj (A.obj G)).obj α :=
       localMapPullbackFamily q U₀ (A₀.obj F) (A₀.obj G) (A.obj F) (A.obj G)

@@ -27,7 +27,6 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 set_option synthInstance.maxSize 2048
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits
 
@@ -476,17 +475,17 @@ theorem integral_residue_model_comparison (l : ℕ) [Fact l.Prime]
   let R := condensedRingObj (discreteObj (Padic.coefficientExtensionIntegers l E)) X
   let B := condensedRingObj (integersObj l E) X
   let S := condensedRingObj (discreteObj (Padic.coefficientExtensionRing l E 1)) X
-  letI := (residueTensorColimits X R).1
-  letI := (residueTensorColimits X R).2
-  letI := residueFlatResolution X R
-  letI := residueExtensionKFlat X _ _ (residueMap l E X)
-  letI := HasDerivedCategory.standard (ConstantCompletion.Mod (ConstantCompletion.constant J k))
-  letI := HasDerivedCategory.standard (ConstantCompletion.Mod (ConstantCompletion.constant J A))
-  letI := HasDerivedCategory.standard (ConstantCompletion.Mod
+  let := (residueTensorColimits X R).1
+  let := (residueTensorColimits X R).2
+  let := residueFlatResolution X R
+  let := residueExtensionKFlat X _ _ (residueMap l E X)
+  let := HasDerivedCategory.standard (ConstantCompletion.Mod (ConstantCompletion.constant J k))
+  let := HasDerivedCategory.standard (ConstantCompletion.Mod (ConstantCompletion.constant J A))
+  let := HasDerivedCategory.standard (ConstantCompletion.Mod
     (ConstantCompletion.completed J A I))
-  letI : HasDerivedCategory (ConstantCompletion.Mod
+  let : HasDerivedCategory (ConstantCompletion.Mod
       (ConstantCompletion.coefficients J A I false)) := HasDerivedCategory.standard _
-  letI : HasDerivedCategory (ConstantCompletion.Mod
+  let : HasDerivedCategory (ConstantCompletion.Mod
       (ConstantCompletion.coefficients J A I true)) := HasDerivedCategory.standard _
   let F := Scheme.CompletedConstantAlgebra.pushRing X
   let comparisons := (integral_constant_section_projection l E X).exists.choose
@@ -565,31 +564,31 @@ theorem integral_residue_model_comparison (l : ℕ) [Fact l.Prime]
   let FC : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) B ⥤
       Scheme.proEtaleRingModules X (Scheme.adicLisseCompletedRing X I) :=
     IntegralConstantModel.modulesFunctor l E X
-  letI : FC.Additive := IntegralConstantModel.modulesFunctor_additive l E X
-  letI : FC.IsEquivalence := IntegralConstantModel.modulesFunctor_isEquivalence l E X
+  let : FC.Additive := IntegralConstantModel.modulesFunctor_additive l E X
+  let : FC.IsEquivalence := IntegralConstantModel.modulesFunctor_isEquivalence l E X
   let HB := TB ⋙ ConstantCompletion.res b₀.inv
   let HS := Scheme.sfbFixedScalarRestriction X k ⋙
     (Scheme.fixedScalarProEtaleSheafEquivalence X k).functor
-  letI : E₀.IsEquivalence := discreteCoefficientModel_isEquivalence X _ _ a
-  letI : E₁.IsEquivalence := discreteCoefficientModel_isEquivalence X _ _ c
-  letI : E₀.Additive := discreteCoefficientModel_additive X _ _ a
-  letI : E₁.Additive := discreteCoefficientModel_additive X _ _ c
-  letI : (smallModules X B).IsEquivalence := smallModules_equivalence X B
-  letI : (smallModules X B).Additive := smallModules_additive X B
-  letI : (ConstantCompletion.res b.inv).IsEquivalence := residueRestrictionEquivalence b.symm
-  letI : EB.IsEquivalence := inferInstanceAs
+  let : E₀.IsEquivalence := discreteCoefficientModel_isEquivalence X _ _ a
+  let : E₁.IsEquivalence := discreteCoefficientModel_isEquivalence X _ _ c
+  let : E₀.Additive := discreteCoefficientModel_additive X _ _ a
+  let : E₁.Additive := discreteCoefficientModel_additive X _ _ c
+  let : (smallModules X B).IsEquivalence := smallModules_equivalence X B
+  let : (smallModules X B).Additive := smallModules_additive X B
+  let : (ConstantCompletion.res b.inv).IsEquivalence := residueRestrictionEquivalence b.symm
+  let : EB.IsEquivalence := inferInstanceAs
     (smallModules X B ⋙ ConstantCompletion.res b.inv).IsEquivalence
-  letI : EB.Additive := inferInstanceAs
+  let : EB.Additive := inferInstanceAs
     (smallModules X B ⋙ ConstantCompletion.res b.inv).Additive
-  letI : TB.IsEquivalence := (toModelEquivalence X _).isEquivalence_functor
-  letI : TS.IsEquivalence := (toModelEquivalence X _).isEquivalence_functor
-  letI : TB.Additive := Functor.additive_of_preserves_binary_products TB
-  letI : TS.Additive := Functor.additive_of_preserves_binary_products TS
-  letI : (ConstantCompletion.res b₀.inv).IsEquivalence := residueRestrictionEquivalence b₀.symm
-  letI : (ConstantCompletion.res t.inv).IsEquivalence := residueRestrictionEquivalence t.symm
-  letI : HB.IsEquivalence := Functor.isEquivalence_trans TB (ConstantCompletion.res b₀.inv)
-  letI : HB.Additive := Functor.additive_of_preserves_binary_products HB
-  letI : (TS ⋙ ConstantCompletion.res t.inv).IsEquivalence :=
+  let : TB.IsEquivalence := (toModelEquivalence X _).isEquivalence_functor
+  let : TS.IsEquivalence := (toModelEquivalence X _).isEquivalence_functor
+  let : TB.Additive := Functor.additive_of_preserves_binary_products TB
+  let : TS.Additive := Functor.additive_of_preserves_binary_products TS
+  let : (ConstantCompletion.res b₀.inv).IsEquivalence := residueRestrictionEquivalence b₀.symm
+  let : (ConstantCompletion.res t.inv).IsEquivalence := residueRestrictionEquivalence t.symm
+  let : HB.IsEquivalence := Functor.isEquivalence_trans TB (ConstantCompletion.res b₀.inv)
+  let : HB.Additive := Functor.additive_of_preserves_binary_products HB
+  let : (TS ⋙ ConstantCompletion.res t.inv).IsEquivalence :=
     Functor.isEquivalence_trans TS (ConstantCompletion.res t.inv)
   have ht : ∀ (U : Scheme.coefficientProEtaleSiteModel.{u, u} X) (r : k),
       t.hom.hom.app (Opposite.op U)
@@ -603,8 +602,8 @@ theorem integral_residue_model_comparison (l : ℕ) [Fact l.Prime]
       (congrArg (fun f ↦ f.hom.app (Opposite.op U)) t.inv_hom_id) _
   obtain ⟨hS₀⟩ := Scheme.fixed_scalar_small_coordinates X k t ht
   have hS : HS ≅ TS ⋙ ConstantCompletion.res t.inv := hS₀
-  letI : HS.IsEquivalence := Functor.isEquivalence_of_iso hS.symm
-  letI : HS.Additive := inferInstanceAs
+  let : HS.IsEquivalence := Functor.isEquivalence_of_iso hS.symm
+  let : HS.Additive := inferInstanceAs
     (Scheme.sfbFixedScalarRestriction X k ⋙
       (Scheme.fixedScalarProEtaleSheafEquivalence X k).functor).Additive
   let e₀ : Mod.comap (residueMap l E X) ⋙ E₀ ≅ E₁ ⋙ ConstantCompletion.res q := by

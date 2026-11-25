@@ -117,7 +117,6 @@ def mP {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)
   (Functor.mapDerivedCategoryPlusCompIso _ _).symm ≪≫
     Functor.mapDerivedCategoryPlusNatIso (proEtaleOpenExtensionComp R a b).symm
 
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem comp_square {C : Type*} [Category C]
@@ -127,7 +126,6 @@ private theorem comp_square {C : Type*} [Category C]
     l ≫ (f' ≫ g') = (f ≫ g) ≫ r := by
   rw [← Category.assoc, hf, Category.assoc, hg, Category.assoc]
 
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem map_square {C D : Type*} [Category C] [Category D]
@@ -136,7 +134,6 @@ private theorem map_square {C D : Type*} [Category C] [Category D]
     (h : l ≫ g = f ≫ r) : P.map l ≫ P.map g = P.map f ≫ P.map r := by
   rw [← P.map_comp, h, P.map_comp]
 
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem B_naturality {X W Y : Scheme.{u}} (j : X ⟶ W)
@@ -149,7 +146,6 @@ private theorem B_naturality {X W Y : Scheme.{u}} (j : X ⟶ W)
     Etale.rightDerivedLowerStarPlus, N, PE, PP, JE, JP] using
     (finiteSiteWordComparison R j r).naturality h
 
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem conjugate_iso_reverse
@@ -174,7 +170,7 @@ variable {X U XB Y YB Z : Scheme.{u}}
 def GE (E : DE R X) :=
   (Etale.properOpenCoefficientInterchangePlus R sq ((JE R a).obj E)).hom
 
-set_option linter.unusedSectionVars false in
+omit [IsNoetherian X] [QuasiCompact a] [QuasiCompact b] [QuasiCompact i] in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem GE_naturality {E F : DE R X} (h : E ⟶ F) :
@@ -267,7 +263,6 @@ def targetCompatibility (E : DE R X) :=
       ((Etale.openImmersionLowerShriek
         (ModuleCat.{u + 1} R) (a ≫ b)).mapDerivedCategoryPlusCompatibility.app E)
 
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem kE_restriction
@@ -291,7 +286,8 @@ private theorem kE_restriction
       (Etale.lowerStar (ModuleCat.{u + 1} R) q)
       (Etale.lowerStarComp (ModuleCat.{u + 1} R) p q) E
 
-set_option linter.unusedSectionVars false in
+omit [Finite R] [IsNoetherian X] [IsNoetherian U] [IsNoetherian XB] [QuasiCompact a]
+  [QuasiCompact b] in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem mE_restriction (E : DE R X) :
@@ -314,7 +310,7 @@ private theorem mE_restriction (E : DE R X) :
     Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app]
   exact congrArg (fun t ↦ t ≫ _) (congrArg Iso.inv hc)
 
-set_option linter.unusedSectionVars false in
+omit [IsNoetherian X] [QuasiCompact a] [QuasiCompact b] [QuasiCompact i] in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem GE_restriction (E : DE R X) :
@@ -337,7 +333,7 @@ private theorem GE_restriction (E : DE R X) :
   simp only [Iso.refl_hom, NatTrans.id_app]
   erw [Category.id_comp]
 
-set_option linter.unusedSectionVars false in
+omit [IsNoetherian X] [QuasiCompact a] [QuasiCompact b] [QuasiCompact i] in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The etale arrow is the restriction of the normalized unbounded tower compositor. -/
@@ -402,7 +398,7 @@ private def towerTriangle : Compactification.Triangle (a ≫ s) (i ≫ q) where
   p_g := rfl
   isPullback := sq.flip
 
-set_option linter.unusedSectionVars false in
+omit [QuasiCompact b] [QuasiCompact i] in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem interchange_eq_exchange (M : Etale.DerivedCategoryModule R U) :
@@ -420,7 +416,7 @@ private theorem interchange_eq_exchange (M : Etale.DerivedCategoryModule R U) :
   simpa only [Etale.unboundedEtaleProperOpenRestriction, hl, Iso.app_hom,
     Etale.rightDerivedLowerStar, asIso_inv, NatIso.isIso_inv_app, Functor.comp_obj] using ht
 
-set_option linter.unusedSectionVars false in
+omit [IsNoetherian X] [IsNoetherian Z] [QuasiCompact a] [QuasiCompact b] [QuasiCompact i] in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem AEUnbounded_eq_triangle (M : Etale.DerivedCategoryModule R X) :
@@ -455,13 +451,10 @@ private theorem AEUnbounded_eq_triangle (M : Etale.DerivedCategoryModule R X) :
             (ModuleCat.{u + 1} R) a).mapDerivedCategory.obj M)) ≫ t) hn.symm
 
 set_option maxRecDepth 4096 in
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem B_isIso {X W Y : Scheme.{u}} (j : X ⟶ W)
@@ -471,7 +464,8 @@ private theorem B_isIso {X W Y : Scheme.{u}} (j : X ⟶ W)
   unfold B
   infer_instance
 
-set_option linter.unusedSectionVars false in
+omit [IsNoetherian X] [IsNoetherian Z] [QuasiCompact a] [QuasiCompact b] [QuasiCompact i]
+  [IsProper q] in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem AE_isIso (E : DE R X) : IsIso (AE R a b p q i s sq E) := by
@@ -479,7 +473,7 @@ private theorem AE_isIso (E : DE R X) : IsIso (AE R a b p q i s sq E) := by
   unfold AE
   infer_instance
 
-set_option linter.unusedSectionVars false in
+omit [QuasiCompact a] [QuasiCompact b] in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem compositor_equation (E : DE R X) :
@@ -537,7 +531,8 @@ private theorem compositor_equation (E : DE R X) :
           ((JE R b).obj ((JE R a).obj E))) ≫ t ≫
         (PP R (p ≫ q)).map ((mP R a b).hom.app ((N R X).obj E))) hk.symm
 
-set_option linter.unusedSectionVars false in
+omit [IsNoetherian X] [IsNoetherian Z] [QuasiCompact a] [QuasiCompact b] [QuasiCompact i]
+  [IsProper q] in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem word_equation (E : DE R X) :
@@ -564,7 +559,7 @@ private theorem word_equation (E : DE R X) :
     erw [(PP R s).map_id, (JP R i).map_id, (PP R q).map_id]
   simp only [Category.id_comp]
 
-set_option linter.unusedSectionVars false in
+omit [QuasiCompact a] [QuasiCompact b] [QuasiCompact i] in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The finite-site word equation, its compositor paste and the resulting inverse formula. -/
@@ -605,7 +600,8 @@ theorem paste (E : DE R X) :
   have hap : IsIso (AP R a b p q i s sq E) := by rw [hinv hd]; infer_instance
   exact ⟨hw, ht, hap, hd, hf, hg, hgf, hinv⟩
 
-set_option linter.unusedSectionVars false in
+omit [IsNoetherian X] [IsNoetherian Z] [QuasiCompact a] [QuasiCompact b] [QuasiCompact i]
+  [IsProper q] in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Naturality of both word comparisons and of the etale tower arrow. -/
@@ -651,7 +647,9 @@ theorem word_naturality {E F : DE R X} (h : E ⟶ F) :
       (comp_square ((kE R p q).hom.naturality ((JE R b).map ((JE R a).map h)))
         (map_square (PE R (p ≫ q)) ((mE R a b).hom.naturality h)))
 
-set_option linter.unusedSectionVars false in
+omit [Finite R] [IsNoetherian X] [IsNoetherian U] [IsNoetherian XB] [IsNoetherian Y]
+  [IsNoetherian YB] [IsNoetherian Z] [QuasiCompact a] [QuasiCompact b] [QuasiCompact i]
+  [IsProper p] [IsProper q] [IsProper s] in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Naturality of the three named compact-support comparisons and their input paste. -/
@@ -677,7 +675,7 @@ theorem comparison_naturality {E F : DE R X} (h : E ⟶ F) :
   exact comp_square (B_naturality R i q ((PE R s).map ((JE R a).map h)))
     (map_square (PP R q) (map_square (JP R i) (B_naturality R a s h)))
 
-set_option linter.unusedSectionVars false in
+omit [QuasiCompact a] [QuasiCompact b] [QuasiCompact i] in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Naturality of the actual tower paste, rather than merely of its transported value. -/

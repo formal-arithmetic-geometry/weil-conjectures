@@ -180,7 +180,6 @@ private theorem chartAlgebraLift_exact (B : Type t) [CommRing B] :
     Adjunction.isEquivalence_preservesColimits _
   exact ⟨inferInstance, inferInstance⟩
 
-set_option linter.unusedVariables false in
 /-- A complex over a constant finite ring, on a localized pro-etale site, with uniformly
 bounded perfect constant models on an etale covering has etale origin. Constant models
 of this origin are exactly the constant models of the original complex. -/
@@ -190,7 +189,7 @@ theorem finitePerfectChart_etale_origin
     (ψ : adicConstantRing X B ⟶ R) (hψ : IsIso ψ)
     (K : DerivedCategory (SheafOfModules.{t + 1}
       ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)))
-    (V : X.Etale) (a b : ℤ) (hab : a ≤ b)
+    (V : X.Etale) (a b : ℤ) (_hab : a ≤ b)
     (hmodel : ∃ T : Sieve V, T ∈ X.smallEtaleTopology V ∧
       ∀ (W : X.Etale) (g : W ⟶ V), T g →
         ∃ P : CochainComplex (ModuleCat.{t} B) ℤ,

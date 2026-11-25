@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.EpiOverFunctor
 universe u v
 
 open CategoryTheory CategoryTheory.Limits
-set_option linter.style.haveILetI false
 
 
 /-- Epimorphic images of finite type sheaves are finite type. (Stacks, Tag 01B7.) -/
@@ -39,8 +38,8 @@ theorem sheaf_finiteType_of_epi
   refine ⟨⟨τ, ?_⟩⟩
   refine ⟨fun i => ?_⟩
   dsimp [τ]
-  haveI : (σ.generators i).IsFiniteType := hσ.isFiniteType i
-  letI := epi_overFunctor_map e (σ.X i)
+  have : (σ.generators i).IsFiniteType := hσ.isFiniteType i
+  let := epi_overFunctor_map e (σ.X i)
   infer_instance
 
 end

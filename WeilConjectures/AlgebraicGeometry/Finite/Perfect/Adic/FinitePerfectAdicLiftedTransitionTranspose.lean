@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicLi
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -37,7 +36,7 @@ theorem finitePerfectAdicLiftedTransition_transpose_isIso
   let q : ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)) →+*
       ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)) :=
     RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1))
-  letI : (normalizationModuleRestrict q).IsRightAdjoint :=
+  let : (normalizationModuleRestrict q).IsRightAdjoint :=
     ModuleCat.derivedRestrictScalars_isRightAdjoint.{t + 1, 0} q
   let canAdj := Adjunction.ofIsRightAdjoint (normalizationModuleRestrict q)
   have hcan : IsIso ((canAdj.homEquiv _ _).symm

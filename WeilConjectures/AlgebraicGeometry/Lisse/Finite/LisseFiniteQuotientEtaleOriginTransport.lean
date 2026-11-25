@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Finite.LisseFiniteQuotientEtaleOr
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -40,9 +39,9 @@ theorem lisse_finite_quotient_etale_origin_transport
       (adicTowerPullback (W.hom ≫ g)
         ((pbcAdicRings X d).obj (op n))).obj K) := by
   obtain ⟨f, hf, hg⟩ := lisse_finite_quotient_etale_origin_transport_map C Z E hE W _w
-  letI : Mono f := hf
-  letI : Epi f := hg
-  haveI : IsIso f := by
+  let : Mono f := hf
+  let : Epi f := hg
+  have : IsIso f := by
     apply isIso_of_mono_of_epi
   exact ⟨asIso f⟩
 

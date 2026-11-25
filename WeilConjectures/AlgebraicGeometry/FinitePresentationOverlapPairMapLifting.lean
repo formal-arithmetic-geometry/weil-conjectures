@@ -43,8 +43,6 @@ lemma overlapLimitMap_stage_comp {I : Type u} [Preorder I]
   simpa using c.w (homOfLE hjk).op
 
 
--- Preserve the original unused existential binder in the public signature.
-set_option linter.unusedVariables false in
 /-- Descend the conjugated transition on one pairwise overlap, with persistence at later stages.
 (Stacks, Tag 01ZR, Tag 05N7) -/
 theorem exists_finitePresentation_overlap_pair_map_lifting
@@ -69,7 +67,7 @@ theorem exists_finitePresentation_overlap_pair_map_lifting
         (T' := Over.mk (c.π.app (op i)))
         (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)))).f a)).obj M)
     (a b : U.I₀) :
-    ∃ (k : I) (hjk : j ≤ k), ∀ (l : I) (hjl : j ≤ l), k ≤ l →
+    ∃ (k : I) (_hjk : j ≤ k), ∀ (l : I) (hjl : j ≤ l), k ≤ l →
       let q := overlapStageMap R f hij hjl
       let V := U.pullback₁ q
       let p := overlapLimitMap R c f (hij.trans hjl)

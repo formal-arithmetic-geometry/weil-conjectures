@@ -27,7 +27,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicLi
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -48,7 +47,7 @@ theorem finitePerfectAdicLiftedTransition_canonical_transpose_isIso
     IsIso ((adj.homEquiv _ _).symm (finitePerfectAdicLiftedTransition T n)) := by
   dsimp
   obtain ⟨e, he⟩ := finitePerfectAdicLiftedTransition_canonical_transpose_formula T n
-  letI := T.normalized n
+  let := T.normalized n
   rw [he]
   infer_instance
 

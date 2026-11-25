@@ -24,7 +24,6 @@ import WeilConjectures.SixFunctors.ProEtale.IntegralSectionProjectionNormalizati
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
@@ -142,10 +141,10 @@ private theorem pointComparison_eq (l : ℕ) [Fact l.Prime]
     TopologicalSpace.induced (fun x : B ↦ (x : E)) t)
       (DerivedNakayama.coefficientTopology l E).symm
   let h₁ : @IsTopologicalRing B t₁ _ := by
-    letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     infer_instance
   let h₂ : @IsTopologicalRing B t₂ _ := by
-    letI := spectralNorm.normedField (Padic l) E
+    let := spectralNorm.normedField (Padic l) E
     infer_instance
   let V := sheafCompose (coherentTopology Profinite.{u})
     (forget₂ RingCat.{u + 1} Ab.{u + 1})
@@ -280,11 +279,11 @@ private theorem canonicalRingMap_scalar_natural
           ((upperStarFromPoint X).map g) =
       (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
         (CommRingCat.ofHom.{u + 1} f) ≫ FiniteDiscreteOrdinary.canonicalRingMap C X := by
-  letI : EssentiallySmall.{u + 1} X.ProEt :=
+  let : EssentiallySmall.{u + 1} X.ProEt :=
     WeilConjectures.instEssentiallySmallProEt_weilConjectures X
-  letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
+  let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
     Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
-  letI : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
+  let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
     AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
   let J := Scheme.ProEt.topology X
   let ηB := toSheafify J ((Functor.const X.ProEtᵒᵖ).obj
@@ -380,29 +379,29 @@ theorem integral_constant_section_projection (l : ℕ) [Fact l.Prime]
           (CommRingCat.ofHom.{u + 1} (Ideal.Quotient.mk
             (IntegralConstantCompletion.ideal l E ^ (n + 1)))) := by
     classical
-    letI : EssentiallySmall.{u + 1} X.ProEt :=
+    let : EssentiallySmall.{u + 1} X.ProEt :=
       WeilConjectures.instEssentiallySmallProEt_weilConjectures X
-    letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
+    let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
       Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
-    letI : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
+    let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
       AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
-    letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     let B := Padic.coefficientExtensionIntegers l E
     let C := Padic.coefficientExtensionRing l E (n + 1)
     let tC : TopologicalSpace C := inferInstance
     let hC : @IsTopologicalRing C tC _ := inferInstance
-    letI : Finite C := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
-    letI : DiscreteTopology C := finiteTopology_discrete.{u} l E n
+    let : Finite C := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+    let : DiscreteTopology C := finiteTopology_discrete.{u} l E n
     obtain ⟨f⟩ := FiniteDiscreteOrdinary.encoding_exists.{u} C X
     let tB : TopologicalSpace B := by
       letI := spectralNorm.normedField (Padic l) E
       infer_instance
-    letI : TopologicalSpace B := tB
-    letI : IsTopologicalRing B := by
-      letI := spectralNorm.normedField (Padic l) E
+    let : TopologicalSpace B := tB
+    let : IsTopologicalRing B := by
+      let := spectralNorm.normedField (Padic l) E
       infer_instance
-    letI : TopologicalSpace C := tC
-    letI : IsTopologicalRing C := hC
+    let : TopologicalSpace C := tC
+    let : IsTopologicalRing C := hC
     let J := Scheme.ProEt.topology X
     let R := constantSheaf J CommRingCat.{u + 1}
     let g := (IntegralConstantModel.pointComparison l E).inv.hom ≫
@@ -412,7 +411,7 @@ theorem integral_constant_section_projection (l : ℕ) [Fact l.Prime]
         ((Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))).comp
           ULift.ringEquiv.toRingHom)
     have hg : IsMonHom g := by dsimp only [g]; infer_instance
-    letI := hg
+    let := hg
     have hconst : FiniteDiscreteOrdinary.pointConstants B ≫ g.hom =
         (Functor.const Profinite.{u}ᵒᵖ).map (AddCommGrpCat.ofHom.{u + 1} q.toAddMonoidHom) ≫
           FiniteDiscreteOrdinary.pointConstants C := by

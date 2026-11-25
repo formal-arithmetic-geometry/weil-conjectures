@@ -96,7 +96,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 include ℓ k
 
-set_option linter.unusedSectionVars false in
+omit [Fact (ringChar k ≠ ℓ)] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] in
 /-- The direct image of an algebraic-closure sheaf comes from a finite coefficient field.
 (Bhatt--Scholze, Proposition 6.8.4(3), Proposition 6.8.14 and Remark 6.8.15.) -/
 theorem finiteTypeAlgClHeart_finiteImage

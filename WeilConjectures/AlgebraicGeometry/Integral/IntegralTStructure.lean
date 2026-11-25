@@ -53,7 +53,6 @@ def pbcIntegralTStructure :=
     (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E))
     (pbcAmbientTStructure T l E)
 
-set_option linter.unnecessarySimpa false in
 /-- The inherited shifts are linear for the actual constant-section scalar action. -/
 @[instance] theorem pbcIntegralShift_isLinear (n : ℤ) :
     (shiftFunctor (PbcBoundedConstructibleComplete T (pbcIntegralDatum l E)) n).Linear
@@ -63,8 +62,7 @@ set_option linter.unnecessarySimpa false in
   have : (shiftFunctor P.FullSubcategory n ⋙ P.ι).Linear (PbcIntegralRing l E) :=
     Functor.linear_of_iso (PbcIntegralRing l E) (P.ι.commShiftIso n).symm
   refine ⟨fun f r ↦ P.ι.map_injective ?_⟩
-  simpa only [Functor.map_smul, Functor.comp_map] using
-    (shiftFunctor P.FullSubcategory n ⋙ P.ι).map_smul r f
+  simp only [Functor.map_smul]
 
 /-- The standard integral structure is bounded, its heart is cohomology in degree zero,
 and its canonical truncations are the ambient ones. Uniformizer torsion is preserved

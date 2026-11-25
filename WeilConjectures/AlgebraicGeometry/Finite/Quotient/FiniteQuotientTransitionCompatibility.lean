@@ -47,10 +47,6 @@ and descends the model computation through K-flat resolutions.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 2048
 set_option backward.defeqAttrib.useBackward true
 universe u

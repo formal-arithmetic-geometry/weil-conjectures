@@ -20,10 +20,6 @@ import WeilConjectures.AlgebraicGeometry.GlobalTensorPullbackOplaxIsIso
 @[expose] public section
 universe u
 set_option autoImplicit false
-set_option linter.style.longLine false
-set_option linter.style.haveILetI false
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open AlgebraicGeometry TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
@@ -42,12 +38,13 @@ local instance : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRinged
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).1
 local instance : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
+omit [HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] in
 /-- The concrete global pullback admits the tensor constraint normalized by its counit
 (Stacks, Tags 008A, 008Y and 0FKU). -/
 theorem globalTensorPullback_monoidal_normalization
     (e : SheafOfModules.{u} (moduleRings (globalSectionsPoint X)) ≌
         ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
-      (he : Nonempty (e.functor ≅ RingedSpace.globalSectionsFunctor (globalSectionsPoint X)))
+      (_he : Nonempty (e.functor ≅ RingedSpace.globalSectionsFunctor (globalSectionsPoint X)))
       (P : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ⥤
         SheafOfModules.{u} (moduleRings X.toRingedSpace))
       (h : ∀ M, P.obj M = SheafOfModules.changeOfRings.{u, u, u}
@@ -56,7 +53,7 @@ theorem globalTensorPullback_monoidal_normalization
             ⟨(toGlobalSectionsPoint X).hom.c⟩)
         (TopCat.Sheaf.inverseImageModule (toGlobalSectionsPoint X).hom.base
           (globalSectionsPoint X).sheaf (e.inverse.obj M)))
-      (hm : ∀ {M N} (a : M ⟶ N), P.map a = eqToHom (h M) ≫
+      (_hm : ∀ {M N} (a : M ⟶ N), P.map a = eqToHom (h M) ≫
         SheafOfModules.changeOfRingsHom.{u, u, u}
           (CochainComplex.tensorPullbackRingMap (toGlobalSectionsPoint X).hom.base
             X.toRingedSpace.sheaf (globalSectionsPoint X).sheaf
@@ -77,12 +74,12 @@ theorem globalTensorPullback_monoidal_normalization
           P.map (moduleCup_sectionTensorMap X M N) ≫ adj.counit.app (M ⊗ N) =
         adj.counit.app M ⊗ₘ adj.counit.app N := by
   obtain ⟨lax, hε, hμ⟩ := globalSectionsFunctor_laxMonoidal_data X
-  letI := lax
+  let := lax
   let oplax : P.OplaxMonoidal := adj.leftAdjointOplaxMonoidal
-  letI := oplax
+  let := oplax
   obtain ⟨hη, hδ⟩ := globalTensorPullback_oplax_isIso X P adj lax hε hμ
-  letI : IsIso (adj.leftAdjointOplaxMonoidal.η) := hη
-  letI : ∀ A B, IsIso (adj.leftAdjointOplaxMonoidal.δ A B) := hδ
+  let : IsIso (adj.leftAdjointOplaxMonoidal.η) := hη
+  let : ∀ A B, IsIso (adj.leftAdjointOplaxMonoidal.δ A B) := hδ
   let mon : P.Monoidal := Functor.Monoidal.ofOplaxMonoidal P
   refine ⟨mon, ?_⟩
   intro M N

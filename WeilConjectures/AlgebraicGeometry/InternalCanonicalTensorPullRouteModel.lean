@@ -19,7 +19,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalTensorC
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.style.haveILetI false
 attribute [local irreducible] AlgebraicGeometry.ProEtale.upperStarFromPoint
   CategoryTheory.Functor.leftDerivedFunctor CategoryTheory.Functor.mapDerivedCategory
 attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.monoidalClosed
@@ -47,9 +46,9 @@ theorem canonical_tensor_pull_route_model (a : Λ ⟶ Λ') [IsMonHom a]
   let F := CondensedRing.upperStar Λ f
   let G := L Λ f
   let γ := pullCounit (Λ := Λ) f
-  letI hm : F.Monoidal := CondensedRing.monoidal_upperStar Λ f
-  letI hdm : G.Monoidal := CategoryTheory.Functor.residueDerivedMonoidal F
-  letI : F.OplaxMonoidal := hm.toOplaxMonoidal
+  let hm : F.Monoidal := CondensedRing.monoidal_upperStar Λ f
+  let hdm : G.Monoidal := CategoryTheory.Functor.residueDerivedMonoidal F
+  let : F.OplaxMonoidal := hm.toOplaxMonoidal
   have hδ := CategoryTheory.Functor.residueDerivedMonoidal_counit F
   have hG : ∀ M N : Modules Λ Y, F.map (β_ M N).hom ≫
       Functor.OplaxMonoidal.δ F N M = Functor.OplaxMonoidal.δ F M N ≫
@@ -60,7 +59,7 @@ theorem canonical_tensor_pull_route_model (a : Λ ⟶ Λ') [IsMonHom a]
       (tensorLeft (B₀ a Y)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh := by
     unfold H D V
     exact Mod.tensorPresentationDerivedCounit (coefficientMap a Y)
-  letI hε : H.IsLeftDerivedFunctor ε
+  let hε : H.IsLeftDerivedFunctor ε
       (HomotopyCategory.quasiIso (Modules Λ Y) (.up ℤ)) := by
     unfold H ε D V
     exact Mod.tensorPresentationDerivedCounit_isLeftDerivedFunctor

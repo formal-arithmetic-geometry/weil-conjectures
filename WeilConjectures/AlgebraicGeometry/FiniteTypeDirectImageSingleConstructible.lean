@@ -218,6 +218,7 @@ private theorem ell_unit : IsUnit (ℓ : k) :=
   isUnit_iff_ne_zero.mpr (CharP.cast_ne_zero_of_ne_of_prime k (p := ringChar k)
     (Fact.out : ℓ.Prime) (Fact.out : ringChar k ≠ ℓ))
 
+-- Keep separatedness here so the public direct-image theorems retain it as a hypothesis.
 set_option linter.unusedSectionVars false in
 private theorem finite_etale (f : X ⟶ Y)
     (A : Type (u + 1)) [CommRing A] [Finite A]

@@ -85,7 +85,6 @@ private theorem assocFive {D : Type*} [Category* D] {A B C E F G : D}
   simp only [Category.assoc]
 
 -- The preserved signature includes the unused let-bound pullback cover V₀.
-set_option linter.unusedVariables false in
 -- Extra fuel checks the dependent descent-data interfaces without raising the wall-clock limit.
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
@@ -121,7 +120,7 @@ theorem finitePresentation_local_maps_eventual_overlap_equations
             (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))
             (T' := Over.mk (c.π.app (op i)))
             (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))
-          let V₀ := U₀.pullback₁ p₀
+          let _V₀ := U₀.pullback₁ p₀
           ∀ r₀ : ∀ a, (Q₀.obj (A₀.obj Fj)).obj a ⟶ (Q₀.obj (A₀.obj Gj)).obj a,
             localMapRecovery p₀ U₀ (A₀.obj Fj) (A₀.obj Gj) δ r₀ →
           ∃ (j' : I) (hkj' : k ≤ j'),
