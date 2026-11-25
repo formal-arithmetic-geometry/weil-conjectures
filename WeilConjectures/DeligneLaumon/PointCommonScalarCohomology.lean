@@ -10,8 +10,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Field.FieldDerivedS
 
 /-! # The Shrink coefficient model in the common-stage point cohomology square
 
-Source: Bhatt--Scholze 6.8.14(2) and the point coefficient convention, order 1509
-(blueprint: lem-a1-point-common-scalar-cohomology).
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, 6.8.14(2)
 -/
 
 @[expose] public noncomputable section

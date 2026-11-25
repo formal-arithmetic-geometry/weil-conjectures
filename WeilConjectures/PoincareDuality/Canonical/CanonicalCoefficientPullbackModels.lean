@@ -16,11 +16,6 @@ import all WeilConjectures.SmoothPurity.Supporting.ConstantWeilStructure
 /-!
 # Models for canonical coefficient pullback and finite quotient projections
 
-(blueprint: lem-pod-canonical-coefficient-model-maps).
-
-Source: Stacks Tags 03D6 and 08TC; blueprint prop-cohomological-finiteness, Step 7
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction).
-
 The sectionwise inverse image used by the specified kappa is compared with the
 normalized constant Weil structure through the actual regular-module coefficient
 maps. Finite multiplication and projection from the strict Roos cone are retained
@@ -41,6 +36,18 @@ positive exponent n+1 throughout.
 ## Main statements
 
 * `canonicalCoefficientModelMaps_isIso`: the regular coefficient identifications.
+
+## Implementation details
+
+On sections the integral and finite unit maps are `c_R⁻¹` and `c_n⁻¹`, so the coefficient
+isomorphisms give their inverses. The reduction map `s ⊗ x ↦ s * π_n(x)` is inverse to
+`b ↦ b ⊗ 1` by the balancing relation, and `x ⊗ b ↦ c_n⁻¹(b) * x` is inverse to the sheafified
+tensor-unit map in every degree. These formulas commute with restrictions, so they descend from
+presheaves to sheaves.
+
+## References
+
+* Stacks Project, Tags 03D6 and 08TC.
 -/
 
 @[expose] public noncomputable section
@@ -69,9 +76,7 @@ attribute [local irreducible] regularExtensionIso regularExtensionPresheafIso
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The regular-module map R_X to the sectionwise inverse image of R_Y.
-Its sectionwise formula is c_R inverse: send 1 to 1 and transport scalars by c_R.
-Source: Stacks 03D6; inverse-image-pullback-comparison, structure isomorphism
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+Its sectionwise formula is c_R inverse: send 1 to 1 and transport scalars by c_R. -/
 def canonicalCoefficientIntegralUnit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E X) ⟶
     (inverseImageIntegralModules l E g).obj
@@ -84,9 +89,7 @@ def canonicalCoefficientIntegralUnit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] 
         ((completedIntegralCoefficientSheafUnrestricted l E Y).obj.map
           ((proEtaleIsoPostcompose g).map f.unop).op).hom))
 /-- The finite regular-module map B_X,n to inverse image of B_Y,n,
-sending 1 to 1 with scalar action through c_n inverse.
-Source: Stacks 03D6, module pullback along the coefficient isomorphism
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+sending 1 to 1 with scalar action through c_n inverse. -/
 def canonicalCoefficientFiniteUnit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (n : ℕ) : SheafOfModules.unit (integralCoefficientSheaf l E X n) ⟶
     (inverseImageFiniteModules l E g n).obj
@@ -100,31 +103,23 @@ def canonicalCoefficientFiniteUnit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
           ((proEtaleIsoPostcompose g).map f.unop).op).hom))
 /-- The canonical multiplication identification of reduction of the regular
 module with the finite regular module, transposed from the actual coefficient
-projection under the normalized tensor/restriction adjunction.
-Source: Stacks 03D6; node proof Step 7
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+projection under the normalized tensor/restriction adjunction. -/
 def canonicalCoefficientReduction (W : Scheme.{u}) (n : ℕ) :=
   ((scalarReductionExtension_adjunction l E W n).choose.homEquiv _ _).symm
     (constantCoefficientProjection l E W n)
 /-- The same canonical reduction identification on the regular complexes,
-using the exact degree-zero single-complex comparison.
-Source: Stacks 03D6; node proof Step 7
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+using the exact degree-zero single-complex comparison. -/
 def canonicalCoefficientReductionComplex (W : Scheme.{u}) (n : ℕ) :=
   ((unrestrictedIntegralReductionFunctor l E W n).mapCochainComplexSingleFunctor 0).hom.app
       (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E W)) ≫
     (CochainComplex.singleFunctor _ 0).map (canonicalCoefficientReduction l E W n)
 
-/-- The regular finite coefficient complex B_Y,n[0].
-Source: node statement, finite coefficient objects; Stacks 03D6
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+/-- The regular finite coefficient complex B_Y,n[0]. -/
 def canonicalCoefficientFiniteComplex (W : Scheme.{u}) (n : ℕ) :=
   (CochainComplex.singleFunctor (integralOperationsFiniteModules l E W n) 0).obj
     (SheafOfModules.unit (integralCoefficientSheaf l E W n))
 
-/-- The finite tensor-unit chain map x to x tensor 1, whose inverse is multiplication.
-Source: inverse-image-pullback-comparison (a); node proof Step 2; Stacks 03D6
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+/-- The finite tensor-unit chain map x to x tensor 1, whose inverse is multiplication. -/
 def canonicalCoefficientFiniteKappaComplex {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g] (n : ℕ) :=
   inverseImageFiniteComparisonComplex l E g n (canonicalCoefficientFiniteComplex l E Y n)
@@ -300,17 +295,7 @@ private theorem canonicalCoefficientFiniteKappa_isIso {X Y : Scheme.{u}}
   exact (isIso_comp_right_iff _ (coefficientFinitePullIso l E g n).hom).1
     ((isIso_comp_left_iff (coefficientFiniteInverseIso l E g n).inv _).1 hi)
 
-/-- The maps used to identify the coefficient models are isomorphisms.
-Source: node statement, c_R and c_n, finite multiplication and canonical reduction;
-node proof Steps 2 and 7; Stacks 03D6
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction).
-Proof: on sections the integral and finite unit maps are c_R inverse and c_n inverse,
-respectively, so the coefficient isomorphisms give their inverses. The reduction map
-s tensor x to s*pi_n(x) is inverse to b to b tensor 1 by the balancing relation.
-These commute with differentials, giving the reduction complex isomorphism. Finally
-x tensor b to c_n inverse(b)*x is inverse to the sheafified tensor-unit map in every
-degree. The formulas commute with restrictions, so they descend from presheaves to
-sheaves. Exact degree-zero comparisons preserve all these inverse identities. -/
+/-- The maps used to identify the coefficient models are isomorphisms. -/
 theorem canonicalCoefficientModelMaps_isIso {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g] :
     IsIso (canonicalCoefficientIntegralUnit l E g) ∧
@@ -340,10 +325,8 @@ theorem canonicalCoefficientModelMaps_isIso {X Y : Scheme.{u}}
 attribute [local irreducible] canonicalCoefficientIntegralUnit
   canonicalCoefficientReduction canonicalCoefficientReductionComplex
 
-/-- c_R on regular objects in the sectionwise inverse-image presentation.
-It is defined from the actual coefficient map, independently of kappa and lambda.
-Source: node structure isomorphism and proof Step 1; Stacks 03D6
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+/-- c_R on regular objects in the sectionwise inverse-image presentation, defined from the
+actual coefficient map. -/
 def canonicalCoefficientIntegralComparison {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g] :=
   ((inverseImageIntegralModules l E g).mapDerivedCategorySingleFunctor 0).app
@@ -353,26 +336,20 @@ def canonicalCoefficientIntegralComparison {X Y : Scheme.{u}}
         (canonicalCoefficientModelMaps_isIso l E g).1).symm
 
 /-- The canonical transport from the normalized termwise inverse-image realization
-of constantWeilIntegralLambda to the sectionwise realization of the specified kappa.
-It uses only the two independently constructed coefficient comparisons c_R.
-Source: node proof Steps 1 and 9; Stacks 03D6
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+of constantWeilIntegralLambda to the sectionwise realization of the specified kappa,
+built from the two coefficient comparisons c_R. -/
 def canonicalCoefficientInverseImageTransport {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g] :=
   constantWeilDerivedCoefficientComparison l E g ≪≫
     (canonicalCoefficientIntegralComparison l E g).symm
 
 /-- lambda_R is the normalized multiplication/completeness comparison, transported
-by the coefficient-model identification. No inverse of kappa is used to define it.
-Source: node proof Steps 2--6 and 9; Stacks 03D6 and 08TC
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+by the coefficient-model identification. -/
 def canonicalCoefficientLambda {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :=
   constantWeilIntegralLambda l E g ≪≫ canonicalCoefficientInverseImageTransport l E g
 
-/-- kappa_R is exactly the specified zero-homotopy Roos augmentation of definition
-(b), on the regular flat-term K-flat representative with its identity resolution.
-Source: inverse-image-pullback-comparison (b); node proof Step 6; Stacks 08TC
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+/-- kappa_R is exactly the specified zero-homotopy Roos augmentation, on the regular flat-term
+K-flat representative with its identity resolution. -/
 def canonicalCoefficientKappa {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
     (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :=
@@ -380,17 +357,13 @@ def canonicalCoefficientKappa {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (constantWeilIntegralComplex l E Y) (constantWeilIntegralGood l E Y) (𝟙 _)
 
 /-- The actual finite multiplication chain isomorphism lambda_n. Its inverse is the
-recorded sheafified x to x tensor 1 map, which uniquely fixes multiplication.
-Source: node proof Step 2; Stacks 03D6
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+recorded sheafified x to x tensor 1 map, which uniquely fixes multiplication. -/
 def canonicalCoefficientLambdaFinite {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (n : ℕ) :=
   (@asIso _ _ _ _ (canonicalCoefficientFiniteKappaComplex l E g n)
     ((canonicalCoefficientModelMaps_isIso l E g).2 n).2.2).symm
 
-/-- c_n on finite regular complexes in the sectionwise inverse-image model.
-Source: node structure isomorphism and proof Step 2; Stacks 03D6
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+/-- c_n on finite regular complexes in the sectionwise inverse-image model. -/
 def canonicalCoefficientFiniteComparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (n : ℕ) :=
   ((inverseImageFiniteModules l E g n).mapCochainComplexSingleFunctor 0).app
@@ -399,16 +372,12 @@ def canonicalCoefficientFiniteComparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso
       (@asIso _ _ _ _ (canonicalCoefficientFiniteUnit l E g n)
         ((canonicalCoefficientModelMaps_isIso l E g).2 n).1).symm
 
-/-- The finite restriction of scalars Res_n, on actual complexes.
-Source: completed-integral-coefficients; node statement; Stacks 03D6
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+/-- The finite restriction of scalars Res_n, on actual complexes. -/
 abbrev canonicalCoefficientRes (W : Scheme.{u}) (n : ℕ) :=
   integralOperationsRestrict l E W n
 
 /-- The pulled-back canonical reduction identification, followed by restriction
-of scalars. It identifies the strict quotient tower term with Res_n Lg_n^* B_Y,n.
-Source: node proof Step 7; Stacks 03D6
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+of scalars. It identifies the strict quotient tower term with Res_n Lg_n^* B_Y,n. -/
 def canonicalCoefficientPullbackReductionIso {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g] (n : ℕ) :=
   (canonicalCoefficientRes l E X n).mapIso
@@ -418,9 +387,7 @@ def canonicalCoefficientPullbackReductionIso {X Y : Scheme.{u}}
 
 /-- rho_n is the defining good-representative comparison, the actual first Roos
 coordinate and nth product projection, then the pulled reduction identification.
-Its source is P_g R_Y; its target is Res_n Lg_n^* B_Y,n in the single R_X category.
-Source: node proof Steps 3, 4 and 7; Stacks 08TC
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+Its source is P_g R_Y; its target is Res_n Lg_n^* B_Y,n in the single R_X category. -/
 def canonicalCoefficientRho {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (n : ℕ) :=
   (integralDerivedPullbackComparison l E g).hom.app (constantWeilIntegralGood l E Y) ≫
     DerivedCategory.Q.map
@@ -429,9 +396,7 @@ def canonicalCoefficientRho {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (n : ℕ)
     DerivedCategory.Q.map (canonicalCoefficientPullbackReductionIso l E g n).hom
 
 /-- pi_n,X as an R_X-linear derived morphism, with exact restriction-of-scalars
-and degree-zero comparisons included.
-Source: node proof Step 7; Stacks 03D6
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+and degree-zero comparisons included. -/
 def canonicalCoefficientProjection (W : Scheme.{u}) (n : ℕ) :=
   DerivedCategory.Q.map
     ((CochainComplex.singleFunctor _ 0).map (constantCoefficientProjection l E W n) ≫
@@ -439,10 +404,7 @@ def canonicalCoefficientProjection (W : Scheme.{u}) (n : ℕ) :=
         (SheafOfModules.unit (integralCoefficientSheaf l E W n)))
 
 /-- The inverse-image projection g^-1(pi_n,Y), expressed using the actual canonical
-coefficient square c_R*pi_n,X = g^-1(pi_n,Y)*c_n. All maps here depend only on
-coefficient projections and c_R,c_n, independently of lambda and rho.
-Source: node structure square and proof Steps 1 and 8; Stacks 03D6
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+coefficient square c_R*pi_n,X = g^-1(pi_n,Y)*c_n. -/
 def canonicalCoefficientInverseProjection {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g] (n : ℕ) :=
   (canonicalCoefficientIntegralComparison l E g).hom ≫
@@ -451,27 +413,20 @@ def canonicalCoefficientInverseProjection {X Y : Scheme.{u}}
       ((canonicalCoefficientRes l E X n).map
         (canonicalCoefficientFiniteComparison l E g n).inv)
 
-/-- theta_R = c_R composed with lambda_R in the recorded sectionwise model.
-Source: node statement and proof Steps 8--9; Stacks 03D6 and blueprint Step 7
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+/-- theta_R = c_R composed with lambda_R in the recorded sectionwise model. -/
 def canonicalCoefficientTheta {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :=
   canonicalCoefficientLambda l E g ≪≫ canonicalCoefficientIntegralComparison l E g
 
 /-- The specified finite pullback transition, transported by the two canonical
-reduction identifications. This is a chain map before taking the derived limit.
-Source: node proof Steps 3 and 7; Stacks 03D6 and 08TC
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+reduction identifications. This is a chain map before taking the derived limit. -/
 def canonicalCoefficientPullbackTransition {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g] (n : ℕ) :=
   (canonicalCoefficientPullbackReductionIso l E g (n + 1)).inv ≫
     (integralOperationsPullbackTransition l E g n).app (constantWeilIntegralComplex l E Y) ≫
     (canonicalCoefficientPullbackReductionIso l E g n).hom
 
-/-- The actual A_(n+2) to A_(n+1) quotient map on restricted regular complexes.
-Reduction of the unit complex is identified with B_n by multiplication, so conjugating
-the recorded pure-tensor transition gives precisely the quotient map.
-Source: node proof Step 7; Stacks 03D6
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+/-- The actual A_(n+2) to A_(n+1) quotient map on restricted regular complexes,
+obtained by conjugating the recorded pure-tensor transition by multiplication. -/
 def canonicalCoefficientTransition (W : Scheme.{u}) (n : ℕ) :=
   (canonicalCoefficientRes l E W (n + 1)).map
       ((@asIso _ _ _ _ (canonicalCoefficientReductionComplex l E W (n + 1))
@@ -479,9 +434,7 @@ def canonicalCoefficientTransition (W : Scheme.{u}) (n : ℕ) :=
     (unrestrictedIntegralTransition l E W n).app (constantWeilIntegralComplex l E W) ≫
     (canonicalCoefficientRes l E W n).map (canonicalCoefficientReductionComplex l E W n)
 
-/-- The corresponding inverse-image quotient transition, transported through c_n.
-Source: node proof Step 3; Stacks 03D6
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction). -/
+/-- The corresponding inverse-image quotient transition, transported through c_n. -/
 def canonicalCoefficientInverseTransition {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g] (n : ℕ) :=
   (canonicalCoefficientRes l E X (n + 1)).map

@@ -23,15 +23,18 @@ comparison
 RHom(A, B) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ RHom(A ⊗ᴸ 𝒪_E ⧸ ℓⁿ, B ⊗ᴸ 𝒪_E ⧸ ℓⁿ)
 ```
 (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`) is an isomorphism
-(`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedIntegersModPowReduction`; blueprint
-`proposition-six-operations-change-coefficients--7`,
-`proposition-six-operations-change-coefficients` (2) for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`).
+(`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedIntegersModPowReduction`).
+
+## Implementation details
 
 Since `0 ⟶ 𝒪_{E,X} --ℓⁿ--> 𝒪_{E,X} ⟶ (𝒪_E ⧸ ℓⁿ)_X ⟶ 0` is short exact
 (`ProEtale.shortExact_integersModPowReduction`), this is an instance of
 `CategoryTheory.Mod.isIso_ihomComparison_leftDerivedExtendScalars`: by the projection formula,
 `RHom(A, B) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ≅ RHom(A, B) ⊗ᴸ_{𝒪_E} (𝒪_E ⧸ ℓⁿ)[0]`, and `(𝒪_E ⧸ ℓⁿ)[0]` is a dualizable
 `𝒪_E`-complex, having the finite free resolution `𝒪_E --ℓⁿ--> 𝒪_E`.
+
+The variant `isIso_ihomComparison_leftDerivedIntegersModPowReduction_of_eq`, applied with
+`h := rfl`, avoids a slow unification of a named monoidal instance with the unfolded one.
 -/
 
 @[expose] public section
@@ -49,10 +52,9 @@ open Scheme
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] (n : ℕ)
   (X : Scheme.{u})
 
-/-- **Reduction modulo `ℓⁿ` commutes with internal homs** (blueprint
-`proposition-six-operations-change-coefficients--7`): for `A, B ∈ D(Mod_{𝒪_{E,X}})`, the comparison
-`RHom(A, B) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ RHom(A ⊗ᴸ 𝒪_E ⧸ ℓⁿ, B ⊗ᴸ 𝒪_E ⧸ ℓⁿ)` of the derived reduction, monoidal
-through `Functor.leftDerivedFunctorMonoidal`, is an isomorphism. -/
+/-- **Reduction modulo `ℓⁿ` commutes with internal homs**: for `A, B ∈ D(Mod_{𝒪_{E,X}})`, the
+comparison `RHom(A, B) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ RHom(A ⊗ᴸ 𝒪_E ⧸ ℓⁿ, B ⊗ᴸ 𝒪_E ⧸ ℓⁿ)` of the derived
+reduction, monoidal through `Functor.leftDerivedFunctorMonoidal`, is an isomorphism. -/
 theorem isIso_ihomComparison_leftDerivedIntegersModPowReduction
     (A B : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) :
@@ -67,9 +69,7 @@ theorem isIso_ihomComparison_leftDerivedIntegersModPowReduction
 
 /-- `ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedIntegersModPowReduction` for any
 monoidal structure on the derived reduction which is equal to that of
-`Functor.leftDerivedFunctorMonoidal`, for instance a named local instance unfolding to it. Applied
-with `h := rfl`, this avoids a slow unification of such a named instance with the unfolded one in
-the statement. -/
+`Functor.leftDerivedFunctorMonoidal`, for instance a named local instance unfolding to it. -/
 theorem isIso_ihomComparison_leftDerivedIntegersModPowReduction_of_eq
     (inst : L(Mod.extendScalars (integersModPowReduction X ℓ E n)).Monoidal)
     (h : inst = (letI := Mod.extendScalarsMonoidal (integersModPowReduction X ℓ E n)

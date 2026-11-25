@@ -50,12 +50,29 @@ import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 /-!
 # Perfect complexes over the integral coefficient tower
 
-Source: Weil conjectures blueprint, `lemma-perfect-complexes-over-oe`, statement (1), (2)
-(blueprint: lemma-perfect-complexes-over-oe).
+We show that a compatible tower of perfect complexes over the quotients `𝒪_E / 𝔪_Eⁿ` is
+represented by a single bounded finite free complex over `𝒪_E`, and that the images in
+cohomology of such a complex stabilize at a uniform torsion rate.
+
+## Implementation details
 
 Positive levels are indexed by `n : ℕ`, with level `n` meaning exponent `n + 1`.
-The isomorphisms of (1) are expressed by their adjoint universal arrows. For a bounded
-finite free complex, ordinary quotient reduction computes derived scalar extension.
+The isomorphisms of the tower statement are expressed by their adjoint universal arrows. For a
+bounded finite free complex, ordinary quotient reduction computes derived scalar extension.
+
+Several auxiliary results are versions of existing project results with the localization
+universe independent of the coefficient universe: `MatrixComplex.exists_iso_Q_obj_of_isPerfect`,
+`MatrixComplex.exists_isIso_Q_map_eq`, `MatrixComplex.isDerivedBaseChange_reduction`,
+`ModuleCat.NormalizedPerfectTower.LevelModel.exists_isSucc`,
+`ModuleCat.derivedRestrictScalarsCompIso` and `ModuleCat.Q_map_restrictScalars_comp`.
+
+The integral model is built by choosing minimal finite free representatives over the local
+quotient rings. Their reductions are homotopy equivalent, and reducing a homotopy equivalence
+modulo the maximal ideal makes its matrices invertible; these matrices are lifted and
+conjugated inductively, and the compatible matrix entries are lifted through the complete
+coefficient ring. For the cohomology statement, the regular quotient exact sequence identifies
+the quotient cohomology with integral cohomology and the uniformizer torsion of the next
+cohomology, on which the transition is multiplication by the intervening power.
 -/
 
 @[expose] public noncomputable section
@@ -68,17 +85,13 @@ open CategoryTheory CategoryTheory.Limits
 namespace Padic
 
 /-- The ordinary quotient complex by a power of a scalar, constructed as a cokernel.
-Cokernels of complexes of modules are computed degreewise, so this is the termwise quotient.
-Source: blueprint `lemma-perfect-complexes-over-oe`, statement (2)
-(blueprint: lemma-perfect-complexes-over-oe). -/
+Cokernels of complexes of modules are computed degreewise, so this is the termwise quotient. -/
 def scalarQuotient {A : Type u} [CommRing A]
     (t : A) (Q : CochainComplex (ModuleCat.{u} A) ℤ) (n : ℕ) :
     CochainComplex (ModuleCat.{u} A) ℤ :=
   cokernel (t ^ n • 𝟙 Q)
 
-/-- The actual quotient transition, induced by the identity on the integral complex.
-Source: blueprint `lemma-perfect-complexes-over-oe`, statement (2)
-(blueprint: lemma-perfect-complexes-over-oe). -/
+/-- The actual quotient transition, induced by the identity on the integral complex. -/
 def scalarQuotientTransition {A : Type u} [CommRing A]
     (t : A) (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (m n : ℕ) (h : n ≤ m) : scalarQuotient t Q m ⟶ scalarQuotient t Q n :=
@@ -86,9 +99,7 @@ def scalarQuotientTransition {A : Type u} [CommRing A]
     rw [← Nat.sub_add_cancel h, pow_add, mul_smul, Linear.smul_comp,
       cokernel.condition, smul_zero])
 
-/-- Precomposition by an isomorphism preserves universal arrows.
-Source: the scalar adjunction used in blueprint proof (1)
-(blueprint: lemma-perfect-complexes-over-oe). -/
+/-- Precomposition by an isomorphism preserves universal arrows. -/
 private theorem universal_precomp_iso
     {C D : Type*} [Category* C] [Category* D] (F : D ⥤ C)
     {X X' : C} {Y : D} (e : X' ≅ X) (η : X ⟶ F.obj Y)
@@ -99,9 +110,7 @@ private theorem universal_precomp_iso
   ext g
   simp
 
-/-- Changing the represented target by an isomorphism preserves its universal arrow.
-Source: the scalar adjunction used in blueprint proof (1)
-(blueprint: lemma-perfect-complexes-over-oe). -/
+/-- Changing the represented target by an isomorphism preserves its universal arrow. -/
 private theorem universal_postcomp_iso
     {C D : Type*} [Category* C] [Category* D] (F : D ⥤ C)
     {X : C} {Y Y' : D} (η : X ⟶ F.obj Y) (e : Y ≅ Y')
@@ -112,9 +121,7 @@ private theorem universal_postcomp_iso
   ext g
   simp
 
-/-- A comparison of universal arrows is an isomorphism.
-Source: blueprint proof (1), uniqueness of derived scalar extension
-(blueprint: lemma-perfect-complexes-over-oe). -/
+/-- A comparison of universal arrows is an isomorphism. -/
 private theorem universal_comparison_isIso
     {C D : Type*} [Category* C] [Category* D] (F : D ⥤ C)
     {X : C} {Y Y' : D} (η : X ⟶ F.obj Y) (η' : X ⟶ F.obj Y')
@@ -131,10 +138,7 @@ private theorem universal_comparison_isIso
     rw [Functor.map_comp, reassoc_of% hψ, hφ]
     simp
 
-/-- Minimal finite free matrix representatives, with an independent localization universe.
-Source: `MatrixComplex.exists_iso_Q_obj_of_isPerfect`; the same proof uses the recorded
-minimal-complex theorem and the actual perfectness witness.
-(blueprint: lemma-perfect-complexes-over-oe). -/
+/-- Minimal finite free matrix representatives, with an independent localization universe. -/
 private theorem minimal_matrix_model {S : Type u} [CommRing S] [IsLocalRing S]
     [HasDerivedCategory.{v} (ModuleCat.{u} S)]
     {K : DerivedCategory (ModuleCat.{u} S)} (hK : DerivedCategory.IsPerfectRingComplex K) :
@@ -162,10 +166,7 @@ private theorem minimal_matrix_model {S : Type u} [CommRing S] [IsLocalRing S]
     exact DerivedCategory.Q.mapIso (MatrixComplex.isoOfLinearEquiv N eb).symm ≪≫
       asIso (DerivedCategory.Q.map h.inv) ≪≫ e.symm
 
-/-- Derived isomorphisms between minimal matrix models have invertible chain representatives.
-Source: `MatrixComplex.exists_isIso_Q_map_eq`, using K-projective representatives and
-`CochainComplex.isIso_of_quasiIso_of_isMinimal` without identifying universes.
-(blueprint: lemma-perfect-complexes-over-oe). -/
+/-- Derived isomorphisms between minimal matrix models have invertible chain representatives. -/
 private theorem minimal_matrix_comparison {S : Type u} [CommRing S] [IsLocalRing S]
     [HasDerivedCategory.{v} (ModuleCat.{u} S)] {r r' : ℤ → ℕ}
     {M : MatrixComplex r S} {N : MatrixComplex r' S}
@@ -179,10 +180,7 @@ private theorem minimal_matrix_comparison {S : Type u} [CommRing S] [IsLocalRing
   have : QuasiIso g := (DerivedCategory.isIso_Q_map_iff_quasiIso _ g).1 inferInstance
   exact ⟨g, CochainComplex.isIso_of_quasiIso_of_isMinimal g hi hi' hM.complex hN.complex, rfl⟩
 
-/-- Ordinary reduction of bounded free matrix complexes computes derived reduction.
-Source: `MatrixComplex.isDerivedBaseChange_reduction`; `ReductionDatum.bijective_comp_map`
-allows the localization universe to be independent of the coefficient universe.
-(blueprint: lemma-perfect-complexes-over-oe). -/
+/-- Ordinary reduction of bounded free matrix complexes computes derived reduction. -/
 private theorem matrix_reduction_universal {S S' : Type u} [CommRing S] [CommRing S']
     [HasDerivedCategory.{v} (ModuleCat.{u} S)]
     [HasDerivedCategory.{v} (ModuleCat.{u} S')] {r : ℤ → ℕ}
@@ -213,9 +211,7 @@ private theorem matrix_reduction_universal {S S' : Type u} [CommRing S] [CommRin
   rw [← D.complexMap_comp_descComplex (M.reduction φ N h), Functor.map_comp, Category.assoc,
     Functor.mapDerivedCategoryFactors_inv_naturality, asIso_hom, Category.assoc]
 
-/-- Internal record of a chosen minimal matrix model of one tower level.
-Source: blueprint proof (1), minimal finite free representatives
-(blueprint: lemma-perfect-complexes-over-oe). -/
+/-- Internal record of a chosen minimal matrix model of one tower level. -/
 private structure ScalarLevelModel {A : ℕ → Type u} [∀ n, CommRing (A n)]
     [∀ n, HasDerivedCategory.{v} (ModuleCat.{u} (A n))]
     (M : ∀ n, DerivedCategory (ModuleCat.{u} (A n))) (r : ℤ → ℕ) (n : ℕ)
@@ -224,9 +220,7 @@ private structure ScalarLevelModel {A : ℕ → Type u} [∀ n, CommRing (A n)]
   minimal : matrix.IsMinimal
   iso : DerivedCategory.Q.obj matrix.complex ≅ M n
 
-/-- Adjacent matrix models whose actual reduction represents the specified transition.
-Source: blueprint proof (1), changing bases at successive levels
-(blueprint: lemma-perfect-complexes-over-oe). -/
+/-- Adjacent matrix models whose actual reduction represents the specified transition. -/
 private def ScalarLevelModel.IsSucc {A : ℕ → Type u} [∀ n, CommRing (A n)]
     [∀ n, IsLocalRing (A n)] [∀ n, HasDerivedCategory.{v} (ModuleCat.{u} (A n))]
     {M : ∀ n, DerivedCategory (ModuleCat.{u} (A n))}
@@ -239,10 +233,8 @@ private def ScalarLevelModel.IsSucc {A : ℕ → Type u} [∀ n, CommRing (A n)]
       (ModuleCat.restrictScalars.{u} (ρ n)).mapDerivedCategoryFactors.inv.app x.matrix.complex ≫
         (ModuleCat.restrictScalars.{u} (ρ n)).mapDerivedCategory.map x.iso.hom = y.iso.hom ≫ f n
 
-/-- Extend a matrix model by lifting an invertible comparison and conjugating.
-Source: `ModuleCat.NormalizedPerfectTower.LevelModel.exists_isSucc`; its matrix argument
-works unchanged with the universe-general universal arrows above.
-(blueprint: lemma-perfect-complexes-over-oe). -/
+/-- Every matrix model extends to an adjacent one, obtained by lifting an invertible
+comparison and conjugating. -/
 private theorem scalar_level_succ {R : Type u} [CommRing R]
     {A : ℕ → Type u} [∀ n, CommRing (A n)] [∀ n, IsLocalRing (A n)]
     [∀ n, HasDerivedCategory.{v} (ModuleCat.{u} (A n))]
@@ -285,9 +277,7 @@ private theorem scalar_level_succ {R : Type u} [CommRing R]
     Category.assoc, Iso.inv_hom_id, Category.comp_id]
   simp only [Category.assoc]
 
-/-- The canonical associativity comparison for the derived restriction functors.
-Source: `ModuleCat.derivedRestrictScalarsCompIso`, with independent localization universe
-(blueprint: lemma-perfect-complexes-over-oe). -/
+/-- The canonical associativity comparison for the derived restriction functors. -/
 private def scalarRestrictionCompIso {R S T : Type u} [CommRing R] [CommRing S] [CommRing T]
     [HasDerivedCategory.{v} (ModuleCat.{u} R)] [HasDerivedCategory.{v} (ModuleCat.{u} S)]
     [HasDerivedCategory.{v} (ModuleCat.{u} T)] {f : R →+* S} {g : S →+* T} {gf : R →+* T}
@@ -298,9 +288,7 @@ private def scalarRestrictionCompIso {R S T : Type u} [CommRing R] [CommRing S] 
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (ModuleCat.restrictScalarsComp' f g gf hgf).symm
 
-/-- The restriction comparison identifies the two images of an actual composite chain map.
-Source: `ModuleCat.Q_map_restrictScalars_comp`, with independent localization universe
-(blueprint: lemma-perfect-complexes-over-oe). -/
+/-- The restriction comparison identifies the two images of an actual composite chain map. -/
 private theorem scalar_restriction_comp {R S T : Type u} [CommRing R] [CommRing S]
     [CommRing T] [HasDerivedCategory.{v} (ModuleCat.{u} R)]
     [HasDerivedCategory.{v} (ModuleCat.{u} S)] [HasDerivedCategory.{v} (ModuleCat.{u} T)]
@@ -345,10 +333,8 @@ private theorem scalar_restriction_comp {R S T : Type u} [CommRing R] [CommRing 
     Functor.mapDerivedCategoryFactors_hom_naturality_assoc, Iso.inv_hom_id_app_assoc,
     Functor.map_comp]
 
-/-- Reconstruct the bounded free model by strictifying finite levels and taking matrix limits.
-Source: blueprint proof (1), implemented with the adopted minimal-matrix and tower-limit APIs.
-All intermediate choices have proved existence; the integral differential is constructed entrywise.
-(blueprint: lemma-perfect-complexes-over-oe). -/
+/-- A compatible tower of perfect complexes has a bounded free integral model, obtained by
+strictifying finite levels and taking matrix limits. -/
 private theorem scalar_tower_from_complete {R : Type u} [CommRing R]
     {A : ℕ → Type u} [∀ n, CommRing (A n)] [∀ n, IsLocalRing (A n)]
     [HasDerivedCategory.{v} (ModuleCat.{u} R)]
@@ -426,15 +412,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- A compatible tower of perfect complexes over the positive coefficient quotients is
 represented by one bounded finite free integral complex. The maps in the conclusion are the
 universal arrows for the derived reductions, and the displayed equation is their compatibility
-with the given transition maps.
-
-Source: current blueprint, `lemma-perfect-complexes-over-oe`, statement and proof (1)
-(blueprint: lemma-perfect-complexes-over-oe).
-
-Proof: choose minimal finite free representatives over the local quotient rings. Their
-reductions are homotopy equivalent; reducing a homotopy equivalence modulo the maximal ideal
-makes its matrices invertible. Lift these matrices and conjugate inductively, then lift the
-compatible matrix entries through the complete coefficient ring. -/
+with the given transition maps. -/
 theorem integral_scalar_tower_lift
     (M : ∀ n : ℕ, DerivedCategory (ModuleCat.{u} (coefficientExtensionRing l E (n + 1))))
     (f : ∀ n : ℕ, M (n + 1) ⟶
@@ -517,9 +495,7 @@ theorem integral_scalar_tower_lift
 
 end Coefficients
 
-/-- Scalar multiplication on homology, via the linear short-complex homology functor.
-Source: Mathlib `ShortComplex.homologyMap_smul`; the scalar action used in blueprint
-`lemma-perfect-complexes-over-oe`, proof (2) (blueprint: lemma-perfect-complexes-over-oe). -/
+/-- Scalar multiplication on homology, via the linear short-complex homology functor. -/
 private theorem homologyMap_scalar_id {R : Type u} [CommRing R]
     (C : CochainComplex (ModuleCat.{u} R) ℤ) (i : ℤ) (r : R) :
     HomologicalComplex.homologyMap (r • 𝟙 C) i = r • 𝟙 (C.homology i) := by
@@ -528,14 +504,7 @@ private theorem homologyMap_scalar_id {R : Type u} [CommRing R]
   rfl
 
 /-- The images in cohomology of a bounded finite free integral complex stabilize at a
-uniform torsion rate for the actual quotient transitions.
-
-Source: current blueprint, `lemma-perfect-complexes-over-oe`, statement and proof (2)
-(blueprint: lemma-perfect-complexes-over-oe).
-
-Proof: the regular quotient exact sequence identifies the quotient cohomology with integral
-cohomology and the next cohomology's uniformizer torsion. The transition on the latter is
-multiplication by the intervening power, hence vanishes after the torsion exponent. -/
+uniform torsion rate for the actual quotient transitions. -/
 theorem integral_scalar_cohomology_images
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

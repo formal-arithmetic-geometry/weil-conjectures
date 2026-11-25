@@ -41,15 +41,7 @@ private theorem injective_aeval_prod
     exact hL (ha hxy)
 
 /-- Every eigenvalue of a positive power is a power of an eigenvalue. Scalars can be any
-quotient of an algebraically closed field, and the module need not be finite dimensional.
-Source: latest blueprint, infinity-reduction proof, eigenvalue power comparison
-(blueprint: lem-wft-infinity-eigenvalue-powers).
-
-Proof: lift the eigenvalue to the algebraically closed field and factor X^m minus that lift
-into its monic linear factors. If no root gave an eigenvalue of the original operator, each
-linear factor evaluated at the operator would be injective. Their product would be injective,
-contradicting the nonzero eigenvector of the power. Evaluation at the chosen root gives the
-claimed scalar power identity. This also covers the zero module and zero eigenvalues. -/
+quotient of an algebraically closed field, and the module need not be finite dimensional. -/
 theorem infinity_eigenvalue_power_preimage
     {K : Type u} [Field K] [IsAlgClosed K]
     {R : Type v} [CommRing R] (s : K →+* R) (hs : Function.Surjective s)
@@ -83,13 +75,7 @@ theorem infinity_eigenvalue_power_preimage
       sub_eq_zero.mpr hx.apply_eq_smul
   exact hx.2 (hinj (hz.trans (map_zero _).symm))
 
-/-- An intertwining linear equivalence preserves every eigenvalue.
-Source: latest blueprint, infinity-reduction proof, identification of geometric cohomology
-(blueprint: lem-wft-infinity-eigenvalue-powers).
-
-Proof: send a nonzero eigenvector through the equivalence; linearity preserves its
-scalar equation and injectivity preserves nonzeroness. Apply the same argument to
-the inverse equivalence for the reverse implication. -/
+/-- An intertwining linear equivalence preserves every eigenvalue. -/
 theorem infinity_eigenvalue_equiv
     {R : Type u} [CommRing R]
     {V : Type v} [AddCommGroup V] [Module R V]
@@ -118,14 +104,7 @@ theorem infinity_eigenvalue_equiv
       simpa using he
 
 /-- A positive power preserves the normalized eigenvalue bound when the cardinality is
-raised to the same power.
-Source: latest blueprint, infinity-reduction proof, first assertion
-(blueprint: lem-wft-infinity-eigenvalue-powers).
-
-Proof: every eigenvalue of the operator yields its m-th power for the powered operator,
-and the preceding factorization argument gives the converse. The norm of a power is the
-power of the norm. The nonnegative real power identity converts the cardinality bound,
-and the positive integer power is order-reflecting on nonnegative reals. -/
+raised to the same power. -/
 theorem infinity_eigenvalue_bound_power_iff
     {K : Type u} [Field K] [IsAlgClosed K]
     {R : Type v} [CommRing R] (s : K →+* R) (hs : Function.Surjective s)

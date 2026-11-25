@@ -16,18 +16,22 @@ public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 
 Let `Λ = 𝒪_E ⧸ ℓⁿ` and write `ρ_X = Rν_* ∘ Φ : D(Mod_{Λ_X}) ⥤ D(X_ét, Λ)` for the étale reading of
 condensed `Λ`-module objects (`ProEtale.CondensedRing.finiteEtaleReading` on bounded constructible
-complexes). This file proves the finite step (i) of blueprint `theorem-verdier-biduality` for
-the reductions `R K₀` of bounded constructible `𝒪_E`-complexes `K₀`: the étale reading is fully
-faithful on them, carries `R ω_{X, 𝒪_E}` to the étale dualizing complex and commutes with the
-internal homs into it, so the condensed Verdier dual `RHom(-, R ω_{X, 𝒪_E})` is fully faithful on
-these objects as soon as the étale one is on their étale readings, which is étale Verdier
-biduality. A fully faithful self-adjoint dual has invertible double-dual morphisms.
+complexes). This file proves finite-coefficient Verdier biduality on the pro-étale site for the
+reductions `R K₀` of bounded constructible `𝒪_E`-complexes `K₀`, assuming étale Verdier
+biduality.
 
 ## Main results
 
 - `ProEtale.CondensedRing.isIso_toIhomIhom_integersModPowReductionAmbient_of_etale`: if étale
   Verdier biduality holds on `Dctf(X_ét, Λ)`, then the double-dual morphism of `R K₀` relative to
   `R ω_{X, 𝒪_E}` is an isomorphism.
+
+## Implementation details
+
+The étale reading is fully faithful on the reductions, carries `R ω_{X, 𝒪_E}` to the étale
+dualizing complex and commutes with the internal homs into it, so the condensed Verdier dual
+`RHom(-, R ω_{X, 𝒪_E})` is fully faithful on these objects as soon as the étale one is on their
+étale readings. A fully faithful self-adjoint dual has invertible double-dual morphisms.
 -/
 
 @[expose] public section
@@ -102,9 +106,7 @@ omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- The condensed Verdier dual `D = RHom(-, W)` is bijective on morphisms `t ⟶ a` of bounded
 constructible condensed `𝒪_E ⧸ ℓⁿ`-complexes as soon as the étale reading `ρ_X` is bijective on
 morphisms `D a ⟶ D t` and the étale double-dual morphism of `ρ_X a` relative to `Ω ≅ ρ_X W` is
-an isomorphism: through `ρ_X`, which carries `D` to `RHom(-, Ω)`
-(`ProEtale.CondensedRing.finiteEtaleReadingIhomIso`), `D` becomes the étale dual on morphisms
-`ρ_X t ⟶ ρ_X a`, which is bijective (`CategoryTheory.MonoidalClosed.bijective_pre_app_of_isIso`). -/
+an isomorphism. -/
 lemma bijective_pre_app_of_finiteEtaleReading
     {a t W : Dᵇc(X.left)⟦Profinite.integersModPowRingObj ℓ E.1 n⟧}
     {Ω : DerivedCategory (Sheaf X.left.smallEtaleTopology
@@ -147,9 +149,7 @@ lemma isIso_toIhomIhom_finiteEtaleReading_integersModPowReduction
   rwa [Etale.verdierDualDoubleDual_app] at this
 
 /-- The Verdier dual `D = RHom(-, R ω_{X, 𝒪_E})` is bijective on morphisms `R L ⟶ R K` between
-reductions of bounded constructible `𝒪_E`-complexes, assuming étale Verdier biduality
-(`ProEtale.CondensedRing.bijective_pre_app_of_finiteEtaleReading`; the duals `D (R K)` are the
-reductions `R RHom(K, ω_{X, 𝒪_E})`, on which `ρ_X` is fully faithful). -/
+reductions of bounded constructible `𝒪_E`-complexes, assuming étale Verdier biduality. -/
 lemma bijective_pre_app_integersModPowReduction
     (hét : ∀ {M : DerivedCategory (Sheaf X.left.smallEtaleTopology
         (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E.1 n)))},
@@ -167,11 +167,10 @@ lemma bijective_pre_app_integersModPowReduction
       (integersModPowReductionIhomIso ℓ E n K (PadicIntegersRingObj.dualizingComplex ℓ E.1 X))
       (integersModPowReductionIhomIso ℓ E n L (PadicIntegersRingObj.dualizingComplex ℓ E.1 X)))
 
-/-- **Finite-coefficient biduality on the reductions of integral complexes** (blueprint
-`theorem-verdier-biduality`, (i)): if étale Verdier biduality holds on `Dctf(X_ét, Λ)`,
-`Λ = 𝒪_E ⧸ ℓⁿ`, then for every bounded constructible `𝒪_E`-complex `K₀` the double-dual morphism
-of its reduction `R K₀`, relative to the reduction `R ω_{X, 𝒪_E}` of the integral dualizing
-complex, is an isomorphism. -/
+/-- **Finite-coefficient biduality on the reductions of integral complexes**: if étale Verdier
+biduality holds on `Dctf(X_ét, Λ)`, `Λ = 𝒪_E ⧸ ℓⁿ`, then for every bounded constructible
+`𝒪_E`-complex `K₀` the double-dual morphism of its reduction `R K₀`, relative to the reduction
+`R ω_{X, 𝒪_E}` of the integral dualizing complex, is an isomorphism. -/
 theorem isIso_toIhomIhom_integersModPowReductionAmbient_of_etale
     (hét : ∀ {M : DerivedCategory (Sheaf X.left.smallEtaleTopology
         (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E.1 n)))},
