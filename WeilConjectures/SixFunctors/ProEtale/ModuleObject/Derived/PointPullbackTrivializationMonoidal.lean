@@ -117,8 +117,18 @@ private theorem mapModComp_monoidal (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
       ((Mod.comap (Functor.compAlgHom F G τ R)).obj ((H.mapMod R).obj M))
       ((Mod.comap (Functor.compAlgHom F G τ R)).obj ((H.mapMod R).obj N))) ht.symm
 
-set_option synthInstance.maxHeartbeats 100000 in
--- Tensor instances for both restrictions need this local elaboration budget.
+private noncomputable instance comapComp_lax [MonoidalClosed C] [HasEqualizers C]
+    {R S : C} [MonObj R] [MonObj S]
+    [IsCommMonObj R] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ] [IsIso φ] :
+    ((Mod.comap φ : Mod C S ⥤ Mod C R) ⋙
+      (Mod.comap (asIso φ).inv : Mod C R ⥤ Mod C S)).LaxMonoidal := by
+  let first : (Mod.comap φ : Mod C S ⥤ Mod C R).LaxMonoidal :=
+    (Mod.monoidal_comap φ).toLaxMonoidal
+  let second : (Mod.comap (asIso φ).inv : Mod C R ⥤ Mod C S).LaxMonoidal :=
+    (Mod.monoidal_comap (asIso φ).inv).toLaxMonoidal
+  exact @Functor.LaxMonoidal.comp _ _ _ _ _ _ _ _ _
+    (Mod.comap φ) (Mod.comap (asIso φ).inv) first second
+
 private theorem comap_unit_monoidal [MonoidalClosed C] [HasEqualizers C]
     {R S : C} [MonObj R] [MonObj S]
     [IsCommMonObj R] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ] [IsIso φ] :
