@@ -11,12 +11,13 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Composition.PodReindexingC
 
 /-! # Identity and composition laws for a normalized tensor family
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL and 07A4
-(blueprint: lem-pod-reindexing-tensor-family-identity-composition).
+A lawful family of normalized completion and tensor comparisons admits section-normalized
+identity and composition comparisons satisfying the relabelling, identity and composition laws.
+The tensor associator, braiding and unitor equations are treated separately.
 
-This is the identity/composition part of the fixed-family coherence argument. The
-remaining tensor associator, braiding and unitor equations are isolated in the
-companion tensor-constraints statement.
+## References
+
+* [Stacks, Tags 03EL, 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -238,16 +239,8 @@ private theorem ordinaryComposition_sections {V W Z : Scheme.{u}}
 
 /--
 Section-normalized identity and composition comparisons exist for every fixed family
-of completion and tensor reindexings satisfying their component laws. The identity
-comparison is induced by `MorphismProperty.Over.mapId` on sections. The compositor
-is induced by `MorphismProperty.Over.mapComp`. Their coefficient maps agree after
-each quotient projection, and the projections jointly detect completed sections;
-therefore both are module isomorphisms. Localization gives the reduction and limit
-equations, while the tensor generator formula gives the tensor equation. Naturality
-and inverse laws follow from the site isomorphism identities. Empty sites and zero
-objects are covered by the same formulas.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4 (blueprint: lem-pod-reindexing-tensor-family-identity-composition).
+of completion and tensor reindexings satisfying their component laws, and the resulting
+family satisfies the relabelling, identity and composition laws.
 -/
 theorem podReindexingTensorFamilyIdentityComposition
     (completion : ∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]

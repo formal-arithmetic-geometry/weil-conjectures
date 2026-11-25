@@ -21,8 +21,24 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensor
 
 /-! # Projection-normalized reindexing of completion and completed tensor
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-completion-unit-tensor).
+For an isomorphism of schemes `g : X ⟶ Y`, projection-normalized ordinary reindexing is
+constructed compatibly with completion and completed tensor, together with identity,
+composition, signed-shift, coefficient-transition and substitution coherences.
+
+## Implementation details
+
+The construction proceeds via exact sectionwise coefficient-module equivalences, which induce
+exact equivalences on strict systems. On flat-term K-flat representatives the quotient
+comparison sends `p ⊗ b` to `Fp ⊗ Fb`; countable products are reindexed by their projections,
+compatibly with the shift operator `s`, giving a map of `Cone(1 - s)[-1]` which is the
+total-derived-limit comparison. The completion augmentation is the identity-scalar case of the
+finite-free scalar comparison, and normalized reconstruction makes its unit invertible on
+derived-complete inputs. Signed shifts arise from the factor `(-1)^r` on the second cone
+coordinate. No boundedness is used, and empty schemes are allowed.
+
+## References
+
+* Stacks Project, Tags 03EL, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -132,23 +148,9 @@ private theorem podRoosBoundary_reindex (D : PodCompletionReindex l E g) :
     Preadditive.comp_sub, Pi.lift_comp_π, Pi.lift_comp_π_assoc]
   rfl
 
-/-- The ambient reduction and completion assertion with independent scheme and coefficient
-universes. Completeness is required only to invert the specified unit and pullback map.
-Source: blueprint theorem-poincare-duality-frobenius--2, proof Steps 1 and 5;
-Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-completion-unit-tensor).
-
-Proof: the projection-normalized coefficient isomorphisms give exact inverse equivalences
-on strict systems. On a single flat-term K-flat representative the quotient comparison
-sends p tensor b to Fp tensor Fb, compatibly with each quotient transition. Projection-defined
-product comparison commutes with 1-s, and its diagonal map on both shifted-cone coordinates
-is the normalized total-derived-limit comparison. Derive the ordinary tensor/limit Hom
-bijection on simultaneous K-flat and K-injective representatives; its reindexing identity
-identifies the actual unit and counit as whole-system maps. For E=E the finite-free scalar
-comparison identifies the completion augmentation with this unit. Normalized reconstruction
-makes it invertible on every derived-complete input. Composing its inverse-image map with
-the specified limit comparison and pullback realization gives the displayed isomorphism.
-The diagonal cone map commutes with signed shifts because the second shift coordinate is
-multiplied by (-1)^r. These are node proof steps 1--5 and the shift calculation of step 8. -/
+/-- For an isomorphism `g : X ⟶ Y` (with independent scheme and coefficient universes), there
+is a completion reindexing `D` satisfying the laws, whose ordinary-to-completed map is an
+isomorphism on every derived-complete complex. -/
 theorem podReindexingCompletionUnit {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] :
@@ -175,42 +177,11 @@ theorem podReindexingCompletionUnit {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
       hSY, hSX, hshift, hres, hlimit, hpullback⟩
   · exact podOrdinaryToCompleted_isIso l E g D (podCompleteUnit l E g D)
 
-/-- Projection-normalized ordinary reindexing commutes with completion and completed tensor.
-
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4, 0941
-(blueprint: lem-pod-reindexing-completion-unit-tensor).
-
-Proof: use the exact sectionwise coefficient-module equivalences at R and every B_n.
-Their projection squares induce an exact equivalence on whole semilinear systems;
-its inverse transports acyclic complexes, hence the defining null-homotopies of
-K-injectivity. On simultaneous flat-term K-flat resolutions send p tensor b to
-Fp tensor Fb. The same formula commutes with each quotient arrow and every chain
-map, so it localizes to the specified coherent reduction comparison. Reindex
-countable products by their projections. This commutes with the shift operator s,
-so the diagonal map on the two product coordinates is a map of Cone(1-s)[-1].
-Reverse relabelling is its inverse. The K-injective limit-to-Roos comparison
-identifies this map with the total derived limit comparison. Transport the
-ordinary tensor/restriction adjunction before deriving: its generator formula
-identifies both unit and counit, including their whole-system maps. The original
-completion augmentation is the identity-scalar normalization of the finite-free
-scalar comparison. Normalized reconstruction therefore makes its actual unit
-invertible precisely on complete inputs. The specified F(unit), limit comparison,
-and inverse pullback realization give the asserted ordinary-to-completed map.
-For tensor, reindex each summand of simultaneous flat K-flat total tensors. The
-formula commutes with the signed total differential and quotient maps. Applying
-the same two-coordinate Roos map gives the displayed tensor comparison and its
-reverse-reindexing inverse. Its finite generator formula is the prescribed finite
-pullback/tensor comparison; the normalized whole-system reduction square then
-identifies it with the prescribed integral comparison. Naturality descends along
-roofs. On three homogeneous factors both reassociation routes agree, and both
-symmetry routes give (-1)^(pq) Fy tensor Fx. Identity and composition are literal
-successive relabellings with the canonical coefficient/projection transports.
-The shifted second cone coordinate has (-1)^r, giving the two displayed signed
-shift equations. Finally apply completed-operation substitution to these same
-normalized primitives: its coherent counit formulas retain all quotient arrows,
-and its structural squares give the functorial realizations of these equations.
-This argument uses no boundedness and applies also to empty schemes. -/
+/-- Projection-normalized ordinary reindexing commutes with completion and completed tensor:
+there is a reindexing family `A` satisfying the relabelling, identity and composition laws,
+whose completion and tensor reindexings along every isomorphism satisfy their laws (with the
+ordinary-to-completed map invertible on derived-complete and on constructible complexes),
+together with signed-shift compatibility, coefficient transitions and substitution. -/
 theorem podReindexingCompletionUnitTensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] :

@@ -7,10 +7,19 @@ module
 
 public import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensorCoefficientTransitionDescentData
 
-/-! # Completed tensor square for scalar/reindexing transitions
+/-! # Reindex normalization for scalar/reindexing tensor descent
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-tensor-reindex-normalization).
+The reindexing tensor chain on a pair of good constructible representatives is identified with
+the completed tensor comparisons and the derived factor maps of reindexing.
+
+## Implementation details
+
+The proof applies the tensor reindexing law of `T` to the chosen good constructible pair and
+reassociates the fixed comparison maps.
+
+## References
+
+* Stacks Project, Tags 03EL, 05RU, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -56,11 +65,10 @@ attribute [local implicit_reducible] podOrdinaryReindex podGoodReindex
   podTensorTensorReindexDerivedChain
   podTensorTensorScalarDerivedChain podTensorTensorMixedDerivedChain
 
-/-- A representative step of the scalar/reindexing tensor descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-tensor-reindex-normalization).
-Proof: Apply the tensor Model law to the chosen good constructible pair. The localization and
-    reindexing factors are the specified ones. Reassociate the fixed comparison maps. -/
+/-- Reindex normalization on representatives: for good constructible `P, Q`, the completed tensor
+comparison followed by the reindexing derived chain equals the reindexed tensor comparison, the
+tensor of the reindexing factor maps, and the completed tensor comparison at the reindexed
+pair. -/
 theorem podTensorReindexRepresentativeNormalization
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

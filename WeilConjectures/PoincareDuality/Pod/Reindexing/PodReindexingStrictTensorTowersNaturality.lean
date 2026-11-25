@@ -10,12 +10,16 @@ import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorLeve
 
 /-! # Naturality part of strict tensor tower reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-reindexing-strict-tensor-towers-naturality).
+## Implementation details
 
-The quotient normalization fixes the comparison on reduced original-section
-generators. Tensor extensionality and the tensor-map formula then prove the
-naturality square before any derived limit is taken.
+The quotient-generator normalization is required: an arbitrary objectwise family of quotient
+isomorphisms need not be natural. It fixes the comparison on reduced original-section generators,
+and tensor extensionality and the tensor-map formula then prove the naturality square before any
+derived limit is taken.
+
+## References
+
+* [Stacks: Tags 00WX, 012Z, 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -53,9 +57,7 @@ attribute [local implicit_reducible] integralOperationsTensorTowerFunctor
   SheafOfModules.pushforward PresheafOfModules.pushforward PresheafOfModules.pushforward₀
   PresheafOfModules.pushforward₀Obj
 
-/-- Evaluation of the strict tensor tower on a morphism is its finite-level map.
-Source: the strict tower construction, Stacks 012Z
-(blueprint: lem-pod-reindexing-strict-tensor-towers-naturality). -/
+/-- Evaluation of the strict tensor tower on a morphism is its finite-level map. -/
 private theorem tensorTower_map_app (W : Scheme.{u}) (n : ℕ)
     {P Q P' Q' : CochainComplex (integralTowerModules l E W) ℤ}
     (a : P ⟶ P') (b : Q ⟶ Q') :
@@ -63,9 +65,7 @@ private theorem tensorTower_map_app (W : Scheme.{u}) (n : ℕ)
       (integralOperationsTensorLevel l E W n).map (Prod.mkHom a b) := by
   rfl
 
-/-- Reindexing leaves the underlying section map unchanged.
-Source: sectionwise inverse image along a site isomorphism, Stacks 00WX
-(blueprint: lem-pod-reindexing-strict-tensor-towers-naturality). -/
+/-- Reindexing leaves the underlying section map unchanged. -/
 private theorem reindexTower_map_section {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     {S T : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E Y) ℤ} (a : S ⟶ T)
     (n : ℕ) (k : ℤ) (U : X.ProEt)
@@ -74,19 +74,9 @@ private theorem reindexTower_map_section {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso
       (((a.app (op n)).f k).val.app (op ((proEtaleIsoPostcompose g).obj U))) x := by
   rfl
 
-/-- Naturality of a generator-compatible strict tower family.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-reindexing-strict-tensor-towers-naturality).
-STATEMENT-DISPUTED: the former signature omitted quotient normalization; repaired here.
-The quotient-generator normalization is required: an arbitrary objectwise
-family of quotient isomorphisms need not be natural. At scalar one it identifies
-reduced original sections under D.quotient. The assumed tensor formula therefore
-computes τ on tensors of these sections. Precompose the desired equality with
-τ inverse, apply finite tensor extensionality, and use the inverse formula deduced
-from τ hom-inverse cancellation. The tensor-map and reduction-map formulas send
-both composites to the tensor of the same two mapped sections. Tower and complex
-extensionality finish. This includes zero complexes, zero sections, and the empty site.
--/
+/-- If `D` satisfies the quotient-generator normalization, then any family `τ` of strict tensor
+tower isomorphisms satisfying the pure-tensor generator formula `hgen` is natural in maps `a`, `b`
+of good representatives. -/
 theorem podReindexingStrictTensorTowersNaturality
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

@@ -11,8 +11,9 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingGoodComplex
 
 /-! # Reindexing the actual restricted coherent tower
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-restricted-tower).
+## References
+
+* [Stacks: Tags 03D6, 03EL, 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -41,14 +42,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
-/-- The actual sequence-pullback unit identifies the full restricted strict towers.
-Source: Stacks 03D6, 0941 (blueprint: lem-pod-reindexing-restricted-tower).
-
-Proof: identify the completed coefficient maps by all projections. The existing
-whole-tower inverse-image unit then gives the comparison on system modules, with
-the stated section formula. Apply it in every cochain degree and convert a complex
-of towers to a tower of complexes. Naturality ensures all differentials and quotient
-transitions commute. The section formula remains the original adjunction-unit formula. -/
+/-- The sequence-pullback unit identifies the reindexed restricted strict tower of `C` with the
+restricted tower of the pulled-back complex, by an isomorphism given on restricted sections by
+the adjunction-unit formula. -/
 theorem podReindexingRestrictedTower :
     ∃ e : ∀ C : CochainComplex (coefficientSequenceModules l E Y) ℤ,
       (podReindexTower l E g).obj (podRestrictedTower l E C) ≅
