@@ -14,7 +14,23 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Comparing the horseshoe connecting map with the constructed Tor boundary
 
-Source: Stacks Project, Algebra, Tags 00M0 and 00LZ; Homology, Tag 0111.
+We show that the connecting map of an augmentation-compatible split sequence of projective
+resolutions, transported to Tor and the tensor of the kernel, is the negative of the explicit
+boundary `torKernelBoundary`.
+
+## Implementation details
+
+Lift the augmentation of the chosen resolution `P` of `N` to a comparison `c : P ⟶ C` and lift
+`c` in degrees zero and one through `b`. The resulting defect factors through `a`, and the
+homology snake formula identifies the connecting map on a cycle with the negative explicit
+boundary. The explicit map kills boundaries, so the cycle equality descends to homology. No
+projectivity of `F` is used.
+
+## References
+
+* [Stacks, Tag 00M0]
+* [Stacks, Tag 00LZ]
+* [Stacks, Tag 0111]
 -/
 
 @[expose] public section
@@ -26,30 +42,7 @@ namespace CategoryTheory
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The connecting map of any augmentation-compatible split resolution sequence,
-transported to Tor and the tensor of the kernel, is the negative of the explicit boundary.
-
-Source: Stacks Project, Algebra, Tags 00M0 and 00LZ; Homology, Tag 0111.
-
-Proof: Let P be the chosen projective resolution of N. Lift its augmentation to a
-comparison c : P -> C. Use the degreewise sections of b to lift c in degrees zero
-and one to maps l0 : P0 -> B0 and l1 : P1 -> B1. The chain identity for c shows
-that dB l1 - l0 dP lies in ker b0, hence factors uniquely through a0, say as a0 t.
-The augmentation identities imply i epsilonA t = -epsilonB l0 dP. Therefore
- epsilonA t is the negative kernel restriction of the differential lifted using
- e0 = epsilonB l0. The chosen lift e used by torKernelBoundary differs from e0
-by a map k : P0 -> ker q. Thus on a tensor cycle z the two explicit boundaries
-agree, since their difference is (k tensor 1)(dP tensor 1)(z) = 0.
-
-The tensor of l1 lifts (c1 tensor 1)(z). Its differential equals (a0 tensor 1)
-(t tensor 1)(z), so the homology snake formula sends the class of that cycle to
-[(t tensor 1)(z)]. Applying the augmentation of A gives the negative explicit
-boundary. In degree zero, homology inclusion followed by fromLeftDerivedZero'
-is exactly the map induced by that augmentation. Resolution comparison in degree
-one identifies the induced map of c with the Tor-to-homology isomorphism for C.
-Every homology class has a cycle representative, and the explicit map kills
-boundaries by torKernelTensor_boundary. Consequently this cycle equality descends
-to the displayed equality of maps. This argument uses no projectivity of F.
-(blueprint: lem-sc-p1-tor-kernel-boundary-horseshoe-comparison) -/
+transported to Tor and the tensor of the kernel, is the negative of the explicit boundary. -/
 theorem tor_kernel_boundary_horseshoe_comparison
     (R : Type u) [CommRing R] (M : ModuleCat.{u} R)
     (F N : ModuleCat.{u} R) (q : F →ₗ[R] N) (hq : Function.Surjective q)

@@ -49,9 +49,17 @@ The pasting laws for the base change maps of horizontally or vertically composed
 follow from `CategoryTheory.mateEquiv_vcomp` and `CategoryTheory.mateEquiv_hcomp` together
 with the coherence of `AlgebraicGeometry.Etale.upperStarComp`; they are left to a later
 file.
-(blueprint: `def:weil-pbc-cartesian-square`, `definition-underived-base-change-map--1`,
-`prose-04-05`)
 
+## Implementation details
+
+A local section of `g^* f_* F` cannot in general be represented by a section on `V ×_{Y'} Y`,
+the square supplying no morphism `Y ⟶ Y'`; this is why the base change map is defined
+categorically, through unit, square isomorphism and counit, and not by a sectionwise rule.
+
+A cartesian square is a `CategoryTheory.IsPullback` square; the compatibilities of the square
+isomorphism with identities and with pasting are `AlgebraicGeometry.Etale.squareUpperStarIso_id`,
+`AlgebraicGeometry.Etale.squareUpperStarIso_paste_horiz_hom` and
+`AlgebraicGeometry.Etale.squareUpperStarIso_paste_vert_hom`.
 -/
 
 @[expose] public section
@@ -71,16 +79,9 @@ section Square
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- Blueprint `definition-underived-base-change-map`: Cartesian square and chosen pullback
-identification, the square isomorphism.
-
-The square isomorphism `g^* ⋙ f'^* ≅ f^* ⋙ g'^*` attached to a commutative square
+/-- The square isomorphism `g^* ⋙ f'^* ≅ f^* ⋙ g'^*` attached to a commutative square
 `g' ≫ f = f' ≫ g`: both sides are identified with the pullback along the diagonal
-`g' ≫ f = f' ≫ g` by `AlgebraicGeometry.Etale.upperStarComp`. A cartesian square is a
-`CategoryTheory.IsPullback` square; the compatibilities with identities and with pasting are
-`AlgebraicGeometry.Etale.squareUpperStarIso_id`,
-`AlgebraicGeometry.Etale.squareUpperStarIso_paste_horiz_hom` and
-`AlgebraicGeometry.Etale.squareUpperStarIso_paste_vert_hom`. -/
+`g' ≫ f = f' ≫ g` by `AlgebraicGeometry.Etale.upperStarComp`. -/
 noncomputable def Etale.squareUpperStarIso (sq : CommSq g' f' f g) :
     (g)^*[A] ⋙ (f')^*[A] ≅ (f)^*[A] ⋙ (g')^*[A] :=
   (Etale.upperStarComp A f' g (g' ≫ f) sq.w).symm ≪≫ Etale.upperStarComp A g' f
@@ -88,9 +89,7 @@ noncomputable def Etale.squareUpperStarIso (sq : CommSq g' f' f g) :
 /-- **The base change map** `g^* f_* ⟶ f'_* g'^*` of a commutative square, as a natural
 transformation `f_* ⋙ g^* ⟶ g'^* ⋙ f'_*`: the mate of the square isomorphism
 `AlgebraicGeometry.Etale.squareUpperStarIso` with respect to the adjunctions `f^* ⊣ f_*` and
-`f'^* ⊣ f'_*`. A local section of `g^* f_* F` cannot in general be represented by a section
-on `V ×_{Y'} Y`, the square supplying no morphism `Y ⟶ Y'`; this is why the map is defined
-categorically, through unit, square isomorphism and counit, and not by a sectionwise rule. -/
+`f'^* ⊣ f'_*`. -/
 noncomputable def Etale.baseChangeMap (sq : CommSq g' f' f g) :
     (f)_*[A] ⋙ (g)^*[A] ⟶ (g')^*[A] ⋙ (f')_*[A] :=
   (mateEquiv (Etale.upperStarLowerStarAdjunction A f)
@@ -128,8 +127,7 @@ lemma Etale.map_unit_baseChangeMap_app (sq : CommSq g' f' f g)
   unit_mateEquiv _ _ _ G
 
 omit [HasSmallSiteSheafify A] in
-/-- **Naturality of the base change map** in the sheaf.
-(blueprint: `prose-04-05`) -/
+/-- **Naturality of the base change map** in the sheaf. -/
 lemma Etale.baseChangeMap_naturality (sq : CommSq g' f' f g)
     {F F' : Sheaf X.smallEtaleTopology A} (u : F ⟶ F') :
     ((g)^*[A]).map (((f)_*[A]).map u) ≫ (Etale.baseChangeMap A sq).app F' =

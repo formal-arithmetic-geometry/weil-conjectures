@@ -18,8 +18,17 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 
 /-! # Tensor closure of native finite open support
 
-Source: Stacks, Modules on Sites, Tag 0E8I.
-(blueprint: lem-coef-native-finite-tensor-support).
+We show that tensoring a native finite extension from an open by an ambient module stays in
+the essential image of the extension.
+
+## Implementation details
+
+No tensor compatibility for the slice equivalence is needed. The statement covers empty
+opens, zero modules and the first positive quotient `n = 0`.
+
+## References
+
+* [Stacks, Tag 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -32,18 +41,7 @@ open CategoryTheory.MonoidalCategory
 open WeilConjectures.SemilinearSections
 namespace WeilConjectures.CoefSupportOpenTensor
 
-/-- Tensoring a native finite extension by an ambient module stays in its essential image.
-Source: Stacks, Modules on Sites, Tag 0E8I (lemma-j-shriek-and-tensor).
-(blueprint: lem-coef-native-finite-tensor-support).
-
-Proof: the native extension is an equivalence from open modules to slice modules,
-followed by localized extension. On the slice the extension/tensor isomorphism
-identifies the ambient tensor with extension of the sheafified tensor of the open
-module and the restricted ambient module. Apply the inverse equivalence to this
-slice tensor to obtain an open witness. The counit of the equivalence and the
-slice tensor isomorphism identify its extension with the desired tensor.
-No tensor compatibility for the equivalence is needed. This applies equally to
-empty opens, zero modules and the first positive quotient n=0. -/
+/-- Tensoring a native finite extension by an ambient module stays in its essential image. -/
 theorem nativeFiniteTensor_mem_essImage
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

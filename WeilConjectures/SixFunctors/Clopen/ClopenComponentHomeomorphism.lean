@@ -17,10 +17,26 @@ import WeilConjectures.SixFunctors.Supporting.ProfiniteClopenPullback
 /-!
 # Clopen inverse images and spectral connected-component spaces
 
-Source: agent consequence of Stacks Project, `topology.tex`, Tags 0906
-(lemma-spectral-pi0), 005F (lemma-connected-component-intersection), and 08ZZ
-(lemma-profinite-refine-open-covering)
-(blueprint: lem-sfb-spectral-clopen-component-homeomorphism).
+A continuous map of spectral spaces whose inverse-image map on clopens is bijective induces a
+homeomorphism of connected-component quotients.
+
+## Implementation details
+
+Clopens descend bijectively through the connected-component quotient, since every clopen is
+a union of connected components, and this descent is natural in continuous maps. The
+component quotients of spectral spaces are profinite, so they have a clopen basis. This gives
+injectivity of the induced map; surjectivity follows by a compactness argument with a finite
+clopen cover, and openness from the clopen basis.
+
+## References
+
+* [Stacks, Tag 004T]
+* [Stacks, Tag 005F]
+* [Stacks, Tag 0376]
+* [Stacks, Tag 08ZL]
+* [Stacks, Tag 08ZZ]
+* [Stacks, Tag 0900]
+* [Stacks, Tag 0906]
 -/
 
 @[expose] public section
@@ -29,9 +45,8 @@ universe u v w
 
 namespace ConnectedComponents
 
-/-- The saturation and quotient-topology argument of Stacks Tag 0900, together with
-surjectivity of the component projection, proves clopen descent for an arbitrary space.
-This packages steps 4 and 5 of `lem-sfb-component-quotient-clopen-naturality`. -/
+/-- Clopen descent for an arbitrary space: inverse image under the component projection is a
+bijection on clopens, and every clopen is saturated with clopen image. -/
 private theorem clopen_descent_aux (Z : Type w) [TopologicalSpace Z] :
     Function.Bijective
       (fun V : TopologicalSpace.Clopens (ConnectedComponents Z) ↦
@@ -60,34 +75,7 @@ private theorem clopen_descent_aux (Z : Type w) [TopologicalSpace Z] :
 /-- Clopens descend bijectively through the connected-component quotient, with inverse
 given by set image. The uniquely normalized continuous component map makes this descent
 natural, so bijectivity on clopens is equivalent before and after taking components.
-The spaces may be empty and need not satisfy any separation or compactness condition.
-
-Source: Stacks Project, `topology.tex`, Tag 0900 (lemma-pi0-profinite), clopen saturation
-passage, with Tags 004T, 0376, and 08ZL, expanded by the agent naturality calculation.
-(blueprint: lem-sfb-component-quotient-clopen-naturality)
-
-Proof for stage 3:
-1. By lem-sfb-connected-component-maximality, the connected component of x contains x,
-is connected, and contains every connected set through x. Mutual containment shows that
-these components partition the space. Mathlib's `ConnectedComponents` is their quotient.
-2. A continuous map sends connected sets to connected sets (def-weil-connected-scheme,
-applied to the inverse images of a clopen partition). Maximality therefore sends the
-component of x into that of f(x). This gives the normalized map h; surjectivity of mk
-makes it the unique normalized map.
-3. An open subset of the target quotient has open preimage under mk. Its preimage under
-h pulls back along the source mk to its preimage under f. The quotient topology proves
-h continuous, and also makes each mk continuous.
-4. If U is clopen and x lies in U, its intersection with the component of x is a nonempty
-relatively clopen subset of that connected component. Connectedness forces the whole
-component into U. Thus mk inverse image of mk image of U equals U.
-5. The quotient topology, applied to this identity and its complement, makes mk image
-of U clopen. Inverse image under mk preserves clopens. Surjectivity gives the other
-inverse identity, so these operations are inverse bijections.
-6. Membership of x in the two sides of the naturality equality means respectively
-h(mk x) belongs to V and mk(f x) belongs to V. Normalization identifies these conditions.
-7. Naturality expresses each clopen inverse-image map as the conjugate of the other by
-the two quotient clopen bijections. Conjugation preserves and reflects bijectivity.
-For an empty space there is one clopen, the empty subset, and the same arguments apply. -/
+The spaces may be empty and need not satisfy any separation or compactness condition. -/
 theorem clopen_descent_naturality
     {X : Type u} {Y : Type v} [TopologicalSpace X] [TopologicalSpace Y]
     (f : X → Y) (hf : Continuous f) :
@@ -148,35 +136,7 @@ end ConnectedComponents
 
 /-- A continuous map of spectral spaces whose inverse-image map on clopens is bijective
 induces a homeomorphism of connected-component quotients, normalized by the quotient maps.
-No nonemptiness assumption is imposed.
-
-Source: agent consequence of Stacks Project, `topology.tex`, Tags 0906
-(lemma-spectral-pi0), 005F (lemma-connected-component-intersection), and 08ZZ
-(lemma-profinite-refine-open-covering)
-(blueprint: lem-sfb-spectral-clopen-component-homeomorphism).
-
-Proof for stage 3:
-1. A continuous map sends each connected component into a connected component. The induced
-map `h = hf.connectedComponentsMap` satisfies `h ∘ q_T = q_S ∘ f`; the quotient topology
-makes it continuous, and surjectivity of `q_T` makes it the unique normalized map.
-2. By `lem-pe-spectral-components-profinite`, both component quotients are compact Hausdorff
-and totally disconnected. Apply `lem-weil-pbc-profinite-clopen-basis` to both quotients.
-3. Every clopen of any space is a union of its connected components. Thus inverse image
-under the quotient map bijects the clopens of the quotient with the clopens of the space:
-the inverse sends a saturated clopen to its image, which is clopen by the quotient topology.
-The normalization conjugates the given clopen-preimage bijection to that of `h`.
-4. Distinct points of the source quotient can be separated by a clopen, using the clopen
-basis. Express that clopen as an inverse image under `h`; its two points must have distinct
-images. Hence `h` is injective.
-5. If a point `y` of the target quotient is outside the image, choose around every image
-point a clopen excluding `y`. Their inverse images cover the compact source quotient, so
-finitely many suffice. Their finite union `V` excludes `y` but contains the image. Thus
-`h` has equal inverse images of `V` and the whole target, contradicting injectivity on
-clopens. This argument permits the empty finite cover when the source is empty.
-6. Every clopen of the source quotient is `h`-preimage of a target clopen. Bijectivity of
-`h` identifies its image with that target clopen. The clopen basis then shows `h` is open,
-so its inverse is continuous. This proves the homeomorphism and the stated normalization.
-If the target quotient is empty, the existence of `h` forces the source quotient empty. -/
+No nonemptiness assumption is imposed. -/
 theorem isHomeomorph_connectedComponentsMap_of_bijective_clopen_preimage
     {T : Type u} {S : Type v} [TopologicalSpace T] [TopologicalSpace S]
     [SpectralSpace T] [SpectralSpace S] {f : T → S} (hf : Continuous f)

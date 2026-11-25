@@ -17,12 +17,23 @@ import WeilConjectures.RingTheory.TorsionHomFlatComparison
 /-!
 # Descent of extensions with an ideal-power torsion quotient
 
-Source: Stacks Project, Dualizing Complexes, Lemma 05EH (blueprint:
-lem-weil-pbc-torsion-extension-flat-descent).
+Let `R → S` be flat with `R/I ≅ S/IS`, and let `Q` be `I`-power torsion. Every extension of
+`S ⊗[R] Q` by `S ⊗[R] N` descends to an extension of `Q` by `N` over `R`.
+
+## Implementation details
 
 Base change is written `S ⊗[R] M`, as in Mathlib's tensor product API; this is
-canonically the source's `M ⊗[R] S`. Exactness is expressed by injectivity,
+canonically the Stacks Project's `M ⊗[R] S`. Exactness is expressed by injectivity,
 `Function.Exact`, and surjectivity of the two linear maps.
+
+The proof chooses a surjection `P = ⨁ j, R/I^(n j) → Q` with torsion kernel `K`, descends
+the pulled-back extension on each cyclic summand and assembles them, descends the canonical
+lift of `K` by torsion Hom comparison, and takes the quotient by its image.
+
+## References
+
+* [Stacks, Tag 05EH]
+* [Stacks, Tag 05ER]
 -/
 
 @[expose] public section
@@ -34,37 +45,9 @@ open TensorProduct
 namespace LinearMap
 
 /--
-Source: Stacks Project, Dualizing Complexes, Lemma 05EH, in the form used in
-the proof of More on Algebra, Proposition 05ER
-(blueprint: lem-weil-pbc-torsion-extension-flat-descent).
-
-The hypotheses say that `S` is flat over `R`, that `R/I → S/IS` is an
-isomorphism, and that `Q` is `I`-power torsion.  The conclusion constructs an
-extension of `Q` by `N` whose base change is the given extension, together
-with an isomorphism preserving both end maps.
-
-Proof:
-1. Choose a surjection `P = ⨁ j, R/I^(n j) → Q` with torsion kernel `K`
-   (lem-weil-pbc-torsion-cyclic-presentation). Flat tensor exactness and tensor
-   right exactness identify `K_S` with the kernel of `P_S → Q_S`.
-2. Pull back the given extension to `P_S`: its middle module is the pairs
-   `(m,x)` with `π(m) = p_S(x)`. Its injection sends `n` to `(ι(n),0)`.
-   Descend each cyclic summand by lem-weil-pbc-cyclic-extension-flat-descent,
-   then assemble them by lem-weil-pbc-direct-sum-extension-assembly. Obtain
-   an extension `N → E_P → P` and an extension isomorphism `α : (E_P)_S ≃ T`.
-3. The kernel has the canonical lift `z ↦ (0,k_S(z))` into `T`. Transport
-   this through `α`. Torsion Hom comparison (lem-weil-pbc-torsion-hom-flat-comparison)
-   descends it to `s : K → E_P`; injectivity of the same comparison gives
-   `b s = k`. Thus `s` is injective and its image meets the image of `N` trivially.
-4. Put `E = E_P/s(K)` (def-weil-pbc-quotient-module). The injection of `N`
-   stays injective by step 3. The map `p b` kills `s(K)` and induces `q`.
-   Surjectivity follows from that of `p` and `b`. If `q([e]) = 0`, write
-   `b(e) = k(z)`; then `e-s(z)` lies in the image of `N`, proving exactness.
-5. Flat tensor exactness and tensor right exactness identify `E_S` with
-   `(E_P)_S/s_S(K_S)`. Under `α` the submodule being quotiented is precisely
-   the kernel of the surjective projection `T → M'`. This gives `θ`.
-   The formula `α(a_S(n)) = (ι(n),0)` gives `θ j_S = ι`; the defining
-   equation of `T` gives `π θ = q_S`, as required. -/
+Let `S` be flat over `R`, with `R/I → S/IS` an isomorphism, and let `Q` be `I`-power
+torsion. Then every extension `0 → S ⊗[R] N → M' → S ⊗[R] Q → 0` is the base change of an
+extension of `Q` by `N` over `R`, via an isomorphism preserving both end maps. -/
 theorem exists_torsion_extension_flat_descent
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (hflat : (algebraMap R S).Flat) (I : Ideal R) (hI : I.FG)

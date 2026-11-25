@@ -15,8 +15,19 @@ import all WeilConjectures.AlgebraicGeometry.System.SystemOrdinaryTensorReductio
 
 /-! # Evaluation of the normalized restriction tensor comparison
 
-Source: Stacks 07A4 and 0941; support-open-tensor steps 5--6.
-(blueprint: lem-coef-native-restriction-tensor-evaluation).
+We show that finite-level evaluation commutes with the tensor comparison for open inverse
+image.
+
+## Implementation details
+
+The statement concerns only restriction and tensor, before taking an open-extension mate,
+and uses neither an open tensor projection nor its evaluation equation.
+
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 03EK]
 -/
 
 @[expose] public noncomputable section
@@ -301,27 +312,7 @@ private theorem ordinary_restriction_square {X Z : Scheme.{u}} (j : X ⟶ Z)
     (H₄.trans (H₅.trans (h₆.trans (H₆.trans h₉)))))))
 
 /-- Evaluation commutes with the tensor comparison for open inverse image.
-This concerns only restriction and tensor, before taking an open-extension mate.
-Source: Stacks 07A4, sites-cohomology-lemma-pullback-tensor-product;
-Stacks 03EK, sites-modules-section-tensor-product;
-support-open-tensor steps 5--6 and the recorded evaluation tensor normalization.
-(blueprint: lem-coef-native-restriction-tensor-evaluation).
-
-Proof: choose flat-term K-flat representatives of M and N. On ordinary module
-sheaves, precompose the two maps with inverse image of the pure-tensor section
-and the inverse-image adjunction unit. The restrictionPure equations for O and
-On, the unit normalization of moduleEvalG, and the pure-tensor normalization of
-coefficientEvaluationTensorIso identify both outputs with the tensor of the two
-pulled, evaluated sections. The inverse-image adjunction and tensor
-sheafification show equality of these ordinary maps. On each total summand of
-bidegree (a,b), use the same ordinary equality; evaluation preserves direct sums
-and the signed differential, so the cochain maps agree. The restrictionModel
-fields and evaluationTensor_normalization identify their localizations with the
-two displayed composites. Cancel the tensor-model and exact-functor
-factorization isomorphisms. Finally naturality along the resolving
-quasi-isomorphisms gives the square for M and N. This uses neither an open
-tensor projection nor its evaluation equation. Identity and empty opens, zero
-objects, and degree n = 0 obey the same unit and generator equations. -/
+This concerns only restriction and tensor, before taking an open-extension mate. -/
 theorem nativeRestrictionTensorEvaluation {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j]
     (SX : CoefficientDerivedSystemCalculus.{u, u} l E X)

@@ -12,7 +12,20 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # Exact open restriction of the strict finite pullback tower
 
-Source: Stacks Project, sites-modules.tex, Tags 03D2 and 03D8.
+The clopen scalar quotient comparisons form a natural isomorphism of strict towers.
+
+## Implementation details
+
+After composing with the inverse of the finite quotient comparison, equality of maps is checked
+on local pure tensors. The quotient transition formula and the finite coefficient transition
+compatibility give the transition squares, and the scalar extension map formula gives naturality
+in the input complex. These generator calculations also cover empty clopens and zero complexes.
+
+## References
+
+* [Stacks, Tag 03D2]
+* [Stacks, Tag 03D8]
+* [Stacks, Tag 03EL]
 -/
 
 @[expose] public section
@@ -44,18 +57,7 @@ private theorem reduction_map_tensor
       unrestrictedIntegralTensorSection l E V n N W s (a.val.app W x) := by
   exact IntegralOnSlice.generator_map.{u, u} l E V none n a W s x
 
-/-- The clopen scalar quotient comparisons form a natural strict tower isomorphism.
-
-Source: Stacks Project, sites-modules.tex, Tags 03D8 and 03EL.
-(blueprint: lem-sf-clopen-scalar-quotient-tower).
-
-Proof: use the existing finite quotient comparison and its pure tensor formula.
-After composing with its inverse, equality of maps can be checked on local pure
-tensors. The quotient transition formula and the finite coefficient transition
-compatibility give the transition square. The scalar extension map formula gives
-naturality in the input complex. NatTrans.ofOpSequence assembles the transition
-squares, and componentwise invertibility gives the natural tower isomorphism.
-These generator calculations apply also to empty clopens and zero complexes. -/
+/-- The clopen scalar quotient comparisons form a natural strict tower isomorphism. -/
 theorem clopenScalarQuotientTower
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

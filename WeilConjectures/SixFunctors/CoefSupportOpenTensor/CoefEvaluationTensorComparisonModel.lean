@@ -14,9 +14,22 @@ import all WeilConjectures.AlgebraicGeometry.System.SystemOrdinaryTensorReductio
 
 /-! # The native evaluation tensor comparison model
 
-Source: Stacks 03EK, 07A4 and 0941. This constructs the representative model
-for the tensor evaluation already specified by a coefficient calculus.
-(blueprint: lem-coef-evaluation-tensor-comparison-model).
+This constructs the representative model for the tensor evaluation already specified by a
+coefficient calculus.
+
+## Implementation details
+
+The model uses the ordinary evaluation tensor isomorphism and the inverse normalized isomorphism
+on total complexes; the unique pure-generator normalization identifies the resulting total
+isomorphism with `coefficientEvaluationTensorIso`. Evaluation preserves the independently K-flat
+class, and the calculus normalization, after cancelling the model isomorphisms, gives the
+derived equation. No extra flatness hypotheses are needed.
+
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -208,17 +221,7 @@ private def evaluationModel (W : Scheme.{u})
     have h := inverse_tensor_relation a b c d e w hn
     kernel_exact h
 
-/-- The specified tensor evaluation has the ordinary comparison fixed on pure tensors.
-Source: Stacks 03EK, 07A4 and 0941.
-(blueprint: lem-coef-evaluation-tensor-comparison-model).
-
-Proof: use the ordinary evaluation tensor isomorphism and the inverse normalized
-isomorphism on total complexes. Its total-summand equation gives the chain field.
-The unique pure-generator normalization identifies this total isomorphism with
-coefficientEvaluationTensorIso. Evaluation preserves the independently K-flat
-class. The calculus normalization, followed by cancellation of the four model
-isomorphisms, gives the required derived equation. These constructions apply to
-all complexes, every level, and the empty site, without extra flatness hypotheses. -/
+/-- The specified tensor evaluation has the ordinary comparison fixed on pure tensors. -/
 theorem coefficientEvaluationTensorModel_exists (W : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus.{u, u} l E W) (n : ℕ) :
     ∃ model : (

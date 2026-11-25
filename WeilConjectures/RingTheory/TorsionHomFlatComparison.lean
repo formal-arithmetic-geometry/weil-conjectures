@@ -14,11 +14,23 @@ import WeilConjectures.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
 /-!
 # Hom comparison for a torsion source along a flat neighbourhood
 
-Source: Stacks Project, More on Algebra, Lemma 05EC, part (2), torsion-source case
-(blueprint: lem-weil-pbc-torsion-hom-flat-comparison).
+For a flat ring map `R → S` inducing an isomorphism `R / I ≅ S / IS`, scalar extension gives a
+bijection on Hom sets out of an `I`-power torsion module.
+
+## Implementation details
 
 Mathlib writes scalar extension as `S ⊗[R] K`; tensor symmetry identifies this with
-`K ⊗[R] S` in the source. The algebra structure encodes the arbitrary ring map.
+`K ⊗[R] S`. The algebra structure encodes the arbitrary ring map.
+
+The proof first treats a torsion target `T`, where `T → S ⊗ T` is bijective and the
+scalar-extension adjunction identifies the Hom sets. For general `N`, every map out of `K`
+factors uniquely through the `I`-power torsion submodule of `N`, whose base change is the
+`IS`-power torsion submodule of `S ⊗ N`. Naturality in both modules is that of
+`LinearMap.baseChange` (`LinearMap.baseChange_comp`).
+
+## References
+
+* [Stacks, Tag 05EC]
 -/
 
 @[expose] public section
@@ -29,27 +41,9 @@ open scoped TensorProduct
 
 namespace LinearMap
 
-/-- Scalar extension gives a bijection on Hom sets when the source is ideal-power torsion;
-the bijection is `LinearMap.baseChange`, natural in both modules by `LinearMap.baseChange_comp`.
-Source: Stacks Project, More on Algebra, Lemma 05EC, part (2), torsion-source case
-(blueprint: lem-weil-pbc-torsion-hom-flat-comparison).
-
-Proof:
-1. For a torsion target T, its canonical map to S ⊗ T is bijective by
-   lem-weil-pbc-torsion-module-flat-base-change-iso. The scalar-extension adjunction
-   lem-weil-pbc-scalar-extension-hom identifies Hom_S(S ⊗ K, S ⊗ T) with
-   Hom_R(K, S ⊗ T). Composition with the canonical map identifies the latter with
-   Hom_R(K,T). On pure tensors the resulting comparison is LinearMap.baseChange.
-2. For an arbitrary N let T = N[I^infinity]. By finite generation of I and
-   lem-weil-pbc-torsion-submodule-flat-base-change-iso, T maps bijectively onto the
-   ideal-power torsion submodule of S ⊗ N. The torsion-module comparison also identifies
-   T with S ⊗ T, so the tensor of T's inclusion is injective with that exact image.
-   The same comparison shows S ⊗ K is IS-power torsion.
-3. Every map from K to N factors uniquely through T; every S-linear map from S ⊗ K
-   to S ⊗ N factors uniquely through S ⊗ T. The resulting Hom comparison square commutes
-   on pure tensors. The torsion-target case from step 1 gives bijectivity in general.
-   Naturality in both modules is that of `LinearMap.baseChange` itself
-   (`LinearMap.baseChange_comp`), so the statement carries it by naming the map. -/
+/-- Let `R → S` be flat with `R / I ≅ S / IS` for a finitely generated ideal `I`. If `K` is
+`I`-power torsion, then scalar extension `LinearMap.baseChange` is a bijection
+`Hom_R(K, N) → Hom_S(S ⊗[R] K, S ⊗[R] N)`. -/
 theorem baseChange_bijective_of_ideal_power_torsion
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (hflat : (algebraMap R S).Flat) (I : Ideal R) (hI : I.FG)

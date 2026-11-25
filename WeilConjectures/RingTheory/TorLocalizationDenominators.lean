@@ -18,7 +18,19 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # Clearing denominators in Tor classes
 
-(blueprint: lem-pc-tor-localization-denominators)
+For a localization `C` of a ring `B` at `S`, every class in `Tor_j^A(C, N)` has a unit multiple
+in the image of `Tor_j^A(B, N)`.
+
+## Implementation details
+
+The argument works on an arbitrary tensor complex: represent a localized class by a cycle,
+clear its denominator, and use a second denominator to kill the differential. The product of
+the two denominators gives the unit. Balancedness of Tor then transfers the result to Tor
+classes, naturally in the coefficient.
+
+## References
+
+* [Stacks, Tag 0B67]
 -/
 
 @[expose] public section
@@ -86,23 +98,9 @@ private theorem tensor_coefficient_fractions
     rw [hmulB, map_zero]
     simpa only [Submonoid.smul_def, smul_zero] using hs
 
-/-- Clearing denominators commutes with passing to homology of an arbitrary tensor complex.
-
-Source: Stacks Project, Tag 0B67, `lemma-tor-amplitude-localization`, the localized
-homology identity in the proof; the cycle argument does not require a resolution.
-Proof: regard Q tensor_A B as a B-complex. Tensor associativity identifies
-Q tensor_A C with its S-localization, and the displayed map with its localization
-map. Represent x by a cycle in degree j. Clear its denominator to obtain z over B.
-The differential of z maps to zero. The localization equality criterion supplies
-a second denominator annihilating this differential. Multiply z by that denominator:
-it is now a cycle, whose homology class is y. The product s of the two denominators
-belongs to S; its image in C is a unit u. Multiplication by u on the localized cycle
-is the image of the cycle defining y. Passing to homology gives the equation below.
-The coefficient multiplication map induces precisely this action on the complex.
-For j = 0 the outgoing differential is zero and the second denominator may be one.
-For Q = 0 both classes are zero; if zero belongs to S the localized complex is zero.
-(blueprint: lem-pc-tor-localization-denominators)
--/
+/-- Clearing denominators commutes with passing to homology of an arbitrary tensor complex:
+every homology class of `Q ⊗_A C` has a unit multiple in the image of the homology of
+`Q ⊗_A B`. -/
 private theorem tensor_complex_localization_denominators
     (A B C : Type u) [CommRing A] [CommRing B] [CommRing C]
     (φ : A →+* B) [Algebra B C] (S : Submonoid B) [IsLocalization S C]
@@ -209,25 +207,7 @@ private theorem tensor_complex_localization_denominators
 /-- Every localized Tor class has a unit multiple in the image of the coefficient map.
 The multiplier is induced by multiplication on the coefficient algebra, rather than
 an arbitrary action on Tor. The map `f` is specified on elements, so it is exactly
-restriction of the localization map with the displayed scalar structures.
-
-Source: Stacks Project, Tag 0B67, the localized derived-tensor homology identity in
-its proof, specialized to B in degree zero; expanded here to individual classes.
-Proof: choose a free A-resolution Q of N. Balancedness identifies the two Tor'
-objects, naturally in the coefficient, with H_j(B tensor_A Q) and H_j(C tensor_A Q).
-Tensor associativity identifies the latter complex with the localization at S of
-the former B-complex. Localization is exact, hence its homology is the localization
-of H_j(B tensor_A Q). More explicitly, represent a localized homology class by a
-cycle. Clear its denominator to obtain a chain over B. Its differential becomes
-zero after localization, so a second denominator annihilates that differential.
-Multiplying by this second denominator gives a cycle over B. The product s of the
-two denominators belongs to S, and its image in C is a unit u. The original class
-multiplied by u is the image of the class y of this cycle. Naturality of balancedness
-identifies multiplication by u with the displayed Tor' map, and the coefficient
-map with Tor'(f,N). This also works in degree zero, for S = {1}, for N = 0, and
-when S contains zero (then C and its Tor objects are zero).
-(blueprint: lem-pc-tor-localization-denominators)
--/
+restriction of the localization map with the displayed scalar structures. -/
 theorem tor_localization_denominators
     (A B C : Type u) [CommRing A] [CommRing B] [CommRing C]
     (φ : A →+* B) [Algebra B C] (S : Submonoid B) [IsLocalization S C]
