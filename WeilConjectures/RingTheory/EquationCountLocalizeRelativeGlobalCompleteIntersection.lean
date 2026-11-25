@@ -16,8 +16,15 @@ import WeilConjectures.RingTheory.EquationCountLocalizeRGCI
 /-!
 # Localizing an equation-count presentation
 
-Source: Stacks Project, Algebra, Lemma 00ST (3)
-(blueprint: lem-weil-pbc-equation-count-localize-relative-global-complete-intersection).
+## Implementation details
+
+The enlarged presentation is indexed by `Option`, adding one variable and one equation. Besides
+the ring-map predicate `IsRelativeGlobalCompleteIntersection`, which only asserts the existence of
+some presentation, the main theorem records the fibre condition for this specific presentation.
+
+## References
+
+* Stacks Project, Algebra, Lemmas 00ST (3) and 00QH
 -/
 
 @[expose] public section
@@ -26,32 +33,10 @@ universe u
 
 namespace Algebra
 
-/-- At a prime where the fibre has dimension equal to the number of variables minus the
-number of equations, adjoining the inverse of a suitable polynomial gives a relative global
-complete intersection with this specific enlarged presentation: besides the ring-map predicate
-`IsRelativeGlobalCompleteIntersection`, which only asserts some presentation, the second conjunct
-is the definition's fibre condition for THIS presentation with `n+1` variables and `c+1`
-equations. The `Option` indices add one variable and one equation. The inequalities encode
-signed dimension counts without truncated subtraction.
-
-Source: Stacks Project, Algebra, Lemma 00ST (3)
-(blueprint: lem-weil-pbc-equation-count-localize-relative-global-complete-intersection).
-
-Proof: apply the fibre-dimension upper-semicontinuity lemma 00QH to obtain an open neighbourhood
-of the given prime on which local fibre dimensions are at most `n-c`. Choose a basic open
-`D(g)` inside it and lift `g` to a polynomial `h`. The polynomial-quotient presentation of
-localization identifies the enlarged quotient with `S_g`, sending the old variables to their
-images and the new variable to `1/g`. Polynomial scalar extension and tensor-quotient base
-change present every fibre of `S` by `c` equations in `n` variables. The height-difference
-formula and Krull's height bound give the lower bound `n-c` at every point of every fibre.
-Tensoring localization with the residue field identifies every fibre of `S_g` with the
-localization of the corresponding fibre of `S`. Its spectrum is the basic open `D(g)` in that
-fibre. Local dimension is unchanged on an open subspace, so both bounds apply and give equality
-at every point. Finally, dimension is the supremum of the dimensions at points, so every
-nonempty fibre of the enlarged quotient has dimension `n-c = (n+1)-(c+1)`. These are the seven
-steps of the blueprint proof, using respectively the bounded-open-upstairs, basic-open localization,
-polynomial-quotient localization, height-quotient-bound, localization-tensor, dimension on open
-subspaces, and dimension-supremum-local-dimensions nodes. -/
+/-- At a prime `q` of `S = R[x_1, …, x_n] ⧸ (f_1, …, f_c)` where the fibre has local dimension
+`n - c`, there is a polynomial `h` with image `g ∉ q` such that the quotient `T` of
+`R[x, z]` by the `f_i` and `h z - 1` is a relative global complete intersection, every nonempty
+fibre of this presentation has dimension `(n + 1) - (c + 1)`, and `T ≃ S_g` with `z ↦ g⁻¹`. -/
 theorem exists_localization_relativeGlobalCompleteIntersection
     (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R)
     (q : PrimeSpectrum (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)))

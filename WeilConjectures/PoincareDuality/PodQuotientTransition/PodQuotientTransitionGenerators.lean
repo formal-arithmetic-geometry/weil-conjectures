@@ -10,8 +10,12 @@ public import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitModels
 
 /-! # Unit generators for quotient comparison functors
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: def-pod-quotient-transition-generators).
+We define the unit generators of ordinary whole quotient systems and the conditions that the
+scalar and reindexing comparisons fix them (`ScalarNormalized`, `ReindexNormalized`).
+
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -39,9 +43,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 namespace PodQuotientTransition
 
-/-- The unit generator of an ordinary whole quotient system.
-Source: Stacks 06YY, 0941
-(blueprint: def-pod-quotient-transition-generators). -/
+/-- The unit generator of an ordinary whole quotient system. -/
 def unitSection (W : Scheme.{u}) (M : CompletionUnit.OrdinaryModel l E W)
     (N : scalarReductionSource l E W) (n : ℕ) (U : W.ProEtᵒᵖ)
     (x : N.val.obj U) : (M.tensor.obj N).val.obj (op (n, U.unop)) :=
@@ -52,9 +54,7 @@ def unitSection (W : Scheme.{u}) (M : CompletionUnit.OrdinaryModel l E W)
 variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- Ordinary scalar comparison is fixed on the nested tensor units.
-Source: Stacks 06YY, 0941
-(blueprint: def-pod-quotient-transition-generators). -/
+/-- Ordinary scalar comparison is fixed on the nested tensor units. -/
 def ScalarNormalized (W : Scheme.{u})
     (ME : CompletionUnit.OrdinaryModel l E W) (ML : CompletionUnit.OrdinaryModel l L W)
     (α : ME.tensor ⋙ (integralComparisonSequenceScalarModel l E L ι W).E ≅
@@ -67,9 +67,7 @@ def ScalarNormalized (W : Scheme.{u})
         (integralOrdinaryTensorSection l E L ι W N U 1 x)
 
 /-- Ordinary reindexing comparison is fixed on quotient unit generators.
-The comma arrow identifies the base change of g(U) with U.
-Source: Stacks 03EL, 06YY, 0941
-(blueprint: def-pod-quotient-transition-generators). -/
+The base change of `g(U)` is identified with `U` via the comma arrow. -/
 def ReindexNormalized {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (MY : CompletionUnit.OrdinaryModel l E Y) (MX : CompletionUnit.OrdinaryModel l E X)
     (β : MY.tensor ⋙ integralComparisonSequencePullback l E g ≅

@@ -22,14 +22,17 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 /-!
 # Strict principal reduction and its compatible cone comparisons
 
-Source: blueprint main-20261015, chap-The-pro-etale-site,
-`sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md`,
-Cones paragraph; Stacks Tag 014E, definition-cone
-(blueprint: lem-pe-principal-reduction-cone-calculus).
+Helpers for reducing complexes of modules on the pro-étale site modulo powers of a uniformizer
+via mapping cones of scalar actions.
 
-Positive level n+1 is indexed by n : ℕ, as in AdicCompletion. Cone coordinates
-are ordered target, shifted source. The comparison is one natural family,
-including its quotient transitions and its specified reduction coaugmentations.
+## Implementation details
+
+Positive level `n + 1` is indexed by `n : ℕ`, as in `AdicCompletion`. Cone coordinates are
+ordered target, shifted source.
+
+## References
+
+* [Stacks Project, Tag 014E]
 -/
 
 @[expose] public noncomputable section

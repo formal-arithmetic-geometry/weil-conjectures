@@ -8,10 +8,18 @@ module
 public import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensorDescentDiagram
 import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensorCoefficientTransitionScalarNormalization
 
-/-! # Completed tensor square for scalar/reindexing transitions
+/-! # Scalar normalization in the named tensor descent diagram
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-tensor-scalar-normalization-diagram).
+The scalar normalization of the scalar/reindexing tensor descent, stated on the named functors
+and comparisons of the fixed tensor descent diagram.
+
+## Implementation details
+
+This is the defining unique normalization of `scalarTensorOrdinary` on the chosen good pair.
+
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -64,10 +72,9 @@ private theorem associatorComponent
     (Functor.associator F G H).hom.app K ≫ f = f := by
   exact Category.id_comp f
 
-/-- The hβ compatibility for the named tensor descent diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: lem-pod-tensor-scalar-normalization-diagram).
-Proof: Use the defining unique normalization of scalarTensorOrdinary on the chosen good pair. -/
+/-- The scalar normalization (`hβ`) of the named tensor descent diagram: the scalar functor
+applied to the scalar chain equals the scalar comparison, the target tensor of the pair scalar
+factor, and the target comparison at the good scalar-extended pair. -/
 theorem podTensorScalarRepresentativeNormalizationDiagram
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

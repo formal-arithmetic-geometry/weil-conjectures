@@ -14,14 +14,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor
 namespace WeilConjectures
 
-/-- The derived identity comparison on a complex is its localized degreewise comparison.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5
-(blueprint: lem-pod-identity-derived-factors).
-
-Proof: the factor formula for the derived identity functor evaluates its comparison
-at Q(K). The factor formula for mapDerivedCategoryNatIso then gives the composite.
-The identity comparison on complexes has identity hom, so functoriality and the
-right identity law identify the remaining factor. -/
+/-- The derived identity comparison on a complex is its localized degreewise comparison. -/
 theorem podIdentityDerivedFactors
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
     (F : C ⥤ C) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]

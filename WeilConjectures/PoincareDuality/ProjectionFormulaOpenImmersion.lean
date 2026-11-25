@@ -21,8 +21,9 @@ identification `Rj_! ≅ j_!`
 (`boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl`),
 the exceptional projection morphism `PF_j : Rj_! K ⊗ B ⟶ Rj_! (K ⊗ Lj^* B)` of bounded
 constructible `ℚ̄_ℓ`-complexes is the inverse of the projection comparison of `j_! ⊣ Lj^*`
-(`boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison`,
-blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2 and 5.1.2).
+(`boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison`).
+
+## Implementation details
 
 The proof follows the definition of `Rj_! ≅ j_!`: the lower shriek `Rj_!` is defined through the
 compactification of `j` chosen by Nagata's theorem, compared with the trivial compactification
@@ -42,8 +43,6 @@ compactification of `j` chosen by Nagata's theorem, compared with the trivial co
    `CategoryTheory.Adjunction.trivial_exceptionalProjection_comp_projectionComparison`
    (`homMk_exceptionalProjectionMorphismOfCompactification_ofIsOpenImmersion`).
 
-## Implementation notes
-
 The coefficient ring is written `_` wherever it is determined by the bounded constructible
 complexes: elaborating `ℚ̲̄_ℓ` explicitly synthesizes its ring structure along a path whose proof
 terms differ from those of the categories `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, and the comparison of the two is
@@ -56,6 +55,10 @@ The comparisons of factorizations are typed by `i_! ⋙ Rp_*` and those of compa
 elaborated on either side is compared by the kernel by unfolding it completely; the two typings are
 therefore related only for a variable natural transformation
 (`natTrans_app_whiskerRight_comp_homMk_exceptionalProjectionMorphismOfCompactification`).
+
+## References
+
+* SGA 4, Exposé XVII, 5.1.2 and 5.2.2
 
 -/
 
@@ -302,7 +305,7 @@ lemma boundedConstructibleUpperStarComp_refinement_hom_app {p₁ : Z₁ ⟶ Y} {
 factorizations `f = i ≫ p` and `f = i₁ ≫ p₁` into open immersions followed by morphisms and a
 refinement `h` (`i ≫ h = i₁` cartesian, `h ≫ p₁ = p`), the comparison
 `ρ : i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rp_*` carries the exceptional projection morphism of `(i₁, p₁)` to that
-of `(i, p)` (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2). -/
+of `(i, p)`. -/
 theorem boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp
     (sq : IsPullback (𝟙 X) i i₁ h) {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p) {f : X ⟶ Y}
     (hf : i ≫ p = f) (hf₁ : i₁ ≫ p₁ = f)
@@ -382,7 +385,7 @@ lemma ι_map_eqToIso_trans_upperStarComp_inv_app_compactification (c : Compactif
     c.overI_overG B
 
 /-- **The comparison along a refinement of compactifications intertwines the exceptional
-projection morphisms** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2). -/
+projection morphisms**. -/
 theorem boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp_compactification
     {c d : Compactification f.left} (r : Compactification.OverRefinement d c)
     [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ r.isPullback)]
@@ -437,10 +440,7 @@ theorem boundedConstructibleLowerShriekRefinementIso_inv_app_whiskerRight_comp_c
 
 /-- A natural transformation `i_! ⋙ Rp_* ⟶ i'_! ⋙ Rp'_*` between the lower shrieks of two
 compactifications which intertwines their exceptional projection morphisms also does so as a
-natural transformation `Rf_!^c ⟶ Rf_!^d`.
-
-The two statements agree up to unfolding `boundedConstructibleLowerShriekOfCompactification`; the
-natural transformation is a variable so that the kernel compares them without unfolding it. -/
+natural transformation `Rf_!^c ⟶ Rf_!^d`. -/
 theorem natTrans_app_whiskerRight_comp_homMk_exceptionalProjectionMorphismOfCompactification
     {c d : Compactification f.left}
     (η : boundedConstructibleOpenImmersionLowerShriek 𝐐 ℓ c.overI ⋙
@@ -552,7 +552,7 @@ theorem boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_hom_app_
   rw [← h₂', ← Category.assoc, h₁', Category.assoc]
 
 /-- **The comparison of the lower shrieks of two compactifications intertwines the exceptional
-projection morphisms** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2): through
+projection morphisms**: through
 `Rf_!^{c₁} ≅ Rf_!^{c₂}`, the exceptional projection morphism of `c₁` is that of `c₂`. -/
 theorem boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_hom_app_whiskerRight_comp
     (c₁ c₂ : Compactification f.left) (K : Dᵇc(X.left)⟦𝐐⟧) (B : Dᵇc(Y.left)⟦𝐐⟧) :
@@ -657,11 +657,10 @@ variable {U X : Over (Spec (.of k))}
   [QuasiCompact X.hom] [IsSeparated X.hom] (j : U ⟶ X) [IsOpenImmersion j.left]
 
 /-- **The projection formula of an open immersion is the adjoint of the monoidal structure of the
-pullback** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2 and 5.1.2): for an open
-immersion `j`, through the identification `Rj_! ≅ j_!` with the extension by zero, the projection
-morphism `PF_j : Rj_! K ⊗ B ⟶ Rj_! (K ⊗ Lj^* B)` is the inverse of the projection comparison
-`j_! (K ⊗ Lj^* B) ⟶ j_! K ⊗ B` of the adjunction `j_! ⊣ Lj^*`, the adjoint of the tensor
-structure of `Lj^*`. -/
+pullback**: for an open immersion `j`, through the identification `Rj_! ≅ j_!` with the extension
+by zero, the projection morphism `PF_j : Rj_! K ⊗ B ⟶ Rj_! (K ⊗ Lj^* B)` is the inverse of the
+projection comparison `j_! (K ⊗ Lj^* B) ⟶ j_! K ⊗ B` of the adjunction `j_! ⊣ Lj^*`, the adjoint
+of the tensor structure of `Lj^*`. -/
 theorem boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison
     (K : Dᵇc(U.left)⟦𝐐⟧) (B : Dᵇc(X.left)⟦𝐐⟧) :
     boundedConstructibleExceptionalProjectionMorphism ℓ j K B ≫

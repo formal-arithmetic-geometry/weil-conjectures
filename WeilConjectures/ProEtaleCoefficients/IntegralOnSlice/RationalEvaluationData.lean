@@ -31,9 +31,12 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalization
 /-!
 # Integral and rational evaluation data on slices
 
-Source: Weil blueprint, sec-six-functors/sk-prop-sf-dualizable-biduality,
-first proof paragraph, exact functors and preservation of direct summands
-(blueprint: lem-sf-rational-thick-evaluation).
+Basic data for evaluating integral and rational coefficient objects on slices of the pro-étale
+site: the coefficient sheaf in degree zero.
+
+## References
+
+* [Stacks, Tag 08JD]
 -/
 
 @[expose] public noncomputable section
@@ -52,8 +55,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (X : AlgebraicGeometry.Scheme.{t}) (U : Option X.ProEt)
 
 set_option linter.unusedVariables false in
-/-- The coefficient sheaf in degree zero. Source: Stacks 08JD
-(blueprint: lem-sf-rational-thick-evaluation). -/
+/-- The coefficient sheaf in degree zero, the duality unit of the ringed slice site. -/
 def coefficient : D l E X U := ringedSiteDualityUnit (topology X U) (ring l E X U)
 
 end WeilConjectures.IntegralOnSlice

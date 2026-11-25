@@ -88,7 +88,7 @@ theorem mem_or_inv_mem_comapResidueSubring (x : K) :
 
 /-- **The composite of two valuation rings**: the preimage in a valuation subring
 `A ⊆ K` of a valuation subring `A''` of the residue field of `A` is a valuation subring
-of `K`. (Blueprint: `lemma:nagata-composite-valuation-ring`.) -/
+of `K`. -/
 def comapResidue : ValuationSubring K where
   __ := A.comapResidueSubring A''
   mem_or_inv_mem' := A.mem_or_inv_mem_comapResidueSubring A''
@@ -138,8 +138,7 @@ theorem ker_residueRestrict :
   rfl
 
 /-- **The composite of two valuation rings has second factor `A''`**: the quotient of the
-composite `C` by the trace of the maximal ideal of `A` is `A''`. This is the
-identification `C/𝔪' ≅ A''` of `lemma:nagata-composite-valuation-ring`. -/
+composite `C` by the trace of the maximal ideal of `A` is `A''`, i.e. `C/𝔪' ≅ A''`. -/
 noncomputable def residueRestrictEquiv :
     (A.comapResidue A'' ⧸ (maximalIdeal A).comap
       (inclusion _ _ (A.comapResidue_le A''))) ≃+* A'' :=

@@ -9,8 +9,15 @@ public import WeilConjectures.PoincareDuality.Point.PointSectionsDerivedReductio
 import WeilConjectures.PoincareDuality.Point.PointSectionsDerivedReductionIso
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-/-! Intermediate proof components for point sections derived reduction.
-(blueprint: lem-pod-point-sections-derived-reduction) -/
+/-! # Homology of point sections of derived reduction
+
+Over the spectrum of a finite field, taking homology commutes with derived reduction of integral
+constructible complexes followed by finite point sections.
+
+## References
+
+* Stacks Project, Tags 010N, 06YY, 0946.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -24,11 +31,9 @@ namespace WeilConjectures
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The homology and exact-sections component of integral reduction.
-Source: Stacks Tags 0946, 010N and 06YY; blueprint `lem-pod-point-sections-derived-reduction`.
-Exact point sections applied to the comparison give this component in every degree.
-(blueprint: lem-pod-point-sections-derived-reduction-homology)
--/
+/-- In every degree `r`, the `r`-th homology of the point sections of the derived reduction of
+an integral constructible complex is the point sections of the `r`-th homology of its derived
+reduction. -/
 theorem point_sections_derived_reduction_homology (_hl : l ≠ D.p) (n : ℕ) :
     ∀ r : ℤ, Nonempty
       (pointReductionTensorSections D l E n ⋙ DerivedCategory.homologyFunctor _ r ≅

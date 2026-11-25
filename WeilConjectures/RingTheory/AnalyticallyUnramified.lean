@@ -13,32 +13,30 @@ public import Mathlib.RingTheory.Noetherian.Defs
 /-!
 # Analytically unramified local rings and prime ideals
 
-Source: Stacks Project, Algebra, Definition 032X
-(blueprint: def-weil-pbc-analytically-unramified).
-
 ## Main definitions
 
 * `IsAnalyticallyUnramified`: the maximal-ideal-adic completion is reduced.
 * `Ideal.IsAnalyticallyUnramified`: the quotient by a prime ideal is analytically unramified.
+
+## References
+
+* Stacks Project, Algebra, Definition 032X.
 -/
 
 @[expose] public section
 
 universe u
 
-/-- (blueprint: def-weil-pbc-analytically-unramified) A Noetherian local ring is
-analytically unramified when its maximal-ideal-adic completion has no nonzero nilpotents
-(Stacks Project, Algebra, Definition 032X). -/
+/-- A Noetherian local ring is analytically unramified when its completion with respect to
+its maximal ideal is reduced. -/
 def IsAnalyticallyUnramified (R : Type u) [CommRing R] [IsLocalRing R]
     [IsNoetherianRing R] : Prop :=
   IsReduced (AdicCompletion (IsLocalRing.maximalIdeal R) R)
 
 namespace Ideal
 
-/-- (blueprint: def-weil-pbc-analytically-unramified) A prime ideal of a Noetherian local ring
-is analytically unramified when the quotient local ring is analytically unramified. Its maximal
-ideal is the image of the maximal ideal of the original ring (Stacks Project, Algebra,
-Definition 032X). -/
+/-- A prime ideal `p` of a Noetherian local ring `R` is analytically unramified when the
+completion of `R ⧸ p` with respect to the image of the maximal ideal of `R` is reduced. -/
 def IsAnalyticallyUnramified {R : Type u} [CommRing R] [IsLocalRing R]
     [IsNoetherianRing R] (p : Ideal R) : Prop :=
   p.IsPrime ∧

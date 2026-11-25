@@ -28,21 +28,18 @@ namespace ValuationSubring
 
 variable {K L : Type*} [Field K] [Field L]
 
-/-- **Intersection with a dominating valuation ring** (consequence of Stacks Project
-Tag 052K): if a valuation subring `B` of a field extension `L` of `K` dominates a
-valuation subring `A ⊆ K` — that is, `A ≤ B.comap f` in the domination order of local
-subrings of `K` — then `K ∩ B = A`, i.e. `B.comap f = A`.
-(Blueprint: `lemma:nagata-valuation-intersection`.) -/
+/-- **Intersection with a dominating valuation ring**: if a valuation subring `B` of a field
+extension `L` of `K` dominates a valuation subring `A ⊆ K` — that is, `A ≤ B.comap f` in the
+domination order of local subrings of `K` — then `K ∩ B = A`, i.e. `B.comap f = A`. -/
 @[stacks 052K]
 theorem comap_eq_of_toLocalSubring_le {f : K →+* L} {A : ValuationSubring K}
     {B : ValuationSubring L} (h : A.toLocalSubring ≤ (B.comap f).toLocalSubring) :
     B.comap f = A :=
   ValuationSubring.toLocalSubring_injective (le_antisymm (A.isMax_toLocalSubring h) h)
 
-/-- **Extension of a valuation ring to a field extension** (Stacks Project Tag 00IA):
-for every field extension `f : K →+* L` and every valuation subring `A ⊆ K` there is a
-valuation subring `B ⊆ L` with `K ∩ B = A`; its fraction field is `L`, as for every
-valuation subring of `L`. -/
+/-- **Extension of a valuation ring to a field extension**: for every field extension
+`f : K →+* L` and every valuation subring `A ⊆ K` there is a valuation subring `B ⊆ L` with
+`K ∩ B = A`. -/
 @[stacks 00IA]
 theorem exists_comap_eq (f : K →+* L) (A : ValuationSubring K) :
     ∃ B : ValuationSubring L, B.comap f = A := by

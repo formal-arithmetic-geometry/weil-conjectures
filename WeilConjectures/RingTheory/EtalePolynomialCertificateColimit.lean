@@ -14,8 +14,18 @@ import Mathlib.Algebra.MvPolynomial.CommRing
 
 /-! # Descent of finite polynomial inverse certificates
 
-Source: Stacks Project, Algebra, proof of Tag 07RI, descent of inverse identities.
-(blueprint: lem-weil-pbc-etale-polynomial-certificate-colimit).
+A finite polynomial inverse certificate over a filtered colimit of base rings descends to some
+stage of the colimit.
+
+## Implementation details
+
+The certificate consists of finitely many polynomials in finitely many variables, which are
+represented at a common stage; the finitely many defining identities hold in the colimit and
+hence at some later stage. Transition maps commute with partial derivatives.
+
+## References
+
+* Stacks Project, Algebra, proof of Tag 07RI
 -/
 
 @[expose] public section
@@ -64,26 +74,7 @@ private theorem certificate_iff_equations {R : Type*} [CommRing R] {n m : ℕ}
     exact ⟨c, (fun k l ↦ ⟨e k l, (sub_eq_zero.mp (he k l)).symm⟩),
       fun j ↦ ⟨h j, (sub_eq_zero.mp (hh j)).symm⟩⟩
 
-/-- A finite polynomial inverse certificate for fixed relations descends to a stage.
-This concerns polynomial equations and ideal memberships, and makes no assertion
-about etaleness or about a presented target algebra.
-
-Source: Stacks Project, Algebra, proof of Tag 07RI, lines 47654-47662.
-(blueprint: lem-weil-pbc-etale-polynomial-certificate-colimit).
-
-Proof: expand each membership in the relation ideal as a sum e_klj f_j, and each
-membership in its square as a sum h_jab f_a f_b. There are finitely many polynomials
-c, e and h in finitely many variables. Polynomial scalar extension identifies the
-coefficient-base-changed polynomial algebra with T tensor P₀, where
-P₀ = B₀[x₁,...,x_n]. Elementwise tensor-colimit descent represents every one of
-these polynomials at a stage. Directedness places these representatives together
-above i₀. Coefficientwise transition maps preserve f_j and commute with partial
-derivatives. Thus the finitely many differences between the two sides of the
-expanded equations map to zero at the colimit. Elementwise eventual vanishing
-and directedness kill all these differences at one later stage. The resulting
-c, e and h give the two required ideal memberships there. When either finite
-index set is empty, no coefficients or equations need lifting; i₀ suffices for
-an empty list and the same construction handles the remaining equations. -/
+/-- A finite polynomial inverse certificate for fixed relations descends to a stage. -/
 theorem exists_stage_etalePolynomialCertificate
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F] (i₀ : I)

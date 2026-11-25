@@ -7,18 +7,18 @@ module
 public import Mathlib.CategoryTheory.Products.Basic
 import Mathlib.Tactic.CategoryTheory.Slice
 /-! # Pasting three tensor model equations
-Source: blueprint dual-Tate compatibility, Steps 1 and 5. -/
+
+Pasting three tensor model squares and cancelling the invertible output comparison.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941
+-/
 @[expose] public section
 set_option autoImplicit false
 open CategoryTheory
 namespace WeilConjectures
-/-- Cancel the output model comparison after pasting three tensor model squares.
-Source: blueprint Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-tensor-composition-of-models).
-Proof: compose with the invertible output comparison. Move the intermediate
-factor through tensor naturality, use the three model squares, and substitute
-the input and output compositor squares. Functoriality of the tensor functor
-and its comparison naturality identify the results; cancel the comparison. -/
+/-- Cancel the output model comparison after pasting three tensor model squares. -/
 theorem podTensorCompositionOfModels
     {C₀ C₁ C₂ : Type*} [Category C₀] [Category C₁] [Category C₂]
     (F : C₀ ⥤ C₁) (G : C₁ ⥤ C₂) (H : C₀ ⥤ C₂) (κ : H ≅ F ⋙ G)

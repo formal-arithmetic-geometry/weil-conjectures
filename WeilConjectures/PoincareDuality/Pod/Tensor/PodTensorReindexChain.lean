@@ -9,8 +9,18 @@ public import WeilConjectures.PoincareDuality.PodReindexFamily.PodCompletionRein
 
 /-! # Explicit tensor Roos chain maps and their localizations
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4, 0941. -/
+We define the explicit Roos chain map underlying a completed tensor reindexing along an
+isomorphism of schemes (`podTensorReindexChain`).
+
+## Implementation details
+
+The chain map and its defining equation are packaged in the structure
+`PodTensorReindexChainDatum`, so that their dependent types are shared during checking.
+
+## References
+
+* [Stacks, Tags 07A4, 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -48,13 +58,9 @@ section TensorModelSpecialization
 -- These proofs use only functoriality and never the underlying section construction.
 attribute [local irreducible] isoSectionwiseModuleInverseImage
 
-/-- The explicit Roos chain map underlying one completed tensor reindexing.
-Source: blueprint Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: def-pod-tensor-reindex-chain).
-The chain map is the specified reindexing comparison followed by the Roos image
-of the specified strict tensor-tower map.
-A named record for the explicit chain map and its defining equation.
-Keeping these fields in a structure shares their dependent types during checking. -/
+/-- The explicit Roos chain map underlying one completed tensor reindexing, together with its
+defining equation: it is the reindexing comparison `D.roos` followed by the Roos image of the
+strict tensor-tower map `T.tower P Q`. -/
 structure PodTensorReindexChainDatum
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [(isoReductionIntegralInverse l E g).Additive]
@@ -70,9 +76,7 @@ structure PodTensorReindexChainDatum
   property : val = (D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom ≫
     integralOperationsRoosFunctor.map (T.tower P Q).hom
 
-/-- The explicit datum described by `PodTensorReindexChainDatum`.
-Source: blueprint Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: def-pod-tensor-reindex-chain). -/
+/-- The explicit datum described by `PodTensorReindexChainDatum`. -/
 @[irreducible] def podTensorReindexChainData
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [(isoReductionIntegralInverse l E g).Additive]

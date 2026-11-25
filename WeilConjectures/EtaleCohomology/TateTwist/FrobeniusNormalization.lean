@@ -21,17 +21,7 @@ the inverse `γ` of `z ↦ z ^ q`. For a commutative ring `Λ` of characteristic
 `Y`, this file shows that the Frobenius operator of the Tate datum
 `τ_r : Lh^* Λ_Y(r) ≅ Λ_Y(r)` (`AlgebraicGeometry.Etale.tateWeilDatum`) of the genuine Tate twist
 (`AlgebraicGeometry.Etale.hasTateTwist`) is the multiplication by `q^{-r}`
-(`AlgebraicGeometry.Etale.frobeniusOperator_tateWeilDatum`): this is the twist normalization of
-`prose-10-21`.
-
-By `WeilConjectures.EtaleCohomology.TateTwist.FrobeniusScalar` the Frobenius operator on
-`H⁰(Y, Λ(r))` is the multiplication by `c_1 ^ r` for a unit `c_1`, and it remains to show
-`c_1 = q⁻¹`. Through `Λ(1) ≅ (μₙ ⊗ Λ)[0]` and `Λ ≅ (ℤ ⊗ Λ)[0]`, both compatible with the derived
-pullbacks, the Frobenius operator on `Λ(1)` becomes "pull back along `h`" on the morphisms of
-sheaves `ℤ ⟶ μₙ`. A global `n`-th root of unity `ζ` gives such a morphism `1 ↦ ζ`
-(`AlgebraicGeometry.Etale.tateClassOfRootOfUnity`), and its pullback is `1 ↦ h^♯ ζ`; for `ζ`
-primitive, `h^♯ ζ = γ(ζ) = ζ ^ c` with `c q ≡ 1 (mod n)`, so the operator is the multiplication by
-`c = q⁻¹` in `Λ`.
+(`AlgebraicGeometry.Etale.frobeniusOperator_tateWeilDatum`).
 
 ## Main definitions
 
@@ -46,6 +36,17 @@ primitive, `h^♯ ζ = γ(ζ) = ζ ^ c` with `c q ≡ 1 (mod n)`, so the operato
   endomorphism `h` with `h^♯ ζ = ζ ^ c` acts on the class of `ζ` by `c`.
 - `AlgebraicGeometry.Etale.frobeniusOperator_tateWeilDatum`: geometric Frobenius acts on
   `H⁰(Spec k̄, Λ(r))` by `q^{-r}`.
+
+## Implementation details
+
+By `WeilConjectures.EtaleCohomology.TateTwist.FrobeniusScalar` the Frobenius operator on
+`H⁰(Y, Λ(r))` is the multiplication by `c_1 ^ r` for a unit `c_1`, and it remains to show
+`c_1 = q⁻¹`. Through `Λ(1) ≅ (μₙ ⊗ Λ)[0]` and `Λ ≅ (ℤ ⊗ Λ)[0]`, both compatible with the derived
+pullbacks, the Frobenius operator on `Λ(1)` becomes "pull back along `h`" on the morphisms of
+sheaves `ℤ ⟶ μₙ`. A global `n`-th root of unity `ζ` gives such a morphism `1 ↦ ζ`
+(`AlgebraicGeometry.Etale.tateClassOfRootOfUnity`), and its pullback is `1 ↦ h^♯ ζ`; for `ζ`
+primitive, `h^♯ ζ = γ(ζ) = ζ ^ c` with `c q ≡ 1 (mod n)`, so the operator is the multiplication by
+`c = q⁻¹` in `Λ`.
 -/
 
 @[expose] public section
@@ -196,9 +197,7 @@ theorem frobeniusOperator_tateWeilDatum_tateClassOfRootOfUnity (h : X ⟶ X) (ζ
   rw [reassoc_of% hE, ← hη, Iso.inv_hom_id_assoc, Nat.cast_smul_eq_nsmul]
 
 omit [NeZero (ringChar Λ)] [HasInvertibleExponent Λ X] in
-/-- Extension of scalars of `1 ↦ ζ` is an epimorphism when `θ_ζ : ℤ/n ⟶ μₙ` is an isomorphism:
-`ℤ ⟶ ℤ/n` is surjective, and the constant sheaf functor and extension of scalars are left
-adjoints. -/
+/-- Extension of scalars of `1 ↦ ζ` is an epimorphism when `θ_ζ : ℤ/n ⟶ μₙ` is an isomorphism. -/
 lemma epi_extendScalarsRootOfUnity (ζ : Γ(X, ⊤)ˣ) (hζ : ζ ^ ringChar Λ = 1)
     [IsIso (X.constantZModToRootsOfUnitySheaf _ ζ hζ)] :
     Epi (extendScalarsRootOfUnity Λ ζ hζ) := by
@@ -306,14 +305,12 @@ theorem tateFrobeniusScalar_specGeometricFrobenius_mul_natCard :
 theorem isUnit_natCard_of_hasInvertibleExponent : IsUnit (Nat.card k : Λ) :=
   isUnit_iff_exists_inv'.2 ⟨_, tateFrobeniusScalar_specGeometricFrobenius_mul_natCard Λ k⟩
 
-/-- Blueprint `definition-weil-structure--1`: Strict Weil data and the Tate datum.
-
-The Tate datum `τ_r : Lg^* Λ(r) ≅ Λ(r)` (`AlgebraicGeometry.Etale.tateWeilDatum`) of the Tate
-twist, for `g` the geometric Frobenius of `Spec k̄` over the finite field `k` with `q` elements, is
-normalized as in `prose-10-21`: geometric Frobenius acts on
-`H⁰(Spec k̄, Λ(r))` by `q^{-r}` (hence by `q^r` on `Λ(-r)`). Here `Λ` is a commutative ring of
-characteristic `n ≠ 0` invertible on `Spec k̄`, so that `q` is a unit of `Λ`
-(`AlgebraicGeometry.Etale.isUnit_natCard_of_hasInvertibleExponent`). -/
+/-- **Geometric Frobenius acts on `H⁰(Spec k̄, Λ(r))` by `q^{-r}`.** Let `k` be a finite field with
+`q` elements and `Λ` a commutative ring of characteristic `n ≠ 0` invertible on `Spec k̄`, so that
+`q` is a unit of `Λ` (`AlgebraicGeometry.Etale.isUnit_natCard_of_hasInvertibleExponent`). For
+`g` the geometric Frobenius of `Spec k̄`, the Frobenius operator of the Tate datum
+`τ_r : Lg^* Λ(r) ≅ Λ(r)` (`AlgebraicGeometry.Etale.tateWeilDatum`) is the multiplication by
+`q^{-r}`. -/
 theorem frobeniusOperator_tateWeilDatum (r : ℤ)
     (x : 𝟙_ (DerivedCategoryModule Λ (Spec (.of (AlgebraicClosure k)))) ⟶
       tateObject Λ (Spec (.of (AlgebraicClosure k))) r) :

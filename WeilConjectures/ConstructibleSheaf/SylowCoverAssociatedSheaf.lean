@@ -19,7 +19,24 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
 /-!
 # A Sylow cover and its associated-sheaf functor
 
-Source: Stacks Project, Tags 0A3R, 0DV5 and 0DV6.
+For a finite locally constant sheaf `G` of `𝔽_ℓ`-modules on a connected scheme `U`, we construct
+a connected finite étale cover `v : V ⟶ U` of degree prime to `ℓ`, together with a finite
+`ℓ`-group `P` and an exact functor from `P`-representations to sheaves on `V` sending some
+finite-dimensional representation to `v^* G`
+(`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_sylow_cover_associated_sheaf`).
+
+## Implementation details
+
+The sheaf `G` corresponds to a finite-dimensional representation of the étale fundamental
+group over `𝔽_ℓ`; its finite image `Q` gives a connected finite étale `Q`-torsor `Y ⟶ U`. For
+an `ℓ`-Sylow subgroup `P` of `Q`, the cover `V = Y/P` has degree `[Q : P]`, prime to `ℓ`. The
+`P`-torsor `Y ⟶ V` associates a sheaf to every `P`-representation by descent of the constant
+sheaf on `Y`; on `Y` this is the constant-sheaf functor, which is exact, and exactness is
+checked on geometric stalks.
+
+## References
+
+* Stacks Project, Tags 0A3R, 0DV5 and 0DV6.
 -/
 
 @[expose] public section
@@ -34,28 +51,12 @@ namespace AlgebraicGeometry
 
 open Etale
 
-/-- The geometric part of the Sylow reduction, without constructing any filtration.
-
-Source: Stacks Project, `etale-cohomology.tex`, Lemma 0A3R
-(`lemma-pullback-filtered`), first part of the proof; Lemma 0DV5 and Remark 0DV6.
-(blueprint: lem-weil-pbc-sylow-cover-associated-sheaf)
-
-Proof: Choose a geometric point of the nonempty connected scheme U. The finite
-locally constant sheaf determines a finite-dimensional representation over ZMod ℓ.
-Its finite image Q gives a connected finite étale Q-torsor Y over U. Choose an
-ℓ-Sylow subgroup P of Q and put V = Y/P. The connected cover V has degree
-[Q:P], prime to ℓ. Its geometric fibres have that cardinality: the finite locally
-free degree is constant on connected U, preserved by base change, and equals the
-number of copies of a separably closed field in the fibre algebra.
-The P-torsor Y over V associates a sheaf to every P-representation: descend the
-constant module sheaf on Y with its P-action, and extend scalars along the canonical
-ring isomorphism ZMod ℓ ≃ ULift (ZMod ℓ). This construction works also for infinite
-modules, since P is finite. On the étale cover Y it is the constant-sheaf functor,
-which is additive and exact; exactness can be checked on geometric stalks, so the
-associated-sheaf functor preserves finite limits and colimits. The trivial rank-one
-representation descends to the constant coefficient sheaf. Functoriality of the
-monodromy correspondence identifies the image of the restricted representation M
-with v*G. If G is zero, Q and P are trivial and M is zero; V can be U. -/
+/-- **Sylow cover and associated-sheaf functor.** For a finite locally constant sheaf `G` of
+`𝔽_ℓ`-modules on a connected scheme `U`, there are a connected finite étale cover `v : V ⟶ U`
+whose geometric fibres all have cardinality `d` prime to `ℓ`, a finite `ℓ`-group `P`, a
+finite-dimensional `P`-representation `M` and an additive functor `T` from `P`-representations
+to sheaves on `V` preserving finite limits and colimits, with `T M ≅ v^* G` and `T` sending the
+trivial rank-one representation to the constant sheaf. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_sylow_cover_associated_sheaf
     {U : Scheme.{u}} [ConnectedSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))

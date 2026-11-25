@@ -11,7 +11,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedClassMapBas
 /-!
 # Base change of the projective-line trace
 
-Blueprint `det-sp-p1-trace`, clauses (1) and (2): the decomposition map
+The decomposition map
 `(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])` of the projective line `q : ℙ¹_S ⟶ S`
 (`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`) and the trace
 `Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S` (`AlgebraicGeometry.Etale.projectiveLineTrace`) commute with
@@ -19,11 +19,13 @@ every base change `g : S' ⟶ S`, through the proper base change map
 `Lg^* Rq_* ⟶ Rq'_* Lg'^*` (`AlgebraicGeometry.Etale.derivedBaseChangeMap`) and the canonical
 identifications of the pulled back coefficients.
 
-## The argument
+## Implementation details
 
-The unit component of `(1, h)` commutes with base change by the compatibility of the base change
-map with the units of the adjunctions. For the component `h`, the hyperplane class
-`h = -c₁(𝒪(1))` is the class of the section at infinity with forgotten supports
+The statements are first proved for the auxiliary objects
+(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux`, ...) and transferred to the main ones
+by a sign. The unit component of `(1, h)` commutes with base change by the compatibility of the
+base change map with the units of the adjunctions. For the component `h`, the auxiliary hyperplane
+class `-c₁(𝒪(1))` is the class of the section at infinity with forgotten supports
 (`AlgebraicGeometry.Etale.chartBoundaryClass_eq`), so it suffices to see that the class with
 supports restricts to the class with supports of `ℙ¹_{S'}`
 (`AlgebraicGeometry.Etale.restrictSupportedClass_chartBoundarySupportedClass_of_isPullback`).
@@ -185,10 +187,10 @@ variable {S S' : Scheme.{u}} [HasInvertibleExponent Λ S] [HasInvertibleExponent
   (g : S' ⟶ S)
 
 variable (Λ) in
-/-- **Base change of the hyperplane class.** The pullback of the hyperplane class
-`h ∈ H²(ℙ¹_S, Λ(1))` (`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux`) along
+/-- **Base change of the auxiliary hyperplane class.** The pullback of the auxiliary hyperplane
+class `-h ∈ H²(ℙ¹_S, Λ(1))` (`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux`) along
 `g' : ℙ¹_{S'} ⟶ ℙ¹_S`, read through `Λ_{ℙ¹_{S'}} ≅ Lg'^* Λ_{ℙ¹_S}` and
-`Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, is the hyperplane class of `ℙ¹_{S'}`. -/
+`Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, is the auxiliary hyperplane class of `ℙ¹_{S'}`. -/
 theorem projectiveLineHyperplaneClassAux_baseChange :
     (leftDerivedUpperStarConstantComplexIso Λ
         (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).inv ≫
@@ -219,9 +221,10 @@ theorem projectiveLineHyperplaneClassAux_baseChange :
     restrictSupportedClass_comp_counit]
 
 variable (Λ) in
-/-- **Base change of the hyperplane class** `h = c₁(𝒪(1))` of the notes
-(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`): the negative of the auxiliary statement
-`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux_baseChange`. -/
+/-- **Base change of the hyperplane class.** The pullback of the hyperplane class
+`h = c₁(𝒪(1))` (`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`) along
+`g' : ℙ¹_{S'} ⟶ ℙ¹_S`, read through `Λ_{ℙ¹_{S'}} ≅ Lg'^* Λ_{ℙ¹_S}` and
+`Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, is the hyperplane class of `ℙ¹_{S'}`. -/
 theorem projectiveLineHyperplaneClass_baseChange :
     (leftDerivedUpperStarConstantComplexIso Λ
         (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).inv ≫
@@ -289,12 +292,10 @@ variable (Λ) in
 /-- **Base change of the decomposition map.** Let `g' : ℙ¹_{S'} ⟶ ℙ¹_S` be the base change of
 `g : S' ⟶ S`. The pullback along `g` of the decomposition map
 `(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`
-(`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`, with the hyperplane class `h = c₁(𝒪(1))`
-of the notes), followed by the proper base change map `Lg^* Rq_* ⟶ Rq'_* Lg'^*` and
-`Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, is the decomposition map of `ℙ¹_{S'}`, preceded by the identification
-`Lg^*(Λ_S(1)[2] ⊕ Λ_S) ≅ Λ_{S'}(1)[2] ⊕ Λ_{S'}`. From the auxiliary statement
-`AlgebraicGeometry.Etale.projectiveLineDecompositionMapAux_baseChange`, since the decomposition map
-is the auxiliary one precomposed with `1 ⊕ (-1)`, which commutes with the identification. -/
+(`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`, with `h = c₁(𝒪(1))`), followed by the
+proper base change map `Lg^* Rq_* ⟶ Rq'_* Lg'^*` and `Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, is the
+decomposition map of `ℙ¹_{S'}`, preceded by the identification
+`Lg^*(Λ_S(1)[2] ⊕ Λ_S) ≅ Λ_{S'}(1)[2] ⊕ Λ_{S'}`. -/
 theorem projectiveLineDecompositionMap_baseChange :
     (L((g)^*[ModuleCat.{u + 1} Λ])).map (projectiveLineDecompositionMap Λ S) ≫
         (derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
@@ -364,8 +365,7 @@ variable (Λ) in
 `g : S' ⟶ S` with base change `g' : ℙ¹_{S'} ⟶ ℙ¹_S`, the pullback along `g` of the trace
 `Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S` (`AlgebraicGeometry.Etale.projectiveLineTrace`) is the
 proper base change map `Lg^* Rq_* ⟶ Rq'_* Lg'^*`, followed by `Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, the
-trace of `ℙ¹_{S'}` and `Λ_{S'} ≅ Lg^* Λ_S`. From the auxiliary statement
-`AlgebraicGeometry.Etale.projectiveLineTraceAux_baseChange` by `Tr_q = -Tr_q^{aux}`. -/
+trace of `ℙ¹_{S'}` and `Λ_{S'} ≅ Lg^* Λ_S`. -/
 theorem projectiveLineTrace_baseChange [HasKummerClass.IsNormalized Λ] :
     (L((g)^*[ModuleCat.{u + 1} Λ])).map (projectiveLineTrace Λ S) =
       (derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
@@ -383,9 +383,8 @@ variable (Λ) in
 `ℙ¹_S` read on `Rq_! ≅ Rq_*`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`)
 commutes with base change through the compactly supported base change map
-`Ex_! : Lg^* Rq_! ⟶ Rq'_! Lg'^*` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap`):
-`Rq_! ≅ Rq_*` intertwines `Ex_!` with the proper base change map
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap_comp_lowerStarIso`). -/
+`Ex_! : Lg^* Rq_! ⟶ Rq'_! Lg'^*` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap`).
+-/
 theorem projectiveLineTrace_lowerShriek_baseChange [HasKummerClass.IsNormalized Λ] :
     (L((g)^*[ModuleCat.{u + 1} Λ])).map
         ((rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ)

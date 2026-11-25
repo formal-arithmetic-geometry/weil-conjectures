@@ -11,11 +11,17 @@ import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingChain
 
 /-! # Chain part of signed shift laws for reindexing comparisons
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA
-(blueprint: lem-pod-reindexing-signed-shifts).
+Defines the chain square `ChainShiftPart` of the signed shift laws for a reindexing comparison
+and shows that chain shift presentations satisfying it exist.
 
-The chain square is isolated from the derived localization square so that the
-representative construction can be proved independently.
+## Implementation details
+
+The chain square is isolated from the derived localization square so that the representative
+construction can be proved independently.
+
+## References
+
+* Stacks Project, Tags 0A8X, 08JA
 -/
 
 @[expose] public noncomputable section
@@ -52,15 +58,8 @@ def ChainShiftPart {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
         (complexShift l E g s (b-a)).hom.app
           (hom l E Y s P I) ≫ ((c.chain P I).hom)⟦b-a⟧'
 
-/-- Construct normalized chain shifts and prove their reindexing square.
-
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA
-(blueprint: lem-pod-reindexing-signed-shifts).
-
-Proof: define the degree-r map by reindexing the p-factor to p-a and multiplying
-by `(-1)^(a*r)`. The ratio of consecutive degree scalars compensates the two
-terms of the Hom differential. Product projections prove the chain identity,
-and the specified comparison projections prove the reindexing square. -/
+/-- There are chain shift presentations on both sites satisfying the reindexing chain square
+`ChainShiftPart`. -/
 theorem chain_shift_part_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

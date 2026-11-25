@@ -17,9 +17,20 @@ import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 /-!
 # Colimits of pointed étale residue triples
 
-Source: Stacks Project, Tag 04GW (lemma-strict-henselization-different), and
-Mathlib's essential smallness of affine étale schemes and ring colimits.
-(blueprint: lem-weil-pbc-etale-triples-filtered-colimit-colimit)
+The ring diagram of pointed étale residue triples has a colimit, with compatible maps from `R`
+and to `K`.
+
+## Implementation details
+
+Triples embed fully faithfully into arrows `B → K` from the opposite of the affine étale site
+over `Spec R`. Essential smallness of that site (`Scheme.AffineEtale.instEssentiallySmall`)
+makes the category of triples essentially small, so `CommRingCat` has the required colimit.
+The map `ρ` comes from the identity triple on `R`, and `ψ` is the descent of the cocone of
+residue maps with vertex `K`. Filteredness is not needed for existence.
+
+## References
+
+* Stacks Project, Tag 04GW
 -/
 
 @[expose] public section
@@ -80,36 +91,7 @@ private noncomputable def triplesToPointedRingsFullyFaithful
   map_preimage f := by ext; rfl
   preimage_map f := by ext; rfl
 
-/-- A compatible cocone and its colimit exist for pointed étale residue triples.
-
-Source: Stacks Project, Tag 04GW (lemma-strict-henselization-different), the ring
-colimit in its statement; Mathlib `Scheme.AffineEtale.instEssentiallySmall` and
-`CommRingCat.hasColimits_commRingCat` for the size and existence assertions.
-
-Proof: Send a triple to the arrow `B → K` from its object in the opposite
-of the affine étale site over `Spec R`. This functor is fully faithful:
-the affine étale morphism gives the underlying ring map and its compatibility
-with `R`, while the costructured-arrow equation gives compatibility with `K`.
-Conversely these two equations define a morphism in the induced under-over
-category of triples. Mathlib's essential smallness of the affine étale site,
-and of costructured arrows over an essentially small category into a locally
-small category, therefore imply essential smallness of triples. Apply
-`HasColimitsOfShape.of_essentiallySmall` and the colimits instance of
-`CommRingCat.{u}` to obtain `c` and `IsColimit c`.
-
-Let `t0` be the identity triple with ring `R`, prime `p`, and residue map the prescribed
-algebra map. For each triple `t`, its structural map `t.α` is a morphism `t0 → t`:
-the required equation is precisely `t.compatible`. Set `ρ = c.ι.app t0`.
-Cocone naturality for this morphism gives `t.α ≫ c.ι.app t = ρ`.
-For each `t` let `j_t` be the composite of the inverse affine global-sections
-isomorphism, evaluation at `t.q`, and `t.φ`. A morphism of triples commutes with
-these maps by its equation in the induced under-over category. Thus the `j_t` form
-a cocone with vertex `CommRingCat.of K`. Its descent through `IsColimit c` is a
-ring homomorphism `ψ : c.pt →+* K`; the colimit factorization equations are exactly
-`ψ.comp (c.ι.app t).hom = j_t.hom`. These constructions prove every asserted clause.
-Only the fixed residue map is used in this argument, so the separable-closure
-hypothesis is harmless and no filteredness lemma is needed for existence.
-(blueprint: lem-weil-pbc-etale-triples-filtered-colimit-colimit) -/
+/-- A compatible cocone and its colimit exist for pointed étale residue triples. -/
 theorem etaleResidueTriples_exists_colimit_part
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     [Algebra ((Spec R).residueField p) K] [IsSepClosure ((Spec R).residueField p) K] :

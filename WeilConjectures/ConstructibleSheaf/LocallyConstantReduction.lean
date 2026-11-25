@@ -28,7 +28,7 @@ splits the unit `G ⟶ v_* v^* G`.
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction`:
-  the reduction (blueprint: `lemma-reduction-unipotent-local-system`).
+  the reduction.
 -/
 
 @[expose] public section
@@ -52,10 +52,7 @@ There is a connected finite étale `v : V ⟶ U` such that
   retraction (namely `d⁻¹ · tr`, the trace being the sum over the geometric fibres).
 
 The coefficient field `𝔽_ℓ` is `ULift.{u + 1} (ZMod ℓ)`, following the convention that the
-coefficient ring of `ModuleCat.{u + 1} Λ`-valued étale sheaves lives in `Type (u + 1)`.
-(blueprint: `lemma-reduction-unipotent-local-system`) 
-(blueprint: lemma-reduction-unipotent-local-system)
--/
+coefficient ring of `ModuleCat.{u + 1} Λ`-valued étale sheaves lives in `Type (u + 1)`. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction {U : Scheme.{u}}
     [ConnectedSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))

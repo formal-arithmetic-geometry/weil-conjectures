@@ -17,8 +17,18 @@ public import Mathlib.Topology.LocallyConstant.Algebra
 /-!
 # Equivariant sections on a finite torsor
 
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS.
-(blueprint: lemma-reduction-unipotent-local-system--1)
+For a finite Galois cover `c` of `V` with group `P` and a representation `N` of `P` over
+`ZMod ℓ`, the presheaf of `P`-equivariant locally constant `N`-valued functions on the total space
+of `c` above each étale object; its sheafification defines the associated module functor.
+
+## Main definitions
+
+- `AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheafFunctor`
+- `AlgebraicGeometry.Scheme.GaloisCover.associatedModuleFunctor`
+
+## References
+
+- Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS.
 -/
 
 @[expose] public section
@@ -135,9 +145,7 @@ instance equivariantModulePresheafFunctor_additive :
 
 /-- The associated module sheaf is the sheafification of equivariant locally constant
 sections on the total space of the torsor above each etale object. Scalars are restricted
-along the ring equivalence from the lifted coefficient ring to the coefficient ring.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS.
-(blueprint: lemma-reduction-unipotent-local-system--1) -/
+along the ring equivalence from the lifted coefficient ring to the coefficient ring. -/
 noncomputable def associatedModuleFunctor :
     Rep.{u + 1} (ZMod ℓ) P ⥤
       Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) :=

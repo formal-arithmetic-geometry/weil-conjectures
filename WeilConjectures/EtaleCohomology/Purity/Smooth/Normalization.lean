@@ -19,11 +19,9 @@ under `Rp_!` and the counit of `Rs_! ⊣ Rs^!`:
 `cl : Λ ≅ R(s ≫ p)_! Λ ≅ Rp_! Rs_! Λ ⟶ Rp_! Rs_! Rs^! Λ(1)[2] ⟶ Rp_! Λ(1)[2]`.
 
 The statement proved here is that *some* purity isomorphism `γ` has `Tr^sm_p(cl) = 1`. It does
-not single out the canonical `γ` of blueprint `proposition-transitivity-trace-map--1`
-(normalized on the projective line): the orientation `pur_s` is the Kummer boundary `∂κ(t)`,
-which forgets supports to `-c₁(𝒪(V(t)))` (blueprint `lemma-cycle-class-cartier-divisor` (b)), so for
-the canonical `γ` the trace of `cl` is `-1`, and `(-1)^d` for the ordered fundamental class of
-`𝔸^d`.
+not single out the canonical `γ` (normalized on the projective line): the orientation `pur_s` is
+the Kummer boundary `∂κ(t)`, which forgets supports to `-c₁(𝒪(V(t)))`, so for the canonical `γ`
+the trace of `cl` is `-1`, and `(-1)^d` for the ordered fundamental class of `𝔸^d`.
 
 ## Main definitions
 
@@ -32,9 +30,7 @@ the canonical `γ` the trace of `cl` is `-1`, and `(-1)^d` for the ordered funda
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isIso_affineLineFundamentalClass_comp_smoothPurityTrace`: for every
-  purity isomorphism, the trace of the fundamental class is invertible. It is the adjoint of the
-  orientation, which is an isomorphism, and the counit of `R(s ≫ p)_! ⊣ R(s ≫ p)^!` is an
-  isomorphism since `s ≫ p` is.
+  purity isomorphism, the trace of the fundamental class is invertible.
 - `AlgebraicGeometry.Etale.exists_affineLineFundamentalClass_comp_smoothPurityTrace`: for some
   purity isomorphism, the trace of the fundamental class is `1`.
 
@@ -45,6 +41,10 @@ The composition isomorphism `α : R(s ≫ p)_! ≅ Rs_! ⋙ Rp_!` and the identi
 exist, so they are arguments; the purity map of `p` is only known to exist as well, so the
 normalization asserts that some purity map is normalized, which is the form in which it
 determines the canonical one.
+
+The trace of the fundamental class is invertible because it is the adjoint, for the composite
+adjunction `Rs_! ⋙ Rp_! ⊣ Rp^! ⋙ Rs^!`, of the isomorphism `Rs^!(u) ∘ pur_s` (with
+`u = γ ∘ ι⁻¹`), and the counit of this adjunction is an isomorphism since `s ≫ p` is.
 -/
 
 @[expose] public section
@@ -99,26 +99,10 @@ noncomputable def affineLineFundamentalClass
         {AffineSpace.coord Y (ULift.up 0)})).counit.app
           ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧))
 
-/-- Blueprint `proposition-transitivity-trace-map--1`: Trace normalization and transitivity
-
-**The trace of the fundamental class is invertible.** For `Y` separated and locally
+/-- **The trace of the fundamental class is invertible.** For `Y` separated and locally
 of finite type over a field and every purity isomorphism
 `γ_{p,Λ} : Lp^* Λ(1)[2] ≅ Rp^! Λ` of the affine line `p : 𝔸¹_Y ⟶ Y`, the composite
-`Tr^sm_{p,Λ} ∘ cl ∘ ψ : Λ_Y ⟶ Λ_Y` is an isomorphism. Writing `u = γ ∘ ι⁻¹ : Λ(1)[2] ≅ Rp^! Λ`,
-the composite is the adjoint, for the composite adjunction `Rs_! ⋙ Rp_! ⊣ Rp^! ⋙ Rs^!`, of the
-isomorphism `Rs^!(u) ∘ pur_s : Λ_{V(t)} ≅ Rs^! Rp^! Λ` (the orientation `pur_s` is an
-isomorphism, `AlgebraicGeometry.Etale.isIso_affineLineOrientation`):
-
-```
-Λ_Y ──ψ──▶ R(s ≫ p)_! Λ ──α──▶ Rp_! Rs_! Λ ──Rp_! Rs_!(Rs^!(u) ∘ pur_s)──▶ Rp_! Rs_! Rs^! Rp^! Λ
-                                                                                │ counit
-                                                                                ▼
-                                                                               Λ_Y
-```
-
-and the counit of the composite adjunction is an isomorphism because `s ≫ p : V(t) ⟶ Y` is an
-isomorphism (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekAdjunction_counit_of_isIso`),
-through `α : R(s ≫ p)_! ≅ Rs_! ⋙ Rp_!`. -/
+`Tr^sm_{p,Λ} ∘ cl ∘ ψ : Λ_Y ⟶ Λ_Y` is an isomorphism. -/
 theorem isIso_affineLineFundamentalClass_comp_smoothPurityTrace [HasKummerClass.IsNormalized Λ]
     {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
     (α : R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
@@ -176,15 +160,10 @@ theorem isIso_affineLineFundamentalClass_comp_smoothPurityTrace [HasKummerClass.
   rw [key]
   infer_instance
 
-/-- Blueprint `proposition-transitivity-trace-map--1`: Trace normalization and transitivity
-
-**Normalization on the affine line.** Over a separably closed field `k`: for every
+/-- **Normalization on the affine line.** Over a separably closed field `k`: for every
 composition isomorphism `α` and identification `ψ : Λ_k ≅ R(s ≫ p)_! Λ_{V(t)}` there is a
 purity isomorphism `γ_{p,Λ} : Lp^* Λ(1)[2] ≅ Rp^! Λ` of the affine line `p : 𝔸¹_k ⟶ Spec k`
-with `Tr^sm_{p,Λ} ∘ cl ∘ ψ = 1`. This `γ` is not the canonical one of the blueprint (normalized
-on the projective line): `cl` is built from the Kummer boundary `∂κ(t)`, which forgets supports
-to `-c₁(𝒪(V(t)))` (blueprint `lemma-cycle-class-cartier-divisor` (b)), so the canonical `γ` gives
-`Tr^sm_{p,Λ} ∘ cl ∘ ψ = -1`, and `(-1)^d` on the ordered fundamental class of `𝔸^d`. -/
+with `Tr^sm_{p,Λ} ∘ cl ∘ ψ = 1`. -/
 theorem exists_affineLineFundamentalClass_comp_smoothPurityTrace {k : Type u} [Field k]
     [IsSepClosed k] [HasKummerClass.IsNormalized Λ]
     [HasInvertibleExponent Λ (Spec (.of k))]

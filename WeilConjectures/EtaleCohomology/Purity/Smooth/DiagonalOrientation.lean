@@ -18,17 +18,16 @@ For `f : X ⟶ Y` smooth separated of pure relative dimension `d`, `Y` separated
 finite type over a field, and a finite coefficient ring `Λ` with invertible exponent and a
 normalized Kummer class, this file constructs an explicit isomorphism
 
-`ω_f = Rf^! Λ_Y ≅ Λ_X(d)[2d]`
+`ω_f = Rf^! Λ_Y ≅ Λ_X(d)[2d]`.
 
-(blueprint `proposition-relative-dualizing-complex--1`). The existence of such an isomorphism is
+The existence of such an isomorphism is
 `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`; here every step of its proof
 is replaced by a concrete map, and nothing is chosen from a `Nonempty`:
 
 1. `ω_{p₁} ≅ Lp₂^* ω_f` for the projections of `X ×_Y X` is the inverse of the canonical base
    change map of the dualizing complexes (`AlgebraicGeometry.Etale.dualizingComplexBaseChangeMap`),
-   an isomorphism by smooth base change (blueprint
-   `proposition-exceptional-inverse-image-smooth-morphism--7`). Pulling back along the diagonal
-   gives `𝒞(p₁, Δ) ≅ ω_f`.
+   an isomorphism by smooth base change. Pulling back along the diagonal gives
+   `𝒞(p₁, Δ) ≅ ω_f`.
 2. For a closed section `s` of a smooth `g : V ⟶ B` of relative dimension `c`, the purity of the
    section `Rs^!(Λ_V(c)[2c]) ≅ Λ_B` is the inverse of the adjoint of the fundamental class
    glued from the coordinate frames (`AlgebraicGeometry.Etale.thomFundamentalClassMap`), and
@@ -92,18 +91,14 @@ noncomputable def rightDerivedUpperShriekDualizingComplexIsoOfCompEqId {V B : Sc
       (rightDerivedLowerShriekCompIsoOfEq Λ s g (𝟙 B) hs)).app (𝟙_ _) ≪≫
     (rightDerivedUpperShriekIdIso Λ B).app _
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Section invariant
-
-For `s : B ⟶ V` admitting a compactification and invertible objects `ω`, `T` of `D(V_ét, Λ)`
+/-- For `s : B ⟶ V` admitting a compactification and invertible objects `ω`, `T` of `D(V_ét, Λ)`
 with `Rs^! T ≅ Λ_B` and `Rs^! ω ≅ Λ_B`, the isomorphism
 
 `Ls^* ω ≅ Rs^! T ⊗ Ls^* ω ≅ Rs^!(T ⊗ ω) ≅ Rs^!(ω ⊗ T) ≅ Rs^! ω ⊗ Ls^* T ≅ Ls^* T`,
 
 through the canonical tensor maps `Rs^! M ⊗ Ls^* N ⟶ Rs^!(M ⊗ N)`
-(`AlgebraicGeometry.Etale.rightDerivedUpperShriekTensorMap`, the co-projection of
-`lem-pur-coprojection`), which are isomorphisms for `N` invertible, and the symmetry of `⊗ᴸ`.
-Unlike `AlgebraicGeometry.Etale.derivedTensorRightCompRightDerivedUpperShriekIso`, it does not
-depend on a choice of tensor inverses of `ω` and `T`. -/
+(`AlgebraicGeometry.Etale.rightDerivedUpperShriekTensorMap`), which are isomorphisms for `N`
+invertible, and the symmetry of `⊗ᴸ`. -/
 noncomputable def leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso {V B : Scheme.{u}}
     (s : B ⟶ V) [HasCompactification s]
     {ω T : _root_.DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -125,9 +120,7 @@ noncomputable def leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso {V B : Sch
 `c` with a closed section `s`, `B` separated and locally of finite type over a field,
 `Rs^! (Λ_V(c)[2c]) ≅ Λ_B`: the inverse of the adjoint
 `cl_s : Λ_B ⟶ Rs^! (Λ_V(c)[2c])` (`AlgebraicGeometry.Etale.thomFundamentalClassMap`) of the
-fundamental class of `s`, glued from the classes of the coordinate frames
-(`AlgebraicGeometry.Etale.hasThomFrames_of_section`). This is the isomorphism of
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_tateObject_of_section`. -/
+fundamental class of `s`. -/
 noncomputable def rightDerivedUpperShriekTateObjectIsoOfSection [HasKummerClass Λ]
     [HasKummerClass.IsNormalized Λ] {V B : Scheme.{u}} (c : ℕ) (g : V ⟶ B)
     [SmoothOfRelativeDimension c g] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)
@@ -140,9 +133,7 @@ noncomputable def rightDerivedUpperShriekTateObjectIsoOfSection [HasKummerClass 
   (asIso (thomFundamentalClassMap Λ (hasThomFrames_of_section Λ c g s hs aB)
     (hasRegularZariskiFrames_of_section c g s hs) (g ≫ aB))).symm
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Section invariant
-
-**The section invariant of a section of a smooth morphism.** For `g : V ⟶ B` smooth of relative
+/-- **The section invariant of a section of a smooth morphism.** For `g : V ⟶ B` smooth of relative
 dimension `c` with a closed section `s`, `B` separated and locally of finite type over a field,
 and a normalized Kummer class,
 
@@ -152,8 +143,7 @@ where the first isomorphism is
 `AlgebraicGeometry.Etale.leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso` for the purity of
 the section (`AlgebraicGeometry.Etale.rightDerivedUpperShriekTateObjectIsoOfSection`) and
 `Rs^! ω_g ≅ Λ_B` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekDualizingComplexIsoOfCompEqId`).
-This is the isomorphism of
-`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_twistShift_of_section`. -/
+-/
 noncomputable def sectionInvariantTwistShiftIsoOfSection [HasKummerClass Λ]
     [HasKummerClass.IsNormalized Λ] {V B : Scheme.{u}} (c : ℕ) (g : V ⟶ B)
     [SmoothOfRelativeDimension c g] [HasCompactification g] (s : B ⟶ V) [IsClosedImmersion s]
@@ -173,19 +163,14 @@ noncomputable def sectionInvariantTwistShiftIsoOfSection [HasKummerClass Λ]
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f]
   [HasCompactification f] [HasInvertibleExponent Λ X]
 
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--7`: Base change for the
-dualizing object of a projection
+/-- **Base change for the dualizing object of a projection.** For `W = X ×_Y X` with projections
+`p₁, p₂`, the inverse
 
-Let `W = X ×_Y X` with projections `p₁, p₂`. The square `p₂ ≫ f = p₁ ≫ f` is cartesian and `p₁`
-is the base change of the smooth `f`, so the canonical base change map
-`Lp₂^* ω_f ⟶ ω_{p₁}` (`AlgebraicGeometry.Etale.dualizingComplexBaseChangeMap`) is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`);
-this is its inverse
+`ω_{p₁} = Rp₁^! Λ_X ≅ Lp₂^* Rf^! Λ_Y = Lp₂^* ω_f`
 
-`ω_{p₁} = Rp₁^! Λ_X ≅ Lp₂^* Rf^! Λ_Y = Lp₂^* ω_f`.
-
-Smooth base change is available over a quasi-separated base `Y` for the quasi-compact base
-change `p₁` of `f`. -/
+of the canonical base change map `Lp₂^* ω_f ⟶ ω_{p₁}`
+(`AlgebraicGeometry.Etale.dualizingComplexBaseChangeMap`), an isomorphism by smooth base change.
+-/
 noncomputable def dualizingComplexPullbackFstIso [QuasiSeparatedSpace Y] [QuasiCompact f] :
     dualizingComplex Λ (pullback.fst f f) ≅
       (L((pullback.snd f f)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ f) :=
@@ -195,39 +180,25 @@ noncomputable def dualizingComplexPullbackFstIso [QuasiSeparatedSpace Y] [QuasiC
     inferInstance
   (asIso (dualizingComplexBaseChangeMap Λ (IsPullback.of_hasPullback f f).flip)).symm
 
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--7`: Base change for the
-dualizing object of a projection
-
-The section invariant of the diagonal `Δ : X ⟶ X ×_Y X`, a closed section of `p₁`, is the
+/-- The section invariant of the diagonal `Δ : X ⟶ X ×_Y X`, a closed section of `p₁`, is the
 dualizing complex of `f`: since `Δ ≫ p₂ = 𝟙 X`,
 
-`𝒞(p₁, Δ) = LΔ^* ω_{p₁} ≅ LΔ^* Lp₂^* ω_f ≅ ω_f`,
-
-through `AlgebraicGeometry.Etale.dualizingComplexPullbackFstIso` and
-`AlgebraicGeometry.Etale.leftDerivedUpperStarCompSectionIso`. This is the isomorphism of
-`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_diagonal`. -/
+`𝒞(p₁, Δ) = LΔ^* ω_{p₁} ≅ LΔ^* Lp₂^* ω_f ≅ ω_f`. -/
 noncomputable def sectionInvariantDiagonalIso [QuasiSeparatedSpace Y] [QuasiCompact f] :
     sectionInvariant Λ (pullback.fst f f) (pullback.diagonal f) ≅ dualizingComplex Λ f :=
   (L((pullback.diagonal f)^*[ModuleCat.{u + 1} Λ])).mapIso
       (dualizingComplexPullbackFstIso Λ f d) ≪≫
     (leftDerivedUpperStarCompSectionIso _ _ _ (pullback.diagonal_snd f)).app _
 
-/-- Blueprint `proposition-relative-dualizing-complex--1`: The dualizing object of a smooth morphism
+/-- **The dualizing object of a smooth morphism.** For `f : X ⟶ Y` smooth separated of pure
+relative dimension `d`, `Y` separated and locally of finite type over a field, and a finite
+coefficient ring `Λ` with invertible exponent and a normalized Kummer class, the isomorphism
 
-For `f : X ⟶ Y` smooth separated of pure relative dimension `d`, `Y` separated and locally of
-finite type over a field, and a finite coefficient ring `Λ` with invertible exponent and a
-normalized Kummer class, the isomorphism
+`θ : ω_f = Rf^! Λ_Y ≅ 𝒞(p₁, Δ) ≅ Λ_X(d)[2d]`,
 
-`θ : ω_f = Rf^! Λ_Y ≅ 𝒞(p₁, Δ) ≅ Λ_X(d)[2d]`
-
-of the diagonal argument: the inverse of
-`AlgebraicGeometry.Etale.sectionInvariantDiagonalIso` (smooth base change, blueprint
-`proposition-exceptional-inverse-image-smooth-morphism--7`) followed by
+the inverse of `AlgebraicGeometry.Etale.sectionInvariantDiagonalIso` followed by
 `AlgebraicGeometry.Etale.sectionInvariantTwistShiftIsoOfSection` for the diagonal, a closed
-section of the smooth projection `p₁ : X ×_Y X ⟶ X`. Every step is a concrete isomorphism, so
-this is a canonical form of `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`;
-it does not depend on the structure morphism `aY`
-(`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_eq`). -/
+section of the smooth projection `p₁ : X ×_Y X ⟶ X`. -/
 noncomputable def dualizingComplexTwistShiftIso [HasKummerClass Λ]
     [HasKummerClass.IsNormalized Λ] [IsSeparated f] {k : Type u} [Field k]
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :

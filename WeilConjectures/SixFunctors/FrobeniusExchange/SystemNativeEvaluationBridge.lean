@@ -19,8 +19,15 @@ specified by adjunction mates of the section-normalized pullback evaluation. Thi
 file identifies them with the native varying-ring evaluations `evalP` and `evalJ`,
 followed by the fixed finite coordinate changes.
 
-Source: Zheng 4.1 and 4.10; Stacks 03DI, 03D2
-(blueprint: def-weil-system-operation-exchange-realization).
+## Implementation details
+
+`pullEvaluationMate_eq` is proved by transporting the mate through the finite adjoint
+coordinate change, using that `moduleEvalG` is the mate of `moduleEvalP`.
+
+## References
+
+- W. Zheng, 4.1 and 4.10.
+- Stacks Project, Tags 03DI, 03D2, 07A6.
 -/
 
 @[expose] public noncomputable section
@@ -95,9 +102,7 @@ theorem nativeFinitePullIso_eq_openSquarePullbackModel {X Y : Scheme.{u}} (f : X
 
 /-- The inverse mate of the native ordinary direct-image evaluation, in finite intrinsic
 coordinates, is the native ordinary pullback evaluation followed by the open-square
-pullback coordinate change.
-Source: Zheng 4.1; Stacks 03D2. Proof: transport the mate through the finite
-adjoint coordinate change, using that `moduleEvalG` is the mate of `moduleEvalP`. -/
+pullback coordinate change. -/
 theorem pullEvaluationMate_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ((mateEquiv (ProEtale.VaryingRing.moduleAdj (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) f)
@@ -158,8 +163,7 @@ theorem pullEvaluationMate_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
 
 /-- Exact localization of `pullEvaluationMate_eq`: any ordinary pullback evaluation
 isomorphism with the native normalization localizes to the native derived evaluation
-`evalG`, followed by the open-square pullback coordinate change.
-Source: Zheng 4.1; Stacks 03D2. -/
+`evalG`, followed by the open-square pullback coordinate change. -/
 theorem pullEvaluation_derived {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (θ : ProEtale.VaryingRing.eval (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) Y n ⋙
@@ -224,8 +228,7 @@ private theorem eq_of_comp_inv {C : Type*} [Category C] {P Q S : C} (x : P ⟶ S
 
 /-- The finite evaluation of the strict-system direct image, defined as the derived
 adjunction mate of a pullback evaluation with the native normalization, is the native
-evaluation `evalP` followed by the right-derived finite coordinate change.
-Source: Zheng 4.10; Stacks 07A6. -/
+evaluation `evalP` followed by the right-derived finite coordinate change. -/
 theorem directEvaluationMate_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (σ : ProEtale.VaryingRing.ev (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) Y n ⋙
@@ -294,8 +297,7 @@ private theorem id_comp_eq {C : Type*} [Category C] {P Q : C} {x y : P ⟶ Q} (h
 
 /-- The finite evaluation of strict-system open extension, defined as the inverse derived
 open-adjunction mate of a pullback evaluation with the native normalization, is inverse to
-the native evaluation `evalJ` followed by the finite open coordinate change.
-Source: Stacks 03DI; Zheng 4.1. -/
+the native evaluation `evalJ` followed by the finite open coordinate change. -/
 theorem openEvaluationMate_eq {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ)
     (σ : ProEtale.VaryingRing.ev (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) X n ⋙
@@ -395,8 +397,7 @@ private theorem eqToIso_sections {X Y : Scheme.{u}} (n : ℕ)
   rfl
 
 /-- Every equality between ordinary direct-image evaluation and finite direct image induces
-the native ordinary direct-image evaluation, since both are the identity on sections.
-Source: Zheng 4.1 (blueprint: def-weil-system-operation-exchange-realization). -/
+the native ordinary direct-image evaluation. -/
 theorem eqToIso_directEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (h : ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) f ⋙ coefficientSequenceEvaluation l E Y n =
@@ -416,8 +417,7 @@ theorem eqToIso_directEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
 end Sections
 
 /-- Transpose a map into a total limit, given by its projections, under a finite
-reduction adjunction. The evaluated counit is assumed to be the adjunct of the projection.
-Source: Stacks 07A6 (blueprint: def-weil-system-operation-exchange-realization). -/
+reduction adjunction. The evaluated counit is assumed to be the adjunct of the projection. -/
 theorem map_comp_counit_eq_of_projection {C D T : Type*} [Category C] [Category D]
     [Category T] {F : C ⥤ D} {R : D ⥤ C} (a : F ⊣ R) {S : C ⥤ T} {L : T ⥤ C}
     (b : S ⊣ L) {ev : T ⥤ D} (π : L ⟶ ev ⋙ R) (e : S ⋙ ev ≅ F)

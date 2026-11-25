@@ -28,9 +28,9 @@ public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
   variety has strictly smaller dimension.
 - `MvPolynomial.height_eq_of_isMaximal`: every maximal ideal of `k[X₁, …, Xₙ]` has height `n`.
 
-## Blueprint
+## References
 
-- `lem-wf-affine-dimension-drop`: proper closed subsets have strictly smaller dimension.
+* [Stacks: Tag 00OP](https://stacks.math.columbia.edu/tag/00OP)
 -/
 
 @[expose] public section
@@ -74,8 +74,7 @@ theorem Ideal.eq_of_le_of_ringKrullDim_quotient_eq {R : Type*} [CommRing R] {I J
   exact absurd (WithBot.coe_le_coe.1 this) (by norm_cast; omega)
 
 /-- In a domain `R` of finite Krull dimension, the quotient by a nonzero ideal `I` has strictly
-smaller dimension: a prime chain of `R ⧸ I` consists of nonzero primes of `R`, and prepending the
-prime `(0)` lengthens it. -/
+smaller dimension. -/
 theorem ringKrullDim_quotient_lt_of_ne_bot {R : Type*} [CommRing R] [IsDomain R]
     (hR : ringKrullDim R ≠ ⊤) {I : Ideal R} (hI : I ≠ ⊥) :
     ringKrullDim (R ⧸ I) < ringKrullDim R := by
@@ -85,13 +84,9 @@ theorem ringKrullDim_quotient_lt_of_ne_bot {R : Type*} [CommRing R] [IsDomain R]
     (Ideal.Quotient.factor_surjective (bot_le (a := I)))) fun h ↦ hI ?_
   exact Ideal.eq_of_le_of_ringKrullDim_quotient_eq (hIJ := bot_le) (hI := Ideal.isPrime_bot) hR h
 
-/-- Blueprint `lem-wf-affine-dimension-drop`: let `A` be the coordinate algebra of an irreducible
-affine variety over a field `k`, i.e. a reduced finitely generated `k`-algebra with irreducible
-spectrum. Then `A` is a domain (`PrimeSpectrum.isDomain_of_irreducibleSpace`), and a proper closed
-subset `V(I)`, i.e. one with `I ≠ 0`, has strictly smaller dimension: `dim (A ⧸ I) < dim A`.
-
-The dimension of `A` is finite (`ringKrullDim_ne_top_of_finiteType`), and the strict drop is
-`ringKrullDim_quotient_lt_of_ne_bot`. -/
+/-- Let `A` be the coordinate algebra of an irreducible affine variety over a field `k`, i.e. a
+reduced finitely generated `k`-algebra with irreducible spectrum. Then a proper closed subset
+`V(I)`, i.e. one with `I ≠ 0`, has strictly smaller dimension: `dim (A ⧸ I) < dim A`. -/
 theorem ringKrullDim_quotient_lt_of_irreducibleSpace (k A : Type*) [Field k] [CommRing A]
     [IsReduced A] [IrreducibleSpace (PrimeSpectrum A)] [Algebra k A] [Algebra.FiniteType k A]
     {I : Ideal A} (hI : I ≠ ⊥) : ringKrullDim (A ⧸ I) < ringKrullDim A := by
@@ -99,9 +94,7 @@ theorem ringKrullDim_quotient_lt_of_irreducibleSpace (k A : Type*) [Field k] [Co
   exact ringKrullDim_quotient_lt_of_ne_bot (ringKrullDim_ne_top_of_finiteType k A) hI
 
 open Ideal in
-/-- Every maximal ideal of the polynomial ring `k[X₁, …, Xₙ]` over a field `k` has height `n`:
-writing `k[X₁, …, Xₙ₊₁] = k[X₁, …, Xₙ][X]`, a maximal ideal lies over a maximal ideal of
-`k[X₁, …, Xₙ]` since this ring is Jacobson, and its height is one more than that one. -/
+/-- Every maximal ideal of the polynomial ring `k[X₁, …, Xₙ]` over a field `k` has height `n`. -/
 theorem MvPolynomial.height_eq_of_isMaximal {k : Type*} [Field k] :
     ∀ (n : ℕ) (M : Ideal (MvPolynomial (Fin n) k)) [M.IsMaximal], M.height = n
   | 0, M, _ => by
@@ -122,8 +115,7 @@ theorem MvPolynomial.height_eq_of_isMaximal {k : Type*} [Field k] :
     norm_cast
 
 /-- For a field `k` and a maximal ideal `M` of `P = k[X₁, …, Xₙ]`, the localization `P_M` has
-Krull dimension `n` (Stacks `00OP`): its dimension is the height of `M`, which is `n`.
-(blueprint: `lem-weil-pbc-polynomial-ring-maximal-localization-dimension`) -/
+Krull dimension `n` (Stacks `00OP`). -/
 theorem MvPolynomial.ringKrullDim_localization_atPrime_of_isMaximal {k : Type*} [Field k]
     (n : ℕ) (M : Ideal (MvPolynomial (Fin n) k)) [M.IsMaximal] :
     ringKrullDim (Localization.AtPrime M) = n := by

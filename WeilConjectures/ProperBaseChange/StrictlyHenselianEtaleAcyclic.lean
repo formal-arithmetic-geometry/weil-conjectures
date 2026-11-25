@@ -15,8 +15,12 @@ import Mathlib.CategoryTheory.Abelian.Exact
 /-!
 # Etale acyclicity of a strictly henselian local scheme
 
-Source: Stacks Project, etale-cohomology.tex, Lemma Tag 03QO
-(blueprint: lem-weil-pbc-strictly-henselian-etale-acyclic).
+For a strictly henselian local ring, the global sections functor on the small étale site is
+exact and all positive-degree étale cohomology vanishes.
+
+## References
+
+- [Stacks, Tag 03QO]
 -/
 
 @[expose] public section
@@ -27,10 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry
 
 /-- For a strictly henselian local ring, global sections on the small etale site are exact,
-and all positive-degree etale cohomology objects vanish.
-Source: Stacks Project, etale-cohomology.tex, Lemma Tag 03QO
-(blueprint: lem-weil-pbc-strictly-henselian-etale-acyclic).
--/
+and all positive-degree etale cohomology objects vanish. -/
 theorem strictlyHenselian_etale_acyclic
     (R : Type u) [CommRing R] [IsLocalRing R]
     (hR : IsStrictlyHenselianLocalRing R) :

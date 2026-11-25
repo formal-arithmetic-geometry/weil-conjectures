@@ -9,11 +9,14 @@ public import WeilConjectures.DeligneLaumon.FinitePullbackStrictTowerData.Finite
 
 /-! # Normalized Koszul tower comparison interface
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4 and sites-modules.tex, Tag 03EL.
-(blueprint: lem-a1-balanced-finite-tower-normalized-theta).
+## Implementation details
 
-The proof is the ordinary pullback/tensor comparison on the two free Koszul
-summands, extended over the sheafified total tensor and its direct sums. -/
+The comparison is the ordinary pullback/tensor comparison on the two free Koszul summands,
+extended over the sheafified total tensor and its direct sums.
+
+## References
+
+* [Stacks Project, Tag 07A4, Tag 03EL] -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

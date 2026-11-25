@@ -17,7 +17,7 @@ Let `R` be a discrete valuation ring (for instance the valuation ring `𝒪_E` o
 that `e` is the ramification index of `R` over `ℤ_ℓ`. If `e ∣ n`, say `n = e N`, then
 `ϖ^n R = ℓ^N R` and the characteristic of `A = R / ϖ^n` is `ℓ^N`
 (`IsDiscreteValuationRing.ringChar_quotient_span_pow`): `N` is the smallest exponent with
-`ℓ^N A = 0`. This is the arithmetic part of blueprint `lem-pur-finite-kummer-level`.
+`ℓ^N A = 0`.
 -/
 
 @[expose] public section
@@ -37,8 +37,7 @@ lemma span_pow_mul_eq_span_natCast_pow (N : ℕ) :
   exact (hℓe.pow_pow (n := N)).symm
 
 include hϖ hℓ he hℓe in
-/-- An integer `m` lies in `ℓ^N R` if and only if `ℓ^N` divides `m`: the prime-to-`ℓ` part of `m`
-is a unit of `R`, the residue field having characteristic `ℓ`. -/
+/-- A natural number `m` lies in `ℓ^N R` if and only if `ℓ^N` divides `m`. -/
 lemma natCast_mem_span_natCast_pow_iff (N m : ℕ) :
     (m : R) ∈ Ideal.span {(ℓ : R) ^ N} ↔ ℓ ^ N ∣ m := by
   refine ⟨fun h ↦ ?_, fun ⟨k, hk⟩ ↦ Ideal.mem_span_singleton.2 ⟨k, by simp [hk]⟩⟩
@@ -71,19 +70,14 @@ lemma natCast_mem_span_natCast_pow_iff (N m : ℕ) :
   exact Dvd.dvd.mul_right (pow_dvd_pow ℓ h) b
 
 include hϖ hℓ he hℓe in
-/-- Blueprint `lem-pur-finite-kummer-level`: Finite Kummer level of the Tate twist
-
-The arithmetic part: if `ℓ = (unit) · ϖ^e` with `e ≥ 1` and `n = e N`, then `A = R / ϖ^n` has
-characteristic `ℓ^N`, so `N` is the smallest exponent with `ℓ^N A = 0`. -/
+/-- If `ℓ = (unit) · ϖ^e` with `e ≥ 1`, then `R / ϖ^{eN}` has characteristic `ℓ^N`. -/
 lemma charP_quotient_span_pow (N : ℕ) : CharP (R ⧸ Ideal.span {ϖ ^ (e * N)}) (ℓ ^ N) := by
   refine ⟨fun m ↦ ?_⟩
   rw [← map_natCast (Ideal.Quotient.mk _), Ideal.Quotient.eq_zero_iff_mem,
     span_pow_mul_eq_span_natCast_pow hℓe, natCast_mem_span_natCast_pow_iff hϖ hℓ he hℓe]
 
 include hϖ hℓ he hℓe in
-/-- Blueprint `lem-pur-finite-kummer-level`: Finite Kummer level of the Tate twist
-
-If `ℓ = (unit) · ϖ^e` with `e ≥ 1` and `n = e N`, the characteristic of `A = R / ϖ^n` is `ℓ^N`. -/
+/-- If `ℓ = (unit) · ϖ^e` with `e ≥ 1`, the characteristic of `R / ϖ^{eN}` is `ℓ^N`. -/
 theorem ringChar_quotient_span_pow (N : ℕ) :
     ringChar (R ⧸ Ideal.span {ϖ ^ (e * N)}) = ℓ ^ N :=
   have := charP_quotient_span_pow hϖ hℓ he hℓe N

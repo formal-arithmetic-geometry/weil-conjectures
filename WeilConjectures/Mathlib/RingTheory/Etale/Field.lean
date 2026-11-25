@@ -125,11 +125,7 @@ end Algebra.Etale
 
 namespace Algebra.Etale
 
-/-- A finite algebra `A` over a field `K` is étale if and only if `Ω[A⁄K] = 0`.
-
-Part of blueprint `proposition-multiplication-n--2`. A finite `K`-algebra is of finite
-presentation, and over a field formally unramified algebras of finite type are formally
-étale. -/
+/-- A finite algebra `A` over a field `K` is étale if and only if `Ω[A⁄K] = 0`. -/
 theorem iff_subsingleton_kaehlerDifferential_of_field {K A : Type*} [Field K] [CommRing A]
     [Algebra K A] [Module.Finite K A] :
     Algebra.Etale K A ↔ Subsingleton Ω[A⁄K] := by

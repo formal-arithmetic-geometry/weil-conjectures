@@ -35,8 +35,7 @@ namespace AlgebraicGeometry.Scheme.IdealSheafData
 
 variable {X : Scheme.{u}} (I : X.IdealSheafData)
 
-/-- On an affine open disjoint from the support, the ideal is the unit ideal.
-(blueprint: `lemma:nagata-ideal-unit-off-support`) -/
+/-- On an affine open disjoint from the support, the ideal is the unit ideal. -/
 lemma ideal_eq_top_of_disjoint_support {U : X.affineOpens}
     (hU : Disjoint (U.1 : Set X) (I.support : Set X)) : I.ideal U = ⊤ := by
   have hsub : X.zeroLocus (U := U.1) (I.ideal U) ∩ U.1 ⊆ (∅ : Set X) := fun x hx ↦
@@ -53,7 +52,7 @@ lemma le_ker_iff_range_subset_support {W : Scheme.{u}} (g : W ⟶ X) [IsReduced 
   simp [TopologicalSpace.Closeds.ext_iff, Set.preimage_eq_univ_iff]
 
 /-- The kernel of a morphism from a reduced scheme is the vanishing ideal of the closure of its
-range: both are the largest ideal sheaf whose support contains the range. -/
+range. -/
 lemma _root_.AlgebraicGeometry.Scheme.Hom.ker_eq_vanishingIdeal {W : Scheme.{u}} (g : W ⟶ X)
     [IsReduced W] : g.ker = vanishingIdeal ⟨closure (Set.range g), isClosed_closure⟩ := by
   refine le_antisymm ?_ ?_

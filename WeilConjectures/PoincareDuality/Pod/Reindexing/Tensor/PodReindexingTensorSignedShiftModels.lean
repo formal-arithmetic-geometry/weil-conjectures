@@ -39,19 +39,10 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Existence of the signed tensor shift models and their two intrinsic laws.
+/-- There exist signed tensor shift structures on the source and target satisfying the
+`Generators` and `Model` laws with respect to the shift data of `D`.
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-reindexing-tensor-signed-shifts-core-models-r3).
-
-Proof: on flat-term K-flat representatives, relabel the direct-sum tensor
-summands for each integer shift.  The first relabelling has no Koszul factor;
-the second has the factor `(-1)^(pr)`.  The signed total differential and all
-finite quotient transitions are preserved by these maps.  Localize the maps
-to obtain the two derived shift fields.  The same representative calculation,
-followed by the normalized Roos comparison, proves `Generators` and `Model`.
-The construction is independent for the source and target schemes and applies
-to negative shifts and zero complexes.
+See [Stacks, Tags 07A4, 0941].
 -/
 theorem podReindexingTensorSignedShiftModels
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

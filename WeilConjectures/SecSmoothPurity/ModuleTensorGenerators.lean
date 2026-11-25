@@ -9,9 +9,9 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrows
 
 /-! # Generalized generators of the ordinary module comparison
 
-Source: Stacks Project, sites-modules.tex, Tag 03EL, and
-sites-cohomology.tex, Tag 07A4.
-(auxiliary; not a blueprint node)
+## References
+
+- Stacks Project, Tags 03EK, 03EL and 07A4.
 -/
 
 @[expose] public section
@@ -79,8 +79,7 @@ private theorem tensor_braiding_iso (M N : Modules R) :
   simpa only [Functor.Monoidal.μIso_inv, Category.assoc] using
     congrArg (fun z ↦ z ≫ (eN ⊗ₘ eM)) hb
 
-/-- The canonical pure tensor in the sheafified module tensor product.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The canonical pure tensor in the sheafified module tensor product. -/
 noncomputable def moduleTmul (M N : Modules R) (U : Cᵒᵖ)
     (x : M.val.obj U) (y : N.val.obj U) : (M ⊗ N).val.obj U :=
   (tensorObjIsoSheafification M N).inv.val.app U
@@ -88,8 +87,7 @@ noncomputable def moduleTmul (M N : Modules R) (U : Cᵒᵖ)
       (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).unit.app
         (M.val ⊗ N.val)).app U (x ⊗ₜ[R.obj.obj U] y))
 
-/-- The sheaf tensor braiding exchanges pure tensor factors.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The sheaf tensor braiding exchanges pure tensor factors. -/
 theorem moduleTmul_braiding (M N : Modules R) (U : Cᵒᵖ)
     (x : M.val.obj U) (y : N.val.obj U) :
     (β_ M N).hom.val.app U (moduleTmul M N U x y) = moduleTmul N M U y x := by
@@ -114,8 +112,7 @@ theorem moduleTmul_braiding (M N : Modules R) (U : Cᵒᵖ)
   rw [← hn] at h
   exact h
 
-/-- The sheaf tensor associator acts on pure triples by reassociation.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The sheaf tensor associator acts on pure triples by reassociation. -/
 theorem moduleTmul_associator (M N H : Modules R) (U : Cᵒᵖ)
     (x : M.val.obj U) (y : N.val.obj U) (z : H.val.obj U) :
     (α_ M N H).hom.val.app U
@@ -150,16 +147,14 @@ theorem moduleTmul_associator (M N H : Modules R) (U : Cᵒᵖ)
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Unit insertion is natural for the actual module pullback.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+/-- Unit insertion is natural for the actual module pullback. -/
 theorem comparison_q_naturality (f : RingedPullback R S) (k : Comparison f)
     {M N : Modules R} (b : M ⟶ N) :
     (underlying f.RI).map (f.I.modules.map b) ≫ k.q N =
       k.q M ≫ (underlying S).map (f.L.map b) := by
   exact q_naturality f k b
 
-/-- Tensor maps act componentwise on the ordinary sheaf pure tensors.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- Tensor maps act componentwise on the ordinary sheaf pure tensors. -/
 theorem moduleTmul_map {M M' N N' : Modules R} (a : M ⟶ M') (b : N ⟶ N')
     (U : Cᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) :
     (a ⊗ₘ b).val.app U (moduleTmul M N U x y) =
@@ -185,8 +180,7 @@ theorem moduleTmul_map {M M' N N' : Modules R} (a : M ⟶ M') (b : N ⟶ N')
       (x ⊗ₜ[R.obj.obj U] y)) at hn
   simpa only [hm] using hn.symm
 
-/-- Naturality of the normalized generalized inverse-image insertion.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+/-- Naturality of the normalized generalized inverse-image insertion. -/
 @[reassoc]
 theorem generator_naturality (f : RingedPullback R S) (k : Comparison f)
     {M N : Modules R} (b : M ⟶ N) {Z : Sheaf J (Type w)}
@@ -216,8 +210,7 @@ private theorem moduleTmul_restrict (M N : Modules R)
   have hu := PresheafOfModules.naturality_apply (adj.unit.app (M.val ⊗ N.val)) i v
   exact hi.symm.trans (congrArg ((tensorObjIsoSheafification M N).inv.val.app V) hu.symm)
 
-/-- The pure pairing on any two generalized module sections.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The pure pairing on any two generalized module sections. -/
 noncomputable def moduleTensorPair {M N : Modules R} {Z : Sheaf J (Type w)}
     (x : Z ⟶ (underlying R).obj M) (y : Z ⟶ (underlying R).obj N) :
     Z ⟶ (underlying R).obj (M ⊗ N) :=
@@ -233,8 +226,7 @@ noncomputable def moduleTensorPair {M N : Modules R} {Z : Sheaf J (Type w)}
        rw [hx, hy]
        exact (moduleTmul_restrict M N i _ _).symm }⟩
 
-/-- The generalized pure formula as an equality of sheaf morphisms.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+/-- The generalized pure formula as an equality of sheaf morphisms. -/
 theorem generator_tensorPair (f : RingedPullback R S) (k : Comparison f)
     {M N : Modules R} {Z : Sheaf J (Type w)}
     (x : Z ⟶ (underlying R).obj M) (y : Z ⟶ (underlying R).obj N) :
@@ -247,12 +239,7 @@ theorem generator_tensorPair (f : RingedPullback R S) (k : Comparison f)
 open scoped TensorProduct
 
 -- Repeated sheafification and scalar-extension identifications require extra elaboration.
-/-- Three scalar-extension unit insertions generate the triple sheaf tensor.
-Source: Stacks 03EK and 03EL (auxiliary; not a blueprint node).
-Proof: cancel the sheafified tensor of the three sheafification units, which is an
-isomorphism by compatibility of tensor with local equivalences. Apply the
-sheafification adjunction and curry the sectionwise linear maps three times.
-Scalar-extension hom extensionality in each argument reduces to unit insertions. -/
+/-- Three scalar-extension unit insertions generate the triple sheaf tensor. -/
 theorem scalarTensor_hom_ext₃
     {A B : Sheaf J CommRingCat.{w}} (c : A ⟶ B)
     (M N P : Modules A) (H : Modules B)

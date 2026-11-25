@@ -31,9 +31,13 @@ a section sends `X` to a root of `f`.
 - `IsLocalRing.isSepClosed_residueField_of_exists_algHom_comap_maximalIdeal_eq`: such a local
   ring has separably closed residue field.
 
-The henselian pairs `(A, I)` of the blueprint (`def-weil-pbc-henselian-terminology`) are
-Mathlib's `HenselianRing A I`; a henselian local ring is `HenselianLocalRing`, and it is
-strictly henselian when moreover `IsSepClosed (IsLocalRing.ResidueField A)`.
+Henselian pairs `(A, I)` are Mathlib's `HenselianRing A I`; a henselian local ring is
+`HenselianLocalRing`, and it is strictly henselian when moreover
+`IsSepClosed (IsLocalRing.ResidueField A)`.
+
+## References
+
+* [Stacks: Henselian local rings](https://stacks.math.columbia.edu/tag/04GE), Tags 06RR, 06RS
 -/
 
 @[expose] public section
@@ -178,18 +182,7 @@ theorem IsStrictlyHenselianLocalRing.of_ringEquiv {R S : Type*} [CommRing R] [Co
   have : HenselianLocalRing S := .of_ringEquiv e
   ⟨IsSepClosed.of_ringEquiv (IsLocalRing.ResidueField.mapEquiv e)⟩
 
-/-- A local ring with nil maximal ideal satisfies simple-root lifting.
-Source: Mathlib.Dynamics.Newton, `Polynomial.existsUnique_nilpotent_sub_and_aeval_eq_zero`;
-Stacks Project, Algebra, Tag 06RS
-(blueprint: lem-weil-pbc-henselian-of-nil-maximal-ideal).
-
-Proof: For a polynomial f and an approximate root x, f(x) lies in the maximal ideal,
-hence is nilpotent. Since f'(x) is a unit, finite Newton iteration gives a root a with
-x - a nilpotent: each iteration squares the error, so a sufficiently high iteration
-has zero error. The derivative remains a unit since the correction is nilpotent.
-The nilpotent difference a - x belongs to every prime ideal, in particular the maximal
-ideal. This gives the defining simple-root lifting condition for a henselian local ring.
-No uniform nilpotence exponent for the maximal ideal is required. -/
+/-- A local ring whose maximal ideal is contained in the nilradical is henselian. -/
 theorem henselianLocalRing_of_maximalIdeal_le_nilradical
     (R : Type*) [CommRing R] [IsLocalRing R]
     (hnil : IsLocalRing.maximalIdeal R ≤ nilradical R) : HenselianLocalRing R := by
@@ -203,8 +196,7 @@ theorem henselianLocalRing_of_maximalIdeal_le_nilradical
   · exact nilradical_le_prime (IsLocalRing.maximalIdeal R)
       (by simpa only [mem_nilradical, neg_sub] using ha.1.neg)
 
-/-- A local ring of Krull dimension zero (e.g. an artinian local ring) is henselian: its maximal
-ideal is its nilradical. (blueprint: `lem-weil-pbc-local-dimension-zero-henselian`) -/
+/-- A local ring of Krull dimension zero (e.g. an artinian local ring) is henselian. -/
 theorem HenselianLocalRing.of_krullDimLE_zero {R : Type*} [CommRing R]
     [IsLocalRing R] [Ring.KrullDimLE 0 R] : HenselianLocalRing R :=
   henselianLocalRing_of_maximalIdeal_le_nilradical R
@@ -212,9 +204,7 @@ theorem HenselianLocalRing.of_krullDimLE_zero {R : Type*} [CommRing R]
 
 
 /-- **Uniqueness of simple roots in a residue class.** Let `R` be a local ring with maximal ideal
-`𝔪`, `f : R[X]` and `a b : R` roots of `f` with `a - b ∈ 𝔪` and `f'(a) ∉ 𝔪`. Then `a = b`.
-This is mathlib's `IsLocalRing.eq_of_eval_eq_zero_of_not_isUnit_sub`, phrased with `𝔪`.
-(blueprint: `lem-weil-pbc-simple-root-uniqueness`) -/
+`𝔪`, `f : R[X]` and `a b : R` roots of `f` with `a - b ∈ 𝔪` and `f'(a) ∉ 𝔪`. Then `a = b`. -/
 @[stacks 06RR]
 theorem IsLocalRing.eq_of_eval_eq_zero_of_sub_mem_maximalIdeal {R : Type*} [CommRing R]
     [IsLocalRing R] {f : R[X]} {a b : R} (ha : f.eval a = 0) (hb : f.eval b = 0)

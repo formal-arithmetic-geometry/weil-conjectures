@@ -18,9 +18,9 @@ public import WeilConjectures.Tactic.ExactByKernel
 The exceptional projection morphism `PF_f : Rf_! T ⊗ M ⟶ Rf_! (T ⊗ Lf^* M)` of bounded
 constructible `ℚ̄_ℓ`-complexes is compatible with the composition isomorphisms
 `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` and `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`
-(`ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_comp_whiskerLeft`,
-blueprint
-`prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2).
+(`ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_comp_whiskerLeft`).
+
+## Implementation details
 
 The composition isomorphism of the lower shriek is computed through a triangle of
 compactifications and the composition isomorphism `compIso` of the exchange formalism of bounded
@@ -37,8 +37,6 @@ constructible complexes:
    projection morphisms
    (`boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_hom_app_whiskerRight_comp`).
 
-## Implementation notes
-
 The data of the exchange formalism (its categories, pullbacks, monoidal structures) unfold to those
 of bounded constructible complexes, but the elaborator compares the two spellings by eagerly
 reducing projections of instances, which does not terminate in reasonable time on these large
@@ -46,6 +44,10 @@ terms, in particular when a natural transformation is applied to two spellings o
 The abstract statement therefore takes all heavy data as variables, they are passed in the
 spelling of the goal (including the instance arguments of the triangle of factorizations), and
 the two remaining identifications are left to the kernel with `exact_by_kernel`.
+
+## References
+
+* [SGA 4, Exposé XVII, 5.2.2]
 
 -/
 
@@ -312,7 +314,7 @@ private lemma whiskerLeft_eq_comp_eqToHom (T : Dᵇc(X.left)⟦𝐐⟧) (M : D�
 
 -- Comparing the two compactification triangles unfolds the lower shriek definitions.
 /-- **The exceptional projection morphism is compatible with the composition isomorphism attached
-to compactifications** (blueprint `prop-sf-pf-coherence`): for the chosen compactifications of
+to compactifications**: for the chosen compactifications of
 `f` and `g` and a compactification `d` of `p ≫ j` with cartesian square, through the
 composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` attached to them, the exceptional projection
 morphism of `f ≫ g` is that of `g` followed by `Rg_!` of that of `f`. -/
@@ -394,8 +396,8 @@ theorem boundedConstructibleExceptionalProjectionMorphism_comp_of_compactificati
   · exact_by_kernel exceptionalProjection_fst_eq_shriekProjection_comp_eqToHom ℓ f g d hd T M
 
 omit d hd in
-/-- **The exceptional projection morphism is compatible with composition** (blueprint
-`prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2): through the composition isomorphisms
+/-- **The exceptional projection morphism is compatible with composition**: through the
+composition isomorphisms
 `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` and `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`, the exceptional projection morphism of
 `f ≫ g` is that of `g` followed by `Rg_!` of that of `f`. -/
 theorem boundedConstructibleExceptionalProjectionMorphism_comp_whiskerLeft

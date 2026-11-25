@@ -41,6 +41,12 @@ Theorem 24.3).
   preserved by a map of `R₀`-algebras `R → R'`.
 - `PrimeSpectrum.isOpen_setOf_flat_localization`: the flat locus of a finite type algebra over a
   noetherian ring is open (Stacks, Tag 00RC).
+
+## References
+
+- Stacks Project, Tag 00RC (openness of the flat locus) and Tag 00MF (regular elements of the
+  fibre).
+- Matsumura, *Commutative Ring Theory*, Theorem 24.3.
 -/
 
 @[expose] public section
@@ -49,8 +55,7 @@ open TensorProduct
 
 namespace Module.Flat
 
-/-- A module over a domain on which every nonzero element acts bijectively is flat: it is a
-vector space over the fraction field. -/
+/-- A module over a domain on which every nonzero element acts bijectively is flat. -/
 theorem of_bijective_smul {R M : Type*} [CommRing R] [IsDomain R] [AddCommGroup M] [Module R M]
     (h : ∀ r : R, r ≠ 0 → Function.Bijective (fun m : M ↦ r • m)) : Flat R M := by
   let S := nonZeroDivisors R
@@ -65,8 +70,7 @@ theorem of_bijective_smul {R M : Type*} [CommRing R] [IsDomain R] [AddCommGroup 
 variable {R : Type*} {M : Type*} [CommRing R] [AddCommGroup M] [Module R M]
 
 /-- **Purity for modules over a prime.** If every `r ∉ p` acts bijectively on `M`, then
-`M ⊗ N' → M ⊗ N` is injective whenever `N' ≤ N` and `N` is killed by `p`: indeed `M ⧸ p M` is
-a vector space over the fraction field of `R ⧸ p`. -/
+`M ⊗ N' → M ⊗ N` is injective whenever `N' ≤ N` and `N` is killed by `p`. -/
 theorem lTensor_subtype_injective_of_bijective_smul (p : Ideal R) [p.IsPrime]
     (hM : ∀ r ∉ p, Function.Bijective (fun m : M ↦ r • m)) {N : Type*} [AddCommGroup N]
     [Module R N] (hN : ∀ i ∈ p, ∀ n : N, i • n = 0) (N' : Submodule R N) :
@@ -175,8 +179,7 @@ universe v in
 /-- **Generic flatness relative to a prime of the base.** Let `R` be noetherian, `p` a prime of
 `R`, `S` a finite type `R`-algebra and `M` a finite `S`-module killed by `p`. Then there is
 `a ∉ p` such that for every injective map `N' → N` of modules killed by `p`, every element of the
-kernel of `M ⊗ N' → M ⊗ N` is killed by a power of `a`. This is generic flatness
-(`Module.exists_flat_localizedModule_powers`) over the domain `R ⧸ p`. -/
+kernel of `M ⊗ N' → M ⊗ N` is killed by a power of `a`. -/
 theorem exists_notMem_pow_smul_eq_zero [IsNoetherianRing R] (p : Ideal R) [p.IsPrime]
     [Algebra.FiniteType R S] [Module.Finite S M] (hM : ∀ r ∈ p, ∀ m : M, r • m = 0) :
     ∃ a ∉ p, ∀ (N N' : Type v) [AddCommGroup N] [Module R N] [AddCommGroup N'] [Module R N'],
@@ -291,10 +294,10 @@ lemma _root_.Submodule.restrictScalars_map_smul_top [Module R M] [IsScalarTower 
     rw [Submodule.restrictScalars_mem, ← algebraMap_smul S r m]
     exact Submodule.smul_mem_smul (Ideal.mem_map_of_mem _ hr) trivial
 
-/-- **Openness of the flat locus** (Stacks, Tag 00RC; Matsumura, Theorem 24.3). Let `R` be a
+/-- **Openness of the flat locus.** Let `R` be a
 noetherian ring, `S` a finite type `R`-algebra and `M` a finite `S`-module. If `M_P` is flat over
 `R` for a prime `P` of `S`, then there is `g ∉ P` such that `M_Q` is flat over `R` for every prime
-`Q` of `S` not containing `g`. (blueprint: `lem-weil-pbc-noetherian-flat-locus-neighborhood`) -/
+`Q` of `S` not containing `g`. -/
 theorem Flat.exists_notMem_forall_flat_localizedModule [IsNoetherianRing R]
     [Algebra.FiniteType R S] [Module.Finite S M] (P : Ideal S) [P.IsPrime]
     (hP : Flat R (LocalizedModule P.primeCompl M)) :
@@ -430,7 +433,7 @@ lemma _root_.Ideal.mem_map_smul_top_iff {A : Type*} [CommRing A] [Algebra R A] [
     | smul b y _ hy => exact hmul b y hy
 
 omit [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] in
-/-- **Regular elements of the fibre, noetherian case** (Stacks, Tags 00MF and 00RC). Let `R` be
+/-- **Regular elements of the fibre, noetherian case.** Let `R` be
 noetherian, `S` a finite type `R`-algebra, `q` a prime of `S` with `S_q` flat over `R`, and
 `f ∈ S` a nonzerodivisor of the fibre `S_q ⧸ p S_q`, `p = q ∩ R`. Then there is `g ∉ q` such that
 `f` is a nonzerodivisor on `S_g` and `(S ⧸ f)_g` is flat over `R`. -/
@@ -770,7 +773,7 @@ theorem Module.Flat.localization_tensorProduct_map {R₀ R R' S₀ : Type*} [Com
 
 namespace PrimeSpectrum
 
-/-- **Openness of the flat locus** (Stacks `00RC`). For a finite type algebra `S` over a
+/-- **Openness of the flat locus.** For a finite type algebra `S` over a
 noetherian ring `R`, the set of primes `q` of `S` such that `S_q` is flat over `R` is open. -/
 theorem isOpen_setOf_flat_localization {R S : Type*} [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [Algebra.FiniteType R S] :

@@ -8,10 +8,20 @@ module
 public import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensorDescentDiagram
 import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensorCoefficientTransitionMixedNormalization
 
-/-! # Completed tensor square for scalar/reindexing transitions
+/-! # Mixed normalization in the named tensor descent diagram
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-tensor-mixed-normalization-diagram).
+The mixed normalization of the scalar/reindexing tensor descent, stated on the named functors
+and comparisons of the fixed tensor descent diagram.
+
+## Implementation details
+
+The proof applies the scalar normalization on the source, uses that scalar localization factors
+preserve constructibility, applies the target-field tensor law, moves both scalar factors by
+tensor naturality and cancels the associator component.
+
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -104,12 +114,9 @@ private theorem associatorComponent
     (Functor.associator F G H).hom.app K ≫ f = f := by
   exact Category.id_comp f
 
-/-- The hγ compatibility for the named tensor descent diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: lem-pod-tensor-mixed-normalization-diagram).
-Proof: Apply the scalar normalization on the source. Scalar localization factors preserve
-  constructibility. Apply the target-field tensor Model law, and use tensor naturality to move
-    both scalar factors. Paste these three equalities and cancel the associator component. -/
+/-- The mixed normalization (`hγ`) of the named tensor descent diagram: the mixed functor applied
+to the mixed chain equals the mixed comparison, the target tensor of the pair mixed factor, and
+the target comparison at the good mixed pair. -/
 theorem podTensorMixedRepresentativeNormalizationDiagram
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

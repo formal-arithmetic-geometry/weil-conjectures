@@ -17,8 +17,10 @@ representation `(V, ρ)`. At every boundary point `z` with closed point `x`, the
 `(j_* ℱ)_x̄` is the module of inertia invariants `V ^ (I_z)`, the Frobenius of the stalk
 corresponding to the residue Frobenius lift `ρ (Frob_z)`
 (`exists_equivalence_isLisse_stalk_directImage_boundaryStalk_eq_invariants`).
-This is blueprint `lemma-boundary-stalk--1` (subsection `lemma-boundary-stalk--2`): it combines
-the existence of strictly henselian neighbourhoods of boundary points
+
+## Implementation details
+
+The statement combines the existence of strictly henselian neighbourhoods of boundary points
 (`AlgebraicGeometry.WeilGroup.exists_boundaryNeighbourhood_conj`) with the computation of the
 boundary stalk through such a neighbourhood
 (`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_stalk_directImage_boundaryStalk_of_conj`).
@@ -48,10 +50,7 @@ variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}} [C.Over (Spec (.of
   (GC : Type u) [Group GC] [TopologicalSpace GC] [IsTopologicalGroup GC] [CompactSpace GC]
   [∀ P, MulAction GC ((fiber sC).obj P)] [IsFundamentalGroup (fiber sC) GC]
 include τ GC in
-/-- Blueprint `lemma-boundary-stalk--1` (subsection `lemma-boundary-stalk--2`), together with
-`definition-weil-representation--1`.
-
-Let `j : U₀ ⟶ C₀` be a nonempty open of a smooth geometrically connected curve over `𝔽_q`, `U₀`
+/-- Let `j : U₀ ⟶ C₀` be a nonempty open of a smooth geometrically connected curve over `𝔽_q`, `U₀`
 geometrically connected, with the boundary datum of actual inertia groups and residue Frobenius
 lifts (`AlgebraicGeometry.WeilGroup.boundaryDatum`). There is a lisse sheaf–representation
 equivalence `ℱ ↦ (V, ρ)` for `W(U₀)`, identifying the stalk `ℱ_x̄` with its local Frobenius with

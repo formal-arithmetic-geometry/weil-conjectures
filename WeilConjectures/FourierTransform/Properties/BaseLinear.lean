@@ -21,7 +21,16 @@ public import WeilConjectures.FourierTransform.Defs
 - `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tateTwist`: the transform commutes
   with the Tate twist.
 
-See `WeilConjectures.FourierTransform.Properties` for the implementation notes.
+## Implementation details
+
+See also `WeilConjectures.FourierTransform.Properties`.
+
+Over a field of coefficients every `N ∈ Dᵇc(S)` has finite Tor amplitude; over the finite ring
+`Λ` this is the hypothesis `N ∈ Dᵇctf(S, Λ)`. Base linearity is proved as
+`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor_of_hasProjectionFormula`, with the
+projection formula for `p₂` given by
+`AlgebraicGeometry.Etale.hasProjectionFormula_of_boundedConstructible`. The two other statements
+are its special cases `K = Λ_V` and `N = Λ_S(m)`.
 
 -/
 
@@ -58,19 +67,7 @@ asserts that the two functors `Dᵇctf(S, Λ) ⥤ (Dᵇc(V, Λ) ⥤ D(V'_ét))` 
   ⊗π^*N │                    │ ⊗π'^*N
         ▼                    ▼
      D(V_ét) ───FT_ψ───▶ D(V'_ét)
-```
-
-The blueprint works over a field of coefficients, where every `N ∈ Dᵇc(S)` has finite Tor
-amplitude; over the finite ring `Λ` this is the hypothesis `N ∈ Dᵇctf(S, Λ)`. The particular
-case `K = Λ_V` is `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_mapDerivedCategory`.
-
-The proof is that of
-`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor_of_hasProjectionFormula`, with the
-projection formula for `p₂` at `p₁^* K ⊗ᴸ 𝒦_ψ[r]` (bounded constructible, `𝒦_ψ` being lisse of
-rank one) and `π'^* N` (in `Dᵇctf`) given by
-`AlgebraicGeometry.Etale.hasProjectionFormula_of_boundedConstructible`.
-(sketch blueprint: `proposition-base-change-fourier-inversion--2`; blueprint:
-`proposition-base-change-fourier-inversion--2`) -/
+``` -/
 theorem nonempty_iso_fourierTransform_tensor (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r : ℤ) :
     Nonempty ((DerivedCategory.boundedConstructibleFiniteTor Λ S).ι ⋙
@@ -96,16 +93,12 @@ theorem nonempty_iso_fourierTransform_tensor (Ψ : AddChar (ZMod p) Λ)
     (DerivedCategory.boundedConstructible_singleFunctor_obj (fourierKernel Λ π π' Ψ b) 0)
     ⟨0, 0, torAmplitudeIn_fourierKernel Λ π π' Ψ b⟩
 
-/-- The first clause of the base linearity proposition: the transform of a complex pulled back
-from the base is the base change of the transform of the unit,
+/-- The transform of a complex pulled back from the base is the base change of the transform
+of the unit,
 
 `FT_ψ(π^* N) ≅ FT_ψ(Λ_V) ⊗ᴸ π'^* N`
 
-for `N ∈ Dᵇctf(S, Λ)`, naturally in `N`. It is
-`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor` at `K = Λ_V`, composed with the
-left unitor `Λ_V ⊗ᴸ π^* N ≅ π^* N`.
-(sketch blueprint: `proposition-base-change-fourier-inversion--2`; blueprint:
-`proposition-base-change-fourier-inversion--2`, clause (1)) -/
+for `N ∈ Dᵇctf(S, Λ)`, naturally in `N`. -/
 theorem nonempty_iso_fourierTransform_mapDerivedCategory (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r : ℤ) :
     Nonempty ((DerivedCategory.boundedConstructibleFiniteTor Λ S).ι ⋙
@@ -139,14 +132,8 @@ for every `m : ℤ`, naturally in `K ∈ Dᵇc(V, Λ)`:
      D(V_ét) ───FT_ψ───▶ D(V'_ét)
 ```
 
-This is the second clause of the base linearity proposition, the Tate twist being tensoring
-with an invertible complex pulled back from the base: it is
-`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor` at `N = Λ_S(m)`, which lies in
-`Dᵇctf(S, Λ)`, composed with the identifications `π^* Λ_S(m) ≅ Λ_V(m)` and
-`π'^* Λ_S(m) ≅ Λ_{V'}(m)`. That the isomorphism is one of Weil complexes when `K` carries a Weil
-structure is `AlgebraicGeometry.nonempty_iso_fourierTransform_tateTwist`.
-(sketch blueprint: `proposition-base-change-fourier-inversion--2`; blueprint:
-`proposition-base-change-fourier-inversion--2`, clause (2)) -/
+For the version for Weil complexes see `AlgebraicGeometry.nonempty_iso_fourierTransform_tateTwist`.
+-/
 theorem nonempty_iso_fourierTransform_tateTwist [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r m : ℤ) :
     Nonempty ((DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V).ι ⋙

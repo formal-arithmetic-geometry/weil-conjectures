@@ -69,8 +69,18 @@ import Mathlib.CategoryTheory.Sites.Abelian
 
 /-! # Completion map compatibility on resolving representatives
 
-Source: Bhatt--Scholze, Lemma 6.5.9(4), Remark 6.8.15; Stacks Tags 0941 and 099N(5).
-(blueprint: lem-weil-pbc-integral-completion-matching-on-good).
+On a good (flat-term K-flat) representative, the model comparison for the integral derived
+pullback carries the ordinary completion map to the strict-tower completion comparison.
+
+## Main results
+
+* `pbc_integral_completion_matching_on_good`
+
+## References
+
+* [B. Bhatt, P. Scholze, *The pro-étale topology for schemes*], Lemma 6.5.9(4),
+  Remark 6.8.15
+* [Stacks Project, Tags 0941 and 099N(5)]
 -/
 
 @[expose] public noncomputable section
@@ -263,32 +273,9 @@ private theorem combine_completion_diagram {V : Type*} [Category* V]
     _ = (a ≫ p ≫ q) ≫ c ≫ r := by rw [hd]
     _ = _ := by simp only [Category.assoc]
 
-/-- On a flat-term K-flat representative, the independently normalized model
-comparison carries the ordinary completion map to the actual strict-tower unit.
-The pullback identification and model comparison are inputs, not constructed here.
-
-Source: Stacks 0941 and 099N(5); Bhatt--Scholze, Lemma 6.5.9(4).
-(blueprint: lem-weil-pbc-integral-completion-matching-on-good).
-
-Proof: choose an entire-tower K-injective resolution r of the actual pulled
-reduction tower, with injective tower terms. The model-matching hypothesis
-supplies t, z and the limit inclusion iota for this resolution. The coordinate
-identities characterize iota as the inclusion (limit projections,0); exact
-countable products and the split transitions in injective towers show it is a
-quasi-isomorphism. Postcompose the desired equation with the invertible actual
-tower counit, derived r, universal Rlim computation and localized iota. Substitute
-the model-matching formula for b. Substitute the defining good-representative
-formula of ordinaryIntegralCompletionComparison and the derived_counit equation
-of a. At the chain level ordinaryIntegralCompletionChain has first coordinate
-the quotient augmentation and second coordinate zero. The augmentation identity
-for t and both coordinate equations for z identify its transported composite
-with the map having coordinates r_n times the actual quotient augmentation and
-zero. Naturality of the strict-tower derived-limit unit gives these same two
-coordinates for completedPullbackComparison followed by the limit inclusion.
-The mapping-cocone extensionality lemma and product extensionality prove equality
-of the chain maps. Localize and cancel the invertible postcomposition. This
-establishes the asserted equation on P, without any extension to arbitrary
-derived objects. -/
+/-- On a flat-term K-flat representative `P`, given a pullback identification `a` and a
+model comparison `b` satisfying the model-matching condition, `b` carries the ordinary
+completion map to the composite of `a` with the strict-tower completion comparison. -/
 theorem pbc_integral_completion_matching_on_good
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T)

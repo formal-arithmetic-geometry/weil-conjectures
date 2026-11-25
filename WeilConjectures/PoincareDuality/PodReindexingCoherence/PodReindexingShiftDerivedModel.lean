@@ -11,11 +11,23 @@ import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingDeriv
 
 /-! # Representative model part of the derived signed shift square
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA
-(blueprint: lem-pod-reindexing-signed-shifts).
+We prove the derived signed shift equation for a reindexing comparison on K-injective
+localized representatives. The remaining localization descent is treated separately.
 
-This module isolates the equation on localized representatives.  The remaining
-localization descent is recorded separately.
+## Main statements
+
+* `derived_shift_model`: the signed shift equation on K-injective localized representatives.
+
+## Implementation details
+
+The proof expands the chosen K-injective representatives in `Comparison.derived_model`,
+transports the signed reindexing through the chain shift isomorphisms, and uses the fixed
+product projections to identify both composites degree by degree.
+
+## References
+
+* [Stacks Project, Tag 0A8X](https://stacks.math.columbia.edu/tag/0A8X)
+* [Stacks Project, Tag 08JA](https://stacks.math.columbia.edu/tag/08JA)
 -/
 
 @[expose] public noncomputable section
@@ -82,12 +94,8 @@ private theorem paste_shift_squares {C D : Type*} [Category C] [Category D]
   rw [hn, reassoc_of% hF]
 
 set_option linter.unusedVariables false in
-/-- The signed shift equation on K-injective localized representatives.
-
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-Proof: expand the chosen K-injective representatives in `Comparison.derived_model`,
-transport the signed reindexing through the chain shift isomorphisms, and use the
-fixed product projections to identify both composites degree by degree. -/
+/-- The signed shift equation on K-injective localized representatives:
+`derivedShiftEquation` holds for the localizations of `P` and of a K-injective `I`. -/
 theorem derived_shift_model {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

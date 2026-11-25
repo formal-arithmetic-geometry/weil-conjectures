@@ -82,9 +82,7 @@ theorem le_rank_map_iff [Finite m] {R : Type*} [CommRing R] (A : Matrix m n R) (
 
 /-- The ranks of the finite square submatrices of a matrix `A` over a field, with arbitrary
 (possibly infinite) row and column index types, are bounded if and only if the rows of `A` span a
-finite-dimensional space. This identifies the rank of an infinite matrix, as the supremum of the
-ranks of its finite square submatrices, with the dimension of its row space (blueprint
-`lemma-hankel-rank-rationality--1`, first step of the proof). -/
+finite-dimensional space. -/
 theorem bddAbove_range_rank_submatrix_iff {m n : Type*} (A : Matrix m n K) :
     BddAbove (Set.range fun x : Σ r : ℕ, (Fin r → m) × (Fin r → n) ↦
       (A.submatrix x.2.1 x.2.2).rank) ↔

@@ -15,7 +15,21 @@ import WeilConjectures.RingTheory.WellOrderedUnionProjectivePresentation
 /-!
 # succ case of the well-ordered union argument
 
-Source: Stacks Project, Algebra, Lemma 0D1U.
+The successor step of Auslander's well-ordered union argument for projective dimension.
+
+## Implementation details
+
+The Stacks proof uses free presentations of the stages; to keep exact universe generality we
+use the projective presentations supplied by `hquot` instead. The direct sum of their
+degree-zero terms is formed over the (small) set of indices with nonzero quotient, so that
+everything stays in `ModuleCat.{v} R` without constructing a free module in universe
+`max u v`. The kernel of the resulting surjection inherits a well-ordered filtration whose
+subquotients have length-`n` resolutions by dimension shifting (Schanuel), and the induction
+hypothesis is spliced with the presentation.
+
+## References
+
+* Stacks Project, Algebra, Lemma 0D1U (positive-bound case) and Lemma 065S (1).
 -/
 
 @[expose] public section
@@ -25,56 +39,9 @@ universe u v w
 namespace ModuleCat
 
 set_option linter.unusedVariables false in
-/-- Successor step in Auslander's well-ordered union argument.
-Source: Stacks Project, Algebra, Lemma 0D1U, the positive-bound case; Lemma 065S (1).
-(blueprint: lem-weil-pbc-well-ordered-union-succ-step).
-
-Proof: the source takes free presentations of the stages. For the exact universe
-generality here use projective presentations already supplied by `hquot` instead.
-Put `U e = sup_{i < e} F i` and `Q e = F e / U e`. For each nonzero `Q e` take
-the degree-zero term `P e` and the augmentation `a e : P e → Q e` of its supplied
-length-`n+1` resolution; for a zero quotient take `P e = 0`. These are projective
-objects in `ModuleCat.{v} R`. Lift `a e` through the quotient epimorphism
-`F e → Q e` to a map `b e : P e → F e`. Let `P` be the external direct sum of
-the `P e`, and `pi : P → M` the sum of the maps `b e` followed by stage inclusions.
-Well-founded induction shows that `pi` maps the partial sum through index `e`
-onto `F e`: subtract a lift of the quotient class; the remainder lies in a
-preceding stage. Thus `pi` is surjective.
-
-All these objects can be formed in universe `v`. Indeed, for each nonzero `Q e`
-choose an element of `F e` outside `U e`. The chosen elements for different
-indices differ, by monotonicity. The active index set therefore injects into
-`M` and is small in `v`. Shrink that index set and its direct sum; the resulting
-sum is categorical-projective by componentwise lifting against epimorphisms.
-This avoids constructing a free R-module in universe `max u v` when `u > v`.
-
-Let `K = ker pi` and let `G e` be its intersection with the partial sum through
-`e`, pulled back into `K`. Finite supports have largest indices, so `G` is
-monotone and covers `K`. The union of the preceding partial sums is the sum
-strictly before `e`, and its image under `pi` is `U e`. Quotienting the kernel
-sequence consequently gives an exact sequence
-`0 → G e / G_{<e} → P e → Q e → 0`.
-For the middle exactness, lift into the preceding partial sum the image of a
-vector whose image in `Q e` is zero and subtract that lift. The difference is
-in `K`. Injectivity is the equality of the intersection with the preceding
-partial sum and the predecessor kernel union. Surjectivity is that of `a e`.
-
-Dimension shifting for this projective presentation gives a length-`n` resolution
-of `G e / G_{<e}`. Concretely, compare the presentation with the initial arrow
-of the supplied resolution of `Q e`; Schanuel identifies their kernels after
-adding the projective degree-zero terms. The supplied kernel has the truncated
-length-`n` resolution, so adding projectives and taking the complementary direct
-summand gives the required bound (the argument of Lemma 065S (1)). This argument
-stays in `ModuleCat.{v} R` and needs no enough-projectives instance.
-Apply `hIH` to `K` and `G`. Splice its length-`n` resolution with `K → P → M`:
-put `P` in degree zero and shift the kernel resolution up by one. Exactness at
-`P` is `range(K → P) = ker pi`; exactness at the next term uses injectivity of
-the kernel inclusion. All other exactness statements are unchanged. All terms
-are projective and degrees above `n+1` are zero, as required.
-
-At `n = 0` the kernel resolution is the identity resolution of a projective
-kernel, giving the usual two-term resolution. Zero or repeated stages contribute
-zero summands. An empty index type is excluded by `hcover` applied to zero. -/
+/-- Successor step in Auslander's well-ordered union argument: assuming the length-`n`
+statement `hIH`, if every subquotient `F e / sup_{i < e} F i` of a well-ordered exhaustive
+filtration of `M` has a projective resolution of length `n + 1`, then so does `M`. -/
 theorem hasProjectiveResolutionLE_of_wellOrderedUnion_succ
     {R : Type u} [CommRing R] (n : ℕ)
     (hIH : ∀ (M : ModuleCat.{v} R) {E : Type w} [LinearOrder E]

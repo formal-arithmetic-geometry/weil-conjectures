@@ -9,14 +9,22 @@ public import WeilConjectures.PoincareDuality.Point.PointSectionsDerivedReductio
 import WeilConjectures.CategoryTheory.DerivedCategory.PoincareDuality.PrincipalDerivedTensorCone
 import WeilConjectures.PoincareDuality.Point.PointReductionCoefficientRing
 
-/-! The cone comparison for point-section reduction.
+/-! # The cone comparison for point-section reduction
 
-The coefficient calculation is isolated from the transport along a chosen model of sections.
-This avoids restating the whole target as an intermediate theorem: the core lemma below has
-an arbitrary module complex as input, while the exported clause only transports it along the
-supplied isomorphism.  The coefficient calculation is the two-term free resolution of the
-principal quotient; its small torsion-freeness input is recorded separately.
-(blueprint: lem-pod-point-sections-derived-reduction-cone) -/
+For a complex `C` of modules over the integral coefficient ring, the derived reduction of `C`
+modulo the `(n + 1)`st power of the uniformizer is the mapping cone of multiplication by that
+power on `C`.
+
+## Implementation details
+
+The coefficient calculation is stated for an arbitrary module complex and is isolated from the
+transport along a chosen model of sections. It uses the two-term free resolution of the
+principal quotient.
+
+## References
+
+* Stacks Project, Tags 05RT, 06Y6.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -30,13 +38,8 @@ namespace WeilConjectures
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Core coefficient cone calculation, for an arbitrary integral module complex.
-Source: Stacks Tags 05RT and 06Y6.  Choose a flat-term K-flat representative of `C`; the
-universal mixed-tensor counit identifies the derived quotient with its termwise tensor by the
-principal quotient.  The two-term free resolution `[R --t--> R]` and
-`DerivedCategory.reductionIso` then identify that tensor with the displayed multiplication
-cone.  Exactness of the quotient sequence uses the normalized quotient-kernel formula.
-(blueprint: lem-pod-point-sections-derived-reduction-cone) -/
+/-- For an integral module complex `C`, the derived reduction of `C` modulo `π ^ (n + 1)`, with
+`π` the uniformizer, is the mapping cone of multiplication by `π ^ (n + 1)` on `C`. -/
 theorem point_sections_derived_reduction_module_cone (_hl : l ≠ D.p) (n : ℕ)
     (C : CochainComplex (ModuleCat.{u + 1}
       (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))) ℤ) :

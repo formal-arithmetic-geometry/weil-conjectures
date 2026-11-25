@@ -63,9 +63,7 @@ lemma isConstant_upperStar {X Y : Scheme.{u}} (g : X ⟶ Y)
 
 variable {Λ} in
 /-- Finitely many locally constant sheaves on an irreducible scheme become constant after
-pullback along a single étale morphism from a nonempty scheme: intersect the images of étale
-trivialisations of the individual sheaves, which are nonempty opens of an irreducible space, and
-take the fibre product. -/
+pullback along a single étale morphism from a nonempty scheme. -/
 lemma exists_etale_isConstant_upperStar {O : Scheme.{u}} [IrreducibleSpace O] (n : ℕ)
     (F : Fin n → Sheaf O.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hF : ∀ i, IsLocallyConstantSheaf (F i)) :
@@ -105,11 +103,7 @@ lemma exists_etale_isConstant_upperStar {O : Scheme.{u}} [IrreducibleSpace O] (n
 variable {Λ} in
 /-- **Generic finite étale trivialisation.** Finitely many locally constant sheaves on an
 irreducible locally noetherian scheme `O`, separated over a base, become constant after pullback
-along a finite étale surjection onto a nonempty open of `O`: an étale trivialisation from an
-affine scheme is finite over a nonempty open
-(`AlgebraicGeometry.Scheme.Hom.exists_isFinite_preimage_of_etale`), and a finite étale morphism
-onto an irreducible scheme whose image is nonempty is surjective, its image being open and
-closed. -/
+along a finite étale surjection onto a nonempty open of `O`. -/
 lemma exists_finite_etale_surjective_isConstant {O S : Scheme.{u}} [IrreducibleSpace O]
     [IsLocallyNoetherian O] (aO : O ⟶ S) [IsSeparated aO] [IsAffine S] (n : ℕ)
     (F : Fin n → Sheaf O.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -163,8 +157,7 @@ section Dualizable
 
 attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 
-/-- The constant sheaf of a finite projective `Λ`-module is dualizable, the constant sheaf
-functor being monoidal. -/
+/-- The constant sheaf of a finite projective `Λ`-module is dualizable. -/
 lemma isDualizable_constantSheaf {X : Scheme.{u}} (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M]
     [Module.Projective Λ M] :
     IsDualizable ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) :=
@@ -173,7 +166,7 @@ lemma isDualizable_constantSheaf {X : Scheme.{u}} (M : ModuleCat.{u + 1} Λ) [Mo
 variable [Finite Λ]
 
 /-- A flat finite sheaf on a nonempty scheme which is constant, with value `M`, has a finite
-projective value: the stalk `M` is flat and finitely generated over the noetherian ring `Λ`. -/
+projective value. -/
 lemma projective_and_finite_of_iso_constantSheaf {V : Scheme.{u}} [Nonempty V]
     {G : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (hG : ObjectProperty.flat G)
     [IsFiniteSheaf G] {M : ModuleCat.{u + 1} Λ}
@@ -237,7 +230,7 @@ lemma exists_finite_etale_isConstant_model {O S : Scheme.{u}} [IrreducibleSpace 
 
 omit [Finite Λ] in
 /-- The right dual of a sheaf isomorphic to the constant sheaf of a finite projective module is
-finite locally constant: it is the constant sheaf of the dual module, duals being unique. -/
+finite locally constant. -/
 lemma isFiniteLocallyConstantSheaf_rightDual_of_iso_constantSheaf {V : Scheme.{u}}
     {F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)} [HasRightDual F]
     {M : ModuleCat.{u + 1} Λ} [Module.Projective Λ M] [Module.Finite Λ M]
@@ -258,7 +251,7 @@ lemma isFiniteLocallyConstantSheaf_rightDual_of_iso_constantSheaf {V : Scheme.{u
   exact IsFiniteLocallyConstantSheaf.of_iso (rightDualIso p₁ inferInstance)
 
 omit [Finite Λ] in
-/-- The right dual of a zero sheaf is finite locally constant, being zero. -/
+/-- The right dual of a zero sheaf is finite locally constant. -/
 lemma isFiniteLocallyConstantSheaf_rightDual_of_isZero {V : Scheme.{u}}
     {F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)} [HasRightDual F] (hF : IsZero F) :
     IsFiniteLocallyConstantSheaf Fᘁ := by
@@ -307,14 +300,7 @@ irreducible scheme, smooth of pure relative dimension `n`, separated and of fini
 field `k`, let `Λ` be a finite ring whose exponent is invertible in `k`, and let `P` be a bounded
 complex in degrees `[a, b]` of flat finite locally constant sheaves of `Λ`-modules on `O`. Then
 on a nonempty open `O' ⊆ O` the Verdier dual of `P` is bounded constructible, with Tor amplitude
-in `[-b - 2n, -a - 2n]`.
-
-On a finite étale surjection `p : V ⟶ O'` trivialising the terms of `P` and the sheaf `L` with
-`ω_O ≅ L[2n]` (`proposition-exceptional-inverse-image-smooth-morphism`), `p^* = Rp^!` gives
-`p^* 𝔻 P ≅ RHom(p^* P, p^* ω)`. Here `p^* P` is a bounded complex of constant sheaves of finite
-projective modules, hence dualizable with dual the termwise dual complex, and `p^* ω ≅ Λ[2n]`, so
-that `RHom(p^* P, p^* ω) ≅ (p^* P)^∨[2n]`: it has Tor amplitude `[-b - 2n, -a - 2n]` and finite
-locally constant homology sheaves. Both properties descend along the surjection `p`. -/
+in `[-b - 2n, -a - 2n]`. -/
 theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] {O : Scheme.{u}} [IrreducibleSpace O]
     (aO : O ⟶ Spec (.of k)) [IsSeparated aO] [LocallyOfFiniteType aO] [QuasiCompact aO]

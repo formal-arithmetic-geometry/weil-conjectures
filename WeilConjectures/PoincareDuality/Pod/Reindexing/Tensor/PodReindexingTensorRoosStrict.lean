@@ -158,22 +158,11 @@ private theorem representative_equivalence
     ((integralCompletedTensorComparison l E X).app
       ((podGoodReindex l E g D).obj P,(podGoodReindex l E g D).obj Q)) a r B c hs
 
-/-- The strict Roos equation is equivalent to the canonical equation on good
-representatives. No naturality of the independently supplied derived tensor family
-is assumed, so the conclusion concerns actual localized representatives only.
+/-- For a completed tensor comparison satisfying the generator law, the strict Roos equation
+(`Model`) holds if and only if the canonical equation holds on all pairs of constructible good
+representatives.
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-reindexing-tensor-roos-model-iff-canonical).
-
-Proof: the representative square identifies the localized strict Roos arrow,
-transported through the two representative comparisons and the completion maps,
-with the canonical completed tensor arrow. The completion maps on constructible
-inputs are invertible by CompleteUnit. Cancel their tensor and the representative
-comparison to obtain the equivalence, independently for each pair of representatives.
-
-STATEMENT-DISPUTED: the old generator and tower naturality laws do not
-constrain T.tensor. In particular they cannot imply the global Canonical equation.
-The repaired statement identifies exactly the equation needed by the parent.
+See [Stacks, Tags 07A4, 0941].
 -/
 theorem podReindexingTensorRoosNormalization_model_iff_canonical
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

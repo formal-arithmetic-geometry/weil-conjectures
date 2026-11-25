@@ -78,9 +78,7 @@ theorem isProper_pi_hom {S : Scheme.{u}} {ι : Type*} [Finite ι] (F : ι → Ov
 
 /-- **Proper and smooth morphisms are stable under base change.** Let `f : X ⟶ S` be proper,
 `g : S' ⟶ S` arbitrary and `f' : X' ⟶ S'` the base change of `f` along `g`. Then `f'` is proper,
-and if `f` is smooth, then so is `f'`.
-
-(blueprint: `lem-pc-proper-base-change`) -/
+and if `f` is smooth, then so is `f'`. -/
 theorem isProper_and_smooth_of_isPullback {X S X' S' : Scheme.{u}} {f : X ⟶ S} {g : S' ⟶ S}
     {f' : X' ⟶ S'} {g' : X' ⟶ X} (h : IsPullback g' f' f g) [IsProper f] :
     IsProper f' ∧ (Smooth f → Smooth f') :=
@@ -88,9 +86,8 @@ theorem isProper_and_smooth_of_isPullback {X S X' S' : Scheme.{u}} {f : X ⟶ S}
     fun hf ↦ smooth_isStableUnderBaseChange.of_isPullback h hf⟩
 
 /-- An immersion `f : X ⟶ Y` whose composite with a separated morphism `g : Y ⟶ Z` is
-universally closed is a closed immersion: `f` is then itself universally closed, so its image is
-closed. In particular, an immersion of a proper `Z`-scheme into a separated `Z`-scheme is a
-closed immersion. -/
+universally closed is a closed immersion. In particular, an immersion of a proper `Z`-scheme
+into a separated `Z`-scheme is a closed immersion. -/
 theorem IsClosedImmersion.of_comp_of_isSeparated {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [IsImmersion f] [UniversallyClosed (f ≫ g)] [IsSeparated g] : IsClosedImmersion f :=
   have : UniversallyClosed f := UniversallyClosed.of_comp_of_isSeparated f g
@@ -99,8 +96,7 @@ theorem IsClosedImmersion.of_comp_of_isSeparated {X Y Z : Scheme.{u}} (f : X ⟶
 /-- **The scheme-theoretic image of a proper morphism is proper.** Let `g : Y ⟶ S` be separated
 and locally of finite type and let `f : X ⟶ Y` be such that `f ≫ g` is proper. Then the
 scheme-theoretic image `f.image` of `f` is proper over `S`, and `f.toImage : X ⟶ f.image` is
-proper and surjective. Universal closedness of `f.image ⟶ S` follows from that of `f ≫ g`,
-since `f.toImage` is surjective. (blueprint: `pqf-lem-image-proper`) -/
+proper and surjective. -/
 theorem isProper_imageι_comp {X Y S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S) [IsProper (f ≫ g)]
     [IsSeparated g] [LocallyOfFiniteType g] :
     IsProper (f.imageι ≫ g) ∧ IsProper f.toImage ∧ Surjective f.toImage := by
@@ -113,8 +109,7 @@ theorem isProper_imageι_comp {X Y S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S) [
   exact ⟨{ }, inferInstance, inferInstance⟩
 
 /-- **Proper affine schemes over a field are finite.** If `X` is affine and proper over a field
-`K`, then `X` is finite over `K`, so `Γ(X, 𝒪_X)` is an artinian ring and `X` has dimension
-zero. (blueprint: `lem-sc-proper-affine-finite`) -/
+`K`, then `X` is finite over `K` and `X` has dimension zero. -/
 theorem isFinite_of_isProper_of_isAffine {X : Scheme.{u}} {K : Type u} [Field K]
     (f : X ⟶ Spec (.of K)) [IsProper f] [IsAffine X] :
     IsFinite f ∧ topologicalKrullDim X ≤ 0 := by
@@ -176,59 +171,50 @@ section Basic
 
 /-! ### Basic properties of proper morphisms
 
-These are the elementary facts about proper morphisms and closed immersions used in the curve
-estimates; all of them are instances or direct consequences of results of Mathlib. -/
+Elementary facts about proper morphisms and closed immersions, recorded under findable names;
+all of them are instances or direct consequences of results of Mathlib. -/
 
 variable {X Y Z : Scheme.{u}}
 
-/-- A closed immersion is proper, and so is a closed immersion followed by a proper morphism.
-(blueprint: `lem-weil-pbc-closed-immersion-proper`) -/
+/-- A closed immersion is proper. -/
 theorem IsProper.of_isClosedImmersion (i : X ⟶ Y) [IsClosedImmersion i] : IsProper i :=
   inferInstance
 
-/-- A closed immersion followed by a proper morphism is proper.
-(blueprint: `lem-weil-pbc-closed-immersion-proper`) -/
+/-- A closed immersion followed by a proper morphism is proper. -/
 theorem IsProper.isClosedImmersion_comp (i : X ⟶ Y) (f : Y ⟶ Z) [IsClosedImmersion i]
     [IsProper f] : IsProper (i ≫ f) :=
   inferInstance
 
-/-- A proper morphism is a closed map.
-(blueprint: `pqf-lem-proper-closed-map`) -/
+/-- A proper morphism is a closed map. -/
 theorem IsProper.isClosedMap (f : X ⟶ Y) [IsProper f] : IsClosedMap f :=
   f.isClosedMap
 
-/-- The image of a proper morphism is closed.
-(blueprint: `lem-weil-pbc-proper-closed-image`) -/
+/-- The image of a proper morphism is closed. -/
 theorem IsProper.isClosed_range (f : X ⟶ Y) [IsProper f] : IsClosed (Set.range f) :=
   f.isClosedMap.isClosed_range
 
 /-- If `f : X ⟶ Y` is proper and `g : X ⟶ W` is a morphism over `Y` to a separated `Y`-scheme,
-then `g` is proper.
-(blueprint: `lem-weil-pbc-proper-to-separated`) -/
+then `g` is proper. -/
 theorem IsProper.of_comp_eq {W : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (g : X ⟶ W) (h : W ⟶ Y)
     [IsSeparated h] (hgh : g ≫ h = f) : IsProper g := by
   subst hgh
   exact IsProper.of_comp g h
 
-/-- The composite of proper morphisms is proper.
-(blueprint: `lem-weil-pbc-proper-composition`) -/
+/-- The composite of proper morphisms is proper. -/
 theorem IsProper.comp (f : X ⟶ Y) (g : Y ⟶ Z) [IsProper f] [IsProper g] : IsProper (f ≫ g) :=
   inferInstance
 
-/-- Proper morphisms are stable under base change.
-(blueprint: `lem-weil-pbc-proper-base-change`) -/
+/-- Proper morphisms are stable under base change. -/
 theorem IsProper.pullback_snd (f : X ⟶ Y) [IsProper f] {Y' : Scheme.{u}} (g : Y' ⟶ Y) :
     IsProper (pullback.snd f g) :=
   inferInstance
 
-/-- The composite of closed immersions is a closed immersion.
-(blueprint: `lem-weil-pbc-closed-immersion-products`) -/
+/-- The composite of closed immersions is a closed immersion. -/
 theorem IsClosedImmersion.comp' (f : X ⟶ Y) (g : Y ⟶ Z) [IsClosedImmersion f]
     [IsClosedImmersion g] : IsClosedImmersion (f ≫ g) :=
   inferInstance
 
-/-- A product over a common base of closed immersions is a closed immersion.
-(blueprint: `lem-weil-pbc-closed-immersion-products`) -/
+/-- A product over a common base of closed immersions is a closed immersion. -/
 theorem IsClosedImmersion.pullback_map {S X' Y' : Scheme.{u}} {f : X ⟶ S} {g : Y ⟶ S}
     {f' : X' ⟶ S} {g' : Y' ⟶ S} (i₁ : X ⟶ X') (i₂ : Y ⟶ Y') [IsClosedImmersion i₁]
     [IsClosedImmersion i₂] (e₁ : f = i₁ ≫ f') (e₂ : g = i₂ ≫ g') :
@@ -236,8 +222,7 @@ theorem IsClosedImmersion.pullback_map {S X' Y' : Scheme.{u}} {f : X ⟶ S} {g :
       ((Category.comp_id _).trans e₂)) :=
   MorphismProperty.pullbackMap (P := @IsClosedImmersion) inferInstance inferInstance e₁ e₂
 
-/-- An open immersion is locally of finite type.
-(blueprint: `lem-weil-pbc-closed-immersion-products`) -/
+/-- An open immersion is locally of finite type. -/
 theorem IsOpenImmersion.locallyOfFiniteType (f : X ⟶ Y) [IsOpenImmersion f] :
     LocallyOfFiniteType f :=
   inferInstance
@@ -246,8 +231,8 @@ end Basic
 
 section Subsingleton
 
-/-- A morphism of finite type from a scheme with at most one point to a Jacobson scheme
-(e.g. the spectrum of a field) is proper. -/
+/-- A separated morphism locally of finite type from a scheme with at most one point to a
+Jacobson scheme (e.g. the spectrum of a field) is proper. -/
 lemma isProper_of_subsingleton {X Y : Scheme.{u}} (f : X ⟶ Y) [Subsingleton X]
     [LocallyOfFiniteType f] [IsSeparated f] [JacobsonSpace Y] : IsProper f := by
   cases isEmpty_or_nonempty X

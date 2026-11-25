@@ -13,8 +13,19 @@ import all WeilConjectures.CategoryTheory.RoosConeCalculus.RoosConeCalculus
 
 /-! # Signed tensor shifts on good representatives
 
-Compose the fixed strict tower comparisons, the supplied signed Roos comparison,
-and localization, retaining their precise components.
+We construct the left and right signed tensor shift isomorphisms on good representatives by
+composing the strict tensor-tower shift comparisons, a signed Roos comparison and the
+localization functor, and compute their components (`podTensorRepresentativeShift_isos`).
+
+## Implementation details
+
+The supplied Roos comparison is identified with the native mapping-cocone shift using its two
+coordinate laws; functor associators then identify the composite with the representative tensor
+functor.
+
+## References
+
+* [Stacks, Tags 011G, 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -42,14 +53,12 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Select the left or right input of a product functor.
-Source: construction (blueprint: lem-pod-tensor-representative-shift-isos). -/
+/-- Select the left or right input of a product functor. -/
 abbrev podTensorRepresentativePairOf {C : Type*} [Category C] (S : C ⥤ C) (right : Bool) :
     C × C ⥤ C × C :=
   if right then (𝟭 C).prod S else S.prod (𝟭 C)
 
-/-- Compose three functorial shift comparisons.
-Source: construction (blueprint: lem-pod-tensor-representative-shift-isos). -/
+/-- Compose three functorial shift comparisons. -/
 def podTensorRepresentativeComposeShiftIso {C D B A : Type*}
     [Category C] [Category D] [Category B] [Category A]
     (F : C ⥤ D) (R : D ⥤ B) (Q : B ⥤ A)
@@ -60,25 +69,21 @@ def podTensorRepresentativeComposeShiftIso {C D B A : Type*}
     isoWhiskerRight (isoWhiskerLeft F f) Q ≪≫
       isoWhiskerLeft (F ⋙ R) g
 
-/-- The existing shift functor on good representatives.
-Source: construction (blueprint: lem-pod-tensor-representative-shift-isos). -/
+/-- The existing shift functor on good representatives. -/
 abbrev podTensorRepresentativeGoodShift (W : Scheme.{u}) (r : ℤ) :
     (integralOperationsGoodComplex l E W).FullSubcategory ⥤
       (integralOperationsGoodComplex l E W).FullSubcategory :=
   podTensorGoodShiftFunctor l E W r
 
-/-- Restrict the existing strict tensor tower to good pairs.
-Source: construction (blueprint: lem-pod-tensor-representative-shift-isos). -/
+/-- Restrict the existing strict tensor tower to good pairs. -/
 abbrev podTensorRepresentativeTensorTowerOnGood (W : Scheme.{u}) := podTensorTowerOnGood l E W
 
-/-- The existing levelwise shift on towers.
-Source: construction (blueprint: lem-pod-tensor-representative-shift-isos). -/
+/-- The existing levelwise shift on towers. -/
 abbrev podTensorRepresentativeTowerShift {A : Type*} [Category A] [Preadditive A] (r : ℤ) :
     (ℕᵒᵖ ⥤ CochainComplex A ℤ) ⥤ (ℕᵒᵖ ⥤ CochainComplex A ℤ) :=
   podTensorTowerShift r
 
-/-- Select the already fixed left or right strict tensor shift.
-Source: construction (blueprint: lem-pod-tensor-representative-shift-isos). -/
+/-- Select the already fixed left or right strict tensor shift. -/
 def podTensorRepresentativeStrictTensorShift (W : Scheme.{u}) (r : ℤ) (right : Bool) :
     podTensorRepresentativePairOf (podTensorRepresentativeGoodShift l E W r) right ⋙
       podTensorRepresentativeTensorTowerOnGood l E W ≅
@@ -91,8 +96,7 @@ attribute [local irreducible] podTensorStrictShiftLeftIso podTensorStrictShiftRi
 
 attribute [local irreducible] integralOperationsTensorTowerFunctor integralOperationsRoos
 
-/-- Compose shift comparisons after restriction, retaining explicit associators.
-Source: construction (blueprint: lem-pod-tensor-representative-shift-isos). -/
+/-- Compose shift comparisons after restriction, retaining explicit associators. -/
 def podTensorRepresentativeComposeRestrictionShiftIso {C C₀ D B A : Type*}
     [Category C] [Category C₀] [Category D] [Category B] [Category A]
     (I : C ⥤ C₀) (F : C₀ ⥤ D) (R : D ⥤ B) (Q : B ⥤ A)
@@ -117,8 +121,7 @@ private theorem composeRestrictionShiftIso_hom_app {C C₀ D B A : Type*}
         g.hom.app ((I ⋙ F ⋙ R).obj X) := by
   simp [podTensorRepresentativeComposeRestrictionShiftIso, podTensorRepresentativeComposeShiftIso]
 
-/-- The constructed signed tensor shift on good representatives.
-Source: construction (blueprint: lem-pod-tensor-representative-shift-isos). -/
+/-- The constructed signed tensor shift on good representatives. -/
 def podTensorRepresentativeOnGoodShiftIso (W : Scheme.{u})
     (ρ : PodSignedRoosShift (scalarReductionSource l E W)) (hρ : ρ.Laws)
     (r : ℤ) (right : Bool) :
@@ -157,18 +160,9 @@ private theorem onGoodShiftIso_hom_app (W : Scheme.{u})
 
 attribute [local irreducible] podTensorRepresentativeOnGoodShiftIso
 
-/-- The two representative tensor shifts, with their prescribed signed Roos components.
-
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G and 07A4
-(blueprint: lem-pod-tensor-representative-shift-isos).
-
-Proof: the two coordinate laws identify the supplied Roos comparison with the
-native mapping-cocone shift: compose each degree with the two coordinates of
-the mapping cocone and use its identity decomposition. The native comparison
-is natural by the Roos commShift isomorphism. Compose it with the natural strict
-left or right tensor-tower shift and with the localization commShift isomorphism.
-Functor associators identify the result with the representative tensor functor.
-Evaluating the composite gives exactly the three displayed maps. -/
+/-- The left and right signed tensor shift isomorphisms on good representatives have the
+prescribed components: the strict tensor-tower shift, the signed Roos comparison `ρ`, and the
+localization commutation isomorphism of `DerivedCategory.Q`. -/
 theorem podTensorRepresentativeShift_isos (W : Scheme.{u})
     (ρ : PodSignedRoosShift (scalarReductionSource l E W)) (hρ : ρ.Laws) (r : ℤ) :
     ∀ P Q : (integralOperationsGoodComplex l E W).FullSubcategory,

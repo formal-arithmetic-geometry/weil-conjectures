@@ -23,9 +23,7 @@ namespace AlgebraicGeometry.LocallyRingedSpace
 /-- **Morphisms of locally ringed spaces.** A morphism `(f, f^♯)` of the underlying ringed
 spaces of two locally ringed spaces `X` and `Y` underlies a morphism of locally ringed spaces
 `X ⟶ Y` (Mathlib's `AlgebraicGeometry.LocallyRingedSpace.Hom`) if and only if all stalk maps
-`f^♯_x : 𝒪_{Y, f x} → 𝒪_{X, x}` are local ring homomorphisms.
-
-(blueprint: `def-weil-locally-ringed-space-morphism`) -/
+`f^♯_x : 𝒪_{Y, f x} → 𝒪_{X, x}` are local ring homomorphisms. -/
 theorem exists_toHom_eq_iff {X Y : LocallyRingedSpace.{u}}
     (f : X.toPresheafedSpace.Hom Y.toPresheafedSpace) :
     (∃ g : X ⟶ Y, g.toHom = f) ↔ ∀ x, IsLocalHom (f.stalkMap x).hom :=

@@ -10,8 +10,13 @@ public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-! # Closed sections of a split monic tensor presentation
 
-Source: Stacks Project, Morphisms, Tag 03HW, final paragraph of lemma-massage-finite
-(blueprint: lem-weil-pbc-split-monic-tensor-sections).
+If finitely many monic polynomials over `R` split, the spectrum of the tensor product of the
+algebras `R[X]/(P i)` is covered by the images of the closed sections given by evaluation at the
+root tuples.
+
+## References
+
+* [Stacks Project, Tag 03HW]
 -/
 
 @[expose] public section
@@ -23,17 +28,9 @@ open scoped TensorProduct
 
 namespace MonicTensorPresentation
 
-/-- The spectra of the evaluation quotients cover the tensor algebra when the monic equations
-split. Source: Stacks Project, Tag 03HW, final paragraph of lemma-massage-finite.
-
-Write each equation as a finite product of linear factors. At any prime of the tensor algebra,
-pass to its domain quotient. The product of the linear factors of each distinguished root is
-zero there, so at least one factor is zero. Choose one such factor for each equation. Evaluation
-at the resulting root tuple, followed by the structural map to the domain quotient, agrees with
-the quotient map on every tensor factor, hence everywhere. Taking kernels identifies the given
-prime as the inverse image of its contraction along this evaluation map. The finite set of all
-root tuples supplies all the sections, including the empty tuple when there are no equations.
-(blueprint: lem-weil-pbc-split-monic-tensor-sections). -/
+/-- If the monic polynomials `P i` split, there are finitely many surjective `R`-algebra maps
+`e k : Tensor P →ₐ[R] R` such that every prime of `Tensor P` is the preimage of a prime of `R`
+under some `e k`. -/
 theorem exists_cover (R : Type u) [CommRing R] {ι : Type v} [Finite ι]
     (P : ι → R[X]) (hP : ∀ i, (P i).Monic) (hsp : ∀ i, (P i).Splits) :
     ∃ (n : ℕ) (e : Fin n → Tensor P →ₐ[R] R),

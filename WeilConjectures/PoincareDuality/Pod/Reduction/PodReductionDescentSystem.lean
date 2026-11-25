@@ -14,8 +14,13 @@ import all WeilConjectures.SixFunctors.Coefficient.CoefficientReductionTensorEva
 
 /-! # Descent of the strict reduction/tensor representative square
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4 and 0941.
-(blueprint: lem-pod-reindexing-reduction-tensor-square-descent)
+Compares the reindexing tensor comparison of the system calculus with the normalized ordinary
+tensor arrow `podReindexingIntegralTensorHom` along a morphism of schemes, on K-flat cochain
+representatives.
+
+## References
+
+* Stacks Project, Tags 03D2, 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -63,16 +68,13 @@ attribute [local irreducible] Padic Padic.coefficientExtensionIntegers
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The two presentations use the same sequence inverse image.
-Source: Stacks 03D2 and 0941
-(blueprint: lem-pod-reindexing-reduction-tensor-square-descent). -/
+/-- The two presentations use the same sequence inverse image. -/
 theorem podReindexing_sequence_pullback_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
     pullbackTensorSequenceDerived l E g = integralComparisonDerivedSequencePullback l E g := by
   exact PodReductionRepresentatives.derived_eq l E g
 
-/-- The existing system tensor comparison, transported only by equality of its functor.
-Source: Stacks 07A4 and 0941
-(blueprint: lem-pod-reindexing-reduction-tensor-square-descent). -/
+/-- The system tensor comparison of the reindexing functor, transported along an equality of
+functors. -/
 def podReindexingSystemTensor {X Y : Scheme.{u}} (g : X ⟶ Y) :
     (podReindexCalculus l E Y).systemClosed.tensor ⋙
         integralComparisonDerivedSequencePullback l E g ≅
@@ -101,9 +103,7 @@ private theorem systemTensor_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
   unfold systemComparison
   rfl
 
-/-- The normalized ordinary tensor arrow, with its construction kept behind one name.
-Source: Stacks 07A4
-(blueprint: lem-pod-reindexing-reduction-tensor-square-descent). -/
+/-- The normalized ordinary tensor comparison arrow for the reindexing along `g`. -/
 @[irreducible] def podReindexingIntegralTensorHom
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -124,9 +124,7 @@ Source: Stacks 07A4
           (podReindexCalculus l E X).integralClosed.tensor.mapIso
             (((eqToIso h).app M).prod ((eqToIso h).app N))).hom)
 
-/-- The defining equation of the normalized ordinary tensor arrow.
-Source: Stacks 07A4
-(blueprint: lem-pod-reindexing-reduction-tensor-square-descent). -/
+/-- The defining equation of the normalized ordinary tensor arrow. -/
 theorem podReindexingIntegralTensorHom_eq
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
