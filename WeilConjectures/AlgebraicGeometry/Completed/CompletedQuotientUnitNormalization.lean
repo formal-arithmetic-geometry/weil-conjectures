@@ -191,7 +191,6 @@ def completedQuotientCompletionUnit (T : Scheme.{t})
     CategoryTheory.Functor.whiskerRight (completedReductionTowerUnit d T)
       (completedRlim T (d.completedRing T))
 
-set_option linter.style.haveILetI false in
 private theorem actualCompletionUnit_normalization (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (P : CochainComplex (reductionModules T (d.completedRing T)) ℤ)
@@ -212,8 +211,8 @@ private theorem actualCompletionUnit_normalization (T : Scheme.{t})
         (completedRlimUnit T (d.completedRing T)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj
             ((L.mapHomologicalComplex (.up ℤ)).obj P)) := by
-  letI := reductionModulesHasDerivedCategory T (d.completedRing T)
-  letI := reductionTowerHasDerivedCategory T (reductionModuleRing T (d.completedRing T))
+  let := reductionModulesHasDerivedCategory T (d.completedRing T)
+  let := reductionTowerHasDerivedCategory T (reductionModuleRing T (d.completedRing T))
   let := completedReductionModuleTowerFunctor_additive T d
   have ht : HasCompletedReductionTowerUnitNormalization d T
       (completedReductionTowerUnit d T) := by
@@ -233,7 +232,6 @@ private theorem actualCompletionUnit_normalization (T : Scheme.{t})
     (completedReductionTowerUnit d T) P
     h
 
-set_option linter.style.haveILetI false in
 /-- On a K-flat representative the actual quotient-completion unit is the localized
 strict quotient-unit cone followed by the universal inverse-limit comparison. -/
 theorem completedQuotientUnitNormalization
@@ -255,8 +253,8 @@ theorem completedQuotientUnitNormalization
           R.map (ε.app P) =
         DerivedCategory.Q.map (completedQuotientOrdinaryUnit T d P) ≫
           η.app ((L.mapHomologicalComplex (.up ℤ)).obj P) := by
-  letI := reductionModulesHasDerivedCategory T (d.completedRing T)
-  letI := reductionTowerHasDerivedCategory T (reductionModuleRing T (d.completedRing T))
+  let := reductionModulesHasDerivedCategory T (d.completedRing T)
+  let := reductionTowerHasDerivedCategory T (reductionModuleRing T (d.completedRing T))
   let := completedReductionModuleTowerFunctor_additive T d
   constructor
   · have hp : IsCompletedReductionTowerPair T d (completedReductionTower T d)

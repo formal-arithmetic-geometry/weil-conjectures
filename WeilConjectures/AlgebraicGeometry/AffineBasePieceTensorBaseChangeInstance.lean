@@ -254,7 +254,6 @@ private theorem tensor_pullback_arrow
   simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.hom_inv_id,
     Category.comp_id] using hh
 
-set_option linter.unusedVariables false in
 /-- The fixed test-object affine tensor base-change construction used in the affine reduction
 (Stacks, Tags 01JR, 01I4 and 01ZO). -/
 theorem affine_base_piece_tensor_base_change_instance
@@ -277,7 +276,7 @@ theorem affine_base_piece_tensor_base_change_instance
           ((((Over.pullback d).map f₀).left) ∣_
             ((pullback.fst Y₀.hom d) ⁻¹ᵁ V)) ≫ eB.hom →
         ∀ (L : Scheme.{u}) (t : L ⟶ T) (A : CommRingCat.{u})
-          (aA : Algebra R A) (e : (t ⁻¹ᵁ (d ⁻¹ᵁ W)).toScheme ≅ Spec A),
+          (_aA : Algebra R A) (e : (t ⁻¹ᵁ (d ⁻¹ᵁ W)).toScheme ≅ Spec A),
           t.resLE (d ⁻¹ᵁ W) _ le_rfl ≫ e0.hom =
             e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R A)) →
           Nonempty

@@ -23,7 +23,6 @@ public import WeilConjectures.Algebra.Homology.System.SystemDerivedSubsequence
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u v w
@@ -37,6 +36,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r : ℕ ↪o ℕ) (m : ℕ)
 
+omit [EssentiallySmall.{w} C] in
 /-- The selected evaluation square is represented by the actual strict transition. -/
 theorem systemSelectedDerivedSquare_rep (K : CochainComplex (StrictRingSystem B) ℤ) :
     ((systemDerivedSubsequenceEvaluation B r (systemNextSelected r m)).hom ≫

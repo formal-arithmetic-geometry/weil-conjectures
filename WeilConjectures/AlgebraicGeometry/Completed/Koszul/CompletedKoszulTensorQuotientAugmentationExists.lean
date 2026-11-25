@@ -197,7 +197,6 @@ private theorem assembleTowerMap {C D : Type*} [Category C] [HasZeroMorphisms C]
   intro j
   rfl
 
-set_option linter.unusedVariables false in
 /-- The normalized strict augmentation exists before taking any products. -/
 theorem completedKoszulTensorQuotientAugmentation_exists
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
@@ -207,7 +206,7 @@ theorem completedKoszulTensorQuotientAugmentation_exists
         completedAdicKoszulTensorUnit T d r a P n ≫
           (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (β.app P)).app (op n) =
             completedQuotientTensorUnit T d P n) ∧
-      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (hq : q ≠ 0),
+      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (_hq : q ≠ 0),
         completedKoszulTensorSummand T d r a P n p q ≫
             ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
               (β.app P)).app (op n)).f (p + q) = 0) := by

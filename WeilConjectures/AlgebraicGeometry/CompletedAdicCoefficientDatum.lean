@@ -209,6 +209,7 @@ def DerivedReductionModelData.complexCounit (D : DerivedReductionModelData F P)
 
 end DerivedReductionModels
 
+-- Untyped proof-valued def: its type is inferred and downstream code unfolds it.
 set_option linter.defProp false in
 /-- The full normalized scalar-extension witness along a map of coefficient sheaves.
 Its object and map equalities fix ordinary tensor; its universal counit fixes the derived

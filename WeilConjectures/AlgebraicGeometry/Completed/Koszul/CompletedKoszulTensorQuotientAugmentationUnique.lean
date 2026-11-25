@@ -212,7 +212,6 @@ private theorem completedKoszulUnitZero_isIso (r : ℕ) (a : Fin r → A) (n : �
   intro V
   exact (completedAdicKoszulUnitZero_exists T d r a n).exists.choose_spec V
 
-set_option linter.unusedVariables false in
 /-- The unit and nonzero-summand formulas determine a strict augmentation uniquely. -/
 theorem completedKoszulTensorQuotientAugmentation_unique
     (r : ℕ) (a : Fin r → A)
@@ -223,7 +222,7 @@ theorem completedKoszulTensorQuotientAugmentation_unique
         completedAdicKoszulTensorUnit T d r a P n ≫
           (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (β.app P)).app (op n) =
             completedQuotientTensorUnit T d P n) ∧
-      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (hq : q ≠ 0),
+      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (_hq : q ≠ 0),
         completedKoszulTensorSummand T d r a P n p q ≫
             ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
               (β.app P)).app (op n)).f (p + q) = 0))
@@ -232,7 +231,7 @@ theorem completedKoszulTensorQuotientAugmentation_unique
         completedAdicKoszulTensorUnit T d r a P n ≫
           (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (γ.app P)).app (op n) =
             completedQuotientTensorUnit T d P n) ∧
-      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (hq : q ≠ 0),
+      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (_hq : q ≠ 0),
         completedKoszulTensorSummand T d r a P n p q ≫
             ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
               (γ.app P)).app (op n)).f (p + q) = 0)) :

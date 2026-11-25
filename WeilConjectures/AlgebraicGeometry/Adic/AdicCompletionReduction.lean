@@ -39,6 +39,4 @@ noncomputable def adicCompletionEvaluation (X : Scheme.{t}) {Λ : Type t} [CommR
   (adicLocalization X Λ).map
     (adicCompletionProjection X d M ≫ Pi.π (adicReductionComplex X d M) n)
 
-set_option linter.style.haveILetI false in
-set_option linter.style.haveILetI false
 end AlgebraicGeometry.Scheme
