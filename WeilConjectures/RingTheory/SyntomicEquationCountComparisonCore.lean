@@ -11,6 +11,24 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 import WeilConjectures.RingTheory.SyntomicPresentationLocalKernel
 
+/-!
+# Core of the syntomic equation-count comparison
+
+A finitely presented algebra satisfying the syntomic hypotheses at a prime `q` is, after a
+principal localization outside `q`, isomorphic to a localization of a quotient of a polynomial
+ring by at most as many equations as variables.
+
+## Implementation details
+
+The proof constructs a finite polynomial presentation, chooses the conormal generators, and uses
+flatness plus Nakayama's lemma to obtain an isomorphism after inverting an element outside the
+prime.
+
+## References
+
+* [Stacks, Tag 00SY], proof of (3) ⇒ (2)
+-/
+
 @[expose] public section
 universe u v
 namespace Algebra
@@ -54,12 +72,9 @@ private theorem exists_multiplier_of_localized_le
   | smul a x hx ih =>
     simpa only [smul_eq_mul, mul_left_comm s a x] using J.mul_mem_left a ih
 
-/-- Core presentation and localization comparison underlying the syntomic equation-count theorem.
-Source: Stacks Project, Algebra, Tag 00SY, proof of (3) ⇒ (2),
-presentation, Nakayama and flatness steps.
-(blueprint: lem-weil-pbc-syntomic-equation-count-comparison-core).
-The proof constructs a finite polynomial presentation, chooses the conormal generators, and uses
-flatness plus Nakayama to obtain an isomorphism after inverting an element outside the prime. -/
+/-- A finitely presented algebra with the syntomic local hypotheses at `q` becomes isomorphic,
+after inverting an element `u` with `π u ∉ q`, to a localization of a quotient
+`T = R[x_1, …, x_n] / (f_1, …, f_c)` with `c ≤ n`. -/
 theorem exists_equationCount_comparison_core
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (q : PrimeSpectrum S)

@@ -93,24 +93,18 @@ lemma isUnit_iff_eval_ne_zero (x : colim R p K) : IsUnit x ↔ eval R p K x ≠ 
 instance : Nontrivial (colim R p K) :=
   ⟨⟨0, 1, fun h ↦ by simpa using congr(eval R p K $h)⟩⟩
 
-/-- The colimit `C` over the étale triples is a local ring.
-
-(blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
+/-- The colimit `C` over the étale triples is a local ring. -/
 instance instIsLocalRingColim : IsLocalRing (colim R p K) :=
   .of_nonunits_add fun a b ha hb ↦ by
     rw [mem_nonunits_iff, isUnit_iff_eval_ne_zero, not_not] at ha hb ⊢
     rw [map_add, ha, hb, add_zero]
 
-/-- The maximal ideal of `C` is the kernel of `ψ : C → K`.
-
-(blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
+/-- The maximal ideal of `C` is the kernel of `ψ : C → K`. -/
 lemma maximalIdeal_colim_eq_ker : maximalIdeal (colim R p K) = RingHom.ker (eval R p K) := by
   ext x
   rw [mem_maximalIdeal, mem_nonunits_iff, isUnit_iff_eval_ne_zero, not_not, RingHom.mem_ker]
 
-/-- The preimage of the maximal ideal of `C` in `R` is `p`.
-
-(blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
+/-- The preimage of the maximal ideal of `C` in `R` is `p`. -/
 lemma comap_maximalIdeal_colim :
     (maximalIdeal (colim R p K)).comap (algebraMap R (colim R p K)) = p := by
   ext r
@@ -120,7 +114,7 @@ lemma comap_maximalIdeal_colim :
 omit [Algebra p.ResidueField K] [IsScalarTower R p.ResidueField K] in
 /-- For an étale algebra the prime below generates the maximal ideal at a prime: if `s ∈ q`,
 some `u ∉ q` has `us ∈ pS`. This is `Algebra.isUnramifiedAt_iff_map_eq`
-(blueprint: `lem-weil-pbc-etale-prime-generates-maximal`) made elementwise. -/
+made elementwise. -/
 lemma exists_mul_mem_map_of_mem (t : EtaleTriple R p K) {s : t.S} (hs : s ∈ t.q) :
     ∃ u ∉ t.q, u * s ∈ p.map (algebraMap R t.S) := by
   have : t.q.LiesOver p := ⟨t.comap_eq.symm⟩
@@ -141,9 +135,7 @@ lemma exists_mul_mem_map_of_mem (t : EtaleTriple R p K) {s : t.S} (hs : s ∈ t.
   rw [mul_assoc, mul_comm m, hc']
   exact Ideal.mul_mem_left _ _ y.2
 
-/-- **The maximal ideal of the colimit is `pC`.**
-
-(blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
+/-- **The maximal ideal of the colimit is `pC`.** -/
 lemma maximalIdeal_colim_eq_map :
     maximalIdeal (colim R p K) = p.map (algebraMap R (colim R p K)) := by
   refine le_antisymm (fun x hx ↦ ?_) (Ideal.map_le_iff_le_comap.mpr comap_maximalIdeal_colim.ge)
@@ -194,10 +186,7 @@ lemma exists_monic_map_eq (P : (colim R p K)[X]) (hP : P.Monic) :
   exact congr($(ι_comp_β R p K (c.ι.app ⟨i⟩)) (s i))
 
 /-- **Simple roots in `K` lift to the colimit.** If `P` is a monic polynomial over `C` whose image
-under `ψ : C → K` has a simple root `a₀ ∈ K`, then `P` has a root `a ∈ C` with `ψ(a) = a₀`: the
-root `X` of the standard étale algebra `S[X][1/Q']/(Q)` of a lift `Q` of `P`.
-
-(blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
+under `ψ : C → K` has a simple root `a₀ ∈ K`, then `P` has a root `a ∈ C` with `ψ(a) = a₀`. -/
 theorem exists_isRoot_and_eval_eq (P : (colim R p K)[X]) (hP : P.Monic) (a₀ : K)
     (h₁ : P.eval₂ (eval R p K).toRingHom a₀ = 0)
     (h₂ : (derivative P).eval₂ (eval R p K).toRingHom a₀ ≠ 0) :
@@ -262,11 +251,7 @@ lemma algebraMap_mem_range_eval (x : p.ResidueField) :
 
 variable [Algebra.IsSeparable p.ResidueField K]
 
-/-- **The map `ψ : C → K` is surjective** when `K` is separable algebraic over `κ(p)`: every
-element of `K` is a simple root of its minimal polynomial over `κ(p)`, which lifts to a monic
-polynomial over `C`.
-
-(blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
+/-- **The map `ψ : C → K` is surjective** when `K` is separable algebraic over `κ(p)`. -/
 theorem eval_surjective : Function.Surjective (eval R p K) := by
   intro α
   have hsep : IsSeparable p.ResidueField α := Algebra.IsSeparable.isSeparable _ α
@@ -285,9 +270,7 @@ theorem eval_surjective : Function.Surjective (eval R p K) := by
       exact hsep.aeval_derivative_ne_zero (minpoly.aeval _ _))
   exact ⟨a, ha⟩
 
-/-- The residue field of `C` is `K`: the isomorphism induced by `ψ : C → K`.
-
-(blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
+/-- The residue field of `C` is `K`: the isomorphism induced by `ψ : C → K`. -/
 noncomputable def residueFieldEquiv : ResidueField (colim R p K) ≃+* K :=
   RingEquiv.ofBijective (ResidueField.lift (eval R p K).toRingHom)
     ⟨(ResidueField.lift _).injective, fun α ↦ by
@@ -300,9 +283,7 @@ lemma residueFieldEquiv_residue (x : colim R p K) :
   rfl
 
 /-- **The colimit over étale triples is henselian**: a simple root in the residue field `K` of a
-monic polynomial over `C` lifts (`EtaleTriple.exists_isRoot_and_eval_eq`).
-
-(blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
+monic polynomial over `C` lifts (`EtaleTriple.exists_isRoot_and_eval_eq`). -/
 instance henselianLocalRing_colim : HenselianLocalRing (colim R p K) := by
   refine ((HenselianLocalRing.TFAE _).out 2 1).mp fun f hf a₀ h₁ h₂ ↦ ?_
   let e : ResidueField (colim R p K) ≃+* K := residueFieldEquiv
@@ -318,9 +299,7 @@ instance henselianLocalRing_colim : HenselianLocalRing (colim R p K) := by
   exact ⟨a, ha, e.injective ((residueFieldEquiv_residue a).trans hae)⟩
 
 /-- **The colimit over étale triples is strictly henselian** when `K` is a separable closure of
-`κ(p)`: it is henselian with residue field `K`.
-
-(blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
+`κ(p)`: it is henselian with residue field `K`. -/
 instance isStrictlyHenselianLocalRing_colim [IsSepClosed K] :
     IsStrictlyHenselianLocalRing (colim R p K) where
   isSepClosed_residueField := IsSepClosed.of_ringEquiv (residueFieldEquiv).symm

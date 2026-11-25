@@ -11,8 +11,21 @@ public import Mathlib.RingTheory.Localization.BaseChange
 
 /-! # Symmetric algebras and base change
 
-Source: Stacks Project, Algebra, Lemma 0C6F and the universal properties of symmetric
-algebras and extension of scalars (blueprint: lem-weil-pbc-symmetric-algebra-base-change).
+The canonical map `S ⊗[R] Sym_R(M) → Sym_S(S ⊗[R] M)` is an isomorphism
+(`SymmetricAlgebra.baseChange_bijective`); in particular the principal localization of a
+symmetric algebra is the symmetric algebra of the localized module
+(`SymmetricAlgebra.exists_away_baseChange`).
+
+## Implementation details
+
+Both directions of the isomorphism are constructed from the universal properties of symmetric
+algebras and of extension of scalars, and the two composites are identified with the identity
+by checking them on degree-one generators. The localized statement uses
+`IsLocalization.Away.tensorRightEquiv` and `LocalizedModule.equivTensorProduct`.
+
+## References
+
+* [Stacks, Tag 0C6F]
 -/
 
 @[expose] public section
@@ -23,25 +36,7 @@ open scoped TensorProduct
 
 namespace SymmetricAlgebra
 
-/-- The canonical base-change map for the symmetric algebra is an isomorphism.
-Source: Stacks Project, Algebra, Lemma 0C6F, generalized by the universal properties
-(blueprint: lem-weil-pbc-symmetric-algebra-base-change).
-
-Proof: (1) The symmetric-algebra universal property
-(lem-weil-pbc-symmetric-algebra-universal-property) constructs the unique `β` from the
-linear map `m ↦ ι S (S ⊗[R] M) (1 ⊗ₜ m)`.
-(2) The algebra base-change universal property
-(lem-weil-pbc-algebra-tensor-base-change-universal-property) extends `β` to the displayed
-`S`-algebra map, sending `s ⊗ₜ a` to `s • β a`.
-(3) The module base-change universal property
-(lem-weil-pbc-module-base-change-universal-property) extends `m ↦ 1 ⊗ₜ ι R M m` to
-an `S`-linear map sending `s ⊗ₜ m` to `s ⊗ₜ ι R M m`. Extend this again by the
-symmetric-algebra universal property to obtain the inverse algebra map.
-(4) The forward map after the inverse is the identity on all degree-one generators;
-symmetric-algebra uniqueness makes it the identity everywhere.
-(5) For the other composite, algebra base-change uniqueness reduces to comparing maps
-on `SymmetricAlgebra R M`; symmetric-algebra uniqueness reduces this to the generators,
-where both maps send `ι R M m` to `1 ⊗ₜ ι R M m`. Thus both composites are identities. -/
+/-- The canonical base-change map for the symmetric algebra is an isomorphism. -/
 theorem baseChange_bijective
     {R : Type u} {S : Type v} {M : Type w}
     [CommRing R] [CommRing S] [Algebra R S] [AddCommGroup M] [Module R M]
@@ -81,18 +76,7 @@ theorem baseChange_bijective
     (show Function.RightInverse Ψ Φ from fun x ↦ DFunLike.congr_fun hright x).surjective⟩
 
 /-- The principal localization of a symmetric algebra is the symmetric algebra of the
-localized module over the localized ring.
-Source: Stacks Project, Algebra, Lemma 0C6F
-(blueprint: lem-weil-pbc-symmetric-algebra-base-change).
-
-Proof: (6) Specialize the base-change isomorphism to `S = Localization.Away f`.
-Use the algebra and module tensor-localization identifications
-(lem-weil-pbc-localization-tensor), namely `IsLocalization.Away.tensorRightEquiv` and
-`LocalizedModule.equivTensorProduct`, to identify its source with the localization of
-`SymmetricAlgebra R M` at the image of the powers of `f`, and its degree-one module
-with `LocalizedModule (Submonoid.powers f) M`. Under these identifications the comparison
-is exactly the stated localization isomorphism. The image submonoid is exactly the powers
-of `algebraMap R (SymmetricAlgebra R M) f`. -/
+localized module over the localized ring. -/
 theorem exists_away_baseChange
     {R : Type u} {M : Type w} [CommRing R] [AddCommGroup M] [Module R M] (f : R) :
     Nonempty (Localization

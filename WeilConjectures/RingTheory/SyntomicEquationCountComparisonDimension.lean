@@ -14,8 +14,21 @@ import WeilConjectures.RingTheory.PolynomialQuotientDimensionAtPointHeightDiffer
 /-!
 # Local fibre dimension under a comparison localization
 
-Source: Stacks Project, Algebra, Tag 00SY, localization comparison; Tag 00P2.
-(blueprint: lem-weil-pbc-syntomic-equation-count-comparison-dimension).
+If a surjection `T → S` becomes an isomorphism after inverting an element outside a prime `q`,
+then the fibres of `T` and `S` have the same local dimension at `q`.
+
+## Implementation details
+
+Injectivity after localization kills every kernel element by a power of `u`, so `D(u)` lies in
+the image of the closed embedding of spectra. Restricting to the base fibre gives a
+homeomorphism over an open neighbourhood of the chosen point, and local dimension is invariant
+under homeomorphisms and passage to open subsets. The equation count must already equal the
+codimension of the target fibre: an arbitrary list of `c` equations need not have codimension `c`.
+
+## References
+
+* [Stacks, Tag 00SY]
+* [Stacks, Tag 00P2]
 -/
 
 set_option autoImplicit false
@@ -122,16 +135,9 @@ private theorem comparison_fibre_dimension
     (PrimeSpectrum.preimageEquivFiber R S p ⟨q, rfl⟩) at he
   exact (fibre_dim_base (q.comap π.toRingHom) p (hcomm q)).trans he
 
-/-- Dimension calculation for a comparison quotient at the canonical fibre prime.
-Source: Stacks Project, Algebra, Tags 00SY and 00P2.
-(blueprint: lem-weil-pbc-syntomic-equation-count-comparison-dimension).
-The localization comparison preserves local fibre dimension. The equation count must
-already equal the codimension of the target fibre; an arbitrary list of c equations
-need not have codimension c.
-Proof: injectivity after localization kills every kernel element by a power of u.
-Thus D(u) lies in the image of the closed spectrum embedding. Restrict to the base
-fibre, obtaining a homeomorphism over an open neighbourhood of the chosen point.
-Local dimension is invariant under this homeomorphism and under passage to opens. -/
+/-- Let `π : T = R[x_1, …, x_n] / (f_1, …, f_c) → S` be surjective with `π u ∉ q` and
+`T_u → S_{π u}` bijective. If the fibre of `S` has local dimension `n - c` at `q`, then so does
+the fibre of `T` at the inverse image of `q`. -/
 theorem equationCount_comparison_dimension
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (q : PrimeSpectrum S) {n c : ℕ} {f : Fin c → MvPolynomial (Fin n) R}

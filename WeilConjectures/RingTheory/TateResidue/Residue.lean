@@ -152,8 +152,8 @@ end Action
 variable {k : Type*} (K : Type*) {V : Type*} [Field k] [CommRing K] [Algebra k K]
   [AddCommGroup V] [Module k V] [Module K V] [IsScalarTower k K V]
 
-/-- A `k`-subspace `A ⊆ V` is *admissible* for the action of `K` if `f A ≺ A` for all `f ∈ K`
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`). -/
+/-- A `k`-subspace `A ⊆ V` is *admissible* for the action of `K` if `f A ≺ A` for all
+`f ∈ K`. -/
 def Admissible (A : Submodule k V) : Prop := ∀ f : K, E A (act k (V := V) f)
 
 variable {K}
@@ -241,8 +241,8 @@ theorem tateTrace_commutator_eq (hA : Admissible K A) (hφ : IsLift A f φ) (hφ
     show φ' * ψ - ψ * φ' = -(ψ * φ' - φ' * ψ) by abel, tateTrace_neg, tateTrace_neg, h₁]
 
 variable (K) in
-/-- Tate's residue pairing `(f, g) ↦ Tr_V [π f, π g]` for the chosen projection `π` onto `A`
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`). -/
+/-- Tate's residue pairing `(f, g) ↦ Tr_V [π f, π g]` for the chosen projection `π`
+onto `A`. -/
 noncomputable def resPair (A : Submodule k V) (f g : K) : k :=
   (proj A * act k f * (proj A * act k g) - proj A * act k g * (proj A * act k f)).tateTrace
 
@@ -326,7 +326,7 @@ open Classical in
 variable (K) in
 /-- **Tate's residue** `res_{V,A} : Ω[K⁄k] → k`, characterised by
 `res (f • D g) = Tr_V [π f, π g]` (`TateResidue.res_smul_D`); it is `0` when `A` is not
-admissible (blueprint: `theorem-riemann-roch-coherent-serre-duality--2`). -/
+admissible. -/
 noncomputable def res (A : Submodule k V) : Ω[K⁄k] →ₗ[k] k :=
   if hA : Admissible K A then
     { toFun ω := (resDerivation hA).liftKaehlerDifferential ω 1

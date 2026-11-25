@@ -11,8 +11,18 @@ import WeilConjectures.RingTheory.PointedEtaleQuotientFinal
 
 /-! # Strict henselization and surjective local quotients
 
-Source: Stacks Project, Tag 05WS (strict henselization of a quotient).
-(blueprint: lem-sbc-strict-henselization-surjective-quotient)
+If `A → B` is a surjection of local rings with kernel `I` and `C` is a strict henselization of
+`A`, then `C ⧸ IC` is a strict henselization of `B`.
+
+## Implementation details
+
+Base change of pointed étale algebras along `A → B` is final, and extension of scalars is a
+left adjoint, so it carries the universal cocone presenting `C` to a universal cocone with
+vertex `B ⊗[A] C ≅ C ⧸ IC`.
+
+## References
+
+* [Stacks, Tag 05WS]
 -/
 
 @[expose] public section
@@ -21,20 +31,11 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace Algebra
 
-/-- Stacks Project, Tag 05WS: let `π : A → B` be a surjection of local rings with kernel
+/-- Let `π : A → B` be a surjection of local rings with kernel
 `I`, and let `C` be the strict henselization of `A` with respect to `K`. Then `C ⧸ I C`,
 with the `B`-algebra structure induced by `π` (the hypothesis `hcomp`; it is unique since
 `π` is surjective), is the strict henselization of `B` with respect to any separable
-closure `L` of the residue field of `B`. Since `κ(A) ≅ κ(B)`, `L` may be taken to be `K`.
-(blueprint: lem-sbc-strict-henselization-surjective-quotient)
-(blueprint: lem-sbc-strict-henselization-surjective-quotient-core)
-
-Proof: Base change of pointed etale algebras along π is final
-(`pointedEtaleQuotient_final`). Extension of scalars along π is a left adjoint, so it
-preserves the universal cocone presenting C. Transport the cocone along the natural
-diagram isomorphism and extend it along the final functor. The resulting universal cocone
-has vertex the base change of C, which `quotientBaseChangeObjIso` identifies with C/IC,
-equipped with the action induced by π. -/
+closure `L` of the residue field of `B`. Since `κ(A) ≅ κ(B)`, `L` may be taken to be `K`. -/
 theorem IsStrictHenselization.surjective_quotient
     (A K C B L : Type u) [CommRing A] [IsLocalRing A] [Field K]
     [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]

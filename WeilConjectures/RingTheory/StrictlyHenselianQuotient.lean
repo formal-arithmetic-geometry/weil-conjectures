@@ -15,8 +15,20 @@ import WeilConjectures.RingTheory.HenselianIntegralIdempotentLifting
 /-!
 # Quotients of strictly henselian local rings
 
-Source: Stacks Project, Algebra, Tag 05WS, specialized to a strictly henselian ring;
-Tags 04GF and 09XI (3) (blueprint: lem-weil-pbc-strictly-henselian-quotient).
+The quotient of a strictly henselian local ring by an ideal contained in its maximal ideal is a
+strictly henselian local ring with the same residue field
+(`isStrictlyHenselianLocalRing_quotient`).
+
+## Implementation details
+
+Any finite `A/I`-algebra is finite over `A`, and extending `m/I` to it is the same as extending
+`m`, so the idempotent-lifting criterion for henselianity transfers from `A` to `A/I`.
+
+## References
+
+* [Stacks, Tag 05WS]
+* [Stacks, Tag 04GF]
+* [Stacks, Tag 09XI]
 -/
 
 @[expose] public section
@@ -25,20 +37,7 @@ universe u v
 
 /-- A quotient by an ideal contained in the maximal ideal of a strictly henselian local
 ring is local with the image maximal ideal and the same residue field, and is strictly
-henselian, with unique idempotent lifting in every finite algebra.
-Source: Stacks Project, Algebra, Tag 05WS and the idempotent criterion of Tag 09XI (3)
-(blueprint: lem-weil-pbc-strictly-henselian-quotient).
-
-Proof:
-1. Since `I ≤ m`, `I` is proper. The quotient is local with maximal ideal `m/I`
-   (`lem-weil-pbc-quotient-local-structure`).
-2. The third isomorphism theorem identifies its residue field with `A/m`, compatibly
-   with reduction from `A` (`lem-weil-pbc-quotient-residue-field`).
-3. Any finite `A/I`-algebra is finite over `A`, and extension of `m` is extension of
-   `m/I`. The henselian idempotent criterion therefore gives the unique lifts
-   (`lem-weil-pbc-quotient-henselian-pair`, `def-weil-pbc-henselian-terminology`).
-4. This proves henselianity; the residue-field identification transfers separable
-   closedness, hence strict henselianity (`def-weil-pbc-henselian-terminology`). -/
+henselian, with unique idempotent lifting in every finite algebra. -/
 theorem isStrictlyHenselianLocalRing_quotient
     (A : Type u) [CommRing A] [IsLocalRing A]
     (hA : IsStrictlyHenselianLocalRing A) (I : Ideal A)

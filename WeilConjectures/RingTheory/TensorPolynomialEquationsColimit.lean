@@ -15,9 +15,20 @@ import Mathlib.Data.Fintype.Order
 
 /-! # Descent of finite systems of polynomial equations
 
-Source: Stacks Project, Algebra, Tag 07RI, proof, lifting finitely many coefficients
-and imposing finitely many identities.
-(blueprint: lem-weil-pbc-tensor-polynomial-equations-colimit).
+A finite system of polynomial equations that is solvable after base change to a directed
+colimit of rings is already solvable at some finite stage.
+
+## Implementation details
+
+The finitely many entries of a solution are lifted to a common stage by elementwise
+base-change descent, using the identification of `F i ⊗ B₀[x]` with `(F i ⊗ B₀)[x]`. Since
+evaluation of polynomials commutes with ring maps, each equation evaluated at the lifted tuple
+vanishes in the colimit, hence at some later stage; a common later stage works for all
+equations. Neither finite presentation of `B₀` nor degree bounds are used.
+
+## References
+
+* [Stacks, Tag 07RI]
 -/
 
 @[expose] public section
@@ -85,26 +96,9 @@ private theorem tensor_map_linear
   | tmul a p => rfl
   | add x y hx hy => simp [hx, hy]
 
-/-- A finite system of polynomial equations over a fixed polynomial coefficient algebra
-has a solution after tensor base change to a directed colimit only if it has a solution
-at a stage above the fixed base stage.
-
-Source: Stacks Project, Algebra, Tag 07RI (lemma-colimit-etale), proof,
-lines 47654-47662; the finite-equation step, abstracted from the inverse identities.
-(blueprint: lem-weil-pbc-tensor-polynomial-equations-colimit).
-
-Proof: put P₀ = B₀[x₁,...,x_n]. The natural polynomial tensor equivalence identifies
-A_i tensor P₀ with (A_i tensor B₀)[x], and likewise at the colimit. Apply elementwise
-base-change descent to the finitely many entries of the solution. Choose a common
-upper bound of their stages and i₀, and transport the entries there. The coefficient
-maps from P₀ commute with all transition maps. Evaluation of a polynomial commutes
-with a ring map (check constants and variables, addition and multiplication).
-Consequently each equation evaluated at this tuple has zero image in the colimit.
-Apply eventual vanishing to these finitely many evaluated differences and choose a
-common later stage. Transport the tuple again: evaluation compatibility makes every
-equation zero there. Empty variable or equation sets require no representatives or
-vanishing conditions, respectively; use i₀ as the initial upper bound. No finite
-presentation of B₀ or bound on the degrees of the lifted entries is used. -/
+/-- If a finite system of polynomial equations with coefficients in `B₀[x₁, …, xₙ]` has a
+solution in `(colim F ⊗[F i₀] B₀)[x₁, …, xₙ]`, then it has a solution in
+`(F i ⊗[F i₀] B₀)[x₁, …, xₙ]` for some stage `i ≥ i₀`. -/
 theorem exists_stage_tensorPolynomialEquations
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F] (i₀ : I)
