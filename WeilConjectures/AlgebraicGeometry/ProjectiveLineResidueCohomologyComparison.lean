@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 
 universe u
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 
 open CategoryTheory Limits
 

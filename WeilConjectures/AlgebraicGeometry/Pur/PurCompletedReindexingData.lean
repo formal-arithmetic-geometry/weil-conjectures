@@ -57,8 +57,6 @@ are derived categories of actual strict diagrams, with positive level n+1 indexe
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option linter.privateModule false
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite

@@ -26,9 +26,6 @@ set_option linter.privateModule false
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
--- Replaying the dependent transport calculations for tactic linting is expensive.
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
