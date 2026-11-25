@@ -11,8 +11,18 @@ import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 
 /-! # Proved calculations for tensor-shift path normalization
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-presented-model-t5).
+We show that the normalized tensor model formula for reindexing along an isomorphism of schemes
+holds for arbitrary constructible presentations by good representatives
+(`tensor_model_presented`).
+
+## Implementation details
+
+Constructibility is transported along the presentations, the `Model` and `Naturality` laws are
+applied, and the adjacent tensor and exact-derived comparison isomorphisms are cancelled.
+
+## References
+
+* [Stacks, Tags 011G, 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -60,11 +70,9 @@ variable [(isoReductionIntegralInverse l E g).Additive]
 attribute [local irreducible] integralOperationsRoos
 
 -- Share the normalized categorical expressions without unfolding coefficient constructions.
-/-- The normalized tensor model holds for arbitrary constructible presentations.
-Transport constructibility along the presentations, apply Model and Naturality, and cancel
-the adjacent tensor and exact-derived comparison isomorphisms.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-presented-model-t5). -/
+/-- The normalized tensor model formula holds for arbitrary constructible presentations
+`eP`, `eQ` of `M`, `N` by good representatives `P`, `Q`: the reindexed completed tensor
+comparison is computed through the reindexed Roos model of the tensor tower. -/
 theorem tensor_model_presented
     (D : PodCompletionReindex l E g) (T : PodCompletedTensorReindex l E g D)
     (hT : PodCompletedTensorReindex.Laws l E g D T)

@@ -13,10 +13,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 A finite scheme `X` over a finite field `k` has a bounded number of points over the finite
 extensions of `k`: a `k_n`-point is a `k`-algebra map `Γ(X, ⊤) → k_n`, and there are at most
-`dim_k Γ(X, ⊤)` of these by the linear independence of characters. Together with the linear
-growth of the point count of an affine curve
-(`AlgebraicGeometry.Scheme.Hom.exists_pointCount_le_mul_pow`), this is blueprint
-`lemma-point-count-bound`.
+`dim_k Γ(X, ⊤)` of these by the linear independence of characters. We combine this with the
+bound on the point count of a smooth affine curve
+(`AlgebraicGeometry.Scheme.Hom.exists_pointCount_le_mul_pow`).
 
 ## Main statements
 
@@ -36,13 +35,8 @@ namespace AlgebraicGeometry.Scheme
 
 variable {k : Type u} [Field k] [Finite k]
 
-/-- Blueprint `lemma-point-count-bound--2`: for a finite scheme `X` over a finite field `k`, the
-number of points of `X` rational over the degree `n` extension `k_n` of `k` is bounded
-independently of `n`.
-
-If `Γ(X, ⊤)` is spanned by `d` elements over `k`, then a `k_n`-point of `X` is a `k`-algebra map
-`Γ(X, ⊤) → k_n`, determined by its values on the `d` generators, and these maps are linearly
-independent characters, so there are at most `d` of them. -/
+/-- For a finite scheme `X` over a finite field `k`, the number of points of `X` rational over
+the degree `n` extension `k_n` of `k` is bounded independently of `n`. -/
 theorem Hom.exists_pointCount_le_of_isFinite {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     [IsFinite f] : ∃ d : ℕ, ∀ n : ℕ, f.pointCount n ≤ d := by
   have : IsAffine X := isAffine_of_isAffineHom f
@@ -60,14 +54,9 @@ theorem Hom.exists_pointCount_le_of_isFinite {X : Scheme.{u}} (f : X ⟶ Spec (.
         Nat.card_le_card_of_injective j hj
     _ ≤ d := by simpa using hRcard
 
-/-- Blueprint `lemma-point-count-bound`: a point-count bound.
-
-For a smooth affine curve `U₀` over a finite field `k` with `q` elements there is a constant `D`
-with `#U₀(k_n) ≤ D q ^ n` for all `n ≥ 1`
-(`AlgebraicGeometry.Scheme.Hom.exists_pointCount_le_mul_pow`, blueprint
-`lemma-point-count-bound--1`); for a finite `k`-scheme `Z`, the number of `k_n`-points is
-bounded independently of `n` (`AlgebraicGeometry.Scheme.Hom.exists_pointCount_le_of_isFinite`,
-blueprint `lemma-point-count-bound--2`). -/
+/-- Point-count bounds: for a smooth affine curve `U₀` over a finite field `k` with `q`
+elements there is a constant `D` with `#U₀(k_n) ≤ D q ^ n` for all `n ≥ 1`, and for a
+finite `k`-scheme `Z` the number of `k_n`-points is bounded independently of `n`. -/
 theorem Hom.exists_pointCount_le_mul_pow_and_exists_pointCount_le {U Z : Scheme.{u}}
     (f : U ⟶ Spec (.of k)) [IsAffine U] [SmoothOfRelativeDimension 1 f]
     (g : Z ⟶ Spec (.of k)) [IsFinite g] :

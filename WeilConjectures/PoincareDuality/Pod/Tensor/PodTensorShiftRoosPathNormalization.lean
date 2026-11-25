@@ -12,7 +12,14 @@ import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorShiftRightPaths
 import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorShiftLeftTargetPath
 import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorShiftRightTargetPath
 
-/-! # Normalizing the two derived tensor-shift paths -/
+/-! # Normalizing the two derived tensor-shift paths
+
+Normal forms of the two derived tensor-shift paths in terms of strict tower maps.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -51,24 +58,7 @@ attribute [local irreducible] integralOperationsRoos
 
 -- Keep sharing in the four dependent path formulas; the wall-clock limit is unchanged.
 /-- The two derived paths have separate formulas in terms of strict tower maps.
-No equality between the two strict paths is assumed or asserted here.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4 and 0941
-(blueprint: lem-pod-tensor-shift-roos-path-normalization-c3).
-
-Proof: substitute SY.Model into the source-shift path and SX.Model into the
-target-shift path. Substitute T.Model on the base and shifted good pairs, using
-T.Naturality to move the three derived presentation isomorphisms. In the target
-model present the reindexed inputs using the inverse of mapDerivedCategoryFactors
-followed by ordinary reindexing of eP and eQ; present the shifted inputs by the
-canonical shift comparison and the specified a or b. Naturality and compatibility
-of mapDerivedCategoryFactors with shifts identify these presentations with the
-images of eP' and eQ'. D.RoosNaturality moves the source tower shift past D.roos.
-D.RoosShift then converts the source signed Roos shift to the target signed shift;
-its two cone coordinates retain the prescribed sign. Naturality of Q.commShiftIso
-and cancellation of adjacent comparison isomorphisms give the two displayed
-normal forms, with the same prefix and suffix. The right slot uses the identical
-argument and its given signed tower map. No generator calculation is needed,
-and no equality between the two strict tower paths is used. -/
+No equality between the two strict paths is assumed or asserted here. -/
 theorem podTensorShift_roosPathNormalization
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
