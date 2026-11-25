@@ -13,7 +13,18 @@ public import Mathlib.RingTheory.Nakayama
 
 /-! # Depth two for a finite module's dual
 
-Source: Stacks Project, Tag 0AV5(2), specialized to Hom_R(N,R).
+If `R` is a Noetherian local ring of depth at least two and `N` is a finite `R`-module, then the
+dual `Hom_R(N, R)` has depth at least two.
+
+## Implementation details
+
+A regular pair `x, y` in the maximal ideal of `R` is shown to be weakly regular on the dual
+pointwise: if `y f = x g`, then `f` takes values in `xR` and factors as `x f'`. No domain or
+reflexivity hypothesis is used.
+
+## References
+
+* Stacks Project, Tag 0AV5(2), specialized to `Hom_R(N, R)`; used by Tags 0EBA and 0EY6.
 -/
 
 @[expose] public section
@@ -93,21 +104,8 @@ private theorem regular_pair_of_depth {R : Type u} [CommRing R] [IsLocalRing R]
         (QuotSMulTop x R) y ys).mp h₁.2
       exact ⟨x, y, hmem x (by simp), hmem y (by simp), h₁.1, h₂.1⟩
 
-/-- A dual over a Noetherian local ring of depth at least two has depth at least two.
-Source: Stacks Project, Tag 0AV5(2), used by Tags 0EBA and 0EY6.
-(blueprint: new-local-dual-depth-two)
-
-Proof: Extract a regular pair x,y in the maximal ideal from the definition of
-depth as the supremum of regular-sequence lengths. Multiplication by x on
-Hom_R(N,R) is injective pointwise. Suppose y*f = x*g. Regularity of y on R/xR
-implies f(n) is in xR for every n. Since x is regular, its multiplication map
-identifies R with xR. Compose f, corestricted to xR, with this linear inverse
-to get a linear map f' with x*f' = f. This proves that y is regular on
-Hom_R(N,R)/x Hom_R(N,R). The dual is finite by Noetherianity; if it is nonzero,
-Nakayama makes the weakly regular pair a regular sequence. Its length gives
-the depth bound. The zero dual has infinite depth. This is the pointwise form
-of the kernel calculation in Tag 0AV5, and uses no domain or reflexivity
-hypothesis. All inverse data is determined uniquely by an injective map. -/
+/-- If `R` is a Noetherian local ring of depth at least two and `N` is a finite `R`-module, then
+the dual `Hom_R(N, R)` has depth at least two. -/
 theorem dual_depth_ge_two (R : Type u) [CommRing R] [IsNoetherianRing R]
     [IsLocalRing R] (N : Type v) [AddCommGroup N] [Module R N] [Module.Finite R N]
     (hR : (2 : ℕ∞) ≤ depth (R := R) R) :

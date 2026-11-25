@@ -13,7 +13,9 @@ import Mathlib.RingTheory.Localization.BaseChange
 /-!
 # Base change of essentially smooth algebras
 
-Source: Stacks Project, Algebra, Tags 00DK and 00T4; Smoothing Ring Maps, proof of 07FJ.
+## References
+
+* Stacks Project, Algebra, Tags 00DK and 00T4; Smoothing Ring Maps, proof of Lemma 07FJ
 -/
 
 @[expose] public section
@@ -21,16 +23,8 @@ universe u v
 open scoped TensorProduct
 namespace Algebra
 
-/-- Essential smoothness is preserved by extension of scalars.
-Source: Stacks Project, Algebra, Tags 00DK and 00T4, used in Smoothing Ring Maps,
-proof of Lemma 07FJ, item-eighth-resolve.
-(blueprint: lem-weil-pbc-essentially-smooth-base-change).
-
-Proof: Present E as a localization S⁻¹P of a smooth R-algebra P. Transport the
-P-algebra structure to E through this presentation. Smoothness of Q⊗_R P over Q
-follows by smooth base change. Localization base change identifies Q⊗_R E as the
-localization of Q⊗_R P at the image of S. The localization algebra equivalence,
-restricted to Q, is the required essentially smooth presentation. -/
+/-- Essential smoothness is preserved by extension of scalars: if `E` is essentially smooth over
+`R`, then `Q ⊗[R] E` is essentially smooth over `Q`. -/
 theorem essentiallySmooth_baseChange
     {R Q : Type u} {E : Type v}
     [CommRing R] [CommRing Q] [CommRing E] [Algebra R Q] [Algebra R E]

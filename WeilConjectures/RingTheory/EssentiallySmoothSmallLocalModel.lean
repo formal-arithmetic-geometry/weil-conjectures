@@ -17,8 +17,14 @@ import Mathlib.RingTheory.Artinian.Module
 /-!
 # A small carrier for a local essentially smooth algebra
 
-Source: Stacks Project, Algebra, Definition 00QM, and Lemma 07FJ, step 25.
-(blueprint: lem-weil-pbc-essentially-smooth-small-local-model).
+## Implementation details
+
+The smooth model `P` is of finite type, hence small, so its localizations are small as well;
+both the algebra and its smooth model are moved into `Type (max u w)` using `Shrink`.
+
+## References
+
+* Stacks Project, Algebra, Definition 00QM, and Lemma 07FJ, step 25
 -/
 
 @[expose] public section
@@ -28,23 +34,8 @@ set_option autoImplicit false
 universe u v w
 namespace Algebra
 
-/-- A local Artinian essentially smooth algebra has a representative in the base universe.
-Source: Stacks Project, Algebra, Definition 00QM; Lemma 07FJ, step 25.
-(blueprint: lem-weil-pbc-essentially-smooth-small-local-model).
-
-Proof: Present D as a localization of a smooth R-algebra P. Smoothness includes finite
-presentation and thus finite type. Mathlib's FiniteType.small makes P small in universe
-max u w. Fractions are a surjective image of P times its denominator submonoid, so
-Localization S and then D are small too. Shrink D into Type(max u w), transport its
-ring and R-algebra structures, and use the resulting R-algebra equivalence e to
-transport locality and the Artinian property. To prove essential smoothness without
-a large smooth-model witness, shrink P as well. Transport its R-algebra structure and
-smoothness, and pull the denominator submonoid back along its algebra equivalence to P.
-The localization equivalence induced by this base ring equivalence commutes with R:
-on R-scalars this is the scalar-tower identity and the base equivalence's commutation
-law. Compose this localization equivalence with the original presentation and e.
-The resulting smooth-model witness has exactly the required universe. All smallness
-and transport assertions are proved before any carrier is chosen. -/
+/-- A local Artinian essentially smooth algebra has a representative in the base universe: it is
+isomorphic over `R` to a local Artinian essentially smooth `R`-algebra in `Type (max u w)`. -/
 theorem exists_essentiallySmooth_small_local_model
     {R : Type u} [CommRing R] (D : Type v) [CommRing D] [Algebra R D]
     [IsLocalRing D] [IsArtinianRing D] (hsmooth : EssentiallySmooth R D) :
