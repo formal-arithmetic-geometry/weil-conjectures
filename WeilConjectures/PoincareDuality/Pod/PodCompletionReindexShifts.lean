@@ -11,10 +11,18 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Signed shifts of normalized reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 011G, 07A4, 0941 (blueprint: def-pod-completion-reindex-shifts).
-The finite tensor generator formulas and both signed Roos coordinates determine
-all shift maps before localization. Their representative squares fix the derived maps.
+We record the shift structures of the limit, reduction and relabelling functors and the
+signed shift data of the tensor product, and define the compatibility of normalized
+reindexing with these shifts.
+
+## Implementation details
+
+The finite tensor generator formulas and both signed Roos coordinates determine all shift
+maps before localization; their representative squares fix the derived maps.
+
+## References
+
+* Stacks Project, Tags 011G, 015F, 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -42,45 +50,39 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The canonical right-derived limit shift, after exact scalar restriction.
-Source: Stacks 0941 (blueprint: def-pod-completion-reindex-shifts). -/
+/-- The canonical right-derived limit shift, after exact scalar restriction. -/
 instance podLimitCommShift (W : Scheme.{t}) : (coefficientSequenceLimit l E W).CommShift ℤ :=
   by
     dsimp only [coefficientSequenceLimit, coefficientConstantTowerLimit]
     infer_instance
 
-/-- Exact ordinary relabelling has its localization shift.
-Source: Stacks 015F (blueprint: def-pod-completion-reindex-shifts). -/
+/-- Exact ordinary relabelling has its localization shift. -/
 instance podOrdinaryCommShift {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g] :
     (podOrdinaryReindex l E g).CommShift ℤ :=
   by
     dsimp only [podOrdinaryReindex]
     infer_instance
 
-/-- Whole-system relabelling has the same localization shift.
-Source: Stacks 015F (blueprint: def-pod-completion-reindex-shifts). -/
+/-- Whole-system relabelling has the same localization shift. -/
 instance podSystemCommShift {X Y : Scheme.{t}} (g : X ⟶ Y) :
     (integralComparisonDerivedSequencePullback l E g).CommShift ℤ :=
   by
     dsimp only [integralComparisonDerivedSequencePullback]
     infer_instance
 
-/-- The reduction shift is the mate of that same limit shift under the actual adjunction.
-Source: Stacks 011G, 0941 (blueprint: def-pod-completion-reindex-shifts). -/
+/-- The reduction shift is the mate of that same limit shift under the actual adjunction. -/
 instance podReductionCommShift (W : Scheme.{t}) :
     (podReindexCalculus l E W).reduction.CommShift ℤ :=
   (podReindexCalculus l E W).adjunction.leftAdjointCommShift ℤ
 
-/-- Exact restriction commutes with cochain shift before conversion to a tower.
-Source: Stacks 011G, 0941 (blueprint: def-pod-completion-reindex-shifts). -/
+/-- Exact restriction commutes with cochain shift before conversion to a tower. -/
 def podRestrictionShift (W : Scheme.{t})
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) (r : ℤ) :
     podRestrictedTower l E (C⟦r⟧) ≅ podShiftTower (podRestrictedTower l E C) r :=
   HomologicalComplex.complexOfFunctorsToFunctorToComplex.mapIso
     ((((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).commShiftIso r).app C)
 
-/-- The canonical limit shift is represented by the specified signed Roos shift.
-Source: Stacks 011G, 0941 (blueprint: def-pod-completion-reindex-shifts). -/
+/-- The canonical limit shift is represented by the specified signed Roos shift. -/
 def PodLimitSignedShift (W : Scheme.{t}) (ρ : IntegralComparisonRoosModel l E W)
     (S : PodSignedRoosShift (scalarReductionSource l E W)) : Prop :=
   ∀ (C : CochainComplex (coefficientSequenceModules l E W) ℤ) (r : ℤ),
@@ -94,9 +96,8 @@ def PodLimitSignedShift (W : Scheme.{t}) (ρ : IntegralComparisonRoosModel l E W
       (((coefficientSequenceLimit l E W).commShiftIso r).hom.app (DerivedCategory.Q.obj C) ≫
         (podLimitRoos l E ρ C).hom⟦r⟧')
 
-/-- Shift a good complex; preservation is part of the model data, not a hypothesis.
-The tensor shifts are retained both on entire strict towers and on derived objects.
-Source: Stacks 07A4, 011G, 0941 (blueprint: def-pod-completion-reindex-shifts). -/
+/-- Signed shift data for the tensor product of good complexes, on strict towers and on
+derived objects; preservation of good complexes is part of the data. -/
 structure PodTensorSignedShift (W : Scheme.{u}) where
   /-- Flat terms and K-flatness are stable under every integer shift. -/
   good : ∀ P : (integralOperationsGoodComplex l E W).FullSubcategory,
@@ -125,8 +126,7 @@ variable {W : Scheme.{u}} (S : PodTensorSignedShift l E W)
   (ρ : PodSignedRoosShift (scalarReductionSource l E W))
 
 /-- Both homogeneous generator rules, including the sign when the second factor shifts.
-`HEq` only handles the equal integer indices (p+r)+q=(p+q)+r; no map is forgotten.
-Source: Stacks 011G, 07A4 (blueprint: def-pod-completion-reindex-shifts). -/
+`HEq` only handles the equal integer indices `(p+r)+q = (p+q)+r`. -/
 def Generators : Prop :=
   (∀ (P Q : (integralOperationsGoodComplex l E W).FullSubcategory)
     (n : ℕ) (p q r : ℤ) (U : W.ProEtᵒᵖ)
@@ -144,9 +144,8 @@ def Generators : Prop :=
       ((p*r).negOnePow •
         integralOperationsTotalTensorSection l E W n P.obj Q.obj p (q+r) U x y))
 
-/-- Both derived shift maps are the localizations of those tower maps followed by the
-same signed Roos shift. Every good representative and every derived presentation is tested.
-Source: Stacks 07A4, 0941 (blueprint: def-pod-completion-reindex-shifts). -/
+/-- Both derived shift maps are the localizations of the tower maps followed by the
+same signed Roos shift, for every good representative and every derived presentation. -/
 def Model : Prop :=
   ∀ (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) (r : ℤ)
     (M N M' N' : sfIntegralConstructibleCategory l E W)
@@ -178,10 +177,8 @@ def Model : Prop :=
 
 end PodTensorSignedShift
 
-/-- The actual reduction and limit maps commute with the canonical shifts; both tensor
-factor equations use the same signed representative-normalized shift maps.
-Source: blueprint Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: def-pod-completion-reindex-shifts). -/
+/-- The actual reduction and limit maps commute with the canonical shifts, and both tensor
+factor equations use the same signed representative-normalized shift maps. -/
 def PodReindexSignedShifts {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

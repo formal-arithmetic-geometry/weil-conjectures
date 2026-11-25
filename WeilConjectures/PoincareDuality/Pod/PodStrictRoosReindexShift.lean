@@ -12,7 +12,12 @@ import all WeilConjectures.CategoryTheory.RoosConeCalculus.RoosConeCalculus
 import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 import all Mathlib.CategoryTheory.Limits.HasLimits
 
-/-! # The strict signed Roos reindexing square -/
+/-! # The strict signed Roos reindexing square
+
+## References
+
+* Stacks Project, Tags 011G, 015F, 0941
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -223,8 +228,7 @@ private abbrev scalarRoosFunctor (W : Scheme.{u}) :
       CochainComplex (scalarReductionSource l E W) ℤ :=
   canonicalSheafRoosFunctor _
 
-/-- Completed relabelling is additive on module sheaves.
-Source: Stacks 015F (blueprint: lem-pod-strict-roos-reindex-shift-s8). -/
+/-- Completed relabelling is additive on module sheaves. -/
 instance podReindexIntegralInverseAdditive
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     (isoReductionIntegralInverse l E g).Additive :=
@@ -300,14 +304,7 @@ private theorem restricted_shift
       rcases n with ⟨n⟩
       exact restricted_shift_f l E g D hgen C r n i) C r
 
-/-- The strict Roos reindexing square commutes with the specified signed shifts.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 0941 and 011G
-(blueprint: lem-pod-strict-roos-reindex-shift-s8).
-Proof: the restricted generator formula identifies the component in degree i+r
-before and after shifting. Apply the Roos functor to that restriction square.
-The coordinate laws uniquely determine the target signed Roos map, which is
-therefore natural. Paste its naturality square with RoosNaturality and RoosShift;
-associativity gives the displayed five-factor identity. -/
+/-- The strict Roos reindexing square commutes with the specified signed shifts. -/
 theorem podStrictRoosReindexShift
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (D : PodCompletionReindex l E g)

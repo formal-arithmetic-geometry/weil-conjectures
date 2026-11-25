@@ -9,8 +9,12 @@ public import WeilConjectures.PoincareDuality.PodReductionRepresentatives.PodRed
 
 /-! # Naturality of reduced unit sections and transport along the pro-etale equivalence
 
-Source: Stacks 03D2, 06YY, 09A5 and 0941.
-(blueprint: lem-pod-reduction-reindex-strict-tensor).
+We prove naturality of reduced unit sections under sequence inverse images and ordinary
+reduction, and an extensionality principle for maps out of reductions of total tensor degrees.
+
+## References
+
+* Stacks Project, Tags 03D2, 03EK, 06YY, 09A5, 0941
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The sequence inverse image of a map sends the unit section of `s` to the unit section of
-the image of `s`.
-Source: Stacks 03D2. -/
+the image of `s`. -/
 theorem inverseImage_map_unit {X Y : Scheme.{u}} (g : X ⟶ Y)
     {M M' : coefficientSequenceModules l E Y} (φ : M ⟶ M') (V : ℕ × Y.ProEt)
     (s : M.val.obj (op V)) :
@@ -43,8 +46,7 @@ theorem inverseImage_map_unit {X Y : Scheme.{u}} (g : X ⟶ Y)
     ((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).unit.naturality
       φ)).symm
 
-/-- Ordinary reduction of a map acts on reduced unit sections through the map.
-Source: Stacks 06YY and 0941. -/
+/-- Ordinary reduction of a map acts on reduced unit sections through the map. -/
 theorem reduction_map_unitSection (W : Scheme.{u}) (n : ℕ)
     {M M' : integralTowerModules l E W} (φ : M ⟶ M') (V : W.ProEt) (z : M.val.obj (op V)) :
     ((pullbackTensorOrdinaryReduction l E W).map φ).val.app (op (n, V))
@@ -78,8 +80,7 @@ private theorem sequenceEvaluation_map_apply (W : Scheme.{u}) (n : ℕ)
     ((coefficientSequenceEvaluation l E W n).obj M).val.map i.op z =
       M.val.map (CategoryTheory.Prod.mkHom (𝟙 n) i).op z := rfl
 
-/-- Ordinary reduction is compatible with restriction of reduced unit sections.
-Source: Stacks 06YY and 0941. -/
+/-- Ordinary reduction is compatible with restriction of reduced unit sections. -/
 theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
     (M : integralTowerModules l E W) {V V' : W.ProEt} (i : V' ⟶ V) (z : M.val.obj (op V)) :
     ((pullbackTensorOrdinaryReduction l E W).obj M).val.map
@@ -114,8 +115,7 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
 
 
 /-- Two maps out of the reduction of a total tensor degree agree once they agree on reduced
-pure tensors over every object postcomposed along an isomorphism of schemes.
-Source: Stacks 03EK, 06YY, 09A5 and 0941. -/
+pure tensors over every object postcomposed along an isomorphism of schemes. -/
 theorem reduction_total_hom_ext_postcompose {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (P Q : CochainComplex (integralTowerModules l E Y) ℤ) (k : ℤ)
     {N : coefficientSequenceModules l E Y}
