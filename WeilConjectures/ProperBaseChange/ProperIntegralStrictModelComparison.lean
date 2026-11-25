@@ -13,11 +13,24 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Normalized comparison of the two integral pullback models
 
-Source: Bhatt--Scholze, Lemma 6.5.9(4), Remark 6.8.15; Stacks Tags 0941 and 099N(5).
-(blueprint: lem-weil-pbc-proper-integral-strict-model-comparison).
+For an edge `h : U ⟶ T` and integral `l`-adic coefficients, scalar transport identifies the
+ordinary pullback with the pullback of the strict quotient towers, compatibly with the
+completion comparisons (`pbc_proper_integral_strict_model_comparison`).
+
+## Implementation details
 
 This comparison concerns ambient derived categories and specified augmentations.
 It has no properness, constructibility, completeness, or base-field hypothesis.
+
+The coefficient rings are identified by their finite quotient projections and tensor balancing
+gives the module pullback isomorphism. For a K-injective tower with injective terms, `1 - s` is
+degreewise split epic with kernel the inverse limit, which identifies the Roos functor with the
+derived limit.
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(4), Remark 6.8.15
+- Stacks Project, Tags 0941 and 099N(5)
 -/
 
 @[expose] public noncomputable section
@@ -43,43 +56,10 @@ private theorem strictUnit_app {A : Type (u + 1)} [CommRing A]
 
 /-- Scalar transport identifies ordinary pullback and the entire strict quotient towers.
 The induced Roos/derived-limit comparison carries the specified ordinary quotient
-augmentation to the specified strict-tower completion unit.
-
-Source: Bhatt--Scholze, Lemma 6.5.9(4), Remark 6.8.15; Stacks Tags 0941 and 099N(5).
-(blueprint: lem-weil-pbc-proper-integral-strict-model-comparison).
-
-Proof: identify the coefficient rings by their finite quotient projections. Their
-inverse-image maps commute with these identifications, since this holds on each
-quotient and maps into the inverse limit are determined by their projections.
-Tensor balancing therefore gives the module pullback isomorphism, taking each
-adjunction-unit generator to the corresponding generator. Localize on flat-term
-K-flat complexes to obtain the derived isomorphism; its equation is the equation
-of the two universal computation counits.
-For each such complex P, apply the same balancing at every finite quotient.
-Naturality in quotient maps gives an isomorphism of entire strict towers. Both
-quotient augmentations send a tensor b tensor x to 1 tensor (x tensor pi_n(b)),
-so this isomorphism preserves the specified augmentations.
-Restriction along the coefficient isomorphism preserves products and finite
-biproducts. It consequently transports the shifted mapping cone of 1-s, with
-both coordinates fixed by the product projections. This gives the stated z.
-Exact countable products imply that the Roos functor preserves quasi-isomorphisms.
-For a K-injective tower I with injective terms, 1-s is degreewise split epic:
-its transitions split, and one solves y_n-s_n(y_(n+1))=x_n recursively. Its kernel
-is the ordinary inverse limit. The inclusion of that kernel in the Roos cone,
-with zero shifted coordinate, is a quasi-isomorphism. Its localization and the
-universal derived-limit computation identify the Roos functor with derived limit.
-The formula using this inclusion and Cone(r) holds for every entire-tower
-K-injective resolution r by naturality of the derived-limit unit. Descend the
-resulting comparison through the localization of the good complexes, giving b
-and exactly PbcProperIntegralModelMatching.
-Finally the chain map defining ordinaryIntegralCompletionComparison has the
-quotient augmentation in its unshifted coordinate and zero in its shifted one.
-After resolving the entire tower, its components are r_n a_n. Functoriality of
-the resolution says the strict-tower completion unit has these same components,
-and its composite with the limit inclusion has zero shifted coordinate as well.
-Equality of both coordinates gives equality of chain maps. The universal
-computation counits and the localization property then give the displayed
-identity for every derived object L. -/
+augmentation to the specified strict-tower completion unit: there are a pullback
+identification `a` and an isomorphism `b` satisfying `PbcProperIntegralModelMatching`, and
+for every `L` the ordinary completion comparison followed by `b` equals `a.derivedIso`
+followed by the completed pullback comparison. -/
 theorem pbc_proper_integral_strict_model_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T) :

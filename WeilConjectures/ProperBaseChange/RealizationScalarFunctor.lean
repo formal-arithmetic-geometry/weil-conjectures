@@ -248,11 +248,12 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # Actual scalar extension on raw integral rationalizations
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Propositions 6.8.11(3), 6.8.14(2).
-(blueprint: lem-weil-pbc-realization-scalar-functor)
+Setup for scalar extension from integral to rational coefficients on the pro-étale site.
 
-The coefficient encodings are the published constructions. The record below retains
-only the scalar functor and its normalization; it contains no equivalence assertion.
+## References
+
+* [B. Bhatt, P. Scholze, *The pro-étale topology for schemes*], Lemma 6.8.2,
+  Propositions 6.8.11(3) and 6.8.14(2)
 -/
 
 @[expose] public noncomputable section

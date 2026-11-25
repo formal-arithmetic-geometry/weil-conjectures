@@ -20,10 +20,8 @@ attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 
 namespace WeilConjectures.NormalizedScalar
 
-/-- Postcomposition by a continuous ring equivalence identifies the actual
-continuous-function sheaves, including their universe lifts.
-Source: functoriality of C(S,-).
-(blueprint: lem-weil-pbc-normalized-integral-comparison). -/
+/-- A homeomorphic ring isomorphism `A ≃+* B` induces, by postcomposition, an isomorphism of
+the sheaves of continuous `A`-valued and `B`-valued functions on profinite sets. -/
 def coefficientRingIso {A : Type u} {B : Type u} [CommRing A] [TopologicalSpace A]
     [IsTopologicalRing A] [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
     (e : A ≃+* B) (he : Continuous e) (hei : Continuous e.symm) :
@@ -57,10 +55,8 @@ def coefficientRingIso {A : Type u} {B : Type u} [CommRing A] [TopologicalSpace 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [hE : NormedField E]
   [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The given extending norm is the canonical spectral norm.
-Source: uniqueness of the norm on a finite extension.
-(blueprint: lem-weil-pbc-normalized-integral-comparison).
-Proof: apply equality of the extending norm and spectral norm to differences. -/
+/-- The metric of the spectral norm on the finite extension `E` of `ℚ_[l]` equals the metric
+of the given norm. -/
 theorem spectralMetric_eq :
     (spectralNorm.normedField ℚ_[l] E).toMetricSpace = hE.toMetricSpace := by
   apply MetricSpace.ext
@@ -69,10 +65,7 @@ theorem spectralMetric_eq :
   rw [(spectralNorm.normedField ℚ_[l] E).dist_eq, hE.dist_eq]
   exact (NormedAlgebra.norm_eq_spectralNorm ℚ_[l] (-a + b)).symm
 
-/-- The unit ball of the given norm is the canonical integer subring.
-Source: uniqueness of the extending absolute value.
-(blueprint: lem-weil-pbc-normalized-integral-comparison).
-Proof: both membership conditions are spectral norm at most one. -/
+/-- The unit ball of the given norm on `E` is the canonical ring of integers of `E`. -/
 theorem integers_eq : integers l E = Padic.coefficientExtensionIntegers l E := by
   ext x
   rw [Padic.mem_coefficientExtensionIntegers]
@@ -81,11 +74,8 @@ theorem integers_eq : integers l E = Padic.coefficientExtensionIntegers l E := b
   change ‖x‖ ≤ 1 ↔ spectralNorm ℚ_[l] E x ≤ 1
   rw [NormedAlgebra.norm_eq_spectralNorm ℚ_[l]]
 
-/-- The given-norm integer coefficients are the canonical integral condensed ring.
-Source: the preceding norm and unit-ball equalities.
-(blueprint: lem-weil-pbc-normalized-integral-comparison).
-Proof: equality of metrics gives equality of topologies. Rewriting the unit ball
-then identifies the two continuous-function sheaves, with identity on values. -/
+/-- The condensed ring of continuous functions valued in the unit ball of the given norm is
+isomorphic, as a monoid object, to the canonical condensed ring of integers of `E`. -/
 def canonicalIntegersIso :
     Mon.mk (Profinite.continuousCoefficientRingObj (integers l E)) ≅
       sfbCondensedIntegers l E := by
@@ -121,9 +111,9 @@ def canonicalIntegersIso :
     Sheaf.isMonHom_sheafCompose_map (coherentTopology Profinite.{u}) er.hom
   exact Mon.mkIso ea (IsMonHom.one_hom ea.hom) (IsMonHom.mul_hom ea.hom)
 
-/-- The normalized assertion used in the scalar-functor assembly.
-Source: the corresponding coefficient or Verdier universal property.
-(blueprint: lem-weil-pbc-normalized-integral-comparison). -/
+/-- The statement that the unit-ball coefficients agree with the canonical condensed integers
+and that the integral coefficient sheaf on `T` is the limit of its finite quotients, compatibly
+with the canonical finite-quotient representations. -/
 def IntegralLimit (T : Scheme.{u}) : Prop :=
     Nonempty (Mon.mk (Profinite.continuousCoefficientRingObj (integers l E)) ≅
       sfbCondensedIntegers l E) ∧
@@ -155,12 +145,7 @@ def IntegralLimit (T : Scheme.{u}) : Prop :=
                     (op S) (ULift.up f.hom.hom)))) =
               ULift.up ((profiniteToProEtOf T).map (f ≫ j.hom ≫ c.π.app (op n)))))
 
-/-- The unit-ball coefficients carry the canonical normalized finite-quotient limit.
-Source: the integral coefficient limit theorem, transported by norm uniqueness.
-(blueprint: lem-weil-pbc-normalized-integral-comparison).
-Proof: the point comparison is identity on coefficient values. Apply the proved
-pulled-back integral limit theorem, whose quotient equations fix every projection.
-Together these give the claimed limit for the original given-norm unit ball. -/
+/-- The statement `IntegralLimit l E T` holds for every scheme `T`. -/
 theorem integral_limit (T : Scheme.{u}) :
     IntegralLimit l E T := by
   exact ⟨⟨canonicalIntegersIso l E⟩, sfb_integral_coefficient_limit l E T⟩

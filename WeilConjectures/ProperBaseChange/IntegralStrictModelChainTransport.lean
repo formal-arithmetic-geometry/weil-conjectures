@@ -13,8 +13,21 @@ import WeilConjectures.ProperBaseChange.IntegralCoefficientStrictTowerComparison
 
 /-! # Strict coefficient comparison before derived-limit descent
 
-Source: Bhatt--Scholze, Remark 6.8.15; Stacks Tags 03D3, 06YY and 099N(5).
-(blueprint: lem-weil-pbc-integral-strict-model-chain-transport).
+For a morphism of schemes `h : U ⟶ T`, the tower of reductions of the pulled-back integral
+coefficient complexes is compared, naturally on good representatives, with the pullback of the
+reduction tower, compatibly with the augmentations. This is a statement about complexes only.
+
+## Implementation details
+
+At level `n` the comparison sends `b ⊗ (m ⊗ q)` to `πₙ(b) · (1 ⊗ (m ⊗ q))`, with inverse
+inserting `1` in the completed scalar factor; these level maps are sheafified, applied
+degreewise, and form a natural isomorphism of towers. The augmentation equality is checked on
+the adjunction-unit generators, which both augmentations send to `1 ⊗ (m ⊗ 1)`.
+
+## References
+
+* [B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Remark 6.8.15]
+* [Stacks Project, Tags 03D3, 06YY and 099N]
 -/
 
 @[expose] public noncomputable section
@@ -105,9 +118,7 @@ private def chainTripleMapIso
         intro i
         exact e.hom.naturality (f.f i))
 
-/-- The functor of actual pulled reduction towers, using the published module functors.
-Source: Stacks 099N(5).
-(blueprint: lem-weil-pbc-integral-strict-model-chain-transport). -/
+/-- The functor of pulled-back reduction towers, built from the published module functors. -/
 def pbcIntegralActualTowerFunctor
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T) :
@@ -215,27 +226,8 @@ private theorem ordinaryTowerComparison_unit
       (ordinaryAmbientComplexIso l E h) (IntegralAmbient.pullTowerIso l E h))
 
 /-- Tensor balancing compares the strict towers naturally
-on good representatives.
-This is entirely a statement about complexes; it does not construct a derived
-natural comparison or assert its formula on resolutions.
-
-Source: Bhatt--Scholze, Remark 6.8.15; Stacks 03D3, 06YY and 099N(5).
-(blueprint: lem-weil-pbc-integral-strict-model-chain-transport).
-
-Proof: restrict the coefficient isomorphisms to each finite quotient. At level n,
-the balanced tensor map takes b tensor (m tensor q) to pi_n(b) times
-(1 tensor (m tensor q)), using the normalized coefficient identifications. Its
-inverse inserts 1 in the completed scalar factor. The coefficient projection
-square makes these maps balanced and proves their inverse identities. Sheafify
-the maps and apply them degreewise. The maps commute with differentials and
-with maps of input modules because the tensor associators do. Quotient transition
-maps take q to its image in the smaller quotient; both composites on pure tensors
-therefore coincide. Sheafification uniqueness proves the strict transition and
-naturality squares. Thus the level comparisons form the natural tower isomorphism t.
-Both augmentations send an adjunction-unit generator m to 1 tensor (m tensor 1).
-The module_unit equation for a identifies these generators on the two presentations.
-Linearity, restriction compatibility, and generation by the adjunction-unit
-sections prove the required augmentation equality on the entire source. -/
+on good representatives: there is a natural isomorphism `t` between the pulled-back reduction
+towers and the reduction towers of the pullback, compatible with the augmentations. -/
 theorem pbc_integral_strict_model_chain_transport
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T)
