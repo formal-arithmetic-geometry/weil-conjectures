@@ -42,7 +42,7 @@ private theorem lisseRational_retract_of_integral_multiple
   change TensorProduct.tmul _ ((a : E) * (a : E)⁻¹) (𝟙 F.integral) = _
   rw [mul_inv_cancel₀ (show (a : E) ≠ 0 from fun h0 ↦ ha (Subtype.ext h0))]
 
--- Keep the section instances as hypotheses of this public statement.
+-- An `omit` would drop `[IsAlgClosure ℚ_[l] K]` from this public statement.
 set_option linter.unusedSectionVars false in
 /-- Every finite-coefficient rational sheaf is a retract of an extension from the
 least coefficient field.

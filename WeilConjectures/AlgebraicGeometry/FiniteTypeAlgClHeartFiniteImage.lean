@@ -96,7 +96,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 include ℓ k
 
--- Keep the section instances as hypotheses of this public statement.
+-- An `omit` would drop `[Fact (ringChar k ≠ ℓ)]`, `[IsSeparated X.hom]`,
+-- `[LocallyOfFiniteType Y.hom]` and `[QuasiCompact Y.hom]` from this public statement.
 set_option linter.unusedSectionVars false in
 /-- The direct image of an algebraic-closure sheaf comes from a finite coefficient field.
 (Bhatt--Scholze, Proposition 6.8.4(3), Proposition 6.8.14 and Remark 6.8.15.) -/
