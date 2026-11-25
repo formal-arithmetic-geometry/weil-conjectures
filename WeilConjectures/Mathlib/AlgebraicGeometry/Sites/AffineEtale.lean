@@ -46,7 +46,7 @@ def zariskiTopology : GrothendieckTopology S.AffineEtale :=
   (Precoverage.comap (toScheme S) zariskiPrecoverage).toGrothendieck
 
 /-- The Zariski topology on the small affine étale site of `S` is coarser than the affine étale
-topology, since a Zariski cover consists of open immersions, which are étale. -/
+topology. -/
 lemma zariskiTopology_le_topology : zariskiTopology S ≤ topology S := by
   rw [zariskiTopology, Precoverage.toGrothendieck_le_iff_le_toPrecoverage]
   intro X R hR
@@ -74,9 +74,7 @@ lemma generate_singleton_mem_topology {X Y : S.AffineEtale} (f : X ⟶ Y)
 /-- **A set of affine étale schemes covers the small étale site.** The category
 `S.AffineEtale` of affine schemes `Spec A` étale over `S` is essentially small, and `Spec` from it
 to the small étale site of `S` is cover-dense: every object of the small étale site is covered by
-affine étale schemes.
-
-(blueprint: `lem-weil-pbc-affine-etale-essentially-small-cover`) -/
+affine étale schemes. -/
 theorem essentiallySmall_and_isCoverDense (S : Scheme.{u}) :
     EssentiallySmall.{u} S.AffineEtale ∧
       (AffineEtale.Spec S).IsCoverDense S.smallEtaleTopology :=

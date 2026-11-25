@@ -12,8 +12,18 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 
 /-! # Presentations for the reduction/reindexing tensor square
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4 and 0941.
-(blueprint: def-pod-reduction-reindex-representatives)
+Localization factors, inverse-image equalities and cochain tensor comparisons used to present the
+square comparing reduction of coefficients with reindexing along a morphism of schemes.
+
+## Implementation details
+
+`systemFactor` is transported from the fixed pullback presentation on both sides of localization.
+Its components retain the ordinary coefficient-map equality, so no comparison of two
+presentations of the derived-category instance is needed.
+
+## References
+
+* Stacks Project, Tags 03D2, 03EL, 05RU, 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +44,7 @@ attribute [local irreducible] HasDerivedCategory.standard
   CategoryTheory.Functor.leftAdjoint CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.mapDerivedCategoryFactors
 
-/-- Rebuild a localization factor componentwise after an isomorphism of functors.
-Source: naturality of a composite of natural isomorphisms; Stacks 05RU. -/
+/-- Rebuild a localization factor componentwise after an isomorphism of functors. -/
 def reductionFactorOfIso
     {C₀ D₀ C D : Type*} [Category C₀] [Category D₀] [Category C] [Category D]
     (q : C₀ ⥤ C) (r : D₀ ⥤ D) (F₀ : C₀ ⥤ D₀)
@@ -44,8 +53,7 @@ def reductionFactorOfIso
   NatIso.ofComponents (fun P ↦ (e.app (q.obj P)).symm ≪≫ a.app P)
     (fun f ↦ (Functor.isoWhiskerLeft q e.symm ≪≫ a).hom.naturality f)
 
-/-- Component equation for the componentwise localization factor.
-Source: its defining components; Stacks 05RU. -/
+/-- Component equation for the componentwise localization factor. -/
 theorem reductionFactorOfIso_hom
     {C₀ D₀ C D : Type*} [Category C₀] [Category D₀] [Category C] [Category D]
     (q : C₀ ⥤ C) (r : D₀ ⥤ D) (F₀ : C₀ ⥤ D₀)
@@ -53,8 +61,7 @@ theorem reductionFactorOfIso_hom
     (reductionFactorOfIso q r F₀ F G e a).hom.app P =
       e.inv.app (q.obj P) ≫ a.hom.app P := rfl
 
-/-- Transport a localization factor with both its ordinary and derived functors.
-Source: composition of natural isomorphisms; Stacks 05RU. -/
+/-- Transport a localization factor with both its ordinary and derived functors. -/
 def reductionSystemFactorOfIso
     {C₀ D₀ C D : Type*} [Category C₀] [Category D₀] [Category C] [Category D]
     (q : C₀ ⥤ C) (r : D₀ ⥤ D) (F₀ G₀ : C₀ ⥤ D₀)
@@ -65,8 +72,7 @@ def reductionSystemFactorOfIso
     (fun f ↦ (Functor.isoWhiskerLeft q e.symm ≪≫ a ≪≫
       Functor.isoWhiskerRight e₀ r).hom.naturality f)
 
-/-- Component equation for transport of the ordinary and derived functors.
-Source: its defining components; Stacks 05RU. -/
+/-- Component equation for transport of the ordinary and derived functors. -/
 theorem reductionSystemFactorOfIso_hom
     {C₀ D₀ C D : Type*} [Category C₀] [Category D₀] [Category C] [Category D]
     (q : C₀ ⥤ C) (r : D₀ ⥤ D) (F₀ G₀ : C₀ ⥤ D₀)
@@ -95,8 +101,7 @@ set_option hygiene false in
 local notation "S[" W "]" => coefficientTotalTensor.{u, u + 1, u}
   (coefficientSequenceTopology (ProEt.topology W)) (coefficientSequenceCommRingSheaf l E W)
 
-/-- The two inverse-image presentations agree by uniqueness of the coefficient map.
-Source: Stacks 03D2 and 0941. -/
+/-- The two inverse-image presentations along `g` agree. -/
 theorem inverse_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
     pullbackTensorSequenceInverse l E g = integralComparisonSequencePullback l E g := by
   unfold pullbackTensorSequenceInverse integralComparisonSequencePullback
@@ -104,36 +109,27 @@ theorem inverse_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
   unfold pullbackTensorSequenceDirect integralComparisonSequenceDirectImage
   rw [pullbackTensorSequenceRing_eq]
 
-/-- The derived functors agree after the ordinary coefficient-map equality.
-Source: Stacks 05RU, 0941. -/
+/-- The derived functors agree after the ordinary coefficient-map equality. -/
 theorem derived_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
     pullbackTensorSequenceDerived l E g = integralComparisonDerivedSequencePullback l E g := by
   have he := inverse_eq l E g
   unfold pullbackTensorSequenceDerived integralComparisonDerivedSequencePullback
   congr 1
 
-/-- The existing sequence localization, with its source and target fixed explicitly.
-Source: Stacks 05RU
-(blueprint: def-pod-reduction-reindex-representatives). -/
+/-- The localization functor of sequence-coefficient cochain complexes on `W`, with its source
+and target fixed explicitly. -/
 def systemQ (W : Scheme.{u}) :
     CochainComplex (coefficientSequenceModules l E W) ℤ ⥤ coefficientSequenceDerived l E W :=
   letI := coefficientSequenceHasDerived l E W
   DerivedCategory.Q
 
-/-- The localization factor of the fixed system pullback presentation.
-Source: its derived-functor construction; Stacks 05RU.
-(blueprint: def-pod-reduction-reindex-representatives). -/
+/-- The localization factor of the fixed system pullback presentation. -/
 def rawSystemFactor {X Y : Scheme.{u}} (g : X ⟶ Y) :
     systemQ l E Y ⋙ pullbackTensorSequenceDerived l E g ≅
       (pullbackTensorSequenceInverse l E g).mapHomologicalComplex (.up ℤ) ⋙ systemQ l E X :=
   (pullbackTensorSequenceInverse l E g).mapDerivedCategoryFactors
 
-/-- Localization factor with the same transport as the canonical system tensor map.
-The factor is transported from the fixed pullback presentation on both sides of
-localization. Its components retain the ordinary coefficient-map equality, so no
-comparison of two presentations of the derived-category instance is needed.
-Source: Stacks 05RU, 0941
-(blueprint: def-pod-reduction-reindex-representatives). -/
+/-- Localization factor with the same transport as the canonical system tensor map. -/
 def systemFactor {X Y : Scheme.{u}} (g : X ⟶ Y) :
     systemQ l E Y ⋙ integralComparisonDerivedSequencePullback l E g ≅
       I[g] ⋙ systemQ l E X :=
@@ -144,17 +140,15 @@ def systemFactor {X Y : Scheme.{u}} (g : X ⟶ Y) :
     (eqToIso (derived_eq l E g))
     (rawSystemFactor l E g)
 
-/-- Transport the unit-normalized system cochain tensor comparison.
-Source: Stacks 07A4 and 0941. -/
+/-- Transport the unit-normalized system cochain tensor comparison. -/
 def systemChain {X Y : Scheme.{u}} (g : X ⟶ Y) :
     S[Y] ⋙ I[g] ≅ (I[g]).prod (I[g]) ⋙ S[X] :=
   let e := NatIso.mapHomologicalComplex (eqToIso (inverse_eq l E g)) (.up ℤ)
   Functor.isoWhiskerLeft _ e.symm ≪≫ pullbackTensorSequenceCochain l E g ≪≫
     Functor.isoWhiskerRight (NatIso.prod e e) _
 
-/-- The ordinary comparison is fixed on scalar generators at every quotient level.
-Source: blueprint dual-Tate compatibility Steps 2 and 4; Stacks 03EL, 0941.
-(blueprint: def-pod-reduction-reindex-representatives). -/
+/-- The condition that the ordinary comparison `β` is fixed on scalar generators at every
+quotient level. -/
 def Generators {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (P : CochainComplex (scalarReductionSource l E Y) ℤ)
     (β : (I[g]).obj ((R[Y]).obj P) ≅ (R[X]).obj ((F[g]).obj P)) : Prop :=
@@ -180,8 +174,7 @@ def Generators {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
             (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom.app
               (op U) a) x)
 
-/-- The exact reindexing localization factor in the ordinary presentation.
-Source: Stacks 05RU. -/
+/-- The exact reindexing localization factor in the ordinary presentation. -/
 def factor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (h : podReindexingDerivedFunctor l E g none = podOrdinaryReindex l E g) :
     podReindexingQ l E Y none ⋙ podOrdinaryReindex l E g ≅

@@ -18,8 +18,9 @@ Helpers for `podOrdinaryQuotientTransitionCube`: relabelling along an isomorphis
 ordinary limits of quotient systems, and the generator-normalized reindexing comparison of
 ordinary quotient tensors.
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-ordinary-quotient-transition-cube).
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 0941
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

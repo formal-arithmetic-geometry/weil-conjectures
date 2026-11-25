@@ -46,20 +46,7 @@ variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
 
 /-- The transpose along `adj.comp adjS : L ⋙ S ⊣ S' ⋙ R` of the morphism
 `S (ε_Y) ≫ g : S (L (R Y)) ⟶ M` is the image under `R` of the transpose of `g` along
-`adjS`, where `ε` is the counit of `adj : L ⊣ R`. Both sides are morphisms
-`R Y ⟶ R (S' M)`, and the equality between them is the naturality square of the unit `η` of
-`adjS` at `ε_Y`
-```
-                     η_{L (R Y)}
-     L (R Y) --------------------------> S' (S (L (R Y)))
-        |                                       |
-       ε_Y                              S' (S (ε_Y))
-        ↓                                       ↓
-        Y ------------------------------> S' (S Y)
-                         η_Y
-```
-composed with the right triangle identity of `adj`, which says that
-`R Y ⟶ R (L (R Y)) ⟶ R Y` is the identity. -/
+`adjS`, where `ε` is the counit of `adj : L ⊣ R`. -/
 theorem comp_homEquiv_map_counit_app_comp (Y : C) (M : E) (g : S.obj Y ⟶ M) :
     (adj.comp adjS).homEquiv (R.obj Y) M (S.map (adj.counit.app Y) ≫ g) =
       R.map (adjS.homEquiv Y M g) := by
@@ -142,8 +129,7 @@ variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
 
 /-- For an adjunction `F ⊣ G` with unit `η` and counit `ε`, and morphisms `φ : F A ⟶ B`,
 `ψ : A ⟶ G B`, one has `ψ = η_A ≫ G φ` if and only if `F ψ ≫ ε_B = φ`. In particular the adjunct
-`η_A ≫ G φ` of `φ` gives back `φ` after applying `F` and composing with the counit.
-(blueprint: `situation-conventions`) -/
+`η_A ≫ G φ` of `φ` gives back `φ` after applying `F` and composing with the counit. -/
 theorem eq_unit_comp_map_iff_map_comp_counit (adj : F ⊣ G) {A : C} {B : D} (φ : F.obj A ⟶ B)
     (ψ : A ⟶ G.obj B) : ψ = adj.unit.app A ≫ G.map φ ↔ F.map ψ ≫ adj.counit.app B = φ :=
   adj.eq_unit_comp_map_iff φ ψ
@@ -151,9 +137,7 @@ theorem eq_unit_comp_map_iff_map_comp_counit (adj : F ⊣ G) {A : C} {B : D} (φ
 /-- **An adjunction from hom-set bijections natural in both variables.** A family of bijections
 `Ψ : (F X ⟶ Y) ≃ (X ⟶ G Y)` natural in `X` and `Y` (a `CoreHomEquiv F G`) defines the
 adjunction `mkOfHomEquiv Ψ : F ⊣ G` with hom bijection `Ψ`, unit `η_X = Ψ (𝟙 (F X))` and counit
-`ε_Y = Ψ⁻¹ (𝟙 (G Y))`; the formulas `Ψ a = η_X ≫ G a` and `Ψ⁻¹ b = F b ≫ ε_Y` are then
-`Adjunction.homEquiv_unit` and `Adjunction.homEquiv_counit`.
-(blueprint: `lem-weil-pbc-adjunction-of-natural-bijection`) -/
+`ε_Y = Ψ⁻¹ (𝟙 (G Y))`. -/
 theorem mkOfHomEquiv_homEquiv_unit_counit (adj : CoreHomEquiv F G) :
     (∀ X Y, (mkOfHomEquiv adj).homEquiv X Y = adj.homEquiv X Y) ∧
       (∀ X, (mkOfHomEquiv adj).unit.app X = adj.homEquiv X _ (𝟙 (F.obj X))) ∧
