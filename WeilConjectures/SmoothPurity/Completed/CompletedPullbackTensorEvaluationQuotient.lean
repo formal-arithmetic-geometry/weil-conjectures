@@ -13,8 +13,12 @@ import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorEvaluationC
 
 /-! # Functorial image of the ordinary evaluation tensor square
 
-Source: Stacks Tags 07A4, 0941 and 03D2.
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-quotient).
+The image of the ordinary evaluation tensor square under the derived quotient functor
+commutes.
+
+## References
+
+* [Stacks, Tags 07A4, 0941 and 03D2](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public noncomputable section
@@ -49,12 +53,8 @@ attribute [local instance] sfIntrinsicPullback_additive
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Apply the derived quotient to the ordinary evaluation tensor square.
-Source: Stacks Tags 07A4, 0941 and 03D2
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-quotient).
-Proof: apply the quotient functor to the ordinary cochain equality, reverse it,
-and expand its images of composites using functoriality.
--/
+/-- The image of the ordinary evaluation tensor square under the derived quotient functor
+commutes. -/
 theorem completedPullbackTensor_evaluation_quotient {D : Type v} [Category.{w} D]
     {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)

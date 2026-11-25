@@ -10,8 +10,12 @@ import all WeilConjectures.SmoothPurity.Coefficient.CoefficientEvaluationTensorN
 
 /-! # Unit sections of the completed pullback evaluation mate
 
-Source: Stacks Tags 0941 and 03D2.
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-unit).
+The ordinary evaluation mate of the completed pullback, followed by a unit-normalized
+comparison `c`, preserves adjunction-unit sections.
+
+## References
+
+* [Stacks, Tags 0941 and 03D2](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -162,14 +166,7 @@ private theorem intrinsic_unit_map {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     ((sfIntrinsicConstantModuleAdjunction f
       (finiteCoefficientRing l E (n + 1))).unit.naturality a)).symm
 
-/-- The ordinary evaluation mate followed by c preserves adjunction-unit sections.
-Source: Stacks Tags 0941 and 03D2
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-unit).
-Proof: transpose the defining mate equality by the finite inverse-image adjunction.
-The direct evaluation map is the identity on the underlying transported sections.
-Naturality of evaluation identifies the image of the sequence unit. Apply the
-inverse mate to that equality and then the supplied unit normalization hc.
--/
+/-- The ordinary evaluation mate followed by `c` preserves adjunction-unit sections. -/
 theorem completedPullbackTensor_evaluation_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (c : integralOperationsLevelPullback l E f n ≅
       sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f)

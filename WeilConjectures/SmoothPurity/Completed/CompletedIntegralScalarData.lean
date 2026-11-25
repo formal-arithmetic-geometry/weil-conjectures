@@ -10,10 +10,7 @@ public import WeilConjectures.SixFunctors.Integral.IntegralScalarExtensionWellDe
 
 /-! # Canonical completed integral scalar data
 
-Source: Bhatt--Scholze, Lemma 6.8.2(1), Proposition 6.8.14(1); Stacks Tag 03EK
-(blueprint: def-weil-completed-integral-scalar-data).
-
-The constructions of this definition node are the published ones, reexported here:
+The completed integral scalar data are the published constructions, reexported here:
 `completedCoefficientMap` (the unique completed map with the prescribed finite residues),
 `completedScalarChangeData`, `completedOrdinaryScalarExtension`,
 `completedScalarTensorSection` and `completedScalarRelativeDegree` from
@@ -21,6 +18,11 @@ The constructions of this definition node are the published ones, reexported her
 `integralScalarIntegerInclusion`, `integralScalarFiniteConstant` and `integralScalarConstant` from
 `WeilConjectures.SixFunctors.Integral.IntegralScalarExtensionWellDefined`.
 No construction is redeclared.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2(1), Proposition 6.8.14(1).
+* Stacks Project, Tag 03EK.
 -/
 
 @[expose] public noncomputable section

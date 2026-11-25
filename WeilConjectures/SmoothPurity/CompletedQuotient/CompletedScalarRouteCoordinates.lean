@@ -12,7 +12,17 @@ import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedScalarRightCoordi
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+Quotient normalization and coherent substitution steps of the integral comparison.
+
+## Implementation details
+
+Both routes of the strict coefficient square send `b ⊗ (x ⊗ y)` to `(b ⊗ x) ⊗ (1 ⊗ y)`;
+this is a chain-system equality, including all quotient transitions. Derived maps are never
+identified merely from finite evaluations, and no flatness of finite coefficient maps is used.
+
+## References
+
+* Stacks Project, Tags 03EL, 07A4 and 0941
 -/
 
 @[expose] public noncomputable section
@@ -51,29 +61,7 @@ set_option backward.isDefEq.respectTransparency.types true
 
 attribute [local implicit_reducible] value expression IntegralCoherence.value scalarQuotients
 
-/-- The strict scalar square and its two uncancelled substitution coordinates.
-Source: Stacks 03EL, 07A4 and 0941; quotient-realization proof steps 6 and 7
-(blueprint: lem-pur-completed-scalar-route-coordinates).
-
-Proof: identify the transported strict comparison with the generator-normalized
-cochain comparison, using equality of the two chosen inverse-image interfaces
-and uniqueness on tensor generators. The strict coefficient square then gives
-the first equation: both routes send b tensor (x tensor y) to
-(b tensor x) tensor (1 tensor y). This is a chain-system equality, including
-all quotient transitions. For the second equation, expand the scalar substitution
-at the source and the recursive L substitution at the pullback of the tensor.
-The normalized scalar/pullback and scalar/tensor limit squares identify kappa
-and sigma with the prescribed completed alpha maps. Naturality moves the leaf
-coherent reductions past these comparisons. Applying total limit and its map_comp
-law gives the displayed left coordinate. For the third equation use the other
-factorization of the strict square: scalar change of c_E followed by sigma_X
-and the tensor of the two kappa maps. Expand the E transport and the L target
-substitution. The inverse E target substitution cancels its forward factor;
-scalar counit naturality identifies the remaining target factors with the
-completed tensor scalar comparison and the tensor of completed pullback scalar
-comparisons. This gives the right coordinate before cancelling the L target
-substitution. The argument never identifies derived maps merely from finite
-evaluations, and uses no flatness of finite coefficient maps. -/
+/-- The strict scalar square and its two uncancelled substitution coordinates. -/
 theorem completedScalarRouteCoordinates
     {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)
     [∀ z : Z, Invertible (l : Z.residueField z)]

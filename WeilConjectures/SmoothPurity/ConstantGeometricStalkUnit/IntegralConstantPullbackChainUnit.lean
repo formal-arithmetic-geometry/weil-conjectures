@@ -15,8 +15,13 @@ import WeilConjectures.SmoothPurity.ConstantScalarStrictUnit.ConstantScalarStric
 
 /-! # The finite quotient of the normalized integral coefficient unit
 
-Source: Stacks 099N(5) and the normalized strict Roos construction of the constant unit.
-(blueprint: lem-pur-integral-constant-pullback-chain-unit).
+The finite quotient of the normalized integral coefficient unit, computed through the
+normalized strict Roos construction of the constant unit.
+
+## References
+
+* [Stacks, Tag 099N(5)]
+* [Stacks, Tag 03D6]
 -/
 
 @[expose] public noncomputable section
@@ -39,9 +44,7 @@ namespace WeilConjectures.ConstantGeometricStalkUnit
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Finite multiplication in the constant-ring pullback presentation.
-Source: Stacks 03D6; the unit-preserving finite pullback change of presentation.
-(blueprint: lem-pur-integral-constant-pullback-chain-unit). -/
+/-- Finite multiplication in the constant-ring pullback presentation. -/
 def finiteRingUnit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E (n + 1)) f).obj
       (finiteConstantCoefficientObject l E Y n) ≅ finiteConstantCoefficientObject l E X n :=

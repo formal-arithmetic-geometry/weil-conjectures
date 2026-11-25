@@ -15,8 +15,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
 
 This file defines the composite of morphisms of models
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.Hom.comp`) and proves that both
-exchanges of nearby cycles are compatible with composition (blueprint
-`prose-E-03`).
+exchanges of nearby cycles are compatible with composition.
 
 ## Main results
 
@@ -284,7 +283,7 @@ lemma pullbackExchange_comp_app_of_eq {fg : X ⟶ Z} {fg' : X' ⟶ Z'} (χ : M.H
       χ.commSq_ε C)
     (ψ.pullbackExchange Λ) rfl (φ.pullbackExchange Λ) rfl (χ.pullbackExchange Λ) rfl C).symm
 
-/-- **Composition law of the pullback exchanges** (blueprint `prose-E-03`):
+/-- **Composition law of the pullback exchanges**:
 `α_{φψ} ∘ c_{f,g} = α_φ(Lg^*) ∘ Lf'^* α_ψ ∘ c_{f',g'}`, where `c` are the composition
 isomorphisms `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` of derived pullbacks. -/
 lemma pullbackExchange_comp_app
@@ -326,7 +325,7 @@ lemma pushforwardExchange_comp_app_of_eq {fg : X ⟶ Z} {fg' : X' ⟶ Z'} (χ : 
     (χ.pullbackExchange Λ) (φ.pullbackExchange_comp_app_of_eq Λ ψ χ h h' htot hgen)
     (ψ.pushforwardExchange Λ) rfl (φ.pushforwardExchange Λ) rfl (χ.pushforwardExchange Λ) rfl E
 
-/-- **Composition law of the pushforward exchanges** (blueprint `prose-E-03`):
+/-- **Composition law of the pushforward exchanges**:
 `χ_{φψ} = Rg'_*(χ_φ) ∘ χ_ψ(Rf_*)`, through the composition isomorphisms
 `R(f ≫ g)_* ≅ Rf_* ⋙ Rg_*` and `R(f' ≫ g')_* ≅ Rf'_* ⋙ Rg'_*`, the conjugates of the composition
 isomorphisms of derived pullbacks. -/

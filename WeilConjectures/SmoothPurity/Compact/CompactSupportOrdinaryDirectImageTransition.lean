@@ -11,8 +11,12 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportOrdinaryDirectTransiti
 
 /-! # Horizontal compatibility of native direct image
 
-Source: Stacks Project, Tags 03DA, 03D3 and 0941; Zheng 4.1.
-(blueprint: lem-weil-compact-support-ordinary-direct-image-transition).
+The ordinary horizontal coefficient map commutes with direct image.
+
+## References
+
+* Stacks Project, Tags 03DA, 03D3 and 0941.
+* Zheng, 4.1.
 -/
 
 @[expose] public noncomputable section
@@ -65,13 +69,7 @@ attribute [local irreducible] compactSupportDirectModel
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The ordinary horizontal coefficient map commutes with direct image.
-Source: Stacks Project, Tags 03DA, 03D3 and 0941.
-(blueprint: lem-weil-compact-support-ordinary-direct-image-transition).
-Proof: the evaluation and scalar direct-image comparisons preserve each section.
-The horizontal coefficient map is the actual restriction of the module presheaf,
-and base change of the product site preserves its horizontal arrow. Thus both
-composites agree on every section. -/
+/-- The ordinary horizontal coefficient map commutes with direct image. -/
 theorem compactSupportOrdinaryDirectImageTransition {X Y : Scheme.{u}} (f : X ⟶ Y)
     {m n : ℕ} (h : n ≤ m) (M : coefficientSequenceModules.{u, u} l E X) :
     (compactSupportOrdinaryCoefficientTransition l E Y h).app

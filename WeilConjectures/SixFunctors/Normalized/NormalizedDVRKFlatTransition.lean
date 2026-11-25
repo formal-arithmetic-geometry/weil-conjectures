@@ -14,7 +14,23 @@ public import WeilConjectures.AlgebraicGeometry.NormalizedDVRKFlatTransition
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 
-/-! # Quotient transitions on K-flat representatives -/
+/-! # Quotient transitions on K-flat representatives
+
+This file shows that the canonical quotient chain map of a K-flat representative is the
+restriction of the adjoint reduction transition (`normalizedDVR_kflat_transition`).
+
+## Implementation details
+
+For `M = Q(P)` the ordinary tensor map `b ⊗ x ↦ ρ(b) ⊗ x` is linear over the larger finite
+quotient and its adjoint is the smaller scalar-extension unit; on pure tensors its restriction is
+the map defining `integralTowerTransition`, so the two agree by tensor generation and the
+universal property of sheafification. The general case follows by naturality along `e.inv`.
+
+## References
+
+* [B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Definition 3.5.2][BS15]
+* [Stacks Project, Tags 03EK, 06YY and 06YL][stacks-project]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -496,22 +512,7 @@ local instance : Category.{max (t + 2) (u + 1)}
 
 set_option linter.unusedVariables false in
 /-- The canonical quotient chain map is the restriction of the adjoint reduction
-transition, expressed through the universal K-flat comparison.
-Source: Stacks Tags 03EK, 06YY, 06YL; Bhatt--Scholze, Definition 3.5.2.
-(blueprint: lem-coef-normalized-dvr-kflat-transition).
-
-Proof: first take M=Q(P) and e the identity. The ordinary tensor map sends b tensor x
-to rho(b) tensor x. It is linear over the larger finite quotient, because the
-completed projections compose with rho. Its adjoint sends x to 1 tensor x and hence
-is the smaller scalar-extension unit. Apply the homotopy-category adjunction and
-localize. The derived adjunction normalization identifies the resulting adjoint
-with the displayed derived transition, after the exact restriction composition
-comparison. The universal derived counits give exactly the comparison factors on
-both sides. On pure tensors the restricted ordinary map has the formula defining
-integralTowerTransition; tensor generation and the universal property of
-sheafification prove equality, degree by degree. For general e, naturality of the
-two adjunction units, of the counits and of the restriction comparison transports
-the equality along e.inv. The argument is valid for n=0 and zero complexes. -/
+transition, expressed through the universal K-flat comparison. -/
 theorem normalizedDVR_kflat_transition
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients

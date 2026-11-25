@@ -53,7 +53,26 @@ import WeilConjectures.SixFunctors.Open.OpenDvrAugmentedTowerComparison
 import WeilConjectures.SixFunctors.Open.OpenDvrIntrinsicCriterion
 import WeilConjectures.SixFunctors.Open.OpenDvrIntrinsicOpenTransport
 
-/-! # DVR quotient, Koszul and open completeness assembly -/
+/-!
+# DVR quotient, Koszul and open completeness assembly
+
+We assemble the DVR quotient augmentation, Koszul completion and quasi-compact open
+completeness results for the canonical DVR coefficient models.
+
+## Implementation details
+
+The extension-integers DVR is a Noetherian principal ideal domain with finite residue field, so
+the finite quotients have two-term free resolutions. Completed constant-sheaf reduction
+identifies finite constant coefficients with continuous component functions. Regular-generator
+Koszul reconstruction and the completion reflector turn quotient Roos completeness into
+invertibility of the actual Koszul unit, using isomorphism invariance of completeness. Open
+completeness comes from completed open-exchange transport along the identity cartesian square.
+No boundedness hypothesis is used.
+
+## References
+
+* [Stacks: Tags 093M, 0A0E, 099B and 09BP]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -562,29 +581,7 @@ private theorem dvrActualUnit_isIso
     infer_instance
   exact isIso_of_reflects_iso _ C.derived.functor
 
-/-- DVR quotient augmentation, Koszul completion, and quasi-compact open completeness.
-Source: Stacks Tags 093M, 0A0E, 099B and 09BP; blueprint fix-prop-coherence
-(blueprint: lem-sf-open-quotient-koszul-completeness).
-
-Proof: (1) The extension-integers DVR theorem makes R a domain and a principal ideal
-ring with finite residue field. Thus R is Noetherian, its residue group is torsion,
-and the finite quotients have the displayed two-term free resolutions.
-(2) Completed constant-sheaf reduction identifies finite constant coefficients with
-continuous component functions, compatibly with the strict quotient maps and their limit.
-(3) Choose one flat-term K-flat resolution. Both strict towers and their augmentations
-are the same quotient tensor complex; scalar restriction only forgets actions.
-(4) The sequence projection derived adjunction sends identity to x ↦ x tensor 1.
-The pushforward/limit comparison and completed quotient-unit normalization identify
-this whole strict augmentation, before evaluation, with the actual derived unit.
-(5) The specified Koszul reconstruction comparison carries its unit to that unit.
-(6) Regular-generator Koszul reconstruction and the completion reflector turn quotient
-Roos completeness into invertibility of the actual Koszul unit, using isomorphism
-invariance of completeness, not an identification of an arbitrary Roos isomorphism.
-(7) Conversely its invertibility transports the actual strict-tower Roos triangle.
-(8) Apply completed open-exchange transport to the identity cartesian square for the
-quasi-compact open. It preserves intrinsic completeness; (6)--(7) give quotient
-completeness and actual-unit invertibility. The calculus unit/projection identity
-gives precisely the finite reduction maps. No boundedness hypothesis is used. -/
+/-- DVR quotient augmentation, Koszul completion, and quasi-compact open completeness. -/
 theorem openQuotientKoszulCompleteness :
     ∃ (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))
       (hd : Ideal.span (Set.range (fun _ : Fin 1 ↦

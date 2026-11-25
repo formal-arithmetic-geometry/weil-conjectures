@@ -24,8 +24,23 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-! # The normalized completion Roos triangle under coefficient transport
 
-Source: Stacks Tags 099M, 099N and 06YY; Bhatt--Scholze, Definition 3.5.2.
-(blueprint: lem-pur-completed-coefficient-completion-roos-transport).
+Transport of the derived completion of a complex along an isomorphism of completed coefficient
+rings: after restriction of scalars, the completion sits in a derived-limit (Roos) triangle
+over the reductions modulo the finite coefficient levels.
+
+## Implementation details
+
+The coefficient isomorphism identifies reduction after inverse scalar restriction with
+`sfDerivedReductionRestricted`, as an isomorphism of augmented reduction sequences (including
+their units), not only levelwise. The Koszul reflector and the complete-subcategory reflector
+represent the same adjunction, so their unit-compatible comparison identifies the first vertex
+with `pbcActualCompletion K`. No completeness, boundedness or constructibility condition is
+imposed on the input.
+
+## References
+
+* [Stacks Project, Tags 099M, 099N and 06YY](https://stacks.math.columbia.edu/tag/099M)
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2
 -/
 
 @[expose] public noncomputable section
@@ -617,32 +632,10 @@ private theorem coefficientReductionComparison
     rw [Functor.map_comp]
     rfl
 
-/-- Transport of the completion reflector, retaining its unit and the canonical
-intrinsic reduction maps. This compares completion objects before imposing any
-completeness, boundedness or constructibility condition on the input.
-
-Source: Stacks Tags 099M, 099N and 06YY; Bhatt--Scholze, Definition 3.5.2.
-(blueprint: lem-pur-completed-coefficient-completion-roos-transport).
-
-Proof: the equation on the coefficient isomorphism identifies its finite projections
-with the already normalized integralDetailedLevelComparison. At each positive level,
-the tensor/restriction adjunction therefore identifies reduction after inverse scalar
-restriction with sfDerivedReductionRestricted. On flat K-flat representatives these
-maps send a pure tensor to the same tensor with its coefficient transported. The
-transition squares and augmentation squares follow on these tensors and descend by
-the universal derived tensor counits. Thus this is an isomorphism of the augmented
-reduction sequences, including their canonical units, rather than only levelwise
-isomorphisms of their objects.
-
-Apply completedKoszulQuotientComparison and completedKoszulReductionRoosTriangle to
-an intrinsic completed-coefficient representative. The Koszul reflector and the
-actual complete-subcategory reflector represent the same adjunction, so their unique
-unit-compatible comparison identifies the first vertex with pbcActualCompletion K.
-Exact restriction along the inverse ring isomorphism preserves products and
-triangles. Transport the resulting Roos triangle through the preceding sequence
-isomorphism. Its coordinate unit equations give the displayed product unit equation
-by product extensionality. All comparisons use the positive quotient levels; the
-argument also applies to the zero object, the empty scheme and residue level one. -/
+/-- Let `c` be an isomorphism of completed coefficient rings compatible with the detailed
+coefficient comparison. For every `K`, after restriction of scalars along `c⁻¹`, the derived
+completion of `K` fits into a derived-limit triangle over the tower of reductions of `K`,
+whose product map composed with the completion unit is the product of the reduction units. -/
 theorem completedCoefficientCompletionRoosTransport
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (W : Scheme.{u})

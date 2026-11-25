@@ -15,10 +15,19 @@ below is the native module-object construction. In particular the tensor compari
 normalized by its derived-functor counit, and the inverse-image compositor is the mate of
 the specified direct-image compositor. No alternate coefficient category is introduced.
 
-Source: latest blueprint, `sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence`,
-maps-used sentence, and `sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/`
-`prose-03-02`; Stacks 03D2, 03D8, 03EL, 0G7E and 07A4.
-(blueprint: lem-pur-diagram-geometric-tensor-presentations).
+## Implementation details
+
+The coefficient comparison for `p_X^* Λ` is invertible, so the native module inverse image
+is exact and its specified adjunction gives preservation of colimits. The exact-derived
+comparison identifies the total left derived functor with termwise pullback. The canonical
+bivariately derived tensor comparison is invertible and its defining counit equation is the
+representative normalization. On underlying sheaves the module direct-image compositor is the
+geometric sheaf compositor; conjugation gives its inverse-image mate, and the unit equation for
+conjugate transformations gives the equality of the two unit routes.
+
+## References
+
+* Stacks Project, Tags 03D2, 03D8, 03EL, 0G7E and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -41,9 +50,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- The geometric presentation and resolving normalization of the fixed native functors.
 All maps in these assertions are specified constructions, rather than chosen witnesses.
-The normalization is stated on all homotopy complexes, hence also on K-flat representatives.
-Source: the maps-used sentence and Stacks 03D2, 03D8, 03EL, 0G7E and 07A4.
-(blueprint: def-pur-native-geometric-tensor-presentations). -/
+The normalization is stated on all homotopy complexes, hence also on K-flat representatives. -/
 structure GeometricTensorPresentations : Prop where
   /-- Pullback of the coefficient ring is the canonical isomorphism. -/
   coefficient : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsIso (condensedPullbackHom Λ f)
@@ -96,21 +103,7 @@ structure GeometricTensorPresentations : Prop where
         (lowerStar Λ (f ≫ g)).map ((upperStarComp Λ f g).hom.app M)
 
 /-- Native geometric inverse images, tensor comparisons and normalized compositors exist
-simultaneously for every scheme and every commutative condensed coefficient ring.
-
-Source: the maps-used sentence of `fix-prop-coherence.proof.md`; Stacks 03D2, 03D8,
-03EL, 0G7E and 07A4 (blueprint: lem-pur-diagram-geometric-tensor-presentations).
-
-Proof: the coefficient comparison for `p_X^* Λ` is invertible. Thus the native module
-inverse image is exact, and its specified adjunction gives preservation of colimits.
-The exact-derived comparison identifies its total left derived functor with termwise
-pullback. Geometric inverse image preserves K-flat complexes; extension of scalars along
-the coefficient isomorphism is an equivalence and also preserves them. The canonical
-bivariately derived tensor comparison is invertible and its defining counit equation is
-the representative normalization. On underlying sheaves the module direct-image compositor
-is precisely the geometric sheaf compositor. Conjugation gives its inverse-image mate,
-and the unit equation for conjugate transformations gives the equality of the two unit
-routes. These statements hold before any finite reduction or constructible restriction. -/
+simultaneously for every scheme and every commutative condensed coefficient ring. -/
 theorem diagramGeometricTensorPresentations : GeometricTensorPresentations Λ where
   coefficient _ := inferInstance
   limits _ := inferInstance

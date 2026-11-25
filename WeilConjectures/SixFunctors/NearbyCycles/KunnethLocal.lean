@@ -31,6 +31,19 @@ Künneth map with pullbacks (`NearbyCyclesModel.map_kunnethMap_comp_pullbackExch
 category of a noetherian scheme is invertible if it is so on the members of an open cover
 (`ProEtale.CondensedRing.isIso_of_forall_exists_isIso_upperStar_map`).
 
+## Implementation details
+
+Besides restrictions to opens
+(`NearbyCyclesModel.isIso_map_kunnethMap_iff_of_isKunnethRestriction`),
+`NearbyCyclesModel.isIso_map_kunnethMap_iff_of_isIso_pullbackExchange` is the formal part of the
+generic-slicing step of Gabber's Künneth formula ("the composition compatibility in (2)"), where
+`ρ` is the base change to the generic slice of a coordinate and `α_ρ` the slicing identification
+(2) of [SGA 4½, Th. finitude, §3][sga4half].
+
+## References
+
+* [P. Deligne, *SGA 4½*, Th. finitude, §3][sga4half]
+
 -/
 
 @[expose] public section
@@ -147,14 +160,7 @@ morphisms of models `ρ_M : M' ⟶ M`, `ρ_N : N' ⟶ N`, `ρ_P : P' ⟶ P` comp
 `φ₁ : P ⟶ M`, `φ₂ : P ⟶ N` and `φ₁' : P' ⟶ M'`, `φ₂' : P' ⟶ N'`, whose pullback exchanges
 `α_{ρ_M}`, `α_{ρ_N}`, `α_{ρ_P}` are invertible at `A`, `B` and `A ⊠ B`, the pullback
 `Lρ'^* Π_{A,B}` of the Künneth map is invertible if and only if the Künneth map
-`Π_{Lρ_M^* A, Lρ_N^* B}` is.
-
-Besides restrictions to opens
-(`NearbyCyclesModel.isIso_map_kunnethMap_iff_of_isKunnethRestriction`),
-this is the formal part of the generic-slicing step of Gabber's Künneth formula (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "the composition compatibility in (2)"), where
-`ρ` is the base change to the generic slice of a coordinate and `α_ρ` the slicing identification (2)
-(SGA 4½, [Th. finitude], §3). -/
+`Π_{Lρ_M^* A, Lρ_N^* B}` is. -/
 theorem isIso_map_kunnethMap_iff_of_isIso_pullbackExchange {φ₁ : P.Hom M f₁ f₁'}
     {φ₂ : P.Hom N f₂ f₂'} {φ₁U : PU.Hom MU e₁ e₁'} {φ₂U : PU.Hom NU e₂ e₂'}
     {ρM : MU.Hom M r₁ r₁'} {ρN : NU.Hom N r₂ r₂'} {ρP : PU.Hom P r r'}

@@ -12,7 +12,11 @@ import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedScalarPullbackSub
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+This file proves the uncancelled left coordinate of the completed scalar route.
+
+## References
+
+* [Stacks, Tags 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -57,13 +61,7 @@ attribute [local implicit_reducible] integralScalarExtension integralScalarExten
   constructibleIntegralPullback constructibleIntegralTensor IntegralCoherence.complexMonoidal
   SheafOfModules.cochainModulesMonoidal
 
-/-- The uncancelled completed scalar left coordinate.
-Source: Stacks 07A4 and 0941; quotient scalar-route proof.
-(blueprint: lem-pur-completed-scalar-left-coordinate).
-
-Proof: apply the pullback scalar substitution law to the tensor of the inputs, then the tensor
-scalar substitution law at Y. Naturality of pullback substitution moves the tensor scalar
-comparison across the strict sigma factor. -/
+/-- The uncancelled completed scalar left coordinate. -/
 theorem scalarRouteLeftCoordinate
     {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)
     [∀ z : Z, Invertible (l : Z.residueField z)]

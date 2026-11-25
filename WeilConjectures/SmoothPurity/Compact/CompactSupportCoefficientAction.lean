@@ -11,20 +11,20 @@ public import WeilConjectures.CategoryTheory.StageSystem.Functor
 
 /-! # Normalized finite-stage compact-support action
 
-Source: blueprint definition order 1490 and the coefficient comparisons in
-proposition-six-operations-change-coefficients, compact-support paragraph
-(blueprint: def-weil-compact-support-coefficient-action).
-
-The finite action is fixed to the already normalized integral/Roos construction.
-The coefficient comparison is required to be the tensor-unit mate at finite levels.
-The finite-field-independence statement asserts existence of this normalized package.
+This file packages compact support with `Q̄_l`-coefficients as a coherent action on the finite
+coefficient stages, whose finite functors are the normalized integral/Roos compact-support
+functors and whose coefficient comparisons are the finite tensor-unit mates.
 
 ## Main definitions
 
-- `sfCompactSupportFiniteFunctor`: actual tensor extension of the normalized integral action.
+- `sfCompactSupportFiniteMate`: the finite-coefficient comparison as a tensor-unit mate.
 - `SfCompactSupportIntegralBetaSpec`: the prescribed finite tensor-unit mate equation.
 - `SfCompactSupportCoefficientAction`: coherent normalized action on coefficient stages.
 - `SfCompactSupportCoefficientAction.representative`: the specified common-stage map.
+
+## Implementation details
+
+The finite-field-independence statement asserts the existence of this normalized package.
 -/
 
 @[expose] public noncomputable section
@@ -39,10 +39,8 @@ section FiniteMate
 variable {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
   (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
-/-- The finite-coefficient comparison is the unique tensor-linear lift of compact
-support of the input tensor unit, followed by the fixed restriction comparison.
-Source: proposition-six-operations-change-coefficients and lemma-sp-reduction--1
-(blueprint: def-weil-compact-support-coefficient-action). -/
+/-- The finite-coefficient comparison: the unique `B`-linear lift, along the universal unit
+`ηN`, of compact support of the unit `ηM` followed by the restriction comparison. -/
 def sfCompactSupportFiniteMate
     (K : proEtaleDerivedCategory X A)
     (M : proEtaleDerivedCategory X B)
@@ -69,12 +67,8 @@ variable (l : ℕ) [Fact l.Prime]
   [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
   (c : Compactification f)
 
-/-- The integral coefficient comparison is the finite tensor-unit mate on every
-quotient. All units are the prescribed mixed tensor/diagonal Roos units. The output
-unit is transported through the fixed reduction isomorphism of the integral action.
-The existential variable is only a proof of a universal property, not comparison data.
-Source: proposition-six-operations-change-coefficients, completed compact-support and associativity
-paragraphs (blueprint: def-weil-compact-support-coefficient-action). -/
+/-- An integral coefficient comparison `b` is, after reduction to every finite quotient, the
+finite tensor-unit mate `sfCompactSupportFiniteMate` for the mixed reduction units. -/
 def SfCompactSupportIntegralBetaSpec
     (E L : Type u) [Field E] [Field L]
     [Algebra (Padic l) E] [Algebra (Padic l) L]
@@ -119,34 +113,31 @@ variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (c : Compactification f)
 
-/-- A coefficient action with both its finite maps and its beta fixed to the actual
-compact-support construction. The finite equality retains the complete previously
-normalized strict-tower action, including all rational pure tensors. The integral
-beta is the tensor-unit mate above, and rational beta is its raw localization.
-Source: definition order 1490 and proposition-six-operations-change-coefficients
-(blueprint: def-weil-compact-support-coefficient-action). -/
+/-- A compact-support action on the coefficient stages whose finite functors are the
+compact-support functors, whose integral comparisons are the tensor-unit mates, and whose
+rational comparisons are their localizations. -/
 structure SfCompactSupportCoefficientAction where
   /-- The compatible action on the recorded stage systems. -/
   system : (stageSystem l Ω X).Morphism (stageSystem l Ω Y)
-  /-- All maps, not just objects, are the fixed finite compact-support functors. -/
+  /-- The finite functors are the compact-support functors. -/
   finite_eq : ∀ E, system.Φ E = sfCompactSupportFiniteFunctor l K₀ hl c
       (AlgebraicallyClosedCoefficients.Coefficient l Ω E)
-  /-- The literal output pairs are the previously defined values. -/
+  /-- The output pairs are the compact-support values `sfQbarCompactSupportValue`. -/
   value_eq : ∀ A : Pair l Ω X, system.functor.obj A =
     sfQbarCompactSupportValue l K₀ hl Ω c A.stage A.obj.obj
-  /-- The integral coefficient comparisons on the actual completed scalar extensions. -/
+  /-- The integral coefficient comparisons between the completed scalar extensions. -/
   integralBeta : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
     sfCompactSupportFiniteIntegralFunctor l K₀ hl c
       (AlgebraicallyClosedCoefficients.Coefficient l Ω E) ⋙ integralTransition l Ω Y E L h ≅
       integralTransition l Ω X E L h ⋙ sfCompactSupportFiniteIntegralFunctor l K₀ hl c
       (AlgebraicallyClosedCoefficients.Coefficient l Ω L)
-  /-- The comparison is the prescribed tensor-unit mate, not an arbitrary natural iso. -/
+  /-- The integral comparison is the prescribed tensor-unit mate. -/
   integralBeta_spec : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
     SfCompactSupportIntegralBetaSpec l K₀ hl c
       (AlgebraicallyClosedCoefficients.Coefficient l Ω E)
       (AlgebraicallyClosedCoefficients.Coefficient l Ω L)
       (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E L h) (integralBeta h)
-  /-- The rational comparison is exactly the localization of this integral map. -/
+  /-- The rational comparison is the localization of the integral comparison. -/
   rationalBeta : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
     (K : Stage l Ω X E), HEq ((system.β h).hom.app K)
       ((sfRationalConstructibleLocalization l (AlgebraicallyClosedCoefficients.Coefficient
@@ -155,24 +146,18 @@ structure SfCompactSupportCoefficientAction where
 namespace SfCompactSupportCoefficientAction
 variable {l K₀ hl Ω c} (S : SfCompactSupportCoefficientAction l K₀ hl Ω c)
 
-/-- The recorded output pair, retained without a new coefficient-category definition.
-Source: definition order 1490
-(blueprint: def-weil-compact-support-coefficient-action). -/
+/-- The compact-support value of a pair. -/
 abbrev value (_S : SfCompactSupportCoefficientAction l K₀ hl Ω c) (A : Pair l Ω X) :=
   sfQbarCompactSupportValue l K₀ hl Ω c A.stage A.obj.obj
 
-/-- The specified common-stage comparison is the image of alpha followed by alpha'
-inverse, transported to the literal output values.
-Source: definition order 1490, finite-field-independence proof step 3
-(blueprint: def-weil-compact-support-coefficient-action). -/
+/-- The comparison `S.value A ≅ S.value B` induced by `α ≪≫ α'.symm`. -/
 def comparison {A B P : Pair l Ω X} (α : A ≅ P) (α' : B ≅ P) :
     S.value A ≅ S.value B :=
   (eqToIso (S.value_eq A)).symm ≪≫ S.system.functor.mapIso (α ≪≫ α'.symm) ≪≫
     eqToIso (S.value_eq B)
 
-/-- The literal class [M, beta inverse F_M(u) beta], in diagrammatic order.
-Source: definition order 1490, finite-field-independence proof step 3
-(blueprint: def-weil-compact-support-coefficient-action). -/
+/-- The morphism `S.value A ⟶ S.value B` represented at the stage `M` by
+`β ≫ F_M(u) ≫ β⁻¹`. -/
 def representative (A B : Pair l Ω X) (M : Padic.FiniteCoefficientFields l Ω)
     (hA : A.stage ≤ M) (hB : B.stage ≤ M) (u : StageHom A B ⟨M, hA, hB⟩) :
     S.value A ⟶ S.value B :=

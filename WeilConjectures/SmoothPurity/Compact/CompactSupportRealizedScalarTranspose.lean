@@ -11,7 +11,8 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportRealizedScalarTranspos
 
 /-! # The transpose of the realized compact-support scalar map
 
-Source: proposition-six-operations-change-coefficients, compact-support and final paragraphs.
+This module gathers the results on the transpose of the realized compact-support scalar map
+for change of coefficients.
 -/
 
 @[expose] public noncomputable section

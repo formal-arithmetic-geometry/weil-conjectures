@@ -10,7 +10,13 @@ public import WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperat
 
 /-! # Pure-section normalization of the quotient tensor augmentation
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5; Stacks 03EL, 07A4, 0941.
+We show that a natural chain given by the recorded tensor-operation augmentation satisfies
+`IsTensorChain`.
+
+## References
+
+* Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5
+* Stacks Project, Tags 03EL, 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -26,17 +32,8 @@ attribute [local implicit_reducible] PurCompactSupport.completed
 
 attribute [-instance] IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBijective in
 /-- Every natural chain with the recorded tensor-operation augmentation has its two
-prescribed quotient coordinates.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5; Stacks 03EL, 07A4, 0941
-(blueprint: lem-sf-tensor-operation-unit-normalization).
-Proof: the operation-unit coordinate theorem identifies the first coordinate with the
-product augmentation followed by the strict tensor-tower comparison, and makes the
-shifted coordinate zero. Project the first identity to level n and evaluate on a
-homogeneous pure tensor. The quotient augmentation sends that tensor to its generator
-with scalar 1. The strict tensor-tower normalization sends this generator to the tensor
-of the two quotient-unit sections. These equalities give exactly the first clause of
-IsTensorChain; the second clause is the zero shifted coordinate. The same formulas hold
-for zero sections and for the empty scheme, without any additional hypotheses. -/
+prescribed quotient coordinates (`IsTensorChain`): on pure tensors it is the tensor of the
+two quotient-unit sections, and its shifted coordinate is zero. -/
 theorem tensorOperationUnit_normalized
     (chain : constructibleTensorTotal l E X ⟶ integralOperationsTensorComplexFunctor l E X)
     (hchain : ∀ P Q, chain.app (P, Q) = tensorOperationUnit l E X P Q) :

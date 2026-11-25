@@ -14,7 +14,24 @@ import WeilConjectures.SixFunctors.CanonicalOpenRestriction.OpenRestrictionGoodC
 import WeilConjectures.SixFunctors.OpenSemilinearTensor.OrdinaryReductionAugmentedComputation
 import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorModelSupplement
 
-/-! # Compatible representatives for strict open tensors -/
+/-! # Compatible representatives for strict open tensors
+
+Compatible strict open tensor representatives and completion presentations, prior to the
+completed comparison theorem.
+
+## Implementation details
+
+The same canonical total-tensor models are used for integral scalar reduction and completion on
+`U` and `V`, and one summand-normalized slice open extension is used for the ordinary, quotient
+and system operations. On a local total-tensor summand the quotient map sends
+`(x ⊗ y) ⊗ a` to `(x ⊗ a) ⊗ (y ⊗ 1)`, and the open map sends `([x] ⊗ y) ⊗ a` to
+`[(x ⊗ a)|_U ⊗ (y|_U ⊗ 1)]`. The resulting laws are equations before evaluation and total
+limit; no faithfulness of finite derived evaluation is asserted.
+
+## References
+
+* Stacks Project, Tags 0GL1 and 0E8I
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -184,38 +201,7 @@ private theorem tensorSystemPaste
 
 /-- Compatible strict open tensor representatives and completion presentations.
 This is the representative construction, prior to the completed comparison theorem.
-It does not assert existence, uniqueness or realization of a completed tensor map.
-
-Source: Stacks Project, sites-cohomology.tex Tag 0GL1 and sites-modules.tex Tag 0E8I;
-strict quotient and completion-unit refinement, original realization proof steps 1--3.
-(blueprint: lem-pur-completed-open-tensor-representatives).
-
-Proof: choose the same canonical total-tensor models for integral scalar reduction and
-completion on U and V. Compute the reduction/limit adjunction on flat-term K-flat
-and K-injective representatives. Its strict scalar augmentation identifies the actual
-completion units, giving completionV/U and unitV/U. Exact slice restriction commutes
-with this augmented quotient tower and both Roos coordinates; descent gives
-restrictionCompletion and its unit square. Use one summand-normalized slice open
-extension for the ordinary, quotient and system operations. Its derived open unit is
-invertible and is the localization of the summand insertion/collapse pair. The strict
-open reduction map restricts on complete objects to completeOpen.r, so sameOpen holds;
-completeOpen.d is its inverse-unit realization. The normalized semilinear model supplies
-ordinaryV/U and strictOpen using these same operations, not independent choices.
-
-Descend strictOpen.totalComparison.chain on the two flat-term K-flat arguments to
-obtain gamma. Restriction preserves their flat-term K-flat property; tensor of two
-K-flat complexes is K-flat, as is the extension of the open argument. The normalized
-reduction computations of their two total tensors provide aV and aU. On every local
-total-tensor summand the quotient map sends (x tensor y) tensor a to
-(x tensor a) tensor (y tensor 1), and the open map sends ([x] tensor y) tensor a to
-[(x tensor a restricted to U) tensor (y restricted to U tensor 1)]. These formulas
-preserve the signed total differential and every quotient transition. At a=1 they
-give the displayed scalar-unit augmentation equation. Localizing this single strict
-chain map with the actual representative counits gives the first and last squares
-of RepresentativeLaws. Thus these are equations before evaluation and total limit;
-no faithfulness of finite derived evaluation is asserted. All choices are retained
-as existential theorem data, and the arguments apply to unbounded inputs, including
-zero objects, the empty open and the identity open immersion. -/
+It does not assert existence, uniqueness or realization of a completed tensor map. -/
 theorem completedOpenTensorRepresentatives [QuasiCompact j]
     (hlV : IsUnit (l : Γ(V, ⊤))) (hlU : IsUnit (l : Γ(U, ⊤))) :
     ∃ (C : Context l E j) (γ : OrdinaryMap l E j C),

@@ -10,8 +10,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Exact pullback composition in finite representative coordinates
 
-Source: Stacks Project, Tags 07A4 and 00YV.
-(blueprint: lem-pur-finite-pullback-tensor-compositor-factors).
+The intrinsic derived pullback compositor agrees with the conjugated ordinary computation
+maps in finite representative coordinates.
+
+## References
+
+* [Stacks: Tags 00YV, 0735, 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -110,15 +114,7 @@ attribute [local instance] modules_abelian modules_derived ordinary_additive
   ordinary_limits ordinary_colimits
 attribute [local implicit_reducible] modules_abelian modules_derived
 
-/-- The intrinsic derived compositor agrees with the conjugated ordinary computation maps.
-Source: Stacks 00YV and exact termwise localization in 0735
-(blueprint: lem-pur-finite-pullback-tensor-compositor-factors).
-Proof: the localization of a conjugated module compositor is the corresponding
-conjugation of its localization, by compatibility with natural isomorphisms and
-composition. For ordinary exact functors, the compositor and computation maps
-satisfy mapDerivedCategoryCompIso_hom_app_factors. Naturality of the three
-realization comparisons moves them across these maps; the inverse pairs cancel.
-This gives the computation equation on every complex, independently of flatness. -/
+/-- The intrinsic derived compositor agrees with the conjugated ordinary computation maps. -/
 theorem compositor_fac {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X) (n : ℕ)
     (P : CochainComplex (normalizedDVRModules l E Y n) ℤ) :

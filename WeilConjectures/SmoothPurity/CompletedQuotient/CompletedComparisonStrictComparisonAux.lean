@@ -11,8 +11,12 @@ import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedComparisonTensora
 
 /-! # Identification of normalized strict tensor comparisons
 
-Source: Stacks 07A4 and 0941; the canonical integral comparison realization.
-(blueprint: lem-pur-completed-comparison-strict-identification).
+The tensor component of an integral pullback comparison agrees with the normalized strict
+tensor comparison on strict quotient complexes.
+
+## References
+
+* [Stacks: Tags 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -114,12 +118,8 @@ private theorem cancel_tensor_bridge {C D : Type*} [Category C] [Category D]
     ← U.map_comp, prod_comp, Iso.inv_hom_id_app, ← prod_id]
   exact (congrArg (e.hom.app A ≫ ·) (U.map_id _)).trans (Category.comp_id _)
 
-/-- Source: Stacks 07A4 and 0941, generator normalization of the cochain comparison.
-(blueprint: lem-pur-completed-comparison-strict-identification).
-Proof: transport the normalized strong monoidal comparison across the equality of
-sequence inverse-image functors. The adjunction units transport with that equality,
-so the generator equations agree. Uniqueness fixes the resulting natural isomorphism.
-Cancel the bridge and its tensor product to recover the displayed components. -/
+/-- The tensor component of every integral pullback comparison `c` is the normalized strict
+tensor comparison. -/
 theorem completedComparisonStrictComparisonAux {X Y : Scheme.{u}} (f : X ⟶ Y)
     (c : IntegralCoherence.PullbackComparison l E f)
     (P Q : StrictQuotient.Complex l E Y) :

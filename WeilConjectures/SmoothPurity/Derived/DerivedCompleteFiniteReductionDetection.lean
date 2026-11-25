@@ -8,7 +8,17 @@ public import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructible
 import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Milnor
 /-! # Detecting maps into a complete object with finite shifted reduction Hom
 
-Source: Stacks, Lemma map-into-Rlim, and the finite-group Mittag-Leffler argument.
+This file proves that scalar reductions detect maps into a derived-complete object when the
+shifted Hom sets into its restricted reductions are finite.
+
+## Implementation details
+
+The proof is the finite-group Mittag-Leffler argument: the completeness triangle makes the
+reduction cone a homotopy limit, and the finiteness hypothesis kills the Milnor kernel.
+
+## References
+
+* [Stacks, Lemma map-into-Rlim]
 -/
 
 @[expose] public noncomputable section
@@ -57,17 +67,7 @@ private theorem reduction_cone_isHomotopyLimit
   exact h
 
 /-- Scalar reductions detect maps into a derived-complete object when the shifted
-Hom sets into its restricted reductions are finite.
-
-Source: Stacks, Lemma map-into-Rlim; the finite-group Mittag-Leffler argument.
-(blueprint: lem-sf-derived-complete-finite-reduction-detection).
-
-Proof: the defining completeness triangle makes the canonical reduction cone a
-homotopy limit. The given finite shifted Hom sets kill the Milnor kernel.
-Naturality of the scalar-adjunction units turns equality after scalar extension
-into equality of all composites with the cone legs. Milnor injectivity then gives
-equality of the original maps. No constructibility or hypothesis on the scheme
-is needed beyond the displayed finiteness and completeness assumptions. -/
+Hom sets into its restricted reductions are finite. -/
 theorem derivedComplete_finiteReduction_ext
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

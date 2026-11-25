@@ -10,8 +10,21 @@ import Mathlib.CategoryTheory.Localization.Prod
 
 /-! # Descending an open tensor comparison with its representative square
 
-Source: Stacks 06YN and 0GL1; the universal property of localization.
-(blueprint: lem-sf-native-open-tensor-derived-representative)
+Descent of an open tensor comparison along the full K-flat localizations, retaining every
+representative square (`native_open_tensor_derived_representative`).
+
+## Implementation details
+
+The tensor models on the full K-flat subcategories assemble, by naturality, into natural
+isomorphisms; their composite with the extension factorizations and the quotient of the total
+comparison descends along the product of the two quotient localizations, since precomposition with
+a localization is fully faithful. Evaluating the defining preimage equation at K-flat
+representatives gives the square.
+
+## References
+
+* [Stacks: Tag 06YN](https://stacks.math.columbia.edu/tag/06YN)
+* [Stacks: Tag 0GL1](https://stacks.math.columbia.edu/tag/0GL1)
 -/
 
 @[expose] public noncomputable section
@@ -26,19 +39,7 @@ attribute [local instance] OpenTensorDescentInput.e_add OpenTensorDescentInput.r
   OpenTensorDescentInput.r_lim OpenTensorDescentInput.r_colim
   OpenTensorDescentInput.e_zero OpenTensorDescentInput.r_zero
 
-/-- Descent along the full K-flat localizations retains every representative square.
-
-Source: Stacks 06YN and 0GL1; Mathlib's fully faithful localization precomposition.
-(blueprint: lem-sf-native-open-tensor-derived-representative)
-
-Proof: restrict the two complexes to their full K-flat subcategories. Naturality
-of the fixed tensor models assembles their components into natural isomorphisms.
-Compose the extension factorization, ambient tensor model, quotient of the total
-comparison, inverse extension factorization, inverse open tensor model, and inverse
-restriction factorization. The product of the two quotient localizations is a
-localization. Fully faithful precomposition therefore descends this isomorphism.
-Evaluate its defining preimage equation at any two K-flat representatives. The
-inverse model and factorization pairs cancel and give the claimed square. -/
+/-- Descent along the full K-flat localizations retains every representative square. -/
 theorem native_open_tensor_derived_representative
     {A B : Type a} [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B]
     [HasDerivedCategory.{b} A] [HasDerivedCategory.{b} B]

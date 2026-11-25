@@ -24,7 +24,17 @@ import all Mathlib.Logic.Small.Defs
 
 The common-stage associator and braiding constraints, using the finite
 normalized constraints and the directed-stage representative calculation.
-(blueprint: lem-pur-derived-pullback-tensor-constraints).
+
+## Implementation details
+
+The rational braiding scalar square is obtained by localizing the integral square
+`integralBraidingScalarExtensionSquare`. The common-stage braiding is obtained by conjugating
+the rational braiding by the transition/tensor comparisons; their scalar-extension cocycles show
+independence of the enlargement, and a representative determines its colimit Hom class.
+
+## References
+
+* Stacks Project, Tags 06YS, 07A4, 0941, 0FPQ
 -/
 
 @[expose] public noncomputable section
@@ -320,20 +330,8 @@ private theorem scalarBraiding_hom_local
   rw [← Q.map_comp, ← Q.map_comp]
   exact congrArg Q.map (integralBraidingScalarExtensionSquare l E F ι X K.obj L.obj)
 
-/-- The rationalized Koszul braiding commutes with the prescribed scalar comparison.
-
-Source: literature/stacks-project/sites-cohomology.tex, Tag 0FPQ; the integral
-compatibility is `integralBraidingScalarExtensionSquare`, and localization of the
-specified maps preserves the square. This includes identity and ramified extensions.
-Proof: Every rational object is the localization of its integral object, so the
-source and target tensor objects are localized integral tensor objects. The
-defining equations of the prescribed rational comparison and braiding identify
-them with localizations of the integral comparison and braiding. Scalar extension
-sends the localized arrow `1 ⊗ f` to the localization of the integral scalar
-extension of `f`. Both composites are then the localization functor applied to
-the two composites of the integral scalar square, which agree.
-(blueprint: lem-pur-rational-braiding-scalar-extension-square).
--/
+/-- The rationalized Koszul braiding commutes with the prescribed scalar comparison,
+for identity and ramified extensions alike. -/
 theorem rationalBraidingScalarExtensionSquare
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
@@ -390,9 +388,7 @@ attribute [local irreducible] rationalDerivedTensor sfRationalScalarExtension
   rationalTensorScalarComparison ObjectProperty.FullSubcategory.category ScalarLocalization.category
   pullbackTensorRationalBraiding pullbackTensorIntegralBraiding
 
-/-- Existence half of the normalized constraint; uniqueness is proved by the parent theorem.
-Source: Stacks 06YS, 07A4, 0941.
-(blueprint: lem-pur-derived-pullback-tensor-constraints-common-braiding-existence). -/
+/-- Existence half of the normalized common-stage braiding constraint. -/
 theorem pullbackTensorCommonBraiding_exists (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
@@ -495,13 +491,7 @@ end CommonBraidingDescent
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The common-stage braiding has its prescribed representative at every larger field.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Conjugate the rational braiding
-by the
-  displayed transition/tensor comparisons. Their scalar-extension cocycles show independence of
-  enlargement. The inverse formula gives an inverse class. Directedness supplies common stages, and
-  a representative determines its colimit hom class uniquely. -/
+/-- The common-stage braiding has its prescribed representative at every larger field. -/
 theorem pullbackTensorCommonBraiding_existsUnique (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
@@ -531,9 +521,7 @@ theorem pullbackTensorCommonBraiding_existsUnique (W : Scheme.{u})
   let hT := ((Padic.finiteCoefficientFields_properties l Ω).1 S.stage T.stage).2
   exact eq_of_heq ((hd L hS hT).trans (he L hS hT).symm)
 
-/-- The stage-independent rational braiding class.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The stage-independent rational braiding class. -/
 def pullbackTensorCommonBraiding (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N : generalAlgebraicallyClosedConstructibleCategory l Ω W) :=

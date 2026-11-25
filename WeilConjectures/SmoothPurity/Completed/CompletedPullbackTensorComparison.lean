@@ -13,10 +13,20 @@ import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 
 /-! # Common-stage pullback/tensor comparison
 
-Source: Stacks 07A4, 0941 and the blueprint common-stage coefficient convention.
-(blueprint: def-pur-completed-pullback-tensor-comparison)
+This file defines the canonical pullback/tensor comparison
+`f^*(P ⊗ Q) ≅ f^*P ⊗ f^*Q` for algebraically closed coefficients, represented at every
+sufficiently large common finite coefficient stage. The integral, rational and finite
+constructions are re-exported unchanged.
 
-The integral, rational and finite constructions are re-exported unchanged.
+## Implementation details
+
+The comparison is represented at the finite compositum stage; the rational scalar-extension
+square shows that the same formula at any larger stage is the transition of that representative,
+so every allowed stage represents the same arrow and the isomorphism is unique.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -73,14 +83,9 @@ attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- The algebraically closed comparison is the actual common-stage class at
-EVERY larger finite coefficient stage, so enlargement and scalar extension are fixed.
-Source: blueprint common-stage paragraph (blueprint: def-pur-completed-pullback-tensor-comparison).
-Proof: represent the comparison at the finite compositum by the preceding formula.
-The rational scalar-extension square makes the same formula at any larger stage
-the transition of that representative. The inverse formula gives the inverse
-class. Every allowed stage therefore represents the same arrow. In particular
-the compositum formula determines the arrow, hence determines the isomorphism uniquely. -/
+/-- There is a unique isomorphism `f^*(P ⊗ Q) ≅ f^*P ⊗ f^*Q` of algebraically closed
+coefficient objects that is represented by the common-stage comparison at every finite
+coefficient stage containing the common stage of `P ⊗ Q`. -/
 theorem canonicalCommonStagePullbackTensor_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
@@ -191,9 +196,8 @@ theorem canonicalCommonStagePullbackTensor_existsUnique {X Y : Scheme.{u}} (f : 
     intro e' he'
     exact Iso.ext (eq_of_heq ((he' H le_rfl).trans (he H le_rfl).symm))
 
-/-- The stage-independent canonical comparison in the actual colimit Hom group.
-Source: blueprint common-stage paragraph (blueprint: def-pur-completed-pullback-tensor-comparison).
--/
+/-- The stage-independent canonical pullback/tensor comparison of
+`canonicalCommonStagePullbackTensor_existsUnique`. -/
 def canonicalCommonStagePullbackTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :

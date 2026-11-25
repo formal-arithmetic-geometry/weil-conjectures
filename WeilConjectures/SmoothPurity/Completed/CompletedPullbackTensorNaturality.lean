@@ -10,8 +10,17 @@ import WeilConjectures.SmoothPurity.OperationsScalarLocalization.DerivedScalarLo
 
 /-! # Naturality of the localized canonical pullback/tensor comparison
 
-Source: Stacks 07A4 and the rationalization paragraph of the blueprint.
-(blueprint: lem-pur-canonical-rational-pullback-tensor-naturality)
+The canonical rational comparison `f^*(M ⊗ N) ≅ f^*M ⊗ f^*N` is natural in `M` and `N`.
+
+## Implementation details
+
+The integral comparison is a natural isomorphism; after scalar localization, on pure tensors
+`a ⊗ f` and `b ⊗ g` both sides equal `ab ⊗` the same integral composite, and bilinearity
+extends this to all rational arrows.
+
+## References
+
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public noncomputable section
@@ -115,21 +124,8 @@ private theorem integralComparisonIso_app
     Functor.comp_obj, Functor.prod_obj, Functor.comp_map, Functor.prod_map,
     Category.assoc]
 
-/-- The fixed rational comparison is natural in both inputs.
-Source: Stacks 07A4; blueprint common-stage coefficient paragraph
-(blueprint: lem-pur-canonical-rational-pullback-tensor-naturality).
-Proof: the coherent comparison is a natural isomorphism. Whisker its hom with
-reduction in both inputs and the actual derived limit. The two coherent counits
-are natural, and their inverses on the normalized input systems are natural by
-cancellation. The integral operation realization isomorphisms are natural as well,
-so their conjugated comparison is natural on the full constructible subcategory.
-Apply scalar localization to this equality. On pure tensors a tensor f and
-b tensor g, the rational pullback formula preserves a and the rational tensor
-formula multiplies the two scalars. Both sides are therefore ab tensor the same
-integral composite. Bilinearity extends this identity to all rational arrows.
-The normalization of canonicalRationalPullbackTensor identifies its components
-with these localized integral components, including zero objects and identity
-coefficient extensions. -/
+/-- The canonical rational comparison `f^*(M ⊗ N) ≅ f^*M ⊗ f^*N` is natural in both
+inputs. -/
 theorem canonicalRationalPullbackTensor_naturality
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

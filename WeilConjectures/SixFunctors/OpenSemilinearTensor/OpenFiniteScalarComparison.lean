@@ -11,8 +11,12 @@ import WeilConjectures.SixFunctors.OpenSemilinearTensor.OpenFiniteScalarUnitTran
 
 /-! # Generator-normalized scalar comparison at finite levels
 
-Source: Stacks Project, Modules on Sites, Tags 03DI, 03EK and 0E8I.
-(blueprint: lem-sf-open-finite-scalar-comparison).
+We construct, at each finite coefficient level, the unique scalar comparison preserving every
+scalar-unit extension summand.
+
+## References
+
+* Stacks Project, Tags 03DI, 03EK and 0E8I
 -/
 
 @[expose] public noncomputable section
@@ -342,23 +346,7 @@ private theorem level_exists (o : Operations l E j) (n : ℕ) :
 
 set_option linter.unusedVariables false in
 /-- There is a unique family of finite scalar comparisons preserving every scalar-unit
-extension summand. This asserts no compatibility between different coefficient levels.
-Source: Stacks 03DI, 03EK and 0E8I; finite-level part of the strict scalar transport
-(blueprint: lem-sf-open-finite-scalar-comparison).
-
-Proof: at level n specialize the ringed-slice scalar generator comparison to the
-completed coefficient sheaf and its projection to the nth quotient. The component is
-linear over the quotient ring, hence is an isomorphism before scalar restriction.
-Transport its source by the completed coefficient equivalence and its target by the
-finite coefficient equivalence. The equality `o.projections n` identifies the two
-scalar restriction functors under these equivalences. Use the unique comparison of
-left adjoints preserving units to identify the scalar extensions. The specified
-forward-functor equalities say these transports act on the original sections, so the
-component formula at coefficient one is exactly `TensorComparison.generators`.
-For uniqueness, two such maps agree after precomposition with the scalar-adjunction
-unit, since maps out of open extension are determined by their original summands.
-Scalar-adjunction injectivity makes the maps equal; natural transformations and their
-inverse isomorphisms are therefore equal. Apply this independently at every n. -/
+extension summand. This asserts no compatibility between different coefficient levels. -/
 theorem existsUnique_openFiniteScalarComparison (o : Operations l E j) :
     ∃! tc : IntegralOpenReduction.TensorComparison l E j o, True := by
   choose e he using level_exists l E j o

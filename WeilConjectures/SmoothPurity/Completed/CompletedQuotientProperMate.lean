@@ -12,10 +12,17 @@ import all WeilConjectures.ProperBaseChange.IntegralCoefficientPresentation.Inte
 
 /-! # Proper quotient coefficient mate
 
-Source: Bhatt--Scholze Lemmas 6.7.7 and 6.1.13; Stacks Tag 0GL6.
-(blueprint: lem-pur-completed-quotient-proper-mate).
-The lower normalization calculation is reused from QcqsCompactSupportFiniteMates
-without importing that consumer of the integral comparison module.
+This module shows that the proper quotient scalar mate is invertible on every derived input.
+
+## Implementation details
+
+The lower normalization calculation is reused from `QcqsCompactSupportFiniteMates` without
+importing that consumer of the integral comparison module.
+
+## References
+
+* Bhatt--Scholze, Lemmas 6.7.7 and 6.1.13
+* Stacks Project, Tag 0GL6
 -/
 
 @[expose] public noncomputable section
@@ -265,15 +272,7 @@ private theorem projection_square (n : ℕ) (hn : 1 ≤ n)
 
 attribute [-instance] CompletedCoefficientPushforward.modAbelian
   CompletedCoefficientPushforward.hasDerived in
-/-- The actual proper quotient scalar mate is invertible on every derived input.
-Source: Bhatt--Scholze Lemmas 6.7.7 and 6.1.13; Stacks Tag 0GL6.
-(blueprint: lem-pur-completed-quotient-proper-mate).
-Proof: identify the ordinary restriction square by its identity section maps.
-Uniqueness on K-injective complexes identifies its derived square with the
-normalized finite reduction square. Transport the known quotient projection
-formula through the two scalar adjunctions. Finally substitute the completed
-and finite inverse-image identifications; proof irrelevance identifies their
-commutative-square witnesses. This applies to zero objects and all shifts. -/
+/-- The proper quotient scalar mate is invertible on every derived input. -/
 theorem completedQuotientProperMate
     (a : Change (completed l E) (finite l E (n + 1) (Nat.le_add_left 1 n)))
     (hmap : ∀ W, a.map W = projection l E (n + 1) (Nat.le_add_left 1 n) W)

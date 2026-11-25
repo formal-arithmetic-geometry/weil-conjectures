@@ -10,7 +10,11 @@ import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedScalarRightSubsti
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+This file proves the uncancelled right coordinate of the completed scalar route.
+
+## References
+
+* [Stacks, Tags 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -64,14 +68,7 @@ private theorem cancel_transport {C : Type*} [Category C] {a b c d : C}
 attribute [local irreducible] coefficientSequenceLimit coefficientConstantTowerLimit
   HasDerivedCategory.standard
 
-/-- The uncancelled completed scalar right coordinate.
-Source: Stacks 07A4 and 0941; quotient scalar-route proof.
-(blueprint: lem-pur-completed-scalar-right-coordinate).
-
-Proof: cancel the inverse target substitution in E transport. Scalar substitution naturality
-moves this transported map across the strict E comparison. Apply tensor scalar substitution at X
-and the pullback scalar substitution law on each input; tensor substitution naturality combines
-the two kappa factors. -/
+/-- The uncancelled completed scalar right coordinate. -/
 theorem scalarRouteRightCoordinate
     {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)
     [∀ z : Z, Invertible (l : Z.residueField z)]

@@ -11,7 +11,7 @@ set_option linter.privateModule false
 
 /-! # A step of normalized compact-support scalar comparison
 
-Source: proposition-six-operations-change-coefficients, compact-support and final paragraphs.
+Auxiliary setup for comparing compact-support pushforward with change of coefficients.
 -/
 
 @[expose] public noncomputable section

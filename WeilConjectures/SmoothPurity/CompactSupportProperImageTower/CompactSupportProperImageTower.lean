@@ -16,14 +16,24 @@ import WeilConjectures.TraceFormula.Compact.CompactSupportSystemEvaluationCohere
 /-!
 # The proper-image and compact-support quotient towers
 
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks Tags 0GL1 and 0E8I;
-blueprint main-20261015, `def-weil-integral-rational-qbar-compact-support`
-(blueprint: lem-sf-compact-support-proper-image-tower).
+For a compactification `f = p ∘ j` and a derived complete complex `K`, this file compares the
+tower of reductions of the proper direct image `Rp_*` with the tower of compact-support levels
+`Rp_* j_!` of the finite reductions of `K`, and shows the two inverse systems are isomorphic
+(`compactSupportProperImageTower`).
 
-Index n denotes exponent n+1. All coefficient categories are the recorded module-sheaf
-categories on the small pro-etale site, with independent site and coefficient universes.
-The presentation data below retain the section-normalized open restriction comparison
-and the K-injective-normalized direct-image comparison; they are supplied in the conclusion.
+## Implementation details
+
+Index `n` denotes exponent `n + 1`. All coefficient categories are module-sheaf categories on
+the small pro-étale site, with independent site and coefficient universes. The presentation data
+`DirectData` and `OpenData` retain the section-normalized open restriction comparison and the
+K-injective-normalized direct-image comparison; they are supplied in the conclusion of the main
+theorem. The proof uses the ordinary unbounded direct images, with no constructibility or Tor
+bound.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 6.7.6 and Lemma 6.7.7.
+* Stacks Project, Tags 0030, 015F, 06YY, 0D6E, 0E8I, 0GL1.
 -/
 
 @[expose] public noncomputable section
@@ -44,10 +54,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Presentation of the canonical finite direct images and their coefficient comparisons.
-The underived comparison is identity on sections; the derived comparison is its normalized
-resolution comparison, without assuming that restriction preserves K-injectives.
-Source: Stacks 0D6E; node proof Steps 2--3
-(blueprint: lem-sf-compact-support-proper-image-tower). -/
+The underived comparison is the identity on sections; the derived comparison is its normalized
+resolution comparison. -/
 class DirectData {V Y : Scheme.{t}} (p : V ⟶ Y) where
   [additive : ∀ n : ℕ, (compactSupportLevelDirectImage l E p n).Additive]
   [kInjective : ∀ n : ℕ, Abelian.HasKInjectiveResolutions (normalizedDVRModules l E V n)]
@@ -73,9 +81,7 @@ attribute [instance] DirectData.additive DirectData.kInjective
 variable {X V Y : Scheme.{t}} (j : X ⟶ V) [IsOpenImmersion j] (p : V ⟶ Y)
 
 /-- The canonical finite open/scalar-restriction identification, given on ordinary module
-sheaves and normalized by the same section on every extension summand.
-Source: Stacks 0E8I; node proof Step 1
-(blueprint: lem-sf-compact-support-proper-image-tower). -/
+sheaves and normalized by the same section on every extension summand. -/
 structure OpenData (o : IntegralOpenReduction.Operations l E j) where
   ordinary : ∀ n : ℕ,
     normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙
@@ -94,9 +100,7 @@ structure OpenData (o : IntegralOpenReduction.Operations l E j) where
 
 variable (o : IntegralOpenReduction.Operations l E j)
 
-/-- The localized canonical open/scalar comparison.
-Source: Stacks 015F and 0E8I; node proof Step 1
-(blueprint: lem-sf-compact-support-proper-image-tower). -/
+/-- The localized canonical open/scalar comparison. -/
 def openRestriction (e : OpenData l E j o) (n : ℕ) :
     normalizedDVRRes l E X (Nat.le_succ n) ⋙ compactSupportCanonicalJLevel l E j o (n + 1) ≅
       compactSupportCanonicalJLevel l E j o n ⋙ normalizedDVRRes l E V (Nat.le_succ n) :=
@@ -107,10 +111,8 @@ by
   letI := normalizedDVRModuleRes_colimits l E V (Nat.le_succ n)
   exact Functor.mapDerivedCategorySquareIso (e.ordinary n)
 
-/-- The quotient map is the transpose of the actual smaller-level scalar-extension unit.
-Thus it is id tensor quotient on K-flat representatives.
-Source: Stacks 06YY; node proof Steps 1--2
-(blueprint: lem-sf-compact-support-proper-image-tower). -/
+/-- The quotient map from level `n + 1` to level `n`, the transpose of the smaller-level
+scalar-extension unit; on K-flat representatives it is `id ⊗ quotient`. -/
 def reductionMap (W : Scheme.{t}) (K : DerivedCategory (scalarReductionSource l E W))
     (n : ℕ) :
     (coefficientFiniteDerivedExtension l E W (n + 1)).obj K ⟶
@@ -121,9 +123,7 @@ def reductionMap (W : Scheme.{t}) (K : DerivedCategory (scalarReductionSource l 
       (compactSupportSystemRestrictionComp l E W (Nat.le_succ n)).inv.app
         ((coefficientFiniteDerivedExtension l E W n).obj K))
 
-/-- The evaluated canonical strict open-reduction comparison alpha_n.
-Source: Stacks 0GL1 and 0E8I; node proof Step 1
-(blueprint: lem-sf-compact-support-proper-image-tower). -/
+/-- The evaluated canonical strict open-reduction comparison `α_n`. -/
 def alpha (SV : CoefficientDerivedSystemCalculus l E V)
     (SX : CoefficientDerivedSystemCalculus l E X)
     (tensor : IntegralOpenReduction.TensorComparison l E j o)
@@ -150,27 +150,22 @@ def alpha (SV : CoefficientDerivedSystemCalculus l E V)
 
 variable [d : DirectData l E p]
 
-/-- The proper-image reduction level N_n, restricted to the completed coefficients of Y.
-Source: Bhatt--Scholze 6.7.6; node statement
-(blueprint: lem-sf-compact-support-proper-image-tower). -/
+/-- The proper-image reduction level `N_n`, restricted to the completed coefficients of `Y`. -/
 def properLevel (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :=
   (coefficientFiniteDerivedRestriction l E Y n).obj
     ((compactSupportLevelDirectImage l E p n).rightDerivedFunctor.obj
       ((coefficientFiniteDerivedExtension l E V n).obj
         ((IntegralOpenReduction.shriek l E j o).obj K)))
 
-/-- The compact-support level M_n uses exactly the finite composite Rp_* j_!.
-Source: Bhatt--Scholze 6.7.6; node statement
-(blueprint: lem-sf-compact-support-proper-image-tower). -/
+/-- The compact-support level `M_n`, given by the finite composite `Rp_* j_!`. -/
 def supportLevel (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :=
   (coefficientFiniteDerivedRestriction l E Y n).obj
     ((compactSupportLevelDirectImage l E p n).rightDerivedFunctor.obj
       ((compactSupportCanonicalJLevel l E j o n).obj
         ((coefficientFiniteDerivedExtension l E X n).obj K)))
 
-/-- The proper transition is Res_(n + 1) of Rp_*(d_n) followed by C_n.
-The final comparison is the actual composition of coefficient restrictions.
-Source: node proof Step 2 (blueprint: lem-sf-compact-support-proper-image-tower). -/
+/-- The proper transition: `Res_(n + 1)` of `Rp_*(d_n)` followed by the direct-image
+coefficient comparison `C_n` and the composition of coefficient restrictions. -/
 def properTransition (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :
     properLevel l E j p o K (n + 1) ⟶ properLevel l E j p o K n :=
   (coefficientFiniteDerivedRestriction l E Y (n + 1)).map
@@ -184,9 +179,8 @@ def properTransition (K : DerivedCategory (scalarReductionSource l E X)) (n : �
         ((coefficientFiniteDerivedExtension l E V n).obj
           ((IntegralOpenReduction.shriek l E j o).obj K)))
 
-/-- The compact-support transition applies j_! and Rp_* to quotient reduction, then
-uses the canonical open restriction identification and the same C_n.
-Source: node proof Step 2 (blueprint: lem-sf-compact-support-proper-image-tower). -/
+/-- The compact-support transition: `Rp_* j_!` applied to quotient reduction, followed by the
+canonical open restriction identification and the same comparison `C_n`. -/
 def supportTransition (e : OpenData l E j o)
     (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :
     supportLevel l E j p o K (n + 1) ⟶ supportLevel l E j p o K n :=
@@ -203,9 +197,7 @@ def supportTransition (e : OpenData l E j o)
         ((compactSupportCanonicalJLevel l E j o n).obj
           ((coefficientFiniteDerivedExtension l E X n).obj K)))
 
-/-- The specified component beta_n = Res_n Rp_*(alpha_n), including its inverse.
-Source: node statement and proof Step 4
-(blueprint: lem-sf-compact-support-proper-image-tower). -/
+/-- The component isomorphism `β_n = Res_n Rp_*(α_n)`. -/
 def beta (SV : CoefficientDerivedSystemCalculus l E V)
     (SX : CoefficientDerivedSystemCalculus l E X)
     (tensor : IntegralOpenReduction.TensorComparison l E j o)
@@ -216,16 +208,12 @@ def beta (SV : CoefficientDerivedSystemCalculus l E V)
     ((compactSupportLevelDirectImage l E p n).rightDerivedFunctor.mapIso
       (alpha l E j o SV SX tensor r K n))
 
-/-- The proper-image tower as an ordinary inverse system in D(R_Y).
-Source: Stacks 0030; node proof Step 4
-(blueprint: lem-sf-compact-support-proper-image-tower). -/
+/-- The proper-image tower as an inverse system in `D(R_Y)`. -/
 def properTower (K : DerivedCategory (scalarReductionSource l E X)) :
     ℕᵒᵖ ⥤ DerivedCategory (scalarReductionSource l E Y) :=
   Functor.ofOpSequence (properTransition l E j p o K)
 
-/-- The compact-support tower with its specified quotient transitions.
-Source: Stacks 0030; node proof Step 4
-(blueprint: lem-sf-compact-support-proper-image-tower). -/
+/-- The compact-support tower with its quotient transitions. -/
 def supportTower (e : OpenData l E j o) (K : DerivedCategory (scalarReductionSource l E X)) :
     ℕᵒᵖ ⥤ DerivedCategory (scalarReductionSource l E Y) :=
   Functor.ofOpSequence (supportTransition l E j p o e K)
@@ -266,27 +254,10 @@ private theorem towerIsoOfSteps
   have : IsIso τ := (NatTrans.isIso_iff_isIso_app τ).mpr inferInstance
   exact ⟨asIso τ, fun _ ↦ rfl⟩
 
-/-- The canonical components give an isomorphism of the two specified inverse systems.
-Source: Bhatt--Scholze 6.7.6--6.7.7; Stacks 0GL1, 0E8I and 0030;
-blueprint main-20261015, integral compact-support formula
-(blueprint: lem-sf-compact-support-proper-image-tower).
-Proof:
-1. Evaluate the strict open-reduction comparison on a complete K. Its strict quotient
-square says S(alpha_n) d_n = e_n j_!(k_n) alpha_(n + 1); both open identifications
-are the identity on the underlying open sections (the open-reduction and compact-support
-restriction-of-scalars lemmas).
-2. Write D_n = Rp_*. The proper transition before restriction is C_n D_(n + 1)(d_n).
-The support transition is C_n D_(n + 1)(e_n) D_(n + 1)(j_!(k_n)), exactly the composite
-specified by the compact-support restriction-of-scalars lemma.
-3. Naturality of the normalized direct-image comparison at alpha_n and functoriality
-of D_(n + 1), followed by the square in Step 1, give
-S(D_n(alpha_n)) C_n D_(n + 1)(d_n) = t^M_n D_(n + 1)(alpha_(n + 1)).
-This uses the ordinary unbounded direct images, with no constructibility or Tor bound.
-4. Restrict to R_Y. Composing scalar restrictions is identity on underlying sections,
-so the equation becomes t^N_n beta_n = beta_(n + 1) t^M_n in Lean composition order.
-Each beta_n is invertible. The equations construct a natural transformation of the
-ofOpSequence functors; the component inverses also commute with the transitions,
-so this transformation is an isomorphism. All m>=n equations follow by composition. -/
+/-- For a separated morphism `f` of finite type `K₀`-schemes with `l` invertible and a
+compactification `f = p ∘ j`, the components `β_n` commute with the proper and compact-support
+transitions, and hence give an isomorphism between the proper-image tower and the
+compact-support tower of every derived complete `K`. -/
 theorem compactSupportProperImageTower
     (K₀ : Type t) [Field K₀]
     [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]

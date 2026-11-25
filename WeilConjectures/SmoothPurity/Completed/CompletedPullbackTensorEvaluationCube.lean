@@ -91,9 +91,18 @@ import all WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Categorical evaluation tensor cube transport
 
-This is the abstract transport step for the representative evaluation square.
-Source: Stacks 07A4, Tags 0941 and 03D2.
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-cube-model).
+For K-flat inputs, the evaluated pullback tensor comparison of coefficient sequences agrees
+with the finite pullback tensor comparison, transported through the evaluation squares.
+
+## Implementation details
+
+The equality is obtained by pasting the faces of a cube: the ordinary cochain evaluation
+identity (the diagonal face), the sequence comparison normalization, the two evaluation
+tensor normalizations, and finite pullback tensor normalization.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941 and 03D2.
 -/
 
 @[expose] public noncomputable section
@@ -138,18 +147,9 @@ private theorem finite_comparison_app {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   rfl
 
 -- The pasted cube uses several chosen derived models with large implicit types.
-/-- Transport the K-flat evaluation squares through the canonical finite comparison.
-Source: Stacks, sites-cohomology.tex, Tags 07A4, 0941 and 03D2
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-cube-model).
-Proof: evaluate the sequence pullback of the K-flat inputs and transport K-flatness
-across the ordinary evaluation mate. Apply finite pullback tensor normalization to
-obtain its ordinary cochain comparison. The ordinary cochain evaluation identity,
-after the derived quotient, and naturality of the exact-functor factorizations give
-the diagonal face of the cube. The other faces are the sequence comparison
-normalization, the two supplied evaluation normalizations, and finite normalization.
-Naturality pastes these faces. Cancelling the invertible tensor-model comparisons
-and exact-functor factorizations gives the displayed equality.
--/
+/-- For K-flat `P` and `Q`, the evaluated pullback tensor comparison of coefficient
+sequences agrees with the canonical finite pullback tensor comparison, transported through
+the evaluation and tensor-evaluation isomorphisms. -/
 theorem completedPullbackTensor_evaluation_cube_model {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]

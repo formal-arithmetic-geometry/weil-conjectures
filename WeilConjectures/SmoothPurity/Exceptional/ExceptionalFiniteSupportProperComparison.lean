@@ -6,8 +6,9 @@ Authors: Bin Wu
 module
 public import WeilConjectures.SmoothPurity.Exceptional.ExceptionalFiniteRealization
 /-! # Strict-presentation proper derived comparison
-Source: blueprint def-pur-adic-support-realization.
-(blueprint: lem-pur-adic-support-proper-derived-adapter).
+
+We specialize the uniquely normalized derived right comparison of the adic étale realization
+to the strict coefficient presentation used at the compact-support level.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -29,14 +30,7 @@ variable (c : Compactification g)
 
 set_option linter.unusedVariables false in
 /-- The proper derived comparison is also available with the strict coefficient
-presentation used by the compact-support level.
-Source: blueprint def-pur-adic-support-realization
-(blueprint: lem-pur-adic-support-proper-derived-adapter).
-Proof: the uniquely normalized derived right comparison of
-`def-pur-adic-etale-realization`, specialized to the morphism `c.g`, the
-ordinary-image record `S.properImage` and the derived record
-`S.properDerived.level n`, has exactly the required type; take it as the
-witness, the remaining predicate being `True`. -/
+presentation used by the compact-support level. -/
 theorem integralExceptionalEtaleProperDerivedRight_exists (n : ℕ) :
     ∃ e : (S.properDerived.level n).direct ⋙
       (integralExceptionalEtaleRealization l E Y n).mapDerivedCategory ≅

@@ -12,8 +12,19 @@ import all WeilConjectures.Algebra.Homology.Ringed.RingedOpenTotalTensorKFlat
 
 /-! # Totalizing a normalized open tensor comparison
 
-Source: Stacks 012Z and 0GL1.
-(blueprint: lem-sf-native-open-tensor-total-comparison)
+A natural comparison of tensor bifunctors totalizes to an isomorphism of total
+complexes with a prescribed summand formula (`native_open_tensor_total_comparison`).
+
+## Implementation details
+
+The inverse of the given natural isomorphism is curried and fed to `comparisonPrecomposeIso`, whose
+naturality in both complexes assembles an isomorphism of the uncurried total bifunctors. No
+boundedness or nonvanishing assumption is used.
+
+## References
+
+* [Stacks: Tag 012Z](https://stacks.math.columbia.edu/tag/012Z)
+* [Stacks: Tag 0GL1](https://stacks.math.columbia.edu/tag/0GL1)
 -/
 
 @[expose] public noncomputable section
@@ -23,17 +34,7 @@ universe u a b
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace NativeExtensionDescentProof
 
-/-- A natural sheaf projection comparison totalizes with its prescribed summand formula.
-
-Source: Stacks 012Z and 0GL1; comparisonPrecomposeIso and its insertion equation.
-(blueprint: lem-sf-native-open-tensor-total-comparison)
-
-Proof: curry the inverse of the given natural isomorphism and apply the existing
-comparisonPrecomposeIso construction. Its naturality in both complexes assembles
-these maps into an isomorphism of the uncurried total bifunctors. Invert it.
-Postcompose the desired summand equality with the degreewise forward isomorphism;
-the insertion equation and the inverse identities prove the resulting equality.
-No boundedness or nonzero assumption is used. -/
+/-- A natural sheaf projection comparison totalizes with its prescribed summand formula. -/
 theorem native_open_tensor_total_comparison
     {A B : Type a} [Category.{b} A] [Category.{b} B]
     [Abelian A] [Abelian B] [HasCountableCoproducts A] [HasCountableCoproducts B]

@@ -10,7 +10,12 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+We transport the fixed completed pullback realization to the comparison interface and compute
+substitution through it.
+
+## References
+
+* Stacks Project, Tags 03D2, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -70,11 +75,9 @@ private theorem derivedPullBridge_factors {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact (Functor.mapDerivedCategoryNatIso_fac
     (eqToIso (sequencePullback_eq l E f)) A).symm
 
-/-- The fixed completed pullback realization transported to the comparison interface.
-Source: Stacks 03D2, 0941; quotient scalar-coordinate normalization.
-(blueprint: def-pur-completed-quotient-pullback-realization).
-The transport is the natural isomorphism on derived categories induced by the
-proved equality of the two strict sequence inverse-image functors. -/
+/-- The fixed completed pullback realization transported to the comparison interface:
+the natural isomorphism on derived categories induced by the equality of the two strict
+sequence inverse-image functors. -/
 def completedQuotientPullbackRealization {X Y : Scheme.{u}} (f : X ⟶ Y) :
     integralDerivedPullback l E f ≅ (pullbackTensorCalculus l E Y).reduction ⋙
       integralComparisonDerivedSequencePullback l E f ⋙ coefficientSequenceLimit l E X :=
@@ -84,13 +87,7 @@ def completedQuotientPullbackRealization {X Y : Scheme.{u}} (f : X ⟶ Y) :
         (Functor.mapDerivedCategoryNatIso (eqToIso (sequencePullback_eq l E f)))
         (coefficientSequenceLimit l E X))
 
-/-- Substitution through the transported pullback realization.
-Source: quotient scalar-coordinate proof, pullback normalization step.
-(blueprint: def-pur-completed-quotient-pullback-realization).
-Proof: naturality of the derived transport moves the coherent reduction to its
-left. The derived quotient factorization formula then converts its last factor
-into the quotient image of the strict bridge; functoriality of total limit gives
-the defining formula for pullSubstitution. -/
+/-- Substitution through the transported pullback realization. -/
 theorem completedQuotientPullbackRealization_substitution {X Y : Scheme.{u}} (f : X ⟶ Y)
     {K : DerivedCategory (scalarReductionSource l E Y)} (A : StrictQuotient.Complex l E Y)
     (β : K ⟶ (coefficientSequenceLimit l E Y).obj (DerivedCategory.Q.obj A)) :

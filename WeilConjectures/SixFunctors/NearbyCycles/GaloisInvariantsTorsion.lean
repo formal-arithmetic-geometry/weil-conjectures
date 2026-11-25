@@ -27,8 +27,11 @@ For a model over a strictly henselian trait whose generic fibre lies over the ge
 `η = Spec L` and `Ω` the separable closure of `L`, the group `Gal(Ω/L)` is the inertia group `I`,
 and for a closed subgroup `P ⊆ I` with fixed field `L_P = Ω^P`, `N_{L_P}` is the model with generic
 fibre over `L_P`; applied to `Ω/L_P` this gives `Ψ_{N_{L_P}} = (Ψ_{N_Ω})^P` (SGA 4½, [Th. finitude],
-Lemme 3.4; blueprint `proposition-external-kunneth-formula-nearby-cycles`, identification (2)), for
-pro-`p` `P`.
+Lemme 3.4), for pro-`p` `P`.
+
+## References
+
+* [SGA 4½], [Th. finitude], Lemme 3.4.
 -/
 
 @[expose] public section

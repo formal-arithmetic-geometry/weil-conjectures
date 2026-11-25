@@ -14,8 +14,21 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Normalized adjoints of strict DVR coefficient maps
 
-Source: Stacks Tags 06YS, 06YY, 03EK and 05RT; blueprint DVR effectivity,
-proof paragraphs 3--4. (blueprint: lem-coef-normalized-dvr-strict-coefficient-adjoint).
+This file computes the normalized adjoint of a strict finite-coefficient map: it is the cone map
+with shifted component zero and unshifted component the given map
+(`normalizedDVR_strict_coefficient_adjoint`).
+
+## Implementation details
+
+The calculation applies the normalized regular quotient augmentation to the completed uniformizer
+power and its finite quotient, computes the map on K-flat resolutions, and identifies the regular
+scalar cone with the linear scalar cone by sectionwise equality of scalar multiplication.
+Localization uniqueness and uniqueness of left adjoints transport the formula to the specified
+adjunction. No tower, limit or fullness of derived restriction is involved.
+
+## References
+
+* [Stacks Project, Tags 06YS, 06YY, 03EK, 05RT and 07A6][stacks-project]
 -/
 
 @[expose] public noncomputable section
@@ -207,19 +220,7 @@ private def cone_iso (n : ℕ) :
   exact Functor.isoWhiskerRight e CochainComplex.ConeCoimage.cone
 
 /-- The strict finite-coefficient adjoint is the cone map with shifted component
-zero and unshifted component f, for one natural comparison of derived functors.
-
-Source: Stacks 06YY and 07A6 and the blueprint DVR effectivity regular quotient
-calculation. (blueprint: lem-coef-normalized-dvr-strict-coefficient-adjoint).
-
-Proof: apply the normalized regular quotient augmentation to the completed
-uniformizer power and its actual finite quotient. The strict adjoint formula
-computes the map on K-flat resolutions and transports it by naturality. Identify
-the regular scalar cone with the linear scalar cone by sectionwise equality of
-scalar multiplication. Localization uniqueness lifts this comparison to every
-derived morphism and identifies the two exact restriction lifts. Uniqueness of
-left adjoints transports the formula to the specified adjunction. This calculation
-has no tower, no limit and no fullness of derived restriction hypothesis. -/
+zero and unshifted component f, for one natural comparison of derived functors. -/
 private theorem strict_coefficient_adjoint_core (n : ℕ)
     (adj : scalarReductionDerivedExtension l E X n ⊣
       scalarReductionDerivedRestriction l E X n) :
@@ -373,17 +374,7 @@ local instance normalizedFiniteDerived (n : ℕ) :
     HasDerivedCategory (normalizedDVRModules l E X n) := HasDerivedCategory.standard _
 
 /-- The strict finite-coefficient adjoint formula in the completed-coefficient
-presentation used by normalized DVR towers.
-
-Source: Stacks 06YY and 07A6, the regular quotient calculation in DVR effectivity.
-(blueprint: lem-coef-normalized-dvr-strict-coefficient-adjoint).
-
-Proof: the core calculation uses the identical scalar-reduction source and target
-categories. Its natural comparison is obtained from the normalized regular
-quotient augmentation by localization and uniqueness of adjoints. On a strict map
-f its cone map is (0,f), by the K-flat adjoint calculation and naturality. Unfolding
-the category abbreviations gives the displayed completed-coefficient presentation;
-the completed and scalar-reduction restriction factorizations agree definitionally. -/
+presentation used by normalized DVR towers. -/
 theorem normalizedDVR_strict_coefficient_adjoint (n : ℕ)
     (adj : scalarReductionDerivedExtension l E X n ⊣
       scalarReductionDerivedRestriction l E X n) :

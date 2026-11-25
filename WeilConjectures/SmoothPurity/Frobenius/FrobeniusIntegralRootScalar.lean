@@ -13,8 +13,17 @@ import all WeilConjectures.AlgebraicGeometry.Pur.PurTwistCoefficientRingsSupplem
 
 /-! # Completed root scalars in the integral tensor
 
-Source: Stacks Project, `sites-modules.tex`, Tags 03EK and 03EL.
-(blueprint: new-weil-frobenius-integral-root-scalar).
+This file proves `frobeniusIntegralRootScalar`: root-limit scalars are compatible with the
+integral tensor inclusion after pullback along an isomorphism of schemes.
+
+## Implementation details
+
+The proof uses only finite projection identities, so it also covers the empty site, and the
+uniqueness specification of the completed scalar map makes it valid for ramified `E`.
+
+## References
+
+* [Stacks, Tags 03EK, 03EL]
 -/
 
 @[expose] public noncomputable section
@@ -164,25 +173,10 @@ private theorem completedScalar_square
   rw [← Category.assoc, ← zlDirect_projection]
   rw [Category.assoc, ← Functor.map_comp, ← hx, Functor.map_comp, ← Category.assoc]
 
-/-- Compatibility of root-limit scalars after the integral tensor inclusion.
-
-Source: the finite scalar clause of `proEtaleRootsOfUnityInverseImageIso`, the
-coordinate characterization of `purTwistZlAction_existsUnique`, and Stacks Project,
-`sites-modules.tex`, tensor-product construction (Tags 03EK and 03EL).
-Proof: form the direct-image map of completed Z_l rings from the compatible
-constant Z/l^(n+1) comparisons. Project the adjunct of r to level n. Naturality of
-the adjunction unit and of the limit comparison identifies this projection with
-the adjunct of the finite root comparison. Its finite scalar formula, together
-with the coordinate definition of the Z_l action, proves semilinearity of the root
-limit map, since its projections are jointly injective. The completed coefficient
-map commutes with the map from completed Z_l: after each integral coefficient
-projection, both composites factor through the same finite Z/l^k quotient and
-have the same constant residues. The uniqueness specification of the completed
-scalar map proves this assertion also for ramified E. Apply the normalization
-formula for the completed action on an integral pure tensor on X and substitute
-the root-limit semilinearity just proved. This gives the displayed equality.
-The argument uses only finite projection identities and includes the empty site.
-(blueprint: new-weil-frobenius-integral-root-scalar). -/
+/-- Compatibility of root-limit scalars after the integral tensor inclusion: for the root-limit
+comparison `r` along an isomorphism `g`, the integral tensor of `b` with the image of `a • x`
+under `r` equals the completed scalar image of `a` acting on the integral tensor of `b` with the
+image of `x`. -/
 theorem frobeniusIntegralRootScalar
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

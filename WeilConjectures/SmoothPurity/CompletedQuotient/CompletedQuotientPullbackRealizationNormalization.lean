@@ -13,7 +13,12 @@ import WeilConjectures.SmoothPurity.Supporting.CoherentReferenceQuotientComparis
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+This file proves that the transported fixed pullback realization is normalized on coherent
+representatives.
+
+## References
+
+* [Stacks, Tags 03D2, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -67,16 +72,7 @@ attribute [local irreducible] pullbackTensorCalculus integralDerivedPullback
   integralCompletedTensor coefficientTotalTensor SheafOfModules.monoidalCategory
   CategoryTheory.Functor.leftAdjoint CategoryTheory.Functor.mapDerivedCategory
 
-/-- The transported fixed pullback realization is normalized on coherent representatives.
-Source: Stacks 03D2 and 0941; quotient scalar-coordinate normalization.
-(blueprint: lem-pur-completed-quotient-pullback-realization-normalized).
-
-Proof: identify inverse evaluation by adjunction mates and the two pullback towers
-componentwise. Use the coherent reference quotient comparison to transport the
-ordinary tower and its generator formula to the given representative. The fixed
-integral pullback model supplies the completed equation on the reference quotient;
-naturality of derived quotient factorization and the Roos bridge transports it
-to the given coherent presentation. -/
+/-- The transported fixed pullback realization is normalized on coherent representatives. -/
 theorem completedQuotientPullbackRealization_normalized {X Y : Scheme.{u}} (f : X ⟶ Y)
     (ρ : IntegralComparisonRoosModel l E X) :
     IsIntegralComparisonPullbackNormalized l E f (pullbackTensorCalculus l E Y) ρ

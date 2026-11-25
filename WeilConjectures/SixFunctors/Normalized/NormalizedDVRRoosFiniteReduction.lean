@@ -10,7 +10,23 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestric
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import WeilConjectures.SixFunctors.Normalized.NormalizedDVRAdicConeModel
 
-/-! # Finite reductions of a normalized DVR Roos limit -/
+/-! # Finite reductions of a normalized DVR Roos limit
+
+This file shows that the finite reductions of the Roos limit of a normalized DVR tower are its
+levels (`normalizedDVRRoos_finite_reduction`).
+
+## Implementation details
+
+After strictifying the tower by K-flat resolutions with flat terms, the two-term free resolution
+of the finite quotient commutes with products and the Roos cone. The fibre of the map to the
+constant `n`-th level has transitions multiplied by powers of the uniformizer, so any `n+1`
+successive transitions vanish and its Roos limit vanishes. Exact restriction detects
+isomorphisms, and changing the adjunction conjugates the comparison by an isomorphism.
+
+## References
+
+* [B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Lemmas 3.5.4--3.5.7][BS15]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -55,27 +71,8 @@ private theorem exactDerived_reflects_iso
   have : Epi ((DerivedCategory.homologyFunctor A i).map f) := F.epi_of_epi_map inferInstance
   exact isIso_of_mono_of_epi _
 
-/-- Finite reduction of the Roos limit of a normalized DVR tower.
-Source: blueprint lemma-sp-tower-adjunction-foundation--2, proof paragraphs 1--4;
-Bhatt--Scholze, Lemmas 3.5.4--3.5.7.
-(blueprint: lem-coef-normalized-dvr-roos-finite-reduction).
-
-Proof: strictify the finite-coefficient complexes with K-flat resolutions with flat
-terms, representing each successor map by a roof before resolving its source. The
-level identifications and their products transport the given Roos triangle to the
-strict model, preserving projections. Fix exponent n+1 and remove its finite prefix.
-The two-term free completed-coefficient resolution of the finite quotient commutes
-with products and the Roos cone. Its tensor with the strict tower maps to the
-constant n-th finite complex, with fiber the shifted reduced complex and transitions
-multiplied by the corresponding uniformizer power. Every n+1 successive fiber
-transitions vanish. The inverse of 1-s on its product is the finite geometric sum,
-so its Roos limit vanishes. Taking limits gives the finite comparison isomorphism.
-The tensor unit formula identifies it with the adjoint of the specified projection.
-Exact restriction detects isomorphisms, since it preserves the underlying abelian
-sheaf. Changing the tensor-restriction adjunction conjugates this comparison by an
-isomorphism, so any adjunction between the fixed functors gives an invertible map.
-The argument includes n=0 (exponent one), zero towers and the empty scheme and
-uses no bounds or constructibility. -/
+/-- Finite reduction of the Roos limit of a normalized DVR tower: the adjoint of the `n`-th limit
+projection, for any reduction adjunction, is invertible. -/
 theorem normalizedDVRRoos_finite_reduction
     (T : NormalizedDVRTower l E X D hl)
     (M : completedIntegralDerivedCategory l E X D hl)

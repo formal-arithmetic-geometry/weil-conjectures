@@ -10,9 +10,11 @@ public import WeilConjectures.SixFunctors.Coefficient.CoefficientRingedSequenceS
 
 /-! # Linearity of completed restriction from a coefficient sequence
 
-Source: the constant-section scalar calculation in the proof of the coherent
-compact-support reduction tower, step 8; Stacks Tags 03DA and 0941.
-(blueprint: lem-weil-compact-support-sequence-restriction-linearity).
+Completed restriction preserves scalar actions whose section formulas agree.
+
+## References
+
+* Stacks Project, Tags 03DA and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -32,17 +34,7 @@ private theorem scalarRestrictionHomTransport
   ext V x
   exact congrFun (eq_of_heq (h V)) x
 
-/-- Completed restriction preserves scalar actions whose section formulas agree.
-
-Source: coherent compact-support reduction tower, step 8; Stacks 03DA, 0941.
-(blueprint: lem-weil-compact-support-sequence-restriction-linearity).
-
-Proof: linearity reduces to preservation of scalar multiples of identity maps.
-Evaluate the strict tower at a level. The specified restriction functor preserves
-underlying section maps, up to its specified object equalities. The two normalized
-scalar formulas and their projection compatibility give equality on every section.
-Transport across the object equalities, then use sheaf-module and tower
-extensionality. No assertion of faithfulness on derived towers is used. -/
+/-- Completed restriction preserves scalar actions whose section formulas agree. -/
 theorem compactSupportSequenceRestriction_linear_of_sections
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u})

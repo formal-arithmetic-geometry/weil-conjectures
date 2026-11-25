@@ -13,9 +13,20 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Quotient compatibility on flat K-flat tensor representatives
 
-Source: Stacks Tags 06YY and 07A4, the quotient compatibility step of the
-completed pullback/tensor comparison.
-(blueprint: lem-pur-finite-pullback-tensor-quotient-representatives).
+The quotient compatibility step of the completed pullback/tensor comparison, on
+representative pairs of flat-term K-flat complexes.
+
+## Implementation details
+
+On the total summand of bidegree `(i, j)`, both paths of the quotient tensor square carry
+`1 ⊗ f^*(x ⊗ y)` to `f^*(1 ⊗ x) ⊗ f^*(1 ⊗ y)`. No flatness of the coefficient quotient
+is used.
+The result concerns representative pairs only; extension to arbitrary derived objects requires
+a separate resolution and naturality argument.
+
+## References
+
+* Stacks Project, Tags 06YY and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -165,25 +176,7 @@ attribute [local irreducible] coefficientFiniteTensorModelIso coefficientTotalTe
 
 -- The concrete coefficient categories require many definitional identifications.
 attribute [local irreducible] sfIntrinsicPullback coefficientFiniteQuotientExtension in
-/-- The quotient tensor square holds on flat-term K-flat pairs.
-Source: Stacks, sites-cohomology.tex, Tag 07A4 (lemma-pullback-tensor-product),
-with the derived change-of-rings construction of Tag 06YY
-(blueprint: lem-pur-finite-pullback-tensor-quotient-representatives).
-Proof: use the flat-term K-flat complexes P and Q to compute their derived tensor.
-The ordinary unit equation hc identifies the quotient/pullback comparison on every
-section inserted by both adjunction units. The degree equations hcc identify its
-termwise extension on complexes. On the total summand of bidegree (i,j), both
-paths carry 1 tensor f*(x tensor y) to f*(1 tensor x) tensor f*(1 tensor y).
-The quotient tensor normalization gives exactly this formula for its tensorator.
-Balancing, sheafification, and the total-summand inclusions determine the two
-ordinary chain maps, so they agree; the signed differential is the same along
-both paths. Apply the derived quotient functor. The normalized square he rewrites
-all quotient/pullback components, and the quotient model counits rewrite the
-remaining coefficient comparisons. Naturality cancels the intermediate model
-isomorphisms, yielding the displayed square. No flatness of the coefficient
-quotient is used, and the same calculation includes m=n and zero complexes.
-This assertion concerns these representative pairs only; extension to arbitrary
-derived objects requires a separate resolution and naturality argument. -/
+/-- The quotient tensor square holds on flat-term K-flat pairs. -/
 theorem finitePullbackTensor_quotient_representatives {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]

@@ -13,8 +13,16 @@ import WeilConjectures.SmoothPurity.Frobenius.FrobeniusIntegralDiscreteTransport
 
 /-! # Discrete tensor step of integral root transport
 
-Source: Stacks Project, `sites-modules.tex`, Tags 03EK and 03EL.
-(blueprint: new-weil-frobenius-integral-discrete-transport).
+The prescribed root comparison extends to the discrete tensor product over the constant
+integral coefficient sheaf.
+
+## Implementation details
+
+No root trivialization or invertibility of `l` on the schemes is required.
+
+## References
+
+* [Stacks, Tags 03EK and 03EL] (tensor products of sheaves of modules and pullback)
 -/
 
 @[expose] public noncomputable section
@@ -76,24 +84,7 @@ private theorem constantCompletion_square
         ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map q)
   exact AlgebraicGeometry.Scheme.constant_naturality g q
 
-/-- Discrete tensor extension of the prescribed root comparison.
-
-Source: Stacks Project, `sites-modules.tex`, Sections "Sheaves of modules" and
-"Tensor product", especially the tensor/restriction adjunction and
-`lemma-tensor-product-pullback` (Tags 03EK and 03EL).
-Proof: at level n the root comparison is linear over the constant Z/l^(n+1)
-comparison. Projecting the inverse-limit map to every finite level therefore shows
-linearity over the constant Z_l sheaf. The bilinear map (b,x) to b' tensor r(x')
-is balanced over this constant sheaf. Its tensor lift commutes with restriction,
-and its sheafification is the asserted map. Along a scheme isomorphism, direct
-image is transport by an equivalence of sites. The constant scalar comparison and
-the root comparison are invertible, so the inverse balanced map sheafifies to its
-inverse. The two composites are identities on pure tensors and hence everywhere
-by local tensor generation. Finally the completed action of a constant integral
-scalar is its ordinary discrete action; naturality of the constant-to-completed
-map follows after every finite coefficient projection. This gives the last formula.
-No root trivialization or invertibility of l on the schemes is required.
-(blueprint: new-weil-frobenius-integral-discrete-transport). -/
+/-- Discrete tensor extension of the prescribed root comparison. -/
 theorem frobeniusIntegralDiscreteTransport
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

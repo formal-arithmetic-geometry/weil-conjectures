@@ -23,11 +23,6 @@ import WeilConjectures.SmoothPurity.Pullback.PullbackTensorUnitCoherence
 
 /-! # Derived pullback and derived tensor comparison
 
-Source: `literature/stacks-project/sites-cohomology.tex`, Lemma 21.18.4
-(Tag 07A4, label `lemma-pullback-tensor-product`), together with the integral,
-rational, and algebraically closed coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-iso).
-
 ## Main definitions
 
 * The four `canonical*PullbackTensor` families are the prescribed comparisons.
@@ -36,6 +31,30 @@ rational, and algebraically closed coefficient conventions
 ## Main statements
 
 * `derivedPullbackTensorIso` packages naturality and the higher compatibilities.
+
+## Implementation details
+
+* At finite level the comparison is the derived pullback/tensor comparison for the morphism of
+  ringed topoi `(X_proet, (A_{E,n})_X) → (Y_proet, (A_{E,n})_Y)`; module pullback is exact, and
+  no finite Tor dimension of `A_{E,n}` is assumed. On flat-term K-flat models it is totalized
+  from the module comparison, and the chain-level coherence equations descend to arbitrary
+  derived inputs.
+* At integral level, flat-term K-flat representatives are reduced along the quotient tower; the
+  strict tower isomorphism of cochain comparisons is passed to the derived limit, and coherent
+  counit comparisons identify its reductions with the finite comparisons. Scalar extension is
+  handled through the strict quotient models of the extended coefficient tower, including
+  ramified extensions.
+* At rational level the comparison is the image of the integral one under scalar localization,
+  and every integral coherence equation remains true after tensoring Hom groups with `E`.
+* At algebraically closed level the comparison is formed over a common finite coefficient field;
+  passing to a larger field sends it to the same comparison, so its class is independent of
+  the choice.
+* The common-stage associativity and braiding equations are proved by applying coherent
+  reduction to both routes and using full faithfulness on complete constructible objects.
+
+## References
+
+* Stacks Project, Tags 06YS, 07A4 (Lemma 21.18.4) and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -205,14 +224,7 @@ attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The normalized commonstage comparison obeys this coherence equation.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-iso). Proof: Apply coherent reduction to both routes.
-  Insert the actual reduction square for the integral comparison and the defining normalized
-  associator. The system comparison associativity equation makes the reduced routes equal. Full
-  faithfulness on complete constructible objects gives the integral equation. Localization gives the
-  rational equation; represent at a common finite field and use the prescribed transition
-  comparisons for the algebraically closed equation. -/
+/-- The normalized common-stage comparison is compatible with the associators. -/
 theorem canonicalCommonStagePullbackTensor_associative_spec {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -497,14 +509,7 @@ attribute [local irreducible] ObjectProperty.FullSubcategory.category
 set_option allowUnsafeReducibility true in
 attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem
 
-/-- The normalized commonstage comparison obeys this coherence equation.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-iso). Proof: Apply coherent reduction to both routes.
-  Insert the actual reduction square for the integral comparison and the defining normalized
-  braiding. The system comparison signed symmetry equation makes the reduced routes equal. Full
-  faithfulness on complete constructible objects gives the integral equation. Localization gives the
-  rational equation; represent at a common finite field and use the prescribed transition
-  comparisons for the algebraically closed equation. -/
+/-- The normalized common-stage comparison is compatible with the braidings. -/
 theorem canonicalCommonStagePullbackTensor_braiding_spec {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -637,116 +642,7 @@ is the inverse-limit comparison on completed reductions; at rational level it is
 its scalar localization; and at algebraically closed level it is the common-stage
 comparison over a finite coefficient compositum.  The comparison is compatible
 with the tensor unit, associativity, signed symmetry, coefficient reduction and
-scalar extension, and with composition of pullbacks, as in the proof steps of
-`lem-pur-derived-pullback-tensor-iso`.
-
-Source: `literature/stacks-project/sites-cohomology.tex`, Lemma 21.18.4 (Tag 07A4,
-label `lemma-pullback-tensor-product`), for the morphism of ringed topoi
-(X_proet, (A_{E,n})_X) -> (Y_proet, (A_{E,n})_Y); the integral, rational and Qlbar
-levels follow the level-by-level definitions of the operations in
-prose-03-02.
-
-Proof plan (the node's numbered steps):
-
-1. At finite level choose compatible small representatives of the pro-etale sites as in [def-weil-
-   proetale-inverse-image]. The inverse image and its constant-ring map make $f_n$ a morphism of
-   ringed topoi. By [prop-weil-pbc-proetale-constant-exact], module pullback is exact and agrees
-   with inverse image with the coefficient action transported through
-   $f^{-1}(A_{E,n})_Y\cong(A_{E,n})_X$. Thus its derived functor is precisely the finite operation
-   in [prose-03-02]. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-
-   pullback] with $R=(A_{E,n})_Y$ and $S=(A_{E,n})_X$. Its displayed isomorphism, natural in both
-   arguments, is $\mu_{f;M,N}$. That theorem is unbounded, so it applies to all the finite-level
-   inputs claimed here; no finite Tor dimension of $A_{E,n}$ is assumed.
-
-2. Choose flat-term K-flat resolutions $P,Q$ by [lem-pc-kflat-resolution]. The closure assertion
-   [lem-pur-kflat-total-tensor-model] shows that $\operatorname{Tot}(P\otimes Q)$ is K-flat with
-   flat terms, so all iterated tensors below compute derived tensors. On these models the
-   comparison is totalized from the module map of [lem-weil-pbc-ringed-topoi-module-pullback-
-   tensor], with the signed differential from [def-pc-tensor-complex-sheaves].
-
-3. Use the chain maps of [lem-pur-cochain-pullback-tensor-coherence]. Their pure-tensor formula
-   and inverse are the ordinary comparison of [lem-weil-pbc-ringed-topoi-module-pullback-tensor],
-   and the chain lemma supplies associativity, signed symmetry, units, composition and
-   coefficient-change equations. By [lem-weil-pbc-site-derived-tensor-descent] these maps and
-   equations descend from the K-flat resolving class to arbitrary finite-level derived inputs.
-
-4. For integral $M,N$, choose flat-term K-flat representatives $P,Q$ by [lem-pc-kflat-resolution].
-   Set $P_n=P\otimes_{R_Y}B_{Y,n}$ and $Q_n=Q\otimes_{R_Y}B_{Y,n}$, with actual quotient
-   transitions. Put $T_n=\operatorname{Tot}(P_n\otimes Q_n)$, $U_n=f_n^*P_n$, $V_n=f_n^*Q_n$, and
-   $W_n=\operatorname{Tot}(U_n\otimes V_n)$. The quotient and pullback models are flat-term K-flat
-   by [lem-pur-kflat-change-of-rings, lem-weil-pbc-ringed-pullback-preserves-kflat], and the
-   tensor totals by step 2. The normalization and coherent reduction assertions of [lem-pur-
-   completed-operation-tower-substitution] and [lemma-sp-tower-adjunction-foundation--2] identify
-   these systems with the reductions of the completed operations in [def-pur-integral-derived-
-   operations]. Here $B_{Y,n}=(A_{E,n})_Y$ and $R_Y=\varprojlim B_{Y,n}$, as in the normalized
-   tower convention [def-coef-normalized-dvr-tower].
-
-5. The cochain maps of [lem-pur-cochain-pullback-tensor-coherence] give the strict tower
-   isomorphism $f_n^*T_n\to W_n$ and its strict inverse. Apply [lem-pur-integral-tower-limit-
-   comparison] to the $T,U,V$ of step 4. With the substitution identifications of [lem-pur-
-   completed-operation-tower-substitution], its actual derived-limit map is the required
-   comparison between completed pullback of $M\widehat\otimes^L N$ and completed tensor of
-   $Lf^*M,Lf^*N$. The functor is [lem-weil-pbc-ringed-strict-tower-homotopy-limit]; its naturality
-   and the resolution comparisons of [lem-pur-integral-operations-well-defined] give naturality in
-   $M,N$ and independence of the chosen representatives.
-
-6. By [lem-pur-integral-operations-preserve-constructible], $M\widehat\otimes^L N$ is
-   constructible on $Y$ and its pullback is constructible on $X$. The same lemma first puts
-   $Lf^*M,Lf^*N$ in $D^b_c(X,\mathcal O_E)$ and then puts their completed tensor there. This is a
-   full subcategory of the ambient derived category [def-weil-derived-complete-integral-detailed],
-   so the ambient comparison and its inverse are morphisms of that subcategory.
-
-7. The finite associativity, signed symmetry, unit and pullback-composition equations from [lem-
-   pur-cochain-pullback-tensor-coherence] are compatible with every quotient transition. The
-   tower-level assertion [lem-pur-integral-coherence-tower] therefore identifies them as
-   equalities of strict normalized systems and gives their integral images after applying [lem-
-   pur-completed-operation-tower-substitution] and [lem-weil-pbc-ringed-strict-tower-homotopy-
-   limit].
-
-8. The coherent counit comparisons of [lemma-sp-tower-adjunction-foundation--2], applied to the
-source
-   and target systems of the strict comparison, identify its reduction with the finite comparison.
-   Their naturality applies to this actual map of systems, and [lem-pur-completed-operation-tower-
-   substitution] carries the counits to the completed operations. No faithfulness assertion for
-   individual finite-reduction functors is needed.
-
-9. For $E\subset L$ put $B_m=\mathcal O_L/\varpi_L^m$. The strict quotient models of [def-weil-
-   integral-scalar-extension] and the coherent reduction model [lem-pur-coefficient-extension-
-   reduction-model] give the normalized $B_\bullet$-tower, including ramified extensions. The
-   quotient K-flatness is [lem-pur-kflat-change-of-rings], and the scalar-association and
-   transition equations are exactly [lem-pur-scalar-extension-tower-coherence].
-
-10. Use the pullback and tensor scalar-extension isomorphisms of [lem-pur-integral-operations-
-   scalar-extension] in their canonical quotient-model form. The tower coherence statement [lem-
-   pur-scalar-extension-tower-coherence] says that both routes around the comparison square send
-   $b\otimes(x\otimes y)$ to $(b\otimes x)\otimes(1\otimes y)$ and commute with every quotient and
-   coefficient square. Applying [lem-weil-pbc-ringed-strict-tower-homotopy-limit] and [lem-pur-
-   completed-operation-tower-substitution] gives the integral scalar-extension square.
-
-11. By [def-weil-rationalization-karoubi], every rational object is an integral object and every
-   morphism is a finite sum of $u\otimes a$, with $u$ integral and $a\in E$. Define $\mu^E$ to be
-   the image $\mu^{\mathcal O_E}\otimes1$; its inverse is the image of the integral inverse. The
-   operations on rational morphisms are the scalar extensions specified in [def-weil-derived-
-   pullback-tensor-hom]. The integral naturality identity for $u,v$, multiplied by the
-   corresponding scalars, gives rational naturality; add the resulting identities for sums. Every
-   integral coherence equation remains an equality after tensoring Hom groups with $E$, so the
-   rational associativity, symmetry, unit and composition equations follow. The scalar-extension
-   square of the preceding scalar-extension steps likewise remains commutative, since the rational
-   scalar-extension functor is the one induced from the integral scalar-extension functor.
-
-12. For objects $(E,M),(E',N)$ at the algebraically closed level, choose a common finite
-   coefficient field $L$ and form the rational comparison there, conjugated by the scalar-
-   extension comparisons as prescribed in [prose-03-02]. Represent the
-   inverse by the inverse rational comparison with the inverse conjugating comparisons. In [def-
-   weil-algebraically-closed-coefficients], morphisms are classes over common finite fields, and
-   two representatives agree if they agree after passage to a further common field. The scalar-
-   extension calculation after rationalization says precisely that passing from $L$ to any larger
-   field sends this comparison to the same comparison there; hence the class and its inverse are
-   independent of $L$. Represent any finite naturality or coherence diagram over a single common
-   finite field; the rational identity proved in the preceding rationalization step gives its
-   equality in the colimit Hom group. This proves all the asserted compatibilities at $\Qlb$,
-   including scalar extension into $\Qlb$.
-(blueprint: lem-pur-derived-pullback-tensor-iso) -/
+scalar extension, and with composition of pullbacks. -/
 theorem derivedPullbackTensorIso
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E]

@@ -14,7 +14,6 @@ import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedComparisonScalarL
 
 The normalization, canonical identification and scalar realization steps are
 combined with the whole-system counit and structural transport calculations.
-(blueprint: lem-pur-completed-comparison-quotient-realization).
 -/
 
 @[expose] public noncomputable section

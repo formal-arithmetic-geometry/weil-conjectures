@@ -32,10 +32,18 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 /-! # Coefficient data for compact-support reduction towers
 
-These are the original coefficient definitions of `CompactSupportReductionTower`,
-separated so that the geometric transition comparison can import them.
-Source: Stacks 03DA, 06YY; Bhatt--Scholze 6.7.6
-(blueprint: def-weil-compact-support-reduction-tower-data).
+This module defines the coefficient quotients, restrictions, reduction maps and transitions
+used to build compact-support reduction towers.
+
+## Implementation details
+
+These definitions are separated from `CompactSupportReductionTower` so that the geometric
+transition comparison can import them.
+
+## References
+
+* Stacks Project, Tags 03CO, 03CZ, 03DA and 06YY
+* Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7
 -/
 
 @[expose] public noncomputable section
@@ -49,24 +57,18 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Positive finite coefficient levels are finite, using the recorded theorem.
-Source: blueprint coefficient extension, clause 4
-(blueprint: lem-weil-compact-support-reduction-tower-functor). -/
+/-- Positive finite coefficient levels are finite. -/
 instance compactSupportLevelFinite (n : ℕ) :
     Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
   Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.le_add_left 1 n)
 
-/-- The canonical quotient for any pair of positive coefficient levels.
-Source: Stacks Tag 06YY; blueprint proof, step 2
-(blueprint: lem-weil-compact-support-reduction-tower-functor). -/
+/-- The canonical quotient for any pair of positive coefficient levels. -/
 def compactSupportLevelQuotient (m n : ℕ) (h : n ≤ m) :
     Padic.coefficientExtensionRing l E (m + 1) →+*
       Padic.coefficientExtensionRing l E (n + 1) :=
   Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.add_le_add_right h 1))
 
-/-- The same quotient after constant sheafification on the small pro-etale site.
-Source: Stacks Tag 06YY; blueprint proof, step 2
-(blueprint: lem-weil-compact-support-reduction-tower-functor). -/
+/-- The same quotient after constant sheafification on the small pro-etale site. -/
 def compactSupportLevelSheafQuotient (W : Scheme.{u}) (m n : ℕ) (h : n ≤ m) :
     integralCoefficientCommRingSheaf l E W m ⟶ integralCoefficientCommRingSheaf l E W n :=
   (constantSheaf (ProEt.topology W) CommRingCat.{u + 1}).map
@@ -94,13 +96,7 @@ private theorem compactSupportLevelSheafQuotient_step
     (compactSupportLevelQuotient l E (m + 1) n (h.trans (Nat.le_succ m))) x.down
   exact Ideal.Quotient.factor_comp_apply _ _ x.down
 
-/-- Limit projections commute with all coefficient quotients, including m=n.
-Source: Stacks Tag 03CO; blueprint proof, steps 1--2
-(blueprint: lem-weil-compact-support-reduction-tower-functor).
-Proof: for adjacent levels this is the cone compatibility of the completed sheaf.
-The quotient factor sends the class of a to the class of a, so successive factors
-compose to the direct factor, and the equal-level factor is the identity. Apply
-constant sheafification and induct on m-n to obtain compatibility for every pair. -/
+/-- Limit projections commute with all coefficient quotients, including `m = n`. -/
 theorem compactSupportProjection_comp (W : Scheme.{u}) (m n : ℕ) (h : n ≤ m) :
     completedIntegralCommRingProjectionUnrestricted l E W m ≫
         compactSupportLevelSheafQuotient l E W m n h =
@@ -127,9 +123,7 @@ theorem compactSupportProjection_comp (W : Scheme.{u}) (m n : ℕ) (h : n ≤ m)
     exact ih
 
 /-- The canonical composition of exact restrictions along a limit projection and
-its quotient, induced by the identity on underlying sections.
-Source: Stacks Tag 03DA; blueprint proof, steps 4 and 6
-(blueprint: lem-weil-compact-support-reduction-tower-functor). -/
+its quotient, induced by the identity on underlying sections. -/
 def compactSupportRestrictionComp (W : Scheme.{u}) (m n : ℕ) (h : n ≤ m) :
     (proEtaleCoefficientRestrictScalars W
         (compactSupportLevelQuotient l E m n h)).mapDerivedCategory ⋙
@@ -141,11 +135,9 @@ def compactSupportRestrictionComp (W : Scheme.{u}) (m n : ℕ) (h : n ≤ m) :
     (completedIntegralCommRingProjectionUnrestricted l E W n)
     (compactSupportProjection_comp l E W m n h)
 
-/-- The quotient-induced derived reduction map. It is the transpose of the
-reduction unit under the normalized derived tensor/restriction adjunction.
-Thus this is id tensor q on K-flat representatives, rather than an arbitrary map.
-Source: Stacks Tags 03CZ and 06YY; blueprint proof, steps 2 and 6
-(blueprint: lem-weil-compact-support-reduction-tower-functor). -/
+/-- The quotient-induced derived reduction map: the transpose of the reduction unit under the
+normalized derived tensor/restriction adjunction, given by `id ⊗ q` on K-flat
+representatives. -/
 def compactSupportReductionMap (W : Scheme.{u}) (m n : ℕ) (h : n ≤ m)
     (K : DerivedCategory (scalarReductionSource l E W)) :
     (scalarReductionDerivedExtension l E W m).obj K ⟶
@@ -157,9 +149,7 @@ def compactSupportReductionMap (W : Scheme.{u}) (m n : ℕ) (h : n ≤ m)
       (compactSupportRestrictionComp l E W m n h).inv.app
         ((scalarReductionDerivedExtension l E W n).obj K))
 
-/-- The specified finite-level composite, including its action on derived morphisms.
-Source: Bhatt--Scholze, Definition 6.7.6; blueprint proof, step 4
-(blueprint: lem-weil-compact-support-reduction-tower-functor). -/
+/-- The specified finite-level composite, including its action on derived morphisms. -/
 def compactSupportRestrictedLevel {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (n : ℕ) :
     DerivedCategory (scalarReductionSource l E X) ⥤
@@ -169,9 +159,7 @@ def compactSupportRestrictedLevel {X Y : Scheme.{u}} {f : X ⟶ Y}
       scalarReductionDerivedRestriction l E Y n
 
 /-- The required transition: quotient-induced reduction, compact support at the
-larger level, the specified coefficient comparison, and composition of restrictions.
-Source: blueprint proof, step 6; Bhatt--Scholze, Lemma 6.7.7
-(blueprint: lem-weil-compact-support-reduction-tower-functor). -/
+larger level, the specified coefficient comparison, and composition of restrictions. -/
 def compactSupportRestrictedTransition {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (m n : ℕ) (h : n ≤ m)
     (K : DerivedCategory (scalarReductionSource l E X)) :
@@ -188,8 +176,7 @@ def compactSupportRestrictedTransition {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- The canonical constant integral section of the completed coefficient sheaf.
 It is obtained from the constant-to-completion map, whose projections are the actual
-constant quotient sections. Source: blueprint proof, step 8
-(blueprint: lem-weil-compact-support-reduction-tower-functor). -/
+constant quotient sections. -/
 def compactSupportConstantScalar (W : Scheme.{u}) (U : W.ProEtᵒᵖ)
     (a : Padic.coefficientExtensionIntegers l E) :
     (completedIntegralCoefficientSheafUnrestricted l E W).obj.obj U :=
@@ -199,9 +186,7 @@ def compactSupportConstantScalar (W : Scheme.{u}) (U : W.ProEtᵒᵖ)
         (CommRingCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))))).app U)
           (ULift.up a))
 
-/-- Normalization of a linear structure by the actual constant-section action.
-Source: blueprint proof, step 8
-(blueprint: lem-weil-compact-support-reduction-tower-functor). -/
+/-- Normalization of a linear structure by the constant-section action. -/
 def IsCompactSupportScalarAction (W : Scheme.{u})
     [Linear (Padic.coefficientExtensionIntegers l E) (scalarReductionSource l E W)] : Prop :=
   ∀ (M N : scalarReductionSource l E W) (v : M ⟶ N)

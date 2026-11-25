@@ -37,7 +37,21 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Normalized direct image on completed-coefficient diagrams
 
-Source: Stacks Tags 0D6E, 0A07 and 0941.
+Existence of the normalized direct-image comparison on completed-coefficient diagrams.
+
+## Implementation details
+
+The levelwise pushforward is derived on the Grothendieck category of towers; evaluation
+preserves K-injective complexes, so the normalized derived square gives each tower evaluation
+comparison. Preservation of ordinary limits is detected after forgetting to abelian presheaves,
+and acyclicity of the target inverse limit gives the normalized derived comparison. The
+conclusion concerns strict derived diagrams and their limit projections; it makes no
+completeness or reconstruction assertion.
+
+## References
+
+* [Stacks Project, Tags 0D6E, 0A07 and 0941](https://stacks.math.columbia.edu/tag/0D6E)
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -113,31 +127,9 @@ private theorem towerSquares {X Y : Scheme.{t}} (f : X ⟶ Y)
   erw [C.completedImage.functor.map_id, Category.comp_id] at h
   exact h
 
-/-- Extend any normalized site-side models to the coherent direct-image comparison.
-The supplied structural map is fixed by all its finite projections.
-The conclusion concerns strict derived diagrams and their actual limit projections;
-it makes no completeness or reconstruction assertion.
-
-Source: Stacks sites-cohomology.tex, Tags 0D6E and 0A07; Zheng, Construction 4.1
-(blueprint: lem-pur-completed-coefficient-direct-image-diagrams).
-Proof:
-1. Obtain the coefficient comparisons, preserving the supplied site models and
-structural map. Their quotient identity, composition and projection equations are
-retained in CoefficientComparisonData.
-2. Derive the additive levelwise pushforward on the Grothendieck category of towers.
-Evaluation preserves K-injective complexes, so the generic normalized derived square
-constructs every tower evaluation comparison. Its ordinary map is identity.
-3. Obtain the strict-system direct image and its diagram square for the fixed
-coefficient comparisons and tower image. This keeps all semilinear transitions.
-4. Detect preservation of ordinary limits after forgetting to abelian presheaves.
-The resulting ordinary comparison is limit.post. Acyclicity for the target inverse
-limit gives the normalized derived comparison by derived composition.
-5. Use uniqueness after the unit of the composite derived functor to prove the
-projection equation. Cancel the source exact evaluation factor; use the comparison
-normalization, target projection naturality, evaluation-square normalization, and
-both projection normalizations. The remaining equation is limit.post followed by
-a limit projection equals pushforward of the source projection. Assemble the record.
-All identifications retain the supplied exact factors and universal units. -/
+/-- Given site data on `X` and `Y` and a structural map `c` compatible with all finite
+projections and with the constant-to-completed maps, there is direct-image comparison data
+for `f` with these source and target data and structural map `c`. -/
 theorem directImageDiagrams_exists {X Y : Scheme.{t}} (f : X ⟶ Y)
     (source : SiteData l E X) (target : SiteData l E Y)
     (c : R l E Y ⟶ (ringPush.{t, u} f).obj (R l E X))

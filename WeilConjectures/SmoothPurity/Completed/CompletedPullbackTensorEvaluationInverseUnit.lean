@@ -11,8 +11,11 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorEvaluat
 
 /-! # Inverse evaluation of total unit generators
 
-Source: Stacks Tags 07A4, 0941 and 03D2.
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-inverse-unit).
+Inverse evaluation transports finite unit generators to evaluated sequence units.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941 and 03D2.
 -/
 
 @[expose] public noncomputable section
@@ -55,15 +58,7 @@ attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
   SheafOfModules.monoidalCategory
 
 -- Pointwise section transports of the two adjunctions have large implicit types.
-/-- Inverse evaluation transports finite unit generators to evaluated sequence units.
-Source: Stacks Tags 07A4, 0941 and 03D2
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-inverse-unit).
-Proof: naturality moves the inverse tensor-evaluation map through the intrinsic
-unit. The generator normalization identifies its inverse image with the evaluated
-sequence tensor generator. The ordinary evaluation-mate unit formula identifies
-the preimage under the inverse mate with the evaluated sequence adjunction unit.
-This computes only the source unit, before either tensor comparison is applied.
--/
+/-- Inverse evaluation transports finite unit generators to evaluated sequence units. -/
 theorem completedPullbackTensor_evaluation_inverse_unit {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     (c : integralOperationsLevelPullback l E f n ≅

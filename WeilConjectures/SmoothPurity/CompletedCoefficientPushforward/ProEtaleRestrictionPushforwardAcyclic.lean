@@ -39,9 +39,19 @@ import Mathlib.Algebra.Homology.Functor
 
 /-! # Restricted K-injectives are acyclic for pro-etale direct image
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E,
-lemma-derived-pushforward-composition.
-(blueprint: lem-pur-proetale-restriction-pushforward-acyclic).
+We show that restricting a K-injective complex along a commutative coefficient map produces a
+complex that is acyclic for the pro-étale direct image along a morphism of schemes.
+
+## Implementation details
+
+One chooses a K-injective resolution of the scalar restriction; its restriction to every slice
+remains K-injective, so scalar-restriction acyclicity for global sections on slices shows that
+the direct image of the resolution map is a quasi-isomorphism. No flatness or commutativity of
+the target coefficient ring is used.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -177,25 +187,8 @@ private theorem restrictionEvaluation_quasiIso {X : Scheme.{t}}
   exact ht
 
 /-- Restricting a K-injective complex along a commutative coefficient map produces
-an acyclic complex for the direct image of a scheme morphism. The assertion is for
-any supplied universal right-derived model and does not assert that scalar restriction
-preserves K-injectives.
-
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E,
-lemma-derived-pushforward-composition, applied to a coefficient change followed by f.
-(blueprint: lem-pur-proetale-restriction-pushforward-acyclic).
-
-Proof: choose a K-injective resolution j of the scalar restriction of I. Restriction
-of I and of the resolution to every slice X/U remains K-injective, and exactness of
-slice restriction preserves the quasi-isomorphism j. Apply scalar-restriction acyclicity
-for global sections on X/U. Sections on X/U are evaluation on its terminal object,
-so j is a quasi-isomorphism on sections over each U. Direct image evaluates these
-same section complexes over the base changes of objects of Y. Sectionwise detection
-therefore makes f_*(j) a quasi-isomorphism of module-sheaf complexes. The unit of the
-supplied derived model is invertible on the K-injective resolution. Its naturality
-square at j, together with the invertibility of Q(j) and Q(f_*(j)), proves that its
-unit on the restricted I is invertible. No flatness or commutativity of the target
-coefficient ring is used. Zero rings and identity coefficient maps are included. -/
+an acyclic complex for the direct image of a scheme morphism,
+for any supplied universal right-derived model. -/
 theorem restrictionPushforward_acyclic {X Y : Scheme.{t}} (f : X ⟶ Y)
     {B C : Sheaf (ProEt.topology X) RingCat.{max u (t + 1)}}
     {D : Sheaf (ProEt.topology Y) RingCat.{max u (t + 1)}}

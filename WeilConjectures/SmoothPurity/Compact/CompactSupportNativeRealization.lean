@@ -14,9 +14,13 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportCoefficientTransition
 
 /-! # Normalized realization of a specified native support tower
 
-Source: Stacks Tags 0940 and 0941; the native realization construction in
-compactSupport_normalized_realization, applied to the supplied reduction calculus.
-(blueprint: lem-pur-compact-support-native-realization).
+This file sets up the normalized realization of the native compact-support tower, the
+construction of `compactSupport_normalized_realization` applied to a supplied reduction
+calculus.
+
+## References
+
+* Stacks Project, Tags 0940, 0941.
 -/
 
 @[expose] public noncomputable section

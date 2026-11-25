@@ -74,7 +74,20 @@ import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedComparisonQuotien
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+We prove quotient normalization and recursive substitution for the simultaneous quotient
+realization of completed comparisons.
+
+## Implementation details
+
+Each prescribed representative is replaced by its ordinary quotient tower; K-flatness and flat
+terms survive reduction. One inducts on the finite expression: at a leaf derived completeness
+makes the reconstruction unit invertible, and tensor and inverse-image steps use the primitive
+counit comparisons. All calculations are in the category of whole coefficient systems before
+evaluation.
+
+## References
+
+* Stacks Project, Tags 07A2, 0941, 0G7E.
 -/
 
 @[expose] public noncomputable section
@@ -328,24 +341,9 @@ private theorem substitution_naturality {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : 
     ← Category.assoc, L.map_comp, Category.assoc]
 
 set_option linter.unusedVariables false in
-/-- Quotient normalization and recursive substitution.
-Source: realization proof step 1 and representative naturality in step 3;
-Stacks 07A2, 0G7E and 0941
-(blueprint: lem-pur-completed-comparison-quotient-normalization).
-
-Proof: use the ordinary quotient tower of each prescribed representative. The
-ordinary evaluation adjunction identifies its levels and every quotient transition.
-K-flatness and flat terms survive reduction; the normalized quotient adjoints are
-the balanced maps. Induct on the expression: units are flat K-flat normalized,
-tensor preserves these properties, and constant-coefficient inverse image does too.
-At a leaf, derived completeness makes the actual reconstruction unit invertible.
-Tensor and inverse-image steps use the primitive counit comparisons, with the
-normalized effective counit, so both substitution and its coherent reduction are
-invertible. The reduction model and evaluation adjunction give the stated
-presentation. Naturality holds at leaves by the reconstruction unit and the
-reduction-model naturality. Induction, primitive naturality and functoriality of
-tensor and inverse image prove it at each remaining constructor. All calculations
-are in the category of whole coefficient systems before evaluation. -/
+/-- Quotient normalization and recursive substitution: the ordinary quotient towers of the
+prescribed representatives give coherent reduction presentations, and recursive substitution
+along finite expressions is invertible and natural. -/
 theorem completedComparisonQuotientNormalization
     {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)
     [∀ z : Z, Invertible (l : Z.residueField z)]

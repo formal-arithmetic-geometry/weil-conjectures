@@ -31,11 +31,23 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
-/-! # Ordinary tensor transport for the DVR coefficient comparison
+/-!
+# Ordinary tensor transport for the DVR coefficient comparison
 
-Source: Stacks Tag 03EK; the ordinary tensor transport step of
-`lem-sf-open-dvr-strict-reduction-comparison`.
-(blueprint: lem-sf-open-dvr-ordinary-tensor-transport).
+We construct the ordinary, representative-level comparison of quotient tensor towers under the
+canonical DVR coefficient isomorphism, compatibly with transitions and the unit.
+
+## Implementation details
+
+On sheafified tensor sections the comparison sends `x ⊗ b` to the scalar tensor of `x` with the
+inverse finite coefficient image of `b`; balancing follows from the completed projection square.
+Both directions are extended by the tensor universal property and sheafification, and commute
+with adjacent quotient transitions, hence with every tower arrow. Zero modules and empty site
+objects are allowed, and no quotient flatness is used.
+
+## References
+
+* [Stacks: Tag 03EK]
 -/
 
 @[expose] public noncomputable section
@@ -448,27 +460,7 @@ private theorem ordinaryFiniteUnit (T : Scheme.{u}) (n : ℕ)
   rw [(scalarReductionExtension_adjunction l E T n).choose_spec]
   rfl
 
-/-- The ordinary, representative-level tensor comparison under the coefficient isomorphism.
-Source: Stacks Tag 03EK, strict tensor transport in the proof of
-`lem-sf-open-dvr-strict-reduction-comparison`
-(blueprint: lem-sf-open-dvr-ordinary-tensor-transport).
-
-Proof: use C.completed_projection to identify each completed coefficient projection
-with its scalar coefficient projection followed by C.finite. On sheafified tensor
-sections send x tensor b to the scalar tensor with the same x and the inverse finite
-coefficient image of b. Balancing follows from the projection square. The inverse
-uses C.finite; extend both maps by the tensor universal property and sheafification,
-so they are inverse isomorphisms. They commute with adjacent quotient transitions
-by C.finite_transition; induction gives every tower arrow and hence the natural
-isomorphism nu of ordinary tower functors.
-At b = 1 the comparison sends the quotient unit to M.adjunction.unit, by M.unit_tensor;
-this is the displayed ordinary unit equation. The evaluation isomorphisms of M,
-after exact scalar restriction and transposition of the complex indices, give kappa.
-M.transition identifies its arrows with the recorded unrestrictedIntegralTransition,
-whose uniqueness is fixed on pure tensors. M.unit_tensor identifies its augmentation
-with unrestrictedTowerUnit, also by its sectionwise uniqueness. All arguments allow
-zero modules and empty site objects;
-no quotient flatness is used. -/
+/-- The ordinary, representative-level tensor comparison under the coefficient isomorphism. -/
 theorem openDvrOrdinaryTensorTransport
     (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))
     (T : Scheme.{u}) (C : OpenDvrCoefficientModel l E d T)

@@ -8,13 +8,20 @@ module
 public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerTensorLevel
 import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerTransitionSquare
 
-/-! Existence of the normalized coherent tensor tower comparison.
+/-! # Existence of the coherent tensor tower comparison
 
-Source: Stacks 0941 and 07A4 (blueprint: lem-pur-completed-pullback-tower-iso-existence).
-Proof: use the prescribed finite component at every natural-number level.  The
-adjacent transition square packages these components with `NatTrans.ofOpSequence`;
-`NatIso.ofComponents` then supplies the levelwise inverses and all remaining
-naturality squares.
+The prescribed finite tensor components `pullbackTensorTensorTowerLevel` assemble into an
+isomorphism of towers.
+
+## Implementation details
+
+The adjacent transition square packages the components with `NatTrans.ofOpSequence`;
+`NatIso.ofComponents` then supplies the levelwise inverses and the remaining naturality
+squares.
+
+## References
+
+* Stacks Project, Tags 0941 and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -36,10 +43,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] pullbackTensorTensorTowerLevel pullbackTensorRestrictedTower
   integralOperationsTensorTowerFunctor in
-/-- The prescribed finite components extend to a tower isomorphism.
-Source: Stacks 0941 and 07A4 (blueprint: lem-pur-completed-pullback-tower-iso-existence).
-Proof: `NatTrans.ofOpSequence` uses the adjacent transition square; the
-levelwise isomorphisms are assembled by `NatIso.ofComponents`. -/
+/-- The prescribed finite components extend to a tower isomorphism whose component at each
+level `n` is `pullbackTensorTensorTowerLevel l E W P Q n`. -/
 theorem pullbackTensorTensorTower_exists (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     ∃ e : pullbackTensorRestrictedTower l E W

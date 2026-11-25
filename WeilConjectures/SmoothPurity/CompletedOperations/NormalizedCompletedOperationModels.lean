@@ -19,14 +19,25 @@ import all WeilConjectures.TraceFormula.Isomorphism.IsomorphismDerivedPullbackCo
 
 /-! # Simultaneous primitive models for completed operations
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.9(4); blueprint
-main-20261015, order 2232, coefficient twists; explicit coherent-counit refinement
-in original proof steps 1--6 of completed-operation substitution
-(blueprint: lem-pur-normalized-completed-operation-models).
-
 All comparisons live in the ordinary derived category of the ringed sequence
 site before restriction or total derived limit. The natural-number index n
 means positive quotient exponent n+1. Site and coefficient universes are independent.
+
+## Implementation details
+
+The models are built from the canonical quotient/limit calculus and its ordinary and derived
+completion models. The closed tensor of the sequence-site duality model is compared with the
+calculus tensor by the unique comparison preserving their common tensor-Hom adjunction. The
+strict quotient/Roos presentation identifies completion with reduction followed by total limit,
+and the same Roos model is used at each scheme in all primitive quotient pullback realizations.
+The reconstruction theorem makes the counit invertible on normalized systems. None of these
+computations assumes boundedness, constructibility, or flatness of a quotient map.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.4.10 and
+  Lemma 6.5.9(4).
+* Stacks Project, Tags 06YY, 07A4, 07A6 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -50,9 +61,7 @@ calculus fixes every quotient map and both adjunction projections. Its closed
 tensors are compared canonically through their common internal Hom. Completion's
 comparison is pinned by the actual quotient/Roos augmentation. Pullback's
 comparison is pinned on every simultaneous quotient presentation, not chosen
-separately on evaluated objects.
-Source: node proof steps 1, 4--5; Stacks 06YY, 07A4, 0941
-(blueprint: lem-pur-completed-operation-tower-substitution). -/
+separately on evaluated objects. -/
 structure Models {S : Type s} (W : S → Scheme.{t}) where
   /-- The recorded reduction/total-limit adjunction. -/
   calculus : ∀ a : S, CoefficientDerivedSystemCalculus l E (W a)
@@ -75,20 +84,17 @@ structure Models {S : Type s} (W : S → Scheme.{t}) where
 
 variable {S : Type s} {W : S → Scheme.{t}} (M : Models l E W)
 
-/-- The system tensor in the fixed canonical total-complex presentation.
-Source: node proof steps 1--2 (blueprint: lem-pur-completed-operation-tower-substitution). -/
+/-- The system tensor in the fixed canonical total-complex presentation. -/
 def tensor (a : S) := (M.system a).closed.tensor
 
-/-- The coefficient unit system B_n[0], including its actual quotient transitions.
-Source: node proof steps 3 and 7 (blueprint: lem-pur-completed-operation-tower-substitution). -/
+/-- The coefficient unit system `B_n[0]`, including its actual quotient transitions. -/
 def unit (a : S) : coefficientSequenceDerived l E (W a) :=
   ringedSiteDualityUnit.{t + 1, t, u}
     (coefficientSequenceTopology (Scheme.ProEt.topology (W a)))
     (coefficientSequenceCommRingSheaf l E (W a))
 
 /-- The defining quotient-limit tensor realization. Each factor is fixed by the
-reduction tensor model, closed-tensor presentation, or completion augmentation.
-Source: node proof step 5 (blueprint: lem-pur-completed-operation-tower-substitution). -/
+reduction tensor model, closed-tensor presentation, or completion augmentation. -/
 def tensorRealization (a : S) : IntegralOnSlice.completedTensor l E (W a) none ≅
     ((M.calculus a).reduction.prod (M.calculus a).reduction) ⋙
       tensor l E M a ⋙ coefficientSequenceLimit l E (W a) :=
@@ -103,9 +109,8 @@ def tensorRealization (a : S) : IntegralOnSlice.completedTensor l E (W a) none �
           (CoefficientClosedStructure.comparison (M.calculus a).systemClosed (M.system a).closed))
       (coefficientSequenceLimit l E (W a))
 
-/-- The primitive tensor comparison is L(T(e_A,e_N)), after its defining realization.
-This is a formula using the coherent counit, before any invertibility assertion.
-Source: node proof step 6 (blueprint: lem-pur-completed-operation-tower-substitution). -/
+/-- The primitive tensor comparison `L(T(e_A, e_N))`, after its defining realization.
+This is a formula using the coherent counit, before any invertibility assertion. -/
 def tensorComparison (a : S) (A N : coefficientSequenceDerived l E (W a)) :
     (IntegralOnSlice.completedTensor l E (W a) none).obj
         ((coefficientSequenceLimit l E (W a)).obj A,
@@ -116,8 +121,7 @@ def tensorComparison (a : S) (A N : coefficientSequenceDerived l E (W a)) :
       ((tensor l E M a).map (Prod.mkHom
         ((M.calculus a).adjunction.counit.app A) ((M.calculus a).adjunction.counit.app N)))
 
-/-- The primitive pullback comparison is L(F(e_C)), after quotient-model realization.
-Source: node proof step 6 (blueprint: lem-pur-completed-operation-tower-substitution). -/
+/-- The primitive pullback comparison `L(F(e_C))`, after quotient-model realization. -/
 def pullbackComparison {a b : S} (f : W a ⟶ W b)
     (C : coefficientSequenceDerived l E (W b)) :
     (integralDerivedPullback l E f).obj ((coefficientSequenceLimit l E (W b)).obj C) ⟶
@@ -129,9 +133,7 @@ def pullbackComparison {a b : S} (f : W a ⟶ W b)
         ((M.calculus b).adjunction.counit.app C))
 
 /-- Normalization for the three primitive operations and effectivity of the
-specified coherent counit. These assertions involve individual systems only.
-Source: original proof steps 1--6 of completed-operation substitution; Stacks
-07A4, 07A6 and 0941 (blueprint: lem-pur-normalized-completed-operation-models). -/
+specified coherent counit. These assertions involve individual systems only. -/
 structure PrimitiveLaws : Prop where
   counit : ∀ (a : S) (N : coefficientSequenceDerived l E (W a)),
     IsNormalizedCoefficientSequence l E (W a) N →
@@ -248,35 +250,9 @@ private theorem modelPullback {a b : S} (f : W a ⟶ W b)
     (M.calculus b) (M.calculus a) (M.calculus b) (M.roos a) (M.roos b)).1
       ((coefficientSequenceLimit l E (W b)).obj N)).2.1
 
-/-- Simultaneous quotient and Roos models with primitive normalization.
-This is the construction part of completed-operation substitution; it makes no
-assertion about finite expressions, naturality of their recursive comparisons,
-simultaneous substitution, or transport of structural maps.
-
-Source: Bhatt--Scholze Definition 3.4.10 and Lemma 6.5.9(4), with the
-representative-normalized refinement in the original substitution proof steps
-1--6; Stacks 07A4, 07A6, 0941
-(blueprint: lem-pur-normalized-completed-operation-models).
-
-Proof: choose the canonical quotient/limit calculus and its ordinary and derived
-completion models. Choose the sequence-site duality model and compare its closed
-tensor with the calculus tensor by the unique comparison preserving their common
-tensor-Hom adjunction. Do the same for the specified integral duality tensor.
-The strict quotient/Roos presentation descends through good representatives to
-identify completion with reduction followed by total limit. The strict quotient
-augmentation agrees sectionwise with the prescribed completion augmentation;
-uniqueness of its descent gives the displayed unit equation. Use the same Roos
-model at each scheme in all primitive quotient pullback realizations.
-The reconstruction theorem makes the actual counit invertible on normalized
-systems. The unit is the empty-input unit expression in the strict quotient
-normalization theorem. For tensor, identify the normalized inputs with reductions
-of their total limits by this counit, apply the reduction tensor comparison, and
-transport along the canonical closed-tensor comparison. Pullback of a reduction
-is normalized by effective quotient model descent; pull back the same counit
-isomorphism to handle any normalized input. Normalization is invariant under
-isomorphism by naturality of transition and the induced Hom-set bijections.
-Empty families require no choices, and none of these computations assumes
-boundedness, constructibility, or flatness of a quotient map. -/
+/-- Simultaneous quotient and Roos models with primitive normalization exist for any
+family of schemes. This makes no assertion about finite expressions, naturality of their
+recursive comparisons, simultaneous substitution, or transport of structural maps. -/
 theorem normalizedCompletedOperationModels {S : Type s} (W : S → Scheme.{t})
     (_hl : ∀ (a : S) (x : W a), IsUnit (l : (W a).residueField x)) :
     ∃ M : Models l E W, PrimitiveLaws l E M := by

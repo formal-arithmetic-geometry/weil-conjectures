@@ -23,11 +23,16 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 
 /-! # Constructible exceptional adjunction and coefficients
 
-Source: current blueprint, exceptional inverse image and coefficient comparisons
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients).
+This file packages the constructible exceptional adjunctions at the finite, field, integral and
+common coefficient stages, together with their coefficient comparisons and refinement
+compatibilities.
 
 The records below package conclusions. In particular they do not assume an exceptional
 adjunction on an unrestricted pro-etale category.
+
+## References
+
+* [Stacks, Tags 08G2, 0F7B]
 -/
 
 @[expose] public noncomputable section
@@ -42,9 +47,7 @@ open scoped CategoryTheory.Functor
 namespace WeilConjectures
 namespace ConstructibleExceptionalCoefficients
 
-/-- A packaged finite coefficient field, using the existing algebra and finiteness notions.
-Source: blueprint coefficient conventions
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- A packaged finite coefficient field, using the existing algebra and finiteness notions. -/
 structure FieldStage (l : ℕ) [Fact l.Prime] where
   carrier : Type u
   [field : Field carrier]
@@ -54,8 +57,7 @@ structure FieldStage (l : ℕ) [Fact l.Prime] where
 attribute [instance] FieldStage.field FieldStage.algebra FieldStage.finite
 
 /-- The four kinds of coefficient stage in the assertion. Positive levels are indexed by
-`ℕ+`, so the zero quotient is never introduced. Source: blueprint exceptional paragraph
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+`ℕ+`, so the zero quotient is never introduced. -/
 inductive Stage (l : ℕ) [Fact l.Prime] where
   | finite (E : FieldStage.{u} l) (n : ℕ+)
   | integral (E : FieldStage.{u} l)
@@ -66,17 +68,14 @@ variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- The exact recorded full finite-Tor categories. At field stages finite Tor imposes no
-additional condition. Source: blueprint finite-Tor and coefficient conventions
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+additional condition. -/
 abbrev C (T : Scheme.{max u v}) : Stage.{max u v} l → Type (max u v + 2)
   | .finite E n => finiteTorConstructibleCategory l E.carrier n n.pos T
   | .integral E => finiteTorConstructibleIntegralCategory l E.carrier T
   | .rational E => sfRationalConstructibleCategory l E.carrier T
   | .closed => generalAlgebraicallyClosedConstructibleCategory l Ω T
 
-/-- The category structures are inherited from the existing coefficient categories.
-Source: blueprint full-subcategory convention
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- The category structures are inherited from the existing coefficient categories. -/
 instance category (T : Scheme.{max u v}) (s : Stage.{max u v} l) :
     Category.{max u v + 2} (C.{u, v} l Ω T s) :=
   match s with
@@ -86,25 +85,13 @@ instance category (T : Scheme.{max u v}) (s : Stage.{max u v} l) :
   | .closed => inferInstance
 
 /-- The finite-Tor subcategories inherit the triangulation of their ordinary derived
-categories. Source: blueprint finite-Tor paragraph
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients).
-Proof: finite Tor amplitude is invariant under isomorphisms and shifts. Tensor a
-distinguished triangle with each degree-zero module and use its long exact cohomology
-sequence. For integral objects use one common interval for all reductions. Combine
-this with bounded constructibility and derived completeness. -/
+categories. -/
 instance finiteTriangulated (E : FieldStage.{u} l) (n : ℕ+) (T : Scheme.{u}) :
     (finiteTorConstructible l E.carrier n n.pos T).IsTriangulated :=
   (finite_ctf_isTriangulated l E.carrier n n.pos T).2.1
 
-/-- The same closure assertion for the completed integral coefficient category.
-This is the DAG statement lem-weil-integral-ctf-triangulated, stated here on the
-recorded predicate of definition-constructible-sheaves.
-Source: blueprint integral finite-Tor paragraph; Stacks Project, Tag 08G2 (2)
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients).
-Proof: every reduction is exact and preserves shifts. A common interval for two
-vertices is enlarged by its minimum and maximum endpoints, independently of the level.
-The finite triangle argument then gives the third vertex at every level. Completeness
-and bounded constructibility are closed under triangles and shifts. -/
+/-- The integral finite-Tor constructible category is triangulated: it is closed under
+isomorphisms, shifts and triangles in the derived category of completed integral coefficients. -/
 theorem integralTriangulated (E : FieldStage.{u} l) (T : Scheme.{u}) :
     (finiteTorConstructibleIntegral l E.carrier T).IsTriangulated := by
   let Q : ObjectProperty (DerivedCategory (scalarReductionSource.{u, u} l E.carrier T)) :=
@@ -161,8 +148,7 @@ theorem integralTriangulated (E : FieldStage.{u} l) (T : Scheme.{u}) :
 
 attribute [instance] integralTriangulated
 
-/-- Inherited zero objects. Source: blueprint finite-Tor paragraph
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- Inherited zero objects. -/
 instance zero (T : Scheme.{max u v}) (s : Stage.{max u v} l) : HasZeroObject (C.{u, v} l Ω T s) :=
   match s with
   | .finite _ _ => inferInstance
@@ -170,8 +156,7 @@ instance zero (T : Scheme.{max u v}) (s : Stage.{max u v} l) : HasZeroObject (C.
   | .rational _ => inferInstance
   | .closed => inferInstance
 
-/-- Inherited additive structures. Source: blueprint full-subcategory convention
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- Inherited additive structures. -/
 instance preadditive (T : Scheme.{max u v}) (s : Stage.{max u v} l) :
     Preadditive (C.{u, v} l Ω T s) :=
   match s with
@@ -180,8 +165,7 @@ instance preadditive (T : Scheme.{max u v}) (s : Stage.{max u v} l) :
   | .rational _ => inferInstance
   | .closed => inferInstance
 
-/-- Inherited integer shifts. Source: blueprint finite-Tor paragraph
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- Inherited integer shifts. -/
 instance shift (T : Scheme.{max u v}) (s : Stage.{max u v} l) : HasShift (C.{u, v} l Ω T s) ℤ :=
   match s with
   | .finite _ _ => inferInstance
@@ -189,8 +173,7 @@ instance shift (T : Scheme.{max u v}) (s : Stage.{max u v} l) : HasShift (C.{u, 
   | .rational _ => inferInstance
   | .closed => inferInstance
 
-/-- Additivity of inherited shifts. Source: blueprint exactness assertion
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- Additivity of inherited shifts. -/
 instance shiftAdditive (T : Scheme.{max u v}) (s : Stage.{max u v} l) (n : ℤ) :
     (shiftFunctor (C.{u, v} l Ω T s) n).Additive :=
   match s with
@@ -199,8 +182,7 @@ instance shiftAdditive (T : Scheme.{max u v}) (s : Stage.{max u v} l) (n : ℤ) 
   | .rational _ => inferInstance
   | .closed => inferInstance
 
-/-- Inherited distinguished triangles. Source: blueprint exactness assertion
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- Inherited distinguished triangles. -/
 instance pretriangulated (T : Scheme.{max u v}) (s : Stage.{max u v} l) :
     Pretriangulated (C.{u, v} l Ω T s) :=
   match s with
@@ -210,9 +192,7 @@ instance pretriangulated (T : Scheme.{max u v}) (s : Stage.{max u v} l) :
   | .closed => inferInstance
 
 /-- The exact adjunction at one of the specified coefficient stages. Both triangle
-identities and naturality of the Hom equivalences are fields of `Adjunction` itself.
-Source: blueprint exceptional adjunction and shift assertions
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+identities and naturality of the Hom equivalences are fields of `Adjunction` itself. -/
 structure Operation (X Y : Scheme.{max u v}) (s : Stage.{max u v} l) where
   F : C.{u, v} l Ω X s ⥤ C.{u, v} l Ω Y s
   G : C.{u, v} l Ω Y s ⥤ C.{u, v} l Ω X s
@@ -231,9 +211,7 @@ attribute [instance] Operation.leftAdditive Operation.rightAdditive
 
 /-- The coefficient comparison and the two completed unit/counit equations, for exact
 scalar functors between two of the actual finite-Tor categories. The counit equation
-uniquely characterizes b as the transpose of inverse q followed by the old counit.
-Source: blueprint coefficient-compatibility displays
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+uniquely characterizes b as the transpose of inverse q followed by the old counit. -/
 structure Comparison {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     (A : Operation.{u, v} l Ω X Y s) (B : Operation.{u, v} l Ω X Y t)
     (TX : C.{u, v} l Ω X s ⥤ C.{u, v} l Ω X t) (TY : C.{u, v} l Ω Y s ⥤ C.{u, v} l Ω Y t)
@@ -249,9 +227,7 @@ structure Comparison {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
   qShift : q.hom.CommShift ℤ
   bShift : b.hom.CommShift ℤ
 
-/-- Composition of q and b, with the scalar associators retained at both endpoints.
-Source: blueprint identity and composition cocycles
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- Composition of q and b, with the scalar associators retained at both endpoints. -/
 structure Cocycle {X Y : Scheme.{max u v}} {s t r : Stage.{max u v} l}
     {A : Operation.{u, v} l Ω X Y s} {B : Operation.{u, v} l Ω X Y t} {D :
     Operation.{u, v} l Ω X Y r}
@@ -270,29 +246,22 @@ structure Cocycle {X Y : Scheme.{max u v}} {s t r : Stage.{max u v} l}
       αX.hom.app (A.G.obj L) ≫ d.b.hom.app L
 
 /-- The finite and completed integral ring stages. This is only an index for the two
-ring-sheaf constructions already present in the dependencies.
-Source: blueprint finite and integral coefficients
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+ring-sheaf constructions already present in the dependencies. -/
 inductive RingStage (l : ℕ) [Fact l.Prime] where
   | finite (E : FieldStage.{u} l) (n : ℕ+)
   | integral (E : FieldStage.{u} l)
 
-/-- Forget the restriction to ring stages. Source: blueprint coefficient list
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- Forget the restriction to ring stages. -/
 abbrev RingStage.stage : RingStage.{u} l → Stage.{u} l
   | .finite E n => .finite E n
   | .integral E => .integral E
 
-/-- The published coefficient sheaves, including their canonical pullback identifications.
-Source: blueprint ordinary finite and completed integral module conventions
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- The published coefficient sheaves, including their canonical pullback identifications. -/
 abbrev RingStage.coefficients : RingStage.{u} l → PurCompactSupport.Coefficients.{u}
   | .finite E n => PurCompactSupport.finite l E.carrier n n.pos
   | .integral E => PurCompactSupport.completed l E.carrier
 
-/-- Inclusion into the ordinary derived category of the corresponding ring sheaf.
-Source: blueprint strictly full finite-Tor subcategories
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- Inclusion into the ordinary derived category of the corresponding ring sheaf. -/
 abbrev RingStage.inclusion (T : Scheme.{max u v}) (s : RingStage.{max u v} l) :
     C.{u, v} l Ω T (s.stage l) ⥤
       DerivedCategory (pbcModules T ((s.coefficients l).ring T)) :=
@@ -302,9 +271,7 @@ abbrev RingStage.inclusion (T : Scheme.{max u v}) (s : RingStage.{max u v} l) :
 
 /-- Exactly the ring coefficient changes generated by quotients, integral reductions,
 retained ramified extensions and completed inclusions. Composition is allowed only
-when its actual ring-sheaf maps compose, and identities have identity ring maps.
-Source: blueprint coefficient-change list and the en convention
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+when its actual ring-sheaf maps compose, and identities have identity ring maps. -/
 inductive Allowed : {s t : RingStage.{u} l} →
     PurCompactSupport.Change (s.coefficients l) (t.coefficients l) → Prop
   | quotient (E : FieldStage.{u} l) (m n : ℕ+) (h : (n : ℕ) ≤ m) :
@@ -332,9 +299,7 @@ inductive Allowed : {s t : RingStage.{u} l} →
       Allowed a → Allowed b → Allowed d
 
 /-- The restricted scalar functor, together with its identification with actual derived
-extension along the specified ring-sheaf map. This records preservation as a conclusion.
-Source: blueprint derived finite change and completed scalar extension
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+extension along the specified ring-sheaf map. This records preservation as a conclusion. -/
 structure Scalar {s t : RingStage.{max u v} l}
     (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))
     (T : Scheme.{max u v}) where
@@ -347,9 +312,7 @@ structure Scalar {s t : RingStage.{max u v} l}
 
 attribute [instance] Scalar.commShift Scalar.additive
 
-/-- The q projection with the actual restricted scalar structures supplied explicitly.
-Source: blueprint canonical q (blueprint: lem-sf-constructible-exceptional-adjunction-coefficients).
--/
+/-- The q projection with the actual restricted scalar structures supplied explicitly. -/
 def Scalar.q {X Y : Scheme.{max u v}} {s t : RingStage.{max u v} l}
     {a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l)}
     {A : Operation.{u, v} l Ω X Y (s.stage l)} {B : Operation.{u, v} l Ω X Y (t.stage l)}
@@ -357,9 +320,7 @@ def Scalar.q {X Y : Scheme.{max u v}} {s t : RingStage.{max u v} l}
     (d : Comparison.{u, v} l Ω A B SX.functor SY.functor) : A.F ⋙ SY.functor ≅ SX.functor ⋙ B.F :=
   d.q
 
-/-- The ambient realization of the left functor at a ring stage.
-Source: blueprint compact-support definition R p_* j_!
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- The ambient realization of the left functor at a ring stage. -/
 abbrev LeftRealization {X Y : Scheme.{max u v}} {f : X ⟶ Y} (c : Compactification f)
     (s : RingStage.{max u v} l) (A : Operation.{u, v} l Ω X Y (s.stage l)) :=
   A.F ⋙ RingStage.inclusion.{u, v} l Ω Y s ≅ RingStage.inclusion.{u, v} l Ω X s ⋙
@@ -367,9 +328,7 @@ abbrev LeftRealization {X Y : Scheme.{max u v}} {f : X ⟶ Y} (c : Compactificat
 
 /-- The q map is the canonical scalar-adjunction mate of the proper/open restriction
 square, expressed through the actual scalar and support realizations. In particular
-it is not an arbitrarily selected natural isomorphism.
-Source: blueprint canonical q construction
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+it is not an arbitrarily selected natural isomorphism. -/
 def QNormalized {X Y : Scheme.{max u v}} {f : X ⟶ Y} (c : Compactification f)
     {s t : RingStage.{max u v} l}
     {A : Operation.{u, v} l Ω X Y (s.stage l)} {B : Operation.{u, v} l Ω X Y (t.stage l)}
@@ -386,8 +345,7 @@ def QNormalized {X Y : Scheme.{max u v}} {f : X ⟶ Y} (c : Compactification f)
         (PurCompactSupport.comparison a c).app ((RingStage.inclusion.{u, v} l Ω X s).obj K)
 
 /-- Scalar associators are the existing tensor-unit-normalized adjunction comparisons,
-lifted through the full inclusions. Source: blueprint coefficient composition
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+lifted through the full inclusions. -/
 structure ScalarComposition {s t r : RingStage.{max u v} l}
     {a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l)}
     {b : PurCompactSupport.Change (t.coefficients l) (r.coefficients l)}
@@ -403,8 +361,7 @@ structure ScalarComposition {s t r : RingStage.{max u v} l}
           ((RingStage.inclusion.{u, v} l Ω T s).obj K)
 
 /-- Identity scalar extension is normalized by multiplication, through the existing
-scalar adjunction. Source: blueprint identity coefficient change
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+scalar adjunction. -/
 structure ScalarIdentity {s : RingStage.{max u v} l}
     {a : PurCompactSupport.Change (s.coefficients l) (s.coefficients l)}
     (h : ∀ W : Scheme.{max u v}, a.map W = 𝟙 _) (T : Scheme.{max u v}) (A :
@@ -419,8 +376,7 @@ structure ScalarIdentity {s : RingStage.{max u v} l}
           ((RingStage.inclusion.{u, v} l Ω T s).obj K)
 
 /-- Rationalization on the integral finite-Tor category uses the specified raw scalar
-localization, with the same integral representatives. Source: blueprint R to E
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+localization, with the same integral representatives. -/
 abbrev rationalization (E : FieldStage.{max u v} l) (T : Scheme.{max u v}) :
     C.{u, v} l Ω T (.integral E) ⥤ C.{u, v} l Ω T (.rational E) :=
   PurCompactSupport.finiteTorIntegralInclusion l E.carrier T ⋙
@@ -428,28 +384,22 @@ abbrev rationalization (E : FieldStage.{max u v} l) (T : Scheme.{max u v}) :
 
 /-- The actual completed scalar functor after rationalization. The parameter zero is
 only the proof parameter of the published intrinsic construction, independent of the
-geometric characteristic. Source: blueprint rational coefficient extension
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+geometric characteristic. -/
 abbrev rationalScalar (E L : FieldStage.{max u v} l) (i : E.carrier →ₐ[Padic l] L.carrier)
     (T : Scheme.{max u v}) : C.{u, v} l Ω T (.rational E) ⥤ C.{u, v} l Ω T (.rational L) :=
   sfRationalScalarExtension l E.carrier T 0 (Fact.out : l.Prime).ne_zero L.carrier i
 
-/-- The canonical small field model of a common coefficient stage.
-Source: blueprint common-stage coefficient category
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- The canonical small field model of a common coefficient stage. -/
 abbrev commonField (i : AlgebraicallyClosedCoefficients.Index l Ω) : FieldStage.{max u v} l where
   carrier := AlgebraicallyClosedCoefficients.Coefficient.{max u v} l Ω i
 
 /-- Select one endpoint of the fixed morphism, without imposing extra geometric
-hypotheses on arbitrary schemes. Source: blueprint fixed X and Y
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+hypotheses on arbitrary schemes. -/
 abbrev endpoint (X Y : Scheme.{u}) (side : Bool) : Scheme.{u} :=
   if side then X else Y
 
 /-- Coefficient equations with the shift structures supplied as output data, for the
-published raw rationalization, rational extension, and finite-stage inclusion functors.
-Source: blueprint rational and common-stage comparisons
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+published raw rationalization, rational extension, and finite-stage inclusion functors. -/
 structure FieldComparison {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     (A : Operation.{u, v} l Ω X Y s) (B : Operation.{u, v} l Ω X Y t)
     (TX : C.{u, v} l Ω X s ⥤ C.{u, v} l Ω X t) (TY : C.{u, v} l Ω Y s ⥤ C.{u, v} l Ω Y t) where
@@ -457,10 +407,7 @@ structure FieldComparison {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
   [shiftY : TY.CommShift ℤ]
   comparison : Comparison.{u, v} l Ω A B TX TY
 
-/-- Left comparison with the output shift structures retained in its type.
-Source: blueprint coefficient q (blueprint:
-lem-sf-constructible-exceptional-adjunction-coefficients).
--/
+/-- Left comparison with the output shift structures retained in its type. -/
 def FieldComparison.q {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     {A : Operation.{u, v} l Ω X Y s} {B : Operation.{u, v} l Ω X Y t}
     {TX : C.{u, v} l Ω X s ⥤ C.{u, v} l Ω X t} {TY : C.{u, v} l Ω Y s ⥤ C.{u, v} l Ω Y t}
@@ -469,10 +416,7 @@ def FieldComparison.q {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
   letI := d.shiftY
   d.comparison.q
 
-/-- Right comparison with the output shift structures retained in its type.
-Source: blueprint coefficient b (blueprint:
-lem-sf-constructible-exceptional-adjunction-coefficients).
--/
+/-- Right comparison with the output shift structures retained in its type. -/
 def FieldComparison.b {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     {A : Operation.{u, v} l Ω X Y s} {B : Operation.{u, v} l Ω X Y t}
     {TX : C.{u, v} l Ω X s ⥤ C.{u, v} l Ω X t} {TY : C.{u, v} l Ω Y s ⥤ C.{u, v} l Ω Y t}
@@ -481,9 +425,7 @@ def FieldComparison.b {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
   letI := d.shiftY
   d.comparison.b
 
-/-- The same cocycle at field stages, retaining the existing scalar associators.
-Source: blueprint composition and common-stage clauses
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- The same cocycle at field stages, retaining the existing scalar associators. -/
 def FieldCocycle {X Y : Scheme.{max u v}} {s t r : Stage.{max u v} l}
     {A : Operation.{u, v} l Ω X Y s} {B : Operation.{u, v} l Ω X Y t} {D :
     Operation.{u, v} l Ω X Y r}
@@ -500,17 +442,13 @@ def FieldCocycle {X Y : Scheme.{max u v}} {s t r : Stage.{max u v} l}
   letI := d.shiftY
   Cocycle.{u, v} l Ω a.comparison b.comparison d.comparison αX αY
 
-/-- The published finite-stage inclusion with both endpoint categories explicit.
-Source: blueprint common-stage category
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- The published finite-stage inclusion with both endpoint categories explicit. -/
 abbrev commonInclusion (T : Scheme.{max u v}) (i : AlgebraicallyClosedCoefficients.Index l Ω) :
     C.{u, v} l Ω T (.rational (commonField.{u, v} l Ω i)) ⥤ C.{u, v} l Ω T .closed :=
   GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := T) i
 
 /-- The existing common-stage transition isomorphism, transported from the opaque
-stage-system transition to the actual rational tensor functor by its defining equality.
-Source: blueprint common-stage coefficient convention
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+stage-system transition to the actual rational tensor functor by its defining equality. -/
 def commonTransition (T : Scheme.{max u v}) (i j : AlgebraicallyClosedCoefficients.Index l Ω)
     (h : i ≤ j) :
     rationalScalar.{u, v} l Ω (commonField.{u, v} l Ω i) (commonField.{u, v} l Ω j)
@@ -523,9 +461,7 @@ def commonTransition (T : Scheme.{max u v}) (i j : AlgebraicallyClosedCoefficien
     (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T).transIso h
 
 /-- Refinement is the counit-normalized conjugate comparison between the two adjunctions.
-Both displayed equations retain all functor components, including the unit equation.
-Source: blueprint compactification refinement and uniqueness of right adjoints
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+Both displayed equations retain all functor components, including the unit equation. -/
 structure RefinementComparison {X Y : Scheme.{max u v}} {s : Stage.{max u v} l}
     (A B : Operation.{u, v} l Ω X Y s) where
   left : A.F ≅ B.F
@@ -540,9 +476,7 @@ structure RefinementComparison {X Y : Scheme.{max u v}} {s : Stage.{max u v} l}
   rightShift : right.hom.CommShift ℤ
 
 /-- The canonical proper/open refinement comparison, normalized by the open unit
-and proper counit. The pullback equality is proof data, not a new comparison map.
-Source: blueprint compactification-refinement clause; Stacks 0F7B
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+and proper counit. The pullback equality is proof data, not a new comparison map. -/
 def RingRefinementNormalized {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c.Refinement d) (s : RingStage.{max u v} l)
     {A B : Operation.{u, v} l Ω X Y (s.stage l)}
@@ -577,9 +511,7 @@ def RingRefinementNormalized {X Y : Scheme.{max u v}} {f : X ⟶ Y}
 
 /-- The full conclusion, with actual categories and canonical scalar/proper-open
 normalizations. All functors and comparisons are output data; no adjunction or
-coefficient compatibility is a premise of the theorem asserting this record exists.
-Source: current blueprint exceptional-functor paragraph and coefficient compatibility
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+coefficient compatibility is a premise of the theorem asserting this record exists. -/
 structure RingSystem (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -691,9 +623,7 @@ structure RingSystem (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
         (operation c (s.stage l)).G.map ((scalarIdentity a h ha false).iso.hom.app L) =
       (scalarIdentity a h ha true).iso.hom.app ((operation c (s.stage l)).G.obj L)
 
-/-- Rational localization and common-stage descent of the same ring-stage system.
-Source: blueprint field-coefficient clauses
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- Rational localization and common-stage descent of the same ring-stage system. -/
 structure FieldSystem (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -751,9 +681,7 @@ structure FieldSystem (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
           ((sfRationalScalarUnit l E.carrier Y 0 (Fact.out : l.Prime).ne_zero).hom.app L) =
       (sfRationalScalarUnit l E.carrier X 0 (Fact.out : l.Prime).ne_zero).hom.app
         ((R.operation c (.rational E)).G.obj L)
-/-- Common coefficient stages and compactification refinement of the fixed system.
-Source: blueprint common-stage and refinement clauses
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- Common coefficient stages and compactification refinement of the fixed system. -/
 structure CommonSystem (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -802,9 +730,7 @@ structure CommonSystem (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
         (commonComparison c i).b.hom.app L ≫
         (R.operation c .closed).G.map
           ((commonTransition.{u, v} l Ω Y i j h).inv.app L))
-/-- Compactification refinements, retaining the counit-conjugate right comparisons.
-Source: blueprint refinement clause
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+/-- Compactification refinements, retaining the counit-conjugate right comparisons. -/
 structure RefinementSystem (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -838,9 +764,7 @@ structure RefinementSystem (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     (refinement (r.comp t) s).left = (refinement r s).left ≪≫ (refinement t s).left
 
 /-- One joint family of ring, field, common-stage and refinement conclusions.
-The later records refer to the very same operation and comparison data in the earlier ones.
-Source: blueprint constructible adjunction with coefficients
-(blueprint: lem-sf-constructible-exceptional-adjunction-coefficients). -/
+The later records refer to the very same operation and comparison data in the earlier ones. -/
 structure System (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

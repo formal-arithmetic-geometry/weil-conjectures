@@ -10,16 +10,20 @@ public import WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperat
 
 /-! # Data for compatible representatives of strict open tensors
 
-All 21 definitions below retain their original signatures and bodies.
-(blueprint: def-pur-completed-open-tensor-representative-data).
+This file records the data of compatible strict representatives for the completed open
+tensor: the ordinary and balanced scalar tensors on the ambient and open sites, the
+simultaneous open tensor map on whole quotient systems, and its normalization on flat-term
+K-flat quotient representatives.
 
-Source: Stacks Project, sites-cohomology.tex Tag 0GL1 and sites-modules.tex Tag 0E8I;
-strict-system and completion-unit refinement, original realization proof steps 1--3
-(blueprint: lem-pur-completed-open-tensor-system-realization).
+## Implementation details
 
 The index n means positive exponent n+1. Site and coefficient universes are independent.
 All tensors below are the published total-complex derived tensors. In particular the
 system tensor is formed on the ringed sequence site, before finite evaluation or total limit.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941, 099B, 0E8I, 0GL1.
 -/
 
 @[expose] public noncomputable section
@@ -40,11 +44,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {U V : Scheme.{t}} (j : U ⟶ V) [IsOpenImmersion j]
 
 /-- Compatible presentations of the already specified open operations, reduction and
-completion. The all-input comparison is essential: ordinary tensor need not be complete.
-The two completion comparisons are fixed by their actual units, and restriction/completion
-by its unit square. No arbitrary comparison of completed objects is supplied.
-Source: Tags 0GL1, 0E8I, 0941, 099B; node proof steps 1--5
-(blueprint: lem-pur-completed-open-tensor-system-realization). -/
+completion, with the completion comparisons fixed by their units and restriction/completion
+by its unit square. -/
 structure Context where
   ambient : CoefficientDerivedSystemCalculus l E V
   openSite : CoefficientDerivedSystemCalculus l E U
@@ -82,37 +83,28 @@ structure Context where
 
 variable (C : Context l E j)
 
-/-- Ordinary tensor on the ambient site, exactly the tensor used in completedTensor.
-Source: Tag 0GL1 (blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- Ordinary tensor on the ambient site, exactly the tensor used in completedTensor. -/
 abbrev tensorV := (IntegralOnSlice.duality l E V none).closed.tensor
 
-/-- The same ordinary tensor on the open site.
-Source: Tag 0GL1 (blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- The same ordinary tensor on the open site. -/
 abbrev tensorU := (IntegralOnSlice.duality l E U none).closed.tensor
 
-/-- The source ordinary tensor functor H(K,N).
-Source: Tag 0GL1 (blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- The source ordinary tensor functor H(K,N). -/
 abbrev ordinarySource := (shriek l E j C.operations).prod (𝟭 _) ⋙ tensorV l E (V := V)
 
-/-- The ordinary tensor H_U(K,N), before extension by zero.
-Source: Tag 0GL1 (blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- The ordinary tensor H_U(K,N), before extension by zero. -/
 abbrev ordinaryOpen := (𝟭 _).prod (star l E j C.operations) ⋙ tensorU l E (U := U)
 
-/-- The type of ordinary open tensor comparisons, not a choice of such a map.
-Source: Tag 0GL1 (blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- The type of ordinary open tensor comparisons. -/
 abbrev OrdinaryMap := ordinarySource l E j C ≅ ordinaryOpen l E j C ⋙ shriek l E j C.operations
 
-/-- Balanced scalar tensor q_V, including the recorded strict quotient transitions.
-Source: node proof step 1, Tag 07A4
-(blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- Balanced scalar tensor q_V, including the recorded strict quotient transitions. -/
 def reductionTensorV : tensorV l E (V := V) ⋙ C.ambient.reduction ≅
     C.ambient.reduction.prod C.ambient.reduction ⋙ C.ambient.systemClosed.tensor :=
   isoWhiskerRight (eqToIso (congrArg CoefficientClosedStructure.tensor C.tensorV))
     C.ambient.reduction ≪≫ C.ambient.reductionTensor
 
-/-- The corresponding balanced scalar tensor q_U.
-Source: node proof step 1, Tag 07A4
-(blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- The corresponding balanced scalar tensor q_U. -/
 def reductionTensorU : tensorU l E (U := U) ⋙ C.openSite.reduction ≅
     C.openSite.reduction.prod C.openSite.reduction ⋙ C.openSite.systemClosed.tensor :=
   isoWhiskerRight (eqToIso (congrArg CoefficientClosedStructure.tensor C.tensorU))
@@ -121,25 +113,19 @@ def reductionTensorU : tensorU l E (U := U) ⋙ C.openSite.reduction ≅
 variable (K : DerivedCategory (scalarReductionSource l E U))
   (N : DerivedCategory (scalarReductionSource l E V))
 
-/-- T is the tensor of whole reductions on the ambient ringed sequence site.
-Source: node statement, Tag 0941
-(blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- T is the tensor of whole reductions on the ambient ringed sequence site. -/
 def sourceSystem : coefficientSequenceDerived l E V :=
   C.ambient.systemClosed.tensor.obj
     (C.ambient.reduction.obj ((shriek l E j C.operations).obj K), C.ambient.reduction.obj N)
 
-/-- S is the open tensor of whole reductions, with its actual quotient transitions.
-Source: node statement, Tag 0941
-(blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- S is the open tensor of whole reductions, with its actual quotient transitions. -/
 def openSystem : coefficientSequenceDerived l E U :=
   C.openSite.systemClosed.tensor.obj
     (C.openSite.reduction.obj K,
       C.openSite.reduction.obj ((star l E j C.operations).obj N))
 
 /-- The simultaneous open tensor map: q_V inverse, reduction of gamma ordinary,
-the all-input strict open comparison, then J(q_U). This fixes the system map itself.
-Source: node proof steps 1--2, Tag 0GL1
-(blueprint: lem-pur-completed-open-tensor-system-realization). -/
+the all-input strict open comparison, then J(q_U). -/
 def systemMap (γ : OrdinaryMap l E j C) :
     sourceSystem l E j C K N ≅ (J l E j C.operations).obj (openSystem l E j C K N) :=
   ((reductionTensorV l E j C).app ((shriek l E j C.operations).obj K, N)).symm ≪≫
@@ -148,9 +134,7 @@ def systemMap (γ : OrdinaryMap l E j C) :
     (J l E j C.operations).mapIso
       ((reductionTensorU l E j C).app (K, (star l E j C.operations).obj N))
 
-/-- The analogous open tensor substitution identification.
-Source: node proof steps 3 and 5
-(blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- The analogous open tensor substitution identification. -/
 def openIdentification :
     (IntegralOnSlice.completedTensor l E U none).obj (K, (star l E j C.operations).obj N) ≅
       (coefficientSequenceLimit l E U).obj (openSystem l E j C K N) :=
@@ -158,22 +142,19 @@ def openIdentification :
     (coefficientSequenceLimit l E U).mapIso
       ((reductionTensorU l E j C).app (K, (star l E j C.operations).obj N))
 
-/-- The total-complex representative of H.
-Source: Tag 0GL1 (blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- The total-complex representative of H. -/
 abbrev sourceComplex (P : CochainComplex (scalarReductionSource l E U) ℤ)
     (Q : CochainComplex (scalarReductionSource l E V) ℤ) :=
   (OpenSemilinearTensor.total l E V).obj
     ((OpenSemilinearTensor.extensionComplex l E j C.operations).obj P, Q)
 
-/-- The total-complex representative of H_U.
-Source: Tag 0GL1 (blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- The total-complex representative of H_U. -/
 abbrev openComplex (P : CochainComplex (scalarReductionSource l E U) ℤ)
     (Q : CochainComplex (scalarReductionSource l E V) ℤ) :=
   (OpenSemilinearTensor.total l E U).obj
     (P, (OpenSemilinearTensor.restrictionComplex l E j C.operations).obj Q)
 
-/-- One strict chain map on whole quotient systems, formed before localization.
-Source: node proof step 2 (blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- One strict chain map on whole quotient systems, formed before localization. -/
 def strictChain (P : CochainComplex (scalarReductionSource l E U) ℤ)
     (Q : CochainComplex (scalarReductionSource l E V) ℤ) :
     (C.ordinaryV.functor.mapHomologicalComplex (.up ℤ)).obj (sourceComplex l E j C P Q) ≅
@@ -196,8 +177,7 @@ variable (P : CochainComplex (scalarReductionSource l E U) ℤ)
     (R := completedIntegralCommRingSheafUnrestricted l E U)
     ((OpenSemilinearTensor.restrictionComplex l E j C.operations).obj Q))
 
-/-- The ambient ordinary-tensor representative, using the actual derived-functor counit.
-Source: node proof step 1 (blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- The ambient ordinary-tensor representative, using the actual derived-functor counit. -/
 def sourceRepresentative :
     (ordinarySource l E j C).obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≅
       DerivedCategory.Q.obj (sourceComplex l E j C P Q) :=
@@ -207,8 +187,7 @@ def sourceRepresentative :
     ((IntegralOnSlice.duality l E V none).models.iso _ _ _ _ _
       (C.strictOpen.kflat P hP hfP) hQ).symm
 
-/-- The open ordinary-tensor representative, retaining the restriction counit.
-Source: node proof step 1 (blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- The open ordinary-tensor representative, retaining the restriction counit. -/
 def openRepresentative :
     (ordinaryOpen l E j C).obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≅
       DerivedCategory.Q.obj (openComplex l E j C P Q) :=
@@ -217,14 +196,9 @@ def openRepresentative :
         ((restriction l E j C.operations).mapDerivedCategoryFactors.app Q)) ≪≫
     ((IntegralOnSlice.duality l E U none).models.iso _ _ _ P _ hP hR).symm
 
-/-- Normalization on flat-term K-flat quotient representatives. The displayed strict-chain
-augmentation equation is imposed on every local section in every degree and finite level,
-before localization. Together these components are equality of augmented strict maps;
-they are not a test for equality of arbitrary derived arrows. The two Computations include
-the actual scalar-unit augmentations and all quotient transitions. The last square
-identifies localization of that single chain map with systemMap itself.
-Source: node proof steps 1--3, Tags 0GL1, 0E8I, 0941
-(blueprint: lem-pur-completed-open-tensor-system-realization). -/
+/-- Normalization on flat-term K-flat quotient representatives: the strict-chain
+augmentation equation holds on every local section in every degree and finite level, and
+the localization of the strict chain map is `systemMap`. -/
 def RepresentativeLaws (γ : OrdinaryMap l E j C) : Prop :=
   ∀ (P : CochainComplex (scalarReductionSource l E U) ℤ)
     (Q : CochainComplex (scalarReductionSource l E V) ℤ)
