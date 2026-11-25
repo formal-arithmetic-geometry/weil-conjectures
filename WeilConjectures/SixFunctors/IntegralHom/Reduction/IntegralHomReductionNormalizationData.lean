@@ -16,7 +16,16 @@ import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWh
 
 This isolates the representative normalization field required by
 `ReductionPresentation`.
-(blueprint: lem-sf-integral-hom-reduction-normalization).
+
+## Implementation details
+
+The derived comparison is chosen together with its normalization, by descent of the
+normalized chain comparison built from the scalar-extension unit `x ↦ 1 ⊗ x` on K-flat
+representatives: an arbitrary comparison need not satisfy the counit square.
+
+## References
+
+* Stacks Project, Tags 07A4, 07A6.
 -/
 
 @[expose] public section
@@ -141,20 +150,9 @@ private theorem actual_ordinaryAdjunction (n : ℕ) :
     (coefficientActualScalarDerivedPair l E Y n).ordinaryAdjunction =
       (scalarReductionExtension_adjunction l E Y n).choose := rfl
 
--- STATEMENT-DISPUTED: repaired; an arbitrary mu need not satisfy the counit square.
--- Choose the comparison and its normalization together.
 -- The concrete representative conversions require a larger elaboration budget.
 /-- The sectionwise and counit-square normalization data exists for a fixed
-finite target and source presentation.
-
-Source: Stacks Tags 07A4 and 07A6; blueprint order 2478, proof step 3.
-Proof: on K-flat representatives use the scalar-extension unit
-`x ↦ 1 ⊗ x`. Balanced tensor associativity gives an invertible chain map and
-its pure-tensor formula. The left-derived universal property transports this
-map to the displayed counit square. Choose the derived comparison by descent
-of this normalized chain comparison, rather than accepting an arbitrary comparison.
-(blueprint: lem-sf-integral-hom-reduction-normalization-data).
--/
+finite target and source presentation. -/
 theorem reduction_normalization_data_exists
     (a : TensorPresentation.{t, u} Y
       (completedIntegralCommRingSheaf l E Y D hl)) (n : ℕ)

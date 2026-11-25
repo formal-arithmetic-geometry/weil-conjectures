@@ -13,8 +13,12 @@ public import Mathlib.RingTheory.Etale.QuasiFinite
 Let `S` be a finite `R`-algebra and `p` a prime of `R`. After base change to an étale
 neighbourhood `(R', P)` of `p` with trivial residue field extension, the algebra `R' ⊗[R] S`
 splits by complete orthogonal idempotents into factors with at most one prime over `P`
-(Stacks 00UK/00UL, finite case). This is Mathlib's
+(finite case of Stacks 00UK/00UL). This is Mathlib's
 `Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq`.
+
+## References
+
+* Stacks Project, Tags 00UK, 00UL
 -/
 
 @[expose] public section
@@ -23,14 +27,12 @@ universe u v
 
 open TensorProduct
 
-/-- **Idempotent decomposition of a finite algebra after an étale neighbourhood** (finite case
-of Stacks 00UK/00UL). If `S` is a finite `R`-algebra and `p` is a prime of `R`, there are an
+/-- **Idempotent decomposition of a finite algebra after an étale neighbourhood.**
+If `S` is a finite `R`-algebra and `p` is a prime of `R`, there are an
 étale `R`-algebra `R'`, a prime `P` of `R'` over `p` with `κ(p) ≅ κ(P)`, complete orthogonal
 idempotents `e₁, …, eₙ, e_∞` of `R' ⊗[R] S` and primes `Q₁, …, Qₙ` of `R' ⊗[R] S` over `P`
 such that `eᵢ ∉ Qᵢ`, and every prime `Q` over `P` contains `e_∞` and equals `Qᵢ` whenever
-`eᵢ ∉ Q`.
-
-(blueprint: `lem-weil-pbc-finite-algebra-etale-idempotent-decomposition`) -/
+`eᵢ ∉ Q`. -/
 theorem Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq_of_finite
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] [Module.Finite R S]
     (p : Ideal R) [p.IsPrime] :

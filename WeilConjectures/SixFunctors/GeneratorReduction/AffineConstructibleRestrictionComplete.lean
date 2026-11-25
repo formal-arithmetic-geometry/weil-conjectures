@@ -23,7 +23,13 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedPullbackU
 
 /-! # Completeness under constructible restriction inside an affine open
 
-Source: Bhatt--Scholze, Lemma 6.5.8; Stacks Tags 09BL, 09BM, and 099M.
+Restricting a complete complex to a qcqs weakly etale object over a constructible immersed
+affine stratum preserves completeness.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.8]
+* [Stacks, Tags 099M, 09BL and 09BM]
 -/
 
 @[expose] public noncomputable section
@@ -143,28 +149,7 @@ private theorem path_immersion {T S : Scheme.{u}} {tree : QcqsOpenClosedTree T}
     exact inferInstanceAs (IsImmersion (p.toRoot ≫ i))
 
 /-- Ordinary restriction of a complete input to a qcqs weakly etale object of a
-constructible immersed affine stratum remains complete. The ambient scheme can be
-arbitrary. This asserts completeness only, with no constructibility or projective model.
-
-Source: Bhatt--Scholze, Lemma 6.5.8; Stacks Tags 09BL, 09BM, and 099M.
-(blueprint: lem-sf-affine-constructible-restriction-complete).
-
-Proof: induction on the path shows that its structural morphism, followed by the
-open immersion, is an immersion. Inverse image along an immersion preserves limits;
-weakly etale inverse image is over-site restriction and also preserves limits. Use
-uniqueness of left adjoints to identify their composite with inverse image along the
-composite scheme map. The finite coefficient maps are isomorphisms and preserve all
-quotient transitions. Taking their inverse limit identifies the completed coefficient
-map, so it too is invertible. The underlying abelian sheaf comparison then proves
-that ordinary module pullback preserves limits. As a left adjoint it preserves
-colimits and is therefore exact. The generator-normalized quotient comparisons give
-one isomorphism of augmented strict towers. Preservation of products gives the Roos
-comparison, and localization gives the completion comparison with its unit equation.
-The source completeness criterion makes the source unit invertible; its pullback
-and the completion comparison are invertible, hence so is the target unit. Apply
-the target completeness criterion. Finally the uniqueness isomorphism between the
-two ordinary total derived pullback presentations transports completeness to the
-displayed functor. Empty schemes and zero inputs need no separate choice. -/
+constructible immersed affine stratum remains complete, for an arbitrary ambient scheme. -/
 theorem affineConstructibleRestrictionComplete
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -24,6 +24,15 @@ Let `f : X ⟶ Y` be a finite morphism.
   triangle `j_! j^* M ⟶ M ⟶ i_* i^* M ⟶ (j_! j^* M)[1]` holds with the *exact* direct image
   `i_*` applied levelwise (`AlgebraicGeometry.Etale.exists_distTriang_openClosed_of_isFinite`),
   the second map being the unit of `i^* ⊣ i_*`.
+
+## Implementation details
+
+The stalk formula is the product formula `AlgebraicGeometry.Etale.stalkIsoPi` (natural in `G`:
+`AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi`), the finite product being a biproduct. The
+vanishing of higher direct images uses that `Rf_*` is `f_*` applied levelwise
+(`AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory`). The open–closed
+triangle is `AlgebraicGeometry.Etale.exists_distTriang_openClosed`, transported along this
+identification.
 -/
 
 @[expose] public section
@@ -49,12 +58,10 @@ section Stalk
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
   (y : Spec (.of Ω) ⟶ Y) [HasSmallSiteSheafify A]
 
-/-- Blueprint `lemma-finite-direct-images--1`: for a finite morphism `f : X ⟶ Y` and a
-geometric point `y` of `Y` with algebraically closed residue field, the restrictions of stalks
-`AlgebraicGeometry.Etale.stalkRestrict` give an isomorphism from the stalk of `f_* G` at `y` to the
-direct sum of the stalks of `G` at the finitely many geometric points of `X` over `y`. This is the
-product formula `AlgebraicGeometry.Etale.stalkIsoPi` (natural in `G`:
-`AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi`), the finite product being a biproduct. -/
+/-- For a finite morphism `f : X ⟶ Y` and a geometric point `y` of `Y` with algebraically
+closed residue field, the restrictions of stalks `AlgebraicGeometry.Etale.stalkRestrict` give an
+isomorphism from the stalk of `f_* G` at `y` to the direct sum of the stalks of `G` at the
+finitely many geometric points of `X` over `y`. -/
 def Etale.stalkIsoBiproduct (G : Sheaf X.smallEtaleTopology A) :
     (pointSmallEtale y).sheafFiber.obj ((f)_*[A].obj G) ≅
       ⨁ fun t : GeometricFiber f y ↦ (pointSmallEtale t.1).sheafFiber.obj G :=
@@ -82,11 +89,8 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f]
   [hJ : Y.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
 include hJ in
-/-- Blueprint `lemma-finite-direct-images--2`, the vanishing of the higher direct
-images: for a finite morphism `f`, `Rᑫf_* G = 0` for every sheaf `G` and `q ≠ 0`. Since `f_*` is
-exact (`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite`), `Rf_*` is `f_*`
-applied levelwise (`AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory`),
-and `f_*` of a sheaf placed in degree `0` is again concentrated in degree `0`. -/
+/-- Vanishing of higher direct images along a finite morphism: `Rᑫf_* G = 0` for every
+sheaf `G` and `q ≠ 0`. -/
 theorem Etale.isZero_homology_rightDerivedFunctor_lowerStar_of_isFinite
     (G : Sheaf X.smallEtaleTopology A) {q : ℤ} (hq : q ≠ 0) :
     IsZero ((DerivedCategory.homologyFunctor _ q).obj
@@ -111,17 +115,14 @@ variable {U Z X : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [I
   [hJ : X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
 include hJ in
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--8`: for a closed immersion
-`i : Z ⟶ X` with complementary open immersion `j : U ⟶ X` and every `M ∈ D(X_ét, A)`, the counit
+/-- For a closed immersion `i : Z ⟶ X` with complementary open immersion `j : U ⟶ X` and every
+`M ∈ D(X_ét, A)`, the counit
 `j_! j^* M ⟶ M` of `j_! ⊣ j^*` and the unit `M ⟶ i_* i^* M` of `i^* ⊣ Ri_*`, followed by the
 identification `Ri_* ≅ i_*` of the derived direct image with the exact direct image `i_*`
 applied levelwise (`AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory`,
 `i` being finite), extend to a distinguished triangle
 
-`j_! j^* M ⟶ M ⟶ i_* i^* M ⟶ (j_! j^* M)[1]`.
-
-This is `AlgebraicGeometry.Etale.exists_distTriang_openClosed`, transported along the
-identification; it is functorial in `M`, its first two maps being natural transformations. -/
+`j_! j^* M ⟶ M ⟶ i_* i^* M ⟶ (j_! j^* M)[1]`. -/
 theorem Etale.exists_distTriang_openClosed_of_isFinite
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :

@@ -14,8 +14,14 @@ set_option linter.privateModule false
 
 /-! # Inverse tensor-unit maps on local sections
 
-Source: the finite-free quotient resolution in the first paragraph of the current
-blueprint `lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 06YY, 08J7 and 07A6.
+We describe the inverse of the right unitor `N ⊗ 𝟙 ≅ N` of cochain complexes of sheaves of
+modules on local sections: a section `v` is sent to the tensor generator `v ⊗ 1`.
+
+## References
+
+* [Stacks: Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks: Tag 08J7](https://stacks.math.columbia.edu/tag/08J7)
+* [Stacks: Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
 -/
 
 @[expose] public section

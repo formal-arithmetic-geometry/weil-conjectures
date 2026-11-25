@@ -18,7 +18,8 @@ set_option linter.privateModule false
 
 /-! # Primitive completion effectivity
 
-Source: current blueprint fix-prop-coherence, primitive realization step.
+We show that the completion unit is an isomorphism on derived complete objects of the primitive
+integral coefficient category.
 -/
 
 @[expose] public noncomputable section

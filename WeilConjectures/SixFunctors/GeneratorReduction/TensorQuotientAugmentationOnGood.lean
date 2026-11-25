@@ -14,8 +14,22 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 /-! # Tensor transpose on good representatives
 
-Source: current blueprint fix-prop-coherence, primitive comparisons
-(blueprint: lem-sf-tensor-quotient-augmentation-on-good).
+We show that, on good complexes, the scalar-adjunction transpose of the balanced tensor map is
+the strict quotient augmentation, expressed in the full Roos coordinates.
+
+## Implementation details
+
+The ordinary tensor representative is transported along `ringed.tensorRepresentative`, and the
+good complexes are given simultaneous strict presentations together with a balanced chain map
+to the total tensor, whose finite components reduce each factor of a pure tensor. The cochain
+transpose formula for the derived reduction/limit adjunction identifies the transpose with the
+quotient maps into the product. Both sides have the same first Roos coordinate (checked via
+tensor sheafification and total-summand injections) and zero shifted coordinate. The result is
+only used on good complexes; it is descended to all objects elsewhere.
+
+## References
+
+* Stacks Project, Tags 07A4, 07A6, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -178,28 +192,9 @@ end
 
 attribute [local irreducible] pullbackTensorReferenceTensorModel pullbackTensorLimitRoos
 
-/-- The scalar-adjunction transpose of the balanced tensor map is the strict
-quotient augmentation, in the published full Roos coordinates.
-Source: current blueprint fix-prop-coherence.proof.md, maps-used sentence;
-Stacks 07A4, 07A6, 0941.
-
-Proof: transport the ordinary tensor representative using
-ringed.tensorRepresentative. Apply reductionTensor_normalization to the good
-complexes P and Q: it supplies simultaneous strict presentations C, D, Z and
-the balanced chain map Z to the total tensor of C and D. On each homogeneous
-pure tensor its finite component reduces each factor. Use the cochain transpose
-formula for the derived reduction/limit adjunction. The unit_projection equations
-identify the transpose with the quotient maps into the product; the strict
-Roos augmentation has zero shifted coordinate. The tensor chain normalization
-has exactly these first coordinates and zero shifted coordinate. Tensor
-sheafification and total-summand injections prove equality of the first coordinate;
-the second coordinate is zero on both sides. Thus the full cochain maps agree.
-Localize this equality and compose with the published reduction and system-tensor
-representative comparisons. Their product is precisely
-pullbackTensorReferenceTensorModel, yielding the displayed equation. This lemma
-only computes a transpose on good complexes; the consumer separately uses
-Tensor.canonical.2 and the global tensor model, then descends to all objects.
-(blueprint: lem-sf-tensor-quotient-augmentation-on-good). -/
+/-- For good complexes `P` and `Q`, the scalar-adjunction transpose of the balanced tensor map,
+composed with the reference tensor model comparison, is the strict quotient augmentation of
+`P ⊗ Q`, in the full Roos coordinates. -/
 theorem tensorQuotientTranspose_onGood
     (ringed : IntegralSystemRealization.RingedModels l E) (X : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E X).FullSubcategory) :

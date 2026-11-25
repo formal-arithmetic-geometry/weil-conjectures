@@ -21,7 +21,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 /-!
 # Gluing comparisons along the affine line
 
-The inputs of the gluing half of blueprint `lemma-section-normal-bundle--1`
+The inputs of the gluing step in the construction of the comparison isomorphism for the affine line
 (`AlgebraicGeometry.Etale.existsUnique_iso_leftDerivedUpperStar_of_etale`):
 
 * the unit section of `𝔸¹_S` is a closed immersion meeting every fibre, and the affine line
@@ -53,8 +53,7 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- The unit section `t = 1` of `𝔸¹_S ⟶ S` is a closed immersion, being a section of a separated
-morphism. -/
+/-- The unit section `t = 1` of `𝔸¹_S ⟶ S` is a closed immersion. -/
 lemma isClosedImmersion_oneSection (S : Scheme.{u}) :
     IsClosedImmersion (AffineSpace.oneSection (ULift.{u} (Fin 1)) S) := by
   have : IsClosedImmersion
@@ -63,8 +62,7 @@ lemma isClosedImmersion_oneSection (S : Scheme.{u}) :
     infer_instance
   exact IsClosedImmersion.of_comp _ (𝔸(ULift.{u} (Fin 1); S) ↘ S)
 
-/-- Every point of `𝔸¹_S` lies in a preconnected set meeting the unit section: its fibre over
-`S`, which is irreducible. -/
+/-- Every point of `𝔸¹_S` lies in a preconnected set meeting the unit section. -/
 lemma exists_isPreconnected_inter_range_oneSection (S : Scheme.{u})
     (x : 𝔸(ULift.{u} (Fin 1); S)) :
     ∃ T : Set 𝔸(ULift.{u} (Fin 1); S), _root_.IsPreconnected T ∧ x ∈ T ∧
@@ -87,9 +85,7 @@ lemma isPullback_affineSpace_map {Y Y' Y'' : Scheme.{u}} {v : Y' ⟶ Y} {p₁ p�
     exact (AffineSpace.isPullback_map (n := ULift.{u} (Fin 1)) p₁).flip.paste_horiz h.flip
   · rw [← AffineSpace.map_comp, ← AffineSpace.map_comp, h.w]
 
-/-- A lisse rank-one sheaf `L`, twisted, is a sheaf placed in degree zero: with
-`Λ(m) ≅ T[0]` for a lisse rank-one `T`, the derived tensor product `L[0] ⊗ᴸ T[0]` is
-`(L ⊗ T)[0]`, `L` being flat. -/
+/-- A lisse rank-one sheaf `L`, twisted, is a sheaf placed in degree zero. -/
 lemma exists_iso_tateTwist_singleFunctor_obj [HasTateTwist Λ] {X : Scheme.{u}}
     [HasInvertibleExponent Λ X] (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsLocallyConstantSheaf L]
@@ -118,8 +114,7 @@ lemma isInvertible_tateTwist_singleFunctor_obj [HasTateTwist Λ] {X : Scheme.{u}
     (isInvertible_tateObject Λ X m)
 
 /-- An object which becomes, after pullback along a surjective étale `u`, a shift and twist of a
-lisse rank-one sheaf is invertible: invertibility descends along `u`
-(`AlgebraicGeometry.Etale.isInvertible_of_isInvertible_leftDerivedUpperStar_of_etale`). -/
+lisse rank-one sheaf is invertible. -/
 lemma isInvertible_of_leftDerivedUpperStar_iso_tateTwist [Finite Λ] [HasTateTwist Λ]
     {U T : Scheme.{u}} (u : U ⟶ T) [Etale u] [Surjective u] [HasInvertibleExponent Λ U]
     {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -133,8 +128,7 @@ lemma isInvertible_of_leftDerivedUpperStar_iso_tateTwist [Finite Λ] [HasTateTwi
     (((isInvertible_tateTwist_singleFunctor_obj L hL m).shift n).of_iso e.symm)
 
 /-- If `Lu^* K` is a sheaf placed in one degree `-n`, for a surjective étale `u`, then so is `K`:
-the shift `K⟦-n⟧` is a sheaf placed in degree zero
-(`lem-pur-concentrated-complex-shift`). -/
+the shift `K⟦-n⟧` is a sheaf placed in degree zero. -/
 lemma exists_iso_shift_singleFunctor_obj_of_leftDerivedUpperStar_iso {U T : Scheme.{u}}
     (u : U ⟶ T) [Etale u] [Surjective u]
     {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -190,8 +184,7 @@ theorem exists_iso_leftDerivedUpperStar_map_hom_eq_of_isPullback {T U Z : Scheme
 
 /-- Let `i : Z ⟶ X` be a closed immersion such that every point of `X` lies in a preconnected set
 meeting `i`. Two morphisms `f, g : F ⟶ G` out of an invertible `F`, with `g` an isomorphism,
-which agree after `Li^*` are equal: `f ≫ g⁻¹` is an endomorphism of `F` restricting to the
-identity (`AlgebraicGeometry.Etale.eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible`). -/
+which agree after `Li^*` are equal. -/
 lemma eq_of_leftDerivedUpperStar_map_eq_of_isInvertible {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i]
     (hi : ∀ x : X, ∃ S : Set X, _root_.IsPreconnected S ∧ x ∈ S ∧
@@ -205,9 +198,7 @@ lemma eq_of_leftDerivedUpperStar_map_eq_of_isInvertible {X Z : Scheme.{u}} (i : 
   rw [← Category.comp_id f, ← IsIso.inv_hom_id g, ← Category.assoc, h', Category.id_comp]
 
 /-- Two morphisms `f, g : F ⟶ G` out of an invertible `F`, with `g` an isomorphism, which agree
-after pullback along a surjective `π` are equal
-(`AlgebraicGeometry.Etale.eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible_of_surjective`).
--/
+after pullback along a surjective `π` are equal. -/
 lemma eq_of_leftDerivedUpperStar_map_eq_of_isInvertible_of_surjective {X Z : Scheme.{u}}
     (π : Z ⟶ X) [Surjective π]
     {F G : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -284,10 +275,7 @@ theorem conj_leftDerivedUpperStar_section_eq {B B' P P' : Scheme.{u}}
 `p₁, p₂ : B'' ⟶ B'` with `p₁ ≫ v = p₂ ≫ v`, carrying a section `i''` to `i'`, and suppose every
 point of `P''` lies in a preconnected set meeting the closed immersion `i''`. Let `F ∈ D(P)` be
 invertible, `θ : Li^* F ≅ C`, and `κ' : Lw^* F ≅ La'^* Lv^* C` normalized at `i'` against `θ`.
-Then the two pullbacks of `κ'`, viewed as maps `Lw^* F ⟶ Lw^* La^* C`, to `P''` agree: both are
-normalized at `i''` against the pullback of `θ`, and comparisons out of an invertible object
-are determined at `i''`
-(`AlgebraicGeometry.Etale.eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible`). -/
+Then the two pullbacks of `κ'`, viewed as maps `Lw^* F ⟶ Lw^* La^* C`, to `P''` agree. -/
 theorem conj_leftDerivedUpperStar_eq_of_section {B B' B'' P P' P'' : Scheme.{u}}
     {a : P ⟶ B} {a' : P' ⟶ B'} {v : B' ⟶ B} {w : P' ⟶ P} {p₁ p₂ : B'' ⟶ B'}
     {r₁ r₂ : P'' ⟶ P'} {i : B ⟶ P} {i' : B' ⟶ P'} {i'' : B'' ⟶ P''} [IsClosedImmersion i'']

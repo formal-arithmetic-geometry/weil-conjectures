@@ -24,9 +24,11 @@ import all WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Closed
 
 /-! # Finite coefficient change for closed exceptional inverse image
 
-Source: Weil blueprint, sec-six-functors/sk-prop-sf-biduality-general, order 2139,
-lemma finite coefficient change for closed support (blueprint:
-lemma-change-coefficients-exceptional-inverse-image--1).
+Coefficient coordinates for change of finite coefficients along a closed immersion: the
+fixed-scalar derived category, derived scalar extension, derived direct image, and the inverse
+of the coefficient-change comparison for direct images.
+
+## Implementation details
 
 The maps use the specified pro-etale exceptional functor and ordinary derived scalar
 extension. The closed map is uniquely normalized by the exceptional counit. Total
@@ -57,32 +59,25 @@ attribute [local instance] finiteClosedEtSheafify finiteClosedProEtInjectives
 
 namespace WeilConjectures
 
-/-- The fixed-scalar presentation of the actual small pro-etale derived category.
-Source: blueprint finite coefficient change for closed support
-(blueprint: lemma-change-coefficients-exceptional-inverse-image--1). -/
+/-- The fixed-scalar presentation of the small pro-etale derived category. -/
 abbrev finiteClosedDerived (T : Scheme.{u}) (A : Type u) [CommRing A] :=
   DerivedCategory (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))
 
 variable {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
 
-/-- The recorded ordinary uncompleted derived change of constant coefficients.
-Source: blueprint finite coefficient change for closed support
-(blueprint: lemma-change-coefficients-exceptional-inverse-image--1). -/
+/-- The ordinary (uncompleted) derived change of constant coefficients along `φ`. -/
 abbrev finiteClosedScalar (φ : ULift.{u + 1, u} A →+* ULift.{u + 1, u} B)
     (T : Scheme.{u}) : finiteClosedDerived T A ⥤ finiteClosedDerived T B :=
   @ProEtale.pbcFixedScalarExtension.{u} T.ProEt inferInstance
     (essentiallySmallSelf.{0, u, u + 1} _) (ProEt.topology T) _ _ _ _ φ
 
-/-- Ordinary derived direct image in these coefficient coordinates.
-Source: blueprint finite coefficient change for closed support
-(blueprint: lemma-change-coefficients-exceptional-inverse-image--1). -/
+/-- Ordinary derived direct image in these coefficient coordinates. -/
 abbrev finiteClosedPush (A : Type u) [CommRing A] {Z X : Scheme.{u}} (i : Z ⟶ X) :
     finiteClosedDerived Z A ⥤ finiteClosedDerived X A :=
   (ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) i).rightDerivedFunctor
 
-/-- Inverse of the specified ordinary coefficient comparison on its isomorphism domain.
-Source: blueprint finite coefficient change for closed support
-(blueprint: lemma-change-coefficients-exceptional-inverse-image--1). -/
+/-- The inverse of the coefficient-change comparison for derived direct image where it is an
+isomorphism, and `0` otherwise. -/
 def finiteClosedDirectInverse
     (φ : ULift.{u + 1, u} A →+* ULift.{u + 1, u} B)
     {Z X : Scheme.{u}} (i : Z ⟶ X) (N : finiteClosedDerived Z A) :

@@ -18,8 +18,19 @@ import Mathlib.RingTheory.Unramified.Field
 
 /-! # Reducedness of generic tensor algebras for a DVR root extension
 
-Source: Stacks Project, Tag 09EV, and separable extension base change.
-(blueprint: lem-sbc-dvr-galois-root-tensor-reduced) -/
+For a uniformizer `π` of a discrete valuation ring `B`, `n ≥ 1`, and a finite Galois extension `E`
+of `Frac B`, the algebra `E ⊗_B B[t]/(t^n - π)` is reduced.
+
+## Implementation details
+
+`t^n - π` is Eisenstein, so `A = B[t]/(t^n - π)` is a domain; by flatness `E ⊗_B A` embeds in
+`E ⊗_{Frac B} Frac A`, which is reduced since `E` is finite separable over `Frac B`. Neither
+invertibility of `n` nor separability of `Frac A / Frac B` is needed.
+
+## References
+
+* Stacks Project, Tag 09EV.
+-/
 
 @[expose] public section
 
@@ -27,27 +38,9 @@ universe u
 open scoped TensorProduct
 namespace RingTheory
 
-/-- The generic tensor algebra of a positive-degree uniformizer root is reduced.
-
-Source: Stacks Project, Tag 09EV, and finite separable extension base change.
-(blueprint: lem-sbc-dvr-galois-root-tensor-reduced)
-
-Proof: Put K = Frac(B) and A = B[t]/(t^n-pi). The polynomial is
-Eisenstein at (pi): it is monic, every coefficient below the leading
-coefficient lies in (pi), and its constant coefficient -pi does not lie
-in (pi)^2, since pi is irreducible. Eisenstein's criterion makes it
-irreducible and therefore prime over the DVR B. Thus A is a domain.
-The monic positive-degree quotient embeds B in A and then in L = Frac(A).
-Lift the B-algebra structure on L to K. The given B-structure on E
-forms a tower B -> K -> E. Since K is B-flat and E is K-flat, E is
-B-flat. Hence the inclusion A -> L induces an injection
-E tensor_B A -> E tensor_B L. The latter is canonically
-E tensor_K L, since K is a localization of B. The Galois extension
-E/K is separable and finite, so L tensor_K E is formally unramified
-and essentially of finite type over the field L, hence reduced.
-Commuting the factors and restricting along the injection proves
-reducedness. The same Eisenstein argument works for n = 1; no
-invertibility of n or separability of L/K is needed. -/
+/-- The generic tensor algebra of a positive-degree uniformizer root is reduced: if `π` is a
+uniformizer of the discrete valuation ring `B`, `n ≥ 1`, and `E` is a finite Galois extension of
+`Frac B`, then `E ⊗_B B[t]/(t^n - π)` is reduced. -/
 theorem dvr_galois_root_tensor_reduced
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi) (n : ℕ) (hnpos : 0 < n)

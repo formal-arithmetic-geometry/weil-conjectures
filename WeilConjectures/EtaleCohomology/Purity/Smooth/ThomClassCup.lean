@@ -17,9 +17,16 @@ invertible. If the adjoint of `α` is an isomorphism (`α` is a fundamental clas
 adjoint of the restriction `β|_{Z₁}` of `β` to `Z₁` is an isomorphism, then the adjoint of the cup
 product `α ∪ β` is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_supportedClassMap_cupWithSupports`).
-This is the inductive step of the model computation `proposition-purity-vector-bundles` (i): the
+This is the inductive step in the computation of the Thom class of affine space: the
 Thom class of `𝔸^{c+1}_B = 𝔸¹_{𝔸^c_B}` is the cup product of the Kummer boundary of the coordinate
 of the affine line and the pullback of the Thom class of `𝔸^c_B`.
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.isIso_supportedPullbackForget`
+- `AlgebraicGeometry.Etale.isIso_supportedClassMap_cupWithSupports`
+
+## Implementation details
 
 The proof uses the language of reflections into objects with supports
 (`AlgebraicGeometry.Etale.IsSupportReflection`). The cup product factors as
@@ -29,11 +36,6 @@ restriction of `α ∪ β` to `Z₁` is a reflection into the objects supported 
 an isomorphism `Li₁^* N ≅ Li₁^* Ri₁_! Ri₁^! (M ⊗ N)` built from `α`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStar_map_supportedProduct_comp`). Since
 `β|_{Z₁} = Li₁^* β ≫ ψ` is a reflection, so is the restriction of `α ∪ β`.
-
-## Main statements
-
-- `AlgebraicGeometry.Etale.isIso_supportedPullbackForget`
-- `AlgebraicGeometry.Etale.isIso_supportedClassMap_cupWithSupports`
 -/
 
 @[expose] public section
@@ -81,8 +83,7 @@ lemma isZero_leftDerivedUpperStar_openComplement_rightDerivedLowerStar_of_isZero
 
 /-- The restriction to `Z₁` of the forgetful map `Ri_! Ri^! L ⟶ Ri₁_! Ri₁^! L`, read as a class
 supported on `Z'` (`AlgebraicGeometry.Etale.supportedPullbackForget`), is an isomorphism when `Z'`
-and `Z` have the same image in `U`: both `Li₁^* Ri_! Ri^! L ⟶ Li₁^* Ri₁_! Ri₁^! L` and the
-counit of `Rj_! ⊣ Rj^!` are coreflections into the objects supported on `Z'`. -/
+and `Z` have the same image in `U`. -/
 theorem isIso_supportedPullbackForget (hsub : Set.range i.base ⊆ Set.range i₁.base)
     (hd : Disjoint (Set.range (j.openComplement.ι ≫ i₁).base) (Set.range i.base))
     (hji : Set.range (j ≫ i₁).base ⊆ Set.range i.base)

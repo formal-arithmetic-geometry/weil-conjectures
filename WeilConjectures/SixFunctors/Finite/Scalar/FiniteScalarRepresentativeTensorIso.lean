@@ -10,8 +10,12 @@ public import WeilConjectures.SixFunctors.Finite.Scalar.Tensor.FiniteScalarTenso
 
 /-! # Fixed-scalar representatives on the shared signed total functor
 
-Source: Stacks Tags 06YN and 07A4.
-(blueprint: def-sf-finite-scalar-representative-tensor-iso).
+On objects satisfying a K-flatness predicate, the shared signed total tensor functor followed
+by localization is isomorphic to the derived tensor product.
+
+## References
+
+* [Stacks, Tags 06YN, 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -47,9 +51,8 @@ namespace WeilConjectures
 
 attribute [local implicit_reducible] finiteScalarRepresentativeTotalTensor
 
-/-- The existing representative isomorphism, assembled by its specified components.
-Source: Stacks Tag 07A4, inversion of the K-flat localization tensorators.
-(blueprint: def-sf-finite-scalar-representative-tensor-iso). -/
+/-- On pairs of K-flat representatives, the signed total tensor product followed by
+localization is isomorphic to the derived tensor product of their images. -/
 @[irreducible] def finiteScalarRepresentativeTensorIso
     (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
     [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
@@ -65,9 +68,8 @@ Source: Stacks Tag 07A4, inversion of the K-flat localization tensorators.
     (fun {_Z _W} f ↦
       (finiteScalarFixedTensorRepresentativeForCoefficients B T P hP).hom.naturality f)
 
-/-- The shared representative retains the actual localization tensorator components.
-Source: Stacks Tag 07A4.
-(blueprint: def-sf-finite-scalar-representative-tensor-iso). -/
+/-- The components of `finiteScalarRepresentativeTensorIso` are those of
+`finiteScalarFixedTensorRepresentativeForCoefficients`. -/
 theorem finiteScalarRepresentativeTensorIso_hom_app
     (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
     [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]

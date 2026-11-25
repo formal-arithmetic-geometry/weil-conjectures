@@ -12,10 +12,19 @@ import Mathlib.RingTheory.Unramified.LocalRing
 import WeilConjectures.RingTheory.EtaleResidueTripleUnitRefinement
 
 /-!
-# EtaleResidueTripleIdealRefinement
+# Ideal refinement of étale residue triples
 
-Source: Stacks Project, Algebra, Tags 04GN and 04GP.
-(blueprint: lem-weil-pbc-etale-triple-ideal-refinement).
+Every element of the prime of a pointed étale residue triple over `(R, p)` maps into `p` times
+the ring of some later triple.
+
+## Implementation details
+
+Since the map is étale, `p B_q = q B_q`, so for `f ∈ q` there is `g ∉ q` with `g f ∈ p B`;
+the principal localization `B_g` gives the required triple and morphism.
+
+## References
+
+* Stacks Project, Algebra, Tags 04GN, 04GP, 00U4
 -/
 
 @[expose] public section
@@ -26,15 +35,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Algebra, Tags 04GN and 04GP.
-
-Proof: Etaleness gives p B_q = q B_q (Stacks Tag 00U4, item (1)). Thus for f in q,
-clearing denominators in membership of f/1 in p B_q gives g outside q with gf in pB.
-Pass to the principal localization B_g. The map to K extends since g is outside q,
-and its kernel and residue embedding give a compatible triple s over R, as in the
-unit-refinement construction. Since g is invertible in B_g, the image of f belongs
-to p B_g. The localization map is the required morphism of triples.
-(blueprint: lem-weil-pbc-etale-triple-ideal-refinement). -/
+/-- For an element `f` of the prime `q` of an étale residue triple `t`, there is a morphism of
+triples `t ⟶ s` sending `f` into the extension of `p` to the ring of `s`. -/
 theorem etaleResidueTriple_ideal_refinement
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     (χ : (Spec R).residueField p ⟶ CommRingCat.of K)

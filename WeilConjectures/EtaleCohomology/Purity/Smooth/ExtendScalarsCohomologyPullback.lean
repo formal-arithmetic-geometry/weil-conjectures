@@ -393,16 +393,11 @@ theorem leftDerivedUpperStar_map_chernClass (L : Y.Pic) :
   rfl
 
 omit [CompactSpace X] [QuasiSeparatedSpace X] [HasInvertibleExponent Λ X] in
-/-- Blueprint `proposition-purity-vector-bundles`: Kummer additivity.
-
-For a line bundle `L` on a quasi-compact quasi-separated scheme `Y` (for instance a separated
-finite-type `k`-scheme) on which the exponent of `Λ` is invertible, let
-`c₁(L) : Λ_Y ⟶ Λ_Y(1)[2]` (`AlgebraicGeometry.Etale.chernClass`) be the image of the class of
-`L` in `H¹(Y, 𝔾ₘ) = Pic(Y)` under the connecting morphism of the Kummer sequence, with
-coefficients extended to `Λ(1) = μₙ ⊗ Λ`. Then `c₁(L ⊗ L') = c₁(L) + c₁(L')`, and `c₁` is
+/-- **Kummer additivity.** For line bundles on a quasi-compact quasi-separated scheme `Y` on
+which the exponent of `Λ` is invertible, the first Chern class `c₁ : Pic(Y) ⟶ Hom(Λ_Y, Λ_Y(1)[2])`
+(`AlgebraicGeometry.Etale.chernClass`) satisfies `c₁(L ⊗ L') = c₁(L) + c₁(L')`, and `c₁` is
 compatible with pullback along every morphism `g : X ⟶ Y` of such schemes:
-`Lg^* c₁(L) = c₁(g^* L)` under `Lg^* Λ_Y ≅ Λ_X` and `Lg^* Λ_Y(1) ≅ Λ_X(1)`. Compatibility with
-base change is the case of the projection `g : Y ×_S S' ⟶ Y`. -/
+`Lg^* c₁(L) = c₁(g^* L)` under `Lg^* Λ_Y ≅ Λ_X` and `Lg^* Λ_Y(1) ≅ Λ_X(1)`. -/
 theorem kummer_additivity :
     (∀ L L' : Y.Pic, chernClass Λ Y (L * L') = chernClass Λ Y L + chernClass Λ Y L') ∧
       ∀ {X : Scheme.{u}} (g : X ⟶ Y) [CompactSpace X] [QuasiSeparatedSpace X]

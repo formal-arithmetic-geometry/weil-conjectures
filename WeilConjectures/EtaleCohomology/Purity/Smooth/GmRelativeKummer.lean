@@ -15,8 +15,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.RankOneLocal
 Let `k` be an algebraically closed field, `Λ` a finite ring whose exponent is invertible in `k`,
 `Y` a separated `k`-scheme of finite type, `p : 𝔸¹_Y ⟶ Y` the projection, `j : G ⟶ 𝔸¹_Y` the
 complement of the zero section and `π = j ≫ p`. With the Tate twist `Λ(1) = μₙ ⊗ Λ` and its
-Kummer classes (`AlgebraicGeometry.Etale.hasKummerClass`) this file proves blueprint
-`prop-pur-gm-relative-kummer`:
+Kummer classes (`AlgebraicGeometry.Etale.hasKummerClass`) this file proves:
 
 1. the unit `Λ_Y(1) ⟶ Rp_* Lp^* Λ_Y(1)` is an isomorphism
    (`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine`);
@@ -31,12 +30,11 @@ Kummer classes (`AlgebraicGeometry.Etale.hasKummerClass`) this file proves bluep
    `κ(t)` pulls back to `κ(t')`
    (`AlgebraicGeometry.Etale.leftDerivedUpperStar_map_kummerClass_coord`).
 
-It also proves the global orientation `thm-pur-affine-line-orientation`
+It also proves the global orientation of the zero section
 (`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord_of_isAlgClosed`), the
-rank-one local calculation `example-closed-support`, with the `Λ`-linear isomorphism
-`H²_Z(𝔸¹_Ω, Λ(1)) ≅ Λ` sending `∂κ(t)` to `1`
-(`AlgebraicGeometry.Etale.supportCohomologyAffineLineLinearEquiv`), and the structure of the
-exceptional inverse image of the zero section `lem-pur-gysin-structure`, with the `Λ`-linear
+rank-one local calculation, with the `Λ`-linear isomorphism `H²_Z(𝔸¹_Ω, Λ(1)) ≅ Λ` sending
+`∂κ(t)` to `1` (`AlgebraicGeometry.Etale.supportCohomologyAffineLineLinearEquiv`), and the
+structure of the exceptional inverse image of the zero section, with the `Λ`-linear
 isomorphism `H²_Z(𝔸¹_Y, Λ(1)) ≅ Γ(Z, H⁰(Rs^!(Λ(1)[2])))`
 (`AlgebraicGeometry.Etale.supportCohomologyLinearEquivΓHomologyZero`).
 -/
@@ -59,9 +57,8 @@ attribute [local instance] neZero_ringChar_of_finite
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- The Kummer class of the coordinate of `𝔾_{m,Ω}` is free of rank one over every
-algebraically closed field `Ω` (`AlgebraicGeometry.Etale.bijective_smul_kummerClassOf`), in the
-form of the hypothesis of the relative statements. -/
+/-- Over an algebraically closed field `Ω`, the Kummer class `κ(t)` of the coordinate of
+`𝔾_{m,Ω}` is torsion-free: `c • κ(t) = 0` implies `c = 0`. -/
 theorem kummerClass_coord_smul_eq_zero (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     [HasInvertibleExponent Λ (Spec (.of Ω))] (G' : Scheme.{u})
     (j' : G' ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of Ω))) [IsOpenImmersion j']
@@ -78,13 +75,8 @@ variable {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec 
   [QuasiCompact aY] [HasInvertibleExponent Λ Y]
 
 include aY in
-/-- Blueprint `prop-pur-gm-relative-kummer`: The affine line and the punctured line over a base
-(clause (1)).
-
-The unit `Λ_Y(1) ⟶ Rp_* Lp^* Λ_Y(1) = Rp_* Λ_{𝔸¹_Y}(1)` of the projection `p : 𝔸¹_Y ⟶ Y` is an
-isomorphism; with `AlgebraicGeometry.Etale.isIso_unit_constantComplex_affineLine` for the
-untwisted unit. With the latter this is clause (a) of the subsection statement
-`sk-prop-a1-kummer`. -/
+/-- The unit `Λ_Y(1) ⟶ Rp_* Lp^* Λ_Y(1) = Rp_* Λ_{𝔸¹_Y}(1)` of the projection `p : 𝔸¹_Y ⟶ Y`
+is an isomorphism. -/
 theorem isIso_unit_tateObject_affineLine :
     IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
       (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).unit.app (tateObject Λ Y 1)) := by
@@ -98,13 +90,8 @@ variable {G : Scheme.{u}} (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Y)) [IsOpenImmersio
   (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ)
 
 include aY hj in
-/-- Blueprint `prop-pur-gm-relative-kummer`: The affine line and the punctured line over a base
-(clause (2), degree zero).
-
-For the complement `j : G ⟶ 𝔸¹_Y` of the zero section and `π = j ≫ p`, the unit
-`Λ_Y(1) ⟶ Rπ_* Lπ^* Λ_Y(1)` is an isomorphism on `H⁰`: `R⁰π_* Λ(1) = Λ_Y(1)`. This is the
-first half of clause (b) of the subsection statement `sk-prop-a1-kummer`: `R⁰π_* Λ(1) ≅ Λ_Y(1)`,
-the pullback `p^*` followed by restriction along `j` being an isomorphism onto it. -/
+/-- For the complement `j : G ⟶ 𝔸¹_Y` of the zero section and `π = j ≫ p`, the unit
+`Λ_Y(1) ⟶ Rπ_* Lπ^* Λ_Y(1)` is an isomorphism on `H⁰`: `R⁰π_* Λ(1) = Λ_Y(1)`. -/
 theorem isIso_homology_zero_unit_tateObject_multiplicativeGroup :
     IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map
       ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
@@ -121,12 +108,9 @@ theorem isIso_homology_zero_unit_tateObject_multiplicativeGroup :
     (boundedConstructibleFiniteTor_tateObject Λ Y 1) eTY hLT
 
 include aY in
-/-- Blueprint `prop-pur-gm-relative-kummer`: The affine line and the punctured line over a base
-(clause (2), degree one).
-
-`R¹π_* Λ(1)` is free of rank one on the Kummer class `κ(t)` of the coordinate: the morphism
+/-- `R¹π_* Λ(1)` is free of rank one on the Kummer class `κ(t)` of the coordinate: the morphism
 `Λ_Y ⟶ R¹π_* Λ(1) = H⁰(Rπ_*(Λ(1)[1]))` adjoint to `κ(t) : Λ_G ⟶ Λ_G(1)[1]` is an
-isomorphism. This is the second half of clause (b) of `sk-prop-a1-kummer`. -/
+isomorphism. -/
 theorem isIso_homology_zero_kummerClassAdjoint [HasInvertibleExponent Λ G] :
     IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map
       ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
@@ -143,11 +127,7 @@ theorem isIso_homology_zero_kummerClassAdjoint [HasInvertibleExponent Λ G] :
     (nonempty_iso_cohomology_one_multiplicativeGroup Λ j₀ hj₀).some j hj _
 
 include aY hj in
-/-- Blueprint `prop-pur-gm-relative-kummer`: The affine line and the punctured line over a base
-(clause (3)).
-
-`R^m π_* Λ(1) = 0` for `m ∉ {0, 1}`; in particular for `m ≥ 2`. This is clause (c) of
-`sk-prop-a1-kummer` for the twist `Λ(1) = μₙ ⊗ Λ`. -/
+/-- `R^m π_* Λ(1) = 0` for `m ∉ {0, 1}`; in particular for `m ≥ 2`. -/
 theorem isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup
     [HasInvertibleExponent Λ G] (m : ℤ) (h₀ : m ≠ 0) (h₁ : m ≠ 1) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ m).obj
@@ -169,14 +149,9 @@ theorem isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup
         (leftDerivedUpperStarTateObjectIso (j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y) 1).symm ≪≫ e))
 
 include aY in
-/-- Blueprint `thm-pur-affine-line-orientation`: Global orientation and its normalization
-
-For `Y` separated of finite type over the algebraically closed field `k` and the zero section
-`s : V(t) ⟶ 𝔸¹_Y` (the zero locus of the coordinate, `V(t) ≅ Y`), the adjoint
-`pur_s : Λ_{V(t)} ⟶ Rs^!(Λ(1)[2])` of the Kummer boundary `∂κ(t)` is an isomorphism: the
-target is concentrated in degree zero, lisse of rank one, and generated by `∂κ(t)`, which the
-localization triangle identifies with the generator `κ(t)` of `R¹π_* Λ(1)`
-(`AlgebraicGeometry.Etale.isIso_homology_zero_kummerClassAdjoint`). -/
+/-- Global orientation: for `Y` separated of finite type over the algebraically closed field `k`
+and the zero section `s : V(t) ⟶ 𝔸¹_Y` (the zero locus of the coordinate, `V(t) ≅ Y`), the adjoint
+`pur_s : Λ_{V(t)} ⟶ Rs^!(Λ(1)[2])` of the Kummer boundary `∂κ(t)` is an isomorphism. -/
 theorem isIso_supportedClassMap_kummerBoundary_coord_of_isAlgClosed :
     IsIso (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
         {AffineSpace.coord Y (ULift.up 0)})
@@ -210,17 +185,9 @@ lemma connectedSpace_zeroLocusSubscheme_coord (S : Scheme.{u}) [ConnectedSpace S
     (AffineSpace.zeroSectionIsoZeroLocusSubscheme (ULift.{u} (Fin 1)) S
       (s := {AffineSpace.coord S (ULift.up 0)}) Set.range_unique))).1 inferInstance
 
-/-- Blueprint `example-closed-support`: Rank-one local calculation (the
-normalized isomorphism).
-
-For an algebraically closed field `Ω` and the origin `Z = V(t) ⊂ 𝔸¹_Ω`, the `Λ`-linear
-isomorphism `H²_Z(𝔸¹_Ω, Λ(1)) ≅ Hom(Λ_Z, Ri^!(Λ(1)[2])) ≅ Hom(Λ_Z, Λ_Z) ≅ Λ`: the first map is
-`AlgebraicGeometry.Etale.supportCohomologyLinearEquiv`, the second is post-composition with the
-inverse of the isomorphism `supportedClassMap (∂κ(t)) : Λ_Z ⟶ Ri^!(Λ(1)[2])`
-(`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord_of_isAlgClosed`), and the
-third is the inverse of `c ↦ c • 𝟙` (`AlgebraicGeometry.Etale.bijective_smul_id_constantComplex`,
-`Z ≅ Spec Ω` being connected). It sends `∂κ(t)` to `1`
-(`AlgebraicGeometry.Etale.supportCohomologyAffineLineLinearEquiv_kummerBoundary`). -/
+/-- For an algebraically closed field `Ω` and the origin `Z = V(t) ⊂ 𝔸¹_Ω`, the `Λ`-linear
+isomorphism `H²_Z(𝔸¹_Ω, Λ(1)) ≅ Hom(Λ_Z, Ri^!(Λ(1)[2])) ≅ Hom(Λ_Z, Λ_Z) ≅ Λ`, whose middle map
+is post-composition with the inverse of `supportedClassMap (∂κ(t)) : Λ_Z ⟶ Ri^!(Λ(1)[2])`. -/
 noncomputable def supportCohomologyAffineLineLinearEquiv :
     (derivedSupportCohomology (ModuleCat.{u + 1} Λ)
         (𝔸(ULift.{u} (Fin 1); Spec (.of Ω)).zeroLocusSubschemeι
@@ -240,10 +207,7 @@ noncomputable def supportCohomologyAffineLineLinearEquiv :
         {AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)}))))
       (by exact bijective_smul_id_constantComplex Λ)).symm
 
-/-- Blueprint `example-closed-support`: Rank-one local calculation (the
-normalization).
-
-The isomorphism `AlgebraicGeometry.Etale.supportCohomologyAffineLineLinearEquiv` sends the
+/-- The isomorphism `AlgebraicGeometry.Etale.supportCohomologyAffineLineLinearEquiv` sends the
 boundary `∂κ(t)` of the Kummer class of the coordinate, read in `H²_Z(𝔸¹_Ω, Λ(1))` through
 `AlgebraicGeometry.Etale.supportCohomologyAddEquiv` as its adjoint `Λ_Z ⟶ Ri^!(Λ(1)[2])`, to
 `1`. -/
@@ -255,9 +219,7 @@ theorem supportCohomologyAffineLineLinearEquiv_kummerBoundary :
           (kummerBoundary Λ (AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)))))) = 1 := by
   simp [supportCohomologyAffineLineLinearEquiv, LinearEquiv.symm_apply_eq, Linear.homCongr_apply]
 
-/-- Blueprint `example-closed-support`: Rank-one local calculation
-
-Let `Ω` be an algebraically closed field (the residue field of a geometric point), `Λ` a finite
+/-- Rank-one local calculation: let `Ω` be an algebraically closed field, `Λ` a finite
 ring whose exponent is invertible in `Ω`, `Z = V(t) ⊂ 𝔸¹_Ω` the origin and
 `Λ(1) = μₙ ⊗ Λ`. The cohomology with supports `H^q_Z(𝔸¹_Ω, Λ(1))`
 (`AlgebraicGeometry.Etale.derivedSupportCohomology`) vanishes for `q ≠ 2`, and the `Λ`-linear
@@ -266,9 +228,7 @@ isomorphism `H²_Z(𝔸¹_Ω, Λ(1)) ≅ Λ` of
 the Kummer class of the coordinate to `1`; equivalently, `c ↦ c • ∂κ(t)` is a bijection
 `Λ ≅ H²_Z(𝔸¹_Ω, Λ(1))`, i.e. `∂κ(t)` is a free generator. Here `∂κ(t)` is read in `H²_Z` through
 `H²_Z(𝔸¹_Ω, Λ(1)) ≅ Hom(Λ_Z, Ri^!(Λ(1)[2]))` (`AlgebraicGeometry.Etale.supportCohomologyAddEquiv`)
-as its adjoint `Λ_Z ⟶ Ri^!(Λ(1)[2])`. The proof is the global orientation over `Y = Spec Ω`
-(`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord_of_isAlgClosed`): it
-identifies `Ri^!(Λ(1)[2])` with `Λ_Z`, and `Z ≅ Spec Ω` has cohomology `Λ` in degree zero only. -/
+as its adjoint `Λ_Z ⟶ Ri^!(Λ(1)[2])`. -/
 theorem rankOne_supportCohomology_affineLine :
     (∀ q : ℤ, q ≠ 2 → Subsingleton ((derivedSupportCohomology (ModuleCat.{u + 1} Λ)
       (𝔸(ULift.{u} (Fin 1); Spec (.of Ω)).zeroLocusSubschemeι
@@ -328,16 +288,11 @@ end RankOne
 section Gysin
 
 include aY in
-/-- Blueprint `lem-pur-gysin-structure`: Structure of the exceptional inverse image of the zero
-section (the identification of `Γ(Z, H⁰(R))`).
-
-For the zero section `s : Z = V(t) ⟶ 𝔸¹_Y` and `R = Rs^!(Λ(1)[2])`, the `Λ`-linear isomorphism
+/-- For the zero section `s : Z = V(t) ⟶ 𝔸¹_Y` and `R = Rs^!(Λ(1)[2])`, the `Λ`-linear isomorphism
 `H²_Z(𝔸¹_Y, Λ(1)) ≅ Γ(Z, H⁰(R))`: a class, read as a morphism `g : Λ_Z ⟶ R` through
 `AlgebraicGeometry.Etale.supportCohomologyLinearEquiv`, goes to the global section of `H⁰(R)`
 which is the image of `1` under `H⁰(g) : Λ = H⁰(Λ_Z) ⟶ H⁰(R)`
-(`AlgebraicGeometry.Etale.homConstantComplexLinearMapΓHomologyZero`). It is bijective since
-`R ≅ Λ_Z` is concentrated in degree zero, through the adjoint of `∂κ(t)`
-(`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord_of_isAlgClosed`). -/
+(`AlgebraicGeometry.Etale.homConstantComplexLinearMapΓHomologyZero`). -/
 noncomputable def supportCohomologyLinearEquivΓHomologyZero :
     (derivedSupportCohomology (ModuleCat.{u + 1} Λ)
         (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι {AffineSpace.coord Y (ULift.up 0)}) 2).obj
@@ -369,15 +324,11 @@ lemma supportCohomologyLinearEquivΓHomologyZero_apply
   simp only [LinearEquiv.ofBijective_apply, supportCohomologyLinearEquiv_apply]
 
 include aY in
-/-- Blueprint `lem-pur-gysin-structure`: Structure of the exceptional inverse image of the zero
-section
-
-Let `s : Z = V(t) ⟶ 𝔸¹_Y` be the zero section (`Z ≅ Y`) and `R = Rs^!(Λ(1)[2])`. Then:
+/-- Structure of the exceptional inverse image of the zero section: let `s : Z = V(t) ⟶ 𝔸¹_Y` be
+the zero section (`Z ≅ Y`) and `R = Rs^!(Λ(1)[2])`. Then:
 
 1. `R` lies in `D^b_{ctf}(Z, Λ)`, is concentrated in degree zero, and its cohomology sheaf `H⁰(R)`
-   is the constant sheaf `Λ` (lisse of rank one, generated by the boundary of `κ(t)`); indeed
-   `R ≅ Λ_Z` through the adjoint of `∂κ(t)`
-   (`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord_of_isAlgClosed`);
+   is the constant sheaf `Λ`;
 2. `Γ(Z, H⁰(R)) ≅ H²_Z(𝔸¹_Y, Λ(1))` through
    `AlgebraicGeometry.Etale.supportCohomologyLinearEquivΓHomologyZero`, and this isomorphism sends
    the boundary `∂κ(t)` of the Kummer class of `t`, read in `H²_Z(𝔸¹_Y, Λ(1))` through
@@ -443,13 +394,9 @@ variable {Y' : Scheme.{u}} (aY' : Y' ⟶ Spec (.of k)) [IsSeparated aY'] [Locall
 omit [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated aY]
   [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY'] [LocallyOfFiniteType aY']
   [QuasiCompact aY'] [HasInvertibleExponent Λ Y] [HasInvertibleExponent Λ Y'] in
-/-- Blueprint `prop-pur-gm-relative-kummer`: The affine line and the punctured line over a base
-(clause (4), the Kummer class).
-
-For `g : Y' ⟶ Y` with base change `g' : 𝔾_{m,Y'} ⟶ 𝔾_{m,Y}`, the pullback of the Kummer class
+/-- For `g : Y' ⟶ Y` with base change `g' : 𝔾_{m,Y'} ⟶ 𝔾_{m,Y}`, the pullback of the Kummer class
 of the coordinate is the Kummer class of the coordinate: `Lg'^* κ(t) = κ(t')`, through
-`Lg'^* Λ ≅ Λ` and `Lg'^* Λ(1) ≅ Λ(1)`. This is the compatibility of `κ(t)` with base change on
-`Y` asserted in `sk-prop-a1-kummer`. -/
+`Lg'^* Λ ≅ Λ` and `Lg'^* Λ(1) ≅ Λ(1)`. -/
 theorem leftDerivedUpperStar_map_kummerClass_coord [HasInvertibleExponent Λ G]
     [HasInvertibleExponent Λ G'] :
     (L((AffineSpace.complementMap g j j' hj hj')^*[ModuleCat.{u + 1} Λ])).map
@@ -464,13 +411,8 @@ theorem leftDerivedUpperStar_map_kummerClass_coord [HasInvertibleExponent Λ G]
     units_map_unitLineCoord g j hj j' hj' _ (AffineSpace.complementMap_comp g j j' hj hj')]
 
 include aY aY' in
-/-- Blueprint `prop-pur-gm-relative-kummer`: The affine line and the punctured line over a base
-(clause (4), the affine line).
-
-For `g : Y' ⟶ Y`, the derived base change map `Lg^* Rp_* Λ(1) ⟶ Rp'_* Λ(1)` of the projections
-`p : 𝔸¹_Y ⟶ Y` and `p' : 𝔸¹_{Y'} ⟶ Y'` is an isomorphism. With
-`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_constantComplex_affineLine` this is the
-base change compatibility of clause (a) of `sk-prop-a1-kummer`. -/
+/-- For `g : Y' ⟶ Y`, the derived base change map `Lg^* Rp_* Λ(1) ⟶ Rp'_* Λ(1)` of the
+projections `p : 𝔸¹_Y ⟶ Y` and `p' : 𝔸¹_{Y'} ⟶ Y'` is an isomorphism. -/
 theorem isIso_derivedBaseChangeMap_app_tateObject_affineLine :
     IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
       (AffineSpace.isPullback_map (n := ULift.{u} (Fin 1)) g).toCommSq).app
@@ -481,13 +423,8 @@ theorem isIso_derivedBaseChangeMap_app_tateObject_affineLine :
 
 omit [HasInvertibleExponent Λ Y] [HasInvertibleExponent Λ Y'] in
 include aY aY' in
-/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients (base change
-of clause (a), untwisted).
-
-For `g : Y' ⟶ Y`, the derived base change map `Lg^* Rp_* Λ ⟶ Rp'_* Λ` of the projections
-`p : 𝔸¹_Y ⟶ Y` and `p' : 𝔸¹_{Y'} ⟶ Y'` is an isomorphism: it is compatible with the units
-`Λ_Y ⟶ Rp_* Λ` and `Λ_{Y'} ⟶ Rp'_* Λ`, which are isomorphisms
-(`AlgebraicGeometry.Etale.isIso_unit_constantComplex_affineLine`). -/
+/-- For `g : Y' ⟶ Y`, the derived base change map `Lg^* Rp_* Λ ⟶ Rp'_* Λ` of the projections
+`p : 𝔸¹_Y ⟶ Y` and `p' : 𝔸¹_{Y'} ⟶ Y'` is an isomorphism. -/
 theorem isIso_derivedBaseChangeMap_app_constantComplex_affineLine :
     IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
       (AffineSpace.isPullback_map (n := ULift.{u} (Fin 1)) g).toCommSq).app
@@ -521,14 +458,8 @@ theorem isIso_derivedBaseChangeMap_app_constantComplex_affineLine :
 set_option maxRecDepth 20000 in
 -- the composites of derived functors between the derived categories of the two bases are large
 include aY aY' in
-/-- Blueprint `prop-pur-gm-relative-kummer`: The affine line and the punctured line over a base
-(clause (4), the punctured line).
-
-For `g : Y' ⟶ Y` with base change `g' : 𝔾_{m,Y'} ⟶ 𝔾_{m,Y}`, the derived base change map
-`Lg^* Rπ_* Λ(1) ⟶ Rπ'_* Lg'^* Λ(1)` is an isomorphism: both sides have cohomology only in degrees
-zero and one, where the base change map is compatible with the units and with the Kummer
-classes, which generate. This is the base change compatibility of clauses (b) and (c) of
-`sk-prop-a1-kummer`. -/
+/-- For `g : Y' ⟶ Y` with base change `g' : 𝔾_{m,Y'} ⟶ 𝔾_{m,Y}`, the derived base change map
+`Lg^* Rπ_* Λ(1) ⟶ Rπ'_* Lg'^* Λ(1)` is an isomorphism. -/
 theorem isIso_derivedBaseChangeMap_app_tateObject_multiplicativeGroup [HasInvertibleExponent Λ G]
     [HasInvertibleExponent Λ G'] :
     IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ)

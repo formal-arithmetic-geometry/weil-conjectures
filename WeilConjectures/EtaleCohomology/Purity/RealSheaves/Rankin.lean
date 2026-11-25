@@ -18,23 +18,21 @@ import Mathlib.Algebra.Order.Star.Real
 /-!
 # The ingredients of the Rankin–Selberg bound
 
-This file collects the inputs of the Rankin–Selberg argument of
-`proposition-bound-largest-determinant-weight--1`, which bounds the local Frobenius eigenvalues of
-an `ι`-real lisse Weil sheaf on an affine curve by the largest determinant weight of its
-constituents.
+This file collects the inputs of the Rankin–Selberg argument bounding the local Frobenius
+eigenvalues of an `ι`-real lisse Weil sheaf on an affine curve by the largest determinant weight
+of its constituents.
 
 * Tensor squares: the tensor square `ℱ ⊗ ℱ` of a lisse, `ι`-real Weil sheaf is lisse and
   `ι`-real, and `α ^ 2` is a local eigenvalue of `ℱ ⊗ ℱ` whenever `α` is one of `ℱ`.
-* `proposition-weights-under-usual-operations--14`: a Tate twist `ℱ (n)` shifts weights by `-2 n`.
-* `lemma-positivity-euler-factors--1`: the inverse local factors of the tensor square of an
-  `ι`-real sheaf have nonnegative coefficients.
-* `proposition-bound-largest-determinant-weight`: the eigenvalues of the geometric Frobenius on
-  the coinvariant Tate twist `V_{π₁(U)} (-1) = H_c² (U, ℱ)` are determinant weights.
-* `theorem-trace-formula-euler-product--4`: the Euler series of `ℱ` times
-`det (1 - F T ∣ H_c² (U, ℱ))` is a
-  polynomial, namely `det (1 - F T ∣ H_c¹ (U, ℱ))`.
+* A Tate twist `ℱ (n)` shifts weights by `-2 n`.
+* The inverse local factors of the tensor square of an `ι`-real sheaf have nonnegative
+  coefficients.
+* The eigenvalues of the geometric Frobenius on the coinvariant Tate twist
+  `V_{π₁(U)} (-1) = H_c² (U, ℱ)` are determinant weights.
+* The Euler series of `ℱ` times `det (1 - F T ∣ H_c² (U, ℱ))` is a polynomial, namely
+  `det (1 - F T ∣ H_c¹ (U, ℱ))`.
 
-## Implementation notes
+## Implementation details
 
 `H_c² (U, ℱ)` is not available for a Weil representation, only for a Weil sheaf. By global
 Verdier duality on the smooth nonproper curve `U` it is the coinvariant Tate twist
@@ -49,6 +47,16 @@ Grothendieck–Lefschetz trace formula for the lisse Weil sheaf attached to the 
 `AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_eq`. It needs `ℓ ≠ char 𝔽_q`:
 for `ℓ = p` the `L`-function of a `p`-adic character of infinite geometric image, such as that
 of an Artin–Schreier–Witt `ℤ_p`-tower, is not rational.
+
+The determinant weight statement
+`AlgebraicGeometry.WeilGroup.exists_isConstituent_hasDetWeight_of_hasEigenvalue` is proved by
+noting that `β = α q⁻¹` is an eigenvalue of `γ` on `V_{π₁(U)}`, whose generalized eigenspace is
+stable under `W (U₀)`; an irreducible subquotient of its preimage has trivial geometric action and
+`γ` acts on it with the single eigenvalue `β`.
+
+Positivity of the Euler factors of `ℱ ⊗ ℱ` comes from the formal identity
+`det (1 - T M)⁻¹ = exp (∑ Tr (M ^ n) T ^ n / n)`: the `n`-th power sum of the local eigenvalues
+of `ℱ ⊗ ℱ` is the square of the real number `ι Tr (F_x ^ n ∣ ℱ)`.
 
 ## Main definitions
 
@@ -107,8 +115,8 @@ theorem IsLisse.tprod (hρ : W.IsLisse l ρ) (hσ : W.IsLisse l σ) : W.IsLisse 
         ((hρ.continuous_apply _ _).mul (hσ.continuous_apply _ _)).mul continuous_const
     | add x y hx hy => exact (hx.add hy).congr fun g ↦ by simp
 
-/-- Blueprint `lemma-filtrations-spectra`: the local eigenvalues of a tensor product are the
-pairwise products of the local eigenvalues of the factors. -/
+/-- The local eigenvalues of a tensor product are the pairwise products of the local
+eigenvalues of the factors. -/
 theorem localEigenvalues_tprod (x : C.finitePoints) :
     W.localEigenvalues l (ρ.tprod σ) x =
       (W.localEigenvalues l ρ x ×ˢ W.localEigenvalues l σ x).map fun a ↦ a.1 * a.2 :=
@@ -193,11 +201,8 @@ theorem localEigenvalues_tprod_tateLine (n : ℤ) (x : C.finitePoints) :
   | empty => simp
   | cons a s ih => simp [ih]
 
-/-- Blueprint `proposition-weights-under-usual-operations--14`: Weight shift under a Tate twist.
-
-If `ℱ` is punctually `ι`-pure of weight `w`, its Tate twist `ℱ (n)` is punctually `ι`-pure of
-weight `w - 2 n`: at a closed point `y` of degree `e` the local Frobenius of the twist is
-`q ^ (-n e)` times that of `ℱ`, and `|ι (q ^ (-n e) α)| = q_y ^ ((w - 2 n) / 2)`. -/
+/-- If `ℱ` is punctually `ι`-pure of weight `w`, its Tate twist `ℱ (n)` is punctually `ι`-pure
+of weight `w - 2 n`. -/
 theorem IsPunctuallyPure.tprod_tateLine {w : ℝ} (h : W.IsPunctuallyPure l ρ ι w) (n : ℤ) :
     W.IsPunctuallyPure l (ρ.tprod (W.tateLine l n)) ι (w - 2 * n) := by
   intro x β hβ
@@ -209,9 +214,7 @@ theorem IsPunctuallyPure.tprod_tateLine {w : ℝ} (h : W.IsPunctuallyPure l ρ �
     Scheme.Hom.pointNorm_eq_pow_degreeOver p x.2, frobeniusWeight_zpow_card ι he]
   ring
 
-/-- Blueprint `proposition-weights-under-usual-operations--14`: Weight shift under a Tate twist.
-
-If `ℱ` has weights at most `w`, its Tate twist `ℱ (n)` has weights at most `w - 2 n`. -/
+/-- If `ℱ` has weights at most `w`, its Tate twist `ℱ (n)` has weights at most `w - 2 n`. -/
 theorem HasWeightsAtMost.tprod_tateLine {w : ℝ} (h : W.HasWeightsAtMost l ρ ι w) (n : ℤ) :
     W.HasWeightsAtMost l (ρ.tprod (W.tateLine l n)) ι (w - 2 * n) := by
   intro x β hβ
@@ -248,10 +251,7 @@ theorem _root_.Multiset.sum_map_pow_map_product_mul {R : Type*} [CommRing R] (s 
     simp [Multiset.map_map, mul_pow, Multiset.sum_map_mul_left]
 
 /-- An inverse local factor `ι P_x (σ, T ^ e_x)⁻¹` has nonnegative real coefficients as soon as
-all power sums `∑ (ι α) ^ n` of the complex local eigenvalues of `σ` at `x` are nonnegative:
-the formal identity `det (1 - T M)⁻¹ = exp (∑ Tr (M ^ n) T ^ n / n)`
-(`PowerSeries.coeff_inv_prod_one_sub_C_mul_X_nonneg`) turns nonnegative power sums into
-nonnegative coefficients, and substituting `T ^ e_x` for `T` preserves nonnegativity. -/
+all power sums `∑ (ι α) ^ n` of the complex local eigenvalues of `σ` at `x` are nonnegative. -/
 theorem hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg (x : C.finitePoints)
     (hsum : ∀ n : ℕ, 0 ≤ (((W.localEigenvalues l σ x).map ι).map (· ^ n)).sum) :
     (W.eulerFactor l σ ι x).HasNonnegCoeffs := by
@@ -294,20 +294,8 @@ theorem IsReal.conj_sum_map_pow_localEigenvalues (hρ : W.IsReal l ρ ι) (x : C
   conv_rhs => rw [← hA]
   simp [map_multiset_sum, Multiset.map_map]
 
-/-- Blueprint `lemma-positivity-euler-factors--1`: Even tensor powers of a real sheaf are positive,
-for the tensor square.
-
-If `ℱ` is `ι`-real, then every inverse local factor `ι P_x (ℱ ⊗ ℱ, T ^ e_x)⁻¹` of the tensor
-square of `ℱ` has nonnegative real coefficients (and constant term `1`, by
-`AlgebraicGeometry.WeilGroup.constantCoeff_eulerFactor`); that `ℱ ⊗ ℱ` is again `ι`-real is
-`AlgebraicGeometry.WeilGroup.IsReal.tprod`. The case of all even tensor powers is
-`AlgebraicGeometry.WeilGroup.IsReal.hasNonnegCoeffs_eulerFactor_tensorPower`; the Rankin–Selberg
-argument here only uses tensor squares, iterated.
-
-Indeed the `n`-th power sum of the complex local eigenvalues of `ℱ ⊗ ℱ` is
-`ι Tr (F_x ^ n ∣ ℱ ⊗ ℱ) = (ι Tr (F_x ^ n ∣ ℱ)) ^ 2`, the square of a real number since the
-eigenvalue multiset of `ℱ` is stable under complex conjugation
-(`AlgebraicGeometry.WeilGroup.hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg`). -/
+/-- If `ℱ` is `ι`-real, then every inverse local factor `ι P_x (ℱ ⊗ ℱ, T ^ e_x)⁻¹` of the tensor
+square of `ℱ` has nonnegative real coefficients. -/
 theorem IsReal.hasNonnegCoeffs_eulerFactor_tprod_self (hρ : W.IsReal l ρ ι)
     (x : C.finitePoints) : (W.eulerFactor l (ρ.tprod ρ) ι x).HasNonnegCoeffs := by
   refine hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg ι x fun n ↦ ?_
@@ -324,34 +312,19 @@ section TopCohomology
 variable (ρ)
 
 variable (W l) in
-/-- Blueprint `lemma-degree-zero-top-cohomology--2`: Description of `H_c²` on an affine curve.
-
-For a lisse Weil sheaf `ℱ` on a smooth geometrically connected affine curve `U₀` with local
-generic fibre `V`, there is a canonical Frobenius-equivariant isomorphism
-`H_c² (U, ℱ) ≅ V_{π₁(U)} (-1)`, by global Verdier duality on a smooth compactification and the
-description of global sections as invariants (`lemma-degree-zero-top-cohomology--1`).
-
-Compactly supported cohomology of a Weil representation is not available, so the right-hand
-side is used as the model of `H_c² (U, ℱ)`: this is the geometric Frobenius acting on it, `q`
-times the endomorphism induced by the degree-one lift `γ` on the geometric coinvariants. -/
+/-- The geometric Frobenius on `H_c² (U, ℱ) ≅ V_{π₁(U)} (-1)`, modelled as `q` times the
+endomorphism induced by the degree-one lift `γ` on the geometric coinvariants of `ρ`. -/
 noncomputable def compactTopFrobenius :
     Module.End (PadicAlgCl l) (Representation.Coinvariants (ρ.comp W.geometric.subtype)) :=
   (Nat.card K : PadicAlgCl l) • ρ.toCoinvariants W.geometric W.frobeniusLift
 
-/-- Blueprint `proposition-bound-largest-determinant-weight`: Eigenvalues of `H_c²` are
-determinant weights.
+/-- Eigenvalues of `H_c²` are determinant weights.
 
 Let `ℱ` be a Weil representation on `V`, and let `α` be an eigenvalue of the geometric
 Frobenius on `H_c² (U, ℱ) = V_{π₁(U)} (-1)`, which acts as `q` times the endomorphism induced by
 the degree-one lift `γ` on the geometric coinvariants. Then `wt_{ι, q} (α q⁻¹)` is a
 determinant weight of `ℱ`: it is the determinant weight of an irreducible constituent of `ℱ`,
-presented as a subquotient `M ⧸ N` of `V`.
-
-Indeed `β = α q⁻¹` is an eigenvalue of `γ` on `V_{π₁(U)}`, whose generalized eigenspace is
-stable under `W (U₀)`, since `π₁(U)` acts trivially on the coinvariants and `W (U₀)` is generated
-by `π₁(U)` and `γ`. An irreducible subquotient of it has trivial geometric action and `γ` acts on
-it with the single eigenvalue `β`, so that the local Frobenius at a point of degree `e` has
-determinant `β ^ (r e)`, of weight `r wt_{ι, q} (β)` relative to `q ^ e`. -/
+presented as a subquotient `M ⧸ N` of `V`. -/
 theorem exists_isConstituent_hasDetWeight_of_hasEigenvalue {α : PadicAlgCl l}
     (hα : (W.compactTopFrobenius l ρ).HasEigenvalue α) :
     ∃ N M : Subrepresentation ρ, N ≤ M ∧ (M.subquotient N).IsConstituent ρ ∧
@@ -464,21 +437,14 @@ theorem exists_isConstituent_hasDetWeight_of_hasEigenvalue {α : PadicAlgCl l}
   ring
 
 open scoped PowerSeries.WithPiTopology in
-/-- Blueprint `theorem-trace-formula-euler-product--4`: Euler product of the `L`-function of a lisse
-sheaf.
+/-- Euler product of the `L`-function of a lisse sheaf.
 
 Let `U₀` be a smooth geometrically connected affine curve and `ℱ` a lisse Weil sheaf on it.
 Then, as power series in `T`,
 `∏_{x ∈ |U₀|} ι det (1 - F_x T ^ e_x ∣ ℱ)⁻¹ = ι det (1 - F T ∣ H_c¹) / ι det (1 - F T ∣ H_c²)`,
 with `H_c² (U, ℱ) = V_{π₁(U)} (-1)` the coinvariant Tate twist, on which the geometric Frobenius
 acts as `q` times the endomorphism induced by `γ`. Here the numerator `ι det (1 - F T ∣ H_c¹)`
-is only recorded as some polynomial `P`.
-
-This is the curve case of the Euler-product form of the Grothendieck–Lefschetz trace formula,
-together with `H_c⁰ (U, ℱ) = 0` (`lemma-degree-zero-top-cohomology--4`) and the coinvariant
-description of `H_c²` (`lemma-degree-zero-top-cohomology--2`), for `ℓ ≠ char 𝔽_q`, applied to the
-lisse Weil sheaf attached to `ρ`
-(`AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_eq`). -/
+is only recorded as some polynomial `P`. -/
 theorem exists_eulerSeries_mul_eq_coe [IsAffine C] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hρ : W.IsLisse l ρ) :
     ∃ P : Polynomial ℂ, W.eulerSeries l ρ ι *

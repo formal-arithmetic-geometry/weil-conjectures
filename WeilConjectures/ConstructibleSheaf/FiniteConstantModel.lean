@@ -11,8 +11,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 /-! # Finite models for finite constant sheaves
 
-Source: `WeilConjectures/ConstructibleSheaf/Monoidal.lean`, coefficient dual argument.
-(blueprint: lem-weil-pbc-finite-constant-model)
+A constant sheaf of `Λ`-modules on `X_ét` with finitely generated geometric stalks is the
+constant sheaf on a finitely generated `Λ`-module
+(`AlgebraicGeometry.Scheme.exists_finite_constant_model`).
 -/
 
 @[expose] public section
@@ -25,16 +26,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- A constant sheaf with finite geometric stalks has a finitely generated constant model.
-
-Source: `WeilConjectures/ConstructibleSheaf/Monoidal.lean`,
-`IsFiniteLocallyConstantSheaf.ihom_unit` docstring.
-
-Proof: On a nonempty scheme choose a point x and the geometric point with residue field
-SeparableClosure κ(x). A constant model exists by constancy, and its geometric stalk is
-that module. Transport finite generation from the stalk across this isomorphism.
-On the empty scheme every sheaf is zero, so use the zero module as its constant model.
-(blueprint: lem-weil-pbc-finite-constant-model) -/
+/-- A constant sheaf with finite geometric stalks has a finitely generated constant model. -/
 theorem exists_finite_constant_model
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hc : F.IsConstant X.smallEtaleTopology) (hf : IsFiniteSheaf F) :

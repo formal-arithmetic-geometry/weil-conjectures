@@ -20,8 +20,15 @@ import WeilConjectures.RingTheory.DvrAbhyankarLocalMaximalIdeal
 
 /-! # Abhyankar's index-one conclusion for normalized tensor factors
 
-Source: Stacks Project, Tags 0BRM, 09EM and 09E7.
-(blueprint: lem-sbc-dvr-abhyankar-normalized-factor-index-one) -/
+If a finite extension `B ⟶ A` of discrete valuation rings has ramification index divisible by
+the (tame) ramification of a finite separable extension `E` of `Frac B`, then every field factor
+of `E ⊗_B A` has normalization unramified over the maximal ideal of `A`
+(`RingTheory.dvr_abhyankar_normalized_factor_ramificationIdx_eq_one`).
+
+## References
+
+* Stacks Project, Tags 0BRM, 09EM and 09E7.
+-/
 
 @[expose] public section
 universe u
@@ -62,26 +69,13 @@ private theorem ramificationIdx_eq_one_of_map_maximalIdeal
     ← Ideal.isMaximal_def, IsLocalRing.isMaximal_iff]
   simpa only [Ideal.under_def, hQ] using hmax
 
-/-- Sufficient divisibility of the base index kills tame ramification.
-
-Source: Stacks Project, Tags 0BRM (lemma-abhyankar), 09EM and 09E7.
-(blueprint: lem-sbc-dvr-abhyankar-normalized-factor-index-one)
-
-Proof: The field map E -> F and injective A -> F identify the two B-maps,
-so B embeds in A. Since A is finite and normal, it is the normalization of B
-in its fraction field. The field F is a factor of E tensor Frac(A) over
-Frac(B), by inverting the nonzero elements of B. The finite normalization C
-is Dedekind; at the contraction R of Q its localization is a DVR. This
-contraction lies over the closed point of B. Its ramification index divides r,
-which is invertible in B. Its residue degree also divides r, so its inseparable
-degree (a power of the residue characteristic) is one. Thus C_R/B is tame.
-The maximal-ideal power identity gives base ramification index n, divisible
-by r and hence by the index at R. Apply 0BRM to C_R/B and Frac(A)/Frac(B).
-Integrality transitivity and localization of integral closure (09EM) identify
-the resulting local normalized tensor factor with S_Q. Its adic formal
-smoothness gives ramification index one by 09E7. The length definition of
-ramificationIdx agrees with this DVR index. No bound for a partially
-ramified base extension is used. -/
+/-- Sufficient divisibility of the base index kills tame ramification. Let `B ⟶ A` be a finite
+extension of discrete valuation rings with `𝔪_B A = 𝔪_A^n`, let `E` be a finite separable
+extension of `Frac B` whose normalization `C` of `B` is finite over `B`, and suppose every prime of
+`C` over `𝔪_B` has ramification index and residue degree dividing `r`, where `r ∣ n` and `r` is a
+unit in `B`. If `F = (E ⊗_B A) / P` is a field factor into which `A` injects and the
+normalization `S` of `A` in `F` is finite over `A`, then every prime of `S` over `𝔪_A` has
+ramification index one over `A`. -/
 theorem dvr_abhyankar_normalized_factor_ramificationIdx_eq_one
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (n : ℕ) (hnpos : 0 < n) (r : ℕ) (hrpos : 0 < r) (hr : IsUnit (r : B))
