@@ -13,11 +13,29 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
 
 /-! # Finite coefficient change for internal Hom
 
-Source: blueprint sec-six-functors/sk-prop-sf-biduality-general,
-node lemma-change-coefficients-internal-hom--1 (blueprint:
-def-sf-finite-coefficient-site-scalar-arrow). Indices n and m below denote exponents n + 1 and m +
-1; thus every positive exponent, including the identity quotient, occurs. All comparison maps are
-closed transposes of reduced evaluation, never choices of arbitrary arrows.
+The finite-stage comparison from étale to pro-étale module sheaves with coefficients
+`Padic.coefficientExtensionRing l E (n + 1)`, its derived version `nu_X^*`, its compatibility
+with scalar restriction between finite stages, and the resulting mate `finiteHomSiteBeta`,
+which is invertible.
+
+## Implementation details
+
+Indices `n` and `m` denote exponents `n + 1` and `m + 1`, so every positive exponent, including
+the identity quotient, occurs. All comparison maps are closed transposes of reduced evaluation,
+never choices of arbitrary arrows.
+
+The restriction comparison is the identity on local generators: on underlying module presheaves
+scalar restriction does not change sections, and both inverse-image constructions are a left
+Kan extension followed by module sheafification, so this normalization determines it uniquely.
+To prove that `finiteHomSiteBeta` is invertible, intrinsic module sheaves are encoded by their
+constant scalar action; the sheafification units identify the encoded inverse image with the
+ordinary fixed-ring comparison, and mate normalization identifies the encoded beta, up to
+invertible factors, with the fixed-ring comparison mate. Isomorphisms are then reflected
+through the derived encoding equivalence.
+
+## References
+
+* [Stacks, Tag 00YV]
 -/
 
 @[expose] public noncomputable section
@@ -302,8 +320,7 @@ private theorem finiteHomRestrictionCandidate_mapGeneral
   simp only [finiteHomRestrictionCandidateGeneral, Functor.fullyFaithfulCancelRight_hom_app,
     Functor.map_preimage]
 
-/-- Identity-on-generators normalization for comparison and scalar restriction.
-Source: blueprint canonical site maps (blueprint: def-sf-finite-coefficient-site-scalar-arrow). -/
+/-- Identity-on-generators normalization for comparison and scalar restriction. -/
 private def FiniteHomNuRestrictionNormalizationGeneral
     (σ : ProEtale.finiteCoefficientIntrinsicComparison X B ⋙ SheafOfModules.restrictScalars f ≅
       Sheaf.restrictScalars X.smallEtaleTopology φ ⋙
@@ -441,8 +458,7 @@ attribute [local instance] finiteHomCommSheafify finiteHomAbSheafify
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
-/-- The actual comparison on module sheaves, with finite coefficients supplied.
-Source: blueprint site formula (blueprint: def-sf-finite-coefficient-site-scalar-arrow). -/
+/-- The actual comparison on module sheaves, with finite coefficients supplied. -/
 def finiteHomNuOrdinary (n : ℕ) :
     Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) ⥤
@@ -450,16 +466,14 @@ def finiteHomNuOrdinary (n : ℕ) :
   @ProEtale.finiteCoefficientIntrinsicComparison X (Padic.coefficientExtensionRing l E (n + 1))
     inferInstance
 
-/-- Additivity of the published intrinsic comparison, at the positive finite stage.
-Source: blueprint site formula (blueprint: def-sf-finite-coefficient-site-scalar-arrow). -/
+/-- Additivity of the published intrinsic comparison, at the positive finite stage. -/
 instance finiteHomNuOrdinary_additive (n : ℕ) : (finiteHomNuOrdinary l E X n).Additive :=
   letI : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
     Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
   inferInstanceAs (ProEtale.finiteCoefficientIntrinsicComparison X
     (Padic.coefficientExtensionRing l E (n + 1))).Additive
 
-/-- Exact comparison preserves finite limits.
-Source: blueprint site formula (blueprint: def-sf-finite-coefficient-site-scalar-arrow). -/
+/-- Exact comparison preserves finite limits. -/
 instance finiteHomNuOrdinary_limits (n : ℕ) :
     PreservesFiniteLimits (finiteHomNuOrdinary l E X n) :=
   letI : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
@@ -467,8 +481,7 @@ instance finiteHomNuOrdinary_limits (n : ℕ) :
   inferInstanceAs (PreservesFiniteLimits (ProEtale.finiteCoefficientIntrinsicComparison X
     (Padic.coefficientExtensionRing l E (n + 1))))
 
-/-- Exact comparison preserves finite colimits.
-Source: blueprint site formula (blueprint: def-sf-finite-coefficient-site-scalar-arrow). -/
+/-- Exact comparison preserves finite colimits. -/
 instance finiteHomNuOrdinary_colimits (n : ℕ) :
     PreservesFiniteColimits (finiteHomNuOrdinary l E X n) :=
   letI : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
@@ -476,14 +489,11 @@ instance finiteHomNuOrdinary_colimits (n : ℕ) :
   inferInstanceAs (PreservesFiniteColimits (ProEtale.finiteCoefficientIntrinsicComparison X
     (Padic.coefficientExtensionRing l E (n + 1))))
 
-/-- The exact derived inverse image nu_X^* in the intrinsic constant-ring presentation.
-Source: blueprint site formula (blueprint: def-sf-finite-coefficient-site-scalar-arrow). -/
+/-- The exact derived inverse image nu_X^* in the intrinsic constant-ring presentation. -/
 def finiteHomNu (n : ℕ) : finiteHomEtale l E X n ⥤ normalizedDVRDerived l E X n :=
   (finiteHomNuOrdinary l E X n).mapDerivedCategory
 
-/-- A section mapped by the comparison unit and the associated-module-sheaf unit.
-Source: blueprint site formula; Stacks 00YV
-(blueprint: def-sf-finite-coefficient-site-scalar-arrow). -/
+/-- A section mapped by the comparison unit and the associated-module-sheaf unit. -/
 def finiteHomNuSection (n : ℕ)
     (M : Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))))
@@ -557,8 +567,7 @@ private def finiteHomRestrictionCandidate {n m : ℕ} (h : m ≤ n) :
   finiteHomRestrictionCandidateGeneral X _ _ (finiteHomQuotient l E h)
     (normalizedDVRQuotient l E X h) (finiteHomScalarUnit_naturality l E X h)
 
-/-- Identity-on-generators normalization for comparison and scalar restriction.
-Source: blueprint canonical site maps (blueprint: def-sf-finite-coefficient-site-scalar-arrow). -/
+/-- Identity-on-generators normalization for comparison and scalar restriction. -/
 def FiniteHomNuRestrictionNormalization {n m : ℕ} (h : m ≤ n)
     (σ : finiteHomNuOrdinary l E X m ⋙ normalizedDVRModuleRes l E X h ≅
       Sheaf.restrictScalars X.smallEtaleTopology (finiteHomQuotient l E h) ⋙
@@ -598,14 +607,8 @@ private theorem finiteHomRestriction_unique {n m : ℕ} (h : m ≤ n)
   exact finiteHomRestriction_uniqueGeneral X _ _ (finiteHomQuotient l E h)
     (normalizedDVRQuotient l E X h) σ τ hσ hτ
 
-/-- Restriction commutes canonically with inverse image, fixing every local generator.
-Source: blueprint canonical site maps (blueprint: def-sf-finite-coefficient-site-scalar-arrow).
-Proof: on underlying module presheaves scalar restriction does not change sections.
-The two inverse-image constructions are left Kan extension followed by module
-sheafification. The identity on the displayed generators respects scalar balancing,
-restriction, and gluing. It extends to a natural isomorphism; the identity in the
-opposite direction is inverse. These generators locally generate the associated
-sheaf, so the normalization determines every component uniquely. -/
+/-- Restriction of scalars commutes with inverse image via a unique isomorphism fixing every
+local generator. -/
 theorem finiteHomNuRestriction_existsUnique {n m : ℕ} (h : m ≤ n) :
     ∃! σ, FiniteHomNuRestrictionNormalization l E X h σ := by
   exact ⟨finiteHomRestrictionCandidate l E X h,
@@ -613,8 +616,7 @@ theorem finiteHomNuRestriction_existsUnique {n m : ℕ} (h : m ≤ n) :
     fun σ hσ ↦ finiteHomRestriction_unique l E X h σ _ hσ
       (finiteHomRestrictionCandidate_normalized l E X h)⟩
 
-/-- The uniquely normalized ordinary scalar-restriction comparison.
-Source: blueprint canonical site maps (blueprint: def-sf-finite-coefficient-site-scalar-arrow). -/
+/-- The uniquely normalized ordinary scalar-restriction comparison. -/
 def finiteHomNuRestriction {n m : ℕ} (h : m ≤ n) :
     finiteHomNuOrdinary l E X m ⋙ normalizedDVRModuleRes l E X h ≅
       Sheaf.restrictScalars X.smallEtaleTopology (finiteHomQuotient l E h) ⋙
@@ -645,8 +647,7 @@ private theorem finiteHomRestriction_encoding {n m : ℕ} (h : m ≤ n)
   exact finiteHomRestrictionCandidate_encodingGeneral X _ _ (finiteHomQuotient l E h)
     (normalizedDVRQuotient l E X h) (finiteHomScalarUnit_naturality l E X h) M
 
-/-- Exact descent of the canonical scalar-restriction comparison.
-Source: blueprint canonical site maps (blueprint: def-sf-finite-coefficient-site-scalar-arrow). -/
+/-- Exact descent of the canonical scalar-restriction comparison. -/
 def finiteHomNuDerivedRestriction {n m : ℕ} (h : m ≤ n) :
     finiteHomNu l E X m ⋙ normalizedDVRRes l E X h ≅
       Sheaf.derivedRestrictScalars X.smallEtaleTopology (finiteHomQuotient l E h) ⋙
@@ -655,9 +656,7 @@ def finiteHomNuDerivedRestriction {n m : ℕ} (h : m ≤ n) :
     Functor.mapDerivedCategoryNatIso (finiteHomNuRestriction l E X h) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Beta is the canonical left-adjoint mate of identity-on-sections scalar restriction.
-Source: blueprint nu_X^* coefficient formula
-(blueprint: def-sf-finite-coefficient-site-scalar-arrow). -/
+/-- Beta is the canonical left-adjoint mate of identity-on-sections scalar restriction. -/
 def finiteHomSiteBeta {n m : ℕ} (h : m ≤ n) :
     finiteHomNu l E X n ⋙ coefficientFiniteQuotientDerived l E X h ⟶
       finiteHomEtaleReduction l E X h ⋙ finiteHomNu l E X m :=
@@ -966,17 +965,7 @@ private instance finiteHomScalarEncodingMate_isIso {n m : ℕ} (h : m ≤ n) :
       (Sheaf.derivedRestrictScalars (ProEt.topology X) (finiteHomQuotient l E h)))
     (finiteHomDerivedEncodingRestriction l E X h)
 
-/-- The specified beta mate is invertible on every ambient object.
-Source: blueprint site-comparison paragraph
-(blueprint: def-sf-finite-coefficient-site-scalar-arrow).
-Proof: encode intrinsic module sheaves by their constant scalar action. The
-canonical sheafification units identify encoded inverse image with the ordinary
-fixed-ring comparison. The section normalization identifies the restriction
-square with the conjugate fixed-ring square. Exact localization preserves this
-identity. The mate of the encoding square is invertible because both encodings
-are equivalences. Mate normalization then identifies the encoded beta, up to
-invertible factors, with the proved fixed-ring comparison mate. Cancel those
-factors and reflect isomorphisms through the derived encoding equivalence. -/
+/-- The specified beta mate is invertible on every ambient object. -/
 @[instance] theorem finiteHomSiteBeta_isIso {n m : ℕ} (h : m ≤ n) :
     IsIso (finiteHomSiteBeta l E X h) := by
   let a := Adjunction.ofIsRightAdjoint

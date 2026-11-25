@@ -11,8 +11,17 @@ public import Mathlib.FieldTheory.Galois.Basic
 /-!
 # Extension over the fixed field is separable and normal
 
-Source: Stacks Project, Fields, Lemma 030M (2).
-(blueprint: lem-weil-pbc-normal-extension-fixed-field-separable-normal)
+If `E / F` is normal, then `E` is separable and normal over the fixed field of `Aut(E/F)`.
+
+## Implementation details
+
+For `x ∈ E`, the polynomial `∏ (X - y)` over the distinct roots `y ∈ E` of the minimal polynomial
+of `x` over `F` is separable and has coefficients fixed by `Aut(E/F)`. No finiteness of the
+automorphism group or of `E / F` is required.
+
+## References
+
+* [Stacks Project, Tag 030M](https://stacks.math.columbia.edu/tag/030M)
 -/
 
 @[expose] public section
@@ -20,24 +29,7 @@ universe u v
 
 namespace Normal
 
-/-- The extension over the fixed field in a normal extension is separable and normal.
-Source: Stacks Project, Fields, Lemma 030M (2).
-(blueprint: lem-weil-pbc-normal-extension-fixed-field-separable-normal)
-
-Proof:
-1. The fixed elements form an intermediate field S. By the normal tower theorem
-(Stacks 09HN), E/S is algebraic and normal.
-2. For a in E, the roots of its nonzero minimal polynomial over F form a finite set R.
-Every F-automorphism permutes R, since it fixes the polynomial's coefficients.
-3. Form Q as the product of T-b for b in R, each root used exactly once. Applying an
-F-automorphism to its coefficients permutes the factors, so every coefficient is fixed.
-Consequently Q is a monic polynomial over S. The element a is a root of Q.
-4. The minimal polynomial of a over S divides Q. Over E the factors of Q are pairwise
-distinct, so Q is separable; separability descends to S and passes to its divisors
-(Stacks 09H3). Hence a is separable over S.
-5. This holds for every a in E, proving separability. Combined with step 1 it proves
-both assertions. No finiteness of the automorphism group or of E/F is required.
--/
+/-- The extension over the fixed field in a normal extension is separable and normal. -/
 theorem fixedField_separable_normal
     (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] [Normal F E] :
     Algebra.IsSeparable (IntermediateField.fixedField (⊤ : Subgroup (E ≃ₐ[F] E))) E ∧

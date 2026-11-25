@@ -17,7 +17,18 @@ import Mathlib.Algebra.BigOperators.Fin
 
 /-! # Descent of the last coefficient in a triangular monic quotient
 
-Source: Stacks Project, Algebra, proofs of Tags 07BV and 08JZ.
+## Implementation details
+
+Let `Q₀` be the preceding quotient and `g` the image of the last (monic) polynomial in
+`Q₀[X]`. Evaluating the earlier variables at their classes in `AdjoinRoot g` and the last
+variable at `AdjoinRoot.root g` descends to a map from the full quotient. Applying it to the
+vanishing expansion and collecting terms by the last exponent gives a vanishing combination of
+root powers, which are linearly independent by the power basis of `AdjoinRoot g`. The case
+`Q₀ = 0` is trivial.
+
+## References
+
+* Stacks Project, Algebra, proofs of Tags 07BV and 08JZ.
 -/
 
 @[expose] public section
@@ -26,27 +37,7 @@ universe u
 namespace FieldTheory
 
 /-- Vanishing in a triangular quotient descends to each last-variable coefficient
-in the preceding quotient. Earlier relations need not be monic.
-Source: Stacks Project, Algebra, proofs of Tags 07BV and 08JZ.
-(blueprint: lem-weil-pbc-triangular-field-model-coefficient-descent).
-
-Proof: Let Q₀ be the preceding quotient and g the image of the last polynomial
-in Q₀[X]. If Q₀ is zero, every coefficient sum is zero. Otherwise mapping the
-last polynomial preserves its monicity and natural degree. Set S = AdjoinRoot g.
-Evaluate every preceding variable at its coefficient class in S and the last
-variable at root g. The localization equation and every earlier relation vanish
-because their preceding quotient classes vanish; the last relation vanishes by
-AdjoinRoot.eval₂_root. Thus evaluation descends to a k-algebra map from the full
-simultaneous quotient to S. Its composite with psi agrees with of g composed
-with psi₀ on the base polynomial ring. Localization extensionality proves these
-maps agree everywhere. Apply the quotient evaluation map to the zero expansion.
-Split each monomial product into its preceding product and last power. Reindex
-the finite sum by Fin.snocEquiv, and collect terms of equal last exponent using
-distributivity. The resulting zero sum is the linear combination of root powers
-with coefficients equal to the asserted preceding quotient sums. The monic
-power basis of AdjoinRoot g, reindexed along its natural-degree equality, is
-linearly independent and forces each coefficient to vanish. No hypotheses on
-earlier monicity or degrees are used. A zero last degree has no coefficient j. -/
+in the preceding quotient. Earlier relations need not be monic. -/
 theorem triangularFieldModel_coefficient_descent
     (k : Type u) [Field k] (d n : ℕ) (h : MvPolynomial (Fin d) k)
     (p : (i : Fin (n + 1)) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k))

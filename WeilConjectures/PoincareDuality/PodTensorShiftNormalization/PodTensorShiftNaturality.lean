@@ -11,8 +11,12 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 
 /-! # Proved calculations for tensor-shift path normalization
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-naturality-t5).
+Naturality of the projection-defined product shift and of signed Roos shifts, and the
+identification of a reindexed shifted presentation with the canonical target presentation.
+
+## References
+
+* [Stacks, Tags 011G, 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -46,9 +50,7 @@ attribute [local implicit_reducible] podShiftTower
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The projection-defined product shift is natural. Test each product projection.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-naturality-t5). -/
+/-- The projection-defined product shift is natural. -/
 private theorem product_shift_naturality
     {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
     {C C' : ℕᵒᵖ ⥤ CochainComplex A ℤ} (f : C ⟶ C') (r : ℤ) :
@@ -81,10 +83,7 @@ private theorem two_coordinate_ext
 section RoosNaturality
 attribute [local implicit_reducible] integralOperationsRoos
 
-/-- The signed Roos shift is natural. Use product naturality in both cocone coordinates,
-with the same sign in the second coordinate, then the cocone coordinate identity.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-naturality-t5). -/
+/-- A signed Roos shift satisfying its laws is natural in the tower. -/
 theorem signed_roos_naturality
     {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
     (S : PodSignedRoosShift A) (hS : S.Laws)
@@ -138,10 +137,7 @@ theorem signed_roos_naturality
 end RoosNaturality
 attribute [local irreducible] integralOperationsRoos
 
-/-- Reindexing a compatible shifted presentation gives the canonical target presentation.
-Cancel the target shift identification and use naturality and CommShift of the comparison.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-naturality-t5). -/
+/-- Reindexing a compatible shifted presentation gives the canonical target presentation. -/
 theorem reindexed_shift_presentation
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [HasShift A ℤ] [HasShift B ℤ] [HasShift C ℤ] [HasShift D ℤ]

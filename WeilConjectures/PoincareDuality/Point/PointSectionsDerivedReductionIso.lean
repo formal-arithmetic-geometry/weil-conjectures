@@ -16,9 +16,18 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Point sections commute with derived principal reduction
 
-The coefficient sequence, flat-resolution comparison and localization descent follow
-steps 1--10 of the original proof. No point-reduction normalization theorem is used.
-(blueprint: lem-pod-point-sections-derived-reduction-iso) -/
+We show that exact sections over a geometric point commute with derived principal reduction
+(`point_sections_derived_reduction_iso`).
+
+## Implementation details
+
+The proof goes through the coefficient sequence, a flat-resolution comparison and localization
+descent; no point-reduction normalization theorem is used.
+
+## References
+
+* [Stacks, Tags 06Y6, 06YY]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -53,9 +62,9 @@ namespace WeilConjectures
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Exact point sections commute with derived principal reduction.
-Source: Stacks Tags 06Y6 and 06YY; original blueprint steps 1--10.
-(blueprint: lem-pod-point-sections-derived-reduction-iso) -/
+/-- Exact point sections commute with derived principal reduction: for `l ≠ p`, on integral
+constructible complexes over the point, taking point sections followed by derived reduction is
+isomorphic to derived reduction followed by point sections. -/
 theorem point_sections_derived_reduction_iso (_hl : l ≠ D.p) (n : ℕ) :
     Nonempty (pointReductionTensorSections D l E n ≅ pointReductionSectionsTensor D l E n) := by
   let T := Spec (.of D.k)

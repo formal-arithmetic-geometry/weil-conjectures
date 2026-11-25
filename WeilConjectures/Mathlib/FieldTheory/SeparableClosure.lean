@@ -21,9 +21,7 @@ namespace IsSepClosed
 
 /-- **Separable algebraic closure inside an extension.** The separable closure
 `separableClosure F E` of `F` in an extension `E` consists of the elements of `E` separable over
-`F`; if `E` is separably closed, then it is a separable closure of `F`.
-
-(blueprint: `def-weil-pbc-relative-separable-closure`) -/
+`F`; if `E` is separably closed, then it is a separable closure of `F`. -/
 theorem isSepClosure_separableClosure (F E : Type*) [Field F] [Field E] [Algebra F E]
     [IsSepClosed E] : IsSepClosure F (separableClosure F E) ∧
       ∀ x : E, x ∈ separableClosure F E ↔ IsSeparable F x :=

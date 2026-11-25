@@ -39,16 +39,8 @@ namespace FiniteField
 
 variable (K L : Type*) [Field K] [Fintype K] [Field L] [Algebra K L] [Algebra.IsAlgebraic K L]
 
-/-- Blueprint `definition-abelian-variety--1`: Finite fields, Frobenius and abelian varieties.
-
-Fix a finite field `K` with `q` elements and an algebraic extension `L`. The *arithmetic
-Frobenius* is `σ : x ↦ x ^ q`; the *geometric Frobenius* is `F = σ⁻¹`.
-
-This is also blueprint `definition-abelian-variety--1`; its abelian varieties are
-`AlgebraicGeometry.IsAbelianVariety` (see
-`AlgebraicGeometry.isAbelianVariety_iff_geometricallyConnected`)
-and the action of `Gal(L/K)` on geometric points by coordinates is
-`AlgebraicGeometry.IsAbelianVariety.geometricPointsAddEquiv`. -/
+/-- The *geometric Frobenius* `σ⁻¹` of an algebraic extension `L` of a finite field `K` with
+`q` elements, where `σ : x ↦ x ^ q` is the arithmetic Frobenius. -/
 @[simps!]
 noncomputable def geometricFrobeniusAlgEquivOfAlgebraic : Gal(L/K) :=
   (frobeniusAlgEquivOfAlgebraic K L)⁻¹
@@ -59,7 +51,7 @@ theorem geometricFrobeniusAlgEquivOfAlgebraic_eq_inv :
   rfl
 
 /-- The `m`-th power of the geometric Frobenius of `L/K` fixes the image of any embedding of a
-field `E` with `#K ^ m` elements: such a field is fixed pointwise by `x ↦ x ^ (#K ^ m)`. -/
+field `E` with `#K ^ m` elements. -/
 theorem geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_of_card_eq {E : Type*} [Field E]
     [Finite E] (m : ℕ) (hE : Nat.card E = Fintype.card K ^ m) (ι : E →+* L) (a : E) :
     (geometricFrobeniusAlgEquivOfAlgebraic K L ^ m) (ι a) = ι a := by
@@ -69,8 +61,7 @@ theorem geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_of_card_eq {E : Type*} [
   dsimp only
   rw [← map_pow, ← hE, Nat.card_eq_fintype_card, pow_card]
 
-/-- The ring endomorphisms of `L` commute with the powers of the geometric Frobenius, as they
-commute with `x ↦ x ^ #K`. -/
+/-- The ring endomorphisms of `L` commute with the powers of the geometric Frobenius. -/
 theorem map_geometricFrobeniusAlgEquivOfAlgebraic_pow_apply (β : L →+* L) (j : ℕ) (y : L) :
     β ((geometricFrobeniusAlgEquivOfAlgebraic K L ^ j) y) =
       (geometricFrobeniusAlgEquivOfAlgebraic K L ^ j) (β y) := by
@@ -96,8 +87,7 @@ theorem exists_pow_card_pow_eq_self (y : L) : ∃ n, 1 ≤ n ∧ y ^ (Fintype.ca
   exact congrArg Subtype.val this
 
 /-- A ring endomorphism of an algebraically closed algebraic extension of a finite field is
-bijective: every element is a root of a polynomial `X ^ (#K ^ n) - X` with coefficients in the
-image. -/
+bijective. -/
 theorem bijective_ringHom_of_isAlgClosed (K' : Type*) [Field K'] [Finite K'] [Algebra K' L]
     [Algebra.IsAlgebraic K' L] [IsAlgClosed L] (β : L →+* L) : Function.Bijective β :=
   have := Fintype.ofFinite K'
@@ -109,8 +99,7 @@ theorem bijective_ringHom_of_isAlgClosed (K' : Type*) [Field K'] [Finite K'] [Al
     simp [hy]
 
 /-- The elements of `L` fixed by the arithmetic Frobenius `x ↦ x ^ q` are exactly the elements
-of `K`: every element of `K` is a root of `X ^ q - X`, and this polynomial has at most `q` roots
-in `L`. -/
+of `K`. -/
 theorem frobeniusAlgEquivOfAlgebraic_apply_eq_self_iff {x : L} :
     frobeniusAlgEquivOfAlgebraic K L x = x ↔ x ∈ Set.range (algebraMap K L) := by
   classical
@@ -134,8 +123,7 @@ theorem frobeniusAlgEquivOfAlgebraic_apply_eq_self_iff {x : L} :
   exact ⟨a, rfl⟩
 
 /-- Two embeddings `ι, ι' : E ↪ L` of a finite field `E` which agree on a finite subfield
-`K ⊆ E` differ by a power of the `#K`-power Frobenius: the `K`-embeddings of `E` into `L` are
-the composites of one of them with the elements of `Gal(E/K)`, the powers of `x ↦ x ^ #K`. -/
+`K ⊆ E` differ by a power of the `#K`-power Frobenius. -/
 theorem exists_apply_eq_pow_card_pow_of_comp_eq {K E L : Type*} [Field K] [Fintype K] [Field E]
     [Finite E] [Field L] (r : K →+* E) {ι ι' : E →+* L} (h : ι.comp r = ι'.comp r) :
     ∃ i : ℕ, ∀ a, ι' a = ι a ^ (Fintype.card K ^ i) := by
@@ -155,9 +143,9 @@ theorem exists_apply_eq_pow_card_pow_of_comp_eq {K E L : Type*} [Field K] [Finty
   simp only [AlgHom.comp_apply, AlgHom.coe_pow, coe_frobeniusAlgHom, pow_iterate] at this
   exact this.symm.trans (map_pow ι _ _)
 
-/-- An embedding `ι` of a finite field with `#K ^ n` elements, `n ≥ 1`, into an algebraic
-extension `L` of `K`: on its image the `#K ^ i`-power map is a positive power of the geometric
-Frobenius, the arithmetic Frobenius having order dividing `n` there. -/
+/-- For an embedding `ι` of a finite field with `#K ^ n` elements, `n ≥ 1`, into an algebraic
+extension `L` of `K`, the `#K ^ i`-power map on the image of `ι` is a positive power of the
+geometric Frobenius. -/
 theorem exists_geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_eq {E : Type*} [Field E]
     [Finite E] {n : ℕ} (hn : 1 ≤ n) (hE : Nat.card E = Fintype.card K ^ n) (ι : E →+* L)
     (i : ℕ) : ∃ j, 1 ≤ j ∧ ∀ a,
@@ -218,8 +206,7 @@ variable (K : Type*) [Field K] [Algebra k K] [Algebra.IsAlgebraic k K]
 
 /-- The geometric Frobenius of an algebraic extension `K` of a finite field `k`, the
 inverse of the arithmetic Frobenius `x ↦ x ^ #k`
-(`FiniteField.frobeniusAlgEquivOfAlgebraic`). It is characterized by
-`FiniteField.geometricFrobenius_pow_card`: it is the unique `#k`-th root. -/
+(`FiniteField.frobeniusAlgEquivOfAlgebraic`). -/
 noncomputable def geometricFrobenius : K ≃ₐ[k] K :=
   letI : Fintype k := Fintype.ofFinite k
   (frobeniusAlgEquivOfAlgebraic k K).symm

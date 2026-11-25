@@ -82,9 +82,12 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Matching pullback augmentations and entire-tower counits
 
-Source: blueprint main-20261015, sec-fourier-transform/sk-def-trace,
-`def-fd-trace-function.md`, final sentence; Stacks Tags 099N(2),(5) and 0941
-(blueprint: lem-fd-pullback-augmentation-counit-matching).
+Matching of pullback augmentations with entire-tower counits, used in the definition of the
+trace function.
+
+## References
+
+* [Stacks, Tag 099N] (2), (5); [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section

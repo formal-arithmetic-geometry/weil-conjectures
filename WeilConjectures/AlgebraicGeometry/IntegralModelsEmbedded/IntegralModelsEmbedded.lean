@@ -189,6 +189,15 @@ public import WeilConjectures.CategoryTheory.Sites.RGammaDerivedLimit
 The canonical constant and continuous coefficients, scalar maps, completeness predicates
 and first-residue etale-origin predicate used by the integral-model theorem.
 
+## Implementation details
+
+The completeness predicate `complete` is measured on the equivalent small ringed site. For the
+first residue map its kernel is the uniformizer ideal, so it is equivalent to the derived
+quotient-tower completion condition. In `integralModelResidueEtaleOrigin` the scalar action is
+transported by the continuous chart, restriction to constant functions and the intrinsic
+realization; finiteness and discreteness of the residue ring are part of the conclusion rather
+than hypotheses.
+
 ## References
 
 * Stacks Tags 099I and 09C1
@@ -297,9 +306,8 @@ abbrev restriction (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermedia
   (Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (scalarMap ℓ E X)).mapDerivedCategory
 
-/-- The existing completeness predicate on the equivalent small ringed site.
-Its kernel is the uniformizer ideal, so it is equivalent to the canonical derived
-quotient-tower completion condition; no completeness hypothesis is built into D. -/
+/-- Completeness of a complex with respect to a ring map `q`, measured on the equivalent small
+ringed site. -/
 abbrev complete (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
     [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
@@ -351,10 +359,8 @@ namespace AlgebraicGeometry.ProEtale
 attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
   monoidal_upperStarFromPoint monoidal_pointUpperStar oplaxMonoidal_pointUpperStar
 
-/-- The first completed-coefficient reduction is a bounded constructible complex pulled
-back from the etale site. The scalar action is transported by the specified continuous
-chart, restriction to constant functions, and intrinsic realization. Finiteness and
-discreteness of the actual residue ring are conclusions, not extra hypotheses. -/
+/-- The first completed-coefficient reduction of `K` is a bounded constructible complex pulled
+back from the etale site, and the residue ring is finite and discrete. -/
 def integralModelResidueEtaleOrigin (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (π : PadicAlgCl.integers ℓ E.1)
     (K : DerivedCategory.{u + 1} (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

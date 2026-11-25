@@ -11,8 +11,18 @@ import WeilConjectures.SixFunctors.IntegralHom.Tensor.TensorEvaluationInterchang
 
 /-! # The signed Hom--tensor chain map
 
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1;
-Stacks Tags 0A8X and 08J7.
+We construct the signed chain map `Hom(P, I) ⊗ Q ⟶ Hom(P, I ⊗ Q)` for arbitrary complexes of
+sheaves of modules.
+
+## Implementation details
+
+The map is the transpose of the composite that reassociates `(Hom(P, I) ⊗ Q) ⊗ P`, interchanges
+`Q` and `P` with the Koszul braiding, reassociates back, and applies evaluation tensored with the
+identity of `Q`. No boundedness, flatness or injectivity hypothesis is needed.
+
+## References
+
+* Stacks Project, Tags 0A8X, 08J7.
 -/
 
 @[expose] public section
@@ -43,17 +53,9 @@ private theorem generator_transport
   subst n
   rfl
 
-/-- The signed exchange exists for arbitrary, possibly unbounded, complexes.
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1;
-Stacks Tags 0A8X and 08J7
-(blueprint: lem-sf-signed-hom-tensor-map).
-
-Proof: transpose the composite which reassociates (Hom(P,I) tensor Q) tensor P,
-interchanges Q and P using the Koszul braiding, reassociates back, and applies
-evaluation tensor the identity of Q. All its factors are chain maps. On degrees
-a,b,p the only interchange contributes (-1)^(bp); normalized evaluation sends
-v tensor x to v(x). Thus the composite has the required local formula.
-No boundedness, flatness or injectivity hypothesis occurs. -/
+/-- For arbitrary, possibly unbounded, complexes `P`, `I`, `Q` there is a signed Hom-tensor
+chain map `Hom(P, I) ⊗ Q ⟶ Hom(P, I ⊗ Q)`, sending `v ⊗ z` to `x ↦ (-1)^(bp) v(x) ⊗ z` for
+`z` of degree `b` and `x` of degree `p`. -/
 theorem signedHomTensor_exists (P I Q : CochainComplex (Modules.{t, u} Y R) ℤ) :
     ∃ f : ((totalTensor Y R).obj
         (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I)).obj Q ⟶

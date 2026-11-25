@@ -18,8 +18,7 @@ public import WeilConjectures.ConstructibleSheaf.ModuleConstantOfSetPullback
 Let `Λ` be a finite commutative ring and `L` a finite locally constant sheaf of `Λ`-modules on
 the small étale site of a connected scheme `X`. Then there is a connected finite étale cover
 `p : P ⟶ X` such that `p^* L` is the constant sheaf of a finite `Λ`-module
-(`AlgebraicGeometry.Scheme.exists_isConstant_upperStar_of_connectedSpace`, blueprint
-`fin2-lem-lisse-trivialized-finite-etale`).
+(`AlgebraicGeometry.Scheme.exists_isConstant_upperStar_of_connectedSpace`).
 
 The underlying sheaf of sets of `L` is represented by a finite étale `X`-scheme `E`
 (`AlgebraicGeometry.Scheme.FiniteEtale.toFLC`). A Galois object `A` of the Galois category of
@@ -54,9 +53,7 @@ variable {X : Scheme.{u}} [ConnectedSpace X] {Ω : Type u} [Field Ω] [IsSepClos
 /-- **A Galois object splits the objects it dominates.** Let `A` be a Galois object of the
 category of finite étale `X`-schemes and `E` a finite étale `X`-scheme such that evaluation at
 a point `a ∈ A_s` is a bijection `Hom(A, E) → E_s`. Then `E ×_X A ≅ ∐_{Hom(A, E)} A` over `A`,
-the summand indexed by `f` mapping to `E` by `f`. On geometric fibres this is the bijection
-`(f, a') ↦ (f(a'), a')`, as evaluation at every point `a'` of `A_s` is bijective (`Aut A` acts
-transitively on `A_s`); the fibre functor reflects isomorphisms. -/
+the summand indexed by `f` mapping to `E` by `f`. -/
 lemma isPullback_sigmaDesc_of_isGalois (A E : X.FiniteEtale) [IsGalois A] (a : (fiber s).obj A)
     (ha : Function.Bijective fun f : A ⟶ E ↦ (fiber s).map f a) :
     IsPullback (Sigma.desc fun f : (A ⟶ E) ↦ f.hom.left)
@@ -223,12 +220,10 @@ lemma IsFiniteLocallyConstantSheaf.isFiniteLocallyConstantSheafOfTypes_sheafForg
     rw [ConcreteCategory.isFinitelyGenerated_iff_finite]
     exact @Finite.of_equiv _ _ this e.symm.toEquiv
 
-/-- Blueprint `fin2-lem-lisse-trivialized-finite-etale`: Finite etale trivialization of a lisse
-sheaf, connected case.
-
-Let `X` be a connected scheme, `Λ` a finite commutative ring and `L` a finite locally constant
-sheaf of `Λ`-modules on `X_ét`. There is a finite étale surjective morphism `p : P ⟶ X` with `P`
-connected such that `p^* L` is the constant sheaf of a finite `Λ`-module `M`. -/
+/-- **Finite étale trivialization of a lisse sheaf, connected case.** Let `X` be a connected
+scheme, `Λ` a finite commutative ring and `L` a finite locally constant sheaf of `Λ`-modules on
+`X_ét`. There is a finite étale surjective morphism `p : P ⟶ X` with `P` connected such that
+`p^* L` is the constant sheaf of a finite `Λ`-module `M`. -/
 theorem exists_isConstant_upperStar_of_connectedSpace {X : Scheme.{u}} [ConnectedSpace X]
     (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf L] :
     ∃ (P : Scheme.{u}) (p : P ⟶ X), IsFinite p ∧ AlgebraicGeometry.Etale p ∧ Surjective p ∧
@@ -276,17 +271,12 @@ theorem exists_isConstant_upperStar_of_connectedSpace {X : Scheme.{u}} [Connecte
   exact Module.finite_of_finite Λ
 
 
-/-- Blueprint `fin2-lem-lisse-trivialized-finite-etale`: Finite etale trivialization of a lisse
-sheaf.
-
-Let `X` be a Noetherian scheme (for instance of finite type over a field), `Λ` a finite
+/-- **Finite étale trivialization of a lisse sheaf.** Let `X` be a Noetherian scheme, `Λ` a finite
 commutative ring and `L` a finite locally constant sheaf of `Λ`-modules on `X_ét`. There are
 finitely many connected schemes `P_a` with finite étale morphisms `p_a : P_a ⟶ X`, jointly
 surjective, such that each `p_a^* L` is the constant sheaf of a finite `Λ`-module `M_a`. In
 other words `p : P = ∐ P_a ⟶ X` is finite étale surjective and `p^* L` is constant with finite
-value on each connected component of `P`. If `X` is connected, a single connected `P` suffices
-(`AlgebraicGeometry.Scheme.exists_isConstant_upperStar_of_connectedSpace`); in general we apply
-that to the finitely many connected components of `X`, which are open and closed. -/
+value on each connected component of `P`. -/
 theorem exists_isConstant_upperStar {X : Scheme.{u}} [IsNoetherian X]
     (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf L] :
     ∃ (n : ℕ) (P : Fin n → Scheme.{u}) (p : ∀ a, P a ⟶ X),

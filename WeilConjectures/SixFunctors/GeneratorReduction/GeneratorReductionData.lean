@@ -12,8 +12,19 @@ public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiber
 
 /-! # Canonical coefficient squares for the basic six-functor generators
 
-Source: blueprint fix-prop-coherence, basic structural maps
-(blueprint: lem-sf-generator-reduction-coherence).
+We define finite operation words built from the basic six-functor generators (tensor, pullback,
+proper pushforward, extension by zero along open immersions), their system, ringed-site and
+integral interpretations, the structural generator maps between words, the recursive coefficient
+comparisons `Word.r`, and the coefficient square `Assertion` for each generator.
+
+## Implementation details
+
+The integral direct-image tower `integralSystemDerivedDirectImage` is defined here, since this
+file needs its specialization to the strict quotient system.
+
+## References
+
+* [Stacks, Tags 03DI and 07A7]
 -/
 
 @[expose] public noncomputable section
@@ -29,15 +40,10 @@ open WeilConjectures
 
 namespace WeilConjectures
 
-/-! The integral direct-image tower used by the generator statement.  This
-construction belongs to the owning item module: the recorded
-`prose-03-02` node keeps its landed common-stage declaration,
-while this item needs the simultaneous strict-system specialization below. -/
+/-! The integral direct-image tower used by the generator statement. -/
 
 /-- The integral direct image is the total limit of the actual strict quotient
-system's total right-derived direct image.
-Source: blueprint main-20261015, def:weil-direct-image-object, integral paragraph;
-coherence proof, step 2 (blueprint: lem-sf-generator-reduction-coherence). -/
+system's total right-derived direct image. -/
 def integralSystemDerivedDirectImage
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (o : IntegralSystemRealization.Operations l E)
@@ -52,11 +58,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 variable {S : Type s} (W : S → Scheme.{u}) {I : Type i} (location : I → S)
 
-/-- Presentations of the actual system and ordinary ringed-site operations.
-Each comparison is fixed by the recorded section, total-complex or adjunction
-normalization; there are no generator arrow fields.
-Source: blueprint coherence proof, steps 1--5
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The system and ordinary ringed-site operations together with their compositors, open
+comparisons, realization model and unit normalization. -/
 structure Operations where
   system : IntegralSystemRealization.Operations l E
   composition : IntegralSystemRealization.Compositors l E system
@@ -79,9 +82,8 @@ structure Operations where
     ((IntegralSystemRealization.calculus l E X).systemClosed.monoidal.leftUnitor
       ((IntegralSystemRealization.calculus l E X).reduction.obj K)).hom
 
-/-- The finite words in the source statement.
-Source: blueprint coherence proof, steps 1--5
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- Finite words in the basic operations: inputs, unit, tensor, pullback, proper pushforward
+and extension by zero along open immersions. -/
 inductive Word {S : Type s} (W : S → Scheme.{u}) {I : Type i} (location : I → S) :
     S → Type (max u s i) where
   | input (k : I) : Word W location (location k)
@@ -95,17 +97,13 @@ inductive Word {S : Type s} (W : S → Scheme.{u}) {I : Type i} (location : I �
   | open {a b : S} (j : W a ⟶ W b) (hj : IsOpenImmersion j)
       (hq : QuasiCompact j) (B : Word W location a) : Word W location b
 
-/-- The corresponding structural recursion of the finite operation word.
-Source: blueprint coherence proof, steps 2--5
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The length (number of operations) of a finite operation word. -/
 def Word.length {a : S} : Word W location a → ℕ
   | .input _ | .unit _ => 0
   | .tensor B C => B.length + C.length + 1
   | .pull _ _ _ _ B | .push _ _ _ _ _ B | .open _ _ _ B => B.length + 1
 
-/-- The listed structural generator kinds; no arbitrary pair of words is a generator.
-Source: blueprint coherence proof, steps 1--5
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The structural generators between pairs of operation words. -/
 inductive GeneratorKind : {a : S} → Word W location a → Word W location a → Type (max u s i) where
   | tensorAssociator {a : S} (B C D : Word W location a) :
       GeneratorKind (Word.tensor (Word.tensor B C) D) (Word.tensor B (Word.tensor C D))
@@ -181,9 +179,8 @@ inductive GeneratorKind : {a : S} → Word W location a → Word W location a �
         (Word.push r (by let := hr; infer_instance) (by let := hr; infer_instance)
           (by let := hr; infer_instance) hr B)
 
-/-- The system interpretation uses the actual derived adjunctions and tensor.
-Source: blueprint coherence proof, step 1
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The interpretation of a word in coefficient systems, using the derived adjunctions and
+tensor product. -/
 def Word.systemValue (o : Operations l E)
     (M : ∀ k : I, coefficientSequenceDerived l E (W (location k))) :
     {a : S} → Word W location a → coefficientSequenceDerived l E (W a)
@@ -197,9 +194,7 @@ def Word.systemValue (o : Operations l E)
   | _, .open j hj _ B => letI := hj
       (IntegralSystemRealization.Operations.shriek l E o.system j).obj (B.systemValue o M)
 
-/-- The ordinary integral ringed-site interpretation, before quotient completion.
-Source: blueprint coherence proof, steps 3--4
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The ordinary integral ringed-site interpretation, before quotient completion. -/
 def Word.ringedValue (o : Operations l E)
     (K : ∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k)))) :
     {a : S} → Word W location a → DerivedCategory (scalarReductionSource l E (W a))
@@ -214,12 +209,8 @@ def Word.ringedValue (o : Operations l E)
   | _, .open j hj _ B => letI := hj
       (IntegralSystemRealization.ringedOpen l E j).obj (B.ringedValue o K)
 
-/-- Select the actual system arrow by recursion on the structural generator.
-The proper/open case is the open adjunct of inverse lambda; lambda itself is the
-published cartesian-conjugation/clopen/compositor composite. No arrow is supplied
-by the generator's caller.
-Source: blueprint coherence proof, steps 3--4
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The system morphism associated to a structural generator, by recursion on the
+generator. -/
 def GeneratorKind.systemMap (o : Operations l E)
     (M : ∀ k : I, coefficientSequenceDerived l E (W (location k))) :
     {a : S} → {B C : Word W location a} → GeneratorKind W location B C →
@@ -262,12 +253,7 @@ def GeneratorKind.systemMap (o : Operations l E)
       (IntegralSystemRealization.properOpenLambda l E o.system o.composition o.opens
         k r p j h).hom.app (B.systemValue l E W location o M)
 
-/-- Select the independently defined ordinary ringed-site generator. In particular,
-its units and counits are the actual geometric/open adjunction transformations;
-the proper/open map uses the ringed clopen factorization, independently of system
-reduction or any realization square.
-Source: blueprint coherence proof, steps 3--4
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The ordinary ringed-site morphism associated to a structural generator. -/
 def GeneratorKind.ringedMap (o : Operations l E)
     (K : ∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k)))) :
     {a : S} → {B C : Word W location a} → GeneratorKind W location B C →
@@ -327,31 +313,22 @@ def GeneratorKind.ringedMap (o : Operations l E)
       (IntegralSystemRealization.ringedProperOpenLambda l E o.ringed o.ringedOpens
         k r p j h).hom.app (B.ringedValue l E W location o K)
 
-/-- Invert an actual comparison where invertible; the value elsewhere is irrelevant
-on the theorem's domain. Source: blueprint coherence proof, complete restriction
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The inverse of `f` if `f` is an isomorphism, and `0` otherwise. -/
 def inverseOrZero {C : Type v} [Category.{w} C] [HasZeroMorphisms C]
     {X Y : C} (f : X ⟶ Y) : Y ⟶ X := by
   classical
   exact if h : IsIso f then @inv C _ X Y f h else 0
 
-/-- The integral proper image is its strict system direct-image tower followed by
-actual total limit. The system image is the recorded derived right adjoint.
-Source: blueprint coherence proof, step 2
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The integral proper direct image: the strict system direct image followed by the total
+limit. -/
 def integralPush (o : Operations l E) {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   integralSystemDerivedDirectImage l E o.system f
 
-/-- Canonical ordinary-to-completed tensor map, from the real completion unit.
-Source: blueprint coherence proof, step 3
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The canonical map from the ordinary tensor product to the completed tensor product. -/
 def tensorCompletion (o : Operations l E) (X : Scheme.{u}) :=
   (o.ringed.tensor X).chi l E
 
-/-- The coefficient map of completed tensor uses the ordinary tensor reduction and
-inverse reduction of the actual completion unit. It is independent of d_tensor.
-Source: blueprint coherence proof, step 2
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The coefficient comparison for the completed tensor product. -/
 def tensorR (o : Operations l E) (X : Scheme.{u})
     (K L : DerivedCategory (scalarReductionSource l E X)) :=
   inverseOrZero ((IntegralSystemRealization.calculus l E X).reduction.map
@@ -363,47 +340,36 @@ def tensorR (o : Operations l E) (X : Scheme.{u})
       (o.ringed.tensorClosed X))).hom) ≫
   (IntegralSystemRealization.calculus l E X).reductionTensor.hom.app (K, L)
 
-/-- Canonical coefficient map of completed pullback, obtained from the fixed
-whole-system pullback comparison and reduction of the quotient-completion unit.
-Source: blueprint coherence proof, step 2
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The coefficient comparison for the completed pullback. -/
 def pullR (o : Operations l E) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategory (scalarReductionSource l E Y)) :=
   inverseOrZero ((IntegralSystemRealization.calculus l E X).reduction.map
     (((o.ringed.pull f).unit l E).app K)) ≫
   (o.realization.reductionPull f).hom.app K
 
-/-- The actual counit is the coefficient comparison of the defining proper tower.
-Source: blueprint coherence proof, step 2
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The coefficient comparison for the proper direct image, given by the counit of the
+reconstruction adjunction. -/
 def pushR (o : Operations l E) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategory (scalarReductionSource l E X)) :=
   (IntegralSystemRealization.calculus l E Y).adjunction.counit.app
     ((IntegralSystemRealization.Operations.push l E o.system f).obj
       ((IntegralSystemRealization.calculus l E X).reduction.obj K))
 
-/-- The specified open coefficient comparison, transported from the recorded
-localized open interface to the same actual functors used by the generators.
-Source: blueprint coherence proof, step 2; Stacks 03DI and 07A7
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The coefficient comparison for extension by zero along an open immersion. -/
 def openR (o : Operations l E) {X Y : Scheme.{u}} (j : X ⟶ Y)
     [IsOpenImmersion j] (K : DerivedCategory (scalarReductionSource l E X)) :=
   inverseOrZero ((o.realization.openReduction l E j).app K)
 
-/-- The specified open realization, from the actual mate and reconstruction unit.
-It is a map on the ambient category; its inverse laws are asserted on complete inputs.
-Source: Stacks 03DI, 07A7; blueprint coherence proof, step 2
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The open realization map, built from the open reduction comparison and the inverse of the
+reconstruction unit. -/
 def openD (o : Operations l E) {X Y : Scheme.{u}} (j : X ⟶ Y)
     [IsOpenImmersion j] (K : DerivedCategory (scalarReductionSource l E X)) :=
   (coefficientSequenceLimit l E Y).map ((o.realization.openReduction l E j).app K) ≫
     inverseOrZero ((IntegralSystemRealization.calculus l E Y).adjunction.unit.app
       ((IntegralSystemRealization.ringedOpen l E j).obj K))
 
-/-- Integral evaluation uses the prescribed completed tensor/pullback, the proper
-strict tower, and the localized ringed open extension.
-Source: blueprint coherence proof, steps 2--5
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The integral interpretation of a word, using completed tensor and pullback, the integral
+proper direct image and the ringed open extension. -/
 def Word.integralValue (o : Operations l E)
     (K : ∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k)))) :
     {a : S} → Word W location a → DerivedCategory (scalarReductionSource l E (W a))
@@ -416,11 +382,8 @@ def Word.integralValue (o : Operations l E)
   | _, .open j hj _ B => letI := hj
       (IntegralSystemRealization.ringedOpen l E j).obj (B.integralValue o K)
 
-/-- Quotient completion applied recursively to ordinary ringed expressions.
-The proper step is the ordinary direct-image/limit comparison and the actual
-reconstruction unit. It is defined before any coefficient square.
-Source: blueprint coherence proof, steps 2--4
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The completion map from the ringed-site value of a word to its integral value, defined
+recursively. -/
 def Word.completionMap (o : Operations l E)
     (K : ∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k)))) :
     {a : S} → (B : Word W location a) →
@@ -444,28 +407,21 @@ def Word.completionMap (o : Operations l E)
   | _, .open j hj _ B => letI := hj
       (IntegralSystemRealization.ringedOpen l E j).map (B.completionMap o K)
 
-/-- The canonical completed ringed-site generator: transport the separately
-constructed ringed generator along the actual recursive completion maps.
-Neither coefficient reduction nor r_B nor the desired square defines this map.
-Source: blueprint coherence proof, steps 3--4
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The integral morphism of a generator: the ringed-site generator transported along the
+completion maps. -/
 def GeneratorKind.integralMap (o : Operations l E)
     (K : ∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k))))
     {a : S} {B C : Word W location a} (g : GeneratorKind W location B C) :=
   inverseOrZero (B.completionMap l E W location o K) ≫
     g.ringedMap l E W location o K ≫ C.completionMap l E W location o K
 
-/-- Reduce the input family in the actual whole-system calculus.
-Source: blueprint coherence proof, step 1
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The reduction of the input family to coefficient systems. -/
 def inputReduction
     (K : ∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k))))
     (k : I) := (IntegralSystemRealization.calculus l E (W (location k))).reduction.obj (K k)
 
-/-- Successive actual primitive coefficient comparisons, with both tensor slots
-and every inner operation applied functorially.
-Source: blueprint coherence proof, steps 2--5
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The coefficient comparison of a word, composed recursively from the primitive coefficient
+comparisons. -/
 def Word.r (o : Operations l E)
     (K : ∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k)))) :
     {a : S} → (B : Word W location a) →
@@ -486,10 +442,8 @@ def Word.r (o : Operations l E)
       openR l E o j (B.integralValue l E W location o K) ≫
       (IntegralSystemRealization.Operations.shriek l E o.system j).map (B.r o K)
 
-/-- The actual normalized system domain with the specified common intervals.
-The witness is the recorded `Origins`, whose levels use `FixedEtaleOriginWitness`.
-Source: blueprint coherence proof, step 1
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- A normalized coefficient system with origins whose levels are constructible, supported in
+`[lo, hi]` and of Tor amplitude in `[torLo, torHi]`. -/
 def SystemAdmissible (X : Scheme.{u}) (M : coefficientSequenceDerived l E X)
     (lo hi torLo torHi : ℤ) : Prop :=
   IsNormalizedCoefficientSequence l E X M ∧
@@ -502,18 +456,14 @@ def SystemAdmissible (X : Scheme.{u}) (M : coefficientSequenceDerived l E X)
     HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1))
       ((coefficientSequenceDerivedEvaluation l E X n).obj M) torLo torHi
 
-/-- The derived-complete constructible finite-Tor input and its actual reduction system.
-Source: blueprint coherence proof, step 1
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- A constructible integral complex of finite Tor dimension whose reduction system is
+admissible. -/
 def Admissible {X : Scheme.{u}} (Syst : CoefficientDerivedSystemCalculus l E X)
     (K : DerivedCategory (scalarReductionSource l E X)) (lo hi torLo torHi : ℤ) : Prop :=
   finiteTorConstructibleIntegral l E X K ∧
   SystemAdmissible l E X (Syst.reduction.obj K) lo hi torLo torHi
 
-/-- Restrict precisely the actual systems at the vertices of this word, recursively
-in each tensor slot; no condition is imposed on unrelated words.
-Source: blueprint coherence proof, steps 1 and 4
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- Admissibility of the systems at every vertex of a word, recursively. -/
 def Word.admissible {a : S} (o : Operations l E)
     (K : ∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k))))
     (lo hi torLo torHi : ℤ) (B : Word W location a) : Prop :=
@@ -526,10 +476,8 @@ def Word.admissible {a : S} (o : Operations l E)
     | .pull _ _ _ _ C | .push _ _ _ _ _ C | .open _ _ _ C =>
         C.admissible o K lo hi torLo torHi
 
-/-- Common bounds at every object in the cartesian/clopen factorization of lambda.
-This includes the internal systems on V ×_Z W, independently of the length bound
-on the two generator endpoints. Source: blueprint proof, step 4
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- Admissibility of every intermediate system in the cartesian/clopen factorization of the
+proper/open comparison lambda. -/
 def lambdaAdmissible (o : Operations l E) {U V T Z : Scheme.{u}}
     (k : U ⟶ V) (r : U ⟶ T) (p : V ⟶ Z) (j : T ⟶ Z)
     [IsOpenImmersion k] [QuasiCompact k] [IsOpenImmersion j] [QuasiCompact j]
@@ -559,9 +507,7 @@ def lambdaAdmissible (o : Operations l E) {U V T Z : Scheme.{u}}
       ((IntegralSystemRealization.Operations.push l E o.system
         (ProEtale.StrictTower.squareLift k r p j h)).obj M)) lo hi torLo torHi
 
-/-- Restriction to the actual additional systems used by a generator.
-Source: blueprint coherence proof, steps 1 and 4
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- Admissibility of the additional systems used by a generator. -/
 def GeneratorKind.admissible (o : Operations l E)
     (K : ∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k))))
     (lo hi torLo torHi : ℤ) :
@@ -573,9 +519,7 @@ def GeneratorKind.admissible (o : Operations l E)
         (B.systemValue l E W location o (inputReduction l E W location K)) lo hi torLo torHi
   | _, _, _, _ => True
 
-/-- The actual coefficient square, as a proposition about two specified maps.
-Source: blueprint coherence proof, step 5
-(blueprint: lem-sf-generator-reduction-coherence). -/
+/-- The coefficient square of a generator commutes. -/
 def Assertion (o : Operations l E)
     (K : ∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k))))
     {a : S} {B C : Word W location a} (g : GeneratorKind W location B C) : Prop :=
@@ -584,8 +528,7 @@ def Assertion (o : Operations l E)
   (IntegralSystemRealization.calculus l E (W a)).reduction.map
     (g.integralMap l E W location o K) ≫ C.r l E W location o K
 
-/-- Finite-type structures over the fixed algebraic closure. Source: blueprint
-coherence proof, step 1 (blueprint: lem-sf-generator-reduction-coherence). -/
+/-- A family of finite-type structures over `Spec k`. -/
 structure FiniteTypeFamily (k : Type u) [CommRing k] where
   structureMap : ∀ a : S, W a ⟶ Spec (CommRingCat.of k)
   locallyFiniteType : ∀ a : S, LocallyOfFiniteType (structureMap a)

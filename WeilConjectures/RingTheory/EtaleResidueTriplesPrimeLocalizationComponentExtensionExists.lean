@@ -16,11 +16,24 @@ import Mathlib.Algebra.Category.Ring.FinitePresentation
 /-!
 # Extending cocone legs to pointed etale algebras over a prime localization
 
+Every cocone leg over `(R, p)` extends to a compatible leg on each pointed étale triple over
+`R_p`.
+
+## Implementation details
+
 The proof passes through the localization of a descended model at its pointed prime.
 Unit refinement extends the model's cocone leg to that local ring. Finite presentation
 factors each compatible map through a principal localization, where naturality applies.
 
-Source: Stacks Project, Tags 00U2 (10), 00CR, 00QO and 04GW.
+## References
+
+* [Stacks: Tag 00U2](https://stacks.math.columbia.edu/tag/00U2), part (10)
+* [Stacks: Tag 00CR](https://stacks.math.columbia.edu/tag/00CR)
+* [Stacks: Tag 00QO](https://stacks.math.columbia.edu/tag/00QO)
+* [Stacks: Tag 01ZM](https://stacks.math.columbia.edu/tag/01ZM)
+* [Stacks: Tag 07RP](https://stacks.math.columbia.edu/tag/07RP)
+* [Stacks: Tag 01Z6](https://stacks.math.columbia.edu/tag/01Z6)
+* [Stacks: Tag 04GW](https://stacks.math.columbia.edu/tag/04GW)
 -/
 
 @[expose] public section
@@ -188,43 +201,9 @@ private lemma cocone_leg_atPrime {R : CommRingCat.{u}} {p : Spec R}
     exact congrArg (fun k : c.B ⟶ V ↦ k.hom x) H
   rw [hg, Category.assoc, hdv, hηs]
 
-/-- Existence of a compatible local component leg.
-Source: Stacks Project, Tags 00CR, 01ZM, 07RP, 01Z6 and 04GW.
-(blueprint: new-lem-sbc-etale-triples-prime-localization-component-extension-exists)
-
-Proof: Put A = R_p and S = R minus p. The principal-localization colimit theorem
-(00CR) expresses A as the filtered colimit of R_s for s in S. Taking spectra gives
-an inverse system of affine schemes with affine transitions and limit Spec A.
-Apply finite-data descent (01ZM, 07RP) to the affine etale A-scheme Spec t.B; its
-structure map is finitely presented. The descended scheme is qcqs. Its base
-changes on the upper tail have affine transitions and affine limit Spec t.B,
-so the affine-limit theorem (01Z6) makes a later model affine, say Spec C.
-Then C is etale over R_s, hence over R, and t.B is the localization S^{-1}C.
-Write i : C to t.B for the canonical map. Restrict the given pointing t.B to K
-along i. Its kernel is prime, and the resulting injection of C modulo the kernel
-into K extends to its fraction field, giving a residue-field embedding.
-The equations hψ and hK show that this prime lies over p and that the embedding
-is compatible with χ. Thus C gives a global triple c and i respects both
-structure maps and pointings.
-
-For r in S the image of r in C is outside this kernel: the map R to K has kernel
-p because χ is an injective field map. Unit refinement gives a global arrow
-c to c_r inverting that image. Cocone naturality makes η.app c factor through
-c_r.B, so it takes the image of r to a unit in V. The localization universal
-property therefore extends η.app c to a ring map b : t.B to V.
-
-For a global triple s and a compatible β : s.B to t.B, base change Spec s.B to
-the stage R_s of the model C. Its structure map is finitely presented because
-s.B is etale over R. Morphism descent (01ZM) descends β to a later common
-principal stage, giving a map from the corresponding principal refinement of
-s.B to that of C. Restrict the pointings from K to both refined rings. The map
-is pointed since its composite into t.B is β; its equality on pointings can be
-checked in K. These refinements are global etale triples. Naturality of η on
-the two refinement arrows and the descended map identifies their legs.
-The extension b restricts to the refined model leg, since it agrees on C and
-principal-localization extensionality forces agreement on the refinement.
-Consequently β followed by b equals η.app s, as required for every s and β.
-Only existence is asserted here; no local cocone or uniqueness is assumed. -/
+/-- Given a cocone `η` on the pointed étale ring diagram over `(R, p)` and a pointed étale
+triple `t` over `R_p`, there is a ring map `b : t.B ⟶ V` with `β ≫ b = η.app s` for every
+compatible pointed map `β` from a triple `s` over `(R, p)` to `t`. -/
 theorem etaleResidueTriples_primeLocalization_component_extension_exists
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     (χ : (Spec R).residueField p ⟶ CommRingCat.of K)

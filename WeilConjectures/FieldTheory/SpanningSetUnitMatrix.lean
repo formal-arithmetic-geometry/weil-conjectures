@@ -10,13 +10,16 @@ public import Mathlib.LinearAlgebra.Span.Defs
 import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
 import Mathlib.LinearAlgebra.Matrix.Basis
 
-/-! Extracting an invertible column matrix from a spanning set. -/
+/-! Extracting an invertible column matrix from a spanning set.
+
+## References
+
+* Stacks Project, Tag 03R7, extraction of an invariant basis.
+-/
 @[expose] public section
 universe u
 namespace Matrix
-/-- A spanning set in F^n contains the columns of a unit matrix.
-Source: Stacks Project, Tag 03R7, extraction of an invariant basis.
-(blueprint: lem-sc-spanning-set-unit-matrix) -/
+/-- A spanning set in `F^n` contains the columns of an invertible `n × n` matrix. -/
 theorem exists_unit_matrix_columns_mem (F : Type u) [Field F] (n : ℕ)
     (s : Set (Fin n → F)) (hs : Submodule.span F s = ⊤) :
     ∃ t : GeneralLinearGroup (Fin n) F, ∀ j, (fun i ↦ t.val i j) ∈ s := by

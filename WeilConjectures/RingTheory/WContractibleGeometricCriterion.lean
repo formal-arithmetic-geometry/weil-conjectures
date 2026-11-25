@@ -14,9 +14,9 @@ import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleIndEtale
 
 /-! # Faithfully flat weakly étale algebras over a w-contractible ring split
 
-Source: blueprint, chap-The-pro-etale-site / theorem-enough-affine-weakly-contractible-objects,
-node `lemma-w-contractible-affines-projective` (blueprint: lemma-w-contractible-affines-projective);
-Stacks Project, Tag 0982.
+## References
+
+- Stacks Project, Tag 0982.
 -/
 
 @[expose] public section
@@ -77,14 +77,7 @@ private theorem retraction_same_universe
 /-- A w-local ring `R` whose space of connected components of `Spec R` is extremally disconnected
 and whose localizations at all maximal ideals are strictly henselian (that is, a w-contractible
 ring, with the definition unpacked) splits every faithfully flat weakly étale ring map out of it.
-Source: blueprint `lemma-w-contractible-affines-projective` (blueprint:
-lemma-w-contractible-affines-projective); Stacks Project, Tag 0982, implication (3) to (1).
-
-Proof: the hypotheses say exactly `IsWContractibleRing R`. By `WeaklyEtale.exists_indEtale_comp`
-the weakly étale map `f : R → B` factors through a faithfully flat map `g : B → E` with
-`g ∘ f` ind-étale; `E` is then faithfully flat over `R`, and `IsWContractibleRing.exists_retraction`
-gives a retraction `s : E → R` of `g ∘ f`, so `s ∘ g` retracts `f`. The universes of `R` and `B`
-are first equalised with `ULift`. -/
+-/
 theorem exists_retraction_of_wlocal_geometric_criterion
     {R : Type u} [CommRing R] [IsWLocalRing R]
     [ExtremallyDisconnected (ConnectedComponents (PrimeSpectrum R))]

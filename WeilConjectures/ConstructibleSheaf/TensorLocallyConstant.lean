@@ -52,8 +52,7 @@ theorem isConstant_tensorObj (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1
 
 /-- **The tensor product of locally constant sheaves of modules is locally constant**: on a
 common trivialising étale cover, the pullback of `F ⊗ G` is the tensor product of the pullbacks,
-the pullback being monoidal, which is constant.
-(blueprint: `lem-weil-pbc-flc-tensor-locally-constant-part`) -/
+the pullback being monoidal, which is constant. -/
 theorem IsLocallyConstantSheaf.tensorObj (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsLocallyConstantSheaf F] [IsLocallyConstantSheaf G] :
     IsLocallyConstantSheaf (F ⊗ G) := by

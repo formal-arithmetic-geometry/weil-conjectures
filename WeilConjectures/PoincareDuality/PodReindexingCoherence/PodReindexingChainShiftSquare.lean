@@ -9,8 +9,19 @@ public import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexi
 
 /-! # Reindexing square for supplied signed chain shifts
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA
-(blueprint: new-pod-reindexing-chain-shift-square).
+We show that, for fixed signed chain shifts on `X` and `Y`, the chain Hom comparison of a
+reindexing along an isomorphism `g : X ⟶ Y` commutes with the shift isomorphisms
+(`chain_shift_reindexing_square`).
+
+## Implementation details
+
+On each product projection, both routes reindex the source factor from `p` to `p - a` and carry
+the sign `(-1) ^ (a * r)`; the `chain_projection` field of the comparison identifies the two
+projections, and product extensionality concludes.
+
+## References
+
+* Stacks Project, Tags 0A8X, 08JA
 -/
 
 @[expose] public noncomputable section
@@ -114,17 +125,9 @@ private lemma chain_projection' {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   subst q
   exact c.chain_projection P I n p U.unop V.unop.left V.unop.hom z x
 
-/-- The supplied signed shifts satisfy the chain reindexing square.
-
-For each product projection, both routes reindex the source factor from `p`
-to `p-a` and carry the scalar `(-1)^(a*r)`.  The `chain_projection` field of
-the normalized comparison identifies the two projection maps.  Product
-extensionality then gives the displayed equality of chain morphisms.  This is
-strictly smaller than the existence theorem because the two shift structures
-are fixed as hypotheses.
-
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-(blueprint: new-pod-reindexing-chain-shift-square). -/
+/-- For given signed chain shifts `sX` and `sY`, the chain Hom comparison `c.chain` commutes with
+the shift isomorphisms `sX.iso` and `sY.iso` up to the reindexing shift comparisons
+`complexShift`. -/
 theorem chain_shift_reindexing_square
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

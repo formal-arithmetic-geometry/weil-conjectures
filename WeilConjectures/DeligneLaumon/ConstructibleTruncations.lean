@@ -12,16 +12,11 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.SpectralOb
 import WeilConjectures.DeligneLaumon.IsomorphismFieldTransport
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-/-! # Constructible truncations and the retained localization compatibility API
+/-! # Constructible truncations
 
-The current ordinary condensed-coefficient proposition is proved in
+Constructible truncations with condensed coefficients are constructed in
 `WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstructibleTruncations`,
-publicly reexported here.
-
-The declarations below retain the previously proved rational/common-stage API for its
-existing consumers. Their coefficient categories come from the historical 2026-10-15
-blueprint, and they are not the realization of the current ordinary-category proposition.
-No historical declaration or proof is removed.
+which is publicly reexported here.
 -/
 
 @[expose] public noncomputable section

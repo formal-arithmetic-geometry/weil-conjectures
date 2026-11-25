@@ -20,17 +20,13 @@ preserved by isomorphisms; in particular it is a characteristic ideal.
   solvable.
 * `LieAlgebra.map_radical`: an isomorphism of Lie algebras maps the radical onto the radical.
 
-## Blueprint
+## Implementation details
 
-The blueprint subsection `det-d-lie` consists of definitions and facts already in Mathlib:
-* `def-wf-lie-algebra`: `LieRing`/`LieAlgebra`, `LieIdeal`, `LieAlgebra.derivedSeries`,
-  `LieAlgebra.IsSolvable`, the quotient `L ⧸ I`, `LieModule`, `LieModule.toEnd`;
-* `def-wf-semisimple-lie-algebra`: `LieAlgebra.HasTrivialRadical`;
-* `def-wf-lie-radical-centre`: `LieAlgebra.radical`, `LieAlgebra.center`, and
-  `LieAlgebra.HasCentralRadical`; the Killing form is `killingForm`;
-* `proposition-lie-algebras-faithful-semisimple-representation--1`: `LieAlgebra.isSolvableAdd`.
-
-`LieAlgebra.map_radical` implements `rem-ptr-wf-lie-radical-centre-3`.
+The other basic notions of Lie algebras used here are already in Mathlib: `LieRing`,
+`LieAlgebra`, `LieIdeal`, `LieAlgebra.derivedSeries`, `LieAlgebra.IsSolvable`, the quotient
+`L ⧸ I`, `LieModule`, `LieModule.toEnd`, `LieAlgebra.HasTrivialRadical`, `LieAlgebra.radical`,
+`LieAlgebra.center`, `LieAlgebra.HasCentralRadical`, `killingForm` and
+`LieAlgebra.isSolvableAdd`.
 -/
 
 @[expose] public section
@@ -87,8 +83,7 @@ theorem map_radical_le {f : L →ₗ⁅R⁆ L'} (hf : Function.Surjective f) :
 
 /-- **The solvable radical is characteristic.** An isomorphism of Lie algebras `e : L ≃ L'` maps
 the radical of `L` onto the radical of `L'`; in particular every automorphism of `L` preserves
-its radical.
-(blueprint: `rem-ptr-wf-lie-radical-centre-3`) -/
+its radical. -/
 theorem map_radical (e : L ≃ₗ⁅R⁆ L') : (radical R L).map (e : L →ₗ⁅R⁆ L') = radical R L' := by
   refine le_antisymm (map_radical_le e.surjective) fun y hy ↦ ?_
   have h := map_radical_le (R := R) (f := (e.symm : L' →ₗ⁅R⁆ L)) e.symm.surjective

@@ -15,8 +15,26 @@ public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Degree-zero cochains and invariants
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG,
-label section-continuous-group-cohomology (blueprint: lem-exc-continuous-cochains-invariants-zero).
+Degree-zero homology of the complex of continuous inhomogeneous cochains of a discrete
+continuous representation is naturally isomorphic to its module of invariants, and the
+invariants functor is left exact.
+
+## Main results
+
+- `Rep.continuousCochains_invariants_zero`: the natural identification of degree-zero
+  continuous cochain homology with the left exact invariants functor.
+
+## Implementation details
+
+A continuous map from the singleton `Fin 0 → G` is a constant, and the degree-zero
+differential is `m ↦ (g ↦ ρ(g) m - m)`, whose kernel is `⨅ g, ker (ρ(g) - id)`. As there are
+no incoming boundaries in degree zero, this gives the identification with the invariants.
+The invariants functor preserves finite limits because the forgetful functor detects module
+kernels and finite products, and taking invariants commutes with both.
+
+## References
+
+- Stacks Project, Tag 0DVG.
 -/
 
 @[expose] public section
@@ -185,24 +203,7 @@ lemma iCycles_cyclesMap_apply {A : Type v} [Ring A] {ι : Type*} {c : ComplexSha
   rfl
 
 set_option linter.unusedVariables false in
-/-- Degree-zero continuous cochain homology is the left exact invariant functor.
-
-Proof: A continuous map from the singleton `Fin 0 → G` is a constant coefficient.
-The degree-zero differential is the function `g ↦ ρ(g)m - m`, so its kernel is exactly
-`⨅ g, ker (ρ(g) - id)`. There are no incoming boundaries in degree zero; the homology
-kernel description therefore gives a linear equivalence to this invariant submodule.
-Postcomposition commutes with evaluation and with the kernel inclusion, making the
-identifications natural. Define the invariant functor on maps by restriction of the
-underlying equivariant linear map. Restriction preserves identities, compositions and
-addition. This construction is data, independent of any existence choice. Finally the
-forgetful functor detects module kernels and finite products by
-`lem-exc-discrete-modules-abelian`; taking invariant elements commutes with both kernels
-and finite products. Thus the constructed invariant functor preserves finite limits.
-The degree-zero equivalences assemble into the asserted natural isomorphism.
-
-Source: Stacks Project, Etale Cohomology, Tag 0DVG,
-label section-continuous-group-cohomology, degree-zero differential and invariants.
-(blueprint: lem-exc-continuous-cochains-invariants-zero). -/
+/-- Degree-zero continuous cochain homology is the left exact invariant functor. -/
 theorem continuousCochains_invariants_zero
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

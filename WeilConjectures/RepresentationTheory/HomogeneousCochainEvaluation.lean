@@ -13,9 +13,14 @@ public import Mathlib.Algebra.BigOperators.Fin
 /-!
 # Evaluation of homogeneous cochains at cumulative products
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed differential;
-homogeneous change of variables in the parent comparison proof.
-(blueprint: def-sc-homogeneous-cochain-evaluation).
+For a compact Hausdorff group `G` and a topological representation `N` with discrete topology,
+we define the additive map `Rep.homogeneousCochainEvaluation` sending a homogeneous continuous
+`n`-cochain to the locally constant function `(g₀, …, gₙ₋₁) ↦ x(1, g₀, g₀g₁, …, g₀⋯gₙ₋₁)`: the
+change of variables from homogeneous to inhomogeneous cochains.
+
+## References
+
+* [Stacks Project, Tag 0DVG](https://stacks.math.columbia.edu/tag/0DVG)
 -/
 
 @[expose] public section
@@ -71,12 +76,7 @@ theorem continuous_finPartialProd (n : ℕ) :
     exact Fin.partialProd_succ g i
 
 /-- The concrete additive coordinate map: uncurry and evaluate at
-`(1,g₀,g₀*g₁,...,g₀*...*gₙ₋₁)`. Continuity of joint evaluation and finite products,
-followed by discreteness of the coefficient topology, proves local constancy.
-
-Source: Stacks Project, Etale Cohomology, Tag 0DVG; the homogeneous coordinate
-conversion in the parent proof, steps 1 and 2.
-(blueprint: def-sc-homogeneous-cochain-evaluation). -/
+`(1, g₀, g₀ * g₁, …, g₀ * ⋯ * gₙ₋₁)`, giving a locally constant function on `Gⁿ`. -/
 def homogeneousCochainEvaluation [CompactSpace G] [T2Space G]
     (N : TopRep.{max u s} ℤ G) [DiscreteTopology N.V] (n : ℕ) :
     (TopRep.homogeneousCochains N).X n →+ LocallyConstant (Fin n → G) N.V where

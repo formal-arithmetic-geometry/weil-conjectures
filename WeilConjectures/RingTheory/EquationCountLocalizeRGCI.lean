@@ -17,7 +17,9 @@ import Mathlib.RingTheory.Extension.Presentation.Basic
 /-!
 # Choosing a localization with the expected fibre dimensions
 
-Source: Stacks Project, Algebra, Lemma 00ST (3), using 00QH and 0B7I.
+## References
+
+* Stacks Project, Algebra, Lemma 00ST (3), using Lemmas 00QH and 0B7I
 -/
 
 @[expose] public section
@@ -57,25 +59,11 @@ private noncomputable def polynomialQuotient_baseChange
   exact (Ideal.quotientEquivAlgOfEq R' P.span_range_relation_eq_ker).trans
     (P.quotientEquiv.restrictScalars R')
 
-/-- There is a polynomial avoiding q whose enlarged quotient has the expected fibre dimensions.
-Source: Stacks Project, Algebra, Lemma 00ST (3), proof via 00QH, and dimension formula 0B7I.
-(blueprint: new-equation-count-localize-rgci).
-
-Proof: the finite polynomial quotient S is finite type over R. Apply 00QH at q to find
-an open neighbourhood V where each point has local fibre dimension at most n-c. Since basic
-opens form a basis, choose g avoiding q with D(g) contained in V, and lift g to a polynomial h
-using quotient surjectivity. Over a residue field, the fibre of S is a polynomial quotient
-by c equations in n variables. The polynomial quotient dimension formula and Krull's height
-bound imply local dimension at least n-c at each point. The fibre of S_g is the principal
-open defined by g in the corresponding fibre of S, and dimension at a point is unchanged
-on an open subspace. Thus all points of each fibre of S_g have local dimension exactly n-c.
-The inverse-variable presentation identifies T with S_g, and base change transports this
-identification to every fibre. For a nonzero fibre the spectrum is nonempty; its dimension
-is the supremum of its local dimensions (0B7I), hence n-c. The count for the displayed
-presentation is (n+1)-(c+1)=n-c, and c+1 ≤ n+1 follows from c ≤ n. Reindex the Option variables
-and equations by Fin (n+1) and Fin (c+1), using their standard equivalences. The quotient
-isomorphism under this reindexing and the fibre dimensions provide the existential finite
-presentation in the definition of IsRelativeGlobalCompleteIntersection. -/
+/-- There is a polynomial avoiding q whose enlarged quotient has the expected fibre dimensions:
+if the fibre of `S = R[x_1, …, x_n] ⧸ (f_1, …, f_c)` has local dimension `n - c` at `q`, there is
+a polynomial `h` with image `g ∉ q` such that the quotient `T` of `R[x, z]` by the `f_i` and
+`h z - 1` is a relative global complete intersection and every nonempty fibre of `T` has
+dimension `(n + 1) - (c + 1)`. -/
 theorem localized_presentation_is_relativeGlobalCompleteIntersection
     (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R)
     (q : PrimeSpectrum (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)))

@@ -93,7 +93,23 @@ import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Monoidal
 
 /-! # Normalization of Hom reduction on fixed chain representatives
 
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2.
+We show that, on fixed chain representatives, the reduction of the derived internal Hom
+comparison is identified with the localization of a signed Hom-tensor chain map.
+
+## Implementation details
+
+The augmented two-term coefficient resolution `Q` identifies with the finite coefficient unit
+after restriction of scalars. Its terms are free of rank one, so `Q` is K-flat and `I ⊗ Q` is
+K-injective whenever `I` is; hence `Hom(P, I)` and `Hom(P, I ⊗ Q)` compute the derived internal
+Homs. The square is checked after transposing through the target tensor-Hom adjunction. The
+Koszul sign from moving the coefficient factor across `P` cancels the evaluation ordering sign.
+No invertibility of the signed map is used.
+
+## References
+
+* [Stacks: Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks: Tag 08J7](https://stacks.math.columbia.edu/tag/08J7)
+* [Stacks: Tag 08J9](https://stacks.math.columbia.edu/tag/08J9)
 -/
 
 @[expose] public section
@@ -364,30 +380,8 @@ private theorem scalarHomIso_comparison
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The localized signed map is the normalized reduction comparison, for fixed
-resolutions and a fixed augmented two-term coefficient resolution.
-
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2;
-Stacks Tags 07A6, 08J7 and 08J9
-(blueprint: lem-sf-integral-hom-representative-square).
-
-Proof: the augmentation identifies Q with the finite coefficient unit after
-restriction of scalars. Its two free terms make Q K-flat, and make I tensor Q
-K-injective: it is the cone, with the appropriate shift, of the multiplication
-map on I. Thus Hom(P,I) and Hom(P,I tensor Q) compute the two needed derived
-internal Homs. Resolve Hom(P,I) by a K-flat complex when applying the tensor
-presentation. The augmentation and the canonical derived scalar counit give
-the source comparison s. For t, first apply the scalar internal-Hom adjunction
-on every slice, then the same augmentation and the Hom localization comparison.
-Transport these comparisons along eP and eI. They are isomorphisms because the
-augmentations are quasi-isomorphisms, Q is K-flat, and the Hom targets are
-K-injective. To check the square, transpose through the target tensor-Hom
-adjunction and test using K-flat representatives. The evaluation condition in
-a and the scalar-unit normalization in m identify both composites with the
-reduction of evaluation. The signed formula for f gives the Koszul sign from
-moving the coefficient factor across P; it cancels precisely the evaluation
-ordering sign. The augmentation is used on both sides, so its chosen quotient
-identification cancels too. Injectivity of the adjunction Hom equivalence gives
-the equality. No invertibility of f is asserted or used. -/
+resolutions and a fixed augmented two-term coefficient resolution: there are isomorphisms `s`
+and `t` with `U(comparison) ≫ t = s ≫ Q(f)`. -/
 theorem comparison_representative_square
     (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))
     (n : ℕ) (m : ReductionPresentation l E Y D hl a n)

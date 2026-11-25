@@ -21,14 +21,27 @@ import WeilConjectures.RingTheory.FiniteModuleComplete
 /-!
 # Adic systems of finite modules over p-adic coefficient rings
 
-Source: Stacks Project, Tags 09B8, 031D, 031B and 00MA;
-blueprint `proposition-lattices-representations-normal-scheme`, steps 6, 7, 9 and 10
-(blueprint: lem-pod-adic-limit-finite-modules).
+Let `R` be the valuation ring of a finite extension of `ℚ_[l]` with uniformizer ideal `I`. An
+inverse system of finite `R ⧸ Iⁿ⁺¹`-modules with the expected quotient transitions has a finite
+limit, and finite `R`-modules are `I`-adically complete, with linear maps determined by
+compatible families of reductions.
+
+## Main statements
+
+- `Padic.adicLimit_finite_modules`: reconstruction of an adic system of finite modules.
+- `Padic.finite_module_adic_complete_and_hom`: completeness, quotient towers and Hom comparison
+  for finite modules.
+
+## Implementation details
 
 Indices `n : ℕ` denote the positive exponent `n + 1`. A module over the coefficient
 quotient is represented by its underlying module over the valuation ring, annihilated
 by the corresponding ideal. Surjectivity and the specified kernel say that the
 transition induces the required quotient isomorphism.
+
+## References
+
+- Stacks Project, Tags 09B8, 031D, 031B and 00MA
 -/
 
 @[expose] public section
@@ -159,17 +172,11 @@ private theorem compatible_sections {R : Type u} [CommRing R]
   rw [he]
   exact hall _ _ _
 
-/-- Reconstruction of an adic system of finite coefficient modules.
-
-Source: Stacks Tags 09B8 and 031D (blueprint: lem-pod-adic-limit-finite-modules), part 1.
-Proof: apply lem-pod-adic-tower-reconstruction to the principal uniformizer ideal.
-The sections submodule is the inverse limit. Its projections are surjective with
-kernel the indicated ideal power, and identify its product-subspace topology with
-its maximal-ideal-adic topology. By lem-weil-l-adic-extension-complete the coefficient
-field is complete; its closed unit ball is complete too. The limit is separated and
-its first reduction is finite, so lem-weil-pbc-finite-over-complete-ring (031D) makes
-it finitely generated. Surjectivity and the kernel equality give the canonical
-quotient isomorphisms by the first isomorphism theorem. -/
+/-- **Reconstruction of an adic system of finite coefficient modules.** Let `R` be the valuation
+ring and `I` its uniformizer ideal. Let `F` be an inverse system of finite `R`-modules `Fₙ`
+killed by `Iⁿ⁺¹`, with surjective transitions `Fₙ₊₁ → Fₙ` of kernel `Iⁿ⁺¹ Fₙ₊₁`. Then the
+limit `S` is a finite `R`-module, each projection `S → Fₙ` is surjective with kernel `Iⁿ⁺¹ S`,
+and the limit topology on `S` is its adic topology. -/
 theorem adicLimit_finite_modules (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     let R := coefficientExtensionIntegers l E
@@ -243,20 +250,13 @@ theorem adicLimit_finite_modules (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     intro j
     exact iInf_le_of_le j.unop le_rfl
 
-/-- Completeness, quotient towers, and Hom comparison for finite integral modules.
-
-Source: Stacks Tags 031B, 09B8 and 00MA
-(blueprint: lem-pod-adic-limit-finite-modules), part 2.
-Proof: the valuation ring is Noetherian since it is a DVR and complete by
-lem-weil-l-adic-extension-complete and the closed-unit-ball argument above.
-Apply lem-weil-pbc-finite-module-complete-over-complete-noetherian to any finite
-module. The canonical quotient transitions are surjective, with the stated kernels,
-and the quotients are finite coefficient modules. A linear map preserves every ideal
-power times the module and hence is continuous. Its reductions are compatible.
-For a compatible family of reductions, send an element to the family of its images
-in the target quotients, then use completeness of the target to reconstruct the
-unique linear map. Separatedness gives uniqueness. The final unique-existence
-clause is precisely bijectivity of the reduction map to the inverse limit of Hom. -/
+/-- **Completeness, quotient towers and Hom comparison for finite integral modules.** Every
+finite module `M` over the valuation ring `R` is adically complete, the map to its `I`-adic
+completion is bijective, and the quotients `M ⧸ Iⁿ⁺¹ M` are finite `R ⧸ Iⁿ⁺¹`-modules with
+surjective transitions of kernel `Iⁿ⁺¹ (M ⧸ Iⁿ⁺² M)`. Every linear map between finite modules is
+continuous for the adic topologies, and every compatible family of linear maps between the
+reductions `M ⧸ Iⁿ⁺¹ M → N ⧸ Iⁿ⁺¹ N` is the family of reductions of a unique linear map
+`M → N`. -/
 theorem finite_module_adic_complete_and_hom (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     let R := coefficientExtensionIntegers l E

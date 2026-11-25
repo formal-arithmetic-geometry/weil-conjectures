@@ -38,30 +38,31 @@ coefficients `Λ` is a morphism `Λ_X ⟶ Λ_X[n]` in `D(X_ét, Λ)`, so that
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.cupProduct` (`corollary-cup-product-pairing--1`): the cup product.
-- `AlgebraicGeometry.Etale.cohomologyAddEquivCompactSupport`
-(`theorem-trace-isomorphism-top-degree`):
+- `AlgebraicGeometry.Etale.cupProduct`: the cup product.
+- `AlgebraicGeometry.Etale.cohomologyAddEquivCompactSupport`:
   `H^n(X, Λ) ≃ H^n_c(X, Λ)` for a proper morphism.
-- `AlgebraicGeometry.Etale.TateOrientation.traceMap` (`corollary-cup-product-pairing--1`,
-  `theorem-trace-isomorphism-top-degree`): `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ`.
+- `AlgebraicGeometry.Etale.TateOrientation.traceMap`: `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ`.
 - `AlgebraicGeometry.Etale.TateOrientation.untwistedSmoothTrace`,
-  `AlgebraicGeometry.Etale.TateOrientation.untwistedTraceMap` (`corollary-cup-product-pairing--1`,
-  `theorem-trace-isomorphism-top-degree`): `tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)`.
-- `AlgebraicGeometry.Etale.TateOrientation.traceCupPairing` (`corollary-cup-product-pairing--1`,
-  `corollary-cup-product-pairing--1`): `⟨x, y⟩ = tr^{(-d)}_X(x ⌣ y)`.
+  `AlgebraicGeometry.Etale.TateOrientation.untwistedTraceMap`:
+  `tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)`.
+- `AlgebraicGeometry.Etale.TateOrientation.traceCupPairing`: `⟨x, y⟩ = tr^{(-d)}_X(x ⌣ y)`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.cupProduct_comm` (`corollary-cup-product-pairing--1`): the cup product is
-  graded commutative, `y ⌣ x = (-1)^{ij} x ⌣ y`.
+- `AlgebraicGeometry.Etale.cupProduct_comm`: the cup product is graded commutative,
+  `y ⌣ x = (-1)^{ij} x ⌣ y`.
 
-## Implementation notes
+## Implementation details
 
 The Hom groups of `D(Y_ét, Λ)` are not given a `Λ`-module structure in the repository, so the
 trace maps, the cup product and the pairing are additive (biadditive), not `Λ`-(bi)linear.
 
 The complementary degrees of the pairing are two indices `i j : ℤ` with `i + j = 2 * d`, since
 `2 * d - (2 * d - i)` is not definitionally `i`.
+
+The graded commutativity of the cup product is the Eckmann–Hilton argument:
+`x ⊗ y = (x ⊗ 1) ≫ (1 ⊗ y) = (1 ⊗ y) ≫ (x ⊗ 1)`, and the two ways of moving the shifts out of
+`Λ_X[i] ⊗ᴸ Λ_X[j]` differ by `(-1)^{ij}` (`CategoryTheory.MonoidalCategory.shiftProduct_comm`).
 -/
 
 @[expose] public section
@@ -114,9 +115,7 @@ lemma cupProductAux_add_right {i j : ℤ} (x : (𝟙_ 𝐃(X, A)) ⟶ (𝟙_ �
     cupProductAux A x (y + y') = cupProductAux A x y + cupProductAux A x y' := by
   simp [cupProductAux, derivedTensor, MonoidalPreadditive.whiskerLeft_add]
 
-/-- Blueprint `corollary-cup-product-pairing--1`: Poincare trace and cup-product pairing.
-
-The *cup product* `⌣ : H^i(X, Λ) × H^j(X, Λ) ⟶ H^{i+j}(X, Λ)` on the cohomology classes
+/-- The *cup product*`⌣ : H^i(X, Λ) × H^j(X, Λ) ⟶ H^{i+j}(X, Λ)` on the cohomology classes
 `Λ_X ⟶ Λ_X[n]` of `D(X_ét)`, induced by the multiplication `Λ_X ⊗ᴸ Λ_X ≅ Λ_X`
 (`AlgebraicGeometry.Etale.cupProductAux`), as a biadditive map. -/
 noncomputable def cupProduct (i j : ℤ) :
@@ -141,14 +140,8 @@ lemma cupProduct_eq_shiftProduct {i j : ℤ} (x : (𝟙_ 𝐃(X, A)) ⟶ (𝟙_ 
   simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Iso.symm_hom, Category.assoc]
   rfl
 
-/-- Blueprint `corollary-cup-product-pairing--1`: Poincare trace and cup-product pairing.
-
-**The cup product is graded commutative**: for `x ∈ H^i(X, Λ)` and `y ∈ H^j(X, Λ)`,
-`y ⌣ x = (-1)^{ij} x ⌣ y`, the two sides being compared along `Λ_X[j + i] = Λ_X[i + j]`.
-
-This is the Eckmann–Hilton argument: `x ⊗ y = (x ⊗ 1) ≫ (1 ⊗ y) = (1 ⊗ y) ≫ (x ⊗ 1)`, and
-the two ways of moving the shifts out of `Λ_X[i] ⊗ᴸ Λ_X[j]` differ by `(-1)^{ij}`
-(`CategoryTheory.MonoidalCategory.shiftProduct_comm`). -/
+/-- The cup product is graded commutative: for `x ∈ H^i(X, Λ)` and `y ∈ H^j(X, Λ)`,
+`y ⌣ x = (-1)^{ij} x ⌣ y`, the two sides being compared along `Λ_X[j + i] = Λ_X[i + j]`. -/
 theorem cupProduct_comm {i j : ℤ} (x : (𝟙_ 𝐃(X, A)) ⟶ (𝟙_ 𝐃(X, A))⟦i⟧)
     (y : (𝟙_ 𝐃(X, A)) ⟶ (𝟙_ 𝐃(X, A))⟦j⟧) :
     cupProduct A j i y x =
@@ -167,10 +160,7 @@ noncomputable def rightDerivedLowerStarShiftIsoLowerShriek (a : X ⟶ Y) [HasCom
   ((R((a)_*[A])).commShiftIso n).app M ≪≫
     (shiftFunctor _ n).mapIso ((rightDerivedLowerShriekIsoRightDerivedLowerStar A a).app M).symm
 
-/-- Blueprint `theorem-trace-isomorphism-top-degree`: Poincare duality conventions: trace and
-trace-cup pairing.
-
-For a proper morphism `a : X ⟶ Y`, ordinary and compactly supported cohomology agree:
+/-- For a proper morphism `a : X ⟶ Y`, ordinary and compactly supported cohomology agree:
 `H^n(X, Λ) = Hom(Λ_X, Λ_X[n]) ≃ Hom(Λ_Y, (Ra_! Λ_X)[n]) = H^n_c(X, Λ)`. The equivalence is
 the adjunction `La^* ⊣ Ra_*` read through an identification `e : La^* Λ_Y ≅ Λ_X`, followed by
 `Ra_*(Λ_X[n]) ≅ (Ra_! Λ_X)[n]` (`Ra_! ≅ Ra_*` for `a` proper),
@@ -198,15 +188,11 @@ namespace TateOrientation
 variable {a : X ⟶ Y} [HasCompactification a] {d : ℕ}
   [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
-/-- Blueprint `corollary-cup-product-pairing--1`: Poincare trace and cup-product pairing.
-
-The *trace map* `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` of a Tate orientation `γ`: a compactly
+/-- The *trace map* `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` of a Tate orientation `γ`: a compactly
 supported class `Λ_Y ⟶ (Ra_! Λ_X(d))[2d]` is composed with the shift compatibility of `Ra_!`
 and the smooth trace `Ra_!(Λ_X(d)[2d]) ⟶ Λ_Y`
 (`AlgebraicGeometry.Etale.TateOrientation.smoothTrace`), the counit of `Ra_! ⊣ Ra^!` read
-through `γ`. The target `Hom(Λ_Y, Λ_Y)` is `Λ` for `Y = Spec k`.
-
-This is also the trace map of `theorem-trace-isomorphism-top-degree`: it does not use properness. -/
+through `γ`. The target `Hom(Λ_Y, Λ_Y)` is `Λ` for `Y = Spec k`. -/
 noncomputable def traceMap (γ : TateOrientation Λ a d) :
     ((𝟙_ (DerivedCategoryModule Λ Y)) ⟶
         ((R(a)_![ModuleCat.{u + 1} Λ]).obj (tateObject Λ X d))⟦(2 * d : ℤ)⟧) →+
@@ -242,10 +228,7 @@ noncomputable def constantComplexIsoTateObjectTensor (Y : Scheme.{u}) [HasInvert
   (HasTateTwist.twistObjectZeroIso Y).symm ≪≫ eqToIso (by rw [add_neg_cancel]) ≪≫
     (HasTateTwist.twistObjectAddIso Y d (-d)).symm
 
-/-- Blueprint `theorem-trace-isomorphism-top-degree`: Poincare duality conventions: trace and
-trace-cup pairing.
-
-The *untwisted smooth trace* `(Ra_! Λ_X)[2d] ⟶ Λ_Y(-d)` of a Tate orientation `γ`: the
+/-- The *untwisted smooth trace* `(Ra_! Λ_X)[2d] ⟶ Λ_Y(-d)` of a Tate orientation `γ`: the
 twisted smooth trace `(Ra_! Λ_X)[2d] ⊗ᴸ Λ_Y(d) ⟶ Λ_Y`
 (`AlgebraicGeometry.Etale.TateOrientation.twistedSmoothTrace`) tensored with `Λ_Y(-d)`, read
 through `Λ_Y(d) ⊗ᴸ Λ_Y(-d) ≅ Λ_Y`,
@@ -265,24 +248,17 @@ noncomputable def untwistedSmoothTrace (γ : TateOrientation Λ a d) :
         ((derivedTensor _ Y).map γ.twistedSmoothTrace).app _ ≫
           (derivedTensorLeftUnitor _ Y _).hom
 
-/-- Blueprint `theorem-trace-isomorphism-top-degree`: Poincare duality conventions: trace and
-trace-cup pairing.
-
-The *untwisted trace map* `tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` of a Tate orientation `γ`:
+/-- The *untwisted trace map* `tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` of a Tate orientation `γ`:
 a compactly supported class `Λ_Y ⟶ (Ra_! Λ_X)[2d]` is composed with the untwisted smooth trace
 (`AlgebraicGeometry.Etale.TateOrientation.untwistedSmoothTrace`). The target
-`Hom(Λ_Y, Λ_Y(-d))` is `Λ(-d)` for `Y = Spec k`. It does not use properness; for `a` proper it
-is the map `H^{2d}(X, Λ) ⟶ Λ(-d)` of `corollary-cup-product-pairing--1`, through
-`AlgebraicGeometry.Etale.cohomologyAddEquivCompactSupport`. -/
+`Hom(Λ_Y, Λ_Y(-d))` is `Λ(-d)` for `Y = Spec k`. -/
 noncomputable def untwistedTraceMap (γ : TateOrientation Λ a d) :
     ((𝟙_ (DerivedCategoryModule Λ Y)) ⟶
         ((R(a)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ X))⟦(2 * d : ℤ)⟧) →+
       ((𝟙_ (DerivedCategoryModule Λ Y)) ⟶ tateObject Λ Y (-d)) :=
   Preadditive.rightComp _ γ.untwistedSmoothTrace
 
-/-- Blueprint `corollary-cup-product-pairing--1`: Trace and trace–cup pairing.
-
-The *trace–cup pairing* of a Tate orientation `γ` of a proper morphism `a : X ⟶ Y`, for
+/-- The *trace–cup pairing* of a Tate orientation `γ` of a proper morphism `a : X ⟶ Y`, for
 complementary degrees `i + j = 2d`,
 
 `⟨x, y⟩ = tr^{(-d)}_X(x ⌣ y) : H^i(X, Λ) × H^j(X, Λ) ⟶ Λ(-d)`,

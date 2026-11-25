@@ -14,8 +14,20 @@ import all WeilConjectures.ProperBaseChange.IntegralCoefficientPresentation.Inte
 
 /-! # Natural computation of the actual pulled reduction tower
 
-Source: Stacks 03D3, 06YY and 099N(5).
-(blueprint: lem-weil-pbc-integral-actual-tower-computation).
+For an edge `h : U ⟶ T` and integral `l`-adic coefficients, scalar transport is an
+equivalence, and the counit computing the actual pulled-back reduction tower is natural and
+invertible on good complexes (`pbc_integral_actual_tower_computation`).
+
+## Implementation details
+
+The normalized coefficient comparison lifts to a ring-sheaf isomorphism, so restriction of
+scalars along it is an equivalence and preserves K-flatness. The natural transformation is
+the composite of the reduction-tower counit, the derived counit of the exact ordinary tower
+pullback and the exact scalar transport factor.
+
+## References
+
+- Stacks Project, Tags 03D3, 06YY and 099N(5)
 -/
 
 @[expose] public noncomputable section
@@ -72,20 +84,7 @@ private def actualTowerCounitNat
       (completedReductionPullbackComplexNat h (pbcIntegralDatum l E))
 
 /-- Scalar transport is an equivalence, and the actual tower computation is natural
-and invertible on good complexes.
-
-Source: Stacks 03D3, 06YY and 099N(5).
-(blueprint: lem-weil-pbc-integral-actual-tower-computation).
-
-Proof: lift the normalized coefficient comparison to a ring-sheaf isomorphism.
-Restriction along an isomorphism has an inverse scalar restriction, so it is an
-equivalence. It preserves K-flatness; apply the existing reduction-tower counit
-computation to the transported good complex. The coefficient inverse-image map
-is invertible, hence ordinary tower pullback is exact and its derived counit is
-invertible on every complex. Compose these two counits and the exact scalar
-transport factor. Their existing naturality squares compose to a natural
-transformation. Its component is the literal actual-tower counit, so the preceding
-invertibility computation applies on good complexes. -/
+and invertible on good complexes. -/
 theorem pbc_integral_actual_tower_computation
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T) :

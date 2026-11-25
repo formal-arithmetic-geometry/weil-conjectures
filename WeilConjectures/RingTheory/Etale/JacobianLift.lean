@@ -28,6 +28,10 @@ to an étale `A`-algebra, with no nilpotence assumption on `I` [Stacks 04D1].
 - `Algebra.SquareJacobianPresentation.etale_lift_and_ker_reduction_and_surjective`: `Bˡⁱᶠᵗ` is
   étale over `A` and `Bˡⁱᶠᵗ ⧸ I Bˡⁱᶠᵗ ≅ B̄` (`Algebra.SquareJacobianPresentation.reductionEquiv`).
 - `Algebra.Etale.exists_etale_quotientEquiv`: every étale `A ⧸ I`-algebra lifts.
+
+## References
+
+* [Stacks: Tag 04D1](https://stacks.math.columbia.edu/tag/04D1)
 -/
 
 @[expose] public section
@@ -61,8 +65,7 @@ noncomputable def liftRelations : Option ι → MvPolynomial (Option ι) A
 /-- **The lift of a square Jacobian presentation.** For a square Jacobian presentation
 `B̄ = (A ⧸ I)[x₁, …, xₘ] ⧸ (f̄₁, …, f̄ₘ)`, with coefficientwise lifts `fᵢ ∈ A[x₁, …, xₘ]` and
 `Δ = det (∂fᵢ / ∂xⱼ)`, this is `A[x₁, …, xₘ, t] ⧸ (f₁, …, fₘ, tΔ - 1)`. Its map to `B̄` is
-`Algebra.SquareJacobianPresentation.reduction`, sending `t` to `Δ̄⁻¹`.
-(blueprint: `proposition-extension-zero-restriction-closed-subscheme`) -/
+`Algebra.SquareJacobianPresentation.reduction`, sending `t` to `Δ̄⁻¹`. -/
 abbrev Lift : Type (max t u) :=
   MvPolynomial (Option ι) A ⧸ Ideal.span (Set.range (P.liftRelations I))
 
@@ -284,10 +287,7 @@ lemma reductionEquiv_mk (x : P.Lift I) :
 /-- **Étale algebras lift across a quotient.** The lift `Bˡⁱᶠᵗ = A[xᵢ, t] ⧸ (fᵢ, tΔ - 1)` of a
 square Jacobian presentation of `B̄` over `A ⧸ I` is étale over `A`, and its reduction
 `Bˡⁱᶠᵗ → B̄` is surjective with kernel `I Bˡⁱᶠᵗ`, i.e. induces `Bˡⁱᶠᵗ ⧸ I Bˡⁱᶠᵗ ≃ B̄`
-(`Algebra.SquareJacobianPresentation.reductionEquiv`). No nilpotence assumption on `I` is
-needed. Every étale `A ⧸ I`-algebra has a square Jacobian presentation, hence such a lift
-(`Algebra.Etale.exists_etale_quotientEquiv`).
-(blueprint: `proposition-extension-zero-restriction-closed-subscheme`) -/
+(`Algebra.SquareJacobianPresentation.reductionEquiv`). -/
 @[stacks 04D1]
 theorem etale_lift_and_ker_reduction_and_surjective :
     Etale A (P.Lift I) ∧ RingHom.ker (P.reduction I) = I.map (algebraMap A (P.Lift I)) ∧

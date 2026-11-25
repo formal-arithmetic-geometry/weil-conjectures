@@ -23,15 +23,54 @@ import Mathlib.CategoryTheory.Shift.Localization
 
 /-! # The integral identity and its raw rationalization
 
-Source: blueprint main-20261015, sec-fourier-transform/sk-def-trace,
-`def-fd-trace-function.md`, final sentence; Bhatt--Scholze, Section 6.5,
-Definition 6.5.1 and Proposition 6.8.11(3); Stacks Tag 05R6
-(blueprint: lem-fd-integral-identity-rational-equivalence).
+The common integral identity induces inverse exact linear equivalences on the integral
+categories and on their raw rationalizations, as used in the definition of the trace function.
 
 The comparison uses the existing finite-stage datum, strengthened explicitly by
 integral linearity, exactness, inverse formulas and normalized finite reductions.
 The fields of `FdRationalStageComparison` retain its forward object, tensor and shift pins.
 The coefficient field's canonical small model permits an algebraic closure in any universe.
+
+## Main results
+
+* `fdIntegralIdentityRationalEquivalence`
+
+## Implementation details
+
+The proof of `fdIntegralIdentityRationalEquivalence` has four steps.
+1. Apply the comparison of integral coefficient presentations. Its unique quotient
+isomorphisms send [x] to [x.down].up. Their inverse-limit isomorphism is fixed by every
+finite projection. Scalar restriction along it and its inverse are exact inverse functors,
+with their normalized finite reductions and transitions. By the stratified-perfect
+characterization of integral objects, these restrictions preserve and reflect precisely the
+two integral predicates, including compatible etale-origin witnesses. Restrict the ambient
+functors to the full subcategories. In their common realization both are identity on objects
+and arrows.
+2. Both integral categories are triangulated, so shifts and triangles are inherited. The
+shift comparisons are induced by the degreewise identity: coefficient restriction does not
+change differentials, shift signs or the cone matrix. Consequently the two restrictions
+preserve triangles. Integral linearity identifies the Hom action with constant sections;
+the coefficient projection equations fix every constant scalar, proving linearity in
+both directions.
+3. Using the rationalization (Karoubi) construction, the PBC rational category and linear
+scalar localization, send K to I(K) and f tensor a to I(f) tensor a.
+Integral linearity gives balancedness; additivity extends the map from pure tensors.
+On pure tensors the identity and composition equations are the integral functor equations
+and multiplication of scalars. The inverse restriction gives the same construction in
+reverse. Both composites fix integral objects and pure tensors, hence all morphisms.
+Thus these are equivalences with the displayed inverse formulas and field linearity.
+The raw categories have exactly the original integral objects: no retract is adjoined.
+4. Since linear scalar localization is triangulated, a distinguished rational triangle
+is isomorphic to the localization of an integral distinguished triangle. The localized
+identity-induced shift comparison intertwines the two localization functors. Step 2
+therefore makes its image distinguished; use the same argument for the inverse.
+This proves rational exactness with precisely the shift pins in the comparison datum.
+
+## References
+
+* [B. Bhatt, P. Scholze, *The pro-étale topology for schemes*], Section 6.5,
+  Definition 6.5.1 and Proposition 6.8.11(3)
+* [Stacks, Tag 05R6]
 -/
 
 @[expose] public noncomputable section
@@ -647,40 +686,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 /-- The common integral identity induces inverse exact linear equivalences on the
 integral categories and their raw rationalizations, with the prescribed finite reductions.
-Source: trace-definition final sentence, auxiliary subclaim from comparison proof steps 1--2;
-Bhatt--Scholze, Section 6.5, Definition 6.5.1 and Proposition 6.8.11(3); Stacks Tag 05R6
-(blueprint: lem-fd-integral-identity-rational-equivalence).
-
-Proof (the four steps of the DAG node):
-1. Apply lem-weil-pbc-integral-coefficient-presentation-comparison. Its unique quotient
-isomorphisms send [x] to [x.down].up. Their inverse-limit isomorphism is fixed by every
-finite projection. Scalar restriction along it and its inverse are exact inverse functors,
-with their normalized finite reductions and transitions. By
-lem-weil-pbc-integral-stratified-perfect-characterization, these restrictions preserve and
-reflect precisely the two integral predicates, including compatible etale-origin witnesses.
-Restrict the ambient functors to the full subcategories. In their common realization both
-are identity on objects and arrows.
-2. By lem-weil-integral-constructible-triangulated and
-lem-weil-pbc-uniform-complete-triangulated, shifts and triangles are inherited.
-situation-conventions supplies the shift comparisons induced
-by the degreewise identity: coefficient restriction does not change differentials,
-shift signs or the cone matrix. Consequently the two restrictions preserve triangles.
-lem-weil-integral-constructible-linear identifies the Hom action with constant sections;
-the coefficient projection equations fix every constant scalar, proving linearity in
-both directions.
-3. Use def-weil-rationalization-karoubi, def-weil-pbc-rational-category and
-def-weil-linear-scalar-localization. Send K to I(K) and f tensor a to I(f) tensor a.
-Integral linearity gives balancedness; additivity extends the map from pure tensors.
-On pure tensors the identity and composition equations are the integral functor equations
-and multiplication of scalars. The inverse restriction gives the same construction in
-reverse. Both composites fix integral objects and pure tensors, hence all morphisms.
-Thus these are equivalences with the displayed inverse formulas and field linearity.
-The raw categories have exactly the original integral objects: no retract is adjoined.
-4. By lem-weil-linear-scalar-localization-triangulated, a distinguished rational triangle
-is isomorphic to the localization of an integral distinguished triangle. The localized
-identity-induced shift comparison intertwines the two localization functors. Step 2
-therefore makes its image distinguished; use the same argument for the inverse.
-This proves rational exactness with precisely the shift pins in the comparison datum. -/
+-/
 theorem fdIntegralIdentityRationalEquivalence
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

@@ -18,9 +18,20 @@ import Mathlib.Algebra.Field.ULift
 /-!
 # Geometrically reduced field extensions are separable in positive characteristic
 
-Source: Stacks Project, Algebra, Lemma Tag 030W, implication (4) => (1),
-with Definition Tag 030S
-(blueprint: lem-weil-pbc-geometrically-reduced-extension-separable).
+We show that a geometrically reduced field extension in characteristic `p` is separable
+(`Algebra.isSeparableExtension_of_forall_isReduced_tensorProduct`).
+
+## Implementation details
+
+Applying the hypothesis to `L = k^{1/p}` inside an algebraic closure, for `bᵢ ∈ K` and `cᵢ ∈ k` the
+element `x = ∑ bᵢ ⊗ cᵢ^{1/p}` satisfies `x ^ p = (∑ cᵢ bᵢ ^ p) ⊗ 1`. Reducedness shows that
+`k`-linearly independent elements have `k`-linearly independent `p`-th powers. This passes to
+finitely generated intermediate fields, which are then separably generated.
+
+## References
+
+* [Stacks Project, Tag 030W](https://stacks.math.columbia.edu/tag/030W), (4) ⇒ (1)
+* [Stacks Project, Tag 030S](https://stacks.math.columbia.edu/tag/030S)
 -/
 
 @[expose] public section
@@ -31,31 +42,8 @@ open scoped TensorProduct
 
 namespace Algebra
 
-/-- In prime characteristic, reducedness of the tensor product with every field extension
-implies separability in the sense that every finitely generated intermediate field is
-separably generated. Source: Stacks Project, Algebra, Lemma Tag 030W, (4) => (1),
-with Definition Tag 030S
-(blueprint: lem-weil-pbc-geometrically-reduced-extension-separable).
-
-Proof:
-1. In an algebraic closure of `k`, form the subfield of elements whose `p`-th powers lie
-   in `k`. Frobenius is injective and a ring homomorphism, so this subfield contains `k`
-   and has a unique `p`-th root of every element of `k`
-   (`def-weil-algebraic-closure`, `def-weil-ring-frobenius`, `def-pc-field-extension`).
-2. Apply the hypothesis to this extension `L = k^{1/p}`. The ring `K ⊗[k] L` is reduced
-   and has characteristic `p` (`def-weil-vector-space-scalar-extension`).
-3. For a finite relation with coefficients `cᵢ` in `k`, put `x = ∑ bᵢ ⊗ cᵢ^{1/p}`.
-   Frobenius and tensor balancing give `x^p = (∑ cᵢ bᵢ^p) ⊗ 1`
-   (`def-weil-ring-frobenius`, `def-weil-vector-space-scalar-extension`).
-4. If the `bᵢ` are linearly independent and the latter sum vanishes, reducedness gives
-   `x = 0`. Extend the `bᵢ` to a basis and extend scalars; their tensors remain independent.
-   Thus every `cᵢ^{1/p}`, and hence every `cᵢ`, is zero
-   (`lem-weil-pbc-vector-space-basis-through-vector`, `def-weil-vector-space-scalar-extension`).
-5. This independence of `p`-th powers passes to every finitely generated intermediate
-   field. Apply `lem-weil-pbc-p-power-independence-separably-generated` to obtain a
-   separating transcendence basis there. This is exactly clause (2) of
-   `def-weil-pbc-separable-field-extension`.
--/
+/-- In prime characteristic `p`, if `K ⊗[k] L` is reduced for every field extension `L/k`, then
+`K/k` is separable: every finitely generated intermediate field is separably generated. -/
 theorem isSeparableExtension_of_forall_isReduced_tensorProduct
     (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]
     (p : ℕ) [Fact p.Prime] [CharP k p]

@@ -19,8 +19,10 @@ import Mathlib.RingTheory.Ideal.GoingUp
 
 /-! # A weakly unramified local unit-root cover of a DVR diagram
 
-Source: Stacks Project, Tag 0BRM, the first claim in its proof.
-(blueprint: lem-sbc-dvr-unit-root-generation) -/
+## References
+
+* Stacks Project, Tag 0BRM (the first claim in its proof)
+-/
 
 @[expose] public section
 
@@ -127,28 +129,12 @@ private theorem root_localization_fraction_adjoin
   rw [htop]
   trivial
 
-/-- Adjoining a root of a unit simultaneously above the two DVRs of a local diagram.
-
-Source: Stacks Project, Tag 0BRM, the paragraph beginning with the claim that the
-unit can be assumed to be an e-th power.
-(blueprint: lem-sbc-dvr-unit-root-generation)
-
-Proof: Form C = A[X]/(X^e-v). Its root is a unit, and e is a unit, so its derivative
-is a unit. Thus C is finite etale over A. Form D = T tensor_A C, which is finite
-etale over T. Choose a maximal ideal of D above the maximal ideal of T and contract
-it to a prime of C. Localize D and C at these primes, obtaining T' and A'. These
-are DVR domains: an etale local extension of a DVR is regular of dimension one.
-Both maps are local and their square commutes. Since A -> A' is essentially
-etale, the extension of its maximal ideal is the maximal ideal of A'. The image r
-of X satisfies r^e = v. Take F' = Frac(T').
-The
-injection T -> T' extends uniquely to a field map iF from F = Frac(T), and the
-localization map A' -> T' -> F' is compatible with A. The field F' is the selected
-field factor of F[X]/(X^e-v). Hence it is generated as an F-algebra by the root:
-the root is algebraic, so this algebra is already a field. Since r belongs to A',
-F' is generated as an A'-algebra by iF(F). This construction does not use any
-ramification or residue-separability assumption on T/A. For e = 1 use A, T and F
-itself, with r = v. -/
+/-- Adjoining a root of a unit simultaneously above the two DVRs of a local diagram. For a DVR
+`A`, a unit `v` of `A`, `e > 0` a unit in `A`, and a DVR `T` local over `A` with fraction field
+`F`, there are DVRs `A'` over `A` (with `m_A A' = m_{A'}`) containing an `e`-th root `r` of `v`, and
+`T'` over `T`, with a commuting square of local maps, together with a field map `F → F'` into the
+fraction field `F'` of `T'`, compatible with `A` and `T`, such that `F'` is generated as an
+`A'`-algebra by the image of `F`. -/
 theorem dvr_unit_root_weakly_unramified_diagram
     (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
     (e : ℕ) (hepos : 0 < e) (he : IsUnit (e : A)) (v : Aˣ)

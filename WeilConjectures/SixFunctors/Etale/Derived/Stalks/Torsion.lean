@@ -18,14 +18,14 @@ asks for `n` to be a unit in `Γ(Spec K, ⊤) ≅ K`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.isTorsionSheafOfInvertibleOrder_spec_iff`
-  (`corollary-open-direct-image-over-field--2`): the characterisation in terms of `K`.
-- `AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero_of_ne_zero`
-  (`corollary-open-direct-image-over-field--2`): sheaves of modules over a ring killed by an integer
-  invertible in `K` have orders invertible in `K`.
-- `AlgebraicGeometry.Scheme.isTorsionSheafOfInvertibleOrder_iff_exists_isColimit`
-  (`corollary-open-direct-image-over-field--2`): a sheaf has orders invertible on `S` if and only if
-  it is a filtered colimit of sheaves killed by integers invertible on `S`.
+- `AlgebraicGeometry.Scheme.isTorsionSheafOfInvertibleOrder_spec_iff`: the characterisation in
+  terms of `K`.
+- `AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero_of_ne_zero`:
+  sheaves of modules over a ring killed by an integer invertible in `K` have orders invertible
+  in `K`.
+- `AlgebraicGeometry.Scheme.isTorsionSheafOfInvertibleOrder_iff_exists_isColimit`: a sheaf has
+  orders invertible on `S` if and only if it is a filtered colimit of sheaves killed by integers
+  invertible on `S`.
 -/
 
 @[expose] public section
@@ -47,12 +47,10 @@ lemma isUnit_natCast_Γ_spec_iff {K : Type u} [Field K] (n : ℕ) :
   rw [← isUnit_iff_ne_zero, ← MulEquiv.isUnit_map e.toMulEquiv]
   simp
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: **orders invertible in a field.** For a
-field `K`, a sheaf `F` of `Λ`-modules on the small étale site of a scheme `T` has orders invertible
-in `K` (`IsTorsionSheafOfInvertibleOrder (Spec K) F`) if and only if every element of every
-geometric stalk of `F` is killed by an integer `n ≥ 1` with `n · 1_K ≠ 0`. A complex has
-torsion cohomology with orders invertible in `K` if all its cohomology sheaves have this
-property. -/
+/-- **Orders invertible in a field.** For a field `K`, a sheaf `F` of `Λ`-modules on the small
+étale site of a scheme `T` has orders invertible in `K`
+(`IsTorsionSheafOfInvertibleOrder (Spec K) F`) if and only if every element of every geometric
+stalk of `F` is killed by an integer `n ≥ 1` with `n · 1_K ≠ 0`. -/
 theorem isTorsionSheafOfInvertibleOrder_spec_iff {K : Type u} [Field K] {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsTorsionSheafOfInvertibleOrder (Spec (.of K)) F ↔
@@ -62,10 +60,9 @@ theorem isTorsionSheafOfInvertibleOrder_spec_iff {K : Type u} [Field K] {T : Sch
   simp_rw [← isUnit_natCast_Γ_spec_iff]
   exact ⟨fun h ↦ h.exists_isUnit_nsmul_eq_zero, fun h ↦ ⟨h⟩⟩
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: **modules over `ℤ/nℤ` have invertible
-orders.** If an integer `n ≥ 1`, nonzero in the field `K`, kills the coefficient ring `Λ` (for
-instance `Λ = ℤ/nℤ`), then every sheaf of `Λ`-modules on the small étale site of a scheme has
-orders invertible in `K`: multiplication by `n` is zero on it. -/
+/-- **Modules over `ℤ/nℤ` have invertible orders.** If an integer `n ≥ 1`, nonzero in the field
+`K`, kills the coefficient ring `Λ` (for instance `Λ = ℤ/nℤ`), then every sheaf of `Λ`-modules on
+the small étale site of a scheme has orders invertible in `K`. -/
 theorem IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero_of_ne_zero {K : Type u} [Field K]
     {T : Scheme.{u}} (n : ℕ) (hn₀ : n ≠ 0) (hn : (n : Λ) = 0) (hnK : (n : K) ≠ 0)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -73,15 +70,10 @@ theorem IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero_of_ne_zero {K : Type 
   IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero Λ n hn₀ hn
     ((isUnit_natCast_Γ_spec_iff n).2 hnK) F
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: **the colimit description of invertible
-orders.** A sheaf `F` of `Λ`-modules on the small étale site of `T` has orders invertible on
-`S` if and only if it is the colimit of a filtered diagram of sheaves each of which is killed by
-a positive integer invertible on `S` (for `S = Spec K`, `F = colim_{n ∈ I_K} F[n]`).
-
-One direction is `AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder.exists_isColimit`.
-Conversely, the geometric stalks commute with the colimit, the stalk functors being left
-adjoints, so every element of a stalk of `F` comes from a stalk of some member of the diagram,
-where it is killed by the corresponding integer. -/
+/-- **The colimit description of invertible orders.** A sheaf `F` of `Λ`-modules on the small
+étale site of `T` has orders invertible on `S` if and only if it is the colimit of a filtered
+diagram of sheaves each of which is killed by a positive integer invertible on `S` (for
+`S = Spec K`, `F = colim_{n ∈ I_K} F[n]`). -/
 theorem isTorsionSheafOfInvertibleOrder_iff_exists_isColimit (S : Scheme.{u}) {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsTorsionSheafOfInvertibleOrder S F ↔

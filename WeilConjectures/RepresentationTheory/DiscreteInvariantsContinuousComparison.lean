@@ -17,8 +17,27 @@ public import WeilConjectures.RepresentationTheory.ContinuousCohomologyCoefficie
 /-!
 # Derived invariants and homogeneous continuous cohomology
 
-Source: Stacks Project, Etale Cohomology, Section 0DVG.
-(blueprint: lem-sc-discrete-invariants-continuous-comparison).
+For a profinite group `G`, an abelian category `A` equivalent to discrete `G`-modules and a
+functor `Γ` corresponding to invariants, we identify the right derived functors of `Γ` with
+continuous group cohomology.
+
+## Main definitions
+
+- `Rep.rightDerivedAddEquivContinuousCohomology`
+
+## Implementation details
+
+An injective resolution of `F` is transported along the equivalence, and `Γ` of it is identified
+with the invariant complex of the transported resolution. Continuous inhomogeneous cochains on
+discrete modules form an exact, effaceable cohomological δ-functor (coinduced modules of
+locally constant functions are acyclic via an explicit contracting homotopy), so both sides are
+universal δ-functors agreeing in degree zero. Homogeneous and inhomogeneous cochains are
+compared by the usual change of variables, and the linear equivalence `e` transports the
+complexes, possibly between universes. No finiteness assumption on the coefficients is used.
+
+## References
+
+- [Stacks, Section 0DVG]
 -/
 
 @[expose] public section
@@ -29,36 +48,9 @@ open CategoryTheory
 
 namespace Rep
 
-/-- Additive equivalence between derived invariants transported across an abelian equivalence
-and homogeneous continuous cohomology, including a change of coefficient universe.
-
-Source: Stacks Project, Etale Cohomology, Section 0DVG, profinite comparison.
-(blueprint: lem-sc-discrete-invariants-continuous-comparison).
-
-Proof: Transport an injective resolution of F across E. An equivalence preserves
-injectives and is exact. The given natural isomorphism identifies its Gamma complex
-with the invariant complex of the transported resolution. Continuous inhomogeneous
-cochains on discrete modules form an exact cohomological delta-functor: continuous
-functions on compact powers have finite image, so a surjection of discrete modules
-allows a continuous lift, chosen separately for each value. Embed a module M into
-locally constant functions G -> M by m |-> (x |-> x*m), with right-translation action.
-Such functions have open stabilizers: a finite clopen partition has a common open
-stabilizing subgroup. In positive degrees the insertion operator
-h(F)(g1,...,g(n-1))(x) = F(x,g1,...,g(n-1))(1) contracts its continuous cochain complex.
-All maps are continuous, using finite clopen partitions on compact finite powers.
-This effaces positive cohomology. The resulting delta-functor and derived invariants
-are universal and agree in degree zero; uniqueness gives inverse comparisons.
-Finally, the compact-open exponential law identifies iterated continuous maps with
-jointly continuous maps. Evaluate an equivariant homogeneous cochain at
-(1,g1,g1*g2,...,g1*...*gn). The inverse is
-(g0,...,gn) |-> g0*c(g0^-1*g1,...,g(n-1)^-1*gn). Alternating omission becomes the
-inhomogeneous differential, by expanding the recursive homogeneous differential.
-The equivariant linear equivalence e transports these complexes, including between
-universes. Kernel modulo image computes the underlying TopModuleCat homology, so
-these inverse cochain transformations descend to the claimed additive equivalence.
-The representation universe is at least the group universe so coinduced modules
-remain in the same category. No finite-ring assumption is used: the scalar ring is the
-discrete integers. -/
+/-- Let `E : A ≌` discrete `G`-modules and `Γ ≅` invariants after `E`. For `F : A` and a
+discrete topological representation `N` equivariantly isomorphic to `E F`, the derived functor
+`R^q Γ (F)` is additively equivalent to the continuous cohomology `H^q(G, N)`. -/
 noncomputable def rightDerivedAddEquivContinuousCohomology
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

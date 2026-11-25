@@ -11,8 +11,21 @@ import WeilConjectures.SmoothPurity.Supporting.CoefDerivedSystemEvaluationCalcul
 import all WeilConjectures.SmoothPurity.Supporting.IsomorphismReductionTower
 import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
-/-! The normalized tensor comparison at a single finite coefficient level.
-(blueprint: lem-pod-reindexing-finite-tensor-comparison).
+/-! # The normalized tensor comparison at a single finite coefficient level
+
+Reindexing a restricted finite total tensor along an isomorphism of schemes, followed by two
+finite chain isomorphisms, is identified with the total tensor of the reindexed factors, with
+the prescribed formula on every tensor summand.
+
+## Implementation details
+
+At a finite coefficient level the sectionwise tensor comparison sends `x ⊗ y` to the tensor of
+the same sections; this determines the map after sheafification and extends to the direct-sum
+total complex. No compatibility between different coefficient levels is asserted.
+
+## References
+
+* Stacks Project, Tags 03EL, 012Z, 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -80,24 +93,8 @@ private theorem finiteTensorGenerator_eq (W : Scheme.{u})
 end GeneratorNormalization
 
 /-- Reindexing a restricted finite total tensor, followed by any two finite chain
-isomorphisms, has the prescribed map on every tensor summand.
-
-Source: blueprint `theorem-poincare-duality-frobenius--2`, Steps 1 and 5;
-Stacks 03EL, 012Z, 07A4 (blueprint: lem-pod-reindexing-finite-tensor-comparison).
-
-Proof: commute sectionwise reindexing with restriction of scalars using the
-completed projection square. At finite coefficients the sectionwise tensor
-comparison sends x tensor y to the tensor of the same sections. It is natural:
-the two composites agree on pure tensors, which determine maps after
-sheafification. Reindexing is an additive equivalence and preserves coproducts,
-so this comparison extends to the direct-sum total complex. On a summand of
-bidegree (p,q), both differentials are d(x) tensor y + (-1)^p x tensor d(y),
-hence the extended maps are chain maps. The inverse is the inverse sectionwise
-tensor comparison, with inverse coefficient transport. Finally apply the total
-tensor functor to a and b and restrict scalars. Their inverses give the inverse
-of the composite, and evaluation on each coproduct injection gives the formula.
-No compatibility between different coefficient levels is asserted here.
--/
+isomorphisms, has the prescribed map on every tensor summand; this version is
+parameterized by coefficient derived system calculi `CX` and `CY`. -/
 private theorem podReindexingFiniteTensorComparison_withModels
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -234,13 +231,9 @@ private theorem podReindexingFiniteTensorComparison_withModels
         ((CategoryTheory.ScalarHomTensor.tensor_generator_map a.hom b.hom
           p q (p + q) rfl (op U) x y).trans hX)))
 
-/-- A normalized tensor comparison at one finite coefficient level.
-Source: blueprint `theorem-poincare-duality-frobenius--2`, Steps 1 and 5;
-Stacks 03EL, 012Z, 07A4 (blueprint: lem-pod-reindexing-finite-tensor-comparison).
-Proof: instantiate the finite closed models in the preceding parameterized argument.
-The result uses only the sectionwise tensor comparison and the two given finite
-chain isomorphisms. It requires no coherence between coefficient levels.
--/
+/-- A normalized tensor comparison at one finite coefficient level: given finite chain
+isomorphisms `a` and `b`, there is an isomorphism from the reindexed level-`n` tensor of
+`P, Q` to the level-`n` tensor of `P', Q'` sending `x ⊗ y` to `a x ⊗ b y` on each summand. -/
 theorem podReindexingFiniteTensorComparison
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

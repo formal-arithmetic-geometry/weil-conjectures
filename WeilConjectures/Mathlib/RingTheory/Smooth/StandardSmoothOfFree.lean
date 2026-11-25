@@ -49,12 +49,7 @@ lemma SquareJacobianPresentation.etale {ι : Type*} [Finite ι]
   inferInstance
 
 /-- An `R`-algebra `S` is étale if and only if it admits a square Jacobian presentation
-`S = R[x₁, …, xₘ] / (f₁, …, fₘ)` with `det (∂fᵢ / ∂xⱼ)` a unit in `S` (blueprint
-`proposition-extension-zero-restriction-closed-subscheme`).
-
-The forward direction starts from a submersive presentation of relative dimension `0`, given
-by `Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero`: its injective map from the
-relations to the variables is then a bijection, along which the variables are reindexed. -/
+`S = R[x₁, …, xₘ] / (f₁, …, fₘ)` with `det (∂fᵢ / ∂xⱼ)` a unit in `S`. -/
 @[stacks 00U9]
 theorem Etale.iff_exists_squareJacobianPresentation :
     Etale R S ↔ ∃ (ι : Type) (_ : Finite ι), Nonempty (SquareJacobianPresentation R S ι) := by
@@ -73,10 +68,7 @@ theorem Etale.iff_exists_squareJacobianPresentation :
   ext i
   simp [Q, PreSubmersivePresentation.reindex_map, e]
 
-/-- A smooth algebra `A` over a field `K` is reduced. Locally on `Spec A` it is standard smooth,
-hence étale over a polynomial ring over `K`, and an étale algebra over a domain is reduced
-(`Algebra.Etale.isReduced_of_isDomain`). An element `a` with nilpotent image therefore vanishes
-in every member `A[1/x]` of a cover by standard opens, so its annihilator is the unit ideal. -/
+/-- A smooth algebra `A` over a field `K` is reduced. -/
 theorem Smooth.isReduced_of_field (K A : Type*) [Field K] [CommRing A] [Algebra K A]
     [Smooth K A] : IsReduced A := by
   obtain ⟨s, hs, H⟩ := Smooth.exists_span_eq_top_isStandardSmooth K A

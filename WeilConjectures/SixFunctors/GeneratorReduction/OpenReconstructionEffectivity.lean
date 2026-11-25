@@ -16,8 +16,23 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 /-! # Effectivity of the specified open reduction and reconstruction
 
-Source: current blueprint fix-prop-coherence, primitive comparisons
-(blueprint: lem-sf-open-reconstruction-effectivity).
+For a quasi-compact open immersion `j`, the canonical open reduction mate and the reconstruction
+unit at the open extension are invertible on finite-Tor constructible inputs and on the
+coefficient unit.
+
+## Implementation details
+
+Both kinds of input are derived complete: for the coefficient unit this is shown by comparing
+it with the constant coefficient object. Quasi-compact open extension preserves completeness
+(checked through the DVR coefficient models), and normalized reconstruction then makes the
+actual unit at the extension invertible. Invertibility of the open reduction mate is checked
+on K-flat representatives, where it is a componentwise isomorphism.
+
+## References
+
+* [Stacks: Tag 03DI](https://stacks.math.columbia.edu/tag/03DI)
+* [Stacks: Tag 0GL1](https://stacks.math.columbia.edu/tag/0GL1)
+* [Stacks: Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -118,22 +133,7 @@ private theorem fixedOpenReduction_isIso (system : IntegralSystemRealization.Ope
   exact IsIso.of_isIso_fac_right he
 
 /-- Quasi-compact open extension has invertible canonical reduction mate and
-reconstruction unit on complete constructible inputs and on the coefficient unit.
-Source: current blueprint, fix-prop-coherence.proof.md, open-factor sentence;
-Stacks Tags 03DI, 0GL1 and 0941
-(blueprint: lem-sf-open-reconstruction-effectivity).
-
-Proof: a finite-Tor constructible input is derived complete; the coefficient
-unit is complete because its surjective quotient tower has completed coefficient
-sheaf as limit and zero higher limit. The section-normalized open tensor map
-commutes with every quotient transition and gives the canonical reduction
-comparison on one flat-term K-flat representative. Quasi-compact open extension
-preserves completeness. Normalized reconstruction therefore makes the actual
-unit at the extension invertible. The inverse open-adjunction mate defining
-openReduction is this same section-normalized map, by the representative
-normalization of RealizationModel.reductionPull and uniqueness of adjunction
-transposition. Thus its components are invertible as whole-system maps. The empty
-open and the identity open use the same construction. -/
+reconstruction unit on finite-Tor constructible inputs and on the coefficient unit. -/
 theorem openReconstructionEffectivity (system : IntegralSystemRealization.Operations l E)
     (realization : IntegralSystemRealization.RealizationModel l E system) {X Y : Scheme.{u}}
     (j : X ⟶ Y) [IsOpenImmersion j] [QuasiCompact j]

@@ -12,8 +12,18 @@ import Mathlib.Analysis.Normed.Module.FiniteDimension
 
 /-! # Small presentations of finite normed coefficient fields
 
-The presentations below retain the actual norm and its closed unit ball. They are
-used only to transport the existing continuous coefficient theorems across universes.
+A finite normed extension `E` of `ℚ_l` admits a presentation in `Type` by an isometric algebra
+isomorphism (`FieldModel`). It identifies the closed unit balls and the continuous coefficient
+ring sheaves, compatibly with the inclusion of the ring of integers into `E`.
+
+## Implementation details
+
+The presentations retain the actual norm and its closed unit ball. They are used only to
+transport the existing continuous coefficient theorems across universes.
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Section 6.8
 -/
 
 @[expose] public noncomputable section
@@ -23,17 +33,14 @@ open CategoryTheory Opposite
 
 namespace WeilConjectures.NormalizedScalar
 
-/-- The ring of integers in the given norm, in the scheme universe.
-Source: Bhatt--Scholze, Section 6.8.
-(blueprint: lem-weil-pbc-normalized-coefficient-model). -/
+/-- The ring of integers in the given norm, in the scheme universe. -/
 def integers (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
     [NormedAlgebra ℚ_[l] E] : Subring E :=
   letI : IsUltrametricDist E := IsUltrametricDist.of_normedAlgebra ℚ_[l]
   (NormedField.valuation (K := E)).integer
 
 /-- A small normed presentation, with an isometric algebra isomorphism to the
-original coefficient field. Source: finite-dimensional linear algebra.
-(blueprint: lem-weil-pbc-normalized-coefficient-model). -/
+original coefficient field. -/
 structure FieldModel (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
     [NormedAlgebra ℚ_[l] E] where
   carrier : Type
@@ -46,13 +53,7 @@ structure FieldModel (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
 attribute [instance] FieldModel.normedField FieldModel.normedAlgebra
   FieldModel.finiteDimensional
 
-/-- Every finite normed extension admits a small presentation preserving the norm.
-Source: finite-dimensional coordinates and transfer of normed-field structure.
-(blueprint: lem-weil-pbc-normalized-coefficient-model).
-
-Proof: a finite basis embeds the underlying set in a finite power of Q_l, so it
-is small. Transfer the field, norm, and scalar action along the shrink equivalence.
-The transferred norm makes this equivalence an isometry by definition. -/
+/-- Every finite normed extension admits a small presentation preserving the norm. -/
 theorem fieldModel_nonempty (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] : Nonempty (FieldModel l E) := by
   classical
@@ -73,9 +74,7 @@ theorem fieldModel_nonempty (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E
 
 variable {l : ℕ} [Fact l.Prime] {E : Type u} [NormedField E] [NormedAlgebra ℚ_[l] E]
 
-/-- The presentation identifies the closed unit balls by the same coefficient map.
-Source: invariance of the unit ball under an isometry.
-(blueprint: lem-weil-pbc-normalized-coefficient-model). -/
+/-- The presentation identifies the closed unit balls by the same coefficient map. -/
 def FieldModel.integerEquiv (m : FieldModel l E) :
     AlgebraicGeometry.ProEtale.CondensedRing.continuousIntegers l m.carrier ≃+*
       integers l E where
@@ -94,16 +93,12 @@ def FieldModel.integerEquiv (m : FieldModel l E) :
   map_mul' a b := Subtype.ext (m.equiv.map_mul a b)
   map_add' a b := Subtype.ext (m.equiv.map_add a b)
 
-/-- Continuity on the unit balls is restriction of the presentation isometry.
-Source: the subspace topology of the valuation ring.
-(blueprint: lem-weil-pbc-normalized-coefficient-model). -/
+/-- The identification of the unit balls is continuous. -/
 theorem FieldModel.integerEquiv_continuous (m : FieldModel l E) :
     Continuous m.integerEquiv :=
   (m.isometry.continuous.comp continuous_subtype_val).subtype_mk _
 
-/-- The inverse presentation is continuous on the unit balls as well.
-Source: inverse of an isometry.
-(blueprint: lem-weil-pbc-normalized-coefficient-model). -/
+/-- The inverse presentation is continuous on the unit balls as well. -/
 theorem FieldModel.integerEquiv_symm_continuous (m : FieldModel l E) :
     Continuous m.integerEquiv.symm := by
   have hi : Isometry m.equiv.symm := fun x y ↦ by
@@ -112,9 +107,7 @@ theorem FieldModel.integerEquiv_symm_continuous (m : FieldModel l E) :
   exact (hi.continuous.comp continuous_subtype_val).subtype_mk _
 
 /-- Postcomposition by a continuous ring equivalence identifies the actual
-continuous-function sheaves, including their universe lifts.
-Source: functoriality of C(S,-).
-(blueprint: lem-weil-pbc-normalized-coefficient-model). -/
+continuous-function sheaves, including their universe lifts. -/
 def pointRingIso {A : Type} {B : Type u} [CommRing A] [TopologicalSpace A]
     [IsTopologicalRing A] [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
     (e : A ≃+* B) (he : Continuous e) (hei : Continuous e.symm) :
@@ -143,9 +136,7 @@ def pointRingIso {A : Type} {B : Type u} [CommRing A] [TopologicalSpace A]
       intro x
       exact e.apply_symm_apply (f.down x) }
 
-/-- The field presentation induces its specified pointwise coefficient isomorphism.
-Source: functoriality of continuous coefficient rings.
-(blueprint: lem-weil-pbc-normalized-coefficient-model). -/
+/-- The field presentation induces its specified pointwise coefficient isomorphism. -/
 def FieldModel.pointFieldIso (m : FieldModel l E) :
     Profinite.continuousMapRingSheaf.{u} m.carrier ≅
       Profinite.continuousCoefficientRingSheaf E := by
@@ -154,18 +145,14 @@ def FieldModel.pointFieldIso (m : FieldModel l E) :
       (m.isometry (m.equiv.symm x) (m.equiv.symm y)).symm
   exact pointRingIso m.equiv.toRingEquiv m.isometry.continuous hi.continuous
 
-/-- The integral coefficient isomorphism uses the restriction of the same field map.
-Source: invariance of the unit ball under an isometry.
-(blueprint: lem-weil-pbc-normalized-coefficient-model). -/
+/-- The integral coefficient isomorphism induced by the restriction of the same field map. -/
 def FieldModel.pointIntegerIso (m : FieldModel l E) :
     Profinite.continuousMapRingSheaf.{u}
       (AlgebraicGeometry.ProEtale.CondensedRing.continuousIntegers l m.carrier) ≅
       Profinite.continuousCoefficientRingSheaf (integers l E) :=
   pointRingIso m.integerEquiv m.integerEquiv_continuous m.integerEquiv_symm_continuous
 
-/-- The actual inclusion of the unit ball, as a map of condensed coefficient rings.
-Source: the inclusion of the ring of integers in the field.
-(blueprint: lem-weil-pbc-normalized-coefficient-model). -/
+/-- The actual inclusion of the unit ball, as a map of condensed coefficient rings. -/
 def scalarRingMap : Profinite.continuousCoefficientRingSheaf (integers l E) ⟶
     Profinite.continuousCoefficientRingSheaf E :=
   ⟨
@@ -175,9 +162,7 @@ def scalarRingMap : Profinite.continuousCoefficientRingSheaf (integers l E) ⟶
             ULift.ringEquiv.toRingHom))
       naturality := fun _ _ _ ↦ rfl }⟩
 
-/-- The underlying internal ring map of the integral inclusion.
-Source: the actual continuous inclusion.
-(blueprint: lem-weil-pbc-normalized-coefficient-model). -/
+/-- The underlying internal ring map of the integral inclusion. -/
 def scalarMap : Profinite.continuousCoefficientRingObj (integers l E) ⟶
     Profinite.continuousCoefficientRingObj E :=
   (sheafCompose (coherentTopology Profinite.{u})
@@ -188,12 +173,7 @@ instance : IsMonHom (scalarMap (l := l) (E := E)) :=
     (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (scalarRingMap (l := l) (E := E))))
 
 /-- The two coefficient comparisons commute with the actual integral inclusion.
-This is a pointwise identity, not a choice of an isomorphism of scalar functors.
-Source: restriction of a field isomorphism to its valuation ring.
-(blueprint: lem-weil-pbc-normalized-coefficient-model).
-
-Proof: both composites send a continuous integral function f to e ∘ f, viewed
-as a field-valued function. Extensionality on profinite tests proves the square. -/
+This is a pointwise identity, not a choice of an isomorphism of scalar functors. -/
 theorem FieldModel.scalar_square (m : FieldModel l E) :
     (sheafCompose (coherentTopology Profinite.{u})
       (forget₂ RingCat.{u + 1} Ab.{u + 1})).map m.pointIntegerIso.hom ≫
@@ -208,10 +188,7 @@ section
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [NormedField E]
   [NormedAlgebra ℚ_[ℓ] E]
 
-/-- E is obtained from its valuation ring by inverting ℓ. Clear the norm of an
-element by a sufficiently large power of ℓ, using ‖ℓ‖ < 1.
-Source: Bhatt--Scholze, Section 6.8
-(blueprint: lem-weil-pbc-normalized-coefficient-model). -/
+/-- E is obtained from its valuation ring by inverting ℓ. -/
 instance integers_isLocalization :
     IsLocalization.Away (ℓ : integers ℓ E) E := by
   have hp : (ℓ : E) ≠ 0 := by

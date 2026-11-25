@@ -52,6 +52,17 @@ two-sided tensor inverse (`CategoryTheory.IsInvertible.isDualizable`).
 - `CategoryTheory.MonoidalClosed.isIso_ihomTensorToIhom`: the comparison map
   `(ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N)` is an isomorphism when `N` is invertible.
 
+## Implementation details
+
+`CategoryTheory.IsInvertible` requires both `X ⊗ Y ≅ 𝟙_ C` and `Y ⊗ X ≅ 𝟙_ C`: without a
+braiding, `X ⊗ Y ≅ 𝟙_ C` alone does not make `X` invertible (for endofunctors under composition
+it only says that `X` has a section). The Tate twists of the `ℓ`-adic formalism are the
+motivating example.
+
+In `CategoryTheory.exactPairingOfTensorIso` the evaluation is `Y ⊗ X ≅ 𝟙_ C` corrected by an
+automorphism of `X` so that the first zigzag identity holds; the second then follows since
+`- ▷ X` is injective.
+
 -/
 
 @[expose] public section
@@ -110,11 +121,7 @@ theorem tensorRightAdjunction_counit_app (Y Y' : C) [ExactPairing Y Y'] (X : C) 
   simp [tensorRightAdjunction, tensorRightHomEquiv]
 
 /-- An object `X` of a monoidal category is *invertible* if it admits a two-sided tensor
-inverse, that is, an object `Y` with `X ⊗ Y ≅ 𝟙_ C` and `Y ⊗ X ≅ 𝟙_ C`. The Tate twists of the
-`ℓ`-adic formalism are the motivating example.
-
-Both isomorphisms are required: without a braiding, `X ⊗ Y ≅ 𝟙_ C` alone does not make `X`
-invertible (for endofunctors under composition it only says that `X` has a section). -/
+inverse, that is, an object `Y` with `X ⊗ Y ≅ 𝟙_ C` and `Y ⊗ X ≅ 𝟙_ C`. -/
 def IsInvertible (X : C) : Prop :=
   ∃ Y, Nonempty (X ⊗ Y ≅ 𝟙_ C) ∧ Nonempty (Y ⊗ X ≅ 𝟙_ C)
 
@@ -127,9 +134,7 @@ theorem isInvertible_iff_of_braided [BraidedCategory C] (X : C) :
   ⟨fun ⟨Y, e, _⟩ ↦ ⟨Y, e⟩, fun ⟨Y, ⟨e⟩⟩ ↦ ⟨Y, ⟨e⟩, ⟨β_ Y X ≪≫ e⟩⟩⟩
 
 /-- An object `X` with a two-sided tensor inverse `Y`, `X ⊗ Y ≅ 𝟙_ C ≅ Y ⊗ X`, forms an exact
-pairing with `Y`. The coevaluation is the inverse of `X ⊗ Y ≅ 𝟙_ C`; the evaluation is
-`Y ⊗ X ≅ 𝟙_ C` corrected by an automorphism of `X` so that the first zigzag identity holds,
-and the second zigzag identity then follows, since `- ▷ X` is injective. -/
+pairing with `Y`, with coevaluation the inverse of `X ⊗ Y ≅ 𝟙_ C`. -/
 @[instance_reducible]
 noncomputable def exactPairingOfTensorIso {X Y : C} (e : X ⊗ Y ≅ 𝟙_ C) (e' : Y ⊗ X ≅ 𝟙_ C) :
     ExactPairing X Y :=
@@ -367,14 +372,8 @@ lemma ihomTensorToIhom_comp_ihomCurry (K A Z N : C) :
   rw [key, whiskerLeft_curry_ihom_ev_app]
   monoidal
 
-/-- Blueprint `theorem-poincare-duality--2`: Internal Hom with an invertible twist (the
-categorical core).
-
-In a monoidal closed category, for every invertible object `N` the canonical map
-`(ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N)` is an isomorphism, for all `X` and `Z`. Since
-`- ⊗ N` is an autoequivalence, both sides corepresent the same functor
-`T ↦ (X ⊗ T ⊗ N⁻¹ ⟶ Z)`, and the canonical map induces this identification (Yoneda). No
-hypothesis on `X` is needed. -/
+/-- In a monoidal closed category, for every invertible object `N` the canonical map
+`(ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N)` is an isomorphism, for all `X` and `Z`. -/
 theorem isIso_ihomTensorToIhom (X Z : C) {N : C} (hN : IsInvertible N) :
     IsIso (ihomTensorToIhom X Z N) := by
   obtain ⟨N', ⟨e⟩, ⟨e'⟩⟩ := hN

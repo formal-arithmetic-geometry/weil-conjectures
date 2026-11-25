@@ -12,6 +12,10 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 The generator and quotient equations concern the explicit maps of
 `PodTensorFiniteSignedShifts`; no tensor shift data is chosen here.
+
+## References
+
+* Stacks Project, Tags 011G, 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -189,16 +193,8 @@ private theorem finiteShiftRight_generators (W : Scheme.{u}) (n : ℕ)
     (by omega) U _ (p * r).negOnePow (integralOperationsTensorSection l E W n _ _ U x y))
 
 /-- The two explicit finite tensor shifts have their prescribed homogeneous
-section formulas for every integer shift.
-
-Source: Stacks 011G, 07A4; more-algebra.tex, item-shift-tensor
-(blueprint: lem-pod-tensor-finite-signed-shift-laws).
-
-Proof: apply the two Mathlib total-tensor summand formulas after the ordinary
-reduction shift comparison, whose components are identities. Restriction of
-scalars leaves the section maps unchanged. The first formula has no sign;
-the second retains (-1)^(p * r). Transport along the equality of total-degree
-indices yields the stated heterogeneous equalities. -/
+section formulas for every integer shift: the left shift has no sign and the right shift
+introduces the sign `(-1)^(p * r)`. -/
 theorem podTensorFiniteSignedShiftGenerators (W : Scheme.{u}) :
     PodTensorFiniteShiftGenerators l E W := by
   constructor

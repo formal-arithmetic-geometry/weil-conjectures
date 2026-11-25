@@ -13,13 +13,23 @@ import WeilConjectures.LinearAlgebra.DvrMatrixSmithPowers
 /-!
 # Local continuous Smith reduction of integral matrices
 
-Source: Hemo--Richarz--Scholbach, arXiv:2305.18131, Example 3.1 and the proof of
-Theorem 6.12(2), finite coefficient extension case. The local constant-cokernel-type
-Smith variant is the agent argument recorded in the blueprint, rather than a verbatim HRS theorem
-(auxiliary; not a blueprint node).
+A continuous family of matrices over the integers of a finite extension of `ℚ_l` whose cokernels
+have locally constant type admits, locally, a Smith reduction by continuous invertible integral
+matrices.
 
 The valuation topology on the integer ring is its maximal-ideal-adic topology.
 The cokernels below are ordinary algebraic module quotients, with no sheaf structure.
+
+## Implementation details
+
+At each point, the scalar Smith form supplies constant invertible factors and a sorted diagonal
+`D`. Equivalent cokernels have equal matrix ranks, so after conjugating by the scalar factors the
+family equals `D` at the centre with ranks bounded by the number of nonzero entries of `D`, and
+`continuous_integral_diagonal_rank_locus` applies.
+
+## References
+
+* Hemo--Richarz--Scholbach, arXiv:2305.18131, Example 3.1 and proof of Theorem 6.12(2)
 -/
 
 @[expose] public section
@@ -43,22 +53,7 @@ private theorem matrix_rank_eq_of_cokernel_equiv
 Smith reduction by integral invertible matrices whose entries and inverse entries are
 continuous. The open cover is indexed by the points, each point lying in its own member.
 The fixed rectangular diagonal on each member has increasing nonnegative uniformizer
-exponents, including exponent zero, and can have no nonzero entries.
-
-Source: Hemo--Richarz--Scholbach, arXiv:2305.18131, Example 3.1 and the continuous integral
-pivot/division argument of Theorem 6.12(2); agent local constant-type Smith variant
-(auxiliary; not a blueprint node).
-
-Proof: Choose a type-constant open neighbourhood of each point. Scalar Smith form
-at the central point supplies constant invertible factors and a sorted diagonal D.
-The quotient-plus-range finrank formula shows that equivalent cokernels imply equal
-matrix ranks. After conjugating by the scalar Smith factors, the family equals D at
-its centre and its ranks are bounded by the number of nonzero entries of D. Apply
-continuous_integral_diagonal_rank_locus to this family. Transport its neighbourhood
-through the open subtype inclusion and compose the continuous factors with the
-constant scalar factors. Inverses reverse these products and remain continuous.
-Finally choose the resulting neighbourhood at every point. Empty dimensions and
-rank zero are covered by the scalar and rank-locus statements. -/
+exponents, including exponent zero, and can have no nonzero entries. -/
 theorem continuous_integral_matrix_local_smith
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]

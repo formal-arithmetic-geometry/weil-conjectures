@@ -18,7 +18,7 @@ Let `ρ : Λ →+* Λ'` be a surjective morphism of commutative rings with princ
 case being the reduction `A_{E,n+1} → A_{E,n}`, and write `Ψ_X : D(X_ét, Λ) ⥤ D(X_ét, Λ')` for the
 derived extension of scalars `K ↦ K ⊗ᴸ_Λ Λ'` (`AlgebraicGeometry.Etale.derivedExtendScalars`),
 left adjoint to the restriction of scalars `Res`. This file shows that `Ψ` commutes with the
-derived pullbacks (blueprint `proposition-compatibility-purity-change-coefficients`):
+derived pullbacks:
 
 * `Lf^*` carries derived base changes to derived base changes
   (`AlgebraicGeometry.Etale.isDerivedBaseChange_leftDerivedUpperStar_map_comp'`): this is checked
@@ -68,10 +68,7 @@ variable {U X : Scheme.{u}} (e : U ⟶ X)
 
 /-- **The derived pullback carries derived base changes to derived base changes.** If
 `η : K ⟶ Res K'` exhibits `K'` as `K ⊗ᴸ_Λ Λ'`, then `Le^* η` followed by the commutation
-`Le^* Res ≅ Res Le^*` exhibits `Le^* K'` as `Le^* K ⊗ᴸ_Λ Λ'`. The comparison map
-`Le^* K ⊗ᴸ_Λ Λ' ⟶ Le^* K'` is an isomorphism, as it is one on every geometric point `s`, where
-`Ls^*` and `L(s ≫ e)^*` carry derived base changes to derived base changes
-(`AlgebraicGeometry.Etale.isDerivedBaseChange_leftDerivedUpperStar_map_comp`). -/
+`Le^* Res ≅ Res Le^*` exhibits `Le^* K'` as `Le^* K ⊗ᴸ_Λ Λ'`. -/
 lemma isDerivedBaseChange_leftDerivedUpperStar_map_comp' (hρ : Function.Surjective ρ)
     (ha : RingHom.ker ρ = Ideal.span {a}) {K : 𝐃(X, Λ)} {K' : 𝐃(X, Λ')}
     {η : K ⟶ (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).obj K'}
@@ -178,9 +175,7 @@ section Comp
 
 /-- **The commutation of `Ψ` with the derived pullbacks is compatible with composition**: for
 `g₁₂ = g₁ ≫ g₂`, the composite `Ψ L(g₁₂)^* ≅ Ψ Lg₁^* Lg₂^* ≅ Lg₁^* Ψ Lg₂^* ≅ Lg₁^* Lg₂^* Ψ` is
-`Ψ L(g₁₂)^* ≅ L(g₁₂)^* Ψ ≅ Lg₁^* Lg₂^* Ψ`. Both are determined by their transposes, which agree
-by the corresponding compatibility of `Res ⋙ Lg^* ≅ Lg^* ⋙ Res`
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarRestrictScalarsIso_comp_hom_app'`). -/
+`Ψ L(g₁₂)^* ≅ L(g₁₂)^* Ψ ≅ Lg₁^* Lg₂^* Ψ`. -/
 @[reassoc]
 lemma derivedExtendScalarsPullbackMap_comp {T S R : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ R)
     (g₁₂ : T ⟶ R) (h : g₁₂ = g₁ ≫ g₂) (K : 𝐃(R, Λ)) :

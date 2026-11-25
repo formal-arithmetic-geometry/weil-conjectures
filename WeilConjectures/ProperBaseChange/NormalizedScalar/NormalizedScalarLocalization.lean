@@ -10,8 +10,21 @@ import Mathlib.RingTheory.Localization.Module
 
 /-! # Linear normalized descent through Verdier rationalization
 
-The construction applies to any triangulated linear functor whose scalar action
-extends to the localized coefficient ring. It requires no equivalence assertion.
+A triangulated functor `H : C ⥤ D` from an `R`-linear category to an `A`-linear one, with
+`A` a localization of `R` and `H` compatible with scalars, factors through the Verdier
+rationalization of `C` by an `A`-linear triangulated functor.
+
+## Main definitions and results
+
+- `WeilConjectures.NormalizedScalar.lift_linear`: the Verdier lift is `A`-linear.
+- `WeilConjectures.NormalizedScalar.ForwardFunctorData`: the data of such a factorization.
+- `WeilConjectures.NormalizedScalar.forward_exists`: such a factorization exists.
+
+## Implementation details
+
+The factorization is the existing triangulated Verdier lift; no equivalence is assumed. Its
+`A`-linearity comes from `R`-linearity by extending scalars along the localization on each
+Hom module.
 -/
 
 @[expose] public noncomputable section
@@ -29,14 +42,8 @@ variable {R : Type w} [CommRing R] (M : Submonoid R)
   {D : Type u₂} [Category.{v₂} D] [Preadditive D] [Linear A D] [HasZeroObject D]
   [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
 
-/-- The existing Verdier lift is linear over the localized coefficient ring.
-Source: localization of modules, applied to each Hom group.
-(blueprint: lem-weil-pbc-normalized-scalar-localization).
-
-Proof: the lift preserves scalar endomorphisms for elements of R by the standard
-formula on QX. Hence it is R-linear. Its Hom maps extend uniquely to A-linear
-maps because both Hom groups are A-modules. The quotient's A-action restricts
-to its R-action by the defining scalar normalization. -/
+/-- The Verdier lift of `H` through the rationalization is linear over the localized
+coefficient ring `A`. -/
 theorem lift_linear (H : C ⥤ D) [H.CommShift ℤ] [H.IsTriangulated]
     (hH : ∀ (r : R) (X : C), H.map (r • 𝟙 X) = algebraMap R A r • 𝟙 (H.obj X)) :
     (CategoryTheory.Rationalization.lift M A H hH).Linear A := by
@@ -62,9 +69,7 @@ theorem lift_linear (H : C ⥤ D) [H.CommShift ℤ] [H.IsTriangulated]
     ((J.mapLinearMap R).extendScalarsOfIsLocalization M A).map_smul a f⟩
 
 /-- An additive linear triangulated forward lift with a shift-compatible comparison
-and its scalar naturality equation.
-Source: Verdier localization and scalar localization of Hom modules.
-(blueprint: lem-weil-pbc-normalized-scalar-localization). -/
+and its scalar naturality equation. -/
 def ForwardFunctorData (H : C ⥤ D) [H.CommShift ℤ] : Prop :=
   ∃ (J : CategoryTheory.Rationalization M C ⥤ D) (_ : J.Additive)
     (_ : J.Linear A) (_ : J.CommShift ℤ)
@@ -74,14 +79,9 @@ def ForwardFunctorData (H : C ⥤ D) [H.CommShift ℤ] : Prop :=
       J.map (a • (CategoryTheory.Rationalization.Q M C).map f) ≫ e.hom.app Y =
         e.hom.app X ≫ (a • H.map f)
 
-/-- A normalized forward functor through the ordinary Verdier rationalization.
-Source: Verdier localization and scalar localization of Hom modules.
-(blueprint: lem-weil-pbc-normalized-scalar-localization).
-
-Proof: use the existing triangulated Verdier lift, not an inverse of an asserted
-realization equivalence. Its standard comparison commutes with every integer
-shift. The previous lemma supplies A-linearity. Naturality of that same comparison,
-multiplied by any a in A, gives the fraction equation, including a=1 and a=0. -/
+/-- A normalized forward functor through the ordinary Verdier rationalization: an additive,
+`A`-linear, triangulated functor `J` with a shift-compatible isomorphism `Q ⋙ J ≅ H` that is
+natural with respect to `A`-scalar multiples of morphisms. -/
 theorem forward_exists (H : C ⥤ D) [H.CommShift ℤ] [H.IsTriangulated]
     (hH : ∀ (r : R) (X : C), H.map (r • 𝟙 X) = algebraMap R A r • 𝟙 (H.obj X)) :
     ∃ (J : CategoryTheory.Rationalization M C ⥤ D) (_ : J.Additive)

@@ -14,8 +14,10 @@ import all WeilConjectures.SmoothPurity.Supporting.AdditiveRoosHorizontal
 Auxiliary module for `PodReindexingTensorCoefficientTransitionChainSquareDiagramAux`: the private
 finite level square `finiteSquare`, used there through `import all`. It is a separate module so
 that its kernel check runs in parallel with the Roos comparisons.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-tensor-chain-square-diagram).
+
+## References
+
+* [Stacks: Tags 03EL, 06YY, 0941]
 -/
 
 -- Only private declarations: they are used through `import all`.

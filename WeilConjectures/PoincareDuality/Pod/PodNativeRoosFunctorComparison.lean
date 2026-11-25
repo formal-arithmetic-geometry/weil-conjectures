@@ -22,7 +22,21 @@ import all WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingSignedRoo
 import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 import all Mathlib.CategoryTheory.Limits.HasLimits
 
-/-! # Comparison of the two strict Roos functor presentations -/
+/-! # Comparison of the two strict Roos functor presentations
+
+We show that the cofiber and mapping cone presentations of the strict Roos functor agree
+(`podNativeRoosIso`).
+
+## Implementation details
+
+`podSheafCanonicalPreadditive` is an explicit preadditive structure on sheaves of modules, taken
+from their abelian instance. It is registered only as a local instance, to avoid expanding
+module-sheaf operations when specializing cochain shift formulas.
+
+## References
+
+* Stacks Project, Tag 0941
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 
@@ -33,11 +47,7 @@ namespace WeilConjectures
 universe a b t u v w s
 variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
 
-/-- The explicit cofiber and cone constructions give the same strict Roos map.
-Source: Stacks 0941 and the two-coordinate Roos calculation.
-(blueprint: lem-pod-native-roos-functor-comparison-s8).
-Proof: both shifted cone maps induce the componentwise product map on each
-coordinate. Extensionality for maps out of the cofiber proves equality. -/
+/-- The explicit cofiber and cone constructions give the same strict Roos map. -/
 theorem podNativeRoosMap_eq
     {N N' : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : N ⟶ N') :
     integralOperationsRoosFunctor.map
@@ -53,9 +63,7 @@ theorem podNativeRoosMap_eq
     (CategoryTheory.RoosConeCalculus.cofiberMap_eq_coneMap (roosU N) (roosU N')
       (roosPmap f) (roosPmap f) (roosU_natural f))
 
-/-- Identity on Roos objects, identifying the two induced strict maps.
-Source: Stacks 0941, the explicit shifted cone model
-(blueprint: lem-pod-native-roos-functor-comparison-s8). -/
+/-- The natural isomorphism, with identity components, between the two strict Roos functors. -/
 def podNativeRoosIso : HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙
     integralOperationsRoosFunctor (A := A) ≅ roosF :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
@@ -182,11 +190,7 @@ private theorem roosShift_eq (S S' : PodSignedRoosShift A)
       apply Iso.ext
       exact roosShift_hom_ext _ _ hS hS' C r
 
-/-- The additive structure already captured by canonical derived shifts.
-This explicit choice avoids expanding module-sheaf operations when specializing
-cochain shift formulas. It is registered only locally in the proof modules.
-Source: Mathlib's abelian instance for module sheaves
-(blueprint: lem-pod-native-roos-functor-comparison-s8). -/
+/-- The preadditive structure on sheaves of modules coming from their abelian instance. -/
 abbrev podSheafCanonicalPreadditive
     {T : Type v} [Category.{w} T] {J : GrothendieckTopology T}
     (M : Sheaf J RingCat.{s})

@@ -19,7 +19,7 @@ A *frame* of a closed immersion `i : Z ⟶ X` of codimension `c`
 supports `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c) ∈ H^{2c}_{Z_U}(U, Λ(c))` of the Kummer boundaries
 (`AlgebraicGeometry.Etale.frameClass`), and a class with supports on `Z` restricts to every frame
 (`AlgebraicGeometry.Etale.frameRestriction`). These are the local pieces from which the
-fundamental class of a regular closed immersion (`lemma-class-of-point--1`) and of a section of a
+fundamental class of a regular closed immersion and of a section of a
 smooth morphism are glued.
 
 ## Main definitions
@@ -139,11 +139,9 @@ lemma EtaleFrame.mem_range_ofSpanEq_toZ {c : ℕ} (i : Z ⟶ X) [IsClosedImmersi
   obtain ⟨q, hq, -⟩ := (EtaleFrame.ofSpanEq i U f hf).isPullback.exists_scheme_point z p hp.symm
   exact ⟨q, hq⟩
 
-/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
-
-*Frames exist Zariski-locally.* Every point of `Z` lies in the zero locus of a frame of a regular
-closed immersion `i : Z ⟶ X` of codimension `c` whose étale map is the inclusion of an affine
-open `U ⊆ X`: the ideal of `Z` is generated on `U` by a regular sequence `f₁, …, f_c`. -/
+/-- *Frames exist Zariski-locally.* Every point of `Z` lies in the zero locus of a frame of a
+regular closed immersion `i : Z ⟶ X` of codimension `c` whose étale map is the inclusion of an
+affine open `U ⊆ X` and whose functions `f₁, …, f_c` form a weakly regular sequence. -/
 theorem exists_etaleFrame_isOpenImmersion (c : ℕ) (i : Z ⟶ X)
     [IsRegularImmersion c i] (z : Z) :
     ∃ F : i.EtaleFrame c, IsOpenImmersion F.e ∧ z ∈ Set.range F.toZ ∧ IsAffine F.U ∧

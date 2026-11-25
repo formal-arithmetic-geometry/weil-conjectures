@@ -12,8 +12,8 @@ set_option linter.privateModule false
 
 /-! # Derived composition normalization
 
-Source: blueprint dual-Tate compatibility, Step 6; localization universal property
-(blueprint: lem-pod-reindexing-derived-composition-normalization).
+A helper lemma for the derived normalization laws: deriving `eqToIso h` for an equality
+`h` of exact functors gives `eqToIso` of the induced equality of derived functors.
 -/
 
 @[expose] public section

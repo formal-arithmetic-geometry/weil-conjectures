@@ -13,8 +13,14 @@ import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 
 /-! # Representative maps for scalar/reindexing tensor descent
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent).
+Exactness properties of reindexing and scalar extension of integral tower modules, the induced
+functors and comparisons on good complexes, the reindexing, scalar and mixed tensor chains on
+good representatives, and `podCoefficientExactSquareChain`, which lifts a square of complex maps
+along a commutative square of exact functors to the derived categories.
+
+## References
+
+* Stacks Project, Tags 03EL, 05RU, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -39,9 +45,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite Algebr
 open AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
-/-- The specified reindex additive used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- Reindexing of integral tower modules along an isomorphism `g` is additive. -/
 theorem podTensorReindexAdditive (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
@@ -50,9 +54,7 @@ theorem podTensorReindexAdditive (l : ℕ) [Fact l.Prime]
   let : IsIso c.hom := c.isIso_hom
   exact isoSectionwiseModuleInverseImage_additive.{u, u} g c.hom
 
-/-- The specified scalar zero used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- Scalar extension of integral tower modules along `ι` preserves zero morphisms. -/
 theorem podTensorScalarZero (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
@@ -62,9 +64,7 @@ theorem podTensorScalarZero (l : ℕ) [Fact l.Prime]
     integralOrdinaryScalar_additive l E L ι W
   infer_instance
 
-/-- The specified mixed left zero used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- Reindexing along `g` followed by scalar extension along `ι` preserves zero morphisms. -/
 theorem podTensorMixedLeftZero (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
@@ -77,9 +77,7 @@ theorem podTensorMixedLeftZero (l : ℕ) [Fact l.Prime]
   let : (integralOrdinaryScalar l E L ι X).PreservesZeroMorphisms := podTensorScalarZero l E L ι X
   exact Functor.preservesZeroMorphisms_comp _ _
 
-/-- The specified mixed right zero used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- Scalar extension along `ι` followed by reindexing along `g` preserves zero morphisms. -/
 theorem podTensorMixedRightZero (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
@@ -99,9 +97,7 @@ attribute [local irreducible] integralCompletedTensor integralOrdinaryScalar
   integralOperationsTensorTowerFunctor scalarTensorChain scalarTensorOrdinary
   integralOperationsRoos
 
-/-- The specified reindex limits used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- Reindexing of integral tower modules along an isomorphism `g` preserves finite limits. -/
 theorem podTensorReindexLimits (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
@@ -110,9 +106,7 @@ theorem podTensorReindexLimits (l : ℕ) [Fact l.Prime]
   let : IsIso c.hom := c.isIso_hom
   exact isoSectionwiseModuleInverseImage_limits.{u, u} g c.hom
 
-/-- The specified reindex colimits used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- Reindexing of integral tower modules along an isomorphism `g` preserves finite colimits. -/
 theorem podTensorReindexColimits (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
@@ -133,9 +127,7 @@ attribute [local implicit_reducible] podOrdinaryReindex podGoodReindex
   scalarReductionSourceDerived integralTowerHasDerivedCategory
   integralOperationsCommHasDerivedCategory
 
-/-- The specified scalar good functor used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- Termwise scalar extension along `ι`, as a functor between good complexes over `W`. -/
 def podTensorScalarGoodFunctor (L : Type u) [Field L] [Algebra ℚ_[l] L]
     [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L) (W : Scheme.{u}) :=
   (integralOperationsGoodComplex l L W).lift
@@ -143,9 +135,8 @@ def podTensorScalarGoodFunctor (L : Type u) [Field L] [Algebra ℚ_[l] L]
       (integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ))
     (fun P ↦ scalarGood l E L ι W P)
 
-/-- The specified scalar good comparison used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- The comparison between derived scalar extension of the localization of a good complex and
+the localization of its termwise scalar extension. -/
 def podTensorScalarGoodComparison (L : Type u) [Field L] [Algebra ℚ_[l] L]
     [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L) (W : Scheme.{u}) :
     integralOperationsGoodLocalization l E W ⋙ integralOrdinaryDerivedScalar l E L ι W ≅
@@ -153,9 +144,8 @@ def podTensorScalarGoodComparison (L : Type u) [Field L] [Algebra ℚ_[l] L]
   isoWhiskerLeft (integralOperationsGoodComplex l E W).ι
     (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors
 
-/-- The specified reindex good comparison used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- The comparison between derived reindexing of the localization of a good complex and the
+localization of its termwise reindexing. -/
 def podTensorReindexGoodComparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (D : PodCompletionReindex l E g) :
@@ -167,9 +157,8 @@ def podTensorReindexGoodComparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
 attribute [local implicit_reducible] podTensorScalarGoodFunctor podTensorScalarGoodComparison
   podTensorReindexGoodComparison
 
-/-- The specified good coefficient transition used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- The natural isomorphism of good complexes between reindexing then scalar extension and
+scalar extension then reindexing, given componentwise by the complex transition `S.complex`. -/
 def podTensorGoodCoefficientTransition
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -187,9 +176,8 @@ def podTensorGoodCoefficientTransition
         apply (integralOperationsGoodComplex l L X).ι.map_injective
         exact (S.complex l E g L ι D D').hom.naturality a.hom)
 
-/-- The specified tensor reindex derived chain used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- The derived reindexing chain map from the reindexed tensor product of good complexes
+`P, Q` to the tensor product of their reindexings. -/
 def podTensorTensorReindexDerivedChain
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -203,9 +191,8 @@ def podTensorTensorReindexDerivedChain
       ((integralOperationsTensorComplexFunctor l E Y).obj (P.obj, Q.obj)) ≫
     DerivedCategory.Q.map (podReindexTensorChain l E g D T P Q)
 
-/-- The specified tensor scalar derived chain used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- The derived scalar chain map from the scalar extension of the tensor product of good
+complexes `P, Q` to the tensor product of their scalar extensions. -/
 def podTensorTensorScalarDerivedChain
     (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
     (ι : E →ₐ[ℚ_[l]] L) (W : Scheme.{u})
@@ -219,9 +206,8 @@ def podTensorTensorScalarDerivedChain
       ((integralOperationsTensorComplexFunctor l E W).obj (P.obj, Q.obj)) ≫
     DerivedCategory.Q.map (scalarTensorChain l E L ι W P.obj Q.obj)
 
-/-- The specified tensor mixed derived chain used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- The derived mixed chain map: the reindexing of the scalar chain followed by the reindexing
+chain at the scalar-extended pair. -/
 def podTensorTensorMixedDerivedChain
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -239,16 +225,13 @@ def podTensorTensorMixedDerivedChain
     podTensorTensorReindexDerivedChain l L g D' T'
       ((podTensorScalarGoodFunctor l E L ι Y).obj P) ((podTensorScalarGoodFunctor l E L ι Y).obj Q)
 
-/-- The specified good constructible used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- The property of a good complex that its image in the derived category is constructible. -/
 def podTensorGoodConstructible (W : Scheme.{u}) :
     ObjectProperty (integralOperationsGoodComplex l E W).FullSubcategory :=
   fun P ↦ sfIntegralConstructible l E W (DerivedCategory.Q.obj P.obj)
 
-/-- The specified good constructible localization used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- The localization functor from constructible good complexes to the constructible derived
+category. -/
 def podTensorGoodConstructibleLocalization (W : Scheme.{u}) :
     (podTensorGoodConstructible l E W).FullSubcategory ⥤ sfIntegralConstructibleCategory l E W :=
   (sfIntegralConstructible l E W).lift
@@ -269,9 +252,8 @@ private theorem goodConstructibleLocalization_essSurj (W : Scheme.{u}) :
     (sfIntegralConstructible l E W).prop_of_iso e.symm M.property
   exact ⟨⟨P, hP⟩, ⟨(sfIntegralConstructible l E W).isoMk e⟩⟩
 
-/-- The specified tensor reindex iso used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- The natural isomorphism, given by `T.tensor`, between the reindexing of a completed tensor
+product of constructible objects and the completed tensor product of their reindexings. -/
 def podTensorTensorReindexIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -285,9 +267,9 @@ def podTensorTensorReindexIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   NatIso.ofComponents (fun M ↦ T.tensor M.1 M.2)
     (by intro M N f; exact _hT _ _ _ _ f.1 f.2)
 
-/-- The specified mixed tensor iso used by the representative descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-coefficient-exact-square-chain-descent). -/
+/-- The natural isomorphism, given by `scalarTensorOrdinary` followed by `T'.tensor`, between the
+scalar extension and reindexing of a completed tensor product of constructible objects and the
+completed tensor product of their scalar extensions and reindexings. -/
 def podTensorMixedTensorIso
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -368,14 +350,8 @@ private theorem exactSquareFactors
   simp only [NatIso.mapHomologicalComplex]
   repeat' erw [Category.assoc]
 
-/-- A commutative square of exact functors lifts a square of complex maps to the
-specified derived functors, including their comparison factors.
-Source: Stacks 05RU; the exact-functor composition and natural-isomorphism factor formulas
-(blueprint: lem-pod-coefficient-exact-square-chain-descent).
-Proof: move the factor for G past c by naturality, combine the three Q-images,
-apply the given chain equation, and separate the Q-images again. The composition
-and natural-isomorphism factor formulas identify the initial factors with the
-specified derived square. Naturality of the factor for I finishes the calculation. -/
+/-- A commutative square `s : F ⋙ G ≅ H ⋙ I` of exact functors lifts a commuting square of
+complex maps to the derived categories, including the derived comparison factors. -/
 theorem podCoefficientExactSquareChain
     {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]

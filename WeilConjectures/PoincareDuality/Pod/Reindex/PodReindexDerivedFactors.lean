@@ -11,8 +11,12 @@ import Mathlib.Tactic.CategoryTheory.Slice
 
 /-! # Exact derived-functor factors and the ordinary compositor
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-reindex-derived-factors).
+The derived compositor of a reindexing family agrees with the exact-functor factor
+comparisons of its constituent functors.
+
+## References
+
+* [Stacks, Tags 015F, 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -76,12 +80,9 @@ private theorem composition_derived_factors
   change _ = (NatTrans.mapHomologicalComplex a.hom (.up ℤ)).app K ≫ 𝟙 _
   exact (Category.comp_id _).symm
 
-/-- The ordinary derived compositor agrees with the exact-functor factors.
-Source: blueprint Steps 1 and 5; Stacks 015F
-(blueprint: lem-pod-reindex-derived-factors).
-Proof: use the factor formulas for deriving a natural isomorphism and a composite
-functor. The homological-complex comparison for the identity is the identity.
-Associativity yields the displayed equation on every complex. -/
+/-- The ordinary derived compositor agrees with the exact-functor factors: on the image of a
+cochain complex `K`, it is computed by the factor comparisons and the localized compositor of
+complexes. -/
 theorem podReindexDerivedFactors
     (A : PodReindexFamily l E)
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]

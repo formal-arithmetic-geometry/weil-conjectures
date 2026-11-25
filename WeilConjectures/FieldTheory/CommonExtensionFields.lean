@@ -14,8 +14,12 @@ import Mathlib.RingTheory.TensorProduct.Nontrivial
 /-!
 # A common extension of two fields
 
-Source: Stacks Project, Fields, Tag 0H7K, `fields-lemma-common-extension-field`
-(blueprint: lem-weil-common-extension-fields).
+We show that two field extensions of `k` embed into a common extension
+(`Field.exists_common_extension`), namely a quotient of `E ⊗[k] F` by a maximal ideal.
+
+## References
+
+* [Stacks Project, Tag 0H7K](https://stacks.math.columbia.edu/tag/0H7K)
 -/
 
 @[expose] public section
@@ -26,17 +30,7 @@ universe u v w
 
 namespace Field
 
-/-- Two extensions `E/k` and `F/k` admit embeddings into a common extension `M/k`.
-Source: Stacks Project, Fields, Tag 0H7K (blueprint: lem-weil-common-extension-fields).
-
-Proof: Form `T = E ⊗[k] F`. The algebra maps from `k` into the field factors are
-injective, so [lem-weil-common-extension-fields-tensor-nontrivial] shows that `T`
-is nontrivial.
-Choose a maximal ideal `I` by [lem-weil-common-extension-fields-maximal-ideal].
-The quotient `M = T/I` is a field by [lem-weil-common-extension-fields-quotient-field].
-Compose the factor maps with the quotient map to obtain `k`-algebra homomorphisms
-`E → M` and `F → M`. Their kernels are proper ideals of fields, since they preserve
-one and `M` is nontrivial. Thus both kernels vanish and both maps are injective. -/
+/-- Two extensions `E/k` and `F/k` admit `k`-embeddings into a common extension `M/k`. -/
 theorem exists_common_extension (k : Type u) (E : Type v) (F : Type w)
     [Field k] [Field E] [Field F] [Algebra k E] [Algebra k F] :
     ∃ (M : Type (max v w)) (_ : Field M) (_ : Algebra k M)

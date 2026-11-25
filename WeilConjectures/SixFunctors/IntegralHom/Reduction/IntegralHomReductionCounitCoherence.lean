@@ -7,8 +7,13 @@ module
 public import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReductionModels
 public import WeilConjectures.SixFunctors.Integral.IntegralHomReductionComparison
 /-! # Coherence of the complex reduction counit
-Source: Stacks Tag 06YY.
-(blueprint: lem-sfb-integral-hom-reduction-counit-coherence)
+
+We identify the transported reduction counit with the Hom reduction complex comparison and show
+that it is natural and invertible at K-flat complexes.
+
+## References
+
+* [Stacks: Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -33,17 +38,14 @@ private noncomputable def complexCounit :
     whiskerLeft ((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ))
       (DerivedCategory.quotientCompQhIso _).hom
 
-/-- Both presentations use the same transported derived counit.
-Source: Stacks 06YY. Proof: the displayed composites are identical.
-(blueprint: lem-sfb-integral-hom-reduction-counit-coherence) -/
+/-- The reduction counit equals the Hom reduction complex comparison: both presentations use
+the same transported derived counit. -/
 theorem reductionCounit_eq_complexComparison
     (P : CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ) :
     reductionCounit l E X D hl n P = homReductionComplexComparison D l hl E X n P := by
   rfl
 
-/-- Naturality of the transported counit on complexes.
-Source: Stacks 06YY. Proof: compose the natural quotient comparisons and derived counit.
-(blueprint: lem-sfb-integral-hom-reduction-counit-coherence) -/
+/-- Naturality of the transported counit on complexes. -/
 theorem reductionCounit_naturality
     {P Q : CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ} (f : P ⟶ Q) :
     (integralDerivedReduction l E X D hl n).map (DerivedCategory.Q.map f) ≫
@@ -52,10 +54,7 @@ theorem reductionCounit_naturality
         (((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).map f) := by
   exact (complexCounit D l hl E X n).naturality f
 
-/-- The transported counit is invertible at K-flat representatives.
-Source: Stacks 06YY. Proof: its four factors are quotient comparisons, the K-flat
-counit isomorphism, and the functor image of a quotient comparison.
-(blueprint: lem-sfb-integral-hom-reduction-counit-coherence) -/
+/-- The transported counit is invertible at K-flat representatives. -/
 theorem reductionCounit_isIso
     (P : CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ)
     (hP : flat.{u, u} X (completedIntegralCommRingSheaf l E X D hl) P) :

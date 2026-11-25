@@ -76,8 +76,7 @@ lemma map_eval_eval₂_sum_C_mul_X_pow {R σ ι : Type*} [CommRing R] [Fintype �
 
 /-- **Tsen's theorem over `k[t]`** (Lang's argument). Over an algebraically closed field `k`, a
 form of degree `d > 0` in more than `d` variables with coefficients in `k[t]` has a nontrivial
-zero in `k[t]`: the coefficients of `G(x(t))` for `x(t)` of degree at most `r` are `d r + r + 1`
-equations without constant term in the `N (r + 1)` coefficients of `x(t)`. -/
+zero in `k[t]`. -/
 theorem exists_ne_zero_eval_eq_zero_of_isHomogeneous_polynomial {k σ : Type*} [Field k]
     [IsAlgClosed k] [Finite σ] {d : ℕ} (G : MvPolynomial σ (Polynomial k))
     (hG : G.IsHomogeneous d) (hd : 0 < d) (hσ : d < Nat.card σ) :
@@ -118,8 +117,7 @@ theorem exists_ne_zero_eval_eq_zero_of_isHomogeneous_polynomial {k σ : Type*} [
 end MvPolynomial
 
 /-- **Tsen's theorem for `k(t)`.** The rational function field over an algebraically closed
-field is quasi-algebraically closed.
-(blueprint: `lemma-cohomology-multiplicative-group--7`) -/
+field is quasi-algebraically closed. -/
 instance RatFunc.isQuasiAlgClosed (k : Type*) [Field k] [IsAlgClosed k] :
     IsQuasiAlgClosed (RatFunc k) where
   exists_ne_zero_and_eval_eq_zero {N d} F hF hd hN := by
@@ -138,8 +136,7 @@ instance RatFunc.isQuasiAlgClosed (k : Type*) [Field k] [IsAlgClosed k] :
 
 /-- **Tsen's theorem.** A field `K` of transcendence degree at most one over an algebraically
 closed field `k` is quasi-algebraically closed. This covers the function field of a curve over
-`k` and all its algebraic extensions.
-(blueprint: `lemma-cohomology-multiplicative-group--7`) -/
+`k` and all its algebraic extensions. -/
 @[stacks 03RD]
 theorem IsQuasiAlgClosed.of_trdeg_le_one {K : Type*} [Field K] (k : Type*) [Field k]
     [IsAlgClosed k] [Algebra k K] (h : Algebra.trdeg k K ≤ 1) : IsQuasiAlgClosed K := by

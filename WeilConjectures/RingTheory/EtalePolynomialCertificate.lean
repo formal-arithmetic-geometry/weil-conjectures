@@ -11,8 +11,12 @@ public import Mathlib.RingTheory.Ideal.Operations
 
 /-! # Finite polynomial certificates for an inverse conormal differential
 
-Source: Stacks Project, Algebra, proof of Tag 07RI.
-(blueprint: def-weil-pbc-etale-polynomial-certificate).
+We define finite polynomial conditions witnessing that the conormal differential of a
+presentation has an inverse.
+
+## References
+
+* Stacks Project, Algebra, proof of Tag 07RI
 -/
 
 @[expose] public section
@@ -23,9 +27,7 @@ namespace Algebra
 
 /-- The finite polynomial conditions for an inverse to the conormal differential.
 The first family expresses a right inverse modulo the relation ideal; the second
-expresses a left inverse on its generating relation classes modulo the ideal square.
-Source: Stacks Project, Algebra, proof of Tag 07RI, lines 47654-47662.
-(blueprint: def-weil-pbc-etale-polynomial-certificate). -/
+expresses a left inverse on its generating relation classes modulo the ideal square. -/
 def EtalePolynomialCertificate {R : Type u} [CommRing R] {n m : ℕ}
     (f : Fin m → MvPolynomial (Fin n) R) : Prop :=
   ∃ c : Fin m → Fin n → MvPolynomial (Fin n) R,

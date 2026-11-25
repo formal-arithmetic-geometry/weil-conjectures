@@ -11,7 +11,10 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingGoodComplex
 
 /-! # Naturality of the normalized restricted-tower comparison
 
-(blueprint: lem-pod-reindexing-restricted-tower-naturality) -/
+## References
+
+* [Stacks: Tag 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -141,15 +144,8 @@ private theorem restricted_eq (S : PodReindexingStrictData l E g)
   exact (hS C n.unop i U.unop x).trans
     (restrictedIso_generators l E g C n.unop i U.unop x).symm
 
-/-- The generator-normalized restricted-tower maps form a natural isomorphism.
-
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 0941. The equality of completed coefficient maps identifies the scalar
-restriction functors. Whisker the inverse-image unit with this identification
-and lift it to complexes. Its section formula agrees with the specified
-restricted generators. Those generators cover every section, so extensionality
-identifies the specified family with the natural lifted unit.
-(blueprint: lem-pod-reindexing-restricted-tower-naturality) -/
+/-- The generator-normalized restricted-tower maps `S.restricted C` are the components of a
+natural isomorphism. -/
 theorem podReindexingRestrictedTower_naturalIso
     (S : PodReindexingStrictData l E g) (hS : S.RestrictedGenerators l E g) :
     ∃ e : ((coefficientSequenceRestriction l E Y).mapHomologicalComplex (.up ℤ) ⋙
