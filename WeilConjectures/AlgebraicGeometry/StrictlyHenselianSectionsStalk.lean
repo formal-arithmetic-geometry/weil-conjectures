@@ -28,7 +28,6 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.style.haveILetI false in
 set_option backward.isDefEq.respectTransparency false in
 /-- The pointed form of the section construction: an étale scheme over a strictly henselian
 local ring, with a geometric point over the closed point, has a section through that point. -/
@@ -40,7 +39,7 @@ private theorem strictlyHenselianSections_pointedSection
     (a : Spec (.of Ω) ⟶ X) (t : Spec (.of Ω) ⟶ Spec (.of R))
     (hat : a ≫ f = t) (ht : t default = IsLocalRing.closedPoint R) :
     ∃ σ : Spec (.of R) ⟶ X, σ ≫ f = 𝟙 _ ∧ t ≫ σ = a := by
-  letI : IsStrictlyHenselianLocalRing R := hR
+  let : IsStrictlyHenselianLocalRing R := hR
   obtain ⟨B, j, hj, haj, _⟩ :=
     exists_affine_mem_range_and_range_subset (x := a default) (U := ⊤) (by simp)
   let : IsOpenImmersion j := hj

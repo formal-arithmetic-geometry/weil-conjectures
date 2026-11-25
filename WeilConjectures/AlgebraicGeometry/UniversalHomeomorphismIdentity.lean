@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 * [Stacks, Tag 03SI]
 -/
 
-set_option linter.style.haveILetI false
 @[expose] public section
 universe u w
 open CategoryTheory CategoryTheory.Limits

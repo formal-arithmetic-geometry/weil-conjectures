@@ -18,7 +18,6 @@ Source: Stacks Project, Tags 07A4, 0FPQ and 0FPT.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 4096
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory.ConstantModuleDerivedProjection
@@ -132,7 +131,7 @@ theorem exact_monoidal_normalization
     (G : B ⥤ E) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesColimitsOfSize.{0, 0} G] [G.PreservesFlat] (m : G.Monoidal) :
     ∃ n : G.mapDerivedCategory.Monoidal, TensorNormalization B E G m n := by
-  letI := m
+  let := m
   let W := HomologicalComplex.quasiIso B (.up ℤ)
   let S : ObjectProperty (CochainComplex B ℤ) := W.kFlat ⊓
     (HomologicalComplex.quasiIso E (.up ℤ)).kFlat.inverseImage

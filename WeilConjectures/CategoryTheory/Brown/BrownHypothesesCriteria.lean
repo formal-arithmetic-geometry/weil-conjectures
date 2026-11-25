@@ -28,14 +28,6 @@ separate from the unresolved arbitrary-field assertion in `BrownHypotheses`.
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.all false
-set_option linter.style.longLine false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedVariables false
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
-set_option linter.unusedSectionVars false
-set_option linter.checkUnivs false
 
 universe u
 

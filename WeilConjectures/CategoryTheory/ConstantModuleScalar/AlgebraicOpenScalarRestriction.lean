@@ -252,7 +252,6 @@ private theorem supported_isIso {C : Type u} [Category.{v} C]
   have : IsIso g := (Sheaf.isLocallyBijective_iff_isIso g).mp ⟨hi, hs⟩
   exact isIso_of_reflects_iso f (moduleSets R)
 
-set_option linter.unusedVariables false in
 /-- The ordinary open-extension mate of the underlying restriction square is invertible.
 Source: Stacks 03DI, 03DJ and 03CZ.
 -/
@@ -267,7 +266,7 @@ theorem open_restriction_mate_isIso
     (F : Sheaf J (Type r) ⥤ Sheaf K (Type r))
     (LA : SheafOfModules.AlgebraicInverseImage F (constantRing J A) (constantRing K A))
     (LB : SheafOfModules.AlgebraicInverseImage F (constantRing J B) (constantRing K B))
-    (P : Sheaf J (Type r)) (hP : IsSubterminal P)
+    (P : Sheaf J (Type r)) (_hP : IsSubterminal P)
     (e : Sheaf K (Type r) ≌ Over P) (he : F ⋙ e.functor ≅ Over.star P)
     (EA : modules (constantRing K A) ⥤ modules (constantRing J A))
     (EB : modules (constantRing K B) ⥤ modules (constantRing J B))
@@ -277,7 +276,7 @@ theorem open_restriction_mate_isIso
         (CommRingCat.ofHom (algebraMap A B))) ⋙ LA.modules ≅
       LB.modules ⋙ restriction ((constantSheaf K CommRingCat).map
         (CommRingCat.ofHom (algebraMap A B))))
-    (h : ∀ M, (underlying (constantRing K A)).map (d.hom.app M) =
+    (_h : ∀ M, (underlying (constantRing K A)).map (d.hom.app M) =
       LA.moduleUnderlying.hom.app
         ((restriction ((constantSheaf J CommRingCat).map
           (CommRingCat.ofHom (algebraMap A B)))).obj M) ≫ LB.moduleUnderlying.inv.app M) :

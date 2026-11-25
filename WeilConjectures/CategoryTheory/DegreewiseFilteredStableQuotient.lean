@@ -60,7 +60,6 @@ private theorem stableBoundaries_le_cycles
   apply Functor.monotone
   exact sup_le_sup_right (inf_le_inf_left _ h) _
 
-set_option linter.unusedVariables false in
 /-- The stationary cycle/boundary quotient is the graded image filtration on cohomology.
 Only degreewise finiteness is needed; no spectral sequence is part of this statement.
 Source: Stacks Project, Tags 012Q (stable subquotients),
@@ -77,7 +76,7 @@ theorem degreewiseFiltered_stable_quotient
       (∀ p n : ℤ, (H n).step p =
         (Subobject.«exists» (c n).hom).obj
           (imageSubobject (HomologicalComplex.homologyMap (L.step p).arrow n))) ∧
-      (∀ p n : ℤ, ∃ (t : ℤ) (ht : 1 ≤ t), ∀ (r : ℤ) (hr : t ≤ r),
+      (∀ p n : ℤ, ∃ (t : ℤ) (_ht : 1 ≤ t), ∀ (r : ℤ) (_hr : t ≤ r),
         ∃ hBZ : L.complexBoundaries p n r ≤ L.complexCycles p n r,
           Nonempty (cokernel (Subobject.ofLE _ _ hBZ) ≅ (H n).gradedPiece p)) := by
   let H : ∀ n : ℤ, DecreasingFiltration (Y n) :=

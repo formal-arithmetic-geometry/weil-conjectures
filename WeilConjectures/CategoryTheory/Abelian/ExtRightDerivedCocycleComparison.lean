@@ -39,7 +39,6 @@ private noncomputable def representedHomComplexIso
           (δ i j (Cochain.fromSingleMk a (zero_add i))))
       simp only [Cochain.δ_fromSingleMk, zero_add, Cochain.fromSingleEquiv_fromSingleMk])
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 open CochainComplex HomComplex in
 /-- The resolution-local Ext comparison takes a represented cocycle to its homology class.
@@ -53,7 +52,7 @@ private theorem exists_ext_resolution_cocycle_iso
         ((H.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).homology p,
       ∀ (s : A ⟶ I.cocomplex.X p) (hs : s ≫ I.cocomplex.d p (p + 1) = 0)
         (c : ((H.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).cycles p)
-        (hc : ((H.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).iCycles p c =
+        (_hc : ((H.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).iCycles p c =
           e.hom.app (I.cocomplex.X p) s),
         t.hom (I.extMk s (p + 1) rfl hs) =
           ((H.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).homologyπ p c := by
@@ -187,7 +186,6 @@ private lemma resolution_comparison_naturality
   rw [InjectiveResolution.extMk_comp_mk₀ s (p + 1) rfl hs φ, hJ _ _ _ hc', hI _ _ _ hc]
   exact (ConcreteCategory.congr_hom (HomologicalComplex.homologyπ_naturality ψ p) c).symm
 
-set_option linter.unusedVariables false in
 /-- A represented additive functor has an Ext comparison normalized on every resolution.
 
 Source: Stacks Project, Derived Categories, Tag 06XR, Lemma 13.27.2; Tag 013P. -/
@@ -199,7 +197,7 @@ theorem exists_ext_rightDerived_cocycle_comparison
       ∀ (Y : C) (I : InjectiveResolution Y) (p : ℕ)
         (s : A ⟶ I.cocomplex.X p) (hs : s ≫ I.cocomplex.d p (p + 1) = 0)
         (c : ((H.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).cycles p)
-        (hc : ((H.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).iCycles p c =
+        (_hc : ((H.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).iCycles p c =
           e.hom.app (I.cocomplex.X p) s),
         (I.isoRightDerivedObj H p).hom ((x p).inv.app Y (I.extMk s (p + 1) rfl hs)) =
           ((H.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).homologyπ p c := by

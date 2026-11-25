@@ -24,7 +24,6 @@ Generic comparison of constant scalar realizations along ordinary scalar towers.
 set_option autoImplicit false
 -- This extracted implementation deliberately adds no public API.
 set_option linter.privateModule false
-set_option linter.unusedSectionVars false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite SheafOfModules
 namespace AlgebraicGeometry.ProEtale.RationalStratum
@@ -52,6 +51,8 @@ private abbrev vectorUnit (N : ModuleCat.{u + 1} R) (x : N) : vectorSpace (f := 
 private def Compatible : Prop := ∀ (U : Cᵒᵖ) (r : R),
   ((scalarRingUnit.{u + 1, u} J R B σ).app U).hom r =
     ((scalarRingUnit.{u + 1, u} J T B τ).app U).hom (f r)
+omit [J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
+  [HasWeakSheafify J RingCat.{u + 1}] in
 private theorem constantScalar_smul (Q : Type (u + 1)) [CommRing Q]
     (σ : (constantSheaf J CommRingCat.{u + 1}).obj
       (CommRingCat.of Q) ⟶ B)
@@ -150,6 +151,7 @@ private def scalarForward
     (σ) N _
     (scalarForwardRaw (J := J) (f := f) (σ := σ) (τ := τ) hcompat N)
 
+omit [HasWeakSheafify J RingCat.{u + 1}] in
 private theorem scalarForward_generator
     (hcompat : Compatible (J := J) (R := R) (T := T) (B := B)
       (f := f) (σ := σ) (τ := τ)) (N : ModuleCat.{u + 1} R)
@@ -202,6 +204,8 @@ private def backwardLinear
   ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{u + 1, u + 1, u + 1}
     (f) (backwardUnit (J := J) (f := f) (σ := σ) (τ := τ) hcompat N U)
 
+omit [J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
+  [HasWeakSheafify J RingCat.{u + 1}] in
 private theorem backwardLinear_unit
     (hcompat : Compatible (J := J) (R := R) (T := T) (B := B)
       (f := f) (σ := σ) (τ := τ)) (N : ModuleCat.{u + 1} R)
@@ -248,6 +252,7 @@ private def scalarBackward
   scalarLift J T (B)
     (τ) (vectorSpace (f := f) N) _ (scalarBackwardRaw (J := J) (f := f) (σ := σ) (τ := τ) hcompat N)
 
+omit [HasWeakSheafify J RingCat.{u + 1}] in
 private theorem scalarBackward_generator
     (hcompat : Compatible (J := J) (R := R) (T := T) (B := B)
       (f := f) (σ := σ) (τ := τ)) (N : ModuleCat.{u + 1} R)
@@ -271,6 +276,7 @@ private theorem scalarBackward_generator
       ((constantModuleHomFunctor J R).obj N)
       U a 1 ((constantModuleHomUnit J R N).app U x))
 
+omit [HasWeakSheafify J RingCat.{u + 1}] in
 private theorem generator_add (Q : Type (u + 1)) [CommRing Q]
     (σ : (constantSheaf J CommRingCat.{u + 1}).obj
       (CommRingCat.of Q) ⟶ B)
@@ -358,12 +364,14 @@ private def scalarModelIso
     rw [mul_one] at hs
     rw [← hs, map_smul, h]
 
+omit [HasWeakSheafify J RingCat.{u + 1}] in
 private theorem scalarModelIso_hom
     (hcompat : Compatible (J := J) (R := R) (T := T) (B := B)
       (f := f) (σ := σ) (τ := τ)) (N : ModuleCat.{u + 1} R) :
     (scalarModelIso (J := J) (f := f) (σ := σ) (τ := τ) hcompat N).hom =
       scalarForward (J := J) (f := f) (σ := σ) (τ := τ) hcompat N := rfl
 
+omit [HasWeakSheafify J RingCat.{u + 1}] in
 private theorem scalarModelIso_natural
     (hcompat : Compatible (J := J) (f := f) (σ := σ) (τ := τ))
     {N N' : ModuleCat.{u + 1} R} (g : N ⟶ N') :
@@ -382,6 +390,7 @@ private theorem scalarModelIso_natural
     scalarMap_generator]
   rfl
 
+omit [HasWeakSheafify J RingCat.{u + 1}] in
 /-- Constant scalar realization commutes with an ordinary scalar tower, naturally
 and with its prescribed constant generators. Stacks Project, Tags 03EK and 0GMW;
 Bhatt--Scholze, Proposition 6.8.14(2).
