@@ -17,8 +17,19 @@ import Mathlib.LinearAlgebra.TensorProduct.Quotient
 /-!
 # Flatness of completed flat modules
 
-Source: literature/stacks-project/more-algebra.tex, Lemma Tag 0AGW (lemma-flat-after-completion).
-(blueprint: lem-weil-pbc-flat-module-completion-flat)
+The adic completion of a flat module over a Noetherian ring is flat over the completed ring.
+
+## Implementation details
+
+With `A` the completion of `R` and `J = I A`, evaluation identifies `A / J ^ n` with `R / I ^ n`
+and the quotient of the completed module by `J ^ n` with `M / I ^ n M`, which is flat over
+`R / I ^ n` by base change. The completed module is the inverse limit of these flat quotients
+with surjective transition maps, hence flat.
+
+## References
+
+* [Stacks, Tag 0AGW]
+* [Stacks, Tag 0912]
 -/
 
 @[expose] public section
@@ -83,22 +94,7 @@ namespace AdicCompletion
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The quotients of a completed flat module are flat over the corresponding quotients
-of the completed ring.
-
-Source: literature/stacks-project/more-algebra.tex, Lemma Tag 0AGW,
-Steps 1--3 of the specialized proof for a flat module over a Noetherian ring.
-(blueprint: lem-weil-pbc-flat-module-completion-flat)
-
-Proof: Put A = AdicCompletion I R and J = I A. Finite generation of I identifies
-A/J^n with R/I^n, by the surjective evaluation map whose kernel is I^n A = J^n.
-Similarly, evaluation identifies (AdicCompletion I M)/J^n(AdicCompletion I M) with
-M/I^n M; the kernel formula holds for arbitrary M when I is finitely generated.
-The scalar tower identifies the R-submodule I^n(AdicCompletion I M) with the restriction
-of J^n(AdicCompletion I M). On representatives the quotient actions agree because
-completion scalar multiplication is componentwise. Flat base change identifies M/I^n M
-with the flat R/I^n-module (R/I^n) tensor M. Transport this flatness along the ring and
-module identifications above. For n = 0 both quotient rings and modules are zero, so
-this argument also covers that case. -/
+of the completed ring. -/
 private theorem flat_completed_quotients
     (R : Type u) [CommRing R] (I : Ideal R) (M : Type v) [AddCommGroup M]
     [Module R M] [IsNoetherianRing R] [Module.Flat R M] :
@@ -174,16 +170,6 @@ end AdicCompletion
 namespace Module
 
 /-- The adic completion of a flat module over a Noetherian ring is flat over the completed ring.
-
-Source: literature/stacks-project/more-algebra.tex, Lemma Tag 0AGW (lemma-flat-after-completion).
-(blueprint: lem-weil-pbc-flat-module-completion-flat)
-
-Proof: For every positive `n`, flat base change identifies `M / I ^ n M` with a flat
-`R / I ^ n`-module. The completion of a Noetherian ring is Noetherian, and its quotient by
-the `n`-th power of the extended ideal is `R / I ^ n`. Thus these quotients, viewed as
-modules over the completed ring, are flat with surjective transition maps. The inverse
-limit flatness lemma (Tag 0912) then gives flatness of `AdicCompletion I M` over
-`AdicCompletion I R`, with the componentwise module structure.
 -/
 theorem flat_adicCompletion
     (R : Type u) [CommRing R] (I : Ideal R) (M : Type v) [AddCommGroup M]

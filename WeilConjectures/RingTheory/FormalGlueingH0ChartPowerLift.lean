@@ -15,8 +15,25 @@ import WeilConjectures.RingTheory.FormalGlueingData
 /-!
 # Clearing denominators of a formal glueing chart section
 
-Source: Stacks Project, More on Algebra, Lemmas 05EQ and 05EP in the proof of
-Proposition 05ER (blueprint: lem-weil-pbc-formal-glueing-H0-chart-power-lift).
+Every element of a chart of a formal glueing datum becomes, after multiplication by a power of
+the chart parameter, the chart coordinate of a compatible section.
+
+## Implementation details
+
+Put `u = f i`. After localizing the ambient product of the prime module and all charts at `u`,
+the tuple with prime coordinate `(X.alpha i).symm (1 ⊗ x)` and chart coordinates
+`X.alpha_overlap i j (x/1)` satisfies all compatibility equations, by the square and cocycle
+conditions; the cocycle with all indices equal to `i` shows that the self-overlap is the
+identity. Clearing one common denominator and then multiplying by a further power of `u` that
+kills the finitely many compatibility differences gives a compatible section. Since `u` is a
+unit on the `i`-th chart, its `i`-th coordinate is `u ^ n • x`.
+
+## References
+
+* [Stacks, Tag 05EL]
+* [Stacks, Tag 05EQ]
+* [Stacks, Tag 05EP]
+* [Stacks, Tag 05ER]
 -/
 
 @[expose] public section
@@ -81,34 +98,8 @@ private theorem self_overlap {t : ℕ} (φ : R →+* S) (f : Fin t → R)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A chart section becomes the projection of a global compatible section after
-multiplication by a power of the chart parameter.
-Source: Stacks Project, More on Algebra, Remark 05EL, Lemmas 05EQ and 05EP,
-and Proposition 05ER, second paragraph
-(blueprint: lem-weil-pbc-formal-glueing-H0-chart-power-lift).
-
-Proof:
-Put `u = f i`. In the localization of the ambient product of the prime module and
-all chart modules at `u`, form a tuple with prime coordinate
-`(X.alpha i).symm (1 ⊗ x)` and chart coordinate `j` equal to
-`X.alpha_overlap i j (x/1)`. The `i` chart coordinate is `x/1`: the cocycle with
-all indices `i` implies that the invertible self-overlap is idempotent, hence the
-identity, under the canonical identifications of repeated localization. The square
-condition, evaluated on the prime coordinate, proves each localized prime/chart
-compatibility equation. The cocycle, evaluated on `(x/1)/1`, proves each localized
-chart/chart equation. Use the canonical swap and tensor comparison fraction
-formulas of the canonical-maps lemma for these identifications.
-There are only finitely many coordinates, so write the tuple with one common
-power `u^a` as denominator, taking the maximum of the individual exponents. Its
-numerator is a tuple in the original ambient product. Each of the finitely many
-compatibility differences is zero after localization at `u`, so some power of `u`
-kills it. Take one exponent `b` at least as large as all these exponents and multiply
-the numerator by `u^b`. All the original compatibility equations now hold, so this
-numerator defines an element `h` of `h0`. Its localized `i` coordinate is
-`u^(a+b) • (x/1)`. The map from the `i` chart to its own localization is injective,
-because `u` is already a unit on that chart. Consequently the original coordinate
-of `h` is `u^(a+b) • x`; choose `n = a+b`.
-This works also when `u = 0`: its chart is the zero module. The presence of `i`
-excludes the empty index set; zero modules and zero rings cause no exception. -/
+multiplication by a power of the chart parameter: for every `x` in the `i`-th chart there are
+`n` and a compatible section `h` whose `i`-th coordinate is `(f i) ^ n • x`. -/
 theorem h0_chart_power_lift {t : ℕ} (φ : R →+* S) (hflat : φ.Flat)
     (f : Fin t → R) (X : Data.{u, v, w} φ f) (i : Fin t)
     (x : piece (f i) (X.M i)) :

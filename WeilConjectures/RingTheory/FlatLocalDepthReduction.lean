@@ -19,8 +19,28 @@ import WeilConjectures.RingTheory.DepthOverQuotientRing
 /-!
 # Quotients reducing the depth induction for a flat local map
 
-Source: Stacks Project, Algebra, Tag 0338, the two positive-depth cases of the proof.
-(blueprint: lem-weil-pbc-flat-local-depth-reduction).
+For a flat local homomorphism `R → S` of Noetherian local rings with positive
+`depth R + depth (S / m_R S)`, we construct compatible proper quotients `R / J → S / K` that
+remain flat and local and on which the depth of the target and the source-plus-fibre depth sum
+both drop by one. These are the two inductive cases of the flat local depth formula.
+
+## Implementation details
+
+If the closed fibre `F = S / m_R S` has positive depth, a regular element of `m_F` is lifted
+to `y ∈ m_S`; the local injectivity criterion makes `y` regular on `S` and `S / y S` flat over
+`R`, and we take `J = 0`, `K = (y)`. Otherwise `depth R` is positive, a regular element
+`x ∈ m_R` is chosen, and we take `J = (x)`, `K = (φ x)`, using flat base change along
+`R → R / J`. In both cases the new closed fibre is identified by double quotient
+isomorphisms, and the depth drops come from the regular-element depth drop and change of
+rings. Quotient-ring identifications preserve depth by transporting regular sequences.
+
+## References
+
+* [Stacks, Tag 0338], the two positive-depth cases of the proof
+* [Stacks, Tag 00ME]
+* [Stacks, Tag 07T8]
+* [Stacks, Tag 090R]
+* [Stacks, Tag 0AUK]
 -/
 
 @[expose] public section
@@ -100,20 +120,7 @@ private theorem depth_principal_quotient (A : Type*) [CommRing A]
   omega
 
 /-- Lifting a regular closed-fibre element gives a flat principal quotient and
-identifies its new closed fibre, without any assertion about depth.
-Source: Stacks Project, Algebra, Tag 0338, second proof paragraph, with M = R, N = S;
-local injectivity criterion Tag 00ME; double quotient identifications.
-(blueprint: lem-weil-pbc-flat-local-depth-reduction).
-
-Proof: Lift x along S → F = S/m_R S. The inverse image of m_F is m_S, so its
-lift y belongs to m_S. Multiplication by y on S reduces to multiplication by x
-on F. Apply flat_mod_injective to this multiplication map: y is S-regular and
-S/yS is R-flat. Set J = 0, K = (y). The map ψ is the composite of the canonical
-isomorphism R/0 → R with R → S/K. Both quotient rings are local and Noetherian,
-and ψ is local since the inverse image of their maximal ideals is the maximal
-ideal of R/0. The image of m_(R/0) in S/K is the image of m_R S. Thus the new
-closed fibre is S/(m_R S + (y)), canonically isomorphic to F/(x) by the double
-quotient theorem. All maps commute on representatives. -/
+identifies its new closed fibre, without any assertion about depth. -/
 private theorem exists_fibre_regular_flat_quotients
     {R : Type u} {S : Type v} [CommRing R] [CommRing S]
     [IsNoetherianRing R] [IsNoetherianRing S] [IsLocalRing R] [IsLocalRing S]
@@ -229,21 +236,7 @@ private theorem exists_fibre_regular_flat_quotients
 
 
 /-- A principal quotient by a source element preserves flatness and the closed fibre.
-The regularity assumption concerns the source element, not a depth formula.
-Source: Stacks Project, Algebra, Tag 0338, final proof paragraph with M = R, N = S;
-flat base change of principal quotients and Tag 07T8.
-(blueprint: lem-weil-pbc-flat-local-depth-reduction).
-
-Proof: Set J = (x), K = (φ(x)). The local map sends x into m_S, so both ideals
-are proper. Multiplication by x is injective on R; tensoring with the flat
-R-module S shows multiplication by φ(x) is injective on S. Equivalently use
-annihilator_element_flat_base_change. The induced quotient map ψ is local:
-its maximal ideals are the images of m_R and m_S, and their inverse image
-relation follows from locality of φ. Base change of R → S along R → R/J
-identifies (R/J) ⊗[R] S with S/K and gives flatness of ψ. The ideal K lies in
-m_R S, so quotienting S/K by the image of m_(R/J) gives S/m_R S, by the
-third isomorphism theorem. This ring is local by hypothesis; transport its
-local structure to the new fibre. The square commutes on representatives. -/
+The regularity assumption concerns the source element, not a depth formula. -/
 private theorem exists_source_regular_flat_quotients
     {R : Type u} {S : Type v} [CommRing R] [CommRing S]
     [IsNoetherianRing R] [IsNoetherianRing S] [IsLocalRing R] [IsLocalRing S]
@@ -333,32 +326,7 @@ private theorem exists_source_regular_flat_quotients
 -- Preserve the existing existential proof-binder name in the public signature.
 set_option linter.unusedVariables false in
 /-- A positive source-plus-fibre depth sum admits compatible proper quotients for
-which both target depth and the source-plus-fibre depth sum decrease by one.
-Source: Stacks Project, Algebra, Tag 0338, proof, second and third paragraphs,
-specialized to the modules `M = R` and `N = S`
-(blueprint: lem-weil-pbc-flat-local-depth-reduction).
-
-Proof: Write F = S/m_R S. If depth(F) is positive, choose the first element of a
-positive-length regular sequence in m_F, and lift it to f in m_S. The local
-injectivity criterion (Tag 00ME, `flat_mod_injective`) applied to multiplication by
-f on S shows that f is S-regular and S/fS is R-flat. Take J = 0 and K = (f), with
-the induced local map R/J → S/K. Its fibre is F/(f mod m_R S). The two applications
-of the regular-element depth drop (Tag 090R) to S and F, followed by change of
-rings (Tag 0AUK), give the two displayed successor equalities. Here R/0 has the
-same depth as R, as is seen by transporting regular sequences along R/0 ≃ R.
-
-If depth(F) is zero, positive sum forces depth(R) positive. Choose the first term
-f of a positive-length regular sequence in m_R. Mathlib flat base change of
-regular multiplication (`IsSMulRegular.of_flat`) makes φ(f) S-regular. Take
-J = (f), K = (φ(f)), and the induced map
-R/J → S/K. This map is flat by flat base change along R → R/J: its target is
-(R/J) ⊗[R] S. Both ideals are contained in the respective maximal ideals, so the
-quotients are nonzero Noetherian local rings and their induced map is local.
-Its closed fibre is F, because φ(f) already belongs to m_R S. Apply Tag 090R and
-Tag 0AUK to R and S to get the two equalities. In either case the quotient maps
-commute with φ, as is checked on representatives. Quotient-ring identifications
-preserve depth by transporting the regular sequences in the depth definition.
-No depth formula for any flat local map is used in this construction. -/
+which both target depth and the source-plus-fibre depth sum decrease by one. -/
 theorem exists_depth_reducing_flat_local_quotients {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] [IsNoetherianRing R] [IsNoetherianRing S]
     [IsLocalRing R] [IsLocalRing S] (φ : R →+* S) [IsLocalHom φ] (hflat : φ.Flat)

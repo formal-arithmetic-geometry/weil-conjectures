@@ -22,8 +22,26 @@ import WeilConjectures.Mathlib.RingTheory.Filtration
 /-!
 # Another variant of the local criterion of flatness
 
-Source: Stacks Project, Algebra, Tag 00MO, with the ideal-tensor description of Tor
-in Tag 00M6 (blueprint: lem-weil-pbc-flat-another-variant-local-criterion).
+For a commutative square of local homomorphisms of Noetherian local rings in which `S'` is a
+localization of `S ⊗[R] R'`, a finite `S`-module `M` whose quotient `M / IM` is flat over `R / I`
+and whose multiplication kernel `I ⊗[R] M → M` dies in the base change has `S' ⊗[S] M` flat
+over `R'`.
+
+## Implementation details
+
+The algebra maps are the four maps of the square, and the scalar towers express its
+commutativity. `M / IM` is represented by `(R ⧸ I) ⊗[R] M`, canonically isomorphic to it via
+`TensorProduct.quotTensorEquivQuotSMul`, and `S' ⊗[S] M` plays the role of `M ⊗[S] S'`.
+
+The proof identifies `M' = S' ⊗[S] M` with a localization of `R' ⊗[R] M`, shows that
+`M' / I'M'` is flat over `R' / I'` by base change, and that the multiplication kernel for `M'`
+is a localization of a quotient of the base change of the original kernel, hence zero by the
+hypothesis on `θ`. The variant of the local criterion then applies.
+
+## References
+
+* [Stacks, Tag 00MO]
+* [Stacks, Tag 00M6]
 -/
 
 @[expose] public section
@@ -34,39 +52,13 @@ open scoped TensorProduct
 
 namespace Module
 
-/-- The local criterion after a localization of base change, Stacks Project, Algebra,
-Tag 00MO (blueprint: lem-weil-pbc-flat-another-variant-local-criterion).
+/-- The local criterion after a localization of base change: let `S'` be a localization of
+`S ⊗[R] R'` and `M` a finite `S`-module. If `M / IM` is flat over `R / I` and the map `θ`
+induced by `I ⊗[R] M → I R' ⊗[R'] (S' ⊗[S] M)` kills the kernel of multiplication
+`I ⊗[R] M → M`, then `S' ⊗[S] M` is flat over `R'`.
 
-The algebra maps are the four maps of the square, and the scalar towers express its
-commutativity. The quotient is represented by `(R ⧸ I) ⊗[R] M`, canonically `M / IM`
-via `TensorProduct.quotTensorEquivQuotSMul`. Tensor symmetry identifies `S' ⊗[S] M`
-with the node's `M ⊗[S] S'`. The additive map `θ` is specified on all pure tensors;
-these values uniquely determine the canonical map, so no choice of map is imposed.
-
-Proof (Tag 00MO, with Tag 00M6):
-1. Put `A = S ⊗[R] R'` and `N = R' ⊗[R] M`. Tensor cancellation
-   (`lem-weil-pbc-module-tensor-cancel-base-change`) identifies `M'` with the localization
-   of `N` at `W`. Images of a finite set of generators of `M` generate `M'` over `S'`.
-2. Tensor quotient base change (`lem-weil-pbc-tensor-quotient-base-change`) identifies
-   `R'/I'` with the base change of `R/I`. Flat module base change
-   (`lem-weil-pbc-flat-module-base-change`) makes `(M/IM) ⊗[R/I] (R'/I')` flat.
-   The quotient tensor relations (`lem-weil-pbc-tensor-over-quotient-ring`) identify
-   this module with `N/I'N`.
-3. The Tor surjections `lem-weil-pbc-tor-one-surjective-flat-middle` and
-   `lem-weil-pbc-tor-one-surjective-change-rings`, together with
-   `lem-weil-pbc-tor-ideal-kernel-naturality`, identify a surjection from the base
-   change of the original multiplication kernel onto the multiplication kernel for `N`.
-   The original kernel is annihilated by `I`, by `def-weil-pbc-tor-modules` and
-   `lem-weil-pbc-tensor-over-quotient-ring`.
-4. Localization is exact (`lem-weil-pbc-localization-module-exact`). Its compatibility
-   with tensor products (`lem-weil-pbc-localization-tensor-over-base`) identifies the
-   localized kernel with the multiplication kernel for `M'`. The surjection in step 3
-   maps each generator to a scalar multiple of `θ(k)`, zero by the kernel hypothesis.
-   Thus this localized kernel vanishes.
-5. The same exactness and tensor compatibility make `M'/I'M'` flat over `R'/I'`.
-   Locality implies `I'` is proper. Apply `lem-weil-pbc-flat-variant-local-criterion`
-   to the finite `S'`-module `M'`, its flat quotient, and its zero multiplication kernel.
--/
+The quotient is represented by `(R ⧸ I) ⊗[R] M`, and `θ` is specified on pure tensors, which
+determines it uniquely. -/
 theorem flat_of_local_criterion_baseChange
     {R : Type u} {S : Type v} {R' : Type w} {S' : Type z}
     [CommRing R] [CommRing S] [CommRing R'] [CommRing S']

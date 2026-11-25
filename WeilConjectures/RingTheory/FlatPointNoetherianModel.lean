@@ -18,8 +18,22 @@ import WeilConjectures.RingTheory.IntegerApproximationFlatPointStage
 /-!
 # Noetherian approximation at a flat point
 
-Source: Stacks Project, Algebra, Theorem Tag 00RC, reduction to finite-type integer models.
-(blueprint: lem-weil-pbc-flat-point-noetherian-model)
+If a finitely presented module `M` over a finitely presented `R`-algebra `S` is flat over `R`
+at a prime `q` of `S`, then the data has a Noetherian model (finite type over `ℤ`) that is flat
+at the contraction of `q`.
+
+## Implementation details
+
+The data is written as a limit of finite type integer models. After localizing the systems at
+the contracted primes, the localized module colimit is `M_q`; the local criterion along a
+filtered system then gives a stage flat at the contracted prime. If the input universes
+differ, everything is lifted to a common universe and the conclusion transported back.
+
+## References
+
+* [Stacks, Tag 00RC], reduction to finite-type integer models
+* [Stacks, Tag 00R1]
+* [Stacks, Tag 00R6]
 -/
 
 @[expose] public section
@@ -30,34 +44,11 @@ open scoped TensorProduct
 
 namespace Module
 
-/-- A flat point of a finitely presented module descends to a Noetherian model.
+/-- A flat point of a finitely presented module descends to a Noetherian model: if `M_q` is
+flat over `R`, then `R → S` and `M` are base changes of a finitely presented model `A → B`, `N`
+over a finite type `ℤ`-algebra `A` with `N` flat at the contraction of `q`.
 
-Source: Stacks Project, Algebra, Theorem Tag 00RC, first reduction paragraph, using
-Tags 00R1 and 00R6. (blueprint: lem-weil-pbc-flat-point-noetherian-model)
-
-Proof:
-1. Apply `Algebra.limitModuleFinitePresentation` (00R1). If the input universes differ,
-   lift the rings and module to a common universe and transport the conclusion back.
-   Contract the given prime and its inverse image in R to every stage.
-2. Localize the two ring systems and the module system at those contracted primes.
-   Localization commutes with the ring colimits. A module fraction comes from a common
-   stage; an equality of fractions is witnessed by a multiplier outside the prime and
-   an equality which holds at a later stage. Thus the localized module colimit is M_q.
-3. The stage rings are Noetherian, since they are finite type over the integers; their
-   localizations are Noetherian local rings. The localized modules are finite. The
-   canonical tensor base-change isomorphisms of 00R1, localized, give the ring
-   localization and module base-change hypotheses of `RingTheory.exists_flat_stage`.
-   All transition maps are local, because the later primes contract to the earlier ones.
-4. Flatness over R is equivalent to flatness over its localization at the inverse image
-   of q. Apply 00R6 to choose a stage flat at the contracted prime; flatness over the
-   localized stage base implies flatness over that stage base.
-5. Take A, B, N to be this unlocalized stage. The limit base-change isomorphisms of 00R1
-   give the pushout A -> B, R -> S and the S-linear equivalence S tensor_B N = M.
-   These are the canonical algebra structures and restricted module actions, hence the
-   scalar towers commute. This proves precisely the displayed model properties.
-
-This statement supplies a model and flatness at one contracted point; it supplies no
-flat neighborhood and makes no claim that a flat point remains flat after base change. -/
+This gives flatness at one contracted point only, not a flat neighbourhood. -/
 theorem exists_noetherian_model_flat_at_prime
     {R : Type u} {S : Type v} {M : Type w}
     [CommRing R] [CommRing S] [Algebra R S] [AddCommGroup M]

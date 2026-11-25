@@ -15,8 +15,25 @@ import WeilConjectures.Algebra.FlatTorIdealCriterion
 import WeilConjectures.Algebra.TorDimensionShiftFree
 
 /-! # Projective dimension from a Tor bound for finite modules
-Source: Stacks Project, Tags 00M5 and 058R, dimension shifting in Tag 00S2.
-(blueprint: lem-pc-finite-projective-dimension-of-tor-bound)
+
+A finite module over a Noetherian ring whose `Tor_i` vanish for `i > d` has projective
+dimension at most `d`.
+
+## Main results
+
+* `ModuleCat.finite_hasProjectiveDimensionLE_of_tor_bound`
+
+## Implementation details
+
+The proof is by induction on `d`. For `d = 0` the module is flat by the ideal criterion and
+finitely presented by Noetherianity, hence projective. For the successor step, the kernel of a
+finite free presentation is finite and has Tor bound one less by dimension shifting.
+
+## References
+
+* [Stacks, Tag 00M5]
+* [Stacks, Tag 058R]
+* [Stacks, Tag 00S2] (dimension shifting)
 -/
 
 @[expose] public section
@@ -27,15 +44,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace ModuleCat
 
-/-- A finite module over a Noetherian ring has projective dimension bounded by its Tor bound.
-Source: Stacks Project, Tags 00M5 and 058R, with dimension shifting as in Tag 00S2.
-Proof: induct on the bound. At zero, Tor with all ideal quotients vanishes, hence the module
-is flat. It is finitely presented by Noetherianity, so it is projective. At a successor bound,
-take a finite free presentation. Its kernel is finite by Noetherianity. Dimension shifting
-reduces its Tor bound by one, and induction bounds its projective dimension. The short exact
-sequence then bounds the projective dimension of the original module by one more.
-(blueprint: lem-pc-finite-projective-dimension-of-tor-bound)
--/
+/-- A finite module over a Noetherian ring has projective dimension bounded by its Tor bound:
+if `Tor_i(M, N) = 0` for all `N` and all `i > d`, then `pd M ≤ d`. -/
 theorem finite_hasProjectiveDimensionLE_of_tor_bound
     {R : Type u} [CommRing R] [IsNoetherianRing R]
     (M : ModuleCat.{u} R) [Module.Finite R M] (d : ℕ)

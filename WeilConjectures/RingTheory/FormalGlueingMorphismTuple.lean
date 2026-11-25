@@ -13,7 +13,23 @@ import WeilConjectures.AlgebraicGeometry.FormalGlueingCanonicalMaps
 /-!
 # Compatible tuples induced by canonical morphisms
 
-Source: Stacks Project, More on Algebra, Lemmas 05EK and 05EM.
+Given canonical glueing data for `M` and `N` and a morphism between them, the image of every
+`m : M` is a compatible tuple, i.e. lies in the kernel of the difference map `β`.
+
+## Implementation details
+
+This is a kernel calculation, with no flatness assumption and no assertion that a preimage
+exists in `N`. Prime compatibility is checked on `(1 ⊗ m)/1` using injectivity of the
+canonical comparison map; overlap compatibility is checked on `(m/1)/1`, which the canonical
+swap fixes, by clearing denominators in the double localization. Empty chart families, zero
+denominators and zero modules are allowed, since the argument only uses localized equality
+criteria and never cancels a scalar in `N`.
+
+## References
+
+* [Stacks, Tag 05EK]
+* [Stacks, Tag 05EL]
+* [Stacks, Tag 05EM]
 -/
 
 @[expose] public section
@@ -142,26 +158,7 @@ private theorem overlap_of_swap {R : Type u} [CommRing R]
   simpa only [rab, rba, IsLocalizedModule.lift_apply] using hh
 
 /-- The image of an input under the components of a canonical morphism is a compatible
-formal glueing tuple. This is a kernel calculation, with no flatness assumption and no
-assertion of existence of a preimage in N.
-Source: Stacks Project, More on Algebra, Remark 05EL and the complex preceding Lemma 05EK.
-(blueprint: lem-weil-pbc-formal-glueing-morphism-tuple).
-Proof: transport the prime and chart components along the given object equalities.
-Evaluate prime compatibility on (1 tensor m)/1. The canonical comparison formula
-identifies the two sides with the comparison of the localized prime value and
-1 tensor c_i(m/1). The comparison is injective, so the prime differences vanish.
-Evaluate overlap compatibility on (m/1)/1. The canonical swap fixes this double
-localization of m, so swap(n_i/1) = n_j/1 for n_i = c_i(m/1).
-Write n_i = x/f_i^a and n_j = y/f_j^b. The swap formula identifies the left side
-with (x/1)/f_i^a. Clearing the outer f_i denominator gives a power f_i^c
-annihilating x/1 - f_i^a y/f_j^b in N_fj. Clearing the inner f_j denominator gives
-a power f_j^d annihilating f_i^c(f_j^b x - f_i^a y) in N.
-The difference of the images in N_(fi*fj) has numerator
-f_i^b f_j^a(f_j^b x - f_i^a y) and denominator (f_i*f_j)^(a+b).
-Multiplication by (f_i*f_j)^(c+d) annihilates that numerator. Thus all overlap
-differences vanish as well. Extensionality of products and functions gives beta = 0.
-Empty chart families, zero denominators and zero modules are included, since this
-argument uses localized equality criteria and never cancels a scalar in N. -/
+formal glueing tuple: the difference map `β` vanishes on `(p (1 ⊗ m), (c i (m / 1))ᵢ)`. -/
 theorem canonical_tuple_compatible {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] (φ : R →+* S) (t : ℕ) (f : Fin t → R)
     (M N : ModuleCat.{max u v w} R)

@@ -9,21 +9,29 @@ module
 public import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.RingHom.Flat
 
-/-! # Flatness under a simultaneous change of rings and modules -/
+/-!
+# Flatness under a simultaneous change of rings and modules
+
+Flatness is preserved when both the ring and the module are replaced by equivalent ones,
+compatibly with the scalar actions.
+
+## Implementation details
+
+The module `N` is regarded as an `R`-module by restriction along the ring equivalence; the
+additive equivalence then becomes `R`-linear, and flatness over `R` and over `S` are compared via
+the flat ring maps `R → S` and `S → R`.
+
+## References
+
+* [Stacks, Tag 02JO]
+-/
 
 @[expose] public section
 
 namespace Module.Flat
 
-/-- Flatness is invariant under compatible ring and additive equivalences.
-Source: transport of the tensor-injectivity definition of flatness;
-Stacks Project, Algebra, Tag 02JO, localized comparison in the first proof paragraph.
-(blueprint: lem-pc-flat-semilinear-equiv)
-Proof: Regard N as an R-module by restricting along eR. The supplied additive
-map becomes an R-linear equivalence, so flatness is preserved by
-Module.Flat.equiv_iff. A ring equivalence and its inverse are flat ring maps.
-Composition of flat modules in each direction identifies flatness of N over R
-with flatness over S; the inverse identities give the required scalar towers. -/
+/-- Flatness is invariant under compatible ring and additive equivalences: if `eM` is
+`eR`-semilinear, then `M` is flat over `R` if and only if `N` is flat over `S`. -/
 theorem semilinearEquiv_iff
     {R S M N : Type*} [CommRing R] [CommRing S]
     [AddCommGroup M] [AddCommGroup N] [Module R M] [Module S N]

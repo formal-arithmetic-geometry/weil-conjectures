@@ -9,21 +9,33 @@ module
 public import WeilConjectures.RingTheory.FormallySmoothAdic
 import WeilConjectures.RingTheory.FormallySmoothAdicUniverseLift
 
+/-!
+# Adic formal smoothness along a ring isomorphism of the base
+
+If `S` is formally smooth over `R` for the `n`-adic topology and `R' ≃+* R`, then `S` is
+formally smooth over `R'` for the induced algebra structure.
+
+## Implementation details
+
+A test algebra `D` over `R'` is regarded as an `R`-algebra through the inverse isomorphism, and
+the lift is obtained from `Algebra.formallySmoothAdic_lift_universe`, so the test algebra may
+live in any universe.
+
+## References
+
+* [Stacks, Tag 07NR]
+* [Stacks, Tag 07NS]
+-/
+
 @[expose] public section
 
 universe u u' v
 
 namespace Algebra
 
-/-- Source: Stacks Project, More on Algebra, Remark 07NS and Lemma 07NR
-(blueprint: lem-weil-pbc-formally-smooth-adic-ring-equiv)
-
-Give each R′-test algebra D the R-action obtained by composing its structure
-map with e.symm. The R′-linear map g : S → D/J is R-linear because
-e(e.symm(r)) = r, with the same positive-power vanishing witness. Apply
-`formallySmoothAdic_lift_universe` to obtain an R-linear lift f at the test
-universe. It is R′-linear because e.symm(e(r′)) = r′. Its underlying ring map
-and quotient equality are unchanged, so it solves the original lifting problem. -/
+/-- Adic formal smoothness is invariant under a ring isomorphism of the base: if `S` is
+formally smooth over `R` for the `n`-adic topology and `e : R' ≃+* R`, then `S` is formally
+smooth over `R'`, with the algebra structure induced by `e`. -/
 theorem FormallySmoothAdic.of_ringEquiv
     {R : Type u} {R' : Type u'} {S : Type v}
     [CommRing R] [CommRing R'] [CommRing S]

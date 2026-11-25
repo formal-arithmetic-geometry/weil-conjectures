@@ -14,8 +14,23 @@ import Mathlib.RingTheory.Flat.Equalizer
 /-!
 # Intersection of presentation relations with an extended ideal
 
-Source: Stacks Project, Algebra, Tags 00MM and 00MO; the purity argument of Tag 00HL.
-(blueprint: lem-weil-pbc-flat-quotient-presentation-intersection)
+Let `F → M` be a surjection with kernel `L`, and suppose `M / IM` is flat over `R / I`. After
+base change to an `R`-algebra `B`, the relations in `B ⊗[R] L` whose image lies in `IB` times
+`B ⊗[R] F` are sums of extended relations from `L ∩ IF` and `IB`-multiples of extended
+relations.
+
+## Implementation details
+
+Modulo `I` the presentation gives a short exact sequence `0 → L/H → F/IF → M/IM → 0` with
+`H = L ∩ IF`. Flatness of `M/IM` makes the inclusion `L/H → F/IF` stay injective after
+tensoring with `B/IB`, and right exactness then decomposes the given relation. No flatness or
+freeness of `F` or `B` is required.
+
+## References
+
+* [Stacks, Tag 00MM]
+* [Stacks, Tag 00MO]
+* [Stacks, Tag 00HL]
 -/
 
 @[expose] public section
@@ -58,24 +73,8 @@ private theorem quotient_lTensor_injective
   exact congrArg eX (hd (eY.injective hab))
 
 /-- Relations in an extended presentation which lie in the extended ideal are sums of
-extended ideal-valued original relations and ideal multiples of extended relations.
-
-Source: Stacks Project, Algebra, Tag 00MM, proof, applied to the presentation modulo I;
-Tag 00HL (lemma-flat-tor-zero) supplies purity of its image inclusion.
-(blueprint: lem-weil-pbc-flat-quotient-presentation-intersection)
-
-Proof: Put L = ker q and H = L intersect IF. Modulo I, the presentation is the short
-exact sequence 0 → L/H → F/IF → M/IM → 0. The first map is injective by the definition
-of H; surjectivity of q identifies its cokernel with M/IM. All three terms are
-R/I-modules. Identify M/IM with (R/I) tensor_R M. Its assumed flatness implies that
-(L/H) tensor_(R/I) (B/IB) → (F/IF) tensor_(R/I) (B/IB) is injective (Tag 00HL).
-For z in B tensor_R L whose image in B tensor_R F lies in IB times that module,
-its class in (L/H) tensor_(R/I) (B/IB) is therefore zero. Right exactness, first
-for L → L/H and then for reduction modulo IB, writes z as an extended H-element
-plus an IB-multiple of elements of B tensor_R L. Mapping to B tensor_R F gives
-the displayed inclusion. No flatness or freeness of F or B is required.
-For I = 0 the intersection is zero; for I = R the right side contains all relations;
-for B = 0 both sides vanish. -/
+extended ideal-valued original relations and ideal multiples of extended relations, provided
+`M / IM` is flat over `R / I`. -/
 theorem flat_quotient_presentation_intersection
     {R : Type u} {B : Type v} {F : Type w} {M : Type t}
     [CommRing R] [CommRing B] [Algebra R B]

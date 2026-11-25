@@ -14,9 +14,18 @@ public import Mathlib.RingTheory.Flat.Localization
 
 /-! # Flatness of localized quotient maps
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FE (lemma-resolve-special),
-final paragraph; quotient base change and localization.
-(blueprint: lem-weil-pbc-flat-localized-quotient).
+If the localization `R_p → S_q` of a ring map is flat, then for an ideal `J` of `R` and a prime
+`q₀` of `S/JS` above `q`, the localized quotient map `(R/J)_{p₀} → (S/JS)_{q₀}` is flat.
+
+## Implementation details
+
+Quotient base change makes `S_q / J S_q` flat over `R/J`; localization commutes with quotients,
+identifying it with `(S/JS)_{q₀}`, and since elements outside `p₀` act invertibly, flatness
+over `R/J` is equivalent to flatness over `(R/J)_{p₀}`.
+
+## References
+
+* [Stacks, Tag 07FE], final paragraph
 -/
 
 @[expose] public section
@@ -25,19 +34,8 @@ universe u v
 
 namespace RingHom
 
-/-- Flatness of a local map descends to the corresponding localizations of quotient rings.
-
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FE (lemma-resolve-special),
-final paragraph, the flat powered-parameter quotient map.
-(blueprint: lem-weil-pbc-flat-localized-quotient).
-
-Proof: Put q equal to the inverse image of q₀ in S, and p equal to its inverse image
-in R. The composite R → R_p → S_q is flat, since localization and the second map
-are flat. Quotient base change therefore makes S_q/JS_q flat over R/J.
-Localization commutes with quotient, identifying this quotient with (S/JS)_{q₀}
-as an R/J-algebra. Since every element outside p₀ is inverted in this target,
-flatness over R/J is equivalent to flatness over (R/J)_{p₀}. This also covers
-J=0 and zero-dimensional local rings; the existence of q₀ excludes the unit ideal. -/
+/-- Flatness of a local map descends to the corresponding localizations of quotient rings:
+if `R_p → S_q` is flat, then so is `(R/J)_{p₀} → (S/JS)_{q₀}`. -/
 theorem flat_localized_quotient_of_flat_localRingHom
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (J : Ideal R) (q₀ : PrimeSpectrum (S ⧸ J.map (algebraMap R S)))

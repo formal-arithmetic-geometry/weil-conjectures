@@ -19,8 +19,28 @@ import WeilConjectures.RingTheory.FinitePresentationModuleBaseChangeDiagram
 import WeilConjectures.RingTheory.BaseChangeDiagramElementwise
 
 /-! # Descent of a finite presentation along a directed ring diagram
-Source: Stacks Project, Algebra, Tags 00QX and 00R1, the presentation-matrix construction.
-(blueprint: lem-weil-pbc-finite-presentation-module-diagram).
+
+A finitely presented module over a directed colimit `S` of finite-type `ℤ`-algebras is the
+colimit of a directed diagram of finite modules over a cofinal restriction of the ring diagram,
+compatible with base change.
+
+## Main results
+
+* `Module.exists_finitePresentation_module_diagram`
+
+## Implementation details
+
+The entries of a presentation matrix are lifted to a common stage `i₀`, and the diagram of
+quotients by the lifted matrix over the tail of `i₀` is built in
+`Module.exists_finitePresentation_baseChange_diagram`. The colimit property is then constructed
+directly from the elementwise representative and eventual-zero criteria, so it holds even when
+the index universe `u` exceeds `v`, without a small-index filtered-colimit instance for
+`AddCommGrpCat.{v}`.
+
+## References
+
+* [Stacks, Tag 00QX] (presentation-matrix construction)
+* [Stacks, Tag 00R1]
 -/
 
 @[expose] public section
@@ -137,41 +157,7 @@ private theorem additive_diagram_isColimit
     simpa only [rep_eq] using h
 
 /-- Descend a finite presentation to a cofinal directed restriction of a given ring diagram.
-The finite-type assumption permits the stage modules to live in any universe `v`.
-
-Source: Stacks Project, Algebra, Tag 00QX, presentation-matrix paragraph, in its
-non-local form used in Tag 00R1.
-(blueprint: lem-weil-pbc-finite-presentation-module-diagram)
-
-Proof:
-1. Choose a finite free presentation of M. Represent each matrix entry in a stage
-   of B using the elementwise ring-colimit theorem, and take a common upper bound i₀.
-   Empty matrices cause no problem: choose any index, using nonemptiness.
-2. Let J be the upper tail above i₀, and F its inclusion. This tail is nonempty and
-   directed. Every original index admits a map to an index in J, so the fully faithful
-   inclusion F is final. Restriction therefore preserves the ring colimit.
-3. For j in J form the quotient of the finite free B(Fj)-module by the image of the
-   lifted presentation matrix. Entrywise ring maps descend to additive quotient maps;
-   they respect scalar actions. Functoriality and cocone naturality hold on quotient
-   representatives. The classes of the standard basis finitely generate each quotient.
-   A finite-type integer algebra is countable; so are its finite powers and quotients.
-   Transport each quotient to a small model in Type v, and transport all maps and actions.
-4. Tensor right exactness and the finite-product tensor equivalence identify base
-   change of these quotients with the corresponding later quotient and with M.
-   The equivalences send y tensor x to y times the induced image of x.
-5. Apply directedColimitBaseChangeElementwise at i₀ and transport its representative
-   and eventual-zero criteria along the equivalences in step 4 and the ring-colimit
-   comparison with S. Thus every element of M comes from a stage; two representatives
-   with equal images become equal at a common later stage, by applying eventual zero
-   to their difference after moving to a common stage. For any additive cocone to X,
-   define M → X by the value of a representative. Eventual equality makes this
-   independent of the representative. Move two representatives to a common stage to
-   prove additivity. It factors every cocone leg, and representatives prove uniqueness.
-   This constructs IsColimit directly, even when the index universe u exceeds v;
-   it does not require a small-index filtered-colimit instance for AddCommGrpCat.{v}.
-   All transports use actual quotient constructions, not arbitrary witnesses of an
-   unproved existence theorem.
--/
+The finite-type assumption permits the stage modules to live in any universe `v`. -/
 theorem exists_finitePresentation_module_diagram
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (B : I ⥤ CommRingCat.{u}) (S : Type u) [CommRing S]

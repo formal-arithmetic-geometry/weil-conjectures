@@ -16,8 +16,28 @@ import WeilConjectures.RingTheory.FlatClosedFiberKernelRigidity
 
 /-! # Removing the equations of a regular closed fibre
 
-Source: Stacks Project, Tag 07NQ, proof of (2) implies (3), through the isomorphism
-S tensor_R A -> B. (blueprint: lem-weil-pbc-flat-closed-fibre-power-series-model)
+Given a compatible power-series presentation of a flat local map `A → B` with formally smooth
+closed fibre, the equations of the closed fibre can be removed, giving a power-series ring `T`
+with `B ≃ T ⊗_R A`.
+
+## Implementation details
+
+The closed fibre of `B` is regular (Tag 07EL), so generators of the kernel between closed fibres
+extend to parameters (Tag 00NR); their lifts to `ker(S → B)` are part of a regular system of
+parameters of `S`, and the quotient by them is again a power-series ring `T` (Tag 07NM), flat
+over `R` (Tag 07DY). This step is `exists_closedFiber_equation_removal`. The equality
+`ker(T → B) = (ker(R → A)) T` then follows from flatness of `B` and Nakayama
+(`ker_eq_map_of_flat_of_ker_le_maximal`). No relative formal smoothness of the power-series map
+or of the original map is asserted.
+
+## References
+
+* [Stacks, Tag 07NQ]
+* [Stacks, Tag 07NN]
+* [Stacks, Tag 07EL]
+* [Stacks, Tag 00NR]
+* [Stacks, Tag 07NM]
+* [Stacks, Tag 07DY]
 -/
 
 @[expose] public section
@@ -29,38 +49,9 @@ open IsLocalRing
 namespace RingHom
 
 /-- Given a compatible power-series presentation of a flat local map with smooth closed
-fibre, remove the equations of the fibre while retaining the base presentation.
-The kernel identity says precisely
-that the target is the base change along the surjective base presentation. This statement
-asserts no relative formal smoothness of the power-series map or of the original map.
-
-Source: Stacks Project, Tag 07NQ, proof of (2) implies (3), from the diagram of Tag 07NN
-through the displayed isomorphism S tensor_R A -> B.
-(blueprint: lem-weil-pbc-flat-closed-fibre-power-series-model)
-
-Proof:
-1. Use the given compatible Cohen presentation R -> S, R -> A, S -> B of Tag 07NN.
-The coefficient hypotheses make these complete power-series rings over fields or Cohen rings.
-The parameters t of R extend to parameters of S. The surjection R -> A identifies
-residue fields. No completeness assumption on A or B is needed after this presentation.
-2. The closed fibre of B is regular by Tag 07EL, since it is adically formally smooth
- over the residue field. The closed fibre of S is regular by the parameter quotient
- theorem. Tag 00NR gives generators of the kernel between these fibres which extend
- to parameters. Lift them to ker(S -> B): subtract an element of m_R S from each lift,
- using surjectivity onto m_A B. Their cotangent classes together with those of t are
- independent; extend to a basis, and apply Nakayama to obtain parameters of S.
-3. Quotient S by these lifted equations. Tag 07NM identifies the quotient with a
- power-series ring T over the same coefficients, retaining the images of t as parameters
- (and retaining p in the Cohen case). The map T -> B is surjective. The parameter
- regular-sequence criterion and Tag 07DY give flatness of R -> T. The induced map of
- closed fibres is an isomorphism, so the fibre of T has the given formal smoothness.
-4. Set D = T/(ker(R -> A))T = T tensor_R A. The induced map D -> B is surjective.
-Both sides are A-flat, by base change and the hypothesis. Tensor its kernel sequence
-with the residue field: flatness of B gives left exactness, and the fibre isomorphism
-shows that the kernel modulo m_A is zero. D is Noetherian local, being a proper
-quotient of T. Its kernel is finitely generated and m_A D lies in its maximal ideal;
-Nakayama gives zero kernel. Thus ker(T -> B) = (ker(R -> A))T, as asserted.
-The zero-dimensional and empty-equation cases use empty parameter lists and zero ideals.
+fibre, remove the equations of the fibre while retaining the base presentation: there is a
+power-series ring `T` with a surjection `v : T → B` such that `ker v = (ker q) T`, i.e. `B` is
+the base change of `T` along the surjective base presentation `q`.
 -/
 theorem exists_flat_closedFiber_powerSeries_model
     (A : Type u) (B : Type v) [CommRing A] [CommRing B]
