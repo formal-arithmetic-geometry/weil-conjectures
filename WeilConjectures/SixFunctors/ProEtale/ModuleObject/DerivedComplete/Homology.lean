@@ -27,8 +27,7 @@ Applying this to `K` and to `Hᵠ(K)[0]` shows that `K` is complete if and only 
 cohomology objects are (Stacks 09B9).
 
 For `𝒪_{E,X}`-module objects on `X_proét` and the action of a uniformizer `ϖ` of `𝒪_E`, this
-yields (Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 3.4.4; blueprint
-`definition-derived-adic-completeness`):
+yields (Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 3.4.4):
 
 ## Main results
 

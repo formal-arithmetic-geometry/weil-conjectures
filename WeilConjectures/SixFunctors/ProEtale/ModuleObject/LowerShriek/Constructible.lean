@@ -18,8 +18,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 Let `Λ` be a commutative condensed ring and `j : U ⟶ X` an open immersion into a scheme whose
 underlying space is noetherian. The extension by zero `j_!` of module objects over `Λ` maps
 constructible module objects (`ProEtale.IsConstructibleModuleObject`) to constructible module
-objects (`ProEtale.CondensedRing.isConstructibleModuleObject_openImmersionLowerShriek_obj`,
-blueprint `proposition-proper-direct-image-extension-zero`): a stratification of `U` together with
+objects (`ProEtale.CondensedRing.isConstructibleModuleObject_openImmersionLowerShriek_obj`): a
+stratification of `U` together with
 the closed complement of `U`, a zero stratum, is a stratification of `X`.
 
 We also record that zero module objects are constructible
@@ -138,10 +138,8 @@ lemma isLocallyFinitelyPresented_mapMod_openImmersionLowerShriek_obj_of_disjoint
   (isLocallyFinitelyPresented_mapMod_iff Λ _ _).2 (isLocallyFinitelyPresented_of_isZero _
     (isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint Λ j h hjh M))
 
-/-- Blueprint `proposition-proper-direct-image-extension-zero` (extension by zero, on sheaves): for
-an open immersion `j : U ⟶ X` into a noetherian scheme, `j_!` maps constructible module objects to
-constructible module objects (add the closed complement as a zero stratum to a stratification
-of `U`). -/
+/-- **Extension by zero preserves constructibility**: for an open immersion `j : U ⟶ X` into a
+noetherian scheme, `j_!` maps constructible module objects to constructible module objects. -/
 theorem isConstructibleModuleObject_openImmersionLowerShriek_obj {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] [TopologicalSpace.NoetherianSpace X]
     (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U))

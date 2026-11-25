@@ -84,6 +84,7 @@ variable (C : Type v) [Category.{u + 1} C] [Abelian C]
 
 variable {B X Y : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B)
 
+omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- Naturality of the pullback and tensor of sections in the first sheaf. -/
 @[reassoc]
 theorem exteriorSectionsMap_naturality_left
@@ -94,6 +95,7 @@ theorem exteriorSectionsMap_naturality_left
         ((upperStar C (pullback.fst f g)).map a ▷ (upperStar C (pullback.snd f g)).obj G) := by
   simpa using exteriorSectionsMap_naturality C f g a (𝟙 G)
 
+omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- Naturality of the pullback and tensor of sections in the second sheaf. -/
 @[reassoc]
 theorem exteriorSectionsMap_naturality_right
@@ -159,6 +161,7 @@ noncomputable def exteriorSectionsComplex
     erw [exteriorSectionsMap_naturality_left_assoc, exteriorSectionsMap_naturality_right_assoc]
     rfl
 
+omit [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- The defining property of the totalized ordinary pairing. -/
 @[reassoc]
 theorem ιTensorObj_exteriorSectionsComplex_f
@@ -178,6 +181,7 @@ theorem ιTensorObj_exteriorSectionsComplex_f
 
 variable {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
 
+omit [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- The totalized supported pairing followed by the inclusion of supported sections is the
 ordinary pairing after the inclusions of supported sections. -/
 theorem exteriorSupportedSectionsComplex_comp_ΓSupportι

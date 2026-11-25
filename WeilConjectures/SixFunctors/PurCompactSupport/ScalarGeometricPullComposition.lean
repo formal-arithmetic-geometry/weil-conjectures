@@ -11,7 +11,10 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! Scalar extension and the geometric pullback compositor.
-(blueprint: lem-sf-scalar-geometric-pull-composition).
+
+## References
+
+* Stacks Project, Tags `0D6D`, `07A6`
 -/
 
 @[expose] public noncomputable section
@@ -187,22 +190,7 @@ private theorem actionIso_derived {R S : Coefficients.{u}} (a : Change R S)
   rw [← Functor.mapDerivedCategoryNatIso_symm]
   rfl
 
-/-- Scalar/pullback balancing respects composition of two geometric pullbacks.
-
-Source: Stacks Project, Tags 0D6D and 07A6.
-(blueprint: lem-sf-scalar-geometric-pull-composition).
-Proof: first take geometric mates of the ordinary inverse-image/restriction
-squares. Restriction of scalars does not change sections, so its normalized
-comparison with direct image is identity on sections. Both direct-image
-compositors restrict sections along the same fibre-product pasting isomorphism.
-Their commuting square therefore follows sectionwise. Injectivity of the mate
-equivalence gives the ordinary inverse-image square, and exact localization
-preserves that square. The coefficient-change adjunction theorem identifies
-scalarPull with the scalar-adjunction mate of the localized restriction square.
-Pasting scalar mates and cancelling the invertible S-compositor gives the stated
-equation. This argument includes identity morphisms and zero objects and does
-not assume flatness of the coefficient map: scalar extension is derived
-throughout. -/
+/-- Scalar/pullback balancing respects composition of two geometric pullbacks. -/
 theorem scalarPull_geometric_composition
     {R S : Coefficients.{u}} (a : Change R S)
     {X Z Y : Scheme.{u}} (h : X ⟶ Z) (k : Z ⟶ Y)

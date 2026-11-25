@@ -103,9 +103,20 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 /-! # Strict coefficient tensor and internal-Hom roof
 
 The definitions and unique-normalization assertion are shared by the finite-free stage
-calculation and the filtered-colimit theorem. They are the unchanged representative
-models of `lem-sfb-dc-hom-filtered-colimit`.
+calculation and the filtered-colimit theorem. They are the representative models of the
+comparison between the tensor product and the internal Hom of a filtered colimit.
+
+## References
+
+* [Stacks, Tag 06YN](https://stacks.math.columbia.edu/tag/06YN)
+* [Stacks, Tag 0A95](https://stacks.math.columbia.edu/tag/0A95)
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks, Tag 0A8X](https://stacks.math.columbia.edu/tag/0A8X)
+* [Stacks, Tag 079P](https://stacks.math.columbia.edu/tag/079P)
+* [Stacks, Tag 08J9](https://stacks.math.columbia.edu/tag/08J9)
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.8.12
 -/
+
 
 @[expose] public section
 set_option autoImplicit false
@@ -123,38 +134,33 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   [HasSheafify J AddCommGrpCat.{max u v r}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}]
 
-/-- Transparent type abbreviation for the recorded module category, not a new category.
-Source: Stacks, Modules on Sites (blueprint: def-sfb-internal-hom-strict-models). -/
+/-- Transparent type abbreviation for the recorded module category, not a new category. -/
 abbrev Modules (R : Sheaf J CommRingCat.{max u v r}) :=
   ringedSiteModules.{max u v r} ((sheafCompose J
     (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R)
 
-/-- The degree-zero coefficient tensor bifunctor, using the recorded total tensor.
-Source: Stacks 06YN (blueprint: def-sfb-internal-hom-strict-models). -/
+/-- The degree-zero coefficient tensor bifunctor, using the recorded total tensor. -/
 noncomputable def tensor (R : Sheaf J CommRingCat.{max u v r}) :
     Modules.{u, v, r} J R × CochainComplex (Modules.{u, v, r} J R) ℤ ⥤
       CochainComplex (Modules.{u, v, r} J R) ℤ :=
   ((HomologicalComplex.single (Modules.{u, v, r} J R) (ComplexShape.up ℤ) 0).prod (𝟭 _)) ⋙
     coefficientTotalTensor.{r, u, v} J R
 
-/-- Tensor a variable coefficient module with a fixed complex.
-Source: Stacks 06YN (blueprint: def-sfb-internal-hom-strict-models). -/
+/-- Tensor a variable coefficient module with a fixed complex. -/
 noncomputable def tensorFixed (R : Sheaf J CommRingCat.{max u v r})
     (B : CochainComplex (Modules.{u, v, r} J R) ℤ) :
     Modules.{u, v, r} J R ⥤ CochainComplex (Modules.{u, v, r} J R) ℤ :=
   Prod.sectL _ B ⋙ tensor.{u, v, r} J R
 
 /-- The actual Hom-complex representative with fixed first input and the recorded
-functorial K-injective replacement in its second input.
-Source: Stacks 0A95 (blueprint: def-sfb-internal-hom-strict-models). -/
+functorial K-injective replacement in its second input. -/
 noncomputable def homFixed (R : Sheaf J CommRingCat.{max u v r})
     (P : CochainComplex (Modules.{u, v, r} J R) ℤ) :
     CochainComplex (Modules.{u, v, r} J R) ℤ ⥤ CochainComplex (Modules.{u, v, r} J R) ℤ :=
   coefficientHomResolution.{r, u, v} J R ⋙
     (homComplexFunctor.{u, v, max u v r, max u v r} (R := R)).obj (op P)
 
-/-- The tensor generator in degree `(0,n)`, using the actual single-complex comparison.
-Source: Stacks 06YN, 03EK (blueprint: def-sfb-internal-hom-strict-models). -/
+/-- The tensor generator in degree `(0,n)`, using the actual single-complex comparison. -/
 noncomputable def tensorGenerator (R : Sheaf J CommRingCat.{max u v r})
     (T : Modules.{u, v, r} J R) (B : CochainComplex (Modules.{u, v, r} J R) ℤ)
     (n : ℤ) (U : Cᵒᵖ) (t : T.val.obj U) (b : (B.X n).val.obj U) :
@@ -163,8 +169,7 @@ noncomputable def tensorGenerator (R : Sheaf J CommRingCat.{max u v r})
     ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj T) B 0 n n (zero_add n) U
     (((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 T).inv).val.app U t) b
 
-/-- Evaluate a Hom-complex component, with no chosen evaluation map.
-Source: Stacks 0A8X (blueprint: def-sfb-internal-hom-strict-models). -/
+/-- Evaluate a Hom-complex component, with no chosen evaluation map. -/
 noncomputable def homValue (R : Sheaf J CommRingCat.{max u v r})
     (P Q : CochainComplex (Modules.{u, v, r} J R) ℤ) (n p q : ℤ) (h : p + n = q)
     (U : Cᵒᵖ) (f : ((homComplex (R := R) P Q).X n).val.obj U)
@@ -172,8 +177,7 @@ noncomputable def homValue (R : Sheaf J CommRingCat.{max u v r})
   (((homComplexπ.{u, v, max u v r, max u v r} (J := J) (R := R) P Q n p q h).val.app U f).app
     (op (Over.mk (𝟙 U.unop)))).hom x
 
-/-- The actual augmentation of the fixed K-injective replacement.
-Source: Stacks 079P (blueprint: def-sfb-internal-hom-strict-models). -/
+/-- The actual augmentation of the fixed K-injective replacement. -/
 noncomputable def resolutionUnit (R : Sheaf J CommRingCat.{max u v r}) :
     𝟭 (CochainComplex (Modules.{u, v, r} J R) ℤ) ⟶ coefficientHomResolution.{r, u, v} J R :=
   letI :=
@@ -181,9 +185,7 @@ noncomputable def resolutionUnit (R : Sheaf J CommRingCat.{max u v r}) :
       J R).1
   CochainComplex.toKInjectiveResolution.{max u v r} _
 
-/-- The evaluation normalization of the strict comparison `a_T` in proof step 6.
-Source: the node's ring-sheaf argument, step 6; Stacks 08J9
-(blueprint: def-sfb-internal-hom-strict-models). -/
+/-- The evaluation normalization of the strict comparison `a_T`. -/
 def Normalized (R : Sheaf J CommRingCat.{max u v r})
     (P L : CochainComplex (Modules.{u, v, r} J R) ℤ)
     (a : tensorFixed.{u, v, r} J R ((homFixed.{u, v, r} J R P).obj L) ⟶
@@ -976,14 +978,7 @@ private theorem component_exists (R : Sheaf J CommRingCat.{max u v r})
       (pure.{u, v, r} J R T (Q.X q) U t _)) = _
   rw [← tensorGenerator_eq.{u, v, r} J R]
 
-/-- The strict evaluation comparisons exist uniquely, before any colimit or localization.
-Source: the node's argument, step 6; Stacks 08J9
-(blueprint: lem-sfb-internal-hom-comparison-exists).
-Proof: send `t tensor f` to the cochain `x ↦ t tensor f(x)`, followed by the fixed
-K-injective augmentation. Balancedness and restrictions give a sheaf map. The Hom
-and total-tensor differentials give a chain map, with no sign since t has degree zero.
-The same formula for a module map gives strict naturality. Sheafified pure tensors
-and Hom-product projections determine every component, hence uniqueness. -/
+/-- The strict evaluation comparisons exist uniquely, before any colimit or localization. -/
 theorem comparison_existsUnique (R : Sheaf J CommRingCat.{max u v r})
     (P L : CochainComplex (Modules.{u, v, r} J R) ℤ) :
     ∃! a : tensorFixed.{u, v, r} J R ((homFixed.{u, v, r} J R P).obj L) ⟶
@@ -1054,15 +1049,12 @@ theorem comparison_existsUnique (R : Sheaf J CommRingCat.{max u v r})
 
 end ComparisonProof
 
-/-- The uniquely evaluation-normalized comparison, not a choice of an arbitrary map.
-Source: the node's argument, step 6 (blueprint: def-sfb-internal-hom-strict-roof). -/
+/-- The uniquely evaluation-normalized comparison, not a choice of an arbitrary map. -/
 noncomputable def comparison (R : Sheaf J CommRingCat.{max u v r})
     (P L : CochainComplex (Modules.{u, v, r} J R) ℤ) :=
   (comparison_existsUnique.{u, v, r} J R P L).exists.choose
 
-/-- Exact termwise-colimit continuity, expressed using the canonical cocone map.
-Source: Bhatt--Scholze 6.8.12 and the node's continuity hypothesis
-(blueprint: def-sfb-internal-hom-strict-roof). -/
+/-- Exact termwise-colimit continuity, expressed using the canonical cocone map. -/
 def Continuous (R : Sheaf J CommRingCat.{max u v r})
     {I : Type (max u v r)} [SmallCategory I] [IsFiltered I]
     [HasColimitsOfShape I (Modules.{u, v, r} J R)]

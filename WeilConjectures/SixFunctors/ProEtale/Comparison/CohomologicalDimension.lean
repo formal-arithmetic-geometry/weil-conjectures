@@ -18,16 +18,14 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-!
 # Pro-étale cohomological dimension through the comparison morphism
 
-Blueprints `rem-sf-fullcd-reduction` (3) and `rem-sf-fullcd-general-form` (a): the global
-sections on the pro-étale site factor through the comparison morphism,
+The global sections on the pro-étale site factor through the comparison morphism,
 `Γ(X_proét, -) = Γ(X_ét, -) ∘ ν_*`, so `RΓ(X_proét, -) ≅ RΓ(X_ét, -) ∘ Rν_*`
 (`AlgebraicGeometry.ProEtale.comparisonLowerStarCompRightDerivedGlobalSectionsIso`). If the étale
 cohomology of `X` vanishes above `e` for every sheaf (the étale factor, `e = 2 dim X` for a
 finite-type scheme over an algebraically closed field) and `R^q ν_* F = 0` for `q > M` and every
 pro-étale sheaf `F`, then `H^r(X_proét, F) = 0` for `r > M + e`
 (`AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedGlobalSections_of_comparison`): unbounded
-degrees can only enter through the comparison direct images `R^q ν_*`. That is exactly where the
-counterexample of `rem-sf-fullcd-counterexample` puts them.
+degrees can only enter through the comparison direct images `R^q ν_*`.
 -/
 
 @[expose] public section
@@ -62,12 +60,9 @@ noncomputable def comparisonLowerStarCompRightDerivedGlobalSectionsIso :
     (comparisonAdjunction A X).preservesKInjectiveComplexes
   Functor.rightDerivedFunctorCompIso' _ _ (comparisonLowerStarCompGlobalSectionsIso A X)
 
-/-- Blueprints `rem-sf-fullcd-reduction` (3), `rem-sf-fullcd-general-form` (a): if the étale
-cohomology `H^p(X_ét, G)` vanishes for `p > e` and every étale sheaf `G`, and the comparison
-direct images `R^q ν_* F` vanish for `q > M` and every pro-étale sheaf `F`, then the pro-étale
-cohomology `H^r(X_proét, F)` vanishes for `r > M + e` and every pro-étale sheaf `F`. In the
-Leray spectral sequence `E₂^{p,q} = H^p(X_ét, R^q ν_* F) ⇒ H^{p+q}(X_proét, F)` the
-`p`-direction is bounded by `e`, so unbounded degrees can only enter through `q`. -/
+/-- If the étale cohomology `H^p(X_ét, G)` vanishes for `p > e` and every étale sheaf `G`, and the
+comparison direct images `R^q ν_* F` vanish for `q > M` and every pro-étale sheaf `F`, then the
+pro-étale cohomology `H^r(X_proét, F)` vanishes for `r > M + e` and every pro-étale sheaf `F`. -/
 theorem isZero_homology_rightDerivedGlobalSections_of_comparison (e M : ℤ)
     (het : ∀ (G : Sheaf X.smallEtaleTopology A) (p : ℤ), e < p →
       IsZero ((DerivedCategory.homologyFunctor _ p).obj

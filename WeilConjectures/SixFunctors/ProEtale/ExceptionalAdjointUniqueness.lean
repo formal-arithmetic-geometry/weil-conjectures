@@ -11,25 +11,17 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Con
 /-!
 # The ambient exceptional adjoint restricts to the constructible one
 
-Blueprint `sk-def-sf-admissible` distinguishes the ambient exceptional right adjoint datum (1)
-of a separated finite-type `f : X ⟶ Y` from the stronger admissibility datum (1)–(3), and
-observes that when (1)–(3) hold, the restriction to `Dctf` of a right adjoint `Rf^×` of
-`Rf_!` on the unbounded pro-étale derived categories coincides, by uniqueness of adjoints, with
-the constructible exceptional inverse image `Rf^!` of `theorem-f-shriek-ell-adic-coefficients--4`
-(vi) (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`).
-
-The uniqueness is that of representing objects: for a bounded below `L` with `Rf^× L` bounded
-below of étale origin, `Rf^× L` and `Rf^! L` both represent `K ↦ Hom(Rf_! K, L)` on the objects
-`K` bounded below of étale origin (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekHomEquiv`),
-so they are isomorphic, by an isomorphism compatible with the counits
-(`AlgebraicGeometry.ProEtale.rightAdjointObjIsoRightDerivedUpperShriekObj`). Clause (3) of the
-admissibility datum puts `Rf^× L` in `Dctf(X, A)` for `L ∈ Dctf(Y, A)`, whence the natural
+For a separated finite-type `f : X ⟶ Y`, when the admissibility datum holds, the restriction to
+`Dctf` of a right adjoint `Rf^×` of `Rf_!` on the unbounded pro-étale derived categories
+coincides, by uniqueness of adjoints, with the constructible exceptional inverse image `Rf^!`
+(`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`): for a bounded below `L` with `Rf^× L`
+bounded below of étale origin, `Rf^× L` and `Rf^! L` both represent `K ↦ Hom(Rf_! K, L)`
+(`AlgebraicGeometry.ProEtale.rightAdjointObjIsoRightDerivedUpperShriekObj`), whence the natural
 isomorphism `Rf^×|_{Dctf} ≅ Rf^!|_{Dctf}`
 (`IsExceptionalAdjointAdmissible.rightAdjointIsoRightDerivedUpperShriek`).
 
-The blueprint's warning that neither datum holds in general is
-`AlgebraicGeometry.ProEtale.not_hasAmbientExceptionalRightAdjoint_of_isAbelianVariety`
-(`sk-rem-sf-fullcd-scope`), and hence
+Neither datum holds in general: see
+`AlgebraicGeometry.ProEtale.not_hasAmbientExceptionalRightAdjoint_of_isAbelianVariety`, and hence
 `AlgebraicGeometry.ProEtale.not_isExceptionalAdjointAdmissible_of_isAbelianVariety` for the
 admissibility datum, which contains the ambient one
 (`AlgebraicGeometry.ProEtale.IsExceptionalAdjointAdmissible.toHasAmbientExceptionalRightAdjoint`).
@@ -55,12 +47,9 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
   (adj : rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f ⊣ G)
 
-/-- Blueprint `sk-def-sf-admissible`: uniqueness of the exceptional adjoint.
-
-If `G` is a right adjoint of the pro-étale `Rf_!` on the unbounded derived categories, `L` is
+/-- If `G` is a right adjoint of the pro-étale `Rf_!` on the unbounded derived categories, `L` is
 bounded below and `G L` is bounded below of étale origin, then `G L ≅ Rf^! L`: both represent
-`K ↦ Hom(Rf_! K, L)` on the objects bounded below of étale origin. The isomorphism is the
-adjunct, under the constructible exceptional adjunction, of the counit `Rf_! G L ⟶ L` of `G`. -/
+`K ↦ Hom(Rf_! K, L)` on the objects bounded below of étale origin. -/
 noncomputable def rightAdjointObjIsoRightDerivedUpperShriekObj
     {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : _root_.DerivedCategory.TStructure.t.plus L)
@@ -118,12 +107,9 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {X Y : Scheme.{u}} {f : X ⟶ Y} [HasCompactification f] [CompactSpace Y]
   {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `sk-def-sf-admissible`: under the admissibility datum (1)–(3), the restriction of
-every right adjoint `Rf^×` of `Rf_!` to `Dctf(Y, Λ)`, for a finite coefficient ring `Λ`, is the
-constructible exceptional inverse image `Rf^!` of `theorem-f-shriek-ell-adic-coefficients--4` (vi),
-by uniqueness of adjoints: clause (3) puts `Rf^× L` in `Dctf(X, Λ)`, which consists of objects
-bounded below of étale origin, and there `Rf^×` and `Rf^!` represent the same functor
-(`AlgebraicGeometry.ProEtale.rightAdjointObjIsoRightDerivedUpperShriekObj`). -/
+/-- Under the admissibility datum, the restriction of every right adjoint `Rf^×` of `Rf_!` to
+`Dctf(Y, Λ)`, for a finite coefficient ring `Λ`, is the constructible exceptional inverse image
+`Rf^!`. -/
 noncomputable def IsExceptionalAdjointAdmissible.rightAdjointIsoRightDerivedUpperShriek
     (h : IsExceptionalAdjointAdmissible (ModuleCat.{u + 1} Λ) f)
     {G : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ⥤
@@ -138,7 +124,7 @@ noncomputable def IsExceptionalAdjointAdmissible.rightAdjointIsoRightDerivedUppe
       φ.hom)
 
 omit [CompactSpace Y] in
-/-- Blueprint `sk-def-sf-admissible`: the admissibility datum contains the ambient datum (1). -/
+/-- The admissibility datum contains the ambient datum. -/
 theorem IsExceptionalAdjointAdmissible.hasAmbientExceptionalRightAdjoint
     (h : IsExceptionalAdjointAdmissible A f) : HasAmbientExceptionalRightAdjoint A f :=
   h.toHasAmbientExceptionalRightAdjoint
@@ -151,12 +137,9 @@ variable (Λ : Type (u + 1)) [Field Λ] {k : Type u} [Field k] [IsAlgClosed k]
   (E : Over (Spec (.of k))) [GrpObj E] [IsAbelianVariety E]
 
 set_option linter.unusedSectionVars false in
-/-- Blueprint `sk-def-sf-admissible` (warning): neither the ambient datum nor the admissibility
-datum may be presupposed for the structure morphism of a smooth proper variety: for an elliptic
-curve (more generally an abelian variety of positive dimension) over an algebraically closed
-field, the structure morphism carries no admissibility datum, since it does not even carry the
-ambient datum (`not_hasAmbientExceptionalRightAdjoint_of_isAbelianVariety`,
-`sk-rem-sf-fullcd-scope`). -/
+/-- For an elliptic curve (more generally an abelian variety of positive dimension) over an
+algebraically closed field, the structure morphism carries no admissibility datum, since it does
+not even carry the ambient datum (`not_hasAmbientExceptionalRightAdjoint_of_isAbelianVariety`). -/
 theorem not_isExceptionalAdjointAdmissible_of_isAbelianVariety
     (hE : 0 < IsAbelianVariety.dim E) :
     ¬ IsExceptionalAdjointAdmissible (ModuleCat.{u + 1} Λ) E.hom := fun h ↦

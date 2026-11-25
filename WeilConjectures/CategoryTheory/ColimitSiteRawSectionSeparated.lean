@@ -31,7 +31,6 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-set_option linter.unusedVariables false in
 /-- Separatedness of the raw colimit-site sections for covering families.
 Stacks Project, Sites, Tag 0A35. -/
 theorem colimit_site_raw_section_isSeparatedFor
@@ -41,9 +40,9 @@ theorem colimit_site_raw_section_isSeparatedFor
     [∀ j, (P j).IsStableUnderFiniteBaseChange] [∀ j, (P j).HasPullbacks]
     (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →
       Finite R.uncurry)
-    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),
+    (_hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),
       R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))
-    (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),
+    (_hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),
       R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →
         PreservesLimit (cospan f g) (F.map a).toFunctor)
     [∀ (j k : J) (a : j ⟶ k),
@@ -55,7 +54,7 @@ theorem colimit_site_raw_section_isSeparatedFor
     (hobjects : IsColimit (Cat.objects.mapCocone V))
     (harrows : IsColimit (Cat.arrows.mapCocone V))
     (Q : Precoverage V.pt)
-    (hVpullback : (∀ (j : J) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X →
+    (_hVpullback : (∀ (j : J) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X →
             ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →
               PreservesLimit (cospan f g) (V.ι.app j).toFunctor))
     [∀ j : J, (V.ι.app j).toFunctor.IsContinuous

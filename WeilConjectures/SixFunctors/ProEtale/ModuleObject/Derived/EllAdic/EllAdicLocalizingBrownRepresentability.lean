@@ -13,9 +13,6 @@ import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
 import Mathlib.CategoryTheory.Triangulated.Yoneda
 
 /-! # Brown representability for proper adic pushforward on localizing hulls
-
-Source: blueprint `theorem-exceptional-inverse-image` (1)-(3), specialized to a proper morphism.
-(blueprint: lem-sfb-adic-localizing-brown-representability)
 -/
 
 @[expose] public section

@@ -11,12 +11,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 /-!
 # Base change for every coefficient with constructible pushforward
 
-Source: the blueprint, `chap-Construction-of-f`, unit `sk-def-sfb-base-change-morphism`
-(blueprint: sk-def-sfb-base-change-morphism).
-
 The pullback comparison is the existing `boundedConstructiblePullbackSquareComparison`.
 The three steps below use the conditional restricted pushforward and its actual restricted
-adjunction, with precisely the unit--comparison--counit formula of the source. The imported
+adjunction, with precisely the unit--comparison--counit formula. The imported
 coefficient constructions include the finite-subextension-valued condensed algebraic closure.
 -/
 
@@ -42,9 +39,7 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
 
-/-- Insert the unit of `Lf'^* ⊣ Rf'_*` after `Lg^* Rf_*`.
-Source: blueprint `sk-def-sfb-base-change-morphism`, first step
-(blueprint: sk-def-sfb-base-change-morphism). -/
+/-- Insert the unit of `Lf'^* ⊣ Rf'_*` after `Lg^* Rf_*`. -/
 noncomputable def boundedConstructibleBaseChangeUnitStepOfPreserves :
     boundedConstructibleLowerStarOfPreserves Λ H f ⋙ boundedConstructibleUpperStar Λ ℓ g ⟶
       (boundedConstructibleLowerStarOfPreserves Λ H f ⋙ boundedConstructibleUpperStar Λ ℓ g) ⋙
@@ -55,9 +50,7 @@ noncomputable def boundedConstructibleBaseChangeUnitStepOfPreserves :
 
 variable {f g f' g'} in
 /-- Transport the unit-inserted functor by the canonical pullback-square comparison, built
-from the two composition isomorphisms and the equality in `sq`.
-Source: blueprint `sk-def-sfb-base-change-morphism`, second step
-(blueprint: sk-def-sfb-base-change-morphism). -/
+from the two composition isomorphisms and the equality in `sq`. -/
 noncomputable def boundedConstructibleBaseChangeSquareStepOfPreserves (sq : CommSq g' f' f g) :
     (boundedConstructibleLowerStarOfPreserves Λ H f ⋙ boundedConstructibleUpperStar Λ ℓ g) ⋙
         (boundedConstructibleUpperStar Λ ℓ f' ⋙ boundedConstructibleLowerStarOfPreserves Λ H f') ≅
@@ -67,9 +60,7 @@ noncomputable def boundedConstructibleBaseChangeSquareStepOfPreserves (sq : Comm
     (boundedConstructibleLowerStarOfPreserves Λ H f')
     (boundedConstructiblePullbackSquareComparison Λ ℓ sq)
 
-/-- Contract the counit of `Lf^* ⊣ Rf_*` under `Lg'^*` and `Rf'_*`.
-Source: blueprint `sk-def-sfb-base-change-morphism`, third step
-(blueprint: sk-def-sfb-base-change-morphism). -/
+/-- Contract the counit of `Lf^* ⊣ Rf_*` under `Lg'^*` and `Rf'_*`. -/
 noncomputable def boundedConstructibleBaseChangeCounitStepOfPreserves :
     (boundedConstructibleLowerStarOfPreserves Λ H f ⋙ boundedConstructibleUpperStar Λ ℓ f) ⋙
         (boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStarOfPreserves Λ H f') ⟶
@@ -82,9 +73,7 @@ variable {f g f' g'} in
 /-- The base-change morphism `Lg^* Rf_* ⟶ Rf'_* Lg'^*`, in diagrammatic composition order,
 for every commutative square and every commutative condensed ring whose derived pushforwards
 preserve bounded constructible complexes. Its data are the specified unit insertion,
-canonical square transport and counit contraction, with no cartesian or proper hypothesis.
-Source: blueprint unit `sk-def-sfb-base-change-morphism`
-(blueprint: sk-def-sfb-base-change-morphism). -/
+canonical square transport and counit contraction, with no cartesian or proper hypothesis. -/
 noncomputable def boundedConstructibleBaseChangeOfPreserves (sq : CommSq g' f' f g) :
     boundedConstructibleLowerStarOfPreserves Λ H f ⋙ boundedConstructibleUpperStar Λ ℓ g ⟶
       boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStarOfPreserves Λ H f' :=

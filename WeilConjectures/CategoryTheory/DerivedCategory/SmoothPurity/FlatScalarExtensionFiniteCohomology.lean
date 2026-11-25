@@ -21,7 +21,6 @@ Source: Stacks Project, Tags 00HD and 00HT. -/
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits
 
@@ -43,9 +42,9 @@ theorem pointFiniteDimensional_of_flat_scalar_extension
     pointFiniteDimensional S
       (Q.obj (((ModuleCat.extendScalars f).mapHomologicalComplex (.up ℤ)).obj C)) := by
   let F := ModuleCat.extendScalars.{u, u, u} f
-  letI : F.Additive := (ModuleCat.extendRestrictScalarsAdj f).left_adjoint_additive
-  letI : PreservesFiniteLimits F := ModuleCat.preservesFiniteLimits_extendScalars_of_flat hf
-  letI : PreservesFiniteColimits F := inferInstance
+  let : F.Additive := (ModuleCat.extendRestrictScalarsAdj f).left_adjoint_additive
+  let : PreservesFiniteLimits F := ModuleCat.preservesFiniteLimits_extendScalars_of_flat hf
+  let : PreservesFiniteColimits F := inferInstance
   let iso (i : ℤ) :
       (homologyFunctor (ModuleCat.{u} S) i).obj
           (Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj C)) ≅
@@ -57,9 +56,9 @@ theorem pointFiniteDimensional_of_flat_scalar_extension
     exact ⟨s, fun i hi ↦ IsZero.of_iso (F.map_isZero (hs i hi)) (iso i)⟩
   · intro i
     let M := (homologyFunctor (ModuleCat.{u} R) i).obj (Q.obj C)
-    letI : Module.Finite R M := hfinite i
+    let : Module.Finite R M := hfinite i
     have h : Module.Finite S (F.obj M) := by
-      letI : Algebra R S := f.toAlgebra
+      let : Algebra R S := f.toAlgebra
       change Module.Finite S (TensorProduct R S M)
       infer_instance
     exact @Module.Finite.equiv S _ _ _ _ _ _ _ h (iso i).toLinearEquiv.symm

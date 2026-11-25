@@ -21,8 +21,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 universe u v v₁ v₂ v₃ u₁ u₂ u₃
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
@@ -138,11 +136,11 @@ private theorem square_inv_eq
   simp only [supportPullbackSquareIso, leftDerivedUpperStarComp,
     leftDerivedUpperStarIsoMapDerivedCategory, Functor.leftDerivedFunctorNatIso,
     Functor.leftDerivedFunctorCompIso, Iso.trans_inv, Iso.trans_hom,
-    Iso.symm_hom, Iso.symm_inv, Iso.app_inv, Iso.app_hom, NatTrans.comp_app,
+    Iso.symm_hom, Iso.symm_inv, Iso.app_inv, NatTrans.comp_app,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Category.assoc, Iso.inv_hom_id_app_assoc, Iso.hom_inv_id_app_assoc]
+    Category.assoc, Iso.inv_hom_id_app_assoc]
   rw [Functor.mapIso_inv]
   have hn := (leftDerivedUpperStarIsoMapDerivedCategory C q).hom.naturality
       ((leftDerivedUpperStarIsoMapDerivedCategory C a).inv.app K)
@@ -274,6 +272,8 @@ variable {C D E : Type*} [Category.{w + 1} C] [Category.{w + 1} D]
   [PreservesFiniteLimits H] [PreservesFiniteColimits H]
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+omit [IsGrothendieckAbelian.{w + 1} D] [MonoidalCategory D] [MonoidalPreadditive D]
+  [SymmetricCategory D] [MonoidalClosed D] [Abelian.HasFunctorialFlatResolution D] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem compositeTensor_ext [(F₂ ⋙ H).PreservesFlat] [(F₂ ⋙ H).IsLeftAdjoint]

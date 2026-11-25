@@ -13,8 +13,6 @@ import Mathlib.Algebra.CharP.CharAndCard
 The canonical scalar localization carries the integral tensor and pullback maps
 into the rational ones. This is the common normalization calculation for the
 proper and open projection mates.
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-rational-pullback-tensor-localization-square).
 -/
 
 @[expose] public noncomputable section
@@ -72,9 +70,7 @@ private theorem mapHEq (F : A ⥤ B) {X Y X' Y' : A}
 end ProjectionTransport
 
 /-- Localization of the prescribed integral tensor is the prescribed rational
-bifunctor on integral inputs, including its morphism action.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-rational-pullback-tensor-localization-square). -/
+bifunctor on integral inputs, including its morphism action. -/
 theorem rationalProjectionTensorFunctorEq
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]
@@ -131,9 +127,7 @@ theorem rationalProjectionTensorFunctorEq
   rw [Functor.uncurry_obj_curry_obj, Functor.uncurry_obj_curry_obj]
   exact he
 
-/-- The shared tensor endpoint comparison, constructed from the proved functor equality.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-rational-pullback-tensor-localization-square). -/
+/-- The shared tensor endpoint comparison, constructed from the proved functor equality. -/
 def rationalProjectionTensorComparison
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]
@@ -175,19 +169,7 @@ private theorem rationalProjectionPullComparison
     (eqToHom_heq_id_dom _ _ _).symm)
 
 /-- The canonical tensor comparison commutes with pullback for any pair of supplied
-integral and rational tensor-pullback isomorphisms normalized to the canonical maps.
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-rational-pullback-tensor-localization-square).
-
-Proof: identify the integral source and target objects using the prescribed
-pullback and tensor normalizations. Map the integral normalization through scalar
-localization. The defining formula for canonicalRationalPullbackTensor identifies
-its hom on localized inputs with this mapped integral hom. The prescribed
-pullback comparison is the identity on these integral models, hence is the
-isomorphism of the proved pullback functor equality. Transport the heterogeneous
-hom equality through that functor equality and the two tensor functor equalities.
-This produces the displayed square without any faithfulness or nonzero-input
-assumptions. -/
+integral and rational tensor-pullback isomorphisms normalized to the canonical maps. -/
 theorem rationalProjectionPullTensorSquare
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]

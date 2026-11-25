@@ -176,8 +176,6 @@ private theorem integral_factor_support_subset (X Z : Scheme.{u}) [IsNoetherian 
   exact ((genericPoint_specializes z).map j.continuous).mem_closed
     hclosed hgeneric
 
--- The existential module structure is used implicitly in the finrank expression.
-set_option linter.unusedVariables false in
 /-- An ideal and a coherent module of generic rank one have a common submodule whose
 two cokernels admit integral-ideal filtrations on strictly smaller closed supports.
 The zero ideal is recorded separately. This statement involves no cohomology property.
@@ -189,7 +187,7 @@ theorem exists_integral_ideal_comparison_filtrations (X W : Scheme.{u})
     (hGann : ∀ a ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk (i.base (genericPoint W))),
       ∀ v : (RingedSpace.moduleStalkFunctor X.toRingedSpace
         (i.base (genericPoint W))).obj G, a • v = 0)
-    (hGrank : ∃ inst : Module (X.residueField (i.base (genericPoint W)))
+    (hGrank : ∃ _inst : Module (X.residueField (i.base (genericPoint W)))
       ((RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint W))).obj G),
       (∀ (a : X.presheaf.stalk (i.base (genericPoint W)))
         (v : (RingedSpace.moduleStalkFunctor X.toRingedSpace

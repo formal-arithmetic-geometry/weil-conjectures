@@ -81,12 +81,7 @@ variable {r} [Abelian.HasFunctorialFlatResolution C]
 /-- **The reduction triangle modulo `r`, with its first morphism**: if
 `0 ⟶ R --r--> R --φ--> S ⟶ 0` is short exact, then for every `K ∈ D(Mod_R(C))` there is a
 distinguished triangle `K --r_K--> K ⟶ S ⊗ᴸ_R K ⟶ K[1]`, the first map being the action of `r` on
-the derived category, and the derived extension of scalars `S ⊗ᴸ_R K` being regarded as a complex
-of `R`-modules:
-```
-K --r_K--> K --g--> S ⊗ᴸ_R K --h--> K[1]
-```
--/
+the derived category, and `S ⊗ᴸ_R K` being regarded as a complex of `R`-modules. -/
 theorem exists_distinguished_derivedRegularEndSMul_derivedExtendScalars (w : r.hom ≫ φ = 0)
     (hφ : (ShortComplex.mk _ _ w).ShortExact) (K : DerivedCategory (Mod C R)) :
     ∃ (g : K ⟶ (comap φ).mapDerivedCategory.obj ((extendScalars φ).leftDerivedFunctor.obj K))

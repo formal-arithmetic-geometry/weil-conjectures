@@ -29,6 +29,11 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OriginalIntegra
 
 This is the scalar section-existence step of integral compatible morphism gluing.
 It constructs no morphism and supplies no restriction or linearity data.
+
+## References
+
+* Hemo, Richarz, Scholbach, Proposition 5.1
+* Bhatt, Scholze, Section 6.1
 -/
 
 @[expose] public section
@@ -313,24 +318,7 @@ private theorem local_limit
     (hz k)
   simpa only [Mod.comp_hom', ← Category.assoc, Sheaf.unitHomEval_comp, ha] using hh
 
-/-- Convergence of individual sections of a finitely presented integral module.
-Source: Hemo--Richarz--Scholbach, Proposition 5.1; Bhatt--Scholze, Section 6.1.
-(blueprint: lem-sp-original-integral-ordinary-quotient-compatible-limit-finite-presentation).
-Proof: cover the test U by w-contractible affine pro-etale tests. Weakly etale
-pullback is restriction and preserves the finite presentation. The regular
-coefficient module on each such test is projective, and its endomorphism ring is
-the ring of continuous O_E-valued functions on the compact extremally disconnected
-component space. Present N as a cokernel of a matrix between finite sums of this
-regular module. Identify each section with a morphism from the regular module;
-the supplied ordinary quotient equations give compatible regular-module maps.
-Apply exists_cokernel_limit_of_continuous_end to this finite presentation. Its
-compact matrix argument constructs the regular-module map with every prescribed
-reduction. Transport it back through the presentation isomorphism and evaluate
-at the unit section to obtain a local section limit. Finite-presentation
-quotient-separatedness proves uniqueness. Restrict to overlaps, refine them by
-w-contractible tests and use this uniqueness to identify the restrictions.
-The sheaf condition now glues the local limits on U, with all reductions checked
-on the cover. Empty tests, zero presentations and bounded torsion are included. -/
+/-- Convergence of individual sections of a finitely presented integral module. -/
 theorem originalIntegralOrdinaryQuotient_compatibleLimit_finitePresentation
     (ell : ℕ) [Fact ell.Prime]
     (E : IntermediateField ℚ_[ell] (PadicAlgCl ell))

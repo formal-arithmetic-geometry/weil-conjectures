@@ -612,10 +612,9 @@ theorem scalarJInv_app_isIso (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X)
   have := hIso
   infer_instance
 
-set_option linter.style.haveILetI false in
 theorem scalarJInv_isIso (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X)
     [IsOpenImmersion f] : IsIso (scalarJInv φ f) := by
-  letI : ∀ M : Modules Λ U, IsIso ((scalarJInv φ f).app M) :=
+  let : ∀ M : Modules Λ U, IsIso ((scalarJInv φ f).app M) :=
     fun M ↦ scalarJInv_app_isIso φ f M
   exact NatIso.isIso_of_isIso_app _
 

@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePointsGeometry
 * [Stacks, Tag 00P4]
 -/
 
-set_option linter.style.haveILetI false
 
 @[expose] public section
 
@@ -46,11 +45,11 @@ theorem zeroDimensional_baseChange_fibre_topology
         (Spec.map (CommRingCat.ofHom (algebraMap k k'))) : Scheme.{v}) ≤ 0 := by
   let f : C ⟶ Spec (.of k) := C ↘ Spec (.of k)
   let g := Spec.map (CommRingCat.ofHom (algebraMap k k'))
-  letI : DiscreteTopology C := (zeroDimensional_baseChange_geometry k C hC).2.1
-  letI : LocallyQuasiFinite f :=
+  let : DiscreteTopology C := (zeroDimensional_baseChange_geometry k C hC).2.1
+  let : LocallyQuasiFinite f :=
     locallyQuasiFinite_iff_isDiscrete_preimage_singleton.mpr
       (fun _ ↦ IsDiscrete.univ.mono (Set.subset_univ _))
-  letI : IsLocallyArtinian (pullback f g) :=
+  let : IsLocallyArtinian (pullback f g) :=
     IsLocallyArtinian.of_locallyQuasiFinite (pullback.snd f g)
   exact topologicalKrullDim_zero_of_discreteTopology _
 

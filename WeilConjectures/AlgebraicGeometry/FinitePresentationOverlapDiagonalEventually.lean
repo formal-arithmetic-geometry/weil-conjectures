@@ -101,8 +101,6 @@ private lemma refinement_comp
     rw [Category.assoc, overlapRefinementHom_comp, overlapRefinementHom_comp,
       overlapRefinementHom_comp]
 
--- The existing existential witness `hkl` is not used in the statement after its binder.
-set_option linter.unusedVariables false in
 /-- The identity defect of a single cover chart vanishes eventually, and remains
 zero at every later stage.
 (Stacks, Tag 01ZR) -/
@@ -117,7 +115,7 @@ theorem finitePresentation_overlap_diagonal_eventually
     [Finite U.I₀] [∀ a, IsAffine (U.X a)]
     (N : (a : U.I₀) → (U.X a).Modules)
     (a : U.I₀)
-    (hN : ∀ a, (N a).IsFinitePresentation) (hNq : ∀ a, (N a).IsQuasicoherent)
+    (hN : ∀ a, (N a).IsFinitePresentation) (_hNq : ∀ a, (N a).IsQuasicoherent)
     :
     ∀ (k : I) (hjk : j ≤ k),
       let q₀ := overlapStageMap R f hij hjk
@@ -129,7 +127,7 @@ theorem finitePresentation_overlap_diagonal_eventually
           (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj (N a))) →
         (T.pull (p := p₀) (α := fun a ↦ a)
           (fun a ↦ V₀.pullbackHom_map p₀ a)).Coherent →
-        ∃ (l : I) (hkl : k ≤ l), ∀ (m : I) (hkm : k ≤ m), l ≤ m →
+        ∃ (l : I) (_hkl : k ≤ l), ∀ (m : I) (hkm : k ≤ m), l ≤ m →
           let q := overlapStageMap R f hij (hjk.trans hkm)
           let V : (pullback f (Spec.map
               (R.map (homOfLE (hij.trans (hjk.trans hkm)))))).OpenCover.{u} :=

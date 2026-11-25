@@ -54,11 +54,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 
 /-- *Proper direct image on the localizing categories*, the direct-sum clause: for a proper
 morphism `p : Z ⟶ Y` of finite-type `k`-schemes, `Rp_*` preserves coproducts of objects of
-`Loc(Dctf(Z, Λ))`. Such objects have cohomology sheaves of étale origin
-(`AlgebraicGeometry.ProEtale.DerivedCategory.localizingClosure_constructibleFiniteTor_le`), and
-the proper direct image commutes with coproducts of such complexes
-(`AlgebraicGeometry.ProEtale.isIso_sigmaComparison_rightDerivedLowerStar_of_etaleOriginHomology`).
--/
+`Loc(Dctf(Z, Λ))`. -/
 theorem preservesColimit_discrete_rightDerivedLowerStar_of_localizingClosure {Z : Scheme.{u}}
     (p : Z ⟶ Y) [IsProper p] (aZ : Z ⟶ Spec (.of k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ]
     (hp : p ≫ aY = aZ) {J : Type (u + 1)}
@@ -99,12 +95,7 @@ theorem preservesColimitsOfShape_localizingClosure_rightDerivedLowerStar_of_isPr
 
 include aY in
 /-- The compact-support functor `Rf_!(c) = Rp_* ∘ j_!` of one compactification `c` preserves
-coproducts of objects of `Loc(Dctf(X, Λ))`: `j_!` maps
-`Loc(Dctf(X, Λ))` into `Loc(Dctf(X̄, Λ))` and preserves coproducts
-(`AlgebraicGeometry.ProEtale.localizingClosure_constructibleFiniteTor_openImmersionLowerShriek`),
-and `Rp_*` preserves coproducts of objects of `Loc(Dctf(X̄, Λ))`
-(`AlgebraicGeometry.ProEtale.preservesColimit_discrete_rightDerivedLowerStar_of_localizingClosure`).
--/
+coproducts of objects of `Loc(Dctf(X, Λ))`. -/
 theorem preservesColimitsOfShape_localizingClosure_rightDerivedLowerShriekOfCompactification
     (J : Type (u + 1)) :
     PreservesColimitsOfShape (Discrete J)

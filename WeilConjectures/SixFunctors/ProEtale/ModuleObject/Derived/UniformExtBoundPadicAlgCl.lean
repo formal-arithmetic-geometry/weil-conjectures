@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClUn
 /-!
 # The uniform `Ext` bound for constructible `ℚ̄_ℓ`-sheaves, by dévissage
 
-Blueprint `lemma-uniform-ext-bound`, coefficients `ℚ̄_ℓ`. Let `X` be a scheme with
+Let `X` be a scheme with
 noetherian underlying space. If, for every finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, constructible
 `E_X`-modules satisfy the uniform `Ext` bound, so do constructible `ℚ̄_{ℓ,X}`-modules
 (`ProEtale.hasUniformConstructibleExtBound_padicAlgClRingObj_of_padicSubfield`).
@@ -84,10 +84,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 /-- Let `K ⊆ ℚ̄_ℓ` be a finite subextension of `ℚ_ℓ` and `M` a constructible `K_X`-module on a
 scheme `X` with noetherian underlying space, such that the morphisms `M[0] ⟶ B[n]` vanish for
 every constructible `K_X`-module `B` and `n ≤ N`. Then the morphisms
-`(ℚ̄_ℓ ⊗ M)[0] ⟶ (ℚ̄_ℓ ⊗ G)[n]` vanish for every constructible `K_X`-module `G` and `n ≤ N`:
-they are the morphisms `M[0] ⟶ Res(ℚ̄_ℓ ⊗ G)[n]`, and `Res(ℚ̄_ℓ ⊗ G)` is the filtered colimit of
-the constructible `K_X`-modules `Res(F ⊗ G)`, `F ⊇ K` finite, out of which `Hom(M[0], -[n])`
-commutes. -/
+`(ℚ̄_ℓ ⊗ M)[0] ⟶ (ℚ̄_ℓ ⊗ G)[n]` vanish for every constructible `K_X`-module `G` and `n ≤ N`. -/
 theorem eq_zero_of_singleFunctor_extendScalars_padicSubfieldRingObjToPadicAlgCl {X : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace X] {K : FiniteIntermediateField ℓ}
     {M G : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ K)}
@@ -264,10 +261,7 @@ theorem eq_zero_of_singleFunctor_extendScalars_padicSubfieldRingObjToPadicAlgCl'
 /-- Let `M` be a constructible `H_X`-module on a scheme `X` with noetherian underlying space,
 such that the morphisms `M[0] ⟶ B[n]` vanish for every constructible `H_X`-module `B` and
 `n ≤ N`. Then the morphisms `(ℚ̄_ℓ ⊗ M)[0] ⟶ B[n]` vanish for every constructible
-`ℚ̄_ℓ,X`-module `B` and `n ≤ N`, by dévissage of `B`
-(`ProEtale.CondensedRing.prop_singleFunctor_of_isConstructibleModuleObject`) to the
-generators `ℚ̄_ℓ ⊗ G`, `G` a constructible sheaf over a finite subextension
-(`ProEtale.exists_iso_singleFunctor_extendScalars_of_lowerShriek`). -/
+`ℚ̄_ℓ,X`-module `B` and `n ≤ N`. -/
 theorem eq_zero_of_singleFunctor_extendScalars_padicSubfieldRingObjToPadicAlgCl_of_constructible
     {X : Scheme.{u}} [TopologicalSpace.NoetherianSpace X] {H : FiniteIntermediateField ℓ}
     {M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ H)}
@@ -306,11 +300,9 @@ theorem eq_zero_of_singleFunctor_extendScalars_padicSubfieldRingObjToPadicAlgCl_
   rw [← cancel_mono e.inv, zero_comp]
   exact hP n hn _
 
-/-- Blueprint `lemma-uniform-ext-bound`, coefficients `ℚ̄_ℓ`: the uniform `Ext`
-bound for constructible `ℚ̄_{ℓ,X}`-modules follows from the uniform bound over the finite
-subextensions `E ⊆ ℚ̄_ℓ`. Same statement as
-`ProEtale.hasUniformConstructibleExtBound_padicAlgClRingObj_of_padicSubfield`,
-proved by dévissage of both arguments instead of the 2-colimit description of `Dᵇc(X, ℚ̄_ℓ)`. -/
+/-- The uniform `Ext` bound for constructible `ℚ̄_{ℓ,X}`-modules follows from the uniform bound
+over the finite subextensions `E ⊆ ℚ̄_ℓ`. Same statement as
+`ProEtale.hasUniformConstructibleExtBound_padicAlgClRingObj_of_padicSubfield`. -/
 theorem hasUniformConstructibleExtBound_padicAlgClRingObj_of_padicSubfield
     {X : Scheme.{u}} [TopologicalSpace.NoetherianSpace X]
     (h : ∀ E : FiniteIntermediateField ℓ, HasUniformConstructibleExtBound

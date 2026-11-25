@@ -11,10 +11,13 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.Integr
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResidueTensorRouteModel
 
 /-! Computation of the scalar-route in the residue tensor square.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
-(blueprint: new-integral-residue-scalar-route-model)
 
-The target is the explicit ordinary homotopy tensor model. -/
+The target is the explicit ordinary homotopy tensor model.
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(3), Remark 6.8.15.
+-/
 
 @[expose] public section
 
@@ -55,21 +58,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- Compute the scalar-route against the ordinary homotopy tensor model.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
-(blueprint: new-integral-residue-scalar-route-model)
-
-Proof. Expand the canonical restriction/pullback square using the exact
-pullback identifications. The scalar comparison is the inverse mate of this
-square. Its counit identity cancels the scalar-extension comparison against the
-extension counit that defines the tensor presentation on X. The ordinary
-restriction/pullback square and the regular-module unit comparison identify its
-coefficient with the inverse image of the coefficient on Y. On ordinary balanced
-tensor presentations both remaining maps send s tensor m to s tensor f*(m):
-precompose with the balanced coequalizer epimorphism to verify the equality.
-Apply the homotopy quotient and Qh; the exact-pullback counit and the defining
-left-derived comparison identities give the stated formula. The extension
-counit is retained as a map, so P and the residue coefficient need not be flat. -/
+/-- Compute the scalar-route against the ordinary homotopy tensor model. -/
 theorem integralResidue_scalarRoute_model {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat)
     (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})

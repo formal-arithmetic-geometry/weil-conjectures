@@ -458,7 +458,7 @@ private theorem c3_etaleObjectSections_baseChange {R X Y : Scheme.{u}} (W : R.Et
         · simp [i, j, Vf, Vg, hm]
         · simp [i, j, Vf, Vg, hm', pullback.condition]
       · simp [i, j, Vf, Vg]
-  let _ : IsIso i := hi
+  have _ : IsIso i := hi
   have hp' : Etale Vg.hom := inferInstance
   have huH := c3_etale_restriction_pullback_unit_eq A h Vf.hom m Vg.hom hm' i
     (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _) hp' H
@@ -615,8 +615,6 @@ private theorem c3_globalSections_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
     (Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology A
       terminalIsTerminal).inv.app ((upperStar A f).obj C)) hu.symm
 
-set_option linter.unusedVariables false in
--- Projection equality proofs are referenced only through proof-irrelevant arguments.
 set_option maxRecDepth 4000 in
 -- Nested inverse-image and global-section functors need extra elaboration reduction.
 /-- Evaluation of f_* f^* G at an étale object W identifies naturally with the global
@@ -631,7 +629,7 @@ private theorem c3_pullbackSections_comparison (R : Scheme.{u})
       ∀ {X Y : Scheme.{u}} (h : X ⟶ Y) (f : Y ⟶ R) (g : X ⟶ R)
         (w : g = h ≫ f) (m : pullback W.hom g ⟶ pullback W.hom f)
         (hm : m ≫ pullback.fst W.hom f = pullback.fst W.hom g)
-        (hm' : m ≫ pullback.snd W.hom f = pullback.snd W.hom g ≫ h),
+        (_hm' : m ≫ pullback.snd W.hom f = pullback.snd W.hom g ≫ h),
         ((lowerStar A f).map
             ((upperStarLowerStarAdjunction A h).unit.app ((upperStar A f).obj G)) ≫
           (lowerStarComp A h f g w).hom.app _ ≫

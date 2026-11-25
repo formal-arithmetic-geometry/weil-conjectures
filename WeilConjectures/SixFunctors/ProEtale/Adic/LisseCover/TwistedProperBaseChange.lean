@@ -18,21 +18,7 @@ Let `p : X ⟶ Y` be proper and smooth, `f : V ⟶ X` a pro-étale cover and `c`
 the constant sheaf `S_V`, defining a pro-étale locally constant sheaf of sets `F_c` on `X`
 (`AlgebraicGeometry.IsDescentCocycle`). If `F_c` has a section over every regular Noetherian
 `X`-scheme, then every point `y` of `Y` has an affine étale neighbourhood `U` such that `F_c` has
-a section over `X ×_Y U` (`AlgebraicGeometry.exists_etale_isTwistedSection_of_isProper`,
-blueprint `proposition-proper-base-change-degree-zero`).
-
-The proof follows proper base change in degree zero:
-1. over a strictly henselian local ring `A`, a section of `F_c` over the closed geometric fibre
-   `Z` of a proper `P ⟶ Spec A` extends to `P`
-   (`AlgebraicGeometry.exists_isTwistedSection_of_geometricFibre`): the sections of the sheaf
-   `ℤ[F_c]` of free abelian groups over `P` and `Z` agree
-   (`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_geometricFibre`), and the locus
-   where the extension of `[σ_Z]` is a basis vector is open and closed and descends to a closed
-   subset of `P` containing the closed fibre, hence everything, `P ⟶ Spec A` being closed;
-2. a section over the base change `X ×_Y Spec 𝒪^{sh}_{Y,s}` to the strict localization comes
-   from a section over some `X ×_Y U` for an affine étale neighbourhood `U` of `s`
-   (`AlgebraicGeometry.exists_etale_isTwistedSection_of_strictLocalization`), the base change
-   being the limit of the `X ×_Y U`.
+a section over `X ×_Y U` (`AlgebraicGeometry.exists_etale_isTwistedSection_of_isProper`).
 -/
 
 @[expose] public section
@@ -46,8 +32,7 @@ namespace AlgebraicGeometry
 variable {X V : Scheme.{u}} {f : V ⟶ X} {S : Type} {c : ↥(pullback f f) → S → S}
 
 /-- The closed geometric point `Spec κ̄ ⟶ Spec A` of a local ring `A`, for `κ̄` an algebraic
-closure of the residue field, maps to the closed point (blueprint
-`proposition-proper-base-change-degree-zero`). -/
+closure of the residue field, maps to the closed point. -/
 lemma spec_algebraMap_algebraicClosure_closedPoint (A : Type u) [CommRing A] [IsLocalRing A] :
     (Spec.map (CommRingCat.ofHom (algebraMap A
       (AlgebraicClosure (IsLocalRing.ResidueField A))))).base
@@ -66,14 +51,7 @@ lemma spec_algebraMap_algebraicClosure_closedPoint (A : Type u) [CommRing A] [Is
 /-- **Sections over the closed geometric fibre extend over a strictly henselian base.** Let `A`
 be a strictly henselian local ring, `pD : P ⟶ Spec A` proper and `π : P ⟶ X`. A section of the
 twisted sheaf of sets defined by `c` over the closed geometric fibre `Z = P ×_A κ̄` extends to a
-section over `P`.
-
-The sections of the sheaf of free abelian groups `ℤ[F_c]` over `P` restrict bijectively to those
-over `Z` (`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_geometricFibre`); let `τ`
-be the extension of `[σ_Z]`. The locus where `τ` is a basis vector descends to an open and
-closed subset of `P` (`AlgebraicGeometry.isClopen_image_fiber_of_isLocallyConstant`) containing
-`Z`; its complement is closed, with closed image in `Spec A` avoiding the closed point, hence
-empty. (blueprint `proposition-proper-base-change-degree-zero`) -/
+section over `P`. -/
 theorem exists_isTwistedSection_of_geometricFibre [WeaklyEtale f] [Surjective f]
     [QuasiCompact f] [QuasiSeparated f] (hc : IsDescentCocycle f c) (A : Type u) [CommRing A]
     [HenselianLocalRing A] [IsSepClosed (IsLocalRing.ResidueField A)] {P : Scheme.{u}}
@@ -122,7 +100,7 @@ theorem exists_isTwistedSection_of_geometricFibre [WeaklyEtale f] [Surjective f]
   exact ⟨σ, hσ⟩
 
 /-- The base change `A ×_Y X ⟶ B ×_Y X` of a morphism of `Y`-schemes `φ : A ⟶ B` which is affine
-is affine (blueprint `proposition-proper-base-change-degree-zero`). -/
+is affine. -/
 lemma isAffineHom_overPullback_map_left {X Y : Scheme.{u}} (p : X ⟶ Y)
     {A B : CategoryTheory.Over Y} (φ : A ⟶ B) [IsAffineHom φ.left] :
     IsAffineHom ((CategoryTheory.Over.pullback p).map φ).left := by
@@ -139,12 +117,7 @@ lemma isAffineHom_overPullback_map_left {X Y : Scheme.{u}} (p : X ⟶ Y)
 /-- **Sections over the base change to the strict localization descend to an étale
 neighbourhood.** Let `p : X ⟶ Y` be proper and `s : Spec Ω ⟶ Y` a geometric point. A section of
 the twisted sheaf of sets defined by `c` over `X ×_Y Spec 𝒪^{sh}_{Y,s}` comes from a section over
-`X ×_Y U` for some affine étale neighbourhood `U` of `s`: the base change to the strict
-localization is the limit of the `X ×_Y U`
-(`AlgebraicGeometry.Scheme.isLimitStrictLocalizationConePullback`), and twisted sections over a
-limit come from a finite stage
-(`AlgebraicGeometry.IsTwistedSection.exists_of_isLimit`). (blueprint
-`proposition-proper-base-change-degree-zero`) -/
+`X ×_Y U` for some affine étale neighbourhood `U` of `s`. -/
 theorem exists_etale_isTwistedSection_of_strictLocalization [QuasiCompact f] [QuasiSeparated f]
     (hc : IsDescentCocycle f c) {Y : Scheme.{u}} (p : X ⟶ Y) [IsProper p] {Ω : Type u}
     [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
@@ -194,15 +167,7 @@ theorem exists_etale_isTwistedSection_of_strictLocalization [QuasiCompact f] [Qu
 quasi-separated, and `c` a descent cocycle on the constant sheaf `S_V`. If the twisted sheaf of
 sets `F_c` on `X` has a section over every regular, locally Noetherian, quasi-compact
 `X`-scheme, then every point `y` of `Y` has an affine étale neighbourhood `j : U ⟶ Y` such that
-`F_c` has a section over `X ×_Y U`.
-
-Let `s` be the geometric point at an algebraic closure of `κ(y)` and `D = Spec 𝒪^{sh}_{Y,s}`
-the strict localization. The closed geometric fibre `Z` of the proper `X ×_Y D ⟶ D` is smooth
-over a field, hence regular, Noetherian and quasi-compact, so `F_c` has a section over `Z`; it
-extends to `X ×_Y D` (`AlgebraicGeometry.exists_isTwistedSection_of_geometricFibre`), and comes
-from some `X ×_Y U` (`AlgebraicGeometry.exists_etale_isTwistedSection_of_strictLocalization`).
-Smoothness of `p` is only used to make `Z` regular. (blueprint
-`proposition-proper-base-change-degree-zero`) -/
+`F_c` has a section over `X ×_Y U`. -/
 theorem exists_etale_isTwistedSection_of_isProper {X Y V : Scheme.{u}} (p : X ⟶ Y) [IsProper p]
     [Smooth p] (f : V ⟶ X) [WeaklyEtale f] [Surjective f] [QuasiCompact f] [QuasiSeparated f]
     {S : Type} {c : ↥(pullback f f) → S → S} (hc : IsDescentCocycle f c)

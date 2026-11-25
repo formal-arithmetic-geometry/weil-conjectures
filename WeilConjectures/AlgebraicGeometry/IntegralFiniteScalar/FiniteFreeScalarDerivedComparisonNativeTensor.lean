@@ -16,7 +16,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.IntegralFiniteScalar
 open CondensedRing
 
-set_option linter.unusedVariables false in
 /-- K-flatness gives the native derived tensor comparison isomorphism.
 
 Resolve the two factors by the K-flat complex;
@@ -24,12 +23,12 @@ the normalized total-tensor comparison is an isomorphism and localization preser
 it, yielding the displayed `DerivedCategory.Q` multiplication map.
 -/
 theorem finiteFreeScalarDerivedComparison_nativeTensor
-    (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}
+    (_D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}
     (a : Λ ⟶ Λ') (S : ShortComplex (PointModules Λ))
-    (t : S.X₃ ≅ (Mod.comap a.hom.hom).obj (Mod.regular Λ'.X))
-    (hS : S.ShortExact) (r : ℕ)
-    (e₁ : S.X₁ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))
-    (e₂ : S.X₂ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))
+    (_t : S.X₃ ≅ (Mod.comap a.hom.hom).obj (Mod.regular Λ'.X))
+    (_hS : S.ShortExact) (r : ℕ)
+    (_e₁ : S.X₁ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))
+    (_e₂ : S.X₂ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))
     (Z : Scheme.{u})
     (hK : CochainComplex.IsKFlatIndependentCoefficients
       (((ModuleRingedComparison.equivalence Λ.X Z).functor.mapHomologicalComplex

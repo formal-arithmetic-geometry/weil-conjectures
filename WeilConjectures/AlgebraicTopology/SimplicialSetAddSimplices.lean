@@ -192,17 +192,16 @@ private theorem range_inclusion {S : SSet.{u}} (A : S.Subcomplex)
   ext x
   exact ⟨fun ⟨y, hy⟩ ↦ hy ▸ y.property, fun hx ↦ ⟨⟨x, hx⟩, rfl⟩⟩
 
-set_option linter.unusedVariables false in
 /-- An inclusion of finite simplicial sets can be built by adjoining one simplex
 at a time. -/
 theorem add_simplices
     (S : SSet.{u})
     (U V : S.Subcomplex)
     (hUV : U ≤ V)
-    (hU_fin : ∀ (n : ℕ), Finite ((U : SSet).obj (Opposite.op (SimplexCategory.mk n))))
-    (hV_fin : ∀ (n : ℕ), Finite ((V : SSet).obj (Opposite.op (SimplexCategory.mk n))))
-    (hU_nonempty : ∀ (n : ℕ), Nonempty ((U : SSet).obj (Opposite.op (SimplexCategory.mk n))))
-    (hV_nonempty : ∀ (n : ℕ), Nonempty ((V : SSet).obj (Opposite.op (SimplexCategory.mk n))))
+    (_hU_fin : ∀ (n : ℕ), Finite ((U : SSet).obj (Opposite.op (SimplexCategory.mk n))))
+    (_hV_fin : ∀ (n : ℕ), Finite ((V : SSet).obj (Opposite.op (SimplexCategory.mk n))))
+    (_hU_nonempty : ∀ (n : ℕ), Nonempty ((U : SSet).obj (Opposite.op (SimplexCategory.mk n))))
+    (_hV_nonempty : ∀ (n : ℕ), Nonempty ((V : SSet).obj (Opposite.op (SimplexCategory.mk n))))
     [SSet.Finite (U : SSet)] [SSet.Finite (V : SSet)] :
     ∃ (r : ℕ) (W : Fin (r + 1) → S.Subcomplex),
       W 0 = U ∧ W ⟨r, Nat.lt_succ_self r⟩ = V ∧

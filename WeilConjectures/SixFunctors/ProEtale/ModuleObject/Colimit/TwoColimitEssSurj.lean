@@ -15,8 +15,7 @@ Let `ℓ` be a prime and `X` a scheme with noetherian underlying space. Assuming
 `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, every bounded constructible `ℚ̄_ℓ,X`-complex `K` is isomorphic to
 `T^X_{E,Ω} K_E = ℚ̄_ℓ,X ⊗ᴸ_{E_X} K_E` for some finite subextension `E` and some bounded
 constructible `E_X`-complex `K_E`
-(`ProEtale.exists_iso_derivedExtendScalarsToPadicAlgCl_obj`, blueprint
-`proposition-dctf-x-qbar-2-colimit--2`, `lemma-descent-finite-coefficient-field--2`).
+(`ProEtale.exists_iso_derivedExtendScalarsToPadicAlgCl_obj`).
 
 The complexes which descend in this sense (`ProEtale.descendsToPadicSubfield`) form a class closed
 under isomorphisms and extensions in distinguished triangles (the cone step,
@@ -39,8 +38,7 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme PadicAlgCl
 
-/-- **(Obj)**, blueprint `proposition-dctf-x-qbar-2-colimit--2`,
-`lemma-descent-finite-coefficient-field--2`: on a scheme with noetherian underlying space,
+/-- **(Obj)**: on a scheme with noetherian underlying space,
 assuming (Hom)-surjectivity `hHom`, every bounded constructible `ℚ̄_ℓ,X`-complex `K` is
 isomorphic to `ℚ̄_ℓ,X ⊗ᴸ_{E_X} K_E` for some finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and some
 bounded constructible `E_X`-complex `K_E`. -/

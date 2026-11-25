@@ -12,8 +12,10 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-! # Ordinary integral pullback and successive exact open restrictions
 
-Source: Stacks Project, sites-modules.tex, Tag 03D8; derived.tex, Tag 06YY.
-(blueprint: lem-fix-ordinary-integral-nested-open-restriction).
+## References
+
+* [Stacks, Tag 03D8](https://stacks.math.columbia.edu/tag/03D8)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public section
@@ -190,8 +192,6 @@ private noncomputable def openModuleIso
   exact (ordinaryIntegralModuleAdjunction l E j).leftAdjointUniq (d.ofNatIsoRight e)
 
 /-- The ordinary derived pullback along an open immersion is normalized exact restriction.
-Source: Stacks Project, sites-modules.tex, Tag 03D8; derived.tex, Tag 06YY.
-(blueprint: lem-fix-ordinary-integral-nested-open-restriction).
 -/
 private theorem ordinaryIntegralOpenRestrictionDerivedIso
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -218,8 +218,6 @@ private theorem ordinaryIntegralOpenRestrictionDerivedIso
       Functor.mapDerivedCategoryNatIso (openModuleIso l E j)⟩
 
 /-- Ordinary derived pullback composes for arbitrary composable scheme morphisms.
-Source: Stacks Project, sites-modules.tex, Tag 03D8; derived.tex, Tag 06YY.
-(blueprint: lem-fix-ordinary-integral-nested-open-restriction).
 -/
 private theorem ordinaryIntegralDerivedPullbackComposition
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -236,23 +234,7 @@ private theorem ordinaryIntegralDerivedPullbackComposition
       (IntegralOrdinary.pullIso l E g)⟩
 
 /-- Ordinary uncompleted pullback along an open followed by an arbitrary morphism
-is successive normalized exact restriction. No completeness hypothesis occurs here.
-
-Source: Stacks Project, sites-modules.tex, lemma-push-pull-composition-modules
-(Tag 03D8), and derived.tex, Tag 06YY; step 3 of
-lem-fix-clopen-completed-restriction-comparison.
-(blueprint: lem-fix-ordinary-integral-nested-open-restriction).
-
-Proof: the normalized finite restriction isomorphisms preserve constant sections.
-Naturality and the completed quotient-projection equations identify their adjoint
-coefficient map with the ordinary direct coefficient map. Lift the site adjunction
-to module sheaves; uniqueness of left adjoints identifies ordinary module pullback
-along an open with exact restriction. Uniqueness of total left derived functors
-then gives the derived identification. Transport the existing geometric pullback
-compositor through IntegralOrdinary.pullIso to obtain ordinary derived pullback
-composition. Apply it to A into V into W and A into U into V, then replace the two
-open pullbacks by their exact restrictions. The argument includes empty opens,
-identity inclusions and zero modules. -/
+is successive normalized exact restriction. No completeness hypothesis occurs here. -/
 theorem ordinaryIntegralNestedOpenRestriction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

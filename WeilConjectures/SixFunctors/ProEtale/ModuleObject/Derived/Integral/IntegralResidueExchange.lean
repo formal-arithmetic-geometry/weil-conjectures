@@ -33,8 +33,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.Bounded
 
 /-! # Reduction of integral exchange to residue-coefficient exchange
 
-Source: Bhatt--Scholze, Lemma 6.5.9(3) and Proposition 6.8.11(3)
-(blueprint: lem-weil-pbc-integral-residue-exchange).
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(3), Proposition 6.8.11(3).
 -/
 
 set_option backward.defeqAttrib.useBackward true
@@ -108,27 +109,7 @@ instance fact_isNilpotent_natCast_integralResidue :
     rw [pow_one]
     exact Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span (by simp))⟩⟩
 
-/-- Derived coefficient reduction compares integral exchange to residue exchange.
-Source: Bhatt--Scholze, Lemma 6.5.9(3) and Proposition 6.8.11(3), using the
-two-term finite free resolution of O_E/ℓ over O_E
-(blueprint: lem-weil-pbc-integral-residue-exchange).
-
-Proof in words. Multiplication by ℓ is injective on O_E and its cokernel is A = O_E/ℓ.
-The proved integral module reduction sequence, pulled back by the exact monoidal
-inverse image from the profinite point, is the two-term finite free resolution of A_X.
-Consequently derived reduction has cohomology only one degree below the bounds of M.
-On each constructible stratum, finite presentations over the discrete valuation ring
-show that its cohomology is finite over A, so reduction is bounded constructible; let N
-be that same reduced object, equipped with this property. Tensor associativity gives
-its canonical pullback comparison. The supplied hTensor identifies reduction after
-restriction as a left derived functor of tensor by the residue module. The supplied
-hPerfect and the projection formula for dualizable objects make the direct-image comparison
-invertible: equivalently, direct image preserves the finite distinguished triangle for
-multiplication by ℓ. These comparisons are adjunction mates of the underived scalar
-comparisons. Their unit and counit equations, and compatibility of pullback composition,
-identify the reduction of the unit-square-counit formula with the residue formula.
-The resulting commuting square has invertible endpoint maps, hence is an arrow
-isomorphism. This step uses neither etale origin nor proper base change. -/
+/-- Derived coefficient reduction compares integral exchange to residue exchange. -/
 theorem integralResidueExchange_comparison
     (sq : CommSq g' f' f g)
     (M : integralConstructible ℓ E X)

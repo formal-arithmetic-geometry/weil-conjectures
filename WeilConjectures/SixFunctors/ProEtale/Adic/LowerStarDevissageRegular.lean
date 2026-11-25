@@ -36,17 +36,11 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {l : ℕ} [Fact l.Prime]
 
-/-- **The inductive step of the dévissage, regular form**. Let `g : Z ⟶ Y` be a morphism locally
+/-- **The inductive step of the dévissage, regular form.** Let `g : Z ⟶ Y` be a morphism locally
 of finite type from an affine scheme to an affine scheme of finite type over a perfect field `K`,
 and assume the finiteness theorem for lisse sheaves on regular integral affine schemes over `K`
 (`H`), and for constructible sheaves on the proper closed subschemes of `Z` (`ih`). Then it holds
-for constructible sheaves on `Z`.
-
-A constructible sheaf `F` on `Z` is lisse on a stratum containing a nonempty irreducible open
-`o`; the reduced structure `R₀` on the stratum over `o` is integral, and its smooth locus over `K`
-is a nonempty open, mapped homeomorphically onto an open of `o`. Over an affine open `W` in it,
-`j^* F` is the pushforward of a lisse sheaf on the regular integral affine scheme `R₀ ×_Z W`
-along the surjective closed immersion `R₀ ×_Z W ⟶ W`. -/
+for constructible sheaves on `Z`. -/
 lemma finiteLowerStar_singleFunctor_of_isAffine_step_of_isRegular {K : Type u} [Field K]
     [PerfectField K]
     (H : ∀ ⦃Y : Scheme.{u}⦄ (_ : Y ⟶ Spec (.of K)) [LocallyOfFiniteType ‹Y ⟶ Spec (.of K)›]
@@ -153,17 +147,12 @@ lemma finiteLowerStar_singleFunctor_of_isAffine_step_of_isRegular {K : Type u} [
     finiteLowerStar_singleFunctor_of_surjective r hr _ _ (H (g ≫ s) _ hLR)
   exact finiteLowerStar_singleFunctor_of_opens g ih hF W hxW hj hjZ
 
-/-- **Dévissage for the finiteness theorem: reduction to lisse sheaves on regular schemes**
-(SGA 4½, *Th. finitude*). Over a perfect field `K`, if the derived pushforward of every lisse
+/-- **Dévissage for the finiteness theorem: reduction to lisse sheaves on regular schemes.**
+Over a perfect field `K`, if the derived pushforward of every lisse
 `ℓ`-adic sheaf along a morphism locally of finite type from a *regular integral* affine scheme
 to an affine scheme of finite type over `K` is bounded with constructible cohomology sheaves
 (`H`), then so is the derived pushforward of every constructible `ℓ`-adic sheaf along a morphism
-locally of finite type between affine schemes.
-
-The proof is the noetherian induction over the closed subschemes of the source of
-`ProEtale.finiteLowerStar_singleFunctor_of_isAffine_of_isAdicLisseSheaf_of_isIntegral`,
-with the inductive step
-`AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine_step_of_isRegular`. -/
+locally of finite type between affine schemes. -/
 theorem finiteLowerStar_singleFunctor_of_isAffine_of_isAdicLisseSheaf_of_isRegular {K : Type u}
     [Field K] [PerfectField K]
     (H : ∀ ⦃Y : Scheme.{u}⦄ (_ : Y ⟶ Spec (.of K)) [LocallyOfFiniteType ‹Y ⟶ Spec (.of K)›]

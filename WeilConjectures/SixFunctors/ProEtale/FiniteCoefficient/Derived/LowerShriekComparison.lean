@@ -17,10 +17,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 Let `f : X ⟶ Y` be a morphism admitting a compactification `X ⟶[i] Z ⟶[g] Y`. The derived lower
 shriek functors on the étale and pro-étale sites are both `Rg_* ∘ i_!`, and the comparison
 functor `ν^*` intertwines them on bounded below complexes:
-`Rf_!^{proét} ∘ ν_X^* ≅ ν_Y^* ∘ Rf_!^{ét}`. This is the compact-support comparison used in the
-proof of blueprint `theorem-existence-exceptional-inverse-image` (c), obtained from blueprint
-`theorem-bounded-below-cohomology-comparison` applied to the extension by zero and to the proper
-part.
+`Rf_!^{proét} ∘ ν_X^* ≅ ν_Y^* ∘ Rf_!^{ét}`. This is the compact-support comparison, obtained by
+applying the comparison of cohomology of bounded below complexes to the extension by zero and to the
+proper part.
 
 ## Main definitions
 
@@ -37,10 +36,10 @@ part.
 ## Implementation notes
 
 The comparison of the direct images along the proper part is the canonical isomorphism
-`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonPlusIso` of blueprint
-`theorem-bounded-below-cohomology-comparison`, the base change morphism of right derived functors
-induced by the underived base change morphism `ν^* g_* ⟶ g_* ν^*`. All comparisons of this file are
-therefore canonical composites of explicit natural isomorphisms; none involves a choice.
+`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonPlusIso`, the base change morphism of
+right derived functors induced by the underived base change morphism `ν^* g_* ⟶ g_* ν^*`. All
+comparisons of this file are therefore canonical composites of explicit natural isomorphisms; none
+involves a choice.
 -/
 
 @[expose] public section
@@ -79,14 +78,9 @@ noncomputable def comparisonLowerStarOpenImmersionRestrictionIso :
       ProEtale.openImmersionRestriction A j ⋙ ν_*(U)[A] :=
   Iso.refl _
 
-/-- Blueprint `proposition-comparison-immersions--1`: Comparison of extension by zero with
-the site morphism.
-
-The extension by zero along an open immersion `j : U ⟶ X` commutes with the comparison
-`ν^*`: `ν_X^* ∘ j^{ét}_! ≅ j^{proét}_! ∘ ν_U^*`, naturally in the étale sheaf. Both sides are
-left adjoint to the two sides of
-`AlgebraicGeometry.ProEtale.comparisonLowerStarOpenImmersionRestrictionIso`, which are equal
-(both are restriction of sections along `U ⟶ X`), and the isomorphism is its conjugate. -/
+/-- Comparison of extension by zero with the site morphism. The extension by zero along an open
+immersion `j : U ⟶ X` commutes with the comparison `ν^*`:
+`ν_X^* ∘ j^{ét}_! ≅ j^{proét}_! ∘ ν_U^*`, naturally in the étale sheaf. -/
 noncomputable def openImmersionLowerShriekComparisonUpperStarIso :
     Etale.openImmersionLowerShriek A j ⋙ ν^*(X)[A] ≅
       ν^*(U)[A] ⋙ ProEtale.openImmersionLowerShriek A j :=
@@ -101,12 +95,11 @@ section LowerStar
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [QuasiCompact g] [QuasiSeparated g]
 
-/-- Blueprint `theorem-bounded-below-cohomology-comparison`, the comparison direct image, on the
-unbounded derived categories restricted to bounded below complexes: for a quasi-compact
-quasi-separated `g`, `Rg_*^{proét} ∘ ν_Z^* ≅ ν_Y^* ∘ Rg_*^{ét}` as functors `D⁺(Z_ét) ⥤ D(Y_proét)`.
-It is the inverse of the canonical isomorphism
-`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonPlusIso`, transported
-along the inclusions of the bounded below derived categories. -/
+/-- The comparison of direct images on the unbounded derived categories restricted to bounded below
+complexes: for a quasi-compact quasi-separated `g`, `Rg_*^{proét} ∘ ν_Z^* ≅ ν_Y^* ∘ Rg_*^{ét}` as
+functors `D⁺(Z_ét) ⥤ D(Y_proét)`. It is the inverse of the canonical isomorphism
+`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonPlusIso`, transported along the
+inclusions of the bounded below derived categories. -/
 noncomputable def rightDerivedLowerStarComparisonIso :
     DerivedCategory.Plus.ι ⋙ D(ν^*(Z)[A]) ⋙ R(ProEtale.lowerStar A g) ≅
       DerivedCategory.Plus.ι ⋙ R(Etale.lowerStar A g) ⋙ D(ν^*(Y)[A]) :=
@@ -159,8 +152,7 @@ noncomputable def rightDerivedLowerShriekOfCompactificationComparisonIso {f : X 
     Functor.isoWhiskerLeft DerivedCategory.Plus.ι (Functor.associator _ _ _).symm
 
 /-- The compact-support comparison `Rf_!^{proét} ∘ ν_X^* ≅ ν_Y^* ∘ Rf_!^{ét}` as functors
-`D⁺(X_ét) ⥤ D(Y_proét)`, for the chosen compactification of `f`
-(proof of blueprint `theorem-existence-exceptional-inverse-image` (c)). -/
+`D⁺(X_ét) ⥤ D(Y_proét)`, for the chosen compactification of `f`. -/
 noncomputable def rightDerivedLowerShriekComparisonIso (f : X ⟶ Y) [HasCompactification f] :
     DerivedCategory.Plus.ι ⋙ D(ν^*(X)[A]) ⋙ ProEtale.rightDerivedLowerShriek A f ≅
       DerivedCategory.Plus.ι ⋙ Etale.rightDerivedLowerShriek A f ⋙ D(ν^*(Y)[A]) :=

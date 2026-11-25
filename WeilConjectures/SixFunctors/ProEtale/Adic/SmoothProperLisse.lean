@@ -17,20 +17,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedProper
 Let `K` be an algebraically closed field (or any field), `Y` locally of finite type over `K`,
 `f : X ⟶ Y` smooth and proper and `F` a lisse `ℓ`-adic sheaf on `X`, `ℓ` invertible in `K`.
 Then every `Hⁿ(Rf_* F[0])` is lisse
-(`ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`,
-Step 1 of blueprint `theorem-purity-higher-direct-images-under`).
-
-The proof follows the blueprint. Being lisse is local on `Y`, so `Y` may be assumed affine,
-hence `X` quasi-compact, and by the decomposition along connected components `X` may be assumed
-connected. Then `F` is trivialised on a single affine pro-étale cover `V ⟶ X`, with transition
-cocycle `γ : V ×_X V → GL_n(E)`, and a lattice of `F` is a twisted section of `γ` acting on the
-lattices of `Eⁿ`. The geometric fibres of `f` are regular, so `F` has a lattice on them
-(`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice_of_isRegular`), and by proper base
-change in degree zero every point of `Y` has an étale neighbourhood `U` such that `F` has a
-lattice on `X ×_Y U` (`AlgebraicGeometry.exists_etale_isTwistedSection_of_isProper`). There the
-lattice case applies
-(`isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_isTwistedSection`),
-and étale base change identifies the result with the restriction of `Hⁿ(Rf_* F[0])` to `U`.
+(`ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`).
 -/
 
 @[expose] public section
@@ -137,10 +124,9 @@ theorem isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isP
   exact isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper_of_connected
     hK s (ι ≫ f) (hF.upperStar ι) n
 
-/-- **Higher direct images of lisse sheaves along smooth proper morphisms are lisse** (Step 1 of
-blueprint `theorem-purity-higher-direct-images-under`): over a field `K` of characteristic `≠ ℓ`,
-the higher direct images `Rⁿf_* F` of a lisse `ℓ`-adic sheaf along a smooth proper morphism `f` of
-schemes locally of finite type over `K` are lisse. -/
+/-- **Higher direct images of lisse sheaves along smooth proper morphisms are lisse**: over a field
+`K` of characteristic `≠ ℓ`, the higher direct images `Rⁿf_* F` of a lisse `ℓ`-adic sheaf along a
+smooth proper morphism `f` of schemes locally of finite type over `K` are lisse. -/
 theorem isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper
     {K : Type u} [Field K] {X Y : Scheme.{u}} (s : Y ⟶ Spec (.of K)) (f : X ⟶ Y)
     (hK : ringChar K ≠ l) [LocallyOfFiniteType s] [Smooth f] [IsProper f] {F : AdicSheaf l X}

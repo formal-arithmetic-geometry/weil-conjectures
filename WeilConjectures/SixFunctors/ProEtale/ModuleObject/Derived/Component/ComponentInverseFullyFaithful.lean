@@ -16,8 +16,10 @@ import Mathlib.CategoryTheory.Sites.Coherent.CoherentTopology
 set_option linter.privateModule false
 
 /-! # Full faithfulness of component inverse image on abelian sheaves
-Source: Hemo--Richarz--Scholbach, Proposition 4.3(1), equation (4.2).
-(blueprint: lem-zl-component-inverse-fully-faithful).
+
+## References
+
+* Hemo--Richarz--Scholbach, Proposition 4.3(1), equation (4.2).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

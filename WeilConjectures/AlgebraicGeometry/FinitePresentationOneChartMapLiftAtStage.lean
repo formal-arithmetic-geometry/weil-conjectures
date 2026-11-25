@@ -28,7 +28,6 @@ namespace AlgebraicGeometry
 attribute [local irreducible] Scheme.Modules.tensorPullbackCompositionIso
   Scheme.Modules.openCoverTensorPullbackComparison
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- A restricted limit morphism lifts at one stage of the affine chart system.
@@ -58,7 +57,7 @@ theorem finitePresentation_one_chart_map_lift_at_stage
             (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))
             (Over.homMk (Spec.map (R.map (homOfLE hjk)))
               (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))
-      let B := Scheme.Modules.moduleBaseChange f
+      let _B := Scheme.Modules.moduleBaseChange f
               (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))
               (T' := Over.mk (c.π.app (op i)))
               (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))

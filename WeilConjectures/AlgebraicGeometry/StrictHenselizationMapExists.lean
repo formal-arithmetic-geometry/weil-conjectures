@@ -43,7 +43,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 /-- Existence of a local map over the base with the prescribed pointed residue map.
 -/
 theorem strictHenselizationMapExists
@@ -53,9 +52,9 @@ theorem strictHenselizationMapExists
     (hbar : barS = barT ≫ g)
     [Algebra (S.residueField (barS (IsLocalRing.closedPoint Ω))) Ω]
     [Algebra (T.residueField (barT (IsLocalRing.closedPoint Ω))) Ω]
-    (hΩS : algebraMap (S.residueField (barS (IsLocalRing.closedPoint Ω))) Ω =
+    (_hΩS : algebraMap (S.residueField (barS (IsLocalRing.closedPoint Ω))) Ω =
       (Scheme.descResidueField (Scheme.stalkClosedPointTo barS)).hom)
-    (hΩT : algebraMap (T.residueField (barT (IsLocalRing.closedPoint Ω))) Ω =
+    (_hΩT : algebraMap (T.residueField (barT (IsLocalRing.closedPoint Ω))) Ω =
       (Scheme.descResidueField (Scheme.stalkClosedPointTo barT)).hom)
     [IsLocalRing (Scheme.strictHenselization barS)]
     [IsLocalRing (Scheme.strictHenselization barT)]

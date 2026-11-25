@@ -16,8 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Countabl
 On a noetherian scheme `X`, a bounded constructible complex of `𝒪_{E,X}`-modules is derived
 `ℓ`-adically complete (`ProEtale.isDerivedAdicComplete_of_boundedConstructible`): the derived
 limit of the tower `⋯ --ℓ--> K --ℓ--> K` vanishes (`CategoryTheory.IsDerivedAdicComplete`). This
-is the completeness half of the implication (1) ⇒ (2) of blueprint
-`proposition-integral-constructibility-criterion` (section `chap-The-pro-etale-site`); the other
+is the completeness half of the integral constructibility criterion; the other
 half, that the first derived reduction is bounded constructible, is
 `ProEtale.boundedConstructible_derivedReduction_obj`.
 
@@ -25,7 +24,6 @@ A complex is derived complete if and only if its cohomology objects are
 (`DerivedCategory.isDerivedAdicComplete_iff_homology`, countable products of module objects being
 exact), and constructible module objects are derived complete
 (`ProEtale.isDerivedAdicComplete_of_isConstructibleModuleObject`).
-
 -/
 
 @[expose] public section
@@ -42,12 +40,11 @@ open Scheme PadicAlgCl CondensedRing
 
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
 
-/-- **Bounded constructible integral complexes are derived complete** (blueprint
-`proposition-integral-constructibility-criterion`, section `chap-The-pro-etale-site`, implication
-(1) ⇒ (2), the completeness of `K`): on a noetherian scheme `X`, a bounded constructible complex `K`
-of `𝒪_{E,X}`-modules is derived complete. Completeness is stated here for `ℓ ∈ 𝔪_E`, as the
-vanishing of `R lim (⋯ --ℓ--> K --ℓ--> K)` (`CategoryTheory.IsDerivedAdicComplete`); since
-`𝔪_E^e ⊆ (ℓ) ⊆ 𝔪_E`, this is equivalent to completeness for `𝔪_E` (Stacks, Tags 091N, 091Q). -/
+/-- **Bounded constructible integral complexes are derived complete**: on a noetherian scheme `X`,
+a bounded constructible complex `K` of `𝒪_{E,X}`-modules is derived complete. Completeness is
+stated here for `ℓ ∈ 𝔪_E`, as the vanishing of `R lim (⋯ --ℓ--> K --ℓ--> K)`
+(`CategoryTheory.IsDerivedAdicComplete`); since `𝔪_E^e ⊆ (ℓ) ⊆ 𝔪_E`, this is equivalent to
+completeness for `𝔪_E`. -/
 theorem isDerivedAdicComplete_of_boundedConstructible [IsNoetherian X]
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))

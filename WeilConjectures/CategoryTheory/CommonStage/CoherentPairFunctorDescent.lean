@@ -28,7 +28,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.CommonStage
 
 -- Bundling the category carriers puts both independent category universes in a maximum.
-set_option linter.checkUnivs false in
 /-- Normalized additive transition diagrams. -/
 structure Diagram (I : Type w) [PartialOrder I] where
   C : I → Type u
@@ -188,7 +187,6 @@ def transformationRep {A B : Diagram.{w, u, v} I} {Φ Ψ : Family A B}
   ⟨X.1, le_refl _, le_refl _, (B.U (le_refl X.1)).map ((η X.1).app X.2)⟩
 
 -- The independently variable object and Hom universes are bundled in the same maximum.
-set_option linter.checkUnivs false in
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true

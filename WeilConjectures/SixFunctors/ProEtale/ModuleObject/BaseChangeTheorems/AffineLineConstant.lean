@@ -128,10 +128,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {E : Type} [Field E] [Algebra E (PadicAlgC
 commutative square `e ≫ g = h ≫ p` of quasi-compact quasi-separated schemes with `W` noetherian,
 the base change morphism `Lp^* Rg_* K ⟶ Rh_* Le^* K` with coefficients `𝒪_E` is invertible at a
 bounded constructible `K` as soon as the pro-étale base change morphism with coefficients `𝔽_E` is
-invertible at the first derived reduction of `K`: both sides are derived complete, and the first
-derived reduction of the integral base change morphism is the one with coefficients `𝔽_E`
-(`ProEtale.CondensedRing.nonempty_arrowIso_derivedReduction_map_exchangeRight`). The square need
-not be cartesian. -/
+invertible at the first derived reduction of `K`. The square need not be cartesian. -/
 theorem isIso_baseChangeMap_app_padicIntegers_of_isIso_derivedReduction
     {S W Y X : Scheme.{u}} {p : X ⟶ S} {g : W ⟶ S} {e : Y ⟶ W} {h : Y ⟶ X}
     [CompactSpace S] [QuasiSeparatedSpace S] [CompactSpace X] [QuasiSeparatedSpace X]

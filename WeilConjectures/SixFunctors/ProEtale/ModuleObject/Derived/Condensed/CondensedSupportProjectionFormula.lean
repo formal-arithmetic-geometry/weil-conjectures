@@ -12,6 +12,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.Conde
 /-! # Unbounded support projection formulas
 
 This isolates steps 1--7 of the internal Hom calculation, before tensor-Hom adjunction.
+
+## References
+
+* Stacks Project, Tags 03EL, 09AA, 09BN, 09AH, 06YS, 0G7D
 -/
 
 @[expose] public section
@@ -30,21 +34,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- The unit-induced open and closed tensor projections are isomorphisms.
-Source: Stacks Tags 03EL, 09AA, 09BN, 09AH, 06YS, 0G7D; steps 1--7 of
-lem-sfb-open-closed-internal-hom-formulas
-(blueprint: lem-sfb-condensed-support-projection-formula).
-
-Proof: use derived open/closed localization and the existing normalized pullback tensor
-comparison. Open restriction kills the tensor of a closed image with any object, so the
-supported closed unit is invertible. The pullback tensor comparison and the tensor of the
-closed counit are invertible, proving the canonical closed projection invertible.
-For the open projection, closed restriction has zero source and target. Under open
-restriction, its composite with the invertible open unit is its adjunction transpose:
-the tensor of the open unit followed by the inverse pullback tensor comparison. Thus the
-open restriction is invertible too, and joint detection proves the projection invertible.
-The normalized pullback comparison already contains the required K-flat descent, so it is
-not constructed again here. Empty strata and zero coefficients are permitted -/
+/-- The unit-induced open and closed tensor projections are isomorphisms. -/
 theorem openClosedSupportProjectionFormula {Z U X : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :

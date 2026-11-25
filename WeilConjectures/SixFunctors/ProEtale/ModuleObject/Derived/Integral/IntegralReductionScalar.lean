@@ -26,8 +26,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 
 /-! # Vanishing reduction and multiplication by ℓ
 
-Source: Bhatt--Scholze, Section 6.5, the two-term resolution of the residue ring.
-(blueprint: lem-weil-pbc-integral-reduction-scalar)
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Section 6.5.
 -/
 
 @[expose] public section
@@ -121,16 +122,7 @@ private theorem reductionScalar_aux
   infer_instance
 
 /-- If the derived reduction of any integral complex vanishes, multiplication by ℓ is
-invertible on it. No constructibility or boundedness is needed.
-Source: Bhatt--Scholze, Section 6.5, two-term residue resolution.
-(blueprint: lem-weil-pbc-integral-reduction-scalar)
-
-Proof: pull the proved short exact coefficient sequence to X. Its two free terms
-resolve the residue module. After tensoring with a K-flat representative of K this
-identifies restriction of its derived reduction with the cone of multiplication by ℓ.
-Restriction of scalars preserves zero objects. Thus this cone is zero, and the
-associated distinguished triangle shows that multiplication by ℓ is invertible.
-This applies to unbounded complexes and includes the zero complex and empty X. -/
+invertible on it. No constructibility or boundedness is needed. -/
 theorem integralReduction_isIso_nsmul_of_isZero (X : Scheme.{u})
     (K : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X)))

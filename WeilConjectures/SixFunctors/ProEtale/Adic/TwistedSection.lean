@@ -22,14 +22,8 @@ trivialising section by a scalar `χ ≠ 1`. Let `z : S ⟶ Y` be a point which,
 restricts on `z'` to an automorphism `σ` of `Spec L` over `S`. Then `z^* N` does not embed into
 a constant sheaf `ℚ̄_ℓⁿ` on `S`.
 
-Indeed `σ` acts on the sections of `π^* z^* N` (the germs along `σ ≫ π = π`) and on those of
-`π^* ℚ̄_ℓ`; a section of `π^* z^* N` coming from `θ` is multiplied by `χ`, while all sections of
-`π^* ℚ̄_ℓ` are pulled back from `S` and so are fixed. Hence every morphism `z^* N ⟶ ℚ̄_ℓ`
-kills that section after pullback, and a monomorphism into `ℚ̄_ℓⁿ` would kill it too.
-
 This is the sheaf-theoretic content of "inertia acts on the fibre of `N` through the nontrivial
-character `χ`", used for the Artin–Schreier sheaves at infinity (blueprint
-`lemma-unramified-at-infinity-no-linear-characters--1`).
+character `χ`", used for the Artin–Schreier sheaves at infinity.
 
 ## Main statements
 
@@ -252,11 +246,7 @@ Let `N` be an `ℓ`-adic sheaf on `Y`, `w : Y' ⟶ Y`, `g : Y' ⟶ Y'` with `g �
 `g`. Let `z : S ⟶ Y`, `π : Spec L ⟶ S` for an algebraically closed field `L`,
 `z' : Spec L ⟶ Y'` with `z' ≫ w = π ≫ z`, and `σ : Spec L ⟶ Spec L` with `σ ≫ π = π` and
 `σ ≫ z' = z' ≫ g`. Then no subsheaf `B` of a constant sheaf `ℚ̄_ℓⁿ` on `S` surjects onto
-`z^* N`.
-
-The germ along `σ` fixes the sections of `π^* ℚ̄_ℓⁿ`, hence those of `π^* B`; they surject onto
-those of `π^* z^* N` (`L` is algebraically closed), so the germ fixes the sections of
-`π^* z^* N`, but it multiplies the transported section of `θ` by `χ`. -/
+`z^* N`. -/
 theorem not_epi_of_mono_biproduct_unit_of_twist {S Y Y' : Scheme.{u}} {L : Type u} [Field L]
     [IsAlgClosed L] {π : Spec (.of L) ⟶ S} {σ : Spec (.of L) ⟶ Spec (.of L)} (hσ : σ ≫ π = π)
     {w : Y' ⟶ Y} {g : Y' ⟶ Y'} (hg : g ≫ w = w)

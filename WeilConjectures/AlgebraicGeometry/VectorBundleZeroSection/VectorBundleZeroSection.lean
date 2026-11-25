@@ -342,7 +342,6 @@ theorem affineChart_equations (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S
     rw [hzero]
     rfl
 
-set_option linter.style.haveILetI false in
 /-- The affine charts are isomorphisms over the corresponding base affine opens, and the
 zero section in these charts is exactly the spectrum of the augmentation. -/
 theorem affineChart_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
@@ -355,16 +354,16 @@ theorem affineChart_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modu
       U.2.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom
         (SymmetricAlgebra.algebraMapInv (R := S.presheaf.obj (op U.1))
           (M := F.val.obj (op U.1))).toRingHom))   := by
-  letI := SheafOfModules.IsFiniteLocallyFreeOfRank.isLocallyFree F d
+  let := SheafOfModules.IsFiniteLocallyFreeOfRank.isLocallyFree F d
   have hq := quasiCoherentSymmetricAlgebra_affine_comparison S F
   have hsec : IsIso (CommRingCat.ofHom (SymmetricAlgebraSheaf.sectionMap F (op U.1))) :=
     (ConcreteCategory.isIso_iff_bijective _).mpr (hq.2 U)
-  letI := hsec
-  haveI : IsAffineHom (π S d F) := (over S d F).property
-  haveI : IsIso (((π S d F) ⁻¹ᵁ U.1).toSpecΓ) :=
+  let := hsec
+  have : IsAffineHom (π S d F) := (over S d F).property
+  have : IsIso (((π S d F) ⁻¹ᵁ U.1).toSpecΓ) :=
     (U.2.preimage (π S d F)).isoSpec.isIso_hom
-  haveI : IsIso ((algebraIso S d F).hom.right.hom) := by infer_instance
-  haveI : IsIso ((algebraIso S d F).hom.right.hom.app (op U.1)) := by infer_instance
+  have : IsIso ((algebraIso S d F).hom.right.hom) := by infer_instance
+  have : IsIso ((algebraIso S d F).hom.right.hom.app (op U.1)) := by infer_instance
   have hi : IsIso (affineChart S d F U) := by
     change IsIso (((π S d F) ⁻¹ᵁ U.1).toSpecΓ ≫
       Spec.map (CommRingCat.ofHom (SymmetricAlgebraSheaf.sectionMap F (op U.1)) ≫

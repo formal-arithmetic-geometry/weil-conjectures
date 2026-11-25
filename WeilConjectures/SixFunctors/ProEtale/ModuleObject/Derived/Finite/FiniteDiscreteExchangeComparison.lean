@@ -21,8 +21,9 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! # Finite discrete internal coefficients and etale exchange
 
-Source: Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3
-(blueprint: lem-weil-pbc-finite-discrete-exchange-comparison).
+## References
+
+* Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project, Tag 09AL
 -/
 
 @[expose] public section
@@ -108,33 +109,7 @@ variable (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))]
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
-/-- Finite discrete internal coefficients compare to the actual etale exchange.
-Source: Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3;
-Stacks Project, Tag 09AL
-(blueprint: lem-weil-pbc-finite-discrete-exchange-comparison).
-
-Proof in words. A continuous map to the discrete ring B is locally constant, so the
-condensed continuous-function ring is the constant ring, and its inverse image on
-T is the constant B ring sheaf. Internal modules over this ring and sheaves of
-ULift B-modules are identified by retaining the underlying additive sheaf and scalar
-action. The proved constantInternalModuleSheaf_equivalence constructs the
-equivalence from internal modules over the sheafified constant ring to module-valued
-sheaves, with its comparison on underlying abelian sheaves. Transfer along the
-constant-ring identification. These
-inverse constructions are additive and exact, as detected on abelian sheaves.
-Derive this equivalence and compose it
-with exact etale-to-pro-etale inverse image to obtain the realization functor F.
-The realization is full and triangulated. Its essential image contains constructible
-sheaves in degree zero, so existing bounded triangulated devissage gives an etale
-bounded-below complex L realizing N. Exact inverse image commutes with pullback, while bounded-below
-site comparison identifies derived direct image of etale-origin objects with the
-pro-etale direct image. Both comparisons come from the same underived adjunctions;
-their equations for units, counits, and composition identify the actual exchange maps.
-Apply the realization to the etale exchange at L and transport the pro-etale exchange
-along the origin isomorphism. This gives the claimed arrow isomorphism. Finiteness and
-ℓB = 0 ensure bounded constructible pushforward in the present finite-type setting.
-No properness or Cartesian hypothesis is used. Empty schemes and the zero ring give
-the same construction with zero objects. -/
+/-- Finite discrete internal coefficients compare to the actual etale exchange. -/
 theorem finiteDiscreteExchange_comparison
     (hB : (ℓ : B) = 0)
     (sq : CommSq g' f' f g)

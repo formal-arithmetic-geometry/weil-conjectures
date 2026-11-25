@@ -199,9 +199,8 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafBaseChan
 
 /-! # Tensor of locally closed lisse generators
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-pf-field/
-sk-thm-sf-pf-field-tensor.proof.md,
-Proof (1) (blueprint: lem-sfb-locally-closed-generator-tensor-intersection).
+Tensor products of the extensions by zero of lisse coefficient modules along locally closed
+immersions.
 -/
 
 @[expose] public section
@@ -218,15 +217,12 @@ open AlgebraicGeometry AlgebraicGeometry.ProEtale AlgebraicGeometry.ProEtale.Con
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Both orders of open/closed factorization, using Mathlib's factorization data without a new
-factorization notion. Source: blueprint tensor proof (1)
-(blueprint: lem-sfb-locally-closed-generator-tensor-intersection). -/
+factorization notion. -/
 abbrev GeneratorFactorization {S X : Scheme.{u}} (a : S ⟶ X) :=
   MorphismProperty.MapFactorizationData @IsClosedImmersion @IsOpenImmersion a ⊕
     MorphismProperty.MapFactorizationData @IsOpenImmersion @IsClosedImmersion a
 
-/-- The actual module extension `j_! i_*`, or `i_* j_!`, for the given factorization.
-Source: blueprint tensor proof (1)
-(blueprint: lem-sfb-locally-closed-generator-tensor-intersection). -/
+/-- The actual module extension `j_! i_*`, or `i_* j_!`, for the given factorization. -/
 noncomputable def generatorExtension
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {S X : Scheme.{u}} {a : S ⟶ X}
@@ -242,8 +238,7 @@ noncomputable def generatorExtension
     openImmersionLowerShriek Λ A.i ⋙ lowerStar Λ A.p
 
 /-- Restriction normalization: inverse open unit and closed counit in factorization order,
-with the canonical inverse-image composition. Source: blueprint tensor proof (1)
-(blueprint: lem-sfb-locally-closed-generator-tensor-intersection). -/
+with the canonical inverse-image composition. -/
 noncomputable def generatorRestriction
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {S X : Scheme.{u}} {a : S ⟶ X}
@@ -277,9 +272,7 @@ noncomputable def generatorRestriction
           (Functor.leftUnitor _).hom) ≫
       (asIso (openImmersionLowerShriekUpperStarAdjunction Λ A.i).unit).inv
 
-/-- Source bifunctor on the full categories of lisse modules, in degree zero.
-Source: blueprint tensor proof (1)
-(blueprint: lem-sfb-locally-closed-generator-tensor-intersection). -/
+/-- Source bifunctor on the full categories of lisse modules, in degree zero. -/
 noncomputable def generatorTensorSource
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {S T X : Scheme.{u}} {a : S ⟶ X} {b : T ⟶ X}
@@ -290,18 +283,14 @@ noncomputable def generatorTensorSource
     ((ObjectProperty.ι (IsLisseCoefficientModule Λ (X := T))) ⋙
       generatorExtension Λ B ⋙ DerivedCategory.singleFunctor _ 0)).obj (derivedTensor Λ X)
 
-/-- Ordinary relative tensor after the two actual fibre-product projections.
-Source: blueprint tensor proof (1)
-(blueprint: lem-sfb-locally-closed-generator-tensor-intersection). -/
+/-- Ordinary relative tensor after the two actual fibre-product projections. -/
 noncomputable def generatorIntersectionModule
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {S T X : Scheme.{u}} (a : S ⟶ X) (b : T ⟶ X) :=
   (((Functor.whiskeringLeft₂ _).obj (upperStar Λ (pullback.fst a b))).obj
     (upperStar Λ (pullback.snd a b))).obj (MonoidalCategory.curriedTensor _)
 
-/-- Target bifunctor: extend the underived relative tensor from the actual fibre product.
-Source: blueprint tensor proof (1)
-(blueprint: lem-sfb-locally-closed-generator-tensor-intersection). -/
+/-- Target bifunctor: extend the underived relative tensor from the actual fibre product. -/
 noncomputable def generatorTensorTarget
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {S T X : Scheme.{u}} (a : S ⟶ X) (b : T ⟶ X)

@@ -110,8 +110,6 @@ private theorem connected_presentation_markings
     MorphismProperty.Over.homMk (𝒰.pullbackHom b.left i) hab
   exact P.transport n Z (h𝒰 i) W (a ≫ c)
 
--- Preserve the original proof-binder names in the statement.
-set_option linter.unusedVariables false in
 /-- On a cover, one algebraic stalk tower models each level separately on a
 possibly level-dependent further cover. No compatible family of markings is asserted. -/
 theorem lisse_tower_stalk_level_models
@@ -146,7 +144,7 @@ theorem lisse_tower_stalk_level_models
           (∀ (n : ℕ) (q : ℤ), Module.Finite (C ⧸ J ^ (n + 1))
             ((DerivedCategory.homologyFunctor
               (ModuleCat.{u + 1} (C ⧸ J ^ (n + 1))) q).obj (K n))) ∧
-          (∀ (W : Y.ProEt) (w : W ⟶ U) (n : ℕ) (q : ℤ),
+          (∀ (W : Y.ProEt) (_w : W ⟶ U) (n : ℕ) (q : ℤ),
             IsRelativelyFiniteLisseModule (W.hom ≫ g) (A ⧸ d.ideal ^ (n + 1))
               ((pbcRestrict ((adicTowerInverseImage (W.hom ≫ g)).map
                 (pbcLevelConstantComparison X d n).hom)).obj

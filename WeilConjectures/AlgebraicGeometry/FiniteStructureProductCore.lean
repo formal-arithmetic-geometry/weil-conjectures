@@ -359,8 +359,6 @@ theorem finite_structure_product_exists_core
       G (G ⊗ G) hG hGG hproper hpGG v hvd
   exact ⟨mu, hformula mu hmu⟩
 
--- The preserved legacy endomorphism family is irrelevant to multiplication existence.
-set_option linter.unusedVariables false in
 /- A compatible finite-level family algebraizes to a product map whose sections multiply.
 This is the algebraization and evaluation part of Tags 09ZT and 088F. -/
 theorem finite_structure_product_section_identity
@@ -410,7 +408,7 @@ theorem finite_structure_product_section_identity
             (Scheme.Modules.tensorPullbackObjUnitToUnit (gn n))) =
         (c n).hom.app G ≫ (ψ n).hom)
     (v : ℕ → (G ⟶ G))
-    (hv : ∀ n : ℕ, v n = v (n + 1)) :
+    (_hv : ∀ n : ℕ, v n = v (n + 1)) :
     ∃ μ : G ⊗ G ⟶ G, ∀ (n : ℕ) (U : X.Opens),
       let a : Γ(G, U) → Γ(Yn n, (fnY n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom
         (Ideal.Quotient.mk (I ^ (n + 1)))))) ⁻¹ᵁ U) :=

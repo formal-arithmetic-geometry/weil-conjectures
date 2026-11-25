@@ -18,7 +18,9 @@ set_option linter.privateModule false
 
 /-! # Unit normalization of the component inverse image
 
-Source: Hemo--Richarz--Scholbach, Construction (4.1).
+## References
+
+* Hemo--Richarz--Scholbach, Construction (4.1).
 -/
 
 @[expose] public noncomputable section

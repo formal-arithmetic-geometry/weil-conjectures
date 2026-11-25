@@ -30,9 +30,6 @@ modulo a uniformizer. Positive levels are indexed by n + 1, as in the dependency
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.all false
-set_option linter.unusedVariables false
-set_option maxHeartbeats 200000
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -245,7 +242,7 @@ private theorem cochainCompute_tensor_comparison
   convert h using 1
   · congr 2
   · congr 1
-    congr 1 <;> assumption
+    congr 1
 
 private theorem canonicalScalarTensorIso_normalized (n : ℕ) (T : Scheme.{u}) :
     ScalarTensorNormalized l E n T (canonicalScalarTensorIso l E n T) := by
@@ -256,7 +253,7 @@ private theorem canonicalScalarTensorIso_normalized (n : ℕ) (T : Scheme.{u}) :
   unfold cochainCompute at h
   unfold canonicalScalarTensorIso compute scalarCounit D scalarTensorTotal
   dsimp only [_root_.id, asIso_hom]
-  convert h using 1 <;> rfl
+  convert h using 1
 
 end GenericComputations
 

@@ -18,13 +18,11 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 /-!
 # The constant sheaf `Λ_X` of a nonarchimedean ring on the pro-étale site
 
-Let `Λ` be a commutative ring with an ultrametric norm, for instance a finite extension `E` of
-`ℚ_ℓ` inside `ℚ̄_ℓ` with the restricted norm, or its ring of integers `𝒪_E`. Following
-Bhatt–Scholze (*The pro-étale topology for schemes*, §6.8), the constructible `E`-sheaves of the
-blueprint (`definition-weil-structure`) are modules over the
-pro-étale sheaf `E_X : U ↦ C(U, E)` of continuous `E`-valued functions. This file constructs
-`Λ_X` (`AlgebraicGeometry.ProEtale.fieldConstantSheaf Λ X`) for any such `Λ`: it is the
-restriction to the small pro-étale site of `X` of the presheaf `U ↦ C(U, Λ)` on all schemes,
+Let `Λ` be a commutative ring with an ultrametric norm, for instance a finite extension `E` of `ℚ_ℓ`
+inside `ℚ̄_ℓ` with the restricted norm, or its ring of integers `𝒪_E`. The constructible `E`-sheaves
+are modules over the pro-étale sheaf `E_X : U ↦ C(U, E)` of continuous `E`-valued functions. This
+file constructs `Λ_X` (`AlgebraicGeometry.ProEtale.fieldConstantSheaf Λ X`) for any such `Λ`: it is
+the restriction to the small pro-étale site of `X` of the presheaf `U ↦ C(U, Λ)` on all schemes,
 which is an fpqc sheaf.
 
 This file and the others in `WeilConjectures.SixFunctors.ProEtale.FieldCoefficient` are the
@@ -51,6 +49,10 @@ agree. To keep the proofs of the `ℚ̄_ℓ` case, the sections are packaged as 
 
 - `AlgebraicGeometry.ProEtale.not_isZero_fieldConstantSheaf`: `Λ_X` is nonzero on a nonempty
   scheme.
+
+## References
+
+* [Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8]
 -/
 
 @[expose] public section

@@ -14,9 +14,6 @@ public import Mathlib.RingTheory.Ideal.Quotient.Index
 
 /-! # The listed coefficient maps
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-scalar-six/_section.md,
-coefficient list (1)--(4) (blueprint: def-sfb-listed-coefficient-maps).
-
 The generators retain their actual ring-object maps. Finite maps are characterized
 by postcomposition on sections, so no flatness or surjectivity is imposed.
 -/
@@ -33,9 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The specified continuous map O_E to a finite discrete ring, as postcomposition
-on all profinite sections. The valuation topology is the existing restricted topology.
-Source: blueprint coefficient list (3)
-(blueprint: def-sfb-listed-coefficient-maps). -/
+on all profinite sections. The valuation topology is the existing restricted topology. -/
 def IsIntegralFiniteScalarMap (ell : ℕ) [Fact ell.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ell) (A : Type u) [CommRing A]
     (a : (⟨Profinite.padicIntegersRingObj ell E.1⟩ : ScalarSixRing.{u}) ⟶

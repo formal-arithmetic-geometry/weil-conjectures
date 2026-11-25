@@ -135,10 +135,7 @@ namespace CondensedRing
 /-- **The reduction modulo `ℓ` of a derived limit of partial right adjoints is bounded
 constructible**: if `G` is the homotopy limit of a tower `Tₙ` of bounded constructible
 `𝒪_E`-complexes on `X` representing `A ↦ Hom(Rf_* A, Res (L ⧸ ℓⁿ⁺¹))` on `Dᵇc(X)⟦𝒪̲_E⟧`,
-compatibly with the reduction tower of `L`, then `Res (G ⊗ᴸ 𝒪_E ⧸ ℓ)` is bounded constructible
-(it is isomorphic to `T₀`). The reduction modulo `ℓ` commutes with `Rf_*` compatibly with the
-natural reduction triangles (`CategoryTheory.unit_comp_map_reductionComparison`,
-`CategoryTheory.map_reductionComparison_comp_δ`). -/
+compatibly with the reduction tower of `L`, then `Res (G ⊗ᴸ 𝒪_E ⧸ ℓ)` is bounded constructible. -/
 theorem boundedConstructible_integersModReduction_homotopyLimit {X Y : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace X] (f : X ⟶ Y)
     (L : _root_.DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1})

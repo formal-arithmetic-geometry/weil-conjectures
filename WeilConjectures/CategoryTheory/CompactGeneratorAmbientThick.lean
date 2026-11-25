@@ -170,7 +170,6 @@ private theorem ambient_shift_coproduct_iso
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 /-- A compact object presented by a generator telescope lies in its ambient thick envelope.
 Source: Stacks Project, Tags 09SP and 094A, applied to the tower of 09SN.
 -/

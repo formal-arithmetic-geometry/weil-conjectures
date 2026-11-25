@@ -90,8 +90,11 @@ import all WeilConjectures.Algebra.Homology.CanonicalRingedTensorComparison.Ring
 
 /-! # Normalization and naturality for coefficient tensor descent
 
-The private helpers retain the existing coefficient proof interfaces while checking their
-self-contained proofs separately from the constructible coefficient comparison.
+Normalization and naturality of the coefficient tensor descent maps.
+
+## References
+
+* Stacks Project, Tags `04VK`, `07A4`
 -/
 
 @[expose] public noncomputable section
@@ -189,14 +192,7 @@ private theorem representativeSquare_iff {C : Type*} [Category* C]
     (f ≫ g ≫ h ≫ r.inv = k ≫ m) ↔ (f ≫ g ≫ h = k ≫ m ≫ r.hom) := by
   simpa only [Category.assoc] using (r.comp_inv_eq (f := f ≫ g ≫ h) (g := k ≫ m))
 
-/-- Unique tensor descent with the inverse representative normalization.
-Source: Stacks Tags 04VK and 07A4; the coefficient comparison in projection-formula step 13
-(blueprint: lem-sf-projection-tensor-normalization-descent).
-Proof: use tensorComparisonDescent on the natural isomorphism of representative total tensors.
-Its equation is the desired equation postcomposed with the target representative isomorphism.
-Postcompose with the inverse to obtain the stated normalization. Conversely cancel that inverse
-and apply the uniqueness clause of tensorComparisonDescent. No object-surjectivity hypothesis is
-used: fully faithful restriction supplies both existence and uniqueness. -/
+/-- Unique tensor descent with the inverse representative normalization. -/
 theorem normalizedTensorDescent
     {K : Type u₁} [Category.{v₁} K] {H : Type u₂} [Category.{v₂} H]
     {D : Type u₃} [Category.{v₃} D] {E : Type u₄} [Category.{v₄} E]

@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tor
 /-!
 # `Dctf(X, Λ)` is essentially small
 
-Blueprint `lemma-hypotheses-brown-representability--5`. On a quasi-compact quasi-separated scheme
+On a quasi-compact quasi-separated scheme
 `X`, a constructible étale sheaf of modules over a noetherian ring `Λ` is the cokernel of a map
 between finite sums of extensions by zero `v_! Λ` along étale maps (Stacks 095N,
 `AlgebraicGeometry.Etale.exists_presentation_of_isConstructibleSheaf`); such data form a set, so
@@ -49,7 +49,7 @@ noncomputable def sigmaEtaleLowerShriekConstant
   ∐ fun i ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) (k.2.2.1 i) (k.2.2.2 i)).obj
     ((constantSheaf (k.2.1 i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ))
 
-/-- Blueprint `lemma-hypotheses-brown-representability--5`: the constructible étale sheaves of
+/-- The constructible étale sheaves of
 modules over a noetherian ring on a quasi-compact quasi-separated scheme are essentially small. -/
 instance essentiallySmall_constructibleSheaf :
     ObjectProperty.EssentiallySmall.{u + 1}
@@ -69,7 +69,7 @@ instance essentiallySmall_constructibleSheaf :
 instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).ContainsZero where
   exists_zero := ⟨0, isZero_zero _, IsConstructibleSheaf.of_isZero (isZero_zero _)⟩
 
-/-- Blueprint `lemma-hypotheses-brown-representability--5`: the bounded constructible étale
+/-- The bounded constructible étale
 complexes on a quasi-compact quasi-separated scheme are essentially small. -/
 instance DerivedCategory.essentiallySmall_boundedConstructible :
     ObjectProperty.EssentiallySmall.{u + 1}
@@ -82,8 +82,7 @@ end Etale
 
 namespace ProEtale
 
-/-- Blueprint `lemma-hypotheses-brown-representability--5`: `Dctf(X, Λ)` is essentially small, for a
-quasi-compact quasi-separated scheme `X`. -/
+/-- `Dctf(X, Λ)` is essentially small, for a quasi-compact quasi-separated scheme `X`. -/
 instance DerivedCategory.essentiallySmall_constructibleFiniteTor :
     ObjectProperty.EssentiallySmall.{u + 1}
       (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X) :=

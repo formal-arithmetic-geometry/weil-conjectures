@@ -29,8 +29,8 @@ the `Gal(Ω / K')`-invariant sections over `Spec Ω`:
   element of `Gal(Ω / K')` (`AlgebraicGeometry.ProEtale.exists_algEquiv_comp_specMap_eq`).
 
 For `K'` the fraction field of the strict henselization of a curve at a boundary point and `Ω` a
-separable closure, `Gal(Ω / K')` is the inertia group at the point: this is the second step of
-blueprint `lemma-boundary-stalk--1`, which identifies the boundary stalk of `j_* F`
+separable closure, `Gal(Ω / K')` is the inertia group at the point, which identifies the boundary
+stalk of `j_* F`
 with the inertia invariants of the geometric generic stalk.
 -/
 

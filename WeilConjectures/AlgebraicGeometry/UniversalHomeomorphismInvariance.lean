@@ -14,8 +14,6 @@ import WeilConjectures.AlgebraicGeometry.UniversalHomeomorphismComposition
 import WeilConjectures.AlgebraicGeometry.UniversalHomeomorphismPullback
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 
-set_option linter.style.haveILetI false
-
 /-!
 # Universal-homeomorphism invariance, with functorial compatibility
 
@@ -100,8 +98,8 @@ theorem universalHomeomorphism_invariance {X X' : Scheme.{u}} (u : X' ⟶ X)
           ((upperStarComp AddCommGrpCat.{u + 1} (pullback.fst g u) g).inv.app F) q
           (cohomologyMap (pullback.fst g u) ((upperStar AddCommGrpCat.{u + 1} g).obj F) q
             (cohomologyMap g F q x))) := by
-  letI : (u.Etale).IsEquivalence := Scheme.Hom.isEquivalence_etale u
-  letI : (upperStar AddCommGrpCat.{u + 1} u).IsEquivalence :=
+  let : (u.Etale).IsEquivalence := Scheme.Hom.isEquivalence_etale u
+  let : (upperStar AddCommGrpCat.{u + 1} u).IsEquivalence :=
     isEquivalence_upperStar _ u
   refine ⟨inferInstance, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · intro I V Vᵢ a

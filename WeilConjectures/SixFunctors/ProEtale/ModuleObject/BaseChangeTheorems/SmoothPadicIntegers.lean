@@ -31,7 +31,7 @@ quasi-compact and quasi-separated and `W` noetherian. Then the base change map
 constructible `K` (`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicIntegers_of_smooth`).
 No finiteness is assumed on `g`: neither side need be constructible.
 
-This is the blueprint's integral step of `theorem-smooth-base-change-all-admissible`, with derived
+This is the integral step of smooth base change, with derived
 completeness in place of constructibility of the two sides:
 
 1. both sides are derived complete: `K` is

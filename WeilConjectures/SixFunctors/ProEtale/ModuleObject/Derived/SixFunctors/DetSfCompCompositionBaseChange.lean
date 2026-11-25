@@ -28,14 +28,14 @@ import WeilConjectures.Compactification.CommonDenseRefinement
 /-!
 # Base change for `Rf_!` on the localizing category
 
-Source: the blueprint of the Weil conjectures, chapter `chap-Construction-of-f`, unit
-`proposition-composition-base-change-rf-shriek--1` (blueprint:
-proposition-composition-base-change-rf-shriek--4); Stacks Project, Tag 09AH.
-
 The statement uses the published module-object definitions of derived pullback and derived
 lower shriek, the literal compactification base-change construction, and the localizing closure
 of bounded constructible finite-Tor objects. The coefficient parameter is a commutative
 condensed ring satisfying the published `IsLocalizingAdmissibleCoefficient ℓ Λ` predicate.
+
+## References
+
+* Stacks Project, Tag 09AH
 -/
 
 @[expose] public section

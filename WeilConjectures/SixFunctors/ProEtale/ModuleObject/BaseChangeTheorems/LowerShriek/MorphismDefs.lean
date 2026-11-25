@@ -77,8 +77,7 @@ All schemes are separated and of finite type over a field `k` of characteristic 
   change for extension by zero. The morphism is the exchange morphism
   `boundedConstructibleOpenImmersionLowerShriekBaseChange'` of
   `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange`, which is
-  an isomorphism by `isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'` (blueprint
-  `sk-def-sfb-open-base-change`).
+  an isomorphism by `isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'`.
 
 -/
 
@@ -116,14 +115,12 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 
-/-- The compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.ofIsPullback sq}`
-on bounded constructible complexes, for a cartesian square `sq` and a compactification
-`c : X ⟶[i] Z ⟶[p] Y` of `f`, *into the base-changed compactification* of `f'` (`ℚ̄_ℓ`-coefficient):
-with `Rf_!^c = i_! ⋙ Rp_*`, it is the pasting of the direct-image exchange
-`boundedConstructibleBaseChange` of the proper square of the base-changed compactification with
-the inverse of the extension-by-zero exchange of its open-immersion square,
-
-`i_! ⋙ Rp_* ⋙ Lg^* ⟶ i_! ⋙ Lḡ^* ⋙ Rp'_* ⟶ Lg'^* ⋙ i'_! ⋙ Rp'_*`. -/
+/-- The compact-support base-change morphism
+`Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.ofIsPullback sq}` on bounded constructible complexes
+(`ℚ̄_ℓ`-coefficient), for a cartesian square `sq` and a compactification
+`c : X ⟶[i] Z ⟶[p] Y` of `f`, into the base-changed compactification of `f'`. It pastes the
+direct-image exchange of the proper square with the inverse of the extension-by-zero exchange of
+the open-immersion square. -/
 @[no_expose]
 noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
     (c : Compactification f.left) (sq : IsPullback g' f' f g) :

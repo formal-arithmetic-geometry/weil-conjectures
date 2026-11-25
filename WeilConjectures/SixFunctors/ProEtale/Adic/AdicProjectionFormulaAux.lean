@@ -23,7 +23,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 * `CategoryTheory.Functor.comparisonCompatible_leftDerivedTensorComparison`: for a monoidal
   isomorphism `G₁ ⋙ G₂ ≅ F₁ ⋙ F₂` of exact strong monoidal functors, the tensor comparisons of
   the left derived functors are compatible.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section

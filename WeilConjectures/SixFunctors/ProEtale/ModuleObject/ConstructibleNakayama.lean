@@ -180,8 +180,7 @@ of the regular module `R` are the continuous functions `V → O` (via `eR`), tha
 functions `V → k` act faithfully on the regular module `S` (via `eS`), where `π : O → k` is as in
 `ContinuousMap.exists_mul_eq_one_of_forall_residue`, and that extension of scalars along `φ`
 corresponds to postcomposition with `π`. Then a finitely presented `R`-module whose extension of
-scalars to `S` vanishes is zero: a presentation matrix becomes surjective after reduction, hence
-has a right inverse. -/
+scalars to `S` vanishes is zero. -/
 theorem isZero_of_isFinitelyPresented_of_isZero_extendScalars_of_continuousMap
     {V O k : Type*} [TopologicalSpace V] [CommRing O] [TopologicalSpace O] [IsTopologicalRing O]
     [Field k] [TopologicalSpace k] [DiscreteTopology k]

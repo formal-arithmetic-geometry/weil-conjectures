@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.CondensedCoefficientIsoBoundedConstruct
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsMate
 
 /-! # Compact-support base change for isomorphic condensed coefficients
-
-Source: latest blueprint, lem-fd-base-change.proof.md, compact-support paragraph
-(blueprint: lem-fd-condensed-compact-support-base-change).
 -/
 
 @[expose] public noncomputable section
@@ -109,22 +106,7 @@ private theorem transport_compactSupport_baseChange
     (ec'.app ((upperStar Λ g').leftDerivedFunctor.obj K)).symm
 
 /-- Compact-support base change on bounded constructible complexes is independent
-of the chosen compactifications and of an isomorphic presentation of E or Qlbar.
-
-Source: latest blueprint, sec-fourier-transform/sk-thm-inversion/
-lem-fd-base-change.proof.md, compact-support pushforward paragraph
-(blueprint: lem-fd-condensed-compact-support-base-change).
-
-Proof: For the canonical coefficient rings the compact-support base-change map
-is an isomorphism on the bounded constructible category. Evaluate it on the given
-complex and apply the full inclusion into the ambient category. Independence of
-compactification replaces the base-changed compactification by the specified one.
-For an isomorphic coefficient ring, restrict scalars along the inverse ring
-isomorphism. This is an exact equivalence preserving bounded constructibility.
-It commutes with derived pullback, extension by zero, and derived pushforward,
-hence with both compactification functors. Apply the canonical-coefficient
-isomorphism after restriction and lift it back through the fully faithful
-equivalence. All constructions are valid for the empty scheme. -/
+of the chosen compactifications and of an isomorphic presentation of E or Qlbar. -/
 theorem nonempty_iso_compactSupport_baseChange_of_coefficientIso
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]

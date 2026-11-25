@@ -47,7 +47,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.IntegralFiniteScalar
 open CondensedRing
 
-set_option linter.unusedVariables false in
 /-- The pulled-back finite-free augmentation is a quasi-isomorphism.
 
 The point pullback preserves the cokernel cofork and the two endpoint
@@ -55,12 +54,12 @@ finite-free presentations; exact section transport identifies its augmentation w
 `augmentation Λ S Z`.
 -/
 theorem finiteFreeScalarDerivedComparison_augmentation
-    (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}
+    (_D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}
     (a : Λ ⟶ Λ') (S : ShortComplex (PointModules Λ))
-    (t : S.X₃ ≅ (Mod.comap a.hom.hom).obj (Mod.regular Λ'.X))
+    (_t : S.X₃ ≅ (Mod.comap a.hom.hom).obj (Mod.regular Λ'.X))
     (hS : S.ShortExact) (r : ℕ)
-    (e₁ : S.X₁ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))
-    (e₂ : S.X₂ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))
+    (_e₁ : S.X₁ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))
+    (_e₂ : S.X₂ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))
     (Z : Scheme.{u}) : QuasiIso (augmentation Λ S Z) := by
   have : PreservesFiniteLimits (CochainComplex.singleFunctor (PointModules Λ) 0) :=
     inferInstanceAs

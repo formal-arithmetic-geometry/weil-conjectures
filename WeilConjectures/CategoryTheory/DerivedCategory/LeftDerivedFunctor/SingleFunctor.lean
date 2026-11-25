@@ -173,7 +173,6 @@ lemma leftDerivedFunctorNatIso_hom_app_singleFunctor_obj
     mapDerivedCategoryNatIso_hom_app_singleFunctor]
 
 -- the `simp` call unfolds the compatibility isomorphisms
-set_option linter.flexible false in
 lemma leftDerivedFunctorCompIso_hom_app_singleFunctor_obj
     (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     (G : D ⥤ E) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G] (X : C) :
@@ -181,7 +180,7 @@ lemma leftDerivedFunctorCompIso_hom_app_singleFunctor_obj
         G.leftDerivedFunctor.map ((F.singleFunctorCompLeftDerivedFunctorIso).hom.app X) ≫
           (G.singleFunctorCompLeftDerivedFunctorIso).hom.app (F.obj X) =
       ((F ⋙ G).singleFunctorCompLeftDerivedFunctorIso).hom.app X := by
-  simp [leftDerivedFunctorCompIso, singleFunctorCompLeftDerivedFunctorIso]
-  exact mapDerivedCategoryCompIso_hom_app_singleFunctor F G X
+  simpa [leftDerivedFunctorCompIso, singleFunctorCompLeftDerivedFunctorIso] using
+    mapDerivedCategoryCompIso_hom_app_singleFunctor F G X
 
 end CategoryTheory.Functor

@@ -63,8 +63,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- Blueprint `lemma-naturality-pasting-comparison`, its last assertion for the localization
-`𝒪_E ⟶ E` of `proposition-six-operations-change-coefficients`: the extension of scalars
+/-- For the localization `𝒪_E ⟶ E`: the extension of scalars
 `E ⊗ᴸ_{𝒪_E} BC_sq(K₀)` of the integral base-change morphism and the base-change morphism of
 `Dᵇc(-)⟦E⟧` at `E ⊗ᴸ_{𝒪_E} K₀` are isomorphic arrows. -/
 theorem nonempty_arrowIso_boundedConstructibleBaseChange_integralToRational

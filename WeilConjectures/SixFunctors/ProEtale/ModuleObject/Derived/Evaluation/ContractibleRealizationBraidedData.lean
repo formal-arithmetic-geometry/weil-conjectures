@@ -71,8 +71,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 
 /-! Braided structure of the terminal scalar realization.
 
-Source: Hemo--Richarz--Scholbach, Lemma 4.1(1), equations (3.1)--(3.2), Remark 3.2.
-(blueprint: new-lem-zl-contractible-realization-braided-data).
+## References
+
+* Hemo--Richarz--Scholbach, Lemma 4.1(1), equations (3.1)--(3.2), Remark 3.2
 -/
 
 @[expose] public noncomputable section
@@ -305,27 +306,7 @@ private theorem sectionBraided
           Iso.inv_hom_id, Category.comp_id] }
   exact ⟨braidedInverse E⟩
 
-/-- The terminal scalar realization `L` admits a strong braided monoidal structure.
-
-Source: Hemo--Richarz--Scholbach, Lemma 4.1(1), equations (3.1)--(3.2), Remark 3.2.
-(blueprint: new-lem-zl-contractible-realization-braided-data).
-
-Proof: write `A = O_sec(U)` and `E` for the internal/section module equivalence. By
-definition `L` is the composite of the constant-module functor `M ↦ M_J` over the constant
-ring sheaf `A_J`, scalar extension along `A_J → O_sec`, and `E⁻¹`; a composite of braided
-functors is braided, so it suffices to braid each factor.
-(1) Constant modules: the sheafified additive unit `const M → M_J` is `A`-linear by the
-constant-scalar action formula and locally bijective, so it gives a natural isomorphism
-from the fixed-coefficient constant sheaf functor `Mod_A → Sh(C, Mod_A)` to the
-constant-module functor followed by the constant-scalar restriction equivalence
-`Mod(A_J) ≃ Sh(C, Mod_A)`. Constant presheaves are braided pointwise and sheafification is
-braided; the restriction equivalence is braided, hence so is its inverse (adjoint braiding
-equation), and transport along the isomorphism braids the constant-module functor.
-(2) Scalar extension: the scalar-extension tensor and unit isomorphisms with their proved
-coherence give a strong monoidal structure; the braiding equation holds on the generators
-`(1 ⊗ m) ⊗ (1 ⊗ n)`, since both sides send them to `(1 ⊗ n) ⊗ (1 ⊗ m)`, hence holds.
-(3) The internal/section tensor comparison (naturality, associativity, unit and symmetry
-clauses) makes `E` braided, and its inverse is braided by the adjoint braiding equation. -/
+/-- The terminal scalar realization `L` admits a strong braided monoidal structure. -/
 theorem contractible_realization_braided_data
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) [(J.W (A := Ab.{u + 1})).IsMonoidal]

@@ -209,12 +209,10 @@ private theorem levelIso_naturality {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (n 
   rw [Functor.map_comp, Functor.map_comp, levelIso_hom, levelIso_hom]
   exact h
 
--- The unchanged existential statement deliberately has the predicate True.
-set_option linter.unusedVariables false in
 /-- Degree-zero fibre cohomology is naturally the section system for the unit module.
 (Stacks, Tag 02OD, degree zero.) -/
 theorem formalFunctions_degreeZero_systemIso {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) :
-    ∃ b : formalFibreCohomologySystem f y (SheafOfModules.unit X.ringCatSheaf) 0 ≅
+    ∃ _b : formalFibreCohomologySystem f y (SheafOfModules.unit X.ringCatSheaf) 0 ≅
           formalFibreSectionsSystem f y, True := by
   let b : formalFibreCohomologySystem f y (SheafOfModules.unit X.ringCatSheaf) 0 ⟶
       formalFibreSectionsSystem f y :=

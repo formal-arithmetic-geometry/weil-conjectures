@@ -28,7 +28,7 @@ it, the derived category `D(Y_proét, 𝒪_E)`, and, for every `n`, the restrict
 `Res_n` along `𝒪̂_{E,Y} ⟶ (A_{E,n})_Y`.
 
 On the pro-étale site the constant sheaf of rings with value a discrete ring `A` is the sheaf of
-continuous (that is, locally constant) functions `U ↦ C(U, A)` (Bhatt–Scholze, Lemma 4.2.12);
+continuous (that is, locally constant) functions `U ↦ C(U, A)`;
 on the small étale site this is `AlgebraicGeometry.Scheme.Etale.constantSheafIsoContinuousMapSheaf`.
 We take this as the definition of `(A_{E,n})_Y` as a sheaf of rings
 (`AlgebraicGeometry.ProEtale.reductionRingSheaf`), using the sheaf of rings
@@ -44,10 +44,14 @@ We take this as the definition of `(A_{E,n})_Y` as a sheaf of rings
 - `AlgebraicGeometry.ProEtale.CompletedIntegralDerivedCategory`: `D(Y_proét, 𝒪_E)`.
 - `AlgebraicGeometry.ProEtale.restrictScalarsReduction`: `Res_n`.
 
-## Implementation notes
+## Implementation details
 
 The derived category of `𝒪̂_{E,Y}`-modules is Mathlib's standard localization at the
 quasi-isomorphisms (`HasDerivedCategory.standard`).
+
+## References
+
+* [Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 4.2.12]
 -/
 
 @[expose] public section
@@ -69,9 +73,8 @@ lemma discreteTopology_reductionTopology (n : ℕ) :
     @DiscreteTopology (Λ ⧸ I ^ n) (reductionTopology I n) :=
   @DiscreteTopology.mk _ (reductionTopology I n) rfl
 
-/-- The constant sheaf of rings `(Λ ⧸ Iⁿ)_Y` on the small pro-étale site of `Y` (for
-`Λ = 𝒪_E`, `I = 𝔪_E`, the finite-torsion coefficients `(A_{E,n})_Y` of blueprint
-`definition-constructible-sheaves`): the sheaf of locally constant functions
+/-- The constant sheaf of rings `(Λ ⧸ Iⁿ)_Y` on the small pro-étale site of `Y` (for `Λ = 𝒪_E`,
+`I = 𝔪_E`, the finite-torsion coefficients `(A_{E,n})_Y`): the sheaf of locally constant functions
 `U ↦ C(U, Λ ⧸ Iⁿ)` for the discrete topology. -/
 noncomputable def reductionRingSheaf (n : ℕ) : Sheaf (Scheme.ProEt.topology Y) RingCat.{u + 1} :=
   @continuousMapRingSheaf Y (Λ ⧸ I ^ n) (reductionTopology I n) _
@@ -122,7 +125,7 @@ lemma completedIntegralSheafπ_reductionRingSheafMap (n : ℕ) :
     using this
 
 /-- The category `Sh(Y_proét, 𝒪_E)` of sheaves of modules over the completed coefficient sheaf
-`𝒪̂_{E,Y}` (blueprint `situation-conventions`, Mathlib's `SheafOfModules`). It is
+`𝒪̂_{E,Y}` (Mathlib's `SheafOfModules`). It is
 abelian. -/
 abbrev CompletedIntegralModule : Type _ :=
   SheafOfModules.{u + 1} (completedIntegralSheaf Y I)

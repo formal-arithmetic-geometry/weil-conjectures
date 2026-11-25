@@ -14,8 +14,11 @@ import all WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
 
 /-! # The augmented actual Roos complex after exact coefficient transport
 
-Source: Stacks Tags 0941 and 099M; integral-models proof (1).
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* [Stacks, Tag 099M](https://stacks.math.columbia.edu/tag/099M)
+* [Stacks, Tag 099L](https://stacks.math.columbia.edu/tag/099L)
 -/
 
 @[expose] public noncomputable section
@@ -386,31 +389,7 @@ private theorem transportedRoosIso_augmentation
 
 /-- Exact coefficient transport carries the actual Roos augmentation to the
 normalized total right derived limit of the strict transported quotient tower.
-This does not mention a generator, a Koszul complex or a completion presentation.
-
-Source: integral-models proof (1); Stacks Tags 0941, 099L and 099M.
-(auxiliary; not a blueprint node).
-
-Proof: the three ordinary functors making up modules preserve countable products:
-limits of scalar-restricted modules are computed on underlying sheaves, and the
-section functor is an equivalence. They are additive and exact. Their product comparison
-intertwines the
-quotient transitions, hence 1-shift, and carries the actual signed Roos complex to
-the signed Roos complex of quotientComplex. It also carries (unit,0) to the same
-augmentation in the latter complex. On the pro-etale site countable products of
-abelian sheaves are exact, hence so are module products; the section equivalence
-transports this assertion to the small ringed site. Thus the strict Roos functor
-preserves quasi-isomorphisms. Resolve the tower by a K-injective tower with injective
-terms. Its transitions split and the ordinary limit includes as the kernel of
-1-shift. That kernel inclusion into the Roos complex is a quasi-isomorphism. Use
-it and the right-derived comparison on the K-injective resolution to get e.
-Naturality of the comparison identifies the composite of the augmentation with e
-with the ordinary compatible-family map followed by c. The localization factors
-of the three exact functors are exactly complexIso, which gives the left source
-identification in the equation. K-injective normalization gives the calculation
-for the specified RF and c. No K-flatness or completeness assumption is needed,
-and the zero and empty-site cases give the same identity.
--/
+This does not mention a generator, a Koszul complex or a completion presentation. -/
 theorem quotient_roos_limit
     (P : CochainComplex (AdicCompletion.Modules l E X) ℤ)
     (RF : DerivedCategory (ℕᵒᵖ ⥤ ConstantCompletion.Mod (ring l E X)) ⥤

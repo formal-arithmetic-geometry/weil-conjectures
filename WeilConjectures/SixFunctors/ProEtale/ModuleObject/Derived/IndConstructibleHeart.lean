@@ -17,7 +17,7 @@ import all WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 /-!
 # The ind-constructible heart
 
-Blueprint `proposition-ind-constructible-sheaves` (2): if the constructible sheaves of `R`-modules
+If the constructible sheaves of `R`-modules
 on `X_proét` are closed under kernels, cokernels and extensions, and morphisms out of a
 constructible sheaf `C` into `B[n]`, `B = colim Bᵢ` a filtered colimit of sheaves, factor through
 some `Bᵢ[n]` (`AlgebraicGeometry.ProEtale.HasConstructibleExtContinuity`), then the
@@ -49,7 +49,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   {X : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology X) A) [MonObj R]
 
-/-- Blueprint `proposition-ind-constructible-sheaves` (2): if the constructible sheaves of
+/-- If the constructible sheaves of
 `R`-modules are closed under kernels, cokernels and extensions, and morphisms out of constructible
 sheaves commute with filtered colimits (`HasConstructibleExtContinuity`), the ind-constructible
 sheaves are closed under kernels, cokernels, extensions and direct sums. -/

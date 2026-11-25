@@ -119,7 +119,6 @@ theorem singleAlpha_vertical {A C E B₀ D F : Scheme.{u}}
   rw [hu]
 
 open CategoryTheory.ExactDerivedPasting
-set_option linter.unusedSimpArgs false
 
 private structure NativeVerticalData (A C E B₀ D F : Scheme.{u}) where
   K : Modules B A ⥤ Modules B B₀

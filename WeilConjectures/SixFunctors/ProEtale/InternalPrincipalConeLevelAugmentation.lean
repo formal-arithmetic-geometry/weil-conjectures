@@ -11,8 +11,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 
 /-! # A normalized internal principal-cone augmentation at one quotient level
 
-Source: Stacks Project, Tags 0A0E and 06YY.
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 0A0E](https://stacks.math.columbia.edu/tag/0A0E)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public noncomputable section
@@ -141,23 +143,7 @@ private theorem complexAction_pow {A : Type*} [Category* A] [Abelian A]
     rw [pow_succ, pow_succ, map_mul, End.mul_asHom, End.mul_asHom,
       HomologicalComplex.comp_f, ih, hμ]
 
-/-- The normalized cone augmentation computes one positive quotient on a K-flat complex.
-
-Source: Stacks Project, Tag 0A0E, regular singleton Koszul-to-quotient comparison,
-and Tag 06YY, K-flat tensor computation.
-(auxiliary; not a blueprint node).
-
-Proof: the pointwise formula determines d as multiplication by the uniformizer.
-Pull back the exact coefficient sequence R --pi^(n+1)--> R --> B_n.
-The corresponding two-term cone augments quasi-isomorphically to B_n in degree zero,
-with the quotient map on its unshifted summand and zero on the shifted summand.
-Tensor this map with P. K-flatness preserves its quasi-isomorphism. The total-tensor
-cone comparison, followed by the unitors, identifies the source with the cone of
-scalarOnComplex(d,P)^(n+1), and the single-object tensor comparison identifies the
-target with the specified termwise tensor reduction. These comparisons send the
-unshifted summand to the quotient unit and kill the shifted summand, giving exactly
-the displayed degreewise formula. No choice of a homotopy or a tower comparison is
-involved. This includes n=0 (the first positive exponent), P=0 and empty X. -/
+/-- The normalized cone augmentation computes one positive quotient on a K-flat complex. -/
 theorem internal_principal_cone_level_augmentation
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})

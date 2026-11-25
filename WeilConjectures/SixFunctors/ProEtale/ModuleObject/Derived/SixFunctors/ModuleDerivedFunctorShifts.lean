@@ -10,17 +10,17 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunct
 /-!
 # Specified integer shifts on derived module pullback and pushforward
 
-Source: Stacks Project, derived.tex, Tags 014X, 015F and 05SE;
-blueprint compactification coherence, refinement (2)
-(blueprint: def-sfb-module-derived-functor-shifts).
-
-The three constructions of this node are the published declarations of
-`ModuleDerivedFunctorCompositorShifts` (in this directory), reexported here unchanged:
+The three constructions here are the published declarations of
+`ModuleDerivedFunctorCompositorShifts`, reexported here unchanged:
 `modulePullbackExactComparison` (the canonical universal-counit comparison
 `c_u : Lu^* ≅ D(u^*)`), `modulePullbackDerivedCommShift` (the termwise shifts of `D(u^*)`
 transported along `c_u`, by `Functor.CommShift.ofIso`) and
 `modulePushforwardDerivedCommShift` (the published K-injective shifts on `Ru_*`).
 They are not redeclared, so that one definition per notion is kept.
+
+## References
+
+* Stacks Project, Tags 014X, 015F and 05SE
 -/
 
 @[expose] public noncomputable section

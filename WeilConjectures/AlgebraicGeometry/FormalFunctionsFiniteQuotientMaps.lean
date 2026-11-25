@@ -29,15 +29,13 @@ noncomputable section
 -- Compare cohomology h-maps by their interfaces, without unfolding chosen resolutions.
 attribute [local irreducible] Scheme.Modules.moduleCohomologyFMap
 
--- The coherence hypothesis belongs to the existing interface; this compatibility is formal.
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Composing the local germ formula with canonical finite-level pullback gives theta.
 (Stacks, Tags 02OD, 01F7, 01FB and 01E4.) -/
 theorem formalFunctions_finite_quotient_maps {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsProper f] [IsLocallyNoetherian Y] (F : X.Modules)
-    (hF : RingedSpace.IsCoherent X.toRingedSpace F) (y : Y) (p n : ℕ)
+    (_hF : RingedSpace.IsCoherent X.toRingedSpace F) (y : Y) (p n : ℕ)
     (r : formalFunctionsLocalCohomology f y F p →ₗ[Y.presheaf.stalk y]
       formalFibreCohomologyLocal f y F p n)
     (hr : ∀ z, r z = formalFunctionsFinitePullback f y F p n z)
