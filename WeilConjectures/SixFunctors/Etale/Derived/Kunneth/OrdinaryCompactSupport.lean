@@ -28,8 +28,14 @@ the right-hand side computed along the compactification `X ×_k Y ⟶ X̄ ×_k �
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_kunneth_compactSupport_of_isSepClosed`
-  (`cor-kun-compact-kunneth`).
+- `AlgebraicGeometry.Etale.nonempty_iso_kunneth_compactSupport_of_isSepClosed`: the Künneth
+  formula for compactly supported cohomology.
+
+## Implementation details
+
+The Künneth formula for `X̄` and `Ȳ` is applied to `j_{X!} E` and `j_{Y!} K`, followed by the
+identification `Lq₁^* j_{X!} E ⊗ᴸ Lq₂^* j_{Y!} K ≅ J_! (Lp₁^* E ⊗ᴸ Lp₂^* K)` given by base
+change and the projection formula for extensions by zero.
 
 -/
 
@@ -151,21 +157,14 @@ theorem nonempty_iso_derivedTensor_leftDerivedUpperStar_openImmersionLowerShriek
             (leftDerivedUpperStarCompObjIso Λ J' r p₁ hJ'r E)).app _)) ≪≫
     mapDerivedCategoryOpenImmersionLowerShriekCompObjIso Λ J' J₁ J hJ _⟩
 
-/-- Blueprint `cor-kun-compact-kunneth`: the Künneth formula for compactly supported
-cohomology.
+/-- The Künneth formula for compactly supported cohomology: let `k` be separably closed and `Λ` a
+finite ring whose exponent is invertible in `k`. Let `j_X : X ⟶ X̄` and `j_Y : Y ⟶ Ȳ` be open
+immersions into proper `k`-schemes, let `W` be the fibre product of `X` and `Y` over `k`
+(projections `p₁`, `p₂`), `W̄` that of `X̄` and `Ȳ` (projections `q₁`, `q₂`), and `J : W ⟶ W̄` the
+product open immersion. Then for all `E ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)`, with
+`RΓ_c(X, E) = RΓ(X̄, j_{X!} E)`,
 
-Let `k` be separably closed and `Λ` a finite ring whose exponent is invertible in `k`. Let
-`j_X : X ⟶ X̄` and `j_Y : Y ⟶ Ȳ` be open immersions into proper `k`-schemes, let `W` be the
-fibre product of `X` and `Y` over `k` (projections `p₁`, `p₂`), `W̄` that of `X̄` and `Ȳ`
-(projections `q₁`, `q₂`), and `J : W ⟶ W̄` the product open immersion. Then for all
-`E ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)`, with `RΓ_c(X, E) = RΓ(X̄, j_{X!} E)`,
-
-`RΓ_c(X, E) ⊗ᴸ RΓ_c(Y, K) ≅ RΓ(W̄, J_! (Lp₁^* E ⊗ᴸ Lp₂^* K)) = RΓ_c(W, Lp₁^* E ⊗ᴸ Lp₂^* K)`.
-
-It is the Künneth formula for `X̄` and `Ȳ` (`proposition-ordinary-external-kunneth--1`), applied to
-`j_{X!} E` and `j_{Y!} K`, followed by the identification `Lq₁^* j_{X!} E ⊗ᴸ Lq₂^* j_{Y!} K ≅
-J_! (Lp₁^* E ⊗ᴸ Lp₂^* K)` given by base change and the projection formula for extensions by
-zero. -/
+`RΓ_c(X, E) ⊗ᴸ RΓ_c(Y, K) ≅ RΓ(W̄, J_! (Lp₁^* E ⊗ᴸ Lp₂^* K)) = RΓ_c(W, Lp₁^* E ⊗ᴸ Lp₂^* K)`. -/
 theorem nonempty_iso_kunneth_compactSupport_of_isSepClosed {X Y Xb Yb : Scheme.{u}}
     (jX : X ⟶ Xb) (jY : Y ⟶ Yb) [IsOpenImmersion jX] [IsOpenImmersion jY]
     (bX : Xb ⟶ Spec (.of k)) (bY : Yb ⟶ Spec (.of k)) [IsProper bX] [IsProper bY]

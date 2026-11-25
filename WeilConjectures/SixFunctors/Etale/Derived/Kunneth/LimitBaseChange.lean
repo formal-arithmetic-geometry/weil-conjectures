@@ -27,9 +27,8 @@ Xᵢ --pᵢ--> Sᵢ
 with affine transition morphisms and `gᵢ` quasi-compact quasi-separated, with limit square
 `(Y, X, T, S)`. If the degree-`q` base-change map
 `pᵢ⁻¹ R^q gᵢ_* Fᵢ ⟶ R^q hᵢ_* eᵢ⁻¹ Fᵢ` is an isomorphism at every stage, then so is the one of
-the limit square (blueprint `corollary-open-direct-image-over-field--2`, Stacks 0EZT). As an
-application, smooth base change holds along limits of smooth schemes (blueprint
-`corollary-open-direct-image-over-field--2`, Stacks 0F09).
+the limit square ([Stacks, Tag 0EZT]). As an application, smooth base change holds along limits
+of smooth schemes ([Stacks, Tag 0F09]).
 
 ## Main statements
 
@@ -44,6 +43,16 @@ application, smooth base change holds along limits of smooth schemes (blueprint
 
 - Stacks Project, Lemma 59.88.3, <https://stacks.math.columbia.edu/tag/0EZT>
 - Stacks Project, Lemma 59.89.3, <https://stacks.math.columbia.edu/tag/0F09>
+
+## Implementation details
+
+In `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit`, the stages `Sᵢ` and `Xᵢ`
+are assumed quasi-compact and quasi-separated. This could be removed by localising on `S_{i₀}`
+and `X_{i₀}`, and every use of this lemma satisfies it. For all coefficient sheaves, a sheaf `F`
+on `T` is the filtered colimit of the pullbacks of its direct images to the stages. Smooth base
+change along a limit of smooth schemes over an arbitrary base is local on the base
+(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_etale_cover`) and holds over affine
+opens by `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth_of_qcqs`.
 -/
 
 @[expose] public section
@@ -58,21 +67,14 @@ namespace AlgebraicGeometry
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: Higher direct images along limits of
-cartesian squares.
-
-Let `i ↦ (Yᵢ, Xᵢ, Tᵢ, Sᵢ)` be a cofiltered system of Cartesian squares
-`IsPullback (e.app i) (h.app i) (g.app i) (p.app i)` with affine transition morphisms and every
-`g.app i` quasi-compact quasi-separated, all `Sᵢ` and `Xᵢ` quasi-compact quasi-separated,
-and let `sq₀ : IsPullback e₀ h₀ g₀ p₀` be a Cartesian
-square of limits (the four limit cones being compatible with the four morphisms), with `g₀`
-quasi-compact quasi-separated. Let `G` be a sheaf on a scheme `W` to which the system `T` maps.
-If for a fixed degree `q` every base-change map `pᵢ⁻¹ R^q gᵢ_* (G|_{Tᵢ}) ⟶ R^q hᵢ_* eᵢ⁻¹ (G|_{Tᵢ})`
-is an isomorphism, then so is `p₀⁻¹ R^q g₀_* (G|_T) ⟶ R^q h₀_* e₀⁻¹ (G|_T)`.
-
-The hypotheses that the `Sᵢ` and `Xᵢ` are quasi-compact and quasi-separated are not in the
-blueprint. They could be removed by localising on `S_{i₀}` and `X_{i₀}`, and every use of this
-lemma satisfies them. -/
+/-- Higher direct images along limits of cartesian squares: let `i ↦ (Yᵢ, Xᵢ, Tᵢ, Sᵢ)` be a
+cofiltered system of Cartesian squares `IsPullback (e.app i) (h.app i) (g.app i) (p.app i)` with
+affine transition morphisms and every `g.app i` quasi-compact quasi-separated, all `Sᵢ` and `Xᵢ`
+quasi-compact quasi-separated, and let `sq₀ : IsPullback e₀ h₀ g₀ p₀` be a Cartesian square of
+limits (the four limit cones being compatible with the four morphisms), with `g₀` quasi-compact
+quasi-separated. Let `G` be a sheaf on a scheme `W` to which the system `T` maps. If for a fixed
+degree `q` every base-change map `pᵢ⁻¹ R^q gᵢ_* (G|_{Tᵢ}) ⟶ R^q hᵢ_* eᵢ⁻¹ (G|_{Tᵢ})` is an
+isomorphism, then so is `p₀⁻¹ R^q g₀_* (G|_T) ⟶ R^q h₀_* e₀⁻¹ (G|_T)`. -/
 @[stacks 0EZT]
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit {I : Type u} [Category.{u} I]
     [IsCofiltered I] {S X T Y : I ⥤ Scheme.{u}} (p : X ⟶ S) (g : T ⟶ S) (e : Y ⟶ T)
@@ -143,15 +145,11 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit {I : Type u} [Category.{u} 
   rw [Etale.isIso_baseChangeHomologyMap_iff_upperStar Λ sq₀ q w₀ G]
   exact Etale.LimitStage.isIso_homology_baseChange_of_isIso Λ β₀ q K hβ₀
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: Higher direct images along limits of
-cartesian squares, for all coefficient sheaves.
-
-In the situation of `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit`, if for a
+/-- Higher direct images along limits of cartesian squares, for all coefficient sheaves: in the
+situation of `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit`, if for a
 fixed degree `q` every stage base-change map is an isomorphism for every sheaf of `Λ`-modules
 on `Tᵢ`, then the base-change map of the limit square is an isomorphism for every sheaf `F` of
-`Λ`-modules on `T`: such an `F` is the filtered colimit of the pullbacks of its direct images
-to the stages (blueprint
-`corollary-open-direct-image-over-field--2`). -/
+`Λ`-modules on `T`. -/
 @[stacks 0EZT]
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_forall {I : Type u} [Category.{u} I]
     [IsCofiltered I] {S X T Y : I ⥤ Scheme.{u}} (p : X ⟶ S) (g : T ⟶ S) (e : Y ⟶ T)
@@ -373,12 +371,9 @@ lemma Scheme.IsTorsionSheafOfInvertibleOrder.upperStar {S S' T T' : Scheme.{u}} 
     rw [← h2, h1, map_zero]
 
 /-- Smooth base change along a limit of smooth schemes, for a system given as a functor
-`X : I ⥤ Scheme` with a cone of morphisms `p : X ⟶ S` (blueprint
-`corollary-open-direct-image-over-field--2`, see
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth`). The base `S` is arbitrary:
-the statement is local on `S` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_etale_cover`)
-and holds over affine opens by
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth_of_qcqs`. -/
+`X : I ⥤ Scheme` with a cone of morphisms `p : X ⟶ S` (see
+`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth`), over an arbitrary base
+`S`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth' {S T : Scheme.{u}} (g : T ⟶ S)
     [QuasiCompact g] [QuasiSeparated g] {I : Type u} [Category.{u} I] [IsCofiltered I]
     (X : I ⥤ Scheme.{u}) (p : X ⟶ (Functor.const I).obj S) [∀ i, Smooth (p.app i)]
@@ -447,12 +442,9 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth' {S T : Scheme.{u}} 
     exact Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth_of_qcqs Λ (g' V) Xr pr hcr (f V)
       (fun i ↦ by simp [cr, pr]) (IsPullback.of_hasPullback (g' V) (f V)) q _
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: Smooth base change for limits of smooth
-schemes.
-
-Let `S' = lim Sᵢ` be a cofiltered limit of schemes `Sᵢ` which are smooth, quasi-compact and
-quasi-separated over `S`, with affine transition morphisms, let `g : T ⟶ S` be quasi-compact
-quasi-separated and form the Cartesian square
+/-- Smooth base change for limits of smooth schemes: let `S' = lim Sᵢ` be a cofiltered limit of
+schemes `Sᵢ` which are smooth, quasi-compact and quasi-separated over `S`, with affine transition
+morphisms, let `g : T ⟶ S` be quasi-compact quasi-separated and form the Cartesian square
 
 ```
 Y --e--> T

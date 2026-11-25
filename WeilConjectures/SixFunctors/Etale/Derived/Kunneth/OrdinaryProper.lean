@@ -18,12 +18,23 @@ Let `k` be a separably closed field and `Λ` a finite ring.
 For a proper `k`-scheme `X` and a `k`-scheme `Y` of finite type, the Künneth formula
 `RΓ(X, E) ⊗ᴸ RΓ(Y, K) ≅ RΓ(X ×_k Y, Lp₁^* E ⊗ᴸ Lp₂^* K)` follows from the projection formula
 and proper base change for the proper projection `p₂ : X ×_k Y ⟶ Y`, and from the tensor
-product with a constant complex on `Y` (Stacks, Lemma 0F14).
+product with a constant complex on `Y` ([Stacks, Tag 0F14]).
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_kunneth_of_isProper`
-(`proposition-ordinary-external-kunneth--1`).
+- `AlgebraicGeometry.Etale.nonempty_iso_kunneth_of_isProper`: the Künneth formula with one
+  proper factor.
+
+## Implementation details
+
+By the Leray isomorphism for `p₂`, the projection formula for the proper morphism `p₂` and
+proper base change `La_Y^* Ra_{X*} E ≅ Rp₂_* Lp₁^* E`, the right-hand side is
+`RΓ(Y, La_Y^* Ra_{X*} E ⊗ᴸ K)`; the tensor product with a constant complex and the symmetry of
+`⊗ᴸ` identify it with the left-hand side.
+
+## References
+
+* [Stacks, Tag 0F14]
 
 -/
 
@@ -43,11 +54,8 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
 
-/-- Blueprint `proposition-ordinary-external-kunneth--1`: the Künneth formula with one proper
-factor.
-
-Let `k` be separably closed, `Λ` a finite ring, `X` a
-proper `k`-scheme and `Y` a `k`-scheme of finite type. For a cartesian square
+/-- The Künneth formula with one proper factor: let `k` be separably closed, `Λ` a finite ring,
+`X` a proper `k`-scheme and `Y` a `k`-scheme of finite type. For a cartesian square
 
 ```
   W --p₂--> Y
@@ -59,14 +67,7 @@ proper `k`-scheme and `Y` a `k`-scheme of finite type. For a cartesian square
 
 and all `E ∈ D(X_ét, Λ)`, `K ∈ D(Y_ét, Λ)`, unbounded,
 
-`RΓ(X, E) ⊗ᴸ RΓ(Y, K) ≅ RΓ(W, Lp₁^* E ⊗ᴸ Lp₂^* K)`.
-
-Following the blueprint: by the Leray isomorphism for `p₂`, the projection formula for the
-proper morphism `p₂` (`proposition-proper-direct-image-constructible-complexes--9`) and proper base
-change `La_Y^* Ra_{X*} E ≅ Rp₂_* Lp₁^* E` (`theorem-results-from-etale-theory--1`), the right-hand
-side is `RΓ(Y, La_Y^* Ra_{X*} E ⊗ᴸ K)`; the tensor product with a constant complex
-(`proposition-open-direct-image-preserves-finite`) and the symmetry of `⊗ᴸ` identify it with the
-left-hand side. -/
+`RΓ(X, E) ⊗ᴸ RΓ(Y, K) ≅ RΓ(W, Lp₁^* E ⊗ᴸ Lp₂^* K)`. -/
 theorem nonempty_iso_kunneth_of_isProper {X Y W : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [IsProper aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
     (p₁ : W ⟶ X) (p₂ : W ⟶ Y) (sq : IsPullback p₁ p₂ aX aY)
