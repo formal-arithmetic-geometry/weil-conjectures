@@ -9,7 +9,9 @@ public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRinge
 
 /-! # The native chain swap obtained from the ringed signed swap
 
-Source: Stacks 06YU and 0FPT, signed total tensor symmetry.
+## References
+
+* Stacks Project, Tags 06YU and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -35,12 +37,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   (adj : T ⊣₂ ihomBifunctor k₀ l X)
   (A : NativeWeilRingedTensorComplexes b T adj)
 
-/-- Transport the signed ringed chain swap through the explicit total comparisons.
-Source: Stacks 06YU and 0FPT.
-(blueprint: new-sf-native-weil-ringed-swap-complex).
-
-The additive equivalence is fully faithful on complexes. Its preimage of this
-specified composite is therefore a real construction, with no existence choice. -/
+/-- Transport the signed ringed chain swap through the explicit total comparisons, as the
+fully faithful preimage of the specified composite. -/
 def nativeRingedSwapComplex
     (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
     CochainComplex.mapBifunctor Q P T ≅ CochainComplex.mapBifunctor P Q T := by
@@ -51,12 +49,7 @@ def nativeRingedSwapComplex
   exact Ec.preimageIso (A.chain Q P ≪≫
     (CochainComplex.Monoidal.braiding (Ec.obj P) (Ec.obj Q)) ≪≫ (A.chain P Q).symm)
 
-/-- The native chain swap satisfies its defining ringed comparison square.
-Source: full faithfulness and cancellation, applied to the signed swap of Stacks 0FPT.
-(blueprint: new-sf-native-weil-ringed-swap-complex).
-
-Proof: map the full-faithful preimage, expand the composite isomorphism, and cancel
-its last inverse against the comparison on the left-hand side. -/
+/-- The native chain swap satisfies its defining ringed comparison square. -/
 theorem nativeRingedSwapComplex_square
     (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
     letI := SheafOfModules.isMonoidal_W_independentCoefficients b.R

@@ -19,13 +19,15 @@ For a morphism `φ : M ⟶ N` of nearby cycles models of finite type over the tr
 `S = Spec k'⟦t⟧` over a proper `f` whose morphism of total spaces is proper and whose squares of
 special fibres and of identifications `ε` are cartesian, the pushforward exchange
 `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` (`NearbyCyclesModel.Hom.pushforwardExchange`) is an isomorphism on
-bounded constructible `ℚ̄_ℓ`-complexes (blueprint `prose-E-03` (2), "proper
-exchange", `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`), provided the
+bounded constructible `ℚ̄_ℓ`-complexes ("proper exchange",
+`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`), provided the
 target `Y` of `f` is noetherian over a field in which `ℓ` is invertible. For the geometric models,
 whose identifications are the inclusions of the geometric generic fibres, this is
 `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_geometric`.
 
-Following the proof of the blueprint, `χ_f` is the composite of `Li_N^* Rj_{N*}` of the base
+## Implementation details
+
+The exchange `χ_f` is the composite of `Li_N^* Rj_{N*}` of the base
 change morphism of the square of identifications, of the comparison of the two generic direct
 images, and of the base change morphism of the square of special fibres at `Rj_{M*} Lε_M^* K`
 (`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isIso_baseChangeMap`). The first is
@@ -33,6 +35,12 @@ invertible by proper base change over noetherian bases mapping to fields
 (`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`), the
 last by proper base change at generic direct images
 (`NearbyCyclesModel.Hom.isIso_baseChangeMap_commSq_i_app_lowerStar`).
+The `ε`-square cannot be dropped: `Rf_*` must commute with the base change to the geometric
+generic fibre.
+
+## References
+
+* SGA 7 XIII 2.1.7
 
 -/
 
@@ -60,14 +68,12 @@ lemma _root_.AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.IsTraitM
     (hN : N.IsTraitModel) : ∃ a : Y'.left ⟶ Spec (.of k'), N.IsTraitModel (X' := Over.mk a) :=
   ⟨Y'.hom, ⟨hN.exists_isPullback⟩⟩
 
-/-- **Proper base change for nearby cycles** (blueprint `prose-E-03` (2),
-proper half; SGA 7 XIII 2.1.7): let `φ : M ⟶ N` be a morphism of models of finite type over the
+/-- **Proper base change for nearby cycles**: let `φ : M ⟶ N` be a morphism of models of finite
+type over the
 trait over `f : X ⟶ Y`, with `Y` noetherian over a field `k` in which `ℓ` is invertible. If the
 morphism of total spaces and `f` are proper and the squares of special fibres and of
 identifications `ε` are cartesian, the pushforward exchange `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` is
-invertible on bounded constructible complexes: by proper base change along `ε_N` and `i_N`, both
-sides are `i_N^* Rt_* Rj_{M*} Lε_M^*`. (The `ε`-square cannot be dropped: `Rf_*` must commute
-with the base change to the geometric generic fibre.) -/
+invertible on bounded constructible complexes. -/
 theorem isIso_pushforwardExchange_app_of_isProper {k : Type u} [Field k]
     [Fact (ringChar k ≠ ℓ)] {X Y : Scheme.{u}} [IsNoetherian Y] (aY : Y ⟶ Spec (.of k))
     {X' Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y}
@@ -91,14 +97,11 @@ theorem isIso_pushforwardExchange_app_of_isProper {k : Type u} [Field k]
     (Profinite.padicAlgClRingObj ℓ) K (by cast_proofs h₁) (by cast_proofs h₂)
   cast_proofs h₃
 
-/-- **The proper exchange for geometric models** (blueprint `prose-E-03` (2)):
+/-- **The proper exchange for geometric models**:
 let `M` and `N` be models over `Spec k'⟦t⟧`, and `φ : M.geometric ⟶ N.geometric` a morphism of
 their geometric models whose morphism of total spaces `t` is proper and whose squares of geometric
 generic fibres and of special fibres are cartesian. Then the pushforward exchange
-`χ_t : Ψ_N Rt_* ⟶ Rt_{s*} Ψ_M` is an isomorphism on bounded constructible `ℚ̄_ℓ`-complexes. This
-is `isIso_pushforwardExchange_app_of_isProper` for the geometric models, whose identifications `ε`
-are the inclusions `j` of the geometric generic fibres; their target, the total space of `N`, is
-noetherian over `k'`. -/
+`χ_t : Ψ_N Rt_* ⟶ Rt_{s*} Ψ_M` is an isomorphism on bounded constructible `ℚ̄_ℓ`-complexes. -/
 theorem isIso_pushforwardExchange_app_of_isProper_geometric {X Y : Scheme.{u}}
     {X' Y' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
     {N : NearbyCyclesModel Y Y'.left} {t : M.total ⟶ N.total} {f' : X'.left ⟶ Y'.left}

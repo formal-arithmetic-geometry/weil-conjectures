@@ -17,7 +17,7 @@ public import WeilConjectures.Tactic.ExactModProofs
 # The formal part of the identification of the slice nearby cycles with the invariants
 
 `NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom` (SGA 4½, [Th. finitude],
-§3.7; blueprint `proposition-external-kunneth-formula-nearby-cycles`, identification (2)) asks, for
+§3.7; identification (2) of the external Künneth formula for nearby cycles) asks, for
 the pullback exchange `α_θ` of the morphism of models `θ : M'' ⟶ M_T` from the geometric slice to
 the change of trait, for a subgroup `V` of finite index of the pro-`p` kernel `P'` acting trivially
 on `Ψ_{M''} C`, and for a retraction of `α_θ` whose idempotent is the average over `P' ⧸ V`.

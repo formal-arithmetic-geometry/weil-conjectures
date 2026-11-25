@@ -16,8 +16,9 @@ set_option linter.privateModule false
 
 /-! # One-step point transport on the finite regular coefficient unit
 
-Source: the constant-sheaf clause of `theorem-grothendieck-lefschetz-trace-formula--8`, reviewed
-expansion step 4 (blueprint: lem-zl-finite-point-transport-unit).
+This file computes the one-step point transport along the geometric Frobenius on the finite
+regular coefficient unit, for the constant-sheaf case of the Grothendieck–Lefschetz trace
+formula.
 -/
 
 @[expose] public noncomputable section

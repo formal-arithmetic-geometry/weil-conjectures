@@ -23,7 +23,7 @@ generic point of the special-fibre line `𝔸¹_{k'}` is in the image of the spe
 `(𝒳 ×_{𝔸¹_S} Spec K⟦t⟧)_s ⟶ 𝒳_s` of the slice
 (`NearbyCyclesModel.mem_range_sliceSpecialMap`). This is how the vanishing of the cone of the
 Künneth map over the slices is turned into its vanishing over the generic point of the coordinate
-line (blueprint `proposition-external-kunneth-formula-nearby-cycles`, "Finite support").
+line in the finite-support step.
 
 -/
 
@@ -88,7 +88,7 @@ lemma specialCoordinate_over (hM : M.IsTraitModelOver q g) {n : Type u}
   (AffineSpace.isPullback_map (n := n) (traitClosedPoint k')).lift_snd _ _ _
 
 /-- The inclusion of the special fibre of a model of finite type over the trait is a closed
-immersion: it is a base change of the closed immersion of the closed point of the trait. -/
+immersion. -/
 lemma IsTraitModelOver.isClosedImmersion_i (hM : M.IsTraitModelOver q g) :
     IsClosedImmersion M.i :=
   MorphismProperty.of_isPullback (P := @IsClosedImmersion) hM.isPullback_i.flip inferInstance
@@ -102,9 +102,7 @@ lemma IsTraitModelOver.injective_i (hM : M.IsTraitModelOver q g) : Function.Inje
 coordinate `b : 𝒳 ⟶ 𝔸¹_S` of a model of finite type over the trait and `x ∈ K` transcendental over
 `k'`, every point of the special fibre `𝒳_s` whose image under `b_s` is the generic point of the
 special-fibre line lies in the image of the special fibre `(𝒳 ×_{𝔸¹_S} Spec K⟦t⟧)_s ⟶ 𝒳_s` of
-the generic slice. Indeed `b` maps it to the image of the closed point of `Spec K⟦t⟧` under the
-generic slice `σ` (`AlgebraicGeometry.traitClosedPoint_traitSlice`), so it lifts to the fibre
-product, and `i : 𝒳_s ⟶ 𝒳` is injective. -/
+the generic slice. -/
 lemma mem_range_sliceSpecialMap (x : K) (hx : Transcendental k' x) (hM : M.IsTraitModelOver q g)
     {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
     (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q) (v : X'.left)

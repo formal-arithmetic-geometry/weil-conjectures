@@ -25,8 +25,21 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoida
 
 /-! # Support of the ordinary open tensor
 
-Source: Stacks 0E8I, 0GL1 and 015F.
-(blueprint: lem-sf-native-ordinary-open-tensor-support).
+We show that the ordinary derived tensor product with an object extended from a geometric
+open remains supported on that open.
+
+## Implementation details
+
+The fixed tensor is compared with the canonical derived module tensor using the ordinary
+Hom representative model. On ordinary sheaves, the open and its closed complement jointly
+detect isomorphisms; the essential image of the fully faithful extension is closed under
+the coproducts forming each term of the total tensor, and K-flat representatives compute
+the derived tensor. The argument covers empty opens and unbounded complexes and asserts
+no compatibility with forgetting Weil structures.
+
+## References
+
+* Stacks Project, Tags 015F, 0E8I and 0GL1
 -/
 
 @[expose] public noncomputable section
@@ -168,30 +181,7 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
 
 set_option linter.unusedSectionVars false in
-/-- Tensor with an extended input remains supported on the geometric open.
-
-Source: Stacks 0GL1, sites-cohomology.tex, lemma-j-shriek-and-tensor, and
-Stacks 0E8I, sites-modules.tex, lemma-j-shriek-and-tensor.
-
-Proof: First use the ordinary Hom representative model and uniqueness of tensor
-adjoints to compare the fixed tensor with the canonical derived module tensor.
-For an ordinary sheaf vanishing on the closed complement, test the open counit
-on the open and the complement. On the open the triangle identity and invertible
-unit make it an isomorphism; on the complement both objects vanish. These two
-quasi-compact pullbacks jointly detect isomorphisms. Pullback commutes with the
-relative module tensor, so tensoring an extended sheaf with any sheaf vanishes
-on the complement and is therefore in the essential image of extension.
-
-The essential image of the fully faithful left adjoint is closed under the
-coproducts forming each term of the total tensor. Its termwise counit is thus
-an isomorphism of complexes. Localization exhibits that total complex as an
-extended derived object. Represent the ambient input by a K-flat complex and
-use the canonical localization tensorator to compute the derived tensor.
-Transport along the fixed tensor comparison. Finally the invertible ordinary
-open unit gives full faithfulness of the exact derived extension, so its counit
-is invertible on this essential image. The argument includes empty opens and
-unbounded complexes and asserts no compatibility with forgetting Weil structures.
-(blueprint: lem-sf-native-ordinary-open-tensor-support). -/
+/-- Tensor with an extended input remains supported on the geometric open. -/
 theorem native_ordinary_open_tensor_support
     (M : DerivedCategory (ProEtale.AdicSheaf l
       (U ↘ Spec (CommRingCat.of k₀)).geometricFiber))

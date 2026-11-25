@@ -9,7 +9,12 @@ public import WeilConjectures.WeilSheaf.NativeWeilTensorPresentation.NativeWeilT
 import all WeilConjectures.WeilSheaf.Native.NativeHomEvaluationSquareAllSources
 import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilChainUncurryForget
 
-/-! # Forgetting uncurrying on native tensor representatives -/
+/-! # Forgetting uncurrying on native tensor representatives
+
+## References
+
+* Stacks Project, Tags 08J9 and 0A97.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -223,19 +228,7 @@ variable {k₀ l X}
 
 -- The proof combines both normalizations and their dependent representative isomorphisms.
 /-- Forgetting commutes with inverse transposition on K-flat tensor representatives
-and a K-injective target.
-
-Source: Stacks 08J9 and 0A97; native tensor-model evaluation argument, tensor-summand
-and localized-uncurrying steps.
-(blueprint: lem-sf-native-weil-representative-uncurry).
-
-Proof: extend the Hom comparison to the K-flat source using source replacement.
-Apply the native and ordinary adjunction normalizations to a curried chain map.
-On each tensor summand, the specified underived uncurrying square identifies the
-two component arrows. The total-tensor comparison and the coproduct universal
-property identify the chain maps. Localize this equality and paste the supplied
-model-forgetting square and the Hom comparison square. Naturality of inverse
-transposition along the factorization isomorphisms gives the displayed identity. -/
+and a K-injective target. -/
 theorem native_weil_representative_uncurry
     (M : NativeClosedHomModels k₀ l X)
     (S : CoefficientClosedStructure M.ordinaryHom)

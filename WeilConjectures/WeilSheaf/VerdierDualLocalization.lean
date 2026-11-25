@@ -18,7 +18,7 @@ public import WeilConjectures.WeilSheaf.UpperStarLowerStar
 Let `j : U ↪ X` be a quasi-compact open immersion with closed complement `i : Z ↪ X`. From the
 statements of the duality theory of Weil complexes collected in
 `WeilConjectures.WeilSheaf.VerdierDual`, this file derives the formal steps 1–4 of the proof of
-the local boundary duality (`lemma-local-duality-point-c-u--1`):
+the local boundary duality:
 
 1. `𝔻_X Rf_* G ≅ Rf₀! 𝔻 G` (Verdier exchange and biduality);
 2. `Rf^! 𝔻_Y K ≅ 𝔻_X f^* K` (`Rf^! = 𝔻 f^* 𝔻` and biduality);
@@ -31,6 +31,19 @@ the local boundary duality (`lemma-local-duality-point-c-u--1`):
 - `AlgebraicGeometry.WeilComplex.upperStarDerivedLowerStarIso`: `j^* Rj_* G ≅ G` for an open
   immersion `j`.
 - `AlgebraicGeometry.WeilComplex.nonempty_verdierDual_upperStar_derivedLowerStar_iso`: step 4.
+
+## Implementation details
+
+- `j^* Rj_* G ≅ G` holds because `j^*` is exact, so `j^* ∘ Rj_* ≅ R(j^* ∘ j_*)`, and
+  `j^* ∘ j_* ≅ 𝟭` on pro-étale Weil sheaves.
+- Step 1 applies the Verdier exchange to `M = 𝔻_X G` and biduality on `X`, then `𝔻_Y` and
+  biduality on `Y`.
+- `Ri^! Rj_* G = 0` since `Hom(N, Ri^! Rj_* G) ≅ Hom(i_* N, Rj_* G) = 0`, as `j^* i_* = 0`.
+- Step 3 applies the triangulated functor `Ri^!` to the open–closed triangle
+  `Rj₀! j^* Rj_* G ⟶ Rj_* G ⟶ Ri_* i^* Rj_* G ⟶`; the middle term vanishes, and the closed unit
+  `Q ≅ Ri^! Ri₀! Q` identifies the third term with `i^* Rj_* G`.
+- The dual of a lisse sheaf on a smooth scheme uses `ω_X ≅ ℚ̄_ℓ(d)[2d]` and
+  `RHom(P, N) ≅ P^∨ ⊗ N`.
 -/
 
 @[expose] public section
@@ -85,8 +98,7 @@ variable {U X : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- **The restriction of the derived direct image to the open**: for an open immersion
-`j : U ↪ X`, `j^* Rj_* G ≅ G`. The pullback `j^*` is exact, so that
-`j^* ∘ Rj_* ≅ R(j^* ∘ j_*)`, and `j^* ∘ j_* ≅ 𝟭` on pro-étale Weil sheaves. -/
+`j : U ↪ X`, `j^* Rj_* G ≅ G`. -/
 noncomputable def upperStarDerivedLowerStarIso (G : WeilComplex k₀ l U) :
     (upperStar j).obj ((derivedLowerStar j).obj G) ≅ G :=
   ObjectProperty.isoMk _
@@ -114,9 +126,7 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [HasUpperShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))]
   [HasUpperShriek k₀ l (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- **Step 1: the dual of a direct image** (blueprint: `lemma-local-duality-point-c-u--1`, step 1):
-`𝔻_Y Rf_* G ≅ Rf₀! 𝔻_X G`. The Verdier exchange applied to `M = 𝔻_X G` and biduality on `X`
-give `𝔻_Y Rf₀! 𝔻_X G ≅ Rf_* G`; applying `𝔻_Y` and biduality on `Y` gives the claim. -/
+/-- **Step 1: the dual of a direct image**: `𝔻_Y Rf_* G ≅ Rf₀! 𝔻_X G`. -/
 theorem nonempty_verdierDual_derivedLowerStar_iso (G : WeilComplex k₀ l X) :
     Nonempty ((verdierDual k₀ l Y).obj (op ((derivedLowerStar f).obj G)) ≅
       (derivedLowerShriek k₀ l f).obj ((verdierDual k₀ l X).obj (op G))) := by
@@ -131,9 +141,7 @@ theorem nonempty_verdierDual_derivedLowerStar_iso (G : WeilComplex k₀ l X) :
 
 variable [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- **Step 2: the exceptional inverse image of a dual** (blueprint:
-`lemma-local-duality-point-c-u--1`, step 2): `Rf^! 𝔻_Y K ≅ 𝔻_X f^* K`, from `Rf^! = 𝔻_X f^* 𝔻_Y`
-and biduality on `Y`. -/
+/-- **Step 2: the exceptional inverse image of a dual**: `Rf^! 𝔻_Y K ≅ 𝔻_X f^* K`. -/
 theorem nonempty_upperShriek_verdierDual_iso [HasUpperShriek k₀ l f]
     (K : WeilComplex k₀ l Y) :
     Nonempty ((upperShriek f).obj ((verdierDual k₀ l Y).obj (op K)) ≅
@@ -170,11 +178,8 @@ theorem hasUpperShriek_of_isCompl (hij : IsCompl (Set.range j.base) (Set.range i
 
 variable [HasUpperShriek k₀ l i]
 
-/-- **The exceptional restriction of a direct image from the open complement vanishes**
-(blueprint: `lemma-local-duality-point-c-u--1`, step 3, `Ri^! Rj_* G = 0`): for a closed immersion
-`i` with open complement `j`, `Ri^! Rj_* G = 0`. For every `N` on `Z`,
-`Hom(N, Ri^! Rj_* G) ≅ Hom(Ri₀! N, Rj_* G) ≅ Hom(i_* N, Rj_* G) = 0`, as `j^* i_* = 0`
-(`AlgebraicGeometry.WeilComplex.subsingleton_hom_shift`). -/
+/-- **The exceptional restriction of a direct image from the open complement vanishes**: for a
+closed immersion `i` with open complement `j`, `Ri^! Rj_* G = 0`. -/
 theorem isZero_upperShriek_obj_derivedLowerStar_obj
     (hij : IsCompl (Set.range j.base) (Set.range i.base)) (G : WeilComplex k₀ l U) :
     IsZero ((upperShriek i).obj ((derivedLowerStar j).obj G)) := by
@@ -188,10 +193,8 @@ theorem isZero_upperShriek_obj_derivedLowerStar_obj
       (Iso.homCongr ((derivedLowerShriekIsoDerivedLowerStar i).app A) (Iso.refl _))).subsingleton
   exact (IsZero.iff_id_eq_zero A).2 (Subsingleton.elim _ _)
 
-/-- **The closed unit** (blueprint: `lemma-local-cohomology-right-adjoint--2`, clause (4), the unit
-`Q ⟶ Ri^! i_* Q` is an isomorphism; `lemma-local-cohomology-right-adjoint--1`): for a closed
-immersion `i`, the unit of the adjunction `Ri₀! ⊣ Ri^!` is an isomorphism, `Ri₀! ≅ Ri_*` being fully
-faithful. -/
+/-- **The closed unit**: for a closed immersion `i`, the unit `Q ⟶ Ri^! Ri₀! Q` of the
+adjunction `Ri₀! ⊣ Ri^!` is an isomorphism. -/
 theorem isIso_derivedLowerShriekUpperShriekAdjunction_unit_app (Q : WeilComplex k₀ l Z) :
     IsIso ((derivedLowerShriekUpperShriekAdjunction (k₀ := k₀) (l := l) i).unit.app Q) := by
   have h := fullyFaithfulDerivedLowerShriekOfIsClosedImmersion (k₀ := k₀) (l := l) i
@@ -216,12 +219,8 @@ variable {U X Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
 
 omit [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))] in
-/-- **Step 3: the exceptional restriction of an extension by zero** (blueprint:
-`lemma-local-duality-point-c-u--1`, step 3): for complementary immersions `j` and `i`,
-`Ri^! Rj₀! G ≅ (i^* Rj_* G)[-1]`. Apply the triangulated functor `Ri^!` to the open–closed
-triangle `Rj₀! j^* Rj_* G ⟶ Rj_* G ⟶ Ri_* i^* Rj_* G ⟶` of `Rj_* G`: the middle term becomes
-`Ri^! Rj_* G = 0`, so the third arrow becomes an isomorphism, and the closed unit
-`Q ≅ Ri^! Ri₀! Q` with `Ri₀! ≅ Ri_*` identifies the third term with `i^* Rj_* G`. -/
+/-- **Step 3: the exceptional restriction of an extension by zero**: for complementary
+immersions `j` and `i`, `Ri^! Rj₀! G ≅ (i^* Rj_* G)[-1]`. -/
 theorem nonempty_upperShriek_derivedLowerShriek_iso
     [HasUpperShriek k₀ l i] (hij : IsCompl (Set.range j.base) (Set.range i.base))
     (G : WeilComplex k₀ l U) :
@@ -255,9 +254,8 @@ variable [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
   [HasUpperShriek k₀ l (U ↘ Spec (CommRingCat.of k₀))]
   [HasUpperShriek k₀ l (Z ↘ Spec (CommRingCat.of k₀))]
 
-/-- **Step 4: the dual of the boundary complex** (blueprint: `lemma-local-duality-point-c-u--1`,
-step 4): for complementary immersions `j` and `i` and a Weil complex `G` on `U`,
-`𝔻_Z (i^* Rj_* G) ≅ (i^* Rj_* 𝔻_U G)[-1]`. -/
+/-- **Step 4: the dual of the boundary complex**: for complementary immersions `j` and `i` and a
+Weil complex `G` on `U`, `𝔻_Z (i^* Rj_* G) ≅ (i^* Rj_* 𝔻_U G)[-1]`. -/
 theorem nonempty_verdierDual_upperStar_derivedLowerStar_iso
     (hij : IsCompl (Set.range j.base) (Set.range i.base)) (G : WeilComplex k₀ l U) :
     Nonempty ((verdierDual k₀ l Z).obj (op ((upperStar i).obj ((derivedLowerStar j).obj G))) ≅
@@ -295,10 +293,8 @@ variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [HasUpperShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- **The Verdier dual of a lisse sheaf on a smooth scheme** (blueprint:
-`lemma-local-duality-point-c-u--1`, "`𝔻_U F ≅ F^∨(1)[2]`"): if `X` is smooth of pure dimension `d`
-over `k₀` and `P` is a lisse Weil sheaf on `X`, then `𝔻_X P ≅ (P^∨ ⊗ (ℚ̄_ℓ(d) ⊗ ℚ̄_ℓ))[2d]`,
-from `ω_X ≅ ℚ̄_ℓ(d)[2d]` and `RHom(P, N) ≅ P^∨ ⊗ N`. -/
+/-- **The Verdier dual of a lisse sheaf on a smooth scheme**: if `X` is smooth of pure dimension
+`d` over `k₀` and `P` is a lisse Weil sheaf on `X`, then `𝔻_X P ≅ (P^∨ ⊗ (ℚ̄_ℓ(d) ⊗ ℚ̄_ℓ))[2d]`. -/
 theorem nonempty_verdierDual_toComplex_iso_of_isLisse (d : ℕ)
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
     (P : WeilSheaf k₀ l X) (hP : P.IsLisse) :

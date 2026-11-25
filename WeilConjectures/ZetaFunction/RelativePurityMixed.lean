@@ -21,7 +21,7 @@ finite filtration all of whose successive quotients are punctually `ι`-pure of 
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.exists_filtration`: a punctually pure
   sheaf of weight `w` is mixed of the single weight `w`.
 - `AlgebraicGeometry.WeilSheaf.exists_filtration_isPunctuallyPureOfWeight_higherLowerStar`:
-  blueprint `theorem-purity-higher-direct-images-under--3`.
+  `Rⁱf₀*F` is mixed of the single weight `w + i`.
 -/
 
 @[expose] public section
@@ -58,12 +58,10 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec 
   (d : ℕ) [SmoothOfRelativeDimension d f]
 
 include d in
-/-- Blueprint `theorem-purity-higher-direct-images-under--3`: for a smooth proper morphism
-`f : X₀ ⟶ Y₀` of pure relative dimension `d` and a lisse Weil sheaf `F` punctually `ι`-pure of
-weight `w`, the sheaf `Rⁱf₀!F = Rⁱf₀*F` is mixed of the single weight `w + i`: it has a finite
-filtration whose successive quotients are all punctually `ι`-pure of weight `w + i`. This follows
-from its punctual purity of weight `w + i`
-(`AlgebraicGeometry.WeilSheaf.smooth_proper_relative_purity`). -/
+/-- For a smooth proper morphism `f : X₀ ⟶ Y₀` of pure relative dimension `d` and a lisse Weil
+sheaf `F` punctually `ι`-pure of weight `w`, the sheaf `Rⁱf₀!F = Rⁱf₀*F` is mixed of the single
+weight `w + i`: it has a finite filtration whose successive quotients are all punctually `ι`-pure
+of weight `w + i`. -/
 theorem exists_filtration_isPunctuallyPureOfWeight_higherLowerStar {F : WeilSheaf k₀ l X}
     (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) (i : ℕ) :
     ∃ (n : ℕ) (G : Fin (n + 1) → WeilSheaf k₀ l Y)

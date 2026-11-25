@@ -95,15 +95,12 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {F : Type u} [Field F] [Fact (ringChar F).
   {gM : M.generic ⟶ Spec (.of (traitGenericField k'))}
   {hM : M.IsTraitModelOfGenericBase X ι qM gM}
 
-/-- **The compact-support exchanges along an open sub-model** (blueprint
-`prose-E-15`, `lemma-compatibilities-base-change-maps` (3)): for an open sub-model `N ⊆ M`
-of trait models over a generic base, over open immersions `j`, `j'`, and a compactification
-`M ⊆ P`, the compact-support exchange of the restricted compactification `N ⊆ P` is the composite
-of the exchange `ν_j` (adjoint to `α_j⁻¹`) and of the compact-support exchange of `M ⊆ P`,
-through the composition isomorphisms `Ra_N! ≅ Rj_! ⋙ Ra_M!` and `Ra'_N! ≅ Rj'_! ⋙ Ra'_M!`.
-
-An instance of `ProEtale.CondensedRing.compactSupportExchangeOfCompactification_comp_app` at the
-morphisms of models `φ : N ⟶ M` and `C.hom : M ⟶ P`. -/
+/-- **The compact-support exchanges along an open sub-model**:
+for an open sub-model `N ⊆ M` of trait models over a generic base, over open immersions `j`,
+`j'`, and a compactification `M ⊆ P`, the compact-support exchange of the restricted
+compactification `N ⊆ P` is the composite of the exchange `ν_j` (adjoint to `α_j⁻¹`) and of the
+compact-support exchange of `M ⊆ P`, through the composition isomorphisms
+`Ra_N! ≅ Rj_! ⋙ Ra_M!` and `Ra'_N! ≅ Rj'_! ⋙ Ra'_M!`. -/
 theorem Compactification.compactSupportExchange_ofOpen_app (C : hM.Compactification)
     (hN : N.IsTraitModelOfGenericBase Y ι q g) (j : Y ⟶ X) [IsOpenImmersion j.left]
     (j' : Y' ⟶ X') [IsOpenImmersion j'.left] (φ : N.Hom M j.left j'.left)

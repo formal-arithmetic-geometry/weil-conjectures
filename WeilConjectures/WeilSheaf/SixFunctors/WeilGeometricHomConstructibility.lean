@@ -33,14 +33,26 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 
 /-! # Geometric constructibility and internal Hom for native Weil complexes
 
-Source: blueprint prose-10-20, internal-Hom paragraph;
-lemma-constructible-sheaves, opening equality Dctf = Dbc; proposition-six-operations-dctf--15.
-(blueprint: lem-sf-weil-geometric-hom-constructibility).
+A native Weil complex is bounded constructible exactly when its underlying complex on the geometric
+fibre is, with the same cohomological support; for two Weil complexes, the underlying complexes
+and their relative derived sheaf Hom have finite Tor amplitude, and the latter is bounded
+constructible.
+
+## Implementation details
 
 The forgetful functor includes the canonical coefficient realization from native modules
 into internal modules over the finite-subextension-valued condensed coefficient ring.
 All derived categories are ordinary localizations. Internal Hom is the ambient relative
 sheaf Hom; its inputs need not be lisse or perfect on the site.
+
+Cohomology commutes with forgetting the invertible Frobenius structure, and the forgetful
+functor reflects zero objects. The exact module equivalence identifies native finite-free
+restrictions with finite scalar models, using the same strata and covers. Over a field the
+equality `D_ctf = D^b_c` gives finite Tor amplitude without asserting site-perfectness, and
+bounded constructibility of the relative internal Hom comes from the finite-subextension
+`ℚ̄_ℓ` case of the six operations on `D_ctf`, through the comparison of constructibility
+predicates. No lissity hypothesis is needed, and no Frobenius invariants of global Hom groups
+are taken.
 -/
 
 @[expose] public noncomputable section
@@ -56,11 +68,9 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 set_option synthInstance.maxSize 2048
 
-/-- Termwise forgetting Frobenius, scalar linearity, and transport along the canonical
-coefficient realization theta from R_X to B_X. This uses precisely the internal-module
-presentation underlying nativeToOrdinaryModules, before its sectionwise presentation.
-Source: prose-10-20, internal-Hom paragraph, and the module comparison
-(blueprint: lem-sf-weil-geometric-hom-constructibility). -/
+/-- The geometric forgetful functor on derived categories of native Weil sheaves: termwise
+forgetting Frobenius and scalar linearity, followed by transport along the canonical coefficient
+realization from native modules to internal modules over the condensed coefficient ring. -/
 abbrev nativeGeometricForget (k₀ : Type u) [Field k₀] [Finite k₀]
     (ℓ : ℕ) [Fact ℓ.Prime] (X₀ : Scheme.{u})
     [X₀.Over (Spec (CommRingCat.of k₀))] :=
@@ -70,34 +80,11 @@ abbrev nativeGeometricForget (k₀ : Type u) [Field k₀] [Finite k₀]
         (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber).hom).mapDerivedCategory
 
 set_option linter.style.haveILetI false in
-/-- The geometric cohomology criterion, with exact support intervals, and finiteness of
-relative derived sheaf Hom between arbitrary native Weil complexes.
-Source: prose-10-20, internal-Hom paragraph; lemma-constructible-sheaves,
-opening equality Dctf = Dbc; proposition-six-operations-dctf--15, finite-subextension Qlbar case.
-(blueprint: lem-sf-weil-geometric-hom-constructibility).
-
-Proof:
-1. Base change preserves separatedness, local finite type and quasi-compactness
-   (lem-pod-separated-finite-type-base-change). The geometric fibre is therefore separated
-   of finite type over the algebraic closure, with characteristic different from ell.
-2. By lem-sf-weil-native-closed-forgetful, cohomology commutes with forgetting the
-   invertible Frobenius structure. The forgetful functor reflects zero, since the zero
-   underlying module has a unique structure. The exact module equivalence of
-   lem-sf-weil-verdier-module-constructibility-comparison identifies native finite-free
-   restrictions with finite scalar models, using the same strata and covers. Thus
-   vanishing outside each prescribed interval and constructibility in each degree are
-   equivalent. Existence of an interval gives the bounded constructibility criterion.
-3. For two Weil complexes the criterion gives geometric bounded constructibility. The
-   field-coefficient equality Dctf = Dbc of lemma-constructible-sheaves makes each input
-   have finite Tor amplitude, without asserting site-perfectness.
-4. Finite type over a field makes the geometric fibre Noetherian
-   (lem-weil-pbc-finite-type-over-noetherian). Apply
-   lem-sfb-adic-constructibility-predicate-comparison to pass to the bounded constructible
-   predicate of sk-def-sfb-bounded-constructible. The finite-subextension Qlbar case of
-   proposition-six-operations-dctf--15 gives bounded constructibility of the ambient relative
-   internal Hom. Return through the predicate comparison and use Dctf = Dbc once more
-   to get finite Tor amplitude. This applies to both arbitrary inputs, with no lissity
-   hypothesis, and takes no Frobenius invariants of global Hom groups. -/
+/-- **Geometric constructibility and internal Hom.** For a separated `k₀`-scheme of finite type
+`X₀`: a native Weil complex is bounded constructible iff its underlying complex on the geometric
+fibre is; its cohomology vanishes outside `[a, b]` iff that of the underlying complex does; and
+for Weil complexes `K`, `L` the underlying complexes have finite Tor amplitude and their relative
+derived sheaf Hom is bounded constructible of finite Tor amplitude. -/
 theorem weil_geometric_hom_constructibility
     (k₀ : Type u) [Field k₀] [Finite k₀] (ℓ : ℕ) [Fact ℓ.Prime]
     [Fact (ringChar k₀ ≠ ℓ)] (X₀ : Scheme.{u})

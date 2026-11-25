@@ -23,8 +23,15 @@ import all WeilConjectures.WeilSheaf.SixFunctors.CanonicalOrdinaryTensorInverseT
 
 /-! # Underived associativity of the normalized canonical comparison
 
-Source: Stacks 03EK and 03EO, pure tensors and evaluation-normalized inverse mates.
-(blueprint: new-sf-canonical-ordinary-tensor-inverse-associativity).
+## Implementation details
+
+The inverse comparison is shown to send every sheafified pure tensor to the corresponding
+native pure tensor, using the evaluation normalization and the underived uncurrying
+equation; associativity is then checked on pure triples. No complex comparison is used.
+
+## References
+
+* Stacks Project, Tags 03EK and 03EO
 -/
 
 @[expose] public noncomputable section
@@ -40,20 +47,7 @@ attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 
 -- Elaborating the concrete tensor instances requires large definitional comparisons.
 -- The native and ringed tensor instances have separate coefficient and site universes.
-/-- The canonical evaluation normalization forces inverse underived associativity.
-Source: Stacks 03EK and 03EO; normalized inverse closed mates.
-(blueprint: new-sf-canonical-ordinary-tensor-inverse-associativity).
-
-Proof: expand the prescribed inverse Hom comparison through the equivalence's
-unit and counit. The normalized forward evaluation equation, naturality in the
-source and target, and the two inverse equations give its evaluation formula on
-the identity slice. Apply the underived uncurrying equation to the adjunct of b.
-Ordinary uncurrying evaluates a pure tensor on that same identity slice, while
-the native quotient equation evaluates it as the corresponding native pure tensor.
-Thus nu inverse sends every sheafified pure tensor to that native pure tensor.
-Test the desired equation on pure triples. Tensor-map naturality and the two
-associator formulas reduce both sides to the same reassociated native pure triple.
-Pure-triple extensionality proves equality. No complex comparison is used. -/
+/-- The canonical evaluation normalization forces inverse underived associativity. -/
 theorem canonical_ordinary_tensor_inverse_associativity
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : ProEtale.AdicModuleHomComparisonCore l Y) :

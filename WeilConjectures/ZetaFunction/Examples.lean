@@ -11,16 +11,23 @@ public import WeilConjectures.ZetaFunction.BettiSymmetry
 /-!
 # Examples of zeta functions and of compactly supported cohomology
 
-This file works out the basic examples of the blueprint chapter on zeta functions and the Weil
-conjectures, over a finite field `k` with `q` elements.
+This file works out basic examples of zeta functions and the Weil conjectures, over a finite
+field `k` with `q` elements.
 
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.Hom.zetaSeries_mul_eq_of_pointCount_eq`: if the point counts are
   `N_n = d₀ a₀ⁿ - d₁ a₁ⁿ + d₂ a₂ⁿ`, then
   `Z(T) (1 - a₀ T)^{d₀} (1 - a₂ T)^{d₂} = (1 - a₁ T)^{d₁}`.
-- `AlgebraicGeometry.Scheme.finiteFieldZeta` (`ex-weil-finite-field-zeta`): `Spec k` has
-  `N_n = 1`, `Z = (1 - T)⁻¹` and a single closed point, of degree one.
+- `AlgebraicGeometry.Scheme.pointCount_id_spec`, `AlgebraicGeometry.Scheme.zetaSeries_id_spec`,
+  `AlgebraicGeometry.Scheme.finitePoints_spec`: `Spec k` has `N_n = 1`, `Z = (1 - T)⁻¹` and a
+  single closed point, of degree one.
+
+## Implementation details
+
+`AlgebraicGeometry.Scheme.Hom.zetaSeries_mul_eq_of_pointCount_eq` is the cohomological
+determinant factorisation `TraceDatum.zeta_mul_prod_even_eq_prod_odd` for the trace datum of the
+homotheties `aᵢ` on `ℚ^{dᵢ}`.
 -/
 
 @[expose] public section
@@ -36,9 +43,7 @@ namespace AlgebraicGeometry.Scheme
 variable {X : Scheme.{u}} {k : Type u} [Field k]
 
 /-- If the point counts of `X` over `k` are `N_n = d₀ a₀ⁿ - d₁ a₁ⁿ + d₂ a₂ⁿ` for all `n ≥ 1`,
-then `Z(X, T) (1 - a₀ T)^{d₀} (1 - a₂ T)^{d₂} = (1 - a₁ T)^{d₁}`. This is the cohomological
-determinant factorisation `TraceDatum.zeta_mul_prod_even_eq_prod_odd` for the trace datum of the
-homotheties `aᵢ` on `ℚ^{dᵢ}`. -/
+then `Z(X, T) (1 - a₀ T)^{d₀} (1 - a₂ T)^{d₂} = (1 - a₁ T)^{d₁}`. -/
 theorem Hom.zetaSeries_mul_eq_of_pointCount_eq (f : X.Hom (Spec (.of k))) (d₀ d₁ d₂ : ℕ)
     (a₀ a₁ a₂ : ℚ)
     (h : ∀ n, 1 ≤ n → (f.pointCount n : ℚ) = d₀ * a₀ ^ n - d₁ * a₁ ^ n + d₂ * a₂ ^ n) :
@@ -73,26 +78,23 @@ theorem Hom.zetaSeries_mul_eq_of_pointCount_eq (f : X.Hom (Spec (.of k))) (d₀ 
   rw [he, ho, Finset.prod_pair (by decide), Finset.prod_singleton, hP, hP, hP, ← hz] at key
   exact key
 
-/-- Blueprint `ex-weil-finite-field-zeta` (finite-field zeta normalization), point counts: the
-scheme `Y₀ = Spec k` over itself has exactly one point over every finite extension of `k`, so
-`N_n(Y₀) = 1`. -/
+/-- The scheme `Y₀ = Spec k` over itself has exactly one point over every finite extension of
+`k`, so `N_n(Y₀) = 1`. -/
 theorem pointCount_id_spec (n : ℕ) : Hom.pointCount (𝟙 (Spec (.of k))) n = 1 := by
   rw [Hom.pointCount, Nat.card_eq_one_iff_unique]
   refine ⟨⟨fun g g' ↦ Subtype.ext ?_⟩, ⟨⟨Spec.map (CommRingCat.ofHom (algebraMap k _)), ?_⟩⟩⟩
   · rw [← Category.comp_id g.1, ← Category.comp_id g'.1, g.2, g'.2]
   · exact Category.comp_id _
 
-/-- Blueprint `ex-weil-finite-field-zeta` (finite-field zeta normalization), zeta function: the
-zeta function of `Y₀ = Spec k` over itself is `Z(Y₀, T) = (1 - T)⁻¹`. -/
+/-- The zeta function of `Y₀ = Spec k` over itself is `Z(Y₀, T) = (1 - T)⁻¹`. -/
 theorem zetaSeries_id_spec [Finite k] :
     Hom.zetaSeries (𝟙 (Spec (.of k))) * (1 - PowerSeries.X) = 1 := by
   have h := Hom.zetaSeries_mul_eq_of_pointCount_eq (𝟙 (Spec (.of k))) 1 0 0 1 0 0
     fun n _ ↦ by simp [pointCount_id_spec]
   simpa using h
 
-/-- Blueprint `ex-weil-finite-field-zeta` (finite-field zeta normalization), closed points: the
-scheme `Y₀ = Spec k` has exactly one closed point (point with finite residue field), and it has
-degree one over `k`. -/
+/-- The scheme `Y₀ = Spec k` has exactly one closed point (point with finite residue field), and
+it has degree one over `k`. -/
 theorem finitePoints_spec [Finite k] :
     Nat.card (Spec (.of k)).finitePoints = 1 ∧
       ∀ x : Spec (.of k), Hom.degreeOver (𝟙 (Spec (.of k))) x = 1 := by
@@ -154,7 +156,7 @@ lemma affineLinePoint_mem_basicOpen_iff (c : K) (x : Spec (.of K)) :
   rw [Scheme.preimage_basicOpen_top, affineLinePoint_appTop_coord, basicOpen_eq_of_affine,
     PrimeSpectrum.mem_basicOpen, Ideal.eq_bot_of_prime x.asIdeal, Ideal.mem_bot]
 
-/-- **Point count of the affine line** (blueprint `prose-12-31`):
+/-- **Point count of the affine line**:
 `#𝔸¹(𝔽_{qⁿ}) = qⁿ` for `n ≥ 1`. -/
 theorem pointCount_affineLine [Finite k] {n : ℕ} (hn : n ≠ 0) :
     (affineLine k ↘ Spec (.of k)).pointCount n = Nat.card k ^ n :=
@@ -198,7 +200,7 @@ def multiplicativeGroupFieldPointsEquiv :
     simp only [IsOpenImmersion.lift_fac]
     exact (affineLineFieldPointsEquiv k K).apply_symm_apply c.1
 
-/-- **Point count of the multiplicative group** (blueprint `ex-weil-multiplicative-group`):
+/-- **Point count of the multiplicative group**:
 `#𝔾_m(𝔽_{qⁿ}) = qⁿ - 1` for `n ≥ 1`. -/
 theorem pointCount_multiplicativeGroup [Finite k] {n : ℕ} (hn : n ≠ 0) :
     (multiplicativeGroup k ↘ Spec (.of k)).pointCount n = Nat.card k ^ n - 1 := by
@@ -336,7 +338,7 @@ lemma projectiveLineFieldPoint_bijective :
       change _ ≫ ProjectiveLine.infinity _ = g.1
       rw [hg, ← hc, hc0, affineLinePoint_zero, ProjectiveLine.infinity, Category.assoc]
 
-/-- **Point count of the projective line** (blueprint `prose-12-31`):
+/-- **Point count of the projective line**:
 `#ℙ¹(𝔽_{qⁿ}) = 1 + qⁿ` for `n ≥ 1`. -/
 theorem pointCount_projectiveLine [Finite k] {n : ℕ} (hn : n ≠ 0) :
     (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).pointCount n = 1 + Nat.card k ^ n := by
@@ -355,7 +357,7 @@ section Zeta
 
 variable (k : Type u) [Field k] [Finite k]
 
-/-- **Zeta function of the affine line** (blueprint `prose-12-31`):
+/-- **Zeta function of the affine line**:
 `Z(𝔸¹, T) = (1 - qT)⁻¹`. -/
 theorem zetaSeries_affineLine :
     (affineLine k ↘ Spec (.of k)).zetaSeries *
@@ -367,7 +369,7 @@ theorem zetaSeries_affineLine :
       ring
   simpa using h
 
-/-- **Zeta function of the multiplicative group** (blueprint `ex-weil-multiplicative-group`):
+/-- **Zeta function of the multiplicative group**:
 `Z(𝔾_m, T) = (1 - T) / (1 - qT)`. -/
 theorem zetaSeries_multiplicativeGroup :
     (multiplicativeGroup k ↘ Spec (.of k)).zetaSeries *
@@ -380,7 +382,7 @@ theorem zetaSeries_multiplicativeGroup :
       ring
   simpa using h
 
-/-- **Zeta function of the projective line** (blueprint `prose-12-31`):
+/-- **Zeta function of the projective line**:
 `Z(ℙ¹, T) = ((1 - T)(1 - qT))⁻¹`. -/
 theorem zetaSeries_projectiveLine :
     (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).zetaSeries *
@@ -393,7 +395,7 @@ theorem zetaSeries_projectiveLine :
   simpa using h
 
 open _root_.Polynomial in
-/-- The Weil factorization of the projective line (blueprint `prose-12-31`):
+/-- The Weil factorization of the projective line:
 `Z(ℙ¹, T) = P₁ / (P₀ P₂)` with the endpoint factors `P₀ = 1 - T`, `P₂ = 1 - qT` and `P₁ = 1`; in
 particular the Betti numbers are `b₀ = b₂ = 1` and `b₁ = 0`. -/
 theorem isWeilFactorization_projectiveLine :
@@ -430,12 +432,9 @@ theorem isWeilFactorization_projectiveLine :
   · simpa [weilBettiNumber] using h2
 
 open _root_.Polynomial in
-/-- The integral Frobenius factors of the projective line (blueprint
-`prose-12-31`): `P₀ = 1 - T`, `P₁ = 1` and `P₂ = 1 - qT`, so that for every
-prime `ℓ ≠ p` the Betti numbers are `b₀ = dim H⁰(ℙ¹ ⊗ k̄, ℚ̄_ℓ) = 1`, `b₁ = 0` and
-`b₂ = dim H²(ℙ¹ ⊗ k̄, ℚ̄_ℓ) = 1`. The factors of the smooth proper geometrically connected curve
-`ℙ¹` form a Weil factorization of its zeta function, which in dimension one is unique
-(`AlgebraicGeometry.IsWeilFactorization.eq_of_one`). -/
+/-- The integral Frobenius factors of the projective line are `P₀ = 1 - T`, `P₁ = 1` and
+`P₂ = 1 - qT`, so that for every prime `ℓ ≠ p` the Betti numbers are
+`b₀ = dim H⁰(ℙ¹ ⊗ k̄, ℚ̄_ℓ) = 1`, `b₁ = 0` and `b₂ = dim H²(ℙ¹ ⊗ k̄, ℚ̄_ℓ) = 1`. -/
 theorem isIntegralFrobeniusFactor_projectiveLine :
     (∀ i : Fin (2 * 1 + 1), Scheme.IsIntegralFrobeniusFactor k (ProjectiveLine (Spec (.of k)))
       (i : ℕ) (![1 - X, 1, 1 - C (Nat.card k : ℤ) * X] i)) ∧

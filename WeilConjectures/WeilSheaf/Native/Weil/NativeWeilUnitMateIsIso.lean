@@ -13,7 +13,16 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Pointwise invertibility of the native tensor unit mate
 
-Source: native tensor lift, comparison on flat representatives; Stacks 06YS and 08J9.
+## Implementation details
+
+The adjunction is computed on a flat-term K-flat representative on the Frobenius ringed
+action site, where the mate is the localized identity comparison of the two total tensors
+(the native-to-standard row signs cancel). Uniqueness of left adjoints then extends the
+statement to every choice of adjunction, without requiring normalization of that choice.
+
+## References
+
+* Stacks Project, Tags 06YS, 08J9 and 0A97
 -/
 
 @[expose] public section
@@ -67,30 +76,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- For any left adjoint of a fixed-source native derived Hom, the ordinary
-transpose of the forgotten unit is invertible. The assertion is about one
-arrow; it supplies no bifunctor, natural transformation or adjoint existence.
-
-Source: prose-10-20, internal-Hom/transposition paragraph;
-native tensor lift step 2; Stacks Tags 06YS, 08J9 and 0A97
-(blueprint: lem-sf-native-weil-unit-mate-iso).
-
-Proof: compute the adjunction for a flat-term K-flat representative of K on
-the Frobenius ringed action site. Forgetting preserves such resolutions and
-K-injective targets. On a K-flat representative of A and a K-injective target,
-the native product-total Hom comparison is fixed on each projection by hη.
-The ordinary model normalization hS uncurries this comparison to the identity
-on each summand of the underived relative tensor. The native-to-standard
-row signs occur on both sides and cancel. Consequently the mate for this
-resolution-defined left adjoint is the localized identity comparison of the
-two total tensors and is an isomorphism. Source and target replacement
-compatibilities extend this conclusion to arbitrary derived A and K.
-Finally compare any supplied L ⊣ M.weilHom(K,-) with the resolution-defined
-adjoint by uniqueness of left adjoints. The unit identity for that unique
-isomorphism and naturality of η express the displayed mate as the canonical
-mate followed by the forgotten adjoint isomorphism. Both factors are
-invertible. Thus the assertion holds for every choice of adjunction, without
-requiring normalization of that choice. The argument also applies to zero
-objects and the empty scheme. -/
+transpose of the forgotten unit is invertible. -/
 theorem native_weil_unit_mate_isIso
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]

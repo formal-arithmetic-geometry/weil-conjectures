@@ -38,13 +38,6 @@ stated in this repository, and no declaration here mentions `Z`.
 That `d χ` is even, so that a half `m` exists, is
 `TraceDatum.even_mul_alternatingNatDegreeSum_of_pairing`.
 
-This file formalises the functional-equation subsection `corollary-functional-equation` of the
-blueprint block on zeta functions and the Weil conjectures. The blueprint deduces it from the
-Poincaré duality reciprocity relations of the Frobenius factors; here those relations are derived
-directly from the matching of reciprocal roots in `AlgebraicGeometry.WeilFunctionalEquation`, via
-`Polynomial.eval_inv_mul_inv_of_roots_eq_map_inv` and
-`Polynomial.leadingCoeff_mul_leadingCoeff_of_roots_eq_map_inv`.
-
 ## Main definitions
 
 - `AlgebraicGeometry.weilSign`: the normalized sign `ε`.
@@ -60,6 +53,20 @@ directly from the matching of reciprocal roots in `AlgebraicGeometry.WeilFunctio
 - `AlgebraicGeometry.WeilFunctionalEquation.alternatingProdEval_eq`: the classical functional
   equation.
 
+## Implementation details
+
+The reciprocity relations of the Frobenius factors are derived directly from the matching of
+reciprocal roots in `AlgebraicGeometry.WeilFunctionalEquation`, via
+`Polynomial.eval_inv_mul_inv_of_roots_eq_map_inv` and
+`Polynomial.leadingCoeff_mul_leadingCoeff_of_roots_eq_map_inv`. Substituting them and
+reindexing by `i ↦ 2 d - i` gives the determinant-constant form, and
+`(-1)^χ ∏ᵢ Dᵢ^{(-1)ⁱ} = ε q^m` by definition of `ε`; neither the evenness `2 m = d χ` nor the
+nonvanishing of the factors is needed for the identity itself. The sign `ε = ±1` because the
+determinant constants pair up under `i ↦ 2 d - i` into powers of `q`.
+
+In `AlgebraicGeometry.weilSign` the half `m` is an argument rather than the truncating integer
+division `d * χ / 2`, so that the definition carries no junk value.
+
 ## References
 
 - [A. Weil, *Numbers of solutions of equations in finite fields*][weil1949]
@@ -71,11 +78,9 @@ directly from the matching of reciprocal roots in `AlgebraicGeometry.WeilFunctio
 namespace AlgebraicGeometry
 
 /-- The normalized functional-equation sign `ε = (-1)^χ q^{-m} ∏ᵢ (Dᵢ)^{(-1)ⁱ}` of a family of
-Weil factors (blueprint `corollary-functional-equation--8`), where `χ` is
-`Polynomial.alternatingNatDegreeSum P`, `Dᵢ = (-1)^{deg (P i)} · [T^{deg (P i)}] P i`, and `m` is
-the half `d χ / 2` of the exponent appearing in the functional equation. The half is an
-argument rather than the truncating integer division `d * χ / 2`, so that the definition carries
-no junk value; that `d χ` is even is `TraceDatum.even_mul_alternatingNatDegreeSum_of_pairing`. -/
+Weil factors, where `χ` is `Polynomial.alternatingNatDegreeSum P`,
+`Dᵢ = (-1)^{deg (P i)} · [T^{deg (P i)}] P i`, and `m` is the half `d χ / 2` of the exponent
+appearing in the functional equation. -/
 noncomputable def weilSign (q : ℕ) (m : ℤ) {n : ℕ} (P : Fin (n + 1) → Polynomial ℤ) : ℚ :=
   (-1) ^ Polynomial.alternatingNatDegreeSum P * (q : ℚ) ^ (-m) *
     ∏ i : Fin (n + 1),
@@ -83,8 +88,7 @@ noncomputable def weilSign (q : ℕ) (m : ℤ) {n : ℕ} (P : Fin (n + 1) → Po
 
 /-- **The determinant product rule.** For a family of normalized Weil factors satisfying the
 functional equation, the leading coefficients in degrees `i` and `2 d - i` multiply to
-`q ^ (d · b i)`, where `b i = deg (P i)`. Up to the signs `(-1)^{b i}`, which cancel, these
-leading coefficients are the determinant constants `Dᵢ`, so this is `Dᵢ D_{2d-i} = q^{d b i}`. -/
+`q ^ (d · b i)`, where `b i = deg (P i)`. -/
 theorem WeilFunctionalEquation.leadingCoeff_mul_leadingCoeff_rev {q d : ℕ} (hq : q ≠ 0)
     {P : Fin (2 * d + 1) → Polynomial ℤ} (h0 : ∀ i, (P i).coeff 0 = 1)
     (hfe : WeilFunctionalEquation q d P) (i : Fin (2 * d + 1)) :
@@ -117,9 +121,8 @@ theorem WeilFunctionalEquation.eval_zpow_mul_inv {q d : ℕ} (hq : q ≠ 0)
   rw [zpow_neg, zpow_natCast, h]
   rfl
 
-/-- **The square of the determinant scalar** (blueprint `corollary-functional-equation`, first
-claim). For a family of normalized Weil factors satisfying the functional equation, the
-alternating product `Δ = ∏ᵢ Dᵢ^{(-1)ⁱ}` of the determinant constants
+/-- **The square of the determinant scalar.** For a family of normalized Weil factors satisfying
+the functional equation, the alternating product `Δ = ∏ᵢ Dᵢ^{(-1)ⁱ}` of the determinant constants
 `Dᵢ = (-1)^{b i} · [T^{b i}] P i` satisfies `Δ² = q^{d χ}`, where
 `χ = Polynomial.alternatingNatDegreeSum P`. -/
 theorem WeilFunctionalEquation.prod_determinant_sq {q d : ℕ} (hq : 1 < q)
@@ -153,11 +156,8 @@ theorem WeilFunctionalEquation.prod_determinant_sq {q d : ℕ} (hq : 1 < q)
   push_cast
   ring
 
-/-- **The corollary-functional-equation--9 sign is `±1`** (blueprint
-`corollary-functional-equation`). For a family of normalized Weil factors satisfying the functional
-equation, the normalized sign `ε` is `1` or `-1`: the determinant constants pair up under
-`i ↦ 2 d - i` into powers of `q` by the reciprocity product rule, and those powers are exactly what
-`q^{-m}` cancels. -/
+/-- **The functional-equation sign is `±1`.** For a family of normalized Weil factors satisfying
+the functional equation, the normalized sign `ε` is `1` or `-1`. -/
 theorem weilSign_eq_one_or_eq_neg_one {q d : ℕ} (hq : 1 < q) {m : ℤ}
     {P : Fin (2 * d + 1) → Polynomial ℤ} (h0 : ∀ i, (P i).coeff 0 = 1)
     (hfe : WeilFunctionalEquation q d P)
@@ -174,9 +174,8 @@ theorem weilSign_eq_one_or_eq_neg_one {q d : ℕ} (hq : 1 < q) {m : ℤ}
     exact zpow_zero _
   rw [← sq, weilSign, mul_pow, mul_pow, hfe.prod_determinant_sq hq h0, hm, h1, one_mul, h2]
 
-/-- **The functional equation in determinant-constant form** (blueprint
-`corollary-functional-equation`, last claim). The alternating product of the values of a family of
-normalized Weil factors satisfying the functional equation obeys
+/-- **The functional equation in determinant-constant form.** The alternating product of the
+values of a family of normalized Weil factors satisfying the functional equation obeys
 `Z (q^{-d} t⁻¹) = (-1)^χ t^χ (∏ᵢ Dᵢ^{(-1)ⁱ}) Z (t)` at every nonzero `t`, where
 `Dᵢ = (-1)^{b i} · [T^{b i}] P i` and `χ = Polynomial.alternatingNatDegreeSum P`. -/
 theorem WeilFunctionalEquation.alternatingProdEval_eq_prod_determinant {q d : ℕ} (hq : q ≠ 0)
@@ -212,16 +211,10 @@ theorem WeilFunctionalEquation.alternatingProdEval_eq_prod_determinant {q d : �
     Finset.prod_mul_distrib, ← zpow_sum₀ (neg_ne_zero.2 one_ne_zero),
     ← zpow_sum₀ ht, Polynomial.alternatingNatDegreeSum]
 
-/-- **The classical functional equation** (blueprint `corollary-functional-equation`, and the main
-claim of `corollary-functional-equation`). The alternating product of the values of a family of
+/-- **The classical functional equation.** The alternating product of the values of a family of
 normalized Weil factors satisfying the functional equation obeys
 `Z (q^{-d} t⁻¹) = ε q^{m} t^χ Z (t)` at every nonzero `t` at which no factor vanishes, where
-`2 m = d χ`.
-
-Substituting the reciprocity relation of each factor and reindexing by `i ↦ 2 d - i` gives the
-determinant-constant form `WeilFunctionalEquation.alternatingProdEval_eq_prod_determinant`, and
-`(-1)^χ ∏ᵢ Dᵢ^{(-1)ⁱ} = ε q^m` by definition of `ε`. Neither the evenness `2 m = d χ` nor the
-nonvanishing of the factors at `t` is needed for the identity itself. -/
+`2 m = d χ`. -/
 theorem WeilFunctionalEquation.alternatingProdEval_eq {q d : ℕ} (hq : 1 < q) {m : ℤ}
     {P : Fin (2 * d + 1) → Polynomial ℤ} (h0 : ∀ i, (P i).coeff 0 = 1)
     (hfe : WeilFunctionalEquation q d P)

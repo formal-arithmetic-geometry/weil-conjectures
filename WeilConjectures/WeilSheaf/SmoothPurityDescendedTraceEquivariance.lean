@@ -161,9 +161,7 @@ noncomputable def descendedUnitTargetIso :
 
 /-- **A2: the descended smooth trace.** The finite-field smooth trace
 `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y`, pulled back to the geometric fibre as a morphism of Weil
-complexes `Rf₀! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ`. Its underlying geometric trace is Frobenius equivariant
-because it is a morphism of Weil complexes (naturality of
-`Endofunctor.IsoAlgebra.derivedStrIso`). -/
+complexes `Rf₀! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ`. -/
 noncomputable def descendedSmoothTrace :
     (derivedLowerShriek k₀ l f).obj (purityTateShift (k₀ := k₀) (l := l) (X := X) d) ⟶
       WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y) :=
@@ -173,10 +171,7 @@ noncomputable def descendedSmoothTrace :
 
 /-- **A1' (universality of the descended trace).** The underlying geometric trace
 `f̄_! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ` on the geometric fibre is universal: composing with it identifies
-`Hom(K[n], ℚ̄_ℓ(d)[2d])` with `Hom(f̄_! K[n], ℚ̄_ℓ)` for every bounded constructible `K`.
-Equivalently, its transpose `ℚ̄_ℓ(d)[2d] ⟶ f̄^! ℚ̄_ℓ` is an isomorphism: this is the
-compatibility of `Rf^!` with the base change `k₀ ⟶ k̄` for the non-proper smooth `f`
-(blueprint `proposition-compatibility-purity-base-change` across the field extension). -/
+`Hom(K[n], ℚ̄_ℓ(d)[2d])` with `Hom(f̄_! K[n], ℚ̄_ℓ)` for every bounded constructible `K`. -/
 def DescendedSmoothTraceUniversal : Prop :=
   ∀ (K : WeilComplex k₀ l X) (n : ℤ), Function.Bijective
     fun φ : (shiftFunctor _ n).obj (forget.obj K) ⟶
@@ -191,7 +186,7 @@ def DescendedSmoothTraceUniversal : Prop :=
 variable [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
 /-- The transpose of the descended trace under `Rf₀! ⊣ Rf^!` is invertible once the trace is
-geometrically universal (free Weil resolution, `isIso_homEquiv_of_geometric_trace`). -/
+geometrically universal. -/
 theorem isIso_homEquiv_descendedSmoothTrace (h : DescendedSmoothTraceUniversal f α)
     {J : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X} (adj : derivedLowerShriek k₀ l f ⊣ J) :
     IsIso (adj.homEquiv _ _ (descendedSmoothTrace f α)) :=
@@ -222,8 +217,7 @@ theorem nonempty_upperShriek_obj_adicConstant_iso_of_descendedTrace
 
 /-- **Sorry ① from the descended trace**: the statement of
 `exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`, from the Tate encoding `α` (A3)
-and the universality of the descended trace (A1'). The equivariance (A2) is automatic: the
-orientation is a morphism of Weil complexes. -/
+and the universality of the descended trace (A1'). -/
 theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_descendedTrace
     (h : DescendedSmoothTraceUniversal f α) :
     ∃ g : forget.obj ((upperShriek f).obj

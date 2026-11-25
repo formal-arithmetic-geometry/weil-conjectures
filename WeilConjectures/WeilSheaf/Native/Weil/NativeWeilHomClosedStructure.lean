@@ -15,7 +15,16 @@ import Mathlib.CategoryTheory.Monoidal.Transport
 
 /-! # Closed structure for native derived internal Hom
 
-Source: native tensor lift, adjoint-construction step; Stacks Tags 06YS and 08J9.
+## Implementation details
+
+Native Weil sheaves are presented on the Frobenius action site; the normalized ringed-site
+tensor--Hom adjunction is transported through the additive module equivalence, and the
+resulting product-total Hom is identified with the specified row-sign model in
+`NativeClosedHomModels`.
+
+## References
+
+* Stacks Project, Tags 06YS and 08J9
 -/
 
 @[expose] public section
@@ -179,17 +188,8 @@ private theorem closedTransport
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- The native product-total Hom model admits a closed derived tensor structure.
-
-Source: internal-Hom/transposition paragraph and native tensor lift steps 1--2;
-Stacks Tags 06YS and 08J9.
-The construction presents native Weil sheaves on the Frobenius action site,
-transports the normalized ringed-site tensor--Hom adjunction through the additive
-module equivalence, and identifies the resulting product-total Hom with the
-specified row-sign model in `NativeClosedHomModels`. The tensor, evaluation,
-and source-parameter naturality fields are part of this closed-structure package.
-(blueprint: lem-sf-native-weil-hom-closed-structure)
--/
+/-- The native product-total Hom model admits a closed derived tensor structure, including
+its tensor, evaluation and source-parameter naturality fields. -/
 theorem native_weil_hom_closed_structure
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]

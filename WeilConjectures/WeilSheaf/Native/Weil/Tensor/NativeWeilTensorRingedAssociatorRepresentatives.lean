@@ -12,8 +12,19 @@ import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedAssoci
 
 /-! # Coherence component of the native ringed derived square
 
-Source: Stacks 06YU, 0FPT; blueprint step 3 of
-`lem-sf-native-weil-tensor-ringed-derived-square-native-data`.
+We prove associativity of the native tensor comparison on three K-flat representatives.
+
+## Implementation details
+
+Each native K-flat complex is replaced by a flat-term K-flat model. The total comparisons identify
+the two total tensor calculations and reduce the desired square to the underived coherence
+square; on a triple summand the signed interchanges have the same total sign, since
+`pq + (p + q)r = qr + p(q + r)`. The resulting chain-map equality is localized and the four model
+isomorphisms are cancelled.
+
+## References
+
+* Stacks Project, Tags 06YU and 0FPT.
 -/
 
 @[expose] public section
@@ -23,30 +34,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 -- Applying the normalized case unfolds the concrete monoidal and localization structures.
-/-- Associativity of the native comparison on three K-flat representatives.
-
-Source: Stacks 06YU, 0FPT; native tensor transport, associator part of step 3.
-(blueprint: lem-sf-native-weil-tensor-ringed-associator-representatives).
-
-Proof: first replace each native K-flat complex by a flat-term K-flat model via
-b.native. The total comparisons A.chain and chain identify the two total tensor
-calculations, with A.summand and hchain fixing every summand. On the ordinary
-side, the canonical clause of hS fixes its tensor model to the localization
-lax tensorator followed by the signed balanced total comparison.
-The supplied hcanonical fixes ordinaryModel itself on pairs of K-flat
-inputs.
-Naturality and a K-flat replacement extend the equations to other inputs.
-Apply the representative equation hforget to both inner and both outer pairs.
-The equations cB.associator_model and the canonical localization associativity
-then reduce the desired square to the underived square b.underived.coherence
-across b.square. The normalized adjunction equations he and A.uncurry and
-b.hom_square identify its comparison maps. On a triple summand the signed
-interchanges have the same total sign, since pq+(p+q)r=qr+p(q+r).
-The coproduct and balanced tensor universal properties prove equality of chain
-maps. Localize this equality and cancel the four model isomorphisms.
-Finally naturality under the chosen flat-term replacements gives the displayed
-equation for the original K-flat P,Q,N. This statement concerns only K-flat
-representatives and asserts neither units nor symmetry nor arbitrary objects. -/
+/-- Associativity of the native comparison on three K-flat representatives. -/
 theorem native_weil_tensor_ringed_associator_representatives
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

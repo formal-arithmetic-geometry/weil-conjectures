@@ -15,16 +15,22 @@ public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
 Let `x` be a rational point of a `k`-scheme `X`, with ideal `I = ker x` and centre
 `Z = V(I) ≅ Spec k`. The pullback exchange of the section `ẽ : S ⟶ 𝒳` of the deformation to the
 normal cone of `x` (`ProEtale.CondensedRing.zeroSectionModelHom`) is the special case `Z = {x}` of
-the zero-section map `ε_{X,Z}` of blueprint `prose-E-04`
-(`ProEtale.CondensedRing.zeroSectionMap`): the constant family `Z × S` of the centre is isomorphic
-to the trait `S` as a model, by the deformation `D_⊥ Z ≅ 𝔸¹_Z ≅ 𝔸¹_k` of the zero ideal of `Z`
-(`ProEtale.CondensedRing.centreModelHom`), and `ẽ` factors through this isomorphism.
+the zero-section map `ε_{X,Z}` (`ProEtale.CondensedRing.zeroSectionMap`): the constant family
+`Z × S` of the centre is isomorphic to the trait `S` as a model, by the deformation
+`D_⊥ Z ≅ 𝔸¹_Z ≅ 𝔸¹_k` of the zero ideal of `Z` (`ProEtale.CondensedRing.centreModelHom`), and
+`ẽ` factors through this isomorphism.
 
 ## Main results
 
 - `ProEtale.CondensedRing.isIso_pullbackExchange_zeroSectionModelHom_app_of_isIso_zeroSectionMap`:
   if the zero-section map `ε_{X,Z}(K)` of the centre `Z = V(ker x)` is an isomorphism, then so is
   the pullback exchange of `ẽ` at `K`.
+
+## Implementation details
+
+The morphism of models `ẽ` factors as the isomorphism of models `S ≅ D_⊥ Z ×_{𝔸¹_k} S` followed by
+the morphism of models defining `ε_{X,Z}`, and the pullback exchanges compose along this
+factorization (`NearbyCyclesModel.Hom.pullbackExchange_square`).
 
 -/
 
@@ -308,13 +314,10 @@ noncomputable def centreModelHom :
 
 /-! ### The zero-section map of a rational point -/
 
-/-- **The zero-section map of a rational point** (blueprint `prose-E-04`, the case
-`Z = {x}`): if the zero-section map `ε_{X,Z}(K)` of the centre `Z = V(ker x)` is an isomorphism,
-then so is the pullback exchange `Le^* Ψ_𝒳(K) ⟶ Ψ_S(Lx^* K)` of the section `ẽ : S ⟶ 𝒳` of the
-deformation to the normal cone of `x`. The morphism of models `ẽ` factors as the isomorphism of
-models `S ≅ D_⊥ Z ×_{𝔸¹_k} S` followed by the morphism of models defining `ε_{X,Z}`, and the
-pullback exchanges compose along this factorization
-(`NearbyCyclesModel.Hom.pullbackExchange_square`). -/
+/-- **The zero-section map of a rational point**: if the zero-section map `ε_{X,Z}(K)` of the
+centre `Z = V(ker x)` is an isomorphism, then so is the pullback exchange
+`Le^* Ψ_𝒳(K) ⟶ Ψ_S(Lx^* K)` of the section `ẽ : S ⟶ 𝒳` of the deformation to the normal cone of
+`x`. -/
 theorem isIso_pullbackExchange_zeroSectionModelHom_app_of_isIso_zeroSectionMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})

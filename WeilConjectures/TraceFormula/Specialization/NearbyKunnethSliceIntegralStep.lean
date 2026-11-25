@@ -40,6 +40,11 @@ complex, and its reduction modulo `ϖ` is invertible by the generic-slicing step
 a tensor product of derived complete complexes, need not be derived complete: this is why the
 splitting is needed.
 
+## References
+
+* SGA 4½, [Th. finitude], Prop. 3.7
+* L. Illusie, *Autour du théorème de monodromie locale*, proof of Thm. 4.7
+
 -/
 
 @[expose] public section
@@ -115,11 +120,9 @@ private theorem derivedCompleteIntegers_nearbyCycles_baseChangeSpecial_obj
         (derivedCompleteIntegers_of_boundedConstructible
           (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε _ hA₀))))
 
-/-- **The generic-slicing step with `𝒪_E`-coefficients** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Finite support"; Illusie, *Autour du théorème
-de monodromie locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait
-`S = Spec k'⟦t⟧` of models `M`, `N` of finite type, a coordinate `b` of `M` and bounded
-constructible `𝒪_E`-complexes `A₀`, `B₀`, if the Künneth map of the geometric slice
+/-- **The generic-slicing step with `𝒪_E`-coefficients**: for the product `P` over the strictly
+henselian trait `S = Spec k'⟦t⟧` of models `M`, `N` of finite type, a coordinate `b` of `M` and
+bounded constructible `𝒪_E`-complexes `A₀`, `B₀`, if the Künneth map of the geometric slice
 (`NearbyCyclesModel.sliceFst`, `NearbyCyclesModel.sliceSnd`) is invertible, so is the pullback
 of `Π_{A₀,B₀}` to the special fibre of the slice of `P`. -/
 theorem isIso_map_kunnethMap_of_isIso_sliceFst_padicIntegers [TopologicalSpace.NoetherianSpace Z]

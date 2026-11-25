@@ -14,7 +14,9 @@ import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedTransp
 
 /-! # Action-site geometry of the native derived tensor
 
-Source: Stacks 06YS and 0FPT; native ringed tensor model, geometric steps.
+## References
+
+* Stacks Project, Tags 06YS, 06YU and 0FPT.
 -/
 
 @[expose] public section
@@ -205,38 +207,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 
 /-- The action-site construction supplies a symmetric monoidal native tensor,
 its total-complex models, and coherent ordinary forgetting. No native derived
-closed adjunction or derived Hom comparison is asserted.
-
-Source: Stacks 06YS, 06YU and 0FPT; native ringed tensor model, steps 1 and 3.
-(blueprint: lem-sf-native-weil-tensor-geometry).
-
-Proof: take the Frobenius action-site realization and its resolution assertions
-from frobenius_action_resolutions. The restriction equivalence on module sheaves
-intertwines Frobenius pullback: on the generating locally finite-subextension
-functions both operations are the same precomposition. Lift the equivalence
-to fixed pairs and then termwise to their complex localizations. Transport
-the ringed derived symmetric monoidal tensor and its coefficient unit through
-this equivalence. Keep its native underived tensor bifunctor, the ordinary
-module tensor--Hom adjunction, and their evaluation-normalized forgetting
-comparison. The transported total tensor has exactly the stated acyclic-test
-K-flats; the resolution theorem and the universal property of localization
-give the restricted localization field. Its one-K-flat model and naturality
-are the transported ringed tensor models. For preservation of K-flatness,
-induce an ordinary acyclic complex to the direct sum of its Frobenius translates.
-This is an acyclic native test complex, and the original ordinary tensor is a
-retract of the forgotten tensor with this test. Its acyclicity follows. Extract
-the ordinary model and its adjunction normalization from hS. Uniqueness
-of left adjoints identifies the transported ordinary model with this specified
-model, and its signed swap with beta. The fixed monoidal equality hmonoidal
-identifies the ordinary associator and unitors. Apply ringed_forget_tensor_descent
-to the action-site forgetting functor and transport its comparison. Its summand
-formula gives chain_summand, and its representative formula gives model_forget.
-Its four coherence equations give c. The coefficient-unit isomorphisms give
-delta and epsilon. Exact forgetting of single complexes gives the displayed
-unit equality, including precisely the two single-functor factors. All
-constructions use unbounded complexes; the same universal properties handle
-zero objects and the empty site. Derived tensor--Hom currying is left to the
-separate representative-currying step. -/
+closed adjunction or derived Hom comparison is asserted. -/
 theorem native_weil_tensor_geometry
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]

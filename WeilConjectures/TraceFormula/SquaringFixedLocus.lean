@@ -12,15 +12,17 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
 
 /-!
 # The fixed locus of squaring on the line
-Blueprint `example-contracting-squaring`: the fixed scheme of the squaring map `x ↦ x²` of the line
-`Spec k[x]` is `Spec k[x]/(x² - x)`
-(`ProEtale.CondensedRing.Correspondence.squaringFixedLocus`), the equalizer of `𝟙` and squaring,
-since `Spec` turns the coequalizer `k[x] ⇉ k[x] ⟶ k[x]/(x² - x)` of rings into an equalizer. Its
-point `0` is an open and closed subscheme `Spec k` (`specPolynomialOver.originComponent`):
-`k[x]/(x² - x) ⟶ k` is the localization away from the idempotent `1 - x`. Hence the local term
-at the origin of the graph correspondence of squaring is the trace of the stalk map
+The fixed scheme of the squaring map `x ↦ x²` of the line `Spec k[x]` is `Spec k[x]/(x² - x)`
+(`ProEtale.CondensedRing.Correspondence.squaringFixedLocus`). Its point `0` is an open and closed
+subscheme `Spec k` (`specPolynomialOver.originComponent`). Hence the local term at the origin of
+the graph correspondence of squaring is the trace of the stalk map
 (`ProEtale.CondensedRing.Correspondence.localTerm_traceClass_squaringFixedLocus`).
-(`ProEtale.CondensedRing.Correspondence.localTerm_traceClass_squaringFixedLocus`).
+
+## Implementation details
+
+The fixed scheme is the equalizer of `𝟙` and squaring, since `Spec` turns the coequalizer
+`k[x] ⇉ k[x] ⟶ k[x]/(x² - x)` of rings into an equalizer. The origin is open because
+`k[x]/(x² - x) ⟶ k` is the localization away from the idempotent `1 - x`.
 -/
 
 @[expose] public section
@@ -147,8 +149,7 @@ noncomputable def originComponent : ProEtale.CondensedRing.point k ⟶ fixedSche
     ext a
     simp [evalZero_mk]
 
-/-- The origin is an open point of the fixed scheme: `k[x]/(x² - x) ⟶ k` is the localization away
-from the idempotent `1 - x`. -/
+/-- The origin is an open point of the fixed scheme. -/
 instance : IsOpenImmersion (originComponent k).left := by
   let := (evalZero k).toAlgebra
   have : IsLocalization.Away (Ideal.Quotient.mk (fixedIdeal k) (1 - X)) k :=
@@ -177,7 +178,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 open specPolynomialOver
 
-/-- (blueprint `example-contracting-squaring`) The fixed locus `Spec k[x]/(x² - x)` of the graph
+/-- The fixed locus `Spec k[x]/(x² - x)` of the graph
 correspondence of squaring on the line. -/
 noncomputable def squaringFixedLocus :
     (ofGraph K (specPolynomialOver.squaring k) v).FixedLocus where
@@ -221,10 +222,10 @@ lemma liftPoint_squaringFixedLocus :
   Fork.IsLimit.hom_ext (squaringFixedLocus v).isLimit
     ((FixedLocus.liftPoint_ι _ _ _).trans (originComponent_ι v).symm)
 
-/-- **Local term of squaring at the origin** (blueprint `example-contracting-squaring`): for the
-graph correspondence of `x ↦ x²` on the line with any coefficient map, with its fixed locus
-`Spec k[x]/(x² - x)` and the open and closed component `{0}`, the local term at the origin is the
-trace of the stalk map: `LT_0(u) = tr(u_0 | K_0)`. -/
+/-- **Local term of squaring at the origin**: for the graph correspondence of `x ↦ x²` on the line
+with any coefficient map, with its fixed locus `Spec k[x]/(x² - x)` and the open and closed
+component `{0}`, the local term at the origin is the trace of the stalk map:
+`LT_0(u) = tr(u_0 | K_0)`. -/
 theorem localTerm_traceClass_squaringFixedLocus
     [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (specPolynomialOver.origin k)).obj K)] :

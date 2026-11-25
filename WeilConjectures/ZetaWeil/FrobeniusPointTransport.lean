@@ -18,9 +18,10 @@ import WeilConjectures.TraceFormula.Integral.IntegralPullbackReductionCounit
 /-!
 # Point transport along geometric Frobenius
 
-Source: Deligne, Weil II (1.1.7), pp. 150--151; the explicit restriction,
-comma-coprojection and sheafification construction in the blueprint
-(blueprint: def-weil-frobenius-point-transport).
+This file defines the transport of complexes on the geometric point `Spec k` along the geometric
+Frobenius, via the explicit restriction, comma-coprojection and sheafification construction.
+
+## Implementation details
 
 The canonical sectionwise model of inverse image along an isomorphism identifies
 its comma coprojection followed by sheafification with the identity on sections.
@@ -29,6 +30,10 @@ the recorded tensor-unit map; the integral comparison is the recorded Roos lift,
 not tensor extension by the completed coefficient sheaf. Rational transport is
 scalar extension of the integral arrow. The algebraic-closure arrow is represented
 at the object's own coefficient stage. No naturality or invertibility is asserted.
+
+## References
+
+* Deligne, *La conjecture de Weil II*, (1.1.7), pp. 150--151.
 -/
 
 @[expose] public noncomputable section
@@ -42,15 +47,13 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGe
 open AlgebraicGeometry.ProEtale
 namespace WeilConjectures
 
-/-- Spec of the geometric field Frobenius, with its prescribed inverse.
-Source: Deligne, Weil II (1.1.7) (blueprint: def-weil-frobenius-point-transport). -/
+/-- Spec of the geometric field Frobenius, with its prescribed inverse. -/
 def frobeniusPointIso (D : FiniteFieldDatum.{u}) : Spec (.of D.k) ≅ Spec (.of D.k) :=
   letI : Fintype D.k₀ := Fintype.ofFinite D.k₀
   Scheme.Spec.mapIso
     (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k).toRingEquiv.toCommRingCatIso.op
 
-/-- The arrow (s,g_s) to (s,id) of the small pro-etale site.
-Source: blueprint restriction formula (blueprint: def-weil-frobenius-point-transport). -/
+/-- The arrow (s,g_s) to (s,id) of the small pro-etale site. -/
 def frobeniusPointRestriction (D : FiniteFieldDatum.{u}) :
     (proEtaleIsoPostcompose (frobeniusPointIso D).hom).obj
         (ProEt.mk (𝟙 (Spec (.of D.k)))) ⟶ ProEt.mk (𝟙 (Spec (.of D.k))) :=
@@ -61,10 +64,8 @@ attribute [local irreducible] frobeniusPointIso frobeniusPointRestriction
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The same excluded characteristic makes l a unit in the residue fields.
-Source: finite-field datum (blueprint: def-weil-frobenius-point-transport).
-Proof: the unique point has residue field canonically k, of characteristic p.
-The image of l is nonzero because l and p are distinct primes, hence invertible. -/
+/-- The prime l is a unit in the residue fields of `Spec k`, since l differs from the
+characteristic p. -/
 theorem frobeniusPointPrimeResidueUnit (D : FiniteFieldDatum.{u}) (l : ℕ)
     [Fact l.Prime] (_hl : l ≠ D.p) :
     ∀ x : Spec (.of D.k), IsUnit (l : (Spec (.of D.k)).residueField x) := by
@@ -83,8 +84,7 @@ theorem frobeniusPointPrimeResidueUnit (D : FiniteFieldDatum.{u}) (l : ℕ)
     ((StructureSheaf.toStalk (CommRingCat.of D.k) x) ≫ (Spec (.of D.k)).residue x).hom
   simpa only [map_natCast] using h
 
-/-- The canonical inverse of the residue-field unit; no extra hypothesis on s.
-Source: finite-field datum (blueprint: def-weil-frobenius-point-transport). -/
+/-- The canonical inverse of the residue-field unit; no extra hypothesis on s. -/
 @[instance_reducible]
 def frobeniusPointPrimeInvertible (x : Spec (.of D.k)) :
     Invertible (l : (Spec (.of D.k)).residueField x) :=
@@ -156,14 +156,7 @@ private def pointFiniteSigmaTerm (n : ℕ)
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-/-- The finite sigma chain map is uniquely fixed on every term and section.
-Source: blueprint finite/integral paragraph (blueprint: def-weil-frobenius-point-transport).
-Proof: use restriction along g_s and then the distinguished comma coprojection
-and the sheafification unit. In the recorded sectionwise inverse-image model the
-latter two maps identify the section with itself. Restrictions commute with d.
-The constant coefficient comparison fixes every constant section, so restriction
-is linear for the transported c inverse action. Equality on all sections proves
-uniqueness of the chain map. No naturality in derived morphisms is used. -/
+/-- The finite sigma chain map is uniquely fixed on every term and section. -/
 theorem frobeniusPointFiniteSigma_existsUnique (n : ℕ)
     (K : CochainComplex (integralOperationsFiniteModules l E (Spec (.of D.k)) n) ℤ) :
     ∃! f : ((pointFiniteSections D.k
@@ -194,8 +187,7 @@ theorem frobeniusPointFiniteSigma_existsUnique (n : ℕ)
   ext x
   exact congrFun (eq_of_heq (hg i)) x
 
-/-- Sigma is the specified chain map res, ins, sheafification, in its sectionwise model.
-Source: blueprint displayed sigma (blueprint: def-weil-frobenius-point-transport). -/
+/-- Sigma is the specified chain map res, ins, sheafification, in its sectionwise model. -/
 def frobeniusPointFiniteSigma (n : ℕ)
     (K : CochainComplex (integralOperationsFiniteModules l E (Spec (.of D.k)) n) ℤ) :
     ((pointFiniteSections D.k

@@ -10,7 +10,9 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSuppleme
 
 /-! # Ordinary K-flat complexes and the localization tensorator
 
-Source: Stacks 06YN, 06YU.
+## References
+
+* Stacks Project, Tags 06YN and 06YU.
 -/
 
 @[expose] public section
@@ -26,11 +28,7 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 attribute [local irreducible] DerivedCategory DerivedCategory.Q
   instCategoryDerivedCategory NativeOrdinaryKFlat
 
-/-- Ordinary total-tensor K-flatness gives canonical homotopy K-flatness.
-Source: Stacks 06YN, 06YU
-(blueprint: lem-sf-native-ordinary-kflat-localization).
-Proof: transport acyclicity along the specified total comparison and apply the
-acyclic-complex criterion for homotopy K-flatness. -/
+/-- Ordinary total-tensor K-flatness gives canonical homotopy K-flatness. -/
 theorem nativeOrdinaryKFlat_homotopy (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (κ : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,
       ordinaryTensorTotal l Y P Q ≅ Q ⊗ P)
@@ -42,11 +40,7 @@ theorem nativeOrdinaryKFlat_homotopy (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   intro N hN n
   exact (hP N hN n).of_iso (κ P N)
 
-/-- The canonical localization tensorator is invertible on ordinary K-flat pairs.
-Source: Stacks 06YU
-(blueprint: lem-sf-native-ordinary-kflat-localization).
-Proof: apply the localization tensorator theorem to the preceding conversion
-of either K-flat factor. -/
+/-- The canonical localization tensorator is invertible on ordinary K-flat pairs. -/
 theorem nativeOrdinaryKFlat_isIso_mu (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (κ : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,
       ordinaryTensorTotal l Y P Q ≅ Q ⊗ P)

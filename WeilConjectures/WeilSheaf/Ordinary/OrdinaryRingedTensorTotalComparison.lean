@@ -8,7 +8,18 @@ module
 public import WeilConjectures.WeilSheaf.Ordinary.OrdinaryRingedTensorCoherenceData
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
-/-! Totalization of a termwise ordinary tensor comparison. -/
+/-! Totalization of a termwise ordinary tensor comparison.
+
+## Implementation details
+
+The total comparison is obtained by currying the binary comparison and applying
+`HomologicalComplex.mapBifunctorComparison`; its components are invertible because the
+equivalence preserves the coproducts indexed by a fixed sum.
+
+## References
+
+* Stacks Project, Tag 0FPQ.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -18,15 +29,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite WeilConjectu
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 attribute [local instance] Mod.monoidalCategoryCochainComplex
 
-/-- A natural binary comparison induces the standard sum-total comparison.
-Source: Stacks 0FPQ.
-(blueprint: new-sf-ordinary-ringed-tensor-total-comparison).
-
-Proof: curry the binary comparison and apply `HomologicalComplex.mapBifunctorComparison`.
-The equivalence preserves the coproducts indexed by a fixed
-sum, so every component is invertible. The defining coproduct equation is exactly
-the displayed summand formula.
--/
+/-- A natural binary comparison induces the standard sum-total comparison. -/
 theorem ordinary_ringed_tensor_total_comparison
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     {C : Type (u + 1)} [SmallCategory C] (J : GrothendieckTopology C)

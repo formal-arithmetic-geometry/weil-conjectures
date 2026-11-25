@@ -15,8 +15,7 @@ public import Mathlib.CategoryTheory.Monoidal.Functor
 Let `Ψ : C ⥤ C'` be a functor between monoidal closed categories with a lax tensor map
 `μ_{A,B} : Ψ A ⊗ Ψ B ⟶ Ψ (A ⊗ B)` (natural in `A` and `B`), and let `θ : Ψ ω ⟶ ω'` be a morphism
 from the image of an object `ω` of `C` to an object `ω'` of `C'`. Write `D = RHom(-, ω)` and
-`D' = RHom(-, ω')`. The *duality map* (blueprint
-`proposition-nearby-cycles-commute-verdier-duality`)
+`D' = RHom(-, ω')`. The *duality map*
 ```
 δ_M : Ψ D M ⟶ D' Ψ M
 ```
@@ -29,27 +28,25 @@ strictly henselian trait, `ω`, `ω'` are the dualizing complexes of the generic
 fibres and `θ = θ_X = β_{a_X}(A)` is the dualizing map of the exceptional exchange; Gabber's
 theorem says that `δ_M` is an isomorphism.
 
-The construction is formal, and so are its compatibilities with the operations (blueprint
-`lemma-nearby-duality-proper-direct-image`), which only use the defining properties of the exchange
-maps:
+The construction is formal, and so are its compatibilities with the operations, which only use
+the defining properties of the exchange maps:
 
 * the same construction applied to a lax monoidal functor `G` with a trace `G ω_X ⟶ ω_Y` gives
   the map `G D_X ⟶ D_Y G` of Verdier duality for a proper direct image `G = Rf_*` (with the
   trace `Rf_* ω_X = Rf_! Rf^! ω_Y ⟶ ω_Y`), and the comparison `F D_X ⟶ D_U F` of the duality
   functors for an open restriction `F = j^*` (with `j^* ω_X ≅ ω_U`);
-* **proper direct image** (`CategoryTheory.Verdier.nearbyDualityMap_proper`, part (1)): if the
+* **proper direct image** (`CategoryTheory.Verdier.nearbyDualityMap_proper`): if the
   lax tensor maps commute with the proper exchange `χ : Ψ_Y G ⟶ G' Ψ_X` and the dualizing maps
   satisfy `θ_Y ∘ Ψ_Y(tr) = tr' ∘ G'(θ_X) ∘ χ` (the ordinary-adjoint form of
   `θ_X = f_s^! θ_Y ∘ β_f(ω_Y)`), then `δ_{Y, G M}` and `G' δ_{X,M}` agree under `χ` and the
   Verdier duality maps of `G` and `G'`;
-* **open restriction** (`CategoryTheory.Verdier.nearbyDualityMap_restrict`, part (2)): the same
+* **open restriction** (`CategoryTheory.Verdier.nearbyDualityMap_restrict`): the same
   for a pullback exchange `α : F' Ψ_X ⟶ Ψ_U F` which is monoidal and compatible with `θ`;
-* **normalization** (part (3)): on the trait itself nearby cycles are the identity, and the
-  duality map with `μ = 𝟙`, `θ = 𝟙` is the identity
-  (`CategoryTheory.Verdier.nearbyDualityMap_id`). Combined with part (1) for the structure map
-  of a proper scheme this gives that `RΓ(X_s, δ_{X,M})` is an isomorphism as soon as the
-  exchange maps and the global Verdier duality maps are
-  (`CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper`).
+* **normalization**: on the trait itself nearby cycles are the identity, and the duality map
+  with `μ = 𝟙`, `θ = 𝟙` is the identity (`CategoryTheory.Verdier.nearbyDualityMap_id`). Combined
+  with the proper case for the structure map of a proper scheme this gives that
+  `RΓ(X_s, δ_{X,M})` is an isomorphism as soon as the exchange maps and the global Verdier duality
+  maps are (`CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper`).
 
 -/
 
@@ -74,8 +71,7 @@ variable {Ψ : C ⥤ C'} (μ : ∀ A B : C, Ψ.obj A ⊗ Ψ.obj B ⟶ Ψ.obj (A 
 noncomputable def nearbyDualityPairing (M : C) : Ψ.obj M ⊗ Ψ.obj ((ihom M).obj ω) ⟶ ω' :=
   μ _ _ ≫ Ψ.map ((ihom.ev M).app ω) ≫ θ
 
-/-- The **duality map** `δ_M : Ψ D M ⟶ D' Ψ M` (blueprint
-`proposition-nearby-cycles-commute-verdier-duality`), `D = RHom(-, ω)` and `D' = RHom(-, ω')`: the
+/-- The **duality map** `δ_M : Ψ D M ⟶ D' Ψ M`, `D = RHom(-, ω)` and `D' = RHom(-, ω')`: the
 tensor–Hom adjoint of the pairing `θ ∘ Ψ(ev) ∘ μ : Ψ M ⊗ Ψ D M ⟶ ω'`. -/
 noncomputable def nearbyDualityMap (M : C) :
     Ψ.obj ((ihom M).obj ω) ⟶ (ihom (Ψ.obj M)).obj ω' :=
@@ -138,9 +134,8 @@ end Definition
 
 section Normalization
 
-/-- **Normalization** (blueprint `lemma-nearby-duality-proper-direct-image` (3)): for the identity
-functor, with the identity as lax tensor map and as dualizing map, the duality map is the
-identity. -/
+/-- **Normalization**: for the identity functor, with the identity as lax tensor map and as
+dualizing map, the duality map is the identity. -/
 @[simp]
 theorem nearbyDualityMap_id (ω : C) (M : C) :
     nearbyDualityMap (Ψ := 𝟭 C) (fun A B ↦ 𝟙 (A ⊗ B)) (𝟙 ω) M = 𝟙 _ := by
@@ -164,10 +159,10 @@ variable {D : Type u₃} [Category.{v₃} D] [MonoidalCategory D] [MonoidalClose
   (tr : G.obj ωX ⟶ ωY) (tr' : G'.obj ωX' ⟶ ωY')
   (χ : ∀ A : C, ΨY.obj (G.obj A) ⟶ G'.obj (ΨX.obj A))
 
-/-- **Nearby duality and proper direct image** (blueprint `lemma-nearby-duality-proper-direct-image`
-(1)). Let `G = Rf_{η*}` and `G' = Rf_{s*}` be lax monoidal with traces `tr : G ω_X ⟶ ω_Y` and
-`tr' : G' ω_{X_s} ⟶ ω_{Y_s}`, so that the duality maps of `(G, μ_G, tr)` and `(G', μ_{G'}, tr')`
-are the maps `Rf_* D ⟶ D Rf_*` of Verdier duality, and let `χ : Ψ_Y G ⟶ G' Ψ_X` be natural. If
+/-- **Nearby duality and proper direct image**. Let `G = Rf_{η*}` and `G' = Rf_{s*}` be lax
+monoidal with traces `tr : G ω_X ⟶ ω_Y` and `tr' : G' ω_{X_s} ⟶ ω_{Y_s}`, so that the duality
+maps of `(G, μ_G, tr)` and `(G', μ_{G'}, tr')` are the maps `Rf_* D ⟶ D Rf_*` of Verdier duality,
+and let `χ : Ψ_Y G ⟶ G' Ψ_X` be natural. If
 * the lax tensor maps commute with `χ`: `G'(μ_X) ∘ μ_{G'} ∘ (χ ⊗ χ) = χ ∘ Ψ_Y(μ_G) ∘ μ_Y`, and
 * the dualizing maps are compatible: `θ_Y ∘ Ψ_Y(tr) = tr' ∘ G'(θ_X) ∘ χ`,
 
@@ -204,12 +199,10 @@ theorem nearbyDualityMap_proper
   rw [hL, hR, reassoc_of% (hμ M _), 
     ← reassoc_of% (hχ (A := M ⊗ (ihom M).obj ωX) (B := ωX) ((ihom.ev M).app ωX)), ← hθ]
 
-/-- **Global duality kills the cone** (blueprint `lemma-nearby-duality-proper-direct-image` (3),
-formal part): in the situation of `nearbyDualityMap_proper`, if `χ` is invertible at `M` and
-`D_X M`, the Verdier duality maps of `G` at `M` and of `G'` at `Ψ_X M` are isomorphisms, and the
-duality map `δ_{Y, G M}` is an isomorphism (for `Y` the trait, `δ_Y` is the identity by the
-normalization `nearbyDualityMap_id`), then `G' δ_{X,M}` is an isomorphism. For `X` proper over
-the trait and `G' = RΓ(X_s, -)`, this says that `RΓ(X_s, -)` kills the cone of `δ_{X,M}`. -/
+/-- **Global duality kills the cone**: in the situation of `nearbyDualityMap_proper`, if `χ` is
+invertible at `M` and `D_X M`, the Verdier duality maps of `G` at `M` and of `G'` at `Ψ_X M` are
+isomorphisms, and the duality map `δ_{Y, G M}` is an isomorphism, then `G' δ_{X,M}` is an
+isomorphism. -/
 theorem isIso_map_nearbyDualityMap_of_proper
     (hμY : ∀ {A A' B B' : D} (x : A ⟶ A') (y : B ⟶ B'),
       (ΨY.map x ⊗ₘ ΨY.map y) ≫ μY A' B' = μY A B ≫ ΨY.map (x ⊗ₘ y))
@@ -251,10 +244,10 @@ variable {U : Type u₃} [Category.{v₃} U] [MonoidalCategory U] [MonoidalClose
   (ρ : F.obj ωX ⟶ ωU) (ρ' : F'.obj ωX' ⟶ ωU')
   (α : ∀ A : C, F'.obj (ΨX.obj A) ⟶ ΨU.obj (F.obj A))
 
-/-- **Nearby duality and open restriction** (blueprint `lemma-nearby-duality-proper-direct-image`
-(2)). Let `F = j_η^*` and `F' = j_s^*` be (lax) monoidal with maps `ρ : F ω_X ⟶ ω_U` and
-`ρ' : F' ω_{X_s} ⟶ ω_{U_s}` (the identifications `j^* ω_X ≅ ω_U`), so that the duality maps of
-`(F, μ_F, ρ)` and `(F', μ_{F'}, ρ')` are the comparisons `j^* D_X ⟶ D_U j^*`, and let
+/-- **Nearby duality and open restriction**. Let `F = j_η^*` and `F' = j_s^*` be (lax) monoidal
+with maps `ρ : F ω_X ⟶ ω_U` and `ρ' : F' ω_{X_s} ⟶ ω_{U_s}` (the identifications
+`j^* ω_X ≅ ω_U`), so that the duality maps of `(F, μ_F, ρ)` and `(F', μ_{F'}, ρ')` are the
+comparisons `j^* D_X ⟶ D_U j^*`, and let
 `α : F' Ψ_X ⟶ Ψ_U F` be the (natural) pullback exchange. If `α` is monoidal,
 `Ψ_U(μ_F) ∘ μ_U ∘ (α ⊗ α) = α ∘ F'(μ_X) ∘ μ_{F'}`, and compatible with the dualizing maps,
 `ρ' ∘ F'(θ_X) = θ_U ∘ Ψ_U(ρ) ∘ α`, then `(F' D Ψ_X M ⟶ D F' Ψ_X M) ∘ F'(δ_{X,M})` is

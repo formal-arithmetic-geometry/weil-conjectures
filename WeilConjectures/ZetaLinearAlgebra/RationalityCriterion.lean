@@ -46,7 +46,7 @@ variable {K : Type*} [Field K]
 
 /-- A sequence satisfying the linear recurrence
 `a (n + d) + c (d - 1) * a (n + d - 1) + ⋯ + c 0 * a n = 0` for all `n ≥ m` has
-finite-dimensional shift span: every shift lies in the span of the first `m + d` shifts. -/
+finite-dimensional shift span. -/
 theorem finiteDimensional_shiftSpan_of_forall_add_eq_zero {a : ℕ → K} {m d : ℕ}
     (c : Fin d → K) (h : ∀ n, m ≤ n → a (n + d) + ∑ i, c i * a (n + i) = 0) :
     FiniteDimensional K (shiftSpan K a) := by
@@ -76,8 +76,7 @@ theorem finiteDimensional_shiftSpan_of_forall_add_eq_zero {a : ℕ → K} {m d :
 
 namespace PowerSeries
 
-/-- The **Hankel matrix** `(c_{r+s})_{r,s ≥ 0}` of a power series `∑ cₙ Tⁿ`
-(blueprints `lemma-hankel-rank-rationality--1`, `definition-reciprocal-root`). -/
+/-- The **Hankel matrix** `(c_{r+s})_{r,s ≥ 0}` of a power series `∑ cₙ Tⁿ`. -/
 noncomputable def hankel {R : Type*} [Semiring R] (f : R⟦X⟧) : Matrix ℕ ℕ R :=
   Matrix.of fun r s => coeff (r + s) f
 
@@ -112,8 +111,7 @@ theorem exists_forall_add_eq_zero_of_finiteDimensional_shiftSpan (a : ℕ → K)
     rw [Fin.sum_univ_eq_sum_range (fun i => p.coeff i * a (n + i)), add_comm]
     exact this
 
-/-- **Rationality criterion** (blueprint `lemma-hankel-rank-rationality`,
-`lemma-hankel-rank-rationality--1`): for a power series `f = ∑ cₙ Tⁿ` over a field `K` the following
+/-- **Rationality criterion**: for a power series `f = ∑ cₙ Tⁿ` over a field `K` the following
 are equivalent:
 1. `f = A / B` for polynomials `A`, `B` with `B(0) = 1`;
 2. the Hankel matrix of `f` has finite rank: the ranks of its finite square submatrices are

@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedAssociatorChainData
 
-/-! Assembly of homogeneous associator components. -/
+/-! Assembly of homogeneous associator components.
+
+## References
+
+* Stacks Project, Tags 0FPQ, 0FNG, 06YU and 0FPT.
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -15,14 +20,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-/-- Outer map-bifunctor extensionality assembles the homogeneous transport.
-Source: Stacks 0FPQ, 0FNG, 06YU, 0FPT.
-(blueprint: new-sf-native-weil-ringed-associator-chain-assembly).
-
-Proof: take the degree component, apply the map-bifunctor hom-extensionality
-lemma for the forgetting functor, and invoke the homogeneous transport for the
-outer summand.  This is the coproduct assembly step and introduces no derived
-or localization data. -/
+/-- Outer map-bifunctor extensionality assembles the homogeneous transport. -/
 theorem nativeChainForgetAssociator_assembly
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}

@@ -10,7 +10,11 @@ import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 /-! # The actual chain comparison for native tensor forgetting
 
-Source: total tensor sums and the signed differential, Stacks 06YN and 06YU.
+This file compares total tensor sums with their signed differentials.
+
+## References
+
+* Stacks Project, Tags 06YN and 06YU.
 -/
 
 @[expose] public noncomputable section
@@ -36,17 +40,7 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- The underived comparison extends to the sum-total tensor, with its prescribed summands.
-
-Source: Stacks 06YN, 06YU; native tensor geometry, step 3.
-(blueprint: lem-sf-native-weil-tensor-chain).
-
-Proof: curry the underived natural isomorphism in its two variables. Apply the existing
-mapBifunctorComparison to complexes. Forgetting preserves the coproduct in every total degree,
-and the component comparisons are isomorphisms, so this chain map is an isomorphism. The defining
-coproduct equation gives the displayed summand formula. Its differential equation incorporates
-both signed tensor differentials, including the Koszul sign. No flatness or boundedness is needed.
-The zero complex and empty sums are covered by the same coproduct universal property. -/
+/-- The underived comparison extends to the sum-total tensor, with its prescribed summands. -/
 theorem native_weil_tensor_chain
     (T : ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X ⥤
       ProEtaleWeilSheaf k₀ l X)

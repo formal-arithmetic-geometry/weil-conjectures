@@ -28,10 +28,10 @@ A *refinement* `C₃ ⟶ C₁` of compactifications
 models `P₃ ⟶ P₁` over proper morphisms `X₃ ⟶ X₁`, `X₃' ⟶ X₁'`, compatible with the inclusions of
 `N`, over which `N` is cartesian. Any two compactifications have a common refinement
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.Compactification.exists_refinement`, in
-`TraceFormula.Specialization.TraitModelOfGenericBaseCommonRefinement`). This is the common
-refinement of the proof of blueprint `prose-E-15` ("two compactifications
-have a common proper refinement"), as for trait models over a base field
-(`NearbyCyclesModel.IsTraitModelOfBase.Compactification.exists_refinement`).
+`TraceFormula.Specialization.TraitModelOfGenericBaseCommonRefinement`), as for trait models over
+a base field (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.exists_refinement`).
+
+## Implementation details
 
 The common refinement is built as over a base field, with `X₃` the closure of the graph of `Y` in
 `X₁ ×_F X₂`: the total space of `N` and the generic fibre `X₃ ×_F η` are glued along `N_η` and
@@ -39,7 +39,9 @@ compactified over `𝒳₁ ×_S 𝒳₂`. Over a generic base there is no morphi
 the bases; instead the generic fibres `𝒳ᵢ ×_S η ≅ Xᵢ ×_F η` are used: `X₃ ×_F η` is a closed
 subscheme of `(𝒳₁ ×_S 𝒳₂) ×_S η`, being proper and a monomorphism, and `N_η` is the inverse image
 of `N` in `X₃ ×_F η`
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.Compactification.isPullback_genericFibre`).
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.Compactification.isPullback_genericFibre`). The key
+point is that `N_η ⟶ 𝒳_η ≅ X ×_F η` is `N_η ⟶ Y ×_F η ⟶ X ×_F η`, as it is on the geometric
+generic fibre, which is faithfully flat over `N_η`.
 
 -/
 
@@ -179,7 +181,7 @@ attribute [instance] Compactification.locallyOfFiniteType Compactification.quasi
   Compactification.isOpenImmersion_ιX' Compactification.isOpenImmersion_hom_total
 
 /-- Every trait model over a generic base of a separated `F`-scheme of finite type has a
-compactification (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_isProper_openSubmodel`). -/
+compactification. -/
 lemma nonempty_compactification [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
     [IsSeparated Y.hom] (h : N.IsTraitModelOfGenericBase Y ι q g) :
     Nonempty h.Compactification := by
@@ -189,8 +191,7 @@ lemma nonempty_compactification [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
 
 variable {h : N.IsTraitModelOfGenericBase Y ι q g}
 
-/-- The structure morphism of `Y` is quasi-compact as soon as `N` has a compactification: `Y` is
-open in the noetherian scheme `X`. -/
+/-- The structure morphism of `Y` is quasi-compact as soon as `N` has a compactification. -/
 lemma Compactification.quasiCompact_hom (C : h.Compactification) : QuasiCompact Y.hom := by
   have := LocallyOfFiniteType.isLocallyNoetherian C.X.hom
   rw [← Over.w C.ιX]
@@ -211,8 +212,7 @@ noncomputable def Compactification.toCompactification (C : h.Compactification) :
 
 /-- **Common compactification of `Y`.** For two compactifications `C₁`, `C₂` of `N` there is a
 proper `F`-scheme `X₃` containing `Y` as an open, with proper morphisms `X₃ ⟶ X₁`, `X₃ ⟶ X₂`
-under `Y` over which `Y` is cartesian and which are jointly monomorphic: the closure of the graph
-of `Y` in `X₁ ×_F X₂` (`AlgebraicGeometry.Compactification.inf`). -/
+under `Y` over which `Y` is cartesian and which are jointly monomorphic. -/
 lemma Compactification.exists_common (C₁ C₂ : h.Compactification) :
     ∃ (X₃ : Over (Spec (.of F))) (_ : IsProper X₃.hom) (ι₃ : Y ⟶ X₃)
       (_ : IsOpenImmersion ι₃.left) (p₁ : X₃ ⟶ C₁.X) (p₂ : X₃ ⟶ C₂.X) (_ : IsProper p₁.left)
@@ -245,9 +245,7 @@ lemma Compactification.exists_common (C₁ C₂ : h.Compactification) :
 /-- **The generic fibre of `N` in a compactification.** Over the generic point `η` of the trait,
 `N_η` is the inverse image of `N ⊆ 𝒳` along `X₃ ×_F η ⟶ X ×_F η ≅ 𝒳 ×_S η`, for
 `p : X₃ ⟶ X` under `Y` with `Y = X₃ ×_X Y`, where `N_η ⟶ X₃ ×_F η` is the open immersion
-`N_η ⟶ Y ×_F η` of the trait model `N` followed by `Y ×_F η ⟶ X₃ ×_F η`. The key point is that
-`N_η ⟶ 𝒳_η ≅ X ×_F η` is `N_η ⟶ Y ×_F η ⟶ X ×_F η`, as it is on the geometric generic fibre,
-which is faithfully flat over `N_η`. -/
+`N_η ⟶ Y ×_F η` of the trait model `N` followed by `Y ×_F η ⟶ X₃ ×_F η`. -/
 lemma Compactification.isPullback_genericFibre (C : h.Compactification)
     {wN : pullback q (traitGenericSpec k') ⟶ pullback Y.hom ι}
     (hwN₁ : wN ≫ pullback.snd _ _ = pullback.snd _ _)
@@ -416,8 +414,7 @@ attribute [instance] Compactification.Refinement.isProper_p
 compactifications `C₃`, `C` of `N` over the trait, compatible with the inclusions of `N`, over
 a proper `p : X₃ ⟶ X` under `Y` with `Y = X₃ ×_X Y`, together with a morphism `πg` of geometric
 generic fibres compatible with `π`, the structure morphisms and the identifications `ε`, and with
-`N = 𝒳₃ ×_𝒳 N`, induces a refinement `C₃ ⟶ C`: the morphism of special fibres is the base change
-of `π`, and the remaining cartesian squares are base changes of `N = 𝒳₃ ×_𝒳 N`. -/
+`N = 𝒳₃ ×_𝒳 N`, induces a refinement `C₃ ⟶ C`. -/
 lemma Compactification.nonempty_refinement {C₃ C : h.Compactification} (p : C₃.X ⟶ C.X)
     [IsProper p.left] (hι : C₃.ιX ≫ p = C.ιX)
     (hιpb : IsPullback C₃.ιX.left (𝟙 Y.left) p.left C.ιX.left)

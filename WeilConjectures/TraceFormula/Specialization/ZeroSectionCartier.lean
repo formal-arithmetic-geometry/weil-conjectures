@@ -22,10 +22,11 @@ Let `X` be a separated `k`-scheme of finite type, `I` an ideal sheaf on `X` with
 (`ProEtale.CondensedRing.isInvertible_comap_blowupOverHom`), so `Z' = b⁻¹ Z` is an effective
 Cartier divisor of `X'`.
 
-This file proves (blueprint `theorem-verdier-s-theorem-specialization-zero`) that the defect
-`C_{X,Z}(L)` of a bounded constructible complex `L` with `Li^* L = 0` is computed on the blow-up:
-`C_{X,Z}(L) ≅ Rb_{Z*} C_{X',Z'}(Lb^* L)`
+This file proves that the defect `C_{X,Z}(L)` of a bounded constructible complex `L` with
+`Li^* L = 0` is computed on the blow-up: `C_{X,Z}(L) ≅ Rb_{Z*} C_{X',Z'}(Lb^* L)`
 (`ProEtale.CondensedRing.nonempty_specializationDefect_iso_blowup`).
+
+## Implementation details
 
 The proof constructs some isomorphism `L ≅ Rb_* Lb^* L`: both sides vanish after `Li^*` (for the
 right-hand side by proper base change), so both are the extension by zero of their restriction to
@@ -56,8 +57,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [LocallyOfFiniteType A.hom] [QuasiCompact A.hom] [IsSeparated A.hom]
   [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom]
 
-/-- Along an isomorphism `e`, `Re_* ∘ Le^*` is isomorphic to the identity: `Re_*` is the right
-adjoint of the equivalence `Le^*`, hence isomorphic to its inverse. -/
+/-- Along an isomorphism `e`, `Re_* ∘ Le^*` is isomorphic to the identity. -/
 noncomputable def boundedConstructibleUpperStarLowerStarIsoOfIsIso (e : A ⟶ B) [IsIso e] :
     boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e ⋙
         boundedConstructibleLowerStar ℓ e ≅ 𝟭 _ :=
@@ -172,8 +172,7 @@ lemma isIso_counit_overRestrictι_of_isZero (K : Dᵇc(X.left)⟦Profinite.padic
     Functor.map_isZero _ hK
   exact (Triangle.isZero₃_iff_isIso₁ _ hδ).1 h
 
-/-- If `Li^* L = 0`, then `Li^* Rb_* Lb^* L = 0`, by proper base change along the inverse image
-`Z' ⟶ Z` of the centre. -/
+/-- If `Li^* L = 0`, then `Li^* Rb_* Lb^* L = 0`. -/
 lemma isZero_upperStar_centreι_lowerStar_blowupOverHom
     (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hL : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -194,8 +193,7 @@ lemma isZero_upperStar_centreι_lowerStar_blowupOverHom
     (Functor.map_isZero (boundedConstructibleUpperStar _ ℓ (centreMap (blowupOverHom X I) I)) hL)
     ((boundedConstructibleUpperStarComp _ ℓ (centreMap (blowupOverHom X I) I) (centreι X I)).app L)
 
-/-- The restrictions of `L` and `Rb_* Lb^* L` to the complement `U` of the centre agree, by proper
-base change, `b` being an isomorphism over `U`. -/
+/-- The restrictions of `L` and `Rb_* Lb^* L` to the complement `U` of the centre agree. -/
 noncomputable def upperStarOverRestrictιLowerStarBlowupOverHomIso
     (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -219,8 +217,7 @@ noncomputable def upperStarOverRestrictιLowerStarBlowupOverHomIso
     (boundedConstructibleUpperStarLowerStarIsoOfIsIso ℓ (blowupCentreComplRestrict X I)).app
       ((boundedConstructibleUpperStar _ ℓ (overRestrictι X I.support.compl)).obj L)
 
-/-- If `Li^* L = 0`, then `L ≅ Rb_* Lb^* L`: both are the extension by zero of their (isomorphic)
-restrictions to the complement of the centre. -/
+/-- If `Li^* L = 0`, then `L ≅ Rb_* Lb^* L`. -/
 noncomputable def lowerStarUpperStarBlowupOverHomIso
     (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hL : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -237,12 +234,9 @@ noncomputable def lowerStarUpperStarBlowupOverHomIso
     asIso ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ
       (overRestrictι X I.support.compl)).counit.app _)
 
-/-- **Reduction of the defect to a Cartier divisor** (blueprint
-`theorem-verdier-s-theorem-specialization-zero`): for `L` bounded constructible on `X` with
-`Li^* L = 0` and `b : X' ⟶ X` the blow-up along `I`, `C_{X,Z}(L) ≅ Rb_{Z*} C_{X',Z'}(Lb^* L)`, where
-`Z' = V(b^* I)` is an effective Cartier divisor
-(`ProEtale.CondensedRing.isInvertible_comap_blowupOverHom`). Here the isomorphism is only asserted
-to exist. -/
+/-- **Reduction of the defect to a Cartier divisor**: for `L` bounded constructible on `X` with
+`Li^* L = 0` and `b : X' ⟶ X` the blow-up along `I`, there is an isomorphism
+`C_{X,Z}(L) ≅ Rb_{Z*} C_{X',Z'}(Lb^* L)`, where `Z' = V(b^* I)` is an effective Cartier divisor. -/
 theorem nonempty_specializationDefect_iso_blowup
     (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hL : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ

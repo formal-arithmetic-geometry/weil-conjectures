@@ -12,8 +12,8 @@ public import Mathlib.CategoryTheory.Monoidal.Functor
 
 # Exchanges of nearby cycles and the projection formula, abstractly
 
-Blueprint `lemma-compatibilities-base-change-maps` (1) states that the compact-support exchange
-`ν_f : Rf_{s!} S_V ⟶ S_W Rf_{η!}` is compatible with the projection formula. For a compactified
+The compact-support exchange `ν_f : Rf_{s!} S_V ⟶ S_W Rf_{η!}` of nearby cycles is compatible
+with the projection formula. For a compactified
 morphism `f = p ∘ h`, `ν_f` is built from the adjoint `ν_h` of the inverse pullback exchange of the
 open immersion `h` and the inverse of the proper exchange `χ_p`. This file proves the two
 building blocks, for abstract adjunctions with monoidal left (respectively right) adjoints and lax
@@ -44,8 +44,8 @@ the adjoint of `L(N ⊗ R X) ≅ L N ⊗ L R X ⟶ L N ⊗ X`. -/
 noncomputable def projectionMap (adj : L ⊣ R) (N : W) (X : V) : N ⊗ R.obj X ⟶ R.obj (L.obj N ⊗ X) :=
   adj.homEquiv _ _ (Functor.OplaxMonoidal.δ L N (R.obj X) ≫ L.obj N ◁ adj.counit.app X)
 
-/-- **The mate of a monoidal exchange is compatible with the projection formula** (the proper case
-of blueprint `lemma-compatibilities-base-change-maps` (1)). -/
+/-- **The mate of a monoidal exchange is compatible with the projection formula** (the proper
+case). -/
 theorem μ_comp_map_projectionMap_comp_app (adj : L ⊣ R) (adj' : L' ⊣ R')
     (α : SW ⋙ L' ⟶ L ⋙ SV)
     (hα : ∀ N M : W, L'.map (μ SW N M) ≫ α.app (N ⊗ M) =
@@ -99,7 +99,7 @@ noncomputable def leftProjectionMap (adj : P ⊣ Lp) (N : W) (X : V) :
   (adj.homEquiv _ _).symm (Lp.obj N ◁ adj.unit.app X ≫ μ Lp N (P.obj X))
 
 /-- **The adjoint of an inverse pullback exchange is compatible with the projection formula** (the
-open case of blueprint `lemma-compatibilities-base-change-maps` (1)): for `ν : S_V ⋙ P' ⟶ P ⋙ S_W`
+open case): for `ν : S_V ⋙ P' ⟶ P ⋙ S_W`
 adjoint to `α⁻¹` along `P ⊣ Lp`, `P' ⊣ Lp'`, with `α` monoidal. -/
 theorem map_comp_comp_map_leftProjectionMap (adj : P ⊣ Lp) (adj' : P' ⊣ Lp')
     (α : SW ⋙ Lp' ≅ Lp ⋙ SV)

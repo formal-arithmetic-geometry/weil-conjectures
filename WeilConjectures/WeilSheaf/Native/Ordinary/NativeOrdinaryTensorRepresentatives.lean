@@ -23,8 +23,9 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSuppleme
 
 /-! # Native total tensor models from the canonical localization tensor
 
-Source: Stacks Tags 06YS, 06YT and 0FPT.
-(blueprint: lem-sf-native-ordinary-tensor-representatives).
+## References
+
+* Stacks Project, Tags 06YS, 06YT and 0FPT.
 -/
 
 @[expose] public section

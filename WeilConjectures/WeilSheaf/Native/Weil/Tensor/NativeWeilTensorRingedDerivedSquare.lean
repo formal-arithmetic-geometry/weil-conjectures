@@ -13,8 +13,11 @@ import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedDerive
 
 /-! # The remaining derived square for the explicit native tensor model
 
-Source: Stacks 06YU, 0FPT; step 3 of native tensor transport.
 The native one-K-flat model is already the explicit composite of supplied ringed maps.
+
+## References
+
+* Stacks Project, Tags 06YU and 0FPT.
 -/
 
 @[expose] public section
@@ -23,8 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-/-- The representative square for the explicit native model and an ordinary model.
-Source: Stacks 06YU (blueprint: lem-sf-native-weil-tensor-ringed-derived-square). -/
+/-- The representative square for the explicit native model and an ordinary model. -/
 def NativeWeilRingedModelForget
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})
@@ -94,40 +96,7 @@ def NativeWeilRingedModelForget
 
 /-- Conjugating the supplied ringed comparison gives a coherent native derived square.
 Only the square, its ordinary representative model and its coherence are asserted here;
-the native model, its naturality and its K-flat localization have already been constructed.
-
-Source: native tensor transport, step 3; Stacks 06YU, 0FPT.
-(blueprint: lem-sf-native-weil-tensor-ringed-derived-square).
-
-Proof: localize the ordinary additive equivalence and its Hom comparison, using
-products of complexes and preservation of K-injectives by the equivalence and its
-inverse. Compare the resulting ordinary derived Hom with M.ordinaryHom using its
-specified representatives. Uniqueness of tensor-Hom adjoints gives the normalized
-ordinary tensor identification. On two K-flat inputs its model agrees with hS
-by componentwise uncurrying. Extend that comparison naturally to an arbitrary
-second input by a K-flat replacement; the one-K-flat tensor inverts that replacement.
-This constructs ordinaryModel with its required normalization and naturality in
-both arguments. Normalization on two K-flat inputs and naturality under a K-flat
-resolution of the second input determine every value uniquely; thus no arbitrary
-model is selected from a mere existence assertion. This avoids using
-hS's unconstrained values on non-K-flat second inputs. The signed-swap equations
-identify the ordinary symmetry, and hmonoidal identifies its associator and unitors.
-Conjugate d.derived by the native and ordinary derived equivalences, the localization
-of b.square, and that ordinary tensor identification. This defines t. On flat-term
-K-flat representatives, expand the explicit nativeWeilRingedTensorModel: the native
-and ordinary exact-functor factors cancel using the localized square, and the
-two total comparisons agree on each summand by hchain, A.summand, d.summand,
-he, A.uncurry and b.hom_square. The remaining equation is d.representative.
-Replace the other input and then the first input by flat-term K-flat resolutions.
-Naturality and the one-K-flat comparisons extend this equality to every native
-K-flat P and arbitrary Q; forgetting preserves K-flatness by the orbit-sum retract.
-This proves NativeWeilRingedModelForget with precisely both displayed forgetting
-factors. Conjugate d.coherence through the same equivalences and tensor
-identifications. Their counit identities give the associator and unit equations;
-the signed-swap formulas give symmetry. These yield TensorCoherence for the fixed
-nativeWeilRingedMonoidal and nativeWeilRingedSymmetric. No native derived closed
-adjunction is assumed or constructed. The argument is valid for unbounded and zero
-complexes and for empty sites. -/
+the native model, its naturality and its K-flat localization have already been constructed. -/
 theorem native_weil_tensor_ringed_derived_square
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

@@ -32,9 +32,12 @@ The case of the change of trait `Spec K⟦t⟧ ⟶ Spec k'⟦t⟧` of a model of
 `Spec k'⟦t⟧` follows
 (`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_padicIntegers`,
 `NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_residueField`); it is the
-coefficient-generic form of the first "fact about traits" of the blueprint proof of
-`proposition-external-kunneth-formula-nearby-cycles`, needed by the induction with
-`𝒪_E`-coefficients.
+invariance of nearby cycles under change of trait used in the proof of Gabber's Künneth formula,
+needed by the induction with `𝒪_E`-coefficients.
+
+## References
+
+* SGA 4½, [Th. finitude], Prop. 3.7
 
 -/
 
@@ -64,14 +67,11 @@ variable {ℓ : ℕ} [Fact ℓ.Prime]
   {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
 /-- **Invariance of nearby cycles under change of strictly henselian trait, the restricted base
-change morphism with `𝒪_E`-coefficients** (SGA 4½, [Th. finitude], Prop. 3.7). In the situation
-of `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`, the base change
+change morphism with `𝒪_E`-coefficients**. In the situation of
+`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`, the base change
 morphism `Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` of the square of geometric generic fibres with
 `𝒪_E`-coefficients, restricted to the special fibre of `M`, is invertible at every bounded
-constructible `𝒪_E`-complex `K₀` on the geometric generic fibre of `N`: `K₀` is derived complete,
-and the morphism is invertible after reduction modulo `ϖ`
-(`NearbyCyclesModel.Hom.isIso_map_exchangeRight_app_of_isPullback_trait_residueField`), hence by
-derived Nakayama. -/
+constructible `𝒪_E`-complex `K₀` on the geometric generic fibre of `N`. -/
 theorem isIso_map_exchangeRight_app_of_isPullback_trait_padicIntegers [IsLocalHom ι]
     (hι : Function.Injective ι) (hun : maximalIdeal R₂ = (maximalIdeal R₁).map ι)
     (ha₁ : Function.Injective a₁) (ha₂ : Function.Injective a₂)
@@ -126,12 +126,11 @@ theorem isIso_map_exchangeRight_app_of_isPullback_trait_padicIntegers [IsLocalHo
     (by exact_mod_proofs hres)
   exact_mod_proofs h
 
-/-- **Invariance of nearby cycles under change of strictly henselian trait, `𝒪_E`-coefficients**
-(SGA 4½, [Th. finitude], Prop. 3.7). In the situation of
-`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`, the pullback exchange
-`α : Lf'^* Ψ_N B₀ ⟶ Ψ_M (Lf^* B₀)` with `𝒪_E`-coefficients is an isomorphism for every `B₀` whose
-restriction `Lε^* B₀` to the geometric generic fibre of `N` is bounded constructible
-(`NearbyCyclesModel.Hom.isIso_map_exchangeRight_app_of_isPullback_trait_padicIntegers`). -/
+/-- **Invariance of nearby cycles under change of strictly henselian trait, `𝒪_E`-coefficients**.
+In the situation of `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`, the
+pullback exchange `α : Lf'^* Ψ_N B₀ ⟶ Ψ_M (Lf^* B₀)` with `𝒪_E`-coefficients is an isomorphism for
+every `B₀` whose restriction `Lε^* B₀` to the geometric generic fibre of `N` is bounded
+constructible. -/
 theorem isIso_pullbackExchange_app_of_isPullback_trait_padicIntegers [IsLocalHom ι]
     (hι : Function.Injective ι) (hun : maximalIdeal R₂ = (maximalIdeal R₁).map ι)
     (ha₁ : Function.Injective a₁) (ha₂ : Function.Injective a₂)
@@ -166,16 +165,11 @@ set_option linter.unusedVariables false in
 -- for the uniformity of the statement with
 -- `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait_padicIntegers`
 /-- **Invariance of nearby cycles under change of strictly henselian trait, the restricted base
-change morphism with `𝔽_E`-coefficients** (SGA 4½, [Th. finitude], Prop. 3.7, for the torsion
-coefficients `𝔽_E = 𝒪_E/ϖ`). In the situation of
-`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`, the base change morphism
-`Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` of the square of geometric generic fibres with `𝔽_E`-coefficients,
-restricted to the special fibre of `M`, is invertible at every complex `K` on the geometric
-generic fibre of `N` which is bounded below of étale origin.
-
-This is `NearbyCyclesModel.traitChangeInvariance`, with the chart dimension of `N`, after
-replacing the special fibre of `N` by its fibre over `κ₂`, which does not affect the base change
-morphism. -/
+change morphism with `𝔽_E`-coefficients** (for the torsion coefficients `𝔽_E = 𝒪_E/ϖ`). In
+the situation of `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`, the base
+change morphism `Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` of the square of geometric generic fibres with
+`𝔽_E`-coefficients, restricted to the special fibre of `M`, is invertible at every complex `K` on
+the geometric generic fibre of `N` which is bounded below of étale origin. -/
 theorem isIso_map_exchangeRight_app_of_isPullback_trait_residueField_of_plusEtaleOrigin
     [IsLocalHom ι]
     (hι : Function.Injective ι) (hun : maximalIdeal R₂ = (maximalIdeal R₁).map ι)
@@ -239,11 +233,10 @@ set_option linter.unusedVariables false in
 -- the uniformity of the statement with
 -- `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait_padicIntegers`
 /-- **Invariance of nearby cycles under change of strictly henselian trait, `𝔽_E`-coefficients**
-(SGA 4½, [Th. finitude], Prop. 3.7, for the torsion coefficients `𝔽_E = 𝒪_E/ϖ`). In the situation
-of `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`, the pullback exchange
+(for the torsion coefficients `𝔽_E = 𝒪_E/ϖ`). In the situation of
+`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`, the pullback exchange
 `α : Lf'^* Ψ_N B ⟶ Ψ_M (Lf^* B)` with `𝔽_E`-coefficients is an isomorphism for every `B` whose
-restriction `Lε^* B` to the geometric generic fibre of `N` is bounded below of étale origin
-(`isIso_map_exchangeRight_app_of_isPullback_trait_residueField_of_plusEtaleOrigin`). -/
+restriction `Lε^* B` to the geometric generic fibre of `N` is bounded below of étale origin. -/
 theorem isIso_pullbackExchange_app_of_isPullback_trait_residueField [IsLocalHom ι]
     (hι : Function.Injective ι) (hun : maximalIdeal R₂ = (maximalIdeal R₁).map ι)
     (ha₁ : Function.Injective a₁) (ha₂ : Function.Injective a₂)
@@ -289,13 +282,11 @@ variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K] {Y : Sch
 
 variable [IsSepClosed k'] [IsSepClosed K] {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k' ≠ ℓ)]
 
-/-- **Invariance of nearby cycles under change of trait, `𝒪_E`-coefficients** (SGA 4½,
-[Th. finitude], Prop. 3.7): for a model `N` of finite type over `S = Spec k'⟦t⟧` and the change of
-trait `Spec K⟦t⟧ ⟶ S` to a separably closed extension `K`, the pullback exchange with
-`𝒪_E`-coefficients to the nearby cycles of the base change `N ×_S Spec K⟦t⟧` is an isomorphism at
-every `B₀` whose restriction to the geometric generic fibre is bounded constructible. This is the
-case `Spec K⟦t⟧ ⟶ Spec k'⟦t⟧` of
-`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait_padicIntegers`. -/
+/-- **Invariance of nearby cycles under change of trait, `𝒪_E`-coefficients**: for a model `N`
+of finite type over `S = Spec k'⟦t⟧` and the change of trait `Spec K⟦t⟧ ⟶ S` to a separably
+closed extension `K`, the pullback exchange with `𝒪_E`-coefficients to the nearby cycles of the
+base change `N ×_S Spec K⟦t⟧` is an isomorphism at every `B₀` whose restriction to the geometric
+generic fibre is bounded constructible. -/
 theorem isIso_pullbackExchange_baseChangeHom_traitMap_padicIntegers
     (hN : N.IsTraitModelOver qN gN) (E : PadicAlgCl.FiniteIntermediateField ℓ)
     {B₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
@@ -320,13 +311,11 @@ theorem isIso_pullbackExchange_baseChangeHom_traitMap_padicIntegers
     (baseChangeGenericMap_g hN qN (Category.comp_id qN) (traitMap k' K) (Category.comp_id _))
     E hB₀
 
-/-- **Invariance of nearby cycles under change of trait, `𝔽_E`-coefficients** (SGA 4½,
-[Th. finitude], Prop. 3.7): for a model `N` of finite type over `S = Spec k'⟦t⟧` and the change of
-trait `Spec K⟦t⟧ ⟶ S` to a separably closed extension `K`, the pullback exchange with
-`𝔽_E`-coefficients to the nearby cycles of the base change `N ×_S Spec K⟦t⟧` is an isomorphism at
-every `B` whose restriction to the geometric generic fibre is bounded below of étale origin. This
-is the case `Spec K⟦t⟧ ⟶ Spec k'⟦t⟧` of
-`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait_residueField`. -/
+/-- **Invariance of nearby cycles under change of trait, `𝔽_E`-coefficients**: for a model `N`
+of finite type over `S = Spec k'⟦t⟧` and the change of trait `Spec K⟦t⟧ ⟶ S` to a separably
+closed extension `K`, the pullback exchange with `𝔽_E`-coefficients to the nearby cycles of the
+base change `N ×_S Spec K⟦t⟧` is an isomorphism at every `B` whose restriction to the geometric
+generic fibre is bounded below of étale origin. -/
 theorem isIso_pullbackExchange_baseChangeHom_traitMap_residueField
     (hN : N.IsTraitModelOver qN gN) (E : PadicAlgCl.FiniteIntermediateField ℓ)
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})

@@ -12,8 +12,24 @@ import WeilConjectures.CategoryTheory.Native.NativeWeilTensorConstraintLifts
 
 /-! # Monoidal coherence on a represented native tensor
 
-Source: Stacks 06YS and 0FPT; the constraint-descent part of
-lem-sf-native-weil-tensor-lift (blueprint: lem-sf-native-weil-tensor-coherence).
+This is the constraint-descent part of the equivariant lift of the native tensor.
+
+## Implementation details
+
+The ringed closed symmetric tensor, transported to native complexes through the Frobenius
+action-site presentation, is naturally isomorphic to `T`: for each `K` both tensor functors
+are left adjoint to `M.weilHom(K, -)`, and the counit equation `ha` makes the isomorphism
+natural in `K`. The monoidal constraints, the coefficient unit and the Koszul symmetry are
+transported through this bifunctor isomorphism, taking `T` itself as the tensor functor (on
+pairs of arrows and on whiskerings), so that pentagon, triangle, symmetry and hexagon follow
+from their ringed counterparts by conjugation. The unit-mate formula `hτ`, `hη` and
+uniqueness of adjoints identify the supplied `τ` with the ringed forgetful tensor comparison;
+the ringed forgetful tensor coherence is applied on summands and descended along the K-flat
+localization. No conservativity argument replaces a constraint equation.
+
+## References
+
+* Stacks 06YS, 0FPT
 -/
 
 @[expose] public section
@@ -111,37 +127,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- Extend the native tensor adjoints to a symmetric monoidal structure, preserving
-an already specified invertible mate. No adjunction is constructed here, and
-there is no assertion about transposition on arbitrary arrows.
-
-Source: Stacks 06YS and 0FPT; native tensor lift, step 2, tensor summands and
-coefficient-unit comparison
-(blueprint: lem-sf-native-weil-tensor-coherence).
-
-Proof: use the Frobenius action-site presentation and its preserved K-flat
-resolutions. Transport the ringed closed symmetric tensor to native complexes.
-Its tensor is naturally isomorphic to T: for each K both tensor functors are
-left adjoint to the specified M.weilHom(K,-), and uniqueness of adjoints gives
-the isomorphism. The counit equation ha makes it natural also in K.
-Transport the monoidal constraints through this bifunctor isomorphism, taking
-T itself as the tensor functor. Explicitly use T on pairs of arrows for
-tensorHom, and T on (id,f) and (f,id) for the two whiskerings. Functoriality of
-T gives the whiskering axioms, so the resulting tensor functor equals T as
-stated, not just on objects. Transport the canonical coefficient unit and the
-Koszul symmetry through the same comparison. Pentagon, triangle, symmetry and
-hexagon follow from their ringed counterparts by conjugation.
-On the ordinary side hmonoidal fixes the monoidal constraints of S, while hS
-fixes its adjunction and signed symmetry on K-flat models. The unit-mate
-formula hτ, hη and adjunction uniqueness identify the supplied tau with the
-ringed forgetful tensor comparison after these transports. Apply the ringed
-forgetful tensor coherence on summands and descend it along the K-flat
-localization. This proves all four TensorCoherence fields for this very tau.
-Transport both canonical degree-zero coefficient identifications to delta and
-epsilon. The ringed localized unit equation, composed with the single-functor
-factorization of exact forgetting, gives exactly the displayed equality of
-unit isomorphisms. No conservativity argument replaces a constraint equation;
-the equations are conjugates of the ringed ones. The construction and the
-adjoint uniqueness comparisons also apply to zero objects and the empty site. -/
+an already specified invertible mate. -/
 theorem native_weil_tensor_coherence
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]

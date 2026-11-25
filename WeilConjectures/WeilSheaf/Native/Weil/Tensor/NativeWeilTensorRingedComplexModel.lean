@@ -10,8 +10,11 @@ public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRinge
 
 /-! # The ringed total-to-native-total middle comparison
 
-Source: Stacks 06YU and the representative step of native tensor transport.
 This module isolates the two middle squares of the transported model.
+
+## References
+
+* Stacks Project, Tag 06YU.
 -/
 
 @[expose] public noncomputable section
@@ -38,9 +41,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   (βB : @SymmetricCategory _ _ SB.monoidal)
   (cB : RingedDerivedTensorCoherence b.J b.R SB TB βB)
 
-/-- The ringed one-K-flat model followed by the localized native total comparison.
-Source: Stacks 06YU
-(blueprint: def-sf-native-weil-tensor-ringed-complex-model). -/
+/-- The ringed one-K-flat model followed by the localized native total comparison. -/
 def nativeWeilRingedTensorComplexModel
     (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (hP : NativeTensorKFlat k₀ l X T P) :
@@ -76,9 +77,7 @@ private theorem two_squares {C : Type*} [Category C]
     f ≫ a' ≫ b' = a ≫ b ≫ h := by
   rw [reassoc_of% ha, hb]
 
-/-- Naturality of the two middle comparison factors.
-Source: Stacks 06YU
-(blueprint: def-sf-native-weil-tensor-ringed-complex-model). -/
+/-- Naturality of the two middle comparison factors. -/
 theorem nativeWeilRingedTensorComplexModel_naturality
     (P Q P' Q' : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (hP : NativeTensorKFlat k₀ l X T P) (hP' : NativeTensorKFlat k₀ l X T P')

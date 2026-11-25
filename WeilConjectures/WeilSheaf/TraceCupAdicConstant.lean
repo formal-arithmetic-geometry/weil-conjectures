@@ -33,9 +33,8 @@ trace–cup structure is perfect
 (`AlgebraicGeometry.ProEtale.finiteAdicHCup_nondegenerate`) transported to `ℚ̄_ℓ`
 (`AlgebraicGeometry.ProEtale.isPerfPair_adicConstantHCup`).
 
-This is the coefficient stage `ℚ̄_ℓ` of blueprint `corollary-cup-product-pairing--1`,
-`corollary-degreewise-duality-over-fields` and `theorem-poincare-duality--9` for the trace–cup
-pairing of `corollary-cup-product-pairing--1`.
+This is the coefficient stage `ℚ̄_ℓ` of the cup product pairing and of Poincaré duality over
+fields.
 -/
 
 @[expose] public section
@@ -58,11 +57,10 @@ private lemma isPerfPair_of_subsingleton {K V W : Type*} [Field K] [AddCommGroup
     (P : V →ₗ[K] W →ₗ[K] K) : P.IsPerfPair :=
   .of_injective (fun _ _ _ ↦ Subsingleton.elim _ _) fun _ _ _ ↦ Subsingleton.elim _ _
 
-/-- **The trace–cup structure of `H^•(X ⊗ k̄, ℚ̄_ℓ)` is perfect** (the coefficient stage `ℚ̄_ℓ`
-of blueprint `corollary-cup-product-pairing--1` and `corollary-degreewise-duality-over-fields`). For
-`X₀` smooth proper geometrically connected of pure dimension `d` over `k₀` and a trace
-`tr : H^{2d} ≅ ℚ̄_ℓ` on which the geometric Frobenius acts by `q^d`, the cup product of
-`ℚ̄_ℓ`-cohomology and `tr` form a trace–cup structure whose pairings are perfect. -/
+/-- **The trace–cup structure of `H^•(X ⊗ k̄, ℚ̄_ℓ)` is perfect.** For `X₀` smooth proper
+geometrically connected of pure dimension `d` over `k₀` and a trace `tr : H^{2d} ≅ ℚ̄_ℓ` on which
+the geometric Frobenius acts by `q^d`, the cup product of `ℚ̄_ℓ`-cohomology and `tr` form a
+trace–cup structure whose pairings are perfect. -/
 theorem exists_traceCup_isPerfect_of_linearEquiv
     (tr : ((adicConstant k₀ l X).cohomology (2 * d)).carrier ≃ₗ[PadicAlgCl l] PadicAlgCl l)
     (htr : ∀ z, tr (((adicConstant k₀ l X).cohomology (2 * d)).frobenius z) =

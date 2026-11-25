@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.Tensor.TensorComparisonFromModels
 
 /-! # Native representative associativity with the canonical ordinary tensor
 
-Source: Stacks 06YU, 0FPT; direct native tensor transport on representatives.
+## References
+
+* Stacks Project, Tags 06YU and 0FPT.
 -/
 
 @[expose] public section
@@ -38,16 +40,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
   nativeWeilRingedTensorComplexModel
 
 -- Keep localization and total-tensor definitions folded in the concrete representative types.
-/-- Associativity after normalizing the ordinary monoidal structure.
-Source: Stacks 06YU, 0FPT
-(blueprint: lem-sf-native-weil-ringed-associator-normalized).
-
-Proof: invert the four given binary representative equations. Native tensor
-closure makes the inner and outer representatives K-flat. The canonical lax
-localization tensorator is invertible on these pairs. Paste the binary squares
-using inverse tensorator naturality, apply its associativity and the native
-associator model equation, and localize the signed chain comparison. Cancel the
-iterated model isomorphisms using associativity_transport. -/
+/-- Associativity after normalizing the ordinary monoidal structure. -/
 theorem nativeRingedAssociatorRepresentatives_normalized
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

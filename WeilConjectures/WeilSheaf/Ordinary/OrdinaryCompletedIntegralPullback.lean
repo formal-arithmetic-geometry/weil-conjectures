@@ -77,10 +77,6 @@ import all WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectC
 /-!
 # Ordinary and completed integral pullback
 
-Source: Bhatt--Scholze, Lemma 6.5.9, Proposition 6.6.11 and Remark 6.8.15;
-Stacks Project, Tags 06YY and 08TC
-(blueprint: lem-tw-ordinary-completed-integral-pullback).
-
 The ordinary pullback uses the adjoint of the completed coefficient map fixed by
 all finite projections. The comparison is fixed on flat-term K-flat representatives
 by the quotient augmentation and the zero second coordinate of the strict Roos cone.
@@ -94,6 +90,24 @@ by the quotient augmentation and the zero second coordinate of the strict Roos c
 ## Main statements
 
 * `ordinaryCompletedIntegralPullback`: constructibility and invertibility of this comparison.
+
+## Implementation details
+
+By the detailed stratified perfect characterization of integral constructible objects, the
+transport of `K` to the completed-coefficient presentation has finite constructible
+stratified pro-étale local models by bounded perfect complexes and is intrinsically complete.
+The normalized strict-model comparison identifies the transported ordinary pullback with
+`completedOrdinaryPullback`, which carries the stratified local models to `X`; this gives
+constructibility of the ordinary pullback. Intrinsic completeness makes the completion
+reflector unit invertible, and the strict tower theorem identifies this unit with
+`completedPullbackComparison` up to isomorphism. Isomorphisms are then reflected through the
+coefficient transport equivalence. No separatedness or base-field structure is used.
+
+## References
+
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*,
+  Lemma 6.5.9, Proposition 6.6.11, Remark 6.8.15
+* Stacks 06YY, 08TC
 -/
 
 @[expose] public noncomputable section
@@ -194,27 +208,7 @@ private theorem ordinaryIntegralStratifiedPerfectPullback
     U c ≪≫ e⟩⟩
 
 /-- Ordinary pullback of an integral constructible object is constructible, and its
-specified completion map is invertible, naturally and independently of its resolution.
-Source: Bhatt--Scholze, Proposition 6.6.11, Lemma 6.5.9 and Remark 6.8.15
-(blueprint: lem-tw-ordinary-completed-integral-pullback).
-Proof:
-1. By integral-stratified-perfect-characterization (detailed form) on Y, the transport of K
-to the completed-coefficient presentation has finite constructible stratified pro-etale
-local models by bounded perfect R-complexes, and is intrinsically complete.
-2. The normalized strict-model comparison gives a natural isomorphism a from the transported
-ordinary pullback to completedOrdinaryPullback, which is the datum pullback d.pull f.
-By integral-local-model-pullback, d.pull f carries the stratified local models of K to
-stratified local models on X; transport them back along a. The characterization on X then
-gives sfIntegralConstructible of the ordinary pullback, including intrinsic completeness.
-3. Intrinsic completeness is invariant under isomorphism, so completedOrdinaryPullback of
-the transport of K is intrinsically complete. Hence the completion reflector unit there is
-invertible (essential image of the fully faithful complete inclusion). The actual strict
-tower theorem identifies this unit with completedPullbackComparison followed by an
-isomorphism, so completedPullbackComparison is invertible.
-4. The strict-model comparison equation says transport of the specified comparison followed
-by the isomorphism b equals a followed by completedPullbackComparison. Cancel b and reflect
-isomorphisms through the detailed coefficient transport, an equivalence.
-No separatedness or base-field structure is used. -/
+specified completion map is invertible, naturally and independently of its resolution. -/
 theorem ordinaryCompletedIntegralPullback
     [IsNoetherian X] [IsNoetherian Y]
     (_hXdim : ∃ n : ℕ, topologicalKrullDim X ≤ n)

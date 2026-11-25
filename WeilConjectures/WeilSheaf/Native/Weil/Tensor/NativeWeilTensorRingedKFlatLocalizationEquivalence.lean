@@ -15,6 +15,10 @@ import Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 Functorial native K-flat replacements give a localized equivalence by the
 fully faithful inclusion criterion. No fraction calculus on complexes is used.
+
+## References
+
+* Stacks Project, Tags 06YS, 06YU and 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -32,19 +36,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, P.HasMapBifunctor Q T]
 
 include b in
-/-- The localization construction for native K-flat complexes is an equivalence.
-Source: Stacks 06YS, 06YU and 0FPT.
-(blueprint: lem-sf-native-weil-tensor-ringed-kflat-localization-equivalence).
-
-Proof: the normalized tensor-Hom adjunction and ringed bridge give a functorial
-native K-flat replacement with a natural quasi-isomorphic augmentation. Lift
-its functor to the full subcategory of native K-flat complexes. The inclusion
-is fully faithful, its weak equivalences are induced, and quasi-isomorphisms
-have two-out-of-three. The functorial-left-resolution criterion therefore makes
-the inclusion a localized equivalence. Since the ambient derived quotient is a
-localization, the restricted quotient is one too, giving the equivalence field.
-The argument covers unbounded and zero complexes.
--/
+/-- The localization construction for native K-flat complexes is an equivalence. -/
 theorem native_weil_tensor_ringed_kflat_localization_equivalence
     (adj : T ⊣₂ ihomBifunctor k₀ l X)
     (hInv :

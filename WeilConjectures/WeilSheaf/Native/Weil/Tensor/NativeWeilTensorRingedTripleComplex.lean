@@ -28,7 +28,11 @@ import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-! # Explicit reassociation of native total tensor complexes
 
-Source: Stacks 0FPQ, 06YU, 0FPT. All constructions precede derived localization.
+All constructions precede derived localization.
+
+## References
+
+* Stacks Project, Tags 0FPQ, 06YU and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -50,13 +54,11 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   (adj : T ⊣₂ ihomBifunctor k₀ l X)
   (A : NativeWeilRingedTensorComplexes b T adj)
 
-/-- The total in actual tensor-factor order, reversing the curried parameters.
-Source: Stacks 0FPQ (blueprint: lem-sf-native-weil-ringed-triple-complex). -/
+/-- The total in actual tensor-factor order, reversing the curried parameters. -/
 abbrev nativeTensorComplex (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :=
   CochainComplex.mapBifunctor Q P T
 
-/-- Identify the left-associated total with its ringed counterpart.
-Source: Stacks 0FPQ (blueprint: lem-sf-native-weil-ringed-triple-complex). -/
+/-- Identify the left-associated total with its ringed counterpart. -/
 def nativeRingedTripleLeft (P Q N : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
     (b.native.functor.mapHomologicalComplex (.up ℤ)).obj
         (nativeTensorComplex T (nativeTensorComplex T P Q) N) ≅
@@ -68,8 +70,7 @@ def nativeRingedTripleLeft (P Q N : CochainComplex (ProEtaleWeilSheaf k₀ l X) 
   A.chain N (nativeTensorComplex T P Q) ≪≫
     (coefficientTotalTensor b.J b.R).mapIso ((A.chain Q P).prod (Iso.refl _))
 
-/-- Identify the right-associated total with its ringed counterpart.
-Source: Stacks 0FPQ (blueprint: lem-sf-native-weil-ringed-triple-complex). -/
+/-- Identify the right-associated total with its ringed counterpart. -/
 def nativeRingedTripleRight (P Q N : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
     (b.native.functor.mapHomologicalComplex (.up ℤ)).obj
         (nativeTensorComplex T P (nativeTensorComplex T Q N)) ≅
@@ -81,8 +82,7 @@ def nativeRingedTripleRight (P Q N : CochainComplex (ProEtaleWeilSheaf k₀ l X)
   A.chain (nativeTensorComplex T Q N) P ≪≫
     (coefficientTotalTensor b.J b.R).mapIso ((Iso.refl _).prod (A.chain N Q))
 
-/-- Reassociate by the actual ringed cochain associator, then take its unique preimage.
-Source: Stacks 0FPQ (blueprint: lem-sf-native-weil-ringed-triple-complex). -/
+/-- Reassociate by the actual ringed cochain associator, then take its unique preimage. -/
 def nativeRingedAssociatorComplex (P Q N : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
     nativeTensorComplex T (nativeTensorComplex T P Q) N ≅
       nativeTensorComplex T P (nativeTensorComplex T Q N) :=
@@ -105,12 +105,7 @@ def nativeRingedAssociatorComplex (P Q N : CochainComplex (ProEtaleWeilSheaf k�
       (nativeRingedTripleRight b T adj A P Q N).symm)
 
 include b adj A in
-/-- Native K-flat complexes are closed under their actual tensor total.
-Source: Stacks 06YU (blueprint: lem-sf-native-weil-ringed-triple-complex).
-
-Proof: the ringed comparison identifies the image of the tensor with the tensor
-of the images. The latter is K-flat. Apply its acyclic-test property to an image
-test, and reflect acyclicity through the additive equivalence. -/
+/-- Native K-flat complexes are closed under their actual tensor total. -/
 theorem nativeTensorComplex_kflat
     (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (hP : NativeTensorKFlat k₀ l X T P) (hQ : NativeTensorKFlat k₀ l X T Q) :

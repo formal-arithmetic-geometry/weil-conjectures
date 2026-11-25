@@ -10,8 +10,8 @@ public import WeilConjectures.WeilSheaf.WeilFourierKernelData
 /-!
 # The unshifted, middle-factor Fourier convolution operator
 
-Source: convolution-kernel proof, Steps 1--4.
-(blueprint: def-fd-weil-convolution-operator)
+Data for the convolution kernel of the Fourier transform on affine space: the phase on the
+triple product and the complement of the diagonal.
 -/
 
 @[expose] public section
@@ -26,17 +26,13 @@ namespace AlgebraicGeometry.WeilComplex
 
 noncomputable section
 
-/-- The phase `r₁₂* b - r₂₃* b` on the triple product, equivalently
-`⟨x-z,y⟩`. Source: convolution-kernel proof, Step 1.
-(blueprint: def-fd-weil-convolution-operator) -/
+/-- The phase `r₁₂* b - r₂₃* b` on the triple product, equivalently `⟨x-z,y⟩`. -/
 abbrev affineFourierInversePhase (k₀ : Type u) [Field k₀] (n : Type u) [Fintype n] :
     Γ(affineFourierTriple k₀ n, ⊤) :=
   (affineFourierR₁₂ k₀ n).appTop (AffineSpace.stdPairing n (affineFourierBase k₀)) -
     (affineFourierR₂₃ k₀ n).appTop (AffineSpace.stdPairing n (affineFourierBase k₀))
 
-/-- The open complement of the closed diagonal. In rank zero it is empty.
-Source: convolution-kernel proof, Steps 2--3.
-(blueprint: def-fd-weil-convolution-operator) -/
+/-- The open complement of the closed diagonal. In rank zero it is empty. -/
 def affineFourierDiagonalComplement (k₀ : Type u) [Field k₀] (n : Type u) :
     (affineFourierPlane k₀ n).Opens :=
   ⟨(Set.range (affineFourierDiagonal k₀ n))ᶜ,

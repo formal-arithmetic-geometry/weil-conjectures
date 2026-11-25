@@ -11,8 +11,9 @@ import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorLift
 
 /-! # Tensor transport for a fixed native product-Hom comparison
 
-Source: native comparison steps 3--7; Stacks 06YS, 08J9, 0A97
-(blueprint: lem-sf-weil-native-tensor-transport).
+## References
+
+* Stacks Project, Tags 06YS, 08J9 and 0A97.
 -/
 
 @[expose] public section
@@ -57,34 +58,8 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- Transport the ringed-site derived tensor to the specified row-sign Hom models.
-This step constructs tensor and its normalized adjunction; it asserts neither
-an evaluation square nor biduality compatibility.
-
-Source: native comparison steps 3--7; Stacks 06YS, 08J9 and 0A97
-(blueprint: lem-sf-weil-native-tensor-transport).
-
-Proof: use the Frobenius action-site presentation and its resolution assertions.
-On its two module categories apply the ringed derived closed symmetric monoidal
-result. Transfer along the additive equivalences of module categories and then
-their termwise localizations. Compare the recorded Hom with the supplied M by
-their product-total representatives into K-injective targets. These comparisons
-are natural in both variables and determine the adjunction on M. Choose the
-adjunction after this comparison, so its uncurrying uses precisely the supplied
-representative maps, rather than an independently chosen Hom equivalence.
-The ringed forgetful tensor transposition result applies: action-site forgetting
-preserves products, coproducts, K-injectives and flat-term K-flats. Its tensor
-comparison localizes the underlying identity on each summand, so it preserves
-associativity, the unit and the Koszul symmetry. Identify its Hom comparison
-with η using the assumed representative square, first on K-injective pairs and
-then on all derived objects by localization. Transport its normalized uncurry
-formula through the two sign conversions. The native row-sign differential and
-the reversed curried tensor order give the unsigned componentwise evaluation
-in NativeAdjunctionNormalization. On ordinary total complexes this gives
-NativeOrdinaryTensorModels. The unit is the actual coefficient module in degree
-zero; its comparison is therefore unitComparison, including the two displayed
-single-functor factors. The normalized uncurry equality at the identity Hom
-arrow identifies η with nativeHomComparison. The tensor coherence and symmetry
-squares follow from their summand equations by derived tensor descent. -/
+This step constructs the tensor and its normalized adjunction; it asserts neither
+an evaluation square nor biduality compatibility. -/
 theorem native_tensor_transport
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]

@@ -124,8 +124,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # A ringed presentation of the underived native forgetful functor
 
-Source: Stacks 00W0, 00YV, 06YS, 06YU and the Frobenius action-site construction.
 This record contains no native derived tensor or derived tensor comparison.
+
+## References
+
+* Stacks Project, Tags 00W0, 00YV, 06YS and 06YU.
 -/
 
 @[expose] public section
@@ -167,33 +170,7 @@ private theorem action_equivalence_exists
     (P.modules.functor ⋙ Endofunctor.IsoAlgebra.mapOfNatIso A.comparison).IsEquivalence
   exact ⟨(A.toWeil P).asEquivalence, rfl⟩
 
-/-- Present native forgetting on the Frobenius action site, before deriving any tensor.
-
-Source: steps 1 and 2 of native tensor geometry; Stacks 00W0, 00YV, 06YS, 06YU,
-and the action-site realization in lem-sf-weil-frobenius-action-resolutions.
-(blueprint: lem-sf-native-weil-tensor-ringed-bridge).
-
-Proof: take the small ordinary pro-etale site and its continuous coefficient ring
-from the Frobenius realization. Form the semidirect action site with integer-labelled
-arrows. Restriction to degree-zero arrows is the functor forget. The section-module
-comparison on the ordinary site intertwines the two Frobenius pullbacks: both pull back
-locally finite-subextension functions by the same precomposition. Lift it to fixed
-pairs and compose with the action-site restriction equivalence to get native; its
-ordinary counterpart gives ordinary. Retain its canonical tensor coherence through
-the explicit inverse-Hom comparison. Their square is the restriction identification.
-All component maps are the actual module maps, so the equivalences and restriction
-are additive. Restriction creates limits and colimits and is exact; its exact orbit-sum
-left adjoint implies preservation of K-injectives. The pure-tensor and local-map
-formulas in the action-site presentation give underived. On a local Hom section,
-both paths in hom_square are conjugation by the source and target Frobenius actions;
-evaluation determines this comparison uniquely. Native Hom from adicConstant is
-the identity. Transport it through the equivalence and use uniqueness of tensor's
-left adjoint; evaluation at the unit gives nativeUnit. Finally ringed
-pullback with invertible structural map preserves flat-term K-flat resolutions,
-which is precisely preserves_flat_models. This condition is unchanged between the
-normalized action-site presentations: their restriction equivalences preserve the
-same tensor, coproducts and acyclic complexes. None of these operations uses a native
-derived tensor. The zero module, empty site and all unbounded complexes are included. -/
+/-- Present native forgetting on the Frobenius action site, before deriving any tensor. -/
 theorem native_weil_tensor_ringed_bridge
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

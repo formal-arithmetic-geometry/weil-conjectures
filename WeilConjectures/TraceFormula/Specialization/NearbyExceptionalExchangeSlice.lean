@@ -27,8 +27,7 @@ along compatible coordinates, `NearbyCyclesModel.IsTraitModelOfGenericBase.gener
 Write `α_M : p_M^* Ψ_M ⟶ Ψ_{M''} c_M^*` and `α_N` for the pullback exchanges of `s_M` and `s_N`
 (the slice exchanges, `NearbyCyclesModel.IsTraitModelOfGenericBase.genericSliceExchange`).
 
-This file proves that the exchanges of `φ` and of `φ''` are compatible with `α_M` and `α_N`
-(blueprint `lemma-nearby-duality-slice--1`, "the map `θ`"):
+This file proves that the exchanges of `φ` and of `φ''` are compatible with `α_M` and `α_N`:
 
 * the **pushforward exchanges** `χ_φ : Ψ_M Ri₁_* ⟶ Ri₂_* Ψ_N` and `χ_{φ''}`, through the base
   change morphisms of `Ri₁_*` and `Ri₂_*`
@@ -52,7 +51,7 @@ This file proves that the exchanges of `φ` and of `φ''` are compatible with `�
   Ψ_{N''} c_N^* Ri₁^! K --Ψ_{N''}(γ)--> Ψ_{N''} Ri₁''^! c_M^* K --β_{φ''}--> Ri₂''^! Ψ_{M''} c_M^* K
   ```
 
-## Proofs
+## Implementation details
 
 Both squares are cubes of mates (`CategoryTheory.mateEquiv_app_cube`). For the pushforward
 exchanges the cube of left adjoints is the square law of the pullback exchanges for the two
@@ -62,6 +61,9 @@ change morphisms are the mates of the pullback comparisons
 adjunctions are `Ri_* ⊣ Ri^!`, the exceptional exchanges are the mates of `χ⁻¹`
 (`CategoryTheory.mateEquiv_ofNatIsoLeft_ofNatIsoLeft_app`), the maps `γ` the mates of the inverse
 proper base change morphisms, and the cube of left adjoints is the pushforward square inverted.
+
+The auxiliary lemmas take the mates and base change morphisms as variables characterized by
+equations, so that elaboration never unfolds them.
 
 -/
 
@@ -111,7 +113,7 @@ variable {DY DX DY' DX' EY EX EY' EX' : Type*} [Category* DY] [Category* DX] [Ca
   {PY : DY ⥤ EY} {PX : DX ⥤ EX} {PY' : DY' ⥤ EY'} {PX' : DX' ⥤ EX'}
 
 /-- `CategoryTheory.mateEquiv_app_cube` with the four mates as variables characterized by their
-definitions, so that it can be instantiated without unfolding them. -/
+definitions. -/
 lemma mateEquiv_app_cube_of_eq (af : Lf ⊣ Rf) (af' : Lf' ⊣ Rf') (bf : Mf ⊣ Sf)
     (bf' : Mf' ⊣ Sf') (σr : Gr ⋙ Lf' ⟶ Lf ⋙ Hr) (σs : Gs ⋙ Mf' ⟶ Mf ⋙ Hs)
     (αf : PY ⋙ Mf ⟶ Lf ⋙ PX) (αf' : PY' ⋙ Mf' ⟶ Lf' ⋙ PX')
@@ -250,8 +252,7 @@ local notation "𝐐" => Profinite.padicAlgClRingObj.{u} ℓ
 include hαM hαN in
 /-- `NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_slice_app` for arbitrary ambient
 base change morphisms `bc₁`, `bc₂` satisfying the ambient identity, restricted to bounded
-constructible complexes by `NearbyCyclesModel.liftExchange`: kept abstract, so that elaboration
-never unfolds the base change morphisms. -/
+constructible complexes by `NearbyCyclesModel.liftExchange`. -/
 private lemma boundedConstructiblePushforwardExchange_slice_app_aux
     (bc₁ : R((i₁.left)_*⟦𝐐⟧) ⋙ L((cM)^*⟦𝐐⟧) ⟶ L((cN)^*⟦𝐐⟧) ⋙ R((i₁''.left)_*⟦𝐐⟧))
     (bc₂ : R((i₂.left)_*⟦𝐐⟧) ⋙ L((pM)^*⟦𝐐⟧) ⟶ L((pN)^*⟦𝐐⟧) ⋙ R((i₂''.left)_*⟦𝐐⟧))
@@ -299,10 +300,9 @@ private lemma boundedConstructiblePushforwardExchange_slice_app_aux
   transport_exact key K.obj
 
 include htot hgen hαM hαN in
-/-- **The pushforward exchanges and slicing** (blueprint `lemma-nearby-duality-slice--1`, "the map
-`θ`"): for morphisms of models `φ : N ⟶ M`, `φ'' : N'' ⟶ M''`, `s_M : M'' ⟶ M` and
-`s_N : N'' ⟶ N` with `s_N ≫ φ = φ'' ≫ s_M`, and the pullback exchanges `α_M`, `α_N` of `s_M`,
-`s_N` on bounded constructible complexes,
+/-- **The pushforward exchanges and slicing**: for morphisms of models `φ : N ⟶ M`,
+`φ'' : N'' ⟶ M''`, `s_M : M'' ⟶ M` and `s_N : N'' ⟶ N` with `s_N ≫ φ = φ'' ≫ s_M`, and the
+pullback exchanges `α_M`, `α_N` of `s_M`, `s_N` on bounded constructible complexes,
 `Ri₂''_*(α_N) ∘ bc ∘ p_M^*(χ_φ) = χ_{φ''} ∘ Ψ_{M''}(bc) ∘ α_M`, where `bc` are the base change
 morphisms of `Ri₂_*` along `p_M` and of `Ri₁_*` along `c_M`. -/
 theorem Hom.boundedConstructiblePushforwardExchange_slice_app
@@ -380,8 +380,7 @@ lemma exceptionalExchange_app_eq_mateEquiv_inv
   simp
 
 include htot hgen hαM hαN in
-/-- **The exceptional exchanges and slicing** (blueprint `lemma-nearby-duality-slice--1`, "the map
-`θ`"): in the situation of
+/-- **The exceptional exchanges and slicing**: in the situation of
 `NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_slice_app`, for proper
 `i₁, i₂, i₁'', i₂''`, cartesian squares of bases and of special fibres, invertible proper
 exchanges `χ_φ`, `χ_{φ''}` and compact-support exchanges `ν`, `ν''` inverse to them, the

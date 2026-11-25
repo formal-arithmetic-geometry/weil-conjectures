@@ -17,14 +17,20 @@ a Weil complex `K` on `X` gives a distinguished triangle
 
 `Ra_{U!} j^*K ⟶ Ra_{X!} K ⟶ Ra_{Z!} i^*K ⟶`
 
-of Weil complexes on `Spec k₀` (blueprint `prop-functor-package`, clause 3). This file deduces it
-and identifies the pullback of a Weil sheaf placed in degree zero with the pullback of the sheaf.
+of Weil complexes on `Spec k₀`. This file deduces it and identifies the pullback of a Weil sheaf
+placed in degree zero with the pullback of the sheaf.
 
 ## Main declarations
 
 - `AlgebraicGeometry.WeilComplex.exists_distTriang_derivedLowerShriek_structure_openClosed`:
   the triangle.
 - `AlgebraicGeometry.WeilSheaf.toComplexCompUpperStarIso`: `φ^* (F[0]) ≅ (φ^* F)[0]`.
+
+## Implementation details
+
+The triangle is obtained by applying `Ra_{X!}` to the open–closed recollement triangle
+(`AlgebraicGeometry.WeilComplex.exists_distTriang_derivedLowerShriek_openClosed` for the
+structure morphism `a_X`), using `a_X ∘ j = a_U` and `a_X ∘ i = a_Z`.
 -/
 
 @[expose] public section
@@ -53,11 +59,7 @@ noncomputable def WeilComplex.derivedLowerShriekIsoOfEq {X Y : Scheme.{u}}
 complement `j : U ↪ X` of separated `k₀`-schemes of finite type and a Weil complex `K` on `X`,
 there is a distinguished triangle of Weil complexes on `Spec k₀`
 
-`Ra_{U!} j^*K ⟶ Ra_{X!} K ⟶ Ra_{Z!} i^*K ⟶ Ra_{U!} j^*K[1]`,
-
-obtained by applying `Ra_{X!}` to the open–closed recollement triangle `j_!j^*K → K → i_*i^*K →`
-(`AlgebraicGeometry.WeilComplex.exists_distTriang_derivedLowerShriek_openClosed` for the structure
-morphism `a_X`), using `a_X ∘ j = a_U` and `a_X ∘ i = a_Z`. -/
+`Ra_{U!} j^*K ⟶ Ra_{X!} K ⟶ Ra_{Z!} i^*K ⟶ Ra_{U!} j^*K[1]`. -/
 theorem WeilComplex.exists_distTriang_derivedLowerShriek_structure_openClosed {U X Z : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
     [Z.Over (Spec (CommRingCat.of k₀))]

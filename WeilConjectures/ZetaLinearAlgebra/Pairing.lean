@@ -49,6 +49,8 @@ the pairing is Poincaré duality and `c = qᵈ`.
 * `LinearMap.det_mul_det_of_similitude`: the determinants of the two members of a similitude
   pair multiply to `c ^ dim V`.
 
+## Implementation details
+
 An auxiliary polynomial lemma `Polynomial.roots_reverse_of_monic` (the roots of the reverse of
 a split monic polynomial with nonzero constant coefficient are the inverses of its roots) also
 lives here: `#find_home` places it in this file, since it combines the two mirror files
@@ -63,9 +65,7 @@ open Module Polynomial
 namespace Polynomial
 
 /-- The roots of the reverse of a monic split polynomial with nonzero constant coefficient are
-the inverses of its roots. The splitting hypothesis is stated as `f.Splits` rather than as
-`[IsAlgClosed L]`, so that it also applies to a polynomial that happens to split over a field
-that is not algebraically closed. -/
+the inverses of its roots. -/
 theorem roots_reverse_of_monic {L : Type*} [Field L] {f : L[X]} (hf : f.Monic) (hsp : f.Splits)
     (h0 : f.coeff 0 ≠ 0) : f.reverse.roots = f.roots.map (·⁻¹) := by
   have hmem : (0 : L) ∉ f.roots := by
@@ -168,8 +168,7 @@ theorem dualMap_mul_conj_of_similitude :
 omit [FiniteDimensional L W] in
 include hc in
 /-- `G` is conjugate, by the isomorphism `W ≃ₗ[L] Dual L V` given by the pairing, to the
-endomorphism `c • (F.dualMap)⁻¹` of the dual of `V`: the transpose of `F` is invertible, and
-`G` corresponds to `c` times the transpose of its inverse. -/
+endomorphism `c • (F.dualMap)⁻¹` of the dual of `V`. -/
 theorem conj_toPerfPair_eq_smul_inverse_dualMap_of_similitude :
     p.flip.toPerfPair.conj G = c • Ring.inverse F.dualMap := by
   set e := p.flip.toPerfPair with he
@@ -214,11 +213,8 @@ include hc in
 /-- **The reciprocal root identity along a field embedding.** After mapping the reverse
 characteristic polynomials into an algebraically closed extension field `M` along a ring
 homomorphism `ι`, the roots of `det (1 - t • G)` are the images of the roots of
-`det (1 - t • F)` under `z ↦ (ι c * z)⁻¹`. Unlike `charpolyRev_roots_of_similitude`, the base
-field `L` is not assumed algebraically closed.
-
-With `M = ℂ`, `c = qᵈ` and `G` the endomorphism dual to `F`, this is literally the shape of
-`AlgebraicGeometry.WeilFunctionalEquation`. -/
+`det (1 - t • F)` under `z ↦ (ι c * z)⁻¹`. The base field `L` is not assumed algebraically
+closed. -/
 theorem roots_map_charpolyRev_of_similitude {M : Type*} [Field M] [IsAlgClosed M] (ι : L →+* M) :
     (G.charpolyRev.map ι).roots = (F.charpolyRev.map ι).roots.map fun z ↦ (ι c * z)⁻¹ := by
   have hdet : IsUnit (LinearMap.det F) := isUnit_det_of_similitude hc hFG
@@ -252,8 +248,7 @@ include hc in
 /-- **The reciprocal eigenvalues along a field embedding.** After mapping the characteristic
 polynomials into an algebraically closed extension field `M` along a ring homomorphism `ι`,
 the eigenvalues of `G`, with multiplicity, are the images of the eigenvalues of `F` under
-`α ↦ ι c / α`. Unlike `charpoly_roots_of_similitude`, the base field `L` is not assumed
-algebraically closed. -/
+`α ↦ ι c / α`. The base field `L` is not assumed algebraically closed. -/
 theorem roots_map_charpoly_of_similitude {M : Type*} [Field M] [IsAlgClosed M] (ι : L →+* M) :
     (G.charpoly.map ι).roots = (F.charpoly.map ι).roots.map fun z ↦ ι c / z := by
   have h := roots_map_charpolyRev_of_similitude hc hFG ι
@@ -267,13 +262,9 @@ theorem roots_map_charpoly_of_similitude {M : Type*} [Field M] [IsAlgClosed M] (
   exact Multiset.map_congr rfl fun z _ ↦ (div_eq_mul_inv _ _).symm
 
 include hc in
-/-- **The degrees along a field embedding.** Both members of a similitude pair are invertible,
-so their reverse characteristic polynomials keep the full degree `dim V = dim W` after their
-coefficients are mapped into an extension field `M` along a ring homomorphism `ι`.
-
-Together with `LinearMap.roots_map_charpolyRev_of_similitude` (the reciprocal root identity) and
-`LinearMap.coeff_zero_charpolyRev` (the constant coefficient is `1`, so neither polynomial
-vanishes at `0`), this is the whole of the blueprint's `cor:zla-reciprocal-roots-embedding`. -/
+/-- **The degrees along a field embedding.** The reverse characteristic polynomials of both
+members of a similitude pair keep the full degree `dim V = dim W` after their coefficients are
+mapped into an extension field `M` along a ring homomorphism `ι`. -/
 theorem natDegree_map_charpolyRev_of_similitude {M : Type*} [Field M] (ι : L →+* M) :
     (F.charpolyRev.map ι).natDegree = finrank L V ∧
       (G.charpolyRev.map ι).natDegree = finrank L V :=

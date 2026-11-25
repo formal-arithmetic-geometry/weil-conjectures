@@ -26,14 +26,16 @@ which is the linear algebra input to the cohomological factorisation of a zeta f
 file proves it in two forms: a logarithmic derivative form, valid over any field, and the
 exponential form above, over a field of characteristic zero.
 
+It also records the *trace series* of a Frobenius module, the generating series whose
+exponential is `det (1 - t F)⁻¹`, and the alternating determinant of a finite graded family
+of Frobenius modules, which is the local factor of an Euler product.
+
+## Implementation details
+
 The proof reduces to an algebraically closed field, where `det (1 - t F) = ∏ (1 - λ t)` and
 `tr (F ^ n) = ∑ λ ^ n` are both expressed through the multiset of roots of the characteristic
 polynomial, so that everything follows from the single factor case
 `t * (1 - λ t)' = - (∑_{n ≥ 1} λ ^ n t ^ n) (1 - λ t)`.
-
-It also records the *trace series* of a Frobenius module, the generating series whose
-exponential is `det (1 - t F)⁻¹`, and the alternating determinant of a finite graded family
-of Frobenius modules, which is the local factor of an Euler product.
 
 ## Main definitions
 
@@ -203,8 +205,7 @@ theorem X_mul_derivative_charpolyRev (F : Module.End K V) :
 
 /-- **The determinant-trace identity**, exponential form:
 `det (1 - t F)⁻¹ = exp (∑_{n ≥ 1} tr (F ^ n) t ^ n / n)` for an endomorphism `F` of a finite
-dimensional vector space over a field of characteristic zero
-(blueprint: `lemma-logarithm-determinant`, `lemma-logarithm-determinant--1`). -/
+dimensional vector space over a field of characteristic zero. -/
 theorem inv_charpolyRev_eq_exp [CharZero K] (F : Module.End K V) :
     (F.charpolyRev : K⟦X⟧)⁻¹ =
       (PowerSeries.exp K).subst
@@ -256,9 +257,7 @@ theorem inv_charpolyRev_eq_exp [CharZero K] (F : Module.End K V) :
 
 `tr_F(T) = ∑_{n ≥ 1} tr (F ^ n ∣ V) T ^ n / n`
 
-of an endomorphism `F` of a finite dimensional vector space. Its companion identity
-`exp (tr_F(T)) = det (1 - T F)⁻¹` is `LinearMap.inv_charpolyRev_eq_exp`, proved above
-(blueprint: `lemma-logarithm-determinant`). -/
+of an endomorphism `F` of a finite dimensional vector space. -/
 noncomputable def traceSeries (F : Module.End K V) : K⟦X⟧ :=
   PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n) / n
 
@@ -270,8 +269,7 @@ theorem coeff_traceSeries (F : Module.End K V) (n : ℕ) :
   rw [traceSeries, PowerSeries.coeff_mk]
 
 omit [FiniteDimensional K V] in
-/-- The trace series has no constant term: it lies in `T K⟦T⟧` (blueprint:
-`theorem-weil-conjectures-smooth-proper-schemes--7`). -/
+/-- The trace series has no constant term: it lies in `T K⟦T⟧`. -/
 @[simp]
 theorem constantCoeff_traceSeries (F : Module.End K V) :
     PowerSeries.constantCoeff (traceSeries F) = 0 := by
@@ -280,8 +278,7 @@ theorem constantCoeff_traceSeries (F : Module.End K V) :
 /-- **The determinant-trace identity**, logarithmic form: the formal logarithm of
 `det (1 - t F)` is minus the trace series,
 `log det (1 - t F) = - ∑_{n ≥ 1} tr (F ^ n) t ^ n / n`, for an endomorphism `F` of a finite
-dimensional vector space over a field of characteristic zero. No semisimplicity is assumed
-(blueprint: `lemma-logarithm-determinant--1`, `lemma-logarithm-determinant`). -/
+dimensional vector space over a field of characteristic zero. -/
 theorem logOf_charpolyRev [CharZero K] (F : Module.End K V) :
     PowerSeries.logOf (F.charpolyRev : K⟦X⟧) = -traceSeries F := by
   set P : K⟦X⟧ := (F.charpolyRev : K⟦X⟧) with hP
@@ -317,17 +314,13 @@ variable {W : ℤ → Type*} [∀ i, AddCommGroup (W i)] [∀ i, Module K (W i)]
 `str_F(T) = ∑_{n ≥ 1} (∑_i (-1) ^ i tr (F i ^ n ∣ W i)) T ^ n / n`
 
 of a finite graded family `(W i, F i)` of Frobenius modules, indexed by a finite set `s` of
-integers: the alternating sum of the individual trace series `LinearMap.traceSeries (F i)`,
-the sign being the parity of the degree `i` via `Int.negOnePow`
-(blueprint: `lemma-logarithm-determinant`). -/
+integers: the alternating sum of the individual trace series `LinearMap.traceSeries (F i)`. -/
 noncomputable def alternatingTraceSeries (s : Finset ℤ) (F : ∀ i, Module.End K (W i)) : K⟦X⟧ :=
   ∑ i ∈ s, (i.negOnePow : ℤ) • traceSeries (F i)
 
 omit [∀ i, FiniteDimensional K (W i)] in
 /-- The `n`-th coefficient of the alternating trace series is
-`(∑_i (-1) ^ i tr (F i ^ n ∣ W i)) / n`, and `0` for `n = 0`: the two descriptions
-`∑_{n ≥ 1} (∑_i (-1) ^ i tr (F i ^ n)) T ^ n / n = ∑_i (-1) ^ i tr_{F i}(T)` of the
-alternating trace series agree (blueprint: `theorem-weil-conjectures-smooth-proper-schemes--7`). -/
+`(∑_i (-1) ^ i tr (F i ^ n ∣ W i)) / n`, and `0` for `n = 0`. -/
 theorem coeff_alternatingTraceSeries (s : Finset ℤ) (F : ∀ i, Module.End K (W i)) (n : ℕ) :
     PowerSeries.coeff n (alternatingTraceSeries s F) =
       if n = 0 then 0
@@ -341,8 +334,7 @@ theorem coeff_alternatingTraceSeries (s : Finset ℤ) (F : ∀ i, Module.End K (
       div_eq_mul_inv, mul_assoc]
 
 omit [∀ i, FiniteDimensional K (W i)] in
-/-- The alternating trace series has no constant term: it lies in `T K⟦T⟧` (blueprint:
-`theorem-weil-conjectures-smooth-proper-schemes--7`). -/
+/-- The alternating trace series has no constant term: it lies in `T K⟦T⟧`. -/
 @[simp]
 theorem constantCoeff_alternatingTraceSeries (s : Finset ℤ) (F : ∀ i, Module.End K (W i)) :
     PowerSeries.constantCoeff (alternatingTraceSeries s F) = 0 := by

@@ -14,7 +14,23 @@ public import WeilConjectures.ZetaLinearAlgebra.Rationality
 
 Let `X₀` be a scheme of finite type over the finite field `k₀ = 𝔽_q`. Then its zeta series
 `Z(X₀, T)` is a rational function: `B(T) Z(X₀, T) = A(T)` for integer polynomials `A, B` with
-`B(0) = 1` (blueprint `corollary-point-counting-zeta-function--7`).
+`B(0) = 1`.
+
+## Main statements
+
+- `AlgebraicGeometry.Scheme.Hom.zetaSeries_mul_zetaSeries_eq`: multiplicativity of the zeta
+  series with respect to additive relations between point counts.
+- `AlgebraicGeometry.Scheme.Hom.pointCount_sup_add_pointCount_inf`: inclusion-exclusion for the
+  point counts of open subschemes.
+- `AlgebraicGeometry.Scheme.Hom.exists_int_mul_zetaSeries_eq_of_isSeparated`: rationality of the
+  zeta series in the separated case, via the trace formula.
+- `AlgebraicGeometry.Scheme.Hom.exists_int_mul_zetaSeries_eq`: rationality of the zeta series of
+  a scheme of finite type over a finite field.
+- `AlgebraicGeometry.Scheme.Hom.finiteDimensional_shiftSpan_zetaSeries_and_exists_rat` and
+  `AlgebraicGeometry.Scheme.Hom.exists_int_zetaSeries_and_exists_rat_mul_eq`: finite Hankel rank,
+  integrality and rationality of the zeta series.
+
+## Implementation details
 
 For `X₀` separated, the Grothendieck–Lefschetz trace formula with compact supports
 (`AlgebraicGeometry.WeilSheaf.pointCount_eq_finsum_trace_compactlySupportedCohomology`) writes
@@ -27,20 +43,8 @@ point counts satisfy the inclusion-exclusion `N(W ∪ U) + N(W ∩ U) = N(W) + N
 `Z(W ∪ U) Z(W ∩ U) = Z(W) Z(U)`; if `U` is affine then `U` and `W ∩ U` are separated, and
 rationality propagates to `W ∪ U`.
 
-## Main statements
-
-- `AlgebraicGeometry.Scheme.Hom.zetaSeries_mul_zetaSeries_eq`: multiplicativity of the zeta
-  series with respect to additive relations between point counts.
-- `AlgebraicGeometry.Scheme.Hom.pointCount_sup_add_pointCount_inf`: inclusion-exclusion for the
-  point counts of open subschemes.
-- `AlgebraicGeometry.Scheme.Hom.exists_int_mul_zetaSeries_eq_of_isSeparated`: rationality of the
-  zeta series in the separated case, via the trace formula.
-- `AlgebraicGeometry.Scheme.Hom.exists_int_mul_zetaSeries_eq`: rationality of the zeta series of
-  a scheme of finite type over a finite field (`corollary-point-counting-zeta-function--7`).
-- `AlgebraicGeometry.Scheme.Hom.finiteDimensional_shiftSpan_zetaSeries_and_exists_rat`
-  (`corollary-point-counting-zeta-function--7`) and
-  `AlgebraicGeometry.Scheme.Hom.exists_int_zetaSeries_and_exists_rat_mul_eq`
-  (`prose-19-06`).
+The finite Hankel rank and the integrality of the zeta series hold for any `X₀` of finite type,
+not only for `X₀` smooth, proper and geometrically connected.
 -/
 
 @[expose] public section
@@ -203,10 +207,7 @@ private lemma isSeparated_ι_comp {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) {V U
 variable [Finite k]
 
 /-- Rationality of the zeta series of a **separated** scheme of finite type over a finite field
-`k`, via the Grothendieck–Lefschetz trace formula with compact supports for a prime
-`ℓ ≠ char k`: the point counts are the alternating traces of Frobenius on the finitely many
-nonzero groups `H_c^i(X ⊗ k̄, ℚ̄_ℓ)`, which form a trace datum
-(`AlgebraicGeometry.Scheme.Hom.zetaSeries_rational_of_traceDatum`). -/
+`k`: there are integer polynomials `A, B` with `B(0) = 1` and `B(T) Z(T) = A(T)`. -/
 theorem Hom.exists_int_mul_zetaSeries_eq_of_isSeparated {Y : Scheme.{u}}
     (g : Y ⟶ Spec (.of k)) [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] :
     ∃ A B : Polynomial ℤ, B.coeff 0 = 1 ∧
@@ -257,14 +258,9 @@ theorem Hom.exists_int_mul_zetaSeries_eq_of_isSeparated {Y : Scheme.{u}}
           exact ⟨⟨(i - a₀).toNat, by omega⟩, by simp; omega⟩ }
   exact Hom.zetaSeries_rational_of_traceDatum g D fun n ↦ rfl
 
-/-- Blueprint `corollary-point-counting-zeta-function--7` (rationality of the zeta series): for a
-scheme `X₀` of finite type (quasi-compact and locally of finite type) over a finite field `k`, there
-are integer polynomials `A, B` with `B(0) = 1` and `B(T) Z(X₀, T) = A(T)` in `ℚ⟦T⟧`.
-
-The separated case is `Hom.exists_int_mul_zetaSeries_eq_of_isSeparated`; in general `X₀` is a
-finite union of affine opens, and the zeta series is multiplicative for the inclusion-exclusion
-`N(W ∪ U) + N(W ∩ U) = N(W) + N(U)` of point counts of opens, where `U` is affine and `W ∩ U`
-is separated as an open subscheme of `U`. -/
+/-- **Rationality of the zeta series**: for a scheme `X₀` of finite type (quasi-compact and
+locally of finite type) over a finite field `k`, there are integer polynomials `A, B` with
+`B(0) = 1` and `B(T) Z(X₀, T) = A(T)` in `ℚ⟦T⟧`. -/
 theorem Hom.exists_int_mul_zetaSeries_eq {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     [LocallyOfFiniteType f] [QuasiCompact f] :
     ∃ A B : Polynomial ℤ, B.coeff 0 = 1 ∧
@@ -301,15 +297,10 @@ theorem Hom.exists_int_mul_zetaSeries_eq {X : Scheme.{u}} (f : X ⟶ Spec (.of k
   rw [htop, Hom.zetaSeries_congr _ f fun n _ ↦ f.pointCount_top_ι_comp n] at h
   exact h
 
-/-- Blueprint `corollary-point-counting-zeta-function--7` (rational descent of the zeta series): the
-zeta series `Z(X₀, T) = ∑ zₙ Tⁿ` of a scheme `X₀` of finite type over a finite field has a Hankel
-matrix of finite rank over `ℚ`, i.e. the span of the shifts of its coefficient sequence is
-finite-dimensional, and `Z(X₀, T) ∈ ℚ(T)`, i.e. `B(T) Z(X₀, T) = A(T)` for rational polynomials
-with `B(0) = 1`.
-
-The blueprint states this for `X₀` smooth, proper and geometrically connected, assuming the
-Euler product, the trace-to-determinant identity and the finiteness of the Hankel rank; these
-hypotheses are theorems here and the statement holds for any `X₀` of finite type. -/
+/-- **Rational descent of the zeta series**: the zeta series `Z(X₀, T) = ∑ zₙ Tⁿ` of a scheme
+`X₀` of finite type over a finite field has a Hankel matrix of finite rank over `ℚ`, i.e. the span
+of the shifts of its coefficient sequence is finite-dimensional, and `Z(X₀, T) ∈ ℚ(T)`, i.e.
+`B(T) Z(X₀, T) = A(T)` for rational polynomials with `B(0) = 1`. -/
 theorem Hom.finiteDimensional_shiftSpan_zetaSeries_and_exists_rat {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] :
     FiniteDimensional ℚ (shiftSpan ℚ fun n ↦ PowerSeries.coeff n f.zetaSeries) ∧
@@ -321,12 +312,8 @@ theorem Hom.finiteDimensional_shiftSpan_zetaSeries_and_exists_rat {X : Scheme.{u
     exact ⟨A.map (Int.castRingHom ℚ), B.map (Int.castRingHom ℚ), by simp [hB], hAB⟩
   exact ⟨(PowerSeries.exists_normalized_fraction_iff_finiteDimensional_shiftSpan _).1 h, h⟩
 
-/-- Blueprint `prose-19-06` (the zeta series is integral and rational): the
-zeta series of a scheme `X₀` of finite type over a finite field lies in
-`(1 + T ℤ⟦T⟧) ∩ ℚ(T)`.
-
-The blueprint states this in the situation of `corollary-point-counting-zeta-function--7` (`X₀`
-smooth, proper and geometrically connected); it holds for any `X₀` of finite type. -/
+/-- **The zeta series is integral and rational**: the zeta series of a scheme `X₀` of finite type
+over a finite field lies in `(1 + T ℤ⟦T⟧) ∩ ℚ(T)`. -/
 theorem Hom.exists_int_zetaSeries_and_exists_rat_mul_eq {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] :
     (∃ Z : PowerSeries ℤ, PowerSeries.constantCoeff Z = 1 ∧

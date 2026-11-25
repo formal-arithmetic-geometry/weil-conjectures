@@ -19,8 +19,8 @@ constructible complex `C` on `X` whose restriction to the open complement `X ∖
 the direct image of its stalk at `x`, `C ≅ Rx_* Lx^* C`; its global sections are therefore
 `RΓ(X, C) ≅ Lx^* C`, and they detect vanishing
 (`ProEtale.CondensedRing.isZero_of_isZero_upperStar_pointComplι_of_isZero_lowerStar`). This is
-the case of a single rational point of the blueprint lemma `lemma-finite-support-global-sections--1`
-(global sections detect complexes with finite support), used in the finite-support step of
+the case of a single rational point of the statement that global sections detect complexes with
+finite support, used in the finite-support step of
 Gabber's Künneth formula for nearby cycles.
 
 -/
@@ -58,9 +58,8 @@ lemma isZero_of_isZero_boundedConstructibleLowerStar_id {E : Dᵇc((point
   exact this.symm
 
 include ℓ in
-/-- **Global sections detect complexes supported at a rational point** (blueprint
-`lemma-finite-support-global-sections--1`, for a single rational point): if the restriction of `C`
-to the open complement `X ∖ {x}` of a rational point `x` vanishes, and `RΓ(X, C) = 0`, then
+/-- **Global sections detect complexes supported at a rational point**: if the restriction of
+`C` to the open complement `X ∖ {x}` of a rational point `x` vanishes, and `RΓ(X, C) = 0`, then
 `C = 0`. -/
 theorem isZero_of_isZero_upperStar_pointComplι_of_isZero_lowerStar (x : RationalPoint X)
     (C : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)

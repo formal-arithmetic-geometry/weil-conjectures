@@ -23,8 +23,7 @@ of models `M`, `N` of finite type along proper structure morphisms, with project
 with the structure morphisms of the geometric generic fibres to `Spec Ω`. This file proves that
 the Künneth map `Π_{A,B} : Ψ_M A ⊠ Ψ_N B ⟶ Ψ_P (A ⊠ B)` is an isomorphism
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.isIso_kunnethMap_of_isProper`),
-following Illusie's argument (*Autour du théorème de monodromie locale*, Thm. 4.7; blueprint
-`proposition-external-kunneth-formula-nearby-cycles`): the cone `C` of `Π_{A,B}`
+following Illusie's argument: the cone `C` of `Π_{A,B}`
 
 * has no global sections, `RΓ(X_s × Y_s, C) = 0` (the global-sections step,
   `NearbyCyclesModel.isIso_lowerStar_kunnethMap`);
@@ -32,7 +31,7 @@ following Illusie's argument (*Autour du théorème de monodromie locale*, Thm. 
   (`NearbyCyclesModel.exists_finite_isIso_upperStar_map_kunnethMap`, the finite-support step);
 
 and a bounded constructible complex supported on finitely many closed points without global
-sections vanishes (blueprint `lemma-finite-support-global-sections--1`; for `ℚ̄_ℓ`-coefficients
+sections vanishes (for `ℚ̄_ℓ`-coefficients
 `ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens`).
 
 The finite-support step is proved in chart dimension `n` (charts `V ⟶ 𝔸ᵐ_S` with `m` summed over
@@ -48,6 +47,10 @@ models of the total spaces and to their closures in projective spaces, whose cha
 dimension, extending the coefficients by zero
 (`NearbyCyclesModel.isIso_kunnethMap_of_properKunnethFormula_of_isImmersion`,
 `WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure`).
+
+## References
+
+* L. Illusie, *Autour du théorème de monodromie locale*, Thm. 4.7 and its proof
 
 -/
 
@@ -104,9 +107,8 @@ lemma boundedConstructible_kunnethMap_source
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 include φ₁ φ₂ in
 /-- The target `Ψ_P (Lf₁^* A ⊗ Lf₂^* B)` of the Künneth map is bounded constructible if the
-geometric nearby cycles `Li^* Rj_* Lj^*` of `P` preserve bounded constructible complexes: since
-`ε_M` and `ε_N` factor through the total spaces, `Lε_P^* (Lf₁^* A ⊗ Lf₂^* B)` is the pullback
-`Lj^* C₀` of a bounded constructible complex on the total space of `P`. -/
+geometric nearby cycles `Li^* Rj_* Lj^*` of `P` preserve bounded constructible complexes and
+`ε_M`, `ε_N` factor through the total spaces. -/
 lemma boundedConstructible_kunnethMap_target (qP : P.total ⟶ trait k')
     [LocallyOfFiniteType qP] [QuasiCompact qP]
     (hgeom : ∀ C₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology P.total) Ab.{u + 1})
@@ -145,21 +147,12 @@ lemma boundedConstructible_kunnethMap_target (qP : P.total ⟶ trait k')
         ((pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) φ₂.commSq_ε).app B).symm) ≪≫
             e).symm)) (hgeom C₀ hC₀)
 
-/-- **The finite-support step of Gabber's Künneth formula** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Finite support"; Illusie, *Autour du théorème
-de monodromie locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of
-models `M`, `N` of finite type and bounded constructible `A`, `B`, the Künneth map `Π_{A,B}` is an
-isomorphism away from finitely many closed points of the special fibre `X_s × Y_s`, given that the
-total spaces locally embed into `𝔸ᵐ_S`, `𝔸^{m'}_S` and that the generic-slicing step holds in
-chart dimension `m + m' - 1` (`NearbyCyclesModel.SliceKunnethFormula`).
-
-The source and target of `Π_{A,B}` are bounded constructible by Deligne's finiteness theorem
-(`NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel`,
-`NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj`), so this is
-`NearbyCyclesModel.exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible`: around
-every point, the coordinates of local charts of the total spaces detect closed points of the
-special fibre, and the cone of `Π_{A,B}` vanishes over the generic point of each coordinate line
-by generic slicing (`NearbyCyclesModel.SliceKunnethFormula`). -/
+/-- **The finite-support step of Gabber's Künneth formula**: for the product `P` over the strictly
+henselian trait of models `M`, `N` of finite type and bounded constructible `A`, `B`, the Künneth
+map `Π_{A,B}` is an isomorphism away from finitely many closed points of the special fibre
+`X_s × Y_s`, given that the total spaces locally embed into `𝔸ᵐ_S`, `𝔸^{m'}_S` and that the
+generic-slicing step holds in chart dimension `m + m' - 1`
+(`NearbyCyclesModel.SliceKunnethFormula`). -/
 theorem exists_finite_isIso_upperStar_map_kunnethMap [TopologicalSpace.NoetherianSpace X]
     [TopologicalSpace.NoetherianSpace Y] [TopologicalSpace.NoetherianSpace Z]
     (hM : M.IsTraitModelOver qM gM)
@@ -259,17 +252,13 @@ private lemma isIso_of_isIso_upperStar_and_lowerStar
     (hdetect S hS C hC h₂ h₁)
 
 -- the triangle of the Künneth map has large terms
-/-- **Gabber's Künneth formula for proper models** (Illusie, *Autour du théorème de monodromie
-locale*, Thm. 4.7; blueprint `proposition-external-kunneth-formula-nearby-cycles`): for the product
-`P` over the strictly henselian trait of models `M`, `N` of finite type along proper structure
-morphisms, with projections compatible with the structure morphisms to `Spec Ω`, and bounded
-constructible `A`, `B`, the Künneth map `Π_{A,B}` is an isomorphism. Its cone `C` is bounded
-constructible (given that the source and target of `Π_{A,B}` are, by Deligne's finiteness theorem),
-has no global sections (`NearbyCyclesModel.isIso_lowerStar_kunnethMap`, given that the Künneth map
-of the trait at the cohomology of the geometric generic fibres is invertible), and is supported on
-finitely many closed points (`NearbyCyclesModel.exists_finite_isIso_upperStar_map_kunnethMap`);
-hence it vanishes (the hypothesis `hdetect`, blueprint
-`lemma-finite-support-global-sections--1`). -/
+/-- **Gabber's Künneth formula for proper models**: for the product `P` over the strictly
+henselian trait of models `M`, `N` of finite type along proper structure morphisms, with
+projections compatible with the structure morphisms to `Spec Ω`, and bounded constructible `A`,
+`B`, the Künneth map `Π_{A,B}` is an isomorphism. The hypotheses are that the source, target and
+nearby cycles are bounded constructible, that the Künneth map of the trait at the cohomology of
+the geometric generic fibres is invertible, and (`hdetect`) that a bounded constructible complex
+supported on finitely many closed points without global sections vanishes. -/
 theorem isIso_kunnethMap_of_isProper [TopologicalSpace.NoetherianSpace X]
     [TopologicalSpace.NoetherianSpace Y] [TopologicalSpace.NoetherianSpace Z]
     (hM : M.IsTraitModelOver qM gM)
@@ -320,8 +309,7 @@ theorem isIso_kunnethMap_of_isProper [TopologicalSpace.NoetherianSpace X]
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- **Projective closures over the trait**: an affine scheme of finite type over the trait
-`S = Spec k'⟦t⟧` is an open subscheme of a proper `S`-scheme: its closure in `ℙⁿ_S` along an
-immersion into `𝔸ⁿ_S ⊆ ℙⁿ_S` (`AlgebraicGeometry.HasCompactification.of_isQuasiAffine`). -/
+`S = Spec k'⟦t⟧` is an open subscheme of a proper `S`-scheme. -/
 theorem exists_isProper_openImmersion_of_isAffine {T : Scheme.{u}} (q : T ⟶ trait k')
     [IsAffine T] [LocallyOfFiniteType q] :
     ∃ (Tc : Scheme.{u}) (qc : Tc ⟶ trait k') (c : T ⟶ Tc), IsProper qc ∧ IsOpenImmersion c ∧
@@ -424,21 +412,10 @@ theorem isIso_kunnethMap_closure_of_properKunnethFormula {n : ℕ}
   exact IsPullback.of_hasPullback _ _
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
-/-- **Reduction of Gabber's Künneth formula to proper models, for a global chart** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Reduction to projective flat families";
-Illusie,
-*Autour du théorème de monodromie locale*, proof of Thm. 4.7): if the Künneth formula holds for
-proper models in chart dimension `n`, then it holds for products over the trait of models whose
-total spaces admit immersions into `𝔸(ι_M; S)`, `𝔸(ι_N; S)` with `|ι_M| + |ι_N| ≤ n`.
-
-The Künneth map is that of the models of the total spaces
-(`NearbyCyclesModel.isIso_kunnethMap_of_toGeometricGeneric`); these are restrictions of the
-standard models of the closures of the total spaces in the projective spaces
-(`AlgebraicGeometry.Compactification.ofIsImmersionAffineSpace`), whose charts have the same
-dimension
-(`AlgebraicGeometry.Compactification.locallyEmbedsInAffineSpace_ofIsImmersionAffineSpace`),
-and the coefficients are extended by zero
-(`NearbyCyclesModel.isIso_kunnethMap_toGeometricGeneric_of_closure`). -/
+/-- **Reduction of Gabber's Künneth formula to proper models, for a global chart**: if the
+Künneth formula holds for proper models in chart dimension `n`, then it holds for products over
+the trait of models whose total spaces admit immersions into `𝔸(ι_M; S)`, `𝔸(ι_N; S)` with
+`|ι_M| + |ι_N| ≤ n`. -/
 theorem isIso_kunnethMap_of_properKunnethFormula_of_isImmersion {n : ℕ}
     (hproper : ProperKunnethFormula Λ k' n) (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
@@ -476,17 +453,8 @@ theorem isIso_kunnethMap_of_properKunnethFormula_of_isImmersion {n : ℕ}
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hB)
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
-/-- **Reduction of Gabber's Künneth formula to proper models** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Reduction to projective flat families";
-Illusie,
-*Autour du théorème de monodromie locale*, proof of Thm. 4.7): if the Künneth formula holds for
-proper models in chart dimension `n`, then it holds in chart dimension `n`.
-
-The assertion is local on the special fibre
-(`NearbyCyclesModel.isIso_kunnethMap_of_forall_exists_restriction`): around each point of the
-special fibre the product restricts to the product `V ×_S W` of charts `V`, `W` of the total
-spaces, where `NearbyCyclesModel.isIso_kunnethMap_of_properKunnethFormula_of_isImmersion`
-applies. -/
+/-- **Reduction of Gabber's Künneth formula to proper models**: if the Künneth formula holds for
+proper models in chart dimension `n`, then it holds in chart dimension `n`. -/
 theorem isIso_kunnethMap_of_properKunnethFormula {n : ℕ}
     (hproper : ProperKunnethFormula Λ k' n) (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)

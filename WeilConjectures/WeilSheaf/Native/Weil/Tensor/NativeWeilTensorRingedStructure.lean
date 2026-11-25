@@ -11,7 +11,12 @@ public import Mathlib.CategoryTheory.Monoidal.Braided.Transport
 
 /-! # The explicit native monoidal structure transported from a ringed presentation
 
-Source: Stacks 0FPT and transport along an equivalence of abelian categories.
+The monoidal structure is transported along an equivalence of abelian categories, and its
+coefficient unit is identified using exactness of forgetting on single complexes.
+
+## References
+
+* Stacks Project, Tags 06YS and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -25,9 +30,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   (b : NativeWeilTensorRingedBridge k₀ l X)
   [HasDerivedCategory.{u + 2} (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)]
 
-/-- Lift the specified native additive equivalence to the actual derived categories.
-Source: localization of equivalences; Stacks 06YS.
-(blueprint: def-sf-native-weil-tensor-ringed-structure). -/
+/-- Lift the specified native additive equivalence to the actual derived categories. -/
 def nativeWeilRingedDerivedEquivalence :
     DerivedCategory (ProEtaleWeilSheaf k₀ l X) ≌
       DerivedCategory (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R) :=
@@ -37,17 +40,13 @@ def nativeWeilRingedDerivedEquivalence :
 variable (SB : CoefficientClosedStructure
   (derivedInternalHomOfUniverses.{u + 1, u + 1, u + 1, u + 2} b.J b.R))
 
-/-- Transport the given ringed monoidal structure, without any choice of a witness.
-Source: equivalence transport of monoidal categories; Stacks 0FPT.
-(blueprint: def-sf-native-weil-tensor-ringed-structure). -/
+/-- Transport the given ringed monoidal structure, without any choice of a witness. -/
 @[instance_reducible]
 def nativeWeilRingedMonoidal : MonoidalCategory (DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :=
   letI := SB.monoidal
   Monoidal.transport (nativeWeilRingedDerivedEquivalence b).symm
 
-/-- Transport the given symmetry on that explicit monoidal structure.
-Source: equivalence transport of symmetric categories; Stacks 0FPT.
-(blueprint: def-sf-native-weil-tensor-ringed-structure). -/
+/-- Transport the given symmetry on that explicit monoidal structure. -/
 @[instance_reducible]
 def nativeWeilRingedSymmetric (βB : @SymmetricCategory _ _ SB.monoidal) :
     @SymmetricCategory _ _ (nativeWeilRingedMonoidal b SB) :=
@@ -56,9 +55,7 @@ def nativeWeilRingedSymmetric (βB : @SymmetricCategory _ _ SB.monoidal) :
   inferInstanceAs (SymmetricCategory
     (Monoidal.Transported (nativeWeilRingedDerivedEquivalence b).symm))
 
-/-- The transported coefficient unit is the original native coefficient module in degree zero.
-Source: the coefficient unit in ringed tensor coherence, and exact forgetting of singles.
-(blueprint: def-sf-native-weil-tensor-ringed-structure). -/
+/-- The transported coefficient unit is the original native coefficient module in degree zero. -/
 def nativeWeilRingedUnit
     (TB : CoefficientTensorModels.{u + 1, u + 1, u + 1, u + 2} b.J b.R SB)
     (βB : @SymmetricCategory _ _ SB.monoidal)

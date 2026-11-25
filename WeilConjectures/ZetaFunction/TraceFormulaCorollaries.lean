@@ -43,9 +43,22 @@ every `t ≠ 0` of `ℚ̄_ℓ`, which is the identity of rational functions over
   `Polynomial.prod_leadingCoeff_sq_of_roots_eq_map_inv`: the functional equation of an
   alternating product of polynomials whose roots are exchanged by `z ↦ (c z)⁻¹`.
 - `AlgebraicGeometry.Scheme.functional_equation_frobeniusCharpolyRev`: the functional equation in
-  terms of the Frobenius on the cohomology, with the
-  duality inputs as hypotheses, supplied by the library's Poincaré duality
-  (`AlgebraicGeometry.WeilSheaf.poincareDuality`, sorry-free).
+  terms of the Frobenius on the cohomology.
+
+## Implementation details
+
+For the cohomological product, both sides have constant coefficient `1`, and their logarithmic
+derivatives are the generating series of `#X₀(𝔽_{qᵐ})` and of `∑ᵢ (-1)ⁱ Tr(Fᵐ | H_cⁱ)`, which
+agree by the point-counting trace formula
+`AlgebraicGeometry.WeilSheaf.pointCount_eq_finsum_trace_compactlySupportedCohomology`.
+
+The two inputs of the functional equation from Poincaré duality
+(`AlgebraicGeometry.WeilSheaf.poincareDuality`) are the reciprocity of the Frobenius eigenvalues
+and, for odd `d`, the evenness of the middle Betti number
+(`AlgebraicGeometry.Scheme.even_finrank_cohomology_middle`). The identities at all `t ≠ 0` of the
+infinite field `ℚ̄_ℓ` amount to the identity of rational functions (the value of a rational
+function at a pole being `0` on both sides); `Z` is the rational function whose expansion is the
+zeta series (`AlgebraicGeometry.Scheme.map_zetaSeries_mul_evenFrobeniusProduct`).
 -/
 
 @[expose] public section
@@ -65,16 +78,13 @@ variable (k₀) (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (X : Schem
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `corollary-point-counting-zeta-function` (cohomological product): for a separated
-scheme `X₀` of finite type over `k₀ = 𝔽_q` and `ℓ ≠ p`,
+/-- Cohomological product for the zeta function: for a separated scheme `X₀` of finite type over
+`k₀ = 𝔽_q` and `ℓ ≠ p`,
 
 `Z(X₀, T) = ∏ᵢ det(1 - T F | H_cⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))^{(-1)^{i+1}}` in `ℚ̄_ℓ⟦T⟧`,
 
 where `S` is any finite set of degrees outside of which `H_cⁱ` vanishes; the right hand side is
-the inverse of the alternating determinant `LinearMap.alternatingCharpolyRevProd`. Both sides
-have constant coefficient `1`, and their logarithmic derivatives are the generating series of
-`#X₀(𝔽_{qᵐ})` and of `∑ᵢ (-1)ⁱ Tr(Fᵐ | H_cⁱ)`, which agree by the point-counting trace formula
-`AlgebraicGeometry.WeilSheaf.pointCount_eq_finsum_trace_compactlySupportedCohomology`. -/
+the inverse of the alternating determinant `LinearMap.alternatingCharpolyRevProd`. -/
 theorem map_zetaSeries_eq_inv_alternatingCharpolyRevProd {S : Finset ℤ}
     (hS : ∀ i ∉ S, Subsingleton ((adicConstant k₀ l X).compactlySupportedCohomology i).carrier) :
     PowerSeries.map (algebraMap ℚ (PadicAlgCl l)) (X ↘ Spec (CommRingCat.of k₀)).zetaSeries =
@@ -375,25 +385,17 @@ private theorem functional_equation_frobeniusCharpolyRev_of_reciprocity
 variable [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
   [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `corollary-functional-equation` (functional equation, cohomological form): let `X₀`
-be smooth, proper and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`, `ℓ ≠ p`,
-`Hⁱ = Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` with Frobenius `Fᵢ`, `bᵢ = dim Hⁱ`, `χ = ∑ᵢ (-1)ⁱ bᵢ`,
-`D = ∏ᵢ det(Fᵢ)^{(-1)ⁱ}` and `Z(t) = ∏ᵢ det(1 - t Fᵢ)^{(-1)^{i+1}}` (the products over
-`0 ≤ i ≤ 2d`; `Z` is the rational function whose expansion is the zeta series,
-`AlgebraicGeometry.Scheme.map_zetaSeries_mul_evenFrobeniusProduct`). Then
+/-- Functional equation, cohomological form: let `X₀` be smooth, proper and geometrically
+connected of pure dimension `d` over `k₀ = 𝔽_q`, `ℓ ≠ p`, `Hⁱ = Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` with Frobenius
+`Fᵢ`, `bᵢ = dim Hⁱ`, `χ = ∑ᵢ (-1)ⁱ bᵢ`, `D = ∏ᵢ det(Fᵢ)^{(-1)ⁱ}` and
+`Z(t) = ∏ᵢ det(1 - t Fᵢ)^{(-1)^{i+1}}` (the products over `0 ≤ i ≤ 2d`). Then
 
 * `b_{2d-i} = bᵢ`;
 * `d χ` is even;
 * `D² = q^{dχ}`;
 * `Z(1/(qᵈ t)) = (-1)^χ D t^χ Z(t)` for every `t ≠ 0` in `ℚ̄_ℓ`;
 * writing `d χ = 2 m`, the sign `ε = (-1)^χ D q^{-m}` is `±1` and
-  `Z(1/(qᵈ t)) = ε q^m t^χ Z(t)` for every `t ≠ 0`.
-
-The identities at all `t ≠ 0` of the infinite field `ℚ̄_ℓ` are the identity of rational functions
-of the blueprint (the value of a rational function at a pole being `0` on both sides). The two
-inputs from Poincaré duality (`AlgebraicGeometry.WeilSheaf.poincareDuality`) are the reciprocity
-of the Frobenius eigenvalues and, for odd `d`, the evenness of the middle Betti number
-(`AlgebraicGeometry.Scheme.even_finrank_cohomology_middle`). -/
+  `Z(1/(qᵈ t)) = ε q^m t^χ Z(t)` for every `t ≠ 0`. -/
 theorem functional_equation_frobeniusCharpolyRev :
     (∀ i : Fin (2 * d + 1),
       Module.finrank (PadicAlgCl l)

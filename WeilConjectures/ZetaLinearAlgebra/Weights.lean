@@ -61,27 +61,24 @@ open scoped Polynomial
 
 /-- `P` is pure of weight `w` for `q` if `P (0) = 1` and every complex root `z` of `P`
 satisfies `‖z‖ = q ^ (-w / 2)`; equivalently every reciprocal root has absolute value
-`q ^ (w / 2)` (blueprint `definition-reciprocal-root`). -/
+`q ^ (w / 2)`. -/
 def Polynomial.IsPureOfWeight (q w : ℕ) (P : Polynomial ℂ) : Prop :=
   P.coeff 0 = 1 ∧ ∀ z ∈ P.roots, ‖z‖ = (q : ℝ) ^ (-(w : ℝ) / 2)
 
 /-- `P` is *mixed of weight at most `w`* for `q` if `P (0) = 1` and every complex root `z` of
 `P` satisfies `q ^ (-w / 2) ≤ ‖z‖`; equivalently every reciprocal root of `P` has absolute
-value at most `q ^ (w / 2)`. This is the `≤` half of `Polynomial.IsPureOfWeight` and the
-conclusion of Deligne's weight estimate. -/
+value at most `q ^ (w / 2)`. -/
 def Polynomial.IsMixedOfWeightLE (q w : ℕ) (P : Polynomial ℂ) : Prop :=
   P.coeff 0 = 1 ∧ ∀ z ∈ P.roots, (q : ℝ) ^ (-(w : ℝ) / 2) ≤ ‖z‖
 
 /-- `z : ℂ` is *universally* pure of weight `w`: it is algebraic over `ℚ` and every
 conjugate of `z` — every complex root of its minimal polynomial over `ℚ` — has absolute
-value `q ^ (-w/2)`. This is strictly stronger than purity under one embedding (blueprint
-`definition-reciprocal-root`). -/
+value `q ^ (-w/2)`. -/
 def IsUniversallyPureOfWeight (q w : ℕ) (z : ℂ) : Prop :=
   IsAlgebraic ℚ z ∧ ∀ y ∈ ((minpoly ℚ z).map (algebraMap ℚ ℂ)).roots,
     ‖y‖ = (q : ℝ) ^ (-(w : ℝ) / 2)
 
-/-- Every reciprocal root of `P` is universally pure of weight `w` (blueprint
-`definition-reciprocal-root`). -/
+/-- Every reciprocal root of `P` is universally pure of weight `w`. -/
 def Polynomial.IsUniversallyPureOfWeight (q w : ℕ) (P : Polynomial ℂ) : Prop :=
   P.coeff 0 = 1 ∧ ∀ z ∈ P.roots, _root_.IsUniversallyPureOfWeight q w z
 
@@ -145,8 +142,7 @@ theorem IsPureOfWeight.disjoint_roots {q v w : ℕ} (hq : 1 < q) {P Q : Polynomi
     ∀ z ∈ P.roots, z ∉ Q.roots :=
   fun z hzP hzQ ↦ hvw (weight_eq_of_norm_eq hq (hP.2 z hzP) (hQ.2 z hzQ))
 
-/-- Polynomials that are pure of distinct weights are coprime: over `ℂ` coprimality of the
-two nonzero polynomials is exactly the absence of a common root. -/
+/-- Polynomials that are pure of distinct weights are coprime. -/
 theorem IsPureOfWeight.isCoprime {q v w : ℕ} (hq : 1 < q) {P Q : Polynomial ℂ}
     (hP : P.IsPureOfWeight q v) (hQ : Q.IsPureOfWeight q w) (hvw : v ≠ w) : IsCoprime P Q := by
   rw [Polynomial.isCoprime_iff_aeval_ne_zero_of_isAlgClosed (K := ℂ) (p := P) (q := Q)]
@@ -187,8 +183,7 @@ theorem coeff_zero_prod_even_eq_one {q r : ℕ} {P : Fin (r + 1) → Polynomial 
 
 /-- **Identification of the two parity factors**. If the parity products of a family of pure
 polynomials of distinct weights cross-multiply against a coprime normalized rational fraction
-`A / B`, then the odd-indexed product is `A` and the even-indexed product is `B`: no reciprocal
-root cancels between odd and even indices. -/
+`A / B`, then the odd-indexed product is `A` and the even-indexed product is `B`. -/
 theorem prod_odd_eq_map_and_prod_even_eq_map {q r : ℕ} (hq : 1 < q) {P : Fin (r + 1) → ℂ[X]}
     (hP : ∀ i, (P i).IsPureOfWeight q i.1) {A B : ℚ[X]} (hAB : IsCoprime A B)
     (hA : A.coeff 0 = 1)
@@ -202,8 +197,7 @@ theorem prod_odd_eq_map_and_prod_even_eq_map {q r : ℕ} (hq : 1 < q) {P : Fin (
     (isCoprime_prod_odd_prod_even hq hP) h
 
 /-- **Algebraicity of every reciprocal root**: under the hypotheses identifying the two parity
-factors, every root of every `P i` is a root of the complex image of `A` or of `B`, hence is
-algebraic over `ℚ`. -/
+factors, every root of every `P i` is algebraic over `ℚ`. -/
 theorem isAlgebraic_of_mem_roots_of_prod_mul_eq {q r : ℕ} (hq : 1 < q) {P : Fin (r + 1) → ℂ[X]}
     (hP : ∀ i, (P i).IsPureOfWeight q i.1) {A B : ℚ[X]} (hAB : IsCoprime A B)
     (hA : A.coeff 0 = 1) (hB : B.coeff 0 = 1)
@@ -228,8 +222,7 @@ theorem isAlgebraic_of_mem_roots_of_prod_mul_eq {q r : ℕ} (hq : 1 < q) {P : Fi
 /-- **Weight separation determines the factors.** Two families `P i` and `P' i` of complex
 polynomials, each with `P i` and `P' i` pure of weight `i`, that have the same alternating
 product — the cross-multiplication `(∏_odd P) (∏_even P') = (∏_odd P') (∏_even P)` — are equal.
-Indeed a root of absolute value `q ^ (-i / 2)` can only come from the degree-`i` member of
-either family, so the two root multisets in degree `i` agree. -/
+-/
 theorem eq_of_isPureOfWeight_of_prod_mul_eq {q r : ℕ} (hq : 1 < q) {P P' : Fin (r + 1) → ℂ[X]}
     (hP : ∀ i, (P i).IsPureOfWeight q i.1) (hP' : ∀ i, (P' i).IsPureOfWeight q i.1)
     (h : (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Odd i.1, P i) *
@@ -309,9 +302,7 @@ theorem roots_prod_filter_norm_eq {q : ℕ} (hq : 1 < q) {S : Finset ℕ}
 
 end Polynomial
 
-/-- A complex number is universally pure of at most one weight. (No hypothesis `z ≠ 0` is
-needed: `0` is a root of its own minimal polynomial `X` and `‖(0 : ℂ)‖ = 0` is never a power
-of `q`, so `0` is universally pure of no weight at all.) -/
+/-- A complex number is universally pure of at most one weight. -/
 theorem IsUniversallyPureOfWeight.weight_unique {q v w : ℕ} (hq : 1 < q) {z : ℂ}
     (hv : IsUniversallyPureOfWeight q v z) (hw : IsUniversallyPureOfWeight q w z) : v = w :=
   weight_eq_of_norm_eq hq (hv.2 z (mem_roots_map_minpoly hv.1))

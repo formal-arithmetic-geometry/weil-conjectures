@@ -10,9 +10,9 @@ import Mathlib.Algebra.Homology.BifunctorHomotopy
 
 /-! # Naturality from ordinary tensor resolution transport
 
-Source: Stacks 06YU and 0FPT; blueprint step 1 of
-`lem-sf-native-weil-tensor-ringed-derived-square-ordinary-resolution-extension`.
-(blueprint: lem-sf-native-weil-tensor-resolution-model-naturality)
+## References
+
+* Stacks Project, Tags 06YU and 0FPT.
 -/
 
 @[expose] public section
@@ -54,16 +54,7 @@ private theorem naturality_of_transport {D : Type v} [Category.{w} D]
 
 -- Preserve the supplied names of hypotheses that only constrain the proof.
 set_option linter.unusedVariables false in
-/-- Resolution transport data imply naturality of the extended ordinary model.
-
-Source: Stacks Tags 06YU and 0FPT, the common-roof comparison argument
-(blueprint: lem-sf-native-weil-tensor-resolution-model-naturality).
-
-Proof plan: for a map of arbitrary second complexes, choose the K-flat roof
-provided by the resolution-lift clause.  Expand both sides with the transport
-identity, use the K-flat naturality square for the roof map, and cancel the
-localized quasi-isomorphism maps.  Homotopy invariance of `DerivedCategory.Q`
-identifies the two composites over the augmentation homotopy. -/
+/-- Resolution transport data imply naturality of the extended ordinary model. -/
 theorem native_ordinary_tensor_model_resolution_naturality
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×

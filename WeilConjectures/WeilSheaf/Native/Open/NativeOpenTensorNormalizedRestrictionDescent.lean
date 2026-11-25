@@ -15,8 +15,12 @@ import Mathlib.CategoryTheory.Localization.Prod
 
 /-! # Normalized native open tensor restriction descent
 
-Source: Stacks 0GL1, 06YN and 012Z; native open tensor proof steps 3--6.
-(blueprint: lem-sf-native-open-tensor-restriction-descent)
+This file totalizes the balanced restriction/tensor comparison for an open immersion and
+descends it to the derived category along K-flat localizations.
+
+## References
+
+* Stacks Project, Tags 0GL1, 06YN, 06YS and 012Z.
 -/
 
 @[expose] public noncomputable section
@@ -51,11 +55,7 @@ theorem map₂CochainComplex_map_comp_map {D₁ D₂ D₃ : Type*}
   simp [HomologicalComplex.ι_mapBifunctorMap,
     HomologicalComplex.ι_mapBifunctorMap_assoc]
 
-/-- A natural sheaf restriction/tensor comparison totalizes, with its prescribed summands.
-
-Source: Stacks 012Z; the comparison `HomologicalComplex.mapBifunctorComparison`.
-Proof: the comparison of total complexes induced by the components of `r` is natural
-in both complexes and invertible; its summand formula is the defining one. -/
+/-- A natural sheaf restriction/tensor comparison totalizes, with its prescribed summands. -/
 theorem restriction_total_comparison
     {A B : Type a} [Category.{b} A] [Category.{b} B]
     [Abelian A] [Abelian B] [HasCountableCoproducts A] [HasCountableCoproducts B]
@@ -138,12 +138,7 @@ attribute [local instance] OpenTensorDescentInput.e_add OpenTensorDescentInput.r
   OpenTensorDescentInput.e_zero OpenTensorDescentInput.r_zero
 
 /-- Descent of a total restriction comparison along the full K-flat localizations,
-retaining every representative square.
-
-Source: Stacks 06YN; fully faithful precomposition with a localization.
-Proof: on K-flat representatives compose the ambient model, the restriction factor,
-the total comparison, the inverse open model and the inverse restriction factors;
-the product localization descends this, and the inverse pairs cancel. -/
+retaining every representative square. -/
 theorem restriction_derived_representative
     {A B : Type a} [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B]
     [HasDerivedCategory.{b} A] [HasDerivedCategory.{b} B]
@@ -384,38 +379,9 @@ private theorem restrictionAbstract_of_eq
 
 end
 
-/-- Totalize the balanced restriction comparison and descend it to the derived category.
-
-Source: Stacks Project, sites-cohomology.tex, Lemma pullback-tensor-product,
-K-flat resolutions (Tag 06YS), and homology.tex, associated simple complex (Tag 012Z).
-(blueprint: lem-sf-native-open-tensor-restriction-descent)
-
-Proof: use the supplied representative models, summand insertions and sheaf
-comparisons. The six equalities in hm identify each with the actual native
-function, so all the native model naturality and sheaf-map properties transfer.
-The preservation field is the given restriction property of s.
-
-Then s.restriction_forget identifies the underlying map with the canonical
-balanced pullback tensor comparison. That comparison is natural in both sheaves;
-faithfulness of forgetting Frobenius proves the same naturality for the specified
-Weil map. Restriction preserves coproducts and is additive, so apply these maps
-and their inverses in every bidegree and sum over p+q=n. Naturality with the two
-differentials, including the sign (-1)^p on the second one, gives a chain
-isomorphism. Its composite with the image of each actual insertion is the given
-sheaf map followed by the target insertion, yielding the first conclusion.
-Use the flat-term equivariant K-flat resolutions on the twisted action site.
-The hypothesis s.restriction_kflat keeps restriction inside the resolving
-subcategory. On pairs of representatives compose inverse native tensor models,
-Q of the total comparison, and the exact-derived restriction factors, obtaining
-an isomorphism between the restrictions of the two derived bifunctors.
-The models are natural by nativeDerivedTensor_models.choose_spec. Fully faithful
-restriction to the resolving representatives descends this comparison and its
-inverse, including naturality, to all derived inputs. Cancelling the model
-isomorphisms gives exactly OpenTensorRestrictionNormalization. This constructs
-rho rather than asserting that an arbitrary isomorphism has the normalization.
-Retain the same comparison with exactly the native functor types and its
-heterogeneous equality to the generic comparison.
-The zero and empty cases use the same coproduct maps. -/
+/-- Totalize the balanced restriction comparison and descend it to the derived category,
+giving a comparison satisfying `OpenTensorRestrictionNormalization` together with its
+summand formulas on representatives. -/
 theorem native_open_tensor_restriction_descent (s : NativeOpenTensorData k₀ l j)
     (m : OpenTensorDescentModels (nativeOpenTensorDescentInput k₀ l j))
     (hm : NativeOpenTensorModelsCompatibility k₀ l j s m) :
