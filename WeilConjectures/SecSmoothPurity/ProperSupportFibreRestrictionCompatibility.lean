@@ -11,9 +11,22 @@ import WeilConjectures.AlgebraicGeometry.ProperSupportSectionLocality
 
 /-! # Fibre restriction compatibility for proper-support pullback
 
-Source: Stacks Project, More on Étale Cohomology, Tag 0F55 (lemma-base-change-f-shriek-separated),
-construction and geometric-stalk verification.
-(auxiliary; not a blueprint node).
+The canonical proper-support pullback map and its inverse-image/direct-image adjunct agree on
+geometric stalks with restriction to the identified geometric fibre.
+
+## Implementation details
+
+In `properSupport_fibre_restriction_compatibility`, the maps `qG` and `qH` are the restriction
+maps supplied by `properSupport_geometricStalk`, normalized by
+`geometricFibreSectionRestriction`; `eG` and `eH` have submodule codomains and are characterized
+by the proper-support inclusion equations. The coefficient/fibre transport `κ₀` is
+characterized on every pulled-back representative by the two geometric-fibre restriction maps
+and the inverse-image composition unit, and `κ` is its induced isomorphism on proper-support
+submodules. Thus no arbitrary stalk or fibre isomorphism occurs.
+
+## References
+
+- Stacks Project, More on Étale Cohomology, Tags 0F55 and 0F76.
 -/
 
 @[expose] public section
@@ -663,26 +676,7 @@ private theorem restrictModuleIso_subtype
 attribute [local irreducible] restrictModuleIso
 
 /-- The canonical proper-support pullback map and its inverse-image/direct-image adjunct agree
-on geometric stalks with restriction to the identified geometric fibre.
-
-The maps `qG` and `qH` are the restriction maps supplied by `properSupport_geometricStalk`,
-normalized by `geometricFibreSectionRestriction`; `eG` and `eH` have submodule codomains and
-are characterized by the proper-support inclusion equations.  The coefficient/fibre transport
-`κ₀` is characterized on every pulled-back representative by the two geometric-fibre
-restriction maps and the inverse-image composition unit, and `κ` is its induced isomorphism on
-proper-support submodules.  Thus no arbitrary stalk or fibre isomorphism occurs.
-
-Proof (the four source computations).  (1) Represent a stalk germ by a pointed étale
-neighbourhood.  The germ equation for `c` identifies the unit pullback germ with the original
-germ, and the normalization of `qG` gives restriction to the geometric fibre.  (2) The adjunct
-unit equation `b_*β ⋙ η = α` identifies the germ of `β` with the section-pullback map.  (3) The
-Cartesian fibre isomorphism, the coefficient transport `κ₀`, and the inverse-image composition
-unit identify the restriction of that pulled-back section with the restriction of the original
-section.  (4) The explicit germ equality for every pointed neighbourhood implies equality of the
-stalk maps by the colimit description of geometric stalks; the submodule inclusion equations
-then give the displayed equality.
-Source: Stacks Project, More on Étale Cohomology, Tags 0F55 and 0F76.
-(auxiliary; not a blueprint node). -/
+on geometric stalks with restriction to the identified geometric fibre. -/
 theorem properSupport_fibre_restriction_compatibility
     {Λ : Type (u + 1)} [CommRing Λ]
     {X X' Y Y' : Scheme.{u}}

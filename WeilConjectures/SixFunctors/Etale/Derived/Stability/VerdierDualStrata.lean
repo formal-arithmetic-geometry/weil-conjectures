@@ -18,8 +18,9 @@ Let `X` be separated of finite type over an algebraically closed field `k` with 
 `Λ` a finite ring whose exponent is invertible in `k`. If `K ∈ Dᵇc(X, Λ)` has Tor amplitude in
 `[a, b]`, then `𝔻_X K = RHom(K, ω_X)` is bounded constructible with Tor amplitude in
 `[-b - 2d, -a]`
-(`AlgebraicGeometry.Etale.boundedConstructible_and_torAmplitudeIn_verdierDual_of_isAlgClosed`,
-`lemma-verdier-duality-preserves-constructibility--1`).
+(`AlgebraicGeometry.Etale.boundedConstructible_and_torAmplitudeIn_verdierDual_of_isAlgClosed`).
+
+## Implementation details
 
 The proof is a noetherian induction on the support, along the localization triangles of the
 *dualizing complex* `Ri_! Ri^! ω ⟶ ω ⟶ Rj_* j^* ω ⟶` for a closed immersion `i` with open
@@ -31,8 +32,7 @@ complement `j`, to which the triangulated functor `RHom(K, -)` is applied:
   `K` is lisse, `𝔻_U(j^* K)` is bounded constructible with Tor amplitude `[-b - 2n, -a - 2n]`
   (`AlgebraicGeometry.Etale.exists_boundedConstructible_and_torAmplitudeIn_verdierDual`), and the
   direct image `Rj_*` moves this to `[-b - 2n, -a]`
-  (`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`,
-  `proposition-six-operations-dctf--2`).
+  (`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`).
 
 Working with the localization triangles of `ω` rather than of `K` only uses the exactness of
 the internal hom in its *second* variable.
@@ -132,9 +132,7 @@ theorem nonempty_iso_derivedHom_rightDerivedLowerStar_dualizingComplex {U Y S : 
 quasi-compact open immersion with `dim U ≤ e` and `i : Z ⟶ Y` a closed immersion onto the
 complement. If the Verdier duals `𝔻_Z(i^* K)` and `𝔻_U(j^* K)` are bounded constructible with Tor
 amplitude in `[α, β]` and `[α, β - 2e]` respectively, then `𝔻_Y K` is bounded constructible with
-Tor amplitude in `[α, β]`: apply the triangulated functor `RHom(K, -)` to the localization
-triangle `Ri_! Ri^! ω ⟶ ω ⟶ Rj_* j^* ω ⟶`, and use that `Ri_!` preserves both properties
-while `Rj_*` widens the Tor amplitude by `2 dim U`. -/
+Tor amplitude in `[α, β]`. -/
 theorem boundedConstructible_and_torAmplitudeIn_verdierDual_of_localization {k : Type u}
     [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {Y U Z : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [HasCompactification aY]
@@ -201,7 +199,7 @@ theorem boundedConstructible_and_torAmplitudeIn_verdierDual_of_localization {k :
 variable {Λ} in
 omit [Finite Λ] in
 /-- Finitely many constructible sheaves on a noetherian scheme are finite locally constant on a
-common dense open: intersect the dense opens of generic constancy of the individual sheaves. -/
+common dense open. -/
 lemma exists_dense_open_forall_isFiniteLocallyConstantSheaf {X : Scheme.{u}} [IsNoetherian X]
     (n : ℕ) (F : Fin n → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hF : ∀ q, IsConstructibleSheaf (F q)) :

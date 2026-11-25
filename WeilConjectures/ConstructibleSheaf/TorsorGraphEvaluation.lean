@@ -12,9 +12,16 @@ import WeilConjectures.Mathlib.CategoryTheory.Extensive
 /-!
 # Equivariant functions are determined on the graph of a torsor section
 
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R;
-the torsor splitting argument in lem-weil-pbc-torsor-section-evaluation-local, step 2.
-(blueprint: lem-weil-pbc-torsor-graph-evaluation)
+## Implementation details
+
+Base changing the torsor isomorphism along a section `f` splits `W ×_V c.P` into copies of `W`
+indexed by the group, the `g`-th copy being the graph of `f` translated by `g`. Two equivariant
+functions agreeing on the graph therefore agree on every translate. No connectedness,
+primality or sheaf condition is used.
+
+## References
+
+* [Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R]
 -/
 
 @[expose] public section
@@ -23,19 +30,8 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.GaloisCover
 
-/-- Evaluation on the chosen graph determines an equivariant locally constant function.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R;
-lem-weil-pbc-torsor-section-evaluation-local, step 2.
-(blueprint: lem-weil-pbc-torsor-graph-evaluation)
-
-Proof: Base change the torsor isomorphism along f to split W times_V c.P into
-copies of W indexed by the finite group. The copy indexed by g is the graph of f
-followed by the action of g on the second factor. Thus these translates jointly
-cover the total space. If two equivariant functions agree on the graph, then at a
-point in its g-th translate their values both equal rho(g) applied to the same
-graph value. They therefore agree everywhere. This also covers empty W, with a
-vacuous pointwise assertion, and the trivial group, whose single translate is W.
-No connectedness, primality, sheaf, normalization, or constant trivialization is used. -/
+/-- Evaluation on the graph of a torsor section `f` over `W` determines an equivariant locally
+constant function on `W ×_V c.P`. -/
 theorem graphEvaluation_injective
     {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]
     (c : Scheme.GaloisCover (ULift.{u + 1} P) V)

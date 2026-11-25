@@ -19,8 +19,19 @@ import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
 /-!
 # Associated primes under flat base change
 
-Source: Stacks Project, Algebra, Lemma Tag 0312 (Bourbaki)
-(blueprint: lem-weil-pbc-associated-primes-flat-base-change).
+We prove Bourbaki's formula: for a ring map `R → S`, an `R`-module `M` and an `R`-flat
+`S`-module `N`, the associated primes of `M ⊗[R] N` are those of the quotients `N/pN` for
+`p ∈ Ass_R(M)`; the inclusion `⊇` holds in general and equality holds for Noetherian `R`.
+
+## Implementation details
+
+For the contraction step we localize only at `p` over `R`, instead of localizing `N` over
+`S`; no comparison of two localizations is needed. The reverse inclusion uses the prime
+filtration of a finite module over a Noetherian ring.
+
+## References
+
+* Stacks Project, Algebra, Lemma Tag 0312 (Bourbaki).
 -/
 
 @[expose] public section
@@ -91,11 +102,8 @@ private theorem associated_flat_tensor
   exact (associated_flat_tensor_finite L N hpL).map_of_injective L.subtype
     Subtype.val_injective
 
-/-- The contraction claim in Stacks 0312. We restrict the annihilator witness to R,
-commute tensor factors, and apply `associated_flat_tensor`. The latter localizes only
-at p over R: no localization of N over S or comparison of two localizations is needed.
-Source: Stacks Project, Algebra, Lemma Tag 0312, third proof paragraph;
-the equivalent argument with localization over R is written here by U1. -/
+/-- Let `R` be Noetherian and `N` an `R`-flat `S`-module. If `q` is an associated prime of
+the `S`-module `N ⊗[R] M`, then its contraction to `R` is an associated prime of `M`. -/
 private theorem annihilatorAssociatedPrimes_tensor_contraction
     {R : Type r} {S : Type s} [CommRing R] [CommRing S] [Algebra R S]
     (M : Type m) [AddCommGroup M] [Module R M]
@@ -273,42 +281,11 @@ private theorem associated_quotient_eq
     Ideal.Quotient.algebraMap_eq, ← map_mul, Ideal.Quotient.eq_zero_iff_mem]
   exact ⟨fun h ↦ (hp.mem_or_mem h).resolve_right hx, fun h ↦ p.mul_mem_right x h⟩
 
-/-- Bourbaki's associated-prime formula for a flat module.
-Source: Stacks Project, Algebra, Lemma Tag 0312
-(blueprint: lem-weil-pbc-associated-primes-flat-base-change).
-The `S`-action on `M ⊗[R] N` is transported along tensor commutation from the action on
-`N ⊗[R] M`: thus `s • (m ⊗ n) = m ⊗ (s • n)`. The submodule `pN` is the
-pointwise set scalar product `(p : Set R) • ⊤` in `Submodule S N`.
-
-Proof, following the node's nine steps:
-1. For `p = Ann(z)`, inject `R/p` into `M` by `r ↦ r z`. Flatness
-   (def-weil-pbc-flat-ring-map, lem-weil-pbc-flat-tensor-exact) preserves this injection.
-   Identify `(R/p) ⊗ N` with `N/pN` (lem-weil-pbc-tensor-over-quotient-ring).
-   An injection preserves associated primes (lem-weil-pbc-associated-primes-exact-sequence).
-2. Associated primes of a directed union of submodules are the union of their associated
-   primes: each witnessing element already lies in one submodule, with the same annihilator.
-3. Write `M` as the directed union of its finite submodules (def-weil-finitely-generated-module).
-   Flatness embeds their tensors into `M ⊗ N`, with union the whole tensor. Step 2 reduces
-   equality over Noetherian `R` (def-weil-pbc-noetherian-ring) to finite `M`.
-4. For `q` associated to `M ⊗ N`, localize at `q` to obtain a nonzero element annihilated by
-   `q S_q` (lem-weil-pbc-associated-prime-localize-at-prime). Set `p` to its contraction.
-5. Identify `(M ⊗ N)_q` with `M_p ⊗ N_q`, compatibly with `R`-scalars, using
-   lem-weil-pbc-localization-tensor-over-base and
-   lem-weil-pbc-localization-module-over-localization (and the module-localization definition).
-6. `N_q` remains flat over `R`: localize the injections induced by tensoring with `N`, using
-   lem-weil-pbc-localization-module-exact and the naturality of the tensor identification.
-7. If `p R_p` were not associated to `M_p`, choose a nonzerodivisor in it using
-   lem-weil-pbc-nonzerodivisor-if-maximal-not-associated. Noetherian localization uses
-   lem-weil-pbc-localization-noetherian. Flatness makes its action injective on `M_p ⊗ N_q`,
-   contradicting Step 4. Descend association by
-   lem-weil-pbc-noetherian-associated-prime-from-localization. Thus `p` is associated to `M`.
-8. Choose a prime filtration of finite `M` (lem-weil-pbc-noetherian-module-prime-filtration).
-   Tensor it with `N`, using flat tensor exactness and lem-weil-pbc-tensor-right-exact.
-   Its quotients are `N/p_iN`. The exact-sequence associated-prime inclusion puts each
-   associated `q` in the associated primes of one such quotient.
-9. Step 7 applied to `R/p_i` shows that the contraction of this `q` is associated to `R/p_i`.
-   Primality gives `Ass(R/p_i) = {p_i}`. Hence that `p_i` is the contraction `p` already
-   associated to `M`, proving the reverse inclusion. All maps are `S`-linear. -/
+/-- Bourbaki's associated-prime formula for a flat module. Let `R → S` be a ring map, `M` an
+`R`-module and `N` an `S`-module that is flat over `R`. Then
+`⋃_{p ∈ Ass_R(M)} Ass_S(N/pN) ⊆ Ass_S(M ⊗[R] N)`, with equality if `R` is Noetherian. Here
+`S` acts on `M ⊗[R] N` through `N`, i.e. `s • (m ⊗ n) = m ⊗ (s • n)`, and `pN` is the
+pointwise product `(p : Set R) • ⊤` in `Submodule S N`. -/
 theorem annihilatorAssociatedPrimes_flat_base_change
     {R : Type r} {S : Type s} [CommRing R] [CommRing S] [Algebra R S]
     (M : Type m) [AddCommGroup M] [Module R M]
@@ -319,8 +296,6 @@ theorem annihilatorAssociatedPrimes_flat_base_change
       annihilatorAssociatedPrimes S (N ⧸ ((p : Set R) • (⊤ : Submodule S N)))
     rhs ⊆ annihilatorAssociatedPrimes S (M ⊗[R] N) ∧
       (IsNoetherianRing R → annihilatorAssociatedPrimes S (M ⊗[R] N) = rhs) := by
-  -- The contraction proof uses localization over R instead of the docstring
-  -- plan's localization over S. The filtration and both inclusions are unchanged.
   let : Module S (M ⊗[R] N) := (TensorProduct.comm R M N).toAddEquiv.module S
   dsimp only
   let e : (M ⊗[R] N) ≃ₗ[S] (N ⊗[R] M) :=

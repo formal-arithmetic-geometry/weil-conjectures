@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 /-!
 # Smooth duality for affine space from the affine line
 
-The induction step of blueprint `lemma-affine-space-etale-localization--1`: the projection
+The induction step for smooth duality of affine space: the projection
 `p_{d+1} : 𝔸^{d+1}_S ⟶ S` is, up to the isomorphism `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`, the composite of
 the affine-line projection over `𝔸^d_S` and of `p_d`. The canonical tensor maps compose
 (`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_comp_of_forall`), and the dualizing
@@ -51,9 +51,7 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- The tensor product of two locally constant sheaves of `Λ`-modules is locally constant: on a
-common trivialising cover it is the tensor product of two constant sheaves, which is the constant
-sheaf at the tensor product, pullback and the constant sheaf functor being monoidal. -/
+/-- The tensor product of two locally constant sheaves of `Λ`-modules is locally constant. -/
 theorem isLocallyConstantSheaf_tensorObj {X : Scheme.{u}}
     (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf F]
     [IsLocallyConstantSheaf G] : IsLocallyConstantSheaf (F ⊗ G) := by
@@ -95,8 +93,7 @@ namespace IsShiftedRankOneLocalSystem
 variable {X : Scheme.{u}}
 
 /-- The derived tensor product of shifted rank-one local systems in degrees `-a` and `-b` is a
-shifted rank-one local system in degree `-(a + b)`: `L[a] ⊗ᴸ L'[b] ≅ (L ⊗ L')[a + b]`, the
-derived tensor product of the flat sheaf `L` with `L'` being the tensor product of sheaves. -/
+shifted rank-one local system in degree `-(a + b)`: `L[a] ⊗ᴸ L'[b] ≅ (L ⊗ L')[a + b]`. -/
 theorem tensor
     {M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} {a b : ℤ}
     (hM : IsShiftedRankOneLocalSystem M a) (hN : IsShiftedRankOneLocalSystem N b) :
@@ -115,8 +112,7 @@ theorem tensor
 
 end IsShiftedRankOneLocalSystem
 
-/-- The unit `Λ_X` of `D(X_ét, Λ)` is a shifted rank-one local system in degree `0`: it is the
-constant sheaf `Λ_X`, placed in degree zero. -/
+/-- The unit `Λ_X` of `D(X_ét, Λ)` is a shifted rank-one local system in degree `0`. -/
 theorem isShiftedRankOneLocalSystem_unit (X : Scheme.{u}) :
     IsShiftedRankOneLocalSystem
       (𝟙_ (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))) 0 :=
@@ -131,10 +127,7 @@ variable (Λ) in
 /-- *Smooth duality for affine-line projections*: for every affine scheme `S` on which the
 exponent of `Λ` is invertible, the projection `p : 𝔸¹_S ⟶ S` satisfies smooth duality in degree
 `-2`: its dualizing complex is a locally constant sheaf of free rank-one `Λ`-modules placed in
-degree `-2` and its canonical tensor maps are isomorphisms. This is what the affine-line
-adjunction `Rp_! ⊣ p^*(1)[2]` (`lemma-affine-space-etale-localization--1` for `d = 1`, from
-`proposition-adjunction-projective-line--1`) gives, together with its compatibility with the tensor
-maps. -/
+degree `-2` and its canonical tensor maps are isomorphisms. -/
 def AffineLineSmoothDuality : Prop :=
   ∀ (S : Scheme.{u}) [IsAffine S] [HasInvertibleExponent Λ S],
     SatisfiesSmoothDuality Λ (𝔸(ULift.{u} (Fin 1); S) ↘ S) 2
@@ -146,13 +139,10 @@ theorem satisfiesSmoothDuality_of_isIso (hE : EtaleSmoothDuality Λ) {V W : Sche
   obtain ⟨hθ, ⟨hω⟩⟩ := hE e
   exact ⟨(isShiftedRankOneLocalSystem_unit V).of_iso hω.symm, hθ⟩
 
-/-- **Smooth duality for affine space from the affine line** (the induction of blueprint
-`lemma-affine-space-etale-localization--1`): if étale morphisms and affine-line projections over
-affine bases satisfy smooth duality, then so do the projections `p_d : 𝔸^d_S ⟶ S` over affine bases
-on which the exponent of `Λ` is invertible, in degree `-2d`. For `d = 0` the projection is an
-isomorphism; for `d + 1` it is, through `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`
-(`AlgebraicGeometry.AffineSpace.sumIso`), the composite of the affine-line projection over
-`𝔸^d_S` and of `p_d`, whose dualizing complexes multiply and whose tensor maps compose. -/
+/-- **Smooth duality for affine space from the affine line**: if étale morphisms and affine-line
+projections over affine bases satisfy smooth duality, then so do the projections
+`p_d : 𝔸^d_S ⟶ S` over affine bases on which the exponent of `Λ` is invertible, in degree
+`-2d`. -/
 theorem affineSpaceSmoothDuality_of_affineLineSmoothDuality (hE : EtaleSmoothDuality Λ)
     (h₁ : AffineLineSmoothDuality Λ) : AffineSpaceSmoothDuality Λ := by
   intro d S _ _
@@ -197,15 +187,12 @@ theorem affineSpaceSmoothDuality_of_affineLineSmoothDuality (hE : EtaleSmoothDua
     push_cast
     ring
 
-/-- **Smooth duality from the étale and affine-line cases** (the reduction in the proofs of
-blueprint `proposition-exceptional-inverse-image-smooth-morphism` and
-`lemma-affine-space-etale-localization--1`): if étale morphisms and the affine-line projections over
-affine bases satisfy smooth duality (`AlgebraicGeometry.Etale.EtaleSmoothDuality`,
-`AlgebraicGeometry.Etale.AffineLineSmoothDuality`), then for every smooth `f : X ⟶ Y` of relative
-dimension `d` admitting a compactification, with the exponent of `Λ` invertible on `X`,
-`ω_f ≅ L[2d]` for a locally constant sheaf `L` of free rank-one `Λ`-modules and
-`θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an isomorphism for every `K`; this is the statement of
-`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`. -/
+/-- **Smooth duality from the étale and affine-line cases**: if étale morphisms and the
+affine-line projections over affine bases satisfy smooth duality
+(`AlgebraicGeometry.Etale.EtaleSmoothDuality`, `AlgebraicGeometry.Etale.AffineLineSmoothDuality`),
+then for every smooth `f : X ⟶ Y` of relative dimension `d` admitting a compactification, with the
+exponent of `Λ` invertible on `X`, `ω_f ≅ L[2d]` for a locally constant sheaf `L` of free
+rank-one `Λ`-modules and `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an isomorphism for every `K`. -/
 theorem exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine
     (hE : EtaleSmoothDuality Λ) (h₁ : AffineLineSmoothDuality Λ) {X Y : Scheme.{u}}
     [HasInvertibleExponent Λ X] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)

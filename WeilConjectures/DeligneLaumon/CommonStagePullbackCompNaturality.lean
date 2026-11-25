@@ -11,8 +11,18 @@ public import WeilConjectures.DeligneLaumon.CommonStagePullbackCompComponent
 
 /-! # Naturality of the normalized common-stage compositor
 
-Source: Stacks Tag 099N(5), blueprint composition proof, first paragraph.
-(blueprint: lem-zl-common-stage-pullback-comp-naturality).
+The components of the normalized common-stage pullback compositor are natural.
+
+## Implementation details
+
+An arrow is represented at a common coefficient stage `L`. There one transports the integral
+compositor to `L` using the scalar-extension tower coherence, applies the naturality square of
+the integral pullback compositor and cancels the comparison isomorphisms. The recorded
+object-equality transports cancel by proof irrelevance.
+
+## References
+
+* [Stacks Project, Tag 099N]
 -/
 
 @[expose] public noncomputable section
@@ -48,15 +58,8 @@ private theorem comp_ofHom_square
     StageSystem.PairCategory.mkHom_comp_mkHom] using
       congrArg (StageSystem.PairCategory.mkHom L hP hS) e
 
-/-- Naturality for one explicit common-stage representative.
-The representative formula is expanded at a common coefficient stage.  One first
-uses the scalar-extension tower coherence to transport the integral compositor to
-that stage, then applies the naturality square of the integral pullback compositor
-and cancels the comparison isomorphisms.  The proof is the finite-stage core of
-`commonStagePullbackCompComponent_naturality`.
-Source: Stacks 099N(5), coefficient-compatibility argument in residue-compatible
-pullback, Step 10.
-(blueprint: lem-zl-common-stage-pullback-comp-naturality-representative). -/
+/-- Naturality of the common-stage compositor for a morphism given by an explicit
+representative at a common coefficient stage. -/
 theorem commonStagePullbackCompComponent_naturality_ofHom {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -109,20 +112,7 @@ theorem commonStagePullbackCompComponent_naturality_ofHom {X Y Z : Scheme.{u}}
   exact
   commonStagePullbackCompComponent_stage_square l Ω f g L hP hQ r
 
-/-- The normalized integral components descend naturally to common-stage morphisms.
-Source: Stacks 099N(5); blueprint composition proof, first paragraph, and the
-coefficient-compatibility argument in residue-compatible pullback, Step 10
-(blueprint: lem-zl-common-stage-pullback-comp-naturality).
-Proof: represent the arrow at a common coefficient stage L. The recorded pullback
-map formula conjugates its rational pullback by the normalized scalar comparisons.
-The integral scalar/composition square reduces at each finite coefficient quotient
-to tensor reassociation and multiplication; fully faithful normalized reduction
-reflects that square. Rationalize it on pure tensors. Additivity extends naturality
-from pure tensors to every rational morphism. Use the scalar square to move both
-component comparisons to L, cancel their invertible boundary comparisons, and apply
-rational naturality there. The two recorded object-equality transports cancel by
-proof irrelevance. Identity stages keep their normalized transition comparisons;
-empty schemes and arbitrary semilinear scheme morphisms need no extra hypothesis. -/
+/-- The normalized integral components descend naturally to common-stage morphisms. -/
 theorem commonStagePullbackCompComponent_naturality {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]
