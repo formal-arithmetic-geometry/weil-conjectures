@@ -24,12 +24,15 @@ projection. For a sheaf `F` of `Λ`-modules on `U_ét`, the stalk formula
 `(R^q f_* F)_s ≅ H^q(U ×_Z S, p^* F)` (Stacks 03Q9,
 `AlgebraicGeometry.Etale.strictHenselizationStalkFormula`), applied to the underlying abelian
 sheaf, shows: if the abelian cohomology `H^q(U ×_Z S, p^* F)` vanishes in every degree, then the
-geometric stalk `(Rf_* F)_s = Ls^* Rf_* F` vanishes in `D(Λ)`
-(blueprint `lemma-cohomology-near-two-transverse-divisors--1`, stalk formula and forgetting `Λ`).
+geometric stalk `(Rf_* F)_s = Ls^* Rf_* F` vanishes in `D(Λ)`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_rightDerivedLowerStar_of_subsingleton_sheafH`
+
+## References
+
+* [Stacks, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 -/
 
 @[expose] public section
@@ -44,9 +47,9 @@ namespace AlgebraicGeometry.Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Stacks 03Q9, after forgetting `Λ`: if the abelian cohomology of `p^* F` on `U ×_Z S`
-vanishes in degree `q`, `S` the strict localization of `Z` at `s`, then the stalk at `s` of
-the higher direct image `R^q f_* F` vanishes. -/
+/-- If the abelian cohomology of `p^* F` on `U ×_Z S` vanishes in degree `q`, `S` the strict
+localization of `Z` at `s`, then the stalk at `s` of the higher direct image `R^q f_* F`
+vanishes. -/
 theorem isZero_sheafFiber_higherDirectImage_of_subsingleton_sheafH
     {U Z : Scheme.{u}} (f : U ⟶ Z) [QuasiCompact f] [QuasiSeparated f]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Z)
@@ -79,10 +82,9 @@ theorem isZero_sheafFiber_higherDirectImage_of_subsingleton_sheafH
   rw [AddCommGrpCat.isZero_iff_subsingleton] at h
   exact ModuleCat.isZero_of_subsingleton _
 
-/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1` (stalk formula): if the abelian
-étale cohomology of the pullback `p^* F` of a sheaf of `Λ`-modules to `U ×_Z S`, `S` the strict
-localization of `Z` at `s`, vanishes in every degree, then the geometric stalk at `s` of
-`Rf_* F` vanishes. -/
+/-- If the abelian étale cohomology of the pullback `p^* F` of a sheaf of `Λ`-modules to
+`U ×_Z S`, `S` the strict localization of `Z` at `s`, vanishes in every degree, then the
+geometric stalk at `s` of `Rf_* F` vanishes. -/
 theorem isZero_leftDerivedUpperStar_rightDerivedLowerStar_of_subsingleton_sheafH
     {U Z : Scheme.{u}} (f : U ⟶ Z) [QuasiCompact f] [QuasiSeparated f]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Z)

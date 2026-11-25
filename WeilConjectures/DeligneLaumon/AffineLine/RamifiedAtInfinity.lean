@@ -31,11 +31,9 @@ generic point `x = 1 / t` of a dense open `Ū ⊆ 𝔸¹_{k̄}`.
   trivialised `ĀS^* ℒ_ψ` by `ψ(-c)`
   (`AlgebraicGeometry.affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage`).
 
-Together they give the blueprint lemma `lemma-unramified-at-infinity-no-linear-characters--1`: a
-nonzero linear Artin–Schreier sheaf is not unramified at infinity
-(`AlgebraicGeometry.not_isUnramifiedAtInfinity_artinSchreier`), and the case `a ≠ 0` of
-`lemma-unramified-at-infinity-no-linear-characters`: a lisse sheaf unramified at infinity has no
-geometric constituent `ℒ_{ψ(a x)}|_U` with `a ≠ 0`
+Together they show that a nonzero linear Artin–Schreier sheaf is not unramified at infinity
+(`AlgebraicGeometry.not_isUnramifiedAtInfinity_artinSchreier`), and that a lisse sheaf
+unramified at infinity has no geometric constituent `ℒ_{ψ(a x)}|_U` with `a ≠ 0`
 (`WeilSheaf.LisseOnDenseOpen.not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity'`).
 The second statement needs no semisimplicity: a subquotient of a constant sheaf on `Spec K` is
 already excluded.
@@ -76,8 +74,7 @@ variable (ψ : AddChar k₀ (PadicAlgCl l))
 
 /-- **`ℒ_{ψ(a x)}` is not a subquotient of a constant sheaf on the punctured disc at `∞`.** For
 `ψ ≠ 1` and `a ≠ 0` in `k̄`, the pullback of `ℒ_ψ` along the point `x = a / t` of `𝔸¹_{k̄}`
-with values in `K = k̄((t))` is not a quotient of a subsheaf of a constant sheaf `ℚ̄_ℓⁿ`: the
-inertia group at infinity acts on it through the nontrivial character `ψ`. -/
+with values in `K = k̄((t))` is not a quotient of a subsheaf of a constant sheaf `ℚ̄_ℓⁿ`. -/
 theorem not_epi_upperStar_laurentPoint_artinSchreierImage (hψ : ψ ≠ 1)
     {a : AlgebraicClosure k₀} (ha : a ≠ 0) {n : ℕ} {B : ProEtale.AdicSheaf l (Spec (.of K̄))}
     (m : B ⟶ ⨁ fun _ : Fin n ↦ ProEtale.AdicSheaf.unit l (Spec (.of K̄))) [Mono m]
@@ -101,8 +98,7 @@ variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
 /-- **A sheaf unramified at infinity is constant on the punctured disc at `∞`.** If the lisse
 Weil sheaf `F` on `U₀ ⊆ 𝔸¹` extends to a lisse sheaf on a neighbourhood `W` of `∞`, its
 underlying sheaf becomes constant after pullback along any lift `Spec k̄((t)) ⟶ Ū` of the point
-`x = 1 / t`: this point extends to the point `z = t` of `W̄` with values in the strictly
-henselian ring `k̄⟦t⟧`, on whose spectrum lisse sheaves are constant. -/
+`x = 1 / t`. -/
 theorem exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity {F : WeilSheaf k₀ l U}
     {j : U ⟶ affineLine k₀} [IsOpenImmersion j] [j.IsOver (Spec (CommRingCat.of k₀))]
     (hF : F.IsUnramifiedAtInfinity j)
@@ -141,11 +137,7 @@ variable (ψ : AddChar k₀ (PadicAlgCl l))
 
 /-- **Linear Artin–Schreier sheaves are ramified at infinity.** For a nontrivial additive
 character `ψ` and `a ≠ 0`, the Artin–Schreier sheaf `ℒ_{ψ(a x)}` on `𝔸¹_{k₀}` does not extend
-to a lisse sheaf on a neighbourhood of `∞` in `ℙ¹`: otherwise it would be constant on the
-punctured disc at `∞`
-(`AlgebraicGeometry.WeilSheaf.exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity`),
-while the inertia group at `∞` acts on it through `ψ`.
-(blueprint: `lemma-unramified-at-infinity-no-linear-characters--1`) -/
+to a lisse sheaf on a neighbourhood of `∞` in `ℙ¹`. -/
 theorem not_isUnramifiedAtInfinity_artinSchreier (hψ : ψ ≠ 1) {a : k₀} (ha : a ≠ 0) :
     ¬ (artinSchreier ψ a).IsUnramifiedAtInfinity (𝟙 (affineLine k₀)) := by
   intro h
@@ -162,11 +154,7 @@ namespace WeilSheaf.LisseOnDenseOpen
 variable (D : LisseOnDenseOpen k₀ l)
 
 /-- A lisse sheaf unramified at infinity has no geometric constituent `ℒ_{ψ(a x)}|_U` with
-`a ≠ 0`: on the punctured disc at `∞` the sheaf becomes constant
-(`AlgebraicGeometry.WeilSheaf.exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity`),
-so a geometric constituent becomes a subquotient of a constant sheaf, which `ℒ_{ψ(a x)}` is not
-(`AlgebraicGeometry.affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage`).
-(blueprint: `lemma-unramified-at-infinity-no-linear-characters`, case `a ≠ 0`) -/
+`a ≠ 0`. -/
 theorem not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity' (hψ : ψ ≠ 1)
     (hinf : D.IsUnramifiedAtInfinity) {a : AlgebraicClosure k₀} (ha : a ≠ 0) :
     ¬ D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j := by

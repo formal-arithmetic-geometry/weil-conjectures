@@ -14,8 +14,17 @@ import Mathlib.RingTheory.TensorProduct.Quotient
 /-!
 # Rank-one propagation for a Zariski pair
 
-Source: literature/stacks-project/more-algebra.tex, Lemma Tag 0ELZ
-(blueprint: lem-weil-pbc-zariski-pair-rank-one-propagation)
+A finite flat algebra whose reduction modulo an ideal in the Jacobson radical is the base
+quotient has rank one at every prime.
+
+## Implementation details
+
+The rank at a maximal ideal containing the given prime is computed by base change to the
+quotient, and rank of a finite flat module is unchanged under specialization.
+
+## References
+
+* Stacks Project, More on Algebra, Lemma 0ELZ
 -/
 
 @[expose] public section
@@ -25,19 +34,8 @@ universe u v
 namespace RingHom
 
 /-- A finite flat algebra whose reduction modulo an ideal in the Jacobson radical is the
-base quotient has rank one at every prime.
-Source: Stacks Project, More on Algebra, Lemma Tag 0ELZ
-(blueprint: lem-weil-pbc-zariski-pair-rank-one-propagation).
-Proof:
-1. The quotient isomorphism and the quotient/tensor-product equivalence identify
-   `(A/I) ⊗[A] B` with `A/I` as an `A/I`-module.
-2. Given a prime `p`, choose a maximal ideal `m` containing it. Since the Jacobson
-   radical is contained in `m`, so is `I`; thus `m` comes from a prime `q` of `A/I`.
-   The base-change formula for rank and the equivalence in step 1 give rank one at `m`.
-3. For a finite flat module the rank is unchanged under specialization `p ≤ m`.
-   The localization at `p` is finite free over the local ring `A_p`; its rank is one,
-   so it is linearly equivalent to `A_p`.
--/
+base quotient has rank one at every prime: each localization `B_p` is linearly equivalent to
+`A_p`. -/
 theorem zariskiPair_rank_one_propagation
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
     [Module.Finite A B] [Module.FinitePresentation A B]

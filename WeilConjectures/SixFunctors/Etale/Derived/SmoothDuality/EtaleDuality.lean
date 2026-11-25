@@ -14,9 +14,15 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.EtaleDuali
 
 For an étale morphism `e : X ⟶ Y` admitting a compactification, `Re^! ≅ Le^*` and the canonical
 tensor map `θ_{e,K} : ω_e ⊗ᴸ Le^* K ⟶ Re^! K` is an isomorphism for every `K`, with `ω_e ≅ Λ_X`
-(`AlgebraicGeometry.Etale.etaleSmoothDuality`): the étale case of the proof of blueprint
-`proposition-exceptional-inverse-image-smooth-morphism`, from
-`lemma-affine-space-etale-localization--4`.
+(`AlgebraicGeometry.Etale.etaleSmoothDuality`). This is the étale case of smooth duality.
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_isOpenImmersion`
+- `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_etale`
+- `AlgebraicGeometry.Etale.etaleSmoothDuality`
+
+## Implementation details
 
 The compactly supported direct image `R(e)_!` is left adjoint to `Le^*`
 (`AlgebraicGeometry.Etale.compactificationEtaleAdjunction`), so `ω_e ≅ Le^* Λ_Y ≅ Λ_X`. The
@@ -34,12 +40,6 @@ tensor maps are treated in three steps.
   projection `g'`.
 * In general, `θ_e` descends along a cover of `X` by affine opens mapping to affine opens of `Y`,
   over which `e` is quasi-compact.
-
-## Main statements
-
-- `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_isOpenImmersion`
-- `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_etale`
-- `AlgebraicGeometry.Etale.etaleSmoothDuality`
 -/
 
 @[expose] public section
@@ -91,9 +91,7 @@ section OpenImmersion
 
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- **The unit of `Rf_!(c) ⊣ Lj^*` is an isomorphism for an open immersion `j`.** The unit
-commutes with base change (`AlgebraicGeometry.Etale.compactificationEtaleUnit_baseChange`), and
-the base change of `j` along itself is `𝟙 U`, for which `Lj^*` is an equivalence. -/
+/-- **The unit of `Rf_!(c) ⊣ Lj^*` is an isomorphism for an open immersion `j`.** -/
 theorem isIso_compactificationEtaleUnit_app_of_isOpenImmersion (c : Compactification j)
     (N : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso ((compactificationEtaleUnit Λ j c).app N) := by
@@ -111,10 +109,7 @@ theorem isIso_compactificationEtaleUnit_app_of_isOpenImmersion (c : Compactifica
   exact (NatIso.isIso_map_iff (leftDerivedUpperStarId _ U) _).1 this
 
 /-- **Smooth duality for open immersions**: for an open immersion `j` admitting a
-compactification, the canonical tensor map `θ_{j,K}` is an isomorphism for every `K`. The unit
-of `R(j)_! ⊣ Lj^*` is an isomorphism, so the tensor maps of this adjunction are
-(`CategoryTheory.Adjunction.isIso_projectionTensorMap_of_isIso_unit`), and so are those of
-`R(j)_! ⊣ Rj^!`. -/
+compactification, the canonical tensor map `θ_{j,K}` is an isomorphism for every `K`. -/
 theorem isIso_dualizingComplexTensorMap_of_isOpenImmersion [HasCompactification j]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (dualizingComplexTensorMap Λ j K) := by
@@ -155,11 +150,8 @@ lemma isIso_map_rightDerivedUpperShriekTensorMap_of_iso_left {X Y : Scheme.{u}} 
   rw [Functor.map_comp] at this
   exact IsIso.of_isIso_comp_left (H.map ((R(f)^![Λ]).map φ.hom ▷ _)) _
 
-/-- **Smooth duality for quasi-compact étale morphisms.** Base change `e` along itself: the
-diagonal `Δ` is a section of the second projection `e'`, hence an open immersion, and by the
-composition law `LΔ^*` of the tensor maps of `e'` are isomorphisms. The base change map being an
-isomorphism (`AlgebraicGeometry.Etale.etaleBaseChange`), so is `LΔ^* Lg'^* θ_{e,K} ≅ θ_{e,K}`,
-for the first projection `g'`. -/
+/-- **Smooth duality for quasi-compact étale morphisms**: for a quasi-compact étale `e` admitting
+a compactification, the canonical tensor map `θ_{e,K}` is an isomorphism for every `K`. -/
 theorem isIso_dualizingComplexTensorMap_of_quasiCompact {V W : Scheme.{u}} (e : V ⟶ W)
     [_root_.AlgebraicGeometry.Etale e] [QuasiCompact e] [HasCompactification e]
     (K : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -201,10 +193,7 @@ theorem isIso_dualizingComplexTensorMap_of_quasiCompact {V W : Scheme.{u}} (e : 
 end QuasiCompact
 
 /-- **Smooth duality for étale morphisms, the tensor maps**: for an étale `e` admitting a
-compactification, `θ_{e,K}` is an isomorphism for every `K`. Cover `X` by affine opens `V_x`
-mapping to affine opens `U_x` of `Y`: the restriction `V_x ⟶ U_x` is quasi-compact
-(`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_quasiCompact`), the tensor maps
-compose with those of the open immersion `U_x ⟶ Y`, and they descend along the open cover. -/
+compactification, `θ_{e,K}` is an isomorphism for every `K`. -/
 theorem isIso_dualizingComplexTensorMap_of_etale {V W : Scheme.{u}} (e : V ⟶ W)
     [_root_.AlgebraicGeometry.Etale e] [HasCompactification e]
     (K : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -245,8 +234,7 @@ theorem isIso_rightDerivedUpperShriekTensorMap_of_etale {X Y : Scheme.{u}} (e : 
     (projectionMapAssociativity Λ e) (isIso_dualizingComplexTensorMap_of_etale Λ e) M N
 
 variable {Λ} in
-/-- **Smooth duality for étale morphisms** (the étale case of the proof of blueprint
-`proposition-exceptional-inverse-image-smooth-morphism`): for every étale `e` admitting a
+/-- **Smooth duality for étale morphisms**: for every étale `e` admitting a
 compactification, the canonical tensor map `θ_{e,K} : ω_e ⊗ᴸ Le^* K ⟶ Re^! K` is an isomorphism for
 every `K`, and `ω_e ≅ Λ`. -/
 theorem etaleSmoothDuality : EtaleSmoothDuality Λ := by

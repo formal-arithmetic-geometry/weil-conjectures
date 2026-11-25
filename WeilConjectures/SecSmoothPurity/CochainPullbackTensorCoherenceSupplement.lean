@@ -18,12 +18,13 @@ import WeilConjectures.SecSmoothPurity.ModuleTensorCoefficientEquations
 
 /-! # Signed tensor comparison and coherence on cochain sheaves
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4, and sites-modules.tex,
-Tag 03EL (blueprint: lem-pur-cochain-pullback-tensor-coherence).
-
 The tensor, associator, Koszul symmetry and action unitors below are the existing
 homological-complex constructions. Coefficient arrows are characterized on
 scalar-extension generators, and composition uses the adjunction conjugate.
+
+## References
+
+* Stacks Project, Tags 07A4 and 03EL
 -/
 
 -- After pruning, this module only keeps private declarations.

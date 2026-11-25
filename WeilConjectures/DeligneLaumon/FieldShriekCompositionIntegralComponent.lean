@@ -16,8 +16,13 @@ import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Normalized components of the integral field shriek compositor
 
-Source: Stacks Project, Tag 0F7J, and Bhatt--Scholze Definition 6.7.6
-(blueprint: lem-zl-field-shriek-integral-component).
+The proper/open normalization predicate for a single component of the integral
+compact-support compositor.
+
+## References
+
+* [Stacks Project, Tag 0F7J]
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6]
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +45,7 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (cf : Compactification f) (cg : Compactification g) (cfg : Compactification (f ≫ g))
 
 /-- The proper/open normalization at one input. Its equation is exactly the
-component equation of `SfIntegralCompositionSpec`; it asserts no naturality in the input.
-Source: Stacks 0F7J (blueprint: lem-zl-field-shriek-integral-component). -/
+component equation of `SfIntegralCompositionSpec`; it asserts no naturality in the input. -/
 def SfIntegralCompositionComponentSpec
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (K : sfIntegralConstructibleCategory l E X)

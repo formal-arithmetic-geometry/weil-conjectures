@@ -12,8 +12,12 @@ import Mathlib.LinearAlgebra.Pi
 /-!
 # A basis for the kernel of a functional with a unit basis value
 
-Source: Stacks Project, Algebra, Tag 00MT, the changes of basis and complementary spans.
-(blueprint: lem-weil-pbc-kernel-basis-unit-value).
+If `ℓ` is a linear functional on a free module with basis `b` indexed by `Fin n` and `ℓ (b p)` is a
+unit, then the kernel of `ℓ` is free with a basis indexed by `Fin (n - 1)`.
+
+## References
+
+* [Stacks Project, Tag 00MT](https://stacks.math.columbia.edu/tag/00MT)
 -/
 
 @[expose] public section
@@ -22,21 +26,7 @@ universe u v
 
 namespace Module.Basis
 
-/-- Removing a unit pivot from a functional gives a finite free kernel.
-Source: Stacks Project, Algebra, Tag 00MT, proof, changes of basis and complementary spans.
-(blueprint: lem-weil-pbc-kernel-basis-unit-value).
-
-Proof: Restrict the coordinate map of `b` to the kernel, retaining only the coordinates
-indexed by `{k : Fin n // k ≠ p}`. This map is injective: a kernel vector whose remaining
-coordinates vanish is `r • b p`, and applying `ℓ` gives `r * ℓ (b p) = 0`. Since the second
-factor is a unit, `r = 0`. It is surjective: extend the prescribed remaining coordinates
-by zero at `p`, use `b.equivFun.symm` to obtain a vector `v`, and replace `v` by
-`v - (a⁻¹ * ℓ v) • b p`, where `a = ℓ (b p)` and `a⁻¹` is the inverse unit. The new vector
-lies in the kernel and has exactly the prescribed remaining coordinates. Thus the
-coordinate map is a linear equivalence. Its inverse gives a basis of the kernel, and
-`finSuccAboveEquiv` reindexes it by `Fin (n - 1)`. This is the coordinate form of the
-source's subtraction of the pivot component and its complementary span. The argument
-also works in the zero ring; `p : Fin n` rules out `n = 0`. -/
+/-- Removing a unit pivot from a functional gives a finite free kernel. -/
 theorem exists_basis_ker_of_isUnit_value
     {R : Type u} [CommRing R] {F : Type v} [AddCommGroup F] [Module R F]
     {n : ℕ} (b : Module.Basis (Fin n) R F) (ℓ : F →ₗ[R] R) (p : Fin n)

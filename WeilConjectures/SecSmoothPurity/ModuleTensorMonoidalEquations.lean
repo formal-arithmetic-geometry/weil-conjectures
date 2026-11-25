@@ -9,9 +9,12 @@ import WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
 
 /-! # Associativity and symmetry of the ordinary module comparison
 
-Source: Stacks Project, sites-modules.tex, Tag 03EL, and
-sites-cohomology.tex, Tag 07A4.
-(auxiliary; not a blueprint node)
+This file shows that the normalized module tensor comparison for a ringed pullback
+is compatible with the associator and the braiding.
+
+## References
+
+* Stacks Project, Tags 03EL and 07A4
 -/
 
 @[expose] public section
@@ -88,10 +91,7 @@ private noncomputable def swappedComparison (f : RingedPullback R S) (k : Compar
     simpa only [Iso.trans_hom, Functor.mapIso_hom, Functor.map_comp,
       Category.assoc] using hh
 
-/-- The normalized module tensor comparison preserves the symmetry.
-Source: Stacks 03EL and 03EK (auxiliary; not a blueprint node).
-Proof: swapping the source and target factors gives a comparison with the same pure
-formula, by the sheafification braiding formula. Uniqueness identifies it with k. -/
+/-- The normalized module tensor comparison preserves the symmetry. -/
 theorem cochainModuleTensorBraiding (f : RingedPullback R S) (k : Comparison f)
     (M N : Modules R) :
     f.L.map (β_ M N).hom ≫ (k.mu N M).hom =
@@ -202,22 +202,7 @@ private theorem generator_triple_elements (f : RingedPullback R S) (k : Comparis
     exact congrArg ((k.q P).hom.app W) hi
 
 -- Triple generators require dependent conversions through scalar extension.
-/-- The ordinary normalized module tensor comparison respects associativity and symmetry.
-Source: Stacks 03EL, lemma-tensor-product-pullback, with the tensor structure of 03EK.
-(auxiliary; not a blueprint node).
-
-Proof: evaluate associativity on generalized pure triple tensors, after inverse image
-and insertion of scalar units. Both routes take s tensor ((x tensor y) tensor z) to
-(s tensor x) tensor ((1 tensor y) tensor (1 tensor z)). Evaluate symmetry on generalized
-pure pairs; both routes take s tensor (x tensor y) to (1 tensor y) tensor (s tensor x).
-These formulas follow from the pure field of each comparison, naturality of the
-inverse-image underlying-module identification, and the sheaf tensor associator and
-symmetry. The scalar-extension balancing relations move s to either tensor factor.
-The inverse-image functor preserves finite products, so pairs and triples of sections
-are represented by generalized elements of the corresponding products. Scalar-extension
-linearity and the sheafification adjunction extend equality from inserted pure tensors
-to all module morphisms. No points, flatness, unit isomorphism or complexes are used.
-Zero rings and zero modules satisfy the same formulas. -/
+/-- The ordinary normalized module tensor comparison respects associativity and symmetry. -/
 theorem cochainModuleTensorAssociativity (f : RingedPullback R S) (k : Comparison f) :
     ∀ M N H : Modules R,
       (k.mu (M ⊗ N) H).hom ≫ ((k.mu M N).hom ⊗ₘ 𝟙 _) ≫

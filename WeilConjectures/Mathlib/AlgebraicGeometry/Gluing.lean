@@ -69,9 +69,16 @@ records the basic geometry of this pushout:
   `AlgebraicGeometry.IsSeparated.pushout_desc`: quasi-compactness and (given that the
   graph `U ⟶ X ×_S Y` is a closed immersion) separatedness of the glued morphism.
 
-These are the raw ingredients for the intermediate schemes `Wᵢ = U ⊔_{Uᵢ} Xᵢ°` of the
-two-open compactification theorem (blueprint chapter "Nagata compactification",
-`def:nagata-two-open-intermediate-schemes`).
+## Implementation details
+
+These are the ingredients for the intermediate schemes `Wᵢ = U ⊔_{Uᵢ} Xᵢ°` of the two-open
+form of Nagata compactification. Quasi-compactness of morphisms is not Zariski-local on the
+source, so `QuasiCompact.pushout_desc` is proved directly, using that the cover of the pushout
+has only two members.
+
+## References
+
+* Stacks Project, Tag 0F3U (the two-open criterion for separatedness).
 -/
 
 @[expose] public section
@@ -199,18 +206,14 @@ end Dominant
 
 variable {U X Y : Scheme.{u}} (f : U ⟶ X) (g : U ⟶ Y) [IsOpenImmersion f] [IsOpenImmersion g]
 
-/-- Every arrow of the span of two open immersions is an open immersion: the two
-non-identity arrows are `f` and `g` themselves. This is what makes the span a locally
-directed diagram, hence gluable. -/
+/-- Every arrow of the span of two open immersions is an open immersion. -/
 instance IsOpenImmersion.span_map : ∀ {i j : WalkingSpan} (h : i ⟶ j),
     IsOpenImmersion ((span f g).map h)
   | _, _, .id _ => by rw [span_map_id]; infer_instance
   | _, _, .init WalkingPair.left => inferInstanceAs (IsOpenImmersion f)
   | _, _, .init WalkingPair.right => inferInstanceAs (IsOpenImmersion g)
 
-/-- The pushout of two open immersions of schemes with common source exists: the span
-is a locally directed diagram of open immersions, glued by
-`AlgebraicGeometry.Scheme.IsLocallyDirected`. -/
+/-- The pushout of two open immersions of schemes with common source exists. -/
 instance IsOpenImmersion.hasPushout : HasPushout f g :=
   inferInstanceAs (HasColimit (span f g))
 
@@ -299,12 +302,8 @@ lemma IsZariskiLocalAtSource.pushout_desc {P : MorphismProperty Scheme.{u}}
   | left => simpa only [IsOpenImmersion.pushoutCover_f, pushout.inl_desc] using hh
   | right => simpa only [IsOpenImmersion.pushoutCover_f, pushout.inr_desc] using hk
 
-/-- **Quasi-compactness of a gluing of two schemes along a common open**: the inverse
-image of a quasi-compact open under the glued morphism is the union of the images of the
-two inverse images under `h` and `k`, hence quasi-compact. (Quasi-compactness of morphisms
-is not Zariski-local on the source, so this does not follow from
-`AlgebraicGeometry.IsZariskiLocalAtSource.pushout_desc`; what makes it work is that the
-cover of the pushout has only two members.) -/
+/-- **Quasi-compactness of a gluing of two schemes along a common open**: if `h : X ⟶ S` and
+`k : Y ⟶ S` are quasi-compact, then so is the glued morphism `X ⊔_U Y ⟶ S`. -/
 theorem QuasiCompact.pushout_desc {S : Scheme.{u}} {h : X ⟶ S} {k : Y ⟶ S}
     (w : f ≫ h = g ≫ k) [QuasiCompact h] [QuasiCompact k] :
     QuasiCompact (pushout.desc h k w) := by
@@ -337,9 +336,7 @@ theorem QuasiCompact.pushout_desc {S : Scheme.{u}} {h : X ⟶ S} {k : Y ⟶ S}
 /-- **Separatedness of a gluing of two schemes along a common open**: let `h : X ⟶ S`
 and `k : Y ⟶ S` be separated morphisms restricting to the same morphism on a common
 open subscheme `U`, and assume the graph morphism `(f, g) : U ⟶ X ×_S Y` is a closed
-immersion. Then the glued morphism `X ⊔_U Y ⟶ S` is separated. This is the form of the
-two-open criterion (Stacks Project Tag 0F3U, `IsSeparated.of_two_open_cover`) used for
-the intermediate schemes of the two-open compactification theorem. -/
+immersion. Then the glued morphism `X ⊔_U Y ⟶ S` is separated. -/
 theorem IsSeparated.pushout_desc {S : Scheme.{u}} {h : X ⟶ S} {k : Y ⟶ S}
     (w : f ≫ h = g ≫ k) [IsSeparated h] [IsSeparated k]
     (hd : IsClosedImmersion (pullback.lift f g w)) :

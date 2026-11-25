@@ -12,17 +12,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.BaseChange
 /-!
 # Base change for the affine line from the projective line
 
-The elementary case (a) of the proof of blueprint
-`proposition-exceptional-inverse-image-smooth-morphism--6` concerns the projection `p : 𝔸¹_S ⟶ S`.
-It factors as the standard chart `j : 𝔸¹_S ⟶ ℙ¹_S`, an open immersion, followed by the proper
-projection `q : ℙ¹_S ⟶ S`. Base change holds for `Rj^!`
+The projection `p : 𝔸¹_S ⟶ S` factors as the standard chart `j : 𝔸¹_S ⟶ ℙ¹_S`, an open
+immersion, followed by the proper projection `q : ℙ¹_S ⟶ S`. Base change holds for `Rj^!`
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right`) and
 base change maps compose
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_comp`), so base change for
-the affine line follows from base change for the projective line: this is the reduction of the
-blueprint to the projective-line adjunction `Rq_* ⊣ q^*(1)[2]`
-(`proposition-adjunction-projective-line--1`) whose unit and counit commute with base change
-(`proposition-adjunction-projective-line`).
+the affine line follows from base change for the projective line. The latter reduces to the
+projective-line adjunction `Rq_* ⊣ q^*(1)[2]`, whose unit and counit commute with base change.
 
 ## Main definitions
 
@@ -31,6 +27,19 @@ blueprint to the projective-line adjunction `Rq_* ⊣ q^*(1)[2]`
 ## Main statements
 
 - `AlgebraicGeometry.Etale.affineLineBaseChange_of_projectiveLineBaseChange`
+
+## Implementation details
+
+In `AlgebraicGeometry.Etale.projectiveLineBaseChange_of_adjunction`, for the standard square of
+`g : S' ⟶ S` (`AlgebraicGeometry.ProjectiveSpace.isPullback_map`) the base change map of `Rq^!`
+is the mate of the inverse of `Ex_!`, which, computed through the adjunctions
+`Rq_! ⊣ Lq^*(1)[2]` and `Rq'_! ⊣ Lq'^*(1)[2]` with compatible counits, is the canonical
+isomorphism `Lg'^*(Lq^* K(1)[2]) ≅ Lq'^* Lg^* K(1)[2]`
+(`CategoryTheory.isIso_mateEquiv_app_of_counit`). An arbitrary cartesian square of `q` is
+isomorphic to the standard one through an isomorphism `e : P' ≅ ℙ¹_{S'}` over `S'`; stacking the
+square of the open immersion `𝟙 : ℙ¹_S ⟶ ℙ¹_S` with vertical map `e` on the standard square, the
+base change maps compose
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff`).
 -/
 
 @[expose] public section
@@ -54,19 +63,16 @@ variable (Λ) in
 exponent of `Λ` is invertible and every cartesian square of the projection
 `q : ℙ¹_S ⟶ S` (here `ℙ¹_S = ℙ(Option (Fin 1); S)`, the target of the standard chart of `𝔸¹_S`)
 with quasi-compact base change admitting a compactification, the canonical base change map
-`Lg'^* Rq^! ⟶ Rq'^! Lg^*` is an isomorphism. By the blueprint
-(`proposition-adjunction-projective-line`), `Rq^! = q^*(1)[2]` with counit built from the
-projective-line trace, and unit and counit commute with base change. -/
+`Lg'^* Rq^! ⟶ Rq'^! Lg^*` is an isomorphism. -/
 def ProjectiveLineBaseChange : Prop :=
   ∀ ⦃S : Scheme.{u}⦄ [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
     {g : S' ⟶ S} {q' : P' ⟶ S'} {g' : P' ⟶ ℙ(Option (ULift.{u} (Fin 1)); S)}
     (sq : IsPullback g' q' (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S) g) [HasCompactification q']
     [QuasiCompact q'], IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq)
 
-/-- **Base change for the affine line from the projective line.** The projection
-`𝔸¹_S ⟶ S` is the standard chart `𝔸¹_S ⟶ ℙ¹_S`, a quasi-compact open immersion, followed by
-the projection `ℙ¹_S ⟶ S`; base change maps compose, and base change holds for open
-immersions. -/
+/-- **Base change for the affine line from the projective line.** Base change for the
+projective-line projections `ℙ¹_S ⟶ S` implies base change for the affine-line projections
+`𝔸¹_S ⟶ S`. -/
 theorem affineLineBaseChange_of_projectiveLineBaseChange (h : ProjectiveLineBaseChange Λ) :
     AffineLineBaseChange Λ := by
   intro S _ S' P' g p' g' sq _ _
@@ -90,9 +96,8 @@ section Adjunction
 variable [HasTateTwist Λ]
 
 variable (Λ) in
-/-- *The projective-line adjunction commutes with base change* (the form in which blueprint
-`proposition-adjunction-projective-line` is used): for every scheme `S` on which the exponent of `Λ`
-is invertible and every `g : S' ⟶ S`, with the cartesian square
+/-- *The projective-line adjunction commutes with base change*: for every scheme `S` on which
+the exponent of `Λ` is invertible and every `g : S' ⟶ S`, with the cartesian square
 
 ```
   ℙ¹_{S'} --g'--> ℙ¹_S
@@ -107,14 +112,7 @@ is invertible and every `g : S' ⟶ S`, with the cartesian square
 compact-support base change `Ex_! : Lg^* Rq_! ⟶ Rq'_! Lg'^*` and the canonical isomorphism
 `Lg'^*(Lq^* K(1)[2]) ≅ Lq'^* Lg^* K(1)[2]`:
 
-`Ex_! ≫ Rq'_!(Lg'^* Lq^* K(1)[2] ≅ Lq'^* Lg^* K(1)[2]) ≫ ε'_{Lg^* K} = Lg^* ε_K`.
-
-In the blueprint, `Rq_! = Rq_*` (`q` is proper), and the counit is
-`ε_K : Rq_* q^* K(1)[2] ≅ K ⊗ Rq_* Λ(1)[2] ⟶ K`, from the trace `Tr_q` of
-`lemma-cohomology-projective-line-trace`; the counit commutes with base change since the trace and
-the projection formula do. Base change for an arbitrary cartesian square of `q` follows, since such
-a square is isomorphic to this one
-(`AlgebraicGeometry.Etale.projectiveLineBaseChange_of_adjunction`). -/
+`Ex_! ≫ Rq'_!(Lg'^* Lq^* K(1)[2] ≅ Lq'^* Lg^* K(1)[2]) ≫ ε'_{Lg^* K} = Lg^* ε_K`. -/
 def ProjectiveLineAdjunctionBaseChange : Prop :=
   ∀ ⦃S : Scheme.{u}⦄ [HasInvertibleExponent Λ S] ⦃S' : Scheme.{u}⦄ (g : S' ⟶ S),
     haveI : HasInvertibleExponent Λ ℙ(Option (ULift.{u} (Fin 1)); S) := .of_hom (_ ↘ S)
@@ -141,17 +139,9 @@ def ProjectiveLineAdjunctionBaseChange : Prop :=
             adj'.counit.app ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) =
           (L((g)^*[ModuleCat.{u + 1} Λ])).map (adj.counit.app K)
 
-/-- **Base change for the projective line from the adjunction** (the formal part of the
-blueprint argument "the unit and counit commute with base change"). For the standard square of
-`g : S' ⟶ S` (`AlgebraicGeometry.ProjectiveSpace.isPullback_map`), the base change map of
-`Rq^!` is the mate of the inverse of `Ex_!`, which, computed through the adjunctions
-`Rq_! ⊣ Lq^*(1)[2]` and `Rq'_! ⊣ Lq'^*(1)[2]` with compatible counits, is the canonical
-isomorphism `Lg'^*(Lq^* K(1)[2]) ≅ Lq'^* Lg^* K(1)[2]`
-(`CategoryTheory.isIso_mateEquiv_app_of_counit`). An arbitrary cartesian square of `q` is
-isomorphic to the standard one through an isomorphism `e : P' ≅ ℙ¹_{S'}` over `S'`: stacking the
-square of the open immersion `𝟙 : ℙ¹_S ⟶ ℙ¹_S` with vertical map `e` on the standard square, the
-base change maps compose
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff`). -/
+/-- **Base change for the projective line from the adjunction.** If the projective-line
+adjunctions `Rq_! ⊣ Lq^*(1)[2]` have counits compatible with base change, then base change holds
+for the projective-line projections `q : ℙ¹_S ⟶ S`. -/
 theorem projectiveLineBaseChange_of_adjunction (h : ProjectiveLineAdjunctionBaseChange Λ) :
     ProjectiveLineBaseChange Λ := by
   intro S _ S' P' g q' g' sq _ _

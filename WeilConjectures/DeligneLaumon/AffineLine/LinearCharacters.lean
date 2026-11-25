@@ -26,7 +26,7 @@ For `a ∈ k̄` let `ℒ_{ψ(a x)} = (a ·)^* ℒ_ψ` be the geometric linear Ar
   (`AlgebraicGeometry.affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage`).
 
 The second statement uses the multiplicativity `ℒ_{ψ,f} ⊗ ℒ_{ψ,g} ≅ ℒ_{ψ,f+g}` of the
-Artin–Schreier sheaves (blueprint `lemma-artin-schreier-character-sheaf`), proved here for the two
+Artin–Schreier sheaves, proved here for the two
 coordinates of the plane `𝔸²` after base change to `k̄`
 (`AlgebraicGeometry.nonempty_iso_tensorLeft_upperStar_artinSchreier_add`) and pulled back along
 `x ↦ (a x, b x)`.
@@ -166,9 +166,7 @@ variable {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 /-- **Multiplicativity of the Artin–Schreier sheaves** on the plane: for the two coordinate
 functions `f = x` and `g = y` of `𝔸² = 𝔸¹ ×_{k₀} 𝔸¹`, `ℒ_{ψ,f} ⊗ ℒ_{ψ,g} ≅ ℒ_{ψ,f+g}`, where
 `ℒ_{ψ,h} = h^* ℒ_ψ`; stated for the underlying sheaves on the geometric plane `𝔸²_{k̄}`, the tensor
-product being that of sheaves of `ℚ̄_ℓ`-modules.
-(blueprint: `lemma-artin-schreier-character-sheaf`, the clause `ℒ_{ψ,f} ⊗ ℒ_{ψ,g} ≅ ℒ_{ψ,f+g}` for
-the coordinates `f = x`, `g = y` of `𝔸²`, after base change to `k̄`) -/
+product being that of sheaves of `ℚ̄_ℓ`-modules. -/
 theorem nonempty_iso_tensorLeft_upperStar_artinSchreier_add (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty ((Mod.tensorLeft ((Scheme.Hom.geometricFiberMap (affinePlane.snd k₀)
           (comp_over _ _))^*ᵃ[l].obj (artinSchreier ψ 1).obj.carrier)).obj
@@ -192,9 +190,7 @@ theorem nonempty_iso_tensorLeft_upperStar_artinSchreier_add (ψ : AddChar k₀ (
   exact ⟨(Mod.tensorLeft _).mapIso e ≪≫ t⟩
 
 /-- **Multiplicativity of the geometric linear characters**:
-`ℒ_{ψ(a x)} ⊗ ℒ_{ψ(b x)} ≅ ℒ_{ψ((a + b) x)}` on `𝔸¹_{k̄}`, for `a, b ∈ k̄`: the pullback of
-`AlgebraicGeometry.nonempty_iso_tensorLeft_upperStar_artinSchreier_add` along `x ↦ (a x, b x)`,
-pullback commuting with the tensor product. -/
+`ℒ_{ψ(a x)} ⊗ ℒ_{ψ(b x)} ≅ ℒ_{ψ((a + b) x)}` on `𝔸¹_{k̄}`, for `a, b ∈ k̄`. -/
 theorem nonempty_iso_tensorLeft_upperStar_geometricSMul_artinSchreier
     (ψ : AddChar k₀ (PadicAlgCl l)) (a b : AlgebraicClosure k₀) :
     Nonempty ((Mod.tensorLeft ((affineLine.geometricSMul k₀ b)^*ᵃ[l].obj
@@ -210,8 +206,7 @@ theorem nonempty_iso_tensorLeft_upperStar_geometricSMul_artinSchreier
   exact ⟨(Mod.tensorLeftMapIso eS.symm).app _ ≪≫ (Mod.tensorLeft _).mapIso eF.symm ≪≫
     ((ProEtale.adicUpperStarTensorLeftIso l γ _).app _).symm ≪≫ (γ)^*ᵃ[l].mapIso e ≪≫ eA⟩
 
-/-- The geometric linear character `ℒ_{ψ(a x)}` has rank one: its stalks are lines. By lissity
-the rank is that of `ℒ_{ψ(0 · x)} ≅ ℚ̄_ℓ`. -/
+/-- The geometric linear character `ℒ_{ψ(a x)}` has rank one: its stalks are lines. -/
 theorem finrank_geometricStalkFunctor_upperStar_geometricSMul_artinSchreier
     (ψ : AddChar k₀ (PadicAlgCl l)) (a : AlgebraicClosure k₀) {Y : Scheme.{u}}
     (g : Y ⟶ (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)
@@ -262,8 +257,7 @@ noncomputable abbrev linearCharacter (a : AlgebraicClosure k₀) :
   (Scheme.Hom.geometricFiberMap D.j (comp_over D.j _))^*ᵃ[l].obj
     ((affineLine.geometricSMul k₀ a)^*ᵃ[l].obj (artinSchreier ψ 1).obj.carrier)
 
-/-- `ℒ_{ψ(a x)}|_Ū` is an irreducible local system: it is lisse of rank one on the irreducible
-`Ū`. -/
+/-- `ℒ_{ψ(a x)}|_Ū` is an irreducible local system. -/
 theorem isIrreducibleAdicLocalSystem_linearCharacter (a : AlgebraicClosure k₀) :
     ProEtale.IsIrreducibleAdicLocalSystem (D.linearCharacter ψ a) := by
   have := D.irreducibleSpace_geometricFiber
@@ -284,9 +278,7 @@ noncomputable def tensorLeftLinearCharacterIso (a b : AlgebraicClosure k₀) :
       (nonempty_iso_tensorLeft_upperStar_geometricSMul_artinSchreier ψ a b).some
 
 /-- **The geometric linear characters are pairwise distinct** on `Ū`: for `ψ ≠ 1` and `a ≠ b`
-in `k̄`, `ℒ_{ψ(a x)}|_Ū ≇ ℒ_{ψ(b x)}|_Ū`. Tensoring with `ℒ_{ψ(-b x)}|_Ū`, an isomorphism would
-give `ℒ_{ψ((a - b) x)}|_Ū ≅ ℒ_{ψ(0 · x)}|_Ū ≅ ℚ̄_ℓ`, while `ℒ_{ψ((a - b) x)}` is not a quotient of
-a constant sheaf on the punctured disc at `∞`, through which `Ū` has a point. -/
+in `k̄`, `ℒ_{ψ(a x)}|_Ū ≇ ℒ_{ψ(b x)}|_Ū`. -/
 theorem isEmpty_iso_linearCharacter (hψ : ψ ≠ 1) {a b : AlgebraicClosure k₀} (hab : a ≠ b) :
     IsEmpty (D.linearCharacter ψ a ≅ D.linearCharacter ψ b) := by
   refine ⟨fun e ↦ ?_⟩

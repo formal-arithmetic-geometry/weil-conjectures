@@ -20,9 +20,15 @@ import Mathlib.Algebra.CharP.CharAndCard
 
 /-! # Constructible pullback comparison data
 
-The unchanged comparison structures and scalar predicate, separated from their proofs
-for compilation. Source: Bhatt--Scholze 6.8.11(3), 6.8.14(2), 6.8.15
-(blueprint: def-a1-constructible-pullback-comparison-data).
+Comparison structures and the scalar predicate for constructible pullback.
+
+## Implementation details
+
+The data are kept separate from the proofs about them to speed up compilation.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, 6.8.11(3), 6.8.14(2), 6.8.15]
 -/
 
 @[expose] public noncomputable section

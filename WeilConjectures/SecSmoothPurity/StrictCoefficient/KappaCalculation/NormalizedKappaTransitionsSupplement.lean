@@ -12,12 +12,13 @@ import WeilConjectures.Algebra.Homology.Module.ModulePullbackPushforwardAdjuncti
 
 /-! # Normalized coefficient transition formulas
 
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03D2 and 03EL.
-(blueprint: lem-pur-normalized-kappa-transition-calculus).
-
 The scalar-extension associator multiplies coefficients. The normalized kappa
 comparison transports arbitrary generalized inverse-image sections, and its
 inverse contracts the coefficient through the recorded ring square.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY, 03D2 and 03EL.
 -/
 
 -- After pruning, this module only keeps private declarations.
