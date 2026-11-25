@@ -105,7 +105,6 @@ lemma upperStarTensorHomotopyHom_braiding
           ((HomotopyCategory.quotient _ _).obj A) :=
   quotient_map_upperStarTensorComplexHom_braiding Λ f A B
 
--- the module objects of the homotopy category are unfolded
 /-- The comparison `upperStarTensorHomotopyHom` is an isomorphism on images of complexes. -/
 instance isIso_upperStarTensorHomotopyHom
     (A B : CochainComplex
@@ -116,16 +115,6 @@ instance isIso_upperStarTensorHomotopyHom
     IsIso.of_isIso_fac_right (upperStarTensorComplexHom_δ Λ f A B)
   exact Functor.map_isIso (HomotopyCategory.quotient _ (.up ℤ))
     (upperStarTensorComplexHom Λ f A B)
-
-/-- The invertibility proof agrees with the composite comparison proof. -/
-theorem isIso_upperStarTensorHomotopyHom_eq
-    (A B : CochainComplex
-      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) :
-    isIso_upperStarTensorHomotopyHom Λ f A B = (by
-      have : IsIso (upperStarTensorComplexHom Λ f A B) :=
-        IsIso.of_isIso_fac_right (upperStarTensorComplexHom_δ Λ f A B)
-      exact Functor.map_isIso (HomotopyCategory.quotient _ (.up ℤ))
-        (upperStarTensorComplexHom Λ f A B)) := rfl
 
 open DerivedCategory Functor Functor.LaxMonoidal
 
