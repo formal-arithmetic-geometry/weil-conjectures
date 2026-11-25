@@ -16,7 +16,22 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 /-!
 # Cover and filtration
 
-Source: Stacks Project, etale-cohomology.tex, Lemma 0A3R (lemma-pullback-filtered).
+A finite locally constant sheaf `G` of `𝔽_ℓ`-modules on a connected scheme becomes, on a
+connected finite étale cover of degree prime to `ℓ`, an iterated extension of constant sheaves
+`𝔽_ℓ` (`Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration_sheaf`).
+
+## Implementation details
+
+We use the cover `v : V ⟶ U` attached to an `ℓ`-Sylow subgroup `P` of the monodromy group of
+`G`, on which `v^* G` comes from a `P`-representation `M`. A finite `ℓ`-group in characteristic
+`ℓ` has nonzero invariants in every nonzero finite-dimensional representation, so induction on
+the dimension gives a `P`-stable flag of `M` with one-dimensional trivial successive quotients;
+its image under the exact associated-sheaf functor is the required filtration. The filtration is
+indexed by all natural numbers, being constant after the last index.
+
+## References
+
+* Stacks Project, Lemma 0A3R, Lemma 0DV5 and Remark 0DV6.
 -/
 
 @[expose] public section
@@ -31,37 +46,11 @@ namespace AlgebraicGeometry
 
 open Etale
 
-/-- **A prime-to-ℓ cover with constant successive quotients.**
-The coefficient field is `ULift.{u + 1} (ZMod ℓ)`, a universe lift of the prime field
-`ℤ/ℓℤ`.
-
-Source: Stacks Project, `etale-cohomology.tex`, Lemma 0A3R
-(`lemma-pullback-filtered`), statement and proof; Lemma 0DV5
-(`lemma-locally-constant-on-connected`) and Remark 0DV6
-(`remark-functorial-locally-constant-on-connected`).
-(blueprint: split-locally-constant-cover-filtration)
-
-Proof: A connected space is nonempty. Choose a geometric point of U.
-The exact equivalence between finite locally constant module sheaves and finite continuous
-representations identifies G with a finite-dimensional vector space M over ℤ/ℓℤ with
-continuous fundamental-group action. Its image Q in GL(M) is finite. A Sylow ℓ-subgroup
-P of Q has index d prime to ℓ. The inverse image H of P in the fundamental group is open,
-and the transitive finite coset set π₁(U)/H corresponds to a connected finite étale cover
-v : V ⟶ U. Its fibre at the chosen point has d elements. A finite étale morphism is finite
-locally free; its fibre dimension is locally constant, hence constant on connected U.
-Base change preserves this dimension. Over any separably closed field, the fibre algebra
-is a product of copies of that field, so its dimension equals both the number of points
-and the number of lifts of the geometric point. Thus every geometric fibre has d elements.
-
-On V the action on M factors through P. A finite ℓ-group in characteristic ℓ has nonzero
-invariants in every nonzero finite-dimensional representation. Choose a one-dimensional
-invariant subspace, apply the same argument to the quotient, and induct on dimension.
-This produces a P-stable flag with one-dimensional trivial successive quotients. Under
-the exact representation/sheaf equivalence on V, this flag gives monomorphisms of sheaves,
-with initial object zero, final object isomorphic to v*G, and cokernels isomorphic to the
-constant coefficient sheaf. For M = 0 the flag has length zero. Extend the finite sequence
-W to all natural indices by its final object, with identity maps after the last index;
-only maps before that index occur in the conclusion. -/
+/-- **A prime-to-ℓ cover with constant successive quotients.** For a finite locally constant
+sheaf `G` of `ULift (ZMod ℓ)`-modules on a connected scheme `U`, there is a connected finite
+étale cover `v : V ⟶ U` whose geometric fibres all have cardinality `d` prime to `ℓ`, together
+with a chain of monomorphisms `0 = W 0 ⟶ W 1 ⟶ ⋯ ⟶ W n ≅ v^* G` whose cokernels are all
+isomorphic to the constant sheaf `ULift (ZMod ℓ)`. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration_sheaf
     {U : Scheme.{u}} [ConnectedSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))

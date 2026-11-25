@@ -76,8 +76,20 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
 /-! # The signed tensor--Hom map before passing to derived categories
 
-Source: the finite-free construction in the first paragraph of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 08J9 and 0A8X.
+We construct the chain map `Hom(P, I) ⊗ Q ⟶ Hom(P, I ⊗ Q)`, natural in `Q`, and show that it
+satisfies the signed formula `IsSignedHomTensor`.
+
+## Implementation details
+
+The map is the curried form of `(H ⊗ Q) ⊗ P ⟶ I ⊗ Q` with `H = Hom(P, I)`: associate, braid `Q`
+past `P`, reassociate, and apply the evaluation `H ⊗ P ⟶ I` (the transpose of the identity under
+the normalized chain tensor-Hom equivalence). On a homogeneous generator `(v ⊗ z) ⊗ x` of degrees
+`(a, b, p)` the associators contribute no sign and the braiding contributes `(-1)^(bp)`.
+
+## References
+
+* [Stacks: Tag 08J9](https://stacks.math.columbia.edu/tag/08J9)
+* [Stacks: Tag 0A8X](https://stacks.math.columbia.edu/tag/0A8X)
 -/
 
 @[expose] public section
@@ -234,27 +246,9 @@ private theorem exchange_generator
   simp only [HomologicalComplex.id_f, SheafOfModules.id_val,
     PresheafOfModules.id_app, ModuleCat.id_apply]
 
-/-- The signed tensor--Hom map is natural in an arbitrary coefficient complex.
-This constructs maps only: neither a quotient resolution nor an invertibility
-assertion is part of this statement.
-
-Source: the first paragraph of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`, finite-free construction;
-Stacks Tags 08J9 and 0A8X
-(blueprint: lem-sf-signed-hom-tensor-comparison).
-
-Proof: let H=Hom(P,I), and take evaluation H tensor P to I to be the inverse
-transpose of its identity under the existing normalized chain tensor--Hom
-equivalence. Associate (H tensor Q) tensor P, braid Q past P, reassociate,
-and apply evaluation tensor identity. Curry this map. Associator and braiding
-naturality and tensor interchange give naturality in Q before currying; the
-naturality identities of the equivalence then give a natural transformation.
-On the homogeneous generator (v tensor z) tensor x of degrees (a,b,p), the
-associators contribute no sign and the middle braiding contributes (-1)^(bp).
-Normalized evaluation sends v tensor x to v(x). The resulting formula is
-exactly IsSignedHomTensor, with the degree transport (p+a)+b=p+(a+b).
-No boundedness, flatness or injectivity is used; zero complexes and the empty
-scheme are included. -/
+/-- For complexes `P` and `I`, there is a chain map `Hom(P, I) ⊗ Q ⟶ Hom(P, I ⊗ Q)`, natural in
+the complex `Q`, whose component at every `Q` satisfies the signed formula
+`IsSignedHomTensor`. -/
 theorem signedHomTensorComparison_exists
     (P I : CochainComplex (Modules.{t, u} Y R) ℤ) :
     ∃ α : (totalTensor.{t, u} Y R).obj

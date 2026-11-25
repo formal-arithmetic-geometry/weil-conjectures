@@ -128,12 +128,17 @@ import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarUnitComposition
 
 /-! # Finite coefficient domains and evaluation transposition
 
-Source: Weil blueprint, sec-six-functors/sk-prop-sf-biduality-general,
-lemma-change-coefficients-internal-hom--1, opening proof paragraph; Stacks 03TT, 0GKB, 06YY, 07A4
-and 08J9 (blueprint: lem-coef-finite-hom-domain-calculus).
+Flat constructible models and monoidality of coefficient change between the finite
+coefficient rings of an `l`-adic coefficient field.
 
-The index n denotes exponent n + 1, as in the recorded finite-Hom arrow.
-Thus all positive exponents and all identity quotients are included.
+## Implementation details
+
+The index `n` denotes exponent `n + 1`, as in the finite-Hom arrow, so all positive exponents
+and all identity quotients are included.
+
+## References
+
+* [Stacks, Tags 01T6, 03TT, 06YQ, 06YY, 07A4, 08J9, 0FPT and 0GKB]
 -/
 
 @[expose] public noncomputable section
@@ -247,16 +252,13 @@ end ClosedCalculus
 
 end FiniteHomDomainClosedCalculus
 
-/-- The existing coefficient ring, lifted to the ordinary small-etale coefficient universe.
-Source: blueprint finite coefficient convention
-(blueprint: lem-coef-finite-hom-domain-calculus). -/
+/-- The finite coefficient ring of exponent `n + 1`, lifted to the small-etale coefficient
+universe. -/
 abbrev finiteHomDomainCoeff (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) :=
   ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))
 
-/-- Positive coefficient levels are finite, by the recorded coefficient-ring theorem.
-Source: blueprint finite coefficient convention
-(blueprint: lem-coef-finite-hom-domain-calculus). -/
+/-- The finite coefficient rings `finiteHomDomainCoeff l E n` are finite. -/
 instance finiteHomDomainCoeffFinite (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) :
     Finite (finiteHomDomainCoeff l E n) :=
@@ -270,20 +272,10 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   [hXft : LocallyOfFiniteType (X ↘ Spec (.of D.k))] [hXqc : QuasiCompact (X ↘ Spec (.of D.k))]
 
 include D hl hXover hXsep hXft hXqc in
-/-- Noetherianity and the flat constructible model in the original Tor interval, including
-its actual scalar extension with its target coefficient action.
-Source: blueprint opening proof paragraph; Stacks 01T6, 03TT, 0GKB, 06YQ and 06YY
-(blueprint: lem-coef-finite-hom-domain-calculus).
-
-Proof: the structure morphism is of finite type over the Noetherian field D.k, so X
-is Noetherian (lem-weil-pbc-finite-type-over-noetherian). Apply
-lem-sp-etale-scalar-flat-model to the actual finite-ring quotient. Its model is flat
-constructible and supported in [a,b]. Bounded flatness gives K-flatness, and
-lem-pur-kflat-change-of-rings preserves flat terms and K-flatness. Constructibility
-of the scalar-extended terms is 0GKB. The universal K-flat counit of
-lem-pur-derived-change-of-rings computes F_X on this model. Tensoring the reduced
-bounded flat complex with any degree-zero B-module sheaf proves the same Tor bound.
-No flatness of B over A is used. -/
+/-- For a bounded constructible `T` of Tor amplitude in `[a, b]`, the scheme `X` is
+Noetherian, `T` has a bounded flat constructible K-flat model `P` in `[a, b]` whose scalar
+extension is again such a model of the reduction of `T`, and the reduction of `T` is bounded
+constructible of Tor amplitude in `[a, b]`. -/
 theorem finiteHomDomain_flatModel {n m : ℕ} (h : m ≤ n) (a b : ℤ) (hab : a ≤ b)
     (T : finiteHomEtale l E X n)
     (hT : Etale.DerivedCategory.isBoundedConstructible (finiteHomDomainCoeff l E n) X T)
@@ -364,17 +356,9 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 include D hl hXover hXsep hXft hXqc in
 /-- The canonical tensor and constant-unit comparisons make ambient coefficient change
-strong symmetric monoidal, for the actual signed tensor and Koszul braiding.
-Source: blueprint opening proof paragraph; Stacks 07A4 and 0FPT
-(blueprint: lem-coef-finite-hom-domain-calculus).
-
-Proof: use scalarExtension_coreMonoidal for the actual quotient ring map. That
-proved generic theorem transports the native derived monoidal structure along
-uniqueness of left adjoints. Right-exact tensor normalization identifies its
-tensorator with the published tensorIso, the left unit law identifies its unit,
-and braidedness descends from the ordinary scalar adjunction. The normalization
-of finiteHomEtaleData identifies its tensor comparison with finiteHomEtaleTensor;
-the all-complex tensor and unit normalization clauses are their choose_spec laws. -/
+strong symmetric monoidal for the signed tensor and Koszul braiding; moreover
+`finiteHomEtaleTensor` agrees with `tensorIso`, and the tensor and unit comparisons satisfy
+their normalization laws. -/
 theorem finiteHomDomain_monoidal {n m : ℕ} (h : m ≤ n) :
     FiniteHomDomainMonoidal (finiteHomEtaleReduction l E X h)
       (fun U V ↦ (Etale.ExceptionalCoefficients.tensorIso

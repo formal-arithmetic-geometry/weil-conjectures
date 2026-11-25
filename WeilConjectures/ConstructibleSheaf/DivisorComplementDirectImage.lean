@@ -21,8 +21,7 @@ If `j : U ⟶ X` has the higher direct images of the complement of a divisor `i 
 `R¹j_* ℤ/ℓ ≅ i_* ℤ/ℓ`, `R^q j_* ℤ/ℓ = 0` for `q ≥ 2`), then for every morphism `ι : Y ⟶ X`
 landing in `D` the cohomology sheaves of `ι^* Rj_* ℤ/ℓ` are finite locally constant: they are
 `ι^* ℤ/ℓ = ℤ/ℓ`, `ι^* i_* ℤ/ℓ` and `0`, and `ι^* i_* ℤ/ℓ` is the pushforward of `ℤ/ℓ` along the
-surjective closed immersion `D ×_X Y ⟶ Y` (blueprint
-`lemma-cohomology-near-two-transverse-divisors--1`).
+surjective closed immersion `D ×_X Y ⟶ Y`.
 
 ## Main statements
 
@@ -62,9 +61,9 @@ theorem isFiniteLocallyConstantSheaf_lowerStar_constantZModModule {W Y : Scheme.
 
 variable {ℓ}
 
-/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1`: if `j : U ⟶ X` has the higher
-direct images of the complement of the divisor `i : D ⟶ X`, then for every `ι : Y ⟶ X` with image in
-`D` the complex `ι^* Rj_* ℤ/ℓ` has finite locally constant cohomology sheaves. -/
+/-- If `j : U ⟶ X` has the higher direct images of the complement of the divisor `i : D ⟶ X`,
+then for every `ι : Y ⟶ X` with image in `D` the complex `ι^* Rj_* ℤ/ℓ` has finite locally
+constant cohomology sheaves. -/
 theorem HasDivisorComplementDirectImages.hasFiniteLocallyConstantHomology {U X D Y : Scheme.{u}}
     {j : U ⟶ X} {i : D ⟶ X} [IsClosedImmersion i] (hj : HasDivisorComplementDirectImages ℓ j i)
     (ι : Y ⟶ X) (hι : Set.range ι ⊆ Set.range i) :

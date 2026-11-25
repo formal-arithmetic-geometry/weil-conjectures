@@ -20,8 +20,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 /-!
 # The section invariant and the family object lie in `Pic(D^b_{ctf})`
 
-Blueprint `lemma-section-normal-bundle--1` and `definition-deformation-normal-bundle` place the
-section invariant `𝒞(g, s) = Ls^* ω_g` and the family object `F = Ls̃^* ω_{g̃}` in
+The section invariant `𝒞(g, s) = Ls^* ω_g` and the family object `F = Ls̃^* ω_{g̃}` lie in
 `Pic(D^b_{ctf}(-, Λ))`: they are ⊗-invertible and lie in `D^b_{ctf}`, since `ω_g` does and `Ls^*`
 preserves both properties.
 
@@ -58,9 +57,7 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}} (d : ℕ)
 
 /-- The dualizing complex `ω_g = Rg^! Λ_B` of a morphism `g` smooth of pure relative dimension
-`d` lies in `D^b_{ctf}(V, Λ)`: it is `L[2d]` for a locally constant sheaf `L` whose stalks are
-free of rank one (`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`), so `L` is a
-finite locally constant, hence constructible, flat sheaf. -/
+`d` lies in `D^b_{ctf}(V, Λ)`. -/
 theorem boundedConstructibleFiniteTor_dualizingComplex (g : V ⟶ B)
     [SmoothOfRelativeDimension d g] [HasCompactification g] [HasInvertibleExponent Λ V] :
     DerivedCategory.boundedConstructibleFiniteTor Λ V
@@ -83,12 +80,9 @@ theorem boundedConstructibleFiniteTor_dualizingComplex (g : V ⟶ B)
   exact ⟨(DerivedCategory.boundedConstructible _ V).prop_of_iso e.symm hL₂.1,
     (DerivedCategory.finiteTorAmplitude _ V).prop_of_iso e.symm hL₂.2⟩
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Section invariant
-
-For `g : V ⟶ B` smooth of pure relative dimension `d` and admitting a compactification, and a
+/-- For `g : V ⟶ B` smooth of pure relative dimension `d` and admitting a compactification, and a
 section `s` of `g`, the section invariant `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` is an object of
-`Pic(D^b_{ctf}(B, Λ))`: it is ⊗-invertible, and it lies in `D^b_{ctf}(B, Λ)` since `ω_g` does
-and `Ls^*` preserves `D^b_{ctf}`. -/
+`Pic(D^b_{ctf}(B, Λ))`: it is ⊗-invertible and lies in `D^b_{ctf}(B, Λ)`. -/
 theorem isInvertible_and_boundedConstructibleFiniteTor_sectionInvariant
     (g : V ⟶ B) [SmoothOfRelativeDimension d g] [HasCompactification g]
     [HasInvertibleExponent Λ V] (s : B ⟶ V) :
@@ -98,10 +92,8 @@ theorem isInvertible_and_boundedConstructibleFiniteTor_sectionInvariant
     constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) s
       (boundedConstructibleFiniteTor_dualizingComplex Λ d g)⟩
 
-/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section
-
-For `g : V ⟶ B` smooth of pure relative dimension `d` and a closed section `s` of `g`, the family
-object `F = Ls̃^* ω_{g̃}` of the deformation to the normal cone of `s` is an object of
+/-- For `g : V ⟶ B` smooth of pure relative dimension `d` and a closed section `s` of `g`, the
+family object `F = Ls̃^* ω_{g̃}` of the deformation to the normal cone of `s` is an object of
 `Pic(D^b_{ctf}(𝔸¹_B, Λ))`: it lies in `D^b_{ctf}(𝔸¹_B, Λ)` and is ⊗-invertible. -/
 theorem isInvertible_and_boundedConstructibleFiniteTor_deformationFamilyObject
     [HasInvertibleExponent Λ B] (g : V ⟶ B) [SmoothOfRelativeDimension d g] (s : B ⟶ V)
@@ -135,7 +127,7 @@ attribute [local instance high] SymmetricCategory.toBraidedCategory
 
 variable (Λ) in
 /-- The dualizing complex restricts to open subschemes: for a quasi-compact open immersion
-`j : U ⟶ V`, `Lj^* ω_g ≅ ω_{j ≫ g}`, since `Rj^! ≅ j^*` and `R(j ≫ g)^! ≅ Rj^! ∘ Rg^!`. -/
+`j : U ⟶ V`, `Lj^* ω_g ≅ ω_{j ≫ g}`. -/
 theorem nonempty_iso_leftDerivedUpperStar_dualizingComplex_of_isOpenImmersion {U : Scheme.{u}}
     (j : U ⟶ V) [IsOpenImmersion j] [QuasiCompact j] (g : V ⟶ B) [HasCompactification g]
     [HasCompactification (j ≫ g)] [QuasiCompact (j ≫ g)] :
@@ -153,15 +145,9 @@ lemma quasiCompact_of_noetherianSpace {Y Z : Scheme.{u}} [TopologicalSpace.Noeth
   ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
 
 variable (Λ) in
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`: Cohomological smoothness,
-clause 1, for a smooth morphism whose relative dimension may vary.
-
-For `g : V ⟶ B` smooth with a compactification, on a source with noetherian underlying space,
-the dualizing complex `ω_g = Rg^! Λ_B` is ⊗-invertible and lies in `D^b_{ctf}(V, Λ)`: on each
-member `W` of an open cover on which `g` has constant relative dimension, `Lj_W^* ω_g ≅ ω_{g|W}`
-is (`AlgebraicGeometry.Etale.isInvertible_dualizingComplex`,
-`AlgebraicGeometry.Etale.boundedConstructibleFiniteTor_dualizingComplex`), and both properties
-are local on `V`. -/
+/-- For `g : V ⟶ B` smooth (of locally constant relative dimension) with a compactification, on
+a source with noetherian underlying space, the dualizing complex `ω_g = Rg^! Λ_B` is ⊗-invertible
+and lies in `D^b_{ctf}(V, Λ)`. -/
 theorem isInvertible_and_boundedConstructibleFiniteTor_dualizingComplex_of_smooth (g : V ⟶ B)
     [Smooth g] [HasCompactification g] [HasInvertibleExponent Λ V]
     [TopologicalSpace.NoetherianSpace V] :
@@ -225,14 +211,10 @@ theorem isInvertible_and_boundedConstructibleFiniteTor_dualizingComplex_of_smoot
     (by have := le_abs_self (b k); linarith) (hab k)
 
 variable (Λ) in
-/-- Blueprint `lemma-section-normal-bundle--1`: Section invariant
-
-For `g : V ⟶ B` smooth (of locally constant relative dimension) admitting a compactification,
+/-- For `g : V ⟶ B` smooth (of locally constant relative dimension) admitting a compactification,
 on a source with noetherian underlying space, and a section `s` of `g`, the section invariant
 `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` is an object of `Pic(D^b_{ctf}(B, Λ))`: it is ⊗-invertible
-and lies in `D^b_{ctf}(B, Λ)`, since `ω_g` does
-(`isInvertible_and_boundedConstructibleFiniteTor_dualizingComplex_of_smooth`)
-and `Ls^*` preserves both properties. -/
+and lies in `D^b_{ctf}(B, Λ)`. -/
 theorem isInvertible_and_boundedConstructibleFiniteTor_sectionInvariant_of_smooth (g : V ⟶ B)
     [Smooth g] [HasCompactification g] [HasInvertibleExponent Λ V]
     [TopologicalSpace.NoetherianSpace V] (s : B ⟶ V) :
@@ -243,13 +225,9 @@ theorem isInvertible_and_boundedConstructibleFiniteTor_sectionInvariant_of_smoot
     constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) s h.2⟩
 
 variable (Λ) in
-/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section
-
-For `g : V ⟶ B` smooth (of locally constant relative dimension) and quasi-compact over a
+/-- For `g : V ⟶ B` smooth (of locally constant relative dimension) and quasi-compact over a
 noetherian base, and a closed section `s` of `g`, the family object `F = Ls̃^* ω_{g̃}` of the
-deformation to the normal cone of `s` is an object of `Pic(D^b_{ctf}(𝔸¹_B, Λ))`: `g̃` is again
-smooth (`AlgebraicGeometry.Scheme.Hom.smooth_deformationSpaceProj`) and quasi-compact, so
-`D_s V` is noetherian, and the section invariant of `(g̃, s̃)` lies in `Pic(D^b_{ctf})`. -/
+deformation to the normal cone of `s` is an object of `Pic(D^b_{ctf}(𝔸¹_B, Λ))`. -/
 theorem isInvertible_and_boundedConstructibleFiniteTor_deformationFamilyObject_of_smooth
     [HasInvertibleExponent Λ B] [IsNoetherian B] (g : V ⟶ B) [Smooth g] [QuasiCompact g]
     (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)

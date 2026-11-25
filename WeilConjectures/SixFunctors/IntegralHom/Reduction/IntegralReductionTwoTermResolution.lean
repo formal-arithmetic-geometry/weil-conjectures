@@ -39,8 +39,20 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 
 /-! # The completed-coefficient two-term quotient resolution
 
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1;
-Stacks Tags 093M, 06YQ and 0657.
+We show that the finite coefficient sheaf, restricted to the completed coefficient ring, has a
+K-flat two-term resolution by free rank-one modules.
+
+## Implementation details
+
+The resolution is multiplication by the `(n+1)`-st power of a uniformizer of the ring of
+integers of `E`, a non-zero-divisor, on the free rank-one module. It is constant-sheafified on
+the pro-étale site and scalar-extended to the completed coefficient ring; flatness of the
+completed constant sheaf preserves the augmentation quasi-isomorphism. The construction works in
+the coefficient universe `max u (t + 1)` and also covers the empty scheme and `n = 0`.
+
+## References
+
+* Stacks Project, Tags 093M, 06YQ, 0657.
 -/
 
 @[expose] public section
@@ -56,27 +68,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The finite coefficient sheaf, restricted to the completed ring, has a K-flat
-resolution with two free rank-one terms. The target of the augmentation is the
-actual restriction of the finite coefficient unit in degree zero.
-
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1;
-Stacks Tags 093M, 06YQ and 0657
-(blueprint: lem-sf-integral-reduction-two-term-resolution).
-
-Proof: use the DVR uniformizer of the ring of integers of E. Its (n+1)-st
-power is a non-zero-divisor. The complex with that multiplication from the
-free rank-one module in degree -1 to the same module in degree zero resolves
-the quotient by its (n+1)-st power. Apply constant sheafification on the pro-etale
-site and extend scalars to the completed coefficient ring. Flatness of the
-completed constant sheaf and its finite-quotient identification preserve the
-augmentation quasi-isomorphism. The quotient identification commutes with the
-coordinate projection of the completed ring, so its target is exactly the
-restricted coefficient unit below. Scalar extension carries the two free terms
-to the completed unit and preserves the zero terms. A bounded complex of flat
-terms is K-flat. These constructions work in the coefficient universe
-max(u,t+1) without identifying the site and coefficient universes, also for the
-empty scheme and n=0. -/
+/-- The finite coefficient sheaf, restricted to the completed ring, has a K-flat resolution
+`Q` concentrated in degrees `-1` and `0`, with both terms free of rank one. The target of the
+augmentation is the restriction of the finite coefficient unit in degree zero. -/
 theorem integralReduction_twoTerm_resolution (n : ℕ) :
     let R := completedIntegralCommRingSheaf l E Y D hl
     ∃ (Q : CochainComplex (Modules.{t, u} Y R) ℤ)

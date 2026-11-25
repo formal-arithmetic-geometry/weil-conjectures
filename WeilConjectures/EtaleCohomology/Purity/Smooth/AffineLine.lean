@@ -27,48 +27,17 @@ on `Y`, and `p : 𝔸¹_Y → Y` is the projection, `s : Y → 𝔸¹_Y` the zer
 `j : 𝔾_{m,Y} → 𝔸¹_Y` the open complement:
 
 * the affine line is acyclic, `Rp_* Λ ≅ Λ_Y`, and `Rπ_* Λ(1)` has `Λ_Y(1)` in degree zero,
-  `Λ_Y` in degree one and nothing else (`sk-prop-a1-kummer`);
-* consequently `Rs^! Λ(1)[2] ≅ Λ_Y`, the *fundamental class* of the zero section
-  (`sk-prop-a1`);
+  `Λ_Y` in degree one and nothing else;
+* consequently `Rs^! Λ(1)[2] ≅ Λ_Y`, the *fundamental class* of the zero section;
 * a complex on `𝔸¹_Y` that is a pullback is determined by its restriction to `t = 1`, so its
-  fibres at `t = 0` and `t = 1` agree (`lemma-section-normal-bundle--1`).
+  fibres at `t = 0` and `t = 1` agree.
 
 Iterating the one-dimensional case gives the model purity `Rz^! Λ(c)[2c] ≅ Λ_B` for the zero
-section of `𝔸^c_B` (`proposition-purity-vector-bundles`), in
-`WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace`.
+section of `𝔸^c_B`, in `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace`.
 
 The invertibility hypothesis is not decorative: for `Λ = ℤ/p` over a base of characteristic
 `p` the Artin–Schreier sequence gives `H¹(𝔸¹_k, ℤ/p) = k[t]/(F − 1)k[t] ≠ 0`, so the affine
 line is not acyclic and every statement below fails.
-
-## Implementation notes
-
-`𝔾_m` is not a Mathlib scheme, so the open complement of the zero section is carried as data:
-a scheme `G` with an open immersion `j` whose range is the complement of the range of the
-zero section. This is the same idiom as `AlgebraicGeometry.Etale.openClosedShortComplex`.
-
-The statements that compare the twist with geometry, `R¹π_*Λ(1) ≅ Λ_Y`,
-`R^mπ_*Λ(1) = 0` for `m ≥ 2` and `Rs^!Λ(1)[2] ≅ Λ_Y`, assume the twist datum normalized
-(`AlgebraicGeometry.Etale.HasTateTwist.IsNormalized`); they are false for the untwisted datum
-`Λ_X(m) = Λ_X` or the shifted datum `Λ_X(m) = Λ_X[-2m]` (for the latter
-`R²π_*(Λ_G[-2]) = R⁰π_*Λ_G = Λ_Y ≠ 0`). The last is then the normalisation itself,
-transported along the identification of the zero section with `V(t)`.
-
-Two clauses of the blueprint are stated only in part, and are TODOs.
-
-* `sk-prop-a1-kummer` is recorded here as what the cohomology sheaves *are* rather than as a
-  statement about the generator `κ(t)` of `R¹π_*Λ(1)`; for the twist `Λ(1) = μₙ ⊗ Λ` the
-  generator, the unit `p^*` in degree zero and the compatibility with base change on `Y` are in
-  `WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer`
-  (`AlgebraicGeometry.Etale.isIso_homology_zero_kummerClassAdjoint` and its neighbours).
-  Here `sk-prop-a1` records that `Rs^!Λ(1)[2] ≅ Λ_Y`; that the boundary `∂κ(t)` of the Kummer class
-  (`AlgebraicGeometry.Etale.kummerBoundary`) is this isomorphism is the orientation
-  `AlgebraicGeometry.Etale.affineLineOrientation` of
-  `WeilConjectures.EtaleCohomology.Purity.Smooth.Orientation`.
-* The gluing half of `lemma-section-normal-bundle--1` (ii) — that normalized local comparisons over
-an étale
-  cover of `Y` glue (`lemma-section-normal-bundle--1`) — is stated for a single surjective étale
-  `v : Y' ⟶ Y`, the disjoint union of the members of a covering family.
 
 ## Main statements
 
@@ -82,6 +51,48 @@ an étale
 - `AlgebraicGeometry.Etale.eq_of_leftDerivedUpperStar_oneSection_eq`
 - `AlgebraicGeometry.Etale.existsUnique_iso_leftDerivedUpperStar_of_etale`,
   `AlgebraicGeometry.Etale.exists_iso_leftDerivedUpperStar_oneSection_iff_of_etale`
+
+## Implementation details
+
+`𝔾_m` is not a Mathlib scheme, so the open complement of the zero section is carried as data:
+a scheme `G` with an open immersion `j` whose range is the complement of the range of the
+zero section. This is the same idiom as `AlgebraicGeometry.Etale.openClosedShortComplex`.
+
+The statements that compare the twist with geometry, `R¹π_*Λ(1) ≅ Λ_Y`,
+`R^mπ_*Λ(1) = 0` for `m ≥ 2` and `Rs^!Λ(1)[2] ≅ Λ_Y`, assume the twist datum normalized
+(`AlgebraicGeometry.Etale.HasTateTwist.IsNormalized`); they are false for the untwisted datum
+`Λ_X(m) = Λ_X` or the shifted datum `Λ_X(m) = Λ_X[-2m]` (for the latter
+`R²π_*(Λ_G[-2]) = R⁰π_*Λ_G = Λ_Y ≠ 0`). The last is then the normalisation itself
+(`AlgebraicGeometry.Etale.HasKummerClass.IsNormalized`), transported along the identification
+of the zero section with the closed subscheme `V(t)` cut out by the coordinate
+(`AlgebraicGeometry.AffineSpace.zeroSectionIsoZeroLocusSubscheme`). For a normalized twist,
+`R¹π_*Λ(1)` and `R^mπ_*Λ(1)` for `m ≥ 2` are read off from the localization triangle of the zero
+section (`AlgebraicGeometry.Etale.nonempty_iso_homology_multiplicativeGroup_of_isZero`), the
+twisted affine line being acyclic.
+
+The acyclicity `Rπ_* Λ ≅ Λ_B` is computed as `RΓ(𝔸¹_k, Λ)_B ≅ Λ_B` by the Künneth formula,
+rather than by a stalk computation over strict henselizations via smooth base change; the unit
+`Λ_B ⟶ Rπ_* Λ_{𝔸¹_B}`, split by the zero section, is then an isomorphism by counting geometric
+stalks.
+
+The cohomology of `𝔾_{m,Y}` is recorded here as what the cohomology sheaves *are* rather than
+as a statement about the generator `κ(t)` of `R¹π_*Λ(1)`; for the twist `Λ(1) = μₙ ⊗ Λ` the
+generator, the unit `p^*` in degree zero and the compatibility with base change on `Y` are in
+`WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer`
+(`AlgebraicGeometry.Etale.isIso_homology_zero_kummerClassAdjoint` and its neighbours). That the
+boundary `∂κ(t)` of the Kummer class (`AlgebraicGeometry.Etale.kummerBoundary`) is the
+isomorphism `Λ_Y ≅ Rs^!Λ(1)[2]` is the orientation `AlgebraicGeometry.Etale.affineLineOrientation`
+of `WeilConjectures.EtaleCohomology.Purity.Smooth.Orientation`; that it is an isomorphism is
+`AlgebraicGeometry.Etale.isIso_affineLineOrientation`, the identification of
+`Hom(Λ_Y, Rs^! Λ(1)[2])` with `H²_{s(Y)}(𝔸¹_Y, Λ(1))` is
+`AlgebraicGeometry.Etale.supportedClassMap_bijective`, and its uniqueness is
+`AlgebraicGeometry.Etale.eq_affineLineOrientation_iff`.
+
+The gluing of normalized local comparisons over an étale cover of `Y` is stated for a single
+surjective étale `v : Y' ⟶ Y`, the disjoint union of the members of a covering family. The
+comparisons are only asked to be between complexes that are étale-locally a shift and twist of a
+lisse rank-one sheaf (invertible, in the uniqueness statement); membership of `F` and `C` in
+`D^b_{ctf}` is not imposed.
 -/
 
 @[expose] public section
@@ -107,13 +118,8 @@ variable {k : Type u} [Field k] {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsSe
 
 omit [HasTateTwist Λ] [HasInvertibleExponent Λ Y] in
 include aY in
-/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
-
-*Acyclicity of the affine line*: for the projection `p : 𝔸¹_Y → Y` one has
-`Rp_* Λ ≅ Λ_Y`, equivalently `R^m p_* Λ = 0` for `m > 0` and `R⁰p_*Λ = Λ_Y`. Being an
-instance of smooth base change, it is compatible with base change on `Y`; on a geometric
-fibre it is the vanishing `H^q(𝔸¹_k, μ_{ℓ^N}) = 0` for `q > 0`, which follows from the
-Kummer sequence, the divisibility of `k^×` and `Pic(𝔸¹_k) = 0`. -/
+/-- **Acyclicity of the affine line.** For the projection `p : 𝔸¹_Y → Y` one has
+`Rp_* Λ ≅ Λ_Y`, equivalently `R^m p_* Λ = 0` for `m > 0` and `R⁰p_*Λ = Λ_Y`. -/
 theorem nonempty_iso_rightDerivedLowerStar_affineLine [IsAlgClosed k] [QuasiCompact aY]
     [HasInvertibleExponent Λ (Spec (.of k))] :
     Nonempty ((R((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
@@ -126,15 +132,9 @@ theorem nonempty_iso_rightDerivedLowerStar_affineLine [IsAlgClosed k] [QuasiComp
 
 omit [HasTateTwist Λ] [HasInvertibleExponent Λ Y] in
 include aY in
-/-- Blueprint `lem-pur-a1-direct-image`: The affine line has no higher direct images
-
-For `B` separated of finite type over the algebraically closed field `k` and the projection
-`π : 𝔸¹_B ⟶ B`, the unit `Λ_B ⟶ Rπ_* Lπ^* Λ_B = Rπ_* Λ_{𝔸¹_B}` of `Lπ^* ⊣ Rπ_*` is an
-isomorphism: the affine line has no higher direct images for the constant coefficients, and its
-`H⁰` is the unit. The proof computes `Rπ_* Λ ≅ RΓ(𝔸¹_k, Λ)_B ≅ Λ_B` by the Künneth formula
-(in place of the stalk computation over strict henselizations by smooth base change of the
-blueprint), and then the unit, split by the zero section, is an isomorphism by counting
-geometric stalks. -/
+/-- **The affine line has no higher direct images.** For `Y` separated of finite type over the
+algebraically closed field `k` and the projection `π : 𝔸¹_Y ⟶ Y`, the unit
+`Λ_Y ⟶ Rπ_* Lπ^* Λ_Y = Rπ_* Λ_{𝔸¹_Y}` of `Lπ^* ⊣ Rπ_*` is an isomorphism. -/
 theorem isIso_unit_constantComplex_affineLine [IsAlgClosed k] [QuasiCompact aY]
     [HasInvertibleExponent Λ (Spec (.of k))] :
     IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
@@ -165,11 +165,8 @@ theorem isZero_homology_rightDerivedLowerStar_tateTwist_affineLine [IsAlgClosed 
 variable {G : Scheme.{u}} (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Y)) [IsOpenImmersion j]
 
 include aY in
-/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
-
-*Degree zero.* Let `j : G ↪ 𝔸¹_Y` be the open complement of the zero section — so
-`G = 𝔾_{m,Y}` — and let `π = p ∘ j`. Then `R⁰π_* Λ(1) ≅ Λ_Y(1)`; on a geometric fibre this is
-the Kummer computation `H⁰(𝔾_{m,k}, μ_n) = μ_n(k)`. -/
+/-- **Cohomology of `𝔾ₘ` in degree zero.** Let `j : G ↪ 𝔸¹_Y` be the open complement of the
+zero section — so `G = 𝔾_{m,Y}` — and let `π = p ∘ j`. Then `R⁰π_* Λ(1) ≅ Λ_Y(1)`. -/
 theorem nonempty_iso_homology_zero_multiplicativeGroup [IsAlgClosed k] [QuasiCompact aY]
     [HasInvertibleExponent Λ (Spec (.of k))]
     (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ) :
@@ -196,27 +193,8 @@ theorem nonempty_iso_homology_zero_multiplicativeGroup [IsAlgClosed k] [QuasiCom
     homologyZeroBiprodShiftIso Λ _ (homology_props_of_iso_singleFunctor Λ eTY hLT).1⟩
 
 include aY in
-/-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section
-
-For the zero section `s : Y ↪ 𝔸¹_Y` the complex `Rs^! Λ(1)[2]` is concentrated in degree zero
-with lisse rank-one `H⁰`; the *fundamental class* `pur_s : Λ_Y ⟶ Rs^! Λ(1)[2]` normalized to
-`1` at every geometric point is therefore an isomorphism, and it is the boundary of the
-Kummer class `κ(t)`.
-
-For a normalized twist datum this is the normalisation itself
-(`AlgebraicGeometry.Etale.HasKummerClass.IsNormalized`): the zero section is the closed
-subscheme `V(t)` cut out by the coordinate
-(`AlgebraicGeometry.AffineSpace.zeroSectionIsoZeroLocusSubscheme`), and the adjoint of the
-Kummer boundary `∂κ(t)` is an isomorphism `Λ_{V(t)} ≅ Rs^! Λ(1)[2]`. The blueprint proves the
-normalisation for the concrete twist by applying `Rp_*` to the localization triangle of the
-closed–open pair `(s, j)` and reading off the long exact sequence with `sk-prop-a1-kummer`.
-
-The orientation itself, `1 ↦ ∂κ(t)`, is `AlgebraicGeometry.Etale.affineLineOrientation`; that
-it is an isomorphism is `AlgebraicGeometry.Etale.isIso_affineLineOrientation`, the
-identification of `Hom(Λ_Y, Rs^! Λ(1)[2])` with `H²_{s(Y)}(𝔸¹_Y, Λ(1))` is
-`AlgebraicGeometry.Etale.supportedClassMap_bijective`, and its uniqueness
-(`prop-pur-affine-line-orientation-uniqueness`) is
-`AlgebraicGeometry.Etale.eq_affineLineOrientation_iff`. -/
+/-- **The fundamental class of the zero section.** For a normalized twist datum and the zero
+section `s : Y ↪ 𝔸¹_Y`, one has `Rs^! Λ(1)[2] ≅ Λ_Y`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero [HasTateTwist.IsNormalized Λ] :
     Nonempty ((rightDerivedUpperShriek Λ
           (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y)).obj
@@ -244,11 +222,9 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero [HasTateTwist.IsNorm
     leftDerivedUpperStarConstantComplexIso Λ e.hom⟩
 
 include aY in
-/-- The degree-one part of `sk-prop-a1-kummer` for a normalized twist, from the localization
-triangle: in the direct image along `p : 𝔸¹_Y ⟶ Y` of the triangle
-`Rs_* Rs^! Λ(1) ⟶ Λ(1) ⟶ Rj_* Λ_G(1) ⟶` of the zero section `s` and its complement
-`j : G ⟶ 𝔸¹_Y`, if `H¹(Rp_* Λ(1))` and `H²(Rp_* Λ(1))` vanish, the boundary identifies
-`R¹π_* Λ(1)` with `H²(Rs^! Λ(1)) = H⁰(Rs^! Λ(1)[2]) ≅ H⁰(Λ_Y)`. -/
+/-- For a normalized twist, let `j : G ⟶ 𝔸¹_Y` be the complement of the zero section and
+`π = p ∘ j`. If `Hⁿ(Rp_* Λ(1))` and `Hⁿ⁺¹(Rp_* Λ(1))` vanish, then
+`Rⁿπ_* Λ(1) ≅ Hⁿ⁻¹(Λ_Y)`, via the localization triangle of the zero section. -/
 theorem nonempty_iso_homology_multiplicativeGroup_of_isZero [HasTateTwist.IsNormalized Λ]
     (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ)
     (n : ℤ) (h₁ : IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
@@ -288,13 +264,8 @@ theorem nonempty_iso_homology_multiplicativeGroup_of_isZero [HasTateTwist.IsNorm
     (_root_.DerivedCategory.homologyFunctor _ (n - 1)).mapIso π₀⟩
 
 include aY in
-/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
-
-*Degree one.* In the situation above `R¹π_* Λ(1) ≅ Λ_Y`, free of rank one; on a geometric
-fibre this is `H¹(𝔾_{m,k}, μ_n) = ℤ/n`, generated by the class of the coordinate `t`. For a
-normalized twist this is read off from the localization triangle of the zero section
-(`AlgebraicGeometry.Etale.nonempty_iso_homology_multiplicativeGroup_of_isZero`), the twisted
-affine line being acyclic. -/
+/-- **Cohomology of `𝔾ₘ` in degree one.** For a normalized twist, in the situation above
+`R¹π_* Λ(1) ≅ Λ_Y`. -/
 theorem nonempty_iso_homology_one_multiplicativeGroup [IsAlgClosed k] [QuasiCompact aY]
     [HasInvertibleExponent Λ (Spec (.of k))] [HasTateTwist.IsNormalized Λ]
     (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ) :
@@ -307,11 +278,8 @@ theorem nonempty_iso_homology_one_multiplicativeGroup [IsAlgClosed k] [QuasiComp
     (isZero_homology_rightDerivedLowerStar_tateTwist_affineLine Λ aY (1 + 1) (by norm_num))
 
 include aY in
-/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
-
-*Vanishing above degree one.* In the situation above `R^m π_* Λ(1) = 0` for `m ≥ 2`, by the
-cohomological dimension of an affine curve. For a normalized twist this is read off from the
-localization triangle of the zero section: `R^m π_* Λ(1) ≅ H^{m+1}(Rs^! Λ(1)) = H^{m-1}(Λ_Y)`. -/
+/-- **Cohomology of `𝔾ₘ` above degree one.** For a normalized twist, in the situation above
+`R^m π_* Λ(1) = 0` for `m ≥ 2`. -/
 theorem isZero_homology_multiplicativeGroup [IsAlgClosed k] [QuasiCompact aY]
     [HasInvertibleExponent Λ (Spec (.of k))] [HasTateTwist.IsNormalized Λ]
     (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ)
@@ -325,14 +293,9 @@ theorem isZero_homology_multiplicativeGroup [IsAlgClosed k] [QuasiCompact aY]
   exact (isZero_homology_constantComplex Λ Y (m - 1) (by omega)).of_iso e
 
 set_option linter.unusedSectionVars false in
-/-- Blueprint `lemma-section-normal-bundle--1`: Uniqueness for lisse sheaf maps (first assertion,
-for the base `B = Y`); also clause (i) of `lemma-section-normal-bundle--1` (Weak `𝔸¹`-invariance).
-
-*Uniqueness for lisse sheaf maps on `𝔸¹_Y`.* Two morphisms between finite locally constant
+/-- **Uniqueness for lisse sheaf maps on `𝔸¹_Y`.** Two morphisms between finite locally constant
 sheaves on `𝔸¹_Y` that agree after restriction to the open complement `G = 𝔾_{m,Y}` of the
-zero section agree everywhere: the internal Hom is again finite locally constant, a section of
-a locally constant sheaf on a connected scheme is determined by one geometric stalk, and every
-connected component of `𝔸¹_Y` meets `𝔾_{m,Y}`. -/
+zero section agree everywhere. -/
 theorem injective_upperStar_map_of_isFiniteLocallyConstantSheaf
     (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ)
     (L M : Sheaf 𝔸(ULift.{u} (Fin 1); Y).smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -344,13 +307,9 @@ theorem injective_upperStar_map_of_isFiniteLocallyConstantSheaf
 
 set_option linter.unusedSectionVars false in
 set_option linter.unusedVariables false in
-/-- Blueprint `lemma-section-normal-bundle--1`: Uniqueness for lisse sheaf maps (second assertion,
-for the base `B = Y`); also clause (i) of `lemma-section-normal-bundle--1` (Weak `𝔸¹`-invariance).
-
-*Uniqueness for lisse sheaf maps on `𝔾_{m,Y}`.* Two morphisms between finite locally constant
-sheaves on `𝔾_{m,Y}` that agree after restriction along the unit section `i₁ : Y ⟶ 𝔾_{m,Y}`
-agree everywhere. This is the second assertion of clause (i), and it is what
-`lemma-section-normal-bundle` Step 2 and `proposition-purity-vector-bundles` Step 3 use. -/
+/-- **Uniqueness for lisse sheaf maps on `𝔾_{m,Y}`.** Two morphisms between finite locally
+constant sheaves on `𝔾_{m,Y}` that agree after restriction along the unit section
+`i₁ : Y ⟶ 𝔾_{m,Y}` agree everywhere. -/
 theorem injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf
     (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ)
     (i₁ : Y ⟶ G) (hi₁ : i₁ ≫ j = AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)
@@ -377,18 +336,9 @@ theorem injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf
   simpa using this
 
 set_option linter.unusedSectionVars false in
-/-- Blueprint `lemma-section-normal-bundle--1`: Weak `𝔸¹`-invariance
-
-*Invariance along the line.* A comparison between an invertible complex `F` on `𝔸¹_Y` and a
+/-- **Weak `𝔸¹`-invariance.** A comparison between an invertible complex `F` on `𝔸¹_Y` and a
 pullback from `Y` is determined by its restriction to the unit section `t = 1`: two
-isomorphisms `α, β : F ≅ Lp^* C` with `Li₁^* α = Li₁^* β` are equal. Consequently the
-identifications `Li₀^* F ≅ C ≅ Li₁^* F` obtained from such a comparison are canonical, and the
-invariant is *constant* along the `𝔸¹`-direction: its values at `t = 0` and at `t = 1` agree.
-
-Invertibility of `F` is what puts the comparison inside the lisse rank-one world in which the
-uniqueness statements above apply; it is the hypothesis `lemma-section-normal-bundle--1` (ii)
-imposes, in the weaker form available here (the blueprint asks that `F` be étale-locally a shift and
-twist of a lisse rank-one sheaf). -/
+isomorphisms `α, β : F ≅ Lp^* C` with `Li₁^* α = Li₁^* β` are equal. -/
 theorem eq_of_leftDerivedUpperStar_oneSection_eq
     (F : _root_.DerivedCategory
       (Sheaf 𝔸(ULift.{u} (Fin 1); Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -422,12 +372,10 @@ theorem eq_of_leftDerivedUpperStar_oneSection_eq
 
 set_option linter.unusedSectionVars false in
 include aY in
-/-- Blueprint `lemma-section-normal-bundle--1`: Invariance along the affine line
-
-*Gluing.* Let `F ∈ D(𝔸¹_Y)`, `C ∈ D(Y)` and `θ : Li₁^* F ≅ C`. Let `v : Y' ⟶ Y` be surjective
-and étale with `Y'` separated of finite type over `k`, for instance the disjoint union of an
-étale covering family `{Y_α ⟶ Y}`, and write `v₁ : 𝔸¹_{Y'} ⟶ 𝔸¹_Y` for the base change of `v`
-and `a' : 𝔸¹_{Y'} ⟶ Y'` for the projection. Suppose
+/-- **Gluing along the affine line.** Let `F ∈ D(𝔸¹_Y)`, `C ∈ D(Y)` and `θ : Li₁^* F ≅ C`. Let
+`v : Y' ⟶ Y` be surjective and étale with `Y'` separated of finite type over `k`, and write
+`v₁ : 𝔸¹_{Y'} ⟶ 𝔸¹_Y` for the base change of `v` and `a' : 𝔸¹_{Y'} ⟶ Y'` for the projection.
+Suppose
 
 * (local shape) `Lv₁^* F ≅ L(m)[n]` for a finite locally constant sheaf `L` on `𝔸¹_{Y'}`, free
   of rank one at every geometric point;
@@ -435,11 +383,7 @@ and `a' : 𝔸¹_{Y'} ⟶ Y'` for the projection. Suppose
   `i₁'` of `𝔸¹_{Y'}` to `Lv^* θ`, under `Li₁'^* La'^* ≅ 𝟭` and `Li₁'^* Lv₁^* ≅ Lv^* Li₁^*`.
 
 Then there is a unique isomorphism `κ : F ≅ La^* C` whose restriction to `𝔸¹_{Y'}` is `κ'`,
-under `Lv₁^* La^* ≅ La'^* Lv^*`.
-
-The blueprint also asks `F` and `C` to lie in `D^b_{ctf}`; this is not imposed here, the local
-shape making `F`, and through `κ'` and `θ` also `C`, étale-locally a shift and twist of a lisse
-sheaf. -/
+under `Lv₁^* La^* ≅ La'^* Lv^*`. -/
 theorem existsUnique_iso_leftDerivedUpperStar_of_etale
     (F : _root_.DerivedCategory
       (Sheaf 𝔸(ULift.{u} (Fin 1); Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -536,14 +480,11 @@ theorem existsUnique_iso_leftDerivedUpperStar_of_etale
 -- unifying the objects of the composition and section isomorphisms is expensive
 set_option linter.unusedSectionVars false in
 include aY in
-/-- Blueprint `lemma-section-normal-bundle--1`: Invariance along the affine line
-
-*Uniqueness and normalization*, clauses (1) and (2). In the situation of
-`AlgebraicGeometry.Etale.existsUnique_iso_leftDerivedUpperStar_of_etale`, the glued comparison
-`κ : F ≅ La^* C`, whose restriction to `𝔸¹_{Y'}` is `κ'`, restricts along the unit section
-`i₁` to `θ`, under `Li₁^* La^* ≅ 𝟭`; and it is the unique isomorphism `F ≅ La^* C` with this
-property, so that it depends neither on the cover nor on the local comparison `κ'`. Applying
-`Li₀^*` to `κ` then gives the canonical identification `Li₀^* F ≅ C` of clause (3). -/
+/-- **Uniqueness and normalization of the glued comparison.** In the situation of
+`AlgebraicGeometry.Etale.existsUnique_iso_leftDerivedUpperStar_of_etale`, there is a comparison
+`κ : F ≅ La^* C` whose restriction to `𝔸¹_{Y'}` is `κ'`, and it is the unique isomorphism
+`F ≅ La^* C` restricting along the unit section `i₁` to `θ`, under `Li₁^* La^* ≅ 𝟭`. In
+particular it depends neither on the cover nor on the local comparison `κ'`. -/
 theorem exists_iso_leftDerivedUpperStar_oneSection_iff_of_etale
     (F : _root_.DerivedCategory
       (Sheaf 𝔸(ULift.{u} (Fin 1); Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)))

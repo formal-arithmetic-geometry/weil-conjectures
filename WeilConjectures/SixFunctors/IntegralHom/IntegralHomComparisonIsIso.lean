@@ -11,9 +11,20 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Invertibility of the normalized integral Hom comparison
 
-Source: blueprint order 2478, proof steps 1 and 4-7; Stacks Tags 093M,
-06YQ, 08J7, 0A8X and 07A6
-(blueprint: lem-sf-integral-hom-comparison-is-iso).
+We show that the specified transpose of reduced evaluation is invertible for arbitrary inputs.
+
+## Implementation details
+
+Over the finite quotient, the restricted quotient is modeled by the two-term free complex
+`Q_n = [B --t^(n+1)--> B]`. Resolving the source by a K-flat complex `P` and the target by a
+K-injective complex `I`, the restricted comparison is modeled by the signed chain map
+`Hom(P, I) ⊗ Q_n → Hom(P, Tot(I ⊗ Q_n))`, which is a degreewise isomorphism even for unbounded
+`P`. The evaluation and scalar-unit normalizations identify it with the restriction of the
+comparison, and restriction is conservative.
+
+## References
+
+* Stacks Project, Tags 093M, 06YQ, 08J7, 0A8X, 07A6.
 -/
 
 @[expose] public section
@@ -35,30 +46,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 -- Use the existing sheafification at the coefficient universe for this declaration.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The specified transpose of reduced evaluation is invertible for arbitrary
-inputs. The presentation hypotheses only specify the normalized tensor models.
-
-Source: blueprint order 2478, steps 1 and 4-7; Stacks Tags 093M, 06YQ,
-08J7, 0A8X and 07A6
-(blueprint: lem-sf-integral-hom-comparison-is-iso).
-
-Proof: The coefficient valuation ring is a DVR, hence Noetherian. Completion
-identifies the restricted quotient with Q_n=[B --t^(n+1)--> B] in degrees -1,0,
-with its degree-zero unit. This bounded free complex is K-flat. The coefficient
-extension/restriction adjunction and tensor-Hom adjunction identify the restricted
-finite internal Hom with Hom_B(K,Res_n N), naturally in N, by Yoneda. Resolve K
-by K-flat P and L by K-injective I. The bounded split-free tensor lemma makes
-Tot(I tensor Q_n) K-injective. The restriction of the displayed comparison is
-therefore modeled by Hom(P,I) tensor Q_n to Hom(P,Tot(I tensor Q_n)). On a
-homogeneous f tensor q it is x maps to (-1)^(degree(q)*degree(x)) f(x) tensor q.
-In each total degree, the two finite coefficient degrees commute with the product
-over degrees of P, making this a degreewise isomorphism even when P is unbounded.
-The differential terms involving d_I,d_P,d_Q have signs respectively bp,
-a+1+bp,a+bp+p on x of degree p, on both sides. Thus it is a chain isomorphism.
-The evaluation and scalar-unit normalizations identify it with the restriction
-of comparison, rather than just an unspecified isomorphism of its endpoints.
-Restriction is conservative: it preserves the underlying cohomology sheaves.
-Hence the comparison itself is an isomorphism over the finite quotient. The
-argument includes zero inputs and n=0, which denotes the first positive power. -/
+inputs. The presentation hypotheses only specify the normalized tensor models. -/
 theorem comparison_isIso
     (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))
     (n : ℕ) (m : ReductionPresentation l E Y D hl a n)

@@ -17,16 +17,25 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SupportsEtale
 Let `i : Z ⟶ X` be a regular closed immersion of pure codimension `c`, with `X` smooth over a
 perfect field `k` and `Z` regular. The morphism `cl_i : Λ_Z ⟶ Ri^! (Λ_X(c)[2c])`, `1 ↦ [Z ⊂ X]`,
 adjoint to the fundamental class (`AlgebraicGeometry.Etale.fundamentalClassMap`), is an
-isomorphism (clause (c) of blueprint `lemma-class-of-point--1`); in particular `[Z ⊂ X]` generates
-the cohomology sheaf `𝓗⁰(Ri^! Λ_X(c)[2c])` at every geometric point (clause (b)).
+isomorphism; in particular `[Z ⊂ X]` generates the cohomology sheaf `𝓗⁰(Ri^! Λ_X(c)[2c])` at
+every geometric point.
 
-This is Step 4 of the proof. The question is étale-local on `Z`. Near every point of `Z` there
-is a Zariski frame `(U, f₁, …, f_c)` of `Z` together with an étale map
-`u : U ⟶ 𝔸^c_B`, `B = 𝔸^m_k`, whose `c` fibre coordinates `t_a` pull back to the `f_a`
+## Main statements
+
+- `AlgebraicGeometry.Etale.isIso_fundamentalClassMap`: `cl_i` is an isomorphism.
+- `AlgebraicGeometry.Etale.isIso_homology_zero_map_fundamentalClassMap`: the fundamental class
+  generates.
+- `AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_fundamentalClassMap`: finite reduction.
+
+## Implementation details
+
+The question is étale-local on `Z`. Near every point of `Z` there is a Zariski frame
+`(U, f₁, …, f_c)` of `Z` together with an étale map `u : U ⟶ 𝔸^c_B`, `B = 𝔸^m_k`, whose `c`
+fibre coordinates `t_a` pull back to the `f_a`
 (`AlgebraicGeometry.IsRegularImmersion.exists_etale_affineSpace`). The frame class
 `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` is the restriction along `u` of the class `∂κ(t₁) ∪ ⋯ ∪ ∂κ(t_c)` of the
 zero section of `𝔸^c_B` (`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct`),
-whose adjoint is an isomorphism by the model computation of `proposition-purity-vector-bundles`
+whose adjoint is an isomorphism by the model computation for vector bundles
 (`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_coord`). Restriction of
 supports along an étale map is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_supportedRestriction_of_etale`), so the adjoint of a class is an
@@ -35,11 +44,14 @@ isomorphism after étale restriction if and only if the class's adjoint is so th
 twice — along `u` and along the frame `U ⟶ X` — shows that `cl_i` becomes an isomorphism on a
 Zariski cover of `Z`.
 
-## Main statements
+The isomorphism `cl_i` agrees with the isomorphism assembled from smooth purity of `a_X` and
+`a_Z` (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_of_isRegularImmersion`); since that
+isomorphism is only recorded as `Nonempty`, this agreement is not stated.
 
-- `AlgebraicGeometry.Etale.isIso_fundamentalClassMap`: clause (c).
-- `AlgebraicGeometry.Etale.isIso_homology_zero_map_fundamentalClassMap`: clause (b), generation.
-- `AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_fundamentalClassMap`: finite reduction.
+For finite reduction, a single coefficient ring `Λ` carries the rank-one datum
+`AlgebraicGeometry.Etale.HasKummerClass`, so the reduction is expressed inside `D(Z_ét, Λ)`;
+comparing with the purity isomorphism of a separate rank-one datum on `Λ / J` would need a
+compatibility structure between the data of the tower, which is not part of the framework.
 -/
 
 @[expose] public section
@@ -62,14 +74,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
 
 attribute [local instance] HasInvertibleExponent.opens
 
-/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
-
-*Step 4, locally.* Every point of `Z` lies in the zero locus of a Zariski frame `F` of `i` on
-which `cl_i` restricts to an isomorphism: `F` is chosen with an étale map `u : F.U ⟶ 𝔸^c_B`
-pulling the coordinates back to the frame functions, the frame class is the restriction of the
-class of the zero section of `𝔸^c_B`, whose adjoint is an isomorphism
-(`proposition-purity-vector-bundles`), and the restriction of supports along the étale maps `u` and
-`F.U ⟶ X` is invertible. -/
+/-- Every point of `Z` lies in the zero locus of a Zariski frame `F` of `i` on which `cl_i`
+restricts to an isomorphism. -/
 theorem exists_etaleFrame_isIso_leftDerivedUpperStar_map_fundamentalClassMap
     (aX : X ⟶ Spec (.of k)) [Smooth aX] (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z))
     (z : Z) : ∃ F : i.EtaleFrame c, z ∈ Set.range F.toZ ∧
@@ -108,18 +114,8 @@ theorem exists_etaleFrame_isIso_leftDerivedUpperStar_map_fundamentalClassMap
     (isIso_supportedClassMap_restrictSupportedClass_iff Λ F.e _ _ _ F.isPullback _ _ _ _ hψe).1
       h₂⟩
 
-/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
-
-**(c) `cl_i` is an isomorphism**, `cl_i : Λ_Z ≅ Ri^! (Λ_X(c)[2c])`, `1 ↦ [Z ⊂ X]`. Its
-restrictions to the members of a Zariski cover of `Z` are isomorphisms
-(`AlgebraicGeometry.Etale.exists_etaleFrame_isIso_leftDerivedUpperStar_map_fundamentalClassMap`),
-and restrictions to a cover detect isomorphisms on cohomology sheaves.
-
-It equals the isomorphism `Φ_i` assembled from smooth purity of `a_X` and `a_Z` in Steps 1–2
-of the proof (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_of_isRegularImmersion`).
-That isomorphism is recorded only as `Nonempty`, so the agreement is a remark rather
-than a statement. Twisting by `(-c)[-2c]`, the inverse of `cl_i(-c)[-2c]` is the canonical
-isomorphism `Ri^! Λ_X ≅ Λ_Z(-c)[-2c]`. -/
+/-- **Purity for regular closed immersions**: `cl_i : Λ_Z ⟶ Ri^! (Λ_X(c)[2c])`,
+`1 ↦ [Z ⊂ X]`, is an isomorphism. -/
 theorem isIso_fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
     IsIso (fundamentalClassMap Λ c i aX hZ) := by
@@ -136,31 +132,20 @@ theorem isIso_fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (Functor.map_isIso (_root_.DerivedCategory.homologyFunctor _ n)
       (D(((F z).toZ)^*[ModuleCat.{u + 1} Λ]).map (fundamentalClassMap Λ c i aX hZ)))
 
-/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
-
-**(b) The fundamental class generates.** `[Z ⊂ X]` generates `𝓗⁰(Ri^! Λ_X(c)[2c])` at every
+/-- **The fundamental class generates.** `[Z ⊂ X]` generates `𝓗⁰(Ri^! Λ_X(c)[2c])` at every
 geometric point: the map of sheaves `Λ_Z ⟶ 𝓗⁰(Ri^! Λ_X(c)[2c])` induced by `cl_i` is an
-isomorphism, `cl_i` being one (`AlgebraicGeometry.Etale.isIso_fundamentalClassMap`). -/
+isomorphism. -/
 theorem isIso_homology_zero_map_fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
     IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map (fundamentalClassMap Λ c i aX hZ)) :=
   have := isIso_fundamentalClassMap Λ c i aX hZ
   inferInstance
 
-/-- Blueprint `prop-pur-regular-immersion-purity-compatibilities`: Compatibilities of purity for
-regular immersions
-
-**Finite reduction** (item 4). Reduction of coefficients along a quotient `Λ ⟶ Λ / J`
+/-- **Finite reduction.** Reduction of coefficients along a quotient `Λ ⟶ Λ / J`
 (`AlgebraicGeometry.Etale.reductionModIdeal`, `K ↦ K ⊗ᴸ (Λ / J)`; for `Λ = A_{E,n}` and
 `J = ϖ^{n-1}` this is the reduction `A_{E,n} ⟶ A_{E,n-1}`) carries the purity isomorphism
 `cl_i : Λ_Z ≅ Ri^! (Λ_X(c)[2c])` to an isomorphism
-`Λ_Z ⊗ᴸ (Λ / J) ≅ Ri^! (Λ_X(c)[2c]) ⊗ᴸ (Λ / J)`: the reduction functor is applied to every
-step of the construction, which is natural in the coefficients.
-
-In this formalisation a single coefficient ring `Λ` carries the rank-one datum
-`AlgebraicGeometry.Etale.HasKummerClass`, so the reduction is expressed inside `D(Z_ét, Λ)`;
-comparing with the purity isomorphism of a separate rank-one datum on `Λ / J` would need a
-compatibility structure between the data of the tower, which is not part of the framework. -/
+`Λ_Z ⊗ᴸ (Λ / J) ≅ Ri^! (Λ_X(c)[2c]) ⊗ᴸ (Λ / J)`. -/
 theorem isIso_reductionModIdeal_map_fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) (J : Ideal Λ) :
     IsIso ((reductionModIdeal Λ Z J).map (fundamentalClassMap Λ c i aX hZ)) :=

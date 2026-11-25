@@ -35,6 +35,27 @@ This extends the finite case `AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isF
 - `AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isIntegralHom`: base change along an
   integral morphism.
 - `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_isIntegralHom`: its derived form.
+
+## Implementation details
+
+The sheaf-level statement is checked on stalks at geometric points of `Y'`. For an integral
+morphism the stalk of `f_* F` at a geometric point `y` consists of sections of `F` over
+`X ×_Y Spec 𝒪^{sh}_{Y,y}`, which only depend on the fibre of `X` over `y`. Concretely, both
+stalks embed into the product of the stalks of `F` at the geometric points of `X` over `y' ≫ g`
+(`AlgebraicGeometry.Etale.eq_zero_of_forall_stalkRestrict_eq_zero`), giving injectivity; for
+surjectivity, local preimages near each point of the geometric fibre
+(`AlgebraicGeometry.Etale.surjective_stalkRestrict_of_isIntegralHom`) are patched using
+quasi-compactness of the fibre
+(`AlgebraicGeometry.Scheme.Hom.Nbhd.exists_finset_geometricFiber_cover`). The global statement
+applies this exchange to the base-changed morphism and to the outer square and cancels the
+comparison isomorphisms in the horizontal pasting identity.
+
+The derived statement follows without resolutions, since `f_*` and `f'_*` are exact
+(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`).
+
+## References
+
+* [Stacks: Tag 0EYP](https://stacks.math.columbia.edu/tag/0EYP)
 -/
 
 @[expose] public section
@@ -79,17 +100,7 @@ variable [IsIntegralHom f]
 
 open Scheme Scheme.Hom in
 /-- **The base change map of an integral morphism is an isomorphism on stalks** at geometric
-points with algebraically closed residue field. Both stalks embed into the product of the
-stalks of `F` at the geometric points of `X` over `y' ≫ g`
-(`AlgebraicGeometry.Etale.eq_zero_of_forall_stalkRestrict_eq_zero`), compatibly with the base
-change map, which is therefore injective. For surjectivity, a germ `b` of `f'_* g'^* F` at `y'`
-agrees at each geometric point `t` of `X'` over `y'` with the image of some germ `a t` of
-`f_* F` (`AlgebraicGeometry.Etale.surjective_stalkRestrict_of_isIntegralHom`), and then at all
-points near `t` in the fibre topology
-(`AlgebraicGeometry.Etale.exists_finset_stalkRestrict_eq_zero`). By quasi-compactness of the
-geometric fibre (`AlgebraicGeometry.Scheme.Hom.Nbhd.exists_finset_geometricFiber_cover`)
-finitely many `a t` suffice, and they patch to a germ of `f_* F`
-(`AlgebraicGeometry.Etale.exists_stalkRestrict_eq_of_finset`) mapping to `b`. -/
+points with algebraically closed residue field. -/
 lemma Etale.isIso_sheafFiber_map_baseChangeMap_app_of_isIntegralHom (sq : IsPullback g' f' f g)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y' : Spec (.of Ω) ⟶ Y')
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -173,21 +184,7 @@ lemma Etale.isIso_sheafFiber_map_baseChangeMap_app_of_isIntegralHom (sq : IsPull
       ((f)_*[ModuleCat.{u + 1} Λ].obj F)) _
 
 /-- **Base change along an integral morphism**: for a cartesian square with `f` integral, the
-base change map `g^* f_* ⟶ f'_* g'^*` on étale sheaves of `Λ`-modules is an isomorphism.
-
-It is checked on the stalks at the geometric points of `Y'`. For an integral morphism the
-stalk of `f_* F` at a geometric point `y` of `Y` is the module of sections of `F` over
-`X ×_Y Spec 𝒪^{sh}_{Y,y}`, the spectrum of an integral algebra over a strictly henselian local
-ring, and such sections only depend on the fibre of `X` over `y`, which is the same for `y` and
-for a geometric point of `Y'` above it. This is the integral case of the exchange property whose
-finite case is `AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isFinite`.
-
-The Lean proof reduces to the geometric-point exchange, applies it to the base-changed
-integral morphism and to the outer square, and cancels the two comparison isomorphisms
-in the horizontal pasting identity. The inverse-image stalk isomorphism then makes
-every geometric stalk of the original exchange invertible.
-Source: Stacks Project, Tag 0EYP.
-(blueprint: lem-sbc-integral-underived-exchange). -/
+base change map `g^* f_* ⟶ f'_* g'^*` on étale sheaves of `Λ`-modules is an isomorphism. -/
 theorem Etale.isIso_baseChangeMap_of_isIntegralHom (sq : IsPullback g' f' f g) :
     IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) := by
   have hf' : IsIntegralHom f' := MorphismProperty.of_isPullback sq inferInstance
@@ -220,11 +217,7 @@ theorem Etale.isIso_baseChangeMap_of_isIntegralHom (sq : IsPullback g' f' f g) :
   infer_instance
 
 /-- **Derived base change along an integral morphism**: for a cartesian square with `f`
-integral, the derived base change map `g^* Rf_* ⟶ Rf'_* g'^*` on `D⁺` is an isomorphism. The
-pushforwards along `f` and along its base change `f'`, which is integral too, are exact
-(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`), so this follows
-from the sheaf-level statement
-`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isIntegralHom` without resolutions. -/
+integral, the derived base change map `g^* Rf_* ⟶ Rf'_* g'^*` on `D⁺` is an isomorphism. -/
 theorem Etale.isIso_derivedBaseChangeMapPlus_of_isIntegralHom (sq : IsPullback g' f' f g) :
     IsIso (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq) := by
   have : IsIntegralHom f' := MorphismProperty.of_isPullback sq inferInstance

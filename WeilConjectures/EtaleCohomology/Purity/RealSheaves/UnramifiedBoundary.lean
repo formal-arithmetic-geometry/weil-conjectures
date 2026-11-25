@@ -18,13 +18,38 @@ public import WeilConjectures.WeilSheaf.RealPurity
 
 Let `j : U₀ ⟶ C₀` be a nonempty open of a smooth geometrically connected curve over a finite
 field, `U₀` geometrically connected, and `z ∈ C₀ ∖ U₀` a boundary point with inertia group
-`I_z ⊆ W(U₀)` (`AlgebraicGeometry.WeilGroup.boundaryInertia`). A lisse representation of `W(U₀)`
-which is trivial on `I_z` is trivial on the whole kernel of `π₁(U₀) → π₁(U₀ ∪ {z})`, intersected
-with the Weil group (`AlgebraicGeometry.WeilGroup.apply_eq_self_of_mem_weilLocalKernel`): its
-kernel on the geometric part is closed and normal, so its image in `π₁(U₀)` is a closed normal
-subgroup (by the density of the Weil group) containing the inertia group, hence the closed normal
-subgroup it generates, which is the local kernel
+`I_z ⊆ W(U₀)` (`AlgebraicGeometry.WeilGroup.boundaryInertia`). We show that if a lisse Weil sheaf
+`ℱ` on `U₀` is punctually `ι`-pure of weight `w` and `I_z` acts trivially on its representation,
+then the stalk `(j_* ℱ)_z̄` is `ι`-pure of weight `w`.
+
+## Main statements
+
+* `AlgebraicGeometry.WeilGroup.apply_eq_self_of_mem_weilLocalKernel`: a lisse representation of
+  `W(U₀)` trivial on `I_z` is trivial on the kernel of `π₁(U₀) → π₁(U₀ ∪ {z})`, intersected with
+  the Weil group.
+* `AlgebraicGeometry.WeilGroup.isPureOfWeight_stalk_directImage_of_rep_eq_self`: purity of the
+  boundary stalk when the geometric monodromy is trivial on the local kernel.
+* `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_isPureOfWeight_stalk_directImage`: the
+  sheaf–representation equivalence for `W(U₀)`, with purity of the boundary stalks at points
+  with trivial inertia.
+
+## Implementation details
+
+For `apply_eq_self_of_mem_weilLocalKernel`: the elements of the geometric part of `W(U₀)` acting
+trivially form a closed normal subgroup; its image in `π₁(U₀)` is compact, hence closed, and
+normal by the density of the Weil group. It contains the inertia group, hence the closed normal
+subgroup it generates, which contains the local kernel
 (`AlgebraicGeometry.WeilGroup.localKernel_le_topologicalClosure_normalClosure`).
+
+For the purity statement, `ℱ` extends to a lisse Weil sheaf `G` on `V₀ = U₀ ∪ {z}`
+(`AlgebraicGeometry.WeilSheaf.exists_isLisse_upperStar_iso_of_rep_eq_self`), which is pure since
+its restriction to `U₀` is
+(`AlgebraicGeometry.WeilSheaf.IsLisse.isPunctuallyPureOfWeight_of_upperStar`), and
+`(j_* ℱ)_z̄ = ((U₀ ⟶ V₀)_* ℱ)_z̄ = G_z̄`. The equivalence in the final statement is the Weil
+fundamental representation at the monodromy of universal covers
+(`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_of_lisseMonodromy`); loops of `Ū` trivial
+on `V̄` push down into the local kernel
+(`AlgebraicGeometry.WeilGroup.BasePointData.geomAut_mem_fixingSubgroup`).
 -/
 
 @[expose] public section
@@ -55,12 +80,7 @@ include hj τ GC in
 lisse representation of `W(U₀)` on which the inertia group `I_z` at a boundary point `z` acts
 trivially. Then every element of `W(U₀)` of degree zero acting trivially on the covers of `U₀`
 which extend over `z` (`AlgebraicGeometry.WeilGroup.weilLocalKernel`) acts trivially through `ρ`.
-
-The elements of the geometric part acting trivially form a closed normal subgroup `N` of
-`W(U₀)`, since `ρ` is continuous on the geometric part. Its image in `π₁(U₀)` is compact, hence
-closed, and normal since the Weil group is dense; it contains the inertia group, hence the local
-kernel (`AlgebraicGeometry.WeilGroup.localKernel_le_topologicalClosure_normalClosure`).
-(blueprint: `corollary-unramified-boundary-point--2`) -/
+-/
 theorem apply_eq_self_of_mem_weilLocalKernel
     {ρ : Representation (PadicAlgCl l) (weilGroup pU sU GU) V}
     (hρ : (ofFundamentalGroup pU sU GU).IsLisse l ρ) (z : ↥((Set.range j.base)ᶜ))
@@ -183,7 +203,7 @@ omit [Nonempty U] in
 morphism `k : U₀ ⟶ V₀` over `𝔽_q` and base point data `B` of the Weil group of `U₀`, a loop `σ`
 of the geometric curve `Ū` at `B.t` acting trivially on the base changes of finite étale covers of
 `V̄` maps to an element of `π₁(U₀, s_U)` acting trivially on the base changes of the finite étale
-covers of `V₀`: these are base changes of covers of `V̄`, since `Ū ⟶ U₀ ⟶ V₀` is `Ū ⟶ V̄ ⟶ V₀`. -/
+covers of `V₀`. -/
 theorem BasePointData.geomAut_mem_fixingSubgroup
     (B : BasePointData (ofFundamentalGroup pU sU GU)) {V : Scheme.{u}} (k : U ⟶ V)
     {q : V ⟶ Spec (.of K)} (hk : k ≫ q = pU) {σ : Aut (fiber B.t)}
@@ -221,8 +241,7 @@ open WeilGroup Scheme.FiniteEtale ProEtale
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-/-- The pullback of a Weil sheaf along the identity is the sheaf itself: both `𝟙^*` and the
-identity functor are left adjoint to `𝟙_* ≅ 𝟭`. -/
+/-- The pullback of a Weil sheaf along the identity is isomorphic to the sheaf itself. -/
 theorem nonempty_upperStar_id_iso {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X) :
     Nonempty ((upperStar (𝟙 X)).obj F ≅ F) :=
@@ -258,13 +277,7 @@ omit [IsIntegral C] [GeometricallyConnected (U ↘ Spec (.of K))] [ConnectedSpac
 open of a smooth geometrically connected curve, `z` a boundary point, `V₀ = U₀ ∪ {z}` and `F` a
 lisse Weil sheaf on `U₀`, punctually `ι`-pure of weight `w`. If the monodromy of `F` on `Ū` at a
 geometric point `t` (`AlgebraicGeometry.ProEtale.universalLisseMonodromy`) is trivial on the
-kernel of `π₁(Ū, t) → π₁(V̄, t)`, then the stalk `(j_* F)_z̄` is `ι`-pure of weight `w`: `F`
-extends to a lisse Weil sheaf `G` on `V₀`
-(`AlgebraicGeometry.WeilSheaf.exists_isLisse_upperStar_iso_of_rep_eq_self`), which is pure of
-weight `w` since its restriction to `U₀` is
-(`AlgebraicGeometry.WeilSheaf.IsLisse.isPunctuallyPureOfWeight_of_upperStar`), and
-`(j_* F)_z̄ = ((U₀ ⟶ V₀)_* F)_z̄ = G_z̄` (`lemma-boundary-stalk--2`).
-(blueprint: `corollary-unramified-boundary-point--2`) -/
+kernel of `π₁(Ū, t) → π₁(V̄, t)`, then the stalk `(j_* F)_z̄` is `ι`-pure of weight `w`. -/
 theorem isPureOfWeight_stalk_directImage_of_rep_eq_self (z : ↥((Set.range j.base)ᶜ))
     {F : WeilSheaf K l U} (hF : F.IsLisse)
     (t : Spec (.of (AlgebraicClosure K)) ⟶ (U ↘ Spec (.of K)).geometricFiber)
@@ -362,25 +375,14 @@ variable (sU : Spec (.of (AlgebraicClosure K)) ⟶ U)
   (GC : Type u) [Group GC] [TopologicalSpace GC] [IsTopologicalGroup GC] [CompactSpace GC]
   [∀ P, MulAction GC ((fiber sC).obj P)] [IsFundamentalGroup (fiber sC) GC]
 
-/-- Blueprint `corollary-unramified-boundary-point--2` (first clause, inertia form), together with
-`definition-weil-representation--1`.
-
-Let `j : U₀ ⟶ C₀` be a nonempty open of a smooth geometrically connected curve over `𝔽_q`, `U₀`
-geometrically connected, with the boundary datum of actual inertia groups and residue Frobenius
-lifts (`AlgebraicGeometry.WeilGroup.boundaryDatum`). There is a lisse sheaf–representation
-equivalence `ℱ ↦ (V, ρ)` for `W(U₀)`, identifying the stalk `ℱ_x̄` with its local Frobenius with
-`V` with `ρ (Frob_x)` at the closed points of `U₀`, such that: if `ℱ` is punctually `ι`-pure of
-weight `w` and the inertia group `I_z` at a boundary point `z` acts trivially on `V` (the boundary
-stalk `V ^ (I_z)` is everything), then the stalk `(j_* ℱ)_z̄` is `ι`-pure of weight `w`.
-
-The equivalence is the Weil fundamental representation at the monodromy of universal covers
-(`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_of_lisseMonodromy`). A representation
-trivial on `I_z` is trivial on the kernel of `π₁(U₀) → π₁(U₀ ∪ {z})`
-(`AlgebraicGeometry.WeilGroup.apply_eq_self_of_mem_weilLocalKernel`), which contains the images
-of the loops of `Ū` trivial on `V̄`
-(`AlgebraicGeometry.WeilGroup.BasePointData.geomAut_mem_fixingSubgroup`); so `ℱ` extends to a
-lisse Weil sheaf on `U₀ ∪ {z}` and the stalk is pure
-(`AlgebraicGeometry.WeilGroup.isPureOfWeight_stalk_directImage_of_rep_eq_self`). -/
+/-- **Purity at unramified boundary points.** Let `j : U₀ ⟶ C₀` be a nonempty open of a smooth
+geometrically connected curve over `𝔽_q`, `U₀` geometrically connected, with the boundary datum
+of actual inertia groups and residue Frobenius lifts (`AlgebraicGeometry.WeilGroup.boundaryDatum`).
+There is a lisse sheaf–representation equivalence `ℱ ↦ (V, ρ)` for `W(U₀)`, identifying the stalk
+`ℱ_x̄` with its local Frobenius with `V` with `ρ (Frob_x)` at the closed points of `U₀`, such that:
+if `ℱ` is punctually `ι`-pure of weight `w` and the inertia group `I_z` at a boundary point `z`
+acts trivially on `V` (the boundary stalk `V ^ (I_z)` is everything), then the stalk
+`(j_* ℱ)_z̄` is `ι`-pure of weight `w`. -/
 theorem exists_equivalence_isLisse_isPureOfWeight_stalk_directImage :
     ∃ e : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l U ↦ F.IsLisse) ≌
         ObjectProperty.FullSubcategory ((ofFundamentalGroup (U ↘ Spec (.of K)) sU GU).isLisseRep l),

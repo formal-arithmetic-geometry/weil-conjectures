@@ -11,7 +11,17 @@ import WeilConjectures.SixFunctors.CompactSupportFiniteProjection.FiniteRealizat
 
 /-! # Finite realization of the canonical proper/open support identification
 
-Source: def-sf-operation-stages, normalized support composition and proper/open identities.
+The finite support realization of a constructible input is compatible with the factorization
+of a compactification into an open immersion followed by a proper morphism.
+
+## Implementation details
+
+The proof expands `sixFunctorFactoredSupportIdentification` as the composition comparison
+followed by the open and proper identifications, and uses a bounded étale-origin witness for
+the input in `finiteCompositionNormalization`. `finiteOpenNormalization` and
+`finiteProperNormalization` cancel the identity proper image and the identity open extension,
+naturality of the realization isomorphisms moves the input comparison through proper image,
+and the origin-witness comparisons cancel. No change of compactification occurs.
 -/
 
 @[expose] public noncomputable section
@@ -193,29 +203,10 @@ private theorem factor_realization
     Functor.whiskerLeft_app, Iso.app_inv, Iso.app_hom, Functor.map_comp, Category.assoc]
     using hc
 
-/-- The finite support realization respects its actual proper/open factorization.
-This is a single finite coefficient ring; no integral reduction or system realization
-is present in the equation.
-
-Source: def-sf-operation-stages, finiteCompositionNormalization,
-finiteOpenNormalization and finiteProperNormalization; prop-sf-pf-coherence.proof.md,
-compatibility of comparisons with counits and j_!.
-(blueprint: lem-sf-finite-support-factor-realization).
-
-Proof: expand sixFunctorFactoredSupportIdentification as composition followed by the
-open identification and proper identification. Use a bounded etale-origin witness for
-the finite constructible input in finiteCompositionNormalization. Its origin compositor
-is the canonical open/proper composite for this same compactification. At the open and
-proper compactifications, finiteOpenNormalization cancels the identity proper image and
-finiteProperNormalization cancels the identity open extension. Naturality of the two
-finite realization isomorphisms moves the input comparison through proper image. The
-three retained origin-witness comparisons cancel, leaving finiteSupport on the source
-and finiteDirectImage followed by direct image of finiteOpenExtension on the target.
-The source compositor is inverted in the displayed equation, so the result is the
-inverse factored support identification followed by finiteSupport. All equality
-transports use Q.factorization and the very compactification Q.compactification;
-there is no change of compactification. Zero inputs, identity factors and the empty
-open use the corresponding identity/unit cancellations. -/
+/-- The finite support realization respects the proper/open factorization of the
+compactification `c` of `f`: the inverse factored support identification followed by
+`finiteSupport` equals `finiteDirectImage` followed by the direct image of
+`finiteOpenExtension`. -/
 theorem finiteSupportFactorRealization
     (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]

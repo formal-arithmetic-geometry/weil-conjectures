@@ -9,8 +9,12 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 
 /-! # Detecting tensor-to-Hom maps by local evaluation
 
-Source: Stacks Tags 03EK and 03EO
-(blueprint: lem-sf-tensor-hom-evaluation-ext).
+Maps from a sheaf tensor product into an internal Hom are determined by their evaluation on
+pure tensors at every identity slice.
+
+## References
+
+* Stacks Project, Tags 03EK, 03EO.
 -/
 
 @[expose] public section
@@ -63,17 +67,7 @@ variable {J : GrothendieckTopology C}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R₁).obj)).IsMonoidal]
 
 /-- Maps from a sheaf tensor into an internal Hom are determined by evaluation
-on pure tensors at every identity slice.
-Source: Stacks Tags 03EK and 03EO; the uniqueness argument in blueprint
-`lem-coef-integral-hom-reduction.proof.md`, paragraph 1
-(blueprint: lem-sf-tensor-hom-evaluation-ext).
-
-Proof: cancel the inverse tensor/sheafification comparison and apply the
-sheafification Hom adjunction. For presheaf maps into internal Hom, naturality
-recovers every slice component from evaluation at the identity of that slice.
-Induction on presheaf tensors now reduces equality to the given pure-tensor
-formula. The zero and sum cases follow from additivity. The argument works for
-zero modules and the zero coefficient ring, and on an empty site. -/
+on pure tensors at every identity slice. -/
 theorem tensorHomEvaluation_ext
     (A B P N : SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R₁))
