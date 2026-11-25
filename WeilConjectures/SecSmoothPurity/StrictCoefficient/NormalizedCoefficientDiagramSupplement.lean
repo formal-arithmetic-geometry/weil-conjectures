@@ -31,15 +31,21 @@ public import WeilConjectures.SecSmoothPurity.NormalizedCoefficientDiagram
 
 /-! # Definition interface for simultaneous strict coefficient comparisons
 
-Source: Stacks 03EL and 07A4; the agent calculations in the eight proof steps of
-lem-pur-strict-coefficient-comparison-calculus
-(blueprint: lem-pur-strict-coefficient-comparison-calculus).
+This file defines the simultaneous coefficient and sequence comparisons for strict
+coefficient systems of sheaves of modules, together with the transition, unit and
+composition laws they are required to satisfy.
+
+## Implementation details
 
 The product index records coefficient changes and all inverse-sequence arrows.
 Semilinear arrows are written in their scalar-extension adjoint form. Thus they
 are arbitrary chain maps out of scalar extension, including zero maps, rather
 than only the scalar-extension units. All tensors are the existing sheafified
 module tensor and its signed direct-sum total complex.
+
+## References
+
+* Stacks Project, Tags 03CY, 03EL and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -64,8 +70,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [K.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
 
-/-- The existing tensor isomorphism on total complexes, with instances fixed once.
-Source: Stacks 07A4 (blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+/-- The existing tensor isomorphism on total complexes, with instances fixed once. -/
 abbrev totalIso {R : Sheaf J CommRingCat.{w}} {P Q P' Q' : Complex R}
     (f : P ≅ P') (g : Q ≅ Q') : total P Q ≅ total P' Q' := by
   let : ∀ (I₁ I₂ : Type w), HasColimitsOfShape (Discrete I₂)
@@ -86,8 +91,7 @@ attribute [instance] Diagram.additive
 
 variable (d : Diagram (J := J) (K := K))
 
-/-- The recorded ringed pullback at a coefficient and sequence level.
-Source: Stacks 03EL (blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+/-- The recorded ringed pullback at a coefficient and sequence level. -/
 def Diagram.ringed (i : Index) : RingedPullback (d.R.obj i) (d.S.obj i) where
   uInv := d.inverse
   uPush := d.direct
@@ -103,8 +107,7 @@ def Diagram.ringed (i : Index) : RingedPullback (d.R.obj i) (d.S.obj i) where
   moduleAdj := d.moduleAdj i
   additive := d.additive i
 
-/-- Every coefficient or sequence arrow is the existing coefficient square.
-Source: Stacks 03EL (blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+/-- Every coefficient or sequence arrow is the existing coefficient square. -/
 def Diagram.square {i j : Index} (t : i ⟶ j) : CoefficientSquare (d.ringed i) where
   R' := d.R.obj j
   S' := d.S.obj j
@@ -124,9 +127,7 @@ def Diagram.square {i j : Index} (t : i ⟶ j) : CoefficientSquare (d.ringed i) 
   additive' := d.additive j
 
 /-- Cochain scalar-extension composition, using the existing identity-on-sections
-restriction comparison and adjoint uniqueness; no arbitrary associator is chosen.
-Source: Stacks 03CY, 03EL
-(blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+restriction comparison and adjoint uniqueness; no arbitrary associator is chosen. -/
 def scalarComp {A B H : Sheaf J CommRingCat.{w}}
     (a : A ⟶ B) (b : B ⟶ H) (c : A ⟶ H) (hc : c = a ≫ b) :
     extend a ⋙ extend b ≅ extend c :=
@@ -139,9 +140,7 @@ def scalarComp {A B H : Sheaf J CommRingCat.{w}}
         (SheafOfModules.systemScalarRestrictionComposition a b c hc))
       (extensionAdjunction c)) (.up ℤ)
 
-/-- Cochain action unit for scalar extension along an identity ring map.
-Source: Stacks 03CY, 03EL
-(blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+/-- Cochain action unit for scalar extension along an identity ring map. -/
 def scalarUnit (A : Sheaf J CommRingCat.{w}) : extend (𝟙 A) ≅ 𝟭 (Complex A) :=
   NatIso.mapHomologicalComplex
     (Adjunction.leftAdjointUniq (F := extensionFunctor (𝟙 A))
@@ -152,23 +151,20 @@ def scalarUnit (A : Sheaf J CommRingCat.{w}) : extend (𝟙 A) ≅ 𝟭 (Complex
 
 attribute [local irreducible] scalarComp scalarUnit
 
-/-- Canonical associator along two arrows of a ring diagram.
-Source: Stacks 03EL (blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+/-- Canonical associator along two arrows of a ring diagram. -/
 def diagramComp (B : Index ⥤ Sheaf J CommRingCat.{w})
     {i j k : Index} (a : i ⟶ j) (b : j ⟶ k) :
     extend (B.map a) ⋙ extend (B.map b) ≅ extend (B.map (a ≫ b)) :=
   scalarComp (B.map a) (B.map b) (B.map (a ≫ b)) (B.map_comp a b)
 
-/-- Canonical unit along the identity arrow of a ring diagram.
-Source: Stacks 03EL (blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+/-- Canonical unit along the identity arrow of a ring diagram. -/
 def diagramUnit (B : Index ⥤ Sheaf J CommRingCat.{w}) (i : Index) :
     extend (B.map (𝟙 i)) ≅ 𝟭 (Complex (B.obj i)) :=
   eqToIso (congrArg (fun f ↦ extend f) (B.map_id i)) ≪≫ scalarUnit (B.obj i)
 
 /-- Simultaneous module comparisons. Each sigma is the existing normalized
 comparison type: its naturality and generalized pure-tensor formula are fields.
-Kappa is a natural isomorphism; its generator normalization is stated separately.
-Source: Stacks 03EL (blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+Kappa is a natural isomorphism; its generator normalization is stated separately. -/
 structure Comparisons where
   kappa : ∀ {i j : Index} (t : i ⟶ j),
     d.L i ⋙ extensionFunctor (d.S.map t) ≅ extensionFunctor (d.R.map t) ⋙ d.L j
@@ -180,34 +176,27 @@ variable {d}
 /-- The generalized-generator equation fixes the displayed kappa formulas in
 both directions: by linearity and balancing it is exactly
 b tensor (a tensor x) mapped to b i(a) tensor (1 tensor x).
-The inverse is forced by the isomorphism law and multiplies by phi(d).
-Source: Stacks 03EL (blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+The inverse is forced by the isomorphism law and multiplies by phi(d). -/
 def Comparisons.Normalized (e : Comparisons d)
     (k : ∀ i : Index, Comparison (d.ringed i)) : Prop :=
   ∀ {i j : Index} (t : i ⟶ j),
     IsScalarAssociation (d.ringed i) (k i) (d.square t) (k j) (e.kappa t).symm
 
-/-- The termwise cochain lift of kappa, retaining the underlying natural isomorphism.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+/-- The termwise cochain lift of kappa, retaining the underlying natural isomorphism. -/
 def Comparisons.kappaC (e : Comparisons d) {i j : Index} (t : i ⟶ j)
     (P : Complex (d.R.obj i)) :
     (extend (d.S.map t)).obj ((pull (d.ringed i)).obj P) ≅
       (pull (d.ringed j)).obj ((extend (d.R.map t)).obj P) :=
   (NatIso.mapHomologicalComplex (e.kappa t) (.up ℤ)).app P
 
-/-- Sigma on unbounded total tensors over Y, with its normalized inverse.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+/-- Sigma on unbounded total tensors over Y, with its normalized inverse. -/
 def Comparisons.sigmaRC (e : Comparisons d) {i j : Index} (t : i ⟶ j)
     (P Q : Complex (d.R.obj i)) :
     (extend (d.R.map t)).obj (total P Q) ≅
       total ((extend (d.R.map t)).obj P) ((extend (d.R.map t)).obj Q) :=
   comparison (extensionPullback (d.R.map t)) (e.sigmaR t) P Q
 
-/-- Sigma on unbounded total tensors over X, with its normalized inverse.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+/-- Sigma on unbounded total tensors over X, with its normalized inverse. -/
 def Comparisons.sigmaSC (e : Comparisons d) {i j : Index} (t : i ⟶ j)
     (P Q : Complex (d.S.obj i)) :
     (extend (d.S.map t)).obj (total P Q) ≅
@@ -216,9 +205,7 @@ def Comparisons.sigmaSC (e : Comparisons d) {i j : Index} (t : i ⟶ j)
 
 /-- The actual induced pullback of an arbitrary semilinear chain map, expressed
 by its scalar-extension adjoint. This permits every strict-system transition,
-including zero transitions and maps not invertible after scalar extension.
-Source: Stacks 03CY and 03EL
-(blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+including zero transitions and maps not invertible after scalar extension. -/
 def Comparisons.pullArrow (e : Comparisons d) {i j : Index} (t : i ⟶ j)
     (P : Complex (d.R.obj i)) (Q : Complex (d.R.obj j))
     (f : (extend (d.R.map t)).obj P ⟶ Q) :
@@ -226,9 +213,7 @@ def Comparisons.pullArrow (e : Comparisons d) {i j : Index} (t : i ⟶ j)
       (pull (d.ringed j)).obj Q :=
   (e.kappaC t P).hom ≫ (pull (d.ringed j)).map f
 
-/-- The tensor of two arbitrary semilinear transitions over Y.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+/-- The tensor of two arbitrary semilinear transitions over Y. -/
 def Comparisons.tensorArrow (e : Comparisons d) {i j : Index} (t : i ⟶ j)
     (P Q : Complex (d.R.obj i)) (P' Q' : Complex (d.R.obj j))
     (f : (extend (d.R.map t)).obj P ⟶ P')
@@ -237,9 +222,7 @@ def Comparisons.tensorArrow (e : Comparisons d) {i j : Index} (t : i ⟶ j)
   (e.sigmaRC t P Q).hom ≫ (totalMap f g)
 
 /-- Transport an arbitrary semilinear transition across a commuting square of
-coefficient and sequence arrows, using the canonical scalar associators.
-Source: Stacks 03CY, 03EL, and the item's proof step 5
-(blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+coefficient and sequence arrows, using the canonical scalar associators. -/
 def squareArrow (B : Index ⥤ Sheaf J CommRingCat.{w})
     {i j k l : Index} (a : i ⟶ j) (b : k ⟶ l) (r : i ⟶ k) (s : j ⟶ l)
     (h : a ≫ s = r ≫ b) (P : Complex (B.obj i)) (Q : Complex (B.obj k))
@@ -250,9 +233,7 @@ def squareArrow (B : Index ⥤ Sheaf J CommRingCat.{w})
     eqToHom (congrArg (fun t ↦ (extend (B.map t)).obj P) h) ≫
       (diagramComp B r b).inv.app P ≫ (extend (B.map b)).map f
 
-/-- Tensoring arbitrary semilinear transitions after scalar extension.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+/-- Tensoring arbitrary semilinear transitions after scalar extension. -/
 def tensorArrowFor (B : Index ⥤ Sheaf J CommRingCat.{w})
     (s : ∀ {i j : Index} (t : i ⟶ j), Comparison (extensionPullback (B.map t)))
     {i j : Index} (t : i ⟶ j)
@@ -263,10 +244,8 @@ def tensorArrowFor (B : Index ⥤ Sheaf J CommRingCat.{w})
 
 /-- The coefficient tensor comparisons commute with every strict transition.
 The transitions f and g are arbitrary scalar-extension adjoints, not assumed
-invertible or equal to extension units. The inverse sigma square is equivalent,
-by cancelling the displayed isomorphisms.
-Source: Stacks 03EL and 07A4, and the item's proof steps 4--5
-(blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+invertible or equal to extension units. The inverse sigma square follows
+by cancelling the displayed isomorphisms. -/
 def TensorTransitionLaws (B : Index ⥤ Sheaf J CommRingCat.{w})
     (z : ∀ {i j : Index} (t : i ⟶ j), Comparison (extensionPullback (B.map t))) : Prop :=
   ∀ {i j k l : Index} (a : i ⟶ j) (b : k ⟶ l) (r : i ⟶ k) (s : j ⟶ l)
@@ -283,9 +262,7 @@ def TensorTransitionLaws (B : Index ⥤ Sheaf J CommRingCat.{w})
 
 /-- The coefficient pullback comparisons commute with every strict transition.
 Both sides use actual scalar extension and the same arbitrary semilinear input
-map; inverse kappa commutes too by cancelling the isomorphisms.
-Source: Stacks 03EL and 07A4, and the item's proof steps 2 and 5
-(blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+map; inverse kappa commutes too by cancelling the isomorphisms. -/
 def Comparisons.KappaTransitionLaws (e : Comparisons d) : Prop :=
   ∀ {i j k l : Index} (a : i ⟶ j) (b : k ⟶ l) (r : i ⟶ k) (s : j ⟶ l)
     (h : a ≫ s = r ≫ b) (P : Complex (d.R.obj i)) (Q : Complex (d.R.obj k))
@@ -299,9 +276,7 @@ def Comparisons.KappaTransitionLaws (e : Comparisons d) : Prop :=
 /-- Unit and successive-extension equations for a normalized tensor comparison.
 They are equations of isomorphisms, so equality in both inverse directions is
 included. Component isomorphisms are the usual chain isomorphisms with the
-signed direct-sum differential; their naturality covers arbitrary chain maps.
-Source: Stacks 03EL and 07A4, and the item's proof steps 7--8
-(blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+signed direct-sum differential; their naturality covers arbitrary chain maps. -/
 def TensorLaws (B : Index ⥤ Sheaf J CommRingCat.{w})
     (s : ∀ {i j : Index} (t : i ⟶ j), Comparison (extensionPullback (B.map t))) : Prop :=
   (∀ (i : Index) (P Q : Complex (B.obj i)),
@@ -319,9 +294,7 @@ def TensorLaws (B : Index ⥤ Sheaf J CommRingCat.{w})
 
 /-- Every square, unit and composition equation, including arbitrary semilinear
 sequence transitions. The product index makes the successive coefficient
-arrows 01,12,02 and every sequence map instances of these same equations.
-Source: Stacks 03EL and 07A4, and all eight agent proof steps of the node
-(blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
+arrows 01,12,02 and every sequence map instances of these same equations. -/
 def Comparisons.Laws (e : Comparisons d)
     (k : ∀ i : Index, Comparison (d.ringed i)) : Prop :=
   TensorLaws d.R e.sigmaR ∧ TensorLaws d.S e.sigmaS ∧

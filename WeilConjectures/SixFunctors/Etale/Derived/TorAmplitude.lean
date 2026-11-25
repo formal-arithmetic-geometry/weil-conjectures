@@ -34,7 +34,7 @@ are typed: the bounded constructible complexes of finite Tor amplitude.
 - `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor`: the category `Dctf(X, A)` of bounded
   constructible complexes of finite Tor amplitude.
 
-## Implementation notes
+## Implementation details
 
 Neither homology concentration in an interval nor Tor amplitude is an étale notion, and neither
 is defined here: they are `DerivedCategory.homologyConcentratedIn` of
@@ -43,7 +43,7 @@ canonical t-structure so that the t-structure API applies to it, and
 `DerivedCategory.torAmplitudeIn` of `WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude`,
 for the derived tensor product. The definitions below specialise them to `D(X_ét)`.
 
-The blueprint's second small category `D_c^[a, b](X, A)` is
+The second small category `D_c^[a, b](X, A)` is
 `AlgebraicGeometry.Etale.DerivedCategoryConstructibleIn` of
 `WeilConjectures.CategoryTheory.DerivedCategory.Constructible`. The statements that speak about
 it — those of `WeilConjectures.SixFunctors.Etale.Derived.Stability` — always pair it with a Tor
@@ -112,7 +112,7 @@ lemma DerivedCategory.constructibleFiniteTor_iff
         Etale.DerivedCategory.finiteTorAmplitude A X K :=
   Iff.rfl
 
-/-- Membership in the blueprint's `D_c^[a, b](X, A)` together with Tor amplitude in the same
+/-- Membership in `D_c^[a, b](X, A)` together with Tor amplitude in the same
 interval, as an object property of `D(X_ét)`: bounded constructible, homology concentrated in
 `[a, b]`, and Tor amplitude in `[a, b]`. -/
 noncomputable def DerivedCategory.constructibleTorAmplitudeIn (a b : ℤ) :
@@ -150,9 +150,7 @@ lemma DerivedCategory.exists_constructibleTorAmplitudeIn_iff_constructibleFinite
 
 variable (A X)
 
-/-- Blueprint `definition-constructible-sheaves`: Ambient categories and small subcategories.
-
-The small category `Dctf(X, A)` of bounded constructible complexes of finite Tor amplitude, as
+/-- The small category `Dctf(X, A)` of bounded constructible complexes of finite Tor amplitude, as
 a full subcategory of `D(X_ét)`. It is the category on which the six operations of the
 `ℓ`-adic formalism are typed. -/
 noncomputable def DerivedCategoryFiniteTor : Type _ :=
@@ -166,7 +164,7 @@ noncomputable def DerivedCategoryFiniteTor.ι :
     DerivedCategoryFiniteTor A X ⥤ _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
   (DerivedCategory.constructibleFiniteTor A X).ι
 
-/-- The inclusion `Dctf(X, A) ⊆ Dᵇc(X, A)` of blueprint `definition-constructible-sheaves`. -/
+/-- The inclusion `Dctf(X, A) ⊆ Dᵇc(X, A)`. -/
 noncomputable def DerivedCategoryFiniteTor.toBoundedConstructible :
     DerivedCategoryFiniteTor A X ⥤ DerivedCategoryBoundedConstructible A X :=
   ObjectProperty.ιOfLE inf_le_left

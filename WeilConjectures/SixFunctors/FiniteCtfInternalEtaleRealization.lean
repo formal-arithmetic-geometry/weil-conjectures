@@ -17,13 +17,32 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 
 /-! # Finite internal-etale realization with fixed Tor intervals
 
-proof.md, paragraph (3); Stacks 09AL, 09C2, 09A6;
-Bhatt--Scholze, Lemma 5.4.3
-(auxiliary; not a blueprint node).
+For a finite discrete coefficient ring `A`, this file defines the realization of étale
+derived complexes in the derived category of internal `A`-modules on the pro-étale site, and
+shows that over a field it restricts to an equivalence on bounded constructible complexes of
+each fixed Tor amplitude and commutes with total direct images.
 
-The fixed-scalar presentation of the normalized section-action encoding is used here.
-It is the same intrinsic constant-ring comparison, followed by its fixed-scalar
-coefficient equivalence. No derived category or tensor product is redefined.
+## Main definitions and results
+
+* `internalEtaleRealization`: the realization `E_T⁻¹ ν_T^*`.
+* `finiteCtfInternalEtaleRealization_of_field`, `finiteCtfInternalEtaleRealization`: the
+  equivalence on fixed Tor intervals and the compatibility with direct images.
+
+## Implementation details
+
+The fixed-scalar presentation of the normalized section-action encoding is used here. It is
+the same intrinsic constant-ring comparison, followed by its fixed-scalar coefficient
+equivalence; no derived category or tensor product is redefined.
+
+The equivalence is obtained from bounded constructible descent and the fixed-module Tor
+comparison, using `encoding_constructibility` and `encoding_tensor_tor` to transport along
+the encoding. The direct-image compatibility combines `encodingDerivedPushforwardIso` with
+the fixed-module bounded-below direct-image comparison.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 5.4.3.
+* Stacks Project, Tags 09AL, 09C2, 09A6.
 -/
 
 @[expose] public noncomputable section
@@ -37,11 +56,8 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
 
-/-- The specified realization `E_T⁻¹ ν_T^*`, in the fixed-scalar presentation of the
-normalized section-action equivalence. The additional fixed-scalar equivalence cancels
-between `ν_T^*` and `E_T⁻¹`.
-Source: blueprint direct-image proof, paragraph (3), finite coefficient comparison
-(auxiliary; not a blueprint node). -/
+/-- The realization `E_T⁻¹ ν_T^*`, in the fixed-scalar presentation of the normalized
+section-action equivalence. -/
 def internalEtaleRealization (A : Type u) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A] (T : Scheme.{u}) (e : Encoding A T) :
     Etale.DerivedCategoryModule (ULift.{u + 1} A) T ⥤
@@ -113,37 +129,10 @@ private theorem ordinaryBC_iff (A : Type u) [CommRing A] [Finite A]
     have hi := DerivedCategory.boundedConstructible_le_boundedConstructibleIntrinsic _ h
     exact ⟨hi.1, fun n ↦ (ordinary_constructible_iff A T _).mpr (hi.2 n)⟩
 
-/-- Finite internal-etale realization restricts to an equivalence for every ordered
-Tor interval and commutes naturally with the specified unbounded total direct images
-on all bounded-below etale inputs. The encodings are normalized section-action
-encodings; thus the assertion applies to each choice of the equivalence in the node.
-
-proof.md,
-paragraph (3); Stacks 09AL, 09C2, 09A6; Bhatt--Scholze, Lemma 5.4.3
-(auxiliary; not a blueprint node).
-
-Proof:
-1. The standing geometric hypotheses make T qcqs. Match the ordinary fixed-scalar
-constructibility convention with the source's finite-stratification convention by resizing
-cover indices; the etale boundedness conventions agree by isGE_iff and isLE_iff.
-2. Apply the existing fixed-module bounded constructible descent theorem to the
-constructible cohomology sheaves. Bounded-below derived Hom bijectivity gives full
-faithfulness on the etale source subcategory.
-3. The existing fixed-module Tor comparison preserves and reflects each interval.
-4. encoding_constructibility and encoding_tensor_tor give the same two identifications
-for every supplied normalized encoding E T. Lift the composite of site comparison and
-its inverse encoding to the two full subcategories. The counit proves membership;
-descent and the unit prove essential surjectivity. Its ambient functor is definitionally
-the specified realization.
-5. Reuse encodingDerivedPushforwardIso, the proved comparison of the separately specified
-unbounded direct images. It derives the normalized sectionwise action comparison by
-exact-equivalence transport through K-injective resolutions.
-6. Apply the existing fixed-module bounded-below direct-image comparison, then use
-rightDerivedFunctorPlusCompatibility and mapDerivedCategoryPlusCompatibility to view it
-in the full unbounded derived categories.
-7. Conjugate step 5 by the inverse encodings and compose it with step 6. All factors are
-natural isomorphisms. Zero rings, empty schemes and degenerate intervals need no exclusions.
--/
+/-- Over a field `k`, for separated schemes of finite type, the finite internal-étale
+realization restricts to an equivalence between bounded constructible complexes of Tor
+amplitude in `[a, b]` on both sides, for every `a ≤ b`, and commutes naturally with the
+unbounded total direct images on bounded-below étale complexes. -/
 theorem finiteCtfInternalEtaleRealization_of_field
     (k : Type u) [Field k]
     (A : Type u) [CommRing A] [Finite A]

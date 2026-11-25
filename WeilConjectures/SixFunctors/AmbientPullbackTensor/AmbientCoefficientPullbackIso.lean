@@ -11,8 +11,18 @@ import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientCoefficientSeque
 
 /-! # Components of ambient pullback coherence
 
-Source: Stacks 03CB, 03D3, 03EL, 07A4 and 04VG.
-(blueprint: lem-sf-ambient-coefficient-pullback-iso).
+Inverse image preserves the coefficient ring, on both the finite and the sequence site.
+
+## Implementation details
+
+At a finite level each coefficient sheaf is identified with the sheafification of the constant
+ring presheaf; the unique left-adjoint comparison is invertible and agrees with `ringMap`. On the
+sequence site, inverse image is computed levelwise, and evaluation on ring sheaves reflects
+isomorphisms.
+
+## References
+
+* Stacks 03CB, 03D3, 03EL, 07A4, 04VG, 0H7J, 0941
 -/
 
 @[expose] public noncomputable section
@@ -31,21 +41,8 @@ variable (ell : ℕ) [Fact ell.Prime] (E : Type u) [Field E]
 attribute [local irreducible] pull CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory
 
-/-- Inverse image preserves the actual coefficient ring, on the finite or sequence site.
-Source: Stacks 0H7J, 03CB and 0941
-(blueprint: lem-sf-ambient-coefficient-pullback-iso).
-Proof: at a finite level identify each coefficient sheaf with the sheafification
-of the constant ring presheaf. The two composites of inverse image and the
-constant-sheaf functor are left adjoint to evaluation of direct image at the
-terminal object; the fibre-product terminal comparison identifies those right
-adjoints. The unique left-adjoint comparison is invertible, and its unit on
-constant sections identifies it with ringMap. On the sequence site, inverse image
-along the product with the identity of the index category is the levelwise
-inverse image. This follows by restricting the levelwise adjunction bijections
-to compatible families; their naturality gives compatibility with all quotient
-maps. Evaluation on ordinary ring sheaves reflects isomorphisms, so the finite
-comparisons prove invertibility on the sequence site as well. No derived
-evaluation, flat transition, nonzero-ring or finiteness hypothesis is used. -/
+/-- Inverse image preserves the coefficient ring, on the finite or sequence site: the map
+`ringMap ell E f s` is an isomorphism. -/
 theorem coefficientPullback_isIso {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     IsIso (ringMap ell E f s) := by
   cases s with

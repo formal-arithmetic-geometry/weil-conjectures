@@ -15,8 +15,15 @@ import WeilConjectures.Mathlib.RingTheory.Trace.Basic
 
 /-! # Nondegenerate trace forms of finite algebras over fields
 
-Source: Stacks Project, Tag 0BJF, finite-dimensional algebra argument.
-(blueprint: lem-sbc-trace-form-nondegenerate-iff-etale-field)
+## Implementation details
+
+Nondegeneracy forces the algebra to be reduced, hence a finite product of fields; its trace form
+is the orthogonal sum of the field traces, and a field factor has nondegenerate trace form
+exactly when it is separable. We conclude with `Algebra.Etale.iff_exists_algEquiv_prod`.
+
+## References
+
+* [Stacks Project, Tag 0BJF](https://stacks.math.columbia.edu/tag/0BJF)
 -/
 
 @[expose] public section
@@ -25,23 +32,7 @@ namespace Algebra
 
 attribute [local instance] IsArtinianRing.fieldOfSubtypeIsMaximal in
 /-- A finite-dimensional commutative algebra over a field has nondegenerate trace form
-exactly when it is etale.
-
-Source: Stacks Project, Tag 0BJF, finite-dimensional fibre-algebra argument.
-(blueprint: lem-sbc-trace-form-nondegenerate-iff-etale-field)
-
-Proof: If a is nilpotent, multiplication by a times any b is a nilpotent endomorphism,
-so its trace is zero. Nondegeneracy forces a = 0; the algebra is therefore reduced.
-A finite-dimensional reduced algebra is an Artinian reduced ring, hence a finite
-product of fields. Its algebra trace form is the orthogonal direct sum of the traces
-on those fields: use block diagonal multiplication matrices in the concatenated
-bases. Each field factor has nondegenerate trace form precisely when it is separable,
-by the field trace criterion. Thus all factors are finite separable extensions,
-equivalently the algebra is etale by Algebra.Etale.iff_exists_algEquiv_prod.
-Conversely this product characterization of an etale algebra and nondegeneracy on
-each finite separable factor imply nondegeneracy of the direct-sum trace form.
-The zero algebra corresponds to an empty product; its trace form is nondegenerate
-because its underlying module has only zero, and it is etale. -/
+exactly when it is etale. -/
 theorem traceForm_nondegenerate_iff_etale
     (K A : Type*) [Field K] [CommRing A] [Algebra K A] [Module.Finite K A] :
     (traceForm K A).Nondegenerate ↔ Etale K A := by

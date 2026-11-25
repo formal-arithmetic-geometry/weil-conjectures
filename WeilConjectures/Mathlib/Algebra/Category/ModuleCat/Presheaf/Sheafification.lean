@@ -36,10 +36,8 @@ namespace SheafOfModules
 variable {C : Type u'} [Category.{v'} C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u})
   [HasSheafify J AddCommGrpCat.{v}] [J.WEqualsLocallyBijective AddCommGrpCat.{v}]
 
-/-- The functor `SheafOfModules.toSheaf R` to sheaves of abelian groups preserves colimits: a
-diagram of sheaves of modules is the sheafification of its underlying diagram of presheaves of
-modules, and sheafification followed by `toSheaf` is `toPresheaf` followed by the
-sheafification of presheaves of abelian groups, which both preserve colimits. -/
+/-- The functor `SheafOfModules.toSheaf R` to sheaves of abelian groups preserves colimits of
+shape `K`. -/
 instance preservesColimitsOfShape_toSheaf (K : Type w) [Category.{w'} K]
     [HasColimitsOfShape K AddCommGrpCat.{v}] :
     PreservesColimitsOfShape K (toSheaf.{v} R) where
@@ -97,10 +95,7 @@ variable {C : Type u'} [Category.{v'} C] {J : GrothendieckTopology C}
 /-- **Universal property of the sheafification of a presheaf of modules.** Every morphism `f`
 from a presheaf of modules `P` to (the restriction of scalars of) a sheaf of modules `F` factors
 uniquely through the unit `P ⟶ P^#` of the sheafification adjunction
-`PresheafOfModules.sheafificationAdjunction`: the sheafification functor is left adjoint to the
-inclusion of sheaves of modules into presheaves of modules. On underlying abelian presheaves,
-`P^#` is the sheafification of `P` (`PresheafOfModules.sheafificationCompToSheaf`).
-(blueprint: `def-weil-presheaf-modules-sheafification`) -/
+`PresheafOfModules.sheafificationAdjunction`. -/
 theorem existsUnique_sheafification_unit_comp (P : PresheafOfModules.{v} R₀)
     (F : SheafOfModules.{v} R)
     (f : P ⟶ (restrictScalars α).obj ((SheafOfModules.forget _).obj F)) :

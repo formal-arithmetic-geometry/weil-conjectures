@@ -11,8 +11,20 @@ import WeilConjectures.AlgebraicGeometry.ProperSupportSectionLocality
 
 /-! # Canonical proper-support pullback map
 
-Source: Stacks Project, More on Étale Cohomology, Tag 0F55 (lemma-base-change-f-shriek-separated).
-(auxiliary; not a blueprint node).
+For a Cartesian square, the unit of constant-coefficient inverse image induces a canonical
+pullback map on sections with proper geometric support, natural in the coefficients.
+
+## Implementation details
+
+The map is the unit pullback on all ambient sections, restricted along the lift
+`properSupportBaseChangeEtaleMap` of `properSupportBaseChangeProjection`. The stalk-and-germ
+comparison for inverse images identifies the support loci, and closed proper supports pull back
+to closed proper supports, so the unit image lands in the proper-support subsheaf; monicity of
+the subsheaf inclusion makes the lift unique, linear and natural.
+
+## References
+
+* Stacks Project, More on Étale Cohomology, Tag 0F55; Étale Cohomology, equation-pullback.
 -/
 
 @[expose] public section
@@ -25,9 +37,7 @@ namespace AlgebraicGeometry.Etale
 
 open AlgebraicGeometry
 
-/-- The projection of the pulled-back étale test scheme to the original test scheme.
-Source: Stacks Project, More on Étale Cohomology, Tag 0F55.
-(auxiliary; not a blueprint node) -/
+/-- The projection of the pulled-back étale test scheme to the original test scheme. -/
 noncomputable def properSupportBaseChangeProjection
     {X X' Y Y' : Scheme.{u}}
     (a : X' ⟶ X) (f : X ⟶ Y) (b : Y' ⟶ Y) (f' : X' ⟶ Y')
@@ -50,9 +60,7 @@ noncomputable def properSupportBaseChangeProjection
       (pullback.snd U'.hom f' ≫ a) h.symm
   simpa only [CategoryTheory.MorphismProperty.Over.pullback_obj_left, U'] using q₀
 
-/-- The lift of the Cartesian projection to the pulled-back étale test object.
-Source: Stacks Project, Tag 0F55, evaluation of the ordinary pullback map.
-(auxiliary; not a blueprint node) -/
+/-- The lift of the Cartesian projection to the pulled-back étale test object. -/
 noncomputable def properSupportBaseChangeEtaleMap
     {X X' Y Y' : Scheme.{u}}
     (a : X' ⟶ X) (f : X ⟶ Y) (b : Y' ⟶ Y) (f' : X' ⟶ Y')
@@ -67,9 +75,7 @@ noncomputable def properSupportBaseChangeEtaleMap
         simp [properSupportBaseChangeProjection]))
     (by simp)
 
-/-- Unit pullback on all ambient sections, followed by restriction along the canonical lift.
-Source: Stacks Project, Tag 0F55; Étale Cohomology, equation-pullback.
-(auxiliary; not a blueprint node) -/
+/-- Unit pullback on all ambient sections, followed by restriction along the canonical lift. -/
 noncomputable def properSupportUnitPullback
     {Λ : Type (u + 1)} [CommRing Λ]
     {X X' Y Y' : Scheme.{u}}
@@ -443,30 +449,8 @@ private theorem lift_moduleSheaf
     exact NatTrans.ext (funext fun U ↦ hcomp U)
 
 /-- The unit of constant-coefficient inverse image induces the canonical pullback map on
-sections with proper geometric support in a Cartesian square.
-Source: Stacks Project, More on Étale Cohomology, Tag 0F55 (lemma-base-change-f-shriek-separated).
-(auxiliary; not a blueprint node)
-
-Proof:
-1. Evaluate the constant-coefficient inverse-image/direct-image unit on each étale
-object (situation-conventions). Restrict along
-`properSupportBaseChangeEtaleMap`, the lift of `properSupportBaseChangeProjection`.
-This gives `properSupportUnitPullback` on every ambient section before imposing support.
-2. The inverse-image stalk-and-germ comparison (lem-weil-pbc-inverse-image-stalk-germ)
-identifies nonzero germs with those over the original point. The zero-open criterion
-(lem-sc-etale-section-zero-open) makes this exactly equality of the support loci.
-3. Local finite type is stable under base change (lem-weil-pbc-lft-base-change).
-Closed proper supports pull back to closed proper supports
-(lem-cbc-closed-proper-support-locality). The section descriptions therefore put the
-unit image in H. The monomorphism ιH makes this lift unique and hence linear.
-4. Naturality of the unit on test objects makes the lifts commute with restriction;
-monicity of ιH detects these equalities. Thus the lifts form the sheaf morphism α.
-The displayed component equation determines α uniquely, proving canonicity.
-5. A coefficient morphism decreases support, and properness passes to closed subsets
-(lem-weil-pbc-closed-subset-proper-over-base-properties). Thus it induces the maps γ
-and δ between proper-support subsheaves. Naturality of the unit, followed by restriction,
-identifies the two ambient composites. Monicity of the target inclusion ιH₂ yields
-γ ≫ α₂ = α ≫ b_*δ, the stated coefficient-naturality square. -/
+sections with proper geometric support in a Cartesian square. It is the unique map
+whose components agree with the unit pullback, and it is natural in the coefficients. -/
 theorem properSupportPullbackSectionMap
     {Λ : Type (u + 1)} [CommRing Λ]
     {X X' Y Y' : Scheme.{u}}

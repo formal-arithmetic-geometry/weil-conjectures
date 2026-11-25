@@ -13,14 +13,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.BoundedConstructibleUppe
 Let `Λ` be a Noetherian domain, complete for a principal ideal `I = (ϖ)` with `Λ ⧸ I` finite of
 exponent invertible on a field `k` (the integral stage `Λ = 𝒪_E`, `I = 𝔪_E`), and `M` a submonoid
 of `Λ` (the nonzero elements, or the powers of `ϖ`), so that the rational stage is
-`Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[M⁻¹]` (`CategoryTheory.Rationalization`, blueprint
-`proposition-inverting-ell--2`). For a separated finite-type morphism `f : X ⟶ Y` of
-separated finite-type `k`-schemes this file constructs the compact-support direct image and the
-exceptional inverse image on `Dᵇc(-, 𝒪_E)` and `Dᵇc(-, E)`, with the adjunction `Rf_! ⊣ Rf^!`:
+`Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[M⁻¹]` (`CategoryTheory.Rationalization`). For a separated finite-type
+morphism `f : X ⟶ Y` of separated finite-type `k`-schemes this file constructs the
+compact-support direct image and the exceptional inverse image on `Dᵇc(-, 𝒪_E)` and
+`Dᵇc(-, E)`, with the adjunction `Rf_! ⊣ Rf^!`:
 
-* at the integral stage, `Rf_!` preserves `Dᵇc(-, 𝒪_E)` (blueprint
-  `lemma-change-coefficients-compact-support`,
-  `AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerShriek`) and so does
+* at the integral stage, `Rf_!` preserves `Dᵇc(-, 𝒪_E)`
+  (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerShriek`) and so does
   `Rf^!` (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`), so that
   the adjunction `Rf_! ⊣ Rf^!` of `D(X_ét, Λ)` restricts to the constructible categories
   (`AlgebraicGeometry.Etale.boundedConstructibleIntegralLowerShriekUpperShriekAdjunction`);
@@ -46,6 +45,11 @@ The exceptional inverse images at both stages are
 `AlgebraicGeometry.Etale.boundedConstructibleRationalUpperShriek`. As there, the lower shrieks on
 `D(-_ét, Λ)` along `f` and the structure morphisms are assumed to be left adjoints, which is how
 `Rf^!` on `D(-_ét, Λ)` is defined.
+
+In `AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerShriek` only the
+coefficient comparison is proved here
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekReductionModIdealMap_span_pow`); the
+constructibility and the Tor bound belong to the coefficient chapter.
 -/
 
 @[expose] public section
@@ -83,18 +87,12 @@ variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ �
   {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
   {X Y : Scheme.{u}}
 
-/-- Blueprint `lemma-change-coefficients-compact-support`: Integral compact support.
-
-Let `f : X ⟶ Y` be a separated finite-type morphism of separated finite-type `k`-schemes and
-`K ∈ Dᵇc(X, Λ)`, at the integral stage `Λ = 𝒪_E`, `I = (ϖ)`. Then `Rf_! K ∈ Dᵇc(Y, Λ)`, the
-canonical compact-support coefficient comparison `(Rf_! K) ⊗ᴸ A_n ≅ Rf_{!,n} K_n` is an
-isomorphism (read after restriction of scalars to `Λ`, where `Rf_{!,n} K_n` is `Rf_!(K ⊗ᴸ A_n)`),
-and if `dim X ≤ d` and the reductions of `K` have Tor amplitude in `[a, b]`, those of `Rf_! K`
-have Tor amplitude in `[a, b + 2d]`.
-
-The coefficient comparison is proved here
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekReductionModIdealMap_span_pow`); the
-constructibility and the Tor bound belong to the coefficient chapter. -/
+/-- **Integral compact support.** Let `f : X ⟶ Y` be a separated finite-type morphism of
+separated finite-type `k`-schemes and `K ∈ Dᵇc(X, Λ)`, at the integral stage `Λ = 𝒪_E`,
+`I = (ϖ)`. Then `Rf_! K ∈ Dᵇc(Y, Λ)`, the canonical compact-support coefficient comparison
+`(Rf_! K) ⊗ᴸ A_n ≅ Rf_{!,n} K_n` is an isomorphism (read after restriction of scalars to `Λ`,
+where `Rf_{!,n} K_n` is `Rf_!(K ⊗ᴸ A_n)`), and if `dim X ≤ d` and the reductions of `K` have Tor
+amplitude in `[a, b]`, those of `Rf_! K` have Tor amplitude in `[a, b + 2d]`. -/
 theorem boundedConstructibleIntegral_rightDerivedLowerShriek {ϖ : Λ}
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY]
@@ -120,8 +118,7 @@ variable [hϖI : Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})]
 variable (I) in
 /-- The compact-support direct image `Rf_! : Dᵇc(X, Λ) ⥤ Dᵇc(Y, Λ)` at the integral stage, the
 restriction of `Rf_!`
-(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerShriek`,
-blueprint `lemma-change-coefficients-compact-support`). -/
+(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerShriek`). -/
 noncomputable abbrev boundedConstructibleIntegralRightDerivedLowerShriek (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY]
     [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)

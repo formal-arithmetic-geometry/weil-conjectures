@@ -15,12 +15,13 @@ set_option linter.privateModule false
 
 /-! # Signed tensor comparison and coherence on cochain sheaves
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4, and sites-modules.tex,
-Tag 03EL (auxiliary; not a blueprint node).
-
 The tensor, associator, Koszul symmetry and action unitors below are the existing
 homological-complex constructions. Coefficient arrows are characterized on
 scalar-extension generators, and composition uses the adjunction conjugate.
+
+## References
+
+* Stacks Project, sites-cohomology.tex, Tag 07A4, and sites-modules.tex, Tag 03EL.
 -/
 
 @[expose] public section

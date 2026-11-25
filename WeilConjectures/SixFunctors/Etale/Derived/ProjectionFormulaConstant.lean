@@ -28,10 +28,9 @@ is an isomorphism as soon as `Rf_* K` and all the `Rf_*(K ⊗ᴸ Z_X)`, for `Z` 
 lie in degrees `≤ B` for one bound `B`
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE`). Under
 the uniform vanishing `UDV(f, Λ; N)` of the higher direct images this holds for every `K` of finite
-Tor amplitude (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf`,
-blueprint `proposition-open-direct-image-preserves-finite--1`).
+Tor amplitude (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf`).
 
-## Proof
+## Implementation details
 
 The projection map is an isomorphism at the constant sheaf of a finite free module, which is
 dualizable. A presentation `0 ⟶ Z ⟶ Λʳ ⟶ M ⟶ 0` gives a distinguished triangle
@@ -39,15 +38,20 @@ dualizable. A presentation `0 ⟶ Z ⟶ Λʳ ⟶ M ⟶ 0` gives a distinguished 
 morphism of distinguished triangles. Both sides vanish in degrees `> B`, and the four and five
 lemmas on the long exact homology sequences show, by descending induction on the degree `n` and
 simultaneously for all finitely generated `M`, first that `Hⁿ` of the projection map is an
-epimorphism, then that it is an isomorphism. This replaces the infinite free resolution and the
-brutal truncations of the blueprint proof: the syzygy `Z` is again finitely generated, and the
-uniform bound `B` is what makes the induction start.
+epimorphism, then that it is an isomorphism. No infinite free resolution or brutal truncation is
+needed: the syzygy `Z` is again finitely generated, and the uniform bound `B` is what makes the
+induction start.
+
+The statement for `UDV(f, Λ; N)` asks for `K` of finite Tor amplitude rather than any
+`K ∈ D^-(X_ét, Λ)`: this makes all the complexes `K ⊗ᴸ Z_X` bounded, so that `UDV(f, Λ; N)`
+bounds their direct images
+(`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj_of_isZero_higherDirectImage`), and the
+result follows from the bounded version with the bound `b + N`.
 
 ## Main results
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE`
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf`
-  (`proposition-open-direct-image-preserves-finite--1`).
 -/
 
 @[expose] public section
@@ -201,23 +205,14 @@ theorem isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE [IsNoethe
   · have := hiso (B + 1 - n).toNat M
     rwa [show B + 1 - ((B + 1 - n).toNat : ℤ) = n by omega] at this
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite--1`: The projection formula with a
-finitely presented constant coefficient.
-
+/-- **The projection formula with a finitely presented constant coefficient.**
 Let `f : X ⟶ Y` be a morphism of schemes, `Λ` a noetherian commutative ring, and assume
 `UDV(f, Λ; N)`: `Rᵠf_* F = 0` for every sheaf of `Λ`-modules `F` and every `q > N`. Let `K` be
 an object of `D(X_ét, Λ)` of Tor amplitude in `[a, b]` and `M` a finitely generated `Λ`-module.
 Then the projection map `Rf_* K ⊗ᴸ M_Y ⟶ Rf_*(K ⊗ᴸ Lf^* M_Y)` is an isomorphism; its target is
 `Rf_*(K ⊗ᴸ M_X)` by `AlgebraicGeometry.Etale.leftDerivedUpperStarSingleConstantSheafIso`. The map
 is natural in `M`, being a component of the natural transformation
-`AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`.
-
-The blueprint allows any `K ∈ D^-(X_ét, Λ)`; here `K` has finite Tor amplitude, which is the case
-used in `proposition-six-operations-dctf--2` and makes all the complexes `K ⊗ᴸ Z_X` bounded, so
-that `UDV(f, Λ; N)` bounds their direct images
-(`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj_of_isZero_higherDirectImage`). The
-proof is `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE`
-with the bound `b + N`. -/
+`AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_constantSheaf [IsNoetherianRing Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (N : ℕ) (hf : HasUniformDirectImageVanishingLE Λ f N)
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} {a b : ℤ}

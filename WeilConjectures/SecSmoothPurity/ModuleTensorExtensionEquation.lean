@@ -11,9 +11,11 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Scalar-extension tensor square for module coefficient change
 
-Source: Stacks Project, sites-modules.tex, Tag 03EL, and
-sites-cohomology.tex, Tag 07A4.
-(blueprint: lem-pur-module-tensor-extension-equation)
+Auxiliary lemmas on tensor products of scalar extensions of sheaves of modules.
+
+## References
+
+* Stacks Project, Tags 03EL and 07A4
 -/
 
 -- After pruning, this module only keeps private declarations.

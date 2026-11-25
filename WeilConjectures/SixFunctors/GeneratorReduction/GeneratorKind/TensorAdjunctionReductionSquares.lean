@@ -16,12 +16,16 @@ set_option linter.privateModule false
 
 /-! # Tensor, composition and adjunction reduction squares
 
-Source: blueprint main-20261015, fix-prop-coherence.proof.md, the maps-used sentence
-(blueprint: lem-sf-tensor-adjunction-reduction-squares).
+This file collects auxiliary commutative squares relating the ringed-site tensor, pushforward
+and open-extension operations to their system realizations under reduction: compatibility of
+closed structures with associators, mate squares for units, counits and compositors, and the
+recursive comparison arrow `Word.ordinaryR` on generator words.
 
-The word evaluations, recursive coefficient arrows and independently normalized
-ringed-site arrows are the published GeneratorReduction definitions. Only the
-structural generators listed in this node are selected below.
+## Implementation details
+
+The word evaluations, recursive coefficient arrows and independently normalized ringed-site
+arrows are the existing `GeneratorReduction` definitions; only the structural generators
+needed here are treated below.
 -/
 
 @[expose] public noncomputable section

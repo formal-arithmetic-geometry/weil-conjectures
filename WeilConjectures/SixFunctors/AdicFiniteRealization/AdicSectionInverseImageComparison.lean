@@ -55,8 +55,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleTensorComparison.ProEtaleInvers
 import all WeilConjectures.CategoryTheory.ProperBaseChange.LocalizationInverseImageCoherence
 
 /-! # Section presentation and module inverse image
-Source: Stacks Project, Tags 00YV and 03D2.
-(blueprint: lem-sf-adic-section-inverse-image-comparison).
+
+This file compares sectionwise module encoding with module inverse image.
+
+## References
+
+* Stacks Project, Tags 00YV and 03D2
 -/
 
 @[expose] public noncomputable section
@@ -70,19 +74,7 @@ namespace WeilConjectures.AdicFiniteRealization
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Sectionwise module encoding commutes with inverse image, up to its coefficient
-isomorphism and restriction of scalars.
-Source: Stacks Project, Tags 00YV and 03D2
-(blueprint: lem-sf-adic-section-inverse-image-comparison).
-Proof: the internal inverse image followed by section encoding and the specified
-ordinary module inverse image both transport the underlying set sheaves and all
-operation graphs under the same left exact set inverse image. Compare their
-coefficient identifications. Inverse product comparison lifts each pair of sections;
-the addition and multiplication graph equations make the induced bijection a ring
-isomorphism. The analogous argument for module addition and scalar multiplication
-makes the underlying module comparison a semilinear isomorphism. Restriction along
-the coefficient isomorphism makes it linear. Naturality follows from the underlying
-natural comparisons. This uses no coefficient flatness, immersion, noetherianity or
-nonempty scheme hypothesis. -/
+isomorphism and restriction of scalars. -/
 theorem sectionModule_inverseImage (X Y : Scheme.{u}) (f : X ⟶ Y)
     (A : Sheaf (ProEt.topology Y) Ab.{u + 1}) [MonObj A] [IsCommMonObj A]
     (M : Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) A) :

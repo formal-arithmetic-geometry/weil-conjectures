@@ -18,12 +18,17 @@ set_option linter.privateModule false
 
 /-! # Tensor comparison for the algebraic inverse image
 
-Source: Stacks Project, Modules on Sites, Tags 03D1--03D3, 03D7 and 03EL.
-(auxiliary; not a blueprint node).
+The algebraic inverse image of sheaves of modules is compared with the sheaf tensor product.
+
+## Implementation details
 
 Transport the right-adjoint module operations, restrict the set adjunction to
 linear and bilinear maps, and apply the sheaf tensor universal property.
 All five site and coefficient universe parameters remain independent.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D1--03D3, 03D7, 03EK and 03EL
 -/
 
 @[expose] public section
@@ -137,8 +142,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
   (R : Sheaf J CommRingCat.{u})
 
-/-- The image of a sectionwise pure tensor in the sheaf tensor.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The image of a sectionwise pure tensor in the sheaf tensor. -/
 private noncomputable def pure (M N : SheafOfModules.{u} (ringSheaf R))
     (W : Cᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) :
     ((monoidalCategory R).tensorObj M N).val.obj W :=
@@ -146,9 +150,7 @@ private noncomputable def pure (M N : SheafOfModules.{u} (ringSheaf R))
     (((PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf R).obj)).unit.app
       (M.val ⊗ N.val)).app W (m ⊗ₜ[R.obj.obj W] n))
 
-/-- A map from a tensor is determined by pure sections. Source: Stacks 03EK
-(auxiliary; not a blueprint node).
-Proof: use the module sheafification adjunction, then sectionwise tensor generation. -/
+/-- A map from a tensor is determined by pure sections. -/
 private theorem pure_hom_ext (M N H : SheafOfModules.{u} (ringSheaf R))
     {f g : (monoidalCategory R).tensorObj M N ⟶ H}
     (h : ∀ W m n, f.val.app W (pure R M N W m n) =
@@ -164,10 +166,7 @@ private theorem pure_hom_ext (M N H : SheafOfModules.{u} (ringSheaf R))
   exact h W m n
 
 end Pure
-/-- Existence part of the sheaf tensor universal property.
-(auxiliary; not a blueprint node)
-The sectionwise tensor maps are assembled into a presheaf morphism and uniquely factored
-through module sheafification; this is exactly the existence construction in the source proof. -/
+/-- Existence part of the sheaf tensor universal property. -/
 private theorem tensor_bilinear_exists {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u})
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
