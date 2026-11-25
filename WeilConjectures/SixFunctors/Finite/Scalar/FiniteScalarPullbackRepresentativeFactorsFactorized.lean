@@ -12,8 +12,19 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Factorized representative equation for finite scalar pullback
 
-Source: Stacks Tags 07A6 and 0D6E.
-(blueprint: lem-sf-finite-scalar-pullback-representative-factors-factorized).
+The representative equation for finite scalar pullback on a complex of sheaves, in factorized
+form: realization of the localization factors of pro-etale pullback agrees with the finite
+scalar pullback comparison composed with the ring-module localization factors.
+
+## Implementation details
+
+The factorized form isolates the ordinary termwise comparison and the two exact localization
+factors; the left-derived counit form is obtained from it by the standard counit
+factorization.
+
+## References
+
+- Stacks Project, Tags 07A6, 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -208,14 +219,10 @@ private theorem square_factors
 namespace WeilConjectures
 
 /--
-The factorized form of the representative equation.  It isolates the ordinary
-termwise comparison and the two exact localization factors; the parent theorem
-obtains the displayed left-derived counit form by the standard counit
-factorization.  This is the derived mate calculation before that final rewrite.
-
-Source: Stacks Tags 07A6 and 0D6E; the localization step in the proof of the
-finite scalar inverse-mate representative formula.
-(blueprint: lem-sf-finite-scalar-pullback-representative-factors-factorized).
+The factorized representative equation for finite scalar pullback: on a complex `P`, the
+realized localization factors of pro-etale pullback, followed by the termwise ordinary
+pullback comparison, agree with the inverse finite scalar pullback comparison followed by the
+localization factors of the ring-module pullback.
 -/
 theorem finiteScalarPullback_representative_factors_factorized
     (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)

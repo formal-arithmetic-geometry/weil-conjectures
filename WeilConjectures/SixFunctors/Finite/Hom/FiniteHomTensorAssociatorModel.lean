@@ -13,7 +13,15 @@ import all WeilConjectures.SixFunctors.Finite.Hom.FiniteHomTensorChainSquare
 
 /-! # The prescribed intrinsic scalar associator on chain representatives
 
-Source: blueprint lemma-change-coefficients-internal-hom--1, successive quotient paragraph.
+The derived associator for successive finite quotient extensions of coefficients is computed
+on chain representatives by the ordinary chain associator.
+
+## Implementation details
+
+The proof of `finiteHomTensor_associatorModel` extends the calculus unit equation from K-flat
+representatives to all complexes by naturality along K-flat resolutions, transposes each
+normalized comparison, and uses the horizontal composition law for these transposes together
+with exact restriction coherence.
 -/
 
 @[expose] public noncomputable section
@@ -57,8 +65,7 @@ private abbrev calculus := (coefficientDerivedSystemEvaluationCalculus.{u, u} l 
 abbrev finiteHomTensorExtensionComplex {n m : ℕ} (h : m ≤ n) :=
   (coefficientFiniteQuotientExtension.{u, u} l E X h).mapHomologicalComplex (.up ℤ)
 
-/-- The localization comparison for the exact counit fixed by the quotient calculus.
-Source: blueprint lemma-change-coefficients-internal-hom--1, representative normalization. -/
+/-- The localization comparison for the exact counit fixed by the quotient calculus. -/
 def finiteHomTensorComparison {n m : ℕ} (h : m ≤ n) :=
   finiteHomTensorRepresentativeComparison (coefficientFiniteQuotientExtension.{u, u} l E X h)
     (coefficientFiniteQuotientDerived.{u, u} l E X h)
@@ -145,8 +152,7 @@ def finiteHomTensorRestrictionComp {n m r : ℕ} (h : m ≤ n) (k : r ≤ m) :
       ((integralCoefficientSheafSystem.{u, u} l E X).map_comp
         (homOfLE h).op (homOfLE k).op).symm)
 
-/-- The ordinary chain associator, formed from the prescribed ordinary adjunctions.
-Source: blueprint lemma-change-coefficients-internal-hom--1, successive quotients. -/
+/-- The ordinary chain associator, formed from the prescribed ordinary adjunctions. -/
 def finiteHomTensorChainAssoc {n m r : ℕ} (h : m ≤ n) (k : r ≤ m) :
     finiteHomTensorExtensionComplex l E X h ⋙ finiteHomTensorExtensionComplex l E X k ≅
       finiteHomTensorExtensionComplex l E X (k.trans h) :=
@@ -168,13 +174,9 @@ private theorem chainAssoc_transpose {n m r : ℕ} (h : m ≤ n) (k : r ≤ m)
           ((finiteHomTensorExtensionComplex l E X (k.trans h)).obj P)) := by
   exact complexAssoc_transpose _ _ _ _ P
 
-/-- The prescribed derived associator is computed by its ordinary adjunction mate.
-Source: blueprint lemma-change-coefficients-internal-hom--1, successive-quotient normalization
-(blueprint: lem-coef-finite-hom-associator-model).
-Proof: extend the calculus unit equation from K-flat representatives to all complexes
-by naturality along K-flat resolutions. Transpose each normalized comparison.
-The horizontal composition law for these transposes and exact restriction coherence
-identify the derived left-adjoint mate with the localization of the ordinary mate. -/
+/-- The prescribed derived associator is computed by its ordinary adjunction mate: on a chain
+representative `P` it is the localization of the ordinary chain associator, up to the
+representative comparisons. -/
 theorem finiteHomTensor_associatorModel {n m r : ℕ} (h : m ≤ n) (k : r ≤ m)
     (P : CochainComplex (normalizedDVRModules.{u, u} l E X n) ℤ) :
     (finiteHomIntrinsicAssoc l E X h k).hom.app (DerivedCategory.Q.obj P) ≫

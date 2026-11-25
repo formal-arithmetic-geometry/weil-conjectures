@@ -11,8 +11,14 @@ import Mathlib.Tactic.CategoryTheory.Reassoc
 
 /-! # Naturality of a tensor-induced internal Hom comparison
 
-Source: blueprint latest, lem-coef-finite-free-extension.proof.md,
-the evaluation-transpose construction of the Hom comparison.
+The internal Hom comparison obtained by transposing an extended evaluation along an invertible
+tensor comparison is natural in both variables.
+
+## Implementation details
+
+The proof applies the inverse tensor-Hom adjunction: the transpose of each Hom comparison is its
+defining extended evaluation, which is natural in its output and dinatural in its input, and the
+inverse tensorator is natural in both arguments.
 -/
 
 @[expose] public section
@@ -140,19 +146,7 @@ private theorem homMap_naturality
 end StageHomProof
 
 /-- The internal Hom map transposed from an invertible tensor comparison is natural
-in both variables.
-
-Source: blueprint latest, lem-coef-finite-free-extension.proof.md, Hom comparison
-by transposition of the extended evaluation.
-(blueprint: lem-sf-normalized-stage-hom-naturality).
-
-Proof: apply the injective inverse tensor-Hom adjunction at the source of the
-contravariant map. The transpose of each Hom comparison is its defining extended
-evaluation. Evaluation is natural in its output and dinatural in its input by the
-parametrized adjunction counit identity. The tensorator inverse is natural in both
-arguments. Use those identities and bifunctoriality to identify the transposes,
-then use adjunction injectivity. No tensor coherence, constructibility or geometric
-assumptions enter this calculation. -/
+in both variables. -/
 theorem scalar_tensor_hom_comparison_naturality
     {A B : Type*} [Category A] [Category B]
     (TA : A ⥤ A ⥤ A) (HA : Aᵒᵖ ⥤ A ⥤ A)
