@@ -458,7 +458,7 @@ private theorem c3_etaleObjectSections_baseChange {R X Y : Scheme.{u}} (W : R.Et
         · simp [i, j, Vf, Vg, hm]
         · simp [i, j, Vf, Vg, hm', pullback.condition]
       · simp [i, j, Vf, Vg]
-  let _ : IsIso i := hi
+  have _ : IsIso i := hi
   have hp' : Etale Vg.hom := inferInstance
   have huH := c3_etale_restriction_pullback_unit_eq A h Vf.hom m Vg.hom hm' i
     (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _) hp' H

@@ -494,7 +494,7 @@ theorem finite_quotient_transition_compatibility
     (CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion Y d))
     ?_ α β ?_
   · intro C
-    let : EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{0} _
+    have : EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{0} _
     obtain ⟨P, p, hP, _, hp, _⟩ :=
       CochainComplex.exists_isKFlatResolutionIndependentCoefficients.{u + 1, u + 1, u}
         (R := pbcAdicCompletion Y d) C

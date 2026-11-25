@@ -40,7 +40,7 @@ private theorem finiteCommonStage
   classical
   choose stage hstage hcomm using h
   let : Fintype A := Fintype.ofFinite _
-  let : Nonempty J := ⟨k⟩
+  have : Nonempty J := ⟨k⟩
   obtain ⟨l, hl⟩ := (insert k (Finset.univ.image stage)).exists_le
   have hkl : k ≤ l := hl k (Finset.mem_insert_self _ _)
   refine ⟨l, hkl, fun a ↦ hcomm a l hkl ?_⟩

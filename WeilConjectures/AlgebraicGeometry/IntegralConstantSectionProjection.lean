@@ -279,11 +279,11 @@ private theorem canonicalRingMap_scalar_natural
           ((upperStarFromPoint X).map g) =
       (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
         (CommRingCat.ofHom.{u + 1} f) ≫ FiniteDiscreteOrdinary.canonicalRingMap C X := by
-  let : EssentiallySmall.{u + 1} X.ProEt :=
+  have : EssentiallySmall.{u + 1} X.ProEt :=
     WeilConjectures.instEssentiallySmallProEt_weilConjectures X
-  let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
+  have : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
     Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
-  let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
+  have : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
     AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
   let J := Scheme.ProEt.topology X
   let ηB := toSheafify J ((Functor.const X.ProEtᵒᵖ).obj
@@ -379,18 +379,18 @@ theorem integral_constant_section_projection (l : ℕ) [Fact l.Prime]
           (CommRingCat.ofHom.{u + 1} (Ideal.Quotient.mk
             (IntegralConstantCompletion.ideal l E ^ (n + 1)))) := by
     classical
-    let : EssentiallySmall.{u + 1} X.ProEt :=
+    have : EssentiallySmall.{u + 1} X.ProEt :=
       WeilConjectures.instEssentiallySmallProEt_weilConjectures X
-    let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
+    have : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
       Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
-    let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
+    have : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
       AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
     let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     let B := Padic.coefficientExtensionIntegers l E
     let C := Padic.coefficientExtensionRing l E (n + 1)
     let tC : TopologicalSpace C := inferInstance
     let hC : @IsTopologicalRing C tC _ := inferInstance
-    let : Finite C := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+    have : Finite C := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
     let : DiscreteTopology C := finiteTopology_discrete.{u} l E n
     obtain ⟨f⟩ := FiniteDiscreteOrdinary.encoding_exists.{u} C X
     let tB : TopologicalSpace B := by

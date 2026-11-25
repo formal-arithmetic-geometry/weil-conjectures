@@ -70,7 +70,7 @@ theorem isIso_kunnethGlobalSectionsMap_finiteCoefficientRing
       pullback.condition.symm K M) := by
   let Λ := Padic.coefficientExtensionRing l E n
   let : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
-  let : Finite Λ := Padic.finite_coefficientExtensionRing l E n hn
+  have : Finite Λ := Padic.finite_coefficientExtensionRing l E n hn
   have hInv : HasInvertibleExponent Λ (Spec (CommRingCat.of D.k)) := by
     have hdvr := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
     have hm : (l : Padic.coefficientExtensionIntegers l E) ∈

@@ -1023,7 +1023,8 @@ private theorem rational_span_of_integral_span
 
 end CofinalLevels
 
-omit [IsAlgClosure ℚ_[l] K] in
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- Finite coefficient extension spans the rational morphisms between extended sheaves. -/
 theorem lisseCoefficientHomBaseChange_span
     (E₀ : Padic.FiniteCoefficientFields l K) :

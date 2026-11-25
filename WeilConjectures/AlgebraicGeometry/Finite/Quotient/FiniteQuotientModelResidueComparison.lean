@@ -160,9 +160,9 @@ private theorem residueCoefficient_square (X : Scheme.{t})
     intro y
     obtain ⟨x, hx⟩ := Ideal.Quotient.mk_surjective y.down
     exact ⟨ULift.up x, congrArg ULift.up hx⟩
-  let : Epi (CommRingCat.ofHom (RingHom.ulift p)) :=
+  have : Epi (CommRingCat.ofHom (RingHom.ulift p)) :=
     ConcreteCategory.epi_of_surjective _ hp
-  let : (constantSheaf (ProEt.topology X) CommRingCat.{t + 1}).IsLeftAdjoint :=
+  have : (constantSheaf (ProEt.topology X) CommRingCat.{t + 1}).IsLeftAdjoint :=
     (constantSheafAdj (ProEt.topology X) CommRingCat.{t + 1}
       terminalIsTerminal).isLeftAdjoint
   have : Epi (adicConstantMap X p) := by

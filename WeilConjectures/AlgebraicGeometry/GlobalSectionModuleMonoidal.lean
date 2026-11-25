@@ -89,8 +89,8 @@ theorem ringFamilyGlobalExtension_module_monoidal
     SheafOfModules.monoidalCategory (CochainComplex.onePointRingSheaf (ringFamilyGlobalRing O))
   obtain ⟨oplax, hη, hδ, hunit⟩ := ringFamilyGlobalExtension_oplax_normalized O
   let := oplax
-  let : IsIso (Functor.OplaxMonoidal.η (ringFamilyGlobalExtension O)) := hη
-  let : ∀ M N, IsIso (Functor.OplaxMonoidal.δ (ringFamilyGlobalExtension O) M N) := hδ
+  have : IsIso (Functor.OplaxMonoidal.η (ringFamilyGlobalExtension O)) := hη
+  have : ∀ M N, IsIso (Functor.OplaxMonoidal.δ (ringFamilyGlobalExtension O) M N) := hδ
   refine ⟨Functor.Monoidal.ofOplaxMonoidal (ringFamilyGlobalExtension O), ?_⟩
   exact hunit
 

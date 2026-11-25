@@ -399,7 +399,7 @@ private theorem finite_integralModel
   let A := Padic.coefficientExtensionRing ℓ E 1
   let : (Padic.coefficientExtensionIdeal ℓ E 1).IsMaximal := residueIdeal_maximal ℓ E
   let : Field A := Ideal.Quotient.field _
-  let : Finite A := Padic.finite_coefficientExtensionRing ℓ E 1 le_rfl
+  have : Finite A := Padic.finite_coefficientExtensionRing ℓ E 1 le_rfl
   let : DiscreteTopology A := ProEtale.DerivedNakayama.quotientDiscrete ℓ E 1
   have hsource := (ProEtale.internal_integral_residue_criterion ℓ E X.left).1 K |>.mp hK
   have hkilled : (ℓ : A) ^ 1 = 0 := residue_killed ℓ E

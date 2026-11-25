@@ -545,7 +545,7 @@ private theorem reconstructionModelUnit_exists :
     apply hu θ
     intro X
     have hX : IsIso (reconstructionModelCounit F LF ε X.obj.as) := by
-      let : IsIso (ε.app ((HomotopyCategory.quotient B (.up ℤ)).obj X.obj.as)) := hε X
+      have : IsIso (ε.app ((HomotopyCategory.quotient B (.up ℤ)).obj X.obj.as)) := hε X
       dsimp only [reconstructionModelCounit]
       infer_instance
     exact (hθ X.obj.as X.property hX).trans (hn X.obj.as X.property hX)

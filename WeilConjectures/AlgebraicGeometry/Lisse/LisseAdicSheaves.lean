@@ -557,7 +557,8 @@ def lisseIntegralUnitDiagram : AdicIntegralDiagram l E Y :=
       map_comp := lisseUnitModuleMap_comp l E _ _ _ }) ⋙
         constantSheaf Y.smallEtaleTopology _
 
-omit [IsNoetherian Y] [Y.IsSeparated] [∀ x : Y, Invertible (l : Y.residueField x)] in
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- The constant coefficient system is lisse. -/
 theorem lisseIntegralUnit_isLisse :
     IsLisseIntegralDiagram l E Y (lisseIntegralUnitDiagram l E Y) := by

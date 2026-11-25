@@ -36,7 +36,7 @@ theorem finitePerfectAdicLiftedTransition_transpose_isIso
   let q : ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)) →+*
       ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)) :=
     RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1))
-  let : (normalizationModuleRestrict q).IsRightAdjoint :=
+  have : (normalizationModuleRestrict q).IsRightAdjoint :=
     ModuleCat.derivedRestrictScalars_isRightAdjoint.{t + 1, 0} q
   let canAdj := Adjunction.ofIsRightAdjoint (normalizationModuleRestrict q)
   have hcan : IsIso ((canAdj.homEquiv _ _).symm

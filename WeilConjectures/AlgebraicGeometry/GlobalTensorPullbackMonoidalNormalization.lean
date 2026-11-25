@@ -79,8 +79,8 @@ theorem globalTensorPullback_monoidal_normalization
   let oplax : P.OplaxMonoidal := adj.leftAdjointOplaxMonoidal
   let := oplax
   obtain ⟨hη, hδ⟩ := globalTensorPullback_oplax_isIso X P adj lax hε hμ
-  let : IsIso (adj.leftAdjointOplaxMonoidal.η) := hη
-  let : ∀ A B, IsIso (adj.leftAdjointOplaxMonoidal.δ A B) := hδ
+  have : IsIso (adj.leftAdjointOplaxMonoidal.η) := hη
+  have : ∀ A B, IsIso (adj.leftAdjointOplaxMonoidal.δ A B) := hδ
   let mon : P.Monoidal := Functor.Monoidal.ofOplaxMonoidal P
   refine ⟨mon, ?_⟩
   intro M N

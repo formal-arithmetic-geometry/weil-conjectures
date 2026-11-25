@@ -56,7 +56,8 @@ private lemma localImage_eq_top_of_isSheaf
     inferInstanceAs (IsIso (i.hom.app (op W)))
   exact (qcqsLocalImage_eq p W).symm.trans (Subobject.eq_top_of_isIso_arrow _)
 
-omit [CompactSpace X] [QuasiSeparatedSpace X] in
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- Maps admitting local lifts through a sheaf epimorphism jointly detect zero maps.
 This is the categorical finite-cover version for Grothendieck abelian coefficients.
 (Stacks, Tags 00WL and 01H0) -/

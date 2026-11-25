@@ -39,8 +39,8 @@ theorem lisse_finite_quotient_etale_origin_transport
       (adicTowerPullback (W.hom ≫ g)
         ((pbcAdicRings X d).obj (op n))).obj K) := by
   obtain ⟨f, hf, hg⟩ := lisse_finite_quotient_etale_origin_transport_map C Z E hE W _w
-  let : Mono f := hf
-  let : Epi f := hg
+  have : Mono f := hf
+  have : Epi f := hg
   have : IsIso f := by
     apply isIso_of_mono_of_epi
   exact ⟨asIso f⟩

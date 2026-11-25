@@ -96,8 +96,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 include ℓ k
 
-omit [Fact (ringChar k ≠ ℓ)] [IsSeparated X.hom]
-  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] in
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- The direct image of an algebraic-closure sheaf comes from a finite coefficient field.
 (Bhatt--Scholze, Proposition 6.8.4(3), Proposition 6.8.14 and Remark 6.8.15.) -/
 theorem finiteTypeAlgClHeart_finiteImage
@@ -117,7 +117,7 @@ theorem finiteTypeAlgClHeart_finiteImage
           ((DerivedCategory.singleFunctor _ 0).obj F))) := by
   let : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
   let : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
-  let : IsNoetherian X.left := {}
+  have : IsNoetherian X.left := {}
   let : QuasiSeparatedSpace Y.left := quasiSeparatedSpace_of_quasiSeparated Y.hom
   obtain ⟨E, N, hN, ⟨e⟩⟩ := exists_constructible_finiteCoefficient_model X.left ℓ F hF
   refine ⟨E, N, hN, ?_⟩

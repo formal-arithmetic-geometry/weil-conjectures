@@ -39,7 +39,7 @@ theorem sheaf_finiteType_of_epi
   refine ⟨fun i => ?_⟩
   dsimp [τ]
   have : (σ.generators i).IsFiniteType := hσ.isFiniteType i
-  let := epi_overFunctor_map e (σ.X i)
+  have := epi_overFunctor_map e (σ.X i)
   infer_instance
 
 end

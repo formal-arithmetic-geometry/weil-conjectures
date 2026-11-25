@@ -232,7 +232,7 @@ theorem koszulReconstructionComparison (r : ℕ) (a : Fin r → A)
     rw [Category.id_comp]
   let γ := reconstructionModelGamma F LF RF (completedAdicReductionData T d).counit
   have hγ (X : P.FullSubcategory) : IsIso (γ.app X.obj) := by
-    let : IsIso ((completedAdicReductionData T d).counit.app X.obj) :=
+    have : IsIso ((completedAdicReductionData T d).counit.app X.obj) :=
       (completedAdicReductionData T d).isIso_counit X.obj.as X.property
     change IsIso ((reconstructionModelGamma F LF RF
       (completedAdicReductionData T d).counit).app X.obj)
@@ -241,10 +241,10 @@ theorem koszulReconstructionComparison (r : ℕ) (a : Fin r → A)
     infer_instance
   have hαiso (X : P.FullSubcategory) : IsIso (α.app X.obj) := by
     have hx := haug X.obj.as X.property
-    let : IsIso (e.hom.app (FC.obj X.obj.as)) := inferInstance
-    let : IsIso (f.hom.app X.obj.as) := inferInstance
+    have : IsIso (e.hom.app (FC.obj X.obj.as)) := inferInstance
+    have : IsIso (f.hom.app X.obj.as) := inferInstance
     let : QuasiIso (aug.app X.obj.as) := hx
-    let : IsIso (DerivedCategory.Q.map (aug.app X.obj.as)) := inferInstance
+    have : IsIso (DerivedCategory.Q.map (aug.app X.obj.as)) := inferInstance
     rw [show α.app X.obj = f.hom.app X.obj.as ≫ DerivedCategory.Q.map (aug.app X.obj.as) ≫
       e.hom.app (FC.obj X.obj.as) from hα X.obj.as]
     infer_instance
