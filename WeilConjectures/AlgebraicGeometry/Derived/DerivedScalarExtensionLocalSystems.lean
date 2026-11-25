@@ -41,7 +41,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 set_option autoImplicit false
 
-set_option linter.unusedSimpArgs false
 set_option backward.isDefEq.respectTransparency false
 open scoped CategoryTheory.TwoSquare
 
@@ -75,10 +74,10 @@ private theorem inverse_mate_transport
   simp only [mateEquiv_symm_apply, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id, Functor.map_comp,
+    CategoryTheory.Functor.map_id, Category.id_comp, Functor.map_comp,
     Category.assoc]
   dsimp only [Functor.comp_obj, Functor.comp_map]
-  simp only [Category.id_comp, Category.comp_id, M.map_comp, Category.assoc]
+  simp only [Category.id_comp]
   have he := e.inv.naturality (a.unit.app z)
   dsimp only [Functor.comp_obj, Functor.id_obj] at he
   rw [← M.map_comp_assoc, he, M.map_comp]
@@ -119,7 +118,7 @@ private theorem inverse_mate_cube
   rw [hq] at hp
   simp only [TwoSquare.hComp, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Iso.symm_hom, Iso.symm_inv, Category.comp_id,
+    Functor.associator_inv_app, Category.comp_id,
     Category.id_comp, Category.assoc] at hp
   have hh := congrArg (fun f ↦ f ≫ b'.hom.app (L.obj x)) hp
   simp only [Category.assoc, Iso.inv_hom_id_app] at hh
@@ -268,7 +267,7 @@ private theorem proet_coefficient_mate_eq (q : R →+* S)
     Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, NatTrans.id_app,
     CategoryTheory.Functor.map_id, Category.id_comp, Adjunction.homEquiv_counit]
   dsimp only [Functor.comp_obj, Functor.comp_map]
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
@@ -528,7 +527,7 @@ private theorem etale_coefficient_mate_eq (q : R →+* S)
     Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, NatTrans.id_app,
     CategoryTheory.Functor.map_id, Category.id_comp, Adjunction.homEquiv_counit]
   dsimp only [Functor.comp_obj, Functor.comp_map]
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
@@ -696,7 +695,7 @@ private theorem etaleDerivedSliceCoefficients_pasting (U : X.Etale) (q : R →+*
     (etaleSliceCoefficients_pasting X U q) M
   rw [he] at h
   simp only [etaleExactCoefficients, etaleDerivedSliceRestrictionIso,
-    etaleDerivedSliceEquivalenceCoefficients, etaleDerivedSliceEquivalence_functor,
+    etaleDerivedSliceEquivalenceCoefficients,
     sliceRestrictScalarsIso,
     Functor.mapDerivedCategorySquareIso, Functor.mapDerivedCategoryTriangleIso,
     Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
@@ -720,10 +719,10 @@ private theorem comparison_coefficient_mate_eq (q : R →+* S)
     mateEquiv_symm_apply, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, NatTrans.id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id, comparisonRestrictScalarsMap,
+    CategoryTheory.Functor.map_id, Category.id_comp, comparisonRestrictScalarsMap,
     Adjunction.homEquiv_counit]
   dsimp only [Functor.comp_obj, Functor.comp_map]
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
@@ -787,9 +786,9 @@ private theorem derived_cube
   have h₂ := Functor.mapDerivedCategorySquareIso_hom_app_comp c q a b b'
     (fun y ↦ by simpa [a] using h y) x
   simp only [Functor.mapDerivedCategoryTriangleIso, Functor.mapDerivedCategoryNatIso_refl,
-    Iso.trans_hom, Iso.symm_hom, Iso.refl_hom, NatTrans.comp_app,
-    NatTrans.id_app, Category.comp_id, CategoryTheory.Functor.map_comp,
-    Category.assoc, CategoryTheory.Functor.map_id, Category.id_comp] at h₁ h₂
+    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    CategoryTheory.Functor.map_comp,
+    Category.assoc, Category.id_comp] at h₁ h₂
   rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso r K).inv.app
     (U.mapDerivedCategory.obj x))]
   rw [← cancel_mono (Z.mapDerivedCategory.map
@@ -798,8 +797,7 @@ private theorem derived_cube
     NatTrans.comp_app, CategoryTheory.Functor.map_comp, Category.assoc]
   simp only [Iso.inv_hom_id_app_assoc]
   rw [← reassoc_of% h₁, ← reassoc_of% h₂]
-  simp only [← Z.mapDerivedCategory.map_comp_assoc, Iso.inv_hom_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  simp only [← Z.mapDerivedCategory.map_comp_assoc]
   simp only [Iso.inv_hom_id_app_assoc]
 
 namespace AlgebraicGeometry.Scheme
@@ -822,7 +820,7 @@ private theorem comparisonSliceCoefficients_eq (V : X.Etale) (q : R →+* S)
     NatTrans.id_app, CategoryTheory.Functor.map_id, Category.id_comp,
     Adjunction.homEquiv_counit]
   dsimp only [Functor.comp_obj, Functor.comp_map]
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
 
 set_option backward.isDefEq.respectTransparency false in

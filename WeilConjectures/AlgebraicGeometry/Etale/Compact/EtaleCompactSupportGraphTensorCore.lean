@@ -220,8 +220,6 @@ private theorem tensorComparison_eq
     Functor.mapIso_inv, Category.assoc]
   rw [NatTrans.naturality_assoc]
 
--- Keep the statement's original unused `adj` let binding verbatim.
-set_option linter.unusedVariables false in
 /-- The normalized comparison satisfies the mate equation before transposing through the
 compactification adjunction. -/
 theorem compactSupportGraph_tensor_evaluation_core
@@ -239,7 +237,7 @@ theorem compactSupportGraph_tensor_evaluation_core
       (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory
     let T₀ := derivedTensor (ModuleCat.{u + 1} A) T
     let V₀ := derivedTensor (ModuleCat.{u + 1} A) V
-    let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) c.g
+    let _adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) c.g
     ∀ q : S.obj ((V₀.obj M).obj (E.obj K)) ⟶ (T₀.obj (S.obj M)).obj K,
       ((etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e
         inferInstance).mapDerivedCategoryAdjunction).unit.app _ ≫ E.map q =

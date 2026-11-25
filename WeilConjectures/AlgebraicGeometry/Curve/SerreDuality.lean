@@ -209,7 +209,7 @@ noncomputable abbrev functionFieldCoordinates [IsIntegral X] (t : X.functionFiel
     ULift.{u} (Fin 2) → Γ(Spec X.functionField, ⊤) :=
   fun i ↦ (Scheme.ΓSpecIso X.functionField).inv (![1, t] i.down)
 
-set_option linter.unusedSectionVars false in
+omit [IsProper (X ↘ Spec (.of k))] in
 /-- **Rational functions define morphisms to `ℙ¹`.** Let `X` be a proper smooth integral curve
 over `k` and `t ∈ k(X)` transcendental over `k`. Then there is a morphism `π_t : X ⟶ ℙ¹_k` over
 `k` with `π_t^* (x₁ / x₀) = t`: at the generic point it is the point `[1 : t]` of `ℙ¹(k(X))`.
@@ -769,7 +769,7 @@ theorem _root_.MvPolynomial.isMaximal_span_X_of_unique {K : Type*} [Field K] {σ
   rw [h]
   infer_instance
 
-set_option linter.unusedSectionVars false in
+omit [IsProper (X ↘ Spec (.of k))] in
 /-- **Degree of pullbacks of divisors.** Let `π : X ⟶ Y` be a finite flat morphism of proper
 smooth integral curves over an algebraically closed field `k`, of degree `d`, so that `π_* 𝒪_X`
 is locally free of rank `d`. Let `y` be a closed point of `Y` with uniformizer `t`, a section on
@@ -950,6 +950,7 @@ theorem finsum_ord_eq_finrank [IsIntegral X] [IsLocallyNoetherian X] {Y : Scheme
       Ideal.map_span, Set.image_singleton, Scheme.Hom.germ_stalkMap_apply]
   rw [Ideal.ramificationIdx_eq_ord p q.1 _ hs]
 
+omit [IsProper (X ↘ Spec (.of k))] in
 /-- **The order of a rational function along a chart of `ℙ¹`.** Let `π : X ⟶ ℙ¹_k` be finite
 flat, and let `χ : Spec k[T] ⟶ ℙ¹_k` be an open immersion through which the generic point
 `Spec k(X) ⟶ ℙ¹_k` of `π` factors as `Spec` of `T ↦ u`. Then at the point `y = χ(T = 0)` the

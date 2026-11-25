@@ -214,13 +214,11 @@ private theorem normalizationOfFormula (X : Scheme.{u}) (F : X.Modules)
     IsSingletonTensorDegreeComparisonHom X F U W g n f := by
   exact hf
 
--- Affineness is only needed for the subsequent invertibility theorem.
-set_option linter.unusedVariables false in
 /-- A normalized degree comparison homomorphism, without invertibility (Stacks, Tags 03P2 and 03DR).
 -/
 theorem exists_singletonTensorDegreeComparison_hom
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
-    (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left)
+    (U W : X.Etale) (g : W ⟶ U) (_hU : IsAffine U.left) (_hW : IsAffine W.left)
     (n : ℕ) :
     ∃ f : (singletonTensorAmitsur X F U W g).X n ⟶
       (singletonTensorCech X F U W g).X n,
