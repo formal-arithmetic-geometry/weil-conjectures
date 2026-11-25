@@ -39,6 +39,9 @@ point `ξ` some coordinate `ξᵢ` is a unit, and the stalk formula
 `AlgebraicGeometry.AffineSpace.linearCoordHom` identifies the fibre with the affine line over
 `𝔸(n ∖ {i}; T)`, the linear form with its coordinate, and `q` with the composite of the two
 projections, so the composition law for `R(-)_!` reduces the vanishing to the affine line.
+
+Several auxiliary lemmas are stated for abstract functors so that the kernel never unfolds the
+concrete derived functors.
 -/
 
 @[expose] public section
@@ -53,9 +56,7 @@ namespace AlgebraicGeometry.Etale
 open AlgebraicGeometry.AffineSpace
 
 /-- An object of `D(X_ét)` is zero if its pullbacks along a jointly surjective family of
-morphisms are zero: the pullbacks of its homology sheaves vanish, and these pullbacks jointly
-reflect isomorphisms (`AlgebraicGeometry.Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective`).
--/
+morphisms are zero. -/
 lemma isZero_of_isZero_mapDerivedCategory_upperStar (Λ : Type (u + 1)) [CommRing Λ]
     {X : Scheme.{u}} {ι : Type u} {U : ι → Scheme.{u}} (a : ∀ i, U i ⟶ X)
     (ha : ∀ x : X, ∃ (i : ι) (y : U i), (a i).base y = x)
@@ -76,11 +77,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {p : ℕ} [Fact p.Prime] [Invertible 
 /-- **Compactly supported cohomology of `ℒ_ψ` of a linear form with a unit coefficient.** For
 `g : T ⟶ S` and coefficients `c : n → Γ(T, 𝒪)` with `cᵢ` a unit, the compactly supported
 direct image along `q : 𝔸(n; S) ×_S T ⟶ T` of the Artin–Schreier sheaf of the linear form
-`ℓ = ∑ⱼ cⱼ xⱼ` vanishes: `Rq_! ℒ_{ψ(ℓ)} = 0`. The change of variables
-`AlgebraicGeometry.AffineSpace.linearCoordHom` makes `ℓ` the coordinate of the affine line over
-`𝔸(n ∖ {i}; T)`; compact-support base change along it and the composition law reduce the
-statement to `AlgebraicGeometry.Etale.isZero_rightDerivedLowerShriek_artinSchreierSheafZMod_coord`.
-(sketch blueprint: `lemma-fourier-transform-constant-sheaf`, proof) -/
+`ℓ = ∑ⱼ cⱼ xⱼ` vanishes: `Rq_! ℒ_{ψ(ℓ)} = 0`. -/
 theorem isZero_rightDerivedLowerShriek_artinSchreierSheafZMod_linearForm [Finite Λ]
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] {n : Type u} [Fintype n]
     {S T : Scheme.{u}} (g : T ⟶ S) [HasInvertibleExponent Λ T]
@@ -135,8 +132,7 @@ lemma pairingAt_stdPairing (n : Type u) [Fintype n] (S : Scheme.{u}) {T : Scheme
     ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, fibreToProduct_snd,
     Scheme.Hom.comp_appTop, CommRingCat.comp_apply]
 
-/-- `(F ⋙ G ⋙ H ⋙ K).obj X ≅ K.obj (H.obj Y)` from `G.obj (F.obj X) ≅ Y`, stated for abstract
-functors so that the kernel never unfolds the concrete derived functors. -/
+/-- `(F ⋙ G ⋙ H ⋙ K).obj X ≅ K.obj (H.obj Y)` from `G.obj (F.obj X) ≅ Y`. -/
 private lemma nonempty_iso_comp_comp_comp_obj_of_iso {C₁ C₂ C₃ C₄ C₅ : Type*} [Category C₁]
     [Category C₂] [Category C₃] [Category C₄] [Category C₅] (F : C₁ ⥤ C₂) (G : C₂ ⥤ C₃)
     (H : C₃ ⥤ C₄) (K : C₄ ⥤ C₅) (X : C₁) {Y : C₃} (a : G.obj (F.obj X) ≅ Y) :
@@ -148,11 +144,7 @@ variable [CharP Γ(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) p]
 variable [HasCompactification (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))]
 
 /-- The restriction of `FT_ψ(Λ)` along a point `ξ : T ⟶ 𝔸(n; S)` of the dual, `T` nonempty,
-with a unit coordinate `ξᵢ` vanishes. By the stalk formula
-(`AlgebraicGeometry.Etale.fourierTransformStalkIso`) it is `Rq_! ℒ_{ψ(∑ⱼ ξⱼ xⱼ)}[r]` on the
-fibre `q : 𝔸(n; S) ×_S T ⟶ T`, which vanishes by
-`AlgebraicGeometry.Etale.isZero_rightDerivedLowerShriek_artinSchreierSheafZMod_linearForm`.
-(sketch blueprint: `lemma-fourier-transform-constant-sheaf`, proof) -/
+with a unit coordinate `ξᵢ` vanishes. -/
 theorem isZero_mapDerivedCategory_upperStar_affineFourierTransform_unit [Finite Λ]
     [HasInvertibleExponent Λ S] [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
     (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) {T : Scheme.{u}} [Nonempty T]
@@ -189,9 +181,8 @@ theorem isZero_mapDerivedCategory_upperStar_affineFourierTransform_unit [Finite 
     ((fourierTransformStalkIso Λ _ _ Ψ (stdPairing n S) (Fintype.card n) ξ).app (𝟙_ _) ≪≫ a)
 
 /-- The Fourier–Deligne transform of the constant sheaf on `𝔸(n; S)` vanishes off the origin:
-its restriction to the open complement `U` of the zero section of the dual is zero. The
-character must satisfy `IsUnit (Ψ 1 - 1)`, which is what makes `H^*_c(𝔸¹, ℒ_ψ)` vanish.
-(sketch blueprint: `lemma-fourier-transform-constant-sheaf`, proof) -/
+its restriction to the open complement `U` of the zero section of the dual is zero, for a
+character `Ψ` with `Ψ 1 - 1` a unit. -/
 theorem isZero_leftDerivedUpperStar_affineFourierTransform_unit [Finite Λ]
     [HasInvertibleExponent Λ S] [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
     (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) {U : Scheme.{u}} (j : U ⟶ 𝔸(n; S))

@@ -20,8 +20,25 @@ import all WeilConjectures.AlgebraicGeometry.Pbc.PbcFiniteRawScalarComparison
 
 /-! # Generator-normalized scalar transport through the coefficient presentation
 
-Source: Bhatt--Scholze 3.4.12, 3.5.1 and 6.8.2; trace-definition coefficient comparison
-(blueprint: lem-fd-coefficient-scalar-lift-normalization).
+The main result is `fdCoefficientScalarLift_normalization`: the ordinary
+coefficient-presentation comparison, composed with the quotient-map completion, gives the
+integral scalar lift required by `FdCoefficientComparison`.
+
+## Implementation details
+
+The ordinary transport `o` is built from the balanced tensor comparison, which transports
+each tensor generator by the completed coefficient isomorphisms. Its derived version uses
+the canonical counits, as in `purScalarModel_existsUnique`; restricted to the integral
+constructible source and composed with coefficient transport of `completedScalarComparison`,
+it is invertible because the source is derived complete and strict scalar extension
+preserves constructibility. On a flat-term K-flat representative, the counit normalization
+of the ordinary transport and the localization equation of `completedScalarComparison`
+reduce the required equation to `o.completion`; uniqueness of descent makes it independent
+of the representative.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, 3.4.12, 3.5.1 and 6.8.2.
 -/
 
 @[expose] public noncomputable section
@@ -263,27 +280,7 @@ private theorem fdDerivedTransport_exists (l : ℕ) [Fact l.Prime]
         k ≫ DerivedCategory.Q.map ((o.complex l Ω).inv.app P)) hd
 
 /-- The ordinary coefficient-presentation comparison, composed with the actual
-quotient-map completion, gives the required integral scalar lift.
-Source: trace-definition coefficient-category sentence, normalized integral
-completion comparison proof steps 2 and 3; Bhatt--Scholze 3.4.12, 3.5.1 and 6.8.2
-(blueprint: lem-fd-coefficient-scalar-lift-normalization).
-
-Proof: the completed coefficient isomorphisms commute with every finite projection.
-Their scalar square therefore commutes. The balanced tensor comparison transports
-each tensor generator by precisely these coefficient isomorphisms; its inverse
-uses their inverses, and both composites are identities on generators, hence on
-the sheafified tensor product. This constructs o. Derive this isomorphism using
-the canonical counits, as in purScalarModel_existsUnique. Restrict its inverse
-to the integral constructible source, and compose with coefficient transport of
-the actual completedScalarComparison. This is invertible because the source is
-derived complete and strict scalar extension preserves constructibility. On a
-flat-term K-flat representative substitute the counit normalization of the
-ordinary transport and the localization equation of completedScalarComparison.
-Naturality moves coefficient transport factors across these maps. Cancellation
-of the two inverse ordinary tensor comparisons leaves exactly o.completion.
-Its quotient coordinates are the actual projections and its shifted-product
-coordinate is zero; uniqueness of descent makes the equation independent of the
-representative. -/
+quotient-map completion, gives the required integral scalar lift. -/
 theorem fdCoefficientScalarLift_normalization
     (l : ℕ) [Fact l.Prime] (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

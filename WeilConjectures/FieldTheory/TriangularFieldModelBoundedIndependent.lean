@@ -15,7 +15,18 @@ import WeilConjectures.FieldTheory.TriangularFieldModelCoefficientDescent
 
 /-! # Bounded monomial independent for triangular quotients
 
-Source: Stacks Project, Algebra, proofs of Tags 07BV and 08JZ.
+## Implementation details
+
+The proof is by induction on the number `m` of tower variables. For `m = 0` the quotient by
+`hT - 1` is identified with `k[X][1/h]`. In the inductive step the last tower variable is
+split off: since the last relation is monic of degree `eᵢ`, uniqueness of the remainder upon
+division shows that all coefficients of a vanishing bounded expansion in the last variable
+vanish, and induction handles the earlier variables. The degenerate cases `h = 0` and
+`eᵢ = 0` need no separate treatment, and no field evaluation is used.
+
+## References
+
+* Stacks Project, Algebra, proofs of Tags 07BV and 08JZ.
 -/
 
 @[expose] public section
@@ -23,24 +34,8 @@ Source: Stacks Project, Algebra, proofs of Tags 07BV and 08JZ.
 universe u
 namespace FieldTheory
 
-/-- Bounded monomials have no nonzero vanishing expansion.
-Source: Stacks Project, Algebra, proofs of Tags 07BV and 08JZ.
-(blueprint: lem-weil-pbc-triangular-field-model-bounded-independent).
-
-Proof: First identify the quotient of the first d+1 variables by hT-1 with
-D=k[X][1/h], using the localization presentation. Agreement on k[X] determines
-psi uniquely, including the inverse of h. Split off the last tower variable,
-and identify the simultaneous quotient with the quotient of the previous
-stage's polynomial ring by the mapped last monic relation. The universal maps
-send each variable to its class; their composites fix every variable and the
-coefficient ring. Over a nonzero previous stage, mapping preserves the leading
-coefficient one and degree e_i. Uniqueness of remainder upon division by this
-monic polynomial says all coefficients of a vanishing bounded expansion in
-the last variable vanish. Induction applies the same assertion to their bounded
-expansions in earlier variables, giving c(a)=0 for every tuple a. For m=0 this
-is injectivity of the localization identification. If h=0 the coefficient ring
-is zero. If an e_i=0 the exponent set is empty and every coefficient function
-is zero; hence the assertion remains true. No field evaluation is used. -/
+/-- Bounded monomials are linearly independent over `k[X][1/h]` in the triangular quotient:
+if `∑ₐ psi (c a) * ∏ᵢ yᵢ ^ aᵢ = 0`, with `aᵢ < eᵢ`, then `c = 0`. -/
 theorem triangularFieldModel_bounded_independent
     (k : Type u) [Field k] (d m : ℕ) (h : MvPolynomial (Fin d) k)
     (p : (i : Fin m) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k))

@@ -14,12 +14,51 @@ import WeilConjectures.FourierTransform.FdRawScalarComparisonPackaging
 
 /-! # Coherence of the completion-inverse scalar comparisons
 
-Source: blueprint main-20261015, sec-fourier-transform/sk-def-trace,
-`def-fd-trace-function.md`, final coefficient-category sentence; extracted comparison
-argument, steps 3--4 (blueprint: lem-fd-completion-inverse-scalar-coherence).
+The completion map of the coefficient-category comparison used in the definition of the trace
+function restricts to an integral isomorphism whose rationalized inverse is a coherent exact
+scalar comparison.
 
 The integral and rational identities are inputs. The conclusion retains the ordinary
 transport, the quotient-normalized integral lift, and its rationalized inverse.
+
+## Main results
+
+* `fdCompletionInverseScalarCoherence`: existence of `FdCompletionScalarComparison`.
+
+## Implementation details
+
+The proof of `fdCompletionInverseScalarCoherence` proceeds as follows.
+1. The stratified-perfect characterization identifies the integral categories after the
+quotient-normalized coefficient transport. Finite-free scalar transport preserves them.
+Completeness makes the specified ambient chi invertible, so it and its inverse restrict.
+2. On a flat-term K-flat representative the ordinary transport fixes every tensor
+factor. Chi has the actual quotient coordinates and zero shifted-product coordinate.
+Quotient-scalar descent makes this normalization independent of the representative;
+its countable-product exactness hypothesis holds on the small pro-etale site.
+3. Ordinary derived tensor is exact. The cone shift comparison is (x,y) ↦ (x,(-1)^m y);
+it fixes (c(z),0). Thus chi and its inverse commute with the specified shifts, and the
+completed restriction is exact for those shifts and the inherited triangles.
+4. The scalar-completion associator equation identifies the completed associator with
+ordinary tensor balancing conjugated by these same chi maps. This is precisely the
+normalization of the integral pullback realization and the chosen framework associator.
+5. Naturality of chi moves its inner component across the outer scalar functor.
+Multiplying by the inverse comparison on both sides and cancelling gives the inverse
+cocycle with the stated arrow directions.
+6. For equal fields ordinary multiplication identifies the tensor unit and chi is the
+completeness unit. Its inverse is the normalized unit. The two associator unit equations
+therefore give both comparison unit squares, also when all fields coincide.
+7. Raw semilinear scalar localization sends these maps and their inverses to the
+specified rational comparisons: the source uniformizer is invertible in the final
+field. It preserves composition, whiskering, shifts and the integral-lift equation.
+The identity raw equivalences preserve each scalar and integral tensor factor.
+8. For four nested fields expand the three successive inverse comparisons. Twice use
+the cocycle and naturality; the two contractions become j_30 followed by J_3 of the
+two framework associator composites. The framework pentagon equates them, and the
+PBC pentagon identifies the corresponding contractions on that side. Unit substitutions
+cover every repeated-field degeneracy.
+
+Several predicates are packaged as separate (locally irreducible) definitions so that the
+generated structure recursors do not repeatedly expand the derived coefficient presentations.
 -/
 
 @[expose] public noncomputable section
@@ -44,9 +83,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 namespace WeilConjectures
 
 /-- The inverse cocycle and both four-field contractions, written in the existing
-stage-system language. This is a predicate on the specified comparisons, not new scalar data.
-Source: trace-definition final sentence, comparison proof steps 5 and 8
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+stage-system language. This is a predicate on the specified comparisons, not new scalar data. -/
 def FdInverseScalarCoherence
     {I : Type w} [Preorder I]
     {C : I → Type u} [∀ i, Category.{v} (C i)]
@@ -142,8 +179,8 @@ private theorem inverseScalarCoherence
   rw [← P.cocycle h k m ((F.Φ E).obj K)]
   exact hleft
 
-/-- The existing ordinary family, named to share its type across structure declarations.
-Source: integral comparison data (blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- A family of ordinary scalar transports `FdOrdinaryScalarTransport l Ω T h`, one for each
+inclusion `h : E ≤ L` of finite coefficient fields. -/
 def FdCompletionOrdinaryFamily
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -154,8 +191,8 @@ def FdCompletionOrdinaryFamily
   ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
       FdOrdinaryScalarTransport l Ω T h
 
-/-- The existing comparison family, named to share its type across structure declarations.
-Source: integral comparison data (blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- A family of ambient comparison isomorphisms between the ambient scalar extension of the
+integral constructible transport at `E` and the transport of `integralTransition` at `L`. -/
 def FdCompletionAmbientFamily
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -171,8 +208,8 @@ def FdCompletionAmbientFamily
           (sfIntegralConstructible l (pbcFiniteField.{u} l Ω L) T).ι ⋙
             integralDetailedTransport T l (pbcFiniteField.{u} l Ω L)
 
-/-- The existing integral family, named to share its type across structure declarations.
-Source: integral comparison data (blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- A family of integral comparison isomorphisms between the integral identity functors of
+`stage E` and `stage L`, intertwining scalar extension with `integralTransition`. -/
 def FdCompletionIntegralFamily
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -185,9 +222,8 @@ def FdCompletionIntegralFamily
         GeneralAlgebraicallyClosedCoefficients.integralTransition l Ω T E L h ⋙
           (stage L).integral.functor
 
-/-- The existing quotient-cocone equation, named to keep generated structure recursors
-from repeatedly expanding the derived coefficient presentations.
-Source: the chi field below (blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- The quotient-cocone equation (chi): on good representatives, each ambient comparison
+agrees (up to `HEq`) with the counit followed by the ordinary completion. -/
 def FdCompletionChi
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -218,8 +254,7 @@ attribute [local irreducible] FdCompletionChi
 
 attribute [local irreducible] AlgebraicGeometry.Scheme.integralDetailedTransport
 
-/-- The original ambient restriction equation.
-Source: integral comparison data (blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- The original ambient restriction equation. -/
 def FdCompletionRestriction
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -238,9 +273,7 @@ attribute [local irreducible] FdCompletionRestriction FdCompletionOrdinaryFamily
 
 /-- The quotient-normalized integral comparison retained by the scalar-coherence theorem.
 This records exactly the tensor transport and chi lift of the coefficient datum, without
-its downstream rational or pair-category conclusions.
-Source: trace-definition final sentence, comparison steps 1--3
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+its downstream rational or pair-category conclusions. -/
 structure FdCompletionIntegralComparison
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -257,9 +290,7 @@ structure FdCompletionIntegralComparison
 attribute [local semireducible] FdCompletionOrdinaryFamily FdCompletionAmbientFamily
   FdCompletionIntegralFamily
 
-/-- The existing finite_functor predicate, shared by the constructor and projections.
-Source: the corresponding scalar-comparison field
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- Each component `family.Φ E` is the rational identity functor of `stage E`. -/
 def FdCompletionFiniteFunctor
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -276,9 +307,7 @@ def FdCompletionFiniteFunctor
 
 attribute [local irreducible] FdCompletionFiniteFunctor
 
-/-- The existing finite_shift_normalization predicate, shared by the constructor and projections.
-Source: the corresponding scalar-comparison field
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- The shift isomorphisms of `family.Φ E` are those of the rational functor of `stage E`. -/
 def FdCompletionShiftNormalization
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -297,9 +326,8 @@ def FdCompletionShiftNormalization
 
 attribute [local irreducible] FdCompletionShiftNormalization
 
-/-- The existing scalar_lift predicate, shared by the constructor and projections.
-Source: the corresponding scalar-comparison field
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- On rationalized integral objects, each comparison `family.β h` is the integral scalar
+comparison followed by the localization of the integral comparison. -/
 def FdCompletionScalarLift
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -324,9 +352,7 @@ def FdCompletionScalarLift
 
 attribute [local irreducible] FdCompletionScalarLift
 
-/-- The existing scalar_shift predicate, shared by the constructor and projections.
-Source: the corresponding scalar-comparison field
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- Each comparison `family.β h` and its inverse commute with the integer shifts. -/
 def FdCompletionScalarShift
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -345,9 +371,7 @@ def FdCompletionScalarShift
 
 attribute [local irreducible] FdCompletionScalarShift
 
-/-- The existing exact predicate, shared by the constructor and projections.
-Source: the corresponding scalar-comparison field
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- Each component `family.Φ E` is a triangulated functor. -/
 def FdCompletionExact
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -365,9 +389,8 @@ def FdCompletionExact
 
 attribute [local irreducible] FdCompletionExact
 
-/-- The existing unit predicate, shared by the constructor and projections.
-Source: the corresponding scalar-comparison field
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- The inverse of the comparison at the identity inclusion is `family.Φ E` applied to the
+unitor. -/
 def FdCompletionUnit
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -390,9 +413,7 @@ attribute [local irreducible] FdCompletionUnit
 
 /-- Coherence data for the specified integral comparison and its rationalized inverse.
 The stage-system components are identified with the supplied raw identity equivalences;
-only presentation transport is expressed by heterogeneous equality.
-Source: trace-definition final sentence, comparison steps 1--8
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+only presentation transport is expressed by heterogeneous equality. -/
 structure FdCompletionScalarComparison
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -417,39 +438,7 @@ structure FdCompletionScalarComparison
 
 /-- The specified completion map restricts to an integral isomorphism, and its inverse
 rationalizes to an exact scalar comparison satisfying shifts, units, the cocycle and
-four-field compatibility, including repeated fields.
-Source: blueprint main-20261015, trace-definition final sentence, expanded comparison
-argument (blueprint: lem-fd-completion-inverse-scalar-coherence).
-
-Proof, following the eight steps of the DAG node:
-1. The stratified-perfect characterization identifies the integral categories after the
-quotient-normalized coefficient transport. Finite-free scalar transport preserves them.
-Completeness makes the specified ambient chi invertible, so it and its inverse restrict.
-2. On a flat-term K-flat representative the ordinary transport fixes every tensor
-factor. Chi has the actual quotient coordinates and zero shifted-product coordinate.
-Quotient-scalar descent makes this normalization independent of the representative;
-its countable-product exactness hypothesis holds on the small pro-etale site.
-3. Ordinary derived tensor is exact. The cone shift comparison is (x,y) ↦ (x,(-1)^m y);
-it fixes (c(z),0). Thus chi and its inverse commute with the specified shifts, and the
-completed restriction is exact for those shifts and the inherited triangles.
-4. The scalar-completion associator equation identifies the completed associator with
-ordinary tensor balancing conjugated by these same chi maps. This is precisely the
-normalization of the integral pullback realization and the chosen framework associator.
-5. Naturality of chi moves its inner component across the outer scalar functor.
-Multiplying by the inverse comparison on both sides and cancelling gives the inverse
-cocycle with the stated arrow directions.
-6. For equal fields ordinary multiplication identifies the tensor unit and chi is the
-completeness unit. Its inverse is the normalized unit. The two associator unit equations
-therefore give both comparison unit squares, also when all fields coincide.
-7. Raw semilinear scalar localization sends these maps and their inverses to the
-specified rational comparisons: the source uniformizer is invertible in the final
-field. It preserves composition, whiskering, shifts and the integral-lift equation.
-The identity raw equivalences preserve each scalar and integral tensor factor.
-8. For four nested fields expand the three successive inverse comparisons. Twice use
-the cocycle and naturality; the two contractions become j_30 followed by J_3 of the
-two framework associator composites. The framework pentagon equates them, and the
-PBC pentagon identifies the corresponding contractions on that side. Unit substitutions
-cover every repeated-field degeneracy. -/
+four-field compatibility, including repeated fields. -/
 theorem fdCompletionInverseScalarCoherence
     (_D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ _D.p)
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

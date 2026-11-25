@@ -10,8 +10,9 @@ public import WeilConjectures.FourierTransform.FdScalarPullbackRealizationIdenti
 
 /-! # Identification of the fixed coefficient scalar comparison
 
-Source: trace-definition whole-tower comparison, steps 8--10; Stacks 0941 and 099N.
-(blueprint: lem-fd-coefficient-scalar-completion-identification). -/
+## References
+
+* Stacks Project, Tags 0941 and 099N. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

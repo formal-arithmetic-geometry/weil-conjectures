@@ -27,10 +27,18 @@ stalk formula along the zero section that restriction is the compactly supported
 
 - `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_unit`: `FT_ψ(Λ) ≅ δ₀(-r)[-r]`.
 
-## Blueprint
+## Implementation details
 
-The `sk-*` labels quoted below are block names of the *sketch* blueprint, a separate
-repository; they are not labels of `blueprint/src` and so are not checked by the build.
+The character must be nontrivial in the strong sense that `Ψ 1 - 1` is a unit of `Λ`: the
+proof uses `H_c^*(𝔸¹, ℒ_ψ) = 0`, and the `ψ`-isotypic part of `H_c^*(𝔸¹, Λ)` is killed by
+`Ψ 1 - 1`. For `Ψ = 1` the kernel is the constant sheaf and the transform of `Λ` is
+`Λ(-r)[-r]`, supported everywhere. Asking `Ψ ≠ 1` is not enough when `Λ` is not a domain: for
+`Λ = 𝔽_ℓ × 𝔽_ℓ` and `Ψ = (ψ₀, 1)` the transform has the trivial-character transform as a
+factor. The computation of `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]` needs `[Finite Λ]` and
+`[HasInvertibleExponent Λ S]`.
+
+Several auxiliary lemmas are stated for abstract functors so that the kernel never unfolds the
+concrete derived functors.
 -/
 
 @[expose] public section
@@ -50,7 +58,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 open Pretriangulated in
 /-- A complex whose restriction to the open complement of a closed immersion `i` vanishes is
-the direct image of its restriction to `i`: `K ≅ Ri_* i^* K`, by the open–closed triangle. -/
+the direct image of its restriction to `i`: `K ≅ Ri_* i^* K`. -/
 lemma nonempty_iso_rightDerivedLowerStar_of_isZero_leftDerivedUpperStar {X U Z : Scheme.{u}}
     (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
@@ -99,8 +107,7 @@ lemma nonempty_iso_rightDerivedLowerShriek_pullbackSnd_unit [Finite Λ] {X S : S
 
 variable [HasTateTwist Λ]
 
-/-- `F(T(M)[a]) ≅ T'(F M)[a]` for `F` commuting with shifts and `F ⋙ T' ≅ T ⋙ F`, stated for
-abstract functors so that the kernel never unfolds the concrete derived functors. -/
+/-- `F(T(M)[a]) ≅ T'(F M)[a]` for `F` commuting with shifts and `F ⋙ T' ≅ T ⋙ F`. -/
 private lemma nonempty_iso_obj_comp_shiftFunctor {C D : Type*} [Category C] [Category D]
     [HasShift C ℤ] [HasShift D ℤ] (F : C ⥤ D) [F.CommShift ℤ] (TX TX' : C ⥤ C) (TY : D ⥤ D)
     (pf : F ⋙ TY ≅ TX' ⋙ F) (e : TX' ≅ TX) (a : ℤ) (M : C) :
@@ -139,7 +146,7 @@ private lemma nonempty_iso_rightDerivedLowerShriek_tateTwist_comp_shiftFunctor [
     (tateTwist Λ Y m) pf e (2 * m) M
 
 /-- Compactly supported direct image commutes with twist-and-shift,
-`Rf_!(M(m)[2m]) ≅ (Rf_! M)(m)[2m]`, by the projection formula. -/
+`Rf_!(M(m)[2m]) ≅ (Rf_! M)(m)[2m]`. -/
 lemma nonempty_iso_rightDerivedLowerShriek_twistShift [Finite Λ] {X Y : Scheme.{u}}
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f]
     (m : ℤ)
@@ -199,8 +206,8 @@ lemma pairingAt_stdPairing_zeroSection :
   rw [map_mul, h, mul_zero]
 
 omit [Fact p.Prime] [Fintype n] in
-/-- The fibre over the origin of the dual is a retract of `𝔸(n; S) ×_S 𝔸(n; S)`, so its
-global sections have characteristic `p` when those of the product do. -/
+/-- The global sections of the fibre of `𝔸(n; S) ×_S 𝔸(n; S)` over the origin of the dual have
+characteristic `p` when those of the product do. -/
 lemma charP_appTop_pullback_zeroSection
     [CharP Γ(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) p] :
     CharP Γ(pullback (𝔸(n; S) ↘ S) (zeroSection n S ≫ 𝔸(n; S) ↘ S), ⊤) p :=
@@ -224,8 +231,7 @@ lemma nonempty_iso_artinSchreierTwist_obj_unit (X : Scheme.{u}) [CharP Γ(X, ⊤
   exact ⟨derivedTensorLeftUnitor _ X _ ≪≫ (DerivedCategory.singleFunctor _ 0).mapIso e₀ ≪≫
     singleFunctorObjUnitIso _ X⟩
 
-/-- `(F ⋙ G ⋙ H ⋙ K).obj X ≅ K.obj (H.obj Y)` from `G.obj (F.obj X) ≅ Y`, stated for abstract
-functors so that the kernel never unfolds the concrete derived functors. -/
+/-- `(F ⋙ G ⋙ H ⋙ K).obj X ≅ K.obj (H.obj Y)` from `G.obj (F.obj X) ≅ Y`. -/
 private lemma nonempty_iso_comp_obj_of_iso {C₁ C₂ C₃ C₄ C₅ : Type*} [Category C₁]
     [Category C₂] [Category C₃] [Category C₄] [Category C₅] (F : C₁ ⥤ C₂) (G : C₂ ⥤ C₃)
     (H : C₃ ⥤ C₄) (K : C₄ ⥤ C₅) (X : C₁) {Y : C₃} (a : G.obj (F.obj X) ≅ Y) :
@@ -266,20 +272,9 @@ variable [HasCompactification (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S
 /-- The Fourier–Deligne transform of the constant sheaf on `𝔸(n; S)` is the skyscraper at
 the origin of the dual, Tate twisted and shifted by the relative dimension `r = #n`:
 
-`FT_ψ(Λ) ≅ δ₀(-r)[-r]`.
+`FT_ψ(Λ) ≅ δ₀(-r)[-r]`,
 
-On the affine line, the blueprint's case, this reads `FT_ψ(Λ) ≅ δ₀(-1)[-1]`.
-
-The character must be **nontrivial** in the strong sense that `Ψ 1 - 1` is a unit of `Λ`:
-the proof uses `H_c^*(𝔸¹, ℒ_ψ) = 0`, and the `ψ`-isotypic part of `H_c^*(𝔸¹, Λ)` is killed
-by `Ψ 1 - 1`. For `Ψ = 1` the kernel is the constant sheaf and the transform of `Λ` is
-`Λ(-r)[-r]`, supported everywhere. Asking `Ψ ≠ 1` is not enough when `Λ` is not a domain:
-for `Λ = 𝔽_ℓ × 𝔽_ℓ` and `Ψ = (ψ₀, 1)` the transform has the trivial-character transform as a
-factor.
-
-Class: torsion; decided by the cohomology of `𝔸^r`, `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`, which needs
-`[Finite Λ] [HasInvertibleExponent Λ S]`.
-(sketch blueprint: `lemma-fourier-transform-constant-sheaf`) -/
+for a character `Ψ` such that `Ψ 1 - 1` is a unit of `Λ`. -/
 theorem nonempty_iso_affineFourierTransform_unit [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] (Ψ : AddChar (ZMod p) Λ)
     (hΨ : IsUnit (Ψ 1 - 1)) :

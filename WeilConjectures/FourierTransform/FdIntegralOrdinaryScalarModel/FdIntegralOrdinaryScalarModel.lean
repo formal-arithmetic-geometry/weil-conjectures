@@ -17,7 +17,23 @@ import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensionC
 
 /-! # Normalized ordinary derived scalar comparison
 
-Source: trace-definition coefficient-category comparison, integral steps 1--6.
+The ordinary derived scalar comparison, normalized by the actual completion map, as part of the
+integral coefficient-category comparison used in the definition of the trace function.
+
+## Implementation details
+
+The ambient shift of the exact ordinary derived comparison is obtained as follows. Finite
+scalar extension is exact in the completed presentation. Compare its universal left derived
+functor with its exact derived functor using their counits. Essential surjectivity of the
+homotopy localization reflects shift compatibility; the unit equation of the scalar adjunction
+identifies the counit-normalized shift with the prescribed mate shift. Derive the ordinary
+coefficient-presentation square, compose with that normalized comparison, and apply the derived
+square factor equation. On complexes the two presentation factors agree degreewise.
+
+For `ordinaryTransportModel`, retain the derived factor equation on representatives, compose
+with `ordinary.completion`, cancel the complex comparison and use the intrinsic
+completion-chain model. Naturality moves the resulting chain across the target coefficient
+factor.
 -/
 
 @[expose] public noncomputable section
@@ -207,9 +223,7 @@ private theorem ambientExactModel_at
   subst φ
   exact ambientExactModel l E L i T
 
-/-- The complex comparison induced by the ordinary coefficient-presentation square.
-Source: trace-definition coefficient transport, integral step 3
-(blueprint: lem-fd-integral-ordinary-scalar-model). -/
+/-- The complex comparison induced by the ordinary coefficient-presentation square. -/
 private def ordinaryTransportComplex
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -242,18 +256,7 @@ private theorem ordinaryTransportComplex_completion
       (.up ℤ)).map_comp _ _).symm
 
 /-- The exact ordinary derived comparison preserves the prescribed ambient shift and
-retains its counit equation on each cochain representative.
-Source: trace-definition coefficient transport, integral steps 3--4
-(blueprint: lem-fd-integral-ordinary-scalar-model).
-
-Proof: finite scalar extension is exact in the completed presentation. Compare its
-universal left derived functor with its exact derived functor using their counits.
-Essential surjectivity of the homotopy localization reflects shift compatibility;
-the unit equation of the scalar adjunction identifies the counit-normalized shift
-with the prescribed mate shift. Derive the ordinary coefficient-presentation square,
-compose with that normalized comparison, and apply the derived square factor equation.
-On complexes the two presentation factors agree degreewise, giving the stated equation.
--/
+retains its counit equation on each cochain representative. -/
 private theorem ordinaryTransportSquare
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -338,17 +341,7 @@ private theorem ordinaryTransportSquare
   congr 2
 
 /-- The ordinary derived scalar square for the prescribed ambient shift, normalized
-by the actual completion map on every cochain representative.
-Source: trace-definition coefficient transport, integral steps 3--4
-(blueprint: lem-fd-integral-ordinary-scalar-model).
-
-Proof: form the exact derived square of the ordinary coefficient comparison and
-compare its target scalar functor with the counit-normalized ambient derived functor.
-The scalar adjunction unit determines its mate shift uniquely. Retain the derived
-factor equation on representatives, compose with ordinary.completion, cancel the
-complex comparison and use the intrinsic completion-chain model. Naturality moves
-the resulting chain across the target coefficient factor, yielding the equation below.
--/
+by the actual completion map on every cochain representative. -/
 theorem ordinaryTransportModel
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
