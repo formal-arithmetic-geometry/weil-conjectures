@@ -16,7 +16,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleGraphProductInterchange
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 
 universe u
 
@@ -156,10 +155,9 @@ def lambda : (side s t second).functor A ≅ (PairwiseProduct.presentation s t).
 lemma lambda_factor : lambda s t second A =
     ambientLambda s t second A ≪≫ shrinkLambda s t second A := by
   cases second <;>
-    simp only [lambda, PairwiseProduct.lambda₁, PairwiseProduct.lambda₂,
-      etaleProductGraphLambda, ambientLambda, shrinkLambda, projection, side, q, j, z, v,
-      ambient, PairwiseProduct.presentation, PairwiseProduct.z₁, PairwiseProduct.z₂,
-      Bool.false_eq_true, ↓reduceIte, Iso.trans_assoc] <;> rfl
+    simp only [lambda, PairwiseProduct.lambda₁, PairwiseProduct.lambda₂, etaleProductGraphLambda,
+      ambientLambda, shrinkLambda, projection, side, q, j, z, v, ambient,
+      PairwiseProduct.presentation, PairwiseProduct.z₁, PairwiseProduct.z₂, Iso.trans_assoc] <;> rfl
 
 end EtaleGraphPresentation.ProductRow
 
