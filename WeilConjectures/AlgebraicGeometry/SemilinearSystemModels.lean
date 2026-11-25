@@ -167,7 +167,8 @@ private theorem horizontal_map' {C : Type c} [Category.{v} C]
   dsimp
   rw [CategoryTheory.Functor.map_id, Category.comp_id]
 
-omit [EssentiallySmall.{r} C] in
+-- `omit` would drop this argument from `systemRing`, whose callers pass it explicitly.
+set_option linter.unusedSectionVars false in
 /-- The actual ring presheaf is a sheaf for the vertical sequence topology. -/
 theorem ringPresheaf_isSheaf :
     Presheaf.IsSheaf (coefficientSequenceTopology J) (ringPresheaf.{c, v, r} J B τ) := by
@@ -545,7 +546,6 @@ variable (F : ℕ → Sheaf J CommRingCat.{r})
 
 include hα
 
-omit [EssentiallySmall.{r} C] in
 /-- A compatible coefficient map induces the unique sectionwise ring-system map. -/
 theorem systemMap_existsUnique :
     ∃! f : systemRing.{c, v, r} J B τ ⟶ systemRing.{c, v, r} J F σ,
