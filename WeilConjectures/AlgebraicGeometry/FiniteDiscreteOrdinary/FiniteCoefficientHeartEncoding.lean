@@ -311,7 +311,8 @@ private theorem fixed_push_pure {X Y : Scheme.{u}} (p : X ⟶ Y)
 attribute [local irreducible] heartSectionsIso coefficientHeartEncoding
   coefficientHeartPushIso coefficientHeartPullIso
 
-omit [Finite A] [DiscreteTopology A] in
+-- Retain the finite discrete hypotheses of the existing public statement.
+set_option linter.unusedSectionVars false in
 /-- The normalized mate respects the balanced tensor comparisons on the hearts. -/
 theorem coefficientHeartPullIso_monoidal
     (e : Mon.mk R ≅ Mon.mk (coefficient A))

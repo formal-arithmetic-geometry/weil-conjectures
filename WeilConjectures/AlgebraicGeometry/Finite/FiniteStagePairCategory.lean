@@ -538,7 +538,8 @@ def pbcScalarExtension (h : E ≤ F) :
     exact if e : E = F then e ▸ 𝟭 _ else
       (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose
 
-omit [IsNoetherian T] in
+-- Omitting `[IsNoetherian T]` would drop it from the public signature and cascade downstream.
+set_option linter.unusedSectionVars false in
 /-- Coefficient maps compose exactly, including repeated fields. -/
 theorem pbcCompletedScalarMap_comp (h : E ≤ F) (k : F ≤ G) :
     pbcCompletedScalarMap l Ω T h ≫ pbcCompletedScalarMap l Ω T k =
@@ -632,7 +633,8 @@ private theorem pbcTensorSection_smul
   simpa only [mul_one] using completedTensor_smul T φ M U r 1 x
 
 set_option backward.isDefEq.respectTransparency false in
-omit [IsNoetherian T] in
+-- Omitting `[IsNoetherian T]` would drop it from the public signature and cascade downstream.
+set_option linter.unusedSectionVars false in
 /-- The tensor unit comparison is fixed on sheafified pure tensors. -/
 theorem pbcOrdinaryScalarUnit_exists (E : Padic.FiniteCoefficientFields l Ω) :
     ∃! e : pbcExtend (pbcCompletedScalarMap l Ω T (le_refl E)) ≅
@@ -709,7 +711,6 @@ private def pbcDerivedScalarUnit (E : Padic.FiniteCoefficientFields l Ω) :
       (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) (.up ℤ))
     (pbcHomotopyScalarUnitQ l Ω T E)
 
-omit [IsNoetherian T] in
 private theorem pbcDerivedScalarUnit_homotopy (E : Padic.FiniteCoefficientFields l Ω)
     (H : HomotopyCategory
       (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) (.up ℤ)) :
@@ -734,7 +735,6 @@ private theorem pbcDerivedScalarUnit_homotopy (E : Padic.FiniteCoefficientFields
       (DerivedCategory.Qh.map ((pbcHomotopyScalarUnit l Ω T E).hom.app H) ≫ 𝟙 _) at h
   simpa only [Category.comp_id] using h
 
-omit [IsNoetherian T] in
 /-- The derived tensor unit is uniquely fixed by its universal counit on complexes. -/
 theorem pbcAmbientScalarUnit_exists (E : Padic.FiniteCoefficientFields l Ω) :
     ∃! e : pbcAmbientScalarExtension l Ω T (le_refl E) ≅
@@ -894,7 +894,6 @@ private theorem pbcAdjunction_complexTranspose
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-omit [IsNoetherian T] in
 private theorem pbcAmbientScalarUnit_mate (E : Padic.FiniteCoefficientFields l Ω) :
     pbcAmbientScalarUnit l Ω T E =
       Adjunction.leftAdjointIdIso
@@ -1084,7 +1083,6 @@ def pbcIntegralScalarAssociator (h : E ≤ F) (k : F ≤ G) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-omit [IsNoetherian T] in
 private theorem pbcDerivedRestriction_leftUnit (h : E ≤ F) :
     pbcDerivedRestrictComp (pbcCompletedScalarMap l Ω T (le_refl E))
         (pbcCompletedScalarMap l Ω T h) (pbcCompletedScalarMap l Ω T h)
@@ -1131,7 +1129,6 @@ private theorem pbcDerivedRestriction_leftUnit (h : E ≤ F) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-omit [IsNoetherian T] in
 private theorem pbcDerivedRestriction_rightUnit (h : E ≤ F) :
     pbcDerivedRestrictComp (pbcCompletedScalarMap l Ω T h)
         (pbcCompletedScalarMap l Ω T (le_refl F)) (pbcCompletedScalarMap l Ω T h)
@@ -1179,7 +1176,6 @@ private theorem pbcDerivedRestriction_rightUnit (h : E ≤ F) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-omit [IsNoetherian T] in
 private theorem pbcAmbientAssociator_leftUnit (h : E ≤ F) (K : pbcAmbientStage l Ω T E) :
     (pbcAmbientScalarAssociator l Ω T (le_refl E) h).hom.app K =
       (pbcAmbientScalarExtension l Ω T h).map ((pbcAmbientScalarUnit l Ω T E).hom.app K) := by
@@ -1196,7 +1192,6 @@ private theorem pbcAmbientAssociator_leftUnit (h : E ≤ F) (K : pbcAmbientStage
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-omit [IsNoetherian T] in
 private theorem pbcAmbientAssociator_rightUnit (h : E ≤ F) (K : pbcAmbientStage l Ω T E) :
     (pbcAmbientScalarAssociator l Ω T h (le_refl F)).hom.app K =
       (pbcAmbientScalarUnit l Ω T F).hom.app ((pbcAmbientScalarExtension l Ω T h).obj K) := by
@@ -1213,7 +1208,6 @@ private theorem pbcAmbientAssociator_rightUnit (h : E ≤ F) (K : pbcAmbientStag
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-omit [IsNoetherian T] in
 private theorem pbcAmbientScalarAssociator_cocycle
     {H : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) (k : F ≤ G) (j : G ≤ H)
     (K : pbcAmbientStage l Ω T E) :
