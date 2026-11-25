@@ -13,6 +13,7 @@ public import Mathlib.RingTheory.Smooth.Basic
 import WeilConjectures.RingTheory.IndStandardSmooth
 import WeilConjectures.RingTheory.PopescuStandardReductionFactor
 import WeilConjectures.RingTheory.StandardSmoothQuotientLift
+import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 
 /-!
 # The presentation construction in Popescu's square-zero lifting lemma
@@ -31,7 +32,6 @@ the subsequent lifting.
 
 * [Stacks, Tag 07CK]
 -/
-import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 
 @[expose] public section
 

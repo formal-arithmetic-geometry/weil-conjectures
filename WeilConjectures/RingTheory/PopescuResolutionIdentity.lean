@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.RingTheory.PopescuResolution
+import WeilConjectures.RingTheory.PopescuIdealCompEquiv
 
 /-!
 # The identity resolution
@@ -23,7 +24,6 @@ preserves the singular ideal.
 
 * [Stacks, Situation 07F7] (the definition following it)
 -/
-import WeilConjectures.RingTheory.PopescuIdealCompEquiv
 
 @[expose] public section
 

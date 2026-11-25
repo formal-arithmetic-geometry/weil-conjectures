@@ -9,6 +9,7 @@ module
 public import WeilConjectures.RingTheory.PopescuLiftPresentation
 import WeilConjectures.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
 import WeilConjectures.RingTheory.PopescuLiftChartFibres
+import WeilConjectures.RingTheory.PopescuLiftChartFlat
 
 /-!
 # Smoothness of the Popescu lifting algebra on the special fibre
@@ -20,7 +21,6 @@ locus of `Cbar`, using the partial charts `D_k`.
 
 * [Stacks, Tag 07CP] (construction of `D_k` and proof of properties (c), (d))
 -/
-import WeilConjectures.RingTheory.PopescuLiftChartFlat
 
 @[expose] public section
 

@@ -11,6 +11,7 @@ public import WeilConjectures.RingTheory.GRing
 import WeilConjectures.RingTheory.GeometricallyRegularH1Injective
 import WeilConjectures.RingTheory.LocalizationOfRegularRing
 import Mathlib.RingTheory.Localization.BaseChange
+import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Setup for Popescu flat coordinates
@@ -25,7 +26,6 @@ homology of its residue field is finite.
 * [Stacks, Tag 07E5]
 -/
 
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 @[expose] public section
 set_option autoImplicit false
 universe u v

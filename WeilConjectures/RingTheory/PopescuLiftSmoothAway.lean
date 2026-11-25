@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.RingTheory.PopescuLiftPresentation
+import Mathlib.Tactic.Ring
 
 /-!
 # Smoothness of the Popescu lifting algebra away from `π`
@@ -23,7 +24,6 @@ the maps on the special fibre.
 
 * [Stacks, Tag 07CP] (key equality and proof of property (b))
 -/
-import Mathlib.Tactic.Ring
 
 @[expose] public section
 
