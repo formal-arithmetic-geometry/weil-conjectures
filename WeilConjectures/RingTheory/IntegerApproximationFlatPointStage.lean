@@ -23,8 +23,23 @@ public import Mathlib.Algebra.EuclideanDomain.Int
 
 /-! # Descent of one flat point in a supplied integer approximation
 
-Source: Stacks Project, Algebra, Tags 00RC, 00R1 and 00R6.
-(blueprint: lem-weil-pbc-integer-approximation-flat-point-stage)
+A flat point of the limit of a supplied finite-type integer approximation is already flat at
+some stage.
+
+## Implementation details
+
+The ring and module diagrams are localized at the contractions of the given prime; localization
+at a prime commutes with filtered colimits, the stages are Noetherian, and the localized
+transition maps are base changes, so the local flatness criterion (Tag 00R6) applies. Flatness
+over the localized stage base then gives flatness over the stage base. No openness theorem is
+used.
+
+## References
+
+* [Stacks, Tag 00RC]
+* [Stacks, Tag 00R1]
+* [Stacks, Tag 00R6]
+* [Stacks, Tag 037D]
 -/
 
 @[expose] public section
@@ -38,35 +53,9 @@ namespace Algebra
 
 -- Preserve the named, nondependent forall binders of the existing signature.
 set_option linter.unusedVariables false in
-/-- A flat point of the limit of a supplied finite-type integer approximation occurs
-at a stage. This asserts only stage flatness, without constructing a model or an open locus.
-
-Source: Stacks Project, Algebra, Theorem Tag 00RC, first reduction paragraph,
-using Lemmas Tags 00R1 and 00R6.
-(blueprint: lem-weil-pbc-integer-approximation-flat-point-stage)
-
-Proof:
-Contract q along the stage maps to S and its inverse image along the maps to R.
-The lifted limit rings are canonically isomorphic to R and S, and the lifted limit
-module to M. Localize both ring diagrams and the module diagram at the contractions.
-Compatibility of the cocones makes the contractions compatible with all transitions,
-so the induced maps of local rings are local. Localization at a prime commutes with
-filtered ring colimits (Tag 037D). For the module, lift numerators and denominators to
-a common stage using the supplied colimits; an equality of fractions is witnessed by
-a multiplier outside the prime, and its zero relation holds at a later stage. Hence
-its localized colimit is M_q. Every stage ring is Noetherian: its base is finite type
-over the integers, and its top is finite type over that base. Their prime localizations
-are Noetherian local rings, and localization preserves finiteness of the stage modules.
-Localize the supplied transition tensor isomorphisms. The ring comparison identifies
-the localized later top ring as a further localization of the base change of the earlier
-localized top ring. Tensor-localization compatibility identifies the localized module
-base changes. Thus all hypotheses of Tag 00R6 hold. Since the localized limit base
-is R at the inverse image of q, flatness over it follows from the given R-flatness:
-flatness over a localization is equivalent to flatness over its base. Tag 00R6 gives
-a flat localized stage module over the localized stage base. Restricting scalars
-along that flat localization map makes it flat over the unlocalized stage base.
-Transport through the canonical lift equivalences changes neither the contracted
-prime nor these scalar actions. No openness theorem is used.
+/-- If `M` is flat over `R` at a prime `q` of `S`, where `R → S` and `M` are the colimits of a
+supplied finite-type integer approximation, then some stage module is flat over its stage base
+at the contraction of `q`. No model or open locus is constructed.
 -/
 theorem exists_flat_integer_approximation_stage_at_prime
     (R : Type u) (S : Type v) (M : Type w)

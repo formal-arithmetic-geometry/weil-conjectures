@@ -18,8 +18,15 @@ import WeilConjectures.RingTheory.FiniteHomogeneousGenerators
 /-!
 # Finite graded free covers
 
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, construction of the first free
-module.
+A finite graded module over `k[x₀, x₁]` admits a surjection from a finite free graded module
+with homogeneous basis (`MvPolynomial.exists_graded_free_cover`). This is the first step of a
+graded free resolution.
+
+## Implementation details
+
+The free module `Fin r →₀ k[x₀, x₁]` carries the shifted grading: a vector has degree `j` if its
+coefficient at `a` is homogeneous of degree `j - e a`, where `e a` is the degree of the `a`-th
+homogeneous generator of the target. The shift parameter in the statement is `d a = -e a`.
 -/
 
 @[expose] public section
@@ -130,21 +137,7 @@ private theorem shiftedGrade_single {k : Type u} [Field k] {r : ℕ}
   · simp [ha] at ht
 
 /-- A finite graded module admits a surjection from a finite free module with homogeneous basis.
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, proof, choose homogeneous
-generators (blueprint: lem-sc-p1-graded-free-cover).
-
-Proof: apply `exists_finite_homogeneous_generators` to obtain generators `m a` of degrees
-`e a` and its surjective map from `Fin r →₀ S`, where `S = k[x₀,x₁]`. Give this free module
-its shifted grading: a vector belongs to degree `j` if its coefficient at `a` belongs to the
-polynomial homogeneous part of degree `j - e a`, with that part zero for negative degrees.
-Decompose each coefficient into total-degree homogeneous polynomials and collect terms of
-common shifted degree. Each vector has only finitely many such terms, and uniqueness follows
-coefficientwise from uniqueness of the polynomial decomposition. This proves internality.
-Multiplication by a homogeneous polynomial of degree `n` raises each shifted coefficient degree
-by `n`, proving scalar compatibility. The standard basis vector at `a` has degree `e a`.
-Linearity and the degree assertion of the generator theorem show that the map preserves each
-homogeneous part. Take the shift parameter `d a = -e a`. This includes the empty basis when
-`M = 0`. The source has universe `u` independently of the target's universe `v`. -/
+The basis vectors have degrees `-d a` and the map preserves the grading. -/
 theorem exists_graded_free_cover {k : Type u} [Field k]
     {M : Type v} [AddCommGroup M] [Module (MvPolynomial (Fin 2) k) M]
     [Module.Finite (MvPolynomial (Fin 2) k) M]

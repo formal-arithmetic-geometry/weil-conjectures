@@ -20,11 +20,6 @@ matrix.
 
 - `Matrix.GeneralLinearGroup.exists_algHom_comp_eq_evalAlgHom_exteriorPower`: the exterior power
   is polynomial.
-
-## Blueprint
-
-`Matrix.GeneralLinearGroup.exists_algHom_comp_eq_evalAlgHom_exteriorPower` is part of
-`lemma-restriction-normal-subgroup`.
 -/
 
 @[expose] public section
@@ -34,8 +29,7 @@ namespace Matrix.GeneralLinearGroup
 variable {n : Type*} [Fintype n] [LinearOrder n] {k : Type*} [Field k]
 
 /-- The exterior power `GL n k →* GL (powersetCard n s) k` is given by polynomials: there is an
-algebra map `φ` of coordinate rings with `evalAlgHom (⋀^s g) = evalAlgHom g ∘ φ`.
-(blueprint: `lemma-restriction-normal-subgroup`) -/
+algebra map `φ` of coordinate rings with `evalAlgHom (⋀^s g) = evalAlgHom g ∘ φ`. -/
 theorem exists_algHom_comp_eq_evalAlgHom_exteriorPower (s : ℕ) :
     ∃ φ : CoordinateRing (Set.powersetCard n s) k →ₐ[k] CoordinateRing n k,
       ∀ g : GL n k, (evalAlgHom g).comp φ = evalAlgHom (exteriorPower s g) := by

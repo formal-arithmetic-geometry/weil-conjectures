@@ -11,11 +11,23 @@ public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import WeilConjectures.RingTheory.RootLiftingEtaleRetraction
 
-/-! Uniqueness part of the henselian étale retraction theorem.
+/-!
+# Uniqueness of retractions of étale algebras over henselian local rings
 
-The standard étale presentation and simple-root uniqueness in Stacks Project, Tag 04GG,
-show that two sections with the prescribed prime are equal.
-(blueprint: lem-weil-pbc-henselian-etale-retraction-uniqueness)
+Let `S` be a henselian local ring and `B` an étale `S`-algebra with a prime `q'` over the maximal
+ideal of `S` with trivial residue field extension. Two `S`-algebra maps `B →ₐ[S] S` under which
+the preimage of the maximal ideal is `q'` are equal (`algHom_eq_of_henselianLocalRing_etale`).
+
+## Implementation details
+
+Locally at an element outside `q'`, the étale algebra has a standard étale presentation. The two
+maps send its generator to roots of the defining polynomial that are congruent modulo the
+maximal ideal and at which the derivative is a unit; uniqueness of lifts of simple roots makes
+them equal.
+
+## References
+
+* [Stacks, Tag 04GG]
 -/
 
 @[expose] public section
@@ -24,13 +36,9 @@ universe u
 
 open AlgebraicGeometry
 
-/-- The theorem is the uniqueness portion of Stacks Project Lemma Tag 04GG, implication
- (1) => (8).  Localize at an element outside q' and use a standard etale presentation.
- The two maps induce the same residue-field map, so their values on the presentation
- generator are roots congruent modulo the maximal ideal.  The standard-etale identity
- makes the derivative a unit; henselian simple-root uniqueness therefore identifies
- the generator images, and the universal property plus localization identifies the
- two algebra maps.  (blueprint: lem-weil-pbc-henselian-etale-retraction-uniqueness)
+/-- Over a henselian local ring `S`, two `S`-algebra maps from an étale `S`-algebra `B` to `S`
+under which the preimage of the maximal ideal is the same prime `q'`, with trivial residue field
+extension, are equal.
 -/
 theorem algHom_eq_of_henselianLocalRing_etale
     {S B : Type u} [CommRing S] [CommRing B] [HenselianLocalRing S]

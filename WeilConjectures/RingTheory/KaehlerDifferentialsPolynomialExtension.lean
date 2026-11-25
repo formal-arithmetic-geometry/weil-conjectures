@@ -19,8 +19,18 @@ import Mathlib.LinearAlgebra.StdBasis
 /-!
 # Kähler differentials of a polynomial algebra over an algebra
 
-Source: Stacks Project, Algebra, Tags 00RS, 00RV and 00RX
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
+## Implementation details
+
+The map `Ω[A⁄R] ⊗ B → Ω[B⁄R]` is injective by the Jacobi–Zariski sequence, since
+`H₁(L_{B/A}) = 0` for the formally smooth `B`; its range is the kernel of `Ω[B⁄R] → Ω[B⁄A]` by
+the first fundamental sequence, and `Ω[B⁄A] ≅ Bᵉ` via the polynomial basis.
+
+## References
+
+* [Stacks, Tag 00RS]
+* [Stacks, Tag 00RV]
+* [Stacks, Tag 00RX]
+* [Stacks, Tag 00S2]
 -/
 
 @[expose] public section
@@ -34,24 +44,8 @@ open scoped TensorProduct
 namespace KaehlerDifferential
 
 /-- The canonical decomposition of the differentials of `A[z₁, …, zₑ]` over `R`, and
-its finite free rank consequence. Source: Stacks Project, Algebra, Tags 00RS
-(`lemma-exact-sequence-differentials`), 00RV (`lemma-differentials-base-change`), and
-00RX (`lemma-differentials-polynomial-ring`)
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
-
-Proof:
-Write `B = A[z₁, …, zₑ]`, `u = mapBaseChange R A B`, and `v = map R A B B`.
-The polynomial algebra `B` is formally smooth over `A`, so `H₁(L_{B/A}) = 0`.
-The Jacobi–Zariski sequence (Stacks Tag 00S2) therefore makes `u` injective.
-The first fundamental sequence (Tag 00RS) gives `ker v = range u`.
-The polynomial basis (Tag 00RX) identifies `Ω[B⁄A]` with `Bᵉ`. Let
-`s(b) = ∑ j, b j • d_R zⱼ`; then `v(s(b))` is the inverse basis-coordinate map.
-Thus `(x,b) ↦ u(x) + s(b)` is injective: applying `v` determines `b`, and
-injectivity of `u` determines `x`. It is surjective: for `ω`, take the coordinates
-`b` of `v(ω)`; then `ω - s(b)` lies in `ker v = range u`.
-Finally extend the given `Fin d` basis to `B`, take its product with the standard
-`Fin e` basis, transport through the constructed equivalence, and reindex by
-`Fin d ⊕ Fin e ≃ Fin (d+e)`. The argument also covers `e = 0`, `d = 0`, and zero rings.
+its finite free rank consequence: `(B ⊗[A] Ω[A⁄R]) × Bᵉ ≃ Ω[B⁄R]` for `B = A[z₁, …, zₑ]`, and
+`Ω[B⁄R]` is free of rank `d + e` if `Ω[A⁄R]` is free of rank `d`.
 -/
 theorem exists_polynomial_extension_equiv
     (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A] (e : ℕ) :

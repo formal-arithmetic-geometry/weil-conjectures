@@ -13,8 +13,10 @@ import Mathlib.Tactic.LinearCombination
 /-!
 # Idempotents determined modulo an ideal in the Jacobson radical
 
-Source: Stacks Project, More on Algebra, Lemma 15.10.2 (Tag 09XF), with Definition
-15.10.1 (Tag 0ELY) (blueprint: lem-weil-pbc-idempotents-determined-modulo-radical).
+## References
+
+* [Stacks, Tag 09XF]
+* [Stacks, Tag 0ELY]
 -/
 
 @[expose] public section
@@ -24,15 +26,6 @@ universe u
 namespace IsIdempotentElem
 
 /-- Idempotents congruent modulo an ideal in the Jacobson radical are equal.
-Source: Stacks Project, Tag 09XF, with Tag 0ELY
-(blueprint: lem-weil-pbc-idempotents-determined-modulo-radical).
-
-Proof: Put `d = e - e'`. Expanding with `e * e = e` and `e' * e' = e'`
-gives `d * d * d = d`. Since `d` belongs to the Jacobson radical, so does `d * d`,
-and hence `1 - d * d` is a unit by the Jacobson criterion
-`Ideal.isUnit_of_sub_one_mem_jacobson_bot`. The cubic identity gives
-`d * (1 - d * d) = 0`; cancelling this unit gives `d = 0`, hence `e = e'`.
-This is a direct algebraic proof of the cited Stacks statement.
 -/
 theorem eq_of_sub_mem_of_le_jacobson {R : Type u} [CommRing R]
     (J : Ideal R) (hJ : J ≤ Ideal.jacobson (⊥ : Ideal R))

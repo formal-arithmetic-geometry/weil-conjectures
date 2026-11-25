@@ -18,10 +18,22 @@ public import Mathlib.RingTheory.Noetherian.Basic
 /-!
 # Height from homogeneous independence at a rational point
 
-Source: the invariant-derivation argument in Waterhouse, *Introduction to Affine Group
-Schemes*, §11.4, as recorded in `WeilConjectures.RingTheory.HopfAlgebra.Cartier`, and the
-local dimension step of blueprint `lemma-connected-components-images-homomorphisms--3`, clause (2).
-(blueprint: lem-wf-height-of-homogeneous-independence).
+Let `ε : A →ₐ[k] k` be a rational point of a Noetherian `k`-algebra and let `xᵢ ∈ ker ε` span
+`ker ε / (ker ε)²` with no homogeneous relation modulo higher powers. Then the height of `ker ε`
+is the number of the `xᵢ` (`AlgHom.height_ker_eq_card_of_homogeneous_independence`).
+
+## Implementation details
+
+The hypotheses identify the associated graded ring of `ker ε` with the polynomial ring `k[Xᵢ]`.
+After localizing at `ker ε`, the image of `x₁` is a nonzerodivisor whose quotient again has a
+polynomial associated graded ring in one variable fewer, so induction and the dimension drop
+`ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim` give the local dimension.
+The homogeneous independence input comes from the invariant-derivation argument recorded in
+`WeilConjectures.RingTheory.HopfAlgebra.Cartier`.
+
+## References
+
+* [W. C. Waterhouse, *Introduction to Affine Group Schemes*, §11.4]
 -/
 
 @[expose] public section
@@ -103,36 +115,8 @@ private theorem local_dimension_of_homogeneous_independence
     simp
 
 /-- A polynomial associated graded ring has local dimension the number of its variables.
-
-Source: the local dimension step of `lemma-connected-components-images-homomorphisms--3`, clause
-(2), with regularity obtained from the homogeneous independence argument recorded in
-`WeilConjectures.RingTheory.HopfAlgebra.Cartier` (Waterhouse, §11.4).
-
-Proof in words: put `I = ker ε`. The map `ε` is onto, since it is a `k`-algebra map to
-`k`, and identifies `A/I` with `k`. The spanning hypothesis implies, by induction on
-`r` using products of elements of `I`, that every class in `I^r/I^(r+1)` is the value
-of a homogeneous degree-`r` polynomial in the `xᵢ`. Its kernel is zero by the second
-hypothesis. Multiplication respects these maps, so they give an isomorphism of graded
-`k`-algebras from `k[Xᵢ]` to the associated graded algebra of `I`.
-
-Localize at `I`. Every `I^r/I^(r+1)` is annihilated by `I`, hence is a `k`-vector space;
-elements outside `I` act by a nonzero scalar, so localization changes none of these
-quotients. Thus the local ring `A_I` has this same polynomial associated graded algebra.
-Write `n` for the number of variables. The classes of the `xᵢ` generate the maximal
-ideal modulo its square, so Nakayama makes their images generators of the maximal
-ideal. Krull intersection makes this local ring separated for that ideal. If `n=0`,
-Nakayama makes the maximal ideal zero, so the local ring is a field of dimension zero.
-Otherwise choose `x₁`. Every nonzero element has finite adic order, and multiplication
-by `x₁` increases its order by exactly one, because multiplication by `X₁` is injective
-on the polynomial associated graded ring. Thus `x₁` is a nonzerodivisor and
-`(x₁) ∩ m^r = x₁ m^(r-1)` for `r ≥ 1`. This strictness identifies the associated graded
-ring of the quotient by `x₁` with `k[Xᵢ]/(X₁)`, a polynomial ring on `n-1` variables.
-Induction gives dimension `n-1` for this quotient. The dimension-drop theorem for a
-nonzerodivisor in the maximal ideal of a Noetherian local ring gives dimension `n`
-for the local ring. This theorem is
-`ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim` in Mathlib. Finally the
-dimension of `A_I` is the height of `I`, giving the asserted equality.
-(blueprint: lem-wf-height-of-homogeneous-independence). -/
+If the `xᵢ ∈ ker ε` span `ker ε / (ker ε)²` and satisfy no homogeneous relation of degree `r`
+modulo `(ker ε)^(r+1)`, then the height of `ker ε` is the number of the `xᵢ`. -/
 theorem height_ker_eq_card_of_homogeneous_independence
     {k A ι : Type*} [Field k] [CommRing A] [Algebra k A] [IsNoetherianRing A]
     [Fintype ι] (ε : A →ₐ[k] k) (x : ι → A)

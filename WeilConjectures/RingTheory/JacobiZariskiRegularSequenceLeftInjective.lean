@@ -15,9 +15,24 @@ import WeilConjectures.RingTheory.ComposedConormalInjectiveOfIntersection
 /-!
 # Left injectivity in Jacobi–Zariski for a regular-sequence presentation
 
-Source: Stacks Project, More on Algebra, Tag 07D4, the “in particular” clause,
-using Tags 062F and 07CX, and Algebra, Tags 00S1 and 00S2
-(blueprint: lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective).
+If `C` is presented over `B` as a polynomial ring modulo a regular sequence, the left map of the
+Jacobi–Zariski sequence for `A → B → C` is injective.
+
+## Implementation details
+
+For the composed presentation `T` of `C` over `A`, the kernel `ker q` of the coefficient map
+`T.Ring → Q.Ring` satisfies `ker q ∩ T.ker² = ker q * T.ker` by regularity, which injects
+`C ⊗[B] P.Cotangent` into `T.Cotangent`. The composite presentation homomorphism and the
+canonical one need not agree on the whole conormal module, but their difference
+(`Cotangent.map_sub_map`) vanishes on the kernel of the base-changed differential.
+
+## References
+
+* [Stacks, Tag 07D4]
+* [Stacks, Tag 062F]
+* [Stacks, Tag 07CX]
+* [Stacks, Tag 00S1]
+* [Stacks, Tag 00S2]
 -/
 
 @[expose] public section
@@ -70,34 +85,9 @@ private theorem intersection_of_surjective_regular
     exact congrArg e.symm (hlift s)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Tag 07D4, with a regular-sequence presentation (Tag 062F).
-(blueprint: lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective)
-The canonical conormal map carries the kernel of the base-changed differential into
-`H1Cotangent A C`; its restriction is injective. Tensor factors are reversed by symmetry.
-
-Proof:
-1. Take `P = Generators.self A B` and `Q = Generators.ofAlgHom β hβ`.
-The composed presentation `T = Q.comp P` maps surjectively to `Q.Ring` by its
-coefficient map `q`. Its kernel is the extension of `P.ker` and is contained in `T.ker`.
-The image of `T.ker` under `q` is `Q.ker = Ideal.ofList fs`.
-2. Lift the given sequence through `q`. The quotient isomorphism `T.Ring/ker q ≃ Q.Ring`
-transports regularity of `fs` to regularity of the lifted sequence modulo `ker q`.
-Apply lem-weil-pbc-conormal-intersection-regular-quotient to obtain
-`ker q ∩ T.ker² = ker q * T.ker`. The proved private helper
-`intersection_of_surjective_regular` performs this transport.
-3. Apply lem-weil-pbc-composed-conormal-injective-of-intersection. This identifies
-`C ⊗[B] P.Cotangent` with the coefficient ideal modulo its product with `T.ker`,
-and injects it into `T.Cotangent`. The commutative differential square restricts
-this injection to `r : ker (P.cotangentComplex.baseChange C) → T.H1Cotangent`.
-4. Mathlib's presentation equivalence compares `T.H1Cotangent` with `H1Cotangent A C`.
-Compose it with `r`. The composite presentation homomorphism and the canonical
-homomorphism need not agree on the whole conormal module; `Cotangent.map_sub_map`
-expresses their difference through the differential. After base change their difference
-vanishes on its kernel, proving the required ambient formula. Injectivity follows from
-the presentation equivalence, the conormal injection, and `Subtype.ext`.
-Presentation functoriality and the polynomial differential square are Mathlib's
-interfaces for lem-weil-pbc-nl-presentation-h1-functoriality and
-lem-weil-pbc-polynomial-ring-kahler-basis-any-variables. -/
+/-- For a presentation of `C` as `B[x₁, …, xₘ]` modulo a regular sequence, the canonical conormal
+map carries the kernel of the base-changed differential `C ⊗[B] (I/I² → Ω)` of `A[B] → B`
+injectively into `H1Cotangent A C`. Tensor factors are reversed by symmetry. -/
 theorem jacobiZariski_left_injective_of_regularSequence
     (A : Type u) (B : Type v) (C : Type w)
     [CommRing A] [CommRing B] [CommRing C]

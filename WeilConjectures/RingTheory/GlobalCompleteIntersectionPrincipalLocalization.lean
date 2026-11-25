@@ -15,8 +15,19 @@ import Mathlib.RingTheory.Extension.Presentation.Basic
 /-!
 # Principal localization of a global complete intersection
 
-Source: Stacks Project, Algebra, Lemma Tag 00SA (lemma-localize-lci), part (1)
-(blueprint: lem-weil-pbc-global-complete-intersection-principal-localization).
+A principal localization of a global complete intersection over a field is again a global
+complete intersection over that field.
+
+## Implementation details
+
+The presentation is the composite of a presentation of the original algebra with
+`Presentation.localizationAway`, reindexed by `Fin (n + 1)` and `Fin (c + 1)`. For the
+dimension, the localized spectrum is an open subspace of the original one; equidimensionality
+gives dimension `n - c` at any of its points.
+
+## References
+
+* [Stacks, Tag 00SA]
 -/
 
 @[expose] public section
@@ -26,22 +37,7 @@ universe u v
 namespace Algebra
 
 /-- A principal localization of a global complete intersection over a field is a global
-complete intersection over that field.
-
-Source: Stacks Project, Algebra, Lemma Tag 00SA (lemma-localize-lci), part (1)
-(blueprint: lem-weil-pbc-global-complete-intersection-principal-localization).
-
-Proof: If the localization is zero, use the zero-ring clause. Otherwise its source and
-any polynomial quotient presenting the source are nonzero. Transport Mathlib's naive
-presentation of that quotient to `T`, compose it with `Presentation.localizationAway`,
-and reindex the resulting variables and relations by `Fin (n + 1)` and `Fin (c + 1)`.
-Mathlib's composition theorem supplies the kernel calculation and quotient equivalence.
-For the dimension, embed the localized spectrum as an open subspace of the original
-polynomial quotient's spectrum. Its dimension is bounded above by the ambient dimension.
-Choose a point of the nonempty localized spectrum. Equidimensionality gives dimension
-`n - c` at its image, which is bounded above by the dimension of this open neighborhood
-by the infimum defining local dimension. Thus the localization has dimension `n - c`,
-equal to `(n + 1) - (c + 1)`, as required. -/
+complete intersection over that field. -/
 theorem isGlobalCompleteIntersection_localizationAway
     (k : Type u) (T : Type v) [Field k] [CommRing T] [Algebra k T]
     (hT : IsGlobalCompleteIntersection k T) (g : T) :

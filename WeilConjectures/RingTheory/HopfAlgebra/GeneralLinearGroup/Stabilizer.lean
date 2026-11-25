@@ -29,12 +29,6 @@ Examples are stabilizers of subspaces and centralizers of sets of matrices.
   Hopf ideal.
 - `Matrix.GeneralLinearGroup.isHopfIdeal_sup_span_of_forall`: the ideal `I ⊔ span E` of `V(I)` cut
   out by extra equations `E` whose solutions form subgroups is a Hopf ideal.
-
-## Blueprint
-
-- `lemma-stable-subspaces-center--1`, `lemma-stable-subspaces-center--2`: the stabilizer of a
-subspace and the
-  centralizer of a set of matrices are closed subgroup schemes, cut out by linear equations.
 -/
 
 @[expose] public section

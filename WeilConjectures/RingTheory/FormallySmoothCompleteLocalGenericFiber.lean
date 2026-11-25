@@ -23,8 +23,23 @@ import WeilConjectures.RingTheory.FormallySmoothRegularCompleteFiniteFieldRegula
 /-!
 # Geometric regularity of the generic fibre of a complete local domain
 
-Source: Stacks Project, More on Algebra, Proposition 07PM, proof of (4) to (1).
-(blueprint: lem-weil-pbc-formally-smooth-complete-local-generic-fiber)
+The generic fibre of an adically formally smooth map out of a complete local domain is
+geometrically regular.
+
+## Implementation details
+
+Choose a complete regular coefficient subring `A₀ ⊆ A`, finite with the same residue field
+(Stacks 032D), and lift the closed fibre to a formally smooth complete local `A₀`-algebra `C`
+(07NS), so that `B = C ⊗[A₀] A`. Since `K = Frac A` is finite over `K₀ = Frac A₀`, Stacks 0381
+reduces geometric regularity to that of `C ⊗[A₀] K₀`, which is regular by 07NQ, 031E and
+localization. In characteristic `p` one inducts on the degree of a finite purely inseparable
+extension `L/K₀`, handling each degree-`p` step with
+`FormallySmoothRegularCompleteFiniteFieldRegular`.
+
+## References
+
+* [Stacks, Tag 07PM] (proof of (4) ⇒ (1))
+* [Stacks, Tags 032D, 07NS, 0381, 07NQ, 031E]
 -/
 
 @[expose] public section
@@ -56,28 +71,6 @@ private theorem formallySmoothAdic_of_algEquiv
 
 /-- The generic fibre of an adically formally smooth map out of a complete local domain
 is geometrically regular.
-Source: Stacks Project, More on Algebra, Proposition 07PM, proof of (4) to (1),
-after replacing the base by its quotient at a prime.
-(blueprint: lem-weil-pbc-formally-smooth-complete-local-generic-fiber)
-
-Proof: Choose a complete regular coefficient subring A₀ of A, finite with the same residue
-field, by Algebra 032D. Lift the formally smooth closed fibre to a formally smooth complete
-local A₀-algebra C using Remark 07NS, obtaining B = C tensor over A₀ with A. The fraction
-field K of A is finite over K₀ = Frac(A₀), so tensor associativity and Algebra 0381 reduce
-geometric regularity to C tensor over A₀ with K₀. Flatness and regularity of the closed
-fibre (07NQ), regular local ascent (031E), and localization make this ring regular.
-In characteristic zero this suffices. In characteristic p, induct on the degree of a finite
-purely inseparable extension L/K₀. Choose its last degree-p step M[z]/(z^p-f) by Fields
-09HI. A finite A₀-subalgebra A' of M with fraction field M is obtained by multiplying a
-basis by denominators so the basis elements become integral. If f = c/e, replace f by
-e^p f = e^(p-1)c and its root by e times that root, so f lies in A'. Lemma 07PH gives a
-derivation of A' nonzero on f. Base change 07EG preserves formal smoothness; finite-module
-completeness 00MA and 07PL extend this derivation to C tensor A', and localization extends
-it to C tensor M. Its value on f is a unit because its nonzero value in A' becomes
-invertible in M. Lemma 07PG proves regularity of the degree-p extension. Tensor
-associativity identifies this extension with C tensor L, completing the induction.
-Geometric regularity over K₀ now gives it over the finite extension K, using 0381 for
-all finite field extensions of K. Noetherianity follows from localization of B.
 -/
 theorem isGeometricallyRegular_genericFiber_of_formallySmoothAdic
     {A : Type u} {B : Type v} {K : Type u}

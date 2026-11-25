@@ -16,28 +16,27 @@ import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 /-!
 # Finite extension from a stable maximal ideal
 
-Source: Stacks Project, Algebra, Tag 0BHZ, fourth proof paragraph.
+If `x` is a regular element in the maximal ideal `m` of a Noetherian local ring `R` and
+`y ∉ xR` satisfies `y m ⊆ x m`, then `R` has a nontrivial finite extension of the kind in
+Kollár's dichotomy.
+
+## Implementation details
+
+The extension is the subalgebra of `R_x` of elements stabilizing the image of `m`; it contains
+`y/x`, and multiplication by `x` embeds it into the image of `m`, so it is finite. It is lifted to
+`ULift` to land in the requested universe.
+
+## References
+
+* [Stacks, Tag 0BHZ]
 -/
 
 @[expose] public section
 universe u v
 namespace IsLocalRing
-/-- Source: Stacks Project, Algebra, Tag 0BHZ, fourth proof paragraph.
-(blueprint: new-kollar-finite-extension-stable-ideal).
-
-Proof: Let i be the injective localization map R to L = R localized at x.
-Construct S as the subalgebra of elements z of L satisfying z i(m) ⊆ i(m).
-The image i(m) is a finite R-submodule N of L. Since x belongs to m and i(x) is
-invertible in L, multiplication by i(x) gives an injective R-linear map S to N.
-Therefore S is finite as an R-module. The stability hypothesis implies y/x lies
-in S. The map R to S is injective and S is nonzero. It cannot be surjective:
-if y/x = i(r), multiplication by i(x) and injectivity of i give y = xr,
-contradicting y outside xR. By its construction S preserves i(m), so the image
-of m is already an ideal of S and mS lies in the image of R. Thus the kernel
-and cokernel conditions hold for n = 1. Finally i(x) is invertible in L, hence
-x acts injectively on S. An element annihilated by m must be zero, whereas
-zero has annihilator R rather than the proper ideal m. Transport the explicit
-subalgebra to ULift to meet the requested universe. -/
+/-- If `x` is a regular element of the maximal ideal `m` and `y ∉ xR` satisfies `y m ⊆ x m`,
+then there is a finite, nonbijective ring map `R → S` with kernel and cokernel killed by a power
+of `m`, such that `m` is not the annihilator of an element of `S`. -/
 theorem kollar_finite_extension_of_stable_ideal (R : Type u)
     [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
     (x : R) (hx : x ∈ maximalIdeal R) (hr : IsSMulRegular R x)

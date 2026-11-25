@@ -21,8 +21,16 @@ import Mathlib.RingTheory.AdicCompletion.LocalRing
 /-!
 # Maximal local completion maps of a henselization of a G-ring
 
-Source: Stacks Project, More on Algebra, Tag 0AH3.
-(blueprint: lem-weil-pbc-henselization-pair-g-ring-core).
+We prove the Noetherian and maximal-local regularity part of the theorem that the henselization
+of a pair over a G-ring is a G-ring.
+
+## Implementation details
+
+The final application of the maximal-ideal criterion is kept in the parent theorem.
+
+## References
+
+* [Stacks, Tag 0AH3]
 -/
 
 @[expose] public section
@@ -89,12 +97,8 @@ private theorem localization_maximal_residue_comparison
     simpa only [neg_sub] using m.neg_mem (hJm ha)
   exact ⟨hmax, hres⟩
 
-/-- The Noetherian and maximal-local regularity part of the G-ring theorem for a
-henselization of a pair.  It packages the completion comparison, finite separable
-fibres, and geometric-regularity argument of Stacks Project Tag 0AH3; the final
-application of the maximal-ideal criterion is kept in the parent theorem.
-Source: Stacks Project, More on Algebra, Tag 0AH3, proof paragraphs 1--4
-(blueprint: lem-weil-pbc-henselization-pair-g-ring-core).
+/-- The henselization of a pair over a G-ring is Noetherian, and the completion maps of its
+localizations at maximal ideals are regular.
 -/
 theorem henselization_pair_noetherian_and_maximal_regular
     (A : Type u) [CommRing A] (I : Ideal A)

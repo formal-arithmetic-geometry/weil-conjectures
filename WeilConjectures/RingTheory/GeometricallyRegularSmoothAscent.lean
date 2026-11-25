@@ -14,8 +14,19 @@ import WeilConjectures.RingTheory.RegularRingSmoothAscent
 /-!
 # Geometric regularity ascends along smooth algebra maps
 
-Source: Stacks Project, Algebra, Lemma 07QF
-(blueprint: lem-weil-pbc-geometrically-regular-smooth-ascent).
+If `A → B` is a smooth map of algebras over a field `k` and `A` is Noetherian and
+geometrically regular over `k`, then so is `B`.
+
+## Implementation details
+
+For a finite purely inseparable extension `k'/k`, the base change `k' ⊗[k] A → k' ⊗[k] B` is
+smooth, and regularity ascends along smooth maps.
+
+## References
+
+* [Stacks, Tag 07QF]
+* [Stacks, Tag 00T4]
+* [Stacks, Tag 07NF]
 -/
 
 @[expose] public section
@@ -24,25 +35,7 @@ universe u v w
 
 namespace Algebra
 
-/-- Smooth maps of algebras over a field preserve Noetherianity and geometric regularity.
-Source: Stacks Project, Algebra, Lemma 07QF
-(blueprint: lem-weil-pbc-geometrically-regular-smooth-ascent).
-
-Proof:
-1. Smoothness gives finite presentation, hence finite type. Since A is Noetherian, B is
-   Noetherian by lem-weil-pbc-finite-type-algebra-noetherian (Stacks 00FN).
-2. For any finite purely inseparable extension k'/k, geometric regularity of A says that
-   k' ⊗[k] A is regular, by theorem-finite-etale-covers-proper-henselian--2 (Stacks 0381, condition
-   (2)).
-3. Base change of the smooth map gives a smooth map from k' ⊗[k] A to k' ⊗[k] B, using
-   lem-weil-pbc-smooth-ring-map-base-change-composition (Stacks 00T4) and
-   lem-weil-pbc-tensor-cancel-base-change. Transport smoothness across the tensor-product
-   identification using Algebra.Smooth.of_equiv.
-4. Regularity ascends along this smooth map, by lem-weil-pbc-regular-ring-smooth-ascent
-   (Stacks 07NF), so k' ⊗[k] B is regular.
-5. Together with step 1, this is geometric regularity of B by
-theorem-finite-etale-covers-proper-henselian--2.
--/
+/-- Smooth maps of algebras over a field preserve Noetherianity and geometric regularity. -/
 theorem isGeometricallyRegular_of_smooth
     {k : Type u} {A : Type v} {B : Type w}
     [Field k] [CommRing A] [CommRing B] [Algebra k A] [Algebra k B]

@@ -15,8 +15,18 @@ import Mathlib.RingTheory.Nakayama
 /-!
 # Homogeneous independence survives localization at a rational point
 
-Source: blueprint `lem-wf-height-of-homogeneous-independence`, steps 1 to 3, in the
-local dimension argument of `lemma-connected-components-images-homomorphisms--3`, clause (2).
+If elements `xᵢ` of the kernel `I` of a `k`-rational point `ε` of a Noetherian `k`-algebra span
+`I/I²` and are homogeneously independent modulo the powers of `I`, the same holds for their
+images in the localization at `I`.
+
+## Implementation details
+
+No finite-type hypothesis on `A` over `k` is needed; Noetherianity supplies the finite
+generation used in Nakayama's lemma.
+
+## References
+
+* [Waterhouse, *Introduction to Affine Group Schemes*, §11.4]
 -/
 
 @[expose] public section
@@ -25,21 +35,11 @@ open MvPolynomial
 
 namespace AlgHom
 
-/-- Source: blueprint `lem-wf-height-of-homogeneous-independence`, steps 1 to 3,
-following Waterhouse, *Introduction to Affine Group Schemes*, §11.4.
-
-Proof in words: put I=ker ε, which is maximal since ε is onto. Its extension to R=A_I
-is the maximal ideal m. A fraction a/s has residue ε(a)/ε(s), so every residue
-class is represented by k. The spanning congruence extends to m modulo m^2: write an
-element as a/s with a in I and s outside I, and divide its coefficients by ε(s).
-Nakayama, applied to the finite ideal m, shows that the images of x_i generate m.
-For independence, if f(x)/1 belongs to m^(r+1), clearing denominators gives
-s f(x) in I^(r+1), with s outside I. Since s-ε(s) belongs to I, and f(x) belongs
-to I^r by homogeneity, ε(s)f(x) lies in I^(r+1). The scalar ε(s) is nonzero and
-invertible, so f(x) lies in I^(r+1). The original independence hypothesis gives f=0.
-No finite-type hypothesis on A over k is needed; Noetherianity supplies finite
-generation for Nakayama. The empty-index case gives m=0 by the same argument.
-(blueprint: lem-wf-homogeneous-independence-localization). -/
+/-- Let `ε : A → k` be a `k`-rational point of a Noetherian `k`-algebra with kernel `I`, and let
+`R = A_I`. If `xᵢ ∈ I` span `I/I²` and no nonzero homogeneous polynomial of degree `r` takes
+a value in `I^(r+1)` at `x`, then every element of `R` is congruent to a scalar modulo `IR`,
+the images of `xᵢ` generate `IR`, and they are homogeneously independent modulo the powers
+of `IR`. -/
 theorem homogeneous_independence_localization
     {k A R ι : Type*} [Field k] [CommRing A] [Algebra k A] [IsNoetherianRing A]
     [CommRing R] [Algebra A R] [Algebra k R] [IsScalarTower k A R]

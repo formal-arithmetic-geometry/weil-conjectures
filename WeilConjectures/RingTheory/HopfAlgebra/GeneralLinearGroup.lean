@@ -37,11 +37,6 @@ so the coordinate ring represents the group functor `R ↦ GL n R`
   structure maps.
 - `Matrix.GeneralLinearGroup.algHomMulEquiv`: `k`-algebra homomorphisms out of the coordinate ring,
   with the convolution product, are the invertible matrices.
-
-## Blueprint
-
-- `det-d-geometry`: the ambient group `GL(V)` of the algebraic groups block, given by its
-  Hopf algebra of coordinates.
 -/
 
 @[expose] public section
@@ -57,8 +52,7 @@ noncomputable abbrev genericMatrix : Matrix n n (MvPolynomial (n × n) k) :=
   Matrix.mvPolynomialX n n k
 
 /-- The coordinate ring `k[x_ij, det⁻¹]` of the general linear group `GL_n` over `k`: the
-polynomial ring in the matrix entries, localized away from the determinant.
-(blueprint: `det-d-geometry`) -/
+polynomial ring in the matrix entries, localized away from the determinant. -/
 abbrev CoordinateRing :=
   Localization.Away (genericMatrix n k).det
 
@@ -219,8 +213,7 @@ theorem mul_antipodeAlgHom_lTensor_comulAlgHom :
     Bialgebra.counitAlgHom_apply, counit_coord]
   simp [Matrix.one_apply]
 
-/-- The coordinate ring of `GL_n` is a commutative Hopf algebra over `k`.
-(blueprint: `det-d-geometry`) -/
+/-- The coordinate ring of `GL_n` is a commutative Hopf algebra over `k`. -/
 noncomputable instance : HopfAlgebra k (CoordinateRing n k) :=
   HopfAlgebra.ofAlgHom (antipodeAlgHom n k) (mul_antipodeAlgHom_rTensor_comulAlgHom n k)
     (mul_antipodeAlgHom_lTensor_comulAlgHom n k)

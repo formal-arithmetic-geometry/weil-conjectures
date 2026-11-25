@@ -31,12 +31,6 @@ The determinant `GL n k → GL 1 k` is regular.
   polynomials is regular.
 - `Matrix.GeneralLinearGroup.exists_algHom_comp_eq_evalAlgHom_detGL`: the determinant is given
   by polynomials.
-
-## Blueprint
-
-- `proposition-central-element-arithmetic-monodromy-group--2`: the regularity of the
-  induced actions, and the closure argument.
-- `definition-determinant-weight--1`: the determinant.
 -/
 
 @[expose] public section
@@ -47,8 +41,7 @@ variable {n m : Type*} [Fintype n] [DecidableEq n] [Fintype m] [DecidableEq m] {
   [Field k]
 
 /-- A homomorphism `R : S →* GL m k` on a subgroup `S ≤ GL n k` is *regular* if every regular
-function `f` on `GL_m` pulls back to the restriction to `S` of a regular function on `GL_n`.
-(blueprint: `proposition-central-element-arithmetic-monodromy-group--2`) -/
+function `f` on `GL_m` pulls back to the restriction to `S` of a regular function on `GL_n`. -/
 def IsRegularOn (S : Subgroup (GL n k)) (R : S →* GL m k) : Prop :=
   ∀ f : CoordinateRing m k, ∃ F : CoordinateRing n k,
     ∀ s : S, evalAlgHom (R s) f = evalAlgHom (s : GL n k) F
@@ -81,8 +74,7 @@ theorem IsRegularOn.of_le {S T : Subgroup (GL n k)} (h : S ≤ T) {R : T →* GL
 /-! ### The determinant -/
 
 variable (n) in
-/-- The determinant `GL n R →* GL 1 R`, `g ↦ (det g)`. (blueprint:
-`definition-determinant-weight--1`) -/
+/-- The determinant `GL n R →* GL 1 R`, `g ↦ (det g)`. -/
 noncomputable def detGL (R : Type*) [CommRing R] : GL n R →* GL (Fin 1) R :=
   (scalar (Fin 1)).comp det
 
@@ -98,7 +90,7 @@ theorem map_detGL {R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) (g : G
     exact RingHom.map_det f _)
 
 /-- The determinant is given by polynomials: evaluation at `det g` is evaluation at `g` composed
-with an algebra map of coordinate rings. (blueprint: `definition-determinant-weight--1`) -/
+with an algebra map of coordinate rings. -/
 theorem exists_algHom_comp_eq_evalAlgHom_detGL :
     ∃ φ : CoordinateRing (Fin 1) k →ₐ[k] CoordinateRing n k,
       ∀ g : GL n k, (evalAlgHom g).comp φ = evalAlgHom (detGL n k g) := by

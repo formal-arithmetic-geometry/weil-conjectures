@@ -11,16 +11,28 @@ public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.Ideal.Height
 import WeilConjectures.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight
 
+/-!
+# Associated primes of fractional principal quotients
+
+For a Noetherian normal domain `A` and a nonzero `y` in its fraction field, every associated
+prime of `A ⧸ (A ∩ yA)` has height one.
+
+## Implementation details
+
+Writing `y = a / b`, the quotient by `A ∩ yA` embeds into `A ⧸ (a)`, and the result follows from
+the height theorem for principal quotients of normal domains.
+
+## References
+
+* [Stacks, Tag 031T] (clause (3))
+-/
+
 @[expose] public section
 universe u v
 namespace Ideal
 
-/-- Height-one part of the fractional principal quotient associated-prime argument.
-Source: Stacks Project, Algebra, Lemma 10.157.6, Tag 031T, clause (3).
-(blueprint: lem-weil-pbc-normal-domain-fractional-principal-quotient-ass-height)
-The proof writes a nonzero fraction as `a / b`, embeds the quotient by `A ∩ yA`
-into the principal quotient by `a`, and applies the normal-domain principal quotient
-height theorem. -/
+/-- For a Noetherian normal domain `A` with fraction field `K` and `y ≠ 0` in `K`, every
+associated prime of `A ⧸ (A ∩ yA)` has height one. -/
 theorem associatedPrimes_fractionalPrincipalQuotient_height
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A] [IsIntegrallyClosed A]
     (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] (y : K) (hy : y ≠ 0) :

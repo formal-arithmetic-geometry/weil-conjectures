@@ -15,7 +15,19 @@ import Mathlib.Algebra.Algebra.Pi
 import Mathlib.Data.Fin.Tuple.Basic
 
 /-! # Ind-smoothness under finite product decompositions
-Source: Stacks Project, Smoothing Ring Maps, Tag 07F3 and the proof of Tag 07F5.
+
+If compatible finite product decompositions `R ≃ ∏ Kᵢ` and `A ≃ ∏ Bᵢ` are given and each `Bᵢ` is
+ind-smooth over `Kᵢ`, then `A` is ind-smooth over `R`.
+
+## Implementation details
+
+The proof is by induction on the number of factors, using the binary case
+`Algebra.ind_smooth_prod` and transport of ind-smoothness along ring isomorphisms.
+
+## References
+
+* [Stacks, Tag 07F3]
+* [Stacks, Tag 07F5]
 -/
 
 @[expose] public section
@@ -112,20 +124,8 @@ private theorem ind_smooth_pi (n : ℕ) :
     exact ind_smooth_transport (piSuccRingEquiv K) (piSuccRingEquiv B)
       (fun _ ↦ rfl) hp
 
-/-- Compatible finite product decompositions of the base and target glue ind-smoothness.
-Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07F3, iterated as in the proof of
-Lemma Tag 07F5 (third paragraph).
-(blueprint: lem-weil-pbc-ind-smooth-finite-product-transport).
-
-Proof: For zero factors both products are zero rings and their structure map is an
-isomorphism, hence smooth and ind-smooth. For a successor number of factors, separate
-factor zero from the remaining factors, apply induction to the latter, and apply
-Algebra.ind_smooth_prod to this binary product. The canonical splitting maps commute
-with the componentwise structure maps. Restriction of scalars along a base ring
-isomorphism is an equivalence of categories of commutative algebras; it preserves
-colimits and takes smooth algebras to smooth algebras, since isomorphisms and composites
-of smooth ring maps are smooth. Apply this to the splitting isomorphisms and then to
-the given compatible base and target isomorphisms. All diagrams retain their universe. -/
+/-- Compatible finite product decompositions `R ≃ ∏ Kᵢ` and `A ≃ ∏ Bᵢ` glue ind-smoothness:
+if each `Bᵢ` is ind-smooth over `Kᵢ`, then `A` is ind-smooth over `R`. -/
 theorem Algebra.ind_smooth_of_finite_product
     (R : Type u) (A : Type (max u v)) [CommRing R] [CommRing A] [Algebra R A]
     (n : ℕ) (K : Fin n → Type u) (B : Fin n → Type (max u v))

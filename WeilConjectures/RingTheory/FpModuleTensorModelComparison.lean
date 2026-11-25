@@ -16,8 +16,21 @@ import WeilConjectures.RingTheory.CompatibleModuleModelDescent
 
 /-! # Comparing a finite-presentation module model with prescribed stages
 
-Source: Stacks Project, Algebra, Tag 02JO (3), final paragraph.
-(blueprint: lem-pc-fp-module-tensor-model-comparison)
+A finitely presented model `(P, Q, L)` of an algebra map `A → B` and a finitely presented
+`B`-module `M`, given over the colimit of a directed system of rings, agrees with the prescribed
+stages `F_j ⊗ A` and `F_j ⊗ A ⊗[A] M` for all sufficiently large `j`.
+
+## Implementation details
+
+After restricting to the tail above `i`, finite presentation of `P` and `Q` factors their maps
+into the colimit through some stage. The resulting comparison `A_j ⊗[P] Q → B_j` and the module
+comparison become isomorphisms at a late stage, since isomorphisms between finitely presented
+algebras and modules descend (Tags 05N9, 05N7). No flatness is used.
+
+## References
+
+* [Stacks, Tag 02JO] ((3), final paragraph)
+* [Stacks, Tags 00QO, 05N9, 05N7]
 -/
 
 @[expose] public section
@@ -29,37 +42,9 @@ open scoped TensorProduct
 
 namespace AlgebraicGeometry
 
-/-- A finitely presented algebra and module model agrees with all sufficiently late stages.
-No flatness of the model or of the limit is assumed.
-
-Source: Stacks Project, Algebra, Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7.
-(blueprint: lem-pc-fp-module-tensor-model-comparison)
-
-Proof:
-1. Restrict to the cofinal tail above i. If needed, pass to its poset reflection:
-   indices mutually below each other have inverse transition maps, so the diagram
-   descends up to these canonical isomorphisms, with the same colimit. A stage in
-   the reflection is represented by an original index; transport its comparisons
-   back and extend them to all later original indices. Tensor products commute
-   with the ring colimit, giving the A, B and compatible module colimits.
-2. Finite presentation of P over the integers factors its map into the limit A algebra
-   through one A stage. Above that stage regard all A stages as P-algebras.
-3. The right inclusion followed by e gives a P-algebra map Q into the limit B algebra.
-   Finite presentation of Q factors it through a B stage. Tensoring gives the comparison
-   A_j tensor_P Q to B_j, compatible with the A_j-action by the left-inclusion identity.
-4. The comparison is an isomorphism at the limit. Both algebras are finitely presented
-   over A_j. Descend its inverse by Tag 05N9 (2) and descend both inverse identities
-   by Tag 05N9 (3), taking a common later stage. Every later comparison is an isomorphism.
-5. At that stage the model L and the prescribed M give two finitely presented modules
-   over B_j. The specified limit linear equivalence identifies their limit base changes.
-   Descend it and its inverse by Tag 05N7, then descend both inverse identities on finite
-   generators. At a common later stage the descended maps are mutually inverse.
-6. Extend these isomorphisms to every later stage. Tensor associativity and the algebra
-   comparison identify B_j tensor_Q L with A_j tensor_P L and the prescribed base-change
-   module with A_j tensor_A M. Restrict scalars to A_j to obtain the displayed equivalence.
-   No flatness enters any step. Zero modules, zero rings, and empty presentations are
-   allowed; a common upper bound is used for every finite collection of indices.
--/
+/-- A finitely presented algebra and module model agrees with all sufficiently late stages: for
+all large `j`, writing `A_j = F_j ⊗ A`, there is an `A_j`-linear equivalence
+`A_j ⊗[P] L ≃ A_j ⊗[A] M`. No flatness of the model or of the limit is assumed. -/
 theorem exists_eventually_tensor_model_equiv
     {I : Type v} [Preorder I] [IsDirectedOrder I]
     (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)
