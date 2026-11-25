@@ -21,7 +21,6 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-set_option linter.style.haveILetI false
 
 /- The two interfaces below isolate the geometric localization and algebraic
   extension-class descent parts of the support induction argument. -/

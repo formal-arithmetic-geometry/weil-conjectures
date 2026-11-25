@@ -428,7 +428,6 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFu
   canonicalPullbackAdjunction affineGlobalSectionsDerivedIso
 
 -- Profiling found expensive linting of the fixed, nondependent forall binders.
-set_option linter.all false in
 set_option cleanup.letToHave false in
 -- The sections and exact-restriction comparisons require unfolding scalar actions.
 /-- The path through the square mate and the comparisons r,d, evaluated on the
@@ -463,9 +462,9 @@ theorem affineSections_square_mate_path_unit
         A₀ ≅ S₀)
     (b : RF ⋙
         A ≅ S)
-    (ht : ∀ (M : SheafOfModules.{u} (moduleRings (X).toRingedSpace))
+    (_ht : ∀ (M : SheafOfModules.{u} (moduleRings (X).toRingedSpace))
         (x : (S₀).obj M), (t.hom.app M) x = x)
-    (hb : ∀ J : HomotopyCategory
+    (_hb : ∀ J : HomotopyCategory
         (SheafOfModules.{u} (moduleRings (X).toRingedSpace)) (ComplexShape.up ℤ),
       (Functor.rightDerivedFunctorCompUnit
           (F₀)
@@ -480,9 +479,9 @@ theorem affineSections_square_mate_path_unit
         B₀ ≅ T₀)
     (d : Q ⋙
         D ≅ T)
-    (hz : ∀ (M : SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace))
+    (_hz : ∀ (M : SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace))
         (x : (T₀).obj M), (z.hom.app M) x = x)
-    (hd : ∀ J : HomotopyCategory
+    (_hd : ∀ J : HomotopyCategory
         (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) (ComplexShape.up ℤ),
       (Functor.rightDerivedFunctorCompUnit
           (Q₀)
@@ -501,9 +500,9 @@ theorem affineSections_square_mate_path_unit
     (r : RG ⋙ A ≅
       D ⋙
         (ρ₀).mapDerivedCategory)
-    (hv : ∀ (M : SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace))
+    (_hv : ∀ (M : SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace))
         (x : (B₀).obj M), (v.hom.app M) x = x)
-    (hr : ∀ J : HomotopyCategory
+    (_hr : ∀ J : HomotopyCategory
         (SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace)) (ComplexShape.up ℤ),
       (Functor.rightDerivedFunctorCompUnit
           (G₀)
@@ -524,7 +523,7 @@ theorem affineSections_square_mate_path_unit
         S₀ ≅
       T₀ ⋙
         ρ₀)
-    (hs : ∀ (F : SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace))
+    (_hs : ∀ (F : SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace))
         (x : (T₀).obj F),
       (s.hom.app F) x = x)
     (J : HomotopyCategory

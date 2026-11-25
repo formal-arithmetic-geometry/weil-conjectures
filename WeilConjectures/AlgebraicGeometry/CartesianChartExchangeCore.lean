@@ -18,7 +18,6 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency true
-set_option linter.unusedSimpArgs false
 set_option linter.privateModule false
 
 variable (A : Type (u + 2)) [Category.{u + 1} A]
@@ -37,10 +36,9 @@ private lemma single_source {S Y Z : Scheme.{u}} (a : Z ⟶ Y) (h : Y ⟶ S)
         ((((h)^*[A]).mapDerivedCategoryPlusSingleFunctor 0).hom.app M) := by
   apply (cancel_epi
     ((((h')^*[A]).mapDerivedCategoryPlusSingleFunctor 0).hom.app M)).1
-  simp only [Category.assoc, Iso.hom_inv_id_app, Iso.hom_inv_id_app_assoc, Category.comp_id]
+  simp only [Iso.hom_inv_id_app_assoc]
   rw [← reassoc_of% (comp_single A a h h' w M)]
-  simp only [Functor.comp_obj, Category.assoc, Iso.hom_inv_id_app, Iso.hom_inv_id_app_assoc,
-    Category.comp_id]
+  simp only [Functor.comp_obj, Iso.hom_inv_id_app, Category.comp_id]
 
 private lemma single_restriction {S Y Z : Scheme.{u}} (a : Z ⟶ Y) (h : Y ⟶ S)
     (h' : Z ⟶ S) (w : h' = a ≫ h)
@@ -85,12 +83,11 @@ private lemma square_comp {B T T' Z Z' : Scheme.{u}}
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   apply (cancel_epi
     ((upperStarCompDerivedPlus A p' a' s' hs').hom.app M)).1
-  simp only [Category.assoc, Iso.hom_inv_id_app, Iso.hom_inv_id_app_assoc, Category.comp_id]
+  simp only [Iso.hom_inv_id_app_assoc]
   rw [reassoc_of% h₂]
-  simp only [Functor.comp_obj, Category.assoc, Iso.hom_inv_id_app, Iso.hom_inv_id_app_assoc,
-    Category.comp_id]
+  simp only [Functor.comp_obj, Iso.hom_inv_id_app_assoc]
   rw [← reassoc_of% h₁]
-  simp only [← Functor.map_comp, ← Functor.map_comp_assoc,
+  simp only [← Functor.map_comp,
     Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.comp_id]
 
 end AlgebraicGeometry.Etale

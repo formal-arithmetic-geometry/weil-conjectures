@@ -56,16 +56,14 @@ private theorem ideal_map_eq_zero_of_generic_stalk (Z : Scheme.{w}) [IsIntegral 
   ext U s
   exact hsec U s
 
--- Keep the existing signature; the shorter proof does not need coherence.
-set_option linter.unusedVariables false in
 /-- A map in the integral lattice construction is injective once it is generically an
 isomorphism.  This is the coordinatewise generic-stalk argument of Stacks, Tag 01YE. -/
 theorem mono_of_coherent_ideal_sum_generic_iso (Z : Scheme.{w}) [IsNoetherian Z]
-    [IsIntegral Z] (G : Z.Modules) (hG : RingedSpace.IsCoherent Z.toRingedSpace G)
+    [IsIntegral Z] (G : Z.Modules) (_hG : RingedSpace.IsCoherent Z.toRingedSpace G)
     (r : ℕ) (I : Z.IdealSheafData)
     (χ : (∐ fun _ : Fin r => I.toModules) ⟶ G)
-    (hI : RingedSpace.IsCoherent Z.toRingedSpace I.toModules)
-    (hSum : RingedSpace.IsCoherent Z.toRingedSpace (∐ fun _ : Fin r => I.toModules))
+    (_hI : RingedSpace.IsCoherent Z.toRingedSpace I.toModules)
+    (_hSum : RingedSpace.IsCoherent Z.toRingedSpace (∐ fun _ : Fin r => I.toModules))
     (hχ : IsIso ((RingedSpace.moduleStalkFunctor Z.toRingedSpace (genericPoint Z)).map χ)) :
     Mono χ := by
   -- The ideal embeds in the structure sheaf, so no coherence argument is needed.

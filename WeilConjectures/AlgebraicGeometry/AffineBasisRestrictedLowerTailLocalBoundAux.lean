@@ -25,21 +25,19 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 set_option autoImplicit false
 namespace AlgebraicGeometry
 
--- Keep the original hypotheses hV and hq, although the proof works without them.
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency.types true in
 -- Comparing the transported injective resolution and its section complexes needs extra elaboration.
 /-- Local vanishing on each affine open; this is the cohomological core of the
 restricted lower-tail bound (Stacks, Tags 0D64, 01E1 and 03FD). -/
 theorem affineBasisRestrictedLowerTail_local_vanishing
-    (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
+    (X : Scheme.{u}) (V : X.Opens) (_hV : IsAffineOpen V)
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wV} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]
     (F : CochainComplex X.Modules ℤ)
     (hhomology : ∀ (W : X.Opens), IsAffineOpen W → W ≤ V → ∀ (n : ℤ) (q : ℕ),
       Subsingleton (((F.homology n).restrict W.ι).H (q + 1)))
     (a : ℤ) (U : Opens V.toScheme) (hU : IsAffineOpen U) (p : ℕ) (hp : 0 < p)
-    (q : ℤ) (hq : q < 0) :
+    (q : ℤ) (_hq : q < 0) :
     IsZero ((RingedSpace.openModuleCohomology V.toScheme.toRingedSpace p U).obj
       ((DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) q).obj

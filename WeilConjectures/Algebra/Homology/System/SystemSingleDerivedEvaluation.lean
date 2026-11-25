@@ -22,7 +22,6 @@ public import WeilConjectures.Algebra.Homology.System.SystemDerivedTransition
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 universe u v w
@@ -42,6 +41,7 @@ def systemSingleIdentityFactors :
       (𝟭 (systemLevel B n)).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
   Iso.refl _
 
+omit [EssentiallySmall.{w} C] in
 /-- The singleton comparison's right square is the localized actual transition. -/
 theorem systemSingleDerivedSquare_rep (K : CochainComplex (StrictRingSystem B) ℤ) :
     ((Functor.rightUnitor (derivedSystemEvaluation B n)).hom ≫

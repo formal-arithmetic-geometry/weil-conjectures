@@ -46,12 +46,11 @@ private theorem product_zero_of_epi {X : Scheme.{u}} {J F G : X.Modules}
   apply (cancel_epi (factorThruImage b)).1
   simpa only [image.fac, comp_zero] using hb
 
-set_option linter.unusedVariables false in
 /-- Cokernel part of the reduction torsion bound (Stacks, Tag 0888). -/
 theorem coherentMap_reduction_torsion_coker
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (F H : CoherentModules X) (a : F ⟶ H) (t : ℕ) (ht : 1 ≤ t)
-    (hker : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
+    (_hker : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
       (kernel a.hom)))
     (hcoker : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
       (cokernel a.hom))) :

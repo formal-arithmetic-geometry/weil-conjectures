@@ -118,8 +118,6 @@ def affineDerivedExtensionAdjunction {R B : CommRingCat.{u}} (g : Spec B ⟶ Spe
   exact (ModuleCat.extendRestrictScalarsAdj ρ).derivedAdjunction.ofNatIsoRight
     (ModuleCat.restrictScalars.{u} ρ).rightDerivedFunctorIsoMapDerivedCategory
 
-set_option linter.unusedSectionVars false in
--- Preserve the original derived-category instances in the theorem signature.
 /-- Derived extension of scalars, chosen from its adjunction with restriction (Stacks, Tag 0AA7). -/
 theorem exists_affineDerivedExtension {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R) :
     ∃ E : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B),
@@ -198,7 +196,7 @@ theorem canonicalPullbackAdjunction_homEquiv_symm_original
   rw [canonicalPullbackAdjunction_eq_original_transport]
   exact Adjunction.homEquiv_ofNatIsoLeft_symm_apply _ _ f
 
-set_option linter.unusedSectionVars false in
+omit [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)] in
 /-- Existence of tensor/internal-Hom adjunctions with the normalized evaluation counit.
 The inverse Hom equivalences satisfy the shared K-flat representative equation: the
 chain evaluation is specified on every summand using the recorded sheaf tensor-Hom

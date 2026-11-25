@@ -44,7 +44,6 @@ section-normalized comparisons are reused, including their quotient transitions.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 2048
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
@@ -924,6 +923,7 @@ private theorem transportArrow
   rw [reassoc_of% hn, ← Q.map_comp_assoc, ← s.map_comp, Iso.inv_hom_id]
   erw [s.map_id, Q.map_id, Category.id_comp]
 
+omit [IsOpenImmersion j] [IsOpenImmersion j'] in
 private theorem restrictionSquare (sq : OpenImmersionSquare v j' j g)
     (Y : DerivedCategory (exchangeTowers T (d.completedRing T))) :
     (exchangeTowerRes d U').map

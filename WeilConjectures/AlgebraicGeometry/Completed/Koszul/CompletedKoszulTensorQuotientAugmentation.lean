@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulTensorQ
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedVariables false
 universe t
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 namespace AlgebraicGeometry.Scheme
@@ -36,7 +35,7 @@ theorem completedKoszulTensorQuotientAugmentation
         completedAdicKoszulTensorUnit T d r a P n ≫
           (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (β.app P)).app (op n) =
             completedQuotientTensorUnit T d P n) ∧
-      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (hq : q ≠ 0),
+      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (_hq : q ≠ 0),
         completedKoszulTensorSummand T d r a P n p q ≫
             ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
               (β.app P)).app (op n)).f (p + q) = 0) := by

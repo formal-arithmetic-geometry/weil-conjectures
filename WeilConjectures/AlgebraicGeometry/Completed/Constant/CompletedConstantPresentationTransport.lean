@@ -388,8 +388,6 @@ structure CompletedConstantPresentationData
               (completedCechTopology T) A d.ideal true).app
                 (equivalence.functor.obj (Q.obj C))
 
--- Keep the fixed derived-category structures inlined at the published interfaces.
-set_option linter.style.haveILetI false in
 /-- The coefficient equivalence preserves the two completion objects and their specified units.
 The Koszul clause uses an actual list generating the adic ideal. -/
 theorem completed_constant_presentation_transport
@@ -397,10 +395,10 @@ theorem completed_constant_presentation_transport
     Nonempty (CompletedConstantPresentationData T d) := by
   classical
   let B := ConstantCompletion.coefficients (completedCechTopology T) A d.ideal true
-  letI := reductionModulesHasDerivedCategory T (d.completedRing T)
-  letI := reductionTowerHasDerivedCategory T (reductionModuleRing T (d.completedRing T))
-  letI := HasDerivedCategory.standard (ConstantCompletion.Mod B)
-  letI := HasDerivedCategory.standard (ℕᵒᵖ ⥤ ConstantCompletion.Mod B)
+  let := reductionModulesHasDerivedCategory T (d.completedRing T)
+  let := reductionTowerHasDerivedCategory T (reductionModuleRing T (d.completedRing T))
+  let := HasDerivedCategory.standard (ConstantCompletion.Mod B)
+  let := HasDerivedCategory.standard (ℕᵒᵖ ⥤ ConstantCompletion.Mod B)
   obtain ⟨β, hβ, E, hE, ⟨δ⟩, eL, hu⟩ := completed_constant_coefficient_equivalence T d
   let := hE
   let Rb := ConstantCompletion.res β.inv
