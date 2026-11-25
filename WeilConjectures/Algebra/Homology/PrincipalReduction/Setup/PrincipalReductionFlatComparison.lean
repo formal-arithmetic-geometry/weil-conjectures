@@ -76,6 +76,8 @@ private theorem c_isIso_on_kFlat (K : CochainComplex (ModuleCat.{r} R) ℤ)
   unfold c
   infer_instance
 
+omit [HasDerivedCategory (ringedSiteModules (derivedChangeRingIndependentCoefficients J D.O))]
+    [HasDerivedCategory (ringedSiteModules (derivedChangeRingIndependentCoefficients J D.S))] in
 private theorem c_isIso_on_regular [IsDomain R] (ht : D.t ≠ 0)
     (K : CochainComplex (ModuleCat.{r} R) ℤ)
     (hK : ∀ i : ℤ, Function.Injective (fun x : K.X i ↦ D.t • x)) :

@@ -572,6 +572,9 @@ private theorem dualBasis_eval
 attribute [local irreducible] dualBasis
 
 omit [UnivLE.{max uC vC, u}] hSliceSheafify
+  [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+  [HasWeakSheafify J AddCommGrpCat.{u}]
+  [∀ X : C, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
   [∀ X : C, (J.over X).HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 private theorem dualBasis_bijective
     {R : Sheaf J CommRingCat.{u}}

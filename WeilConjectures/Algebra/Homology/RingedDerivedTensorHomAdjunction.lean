@@ -949,7 +949,8 @@ private theorem closedStructure_representatives
     (representativeFunctor.{c, v, u, w} J R) (representativeW.{c, v, u} J R)
     (representativeHomIso.{c, v, u, w} J R) (op P, (op L, M)) ξ
 
-omit [HasDerivedCategory.{w} (Modules.{c, v, u} J R)] in
+-- Omitting the unused `HasDerivedCategory.{w}` drops universe `w`, which callers pass explicitly.
+set_option linter.unusedSectionVars false in
 private theorem chainEquiv_symm_pure
     (P L M : CochainComplex (Modules.{c, v, u} J R) ℤ)
     (φ : P ⟶ homComplex (R := R) L M)
