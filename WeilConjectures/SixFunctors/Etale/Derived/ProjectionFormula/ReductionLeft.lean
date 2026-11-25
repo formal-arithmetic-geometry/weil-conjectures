@@ -21,8 +21,8 @@ projection map (`AlgebraicGeometry.Etale.projectionMapOfCompactification_assoc`)
 being invertible for the dualizable `N_Y`.
 
 For `N = (Λ/J)` constant this moves the reduction of the coefficients from the second variable
-of the projection map, where it is in the blueprint (`sk-prop-sf-pf-reduction`), to the first
-one, where the object becomes torsion and proper base change applies.
+of the projection map to the first one, where the object becomes torsion and proper base change
+applies.
 
 ## Main statements
 

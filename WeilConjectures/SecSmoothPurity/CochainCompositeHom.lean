@@ -16,11 +16,16 @@ import all WeilConjectures.SecSmoothPurity.CochainModuleAdjunction
 import all WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
 /-! # Normalized scalar-extension comparison for a composite
 
-Source: Stacks Project, Modules on Sites, Tags 03EL and 0D6D.
-(auxiliary; not a blueprint node).
+Scalar extension commutes with composition of geometric inverse images.
+
+## Implementation details
 
 The comparison is recovered from the two explicit Hom adjunctions. Its value on
 scalar-insertion generators determines it and gives its naturality.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03DA, 03EL and 0D6D
 -/
 
 @[expose] public section
@@ -32,15 +37,13 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
-/-- Module sheaves, using Mathlib's category verbatim.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+/-- Module sheaves, using Mathlib's category verbatim. -/
 private abbrev Modules {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
     (R : Sheaf J CommRingCat.{w}) :=
   ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
 
-/-- Underlying sheaves of sets of module sheaves.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+/-- Underlying sheaves of sets of module sheaves. -/
 private noncomputable abbrev underlying {C : Type uC} [Category.{vC} C]
     {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
@@ -640,15 +643,7 @@ private theorem normalizedComposite_exists (f : RingedPullback R S)
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Scalar extension commutes with composition of geometric inverse images,
-with the isomorphism fixed on the scalar-insertion generators.
-Source: Stacks Project, Modules on Sites, Tags 03EL and 0D6D.
-(auxiliary; not a blueprint node).
-Proof: transpose linear maps through each underlying adjunction and through
-scalar extension. The composed Hom equivalence agrees with that of the composite
-on insertion generators, because the direct-image addition and scalar-action
-formulas compose. Apply the equivalence and its inverse to identities. Their
-composites fix generators, hence are identities; the same calculation proves
-naturality and the displayed normalization. -/
+with the isomorphism fixed on the scalar-insertion generators. -/
 theorem normalizedScalarComposition_exists
     (F : Sheaf J (Type w) ⥤ Sheaf K (Type w))
     (V : Sheaf K (Type w) ⥤ Sheaf J (Type w)) (aF : F ⊣ V)

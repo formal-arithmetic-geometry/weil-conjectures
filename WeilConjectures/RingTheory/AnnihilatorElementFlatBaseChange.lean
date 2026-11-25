@@ -11,9 +11,17 @@ public import Mathlib.RingTheory.Ideal.Maps
 
 /-! # Annihilator of an element under flat base change
 
-Source: Stacks Project, Algebra, Lemma Tag 07T8 (`lemma-annihilator-flat-base-change`),
-first assertion with `M = R` and `m = x`
-(blueprint: lem-weil-pbc-annihilator-element-flat-base-change).
+For a flat ring map `φ : R →+* S` and `x : R`, the annihilator of `φ x` is the extension of
+the annihilator of `x`.
+
+## Implementation details
+
+The proof tensors the exact sequence `0 → Ann_R(x) → R → R`, whose last map is multiplication
+by `x`, with the flat `R`-module `S`.
+
+## References
+
+* Stacks Project, Algebra, Lemma Tag 07T8, first assertion with `M = R` and `m = x`.
 -/
 
 @[expose] public section
@@ -22,24 +30,8 @@ universe u v
 
 namespace RingHom
 
-/--
-Source: Stacks Project, Algebra, Lemma Tag 07T8, first assertion
-(blueprint: lem-weil-pbc-annihilator-element-flat-base-change).
-
-Let `φ : R →+* S` be flat and `x : R`. The annihilator ideal of the image of
-`x` is the extension of the annihilator ideal of `x`. The proof tensors the
-exact sequence given by multiplication by `x` with the flat `R`-module `S`.
-
-1. Put `I = Ann_R(x)`. Multiplication by `x` has kernel `I`, so the sequence
-   `0 → I → R → R`, with inclusion followed by multiplication by `x`, is exact.
-2. Flatness (`def-weil-pbc-flat-ring-map`) preserves this exact sequence after
-   tensoring with `S` (`lem-weil-pbc-flat-tensor-exact`). Identify `R ⊗[R] S`
-   with `S` by `r ⊗ s ↦ φ(r)s`. Multiplication by `x` then becomes multiplication
-   by `φ(x)`, and the inclusion becomes `α : I ⊗[R] S → S`,
-   `a ⊗ s ↦ φ(a)s`. Thus the image of `α` is the annihilator of `φ(x)`.
-3. The image of `α` consists of finite sums of `φ(a)s` with `a ∈ I` and `s ∈ S`.
-   This is exactly `Ideal.map φ I`, giving the asserted equality.
--/
+/-- Let `φ : R →+* S` be flat and `x : R`. The annihilator ideal of `φ x` in `S` is the
+extension along `φ` of the annihilator ideal of `x` in `R`. -/
 theorem annihilator_element_flat_base_change {R : Type u} {S : Type v}
     [CommRing R] [CommRing S]
     (φ : R →+* S) (hφ : φ.Flat) (x : R) :

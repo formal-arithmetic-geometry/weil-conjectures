@@ -30,7 +30,7 @@ this reduces the inversion theorem to a single computation, that the convolution
 
 Coefficient hypotheses follow the classes in `WeilConjectures.FourierTransform.Defs`.
 
-## Implementation notes
+## Implementation details
 
 The statements only assert that an isomorphism *exists*. Showing that `FT_ψ` is an
 equivalence with inverse `FT_{ψ⁻¹}(r)` will need specific, coherent isomorphisms, which
@@ -40,12 +40,21 @@ The proof of `AlgebraicGeometry.Etale.nonempty_iso_fourierKernel_convolution` us
 isomorphism, Poincaré duality at geometric points, `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]` and
 `H_c^*(𝔸¹, ℒ_ψ) = 0`.
 
+The inversion theorem composes the two kernel transforms, computes the convolution of the
+kernels, moves the shift out of the kernel and recognises the kernel transform of `Δ_* Λ(-r)`
+as the Tate twist (`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_diagonal`). The
+statement with the same character follows from
+`AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_inv`, which gives
+`FT_ψ ≅ ι^* ⋙ FT_{ψ⁻¹}`, and inversion for `ψ⁻¹`. The companion convolution statement
+`𝒦_ψ ∗ 𝒦_ψ ≅ (id × ι')_* Δ_* Λ(-r)[-2r]` is therefore not stated.
+
+All statements are torsion statements, decided by the cohomology of `𝔸^r`, and need
+`[Finite Λ] [HasInvertibleExponent Λ S]`. The character must be nontrivial in the strong sense
+that `Ψ 1 - 1` is a unit of `Λ`: for `Ψ = 1` both kernels are constant and the convolution is
+`Λ(-r)[-2r]`, supported everywhere, and `Ψ ≠ 1` is not enough when `Λ` is not a domain (see
+`AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_unit`).
+
 TODO: upgrade these back to `Iso` constructions once they can be built.
-
-## Blueprint
-
-The `sk-*` labels quoted below are block names of the *sketch* blueprint, a separate
-repository; they are not labels of `blueprint/src` and so are not checked by the build.
 
 -/
 
@@ -73,19 +82,7 @@ variable [HasCompactification
 
 /-- The convolution of the kernel of `FT_{ψ⁻¹}` with the kernel of `FT_ψ` on `𝔸(n; S)` is
 the delta kernel `Δ_* Λ(-r)[-2r]` supported on the diagonal, `r = #n` being the relative
-dimension. The companion statement `𝒦_ψ ∗ 𝒦_ψ ≅ (id × ι')_* Δ_* Λ(-r)[-2r]` is not stated:
-its consequence `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_comp_self` is
-deduced from this one and `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_inv`.
-
-The character must be **nontrivial** in the strong sense that
-`Ψ 1 - 1` is a unit of `Λ`, which is what makes `H_c^*(𝔸¹, ℒ_ψ)` vanish: for `Ψ = 1` both
-kernels are constant and the convolution is `Λ(-r)[-2r]`, supported everywhere, and `Ψ ≠ 1`
-is not enough when `Λ` is not a domain
-(see `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_unit`).
-
-Class: torsion; decided by the cohomology of `𝔸^r`, `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`, which needs
-`[Finite Λ] [HasInvertibleExponent Λ S]`.
-(sketch blueprint: `proposition-fourier-inversion`) -/
+dimension. The character is assumed nontrivial in the sense that `Ψ 1 - 1` is a unit of `Λ`. -/
 theorem nonempty_iso_fourierKernel_convolution [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] (Ψ : AddChar (ZMod p) Λ)
     (hΨ : IsUnit (Ψ 1 - 1)) :
@@ -114,7 +111,7 @@ character inverts the Fourier–Deligne transform up to the Tate twist `(-r)`,
 
 `FT_{ψ⁻¹} FT_ψ(K) ≅ K(-r)`,
 
-functorially in `K`:
+functorially in `K`, for a character with `Ψ 1 - 1` a unit of `Λ`:
 
 ```
                  FT_ψ
@@ -125,20 +122,8 @@ functorially in `K`:
                     D(𝔸(n; S))
 ```
 
-The proof composes the two kernel transforms
-(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_comp`), computes the convolution of the
-kernels (`AlgebraicGeometry.Etale.nonempty_iso_fourierKernel_convolution`), moves the shift
-out of the kernel and recognises the kernel transform of `Δ_* Λ(-r)` as the Tate twist
-(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_diagonal`). The hypotheses are those
-of the convolution computation: for `Ψ = 1` the transform is `Rp₂,! p₁^*(-)[r]`, which is not
-invertible.
-The composition law of kernel transforms also needs the projection
-`𝔸(n; S) ×ₛ 𝔸(n; S) ×ₛ 𝔸(n; S) ⟶ 𝔸(n; S)` onto the last factor to admit a compactification.
-
-Class: torsion; decided by the convolution computation
-`AlgebraicGeometry.Etale.nonempty_iso_fourierKernel_convolution` (cohomology of `𝔸^r`), which
-needs `[Finite Λ] [HasInvertibleExponent Λ S]`.
-(sketch blueprint: `sec-Fourier-inversion`) -/
+The projection `𝔸(n; S) ×ₛ 𝔸(n; S) ×ₛ 𝔸(n; S) ⟶ 𝔸(n; S)` onto the last factor is assumed to
+admit a compactification. -/
 -- TODO: discharge the `HasCompactification` hypothesis: the composite is a morphism
 -- `𝔸^{3n}_S ⟶ 𝔸^n_S`, which is compactified through projective space by
 -- `AlgebraicGeometry.Compactification.ofIsImmersionAffineSpace`, with no need for Nagata.
@@ -195,15 +180,8 @@ functorially in `K`, where `ι = AlgebraicGeometry.AffineSpace.neg` is `x ↦ -x
                     D(𝔸(n; S))
 ```
 
-It follows from `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_inv`, which
-gives `FT_ψ ≅ ι^* ⋙ FT_{ψ⁻¹}`, and inversion
-(`AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_comp_inv`) for `ψ⁻¹`; the
-hypotheses are those of inversion.
-
-Class: torsion; decided by inversion
-`AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_comp_inv`, which needs
-`[Finite Λ] [HasInvertibleExponent Λ S]`.
-(sketch blueprint: `sec-Fourier-inversion`) -/
+The hypotheses are those of
+`AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_comp_inv`. -/
 theorem nonempty_iso_affineFourierTransform_comp_self [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
     [HasCompactification (pullback.tripleProj₁₃ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ≫

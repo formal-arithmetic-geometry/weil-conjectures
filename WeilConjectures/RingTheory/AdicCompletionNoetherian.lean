@@ -15,8 +15,16 @@ public import Mathlib.RingTheory.Noetherian.Basic
 /-!
 # Noetherianity of adic completion
 
-Source: Stacks Project, Commutative Algebra, Lemma 10.97.6 (Tag 0316), second proof
-(blueprint: lem-weil-pbc-adic-completion-noetherian).
+We show that the adic completion of a Noetherian ring with respect to any ideal is Noetherian.
+
+## Implementation details
+
+The completion is a quotient of a multivariate power series ring over `A`, via substituting
+generators of the ideal for the variables, and such power series rings are Noetherian.
+
+## References
+
+* Stacks Project, Lemma 10.97.6 (Tag 0316), second proof.
 -/
 
 @[expose] public section
@@ -25,18 +33,7 @@ universe u
 
 namespace AdicCompletion
 
-/-- The completion of a Noetherian commutative ring with respect to any ideal is Noetherian.
-Source: Stacks Project, Commutative Algebra, Lemma 10.97.6 (Tag 0316), second proof
-(blueprint: lem-weil-pbc-adic-completion-noetherian).
-
-Proof: Since `A` is Noetherian, choose finitely many generators `f₁, …, fₙ` of `I`
-(`def-weil-pbc-noetherian-ring`), allowing `n = 0`. Substituting these generators for the
-variables gives a surjective ring homomorphism from the multivariate formal power series ring
-`A[[x₁, …, xₙ]]` to `AdicCompletion I A`
-(`lem-weil-pbc-power-series-onto-completion`, `def-weil-pbc-multivariate-power-series`, and
-`def-weil-pbc-adic-completion`). The source ring is Noetherian by
-`lem-weil-pbc-power-series-noetherian` (Stacks Tag 0306). Its surjective image is Noetherian by
-`lem-weil-pbc-surjective-image-noetherian` (Stacks Tag 00FN), proving the conclusion. -/
+/-- The completion of a Noetherian commutative ring with respect to any ideal is Noetherian. -/
 theorem isNoetherianRing {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A) :
     IsNoetherianRing (AdicCompletion I A) := by
   obtain ⟨n, f, hf⟩ :=

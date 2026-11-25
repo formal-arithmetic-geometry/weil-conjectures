@@ -21,10 +21,10 @@ coefficients `K ↦ K_m` along `Λ ⟶ Λ/J` is the endofunctor
 `ρ = AlgebraicGeometry.Etale.reductionModIdeal`, `K ↦ K ⊗ᴸ (Λ/J)_X`, of `D(X_ét, Λ)`: the
 reduction `K_m` is kept as a complex of `Λ`-modules. Read in `D(Λ)`, a tensor product over
 `Λ/J` of two reduced complexes is `K_m ⊗ᴸ_{Λ/J} L_m = K ⊗ᴸ_Λ L_m`, and `Rf_!` commutes with
-reduction, so the projection map `PF_{f, K_m, L_m}` of the blueprint becomes the projection map
+reduction, so the projection map `PF_{f, K_m, L_m}` becomes the projection map
 `PF_{f, K, ρL}` over `Λ`.
 
-The three compatibilities of `ρ` used in blueprint `sk-prop-sf-pf-reduction` are:
+The three compatibilities of `ρ` used are:
 
 * with `⊗ᴸ`: the associator `ρ(M ⊗ᴸ L) = (M ⊗ᴸ L) ⊗ᴸ (Λ/J)_Y ≅ M ⊗ᴸ ρL`;
 * with `Lf^*`: `Lf^*(ρL) ≅ ρ(Lf^*L)`, the tensor comparison of `Lf^*` followed by
@@ -33,6 +33,24 @@ The three compatibilities of `ρ` used in blueprint `sk-prop-sf-pf-reduction` ar
   `Lf^*(Λ/J)_Y ≅ (Λ/J)_X` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekReductionModIdealMap`).
   It is an isomorphism for `Λ` finite, by the finite projection formula.
 
+When `Λ/ϖⁿ` is perfect, that is for `J = (ϖⁿ)` with `ϖ` a nonzerodivisor (for `Λ = 𝒪_E`, the
+reduction `𝒪_E ⟶ A_{E,n}`), the constant complex `(Λ/ϖⁿ)_X` is dualizable, and the comparisons
+of `ρ` with `Rf_!` and `Rf_*` are isomorphisms for every `Λ`.
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.projectionMapOfCompactification_constantSingle`: the square comparing
+  `ρ(PF_{f, K, L})` and `PF_{f, K, ρL}` through the three compatibilities commutes.
+- `AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_projectionMapOfCompactification_iff`,
+  `AlgebraicGeometry.Etale.hasProjectionFormula_iff_reductionModIdeal`: hence, for `Λ` finite,
+  `ρ(PF_{f, K, L})` is an isomorphism if and only if `PF_{f, K, ρL}` is, and the projection
+  formula holds at `(K, L)` if and only if it holds at `(K, ρL)`.
+- `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekReductionModIdealMap_span_pow`,
+  `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarReductionModIdealMap_span_pow`: reduction
+  modulo `ϖⁿ` commutes with `Rf_!` and `Rf_*`.
+
+## Implementation details
+
 Everything except the identification of the constant complexes is formal, and is done for an
 arbitrary coefficient category `A` and an arbitrary object `N` in place of `(Λ/J)_Y`. The square
 is stated for a general coefficient category: at `A = ModuleCat Λ`, writing the monoidal
@@ -40,24 +58,10 @@ structure of `D(X_ét, Λ)` through instance search produces a term the kernel c
 with the one inside `AlgebraicGeometry.Etale.derivedTensor` in reasonable time (see the
 implementation notes of `WeilConjectures.SixFunctors.Etale.Derived.TensorStructure`).
 
-When `Λ/ϖⁿ` is perfect, that is for `J = (ϖⁿ)` with `ϖ` a nonzerodivisor (for `Λ = 𝒪_E`, the
-reduction `𝒪_E ⟶ A_{E,n}`), the constant complex `(Λ/ϖⁿ)_X` is dualizable, and the comparisons
-of `ρ` with `Rf_!` and `Rf_*` are isomorphisms for every `Λ` (blueprint
-`proposition-six-operations-change-coefficients`).
-
-## Main statements
-
-- `AlgebraicGeometry.Etale.projectionMapOfCompactification_constantSingle`
-  (`sk-prop-sf-pf-reduction`, `prop-sf-pf-reduction`): the square comparing `ρ(PF_{f, K, L})`
-  and `PF_{f, K, ρL}` through the three compatibilities commutes.
-- `AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_projectionMapOfCompactification_iff`,
-  `AlgebraicGeometry.Etale.hasProjectionFormula_iff_reductionModIdeal`: hence, for `Λ` finite,
-  `ρ(PF_{f, K, L})` is an isomorphism if and only if `PF_{f, K, ρL}` is, and the projection
-  formula holds at `(K, L)` if and only if it holds at `(K, ρL)`.
-- `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekReductionModIdealMap_span_pow`,
-  `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarReductionModIdealMap_span_pow`
-  (`proposition-six-operations-change-coefficients`): reduction modulo `ϖⁿ` commutes with `Rf_!` and
-  `Rf_*`.
+The square `AlgebraicGeometry.Etale.projectionMapOfCompactification_constantSingle` is an
+equality of the specified morphisms, proved from their constructions and not from agreement on
+stalks, via the associativity of the projection map of `Rf_!`
+(`AlgebraicGeometry.Etale.projectionMapOfCompactification_assoc`).
 -/
 
 @[expose] public section
@@ -172,9 +176,7 @@ Rf_!(K ⊗ᴸ Lf^*(L ⊗ᴸ N_Y)) ---Rf_!(K ⊗ᴸ (δ ≫ 1 ⊗ᴸ a))--> Rf_!(
 ```
 commutes, where the comparisons are `AlgebraicGeometry.Etale.derivedTensorRightTensorIso`,
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekDerivedTensorRightMap` and
-`AlgebraicGeometry.Etale.leftDerivedUpperStarDerivedTensorRightIso`. It follows from the
-associativity of the projection map
-(`AlgebraicGeometry.Etale.projectionMapOfCompactification_assoc`). -/
+`AlgebraicGeometry.Etale.leftDerivedUpperStarDerivedTensorRightIso`. -/
 theorem projectionMapOfCompactification_derivedTensorRight
     {NY : DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     {NX : DerivedCategory (Sheaf X.smallEtaleTopology A)} (a : L((f)^*[A]).obj NY ≅ NX)
@@ -318,15 +320,13 @@ variable [Etale.UpperStarPreservesFlat A]
 variable {f : X ⟶ Y} (c : Compactification f)
 
 omit [HasSmallSiteSheafify A] in
-/-- Blueprint `sk-prop-sf-pf-reduction`, with its detailed node `prop-sf-pf-reduction`:
-Projection formula: compatibility with finite reduction; the square.
-
+/-- **The projection formula is compatible with finite reduction: the square.**
 Let `M` be an object of the coefficient category and `ρ = - ⊗ᴸ M` the functor of tensoring with
 the constant complex `M_X` on every scheme `X`. For `A = ModuleCat Λ` and `M = Λ/J` this is the
 reduction of the coefficients along `Λ ⟶ Λ/J`, kept in `D(-, Λ)`
 (`AlgebraicGeometry.Etale.reductionModIdeal`, see
 `AlgebraicGeometry.Etale.reductionModIdeal_eq_derivedTensorRight`); for `Λ = A_{E,n}` and
-`J = 𝔪_E^m` it is the finite reduction `K ↦ K_m` of the blueprint. For `K` on `X` and `L` on
+`J = 𝔪_E^m` it is the finite reduction `K ↦ K_m`. For `K` on `X` and `L` on
 `Y` the square
 ```
 ρ(Rf_!K ⊗ᴸ L) ------------ρ(PF_{K, L})-------------> ρ(Rf_!(K ⊗ᴸ Lf^*L))
@@ -338,13 +338,7 @@ commutes. Here the comparison of `Rf_!` with `ρ` is the projection map at `(-, 
 `Lf^*M_Y ≅ M_X` (`AlgebraicGeometry.Etale.leftDerivedUpperStarSingleConstantSheafIso`), and the
 bottom right isomorphism is built from the comparison of `Lf^*` with `ρ` (the tensor comparison of
 `Lf^*` followed by the same isomorphism) and the associator. Read in `D(-, Λ)`, `PF_{K, ρL}` is
-the projection map `PF_{K_m, L_m}` of the reductions, since `K_m ⊗ᴸ_{Λ/J} L_m = K ⊗ᴸ_Λ L_m`.
-
-As in the blueprint, this is an equality of the specified morphisms, proved from their
-constructions and not from agreement on stalks: the projection map of `Rf_!` is associative
-(`AlgebraicGeometry.Etale.projectionMapOfCompactification_assoc`), which comes down to the
-counit–tensor description of the projection map of the proper direct image and the
-monoidality of the derived pullbacks. -/
+the projection map `PF_{K_m, L_m}` of the reductions, since `K_m ⊗ᴸ_{Λ/J} L_m = K ⊗ᴸ_Λ L_m`. -/
 theorem projectionMapOfCompactification_constantSingle (M : A)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
     (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
@@ -371,10 +365,7 @@ lemma reductionModIdeal_eq_derivedTensorRight (X : Scheme.{u}) :
       (constantSingle (ModuleCat.{u + 1} Λ) X (ModuleCat.of Λ (Λ ⧸ J))) :=
   rfl
 
-/-- Blueprint `proposition-six-operations-change-coefficients`: Basic operations and coefficient
-reduction; the pullback.
-
-**`Lf^*` commutes with the reduction of the coefficients**: the isomorphism
+/-- **`Lf^*` commutes with the reduction of the coefficients**: the isomorphism
 `Lf^*(L ⊗ᴸ (Λ/J)_Y) ≅ Lf^*L ⊗ᴸ (Λ/J)_X`, natural in `L`, given by the tensor comparison of
 `Lf^*` followed by `Lf^*(Λ/J)_Y ≅ (Λ/J)_X`. The two functors are
 `reductionModIdeal Λ Y J ⋙ Lf^*` and `Lf^* ⋙ reductionModIdeal Λ X J`
@@ -420,14 +411,9 @@ theorem isDualizable_constantSingle_quotient_bot (X : Scheme.{u}) :
       (Submodule.quotEquivOfEqBot (⊥ : Ideal Λ) rfl).toModuleIso)
 
 variable {Λ} in
-/-- Blueprint `proposition-six-operations-change-coefficients`: Basic operations and coefficient
-reduction; the ordinary direct image at the integral stage.
-
-For a nonzerodivisor `ϖ` of `Λ` (for `Λ = 𝒪_E`, a uniformizer), the reduction modulo `ϖⁿ`
+/-- For a nonzerodivisor `ϖ` of `Λ` (for `Λ = 𝒪_E`, a uniformizer), the reduction modulo `ϖⁿ`
 commutes with `Rg_*` for any morphism `g`: the comparison `ρ(Rg_*M) ⟶ Rg_*(ρM)` is an
-isomorphism. As in the blueprint, `Λ/ϖⁿ` is perfect over `Λ`, the constant complex `(Λ/ϖⁿ)_Y` is
-dualizable (`AlgebraicGeometry.Etale.isDualizable_constantSingle_quotient_span_pow`), and the
-projection map of `Rg_*` is invertible at a dualizable object. -/
+isomorphism. -/
 theorem isIso_rightDerivedLowerStarReductionModIdealMap_span_pow {ϖ : Λ}
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : ℕ) {Z : Scheme.{u}} (g : Z ⟶ Y) :
     IsIso (rightDerivedLowerStarReductionModIdealMap Λ (Ideal.span {ϖ} ^ n) g) :=
@@ -455,13 +441,8 @@ noncomputable def rightDerivedLowerShriekReductionModIdealMap :
   rightDerivedLowerShriekDerivedTensorRightMap _ c
     (leftDerivedUpperStarSingleConstantSheafIso _ f (ModuleCat.of Λ (Λ ⧸ J))).hom
 
-/-- Blueprint `proposition-six-operations-change-coefficients`: Basic operations and coefficient
-reduction; the compact-support direct image between finite levels.
-
-For a finite coefficient ring `Λ`, the comparison `ρ(Rf_!K) ⟶ Rf_!(ρK)` of `Rf_!` with the
-reduction of the coefficients is an isomorphism: it is a projection map followed by an
-isomorphism, and the projection formula holds at finite coefficients
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite`). -/
+/-- For a finite coefficient ring `Λ`, the comparison `ρ(Rf_!K) ⟶ Rf_!(ρK)` of `Rf_!` with the
+reduction of the coefficients is an isomorphism. -/
 instance isIso_rightDerivedLowerShriekReductionModIdealMap [Finite Λ] :
     IsIso (rightDerivedLowerShriekReductionModIdealMap Λ J c) := by
   have := isIso_rightDerivedLowerStarProjectionMap_of_finite Λ c.g
@@ -472,28 +453,17 @@ instance isIso_rightDerivedLowerShriekReductionModIdealMap [Finite Λ] :
   infer_instance
 
 variable {Λ} in
-/-- Blueprint `proposition-six-operations-change-coefficients`: Basic operations and coefficient
-reduction; the compact-support direct image at the integral stage.
-
-For a nonzerodivisor `ϖ` of `Λ` (for `Λ = 𝒪_E`, a uniformizer), the reduction modulo `ϖⁿ`
-commutes with `Rf_!`: the comparison `ρ(Rf_!K) ⟶ Rf_!(ρK)` is an isomorphism, the constant
-complex `(Λ/ϖⁿ)_Y` being dualizable
-(`AlgebraicGeometry.Etale.isDualizable_constantSingle_quotient_span_pow`). -/
+/-- For a nonzerodivisor `ϖ` of `Λ` (for `Λ = 𝒪_E`, a uniformizer), the reduction modulo `ϖⁿ`
+commutes with `Rf_!`: the comparison `ρ(Rf_!K) ⟶ Rf_!(ρK)` is an isomorphism. -/
 theorem isIso_rightDerivedLowerShriekReductionModIdealMap_span_pow {ϖ : Λ}
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : ℕ) :
     IsIso (rightDerivedLowerShriekReductionModIdealMap Λ (Ideal.span {ϖ} ^ n) c) :=
   isIso_rightDerivedLowerShriekDerivedTensorRightMap_of_isDualizable _ c _
     (isDualizable_constantSingle_quotient_span_pow hϖ n Y)
 
-/-- Blueprint `sk-prop-sf-pf-reduction`, with its detailed node `prop-sf-pf-reduction`:
-Projection formula: compatibility with finite reduction; the equivalence of invertibility.
-
-For a finite coefficient ring `Λ` and an ideal `J`, the reduction `ρ(PF_{K, L})` of the
+/-- For a finite coefficient ring `Λ` and an ideal `J`, the reduction `ρ(PF_{K, L})` of the
 projection map is an isomorphism if and only if the projection map `PF_{K, ρL}` of the
-reductions is: by the commutative square
-`AlgebraicGeometry.Etale.projectionMapOfCompactification_constantSingle` the two differ by
-isomorphisms, the comparison of `Rf_!` with `ρ` being invertible at finite coefficients
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekReductionModIdealMap`). -/
+reductions is. -/
 theorem isIso_reductionModIdeal_map_projectionMapOfCompactification_iff [Finite Λ]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -505,17 +475,10 @@ theorem isIso_reductionModIdeal_map_projectionMapOfCompactification_iff [Finite 
     (leftDerivedUpperStarSingleConstantSheafIso _ f (ModuleCat.of Λ (Λ ⧸ J))) K L
     (inferInstanceAs (IsIso ((rightDerivedLowerShriekReductionModIdealMap Λ J c).app _))) _ rfl
 
-/-- Blueprint `sk-prop-sf-pf-reduction`, with its detailed node `prop-sf-pf-reduction`:
-Projection formula: compatibility with finite reduction; the conclusion.
-
-For a finite coefficient ring `Λ` (for instance `A_{E,n}`) and an ideal `J` (for instance
+/-- For a finite coefficient ring `Λ` (for instance `A_{E,n}`) and an ideal `J` (for instance
 `𝔪_E^m`, `m ≤ n`), the projection formula holds at `(K, L)` if and only if it holds at
 `(K, ρL)`, where `ρ = - ⊗ᴸ (Λ/J)` is the reduction of the coefficients; read in `D(-, Λ)`, the
-latter is the projection formula `PF_{K_m, L_m}` of the reductions. As in the blueprint, both
-sides hold, by the projection formula at finite coefficients
-(`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`, the case of `sk-thm-sf-pf-finite`);
-the comparison square itself is
-`AlgebraicGeometry.Etale.projectionMapOfCompactification_constantSingle`. -/
+latter is the projection formula `PF_{K_m, L_m}` of the reductions. -/
 theorem hasProjectionFormula_iff_reductionModIdeal [Finite Λ] (f : X ⟶ Y) [HasCompactification f]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
