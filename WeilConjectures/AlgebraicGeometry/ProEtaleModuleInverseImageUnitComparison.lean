@@ -96,10 +96,8 @@ theorem proEtaleModuleInverseImage_unitComparison_isIso {X Z : Scheme.{u}} (i : 
           (Q.obj ((proEtaleModuleInverseImage i A).obj M))).symm
           (P.map (adj₀.unit.app M) ≫ P.map (T.map (e.hom.app M))) := by rfl
       _ = c := by rw [← P.map_comp, he]
-  set_option linter.style.haveILetI false in
-  letI : IsIso (e.hom.app M) := by infer_instance
-  set_option linter.style.haveILetI false in
-  letI : IsIso g₀ := Q.map_isIso _
+  let : IsIso (e.hom.app M) := by infer_instance
+  let : IsIso g₀ := Q.map_isIso _
   change IsIso c
   rw [← hce]
   exact inferInstanceAs (IsIso (c₀ ≫ g₀))

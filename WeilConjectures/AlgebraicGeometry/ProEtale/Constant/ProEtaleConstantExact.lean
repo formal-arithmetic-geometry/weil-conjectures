@@ -159,7 +159,7 @@ theorem finiteCoefficientCommRing_preservesSheafification (T : Scheme.{u}) :
 
 attribute [instance] finiteCoefficientCommRing_preservesSheafification
 
-set_option linter.unusedSectionVars false in
+omit [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] in
 /-- The canonical commutative coefficient map is invertible too. -/
 theorem finiteCoefficientCommRingMap_isIso :
     IsIso (Scheme.proEtaleConstantInverseImageMap f CommRingCat.{u + 1}

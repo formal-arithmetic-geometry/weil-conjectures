@@ -26,7 +26,6 @@ import WeilConjectures.CategoryTheory.Scalar.ScalarLocalizationSheafExact
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposite
@@ -128,7 +127,7 @@ private def integralLocalizationPresentation (X : Scheme.{u}) :
 private theorem integralExtensionExact (X : Scheme.{u}) :
     PreservesFiniteLimits (pbcExtend (integralRationalCoefficientMap l E X)) ∧
       PreservesFiniteColimits (pbcExtend (integralRationalCoefficientMap l E X)) := by
-  letI := coefficientExtensionNormedField l E
+  let := coefficientExtensionNormedField l E
   let R := integralCoefficientSheaf l X E
   let s := integralSections l E X (pbcUniformizer l E)
   let j := integralLocalizationPresentation l E X
@@ -230,7 +229,7 @@ private theorem completedSectionComparison (X : Scheme.{u})
     (U : X.ProEtᵒᵖ) (a : PbcIntegralRing l E) :
     i.hom.hom.app U (pbcCompletedSection X (pbcIntegralDatum l E) U a) =
       (integralSections l E X a).val U := by
-  letI := coefficientExtensionNormedField l E
+  let := coefficientExtensionNormedField l E
   have h := congrArg (fun f ↦ (toSheafify (ProEt.topology X)
     ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (PbcIntegralRing l E)))) ≫ f.hom) hi
   rw [continuousCoefficientConstantComparison_unit] at h
@@ -281,7 +280,7 @@ theorem completedRestrictionLinear (X : Scheme.{u})
       (rationalCoefficientSheaf l X E)
       ((rationalSections l E X).comp (integralToField l E))
     (pbcRestrict a).Linear (PbcIntegralRing l E) := by
-  letI := scalarLocalizationCoefficientLinearOfUniverses (PbcIntegralRing l E)
+  let := scalarLocalizationCoefficientLinearOfUniverses (PbcIntegralRing l E)
     (rationalCoefficientSheaf l X E)
     ((rationalSections l E X).comp (integralToField l E))
   dsimp only

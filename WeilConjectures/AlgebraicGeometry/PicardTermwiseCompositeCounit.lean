@@ -105,7 +105,6 @@ private theorem composite_counit_of_associativity
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedVariables false in
 -- Preserve the original statement, including its unused lambda binder t.
 /-- The composites of a fixed morphism with the pinned tensor-pullback counits
 satisfy the composition equation. No perfectness, invertibility, or representation
@@ -125,7 +124,7 @@ theorem picard_termwise_composite_counit
     let b : ∀ {T : Scheme.{v}} (t : T ⟶ W) (s : T ⟶ U.toScheme),
         s ≫ U.ι = t → ((derivedPullback t).obj E ⟶
           DerivedCategory.Q.obj (picardTermwiseModel W U K s)) :=
-      fun {T} t s hf ↦
+      fun {T} _t s hf ↦
         ((c s U.ι ≪≫ eqToIso
           (congrArg (fun g : T ⟶ W ↦ derivedPullback g) hf)).inv.app E) ≫
         (derivedPullback s).map e ≫ (picardTermwiseCounit s).app P

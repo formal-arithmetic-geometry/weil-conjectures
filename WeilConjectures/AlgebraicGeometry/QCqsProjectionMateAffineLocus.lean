@@ -221,8 +221,7 @@ variable (A : Type u) [CommRing A]
   (L : schemeDerivedQCohCategory X)
   (e : DerivedCategory (ModuleCat.{u} A) ≌ schemeDerivedQCohCategory (Spec (.of A)))
 
--- Keep the existing compactness and quasi-separatedness binders in the public signature.
-set_option linter.unusedSectionVars false in
+omit [CompactSpace X] [QuasiSeparatedSpace X] in
 set_option backward.isDefEq.respectTransparency false in
 /-- The all-shifts isomorphism locus of the supplied projection mate is closed
 under coproducts, distinguished triangles, and retracts. -/

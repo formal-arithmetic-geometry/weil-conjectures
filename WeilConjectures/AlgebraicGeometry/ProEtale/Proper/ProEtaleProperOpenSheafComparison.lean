@@ -53,7 +53,6 @@ is imposed on the sheaf.
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 
 universe u
 
@@ -154,8 +153,8 @@ theorem sfProperOpenCounit_isIso {V W T : Scheme.{u}} (p : V ⟶ T) [IsProper p]
   let f := (sfIntrinsicExtensionByZeroAdjunction i A).counit.app
     ((sfIntrinsicExtensionByZero (pullback.fst p i) A ⋙
       proEtaleConstantModuleDirectImage p A).obj M)
-  letI : Mono f := sfProperOpenCounit_mono A p i M
-  letI : Epi f := sfProperOpenCounit_epi A p i M
+  let : Mono f := sfProperOpenCounit_mono A p i M
+  let : Epi f := sfProperOpenCounit_epi A p i M
   exact isIso_of_mono_of_epi f
 
 /-- Proper direct image commutes with open extension by zero for every pro-etale module
@@ -170,7 +169,7 @@ theorem sfProperOpenSheafComparison_isIso {V W T : Scheme.{u}} (p : V ⟶ T) [Is
   intro M
   dsimp only [sfProperOpenSheafComparison]
   have hc := sfProperOpenCounit_isIso A p i M
-  letI : IsIso ((sfIntrinsicExtensionByZeroAdjunction i A).counit.app
+  let : IsIso ((sfIntrinsicExtensionByZeroAdjunction i A).counit.app
       ((sfIntrinsicExtensionByZero (pullback.fst p i) A ⋙
         proEtaleConstantModuleDirectImage p A).obj M)) := hc
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]

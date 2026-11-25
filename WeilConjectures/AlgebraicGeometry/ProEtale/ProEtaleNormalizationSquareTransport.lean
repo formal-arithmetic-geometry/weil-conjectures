@@ -21,7 +21,6 @@ are the canonical derived mates.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
@@ -76,10 +75,10 @@ private theorem comparison_coefficient_mate_eq (q : R →+* S)
     mateEquiv_symm_apply, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, NatTrans.id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id, comparisonRestrictScalarsMap,
+    CategoryTheory.Functor.map_id, Category.id_comp, comparisonRestrictScalarsMap,
     Adjunction.homEquiv_counit]
   dsimp only [Functor.comp_obj, Functor.comp_map]
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
 
 private theorem comparison_coefficient_derived_eq (q : R →+* S) :
@@ -113,7 +112,7 @@ private theorem proet_coefficient_mate_eq (q : R →+* S)
     Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, NatTrans.id_app,
     CategoryTheory.Functor.map_id, Category.id_comp, Adjunction.homEquiv_counit]
   dsimp only [Functor.comp_obj, Functor.comp_map]
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
 
 private theorem proet_localization_coefficient_mate (q : R →+* S)
@@ -328,13 +327,13 @@ private theorem source_slice_normalization (U : X.ProEt) (q : R →+* S)
     Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Category.id_comp, Category.comp_id, localProEtaleComparison, Functor.comp_map,
-    Category.assoc, comparison_coefficient_derived_eq] at *
+    comparison_coefficient_derived_eq] at *
   rw [← CategoryTheory.Functor.map_comp_assoc]
   erw [← reassoc_of% hn]
   apply (cancel_mono ((normalizationRestrict (ProEt.topology U.left) q).map
     ((proetDerivedSliceRestrictionIso X S U).inv.app ((derivedComparison X S).obj A')))).mp
   simp only [Category.assoc, ← CategoryTheory.Functor.map_comp,
-    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.comp_id]
+    Iso.hom_inv_id_app]
   erw [hp]
   simp only [sliceComparisonNormalizationArrow, CategoryTheory.Functor.map_comp,
     Category.assoc]

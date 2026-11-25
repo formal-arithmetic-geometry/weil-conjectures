@@ -51,8 +51,8 @@ def pushSectionIso (Y : Scheme.{u}) :
       (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (diagonalImmersion Y)))
     (pullSectionIso Λ Y (secondProjection Y) (pullback.diagonal_snd _))
 
-set_option linter.unusedSectionVars false in
 -- Keep fixed site and derived comparisons folded during elaboration.
+omit [IsCommMonObj Λ] in
 /-- Closed direct image on internal modules is exact. -/
 theorem diagonalPush_preservesFiniteColimits (Y : Scheme.{u}) :
     PreservesFiniteColimits (CondensedRing.lowerStar Λ (diagonalImmersion Y)) := by

@@ -24,7 +24,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme.ProEt
 
-set_option linter.unusedVariables false in
 /-- The qcqs finite-cover subsite has scheme fibre products and slice finite limits.
 Finite disjoint unions are qcqs, and affine for affine summands. Representable sheaves
 carry these unions to coproducts, and sections of every sheaf carry them to products,
@@ -49,8 +48,8 @@ theorem qcqs_finite_family_geometry (X : Scheme.{u}) :
           S ∈ Precoverage.finite (Qcqs X) T → R ⊔ S ∈ qcqsPrecoverage X T)) ∧
     (topology X).Subcanonical ∧
     (∀ (I : Type v) [Finite I] (V : I → X.ProEt)
-      (hqc : ∀ i, CompactSpace (V i).left)
-      (hqs : ∀ i, QuasiSeparatedSpace (V i).left),
+      (_hqc : ∀ i, CompactSpace (V i).left)
+      (_hqs : ∀ i, QuasiSeparatedSpace (V i).left),
       ∃ (W : X.ProEt) (ι : ∀ i, V i ⟶ W)
         (e : (∐ fun i ↦ (V i).left) ≅ W.left),
         (∀ i, Sigma.ι (fun i ↦ (V i).left) i ≫ e.hom = (ι i).left) ∧

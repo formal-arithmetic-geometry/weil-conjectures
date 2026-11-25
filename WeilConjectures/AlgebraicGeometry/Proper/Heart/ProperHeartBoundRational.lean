@@ -735,11 +735,10 @@ theorem isZero_higherDirectImage_rational_of_isProper_of_isNoetherian
     ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.mapIso
       e)).symm
 
-set_option linter.unusedVariables false in
 /-- The proper direct-image bound for a finite subextension of Qbar_ell. -/
 theorem isZero_higherDirectImage_rational_of_isProper
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k]
-    (hchar : ringChar k ≠ 0) (hell : ringChar k ≠ ℓ)
+    (_hchar : ringChar k ≠ 0) (_hell : ringChar k ≠ ℓ)
     {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
     [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
     [QuasiCompact (X ↘ Spec (.of k))]
@@ -812,11 +811,10 @@ theorem isZero_higherDirectImage_padicAlgCl_of_isProper_of_isNoetherian
     ((CondensedRing.lowerStar (Profinite.padicAlgClRingObj ℓ) p).rightDerivedFunctor.mapIso
       ((DerivedCategory.singleFunctor _ 0).mapIso eN))).symm
 
-set_option linter.unusedVariables false in
 /-- The proper direct-image bound for the finite-subextension-valued condensed ring Qbar_ell. -/
 theorem isZero_higherDirectImage_padicAlgCl_of_isProper
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
-    (hchar : ringChar k ≠ 0) (hell : ringChar k ≠ ℓ)
+    (_hchar : ringChar k ≠ 0) (_hell : ringChar k ≠ ℓ)
     {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
     [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
     [QuasiCompact (X ↘ Spec (.of k))]
