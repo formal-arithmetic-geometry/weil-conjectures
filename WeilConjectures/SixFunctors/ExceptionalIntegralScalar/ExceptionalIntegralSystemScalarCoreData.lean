@@ -8,8 +8,13 @@ module
 public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalIntegralScalarMatesData
 
 /-! # Whole-system scalar transport before selected finite-level compatibility
-Source: Zheng, Construction 4.1, Lemma 5.22 and Proposition 5.26.
-(blueprint: def-sf-exceptional-integral-system-scalar-core)
+
+This file defines the data of whole-system scalar transport (`SystemScalarCore`) and of its
+selected finite-level left comparisons (`SystemSelectedLeft`).
+
+## References
+
+* [Zheng, Construction 4.1, Lemma 5.22 and Proposition 5.26]
 -/
 
 @[expose] public noncomputable section
@@ -29,9 +34,7 @@ variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- The coefficient systems, their normalized reduction comparison, and the transported
-adjunction square, before selecting a ramified finite level.
-Source: Zheng, Construction 4.1 and Lemma 5.22.
-(blueprint: def-sf-exceptional-integral-system-scalar-core). -/
+adjunction square, before selecting a ramified finite level. -/
 structure SystemScalarCore (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -101,9 +104,7 @@ structure SystemScalarCore (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 
 /-- Selected finite-level comparisons for an already constructed whole-system scalar
 functor and its left mate. The right selected equation is deliberately absent: it
-follows by taking transposes from the left equation and the two counit identities.
-Source: Zheng, Construction 4.1 and Proposition 5.26.
-(blueprint: def-sf-exceptional-integral-system-selected-left). -/
+follows by taking transposes from the left equation and the two counit identities. -/
 structure SystemSelectedLeft (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

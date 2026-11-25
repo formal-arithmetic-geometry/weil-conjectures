@@ -8,9 +8,13 @@ module
 public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.TransportCoreData.ExceptionalRingTransportCoreData
 import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.TransportCoreData.ExceptionalRingTransportCoreLawsSystemSupportMaps
 
-/-! The support part of the exceptional integral transport system laws.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26 (blueprint: lem-sf-exceptional-ring-transport-core-system-support-law).
+/-! # Support law for exceptional integral transport
+
+The support part of the exceptional integral transport system laws.
+
+## References
+
+* [Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24, 5.26]
 -/
 
 @[expose] public noncomputable section
@@ -22,13 +26,7 @@ open ConstructibleExceptionalCoefficients
 
 /--
 The strict-system transport calculation supplies the support identity for the
-transported functor.  This is the support component isolated from the full
-system-law package.  The construction transports the proper/open support
-comparison through the chosen reconstruction equivalences and then retains its
-functor equality on the prescribed full subcategories.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26 (blueprint: lem-sf-exceptional-ring-transport-core-system-support-law).
--/
+transported functor. -/
 theorem exists_exceptional_transport_core_system_support_law
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

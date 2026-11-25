@@ -14,8 +14,19 @@ import WeilConjectures.SmoothPurity.PurCompactSupport.FiniteFreeRestrictionDirec
 
 /-! # Invertibility of the canonical left scalar comparison
 
-Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
-(blueprint: lem-sf-integral-left-comparison-invertible)
+The ambient proper/open scalar comparison is invertible on the constructible finite-Tor domain for
+every allowed coefficient change.
+
+## Implementation details
+
+The proof treats the generators separately (finite quotient and ramified changes, integral
+reduction, completed integral extension) and handles identities and composites by the
+normalized tensor unitor and the composition law of the coefficient comparison. Only
+separatedness of `f` is used, not absolute separatedness of `X` or `Y`.
+
+## References
+
+* [Zheng, Lemma 5.22 and Propositions 5.24 and 5.26]
 -/
 
 @[expose] public noncomputable section
@@ -83,23 +94,7 @@ private theorem reductionComparison_isIso {X Y : Scheme.{u}} {f : X ⟶ Y}
     infer_instance
 
 /-- The specified ambient proper/open scalar comparison is invertible on the
-constructible finite-Tor domain for every allowed actual coefficient change.
-Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
-
-Proof: finite quotient and ramified generators use the finite coefficient scalar
-comparison, obtained on bounded-below etale models and transported to the pro-etale
-site through the counit-normalized proper and open comparisons. For integral reduction,
-use the quotient projection formula on the complete finite-Tor input; the proper
-factor and the open tensor factor are invertible. For completed integral extension,
-the finite-free completed coefficient sheaf makes the proper restriction mate a finite
-biproduct comparison, and open extension commutes with coefficient extension. This
-argument needs only separatedness of f, not absolute separatedness of X or Y.
-Identity changes use the normalized tensor unitor. For a composite, the ambient
-coefficient-comparison composition law conjugates the composite of the two generator
-isomorphisms by tensor associators. The scalar-preservation argument ensures that the
-second comparison is evaluated on its finite-Tor domain. Invertibility is preserved
-under composition and conjugation. No exceptional right mate occurs in this proof.
-(blueprint: lem-sf-integral-left-comparison-invertible). -/
+constructible finite-Tor domain for every allowed coefficient change. -/
 theorem integralLeftComparison_isIso
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

@@ -21,15 +21,26 @@ import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalIntegral
 
 /-! # Integral scalar mates for the exceptional adjunction
 
-Source: Zheng, Constructions 4.1 and 5.15, Lemma 5.22 and Propositions 5.24, 5.26
-(blueprint: lem-sf-exceptional-integral-scalar-mates).
+This file constructs the normalized scalar comparisons for the integral exceptional adjunction
+and their mates, together with the recovery of normalized ramified strict towers.
 
 ## Main definitions and statements
 
 - `systemBounds`, `systemProperty`, `Recovery`: normalized ramified strict towers.
 - `sequenceProperty`, `Reconstruction`, `Transported`: actual reduction/limit transport.
 - `Mates`, `ReductionMates`, `SystemMates`: normalized scalar comparisons and equations.
-- `exceptionalIntegralScalarMates`, `ramifiedRecovery`: the two clauses of the node.
+- `exceptionalIntegralScalarMates`, `ramifiedRecovery`: the two main statements.
+
+## Implementation details
+
+The finite scalar maps are constructed from the ordinary étale adjunction and transported through
+the reduction/limit reconstruction; the integral scalar functor is assembled using the completed
+scalar comparison. The whole-system mate transports finite-level mates along the normalized
+subsequence equivalence, and balanced associativity supplies transitions and shifts.
+
+## References
+
+* [Zheng, Constructions 4.1 and 5.15, Lemma 5.22 and Propositions 5.24, 5.26]
 -/
 
 @[expose] public noncomputable section
@@ -173,15 +184,8 @@ private theorem pasteCounit (N : B) :
   rw [← VY.map_comp_assoc, ← VY.map_comp, Category.assoc, h₁]
 end
 
-/-- Construction of the mate data used by the integral scalar comparison.  This is the
-first strictly smaller part of the construction; the remaining reduction maps are
-recorded separately below because they require the same chosen mate.
-Source: Zheng, Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-integral-scalar-mates-data-mates).
-The finite scalar constructions are transported through the specified reconstruction,
-and the completed scalar comparison supplies the integral component.  The resulting
-record contains the fixed scalar functors, their realizations, and all mate equations.
--/
+/-- The mate data used by the integral scalar comparison exists. The remaining reduction maps
+are constructed separately because they require the same chosen mate. -/
 theorem exceptionalIntegralScalarMates_data_mates
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}
@@ -228,8 +232,6 @@ private theorem reductionCounit
 /-! The pointwise reduction construction is the remaining independent part of the
     reduction-data theorem.  Isolating one coefficient stage and one level keeps the
     unresolved construction strictly below the quantified assertion above it.
-    Source: Zheng, Lemma 5.22 and Proposition 5.26.
-    (blueprint: lem-sf-exceptional-integral-scalar-mates-data-reduction-pointwise).
     The finite-level adjunction units and counits are transported through the chosen
     reconstruction, and their normalized evaluation equations give the four fields of
     `ReductionMates` for this fixed `E` and `n`. -/
@@ -323,8 +325,6 @@ theorem exceptionalIntegralScalarMates_data_reduction_pointwise
 /-
 The reduction part is a separate strictly smaller assertion: once the scalar mate
 record is fixed, it supplies the reduction comparison at every finite level.
-Source: Zheng, Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-integral-scalar-mates-data-reduction).
 The system evaluation and counit maps are obtained by applying the actual finite
 scalar maps to the reconstruction unit and counit; their equations are the transported
 adjunction equations.  The statement is parameterized by the chosen mate record.
@@ -350,14 +350,7 @@ theorem exceptionalIntegralScalarMates_data_reduction
     Classical.choice (exceptionalIntegralScalarMates_data_reduction_pointwise
       l Ω D hl c operation left transport d E n)⟩
 
-/-- Construction of the mate and finite-reduction data used by the integral scalar comparison.
-Source: Zheng, Lemma 5.22 and Proposition 5.26; the finite reduction and completed scalar
-transport steps of the exceptional coefficient construction.
-(blueprint: lem-sf-exceptional-integral-scalar-mates-data).
-The proof constructs the finite scalar maps from the ordinary etale adjunction, transports them
-through the reduction/limit reconstruction, and assembles the integral scalar functor using the
-published completed scalar comparison. The counit transpose and all shift witnesses are retained.
--/
+/-- The mate and finite-reduction data used by the integral scalar comparison exist. -/
 theorem exceptionalIntegralScalarMates_data
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}
@@ -379,14 +372,7 @@ theorem exceptionalIntegralScalarMates_data
     l Ω D hl c operation left transport d
   exact ⟨d, red, trivial⟩
 
-/-- Construction of the whole-system scalar mate from the integral mate data.
-Source: Zheng, Construction 4.1, Lemma 5.22 and Proposition 5.26; the cofinal ramified
-subsequence, finite-free comparison, and normalized system transport steps.
-(blueprint: lem-sf-exceptional-integral-scalar-mates-system).
-The proof transports finite-level mates along the normalized subsequence equivalence, uses the
-completed scalar comparison to identify the chosen integral functor, and conjugates the system
-counit equation through reconstruction. Balanced associativity supplies transitions and shifts.
--/
+/-- The whole-system scalar mate can be constructed from the integral mate data. -/
 theorem exceptionalIntegralScalarMates_system
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}
@@ -470,11 +456,7 @@ theorem exceptionalIntegralScalarMates_system
     isoWhiskerLeft_hom, whiskerRight_app, whiskerLeft_app, Functor.map_comp,
     Functor.comp_map, Functor.comp_obj, Category.assoc] using hr
 
-/-- Core integral scalar mate data before the arithmetic ramified-index witness.
-Source: Zheng, Lemma 5.22 and Proposition 5.26. The proof follows the parent's
-system transport, finite reduction, completed scalar comparison, reconstruction,
-realization, and shift-coherence steps, omitting only the final explicit index choice.
-(blueprint: lem-sf-exceptional-integral-scalar-mates-core). -/
+/-- Core integral scalar mate data before the arithmetic ramified-index witness. -/
 theorem exceptionalIntegralScalarMates_core
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

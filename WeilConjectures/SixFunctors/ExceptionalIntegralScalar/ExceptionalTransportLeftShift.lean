@@ -9,7 +9,26 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalI
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Ring.ExceptionalRingOperationsExistence
 import Mathlib.CategoryTheory.Triangulated.Subcategory
 
-/-! # Shift witnesses for exceptional integral transport realizations -/
+/-!
+# Shift witnesses for exceptional integral transport realizations
+
+Exceptional operations admit compact-support realizations compatible with shifts.
+
+## Implementation details
+
+At one ring stage write the realization as `r : F ⋙ IY ≅ IX ⋙ H`. The canonical shift of the
+exact proper/open image `H` is transported to `F` by `ofComp`, which makes `r` commute with
+shifts; the right adjoint gets its uniquely induced shift. The operations are reassembled with
+these structures and the same functors, adjunction and realization.
+
+The statement asserts existence of such normalized operations; the universal assertion for
+arbitrary, independently shifted operations and arbitrary realization isomorphisms is false in
+general, since compatibility requires this normalization of the shift structures.
+
+## References
+
+* [Zheng, Construction 5.25 and Proposition 5.26]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,27 +41,7 @@ open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.ExceptionalIntegralScalar
 open ConstructibleExceptionalCoefficients
 
-/-- Exceptional operations admit compact-support realizations compatible with shifts.
-Source: Zheng, Construction 5.25 and Proposition 5.26.
-
-Proof: choose the finite and integral operations and their left realizations. At
-one ring stage write the realization as `r : F ⋙ IY ≅ IX ⋙ H`. The inclusions
-are fully faithful, exact, and compatible with shifts, and the proper/open image
-`H` is exact with its canonical shift. Transport that shift to `F` by `ofComp`;
-its compatibility theorem makes `r` commute with shifts. Reflect exactness along
-`IY`. Give the existing right adjoint its uniquely induced shift, so both
-adjunction maps commute with shifts, and use exactness of a right adjoint.
-Reassemble the operation with these structures and the same functors,
-adjunction, and realization. Choose these normalized operations stagewise.
-This argument includes zero objects and empty schemes, with no nonvanishing
-assumption.
-
-STATEMENT-DISPUTED (former statement): the universal assertion for arbitrary,
-independently shifted operations
-and arbitrary realization isomorphisms is not asserted: compatibility requires
-this normalization of the shift structures.
-(blueprint: new-lem-sf-exceptional-ring-transport-left-shifts)
--/
+/-- Exceptional operations admit compact-support realizations compatible with shifts. -/
 theorem exists_exceptional_transport_left_shifts
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

@@ -11,9 +11,20 @@ import WeilConjectures.SixFunctors.Integral.IntegralHomComparisonUncurry
 
 /-! # Independence of the normalized integral Hom reduction presentation
 
-Source: Stacks Tags 06YY and 08J7; the universal-property and evaluation normalization
-in the integral Hom reduction construction
-(blueprint: lem-sfb-integral-hom-comparison-normalization).
+The two normalized presentations of the integral Hom reduction give the same evaluation-transpose
+morphism.
+
+## Implementation details
+
+The two tensor orders differ by the signed exchange, so equality of maps, rather than an
+isomorphism between their endpoints, is proved. On K-flat pairs both tensors are identified with
+the ordinary signed total tensor; the sign in `TensorPresentation.evaluation` cancels the Koszul
+sign `(-1)^(ij)` of the exchange. Naturality and the localization universal property extend the
+identification to all objects. No finite-field hypothesis on the base scheme is used.
+
+## References
+
+* [Stacks, Tag 06YY], [Stacks, Tag 08J7]
 -/
 
 @[expose] public section
@@ -24,27 +35,7 @@ universe d u
 open CategoryTheory Opposite
 namespace WeilConjectures
 
-/-- The two normalized presentations give the same evaluation-transpose morphism.
-Their tensor orders differ by the signed exchange, so equality of maps, rather than
-an arbitrary isomorphism between their endpoints, is essential here.
-
-Source: Stacks Tags 06YY and 08J7; the normalization paragraphs of the integral
-Hom reduction construction
-(blueprint: lem-sfb-integral-hom-comparison-normalization).
-
-Proof: on K-flat pairs the representative comparisons identify both tensors with the
-ordinary signed total tensor. Exchange the factors using the Koszul symmetry; its
-sectionwise factor is (-1)^(ij). The two evaluation normalizations then agree on
-homogeneous generators: the sign in TensorPresentation.evaluation cancels this exchange.
-Their adjunction Hom equivalences therefore agree on K-flat sources and K-injective
-targets. Every derived source has a K-flat representative and every derived target a
-K-injective representative. Naturality and the localization universal property extend
-these identifications to all objects. The two scalar comparisons also agree there:
-the ordinary units both send x to 1 tensor x, and their counit normalization squares
-identify them on every K-flat pair. Apply the target adjunction's injectivity to the
-two reduced-evaluation transposes. The preceding equalities identify their uncurried
-maps, giving the asserted equality. This includes n=0, zero complexes, and unbounded
-inputs; no finite-field hypothesis on the base scheme is used. -/
+/-- The two normalized presentations give the same evaluation-transpose morphism. -/
 theorem integralHomComparison_normalization
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
