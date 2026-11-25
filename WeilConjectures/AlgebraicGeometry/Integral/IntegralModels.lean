@@ -200,16 +200,21 @@ import WeilConjectures.AlgebraicGeometry.Integral.Models.IntegralModelsEmbeddedS
 import WeilConjectures.AlgebraicGeometry.Integral.Models.IntegralModelsEmbeddedResidueComparison
 /-! # Integral models for constructible l-adic complexes
 
-Coefficients are the existing continuous condensed rings pulled back from the point.
-The constant and completed ambient categories remain distinct. Completeness is the
-existing local ringed-ideal predicate transported to the equivalent small site; the
-constant-completion comparison identifies it with the canonical quotient-tower condition.
+This file states and assembles the comparison between integral and rational constructible
+`ℓ`-adic complexes on the pro-étale site of a scheme of finite type over a field.
 
 ## Main definitions and statement
 
 * `IntegralModelsEmbedded`: canonical embedded-coefficient scalar maps and predicates.
 * `integralModelResidueEtaleOrigin`: bounded constructible etale origin of the first reduction.
 * `integral_models`: the opening Tor-amplitude equality and all four integral-model clauses.
+
+## Implementation details
+
+Coefficients are the existing continuous condensed rings pulled back from the point.
+The constant and completed ambient categories remain distinct. Completeness is the
+existing local ringed-ideal predicate transported to the equivalent small site; the
+constant-completion comparison identifies it with the canonical quotient-tower condition.
 -/
 
 @[expose] public noncomputable section

@@ -14,8 +14,25 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 /-!
 # Subgroup quotients of connected finite etale torsors
 
-Source: Stacks Project, proof of Tag 0A3R, and Tag 0BND.
-(blueprint: lemma-covers-degree-prime-to-ell--1)
+The quotient of a connected finite étale `Q`-torsor over a connected scheme `U` by a subgroup
+`H ≤ Q` is a connected finite étale `U`-scheme `V` whose geometric fibres have cardinality
+`[Q : H]`, and the original total space is an `H`-torsor over `V`.
+
+## Main results
+
+- `AlgebraicGeometry.Scheme.GaloisCover.exists_connected_subgroup_quotient`
+
+## Implementation details
+
+The quotient `V` is the quotient in finite étale `U`-schemes of the total space by the action
+of `H`. On a geometric fibre, the map `H × Q → Q ×_{H\Q} Q` is a bijection, and the fibre
+functor reflects isomorphisms, so the `H`-action makes the total space an `H`-torsor over `V`,
+with the identity as comparison isomorphism. The geometric fibre cardinality of `V` follows by
+comparing the fibre cardinalities of the two torsors.
+
+## References
+
+- Stacks Project, proof of Tag 0A3R, and Tag 0BND.
 -/
 
 @[expose] public section
@@ -129,29 +146,7 @@ private theorem card_geometricFiber_comp
   simp only [h, Finset.sum_const, Finset.card_univ, smul_eq_mul, Nat.card_eq_fintype_card]
 
 /-- The quotient of a connected finite Q-torsor by H is connected, of geometric
-fibre cardinality [Q:H], and has the same total space as an H-torsor.
-Source: Stacks Project, Tag 0A3R, proof at T = Y/H; Tag 0BND (1), (3).
-(blueprint: lemma-covers-degree-prime-to-ell--1)
-
-Proof:
-1. Choose a geometric point of U and a lift to c.P. The fibre is the regular
-Q-set, with the fundamental group acting through a surjection onto Q because
-c.P is connected. The quotient of the regular fibre by the deck action of H is the coset set
-H\Q (identified by inversion with Q/H). The commuting monodromy action remains
-transitive. This finite continuous fundamental-group set corresponds under the finite etale
-Galois equivalence to a connected finite etale map v : V -> U.
-2. The quotient map c.P -> V is induced by the equivariant projection from the
-regular fibre to its H-orbits.
-The H action on c.P gives an H-torsor over V: on the chosen geometric fibre
-the map H times Q -> Q times_(H\Q) Q is a bijection. The fibre functor reflects
-isomorphisms, so the corresponding scheme map is an isomorphism. The quotient
-is surjective because its image on the fibre is surjective. Use the same total
-space for cH; e can then be the identity, and the displayed square commutes.
-3. Every geometric fibre of v has the cardinality of H\Q: fibre functors at
-any two geometric points of connected U are isomorphic. This applies also to
-separably closed fields, since finite etale algebras split over such fields.
-Its cardinality is the subgroup index. The construction works for H = 1,
-H = Q, and Q = 1 without a nonzero-rank hypothesis. -/
+fibre cardinality [Q:H], and has the same total space as an H-torsor. -/
 theorem Scheme.GaloisCover.exists_connected_subgroup_quotient
     {U : Scheme.{u}} [ConnectedSpace U]
     (Q : Type u) [Group Q] [Finite Q]

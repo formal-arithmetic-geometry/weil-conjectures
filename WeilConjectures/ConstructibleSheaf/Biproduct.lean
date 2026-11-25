@@ -25,8 +25,6 @@ when the forgetful functor of the coefficient category preserves finite limits
 sheaves is finite (`IsFiniteSheaf.biprod`). Together,
 finite direct sums of finite locally constant sheaves are finite locally constant
 (`IsFiniteLocallyConstantSheaf.biprod`).
-(blueprint: `lemma:constructible-flc-biproduct`)
-
 -/
 
 @[expose] public section
@@ -84,7 +82,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [HasSmallSiteSheafify A]
 
 /-- The direct sum of two locally constant sheaves is locally constant, trivialised by the
-fibre product of trivialising covers. (blueprint: `lemma:constructible-flc-biproduct`) -/
+fibre product of trivialising covers. -/
 theorem IsLocallyConstantSheaf.biprod (F G : Sheaf X.smallEtaleTopology A)
     [IsLocallyConstantSheaf F] [IsLocallyConstantSheaf G] : IsLocallyConstantSheaf (F ⊞ G) := by
   obtain ⟨⟨𝒰, h𝒰⟩⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := F)
@@ -133,7 +131,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 omit [HasSmallSiteSheafify A] in
 /-- The direct sum of two finite sheaves is finite: the stalk of `F ⊞ G` is the direct sum of the
-stalks, which is finitely generated. (blueprint: `lemma:constructible-flc-biproduct`) -/
+stalks, which is finitely generated. -/
 theorem IsFiniteSheaf.biprod (F G : Sheaf X.smallEtaleTopology A)
     [IsFiniteSheaf F] [IsFiniteSheaf G] : IsFiniteSheaf (F ⊞ G) where
   isFinitelyGenerated_sheafFiber Ω _ _ s :=
@@ -141,8 +139,7 @@ theorem IsFiniteSheaf.biprod (F G : Sheaf X.smallEtaleTopology A)
       (IsFiniteSheaf.isFinitelyGenerated_sheafFiber (FA := FA) (CA := CA) (F := G) Ω s)).of_iso
       (((pointSmallEtale s).skyscraperSheafAdjunction (A := A)).leftAdjointBiprodIso F G).symm
 
-/-- **A finite direct sum of finite locally constant sheaves is finite locally constant.**
-(blueprint: `lemma:constructible-flc-biproduct`) -/
+/-- **A finite direct sum of finite locally constant sheaves is finite locally constant.** -/
 theorem IsFiniteLocallyConstantSheaf.biprod (F G : Sheaf X.smallEtaleTopology A)
     [IsFiniteLocallyConstantSheaf F] [IsFiniteLocallyConstantSheaf G] :
     IsFiniteLocallyConstantSheaf (F ⊞ G) where

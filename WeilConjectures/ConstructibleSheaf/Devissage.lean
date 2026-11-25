@@ -16,8 +16,8 @@ public import WeilConjectures.Topology.StratificationDense
 
 A constructible sheaf `F` of `Λ`-modules on a Noetherian scheme `X` has a finite filtration
 `0 = F₀ ⊆ F₁ ⊆ ⋯ ⊆ F_m = F` whose subquotients are extensions by zero of lisse sheaves along
-locally closed immersions (`AlgebraicGeometry.Etale.exists_filtration_isFiniteLocallyConstant`,
-blueprint `lemma-flat-models-generators--3`). A locally closed immersion is written as a closed
+locally closed immersions (`AlgebraicGeometry.Etale.exists_filtration_isFiniteLocallyConstant`).
+A locally closed immersion is written as a closed
 immersion `i : Y ⟶ W` into an open subscheme `W ⊆ X`, and the extension by zero along it is
 `(W.ι)_! ∘ i_*`.
 
@@ -154,9 +154,7 @@ instance Etale.mono_openImmersionLowerShriekUpperStarAdjunction_counit {U X : Sc
   obtain ⟨Z, i, _, hi⟩ := exists_isClosedImmersion_range_eq_compl j
   exact (Etale.shortExact_openClosedShortComplex _ j i F hi).mono_f
 
-/-- Blueprint `lemma-flat-models-generators--3`: Dévissage of a constructible sheaf.
-
-Let `X` be Noetherian (in the blueprint: of finite type over a field) and `F` a constructible
+/-- Dévissage of a constructible sheaf. Let `X` be Noetherian and `F` a constructible
 sheaf of `Λ`-modules on `X_ét`. There is a finite filtration by subsheaves
 `0 = F₀ ⊆ F₁ ⊆ ⋯ ⊆ F_m = F` and, for each `1 ≤ r ≤ m`, a locally closed subscheme of `X`, given
 as a closed immersion `i_r : Y_r ⟶ W_r` into an open `W_r ⊆ X`, with a finite locally constant
