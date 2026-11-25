@@ -902,7 +902,8 @@ def pbcIsoIntegralScalarComparison (h : E ≤ F) :
         pbcIntegralScalarExtension l Ω T hdim hl h :=
   (pbcIsoIntegralScalarComparison_exists l Ω e hdim hl h).exists.choose
 
-omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian T] in
+-- Omitting the unused `[IsAlgClosure ℚ_[l] Ω]` would cascade into downstream statements.
+set_option linter.unusedSectionVars false in
 /-- Integral localization commutes with the explicitly linear coefficient transport. -/
 theorem pbcIsoRationalization (E : Padic.FiniteCoefficientFields l Ω) :
     pbcRationalization T (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E) ⋙
