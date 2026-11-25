@@ -13,8 +13,26 @@ import WeilConjectures.ProperBaseChange.IntegralCoefficientCompletenessTransport
 
 /-! # Coefficient comparison for augmented strict integral towers
 
-Source: Bhatt--Scholze Remark 6.8.15; Stacks 03D3, 03EL and 099N(5).
-(blueprint: lem-weil-pbc-integral-coefficient-strict-tower-comparison).
+We compare the strict reduction tower of the completed coefficient transport of a complex with
+the transport of its integral reduction tower, compatibly with the augmentations.
+
+## Main results
+
+- `integralCoefficientStrictTowerComparison`
+
+## Implementation details
+
+The completed coefficient comparison and its finite-level versions commute with the quotient
+projections, and scalar restriction along each coefficient isomorphism is an equivalence; the
+adjunction square for extension and restriction of scalars then gives an isomorphism of the two
+reductions preserving their units, which is lifted degreewise to cochain complexes. Since the
+quotient units are epimorphisms, this normalization forces compatibility with the tower
+transitions and naturality in the complex.
+
+## References
+
+- Bhatt–Scholze, *The pro-étale topology for schemes*, Remark 6.8.15
+- [Stacks, Tag 03D3], [Stacks, Tag 03EL], [Stacks, Tag 099N]
 -/
 
 @[expose] public noncomputable section
@@ -119,17 +137,9 @@ private theorem sliceAugmentation_component
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
-/-- The canonical completed/ordinary coefficient comparison of augmented strict towers.
-Source: Bhatt--Scholze Remark 6.8.15; Stacks 03D3, 03EL and 099N(5).
-(blueprint: lem-weil-pbc-integral-coefficient-strict-tower-comparison).
-
-Proof: the completed coefficient comparison and its finite-level versions commute with
-quotient projections. Scalar restriction along each coefficient isomorphism is an
-equivalence. The adjunction square for extension and restriction therefore gives an
-isomorphism between the two reductions preserving their tensor units. Lift it degreewise
-to cochain complexes. Quotient units are epimorphisms, so their normalization forces both
-tower-transition compatibility and naturality in the input complex. The resulting strict
-tower isomorphism satisfies the displayed degreewise augmentation formula. -/
+/-- There is a natural isomorphism between the completed strict reduction tower of the
+transported complex and the transport of the integral reduction tower, compatible in each
+degree and level with the two augmentations. -/
 theorem integralCoefficientStrictTowerComparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (W : Scheme.{u}) :

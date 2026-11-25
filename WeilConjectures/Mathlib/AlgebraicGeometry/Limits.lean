@@ -13,8 +13,8 @@ public import Mathlib.AlgebraicGeometry.Properties
 
 A quasi-compact scheme with finitely many irreducible components admits a finite
 affine open cover whose total intersection contains every generic point, and is
-therefore dense (Stacks Project Tag 01ZX, simplified for the finite-components case;
-blueprint `lemma:nagata-dense-affine-cover-exists`):
+therefore dense (a simplified form, for finitely many components, of Stacks Project
+Tag 01ZX):
 
 - `AlgebraicGeometry.exists_isAffineOpen_mem_and_genericPoints_subset`: every point
   has an affine open neighbourhood containing all generic points, obtained as the
@@ -30,6 +30,10 @@ We also record `AlgebraicGeometry.sigmaSpec_comp_Spec_map_algebraMap`: under
 `AlgebraicGeometry.Scheme.isEmpty_of_subsingleton_Γ`: a scheme whose ring of global sections is
 zero is empty, and `AlgebraicGeometry.exists_comp_sigmaι_eq_of_subsingleton`: a morphism from a
 one-point scheme into a coproduct factors through one of the summands.
+
+## References
+
+* [Stacks Project, Tag 01ZX](https://stacks.math.columbia.edu/tag/01ZX)
 -/
 
 @[expose] public section
@@ -44,12 +48,7 @@ variable {X : Scheme.{u}}
 
 /-- **Affine neighbourhoods containing all generic points**: every point `x` of a
 scheme with finitely many irreducible components has an affine open neighbourhood
-containing every generic point. The neighbourhood is the disjoint union of an affine
-open `W ∋ x` avoiding the components not through `x` — which automatically contains
-the generic points of the components through `x` — with, for each remaining generic
-point, a small affine open around it avoiding `closure W` and all other components.
-(Stacks Project Tag 01ZX, simplified for the finite-components case; blueprint
-`lemma:nagata-dense-affine-cover-exists`.) -/
+containing every generic point. -/
 theorem exists_isAffineOpen_mem_and_genericPoints_subset
     (hX : (irreducibleComponents X).Finite) (x : X) :
     ∃ U : X.Opens, IsAffineOpen U ∧ x ∈ U ∧ genericPoints X ⊆ ↑U := by
@@ -165,9 +164,7 @@ theorem exists_isAffineOpen_mem_and_genericPoints_subset
 
 /-- **Dense affine covers exist**: a quasi-compact scheme with finitely many
 irreducible components admits a finite affine open cover whose total intersection
-contains every generic point, and is therefore dense.
-(Stacks Project Tag 01ZX, simplified for the finite-components case; blueprint
-`lemma:nagata-dense-affine-cover-exists`.) -/
+contains every generic point, and is therefore dense. -/
 theorem exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter
     (X : Scheme.{u}) [CompactSpace X] (hX : (irreducibleComponents X).Finite) :
     ∃ (n : ℕ) (U : Fin n → X.Opens), (∀ i, IsAffineOpen (U i)) ∧ iSup U = ⊤ ∧
@@ -195,9 +192,7 @@ lemma sigmaSpec_comp_Spec_map_algebraMap (ι : Type u) (k : Type u) [CommRing k]
   rw [Sigma.ι_comp_desc, ι_sigmaSpec_assoc, ← Spec.map_comp, ← Spec.map_id]
   rfl
 
-/-- A scheme whose ring of global sections is the zero ring is empty: at a point `p` the germ map
-`Γ(X, ⊤) → 𝒪_{X,p}` would send `0 = 1` to `0 = 1` in the nonzero local ring `𝒪_{X,p}`. This is
-the converse of the instance `Subsingleton Γ(X, U)` for empty `X`. -/
+/-- A scheme whose ring of global sections is the zero ring is empty. -/
 lemma Scheme.isEmpty_of_subsingleton_Γ (h : Subsingleton Γ(X, ⊤)) : IsEmpty X :=
   ⟨fun p ↦ by
     have := congrArg (X.presheaf.germ ⊤ p trivial).hom (Subsingleton.elim (0 : Γ(X, ⊤)) 1)

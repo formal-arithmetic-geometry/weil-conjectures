@@ -9,9 +9,10 @@ public import Mathlib.RepresentationTheory.Rep.Basic
 public import Mathlib.Topology.Algebra.Group.Defs
 
 /-!
-# Blueprint statements
+# Discrete representations of a topological group
 
-theorem-cohomology-curves.
+The category of discrete representations of a topological group `G` over a ring `A`, i.e. those
+in which every vector has an open stabilizer.
 -/
 
 @[expose] public section
@@ -20,7 +21,8 @@ universe u₁ v₁ w₁
 
 namespace Rep
 
-/-- Required definitions for theorem-cohomology-curves. -/
+/-- The full subcategory of `Rep A G` on the representations in which the stabilizer of every
+vector is open in `G`. -/
 abbrev DiscreteContinuousRep (A : Type u₁) [Ring A] (G : Type v₁) [Group G]
     [TopologicalSpace G] [IsTopologicalGroup G] : Type _ :=
   CategoryTheory.ObjectProperty.FullSubcategory

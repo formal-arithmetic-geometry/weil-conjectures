@@ -85,9 +85,7 @@ end toolkit
 
 section coind₁
 
-/-- **Coinduced modules are acyclic.** `Hⁿ(G, C^sm(G, A)) = 0` for `n ≥ 1`: by the
-`Ext`-adjunction for the exact functors `forget ⊣ coind₁` it is `Extⁿ(ℤ, A)` computed among
-abelian groups, which vanishes as `ℤ` is projective. -/
+/-- **Coinduced modules are acyclic.** `Hⁿ(G, C^sm(G, A)) = 0` for `n ≥ 1`. -/
 lemma subsingleton_H_coind₁ (A : AddCommGrpCat.{max u w}) (n : ℕ) :
     Subsingleton (H G ((coind₁ G).obj A) (n + 1)) := by
   let := hasExt_of_enoughInjectives.{max u w} AddCommGrpCat.{max u w}
@@ -216,8 +214,7 @@ lemma injective_ofInvariant (X : DiscreteModule.{w} G) (x : X.obj.V) (hx : ℓ �
 
 /-- **Modules over an `ℓ`-group.** Suppose that `G` acts on finite `ℓ`-primary modules through
 an `ℓ`-group: the normal subgroup `N` acts trivially and every element of `G` has an `ℓ`-power in
-`N`. If `H²(G, 𝔽_ℓ) = 0`, then `H²(G, X) = 0` for every such `X`: a nonzero `X` contains a
-copy of `𝔽_ℓ` spanned by a fixed vector, and we argue by induction on `#X`. -/
+`N`. If `H²(G, 𝔽_ℓ) = 0`, then `H²(G, X) = 0` for every such `X`. -/
 theorem subsingleton_H_two_of_forall_pow_mem (N : Subgroup G) [N.Normal]
     (hpow : ∀ k : G, ∃ j : ℕ, k ^ ℓ ^ j ∈ N) (h2 : Subsingleton (H G (trivialZMod.{w} G ℓ) 2))
     (n : ℕ) (X : DiscreteModule.{w} G) [Finite X.obj.V] (hn : Nat.card X.obj.V = n)
@@ -592,8 +589,7 @@ section main
 variable [CompactSpace G] (ℓ : ℕ) [hℓ : Fact ℓ.Prime]
 
 /-- `H²(G, M) = 0` for a finite `ℓ`-primary module `M`, if `H²(K, 𝔽_ℓ) = 0` for every open
-subgroup `K`: by restriction–corestriction to an open subgroup of index prime to `ℓ` acting on
-`M` through an `ℓ`-group (`exists_isOpen_not_dvd_index_pow_mem`). -/
+subgroup `K`. -/
 theorem subsingleton_H_two_of_finite
     (h2 : ∀ K : Subgroup G, IsOpen (K : Set G) → Subsingleton (H K (trivialZMod.{w} K ℓ) 2))
     (M : DiscreteModule.{w} G) [Finite M.obj.V] (hM : IsPrimary ℓ M) :
@@ -621,7 +617,7 @@ theorem subsingleton_H_two_of_finite
   exact ⟨fun x y ↦ by rw [key x, key y]⟩
 
 /-- `H²(G, M) = 0` for every `ℓ`-primary module `M`, if `H²(K, 𝔽_ℓ) = 0` for every open
-subgroup `K`: `M` is the union of its finite stable subgroups. -/
+subgroup `K`. -/
 theorem subsingleton_H_two
     (h2 : ∀ K : Subgroup G, IsOpen (K : Set G) → Subsingleton (H K (trivialZMod.{w} K ℓ) 2))
     (M : DiscreteModule.{w} G) (hM : IsPrimary ℓ M) :
@@ -652,7 +648,7 @@ theorem subsingleton_H_two
 /-- **A degree-two criterion for continuous cohomology.** Let `G` be a profinite (more
 generally, compact) group and `ℓ` a prime such that `H²(K, 𝔽_ℓ) = 0` for every open subgroup
 `K` of `G`. Then `Hⁿ(G, M) = 0` for every `n ≥ 2` and every discrete `ℓ`-primary `G`-module `M`.
-(blueprint: `theorem-cohomology-curves`) -/
+-/
 theorem subsingleton_H_of_two_le
     (h2 : ∀ K : Subgroup G, IsOpen (K : Set G) → Subsingleton (H K (trivialZMod.{w} K ℓ) 2))
     (M : DiscreteModule.{w} G) (hM : IsPrimary ℓ M) {n : ℕ} (hn : 2 ≤ n) :

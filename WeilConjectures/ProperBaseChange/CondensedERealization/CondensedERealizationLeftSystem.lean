@@ -9,11 +9,19 @@ public import WeilConjectures.ProperBaseChange.CondensedERealization.CondensedER
 
 /-! # Integral operations and left realization comparisons
 
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15.
-(blueprint: def-weil-pbc-condensed-e-left-system)
+For a morphism `h` of schemes over `k`, `LeftAlong` records integral inverse and direct image
+functors on bounded constructible complete complexes, compatible with the ambient completed
+operations and adjunction, together with a comparison of the rational inverse image with
+pullback of condensed realizations.
 
-The records omit the rational adjunction and the right realization comparison.
-Those are constructed by tensor extension and taking mates.
+## Implementation details
+
+The records omit the rational adjunction and the right realization comparison; these are
+constructed from the integral data by tensor extension and by taking mates.
+
+## References
+
+- Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(2), Remark 6.8.15
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +41,9 @@ variable (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E]
 variable (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
 
-/-- Integral restrictions with their ambient adjunction normalization and a left comparison.
-Source: BS 6.8.14(2), 6.8.15 (blueprint: def-weil-pbc-condensed-e-left-system). -/
+/-- Integral inverse and direct image functors along `h`, an adjunction between them compatible
+with the ambient completed operations, and a comparison of the rational inverse image with
+pullback of realizations. -/
 structure LeftAlong (T U : Base k) (h : T.scheme ⟶ U.scheme)
     [h.IsOver (Spec (.of k))] (rT : At l E T.scheme) (rU : At l E U.scheme) where
   pull : Integral l E U.scheme ⥤ Integral l E T.scheme
@@ -76,8 +85,7 @@ structure LeftAlong (T U : Base k) (h : T.scheme ⟶ U.scheme)
 attribute [instance] LeftAlong.pullAdditive LeftAlong.pullLinear
   LeftAlong.pushAdditive LeftAlong.pushLinear
 
-/-- Tensor extension of the integral inverse image.
-Source: BS 6.8.15 (blueprint: def-weil-pbc-condensed-e-left-system). -/
+/-- The rational inverse image: tensor extension of the integral inverse image. -/
 abbrev LeftAlong.rationalPull {T U : Base k} {h : T.scheme ⟶ U.scheme}
     [h.IsOver (Spec (.of k))] {rT : At l E T.scheme} {rU : At l E U.scheme}
     (a : LeftAlong l E k T U h rT rU) :=

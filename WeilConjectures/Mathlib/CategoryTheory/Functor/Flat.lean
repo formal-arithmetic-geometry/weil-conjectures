@@ -26,13 +26,15 @@ in the target. This is the variant of `CategoryTheory.lan_preservesFiniteLimits_
 that replaces smallness of the categories and concreteness of the target by AB5 at the
 relevant size.
 
-`lanEvaluationIsoColim'` is taken verbatim from the `proetale` dependency
-(`Proetale.Topology.Comparison.CohomologyComparison`), which is not otherwise imported here;
-the import direction would be the wrong way round and that file is heavy.
-
 The comma categories `CostructuredArrow L X` of a representably coflat functor `L` are
 filtered, hence sifted (`CategoryTheory.Functor.isSifted_costructuredArrow`). This is what
 makes left Kan extension along `L` strong monoidal (`CategoryTheory.Functor.isIso_lan_δ`).
+
+## Implementation details
+
+`lanEvaluationIsoColim'` is taken verbatim from the `proetale` dependency
+(`Proetale.Topology.Comparison.CohomologyComparison`), which is not otherwise imported here;
+the import direction would be the wrong way round and that file is heavy.
 
 TODO: upstream `lanEvaluationIsoColim'` to `Mathlib/CategoryTheory/Functor/Flat.lean`,
 deriving Mathlib's `lanEvaluationIsoColim` from it (and renaming: the prime is only kept
@@ -101,10 +103,7 @@ end Functor
 
 /-- Left Kan extension along the opposite of a representably flat functor `F` is left
 exact, provided the pointwise left Kan extensions along `F.op` exist and filtered colimits
-of shape the comma categories `CostructuredArrow F.op K` are exact in the target.
-
-This is the variant of `CategoryTheory.lan_preservesFiniteLimits_of_flat` that assumes AB5
-at the relevant size instead of smallness of `C` and `D` and concreteness of `H`. -/
+of shape the comma categories `CostructuredArrow F.op K` are exact in the target. -/
 instance preservesFiniteLimits_op_lan_of_flat (F : C ⥤ D) [RepresentablyFlat F]
     [∀ G : Cᵒᵖ ⥤ H, F.op.HasPointwiseLeftKanExtension G]
     [HasFiniteLimits H] [HasFilteredColimitsOfSize.{v₁, max u₁ v₂} H]
@@ -129,8 +128,7 @@ open Limits
 /-- **Presheaf pullback of presheaves of sets.** For a functor `b : C ⥤ D` between small
 categories, the left Kan extension `b.op.lan` along `bᵒᵖ` (the presheaf pullback
 `b_p F (Y) = colim_{(X, Y ⟶ b X)} F X`) is left adjoint to precomposition with `bᵒᵖ`; if moreover
-`C` has finite limits and `b` preserves them, then `b.op.lan` preserves finite limits.
-(blueprint: `situation-conventions`) -/
+`C` has finite limits and `b` preserves them, then `b.op.lan` preserves finite limits. -/
 theorem nonempty_lan_adjunction_and_preservesFiniteLimits {C D : Type u₁} [SmallCategory C]
     [SmallCategory D] (b : C ⥤ D) :
     Nonempty (b.op.lan ⊣ (Functor.whiskeringLeft Cᵒᵖ Dᵒᵖ (Type u₁)).obj b.op) ∧

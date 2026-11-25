@@ -13,10 +13,24 @@ import WeilConjectures.Topology.ContinuousOpenNormalStabilizer
 /-!
 # Coinduced embeddings of discrete continuous modules
 
-Source: Stacks Project, etale-cohomology.tex, Tag 04JP,
-label definition-G-module-continuous; Tag 0DVG, label section-continuous-group-cohomology.
-The coinduced embedding is the agent-written comparison ingredient
-(blueprint: lem-exc-coinduced-discrete-embedding).
+For a profinite group `G` and a finite ring `A`, every discrete continuous `A[G]`-module `M`
+embeds naturally into the coinduced module of locally constant functions `G → M`, with `G`
+acting by right translation, via the orbit map `m ↦ (x ↦ x • m)`.
+
+## Main results
+
+- `Rep.exists_coinduced_discrete_embedding`: the coinduction functor and the natural injective
+  orbit-map embedding.
+
+## Implementation details
+
+`LocallyConstant G M` is exactly the module of continuous functions `G → M` with discrete
+codomain, with pointwise operations. Each such function is invariant under right translation by
+an open normal subgroup, so the coinduced object is again discrete.
+
+## References
+
+- Stacks Project, Tags 04JP and 0DVG
 -/
 
 @[expose] public section
@@ -143,26 +157,11 @@ private def discreteOrbitMap {G : Type u} [Group G] [TopologicalSpace G]
         change M.obj.ρ x (M.obj.ρ h m) = M.obj.ρ (x * h) m
         simp [map_mul, Module.End.mul_apply] })
 
-/-- Discrete continuous modules admit the natural injective orbit-map embedding into
-continuous functions with right translation. `LocallyConstant G M.obj.V` is exactly
-`Cont(G, M)` with discrete codomain, and its module operations are pointwise.
-The linear equivalences identify the coinduced objects with those function modules.
-
-Source: Stacks Project, etale-cohomology.tex, Tag 04JP,
-label definition-G-module-continuous; Tag 0DVG, label section-continuous-group-cohomology
-(blueprint: lem-exc-coinduced-discrete-embedding).
-
-Proof: (1) Pointwise operations give the function module, and precomposition by right
-multiplication gives a linear left action: translating successively by `k` then `h`
-evaluates at `x * h * k`, and translation by one is the identity.
-(2) `lem-exc-coinduced-functions-open-stabilizer` supplies an open normal subgroup
-under whose right translations any continuous function is invariant. Its stabilizer
-contains that subgroup, so is open; hence the coinduced object belongs to
-`DiscreteContinuousRep`, the category used in `lem-exc-discrete-modules-abelian`.
-(3) The orbit map is locally constant on the open left cosets of each element's
-stabilizer. It is linear pointwise and equivariant since `(x * h) m = x (h m)`.
-Evaluation at one proves injectivity. Equivariant linear maps commute with the orbit
-maps pointwise, giving naturality; on functions the coinduced map is postcomposition. -/
+/-- Discrete continuous modules admit a natural injective orbit-map embedding into
+continuous functions with right translation: there is an endofunctor `D` with linear
+equivalences `D M ≃ LocallyConstant G M` under which `G` acts by right translation and `D`
+acts by postcomposition, and a natural transformation `𝟭 ⟶ D` given by `m ↦ (x ↦ x • m)`,
+injective on every object. -/
 theorem exists_coinduced_discrete_embedding
     (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

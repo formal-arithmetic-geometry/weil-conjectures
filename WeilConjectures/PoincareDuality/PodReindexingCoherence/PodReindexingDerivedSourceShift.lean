@@ -11,8 +11,19 @@ import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingDeriv
 
 /-! # Source-shift square for normalized reindexing
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-(blueprint: lem-pod-reindexing-derived-source-shift)
+We show that the derived internal Hom comparison of reindexing along an isomorphism respects
+the signed shift in the source variable (`derived_source_shift_square`).
+
+## Implementation details
+
+On representatives (source a complex, target K-injective) both routes reindex each
+Hom-product factor by the source shift and multiply degree `r` by `(-1)^(a*r)`, while
+`chain_projection` identifies the unshifted factors; naturality gives the general case.
+
+## References
+
+* Stacks Project, Tag 0A8X
+* Stacks Project, Tag 08JA
 -/
 
 @[expose] public noncomputable section
@@ -28,20 +39,7 @@ namespace WeilConjectures.PodReindexingCoherence
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Reindexing respects the signed source shift of derived internal Hom.
-
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-(blueprint: lem-pod-reindexing-derived-source-shift).
-
-Proof: represent the source by a complex and resolve the target by a K-injective
-complex. Apply `Comparison.derived_model` to the source and its shift. The
-normalization `LeftNormalization` for `sourceShift` expresses both vertical maps
-as localizations of signed source reindexing. Apply each Hom-product projection:
-both routes reindex the factor by the source shift and multiply degree r by
-(-1)^(a*r), while `chain_projection` identifies their unshifted factors.
-Product extensionality proves the chain equality. Localize it and cancel the
-Hom-model and localization factor isomorphisms. Naturality along the chosen
-resolution and source presentation gives the square for M and N. -/
+/-- Reindexing respects the signed source shift of derived internal Hom. -/
 theorem derived_source_shift_square
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

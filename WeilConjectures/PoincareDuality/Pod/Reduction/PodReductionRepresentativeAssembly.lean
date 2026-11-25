@@ -103,8 +103,23 @@ import all WeilConjectures.SixFunctors.Coefficient.CoefficientReductionTensorEva
 
 /-! # Pasting the reduction tensor square on specified representatives
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4 and 0941.
-(blueprint: lem-pod-reduction-representative-assembly)
+We show that the reduction/reindexing tensor square commutes on flat-term K-flat
+representatives.
+
+## Main statements
+
+* `podReduction_assemble_representative`: the reduction/reindexing tensor square on
+  representatives.
+
+## Implementation details
+
+The proof pastes the unary models with the strict tensor identity and cancels the model
+isomorphisms; no finite-evaluation faithfulness is used.
+
+## References
+
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks Project, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -187,11 +202,8 @@ private theorem map_three {C D : Type*} [Category C] [Category D]
     F.map a ≫ F.map b ≫ F.map c = F.map d ≫ F.map e ≫ F.map f := by
   simpa only [Functor.map_comp] using congrArg (fun z ↦ F.map z) h
 
-/-- The reduction/reindexing tensor square on flat-term K-flat representatives.
-Source: blueprint dual-Tate compatibility Steps 2 and 4; Stacks 07A4 and 0941.
-The proof pastes the unary models with the strict tensor identity and cancels the
-model isomorphisms. No finite-evaluation faithfulness is used.
-(blueprint: lem-pod-reduction-representative-assembly). -/
+/-- The reduction/reindexing tensor square commutes on flat-term K-flat representatives
+`P` and `Q`, given unary models `βP`, `βQ`, `βT` compatible with the reduction comparison. -/
 theorem podReduction_assemble_representative
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

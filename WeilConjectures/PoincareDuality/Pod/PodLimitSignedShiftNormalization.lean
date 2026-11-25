@@ -12,7 +12,23 @@ import all WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingSignedRoo
 import all WeilConjectures.PoincareDuality.Pod.PodNativeRoosFunctorComparison
 import all WeilConjectures.PoincareDuality.Pod.PodNormalizedRoosComparisonShift
 
-/-! # Signed shifts of the normalized limit-to-Roos comparison -/
+/-! # Signed shifts of the normalized limit-to-Roos comparison
+
+We show that the K-injective-normalized limit-to-Roos comparison has the prescribed signed
+shift (`podLimitSignedShiftNormalization`).
+
+## Implementation details
+
+On a K-injective tower the comparison is the inverse derived-unit comparison followed by the
+limit tuple with zero second coordinate, so it commutes with the signed shift. The derived
+unit commutes with shifts, and naturality along a K-injective replacement gives the equation
+on every complex. No boundedness, completeness or constructibility is used.
+
+## References
+
+* Stacks Project, Tag 0941
+* Stacks Project, Tag 011G
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -202,18 +218,8 @@ private theorem normalization_native_square
   erw [hm]
   exact h'
 
-/-- The K-injective-normalized Roos comparison has the prescribed signed shift.
-Source: Stacks 0941, the shifted K-injective calculation, and 011G, signed shifts
-(blueprint: lem-pod-limit-signed-shift-normalization-s8).
-
-Proof: the two coordinate equations uniquely determine the signed Roos map.
-On a K-injective tower, the comparison is the inverse derived-unit comparison
-followed by the limit tuple with zero in the second coordinate. The tuple
-inclusion commutes with the signed shift because that second coordinate is zero.
-The canonical derived unit commutes with shifts. Cancel it on K-injectives,
-then use naturality along a K-injective replacement to obtain the equation on
-every complex. Compose with exact restriction and its canonical shift comparison.
-No boundedness, completeness or constructibility is used. -/
+/-- For a signed Roos shift `S` satisfying `S.Laws`, the K-injective-normalized Roos
+comparison `ρ` has the prescribed signed shift `PodLimitSignedShift l E W ρ S`. -/
 theorem podLimitSignedShiftNormalization
     (ρ : IntegralComparisonRoosModel l E W)
     (S : PodSignedRoosShift (scalarReductionSource l E W)) (hS : S.Laws) :
