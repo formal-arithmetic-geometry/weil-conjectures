@@ -11,7 +11,11 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.Canonical
 
 /-! # Degreewise ordinary reduction and total tensor pullback
 
-Source: Stacks 07A4, 07A6 and 0941; proposition-six-operations-change-coefficients, first paragraph.
+We prove the ordinary reduction/tensor pullback identity in a single cochain degree.
+
+## References
+
+* [Stacks, Tag 07A4], [Stacks, Tag 07A6], [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -27,16 +31,7 @@ attribute [local irreducible] pullbackTensorCalculus
   completedIntegralCoefficientSheafUnrestricted completedIntegralCommRingSheafUnrestricted
   HasDerivedCategory.standard SheafOfModules.monoidalCategory
 
-/-- The missing ordinary tensor identity, after taking one cochain degree.
-Source: Stacks 07A4, 07A6 and 0941; proposition-six-operations-change-coefficients, first paragraph.
-(blueprint: lem-sf-canonical-reduction-tensor-pull-complex-component).
-
-Proof: expand the three strict-system maps in degree `n` and use the finite
-component formula for `tensorReductionStrictMap`, the unit formula for
-`pullbackTensorSequenceCochain`, and the pure-tensor formula for the ordinary
-limit mate. Balancing and additivity extend the pure-tensor equality to each
-summand; compatibility with quotient transitions is inherited from the same
-finite component formula. -/
+/-- The ordinary reduction/tensor pullback identity, in a single cochain degree `n`. -/
 theorem canonicalReductionTensorPullComplex_component
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -50,9 +50,9 @@ public import WeilConjectures.SmoothPurity.Compact.CompactSupportReductionTowerF
 
 /-! # Primitive integral realization with strict coefficient towers
 
-Source: blueprint main-20261015, fix-prop-coherence.proof.md, primitive coefficient
-comparisons; the five-step refinement in the DAG
-(blueprint: def-sf-integral-basic-realization-data).
+We record the primitive realization data for integral coefficient towers.
+
+## Implementation details
 
 Only primitive operations occur here. Each domain below is the specialization of
 Expression.domain to one operation and its inputs. Natural number n denotes the
@@ -80,18 +80,14 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The input and output conditions of Expression.domain for one unary operation.
-Source: fix-prop-coherence, intermediate-domain paragraph
-(blueprint: def-sf-integral-basic-realization-data). -/
+/-- The input and output conditions of Expression.domain for one unary operation. -/
 def basicUnaryDomain (X Y : Scheme.{u}) (A : System l E X ⥤ System l E Y) :
     ObjectProperty (Integral l E X) := fun K ↦
   sfIntegralConstructible l E X K ∧
     Good l E X ((calculus l E X).reduction.obj K) ∧
     Good l E Y (A.obj ((calculus l E X).reduction.obj K))
 
-/-- Both inputs and the tensor output satisfy the recorded intermediate domain.
-Source: fix-prop-coherence, two-input tensor clause
-(blueprint: def-sf-integral-basic-realization-data). -/
+/-- Both inputs and the tensor output satisfy the recorded intermediate domain. -/
 def basicTensorDomain (W : Scheme.{u}) : ObjectProperty (Integral l E W × Integral l E W) :=
   fun K ↦ sfIntegralConstructible l E W K.1 ∧ sfIntegralConstructible l E W K.2 ∧
     Good l E W ((calculus l E W).reduction.obj K.1) ∧
@@ -99,32 +95,24 @@ def basicTensorDomain (W : Scheme.{u}) : ObjectProperty (Integral l E W × Integ
     Good l E W ((calculus l E W).systemClosed.tensor.obj
       ((calculus l E W).reduction.obj K.1, (calculus l E W).reduction.obj K.2))
 
-/-- The compactification domain also retains the intermediate open-extension bound.
-Source: fix-prop-coherence, chosen compactification paragraph
-(blueprint: def-sf-integral-basic-realization-data). -/
+/-- The compactification domain also retains the intermediate open-extension bound. -/
 def basicSupportDomain (o : Operations l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) : ObjectProperty (Integral l E X) := fun K ↦
   basicUnaryDomain l E X Y (Operations.shriek l E o c.i ⋙ Operations.push l E o c.g) K ∧
     Good l E c.Z ((Operations.shriek l E o c.i).obj ((calculus l E X).reduction.obj K))
 
-/-- Inclusion of the primitive support domain into the recorded integral category.
-Source: fix-prop-coherence, compact-support comparison domain
-(blueprint: def-sf-integral-basic-realization-data). -/
+/-- Inclusion of the primitive support domain into the recorded integral category. -/
 def basicSupportInput (o : Operations l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) :
     (basicSupportDomain l E o c).FullSubcategory ⥤ sfIntegralConstructibleCategory l E X :=
   ObjectProperty.ιOfLE (fun _ h ↦ h.1.1)
 
-/-- Restrict a primitive operation's actual reduction/system/limit composite.
-Source: fix-prop-coherence, displayed d_A
-(blueprint: def-sf-integral-basic-realization-data). -/
+/-- Restrict a primitive operation's actual reduction/system/limit composite. -/
 def basicUnarySource (X Y : Scheme.{u}) (A : System l E X ⥤ System l E Y) :=
   (basicUnaryDomain l E X Y A).ι ⋙ (calculus l E X).reduction ⋙ A ⋙
     coefficientSequenceLimit l E Y
 
-/-- Restrict the prescribed integral operation to the same full input domain.
-Source: fix-prop-coherence, displayed d_A
-(blueprint: def-sf-integral-basic-realization-data). -/
+/-- Restrict the prescribed integral operation to the same full input domain. -/
 def basicUnaryTarget (X Y : Scheme.{u}) (A : System l E X ⥤ System l E Y)
     (B : Integral l E X ⥤ Integral l E Y) := (basicUnaryDomain l E X Y A).ι ⋙ B
 

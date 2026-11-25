@@ -12,8 +12,12 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 
 /-! # Finite projections of the published completed pullback tower
 
-Source: Stacks 08TC, 0941, 099N; the fixed quotient and Roos normalizations.
-(blueprint: lem-sf-integral-published-tower-evaluation).
+We show that the finite projections of the published completed pullback tower agree with the
+normalized finite evaluations, using the fixed quotient and Roos normalizations.
+
+## References
+
+* [Stacks, Tag 08TC], [Stacks, Tag 0941], [Stacks, Tag 099N]
 -/
 
 @[expose] public noncomputable section
@@ -59,9 +63,7 @@ namespace WeilConjectures.IntegralPublishedPullback
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Naturality of the actual Roos projection. Source: Stacks 08TC.
-Expand the Roos map in its first cone coordinate, then apply product-map naturality.
-(blueprint: lem-sf-integral-published-tower-evaluation). -/
+/-- Naturality of the actual Roos projection. -/
 private theorem roos_projection_natural {W : Scheme.{u}}
     {A B : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E W) ℤ}
     (a : A ⟶ B) (n : ℕ) :
@@ -122,10 +124,7 @@ private theorem published_roos_projection (W : Scheme.{u})
   rw [Category.assoc, ← hv]
   exact (reassoc_of% hp) _
 
-/-- The published limit/Roos bridge preserves finite projections. Source: Stacks 08TC.
-Compute on K-injective towers using the prescribed Roos unit, extend by naturality,
-then use the exact scalar-restriction factorization.
-(blueprint: lem-sf-integral-published-tower-evaluation). -/
+/-- The published limit/Roos bridge preserves finite projections. -/
 private theorem published_bridge_projection (W : Scheme.{u})
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) (n : ℕ) :
     (pullbackTensorLimitRoos l E W C).hom ≫
@@ -144,11 +143,7 @@ private theorem published_bridge_projection (W : Scheme.{u})
   erw [reassoc_of% ((coefficientConstantTowerProjection l E W n).naturality
     ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.hom.app C))]
 
-/-- The strict pullback tower component is the normalized finite evaluation.
-Source: Stacks 0941 and 099N. Transport the exact restriction square to complexes,
-apply the normalization of pullbackTensorDerivedEvaluation, and cancel the
-inverse-image evaluation and representative quotient isomorphisms.
-(blueprint: lem-sf-integral-published-tower-evaluation). -/
+/-- The strict pullback tower component is the normalized finite evaluation. -/
 theorem published_tower_finite_component {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) :
     let C := ((pullbackTensorOrdinaryReduction l E Y).mapHomologicalComplex (.up ℤ)).obj P

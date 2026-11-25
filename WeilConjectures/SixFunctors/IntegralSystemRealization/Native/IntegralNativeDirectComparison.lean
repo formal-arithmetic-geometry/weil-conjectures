@@ -11,7 +11,18 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.NativeComparison.In
 import WeilConjectures.SmoothPurity.Compact.CompactSupportOrdinaryDirectEvaluationSections
 import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 
-/-! # Normalized comparison with the native system operation -/
+/-! # Normalized comparison with the native system operation
+
+## Implementation details
+
+All constructions take place on the sequence site before evaluation, so quotient transitions
+are retained and no faithfulness of finite evaluations is used.
+
+## References
+
+* [Zheng, Construction 4.1 and Lemma 4.10]
+* [Stacks, Tag 03D2], [Stacks, Tag 0941], [Stacks, Tag 0D6E]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,9 +37,7 @@ attribute [local irreducible] Scheme.residueField HasDerivedCategory.standard
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Identity on sections identifies the two ordinary sequence direct images.
-Source: Stacks 03D2, 0941
-(blueprint: lem-sf-integral-native-direct-comparison). -/
+/-- Identity on sections identifies the two ordinary sequence direct images. -/
 def integralNativeOrdinaryDirectIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     pullbackTensorSequenceDirect l E f ≅
       ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
@@ -40,9 +49,7 @@ def integralNativeOrdinaryDirectIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
   unfold pullbackTensorSequenceRing pullbackTensorSequenceRingMap
   rfl
 
-/-- Localize ordinary inverse-image uniqueness to the whole native system category.
-Source: Stacks 03D2, 0941
-(blueprint: lem-sf-integral-native-direct-comparison). -/
+/-- Localize ordinary inverse-image uniqueness to the whole native system category. -/
 def integralNativePullIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     pull l E f ≅ ProEtale.VaryingRing.G (compactSupportSystemLevel l E)
       (compactSupportSystemQuotient l E) f :=
@@ -58,9 +65,7 @@ def integralNativePullIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
         (ProEtale.VaryingRing.moduleAdj (compactSupportSystemLevel l E)
           (compactSupportSystemQuotient l E) f))
 
-/-- The derived direct-image comparison is the conjugate of the exact inverse-image one.
-Source: Stacks 03D2, 0941; Zheng 4.10
-(blueprint: lem-sf-integral-native-direct-comparison). -/
+/-- The derived direct-image comparison is the conjugate of the exact inverse-image one. -/
 def integralNativeDirectIso {X Y : Scheme.{u}} (f : X ⟶ Y) (d : Direct l E f) :
     d.direct ≅ ProEtale.VaryingRing.P (compactSupportSystemLevel l E)
       (compactSupportSystemQuotient l E) f :=
@@ -80,28 +85,7 @@ private theorem ordinary_direct_square {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ
     M V.unop x
   exact eq_of_heq (h₁.trans h₂.symm)
 
-/-- Compare total derived direct images on whole systems, with their finite evaluations.
-Source: Stacks 03D2, 0941, 0D6E; Zheng 4.1 and 4.10; blueprint
-fix-prop-coherence, coefficient comparisons of adjunction units and counits
-(blueprint: lem-sf-integral-native-direct-comparison).
-
-Proof: identify the two ordinary sequence-site direct images by identity on sections.
-Their scalar maps agree by the specified constant-section ring-map normalizations.
-Take ordinary left-adjoint uniqueness and localize this exact inverse-image comparison.
-Conjugation under d.adj and the native derived adjunction gives alpha between their
-right adjoints. This uses the normalized inverse-image factorization in Direct, so
-alpha is also the universal right-derived comparison of the ordinary section map.
-Compare evaluation of inverse image on complexes: both comparisons are localizations
-of the adjoint of the identity ordinary direct-image evaluation square. The whole
-cochain normalization of pullbackTensorDerivedEvaluation fixes this comparison.
-Take its right-adjoint mate. Native evalP is precisely that mate, followed by the
-right-derived constant-module coordinate change compactSupportDirectModel. The unit
-and counit equations of ed identify ed.evaluation with the same mate under d.adj.
-Naturality of adjoint conjugation therefore gives the displayed equality, on all
-derived inputs. Every construction takes place on the sequence site before evaluation,
-so quotient transitions are retained and no faithfulness of finite evaluations is used.
-Zero inputs and n=0 satisfy the same unit/counit equations; neither properness nor a
-constructibility assumption is needed for this comparison of the two presentations. -/
+/-- Compare total derived direct images on whole systems, with their finite evaluations. -/
 theorem integralNativeDirectComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (d : Direct l E f) (ed : DirectEvaluation l E d) :
     ∀ (M : System l E X) (n : ℕ),
