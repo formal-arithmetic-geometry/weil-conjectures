@@ -1,0 +1,62 @@
+SOURCE: isf-derived.out:220-224 (generic class-field source recompile, FT)
+goal: MonoidalCategory C
+instances: #[inst-local-2]
+attempt: inst-local-2; target unifies; success
+result: inst-local-2
+
+SOURCE: isf-derived-e1.out:220-224 (old source plus shortcut import, FC)
+goal: MonoidalCategory C
+instances: #[inst-local-2]
+attempt: inst-local-2; target unifies; success
+result: inst-local-2
+limitation: later rewrite tactics fail; full variant does not compile.
+
+SOURCE: isf-tensor.out:3396-3633 (exact consumer source recompile, FT)
+goal: MonoidalCategory (HomotopyCategory (Sheaf X.smallEtaleTopology A) (ComplexShape.up Int))
+instances in returned order:
+  SemiCartesianMonoidalCategory.toMonoidalCategory
+  HomotopyCategory.MonoidalCategory.instMonoidalCategory
+  instMonoidalCategoryHomotopyCategoryIntUp_weilConjectures
+  inst-local-4 : MonoidalCategory A
+attempt 1: inst-local-4; target mismatch against MonoidalCategory A
+attempt 2: instMonoidalCategoryHomotopyCategoryIntUp_weilConjectures; target unifies
+subgoals: Abelian Sheaf; HasColimitsOfSize Sheaf; MonoidalCategory Sheaf;
+  MonoidalPreadditive Sheaf; MonoidalClosed Sheaf; BraidedCategory Sheaf
+subgoal result: all solved
+result: instMonoidalCategoryHomotopyCategoryIntUp_weilConjectures (Sheaf X.smallEtaleTopology A)
+canonical attempt: none after shortcut success
+
+SOURCE: isf-matrix-old.out:541-38745 (canonical-only concrete replay, FC)
+goal: MonoidalCategory (HomotopyCategory A (ComplexShape.up Int))
+instances: #[HomotopyCategory.MonoidalCategory.instMonoidalCategory, inst-local-3]
+attempt 1: inst-local-3; target mismatch against MonoidalCategory A
+attempt 2: canonical; target unifies; recursive obligations resolved
+result: HomotopyCategory.MonoidalCategory.instMonoidalCategory A (ComplexShape.up Int)
+
+SOURCE: isf-shortcut.out:118-491 (shortcut source recompile, FT)
+goal: IsRightCancelAdd Int
+instances: #[IsCancelAdd.toIsRightCancelAdd,
+  AddRightCancelSemigroup.toIsRightCancelAdd,
+  instIsRightCancelAddOfAddRightReflectLE]
+attempt: instIsRightCancelAddOfAddRightReflectLE; target unifies
+recursive goals include PartialOrder Int and AddRightReflectLE Int;
+  alternative branches fail before the successful answers
+result: instIsRightCancelAddOfAddRightReflectLE
+
+SOURCE: isf-shortcut.out:18897-23334 (shortcut final inferInstance, FT)
+goal: MonoidalCategory (HomotopyCategory A (ComplexShape.up Int))
+instances: #[HomotopyCategory.MonoidalCategory.instMonoidalCategory,
+  inst-local-3 : MonoidalCategory A]
+attempt 1: local; target mismatch
+attempt 2: canonical; target unifies, recursive obligations resolve
+result: HomotopyCategory.MonoidalCategory.instMonoidalCategory A (ComplexShape.up Int)
+
+SOURCE: isf-hasderived-hist.out:347-435 (historical intermediate source recompile, FT)
+goal: MonoidalCategory (HomotopyCategory A (ComplexShape.up Int))
+attempts: local MonoidalCategory A mismatch; shortcut succeeds
+result: instMonoidalCategoryHomotopyCategoryIntUp_weilConjectures A
+
+SOURCE: isf-derivedcategory-hist.out:30207-30279 (historical intermediate source recompile, FT)
+goal: MonoidalCategory (HomotopyCategory C (ComplexShape.up Int))
+attempts: local MonoidalCategory C mismatch; shortcut succeeds
+result: instMonoidalCategoryHomotopyCategoryIntUp_weilConjectures C

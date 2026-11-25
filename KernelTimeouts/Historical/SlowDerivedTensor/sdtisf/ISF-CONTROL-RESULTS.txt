@@ -1,0 +1,20 @@
+E0: generic old field -> local; concrete canonical-only proxy -> canonical. [FT, FC]
+E1: added shortcut import to old generic field module -> local still chosen at field; full module variant later fails rewrite tactics. [FC]
+E2: exact consumer source copy compiles; concrete homotopy goal -> shortcut. [FT]
+E3: consumer with shortcut registration removed -> canonical; constant retained. [FC]
+E4: consumer with canonical registration removed -> shortcut; constant retained. [FC]
+E5a: canonical priority 2000, shortcut 1000 -> canonical. [FC]
+E5b: shortcut priority 2000, canonical 1000 -> shortcut. [FC]
+E6a: equal-priority return [first, second] -> second. [FC]
+E6b: equal-priority return [second, first] -> first. [FC]
+
+Cross-environment replay matrix (fresh controls):
+generic goal + local instance / canonical-only imports -> [local] -> local. [FC]
+generic goal + local instance / consumer imports -> [SemiCartesian, local] -> local. [FC]
+concrete homotopy goal / canonical-only imports -> [canonical, local] -> canonical. [FC]
+concrete homotopy goal / consumer imports -> [SemiCartesian, canonical, shortcut, local] -> shortcut. [FC]
+
+Pinned Lean implementation: global candidate index lookup; stable ascending
+priority insertionSort; erased/private filtering; append matching locals;
+iterate array from end via currInstanceIdx - 1. Source:
+Lean/Meta/SynthInstance.lean:202-237, 603-608. [IA]
