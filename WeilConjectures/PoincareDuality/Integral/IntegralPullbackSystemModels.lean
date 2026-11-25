@@ -16,14 +16,21 @@ import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedQuotientPullbackR
 
 /-! # The pinned system comparison of integral pullback
 
-Source: Stacks Project, Tags 099N(5) and 0941; Bhatt--Scholze, Lemma 3.5.7
-(blueprint: lem-pod-integral-pullback-system-comparison).
+We define the pinned natural system comparison of integral pullback with the exact finite
+inverse image of reduction systems.
+
+## Implementation details
 
 The comparison of `integralPullbackSystemComparison` is only asserted to exist. Here the
 same construction is recorded as a definition: the fixed evaluation calculus, a fixed Roos
 model, a fixed normalized pullback realization model, and the coherent counit. Its finite
 evaluations are the projection-adjoint maps. Later scalar-extension arguments use that this
 comparison is literally the transposed realization of a pullback model.
+
+## References
+
+* [Stacks, Tag 099N], [Stacks, Tag 0941]
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 3.5.7
 -/
 
 @[expose] public noncomputable section
@@ -37,9 +44,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- A Roos model exists on every scheme with l invertible.
-Source: Stacks 0941 (blueprint: lem-pod-integral-pullback-system-comparison).
-Proof: take the Roos field of the normalized completed operation models. -/
+/-- A Roos model exists on every scheme with l invertible. -/
 theorem integralSystemRoos_nonempty (X : Scheme.{u})
     (hX : ∀ x : X, IsUnit (l : X.residueField x)) :
     Nonempty (IntegralComparisonRoosModel l E X) := by
@@ -47,15 +52,13 @@ theorem integralSystemRoos_nonempty (X : Scheme.{u})
     (fun _ : Unit ↦ X) (fun _ ↦ hX)
   exact ⟨M.roos ()⟩
 
-/-- The fixed Roos model used by the pinned system pullback comparison.
-Source: Stacks 0941 (blueprint: lem-pod-integral-pullback-system-comparison). -/
+/-- The fixed Roos model used by the pinned system pullback comparison. -/
 def integralSystemRoos (X : Scheme.{u}) (hX : ∀ x : X, IsUnit (l : X.residueField x)) :
     IntegralComparisonRoosModel l E X :=
   Classical.choice (integralSystemRoos_nonempty l E X hX)
 
 /-- The fixed normalized realization model of completed pullback, over the fixed
-evaluation calculus of the target and the fixed Roos model of the source.
-Source: Stacks 099N(5), 0941 (blueprint: lem-pod-integral-pullback-system-comparison). -/
+evaluation calculus of the target and the fixed Roos model of the source. -/
 def integralSystemPullbackModel {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hX : ∀ x : X, IsUnit (l : X.residueField x))
     (hY : ∀ y : Y, IsUnit (l : Y.residueField y)) :
@@ -68,8 +71,7 @@ def integralSystemPullbackModel {X Y : Scheme.{u}} (f : X ⟶ Y)
     (coefficientDerivedSystemEvaluationCalculus l E Y).choose
     (integralSystemRoos l E X hX) (integralSystemRoos l E Y hY)).2.1
 
-/-- The transposed realization: reduction of the realization followed by the coherent counit.
-Source: Stacks 099N(5), 0941 (blueprint: lem-pod-integral-pullback-system-comparison). -/
+/-- The transposed realization: reduction of the realization followed by the coherent counit. -/
 def integralPullbackSystemTransformation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hX : ∀ x : X, IsUnit (l : X.residueField x))
     (hY : ∀ y : Y, IsUnit (l : Y.residueField y)) :
@@ -83,11 +85,7 @@ def integralPullbackSystemTransformation {X Y : Scheme.{u}} (f : X ⟶ Y)
         integralComparisonDerivedSequencePullback l E f)
       (coefficientDerivedSystemEvaluationCalculus l E X).choose.adjunction.counit
 
-/-- On constructible inputs the transposed realization is invertible.
-Source: Stacks 0941; Bhatt--Scholze, Lemma 3.5.7
-(blueprint: lem-pod-integral-pullback-system-comparison).
-Proof: the realization is an isomorphism, and effective quotient model descent makes the
-coherent counit invertible on the pulled-back reduction system. -/
+/-- On constructible inputs the transposed realization is invertible. -/
 theorem integralPullbackSystemTransformation_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hX : ∀ x : X, IsUnit (l : X.residueField x))
     (hY : ∀ y : Y, IsUnit (l : Y.residueField y))
@@ -122,8 +120,6 @@ set_option backward.isDefEq.respectTransparency.types true
 
 /-- The pinned natural system comparison beta_f of integral pullback with exact finite
 inverse image of reduction systems.
-Source: Stacks 099N(5), 0941; Bhatt--Scholze, Lemma 3.5.7
-(blueprint: lem-pod-integral-pullback-system-comparison).
 Its component at K is the reduction of the fixed realization model followed by the
 coherent counit; it is invertible on constructible inputs. -/
 def integralPullbackSystemIso {X Y : Scheme.{u}}
@@ -142,9 +138,7 @@ def integralPullbackSystemIso {X Y : Scheme.{u}}
         (fun x ↦ isUnit_of_invertible (l : X.residueField x))
         (fun y ↦ isUnit_of_invertible (l : Y.residueField y))).naturality a.hom)
 
-/-- The component formula of the pinned comparison.
-Source: Stacks 099N(5) (blueprint: lem-pod-integral-pullback-system-comparison).
-Proof: definitional unfolding. -/
+/-- The component formula of the pinned comparison. -/
 theorem integralPullbackSystemIso_hom_app {X Y : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y)
@@ -154,12 +148,7 @@ theorem integralPullbackSystemIso_hom_app {X Y : Scheme.{u}}
         (fun x ↦ isUnit_of_invertible (l : X.residueField x))
         (fun y ↦ isUnit_of_invertible (l : Y.residueField y))).app K.obj := rfl
 
-/-- The pinned comparison evaluates to the actual projection-adjoint reductions.
-Source: Stacks 099N(5), 0941; Bhatt--Scholze, Lemma 3.5.7
-(blueprint: lem-pod-integral-pullback-system-comparison).
-Proof: this is the counit projection formula for the fixed realization model, transported
-through the unit-normalized finite pullback presentation, exactly as in
-integralPullbackSystemComparison. -/
+/-- The pinned comparison evaluates to the actual projection-adjoint reductions. -/
 theorem integralPullbackSystemIso_evaluation {X Y : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y)
@@ -208,10 +197,7 @@ theorem integralPullbackSystemIso_evaluation {X Y : Scheme.{u}}
     Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.comp_obj] at h'' ⊢
   exact h''
 
-/-- The pinned pullback realization model is the transported completed-quotient realization.
-Source: Stacks 099N(5), 0941 (blueprint: lem-pod-integral-pullback-system-comparison).
-Proof: both are normalized pullback models for the same calculus and Roos model, and
-normalized realizations are unique. -/
+/-- The pinned pullback realization model is the transported completed-quotient realization. -/
 theorem integralSystemPullbackModel_realization {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hX : ∀ x : X, IsUnit (l : X.residueField x))
     (hY : ∀ y : Y, IsUnit (l : Y.residueField y)) :
@@ -231,11 +217,8 @@ theorem integralSystemPullbackModel_realization {X Y : Scheme.{u}} (f : X ⟶ Y)
     (coefficientDerivedSystemEvaluationCalculus l E Y).choose (integralSystemRoos l E X hX)
     (integralSystemRoos l E Y hY) M hd.2.2.some).1 (integralSystemPullbackModel l E f hX hY)
 
-/-- The whole-system comparison chosen in integralPullbackSystemComparison is the pinned
-comparison integralPullbackSystemIso.
-Source: Stacks 099N(5), 0941 (blueprint: lem-pod-integral-pullback-system-comparison).
-Proof: both components are the reduction of the same realization followed by the coherent
-counit (integralSystemPullbackModel_realization). -/
+/-- The whole-system comparison chosen in `integralPullbackSystemComparison` is the pinned
+comparison `integralPullbackSystemIso`. -/
 theorem integralPullbackSystemComparison_choose {X Y : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y) :

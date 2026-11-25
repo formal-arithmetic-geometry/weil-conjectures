@@ -86,13 +86,35 @@ import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Completed scalar comparison and the inverse-image counit
 
-Source: main-20261015, sec-six-functors/sk-rem-sf-pf-done,
-lem-fix-weil-operations.proof.md, first paragraph; Stacks Tags 03D6, 03EK, 015F and 04VG
-(blueprint: lem-pod-completed-inverse-image-scalar-counit).
+For an isomorphism of schemes `g : X ⟶ Y`, we construct the counit identifying inverse
+image along `g` followed by inverse image along `inv g` with the identity, on integral tower
+modules and on their derived categories, and show that ordinary and completed scalar
+extension preserve this counit.
 
-The counit is fixed on sections by the identity on the underlying schemes. The ordinary
-scalar functor is the recorded exact tensor model, and its completion comparison is the
-specified comparison under the normalized ordinary-derived-model identification.
+## Main definitions
+
+* `integralInverseImageCounit`: the section-normalized inverse-image counit on modules.
+* `integralInverseImageDerivedCounit`: its termwise localization on derived categories.
+
+## Main statements
+
+* `completedInverseImage_scalarCounit`: ordinary and completed scalar extension preserve the
+  inverse-image counit.
+
+## Implementation details
+
+The counit is fixed on sections by the identity on the underlying schemes, rather than chosen
+from an unnormalized equivalence. The ordinary scalar functor is the recorded exact tensor
+model, and its completion comparison is the specified comparison under the normalized
+ordinary-derived-model identification. Scalar extension is exact by finite freeness of the
+completed coefficients, so both functors are computed termwise without flatness assumptions;
+the equalities are checked on local pure tensors and then extended by sheafification and the
+universal property of localization.
+
+## References
+
+* [Stacks Project, Tag 03D6], [Stacks Project, Tag 03EK], [Stacks Project, Tag 015F],
+  [Stacks Project, Tag 04VG]
 -/
 
 @[expose] public noncomputable section
@@ -109,9 +131,7 @@ open AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
 namespace WeilConjectures
 
 /-- The canonical reindexing identification for inverse isomorphisms, with identity
-underlying scheme maps. Source: Stacks Tag 03D6 and the first paragraph of
-lem-fix-weil-operations.proof.md
-(blueprint: lem-pod-completed-inverse-image-scalar-counit). -/
+underlying scheme maps. -/
 def integralInverseImageCounitSite {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     proEtaleIsoPostcompose (inv g) ⋙ proEtaleIsoPostcompose g ≅ 𝟭 Y.ProEt :=
   (MorphismProperty.Over.mapComp (Q := ⊤)
@@ -213,18 +233,9 @@ private theorem completedCoefficientCounit
 
 attribute [local irreducible] inverseImageCompletedCoefficientMap
 
-/-- The inverse-image counit is uniquely specified by reindexing sections. This supplies
-only the linearity and naturality needed by the named counit construction below.
-Source: Stacks Tag 03D6; lem-fix-weil-operations.proof.md, first paragraph
-(blueprint: lem-pod-completed-inverse-image-scalar-counit).
-Proof: the finite constant-coefficient structure maps send each constant to itself.
-Their double transport agrees with the displayed identity reindexing. Composing with
-each finite projection therefore makes double completed coefficient transport the
-identity, by uniqueness of maps to the coefficient limit. The displayed restriction
-maps are consequently linear for the transported actions. Restriction along the
-inverse site isomorphism supplies their inverses. Sheaf restrictions and module maps
-commute with these maps, giving a natural isomorphism. Its values on all sections
-uniquely determine each component, and hence the natural isomorphism. -/
+/-- There is a unique natural isomorphism between inverse image along `g` followed by
+inverse image along `inv g` and the identity of integral tower modules which is given on
+sections by the canonical reindexing. -/
 theorem integralInverseImageCounit_existsUnique
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     ∃! e : inverseImageIntegralModules l E g ⋙ inverseImageIntegralModules l E (inv g) ≅
@@ -274,17 +285,14 @@ theorem integralInverseImageCounit_existsUnique
     ext U x
     exact (he' M U.unop x).trans (by rfl)
 
-/-- The actual section-normalized counit, with no choice of an unnormalized equivalence.
-Source: Stacks Tag 03D6; lem-fix-weil-operations.proof.md, first paragraph
-(blueprint: lem-pod-completed-inverse-image-scalar-counit). -/
+/-- The section-normalized inverse-image counit on integral tower modules. -/
 def integralInverseImageCounit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     inverseImageIntegralModules l E g ⋙ inverseImageIntegralModules l E (inv g) ≅
       𝟭 (integralTowerModules l E Y) :=
   (integralInverseImageCounit_existsUnique l E g).exists.choose
 
-/-- Apply the section-normalized counit termwise and localize it. This is u_F.
-Source: Stacks Tags 015F and 04VG; lem-fix-weil-operations.proof.md, first paragraph
-(blueprint: lem-pod-completed-inverse-image-scalar-counit). -/
+/-- The derived inverse-image counit, obtained by applying `integralInverseImageCounit`
+termwise and localizing. -/
 def integralInverseImageDerivedCounit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     inverseImageIntegralDerived l E g ⋙ inverseImageIntegralDerived l E (inv g) ≅
       𝟭 (DerivedCategory (integralTowerModules l E Y)) :=
@@ -573,39 +581,10 @@ private theorem completionCounit
     _ = CY.map (u.app K) ≫ χY.app K := congrArg (fun z ↦ z ≫ χY.app K) hc
     _ = _ := χY.naturality (u.app K)
 
-/-- Ordinary tensor reindexing and its specified completion conjugate preserve the
-canonical inverse-image counit, as actual derived arrows, naturally in K.
-Source: lem-fix-weil-operations.proof.md, first paragraph, inverse automorphism
-squares whose paste is the identity; Stacks Tags 03D6, 03EK, 015F and 04VG
-(blueprint: lem-pod-completed-inverse-image-scalar-counit).
-Proof:
-1. Finite freeness of completed coefficients (lem-weil-finite-free-completed-scalar-
-   comparison) and lem-sfb-finite-free-scalar-coordinates express underlying scalar
-   extension as a finite sum. Kernels and sheafified cokernels are preserved
-   (situation-conventions). Thus scalar extension is exact, as is
-   inverse image (lem-weil-proetale-isomorphism-inverse-image). The exact-functor
-   derived-factorization and derived-functor nodes compute them termwise on every
-   complex, without flatness assumptions on K.
-2. Reindex twice. Constants and all finite coefficient projections are fixed, so
-   double completed coefficient transport is the identity by its limit property
-   (def-weil-proetale-inverse-image, lem-weil-isomorphism-derived-pullback and
-   def-weil-completed-integral-coefficients). This is the normalized counit above.
-3. On local pure tensors, first apply b for the inverse map, then inverse image of
-   b for g, and finally u_L. The result is u_E(x) tensor a. Tensor induction and
-   sheafification give equality of sheaf maps (def-pur-sheaf-tensor-product and
-   lem-weil-isomorphism-comparison-scalar-extension); sections of the tensor sheaf
-   are never assumed to equal the sectionwise tensor product.
-4. Apply this equality degreewise. Naturality gives equality of chain maps, and
-   lem-weil-pbc-localization-universal-property gives equality of the derived
-   transformations. Restrict to the full constructible complete category, using
-   lem-weil-isomorphism-derived-pullback. The first equation results.
-5. Expand both specified beta maps. Functoriality cancels the adjacent chi_X
-   inverse and chi_X. Naturality of u_L at chi_Y moves chi_Y to the left of u_L.
-   Substitute the first equation, then naturality of chi_Y at u_E gives the
-   second equation. The normalized ordinary-model identification in
-   isomorphismScalarModel_existsUnique identifies scalarCompletion with the
-   specified completedScalarComparison. Every map is natural on the full
-   constructible category, so both equalities are natural in K. -/
+/-- Ordinary tensor reindexing and its completion conjugate preserve the inverse-image
+counit: for `K` in the integral constructible category, the two displayed squares of derived
+arrows built from `isomorphismScalarTensorDerived` and `isomorphismComparisonScalarBeta`
+commute with `integralInverseImageDerivedCounit`. -/
 theorem completedInverseImage_scalarCounit
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))

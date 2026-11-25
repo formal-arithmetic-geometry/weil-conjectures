@@ -16,11 +16,8 @@ Let `E / ℚ_ℓ` be a finite extension inside `ℚ̄_ℓ = PadicAlgCl l`, with 
 `log (1 + x) = ∑ (-1)^(n+1) x ^ n / n` (`PadicAlgCl.smallLog`) and the exponential series
 `exp x = ∑ x ^ n / n!` (`PadicAlgCl.smallExp`) converge, are isometries, and are mutually
 inverse group isomorphisms between the principal units `1 + x` and the additive group of the
-ball (blueprint `theorem-rank-one-sheaves-have-finite--1`). For a uniformizer `ϖ` and
-`r > e / (ℓ - 1)` the ideal `𝔪_E ^ r` is a closed sub-ball of this ball.
-
-The inverse identities are proved without composing power series: `f x = log (exp x)` is
-additive with `‖f x - x‖ ≤ K ‖x‖ ^ 2`, and evaluating at `ℓⁿ x` forces `f x = x`.
+ball. For a uniformizer `ϖ` and `r > e / (ℓ - 1)` the ideal `𝔪_E ^ r` is a closed sub-ball of
+this ball.
 
 ## Main statements
 
@@ -30,6 +27,11 @@ additive with `‖f x - x‖ ≤ K ‖x‖ ^ 2`, and evaluating at `ℓⁿ x` fo
 - `PadicAlgCl.smallLog_smallExp_deep`: summary on a closed ball of radius `ρ < ℓ ^ (-1 / (ℓ - 1))`.
 - `PadicAlgCl.exists_pow_norm_sub_one_le`: some power `u ^ N` of every unit of `𝒪_E` is a deep
   principal unit.
+
+## Implementation details
+
+The inverse identities are proved without composing power series: `f x = log (exp x)` is
+additive with `‖f x - x‖ ≤ K ‖x‖ ^ 2`, and evaluating at `ℓⁿ x` forces `f x = x`.
 -/
 
 @[expose] public section
@@ -119,9 +121,7 @@ theorem norm_logSeries_term_le' (x : E) (n : ℕ) :
   exact mul_le_of_le_one_right (norm_nonneg _) (IsUltrametricDist.norm_natCast_le_one E _)
 
 /-- For `K ‖x‖ ≤ 1` the difference quotient `((1 + x) ^ q - 1) / q` agrees with the `q`-th
-partial sum of the logarithm series up to an error of norm at most `‖q‖ ‖x‖`: the coefficient of
-`x ^ (j + 1)` in their difference is `(C(q - 1, j) - (-1)^j) / (j + 1)`, and
-`j! (C(q - 1, j) - (-1)^j)` is divisible by `q`. -/
+partial sum of the logarithm series up to an error of norm at most `‖q‖ ‖x‖`. -/
 theorem norm_pow_sub_one_div_sub_sum_le' {x : E}
     (hx : letI := normedFieldOfAlgebra l E; logExpConst l * ‖x‖ ≤ 1) (q : ℕ) :
     letI := normedFieldOfAlgebra l E
@@ -176,10 +176,7 @@ section Series
 
 variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl l)]
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: The logarithm on sufficiently deep
-principal units.
-
-`smallExp l E x` is the sum of the exponential series `exp x = ∑_{n ≥ 0} x ^ n / n!`, formed in
+/-- `smallExp l E x` is the sum of the exponential series `exp x = ∑_{n ≥ 0} x ^ n / n!`, formed in
 the topology restricted from `ℚ̄_ℓ`. It converges for `‖x‖ < ℓ ^ (-1 / (ℓ - 1))`
 (`PadicAlgCl.summable_expSeries`). -/
 noncomputable def smallExp (x : E) : E :=
@@ -217,11 +214,7 @@ theorem summable_norm_expSeries {x : E}
     ((summable_geometric_of_lt_one (mul_nonneg logExpConst_pos.le (norm_nonneg _)) hx).mul_left
       ‖x‖)
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: The logarithm on sufficiently deep
-principal units.
-
-The exponential series converges on the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))`: its `n`-th term has
-norm `‖x‖ ^ n ℓ ^ v_ℓ(n!)` and `v_ℓ(n!) ≤ (n - 1) / (ℓ - 1)`. -/
+/-- The exponential series converges on the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))`. -/
 theorem summable_expSeries {x : E}
     (hx : letI := normedFieldOfAlgebra l E; logExpConst l * ‖x‖ < 1) :
     letI := normedFieldOfAlgebra l E
@@ -292,10 +285,7 @@ theorem norm_eq_of_norm_sub_le {x y : E}
   have h := IsUltrametricDist.norm_add_eq_max_of_norm_ne_norm hlt.ne'
   rwa [add_sub_cancel, max_eq_left hlt.le] at h
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: The logarithm on sufficiently deep
-principal units.
-
-On the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))` the logarithm preserves the norm:
+/-- On the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))` the logarithm preserves the norm:
 `‖log (1 + x)‖ = ‖x‖`. -/
 theorem norm_smallLog_eq {x : E}
     (hx : letI := normedFieldOfAlgebra l E; logExpConst l * ‖x‖ < 1) :
@@ -303,22 +293,15 @@ theorem norm_smallLog_eq {x : E}
     ‖smallLog l E x‖ = ‖x‖ :=
   norm_eq_of_norm_sub_le hx (norm_smallLog_sub_le hx)
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: The logarithm on sufficiently deep
-principal units.
-
-On the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))` the exponential satisfies `‖exp x - 1‖ = ‖x‖`. -/
+/-- On the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))` the exponential satisfies `‖exp x - 1‖ = ‖x‖`. -/
 theorem norm_smallExp_sub_one_eq {x : E}
     (hx : letI := normedFieldOfAlgebra l E; logExpConst l * ‖x‖ < 1) :
     letI := normedFieldOfAlgebra l E
     ‖smallExp l E x - 1‖ = ‖x‖ :=
   norm_eq_of_norm_sub_le hx (norm_smallExp_sub_le hx)
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: The logarithm on sufficiently deep
-principal units.
-
-The exponential turns addition into multiplication on the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))`:
-`exp (x + y) = exp x exp y`, by the Cauchy product formula, the norms of the terms of both
-series being summable. -/
+/-- The exponential turns addition into multiplication on the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))`:
+`exp (x + y) = exp x exp y`. -/
 theorem smallExp_add {x y : E}
     (hx : letI := normedFieldOfAlgebra l E; logExpConst l * ‖x‖ < 1)
     (hy : letI := normedFieldOfAlgebra l E; logExpConst l * ‖y‖ < 1) :
@@ -422,11 +405,9 @@ theorem tendsto_pow_sub_one_div_smallLog' {x : E}
   simp only [Function.comp_apply, sub_add_cancel, zero_add] at h
   exact h
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: The logarithm on sufficiently deep
-principal units.
-
-The logarithm is a homomorphism on the principal units `1 + x` with `‖x‖ < ℓ ^ (-1 / (ℓ - 1))`:
-`log ((1 + x) (1 + y)) = log (1 + x) + log (1 + y)`, where `(1 + x) (1 + y) = 1 + (x + y + x y)`. -/
+/-- The logarithm is a homomorphism on the principal units `1 + x` with `‖x‖ < ℓ ^ (-1 / (ℓ - 1))`:
+`log ((1 + x) (1 + y)) = log (1 + x) + log (1 + y)`, where
+`(1 + x) (1 + y) = 1 + (x + y + x y)`. -/
 theorem smallLog_add_add_mul {x y : E}
     (hx : letI := normedFieldOfAlgebra l E; logExpConst l * ‖x‖ < 1)
     (hy : letI := normedFieldOfAlgebra l E; logExpConst l * ‖y‖ < 1) :
@@ -460,10 +441,7 @@ theorem smallLog_add_add_mul {x y : E}
   rw [zero_mul, zero_mul, zero_add] at hlim
   exact tendsto_nhds_unique huv (hlim.congr key)
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: The logarithm on sufficiently deep
-principal units.
-
-The logarithm is an isometry on the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))`:
+/-- The logarithm is an isometry on the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))`:
 `‖log (1 + x) - log (1 + y)‖ = ‖x - y‖`; in particular it is continuous and injective there. -/
 theorem norm_smallLog_sub_smallLog {x y : E}
     (hx : letI := normedFieldOfAlgebra l E; logExpConst l * ‖x‖ < 1)
@@ -488,10 +466,7 @@ theorem norm_smallLog_sub_smallLog {x y : E}
   rw [hxc, smallLog_add_add_mul hy hcb, add_sub_cancel_left, norm_smallLog_eq hcb,
     ← hxc, hcn]
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: The logarithm on sufficiently deep
-principal units.
-
-The exponential is an isometry on the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))`:
+/-- The exponential is an isometry on the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))`:
 `‖exp x - exp y‖ = ‖x - y‖`; in particular it is continuous and injective there. -/
 theorem norm_smallExp_sub_smallExp {x y : E}
     (hx : letI := normedFieldOfAlgebra l E; logExpConst l * ‖x‖ < 1)
@@ -513,12 +488,8 @@ theorem norm_smallExp_sub_smallExp {x y : E}
     rw [← smallExp_add hy hxy, add_sub_cancel]
   rw [hsplit, ← mul_sub_one, norm_mul, hy1, one_mul, norm_smallExp_sub_one_eq hxy]
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: The logarithm on sufficiently deep
-principal units.
-
-On the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))` the logarithm inverts the exponential:
-`log (exp x) = x`. The map `f x = log (exp x)` is additive, and `‖f x - x‖ ≤ K ‖x‖ ^ 2`; applying
-this to `ℓⁿ x` gives `‖f x - x‖ ≤ K ℓ⁻ⁿ ‖x‖ ^ 2` for every `n`. -/
+/-- On the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))` the logarithm inverts the exponential:
+`log (exp x) = x`. -/
 theorem smallLog_smallExp_sub_one {x : E}
     (hx : letI := normedFieldOfAlgebra l E; logExpConst l * ‖x‖ < 1) :
     smallLog l E (smallExp l E x - 1) = x := by
@@ -575,12 +546,8 @@ theorem smallLog_smallExp_sub_one {x : E}
   have h0 : ‖f x - x‖ ≤ 0 := ge_of_tendsto' ht hlim
   exact sub_eq_zero.1 (norm_le_zero_iff.1 h0)
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: The logarithm on sufficiently deep
-principal units.
-
-On the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))` the exponential inverts the logarithm:
-`exp (log (1 + x)) = 1 + x`, since the logarithm is injective there and inverts the
-exponential. -/
+/-- On the ball `‖x‖ < ℓ ^ (-1 / (ℓ - 1))` the exponential inverts the logarithm:
+`exp (log (1 + x)) = 1 + x`. -/
 theorem smallExp_smallLog {x : E}
     (hx : letI := normedFieldOfAlgebra l E; logExpConst l * ‖x‖ < 1) :
     smallExp l E (smallLog l E x) = 1 + x := by
@@ -593,10 +560,7 @@ theorem smallExp_smallLog {x : E}
     sub_eq_zero] at h
   linear_combination h
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: The logarithm on sufficiently deep
-principal units.
-
-Let `E / ℚ_ℓ` be finite and `0 ≤ ρ < ℓ ^ (-1 / (ℓ - 1))`; for instance `ρ = |ϖ| ^ r` for a
+/-- Let `E / ℚ_ℓ` be finite and `0 ≤ ρ < ℓ ^ (-1 / (ℓ - 1))`; for instance `ρ = |ϖ| ^ r` for a
 uniformizer `ϖ` of `E` and `r > e / (ℓ - 1)`, `e = v_E(ℓ)`, the ball `‖x‖ ≤ ρ` then being
 `𝔪_E ^ r`. On the ball `D = {‖x‖ ≤ ρ}` the series `log (1 + x) = ∑ (-1)^(n+1) x ^ n / n` and
 `exp x = ∑ x ^ n / n!` converge, `x ↦ log (1 + x)` and `x ↦ exp x - 1` map `D` to itself, are
@@ -653,12 +617,7 @@ theorem norm_lt_one_of_mem_maximalIdeal {x : integers l E}
   · exact Subtype.ext (mul_inv_cancel₀ hx0)
   · exact Subtype.ext (inv_mul_cancel₀ hx0)
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: The logarithm on sufficiently deep
-principal units.
-
-For every `ρ > 0` there is `N ≥ 1` with `‖u ^ N - 1‖ ≤ ρ` for every unit `u` of `𝒪_E`: the
-quotient `𝒪_Eˣ / (1 + 𝔪_E ^ k)` is finite, and `𝔪_E ^ k` lies in the ball of radius `|ϖ| ^ k`
-for a uniformizer `ϖ`. -/
+/-- For every `ρ > 0` there is `N ≥ 1` with `‖u ^ N - 1‖ ≤ ρ` for every unit `u` of `𝒪_E`. -/
 theorem exists_pow_norm_sub_one_le {ρ : ℝ} (hρ : 0 < ρ) :
     ∃ N : ℕ, 0 < N ∧ ∀ u : (integers l E)ˣ,
       ‖algebraMap E (PadicAlgCl l) (((u : integers l E) : E) ^ N - 1)‖ ≤ ρ := by
@@ -726,10 +685,7 @@ theorem mem_maximalIdeal_pow_iff {ϖ : integers l E}
     push_cast
     field_simp
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: The logarithm on sufficiently deep
-principal units.
-
-Let `E / ℚ_ℓ` be finite, `ϖ` a uniformizer (a generator of the maximal ideal `𝔪_E` of `𝒪_E`),
+/-- Let `E / ℚ_ℓ` be finite, `ϖ` a uniformizer (a generator of the maximal ideal `𝔪_E` of `𝒪_E`),
 `e = v_E(ℓ)`, i.e. `|ℓ| = |ϖ| ^ e`, and `r` an integer with `r > e / (ℓ - 1)`. Then
 `𝔪_E ^ r` is the closed ball `D` of radius `|ϖ| ^ r < ℓ ^ (-1 / (ℓ - 1))`, so that on `D` the
 series `log (1 + x)` and `exp x` converge and give mutually inverse isometric (hence continuous)
@@ -797,14 +753,9 @@ theorem mul_logExpConst_lt_one_of_div_mem_integers {x : E}
     _ = (l : ℝ)⁻¹ := by field_simp
     _ < 1 := inv_lt_one_of_one_lt₀ hl
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite`: A multiplicative curve character produces an
-invariant additive character.
-
-The core of the lemma, for a continuous character `χ : G → Eˣ` of a compact group: its values are
-units of `𝒪_E` (the norms `|χ g| ^ n = |χ (g ^ n)|` are bounded for all `n ∈ ℤ`), so for some
-`N ≥ 1` (`PadicAlgCl.exists_pow_norm_sub_one_le`) the character `χ ^ N` takes values in the
-principal units `1 + ℓ² 𝒪_E = 1 + 𝔪_E ^ (2 e)`, where the logarithm is a homomorphism; then
-`λ g = log (χ g ^ N)` is a continuous additive character `G → E`. -/
+/-- For a continuous character `χ : G → Eˣ` of a compact group there is `N ≥ 1` such that
+`χ ^ N` takes values in the principal units `1 + ℓ² 𝒪_E` and `λ g = log (χ g ^ N)` is a
+continuous additive character `G → E`. -/
 theorem exists_smallLog_pow_hom {G : Type*} [Group G] [TopologicalSpace G] [CompactSpace G]
     (χ : G →* Eˣ) (hχ : Continuous fun g ↦ algebraMap E (PadicAlgCl l) (χ g)) :
     ∃ N : ℕ, 0 < N ∧ (∀ g, χ g ^ N ∈ smallUnits l E) ∧

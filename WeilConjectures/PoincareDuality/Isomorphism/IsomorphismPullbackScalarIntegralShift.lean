@@ -11,7 +11,18 @@ public import WeilConjectures.PoincareDuality.Isomorphism.IsomorphismCoefficient
 import WeilConjectures.SixFunctors.Isomorphism.IsomorphismComparisonScalarExtension
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
-/-! # Integral scalar comparison preserves the specified pullback shifts -/
+/-! # Integral scalar comparison preserves the specified pullback shifts
+
+For an isomorphism of schemes, the integral pullback scalar comparison between two coefficient
+stages commutes with the specified integral pullback shifts.
+
+## Implementation details
+
+The comparison is identified with the conjugate, by the normalized comparisons `eE`, `eL` and the
+ordinary-to-completed scalar comparisons, of the derived inverse-image tensor comparison, which
+commutes with shifts. Faithfulness of the constructible inclusion then reflects the shift
+equation.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -266,18 +277,9 @@ private theorem integralScalarConjugation_eq
       convert hc using 1)
   exact H.trans (integralScalarConjugation_hom_app eE eL χY χX b K).symm
 
-/-- The integral scalar comparison preserves the supplied integral pullback shifts.
-Source: the final automorphism sentence in the current blueprint proof of constructible
-truncations, and steps 1--2 of `lem-pod-isomorphism-pullback-scalar-shift`.
-(blueprint: lem-pod-isomorphism-pullback-scalar-integral-shift).
-
-Proof: uniqueness identifies the restricted ordinary-to-completed scalar comparison with
-scalarCompletion. The normalization of integral scalar shifts gives its shift equation.
-The ordinary derived inverse-image tensor comparison commutes with shifts. Conjugate it
-by the supplied eE and eL and the ordinary-to-completed comparisons. The existing scalar
-compatibility square and naturality of scalarCompletion identify the result with alpha
-on underlying derived objects. Faithfulness of the constructible inclusion reflects the
-shift equation. All shifts and components remain the ones supplied in the statement. -/
+/-- If the integral pullback shifts `sE`, `sL` make the normalized comparisons `eE`, `eL`
+commute with shifts, then the integral pullback scalar comparison `α` commutes with `sE`
+and `sL`. -/
 theorem isomorphismPullbackScalarIntegralShift
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

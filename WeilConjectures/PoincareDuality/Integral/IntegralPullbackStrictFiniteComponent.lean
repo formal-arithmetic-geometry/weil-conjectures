@@ -13,7 +13,21 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # The finite component of a strict normalized pullback comparison
 
-Source: Stacks Tags 03D3, 099N(5), and 0941.
+We show that the finite component of a strict tower comparison for the integral pullback is
+determined by its values on inverse-image unit generators.
+
+## Implementation details
+
+The completed-to-finite coefficient projection is locally surjective, so completed-linear maps
+between the restricted quotient modules are already quotient-linear. The inverse-image
+adjunction then makes two such maps equal as soon as they agree on unit generators; the
+degreewise equalities are assembled using the exact-functor factorization comparisons for
+restriction, evaluation and inverse image. No flatness of a transition map, effectivity, or
+invertibility of a derived reduction counit is used.
+
+## References
+
+* [Stacks, Tag 03D3], [Stacks, Tag 099N], [Stacks, Tag 0941], [Stacks, Tag 015F]
 -/
 
 @[expose] public noncomputable section
@@ -52,8 +66,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Exact evaluation after scalar restriction, computed on a complex of strict systems.
-Source: Stacks 0941 (blueprint: lem-pod-integral-pullback-strict-finite-component). -/
+/-- Exact evaluation after scalar restriction, computed on a complex of strict systems. -/
 @[irreducible] def integralComparisonRestrictedEvaluationFactors (W : Scheme.{u})
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) (n : ℕ) :
     (coefficientFiniteDerivedRestriction l E W n).obj
@@ -300,18 +313,7 @@ private theorem finiteEvaluation_zero {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   by infer_instance
 
 /-- A strict comparison normalized on inverse-image generators equals the canonical
-ordinary comparison followed by inverse image of the finite representative isomorphism.
-Source: Stacks Tags 03D3, 099N(5), and 0941.
-(blueprint: lem-pod-integral-pullback-strict-finite-generators).
-
-Proof: restricted evaluation, finite system evaluation, and the inverse finite pullback
-presentation comparison give the canonical ordinary comparison. Their defining unit
-identities give its generator formula. Precompose the given comparison with its inverse.
-The completed-to-finite projection is locally surjective, so restricted finite-module
-maps remain finite-linear. The inverse-image adjunction makes equality of these maps
-follow from their equality on unit generators. The hypothesis and naturality of the
-adjunction unit give that equality degreewise. Cancel the canonical comparison. No
-flatness, nonzero section, or positive-degree hypothesis is used. -/
+ordinary comparison followed by inverse image of the finite representative isomorphism. -/
 private theorem strictComponent_generators {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (scalarReductionSource l E Y) ℤ)
     (C : CochainComplex (coefficientSequenceModules l E Y) ℤ)
@@ -529,17 +531,7 @@ private theorem finiteEvaluation_fac {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 
 /-- The derived finite evaluation comparison, followed by an arbitrary map of finite
-complexes, is computed by the ordinary evaluation comparison and the exact factors.
-Source: Stacks Tag 015F; exact localization composition and naturality.
-(blueprint: lem-pod-integral-pullback-finite-evaluation-factors).
-
-Proof: the derived finite evaluation comparison is the composition of the inverse
-factorization compositor, the derived ordinary evaluation isomorphism, and the other
-compositor. Their factorization identities compute its value on Q(C). Naturality of
-the finite pullback factor moves Q(k) across that factor. The inverse and forward
-sequence pullback factors cancel, leaving Q of the ordinary comparison followed by
-finite pullback of k. The argument applies to every finite target complex and every
-chain map k, including zero maps, and uses neither a resolution nor flatness. -/
+complexes, is computed by the ordinary evaluation comparison and the exact factors. -/
 private theorem finiteEvaluation_fac_comp {X Y : Scheme.{u}} (f : X ⟶ Y)
     (C : CochainComplex (coefficientSequenceModules l E Y) ℤ) (n : ℕ)
     (N : CochainComplex (normalizedDVRModules l E Y n) ℤ)
@@ -703,26 +695,8 @@ attribute [local implicit_reducible] integralOperationsPullbackTowerFunctor
   integralComparisonSequenceGenerator
 
 /-- The finite component of a strict tower comparison is fixed by its values on
-inverse-image unit generators. This is a statement about the strict comparison q;
-it has no integral realization or reduction/limit counit as an input.
-Source: Stacks 03D3 (inverse-image adjunction), 099N(5), and 0941;
-step 1 of lem-pod-integral-pullback-counit-projection.
-(blueprint: lem-pod-integral-pullback-strict-finite-component).
-
-Proof: evaluate the system inverse-image unit at level n. The defining property of
-finiteSystemPullbackEvaluation identifies it with the ordinary finite inverse-image
-unit. The defining property of integralFinitePullbackModel identifies the other
-presentation with this same unit. After transporting by kappa, the hypothesis says
-that both maps have the same values on these unit sections. The completed-to-finite
-coefficient projection is locally surjective; thus completed-linear maps between
-these restricted quotient modules are already quotient-linear. The inverse-image
-adjunction, or equivalently its locally generating unit sections and scalar multiples,
-therefore makes the two maps equal in every degree. The degreewise equalities commute
-with the differentials. Apply Q, and use the exact-functor factorization comparisons
-for restriction, evaluation and inverse image. This gives precisely the displayed
-identity. The proof uses no flatness of a transition map, no effectivity, and no
-invertibility of a derived reduction counit. It also covers zero complexes, empty
-schemes, and n=0, where the coefficient exponent is one. -/
+inverse-image unit generators. It concerns only the strict comparison: it has no
+integral realization or reduction/limit counit as an input. -/
 theorem integralPullbackStrictFiniteComponent {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (scalarReductionSource l E Y) ℤ)
     (C : CochainComplex (coefficientSequenceModules l E Y) ℤ)

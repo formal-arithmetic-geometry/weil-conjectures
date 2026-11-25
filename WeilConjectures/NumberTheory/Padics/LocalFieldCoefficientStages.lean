@@ -17,9 +17,17 @@ import Mathlib.RingTheory.Ideal.Quotient.Index
 /-!
 # Ramified finite coefficient stages of local fields
 
-Source: Weil blueprint, main-20261015, smooth-purity,
-`sk-lem-sp-field-extension-towers.proof.md`, Part (1)
-(blueprint: lem-pur-local-field-coefficient-stages).
+For a finite extension `F / E` of finite extensions of `ℚ_l` with compatible absolute values,
+the integer ring of `F` is finite free over that of `E`, and the quotients by powers of
+uniformizers form compatible systems of finite local rings with finite free induced maps.
+
+## Implementation details
+
+The integer rings and maximal ideals are the closed and open unit balls of the
+coefficient-extension DVR theorem, and `f` is the restriction of `E → F`. Finite freeness comes
+from an integral basis, and freeness of the level-`n` quotients from the identification
+`S / t^n S ≃ (R / t^n) ⊗[R] S`. The unit-change statements concern only the rings and maps,
+independently of any integral basis.
 -/
 
 @[expose] public section
@@ -131,38 +139,13 @@ private theorem quotient_mk_heq
   subst J
   rfl
 
-/-- Finite extensions of coefficient fields give finite free integer rings and
-finite free ramified coefficient stages, independently of unit changes of uniformizers.
-
-Source: Weil blueprint, main-20261015,
-`sk-lem-sp-field-extension-towers.proof.md`, Part (1), and rational/qbar purity,
-Steps 1–2 (blueprint: lem-pur-local-field-coefficient-stages).
-
-Proof:
-1. The coefficient-extension DVR theorem identifies both integer rings and their
-   maximal ideals with the closed and open unit balls. Compatibility of absolute
-   values therefore restricts the field inclusion to the ring homomorphism `f`.
-2. Apply `lem-sfb-local-field-integral-basis` to obtain a finite integral basis;
-   this proves `Module.Free` and `Module.Finite` for the scalar action given by `f`.
-3. Apply `lem-weil-pbc-dvr-unit-times-uniformizer-power` in the upper DVR to `f t`.
-   It is nonzero; its absolute value is less than one, so the exponent is positive.
-   Raising `f t = u * v^e` to the nth power gives equality of the principal ideals.
-4. Identify `S/t^n S` with `(R/t^n) ⊗[R] S` by the quotient tensor equivalence.
-   Base change preserves finite freeness. The scalar map takes `[r]` to `[f r]`.
-5. The finite residue fields and `Ideal.finite_quotient_pow` give finite quotients
-   at exponents `n` and `e*n`. A quotient of a local ring by a proper ideal is local.
-   The absolute value of `l` is less than one, so `l ∈ (t)` and `f l ∈ (f t)`.
-   Taking nth powers shows that `l^n` vanishes in both level-n rings.
-6. For a positive `k`, take `n = k` to see `k ≤ e*n`. Quotient transition maps
-   for `m ≤ n` are induced by the identity on representatives.
-7. Multiplication of either uniformizer by a unit leaves every principal-power
-   ideal unchanged. Equal ideals give the canonical identity-on-representatives
-   quotient equivalences. The quotient projections are heterogeneously equal,
-   as are the scalar maps, which are specified on representatives. Transition
-   maps are determined by their composites with these projections, so commute
-   with the same identifications. This concerns the rings and maps,
-   independently of any integral basis.
--/
+/-- Let `F / E` be a finite extension of finite extensions of `ℚ_l` with compatible absolute
+values, and let `t`, `v` be uniformizers of their integer rings. Then `E → F` restricts to a
+finite free map `f` of integer rings with `f t = w * v ^ e` for a unit `w` and some `e ≥ 1`.
+For every `n ≥ 1` the quotients by `t ^ n` and `f t ^ n` are finite local rings in which `l` is
+nilpotent, and the induced map between them is finite free. Quotient transition maps exist, and
+the principal-power ideals, quotient projections and induced maps are unchanged when the
+uniformizers are multiplied by units. -/
 theorem local_field_coefficient_stages
     (l : ℕ) [Fact l.Prime] (E : Type u) (F : Type v) [Field E] [Field F]
     [Algebra (Padic l) E] [Algebra (Padic l) F] [Algebra E F]
