@@ -14,8 +14,13 @@ public import WeilConjectures.FieldTheory.GaloisUnitsCohomology
 /-!
 # The scalar-defect relation for a central simple algebra
 
-Source: Stacks Project, the construction between Tags 03R6 and 03R7, and Tag 0DVG.
-(blueprint: def-sc-brauer-scalar-defect).
+A central simple `K`-algebra `A` has scalar defect `x ∈ H²(Gal(Kˢᵉᵖ/K), (Kˢᵉᵖ)ˣ)` if a splitting
+`Kˢᵉᵖ ⊗ A ≅ Mₙ(Kˢᵉᵖ)` admits locally constant matrix lifts of its Galois descent datum whose
+failure to be a one-cocycle is a homogeneous two-cocycle representing `x`.
+
+## References
+
+* [Stacks Project, Tags 03R6, 03R7 and 0DVG](https://stacks.math.columbia.edu/tag/0DVG)
 -/
 
 @[expose] public section
@@ -28,9 +33,8 @@ open scoped TensorProduct
 
 variable (K : Type u) [Field K]
 
-/-- An actual homogeneous degree-two cocycle evaluated in inhomogeneous coordinates.
-Source: Stacks Project, Section 0DVG: evaluate at `(1, g, g * h)`.
-(blueprint: def-sc-brauer-scalar-defect). -/
+/-- A homogeneous degree-two cocycle evaluated in inhomogeneous coordinates, that is, at
+`(1, g, g * h)`. -/
 noncomputable def galoisUnitsCocycleValue
     (z : ContinuousCohomology.cocycles (galoisUnitsTopRep K) 2)
     (g h : SeparableClosure K ≃ₐ[K] SeparableClosure K) : (SeparableClosure K)ˣ :=
@@ -39,9 +43,7 @@ noncomputable def galoisUnitsCocycleValue
 /-- `A` realizes the class `x` through matrix lifts of its Galois descent datum.
 The splitting is an algebra equivalence after scalar extension, and the matrix lifts
 are locally constant for the Krull topology. The last equation specifies their scalar
-multiplication defect using an actual homogeneous cocycle representing `x`.
-Source: Stacks Project, the scalar-defect construction following Tag 03R6; Tag 0DVG.
-(blueprint: def-sc-brauer-scalar-defect). -/
+multiplication defect using a homogeneous cocycle representing `x`. -/
 def HasBrauerScalarDefect (A : CSA.{u, u} K) (x : GaloisUnitsH2 K) : Prop :=
   ∃ (n : ℕ) (_ : n ≠ 0)
     (e : (SeparableClosure K ⊗[K] A) ≃ₐ[SeparableClosure K]

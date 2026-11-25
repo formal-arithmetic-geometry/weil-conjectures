@@ -13,8 +13,23 @@ import Mathlib.Algebra.Group.Action.End
 /-!
 # Finite monomial coefficient data for a continuous two-cocycle
 
-Source: Stacks Project, Theorem 03R7, surjectivity, and Section 0DVG.
-(blueprint: lem-sc-cocycle-monomial-coefficients).
+A continuous two-cocycle with values in the units of the separable closure admits finite,
+locally constant monomial coefficient data.
+
+## Main results
+
+- `Field.exists_cocycle_monomial_coefficients`
+
+## Implementation details
+
+The data come from a finite quotient `q` of the Galois group with a group law on `Fin n` and
+coefficients `d` with `c(g,h) = d(q(g),q(h))`. The permutation `p(g)` is left multiplication by
+`q(g)` and `w(g,j) = d(q(g),j)`. No normalization of the cocycle is used.
+
+## References
+
+* [Stacks Project, Theorem 03R7](https://stacks.math.columbia.edu/tag/03R7), surjectivity
+* [Stacks Project, Section 0DVG](https://stacks.math.columbia.edu/tag/0DVG)
 -/
 
 @[expose] public section
@@ -23,25 +38,10 @@ universe u
 
 namespace Field
 
-/-- A continuous two-cocycle admits finite, locally constant monomial coefficient data.
-
-Proof: use the finite quotient data theorem to obtain a nonzero n, a group law
-on Fin n, a locally constant quotient homomorphism q, and coefficients d with
-c(g,h) = d(q(g),q(h)) and the finite twisted cocycle equation. Construct p(g)
-as the permutation given by left multiplication by q(g), using the transported
-group law explicitly. This is a permutation homomorphism because left
-multiplication is an action and q is a homomorphism. Put w(g,j) = d(q(g),j).
-The paired map (p,w) is a postcomposition of q, hence locally constant.
-The finite twisted cocycle equation is exactly
-w(g,p(h)j)g(w(h,j)) = d(q(g),q(h))w(gh,j).
-Substitute the factorization of c to obtain the asserted coefficient equation.
-No normalization is used, including for a nontrivial constant cocycle. The
-construction supplies coefficients and permutations, not an algebra or matrix
-splitting. All data are constructed from the given finite quotient data.
-
-Source: Stacks Project, Theorem 03R7 surjectivity sketch and Section 0DVG;
-the finite coset refinement and regular coefficients are expanded here.
-(blueprint: lem-sc-cocycle-monomial-coefficients). -/
+/-- A continuous two-cocycle `z` admits finite, locally constant monomial coefficient data: a
+homomorphism `p` from the absolute Galois group to the permutations of `Fin n`, `n ≠ 0`, and
+units `w(g,j)` with `(p, w)` locally constant and
+`w(g, p(h)j) g(w(h,j)) = z(g,h) w(gh, j)`. -/
 theorem exists_cocycle_monomial_coefficients (K : Type u) [Field K]
     (z : ContinuousCohomology.cocycles (galoisUnitsTopRep K) 2) :
     ∃ (n : ℕ) (_ : n ≠ 0)

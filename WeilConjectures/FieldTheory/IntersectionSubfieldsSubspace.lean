@@ -12,8 +12,13 @@ public import Mathlib.LinearAlgebra.Pi
 /-!
 # Nonzero intersections of a subspace with a directed family of subfields
 
-Source: Stacks Project, More on Algebra, Lemma 15.47.3, Tag 07P3
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
+For a nonempty downward directed family of intermediate fields of `K / k` with intersection `k`,
+a subspace of `Kⁿ` contains a nonzero vector with coordinates in `k` exactly when it contains a
+nonzero vector with coordinates in each field of the family.
+
+## References
+
+* Stacks Project, More on Algebra, Lemma 15.47.3, Tag 07P3.
 -/
 
 @[expose] public section
@@ -24,26 +29,7 @@ namespace IntermediateField
 
 /-- For a nonempty downward directed family of intermediate fields whose intersection is the
 base field, a linear subspace of `Kⁿ` contains a nonzero vector over the base field exactly when
-it contains a nonzero vector over every field of the family.
-
-Source: Stacks Project, More on Algebra, Lemma 15.47.3, Tag 07P3
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
-
-Proof:
-1. A nonzero vector over `k` lies over every intermediate field, giving the forward implication.
-2. For the converse, induct on `n`. For `n = 1`, a nonzero vector in the subspace makes the
-   subspace all of `K`. Nonemptiness of the index type supplies such a vector, so `1` works.
-3. For larger `n`, let `W` be the subspace of tails of vectors in `V` with first coordinate zero.
-   A nonzero vector of `W` over `k` finishes the proof by adjoining a leading zero. Otherwise,
-   the induction hypothesis gives an index `a` for which `W` has zero intersection over `L a`.
-4. Choose a nonzero vector of `V` over `L a`. Its first coordinate is nonzero, so divide by it
-   to obtain `v` with first coordinate `1`. Subtracting the first coordinate times `v` from
-   any vector of `V` over `L a` shows that this intersection is the line `(L a) v`.
-   For any `L b ≤ L a`, a nonzero vector over `L b` therefore normalizes to the same `v`,
-   so all coordinates of `v` lie in `L b`.
-5. For any index `c`, downward directedness supplies `b` with `L b ≤ L a ⊓ L c`.
-   Thus every coordinate of `v` lies in every `L c`, hence in their intersection `k`.
-   Its first coordinate is `1`, so it is the required nonzero vector. -/
+it contains a nonzero vector over every field of the family. -/
 theorem exists_ne_zero_mem_base_iff_forall_mem_intermediateField
     {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K]
     {ι : Type w} [Nonempty ι] (L : ι → IntermediateField k K)

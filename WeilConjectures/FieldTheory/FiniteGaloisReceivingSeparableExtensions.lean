@@ -16,8 +16,20 @@ import Mathlib.Algebra.Field.ULift
 /-!
 # Finitely many finite separable extensions embed into one finite Galois extension
 
-Source: literature/stacks-project/fields.tex, Lemmas 09DT and 0EXM and Definition 09I0
-(blueprint: lem-weil-pbc-finite-galois-receiving-separable-extensions)
+## Main results
+
+- `finite_galois_receiving_separable_extensions`: finitely many finite separable extensions of a
+  field `k` all embed into one finite Galois extension of `k`.
+
+## Implementation details
+
+Each extension embeds into the separable closure `Ω` of `k`; the images of finite bases lie in a
+finite Galois intermediate field of `Ω/k`, which is lifted to the universe `max u v`.
+
+## References
+
+* Stacks Project, Fields, Lemmas 09GU, 09DT, 0EXM and Definition 09I0.
+* Stacks Project, More on Morphisms, proof of Lemma 02LM.
 -/
 
 @[expose] public section
@@ -26,24 +38,8 @@ open scoped Polynomial
 
 universe u v
 
-/-- Finitely many finite separable extensions of a field embed into one finite Galois
-extension. Source: Stacks Project, Fields, Lemmas 09GU, 09DT, 0EXM and Definition 09I0;
-More on Morphisms, proof of Lemma 02LM.
-(blueprint: lem-weil-pbc-finite-galois-receiving-separable-extensions)
-
-Proof:
-1. By `lem-weil-pbc-separable-closure-exists-galois`, choose a separable algebraic,
-   separably closed extension Ω/k. Its normality makes it Galois (Definition 09I0).
-2. By `lem-weil-pbc-separable-extension-embeds-separably-closed`, embed each Lᵢ into Ω
-   as a k-algebra, using its separability and the separable closedness of Ω (09GU).
-3. Choose finite k-bases of the Lᵢ. Their images form a finite set S in Ω. By
-   `lem-weil-pbc-finite-set-in-finite-galois-subextension`, choose a finite separable
-   normal intermediate field K containing S (09DT and 0EXM).
-4. Each image lies in K: expand any element in its basis and use k-linearity and
-   closure of K under k-linear combinations. Restrict the embeddings' codomains to K
-   to obtain the required k-algebra homomorphisms. When n = 0, S is empty and K = k
-   suffices, transported to the indicated universe if necessary.
--/
+/-- Finitely many finite separable extensions `L i` of a field `k` embed into one finite Galois
+extension `K` of `k` (finite, separable, and every minimal polynomial splits in `K`). -/
 theorem finite_galois_receiving_separable_extensions
     (k : Type u) [Field k] (n : ℕ)
     (L : Fin n → Type v) [hfield : ∀ i, Field (L i)]

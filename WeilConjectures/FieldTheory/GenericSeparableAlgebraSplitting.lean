@@ -20,9 +20,20 @@ import WeilConjectures.FieldTheory.SeparableSplitPurelyInseparableResidueFields
 /-!
 # Splitting the reduction of a finite algebra after a separable extension
 
-Source: blueprint, `sec-smooth-purity/sk-prop-sf-cbc`, proof of
-`lem-weil-pbc-finite-pushforward-generic-constructible`; Stacks Project, More on Morphisms,
-proof of Tag 02LM (blueprint: lem-weil-pbc-generic-separable-algebra-splitting).
+The reduction of a finite-dimensional commutative algebra `C` over a field `K` becomes a finite
+product of finite purely inseparable field extensions of `K'` after base change to a suitable
+finite separable extension `K' / K`.
+
+## Implementation details
+
+The reduction of the Artinian ring `C` is the product of its residue fields `Eᵢ`. A finite
+separable extension `K'` is chosen such that every residue field of every `K' ⊗ Eᵢ` is purely
+inseparable over `K'`; reducing `K' ⊗ C` and applying the Chinese remainder theorem to each
+`K' ⊗ Eᵢ` gives the product decomposition.
+
+## References
+
+* [Stacks Project, Tag 02LM](https://stacks.math.columbia.edu/tag/02LM)
 -/
 
 @[expose] public section
@@ -36,8 +47,7 @@ open scoped TensorProduct
 namespace Algebra
 
 /-- The reduction of a finite-dimensional commutative algebra over a field is a finite product
-of finite field extensions.  This is the Artinian nilradical/Chinese-remainder part of the
-finite-algebra calculation in the proof of Tag 02LM. -/
+of finite field extensions. -/
 private theorem exists_reduction_equiv_pi_of_finite_dimensional
     (K : Type u) [Field K] (C : Type v) [CommRing C] [Algebra K C]
     [FiniteDimensional K C] :
@@ -142,7 +152,7 @@ private theorem piReductionEquiv
 
 /-- Given the Artinian product decomposition and a separable extension splitting all its field
 factors, the tensor-product reduction is the corresponding product of purely inseparable fields.
-This is the tensor/base-change and reassembly part of the finite-algebra calculation in Tag 02LM. -/
+-/
 private theorem exists_tensor_reduction_equiv_pi_of_reduction_equiv_pi
     (K : Type u) [Field K] (C : Type v) [CommRing C] [Algebra K C]
     [FiniteDimensional K C] (n : ℕ) (E : Fin n → Type v)
@@ -206,30 +216,7 @@ private theorem exists_tensor_reduction_equiv_pi_of_reduction_equiv_pi
       (AlgEquiv.piCongrLeft' K' Q ef)))))⟩
 
 /-- The reduction of a finite-dimensional commutative algebra over a field becomes a finite
-product of finite purely inseparable fields after a finite separable extension.
-Source: blueprint, proof of `lem-weil-pbc-finite-pushforward-generic-constructible`, generic
-finite-algebra calculation; Stacks Project, proof of Tag 02LM.
-(blueprint: lem-weil-pbc-generic-separable-algebra-splitting)
-
-Proof:
-1. By `lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum`, applied over the field K,
-   C has finitely many prime ideals, all maximal, with intersection its nilradical N.
-   The Chinese remainder theorem (`lem-pc-crt-ideal-quotient-product`) identifies C/N with
-   the product of the finite residue fields E_i. For C = 0 the product is empty.
-   N is nilpotent. Its image after tensoring with K' is nilpotent too; right exactness of
-   tensor product identifies the quotient by that image with (C/N) tensor K'. Thus reducing
-   C tensor K' gives the product of the reductions of E_i tensor K'.
-2. Apply `lem-weil-pbc-separable-split-purely-inseparable-residue-fields` to the finite family
-   E_i/K. It supplies a finite separable extension K'/K such that every prime of
-   K' tensor E_i has a residue field finite purely inseparable over K'. Swap tensor factors
-   to use the right-factor K'-algebra structure in the statement.
-3. Apply `lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum` over K' to each tensor
-   factor. Its finitely many primes are maximal and intersect in the nilradical. Apply
-   `lem-pc-crt-ideal-quotient-product` to identify its reduction with their residue fields.
-   By step 2 each of those fields is finite purely inseparable over K'.
-4. Assemble these finite products over i to obtain the asserted K'-algebra isomorphism.
-   The extension K'/K retains the finiteness and separability supplied in step 2.
--/
+product of finite purely inseparable fields after a finite separable extension. -/
 theorem exists_separable_extension_reduction_tensorProduct_equiv_pi
     (K : Type u) [Field K] (C : Type v) [CommRing C] [Algebra K C]
     [FiniteDimensional K C] :

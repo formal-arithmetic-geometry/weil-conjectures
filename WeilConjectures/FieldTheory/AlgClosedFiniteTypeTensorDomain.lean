@@ -16,8 +16,23 @@ import Mathlib.RingTheory.TensorProduct.Nontrivial
 /-!
 # Tensor products of finite type domains over an algebraically closed field
 
-Source: Stacks Project, Algebra, Lemma 00I7, final paragraph
-(blueprint: lem-weil-pbc-algclosed-finite-type-tensor-domain).
+If `k` is algebraically closed, `R` is a `k`-domain and `S` is a `k`-domain of finite type,
+then `R ⊗[k] S` is a domain.
+
+## Main results
+
+- `IsAlgClosed.isDomain_tensorProduct_of_finiteType`
+
+## Implementation details
+
+Choose a `k`-basis of `R` and write elements of `R ⊗[k] S` in coordinates in `S`. For a maximal
+ideal `m` of `S`, the residue field is `k` by the Nullstellensatz, so `R ⊗[k] S/m ≅ R` is a
+domain. Hence for `xy = 0` every product of a coordinate of `x` with a coordinate of `y` lies in
+every maximal ideal, and vanishes since `S` is Jacobson.
+
+## References
+
+* [Stacks Project, Lemma 00I7](https://stacks.math.columbia.edu/tag/00I7), final paragraph
 -/
 
 @[expose] public section
@@ -25,21 +40,7 @@ Source: Stacks Project, Algebra, Lemma 00I7, final paragraph
 universe u v w
 open scoped TensorProduct
 
-/-- A domain tensored with a finite type domain over an algebraically closed field is a domain.
-Source: Stacks Project, Algebra, Lemma 00I7, final paragraph
-(blueprint: lem-weil-pbc-algclosed-finite-type-tensor-domain).
-
-Proof: Choose a basis of the first domain as a vector space over the base field and
-express both proposed zero divisors in coordinates in the second domain. At a maximal
-ideal of the second domain, the residue field is finite over the base by the
-Nullstellensatz, and is therefore equal to the algebraically closed base field. The
-specialized tensor product is isomorphic to the first domain, so one specialized factor
-vanishes. Thus the product of any coordinate of the first element with any coordinate of
-the second lies in every maximal ideal of the second domain. That domain is Jacobson,
-so these products vanish. If both tensor elements were nonzero, each would have a nonzero
-coordinate and their product would contradict the domain property of the second factor.
-Finally, tensor products of two domains over a field are nonzero (the base field injects
-into both factors), so absence of zero divisors gives a domain -/
+/-- A domain tensored with a finite type domain over an algebraically closed field is a domain. -/
 theorem IsAlgClosed.isDomain_tensorProduct_of_finiteType
     (k : Type u) [Field k] [IsAlgClosed k]
     (R : Type v) [CommRing R] [IsDomain R] [Algebra k R]
