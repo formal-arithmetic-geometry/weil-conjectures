@@ -14,8 +14,11 @@ import Mathlib.Algebra.Category.Ring.FinitePresentation
 
 /-! # Factoring polynomial solutions through a smooth algebra
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 0AH5, second paragraph.
-(blueprint: lem-weil-pbc-smooth-polynomial-factorization).
+## References
+
+* [Stacks, Tag 0AH5]
+* [Stacks, Tag 07GC]
+* [Stacks, Tag 00QO]
 -/
 
 @[expose] public section
@@ -24,22 +27,7 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
-/-- A finite polynomial solution along a regular map factors through a smooth algebra.
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 0AH5, second paragraph;
-Theorem 07GC and Algebra Lemma 00QO.
-(blueprint: lem-weil-pbc-smooth-polynomial-factorization).
-
-Proof: put C = A[X_1,...,X_n]/(f_1,...,f_m). Evaluation at the given solution
-kills the ideal of equations and therefore induces an A-algebra map C to Λ.
-C is finitely presented, since there are finitely many variables and equations.
-Popescu smoothing expresses Λ as a filtered colimit in commutative rings of
-smooth A-algebras with A-algebra coprojections. The finite-presentation
-factorization lemma factors C to Λ through one stage B, by an A-algebra map.
-Take b_k to be the image of X_k in B. The defining relations give f_j(b) = 0,
-and commutativity with the coprojection ψ gives ψ(b_k) = a_k.
-This argument also covers no variables and no equations by the empty
-polynomial presentation. No henselian hypothesis or approximation is used.
--/
+/-- A finite polynomial solution along a regular map factors through a smooth algebra. -/
 theorem exists_smooth_polynomial_factorization
     {A Λ : Type u} [CommRing A] [CommRing Λ] [Algebra A Λ]
     [IsNoetherianRing A] [IsNoetherianRing Λ]

@@ -17,8 +17,14 @@ import WeilConjectures.RingTheory.FiniteRankCoefficientCorrection
 /-!
 # Lifting a finite coefficient model through a square-zero terminal layer
 
-Source: Stacks Project, Tag 07FG, the inductive step of the coefficient-field claim.
-(blueprint: lem-weil-pbc-square-zero-coefficient-adjustment)
+An adjusted coefficient section of a nilpotent local ring modulo an ideal annihilated by the
+maximal ideal lifts to the ring itself, preserving its reduction. This is the inductive step of
+the coefficient-field argument.
+
+## References
+
+* [Stacks, Tag 07FG]
+* [Stacks, Tag 0320]
 -/
 
 @[expose] public section
@@ -237,43 +243,8 @@ private theorem exists_structure_map_lift_in_coefficient_closure
       rfl
 
 /-- Lift an already adjusted coefficient section through an ideal annihilated by the
-maximal ideal. Unlike the full coefficient-field claim, this theorem assumes the
-coefficient model in the quotient and preserves its specified section after reduction.
-
-Source: Stacks Project, Tag 07FG, proof of the coefficient-field claim, from
-"Choose a lift sigma" through "Then the claim holds".
-(blueprint: lem-weil-pbc-square-zero-coefficient-adjustment).
-
-Proof:
-1. Write m for the maximal ideal and choose N with m^N = 0. Since I is contained in m
-   and mI = 0, I is square-zero. Lift the specified section sigma' through I by the
-   characteristic-p field lifting theorem (Tag 0320). Its composite with r is the identity.
-2. Put S = Subring.closure(t union sigma0(k(c'))), and restrict the quotient map
-   to S. Its image contains the image of k by the quotient coefficient hypothesis.
-   Let J be its kernel. Since J lies in the contraction of m to S and m is nilpotent,
-   J is nilpotent. The first isomorphism theorem identifies S/J with the image.
-   Lift the induced map k -> S/J to S by Tag 0320, obtaining psi in this closure
-   and equal to the structure map modulo I.
-3. The difference between the structure map and the lifted evaluation is a derivation
-   theta : k -> I, since the two maps agree modulo I and mI = 0. Replacing sigma by
-   sigma + D for a derivation D : K -> I keeps its reduction sigma' unchanged and
-   replaces theta by theta - D restricted to k. Positive-degree monomials vanish when
-   multiplied by I, and the constant coefficient of the lift of a is its image in K.
-4. Choose a basis dy_j of the prime-field differentials of k. Jacobi--Zariski exactness
-   makes the kernel of K tensor Omega_k -> Omega_K finite dimensional by the H1
-   hypothesis. It is supported on a finite subset J0 of this basis. Outside J0, the
-   images dy_j are independent. Extend these images to a basis of Omega_K and choose
-   a linear map to I matching theta there. Its associated derivation D makes the new
-   discrepancy a finite sum of k-multiples of fixed elements f_j in I, j in J0.
-5. A residue section and the generators t generate the whole nilpotent local ring over
-   K: substitute the ideal generators repeatedly in a = sigma(r(a)) + z, z in m;
-   after N substitutions the remainder in m^N vanishes. Thus each of the finitely many
-   f_j is a polynomial in t with finitely many coefficients in K. Enlarge c' by these
-   coefficients. In the discrepancy formula, replace the action of a in k on f_j by
-   sigma(algebraMap k K a): their difference lies in m, which annihilates I. Both the
-   lifted evaluation and every discrepancy summand now lie in the asserted ring
-   closure. Closure under finite sums proves the containment. All adjustments take
-   values in I, so the reduction of the final section remains sigma'. -/
+maximal ideal. The coefficient model in the quotient is assumed, and its specified section is
+preserved after reduction. -/
 theorem exists_square_zero_coefficient_adjustment
     (k : Type u) [Field k] (K : Type w) [Field K] [Algebra k K]
     (Λ : Type v) [CommRing Λ] [Algebra k Λ] [IsLocalRing Λ]

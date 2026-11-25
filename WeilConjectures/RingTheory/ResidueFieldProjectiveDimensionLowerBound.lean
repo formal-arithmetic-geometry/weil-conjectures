@@ -14,8 +14,20 @@ import WeilConjectures.Mathlib.RingTheory.Regular.ProjectiveDimension
 /-!
 # Embedding dimension bounds the length of a residue-field resolution
 
-Source: Stacks Project, Algebra, Lemma 00OA
-(blueprint: lem-weil-pbc-residue-field-pd-ge-embedding-dimension).
+In a Noetherian local ring, the dimension of `m/m²` is bounded by the length of any projective
+resolution of the residue field.
+
+## Implementation details
+
+The proof uses Serre's theorem that a Noetherian local ring whose residue field has finite
+projective dimension is regular, and the formula for the projective dimension of the residue
+field of a regular local ring, both from
+`WeilConjectures.Mathlib.RingTheory.Regular.ProjectiveDimension`.
+
+## References
+
+* [Stacks, Tag 00OA]
+* [Stacks, Tag 00OC]
 -/
 
 @[expose] public section
@@ -25,29 +37,7 @@ universe u
 namespace IsLocalRing
 
 /-- In a Noetherian local ring, every projective resolution of the residue field of length
-at most `d` satisfies `dim (m/m²) ≤ d`. Source: Stacks Project, Algebra, Lemma 00OA
-(blueprint: lem-weil-pbc-residue-field-pd-ge-embedding-dimension).
-
-Proof:
-1. Unpack the bounded projective resolution `P`. Mathlib's `P.extMk_surjective`
-   represents every class in `Extⁱ(κ, Y)` by a map `Pᵢ → Y`. For `i > d`, the
-   source is zero, so this map and its Ext class are zero. This gives Mathlib's
-   `HasProjectiveDimensionLE κ d`.
-2. Apply the source library's proved Serre theorem
-   `IsRegularLocalRing.of_hasProjectiveDimensionLE_residueField` to make `R` regular.
-   Its proof uses induction on the number of generators of the maximal ideal,
-   change of rings and the residue-field retract; it does not use this theorem.
-3. The source library's `projectiveDimension_quotient_maximalIdeal` identifies
-   the projective dimension of `R/m` with the minimal number of generators of `m`,
-   using a regular sequence generating `m`. Transport along the canonical linear
-   equivalence to the universe-shrunk quotient used by that theorem.
-4. The minimal number of generators of `m` is `finrank κ (m/m²)` by Mathlib's
-   `spanFinrank_maximalIdeal_eq_finrank_cotangentSpace`. Rewrite the projective
-   dimension bound and reflect the natural-number casts.
-
-The two source-library results are in
-`WeilConjectures.Mathlib.RingTheory.Regular.ProjectiveDimension`, Serre's theorem
-(Stacks 00OC) and the regular-local residue-field dimension formula. -/
+at most `d` satisfies `dim (m/m²) ≤ d`. -/
 theorem finrank_cotangentSpace_le_of_hasProjectiveResolutionLE
     (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] (d : ℕ)
     (h : ModuleCat.HasProjectiveResolutionLE (ModuleCat.of R (ResidueField R)) d) :

@@ -11,20 +11,26 @@ public import Mathlib.RingTheory.Noetherian.Defs
 import WeilConjectures.RingTheory.SingularIdealsRelativeBound
 import WeilConjectures.RingTheory.SingularIdealLocalizationSmooth
 
+/-!
+# Absolute singular-ideal containment from an annihilator bound
+
+Given a finitely presented map `D → B` of `R`-algebras whose relative singular ideal contains
+the image of an annihilator bound, the absolute singular ideal of `D` over `R` maps into the
+absolute singular ideal of `B` over `R`.
+
+## References
+
+* [Stacks, Tag 07CT]
+-/
+
 @[expose] public section
 
 universe u v w
 namespace Algebra
 
-/-- Absolute singular-ideal containment from an annihilator bound.
-
-This is the smooth-composition paragraph in Stacks Project, Tag 07CT. The relative
-containment makes every prime outside the extended singular ideal smooth for `D → B`; smooth
-base change and composition then make it smooth for `R → B`, and the radical zero-locus
-criterion gives the absolute inclusion. The proof is postponed while the requisite
-smooth-composition lemmas are formalized.
-(blueprint: lem-weil-pbc-singular-ideals-absolute-bound)
--/
+/-- Let `R` be Noetherian, `D` a finitely presented `R`-algebra and `D → B` a finitely presented
+`R`-algebra map. If the image of the annihilator bound for `π` lies in the relative singular
+ideal of `D → B`, then the image of the singular ideal of `R → D` lies in that of `R → B`. -/
 theorem singularIdeal_map_le_absolute_of_annihilator_bound
     (R : Type u) (D : Type v) (B : Type w)
     [CommRing R] [CommRing D] [CommRing B]

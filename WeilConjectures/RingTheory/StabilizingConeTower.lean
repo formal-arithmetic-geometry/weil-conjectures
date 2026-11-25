@@ -16,8 +16,13 @@ import Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant
 /-!
 # Stabilizing towers of cochain approximations
 
-Source: Stacks Project, Tag 064U, passage from descending approximations to a complex.
-(blueprint: lem-pc-ring-stabilizing-cone-tower).
+A tower of cochain complexes mapping to a fixed complex, whose transition maps are
+eventually degreewise invertible and whose cones have vanishing cohomology in a growing
+range, yields a quasi-isomorphic model of that complex.
+
+## References
+
+* [Stacks, Tag 064U]
 -/
 
 @[expose] public section
@@ -51,33 +56,7 @@ private theorem sequence_eventuallyConstant {D : Type*} [Category D]
     infer_instance
 
 /-- A degreewise stabilizing sequence of increasingly accurate approximations gives
-an actual quasi-isomorphism, with each term isomorphic to a term of a finite stage.
-No finiteness or support hypothesis on the stages is needed for this assembly step.
-
-Source: Stacks Project, More on Algebra, Tag 064U, proof of (2) implies (1), assembly
-of the descending construction.
-(blueprint: lem-pc-ring-stabilizing-cone-tower).
-
-Proof: Form the sequential diagram with objects `P k` and maps `j k`. Use Mathlib's
-`HomologicalComplex.coconeOfHasColimitEval`: its term in degree i is the colimit
-of the degree-i modules, and its differential is induced by the stage differentials.
-This is a real construction from module colimits; their universal property uniquely
-determines the objects up to the isomorphisms used here. The equations in hcomm
-give a cocone with point C and therefore a chain map g from the constructed complex.
-For any k with b+1-k ≤ i, all degree-i transitions after k are invertible. Prove by
-induction on the target index that their composites are invertible. Mathlib's
-`Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit` then makes the degree-i
-colimit inclusion from stage k invertible.
-To check cohomology in degree i take k = max(0,b+2-i), implemented with Int.toNat.
-The three inclusions in degrees i-1,i,i+1 are invertible; the corresponding map of
-short complexes is a quasi-isomorphism, by
-`ShortComplex.quasiIso_of_epi_of_isIso_of_mono`. The stage cone is zero in
-cohomology in degrees i-1 and i. In the long exact sequence this makes H^i(f k)
-mono and epi, hence invertible. Factor f k as the stage inclusion followed by g
-and use cancellation of degree-i quasi-isomorphisms. Thus g is a quasi-isomorphism
-in every degree. For the term comparison use k = max(0,b+1-i) and the inverse
-of the degree-i colimit inclusion. This requires neither finite generation nor
-support bounds on the stages. Zero complexes and the zero ring work as well. -/
+an actual quasi-isomorphism, with each term isomorphic to a term of a finite stage. -/
 theorem exists_model_of_stabilizing_cone_tower (R : Type u) [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{v} R)]
     (C : CochainComplex (ModuleCat.{v} R) ℤ) (b : ℤ)

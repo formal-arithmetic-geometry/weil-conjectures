@@ -13,9 +13,12 @@ import WeilConjectures.RingTheory.SerreS2RegularQuotientAssociatedHeight
 /-!
 # Membership in a reduced S2 ring detected in codimension one
 
-Source: Stacks Project, Algebra, Tag 031T, proof of (1) and (2), using only S2;
-the argument applies to nonzerodivisor denominators in a reduced ring.
-(blueprint: lem-weil-pbc-serre-s2-total-fraction-membership).
+The argument of [Stacks, Tag 031T] uses only condition S2 and applies to nonzerodivisor
+denominators in a reduced ring.
+
+## References
+
+* [Stacks, Tag 031T]
 -/
 
 @[expose] public section
@@ -23,20 +26,7 @@ the argument applies to nonzerodivisor denominators in a reduced ring.
 universe u
 
 /-- A total fraction of a reduced Noetherian S2 ring lies in the ring if it does so
-at every prime of height at most one, expressed by clearing a local denominator.
-Source: Stacks Project, Algebra, Tag 031T, proof of (1) and (2), using only S2
-(blueprint: lem-weil-pbc-serre-s2-total-fraction-membership).
-
-Proof: Write x = a/b with b a nonzerodivisor. If x is not in R, the class of a in
-M = R/bR is nonzero. Choose an associated prime p of the cyclic submodule generated
-by this class; it is also an associated prime of M, and it contains the annihilator
-J = (bR : a). Localizing at p gives depth(M_p) = 0. Since b is regular in R_p,
-the regular-element depth formula (Tag 090R) gives depth(R_p) = 1. Condition S2
-forces min(2,height(p)) ≤ 1, hence height(p) ≤ 1. The local denominator hypothesis
-supplies s outside p and c with sx = c. Multiplication by b and injectivity of
-R → Q(R) gives sa = bc, so s lies in J and hence in p, a contradiction.
-Thus x comes from R. If b is a unit the conclusion is immediate; if R is the zero
-ring every fraction already comes from R. No domain or normality assumption is used. -/
+at every prime of height at most one, expressed by clearing a local denominator. -/
 theorem Ring.exists_algebraMap_eq_of_serreS_two
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsReduced R]
     (hS : Ring.IsSerreS R 2) (x : FractionRing R)

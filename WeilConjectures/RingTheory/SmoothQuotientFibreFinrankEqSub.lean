@@ -15,19 +15,32 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 import Mathlib.RingTheory.Kaehler.TensorProduct
 import Mathlib.LinearAlgebra.TensorProduct.Prod
 
+/-!
+# Fibre dimension of the differentials of a smooth quotient
+
+For a smooth quotient of `R[x₁, …, xₙ]` by `c` equations with free conormal module, the
+differentials of each fibre have dimension `n - c` at every point.
+
+## Implementation details
+
+Tensoring the split conormal sequence with the residue field and applying base change
+identifies the differential summand; rank additivity gives its dimension as `n - c`.
+
+## References
+
+* [Stacks, Tag 07CG]
+* [Stacks, Tag 07CH]
+-/
+
 @[expose] public section
 
 universe u
 open scoped TensorProduct
 namespace Algebra
 
-/--
-Source: Stacks Project, Smoothing Ring Maps, Lemmas 07CG and 07CH.
-(blueprint: new-smooth-quotient-fibre-finrank-eq-sub)
-Tensoring the split conormal sequence with the residue field and applying
-base change identifies the differential summand; rank additivity gives its
-dimension as n - c.
--/
+/-- For a smooth quotient `R[x₁, …, xₙ]/(f₁, …, f_c)` whose conormal module is free with basis
+indexed by `Fin c`, the Kähler differentials of each fibre, tensored with the residue field at a
+point, have dimension `n - c`. -/
 theorem smooth_quotient_fibre_finrank_eq_sub
     {R : Type u} [CommRing R] {n c : ℕ} (f : Fin c → MvPolynomial (Fin n) R)
     [Smooth R (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]

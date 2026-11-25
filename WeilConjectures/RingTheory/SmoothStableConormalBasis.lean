@@ -15,8 +15,13 @@ import WeilConjectures.RingTheory.PresentationLocalizedConormalSplit
 /-!
 # A polynomial presentation with a basis of its localized conormal module
 
-Source: Stacks Project, Tag 07EZ, proof of part (e), preparation of the presentation
-(blueprint: lem-weil-pbc-smooth-stable-conormal-basis).
+A polynomial presentation of a finitely presented algebra, smooth after inverting an element,
+can be stabilized so that its first relations give a basis of the localized conormal module.
+
+## References
+
+* [Stacks, Tag 07EZ], proof of part (e), first paragraph through the choice of
+  `f₁, ..., f_c` and their extension to generators
 -/
 
 @[expose] public section
@@ -27,23 +32,9 @@ open scoped TensorProduct
 namespace Algebra
 
 /-- Stabilize a polynomial presentation so that the first relations give a basis of its
-localized conormal module.
-
-Source: Stacks Project, Tag 07EZ, proof of part (e), first paragraph through the choice of
-`f₁, ..., f_c` and their extension to generators
-(blueprint: lem-weil-pbc-smooth-stable-conormal-basis).
-
-Proof: the input equivalence makes the localized conormal module stably free.
-Adjoin `r` polynomial variables mapping to zero. The new conormal module is the old one
-plus `A^r`: constant terms in the new variables and their linear coefficients give this
-isomorphism, with products of kernel elements mapping to zero. After localization this
-module is finite free. Lift its basis to kernel elements and multiply each vector by a
-power of the now invertible element to clear its denominator. Append a finite generating
-family of the kernel. Reindex the variables and relations by finite ordinals with these
-basis elements first. The number of basis elements is at most the number of variables:
-the split conormal injection, reduced modulo a maximal ideal, is an injection of vector
-spaces. If the localization is the zero ring, use the empty basis instead. The number of
-relations is at least the number of initial basis elements by construction. -/
+localized conormal module: if the localized conormal module of `P₀` is stably free, there is
+a presentation `P` with `c ≤ min n m` whose first `c` relations give a basis of
+`A_a ⊗[A] I/I²`. -/
 theorem exists_presentation_localized_conormal_basis
     (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A]
     [FinitePresentation R A] (a : A) [Smooth R (Localization.Away a)]

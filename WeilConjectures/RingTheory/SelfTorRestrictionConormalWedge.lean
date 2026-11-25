@@ -12,8 +12,15 @@ import WeilConjectures.RingTheory.KoszulRestrictionTestCycles
 
 /-! # Normalized conormal wedges under resolution-induced Tor restriction
 
-Source: Stacks Project, Tags 09PQ and 00LS.
-(blueprint: new-t2-self-tor-restriction-conormal-wedge). -/
+For a ring map `A → B` sending `I` into `J`, a certified restriction map
+`Tor_n^A(A/I, A/I) → Tor_n^B(B/J, B/J)` carries the normalized image of a pure conormal wedge
+to the normalized image of the wedge of the images of its ideal elements.
+
+## References
+
+* [Stacks, Tag 09PQ]
+* [Stacks, Tag 00LS]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -22,27 +29,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
 
 /-- A certified algebraic Tor restriction carries the normalized pure conormal wedge
-to the wedge of the images of its ideal elements. No sheaf or derived-category
-coordinate appears in this statement.
-Source: Stacks Project, Tag 09PQ (resolution-independent products), Tag 00LS
-(augmentation-preserving comparison and its homotopy uniqueness).
-(blueprint: new-t2-self-tor-restriction-conormal-wedge).
-
-Proof: Choose projective quotient resolutions P over A and Q over B, and lift
-the Koszul augmentation of g to P. After quotient tensoring the standard top
-wedge is a cycle. Normalize its image by selfTorConormalComparison_spec.
-Apply the certificate to P,Q: its augmented comparison a and tensor comparison
-k carry this class to Q-homology. Extend the Koszul complex along φ; on each
-exterior power, generator-wise scalar extension gives the Koszul complex of g'.
-The equation on g and g' makes this a chain map and identifies the standard
-wedge tensors. The adjoint of a composed with the Koszul lift is an
-augmentation-preserving Koszul lift into Q. Normalize that lift by
-selfTorConormalComparison_spec over B. The certificate equation on cycles
-identifies the two homology classes. Cancel Q.isoLeftDerivedObj to get the
-asserted equality. This argument needs neither flatness of φ nor regularity
-or finite generation of I,J. In degree zero the wedge is 1 and the quotient
-ring map preserves 1; if either quotient is zero the corresponding classes
-are zero. Characteristic two uses the alternating exterior wedge throughout. -/
+to the wedge of the images of its ideal elements. -/
 theorem selfTor_restriction_conormal_wedge
     (A B : Type u) [CommRing A] [CommRing B] (I : Ideal A) (J : Ideal B)
     (φ : A →+* B) (n : ℕ)

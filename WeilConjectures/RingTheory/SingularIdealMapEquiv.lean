@@ -9,18 +9,24 @@ module
 public import WeilConjectures.RingTheory.SingularIdeal
 import Mathlib.RingTheory.Localization.Basic
 
+/-!
+# Singular ideals under algebra equivalences
+
+An `R`-algebra equivalence `A ≃ₐ[R] B` maps the singular ideal of `A` into the singular ideal
+of `B`.
+
+## References
+
+* [Stacks, Tag 07C5]
+-/
+
 @[expose] public section
 
 universe u v w
 
 namespace Algebra
 
-/-- An algebra equivalence carries the singular ideal into the singular ideal.
-Source: Stacks Project, Smoothing Ring Maps, Definition 07C5
-(blueprint: lem-weil-pbc-singular-ideal-map-equiv).
-Proof: The equivalence identifies the principal localizations at a and its image, so
-smoothness transfers. Thus it maps the span of smooth-localization elements into the
-corresponding span. Mapping a radical is contained in the radical of its image. -/
+/-- An algebra equivalence carries the singular ideal into the singular ideal. -/
 theorem singularIdeal_map_equiv_le
     {R : Type u} {A : Type v} {B : Type w}
     [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]

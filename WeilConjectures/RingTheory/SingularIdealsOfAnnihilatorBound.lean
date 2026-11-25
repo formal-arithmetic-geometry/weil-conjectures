@@ -13,8 +13,13 @@ import WeilConjectures.RingTheory.SingularIdealsAbsoluteBound
 
 /-! # From an annihilator bound to singular-ideal comparisons
 
-Source: Stacks Project, Tag 07CT, second paragraph and final sentence of the proof.
-(blueprint: lem-weil-pbc-singular-ideals-of-annihilator-bound).
+For a finitely presented tower `R → D → B` over a Noetherian ring `R`, we show that an
+annihilator bound for `π ∈ R` forces the singular ideals `H_{B/D}` and `H_{B/R}` to contain the
+extension of `H_{D/R}`.
+
+## References
+
+* [Stacks, Tag 07CT]
 -/
 
 @[expose] public section
@@ -23,26 +28,8 @@ universe u v w
 
 namespace Algebra
 
-/-- For a finitely presented tower, an annihilator bound makes the relative and absolute
-singular ideals contain the extension of the singular ideal of the intermediate algebra.
-This comparison involves neither a source algebra `A` nor a factorization into `Λ`.
-
-Source: Stacks Project, Tag 07CT, second paragraph and final sentence of the proof.
-
-Proof: Write `p = algebraMap R D π` and `M = Ann_D(p²)/Ann_D(p)`. Its annihilator is the
-ideal of elements `r` such that `p² * x = 0` implies `r * p * x = 0` for every `x`.
-Since `D` is Noetherian, `M` is finite. At a prime `q` where `D_q` is flat over `R`,
-flat base change of annihilators (Tag 07T8) and `hR` give `M_q = 0`. The finite-module
-support criterion (Tag 00L2) therefore supplies an element of `Ann_D(M)` outside `q`.
-At a prime `Q` of `B` outside the extension of `H_{D/R}`, the inverse-image prime `q`
-is smooth for `D/R`, hence `D_q` is flat over `R`. The preceding annihilator element
-maps outside `Q`, and `hbound` puts it in `H_{B/D}`. Thus `D → B` is smooth at `Q`.
-The nonsmooth-locus characterization of singular ideals and their radicality imply the
-first containment. Smoothness of `R → D` at `q` and of `D → B` at `Q` implies smoothness
-of `R → B` at `Q`: choose smooth principal neighbourhoods and localize both so that the
-maps compose, using smooth base change and composition (Tags 00T4 and 00TD).
-Apply the same radical/zero-locus criterion to get the second containment.
-(blueprint: lem-weil-pbc-singular-ideals-of-annihilator-bound). -/
+/-- For a finitely presented tower `R → D → B`, an annihilator bound makes the relative and
+absolute singular ideals `H_{B/D}` and `H_{B/R}` contain the extension of `H_{D/R}`. -/
 theorem singularIdeals_of_annihilator_bound
     (R : Type u) (D : Type v) (B : Type w)
     [CommRing R] [CommRing D] [CommRing B]

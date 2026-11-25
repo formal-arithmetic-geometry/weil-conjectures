@@ -16,8 +16,13 @@ import Mathlib.RingTheory.LocalRing.Module
 /-!
 # First-order coordinates for a smooth augmented algebra
 
-Source: Stacks Project, Tag 05D5, the choice of basis lifts and the map Ψ₂.
-(blueprint: lem-sbc-smooth-augmentation-first-order-coordinates)
+For a smooth algebra `C` over a local ring `B` with an augmentation `ε : C → B`, a polynomial
+map `B[X₁, …, Xₙ] → C` sending the variables into `I = ker ε` induces an isomorphism modulo
+the squares of the augmentation ideals.
+
+## References
+
+* [Stacks, Tag 05D5], proof through the assertion that Ψ₂ is an isomorphism
 -/
 
 @[expose] public section
@@ -76,20 +81,10 @@ private theorem firstOrder_remainder {R : Type u} [CommRing R] {n : ℕ}
     simp [MvPolynomial.coeff_C_mul, MvPolynomial.coeff_C,
       MvPolynomial.coeff_X, Ne.symm hi, Finsupp.single_eq_single_iff]
 
-/-- Polynomial coordinates on the square-zero augmentation quotient.
-
-Source: Stacks Project, Tag 05D5, proof through the assertion that Ψ₂ is an isomorphism.
-(blueprint: lem-sbc-smooth-augmentation-first-order-coordinates)
-
-Proof: Write I = ker ε. The split conormal sequence for B → C → B identifies I/I²
-with Ω[C/B] tensored along ε with B. Smoothness makes this module finite projective.
-Since B is local, it is free of finite rank n. Lift a basis to elements fᵢ of I and
-let f be polynomial evaluation at these elements. Thus f sends the variables ideal
-J into I. The augmentation splits C/I² as B ⊕ I/I², with square-zero second summand.
-Likewise B[X]/J² is B ⊕ Bⁿ, with square-zero second summand. Evaluation is the identity
-on B and the chosen basis map on the second summands, hence bijective. If n = 0,
-both second summands vanish and evaluation on these quotients is the identity of B.
-No finite generation of I itself or Noetherian hypothesis is used. -/
+/-- Polynomial coordinates on the square-zero augmentation quotient: for a smooth algebra `C`
+over a local ring `B` with augmentation `ε`, there is a `B`-algebra map
+`f : B[X₁, …, Xₙ] → C` sending the variables ideal `J` into `I = ker ε` such that the induced
+map `B[X]/J² → C/I²` is bijective. -/
 theorem exists_augmented_firstOrder_polynomial_coordinates
     (B C : Type u) [CommRing B] [IsLocalRing B] [CommRing C] [Algebra B C]
     [Smooth B C] (ε : C →ₐ[B] B) :

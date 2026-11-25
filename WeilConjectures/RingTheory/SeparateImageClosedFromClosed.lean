@@ -11,8 +11,17 @@ public import Mathlib.RingTheory.Spectrum.Prime.Topology
 /-!
 # Separating a closed set from the closure of an image in a prime spectrum
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07M3
-(blueprint: lem-weil-pbc-separate-image-closed-from-closed).
+For a ring map `φ : R → S` and ideals `I` of `R` and `J` of `S`, we show that if the closure of
+the image of `V(J)` is disjoint from `V(I)`, then some `f ∈ R` is one modulo `I` with `φ f ∈ J`.
+
+## Implementation details
+
+Taking `I' = J.comap φ`, whose zero locus is the closure of the image of `V(J)`, avoids the
+power replacement in the original Stacks proof.
+
+## References
+
+* [Stacks, Tag 07M3]
 -/
 
 @[expose] public section
@@ -21,22 +30,8 @@ universe u v
 
 namespace PrimeSpectrum
 
-/-- Stacks Project, More on Algebra, Lemma Tag 07M3
-(blueprint: lem-weil-pbc-separate-image-closed-from-closed).
-If the closure of the image of `V(J)` is disjoint from `V(I)`, an element of `R`
-can be chosen to equal one modulo `I` and to map into `J`.
-
-Proof:
-1. Set `I' = J.comap φ`. The closure of the image of `V(J)` is `V(I')`, by
-   `lem-weil-pbc-closure-image-spec-zero-locus`
-   (`PrimeSpectrum.closure_image_comap_zeroLocus`).
-2. Disjointness gives `I + I' = R`, by
-   `lem-weil-pbc-spec-zero-loci-disjoint-unit-ideal`
-   (the zero-locus identities for a sum of ideals and for the unit ideal). Thus write
-   `1 = g + f` with `g ∈ I` and `f ∈ I'`.
-3. Since `f = 1 - g`, its image modulo `I` is one; membership in `I'` says
-   `φ f ∈ J`. This choice of `I'` avoids the power replacement in the original Stacks proof.
--/
+/-- If the closure of the image of `V(J)` under `Spec φ` is disjoint from `V(I)`, then there is
+an element `f` of `R` that is one modulo `I` and satisfies `φ f ∈ J`. -/
 theorem exists_one_mod_mem_of_disjoint_closure_image_zeroLocus
     {R : Type u} {S : Type v} [CommRing R] [CommRing S]
     (φ : R →+* S) (I : Ideal R) (J : Ideal S)

@@ -10,17 +10,26 @@ public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 
+/-!
+# A rank bound for smooth quotients of polynomial rings
+
+If a quotient of `R[X₁, …, Xₙ]` by `c` polynomials is smooth, nonzero and has a conormal
+module free of rank `c`, then `c ≤ n`.
+
+## References
+
+* [Stacks, Tag 07CG]
+* [Stacks, Tag 07CH]
+-/
+
 @[expose] public section
 
 universe u
 open scoped TensorProduct
 namespace Algebra
 
-/--
-Source: Stacks Project, Smoothing Ring Maps, Lemmas 07CG and 07CH.
-(blueprint: new-smooth-quotient-fibre-finrank-add-le)
-The split conormal sequence embeds a rank-c summand in the rank-n polynomial
-differential module, hence c ≤ n.
+/-- Let `A = R[X₁, …, Xₙ]/(f₁, …, f_c)` be smooth over `R` with conormal module free on a
+basis indexed by `Fin c`. If some fibre of `A` over a prime of `R` has a prime, then `c ≤ n`.
 -/
 theorem smooth_quotient_fibre_finrank_add_le
     {R : Type u} [CommRing R] {n c : ℕ} (f : Fin c → MvPolynomial (Fin n) R)

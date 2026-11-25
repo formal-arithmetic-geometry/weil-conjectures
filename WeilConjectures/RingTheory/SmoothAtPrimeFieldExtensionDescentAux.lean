@@ -13,6 +13,23 @@ import Mathlib.RingTheory.Extension.Cotangent.BaseChange
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 public import Mathlib.RingTheory.Kaehler.TensorProduct
 
+/-!
+# Descent of smoothness at a prime along a field extension: cotangent conditions
+
+For a finite type algebra `S` over a field `k` and a field extension `K / k`, if `K ⊗[k] S` is
+smooth over `K` at a prime, then `S` is formally smooth over `k` at the contracted prime.
+
+## Implementation details
+
+Flat base change identifies the localized cotangent homology `H₁` and the differentials of
+`S` after tensoring with `K`; faithfully flat descent then reflects the vanishing of `H₁` and
+the projectivity of the differentials, and the cotangent criterion gives formal smoothness.
+
+## References
+
+* [Stacks, Tag 00TG]
+-/
+
 @[expose] public section
 
 universe u v w
@@ -68,11 +85,9 @@ private theorem kaehler_baseChange
   exact IsBaseChange.of_equiv e (fun x ↦ congr($he x))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The localized cotangent conditions descend along the field extension.
-The proof is the faithful-flat cotangent descent argument of Stacks, Tag 00TG:
-flat base change identifies the localized cotangent homology and differentials, and
-faithful-flat descent reflects vanishing and finite projectivity.
-(blueprint: lem-weil-pbc-formally-smooth-at-prime-field-extension-descent-cotangent-conditions) -/
+/-- The localized cotangent conditions descend along the field extension: if `K ⊗[k] S` is
+smooth over `K` at `qK`, then at the contracted prime of `S` the localized differentials are
+projective and the localized `H₁` of the cotangent complex vanishes. -/
 theorem fieldExtension_cotangent_conditions
     {k : Type u} {K : Type v} {S : Type w}
     [Field k] [Field K] [Algebra k K] [CommRing S] [Algebra k S] [FiniteType k S]
@@ -164,14 +179,9 @@ theorem fieldExtension_cotangent_conditions
     infer_instance
   exact ⟨hp, hz⟩
 
-/-- (blueprint: lem-weil-pbc-formally-smooth-at-prime-field-extension-descent)
-Formal smoothness at the contracted local ring descends from a smooth tensor-product
-localization.  This is the local cotangent descent step in the proof of field-extension
-descent; it packages faithful-flat descent of the localized cotangent homology and
-finite projectivity of differentials.  The proof uses finite presentation over the field,
-faithful flatness after tensoring and localizing, flat base change for cotangent homology
-and Kähler differentials, faithful-flat descent of vanishing and finite projectivity, and
-the naive cotangent criterion for formal smoothness. -/
+/-- Formal smoothness at the contracted local ring descends from a smooth tensor-product
+localization: if `K ⊗[k] S` is smooth over `K` at `qK`, then `S` is smooth over `k` at the
+contracted prime. -/
 theorem formallySmoothAtPrime_of_fieldExtension
     {k : Type u} {K : Type v} {S : Type w}
     [Field k] [Field K] [Algebra k K] [CommRing S] [Algebra k S] [FiniteType k S]

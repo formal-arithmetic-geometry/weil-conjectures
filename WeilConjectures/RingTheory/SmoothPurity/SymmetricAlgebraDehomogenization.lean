@@ -10,8 +10,14 @@ public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 set_option linter.privateModule false
 /-! # Dehomogenizing a symmetric algebra
 
-Source: Stacks Project, Constructions, Tags 01OA and 01NG.
-(blueprint: lem-amb-symmetric-algebra-dehomogenization).
+This file sets up the context for dehomogenizing the symmetric algebra of `R × M`: an
+`R`-algebra `B` identified with `Sym(R × M)`, graded by the powers of the image of `R × M`,
+together with the degree-one element `t` corresponding to `(1, 0)`.
+
+## References
+
+* [Stacks, Tag 01OA]
+* [Stacks, Tag 01NG]
 -/
 
 @[expose] public section

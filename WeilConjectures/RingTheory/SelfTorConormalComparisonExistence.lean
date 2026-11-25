@@ -9,7 +9,17 @@ module
 public import WeilConjectures.RingTheory.SelfTorConormalComparisonPredicate
 import WeilConjectures.RingTheory.SelfTorConormalComparisonHomotopyNormalization
 
-/-! Existence of the normalized self-Tor comparison. -/
+/-!
+# Existence of the normalized self-Tor comparison
+
+We show that a normalized comparison map from the exterior powers of the conormal module of
+`I` to the self-Tor `Tor_n^A(A/I, A/I)` exists, using a Tate resolution of `A/I`.
+
+## References
+
+* [Stacks, Tag 09PQ]
+* [Stacks, Tag 00LS]
+-/
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -17,30 +27,8 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-/-- The Tate resolution construction supplies a normalized comparison map.
-Source: Stacks Project, Tag 09PQ (strictly graded commutative self-Tor), and
-Tag 00LS (comparison of free complexes with resolutions).
-(blueprint: new-r4-self-tor-conormal-comparison-existence).
-
-Proof: Choose a Tate free strictly commutative dg algebra resolving A/I. The
-quotient exact sequence identifies degree-one self-Tor with I/I²: an element
-x of I is represented by a degree-one lift whose differential is x. After
-base change to A/I this is a cycle, and changing the lift changes its class
-by a boundary. Multiplication of n such classes is alternating, even in
-characteristic two, by strict graded commutativity. It is A/I-multilinear,
-so the exterior universal property gives an A/I-linear map, and restriction
-of scalars gives the required A-linear morphism. For a tuple g, send each
-Koszul generator to a degree-one lift of its ideal element in the Tate
-resolution. This defines a dg algebra map preserving the augmentation;
-its value on every wedge is the product just used. Comparison with any
-projective resolution P transports this formula to P. Any other chain lift
-a has the same effect on homology: the Koszul terms are free, so inductive
-lifting against the exact augmented target constructs a chain homotopy
-between the two lifts. Tensoring preserves that homotopy. This proves the
-normalization for every v and cycle z in the statement. In degree zero the
-empty product is the quotient unit. For I=0 positive exterior degrees
-vanish, and for I=A the quotient modules vanish; neither case requires a
-nonzero ring or a regular sequence. -/
+/-- For every ideal `I` of `A` and every `n`, there is a normalized comparison map from the
+`n`-th exterior power of the conormal module of `I` to `Tor_n^A(A/I, A/I)`. -/
 theorem selfTorConormalComparison_exists (A : Type u) [CommRing A]
     (I : Ideal A) (n : ℕ) :
     ∃ c : conormalExteriorModule A I n ⟶

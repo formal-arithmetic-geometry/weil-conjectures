@@ -16,8 +16,20 @@ import WeilConjectures.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres
 /-!
 # Normalization of a one-dimensional semilocal domain
 
-Source: Stacks Project, Varieties, Lemma 09N2, opening normalization clause, and
-Algebra, Lemma 09IG (blueprint: lem-sc-semilocal-dim-one-normalization).
+We show that the normalization of a semilocal Noetherian domain of dimension one in its fraction
+field is a semilocal Dedekind domain of dimension one with the same fraction field.
+
+## Implementation details
+
+Mathlib's `IsDedekindDomain` permits dimension zero, so dimension one is stated separately.
+The statement is first proved for the canonical fraction field `FractionRing B`, which lies in
+the universe of `B`, and then transported along the integral-closure equivalence induced by
+`FractionRing B ≃ₐ[B] K`.
+
+## References
+
+* [Stacks, Tag 09N2]
+* [Stacks, Tag 09IG]
 -/
 
 @[expose] public section
@@ -26,8 +38,8 @@ universe u v
 
 namespace integralClosure
 
-/-- Apply the normalization theorem in one universe and deduce semilocality from its
-finite spectral fibres over the maximal ideals of the base. -/
+/-- Version of the normalization statement for a fraction field `K` in the universe of `B`: the
+integral closure of `B` in `K` is semilocal and a Dedekind domain of dimension one. -/
 private theorem normalization_same_universe
     (B K : Type u) [CommRing B] [IsDomain B] [IsNoetherianRing B]
     [Finite (MaximalSpectrum B)] [Field K] [Algebra B K] [IsFractionRing B K]
@@ -55,28 +67,7 @@ private theorem normalization_same_universe
 
 /-- The normalization of a semilocal Noetherian domain of dimension one in its fraction
 field is semilocal, Noetherian, an integrally closed domain of dimension one, and has
-that same fraction field. Mathlib's Dedekind predicate permits dimension zero, so
-dimension one is stated separately to retain the node's convention.
-Source: Stacks Project, Varieties Lemma 09N2, opening normalization clause, invoking
-Algebra Lemma 09IG (`lemma-integral-closure-Dedekind`).
-(blueprint: lem-sc-semilocal-dim-one-normalization).
-
-Proof:
-1. First use the canonical fraction field `F = FractionRing B`, which lies in the
-   universe of `B`. Apply `lem-sc-integral-closure-dedekind-surjective-fibres`
-   with both extension fields equal to `F`. The integral closure is Dedekind
-   of dimension one and its spectral map has finite fibres. By
-   `lem-weil-pbc-integral-maximal-contracts-maximal`, maximal ideals contract to
-   maximal ideals under the integral inclusion.
-2. Since `B` has finitely many maximal ideals and each spectral fibre is finite,
-   the maximal ideals of its integral closure form a finite union of finite sets.
-   In Lean, embed its maximal spectrum into the finite sigma type of spectral
-   fibres indexed by the maximal spectrum of `B`. Transport semilocality,
-   Dedekindness and dimension along the integral-closure equivalence induced by
-   the canonical `B`-algebra equivalence `F ≃ₐ[B] K`.
-3. The inclusions `B ⊆ integralClosure B K ⊆ K` show that its fraction field is
-   contained in `K` and contains the fraction field `K` of `B`, hence equals `K`.
-   This is Mathlib's `integralClosure.isFractionRing_of_finite_extension K K`. -/
+that same fraction field. -/
 theorem semilocal_normalization_dim_one
     (B : Type u) [CommRing B] [IsDomain B] [IsNoetherianRing B]
     [Finite (MaximalSpectrum B)] (hdim : ringKrullDim B = 1)

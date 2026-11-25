@@ -19,8 +19,12 @@ import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 /-!
 # Serre's criterion for normality
 
-Source: Stacks Project, Algebra, Lemma 10.157.4 (Tag 031S)
-(blueprint: lem-weil-pbc-serre-criterion-normal).
+We prove Serre's criterion: a Noetherian ring is normal if and only if it satisfies the
+conditions `(R₁)` and `(S₂)`.
+
+## References
+
+* [Stacks, Tag 031S]
 -/
 
 @[expose] public section
@@ -29,28 +33,8 @@ universe u
 
 namespace Ring
 
-/-- A Noetherian ring is normal if and only if it satisfies `(R₁)` and `(S₂)`.
-Source: Stacks Project, Algebra, Lemma 10.157.4 (Tag 031S)
-(blueprint: lem-weil-pbc-serre-criterion-normal).
-
-Proof:
-1. At primes of height at most one, the normal local domain is regular by the
-   source-library dimension-at-most-one theorem, giving `(R₁)`.
-2. For `(S₂)`, height zero is immediate. At height one, a nonzero element of the
-   maximal ideal gives a singleton regular sequence, hence depth at least one.
-   At higher height use `lem-weil-pbc-normal-local-depth-two`, the local depth step
-   of Tag 031S, whose argument excludes Kollár's finite-extension alternative.
-3. Conversely, lower `(R₁)` and `(S₂)` to `(R₀)` and `(S₁)` and apply
-   `lem-weil-pbc-serre-criterion-reduced`. Noetherianity gives finitely many minimal
-   primes, so `lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions`
-   reduces the goal to integral closedness in the total fraction ring.
-4. For an integral total fraction, `(R₁)` makes each localization of height at most
-   one a normal domain. The local denominator lemma gives a denominator outside
-   each such prime. By `lem-weil-pbc-serre-s2-total-fraction-membership`, the
-   fraction belongs to the original ring: an associated prime of a regular
-   principal quotient detecting nonmembership has height at most one, and the
-   local denominator witness contradicts containment of its annihilator there.
-   This is the S2-only associated-prime argument underlying Tag 031T. -/
+/-- A Noetherian ring is normal (all localizations at primes are integrally closed domains)
+if and only if it satisfies `(R₁)` and `(S₂)`. -/
 theorem forall_isIntegrallyClosed_localization_iff_isSerreR_and_isSerreS (R : Type u) [CommRing R]
     [IsNoetherianRing R] :
     (∀ (p : Ideal R) [p.IsPrime],
