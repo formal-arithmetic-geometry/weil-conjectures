@@ -13,8 +13,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.Punctual
 # The ordinary amplitude of the Fourier–Deligne transform on the line
 
 This file collects the statements about the ordinary cohomology sheaves of the Fourier–Deligne
-transform `FT_ψ` of the affine line which enter the perverse t-exactness of `FT_ψ`
-(blueprint `proposition-fourier-transform-perverse-heart--1`):
+transform `FT_ψ` of the affine line which enter the perverse t-exactness of `FT_ψ`:
 
 - `FT_ψ` lowers the lower bound of the cohomological amplitude by at most one, since `Rpr₂!` is
   left t-exact and `pr₁^*` and the tensor product with the lisse kernel are exact
@@ -70,8 +69,7 @@ lemma isLE_shift_obj (K : WeilComplex k₀ l X) (n a n' : ℤ) (h : a + n' = n)
     (((WeilComplex.objectProperty k₀ l X).ι.commShiftIso a).app K).symm n'
 
 /-- The cohomology sheaves of a Tate twist are the constant twists of the cohomology sheaves:
-`𝓗ᵃ(K(m)) ≅ 𝓗ᵃ(K) ⊗ 𝓑_{χ_ℓ(σ)^m}`, the Tate twist being the derived functor of the exact
-constant twist (`ProEtaleWeilSheaf.rightDerivedFunctorIhomFunctorTateTwistIso`). -/
+`𝓗ᵃ(K(m)) ≅ 𝓗ᵃ(K) ⊗ 𝓑_{χ_ℓ(σ)^m}`. -/
 noncomputable def homologySheafTateTwistIso (m a : ℤ) (K : WeilComplex k₀ l X) :
     (homologySheaf a).obj ((tateTwist k₀ l X m).obj K) ≅
       ((homologySheaf a).obj K).constantTwist (WeilSheaf.cyclotomicUnit k₀ l ^ m) :=
@@ -203,8 +201,7 @@ theorem isGE_upperStar_obj (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀)
 
 variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- The tensor product with a lisse Weil sheaf preserves complexes `≥ a`: it carries a Weil
-sheaf placed in degree zero to a complex `≥ 0`, being a right derived functor. -/
+/-- The tensor product with a lisse Weil sheaf preserves complexes `≥ a`. -/
 theorem isGE_tensorLisse_obj (F : WeilSheaf k₀ l X) (hF : F.IsLisse)
     {K : WeilComplex k₀ l X} {a : ℤ} (hK : K.obj.IsGE a) :
     ((tensorLisse F hF).obj K).obj.IsGE a := by
@@ -215,8 +212,7 @@ theorem isGE_tensorLisse_obj (F : WeilSheaf k₀ l X) (hF : F.IsLisse)
 variable [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- The direct image with compact support preserves complexes `≥ a`: it carries a Weil sheaf
-placed in degree zero to a complex `≥ 0`. -/
+/-- The direct image with compact support preserves complexes `≥ a`. -/
 theorem isGE_derivedLowerShriek_obj (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     {K : WeilComplex k₀ l X} {a : ℤ} (hK : K.obj.IsGE a) :
@@ -229,9 +225,7 @@ end LeftTExact
 
 end WeilComplex
 
-/-- **Fourier inversion** on the line: `FT_{ψ⁻¹} ∘ FT_ψ ≅ (-)(-1)`, the shifts
-`[-2][1][1]` of `nonempty_iso_fourierTransform_comp_inv` cancelled.
-(blueprint: `proposition-fourier-inversion`) -/
+/-- **Fourier inversion** on the line: `FT_{ψ⁻¹} ∘ FT_ψ ≅ (-)(-1)`. -/
 theorem nonempty_fourierTransform_comp_fourierTransform_inv_iso
     (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) :
     Nonempty (fourierTransform ψ ⋙ fourierTransform ψ⁻¹ ≅
@@ -243,17 +237,14 @@ theorem nonempty_fourierTransform_comp_fourierTransform_inv_iso
         shiftFunctorCompIsoId _ (-2 : ℤ) 2 (by norm_num)) ≪≫
     Functor.rightUnitor _⟩
 
-/-- `FT_ψ` lowers the lower bound of the amplitude by at most one: `pr₁^*` and the tensor
-product with the lisse kernel are exact, `Rpr₂!` is left t-exact, and the shift `[1]` lowers
-the bound by one. -/
+/-- `FT_ψ` lowers the lower bound of the amplitude by at most one. -/
 theorem isGE_fourierTransform_obj (ψ : AddChar k₀ (PadicAlgCl l)) {a : ℤ}
     {K : WeilComplex k₀ l (affineLine k₀)} (hK : K.obj.IsGE a) :
     ((fourierTransform ψ).obj K).obj.IsGE (a - 1) :=
   WeilComplex.isGE_shift_obj _ a 1 (a - 1) (by lia) (WeilComplex.isGE_derivedLowerShriek_obj _
     (WeilComplex.isGE_tensorLisse_obj _ _ (WeilComplex.isGE_upperStar_obj _ hK)))
 
-/-- The inverse of `FT_ψ` lowers the lower bound of the amplitude by at most one: by Fourier
-inversion, its Tate twist `(-1)` is `FT_{ψ⁻¹}`. -/
+/-- The inverse of `FT_ψ` lowers the lower bound of the amplitude by at most one. -/
 theorem isGE_fourierTransform_inv_obj (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) {a : ℤ}
     {K : WeilComplex k₀ l (affineLine k₀)} (hK : K.obj.IsGE a) :
     haveI := isEquivalence_fourierTransform (l := l) ψ hψ
@@ -267,9 +258,7 @@ theorem isGE_fourierTransform_inv_obj (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : 
   exact (h b hb).of_iso ((WeilComplex.homologySheaf b).mapIso ((e.app _).symm ≪≫
     (fourierTransform ψ⁻¹).mapIso ((fourierTransform ψ).asEquivalence.counitIso.app K)))
 
-/-- `FT_ψ` raises the upper bound of the amplitude by at most one: the truncation
-`τ_{≥ m + 2} FT_ψ(K)` is right orthogonal to `FT_ψ(K)`, since by adjunction
-`Hom(FT_ψ K, Z) = Hom(K, FT_ψ⁻¹ Z)` and `FT_ψ⁻¹ Z ≥ m + 1`. -/
+/-- `FT_ψ` raises the upper bound of the amplitude by at most one. -/
 theorem isLE_fourierTransform_obj (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) {m : ℤ}
     {K : WeilComplex k₀ l (affineLine k₀)} (hK : K.obj.IsLE m) :
     ((fourierTransform ψ).obj K).obj.IsLE (m + 1) := by
@@ -307,9 +296,7 @@ theorem isLE_fourierTransform_obj (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ �
     ‹_› ‹_›
 
 omit [Finite k₀] in
-/-- The complement of a finite set of closed points of the affine line is a dense open: it
-contains the image of the generic point of the irreducible geometric line, which is not a
-closed point since the affine line is not a single point. -/
+/-- The complement of a finite set of closed points of the affine line is a dense open. -/
 theorem affineLine.exists_opens_dense_compl_finite (S : Set (affineLine k₀).finitePoints)
     (hS : S.Finite) :
     ∃ V : (affineLine k₀).Opens, Dense (V : Set (affineLine k₀)) ∧
@@ -340,9 +327,7 @@ theorem affineLine.exists_opens_dense_compl_finite (S : Set (affineLine k₀).fi
   intro z
   exact closure_mono (Set.singleton_subset_iff.2 hξ) (specializes_iff_mem_closure.1 (hsp z))
 
-/-- A sheaf of finite support transforms into a complex `≤ -1`: it vanishes on the dense
-complement of its support, so its transform is a lisse sheaf placed in degree `-1`
-(`AlgebraicGeometry.WeilSheaf.exists_isLisse_iso_fourierTransform_of_isZero_upperStar`). -/
+/-- A sheaf of finite support transforms into a complex `≤ -1`. -/
 theorem isLE_fourierTransform_toComplex_of_support_finite (ψ : AddChar k₀ (PadicAlgCl l))
     (P : WeilSheaf k₀ l (affineLine k₀)) (hP : P.support.Finite) :
     ((fourierTransform ψ).obj (WeilSheaf.toComplex.obj P)).obj.IsLE (-1) := by
@@ -369,7 +354,7 @@ theorem isLE_fourierTransform_toComplex_of_support_finite (ψ : AddChar k₀ (Pa
     ((WeilComplex.homologySheaf a).mapIso e)
 
 /-- A complex concentrated in degree `n` whose `𝓗ⁿ` has finite support transforms into a
-complex `≤ n - 1`: it is a sheaf of finite support placed in degree `n`. -/
+complex `≤ n - 1`. -/
 theorem isLE_fourierTransform_of_isGE_of_isLE (ψ : AddChar k₀ (PadicAlgCl l)) {n : ℤ}
     {K : WeilComplex k₀ l (affineLine k₀)} (hge : K.obj.IsGE n) (hle : K.obj.IsLE n)
     (hK : ((WeilComplex.homologySheaf n).obj K).support.Finite) :

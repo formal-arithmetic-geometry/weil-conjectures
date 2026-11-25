@@ -18,7 +18,7 @@ For a flat ring morphism `φ : Λ →+* Λ'`, restriction of scalars from étale
 `g_*` on the nose (both forget the `Λ'`-action on the sections over `V ×_Y Z`), hence it commutes
 with the derived direct image: `Rg_* ⋙ Res ≅ Res ⋙ Rg_*`.
 
-The case of the blueprint is `Λ = 𝔽_ℓ` and `Λ'` a finite `𝔽_ℓ`-algebra, which is free, hence
+The main case of interest is `Λ = 𝔽_ℓ` and `Λ'` a finite `𝔽_ℓ`-algebra, which is free, hence
 flat, over the field `𝔽_ℓ`: the derived direct image of a sheaf of `Λ'`-modules is computed by
 that of its underlying sheaf of `𝔽_ℓ`-modules.
 
@@ -27,7 +27,7 @@ that of its underlying sheaf of `𝔽_ℓ`-modules.
 - `AlgebraicGeometry.Etale.preservesKInjectiveComplexes_restrictScalars`: restriction of scalars
   along a flat ring morphism preserves K-injective complexes.
 - `AlgebraicGeometry.Etale.rightDerivedLowerStarCompDerivedRestrictScalarsIso`: restriction of
-  scalars commutes with `Rg_*` (`corollary-open-direct-image-over-field--1`).
+  scalars commutes with `Rg_*`.
 -/
 
 @[expose] public section
@@ -77,11 +77,8 @@ lemma preservesKInjectiveComplexes_restrictScalars (hφ : φ.Flat) (X : Scheme.{
 
 variable (φ)
 
-/-- Blueprint `corollary-open-direct-image-over-field--1`: Changing finite coefficient rings in
-a direct image.
-
-Let `φ : Λ →+* Λ'` be a flat ring morphism (in the blueprint, `Λ = 𝔽_ℓ` and `Λ'` a finite
-`𝔽_ℓ`-algebra) and let `g : Z ⟶ Y` be a morphism of schemes. Forgetting the `Λ'`-action
+/-- Changing coefficient rings in a direct image. Let `φ : Λ →+* Λ'` be a flat ring morphism and
+let `g : Z ⟶ Y` be a morphism of schemes. Forgetting the `Λ'`-action
 identifies the derived direct image of a complex of sheaves of `Λ'`-modules with the derived
 direct image of the underlying complex of sheaves of `Λ`-modules:
 `Res ∘ Rg_* ≅ Rg_* ∘ Res` on the unbounded derived categories. -/

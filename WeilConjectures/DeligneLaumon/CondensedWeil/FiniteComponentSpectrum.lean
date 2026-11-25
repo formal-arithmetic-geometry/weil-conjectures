@@ -14,15 +14,9 @@ set_option autoImplicit false
 
 namespace WeilConjectures.CondensedWeil
 
-/-- An eigenvalue of an endomorphism transported to a finite product is an eigenvalue
-on a nonzero component.  This is the linear algebra part of a finite clopen decomposition.
-Source: latest blueprint, second paragraph of lem-zl-affine-curve-hc2-purity.proof.md,
-the sentence selecting a nonzero summand of an eigenvector
-(blueprint: lem-zl-eigenvalue-equiv-pi).
-Proof: transport a nonzero eigenvector through phi. Since phi is injective, one of
-its coordinates is nonzero. Equivariance and linearity give the eigenvector equation
-in that coordinate. Apply its spectral predicate. This also handles the empty product:
-there can be no nonzero vector in it. No finiteness assumption is needed. -/
+/-- If `F` corresponds under an equivariant linear equivalence `φ` to the product of the
+endomorphisms `f i`, then every eigenvalue of `F` is an eigenvalue of some component `f i`;
+in particular it satisfies any predicate `P` satisfied by all eigenvalues of all `f i`. -/
 theorem hasEigenvalue_of_equiv_pi
     {K : Type*} [Field K] {H : Type*} [AddCommGroup H] [Module K H]
     {I : Type*}

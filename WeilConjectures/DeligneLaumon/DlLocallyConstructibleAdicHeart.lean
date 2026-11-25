@@ -14,14 +14,15 @@ import all WeilConjectures.SmoothPurity.GeneralAlgebraicallyClosedCoefficients.G
 
 /-! # Locally constructible adic sheaves as compatible local heart objects
 
-Source: Bhatt--Scholze, Section 6.8, Definitions 6.8.6 and 6.8.8,
-Propositions 6.8.4(5) and 6.8.14, and Remark 6.8.15
-(blueprint: def-dl-a1-locally-constructible-adic-heart).
-
 On a locally finite-type k0-scheme, separated finite-type opens form a basis.
 A locally constructible sheaf is specified on this basis, with the canonical completed
 restriction identifications and their cocycle. Different opens may use different finite
 coefficient fields. Morphisms commute with every restriction identification.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Section 6.8, Definitions 6.8.6
+  and 6.8.8, Propositions 6.8.4(5) and 6.8.14, and Remark 6.8.15]
 -/
 
 @[expose] public noncomputable section

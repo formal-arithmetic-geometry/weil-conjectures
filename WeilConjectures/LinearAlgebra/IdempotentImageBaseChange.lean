@@ -15,8 +15,12 @@ import Mathlib.LinearAlgebra.TensorProduct.Pi
 /-!
 # Images of finite free projectors under base change
 
-Source: Stacks Project, More on Algebra, proof of Lemma Tag 07M5, final projector argument
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
+The image of an idempotent endomorphism `p` of `Rⁿ` is a finite projective direct summand, and
+its formation commutes with base change along any `R`-algebra `S`.
+
+## References
+
+* [Stacks Project, Tag 07M5](https://stacks.math.columbia.edu/tag/07M5)
 -/
 
 @[expose] public section
@@ -27,25 +31,7 @@ open TensorProduct
 
 namespace LinearMap
 
-/-- The image of a finite free projector is finite projective and commutes with base change.
-Source: Stacks Project, More on Algebra, proof of Lemma Tag 07M5, final sentences
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
-
-Proof: Put `q = 1 - p`. The identities `q² = q`, `pq = qp = 0`, and `p + q = 1`
-decompose every vector as `p v + q v`. Applying `p` to a vector in both images makes
-it zero, and `q v = v` on the kernel of `p`. Thus the images are complementary and
-`range q = ker p`. A direct summand of a finite free module is finite projective.
-Tensor this split decomposition with `S`. The split inclusions and projections remain
-split, and the tensor universal property identifies the first inclusion with
-`s ⊗ v ↦ s • ρ(v)` (lem-weil-pbc-module-base-change-universal-property).
-The hypothesis `p ∘ p = p` is `IsIdempotentElem p` in `Module.End R (Fin n → R)`, whose
-multiplication is composition; likewise for `p_S`.
-The matrix of the tensor projector is the entrywise image of the original matrix.
-It is identity on the first tensor summand and zero on the second. Hence it is
-idempotent, and its range is exactly the injective image of the first tensor summand.
-The resulting range equivalence is the displayed canonical map. The tensor factors
-are ordered `S ⊗[R] range p`, using the canonical commutor to express `range p ⊗[R] S`.
--/
+/-- The image of a finite free projector is finite projective and commutes with base change. -/
 theorem idempotent_image_baseChange
     {R : Type u} [CommRing R] (n : ℕ)
     (p : Module.End R (Fin n → R)) (hp : IsIdempotentElem p)

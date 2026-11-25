@@ -20,9 +20,8 @@ projection map `PF_{f, K, L}` over `Λ` is, up to isomorphism of arrows, the pro
 `PF_{f, K_n, L_n}` over `Λ ⧸ (ϖ)ⁿ` of the reductions.
 
 The reduction square itself,
-`AlgebraicGeometry.Etale.exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap`
-(`proposition-six-operations-change-coefficients`), and the constant
-`AlgebraicGeometry.Etale.projectionMapApp` are in
+`AlgebraicGeometry.Etale.exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap`,
+and the constant `AlgebraicGeometry.Etale.projectionMapApp` are in
 `WeilConjectures.SixFunctors.CoefficientReduction`.
 
 ## Main statements

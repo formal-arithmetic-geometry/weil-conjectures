@@ -16,10 +16,6 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportRationalScalarIso
 
 /-! # Normalized compact-support comparisons for individual coefficient inclusions
 
-Source: main-20261015, lem-weil-compact-support-finite-field-independence, first sentence;
-proposition-six-operations-change-coefficients, compact-support and final paragraphs
-(blueprint: lem-weil-compact-support-normalized-scalar-isomorphisms).
-
 ## Main definitions and statements
 
 - `sfCompactSupportScalarSystemMap`: the actual whole-system mate followed by its limit.
@@ -48,9 +44,7 @@ variable (l : ℕ) [Fact l.Prime]
   (c : Compactification f)
 
 /-- Transport the given base-field unit through global sections to each residue field.
-This is data obtained from the given unit, not an additional invertibility hypothesis.
-Source: lem-weil-compact-support-finite-field-independence, coefficient convention
-(blueprint: lem-weil-compact-support-normalized-scalar-isomorphisms). -/
+This is data obtained from the given unit, not an additional invertibility hypothesis. -/
 @[instance_reducible] def sfCompactSupportScalarResidueUnit
     (W : Scheme.{u}) [W.Over (Spec (.of K₀))] (x : W) :
     Invertible (l : W.residueField x) :=
