@@ -16,8 +16,12 @@ import Mathlib.RingTheory.Int.Basic
 /-!
 # Primary decomposition of finite discrete representations
 
-Source: blueprint `theorem-cohomology-curves--2`, proof paragraph 1.
-(blueprint: lem-sc-finite-discrete-rep-primary-decomposition)
+A finite discrete continuous representation `M` of a topological group on an abelian group
+splits equivariantly as a finite direct sum of finite `p`-primary discrete representations.
+
+## Main statements
+
+- `Rep.exists_finite_primary_decomposition`: the primary decomposition of `M`.
 -/
 
 @[expose] public section
@@ -31,20 +35,9 @@ open CategoryTheory
 namespace Rep
 
 /-- A finite discrete continuous integral representation splits into finite primary
-representations equivariantly.
-
-Source: blueprint `theorem-cohomology-curves--2`, proof paragraph 1.
-
-Proof: take the exponent n of the finite abelian group underlying M. If n = 1, M is
-zero and the empty family works. Otherwise enumerate the prime divisors p_i of n, and
-put q_i = p_i ^ v_i(n). The subgroup killed by q_i is invariant under all integral
-linear automorphisms. Give it the restricted action; its stabilizers are the same open
-stabilizers as in M, so it defines a discrete continuous representation N_i. The subgroup
-is finite and p_i-primary. Chinese remainder gives integers c_i equal to 1 modulo q_i
-and 0 modulo the other q_j. Multiplication by c_i lands in N_i, commutes with the action,
-and is its projection. Projection followed by inclusion is multiplication by c_i on M.
-The sum of c_i is 1 modulo n, so the sum of the displayed composites is the identity.
-(blueprint: lem-sc-finite-discrete-rep-primary-decomposition) -/
+representations equivariantly: there are primes `p i`, finite `p i`-primary discrete
+representations `N i` and morphisms `a i : M ⟶ N i`, `b i : N i ⟶ M` with
+`∑ i, a i ≫ b i = 𝟙 M`. -/
 theorem exists_finite_primary_decomposition
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     (M : DiscreteContinuousRep.{0, u, v} ℤ G) [Finite M.obj.V] :

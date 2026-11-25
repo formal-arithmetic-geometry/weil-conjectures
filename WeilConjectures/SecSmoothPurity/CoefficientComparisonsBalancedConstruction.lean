@@ -11,13 +11,19 @@ import all WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
 
 /-! # Balanced coefficient comparisons on sheaves of modules
 
-Source: Stacks Project, Modules on Sites, Section 03EK and Tag 03EL,
-lemma-tensor-product-pullback.
-(auxiliary; not a blueprint node).
+This file constructs the comparison between the two composites of scalar extension and
+inverse image for a coefficient square of sheaves of rings, together with its generator
+formulas and the scalar/tensor comparisons for scalar extension.
+
+## Implementation details
 
 All tensor sections below are sections of the actual sheafified tensor. The transported
 insertion is a morphism on the algebraic inverse image, so its argument is an arbitrary
 local section there. No lifting of local sections to the source site is assumed.
+
+## References
+
+* Stacks Project, Modules on Sites, Section 03EK and Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +46,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
   {J : GrothendieckTopology C} {K : GrothendieckTopology D}
 
 /-- The coefficient square and its algebraic inverse-image presentations. The graph equation
-specifies that j is the inverse image of iY under the given identifications.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+specifies that j is the inverse image of iY under the given identifications. -/
 structure Square (F : Sheaf J (Type w) ⥤ Sheaf K (Type w)) where
   R0 : Sheaf J CommRingCat.{w}
   R1 : Sheaf J CommRingCat.{w}
@@ -63,34 +68,28 @@ structure Square (F : Sheaf J (Type w) ⥤ Sheaf K (Type w)) where
 
 variable {F : Sheaf J (Type w) ⥤ Sheaf K (Type w)} (d : Square F)
 
-/-- F_0 is the specified algebraic inverse image followed by sheafified scalar extension.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+/-- F_0 is the specified algebraic inverse image followed by sheafified scalar extension. -/
 def pull0 : Modules.{w, uC, vC} d.R0 ⥤ Modules.{w, uD, vD} d.B0 :=
   d.I0.modules ⋙ extensionFunctor.{w, uD, vD} d.phi0
 
-/-- F_1 is the specified algebraic inverse image followed by sheafified scalar extension.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+/-- F_1 is the specified algebraic inverse image followed by sheafified scalar extension. -/
 def pull1 : Modules.{w, uC, vC} d.R1 ⥤ Modules.{w, uD, vD} d.B1 :=
   d.I1.modules ⋙ extensionFunctor.{w, uD, vD} d.phi1
 
-/-- The source S_X F_0 of k, in diagrammatic functor-composition order.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+/-- The source S_X F_0 of k, in diagrammatic functor-composition order. -/
 def left : Modules.{w, uC, vC} d.R0 ⥤ Modules.{w, uD, vD} d.B1 :=
   pull0 d ⋙ extensionFunctor.{w, uD, vD} d.iX
 
-/-- The target F_1 S_Y of k, in diagrammatic functor-composition order.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+/-- The target F_1 S_Y of k, in diagrammatic functor-composition order. -/
 def right : Modules.{w, uC, vC} d.R0 ⥤ Modules.{w, uD, vD} d.B1 :=
   extensionFunctor.{w, uC, vC} d.iY ⋙ pull1 d
 
-/-- The single pullback with coefficient map i_X phi^0 = phi^1 u^{-1}i_Y.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+/-- The single pullback with coefficient map i_X phi^0 = phi^1 u^{-1}i_Y. -/
 def common : Modules.{w, uC, vC} d.R0 ⥤ Modules.{w, uD, vD} d.B1 :=
   d.I0.modules ⋙ extensionFunctor.{w, uD, vD} (d.phi0 ≫ d.iX)
 
 /-- The inverse image of x mapped to 1 tensor x. This is defined on the entire underlying
-inverse-image sheaf, not merely on inverse images of source-site local sections.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+inverse-image sheaf, not merely on inverse images of source-site local sections. -/
 def transportedInsertion (M : Modules.{w, uC, vC} d.R0) :
     (underlying d.A0).obj (d.I0.modules.obj M) ⟶
       (underlying d.A1).obj (d.I1.modules.obj ((extensionFunctor.{w, uC, vC} d.iY).obj M)) :=
@@ -99,9 +98,7 @@ def transportedInsertion (M : Modules.{w, uC, vC} d.R0) :
 
 /-- The two generator formulas for k and its inverse. The expression d • transportedInsertion x
 is the algebraic inverse image of d tensor x in S_Y M; its d and x are arbitrary local
-sections of the inverse-image ring and module.
-Source: Stacks 03EK, 03EL
-(auxiliary; not a blueprint node). -/
+sections of the inverse-image ring and module. -/
 def PullbackFormulas (k : left d ≅ right d) : Prop :=
   (∀ (M : Modules.{w, uC, vC} d.R0) (U : Dᵒᵖ) (b : d.B1.obj.obj U) (a : d.B0.obj.obj U)
       (x : (d.I0.modules.obj M).val.obj U),
@@ -120,8 +117,7 @@ def PullbackFormulas (k : left d ≅ right d) : Prop :=
         (extensionTmul d.phi0 (d.I0.modules.obj M) U 1 x))
 
 /-- Identification with the two normalized comparisons from the single pullback.
-Both comparisons are natural isomorphisms, fixed on all scalar-extension generators.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+Both comparisons are natural isomorphisms, fixed on all scalar-extension generators. -/
 def ViaCommonPullback (k : left d ≅ right d) : Prop :=
   ∃ (l : common d ≅ left d) (h : common d ≅ right d),
     (∀ (M : Modules.{w, uC, vC} d.R0) (U : Dᵒᵖ) (b : d.B1.obj.obj U)
@@ -138,9 +134,7 @@ def ViaCommonPullback (k : left d ≅ right d) : Prop :=
           ((transportedInsertion d M).hom.app U x)) ∧
     k = l.symm ≪≫ h
 
-/-- Forward and inverse scalar/tensor prescriptions, on the actual sheafified tensor.
-Source: Stacks 03EK, 03EL
-(auxiliary; not a blueprint node). -/
+/-- Forward and inverse scalar/tensor prescriptions, on the actual sheafified tensor. -/
 def ScalarTensorFormulas {A B : Sheaf J CommRingCat.{w}} (i : A ⟶ B)
     (s : RingedComparisonTensor A B (extensionFunctor.{w, uC, vC} i)) : Prop :=
   (∀ (M N : Modules.{w, uC, vC} A) (U : Cᵒᵖ) (b : B.obj.obj U)
@@ -161,8 +155,7 @@ def ScalarTensorFormulas {A B : Sheaf J CommRingCat.{w}} (i : A ⟶ B)
         (ringedComparisonPure A M N U x y))
 
 /-- The scalar comparison existence and uniqueness assertion, including its identification
-with every canonical normalized comparison for the identity geometric morphism.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+with every canonical normalized comparison for the identity geometric morphism. -/
 def ScalarTensorConstruction {A B : Sheaf J CommRingCat.{w}} (i : A ⟶ B) : Prop :=
   ∃! s : RingedComparisonTensor A B (extensionFunctor.{w, uC, vC} i),
     ScalarTensorFormulas i s ∧
@@ -172,10 +165,7 @@ def ScalarTensorConstruction {A B : Sheaf J CommRingCat.{w}} (i : A ⟶ B) : Pro
         (fun _ ↦ rfl), c.mu = s
 
 /-- Forgetting commutativity preserves sheaves. Cache the existing Mathlib instance locally
-so that coefficient-comparison types do not repeat its multicospan inference.
-Source: Mathlib, Sites.Whiskering, `hasSheafCompose_of_preservesMulticospan`.
-(auxiliary; not a blueprint node).
-Proof: apply Mathlib's instance for the limit-preserving forgetful functor. -/
+so that coefficient-comparison types do not repeat its multicospan inference. -/
 private theorem coefficientComparison_hasSheafCompose
     {E : Type uC} [Category.{vC} E] [EssentiallySmall.{w} E]
     (T : GrothendieckTopology E) :
@@ -508,29 +498,9 @@ private theorem common_comparisons
 
 end Proof
 
-/-- Balanced construction of the coefficient/pullback comparison. The two inverse formulas,
-all balancing and sheafification descent, naturality, uniqueness and normalization through
-one pullback are retained. The scalar comparisons on both X and Y are asserted in the
-same conclusion.
-Source: Stacks 03EL (auxiliary; not a blueprint node).
-
-Proof: Apply the normalized scalar-composition theorem twice, first to the ringed inverse
-image followed by scalar extension along i_X, and then to scalar extension along i_Y
-followed by the ringed inverse image. The graph equation and coefficient square give the
-same composite coefficient. Evaluating the two normalizations on the identity generalized
-section gives the unit-insertion formulas for l and h on all inverse-image sections.
-Linearity gives arbitrary scalar coefficients. Set k = l.symm followed by h; scalar
-balancing proves both displayed formulas. The sheafification adjunction and scalar-extension
-extensionality identify any other normalized l and h with these, proving uniqueness of k.
-
-For each scalar map, use the existing canonical ringed tensor comparison for the identity
-geometric morphism. Evaluate its generalized pure formula on the product of the two
-underlying module sheaves; evaluation preserves this product, so this covers any pair of
-local sections. Its unit normalization gives the coefficient-one formula. Linearity and
-tensor bilinearity give the general forward formula; applying the inverse gives its product
-of scalar coefficients. Naturality is a field of the canonical comparison. Its uniqueness
-identifies every normalized canonical comparison with this one, and the canonical
-normalization clause of any second scalar candidate proves uniqueness of the scalar family. -/
+/-- Balanced construction of the coefficient/pullback comparison: there is a unique
+isomorphism `k : left d ≅ right d` satisfying the generator formulas and factoring through
+the common pullback, and the scalar comparisons along `d.iX` and `d.iY` exist uniquely. -/
 theorem coefficientComparisons_balanced_construction (G : Sheaf K (Type w) ⥤ Sheaf J (Type w))
     (adj : F ⊣ G) [PreservesFiniteLimits F] :
     (∃! k : left d ≅ right d, PullbackFormulas d k ∧ ViaCommonPullback d k) ∧

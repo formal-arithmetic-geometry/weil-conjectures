@@ -17,9 +17,20 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 /-!
 # The kernel filtration of a well-ordered projective presentation
 
-Source: Stacks Project, Algebra, Lemma 0D1U, successor argument, with the
-projective presentations supplied by the quotient resolutions in place of free modules.
-(blueprint: lem-weil-pbc-well-ordered-presentation-kernel-filtration).
+Given a well-ordered exhaustive filtration of a module together with projective resolutions
+of its successive quotients, we build a projective presentation of the module whose kernel
+carries a compatible exhaustive filtration with successive quotients the augmentation kernels.
+
+## Implementation details
+
+The projective presentations supplied by the quotient resolutions replace the free modules of
+the Stacks argument. The direct sum is formed only over the indices with nonzero quotient;
+these inject into `M` (choose an element of `F e` outside the predecessor supremum), so the sum
+lives in universe `v` and is projective without assuming the ring is small.
+
+## References
+
+* Stacks Project, Algebra, Lemma 0D1U, successor argument.
 -/
 
 @[expose] public section
@@ -33,45 +44,8 @@ open CategoryTheory CategoryTheory.Limits
 /-- The degree-zero presentations of the successive quotients give a projective
 presentation of the union with a compatible exhaustive kernel filtration.
 No dimension bound or induction hypothesis is used here.
-Source: Stacks Project, Algebra, Lemma 0D1U, successor argument.
-(blueprint: lem-weil-pbc-well-ordered-presentation-kernel-filtration).
-
-Proof: put `U e = sup_{i<e} F i` and `Q e = F e / U e`. At a stage with nonzero
-`Q e`, use the given augmentation `P e` in degree zero and lift it to `F e`
-through its quotient epimorphism by categorical projectivity. At a zero quotient
-use a zero summand instead. Sum these lifts followed by the inclusions into `M`.
-Transfinite induction shows that the sum through `e` maps onto `F e`: subtract
-a lift of the quotient class and apply induction to the difference in `U e`.
-The predecessor family is directed when nonempty, so its supremum is its union;
-at a least index the predecessor supremum is zero. Exhaustion gives surjectivity.
-
-The nonzero quotients form a small index set in universe `v`: choose for each
-such index an element of `F e` outside `U e`. Distinct chosen elements cannot
-coincide, since the one at a smaller index belongs to the larger predecessor
-supremum. This injects the active indices into `M`. Shrink this set to universe
-`v`, form the direct sum of its degree-zero projectives there, and denote it by
-`B`. For a map from `B` through any epimorphism lift on each summand and sum the
-lifts. Thus `B` is categorically projective without assuming the ring is small.
-
-Take the kernel `K` of the resulting surjection `B → M`, and let `G e` be the
-intersection of `K` with the partial sum through index `e`. The inclusions make
-`G` monotone. Every vector has finite support, hence is contained in some partial
-sum; the covering assumption gives a nonempty index set also for the zero vector.
-The sum strictly before `e` is the union of the earlier partial sums and maps
-onto `U e`. Projection onto the `e` summand consequently maps `G e` onto the
-kernel of the given augmentation: for a vector in that augmentation kernel,
-its lifted image lies in `U e`; choose a preimage in the preceding sum and
-subtract it. The kernel of this projection is precisely the union of the
-preceding `G i`, by intersection with the predecessor partial sum and finite
-support. The first isomorphism theorem identifies the successive kernel quotient
-with the augmentation kernel. At an inactive index the partial sum does not
-change, so the successive kernel quotient is zero. Package `K → B → M` as a
-short exact complex with third object exactly `M`.
-
-Edge cases: repeated stages contribute zero kernel quotients; at a least stage
-all predecessor submodules are zero; for a single stage this is the usual
-augmentation presentation. An empty index type is excluded by covering zero.
-The resolution family is input to this proposition, never chosen as library data. -/
+Each successive kernel quotient is either zero or isomorphic to the kernel of the
+augmentation of the corresponding resolution. -/
 theorem exists_projective_presentation_kernel_filtration
     {R : Type u} [CommRing R] (M : ModuleCat.{v} R)
     {E : Type w} [LinearOrder E] [IsWellOrder E (· < ·)]

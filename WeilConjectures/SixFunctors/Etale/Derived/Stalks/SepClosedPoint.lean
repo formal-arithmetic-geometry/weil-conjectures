@@ -13,8 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Basic
 For a geometric point `s : Spec Ω ⟶ T` and a morphism of fields `Spec Ω' ⟶ Spec Ω`, the
 derived pullback along `Spec Ω' ⟶ Spec Ω` is conservative (the morphism is surjective), so the
 vanishing of the stalk `L(a ≫ s)^* M` implies that of `Ls^* M`. This reduces vanishing at a
-geometric point with separably closed field to vanishing at one with algebraically closed field
-(blueprint `lemma-cohomology-near-two-transverse-divisors--1`).
+geometric point with separably closed field to vanishing at one with algebraically closed field.
 
 ## Main statements
 

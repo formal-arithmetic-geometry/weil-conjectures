@@ -32,11 +32,14 @@ comparison* of the exceptional inverse image is the mate of `Ex_!⁻¹`,
 whose transpose under `Rf'_! ⊣ Rf'^!` is `Rf'_! Lg'^* Rf^! ≅ Lg^* Rf_! Rf^! ⟶ Lg^*`
 (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`). It is not an isomorphism for
 an arbitrary `g`; it is one when `g` is an open immersion
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion`,
-blueprint `proposition-composition-open-restriction-compactifications-f--5` and
-`proposition-composition-open-restriction-compactifications-f--5`).
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion`).
 
-## The argument
+## Main definitions and statements
+
+- `AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`: `β : Lg'^* Rf^! ⟶ Rf'^! Lg^*`.
+- `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion`.
+
+## Implementation details
 
 For an open immersion `g` the pullbacks `Lg^*`, `Lg'^*` are themselves right adjoints, of the
 extensions by zero `g_!`, `g'_!`. The iterated mate of a square of left adjoints is its
@@ -54,14 +57,19 @@ between the left adjoints of `Rf'^! Lg^*` and `Lg'^* Rf^!`, and `β` is invertib
 * over `Z`, both sides vanish: `Li^* g_! = 0`, and `Li^* Rf_! g'_! ≅ Rf_{Z,!} Li'^* g'_! = 0` by
   compact-support base change along `i` and since the ranges of `i'` and `g'` are disjoint.
 
-This is a different route from the blueprint proof of
-`proposition-composition-open-restriction-compactifications-f--5` (closed support triangle and dual
-base change), and it does not need `f` to be proper.
+This argument avoids the closed support triangle and dual base change, and it does not need `f`
+to be proper.
 
-## Main definitions and statements
-
-- `AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`: `β : Lg'^* Rf^! ⟶ Rf'^! Lg^*`.
-- `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion`.
+For the reduction to the proper part
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv`), write
+`Rf_! = Rp_* j_!` for the chosen compactification `X ⟶[j] X̄ ⟶[p] Y`, so that `Gp ⋙ j^*` is a
+right adjoint of `Rf_!`. The mate of `Ex_!⁻¹` for these composite adjunctions is the horizontal
+pasting of the comparison for `p` with the mate `j^* Lg'^* ⟶ Lḡ^* j'^*` of the extension-by-zero
+base change (`CategoryTheory.mateEquiv_hcomp`); the latter is invertible, being identified
+through the pullback composition `L(j' ≫ ḡ)^* = L(g' ≫ j)^*` with `Lg'^*` of the invertible
+`j^* (j_! j^* ⟶ 𝟭)`. Changing the right adjoints and the compactification of `f'` to the chosen
+ones does not affect invertibility of mates
+(`CategoryTheory.isIso_mateEquiv_whiskerLeft_whiskerRight`).
 -/
 
 @[expose] public section
@@ -116,23 +124,12 @@ instance isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_uni
   rw [Adjunction.ofNatIsoRight_unit]
   infer_instance
 
-/-- Blueprint `proposition-composition-open-restriction-compactifications-f--5`: Base change for a
-proper morphism, against an open immersion.
-
-Blueprint `proposition-composition-open-restriction-compactifications-f--5`: Base change for an
-arbitrary morphism, against an open immersion.
+/-- Base change for the exceptional inverse image against an open immersion.
 
 For a cartesian square `g' ≫ f = f' ≫ g` with `g` an open immersion, `f`, `f'` admitting
 compactifications and torsion coefficients `Λ`, the base-change comparison
 `β : Lg'^* Rf^! ⟶ Rf'^! Lg^*` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`)
-is an isomorphism. The ambient right adjoints `Rf^!`, `Rf'^!` of the blueprint's datum are the
-exceptional inverse images, which exist for torsion coefficients
-(`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`, blueprint
-`theorem-existence-exceptional-inverse-image--1`). In particular this applies to the passage from an
-affine open of the base to the base.
-
-`f` need not be proper: `β` is the conjugate of `γ : g_! Rf'_! ⟶ Rf_! g'_!`, which is checked to
-be invertible on the open `Y'` and on its closed complement; see the module docstring. -/
+is an isomorphism. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f] [QuasiCompact f'] [IsOpenImmersion g]
     (sq : IsPullback g' f' f g) :
@@ -274,8 +271,7 @@ lemma twoSquare_inv_rightDerivedLowerShriekBaseChangeMap
     NatTrans.id_app]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
-/-- Blueprint `cor-exc-base-change-reduces-to-proper`: Base change for a general morphism
-reduces to the proper part.
+/-- Base change for a general morphism reduces to the proper part.
 
 Let `X ⟶[j] X̄ ⟶[p] Y` be the chosen compactification of `f`, and let `X' ⟶[j'] X̄' ⟶[p'] Y'`
 be its base change along `g`, with `ḡ : X̄' ⟶ X̄`. Let `Rp_* ⊣ Gp` and `Rp'_* ⊣ Gp'` be right
@@ -284,16 +280,7 @@ adjoints of the compact-support functors `Rp_! = Rp_*`, `Rp'_! = Rp'_*` of the p
 the mate of the inverse of the proper base change `Ex_*`, is an isomorphism, then so is the
 base-change comparison `β : Lg'^* Rf^! ⟶ Rf'^! Lg^*` of `f`
 (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`). So the comparison for a
-general separated finite-type morphism reduces to its proper part, the open part being free.
-
-As in the blueprint, `Rf_! = Rp_* j_!`, so the composite `Gp ⋙ j^*` is a right adjoint of
-`Rf_!`, and the mate of `Ex_!⁻¹` for these composite adjunctions is the horizontal pasting of
-the comparison for `p` with the mate `j^* Lg'^* ⟶ Lḡ^* j'^*` of the extension-by-zero base
-change (`CategoryTheory.mateEquiv_hcomp`); the latter is invertible, being identified through
-the pullback composition `L(j' ≫ ḡ)^* = L(g' ≫ j)^*` with `Lg'^*` of the invertible
-`j^* (j_! j^* ⟶ 𝟭)`. Changing the right adjoints and the compactification of `f'` to the chosen
-ones does not affect invertibility of mates
-(`CategoryTheory.isIso_mateEquiv_whiskerLeft_whiskerRight`). -/
+general separated finite-type morphism reduces to its proper part, the open part being free. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv
     {Gp : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       _root_.DerivedCategory (Sheaf (HasCompactification.compactification f).Z.smallEtaleTopology

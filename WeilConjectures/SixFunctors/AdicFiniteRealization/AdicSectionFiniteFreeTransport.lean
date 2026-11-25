@@ -13,8 +13,20 @@ import WeilConjectures.AlgebraicGeometry.Constant.ConstantModelStratificationTra
 import WeilConjectures.Mathlib.Topology.Constructible
 
 /-! # Finite-free targets under section encoding
-Source: Stacks Project, Tags 00YV, 03DM and 03DO.
-(blueprint: lem-sf-adic-section-finite-free-transport).
+
+Section encoding preserves and reflects the stratified finite-free target.
+
+## Implementation details
+
+The section equivalence preserves and reflects the standard degree bounds and identifies each
+homology module with the section encoding of internal homology; on each stratum, the section
+inverse-image comparison and local finite-freeness detection give the same criterion. For the
+reverse direction, the constructibility fields of a stratification are restored using that
+every locally closed subset of a noetherian space is constructible.
+
+## References
+
+- Stacks Project, Tags 00YV, 03D2, 03DM and 03DO.
 -/
 
 @[expose] public noncomputable section
@@ -46,16 +58,7 @@ private theorem stratum_sections (T : Scheme.{u})
     ((lf_iso e).trans (lf_restrict c _))
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
-/-- Section encoding preserves and reflects the stratified finite-free target.
-Source: Stacks Project, Tags 00YV, 03DM, 03DO and 03D2
-(blueprint: lem-sf-adic-section-finite-free-transport).
-Proof: the exact section equivalence preserves and reflects both standard degree bounds
-and identifies each homology module with the section encoding of internal homology.
-On each stratum, section inverse-image comparison and local finite-freeness detection
-give the identical criterion. Forget the constructibility fields of an internal
-stratification for the forward direction. In the reverse direction, every locally
-closed subset of a noetherian space is constructible, so those fields can be restored
-without changing the stratum schemes or immersions. All ordered bounds are retained. -/
+/-- Section encoding preserves and reflects the stratified finite-free target. -/
 theorem section_finiteFreeTarget (T : Scheme.{u}) [IsNoetherian T]
     (A : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj A] [IsCommMonObj A]
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) A)) :

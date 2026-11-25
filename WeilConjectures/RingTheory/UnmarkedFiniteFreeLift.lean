@@ -10,6 +10,22 @@ public import WeilConjectures.RingTheory.StablyFreeComplexLift
 import WeilConjectures.RingTheory.FiniteModuleSurjectiveModIdeal
 import all WeilConjectures.RingTheory.NilpotentProjectiveComplexLift
 
+/-!
+# Unmarked finite-free lifts along nilpotent ideals
+
+A bounded-above finite-free model of a pseudo-coherent complex lifts through a nilpotent
+quotient, retaining the upper bound and finite freeness.
+
+## Implementation details
+
+Compatibility of the lift with a prescribed derived marking is a separate comparison argument,
+not handled here.
+
+## References
+
+- Stacks Project, More on Algebra, Tags 0H76 and 0BCB.
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u v w w'
@@ -17,13 +33,8 @@ open CategoryTheory
 namespace DerivedCategory
 
 set_option linter.unusedVariables false in
-/-- The unmarked finite-free lifting data needed before checking the prescribed marking.
-Source: Stacks Project, More on Algebra, Tags 0H76 and 0BCB.
-(auxiliary; not a blueprint node)
-The construction first lifts a bounded-above finite-free model through the nilpotent
-quotient, retaining the upper bound and finite freeness. The remaining compatibility
-with the prescribed derived marking is a separate comparison argument.
--/
+/-- A bounded-above finite-free model lifts through the nilpotent quotient, retaining the upper
+bound and finite freeness (without the prescribed derived marking). -/
 theorem exists_unmarked_finiteFree_lift_of_nilpotent
     {R : Type u} [CommRing R] (I : Ideal R)
     (hnil : ∃ N : ℕ, 1 ≤ N ∧ I ^ N = 0)

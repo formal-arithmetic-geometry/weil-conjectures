@@ -24,9 +24,10 @@ import Mathlib.CategoryTheory.Equivalence
 
 /-! # Frobenius fixed-pair comparison for a supplied comparison system
 
-Source: blueprint main-20261015, sec-fourier-transform/sk-def-trace,
-`def-fd-trace-function.md`, final sentence, geometric-fibre and fixed-pair auxiliary
-(blueprint: lem-fd-frobenius-fixed-pair-comparison).
+Setting for comparing Frobenius fixed pairs across the stages of a supplied coefficient
+comparison system.
+
+## Implementation details
 
 The finite/common-stage transports and scalar/inclusion comparisons below use the
 specified comparisons of the supplied system, with their recorded reverse orientation.

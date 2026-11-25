@@ -17,8 +17,19 @@ import Mathlib.Topology.Algebra.OpenSubgroup
 /-!
 # Abelian structure on discrete modules with a continuous group action
 
-Source: Stacks Project, Etale Cohomology, Definition 04JP and the following paragraph,
-in Section 0A2H (blueprint: lem-exc-discrete-modules-abelian-structure).
+We show that the full subcategory `DiscreteContinuousRep A G` of representations with open
+stabilizers is abelian, and that the forgetful functor to `A`-modules is additive, exact and
+detects exactness.
+
+## Implementation details
+
+The full subcategory is closed under subobjects, quotients, zero objects and finite products
+in `Rep A G`, so it inherits an abelian structure whose kernels and cokernels are computed in
+the underlying modules.
+
+## References
+
+* Stacks Project, Definition 04JP and the paragraph after it (Section 0A2H).
 -/
 
 @[expose] public section
@@ -51,16 +62,9 @@ private theorem discreteOpenImage {A : Type u} [Ring A] {G : Type v} [Group G]
   change N.ρ g (f.hom x) = f.hom x
   rw [← Rep.hom_comm_apply, hg]
 
-/-- Stacks Project, Definition 04JP and the paragraph after it (Section 0A2H).
-The zero module has its unique action. Binary direct sums have componentwise action and
-open stabilizers by intersection. An equivariant map has the ordinary module kernel,
-whose stabilizers stay open, and the ordinary quotient cokernel, whose stabilizers contain
-the open stabilizers of representatives. The usual universal properties are equivariant.
-Addition of maps is equivariant; mono and epi coincide with injective and surjective maps,
-respectively. These calculations give the abelian-category criterion of `def-sp-abelian`.
-The image and kernel computed in this category are the underlying module image and kernel,
-so exactness at each term is exactly underlying module exactness.
-(blueprint: lem-exc-discrete-modules-abelian-structure) -/
+/-- Discrete `A`-modules with a continuous `G`-action form an abelian category, and the
+forgetful functor to `A`-modules is additive, preserves finite limits and colimits, and a short
+complex is exact if and only if its underlying complex of modules is exact. -/
 theorem discreteRep_abelian_structure (A : Type u) [Ring A] [Finite A]
     (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] :

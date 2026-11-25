@@ -10,9 +10,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Charts
 /-!
 # Base change for smooth duality reduces to the dualizing complex
 
-The last step of the proof of blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`:
-the base change map of the exceptional inverse image respects the tensor isomorphisms of
-`proposition-exceptional-inverse-image-smooth-morphism`. For a cartesian square
+This file proves that the base change map of the exceptional inverse image respects the tensor
+isomorphisms `Rf^! K ≅ ω_f ⊗ Lf^* K` of smooth duality. For a cartesian square
 
 ```
   X' --g'--> X
@@ -48,8 +47,7 @@ namespace CategoryTheory.Adjunction
 /-- **Base change at an object where the tensor maps are isomorphisms.** In the situation of
 `CategoryTheory.Adjunction.projectionTensorMap_mateEquiv`, if the base change map `β` is an
 isomorphism at `𝟙_`, and the tensor maps of `adj` at `(𝟙_, N)` and of `adj'` at
-`(Gb 𝟙_, Gb N)` are isomorphisms, then `β` is an isomorphism at `N`: `β` at `𝟙_ ⊗ N` is, through
-the tensor maps, `β` at `𝟙_` tensored with `κ N`. -/
+`(Gb 𝟙_, Gb N)` are isomorphisms, then `β` is an isomorphism at `N`. -/
 theorem isIso_mateEquiv_app_of_isIso_projectionTensorMap
     {Cx Cy Cx' Cy' : Type*} [Category* Cx] [Category* Cy] [Category* Cx'] [Category* Cy']
     [MonoidalCategory Cx] [MonoidalCategory Cy] [MonoidalCategory Cx'] [MonoidalCategory Cy']
@@ -145,8 +143,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isIso_tensorMap
 /-- **The base change map respects the tensor isomorphisms.** For a cartesian square
 `g' ≫ f = f' ≫ g` with quasi-compact `f'` such that the canonical tensor maps of `f` and `f'` are
 isomorphisms at every object, the base change map `Lg'^* Rf^! ⟶ Rf'^! Lg^*` is an isomorphism as
-soon as it is one at `Λ_Y`, that is, as soon as `Lg'^* ω_f ⟶ ω_{f'}` is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_dualizingComplexBaseChangeMap_iff`). -/
+soon as it is one at `Λ_Y`, that is, as soon as `Lg'^* ω_f ⟶ ω_{f'}` is an isomorphism. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_forall_isIso
     (hθ : ∀ K, IsIso (dualizingComplexTensorMap Λ f K))
     (hθ' : ∀ K, IsIso (dualizingComplexTensorMap Λ f' K))

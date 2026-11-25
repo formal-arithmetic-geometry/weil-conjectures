@@ -31,8 +31,8 @@ restriction of scalars and monoidal. We deduce:
   scalars restricted back to `Λ`, `K ⊗ᴸ_Λ Λ'` is the derived tensor product of `K` with the
   constant sheaf `Λ ⧸ (a)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedHom_derivedTensor_of_isDerivedBaseChange`: for
-  derived base changes `K'`, `L'` of `K`, `L`, `RHom_Λ(K, L ⊗ᴸ (Λ ⧸ (a))_X) ≅ Res RHom_{Λ'}(K', L')`
-  (used for blueprint `proposition-six-operations-change-coefficients--7`).
+  derived base changes `K'`, `L'` of `K`, `L`,
+  `RHom_Λ(K, L ⊗ᴸ (Λ ⧸ (a))_X) ≅ Res RHom_{Λ'}(K', L')`.
 
 ## Implementation notes
 
