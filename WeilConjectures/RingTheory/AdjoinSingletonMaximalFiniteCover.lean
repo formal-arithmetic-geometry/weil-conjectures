@@ -19,8 +19,13 @@ import Mathlib.RingTheory.LocalRing.RingHom.Basic
 /-!
 # A finite cover of a maximal localization of a fractional monogenic algebra
 
-Source: Stacks Project, Algebra, Tag 0334, Step 5, residue-polynomial splitting reduction.
-(blueprint: lem-weil-pbc-monogenic-maximal-finite-cover).
+Assuming the local statement for maximal ideals containing the generator, a maximal localization
+`R[x]_m` of a fractional monogenic algebra over a Nagata normal domain has a finite injective
+domain extension with a normal principal open and analytically unramified maximal localizations.
+
+## References
+
+* [Stacks Project, Tag 0334], Step 5
 -/
 
 @[expose] public section
@@ -37,31 +42,12 @@ private theorem unramified_of_equiv {C D : Type*} [CommRing C] [CommRing D]
   have : IsReduced (AdicCompletion (IsLocalRing.maximalIdeal D) D) := h
   exact isReduced_of_injective E.toRingHom E.injective
 
-/-- The generator-in-maximal local calculation produces a finite domain cover whose
-maximal localizations are analytically unramified and which has a normal principal open.
-Source: Stacks Project, Algebra, Tag 0334, Step 5, lines 46137--46173 and the descent setup.
-(blueprint: lem-weil-pbc-monogenic-maximal-finite-cover).
-
-Proof:
-1. Contract `m` to `n` in `R`. The residue field at `m` is monogenic of finite type over
-   the residue field at `n`, hence finite by Tag 00FV. Lift its monic minimal polynomial
-   to `R_n[T]`, clear the finitely many coefficient denominators by one element outside
-   `n`, and work over `R_s`. Its evaluation at `x` lies in `m`.
-2. Take a finite splitting field of the lifted polynomial over `K` and let `R'` be the
-   integral closure of `R_s` in that field. Tags 032U and 032R make `R'` finite over `R_s`;
-   it is normal and Nagata by integral-closure normality and Tag 032T. All roots lie in
-   `R'` because the polynomial is monic. The algebra `S' = R'[x]` is finite over `R_s[x]`,
-   using the module generators of `R'`.
-3. Set `A = R[x]_m` and `B = (R[x] ∖ m)⁻¹S'`. The element `s` is already invertible in
-   `A`, so `B` is a finite injective `A`-algebra and a Noetherian domain. Every maximal
-   ideal of `B` corresponds to a maximal ideal `m'` of `S'` over `m`, by integrality.
-   Factoring the lifted polynomial gives a root `r ∈ R'` with `x - r ∈ m'`.
-   Since `R'[x] = R'[x-r]`, the supplied local calculation makes `S'_{m'}`, and hence
-   that maximal localization of `B`, analytically unramified.
-4. Write the original fraction `x = b/a`, `a ≠ 0`. After inverting its image in `B`,
-   `R'[x]` becomes `R'_a`; further localization remains normal. The image of `a` is
-   nonzero since all maps are injective. This supplies the required normal principal open.
-   No N-1 assertion or finite-extension descent is part of this lemma. -/
+/-- Let `R` be a Nagata normal domain with fraction field `K`, `x ∈ K`, and `m` a maximal ideal of
+`R[x]`. Assume that `R'[y]_q` is analytically unramified whenever `R'` is a Noetherian Nagata
+normal domain with fraction field `K'`, `y ∈ K'` with `R'[y]` Noetherian, and `q` is a maximal
+ideal of `R'[y]` containing `y`. Then there is a Noetherian domain `B`, finite over `R[x]_m` with
+injective structure map, having a nonzero `f` such that all prime localizations of `B_f` are
+normal domains, and whose local rings at maximal ideals are analytically unramified. -/
 theorem exists_finite_cover_adjoin_singleton_atPrime
     (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     [Field K] [Algebra R K] [IsFractionRing R K] (hR : IsNagataRing R) (x : K)

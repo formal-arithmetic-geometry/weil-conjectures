@@ -22,6 +22,12 @@ every equivalence between the two, in particular the Galois correspondence
 `AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf`, is exact: it matches
 short exact sequences of sheaves with short exact sequences of representations
 (`AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_shortExact_iff`).
+
+## Implementation details
+
+Exactness follows because both sides are abelian full subcategories closed under kernels,
+cokernels and finite direct sums, so their inclusions are exact, and an equivalence of abelian
+categories is exact (`CategoryTheory.ObjectProperty.shortExact_map_ι_iff_of_equivalence`).
 -/
 
 @[expose] public section
@@ -36,7 +42,7 @@ variable {Λ : Type v} [CommRing Λ] {G : Type w} [Group G] [TopologicalSpace G]
   [IsTopologicalGroup G]
 
 /-- The stabilizer `{g | ρ g v = v}` of a vector is open as soon as it contains an open
-neighbourhood of `1`: it is then a union of translates of that neighbourhood. -/
+neighbourhood of `1`. -/
 lemma isOpen_setOf_apply_eq_of_subset {V : Type*} [AddCommGroup V] [Module Λ V]
     (ρ : Representation Λ G V) (v : V) {S : Set G} (hS : IsOpen S) (h1 : (1 : G) ∈ S)
     (hSv : ∀ h ∈ S, ρ h v = v) : IsOpen {g : G | ρ g v = v} := by
@@ -172,16 +178,12 @@ instance : (isFiniteLocallyConstantSheaf Y Λ).IsClosedUnderFiniteProducts :=
       (HasLimit.isoOfNatIso (diagramIsoPair G)).symm))
   .mk'
 
-/-- Blueprint `proposition-lattices-representations-normal-scheme`: Galois correspondence for finite
-local systems, exactness.
-
-Every equivalence `e` between finite locally constant sheaves of `Λ`-modules on `Y_ét` and finite
-continuous `Λ`-representations of a topological group `G` — such as the Galois correspondence
-`AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup`
-— is exact: a short complex of finite locally constant sheaves is short exact as a complex of
-sheaves if and only if its image is short exact as a complex of representations. Both sides
-are abelian full subcategories closed under kernels, cokernels and finite direct sums, so their
-inclusions are exact, and an equivalence of abelian categories is exact. -/
+/-- Galois correspondence for finite local systems, exactness: for every equivalence `e` between
+finite locally constant sheaves of `Λ`-modules on `Y_ét` and finite continuous
+`Λ`-representations of a topological group `G` (such as the Galois correspondence
+`AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup`),
+a short complex of finite locally constant sheaves is short exact as a complex of sheaves if and
+only if its image under `e` is short exact as a complex of representations. -/
 theorem isFiniteLocallyConstantSheaf_shortExact_iff (G : Type u) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G]
     (e : ObjectProperty.FullSubcategory

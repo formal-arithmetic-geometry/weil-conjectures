@@ -9,8 +9,15 @@ public import WeilConjectures.FourierTransform.FdRawLocalization.FdRawLocalizati
 
 /-! # Packaging raw scalar comparisons on the specified stage systems
 
-Source: trace-definition coefficient-category comparison, localization step 7
-(blueprint: lem-fd-raw-scalar-comparison-packaging).
+A coherent raw rational scalar comparison is packaged as a morphism of stage systems from the
+coefficient stage system to the raw scalar system.
+
+## Implementation details
+
+The transition functors and associators of the coefficient stage system are identified with
+`scalar` and `assoc`, and the inverse of `j` is transported along these equalities to give the
+components `β` of the morphism. The integral-lift equation for `β` is obtained by inverting the
+supplied one. No pentagon or four-field assertion is assumed or concluded here.
 -/
 
 @[expose] public noncomputable section
@@ -245,27 +252,12 @@ private def packageInverseComparison
     simpa only [Functor.comp_obj, Category.id_comp, Category.comp_id,
       Iso.hom_inv_id_app_assoc] using hh.symm
 
-/-- Convert an already coherent raw inverse comparison into a morphism of the specified
-stage systems. This is only presentation transport and inversion of the integral-lift square;
-existence of the integral comparison and existence of the raw comparison are inputs.
-Source: trace-definition final coefficient-category sentence, localization step 7
-(blueprint: lem-fd-raw-scalar-comparison-packaging).
-
-Proof: The specification of GeneralAlgebraicallyClosedCoefficients.stageSystem identifies
-its transition functors and associators with scalar and assoc. Transport j inverse along
-these equalities. This defines beta with the arrow direction required by StageSystem.Morphism;
-its finite functors are family.functor. Precompose the raw inverse cocycle with the two beta
-components and cancel j against beta to obtain Morphism.coh. Transport family.shift using
-its shift_identity; the stage transition shift is the canonical equality transport of the
-specified scalar shift, so both beta shift squares follow from the given j shift squares.
-The finite functors and their shifts agree with the supplied stage equivalences, hence are
-exact. Transport the raw unit equation to beta inverse. Finally invert the supplied
-integral-lift equation: localization preserves inverses and composition, so the inverse of
-Q(b inverse) followed by the inverse scalar-integral comparison is the scalar-integral
-comparison followed by Q(b). The supplied rational object normalizations identify the
-endpoints; only their canonical equality casts occur. This gives the required forward lift.
-No pentagon or four-field assertion is assumed or concluded here.
--/
+/-- A shift-compatible, exact raw comparison `j` satisfying the integral-lift, unit and cocycle
+equations yields a morphism of stage systems `F` from the coefficient stage system to the raw
+scalar system whose functors are the supplied rational functors (with their shifts), whose
+components `F.β` are shift-compatible, whose functors are exact, whose unit components are given
+by the unitor, and whose components on integral objects are the integral comparison followed by
+the localization of `b`. -/
 theorem fdRawScalarComparisonPackaging
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

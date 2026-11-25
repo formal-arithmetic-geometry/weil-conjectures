@@ -10,10 +10,13 @@ import WeilConjectures.SixFunctors.AdicSmoothDualizing.EtalePowerRecursionNormal
 
 /-! # The normalized finite Tate-power presentation
 
-The existing finite-power data of the smooth-dualizing construction, extracted
-without changing any declaration's name, signature or body.
-Source: the ordered tensor-power construction in the smooth-dualizing corollary
-(blueprint: def-sf-etale-power-presentation).
+The finite Tate-power data of the smooth-dualizing construction: the ordered tensor-power
+presentation and its unique normalized comparison family.
+
+## Implementation details
+
+Uniqueness of the presentation is proved by induction from the zero-shift unitor, using that
+`HEq` fixes each of the four normalized factors of the successor step.
 -/
 
 @[expose] public noncomputable section
@@ -64,21 +67,14 @@ private theorem etalePowerPresentation_eq (P : PurityFiniteSetting.{u})
 
 set_option linter.unusedVariables false in
 /-- The canonical finite tensor presentation, with its full normalization stored
-in its type, is uniquely determined.
-Source: the corollary's ordered Tate powers
-(blueprint: corollary-dualizing-complex-smooth-scheme--1).
-Proof: construct the comparison by induction from the zero-shift unitor using
-exactly the four normalized factors. HEq fixes each factor, so induction proves
-uniqueness of the comparison. The normalization proof is unique by proof irrelevance. -/
+in its type, is uniquely determined. -/
 theorem existsUnique_etalePowerPresentation (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
     (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))) :
     ∃! e : EtalePowerPresentation P T hT, True := by
   obtain ⟨e⟩ := etalePowerPresentation_nonempty P T hT
   exact ⟨e, trivial, fun other _ ↦ etalePowerPresentation_eq P T hT other e⟩
 
-/-- The canonical ordered-tensor family selected by its uniquely determining recursion.
-Source: the corollary's finite Tate presentation
-(blueprint: corollary-dualizing-complex-smooth-scheme--1). -/
+/-- The canonical ordered-tensor family selected by its uniquely determining recursion. -/
 def etalePowerComparison (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
     (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))) :
     (d : ℕ) → P.diagonalTwistEtale T d ≅ (etaleSingle P T d)⟦2 * (d : ℤ)⟧ :=

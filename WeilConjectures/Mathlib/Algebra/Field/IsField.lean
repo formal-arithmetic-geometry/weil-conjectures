@@ -17,9 +17,7 @@ multiplicative inverse.
 @[expose] public section
 
 /-- **Fields.** A commutative ring `R` is a field if and only if `0 ≠ 1` in `R` and every nonzero
-element of `R` has a multiplicative inverse.
-
-(blueprint: `def-weil-field`) -/
+element of `R` has a multiplicative inverse. -/
 theorem isField_iff_exists_mul_eq_one {R : Type*} [CommRing R] :
     IsField R ↔ (0 : R) ≠ 1 ∧ ∀ x : R, x ≠ 0 → ∃ y, x * y = 1 := by
   refine ⟨fun h ↦ ⟨fun e ↦ ?_, fun x hx ↦ h.mul_inv_cancel hx⟩,

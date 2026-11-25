@@ -14,7 +14,20 @@ import all WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.Normalization.
 
 /-! # Exact localization of the integral system pullback square
 
-(blueprint: lem-weil-integral-system-square-normalization).
+The integral system pullback square is the exact localization of the ordinary varying-ring
+square at the lifted quotient rings; consequently the inverse Cartesian open base-change mate
+is invertible in the integral coordinates.
+
+## Implementation details
+
+Exact localization preserves the compositor word and the equality transport forming the
+varying-ring square. The compositor normalization identifies each derived compositor with the
+integral one, and the equality transports agree definitionally.
+
+## References
+
+* [Stacks, Tags 0D6D, 03S6]
+* [Zheng, 4.10]
 -/
 
 @[expose] public noncomputable section
@@ -125,12 +138,7 @@ private theorem varyingInverseOpenMate_isIso
       (ProEtale.VaryingRing.moduleSquareG R q gU j j gX sq.w)).symm hi
 
 /-- The specified integral system pullback square is the localization of the ordinary
-varying-ring square at the actual lifted quotient rings.
-Source: Stacks 0D6D and 03S6; Zheng 4.10
-(blueprint: lem-weil-integral-system-square-normalization).
-Proof: exact localization preserves the compositor word and the equality transport
-forming the varying-ring square. The proved compositor normalization identifies each
-derived compositor with the integral one. The equality transports agree definitionally. -/
+varying-ring square at the actual lifted quotient rings. -/
 theorem integralComparisonSystemSquare_eq_varyingRing
     {U X : Scheme.{u}} (j : U ⟶ X) (gU : U ⟶ U) (gX : X ⟶ X)
     (h : gU ≫ j = j ≫ gX) :

@@ -33,9 +33,8 @@ cartesian square of separated `k`-schemes of finite type
 ```
 
 The ordinary Künneth formula with an identity factor
-(`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedLowerStar`, blueprint
-`lemma-kunneth-one-identity-factor--1`) computes the direct image along `pr` of a complex pulled
-back from `Y`:
+(`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedLowerStar`) computes the direct
+image along `pr` of a complex pulled back from `Y`:
 
 `Rpr_* Lpr^* Q ≅ Lc^* Rf_* Λ_X ⊗ᴸ Q`
 
@@ -100,8 +99,7 @@ noncomputable def rightDerivedLowerStarLeftDerivedUpperStarIsoOfIsIso
 
 end Iso
 
-/-- The constant complex `Λ_X` lies in `Dctf(X, Λ)`: it is the constant sheaf `Λ` in degree
-zero, constructible and flat. -/
+/-- The constant complex `Λ_X` lies in `Dctf(X, Λ)`. -/
 theorem constructibleFiniteTor_constantComplex [IsNoetherianRing Λ] (X : Scheme.{u}) :
     DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (constantComplex Λ X) := by
   have hU : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X (𝟙_ _) :=

@@ -11,8 +11,9 @@ public import WeilConjectures.CategoryTheory.StageSystem.CommonStageCalculus
 
 /-! # Presentations for raw scalar comparisons
 
-Source: trace-definition coefficient-category sentence, extracted raw localization
-argument, steps 7--8 (blueprint: lem-fd-raw-localization-scalar-coherence).
+Notation and data for the raw localization of scalar comparisons between coefficient stages:
+completed and ordinary integral transitions, the rational transitions with their associators and
+unitors, and the four-field associator contractions.
 -/
 
 @[expose] public noncomputable section
@@ -33,32 +34,25 @@ variable (l : ℕ) [Fact l.Prime]
   [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
   [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
 
-/-- The existing completed integral transition.
-Source: trace-definition scalar comparison (blueprint: lem-fd-raw-localization-scalar-coherence).
--/
+/-- The completed integral scalar-extension transition along `E ≤ L`. -/
 abbrev U {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) :=
   sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
     (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω L)
     (pbcFiniteFieldInclusion l Ω h) T
 
-/-- The specified shift of the existing completed transition.
-Source: trace-definition scalar comparison (blueprint: lem-fd-raw-localization-scalar-coherence).
--/
+/-- The specified shift structure on the completed integral transition. -/
 instance uCommShift {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) :
     (U l Ω T h).CommShift ℤ :=
   (GeneralAlgebraicallyClosedCoefficients.integralScalarCommShift_existsUnique l
     (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω L)
     (pbcFiniteFieldInclusion l Ω h) T).exists.choose
 
-/-- The existing ordinary integral transition.
-Source: trace-definition scalar comparison (blueprint: lem-fd-raw-localization-scalar-coherence).
--/
+/-- The ordinary integral scalar-extension transition along `E ≤ L`. -/
 abbrev C {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) :=
   pbcIntegralScalarExtension l Ω T dT.out iT.out h
 
-/-- Completed integral associativity, including the actual coefficient-inclusion transport.
-Source: trace-definition scalar comparison (blueprint: lem-fd-raw-localization-scalar-coherence).
--/
+/-- Associativity of the completed integral transitions, including the transport along the
+composite coefficient inclusion. -/
 def integralAssoc {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (k : L ≤ M) :
     U l Ω T h ⋙ U l Ω T k ≅ U l Ω T (h.trans k) :=
   sfIntegralScalarComp l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω L)
@@ -69,9 +63,7 @@ def integralAssoc {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (k 
       (pbcFiniteField.{u} l Ω M) · T)
     ((AlgebraicallyClosedCoefficients.coefficientInclusion_laws l Ω).2 E L M h k))
 
-/-- Completed integral unit with the multiplication/completeness normalization.
-Source: trace-definition scalar comparison (blueprint: lem-fd-raw-localization-scalar-coherence).
--/
+/-- The completed integral transition along `E ≤ E` is isomorphic to the identity. -/
 def integralUnit (E : Padic.FiniteCoefficientFields l Ω) :
     U l Ω T (le_refl E) ≅ 𝟭 _ :=
   eqToIso (congrArg (sfConstructibleIntegralScalarExtension 0 l
@@ -81,50 +73,36 @@ def integralUnit (E : Padic.FiniteCoefficientFields l Ω) :
   sfIntegralScalarUnit l (pbcFiniteField.{u} l Ω E) T 0
     (Nat.Prime.ne_zero (Fact.out : l.Prime))
 
-/-- The specified framework rational transition on the common small-field presentation.
-Source: trace-definition scalar comparison (blueprint: lem-fd-raw-localization-scalar-coherence).
--/
+/-- The rational scalar-extension transition along `E ≤ L`. -/
 abbrev scalar {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) :=
   GeneralAlgebraicallyClosedCoefficients.transition l Ω T E L h
 
-/-- The coefficient owner's specified rational shift.
-Source: blueprint order 1462 (blueprint: lem-fd-raw-localization-scalar-coherence). -/
+/-- The specified shift structure on the rational transition. -/
 instance scalarCommShift {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) :
     (scalar l Ω T h).CommShift ℤ :=
   GeneralAlgebraicallyClosedCoefficients.transitionCommShift l Ω T E L h
 
-/-- The coefficient owner's balanced-tensor associator.
-Source: blueprint order 1462 (blueprint: lem-fd-raw-localization-scalar-coherence). -/
+/-- The associator of the rational transitions. -/
 abbrev assoc {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (k : L ≤ M) :=
   GeneralAlgebraicallyClosedCoefficients.associator l Ω T E L M h k
 
-/-- The coefficient owner's normalized unit.
-Source: blueprint order 1462 (blueprint: lem-fd-raw-localization-scalar-coherence). -/
+/-- The unitor of the rational transitions. -/
 abbrev unit (E : Padic.FiniteCoefficientFields l Ω) :=
   GeneralAlgebraicallyClosedCoefficients.unitor l Ω T E
 
-/-- The published PBC raw scalar system, including literal identity extensions.
-Source: trace-definition scalar comparison (blueprint: lem-fd-raw-localization-scalar-coherence).
--/
+/-- The raw scalar system on the stage categories. -/
 abbrev P := pbcScalarSystem l Ω T dT.out iT.out
 
 variable (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E)
 
-/-- The supplied integral identity functor, with its quotient-normalized coefficient transport.
-Source: trace-definition scalar comparison (blueprint: lem-fd-raw-localization-scalar-coherence).
--/
+/-- The supplied integral functor of the stage comparison at `E`. -/
 abbrev I (E : Padic.FiniteCoefficientFields l Ω) := (stage E).integral.functor
 
-/-- Its supplied raw rationalization, fixing the recorded pure tensor coordinates.
-Source: trace-definition scalar comparison (blueprint: lem-fd-raw-localization-scalar-coherence).
--/
+/-- The supplied rational functor of the stage comparison at `E`. -/
 abbrev suppliedJ (E : Padic.FiniteCoefficientFields l Ω) := (stage E).rational.functor
 
-/-- The supplied rational functors in the owner's named stage presentation.
-HEq fixes the entire functors and their specified shifts; this is only size-presentation
-transport, with no scalar comparison or coherence assumed.
-Source: coefficient-stage transport in def-fd-coefficient-comparison-datum
-(blueprint: lem-fd-raw-localization-scalar-coherence). -/
+/-- A family of functors from the coefficient stages to the stage categories, with shift
+structures, agreeing (up to `HEq`) with the supplied rational functors and their shifts. -/
 structure RationalFamily where
   functor : ∀ E : Padic.FiniteCoefficientFields l Ω,
     GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E ⥤ pbcStageCategory l Ω T E
@@ -137,19 +115,15 @@ attribute [instance] RationalFamily.shift
 
 variable (family : RationalFamily l Ω T stage)
 
-/-- The supplied rational functor on the owner's coefficient stage.
-Source: coefficient-stage transport (blueprint: lem-fd-raw-localization-scalar-coherence). -/
+/-- The rational functor of the family at `E`. -/
 abbrev J (E : Padic.FiniteCoefficientFields l Ω) := family.functor E
 
-/-- The type of the specified inverse comparison after raw rationalization.
-Source: trace-definition scalar comparison (blueprint: lem-fd-raw-localization-scalar-coherence).
--/
+/-- The type of families of isomorphisms `scalar h ⋙ J L ≅ J E ⋙ T h` comparing the rational
+transitions with the raw scalar system. -/
 abbrev RawComparison := ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
   scalar l Ω T h ⋙ J l Ω T stage family L ≅ J l Ω T stage family E ⋙ (P l Ω T).T h
 
-/-- The three successive inverse comparisons before either associator contraction.
-Source: trace-definition scalar comparison, displayed D
-(blueprint: lem-fd-raw-localization-scalar-coherence). -/
+/-- The composite of the three successive comparisons along `E ≤ L ≤ M ≤ N` at `K`. -/
 def fourComparison (j : RawComparison l Ω T stage family)
     {E L M N : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (k : L ≤ M) (m : M ≤ N)
     (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E) :=
@@ -157,18 +131,14 @@ def fourComparison (j : RawComparison l Ω T stage family)
     ((P l Ω T).T m).map ((j k).hom.app ((scalar l Ω T h).obj K)) ≫
     ((P l Ω T).T m).map (((P l Ω T).T k).map ((j h).hom.app K))
 
-/-- The first framework associator contraction in the four-field diagram.
-Source: trace-definition scalar comparison, first four-field contraction
-(blueprint: lem-fd-raw-localization-scalar-coherence). -/
+/-- The associator contraction in the four-field diagram that first contracts `E ≤ L ≤ M`. -/
 def leftContraction {E L M N : Padic.FiniteCoefficientFields l Ω}
     (h : E ≤ L) (k : L ≤ M) (m : M ≤ N)
     (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E) :=
   (scalar l Ω T m).map ((assoc l Ω T h k).hom.app K) ≫
     (assoc l Ω T (h.trans k) m).hom.app K
 
-/-- The second framework associator contraction in the four-field diagram.
-Source: trace-definition scalar comparison, second four-field contraction
-(blueprint: lem-fd-raw-localization-scalar-coherence). -/
+/-- The associator contraction in the four-field diagram that first contracts `L ≤ M ≤ N`. -/
 def rightContraction {E L M N : Padic.FiniteCoefficientFields l Ω}
     (h : E ≤ L) (k : L ≤ M) (m : M ≤ N)
     (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E) :=

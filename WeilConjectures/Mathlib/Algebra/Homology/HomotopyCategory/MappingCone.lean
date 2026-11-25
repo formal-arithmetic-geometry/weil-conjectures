@@ -81,8 +81,7 @@ open mappingCylinderFactorization in
 category factors as `α = α' ≫ π` with `α'` a termwise split injection (in degree `n`, `α'` is
 the inclusion of the summand `K.X n` of `L'.X n ≅ K.X n ⊞ M`) and `π : L' ⟶ L` having a section
 `s` with `s ≫ π = 𝟙` and `π ≫ s` homotopic to `𝟙`. Moreover `L'` vanishes in degrees `< n₀ - 1`
-(resp. `> n₁`) if `K` and `L` vanish in degrees `< n₀` (resp. `> n₁`).
-(blueprint: `lem-weil-pbc-complex-mapping-cylinder-split-factorization`) -/
+(resp. `> n₁`) if `K` and `L` vanish in degrees `< n₀` (resp. `> n₁`). -/
 theorem exists_mappingCylinder_split_factorization :
     ∃ (L' : CochainComplex C ℤ) (α' : K ⟶ L') (π : L' ⟶ L) (s : L ⟶ L'),
       α' ≫ π = α ∧

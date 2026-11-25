@@ -17,9 +17,8 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
 /-!
 # Exact kernel invariants and comparison of continuous cohomology
 
-Source: blueprint main-20261015, `lem-exc-dvr-galois.proof.md`, third paragraph;
-DAG proof steps 3--5 of `lem-exc-dvr-galois`.
-(blueprint: lem-exc-kernel-invariants-cohomology)
+This file is reserved for the exactness of taking invariants under the kernel of a
+surjection of profinite groups, and the resulting comparison of continuous cohomology.
 -/
 
 @[expose] public section

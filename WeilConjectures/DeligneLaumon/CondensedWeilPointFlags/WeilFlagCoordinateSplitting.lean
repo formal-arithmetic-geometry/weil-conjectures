@@ -7,9 +7,9 @@ module
 public import Mathlib.LinearAlgebra.Matrix.Block
 /-! # Split coordinate sequence underlying a Weil flag
 
-Source: latest blueprint, thm-zl-real-mixed-by-curves.proof.md, dimension-zero
-Jordan-filtration sub-step
-(blueprint: lem-zl-condensed-point-weil-flags-coordinate-splitting).
+The standard coordinate inclusion `Kⁿ → Kⁿ⁺¹` and last-coordinate projection form a split
+short exact sequence. This is used in the dimension-zero Jordan filtration step of the proof
+that real mixed sheaves are detected by curves.
 -/
 
 @[expose] public section
@@ -17,16 +17,7 @@ set_option autoImplicit false
 universe u
 namespace WeilConjectures.CondensedWeilPointFlags
 /-- The standard inclusion I and projection P, with their coordinate retraction R and
-section S, satisfy RI=1, PS=1, PI=0, and IR+SP=1. This includes n=0.
-Source: latest blueprint, thm-zl-real-mixed-by-curves.proof.md, dimension-zero
-Jordan-filtration sub-step
-(blueprint: lem-zl-condensed-point-weil-flags-coordinate-splitting).
-
-Proof: each product is a sum of products of Kronecker entries. The first product is
-the identity on the first n coordinates, the second the identity on the last coordinate,
-and the third is zero because an initial coordinate is never the last. For the final
-identity, divide its row and column into initial and final coordinates: the first
-summand is the initial-coordinate identity, and the second the final-coordinate identity. -/
+section S, satisfy RI=1, PS=1, PI=0, and IR+SP=1. This includes n=0. -/
 theorem coordinate_split_equations {K : Type u} [Field K] (n : ℕ) :
     let I : Matrix (Fin (n+1)) (Fin n) K := fun r k ↦ if r = k.castSucc then 1 else 0
     let R : Matrix (Fin n) (Fin (n+1)) K := I.transpose

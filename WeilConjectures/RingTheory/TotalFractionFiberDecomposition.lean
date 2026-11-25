@@ -12,7 +12,12 @@ import WeilConjectures.RingTheory.ReducedNoetherianTotalRingFractions
 import Mathlib.RingTheory.TensorProduct.Pi
 
 /-! # The total-fraction localization as a product of residue-field fibres
-Source: Stacks Project, Algebra, Tag 02LX; Smoothing Ring Maps, proof of Tag 07F5.
+
+## References
+
+* [Stacks Project, Tag 02LX](https://stacks.math.columbia.edu/tag/02LX)
+* [Stacks Project, Tag 07F5](https://stacks.math.columbia.edu/tag/07F5), third paragraph of
+  the proof
 -/
 
 @[expose] public section
@@ -21,20 +26,7 @@ open scoped nonZeroDivisors TensorProduct
 universe u v
 
 /-- The localization of an algebra over a reduced Noetherian ring decomposes over its
-minimal-prime residue fields, compatibly with the decomposition of the base ring.
-Source: Stacks Project, Algebra, Lemma Tag 02LX; Smoothing Ring Maps, Lemma Tag 07F5,
-third paragraph of its proof.
-(blueprint: lem-weil-pbc-total-fraction-fiber-decomposition).
-
-Proof: Apply reduced_noetherian_total_ring_fractions to enumerate the minimal primes.
-Its unique maps to the prime localizations combine to a bijective R-algebra map from
-Q to their product. The canonical maps from these localizations to their residue
-fields are bijective, giving an R-algebra isomorphism Q with the product of residue
-fields. Base change identifies the localization of A with Q tensor_R A. Tensor
-symmetry, distribution over the finite product, and tensor symmetry on each factor
-give the displayed target ring isomorphism. On a scalar q in Q these maps send
-q tensor 1 to the family e(q)_i tensor 1, proving compatibility. No regularity or
-Noetherianity of A is used. For the zero base ring the empty product is permitted. -/
+minimal-prime residue fields, compatibly with the decomposition of the base ring. -/
 theorem total_fraction_fiber_decomposition
     (R : Type u) (A : Type (max u v)) [CommRing R] [CommRing A] [Algebra R A]
     [IsNoetherianRing R] [IsReduced R] :

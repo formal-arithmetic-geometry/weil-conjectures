@@ -11,9 +11,12 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # The ordinary tensor square for composite pullback
 
-Source: Stacks Project, sites-modules.tex, Tag 03EL, and
-sites-cohomology.tex, Tag 07A4.
-(blueprint: lem-pur-module-tensor-composition-equation)
+This file proves the compatibility of the ordinary module tensor comparison with
+composition of pullbacks.
+
+## References
+
+* Stacks Project, Tags 03EL and 07A4
 -/
 
 -- After pruning, this module only keeps private declarations.

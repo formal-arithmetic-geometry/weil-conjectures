@@ -40,6 +40,11 @@ The rank-one case of `SheafOfModules.IsFiniteLocallyFreeOfRank` and
   locally free of finite rank on a covering is finite locally free.
 - `SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one`: a sheaf of modules is
   invertible if and only if it is finite locally free of rank one.
+
+## Implementation details
+
+`SheafOfModules.IsFiniteLocallyFreeOfRank.isLocallyFree` cannot be an instance: the rank `r`
+does not occur in the goal `M.IsLocallyFree`, so type-class synthesis cannot determine it.
 -/
 
 @[expose] public section
@@ -105,12 +110,7 @@ instance IsInvertibleData.shrink {M : SheafOfModules.{u} R} (q : M.LocalGenerato
 end LocalGeneratorsData
 
 /-- A sheaf of modules is *invertible* if it is locally free of rank one, i.e. if there
-exist local generators satisfying `IsInvertibleData`.
-
-The isomorphism classes of invertible `𝒪_X`-modules on a scheme `X` form the Picard group
-`AlgebraicGeometry.Scheme.Pic`.
-
-(blueprint: `def-sc-invertible-module`) -/
+exist local generators satisfying `IsInvertibleData`. -/
 class IsInvertible (M : SheafOfModules.{u} R) : Prop where
   exists_isInvertibleData : ∃ q : LocalGeneratorsData.{u₁} M, q.IsInvertibleData
 
@@ -136,10 +136,7 @@ class IsFiniteLocallyFreeOfRank (M : SheafOfModules.{u} R) (r : ℕ) : Prop wher
   exists_localGeneratorsData : ∃ q : LocalGeneratorsData.{u₁} M, ∃ _ : q.IsLocallyFreeData,
     ∀ i, Nonempty ((q.generators i).I ≃ Fin r)
 
-/-- A finite locally free sheaf of modules is locally free.
-
-This cannot be an instance: the rank `r` does not occur in the goal `M.IsLocallyFree`, so
-type-class synthesis has no way to determine it. -/
+/-- A finite locally free sheaf of modules is locally free. -/
 theorem IsFiniteLocallyFreeOfRank.isLocallyFree (M : SheafOfModules.{u} R)
     (r : ℕ) [h : M.IsFiniteLocallyFreeOfRank r] : M.IsLocallyFree :=
   have := h.exists_localGeneratorsData.choose_spec.choose

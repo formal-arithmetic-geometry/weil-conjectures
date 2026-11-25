@@ -10,8 +10,12 @@ import Mathlib.Tactic.LinearCombination
 
 /-! # Exactness of the two-element localization row
 
-Source: Stacks Project, algebra.tex, Tag 00EJ.
-(auxiliary; not a blueprint node).
+For comaximal `f, g` in `A`, the sequence `0 → A → A_f × A_g → A_{fg} → 0` given by the
+diagonal and the difference is exact.
+
+## References
+
+* Stacks Project, Algebra, Tag 00EJ; the surjectivity argument in Algebraization, Tag 0998.
 -/
 
 @[expose] public section
@@ -20,18 +24,7 @@ set_option autoImplicit false
 
 universe u
 
-/-- The diagonal and difference form a short exact row for two comaximal elements.
-
-Proof: A section killed in both localizations is killed by powers of both elements;
-Bezout for those powers makes it zero. For a compatible pair of fractions, clear
-both denominators and the power needed to clear equality on the overlap. Bezout
-for the resulting powers gives a numerator realizing the pair. Every fraction
-z/(fg)^n in the overlap is the difference of v*z/f^n and -u*z/g^n, where
-u*f^n+v*g^n=1. This also includes the zero ring and zero denominators.
-
-Source: Stacks Project, algebra.tex, Tag 00EJ, and the surjectivity argument in
-algebraization.tex, Tag 0998.
-(auxiliary; not a blueprint node). -/
+/-- The diagonal and difference form a short exact row for two comaximal elements. -/
 theorem localization_two_exact
     {A : Type u} [CommRing A] (f g : A) (hc : IsCoprime f g)
     (S T P : Type u) [CommRing S] [CommRing T] [CommRing P]

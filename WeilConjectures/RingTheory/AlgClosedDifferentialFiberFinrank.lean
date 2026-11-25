@@ -15,6 +15,23 @@ public import Mathlib.RingTheory.Spectrum.Prime.RingHom
 import Mathlib.RingTheory.Kaehler.TensorProduct
 import Mathlib.LinearAlgebra.Dimension.Constructions
 
+/-!
+# Differential-fibre dimension under scalar extension
+
+The dimension of the fibre of the module of differentials of a finite type `k`-algebra `S` at
+a prime `q` is unchanged at any prime of `K ⊗[k] S` above `q`.
+
+## Implementation details
+
+The maximality and algebraic closedness hypotheses are not used by the proof; they are
+present only to match the intended application. Finrank base change holds without a
+finite-dimensionality hypothesis, so the statement also covers infinite-dimensional fibres.
+
+## References
+
+* Stacks Project, Algebra, Tag 00RV.
+-/
+
 @[expose] public section
 
 universe u v
@@ -23,20 +40,10 @@ open scoped TensorProduct
 
 namespace Algebra
 
-/-- Differential-fibre finrank is preserved at any prime above q after scalar
-extension. Source: Stacks Project, Tag 00RV.
-(blueprint: new-algclosed-differential-fiber-finrank).
-
-Proof: Write B = K ⊗[k] S, κ = κ(q), and L = κ(qK). Contraction gives the
-canonical field embedding κ → L, compatible with the maps from S. Differential
-base change gives Ω[B/K] ≃ B ⊗[S] Ω[S/k]. Tensor with L over B and cancel B
-to identify the left-hand fibre with L ⊗[S] Ω[S/k]. Compatibility of S → κ → L
-and tensor associativity identify this with L ⊗[κ] (κ ⊗[S] Ω[S/k]). Extending
-a κ-vector-space basis to L preserves finrank, proving the asserted equality.
-The argument does not require maximality or algebraic closedness, and works
-also when the differential fibre is zero; finrank base change holds without
-a finite-dimensionality hypothesis.
--/
+/-- Let `S` be a finite type `k`-algebra, `q` a prime of `S`, `K` an algebraically closed
+field over `k` and `qK` a maximal ideal of `K ⊗[k] S` lying over `q`. Then the fibre of
+`Ω[(K ⊗[k] S)/K]` at `qK` has the same dimension over `κ(qK)` as the fibre of `Ω[S/k]` at `q`
+over `κ(q)`. -/
 theorem algClosed_prime_over_finrank_differentials_eq
     {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S] [FiniteType k S]
     (q : PrimeSpectrum S)

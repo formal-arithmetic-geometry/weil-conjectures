@@ -18,11 +18,15 @@ import WeilConjectures.AlgebraicGeometry.ContinuousRational.RationalContinuousFi
 
 /-! # Coherent finite adic realizations
 
-Source: Bhatt--Scholze, Propositions 6.6.11 and 6.8.14(2); HRS Theorem 7.7.
-(blueprint: lem-sf-adic-finite-realization-cocone).
+## Implementation details
 
 The data declarations are reexported from
 `AdicFiniteRealizationData`, allowing the proof steps to have independent modules.
+
+## References
+
+* Bhatt--Scholze, Propositions 6.6.11 and 6.8.14(2)
+* HRS, Theorem 7.7
 -/
 
 @[expose] public noncomputable section

@@ -20,8 +20,11 @@ import all WeilConjectures.AlgebraicGeometry.CompletedLisse.LisseCompletedPointw
 
 /-! # Finite-free targets under coefficient isomorphisms
 
-Source: Stacks Project, Modules on Sites, change of rings and Tag 03DM.
-(blueprint: lem-sf-adic-finite-free-scalar-transport).
+This file shows that coefficient isomorphisms preserve and reflect finite-free targets.
+
+## References
+
+* Stacks Project, Modules on Sites, change of rings and Tag 03DM
 -/
 
 @[expose] public noncomputable section
@@ -135,16 +138,7 @@ private theorem target_restrict {T : Scheme.{u}}
     obtain ⟨S', hS⟩ := hs q
     exact ⟨S', fun i ↦ (hq q S' i).mpr (hS i)⟩
 
-/-- A coefficient isomorphism preserves and reflects the ordinary finite-free target.
-Source: Stacks Project, Modules on Sites, change of rings and Tag 03DM
-(blueprint: lem-sf-adic-finite-free-scalar-transport).
-Proof: restriction along the inverse coefficient is an exact equivalence. It commutes
-with module inverse image to every stratum by the scalar-pullback adjunction. On a
-trivializing slice it preserves the regular module and all finite coproducts, hence
-finite local freeness in both directions. Exact localization commutes with homology
-and preserves and reflects both standard degree bounds. Finally the derived scalar
-adjunction identifies extension with this inverse restriction. This argument retains
-every stratum and applies to zero rank, empty schemes, and arbitrary coefficient rings. -/
+/-- A coefficient isomorphism preserves and reflects the ordinary finite-free target. -/
 theorem finiteFreeTarget_coefficientIso {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (c : R ≅ S)
     (K : DerivedCategory (pbcModules T R)) :

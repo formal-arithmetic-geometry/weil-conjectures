@@ -25,12 +25,16 @@ of a constructible sheaf on `Z` and the extension by zero `j_! G` of a construct
 `U` are constructible (`IsConstructibleSheaf.lowerStar_of_isClosedImmersion`,
 `IsConstructibleSheaf.openImmersionLowerShriek`): their pullbacks to the other member of the
 pair vanish, and a zero sheaf is constructible (`IsConstructibleSheaf.of_isZero`).
-(blueprint: `prop:constructible-open-closed`, `lemma:constructible-lowerStar-closed`,
-`lemma:constructible-lowerShriek-open`)
 
 When the complement of an open immersion `j` is a finite set of closed points, the range of
 `j` and these points form a stratification of `X`
 (`AlgebraicGeometry.Scheme.Stratification.ofOpenImmersion`).
+
+## Implementation details
+
+In `AlgebraicGeometry.Scheme.Stratification.openClosed` the open immersion `j` is assumed
+quasi-compact (its range retrocompact), so that the images of constructible strata are
+constructible. On a quasi-compact quasi-separated (e.g. Noetherian) scheme this is automatic.
 
 -/
 
@@ -185,12 +189,9 @@ variable {U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsC
   [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ)
 
 include hij in
-/-- Blueprint `prop-constructible-open-closed`, first assertion: stratifications of the members
-of a complementary pair `(j, i)` concatenate to a stratification of `X`: the strata are the
-images of the strata of `U` and of `Z`. The open immersion `j` is assumed quasi-compact (its
-range retrocompact), so that the images of constructible strata are constructible: this is
-implicit in the blueprint, whose constructible subsets are meant in the sense of a
-quasi-compact quasi-separated (e.g. Noetherian) scheme, where it is automatic. -/
+/-- Stratifications of the members of a complementary pair `(j, i)`, with `j` quasi-compact,
+concatenate to a stratification of `X` whose strata are the images of the strata of `U` and
+of `Z`. -/
 def Stratification.openClosed (SU : Stratification U) (SZ : Stratification Z) :
     Stratification X where
   n := SU.n + SZ.n
@@ -260,9 +261,8 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
 include hij in
-/-- Blueprint `prop-constructible-open-closed`: **A sheaf is constructible if and only if its
-restrictions to the members of a complementary pair `(j, i)` are**, for `j` quasi-compact (see
-`AlgebraicGeometry.Scheme.Stratification.openClosed`). -/
+/-- **A sheaf is constructible if and only if its restrictions to the members of a
+complementary pair `(j, i)` are**, for `j` quasi-compact. -/
 theorem isConstructibleSheaf_iff_upperStar (F : Sheaf X.smallEtaleTopology A) :
     IsConstructibleSheaf F ↔
       IsConstructibleSheaf ((Etale.upperStar A j).obj F) ∧
@@ -288,8 +288,7 @@ theorem isConstructibleSheaf_iff_upperStar (F : Sheaf X.smallEtaleTopology A) :
 
 include hij in
 /-- **The extension by zero of a constructible sheaf along an open immersion is
-constructible**: its restriction to `U` is the sheaf itself, and its restriction to the
-complement `Z` vanishes. (blueprint: `lemma:constructible-lowerShriek-open`) -/
+constructible**. -/
 theorem IsConstructibleSheaf.openImmersionLowerShriek (G : Sheaf U.smallEtaleTopology A)
     [IsConstructibleSheaf G] : IsConstructibleSheaf ((j)_!open[A].obj G) := by
   rw [isConstructibleSheaf_iff_upperStar j i hij]
@@ -306,9 +305,7 @@ variable [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [hJ : Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
 include hij hJ in
-/-- **The pushforward of a constructible sheaf along a closed immersion is constructible**:
-its restriction to `Z` is the sheaf itself, and its restriction to the complement `U`
-vanishes. (blueprint: `lemma:constructible-lowerStar-closed`) -/
+/-- **The pushforward of a constructible sheaf along a closed immersion is constructible**. -/
 theorem IsConstructibleSheaf.lowerStar_of_isClosedImmersion (G : Sheaf Z.smallEtaleTopology A)
     [IsConstructibleSheaf G] : IsConstructibleSheaf ((i)_*[A].obj G) := by
   rw [isConstructibleSheaf_iff_upperStar j i hij]

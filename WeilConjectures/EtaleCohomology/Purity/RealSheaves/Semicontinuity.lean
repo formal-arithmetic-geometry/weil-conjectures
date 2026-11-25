@@ -16,25 +16,24 @@ Let `j : U₀ ↪ C₀` be a nonempty open of a smooth geometrically connected c
 a boundary datum, and let `ℱ` be a lisse Weil sheaf on `U₀` with punctual weights at most `β`.
 This file proves that the middle extension `j_* ℱ` has punctual weights at most `β` at every
 boundary point `s`: every eigenvalue `α` of the residue Frobenius `F_s` on the boundary stalk
-`V ^ (I_s)` satisfies `|ι α| ^ 2 ≤ q_s ^ β` (`proposition-weights-j-boundary-points--1`).
+`V ^ (I_s)` satisfies `|ι α| ^ 2 ≤ q_s ^ β`.
 
 The argument is analytic. On an affine neighbourhood `X'₀` of `s`, with `U'₀ = U₀ ∩ X'₀`:
 
 * the inverse of the Euler series `L (U'₀, ℱ, T)` has radius of convergence at least
   `R = q ^ (-(β / 2 + 1))`, because the closed points of `U'₀` of degree `e` number at most
-  `A q ^ e` (`lemma-point-count-bound--1`), so that the coefficients of the inverse are
-  dominated by those of `∏_x (1 + q_x ^ (β / 2) T ^ e_x) ^ r`;
-* the eigenvalues of the geometric Frobenius on `H_c² = V_{π₁(U)} (-1)`
-(`lemma-degree-zero-top-cohomology--2`)
-  have absolute value at most `q ^ (β / 2 + 1)`;
-* the Euler product identity for `j_* ℱ` (`proposition-weights-j-boundary-points`), the
-  Grothendieck–Lefschetz trace formula, then forces the boundary polynomials
-  `det (1 - F_s T ^ e_s ∣ V ^ (I_s))` to have no zero in the disc `|T| < R`,
+  `A q ^ e`, so that the coefficients of the inverse are dominated by those of
+  `∏_x (1 + q_x ^ (β / 2) T ^ e_x) ^ r`;
+* the eigenvalues of the geometric Frobenius on `H_c² = V_{π₁(U)} (-1)` have absolute value at
+  most `q ^ (β / 2 + 1)`;
+* the Euler product identity for `j_* ℱ`, the Grothendieck–Lefschetz trace formula, then forces
+  the boundary polynomials `det (1 - F_s T ^ e_s ∣ V ^ (I_s))` to have no zero in the disc
+  `|T| < R`,
 
 which gives `|ι α| ≤ q_s ^ (β / 2 + 1)`. Applying this to the tensor powers `ℱ ^ ⊗ 2 ^ k`, whose
 boundary stalks contain `v ^ ⊗ 2 ^ k` for an eigenvector `v`, sharpens the bound to `β`.
 
-## Implementation notes
+## Implementation details
 
 The cohomology `H_c² (U, ℱ)` of a Weil representation is not available; as in
 `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin`, the coinvariant Tate twist
@@ -44,7 +43,15 @@ The Euler-product form of the trace formula for middle extensions is the hypothe
 `AlgebraicGeometry.BoundaryDatum.HasMiddleExtensionEulerProduct` of the main results: the
 Grothendieck–Lefschetz trace formula is not available, and the identity is not a consequence of
 the fields of a `AlgebraicGeometry.BoundaryDatum`, which pin the inertia groups down only through
-the closed normal subgroup they generate (`AlgebraicGeometry.BoundaryDatum.ker_restrict_eq`).
+the closed normal subgroup they generate (`AlgebraicGeometry.BoundaryDatum.ker_restrict_eq`),
+while the boundary polynomials depend on the individual inertia groups. It is required for every
+lisse Weil sheaf on `U₀`, since the tensor-power argument applies it to `ℱ ^ ⊗ 2 ^ k` and to
+`ℱ ^ ∨`. The sheaf-level identity is
+`AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_directImage`.
+
+Purity at an unramified boundary point
+(`AlgebraicGeometry.BoundaryDatum.frobeniusWeight_eq_of_isPunctuallyPure`) applies the upper
+bound to `ℱ` and to its dual `ℱ ^ ∨`, whose residue Frobenius has the eigenvalue `α⁻¹`.
 
 ## Main definitions
 
@@ -83,12 +90,7 @@ variable {C : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p] (W : WeilGroup p)
 section TopCohomology
 
 /-- The eigenvalues of the geometric Frobenius on `H_c² (U, ℱ) = V_{π₁(U)} (-1)` are bounded by
-`q ^ (β / 2 + 1)` if `ℱ` has weights at most `β`.
-
-Since `π₁(U)` acts trivially on the coinvariants, a local Frobenius `F_x` of degree `e` acts on
-them as `γ ^ e`. If `μ` is an eigenvalue of `q γ`, then `(μ / q) ^ e` is an eigenvalue of `F_x` on
-the quotient `V_{π₁(U)}` of `V`, hence of `F_x` on `V` (`lemma-filtrations-spectra--2`), so it has
-weight at most `β`. -/
+`q ^ (β / 2 + 1)` if `ℱ` has weights at most `β`. -/
 theorem norm_le_of_hasEigenvalue_compactTopFrobenius {β : ℝ} (hw : W.HasWeightsAtMost l ρ ι β)
     (x : C.finitePoints) {μ : PadicAlgCl l}
     (hμ : (W.compactTopFrobenius l ρ).HasEigenvalue μ) :
@@ -411,17 +413,12 @@ private theorem wnorm_localPoly_le {r : ℝ} (hr : 0 ≤ r) {β : ℝ} (x : C.fi
 
 variable (W l ρ ι)
 
-/-- Step 1 of `proposition-weights-j-boundary-points--1`: the pole-free region of the open part.
+/-- The pole-free region of the open part.
 
 Let `T` be a set of closed points of `C₀` with at most `A q ^ e` points of degree `e`, and let
 `ℱ` have weights at most `β` at the points of `T`. Then the inverse of the partial Euler series
 `∏_{x ∈ T} ι P_x (ℱ, T ^ e_x)⁻¹` converges on the disc of radius `r` whenever
-`q ^ (β / 2 + 1) r < 1`.
-
-The coefficient of degree `n` of the inverse is that of the finite product of the local
-polynomials at the points of degree at most `n`, whose weighted norm `∑ₙ |aₙ| rⁿ` is at most
-`∏_x (1 + (q ^ (β / 2) r) ^ e_x) ^ rank ≤ exp (rank ∑_x (q ^ (β / 2) r) ^ e_x)`; grouping the
-points by degree, the exponent is at most `rank A ∑_e (q ^ (β / 2 + 1) r) ^ e < ∞`. -/
+`q ^ (β / 2 + 1) r < 1`. -/
 theorem le_radius_inv_tprod_eulerFactor (T : Set C.finitePoints) {β : ℝ}
     (hw : ∀ x ∈ T, ∀ α ∈ W.localEigenvalues l ρ x, frobeniusWeight ι (C.pointNorm x.1) α ≤ β)
     {A : ℝ} (hA : ∀ (s : Finset T) (e : ℕ),
@@ -496,30 +493,13 @@ noncomputable def boundaryPolynomial (ρ : Representation (PadicAlgCl l) WU.carr
     (s : ↥((Set.range j.base)ᶜ)) : Polynomial ℂ :=
   ((D.boundaryFrobenius l ρ s).charpolyRev.map ι).comp (Polynomial.X ^ p.degreeOver s.1)
 
-/-- The Euler-product identity of `proposition-weights-j-boundary-points`, transported to the
-representation side, as a hypothesis on a boundary datum. (The blueprint node itself is the
-sheaf-level identity
-`AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_directImage`.)
+/-- The Euler-product identity for middle extensions, on the representation side, as a
+hypothesis on a boundary datum.
 
-Let `X'₀ ⊆ C₀` be an affine open, a smooth geometrically connected affine curve, and let
-`j' : U'₀ = U₀ ∩ X'₀ ↪ X'₀`. For the middle extension `j'_* ℱ` of a lisse Weil sheaf `ℱ` the
-Euler-product form of the Grothendieck–Lefschetz trace formula reads
-`L (X'₀, j'_* ℱ, T) = det (1 - F T ∣ H_c¹) / det (1 - F T ∣ H_c²)`, as `H_c⁰ (X', j'_* ℱ) = 0`.
-Its left-hand side is the Euler series of `ℱ` over the closed points of `U'₀` times the
-boundary factors `ι det (1 - F_s T ^ e_s ∣ V ^ (I_s))⁻¹` at the points `s ∈ X'₀ \ U₀`, and
-`H_c² (X', j'_* ℱ) = H_c² (U', ℱ) = V_{π₁(U)} (-1)` (`lemma-degree-zero-top-cohomology--2`, using
-that `π₁(U') → π₁(U)` is onto). Clearing denominators: for some polynomial `P` (the numerator
-`ι det (1 - F T ∣ H_c¹)`),
-`L (U'₀, ℱ, T) · ι det (1 - F T ∣ H_c²) = P · ∏_{s ∈ X'₀ \ U₀} ι det (1 - F_s T ^ e_s ∣ V ^ (I_s))`.
-
-For the boundary datum of the actual inertia groups and residue Frobenius lifts of an open
-immersion this is the Grothendieck–Lefschetz trace formula, which is not available. It is not a
-consequence of the fields of a `BoundaryDatum`: they tie the Weil groups and the restriction
-map to the curve, but pin the inertia groups down only through the closed normal subgroup they
-generate (`AlgebraicGeometry.BoundaryDatum.ker_restrict_eq`), and the boundary polynomials
-depend on the individual inertia groups. It is therefore recorded as a hypothesis on `D`, for
-every lisse Weil sheaf on `U₀` (the tensor-power argument applies it to `ℱ ^ ⊗ 2 ^ k` and to
-`ℱ ^ ∨`). -/
+For every affine open `X'₀ ⊆ C₀` and every lisse Weil sheaf `ℱ` on `U₀` there is a polynomial
+`P` (the numerator `ι det (1 - F T ∣ H_c¹)`) with
+`L (U'₀, ℱ, T) · ι det (1 - F T ∣ H_c²) = P · ∏_{s ∈ X'₀ \ U₀} ι det (1 - F_s T ^ e_s ∣ V ^ (I_s))`,
+where `U'₀ = U₀ ∩ X'₀` and `H_c² = V_{π₁(U)} (-1)`. -/
 def HasMiddleExtensionEulerProduct [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p]
     [Fact (ringChar K ≠ l)] : Prop :=
   ∀ {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
@@ -575,8 +555,8 @@ theorem eval_boundaryPolynomial_eq_zero (ρ : Representation (PadicAlgCl l) WU.c
   simp [hα0]
 
 include D in
-/-- The closed points of `U₀` lying in an affine open `X'₀` of `C₀` satisfy the point count bound
-of `lemma-point-count-bound--1`: there is `A` with at most `A q ^ e` points of degree `e`
+/-- The closed points of `U₀` lying in an affine open `X'₀` of `C₀` satisfy a point count
+bound: there is `A` with at most `A q ^ e` points of degree `e`
 among them. -/
 theorem exists_card_filter_degreeOver_le {X' : C.Opens} (hX' : IsAffineOpen X') :
     ∃ A : ℝ, ∀ (t : Finset {x : U.finitePoints | j.base x.1 ∈ X'}) (e : ℕ),
@@ -624,18 +604,10 @@ theorem exists_card_filter_degreeOver_le {X' : C.Opens} (hX' : IsAffineOpen X') 
   rw [← hS]
   exact_mod_cast hle.trans (hd e he)
 
-/-- Steps 0–3 of `proposition-weights-j-boundary-points--1`: the preliminary bound.
+/-- The preliminary bound.
 
 If `ℱ` is lisse with weights at most `β` on `U₀`, every eigenvalue `α` of the residue Frobenius
-on the boundary stalk at `s` has weight at most `β + 2`.
-
-On an affine neighbourhood `X'₀` of `s`, the inverse of the Euler series of `ℱ` over
-`U'₀ = U₀ ∩ X'₀` and `P / ι det (1 - F T ∣ H_c²)` converge on the disc of radius
-`R = q ^ (-(β / 2 + 1))` (`AlgebraicGeometry.WeilGroup.le_radius_inv_tprod_eulerFactor`,
-`AlgebraicGeometry.WeilGroup.norm_le_of_hasEigenvalue_compactTopFrobenius`); by the Euler product
-identity (`proposition-weights-j-boundary-points`) so does the inverse of the product of the
-boundary polynomials, which therefore has no zero in that disc. The zero `z` with
-`z ^ e_s = (ι α)⁻¹` gives `|ι α| ^ (-1 / e_s) ≥ R`. -/
+on the boundary stalk at `s` has weight at most `β + 2`. -/
 theorem frobeniusWeight_le_add_two [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p]
     [Fact (ringChar K ≠ l)]
     (hD : D.HasMiddleExtensionEulerProduct l ι)
@@ -762,8 +734,7 @@ theorem frobeniusWeight_le_add_two [SmoothOfRelativeDimension 1 p] [Geometricall
   nlinarith
 
 /-- If `α` is an eigenvalue of the boundary Frobenius of `ℱ` at `s`, then `α ^ 2` is one of
-`ℱ ⊗ ℱ`: for an invariant eigenvector `v`, the vector `v ⊗ v` is an invariant eigenvector
-(`lemma-filtrations-spectra`). -/
+`ℱ ⊗ ℱ`. -/
 theorem hasEigenvalue_boundaryFrobenius_tprod_self
     {ρ : Representation (PadicAlgCl l) WU.carrier V} {s : ↥((Set.range j.base)ᶜ)}
     {α : PadicAlgCl l} (hα : (D.boundaryFrobenius l ρ s).HasEigenvalue α) :
@@ -796,10 +767,7 @@ theorem hasEigenvalue_boundaryFrobenius_tprod_self
     rw [TensorProduct.smul_tmul_smul, sq]
   · exact fun h ↦ hvv0 (congrArg Subtype.val h)
 
-/-- Step 4 of `proposition-weights-j-boundary-points--1`: sharpening by tensor powers.
-
-Applying the preliminary bound to the iterated tensor squares `ℱ ^ ⊗ 2 ^ k`, whose weights are
-at most `2 ^ k β` and whose boundary Frobenius has the eigenvalue `α ^ (2 ^ k)`, gives
+/-- Sharpening by tensor powers: every eigenvalue `α` of the boundary Frobenius satisfies
 `wt (α) ≤ β + 2 / 2 ^ k`. -/
 theorem frobeniusWeight_le_add_div_two_pow [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
@@ -824,9 +792,9 @@ theorem frobeniusWeight_le_add_div_two_pow [SmoothOfRelativeDimension 1 p]
     push_cast at h
     linarith
 
-/-- `proposition-weights-j-boundary-points--1` in terms of weights: if `ℱ` is lisse with weights at
-most `β` on `U₀`, every eigenvalue of the residue Frobenius on the boundary stalk at `s` has weight
-at most `β`. -/
+/-- Boundary semicontinuity in terms of weights: if `ℱ` is lisse with weights at most `β` on
+`U₀`, every eigenvalue of the residue Frobenius on the boundary stalk at `s` has weight at most
+`β`. -/
 theorem frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
     (hD : D.HasMiddleExtensionEulerProduct l ι)
@@ -844,18 +812,14 @@ theorem frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius [SmoothOfRelativeD
     linarith
   linarith
 
-/-- Boundary semicontinuity of weights on a curve (`proposition-weights-j-boundary-points--1`), on
-the representation side and conditional on the Euler-product hypothesis `hD`.
+/-- Boundary semicontinuity of weights on a curve, on the representation side and conditional on
+the Euler-product hypothesis `hD`.
 
 Let `j : U₀ ↪ C₀` be a dense open of a smooth geometrically connected curve over `𝔽_q` with
 finite complement, and let `ℱ` be a lisse Weil sheaf on `U₀` such that every local Frobenius
 eigenvalue `α` at a closed point `x` of `U₀` satisfies `|ι α| ^ 2 ≤ q_x ^ β`. Then every
 eigenvalue `α` of the residue Frobenius `F_s` on the boundary stalk `(j_* ℱ)_s̄ = V ^ (I_s)` at a
-boundary point `s` satisfies `|ι α| ^ 2 ≤ q_s ^ β`.
-
-Steps 0–3 (`AlgebraicGeometry.BoundaryDatum.frobeniusWeight_le_add_two`) give the bound
-`q_s ^ (β + 2)` on an affine neighbourhood of `s`; Step 4 applies it to the tensor powers
-(`AlgebraicGeometry.BoundaryDatum.frobeniusWeight_le_add_div_two_pow`). -/
+boundary point `s` satisfies `|ι α| ^ 2 ≤ q_s ^ β`. -/
 theorem sq_norm_le_rpow_of_hasEigenvalue_boundaryFrobenius [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
     (hD : D.HasMiddleExtensionEulerProduct l ι)
@@ -893,16 +857,11 @@ theorem hasEigenvalue_boundaryFrobenius_of_forall_inertia
     simp [boundaryFrobenius, hv.apply_eq_smul]
   · exact fun h ↦ hv.2 (congrArg Subtype.val h)
 
-/-- Purity at an unramified boundary point (first part of `corollary-unramified-boundary-point--2`),
-conditional on the Euler-product hypothesis `hD`.
+/-- Purity at an unramified boundary point, conditional on the Euler-product hypothesis `hD`.
 
 Let `ℱ` be lisse and punctually `ι`-pure of weight `w` on `U₀`, and let `s` be a boundary point
 at which the inertia `I_s` acts trivially. Then the extended stalk `(j_* ℱ)_s̄ = V` is pure of
-weight `w`: every eigenvalue `α` of the residue Frobenius `F_s` on `V` has weight `w`.
-
-By `proposition-weights-j-boundary-points--1` applied to `ℱ`, of weights at most `w`, the weight of
-`α` is at most `w`; applied to the dual `ℱ ^ ∨`, punctually pure of weight `-w` and again unramified
-at `s`, whose residue Frobenius has the eigenvalue `α⁻¹`, it is at least `w`. -/
+weight `w`: every eigenvalue `α` of the residue Frobenius `F_s` on `V` has weight `w`. -/
 theorem frobeniusWeight_eq_of_isPunctuallyPure [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
     (hD : D.HasMiddleExtensionEulerProduct l ι)

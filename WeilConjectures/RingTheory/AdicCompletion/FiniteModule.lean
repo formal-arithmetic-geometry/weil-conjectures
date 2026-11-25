@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.AdicCompletion.Functoriality
 We prove two standard facts about modules over adically complete rings.
 
 * If `A` is `I`-adically complete, `M` is `I`-adically Hausdorff and `M / IM` is finite, then
-  any lifts of generators of `M / IM`  `M`; in particular `M` is finite
+  any lifts of generators of `M / IM` generate `M`; in particular `M` is finite
   (Stacks, Lemma 031D).
 * If `R` is Noetherian and `J`-adically complete, every finite `R`-module is `J`-adically
   complete (Stacks, Lemma 00MA).
@@ -69,8 +69,7 @@ theorem Submodule.span_range_eq_top_of_isPrecomplete [IsPrecomplete I A] [IsHaus
 
 /-- Let `A` be `I`-adically complete and `M` an `A`-module with `⋂ₙ IⁿM = 0` such that
 `M / IM` is finitely generated. Then any `x₁, …, xᵣ ∈ M` whose images generate `M / IM`
-generate `M`; in particular `M` is a finite `A`-module.
-(blueprint: `lem-weil-pbc-finite-over-complete-ring`) -/
+generate `M`; in particular `M` is a finite `A`-module. -/
 theorem Module.finite_and_span_eq_top_of_isAdicComplete [IsAdicComplete I A] [IsHausdorff I M]
     [Module.Finite A (M ⧸ (I • ⊤ : Submodule A M))] :
     Module.Finite A M ∧ ∀ (r : ℕ) (x : Fin r → M),
@@ -96,8 +95,7 @@ variable {R : Type u} [CommRing R] [IsNoetherianRing R] (J : Ideal R) [IsAdicCom
 variable (N : Type u) [AddCommGroup N] [Module R N] [Module.Finite R N]
 
 /-- Let `R` be a Noetherian ring which is `J`-adically complete and `N` a finite `R`-module.
-Then the canonical map `N → lim N / JⁿN` is bijective.
-(blueprint: `lem-weil-pbc-finite-module-complete-over-complete-noetherian`) -/
+Then the canonical map `N → lim N / JⁿN` is bijective. -/
 theorem AdicCompletion.of_bijective_of_isAdicComplete :
     Function.Bijective (AdicCompletion.of J N) := by
   let e : R ≃ₗ[R] AdicCompletion J R :=

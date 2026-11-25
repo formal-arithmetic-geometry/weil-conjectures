@@ -12,8 +12,12 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Scalar coherence after extension to the native closure ring
 
-Source: BS Proposition 6.8.14(2); balanced tensor associativity.
-(blueprint: lem-sf-adic-closure-scalar-coherence).
+Scalar coherence for the adic finite realization after extending scalars to the native closure
+ring, via balanced tensor associativity.
+
+## References
+
+* BS Proposition 6.8.14(2).
 -/
 
 @[expose] public noncomputable section
