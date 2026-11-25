@@ -35,6 +35,15 @@ with an isomorphism in the first variable
 
 The isomorphism `X ≅ [𝟙_ C, X]` of `CategoryTheory.MonoidalClosed.unitNatIso` is the transpose
 of the left unitor (`CategoryTheory.MonoidalClosed.unitNatIso_hom_app`).
+
+## Implementation details
+
+No braiding is needed to define perfect pairings: the adjoint is taken in the second variable.
+A perfect pairing is weaker than an exact pairing (`CategoryTheory.ExactPairing`), which also
+asks for a coevaluation `𝟙_ C ⟶ Y ⊗ X` satisfying the zigzag identities: the evaluation of an
+exact pairing `ExactPairing X Y` is a perfect pairing `Y ⊗ X ⟶ 𝟙_ C`, but a perfect pairing of
+an object that is not dualizable is not part of an exact pairing. It is not to be confused with
+`LinearMap.IsPerfPair`, perfectness of a bilinear form on modules.
 -/
 
 @[expose] public section
@@ -148,9 +157,7 @@ instance (A : C) : IsIso (LaxMonoidal.μTwoSquare G A) :=
   @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun X ↦ inferInstanceAs (IsIso (LaxMonoidal.μ G A X))
 
 /-- A monoidal functor which is an equivalence preserves internal homs: the comparison map
-`G [A, B] ⟶ [G A, G B]` is an isomorphism. Taking mates once more, along the adjunction
-`G ⊣ G⁻¹`, gives the conjugate of the tensorator, which is an isomorphism; and taking mates along
-adjoint equivalences preserves isomorphisms. -/
+`G [A, B] ⟶ [G A, G B]` is an isomorphism. -/
 instance (A : C) : IsIso (LaxMonoidal.ihomComparison G A) := by
   let adj : G ⊣ G.inv := G.asEquivalence.toAdjunction
   have h := iterated_mateEquiv_conjugateEquiv (ihom.adjunction A) (ihom.adjunction (G.obj A))
@@ -201,19 +208,7 @@ variable {C : Type*} [Category* C] [MonoidalCategory C] [MonoidalClosed C]
 ```
  X ⊗ Y ──b──▶ 𝟙_ C        Y ──curry b──▶ [X, 𝟙_ C]   (iso)
 ```
-i.e. if `b` identifies `Y` with the dual `[X, 𝟙_ C]` of `X`. No braiding is needed: the adjoint
-is taken in the second variable.
-
-This is weaker than an exact pairing (`CategoryTheory.ExactPairing`), which also asks for a
-coevaluation `𝟙_ C ⟶ Y ⊗ X` satisfying the zigzag identities: the evaluation of an exact
-pairing `ExactPairing X Y` is a perfect pairing `Y ⊗ X ⟶ 𝟙_ C`, but a perfect pairing of an
-object that is not dualizable is not part of an exact pairing. It is not to be confused with
-`LinearMap.IsPerfPair`, perfectness of a bilinear form on modules.
-
-This is the perfectness of a pairing of blueprint `definition-perfect-pairing` and
-`definition-perfect-pairing--1`; its symmetry in the two variables (blueprint
-`definition-perfect-pairing--1`) is
-`CategoryTheory.MonoidalClosed.isPerfectPairing_braiding_hom_comp_iff`. -/
+i.e. if `b` identifies `Y` with the dual `[X, 𝟙_ C]` of `X`. -/
 structure IsPerfectPairing {X Y : C} (b : X ⊗ Y ⟶ 𝟙_ C) : Prop where
   /-- The adjoint `Y ⟶ [X, 𝟙_ C]` of the pairing is an isomorphism. -/
   isIso : IsIso (curry b)
@@ -228,12 +223,7 @@ instance isIso_pre {X X' : C} (f : X' ⟶ X) [IsIso f] : IsIso (pre f) :=
     by rw [← pre_map, IsIso.hom_inv_id, pre_id]⟩
 
 /-- Precomposing a perfect pairing `b : X ⊗ Y ⟶ 𝟙_ C` with an isomorphism `f : X' ⟶ X` in the
-first variable gives a perfect pairing `X' ⊗ Y ⟶ 𝟙_ C`: the adjoint of the composite is the
-adjoint of `b` followed by the isomorphism `pre f`,
-```
-         curry b                 pre f
-  Y ─────────────▶ [X, 𝟙_ C] ─────────▶ [X', 𝟙_ C]
-``` -/
+first variable gives a perfect pairing `X' ⊗ Y ⟶ 𝟙_ C`. -/
 lemma IsPerfectPairing.whiskerRight_comp {X X' Y : C} {b : X ⊗ Y ⟶ 𝟙_ C}
     (h : IsPerfectPairing b) (f : X' ⟶ X) [IsIso f] : IsPerfectPairing (f ▷ Y ≫ b) :=
   ⟨by

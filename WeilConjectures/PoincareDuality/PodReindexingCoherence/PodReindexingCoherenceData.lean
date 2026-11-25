@@ -14,9 +14,20 @@ public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 
 /-! # Presentation data for reindexed tensor and Hom comparisons
 
-Source: blueprint `theorem-poincare-duality-frobenius--2`, proof Steps 1, 2 and 4;
-Stacks Project, Tags 0GMX, 0A8X and 08J9
-(blueprint: def-pod-reindexing-coherence-data).
+Records the data used to compare tensor products and Hom complexes of coefficient modules on
+pro-étale sites with their reindexing along an isomorphism of schemes: the comparison
+isomorphisms, their evaluation and shift laws, and the compositor and identity comparisons.
+
+## Implementation details
+
+The comparisons are presentation data, not an assumed preservation property. The signed double
+shift `signedShift` applies the source shift first and then the target shift; this fixes the
+sign `(-1)^(a*r)`. The evaluation laws use the Hom-first order of the recorded closed
+adjunction.
+
+## References
+
+* Stacks Project, Tags 0GMX, 0A8X, 08J9, 08JA, 07A4, 06YN, 08J7, 09A5, 05RU, 0FPI
 -/
 
 @[expose] public noncomputable section
@@ -54,41 +65,35 @@ namespace WeilConjectures.PodReindexingCoherence
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The recorded complexes. Source: Stacks 0A8X
-(blueprint: def-pod-reindexing-coherence-data). -/
+/-- The category of `ℤ`-indexed cochain complexes of coefficient modules on `W`. -/
 abbrev K (W : Scheme.{u}) (s : Option ℕ) :=
   CochainComplex (podReindexingModules l E W s) ℤ
 
-/-- The recorded closed structure. Source: Stacks 08J9
-(blueprint: def-pod-reindexing-coherence-data). -/
+/-- A closed structure on the derived category, with the recorded derived Hom. -/
 abbrev Closed (W : Scheme.{u}) (s : Option ℕ) :=
   CoefficientClosedStructure (podReindexingDerivedHom l E W s)
 
-/-- The recorded K-flat tensor model, with the standard localization universe.
-Source: Stacks 07A4 (blueprint: def-pod-reindexing-coherence-data). -/
+/-- K-flat tensor models for the closed structure `S`, with the standard localization
+universe. -/
 abbrev Models (W : Scheme.{u}) (s : Option ℕ) (S : Closed l E W s) :=
   @CoefficientTensorModels.{u, u + 1, u, u + 2} _ _ (ProEt.topology W) _ _
     (podReindexingRing l E W s) (HasDerivedCategory.standard.{u + 1, u + 2} _) S
 
-/-- Actual total tensor. Source: Stacks 06YN
-(blueprint: def-pod-reindexing-coherence-data). -/
+/-- The total tensor product of complexes of coefficient modules. -/
 abbrev total (W : Scheme.{u}) (s : Option ℕ) :=
   coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W) (podReindexingRing l E W s)
 
-/-- Actual Hom complex. Source: Stacks 0A8X
-(blueprint: def-pod-reindexing-coherence-data). -/
+/-- The Hom complex between two complexes of coefficient modules. -/
 abbrev hom (W : Scheme.{u}) (s : Option ℕ) (P I : K l E W s) :=
   homComplex.{u + 1, u, u + 1, u + 1} (R := podReindexingRing l E W s) P I
 
-/-- Actual Hom-product projection. Source: Stacks 0A8X
-(blueprint: def-pod-reindexing-coherence-data). -/
+/-- The projection from the Hom complex onto a product factor. -/
 abbrev proj (W : Scheme.{u}) (s : Option ℕ) (P I : K l E W s)
     (r p q : ℤ) (h : p + r = q) :=
   homComplexπ.{u + 1, u, u + 1, u + 1} (R := podReindexingRing l E W s) P I r p q h
 
-/-- The signed double shift of the recorded derived Hom. Source: Stacks 0A8X, 08JA.
-Source shift is applied first, then target shift; this fixes the factor (-1)^(a*r).
-(blueprint: def-pod-reindexing-coherence-data). -/
+/-- The signed double shift `RHom(M[a], N[b]) ≅ RHom(M, N)[b - a]` of the recorded derived
+Hom. -/
 def signedShift (W : Scheme.{u}) (s : Option ℕ)
     (M N : podReindexingDerived l E W s) (a b : ℤ) :
     (podReindexingDerivedHom l E W s).obj (op (M⟦a⟧), N⟦b⟧) ≅
@@ -117,10 +122,8 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] podReindexingDerivedFunctor podReindexingDerivedFactors
 
 -- Elaborate the representative normalization across the two ringed sites.
-/-- Comparisons with their actual product, tensor-generator, and localization
-normalizations. These are presentation data, not an assumed preservation property.
-Source: Stacks 0GMX, 0A8X, 07A4, 08J7
-(blueprint: def-pod-reindexing-coherence-data). -/
+/-- Comparisons of Hom complexes and tensor products with reindexing along `g`, together with
+their product, tensor-generator and localization normalizations. -/
 structure Comparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)
     (SX : Closed l E X s) (SY : Closed l E Y s)
@@ -204,10 +207,8 @@ structure Comparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
           _ _ (podReindexingRing l E X s) (HasDerivedCategory.standard.{u + 1, u + 2} _) SX
             TX).hom.app (⟨_, hFP⟩, ⟨_, hFL⟩)
 
-/-- Evaluation determines the comparison, and hence its transpose, with both variances.
-Hom-first order is the order of the recorded closed adjunction.
-Source: Stacks 08J9 and blueprint dual-Tate compatibility, Step 2
-(blueprint: def-pod-reindexing-coherence-data). -/
+/-- The derived Hom comparison of `c` is characterized by evaluation, transports
+transposition, and is natural in both variables. -/
 structure EvaluationLaws {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)
     (SX : Closed l E X s) (SY : Closed l E Y s)
@@ -252,10 +253,7 @@ structure EvaluationLaws {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
         (Prod.mkHom ((podReindexingDerivedFunctor l E g s).map a).op
           ((podReindexingDerivedFunctor l E g s).map b))
 
-/-- The canonical double shift on Hom complexes is specified on every product factor.
-The index equality in each transport is an equality of integers, with no extra size condition.
-Source: Stacks 0A8X and blueprint dual-Tate compatibility, Step 4
-(blueprint: def-pod-reindexing-coherence-data). -/
+/-- The canonical signed double shift on Hom complexes, specified on every product factor. -/
 structure ChainShift (W : Scheme.{u}) (s : Option ℕ) where
   /-- The signed reindexing isomorphism. -/
   iso : ∀ (P I : K l E W s) (a b : ℤ),
@@ -275,8 +273,7 @@ attribute [local reducible] podReindexingFunctor podReindexingDerivedFunctor
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The degreewise identity shift comparison of the exact termwise functor.
-Source: Stacks 0A8X (blueprint: def-pod-reindexing-coherence-data). -/
+/-- The degreewise identity shift comparison of the exact termwise reindexing functor. -/
 def complexShift {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (s : Option ℕ) (a : ℤ) :
     shiftFunctor (K l E Y s) a ⋙ podReindexingComplexFunctor l E g s ≅
       podReindexingComplexFunctor l E g s ⋙ shiftFunctor (K l E X s) a :=
@@ -284,9 +281,8 @@ def complexShift {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (s : Option ℕ) (a 
 
 attribute [local irreducible] complexShift
 
-/-- Both the chain square and the square for the specified signed derived comparison.
-Source: Stacks 0A8X and blueprint dual-Tate compatibility, Step 4
-(blueprint: def-pod-reindexing-coherence-data). -/
+/-- The Hom comparisons of `c` commute with the signed double shifts, both on Hom complexes and
+in the derived category. -/
 structure ShiftLaws {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)
     (SX : Closed l E X s) (SY : Closed l E Y s)
@@ -325,8 +321,7 @@ attribute [local semireducible] podReindexingFunctor
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The canonical site compositor, identity on the underlying schemes.
-Source: Stacks 09A5 (blueprint: def-pod-reindexing-coherence-data). -/
+/-- The canonical site compositor, identity on the underlying schemes. -/
 def siteComp {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X) [IsIso g] [IsIso h] :
     proEtaleIsoPostcompose (h ≫ g) ≅
       proEtaleIsoPostcompose h ⋙ proEtaleIsoPostcompose g :=
@@ -335,9 +330,8 @@ def siteComp {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X) [IsIso g] [IsIso h
 
 attribute [local irreducible] siteComp
 
-/-- The pullback compositor fixed by actual sheaf restrictions and termwise localization.
-Source: Stacks 09A5, 05RU and the monoidal comparison of Tags 07A4 and 0FPI
-(blueprint: def-pod-reindexing-coherence-data). -/
+/-- The reindexing compositor for `h ≫ g`, given by sheaf restrictions and termwise
+localization. -/
 structure Compositor {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X)
     [IsIso g] [IsIso h] (s : Option ℕ) where
   /-- Ordinary module compositor. -/
@@ -371,16 +365,14 @@ structure Compositor {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The canonical identity comparison on the site, identity on underlying schemes.
-Source: Stacks 09A5 (blueprint: def-pod-reindexing-coherence-data). -/
+/-- The canonical identity comparison on the site, identity on underlying schemes. -/
 def siteId (X : Scheme.{u}) : proEtaleIsoPostcompose (𝟙 X) ≅ 𝟭 X.ProEt :=
   MorphismProperty.Over.mapId (P := @WeaklyEtale.{u}) (Q := ⊤) X (𝟙 X) rfl
 
 attribute [local irreducible] siteId
 
-/-- Canonical identity comparison, specified by restriction and localization.
-Source: Stacks 09A5 and 05RU
-(blueprint: def-pod-reindexing-coherence-data). -/
+/-- The canonical identity comparison for reindexing along `𝟙 X`, specified by restriction and
+localization. -/
 structure Identity (X : Scheme.{u}) (s : Option ℕ) where
   /-- Ordinary identity pullback comparison. -/
   ordinary : podReindexingFunctor l E (𝟙 X) s ≅ 𝟭 (podReindexingModules l E X s)

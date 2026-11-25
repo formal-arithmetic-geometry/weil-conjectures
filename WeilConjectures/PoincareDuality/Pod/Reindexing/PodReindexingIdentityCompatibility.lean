@@ -14,8 +14,11 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Compatibility of normalized ordinary reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4 and 0941.
+The identity relabelling commutes with reduction, total limit and completed tensor.
+
+## References
+
+* Stacks Project, Tags 03EL, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -193,21 +196,9 @@ private theorem tensor_identity_on_good (A : PodReindexFamily l E)
 
 end TensorIdentityProof
 
-/-- The identity relabelling commutes with reduction, total limit and completed tensor.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4 and 0941
-(blueprint: lem-pod-reindexing-identity-compatibility).
-
-Proof: podIdentityLimit gives the whole-system limit equation from the restricted
-section formula, the two Roos coordinates, normalized K-injective models and
-localization. Unit compatibility and injectivity of the adjunction homEquiv give
-the reduction equation. For good representatives, podIdentityTensorRoos gives the
-whole cochain identity. Substitute the tensor Model equation, use naturality of
-its representative comparison, and cancel that isomorphism. Essential surjectivity
-of the good localization supplies representatives for both constructible inputs;
-constructibility is preserved by their isomorphisms. Naturality transports the
-tensor equation to the original inputs. The remaining strict tensor-tower lemma
-is stated separately with its generator-and-sheafification argument. -/
+/-- The identity relabelling commutes with reduction, total limit and completed tensor:
+if the completion and tensor reindexings of `A` satisfy their laws and `A.identity` acts on
+sections by the canonical identity relabelling, then `A` satisfies the identity law. -/
 theorem podReindexingIdentityCompatibility
     (A : PodReindexFamily l E)
     (hcompletion : ∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]

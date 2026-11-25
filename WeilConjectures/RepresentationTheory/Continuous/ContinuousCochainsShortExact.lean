@@ -19,8 +19,24 @@ import Mathlib.Topology.Algebra.ConstMulAction
 /-!
 # Short exact sequences of continuous inhomogeneous cochains
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, section continuous-group-cohomology
-(blueprint: lem-exc-continuous-cochains-short-exact).
+The functor of continuous inhomogeneous cochains carries a short exact sequence of discrete
+continuous representations of a profinite group to a short exact sequence of cochain complexes.
+
+## Main results
+
+- `Rep.continuousCochains_shortExact`: the cochain complexes and their short exactness.
+
+## Implementation details
+
+Exactness on underlying modules is checked degreewise: postcomposition with an injection is
+injective, a cochain in the kernel has a unique pointwise preimage, which is continuous because
+the modules are discrete, and a set-theoretic section of the surjection lifts every cochain.
+Equivariant maps commute with each term of the differential, so postcomposition gives cochain
+maps, and degreewise exactness gives short exactness of complexes.
+
+## References
+
+- Stacks Project, Tag 0DVG.
 -/
 
 @[expose] public section
@@ -180,22 +196,7 @@ private noncomputable abbrev cochainMap
 representations to a short exact sequence of complexes. The equivalences `e` identify
 complex terms with continuous maps, and specify both differentials and postcomposition maps.
 The final term of the sum, indexed by `Fin.last n`, omits the last argument; the other terms
-multiply adjacent arguments. At `n = 0` the formula is `g • m - m`.
-
-Proof: (1) Underlying module exactness follows from `lem-exc-discrete-modules-abelian`.
-Postcomposition with the injection is injective. A cochain in the kernel has a unique
-pointwise preimage, continuous since inverse images of singletons are open. A set-theoretic
-section of the surjection is continuous between discrete modules and lifts every cochain.
-(2) Projections, adjacent multiplication and the action are continuous; the displayed
-alternating sum therefore defines a continuous linear differential. Expanding two successive
-differentials cancels all terms in pairs, using associativity and the action law, including
-in degree zero. (3) Equivariant linear maps commute with each term of the differential,
-so postcomposition gives cochain maps. Degreewise exactness gives short exactness of complexes
-by `lem-weil-pbc-cochain-complexes-degreewise-exact`.
-
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed differential and paragraph
-beginning "However, a short exact sequence of discrete G-modules"
-(blueprint: lem-exc-continuous-cochains-short-exact). -/
+multiply adjacent arguments. At `n = 0` the formula is `g • m - m`. -/
 theorem continuousCochains_shortExact
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

@@ -11,12 +11,18 @@ public import WeilConjectures.TraceFormula.Integral.IntegralDerivedOperations
 /-!
 # Finite pullback composition in the integral tower presentation
 
-Source: Stacks Project, Tag 0D6D, and Modules on Sites, Tag 03D3
-(blueprint: lem-weil-pbc-proetale-derived-pullback-composition).
+We identify the finite-level pullback of the integral tower presentation with the pullback
+for the constant ring `O_E / λ^(n+1)`, normalized by the adjunction units, and specialize the
+composition isomorphism for derived pullback to these constant rings.
 
-The general ring-sheaf comparison remains publicly imported. The additional interface
-identifies the coefficient-sized tower pullback with the same constant-ring pullback,
-with its tensor-unit normalization, and exposes the constant-coefficient specialization.
+## Main definitions
+
+* `integralFinitePullbackModel`: the unit-normalized change of presentation.
+* `integralFiniteCanonicalPullbackComposition`: `L(h ≫ k)^* ≅ Lk^* ⋙ Lh^*` at finite level.
+
+## References
+
+* [Stacks Project, Tags 0D6D and 03D3]
 -/
 
 @[expose] public noncomputable section
@@ -30,17 +36,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The two presentations of finite pullback have a unique unit-preserving identification.
-Source: Stacks Tag 0D6D and Modules on Sites, Tag 03D3
-(blueprint: lem-weil-pbc-proetale-derived-pullback-composition).
-Proof: both right adjoints are sectionwise direct image with the constant-section
-coefficient action. The inverse-image adjunction identifies their coefficient maps:
-both adjoints send every constant section to itself. Thus their right adjoints agree
-canonically on sections. Take the corresponding mate between the left adjoints.
-The mate equation is the displayed unit equation. The adjunction Hom bijection makes
-this equation determine the comparison uniquely. It is invertible because the
-right-adjoint comparison is invertible. This identifies the termwise pullbacks used
-in the K-flat composition construction of Tag 0D6D, on all complexes and chain maps. -/
+/-- The two presentations of finite pullback have a unique unit-preserving identification. -/
 theorem integralFinitePullbackModel_existsUnique
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ∃! a : integralOperationsLevelPullback l E f n ≅
@@ -95,18 +91,14 @@ theorem integralFinitePullbackModel_existsUnique
   ext m
   exact (hb M U.unop m).trans (ha M U.unop m).symm
 
-/-- The uniquely unit-normalized change of presentation for finite pullback.
-Source: Stacks Tags 03D3 and 0D6D
-(blueprint: lem-weil-pbc-proetale-derived-pullback-composition). -/
+/-- The uniquely unit-normalized change of presentation for finite pullback. -/
 def integralFinitePullbackModel {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     integralOperationsLevelPullback l E f n ≅
       proEtaleConstantRingPullback (Padic.coefficientExtensionRing l E (n + 1)) f :=
   Classical.choose (integralFinitePullbackModel_existsUnique l E f n).exists
 
-/-- The published finite composition, specialized to the actual constant quotient rings.
-It has direction composite pullback to iterated pullback, as in Tag 0D6D.
-Source: Stacks Tag 0D6D
-(blueprint: lem-weil-pbc-proetale-derived-pullback-composition). -/
+/-- The composition isomorphism `L(h ≫ k)^* ≅ Lk^* ⋙ Lh^*` for derived pullback with
+coefficients in the constant ring `O_E / λ^(n+1)`. -/
 def integralFiniteCanonicalPullbackComposition
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) (n : ℕ) :
     proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E (n + 1))

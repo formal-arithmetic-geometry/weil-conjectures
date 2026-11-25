@@ -11,9 +11,24 @@ import Mathlib.Tactic.Abel
 /-!
 # The coinduced contraction satisfies the homotopy identity
 
-Source: Stacks Project, etale-cohomology.tex, Tag 0DVG,
-label section-continuous-group-cohomology, final profinite comparison
-(blueprint: lem-exc-coinduced-homotopy-identity).
+The evaluation contraction on continuous cochains with values in a coinduced module is a
+contracting homotopy: `d h + h d = id` in every positive degree.
+
+## Main results
+
+- `Rep.coinduced_homotopy_identity`: the contracting homotopy identity.
+
+## Implementation details
+
+Nested locally constant maps give the discrete topology on the coinduced module.
+`Fin.contractNth` combines adjacent entries, or drops the last entry at the last index, and
+integer scalar multiplication expresses the alternating signs over an arbitrary ring. The
+identity is proved by expanding `d h F` and `h d F` at a tuple and a point `x`: all product
+terms and endpoints cancel, leaving `F(g_1, …)(x)`.
+
+## References
+
+- Stacks Project, Tag 0DVG.
 -/
 
 @[expose] public section
@@ -111,31 +126,8 @@ private theorem coinducedDifferential_apply
 /-- The inhomogeneous continuous cochain differential and the evaluation contraction
 satisfy the contracting homotopy identity in every positive degree.
 The witnesses `d` and `h` are uniquely specified by their pointwise formulas;
-`h n` is the paper's `h_{n+1}`, so `n = 0` includes the degree-one identity.
-Nested locally constant maps give the discrete topology on the coinduced module.
-`Fin.contractNth` combines adjacent entries, or drops the last entry at the last index.
-Integer scalar multiplication expresses alternating signs over an arbitrary ring.
-
-Source: Stacks Project, etale-cohomology.tex, Tag 0DVG, label
-section-continuous-group-cohomology (blueprint: lem-exc-coinduced-homotopy-identity).
-
-Proof: (1) Use `lem-exc-coinduced-homotopy-continuous`
-(`Rep.exists_coinduced_continuous_contraction`) for the evaluation contractions.
-Construct the displayed differential directly. The leading expression is jointly
-locally constant in the tuple and the function variable: near a point the outer
-cochain is fixed, and then its value is locally constant. Compactness of `G` makes
-its curry locally constant into the discrete function module. The other faces are
-continuous precompositions with multiplication and deletion of tuple entries.
-All operations are linear pointwise. Fix a positive degree,
-a group tuple and `x`. Expand `d h` using right translation. Its leading term is
-`F(x*g_1,g_2,...)(1)`, followed by the alternating interior product terms and the
-endpoint with sign `(-1)^degree`. This also covers `d^0` in degree one.
-(2) Expand `h d` by evaluating `d F` on `(x,g_1,...)` at one. Its leading term is
-`F(g_1,...)(x)`, followed by the negative leading term from (1), the opposite interior
-product terms, and the endpoint with sign `(-1)^(degree+1)`.
-(3) Add the expansions. Each product term and endpoint cancels, leaving only
-`F(g_1,...)(x)`. Extensionality in `x` and the tuple gives equality of continuous
-cochains, namely `d^{degree-1} h_degree F + h_{degree+1} d^degree F = F`. -/
+`h n` is the contraction `h_{n+1}` out of degree `n + 1`, so `n = 0` includes the degree-one
+identity. -/
 theorem coinduced_homotopy_identity
     (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

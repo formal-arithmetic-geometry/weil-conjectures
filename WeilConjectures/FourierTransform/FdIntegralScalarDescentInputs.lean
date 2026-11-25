@@ -13,8 +13,27 @@ import WeilConjectures.FourierTransform.FdIntegralStageExact
 
 /-! # Integral inputs for raw scalar-comparison descent
 
-Source: trace-definition coefficient-category comparison, integral steps 1--6
-(blueprint: lem-fd-integral-scalar-descent-inputs).
+The integral completion comparison in both coefficient presentations, with the shift,
+exactness, cocycle and unit properties needed for raw localization in the coefficient-category
+comparison used in the definition of the trace function.
+
+## Implementation details
+
+The proof of `fdIntegralScalarDescentInputs` obtains the normalized ordinary transports and
+ambient comparisons from `fdIntegralAmbientScalarNormalization`. The stage
+`integral_identity` equations identify the two endpoint functors after the full PBC inclusion
+with these ambient functors. Take the preimage isomorphism under fully faithful right
+whiskering; `map_preimage` and equality elimination give its component `HEq`. The same
+equality elimination inserts the target `integral_identity` cast in the representative
+completion equation.
+`fdIntegralStageExact` proves exactness of the supplied stage functors for their
+normalized shifts. Apply `fdIntegralScalarRestrictionExact` for the two shift squares
+and exact scalar composites, and `fdIntegralScalarPresentationForward` for the forward
+associator and multiplication/completeness unit laws. For the inverse cocycle,
+postcompose with the direct comparison hom, replace the forward associator equation,
+and cancel the two comparison inverses. Precomposition of the forward unit equation
+with the comparison inverse gives the inverse unit law, including repeated fields.
+All maps retain their original coefficient presentations and completion normalization.
 -/
 
 @[expose] public noncomputable section
@@ -68,25 +87,7 @@ private theorem inverseForwardComparison
     c.inv_hom_id_assoc]
 
 /-- The integral completion comparison in both coefficient presentations, ready for raw
-localization. This statement makes no assertion about rational comparisons or stage systems.
-Source: trace-definition final coefficient-category sentence, integral comparison steps 1--6
-(blueprint: lem-fd-integral-scalar-descent-inputs).
-
-Proof: Obtain the normalized ordinary transports and ambient comparisons from
-fdIntegralAmbientScalarNormalization. The stage integral_identity equations identify
-the two endpoint functors after the full PBC inclusion with these ambient functors.
-Take the preimage isomorphism under fully faithful right whiskering; map_preimage
-and equality elimination give its component HEq. The same equality elimination
-inserts the target integral_identity cast in the representative completion equation.
-fdIntegralStageExact proves exactness of the supplied stage functors for their
-normalized shifts. Apply fdIntegralScalarRestrictionExact for the two shift squares
-and exact scalar composites, and fdIntegralScalarPresentationForward for the forward
-associator and multiplication/completeness unit laws. For the inverse cocycle,
-postcompose with the direct comparison hom, replace the forward associator equation,
-and cancel the two comparison inverses. Precomposition of the forward unit equation
-with the comparison inverse gives the inverse unit law, including repeated fields.
-All maps retain their original coefficient presentations and completion normalization.
--/
+localization. This statement makes no assertion about rational comparisons or stage systems. -/
 theorem fdIntegralScalarDescentInputs
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

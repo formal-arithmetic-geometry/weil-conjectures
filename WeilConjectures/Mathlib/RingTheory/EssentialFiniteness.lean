@@ -14,11 +14,15 @@ public import Mathlib.RingTheory.RingHom.EssFiniteType
 # Essentially of finite type algebras over Artinian local rings
 
 An algebra `S` over `R` which is an Artinian local ring is essentially of finite type as soon
-as its residue field is (Stacks, Tag 07DT (3)).
+as its residue field is.
 
 ## Main results
 
 - `Algebra.EssFiniteType.of_isArtinianRing_of_residueField`
+
+## References
+
+* [Stacks, Tag 07DT (3)]
 -/
 
 @[expose] public section
@@ -30,8 +34,7 @@ namespace Algebra.EssFiniteType
 variable (R S : Type*) [CommRing R] [CommRing S] [Algebra R S]
 
 /-- Let `S` be an Artinian local `R`-algebra. If the residue field of `S` is essentially of
-finite type over `R`, then so is `S` (Stacks, Tag 07DT (3)).
-(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
+finite type over `R`, then so is `S`. -/
 theorem of_isArtinianRing_of_residueField [IsArtinianRing S] [IsLocalRing S]
     [EssFiniteType R (ResidueField S)] : EssFiniteType R S := by
   classical

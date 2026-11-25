@@ -19,8 +19,7 @@ with the image of `l₀`, form a basis `b = (l₀, t)` of `E`
 triangular: `det_b (l, t') = (l / l₀) · det_{b'} (g ∘ t')` (`Module.Basis.det_cons_of_exact`).
 
 This is the linear algebra behind the multiplicativity `det E ≅ L ⊗ det E'` of determinants of
-locally free sheaves in short exact sequences (blueprint
-`theorem-riemann-roch-coherent-serre-duality--1`).
+locally free sheaves in short exact sequences.
 -/
 
 @[expose] public section
@@ -77,9 +76,7 @@ theorem exists_eq_cons_of_exact (hf : Function.Injective f) (hfg : Function.Exac
 
 /-- **Determinants in a basis adapted to an exact sequence.** In the situation of
 `Module.Basis.exists_eq_cons_of_exact`, with `b = (f (b₁ 0), t)`, the determinant of a family
-`(f l, t')` is `det_b (f l, t') = b₁.repr l 0 * det_{b₃} (g ∘ t')`: the matrix of `(f l, t')` in
-`b` is block lower triangular, with first column `(b₁.repr l 0, 0, …, 0)` and lower right block
-the matrix of `g ∘ t'` in `b₃`. -/
+`(f l, t')` is `det_b (f l, t') = b₁.repr l 0 * det_{b₃} (g ∘ t')`. -/
 theorem det_cons_of_exact (hfg : Function.Exact f g) (b₁ : Basis (Fin 1) R L)
     (b₃ : Basis (Fin r) R E') {t : Fin r → E} (ht : ∀ k, g (t k) = b₃ k)
     (b : Basis (Fin (r + 1)) R E) (hb : ⇑b = Fin.cons (f (b₁ 0)) t) (l : L) (t' : Fin r → E) :

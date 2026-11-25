@@ -18,7 +18,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
-# Fibre products of affine schemes over the terminal scheme
+# Complements on fibre products of schemes
 
 `Mathlib.AlgebraicGeometry.Pullbacks` computes the fibre product of `Spec A` and `Spec B` over
 `Spec R` as `Spec (A ⊗[R] B)`. Since `Spec (ULift ℤ)` is a terminal scheme, this also computes
@@ -42,31 +42,12 @@ schemes appear in practice.
 * `AlgebraicGeometry.Scheme.pullback_fst_toSpecΓ_appTop`: global sections of the base change of
   `Spec R ⟶ Spec Γ(U, ⊤)` along `U ⟶ Spec Γ(U, ⊤)`.
 
-Note that `IsAffine (pullback (terminal.from X) (terminal.from Y))` for affine `X` and `Y` is
-already an instance in Mathlib, since `⊤_ Scheme` is affine.
-
-## Implementation notes
-
-The `ULift ℤ`-algebra structure on a commutative ring `A : Type u` is `ULift.algebra'`, which is a
-def rather than an instance; it is enabled as a local instance in this file.
-
-
--/
-
-/-!
-
-# Graphs of partial sections of a fibre product
+## Graphs of partial sections of a fibre product
 
 For a partial section `γ : U ⟶ X ×_S Y` of the first projection, defined on an open
 `j : U ⟶ X` and with `Y ⟶ S` separated, the graph of `γ` is a closed immersion
 `U ⟶ U ×_S Y`, and the scheme-theoretic image of `γ` restricts over `U ×_S Y` to that
 graph.
-
-This is the elimination-of-indeterminacy input for the graph-extension and
-common-modification steps of the Nagata compactification proof (Stacks Project
-Tags 0F3X–0F3Z; revised blueprint `lemma:nagata-scheme-image-partial-section`).
-
-## Main definitions and results
 
 - `AlgebraicGeometry.partialSection`: the graph `U ⟶ U ×_S Y` of a partial
   section, a closed immersion since `Y ⟶ S` is separated;
@@ -89,6 +70,18 @@ Tags 0F3X–0F3Z; revised blueprint `lemma:nagata-scheme-image-partial-section`)
   `g : B ⟶ C` is an isomorphism over an open `O ⊆ C`, then `A ×_C B ⟶ A` is an
   isomorphism over the inverse image of `O`.
 
+## Implementation details
+
+The `ULift ℤ`-algebra structure on a commutative ring `A : Type u` is `ULift.algebra'`, which is a
+def rather than an instance; it is enabled as a local instance in this file.
+
+Note that `IsAffine (pullback (terminal.from X) (terminal.from Y))` for affine `X` and `Y` is
+already an instance in Mathlib, since `⊤_ Scheme` is affine.
+
+## References
+
+* [Stacks: Tag 0F3X](https://stacks.math.columbia.edu/tag/0F3X) to
+  [Stacks: Tag 0F3Z](https://stacks.math.columbia.edu/tag/0F3Z)
 -/
 
 @[expose] public section
@@ -328,8 +321,7 @@ lemma isPullback_partialSectionOpenι :
     (partialSectionOpenι_fst x y j) (IsPullback.of_hasPullback x y).flip
 
 /-- **The base change of an isomorphism over an open stays an isomorphism**: if
-`j : U ⟶ X` restricts to an isomorphism over an open `V ⊆ X` — in the application `j`
-is an admissible blow-up and `V` the complement of its center — then the base-changed
+`j : U ⟶ X` restricts to an isomorphism over an open `V ⊆ X`, then the base-changed
 morphism `U ×_S Y ⟶ X ×_S Y` restricts to an isomorphism over the preimage of `V`
 under the first projection. -/
 lemma isIso_partialSectionOpenι_restrict (V : X.Opens) [IsIso (j ∣_ V)] :
@@ -389,8 +381,7 @@ instance [IsSeparated y] : IsClosedImmersion (partialSection x y j γ hγ) := by
   exact IsClosedImmersion.of_comp (partialSection x y j γ hγ) (pullback.fst (j ≫ x) y)
 
 /-- A partial section of the first projection over a quasi-compact `j` is itself
-quasi-compact: it becomes `j` after composing with the (quasi-separated) first
-projection. -/
+quasi-compact. -/
 lemma quasiCompact_of_partialSection [QuasiSeparated y] [QuasiCompact j]
     (hγ : γ ≫ pullback.fst x y = j) : QuasiCompact γ := by
   have : QuasiCompact (γ ≫ pullback.fst x y) := by rw [hγ]; infer_instance
@@ -410,8 +401,7 @@ variable [IsSeparated y] [IsOpenImmersion j] [QuasiCompact j]
 
 /-- **The scheme-theoretic image of a partial section restricts to its graph**: the
 kernel ideal sheaf of `γ` pulled back to `U ×_S Y` is the kernel of the (closed
-immersion) graph of `γ`.
-(Revised blueprint: `lemma:nagata-scheme-image-partial-section`, kernel form.) -/
+immersion) graph of `γ`. -/
 theorem ker_comap_partialSectionOpenι :
     γ.ker.comap (partialSectionOpenι x y j) = (partialSection x y j γ hγ).ker := by
   have := quasiCompact_of_partialSection x y j γ hγ
@@ -423,9 +413,7 @@ theorem ker_comap_partialSectionOpenι :
   rw [hsnd, Scheme.Hom.ker_comp_of_isIso]
 
 /-- The isomorphism of `U` with the restriction of the scheme-theoretic image of a
-partial section over `U ×_S Y`: the composite of the identification of `U` with the
-image of its graph and the flat base change identification of images.
-(Revised blueprint: `lemma:nagata-scheme-image-partial-section`.) -/
+partial section over `U ×_S Y`. -/
 def partialSectionRestrictIso : U ≅ pullback (partialSectionOpenι x y j) γ.imageι :=
   asIso (partialSection x y j γ hγ).toImage ≪≫
     eqToIso (congrArg Scheme.IdealSheafData.subscheme
@@ -447,8 +435,7 @@ lemma partialSectionRestrictIso_hom_fst :
 
 /-- The restriction isomorphism is compatible with the canonical morphism to the
 scheme-theoretic image: composing with the second projection of the fibre product
-recovers `γ.toImage`.
-(Revised blueprint: `lemma:nagata-scheme-image-partial-section`.) -/
+recovers `γ.toImage`. -/
 @[reassoc (attr := simp)]
 lemma partialSectionRestrictIso_hom_snd :
     (partialSectionRestrictIso x y j γ hγ).hom ≫
@@ -461,8 +448,7 @@ include hγ in
 /-- **The fibre of the scheme-theoretic image of a partial section over `j` is `U`
 itself**: pulling back the projection `SIm(γ) ⟶ X` of the scheme-theoretic image of a
 partial section along the open `j : U ⟶ X` recovers `U`, embedded via the canonical
-morphism `γ.toImage`. This is the cartesian form of `partialSectionRestrictIso`.
-(Revised blueprint: `lemma:nagata-scheme-image-partial-section`.) -/
+morphism `γ.toImage`. -/
 lemma isPullback_toImage_partialSection :
     IsPullback γ.toImage (𝟙 U) (γ.imageι ≫ pullback.fst x y) j := by
   -- paste the restriction of the image over `U ×_S Y` onto the cartesian square of the
@@ -481,9 +467,7 @@ lemma isPullback_toImage_partialSection :
 include hγ in
 /-- **The projection of the graph image is an isomorphism over the open part**: the
 projection `SIm(γ) ⟶ X` of the scheme-theoretic image of a partial section restricts
-to an isomorphism over the range of `j`. This is the isomorphism input for the
-elimination of indeterminacy in the graph-extension step (Stacks Project Tag 0F3Z).
-(Revised blueprint: `lemma:nagata-scheme-image-partial-section`.) -/
+to an isomorphism over the range of `j`. -/
 lemma isIso_restrict_imageι_comp_fst :
     IsIso ((γ.imageι ≫ pullback.fst x y) ∣_ j.opensRange) := by
   -- the graph square, with the `U`-corner rewritten through `j.isoOpensRange`
@@ -513,9 +497,7 @@ section GraphClosure
 include hγ in
 /-- **The graph of a partial section is closed over the open part**: any point of the
 closure of the graph of `γ` lying over the range of `j` (via the first projection)
-already lies on the graph. Indeed, over the open locus `pr₁⁻¹(j(U)) = U ×_S Y` the
-graph is the closed immersion `partialSection`, so the graph is closed there.
-(Revised blueprint: `lemma:nagata-scheme-image-partial-section`.) -/
+already lies on the graph. -/
 theorem closure_range_inter_preimage_range_fst_subset [IsSeparated y] [IsOpenImmersion j] :
     closure (Set.range ⇑γ) ∩ ⇑(pullback.fst x y) ⁻¹' Set.range ⇑j ⊆ Set.range ⇑γ := by
   -- the base-changed open immersion `U ×_S Y ⟶ X ×_S Y` has range the locus over `j`
@@ -548,11 +530,8 @@ theorem closure_range_inter_preimage_range_fst_subset [IsSeparated y] [IsOpenImm
   rw [hγrange]
   exact ⟨closure_minimal (hγrange.le.trans Set.inter_subset_left) hC hw₁, hw₂⟩
 
-/-- The second-projection form of `closure_range_inter_preimage_range_fst_subset`,
-obtained by the symmetry of the fibre product: any point of the closure of the graph of
-a partial section of the **second** projection lying over the range of `j'` already
-lies on the graph.
-(Revised blueprint: `lemma:nagata-scheme-image-partial-section`.) -/
+/-- Any point of the closure of the graph of a partial section of the **second** projection
+lying over the range of `j'` already lies on the graph. -/
 theorem closure_range_inter_preimage_range_snd_subset (j' : U ⟶ Y)
     [IsSeparated x] [IsOpenImmersion j'] (hγsnd : γ ≫ pullback.snd x y = j') :
     closure (Set.range ⇑γ) ∩ ⇑(pullback.snd x y) ⁻¹' Set.range ⇑j' ⊆ Set.range ⇑γ := by
@@ -584,10 +563,7 @@ theorem closure_range_inter_preimage_range_snd_subset (j' : U ⟶ Y)
 
 /-- **The graph of a partial section of the second projection is the whole part of its
 scheme-theoretic image lying over the open part**: the inverse image in `SIm(γ)` of the
-range of `j'` under the second projection is exactly the range of `γ.toImage`. Indeed the
-image is the closure of the graph, and over the range of `j'` the graph is already closed
-(`closure_range_inter_preimage_range_snd_subset`).
-(Revised blueprint: `lemma:nagata-scheme-image-partial-section`.) -/
+range of `j'` under the second projection is exactly the range of `γ.toImage`. -/
 theorem preimage_range_snd_eq_range_toImage (j' : U ⟶ Y) [IsSeparated x] [IsOpenImmersion j']
     [QuasiCompact γ] (hγsnd : γ ≫ pullback.snd x y = j') :
     ⇑(γ.imageι ≫ pullback.snd x y) ⁻¹' Set.range ⇑j' = Set.range ⇑γ.toImage := by
@@ -611,10 +587,7 @@ end GraphClosure
 
 /-- **The graph image is proper over the base**: if `Y ⟶ S` is proper, the
 scheme-theoretic image of a partial section `γ : U ⟶ X ×_S Y`, projected to `X`, is
-proper. This is the properness half of the graph-extension lemma: together with
-`partialSectionRestrictIso` (the image restricts to `U` over `U ×_S Y`) it yields the
-proper extension `SIm(γ) ⟶ X` of the partial section
-(Stacks Project Tag 0F3Z; revised blueprint `lemma:nagata-graph-extension`). -/
+proper. -/
 theorem isProper_imageι_comp_fst [IsProper y] :
     IsProper (γ.imageι ≫ pullback.fst x y) := by
   have : IsProper (pullback.fst x y) := MorphismProperty.pullback_fst _ _ ‹_›
@@ -646,9 +619,7 @@ section PullbackSpec
 
 /-- For a ring map `φ : Γ(U, ⊤) ⟶ R`, pulling a global function on `U` back to the fibre product
 `U ×_{Spec Γ(U, ⊤)} Spec R` along the first projection is the same as applying `φ` and then
-pulling back along the second projection: `fst^* = snd^* ∘ (ΓSpecIso R)⁻¹ ∘ φ`. This is the
-commutativity of the pullback square on global sections, together with
-`X.toSpecΓ.appTop = (ΓSpecIso Γ(X, ⊤)).hom`. -/
+pulling back along the second projection: `fst^* = snd^* ∘ (ΓSpecIso R)⁻¹ ∘ φ`. -/
 lemma Scheme.pullback_fst_toSpecΓ_appTop {U : Scheme.{u}} {R : CommRingCat.{u}}
     (φ : Γ(U, ⊤) ⟶ R) :
     (pullback.fst U.toSpecΓ (Spec.map φ)).appTop =

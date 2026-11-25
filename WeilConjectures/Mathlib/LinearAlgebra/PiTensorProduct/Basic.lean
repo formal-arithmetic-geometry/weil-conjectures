@@ -30,8 +30,7 @@ namespace PiTensorProduct
 variable {K : Type*} [Field K] {ι : Type*} [Finite ι] {V : ι → Type*}
   [∀ i, AddCommGroup (V i)] [∀ i, Module K (V i)]
 
-/-- Over a field, a pure tensor of nonzero vectors is nonzero: choose linear forms `φᵢ` with
-`φᵢ vᵢ ≠ 0`, then `⊗ᵢ φᵢ` does not vanish on `⊗ᵢ vᵢ`. -/
+/-- Over a field, a pure tensor of nonzero vectors is nonzero. -/
 theorem tprod_ne_zero {v : ∀ i, V i} (hv : ∀ i, v i ≠ 0) : (⨂ₜ[K] i, v i) ≠ 0 := by
   have := Fintype.ofFinite ι
   have hφ (i : ι) : ∃ φ : Module.Dual K (V i), φ (v i) ≠ 0 := by
@@ -45,7 +44,7 @@ theorem tprod_ne_zero {v : ∀ i, V i} (hv : ∀ i, v i ≠ 0) : (⨂ₜ[K] i, v
   exact Finset.prod_ne_zero_iff.2 (fun i _ ↦ hφ i) this
 
 /-- If `α` is an eigenvalue of `f`, then `αⁿ` is an eigenvalue of the tensor power
-`f^{⊗n} = ⨂_{i < n} f`. (blueprint: `lemma-filtrations-spectra`) -/
+`f^{⊗n} = ⨂_{i < n} f`. -/
 theorem hasEigenvalue_map_pow {W : Type*} [AddCommGroup W] [Module K W] {f : Module.End K W}
     {α : K} (hα : f.HasEigenvalue α) (n : ℕ) :
     Module.End.HasEigenvalue (map fun _ : Fin n ↦ f) (α ^ n) := by

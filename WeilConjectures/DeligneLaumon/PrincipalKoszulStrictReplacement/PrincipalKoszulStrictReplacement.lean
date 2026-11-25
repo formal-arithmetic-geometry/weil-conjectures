@@ -89,9 +89,16 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 /-! # Principal Koszul strict replacements of completed quotient towers
 
-Source: Stacks Project, Tags 093M, 099L and 06YS; the explicit principal argument
-in proof steps 1--8 (blueprint: lem-a1-principal-koszul-strict-replacement).
+We construct the strict principal Koszul replacement of the tensor product of a complex `P` with
+the completed quotient tower, together with its augmentation to the actual quotient tower.
+
+## Implementation details
+
 The index `n : ℕ` denotes exponent `n + 1`. Tensor products keep the order `P ⊗ Q`.
+
+## References
+
+* Stacks Project, Tags 00PD, 0657, 06YM, 06YS, 093M, 099L and 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -108,32 +115,27 @@ namespace WeilConjectures.PrincipalKoszulStrictReplacement
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (W : AlgebraicGeometry.Scheme.{t})
 
-/-- The canonical size witness, without identifying the two input universes.
-Source: Stacks 099L (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The canonical size witness, without identifying the two input universes. -/
 instance siteSmall : EssentiallySmall.{max u (t + 1)} W.ProEt :=
   essentiallySmallSelf.{u} _
 
 attribute [local instance 20000] principalKoszulHasSheafCompose
 
-/-- Canonical additive sheafification at the actual coefficient size.
-Source: Stacks 099L (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- Canonical additive sheafification at the actual coefficient size. -/
 instance (priority := 4000) abSheafify :
     HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W)
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} W
 
-/-- The canonical locally bijective criterion at the actual coefficient size.
-Source: Stacks 099L (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The canonical locally bijective criterion at the actual coefficient size. -/
 instance (priority := 4000) abLocallyBijective :
     (AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} W
 
-/-- The existing completed coefficient module category.
-Source: Stacks 099L (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The existing completed coefficient module category. -/
 abbrev Modules := SheafOfModules.{max u (t + 1)}
   (completedIntegralCoefficientSheafUnrestricted l E W)
 
-/-- The constant uniformizer, sent into the specified inverse limit.
-Source: Stacks 093M (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The constant uniformizer, sent into the specified inverse limit. -/
 def uniformizer :
     (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E W)).sections :=
   PresheafOfModules.sectionsMk
@@ -158,15 +160,13 @@ def uniformizer :
         (η.app U a) at hη
       exact hc.symm.trans (congrArg (c.hom.app V) hη.symm))
 
-/-- The actual constant quotient module, restricted along the limit projection.
-Source: Stacks 093M (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The actual constant quotient module, restricted along the limit projection. -/
 def residue (n : ℕ) : Modules l E W :=
   (SheafOfModules.restrictScalars
     (limit.π (integralCoefficientSheafSystem l E W) (op n))).obj
       (SheafOfModules.unit (integralCoefficientSheaf l E W n))
 
-/-- The specified projection, as a linear map from the unit.
-Source: Stacks 093M (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The specified projection, as a linear map from the unit. -/
 def projection (n : ℕ) :
     SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E W) ⟶
       residue l E W n :=
@@ -178,14 +178,12 @@ def projection (n : ℕ) :
         change (integralCoefficientSheaf l E W n).obj.map f 1 = 1
         exact map_one _))
 
-/-- The existing two-term mapping-cone Koszul complex.
-Source: Stacks 0A0E (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The existing two-term mapping-cone Koszul complex. -/
 abbrev koszul (n : ℕ) : CochainComplex (Modules l E W) ℤ :=
   principalKoszul (completedIntegralCommRingSheafUnrestricted l E W)
     (uniformizer l E W) n
 
-/-- The existing multiplication endomorphism raised to exponent n+1.
-Source: Stacks 093M (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The existing multiplication endomorphism raised to exponent n+1. -/
 abbrev multiplication (n : ℕ) :=
   endoPow (globalSectionMultiplication (completedIntegralCommRingSheafUnrestricted l E W)
     (uniformizer l E W)) (n + 1)
@@ -258,10 +256,7 @@ private lemma multiplication_apply (n : ℕ) (U : W.ProEtᵒᵖ)
       rw [hmul, ih, pow_succ, mul_assoc]
   exact hp (n + 1)
 
-/-- The actual projection kills the indicated uniformizer power.
-Source: Stacks 093M (blueprint: lem-a1-principal-koszul-strict-replacement).
-Proof: compose the constant-to-limit map with its nth projection. This is the constant
-quotient homomorphism, which kills t^(n+1); multiplication then kills every section. -/
+/-- The actual projection kills the indicated uniformizer power. -/
 theorem multiplication_projection (n : ℕ) :
     multiplication l E W n ≫ projection l E W n = 0 := by
   apply SheafOfModules.hom_ext
@@ -274,37 +269,32 @@ theorem multiplication_projection (n : ℕ) :
   change (projection l E W n).val.app U ((multiplication l E W n).val.app U x) = 0
   rw [projection_apply, multiplication_apply, map_mul, scalar_projection_zero, mul_zero]
 
-/-- The canonical cokernel comparison, fixed by the actual projection.
-Source: Stacks 093M (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The canonical cokernel comparison, fixed by the actual projection. -/
 def quotientComparison (n : ℕ) :
     principalQuotient (completedIntegralCommRingSheafUnrestricted l E W)
       (uniformizer l E W) n ⟶ residue l E W n :=
   cokernel.desc (multiplication l E W n) (projection l E W n) (multiplication_projection l E W n)
 
-/-- The quotient augmentation is zero on the shifted summand and pi_n on degree zero.
-Source: Stacks 093M (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The quotient augmentation is zero on the shifted summand and pi_n on degree zero. -/
 def augmentation (n : ℕ) : koszul l E W n ⟶
     (CochainComplex.singleFunctor (Modules l E W) 0).obj (residue l E W n) :=
   principalAugmentation (completedIntegralCommRingSheafUnrestricted l E W)
     (uniformizer l E W) n ≫
       (CochainComplex.singleFunctor (Modules l E W) 0).map (quotientComparison l E W n)
 
-/-- Total tensor with P in the first variable, using the recorded direct-sum total.
-Source: Stacks 06YM (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- Total tensor with P in the first variable, using the recorded direct-sum total. -/
 def tensorWith (P : CochainComplex (Modules l E W) ℤ) :
     CochainComplex (Modules l E W) ℤ ⥤ CochainComplex (Modules l E W) ℤ :=
   (SheafOfModules.KFlatTotalTensorModel.tensor.{t + 1, t, max u (t + 1)}
     (completedIntegralCommRingSheafUnrestricted l E W)).map₂CochainComplex.obj P
 
-/-- The source strict tower, whose successive transition is id_P tensor (t,1).
-Source: Stacks 0A0E (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The source strict tower, whose successive transition is id_P tensor (t,1). -/
 def sourceTower (P : CochainComplex (Modules l E W) ℤ) :
     ℕᵒᵖ ⥤ CochainComplex (Modules l E W) ℤ :=
   principalKoszulTower (completedIntegralCommRingSheafUnrestricted l E W)
     (uniformizer l E W) ⋙ tensorWith l E W P
 
-/-- The actual quotient map on the restricted quotient modules.
-Source: Stacks 099L (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The actual quotient map on the restricted quotient modules. -/
 def residueStep (n : ℕ) : residue l E W (n + 1) ⟶ residue l E W n where
   val :=
     { app := fun U ↦ ModuleCat.ofHom
@@ -338,17 +328,13 @@ def residueStep (n : ℕ) : residue l E W (n + 1) ⟶ residue l E W n where
         exact ConcreteCategory.congr_hom
           ((integralCoefficientSheafTransition l E W n).hom.naturality f) x }
 
-/-- The strict target tower uses actual quotient maps before any localization.
-Source: Stacks 099L (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The strict target tower uses actual quotient maps before any localization. -/
 def targetTower (P : CochainComplex (Modules l E W) ℤ) :
     ℕᵒᵖ ⥤ CochainComplex (Modules l E W) ℤ :=
   Functor.ofOpSequence (residueStep l E W) ⋙
     CochainComplex.singleFunctor (Modules l E W) 0 ⋙ tensorWith l E W P
 
-/-- Strict augmentation compatibility with adjacent quotient maps.
-Source: Stacks 093M, 0A0E (blueprint: lem-a1-principal-koszul-strict-replacement).
-Proof: on degree zero the equality is pi_(n+1) followed by q = pi_n, the limit-cone
-equation. In degree -1 both augmentations vanish. Tensor functoriality preserves it. -/
+/-- Strict augmentation compatibility with adjacent quotient maps. -/
 theorem augmentation_compatible (P : CochainComplex (Modules l E W) ℤ) (n : ℕ) :
     (sourceTower l E W P).map (homOfLE n.le_succ).op ≫
         (tensorWith l E W P).map (augmentation l E W n) =
@@ -388,22 +374,15 @@ theorem augmentation_compatible (P : CochainComplex (Modules l E W) ℤ) (n : �
   rw [← Functor.map_comp, ← Functor.map_comp]
   exact congrArg (CochainComplex.singleFunctor (Modules l E W) 0).map hq
 
-/-- The required strict tower morphism, with components id_P tensor epsilon_n.
-Source: Stacks 099L (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The required strict tower morphism, with components id_P tensor epsilon_n. -/
 def comparison (P : CochainComplex (Modules l E W) ℤ) :
     sourceTower l E W P ⟶ targetTower l E W P :=
   NatTrans.ofOpSequence (fun n ↦ (tensorWith l E W P).map (augmentation l E W n))
     (augmentation_compatible l E W P)
 
-/-- The coefficient datum and its explicit principal two-term free resolutions.
-Source: Stacks 00PD, 0657, 099L (blueprint: lem-a1-principal-koszul-strict-replacement).
-Proof: the coefficient DVR theorem gives a nonzero uniformizer generating the maximal
-ideal. Principal ideals are finitely generated, so A is Noetherian. The finite-quotient
-theorem gives every positive quotient finite. Since the extending absolute value of ell
-is less than one, ell lies in (t), killing A/(t). Multiplication by any t^(n+1) is
-injective in the domain A; its image is precisely the kernel of the quotient map.
-The resulting two-term resolution has free rank-one terms and is bounded, proving
-perfectness of every quotient. These are exactly the fields of AdicCoefficientDatum. -/
+/-- There is an adic coefficient datum on the coefficient integers with ideal generated by the
+uniformizer `t`, and multiplication by `t ^ (n + 1)` followed by the quotient map is a short exact
+sequence for every `n`. -/
 theorem coefficient_datum :
     ∃ d : AlgebraicGeometry.Scheme.AdicCoefficientDatum
         (Padic.coefficientExtensionIntegers l E),
@@ -487,13 +466,8 @@ private theorem shortExact_of_app {C : Type (t + 1)} [Category.{t} C]
   have hg : Epi K.g := (NatTrans.epi_iff_epi_app _).2 (fun U ↦ (h U).epi_g)
   exact CategoryTheory.ShortExact.reflects_shortExact_of_faithful F ⟨he⟩
 
-/-- Exactness through the specified completed projection, and the canonical quotient iso.
-Source: Stacks 093M (blueprint: lem-a1-principal-koszul-strict-replacement).
-Proof: uniformizer regularity gives injectivity on sections. The projection kernel
-consists of divisible sections, and the constant quotient surjection factors through
-completion. These three sectionwise assertions give a short exact sequence of additive
-sheaves, reflected by the faithful exact forgetful functor from module sheaves.
-Its cokernel universal property makes the specified quotient comparison invertible. -/
+/-- Multiplication by the uniformizer power followed by the projection is short exact, and the
+canonical cokernel comparison is an isomorphism. -/
 theorem completed_exact (n : ℕ) :
     (ShortComplex.mk (multiplication l E W n) (projection l E W n)
       (multiplication_projection l E W n)).ShortExact ∧
@@ -622,8 +596,7 @@ private lemma quasiIso_conjugate {A : Type*} [Category A] [Abelian A]
   rw [hf]
   infer_instance
 
-/-- The strict source-tower map induced by f tensor identity.
-Source: Stacks 06YM (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The strict source-tower map induced by f tensor identity. -/
 def sourceTowerMap {P P' : CochainComplex (Modules l E W) ℤ} (f : P ⟶ P') :
     sourceTower l E W P ⟶ sourceTower l E W P' :=
   Functor.whiskerLeft
@@ -632,8 +605,7 @@ def sourceTowerMap {P P' : CochainComplex (Modules l E W) ℤ} (f : P ⟶ P') :
     ((SheafOfModules.KFlatTotalTensorModel.tensor.{t + 1, t, max u (t + 1)}
       (completedIntegralCommRingSheafUnrestricted l E W)).map₂CochainComplex.map f)
 
-/-- The strict actual reduction-tower map induced by f tensor identity.
-Source: Stacks 06YM (blueprint: lem-a1-principal-koszul-strict-replacement). -/
+/-- The strict actual reduction-tower map induced by f tensor identity. -/
 def targetTowerMap {P P' : CochainComplex (Modules l E W) ℤ} (f : P ⟶ P') :
     targetTower l E W P ⟶ targetTower l E W P' :=
   Functor.whiskerLeft
@@ -642,13 +614,7 @@ def targetTowerMap {P P' : CochainComplex (Modules l E W) ℤ} (f : P ⟶ P') :
     ((SheafOfModules.KFlatTotalTensorModel.tensor.{t + 1, t, max u (t + 1)}
       (completedIntegralCommRingSheafUnrestricted l E W)).map₂CochainComplex.map f)
 
-/-- Naturality in the representative as an equality of strict tower morphisms.
-Source: Stacks 06YM, 099L (blueprint: lem-a1-principal-koszul-strict-replacement).
-Proof: both composites on a homogeneous tensor p tensor q send it to
-f(p) tensor epsilon(q). With a transition in place of epsilon both send it to
-f(p) tensor tau(q). Balanced tensor functoriality and total direct sums extend
-these formulas to equalities of chain maps. This works for every chain map, hence
-in particular for chain maps between the flat-term K-flat representatives above. -/
+/-- Naturality in the representative as an equality of strict tower morphisms. -/
 theorem comparison_naturality
     {P P' : CochainComplex (Modules l E W) ℤ} (f : P ⟶ P') :
     sourceTowerMap l E W f ≫ comparison l E W P' =

@@ -14,10 +14,22 @@ import Mathlib.FieldTheory.PurelyInseparable.Exponent
 /-!
 # Powers in the base after localization
 
-Source: literature/stacks-project/algebra.tex, Algebra, Section 0BR5
-(section-universal-homeomorphism), denominator-clearing input to Lemma 0BR8
-(lemma-powers) for a finite purely inseparable extension
-(blueprint: lem-weil-pbc-power-in-base-after-localization).
+Let `A' → E` be a finite extension of Noetherian domains whose fraction field extension
+`K' → L` is finite purely inseparable. After inverting a suitable nonzero `s ∈ A'`, the
+inclusion `A'[1/s] → E ⊗[A'] A'[1/s]` is surjective in characteristic zero, and in
+characteristic `p` every element of `E ⊗[A'] A'[1/s]` has a `p`-power in `A'[1/s]`.
+
+## Implementation details
+
+Choose finitely many `A'`-module generators `e_i` of `E` and a uniform exponent `N` of the
+purely inseparable extension. Writing `e_i^(q^N) = b_i / t_i` in `K'`, with
+`q = ringExpChar K'`, and taking `s = ∏ t_i`, the generators' powers lie in the localized base.
+The statement for all elements follows by span and tensor induction, since `x ↦ x^(q^N)` is
+additive. This also covers `q = 1` and `N = 0`; no normality assumption on `A'` is used.
+
+## References
+
+* Stacks Project, Algebra, Section 0BR5 and Lemma 0BR8
 -/
 
 @[expose] public section
@@ -31,19 +43,9 @@ open scoped TensorProduct
 namespace RingTheory
 
 /--
-Source: literature/stacks-project/algebra.tex, Section 0BR5, the denominator-clearing
-argument used in Lemma 0BR8; step 1 of lem-weil-pbc-power-in-base-after-localization.
-
-Choose finitely many A'-module generators of E. The finite purely inseparable field
-extension has a uniform exponent N, by Mathlib's `hasExponent_of_finiteDimensional`.
-Write each generator's q^N-th power in K' as a fraction b_i/t_i, where q = ringExpChar K'.
-The compatible maps and injectivity of E into L give the equality t_i e_i^(q^N) = b_i
-already in E. Let s be the product of the finitely many nonzero t_i. Each denominator
-is a unit in A'[1/s], since it divides s. Map the equality in E to the tensor product
-and multiply by the image of this unit's inverse to obtain the required base element.
-This works also when q=1 and N=0. Empty products are 1; no normality assumption on A'
-is used.
-(blueprint: lem-weil-pbc-power-in-base-after-localization)
+There are a nonzero `s : A'`, a finite set `g` of `A'`-module generators of `E` and an
+exponent `N` such that `(e ⊗ 1)^(q^N)` lies in the image of `A'[1/s]` for every `e ∈ g`,
+where `q = ringExpChar K'`.
 -/
 private theorem localized_generator_powers
     (A' : Type u) (K' : Type v) (E : Type w) (L : Type z)
@@ -139,28 +141,11 @@ private theorem powers_from_generators
     rw [hm, mul_pow]
 
 /--
-Source: literature/stacks-project/algebra.tex, Algebra, Section 0BR5
-(section-universal-homeomorphism), denominator-clearing input to Lemma 0BR8
-(lemma-powers) for a finite purely inseparable extension.
-
-Proof, following the node's steps:
-1. By `def-weil-finite-integral-morphism`, choose finitely many module generators
-   e_i of E. The compatible fraction-field maps embed A' and E into L.
-   By `def-pc-field-extension` and `def-weil-pbc-finite-purely-inseparable-extension`,
-   each generator lies in K' in characteristic zero, and a common p^N-th power
-   of all generators lies in K' in characteristic p. Write these elements as
-   b_i/t_i, with nonzero t_i in A', and take s to be the product of the t_i.
-   Localization embeds A'[1/s] in K' and E[1/s] in L; the displayed generators
-   or their common powers then belong to the localized base.
-2. In characteristic zero, E[1/s] is spanned by generators in A'[1/s], so the
-   canonical inclusion of the base is surjective. It is injective by step 1,
-   and hence this says E[1/s] = A'[1/s] as subrings of L.
-3. In characteristic p, write any x as a finite A'[1/s]-linear combination of
-   the e_i. Frobenius to the common power p^N distributes over this sum, and
-   each summand is in the base. Thus x^(p^N) is in the base, allowing n = N.
-4. Since s is nonzero and the maps are compatible, localization preserves
-   the fraction fields K' and L. This establishes both characteristic clauses.
-(blueprint: lem-weil-pbc-power-in-base-after-localization)
+Let `A' → E` be a finite extension of Noetherian domains with finite purely inseparable
+fraction field extension `K' → L`. There is a nonzero `s : A'` such that
+`A'[1/s] → E ⊗[A'] A'[1/s]` is surjective if `K'` has characteristic zero, and such that every
+element of `E ⊗[A'] A'[1/s]` has some `p^n`-th power in the image of `A'[1/s]` if `K'` has
+prime characteristic `p`.
 -/
 theorem power_in_base_after_localization
     (A' : Type u) (K' : Type v) (E : Type w) (L : Type z)

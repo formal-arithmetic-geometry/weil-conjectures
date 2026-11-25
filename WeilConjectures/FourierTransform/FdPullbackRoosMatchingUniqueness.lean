@@ -10,8 +10,13 @@ public import WeilConjectures.FourierTransform.PullbackCommonStrictTowerModels
 
 /-! # Uniqueness of the normalized integral pullback comparison
 
-Source: trace-definition whole-tower comparison, steps 8--10; Stacks 0941 and 099N.
-(blueprint: lem-fd-pullback-roos-matching-uniqueness). -/
+Uniqueness of the normalized integral pullback comparison in the whole-tower comparison used
+in the definition of the trace function.
+
+## References
+
+* [Stacks, Tag 0941], [Stacks, Tag 099N]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

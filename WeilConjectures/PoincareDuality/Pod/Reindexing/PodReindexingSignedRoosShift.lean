@@ -10,7 +10,14 @@ import all WeilConjectures.CategoryTheory.RoosConeCalculus.RoosConeCalculus
 
 /-! # The signed shift of the projection-normalized Roos model
 
-Source: Stacks 011G, 014E, 0941 (blueprint: lem-pod-reindexing-signed-roos-shift).
+## Implementation details
+
+The shift is obtained by regarding a strict tower as a complex in the category of towers and
+applying the native commutation of the Roos functor with shifts.
+
+## References
+
+* [Stacks: Tags 011G, 014E, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -60,17 +67,8 @@ private theorem podProductShift (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) (r : �
     rw [← piComparison_comp_π (shiftFunctor (CochainComplex A ℤ) r)]
     simp only [Category.comp_id, ← Category.assoc, IsIso.inv_hom_id, Category.id_comp])
 
-/-- The native signed Roos shift has precisely the two prescribed projection formulas.
-Source: Stacks 011G, 014E, 0941, blueprint Steps 1 and 5
-(blueprint: lem-pod-reindexing-signed-roos-shift).
-
-Proof: regard the strict tower as a complex in the category of towers. Apply the
-native Roos commutation with shifts. Its product comparison is the inverse of
-the projection-defined shift/product comparison, since their composites with
-each product projection agree. The first coordinate formula is roosShift_v;
-the second is roosShift_u and retains exactly the sign (-1)^r. Converting the
-tower presentation changes none of its objects, differentials or transitions.
-The proof applies to every integer shift and every unbounded strict tower. -/
+/-- There is a signed Roos shift satisfying the two prescribed projection formulas, the second
+with the sign `(-1)^r`. -/
 theorem podReindexingSignedRoosShift : ∃ S : PodSignedRoosShift A, S.Laws := by
   refine ⟨podNativeRoosShift, ?_, ?_⟩
   · intro C r

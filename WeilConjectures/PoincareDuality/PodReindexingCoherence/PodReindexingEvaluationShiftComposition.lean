@@ -58,9 +58,13 @@ public import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetric
 
 /-! # Evaluation and signed coherence for the reindexed Hom complex
 
-Source: blueprint `theorem-poincare-duality-frobenius--2`, proof Steps 1, 2 and 4;
-Stacks Project, Tags 0GMX, 0A8X and 08J9
-(blueprint: lem-pod-reindexing-evaluation-shift-composition).
+For an isomorphism of schemes we construct the normalized comparison of the reindexed
+derived Hom complex and prove its evaluation, transpose, naturality and signed-shift laws,
+together with its compatibility with composition, identities and Koszul symmetry.
+
+## References
+
+* Stacks Project, Tags 0GMX, 0A8X, 08J9, 07A4, 0FPI, 06YU, 06YN
 -/
 
 @[expose] public noncomputable section
@@ -271,30 +275,8 @@ private theorem composite_evaluation {A B C : Type*}
   simp only [Category.assoc]
   rw [hc', ← G.map_comp, ← G.map_comp, hc]
 
-/-- Existence of the normalized comparison and the evaluation and signed-shift laws.
-Source: blueprint dual-Tate compatibility, Steps 1, 2 and 4; Stacks 0GMX, 0A8X, 08J9
-(blueprint: lem-pod-reindexing-evaluation-shift-composition).
-
-Proof: choose flat-term K-flat and K-injective representatives using
-lem-pc-kflat-resolution and prop-pur-kinjective-resolutions-exist. Reindexing preserves
-these by lem-pod-reindexing-hom-resolution-model. Its product projections give chain,
-and its localization factorization gives derived. Reindex the total-tensor summands
-and localize them, using def-coef-ringed-tensor-hom-model, to obtain tensor.
-The chain-transpose lemma lem-sfb-hom-kflat-chain-transpose computes evaluation as
-f tensor x maps to f(x), followed by inverse localized augmentation. The terms f(d x)
-in the chain identity cancel. The two reindexed evaluations therefore coincide on
-pure tensors and hence locally on every section. Koszul symmetry gives the M-first
-formula with the same sign on each side. The closed adjunction of
-lem-sf-ringed-derived-closed-symmetric-monoidal makes uncurrying bijective, proving
-uniqueness. Uncurry the two proposed transported transposes and use tensor naturality;
-injectivity gives the transpose formula for every derived arrow. The same argument
-with precomposition in M and postcomposition in N gives naturality.
-For shifts put q=p+a and s=r+b-a. Multiply the reindexed factor by (-1)^(a*r).
-Its ratio in consecutive degrees is (-1)^a, so both terms in the Hom differential
-commute. Both routes of the reindexing square have component (-1)^(a*r) F(f^(q-a)).
-Localize using the preserved K-injective targets; the normalized source and target
-shifts are exactly the localization of this signed comparison. This proves ShiftLaws,
-including negative integers and unbounded representatives. -/
+/-- For an isomorphism `g`, there exists a normalized comparison of the reindexed Hom
+complex satisfying the evaluation laws and the signed-shift laws. -/
 theorem comparison_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -530,15 +512,7 @@ private theorem tensor_comparison_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   let e := eM.prod eN
   exact app_eq_of_iso c.tensor.hom c'.tensor.hom e (hc P L hP hL)
 
-/-- Every product-normalized comparison satisfies the evaluation laws.
-Source: Stacks 0GMX, 08J9 and blueprint dual-Tate compatibility, Step 2
-(blueprint: lem-pod-reindexing-evaluation-shift-composition).
-
-Proof: the projection and total-tensor normalizations of Comparison identify its
-representatives with those of lem-pod-reindexing-hom-resolution-model. On every pure
-tensor the two evaluations equal F(f(x)); the chain-transpose lemma and localization
-give evaluation. Closed-adjunction bijectivity proves unique; naturality of tensor
-and evaluation proves transpose and naturality by uncurrying, as in node Steps 2--5. -/
+/-- Every product-normalized comparison satisfies the evaluation laws. -/
 theorem evaluation_laws {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -557,22 +531,9 @@ theorem evaluation_laws {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     simpa only [hd, hi] using htr
   · simpa only [hd] using hn
 
-/-- The specified monoidal compositor identifies the product-Hom comparison with
-successive reindexing. The tensor equation specifies the same compositor as the
-canonical derived monoidal comparison; it is not an independent equivalence.
-Source: blueprint dual-Tate compatibility, Steps 1, 2 and 4; Stacks 0GMX, 07A4, 0FPI
-(blueprint: lem-pod-reindexing-evaluation-shift-composition).
-
-Proof: compose the site postcomposition functors, whose comparison is identity on
-underlying schemes. The finite ring maps commute, and the completed ring maps commute
-by all quotient projections. Thus restrictions give the ordinary module compositor.
-Apply it termwise and localize to give the displayed model. On pure total-tensor
-summands both routes of the tensor equation are identical. K-flat localization and
-naturality give that equation for all derived objects. This is the representative
-normalization of lem-sfb-ringed-derived-monoidal-comparisons. Apply evaluation twice
-to the successive Hom comparison and this tensor equation. The resulting arrow is
-F_h F_g(ev). Naturality of the compositor identifies it with F_gh(ev), and uniqueness
-from EvaluationLaws proves the Hom equation. This is node Step 8. -/
+/-- The specified monoidal compositor identifies the product-Hom comparison for `h ≫ g`
+with successive reindexing along `g` and `h`, compatibly with the canonical derived monoidal
+comparison. -/
 theorem composition {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X) [IsIso g] [IsIso h]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -635,15 +596,7 @@ theorem composition {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X) [IsIso g] [
   · exact hk
 
 /-- Identity reindexing gives the identity Hom and tensor comparisons under their
-canonical identity pullback identifications.
-Source: blueprint dual-Tate compatibility, Steps 1 and 2; Stacks 0GMX, 0FPI
-(blueprint: lem-pod-reindexing-evaluation-shift-composition).
-
-Proof: the site identity comparison induces the restriction map on module sections.
-Its termwise localization is the displayed derived identity. The total-tensor pure
-sections make the tensor equation the identity. The identity Hom comparison has the
-required evaluation; uniqueness in EvaluationLaws makes it the specified comparison.
-This is the identity case of node Step 8 and of the monoidal comparison lemma. -/
+canonical identity pullback identifications. -/
 theorem identity (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)]
     [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)
     (S : Closed l E X s) (T : Models l E X s S)
@@ -668,9 +621,8 @@ theorem identity (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)]
     (by intro M N; simp) k.derived (by simpa using hk) M N
   simpa only [Category.comp_id] using h
 
-/-- The one-sided flat-term representative normalization already supplied by the
-chain-transpose dependency. Source: Stacks 08J9, 06YU
-(blueprint: lem-pod-reindexing-evaluation-shift-composition). -/
+/-- The one-sided flat-term representative normalization supplied by the chain-transpose
+data. -/
 abbrev TransposeModel (W : Scheme.{u}) (s : Option ℕ)
     (S : Closed l E W s) (T : Models l E W s S) :=
   @OneKFlatChainTransposeData.{u + 1, u, u, u + 2} _ _ (ProEt.topology W) _ _
@@ -690,16 +642,7 @@ set_option maxHeartbeats 60000 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Evaluation on flat-term K-flat representatives is ordinary Hom evaluation followed
-by the inverse localized augmentation of the K-injective target. The pure formula is
-`d.uncurry_pure` applied to the identity of the actual Hom complex.
-Source: Stacks 08J9 and blueprint dual-Tate compatibility, Step 2
-(blueprint: lem-pod-reindexing-evaluation-shift-composition).
-
-Proof: apply lem-sfb-hom-kflat-chain-transpose with A=Hom(P, I) and its identity map.
-The resulting chain map is f tensor x maps to f(x), by uncurry_pure. Its transpose
-is the canonical inverse Hom resolution comparison. Postcompose by inverse Q(e)
-and use naturality in the target of the adjunction counit. This is exactly node
-Steps 1--2, with no K-flatness requirement on Hom(P, I). -/
+by the inverse localized augmentation of the K-injective target. -/
 theorem representative_evaluation (W : Scheme.{u})
     [EssentiallySmall.{u + 1} W.ProEt] (s : Option ℕ)
     (S : Closed l E W s) (T : Models l E W s S) (d : TransposeModel l E W s S T)
@@ -777,9 +720,7 @@ theorem representative_evaluation (W : Scheme.{u})
     Functor.comp_map, Prod.sectR_map, op_id] using
       uncurry_postcompose (S.adjunction (Q.obj P)) c₁.hom j (inv (Q.map e)) (Q.map ev) ht
 
-/-- The canonical Koszul symmetry data of the closed derived tensor.
-Source: Stacks 06YN, 08J9
-(blueprint: lem-pod-reindexing-evaluation-shift-composition). -/
+/-- The canonical Koszul symmetry data of the closed derived tensor. -/
 abbrev SymmetryModel (W : Scheme.{u}) (s : Option ℕ)
     (S : Closed l E W s) (T : Models l E W s S)
     (β : @SymmetricCategory (podReindexingDerived l E W s) _ S.monoidal) :=
@@ -1008,15 +949,7 @@ private theorem symmetry_base {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
         ((congrArg QX.map hchain).trans (QX.map_comp _ _)))
 
 /-- Reversing the Hom-first order to M-first order uses the same Koszul symmetry
-on both sides of the evaluation equation.
-Source: blueprint dual-Tate compatibility, Step 2; Stacks 06YN, 08J9
-(blueprint: lem-pod-reindexing-evaluation-shift-composition).
-
-Proof: on total-tensor generators the two maps swap degrees p and r and multiply
-by (-1)^(p*r). The coefficient reindexing is additive and fixes integer signs,
-so both composites coincide. Sheafification, the direct-sum total, and K-flat
-localization give the symmetry equation. Precompose the Hom-first evaluation
-formula with this symmetry; it becomes exactly the M-first formula of the node. -/
+on both sides of the evaluation equation. -/
 theorem symmetry {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

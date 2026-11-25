@@ -17,7 +17,20 @@ import Mathlib.Tactic.Ring
 /-!
 # Lifting finitely many triangular polynomial coefficients through one denominator
 
-Source: Stacks Project, proof of Tag 07BV, choosing h for all coefficients.
+Monic triangular polynomials over `k(x)` lift to monic polynomials over `k[X, T]` once a
+single nonzero `h ∈ k[X]` is inverted, with `T` mapping to `h⁻¹`.
+
+## Implementation details
+
+Every coefficient in `k(x)` is a fraction `a / s` of polynomials in `x`. Let `h` be the
+product of the finitely many denominators; writing `h = s t`, the fraction `a / s` is
+represented by `a(X) t(X) T`. The leading coefficient is kept equal to one, so the lifts are
+monic of unchanged degree.
+
+## References
+
+* Stacks Project, proof of Tag 07BV, the choice of a common denominator `h`; Tag 08JZ, the
+  localization presentation with `T` mapping to `h⁻¹`.
 -/
 
 @[expose] public section
@@ -79,25 +92,9 @@ private theorem exists_scalar_denominator_lifts
     _ = MvPolynomial.aeval x (a c) := by rw [← hteval, mul_inv_cancel₀ hhx, mul_one]
 
 /-- Monic triangular polynomials over k(x) lift to k[X,T] after inverting one
-nonzero polynomial in X; evaluation of every lifted coefficient is preserved.
-Source: Stacks Project, proof of Tag 07BV, the choice of a common denominator h;
-Tag 08JZ, the localization presentation with T mapping to inverse h
-(blueprint: lem-weil-pbc-triangular-relations-denominator-lift).
-
-Proof: Algebraic independence identifies k[X] with the subalgebra k[x]. Every
-coefficient in k(x) is a quotient of two elements of k[x] with nonzero denominator.
-There are finitely many scalar coefficients among all coefficients of all q_i.
-Choose polynomial numerators and nonzero polynomial denominators for them, and
-let h be the product of these denominators (one for the empty set). Since k[X] is
-a domain, h is nonzero. For a denominator s dividing h, write h = s t; then the
-fraction a/s is represented by a(X)t(X)T. More generally a/h^n is represented by
-a(X)T^n. Replace every scalar coefficient in every nonleading coefficient of q_i
-by such a polynomial, and shift each preceding variable j to d+1+j. Keep the
-leading coefficient exactly one. This constructs a monic p_i of unchanged degree.
-For every assignment z with first coordinates x and coordinate d equal to inverse
-h(x), each scalar lift evaluates to its original fraction. The preceding variables
-evaluate to z(d+1+j), so coefficientwise polynomial evaluation gives the stated
-map equality. For d=0 the rational function field is k; for m=0 use h=1. -/
+nonzero polynomial in X: there are a nonzero `h` and monic `p i` of the same degrees as
+`q i` such that evaluating `p i` at any point with coordinates `x`, `h(x)⁻¹` and `z` gives
+`q i` evaluated at `z`. -/
 theorem exists_triangularRelations_denominatorLift
     (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]
     (d : ℕ) (x : Fin d → K) (hx : AlgebraicIndependent k x)

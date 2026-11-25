@@ -15,8 +15,27 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Normalized identification of ordinary integral pullback
 
-Source: Bhatt--Scholze, Lemma 6.5.9(4), Remark 6.8.15; Stacks Tags 0941 and 099N(5).
-(blueprint: lem-weil-pbc-integral-pullback-identification).
+Restriction of scalars along the normalized integral coefficient comparison identifies the
+ordinary module pullback and the derived pullback with their integral-tower counterparts.
+
+## Main results
+
+- `WeilConjectures.pbc_integral_pullback_identification_exists`: existence of a
+  `PbcProperIntegralPullbackIdentification` for every morphism of schemes.
+
+## Implementation details
+
+On each finite quotient the coefficient comparison is the normalized `ULift` quotient
+isomorphism followed by the constant-sheaf comparison; passing to the limit identifies the
+completed direct-image ring maps, so restriction of scalars commutes with module direct image.
+Conjugating the two module adjunctions gives the module pullback isomorphism. The derived
+comparison is obtained from exactness of the restriction functors and the universal property of
+left derived functors.
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(4), Remark 6.8.15.
+- Stacks Project, Tags 0941, 099N, 03D2, 06YY.
 -/
 
 @[expose] public noncomputable section
@@ -347,27 +366,7 @@ private theorem derivedComparison (l : ℕ) [Fact l.Prime]
   exact ⟨b, hb⟩
 
 /-- Coefficient restriction identifies ordinary module and derived pullback, retaining
-both the adjunction-unit generators and the computation counits. This assertion
-contains no completed pullback or derived inverse limit comparison.
-
-Source: Bhatt--Scholze, Lemma 6.5.9(4), Remark 6.8.15; Stacks 03D2 and 06YY.
-(blueprint: lem-weil-pbc-integral-pullback-identification).
-
-Proof: for each finite quotient, the coefficient comparison is the normalized
-ULift quotient isomorphism followed by the constant-sheaf comparison. These commute
-with the constant-section direct-image maps. Compose with every quotient projection
-and use the limit universal property to identify the completed direct-image ring maps.
-Consequently restriction of scalars commutes with module direct image by the identity
-on underlying sections. Restriction along the inverse coefficient isomorphisms is
-inverse to the specified restriction. Conjugating the two module adjunctions gives
-the module pullback isomorphism. The unit identity for the adjunction conjugate,
-evaluated on sections, gives module_unit. The coefficient equivalences preserve
-flatness and K-flatness, since they identify tensor products and acyclic complexes.
-On flat-term K-flat representatives, compose the inverse of the actual pullback
-computation counit, the termwise module comparison, the ordinary computation counit
-and the exact restriction localization factors. These are natural isomorphisms.
-Faithful restriction along good-complex localization descends them to derivedIso;
-the defining composite gives derived_counit. Package these four fields. -/
+both the adjunction-unit generators and the computation counits. -/
 theorem pbc_integral_pullback_identification_exists
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T) :

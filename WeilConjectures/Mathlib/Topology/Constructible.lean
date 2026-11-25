@@ -15,8 +15,8 @@ A constructible set dense in an irreducible closed set `t` contains a nonempty o
 In a Noetherian space, every nonempty constructible set contains a nonempty open subset of its
 closure.
 
-The other affine-geometric facts of the blueprint subsection are in Mathlib: the spectrum of a
-finitely generated algebra over a field is Noetherian (`Algebra.FiniteType.isNoetherianRing` and
+Related facts are in Mathlib: the spectrum of a finitely generated algebra over a field is
+Noetherian (`Algebra.FiniteType.isNoetherianRing` and
 `PrimeSpectrum.instNoetherianSpace`), a Noetherian space has finitely many irreducible components
 (`TopologicalSpace.NoetherianSpace.finite_irreducibleComponents`), and the image of a constructible
 set under a morphism of finite presentation is constructible (Chevalley,
@@ -29,10 +29,10 @@ set under a morphism of finite presentation is constructible (Chevalley,
 - `exists_isOpen_inter_subset_of_isConstructible`
 - `exists_isOpen_inter_closure_subset_of_isConstructible`
 
-## Blueprint
+## Implementation details
 
-- `det-i-geometry`: dense constructible sets.
-- `lem-wf-affine-constructible-open`, clause (2): open pieces of constructible sets.
+The Noetherian hypothesis of `exists_isOpen_inter_subset_of_isConstructible` is not needed for
+the proof.
 -/
 
 @[expose] public section
@@ -64,9 +64,7 @@ theorem Topology.IsConstructible.exists_isOpen_inter_subset_or {X : Type*} [Topo
   | compl s _ h => simpa only [compl_compl, or_comm] using h
 
 /-- A constructible set `s` dense in an irreducible closed set `t` contains a nonempty open subset
-of `t`. (blueprint: `det-i-geometry`)
-
-The Noetherian hypothesis is not needed for the proof. -/
+of `t`. -/
 theorem exists_isOpen_inter_subset_of_isConstructible {X : Type*} [TopologicalSpace X]
     [TopologicalSpace.NoetherianSpace X] {s t : Set X} (hs : IsConstructible s) (_ht : IsClosed t)
     (hirr : IsIrreducible t) (hst : closure s = t) :
@@ -76,13 +74,8 @@ theorem exists_isOpen_inter_subset_of_isConstructible {X : Type*} [TopologicalSp
   have hsu : s ⊆ uᶜ := fun y hys hyu ↦ hus ⟨hyu, hst ▸ subset_closure hys⟩ hys
   exact (closure_minimal hsu hu.isClosed_compl) (hst ▸ hxt) hxu
 
-/-- Blueprint `lem-wf-affine-constructible-open`, clause (2): in a Noetherian space, a nonempty
-constructible set `s` contains a nonempty open subset of its closure.
-
-Write `closure s` as a finite union of irreducible closed sets and pick a maximal one `C`. The
-complement `Ω` of the members not containing `C` is open, and `Ω ∩ closure s` is a nonempty open
-subset of `C`. Then `s ∩ Ω` is a constructible set dense in `C`, and
-`IsConstructible.exists_isOpen_inter_subset_or` gives the open set. -/
+/-- In a Noetherian space, a nonempty constructible set `s` contains a nonempty open subset of its
+closure. -/
 theorem exists_isOpen_inter_closure_subset_of_isConstructible {X : Type*} [TopologicalSpace X]
     [TopologicalSpace.NoetherianSpace X] {s : Set X} (hs : IsConstructible s)
     (hne : s.Nonempty) :
@@ -189,9 +182,7 @@ lemma Topology.IsConstructible.image_of_isEmbedding [NoetherianSpace Y] {f : X �
   rwa [← image_comp] at h2
 
 /-- In a Noetherian space, a constructible set containing the generic point `ξ` of an
-irreducible component contains an open neighbourhood of `ξ`: it generically contains the
-component, and the complement of the other, finitely many, components is an open neighbourhood
-of `ξ` inside the component. -/
+irreducible component contains an open neighbourhood of `ξ`. -/
 theorem Topology.IsConstructible.exists_isOpen_mem_subset [NoetherianSpace X] {s : Set X}
     (hs : IsConstructible s) {ξ : X} (hξ : closure {ξ} ∈ irreducibleComponents X)
     (hξs : ξ ∈ s) : ∃ u : Set X, IsOpen u ∧ ξ ∈ u ∧ u ⊆ s := by

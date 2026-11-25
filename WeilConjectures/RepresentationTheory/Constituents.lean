@@ -30,13 +30,7 @@ are constituents of its graded pieces, and it is compatible with tensor products
 - `Representation.ConstituentsLE.of_exact`: constituents of the middle of a short exact sequence.
 - `Representation.ConstituentsLE.of_chain`: constituents of a representation with a finite
   filtration are constituents of the graded pieces.
-- `Representation.ConstituentsLE.tprod`: `ρ ≤ ρ'` implies `ρ ⊗ σ ≤ ρ' ⊗ σ`.
-
-## Blueprint
-
-- `lemma-tensor-exterior-powers-filtered-representations--3`,
-`lemma-tensor-exterior-powers-filtered-representations--1`: the constituents of a filtered
-  representation and of a tensor product.
+- `Representation.ConstituentsLE.tprod_left`: `ρ ≤ ρ'` implies `ρ ⊗ σ ≤ ρ' ⊗ σ`.
 -/
 
 @[expose] public section
@@ -145,8 +139,7 @@ variable {k : Type*} [Field k] {W : Type*} [Group W]
   {V V' V'' : Type*} [AddCommGroup V] [Module k V] [AddCommGroup V'] [Module k V']
   [AddCommGroup V''] [Module k V'']
 
-/-- Every constituent (irreducible subquotient) of `ρ` is equivalent to a constituent of `σ`.
-(blueprint: `lemma-tensor-exterior-powers-filtered-representations--3`) -/
+/-- Every constituent (irreducible subquotient) of `ρ` is equivalent to a constituent of `σ`. -/
 def ConstituentsLE (ρ : Representation k W V) (σ : Representation k W V') : Prop :=
   ∀ U S : Subrepresentation ρ, (S.subquotient U).IsIrreducible →
     ∃ U' S' : Subrepresentation σ, (S'.subquotient U').IsIrreducible ∧
@@ -238,8 +231,7 @@ theorem of_subsingleton [Subsingleton V] (ρ : Representation k W V) (σ : Repre
 
 /-- **Constituents of a filtered representation.** If `0 = F_m ≤ ⋯ ≤ F_1 ≤ F_0 = V` is a finite
 decreasing filtration by subrepresentations, every constituent of `ρ` is a constituent of one of
-the graded pieces `F_j ⧸ F_{j+1}`. (blueprint:
-`lemma-tensor-exterior-powers-filtered-representations--3`) -/
+the graded pieces `F_j ⧸ F_{j+1}`. -/
 theorem of_chain (F : ℕ → Subrepresentation ρ) (hF : ∀ j, F (j + 1) ≤ F j) (h0 : F 0 = ⊤)
     {m : ℕ} (hm : F m = ⊥) (h : ∀ j < m, ConstituentsLE ((F j).subquotient (F (j + 1))) τ) :
     ConstituentsLE ρ τ := fun U S hirr ↦ by
@@ -260,10 +252,7 @@ noncomputable def _root_.Representation.Equiv.rTensor {V₁ : Type*} [AddCommGro
     exact e.apply_apply w x
 
 /-- **Constituents of a tensor product.** If every constituent of `ρ` is a constituent of `ρ'`,
-then every constituent of `ρ ⊗ σ` is a constituent of `ρ' ⊗ σ`: a constituent of `ρ ⊗ σ` is a
-subquotient of `A ⊗ σ` for a constituent `A` of `ρ`, and `A' ⊗ σ` is a subquotient of `ρ' ⊗ σ`
-for a constituent `A'` of `ρ'`. (blueprint:
-`lemma-tensor-exterior-powers-filtered-representations--1`) -/
+then every constituent of `ρ ⊗ σ` is a constituent of `ρ' ⊗ σ`. -/
 theorem tprod_left [FiniteDimensional k V] (h : ConstituentsLE ρ σ) (τ : Representation k W V'') :
     ConstituentsLE (ρ.tprod τ) (σ.tprod τ) := by
   intro U S hirr

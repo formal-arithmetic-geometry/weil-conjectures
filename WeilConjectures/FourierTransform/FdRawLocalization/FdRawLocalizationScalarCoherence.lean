@@ -10,32 +10,13 @@ import WeilConjectures.FourierTransform.FdRawLocalization.FdRawLocalizationScala
 
 /-! # Raw localization of the specified scalar comparisons
 
-Source: trace-definition coefficient-category sentence, extracted raw localization
-argument, steps 7--8 (blueprint: lem-fd-raw-localization-scalar-coherence).
--/
+Exact semilinear raw localization of the specified inverse integral scalar comparisons, with
+their integral lift, normalized units and four-field contractions, as part of the
+coefficient-category comparison used in the definition of the trace function.
 
-@[expose] public noncomputable section
-set_option autoImplicit false
-set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
-universe d u w
-open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
-namespace WeilConjectures.FdRawLocalization
+## Implementation details
 
-variable (l : ℕ) [Fact l.Prime]
-  (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
-  (T : Scheme.{u}) [IsNoetherian T]
-  [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
-  [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
-  (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E)
-
-/-- Exact semilinear raw localization of the specified inverse integral comparison,
-with its actual integral lift, normalized units and both four-field contractions.
-Source: trace-definition final coefficient-category sentence, extracted proof steps 7--8
-(blueprint: lem-fd-raw-localization-scalar-coherence).
-
-Proof:
+The proof of `rawLocalizationScalarCoherence` proceeds as follows.
 1. Ordinary and strict scalar extension are semilinear over the coefficient inclusion.
 The source uniformizer becomes invertible in the final field. Apply semilinear scalar
 localization to b inverse and b. The raw functors fix objects and their Hom maps are
@@ -59,6 +40,25 @@ framework contraction followed by the same total j.
 their target contraction maps as well. No step uses a strict inclusion, so identity,
 partially repeated and fully repeated fields and all their unit degeneracies remain.
 -/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option synthInstance.maxSize 4096
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+universe d u w
+open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
+namespace WeilConjectures.FdRawLocalization
+
+variable (l : ℕ) [Fact l.Prime]
+  (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+  (T : Scheme.{u}) [IsNoetherian T]
+  [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+  [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+  (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E)
+
+/-- Exact semilinear raw localization of the specified inverse integral comparison,
+with its actual integral lift, normalized units and both four-field contractions. -/
 theorem rawLocalizationScalarCoherence
     (_D : FiniteFieldDatum.{d}) (_hl : l ≠ _D.p)
     (hI : ∀ E : Padic.FiniteCoefficientFields l Ω, (I l Ω T stage E).IsTriangulated)

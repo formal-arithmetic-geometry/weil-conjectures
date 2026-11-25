@@ -9,27 +9,33 @@ public import WeilConjectures.FieldTheory.BrauerScalarDefect
 import Mathlib.FieldTheory.Galois.Profinite
 import Mathlib.Tactic.Abel
 
+/-!
+# Realizing scalar Galois two-cocycles as continuous cocycles
+
+A jointly locally constant two-cocycle of `Gal(Kˢᵉᵖ/K)` with values in `(Kˢᵉᵖ)ˣ` is realized by a
+cocycle of the continuous homogeneous cochain complex of `galoisUnitsTopRep K`.
+
+## Implementation details
+
+The homogeneous cochain is `f(g₀, g₁, g₂) = g₀ (c (g₀⁻¹ g₁, g₁⁻¹ g₂))`, written additively. It is
+continuous because the Galois action on each unit is locally constant (stabilizers of algebraic
+elements are open), and it is invariant under left translation. Its differential vanishes by the
+cocycle identity for `c`, so it lifts along the kernel inclusion to a cocycle `z`, and evaluating
+at `(1, g, g h)` gives `c g h`.
+
+## References
+
+* [Stacks Project, Section 0DVG](https://stacks.math.columbia.edu/tag/0DVG)
+-/
+
 @[expose] public section
 universe u
 namespace Field
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A jointly locally constant scalar two-cocycle has a homogeneous realization.
-Proof: set f(g₀,g₁,g₂) = g₀(c(g₀⁻¹g₁,g₁⁻¹g₂)) and write its values
-additively using Additive.ofMul. The action on each fixed unit is locally
-constant, since the unit is algebraic and its stabilizer is Krull-open.
-Together with joint local constancy of c and continuous group operations,
-this makes f jointly continuous into the discrete coefficient module.
-The absolute Galois group is compact Hausdorff, so the compact-open exponential
-law curries f into the iterated continuous-map object in degree two.
-Left translation of all three coordinates applies that same translation to
-f, placing it in the invariant homogeneous cochains. At four coordinates,
-put g = g₀⁻¹g₁, h = g₁⁻¹g₂ and k = g₂⁻¹g₃. The given identity, acted on
-by g₀, is exactly the vanishing alternating homogeneous differential.
-Lift this closed cochain along the kernel inclusion to obtain z. Evaluation
-at (1,g,gh) is c(g,h), proving the requested equality. Normalization is unused.
-Source: Stacks Project, Section 0DVG, homogeneous and inhomogeneous cochains.
-(blueprint: lem-sc-brauer-scalar-defect-cocycle-realization). -/
+/-- A jointly locally constant two-cocycle `c` of the absolute Galois group of `K` with values in
+the units of the separable closure is realized by a continuous homogeneous two-cocycle `z`,
+whose inhomogeneous value at `(g, h)` is `c g h`. -/
 theorem exists_galoisUnits_cocycle_of_scalar_cocycle (K : Type u) [Field K]
     (c : (SeparableClosure K ≃ₐ[K] SeparableClosure K) →
       (SeparableClosure K ≃ₐ[K] SeparableClosure K) → (SeparableClosure K)ˣ)

@@ -34,31 +34,15 @@ affine open cover all of whose members contain all the generic points.
   quasi-separated scheme with finitely many irreducible components has a finite affine open
   cover each member of which contains all the generic points. The intersection of such a cover
   is dense by `dense_iInf_of_genericPoints_subset`.
+* `AlgebraicGeometry.exists_isCompact_opens_inf_eq_of_disjoint_closure_sdiff`: if `U ≤ V` are
+  opens of a scheme `X` with `U` quasi-compact, a quasi-compact subset of `X` disjoint from
+  `closure (V ∖ U)` is contained in a quasi-compact open which meets `V` exactly in `U`.
 
-These are the topological input to Chow's lemma (Stacks Project Tag 0200, Step 1 of the proof).
-The key geometric ingredient is
-`AlgebraicGeometry.IsAffineOpen.exists_mem_basicOpen_and_disjoint`, the scheme-theoretic form of
-Stacks Project Tag 00EV.
+## References
 
--/
-
-/-!
-# Shrinking the base of a pair of quasi-compact opens
-
-If `U ≤ V` are opens of a scheme `X` with `U` quasi-compact, a quasi-compact subset of `X`
-disjoint from `closure (V ∖ U)` is contained in a quasi-compact open which meets `V` exactly
-in `U`. This is the second opening reduction of Conrad's Theorem 2.4, Case 3 (blueprint:
-`lemma:nagata-conrad-case3-smaller-base`).
-
-The underlying topology is that the carrier of a scheme is a prespectral space, so a
-quasi-compact subset of an open subset is contained in a quasi-compact open subset of it
-(`PrespectralSpace.exists_isCompact_and_isOpen_between`).
-
-## Main results
-
-* `AlgebraicGeometry.exists_isCompact_opens_inf_eq_of_disjoint_closure_sdiff`: the
-  quasi-compact open meeting `V` in `U`.
-
+* [Stacks: Tag 0200](https://stacks.math.columbia.edu/tag/0200) (Chow's lemma, Step 1 of the
+  proof) and [Stacks: Tag 00EV](https://stacks.math.columbia.edu/tag/00EV)
+* B. Conrad, *Deligne's notes on Nagata compactifications*, Theorem 2.4, Case 3
 -/
 
 @[expose] public section
@@ -164,8 +148,7 @@ theorem exists_isAffineOpen_pairwise_disjoint [QuasiSeparatedSpace X] {s : Set X
     (hUdisj x hx y hy (Ne.symm hxy)).mono_right (hUle y hy)⟩
 
 /-- A finite set of generic points of irreducible components of a quasi-separated scheme is
-contained in an affine open: the disjoint union of the affine opens provided by
-`AlgebraicGeometry.exists_isAffineOpen_pairwise_disjoint` is affine. -/
+contained in an affine open. -/
 theorem exists_isAffineOpen_of_subset_genericPoints [QuasiSeparatedSpace X] {s : Set X}
     (hsf : s.Finite) (hs : s ⊆ genericPoints X) :
     ∃ U : X.Opens, IsAffineOpen U ∧ s ⊆ (U : Set X) := by
@@ -251,8 +234,7 @@ namespace AlgebraicGeometry
 /-- **A quasi-compact open meeting `V` exactly in `U`.** If `U ≤ V` are opens of a scheme
 `X` with `U` quasi-compact and `S` is a quasi-compact subset of `X` disjoint from
 `closure (V ∖ U)`, then there is a quasi-compact open `X₀` containing `S` and `U` with
-`X₀ ⊓ V = U`.
-(Blueprint: `lemma:nagata-conrad-case3-smaller-base`.) -/
+`X₀ ⊓ V = U`. -/
 theorem exists_isCompact_opens_inf_eq_of_disjoint_closure_sdiff
     {X : Scheme.{u}} {U V : X.Opens} (hUV : U ≤ V) (hU : IsCompact (U : Set X))
     {S : Set X} (hS : IsCompact S)

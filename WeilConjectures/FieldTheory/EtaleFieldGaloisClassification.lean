@@ -14,7 +14,20 @@ import WeilConjectures.FieldTheory.OpenSubgroupFixedField
 /-!
 # Finite separable extensions and finite continuous Galois sets
 
-Source: Stacks Project, Tags 03SF and 03QR (blueprint: lem-exc-etale-field-galois-classification).
+We show that finite separable extensions of a field `K` are classified by finite continuous
+transitive `Gal(Ksep/K)`-sets (`FieldTheory.finite_separable_extension_galois_classification`).
+
+## Implementation details
+
+Embeddings exist by extension to the separable closure, and are finite because their values on a
+basis are roots of minimal polynomials. Transitivity follows by extending an isomorphism between
+two images to an automorphism of the separable closure. For a transitive Galois set with open
+stabilizers, the fixed field of a stabilizer realizes the set as an embedding set.
+
+## References
+
+* [Stacks Project, Tag 03SF](https://stacks.math.columbia.edu/tag/03SF)
+* [Stacks Project, Tag 03QR](https://stacks.math.columbia.edu/tag/03QR)
 -/
 
 @[expose] public section
@@ -115,17 +128,11 @@ private theorem transitive_actions_equiv
 
 /-- Finite separable extensions of a field are classified by finite continuous Galois sets.
 
-Source: Stacks Project, Tags 03SF and 03QR (blueprint: lem-exc-etale-field-galois-classification).
-The proof first identifies geometric points with algebra embeddings. Embeddings exist by
-extension to the separable closure and are finite because their values on a finite basis
-are roots of minimal polynomials. Extend an isomorphism between two images to an
-endomorphism of the separable closure; algebraicity makes it invertible, proving
-transitivity. Stabilizers are fixing subgroups, which are open for finite subextensions.
-For a nonempty transitive continuous discrete action, the stabilizer of a point is open;
-its fixed field is finite separable and its embedding action has the same homogeneous
-G-set. Finally, an equivariant map is determined by one embedding. The fixed-field
-identity factors its image through that embedding and gives the unique field map.
--/
+For a finite separable extension `L/K`, the set of `K`-embeddings `L →ₐ[K] Ksep` is nonempty,
+finite, and a transitive `Gal(Ksep/K)`-set whose stabilizers are the (open) fixing subgroups of
+the images. Every nonempty finite transitive Galois set with open stabilizers is isomorphic to the
+embedding set of some finite separable subextension `E`. Finally, `K`-algebra maps `L' →ₐ[K] L`
+correspond bijectively to equivariant maps between the embedding sets. -/
 theorem finite_separable_extension_galois_classification
     (K : Type u) (Ksep : Type v) [Field K] [Field Ksep] [Algebra K Ksep]
     [IsSepClosure K Ksep]

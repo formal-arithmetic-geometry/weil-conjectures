@@ -13,27 +13,32 @@ import Mathlib.Algebra.MvPolynomial.Equiv
 /-!
 # Extending an automorphism of a separable closure
 
-Source: Stacks Project, Tag 03QW, discussion of the action on geometric stalks.
+Every `K`-automorphism of a separable closure `Ks` of `K` extends to a `K`-automorphism of any
+algebraically closed field `Ω` containing `Ks`.
+
+## Main results
+
+- `exists_algEquiv_extending_separableClosure`
+
+## Implementation details
+
+Choose a transcendence basis `B` of `Ω` over `Ks`. Acting on coefficients of `Ks[B]` and fixing
+`B` gives a ring automorphism, which extends to `Ω` since `Ω` is an algebraic closure of
+`Ks[B]`.
+
+## References
+
+* [Stacks Project, Tag 03QW](https://stacks.math.columbia.edu/tag/03QW), discussion of the
+  action on geometric stalks
 -/
 
 @[expose] public section
 
 universe u
 
-/-- Source: Stacks Project, Tag 03QW, construction of the Galois action on stalks.
-(blueprint: lem-exc-galois-automorphism-extension).
-
-Proof: The algebraic closure of K inside Omega is an algebraic closure of Ks.
-Extend g to an automorphism of it by the extension theorem for embeddings into
-an algebraic closure; the resulting endomorphism is surjective because this is
-an algebraic normal extension. Choose a transcendence basis of Omega over this
-algebraic closure. Acting on coefficients and fixing the basis gives an
-isomorphism of the rational function field. Omega is its algebraic closure,
-so this isomorphism extends to an automorphism of Omega. It fixes K, agrees
-with g on the embedded Ks, and hence has the asserted restriction. If Omega
-is algebraic over K, the transcendence basis is empty and the first extension
-already gives the result. The argument works in positive characteristic too:
-the purely inseparable part of the algebraic closure has unique extensions. -/
+/-- If `Ks` is a separable closure of `K` and `Ω` is an algebraically closed field containing
+`Ks`, then every `g ∈ Gal(Ks/K)` extends to a `K`-automorphism `τ` of `Ω`, that is,
+`τ ∘ (Ks → Ω) = (Ks → Ω) ∘ g`. -/
 theorem exists_algEquiv_extending_separableClosure
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

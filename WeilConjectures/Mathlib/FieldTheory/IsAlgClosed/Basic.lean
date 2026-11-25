@@ -149,8 +149,7 @@ end Polynomial
 
 open Polynomial in
 /-- The fraction field of the integral closure of a ring `R` in an algebraically closed field
-`K` is algebraically closed: a root `y ∈ K` of a polynomial over it has an integral multiple
-`c • y` with `c ≠ 0` in the integral closure, so `y = (c • y) / c` lies in the fraction field. -/
+`K` is algebraically closed. -/
 theorem IsFractionRing.isAlgClosed_integralClosure {R K L : Type*} [CommRing R] [Field K]
     [IsAlgClosed K] [Algebra R K] [Field L] [Algebra (integralClosure R K) L]
     [IsFractionRing (integralClosure R K) L] : IsAlgClosed L := by
@@ -181,8 +180,7 @@ open Polynomial
 variable {k : Type*} [Field k] [IsAlgClosed k]
 
 /-- Over an algebraically closed field, if the polynomial `P` has vanishing derivative, then the
-equation `P(y) - y = b` has a solution for every `b`: the polynomial `P - X - b` has derivative
-`-1`, so it is not constant and has a root. -/
+equation `P(y) - y = b` has a solution for every `b`. -/
 theorem exists_eval_sub_self_eq_of_derivative_eq_zero {P : k[X]} (hP : derivative P = 0)
     (b : k) : ∃ y, P.eval y - y = b := by
   obtain ⟨y, hy⟩ := exists_root (P - X - C b) fun h ↦ by
@@ -190,12 +188,8 @@ theorem exists_eval_sub_self_eq_of_derivative_eq_zero {P : k[X]} (hP : derivativ
     simp [hP] at this
   exact ⟨y, by simpa [sub_eq_zero] using hy⟩
 
-/-- Blueprint `proposition-p-torsion-smooth-proper-curve--2`: Artin–Schreier on algebraically closed
-fields.
-
-Over an algebraically closed field `k` of characteristic `p > 0`, the Artin–Schreier map
-`x ↦ x ^ p - x` is surjective, since `X ^ p - X - a` has derivative `-1`. Its kernel is the prime
-field `𝔽_p`, which is `Subfield.mem_bot_iff_pow_eq_self`. -/
+/-- **Artin–Schreier on algebraically closed fields.** Over an algebraically closed field `k` of
+characteristic `p > 0`, the Artin–Schreier map `x ↦ x ^ p - x` is surjective. -/
 theorem surjective_pow_sub_self (p : ℕ) [CharP k p] :
     Function.Surjective fun x : k ↦ x ^ p - x := by
   intro a
@@ -204,9 +198,7 @@ theorem surjective_pow_sub_self (p : ℕ) [CharP k p] :
 
 /-- **Finite extensions of an algebraically closed field are trivial.** If `Ω` is algebraically
 closed and `K / Ω` is a finite field extension, then `algebraMap Ω K` is bijective, i.e.
-`K = Ω`.
-
-(blueprint: `lem-pc-finite-extension-alg-closed`) -/
+`K = Ω`. -/
 theorem algebraMap_bijective_of_finite {K : Type*} [Field K] [Algebra k K] [Module.Finite k K] :
     Function.Bijective (algebraMap k K) :=
   algebraMap_bijective_of_isIntegral

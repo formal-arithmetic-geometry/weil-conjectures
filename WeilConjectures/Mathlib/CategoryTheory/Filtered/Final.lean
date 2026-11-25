@@ -26,9 +26,7 @@ open Limits
 `F : C ⥤ D` be fully faithful with `D` cofiltered, such that every object of `D` receives a
 morphism from an object in the image of `F`. Then `C` is cofiltered, `F` is initial, and for any
 `G : Dᵒᵖ ⥤ E` the colimit of `F.op ⋙ G` exists if and only if the colimit of `G` exists, in which
-case the canonical map `colim (F.op ⋙ G) ⟶ colim G` is an isomorphism.
-
-(blueprint: `lem-weil-pbc-colimit-initial-full-subcategory`) -/
+case the canonical map `colim (F.op ⋙ G) ⟶ colim G` is an isomorphism. -/
 theorem Functor.isCofiltered_initial_and_isIso_colimitPre {C D E : Type*} [Category C]
     [Category D] [Category E] (F : C ⥤ D) [IsCofiltered D] [F.Full] [F.Faithful]
     (h : ∀ d, ∃ c, Nonempty (F.obj c ⟶ d)) (G : Dᵒᵖ ⥤ E) :
@@ -40,9 +38,7 @@ theorem Functor.isCofiltered_initial_and_isIso_colimitPre {C D E : Type*} [Categ
 
 /-- **Colimits over equivalent index categories.** If `e : J ≌ K` is an equivalence and
 `w : e.functor ⋙ G ≅ F`, then there is an isomorphism `colim F ≅ colim G` whose composite with
-the coprojection `ι_k` of `F` is `w⁻¹_k ≫ ι_{e k}`.
-
-(blueprint: `lem-weil-pbc-colimit-initial-full-subcategory`) -/
+the coprojection `ι_k` of `F` is `w⁻¹_k ≫ ι_{e k}`. -/
 theorem Limits.HasColimit.exists_iso_of_equivalence {J K C : Type*} [Category J] [Category K]
     [Category C] (e : J ≌ K) {G : K ⥤ C} {F : J ⥤ C} (w : e.functor ⋙ G ≅ F) [HasColimit F]
     [HasColimit G] :

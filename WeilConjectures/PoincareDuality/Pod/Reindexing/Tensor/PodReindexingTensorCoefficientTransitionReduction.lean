@@ -15,8 +15,22 @@ import all WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientScalarModelEx
 
 /-! # Reduction square component of the normalized coefficient transition
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition-core-reduction).
+If a coefficient transition satisfies the pure-tensor section law, then its reduction square
+commutes.
+
+## Implementation details
+
+Choose a flat-term K-flat representative of `K` and its coherent quotient presentation. The
+quotient laws for `D` and `D'` identify their finite reindexing maps with the actual maps on the
+quotients, and the pure-tensor law identifies the two scalar/reindexing routes on scalar-unit
+generators; balancedness and sheafification extend this to an equality of strict systems, and
+the good-complex localization transports it to `K`. No new completion reindexing family is
+chosen. The square pasting is done in abstract categories (`reduction_cube_pasting`) so that the
+diagram algebra does not unfold the concrete derived sheaf functors.
+
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -120,8 +134,8 @@ private theorem transition_cube_descent
   rw [α.naturality, β.naturality]
   exact congrArg (fun z ↦ z ≫ (rE ⋙ sY ⋙ qL).map e.hom) (h P)
 
-/-- Paste the scalar, reindexing, and naturality squares in abstract categories,
-so the diagram algebra does not unfold the concrete derived sheaf functors. -/
+/-- Pasting the scalar, reindexing and naturality squares of a cube of functors to a common
+category gives the commutativity of the outer square. -/
 private theorem reduction_cube_pasting
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     (R : A ⥤ D) (S : B ⥤ D) (T : C ⥤ D)
@@ -282,30 +296,9 @@ private theorem good_reduction
 attribute [local irreducible] podReindexCalculus integralComparisonSequenceScalarModel
 attribute [local irreducible] integralComparisonSystemScalarPullback podScalarReduction
 
-/-- The reduction square component of a normalized coefficient transition.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition-core-reduction).
-Proof: choose a flat-term K-flat representative P of K and its whole-system
-coherent quotient presentation. The quotient-generator and quotient-transition
-laws for D and D′ identify their finite reindexing maps with the actual maps on
-these quotients. The formula hpure identifies the two scalar/reindexing routes on
-scalar-unit tensor generators. Balancedness extends this to all tensors, and
-sheafification gives equality of the maps of module sheaves. Apply this degreewise
-to P, retaining the actual quotient transition maps, to obtain equality of strict
-systems. The scalar model normalization identifies its cochain scalar counit with
-this same generator map, and its realization with the selected Roos comparison.
-Thus applying the whole-system counit to the equality of strict maps gives the
-claimed equality on P. The good-complex localization and naturality transport it
-along a K-flat resolution to K. Expanding podScalarReduction gives the displayed
-order of scalar completion, scalar realization, and counit. No choice of a new
-completion reindexing family is made: the quotient and realization laws identify
-the maps of the supplied D and D′ themselves.
-
-Edge cases: for identity reindexing or identity scalar extension this is the
-corresponding normalized identity square. The generator and localization argument
-also applies to zero complexes and to the empty scheme; it uses no nonzero section
-or nonempty-site assumption.
--/
+/-- The reduction square component of a normalized coefficient transition: if `S` satisfies the
+pure-tensor section law `hpure`, then for every derived complex `K` the scalar reduction maps
+intertwine the reduction comparisons `D.reduction` and `D'.reduction` with `S.derived`. -/
 theorem podReindexingTensorCoefficientTransition_reduction
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

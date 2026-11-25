@@ -20,9 +20,7 @@ namespace Submodule
 
 /-- **Finite-dimensional subspaces.** A subspace `W` of a `K`-vector space is finite-dimensional
 if and only if there are finitely many elements `v₁, …, vᵣ ∈ W` such that every element of `W` is
-a `K`-linear combination of them.
-
-(blueprint: `def-weil-finite-dimensional-subspace`) -/
+a `K`-linear combination of them. -/
 theorem finiteDimensional_iff_exists_finset_span_eq {K V : Type*} [DivisionRing K]
     [AddCommGroup V] [Module K V] (W : Submodule K V) :
     FiniteDimensional K W ↔ ∃ s : Finset V, ↑s ⊆ (W : Set V) ∧ span K (s : Set V) = W := by

@@ -37,18 +37,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [I
   {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
   [HasCompactification aX]
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finiteness: the global sections are perfect
-at the point. This is also blueprint `lemma-perfect-complexes-geometric-point` (Point perfectness of
-global sections), at the finite stage.
-
-Also blueprint `lemma-perfect-complexes-geometric-point`: Compact-support perfectness (compactly
-supported cohomology).
-
-**`RΓ_c(X, K)` is perfect.** Let `Λ` be a finite ring whose exponent is invertible in the
+/-- **`RΓ_c(X, K)` is perfect.** Let `Λ` be a finite ring whose exponent is invertible in the
 separably closed field `k`, `X` separated of finite type over `k` and `K ∈ Dctf(X, Λ)`. Then
-`RΓ_c(X, K)` is a perfect complex of `Λ`-modules: it is bounded with finite cohomology modules
-and of finite Tor amplitude (`lemma-perfect-complexes-geometric-point`), hence perfect over the
-Noetherian ring `Λ`. -/
+`RΓ_c(X, K)` is a perfect complex of `Λ`-modules. -/
 theorem isPerfect_compactlySupportedGlobalSections
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) :

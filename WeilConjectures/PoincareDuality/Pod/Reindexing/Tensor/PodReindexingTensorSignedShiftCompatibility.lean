@@ -56,19 +56,11 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 -- The shorter proof retains every hypothesis of the assigned statement.
 set_option linter.unusedVariables false in
-/-- Compatibility of fixed signed tensor shifts with a normalized reindexing.
+/-- Compatibility of fixed signed tensor shifts with a normalized reindexing: the reduction and
+limit comparisons of `D` commute with integer shifts, and the source and target Roos models
+satisfy the limit signed-shift identities.
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-reindexing-tensor-signed-shifts-core-compatibility-r3).
-
-Proof: the coordinate laws identify each prescribed signed Roos shift with
-its native comparison. K-injective normalization of the limit-to-Roos map
-then gives both fixed limit shift equations. The restricted generator formula,
-Roos naturality and the Roos shift law give the strict reindexing square;
-localization and LimitModel identify it with the shift square for D.limit.
-Finally, the Unit law identifies the inverse reduction comparison with the
-adjunction mate of D.limit. The shift-mate identity gives reduction compatibility.
-No boundedness or extra coefficient hypothesis is used.
+See [Stacks, Tags 07A4, 0941].
 -/
 theorem podReindexingTensorSignedShiftCompatibility
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

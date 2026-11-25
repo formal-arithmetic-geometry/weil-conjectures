@@ -14,8 +14,9 @@ The tower map induced by the chain-level model of the coherent system tensor com
 the prescribed strict tensor tower comparison: both are fixed on the total tensors of
 unit-inserted original sections.
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 03EK, 07A4, 0941
-(blueprint: stage3-pod-reindexing-coherent-tensor-roos).
+## References
+
+* Stacks 03EK, 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -51,8 +52,7 @@ set_option hygiene false in
 local notation "S[" W "]" => coefficientTotalTensor.{u, u + 1, u}
   (coefficientSequenceTopology (ProEt.topology W)) (coefficientSequenceCommRingSheaf l E W)
 
-/-- A composite of four maps of towers of complexes of sheaves of modules, on sections.
-Source: composition of natural transformations. -/
+/-- A composite of four maps of towers of complexes of sheaves of modules, on sections. -/
 theorem towerSheafHom_comp₄_apply {C : Type*} [Category C] {J : GrothendieckTopology C}
     {R : Sheaf J RingCat} {D : Type*} [Category D]
     {T₀ T₁ T₂ T₃ T₄ : D ⥤ CochainComplex (SheafOfModules R) ℤ}
@@ -63,8 +63,7 @@ theorem towerSheafHom_comp₄_apply {C : Type*} [Category C] {J : GrothendieckTo
         (((b.app n).f k).val.app U (((a.app n).f k).val.app U z))) :=
   rfl
 
-/-- The inverse of an isomorphism of towers of complexes of sheaves of modules, on sections.
-Source: composition of natural transformations. -/
+/-- The inverse of an isomorphism of towers of complexes of sheaves of modules, on sections. -/
 theorem towerSheafIso_inv_hom_apply {C : Type*} [Category C] {J : GrothendieckTopology C}
     {R : Sheaf J RingCat} {D : Type*} [Category D]
     {T₀ T₁ : D ⥤ CochainComplex (SheafOfModules R) ℤ} (e : T₀ ≅ T₁) (n : D) (k : ℤ)
@@ -74,8 +73,7 @@ theorem towerSheafIso_inv_hom_apply {C : Type*} [Category C] {J : GrothendieckTo
   exact h
 
 /-- The tower map induced by the chain-level model of the system tensor comparison sends the
-total tensor of two unit-inserted original sections to the same total tensor after reindexing.
-Source: Stacks 03EK, 07A4, 0941. -/
+total tensor of two unit-inserted original sections to the same total tensor after reindexing. -/
 theorem podCoherentTower_unitTensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (A : PodCompletionReindex l E g)
     (hA : PodCompletionReindex.RestrictedGenerators l E g A)
@@ -139,8 +137,7 @@ theorem podCoherentTower_unitTensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   exact pullbackTensorTensorTower_hom_reducedUnit l E X ((podGoodReindex l E g A).obj P).obj
     ((podGoodReindex l E g A).obj Q).obj n p q U x y
 
-/-- A composite of two maps of towers of complexes of sheaves of modules, on sections.
-Source: composition of natural transformations. -/
+/-- A composite of two maps of towers of complexes of sheaves of modules, on sections. -/
 theorem towerSheafHom_comp_apply {C : Type*} [Category C] {J : GrothendieckTopology C}
     {R : Sheaf J RingCat} {D : Type*} [Category D]
     {T₀ T₁ T₂ : D ⥤ CochainComplex (SheafOfModules R) ℤ}
@@ -150,8 +147,7 @@ theorem towerSheafHom_comp_apply {C : Type*} [Category C] {J : GrothendieckTopol
   rfl
 
 /-- The tower map induced by the chain-level model of the coherent system tensor comparison is
-the prescribed strict tensor tower comparison.
-Source: Stacks 03EK, 07A4, 0941 (blueprint: stage3-pod-reindexing-coherent-tensor-roos). -/
+the prescribed strict tensor tower comparison. -/
 theorem podCoherentTower_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

@@ -15,8 +15,19 @@ import WeilConjectures.FieldTheory.SeparablyGeneratedSeparable
 /-!
 # Making a finitely generated field extension separable
 
-Source: Stacks Project, Algebra, Lemma 030R (lemma-make-separable), first assertion
-(blueprint: lem-weil-pbc-make-separable).
+## Main results
+
+- `Algebra.exists_finite_purelyInseparable_separable_extension`: a finitely generated field
+  extension `K/k` becomes separable after finite purely inseparable extensions `k'/k` and `K'/K`.
+
+## Implementation details
+
+`FieldExtension.exists_finitePurelyInseparable_separablyGenerated` gives such `k'` and `K'` with
+`K'/k'` separably generated, and separably generated extensions are separable.
+
+## References
+
+* Stacks Project, Algebra, Lemma 030R, first assertion.
 -/
 
 @[expose] public section
@@ -26,17 +37,8 @@ universe u v
 namespace Algebra
 
 /-- A finitely generated field extension becomes separable after finite purely inseparable
-extensions of the base and of the extension field.
-Source: Stacks Project, Algebra, Lemma 030R, first assertion
-(blueprint: lem-weil-pbc-make-separable).
-
-Proof outline (the proof is deferred): apply
-`lem-weil-pbc-make-separably-generated` to the finitely generated extension.  It supplies
-fields `k'` and `K'`, the maps and scalar towers in the displayed square, finite purely
-inseparable extensions `k'/k` and `K'/K`, and a separably generated extension `K'/k'`.
-Then apply `lem-weil-pbc-separably-generated-separable` to conclude
-`Algebra.IsSeparableExtension k' K'`; the two scalar towers identify the two maps from
-`k` to `K'`, so the square commutes. -/
+extensions of the base and of the extension field: there are finite purely inseparable `k'/k`
+and `K'/K`, compatible over `k`, with `K'/k'` separable. -/
 theorem exists_finite_purelyInseparable_separable_extension
     (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]
     (hK : (⊤ : IntermediateField k K).FG) :

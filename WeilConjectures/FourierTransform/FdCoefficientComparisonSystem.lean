@@ -12,10 +12,6 @@ public import WeilConjectures.PoincareDuality.Integral.IntegralPullbackCompariso
 
 /-! # Whole-tower pullback comparison data
 
-Source: blueprint main-20261015, sec-fourier-transform/sk-def-trace,
-`def-fd-trace-function.md`, final sentence
-(blueprint: def-fd-pullback-comparison-datum).
-
 The data use the recorded raw categories and operations. No completion of their
 object sets and no arbitrary replacement comparison is introduced.
 
@@ -49,9 +45,7 @@ variable (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
 /-- The simultaneous finite-stage and common-stage pullback comparison. The compatible
 transformation field is precisely the mixed scalar square, so it includes arbitrary
-common stages, repeated stages and the actual beta maps of completed pullback.
-Source: trace-definition final sentence, proof steps 8--9
-(blueprint: def-fd-pullback-comparison-datum). -/
+common stages, repeated stages and the actual beta maps of completed pullback. -/
 structure FdPullbackSystem {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T]
     [Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)]
     [Fact (∀ t : U, IsUnit (l : U.presheaf.stalk t))]
@@ -82,9 +76,7 @@ structure FdPullbackSystem {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T]
         ((finite P.stage).rational.hom.app K))
 
 /-- The coefficient and scheme comparisons are simultaneous over every allowed scheme.
-The realization data retain all the normalized whole-diagram composition/scalar equations.
-Source: trace-definition final sentence, proof steps 1--9
-(blueprint: def-fd-pullback-comparison-datum). -/
+The realization data retain all the normalized whole-diagram composition/scalar equations. -/
 structure FdCoefficientComparisonSystem where
   realization : IntegralComparisonSystem.{u} l
   realization_coherent : ∀ (E L : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L),

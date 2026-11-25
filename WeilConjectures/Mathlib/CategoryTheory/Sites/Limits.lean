@@ -27,7 +27,7 @@ open Limits
 functor into presheaves preserves finite limits as soon as all its composites with the
 evaluations do; (2) the inclusion of sheaves into presheaves preserves finite limits; (3) when
 sheafification exists, the counit of the sheafification adjunction is an isomorphism at every
-sheaf. (blueprint: `situation-conventions`) -/
+sheaf. -/
 theorem presheaf_finiteLimits_objectwise {C : Type*} [Category* C] (J : GrothendieckTopology C)
     (A : Type*) [Category* A] [HasFiniteLimits A] :
     (∀ V : Cᵒᵖ, PreservesFiniteLimits ((evaluation Cᵒᵖ A).obj V)) ∧
@@ -39,10 +39,8 @@ theorem presheaf_finiteLimits_objectwise {C : Type*} [Category* C] (J : Grothend
   ⟨fun _ ↦ inferInstance, fun Φ h ↦ preservesFiniteLimits_of_evaluation Φ h, inferInstance,
     fun _ ↦ inferInstance⟩
 
-/-- **Sheafification is exact.** The inclusion of sheaves into presheaves preserves all limits
-(limits of sheaves are computed sectionwise, e.g. kernels), and sheafification preserves finite
-limits and, being a left adjoint, all colimits. Applied to `A = Ab` this is the exactness of
-sheafification of abelian presheaves. (blueprint: `situation-conventions`) -/
+/-- **Sheafification is exact.** The inclusion of sheaves into presheaves preserves all limits,
+and sheafification preserves finite limits and all colimits. -/
 theorem sheafToPresheaf_preservesLimits_and_presheafToSheaf_exact {C : Type*} [Category* C]
     (J : GrothendieckTopology C) (A : Type*) [Category* A] [HasSheafify J A] [HasFiniteLimits A] :
     PreservesLimits (sheafToPresheaf J A) ∧ PreservesFiniteLimits (presheafToSheaf J A) ∧

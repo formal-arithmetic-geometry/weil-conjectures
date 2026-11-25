@@ -14,8 +14,13 @@ import Mathlib.Tactic.CategoryTheory.Slice
 
 /-! # Total-limit composition for section-normalized ordinary reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 0941. -/
+We show that, for section-normalized ordinary reindexing, the total-limit comparisons are
+compatible with composition of isomorphisms (`podReindexingCompositionLimit`).
+
+## References
+
+* Stacks Project, Tags 03EL, 0941
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -83,30 +88,11 @@ private theorem localize_composition_models
   simp only [Category.assoc, ← DerivedCategory.Q.map_comp]
   rw [hr]
 
-/-- The total-limit equation, on arbitrary ambient coefficient systems.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 0941 (blueprint: lem-pod-reindexing-composition-limit-equation).
-
-Proof: represent a coefficient system by a strict complex C. RestrictedGenerators
-identifies the comparison between reindexing its restricted tower and restricting
-its sequence pullback with the actual sectionwise adjunction-unit map. The unit
-normalization of the strict sequence compositor makes the two iterated restricted
-maps equal, including their transition morphisms. The ordinary compositor is fixed
-on all original sections by hcomposition. Apply every product projection to the
-product maps in the three Roos comparisons: both composite paths are restriction
-along this same Over.mapComp arrow. RoosFst and RoosSnd then give equality on both
-coordinates of the mapping cocone of 1-s, hence equality of the entire chain maps.
-The intermediate source/target Roos models are identified using their computes
-normalization on a simultaneous K-injective resolution. Naturality extends this
-identification to C, so these model isomorphisms cancel in the pasted square.
-Substitute the three LimitModel formulas and localize the strict square. The
-localization factors are natural and their composition comparison is precisely
-the one in A.compositionDerived and integralComparisonSystemComposition.
-Every derived system is isomorphic to a localized complex; naturality transports
-the resulting equality to it. No finite evaluation is treated as faithful.
-For the zero complex or an empty scheme the same projection and coordinate
-formulas apply. This statement assumes no tensor law and proves no reduction
-or tensor composition equation. -/
+/-- If the completion reindexings of `A` satisfy their laws and the compositors of `A` are given
+on sections by restriction along `Over.mapComp`, then the total-limit comparisons of `A` are
+compatible with composition: for isomorphisms `h`, `f` and every derived coefficient system `N`,
+the two composite comparisons of `A.compositionDerived` and `integralComparisonSystemComposition`
+agree. -/
 theorem podReindexingCompositionLimit
     (A : PodReindexFamily l E)
     (hcompletion : ∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]

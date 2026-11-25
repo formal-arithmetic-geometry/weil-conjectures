@@ -32,10 +32,7 @@ universe u v
 
 /-- **Finitely many finite separable extensions embed into one finite Galois extension.**
 If `L₁, …, Lₙ` are finite separable field extensions of `k`, there is a finite Galois extension
-`M / k` together with `k`-algebra maps `Lᵢ →ₐ[k] M`. We take for `M` the normal closure, inside
-a separable closure of `k`, of the compositum of the images of the `Lᵢ`.
-
-(blueprint: `lem-weil-pbc-finite-galois-receiving-separable-extensions`) -/
+`M / k` together with `k`-algebra maps `Lᵢ →ₐ[k] M`. -/
 theorem exists_finiteDimensional_isGalois_algHom_of_isSeparable {k : Type u} [Field k] {n : ℕ}
     (L : Fin n → Type v) [∀ i, Field (L i)] [∀ i, Algebra k (L i)]
     [∀ i, FiniteDimensional k (L i)] [∀ i, Algebra.IsSeparable k (L i)] :
@@ -80,9 +77,7 @@ theorem Normal.isPurelyInseparable_fixedField [Normal F E] :
   have hpos := minpoly.natDegree_pos (hN.isIntegral (x : E))
   rw [← hmin]; omega
 
-/-- If `E / F` is normal, then `E` is Galois over the fixed field of `Aut(E/F)`. For `x ∈ E`, the
-polynomial `∏ (X - y)` over the distinct roots `y ∈ E` of the minimal polynomial of `x` over `F`
-is separable and has coefficients fixed by `Aut(E/F)`. -/
+/-- If `E / F` is normal, then `E` is Galois over the fixed field of `Aut(E/F)`. -/
 theorem Normal.isGalois_fixedField [Normal F E] :
     IsGalois (fixedField (⊤ : Subgroup Gal(E/F))) E := by
   classical
@@ -123,9 +118,7 @@ theorem Normal.isGalois_fixedField [Normal F E] :
 /-- **A normal extension is Galois over a purely inseparable subextension.** Let `E / F` be a
 normal (algebraic) extension and `E_insep = {x ∈ E | σ x = x for all σ ∈ Aut(E/F)}`, the
 intermediate field `fixedField ⊤` (so a subfield of `E` containing `F`). Then `E_insep / F` is
-purely inseparable and `E / E_insep` is Galois, i.e. separable and normal.
-
-(blueprint: `lem-weil-pbc-normal-extension-purely-inseparable-then-galois`) -/
+purely inseparable and `E / E_insep` is Galois, i.e. separable and normal. -/
 theorem Normal.isPurelyInseparable_fixedField_and_isGalois [Normal F E] :
     IsPurelyInseparable F (fixedField (⊤ : Subgroup Gal(E/F))) ∧
       IsGalois (fixedField (⊤ : Subgroup Gal(E/F))) E :=

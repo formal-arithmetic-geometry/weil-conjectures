@@ -10,8 +10,19 @@ public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerived
 
 /-! # The generator formula of the transported system tensor comparison
 
-Source: Stacks 03EL and 07A4.
-(blueprint: lem-pod-reduction-reindex-strict-tensor).
+We compute the transported system tensor comparison on pure tensor generators.
+
+## Main statements
+
+* `systemChain_generator`: the transported system tensor comparison sends the inverse-image
+  unit of a pure tensor to the tensor of the two inverse-image units.
+
+## References
+
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
+* [Stacks Project, Tag 06YN](https://stacks.math.columbia.edu/tag/06YN)
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public noncomputable section
@@ -51,8 +62,7 @@ open MonoidalCategory
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Total-tensor generators are natural for restriction of sections.
-Source: Stacks 03EK and 06YN. -/
+/-- Total-tensor generators are natural for restriction of sections. -/
 theorem coefficientTensorGenerator_restrict
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u + 1}]
@@ -99,8 +109,7 @@ end TotalTensor
 
 -- The transported comparison is unfolded through two equality transports.
 /-- The transported system tensor comparison sends the inverse-image unit of a pure tensor to
-the tensor of the two inverse-image units.
-Source: Stacks 03EL and 07A4. -/
+the tensor of the two inverse-image units. -/
 theorem systemChain_generator {X Y : Scheme.{u}} (g : X ⟶ Y)
     (A B : CochainComplex (coefficientSequenceModules l E Y) ℤ) (p q k : ℤ) (hpq : p + q = k)
     (V : ℕ × Y.ProEt) (x : (A.X p).val.obj (op V)) (y : (B.X q).val.obj (op V)) :

@@ -15,8 +15,13 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Derived.PodReindexingDeriv
 
 /-! # Localization of the normalized strict reindexing comparisons
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-derived-comparisons).
+We package the derived reindexing comparisons along an isomorphism of schemes, state their
+localization laws, and show that the strict comparisons descend to derived comparisons satisfying
+all laws except pullback normalization.
+
+## References
+
+* Stacks 03EL, 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -47,13 +52,10 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (SY : PodSignedRoosShift (scalarReductionSource l E Y))
   (SX : PodSignedRoosShift (scalarReductionSource l E X))
 
-/-! # Core data and normalized laws for derived reindexing comparisons
+/-! ### Core data and normalized laws for derived reindexing comparisons -/
 
-Source: blueprint Steps 1 and 5 (blueprint: lem-pod-reindexing-derived-comparisons).
--/
-
-/-- Quotient normalization on local scalar-tensor generators.
-Source: blueprint Step 1 (blueprint: lem-pod-reindexing-derived-comparisons). -/
+/-- The quotient comparisons `β` send each local scalar-tensor generator `a ⊗ x` to the
+generator formed from the reindexed scalar `a` and the section `x`. -/
 def podReindexingQuotientGenerators
     (β : ∀ (P : CochainComplex (scalarReductionSource l E Y) ℤ),
       integralOperationsGoodComplex l E Y P → ∀ n : ℕ,
@@ -74,8 +76,7 @@ def podReindexingQuotientGenerators
           (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom.app
             (op U) a) x
 
-/-- Compatibility with each consecutive quotient arrow.
-Source: blueprint Step 1 (blueprint: lem-pod-reindexing-derived-comparisons). -/
+/-- The quotient comparisons `β` are compatible with each consecutive quotient transition. -/
 def podReindexingQuotientTransition
     (β : ∀ (P : CochainComplex (scalarReductionSource l E Y) ℤ),
       integralOperationsGoodComplex l E Y P → ∀ n : ℕ,
@@ -93,8 +94,7 @@ def podReindexingQuotientTransition
         ((isoReductionIntegralComplex l E g).obj P) n).f i).val.app (op U))
           ((((β P hP (n + 1)).hom.f i).val.app (op U)) z)
 
-/-- The derived comparisons to be descended from the strict comparisons.
-Source: blueprint Steps 1 and 5 (blueprint: lem-pod-reindexing-derived-comparisons). -/
+/-- The derived reindexing comparisons along `g` to be descended from the strict comparisons. -/
 structure PodReindexingDerivedData where
   /-- Reindex the strict coherent reduction system. -/
   reduction : (podReindexCalculus l E Y).reduction ⋙
@@ -123,8 +123,8 @@ structure PodReindexingDerivedData where
   pullback : integralDerivedPullback l E g ≅ (podReindexCalculus l E Y).reduction ⋙
     integralComparisonDerivedSequencePullback l E g ⋙ coefficientSequenceLimit l E X
 
-/-- Assemble the strict chain maps and the derived comparisons without choosing any data.
-Source: blueprint Steps 1 and 5 (blueprint: lem-pod-reindexing-derived-comparisons). -/
+/-- Assemble strict reindexing data, quotient comparisons, completion isomorphisms and derived
+comparisons into a completion reindexing datum. -/
 def PodReindexingDerivedData.assemble
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (S : PodReindexingStrictData l E g)
@@ -154,9 +154,7 @@ def PodReindexingDerivedData.assemble
   restricted := S.restricted
   pullback := R.pullback
 
-/-- The localization assertions except pullback normalization.
-Source: blueprint Steps 1 and 5 (blueprint: lem-pod-reindexing-derived-comparisons).
--/
+/-- The localization laws for assembled derived comparisons, except pullback normalization. -/
 def PodReindexingDerivedData.CoreLaws
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (S : PodReindexingStrictData l E g)
@@ -176,9 +174,8 @@ def PodReindexingDerivedData.CoreLaws
   PodCompletionReindex.FiniteModel l E g D ∧
   PodCompletionReindex.LimitModel l E g D
 
-/-- The full localization assertions, including pullback normalization.
-Source: blueprint Steps 1 and 5 (blueprint: lem-pod-reindexing-derived-comparisons).
--/
+/-- The full localization laws for assembled derived comparisons, including pullback
+normalization. -/
 def PodReindexingDerivedData.Laws
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (S : PodReindexingStrictData l E g)
@@ -199,9 +196,9 @@ def PodReindexingDerivedData.Laws
   PodCompletionReindex.LimitModel l E g D ∧
   PodCompletionReindex.PullbackNormalization l E g D
 
-/-- The core package of derived comparisons, omitting only pullback normalization.
-Source: blueprint Steps 1 and 5; strict quotient, evaluation and Roos-limit descent.
-(blueprint: lem-pod-reindexing-derived-comparisons-core) -/
+/-- Given strict reindexing data satisfying its laws and quotient comparisons `β` normalized
+on generators and compatible with the quotient transitions, there are derived reindexing
+comparisons satisfying all localization laws except pullback normalization. -/
 theorem podReindexingDerivedComparisonsCore
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

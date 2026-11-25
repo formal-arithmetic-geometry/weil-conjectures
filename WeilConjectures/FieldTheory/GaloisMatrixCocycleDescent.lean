@@ -20,17 +20,27 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 /-!
 # Descending a splitting with a genuine Galois matrix cocycle
 
-Source: Stacks Project, Tag 03R7, injectivity via general-linear descent.
-(blueprint: lem-sc-galois-matrix-cocycle-descent)
+We show that a split algebra whose splitting carries a genuine (scalar-free) Galois matrix cocycle
+is isomorphic to a matrix algebra over the base field
+(`Field.exists_algHom_matrix_of_galois_cocycle`).
+
+## Implementation details
+
+By matrix Hilbert 90 the cocycle is a coboundary of some invertible matrix `t`; conjugating the
+splitting by `t` makes the images of `D` Galois-fixed. Their entries then lie in `K`, injectivity
+follows from faithful scalar extension, and surjectivity from equality of dimensions.
+
+## References
+
+* [Stacks Project, Tag 03R7](https://stacks.math.columbia.edu/tag/03R7)
 -/
 
 @[expose] public section
 universe u
 namespace Field
 open scoped TensorProduct
-/-- A splitting whose base-algebra images have fixed entries descends to the base field.
-The entries have unique base-field preimages. Injectivity follows from faithful scalar
-extension, and surjectivity follows from equality of finite dimensions. -/
+/-- If a splitting `e : K^sep ⊗[K] D ≃ Mₙ(K^sep)` has Galois-fixed images `e (1 ⊗ a)` for all
+`a : D`, then there is a bijective `K`-algebra map `D →ₐ[K] Mₙ(K)`. -/
 private theorem fixed_matrix_descent (K : Type u) [Field K]
     (D : Type u) [Ring D] [Algebra K D] (n : ℕ)
     (e : (SeparableClosure K ⊗[K] D) ≃ₐ[SeparableClosure K]
@@ -96,9 +106,9 @@ private def matrixConjugation (K : Type u) [Field K] (n : ℕ)
     rw [mul_assoc, Algebra.commutes r t.val, ← mul_assoc, ← Units.val_mul,
       inv_mul_cancel, Units.val_one, one_mul]
 
-/-- The descent construction produces a bijective algebra homomorphism over the base.
-The proof is the matrix Hilbert 90 and finite Galois descent argument from Stacks Tag 03R7.
-(blueprint: lem-sc-galois-matrix-cocycle-descent) -/
+/-- Galois descent for matrix algebras: if a splitting `e : K^sep ⊗[K] D ≃ Mₙ(K^sep)` has a
+locally constant family of matrix lifts `b` of the Galois action satisfying the cocycle identity
+`b g * g(b h) = b (g * h)`, then there is a bijective `K`-algebra map `D →ₐ[K] Mₙ(K)`. -/
 theorem exists_algHom_matrix_of_galois_cocycle (K : Type u) [Field K]
     (D : Type u) [Ring D] [Algebra K D] (n : ℕ)
     (e : (SeparableClosure K ⊗[K] D) ≃ₐ[SeparableClosure K]

@@ -16,7 +16,21 @@ public import Mathlib.RingTheory.Localization.Algebra
 
 import WeilConjectures.FieldTheory.TriangularFieldModelReconstructionBijective
 
-/-! # Unique localized coefficients for a triangular monic quotient -/
+/-! # Unique localized coefficients for a triangular monic quotient
+
+## Implementation details
+
+Bijectivity of the bounded-monomial reconstruction map over `D = k[X][1/h]` is supplied by
+`triangularFieldModel_reconstruction_bijective`; its inverse gives the coordinates. Evaluation
+at `y` factors through the quotient, and its restriction to `D` agrees with `phi` by the
+universal property of localization. No algebraic independence is needed, and the coordinates
+are over `D`, not a finite basis over `k`.
+
+## References
+
+* Stacks Project, Algebra, proof of Tag 07BV (the triangular monic quotient before embedding it
+  in the generated field), and Tag 08JZ (localization presentation).
+-/
 
 @[expose] public section
 
@@ -24,32 +38,10 @@ universe u v
 
 namespace FieldTheory
 
-/-- Successive monic division gives unique coefficients in the explicit localization.
-Source: Stacks Project, Algebra, proof of Tag 07BV (the triangular monic quotient
-before embedding it in the generated field), and Tag 08JZ (localization presentation).
-(blueprint: lem-weil-pbc-triangular-field-model-localized-normal-form).
-
-Proof: Set R = k[X] and D = R[1/h]. Identify the quotient by hT-1 with D
-using the localization presentation. At stage i, regard the polynomial ring on
-its first d+1+i variables modulo the preceding equations as the coefficient ring;
-adjoining the next variable and quotienting by p_i is AdjoinRoot of the mapped
-polynomial. Mapping preserves monicity. If e_i is positive, the leading
-coefficient stays one and its degree stays e_i. The power basis of this monic
-quotient has exponents below e_i. Inductively multiply these bases with the
-previous D-basis and reindex the product by dependent exponent tuples. The
-base case m=0 is D with its one-element basis. Splitting off the last variable
-and the quotient universal property identify this iterated quotient with the
-simultaneous ideal-of-list quotient. Restrict the D-linear coordinate equivalence
-to k and identify finitely supported functions with functions on the finite
-exponent set. This gives nf. Evaluation at y factors through the simultaneous
-quotient by hzero. Its restriction to D is phi: the maps agree on R by hphi,
-and the localization universal property determines the inverse of h. The
-identifications hyx, hyt and hyb therefore evaluate each power-basis monomial
-to the corresponding product of powers of b_i. Applying this evaluation map
-to the finite basis expansion proves the formula. If some e_i=0, monicity
-makes p_i=1; hzero would give 1=0 in K, so eliminate this impossible case.
-No algebraic independence is needed. In particular this is a basis over D,
-not a finite basis over k. -/
+/-- Successive monic division gives unique coefficients in the explicit localization: there
+is a `k`-linear equivalence `nf` from the triangular quotient to functions on bounded exponent
+tuples with values in `k[X][1/h]`, such that evaluation at `y` of any `q` equals
+`∑ₐ phi (nf q a) * ∏ᵢ bᵢ ^ aᵢ`. -/
 theorem triangularFieldModel_localized_normal_form
     (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]
     (d : ℕ) (x : Fin d → K) (m : ℕ) (b : Fin m → K)

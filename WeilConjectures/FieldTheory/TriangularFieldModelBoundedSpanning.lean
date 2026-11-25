@@ -15,7 +15,18 @@ import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 
 /-! # Bounded monomial spanning for triangular quotients
 
-Source: Stacks Project, Algebra, proofs of Tags 07BV and 08JZ.
+## Implementation details
+
+The quotient by `hT - 1` is identified with `k[X][1/h]` via the localization presentation,
+and `psi` with its canonical map. The span of the bounded monomials is shown to be stable
+under multiplication by every variable: a power `yᵢ ^ eᵢ` is rewritten using the monic
+relation `pᵢ`, whose coefficients involve only earlier variables, so the argument proceeds by
+strong induction on `i`. If some `eᵢ = 0`, monicity makes `pᵢ = 1` and the quotient is zero.
+No field evaluation is used.
+
+## References
+
+* Stacks Project, Algebra, proofs of Tags 07BV and 08JZ.
 -/
 
 @[expose] public section
@@ -182,22 +193,8 @@ private theorem triangularFieldModel_bounded_mul
         simpa only [smul_eq, mul_assoc] using S.smul_mem r hz
   exact stable j.val j rfl (v a) (Submodule.subset_span ⟨a, rfl⟩)
 
-/-- Bounded monomials span the triangular quotient.
-Source: Stacks Project, Algebra, proofs of Tags 07BV and 08JZ.
-(blueprint: lem-weil-pbc-triangular-field-model-bounded-spanning).
-
-Proof: Identify the quotient by hT-1 with D=k[X][1/h] via the localization
-presentation. Agreement on k[X] identifies psi with its canonical map. Split
-off the last tower variable and identify the simultaneous quotient with the
-successive monic quotients by the universal maps fixing every variable. Divide
-an arbitrary representative by the mapped last monic polynomial. Its remainder
-has degree below e_i, and represents the same quotient class. Inductively
-expand each remainder coefficient in earlier bounded monomials. Collecting
-coefficients gives the displayed expansion indexed by all bounded exponent
-tuples. The base case m=0 is the localization presentation and its single
-coefficient. If h=0 both rings are zero. If some e_i=0, monicity makes p_i=1,
-so the quotient is zero; its zero element is represented by the unique function
-on the empty exponent set. The argument needs no field evaluation. -/
+/-- Bounded monomials span the triangular quotient over `k[X][1/h]`: every element `q` can be
+written as `∑ₐ psi (c a) * ∏ᵢ yᵢ ^ aᵢ` with `aᵢ < eᵢ`. -/
 theorem triangularFieldModel_bounded_spanning
     (k : Type u) [Field k] (d m : ℕ) (h : MvPolynomial (Fin d) k)
     (p : (i : Fin m) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k))

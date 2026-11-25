@@ -12,8 +12,12 @@ import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingCompa
 
 /-! # Core comparison data for reindexing
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 2; Stacks 0GMX, 0A8X, 08J9.
-(blueprint: lem-pod-reindexing-comparison-core).
+Proves `comparison_core_exists`: the comparison data `Comparison` exists for reindexing along an
+isomorphism of schemes.
+
+## References
+
+* Stacks Project, Tags 0GMX, 0A8X, 08J9
 -/
 
 @[expose] public noncomputable section
@@ -28,18 +32,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /--
-The normalized tensor and Hom comparison data exists for reindexing along a scheme
-isomorphism.  This is the construction of all fields of `Comparison`, before the
-evaluation equation is imposed.
-
-Source: blueprint dual-Tate compatibility, Steps 1 and 2; Stacks 0GMX and 0A8X
-(blueprint: lem-pod-reindexing-comparison-core).
-
-Proof: combine the product-Hom comparison and derived resolution model with the
-sectionwise tensor comparison.  Totalize the pure-tensor maps, descend them through
-the localization on independent K-flat representatives, and use the recorded
-K-injective model equations.  The resulting maps satisfy every field of
-`Comparison`, including the projection and model normalizations.
+The normalized tensor and Hom comparison data `Comparison` exists for reindexing along a scheme
+isomorphism `g`, before the evaluation equation is imposed.
 -/
 theorem comparison_core_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

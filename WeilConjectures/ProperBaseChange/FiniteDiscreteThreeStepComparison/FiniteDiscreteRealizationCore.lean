@@ -17,10 +17,20 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
 /-! # The finite discrete coefficient realization and three-step comparisons
 
-The realization functor and the three-step diagram comparisons, split out of
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteRealizationFunctor`
-so that they do not import the bounded
-constructible six functors.
+We define comparisons of three-step factorizations of arrows, which identify the composite
+arrows, and the realization functor from bounded-below derived étale sheaves with finite
+discrete coefficients to derived internal modules on the pro-étale site.
+
+## Main definitions
+
+* `FiniteDiscreteThreeStepComparison`: isomorphisms between two three-step diagrams.
+* `AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteRealization`: the realization
+  functor.
+
+## Implementation details
+
+This file is kept separate from the bounded constructible six functors so that it does not
+import them.
 -/
 
 @[expose] public section
@@ -62,12 +72,7 @@ noncomputable def FiniteDiscreteThreeStepComparison.arrowIso
     simp only [Category.assoc]
     rw [h.third, reassoc_of% h.second, reassoc_of% h.first])
 
-/-- The three commuting squares identify their composite arrows.
-Source: Mathlib `Arrow.isoMk`
-(blueprint: lem-weil-pbc-three-step-arrow-comparison).
-
-Proof. Reassociate and substitute the third, second and first square equations.
-Use the endpoint isomorphisms in Arrow.isoMk. -/
+/-- The three commuting squares identify their composite arrows. -/
 theorem FiniteDiscreteThreeStepComparison.nonemptyArrowIso
     {C : Type*} [Category C] {A0 A1 A2 A3 B0 B1 B2 B3 : C}
     {a : A0 ⟶ A1} {b : A1 ⟶ A2} {c : A2 ⟶ A3}
@@ -109,8 +114,7 @@ theorem FiniteDiscreteFactoredComparison.nonemptyArrowIso
 
 namespace ExchangeChain
 
-/-- A comparison retaining its two diagrams as arguments.
-(blueprint: def-weil-pbc-three-step-chain-comparison). -/
+/-- A three-step comparison between the diagrams of two exchange chains. -/
 def Comparison {C : Type*} [Category C] (s t : ExchangeChain C) :=
   FiniteDiscreteThreeStepComparison s.first s.second s.third t.first t.second t.third
 
@@ -164,12 +168,8 @@ instance : (finiteDiscreteRealization B T E).Full := by
   have : V.Full := finiteDiscreteEtaleRealization_full B T
   exact inferInstanceAs (V ⋙ D(E.functor)).Full
 
-/-- A sheaf in the underived realization has its single complex in the derived
-realization's essential image. This is purely functorial and needs no descent theorem.
-(blueprint: lem-weil-pbc-finite-discrete-single-realization)
-
-Proof. Put the etale sheaf in degree zero, commute each of the two exact functors
-with the single-complex functor, and apply the supplied sheaf isomorphism. -/
+/-- If a module lies in the essential image of the underived realization, then the complex
+concentrated in degree zero on it lies in the essential image of the derived realization. -/
 theorem finiteDiscreteRealization_single
     (M : FiniteDiscreteInternalModules B T)
     (hM : (ν^*(T)[ModuleCat.{u + 1} (ULift.{u + 1} B)] ⋙ E.functor).essImage M) :

@@ -139,14 +139,18 @@ import Mathlib.CategoryTheory.Abelian.FunctorCategory
 
 /-! # Ordinary pullback of the principal Koszul tower
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0G7E and 07A4;
-sites-modules.tex, Tag 03EL; homology.tex, Tag 02MZ
-(blueprint: lem-a1-pulled-koszul-tower-chain-comparison).
+This file concerns the chain-level comparison for the ordinary pullback of the principal Koszul
+tower.
 
-The natural number n denotes the positive exponent n+1. The normalization is the
-existing equation on both Koszul basis vectors and every local coefficient b.
-The generators and normalization belong to the independent definition module
-PulledKoszulTowerNormalization, with no import of the downstream comparison theorem.
+## Implementation details
+
+The natural number `n` denotes the positive exponent `n + 1`. The normalization is the
+equation on both Koszul basis vectors and every local coefficient `b`. The generators and the
+normalization live in `PulledKoszulTowerNormalization`, which does not import the comparison.
+
+## References
+
+* Stacks Project, Tags 0G7E, 07A4, 03EL, 02MZ
 -/
 
 @[expose] public noncomputable section

@@ -12,8 +12,18 @@ import Mathlib.FieldTheory.PurelyInseparable.Tower
 /-!
 # Separable tensor purely inseparable field extensions
 
-Source: literature/stacks-project/algebra.tex, Lemma Tag 07QH (blueprint:
-lem-weil-pbc-separable-tensor-purely-inseparable-field)
+The tensor product of a separable algebraic extension `k'/k` with a finite purely inseparable
+extension `L/k` is a field, finite and purely inseparable over `k'`.
+
+## Implementation details
+
+Fieldness follows from the common-overfield criterion and linear disjointness of separable and
+purely inseparable subfields. Pure inseparability follows from a Frobenius-power argument, and
+base change preserves finiteness and dimension.
+
+## References
+
+* Stacks Project, Algebra, Lemma Tag 07QH
 -/
 
 @[expose] public section
@@ -28,12 +38,6 @@ open scoped TensorProduct
 The tensor product of a separable algebraic field extension with a finite purely
 inseparable extension is a field and is finite purely inseparable over the first
 field, with the expected dimension.
-
-Source: literature/stacks-project/algebra.tex, Lemma Tag 07QH, proof first
-paragraph (blueprint: lem-weil-pbc-separable-tensor-purely-inseparable-field).
-The common-overfield criterion and linear disjointness of separable and purely
-inseparable images prove fieldness. A Frobenius-power argument proves pure
-inseparability, and base change preserves finiteness and dimension.
 -/
 theorem separableTensor_purelyInseparable_isField
     (k : Type u) (k' : Type v) (L : Type w) [Field k] [Field k'] [Field L]

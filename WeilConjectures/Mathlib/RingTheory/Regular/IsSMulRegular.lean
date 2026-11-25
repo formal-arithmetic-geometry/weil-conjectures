@@ -26,8 +26,7 @@ open IsLocalRing
 variable {R M : Type*} [CommRing R] [AddCommGroup M] [Module R M] [IsNoetherianRing R]
 
 /-- Over a noetherian local ring `R`, if the maximal ideal is not an associated prime of the
-finite module `M`, some element of the maximal ideal is `M`-regular (prime avoidance).
-(blueprint: `lem-weil-pbc-nonzerodivisor-if-maximal-not-associated`) -/
+finite module `M`, some element of the maximal ideal is `M`-regular. -/
 theorem exists_mem_maximalIdeal_isSMulRegular [IsLocalRing R] [Module.Finite R M]
     (h : maximalIdeal R ∉ associatedPrimes R M) :
     ∃ x ∈ maximalIdeal R, IsSMulRegular M x := by
@@ -52,7 +51,7 @@ theorem Module.eq_zero_of_forall_associatedPrimes {m : M}
   exact hs (hle (by simpa [Submodule.mem_colon_singleton] using hsm))
 
 /-- Over a noetherian ring, a module embeds into the product of its localizations at its
-associated primes. (blueprint: `lem-weil-pbc-module-injects-localizations-associated-primes`) -/
+associated primes. -/
 theorem Module.injective_pi_localizedModule_associatedPrimes :
     Function.Injective (LinearMap.pi fun p : associatedPrimes R M ↦
       LocalizedModule.mkLinearMap p.1.primeCompl M) := by

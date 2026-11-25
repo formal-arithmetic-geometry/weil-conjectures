@@ -29,6 +29,13 @@ dimension `[L : K] ^ 2`.
 - `CrossedProduct.finrank_eq`: it has dimension `[L : K] ^ 2`.
 - `IsQuasiAlgClosed.exists_mul_eq_of_galois_cocycle`: over a `C₁` field every Galois 2-cocycle
   is a coboundary, i.e. `H²(Gal(L/K), Lˣ) = 0`.
+
+## Implementation details
+
+For `IsQuasiAlgClosed.exists_mul_eq_of_galois_cocycle`: over a `C₁` field the crossed product,
+being central simple of dimension `[L : K] ^ 2`, is a matrix algebra `M_n(K)` with `n = [L : K]`.
+On its simple module `Kⁿ`, which is a line over `L`, the basis elements `u_σ` act by scalars
+`c_σ` that split `f`.
 -/
 
 @[expose] public section
@@ -318,11 +325,7 @@ end CrossedProduct
 
 open CrossedProduct in
 /-- Over a quasi-algebraically closed (`C₁`) field `K`, every inhomogeneous 2-cocycle of a finite
-Galois extension `L / K` with values in `Lˣ` is a coboundary: `H²(Gal(L/K), Lˣ) = 0`. The crossed
-product is a central simple `K`-algebra of dimension `[L : K] ^ 2`, hence a matrix algebra
-`M_n(K)` with `n = [L : K]`; on its simple module `Kⁿ`, which is a line over `L`, the basis
-elements `u_σ` act by scalars `c_σ` that split `f`.
-(blueprint: `lemma-cohomology-multiplicative-group--7`, crossed product step) -/
+Galois extension `L / K` with values in `Lˣ` is a coboundary: `H²(Gal(L/K), Lˣ) = 0`. -/
 theorem IsQuasiAlgClosed.exists_mul_eq_of_galois_cocycle (K L : Type u) [Field K] [Field L]
     [Algebra K L] [FiniteDimensional K L] [IsGalois K L] [IsQuasiAlgClosed K]
     (f : (L ≃ₐ[K] L) → (L ≃ₐ[K] L) → Lˣ)

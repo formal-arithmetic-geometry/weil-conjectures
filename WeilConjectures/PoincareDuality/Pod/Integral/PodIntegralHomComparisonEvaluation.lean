@@ -9,13 +9,17 @@ public import WeilConjectures.PoincareDuality.Derived.DerivedAutomorphismHomEval
 
 /-! # Evaluation square of the integral pullback Hom comparison
 
-Source: Stacks Project, Tag 0GMX; blueprint main-20261015
-theorem-poincare-duality-frobenius--2, Steps 8--11
-(blueprint: stage3-derived-automorphism-continuation-a-integral-evaluation).
+We prove the evaluation field of `podIntegralHomComparison_laws`
+(`podIntegralHomComparison_evaluation`).
 
-The evaluation field of `podIntegralHomComparison_laws`. It is formal: the
-comparison is defined as a transpose, and evaluation is the inverse transpose
-of the identity.
+## Implementation details
+
+The proof is formal: the comparison is defined as a transpose, and evaluation is the inverse
+transpose of the identity.
+
+## References
+
+* [Stacks Project, Tag 0GMX](https://stacks.math.columbia.edu/tag/0GMX)
 -/
 
 @[expose] public noncomputable section
@@ -32,14 +36,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
-/-- Evaluation component of the integral pullback Hom compatibility.
-Source: Stacks 0GMX; node lem-pod-derived-automorphism-hom-evaluation, steps 8--11.
-Proof: for any `f : L ⟶ H(Q)`, parameter naturality of the transposition gives
-`transpose (T(f,1) ≫ ev_Q) = f ≫ transpose ev_Q = f`, so `T(f,1) ≫ ev_Q` is the
-inverse transpose of `f`. Apply this to `c_P`, which is by definition the
-transpose of `μ⁻¹ ≫ F(ev_P)`: then `T(c_P,1) ≫ ev = μ⁻¹ ≫ F(ev_P)`, and
-precomposing with `μ` cancels `μ⁻¹`.
-(blueprint: stage3-derived-automorphism-continuation-a-integral-evaluation). -/
+/-- The evaluation component of the integral pullback Hom compatibility: the pullback tensor
+comparison, followed by the Hom comparison tensored with the identity and evaluation, equals the
+pullback of evaluation. -/
 theorem podIntegralHomComparison_evaluation :
     ∀ P : (constructibleIntegralHomPairs l E Y).FullSubcategory,
       (canonicalIntegralPullbackTensor l E g

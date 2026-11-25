@@ -10,8 +10,18 @@ import Mathlib.Tactic.CategoryTheory.Slice
 
 /-! # Reduction composition from total-limit composition
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5.
-The proof uses injectivity of the adjunction Hom equivalence and the Unit law. -/
+We show that the composition law for the total-limit comparisons of a reindexing family
+implies the composition law for its reduction comparisons.
+
+## Implementation details
+
+The proof is formal: invert each reduction isomorphism, take adjunction transposes, and use
+the unit compatibility laws, naturality of the compositors, and injectivity of the adjunction
+Hom equivalence. No evaluation faithfulness, constructibility or tensor law is used.
+
+## References
+
+* Stacks 03EL, 0941 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -100,22 +110,10 @@ private theorem composition_mates
 
 end CompositionMates
 
-/-- Composition for reduction follows from composition for total limit.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 0941 (blueprint: lem-pod-reindexing-composition-reduction-equation).
-
-Proof: invert each reduction isomorphism. Unit compatibility identifies its
-adjunction transpose with ordinary reindexing of the source unit followed by
-the limit comparison. Transpose the inverse composite reduction map at Z.
-Naturality of the h-limit map moves the f-reduction inverse across it. The
-f-unit equation combines the two source-unit factors. Substitute hlimit and
-cancel the system compositor with its inverse. Naturality of the ordinary
-compositor moves the remaining unit past that compositor. The composite-unit
-equation and naturality of the Z-unit identify the result with the transpose
-of the other inverse reduction map. The adjunction Hom equivalence is injective,
-so the inverse reduction maps are equal. Inverting gives the desired equation.
-This is formal for arbitrary ambient objects; it uses no evaluation faithfulness,
-constructibility, tensor law, or additional normalization assumption. -/
+/-- For a reindexing family whose completion data satisfy the completion laws, the
+total-limit composition equation `hlimit` implies the composition equation for the reduction
+isomorphisms: for isomorphisms `h : Z ⟶ W`, `f : W ⟶ V`, the reduction comparison of `h ≫ f`
+agrees with the composite of those of `f` and `h`, up to the ordinary and system compositors. -/
 theorem podReindexingCompositionReduction
     (A : PodReindexFamily l E)
     (hcompletion : ∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]

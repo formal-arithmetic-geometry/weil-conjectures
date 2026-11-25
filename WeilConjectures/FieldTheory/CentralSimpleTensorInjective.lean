@@ -12,6 +12,24 @@ public import Mathlib.Algebra.Azumaya.Defs
 import WeilConjectures.Mathlib.Algebra.Central.TensorProduct
 import Mathlib.RingTheory.TwoSidedIdeal.Operations
 
+/-!
+# Injectivity of `A ⊗ Aᵐᵒᵖ ⟶ End_K(A)` for central simple algebras
+
+## Main results
+
+- `Field.centralSimple_mulLeftRight_injective`: for a central simple algebra `A` over `K`, the
+  map `A ⊗[K] Aᵐᵒᵖ → End_K(A)`, `a ⊗ op(b) ↦ (v ↦ a * v * b)`, is injective.
+
+## Implementation details
+
+The tensor product of a simple algebra with a central simple algebra is simple; the injectivity
+follows since the kernel is a proper two-sided ideal.
+
+## References
+
+* Stacks Project, Tag 074I (Lemma 11.4.10) and Tag 074G (Lemma 11.4.8).
+-/
+
 @[expose] public section
 
 universe u
@@ -111,18 +129,8 @@ private lemma simple_tensor_of_central
     IsSimpleRing.one_mem_of_ne_zero_mem _ hf ((TwoSidedIdeal.mem_comap i.toRingHom).mpr hxI)
   exact I.eq_top (by simpa using ((TwoSidedIdeal.mem_comap i.toRingHom).mp h1))
 
-/-- Injectivity of the enveloping map for a finite-dimensional central simple algebra.
-
-Proof: taking the opposite preserves finite dimension, centrality and simplicity.
-Stacks Tag 074G therefore makes `A ⊗[K] Aᵐᵒᵖ` simple. The kernel of the unital
-algebra homomorphism `a ⊗ op(b) ↦ (v ↦ a * v * b)` is a two-sided ideal, so it is
-zero or the whole domain. It cannot be the whole domain: the map sends one to the
-identity endomorphism of the nonzero algebra A, and that endomorphism is not zero
-(evaluate it at one). Thus its kernel is zero. If two elements have the same image,
-their difference belongs to this zero kernel, so the elements are equal.
-Source: Stacks Project, Tag 074I, Lemma 11.4.10, proof; tensor simplicity in
-Tag 074G, Lemma 11.4.8.
-(blueprint: lem-sc-central-simple-tensor-end-injective). -/
+/-- For a central simple algebra `A` over `K`, the map `A ⊗[K] Aᵐᵒᵖ → End_K(A)`,
+`a ⊗ op(b) ↦ (v ↦ a * v * b)`, is injective. -/
 theorem centralSimple_mulLeftRight_injective (K : Type u) [Field K] (A : CSA.{u, u} K) :
     Function.Injective (AlgHom.mulLeftRight K A) := by
   have : IsSimpleRing (TensorProduct K A Aᵐᵒᵖ) := simple_tensor_of_central

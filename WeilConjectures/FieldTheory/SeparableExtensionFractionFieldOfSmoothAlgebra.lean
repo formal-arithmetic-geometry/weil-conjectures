@@ -14,9 +14,18 @@ import WeilConjectures.RingTheory.SmoothAtGenericPointOverField
 /-!
 # A separable extension as the fraction field of a smooth algebra
 
-Source: Stacks Project, Algebra, Lemma Tag 037X (lemma-localization-smooth-separable),
-implication “separable => localization of a smooth k-algebra” (blueprint:
-lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra).
+A finitely generated separable field extension `K/k` is the fraction field of a smooth
+`k`-subalgebra of `K`.
+
+## Implementation details
+
+The proof chooses a finite-type domain with fraction field `K`, applies smoothness at the generic
+point, and then localizes at a nonzero element.
+
+## References
+
+* Stacks Project, Algebra, Lemma Tag 037X, implication "separable implies localization of a
+  smooth `k`-algebra"
 -/
 
 @[expose] public section
@@ -29,12 +38,6 @@ namespace FieldTheory
 and separable. There is a `k`-subalgebra `B` of `K` such that `k → B` is smooth and `K` is the
 fraction field of `B` (`IsFractionRing B K`: every element of `K` is `b/b'` with `b, b' ∈ B`,
 `b' ≠ 0`).
-Source: Stacks Project, Algebra, Lemma Tag 037X (lemma-localization-smooth-separable),
-implication “separable => localization of a smooth k-algebra”.
-(blueprint: lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra). The proof first
-chooses a
-finite-type domain with fraction field `K`, applies smoothness at the generic point, and then
-localizes at a nonzero element.
 -/
 theorem exists_smooth_subalgebra_fraction_field
     {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K]

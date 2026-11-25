@@ -17,8 +17,9 @@ good representatives, to two strict statements: a system-level identification of
 coherent system tensor comparison with an actual chain map `σ`, and an equation of
 strict tensor towers.
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4, 08TC, 0941
-(blueprint: stage3-pod-reindexing-coherent-tensor-roos).
+## References
+
+* Stacks Project, Tags 07A4, 08TC, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +39,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Every Roos model of the total limit gives the reference total-limit/Roos comparison.
-Source: Stacks 08TC, 0941 (blueprint: stage3-pod-reindexing-coherent-tensor-roos). -/
+/-- Every Roos model of the total limit gives the reference total-limit/Roos comparison. -/
 theorem podLimitRoos_eq_pullbackTensorLimitRoos (W : Scheme.{u})
     (ρ : IntegralComparisonRoosModel l E W)
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) :
@@ -47,8 +47,7 @@ theorem podLimitRoos_eq_pullbackTensorLimitRoos (W : Scheme.{u})
   exact (ScalarExtensionTower.roosBridge_eq l E W ρ C).symm
 
 /-- On good representatives, the tensor realization is the defining comparison followed
-by the inverse reference Roos model.
-Source: Stacks 07A4, 0941 (blueprint: stage3-pod-reindexing-coherent-tensor-roos). -/
+by the inverse reference Roos model. -/
 theorem podReindexingTensorModel_hom_app_good (W : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) :
     (podReindexingTensorModel l E W).hom.app
@@ -61,8 +60,8 @@ theorem podReindexingTensorModel_hom_app_good (W : Scheme.{u})
   unfold podReindexingTensorModel pullbackTensorIntegralTensorModel
   exact hPQ
 
-/-- The categorical pasting behind `podReindexing_tensor_roos_of_strict`.
-Source: Stacks 07A4, 08TC, 0941 (blueprint: stage3-pod-reindexing-coherent-tensor-roos). -/
+/-- A categorical pasting lemma: under the listed commutativity, retraction and factorization
+hypotheses, `F dYh ≫ δ_U ≫ LX w₁ ≫ LX w₂ ≫ dXi ≫ Tf ≫ cX = F cY ≫ fac ≫ roosAll`. -/
 theorem coherentTensorRoos_paste {DY DX SY SX TW : Type*} [Category* DY] [Category* DX]
     [Category* SY] [Category* SX] [Category* TW]
     (F : DY ⥤ DX) (LY : SY ⥤ DY) (LX : SX ⥤ DX) (G : SY ⥤ SX) (δ : LY ⋙ F ⟶ G ⋙ LX)
@@ -122,8 +121,7 @@ theorem coherentTensorRoos_paste {DY DX SY SX TW : Type*} [Category* DY] [Catego
   simp only [← F.map_comp_assoc, Iso.inv_hom_id, F.map_id, Category.id_comp]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The inverse form of `podReindexingTensorModel_hom_app_good`.
-Source: Stacks 07A4, 0941 (blueprint: stage3-pod-reindexing-coherent-tensor-roos). -/
+/-- The inverse form of `podReindexingTensorModel_hom_app_good`. -/
 theorem podReindexingTensorModel_inv_app_good (W : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) :
     (podReindexingTensorModel l E W).inv.app
@@ -134,8 +132,7 @@ theorem podReindexingTensorModel_inv_app_good (W : Scheme.{u})
     Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The reference total-limit/Roos comparison is natural in the coherent complex.
-Source: Stacks 08TC, 0941 (blueprint: stage3-pod-reindexing-coherent-tensor-roos). -/
+/-- The reference total-limit/Roos comparison is natural in the coherent complex. -/
 theorem pullbackTensorLimitRoos_naturality (W : Scheme.{u})
     {C C' : CochainComplex (coefficientSequenceModules l E W) ℤ} (f : C ⟶ C') :
     (pullbackTensorLimitRoos l E W C).hom ≫

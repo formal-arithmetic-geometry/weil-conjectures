@@ -15,11 +15,14 @@ import WeilConjectures.SmoothPurity.PrimitiveCounit.PrimitiveCounitEvaluation
 import WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientPullbackModelExistence
 import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingGoodComplex
 
-/-! Existence of the raw comparison maps for the derived reindexing core.
+/-! # Existence of the raw comparison maps for the derived reindexing core
 
-The construction assembles the strict quotient, finite evaluation, and normalized
-Roos-limit comparisons.  The five normalization laws are separate obligations.
-(blueprint: lem-pod-reindexing-derived-core-data-existence) -/
+## Implementation details
+
+The construction assembles the strict quotient, finite evaluation and normalized Roos-limit
+comparisons: the induced derived reduction, finite evaluation and restriction maps, the
+normalized total-limit comparison, the two normalized Roos models, and the induced pullback
+comparison. The five normalization laws are separate obligations. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -69,15 +72,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (SY : PodSignedRoosShift (scalarReductionSource l E Y))
   (SX : PodSignedRoosShift (scalarReductionSource l E X))
 
-/-- The strict quotient and normalized limit constructions provide all raw maps.
-
-The proof follows the construction in the strict comparison and coefficient
-calculus nodes: take the induced derived reduction, finite evaluation and
-restriction maps, the normalized total-limit comparison, and the two normalized
-Roos models, together with the induced pullback comparison.  No normalization
-law is asserted here; those five laws are the separate split obligations used by
-the core theorem.
-(blueprint: lem-pod-reindexing-derived-core-data-existence) -/
+/-- Given strict reindexing data along `g` satisfying its laws and quotient comparisons `β`,
+there exist raw derived core comparison data along `g`. No normalization law is asserted. -/
 theorem podReindexingDerivedCoreData_exists
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
