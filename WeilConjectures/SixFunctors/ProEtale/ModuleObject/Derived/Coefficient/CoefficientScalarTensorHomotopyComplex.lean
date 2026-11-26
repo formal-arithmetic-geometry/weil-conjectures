@@ -21,7 +21,6 @@ with the quotient and prolonged-functor objects in their native presentations.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedSectionVars false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 open scoped CategoryTheory.Obj ChangeOfRings
@@ -45,6 +44,8 @@ attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.
   Localization.Monoidal.tensorBifunctor
 
 -- Compare the homotopy and complex presentations of the same tensor counit face.
+-- Keep the section instances as hypotheses of the public alias of this statement.
+set_option linter.unusedSectionVars false in
 /-- The general derived tensor counit equation on internal complex representatives. -/
 private theorem coefficientScalarTensor_homotopyComplex_private (Z : Scheme.{u})
     (P Q : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :

@@ -457,7 +457,6 @@ private instance finiteScalarPoint_mon (n : ℕ) : IsMonHom (finiteScalarPoint l
   unfold finiteScalarPoint
   infer_instance
 
-set_option linter.style.haveILetI false in
 private theorem finiteScalarPoint_square (n : ℕ) :
     IntegralModelsStacks.scalarPointMap l E ≫
         (IntegralConstantModel.pointComparison l E).inv.hom ≫
@@ -467,18 +466,18 @@ private theorem finiteScalarPoint_square (n : ℕ) :
         finiteScalarPoint l E n := by
   let A := Padic.coefficientExtensionIntegers l E
   let B := Padic.coefficientExtensionRing l E (n + 1)
-  letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let tB : TopologicalSpace B := inferInstance
   have hB : @IsTopologicalRing B tB _ := inferInstance
   let tA : TopologicalSpace A := by
     letI := spectralNorm.normedField (Padic l) E
     infer_instance
-  letI : TopologicalSpace A := tA
+  let : TopologicalSpace A := tA
   have : IsTopologicalRing A := by
-    letI := spectralNorm.normedField (Padic l) E
+    let := spectralNorm.normedField (Padic l) E
     infer_instance
-  letI : TopologicalSpace B := tB
-  letI : IsTopologicalRing B := hB
+  let : TopologicalSpace B := tB
+  have : IsTopologicalRing B := hB
   let f := Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
   let g : Profinite.continuousCoefficientRingObj A ⟶
       Profinite.continuousCoefficientRingObj B :=

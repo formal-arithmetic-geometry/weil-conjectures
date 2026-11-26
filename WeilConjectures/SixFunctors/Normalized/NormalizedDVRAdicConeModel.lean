@@ -74,7 +74,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
-set_option linter.style.haveILetI false
 universe d t u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ZeroObject ChangeOfRings
@@ -188,8 +187,8 @@ private theorem flatScalar_exact
     rw [ShortComplex.exact_iff_evaluation]
     intro U
     exact (ShortComplex.ab_exact_iff_function_exact _).2 (hexact U)
-  letI : PreservesFiniteLimits (tensorRight N) := hflat.1
-  letI : PreservesFiniteColimits (tensorRight N) := hflat.2
+  have : PreservesFiniteLimits (tensorRight N) := hflat.1
+  have : PreservesFiniteColimits (tensorRight N) := hflat.2
   let e := regularTensorIso N
   have he (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections) :
       (tensorRight N).map ((scalar R t).app A) ≫ e.hom = e.hom ≫ (scalar R t).app N := by
@@ -215,7 +214,7 @@ private structure FiniteFlatModel (j : ℕ) (L : normalizedDVRDerived l E X j) w
 
 private theorem finite_flat_representative (j : ℕ)
     (L : normalizedDVRDerived l E X j) : Nonempty (FiniteFlatModel l E X j L) := by
-  letI := HasDerivedCategory.standard (normalizedDVRModules l E X j)
+  let := HasDerivedCategory.standard (normalizedDVRModules l E X j)
   let G := DerivedCategory.Q.objPreimage L
   obtain ⟨P, q, hk, hflat, hq, _⟩ :=
     CochainComplex.exists_isKFlatResolutionIndependentCoefficients
@@ -235,8 +234,8 @@ private theorem finite_flat_representative_map (j : ℕ)
       DerivedCategory.Q.map g ≫
           (normalizedDVRModuleRes l E X j.le_succ).mapDerivedCategoryFactors.inv.app A.P ≫
           (normalizedDVRRes l E X j.le_succ).map A.iso.hom = B.iso.hom ≫ f := by
-  letI := HasDerivedCategory.standard (normalizedDVRModules l E X j)
-  letI := HasDerivedCategory.standard (normalizedDVRModules l E X (j + 1))
+  let := HasDerivedCategory.standard (normalizedDVRModules l E X j)
+  let := HasDerivedCategory.standard (normalizedDVRModules l E X (j + 1))
   let F := normalizedDVRModuleRes l E X j.le_succ
   let Y := DerivedCategory.Q.objPreimage L'
   let eY : DerivedCategory.Q.obj Y ≅ L' := DerivedCategory.Q.objObjPreimageIso L'
@@ -322,8 +321,8 @@ private theorem completedRestrictionComp_fac {m n : ℕ} (h : n ≤ m)
     DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso
         (completedRestrictionComp l E X D hl h) (.up ℤ)).hom.app P) ≫
       (completedIntegralRestrictScalars l E X D hl n).mapDerivedCategoryFactors.inv.app P := by
-  letI := HasDerivedCategory.standard (normalizedDVRModules l E X n)
-  letI := HasDerivedCategory.standard (normalizedDVRModules l E X m)
+  let := HasDerivedCategory.standard (normalizedDVRModules l E X n)
+  let := HasDerivedCategory.standard (normalizedDVRModules l E X m)
   let F := normalizedDVRModuleRes l E X h
   let G := completedIntegralRestrictScalars l E X D hl m
   let H := completedIntegralRestrictScalars l E X D hl n
@@ -470,9 +469,9 @@ private theorem modelTower_exact (T : NormalizedDVRTower l E X D hl) (a b : ℕ)
       ((finiteModel l E X D hl T j).P.X i) ((finiteModel l E X D hl T j).flat i)
     let F := SheafOfModules.restrictScalars.{max u (t + 1)}
       (completedIntegralCoefficientProjection l E X D hl j)
-    letI : PreservesFiniteLimits F :=
+    have : PreservesFiniteLimits F :=
       completedRestrictionLimits l E X D hl j
-    letI : PreservesFiniteColimits F :=
+    have : PreservesFiniteColimits F :=
       completedRestrictionColimits l E X D hl j
     have he' := he.map F
     refine (ShortComplex.exact_iff_of_iso ?_).1 he'
@@ -507,8 +506,8 @@ private theorem modelTowerIso_successor (T : NormalizedDVRTower l E X D hl) (j :
         (homOfLE (Nat.succ_le_succ j.le_succ)).op) ≫ (modelTowerIso l E X D hl T j).hom =
       (modelTowerIso l E X D hl T (j + 1)).hom ≫
         (normalizedDVRTowerTransition l E X D hl j.le_succ).app T.tower := by
-  letI := HasDerivedCategory.standard (normalizedDVRModules l E X j)
-  letI := HasDerivedCategory.standard (normalizedDVRModules l E X (j + 1))
+  let := HasDerivedCategory.standard (normalizedDVRModules l E X j)
+  let := HasDerivedCategory.standard (normalizedDVRModules l E X (j + 1))
   have hfac := completedRestrictionComp_fac l E X D hl j.le_succ
     (finiteModel l E X D hl T j).P
   apply (cancel_mono (T.evaluationIso j).hom).1
@@ -572,11 +571,11 @@ private theorem completed_exact_products :
 
 private theorem completed_derived_products :
     Nonempty (HasLimitsOfShape (Discrete ℕ) (completedIntegralDerivedCategory l E X D hl)) := by
-  letI : CountableAB4Star (completedIntegralModuleSheaves l E X D hl) :=
+  have : CountableAB4Star (completedIntegralModuleSheaves l E X D hl) :=
     completed_exact_products l E X D hl
   obtain ⟨hP, _⟩ := derivedCategory_countableProducts_core.{0}
     (completedIntegralModuleSheaves l E X D hl)
-  letI := hP
+  have := hP
   exact ⟨inferInstance⟩
 
 /-- A strict normalized adic complex model and the bounded-free cone computation
@@ -647,7 +646,7 @@ theorem normalizedDVR_adic_cone_model
                 (T.evaluationIso n).hom := by
   classical
   let hprod := (completed_derived_products l E X D hl).some
-  letI := hprod
+  have := hprod
   refine ⟨Scalar l E X, inferInstance, inferInstance, hprod,
     scalarUniformizer l E X, modelTower l E X D hl T,
     modelTower_normalized l E X D hl T, modelTowerIso l E X D hl T,

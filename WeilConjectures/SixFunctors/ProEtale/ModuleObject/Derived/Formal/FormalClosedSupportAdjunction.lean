@@ -339,7 +339,6 @@ private theorem supportTriangle {Z U X : Scheme.{u}}
   rw [h₁, h₃] at h
   exact h.symm
 
-set_option linter.unusedVariables false in
 /-- Sections with closed support, all four clauses, for arbitrary condensed coefficients.
 The Hom-complex clause uses global abelian-group-valued Hom, on K-injective targets.
 The last clause describes the fibre without selecting a cone in a triangulated category:
@@ -376,7 +375,7 @@ theorem formal_closed_support_adjunction
             (p q : ℤ) (hpq : p + n = q),
             (((e.hom.f n).hom f).v p q hpq) =
               a.homEquiv (A.X p) (I.X q) (f.v p q hpq)) ∧
-      Exists fun [hclosed : PreservesFiniteColimits (lowerStar Λ i)] ↦
+      Exists fun [_hclosed : PreservesFiniteColimits (lowerStar Λ i)] ↦
         ∃ (b : (lowerStar Λ i).mapDerivedCategory ⊣
             (formalClosedSupport Λ i j).rightDerivedFunctor)
           (c : (formalSupportPullback Λ j).mapDerivedCategory ⊣

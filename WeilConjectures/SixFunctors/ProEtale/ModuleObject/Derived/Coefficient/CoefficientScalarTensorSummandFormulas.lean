@@ -20,7 +20,6 @@ The proved private formulas expose the scalar and total comparison summands.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedSectionVars false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 open scoped CategoryTheory.Obj ChangeOfRings
@@ -43,6 +42,7 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R Z)]
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S Z)]
 
+omit [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))] in
 private theorem scalar_total_summand (Z : Scheme.{u})
     (d : CoefficientScalarTensorRepresentativeBasicData a Z)
     (P Q : CochainComplex (ModuleRingedComparison.modules R Z) ℤ)
@@ -64,6 +64,8 @@ private theorem scalar_total_summand (Z : Scheme.{u})
   exact HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX
     (Functor.OplaxMonoidal.δNatTrans d.b.extension) (.up ℤ) P Q p q n hpq
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- Naturality of a termwise comparison on a tensor summand. -/
 theorem coefficientScalarTensor_summandNaturality (Z : Scheme.{u})
     (F₁ : ModuleRingedComparison.internalModules R Z ⥤

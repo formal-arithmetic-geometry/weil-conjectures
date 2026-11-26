@@ -97,7 +97,6 @@ attribute [local irreducible] Completion CompletionData
 
 set_option backward.defeqAttrib.useBackward true
 set_option Elab.async false
-set_option linter.style.haveILetI false
 /-- The augmented open projection square has the specified Roos completion and actual
 completion-unit normalization, naturally on the integral constructible domain.
 
@@ -144,8 +143,8 @@ theorem openProjectionRoosCompletion (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
     [j.IsOver (Spec (.of D.k))] :
     Completion l E j o SX SU AX AU st m c q := by
-  haveI := restrictionLimits l E j o
-  haveI := restrictionColimits l E j o
+  have := restrictionLimits l E j o
+  have := restrictionColimits l E j o
   have flat : ∀ (W : Scheme.{u}) (P : CochainComplex (scalarReductionSource l E W) ℤ),
       integralOperationsGoodComplex l E W P →
         proEtaleFlatRepresentatives W (completedIntegralCommRingSheafUnrestricted l E W) P :=

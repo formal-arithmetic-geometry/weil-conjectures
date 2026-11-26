@@ -494,7 +494,6 @@ private theorem comparison_eq (n : ℕ)
 local instance : Category.{max (t + 2) (u + 1)}
     (DerivedCategory (scalarReductionSource l E X)) := inferInstance
 
-set_option linter.unusedVariables false in
 /-- The canonical quotient chain map is the restriction of the adjoint reduction
 transition, expressed through the universal K-flat comparison.
 Source: Stacks Tags 03EK, 06YY, 06YL; Bhatt--Scholze, Definition 3.5.2.
@@ -514,7 +513,7 @@ two adjunction units, of the counits and of the restriction comparison transport
 the equality along e.inv. The argument is valid for n=0 and zero complexes. -/
 theorem normalizedDVR_kflat_transition
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
-    (hP : CochainComplex.IsKFlatIndependentCoefficients
+    (_hP : CochainComplex.IsKFlatIndependentCoefficients
       (J := AlgebraicGeometry.Scheme.ProEt.topology X)
       (R := completedIntegralCommRingSheafUnrestricted l E X) P)
     (M : completedIntegralDerivedCategory l E X D hl)
