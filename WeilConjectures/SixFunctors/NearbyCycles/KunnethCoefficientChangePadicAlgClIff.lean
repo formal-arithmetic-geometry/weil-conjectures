@@ -74,8 +74,22 @@ theorem isIso_map_map_kunnethMap_iff_padicAlgCl [QuasiCompact M.j] [QuasiSeparat
   (MorphismProperty.isomorphisms _).arrow_mk_iso_iff
     (nonempty_arrowIso_map_map_kunnethMap_padicAlgCl ℓ E φ₁ φ₂ A₀ B₀ n m).some
 
-set_option maxHeartbeats 2000000 in
--- elaborating the Künneth maps of the derived categories of module objects is slow
+/-- Invertibility of the restricted coefficient-changed Künneth map. -/
+def restrictedPadicAlgClKunnethIsIso (φ₁ : P.Hom M f₁ f₁')
+    (φ₂ : P.Hom N f₂ f₂') {W : Scheme.{u}} (h : W ⟶ Z')
+    (A₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
+    (B₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y))) : Prop :=
+  IsIso (L((h)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+    (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂
+      ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+        X)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
+          (padicIntegersRingObjToContinuousMapRingObj ℓ E) X)).leftDerivedFunctor.obj A₀))
+      ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+        Y)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
+          (padicIntegersRingObjToContinuousMapRingObj ℓ E) Y)).leftDerivedFunctor.obj B₀))))
+
 /-- **The restricted Künneth map and the coefficients `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`**: under the hypotheses of
 `NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_padicAlgCl`, for every `h : W ⟶ Z'`,
 `ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} Lh^* Π_{A₀,B₀}` is invertible if and only if `Lh^* Π_{A,B}` is. -/
@@ -96,15 +110,7 @@ theorem isIso_map_map_map_kunnethMap_iff_padicAlgCl [QuasiCompact M.j]
           W)).leftDerivedFunctor.map
           (L((h)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).map
             (kunnethMap (Profinite.padicIntegersRingObj ℓ E.1) φ₁ φ₂ A₀ B₀)))) ↔
-      IsIso (L((h)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
-        (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂
-        ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-          X)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
-            (padicIntegersRingObjToContinuousMapRingObj ℓ E) X)).leftDerivedFunctor.obj A₀))
-        ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-          Y)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
-            (padicIntegersRingObjToContinuousMapRingObj ℓ E) Y)).leftDerivedFunctor.obj
-              B₀)))) :=
+      restrictedPadicAlgClKunnethIsIso ℓ E φ₁ φ₂ h A₀ B₀ :=
   (MorphismProperty.isomorphisms _).arrow_mk_iso_iff
     (nonempty_arrowIso_map_map_map_kunnethMap_padicAlgCl ℓ E φ₁ φ₂ h A₀ B₀ n m).some
 
