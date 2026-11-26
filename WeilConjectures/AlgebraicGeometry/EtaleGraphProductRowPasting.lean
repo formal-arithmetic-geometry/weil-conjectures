@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphProductShrinkPasting
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 set_option backward.isDefEq.respectTransparency true
 
 universe u

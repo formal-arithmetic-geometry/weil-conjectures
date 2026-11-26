@@ -17,7 +17,6 @@ import all WeilConjectures.AlgebraicGeometry.SfExactExchangePasting
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 
 universe u
 
@@ -115,8 +114,7 @@ private theorem graphTriangle_open_square
   have hp' := congrArg
     (fun z ↦ z ≫ (F.pf R).map
       ((F.shComp' v' b' e' he').hom.app ((F.pf s').obj M))) hp
-  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
-    Functor.map_id, Category.comp_id] at hp'
+  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app] at hp'
   simp only [Functor.comp_obj, CategoryTheory.Functor.map_id, Category.comp_id] at hp'
   have hn := (F.exchange r b' b R sqb.w).naturality
     ((graphTriangle F s' v' a' hv').app M)
@@ -347,8 +345,8 @@ private theorem ambientLegOver_natural
     Functor.isoWhiskerRight_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Category.id_comp, Category.comp_id,
-    Functor.comp_map, Functor.comp_obj, Functor.id_obj,
-    CategoryTheory.Functor.map_id, Functor.map_comp, Category.assoc] at hh ⊢
+    Functor.comp_map, Functor.comp_obj,
+    Functor.map_comp, Category.assoc] at hh ⊢
   have hn' :
       (rightDerivedLowerStarCompOfEq (ModuleCat.{u + 1} A) R p p' hp).hom.app
           ((R((s')_*[ModuleCat.{u + 1} A]) ⋙
@@ -363,9 +361,9 @@ private theorem ambientLegOver_natural
   simp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_inv_app,
-    Functor.comp_obj, Functor.id_obj, CategoryTheory.Functor.map_id,
-    Category.comp_id, Functor.map_comp, Category.assoc] at hn'
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] at hn'
+    Functor.comp_obj, CategoryTheory.Functor.map_id,
+    Functor.map_comp, Category.assoc] at hn'
+  simp only [Category.id_comp] at hn'
   rw [hn']
   exact hh
 
@@ -490,16 +488,16 @@ theorem etaleGraphProperAmbientMiddle
     apply Iso.ext
     apply NatTrans.ext
     funext M
-    simp only [L₁, L₂, ambientLegOver, ambientLeg, s₁, s₂, S, b₁, b₂, u₁, u₂, e, p, h,
+    simp only [L₁, L₂, ambientLegOver, ambientLeg, s₁, s₂, S, b₁, b₂, u₁, u₂, e, p,
       locallyClosedGraphMiddle,
       Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
       Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
       Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
       NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
-      Functor.comp_obj, Functor.id_obj, Functor.map_comp,
-      graph_open_congr_refl, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
-      CategoryTheory.Functor.map_id, Category.assoc, Category.id_comp, Category.comp_id]
+      Functor.comp_obj, Functor.map_comp,
+      graph_open_congr_refl, Iso.refl_inv,
+      Category.assoc, Category.id_comp, Category.comp_id]
   let R := s.properAmbientProduct c t pr hp
   let r₁ := s.properAmbientFirst c t pr hp
   let r₂ := s.properAmbientSecond c t pr q sq hp

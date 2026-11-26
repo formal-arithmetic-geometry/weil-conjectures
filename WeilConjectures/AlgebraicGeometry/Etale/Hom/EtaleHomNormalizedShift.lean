@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Native.NativeDerivedHomNormalizedShift
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated MonoidalCategory
 open CategoryTheory.Pretriangulated.Opposite Opposite

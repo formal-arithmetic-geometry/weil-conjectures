@@ -82,7 +82,6 @@ private noncomputable def mapResolution
       · exact CochainComplex.exactAt_succ_single_obj _ _⟩
 
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 /-- Acyclic Leray for right-derived terminal sections, without either Ext model
 (Stacks, Tags 072Z and 0733). -/
 theorem etaleZariskiDerivedSectionsAcyclicLeray
@@ -98,7 +97,7 @@ theorem etaleZariskiDerivedSectionsAcyclicLeray
     let E := sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u} ⋙
       (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u}).obj (op (i.obj ⊤))
     ∃ c : ∀ (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u})
-        (hF : ∀ n : ℕ, IsZero ((T.rightDerived (n + 1)).obj F)) (n : ℕ),
+        (_hF : ∀ n : ℕ, IsZero ((T.rightDerived (n + 1)).obj F)) (n : ℕ),
         ((Z.rightDerived (n + 1)).obj (T.obj F)) ≃+
           ((E.rightDerived (n + 1)).obj F),
       ∀ (F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u})

@@ -17,7 +17,6 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportCompari
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 
 universe u
 
@@ -91,8 +90,8 @@ private theorem open_rectangle_tail
   have h₁ := openC_assoc_inv A v e k (t ≫ n) h w hve hek hm hvh M
   have h₂ := openC_assoc_inv A t n k (t ≫ n) l w rfl hnk hm htl M
   rw [← h₂]
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp,
-    ← Category.assoc, ← Functor.map_comp]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, ← Category.assoc,
+    ← Functor.map_comp]
   simp only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
   exact h₁
 
@@ -172,8 +171,7 @@ private theorem exchange_rectangle
     simpa only [openC_rfl] using ho
   rw [ho']
   simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
-  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id,
-    Category.id_comp, Category.comp_id]
+  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [Category.comp_id]
   have hn := (etaleGraphNormalizedProperOpenExchange A k q p j s₂).hom.naturality
     (D((e)_!open[ModuleCat.{u + 1} A]).map δ ≫

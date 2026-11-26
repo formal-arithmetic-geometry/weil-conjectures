@@ -25,7 +25,6 @@ open CategoryTheory TopologicalSpace Opposite
 
 namespace AlgebraicGeometry.RingedSpace
 
-set_option linter.unusedVariables false in
 /-- A morphism from a restricted finite free sheaf which is zero on all germs
 becomes the zero morphism on a smaller neighborhood. (Stacks, Tag 01CP.) -/
 theorem exists_finiteFree_local_hom_zero
@@ -41,7 +40,7 @@ theorem exists_finiteFree_local_hom_zero
         (op (Over.mk (j ≫ i)))),
       TopCat.Presheaf.germ G.val.presheaf W x hxW
         (ψ.val.app (op (Over.mk j)) s) = 0) :
-    ∃ (W : Opens X) (hxW : x ∈ W) (j : W ⟶ V),
+    ∃ (W : Opens X) (_hxW : x ∈ W) (j : W ⟶ V),
       (SheafOfModules.overMap ((sheafCompose (Opens.grothendieckTopology X)
       (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf) j).map ψ = 0 := by
   classical

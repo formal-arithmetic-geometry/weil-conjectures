@@ -26,7 +26,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-set_option linter.unusedVariables false in
 /-- For a surjective etale map `g : Y' ⟶ Y`, the base-change functor from
 finite etale schemes over `Y` to finite etale schemes over `Y'` with descent
 data is an equivalence. -/
@@ -36,7 +35,7 @@ theorem finiteEtaleDescent {Y Y' : Scheme.{v}} (g : Y' ⟶ Y)
       (q : ∀ P : Y.FiniteEtale, (F.obj P).obj.V.left ⟶ P.obj.left),
       Nonempty F.IsEquivalence ∧
       (∀ P : Y.FiniteEtale,
-        ∃ hq : q P ≫ P.obj.hom = (F.obj P).obj.V.hom ≫ g,
+        ∃ _hq : q P ≫ P.obj.hom = (F.obj P).obj.V.hom ≫ g,
           IsPullback (q P) (F.obj P).obj.V.hom P.obj.hom g ∧
           ∀ {T : Scheme.{v}} (f₁ f₂ : T ⟶ Y')
             (h : f₁ ≫ g = f₂ ≫ g) (z : Over.mk f₁ ⟶ (F.obj P).obj.V),

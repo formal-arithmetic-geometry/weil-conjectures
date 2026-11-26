@@ -34,7 +34,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option autoImplicit false
 
-set_option linter.unusedVariables false in
 /-- Natural mixed-universe Leray comparison on the subcategory of acyclic abelian
 sheaves. No quasi-coherent module or tensor-sections construction is assumed
 (Stacks, Tags 0733, 072Z, 0730 and 06XP). -/
@@ -48,7 +47,7 @@ theorem etaleZariskiNaturalAcyclicLeray
     let T := i.sheafPushforwardContinuous AddCommGrpCat.{u}
       (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology
     ∃ b : ∀ (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u})
-        (hF : ∀ n : ℕ, IsZero ((T.rightDerived (n + 1)).obj F)) (n : ℕ),
+        (_hF : ∀ n : ℕ, IsZero ((T.rightDerived (n + 1)).obj F)) (n : ℕ),
         Sheaf.H' (T.obj F) (n + 1) (⊤ : X.Opens) ≃+
           @Sheaf.H _ _ X.smallEtaleTopology F inferInstance (HasExt.standard _) (n + 1),
       ∀ (F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u})

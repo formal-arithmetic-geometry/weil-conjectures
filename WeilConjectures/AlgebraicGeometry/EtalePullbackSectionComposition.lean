@@ -15,7 +15,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-set_option linter.unusedVariables false in
 /-- Canonical section transitions on iterated etale pullbacks compose.
 (Stacks, Tag 09YP) -/
 theorem etale_pullback_section_composition
@@ -37,7 +36,7 @@ theorem etale_pullback_section_composition
     ∀ (γ : ∀ (j k : J) (a : j ⟶ k),
         (MorphismProperty.Over.pullback @Etale ⊤
           (D.map (show j.val ⟶ k.val from a).op)).obj (Wj j) ≅ Wj k)
-      (hγ : ∀ (j k : J) (a : j ⟶ k),
+      (_hγ : ∀ (j k : J) (a : j ⟶ k),
         (γ j k a).hom.left ≫
             pullback.fst W₀.hom (D.map (homOfLE k.property).op) =
           pullback.fst (Wj j).hom (D.map (show j.val ⟶ k.val from a).op) ≫

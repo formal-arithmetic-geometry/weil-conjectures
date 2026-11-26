@@ -132,9 +132,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.all false
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
@@ -626,13 +623,12 @@ private theorem rightTower
   simp only [Category.assoc]
   erw [hc P]
   symm
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    isoWhiskerLeft_hom, isoWhiskerRight_hom, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp, Category.comp_id, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerLeft_hom,
+    isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp, Category.assoc]
   erw [(exactComposition eu).inv.naturality_assoc (chainDerivedUnit F₂ P)]
   rw [← F₀.rightDerivedFunctor.map_comp, exactComposition_fac ev P]
-  simp only [F₀.rightDerivedFunctor.map_comp, Category.assoc]
+  simp only [F₀.rightDerivedFunctor.map_comp]
   erw [← da.hom.naturality_assoc (Vb.mapDerivedCategoryFactors.hom.app P)]
   simp only [Functor.comp_map]
   rw [← Ua.mapDerivedCategory.map_comp_assoc, ← Ua.mapDerivedCategory.map_comp_assoc]
@@ -658,7 +654,7 @@ private theorem rightTower
       (NatIso.mapHomologicalComplex oc (.up ℤ)).hom.app P := by
     ext i : 1
     exact ho (P.X i)
-  simp only [Functor.comp_map, Category.assoc, ← DerivedCategory.Q.map_comp_assoc]
+  simp only [Functor.comp_map, ← DerivedCategory.Q.map_comp_assoc]
   erw [hco]
 
 open SheafOfModules.SuccessiveDerivedQuotient in
@@ -768,10 +764,8 @@ private theorem rightIdentity
     ((𝟭 C).mapDerivedCategoryFactors.hom.app P))).mp
   simp only [Category.assoc]
   erw [hd P]
-  simp only [Iso.trans_hom, NatTrans.comp_app, isoWhiskerLeft_hom,
-    isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, Category.id_comp,
-    Category.comp_id, Category.assoc]
+  simp only [Iso.trans_hom, NatTrans.comp_app, isoWhiskerLeft_hom, isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.rightUnitor_hom_app, Category.assoc]
   erw [(Functor.mapDerivedCategoryIdIso D).hom.naturality_assoc (chainDerivedUnit F P)]
   rw [← F.rightDerivedFunctor.map_comp]
   erw [← identity_fac P, Iso.inv_hom_id_app, F.rightDerivedFunctor.map_id,

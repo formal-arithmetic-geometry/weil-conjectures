@@ -42,7 +42,6 @@ set_option synthInstance.maxSize 4096
 set_option genSizeOf false
 set_option genInjectivity false
 set_option genSizeOfSpec false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite SheafOfModules
 namespace AlgebraicGeometry
@@ -92,9 +91,9 @@ theorem exceptionalSiteOriginComparison_level_inverse_bound
     (C : ExceptionalSystemSiteComparison O ell T PE)
     (n : ℕ) (N : DerivedCategory (strictEtaleLevel T O ell n)) (a : ℤ)
     (hN : N.IsGE a) : ((C.image.level n).inverse.obj N).IsGE a := by
-  letI : PreservesFiniteLimits (C.ordinary.lift n).modules :=
+  let : PreservesFiniteLimits (C.ordinary.lift n).modules :=
     C.ordinary.inverseExact n |>.1
-  letI : PreservesFiniteColimits (C.ordinary.lift n).modules :=
+  let : PreservesFiniteColimits (C.ordinary.lift n).modules :=
     C.ordinary.inverseExact n |>.2
   have hF : ((C.ordinary.lift n).modules.mapDerivedCategory.obj N).IsGE a :=
     (C.ordinary.lift n).modules.isGE_mapDerivedCategory_obj N a
@@ -614,8 +613,8 @@ private theorem exceptionalLevel_full
     (hX : ∃ a : ℤ, X.IsGE a) (hY : ∃ a : ℤ, Y.IsGE a) :
     Function.Bijective (FD.map : (X ⟶ Y) → _) := by
   let A : Type (u + 1) := O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)
-  letI : TopologicalSpace A := ⊥
-  letI : DiscreteTopology A := ⟨rfl⟩
+  let : TopologicalSpace A := ⊥
+  let : DiscreteTopology A := ⟨rfl⟩
   let F := (S.lift n).modules
   have : PreservesFiniteLimits F := (S.inverseExact n).1
   have : PreservesFiniteColimits F := (S.inverseExact n).2

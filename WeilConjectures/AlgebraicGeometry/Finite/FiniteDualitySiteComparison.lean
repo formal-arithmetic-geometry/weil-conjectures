@@ -591,7 +591,6 @@ noncomputable def nativeProEtaleBiduality
   let := DerivedCategory.braidedCategory' (Sheaf (Scheme.ProEt.topology X) A)
   MonoidalClosed.toIhomIhom W K
 
-set_option linter.unusedVariables false in
 /-- The site-comparison and Verdier-duality assertions for the supplied, fixed ambient
 objects and constructibility predicates. All comparison arrows and normalized pairings
 are the recorded ones; the coefficient specialization fixes every parameter below. -/

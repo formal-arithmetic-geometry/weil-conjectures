@@ -281,7 +281,6 @@ instance isTriangulated_boundedConstructible_unitBallRingObj
       ObjectProperty.prop_cokernel _ f hM hN⟩)
     (fun S hS h₁ h₃ ↦ ObjectProperty.prop_X₂_of_shortExact _ hS h₁ h₃)
 
-set_option linter.unusedVariables false in
 /-- For a noetherian scheme, bounded constructible complexes are triangulated for each
 allowed coefficient ring: a finite extension field, its ring of integers, the algebraic closure,
 or a finite discrete ring killed by a power of the fixed prime. The ring objects carry their
@@ -303,7 +302,7 @@ theorem isTriangulated_boundedConstructible
         (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X)).IsTriangulated) ∧
     (∀ (ℓ : ℕ) [Fact ℓ.Prime] (T : Type) [CommRing T] [TopologicalSpace T]
       [IsTopologicalRing T] [DiscreteTopology T] [Finite T]
-      (hT : ∃ n : ℕ, ∀ t : T, (ℓ : T) ^ n * t = 0),
+      (_hT : ∃ n : ℕ, ∀ t : T, (ℓ : T) ^ n * t = 0),
       (boundedConstructible
         (condensedRingObj (Profinite.continuousMapRingObj.{u} T) X)).IsTriangulated) := by
   constructor

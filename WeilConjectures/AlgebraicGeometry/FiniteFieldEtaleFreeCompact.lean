@@ -54,18 +54,16 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-set_option linter.style.haveILetI false in
-set_option linter.unusedVariables false in
 private theorem moduleFiniteCd_of_primeCd
     (ell : ℕ) [Fact ell.Prime] (K : Type u) [Field K] [Finite K]
-    (R : Type (u + 1)) [CommRing R] [Finite R] (r : ℕ) (hr : (ell ^ r : R) = 0) :
+    (R : Type (u + 1)) [CommRing R] [Finite R] (r : ℕ) (_hr : (ell ^ r : R) = 0) :
     HasFiniteCohomologicalDimension R (Spec (.of K)) := by
   classical
   refine ⟨1, fun F q hq ↦ ?_⟩
   obtain ⟨n, rfl⟩ := Int.eq_ofNat_of_zero_le (by omega : 0 ≤ q)
   let B := (sheafCompose (Spec (.of K)).smallEtaleTopology
     (forget₂ (ModuleCat.{u + 1} R) AddCommGrpCat.{u + 1})).obj F
-  letI : Scheme.IsTorsionModuleSheaf F :=
+  let : Scheme.IsTorsionModuleSheaf F :=
     Scheme.IsTorsionModuleSheaf.of_isTorsion isAddTorsion_of_finite F
   have ht : B.IsTorsion :=
     (Scheme.isTorsionModuleSheaf_iff_isTorsion F).mp inferInstance
@@ -80,8 +78,6 @@ private theorem moduleFiniteCd_of_primeCd
     (AddCommGrpCat.subsingleton_of_isZero (hz.of_iso (iso.app F)))
 
 set_option maxRecDepth 100000 in
-set_option linter.style.haveILetI false in
-set_option linter.unusedVariables false in
 /-- The affine étale free sheaves over a finite field are canonically extensions
 by zero of the constant rank-one sheaf, constructible and flat; their degree-zero
 complexes are bounded constructible of Tor amplitude `[0,0]` and compact in the
@@ -96,7 +92,7 @@ theorem finiteField_affineEtaleFree_compact
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k))
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (B : Type (u + 1)) [Category.{u} B] (e : B ≌ X.AffineEtale)
-    (hB : Skeletal B) :
+    (_hB : Skeletal B) :
     ∃ hcoprod : HasCoproducts.{u + 1} (DerivedCategoryModule A X),
       LocallySmall.{u + 1} (DerivedCategoryModule A X) ∧
       ∀ U : B,
@@ -132,14 +128,14 @@ theorem finiteField_affineEtaleFree_compact
             (Sheaf.freeYonedaHomEquiv (comparison.hom ≫ a)).hom 1 =
               Scheme.shriekEvalEquiv ((Scheme.AffineEtale.Spec X).obj (e.functor.obj U)) G a := by
   classical
-  letI : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
-  letI : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
-  letI : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f
-  letI : IsNoetherian X := {}
-  letI : TopologicalSpace.NoetherianSpace X := by infer_instance
-  letI : IsGrothendieckAbelian.{u + 1}
+  let : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  let : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f
+  let : IsNoetherian X := {}
+  let : TopologicalSpace.NoetherianSpace X := by infer_instance
+  let : IsGrothendieckAbelian.{u + 1}
       (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) := inferInstance
-  letI : HasColimitsOfSize.{u + 1, u + 1}
+  let : HasColimitsOfSize.{u + 1, u + 1}
       (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
     IsGrothendieckAbelian.hasColimits _
   let hc : HasCoproducts.{u + 1} (DerivedCategoryModule A X) :=
@@ -147,11 +143,11 @@ theorem finiteField_affineEtaleFree_compact
   refine ⟨hc, inferInstance, ?_⟩
   intro U
   let W := (Scheme.AffineEtale.Spec X).obj (e.functor.obj U)
-  letI : IsAffine W.left := by
+  let : IsAffine W.left := by
     change IsAffine ((Scheme.Spec).obj _)
     infer_instance
-  letI : CompactSpace W.left := Scheme.compactSpace_of_isAffine W.left
-  letI : QuasiSeparatedSpace W.left := quasiSeparatedSpace_of_isAffine W.left
+  let : CompactSpace W.left := Scheme.compactSpace_of_isAffine W.left
+  let : QuasiSeparatedSpace W.left := quasiSeparatedSpace_of_isAffine W.left
   have hconstruct : Scheme.IsConstructibleEtaleModuleSheaf
       (Sheaf.freeYoneda X.smallEtaleTopology W (ModuleCat.of A A)) := by
     apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2
@@ -160,7 +156,7 @@ theorem finiteField_affineEtaleFree_compact
       (Sheaf.freeYoneda X.smallEtaleTopology W (ModuleCat.of A A)) := by
     exact flat_freeYoneda (X := X) W
   let F := Sheaf.freeYoneda X.smallEtaleTopology W (ModuleCat.of A A)
-  letI : Scheme.IsConstructibleSheaf F := isConstructibleSheaf_freeYoneda (X := X) W
+  let : Scheme.IsConstructibleSheaf F := isConstructibleSheaf_freeYoneda (X := X) W
   have hbc0 := DerivedCategory.boundedConstructible_singleFunctor_obj F 0
   have hbounded : DerivedCategory.isBoundedConstructible A X
       ((_root_.DerivedCategory.singleFunctor _ 0).obj F) := by
@@ -189,17 +185,17 @@ theorem finiteField_affineEtaleFree_compact
   have hcompact : @IsCompactObject (DerivedCategoryModule A X) _ _ hc
       ((_root_.DerivedCategory.singleFunctor _ 0).obj F) := by
     obtain ⟨r, hr⟩ := hA
-    letI : Fact ℓ.Prime := ⟨hℓprime⟩
+    let : Fact ℓ.Prime := ⟨hℓprime⟩
     have hAcd : HasFiniteCohomologicalDimension A (Spec (.of k)) :=
       moduleFiniteCd_of_primeCd ℓ k A r hr
-    letI : HasInvertibleExponent A (Spec (.of k)) := by
+    let : HasInvertibleExponent A (Spec (.of k)) := by
       refine ⟨ℓ ^ r, pow_pos hℓprime.pos r, ?_, ?_⟩
       · simpa only [Nat.cast_pow] using hr
       · have hℓ : (ℓ : k) ≠ 0 :=
           CharP.cast_ne_zero_of_ne_of_prime k (Fact.out : ℓ.Prime) hℓchar.symm
         simpa using (isUnit_iff_ne_zero.mpr (pow_ne_zero r hℓ)).map
           (Scheme.ΓSpecIso (.of k)).inv.hom
-    letI : HasInvertibleExponent A X := HasInvertibleExponent.of_hom f
+    let : HasInvertibleExponent A X := HasInvertibleExponent.of_hom f
     have hctf : DerivedCategory.constructibleFiniteTor
         (ModuleCat.{u + 1} A) X ((_root_.DerivedCategory.singleFunctor _ 0).obj F) := by
       refine ⟨hbc0, ⟨0, 0, ?_⟩⟩

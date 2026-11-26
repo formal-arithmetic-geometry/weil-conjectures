@@ -33,7 +33,6 @@ isomorphisms. The transpose formula is the definition of the comparison map `α`
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 
 universe u
 
@@ -119,7 +118,7 @@ theorem isIso_finiteDualityClosedComparisonDelta_proof
       (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)))
     (e : X ≅ DerivedCategory.Plus.ι.obj L) :
     IsIso (finiteDualityClosedComparisonDelta i X L e) := by
-  letI := ProEtale.isIso_fixedComparisonDirectImageMatePlus A i
+  let := ProEtale.isIso_fixedComparisonDirectImageMatePlus A i
   unfold finiteDualityClosedComparisonDelta
   dsimp -failIfUnchanged only [Etale.rightDerivedLowerStar]
   infer_instance
@@ -129,10 +128,8 @@ to the canonical component; no further declaration or proof is added. -/
 attribute [instance] isIso_finiteDualityClosedComparisonDelta_proof
 
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 open Etale in
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 private theorem closedLowerStar_isLeftAdjoint
     (A : Type (u + 1)) [Ring A] {Z T : Scheme.{u}}
     (i : Z ⟶ T) [IsClosedImmersion i] :
@@ -193,7 +190,6 @@ private theorem closedLowerStar_isLeftAdjoint
   exact (Adjunction.adjunctionOfEquivRight e he).isLeftAdjoint
 
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 private theorem closedRightAdjoint_boundedBelow
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {Z T : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]
@@ -204,12 +200,12 @@ private theorem closedRightAdjoint_boundedBelow
     ∃ L : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)),
       Nonempty ((Etale.rightDerivedLowerStar (ModuleCat.{u + 1} A) i).rightAdjoint.obj M ≅
         DerivedCategory.Plus.ι.obj L) := by
-  letI : (Etale.rightDerivedLowerStar (ModuleCat.{u + 1} A) i).IsLeftAdjoint :=
+  let : (Etale.rightDerivedLowerStar (ModuleCat.{u + 1} A) i).IsLeftAdjoint :=
       Etale.isLeftAdjoint_rightDerivedLowerStar_of_isClosedImmersion A i
   let F := Etale.lowerStar (ModuleCat.{u + 1} A) i
-  letI : F.IsLeftAdjoint := closedLowerStar_isLeftAdjoint A i
+  let : F.IsLeftAdjoint := closedLowerStar_isLeftAdjoint A i
   let adj := Adjunction.ofIsLeftAdjoint F
-  letI : F.rightAdjoint.Additive := adj.right_adjoint_additive
+  let : F.rightAdjoint.Additive := adj.right_adjoint_additive
   let adjD := adj.mapDerivedCategoryRightDerivedAdjunction.ofNatIsoLeft
     F.rightDerivedFunctorIsoMapDerivedCategory.symm
   let e := (Adjunction.ofIsLeftAdjoint F.rightDerivedFunctor).rightAdjointUniq adjD
@@ -219,7 +215,6 @@ private theorem closedRightAdjoint_boundedBelow
     ⟨e.app M ≪≫ (F.rightAdjoint.rightDerivedFunctorPlusCompatibility.app Mplus).symm⟩⟩
 
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 private theorem closedComparisonAlpha_isIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {Z T U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]
@@ -254,7 +249,7 @@ private theorem closedComparisonAlpha_isIso
   let GP := (ProEtale.lowerStar C j).rightDerivedFunctor
   let adjj := (ProEtale.upperStarLowerStarAdjunction C j
     ).mapDerivedCategoryRightDerivedAdjunction
-  letI := ProEtale.preservesFiniteColimits_lowerStar_of_isCompl (R := A) i j hij
+  let := ProEtale.preservesFiniteColimits_lowerStar_of_isCompl (R := A) i j hij
   have hz (P : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) C)) :
       IsZero (JP.obj (RP.obj P)) := by
     have hz' : IsZero (JP.obj ((ProEtale.lowerStar C i).mapDerivedCategory.obj P)) :=
@@ -270,9 +265,9 @@ private theorem closedComparisonAlpha_isIso
       IsZero (IP.obj (GP.obj N)) := by
     apply (IsZero.iff_id_eq_zero _).2
     apply (adjP.homEquiv _ _).symm.injective
-    letI : Subsingleton (JP.obj (RP.obj (IP.obj (GP.obj N))) ⟶ N) :=
+    let : Subsingleton (JP.obj (RP.obj (IP.obj (GP.obj N))) ⟶ N) :=
       ⟨fun f g ↦ (hz _).eq_of_src f g⟩
-    haveI : Subsingleton (RP.obj (IP.obj (GP.obj N)) ⟶ GP.obj N) :=
+    have : Subsingleton (RP.obj (IP.obj (GP.obj N)) ⟶ GP.obj N) :=
       (adjj.homEquiv (RP.obj (IP.obj (GP.obj N))) N).symm.subsingleton
     exact Subsingleton.elim _ _
   let JE := (Etale.upperStar C j).mapDerivedCategory

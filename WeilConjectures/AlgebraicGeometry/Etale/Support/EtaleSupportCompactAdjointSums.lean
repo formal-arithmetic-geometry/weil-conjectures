@@ -70,7 +70,6 @@ private theorem boundedConstructible_iff
     · exact (_root_.DerivedCategory.isGE_iff _ a).1 ha q (lt_of_lt_of_le hq (min_le_left _ _))
     · exact (_root_.DerivedCategory.isLE_iff _ b).1 hb q (lt_of_le_of_lt (le_max_right _ _) hq)
 
-set_option linter.unusedVariables false in
 /-- Compact support sends bounded constructible finite-Tor complexes to compact objects;
 its fixed right adjoint preserves coproducts and is exact with adjunction-compatible shifts.
 The termwise constant and the two coefficient tensor functors are exact and preserve sums.
@@ -124,7 +123,7 @@ theorem support_compactImages_adjoint_sums
           (∀ (s : S) (n : ℤ),
             Function.Bijective (fun φ : (E s)⟦n⟧ ⟶ A ↦ φ ≫ h)) → IsIso h) ∧
       (∀ I : Type v, PreservesColimitsOfShape (Discrete I) G) ∧
-      ∃ (hG : G.CommShift ℤ),
+      ∃ (_hG : G.CommShift ℤ),
         G.IsTriangulated ∧
         (∀ (n : ℤ) (M : DerivedCategoryModule C Y),
           adj.counit.app (M⟦n⟧) =

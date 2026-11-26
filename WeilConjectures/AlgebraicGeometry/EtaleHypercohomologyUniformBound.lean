@@ -77,7 +77,6 @@ private theorem sections_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
 
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent page and presentation families.
-set_option linter.unusedVariables false in
 /-- Functorial termwise presentations can be chosen with a quantitative stabilization bound
 (Stacks, Tags 015J, 015K and 0EZM). -/
 theorem exists_etaleHypercohomology_uniform_bound
@@ -110,15 +109,15 @@ theorem exists_etaleHypercohomology_uniform_bound
       (M : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X)
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
         (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}))
-        (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+        (_v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
           (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj),
         (D X K).sequence ⟶ (D Y L).sequence)
       (R : ∀ (X : Scheme.{u})
-        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
-        (q n : ℤ), ℤ)
+        (_K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+        (_q _n : ℤ), ℤ)
       (eInf : ∀ (X : Scheme.{u})
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
-        (q n r : ℤ) (hr : 1 ≤ r) (hR : R X K q n ≤ r),
+        (q n r : ℤ) (hr : 1 ≤ r) (_hR : R X K q n ≤ r),
         ((D X K).sequence.page r hr).X (q, n - q) ≅ ((D X K).H n).gradedPiece q),
       (      (∀ {X Y : Scheme.{u}} (f : Y ⟶ X)
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -136,7 +135,7 @@ theorem exists_etaleHypercohomology_uniform_bound
           (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj) (n : ℤ),
         ∃ (t : ∀ q : ℤ, (((D X K).H n).step q : AddCommGrpCat.{u + 1}) ⟶
             (((D Y L).H n).step q : AddCommGrpCat.{u + 1}))
-          (ht : ∀ q : ℤ, t q ≫ (((D Y L).H n).step q).arrow =
+          (_ht : ∀ q : ℤ, t q ≫ (((D Y L).H n).step q).arrow =
             (((D X K).H n).step q).arrow ≫ P f K.obj L.obj v n)
           (hc : ∀ q : ℤ,
             Subobject.ofLE (((D X K).H n).step (q + 1)) (((D X K).H n).step q)

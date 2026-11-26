@@ -55,7 +55,6 @@ private theorem sectionsUnit_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
   exact (ceSectionsUnit f).naturality (a.f i)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 -- Elaborate the dependent presentation, stable-range and resolution-map families.
 /-- Construct the filtered resolution comparison on every page in the support-controlled
 stable range. The abutment map is expressed on K-injective resolutions; no derived
@@ -68,12 +67,12 @@ theorem exists_etaleHypercohomology_supported_resolution_maps :
       (M : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X)
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
         (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}))
-        (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+        (_v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
           (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj),
         (D X K).sequence ⟶ (D Y L).sequence)
       (eInf : ∀ (X : Scheme.{u})
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
-        (q n r : ℤ) (hr : 1 ≤ r) (hR : ∃ a : ℤ, (∀ s : ℤ, s < a → IsZero (K.obj.X s)) ∧
+        (q n r : ℤ) (hr : 1 ≤ r) (_hR : ∃ a : ℤ, (∀ s : ℤ, s < a → IsZero (K.obj.X s)) ∧
           max 1 (max (q - a + 2) (n - q + 2)) ≤ r),
         ((D X K).sequence.page r hr).X (q, n - q) ≅ ((D X K).H n).gradedPiece q),
       (∀ {X Y : Scheme.{u}} (f : Y ⟶ X)
@@ -92,19 +91,19 @@ theorem exists_etaleHypercohomology_supported_resolution_maps :
           (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj) (n : ℤ),
         ∀ (j : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
               (ComplexShape.up ℤ)).obj (D X K).ρ.complex ⟶ (D Y L).ρ.complex)
-          (hj : Nonempty (Homotopy
+          (_hj : Nonempty (Homotopy
             (((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
               (ComplexShape.up ℤ)).map (D X K).ρ.map ≫ j) (v ≫ (D Y L).ρ.map))),
         ∀ (w : ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
               (ComplexShape.up ℤ)).obj (D X K).ρ.complex ⟶
             ((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
               (ComplexShape.up ℤ)).obj (D Y L).ρ.complex)
-          (hw : ∀ i : ℤ, w.f i =
+          (_hw : ∀ i : ℤ, w.f i =
             globalSectionsUpperStarMap AddCommGrpCat.{u + 1} f ((D X K).ρ.complex.X i) ≫
               (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).map (j.f i)),
         ∃ (t : ∀ q : ℤ, (((D X K).H n).step q : AddCommGrpCat.{u + 1}) ⟶
             (((D Y L).H n).step q : AddCommGrpCat.{u + 1}))
-          (ht : ∀ q : ℤ, t q ≫ (((D Y L).H n).step q).arrow =
+          (_ht : ∀ q : ℤ, t q ≫ (((D Y L).H n).step q).arrow =
             (((D X K).H n).step q).arrow ≫
             ((@resolutionEtaleCohomologyIso.{u} X K.obj (D X K).ρ.complex
               (D X K).ρ.map (D X K).ρ.quasiIso (D X K).ρ.isKInjective n).inv ≫

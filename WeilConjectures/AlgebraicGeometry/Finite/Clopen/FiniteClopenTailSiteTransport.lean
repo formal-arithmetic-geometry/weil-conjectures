@@ -99,7 +99,6 @@ private lemma conjugate_comp_transport
   erw [Category.id_comp, Category.id_comp]
 
 set_option backward.defeqAttrib.useBackward true in
-set_option linter.flexible false in
 private lemma restriction_mate (Λ : Type (u + 1)) [CommRing Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (mateEquiv (openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} Λ) j)
@@ -109,21 +108,15 @@ private lemma restriction_mate (Λ : Type (u + 1)) [CommRing Λ]
   ext F : 2
   apply Sheaf.hom_ext
   refine NatTrans.ext (funext fun W ↦ ?_)
-  simp [mateEquiv, comparisonLowerStarOpenImmersionRestrictionIso,
-    openImmersionRestrictionLowerStarAdjunction,
-    Etale.openImmersionRestrictionLowerStarAdjunction,
-    localizationRestrictionLowerStarAdjunction,
-    Etale.localizationRestrictionLowerStarAdjunction,
-    lowerStarCompComparisonLowerStarIso, comparisonLowerStar,
-    openImmersionRestriction, Etale.openImmersionRestriction,
-    localizationRestriction, Etale.localizationRestriction,
-    lowerStar, Etale.lowerStar]
+  simp only [comp_obj, mateEquiv_apply, NatTrans.comp_app, id_obj, rightUnitor_inv_app,
+    whiskerLeft_app, associator_hom_app, associator_inv_app, whiskerRight_app,
+    Functor.comp_map, leftUnitor_hom_app, Category.comp_id, Category.id_comp,
+    ObjectProperty.FullSubcategory.comp_hom]
   erw [Category.id_comp, ← Functor.map_comp]
   congr 1
   apply Quiver.Hom.unop_inj
   ext
-  simp only [Quiver.Hom.unop_op, toProEtCompOverPullbackIso,
-    NatIso.ofComponents_inv_app, Iso.refl_inv]
+  simp only [toProEtCompOverPullbackIso]
   apply CategoryTheory.Limits.pullback.hom_ext <;> simp
 
 set_option backward.defeqAttrib.useBackward true in

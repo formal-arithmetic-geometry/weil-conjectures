@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphProductShrinkSquare
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 
 universe u
 
