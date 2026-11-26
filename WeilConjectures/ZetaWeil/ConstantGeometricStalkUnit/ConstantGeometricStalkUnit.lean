@@ -38,12 +38,9 @@ import all WeilConjectures.SixFunctors.Supporting.FrobeniusPointTransportNatural
 
 /-! # Constant geometric stalks and the coefficient unit
 
-Source: main-20261015, sec-zeta-weil/sk-thm-tracetodeterminant,
-prop-every-iterate-trace.proof.md, constant-sheaf clause, reviewed expansion step 5
-(blueprint: lem-zl-constant-geometric-stalk-unit).
-
-All finite indices denote exponent m+1. The integral coefficient is the completed
-ring sheaf. The maps below retain the actual adjunction units and strict Roos model.
+The geometric stalks of the constant sheaf and their coefficient units, at the finite,
+integral and rational coefficient levels, for the constant-sheaf case of the trace-to-determinant
+identity for every iterate.
 
 ## Main statements
 
@@ -52,6 +49,11 @@ ring sheaf. The maps below retain the actual adjunction units and strict Roos mo
 * `finiteOperator_unit`, `integralOperator_unit`, `rationalOperator_unit`: identity operators.
 * `finiteUnit_reduction`, `integralUnit_projection`, `section_reductions`: actual quotient squares.
 * `rationalStalkUnit_existsUnique`, `rationalOperator_scalar`: rationalization squares.
+
+## Implementation details
+
+All finite indices denote exponent m+1. The integral coefficient is the completed
+ring sheaf. The maps below retain the actual adjunction units and strict Roos model.
 -/
 
 @[expose] public noncomputable section

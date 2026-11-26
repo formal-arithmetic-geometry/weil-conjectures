@@ -14,8 +14,18 @@ import WeilConjectures.Topology.TopologicalLeraySpectralSequence
 /-!
 # Leray comparison for an acyclic abelian sheaf
 
-Source: Stacks Project, Cohomology of Sheaves, Tags 01F2 and 01F4 (1)
-(blueprint: lem-sc-leray-closed-pushforward-cohomology).
+For a continuous map whose higher direct images of a sheaf vanish, the Leray edge map identifies
+the cohomology of the direct image with the cohomology of the sheaf.
+
+## Implementation details
+
+The edge map comes from the Leray spectral sequence; when all positive higher direct images
+vanish only row zero remains, the spectral sequence degenerates, and the finite abutment
+filtration identifies the edge with an isomorphism.
+
+## References
+
+* [Stacks Project, Tags 01F2 and 01F4](https://stacks.math.columbia.edu/tag/01F2)
 -/
 
 @[expose] public section
@@ -126,26 +136,13 @@ private lemma mapped_filtration_arrow_isIso
   exact h p le_rfl
 
 /-- The natural Leray edge is an isomorphism on sheaves with vanishing higher direct images.
-Source: Stacks Project, Cohomology of Sheaves, Tags 01F2 and 01F4 (1)
-(blueprint: lem-sc-leray-closed-pushforward-cohomology).
 
 Here `a` is the canonical map from the free abelian sheaf on the terminal open of `X`
 to the direct image of that on `Z`: its value on every free generator is the corresponding
 free generator on the inverse-image open. The cocycle equation characterizes the edge:
 lift an injective resolution of the direct image to the direct image of an injective
 resolution, and use the same global cocycle on `Z`. Quantifying over all such lifts makes
-this characterization independent of the resolutions and comparison maps.
-
-Proof:
-1. Apply lem-sc-topological-leray-spectral-sequence to obtain the first-quadrant Leray
-spectral sequence with E₂^{a,b} = H^a(X,R^b f_*F), its finite abutment filtration and the
-natural bottom edge H^p(X,f_*F) → H^p(Z,F). The injective-resolution construction of this
-edge gives the displayed cocycle characterization and naturality.
-2. If all positive higher direct images vanish, only row zero remains. Every differential
-on each page r ≥ 2 has source or target outside that row, and hence vanishes. Thus E∞ = E₂.
-For total degree p all graded pieces except the p-th vanish. The finite filtration therefore
-identifies its p-th piece with the whole abutment H^p(Z,F). Consequently the same edge map
-is an isomorphism, whose inverse gives the comparison in the direction stated in the node. -/
+this characterization independent of the resolutions and comparison maps. -/
 theorem exists_lerayEdge_isIso_of_acyclic {Z X : TopCat.{u}} (f : Z ⟶ X) :
     ∃ a : (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
         (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶

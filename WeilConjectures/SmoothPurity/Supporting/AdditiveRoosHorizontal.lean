@@ -9,7 +9,11 @@ public import WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 import all WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 
 /-! # Horizontal coherence of additive Roos comparisons
-(blueprint: lem-pur-additive-roos-horizontal). -/
+
+## References
+
+* Stacks Project, Tag 08TC.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -138,14 +142,7 @@ private theorem roos_composite
   simpa only [Category.assoc] using
     congrArg (· ≫ integralOperationsRoosMap c) (roos_horizontal F G H η C)
 
-/-- Compatible composites of strict tower comparisons give compatible Roos maps.
-Source: Stacks Tag 08TC, functoriality of the explicit homotopy inverse limit.
-(blueprint: lem-pur-additive-roos-horizontal).
-Proof: product projections identify the horizontal composite of canonical product
-comparisons with the comparison for the composite functor. Naturality of eta at
-the two cocone coordinates and the mapping cocone identity decomposition give
-horizontal coherence. Apply this, naturality, and functoriality of the Roos map
-to the assumed equation of tower transformations. -/
+/-- Compatible composites of strict tower comparisons give compatible Roos maps. -/
 theorem additiveRoosComposite
     (F : A ⥤ B) [F.Additive] (G : B ⥤ D) [G.Additive]
     (H : A ⥤ D) [H.Additive] (η : F ⋙ G ≅ H)

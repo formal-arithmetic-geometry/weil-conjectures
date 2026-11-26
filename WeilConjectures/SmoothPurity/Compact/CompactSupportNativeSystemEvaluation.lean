@@ -13,8 +13,14 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenSquare
 
 /-! # Canonical evaluation of native compact-support systems
 
-Source: Stacks 03DI, 0D6E; Bhatt--Scholze 6.7.6
-(blueprint: def-weil-compact-support-native-system-evaluation).
+This file defines the native sequence-site presentation of the finite coefficient quotients
+and the canonical isomorphism between the evaluation at level `n` of the native compact-support
+system functor and finite-level compact support.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 6.7.6.
+* Stacks Project, Tags 03D2, 03DI, 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +34,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The section-normalized comparison of the two ordinary direct-image models.
-Source: Stacks 03DI, 03D2
-(blueprint: def-weil-compact-support-native-system-evaluation). -/
+/-- The section-normalized comparison of the two ordinary direct-image models. -/
 def compactSupportDirectModel {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] :
     ProEtale.StrictTower.moduleDirectImage (ULift.{u + 1, u} A) f ≅
@@ -42,9 +46,7 @@ def compactSupportDirectModel {X Y : Scheme.{u}} (f : X ⟶ Y)
     Functor.whiskerRight z.hom (forget₂ CommRingCat RingCat))
   exact ((proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _).apply_symm_apply _
 
-/-- The comparison of open extensions determined by their adjunction units.
-Source: Stacks 03DI, 03D2
-(blueprint: def-weil-compact-support-native-system-evaluation). -/
+/-- The comparison of the two models of extension by zero, determined by their adjunctions. -/
 def compactSupportOpenModel {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] :
     ProEtale.StrictTower.moduleJ (ULift.{u + 1, u} A) j ≅
@@ -52,24 +54,20 @@ def compactSupportOpenModel {X Z : Scheme.{u}} (j : X ⟶ Z)
   exact (ProEtale.StrictTower.moduleJAdj (ULift.{u + 1, u} A) j).leftAdjointUniq
     ((sfIntrinsicOpenAdjunction A j).ofNatIsoRight (openSquarePullbackModel A j).symm)
 
-/-- The positive coefficient ring in the native sequence-site presentation.
-Source: Stacks 03DI, 0D6E
-(blueprint: def-weil-compact-support-native-system-evaluation). -/
+/-- The finite coefficient ring at level `n` (exponent `n + 1`) in the native sequence-site
+presentation. -/
 @[instance_reducible]
 def compactSupportSystemLevel (n : ℕ) : CommRingCat.{u + 1} :=
   CommRingCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))
 
-/-- The adjacent quotient in the native sequence-site presentation.
-Source: Stacks 03DI, 0D6E
-(blueprint: def-weil-compact-support-native-system-evaluation). -/
+/-- The adjacent quotient map in the native sequence-site presentation. -/
 @[instance_reducible]
 def compactSupportSystemQuotient (n : ℕ) :
     compactSupportSystemLevel l E (n + 1) ⟶ compactSupportSystemLevel l E n :=
   CommRingCat.ofHom (Padic.coefficientExtensionTransition l E (n + 1)).ulift
 
-/-- The canonical geometric evaluation, with the native adjunction normalization.
-Source: Stacks 03DI, 0D6E
-(blueprint: def-weil-compact-support-native-system-evaluation). -/
+/-- Evaluation at level `n` of the native compact-support system functor `Rp_* j_!` is
+isomorphic to finite-level compact support of the evaluation. -/
 def compactSupportSystemEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (n : ℕ) :
     (ProEtale.VaryingRing.J (compactSupportSystemLevel l E)

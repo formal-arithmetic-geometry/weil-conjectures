@@ -15,8 +15,9 @@ import all WeilConjectures.Topology.ConstantSheafLocallyConstantComparison
 /-!
 # The unit-compatible locally constant description of the constant abelian sheaf
 
-Source: literature/stacks-project/sheaves.tex, Definition 006W and Example 0081.
-(blueprint: lem-sc-constant-sheaf-locally-constant-unit-comparison)
+## References
+
+* Stacks Project, Definition 006W and Example 0081.
 -/
 
 @[expose] public section
@@ -27,33 +28,9 @@ universe u v
 
 namespace TopCat
 
-/-- The constant abelian sheaf is naturally the group of locally constant maps on opens.
-
-Source: literature/stacks-project/sheaves.tex, Definition 006W and Example 0081.
-(blueprint: lem-sc-constant-sheaf-locally-constant-unit-comparison)
-Proof: first extract elementwise gluing and separation from the abelian sheaf condition
-using the corepresentability of the forgetful functor by the lifted integers. The
-subgroups of sections locally in the image of the constant-presheaf unit form a sheaf:
-local representatives are stable under restriction, addition on common intersections,
-and negation; gluing preserves the local representative property. The unit factors
-through this subsheaf. Its sheafification lift followed by the inclusion is the identity,
-by uniqueness of sheafification, so every section is locally represented by a constant.
-For a point x, the presheaf with value A on opens containing x and the trivial group
-elsewhere is a sheaf, directly by gluing. Factoring the constant presheaf map to this
-skyscraper sheaf through sheafification proves the unit injective on every open containing
-x. This proof does not require the space and coefficient universes to coincide.
-Assign to a section at x the value of any local constant representative. On intersections
-the injectivity just proved makes this value independent of the representative. The
-resulting function is locally constant. Restriction and addition follow by comparing
-representatives on a common neighbourhood. Equality of these functions implies local,
-hence global, equality of sections. Conversely, the constant sections on the open fibres
-of a locally constant function agree on overlaps and glue to a section with that function.
-The resulting bijective additive maps are the required additive equivalences; restriction
-compatibility was proved pointwise. The local representative of a unit section is its
-prescribed value, giving the additional compatibility with the sheafification unit.
-The proof reuses the comparison construction of group P3, retaining its hconst equation.
-Empty opens are included: separation is vacuous and
-the gluing argument works with all fibres empty. -/
+/-- The constant abelian sheaf is naturally the group of locally constant maps on opens,
+compatibly with the sheafification unit: a unit section corresponds to its prescribed constant
+value. -/
 theorem constantSheaf_locallyConstant_unit_comparison
     (X : TopCat.{u})
     [HasWeakSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{v}]

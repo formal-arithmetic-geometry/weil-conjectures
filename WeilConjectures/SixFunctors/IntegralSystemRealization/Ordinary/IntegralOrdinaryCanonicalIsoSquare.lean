@@ -11,8 +11,6 @@ import all WeilConjectures.SixFunctors.GeneratorReduction.GeneratorKind.TensorAd
 import all WeilConjectures.SixFunctors.GeneratorReduction.OpenReconstructionEffectivity
 
 /-! # Ordinary coefficient squares for canonical isomorphisms
-
-Source: blueprint fix-prop-coherence, the coefficient comparisons of individual maps.
 -/
 
 @[expose] public noncomputable section
@@ -888,20 +886,7 @@ private theorem openProjection_square
     (by simpa only [Iso.symm_hom, Iso.app_inv] using! hs')
   exact hi
 
-/-- Forward squares for the listed ordinary structural isomorphisms.
-Source: blueprint fix-prop-coherence, tensor reassociation and geometric/open compositors.
-(blueprint: lem-sf-integral-ordinary-canonical-iso-square).
-
-Proof: substitute the independently constructed child coefficient maps into the
-primitive coefficient diagrams. Tensor reassociation uses reduction_compatible
-and tensorClosed; pull composition uses canonicalReductionPullComposition, and
-proper composition is its adjoint mate. Open composition, base change and projection
-are the specified open-adjunction mates, so their squares follow by pasting the
-pullback, tensor, unit and counit squares. The clopen comparison is the inverse
-open unit transposed by the direct-image adjunction. Compactification expansion
-is definitionally the same open/proper recursion on both sides. Naturality inserts every child
-coefficient map, including repeated inputs. No completion or chosen expression
-realization occurs, and inverse structural arrows are not asserted here. -/
+/-- Forward squares for the listed ordinary structural isomorphisms. -/
 theorem ordinaryCanonicalIsoSquare
     (o : Operations l E) (a : AmbientModels l E o)
     {B : Scheme.{u}} {I : Type u} {X : I → Over B}

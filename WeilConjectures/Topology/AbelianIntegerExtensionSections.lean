@@ -10,6 +10,13 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Topology.AbelianOpenExtensionByZero
 import all WeilConjectures.Topology.AbelianSheafLocalIntegerGenerator
 
+/-! # Sections as images of integer extensions by zero
+
+## References
+
+* Stacks Project, Tags 00A5 and 0A38.
+-/
+
 @[expose] public section
 
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
@@ -18,18 +25,7 @@ universe u
 
 namespace TopCat.Sheaf
 
-/-- Every section is the unit image of a map from the integer extension by zero.
-Source: Stacks Project, Sheaves, Lemma 00A5, and Cohomology, Lemma 0A38,
-https://stacks.math.columbia.edu/tag/00A5 and https://stacks.math.columbia.edu/tag/0A38
-(blueprint: lem-sc-abelian-integer-extension-sections)
-
-Proof: Given a section s of F on U, on each open of U send an integer z to
-z times the restriction of s to the image open in X. These additive maps commute
-with restriction. Sheafification gives a map from the constant integer sheaf to
-F restricted to U. Apply extension by zero and compose with its restriction
-counit. Naturality of the sheafification unit and the counit's formula on the
-sole direct-sum summand show that the canonical unit maps to s. The construction
-works for s = 0 and for empty U, without any compactness assumption. -/
+/-- Every section is the unit image of a map from the integer extension by zero. -/
 theorem abelianIntegerExtension_section_lift
     (X : TopCat.{u}) (F : Sheaf AddCommGrpCat.{u} X) (U : Opens X)
     (s : F.obj.obj (op U)) :

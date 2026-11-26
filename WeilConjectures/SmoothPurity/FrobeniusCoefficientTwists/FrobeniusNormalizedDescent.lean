@@ -17,14 +17,7 @@ set_option backward.isDefEq.respectTransparency.types true
 open CategoryTheory
 namespace WeilConjectures.FrobeniusCoefficientTwists
 
-/-- A normalized inverse descends uniquely across a localization on an iso-closed property.
-Source: coefficient-twist clause 4; Mathlib Localization.fullyFaithfulWhiskeringLeft.
-(blueprint: lem-weil-frobenius-normalized-localization-descent).
-Proof: descend the specified natural transformation through full faithfulness of
-whiskering. On every representative its component has the prescribed inverse.
-Essential surjectivity transports invertibility to every object satisfying the
-property, giving the natural inverse there. Naturality and essential surjectivity
-also force uniqueness from the representative normalization. -/
+/-- A normalized inverse descends uniquely across a localization on an iso-closed property. -/
 theorem normalized_descent
     {A B C : Type*} [Category A] [Category B] [Category C]
     (L : A ⥤ B) (W : MorphismProperty A) [L.IsLocalization W]

@@ -53,7 +53,7 @@ open Scheme
 variable {k : Type u} [Field k] {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom]
 
-/-! ### Sheaf-theoretic part of route (a) -/
+/-! ### Sheaf-theoretic part of the reduction -/
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   (k' : Type u) [Field k'] [Algebra k k'] [IsSeparated X.hom]
@@ -89,17 +89,10 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_isEmpty
 
 set_option linter.unusedVariables false in
 -- The lisse generator data are part of the interface of the reduction.
-/-- **The codimension-one core** (route (a), after the geometric reduction
-`isEmpty_or_exists_opens_subset_range`): the hypotheses of
-`exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator_of_mem_closure`, with the
-closure condition replaced by its consequence that, on an open neighbourhood `V` of `ζ`, the
-lisse generator `Rg_! Rj'_! M` is lisse on all of `V ∖ Z`.
-
-This is the genuine local acyclicity statement: near `ζ` the complex `j_! N` is the extension by
-zero of a lisse complex on the complement of the divisor (up to the universal homeomorphism
-`U₀ ∩ V ⟶ V ∖ Z`), and `Le^* Ψ_X(j_! N)` vanishes near `ζ`. It holds for every bounded
-constructible `N` (`exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl`), by reduction to
-`𝔽_E`-coefficients through an integral model of `N` and derived Nakayama. -/
+/-- **The codimension-one core**: the hypotheses of
+`exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator_of_mem_closure`, with the closure
+condition replaced by its consequence that, on an open neighbourhood `V` of `ζ`, the lisse generator
+`Rg_! Rj'_! M` is lisse on all of `V ∖ Z`. Then `Le^* Ψ_X(j_! N)` vanishes near `ζ`. -/
 theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range
     [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
     (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}
@@ -125,11 +118,9 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range
               (overRestrictι X I.support.compl)).obj N).obj))) :=
   exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl k' hX hh hI ζ hζ N
 
-/-- **The target modulo the codimension-one core**: route (a) reduces
-`exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator_of_mem_closure` to
-`exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range`, by the geometric reduction
-`isEmpty_or_exists_opens_subset_range` and the empty case
-`exists_isZero_upperStar_nearbyCycles_lowerShriek_of_isEmpty`. -/
+/-- **Lisse generators whose support closure contains `ζ`**: for a lisse generator
+`N = Rg_! Rj'_! M` of `Dᵇc(X ∖ Z)` whose support has closure containing the generic point `ζ` of
+`Z`, the restricted specialization `Le^* Ψ_X(j_! N)` vanishes near `ζ`. -/
 theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator_of_mem_closure
     [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
     (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}
@@ -156,13 +147,11 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator_of_mem_c
   · exact exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range k' hX hh hI g j' M hM
       N e ζ hζ V hζV hV
 
-/-- **The local computation at a generic point of a principal divisor for lisse generators**
-(the local nearby-cycles computation of the proof of blueprint
-`lemma-vanishing-generic-points-principal-divisor--1`, for extensions by zero of lisse generators):
-let `X` be normal, `Z = V(h)` for a nonzero global function `h`, `j : X ∖ Z ⟶ X` the complement, `N`
-a lisse generator of `Dᵇc(X ∖ Z)⟦ℚ̲̄_ℓ⟧` and `ζ` a generic point of an irreducible component of `Z`.
+/-- **The local computation at a generic point of a principal divisor for lisse generators**: let
+`X` be normal, `Z = V(h)` for a nonzero global function `h`, `j : X ∖ Z ⟶ X` the complement, `N` a
+lisse generator of `Dᵇc(X ∖ Z)⟦ℚ̲̄_ℓ⟧` and `ζ` a generic point of an irreducible component of `Z`.
 Then the restriction `Le^* Ψ_X(j_! N)` to the zero section vanishes over a neighbourhood of `ζ`: the
-extension by zero is locally acyclic along the divisor near `ζ`. Unfinished. -/
+extension by zero is locally acyclic along the divisor near `ζ`. -/
 theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator [IsSepClosed k']
     [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] (hX : IsNormalScheme X.left)
     {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}
@@ -185,10 +174,9 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator [IsSepCl
   · exact exists_isZero_upperStar_nearbyCycles_lowerShriek_of_notMem_closure k' g _ N hNM.some ζ
       hζZ₀
 
-/-- **Reduction of the local computation to the lisse generators**: for `L` with `Li^* L = 0`,
-the restricted specialization `Le^* Ψ_X(L)` vanishes near `ζ` as soon as it does for the
-extensions by zero `j_! N` of the lisse generators `N` of `Dᵇc(X ∖ Z)⟦ℚ̲̄_ℓ⟧`. Indeed the
-open–closed triangle `j_! Lj^* L ⟶ L ⟶ Ri_* Li^* L ⟶` shows `L ≅ j_! Lj^* L`. -/
+/-- **Reduction of the local computation to the lisse generators**: for `L` with `Li^* L = 0`, the
+restricted specialization `Le^* Ψ_X(L)` vanishes near `ζ` as soon as it does for the extensions by
+zero `j_! N` of the lisse generators `N` of `Dᵇc(X ∖ Z)⟦ℚ̲̄_ℓ⟧`. -/
 theorem exists_isZero_upperStar_nearbyCycles_of_lowerShriek {I : X.left.IdealSheafData}
     (ζ : (centre X I).left)
     (h : ∀ N : Dᵇc((overRestrict X I.support.compl).left)⟦Profinite.padicAlgClRingObj ℓ⟧,

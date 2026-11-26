@@ -14,7 +14,16 @@ public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRinge
 
 /-! # Pasted binary squares for the explicit native derived tensor models
 
-Source: Stacks 06YN, 06YU, 0FPT. Transport the explicit chain models through localization.
+Transport the explicit chain models through localization.
+
+## Implementation details
+
+Both squares are obtained by combining the separately proved left and right binary model
+pastings.
+
+## References
+
+* Stacks 06YN, 06YU, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -51,11 +60,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 
 attribute [local irreducible] nativeWeilRingedMonoidal nativeRingedTensorComparison
 
-/-- Both iterated native binary model squares commute with the ringed comparisons.
-Source: Stacks 0FPT
-(blueprint: lem-sf-native-weil-ringed-associator-model-squares).
-
-Proof: combine the separately proved left and right binary model pastings. -/
+/-- Both iterated native binary model squares commute with the ringed comparisons. -/
 theorem nativeRingedAssociatorModel_squares
     (P Q N : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (hP : NativeTensorKFlat k₀ l X T P) (hQ : NativeTensorKFlat k₀ l X T Q)

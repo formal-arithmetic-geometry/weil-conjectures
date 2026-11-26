@@ -18,8 +18,8 @@ the restriction of `f`. Write `ε_{X,Z}(L) : Le^* Ψ_X(L) ⟶ Ψ_Z(Li^* L)` for 
 (`ProEtale.CondensedRing.zeroSectionMap`), `f̃ : 𝒟_{Z'} X' ⟶ 𝒟_Z X` and `f̃_Z : Z' × S ⟶ Z × S` for
 the morphisms of models induced by `f`, with special fibres `f_s` and `g_s`.
 
-This file proves, for arbitrary coefficients, the commutative squares of the proof of blueprint
-`lemma-base-change-cone-x-z`:
+This file proves, for arbitrary coefficients, the commutative squares relating the zero-section maps
+along `f`:
 
 * the *pullback square* (`ProEtale.CondensedRing.zeroSectionMap_upperStar_square`): through the
   pullback exchanges `α_{f̃}` and `α_{f̃_Z}`, `Lg_s^* ε_{X,Z}(L)` corresponds to
@@ -33,7 +33,7 @@ This file proves, for arbitrary coefficients, the commutative squares of the pro
   `Rg_{s*} ε_{X',Z'}(L')`; both sides have the same adjoint for `Lg_s^* ⊣ Rg_{s*}`, by the pullback
   square.
 
-It also proves the triangulated step of blueprint `lemma-base-change-cone-x-z`
+It also proves the triangulated step
 (`ProEtale.CondensedRing.nonempty_specializationDefect_iso_of_distTriang`): for a distinguished
 triangle `A ⟶ B ⟶ D ⟶ A[1]` with `Ψ_Z(Li^* A) = 0` and `ε_{X,Z}(D)` invertible,
 `C_{X,Z}(A) ≅ C_{X,Z}(B)`, both being `Le^* Ψ_X(A)[1]`.
@@ -150,9 +150,11 @@ lemma zeroSectionMap_lowerStar_square_aux {DX DX' DZ DZ' SX SX' SZ SZ' : Type*} 
 /-- **The pushforward square of the zero-section maps**: through the pushforward exchanges `χ` of
 `f̃ : 𝒟_{Z'} X' ⟶ 𝒟_Z X` and `f̃_Z : Z' × S ⟶ Z × S` and the base change morphisms `β` of the
 squares `i' ≫ f = f_Z ≫ i` and `e' ≫ f_s = g_s ≫ e`,
-`χ_{f̃_Z}(Li'^* L') ∘ Ψ_Z(β(L')) ∘ ε_{X,Z}(Rf_* L') = Rg_{s*} ε_{X',Z'}(L') ∘ β(Ψ_{X'} L') ∘
-Le^* χ_{f̃}(L')`. Both sides have the same adjoint for `Lg_s^* ⊣ Rg_{s*}`, by the pullback square
-`zeroSectionMap_upperStar_square` and the counit identities of the exchanges. -/
+```
+χ_{f̃_Z}(Li'^* L') ∘ Ψ_Z(β(L')) ∘ ε_{X,Z}(Rf_* L')
+  = Rg_{s*} ε_{X',Z'}(L') ∘ β(Ψ_{X'} L') ∘ Le^* χ_{f̃}(L').
+```
+-/
 lemma zeroSectionMap_lowerStar_square
     (L' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X'.left) Ab.{u + 1})
       (condensedRingObj Λ X'.left))) :
@@ -234,11 +236,9 @@ lemma nonempty_iso_obj₃_of_comp_aux {D : Type*} [Category D] [Preadditive D] [
     (Arrow.isoMk (asIso (a ≫ b)) (asIso (c ≫ d)) (by simpa using w))
   exact ⟨Triangle.π₃.mapIso φ⟩
 
-/-- **The defect along a triangle whose first term is killed by `Ψ_Z Li^*`** (the triangulated step
-of blueprint `lemma-base-change-cone-x-z`): for a distinguished triangle `A ⟶ B ⟶ D ⟶ A[1]`
-with `Ψ_Z(Li^* A) = 0` and `ε_{X,Z}(D)` invertible, `C_{X,Z}(A) ≅ C_{X,Z}(B)`. Indeed both are
-`Le^* Ψ_X(A)[1]`: the first since `ε_{X,Z}(A)` has target zero, the second since `ε_{X,Z}(B)` is
-`Le^* Ψ_X(B ⟶ D)` up to the isomorphisms `Ψ_Z Li^*(B) ≅ Ψ_Z Li^*(D)` and `ε_{X,Z}(D)`. -/
+/-- **The defect along a triangle whose first term is killed by `Ψ_Z Li^*`**: for a distinguished
+triangle `A ⟶ B ⟶ D ⟶ A[1]` with `Ψ_Z(Li^* A) = 0` and `ε_{X,Z}(D)` invertible,
+`C_{X,Z}(A) ≅ C_{X,Z}(B)`. -/
 theorem nonempty_specializationDefect_iso_of_distTriang
     {T : Triangle (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj Λ X.left)))} (hT : T ∈ distTriang _)
@@ -259,10 +259,9 @@ theorem nonempty_specializationDefect_iso_of_distTriang
 /-! ### The exchanges of the defect -/
 
 -- The defeq checks of `Functor.mapTriangle` on the derived categories exceed the default limit.
-/-- **Smooth exchange for the defect, given the smooth exchanges of nearby cycles**: if the
-pullback exchanges of `f̃ : 𝒟_{Z'} X' ⟶ 𝒟_Z X` at `L` and of `f̃_Z : Z' × S ⟶ Z × S` at `Li^* L` are
-invertible, then `C_{X',Z'}(Lf^* L) ≅ Lg_s^* C_{X,Z}(L)`: these exchanges carry
-`Lg_s^* ε_{X,Z}(L)` to `ε_{X',Z'}(Lf^* L)` (`zeroSectionMap_upperStar_square`). -/
+/-- **Smooth exchange for the defect, given the smooth exchanges of nearby cycles**: if the pullback
+exchanges of `f̃ : 𝒟_{Z'} X' ⟶ 𝒟_Z X` at `L` and of `f̃_Z : Z' × S ⟶ Z × S` at `Li^* L` are
+invertible, then `C_{X',Z'}(Lf^* L) ≅ Lg_s^* C_{X,Z}(L)`. -/
 theorem nonempty_specializationDefect_upperStar_iso_of_isIso
     (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj Λ X.left)))
@@ -278,11 +277,10 @@ theorem nonempty_specializationDefect_upperStar_iso_of_isIso
     (L((f.left)^*⟦Λ⟧).obj L)).choose_spec.choose_spec
   exact (nonempty_iso_obj₃_of_comp_aux _ _ hT₂ hT' _ _ _ _ hw).map Iso.symm
 
-/-- **Proper exchange for the defect, given the proper exchanges**: if the pushforward exchanges
-of `f̃` at `L'` and of `f̃_Z` at `Li'^* L'` and the base change morphisms of the squares
+/-- **Proper exchange for the defect, given the proper exchanges**: if the pushforward exchanges of
+`f̃` at `L'` and of `f̃_Z` at `Li'^* L'` and the base change morphisms of the squares
 `i' ≫ f = f_Z ≫ i` at `L'` and `e' ≫ f_s = g_s ≫ e` at `Ψ_{X'}(L')` are invertible, then
-`C_{X,Z}(Rf_* L') ≅ Rg_{s*} C_{X',Z'}(L')`: these maps carry `ε_{X,Z}(Rf_* L')` to
-`Rg_{s*} ε_{X',Z'}(L')` (`zeroSectionMap_lowerStar_square`). -/
+`C_{X,Z}(Rf_* L') ≅ Rg_{s*} C_{X',Z'}(L')`. -/
 theorem nonempty_specializationDefect_lowerStar_iso_of_isIso
     (L' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X'.left) Ab.{u + 1})
       (condensedRingObj Λ X'.left)))
@@ -308,9 +306,7 @@ theorem nonempty_specializationDefect_lowerStar_iso_of_isIso
 
 
 omit [Algebra k k'] in
-/-- **The defect of the zero ideal vanishes** (blueprint `lemma-base-change-cone-x-z`, first
-assertion): for `J = ⊥`, the zero section `Y × S ⟶ 𝒟_⊥ Y` is an isomorphism of models, so the
-zero-section map is invertible and `C_{Y,Y} = 0`. -/
+/-- **The defect of the zero ideal vanishes**: for `J = ⊥`, `C_{Y,Y} = 0`. -/
 theorem isZero_specializationDefect_of_eq_bot [Algebra k k'] (Y : Over (Spec (.of k)))
     (J : Y.left.IdealSheafData) (hJ : J = ⊥)
     (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})

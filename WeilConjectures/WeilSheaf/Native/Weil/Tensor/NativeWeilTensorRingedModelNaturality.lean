@@ -9,7 +9,11 @@ public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRinge
 
 /-! # Naturality of the explicit native one-K-flat model
 
-Source: Stacks 06YU, 0FPT and the representative step of native tensor transport.
+This is the representative step of native tensor transport.
+
+## References
+
+* Stacks 06YU, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -72,9 +76,7 @@ private theorem four_squares {C : Type*} [Category C]
     f0 ≫ b1 ≫ b2 ≫ b3 ≫ b4 = a1 ≫ a2 ≫ a3 ≫ a4 ≫ f4 := by
   rw [reassoc_of% h1, reassoc_of% h2, reassoc_of% h3, h4]
 
-/-- Naturality of the explicit transported model in both representative complexes.
-Source: Stacks 06YU, 0FPT
-(blueprint: lem-sf-native-weil-tensor-ringed-model-naturality). -/
+/-- Naturality of the explicit transported model in both representative complexes. -/
 theorem nativeWeilRingedTensorModel_naturality
     (P Q P' Q' : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (hP : NativeTensorKFlat k₀ l X T P) (hP' : NativeTensorKFlat k₀ l X T P')

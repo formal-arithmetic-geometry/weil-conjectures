@@ -14,8 +14,16 @@ import WeilConjectures.RingTheory.GradedSubmoduleFinite
 /-!
 # Finite graded kernels over the two-variable polynomial ring
 
-Source: blueprint `sec-picard-framework/det-thm-picard-duality/lem-sc-p1-graded-resolution.md`,
-proof, Noetherianity of successive graded kernels (blueprint: lem-sc-p1-graded-kernel-finite).
+The kernel of a degree-preserving map out of a finite graded `k[x₀,x₁]`-module is a finite graded
+submodule (`MvPolynomial.graded_kernel_finite`). This gives the Noetherianity of the successive
+kernels in a graded free resolution.
+
+## Implementation details
+
+The integer gradings are internal direct sums allowing arbitrary shifts; the polynomial ring
+carries its standard total-degree grading. Finite graded generation is expressed by finite
+homogeneous spanning sets, and the kernel grading is the one inherited from `F`, expressed by
+closure under homogeneous components.
 -/
 
 @[expose] public section
@@ -25,20 +33,7 @@ universe u v w
 namespace MvPolynomial
 
 /-- The kernel of a graded map out of a finite graded `k[x₀,x₁]`-module is finite graded.
-Source: blueprint `lem-sc-p1-graded-resolution.md`, proof, successive graded kernels
-(blueprint: lem-sc-p1-graded-kernel-finite).
-
-The internal integer gradings allow arbitrary shifts, with the polynomial ring carrying its
-standard total-degree grading. Finite graded generation is expressed by finite homogeneous
-spanning sets. The kernel grading is the grading inherited from `F`, expressed by closure under
-homogeneous components; its finite homogeneous generators are elements of `F` spanning `q.ker`.
-
-Proof:
-1. Decompose an element of the kernel into its finitely many homogeneous components. Since `q`
-   preserves degrees and `M` is an internal direct sum, each image component is zero. Thus every
-   homogeneous component belongs to the kernel, making it a graded submodule of `F`.
-2. Apply `lem-sc-p1-graded-submodule-finite` to this graded submodule of the finitely generated
-   graded module `F`. It supplies the finite homogeneous generating set for the kernel. -/
+It is homogeneous for the grading of `F` and spanned by finitely many homogeneous elements. -/
 theorem graded_kernel_finite {k : Type u} [Field k]
     {F : Type v} [AddCommGroup F] [Module (MvPolynomial (Fin 2) k) F]
     {M : Type w} [AddCommGroup M] [Module (MvPolynomial (Fin 2) k) M]

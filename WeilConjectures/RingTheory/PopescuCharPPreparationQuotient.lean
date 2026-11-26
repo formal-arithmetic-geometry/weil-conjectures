@@ -16,7 +16,19 @@ import WeilConjectures.RingTheory.EssentiallySmoothLocalizedQuotientFactorizatio
 /-!
 # Popescu characteristic-p preparation: quotient descent
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ.
+The auxiliary thickening factorization of the positive characteristic case descends to the
+quotient by the eighth powers of the parameters.
+
+## Implementation details
+
+The quotient by `J = (π_i^8)` is finitely presented, and the maximal-ideal power bound makes the
+image of `q` a minimal prime of `Λ / J Λ`; this bound is needed because zero parameters alone
+would not cut the localization down to dimension zero. The factorization itself comes from
+`essentiallySmooth_localized_quotient_factorization`.
+
+## References
+
+* [Stacks, Tag 07FJ] (construction and quotient steps)
 -/
 
 @[expose] public section
@@ -24,36 +36,9 @@ universe u v w
 open scoped TensorProduct
 namespace Algebra
 
--- Previous interface: STATEMENT-DISPUTED because zero parameters satisfy hparam without
--- cutting the target localization to dimension zero. The power bound below repairs it.
 set_option linter.unusedVariables false in
 /-- Descend the auxiliary thickening factorization to the eighth-power quotient and derive
-the dimension and minimal-prime alternative.
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07FJ, construction and
-quotient steps (with n=N+de).
-(blueprint: popescu-char-p-preparation-quotient).
-
-Proof:
-1. Let R=k[X_1,…,X_m], J=(π_i^8), JC=J·C and JT=J·Λ. Parameter membership gives JT⊆q.
-   The quotient universal property gives γ₀:C/JC→Λ/JT, and the image of q under the
-   quotient map gives q₀. Quotient surjectivity proves the required prime equality.
-   JC is finitely generated as the extension of the finitely generated ideal J, hence
-   C/JC is finitely presented over R. Restricting scalars gives finite presentation over R/J.
-
-2. Extract the positive n and maximal-ideal power bound from hconstruction. Any prime p₀
-   below q₀ contracts to a prime p⊆q containing JT. Its extension to L=Λ_q is prime and
-   contains the nth power of the maximal ideal, so it contains that maximal ideal.
-   Contracting gives q⊆p. Quotient surjectivity then gives q₀⊆p₀. Thus q₀ is a minimal
-   prime of Λ/JT, and its localization has Krull dimension zero. It is consequently
-   minimal over every ideal contained in it, including popescuIdeal γ₀. If that ideal
-   is not contained in q₀, choose the first alternative instead.
-
-3. Apply essentiallySmooth_localized_quotient_factorization to γ, J, the quotient maps,
-   and the auxiliary factorization extracted from hconstruction. That theorem constructs
-   E=P⊗_(Q/I)D, descends the maps using the quotient and tensor universal properties,
-   proves essential smoothness by localization base change, and checks their composite
-   on pure tensors. Combine it with the minimality and dimension from step 2.
--/
+the dimension and minimal-prime alternative. -/
 theorem popescu_char_p_preparation_quotient
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]

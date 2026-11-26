@@ -23,14 +23,24 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompact
 
 /-! # Ordinary locally finite adic compact-support realization
 
-Source: current blueprint, prose-10-20, common-field
-comparisons; Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
-(blueprint: lem-sf-locally-finite-adic-compact-support-realization).
+The canonical scalar-extension comparison between ordinary common-stage and native
+derived compact-support functors is a natural isomorphism.
+
+## Implementation details
 
 The auxiliary coefficient closure in the finite-stage construction is lifted only to
 use its published interface. Every finite field below is a subfield of PadicAlgCl,
 and the descended functor acts on the original, unlifted common-stage category.
 The section presentation fixes the scalar comparison as a mate of actual operations.
+
+The natural isomorphism is assembled from the native geometry, the stage action of the
+rational operations and the finite-stage comparison isomorphisms; naturality on a
+common-stage arrow is checked by factoring it into a source transition, a same-stage
+arrow and an inverse target transition.
+
+## References
+
+* [Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15]
 -/
 
 @[expose] public noncomputable section
@@ -68,30 +78,9 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 
 /-- The canonical scalar-extension comparison is a natural isomorphism of ordinary
 common-stage and native derived compact-support functors. Neither X nor Y is assumed
-separated over the field. Source: blueprint common-field comparisons;
-Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15
-(blueprint: lem-sf-locally-finite-adic-compact-support-realization).
-
-Proof:
-1. Obtain the normalized native ring and section geometry from
-lem-sf-native-compact-support-geometry. This construction is independent of the finite
-field datum and does not impose absolute separatedness on either scheme.
-2. Use lem-sf-locally-finite-compact-support-stage-action to assemble the rational
-operations of P and their prescribed scalar comparisons into a stage morphism.
-3. Apply lem-sf-native-compact-support-finite-comparison to obtain the three coefficient
-realizations, compatible coefficient changes and finite-stage comparison isomorphisms.
-Their integral components have the original six-arrow proper/open scalar-mate formula.
-4. At a pair A use the component of the finite-stage comparison at A.stage and A.obj.
-Theorem lem-sf-stage-comparison-naturality proves naturality on every common-stage arrow:
-factor its representative into a source transition, a same-stage arrow and an inverse
-target transition, and use the finite comparison's transition equation and naturality.
-NatIso.ofComponents therefore gives alpha. Its integral components are the prescribed
-finite-stage components, so the six-arrow normalization is retained verbatim.
-5. A native constructible object is isomorphic to a source-realized stage object by the
-source image clause. The stage morphism sends that object to a target-stage object.
-Compose alpha with compact support applied to the given isomorphism; the target image
-clause gives constructibility of actual compact support. This includes zero objects,
-empty schemes and identity coefficient extensions. -/
+separated over the field. Its integral components are given by the six-arrow
+proper/open scalar-mate formula, and actual compact support preserves native
+constructible objects. -/
 theorem locally_finite_adic_compact_support_realization :
     ∃ G : NativeGeometry.{u} l,
       @Nonempty (CompactSupportComparison l D hl P c (G := G)) := by

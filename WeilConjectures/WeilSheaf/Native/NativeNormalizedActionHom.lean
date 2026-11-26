@@ -11,7 +11,13 @@ import all WeilConjectures.WeilSheaf.NativeFrobeniusRingedModel.NativeActionSite
 /-! # The normalized forward action-site Hom comparison
 
 This records the underlying map of the existing comparison, without choosing
-new sites or equivalences. Source: native action-site Hom comparison step 2.
+new sites or equivalences.
+
+## Implementation details
+
+Each component is `action_hom_component`, whose underlying map is `E(P.hom)` followed by
+`A.hom`; naturality follows from `P.hom_naturality` and `A.hom_naturality`, lifted by
+faithfulness of native forgetting.
 -/
 
 @[expose] public section
@@ -20,14 +26,7 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-/-- The action-site Hom comparison with its specified underlying ordinary map.
-Source: the local Hom/evaluation paragraph of prose-10-20,
-and the normalized component construction of native_action_site_hom_comparison.
-(blueprint: lem-sf-native-normalized-action-hom).
-
-Proof: use action_hom_component for each pair. Its underlying map is E(P.hom)
-followed by A.hom. P.hom_naturality followed by A.hom_naturality proves
-naturality; faithfulness of native forgetting lifts that equation. -/
+/-- The action-site Hom comparison with its specified underlying ordinary map. -/
 theorem normalized_action_hom
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}

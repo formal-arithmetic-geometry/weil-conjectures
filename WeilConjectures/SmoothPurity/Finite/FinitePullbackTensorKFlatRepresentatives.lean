@@ -41,8 +41,12 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Extending finite tensor representatives beyond flat terms
 
-Source: Stacks Tags 06YS and 07A4.
-(blueprint: lem-pur-finite-pullback-tensor-kflat-representatives).
+The prescribed finite pullback tensor square holds on arbitrary K-flat complexes whose
+ordinary pullbacks are K-flat, not only on complexes with flat terms.
+
+## References
+
+* [Stacks: Tags 06YS, 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -107,18 +111,8 @@ private theorem finiteRepresentative_eq (W : Scheme.{u}) (n : ℕ)
   exact heq_comp_eqToIso h.1 _ _ _ (h.2 ⟨P, hP⟩ ⟨Q, hQ⟩)
 
 -- The two-input resolution argument includes the full tensor naturality square.
-/-- The prescribed finite tensor square on arbitrary K-flat complexes whose ordinary
-pullbacks are K-flat. Source: Stacks 06YS and 07A4
-(blueprint: lem-pur-finite-pullback-tensor-kflat-representatives).
-Proof: regard both sides as natural isomorphisms on pairs of K-flat complexes whose
-pullbacks are K-flat. The tensor-model comparisons are natural on this full subcategory.
-Resolve each input by a flat-term K-flat complex. Its ordinary pullback is again a
-flat-term K-flat complex. The existing flat representative square gives equality at
-the resolved pair, because its uniquely normalized representative is the restriction
-of the prescribed finite tensor model. The localization of each resolution is an
-isomorphism. Naturality of the tensor models makes the localized total tensor map
-invertible too. Naturality of the two square composites and cancellation transport
-the equality to the original pair. No terms of that pair need be flat. -/
+/-- The prescribed finite tensor square holds on arbitrary K-flat complexes whose ordinary
+pullbacks are K-flat. -/
 theorem finitePullbackTensor_ringed_kflat_square {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]

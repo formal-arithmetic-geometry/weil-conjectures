@@ -16,8 +16,10 @@ Let `X` be a separated `k`-scheme of finite type and `S` a finite set of rationa
 A bounded constructible `ℚ̄_ℓ`-complex `C` on `X` whose restriction to the open complement
 `X ∖ S` (`ProEtale.CondensedRing.pointsCompl`) vanishes is detected by its global sections: if
 `RΓ(X, C) = 0`, then `C = 0`
-(`ProEtale.CondensedRing.isZero_of_isZero_upperStar_pointsComplι_of_isZero_lowerStar`, blueprint
-`lemma-finite-support-global-sections--1`).
+(`ProEtale.CondensedRing.isZero_of_isZero_upperStar_pointsComplι_of_isZero_lowerStar`). This is
+the finite-support step of Gabber's Künneth formula for nearby cycles.
+
+## Implementation details
 
 The proof is by induction on `S`. For `S = S' ∪ {x}`, the open–closed triangle
 `j_! Lj^* C ⟶ C ⟶ Rx_* Lx^* C ⟶` of the complement `j` of `x` splits: its connecting morphism
@@ -25,6 +27,10 @@ vanishes since `j_! Lj^* C` vanishes on the open neighbourhood `X ∖ S'` of `x`
 (`ProEtale.CondensedRing.eq_zero_of_lowerStar_rationalPoint`). Hence `RΓ(X, Rx_* Lx^* C) = Lx^* C`
 is a retract of `RΓ(X, C) = 0`, so `C` vanishes at `x`, hence on `X ∖ S'`, and we conclude by
 induction.
+
+## References
+
+* L. Illusie, *Around the Thom–Sebastiani theorem*, 4.7
 
 -/
 
@@ -233,8 +239,7 @@ section Splitting
 variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 /-- **Hom vanishing at a rational point**: if `D` vanishes on an open neighbourhood `V` of a
-rational point `x`, then every morphism `Rx_* E ⟶ D` vanishes. Indeed `Rx_* ≅ Rx_!` since `x` is
-proper, and `Rx^! D ≅ Rx_V^! Rj_V^! D ≅ Rx_V^! Lj_V^* D = 0`. -/
+rational point `x`, then every morphism `Rx_* E ⟶ D` vanishes. -/
 lemma eq_zero_of_lowerStar_rationalPoint {V : Over (Spec (.of k))} [LocallyOfFiniteType V.hom]
     [QuasiCompact V.hom] [IsSeparated V.hom] (xV : RationalPoint V) (jV : V ⟶ X)
     [IsOpenImmersion jV.left] {x : RationalPoint X} (hx : xV ≫ jV = x)
@@ -258,7 +263,7 @@ lemma eq_zero_of_lowerStar_rationalPoint {V : Over (Spec (.of k))} [LocallyOfFin
   exact (cancel_epi e.hom).1 (h.trans comp_zero.symm)
 
 /-- If `Rx_* Lx^* C` is a retract of `C` through the unit, and `RΓ(X, C) = 0`, then
-`Lx^* C = 0`: indeed `RΓ(X, Rx_* Lx^* C) = Lx^* C` is then a retract of `RΓ(X, C) = 0`. -/
+`Lx^* C = 0`. -/
 lemma isZero_upperStar_of_retract (x : RationalPoint X)
     (C : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hΓ : IsZero ((boundedConstructibleLowerStar ℓ
@@ -285,8 +290,7 @@ variable {ℓ}
 
 /-- **A complex vanishes at a rational point `x` if its global sections vanish**, provided its
 extension by zero `j_! Lj^* C` from the complement `j` of `x` vanishes on an open neighbourhood
-`W'` of `x`: the open–closed triangle `j_! Lj^* C ⟶ C ⟶ Rx_* Lx^* C ⟶` then splits, so
-`RΓ(X, Rx_* Lx^* C) = Lx^* C` is a retract of `RΓ(X, C) = 0`. -/
+`W'` of `x`. -/
 theorem isZero_upperStar_rationalPoint_of_isZero_lowerStar (x : RationalPoint X)
     (W' : X.left.Opens) (hx : Set.range x.left.base ⊆ W')
     (C : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -388,16 +392,10 @@ theorem isZero_upperStar_pointsComplι_of_insert [DecidableEq (RationalPoint X)]
     hcov C (isZero_upperStar_rationalPoint_of_isZero_lowerStar x _ hx C hD hΓ) hU
 
 variable (ℓ) in
-/-- **Global sections detect complexes supported at finitely many rational points** (blueprint
-`lemma-finite-support-global-sections--1`, the finite-support step of Gabber's Künneth formula for
-nearby cycles, Illusie, *Around the Thom–Sebastiani theorem*, 4.7): let `S` be a finite set of
-rational points of a separated `k`-scheme of finite type `X`. If the restriction of
-`C ∈ Dᵇc(X, ℚ̄_ℓ)` to the open complement `X ∖ S` vanishes, and `RΓ(X, C) = 0`, then `C = 0`.
-
-This is the case of rational points; when `k` is algebraically closed, every closed point is
-rational. The proof is by induction on `S`: the open–closed triangle at a point `x ∈ S` splits
-(`isZero_upperStar_rationalPoint_of_isZero_lowerStar`), so `C` vanishes at `x`, hence on the
-complement of `S ∖ {x}` (`isZero_upperStar_pointsComplι_of_insert`). -/
+/-- **Global sections detect complexes supported at finitely many rational points**: let `S` be
+a finite set of rational points of a separated `k`-scheme of finite type `X`. If the restriction
+of `C ∈ Dᵇc(X, ℚ̄_ℓ)` to the open complement `X ∖ S` vanishes, and `RΓ(X, C) = 0`, then
+`C = 0`. -/
 theorem isZero_of_isZero_upperStar_pointsComplι_of_isZero_lowerStar
     (S : Finset (RationalPoint X)) (C : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hU : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ

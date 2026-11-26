@@ -18,12 +18,22 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
 
 /-! # The regular coefficient scalar unit is a quasi-isomorphism
 
-Source: Bhatt--Scholze, Propositions 3.1.10, 3.2.3(1), 4.2.8,
-Definition 3.5.2 and Lemma 6.8.2(1)
-(blueprint: lem-weil-constant-scalar-unit-quasi-isomorphism).
+We show that the normalized unit of the integral scalar extension of the regular coefficient
+complex is a quasi-isomorphism, and identify its ordinary limit, derived product,
+Roos triangle and inverse projections.
 
-Positive exponent m is indexed by n = m-1. The strict tower, tensor,
-normalized unit and mapping cocone are those of the recorded dependencies.
+## Implementation details
+
+Positive exponent `m` is indexed by `n = m - 1`. The strict tower, tensor,
+normalized unit and mapping cocone are those of the recorded dependencies. The proof shows that
+the quotient reductions are locally surjective, so the strict tower is a surjective tower whose
+ordinary limit is the regular complex; the degreewise-epi kernel cocone criterion then gives the
+quasi-isomorphism and the Roos triangle. No finiteness or connectedness of `Y` is needed.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Propositions 3.1.10, 3.2.3(1), 4.2.8,
+  Definition 3.5.2 and Lemma 6.8.2(1)
 -/
 
 @[expose] public noncomputable section
@@ -44,28 +54,20 @@ variable (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L) (Y : Scheme.{t})
 
-/-- The actual restricted quotient tower of the regular source complex.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-weil-constant-scalar-unit-quasi-isomorphism). -/
+/-- The actual restricted quotient tower of the regular source complex. -/
 abbrev tower := (integralScalarTowerFunctor l E L ι Y).obj (regularComplex l E Y)
 
-/-- Its termwise product B, before localization.
-Source: Bhatt--Scholze, Proposition 3.1.10
-(blueprint: lem-weil-constant-scalar-unit-quasi-isomorphism). -/
+/-- The termwise product `B` of the quotient tower, before localization. -/
 abbrev product := ∏ᶜ (fun n : ℕ ↦ (tower l E L ι Y).obj (op n))
 
-/-- The first component of the specified normalized unit.
-Source: Bhatt--Scholze, Lemma 6.8.2(1), strict coordinate refinement
-(blueprint: lem-weil-constant-scalar-unit-quasi-isomorphism). -/
+/-- The first component of the specified normalized unit. -/
 def inclusion (η : regularComplex l L Y ⟶
     (integralScalarComplexFunctor l E L ι Y).obj (regularComplex l E Y)) :
     regularComplex l L Y ⟶ product l E L ι Y :=
   η ≫ CochainComplex.mappingCocone.fst (boundary l E Y L ι)
 
-/-- The prescribed quotient leg u_n inverse composed with pi_n.
-Its tensor formula is fixed by quotientCoordinates, rather than a choice of isomorphism.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-weil-constant-scalar-unit-quasi-isomorphism). -/
+/-- The prescribed quotient leg: the inverse of `u_n` composed with `π_n`.
+Its tensor formula is fixed by `quotientCoordinates`. -/
 def leg (η : regularComplex l L Y ⟶
     (integralScalarComplexFunctor l E L ι Y).obj (regularComplex l E Y)) (n : ℕ) :=
   inclusion l E L ι Y η ≫ Pi.π (fun m : ℕ ↦ (tower l E L ι Y).obj (op m)) n
@@ -697,43 +699,7 @@ private theorem regular_complete
 
 -- Assemble the tower comparisons without unfolding the coefficient existence witnesses.
 /-- The normalized unit is a quasi-isomorphism, with its ordinary-limit, derived-product,
-Roos-triangle and inverse-projection identifications; the self-extension is complete.
-Source: Bhatt--Scholze, Propositions 3.1.10 (p.17), 3.2.3(1) (p.18), 4.2.8 (p.29),
-Definition 3.5.2 (p.24), Lemma 6.8.2(1) (pp.58--59)
-(blueprint: lem-weil-constant-scalar-unit-quasi-isomorphism).
-
-Proof:
-1. lem-weil-l-adic-extension-integers-dvr and lem-weil-valued-dvr-finite-quotients
-make every positive target quotient finite and its reductions surjective, also in
-ramified extensions.
-2. def-weil-pbc-constant-sheaf, lem-pe-ring-sheafification-underlying-sets and
-lem-weil-pbc-site-sheafification-sections-local lift quotient sections locally.
-The reductions are therefore locally surjective, i.e. epimorphisms of sheaves; the
-sheafified sectionwise cokernel is zero, so they are epimorphic in modules
-(situation-conventions).
-3. The multiplication isomorphisms of lem-weil-constant-scalar-strict-unit identify
-the strict tower with the target quotient tower. By
-situation-conventions its ordinary limit is R_L[0],
-with exactly the quotient legs (def-weil-completed-integral-coefficients).
-4. lem-weil-proetale-surjective-tower-derived-limit gives that 1-s is degreewise epi
-and its kernel inclusion is the ordinary limit inclusion. Outside degree zero all
-terms vanish.
-5. lem-weil-degreewise-epi-kernel-cocone-qis gives a quasi-isomorphism from this
-kernel with unshifted component the inclusion and shifted component zero.
-Uniqueness in lem-weil-constant-scalar-strict-unit identifies it with eta.
-6. The same surjective-tower theorem identifies the actual termwise product as a
-derived product and supplies the distinguished triangle with these very first and
-second arrows, hence the Roos triangle of def-weil-derived-limit.
-7. def-weil-abstract-derived-category inverts eta. For j_n = fst followed by pr_n,
-the strict normalization says eta followed by j_n is the prescribed quotient leg.
-Compose its localized equality with the inverse of Q(eta) to obtain the displayed
-projection compatibility. The strict cone is precisely the representative used by
-def-weil-integral-scalar-extension on the regular K-flat complex.
-8. For the identity extension, the strict-unit reductionUnits assertion identifies
-the first map with the canonical derived reduction units. The triangle therefore
-proves def-weil-derived-complete. All arguments allow arbitrary Y, including the
-empty scheme and disconnected schemes, and require no finiteness of Y.
--/
+Roos-triangle and inverse-projection identifications; the self-extension is complete. -/
 theorem regular_scalar_unit_quasi_isomorphism (D : FiniteFieldDatum.{d}) (_hl : l ≠ D.p)
     (η : regularComplex l L Y ⟶
       (integralScalarComplexFunctor l E L ι Y).obj (regularComplex l E Y))

@@ -31,8 +31,8 @@ structures it is the pro-étale `Rf̄_! = Rḡ_* ∘ ī_!` of
 built into the categories of pro-étale Weil sheaves, no transport of the compactification along the
 Frobenius is needed.
 
-That `Rf_!` carries Weil complexes to Weil complexes is the finiteness theorem for `Rf_!`
-(SGA 4½, *Th. finitude*), `AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerShriek`,
+That `Rf_!` carries Weil complexes to Weil complexes is the finiteness theorem for `Rf_!`,
+`AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerShriek`,
 deduced from the finiteness of `ī_!` and of `Rḡ_*`. The higher direct images `Rʳf₀!` of Weil
 sheaves are the cohomology sheaves of `Rf₀!`. Compactly supported cohomology is defined in
 `WeilConjectures.WeilSheaf.Cohomology` from `Rf₀!` along the structure morphism `X ⟶ Spec k₀`.
@@ -44,6 +44,16 @@ sheaves are the cohomology sheaves of `Rf₀!`. Compactly supported cohomology i
 - `AlgebraicGeometry.WeilSheaf.higherLowerShriek` and
   `AlgebraicGeometry.WeilComplex.derivedLowerShriek`: the higher direct images with compact
   support `Rʳf₀!` and the total derived one `Rf₀!`.
+
+## Implementation details
+
+In the finiteness theorem the target is assumed quasi-compact over `k₀`: over
+`Y = ⊔ₙ Spec k₀` the direct image of `ℚ̄_ℓ` along the proper morphism `⊔ₙ ℙⁿ ⟶ Y` is not
+bounded.
+
+## References
+
+* [SGA 4½], *Th. finitude*.
 -/
 
 @[expose] public section
@@ -104,14 +114,8 @@ lemma hasCompactification_of_over (f : X ⟶ Y) [IsSeparated f] [LocallyOfFinite
     quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (CommRingCat.of k₀))
   inferInstance
 
-/-- **Finiteness for the direct image with compact support of Weil complexes** (SGA 4½,
-*Th. finitude*): `Rf_!` carries Weil complexes, bounded with constructible cohomology, to
-Weil complexes. For `Rf_! = Rḡ_* ∘ ī_!` this follows from the exactness of `ī_!`, which
-preserves constructibility (`AlgebraicGeometry.WeilSheaf.isAdicConstructibleSheaf_extensionByZero`),
-and from the finiteness of `Rḡ_*`
-(`AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerStar`). The target is assumed
-quasi-compact over `k₀`: over `Y = ⊔ₙ Spec k₀` the direct image of `ℚ̄_ℓ` along the proper
-morphism `⊔ₙ ℙⁿ ⟶ Y` is not bounded. -/
+/-- **Finiteness for the direct image with compact support of Weil complexes**: `Rf_!` carries
+Weil complexes, bounded with constructible cohomology, to Weil complexes. -/
 theorem WeilComplex.objectProperty_rightDerivedLowerShriek (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [hf : HasCompactification f]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
@@ -141,7 +145,7 @@ theorem WeilComplex.objectProperty_rightDerivedLowerShriek (f : X ⟶ Y)
   rw [Functor.comp_obj]
   exact WeilComplex.objectProperty_rightDerivedLowerStar c.g _ hK'
 
--- TODO(unify): sk-thm-sf-package
+-- TODO(unify): unify with the six-functor formalism package.
 variable (k₀ l) in
 /-- The total derived direct image with compact support `Rf₀!` along a separated quasi-compact
 morphism `f : X ⟶ Y` locally of finite type of `k₀`-schemes, with `Y` of finite type and
@@ -159,7 +163,7 @@ noncomputable def WeilComplex.derivedLowerShriek (f : X ⟶ Y)
     (WeilComplex.objectProperty_rightDerivedLowerShriek f
       (hf := hasCompactification_of_over (k₀ := k₀) f))
 
--- TODO(unify): sk-thm-sf-package
+-- TODO(unify): unify with the six-functor formalism package.
 variable (k₀ l) in
 /-- The `r`-th higher direct image with compact support `Rʳf₀!` along a separated quasi-compact
 morphism locally of finite type of `k₀`-schemes, with target of finite type and

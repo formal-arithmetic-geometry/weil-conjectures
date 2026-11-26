@@ -11,8 +11,14 @@ import all WeilConjectures.SmoothPurity.Sf.SfRationalScalarExactOfIntegral
 
 /-! # Localization of normalized pullback shifts
 
-Source: the rationalization paragraph of the open-closed localization proof.
-(blueprint: lem-sf-rational-pullback-shift-localization).
+The rationalization step of the open-closed localization triangle.
+
+## Implementation details
+
+The rational pullback is identified with the semilinear extension for the identity coefficient
+map using the object and pure-tensor formulas, and `extension_exact` gives the normalized
+comparison at one and exactness for the image triangles. The `CommShift` laws extend the square
+at one to positive shifts by addition and to negative shifts by inverses.
 -/
 
 @[expose] public noncomputable section
@@ -93,18 +99,7 @@ private theorem rational_shift_exact
       |>.choose_spec.choose_spec.2.choose_spec.2.2)
     F hF
 
-/-- A linear exact integral pullback localizes with its canonical shift square.
-Source: current blueprint, sec-smooth-purity/sk-prop-sf-localization,
-prop-sf-open-closed-triangle-all-stages.proof.md, rationalization paragraph.
-(blueprint: lem-sf-rational-pullback-shift-localization).
-
-Proof: identify the rational pullback with the semilinear extension for the identity
-coefficient map using the object and pure-tensor formulas. Apply extension_exact to
-obtain the normalized comparison at one and exactness for the image triangles.
-The same formulas give the identity-component localization comparison. Its square at
-one follows from the two normalized localization comparisons. The CommShift laws
-extend that square to positive shifts by addition and to negative shifts by inverses.
-This retains the localization comparisons at every integer, including zero. -/
+/-- A linear exact integral pullback localizes with its canonical shift square. -/
 theorem rationalPullbackShiftLocalization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

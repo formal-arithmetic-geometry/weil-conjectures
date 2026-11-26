@@ -17,9 +17,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficien
 
 Let `X` be a quasi-compact quasi-separated scheme. For `E ∈ D⁺(X_ét)` and `K ∈ D⁺(ℤ)`, the
 canonical map `RΓ(X_ét, E) ⊗ᴸ K ⟶ RΓ(X_ét, E ⊗ᴸ K_X)` is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_constantProjectionMap_of_isGE_int`, blueprint
-`corollary-open-direct-image-over-field--2`, [Stacks 0F0E]). More generally this holds over any
-principal ideal domain
+(`AlgebraicGeometry.Etale.isIso_constantProjectionMap_of_isGE_int`, [Stacks, Tag 0F0E]). More
+generally this holds over any principal ideal domain
 (`AlgebraicGeometry.Etale.isIso_constantProjectionMap_of_isPrincipalIdealRing`). Abelian sheaves are
 sheaves of modules over `ULift ℤ`, and the map is `AlgebraicGeometry.Etale.constantProjectionMap`.
 
@@ -31,6 +30,10 @@ because `RᵠΓ(X, -)` commutes with filtered colimits on a qcqs scheme, hence a
 amplitude bounded below
 (`CategoryTheory.Functor.isIso_mapDerivedCategoryProjectionMap_app_of_torAmplitudeGE`).
 Over a principal ideal domain such as `ℤ`, every `K ∈ D^{≥ b}` has Tor amplitude in `[b - 1, ∞)`.
+
+## References
+
+* [Stacks, Tag 0F0E]
 -/
 
 @[expose] public section
@@ -117,13 +120,10 @@ theorem isIso_constantProjectionMap_of_isPrincipalIdealRing [IsDomain Λ] [IsPri
   isIso_constantProjectionMap_of_torAmplitudeGE Λ X E a K (b - 1)
     (torAmplitudeGE_of_isGE_of_isPrincipalIdealRing K b)
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: tensor with a constant complex over `ℤ`
-([Stacks 0F0E]).
-
-Let `X` be a quasi-compact quasi-separated scheme. For `E ∈ D⁺(X_ét)` and `K ∈ D⁺(ℤ)`, the
-canonical map `RΓ(X_ét, E) ⊗ᴸ_ℤ K ⟶ RΓ(X_ét, E ⊗ᴸ_ℤ K_X)`
-(`AlgebraicGeometry.Etale.constantProjectionMap`) is an isomorphism. Abelian sheaves are
-sheaves of modules over `ULift ℤ`. -/
+/-- Tensor with a constant complex over `ℤ`: let `X` be a quasi-compact quasi-separated scheme. For
+`E ∈ D⁺(X_ét)` and `K ∈ D⁺(ℤ)`, the canonical map `RΓ(X_ét, E) ⊗ᴸ_ℤ K ⟶ RΓ(X_ét, E ⊗ᴸ_ℤ K_X)`
+(`AlgebraicGeometry.Etale.constantProjectionMap`) is an isomorphism. Abelian sheaves are sheaves of
+modules over `ULift ℤ`. -/
 theorem isIso_constantProjectionMap_of_isGE_int
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))))
     (a : ℤ) [E.IsGE a] (K : DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) (b : ℤ)

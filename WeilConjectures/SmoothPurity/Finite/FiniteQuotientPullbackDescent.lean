@@ -10,8 +10,16 @@ import all WeilConjectures.CategoryTheory.Exact.ExactEquivalenceDerivedSquares
 
 /-! # K-flat descent of a finite quotient/pullback comparison
 
-Source: Stacks Tags 06YY and 07A4.
-(blueprint: lem-pur-finite-quotient-pullback-descent).
+## Implementation details
+
+The homotopy counits are transported to cochain localization, where on K-flat complexes they
+are the prescribed quotient models. Restriction to K-flat representatives is fully faithful, so
+the counit square fixes the descended natural isomorphism uniquely. No termwise flatness
+condition is imposed on the given representatives.
+
+## References
+
+* Stacks Project, Tags 06YY and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -111,16 +119,7 @@ private theorem quotientComplexCounit_app (W : Scheme.{u}) {m n : ℕ} (h : n �
 
 attribute [local irreducible] quotientComplexCounit
 
-/-- Descend a finite quotient comparison of complexes using the universal quotient counits.
-Source: Stacks Tags 06YY and 07A4
-(blueprint: lem-pur-finite-quotient-pullback-descent).
-Proof: transport the homotopy counits to cochain localization. On K-flat complexes
-these are precisely the prescribed quotient models. The first horizontal pullback
-preserves the K-flat representatives by hypothesis, and both horizontal pullbacks
-are exact. Apply the existing normalized comparison descent to their two composites.
-Restriction to K-flat representatives is fully faithful, so its counit square fixes
-the descended natural isomorphism uniquely. No termwise flatness condition is imposed
-on the given representatives. -/
+/-- A finite quotient comparison of complexes descends along the universal quotient counits. -/
 theorem finiteQuotientPullbackDescent {X Y : Scheme.{u}} (f : X ⟶ Y)
     {m n : ℕ} (h : n ≤ m)
     (c : (sfIntrinsicPullback

@@ -27,6 +27,13 @@ public import WeilConjectures.RingTheory.SmoothAtPrimeDifferentialsDimension
   invariant under isomorphisms of algebras.
 - `Algebra.Smooth.natCast_le_ringKrullDim`: the rank of the differentials of a smooth domain over
   a field is at most its Krull dimension.
+
+## Implementation details
+
+A smooth algebra over a field has regular, hence integral, local rings, so a connected spectrum
+is irreducible; together with reducedness this gives a domain. For the rank bound, at the
+generic point the dimension of the fibre of the differentials is the local dimension of the
+spectrum.
 -/
 
 @[expose] public section
@@ -36,9 +43,7 @@ universe u
 open AlgebraicGeometry
 open scoped TensorProduct
 
-/-- (E) A smooth algebra over a field with connected spectrum is a domain: its local rings are
-regular, hence domains, so its spectrum is irreducible, and it is reduced.
-(blueprint: `lemma-curve-preserving-finite-cover--1`) -/
+/-- A smooth algebra over a field with connected spectrum is a domain. -/
 theorem Algebra.Smooth.isDomain_of_connectedSpace {k A : Type u} [Field k] [CommRing A]
     [Algebra k A] [Algebra.Smooth k A] [ConnectedSpace (PrimeSpectrum A)] : IsDomain A := by
   have := Algebra.FiniteType.isNoetherianRing k A
@@ -107,8 +112,7 @@ theorem KaehlerDifferential.rank_eq_of_algEquiv {k : Type*} {R R' : Type u} [Com
   exact (algebraMap_smul R' r (f m)).symm
 
 /-- The rank of the module of differentials of a smooth domain over a field is at most its Krull
-dimension: at the generic point, the dimension of the fibre of the differentials is the local
-dimension of the spectrum. (blueprint: `lemma-curve-preserving-finite-cover--1`) -/
+dimension. -/
 theorem Algebra.Smooth.natCast_le_ringKrullDim {k A : Type u} [Field k] [CommRing A]
     [IsDomain A] [Algebra k A] [Algebra.Smooth k A] {n : ℕ}
     (h : Module.rank A Ω[A⁄k] = n) : (n : WithBot ℕ∞) ≤ ringKrullDim A := by

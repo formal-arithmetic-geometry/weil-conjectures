@@ -16,11 +16,14 @@ compatible with automorphisms of the four corners, the compact-support base-chan
 `Ex_! : Lg^* Rf_! K ≅ Rf'_! Lg'^* K` is an isomorphism of Weil objects, so that both have the
 same local traces
 (`ProEtale.CondensedRing.weilStalkTraceAlternatingSum_weilUpperStar_weilLowerShriek`).
-Its compatibility with the Frobenius structures is the pasting law of `Ex_!` (blueprint
-`proposition-composition-base-change-rf-shriek`, item (2)) applied to the rectangles formed by the
-square and the Frobenius squares, in the two possible orders
-(`ProEtale.CondensedRing.weilUpperStarLowerShriekIso_comm`). The transport of the isomorphism to
-Weil objects is the general `CategoryTheory.Endofunctor.IsoAlgebra.compMapOfNatIsoIsoOfIso`.
+
+## Implementation details
+
+The compatibility of `Ex_!` with the Frobenius structures is the pasting law of `Ex_!` for
+horizontally composed squares, applied to the rectangles formed by the square and the Frobenius
+squares, in the two possible orders (`ProEtale.CondensedRing.weilUpperStarLowerShriekIso_comm`).
+The transport of the isomorphism to Weil objects is the general
+`CategoryTheory.Endofunctor.IsoAlgebra.compMapOfNatIsoIsoOfIso`.
 -/
 
 @[expose] public section
@@ -92,9 +95,7 @@ include sq in
 /-- **The Frobenius compatibility of the compact-support base change**: for a cartesian square
 compatible with automorphisms of the corners,
 `Le_{Y'}^* Ex_! ≫ Ex_!(e) ≫ Rf'_!(b^*_{g'}) = b^*_g ≫ Lg^* Ex_!(e) ≫ Ex_!`, where `Ex_!(e)` are
-the Frobenius comparisons of the lower shrieks and `b^*` those of the pullbacks. Both sides are
-the exchange of the rectangle `e_{X'} ≫ g' = g' ≫ e_X` over `e_{Y'} ≫ g = g ≫ e_Y`, pasted in the
-two orders (`boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz`). -/
+the Frobenius comparisons of the lower shrieks and `b^*` those of the pullbacks. -/
 lemma weilUpperStarLowerShriekIso_comm (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eY'.hom).map
         ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app M) ≫
@@ -150,9 +151,7 @@ lemma weilUpperStarLowerShriekIso_comm (M : Dᵇc(X.left)⟦Profinite.padicAlgCl
 include sq in
 /-- **Compactly supported base change of Weil objects**: for a cartesian square
 `g' ≫ f = f' ≫ g` compatible with automorphisms of the four corners, the local traces of
-`Lg^* Rf_! K` and `Rf'_! Lg'^* K` agree. The base-change isomorphism
-`Ex_! : Lg^* Rf_! K ≅ Rf'_! Lg'^* K` is an isomorphism of Weil objects
-(`CategoryTheory.Endofunctor.IsoAlgebra.compMapOfNatIsoIsoOfIso` applied to `Ex_!`). -/
+`Lg^* Rf_! K` and `Rf'_! Lg'^* K` agree. -/
 theorem weilStalkTraceAlternatingSum_weilUpperStar_weilLowerShriek [Finite k]
     (K : WeilBoundedConstructible ℓ eX.hom)
     (n : ℕ) (y : Spec (.of (AlgebraicClosure k)) ⟶ Y'.left)

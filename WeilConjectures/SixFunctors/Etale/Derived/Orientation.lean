@@ -20,8 +20,8 @@ Let `Λ` be a finite coefficient ring carrying a Tate twist datum (`HasTateTwist
 twisting objects `Λ_X(d) = tateObject Λ X d`. For a smooth separated morphism `f : X ⟶ Y` of
 finite type and of pure relative dimension `d`, *smooth purity* provides a canonical isomorphism
 `Lf^* Λ_Y (d)[2d] ≅ Rf^! Λ_Y`, that is `Λ_X(d)[2d] ≅ Rf^! Λ_Y`. It is
-`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`
-(`proposition-smooth-purity-finite-coefficients`), which gives orientations through
+`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`, which gives orientations
+through
 `AlgebraicGeometry.Etale.Orientation.nonempty`. What is recorded in this file is the interface it
 produces, packaged as a structure `AlgebraicGeometry.Etale.Orientation`, together with the two
 consequences the six-functor formalism uses: for the structure morphism `a : X ⟶ S` an orientation
@@ -31,47 +31,44 @@ a perfect complex into its coefficient dual, twisted and shifted.
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.Orientation`: the interface record of an orientation of relative
-  dimension `d`, namely the smoothness of `f` together with `Λ_X(d)[2d] ≅ Rf^! Λ_Y` for the
-  Tate twist `Λ_X(d)`.
+  dimension `d`, namely the smoothness of `f` together with `Λ_X(d)[2d] ≅ Rf^! Λ_Y` for the Tate
+  twist `Λ_X(d)`.
 - `AlgebraicGeometry.Etale.Orientation.ofDualizingComplexIso`: the orientation given by an
   isomorphism `Λ_X(d)[2d] ≅ ω_X` for a smooth `a` of relative dimension `d`.
-- `AlgebraicGeometry.Etale.Orientation.twistShiftIso` (`rem-ptr-sf-orientation-2`): the purity
-  isomorphism in the twist conventions of `definition-tate-twists`,
-  `(twistShift Λ X d).obj Λ_X ≅ Rf^! Λ_Y`.
-- `AlgebraicGeometry.Etale.Orientation.verdierDualIso` (`theorem-poincare-duality--2`): the natural
-  isomorphism `θ_f : 𝔻_{X/Y} K = RHom(K, Rf^! Λ_Y) ≅ K^∨ ⊗ᴸ Λ_X(d)[2d]`, the composite of
-  `RHom(K, γ_f⁻¹)` and of the twist interchange; it is the case `T = Λ_X(d)[2d]` of
-  `AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor`, defined for any
-  `γ : T ≅ Rf^! Λ_Y` with `T` invertible.
-- `AlgebraicGeometry.Etale.Orientation.verdierDualEquivalence` (`theorem-poincare-duality--2`): the
-  anti-equivalence of the perfect objects given by `𝔻_{X/Y}`.
+- `AlgebraicGeometry.Etale.Orientation.twistShiftIso`: the purity isomorphism in the twist
+  conventions of `AlgebraicGeometry.Etale.twistShift`, `(twistShift Λ X d).obj Λ_X ≅ Rf^! Λ_Y`.
+- `AlgebraicGeometry.Etale.Orientation.verdierDualIso`: the natural isomorphism
+  `θ_f : 𝔻_{X/Y} K = RHom(K, Rf^! Λ_Y) ≅ K^∨ ⊗ᴸ Λ_X(d)[2d]`, the composite of `RHom(K, γ_f⁻¹)` and
+  of the twist interchange; it is the case `T = Λ_X(d)[2d]` of
+  `AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor`, defined for any `γ : T ≅ Rf^! Λ_Y`
+  with `T` invertible.
+- `AlgebraicGeometry.Etale.Orientation.verdierDualEquivalence`: the anti-equivalence of the perfect
+  objects given by `𝔻_{X/Y}`.
 - `AlgebraicGeometry.Etale.Orientation.verdierDualVerdierDualIso`: the isomorphism
   `𝔻_{X/Y} 𝔻_{X/Y} K ≅ K^∨∨` induced by `θ_f`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.Orientation.nonempty` (`rem-sf-orientation-pointer`): orientations
-  are not assumed; smooth purity constructs one for every smooth separated `f` of pure relative
-  dimension `d` over a separated scheme locally of finite type over a field.
-- `AlgebraicGeometry.Etale.Orientation.nonempty_iso_dualizingComplex`
-  (`theorem-smooth-purity-all-admissible-coefficients`): for the structure morphism the orientation
-  reads `ω_X ≅ Λ_X(d)[2d]`.
-- `AlgebraicGeometry.Etale.Orientation.nonempty_iso_verdierDual_coefficientDual`
-  (`theorem-poincare-duality--2`): `𝔻_X K ≅ K^∨(d)[2d]` for a perfect `K`.
-- `AlgebraicGeometry.Etale.Orientation.isDualizable_verdierDual`
-  (`theorem-poincare-duality--2`): `𝔻_X` preserves the perfect objects.
-- `…Etale.Orientation.verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom`
-  (`theorem-poincare-duality--2`): under `θ_f` the Verdier biduality `K ⟶ 𝔻_{X/Y} 𝔻_{X/Y} K` is
-  the coefficient-dual biduality `K ⟶ K^∨∨`; hence it is an isomorphism for perfect `K`
+- `AlgebraicGeometry.Etale.Orientation.nonempty`: orientations are not assumed; smooth purity
+  constructs one for every smooth separated `f` of pure relative dimension `d` over a separated
+  scheme locally of finite type over a field.
+- `AlgebraicGeometry.Etale.Orientation.nonempty_iso_dualizingComplex`: for the structure morphism
+  the orientation reads `ω_X ≅ Λ_X(d)[2d]`.
+- `AlgebraicGeometry.Etale.Orientation.nonempty_iso_verdierDual_coefficientDual`:
+  `𝔻_X K ≅ K^∨(d)[2d]` for a perfect `K`.
+- `AlgebraicGeometry.Etale.Orientation.isDualizable_verdierDual`: `𝔻_X` preserves the perfect
+  objects.
+- `…Etale.Orientation.verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom`: under `θ_f` the
+  Verdier biduality `K ⟶ 𝔻_{X/Y} 𝔻_{X/Y} K` is the coefficient-dual biduality `K ⟶ K^∨∨`; hence it
+  is an isomorphism for perfect `K`
   (`AlgebraicGeometry.Etale.Orientation.isIso_verdierDualDoubleDual_app_of_isDualizable`).
-- `AlgebraicGeometry.Etale.whiskerLeft_verdierDualIsoCoefficientDualTensor_hom_app_comp`
-  (`theorem-poincare-duality--2`): `θ` is compatible with the evaluations. The compatibility with a
-  change of coefficients is `CategoryTheory.MonoidalClosed.map_ihomIsoIhomUnitTensor_hom`, and
-  the pro-étale coefficient stages are
-  `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.DualPerfect`.
-- `AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor_hom_app_shift`
-  (`theorem-poincare-duality--2`): `θ` commutes with shifts, `θ_{K⟦n⟧} = θ_K⟦-n⟧` under
-  `AlgebraicGeometry.Etale.ihomShiftIso` (`RHom(K⟦n⟧, M) ≅ RHom(K, M)⟦-n⟧`).
+- `AlgebraicGeometry.Etale.whiskerLeft_verdierDualIsoCoefficientDualTensor_hom_app_comp`: `θ` is
+  compatible with the evaluations. The compatibility with a change of coefficients is
+  `CategoryTheory.MonoidalClosed.map_ihomIsoIhomUnitTensor_hom`, and the pro-étale coefficient
+  stages are `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.DualPerfect`.
+- `AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor_hom_app_shift`: `θ` commutes with
+  shifts, `θ_{K⟦n⟧} = θ_K⟦-n⟧` under `AlgebraicGeometry.Etale.ihomShiftIso`
+  (`RHom(K⟦n⟧, M) ≅ RHom(K, M)⟦-n⟧`).
 
 ## Implementation notes
 
@@ -84,6 +81,15 @@ is always invertible, and leaving it out keeps the field free of the comparison 
 dimension `d`. Constructions that only use the shape of the purity isomorphism, such as the
 derived Poincaré pairing of `WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing`, take
 an isomorphism `T⟦2d⟧ ≅ ω_X` as an argument instead.
+
+The identification `M⟦-n⟧ ⊗ᴸ T ≅ (M ⊗ᴸ T)⟦-n⟧` of
+`AlgebraicGeometry.Etale.shiftTensorIsoOfIsInvertible` is built ad hoc. It is not (yet) known to
+agree with the canonical commutation of `⊗ᴸ` with shifts
+(`AlgebraicGeometry.Etale.derivedTensorShiftIso`,
+`AlgebraicGeometry.Etale.commShiftDerivedTensorFlipObj`), since the coherence of the associator
+with shifts is not available. The shift compatibility
+`AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor_hom_app_shift` is stated relative to
+this identification.
 
 Perfectness is `CategoryTheory.IsDualizable`; see the implementation note of
 `WeilConjectures.SixFunctors.Etale.Derived.Perfect`.
@@ -117,19 +123,14 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {X : Scheme.{u}} {ω T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
   (γ : T ≅ ω) (hT : IsInvertible T)
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex.
-
-For an isomorphism `γ : T ≅ ω_X` from an invertible complex `T` (for an orientation,
+/-- For an isomorphism `γ : T ≅ ω_X` from an invertible complex `T` (for an orientation,
 `T = Λ_X(d)[2d]`), the natural isomorphism
 ```
   θ_K : 𝔻_X K = RHom(K, ω_X) ≅ RHom(K, T) ≅ K^∨ ⊗ᴸ T,
 ```
 the composite of `RHom(K, γ⁻¹)` and of the twist interchange
-`AlgebraicGeometry.Etale.DerivedCategory.derivedHomIsoCoefficientDualTensor`
-(`AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor_app`). The results of this section are
-stated for an arbitrary object `ω` in place of the dualizing complex `ω_X`: for a finite
-coefficient ring `Λ` and `ω = ω_X`, `RHom(-, ω)` is `AlgebraicGeometry.Etale.verdierDual` and the
-double-dual map is `AlgebraicGeometry.Etale.verdierDualDoubleDual`. -/
+`AlgebraicGeometry.Etale.DerivedCategory.derivedHomIsoCoefficientDualTensor`. Here `ω` is an
+arbitrary object in place of the dualizing complex `ω_X`. -/
 noncomputable def verdierDualIsoCoefficientDualTensor :
     (RHom(X)[A]).flip.obj ω ≅
       DerivedCategory.coefficientDual A X ⋙ (derivedTensor A X).flip.obj T :=
@@ -144,10 +145,7 @@ lemma verdierDualIsoCoefficientDualTensor_app
         DerivedCategory.derivedHomIsoCoefficientDualTensor K hT :=
   rfl
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (compatibility with the
-canonical evaluation).
-
-Under `θ_K : 𝔻_X K ≅ K^∨ ⊗ᴸ T` the evaluation `K ⊗ᴸ 𝔻_X K ⟶ ω_X` is the coefficient evaluation
+/-- Under `θ_K : 𝔻_X K ≅ K^∨ ⊗ᴸ T` the evaluation `K ⊗ᴸ 𝔻_X K ⟶ ω_X` is the coefficient evaluation
 `K ⊗ᴸ K^∨ ⟶ Λ_X` tensored with `T`: the square
 ```
   K ⊗ᴸ 𝔻_X K ────── K ◁ θ_K ──────→ K ⊗ᴸ (K^∨ ⊗ᴸ T)
@@ -176,9 +174,7 @@ noncomputable def verdierDualVerdierDualIso
         (op ((DerivedCategory.coefficientDual A X).obj (op K))) :=
   MonoidalClosed.ihomIhomIsoIhomIhomUnit γ hT K
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (biduality).
-
-Under the isomorphism `𝔻_X 𝔻_X K ≅ K^∨∨` induced by `θ`, the double-dual map
+/-- Under the isomorphism `𝔻_X 𝔻_X K ≅ K^∨∨` induced by `θ`, the double-dual map
 `K ⟶ 𝔻_X 𝔻_X K` is the coefficient-dual biduality `K ⟶ K^∨∨`. -/
 @[reassoc]
 lemma verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom
@@ -188,17 +184,13 @@ lemma verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom
   MonoidalClosed.toIhomIhom_comp_ihomIhomIsoIhomIhomUnit_hom γ hT K
 
 include γ hT in
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (biduality).
-
-For a perfect `K` the double-dual map `K ⟶ 𝔻_X 𝔻_X K` is an isomorphism. -/
+/-- For a perfect `K` the double-dual map `K ⟶ 𝔻_X 𝔻_X K` is an isomorphism. -/
 theorem isIso_verdierDualDoubleDual_app_of_isDualizable
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
     IsIso ((derivedHomToIhomIhomNatTrans A X ω).app K) :=
   MonoidalClosed.isIso_toIhomIhom_of_isDualizable γ hT hK
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (anti-equivalence).
-
-The Verdier dual `𝔻_X` restricts to an anti-equivalence of the perfect objects of `D(X_ét)`,
+/-- The Verdier dual `𝔻_X` restricts to an anti-equivalence of the perfect objects of `D(X_ét)`,
 its own quasi-inverse, the unit and counit being the double-dual isomorphisms. -/
 noncomputable def verdierDualEquivalenceOfIso :
     (ObjectProperty.FullSubcategory
@@ -260,14 +252,7 @@ noncomputable def ihomShiftIso (K : _root_.DerivedCategory (Sheaf X.smallEtaleTo
 ```
   M⟦-n⟧ ⊗ᴸ T ≅ RHom(Λ_X⟦n⟧, M) ⊗ᴸ T ≅ RHom(Λ_X⟦n⟧, M ⊗ᴸ T) ≅ (M ⊗ᴸ T)⟦-n⟧,
 ```
-by `AlgebraicGeometry.Etale.ihomUnitShiftIso` and the twist interchange.
-
-This identification is built ad hoc. It is not (yet) known to agree with the canonical
-commutation of `⊗ᴸ` with shifts (`AlgebraicGeometry.Etale.derivedTensorShiftIso`,
-`AlgebraicGeometry.Etale.commShiftDerivedTensorFlipObj`), since the coherence of the
-associator with shifts is not available. The shift compatibility
-`AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor_hom_app_shift` is stated relative
-to this identification. -/
+by `AlgebraicGeometry.Etale.ihomUnitShiftIso` and the twist interchange. -/
 noncomputable def shiftTensorIsoOfIsInvertible (n : ℤ)
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     M⟦-n⟧ ⊗ T ≅ (M ⊗ T)⟦-n⟧ :=
@@ -275,10 +260,7 @@ noncomputable def shiftTensorIsoOfIsInvertible (n : ℤ)
   whiskerRightIso ((ihomUnitShiftIso X n).app M).symm T ≪≫
     asIso (MonoidalClosed.ihomTensorToIhom _ M T) ≪≫ (ihomUnitShiftIso X n).app _
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (compatibility with
-shifts).
-
-The isomorphism `θ_K : 𝔻_X K ≅ K^∨ ⊗ᴸ T` commutes with shifts: under the identifications
+/-- The isomorphism `θ_K : 𝔻_X K ≅ K^∨ ⊗ᴸ T` commutes with shifts: under the identifications
 `𝔻_X (K⟦n⟧) ≅ (𝔻_X K)⟦-n⟧` and `(K⟦n⟧)^∨ ⊗ᴸ T ≅ K^∨⟦-n⟧ ⊗ᴸ T ≅ (K^∨ ⊗ᴸ T)⟦-n⟧`
 (`AlgebraicGeometry.Etale.ihomShiftIso`,
 `AlgebraicGeometry.Etale.shiftTensorIsoOfIsInvertible`), `θ_{K⟦n⟧}` is `θ_K⟦-n⟧`. -/
@@ -313,25 +295,10 @@ end InvertibleDualizingComplex
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
 
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Orientation: an interface record.
-
-An *orientation* of relative dimension `d` for a separated morphism `f : X ⟶ Y` of finite type
+/-- An *orientation* of relative dimension `d` for a separated morphism `f : X ⟶ Y` of finite type
 consists of the smoothness of `f`, of pure relative dimension `d`, together with an isomorphism
 `γ : Λ_X(d)[2d] ≅ Rf^! Λ_Y`, where `Λ_X(d) = tateObject Λ X d` is the Tate twist. Since
-`Lf^* Λ_Y ≅ Λ_X` (`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_unit`), this is the
-blueprint's `Lf^* Λ_Y (d)[2d] ≅ Rf^! Λ_Y`.
-
-In the blueprint an orientation is **not** an assumption: it is the smooth purity theorem
-`proposition-smooth-purity-finite-coefficients`, which lives in a different blueprint block; see
-`AlgebraicGeometry.Etale.Orientation.nonempty` (`rem-sf-orientation-pointer`).
-This structure therefore records only the interface that purity produces and that the six
-operations consume. The blueprint's naturality in `Y` and its compatibilities with composition,
-étale base change, finite reduction, scalar extension and the pro-étale realization concern the
-whole family of orientations; they are the conditions of
-`AlgebraicGeometry.Etale.OrientationDatum` (`theorem-smooth-purity-all-admissible-coefficients`).
-
-For the structure morphism `f = a_X` the isomorphism reads `ω_X ≅ Λ_X(d)[2d]`; see
-`AlgebraicGeometry.Etale.Orientation.nonempty_iso_dualizingComplex`. -/
+`Lf^* Λ_Y ≅ Λ_X`, this is an isomorphism `Lf^* Λ_Y (d)[2d] ≅ Rf^! Λ_Y`. -/
 structure Orientation (f : X ⟶ Y) (d : ℕ) [HasCompactification f] where
   /-- The morphism is smooth of pure relative dimension `d`. -/
   smoothOfRelativeDimension : SmoothOfRelativeDimension d f
@@ -346,11 +313,8 @@ noncomputable abbrev Orientation.twist {f : X ⟶ Y} {d : ℕ} [HasCompactificat
     (_o : Orientation Λ f d) : DerivedCategoryModule Λ X :=
   tateObject Λ X d
 
-/-- Blueprint `rem-ptr-sf-orientation-2`: Pointer to the properties of
-[theorem-smooth-purity-all-admissible-coefficients].
-
-The purity isomorphism of an orientation, read in the Tate twist conventions of
-`definition-tate-twists`: the source `Λ_X(d)[2d]` is the twist-and-shift
+/-- The purity isomorphism of an orientation, read in the Tate twist conventions of
+`AlgebraicGeometry.Etale.twistShift`: the source `Λ_X(d)[2d]` is the twist-and-shift
 `(twistShift Λ X d).obj Λ_X = (Λ_X ⊗ Λ_X(d))[2d]` of the constant complex, so that `γ` takes
 the form in which smooth purity
 (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`) states it. -/
@@ -359,12 +323,10 @@ noncomputable def Orientation.twistShiftIso {f : X ⟶ Y} {d : ℕ} [HasCompacti
     (twistShift Λ X d).obj (constantComplex Λ X) ≅ dualizingComplex Λ f :=
   twistShiftConstantComplexIso Λ X d ≪≫ o.purity
 
-/-- Blueprint `rem-sf-orientation-pointer`: Where the orientation is constructed.
-
-The orientation datum is not an assumption: for `f : X ⟶ Y` smooth separated of pure relative
+/-- Orientations exist: for `f : X ⟶ Y` smooth separated of pure relative
 dimension `d`, with `Y` separated and locally of finite type over a field `k` and the exponent
-of `Λ` invertible on `X`, smooth purity (`proposition-smooth-purity-finite-coefficients`,
-`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`) gives
+of `Λ` invertible on `X`, smooth purity
+(`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`) gives
 `Rf^! Λ_Y ≅ Λ_X(d)[2d]`, hence an orientation of `f` of relative dimension `d`. -/
 theorem Orientation.nonempty [HasTateTwist.IsNormalized Λ] {d : ℕ} (f : X ⟶ Y)
     [IsSeparated f] [SmoothOfRelativeDimension d f] [HasCompactification f]
@@ -387,9 +349,7 @@ def Orientation.ofDualizingComplexIso [SmoothOfRelativeDimension d a]
   smoothOfRelativeDimension := inferInstance
   purity := γ
 
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Orientation: an interface record.
-
-The special case of the orientation at the structure morphism `a : X ⟶ S`: `Ra^! Λ_S` is by
+/-- The special case of the orientation at the structure morphism `a : X ⟶ S`: `Ra^! Λ_S` is by
 definition the dualizing complex, so the purity isomorphism reads
 ```
 ω_X ═══ Ra^! Λ_S ≅ Λ_X(d)[2d]
@@ -408,9 +368,7 @@ theorem isInvertible_tateObject_shift [HasInvertibleExponent Λ X] :
   DerivedCategory.isInvertible_shift
     ((isInvertible_iff_exists_derivedTensor _).2 (isInvertible_tateObject Λ X d)) _
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex.
-
-Let `f = a : X ⟶ S` be a morphism admitting a compactification, with an orientation
+/-- Let `f = a : X ⟶ S` be a morphism admitting a compactification, with an orientation
 `γ_f : Λ_X(d)[2d] ≅ Rf^! Λ_S` of relative dimension `d`, and put
 `𝔻_{X/S} K = RHom_X(K, Rf^! Λ_S)`. The natural isomorphism
 ```
@@ -419,9 +377,7 @@ Let `f = a : X ⟶ S` be a morphism admitting a compactification, with an orient
 the composite of `RHom_X(K, γ_f⁻¹)` and of the twist interchange
 `AlgebraicGeometry.Etale.DerivedCategory.derivedHomIsoCoefficientDualTensor` (see
 `AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor_app`). For the structure morphism
-`a_X : X ⟶ Spec k` this is `θ_K : 𝔻_X K ≅ K^∨(d)[2d]`. The isomorphism `θ_{f,K}` exists for
-every `K`; the subsection's perfectness hypothesis is only needed for the biduality
-(`AlgebraicGeometry.Etale.Orientation.isIso_verdierDualDoubleDual_app_of_isDualizable`). -/
+`a_X : X ⟶ Spec k` this is `θ_K : 𝔻_X K ≅ K^∨(d)[2d]`. -/
 noncomputable def Orientation.verdierDualIso [HasInvertibleExponent Λ X] (o : Orientation Λ a d) :
     verdierDual Λ a ≅
       DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X ⋙
@@ -437,16 +393,11 @@ lemma Orientation.verdierDualIso_app [HasInvertibleExponent Λ X] (o : Orientati
           (isInvertible_tateObject_shift Λ X d) :=
   rfl
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex.
-
-Let `a : X ⟶ S` be a structure morphism admitting a compactification, let `o` be an
+/-- Let `a : X ⟶ S` be a structure morphism admitting a compactification, let `o` be an
 orientation of `a` of relative dimension `d`, and let `K` be perfect over `Λ_X`, i.e.
 dualizable. Substituting `ω_X ≅ Λ_X(d)[2d]` into `𝔻_X K = RHom_X(K, ω_X)` and interchanging
 the twist with the internal hom identifies the Verdier dual of `K` with the twisted, shifted
-coefficient dual: `𝔻_X K ≅ K^∨(d)[2d]`.
-
-When `[HasInvertibleExponent Λ X]` holds, the component `o.verdierDualIso.app (op K)` of `θ_f`
-is such an isomorphism. This statement needs no such hypothesis, because `K` is dualizable. -/
+coefficient dual: `𝔻_X K ≅ K^∨(d)[2d]`. -/
 theorem Orientation.nonempty_iso_verdierDual_coefficientDual (o : Orientation Λ a d)
     {K : DerivedCategoryModule Λ X} (hK : IsDualizable K) :
     Nonempty ((verdierDual Λ a).obj (op K) ≅
@@ -457,9 +408,7 @@ theorem Orientation.nonempty_iso_verdierDual_coefficientDual (o : Orientation Λ
     ((tateObject Λ X d)⟦(2 * d : ℤ)⟧)
   exact ⟨(RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).mapIso o.purity.symm ≪≫ e⟩
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex.
-
-Under an orientation the Verdier dual of a perfect complex is perfect, so that `𝔻_X`
+/-- Under an orientation the Verdier dual of a perfect complex is perfect, so that `𝔻_X`
 restricts to a contravariant anti-equivalence of the perfect objects. -/
 theorem Orientation.isDualizable_verdierDual [HasInvertibleExponent Λ X] (o : Orientation Λ a d)
     {K : DerivedCategoryModule Λ X} (hK : IsDualizable K) :
@@ -471,9 +420,7 @@ theorem Orientation.isDualizable_verdierDual [HasInvertibleExponent Λ X] (o : O
     (DerivedCategory.isDualizable_coefficientDual hK)
     (DerivedCategory.isDualizable_of_isInvertible (DerivedCategory.isInvertible_shift hT _)))
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (anti-equivalence).
-
-Under an orientation the Verdier dual `𝔻_{X/S} = RHom_X(-, Rf^! Λ_S)` restricts to an
+/-- Under an orientation the Verdier dual `𝔻_{X/S} = RHom_X(-, Rf^! Λ_S)` restricts to an
 anti-equivalence of the perfect objects of `D(X_ét, Λ)`, its own quasi-inverse; the unit and
 the counit are the double-dual isomorphisms
 (`AlgebraicGeometry.Etale.Orientation.isIso_verdierDualDoubleDual_app_of_isDualizable`). -/
@@ -492,9 +439,7 @@ noncomputable def Orientation.verdierDualVerdierDualIso [HasInvertibleExponent �
         (op ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))) :=
   Etale.verdierDualVerdierDualIso o.purity (isInvertible_tateObject_shift Λ X d) K
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (biduality).
-
-Under the isomorphism `𝔻_{X/S} 𝔻_{X/S} K ≅ K^∨∨` induced by `θ_f`, the double-dual map
+/-- Under the isomorphism `𝔻_{X/S} 𝔻_{X/S} K ≅ K^∨∨` induced by `θ_f`, the double-dual map
 `K ⟶ 𝔻_{X/S} 𝔻_{X/S} K` is the coefficient-dual biduality `K ⟶ K^∨∨`. -/
 @[reassoc]
 lemma Orientation.verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom
@@ -503,9 +448,7 @@ lemma Orientation.verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom
       (DerivedCategory.coefficientDualDoubleDual _ X).app K :=
   Etale.verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom _ _ K
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (biduality).
-
-Under an orientation, the double-dual map `K ⟶ 𝔻_{X/S} 𝔻_{X/S} K` of a perfect `K` is an
+/-- Under an orientation, the double-dual map `K ⟶ 𝔻_{X/S} 𝔻_{X/S} K` of a perfect `K` is an
 isomorphism. -/
 theorem Orientation.isIso_verdierDualDoubleDual_app_of_isDualizable [HasInvertibleExponent Λ X]
     (o : Orientation Λ a d)

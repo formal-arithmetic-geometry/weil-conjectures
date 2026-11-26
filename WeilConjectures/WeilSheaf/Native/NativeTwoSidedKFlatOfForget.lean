@@ -15,7 +15,21 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import Mathlib.Algebra.Homology.BifunctorFlip
 
-/-! # The ordinary acyclic tensor test implies the two-sided native K-flat test -/
+/-! # The ordinary acyclic tensor test implies the two-sided native K-flat test
+
+## Implementation details
+
+A chain map is a quasi-isomorphism iff its mapping cone is acyclic, and the total tensor with a
+fixed complex commutes with mapping cones, so it suffices that the native total tensor of `P` with
+an acyclic complex, on either side, is acyclic. Forgetting is faithful and exact, hence reflects
+acyclicity; after forgetting, the chain comparison (and the ordinary signed swap for the other
+side) identifies the complex with the ordinary total tensor of the forgotten `P` with an acyclic
+complex.
+
+## References
+
+* [Stacks Project, Tag 06YS](https://stacks.math.columbia.edu/tag/06YS)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -82,15 +96,7 @@ private theorem acyclic_tensor_right (P N : CochainComplex (ProEtaleWeilSheaf k�
   exact (hP _ (hN.map _) n).of_iso (chain N P ≪≫ swap _ _).symm
 
 /-- The ordinary acyclic tensor test for the forgotten complex implies the
-canonical native two-sided K-flat test.
-Source: Stacks 06YS (blueprint: lem-sf-native-two-sided-kflat-forget).
-
-Proof: a chain map is a quasi-isomorphism iff its mapping cone is acyclic, and the
-total tensor with a fixed complex commutes with mapping cones. So it suffices that
-the native total tensor of P with an acyclic complex, on either side, is acyclic.
-Forgetting is faithful and exact, hence reflects acyclicity; after forgetting, the
-chain comparison (and the ordinary signed swap for the other side) identifies the
-complex with the ordinary total tensor of the forgotten P with an acyclic complex. -/
+canonical native two-sided K-flat test. -/
 theorem nativeIsKFlat_of_nativeOrdinaryKFlat_forget
     (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (hP : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber

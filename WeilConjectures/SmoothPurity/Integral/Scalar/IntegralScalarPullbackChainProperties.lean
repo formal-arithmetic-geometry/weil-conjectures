@@ -12,11 +12,12 @@ import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarPullbackRoosQu
 
 /-! # Properties of the specified integral scalar pullback chain map
 
-Source: Stacks 07A4, 0941 and 08TC.
-(blueprint: lem-pur-integral-scalar-pullback-chain-quasi-iso).
-
 Naturality follows from the two Roos coordinates. The quasi-isomorphism proof
 specializes the normalized cofinal-filtration comparison to the specified maps.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941 and 08TC
 -/
 
 @[expose] public noncomputable section
@@ -82,15 +83,7 @@ private theorem scalarPullbackChain_naturality
   simpa only [δ, scalarRoosTransformation, scalarPullbackChain,
     integralOperationsPullbackComplexFunctor, Functor.comp_map] using δ.naturality a
 
-/-- The specified pullback chain comparison is a quasi-isomorphism on every good complex.
-Source: Stacks 07A4, 0941 and 08TC, via the normalized Roos comparison.
-(blueprint: lem-pur-integral-scalar-pullback-chain-quasi-iso).
-Proof: unfold the specified chain map as its additive Roos comparison followed
-by its strict tower comparison. Apply integralScalarPullbackRoosQuasiIso.
-The chosen strict tower normalization identifies its component at each n with
-the chosen finite-level map, whose generator normalization gives the first
-hypothesis. The two defining coordinates of scalarRoosMap give the second.
-No further completeness or boundedness assumption is used. -/
+/-- The specified pullback chain comparison is a quasi-isomorphism on every good complex. -/
 theorem scalarPullbackChainQuasiIso {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :
     QuasiIso (scalarPullbackChain l E L ι f P.obj) := by

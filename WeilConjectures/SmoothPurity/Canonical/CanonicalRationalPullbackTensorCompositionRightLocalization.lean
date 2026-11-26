@@ -7,9 +7,14 @@ module
 
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorConstraints
 
-/-! Localization of the right hand side of rational pullback/tensor composition.
-Source: Stacks 07A4 and 0941; normalized localization of the composition square.
-(blueprint: lem-pur-pullback-tensor-rational-composition-coherence-right-localization)
+/-! # Localization of the right hand side of rational pullback/tensor composition
+
+This file identifies the right hand side of the rational pullback/tensor composition square
+with the localization of the integral right hand side.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -28,13 +33,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The right side of rational composition is the localized integral right side.
-Source: Stacks 07A4 and 0941; localization of the normalized composition square.
-(blueprint: lem-pur-pullback-tensor-rational-composition-coherence-right-localization).
-Apply the localization formula for the composition compositor, the pullback map, and
-the canonical tensor comparison, then use functoriality of localization. Endpoint
-normalization identifies the resulting morphisms with the displayed types.
--/
+/-- The right side of rational composition is the localized integral right side. -/
 theorem canonicalRationalPullbackTensorComposition_right_localization {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]

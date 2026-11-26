@@ -18,8 +18,23 @@ import WeilConjectures.RingTheory.CompletionLocalizedAlgebraProductSurjective
 /-!
 # Surjectivity of the local completion comparison
 
-Source: Stacks Project, Algebra, Tag 07N9 (lemma-completion-finite-extension).
-(blueprint: lem-weil-pbc-completion-tensor-local-maps-surjective)
+For a finite algebra `S` over a Noetherian ring `R` and a prime `p` of `R`, the map from
+`R_p^∧ ⊗_R S` to the product of the completions of the local rings `S_q` at the primes `q`
+over `p` is surjective.
+
+## Implementation details
+
+For `n > 0` the Artinian ring `B/m^n B`, `B = R_p ⊗_R S`, is the product of the
+`S_q/m^n S_q` (Tags 00JA, 00CT). In each `S_q` the `m S_q`-adic and maximal-ideal-adic
+filtrations are cofinal (Tag 0394). A tuple in the target thus gives compatible elements of
+the `B/m^n B`, i.e. an element of the `m`-adic completion of `B`, which is a tensor in
+`C ⊗_R S` by Tag 00MA. The hypothesis on the quotient maps pins down the given map on this
+tensor.
+
+## References
+
+* [Stacks, Tag 07N9]
+* [Stacks, Tag 00MA]
 -/
 
 @[expose] public section
@@ -65,32 +80,9 @@ private theorem completionMap_eval
   simp only [RingHom.comp_apply, AlgHom.toRingHom_eq_coe, AlgHom.coe_toRingHom,
     hx, Ideal.quotientMap_mk]
 
-/-- Local completion tuples can be interpolated by completed tensors.
-Source: Stacks Project, Algebra, Tag 07N9 (lemma-completion-finite-extension),
-the inverse limit of the quotient product decompositions and Tag 00MA.
-(blueprint: lem-weil-pbc-completion-tensor-local-maps-surjective)
-
-Proof:
-1. Put A = R_p and B = A tensor_R S. B is finite over the Noetherian local ring A.
-   The finitely many primes over m correspond to Q and have local rings S_q.
-   For n > 0 the Artinian ring B/m^n B is canonically the product of the
-   S_q/m^n S_q by Tags 00JA and 00CT. The isomorphisms commute with reduction
-   because their maps are induced by the same localization maps at every level.
-2. In each S_q the m S_q-adic and maximal-ideal-adic filtrations are cofinal:
-   m S_q is contained in q S_q, and finite generation plus radical equality
-   gives (q S_q)^t contained in m S_q. Tag 0394 gives the canonical comparison
-   of completions, induced by the identity on S_q.
-3. Given a tuple in the maximal-ideal completions, use these comparisons to
-   obtain m-adic sequences in all factors. At each positive n apply the inverse
-   quotient product isomorphism to their coordinates. These preimages commute
-   with reduction by uniqueness, hence define an element of the m-adic
-   completion of B. The n = 0 coordinate belongs to the zero quotient.
-4. Tag 00MA and tensor cancellation express that element as a tensor in
-   C tensor_R S. The quotient equation in the hypothesis pins down the maps on
-   a tensor 1 by extensionality of completion coordinates. The S-algebra property
-   then pins down the whole map by tensor induction. Its value on the tensor
-   just constructed is the prescribed tuple, proving surjectivity. For empty Q
-   there is one tuple in the zero product ring, and zero is its preimage. -/
+/-- Let `S` be a finite algebra over a Noetherian ring `R` and `p` a prime of `R`. Every
+`S`-algebra map `R_p^∧ ⊗_R S → ∏_q (S_q)^∧` (over the primes `q` above `p`) compatible with
+the quotient maps is surjective. -/
 theorem completion_tensor_localMaps_surjective
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :

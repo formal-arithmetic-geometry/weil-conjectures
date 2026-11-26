@@ -13,8 +13,12 @@ import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorEvaluationD
 
 /-! # The total diagonal with tensor-model isomorphisms
 
-Source: Stacks Tags 07A4, 0941 and 03D2.
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-model-diagonal).
+Expresses the ordinary derived diagonal of the completed pullback/tensor comparison through
+the composite tensor-model isomorphisms.
+
+## References
+
+* [Stacks Project, Tags 07A4, 0941 and 03D2](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public noncomputable section
@@ -49,14 +53,8 @@ attribute [local instance] sfIntrinsicPullback_additive
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Express the ordinary-derived diagonal through the composite model isomorphisms.
-Source: Stacks Tags 07A4, 0941 and 03D2
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-model-diagonal).
-Proof: use the total diagonal through exact-functor factorizations. Expand only
-composite isomorphisms, mapped isomorphisms and the product of the ordinary mates;
-functoriality and associativity identify its two sides with the displayed paths.
-This step changes neither the complexes nor the tensor comparison.
--/
+/-- The ordinary derived diagonal of the pullback/tensor comparison equals the composite of
+the tensor-model isomorphisms. -/
 theorem completedPullbackTensor_evaluation_model_diagonal {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     (c : integralOperationsLevelPullback l E f n ≅

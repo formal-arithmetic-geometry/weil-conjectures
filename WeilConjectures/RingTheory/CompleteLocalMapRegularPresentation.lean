@@ -15,9 +15,18 @@ import WeilConjectures.RingTheory.CompleteLocalMapCohenPresentation
 /-!
 # Compatible regular presentations of a map of complete local rings
 
-Source: Stacks Project, More on Algebra, Lemma 07NN
-(lemma-embed-map-Noetherian-complete-local-rings),
-statement and proof (blueprint: lem-weil-pbc-complete-local-map-regular-presentation).
+Every local map of complete Noetherian local rings has compatible presentations by complete
+regular local rings, linked by a flat map with regular closed fibre.
+
+## Implementation details
+
+The result is obtained from `RingHom.exists_complete_local_map_cohen_presentation`, which
+presents both rings by power-series rings over fields or Cohen rings. The residue-field
+isomorphism is induced by the surjection `R → A`.
+
+## References
+
+* [Stacks, Tag 07NN]
 -/
 
 @[expose] public section
@@ -26,39 +35,11 @@ universe u v
 
 namespace RingHom
 
-/-- Every local map of complete Noetherian local rings has compatible regular presentations.
-
-Source: Stacks Project, More on Algebra, Lemma 07NN, statement and proof
-(blueprint: lem-weil-pbc-complete-local-map-regular-presentation).
-
-Proof:
-1. Apply lem-weil-pbc-cohen-power-series-presentation to A and B to obtain surjective local
-   maps q : R → A and v₀ : S₀ → B from complete regular power series rings. The residue fields
-   have the same characteristic because f induces a field homomorphism. The coefficient ring
-   of R has residue field A/m_A, so q induces the required residue-field isomorphism.
-2. By lem-weil-pbc-field-cohen-power-series-formally-smooth, R is adically formally smooth
-   over the integers. The kernel J of v₀ lies in m_S₀ and is closed, since
-   lem-weil-pbc-complete-local-quotient makes S₀/J separated. The map fq is continuous and
-   lem-weil-pbc-fs-adic-lift-into-complete lifts it to φ : R → S₀. Its bound on maximal ideals
-   makes φ local (equivalently, use locality of fq and the preimage of m_B under v₀).
-3. Set S = S₀[[y₁, …, yₙ]] using def-weil-pbc-multivariate-power-series. Grouping variables
-   and lem-weil-pbc-power-series-field-cohen-regular-complete make S complete regular local.
-   Evaluation at y = 0 followed by v₀ gives a surjective local v, by
-   lem-weil-pbc-power-series-quotient-variables. By lem-weil-pbc-power-series-adic-evaluation,
-   define u with the coefficient map of φ and u(xᵢ) = φ(xᵢ) + yᵢ. Images of the generators of
-   m_R lie in m_S (including p in the Cohen case), so u is local. Uniqueness of evaluation
-   into complete B gives vu = fq, since these maps agree on coefficients and variables.
-4. Put aᵢ = φ(xᵢ) ∈ m_S₀. The substitutions yᵢ ↦ aᵢ + yᵢ and yᵢ ↦ yᵢ - aᵢ are inverse
-   continuous automorphisms by lem-weil-pbc-power-series-adic-evaluation and its uniqueness.
-   Apply the first to the standard parameters of S, given by
-   lem-weil-pbc-power-series-field-cohen-regular-complete. The resulting system contains all
-   u(xᵢ), and also u(p) = p in the Cohen case. Thus the parameters of R extend to those of S.
-5. Reorder that system to put the images of the parameters of R first. They are a regular
-   sequence by lem-weil-pbc-regular-local-generators-regular-sequence. Therefore
-   lem-weil-pbc-flat-over-regular proves that u is flat.
-6. Those images generate m_R S. The quotient clause of
-   lem-weil-pbc-regular-local-generators-regular-sequence shows that S/m_R S is regular
-   local. When d = 0 the ideal is zero and the quotient is S. -/
+/-- Every local map `f : A → B` of complete Noetherian local rings has compatible regular
+presentations: surjections `q : R → A` and `v : S → B` from complete regular local rings and a
+flat local map `u : R → S` with `v ∘ u = f ∘ q`, such that `q` induces an isomorphism of
+residue fields, a regular system of parameters of `R` maps into one of `S`, and the closed
+fibre `S ⧸ m_R S` is regular local. -/
 theorem exists_complete_local_map_regular_presentation
     {A : Type u} {B : Type v} [CommRing A] [CommRing B]
     [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B]

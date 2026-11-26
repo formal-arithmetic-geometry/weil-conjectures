@@ -15,8 +15,12 @@ import WeilConjectures.RingTheory.Smooth.AugmentationPolynomialTruncationsInject
 /-!
 # Propagation of first-order augmented polynomial coordinates
 
-Source: Stacks Project, Tag 05D5, the induction on the truncation degree.
-(blueprint: lem-sbc-formally-smooth-augmentation-truncations)
+For a formally smooth augmented algebra, polynomial coordinates that are bijective to first
+order are bijective modulo every power of the augmentation ideal.
+
+## References
+
+* [Stacks, Tag 05D5]
 -/
 
 @[expose] public section
@@ -26,24 +30,8 @@ universe u
 namespace Algebra
 
 /-- First-order polynomial coordinates of a formally smooth augmented algebra are
-coordinates at every finite order.
-
-Source: Stacks Project, Tag 05D5, induction constructing the inverse σₙ of Ψₙ.
-(blueprint: lem-sbc-formally-smooth-augmentation-truncations)
-
-Proof: Put I = ker ε and J = the variables ideal. Bijectivity at degree two identifies
-I/I² with the span of the coordinate images over B. Multiplying representatives shows
-that products of k coordinate images span Iᵏ/Iᵏ⁺¹. Induction, starting with degree two
-(and its degree-one quotient), therefore makes every induced map fₖ surjective.
-Degree zero has zero source and target. For k ≥ 2, assume fₖ is invertible. Formal
-smoothness lifts the map C → C/Iᵏ → B[X]/Jᵏ across B[X]/Jᵏ⁺¹ → B[X]/Jᵏ; its kernel
-is square-zero since 2k ≥ k+1. The lift sends I into J/Jᵏ⁺¹, since its degree-one
-reduction is the inverse augmentation map, and hence kills Iᵏ⁺¹. Compose its descended
-map with fₖ₊₁. Each variable becomes Xᵢ + δᵢ with δᵢ in Jᵏ/Jᵏ⁺¹. Substitution
-Xᵢ ↦ Xᵢ - δᵢ is the inverse: substituting a correction into a monomial of degree k
-changes it by terms of degree at least 2k-1 ≥ k+1. Thus this composite is invertible,
-so fₖ₊₁ is injective as well as surjective. This completes induction. Rank zero works
-with the same argument and empty sums. Neither locality nor Noetherianity is needed. -/
+coordinates at every finite order: if `MvPolynomial (Fin n) B → C` induces a bijection modulo
+the square of the augmentation ideal, it induces a bijection modulo every power of it. -/
 theorem bijective_augmented_polynomial_truncations
     (B C : Type u) [CommRing B] [CommRing C] [Algebra B C]
     [FormallySmooth B C] (ε : C →ₐ[B] B) (n : ℕ)

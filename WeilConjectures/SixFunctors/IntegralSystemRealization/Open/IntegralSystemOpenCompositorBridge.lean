@@ -8,7 +8,13 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.In
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemBridgePushComposition
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.Ordinary.IntegralSystemOrdinaryBridgeComposition
 
-/-! # The canonical bridge preserves open composition. -/
+/-! # The canonical bridge preserves open composition.
+
+## References
+
+* [Zheng, Lemma 4.10]
+* [Stacks, Tag 03D8], [Stacks, Tag 07A7], [Stacks, Tag 0F7D]
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -75,20 +81,7 @@ attribute [local implicit_reducible] coefficientSequenceCommRingSheaf
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The section-normalized bridge respects one binary open compositor.
-Source: Stacks 03D8, 07A7 and 0F7D; Zheng Lemma 4.10.
-(blueprint: lem-sf-integral-system-open-compositor-bridge).
-Proof: compare the ordinary direct-image compositor with the intrinsic one on
-sections at every pair (n,V). Both restrict the input section along the same
-canonical pullback-composition isomorphism; the bridge acts identically on these
-sections. Sheaf morphism extensionality gives the ordinary compositor square.
-Transpose it along the two ordinary inverse-image adjunctions: conjugation
-preserves composition and whiskering, so the corresponding pullback compositor
-square commutes. Apply exact localization to complexes and use the representative
-equation of c.pullComp to identify the derived square. Finally conjugate along
-the open adjunctions. The open bridge is left-adjoint uniqueness and openComp is
-leftAdjointCompIso for that same pullback compositor, so its conjugate is exactly
-the displayed equation. This applies also to identities and empty opens. -/
+/-- The section-normalized bridge respects one binary open compositor. -/
 theorem integralSystemOpenCompositorBridge
     (o : Operations l E) (c : Compositors l E o) (b : CanonicalBridge l E o)
     {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)

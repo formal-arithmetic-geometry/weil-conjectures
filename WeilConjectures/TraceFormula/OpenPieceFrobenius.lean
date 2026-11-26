@@ -143,8 +143,7 @@ lemma compactFrobeniusOpenPiece_eq (hj : ΦU ≫ j = j ≫ Φ) (K : WeilBoundedC
 
 omit [IsClosedImmersion i.left] [IsFinite Φ.left] [IsFinite ΦU.left] in
 /-- The pullback along `Φ` of the counit `ε : Rj_! Lj^* K ⟶ K` is the compact-support base change
-followed by `Rj_!` of the pullback comparison and the counit at `LΦ^* K` (blueprint
-`def-exchange-projection` for the open immersion `j`). -/
+followed by `Rj_!` of the pullback comparison and the counit at `LΦ^* K`. -/
 lemma upperStar_map_counit_eq (hj : ΦU ≫ j = j ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).map

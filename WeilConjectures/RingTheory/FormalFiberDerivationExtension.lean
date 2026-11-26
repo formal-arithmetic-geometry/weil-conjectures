@@ -23,7 +23,23 @@ import WeilConjectures.RingTheory.Derivation.Localization
 
 /-! # Extending finite-model derivations to a generic formal fibre
 
-Source: Stacks Project, More on Algebra, Tag 07PR, and Tag 07PE.
+Let `A` be a Noetherian normal domain with fraction field `K`, `q` a prime of `A`, `M` a finite
+purely inseparable extension of `K` and `B ⊆ M` a finite `A`-subalgebra with fraction field `M`.
+Every absolute derivation of `B` extends to `M ⊗_K (formal fibre of A at q)`.
+
+## Implementation details
+
+Pure inseparability and normality of `A` give a unique prime `r` of `B` over `q`, so the
+completion of `A_q` tensored with `B` is the completion of `B_r`. The formal fibre is then
+identified with `completion(B_r) ⊗_B M`, a localization of `completion(B_r)`. The derivation is
+extended to `B_r` by the quotient rule, to its completion, and once more by the quotient rule,
+and finally transported along the ring equivalences. No nontriviality hypothesis is needed.
+
+## References
+
+* [Stacks, Tag 07PR]
+* [Stacks, Tag 07PE]
+* [Stacks, Tag 07N9]
 -/
 
 @[expose] public section
@@ -117,26 +133,7 @@ private theorem extend_from_tensor
   exact e.symm_apply_apply _
 
 /-- Every absolute derivation of a finite integral model extends to the base-changed
-formal fibre, compatibly with the model's inclusion into its fraction field.
-Source: Stacks Project, More on Algebra, Tag 07PR, finite-model and extension paragraphs;
-Tag 07PE, parts (1) and (2); Algebra, Tag 07N9.
-(blueprint: new-lem-weil-pbc-finite-model-formal-fiber-derivation-extension)
-
-Proof: Put K = Frac(A). For b in B, pure inseparability gives a positive power
-of b in K. That power is integral over A, because B is finite over A, so normality
-of A puts it in A. Integral lying over supplies a prime r of B above q; these
-powers show that two primes over q must coincide. The finite-extension completion
-formula of Tag 07N9 therefore identifies completion(A_q) tensor_A B with
-completion(B_r), as B-algebras. Tensor with M over B, and use tensor associativity
-and K tensor_A M = M to identify the requested formal fibre with
-completion(B_r) tensor_B M. Extend D first to B_r by the quotient rule of
-Tag 07PE(2), then to its maximal-ideal-adic completion by Tag 07PE(1).
-Since M is Frac(B), the last tensor product is the localization of that completion
-at the images of the nonzero elements of B. Extend once more by the quotient rule.
-Each extension agrees on B, and the B-algebra equivalences preserve these images;
-transporting the derivation gives the asserted equality for every b. This also
-works if the final localization is zero: localization extension and transport
-require no nontriviality hypothesis. -/
+formal fibre, compatibly with the model's inclusion into its fraction field. -/
 theorem exists_formalFiber_extension
     (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A]
     [IsIntegrallyClosed A] (q : Ideal A) [q.IsPrime]

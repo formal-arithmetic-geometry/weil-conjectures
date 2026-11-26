@@ -14,8 +14,8 @@ public import WeilConjectures.TraceFormula.Specialization.ResidueConstantThickOr
 
 # The thick origin with coefficients in a finite free module
 
-Let `X = 𝔸¹_k` and `Z = V(x^m)` with `m ≥ 1`. The thick origin (blueprint `lemma-case-z-v-x-m`)
-asserts that the defect `C_{X,Z}(M_X)` of the constant sheaf of a finite `A`-module `M` vanishes.
+Let `X = 𝔸¹_k` and `Z = V(x^m)` with `m ≥ 1`. The thick origin asserts that the defect
+`C_{X,Z}(M_X)` of the constant sheaf of a finite `A`-module `M` vanishes.
 The library proves it for `M = A`, i.e. for the unit, both for a finite coefficient ring `T` and
 for `ℚ̄_ℓ`. Since the complexes with vanishing defect form a triangulated subcategory
 (`ProEtale.CondensedRing.isTriangulated_vanishingDefect`), they are closed under finite biproducts,
@@ -101,8 +101,7 @@ instance : (vanishingDefect X I k' Λ).IsClosedUnderIsomorphisms := by
   rw [vanishingDefect_eq_isoLocus]
   infer_instance
 
-/-- The defect of a finite biproduct vanishes if it vanishes at each summand: the complexes with
-vanishing defect form a triangulated subcategory, which is closed under finite products. -/
+/-- The defect of a finite biproduct vanishes if it vanishes at each summand. -/
 theorem isZero_specializationDefect_biproduct {J : Type*} [Finite J]
     (f : J → DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj Λ X.left))) [HasBiproduct f]
@@ -116,8 +115,8 @@ end General
 variable {k : Type u} [Field k] (k' : Type u) [Field k'] [Algebra k k'] [IsSepClosed k']
   {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
-/-- **The thick origin for a finite free `ℚ̄_ℓ`-module** (blueprint `lemma-case-z-v-x-m`, for
-`M = ℚ̄_ℓ^J` with `J` finite): for `m ≥ 1`, the defect `C_{𝔸¹, V(x^m)}(⨁_J ℚ̄_ℓ)` vanishes. -/
+/-- **The thick origin for a finite free `ℚ̄_ℓ`-module** `M = ℚ̄_ℓ^J` with `J` finite: for
+`m ≥ 1`, the defect `C_{𝔸¹, V(x^m)}(⨁_J ℚ̄_ℓ)` vanishes. -/
 theorem isZero_specializationDefect_polyAffineThickOrigin_biproduct_unit_padicAlgCl
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {m : ℕ} (hm : 0 < m)
     (J : Type*) [Finite J] :
@@ -140,9 +139,9 @@ theorem isZero_specializationDefect_polyAffineThickOrigin_biproduct_unit_finiteC
     isZero_specializationDefect_polyAffineThickOrigin_unit_finiteCoefficient T k' hT hm
 
 /-- **The thick origin for the constant complex of a finite free module, with finite
-coefficients** (blueprint `lemma-case-z-v-x-m`, for `M` finite free over a finite ring `T` killed
-by a power of a prime `ℓ ≠ char k'`; every finite `T`-module is free when `T` is a field):
-for `m ≥ 1`, the defect `C_{𝔸¹, V(x^m)}(M_X)` of the constant complex `M_X` vanishes. -/
+coefficients**: let `M` be finite free over a finite ring `T` killed by a power of a prime
+`ℓ ≠ char k'`. For `m ≥ 1`, the defect `C_{𝔸¹, V(x^m)}(M_X)` of the constant complex `M_X`
+vanishes. -/
 theorem isZero_specializationDefect_polyAffineThickOrigin_finiteCoefficientConstant
     {n : ℕ} (hT : (ℓ : T) ^ n = 0) {m : ℕ} (hm : 0 < m) (M : ModuleCat.{u + 1} (ULift.{u + 1} T))
     [Module.Free (ULift.{u + 1} T) M] [Module.Finite (ULift.{u + 1} T) M] :

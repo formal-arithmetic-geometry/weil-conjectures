@@ -18,20 +18,24 @@ fibre the `k'`-scheme `X'`. Its nearby cycles `Ψ = Li^* Rj_* Lε^*` carry the l
 `μ_Ψ : Ψ A ⊗ Ψ B ⟶ Ψ (A ⊗ B)` (`NearbyCyclesModel.tensorMap`), which restricts to bounded
 constructible complexes (`NearbyCyclesModel.boundedConstructibleTensorMap`), and the dualizing map
 `θ_M = β_a(ℚ̄_ℓ) : Ψ ω_X ⟶ ω_{X'}` of a family `D` of dualizing maps
-(`NearbyCyclesModel.NearbyDualizingData`, blueprint `prose-E-15`). The **duality
-map** (`NearbyCyclesModel.nearbyDualityMap`)
+(`NearbyCyclesModel.NearbyDualizingData`). The **duality map**
+(`NearbyCyclesModel.nearbyDualityMap`)
 ```
 δ_{M,K} : Ψ D_X K ⟶ D_{X'} Ψ K
 ```
 is the adjoint of `θ_M ∘ Ψ(ev) ∘ μ_Ψ` (`CategoryTheory.Verdier.nearbyDualityMap`).
 
-**Gabber's theorem** (Illusie, *Autour du théorème de monodromie locale*, Thm. 4.2; blueprint
-`proposition-nearby-cycles-commute-verdier-duality`) says that `δ_{M,K}` is an isomorphism for every
-bounded constructible `K` (`NearbyCyclesModel.isIso_nearbyDualityMap`, reduced by open locality to
-affine total spaces, `NearbyCyclesModel.isIso_nearbyDualityMap_of_isAffine`, and by compactification
-to proper ones, `NearbyCyclesModel.isIso_nearbyDualityMap_of_isProper`). Here `D_X` is relative
-to `k`; it is identified with the duality relative to `Ω` on the geometric generic fibre since `ε`
-is an open immersion into a base change of fields, and this identification is part of `θ_M`.
+**Gabber's theorem** (Illusie, *Autour du théorème de monodromie locale*, Thm. 4.2) says that
+`δ_{M,K}` is an isomorphism for every bounded constructible `K`
+(`NearbyCyclesModel.isIso_nearbyDualityMap`, reduced by open locality to affine total spaces,
+`NearbyCyclesModel.isIso_nearbyDualityMap_of_isAffine`, and by compactification to proper ones,
+`NearbyCyclesModel.isIso_nearbyDualityMap_of_isProper`). Here `D_X` is relative to `k`; it is
+identified with the duality relative to `Ω` on the geometric generic fibre since `ε` is an open
+immersion into a base change of fields, and this identification is part of `θ_M`.
+
+## References
+
+* Illusie, *Autour du théorème de monodromie locale*, Thm. 4.2.
 
 -/
 
@@ -73,9 +77,8 @@ noncomputable def boundedConstructibleTensorMap
 variable (ℓ) [IsSepClosed k'] [Algebra k k'] {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
-/-- The **duality map** `δ_{M,K} : Ψ D_X K ⟶ D_{X'} Ψ K` of a trait model `M` over the base
-(blueprint `proposition-nearby-cycles-commute-verdier-duality`): the adjoint of `θ_M ∘ Ψ(ev) ∘ μ_Ψ`,
-with `θ_M` the dualizing map `β_a(ℚ̄_ℓ)` of the family `D`
+/-- The **duality map** `δ_{M,K} : Ψ D_X K ⟶ D_{X'} Ψ K` of a trait model `M` over the base: the
+adjoint of `θ_M ∘ Ψ(ev) ∘ μ_Ψ`, with `θ_M` the dualizing map `β_a(ℚ̄_ℓ)` of the family `D`
 (`NearbyCyclesModel.NearbyDualizingData`). -/
 noncomputable def nearbyDualityMap (D : NearbyDualizingData k k' ℓ)
     (h : M.IsTraitModelOfBase k q g)

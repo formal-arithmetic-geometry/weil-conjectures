@@ -15,8 +15,20 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenScalarRes
 
 /-! # Identity and composition of the normalized quotient reduction arrows
 
-Source: blueprint coefficient quotient proof, Step 4; Stacks Tag 03EK.
-(blueprint: lem-coef-compact-support-quotient-input-laws).
+We show that the normalized quotient reductions satisfy identity and composition before
+applying any geometric functor.
+
+## Implementation details
+
+The map `rho` is the unique transpose of the level-`n` unit under the integral-to-level-`m`
+adjunction. On a flat-term K-flat representative its termwise formula is `s ⊗ x ↦ q(s) ⊗ x`,
+so the identity and composition laws hold on tensors, descend through sheafification and are
+identified with the prescribed derived arrows by localization and uniqueness of normalized
+adjuncts. No flatness of a quotient map is used.
+
+## References
+
+* [Stacks, Tag 03EK]
 -/
 
 @[expose] public noncomputable section
@@ -285,22 +297,7 @@ attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExi
   compactSupportLevelQuotient
 
 /-- The normalized quotient reductions satisfy identity and composition before applying
-any geometric functor.
-
-Source: blueprint `lem-coef-integral-compact-support.proof.md`, paragraph 2, and
-Step 4 of `lem-coef-compact-support-quotient-cocycle`; Stacks Tag 03EK.
-(blueprint: lem-coef-compact-support-quotient-input-laws).
-
-Proof: the definition of rho is the unique transpose of the level-n unit under the
-integral-to-level-m adjunction. On a common flat-term K-flat representative P, its
-termwise formula is s tensor x to q(s) tensor x. For equal levels the quotient is the
-identity. For r >= m >= n, the successive maps send s tensor x to
-q_mn(q_rm(s)) tensor x = q_rn(s) tensor x. These identities hold on tensors,
-descend through sheafification, and commute with differentials. Localization and the
-normalized adjunct uniqueness identify these maps with the prescribed derived arrows.
-The restriction identifications are exactly the sectionwise identities defining
-compactSupportQuotientNativeResId and compactSupportQuotientNativeResComp. This applies to unbounded
-P, the zero complex, and repeated indices, and uses no flatness of a quotient map. -/
+any geometric functor. -/
 theorem compactSupportQuotient_input_laws (W : Scheme.{u})
     (K : DerivedCategory (scalarReductionSource.{u, u} l E W)) :
     (∀ n : ℕ, compactSupportQuotientNativeMap l E W n n le_rfl K ≫

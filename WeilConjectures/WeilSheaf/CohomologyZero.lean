@@ -41,13 +41,7 @@ variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
 
 /-- The cohomology `H⁰(Y ⊗ k̄, G)` of a Weil sheaf is its space of global sections `Γ(Ȳ, G)`,
-Frobenius-equivariantly: `H⁰ = Γ(Spec k̄, 𝓗⁰(Ra_* G)) ≅ Γ(Spec k̄, a_* G) ≅ Γ(Ȳ, G)`, by the left
-exactness of `a_*` (`AlgebraicGeometry.WeilSheaf.homologySheafZeroDerivedLowerStarIso`) and the
-invariance of global sections under pushforward
-(`AlgebraicGeometry.WeilSheaf.globalSectionsLowerStarEquiv`).
-
-Used for blueprint `lemma-degree-zero-top-cohomology--1` and `lemma-degree-zero-top-cohomology--2`
-(step 3: `H⁰(U, -) = Γ(Ū, -)`). -/
+Frobenius-equivariantly. -/
 noncomputable def cohomologyZeroEquiv (G : WeilSheaf k₀ l Y) :
     (G.cohomology 0).Equiv G.globalSections :=
   (globalSectionsEquivOfIso

@@ -10,11 +10,15 @@ public import WeilConjectures.DeligneLaumon.WeilIndSheafCategory
 
 /-! # Standard cohomology on the intrinsic common-stage Weil category
 
-Source: Bhatt--Scholze 6.8.11(3), 6.8.14(2), 6.8.15; BBD 1.3
-(blueprint: def-weil-derived-cohomology-sheaves).
 The recorded ambient and coefficient-pair cohomology remain reexported. Here the same
 standard truncation construction is applied to the general intrinsic pair category.
 The Weil map is induced by the canonical Frobenius truncation comparison.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, 6.8.11(3), Proposition 6.8.14(2),
+  Remark 6.8.15.
+* Beilinson--Bernstein--Deligne, *Faisceaux pervers*, 1.3.
 -/
 
 @[expose] public noncomputable section

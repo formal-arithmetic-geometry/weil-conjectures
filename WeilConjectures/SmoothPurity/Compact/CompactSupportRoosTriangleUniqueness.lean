@@ -7,10 +7,14 @@ module
 
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
-/-! # CompactSupportRoosTriangleUniqueness
+/-! # Uniqueness of Roos triangles
 
-A proved generic calculation for the compact-support finite action.
-(blueprint: lem-weil-compact-support-roos-triangle-uniqueness).
+Two derived-limit (Roos) triangles for the same tower have isomorphic vertices, compatibly
+with the projections to the product.
+
+## References
+
+* Stacks Project, Derived limits, Tag 08TC.
 -/
 
 @[expose] public noncomputable section
@@ -18,12 +22,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace WeilConjectures
 
-/-- Two Roos triangles for the same tower have a projection-preserving vertex isomorphism.
-Source: Stacks Project, Derived limits, Tag 08TC; triangle isomorphism axioms.
-(blueprint: lem-weil-compact-support-roos-triangle-uniqueness).
-Proof: Rotate both distinguished triangles, complete the identity maps on the two product
-terms to an isomorphism, then unrotate. Its first component preserves the given
-projection because the second component is the identity. -/
+/-- Two Roos triangles for the same tower have a projection-preserving vertex isomorphism. -/
 theorem compactSupportRoosTriangleUniqueness
     {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]

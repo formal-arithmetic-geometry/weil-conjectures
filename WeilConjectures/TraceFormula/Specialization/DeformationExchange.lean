@@ -19,14 +19,13 @@ public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalFor
 
 # The compact-support exchanges of the deformation to the normal cone
 
-For a correspondence `c` contracting at `y`, the compact-support exchanges of blueprint
-`prose-E-15` (3) for the support map
-(`ProEtale.CondensedRing.Correspondence.IsContractingAt.supportCompactSupportExchange`, through
-the compactification `C ⊂ C̄ ⟶ X ⨯ X` deformed along `c̄⁻¹(x, x)`) and for the structure map of `X`
+For a correspondence `c` contracting at `y`, the compact-support exchanges for the support map
+(`ProEtale.CondensedRing.Correspondence.IsContractingAt.supportCompactSupportExchange`, through the
+compactification `C ⊂ C̄ ⟶ X ⨯ X` deformed along `c̄⁻¹(x, x)`) and for the structure map of `X`
 (`ProEtale.CondensedRing.pointCompactSupportExchangeOfSeparated`, through a compactification
 `X ⊂ X̄` and the dense compactification of the deformation of `X̄`) give the trace specialization
-`deformationTraceSpecialization`. This file states that these exchanges specialize the class of
-the component `B ∋ y` of the fixed locus
+`deformationTraceSpecialization`. This file states that these exchanges specialize the class of the
+component `B ∋ y` of the fixed locus
 (`ProEtale.CondensedRing.Correspondence.IsContractingAt.specializesComponentClass_deformation`).
 
 -/
@@ -384,15 +383,11 @@ set_option Elab.async false in
 -- instantiating the support identity, facts (II) and (III) and the reduction at the concrete data
 -- is slow; the auxiliary theorems of `instantiate_by_match` are checked one after the other
 -- (`Elab.async false`), which keeps the memory below 4 GB
-/-- **The compact-support exchanges of the deformation specialize the class of `B`** (blueprint
-`corollary-specialization-when-fixed-point-scheme--1`, with
-`lemma-fixed-point-scheme-deformation--1`; Varshavsky, *Lefschetz–Verdier trace formula and a
-generalization of a theorem of Fujiwara*, §1.4–§2): for the exchanges `ν_c`
-(`supportCompactSupportExchange`) and `ν_X` (`pointCompactSupportExchangeOfSeparated`), the
-exchange `ν_F` of the fixed loci maps the specialization of the unit class of the special fixed
-locus `F'` to the specialization of the class of the component `B ∋ y`. Near `y` the deformed fixed
-locus is the constant family `B × S` up to nilpotents, on which `ν` is the inverse of the proper
-exchange and is compatible with the specialization units. -/
+/-- **The compact-support exchanges of the deformation specialize the class of `B`**: for the
+exchanges `ν_c` (`supportCompactSupportExchange`) and `ν_X`
+(`pointCompactSupportExchangeOfSeparated`), the exchange `ν_F` of the fixed loci maps the
+specialization of the unit class of the special fixed locus `F'` to the specialization of the class
+of the component `B ∋ y`. -/
 theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCompact B.hom]
     [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
     (hB : Set.range j.left.base =

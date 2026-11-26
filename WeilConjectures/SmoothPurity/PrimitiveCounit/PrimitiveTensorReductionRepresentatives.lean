@@ -12,7 +12,9 @@ import all WeilConjectures.SmoothPurity.IntegralCoherence.IntegralGoodQuotientPr
 
 /-! # Functorial strict quotient representatives
 
-Source: Stacks Project, Tags 06YY, 07A4 and 0941.
+## References
+
+* Stacks Project, Tags 06YY, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -34,9 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local implicit_reducible] integralOperationsGoodLocalization
 
 /-- Functorial models of reduction on the good category, with strict quotient coordinates
-and normalized ordinary units.
-Source: Stacks 06YY and 0941.
-(blueprint: stage3-v3-primitive-tensor-reduction-representatives). -/
+and normalized ordinary units. -/
 structure ReductionRepresentatives (S : CoefficientDerivedSystemReduction l E W) where
   complexes : (integralOperationsGoodComplex l E W).FullSubcategory ⥤
     CochainComplex (coefficientSequenceModules l E W) ℤ
@@ -87,23 +87,7 @@ private theorem reduction_transport_evaluation
   simpa only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp] using
     congrArg (fun f ↦ f ≫ (T.reductionEvaluation n).hom.app K) he
 
-/-- The actual quotient functor gives simultaneous functorial reduction models.
-Source: Stacks 06YY, 07A4 and 0941; the reduction part of step 1 of
-lem-pur-primitive-counit-tensor-realization.
-(blueprint: stage3-v3-primitive-tensor-reduction-representatives).
-
-Proof: take the ordinary model constructed by CompletionUnit.ordinaryModel_exists
-and its normalized derived comparison for a coherent calculus T. Restrict its
-quotient functor and finite evaluation isomorphisms to good complexes. Each finite
-scalar extension preserves K-flatness, and kflat_of_levels gives K-flatness on the
-sequence site. Uniqueness of the left adjoint to the fixed coefficient limit
-transports the normalized comparison from T.reduction to S.reduction. The finite
-unit projection equations identify the transported comparison with
-S.reductionEvaluation. The ordinary model transition formula supplies the strict
-quotient transition clause. Its ordinary unit supplies the degreewise cone unit,
-whose finite evaluations are the normalized scalar units by unit_tensor.
-These formulas also cover zero complexes, level zero
-and the empty scheme. -/
+/-- The actual quotient functor gives simultaneous functorial reduction models. -/
 theorem reductionRepresentatives_nonempty
     (S : CoefficientDerivedSystemReduction l E W) :
     Nonempty (ReductionRepresentatives l E W S) := by

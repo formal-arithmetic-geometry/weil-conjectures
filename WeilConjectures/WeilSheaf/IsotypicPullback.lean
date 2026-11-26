@@ -24,7 +24,7 @@ through `χ ∘ c` and whose adjoint `π^* h^* N ⟶ ℚ̄_ℓ` is an isomorphis
 
 Applied to the Artin–Schreier covering of the affine line and the Artin–Schreier coverings of
 the plane, this describes the Artin–Schreier sheaves `ℒ_{ψ,f}` of functions as isotypic
-components (blueprint `lemma-artin-schreier-character-sheaf`).
+components.
 -/
 
 @[expose] public section
@@ -120,15 +120,13 @@ noncomputable def adicUnitToLowerStar :
       adicConstantSheafToLowerStar l s ▷ _ ≫ MonObj.mul
     rw [IsMonHom.mul_hom, tensorHom_def', Category.assoc])
 
-/-- The underlying sheaf morphism of `AlgebraicGeometry.ProEtale.adicUnitToLowerStar`
-(blueprint `lemma-artin-schreier-character-sheaf`). -/
+/-- The underlying sheaf morphism of `AlgebraicGeometry.ProEtale.adicUnitToLowerStar`. -/
 @[simp]
 lemma adicUnitToLowerStar_hom :
     (adicUnitToLowerStar l s).hom = adicConstantSheafToLowerStar l s :=
   rfl
 
-/-- The adjoint `s^* ℚ̄_ℓ ⟶ ℚ̄_ℓ` of the unit `ℚ̄_ℓ ⟶ s_* ℚ̄_ℓ` is invertible
-(blueprint `lemma-artin-schreier-character-sheaf`). -/
+/-- The adjoint `s^* ℚ̄_ℓ ⟶ ℚ̄_ℓ` of the unit `ℚ̄_ℓ ⟶ s_* ℚ̄_ℓ` is invertible. -/
 instance : IsIso ((adicUpperStarLowerStarAdjunction l s).homEquiv _ _ |>.symm
     (adicUnitToLowerStar l s)) := by
   have : IsIso ((adicUpperStarLowerStarAdjunction l s).homEquiv _ _ |>.symm
@@ -378,8 +376,7 @@ variable {W W₁ : Scheme.{u}} [W.Over (Spec (CommRingCat.of k₀))]
 
 local notation "s̄" => Scheme.Hom.geometricFiberMap s (comp_over s (Spec (CommRingCat.of k₀)))
 
-/-- A morphism of iso-algebras whose underlying morphism is invertible is invertible
-(blueprint `lemma-artin-schreier-character-sheaf`). -/
+/-- A morphism of iso-algebras whose underlying morphism is invertible is invertible. -/
 lemma Endofunctor.IsoAlgebra.isIso_of_isIso_hom_f' {C : Type*} [Category C] {F : C ⥤ C}
     {K K' : Endofunctor.IsoAlgebra F} (f : K ⟶ K') [IsIso f.hom.f] : IsIso f := by
   have : f = (Endofunctor.IsoAlgebra.isoMk (asIso f.hom.f) f.hom.h).hom :=
@@ -387,8 +384,7 @@ lemma Endofunctor.IsoAlgebra.isIso_of_isIso_hom_f' {C : Type*} [Category C] {F :
   rw [this]
   infer_instance
 
-/-- The unit `ℚ̄_ℓ ⟶ s̄_* ℚ̄_ℓ` commutes with the Weil structures
-(blueprint `lemma-artin-schreier-character-sheaf`). -/
+/-- The unit `ℚ̄_ℓ ⟶ s̄_* ℚ̄_ℓ` commutes with the Weil structures. -/
 lemma ProEtaleWeilSheaf.unitToLowerStar_comm :
     (WeilSheaf.frobeniusPullback k₀ l W₁).map (adicUnitToLowerStar l s̄) ≫
       (ProEtaleWeilSheaf.torsorPushforward k₀ l s).str.hom =
@@ -409,8 +405,7 @@ noncomputable def ProEtaleWeilSheaf.unitToLowerStar :
     ProEtaleWeilSheaf.adicConstant k₀ l W₁ ⟶ ProEtaleWeilSheaf.torsorPushforward k₀ l s :=
   ObjectProperty.homMk ⟨adicUnitToLowerStar l s̄, ProEtaleWeilSheaf.unitToLowerStar_comm s⟩
 
-/-- The underlying morphism of `AlgebraicGeometry.ProEtaleWeilSheaf.unitToLowerStar`
-(blueprint `lemma-artin-schreier-character-sheaf`). -/
+/-- The underlying morphism of `AlgebraicGeometry.ProEtaleWeilSheaf.unitToLowerStar`. -/
 lemma ProEtaleWeilSheaf.unitToLowerStar_hom_f :
     (ProEtaleWeilSheaf.unitToLowerStar k₀ l s).hom.f = adicUnitToLowerStar l s̄ :=
   rfl
@@ -423,7 +418,7 @@ lemma ProEtaleWeilSheaf.unitToLowerStar_comp_torsorTranslation {G : Type u} (τ 
   Endofunctor.IsoAlgebra.hom_ext (ProEtale.adicUnitToLowerStar_comp_torsorTranslation _ _ _ g)
 
 /-- The adjoint `s^* ℚ̄_ℓ ⟶ ℚ̄_ℓ` of the unit `ℚ̄_ℓ ⟶ s_* ℚ̄_ℓ` of pro-étale Weil sheaves is
-invertible (blueprint `lemma-artin-schreier-character-sheaf`). -/
+invertible. -/
 instance ProEtaleWeilSheaf.isIso_homEquiv_symm_unitToLowerStar :
     IsIso (((ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l s).homEquiv _ _).symm
       (ProEtaleWeilSheaf.unitToLowerStar k₀ l s)) := by
@@ -476,8 +471,7 @@ lemma ProEtaleWeilSheaf.isIso_homEquiv_symm_isotypicPullback (hs : s ≫ π₁ =
     (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l s)
     (ProEtaleWeilSheaf.lowerStarSquareIso k₀ l hs) ι (ProEtaleWeilSheaf.unitToLowerStar k₀ l s)
 
-/-- The underlying morphism of the composition isomorphism of pushforwards
-(blueprint `lemma-artin-schreier-character-sheaf`). -/
+/-- The underlying morphism of the composition isomorphism of pushforwards. -/
 lemma ProEtaleWeilSheaf.lowerStarCompIso_hom_app_hom_f {Y₁ Y₂ Y₃ : Scheme.{u}}
     [Y₁.Over (Spec (CommRingCat.of k₀))] [Y₂.Over (Spec (CommRingCat.of k₀))]
     [Y₃.Over (Spec (CommRingCat.of k₀))] (φ : Y₁ ⟶ Y₂) (ψ : Y₂ ⟶ Y₃)
@@ -490,8 +484,7 @@ lemma ProEtaleWeilSheaf.lowerStarCompIso_hom_app_hom_f {Y₁ Y₂ Y₃ : Scheme.
   rw [ProEtaleWeilSheaf.lowerStarCompIso]
   exact Endofunctor.IsoAlgebra.mapOfNatIsoCompIso_trans_mapOfNatIsoIsoOfIso_hom_app_hom_f _ _ _ _ K
 
-/-- The underlying morphism of the inverse composition isomorphism of pushforwards
-(blueprint `lemma-artin-schreier-character-sheaf`). -/
+/-- The underlying morphism of the inverse composition isomorphism of pushforwards. -/
 lemma ProEtaleWeilSheaf.lowerStarCompIso_inv_app_hom_f {Y₁ Y₂ Y₃ : Scheme.{u}}
     [Y₁.Over (Spec (CommRingCat.of k₀))] [Y₂.Over (Spec (CommRingCat.of k₀))]
     [Y₃.Over (Spec (CommRingCat.of k₀))] (φ : Y₁ ⟶ Y₂) (ψ : Y₂ ⟶ Y₃)
@@ -504,8 +497,7 @@ lemma ProEtaleWeilSheaf.lowerStarCompIso_inv_app_hom_f {Y₁ Y₂ Y₃ : Scheme.
   rw [ProEtaleWeilSheaf.lowerStarCompIso]
   exact Endofunctor.IsoAlgebra.mapOfNatIsoCompIso_trans_mapOfNatIsoIsoOfIso_inv_app_hom_f _ _ _ _ K
 
-/-- The underlying morphism of the isomorphism of pushforwards along equal morphisms
-(blueprint `lemma-artin-schreier-character-sheaf`). -/
+/-- The underlying morphism of the isomorphism of pushforwards along equal morphisms. -/
 lemma ProEtaleWeilSheaf.lowerStarCongr_hom_app_hom_f {Y₁ Y₂ : Scheme.{u}}
     [Y₁.Over (Spec (CommRingCat.of k₀))] [Y₂.Over (Spec (CommRingCat.of k₀))] {φ φ' : Y₁ ⟶ Y₂}
     [φ.IsOver (Spec (CommRingCat.of k₀))] [φ'.IsOver (Spec (CommRingCat.of k₀))] (e : φ = φ')
@@ -517,8 +509,7 @@ lemma ProEtaleWeilSheaf.lowerStarCongr_hom_app_hom_f {Y₁ Y₂ : Scheme.{u}}
   refine Mod.hom_ext _ _ ?_
   rfl
 
-/-- The underlying morphism of the pushforward of a morphism of pro-étale Weil sheaves
-(blueprint `lemma-artin-schreier-character-sheaf`). -/
+/-- The underlying morphism of the pushforward of a morphism of pro-étale Weil sheaves. -/
 lemma ProEtaleWeilSheaf.lowerStar_map_hom_f {Y₁ Y₂ : Scheme.{u}}
     [Y₁.Over (Spec (CommRingCat.of k₀))] [Y₂.Over (Spec (CommRingCat.of k₀))] (φ : Y₁ ⟶ Y₂)
     [φ.IsOver (Spec (CommRingCat.of k₀))] {K K' : ProEtaleWeilSheaf k₀ l Y₁} (f : K ⟶ K') :

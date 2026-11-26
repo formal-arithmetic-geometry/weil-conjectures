@@ -21,15 +21,21 @@ import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 /-!
 # Inverse-system site points
 
-Source: Stacks Project, Sites, Tags 00YC and 00YA, with the inverse-system
-construction in Tag 00YQ (blueprint: lem-trf-inverse-system-site-point).
+Private auxiliary constructions for the inverse-system criterion for points of a site, for a
+precoverage satisfying the site axioms.
+
+## Implementation details
 
 The inverse system is represented by a functor from the opposite of a directed
 poset.  Its colimit of representables is the functor `inverseSystemHomFunctor`,
 and the colimit of sections along it is the functor
 `inverseSystemSectionColimitFunctor`.  The site is a precoverage satisfying the
 site axioms `Precoverage.IsSiteForCoverings`, with sheaves for the generated
-Grothendieck topology, as in the dependency def-weil-pbc-sites-and-cohomology.
+Grothendieck topology.
+
+## References
+
+* Stacks Project, Tags 00YC, 00YA, 00YQ
 -/
 
 @[expose] public section

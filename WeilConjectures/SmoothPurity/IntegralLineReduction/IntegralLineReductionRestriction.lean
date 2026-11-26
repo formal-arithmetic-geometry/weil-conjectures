@@ -41,8 +41,11 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-! # Assembly of signed integral line reduction and restriction
 
-Source: Stacks 07A4; Bhatt--Scholze, Definitions 3.4.10 and 3.5.2.
-(blueprint: lem-pur-integral-line-reduction-restriction).
+## References
+
+* Stacks Project, Tag 07A4.
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definitions 3.4.10 and 3.5.2,
+  Lemma 3.4.12, Proposition 3.5.1.
 -/
 
 @[expose] public noncomputable section
@@ -77,58 +80,7 @@ private theorem comparison_isIso
 
 /-- Signed lines commute with all positive derived reductions, preserve derived completeness
 and the integral constructible category with each given uniform cohomological interval,
-and induce inverse ordinary and completed tensor equivalences on that full category.
-
-Source: Bhatt--Scholze, Definitions 3.4.10 and 3.5.2, Lemma 3.4.12,
-Proposition 3.5.1, pp. 22--24; Stacks 07A4; blueprint
-`sk-def-sp-tate-twist-locally-free.proof.md`, (3), final sentence
-(blueprint: lem-pur-integral-line-reduction-restriction).
-
-Proof:
-1. Trivialize L. Its signed powers have bases e tensor ... tensor e, 1, or
-   the functional taking the positive basis to 1. Pair opposite bases by
-   multiplication; the inverse sends a to ap tensor q. The factors change by
-   u^m and u^(-m), so the evaluations glue and satisfy both triangle identities.
-   Use localizedSiteTensorRestriction and the sheaf tensor-Hom adjunction.
-2. Positive scalar comparison balances tensor factors. For negative powers send
-   phi tensor a to the functional x tensor c mapped to residue(phi(x))ac.
-   Each comparison is the identity on the local quotient basis. These maps
-   commute with every quotient and preserve evaluation (PowerFormula).
-3. By lem-pur-line-unbounded-derived-tensor the lines in degree zero are K-flat.
-   Apply the ringed-topoi derived-tensor pullback theorem to the identity topos
-   and R to R_n. Its representative is the balancing map in ChainFormula.
-   This commutes with both strict quotient transitions (DerivedFormula).
-4. Tensor by the line has tensor by its opposite as both adjoints, by the
-   dual-tensor adjunction theorem. Hence it preserves products with projections.
-   It is exact; pro-etale countable products are exact and represent derived
-   products by derived-limit-existence (2). Thus the same comparison works on
-   arbitrary complexes, without asserting that localization at a cover preserves products.
-5. Apply this triangulated product-preserving equivalence to the canonical
-   augmented reduction-unit Roos triangle. The balancing comparison takes its
-   first map to the new reduction units and 1-s to the new quotient shift.
-   This proves completeness of ordinary tensor with the signed line.
-6. Compute completed tensor on flat-term K-flat representatives, using
-   integralOperationsWellDefined. The levelwise balancing maps identify its
-   finite-tensor tower with tensor by the line of the original reduction tower.
-   On Roos coordinates (v,u), apply the product comparison on both summands;
-   it respects d(v,u)=(dv,-du-(1-s)v), by roos_cone_calculus.
-7. The identity-field case of finiteFreeCompletedScalarComparison identifies
-   the original complete object with this Roos model by its (c,0) unit.
-   Tensoring that unit and using step 6 gives exactly integralLineComparison,
-   with zero shifted-product component. It is invertible and natural in K.
-8. The reduction comparison identifies cohomology with H^i(K_n) tensor P_n.
-   Exact line tensor preserves every zero cohomology degree, hence the very
-   same interval [a,b], without assuming K itself bounded.
-9. On each constructible stratum, exact finite-coefficient pullback commutes
-   with tensor. Refine with a finite-model trivializing cover of L_n. Tensor
-   with its rank-one finite value takes M to M tensor A_n, isomorphic to M.
-   This preserves finite local values on the same finite constructible partition.
-   Steps 5, 7 and 8 then give both integral membership claims.
-10. The ordinary evaluations restrict through the full inclusion. Conjugate
-   them by the actual completion comparisons c to obtain the two completed
-   evaluations in CompletedRestriction. Naturality cancels adjacent comparisons
-   in the triangle composites, leaving the ordinary triangle identities.
--/
+and induce inverse ordinary and completed tensor equivalences on that full category. -/
 theorem integral_line_reduction_restriction
     (_hl : ∀ x : X, Invertible (l : X.residueField x))
     (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1]

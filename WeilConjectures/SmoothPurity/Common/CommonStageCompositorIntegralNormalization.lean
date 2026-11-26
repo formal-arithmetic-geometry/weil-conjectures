@@ -10,8 +10,8 @@ import WeilConjectures.SmoothPurity.Common.CommonStageCompositorRepresentative
 
 /-! # Integral normalization of the common-stage compositor
 
-Source: purity/trace equivariance proof Step 1, canonical pullback compositors.
-(blueprint: lem-pur-common-stage-compositor-integral-normalization).
+The common-stage pullback compositor is the localization of the integral compositor at
+the object's original coefficient stage.
 -/
 
 @[expose] public noncomputable section
@@ -60,14 +60,7 @@ private theorem normalization_map_heq
   rfl
 
 /-- The common-stage compositor is the localized integral compositor at the
-object's original coefficient stage.
-Source: blueprint purity/trace equivariance Step 1, normalized pullback composition.
-(blueprint: lem-pur-common-stage-compositor-integral-normalization).
-Proof: the literal-stage representative theorem identifies the common compositor
-with the inclusion of its rational compositor. The rational compositor's defining
-normalization identifies its hom with the localization of the integral compositor.
-The rational pullback object formulas identify both endpoints; functoriality of
-heterogeneous equality carries this identification through the stage inclusion. -/
+object's original coefficient stage. -/
 theorem commonStageCompositor_integral (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     {X Y Z : Scheme.{u}}

@@ -10,7 +10,15 @@ import WeilConjectures.Algebra.Homology.RingedOpenScalar.RingedOpenScalarAdjunct
 
 /-! # Generator-normalized consecutive open scalar restriction
 
-Source: Stacks 03DI, 03DA and 0E8I; Steps 1 and 2 of the open tensor quotient-model proof.
+## Implementation details
+
+The horizontal naturality square of the system ring map gives the finite transport
+square; it is composed with the inverse scalar/open comparison and the explicit forgetful
+coefficient identifications, whose generator formulas give the normalization.
+
+## References
+
+* Stacks Project, Tags 03DI, 03DA and 0E8I
 -/
 
 @[expose] public noncomputable section
@@ -518,15 +526,8 @@ private def nativeOrdinary (n : ℕ) :
         normalizedDVRModuleRes l E V (Nat.le_succ n) :=
   NatIso.ofComponents (nativePointIso l E j o n) (nativePointNaturality l E j o n)
 
-/-- The consecutive open scalar comparison, constructed from the coefficient-system map.
-Source: Stacks 03DI, 03DA and 0E8I; parent Steps 1 and 2.
-(blueprint: lem-sf-integral-open-scalar-restriction-comparison).
-
-The horizontal naturality square of the system ring map gives the finite transport
-square. Continuous pushforward composition and congruence carry sections identically.
-Compose this transport with the inverse scalar/open comparison and the explicit
-forgetful coefficient identifications. Their generator formulas prove the asserted
-normalization, including for n=0, zero modules and the empty open. -/
+/-- The consecutive open scalar comparison, constructed from the coefficient-system map,
+with its generator normalization. -/
 theorem integralOpenScalarRestrictionComparison (n : ℕ) :
     ∃ ordinary : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙
           IntegralOpenReduction.finiteExtension l E j o (n + 1) ≅

@@ -49,10 +49,9 @@ initiality of base change on pointed étale neighbourhoods enters.
 
 ## Why not the dense-subsite route
 
-Blueprint `rmk-openclosed-no-dense-subsite`: it is tempting to deduce full faithfulness from
-the base-change functor `X_ét ⥤ Z_ét` exhibiting `Z_ét` as a dense subsite. That functor is
-cover-dense (blueprint `lemma-openclosed-etale-lifts-locally`,
-`AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`), but it is neither locally
+It is tempting to deduce full faithfulness from the base-change functor `X_ét ⥤ Z_ét`
+exhibiting `Z_ét` as a dense subsite. That functor is cover-dense
+(`AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`), but it is neither locally
 full nor locally faithful: two morphisms `V ⟶ V'` of étale `X`-schemes agreeing after base
 change to `Z` need only agree on an open subscheme of `V` containing the preimage of `Z`, which
 is not a covering of `V` in general. The stalk computation above replaces the formal argument,
@@ -79,13 +78,7 @@ variable {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 /-- **The stalk of a pushforward along a closed immersion, at the inverse image point.**
 For a closed immersion `i : Z ⟶ X` and a geometric point `s : Spec Ω ⟶ Z`, the stalk of
 `i_* H` at the point `(pointSmallEtale s).comap i.Etale` of the small étale site of `X` is
-the stalk of `H` at `s`, naturally in the sheaf `H`.
-
-This is `AlgebraicGeometry.Etale.lowerStarCompSheafFiberIso`, which is stated at the
-geometric point `s ≫ i` of `X`, transported along the identification
-`AlgebraicGeometry.Scheme.pointSmallEtaleComapIso` of that point with the inverse image of
-`s`. The inverse image point is the form needed below, since its skyscraper sheaf functor
-is, on the nose, the skyscraper sheaf functor of `s` followed by `i_*`. -/
+the stalk of `H` at `s`, naturally in the sheaf `H`. -/
 noncomputable def Etale.lowerStarCompComapSheafFiberIso :
     (i)_*[A] ⋙ ((pointSmallEtale s).comap i.Etale (Hom.coverPreserving_etale i)).sheafFiber ≅
       (pointSmallEtale s).sheafFiber :=
@@ -138,10 +131,7 @@ omit [HasSmallSiteSheafify A] in
 /-- Pushing a morphism `H ⟶ Φ.skyscraperSheaf M` forward along `i_*` is, up to the
 adjunction between the stalk at `Φ.comap i.Etale` and its skyscraper sheaf functor, the
 same as composing with the stalk comparison
-`AlgebraicGeometry.Etale.lowerStarCompComapSheafFiberIso`.
-
-Both sides are morphisms of sheaves on `X` into a skyscraper sheaf, so it suffices to
-compare their components on each factor of the product, where both are the germ map. -/
+`AlgebraicGeometry.Etale.lowerStarCompComapSheafFiberIso`. -/
 private lemma Etale.lowerStar_map_skyscraperSheafAdjunction_homEquiv
     (H : Sheaf Z.smallEtaleTopology A) (M : A)
     (g : (pointSmallEtale s).sheafFiber.obj H ⟶ M) :
@@ -185,14 +175,7 @@ private lemma Etale.lowerStar_map_skyscraperSheafAdjunction_homEquiv
 
 omit [HasSmallSiteSheafify A] in
 /-- **The stalk at a geometric point of `Z` of the counit of `i^* ⊣ i_*` is an
-isomorphism**, for a closed immersion `i : Z ⟶ X`.
-
-A morphism is invertible as soon as precomposition with it is bijective on morphisms to
-every object `M`; transposing along the composed adjunction
-`i^* ⋙ Φ.sheafFiber ⊣ Φ.skyscraperSheafFunctor ⋙ i_*` by
-`CategoryTheory.Adjunction.comp_homEquiv_map_counit_app_comp` turns precomposition with the
-stalk of the counit into `i_*` on morphisms into the skyscraper sheaf at `M`, which is
-bijective by `AlgebraicGeometry.Etale.lowerStarCompComapSheafFiberIso`. -/
+isomorphism**, for a closed immersion `i : Z ⟶ X`. -/
 theorem Etale.isIso_sheafFiber_map_upperStarLowerStarAdjunction_counit_app
     (H : Sheaf Z.smallEtaleTopology A) :
     IsIso ((pointSmallEtale s).sheafFiber.map
@@ -239,9 +222,7 @@ variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
 
 include hJ in
 /-- **The counit of `i^* ⊣ i_*` is an isomorphism at every sheaf**, for a closed immersion
-`i : Z ⟶ X`: this is
-`AlgebraicGeometry.Etale.isIso_uliftSheafFiber_map_upperStarLowerStarAdjunction_counit_app`
-fed to the joint reflection of isomorphisms by the geometric points of `Z`. -/
+`i : Z ⟶ X`. -/
 instance Etale.isIso_upperStarLowerStarAdjunction_counit_app
     (H : Sheaf Z.smallEtaleTopology A) :
     IsIso ((Etale.upperStarLowerStarAdjunction A i).counit.app H) :=
@@ -249,16 +230,14 @@ instance Etale.isIso_upperStarLowerStarAdjunction_counit_app
     Etale.isIso_uliftSheafFiber_map_upperStarLowerStarAdjunction_counit_app A i _ H)
 
 include hJ in
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--5`: **The counit of
-`i^* ⊣ i_*` is an isomorphism**, for a closed immersion `i : Z ⟶ X`,
+/-- **The counit of `i^* ⊣ i_*` is an isomorphism**, for a closed immersion `i : Z ⟶ X`,
 that is, `i^* i_* H ≅ H` naturally in the sheaf `H` on `Z`. -/
 instance Etale.isIso_upperStarLowerStarAdjunction_counit :
     IsIso (Etale.upperStarLowerStarAdjunction A i).counit :=
   NatIso.isIso_of_isIso_app _
 
 include hJ in
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--5`: **The pushforward along
-a closed immersion is fully faithful.** -/
+/-- **The pushforward along a closed immersion is fully faithful.** -/
 noncomputable def Etale.fullyFaithfulLowerStar : (i)_*[A].FullyFaithful :=
   (Etale.upperStarLowerStarAdjunction A i).fullyFaithfulROfIsIsoCounit
 

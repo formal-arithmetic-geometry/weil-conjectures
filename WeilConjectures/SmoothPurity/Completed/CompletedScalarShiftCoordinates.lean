@@ -10,13 +10,16 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 /-! # Signed completed scalar shift coordinates and normalization
 
-Source: Stacks Project Tags 011G, 014E, 06YS, 06YT, 06YU and 08TC;
-blueprint main-20261015, the Weil-structures paragraph of the open-closed
-triangle proof (blueprint: def-pur-completed-scalar-shift-coordinates).
+This module defines the finite-level and product reindexing isomorphisms and the coordinate and
+normalization predicates for the signed completed scalar shift.
 
-The finite-level and product maps and the two predicates are extracted from
-CompletedScalarShift without changing names, signatures or bodies. These are
-normalization definitions; they assert no existence or shift compatibility.
+## Implementation details
+
+These are normalization definitions; they assert no existence or shift compatibility.
+
+## References
+
+* Stacks Project, Tags 011G, 014E, 06YS, 06YT, 06YU and 08TC
 -/
 
 @[expose] public section
@@ -41,8 +44,7 @@ variable {l : ℕ} [Fact l.Prime] {E : Type u} [Field E]
 
 /-- The canonical tensor reindexing at a finite level, followed by scalar restriction.
 Both comparisons are the `mapCochainComplexShiftIso` comparisons of the underlying
-additive module functors; no tower isomorphism is chosen.
-Source: Stacks Tags 011G and 08TC (blueprint: def-pur-completed-scalar-shift-coordinates). -/
+additive module functors. -/
 noncomputable def completedScalarShiftLevelIso
     (P : CochainComplex (integralTowerModules l E Y) ℤ) (m : ℤ) (n : ℕ) :
     (integralScalarLevel l E L ι Y n).obj (P⟦m⟧) ≅
@@ -56,8 +58,7 @@ noncomputable def completedScalarShiftLevelIso
             m).app
       ((integralScalarFiniteComplex l E L ι Y n).obj P)
 
-/-- The canonical degreewise product reindexing, fixed at every quotient level.
-Source: Stacks Tags 011G and 08TC (blueprint: def-pur-completed-scalar-shift-coordinates). -/
+/-- The canonical degreewise product reindexing, fixed at every quotient level. -/
 noncomputable def completedScalarShiftProductIso
     (P : CochainComplex (integralTowerModules l E Y) ℤ) (m : ℤ) :
     (∏ᶜ fun n : ℕ ↦ ((integralScalarTowerFunctor l E L ι Y).obj (P⟦m⟧)).obj (op n)) ≅
@@ -66,11 +67,9 @@ noncomputable def completedScalarShiftProductIso
     (PreservesProduct.iso (shiftFunctor (CochainComplex (integralTowerModules l L Y) ℤ) m)
       (fun n : ℕ ↦ ((integralScalarTowerFunctor l E L ι Y).obj P).obj (op n))).symm
 
-/-- The two coordinates of the actual Roos shift map. The first inclusion carries
-coefficient one, and the second carries `(-1)^m`. These are inclusions in the
-mapping *cocone*, rather than in the unshifted mapping cone.
-Source: Stacks Tags 011G, 014E and 08TC
-(blueprint: def-pur-completed-scalar-shift-coordinates). -/
+/-- The two coordinate formulas for the shift isomorphism on the mapping cocone of the Roos
+endomorphism: on the first inclusion it is the product reindexing, and on the second it is the
+product reindexing multiplied by `(-1)^m`. -/
 def completedScalarShiftConeFormula
     (eC : (integralScalarComplexFunctor l E L ι Y).CommShift ℤ)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) (m : ℤ) : Prop :=
@@ -98,10 +97,8 @@ def completedScalarShiftConeFormula
           ((integralScalarComplexFunctor l E L ι Y).obj P)
           m j (j + m) rfl).inv))
 
-/-- The strict derived shift is the descent of this same chain alpha, with the
-retained localization comparison. Shifted representatives remain good.
-Source: Stacks Tags 011G, 06YS and 08TC
-(blueprint: def-pur-completed-scalar-shift-coordinates). -/
+/-- The derived shift isomorphism `eL` is the descent of the chain-level shift isomorphism `eC`
+through the localization comparison, and shifts of good complexes are good. -/
 def completedScalarShiftIntegralNormalization
     (eC : (integralScalarComplexFunctor l E L ι Y).CommShift ℤ)
     (eL : (integralScalarExtensionOfUniverses l E L ι Y).CommShift ℤ) : Prop := by

@@ -16,9 +16,20 @@ public import Mathlib.RingTheory.Finiteness.Basic
 /-!
 # Depth over a quotient ring
 
-Source: Stacks Project, Algebra, Lemma Tag 0AUK (lemma-depth-goes-down-finite),
-applied to the finite ring map `R → R ⧸ I`
-(blueprint: lem-weil-pbc-depth-over-quotient-ring).
+For a finite module `M` over a Noetherian local ring `R` killed by an ideal `I`, the depth of
+`M` over `R ⧸ I` equals its depth over `R`.
+
+## Implementation details
+
+This is the case of the finite ring map `R → R ⧸ I` of Tag 0AUK. The proof is the direct
+argument for a surjective local ring map: the maximal ideals generate the same submodule of
+`M`, and regular sequences correspond to each other, since every sequence in `m ⧸ I` lifts.
+
+## References
+
+* [Stacks, Tag 0AUK]
+* [Stacks, Tag 00LF]
+* [Stacks, Tag 00LI]
 -/
 
 @[expose] public section
@@ -28,8 +39,7 @@ universe u v
 namespace IsLocalRing
 
 /-- Surjective scalar change preserves depth: the maximal ideals generate the same
-submodule and corresponding regular sequences have equal lengths. This is the direct
-quotient argument from Stacks Tags 00LF and 00LI, generalised to a surjective algebra map. -/
+submodule and corresponding regular sequences have equal lengths. -/
 private theorem depth_eq_of_surjective
     {R S M : Type*} [CommRing R] [CommRing S] [Algebra R S]
     [IsLocalRing R] [IsLocalRing S] [AddCommGroup M]
@@ -82,15 +92,7 @@ private theorem depth_eq_of_surjective
 `I ≠ ⊤`), `M` is a finite `R ⧸ I`-module by Mathlib's `Module.IsTorsionBySet.module`,
 `(r mod I) • m = r • m`, and the depth of `M` over `R ⧸ I` equals its depth over `R`;
 in particular (for `M = R ⧸ I`) the depth of the local ring `R ⧸ I` equals the depth of
-`R ⧸ I` as an `R`-module (blueprint: lem-weil-pbc-depth-over-quotient-ring).
-
-Proof (Stacks Tag 0AUK for the finite ring map `R → R ⧸ I`, whose only maximal ideal is
-`m ⧸ I`): the maximal ideal of `R ⧸ I` is the image of `m`, so `(m ⧸ I) M = m M` and the
-clause `I M = M` of the depth definition holds over one ring iff over the other. For
-`f₁, …, f_r ∈ m` with images `f̄ᵢ ∈ m ⧸ I`, multiplication by `fᵢ` and by `f̄ᵢ` on each
-`M ⧸ (f₁, …, f_{i-1}) M` is the same map, so `f₁, …, f_r` is `M`-regular over `R` iff
-`f̄₁, …, f̄_r` is `M`-regular over `R ⧸ I`; every sequence in `m ⧸ I` lifts to `m`. Hence
-the sets of lengths of regular sequences agree and the two depths are equal. -/
+`R ⧸ I` as an `R`-module. -/
 theorem depth_over_quotient_ring
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (I : Ideal R) (hI : I ≤ maximalIdeal R)

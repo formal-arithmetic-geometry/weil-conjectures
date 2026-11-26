@@ -11,8 +11,18 @@ public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 /-!
 # EtaleResidueTripleUnitRefinement
 
-Source: Stacks Project, Algebra, Tags 04GN and 04GP.
-(blueprint: lem-weil-pbc-etale-triple-unit-refinement).
+An element `f` outside the prime of an étale residue triple becomes a unit in a refinement.
+
+## Implementation details
+
+The refinement is the principal localization `B_f`: the map `B → K` extends to `B_f` since
+`f` maps to a unit, and the kernel of the extension gives the new prime and residue-field
+embedding.
+
+## References
+
+* [Stacks, Tag 04GN]
+* [Stacks, Tag 04GP]
 -/
 
 @[expose] public section
@@ -23,16 +33,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Algebra, Tags 04GN and 04GP.
-
-Proof: For an element f outside the prime q of a triple, form the principal localization B_f.
-The map B → K extends to B_f because the image of f in K is nonzero and hence a unit.
-Let q' be the kernel of this extension and extend the resulting injection B_f/q' → K
-to its fraction field. This gives the residue-field embedding of the new triple.
-The extended map agrees on R, so q' lies over p and the triple is compatible with χ.
-Principal localization is etale, and composition with the given etale map is etale.
-The localization map is a morphism of triples and takes f to a unit.
-(blueprint: lem-weil-pbc-etale-triple-unit-refinement). -/
+/-- An element of the ring of an étale residue triple outside its prime becomes a unit after
+passing along some morphism of triples. -/
 theorem etaleResidueTriple_unit_refinement
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     (χ : (Spec R).residueField p ⟶ CommRingCat.of K)

@@ -13,9 +13,9 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSup
 The recursive scalar/root sections locally span every completed integral root tensor
 power, and maps out of such a power are determined by their values on them.
 
-Source: Stacks, Modules on Sites, Tags 03EK and 03EL
-(blueprint: lem-weil-integral-root-power-generators-local-span,
-lem-weil-integral-root-power-generators-local-ext).
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK and 03EL
 -/
 
 @[expose] public noncomputable section
@@ -341,15 +341,7 @@ private theorem rootGen_locally_span (d : ℕ) (U : X.ProEtᵒᵖ)
 
 end RootFormulas
 
-/-- The recursive root formulas locally span every positive tensor power.
-Source: Stacks, Modules on Sites, Tags 03EK and 03EL; the tensor-sheafification
-argument in the proof of local generation.
-(blueprint: lem-weil-integral-root-power-generators-local-span).
-Proof: degree zero is the coefficient sheaf. In degree one, use the
-sheafification unit for scalar extension and the tensor-product induction. For
-higher degrees, refine the local spans of the two factors to a common cover,
-expand bilinearly, and use the recursion equation for G. The sieve formulation
-records exactly the local descent needed by the sheaf separatedness argument. -/
+/-- The recursive root formulas locally span every positive tensor power. -/
 theorem integralRootPower_local_spanning
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -399,13 +391,7 @@ theorem integralRootPower_local_spanning
   exact hi
 
 /-- Local spanning of the prescribed sections implies extensionality of maps.
-The generation assertion is the strictly smaller geometric part of the argument.
-Source: Stacks, Modules on Sites, Tags 03EK and 03EL.
-(blueprint: lem-weil-integral-root-power-generators-local-ext).
-Proof: use sheaf extensionality and separatedness of the target. On each member
-of the covering sieve supplied by local spanning, induct on the submodule span;
-linearity reduces the equality to the displayed generators, where the
-hypothesis h applies. -/
+The generation assertion is the strictly smaller geometric part of the argument. -/
 theorem integralRootPower_hom_ext_of_locallySpans
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

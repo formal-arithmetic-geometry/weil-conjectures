@@ -10,7 +10,12 @@ import all WeilConjectures.SmoothPurity.StrictQuotient.StrictScalarPullbackCompa
 import all WeilConjectures.SmoothPurity.StrictQuotient.StrictPullbackEvaluationConstructor
 import all WeilConjectures.SmoothPurity.StrictQuotient.StrictTensorOrdinaryAdjunct
 
-/-! # Constructor laws for ordinary strict quotient adjuncts -/
+/-! # Constructor laws for ordinary strict quotient adjuncts
+
+## References
+
+* Stacks Project, Tags 0G7E, 07A6 and 03EL.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -238,32 +243,7 @@ private theorem pullbackAdjointEquation {V W : Scheme.{t}} (g : V ⟶ W)
     exact (h4.trans hf).trans (hl.trans (hen.symm.trans hr.symm))
 
 /-- Exact geometric inverse image on the strict sequence site evaluates to the
-specified finite pullback and respects its actual quotient adjuncts.
-Source: Stacks Project, sites-cohomology.tex, Tags 0G7E and 07A6;
-sites-modules.tex, Tag 03EL; pullback step of
-lem-pur-quotient-operation-adjoint-factorizations.
-(blueprint: lem-pur-strict-pullback-adjoint-constructor).
-
-Proof: the unit defining integralComparisonSequenceGenerator is a morphism of
-sequence module sheaves, so its naturality for the horizontal site arrow gives
-PullbackTransitions. Evaluation of the sequence inverse image and finite inverse
-image are left adjoint to the same evaluated direct image. The resulting comparison
-is fixed by their units; it sends the sequence unit generator to the finite unit
-generator, giving PullbackModel. The constant-ring inverse-image comparison is an
-isomorphism, so finite pullback is exact. Exact localization therefore computes
-every universal left derived pair on every complex, giving PullbackComputes.
-For two levels, base change of scalars commutes with this inverse image. The
-ordinary scalar comparison sends the insertion of one followed by the mth
-inverse-image unit to the nth unit applied to the insertion of one. The two
-composites in PullbackAdjointEquation agree on these generators, by the ordinary
-adjunction unit identities and horizontal naturality. Linearity, Kan extension,
-sheafification and the adjunction Hom bijection imply equality of chain maps.
-The inverse comparisons are the reversed balanced tensor and inverse-image
-comparisons. This constructs em, en and chi with all three required generator
-identifications and the displayed equation. No normalization of K, flatness of the
-quotient map or commutation of inverse image with the completed coefficient limit
-is needed. Equal levels, identity arrows, zero complexes and empty schemes are
-included. -/
+specified finite pullback and respects its actual quotient adjuncts. -/
 theorem strictPullbackAdjointConstructor {V W : Scheme.{t}} (g : V ⟶ W)
     (K : Complex l E W) :
     PullbackTransitions l E g K ∧

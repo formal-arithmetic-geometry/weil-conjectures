@@ -14,13 +14,13 @@ public import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 The coordinate `t` vanishes on the special fibre `𝒳_s` of the deformation model
 `𝒳 = D_I X ×_{𝔸¹_k} Spec k'⟦t⟧`, so `𝒳_s ⟶ D_I X` factors through the normal cone
-`N_I X = D_I X ×_{𝔸¹_X} X` (`AlgebraicGeometry.ProEtale.CondensedRing
-.deformationSpecialFibreToNormalCone`), naturally in `(X, I)`. The preimage of the zero section
-`V(I) ⟶ N_I X` is the *zero section of the special fibre*
-(`AlgebraicGeometry.ProEtale.CondensedRing.deformationSpecialFibreZeroSection`), a closed
-subscheme of `𝒳_s`. If the morphism of normal cones induced by `f : X ⟶ Y` lands in the zero
-section (blueprint `lemma-normal-cones-contracting-ideals` (2)), so does the morphism of special
-fibres (`AlgebraicGeometry.ProEtale.CondensedRing.range_deformationSpecialFibreMap_subset`).
+`N_I X = D_I X ×_{𝔸¹_X} X`
+(`AlgebraicGeometry.ProEtale.CondensedRing.deformationSpecialFibreToNormalCone`), naturally in
+`(X, I)`. The preimage of the zero section `V(I) ⟶ N_I X` is the *zero section of the special fibre*
+(`AlgebraicGeometry.ProEtale.CondensedRing.deformationSpecialFibreZeroSection`), a closed subscheme
+of `𝒳_s`. If the morphism of normal cones induced by `f : X ⟶ Y` lands in the zero section, so does
+the morphism of special fibres
+(`AlgebraicGeometry.ProEtale.CondensedRing.range_deformationSpecialFibreMap_subset`).
 
 -/
 

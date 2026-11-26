@@ -18,8 +18,13 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 /-! # Generic support, resolution, and derived-mate proofs
 
-Proved categorical subarguments for compact-support coefficient transport.
-Sources: Stacks 03EK and 0D6E; blueprint theorem-smooth-purity-all-admissible-coefficients, Step 10.
+Categorical lemmas used for compact-support coefficient transport: invertibility criteria for
+inverse and derived mates, support of scalar restriction along open extension, and
+preservation of injective resolutions by continuous flat site direct images.
+
+## References
+
+* Stacks Project, Tags 03EK and 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -79,11 +84,7 @@ private theorem chosen_unit_isIso_congr
   exact hi
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- An inverse mate is invertible when its unit and relevant counits are invertible.
-Source: Stacks 03EK and 0D6E; blueprint theorem-smooth-purity-all-admissible-coefficients, Step 10.
-(blueprint: lem-pur-inverse-mate-supported-counit).
-Proof: Expand the inverse mate through its unit and counit. Each factor is an isomorphism, so
-every component and hence the natural transformation is invertible. -/
+/-- An inverse mate is invertible when its unit and relevant counits are invertible. -/
 theorem inverse_mate_isIso_of_support
     {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
     {L : A ⥤ B} {R : B ⥤ A} {l : D ⥤ E} {r : E ⥤ D}
@@ -148,12 +149,7 @@ private theorem exact_support_counit_isIso
 end ExactSupport
 
 attribute [-instance] WeilConjectures.completedOrdinaryScalarExtension_additive in
-/-- Scalar restriction preserves the derived essential image of open extension.
-Source: Stacks 03EK and 0D6E; blueprint theorem-smooth-purity-all-admissible-coefficients, Step 10.
-(blueprint: lem-pur-derived-scalar-open-support).
-Proof: The ordinary open unit is invertible. The ordinary support theorem makes its counit
-invertible on scalar-restricted extensions. Transport that counit through exact derived functors
-and use the open derived adjunction to recognize essential-image membership. -/
+/-- Scalar restriction preserves the derived essential image of open extension. -/
 theorem scalarRestriction_openSupported
     (C D : ℕ → CommRingCat.{u + 1})
     (τ : ∀ n, C (n + 1) ⟶ C n) (σ : ∀ n, D (n + 1) ⟶ D n)
@@ -196,11 +192,7 @@ theorem scalarRestriction_openSupported
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Continuous module pushforward is additive on morphisms.
-Source: the sectionwise module direct-image construction, Stacks 03EK.
-(blueprint: lem-pur-scalar-site-pushforward-additive).
-Proof: the pushforward maps linear morphisms on each section by the original maps;
-therefore addition of two morphisms is preserved on every section. -/
+/-- Continuous module pushforward is additive on morphisms. -/
 theorem scalarSitePushforward_additive
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}
@@ -249,13 +241,7 @@ attribute [-instance] WeilConjectures.completedOrdinaryScalarExtension_additive 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A continuous flat site direct image preserves the scalar-restricted injective resolution used
-for coefficient transport.
-Source: Stacks 03EK and 0D6E; blueprint theorem-smooth-purity-all-admissible-coefficients, Step 10.
-(blueprint: lem-pur-continuous-scalar-resolution).
-Proof: Pass both sites to their small equivalent models. Construct the ringed direct-image models
-and the sectionwise identity comparison isomorphisms. Equivalences are exact and preserve
-K-injective complexes; apply the existing ringed resolution theorem and transport the resulting
-quasi-isomorphism back through the equivalences. -/
+for coefficient transport. -/
 theorem continuous_scalar_resolution
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
     (JC : GrothendieckTopology C) (JD : GrothendieckTopology D)
@@ -492,14 +478,7 @@ attribute [-instance] WeilConjectures.completedOrdinaryScalarExtension_additive 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A derived mate is invertible when the ordinary mate is invertible and restricted resolutions
-remain quasi-isomorphisms.
-Source: Stacks 03EK and 0D6E; blueprint theorem-smooth-purity-all-admissible-coefficients, Step 10.
-(blueprint: lem-pur-derived-mate-resolution-criterion).
-Proof: Resolve the scalar-restricted image of each K-injective complex. The resolution condition
-makes the target derived unit invertible, and the source unit is invertible on K-injectives. The
-derived-mate factorization and ordinary mate then make the derived component invertible. Transport
-by naturality from injective representatives to every object; finally identify the inverse of the
-symmetrized derived square with the original square. -/
+remain quasi-isomorphisms. -/
 theorem derived_mate_isIso_of_resolution
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]

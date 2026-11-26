@@ -7,7 +7,13 @@ module
 
 public import Mathlib.CategoryTheory.Monoidal.Functor
 
-/-! # Typed data for a representative tensor-counit square -/
+/-!
+# Typed data for a representative tensor-counit square
+
+## References
+
+* [Stacks Project, Tags 07A4 and 0FPT]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -16,9 +22,7 @@ universe u v w uA vA uB vB wA wB
 open CategoryTheory MonoidalCategory
 namespace WeilConjectures.PurityFiniteSetting
 
-/-- Source and tail maps of a tensor-counit square, retaining their actual common target.
-Source: Stacks 07A4 and 0FPT, the representative formula for derived scalar extension.
-(blueprint: def-pur-tensor-representative-data). -/
+/-- Source and tail maps of a tensor-counit square, retaining their actual common target. -/
 structure TensorRepresentativeData
     {C D K L : Type*} [Category* C] [Category* D] [Category* K] [Category* L]
     [MonoidalCategory C] [MonoidalCategory D]
@@ -40,18 +44,15 @@ variable {C D K L : Type*} [Category* C] [Category* D] [Category* K] [Category* 
   [MonoidalCategory C] [MonoidalCategory D]
   {Q : C ⥤ D} {R : K ⥤ C} {QB : L ⥤ D} {S : K → Prop}
 
-/-- The common target of the actual source and tail composites.
-Source: Stacks 07A4 and 0FPT (blueprint: def-pur-tensor-representative-data). -/
+/-- The common target of the actual source and tail composites. -/
 abbrev obj (d : TensorRepresentativeData Q R QB S) (X Y : K) : D := QB.obj (d.target X Y)
 
-/-- Compose the three recorded source factors in abstract categories.
-Source: Stacks 07A4 and 0FPT (blueprint: def-pur-tensor-representative-data). -/
+/-- Compose the three recorded source factors in abstract categories. -/
 def source (d : TensorRepresentativeData Q R QB S) (X Y : K) :
     Q.obj (R.obj X ⊗ R.obj Y) ⟶ d.obj X Y :=
   Q.map (d.first X Y) ≫ d.second (d.tensor X Y) ≫ QB.map (d.third X Y)
 
-/-- The entire representative equation, formed before specializing the input categories.
-Source: Stacks 07A4 and 0FPT (blueprint: def-pur-tensor-representative-data). -/
+/-- The entire representative equation, formed before specializing the input categories. -/
 def Normalized (d : TensorRepresentativeData Q R QB S) (h : Q.CoreMonoidal) : Prop :=
   ∀ X Y, S X → S Y →
     d.source X Y = (h.μIso (R.obj X) (R.obj Y)).inv ≫ d.tail X Y

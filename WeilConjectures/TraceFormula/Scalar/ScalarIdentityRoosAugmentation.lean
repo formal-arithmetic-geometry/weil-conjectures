@@ -10,8 +10,13 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 
 /-! # Multiplication and the strict scalar identity augmentation
 
-Source: Bhatt--Scholze, Definition 3.4.10; Stacks Project, Tags 06YY and 0941.
-(blueprint: lem-trf-scalar-identity-roos-augmentation)
+Inserting the scalar one into a strict quotient family and applying its normalized tower
+identification gives the scalar identity cone augmentation.
+
+## References
+
+* Bhatt--Scholze, Definition 3.4.10.
+* Stacks Project, Tags 06YY and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -102,23 +107,8 @@ private theorem multiplication_inv_apply
     M V 1 x
   simpa only [e, integralComparisonSequenceScalarUnit, Iso.app_hom, one_smul] using hu.symm
 
-/-- Inserting the scalar one into a strict quotient family and applying its
-normalized tower identification gives the specified scalar identity cone augmentation.
-Source: Bhatt--Scholze, Definition 3.4.10; Stacks 06YY and 0941;
-scalar-model-unit proof steps 2--3.
-(blueprint: lem-trf-scalar-identity-roos-augmentation).
-
-Proof: the inverse ordinary scalar unitor inserts 1 tensor x, since multiplication
-and insertion are inverse on sheafified tensor generators. In each quotient the
-section formula for b, followed by this insertion and q, is precisely the scalar
-tensor generator 1 tensor x by hq with s=1. The ordinary adjunction transpose has
-these components as its limit projections. The limit-to-Roos map has that limit
-tuple in its unshifted coordinate and zero in its shifted coordinate. Roos(q)
-acts by the product of q in both coordinates and has zero off-diagonal entries.
-Consequently the composite has the same unshifted components and zero shifted
-component as completedScalarIdentityUnit. Product and biproduct extensionality
-identify the chain maps. The computation respects all quotient transitions and
-works also for the zero complex; it uses no derived-category faithfulness. -/
+/-- Inserting the scalar one into a strict quotient family and applying its normalized tower
+identification gives the specified scalar identity cone augmentation. -/
 theorem scalarIdentityRoosAugmentation
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
     (C : CochainComplex (coefficientSequenceModules l E X) ℤ)

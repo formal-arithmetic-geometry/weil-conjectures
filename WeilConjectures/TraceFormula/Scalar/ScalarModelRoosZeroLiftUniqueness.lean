@@ -10,11 +10,13 @@ import WeilConjectures.TraceFormula.Scalar.ScalarModelRoosZeroLiftNestedCoordina
 
 /-! # Uniqueness of a zero-shifted scalar Roos lift
 
-Source: Stacks Project, Tag 0941; Bhatt--Scholze, Proposition 3.5.1.
-(blueprint: lem-trf-scalar-model-roos-zero-lift-uniqueness)
-
 The strict Roos coordinates determine a localized map once the shifted coordinate
 vanishes. This is the coordinate/extensionality part of the scalar lift argument.
+
+## References
+
+* Stacks Project, Tag 0941.
+* Bhatt--Scholze, Proposition 3.5.1.
 -/
 
 @[expose] public noncomputable section
@@ -62,17 +64,8 @@ private theorem scalarModel_cocone_degree_ext
         reassoc_of% hs]
     _ = g.f i := by rw [hi, Category.comp_id]
 
-/-- A zero-shifted strict Roos map is determined after localization by its unshifted
-coordinates on nested scalar tensors.
-
-Source: Stacks 0941; Bhatt--Scholze, Proposition 3.5.1; step 3 of
-`lem-trf-scalar-model-roos-zero-lift`.
-
-Proof in words: the zero shifted coordinates remove the second component of the
-Roos cone. Tensor balancing and sheafification extend equality from nested tensor
-generators to every section, while product and mapping-cocone extensionality identify
-the strict chain maps. Applying the localization functor gives the displayed equality.
--/
+/-- A zero-shifted strict Roos map is determined after localization by its unshifted coordinates on
+nested scalar tensors. -/
 theorem scalarModelRoosZeroLift_uniqueness
     (P : (integralOperationsGoodComplex l E X).FullSubcategory)
     (D : CochainComplex (coefficientSequenceModules l L X) ℤ)

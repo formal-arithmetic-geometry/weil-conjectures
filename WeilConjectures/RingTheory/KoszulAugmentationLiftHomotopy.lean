@@ -13,6 +13,21 @@ import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 import Mathlib.Algebra.Category.ModuleCat.Projective
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
+/-! # Homotopy uniqueness of Koszul augmentation lifts
+
+Two chain maps from the Koszul complex of a tuple in `I` to a projective resolution of `A/I`
+with the same augmentation are homotopic.
+
+## Implementation details
+
+The inductive construction is that of Mathlib's `ProjectiveResolution.liftHomotopyZero`, with
+the free Koszul complex in place of a source resolution.
+
+## References
+
+* [Stacks, Tag 00LS]
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -20,19 +35,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Two Koszul chain maps with the same augmentation into a projective resolution
-are homotopic. Source: Stacks Project, Tag 00LS, part (2); the inductive proof
-is Mathlib's `ProjectiveResolution.liftHomotopyZero` with an arbitrary free
-source complex in place of a source resolution.
-(blueprint: new-r4-koszul-augmentation-lift-homotopy).
-
-Proof: Subtract the maps. The degree-zero difference lands in the kernel of
-the augmentation, hence lifts to degree one of the resolution. Inductively,
-subtract the already constructed homotopy term composed with the source
-differential. The chain-map equation and the preceding homotopy equation
-show that the residual map is a cycle. Exactness of the target and freeness
-of each Koszul exterior power lift it one degree higher. These lifts assemble
-to a null-homotopy of the difference, and hence a homotopy of the two maps.
-No exactness of the Koszul complex or regularity of the sequence is used. -/
+are homotopic. No exactness of the Koszul complex or regularity of the sequence is used. -/
 theorem koszul_augmentation_lifts_homotopic (A : Type u) [CommRing A]
     (I : Ideal A) (r : ℕ) (g : Fin r → I)
     (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I)))

@@ -167,10 +167,16 @@ import all WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientData
 
 /-! # Associativity for prescribed scalar presentations
 
-Source: Stacks Tags 06YY and 07A6; blueprint Proof (3).
-(blueprint: lem-pur-prescribed-scalar-associator).
+This file shows that prescribed ordinary and derived scalar presentations admit a normalized
+associator.
+
+## Implementation details
 
 The presentations are supplied, so the comparison retains their actual universal counits.
+
+## References
+
+* [Stacks, Tags 06YY, 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -328,14 +334,7 @@ private theorem scalarCompositionData
     representative := fun P ↦ (hd P).symm
     unique := fun o' ho' ↦ scalarComp_unique p a b c o' o ho' ho }⟩
 
-/-- Prescribed ordinary and derived presentations admit their normalized associator.
-Source: Stacks Tags 06YY and 07A6 (blueprint: lem-pur-prescribed-scalar-associator).
-Proof: take the extension-restriction adjunction for each prescribed presentation.
-Compose the ordinary adjunctions and their derived adjunctions, then use uniqueness
-of left adjoints. The ordinary units insert one, so their comparison multiplies the
-two scalar factors. The derived adjunction hom-comparison gives the displayed
-universal-counit equation. Finally apply the two injective ordinary hom-equivalences:
-the tensor formula at the two units determines every component uniquely. -/
+/-- Prescribed ordinary and derived presentations admit their normalized associator. -/
 theorem presentation_associator_exists
     {C : Type*} [Category C] [EssentiallySmall.{u} C]
     {J : GrothendieckTopology C}

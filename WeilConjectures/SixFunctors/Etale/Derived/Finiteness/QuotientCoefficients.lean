@@ -19,7 +19,7 @@ invertible on the base. For a morphism `f : X ⟶ Y` of finite-type `k`-schemes,
 bounded constructible complex of étale sheaves of `Λ`-modules killed by `J` to a bounded
 constructible complex
 (`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_smul_eq_zero`).
-This is the form of the finiteness theorem (blueprint `sk-prop-sf-finiteness`) used at the
+This is the form of the finiteness theorem used at the
 integral coefficient stage `Λ = 𝒪_E`, for the reductions `K ⊗ᴸ Λ ⧸ Iⁿ⁺¹`.
 
 The proof reduces to the finite ring `Λ ⧸ J`:
@@ -56,9 +56,7 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ'
   (f : X ⟶ Y)
 
 /-- Restriction of scalars along `φ : Λ →+* Λ'` commutes with the derived direct image of a sheaf
-placed in degree `0`: `Res (Rf_* M) ≅ Rf_* (Res M)`. This is the bounded below comparison
-`AlgebraicGeometry.Etale.rightDerivedLowerStarRestrictScalars`, transported to the unbounded
-derived categories. -/
+placed in degree `0`: `Res (Rf_* M) ≅ Rf_* (Res M)`. -/
 noncomputable def restrictScalarsRightDerivedLowerStarSingleIso
     (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
     (Sheaf.restrictScalars Y.smallEtaleTopology φ).mapDerivedCategory.obj
@@ -83,8 +81,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (J : Ideal Λ) {X Y : Scheme.{u}}
 
 /-- Restriction of scalars along `Λ ⟶ Λ ⧸ J`, for `Λ ⧸ J` finite, carries bounded constructible
 complexes of sheaves of `Λ ⧸ J`-modules to bounded constructible complexes of sheaves of
-`Λ`-modules: it is exact and commutes with the homology sheaves, and it preserves constructible
-sheaves (`AlgebraicGeometry.Scheme.isConstructibleSheaf_restrictScalars_iff`). -/
+`Λ`-modules. -/
 lemma boundedConstructible_mapDerivedCategory_restrictScalars [Finite (Λ ⧸ J)]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Λ ⧸ J)))}
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (Λ ⧸ J)) X K) :
@@ -103,10 +100,7 @@ variable {k : Type u} [Field k]
 
 /-- **Finiteness for a constructible sheaf killed by an ideal of finite index.** Let `F` be a
 constructible sheaf of `Λ`-modules on `X` killed by an ideal `J` with `Λ ⧸ J` finite, whose
-exponent is invertible on `X`. Then `Rf_* F` is bounded constructible: `F` is the restriction of
-scalars of the constructible sheaf `Hom_Λ(Λ ⧸ J, F)` of `Λ ⧸ J`-modules, restriction of scalars
-commutes with `Rf_*`, and the finite-coefficient case is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`. -/
+exponent is invertible on `X`. Then `Rf_* F` is bounded constructible. -/
 lemma boundedConstructible_rightDerivedLowerStar_singleFunctor_of_smul_eq_zero [Finite (Λ ⧸ J)]
     [HasInvertibleExponent (Λ ⧸ J) X] (f : X ⟶ Y) [QuasiCompact f] (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
@@ -134,8 +128,7 @@ lemma _root_.CategoryTheory.smul_id_eq_zero_of_iso {C : Type*} [Category C] [Pre
   have : r • 𝟙 B = e.inv ≫ (r • 𝟙 A) ≫ e.hom := by simp
   rw [this, h, zero_comp, comp_zero]
 
-/-- The elements of an ideal `J` kill the homology sheaves of every complex killed by `J`, the
-homology functors being linear. -/
+/-- The elements of an ideal `J` kill the homology sheaves of every complex killed by `J`. -/
 lemma smul_id_homologyFunctor_obj_eq_zero
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : ∀ r ∈ J, r • 𝟙 K = 0) (q : ℤ) :
@@ -143,13 +136,8 @@ lemma smul_id_homologyFunctor_obj_eq_zero
   rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul, hK r hr, Functor.map_zero]
 
 open _root_.DerivedCategory in
-/-- The dévissage of `boundedConstructible_rightDerivedLowerStar_of_smul_eq_zero`, by induction
-on the number `m` of degrees in which `K` may have nonzero homology: if the homology sheaves of
-`K` are constructible and killed by `J`, then `Rf_* K` is bounded constructible and `K` is killed
-by `Jᵐ`. Along the truncation triangle `τ_{< b} K ⟶ K ⟶ τ_{≥ b} K ⟶`, the third term is a sheaf
-placed in degree `b`, killed by `J`, so `K` is killed by `Jᵐ⁺¹` and so is `Rf_* K`; as
-`Λ ⧸ Jᵐ⁺¹` is finite, `Rf_* K` is then bounded constructible as an extension of bounded
-constructible complexes (`DerivedCategory.boundedConstructible_obj₂_of_smul_eq_zero`). -/
+/-- If `K` has nonzero homology in at most `m` degrees and its homology sheaves are constructible
+and killed by `J`, then `Rf_* K` is bounded constructible and `K` is killed by `Jᵐ`. -/
 lemma boundedConstructible_rightDerivedLowerStar_of_isGE_of_isLE [IsNoetherianRing Λ]
     [Finite (Λ ⧸ J)] [HasInvertibleExponent (Λ ⧸ J) X] (f : X ⟶ Y) [QuasiCompact f]
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
@@ -227,17 +215,12 @@ lemma boundedConstructible_rightDerivedLowerStar_of_isGE_of_isLE [IsNoetherianRi
     · have : T.obj₁.IsLE (b - 1) := TStructure.t.isLE_truncLT_obj _ _ _ (by lia)
       exact fun r _ ↦ (isZero_of_isLE _ (b - 1) _ (by lia)).eq_of_src _ _
 
-/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility, for coefficients killed
-by an ideal of finite index.
+/-- Finiteness and constructibility, for coefficients killed by an ideal of finite index.
 
 Let `Λ` be a noetherian ring and `J` an ideal of `Λ` with `Λ ⧸ J` finite, whose exponent is
 invertible on `X`, and let `f : X ⟶ Y` be a quasi-compact morphism of `k`-schemes locally of
 finite type, with `Y` quasi-compact. If `K` is a bounded constructible complex of étale sheaves of
-`Λ`-modules on `X` killed by `J`, then `Rf_* K` is bounded constructible. For `J = 0` this is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`; in
-general the homology sheaves of `K` are sheaves of `Λ ⧸ J`-modules, to which the
-finite-coefficient case applies, and `K` is reassembled by dévissage
-(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isGE_of_isLE`). -/
+`Λ`-modules on `X` killed by `J`, then `Rf_* K` is bounded constructible. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_smul_eq_zero [IsNoetherianRing Λ]
     [Finite (Λ ⧸ J)] [HasInvertibleExponent (Λ ⧸ J) X] (f : X ⟶ Y) [QuasiCompact f]
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]

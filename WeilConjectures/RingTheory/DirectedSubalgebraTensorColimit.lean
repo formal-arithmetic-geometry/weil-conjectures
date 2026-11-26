@@ -16,8 +16,21 @@ import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 /-!
 # Tensor base changes over a directed union of subalgebras
 
-Source: Stacks Project, Algebra, Tags 00DD, 00D6 and 00D7; Tag 033C,
-third paragraph. (blueprint: lem-weil-pbc-directed-subalgebra-tensor-colimit).
+## Implementation details
+
+Index by the subalgebras `A` of `P`, ordered by inclusion (a small filtered category), with
+stages `A ⊗ B`. A ring cocone on this diagram restricts to a compatible family on the `A`,
+hence a map from `R` (as `R` is covered, `CommRingCat.isColimitSubalgebraCocone`), and to a map
+from `B` independent of the stage; these agree on `A0`, so the tensor universal property gives
+the descended map, unique by tensor extensionality. The existential algebra structure in the
+conclusion is the canonical one induced by `A0 ≤ A`; every type lives in universe `u`.
+
+## References
+
+* [Stacks, Tag 00DD]
+* [Stacks, Tag 00D6]
+* [Stacks, Tag 00D7]
+* [Stacks, Tag 033C]
 -/
 
 @[expose] public section
@@ -32,33 +45,7 @@ namespace Subalgebra
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Base change over a directed union of subalgebras gives a filtered ring colimit.
-There is no smoothness, finite-type or normality assumption.
-
-Source: Stacks Project, Algebra, Tags 00DD, 00D6 and 00D7; Tag 033C,
-third paragraph. (blueprint: lem-weil-pbc-directed-subalgebra-tensor-colimit).
-
-Proof: index by the subalgebras A in P, ordered by inclusion. Nonemptiness and
-directedness make this a small filtered category. The assumption A0 ≤ A gives
-A its canonical A0-algebra structure. Form the tensor-product ring diagram
-A tensor B with maps induced by inclusions, and the cocone with vertex R tensor B.
-The inclusions of A into R are colimiting by
-`CommRingCat.isColimitSubalgebraCocone`: the covering hypothesis gives supremum top.
-For any ring cocone c on the tensor diagram, restriction to A tensor 1 gives
-a compatible family of ring maps out of A, hence a ring map r from R into c's
-vertex. Restriction to 1 tensor B gives a ring map b from B into c's vertex
-independent of the chosen stage: any two stages have a common upper bound.
-The maps r and b agree on A0 by the tensor balancing relation at any stage.
-Give c's vertex the A0-algebra structure induced by b. The universal property
-of the algebra tensor product then gives a ring map from R tensor B to c's
-vertex. Its composites with the coprojections agree with c on both tensor
-factors and hence on the entire tensor product. For uniqueness, restriction
-to the R factor is determined by the covering of R by the A, and restriction
-to B is determined at any single stage. Tensor-product extensionality then
-determines the whole ring map. This proves the cocone is colimiting; compare
-it with the chosen categorical colimit to obtain the ring equivalence.
-Each stage is A tensor B, and every type lives in universe u. The existential
-algebra structure in the conclusion is the canonical one induced by A0 ≤ A.
--/
+There is no smoothness, finite-type or normality assumption. -/
 theorem exists_tensorProduct_colimit_of_directed_cover
     {R : Type u} [CommRing R] (A0 : Subalgebra ℤ R)
     (B : Type u) [CommRing B] [Algebra A0 B]

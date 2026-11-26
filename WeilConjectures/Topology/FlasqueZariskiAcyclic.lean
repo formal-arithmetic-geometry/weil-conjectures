@@ -15,8 +15,17 @@ import WeilConjectures.AlgebraicGeometry.InjectiveRestrictionSurjective
 /-!
 # Flasque sheaves are acyclic
 
-Source: literature/stacks-project/cohomology.tex, Lemma Tag 09SY (lemma-flasque-acyclic)
-(blueprint: lemma-uniform-bounds-pro-etale-affines).
+A flasque abelian sheaf on a topological space has vanishing cohomology in positive degrees.
+
+## Implementation details
+
+The proof applies `IsFlasque.subsingleton_H` and identifies `H' F q ⊤` with `H F q`: the free
+abelian sheaf on the representable presheaf of the top open is the sheafification of the
+constant presheaf `ULift ℤ`, and `Ext.precompAddEquiv` transports the subsingleton instance.
+
+## References
+
+* [Stacks Project, Tag 09SY](https://stacks.math.columbia.edu/tag/09SY)
 -/
 
 @[expose] public section
@@ -28,21 +37,7 @@ open CategoryTheory TopologicalSpace
 namespace TopCat.Sheaf
 
 /-- A flasque abelian sheaf on a topological space `X` has vanishing cohomology
-`H^q(X, F) = Sheaf.H' F q ⊤` in every positive degree `q`.
-Source: Stacks Project, `cohomology.tex`, Tag 09SY (`lemma-flasque-acyclic`)
-(blueprint: lemma-uniform-bounds-pro-etale-affines).
-
-Proof:
-1. Apply the source library's `IsFlasque.subsingleton_H` in degree `q = n + 1`.
-   It proves flasque acyclicity by embedding into injectives and dimension shifting;
-   enough injectives on the opens site is provided by Mathlib.
-2. The representable presheaf of the top open has exactly one element at every open.
-   The free abelian group on this singleton is canonically `ℤ`, hence `ULift ℤ`.
-   These component isomorphisms are natural because every generator maps to `1`.
-3. Sheafify this isomorphism and use `Ext.precompAddEquiv` to identify `H' F q ⊤`
-   with `H F q`. Transport the subsingleton instance along the equivalence. 
-(blueprint: lem-sc-topological-flasque-acyclic)
--/
+`H^q(X, F) = Sheaf.H' F q ⊤` in every positive degree `q`. -/
 theorem IsFlasque.subsingleton_H'_top {X : TopCat.{u}}
     [HasExt.{u} (CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})]
     (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})

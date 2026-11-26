@@ -11,7 +11,23 @@ import all WeilConjectures.WeilSheaf.Ordinary.OrdinaryIntegralPullbackConstructi
 import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperationsOnSlices
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 
-/-! # The module pullback comparison and its adjunction units -/
+/-! # The module pullback comparison and its adjunction units
+
+We identify the module direct images and module pullbacks defined by the two completed-ring
+adjunctions, and show that the pullback comparison preserves adjunction-unit sections.
+
+## Implementation details
+
+The direct-image isomorphism is built with `pushforwardCongr` after identifying the direct
+map adjoint to the completed coefficient map with the recorded ordinary direct ring map.
+The pullback isomorphism transports the ringed module adjunction through
+`pullbackPushforwardIso` and uses uniqueness of left adjoints.
+
+## References
+
+* [Stacks, Tag 03D1]
+* [Stacks, Tag 03D2]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -52,12 +68,7 @@ private def push_iso_aux {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [h]
   exact SheafOfModules.pushforwardCongr (directRing_eq l E f)
 
-/-- The actual module direct images agree by equality of their direct ring maps.
-Source: Stacks 03D1 and 03D2.
-(blueprint: def-sf-integral-pullback-pushforward-identification).
-
-Construct the isomorphism with pushforwardCongr after identifying the direct map
-adjoint to the completed coefficient map with the recorded ordinary direct ring map. -/
+/-- The actual module direct images agree by equality of their direct ring maps. -/
 def pullbackPushforwardIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     proEtaleRingModuleDirectImage f ((PurCompactSupport.completed l E).ring Y)
       ((PurCompactSupport.completed l E).ring X) ((PurCompactSupport.completed l E).pull f) ≅
@@ -90,12 +101,7 @@ private theorem pullbackPushforwardIso_section {X Y : Scheme.{u}} (f : X ⟶ Y)
     ((proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _
       |>.apply_symm_apply (sfCompletedCoefficientMap l E f)) M V x
 
-/-- The module pullback isomorphism determined by the completed-ring adjunctions.
-Source: Stacks 03D2.
-(blueprint: def-sf-integral-pullback-module-identification).
-
-Transport the actual ringed module adjunction through pullbackPushforwardIso and
-apply uniqueness of left adjoints to the specified ordinary module adjunction. -/
+/-- The module pullback isomorphism determined by the completed-ring adjunctions. -/
 def pullbackModuleIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (proEtaleRingModulePullback f ((PurCompactSupport.completed l E).ring Y)
       ((PurCompactSupport.completed l E).ring X) ((PurCompactSupport.completed l E).pull f) :
@@ -127,13 +133,7 @@ private theorem pullbackModuleIso_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     ModuleCat.comp_apply, pullbackPushforwardIso_section] at hh
   exact hh
 
-/-- The inverse module comparison preserves adjunction-unit sections.
-Source: Stacks 03D2.
-(blueprint: lem-sf-integral-pullback-module-unit).
-
-Proof: uniqueness of left adjoints preserves the units. The pushforward comparison
-is identity on underlying sections, so evaluate the unit identity on a section.
-Apply the inverse module comparison and cancel its composite with the hom. -/
+/-- The inverse module comparison preserves adjunction-unit sections. -/
 theorem pullbackModuleIso_inv_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : integralTowerModules l E Y) (V : Y.ProEt) (x : M.val.obj (op V)) :
     ((pullbackModuleIso l E f).inv.app M).val.app

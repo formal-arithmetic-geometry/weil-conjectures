@@ -20,8 +20,22 @@ import WeilConjectures.RingTheory.LocalizedApproximationColimits
 
 /-! # Cocones for prime-localized approximation diagrams
 
-Source: Stacks Project, Algebra, Tag 00RC, first reduction, and Tag 037D.
-(blueprint: lem-weil-pbc-localized-approximation-cocones)
+Localizing a ring and module approximation diagram at the contractions of a prime `q` of the
+limit gives ring and module cocones with local induced maps, without finiteness or tensor
+hypotheses.
+
+## Implementation details
+
+Stage rings are `Localization.AtPrime` of the contracted primes and stage modules are
+`LocalizedModule`s, with fraction-formula transitions. The ring colimits localize by Stacks
+037D; for modules, numerators, denominators and zero relations are lifted to a common stage
+using the supplied colimits. A fraction is a nonunit precisely when its numerator lies in the
+contracted prime, which gives locality. No Noetherianity or finiteness is needed.
+
+## References
+
+* [Stacks, Tag 00RC] (first reduction)
+* [Stacks, Tag 037D]
 -/
 
 @[expose] public section
@@ -68,37 +82,7 @@ private theorem prime_ring_localization_witness
   infer_instance
 
 set_option linter.unusedVariables false in
-/-- Construct the localized ring and module cocones, without finiteness or tensor hypotheses.
-
-Source: Stacks Project, Algebra, Tag 00RC, first reduction paragraph; Tag 037D.
-(blueprint: lem-weil-pbc-localized-approximation-cocones)
-
-Proof:
-1. Contract q along each top-stage cocone map followed by ULift.down and then along
-   the base-to-top map. Cocone naturality and the commuting squares identify the
-   contractions along transitions. Take Localization.AtPrime of both stage rings
-   and LocalizedModule of each stage module. The transition maps send x/s to
-   f(x)/f(s). They are well defined because a denominator outside the earlier prime
-   maps outside the later prime; semilinearity carries the fraction relation to the
-   fraction relation. Uniqueness on numerator-one images proves the functor laws,
-   the ring squares, and all displayed naturality identities for the maps ρA, ρB, ζ.
-2. Localize the two supplied ring colimit cocones using Tag 037D. Transport their
-   colimit comparisons through the canonical ULift ring equivalences. For modules,
-   lift a numerator and denominator to a common stage. Equality of fractions has
-   a multiplier outside q; lift that multiplier and descend the zero relation to
-   a later stage using eventual equality in the supplied group colimit. This gives
-   the localized group colimit and its scalar action by multiplication of fractions.
-   The cocone maps are semilinear for this action. The commuting ring squares induce ψ.
-3. Prime localizations are local. A fraction is a nonunit precisely when its numerator
-   belongs to the contracted prime; this criterion proves locality of every induced
-   ring map.
-4. The base limit is R at q contracted to R. The module limit is M at q. The fraction
-   comparisons preserve the restricted R-action, giving the limit linear equivalence.
-   At each stage the same calculation gives the A_i-linear module equivalence and
-   base localization witness. The numerator-one linear map ℓ is IsLocalizedModule:
-   denominator scalars are invertible, every fraction has a numerator and denominator,
-   and an equality of numerator-one images is killed by a denominator.
-No Noetherianity, finiteness, or transition tensor equivalence is needed here. -/
+/-- Construct the localized ring and module cocones, without finiteness or tensor hypotheses. -/
 theorem exists_localized_approximation_cocones
     (R : Type u) (S : Type v) (M : Type w)
     [CommRing R] [CommRing S] [Algebra R S]

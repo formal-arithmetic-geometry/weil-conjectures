@@ -11,7 +11,7 @@ public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 /-!
 # Direct images on the pieces of a generic curve model
 
-Two formal inputs of the proof of `proposition-proper-direct-image-finite-coefficients`:
+Two formal inputs of the constructibility of direct images with finite coefficients:
 
 - a surjective closed immersion `t : T ⟶ P` does not change direct images: the unit
   `F ⟶ t_* t^* F` is an isomorphism
@@ -42,8 +42,7 @@ open _root_.DerivedCategory
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- For a surjective closed immersion `t`, the unit `F ⟶ t_* t^* F` is an isomorphism: its
-pullback along `t` is one, and `t` is surjective. -/
+/-- For a surjective closed immersion `t`, the unit `F ⟶ t_* t^* F` is an isomorphism. -/
 lemma isIso_unit_app_of_isClosedImmersion_of_surjective {T P : Scheme.{u}} (t : T ⟶ P)
     [IsClosedImmersion t] [Surjective t] (F : Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) t).unit.app F) :=
@@ -67,8 +66,7 @@ section Sigma
 
 variable {ι : Type u} (Y : ι → Scheme.{u})
 
-/-- The range of the inclusion of a summand of a finite coproduct of schemes is closed: it is the
-complement of the union of the other (open) summands. -/
+/-- The range of the inclusion of a summand of a finite coproduct of schemes is closed. -/
 lemma isClosed_range_sigmaι [Finite ι] (a : ι) : IsClosed (Set.range (Sigma.ι Y a)) := by
   classical
   have h : Set.range (Sigma.ι Y a) = (⋃ b ∈ ({a}ᶜ : Set ι), Set.range (Sigma.ι Y b))ᶜ := by
@@ -161,8 +159,7 @@ lemma isIso_biproductLift_unit_sigmaι [Finite ι]
   exact this
 
 /-- **Direct images of a finite direct sum.** If `Rf_*(Gⱼ[0])` has constructible homology
-sheaves for each member of a finite family `(Gⱼ)` of sheaves on `X`, so has `Rf_*((⨁ⱼ Gⱼ)[0])`:
-each `Hᵠ(Rf_*(-[0]))` is an additive functor, hence commutes with finite direct sums. -/
+sheaves for each member of a finite family `(Gⱼ)` of sheaves on `X`, so has `Rf_*((⨁ⱼ Gⱼ)[0])`. -/
 lemma constructibleHomology_rightDerivedLowerStar_biproduct {X S : Scheme.{u}} (f : X ⟶ S)
     {J : Type*} [Finite J] (G : J → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hG : ∀ j, Etale.DerivedCategory.constructibleHomology (ModuleCat.{u + 1} Λ) S

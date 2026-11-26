@@ -142,15 +142,25 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Coherent reduction and strict tower realizations
 
-Source: `literature/stacks-project/sites-cohomology.tex`, Lemma 21.18.4
-(Tag 07A4, label `lemma-pullback-tensor-product`), together with the integral,
-rational, and algebraically closed coefficient conventions
-(blueprint: def-pur-completed-pullback-tower-realizations).
+This file fixes the coherent reduction/limit presentations of the integral pullback and tensor
+realizations, normalized by their strict Roos models, and the pullback/tensor comparison of
+coherent derived systems.
 
 ## Main definitions
 
 * `pullbackTensorOrdinaryReduction` and its adjunction fix coherent reduction.
 * `pullbackTensorLimitRoos` fixes the total-limit/Roos normalization.
+
+## Implementation details
+
+The full strict tensor-model normalization is kept behind the named predicate
+`pullbackTensorIntegralTensorNormalization`, so that selecting its unique isomorphism does not
+repeatedly type-check the full square.
+
+## References
+
+* Stacks Project, Lemma 21.18.4 (Tag 07A4), together with Tags 03EL, 06YU, 06YY, 08TC,
+  0941 and 099N.
 -/
 
 @[expose] public noncomputable section
@@ -211,8 +221,7 @@ theorem pullbackTensorTensorTower_existsUnique (W : Scheme.{u})
   change (e'.app (op n)).hom = (e.app (op n)).hom
   exact he'h.trans heh.symm
 
-/-- The uniquely prescribed strict tensor tower comparison.
-Source: Stacks 0941 and 07A4 (blueprint: def-pur-completed-pullback-tower-realizations). -/
+/-- The uniquely prescribed strict tensor tower comparison. -/
 def pullbackTensorTensorTower (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :=
   pullbackTensorUniqueChoice (pullbackTensorTensorTower_existsUnique l E W P Q)
@@ -253,8 +262,7 @@ private theorem pullbackTensorTensorTower_naturality (W : Scheme.{u})
   exact (pullbackTensorTensorTower_app l E W P Q n).trans
     (pullbackTensorTensorLevelComparison_app l E W P Q n).symm
 
-/-- The total limit of a coherent complex, normalized by the actual Roos model.
-Source: Stacks 08TC and 0941 (blueprint: def-pur-completed-pullback-tower-realizations). -/
+/-- The total limit of a coherent complex, normalized by the actual Roos model. -/
 def pullbackTensorLimitRoos (W : Scheme.{u})
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) :
     (coefficientSequenceLimit l E W).obj (DerivedCategory.Q.obj C) ≅
@@ -264,21 +272,18 @@ def pullbackTensorLimitRoos (W : Scheme.{u})
   (pullbackTensorRoosModel l E W).app
     (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C)
 
-/-- Pullback in the coherent reduction/limit presentation, before restricting objects.
-Source: Stacks 0941, 099N (blueprint: def-pur-completed-pullback-tower-realizations). -/
+/-- Pullback in the coherent reduction/limit presentation, before restricting objects. -/
 def pullbackTensorReferencePullback {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (pullbackTensorCalculus l E Y).reduction ⋙ pullbackTensorSequenceDerived l E f ⋙
     coefficientSequenceLimit l E X
 
-/-- Completed tensor in the coherent reduction/limit presentation.
-Source: Stacks 0941 and 07A4 (blueprint: def-pur-completed-pullback-tower-realizations). -/
+/-- Completed tensor in the coherent reduction/limit presentation. -/
 def pullbackTensorReferenceTensor (W : Scheme.{u}) :=
   ((pullbackTensorCalculus l E W).reduction.prod
     (pullbackTensorCalculus l E W).reduction) ⋙
       (pullbackTensorCalculus l E W).systemClosed.tensor ⋙ coefficientSequenceLimit l E W
 
-/-- The coherent pullback presentation computes the actual strict finite-pullback Roos model.
-Source: Stacks 08TC, 0941, 099N (blueprint: def-pur-completed-pullback-tower-realizations). -/
+/-- The coherent pullback presentation computes the actual strict finite-pullback Roos model. -/
 def pullbackTensorReferencePullbackModel {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :
     (pullbackTensorReferencePullback l E f).obj (DerivedCategory.Q.obj P.obj) ≅
@@ -335,13 +340,7 @@ attribute [local irreducible] integralPullbackDescent pullbackTensorReferencePul
 attribute [local implicit_reducible] integralDerivedPullback integralDerivedPullbackComparison
   integralOperationsGoodLocalization in
 /-- The actual integral pullback is identified with coherent reduction and limit
-by equality with its full strict Roos comparison on every good representative.
-Source: Stacks 08TC, 0941, 099N (blueprint: def-pur-completed-pullback-tower-realizations).
-Proof: the preceding model is a composition of the adjunction-normalized coherent
-reduction comparison, exact pullback factorization, the right-derived Roos model,
-and the unit-normalized strict tower isomorphism. Thus its representative functor
-is exactly integralOperationsPullbackOnGood. Compare the two descents of that
-functor. The localization universal property gives the stated unique isomorphism. -/
+by equality with its full strict Roos comparison on every good representative. -/
 theorem pullbackTensorIntegralPullbackModel_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! e : integralDerivedPullback l E f ≅ pullbackTensorReferencePullback l E f,
       ∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,
@@ -363,16 +362,11 @@ theorem pullbackTensorIntegralPullbackModel_existsUnique {X Y : Scheme.{u}} (f :
     rw [pullbackTensorReferencePullbackModelIso_app]
     exact h' P
 
-/-- The uniquely Roos-normalized integral pullback realization.
-Source: Stacks 08TC, 0941, 099N (blueprint: def-pur-completed-pullback-tower-realizations). -/
+/-- The uniquely Roos-normalized integral pullback realization. -/
 def pullbackTensorIntegralPullbackModel {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   pullbackTensorUniqueChoice (pullbackTensorIntegralPullbackModel_existsUnique l E f)
 
-/-- Ordinary coherent reduction preserves K-flat representatives.
-Source: Stacks 06YY and 0941 (blueprint: def-pur-completed-pullback-tower-realizations).
-Proof: finite evaluation of reduction is ordinary scalar extension, which preserves
-K-flatness. Evaluation is exact and commutes with the total tensor. Componentwise
-exactness of semilinear systems detects the acyclicity of every tensor test. -/
+/-- Ordinary coherent reduction preserves K-flat representatives. -/
 theorem pullbackTensorReductionGood (W : Scheme.{u})
     (P : (integralOperationsGoodComplex l E W).FullSubcategory) :
     @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
@@ -387,8 +381,7 @@ theorem pullbackTensorReductionGood (W : Scheme.{u})
     ((pullbackTensorReductionEvaluationComplex l E W n).app P.obj)
     ((coefficientTensorModelPreservation l E W).1 P.obj P.property.1 n)
 
-/-- The recorded system tensor model, at the actual sequence-site universes.
-Source: Stacks 06YU (blueprint: def-pur-completed-pullback-tower-realizations). -/
+/-- The recorded system tensor model, at the actual sequence-site universes. -/
 def pullbackTensorSystemModel (W : Scheme.{u})
     (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ)
     (hP : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
@@ -404,8 +397,7 @@ def pullbackTensorSystemModel (W : Scheme.{u})
     (coefficientSequenceCommRingSheaf l E W) (pullbackTensorCalculus l E W).systemClosed
     (pullbackTensorCalculus l E W).systemTensorModel P Q hP hQ
 
-/-- The reference tensor computes the prescribed full strict tensor tower.
-Source: Stacks 08TC, 0941 and 07A4 (blueprint: def-pur-completed-pullback-tower-realizations). -/
+/-- The reference tensor computes the prescribed full strict tensor tower. -/
 def pullbackTensorReferenceTensorModel (W : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) :
     (pullbackTensorReferenceTensor l E W).obj
@@ -455,9 +447,7 @@ private theorem pullbackTensorReferenceTensorModelIso_app (W : Scheme.{u})
   rw [pullbackTensorCoherentTensorRoosComparison_app]
   rfl
 
-/-- The full strict tensor-model normalization, kept behind a named predicate so
-selecting its unique isomorphism does not repeatedly type-check the full square.
-Source: Stacks 07A4, 0941 (blueprint: def-pur-completed-pullback-tower-realizations). -/
+/-- The full strict tensor-model normalization, stated as a named predicate. -/
 def pullbackTensorIntegralTensorNormalization (W : Scheme.{u})
     (e : integralCompletedTensor l E W ≅ pullbackTensorReferenceTensor l E W) : Prop :=
   ∀ P Q : (integralOperationsGoodComplex l E W).FullSubcategory,
@@ -471,12 +461,7 @@ attribute [local irreducible] integralCompletedTensorDescent
   pullbackTensorReferenceTensorModel in
 attribute [local implicit_reducible] integralCompletedTensor integralCompletedTensorComparison
   integralOperationsGoodLocalization in
-/-- The integral tensor realization is fixed by its complete strict Roos model.
-Source: Stacks 08TC and 0941 (blueprint: def-pur-completed-pullback-tower-realizations).
-Proof: both functors descend integralOperationsTensorOnGood. The preceding
-comparison identifies the whole tower and the Roos differential, not just its
-finite projections. The localization universal property gives a unique natural
-isomorphism compatible with these specified comparison components. -/
+/-- The integral tensor realization is fixed by its complete strict Roos model. -/
 theorem pullbackTensorIntegralTensorModel_existsUnique (W : Scheme.{u}) :
     ∃! e : integralCompletedTensor l E W ≅ pullbackTensorReferenceTensor l E W,
       pullbackTensorIntegralTensorNormalization l E W e := by
@@ -498,18 +483,12 @@ theorem pullbackTensorIntegralTensorModel_existsUnique (W : Scheme.{u}) :
     rw [pullbackTensorReferenceTensorModelIso_app]
     exact h' P Q
 
-/-- The uniquely Roos-normalized tensor realization.
-Source: Stacks 08TC and 0941 (blueprint: def-pur-completed-pullback-tower-realizations). -/
+/-- The uniquely Roos-normalized tensor realization. -/
 def pullbackTensorIntegralTensorModel (W : Scheme.{u}) :=
   pullbackTensorUniqueChoice (pullbackTensorIntegralTensorModel_existsUnique l E W)
 
 /-- The ordinary tensor comparison on coherent complexes is determined on every
-pure-tensor total summand by the actual inverse-image adjunction unit.
-Source: Stacks 03EL and 07A4 (blueprint: def-pur-completed-pullback-tower-realizations).
-Proof: use the ordinary ringed-topos pullback/tensor comparison on each pair of
-terms. Its pure-tensor formula is the displayed unit equation. Totalization
-respects both differential summands. Tensor generators and total-summand
-injections prove uniqueness; the ordinary inverse gives invertibility. -/
+pure-tensor total summand by the actual inverse-image adjunction unit. -/
 theorem pullbackTensorSequenceCochain_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! e : coefficientTotalTensor.{u, u + 1, u}
         (coefficientSequenceTopology (ProEt.topology Y))
@@ -558,19 +537,11 @@ theorem pullbackTensorSequenceCochain_existsUnique {X Y : Scheme.{u}} (f : X ⟶
       (pullbackTensorSequenceRing l E f) (pullbackTensorSequenceInverse l E f)
       (pullbackTensorSequenceAdjunction l E f)).exists.choose
 
-/-- The pure-tensor normalized comparison of strict coherent complexes.
-Source: Stacks 07A4 (blueprint: def-pur-completed-pullback-tower-realizations). -/
+/-- The pure-tensor normalized comparison of strict coherent complexes. -/
 def pullbackTensorSequenceCochain {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   pullbackTensorUniqueChoice (pullbackTensorSequenceCochain_existsUnique l E f)
 
-/-- Exact sequence inverse image preserves K-flatness.
-Source: Stacks 0DEN, 0DEP and 07A4
-(blueprint: lem-pur-sequence-pullback-kflat).
-Proof: evaluate at every finite level. Algebraic inverse image preserves arbitrary
-K-flat complexes by the conservative stalk criterion; scalar extension preserves
-K-flatness. Uniqueness of left adjoints identifies this with the actual finite
-pullback. Its specified evaluation comparison and componentwise tensor exactness
-then prove K-flatness on the sequence site. No flat-term assumption is used. -/
+/-- Exact sequence inverse image preserves K-flatness. -/
 theorem pullbackTensorSequenceGood {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (coefficientSequenceModules l E Y) ℤ)
     (hP : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
@@ -590,12 +561,7 @@ theorem pullbackTensorSequenceGood {X Y : Scheme.{u}} (f : X ⟶ Y)
       (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P)
       ((coefficientTensorModelPreservation l E Y).2 P hP n))
 
-/-- The derived coherent comparison is uniquely fixed before applying Rlim.
-Source: Stacks 06YU, 07A4 and 0941 (blueprint: def-pur-completed-pullback-tower-realizations).
-Proof: restrict the pure-tensor cochain comparison to K-flat pairs. Exact inverse
-image preserves these pairs. The displayed square is the localization descent
-square with the prescribed tensor and pullback models. The K-flat resolving
-localization gives existence and uniqueness, including all system transitions. -/
+/-- The derived coherent comparison is uniquely fixed before applying Rlim. -/
 theorem pullbackTensorSystemComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! e : (pullbackTensorCalculus l E Y).systemClosed.tensor ⋙
         pullbackTensorSequenceDerived l E f ≅
@@ -654,8 +620,7 @@ theorem pullbackTensorSystemComparison_existsUnique {X Y : Scheme.{u}} (f : X �
     (fun P Q _ _ ↦ ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.app
       ((coefficientTotalTensor.{u, u + 1, u} JY AY).obj (P,Q))).isIso_hom)
 
-/-- The canonical comparison as a map of coherent derived systems.
-Source: Stacks 07A4 and 0941 (blueprint: def-pur-completed-pullback-tower-realizations). -/
+/-- The canonical comparison as a map of coherent derived systems. -/
 def pullbackTensorSystemComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   pullbackTensorUniqueChoice (pullbackTensorSystemComparison_existsUnique l E f)
 

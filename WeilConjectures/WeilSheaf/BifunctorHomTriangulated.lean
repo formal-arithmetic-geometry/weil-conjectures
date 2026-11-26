@@ -25,8 +25,7 @@ distinguished (`HomotopyCategory.distinguished_iff_iso_trianglehOfDegreewiseSpli
 is identified with the image of the standard triangle of `φ`
 (`CochainComplex.bifunctorHomMappingConeTriangleIso`).
 
-This is used for the exactness of the Verdier dual of Weil complexes (blueprint
-`theorem-verdier-biduality`).
+This is used for the exactness of the Verdier dual of Weil complexes.
 -/
 
 @[expose] public section

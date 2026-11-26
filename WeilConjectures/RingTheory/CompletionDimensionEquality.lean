@@ -17,13 +17,18 @@ set_option autoImplicit false
 @[expose] public section
 universe u
 namespace RingTheory
-/-! (blueprint: lem-weil-pbc-completion-dimension-eq) -/
-/-- (blueprint: lem-weil-pbc-completion-dimension-eq) Equality of Krull dimensions for
-maximal-ideal adic completion.
-Proof: apply the flat height formula to the canonical flat map from A to its completion at
-the maximal ideal. The completion is local with the extended maximal ideal, and its closed
-fibre is the residue field A/m, hence has dimension zero. Localizing at the maximal ideals
-does not change either local ring, so the formula gives equality. -/
+/-!
+# Krull dimension of the completion of a Noetherian local ring
+
+The completion of a Noetherian local ring at its maximal ideal has the same Krull dimension.
+
+## Implementation details
+
+The proof applies the flat height formula to the flat map from `A` to its completion, which is
+local with the extended maximal ideal and whose closed fibre is the residue field.
+-/
+/-- The maximal-ideal adic completion of a Noetherian local ring has the same Krull dimension
+as the ring. -/
 theorem completion_dimension_eq (A : Type u) [CommRing A] [IsNoetherianRing A]
     [IsLocalRing A] :
     ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal A) A) = ringKrullDim A := by

@@ -16,10 +16,9 @@ import WeilConjectures.Tactic.TransportExact
 # The twist equation for quasi-projective opens
 
 This file proves the twist equation of the generic slice
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`, blueprint
-`lemma-nearby-duality-slice--1`, the twist (1) and "the map `θ`") for the opens used in the
-induction of Gabber's theorem: opens `V` of the total space of a proper trait model `M_c` over
-a generic base which embed into an affine space over the trait `S`
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`) for the opens used in the induction of
+Gabber's theorem: opens `V` of the total space of a proper trait model `M_c` over a generic base
+which embed into an affine space over the trait `S`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_restrictOpen_of_immersion`).
 
 The proof follows the composition-law route:
@@ -38,7 +37,7 @@ The proof follows the composition-law route:
   for `M_c|_V`, from its generic standard model `V ⟶ S` (re-basing to `η` and shrinking the base,
   `TraceFormula.Specialization.NearbyDualityGenericBaseSliceShrink`).
 
-## Implementation notes
+## Implementation details
 
 The composition law is stated over abstract fields, and the field of fractions `Frac K⟦t⟧` of the
 slice trait carries two ring structures (`OreLocalization.instCommRing` and `Field.toCommRing`).
@@ -137,17 +136,9 @@ variable [LocallyOfFiniteType (N.restrictSpecialFibre U).hom]
 
 /-- **The twist equation for `W = b̄⁻¹(𝔸¹_S)`**: let `N` be a proper trait model over `(η, X̄₁, 𝟙)`
 with full geometric generic fibre and `b̄ : N ⟶ ℙ¹_S` a proper morphism of models whose maps of
-fibres are projective (`b̄₁ = i₁ ≫ p₁`, `b̄₂ = i₂ ≫ p₂`, closed immersions followed by smooth
-proper morphisms). Then the twist equation
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`) holds for the open sub-model
-`W = N|_U`, `U = b̄⁻¹(𝔸¹_S)`, and its coordinate `b_W`.
-
-By `NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_of_openSubmodel_comp`
-it suffices to prove the twist equation of `θ_N` along `W'' ⟶ W ⟶ N`. That is
-`NearbyCyclesModel.exists_twist_of_slice_of_composition_law` for `b̄` and the slice of
-`P = ℙ¹_S`, whose own twist equation is `NearbyCyclesModel.exists_twist_projectiveLineSlice`; the
-base change maps `γ` of `Rb̄^!` along the slices of `ℙ¹_S` are invertible since `b̄₁`, `b̄₂` are
-projective (`NearbyCyclesModel.isIso_upperShriekBaseChangeOfMap_projectiveLineGenericSlice`). -/
+fibres are projective (`b̄₁ = i₁ ≫ p₁`, `b̄₂ = i₂ ≫ p₂`, closed immersions followed by smooth proper
+morphisms). Then the twist equation (`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`)
+holds for the open sub-model `W = N|_U`, `U = b̄⁻¹(𝔸¹_S)`, and its coordinate `b_W`. -/
 theorem exists_twist_restrictOpen_of_compactified (D : NearbyDualizingDataOfGenericBase k' ℓ)
     (DK : NearbyDualizingDataOfGenericBase (traitSliceField k') ℓ)
     (hN : N.IsTraitModelOfGenericBase Xc (𝟙 _) qN gN) [IsProper qN]
@@ -254,18 +245,10 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   [QuasiCompact (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom]
   [IsSeparated (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom]
 
-/-- **The twist equation for a quasi-projective model over `(η, X₁, 𝟙)`** (blueprint
-`lemma-nearby-duality-slice--1`, "the map `θ`"): let `M` be a trait model over the generic base
-`(η, X₁, 𝟙)` with full generic fibre, whose total space is quasi-projective over `S`
-(an immersion `e : 𝒳 ⟶ ℙ(n; S)` over `S`), and `b` a coordinate of `M`. Then the twist equation
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`) holds for `M` and `b`.
-
-`M` is an open sub-model of `W = b̄⁻¹(𝔸¹_S)` for the projective compactification `b̄ : N ⟶ ℙ¹_S`
-of `b` (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_projectiveCoordinateCompactification`),
-whose twist equation is `NearbyCyclesModel.exists_twist_restrictOpen_of_compactified`; open
-restriction
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_of_openSubmodel`)
-passes it to `M`. -/
+/-- **The twist equation for a quasi-projective model over `(η, X₁, 𝟙)`**: let `M` be a trait model
+over the generic base `(η, X₁, 𝟙)` with full generic fibre, whose total space is quasi-projective
+over `S` (an immersion `e : 𝒳 ⟶ ℙ(n; S)` over `S`), and `b` a coordinate of `M`. Then the twist
+equation (`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`) holds for `M` and `b`. -/
 theorem exists_twist_of_isImmersion (D : NearbyDualizingDataOfGenericBase k' ℓ)
     (DK : NearbyDualizingDataOfGenericBase (traitSliceField k') ℓ)
     (h : M.IsTraitModelOfGenericBase X₁ (𝟙 _) q g)
@@ -333,20 +316,13 @@ variable {F : Type u} [Field F] {k' : Type u} [Field k']
   [QuasiCompact (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom]
   [IsSeparated (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom]
 
-/-- **The twist equation for the opens of the induction** (blueprint
-`lemma-nearby-duality-slice--1`, "the twist (1)" and "the map `θ`"): let `M_c` be a proper trait
-model over the generic base `(F, X_c, ι)` with proper `X_c`, `X_c'` and full generic fibre, `V`
-an open of its total space with quasi-compact inclusion which embeds into an affine space over
-the trait (an immersion `c_V : V ⟶ 𝔸(ι_V; S)` over `S`), and `b : V ⟶ 𝔸¹_S` a coordinate. Then
-the twist equation (`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`) holds for
-`M_c|_V` and `b`: there are `u : c^* ω_{X_c} ≅ ω_{X₂} ⊗ T` and `v : p^* ω_{X'} ≅ ω_{𝒳''_s} ⊗ T`,
-`T = ℚ̄_ℓ(0)[2]`, with `p^* θ_{M_c|_V} ≫ v = α ≫ Ψ_{M''}(u) ≫ κ ≫ θ_{M''} ▷ T`.
-
-The twist equation of `M_c|_V` follows from that of its generic standard model `V ⟶ S` over
-`(η, V_η, 𝟙)`
-(`IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_restrictOpen_of_traitFibreModel`),
-which is quasi-projective over `S` through the standard chart `𝔸(ι_V; S) ⟶ ℙ(Option ι_V; S)`
-(`NearbyCyclesModel.exists_twist_of_isImmersion`). -/
+/-- **The twist equation for the opens of the induction**: let `M_c` be a proper trait model over
+the generic base `(F, X_c, ι)` with proper `X_c`, `X_c'` and full generic fibre, `V` an open of its
+total space with quasi-compact inclusion which embeds into an affine space over the trait (an
+immersion `c_V : V ⟶ 𝔸(ι_V; S)` over `S`), and `b : V ⟶ 𝔸¹_S` a coordinate. Then the twist equation
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`) holds for `M_c|_V` and `b`: there are
+`u : c^* ω_{X_c} ≅ ω_{X₂} ⊗ T` and `v : p^* ω_{X'} ≅ ω_{𝒳''_s} ⊗ T`, `T = ℚ̄_ℓ(0)[2]`, with
+`p^* θ_{M_c|_V} ≫ v = α ≫ Ψ_{M''}(u) ≫ κ ≫ θ_{M''} ▷ T`. -/
 theorem exists_iso_map_θ_eq_twist_restrictOpen_of_immersion
     (D : NearbyDualizingDataOfGenericBase k' ℓ)
     (DK : NearbyDualizingDataOfGenericBase (traitSliceField k') ℓ)

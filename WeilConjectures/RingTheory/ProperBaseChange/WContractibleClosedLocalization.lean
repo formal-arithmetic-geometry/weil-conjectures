@@ -10,8 +10,23 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-! # Closed localization of a w-contractible ring
 
-Source: Stacks Project, Tags 096V, 0987 and 09AH
-(blueprint: lem-weil-pbc-wcontractible-closed-localization).
+For a w-contractible ring and an ideal `I`, the localization at the elements that are units
+modulo `I` has spectrum the generizations of `V(I)`, and preserves the retraction property of
+w-contractibility.
+
+## Implementation details
+
+Primes of the localization are the primes `p` with `p + I` proper. The fraction map induces
+`B/IB ≃ R/I`. Together with the principal opens `D(f_k)`, the localization gives a finite
+pro-étale cover. Given a faithfully flat weakly étale `B → D`, replace the `B` member by `D`; the
+w-contractible cover-section lemma gives a section over `R`, which on `Spec B` lands in the clopen
+`D` summand since every point specializes to a point over `V(I)`. Affine full faithfulness turns
+this into a retraction `D → B`. The empty list, unit ideal and zero ring need no separate
+argument.
+
+## References
+
+* [Stacks, Tags 096V, 0987, 09AH]
 -/
 
 @[expose] public section
@@ -23,8 +38,7 @@ open CategoryTheory AlgebraicGeometry
 namespace IsLocalization
 
 /-- The finite family of principal opens and the closed localization, indexed by `Option (Fin r)`.
-The `none` member is `Spec B`. Source: Stacks Project, Tags 0987 and 09AH
-(blueprint: lem-weil-pbc-wcontractible-closed-localization). -/
+The `none` member is `Spec B`. -/
 noncomputable def closedLocalizationFamily (R B : Type u) [CommRing R] [CommRing B] [Algebra R B]
     {r : ℕ} (f : Fin r → R) : PreZeroHypercover (Spec (.of R)) where
   I₀ := Option (Fin r)
@@ -66,29 +80,7 @@ private theorem weaklyEtale_pi {A : Type u} [CommRing A] {ι : Type u}
     (MorphismProperty.cancel_left_of_respectsIso (P := @WeaklyEtale) _ _).mp hw'
   exact (WeaklyEtale.Spec_iff _).mp this
 
-/-- Closed localization and preservation of the retraction property called w-contractibility.
-Source: Stacks Project, Tags 096V, 0987 and 09AH
-(blueprint: lem-weil-pbc-wcontractible-closed-localization).
-
-Proof: (1) Localization primes are primes disjoint from the denominator monoid. Such a prime
-`p` is disjoint precisely when `p + I` is proper, equivalently when some prime `q` contains
-both `p` and `I` (localization prime correspondence and existence of maximal ideals).
-(2) Basic opens pull back to basic opens, and every denominator is invertible, so this
-bijection is a homeomorphism onto its image with the subspace topology.
-(3) The fraction map `a/s ↦ (a mod I)/(s mod I)` is surjective with kernel `IB`, inducing
-the canonical quotient isomorphism, including when the quotient is zero.
-(4) Localizations are flat and have invertible diagonal, hence are weakly etale. The
-principal opens together with the localization image cover the spectrum, by the equality
-of zero loci. The finite affine family therefore satisfies the full fpqc cover condition.
-(5) Given a faithfully flat weakly etale map `B → D`, replace the `B` member by `D`;
-its image is unchanged by faithful flatness. The w-contractible-cover-section lemma gives
-a section of this finite cover over `R`.
-(6) Restrict the section to `Spec B`. Points over `V(I)` must land in the `D` summand,
-since each `f k` is in `I`. Every point specializes to one of these points, so the clopen
-`D` summand contains the entire image. Restriction to that open summand gives `Spec B → Spec D`.
-(7) Affine full faithfulness gives an `R`-map `D → B`. Its composite with `B → D` agrees
-with the identity on `R` and hence on all fractions, so is a retraction. The same argument
-covers the empty list, the unit ideal, and the zero ring. -/
+/-- Closed localization and preservation of the retraction property called w-contractibility. -/
 theorem wcontractible_closed_localization (R B : Type u) [CommRing R] [CommRing B]
     [Algebra R B] (I : Ideal R)
     [IsLocalization ((IsUnit.submonoid (R ⧸ I)).comap (Ideal.Quotient.mk I)) B]

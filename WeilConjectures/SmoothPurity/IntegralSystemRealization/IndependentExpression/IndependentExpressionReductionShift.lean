@@ -10,11 +10,7 @@ import Mathlib.CategoryTheory.Comma.Arrow
 
 set_option linter.privateModule false
 
-/-! # Pointwise reduction and independent expression shifts
-
-Source: blueprint purity transport, Step 2
-(blueprint: lem-pur-independent-expression-reduction-shift).
--/
+/-! # Pointwise reduction and independent expression shifts -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

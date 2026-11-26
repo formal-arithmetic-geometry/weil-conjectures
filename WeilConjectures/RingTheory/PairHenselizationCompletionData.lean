@@ -11,8 +11,16 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 /-!
 # Completion comparison from quotient isomorphisms
 
-Source: Stacks Project, More on Algebra, Tag 0AGV, first paragraph of the proof.
-(blueprint: lem-weil-pbc-henselization-completion-data).
+Compatible quotient isomorphisms `A / I^n ≅ B / I^n B` induce an isomorphism of adic completions.
+
+## Implementation details
+
+The quotient maps and their inverses commute with the transition maps, so the inverse limit
+construction gives mutually inverse ring maps. For `n = 0` both quotients are zero rings.
+
+## References
+
+* [Stacks, Tag 0AGV] (first paragraph of the proof)
 -/
 
 @[expose] public section
@@ -21,20 +29,9 @@ universe u v
 
 namespace RingTheory
 
-/-- Compatible quotient isomorphisms induce the canonical completion isomorphism.
-Source: Stacks Project, More on Algebra, Tag 0AGV, first paragraph of the proof.
-(blueprint: lem-weil-pbc-henselization-completion-data).
-
-Proof: For each positive n the hypothesis gives the ring isomorphism
-A/I^n → B/(I^n B). Ideal.map_pow identifies I^n B with (IB)^n. For n = 0
-both quotients are zero rings, so the same conclusion holds. The quotient maps
-commute with the transition maps because they all send a representative a to f(a).
-Their inverses therefore also commute with the transition maps. Apply the inverse
-limit construction to the maps and their inverses, obtaining mutually inverse ring
-maps θ and θ⁻¹. Evaluation on any coordinate is the corresponding quotient map;
-this proves the displayed compatibility with representatives. Applying that identity
-to the image of a in the completion shows that θ sends the completion image of a
-to that of f(a). Applying θ⁻¹ gives the displayed equality of composite ring maps. -/
+/-- If `f : A → B` induces isomorphisms `A / I^n ≅ B / I^n B` for all `n ≥ 1`, then it induces a
+ring isomorphism `θ` of the adic completions, compatible with representatives and with the
+canonical maps from `A`. -/
 theorem pair_henselization_completion_data
     (A : Type u) [CommRing A] (B : Type v) [CommRing B]
     (I : Ideal A) (f : A →+* B)

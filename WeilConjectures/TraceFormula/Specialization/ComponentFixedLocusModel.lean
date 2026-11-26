@@ -12,13 +12,12 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 /-!
 # A component of the fixed locus inside the deformed fixed locus
 
-Let `c` be contracting at `y`, `F` a fixed locus of `c` and `j : B ⟶ F` with a rational point `b`
-of `B` over `y`. The deformation `𝒟_b B` of `B` along its point `b` maps to the deformation `𝒞`
-of `C` (`componentModelHom`), and the two deformed legs agree on it, since `c₁ ∘ ι = c₂ ∘ ι`.
-Hence it factors through the total space `F̃ = 𝒞 ×_{𝒳 ×_S 𝒳} 𝒳` of the deformed fixed locus
-(`deformationFixedLocusModel`): this is the map `ι_F` of blueprint
-`lemma-fixed-point-scheme-deformation` (E.20), for `Z = {x}`. If `B ⊂ C` is closed, it is a
-closed immersion (`isClosedImmersion_componentFixedLocusTotalLift`).
+Let `c` be contracting at `y`, `F` a fixed locus of `c` and `j : B ⟶ F` with a rational point `b` of
+`B` over `y`. The deformation `𝒟_b B` of `B` along its point `b` maps to the deformation `𝒞` of `C`
+(`componentModelHom`), and the two deformed legs agree on it, since `c₁ ∘ ι = c₂ ∘ ι`. Hence it
+factors through the total space `F̃ = 𝒞 ×_{𝒳 ×_S 𝒳} 𝒳` of the deformed fixed locus
+(`deformationFixedLocusModel`): this is the map `ι_F`. If `B ⊂ C` is closed, it is a closed
+immersion (`isClosedImmersion_componentFixedLocusTotalLift`).
 
 ## Main definitions and statements
 
@@ -85,9 +84,8 @@ lemma componentModelHom_total_comp_deformationProdLiftTotal :
         rw [e₂]; exact map_siteIdeal_le_ker_component_comp_c₁ F j hb)]
     exact deformationTotalMap_eq_of_eq k' e₂ _ _
 
-/-- **The map `ι_F` of blueprint `lemma-fixed-point-scheme-deformation`** (E.20), for `Z = {x}`:
-the deformation `𝒟_b B` of a subscheme `B` of the fixed locus along a rational point `b` over `y`
-factors through the total space `F̃` of the deformed fixed locus. -/
+/-- **The map `ι_F`**: the deformation `𝒟_b B` of a subscheme `B` of the fixed locus along a
+rational point `b` over `y` factors through the total space `F̃` of the deformed fixed locus. -/
 noncomputable def componentFixedLocusTotalLift :
     deformationTotal B b.left.ker k' ⟶ deformedFixedLocusTotal hc k' F :=
   pullback.lift (componentModelHom k' j hb).total
@@ -103,9 +101,8 @@ lemma componentFixedLocusTotalLift_fst :
       (componentModelHom k' j hb).total :=
   pullback.lift_fst _ _ _
 
-/-- **`ι_F` is a closed immersion** (blueprint `lemma-fixed-point-scheme-deformation`, `Z = {x}`):
-if `B ⊂ F ⊂ C` is closed, the deformation `𝒟_b B` is a closed subscheme of the total space `F̃`
-of the deformed fixed locus. -/
+/-- **`ι_F` is a closed immersion**: if `B ⊂ F ⊂ C` is closed, the deformation `𝒟_b B` is a closed
+subscheme of the total space `F̃` of the deformed fixed locus. -/
 theorem isClosedImmersion_componentFixedLocusTotalLift [IsClosedImmersion (j ≫ F.ι).left] :
     IsClosedImmersion (componentFixedLocusTotalLift hc k' F j hb) := by
   have : IsClosedImmersion (componentModelHom k' j hb).total :=

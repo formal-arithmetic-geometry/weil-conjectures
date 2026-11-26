@@ -165,10 +165,9 @@ import Mathlib.CategoryTheory.Generator.Basic
 
 /-! # Resolution-normalized sequence-site adjoints
 
-Source: blueprint main-20261015, `sec-six-functors/sk-thm-sf-package/`
-`fix-prop-coherence.proof.md`, coefficient-comparison sentence; Stacks 0940,
-0941, 03D7, 06YY, 07A6 and 0D6E
-(blueprint: def-pur-sequence-adjoint-resolution-data).
+## References
+
+* [Stacks Project, Tags 0940, 0941, 03D7, 06YY, 07A6, 0A8D and 0D6E]
 -/
 
 @[expose] public noncomputable section
@@ -192,18 +191,15 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   coefficientSequenceRestriction
   coefficientSequenceEvaluation coefficientFiniteDerivedExtension scalarReductionExtension
 
-/-- Read a supplied coherent shift structure without file-local instances.
-Source: cochain shift convention, Stacks 0A8D
-(blueprint: def-pur-sequence-adjoint-resolution-data). -/
+/-- Read a supplied coherent shift structure without file-local instances. -/
 def purSequenceShiftIso {C : Type c} {D : Type d} [Category.{v} C] [Category.{z} D]
     [HasShift C ℤ] [HasShift D ℤ] (F : C ⥤ D) (h : F.CommShift ℤ) (r : ℤ) :
     shiftFunctor C r ⋙ F ≅ F ⋙ shiftFunctor D r :=
   letI := h
   F.commShiftIso r
 
-/-- The ordinary unit-shift equation, with explicit functor and shift parameters.
-Source: Stacks 06YY and Mathlib's adjunction shift convention
-(blueprint: def-pur-sequence-adjoint-resolution-data). -/
+/-- The ordinary unit-shift equation, with explicit functor and shift parameters
+(Mathlib's adjunction shift convention). -/
 def purSequenceUnitShiftCompatibility
     {C : Type c} {D : Type d} [Category.{v} C] [Category.{z} D]
     [HasShift C ℤ] [HasShift D ℤ] {F : C ⥤ D} {G : D ⥤ C}
@@ -211,9 +207,8 @@ def purSequenceUnitShiftCompatibility
   Adjunction.CommShift.CompatibilityUnit adj
     (purSequenceShiftIso F hF r) (purSequenceShiftIso G hG r)
 
-/-- The ordinary counit-shift equation, with explicit functor and shift parameters.
-Source: Stacks 06YY and Mathlib's adjunction shift convention
-(blueprint: def-pur-sequence-adjoint-resolution-data). -/
+/-- The ordinary counit-shift equation, with explicit functor and shift parameters
+(Mathlib's adjunction shift convention). -/
 def purSequenceCounitShiftCompatibility
     {C : Type c} {D : Type d} [Category.{v} C] [Category.{z} D]
     [HasShift C ℤ] [HasShift D ℤ] {F : C ⥤ D} {G : D ⥤ C}
@@ -224,21 +219,18 @@ def purSequenceCounitShiftCompatibility
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- The completed ring, retaining exactly its recorded module category.
-Source: Stacks 0940 (blueprint: def-pur-sequence-adjoint-resolution-data). -/
+/-- The completed ring, retaining exactly its recorded module category. -/
 abbrev purSequenceBaseRing :=
   SheafOfModules.derivedChangeRingIndependentCoefficients
     (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W)
 
-/-- The actual quotient ring on the sequence site, with commutativity forgotten.
-Source: Stacks 0941 (blueprint: def-pur-sequence-adjoint-resolution-data). -/
+/-- The actual quotient ring on the sequence site, with commutativity forgotten. -/
 abbrev purSequenceQuotientRing :=
   (sheafCompose (coefficientSequenceTopology (Scheme.ProEt.topology W))
     (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
       (coefficientSequenceCommRingSheaf l E W)
 
-/-- The constant completed ring on the same sequence site.
-Source: Stacks 0940 (blueprint: def-pur-sequence-adjoint-resolution-data). -/
+/-- The constant completed ring on the same sequence site. -/
 abbrev purSequenceConstantRing :=
   (sheafCompose (coefficientSequenceTopology (Scheme.ProEt.topology W))
     (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
@@ -247,23 +239,20 @@ abbrev purSequenceConstantRing :=
         ((Functor.const ℕᵒᵖ).obj (completedIntegralCommRingSheafUnrestricted l E W)))
 
 /-- The constant-system functor at the underlying presheaf level. A geometric
-inverse image below is identified with this functor, on objects and maps.
-Source: Stacks 0940 (blueprint: def-pur-sequence-adjoint-resolution-data). -/
+inverse image below is identified with this functor, on objects and maps. -/
 abbrev purSequenceConstantPresheaf :=
   sheafToPresheaf (Scheme.ProEt.topology W) (Type (max u (t + 1))) ⋙
     (Functor.whiskeringLeft (ℕ × W.ProEt)ᵒᵖ W.ProEtᵒᵖ
       (Type (max u (t + 1)))).obj (CategoryTheory.Prod.snd ℕ W.ProEt).op
 
 /-- The recorded ordinary scalar adjunction, with its large unit characterization hidden
-behind its actual adjunction type. Source: Stacks 03D7
-(blueprint: def-pur-sequence-adjoint-resolution-data). -/
+behind its actual adjunction type. -/
 def purSequenceFiniteAdjunction (n : ℕ) :
     scalarReductionExtension l E W n ⊣ scalarReductionRestriction l E W n :=
   (scalarReductionExtension_adjunction l E W n).choose
 
 /-- The existing K-injective model of the constant-tower total limit, with
-its declared codomain retained explicitly. Source: Stacks 0941
-(blueprint: def-pur-sequence-adjoint-resolution-data). -/
+its declared codomain retained explicitly. -/
 def purSequenceTowerLimitModel
     (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) [J.IsKInjective] :
     (coefficientConstantTowerLimit l E W).obj (DerivedCategory.Q.obj J) ≅
@@ -275,9 +264,7 @@ def purSequenceTowerLimitModel
 attribute [local irreducible] coefficientConstantTowerLimit coefficientSequenceLimit
 
 /-- Ordinary tensor/limit adjoints and their geometric ringed projection.
-All displayed section maps use the actual quotient and completed-ring projections.
-Source: Stacks 0940, 0941 and 03D7
-(blueprint: def-pur-sequence-adjoint-resolution-data). -/
+All displayed section maps use the actual quotient and completed-ring projections. -/
 structure PurSequenceOrdinaryAdjoints where
   p : RingedToposMorphismOfUniverses (C := ℕ × W.ProEt) (D := W.ProEt)
     (purSequenceQuotientRing l E W) (purSequenceBaseRing l E W)
@@ -320,9 +307,7 @@ attribute [instance] PurSequenceOrdinaryAdjoints.pullback_additive
 
 /-- Universal derived pairs, their specified adjunction and the normalized
 comparison with the supplied coefficient calculus. The `model` field is fixed
-by its equation, for every simultaneous replacement, rather than freely chosen.
-Source: Stacks 06YY, 07A6, 0941 and 0D6E
-(blueprint: def-pur-sequence-adjoint-resolution-data). -/
+by its equation, for every simultaneous replacement, rather than freely chosen. -/
 structure PurSequenceDerivedAdjoints
     (S : CoefficientDerivedSystemCalculus l E W)
     (O : PurSequenceOrdinaryAdjoints l E W) where
@@ -394,9 +379,7 @@ structure PurSequenceDerivedAdjoints
         scalarReductionSource l E W).mapHomologicalComplex (.up ℤ)).map j)
 
 /-- The ringed factorization through the constant completed ring. Its tower
-comparison is normalized on unchanged underlying sections and horizontal maps.
-Source: Stacks 0940 and 0D6E
-(blueprint: def-pur-sequence-adjoint-resolution-data). -/
+comparison is normalized on unchanged underlying sections and horizontal maps. -/
 structure PurSequenceRingedFactorization (O : PurSequenceOrdinaryAdjoints l E W) where
   a : RingedToposMorphismOfUniverses (C := ℕ × W.ProEt) (D := ℕ × W.ProEt)
     (purSequenceQuotientRing l E W) (purSequenceConstantRing l E W)
@@ -453,8 +436,7 @@ structure PurSequenceRingedFactorization (O : PurSequenceOrdinaryAdjoints l E W)
   exact_colimits : PreservesFiniteColimits a.modules
 
 /-- The geometric, ordinary and derived resolution identifications, before the
-shift-coherence assertions. Source: Stacks 0940, 03D7, 06YY and 0D6E
-(blueprint: def-pur-sequence-adjoint-resolution-data). -/
+shift-coherence assertions. -/
 structure PurSequenceResolutionData (S : CoefficientDerivedSystemCalculus l E W) where
   ordinary : PurSequenceOrdinaryAdjoints l E W
   factorization : PurSequenceRingedFactorization l E W ordinary

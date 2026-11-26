@@ -15,8 +15,21 @@ import WeilConjectures.RingTheory.ZariskiPairFlatIntegralIsomorphism
 /-!
 # Étale section lifting from Gabber's root condition
 
-Source: Stacks Project, More on Algebra, Lemma Tag 09XI, implication (5) ⇒ (2)
-(blueprint: lem-weil-pbc-gabber-root-criterion-etale-section-lifting).
+If an ideal `I` in the Jacobson radical of `A` satisfies Gabber's root condition, then every
+`A`-algebra section `B → A/I` of an étale `A`-algebra `B` lifts to a section `B → A`.
+
+## Implementation details
+
+The section modulo `I` gives an idempotent `ε` of `B/IB` splitting off `A/I`. Passing to a finite
+subalgebra of the integral closure of `A` in `B`, one finds an element `b` lifting `ε` that is
+annihilated by a polynomial `f = Xⁿ(X - 1) + ∑ aⱼ Xʲ` with `aⱼ ∈ I`. A root `α` of `f` with
+`α - 1 ∈ I` is a unit, and writing `f = (X - α)g` the polynomial `E = g(α)⁻¹ g` gives an
+idempotent `e = E(b)` lifting `ε` with `be = αe`. Then `A → B_e` is étale, flat, integral and an
+isomorphism modulo `I`, hence an isomorphism, and `B → B_e ≅ A` is the required lift.
+
+## References
+
+* [Stacks, Tag 09XI], implication (5) ⇒ (2)
 -/
 
 @[expose] public section
@@ -29,41 +42,7 @@ open scoped BigOperators
 namespace Algebra
 
 /-- Gabber's root condition for an ideal in the Jacobson radical implies that every
-section of an étale algebra modulo that ideal lifts to an algebra section.
-Source: Stacks Project, More on Algebra, Lemma Tag 09XI, implication (5) ⇒ (2)
-(blueprint: lem-weil-pbc-gabber-root-criterion-etale-section-lifting).
-
-Proof (the nine steps of the DAG node):
-1. The section factors through `B/IB`. By `lem-weil-pbc-etale-ring-base-change` and
-`lem-weil-pbc-etale-section-idempotent-splitting`, its associated idempotent `ε` gives
-`B/IB ≅ A/I × C`, with the section the first projection.
-2. Let `B'` be the integral closure of `A` in `B`. Finite presentation follows from
-`lem-weil-pbc-etale-algebra-finite-presentation-localization`. Apply
-`lem-weil-pbc-integral-closure-finite-fibre-part-localization` to obtain an idempotent
-`ε'` modulo `IB'` mapping to `ε` and a lift `b` with `B'_b ≅ B_b`.
-3. Choose a finite subalgebra `B''` containing `b`, the numerators of generators of `B'_b`,
-and the finitely many elements expressing `b²-b` in `IB'`. Finiteness follows from
-`lem-weil-pbc-finite-of-integral-generators`. Then `B''_b ≅ B'_b`, the image of `b` is
-idempotent modulo `IB''`, and its first factor is `A/I`.
-4. Apply `lem-weil-pbc-zariski-pair-finite-gabber-polynomial` to find `n ≥ 1` and a
-polynomial `f = X^n(X-1) + ∑ aⱼ X^j`, with all `aⱼ ∈ I`, annihilating `b`.
-5. The root hypothesis supplies `α` with `α-1 ∈ I`. The Jacobson condition makes `α`
-a unit. Write `f = (X-α)g`; reduction gives `g mod I = X^n`, so `g(α)` is a unit.
-The polynomial `E = g(α)⁻¹ g` satisfies `E²-E ∈ (f)` and `(X-α)E ∈ (f)`.
-Thus `e = E(b)` is idempotent in `B'` and `be = αe`.
-6. Modulo `I`, `E = X^n`, so `e` maps to `ε'^n = ε'`, since `n ≥ 1`.
-Consequently its image in `B/IB` is `ε`.
-7. On the `e` factor, `b = α` is invertible. Therefore `B'_e ≅ B_e` follows from
-`B'_b ≅ B_b`. Since localization at an idempotent is a quotient, `B'_e`, and hence
-`B_e`, is integral over `A`.
-8. The map `A → B_e` is étale by
-`lem-weil-pbc-etale-algebra-finite-presentation-localization`, flat by
-`lem-weil-pbc-etale-algebra-flat`, and integral by step 7. Its reduction modulo `I`
-is the identity of `A/I`. By `lem-weil-pbc-zariski-pair-flat-integral-isomorphism`,
-it is an isomorphism.
-9. Compose `B → B_e` with the inverse of this isomorphism. Its reduction agrees
-with the original section, since both maps agree on the image of `A → B_e`,
-which is surjective. This yields the required `τ`. -/
+section of an étale algebra modulo that ideal lifts to an algebra section. -/
 theorem exists_etale_section_lift_of_gabber_roots
     (A : Type u) [CommRing A] (I : Ideal A) (hI : I ≤ Ideal.jacobson ⊥)
     (hroots : ∀ (n : ℕ), 1 ≤ n → ∀ (a : Fin (n + 1) → A),

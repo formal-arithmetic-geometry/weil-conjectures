@@ -35,7 +35,11 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # K-flatness of a strict coefficient-system presentation
 
-Source: Stacks Project, Tags 06YY and 0941.
+A simultaneous strict quotient presentation of a good complex is K-flat.
+
+## References
+
+* Stacks Project, Tags 06YY and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -49,17 +53,7 @@ open CategoryTheory AlgebraicGeometry Opposite
 namespace WeilConjectures
 attribute [local irreducible] HasDerivedCategory.standard
 
-/-- A simultaneous strict quotient presentation of a good complex is K-flat.
-
-Source: Stacks Project, Tags 06YY and 0941, applied to the evaluation functors
-of the coefficient-system site.
-(blueprint: lem-trf-scalar-presentation-kflat).
-
-Proof in words: quotient extension preserves K-flatness because P is K-flat
-with flat terms. Transport this property through each evaluation isomorphism.
-Tensor products commute with evaluation. An acyclic test complex remains
-acyclic after evaluation, so its tensor with C is acyclic at every level.
-Componentwise detection of acyclicity on the system site gives the result. -/
+/-- A simultaneous strict quotient presentation of a good complex is K-flat. -/
 theorem scalarPresentationKFlat
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

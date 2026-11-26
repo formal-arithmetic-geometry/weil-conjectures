@@ -15,14 +15,20 @@ import all WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestrictio
 
 /-! # Shift compatibility of the compact-support restriction square
 
-Source: Stacks Tag 07A6; the restriction square used by the scalar mate
-(blueprint: lem-pur-compact-support-restriction-shift).
+The restriction square used by the scalar mate commutes with integer shifts.
+
+## Implementation details
 
 The proof is split from the ambient coefficient comparison: the restriction
 square is built from the exact open restriction comparison and the canonical
-proper direct-image restriction comparison. Both pieces commute with integer
-shifts by their normalized derived adjunctions; the pasted square therefore
-commutes with shifts. This auxiliary statement records exactly that lower step.
+proper direct-image restriction comparison. The open comparison is induced by an isomorphism of
+exact functors, hence commutes with the exact derived shifts; the proper comparison is the mate
+of the exact inverse-image comparison under the canonical derived geometric adjunctions, which
+commute with shifts. The pasted square therefore commutes with shifts.
+
+## References
+
+* [Stacks Project, Tag 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -76,14 +82,7 @@ private theorem properRestriction_shift {R S : Coefficients.{u}} (a : Change R S
 
 /-- The compact-support restriction square commutes with the canonical integer shifts.
 The restriction functors have their exact derived shifts, and compact support has
-exact open shifts followed by canonical K-injective direct-image shifts.
-Source: Stacks Tag 07A6; the normalized open/proper scalar square.
-(blueprint: lem-pur-compact-support-restriction-shift).
-Proof: the open comparison is induced by an isomorphism of exact functors, hence
-commutes with the exact derived shifts. The proper comparison is the mate of the
-exact inverse-image comparison under the canonical derived geometric adjunctions.
-The latter commute with shifts. Whiskering the open square by proper image and
-composing with the inverse proper square gives the asserted compatibility. -/
+exact open shifts followed by canonical K-injective direct-image shifts. -/
 theorem restriction_commShift {R S : Coefficients.{u}} (a : Change R S)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     letI : (pbcDerivedRestrict (a.map X)).CommShift ℤ :=

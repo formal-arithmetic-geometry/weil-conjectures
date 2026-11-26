@@ -31,19 +31,16 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 /-!
 # Derived complete objects for completed integral pro-etale coefficients
 
-Source: Weil conjectures blueprint, `chap-Smooth-purity`, `sk-def-sf-operations`,
-node `def-weil-derived-complete`; Bhatt--Scholze, Definition 3.5.2
-(blueprint: def-weil-derived-complete).
+We define derived complete objects of `D(Y_proet, O_E)`. The definition asks for a K-flat
+representative of an object whose augmented reduction tower is a homotopy-limit cone.
+The cone legs are the canonical reduction maps supplied by `integralReductionTowerCone`; its
+Milnor triangle is therefore the Roos triangle with first map `c : K → ∏ₙ Kₙ` and transition
+`1 - s`.
 
-The definition asks for a K-flat representative of an object whose augmented reduction
-tower is a homotopy-limit cone. The cone legs are the canonical reduction maps supplied
-by `integralReductionTowerCone`; its Milnor triangle is therefore the Roos triangle
-with first map `c : K → ∏ₙ Kₙ` and transition `1 - s`.
-The bounded integral constructibility interface imports this same definition through
-a paired source overlay. This keeps its canonical coefficient and K-flat interfaces
-consistent when published compiled artifacts lag behind their recorded sources.
-The integral triangulation statement compiles this same canonical interface in a
-paired source packet to retain its recorded independent coefficient universes.
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2.
+* Stacks Project, Tag 06YL.
 -/
 
 @[expose] public section
@@ -65,10 +62,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   K-flat resolution `q : P ⟶ G`; `integralReductionTowerCone q hq` has point `Q.obj G`
   and legs the canonical maps `c_n : Q.obj G ⟶ K_n`. Thus its homotopy-limit condition
   is exactly the distinguished Roos triangle
-  `K → ∏ₙ K_n →^{1-s} ∏ₙ K_n → K[1]`. The existential is independent of the chosen
-  representative by the recorded well-definedness theorem for the reduction tower.
-  Source: Bhatt--Scholze, Definition 3.5.2, p. 24; Stacks Tag 06YL
-  (blueprint: def-weil-derived-complete). -/
+  `K → ∏ₙ K_n →^{1-s} ∏ₙ K_n → K[1]`. -/
 noncomputable def IsDerivedComplete
     (K : completedIntegralDerivedCategory l E Y D hl) : Prop :=
   ∃ (P G : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)

@@ -20,6 +20,28 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingCl
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import all WeilConjectures.RingTheory.StablyFreeComplexLift
 
+/-!
+# Finite free lifts compatible with a prescribed marking
+
+Unmarked finite free lifting data of a pseudo-coherent complex along a ring surjection can be
+upgraded to a lift whose reduction is identified with the given complex by a prescribed derived
+marking.
+
+## Implementation details
+
+The universal counit is invertible on the bounded projective representative supplied by the
+lifting data. The inverse of the prescribed marking is represented by a map from `F` to its
+reduction; its acyclic cone is lifted, the cone inclusion is lifted strictly, and the cokernel is
+shifted by minus one. The projective class splitting lemma gives finite stably free terms, whose
+free reductions make them free, and Nakayama gives the exact bound. Mathlib's cone rotation
+homotopy identifies the reduced roof with the prescribed map, with the minus sign absorbed into
+the roof, and naturality of the counit proves the marking.
+
+## References
+
+* [Stacks, Tag 0BCA] (the cone-coordinate homotopy)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u v w w'
@@ -229,15 +251,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 set_option linter.unusedVariables false in
 /-- The remaining comparison step upgrades unmarked lifting data to the prescribed marking.
-Source: Stacks Project, More on Algebra, Tag 0BCA, the cone-coordinate homotopy.
-(auxiliary; not a blueprint node)
-The universal counit is invertible on the bounded projective representative supplied by
-`hdata`. Represent the inverse of the prescribed derived marking by a map from `F` to
-its reduction. Lift its acyclic cone, lift the cone inclusion strictly, and take the
-cokernel shifted by minus one. The projective class splitting lemma gives finite stably
-free terms; their free reductions make them free, and Nakayama gives the exact bound.
-Mathlib's cone rotation homotopy identifies the reduced roof with the prescribed map,
-with the minus sign absorbed into the roof. Naturality of the counit proves the marking.
 -/
 theorem exists_marking_compatible_finiteFree_lift
     {R : Type u} [CommRing R] (I : Ideal R)

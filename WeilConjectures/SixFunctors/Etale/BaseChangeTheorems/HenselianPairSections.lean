@@ -672,9 +672,7 @@ include h in
 /-- **Sections over a proper scheme over a henselian pair.** Let `(A, I)` be a henselian pair,
 `p : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`. For every abelian
 étale sheaf `G` on `Y`, restriction `Γ(Y, G) ⟶ Γ(Y₀, i^* G)` is bijective. A henselian pair is
-Mathlib's `HenselianRing A I` (blueprint: `def-weil-pbc-henselian-terminology`; a strictly
-henselian local ring is a `HenselianLocalRing` with separably closed residue field).
-(blueprint: `theorem-comparison-over-henselian-pair-degree--1`) -/
+Mathlib's `HenselianRing A I`. -/
 @[stacks 0A0C]
 theorem bijective_pullSection_of_henselianRing :
     Function.Bijective (pullSection i G (V := Scheme.Etale.mk (𝟙 Y₀))

@@ -19,10 +19,24 @@ import Mathlib.CategoryTheory.Linear.FunctorCategory
 /-!
 # Canonical first Tor action and natural base-change map
 
-Source: Stacks Project, Algebra, Tag 00MM (lemma-surjective-on-tor-one).
-The coefficient action is induced by multiplication in the second Tor argument.
-The natural map is constructed using the balanced tensor universal property.
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle).
+For commutative-ring maps `R → A → B` and an `R`-module `M`, we construct the canonical
+`A`-action on `Tor₁(M, A)` and the natural `B`-linear map `Tor₁(M, A) ⊗[A] B → Tor₁(M, B)`,
+and show that this map is surjective when `A ⊗[R] M` is flat over `A`.
+
+## Implementation details
+
+The coefficient action is induced by multiplication in the second Tor argument, and the natural
+map is constructed using the balanced tensor universal property.
+
+For surjectivity, choose a free resolution `F` of `M` and let `K_A`, `K_B` be the degree-one
+cycles after tensoring with `A` and `B`. Flatness of `A ⊗[R] M` makes `I ⊗ B → F₀ ⊗ B`
+injective, where `I` is the image of the first differential over `A`, so `K_A ⊗ B → K_B` is
+surjective. A cycle representative over `B` is then lifted to a finite sum of coefficient images
+of cycles over `A`.
+
+## References
+
+* [Stacks, Tag 00MM]
 -/
 
 @[expose] public section
@@ -38,10 +52,7 @@ noncomputable section
 
 variable (R : Type u) [CommRing R] (M : Type u) [AddCommGroup M] [Module R M]
 set_option backward.isDefEq.respectTransparency false in
-/-- Additivity in coefficient maps follows by computing on one resolution of `M`.
-(blueprint: lem-weil-pbc-tor-one-second-additive) 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- First Tor is additive in maps of the second argument. -/
 noncomputable instance torOneSecondAdditive :
     ((Tor' (ModuleCat R) 1).obj (ModuleCat.of R M)).Additive := by
   constructor
@@ -67,9 +78,7 @@ noncomputable instance torOneSecondAdditive :
   rw [h, Functor.map_add, Preadditive.add_comp, Preadditive.comp_add]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Homology preserves scalar multiplication on chain maps. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- Homology preserves scalar multiplication on chain maps. -/
 theorem torHomology_map_smul {X Y : ChainComplex (ModuleCat R) ℕ}
     (f : X ⟶ Y) (r : R) :
     (HomologicalComplex.homologyFunctor (ModuleCat R) (ComplexShape.down ℕ) 1).map
@@ -86,10 +95,7 @@ theorem torHomology_map_smul {X Y : ChainComplex (ModuleCat R) ℕ}
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- First Tor is linear in maps of the second argument.
-(blueprint: lem-weil-pbc-tor-one-second-linear) 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- First Tor is linear in maps of the second argument. -/
 noncomputable instance torOneSecondLinear :
     ((Tor' (ModuleCat R) 1).obj (ModuleCat.of R M)).Linear R := by
   constructor
@@ -113,17 +119,13 @@ noncomputable instance torOneSecondLinear :
     rfl
   rw [hc, torHomology_map_smul, Linear.smul_comp, Linear.comp_smul]
 
-/-- First Tor, deriving in the first argument. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- First Tor, deriving in the first argument. -/
 abbrev TorOne (R : Type u) [CommRing R] (M : Type u) [AddCommGroup M] [Module R M]
     (N : Type u) [AddCommGroup N] [Module R N] : ModuleCat R :=
   (((Tor' (ModuleCat R) 1).obj (ModuleCat.of R M)).obj (ModuleCat.of R N))
 
-/-- The canonical algebra structure on the last ring of a compatible tower.
-Its scalar action is the given `R`-action, not a replacement of it. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- The canonical algebra structure on the last ring of a compatible tower, whose scalar
+action is the given `R`-action. -/
 @[instance_reducible]
 def torTowerAlgebra (A B : Type u) [CommRing A] [CommRing B]
     [Algebra R A] [Algebra A B] [Module R B] [IsScalarTower R A B] : Algebra R B :=
@@ -137,16 +139,11 @@ def torTowerAlgebra (A B : Type u) [CommRing A] [CommRing B]
 
 variable (S : Type u) [CommRing S] [Algebra R S]
 
-/-- Multiplication by `s`, regarded as an `R`-linear endomorphism. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- Multiplication by `s`, regarded as an `R`-linear endomorphism. -/
 def torCoefficientMul (s : S) : ModuleCat.of R S ⟶ ModuleCat.of R S :=
   ModuleCat.ofHom (Algebra.lsmul R R S s)
 
-/-- The canonical action on Tor is the image of coefficient multiplication.
-All module laws are proved from functoriality and additivity. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- The canonical action on Tor, induced by coefficient multiplication. -/
 @[instance_reducible]
 def torOneModule : Module S (TorOne R M S) where
   smul s t := (((Tor' (ModuleCat R) 1).obj (ModuleCat.of R M)).map
@@ -185,17 +182,13 @@ def torOneModule : Module S (TorOne R M S) where
     simp only [h, Functor.map_zero, ModuleCat.hom_zero, LinearMap.zero_apply]
 
 
-/-- The canonical action is functorial multiplication in the second argument. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- The canonical action is functorial multiplication in the second argument. -/
 theorem torOneModule_smul (s : S) (t : TorOne R M S) :
     letI := torOneModule R M S
     s • t = ((Tor' (ModuleCat R) 1).obj (ModuleCat.of R M)).map
       (torCoefficientMul R S s) t := rfl
 
-/-- The canonical Tor action restricts to the original `R`-action. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- The canonical Tor action restricts to the original `R`-action. -/
 theorem torOne_algebraMap_smul (r : R) (t : TorOne R M S) :
     letI := torOneModule R M S
     algebraMap R S r • t = r • t := by
@@ -208,9 +201,7 @@ theorem torOne_algebraMap_smul (r : R) (t : TorOne R M S) :
   rw [h, Functor.map_smul, Functor.map_id]
   rfl
 
-/-- The scalar tower of the canonical Tor module, with no arbitrary action binder. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- The canonical Tor module is a scalar tower over `R`. -/
 theorem torOneScalarTower :
     letI := torOneModule R M S
     IsScalarTower R S (TorOne R M S) := by
@@ -221,9 +212,7 @@ theorem torOneScalarTower :
 variable (A B : Type u) [CommRing A] [CommRing B]
   [Algebra R A] [Algebra A B] [Module R B] [IsScalarTower R A B]
 
-/-- The coefficient algebra map as an `R`-linear map. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- The coefficient algebra map as an `R`-linear map. -/
 def torCoefficientMap : ModuleCat.of R A ⟶ ModuleCat.of R B :=
   ModuleCat.ofHom
     { toFun := algebraMap A B
@@ -234,15 +223,11 @@ def torCoefficientMap : ModuleCat.of R A ⟶ ModuleCat.of R B :=
           ← IsScalarTower.algebraMap_smul A r (algebraMap A B a)]
         simp [Algebra.smul_def] }
 
-/-- Functorial map on first Tor induced by the coefficient algebra map. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- Functorial map on first Tor induced by the coefficient algebra map. -/
 def torOneCoefficientMap : TorOne R M A ⟶ TorOne R M B :=
   ((Tor' (ModuleCat R) 1).obj (ModuleCat.of R M)).map (torCoefficientMap R A B)
 
-/-- Scalar compatibility is a consequence of functoriality, not a hypothesis. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- The coefficient map on first Tor is compatible with the scalar actions. -/
 theorem torOneCoefficientMap_smul (a : A) (t : TorOne R M A) :
     let := torOneModule R M A
     let := torTowerAlgebra R A B
@@ -264,9 +249,7 @@ theorem torOneCoefficientMap_smul (a : A) (t : TorOne R M A) :
       (torCoefficientMul R B (algebraMap A B a)) by
         rw [← F.map_comp, ← F.map_comp, h])
 
-/-- The `B`-action on `Tor₁(M,A) ⊗[A] B`, acting on the right tensor factor. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- The `B`-action on `Tor₁(M,A) ⊗[A] B`, acting on the right tensor factor. -/
 @[instance_reducible]
 def torOneTensorModule :
     letI := torOneModule R M A
@@ -275,9 +258,7 @@ def torOneTensorModule :
   exact (TensorProduct.comm A (TorOne R M A) B).toAddEquiv.module B
 
 omit [Module R B] [IsScalarTower R A B] in
-/-- The tensor source uses the standard action on its right factor. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- The tensor source uses the standard action on its right factor. -/
 theorem torOneTensorModule_smul_tmul (b c : B) (t : TorOne R M A) :
     letI := torOneModule R M A
     letI := torOneTensorModule R M A B
@@ -288,9 +269,8 @@ theorem torOneTensorModule_smul_tmul (b c : B) (t : TorOne R M A) :
     (b • (TensorProduct.comm A (TorOne R M A) B) (t ⊗ₜ[A] c)) = _
   simp only [TensorProduct.comm_tmul, TensorProduct.smul_tmul', smul_eq_mul]
 
-/-- Balanced pure-tensor formula before taking the tensor quotient. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- The balanced pairing `Tor₁(M, A) → B → Tor₁(M, B)` sending `t` and `b` to `b • τ t`,
+where `τ` is the coefficient map on first Tor. -/
 def torOnePairing :
     letI := torOneModule R M A
     letI := torTowerAlgebra R A B
@@ -308,10 +288,8 @@ def torOnePairing :
       map_zero' := by ext b; simp [τ]
       map_add' := by intro t t'; ext b; simp [τ, smul_add] }
 
-/-- The natural `B`-linear base-change map. Its data is a balanced tensor lift,
-not a choice of a morphism satisfying an existence statement. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- The natural `B`-linear base-change map `Tor₁(M, A) ⊗[A] B → Tor₁(M, B)`, given by a
+balanced tensor lift. -/
 def torOneBaseChange :
     letI := torOneModule R M A
     letI := torOneTensorModule R M A B
@@ -344,9 +322,7 @@ def torOneBaseChange :
     change g (b • y) = b • g y at hy
     rw [smul_add, g.map_add, hx, hy, g.map_add, smul_add]
 
-/-- The natural map has the required pure-tensor value. 
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle)
--/
+/-- The natural map has the required pure-tensor value. -/
 @[simp]
 theorem torOneBaseChange_tmul (t : TorOne R M A) (b : B) :
     letI := torOneModule R M A
@@ -372,23 +348,8 @@ theorem torOneBaseChange_tmul (t : TorOne R M A) (b : B) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Let `R → A → B` be commutative-ring maps and `M` an `R`-module.
-If `A ⊗[R] M` is flat over `A`, the specified natural `B`-linear map on first
-Tor is surjective. The coefficient actions are constructed, not quantified over.
-
-Source: Stacks Project, Algebra, Tag 00MM, lemma-surjective-on-tor-one.
-Proof: choose a free resolution of M and tensor it with A and B. Write K_A and
-K_B for its degree-one cycles, and I for the image of the first differential
-with coefficients in A. Factor the augmented exact sequence into
-0 → K_A → F₁ ⊗ A → I → 0 and 0 → I → F₀ ⊗ A → M ⊗ A → 0.
-Flatness of the last term makes I ⊗ B → F₀ ⊗ B injective. Right exactness applied
-to the first sequence therefore gives K_A ⊗ B → K_B surjective. For a given Tor class over B,
-lift a cycle representative as a finite sum
-of coefficient images of cycles over A. Take their homology classes, transport
-them through the resolution comparison isomorphism, and form the corresponding
-tensor sum. Naturality of the comparison isomorphism and of the homology
-projection, together with `torOneBaseChange_tmul`, identifies its image with
-the original class. Hence the constructed map is surjective.
-(blueprint: lem-weil-pbc-tor-one-surjective-flat-middle) -/
+If `A ⊗[R] M` is flat over `A`, the natural `B`-linear map
+`Tor₁(M, A) ⊗[A] B → Tor₁(M, B)` is surjective. -/
 theorem torOne_surjective_flat_middle
     (R : Type u) (A : Type u) (B : Type u) (M : Type u)
     [CommRing R] [CommRing A] [CommRing B]

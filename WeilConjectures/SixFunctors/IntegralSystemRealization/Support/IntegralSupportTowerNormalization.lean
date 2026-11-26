@@ -11,7 +11,13 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Support.IntegralSup
 
 import WeilConjectures.SmoothPurity.Qcqs.QcqsCompactSupportRealization
 
-/-! # Whole compact-support tower normalization -/
+/-! # Whole compact-support tower normalization
+
+## References
+
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0D6E]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -47,24 +53,7 @@ private theorem scalarProjection_comp
   exact ha
 
 /-- The fixed compactification composite has the recorded strict tower and the
-projection-normalized integral compact-support comparison.
-Source: Stacks 0941 and 0D6E; primitive realization Step 5 and the normalized
-compact-support realization
-(blueprint: lem-sf-integral-support-tower-normalization).
-
-Proof: identify o.extension and o.direct with the canonical simultaneous open and
-proper functors through their unit-normalized ordinary adjunctions. Compose these
-whole-system comparisons with the fixed reduction calculus. The construction of the
-recorded compact-support tower then gives the strict derived-tower comparison.
-Its finite evaluations are the open/proper evaluation factors, followed by the
-reduction evaluation, exactly as displayed. The coefficient-restriction cocycle gives
-all pairs of quotient transitions. Apply total limit to the whole comparison, retaining
-its projections. Insert the inverse actual unit of the completed open extension.
-The normalized compact-support realization identifies the resulting integral image
-with the recorded constructible functor. Its defining scalar-adjoint projection
-identity gives the last equation. No equality of derived arrows is inferred merely
-from their finite evaluations. The same construction works for zero inputs and empty
-opens. -/
+projection-normalized integral compact-support comparison. -/
 theorem integralSupportTowerNormalization (D : FiniteFieldDatum.{u})
     (o : Operations l E) (model : RealizationModel l E o) :
 ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)

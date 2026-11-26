@@ -10,8 +10,19 @@ import WeilConjectures.SmoothPurity.Pur.PurSequenceOrdinaryFactorization
 
 /-! # The ordinary coefficient tensor and inverse-limit adjunction
 
-Source: Stacks 03D7 and 0941, and canonical-model construction step 1.
-(blueprint: lem-trf-completion-unit-ordinary-adjunction).
+The ordinary quotient tensor and inverse limit admit the prescribed sectionwise adjunction.
+
+## Implementation details
+
+At level `n` the tensor functor is identified with `scalarReductionExtension` using the
+normalized scalar adjunctions, whose units send `x` to `1 ⊗ x`. The Hom bijection sends a system
+map to the compatible family obtained by evaluating it on `1 ⊗ x`, which the inverse-limit
+universal property identifies with a map into `ordinaryLimit`. Limits of complexes are computed
+degreewise.
+
+## References
+
+* [Stacks Project, Tags 03D7 and 0941](https://stacks.math.columbia.edu/tag/03D7)
 -/
 
 @[expose] public noncomputable section
@@ -155,30 +166,7 @@ private theorem termwiseLimitComparison_projection
 end CanonicalComparisons
 
 /-- The ordinary quotient tensor and limit admit the prescribed sectionwise adjunction.
-This statement involves no derived coefficient calculus or derived comparison.
-
-Source: Stacks, sites-modules.tex, lemma-adjoint-pullback-pushforward-modules (03D7),
-and sites-cohomology.tex, lemma-derived-limit-is-ok (0941); coefficient specialization
-of step 1 of lem-trf-completion-unit-canonical-models.
-(blueprint: lem-trf-completion-unit-ordinary-adjunction).
-
-Proof: Apply the sequence-projection construction to the completion ring sheaf and
-its tower of positive quotients. Transfer the resulting strict systems to modules
-on the coefficient sequence site. At level n identify the tensor functor with the
-fixed scalarReductionExtension using the uniquely normalized scalar adjunctions.
-Their units send x to 1 tensor x, so their mates give exactly
-coefficientOrdinaryQuotient at every transition n <= m. The Hom bijection sends a
-system map to the compatible family obtained by evaluating it on 1 tensor x.
-The inverse-limit universal property identifies this family with a map into the
-fixed ordinaryLimit. Its inverse is the levelwise scalar-extension transpose;
-the two composites are identities by the scalar Hom bijections and limit.hom_ext.
-Naturality gives the adjunction, and transposing the identity gives unit_tensor.
-The system tensor is additive because each scalar extension is additive and the
-vertical evaluations are faithful. Finally limits of complexes are computed in
-each degree: use their degreewise universal property to obtain limitComparison;
-its nth projection in degree p is the ordinary limit projection at that degree.
-The construction applies to zero modules, all n including zero, and all integers p;
-no exactness of tensor or boundedness is needed. -/
+This statement involves no derived coefficient calculus or derived comparison. -/
 theorem ordinaryModel_exists : Nonempty (OrdinaryModel l E W) := by
   -- The ordinary construction is already packaged by this factorization theorem.
   obtain ⟨O, _⟩ := purSequenceOrdinaryFactorization l E W

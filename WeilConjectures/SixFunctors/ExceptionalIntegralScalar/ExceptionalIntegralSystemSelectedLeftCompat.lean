@@ -8,8 +8,20 @@ module
 public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalIntegralSystemScalarCoreData
 
 /-! # Proper/open compatibility of the normalized selected scalar comparison
-Source: Zheng, Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-integral-system-selected-left-compat)
+
+The normalized selected comparison intertwines the left scalar mates.
+
+## Implementation details
+
+The intended proof precomposes both paths with reconstruction over `E`, expands the selected
+comparison using `selected_balanced`, and reduces to the left comparison cocycle for the two
+coefficient paths. The equality on an arbitrary normalized sequence then follows from the
+reconstruction counit isomorphism and naturality. Only faithfulness of the full inclusion and
+of the equivalence is used, never faithfulness of finite evaluation.
+
+## References
+
+* [Zheng, Lemma 5.22 and Proposition 5.26]
 -/
 
 @[expose] public noncomputable section
@@ -28,22 +40,7 @@ open ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- The normalized selected comparison intertwines the left scalar mates.
-Source: Zheng, Lemma 5.22 and Proposition 5.26, the coefficient projection square.
-Proof: first precompose both paths with reconstruction over E. Its essential
-surjectivity will recover the equality on every normalized sequence. Expand the
-selected comparison using selected_balanced; the finite inclusion is faithful, and
-the surrounding reduction comparison factors are invertible. Substitute
-core.q_reduction on the whole-system side and red.q_evaluation on the finite
-reduction sides. The remaining square is precisely the left comparison cocycle
-for the two coefficient paths, whose scalar associators are fixed by
-d.scalarComposition.normalized. The normalized proper coefficient projection and
-open balancing comparisons identify its composite coefficient maps. Cancel the
-common associator and red factors to get the equality on reconstructed objects.
-For an arbitrary N use the reconstruction counit isomorphism; naturality of each
-comparison transports the equality along that isomorphism. This argument uses
-faithfulness only of the full inclusion and equivalence, never of evaluation.
-(blueprint: lem-sf-exceptional-integral-system-selected-left-compat). -/
+/-- The normalized selected comparison intertwines the left scalar mates. -/
 theorem exceptionalIntegralSystemSelectedLeftCompat
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

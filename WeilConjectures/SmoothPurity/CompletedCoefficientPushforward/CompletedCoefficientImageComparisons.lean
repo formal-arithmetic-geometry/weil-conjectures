@@ -35,8 +35,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 /-! # Normalized direct image at the constant and finite coefficient levels
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E.
-(blueprint: lem-pur-completed-coefficient-image-comparisons).
+This module constructs the normalized comparisons between derived direct image and restriction
+of scalars at the constant, finite and quotient coefficient levels.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0D6E
 -/
 
 @[expose] public noncomputable section
@@ -570,28 +574,7 @@ private theorem projectionCoherence_of_sections {X Y : Scheme.{t}} (f : X ⟶ Y)
 
 /-- Constant, finite and quotient coefficient comparisons, with their section identities
 and identity, composition and projection coherence. This concerns individual coefficient
-categories; it constructs neither a strict-system direct image nor a limit comparison.
-
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E, derived pushforward composition;
-blueprint fix-prop-adjunctions, Step 1
-(blueprint: lem-pur-completed-coefficient-image-comparisons).
-
-Proof: Use c and hc for the completed structural map and its projections. The constant
-square is hconstant, and naturality of constant sheafification gives every finite quotient
-ring square. Pushforward followed by scalar restriction and scalar restriction followed
-by pushforward have the same underlying sections; the ring squares identify their scalar
-actions. These identity maps give the ordinary coefficient isomorphisms. Choose total
-right derived pushforwards by K-injective resolutions. Scalar restriction of a K-injective
-is direct-image acyclic: check the resolution on each slice using scalar-restriction
-acyclicity for sections, then use sectionwise detection. Thus both sides of each coefficient
-square derive the same ordinary composite. Identify them by uniqueness of total derived
-functors, using the factorization isomorphisms of the supplied exact models. The defining
-unit equation gives Square.normalization. For an identity or a composite quotient, both proposed
-comparisons have the same ordinary section map and induce the same transformation after
-precomposition with the universal derived unit. Uniqueness of derived transformations
-gives quotientIdentity, quotientCoherence and projectionCoherence. The supplied source
-and target models are retained throughout. The argument also applies to identity
-quotients and empty sites. -/
+categories; it constructs neither a strict-system direct image nor a limit comparison. -/
 theorem coefficientComparisons_exists {X Y : Scheme.{t}} (f : X ⟶ Y)
     (source : SiteData l E X) (target : SiteData l E Y)
     (c : R l E Y ⟶ (ringPush.{t, u} f).obj (R l E X))

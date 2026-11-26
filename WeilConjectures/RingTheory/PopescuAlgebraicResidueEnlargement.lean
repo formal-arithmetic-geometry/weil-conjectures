@@ -19,8 +19,20 @@ import Mathlib.Algebra.CharP.Algebra
 /-!
 # Geometric residue-power capture in an Artinian local algebra
 
-Source: Stacks Project, Tags 07FH and 07FI.
-(blueprint: lem-weil-pbc-popescu-algebraic-residue-enlargement).
+In the algebraic case of the Popescu enlargement, a `p`-power of a residue class is captured by an
+admissible Artinian local subalgebra with finite separable residue extension.
+
+## Implementation details
+
+The separable part `F₀(α^Q) / F₀` lifts to a finite étale `A₀`-algebra `D`, which is Artinian
+local; henselian étale retraction gives a map `D → B` compatible with the residue embedding,
+which is flat by the closed-fibre criterion and hence injective. Its image is the admissible
+subalgebra.
+
+## References
+
+* [Stacks, Tag 07FH]
+* [Stacks, Tag 07FI] (algebraic case)
 -/
 
 @[expose] public section
@@ -40,25 +52,10 @@ private theorem exists_separable_power
   have h := congrArg (Polynomial.aeval α) heq
   simpa only [Polynomial.expand_aeval, minpoly.aeval] using h
 
-
-/-- The algebraic branch of geometric enlargement, before lifting an inverse.
-Source: Stacks Project, Tag 07FI, algebraic case.
-
-Proof: Let α be the residue of x. Choose Q = p^e ≥ 1 with α^Q separable over F₀,
-using the separable-first purely inseparable decomposition of F₀(α)/F₀.
-Both A₀ and B have nilpotent maximal ideals, so they are henselian. Lift the
-finite separable extension F₀(α^Q)/F₀ to a finite étale A₀-algebra D. Its
-closed fibre is a field and its extended maximal ideal is nilpotent, so D is
-Artinian local. The residue embedding into K specifies a prime of D ⊗[A₀] B
-with residue K. Henselian étale retraction gives a map D → B compatible with
-this embedding. The flatness criterion on the closed fibre shows D → B is flat;
-it is local, hence faithfully flat and injective. Its image A contains A₀ and
-is Artinian local with m_A B = m_B. Its residue field F₀(α^Q) is essentially of
-finite type over k, and the Artinian local residue criterion implies A is too.
-Thus A is admissible. Lift α^Q through the surjection A → residueField A to a.
-The induced residue algebra of inclusion A₀ → A is finite separable, hence
-formally étale, and is compatible with the k-scalar tower and residue maps.
-(blueprint: lem-weil-pbc-popescu-algebraic-residue-enlargement). -/
+/-- The algebraic branch of geometric enlargement, before lifting an inverse: if the unit `x` has
+residue algebraic over the residue field of `A₀`, then some power `x^Q` with `Q ≥ 1` has the same
+residue as an element of an admissible subalgebra `A ⊇ A₀` whose residue field is formally étale
+over that of `A₀`. -/
 theorem exists_popescu_algebraic_residue_enlargement
     (k : Type u) (B : Type v) [Field k] [CommRing B] [Algebra k B]
     [IsArtinianRing B] [IsLocalRing B]

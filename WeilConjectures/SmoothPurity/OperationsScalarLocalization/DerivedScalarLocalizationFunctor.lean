@@ -10,7 +10,11 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLocaliz
 
 /-! # Unique additive localization of a linear functor
 
-Extracted proved scalar-localization calculus used by the derived-operation construction.
+Scalar-localization calculus used by the derived-operation construction.
+
+## References
+
+* Stacks Project, Tags 00CV and 00CX.
 -/
 
 @[expose] public noncomputable section
@@ -22,14 +26,7 @@ universe u v r s u₁ v₁ u₂ v₂
 open Opposite TensorProduct CategoryTheory
 namespace WeilConjectures.OperationsScalarLocalization
 
-/-- Unique additive localization of a linear functor.
-Source: module base change (Stacks 00CV, 00CX), and the rational paragraph of
-blueprint `prose-03-02`.
-(blueprint: lem-sf-localized-functor).
-Proof: Use the semilinear extension with the identity coefficient homomorphism. Its coefficient
-map is the identity by uniqueness. The extension has the stated object and pure-tensor formulas.
-For uniqueness, use functor extensionality and induction on each tensor Hom group; additivity
-handles zero and sums, and the prescribed formula handles pure tensors. -/
+/-- Unique additive localization of a linear functor. -/
 theorem functor_existsUnique
     {R : Type r} [CommRing R]
     {C : Type u₁} [Category.{v₁} C] [Preadditive C] [Linear R C]

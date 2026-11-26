@@ -10,6 +10,11 @@ public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 
 /-! # The cyclotomic character of a finite field
 
+The geometric Frobenius of a finite field acts on the roots of unity `μ_{ℓ^N}(k̄)` and on
+`ℤ_ℓ(1)` by `q⁻¹`.
+
+## Implementation details
+
 These are the field-level proofs from `FrobeniusTwist`, isolated from Weil
 cohomology for the ordinary root-trivialization calculations.
 -/
@@ -49,10 +54,9 @@ lemma purity_cyclotomicCharacter_frobenius :
     ← pow_eq_pow_mod _ ((mem_rootsOfUnity _ _).mp ht)]
   simp
 
-/-- Blueprint `prose-10-21`: Frobenius on coefficient twists
-
-At the integral stage: the geometric Frobenius `σ` of `k̄` acts on `ℤ_ℓ(1) = lim μ_{ℓ^r}(k̄)` by
-`q⁻¹`, that is, its `ℓ`-adic cyclotomic character `χ_ℓ(σ)` satisfies `χ_ℓ(σ) q = 1`. -/
+/-- **Frobenius on coefficient twists**, integral stage: the geometric Frobenius `σ` of `k̄` acts
+on `ℤ_ℓ(1) = lim μ_{ℓ^r}(k̄)` by `q⁻¹`, that is, its `ℓ`-adic cyclotomic character `χ_ℓ(σ)`
+satisfies `χ_ℓ(σ) q = 1`. -/
 theorem purity_cyclotomicCharacter_geometricFrobenius_mul :
     ((cyclotomicCharacter (AlgebraicClosure k₀) l
       (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k₀ (AlgebraicClosure k₀)).toRingEquiv :
@@ -62,11 +66,9 @@ theorem purity_cyclotomicCharacter_geometricFrobenius_mul :
         (AlgebraicClosure k₀)).toRingEquiv⁻¹ := rfl
   rw [hinv, map_inv, ← purity_cyclotomicCharacter_frobenius, Units.inv_mul]
 
-/-- Blueprint `prose-10-21`: Frobenius on coefficient twists
-
-At the finite stages: the geometric Frobenius `σ` of `k̄` acts on `μ_{ℓ^N}(k̄)` by `q⁻¹`, that is,
-`σ(ζ) = ζ^c` for the value `c ∈ (ℤ/ℓ^N)ˣ` of the modular cyclotomic character, and `c q = 1`. This
-is the reduction modulo `ℓ^N` of `purity_cyclotomicCharacter_geometricFrobenius_mul`. -/
+/-- **Frobenius on coefficient twists**, finite stages: the geometric Frobenius `σ` of `k̄` acts on
+`μ_{ℓ^N}(k̄)` by `q⁻¹`, that is, `σ(ζ) = ζ^c` for the value `c ∈ (ℤ/ℓ^N)ˣ` of the modular
+cyclotomic character, and `c q = 1`. -/
 theorem purity_modularCyclotomicCharacter_geometricFrobenius_mul (N : ℕ) :
     haveI := purity_neZero_natCast_algebraicClosure k₀ l
     ((modularCyclotomicCharacter (AlgebraicClosure k₀)

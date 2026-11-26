@@ -15,8 +15,11 @@ import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorChainTow
 /-! # Coherent scalar squares on tensor representatives
 
 The exact scalar factors and the normalized chain maps form coherent squares before
-localization. Source: coefficient-comparison coherence, Stacks 07A4 and 08J9.
-(blueprint: lem-pur-integral-scalar-tensor-tower-representatives).
+localization.
+
+## References
+
+* Stacks Project, Tags 07A4, 08J9 and 08TC.
 -/
 
 @[expose] public noncomputable section
@@ -109,14 +112,7 @@ private theorem tensorSquare_app (W : AlgebraicGeometry.Scheme.{u})
         ((integralOperationsTensorComplexFunctor l E W).obj (P.1.obj, P.2.obj)) ≫
       DerivedCategory.Q.map (scalarTensorChain l E L ι W P.1.obj P.2.obj) := by rfl
 
-/-- The completed-tensor representative square commutes with coefficient towers.
-Source: coefficient-comparison coherence, Stacks 07A4, 08J9 and 08TC.
-(blueprint: lem-pur-integral-scalar-tensor-tower-representatives).
-Proof: move the first scalar tensor chain map across the second exact scalar
-localization factor by naturality. The localized tensor chain tower equation
-rewrites the three chain maps to the direct comparison preceded by the scalar
-associator. The composition formula for scalar localization factors gives the
-claimed representative equation. -/
+/-- The completed-tensor representative square commutes with coefficient towers. -/
 theorem integralScalarTensorTowerOnRepresentatives
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (j : L →ₐ[ℚ_[l]] F) (W : AlgebraicGeometry.Scheme.{u})

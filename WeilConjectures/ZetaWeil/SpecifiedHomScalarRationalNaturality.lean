@@ -8,8 +8,13 @@ module
 public import WeilConjectures.SmoothPurity.Finite.FiniteRationalDerivedOperations
 
 /-! The naturality clause for the specified rational Hom comparison.
-Source: blueprint common-stage paragraph (blueprint: lem-zl-specified-hom-scalar-evaluation).
 This is the rationalized naturality calculation for arbitrary localized arrows.
+
+## Implementation details
+
+Localize the integral comparison and use bilinearity of the rational internal Hom, with
+contravariance in the first variable; the universal localization property extends the equality
+from integral maps to all localized arrows.
 -/
 
 @[expose] public noncomputable section
@@ -122,12 +127,7 @@ private theorem integral_naturality (X : Scheme.{u})
   simp only [Category.assoc]
   rw [hd]
 
-/-- Rational naturality of the specified Hom comparison for arbitrary localized arrows.
-Source: blueprint rational/common-stage paragraphs
-(blueprint: lem-zl-specified-hom-scalar-evaluation).
-Proof: localize the integral comparison and use bilinearity of the rational internal Hom,
-with contravariance in the first variable; the universal localization property extends
-the equality from integral maps to all localized arrows. -/
+/-- Rational naturality of the specified Hom comparison for arbitrary localized arrows. -/
 theorem specifiedHomScalarRational_naturality (X : Scheme.{u})
     (P P' : (constructibleRationalHomPairs l E X).FullSubcategory)
     (a : P'.obj.1.unop ⟶ P.obj.1.unop) (b : P.obj.2 ⟶ P'.obj.2) :

@@ -12,15 +12,17 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 /-!
 # Integral closure in finite products of ring maps
 
-Source: Stacks Project, Algebra, Tags 0CY8 and 0CY9
-(blueprint: lem-weil-pbc-finite-product-integral-closure).
+## References
+
+* [Stacks, Tag 0CY8]
+* [Stacks, Tag 0CY9]
 -/
 
 @[expose] public section
 
 universe w u v
 
-/-- Coordinatewise integrality for finite products (Stacks Project, Algebra, Tag 0CY8). -/
+/-- An element of a finite product of algebras is integral if and only if each coordinate is. -/
 private theorem integral_pi_iff {I : Type w} [Finite I]
     (R : I → Type u) (S : I → Type v) [∀ i, CommRing (R i)] [∀ i, CommRing (S i)]
     [∀ i, Algebra (R i) (S i)] (x : ∀ i, S i) :
@@ -72,19 +74,7 @@ private theorem integral_pi_iff {I : Type w} [Finite I]
 
 /-- The integral closure of a finite product of ring maps is the product of the component
 integral closures. For injective component maps, the product is integrally closed if and only
-if every component is integrally closed. Source: Stacks Project, Algebra, Tag 0CY9, using 0CY8
-(blueprint: lem-weil-pbc-finite-product-integral-closure).
-
-Proof: project a monic polynomial annihilating a tuple to each coordinate to prove that its
-coordinates are integral (def-weil-pbc-integral-closure). Conversely, choose monic annihilating
-polynomials in each coordinate. Finiteness permits a common degree D at least one; multiply
-each polynomial of degree d by T^(D-d), and assemble the coefficients coordinatewise. This
-produces a monic polynomial over the product ring annihilating the tuple. For the empty
-product both rings are zero rings and T suffices. The coordinatewise integrality criterion
-identifies the integral-closure subring with the intersection of the inverse images of the
-component closures under evaluation. If the component maps are injective, their product is
-injective, and this equality identifies the closure with the base ring exactly when every
-component closure equals its base ring, also for the empty product. -/
+if every component is integrally closed. -/
 theorem integralClosure_finite_pi {I : Type w} [Finite I]
     (R : I → Type u) (S : I → Type v) [∀ i, CommRing (R i)] [∀ i, CommRing (S i)]
     (φ : ∀ i, R i →+* S i) :

@@ -11,7 +11,12 @@ public import WeilConjectures.SmoothPurity.Integral.Comparison.IntegralCompariso
 public import WeilConjectures.CategoryTheory.RoosShift.RoosCommShift
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.UnitShift
 
-/-! # The normalized Roos bridge and its signed shift -/
+/-! # The normalized Roos bridge and its signed shift
+
+## References
+
+* Stacks Project, Tags 014E and 0941
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -360,29 +365,7 @@ private theorem normalizedComparison_shift (X : Scheme.{u})
   exact normalizedDerivedComparison_shift _ _ (comparisonForShift l E X ρ) b
     (fun I _ ↦ normalizedComparison_app l E X ρ I)
 
-/-- The normalized total-limit comparison has the native signed Roos shift.
-
-Source: Stacks 014E and 0941; step 3 of
-lem-sf-integral-pullback-realization-shifts.
-(blueprint: lem-sf-integral-roos-bridge-shifts).
-
-Proof: on a simultaneous K-injective tower I use rho.computes to express
-rho as the canonical right-derived limit comparison followed by the
-limit-to-Roos map. The latter has first coordinate the compatible limit
-tuple and second coordinate zero, by integralComparisonLimitToRoos's
-unique defining property. The native Roos shift multiplies the second
-coordinate by (-1)^m and leaves the first coordinate unchanged after
-termwise reindexing. Hence the two coordinates prove that the ordinary
-limit-to-Roos map commutes with shifts. The canonical right-derived shift
-has its defining replacement square on I and I[m], so the composite has
-the desired square there. Choose a K-injective replacement of an arbitrary
-tower; its localization is invertible and its shift is again a replacement.
-Naturality of rho and cancellation transport the square back to that tower.
-Finally exact restriction and its mapDerivedCategoryFactors both commute
-with their termwise shifts, so whiskering and composition give the displayed
-natural-transformation square. This argument uses no exactness of arbitrary
-products. Zero shift, negative shifts, zero towers and the empty scheme
-use exactly the same two coordinate equations. -/
+/-- The normalized total-limit comparison has the native signed Roos shift. -/
 theorem integralComparisonRoosBridge_commShift (X : Scheme.{u})
     (ρ : IntegralComparisonRoosModel l E X) :
     letI := integralComparisonLimitShift l E X

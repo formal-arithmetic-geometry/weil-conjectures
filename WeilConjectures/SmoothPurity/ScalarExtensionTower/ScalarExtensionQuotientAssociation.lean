@@ -12,8 +12,11 @@ import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionQuotient
 
 /-! # Association of strict coefficient quotient representatives
 
-Source: Stacks Tags 03EL and 07A4; strict quotient association in the integral
-operations clause of the blueprint.
+Strict association `(x ⊗ a) ⊗ b ↦ x ⊗ ι(a) b` for fixed coefficient quotient representatives.
+
+## References
+
+* Stacks Project, Tags 03EL and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -32,25 +35,7 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
   (ι : E →ₐ[ℚ_[l]] L)
 
 /-- Strict association for fixed quotient representatives, without constructing
-models or asserting compatibility with geometric pullback or completed operations.
-
-Source: Stacks Tags 03EL and 07A4; quotient-association part of proof steps 1--2 of
-lem-pur-scalar-extension-tower-coherence.
-(blueprint: stage3-pur-scalar-quotient-association).
-
-Proof: evaluate each direct representative at n and conjugate by directEvaluation.
-The ordinary extension/restriction adjunction identifies the resulting map with
-balanced tensor association (x tensor a) tensor b -> x tensor iota(a)*b. Its inverse
-inserts one; balancing and the unit identities show that these are inverse maps.
-The formulas are natural in the original module, hence commute with each cochain
-differential. The direct_transition equations for the two representatives identify
-their transition maps with coefficient reduction. Reduction preserves multiplication
-and one, so the association and its inverse commute with these transitions. They
-therefore define inverse chain maps on the whole sequence site, not merely on each
-finite derived evaluation. The displayed sections are the inverse evaluation images
-of finite pure tensors. Thus the association has the specified section formula.
-Zero complexes and the zero quotient n=0 are covered by the
-same adjunction and generator argument. No flatness of a quotient ring map is used. -/
+models or asserting compatibility with geometric pullback or completed operations. -/
 theorem quotientAssociation_exists
     (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)

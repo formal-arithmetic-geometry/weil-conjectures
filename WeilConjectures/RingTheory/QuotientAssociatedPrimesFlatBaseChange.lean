@@ -14,7 +14,19 @@ import Mathlib.LinearAlgebra.TensorProduct.Quotient
 /-!
 # Associated primes of a quotient under flat base change
 
-Source: Stacks Project, Algebra, Lemma Tag 0312 and its application in Tag 0330.
+For a flat map of Noetherian rings `R → S` and an ideal `I` of `R`, every associated prime of
+`S/IS` is an associated prime of `S/pS` for some associated prime `p` of `R/I`.
+
+## Implementation details
+
+This applies `RingTheory.annihilatorAssociatedPrimes_flat_base_change` with `M = R/I` and
+`N = S`, identifying `(R/I) ⊗_R S` with `S/IS` by right exactness of the tensor product.
+The cases `I = ⊤` and `I = ⊥` need no separate argument.
+
+## References
+
+* [Stacks, Tag 0312]
+* [Stacks, Tag 0330]
 -/
 
 @[expose] public section
@@ -23,23 +35,8 @@ universe u v
 
 open scoped TensorProduct Pointwise
 
-/-- (blueprint: lem-weil-pbc-associated-primes-flat-quotient)
-Source: Stacks Project, Algebra, Lemma Tag 0312 (Bourbaki), as applied in the proof
-of Tag 0330 to the principal quotient.
-
-Proof: Apply `RingTheory.annihilatorAssociatedPrimes_flat_base_change` with
-`M = R / I` and `N = S`. Right exactness of tensor product identifies
-`(R / I) tensor_R S` with `S / IS` as S-modules: tensor the presentation
-`I -> R -> R / I -> 0`, and identify `R tensor_R S` with S by multiplication.
-The image of `I tensor_R S` is exactly the extended ideal `IS`.
-For each prime p the same identification gives `S / pS` from the scalar-product
-submodule pS in the formula. The formula's equality clause applies since R is
-Noetherian. Over both Noetherian rings, `isAssociatedPrime_iff` identifies the
-annihilator definition with Mathlib's associated primes. Associated primes are
-preserved by these S-linear equivalences. Membership in the resulting union
-provides p and both asserted memberships. This also covers I = top, when the
-quotient is zero and the hypothesis has no witnesses, and I = bot.
--/
+/-- For a flat map of Noetherian rings `R → S` and an ideal `I` of `R`, every associated prime of
+`S/IS` is an associated prime of `S/pS` for some associated prime `p` of `R/I`. -/
 theorem associatedPrimes_quotient_map_of_flat
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [IsNoetherianRing S] [Module.Flat R S]

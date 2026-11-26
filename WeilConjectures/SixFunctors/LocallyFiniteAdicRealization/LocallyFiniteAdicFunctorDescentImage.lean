@@ -13,9 +13,20 @@ import WeilConjectures.AlgebraicGeometry.Native.NativeScalarForgetting
 
 /-! # Essential image descent for a normalized locally finite adic functor
 
-Source: Bhatt--Scholze, Proposition 6.8.14(1),(2), using the existing condensed
-filtered two-colimit; native realization proof steps 3 and 7.
-(blueprint: lem-sf-locally-finite-adic-functor-descent-image)
+The essential image of the normalized locally finite adic functor consists exactly of the
+bounded adic constructible objects.
+
+## Implementation details
+
+Bounded native constructible objects are identified with the condensed module category via the
+internal-module and section-module equivalences and the finite-field local-freeness theorems.
+The object clause of `constructibleCocone_isFilteredTwoColimit` descends a condensed object to a
+finite field; essential surjectivity of the finite-field realization lifts that model to a
+source object, and tensor transitivity identifies its normalized image with the original object.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(1),(2)
 -/
 
 @[expose] public noncomputable section
@@ -38,18 +49,7 @@ namespace WeilConjectures.LocallyFiniteAdicRealization
 attribute [local irreducible] sections CoefficientPresentation.integralMap
   completedTensorComparison
 
-/-- Bounded adic constructibility is exactly the essential image of the normalized functor.
-
-Proof in words: identify bounded native constructible objects with the condensed module
-category using the internal-module and section-module equivalences and the finite-field
-local-freeness theorems. The object clause of
-`constructibleCocone_isFilteredTwoColimit` descends a condensed object to a finite field.
-Essential surjectivity of the finite-field realization lifts that model to a source object,
-and tensor transitivity identifies its normalized image with the original object. In the
-other direction, finite realization and scalar extension preserve bounded constructibility.
-The argument includes the zero object and empty strata.
-(blueprint: lem-sf-locally-finite-adic-functor-descent-image)
--/
+/-- Bounded adic constructibility is exactly the essential image of the normalized functor. -/
 theorem normalizedFunctor_descent_image
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]
     [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]

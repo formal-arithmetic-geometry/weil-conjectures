@@ -13,9 +13,12 @@ import WeilConjectures.SmoothPurity.Integral.IntegralSystemReductionFullyFaithfu
 
 /-! # Natural associativity and the coefficient unit for common-stage tensor
 
-Source: Stacks Project, Tags 06YS, 07A4 and 0941; the common-stage paragraph
-of the coefficient operations blueprint.
-(blueprint: lem-pur-common-stage-tensor-line-coherence).
+Fixed-right associativity of the common-stage tensor product and its degree-zero regular
+coefficient unit.
+
+## References
+
+* [Stacks, Tags 06YS, 07A4 and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -24,22 +27,7 @@ universe u v
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
 
-/-- Fixed-right tensor associativity and its degree-zero regular coefficient unit.
-
-Source: Stacks Project, Tags 06YS, 07A4 and 0941; the common-stage paragraph
-of the coefficient operations blueprint.
-(blueprint: lem-pur-common-stage-tensor-line-coherence).
-
-Proof: specialize naturality of the prescribed common-stage associator to
-identity arrows in the two fixed inputs and assemble with NatIso.ofComponents.
-The degree-zero integral twist is the regular completed coefficient. Its
-coherent reduction is the system tensor unit, as is the reduction of the
-reconstructed integral unit. Full faithfulness lifts their isomorphism;
-rational localization and inclusion at the least finite coefficient field
-identify the specified zero twist with the reconstructed common-stage unit.
-Tensor this isomorphism in the second input. Bifunctoriality gives naturality.
-Finally assemble the canonical right unitors using their naturality equation
-and compose the resulting natural isomorphisms -/
+/-- Fixed-right tensor associativity and its degree-zero regular coefficient unit. -/
 theorem commonStageTensorLineCoherence
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     [∀ x : X, Invertible (l : X.residueField x)]

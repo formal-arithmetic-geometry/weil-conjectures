@@ -16,8 +16,17 @@ import WeilConjectures.RingTheory.PointedEtaleFiltered
 /-!
 # Size and filteredness of pointed etale algebras
 
-Source: Stacks Project, Algebra, Tag 04GW.
-(blueprint: lem-sc-pointed-etale-small-filtered).
+The category of étale algebras pointed in a separable closure of the residue field is
+essentially small and filtered.
+
+## Implementation details
+
+Essential smallness comes from finite presentation. Tensor products give common successors, and
+for parallel maps `S → S'` the étale algebra `(S' ⊗[S] S') ⊗[S' ⊗[R] S'] S'` equalizes them.
+
+## References
+
+* [Stacks, Tag 04GW]
 -/
 
 @[expose] public section
@@ -26,21 +35,8 @@ universe u
 open CategoryTheory
 namespace Algebra
 
-/-- The category of etale algebras pointed in the chosen residue separable closure
-is essentially small and filtered.
-Source: Stacks Project, Algebra, Tag 04GW, proof of
-`lemma-strict-henselization-different`.
-(blueprint: lem-sc-pointed-etale-small-filtered).
-
-Proof: Identify an object with its etale algebra, the kernel of its map to `K`,
-and the induced residue-field embedding. This identifies the category with the
-etale residue triples at the maximal ideal. Finite presentation and essential
-smallness of the affine etale site give a small set of representatives; the
-maps to `K` over each representative form a set. The identity algebra is an
-object. Tensor products give common successors. For two parallel maps
-`S → S'`, the etale algebra `(S' ⊗[S] S') ⊗[S' ⊗[R] S'] S'` equalizes them;
-the compatible maps to `K` extend to this algebra. These are precisely the
-nonemptiness, common-successor and equalization conditions for filteredness. -/
+/-- The category of étale algebras pointed in the chosen residue separable closure
+is essentially small and filtered. -/
 theorem pointedEtale_small_filtered
     (R K : Type u) [CommRing R] [IsLocalRing R] [Field K]
     [Algebra (IsLocalRing.ResidueField R) K]

@@ -14,8 +14,19 @@ import WeilConjectures.RingTheory.EtaleSectionNeighbourhoodRefinement
 
 /-! # Lifting a section at one pair neighbourhood
 
-Source: Stacks Project, More on Algebra, Tag 0A02, verification of condition (2)
-of Tag 09XI (blueprint: lem-weil-pbc-pair-henselization-stage-sections).
+A section modulo `J` of an étale algebra over one étale neighbourhood of a pair `(B, J)` extends
+to the vertex of any cocone of pair neighbourhoods with unchanged quotient.
+
+## Implementation details
+
+Split the section by an idempotent with image `1` and lift it to `g ∈ D`; then `D_g` is another
+neighbourhood. Every `B`-algebra map from a neighbourhood to `B / J` is the inverse of its
+quotient isomorphism, which identifies the reductions. No filteredness or colimit universality
+is used.
+
+## References
+
+* [Stacks, Tag 0A02] (the verification of condition (2) of Tag 09XI)
 -/
 
 @[expose] public section
@@ -44,24 +55,7 @@ private theorem quotient_map_unique
   exact congrArg (fun z : C ⧸ J.map f →+* Q ↦ z (Ideal.Quotient.mk _ x)) he
 
 /-- A section of an étale algebra over one neighbourhood extends to the vertex of
-any cocone of pair neighbourhoods with unchanged quotient.
-Source: Stacks Project, Tag 0A02, verification of condition (2) of Tag 09XI
-(blueprint: lem-weil-pbc-pair-henselization-stage-sections).
-
-Proof: Identify the quotient of the stage and the quotient of the vertex with B/J
-using their canonical quotient isomorphisms. The section kills the extension of J
-to D, hence factors through D/JD, an étale algebra over B/J by base change. Split
-this section by an idempotent e with image 1, and lift e to g in D. Localize D at g.
-Its quotient by J is B/J, since quotient commutes with localization and localization
-at e is B/J by the splitting theorem. Composition and localization show that D_g
-is étale over B, so it is another object of the neighbourhood category. The map
-from the original stage to D_g is a morphism in that category. Compose D to D_g
-with its cocone map to obtain t. Cocone naturality makes t an algebra map over
-the original stage. Since s(g)=1, the original section extends to D_g. Every map
-from D_g to B/J over B equals the inverse of its quotient isomorphism: it kills J,
-and a map from B/J to itself fixing B is the identity by quotient surjectivity.
-Apply this uniqueness both to the extended section and the reduced cocone map,
-then restrict to D. No filteredness or colimit universality is used. -/
+any cocone of pair neighbourhoods with unchanged quotient. -/
 theorem pair_henselization_stage_sections (B : Type u) [CommRing B] (J : Ideal B)
     (c : Cocone (ObjectProperty.ι
       (fun C : Under (CommRingCat.of B) ↦

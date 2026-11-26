@@ -80,8 +80,10 @@ import WeilConjectures.Algebra.Homology.SmoothPurity.DiagonalConeTransitionHomot
 
 /-! # The normalized scalar tensor Roos comparison
 
-Source: Stacks 03EL, 07A4, 0941 and 08TC; Bhatt--Scholze, Proposition 3.5.1.
-(blueprint: lem-pur-integral-scalar-tensor-chain-quasi-iso).
+## References
+
+* Stacks Project, Tags 03EL, 07A4, 0941 and 08TC.
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 3.5.1.
 -/
 
 @[expose] public noncomputable section
@@ -432,22 +434,7 @@ attribute [local implicit_reducible] integralOperationsTensorComplexFunctor
   integralOperationsRoosFunctor
 set_option backward.defeqAttrib.useBackward true
 
-/-- The prescribed strict scalar tensor comparison is a quasi-isomorphism on good pairs.
-Source: Stacks, sites-modules.tex, Tag 03EL; sites-cohomology.tex, Tags 07A4 and 0941;
-derived.tex, Tag 08TC; Bhatt--Scholze, Proposition 3.5.1.
-(blueprint: lem-pur-integral-scalar-tensor-chain-quasi-iso).
-Proof: at every finite source level choose the normalized ramified tensor
-isomorphism to a later target level. Its inverse is a diagonal factorization
-of both tower transitions, as checked on total pure generators. The diagonal
-cone-transition homotopy therefore makes the cone tower pro-zero in the
-derived category. The strict-tower homotopy-limit theorem and the strict Roos
-comparison show that the specified tower map induces a quasi-isomorphism on
-Roos complexes. Finite freeness makes ordinary scalar extension preserve
-countable products. The two prescribed Roos coordinates identify its additive
-Roos comparison with product and biproduct isomorphisms, so this comparison is
-itself an isomorphism. Their composite is exactly scalarTensorChain.
-Only the finite ramified tensor isomorphism is postponed. The remaining
-argument applies even without flatness or boundedness of the complexes. -/
+/-- The prescribed strict scalar tensor comparison is a quasi-isomorphism on good pairs. -/
 theorem scalarTensorChainQuasiIso (W : AlgebraicGeometry.Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) :
     QuasiIso (scalarTensorChain l E L ι W P.obj Q.obj) := by

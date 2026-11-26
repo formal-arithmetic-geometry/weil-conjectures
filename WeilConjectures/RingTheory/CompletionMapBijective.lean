@@ -14,8 +14,17 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 /-!
 # Bijectivity of flat compatible completion maps
 
-Source: More on Algebra, Lemma Tag 0AGX. The proof uses completeness and separation
-for surjectivity, and faithful flatness for injectivity.
+A flat map of completions, compatible with a local map of Noetherian local rings that extends
+the maximal ideal to the maximal ideal and is bijective on residue fields, is bijective.
+
+## Implementation details
+
+Injectivity follows since a flat local map is faithfully flat. Surjectivity follows from
+lifting residues, completeness of the source and separation of the target.
+
+## References
+
+* [Stacks, Tag 0AGX]
 -/
 
 @[expose] public section
@@ -24,28 +33,9 @@ universe u v
 
 namespace RingHom
 
-/-- Bijectivity of a completion map under the residue-field and maximal-ideal hypotheses.
-Source: More on Algebra, Lemma Tag 0AGX, final rank-one argument.
-(blueprint: theorem-finite-etale-covers-proper-henselian--2)
-
-Proof:
-Let R and S denote the two completions, with maximal ideals mR and nS.
-The local-completion theorem identifies these ideals with those extended from A and B,
-and identifies their residue fields with the residue fields of A and B. Compatibility
-and hmax therefore give mR S = nS. In particular the map sends mR into nS, hence
-sends every power into the corresponding power and is adically continuous.
-An element of R is congruent modulo mR^k to an element of A for every k. Thus
-compatibility and separation of S identify this map with the componentwise completion
-map, including its action on residue fields. The same argument identifies it with the
-map supplied by finite_after_completion. Since hmax and hres identify B/mA B with
-A/mA, that theorem makes S finite over R for this map.
-The assumed flatness now makes S a finite free module over the local ring R.
-Reduction modulo mR identifies S/mR S with B/mB, a one-dimensional vector space
-over A/mA, by hres. A finite basis therefore has exactly one member e.
-Write 1 = u e. If u belongs to mR then 1 belongs to mR S = nS, impossible in a
-nonzero local ring. Thus u is a unit, so 1 itself is a basis. Every element of S is
-then uniquely x times 1 for x in R, which says exactly that the ring map is bijective.
--/
+/-- Let `φ : A → B` be a local map of Noetherian local rings with `φ(m_A) B = m_B` inducing a
+bijection of residue fields. Then any flat map of completions compatible with `φ` is
+bijective. -/
 theorem completion_map_bijective
     {A : Type u} {B : Type v} [CommRing A] [CommRing B]
     [IsNoetherianRing A] [IsNoetherianRing B]

@@ -13,8 +13,18 @@ import all WeilConjectures.SixFunctors.OpenSemilinearTensor.OpenFiniteScalarComp
 
 /-! # Scalar units and open restriction of strict quotient towers
 
-Source: Stacks Project, Tags 03DI, 03EK, 0941 and 0E8I.
-(blueprint: lem-sf-open-quotient-scalar-unit-compatibility).
+This file shows that scalar restriction of the open operations admits a strict comparison
+of quotient towers intertwining the scalar-adjunction units.
+
+## Implementation details
+
+The comparisons are computed on extension summands by a generator calculation, and
+extended to all sections by sheafification, complex and tower extensionality. No
+boundedness or flatness is used.
+
+## References
+
+* Stacks Project, Tags 03DI, 03EK, 0941, 0E8I
 -/
 
 @[expose] public noncomputable section
@@ -36,8 +46,7 @@ attribute [local implicit_reducible] reductionTower unrestrictedIntegralComplexF
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The scalar-adjunction unit as a map of strict towers, before localization.
-Source: Stacks 03EK and 0941. -/
+/-- The scalar-adjunction unit as a map of strict towers, before localization. -/
 def scalarUnitTower (W : Scheme.{u})
     (P : CochainComplex (scalarReductionSource l E W) ℤ) :
     (Functor.const ℕᵒᵖ).obj P ⟶ (reductionTower l E W).obj P :=
@@ -58,8 +67,7 @@ def scalarUnitTower (W : Scheme.{u})
         ((unrestrictedIntegralTransition_existsUnique l E W n).exists.choose_spec
           P i V 1 x).symm)
 
-/-- The unit tower has the scalar-unit formula at every degree and level.
-Source: Stacks 03EK. -/
+/-- The unit tower has the scalar-unit formula at every degree and level. -/
 theorem scalarUnitTower_sections (W : Scheme.{u})
     (P : CochainComplex (scalarReductionSource l E W) ℤ)
     (n : ℕ) (i : ℤ) (V : W.ProEtᵒᵖ) (x : (P.X i).val.obj V) :
@@ -67,8 +75,7 @@ theorem scalarUnitTower_sections (W : Scheme.{u})
       unrestrictedIntegralTensorSection l E W n (P.X i) V 1 x :=
   unrestrictedTowerUnit_condition l E W P n i V x
 
-/-- Scalar units are natural in the entire complex, including every differential.
-Source: the scalar-extension adjunction, Stacks 03EK. -/
+/-- Scalar units are natural in the entire complex, including every differential. -/
 theorem scalarUnitTower_natural (W : Scheme.{u})
     {P Q : CochainComplex (scalarReductionSource l E W) ℤ} (f : P ⟶ Q) :
     (Functor.const ℕᵒᵖ).map f ≫ scalarUnitTower l E W Q =
@@ -86,12 +93,7 @@ attribute [local irreducible] scalarReductionExistence scalarReductionExtension
   completedIntegralCoefficientSheafUnrestricted completedIntegralCommRingSheafUnrestricted
 
 /-- For fixed normalized scalar data and a strict scalar comparison, the scalar-adjunction
-unit agrees with extension by zero. The proof is the generator calculation: both maps
-send each extension summand to the same unit generator, and extensionality of
-sheafification, complexes, and strict towers assembles the equality. This includes zero
-and negative degrees and empty or identity opens.
-Source: Stacks Project, Tags 03DI, 03EK, 0E8I and 0941.
-(blueprint: lem-sf-open-quotient-scalar-unit-equation). -/
+unit agrees with extension by zero. -/
 theorem openQuotientScalarUnitEquation
     (o : IntegralOpenReduction.Operations l E j)
     (tc : IntegralOpenReduction.TensorComparison l E j o)
@@ -139,23 +141,7 @@ theorem openQuotientScalarUnitEquation
 
 /-- Scalar restriction of the fixed open operations admits a strict comparison which
 intertwines the actual scalar-adjunction units on every complex. This is only the
-scalar comparison; no tensor balancing or open tensor square is asserted.
-
-Source: Stacks Project, Modules on Sites, Tags 03DI and 0E8I; strict towers, Tag 0941.
-(blueprint: lem-sf-open-quotient-scalar-unit-compatibility).
-
-Proof: on the ambient site's slice at the open object, restriction of scalars does not change an
-extension-presheaf summand or its insertion. The identity on these summands, followed by
-sheafification, gives the finite restriction comparison. Transport with the coefficient
-equivalences in o; their specified pushforward formulas and projection equations identify the
-completed and finite scalar actions. Compose the finite comparison with tc.ordinary in each
-degree. Naturality of its generator formula in coefficient quotients makes these maps a strict
-tower isomorphism r, and gives its components field. On an extension summand, tc.generators sends
-the scalar unit of x to the scalar unit of the same x. The restriction comparison is the identity
-on that summand, so this is exactly the extension of the open scalar unit. Summand and
-sheafification extensionality extend the equation to all local sections, and complex and tower
-extensionality give the displayed equation. This calculation uses no boundedness or flatness and
-includes the empty and identity opens. -/
+scalar comparison; no tensor balancing or open tensor square is asserted. -/
 theorem openQuotientScalarUnitCompatibility
     (o : IntegralOpenReduction.Operations l E j)
     (tc : IntegralOpenReduction.TensorComparison l E j o) :

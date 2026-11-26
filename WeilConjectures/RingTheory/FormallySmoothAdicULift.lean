@@ -13,8 +13,22 @@ import Mathlib.Algebra.MvPolynomial.Eval
 /-!
 # Universe transport for adic formal smoothness
 
-Source: Stacks Project, More on Algebra, Definition 07EB and Definition 07NI;
-universe bookkeeping in the proof of Lemma 07NR and Remark 07NS.
+Raising the universe of an algebra with `ULift` preserves adic formal smoothness.
+
+## Implementation details
+
+Given a test problem `g : ULift S → D ⧸ J`, choose representatives in `D` of the images of
+elements of `S` and let `T` be the image of the polynomial algebra `R[X_s | s ∈ S]` under
+evaluation at these representatives; it lives in universe `max u v` and embeds into `D`. The
+lifting problem restricts to `T` with the square-zero ideal `J ∩ T`, where the original lifting
+property applies. No nontriviality assumptions are needed.
+
+## References
+
+* [Stacks, Tag 07EB]
+* [Stacks, Tag 07NI]
+* [Stacks, Tag 07NR]
+* [Stacks, Tag 07NS]
 -/
 
 @[expose] public section
@@ -23,25 +37,9 @@ universe u v w
 
 namespace Algebra
 
-/-- Raising the universe of an algebra preserves its adic lifting property.
-Source: Stacks Project, More on Algebra, Definitions 07EB and 07NI, applied to
-Lemma 07NR and Remark 07NS.
-(blueprint: lem-weil-pbc-formally-smooth-adic-ulift)
-
-Proof (universe bookkeeping written by T2): Write e : ULift S ≃ₐ[R] S. Given
-J squared equal to zero in a test algebra D and g : ULift S →ₐ[R] D/J, choose a
-representative r(s) of g(e.symm s) for every s in S. Evaluate the polynomial
-algebra R[X_s | s in S] in D at these representatives and quotient it by the
-kernel of evaluation. This constructs an algebra T in universe max u v with an
-injective algebra map i : T → D. Set K = i⁻¹(J). Since i is injective and J is
-square-zero, K is square-zero. The induced map j : T/K → D/J is injective.
-Send s to the class of X_s in T/K. Its image under j is g(e.symm s), so
-injectivity of j proves that this is an R-algebra map g' : S → T/K. The ideal
-map under e.symm commutes with powers; therefore g' kills the same positive
-power of n that g kills after transport. Apply the original lifting property
-to T, K, and g'. Compose the resulting lift with i and e. Applying j to its
-quotient equality gives the required lift of g. The construction works also
-for zero rings and the zero and unit ideals; no nontriviality is required. -/
+/-- Raising the universe of an algebra preserves its adic lifting property: if `S` is
+formally smooth over `R` for the `n`-adic topology, then so is `ULift S` for the transported
+ideal. -/
 theorem formallySmoothAdic_ulift
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (n : Ideal S) (h : FormallySmoothAdic R S n) :

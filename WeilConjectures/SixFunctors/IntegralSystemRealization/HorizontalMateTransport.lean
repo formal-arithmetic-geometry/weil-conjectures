@@ -13,12 +13,7 @@ set_option autoImplicit false
 open CategoryTheory
 namespace WeilConjectures.IntegralSystemRealization
 
-/-- Naturality and inverse cancellation transport a horizontal pasting equation.
-Source: the naturality axiom and the inverse laws for natural isomorphisms.
-(blueprint: lem-sf-horizontal-mate-transport).
-Proof: cancel the isomorphism at the common target, commute the two compositor
-comparisons and the three square comparisons, and use naturality to move the
-remaining comparison maps to the ends. The remaining middle equality is hp₀. -/
+/-- Naturality and inverse cancellation transport a horizontal pasting equation. -/
 theorem horizontalMateTransport
     {A B C D E F : Type*}
     [Category A] [Category B] [Category C] [Category D] [Category E] [Category F]

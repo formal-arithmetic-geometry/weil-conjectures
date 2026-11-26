@@ -11,10 +11,9 @@ import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarPullbackCounit
 
 /-! # Normalization of completed scalar pullback in whole-system coordinates
 
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md,
-Weil-structures paragraph, scalar compatibility of the pullback comparisons
-(blueprint: lem-sf-integral-scalar-pullback-completion-normalization).
+## References
+
+* Stacks Project, Tag 099N
 -/
 
 @[expose] public section
@@ -51,25 +50,7 @@ private theorem counit_coordinate_map
   rw [hn, Category.assoc]
 
 /-- The specified tensor-and-completion comparison has the prescribed lambda/mu
-coordinates for any representative-normalized comparison system.
-
-Source: the Weil-structures paragraph of
-literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md;
-Stacks 099N and the scalar tower calculation of
-lem-pur-scalar-extension-tower-coherence
-(blueprint: lem-sf-integral-scalar-pullback-completion-normalization).
-
-Proof: apply integralScalarPullbackCounit_compatibility. Naturality of the
-reduction/limit counit identifies the coordinates of a realization followed by
-L(t) with its original counit coordinates followed by t. Applied to the two
-primitive realizations and their scalarized pullback and pulled-back scalar
-counits, this rewrites the whole-system square as equality of the adjunction
-mates of alpha followed by the target realization and lambda followed by
-L(kappa). Injectivity of the adjunction Hom equivalence identifies these two
-ambient arrows. Compose with L(kappa inverse) and cancel. By definition the
-target realization followed by L(kappa inverse) is mu, which proves the claim.
-All operations are on entire systems; no separate finite evaluation is used. -/
+coordinates for any representative-normalized comparison system. -/
 theorem integralScalarPullbackCompletion_normalization
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

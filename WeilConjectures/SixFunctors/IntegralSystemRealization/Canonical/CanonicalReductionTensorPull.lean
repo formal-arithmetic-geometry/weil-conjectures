@@ -13,7 +13,18 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Pullback and tensor under ordinary coefficient reduction
 
-Source: blueprint fix-prop-coherence, individual coefficient comparisons; Stacks 07A4.
+We show that the normalized reduction/pullback comparison preserves the ordinary tensor map.
+
+## Implementation details
+
+The proof resolves both inputs by flat-term K-flat complexes and computes on total tensor
+summands: on pure tensors both composites send `b ⊗ (x ⊗ y)` to `(b ⊗ x) ⊗ (1 ⊗ y)`. The
+resulting identity of strict system complexes is localized, and the representative
+normalizations cancel the K-flat factorization isomorphisms.
+
+## References
+
+* [Stacks, Tag 07A4], [Stacks, Tag 07A6], [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -56,29 +67,7 @@ private theorem on_representatives
         (pullbackTensorSequenceGood l E f _ (pullbackTensorReductionGood l E V P))
         (pullbackTensorSequenceGood l E f _ (pullbackTensorReductionGood l E V Q))).hom) h
 
-/-- The normalized reduction/pullback comparison preserves the ordinary tensor map.
-Source: blueprint sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md,
-"tensor reassociation, evaluation, and adjunction units and counits", and
-proposition-six-operations-change-coefficients; Stacks 07A4, 07A6 and 0941.
-(blueprint: lem-sf-canonical-reduction-tensor-pull).
-
-Proof: resolve K and H by flat-term K-flat complexes. Use the total tensor of these
-representatives for their tensor product. The tensorRepresentative field identifies
-this representative with the tensor in the coefficient calculus, and the model field
-of the realization identifies reductionPull with the ordinary quotient/pullback mate.
-At the ordinary level that mate is determined by its adjoint limit comparison:
-postcomposing with each limit projection is the specified coefficient projection.
-Its inverse-image transpose is thus the usual scalar-association map. In each total
-tensor summand both composites in the displayed equation send b tensor (x tensor y)
-to (b tensor x) tensor (1 tensor y). The defining pure-tensor formulas for the ringed
-and system pullback/tensor maps, and the reductionTensor normalization, identify the
-four sides with these maps. Pure tensors generate the module tensor product; tensor
-sheafification and inverse image preserve this identity. The formula respects the
-signed total differential and every adjacent quotient transition, so it is an equality
-of whole strict system complexes. Localize it. The representative normalizations
-cancel the K-flat factorization isomorphisms and give the equation on the chosen
-resolutions. Naturality transports it along their resolving isomorphisms to K and H.
-Zero inputs and identity scheme maps use exactly the same summand calculation. -/
+/-- The normalized reduction/pullback comparison preserves the ordinary tensor map. -/
 theorem canonicalReductionTensorPull
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

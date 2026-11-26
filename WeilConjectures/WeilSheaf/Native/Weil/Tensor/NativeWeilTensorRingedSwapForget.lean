@@ -9,7 +9,17 @@ public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRinge
 
 /-! # Ordinary forgetting of the native signed chain swap
 
-Source: Stacks 06YU and 0FPT, homogeneous-summand comparison.
+## Implementation details
+
+The proof uses the signed summand formula for the native chain swap and expands both
+ordinary total comparisons using `hchain`, then applies the assumed underived
+balanced-tensor equation; its Koszul sign agrees with `hswap` since `p * q = q * p`.
+Balanced-tensor and coproduct extensionality give the chain-map equation. No K-flatness
+or derived-category argument is used.
+
+## References
+
+* Stacks 06YU, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -23,15 +33,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 -- The native and ordinary mapped-complex instances need additional elaboration fuel.
-/-- The native signed chain swap becomes the prescribed ordinary signed swap.
-Source: Stacks 06YU and 0FPT; homogeneous-summand part of native tensor transport.
-(blueprint: new-sf-native-weil-ringed-swap-forget).
-
-Proof: use the signed summand formula for the native chain swap and expand
-both ordinary total comparisons using hchain. Apply the assumed underived
-balanced-tensor equation. Its Koszul scalar agrees with hswap since p*q=q*p.
-Balanced-tensor and coproduct extensionality then give the chain-map equation.
-No K-flatness or derived-category argument is used. -/
+/-- The native signed chain swap becomes the prescribed ordinary signed swap. -/
 theorem nativeRingedSwapComplex_forget_of_underived
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

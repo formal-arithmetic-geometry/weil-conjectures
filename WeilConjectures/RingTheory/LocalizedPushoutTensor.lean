@@ -8,8 +8,19 @@ module
 public import Mathlib.Algebra.Category.Ring.Constructions
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 /-! # Tensor products of localizations of a pushout
-Source: Stacks Project, Algebra, Tag 00QV, verification of assertion (4).
-(blueprint: lem-weil-pbc-localized-pushout-tensor)
+
+Localizing the two factors of a pushout `C = A ⊗_R S` at nested denominator sets gives a
+localization of the tensor product of the localizations.
+
+## Implementation details
+
+Base change of `M⁻¹A` along `A → C` is the localization of `C` at the image of `M`, and
+localization at nested submonoids identifies `N⁻¹C` as a further localization. No injectivity,
+flatness, primality or nontriviality is assumed.
+
+## References
+
+* [Stacks, Tag 00QV] (verification of assertion (4))
 -/
 @[expose] public section
 universe u
@@ -17,15 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace RingHom
 /-- Localizing a pushout at nested denominator sets gives a localization of its tensor product.
-Source: Stacks Project, Algebra, Tag 00QV, verification of assertion (4).
-Proof: First base change the localization of A at M along A to C. This gives the
-localization Z of C at the image of M, identified by the pushout universal property
-with LA tensor over R with S. The inclusion of the image of M in N lets the map
-Z to LC factor the localization C to LC. Localization at nested submonoids shows
-that LC is a localization of Z at the image of N. The tensor lift sends x tensor y
-to m(x)n(y); its restrictions are the two prescribed maps by pushout uniqueness.
-This argument does not assume injectivity, flatness, primality, or nonzero rings.
-(blueprint: lem-weil-pbc-localized-pushout-tensor) -/
+-/
 theorem exists_localized_pushout_tensor
     (R A S C LA LC : CommRingCat.{u})
     (σ : R →+* A) (ρ : R →+* S) (a : A →+* C) (b : S →+* C)

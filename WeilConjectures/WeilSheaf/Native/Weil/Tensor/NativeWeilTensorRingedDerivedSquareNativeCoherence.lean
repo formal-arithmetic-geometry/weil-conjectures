@@ -15,8 +15,26 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! # Coherence component of the native ringed derived square
 
-Source: Stacks 06YU, 0FPT; blueprint step 3 of
-`lem-sf-native-weil-tensor-ringed-derived-square-native-data`.
+This is the final descent step in constructing the native data for the native ringed derived
+tensor square.
+
+## Implementation details
+
+Two tensor models for the same closed adjunction and Hom representatives are compared by
+resolving the ordinary tensor total by a K-injective complex `I`: currying its resolution map
+gives the same transpose for both model maps, by their normalizations and coproduct
+extensionality, and the localized resolution map is invertible.
+
+The coherence equations on all derived objects come from the representative lemmas
+(associativity on three native K-flat complexes, and one common unit comparison with both unit
+equations and symmetry on K-flat complexes). The localization `A.localization` is essentially
+surjective, and naturality of `t`, the associator, unitors and braidings transfers the
+equations along the resulting isomorphisms. The canonical localization clause in `hS`
+supplies the ordinary normalization.
+
+## References
+
+* Stacks 06YU, 0FPT, 0A96, 079P
 -/
 
 @[expose] public section
@@ -308,17 +326,7 @@ end Transport
 
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-/-- Two tensor models for the same closed adjunction and Hom representatives coincide.
-
-Source: Stacks 0A96, tensor-Hom currying, and 079P, K-injective resolutions.
-(blueprint: lem-sf-native-ordinary-model-uniqueness)
-
-Proof: resolve the ordinary tensor total by a K-injective complex I. Currying
-its resolution map gives the same transpose for both model maps, by their
-normalizations and coproduct extensionality. Thus the two model maps agree after
-composition with the localized resolution map. This last map is invertible,
-so cancellation proves equality of the model isomorphisms. Both flatness
-hypotheses are used by normalization; no equality for nonflat Q is asserted. -/
+/-- Two tensor models for the same closed adjunction and Hom representatives coincide. -/
 private theorem normalized_model_unique
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×
@@ -361,20 +369,7 @@ attribute [local irreducible] Functor.mapDerivedCategory
   AlgebraicGeometry.ProEtaleWeilSheaf.NativeTensorKFlat
 
 -- The dependent ringed and ordinary tensor models require extra elaboration during descent.
-/-- Extend the normalized representative coherence equations to all derived objects.
-
-Source: Stacks 06YU, 0FPT; native tensor transport, final descent in step 3.
-(blueprint: lem-sf-native-weil-tensor-ringed-derived-square-native-coherence).
-
-Proof: the two representative lemmas give associativity on three native K-flat
-complexes, and one common unit comparison with both unit equations and symmetry
-on K-flat complexes. The localization A.localization is essentially surjective,
-so every native derived object is isomorphic to such a representative. Naturality
-of t, the associator, unitors and braidings transfers the equations along these
-isomorphisms; the private calculations above carry this out for raw monoidal
-structures. Assemble the five fields of TensorCoherence with that common unit.
-The canonical localization clause in hS supplies the ordinary normalization
-missing from the earlier proposed proof. -/
+/-- The normalized representative coherence equations extend to all derived objects. -/
 theorem native_weil_tensor_ringed_derived_square_native_coherence
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

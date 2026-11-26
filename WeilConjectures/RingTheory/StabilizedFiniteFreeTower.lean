@@ -15,7 +15,13 @@ import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-! # Assembly of a degreewise stabilizing finite free tower
 
-Source: Stacks Project, Tag 08EE, proof of lemma-lift-pseudo-coherent, final iteration.
+A tower of finite free complexes whose transition maps stabilize degreewise and whose localized
+comparison maps improve assembles, via its colimit, to a bounded above finite free complex.
+This is the final iteration in the proof of [Stacks, Tag 08EE].
+
+## References
+
+* [Stacks, Tag 08EE]
 -/
 
 @[expose] public section
@@ -29,29 +35,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- A tower with a descending stabilization cutoff and improving localized cohomology
-assembles to a bounded above finite free complex. No pseudo-coherence hypothesis is
-needed for this assembly statement.
-
-Source: Stacks Project, Tag 08EE, proof of lemma-lift-pseudo-coherent, final iteration
-(blueprint: lem-sc-stabilized-finite-free-tower).
-
-Proof: Regard the sequence and transitions as the diagram D on the ordered natural
-numbers. In each degree i, the evaluated diagram is eventually constant from
-k(i)=max(0,b+1-i): induction on l-k(i) shows that all composites of transitions from
-k(i) are invertible. Mathlib's eventual-constancy colimit construction provides its
-colimit. The homological-complex colimit construction assembles these degreewise
-colimits into E, with its differential and square-zero identity. The compatible maps
-alpha define a cocone to M, hence a map gamma:E to M by the colimit universal property.
-The inclusion from every sufficiently late stage is invertible in degree i. Transport
-finite freeness and the upper support bound across this inclusion. For cohomology in
-degree i choose k(i-1); the inclusions in i-1,i,i+1 are all invertible, and localization
-preserves them. The localized inclusion is therefore a quasi-isomorphism at i by the
-short-complex criterion. Its composite with gamma is alpha at this stage by the
-colimit factorization identity. Since that stage map is a quasi-isomorphism at i,
-cancellation gives that gamma is also one. Empty families impose no condition; zero
-rings are included throughout. The colimit object is fixed by its universal property;
-no datum is defined using an unproved mere existence statement.
--/
+assembles to a bounded above finite free complex. -/
 theorem exists_model_of_stabilized_finite_free_tower (A : Type u) [CommRing A]
     (M : CochainComplex (ModuleCat.{u} A) ℤ) (r : ℕ) (f : Fin r → A) (b : ℤ)
     (F : ℕ → CochainComplex (ModuleCat.{u} A) ℤ) (α : ∀ k : ℕ, F k ⟶ M)

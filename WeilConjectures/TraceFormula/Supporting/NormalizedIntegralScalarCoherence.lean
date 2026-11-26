@@ -12,7 +12,23 @@ import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensionConst
 
 /-! # NormalizedIntegralScalarCoherence
 
-(blueprint: lem-trf-normalized-integral-scalar-coherence). -/
+The normalized mixed comparison of an integral comparison system respects scheme units,
+coefficient units and towers of coefficient extensions.
+
+## Implementation details
+
+The scalar-model unit and associativity equations identify multiplication and the derived
+tensor associator with the whole-system scalar unitor and associator after precomposition
+with the completion comparison `chi`; cancelling `chi` gives the completed scalar unit and
+associator squares, which are pasted with the primitive mixed squares. Quotient scalar-unit
+and scalar-tower coherence then give the coefficient conclusions. For scheme identities the
+mixed-unit square is derived from the mixed-composition square at two identities, using that
+the identity pullback functor is faithful.
+
+## References
+
+* Stacks 06YY, 0941.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -470,22 +486,8 @@ private theorem scalar_tower
 end Coordinates
 end Proofs
 
-/-- The normalized mixed comparison respects scheme and coefficient units and towers.
-Source: Stacks 06YY and 0941, scalar normalization in common-stage transport.
-Proof: the scalar-model unit equation identifies multiplication with the whole
-system scalar unitor after precomposition with chi. Its associativity equation
-identifies the system associator with the ordinary derived tensor associator after
-the same completion comparisons. The ordinary scalar models agree by their
-balanced tensor generator formulas and universal derived counits. Cancel chi to
-obtain the completed scalar unit and associator squares. Paste these squares
-with the primitive mixed squares. Quotient scalar-unit and scalar-tower coherence
-then give the coefficient identity and tower conclusions by cancellation of the
-common word coordinate. For scheme identities derive the mixed-unit square from
-the mixed-composition square at two identities and both geometric unit laws:
-the identity pullback functor is isomorphic to the identity, hence faithful, so
-cancelling its action gives the desired mixed unitor. Transport this square by
-the counit coordinates. All equations include identity embeddings and zero inputs.
-(blueprint: lem-trf-normalized-integral-scalar-coherence). -/
+/-- The normalized mixed comparison respects scheme identities, coefficient identities
+and towers of coefficient embeddings. -/
 theorem normalizedIntegralScalarCoherence
     (l : ℕ) [Fact l.Prime] (D : IntegralComparisonSystem.{u} l)
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

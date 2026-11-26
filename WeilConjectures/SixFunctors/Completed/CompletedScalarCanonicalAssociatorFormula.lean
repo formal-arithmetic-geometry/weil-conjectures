@@ -13,8 +13,12 @@ import all WeilConjectures.SmoothPurity.PurStrictScalar.ConstantCompletedOrdinar
 
 /-! # Ambient formula for the canonical completed scalar associator
 
-Source: Bhatt--Scholze, Proposition 3.5.1; Stacks Tag 06YY.
-(blueprint: lem-sf-completed-scalar-associator-ambient-formula).
+The canonical restricted integral associator is a conjugate of the specified comparison.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 3.5.1]
+* [Stacks, Tag 06YY]
 -/
 
 @[expose] public noncomputable section
@@ -102,15 +106,7 @@ private theorem ordinary_derived_eq :
   exact ordinary_good_component l E L M i j T P
 
 attribute [-instance] WeilConjectures.SemilinearSections.moduleAbelian in
-/-- The canonical restricted integral associator is the specified comparison conjugate.
-Source: Bhatt--Scholze, Proposition 3.5.1, and Stacks 06YY (lemma-derived-base-change).
-(blueprint: lem-sf-completed-scalar-associator-ambient-formula).
-Proof: first identify the ordinary sheaf associators on successive tensor units.
-The tensor-associator counit formula and the associator-data normalization then
-agree on every good complex. Their direct counit is invertible, so cancellation
-and the good-complex localization identify the derived associators.
-Finally canonical_restriction identifies the intrinsic associator with the
-completed associator, whose definition is precisely the displayed conjugation. -/
+/-- The canonical restricted integral associator is the specified comparison conjugate. -/
 theorem completedScalarCanonicalAssociatorFormula (K : sfIntegralConstructibleCategory l E T) :
     ((sfIntegralScalarComp l E L i T 0 (Fact.out : l.Prime).ne_zero M j).hom.app K).hom =
       (CompletedLineTensor.chi l L T M j _

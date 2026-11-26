@@ -18,19 +18,16 @@ for `B`, such that `|τ a| = q^{i/2}` for every embedding `τ : ℚ(a) → ℂ` 
 eigenvalue on `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every embedding `θ : ℚ̄ → ℚ̄_ℓ`.
 
 The degree is that of the integral Frobenius factor `Pᵢ` of which `a` is a reciprocal root: by
-`prop-integral-recovery` (`AlgebraicGeometry.Scheme.integral_recovery`), `A = ∏_{i odd} Pᵢ` and
-`B = ∏_{i even} Pᵢ`.
+`AlgebraicGeometry.Scheme.integral_recovery`, `A = ∏_{i odd} Pᵢ` and `B = ∏_{i even} Pᵢ`.
 
 ## Main statements
 
-- `PowerSeries.IsNormalizedIntegralFraction.isIntegral_of_mem_roots_reverse`: blueprint
-  `lemma-reciprocal-roots-zeta--4`.
-- `AlgebraicGeometry.Scheme.exists_degree_of_mem_roots_reverse`: blueprint
-  `lemma-reciprocal-roots-zeta--5`.
-- `AlgebraicGeometry.Scheme.norm_eq_of_hasEigenvalue_of_mem_roots_reverse`: blueprint
-  `lemma-reciprocal-roots-zeta--6`.
-- `AlgebraicGeometry.Scheme.hasEigenvalue_of_norm_eq_of_mem_roots_reverse`: blueprint
-  `lemma-reciprocal-roots-zeta--7`.
+- `PowerSeries.IsNormalizedIntegralFraction.isIntegral_of_mem_roots_reverse`: the reciprocal
+  roots of `A` and `B` are algebraic integers.
+- `AlgebraicGeometry.Scheme.exists_degree_of_mem_roots_reverse`: existence of the degree.
+- `AlgebraicGeometry.Scheme.norm_eq_of_hasEigenvalue_of_mem_roots_reverse`: absolute values.
+- `AlgebraicGeometry.Scheme.hasEigenvalue_of_norm_eq_of_mem_roots_reverse`: occurrence as a
+  Frobenius eigenvalue.
 -/
 
 @[expose] public section
@@ -41,9 +38,8 @@ open CategoryTheory Limits Polynomial IntermediateField
 
 namespace PowerSeries.IsNormalizedIntegralFraction
 
-/-- Blueprint `lemma-reciprocal-roots-zeta--4`: for a normalized reduced integral presentation
-`Z = A / B`, every reciprocal root `a ∈ ℚ̄` of `A` or of `B` (a root of `A^#` or `B^#`) is an
-algebraic integer, since `A(0) = B(0) = 1` makes `A^#` and `B^#` monic. -/
+/-- For a normalized reduced integral presentation `Z = A / B`, every reciprocal root `a ∈ ℚ̄` of
+`A` or of `B` (a root of `A^#` or `B^#`) is an algebraic integer. -/
 theorem isIntegral_of_mem_roots_reverse {Z : PowerSeries ℚ} {A B : ℤ[X]}
     (hAB : IsNormalizedIntegralFraction Z A B) {a : AlgebraicClosure ℚ}
     (ha : a ∈ (A.reverse.map (algebraMap ℤ (AlgebraicClosure ℚ))).roots ∨
@@ -109,7 +105,8 @@ variable (k₀) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] (d : ℕ)
 
 variable {k₀ X}
 
-/-- The integral Frobenius factors `Pᵢ` of `prop-integral-recovery`, with the Riemann hypothesis,
+/-- The integral Frobenius factors `Pᵢ` of `AlgebraicGeometry.Scheme.integral_recovery`, with the
+Riemann hypothesis,
 and the reciprocal roots of the normalized presentation `Z = A / B` distributed among them: a
 reciprocal root of `A` is one of some `Pᵢ` with `i` odd, a reciprocal root of `B` one of some
 `Pᵢ` with `i` even. -/
@@ -148,8 +145,7 @@ private theorem exists_degree_aux {P : Fin (2 * d + 1) → ℤ[X]}
       (fun _ hy ↦ hrh.norm_eq_of_mem_roots_reverse (fun k ↦ (hP k).1) i hy) ha).2,
     fun l _ _ θ ↦ hasEigenvalue_of_mem_roots_reverse_of_isIntegralFrobeniusFactor (hP i).2 ha l θ⟩
 
-/-- Blueprint `lemma-reciprocal-roots-zeta--5` (choice of the degree), with the two clauses
-`lemma-reciprocal-roots-zeta--6` and `lemma-reciprocal-roots-zeta--7` for the chosen degree: let
+/-- **Choice of the degree** of a reciprocal root of the zeta function: let
 `Z(X₀, T) = A / B` be the normalized reduced integral presentation of the zeta series of `X₀`
 smooth, proper and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`. For each
 reciprocal root `a ∈ ℚ̄` of `A` (resp. `B`) there is an integer `0 ≤ i ≤ 2d`, odd (resp. even),
@@ -157,10 +153,7 @@ such that
 
 * `|τ a| = q^{i/2}` for every field embedding `τ : ℚ(a) → ℂ`, and
 * `θ a` is a Frobenius eigenvalue on `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every prime `ℓ ≠ p` and every field
-  embedding `θ : ℚ̄ → ℚ̄_ℓ`.
-
-The degree `i` is that of the integral Frobenius factor `Pᵢ` of which `a` is a reciprocal root
-(`AlgebraicGeometry.Scheme.integral_recovery`). -/
+  embedding `θ : ℚ̄ → ℚ̄_ℓ`. -/
 theorem exists_degree_of_mem_roots_reverse {A B : ℤ[X]}
     (hAB : PowerSeries.IsNormalizedIntegralFraction (X ↘ Spec (CommRingCat.of k₀)).zetaSeries A
       B) :
@@ -183,10 +176,9 @@ theorem exists_degree_of_mem_roots_reverse {A B : ℤ[X]}
     exact ⟨i, by have := i.2; omega, hi, exists_degree_aux d hP hrh i hb⟩
 
 include d in
-/-- Blueprint `lemma-reciprocal-roots-zeta--6` (absolute values): let `a ∈ ℚ̄` be a reciprocal
-root of `A` or `B`, where `Z(X₀, T) = A / B` is the normalized reduced integral presentation, and
-let `i` be a degree as chosen in `lemma-reciprocal-roots-zeta--5`, i.e. such that `θ a` is a
-Frobenius eigenvalue on `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for some prime `ℓ ≠ p` and some embedding
+/-- **Absolute values of reciprocal roots**: let `a ∈ ℚ̄` be a reciprocal root of `A` or `B`,
+where `Z(X₀, T) = A / B` is the normalized reduced integral presentation, and let `i` be such that
+`θ a` is a Frobenius eigenvalue on `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for some prime `ℓ ≠ p` and some embedding
 `θ : ℚ̄ → ℚ̄_ℓ`. Then `|τ a| = q^{i/2}` for every field embedding `τ : ℚ(a) → ℂ`. -/
 theorem norm_eq_of_hasEigenvalue_of_mem_roots_reverse {A B : ℤ[X]}
     (hAB : PowerSeries.IsNormalizedIntegralFraction (X ↘ Spec (CommRingCat.of k₀)).zetaSeries A
@@ -215,10 +207,9 @@ theorem norm_eq_of_hasEigenvalue_of_mem_roots_reverse {A B : ℤ[X]}
   rw [hτ τ, show ((j : ℕ) : ℝ) = i by linarith]
 
 include d in
-/-- Blueprint `lemma-reciprocal-roots-zeta--7` (occurrence as an eigenvalue): let `a ∈ ℚ̄` be a
-reciprocal root of `A` or `B`, where `Z(X₀, T) = A / B` is the normalized reduced integral
-presentation, and let `i` be a degree as chosen in `lemma-reciprocal-roots-zeta--5`, i.e. such
-that `|τ a| = q^{i/2}` for every field embedding `τ : ℚ(a) → ℂ`. Then for every prime `ℓ ≠ p` and
+/-- **Reciprocal roots occur as eigenvalues**: let `a ∈ ℚ̄` be a reciprocal root of `A` or `B`,
+where `Z(X₀, T) = A / B` is the normalized reduced integral presentation, and let `i` be such that
+`|τ a| = q^{i/2}` for every field embedding `τ : ℚ(a) → ℂ`. Then for every prime `ℓ ≠ p` and
 every field embedding `θ : ℚ̄ → ℚ̄_ℓ`, `θ a` is a Frobenius eigenvalue on `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)`. -/
 theorem hasEigenvalue_of_norm_eq_of_mem_roots_reverse {A B : ℤ[X]}
     (hAB : PowerSeries.IsNormalizedIntegralFraction (X ↘ Spec (CommRingCat.of k₀)).zetaSeries A

@@ -13,8 +13,13 @@ import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 /-!
 # Generators from fibre dimensions over a semilocal ring
 
-Source: Stacks Project, Morphisms, proof of Tag 03J6, and Algebra, Tag 00DV.
-(blueprint: lem-weil-pbc-semilocal-fibre-generators).
+A finite algebra over a semilocal ring is generated as a module by `n` elements when all of
+its residue-field fibres have dimension at most `n`.
+
+## References
+
+* [Stacks, Tag 03J6], proof
+* [Stacks, Tag 00DV]
 -/
 
 @[expose] public section
@@ -66,17 +71,7 @@ private theorem residue_crt_surjective (R : Type*) [CommRing R]
 
 
 /-- A finite algebra over a semilocal ring has at most `n` module generators when
-all residue-field fibre dimensions are at most `n`.
-
-Source: Stacks Project, Morphisms, proof of Tag 03J6; Algebra, Tag 00DV.
-(blueprint: lem-weil-pbc-semilocal-fibre-generators)
-
-Proof: pad a basis of every residue-field fibre with zeroes to length `n` and
-lift these tuples simultaneously by the module Chinese remainder theorem. The
-resulting linear combination map is surjective after tensoring with every
-residue field. The kernel of the map to the product of fibres is the intersection
-of the maximal ideals times the module. This intersection lies in the Jacobson
-radical, so Nakayama's lemma makes the lifted elements generate the module. -/
+all residue-field fibre dimensions are at most `n`. -/
 theorem exists_surjective_fin_of_fiberDegree_le
     (R : Type u) [CommRing R] [Finite (MaximalSpectrum R)]
     (A : Type v) [CommRing A] [Algebra R A] [Module.Finite R A]

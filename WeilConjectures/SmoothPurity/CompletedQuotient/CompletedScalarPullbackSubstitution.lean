@@ -15,7 +15,11 @@ import WeilConjectures.SmoothPurity.Normalized.NormalizedCompletionRealization
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+Quotient normalization and coherent substitution steps of the integral comparison.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941
 -/
 
 @[expose] public noncomputable section
@@ -102,15 +106,7 @@ private theorem pullSubstitution_model {X Y : Scheme.{u}} (f : X ⟶ Y)
           ((integralComparisonSequencePullback l E f).mapDerivedCategoryFactors.hom.app A) := by
   exact completedQuotientPullbackRealization_substitution l E f A β
 
-/-- Scalar extension of a completed pullback substitution in its fixed limit coordinates.
-Source: Stacks 07A4 and 0941; quotient scalar-coordinate proof.
-(blueprint: lem-pur-completed-scalar-pullback-substitution).
-
-Proof: equip the fixed calculi with normalized completion and pullback models.
-Express the reduction of pullSubstitution through its transported realization.
-The normalized system scalar/pullback equation and naturality move the strict
-kappa factor across reduction of beta. Apply the scalar tower pullback limit
-square, and reverse the scalar-reduction and pullback-substitution formulas. -/
+/-- Scalar extension of a completed pullback substitution in its fixed limit coordinates. -/
 theorem completedScalarPullbackSubstitution {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

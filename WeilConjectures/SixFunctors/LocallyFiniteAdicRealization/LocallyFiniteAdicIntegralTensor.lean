@@ -12,8 +12,13 @@ import WeilConjectures.Algebra.Homology.Derived.DerivedScalarExtensionCounitShif
 
 /-! # The integral tensor maps underlying the finite native cocone
 
-Source: Bhatt--Scholze, Proposition 3.5.1 and Proposition 6.8.14(2).
 The functors and comparison maps are constructed before scalar localization.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 3.5.1 and
+  Proposition 6.8.14(2)
+* Stacks Project, Tag 06YY
 -/
 
 @[expose] public noncomputable section
@@ -44,8 +49,7 @@ instance integralTensor_sourceShiftAdditive (E : Index l (PadicAlgCl l)) :
       (sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) n).Additive :=
   fun n ↦ by infer_instance
 
-/-- Integral extension into the ordinary section modules of the native ring.
-Source: BS 6.8.14(2) (blueprint: lem-sf-native-integral-tensor). -/
+/-- Integral extension into the ordinary section modules of the native ring. -/
 def integralTensor (E : Index l (PadicAlgCl l)) :
     sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X ⥤
       DerivedCategory (pbcModules X (ringSheaf l X)) :=
@@ -57,8 +61,7 @@ instance integralTensor_shift (E : Index l (PadicAlgCl l)) :
   unfold integralTensor
   infer_instance
 
-/-- Derived extension is exact for its counit-normalized shift.
-Source: Stacks Tag 06YY (blueprint: lem-sf-native-integral-tensor). -/
+/-- Derived extension is exact for its counit-normalized shift. -/
 theorem derivedTensor_triangulated
     {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S) :
     (pbcDerivedExtend φ).IsTriangulated := by
@@ -89,9 +92,7 @@ instance integralTensor_triangulated (E : Index l (PadicAlgCl l)) :
 instance integralTensor_additive (E : Index l (PadicAlgCl l)) :
     (integralTensor l X C E).Additive := by infer_instance
 
-/-- The natural balanced derived tensor comparison, with the recorded adjunction units.
-Source: Stacks Tag 06YY; BS 6.8.14(2)
-(blueprint: lem-sf-native-integral-tensor). -/
+/-- The natural balanced derived tensor comparison, with the recorded adjunction units. -/
 def integralTensorBalancing {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     pbcDerivedExtend (completedCoefficientMap l (Coefficient.{u} l (PadicAlgCl l) E)
         (Coefficient.{u} l (PadicAlgCl l) L)
@@ -104,8 +105,7 @@ def integralTensorBalancing {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
 
 -- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
-/-- The natural balancing comparison has exactly the prescribed component.
-Source: Stacks Tag 06YY (blueprint: lem-sf-native-integral-tensor). -/
+/-- The natural balancing comparison has exactly the prescribed component. -/
 theorem integralTensorBalancing_app {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (K : DerivedCategory (scalarReductionSource l (Coefficient.{u} l (PadicAlgCl l) E) X)) :
     (integralTensorBalancing l X C h).app K =
@@ -121,9 +121,7 @@ theorem integralTensorBalancing_app {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
   simp only [Adjunction.leftAdjointCompIso_hom_app, Adjunction.homEquiv_counit,
     Functor.map_comp, Category.assoc]
 
-/-- The explicit integral comparison: inverse balancing followed by completion.
-Source: BS 3.5.1 and 6.8.14(2)
-(blueprint: lem-sf-native-integral-tensor). -/
+/-- The explicit integral comparison: inverse balancing followed by completion. -/
 def integralTensorComparison {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     integralTensor l X C E ⟶
       GeneralAlgebraicallyClosedCoefficients.integralTransition l (PadicAlgCl l) X E L h ⋙
@@ -137,8 +135,7 @@ def integralTensorComparison {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
 
 -- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
-/-- Component formula for the integral comparison, avoiding functor-alias unfolding.
-Source: BS 3.5.1 and 6.8.14(2) (blueprint: lem-sf-native-integral-tensor). -/
+/-- Component formula for the integral comparison. -/
 theorem integralTensorComparison_app {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :
     (integralTensorComparison l X C h).app K =

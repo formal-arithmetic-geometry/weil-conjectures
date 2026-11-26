@@ -10,8 +10,11 @@ public import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitModels
 
 /-! # Ordinary reconstruction of a coherent strict quotient system
 
-Source: Stacks 03D7, 06YY and 0941.
-(blueprint: lem-trf-coherent-quotient-ordinary-lift)
+A strict unit-tower map determines its ordinary quotient isomorphism.
+
+## References
+
+* [Stacks Project, Tags 03D7, 06YY and 0941](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public noncomputable section
@@ -278,18 +281,7 @@ private theorem isIso_of_evaluations (W : Scheme.{t})
   let := hi
   exact HomologicalComplex.Hom.isIso_of_components a
 
-/-- A strict unit-tower map determines its ordinary quotient isomorphism.
-Source: Stacks 03D7 (ordinary adjunction) and 0941 (strict tower limits).
-(blueprint: lem-trf-coherent-quotient-ordinary-lift).
-
-Proof: transpose b through the constant/limit adjunction and inversely through
-M's termwise tensor/limit adjunction. At every degree and level, the prescribed
-values on 1 tensor x and M.unit_tensor identify the two scalar adjuncts. The
-finite scalar Hom bijection identifies the evaluated map followed by κ with
-M.evaluation. Each evaluation is therefore invertible. Sectionwise bijectivity
-on the product site detects an isomorphism of module sheaves degree by degree,
-and hence an isomorphism of strict complexes. This uses no derived evaluation
-faithfulness and applies to zero objects and level zero without exceptions. -/
+/-- A strict unit-tower map determines its ordinary quotient isomorphism. -/
 theorem coherentQuotientOrdinaryLift (W : Scheme.{t})
     (M : CompletionUnit.OrdinaryModel l E W)
     (P : CochainComplex (scalarReductionSource l E W) ℤ)

@@ -17,8 +17,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.FreeModule.Basic
 
 For a short exact sequence `0 → M → N → P → 0` of modules over a commutative ring with `M` and
 `P` finite free, and endomorphisms `φM`, `φN`, `φP` compatible with the maps,
-`tr φN = tr φM + tr φP` (`LinearMap.trace_eq_trace_add_trace_of_exact`). This is the linear
-algebra behind blueprint `proposition-properties-trace`, items (2) and (4).
+`tr φN = tr φM + tr φP` (`LinearMap.trace_eq_trace_add_trace_of_exact`).
 
 For endomorphisms `g` of `N` and `h` of `M` (free of finite rank), the endomorphism
 `f ↦ g ∘ f ∘ h` of `M →ₗ N` has trace `tr(g) tr(h)`
@@ -29,6 +28,11 @@ intertwines endomorphisms `F_V`, an automorphism `F_M` and `F_N`, then
 For morphisms of `ModuleCat`, the trace is invariant under conjugation by an isomorphism
 (`ModuleCat.trace_hom_eq_of_iso`) and vanishes on zero modules
 (`ModuleCat.trace_hom_eq_zero_of_isZero`).
+
+## Implementation details
+
+Additivity is proved by splitting the sequence (`P` is projective): with a splitting
+`id = f ∘ r + s ∘ g`, the claim follows from the cyclicity of the trace.
 -/
 
 @[expose] public section
@@ -48,9 +52,7 @@ lemma trace_eq_zero_of_subsingleton [Subsingleton M] (φ : M →ₗ[R] M) : trac
 
 /-- **Additivity of the trace on short exact sequences**: for a short exact sequence
 `0 → M → N → P → 0` of modules with `M`, `P` finite free (hence also `N`) and endomorphisms
-`φM`, `φN`, `φP` commuting with the maps, `tr φN = tr φM + tr φP`. The sequence splits since `P`
-is projective, and with a splitting `id = f ∘ r + s ∘ g` the claim follows from the cyclicity of
-the trace. -/
+`φM`, `φN`, `φP` commuting with the maps, `tr φN = tr φM + tr φP`. -/
 theorem trace_eq_trace_add_trace_of_exact [Module.Free R M] [Module.Finite R M] [Module.Free R P]
     [Module.Finite R P] {f : M →ₗ[R] N} {g : N →ₗ[R] P} (hfg : Function.Exact f g)
     (hf : Function.Injective f) (hg : Function.Surjective g) {φM : M →ₗ[R] M} {φN : N →ₗ[R] N}

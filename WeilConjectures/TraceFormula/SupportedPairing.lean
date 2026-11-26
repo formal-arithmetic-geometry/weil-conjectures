@@ -22,8 +22,8 @@ and a correspondence from `(Y, L)` to `(X, K)`,
 d : D ⟶ X ⨯ Y,   v : L(d ≫ q₂)^* L ⟶ R(d ≫ q₁)^! K,
 ```
 together with the fibre product `E = C ×_{c, Z, d̄} D` of the supports, `d̄ = d ≫ τ`. The
-*supported pairing* `⟨u, v⟩_LV : ℚ̄_ℓ,E ⟶ ω_E` (`ProEtale.CondensedRing.supportedPairing`,
-blueprint `def-trf-supported-pairing`) is the exceptional adjoint, along `e : E ⟶ Z`, of
+*supported pairing* `⟨u, v⟩_LV : ℚ̄_ℓ,E ⟶ ω_E` (`ProEtale.CondensedRing.supportedPairing`) is
+the exceptional adjoint, along `e : E ⟶ Z`, of
 ```
 Re_! ℚ̄_ℓ,E ≅ Rc_! ℚ̄_ℓ,C ⊗ Rd̄_! ℚ̄_ℓ,D --uc ⊗ vc--> (L ⊠ D_X K) ⊗ (D_Y L ⊠ K)
   ⟶ ω_Y ⊠ ω_X ⟶ ω_Z,
@@ -32,19 +32,17 @@ read through `Re^! ω_Z ≅ ω_E`, where:
 
 * `uc = κ_{L,K}⁻¹ ∘ [u]` and `vc` are the supported classes of `u` and `v`
   (`ProEtale.CondensedRing.supportedClass`, `ProEtale.CondensedRing.oppositeSupportedClass`),
-  the class of `lemma-external-duality-trace-morphism--2` read through the inverse Künneth–Verdier
-  map, the second one transported along `τ`;
+  the correspondence classes read through the inverse Künneth–Verdier map, the second one
+  transported along `τ`;
 * the first isomorphism `μ` is built from the composition of the lower shrieks, compact-support
   base change in the cartesian square of `E` and the projection formula for `c`
   (`ProEtale.CondensedRing.supportProductIso`);
 * the contraction uses the monoidality of `Lp_i^*`, the two evaluations, and the exterior
   product `ω_Y ⊠ ω_X ⟶ ω_Z` (`ProEtale.CondensedRing.dualizingComplexExternalProduct`, the
-  exceptional Künneth map of blueprint `proposition-exceptional-external-kunneth--1` for `a_Y` and
-  `a_X`).
+  exceptional Künneth map for `a_Y` and `a_X`).
 
 The *local term* of the pair along an open and closed subscheme `B` of `E` proper over `s` is the
-local term of the supported pairing (`ProEtale.CondensedRing.localTermPair`, blueprint
-`def-trf-local-term-pair`).
+local term of the supported pairing (`ProEtale.CondensedRing.localTermPair`).
 
 -/
 
@@ -103,10 +101,8 @@ variable {X Y C D : Over (Spec (.of k))}
   {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
 
 /-- The *supported class* `uc = κ_{L,K}⁻¹ ∘ [u] : Rc_! ℚ̄_ℓ,C ⟶ L ⊠ D_X K` of a correspondence
-`u : L(c ≫ p₂)^* K ⟶ R(c ≫ p₁)^! L` from `(X, K)` to `(Y, L)` with support `c : C ⟶ Y ⨯ X`
-(blueprint `def-trf-supported-pairing`, Step 1): the class `[u]` of
-`lemma-external-duality-trace-morphism--2`, a class supported on `c` in the sense of
-`def-trf-supported-class`, read through the inverse Künneth–Verdier isomorphism. -/
+`u : L(c ≫ p₂)^* K ⟶ R(c ≫ p₁)^! L` from `(X, K)` to `(Y, L)` with support `c : C ⟶ Y ⨯ X`:
+the class `[u]`, supported on `c`, read through the inverse Künneth–Verdier isomorphism. -/
 noncomputable def supportedClass (c : C ⟶ Y ⨯ X)
     (u : (boundedConstructibleUpperStar _ ℓ (c ≫ prod.snd)).obj K ⟶
       (boundedConstructibleUpperShriek ℓ (c ≫ prod.fst)).obj L) :
@@ -131,7 +127,7 @@ noncomputable def externalProductBraidingIso (K : Dᵇc(X.left)⟦Profinite.padi
     β_ _ _
 
 /-- The *supported class of the opposite correspondence* `vc : Rd̄_! ℚ̄_ℓ,D ⟶ D_Y L ⊠ K` on
-`Y ⨯ X`, `d̄ = d ≫ τ` (blueprint `def-trf-supported-pairing`, Step 1): the supported class
+`Y ⨯ X`, `d̄ = d ≫ τ`: the supported class
 `κ_{K,L}⁻¹ ∘ [v] : Rd_! ℚ̄_ℓ,D ⟶ K ⊠ D_Y L` on `X ⨯ Y`, transported along `Rd̄_! ≅ Rτ_! Rd_!`
 and the exchange of the factors `Rτ_! (K ⊠ D_Y L) ≅ D_Y L ⊠ K`. -/
 noncomputable def oppositeSupportedClass (d : D ⟶ X ⨯ Y)
@@ -160,10 +156,8 @@ adjoint of
 Ra_Z! (ω_Y ⊠ ω_X) ≅ Ra_Y! Rp₁! (ω_Y ⊠ ω_X) ⟶ Ra_Y! ω_Y ⟶ ℚ̄_ℓ,s,
 ```
 the composition isomorphism for `a_Z = p₁ ≫ a_Y`, the morphism `exceptionalKunnethAdjoint`
-(projection formula, base change in the product square and the counit of `a_X`) and the counit
-of `a_Y`. It is the exceptional Künneth map `α` of blueprint
-`proposition-exceptional-external-kunneth--1` (`lemma-external-duality-trace-morphism`, (ii)) for
-`f₁ = a_Y`, `f₂ = a_X`, `L₁ = L₂ = ℚ̄_ℓ`. -/
+and the counit of `a_Y`: the exceptional Künneth map for `a_Y`, `a_X` and constant
+coefficients. -/
 noncomputable def dualizingComplexExternalProduct :
     externalProduct ℓ (dualizingComplex' ℓ Y) (dualizingComplex' ℓ X) ⟶
       dualizingComplex' ℓ (Y ⨯ X) :=
@@ -189,8 +183,7 @@ variable {X Y C D E : Over (Spec (.of k))}
   {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
   {c : C ⟶ Y ⨯ X} {d' : D ⟶ Y ⨯ X} {eC : E ⟶ C} {eD : E ⟶ D}
 
-/-- The *support of the product* (blueprint `def-trf-supported-pairing`, Step 2): for the
-cartesian square `E = C ×_{c, Z, d'} D`,
+/-- The *support of the product*: for the cartesian square `E = C ×_{c, Z, d'} D`,
 ```
 R(eC ≫ c)_! ℚ̄_ℓ,E ≅ Rc_! ReC_! LeD^* ℚ̄_ℓ,D ≅ Rc_! (Lc^* Rd'_! ℚ̄_ℓ,D)
   ≅ Rc_! (ℚ̄_ℓ,C ⊗ Lc^* Rd'_! ℚ̄_ℓ,D) ≅ Rc_! ℚ̄_ℓ,C ⊗ Rd'_! ℚ̄_ℓ,D,
@@ -212,7 +205,7 @@ noncomputable def supportProductIso (hE : IsPullback eC eD c d') :
     (asIso (((boundedConstructibleExceptionalProjection ℓ c).app (𝟙_ _)).app _)).symm
 
 variable (L K) in
-/-- The *contraction* of the kernels (blueprint `def-trf-supported-pairing`, Step 3):
+/-- The *contraction* of the kernels:
 ```
 (L ⊠ D_X K) ⊗ (D_Y L ⊠ K) ≅ (Lp₁^* L ⊗ Lp₁^* D_Y L) ⊗ (Lp₂^* K ⊗ Lp₂^* D_X K)
   ⟶ Lp₁^* (L ⊗ D_Y L) ⊗ Lp₂^* (K ⊗ D_X K) ⟶ ω_Y ⊠ ω_X ⟶ ω_Z,
@@ -235,9 +228,8 @@ noncomputable def kernelContraction :
     dualizingComplexExternalProduct ℓ X Y
 
 variable (c d') in
-/-- The morphism `σ_{u,v} : R(eC ≫ c)_! ℚ̄_ℓ,E ⟶ ω_Z` of the supported pairing (blueprint
-`def-trf-supported-pairing`, Step 3), for supported classes `uc : Rc_! ℚ̄_ℓ,C ⟶ L ⊠ D_X K` and
-`vc : Rd'_! ℚ̄_ℓ,D ⟶ D_Y L ⊠ K`. -/
+/-- The morphism `σ_{u,v} : R(eC ≫ c)_! ℚ̄_ℓ,E ⟶ ω_Z` of the supported pairing, for
+supported classes `uc : Rc_! ℚ̄_ℓ,C ⟶ L ⊠ D_X K` and `vc : Rd'_! ℚ̄_ℓ,D ⟶ D_Y L ⊠ K`. -/
 noncomputable def pairingMorphism (hE : IsPullback eC eD c d')
     (uc : (boundedConstructibleLowerShriek ℓ c).obj (𝟙_ _) ⟶
       externalProduct ℓ L (verdierDual ℓ K))
@@ -261,11 +253,10 @@ noncomputable def pairingOfClasses (hE : IsPullback eC eD c d')
       (pairingMorphism ℓ c d' hE uc vc) ≫
     (dualizingComplexComp ℓ (eC ≫ c)).hom
 
-/-- The **supported pairing** `⟨u, v⟩_LV : ℚ̄_ℓ,E ⟶ ω_E` of an opposite pair (blueprint
-`def-trf-supported-pairing`, `sk-d-pairing`, `rem-ptr-trf-supported-pairing-1`): for a
-correspondence `u` from `(X, K)` to `(Y, L)` with support
-`c : C ⟶ Y ⨯ X`, a correspondence `v` from `(Y, L)` to `(X, K)` with support `d : D ⟶ X ⨯ Y`
-and the cartesian square `E = C ×_{c, Y ⨯ X, d ≫ τ} D`, the Borel–Moore section
+/-- The **supported pairing** `⟨u, v⟩_LV : ℚ̄_ℓ,E ⟶ ω_E` of an opposite pair: for a
+correspondence `u` from `(X, K)` to `(Y, L)` with support `c : C ⟶ Y ⨯ X`, a correspondence
+`v` from `(Y, L)` to `(X, K)` with support `d : D ⟶ X ⨯ Y` and the cartesian square
+`E = C ×_{c, Y ⨯ X, d ≫ τ} D`, the Borel–Moore section
 `pairingOfClasses` of the supported classes `uc = supportedClass u` and
 `vc = oppositeSupportedClass v`. -/
 noncomputable def supportedPairing {d : D ⟶ X ⨯ Y}
@@ -277,7 +268,7 @@ noncomputable def supportedPairing {d : D ⟶ X ⨯ Y}
   pairingOfClasses ℓ c _ hE (supportedClass ℓ c u) (oppositeSupportedClass ℓ d v)
 
 /-- The *local term of an opposite pair* along an open and closed subscheme `j : B ⟶ E` proper
-over `s` (blueprint `def-trf-local-term-pair`): the local term `LT_B(u, v) = ∫_B j^* ⟨u, v⟩_LV`
+over `s`: the local term `LT_B(u, v) = ∫_B j^* ⟨u, v⟩_LV`
 of the supported pairing; the ambient `E` need not be proper. -/
 noncomputable def localTermPair {d : D ⟶ X ⨯ Y}
     (u : (boundedConstructibleUpperStar _ ℓ (c ≫ prod.snd)).obj K ⟶

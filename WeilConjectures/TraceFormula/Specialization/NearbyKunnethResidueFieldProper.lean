@@ -35,6 +35,10 @@ special fibre `X_s × Y_s`, a scheme of finite type over the separably closed fi
   `NearbyCyclesModel.isIso_map_map_kunnethMap_iff_residueField`);
 * its global sections are invertible (`NearbyCyclesModel.isIso_lowerStar_kunnethMap_residueField`).
 
+## References
+
+* L. Illusie, *Autour du théorème de monodromie locale*, proof of Thm. 4.7
+
 -/
 
 @[expose] public section
@@ -67,13 +71,12 @@ set_option hygiene false in
 local notation "𝒪" => Profinite.padicIntegersRingObj ℓ E.1
 
 -- the Künneth maps of the product are large terms
-/-- **Gabber's Künneth formula for proper models, modulo `ϖ`** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`; Illusie, *Autour du théorème de monodromie
-locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`,
-`N` of finite type along proper structure morphisms, whose total spaces locally embed into `𝔸ᵐ_S`,
-`𝔸^{m'}_S`, if the generic-slicing step holds with `𝒪_E`-coefficients in chart dimension
-`m + m' - 1`, then for bounded constructible `𝒪_E`-complexes `A₀`, `B₀` on noetherian `X`, `Y` the
-Künneth map of the reductions `𝔽_E ⊗ᴸ A₀`, `𝔽_E ⊗ᴸ B₀` is an isomorphism. -/
+/-- **Gabber's Künneth formula for proper models, modulo `ϖ`**: for the product `P` over the
+strictly henselian trait of models `M`, `N` of finite type along proper structure morphisms,
+whose total spaces locally embed into `𝔸ᵐ_S`, `𝔸^{m'}_S`, if the generic-slicing step holds with
+`𝒪_E`-coefficients in chart dimension `m + m' - 1`, then for bounded constructible
+`𝒪_E`-complexes `A₀`, `B₀` on noetherian `X`, `Y` the Künneth map of the reductions
+`𝔽_E ⊗ᴸ A₀`, `𝔽_E ⊗ᴸ B₀` is an isomorphism. -/
 theorem isIso_kunnethMap_residueField_of_isProper [IsNoetherian X] [IsNoetherian Y]
     [TopologicalSpace.NoetherianSpace Z]
     (hM : M.IsTraitModelOver qM gM)

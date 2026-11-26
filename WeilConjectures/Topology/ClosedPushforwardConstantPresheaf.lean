@@ -12,8 +12,9 @@ public import Mathlib.Topology.LocallyConstant.Basic
 /-!
 # The section presheaf of a constant sheaf pushed forward from a closed subset
 
-Source: Stacks Project, Sheaves on Spaces, Tags 006W and 00AE
-(blueprint: def-weil-pbc-closed-pushforward-constant-presheaf).
+## References
+
+* Stacks Project, Tags 006W and 00AE.
 -/
 
 @[expose] public section
@@ -28,8 +29,6 @@ namespace TopCat
 
 /-- The presheaf of locally constant maps on intersections with a closed subset, with
 restriction of functions. The subtypes carry their subspace topologies.
-Source: Stacks Project, Tags 006W and 00AE
-(blueprint: def-weil-pbc-closed-pushforward-constant-presheaf).
 The construction makes sense for every subset; closedness is needed for the off-subset
 stalk assertion, rather than for defining the section presheaf. -/
 def closedPushforwardConstantPresheaf (X : TopCat.{u}) (C : Set X) (R : Type u) :

@@ -64,8 +64,7 @@ end Extension
 
 namespace Generators
 
-/-- (blueprint: `lem-weil-pbc-nl-presentations-homotopy-equivalent`)
-Let `P = R[x_t, t ∈ ι]` and `P' = R[x'_u, u ∈ ι']` be two polynomial presentations of the
+/-- Let `P = R[x_t, t ∈ ι]` and `P' = R[x'_u, u ∈ ι']` be two polynomial presentations of the
 `R`-algebra `S`. Then there is a map of presentations `P → P'` (an `R`-algebra map compatible
 with the projections to `S`), and for any maps of presentations `φ : P → P'` and
 `ψ : P' → P`, the induced maps `φ₁ = Cotangent.map φ`, `φ₀ = CotangentSpace.map φ`,

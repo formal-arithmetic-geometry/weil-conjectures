@@ -10,8 +10,18 @@ import WeilConjectures.SmoothPurity.FrobeniusExchange.CompactSupportScalarEvalua
 
 /-! # Finite evaluation of the compact-support scalar mate
 
-Source: proposition-six-operations-change-coefficients, compact-support paragraph; Stacks 0GL6 and
-09AL.
+## Implementation details
+
+The evaluated input is realized by a bounded constructible étale antecedent; evaluation of
+system scalar extension is ordinary derived scalar extension of the finite quotient rings.
+The evaluated mate is then identified, through the specified adjunction words, with the
+intrinsic compact-support scalar transpose, which is invertible on such antecedents. No
+flatness of the finite quotient map is assumed.
+
+## References
+
+* W. Zheng, Construction 4.1 and Lemma 4.10
+* Stacks Project, Tags 0GL6 and 09AL
 -/
 
 @[expose] public noncomputable section
@@ -26,36 +36,7 @@ namespace WeilConjectures.FrobeniusExchange
 
 /-- A single evaluation of the actual proper/open system scalar mate is invertible
 when both the input evaluation and its scalar extension are bounded constructible.
-There is no completeness, cartesian-system, uniform-interval or limit hypothesis.
-
-Source: proposition-six-operations-change-coefficients, compact-support paragraph; Stacks 0GL6,
-09AL; Zheng, Construction 4.1 and Lemma 4.10.
-(blueprint: lem-sf-compact-support-system-scalar-finite-invertible).
-
-Proof: put A = O_E/(pi_E^(n+1)) and B = O_L/(pi_L^(n+1)), with the recorded
-quotient map induced by the embedding. The first bounded constructibility hypothesis
-and finiteRing_constructibleDerived_origin give a bounded constructible etale
-antecedent G of the evaluated input. Evaluation of system scalar extension is
-ordinary derived scalar extension A -> B, by its K-flat tensor comparison. The
-canonical tensor/pullback comparison therefore identifies the intrinsic realization
-of G tensor_A^L B with the evaluated scalar input. The second hypothesis makes
-this realization bounded. Exactness and faithfulness of etale/pro-etale inverse
-image reflect vanishing of cohomology sheaves, so G tensor_A^L B is bounded below;
-choose it as the etale antecedent GB. These comparisons work for arbitrary system
-inputs at this single index and need no information about their transitions.
-
-Apply intrinsicCompactScalarIsoOfOrigin_hom to G, GB and the fixed compactification.
-It identifies the intrinsic scalar-adjunction transpose with an isomorphism. Evaluate
-the defining systemCompactScalar word: the direct-image evaluation comparison and
-the scalar evaluation comparison identify the proper mate with the proper finite
-scalar transpose; the open evaluation comparison identifies the other factor with
-the exact finite open scalar isomorphism. The unit and counit evaluation equations
-in SemilinearSections.evaluation_mate and mate pasting show that their composite is
-the intrinsic compact-support scalar transpose. Conjugate by these evaluation
-isomorphisms and the chosen antecedent isomorphism. Thus the displayed evaluated
-map is invertible. This uses equality of the specified adjunction words, rather
-than detection of equality by evaluation, and assumes no flatness of A -> B.
-The argument includes zero inputs, identity embeddings and empty schemes. -/
+There is no completeness, cartesian-system, uniform-interval or limit hypothesis. -/
 theorem systemCompactScalar_evaluation_isIso
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L]

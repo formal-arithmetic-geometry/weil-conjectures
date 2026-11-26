@@ -86,8 +86,10 @@ import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 
 /-! # Completeness of internal Hom over completed integral coefficients
 
-Source: Bhatt--Scholze 3.4.11; Stacks 08JB, 099B
-(blueprint: lem-pur-integral-scalar-internal-hom-complete).
+## References
+
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, 3.4.11
+* Stacks Project, Tags 08JB and 099B
 -/
 
 @[expose] public noncomputable section
@@ -250,13 +252,7 @@ private theorem scalarSfLocalIff (W : AlgebraicGeometry.Scheme.{u})
   exact hi.trans (ht.out 1 2)
 
 /-- Ambient internal Hom into a complete object is complete; constructibility of the
-Hom is not assumed. Source: Bhatt--Scholze 3.4.11; Stacks 08JB, 099B
-(blueprint: lem-pur-integral-scalar-internal-hom-complete).
-Proof: restrict to every slice. Tensor-Hom currying identifies Hom from R[1/t]
-into Hom(M,N) with Hom from M into Hom(R[1/t],N), which vanishes by completeness
-of N. The local Koszul completion reflector identifies this vanishing with
-invertibility of the canonical completion unit. Its Roos triangle is the specified
-strict reduction-tower triangle, giving precisely IsSfDerivedComplete. -/
+Hom is not assumed. -/
 theorem integralScalarInternalHomComplete (W : AlgebraicGeometry.Scheme.{u})
     (M N : DerivedCategory (integralTowerModules l E W))
     (hN : IsSfDerivedComplete l E W N) :

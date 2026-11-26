@@ -20,9 +20,9 @@ compact-support base change `Ex_!(c)`: then the mate of `Ex_!(c)⁻¹` is the ca
 `Lg'^* Lf^* ≅ Lf'^* Lg^*`, and invertibility of mates does not depend on the choice of the
 adjunctions.
 
-This is the formal part of the étale case of the proof of blueprint
-`proposition-exceptional-inverse-image-smooth-morphism--6`: for an étale `f` the derived pullback is
-right adjoint to the compactly supported direct image.
+This is the formal part of the étale case of the base change of the exceptional inverse image
+along a smooth morphism: for an étale `f` the derived pullback is right adjoint to the compactly
+supported direct image.
 
 ## Main statements
 
@@ -107,8 +107,7 @@ quasi-compact `f'`, let `c` be the chosen compactification of `f` and `c'` its b
 Suppose that `Rf_!(c) ⊣ Lf^*` and `Rf'_!(c') ⊣ Lf'^*`, with units `η` and `η'` compatible with
 the compact-support base change: `η'_{Lg'^* N}` is `Lg'^* η_N` followed by the canonical
 isomorphism `Lg'^* Lf^* ≅ Lf'^* Lg^*` and `Lf'^*` of `Ex_!(c)`. Then the base change map
-`Lg'^* Rf^! ⟶ Rf'^! Lg^*` is an isomorphism: the mate of `Ex_!(c)⁻¹` is the canonical
-isomorphism (`CategoryTheory.mateEquiv_eq_of_unit`). -/
+`Lg'^* Rf^! ⟶ Rf'^! Lg^*` is an isomorphism. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_unit (sq : IsPullback g' f' f g)
     (adj₁ : Rf_!(HasCompactification.compactification f)[ModuleCat.{u + 1} Λ] ⊣
       L((f)^*[ModuleCat.{u + 1} Λ]))

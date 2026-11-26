@@ -14,8 +14,8 @@ public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 Let `k₀` be a finite field, `X` a quasi-compact `k₀`-scheme locally of finite type, `i : Z ⟶ X` a
 closed immersion and `j : U ⟶ X` the complementary quasi-compact open immersion, over `k₀`, and
 let `X̄`, `Z̄`, `Ū` be the geometric fibres, with the base changes `ī`, `j̄` and the geometric
-Frobenii `Fr`. This file proves the Weil clause of blueprint
-`lemma-local-cohomology-right-adjoint--2` at the stage `E`: a Weil structure on `K ∈ Dᵇc(X̄, E)` is
+Frobenii `Fr`. This file proves the Weil-equivariance of the local cohomology adjunctions at the
+stage `E`: a Weil structure on `K ∈ Dᵇc(X̄, E)` is
 an isomorphism `θ : Fr^* K ≅ K`, where `Fr^* = R(Fr⁻¹)_*`, i.e. `(K, θ)` is an object of
 `CategoryTheory.Endofunctor.IsoAlgebra`; then
 
@@ -79,29 +79,27 @@ include hij in
 lemma range_geometricFiberMap_eq_compl : Set.range (ī).base = (Set.range (j̄).base)ᶜ :=
   (Scheme.Hom.isCompl_range_geometricFiberMap i j _ _ hij).eq_compl
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause, stage `E`): the adjunction
-`j̄^* ⊣ Rj̄_*` on `Dᵇc(-, E)` of the geometric fibres lifts to objects with Weil structure
-`θ : Fr^* K ≅ K`, with the original unit and counit. -/
+/-- The adjunction `j̄^* ⊣ Rj̄_*` on `Dᵇc(-, E)` of the geometric fibres lifts to objects with
+Weil structure `θ : Fr^* K ≅ K`, with the original unit and counit. -/
 noncomputable def geometricFrobeniusUpperStarIsoAlgebraAdjunction :=
   boundedConstructibleRationalUpperStarIsoAlgebraAdjunction M I a[X] Fr⁻¹[X] ī j̄
     (range_geometricFiberMap_eq_compl i j hij) (ī ≫ a[X]) (j̄ ≫ a[X]) Fr⁻¹[Z] Fr⁻¹[U]
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause, stage `E`): `Rī^!` carries
-Weil structures, and the adjunction `ī_* ⊣ Rī^!` on `Dᵇc(-, E)` of the geometric fibres lifts to
-objects with Weil structure `θ : Fr^* K ≅ K`, with the original unit and counit. -/
+/-- `Rī^!` carries Weil structures, and the adjunction `ī_* ⊣ Rī^!` on `Dᵇc(-, E)` of the
+geometric fibres lifts to objects with Weil structure `θ : Fr^* K ≅ K`, with the original unit
+and counit. -/
 noncomputable def geometricFrobeniusClosedUpperShriekIsoAlgebraAdjunction :=
   boundedConstructibleRationalClosedUpperShriekIsoAlgebraAdjunction M I a[X] Fr⁻¹[X] ī j̄
     (range_geometricFiberMap_eq_compl i j hij) (ī ≫ a[X]) (j̄ ≫ a[X]) Fr⁻¹[Z] Fr⁻¹[U]
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause, stage `E`): for a Weil complex
-`(K, θ : Fr^* K ≅ K)` on the geometric fibre `X̄` at the stage `E`, the three arrows of the
-closed-support triangle `ī_* Rī^! K ⟶ K ⟶ Rj̄_* j̄^* K ⟶ (ī_* Rī^! K)[1]` are Weil-equivariant:
-the Weil structures of the vertices form an isomorphism of triangles from its image under
-`Fr^*`. -/
+/-- For a Weil complex `(K, θ : Fr^* K ≅ K)` on the geometric fibre `X̄` at the stage `E`, the
+three arrows of the closed-support triangle `ī_* Rī^! K ⟶ K ⟶ Rj̄_* j̄^* K ⟶ (ī_* Rī^! K)[1]`
+are Weil-equivariant: the Weil structures of the vertices form an isomorphism of triangles from
+its image under `Fr^*`. -/
 noncomputable def geometricFrobeniusClosedSupportTriangleIso
     (K : IsoAlgebra (boundedConstructibleRationalRightDerivedLowerStar M I a[X] Fr⁻¹[X])) {w}
     (hw : boundedConstructibleRationalClosedSupportTriangle M a[X] ī j̄

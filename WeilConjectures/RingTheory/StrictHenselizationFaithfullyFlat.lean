@@ -16,9 +16,19 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 /-!
 # Faithful flatness of strict henselization
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07QM, part (1), using the
-strict henselization of Algebra, Lemma Tag 04GP
-(blueprint: lem-sc-strict-henselization-faithfully-flat).
+The canonical map from a local ring `R` to its strict henselization, presented as the colimit
+of étale residue triples, is faithfully flat.
+
+## Implementation details
+
+Each ring in the diagram is étale, hence flat, over `R`, so the filtered colimit is flat over
+`R`. The colimit is local and its maximal ideal contracts to that of `R`, so the map is a flat
+local homomorphism of local rings, hence faithfully flat.
+
+## References
+
+* [Stacks, Tag 07QM], part (1)
+* [Stacks, Tag 04GP]
 -/
 
 @[expose] public section
@@ -80,23 +90,7 @@ private noncomputable def flatTriplesToPointedRingsFullyFaithful
   preimage_map f := by ext; rfl
 
 /-- The canonical map from a local ring to the colimit of its etale residue triples,
-pointed in a separable closure of its residue field, is faithfully flat.
-Source: Stacks Project, More on Algebra, Tag 07QM (1), and Algebra, Tag 04GP.
-(blueprint: lem-sc-strict-henselization-faithfully-flat).
-
-Proof:
-1. Apply lem-weil-pbc-strict-henselization-triples at the maximal ideal. Its colimit
-is the strict henselization, and the compatibility of the structure maps identifies
-`ρ` with the canonical map from `R` to this colimit. The chosen residue embedding
-is the one specified by the algebra structure on `K`.
-2. Each ring in the diagram is etale over `R`, hence flat by
-lem-weil-pbc-etale-algebra-flat. The underlying module of the ring colimit is the
-filtered colimit of these flat modules, so lem-weil-pbc-filtered-colimit-flat-modules
-makes the colimit flat over `R`.
-3. By lem-weil-pbc-strict-henselization-triples the colimit is local, and its maximal
-ideal contracts to the maximal ideal of `R`. Thus `ρ` is a local ring map. A flat
-local homomorphism of local rings is faithfully flat, by
-lem-pc-local-flat-faithful-flat-reflects-surjective. -/
+pointed in a separable closure of its residue field, is faithfully flat. -/
 theorem strictHenselization_faithfullyFlat
     (R : CommRingCat.{u}) [IsLocalRing R] (p : Spec R)
     (hp : p.asIdeal = IsLocalRing.maximalIdeal R)

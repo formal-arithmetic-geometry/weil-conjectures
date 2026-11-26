@@ -17,6 +17,10 @@ import WeilConjectures.SmoothPurity.Frobenius.FrobeniusIntegralRootTransportModu
 This file isolates the categorical step that turns an additive semilinear map into a
 module isomorphism. The root-limit comparison and its tensor formula are handled by
 the parent transport theorem.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -38,17 +42,8 @@ attribute [local implicit_reducible] PurCompactSupport.completed
   completedIntegralCommRingSheafUnrestricted
 
 /--
-The module adjunction transports an additive semilinear isomorphism. This is the
-categorical middle of the integral root transport argument; it does not mention the
-root comparison or any tensor formula.
-Source: Stacks Project, Modules on Sites, Tag 03EL, and the module adjunction
-constructed in `ProEtaleOperationsCanonicalAdjunction`.
-Proof: regard the additive map as a map into the direct image by its completed
-coefficient semilinearity. Transpose it under the canonical module adjunction. The
-underlying additive map is invertible, so reflection of isomorphisms along the
-forgetful sheaf functor makes the transpose invertible. The adjunction unit identity
-then gives the displayed sectionwise formula.
-(blueprint: new-weil-frobenius-integral-root-transport-module-glue). -/
+The module adjunction transports an additive semilinear isomorphism to a module isomorphism
+with the displayed sectionwise formula. -/
 theorem frobeniusIntegralRootTransport_moduleGlue
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

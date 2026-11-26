@@ -19,8 +19,19 @@ import Mathlib.Tactic.NoncommRing
 /-!
 # Monic factorization from a lifted idempotent
 
-Source: Stacks Project, Tag 09XI, proof of (3) implies (1)
-(blueprint: lem-weil-pbc-idempotent-splitting-monic-factorization).
+An idempotent of `A[X]/(f)` lifting the Chinese remainder idempotent of a coprime factorization
+`f ≡ g₀ h₀` modulo `I` gives a monic factorization `f = g h` lifting `g₀ h₀`.
+
+## Implementation details
+
+With `T` the matrix of multiplication by `X` and `P` that of the idempotent `e` in the power
+basis, `g` and `h` are `Matrix.idempotentCharpoly T P` and `Matrix.idempotentCharpoly T (1 - P)`.
+They are monic by the constant-rank argument over a Jacobson ideal, and `g h` is the
+characteristic polynomial of `T`, which is `f`.
+
+## References
+
+* [Stacks, Tag 09XI] (proof of (3) implies (1))
 -/
 
 @[expose] public section
@@ -29,26 +40,10 @@ universe u
 
 namespace Polynomial
 
-/-- Stacks Project, Tag 09XI, proof of (3) implies (1): an idempotent of `A[X]/(f)`
-lifting the Chinese remainder element `(1, 0)` yields a monic factorization lifting `g₀ * h₀`.
-The two `AdjoinRoot.map` conditions are precisely its residues in the Chinese remainder
-factors, so they express that its reduction is the specified idempotent of `B/IB`.
-(blueprint: lem-weil-pbc-idempotent-splitting-monic-factorization)
-
-Proof:
-1. Use the power basis of `AdjoinRoot f`. Let T be the matrix of multiplication by X
-   and P the matrix of multiplication by e. Idempotence of e gives P²=P, and P commutes
-   with T; the same holds for the complementary projection 1-P.
-2. Define g and h by the explicit determinants `Matrix.idempotentCharpoly T P` and
-   `Matrix.idempotentCharpoly T (1-P)`. The Chinese remainder calculation in
-   `adjoinRoot_idempotentCharpoly_map` identifies their reductions with g₀ and h₀.
-3. Apply `Matrix.idempotentCharpoly_monic_of_map_monic` to both projections. This is
-   the constant-rank argument over a Jacobson ideal, and proves g and h monic.
-4. `Matrix.idempotentCharpoly_mul_complement` gives g*h=T.charpoly. The characteristic
-   polynomial of multiplication by the power-basis generator is its minimal polynomial;
-   `minpoly.unique'` and the power-basis degree bound identify this with f. In the zero
-   ring the equality holds directly.
-5. Assemble the monicity, product equality, and reduction equalities. -/
+/-- An idempotent of `A[X]/(f)` lifting the Chinese remainder element `(1, 0)` yields a monic
+factorization lifting `g₀ * h₀`. The two `AdjoinRoot.map` conditions are precisely its residues
+in the Chinese remainder factors, so they express that its reduction is the specified idempotent
+of `B/IB`. -/
 theorem exists_monic_factorization_of_idempotent
     {A : Type u} [CommRing A] (I : Ideal A) (hI : I ≤ Ideal.jacobson (⊥ : Ideal A))
     (f : A[X]) (hf : f.Monic) (g₀ h₀ : (A ⧸ I)[X])

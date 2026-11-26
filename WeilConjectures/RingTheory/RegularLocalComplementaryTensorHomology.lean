@@ -10,12 +10,21 @@ public import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 
-/-! Tensor Koszul homology for a complementary regular quotient.
-Source: Stacks Project, `intersection.tex`, Tag 0B1I.
-(blueprint: new-d3-regular-local-complementary-tensor-homology)
+/-!
+# Tensor Koszul homology for a complementary regular quotient
 
-The statement isolates the base-change step converting regularity of the images of a
-parameter sequence in `A ⧸ J` into acyclicity of the tensor Koszul complex over `A`.
+If the images of a sequence `g` in `A ⧸ J` form a regular sequence, the tensor Koszul complex
+`K_•(g) ⊗[A] (A ⧸ J)` has no positive homology.
+
+## Implementation details
+
+The images of `g` are weakly regular on `A ⧸ J` exactly when `g` is weakly regular on it as an
+`A`-module (`isWeaklyRegular_map_algebraMap_iff`), and weakly regular sequences are
+Koszul-regular (`isKoszulRegularOn_of_isWeaklyRegular`).
+
+## References
+
+* [Stacks, Tag 0B1I]
 -/
 
 @[expose] public section
@@ -30,18 +39,7 @@ open scoped TensorProduct
 namespace RingTheory
 
 /-- The tensor Koszul complex on a sequence whose images form a regular sequence in a
-quotient has no positive homology.
-Source: Stacks Project, `intersection.tex`, Tag 0B1I.
-(blueprint: new-d3-regular-local-complementary-tensor-homology)
-
-Proof: `A` acts on the `A`-module `A ⧸ J` through the quotient map, so the images of
-`g` form a weakly regular sequence on the `A ⧸ J`-module `A ⧸ J` exactly when `g` is
-weakly regular on `A ⧸ J` as an `A`-module (`isWeaklyRegular_map_algebraMap_iff`).
-A regular sequence is weakly regular, and a weakly regular sequence on a module `M` is
-`M`-Koszul-regular (`isKoszulRegularOn_of_isWeaklyRegular`,
-lem-weil-pbc-regular-sequence-koszul-regular): the tensor Koszul complex
-`K_•(g) ⊗[A] M` has zero homology in every nonzero degree. Take `M = A ⧸ J`.
--/
+quotient has no positive homology. -/
 theorem regularLocal_complementary_tensor_homology_vanishing
     (A : Type u) [CommRing A] (r : ℕ) (J : Ideal A) (g : Fin r → A)
     [IsRegularLocalRing (A ⧸ J)]

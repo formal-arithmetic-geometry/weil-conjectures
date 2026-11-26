@@ -13,8 +13,20 @@ import WeilConjectures.AlgebraicGeometry.NativeFrobenius.NativeFrobeniusHomNatur
 
 /-! # An ordinary coefficient model intertwining geometric Frobenius
 
-Source: the underived coefficient comparison in the internal-Hom paragraph of
-prose-10-20; Stacks 00YV and 03D6.
+Ordinary native adic sheaves admit a small sectionwise coefficient realization, together with
+an internal Hom comparison, intertwining the Frobenius pullback.
+
+## Implementation details
+
+The model is built on the bounded pro-étale site of the geometric fibre, made small with
+`AsSmall`, with inverse geometric Frobenius acting by postcomposition; the coefficient ring is
+the restriction of `comparisonRing l`. Only ordinary modules occur: there are no structure maps
+`θ` and no fixed-pair categories. The Hom comparison `sigmaHom` of a presentation is normalized
+uniquely by evaluation (`sigmaHom_evaluation`).
+
+## References
+
+* Stacks Project, Tags 00YV and 03D6.
 -/
 
 @[expose] public section
@@ -26,10 +38,8 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- Ordinary module sheaves with their Frobenius comparison. This is data about
-ordinary sheaves, before forming any category of fixed pairs.
-Source: native ringed presentation, step 1
-(blueprint: lem-sf-native-frobenius-ringed-model). -/
+/-- Ordinary module sheaves with their Frobenius comparison, before forming any category of
+fixed pairs. -/
 structure NativeFrobeniusRingedModel
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] where
@@ -68,9 +78,7 @@ structure NativeFrobeniusRingedModel
     E.functor.map (SheafOfModules.homObjMap (R := R) f g) ≫ (hom M' N').hom =
       (hom M N).hom ≫ (Mod.ihomMap (E.functor.map f)).app _ ≫
         (ProEtale.AdicSheaf.ihom (E.functor.obj M')).map (E.functor.map g)
-  /-- The ordinary Hom comparison commutes with translation. Only ordinary modules
-  occur here: there are no structure maps theta and no fixed-pair categories.
-  The presentation's sigmaHom is normalized uniquely by evaluation. -/
+  /-- The ordinary Hom comparison commutes with translation. -/
   hom_frobenius (P : Presentation J s R a) (M N : Modules R) :
     (WeilSheaf.frobeniusPullback k₀ l X).map (hom M N).hom ≫
         (ProEtale.adicLowerStarCompIhomIso l
@@ -86,40 +94,7 @@ attribute [instance] NativeFrobeniusRingedModel.category NativeFrobeniusRingedMo
   NativeFrobeniusRingedModel.continuous NativeFrobeniusRingedModel.inverseContinuous
 
 /-- Ordinary native adic sheaves have a small sectionwise coefficient realization
-intertwining their Frobenius pullback.
-
-Source: prose-10-20, internal-Hom paragraph; native ringed
-presentation step 1; Stacks 00YV and 03D6
-(blueprint: lem-sf-native-frobenius-ringed-model).
-
-Proof: take the bounded pro-etale site of the geometric fiber and lift its hom
-sets to universe u+1 with AsSmall. Transport the pro-etale topology along the
-resulting equivalence. Postcomposition by inverse geometric Frobenius is an
-orbit-stable autoequivalence and preserves covers, because domains and underlying
-arrows of a covering family are unchanged. Pullbacks are transported from the
-bounded site. Restrict comparisonRing l to this small site. Its sections are the
-native locally finite continuous coefficient functions. The coefficient
-identification under translation is the identity on those functions; in
-particular it preserves their finite field of definition. Combine the inverse
-small-site module restriction equivalence with the inverse of the native
-section-module equivalence comparisonModuleFunctor. This gives E, which is
-additive since each comparison preserves the actual section maps. For the
-comparison of pullbacks, identify postcomposition by Frobenius with base change
-by inverse Frobenius using the pullback universal property. On coefficient
-sections this identification is the same precomposition of functions as in the
-native adicLowerStar construction. The native action on tensor generators is
-therefore the sectionwise scalar action after transport. The section-module
-fully faithful functor lifts these section identifications to module
-isomorphisms. Naturality follows from the unchanged section maps. These give
-comparison with the displayed direction. All constructions apply to arbitrary
-modules, including zero modules, and to an empty geometric fiber. The ordinary
-Hom comparison is the transpose of evaluation through the tensor comparison.
-Full faithfulness and both tensor-Hom adjunctions prove it invertible;
-composition of local maps proves its two-variable naturality. On translated
-slices both sides of hom_frobenius send a local map to the same translated local
-map with its source and target relabeled by comparison. Evaluation determines
-P.sigmaHom uniquely, by P.sigmaHom_evaluation; thus this square holds for every
-presentation P. No fixed-pair category or equivariant Hom assertion is used. -/
+intertwining their Frobenius pullback. -/
 theorem native_frobenius_ringed_model
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :

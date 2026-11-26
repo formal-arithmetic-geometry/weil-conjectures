@@ -10,7 +10,8 @@ import all WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTens
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+Naturality of the derived pullback factorization followed by the Roos bridge, used in the
+quotient normalization transport.
 -/
 
 @[expose] public noncomputable section
@@ -84,11 +85,7 @@ private theorem cochainRoos_naturality {X : Scheme.{u}}
   rw [ScalarExtensionTower.roosBridge_eq l E X ρ]
   exact ηr.hom.naturality a
 
-/-- Naturality of the derived pullback factorization followed by the Roos bridge.
-Source: the quotient normalization transport step.
-(blueprint: lem-pur-completed-quotient-derived-roos-naturality).
-Proof: compose the natural derived factorization isomorphisms with the Roos
-comparison, and evaluate naturality of that composite on the cochain map. -/
+/-- Naturality of the derived pullback factorization followed by the Roos bridge. -/
 theorem completedQuotientDerivedRoosNaturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     (ρ : IntegralComparisonRoosModel l E X)
     {C D : StrictQuotient.Complex l E Y} (a : C ⟶ D) :

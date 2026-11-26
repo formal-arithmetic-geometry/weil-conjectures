@@ -14,27 +14,28 @@ import WeilConjectures.RingTheory.FiniteFreeMapResidueLocalizationStrong
 /-!
 # Residue-field rank criterion for maps of finite free modules
 
-Source: Stacks Project, Algebra, Tag 00O0, Lemma cokernel-flat, parts (1) and (3)
-(blueprint: lem-pc-finite-free-map-residue-localization).
+A map of finite free modules that is injective (resp. bijective) on the residue field at a
+prime `p` becomes injective with finite free cokernel (resp. bijective) after inverting an
+element outside `p`.
+
+## Implementation details
+
+Represent `u` by a matrix. In the injective case a maximal minor has determinant `f ∉ p`, and
+after localizing at `f` row and column operations bring the matrix to the block form `[I_m; 0]`.
+In the bijective case the determinant becomes a unit and the adjugate gives an inverse.
+
+## References
+
+* [Stacks, Tag 00O0] (1), (3)
 -/
 
 @[expose] public section
 
 namespace Module
 
-/-- Source: Stacks Project, Algebra, Tag 00O0, Lemma `cokernel-flat`, parts (1) and (3),
-finite-free matrix calculation (blueprint: lem-pc-finite-free-map-residue-localization).
-
-For the injective-fibre clause, represent `u` by an `n`-by-`m` matrix. Injectivity over
-`p.ResidueField` gives a nonzero `m`-by-`m` minor; its determinant `f` is outside `p`.
-After localizing at `f`, elementary row and column operations put the matrix in the
-block form `[I_m; 0]`. Hence the localized map is injective and its cokernel is the
-free module of rank `n - m`; exactness of localization identifies this with the
-displayed quotient, so it is finite and free.
-
-For the bijective-fibre clause, the matrix is square and its determinant is outside
-`p`. Localizing at that determinant makes it a unit, and the adjugate matrix gives a
-two-sided inverse, so the localized map is bijective. -/
+/-- Let `u : R^m → R^n` and let `p` be a prime of `R`. If `u` is injective on the residue field
+of `p`, then after inverting some `f ∉ p` it is injective with finite free cokernel; if it is
+bijective on the residue field, then it is bijective after inverting some `f ∉ p`. -/
 theorem finiteFreeMap_residue_localization
     {R : Type*} [CommRing R] (m n : ℕ) (u : (Fin m → R) →ₗ[R] (Fin n → R))
     (p : Ideal R) [p.IsPrime] :

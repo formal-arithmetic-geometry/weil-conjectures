@@ -16,7 +16,12 @@ import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorMo
 
 /-! # Associativity on simultaneous resolving representatives
 
-Source: Stacks 07A4 and 0FPT.
+We paste four binary representative squares and the ordinary associativity equation to obtain
+associativity on simultaneous resolving representatives.
+
+## References
+
+* [Stacks, Tags 07A4, 0FPT]
 -/
 
 @[expose] public noncomputable section
@@ -247,9 +252,7 @@ include cB cA hε hU hκ hμ
 attribute [local irreducible] coefficientTotalTensor SheafOfModules.monoidalCategory
 
 -- Paste the four model squares without unfolding localization constructions.
-/-- Paste four binary representative squares and the ordinary associativity equation.
-Source: Stacks 07A4 and 0FPT.
-(blueprint: lem-coef-tensor-associativity-representatives). -/
+/-- Paste four binary representative squares and the ordinary associativity equation. -/
 theorem coefficientTensorAssociativityOnRepresentatives
     (P Q N : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
     (hP : P.IsKFlatIndependentCoefficients)

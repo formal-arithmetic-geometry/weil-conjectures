@@ -16,6 +16,12 @@ public import Mathlib.RingTheory.TensorProduct.Quotient
 If `A = colim A_i` is a filtered colimit of commutative rings and `B` is a finitely presented
 `A`-algebra, then `B ≅ A ⊗[A_i] B_i` for some `i` and some finitely presented `A_i`-algebra
 `B_i`.
+
+## Implementation details
+
+Write `B ≅ A[x_1, …, x_n] / (f_1, …, f_m)`. The finitely many coefficients of the `f_j` come
+from a single stage `A_i`; lift the `f_j` to `g_j ∈ A_i[x_1, …, x_n]` and put
+`B_i = A_i[x] / (g_j)`. Base change commutes with polynomial rings and with quotients.
 -/
 
 @[expose] public section
@@ -56,14 +62,9 @@ namespace Algebra
 variable {J : Type u} [SmallCategory J] [IsFiltered J] {F : J ⥤ CommRingCat.{u}}
   {c : Cocone F}
 
-/-- Blueprint `lem-kun-fp-algebra-descent`: let `A = colim_{i ∈ J} A_i` be a filtered colimit
-of commutative rings and `B` a finitely presented `A`-algebra. Then there are a stage `i` and
-a finitely presented `A_i`-algebra `B_i` with an isomorphism of `A`-algebras
-`A ⊗[A_i] B_i ≅ B`.
-
-Proof: write `B ≅ A[x_1, …, x_n] / (f_1, …, f_m)`. The finitely many coefficients of the `f_j`
-come from a single stage `A_i`; lift the `f_j` to `g_j ∈ A_i[x_1, …, x_n]` and put
-`B_i = A_i[x] / (g_j)`. Base change commutes with polynomial rings and with quotients. -/
+/-- Let `A = colim_{i ∈ J} A_i` be a filtered colimit of commutative rings and `B` a finitely
+presented `A`-algebra. Then there are a stage `i` and a finitely presented `A_i`-algebra `B_i`
+with an isomorphism of `A`-algebras `A ⊗[A_i] B_i ≅ B`. -/
 theorem exists_finitePresentation_tensorProduct_algEquiv (hc : IsColimit c) (B : Type u)
     [CommRing B] [Algebra c.pt B] [FinitePresentation c.pt B] :
     ∃ i : J, letI : Algebra (F.obj i) c.pt := (c.ι.app i).hom.toAlgebra

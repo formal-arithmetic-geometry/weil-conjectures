@@ -11,8 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Direct.ProEtaleDirectImage
 
 /-! # The ordinary finite evaluation square for section-normalized pullback
 
-Source: Stacks Project, Tag 03D8, and the ordinary adjunction unit normalizations.
-(blueprint: lem-pur-ordinary-system-pullback-compositor-evaluation).
+## References
+
+* Stacks Project, Tag 03D8.
 -/
 
 @[expose] public noncomputable section
@@ -292,24 +293,7 @@ attribute [local irreducible] pullbackTensorSequenceInverseEvaluation
   sfIntrinsicConstantModuleAdjunction sfIntrinsicPullbackComp
 
 /-- Ordinary evaluation commutes with the specified section-normalized compositor.
-This concerns module sheaves, without complexes or derived localization.
-Source: Stacks Project, Tag 03D8; steps 1 and 2 of the parent proof.
-(blueprint: lem-pur-ordinary-system-pullback-compositor-evaluation).
-Proof: the section equation of c identifies its direct compositor with restriction
-along the canonical iterated-base-change isomorphism. Extensionality of module-sheaf
-morphisms and then natural transformations proves that identification. Transpose
-under the composite ordinary adjunction and use c.conjugate to identify its left
-mate. The inverse-evaluation comparisons are fixed by their adjunction unit
-formulas. Apply ordinaryCompositionEvaluation for the canonical sequence and
-coefficient-module pullbacks: it is the equality obtained by transposing the two
-paths under the finite adjunctions and restricting along that same base-change map.
-The unit formulas identify its evaluation comparisons with those displayed here.
-Finally the unit characterization of pullbackTensorLevelIntrinsic transports this
-identity from the coefficient-module pullback to the intrinsic pullback, whose
-compositor is the conjugate of the same base-change restriction. Injectivity of
-adjunction hom equivalences gives the displayed ordinary square. This argument
-uses arbitrary sections, so applies to zero sheaves and n=0 without exceptions;
-identity scheme morphisms use the same adjunction unit equations. -/
+This concerns module sheaves, without complexes or derived localization. -/
 theorem ordinarySystemPullbackCompositorEvaluation
     (o : Operations l E) (c : Compositors l E o)
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (n : ℕ)

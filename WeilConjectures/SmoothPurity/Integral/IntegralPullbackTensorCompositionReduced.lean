@@ -13,18 +13,22 @@ public import WeilConjectures.TraceFormula.Integral.IntegralPullbackComposition
 import WeilConjectures.SmoothPurity.Integral.IntegralCanonicalPullbackTensorReduction
 import WeilConjectures.SmoothPurity.Integral.IntegralSystemCompositionIdentification
 
-/-! The reduced system form of integral pullback/tensor composition coherence.
+/-! # Reduced integral pullback/tensor composition coherence
 
-Source: Stacks 07A4 and 0941; the strict quotient-system calculation before reflection.
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced)
+The reduced system form of integral pullback/tensor composition coherence.
 
-The former finite-evaluation proof used a false joint-faithfulness assertion.
+## Implementation details
+
 `integralPullbackTensorCompositionReduced_of_systemLaw` compares whole strict-system
 representatives before localization: for every compositor whose reduction is the system
 compositor after the whole-system pullback comparisons, the equation reduces to the
 composition law of the coherent system pullback/tensor comparison, which descends from
 the strict cochain law. The compositor `pullbackTensorIntegralComposition`, chosen from
 `integralPullbackComposition`, has this normalization by the last clause of that theorem.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941
 -/
 
 @[expose] public noncomputable section
@@ -91,16 +95,7 @@ private theorem finiteSystemDerivedComposition_hom_app_sequence {X Y Z : Scheme.
     (finiteSystemDerivedComposition_eq l E h f)
   exact e
 
-/-- Reduced integral pullback/tensor composition equation for a system-normalized compositor.
-Source: Stacks 07A4 and 0941; quotient-system pure-tensor calculation.
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced)
-
-Proof: the reductions of the canonical integral pullback/tensor comparisons are the
-system comparisons conjugated by the whole-system pullback comparisons of
-`integralPullbackSystemComparison` and the reduction/tensor comparisons.
-The system comparisons obey the composition law for the system compositor, by descent of
-the strict cochain law. The hypothesis on `c` identifies its reduction with the system
-compositor; `reducedPullbackTensorComposition_of_systemLaw` combines these equations. -/
+/-- Reduced integral pullback/tensor composition equation for a system-normalized compositor. -/
 theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -173,14 +168,7 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
     (integralSystemTensorComparison_comp l E h f) M N
   exact key
 
-/-- Reduced form of the integral pullback/tensor composition equation.
-Source: Stacks 07A4 and 0941; quotient-system pure-tensor calculation.
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced)
-
-Proof: the recorded compositor `pullbackTensorIntegralComposition` is the one chosen from
-`integralPullbackComposition`, whose last clause says that its reduction is the system
-compositor after the whole-system pullback comparisons. This is the hypothesis of
-`integralPullbackTensorCompositionReduced_of_systemLaw`. -/
+/-- Reduced form of the integral pullback/tensor composition equation. -/
 theorem integralPullbackTensorCompositionReduced {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]

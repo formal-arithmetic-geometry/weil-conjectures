@@ -13,8 +13,14 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorCoheren
 
 /-! # Scalar extension preserves the signed symmetry of coherent systems
 
-Source: Stacks Project, Tag 07A4 and the Koszul sign rules, Tag 0FNG.
-(blueprint: lem-pur-system-scalar-tensor-braiding).
+## Implementation details
+
+No completed tensor, constructible scalar comparison or integral braiding occurs in
+`systemScalarTensorBraiding`, and no derived evaluations are used to detect equality.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0FNG.
 -/
 
 @[expose] public noncomputable section
@@ -154,28 +160,7 @@ private theorem scalarSignedTotal (P Q : Complex l E W) :
 
 end Chain
 
-/-- The normalized whole-system scalar tensorator preserves signed symmetry.
-No completed tensor, constructible scalar comparison or integral braiding occurs.
-
-Source: Stacks, more-algebra.tex, item-flip-tensor-product; Stacks 07A4, scalar tensor comparison;
-step 2 of lem-pur-integral-braiding-scalar-extension-square-reduced.
-(blueprint: lem-pur-system-scalar-tensor-braiding).
-
-Proof: take simultaneous flat-term K-flat representatives P,Q on the ringed
-sequence site. By DerivedSigmaModel the derived scalar tensorator is the
-localization of the strict scalar tensorator, conjugated by the fixed tensor
-model isomorphisms and scalar counits. By pullbackTensorBraiding_existsUnique
-the system braidings are the localizations of the signed total swaps with those
-same tensor models. On a homogeneous local tensor of degrees p,q the two strict
-routes both interchange the two inputs and multiply by (-1)^(pq). Scalar
-coefficients have degree zero, and tensor balancing moves the coefficient to
-the other factor, so the two routes agree for every scalar. These generators
-span the sheafified tensor and each total-complex coproduct summand. Thus the
-strict chain maps agree, including all sequence-site transitions. Localize and
-cancel the tensor model maps and scalar counits. Naturality transports the
-equality from the representatives to arbitrary system objects. Zero objects,
-identity coefficient maps, degree-zero inputs and ramification satisfy the same
-formula; no separate derived evaluations are used to detect equality. -/
+/-- The normalized whole-system scalar tensorator preserves signed symmetry. -/
 theorem systemScalarTensorBraiding
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L]

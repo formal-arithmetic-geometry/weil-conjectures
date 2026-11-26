@@ -11,9 +11,18 @@ import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryTensorModelResolu
 
 /-! # Resolution transport data for ordinary tensor models
 
-Source: Stacks 06YS, 06YU, 0FPT; blueprint step 1 of
-`lem-sf-native-weil-tensor-ringed-derived-square-ordinary-resolution-extension`.
-(blueprint: lem-sf-native-weil-tensor-resolution-model-data)
+## Implementation details
+
+The resolved model is obtained from the degreewise-epimorphic K-flat resolution supplied by
+`CochainComplex.exists_isKFlatResolutionIndependentCoefficients`: tensoring its augmentation
+with a K-flat first input is a quasi-isomorphism, and the supplied K-flat model is composed
+with the inverse of its localization. Independence of two resolutions gives the restriction
+equation, and the same construction on a common K-flat roof supplies the lift property used
+by the naturality theorem.
+
+## References
+
+* Stacks Project, Tags 06YS, 06YU and 0FPT
 -/
 
 @[expose] public section
@@ -23,21 +32,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-/-- The model and its comparison equations obtained by resolving the second input.
-
-Source: Stacks Tags 06YS and 06YU, the K-flat replacement and resolution-comparison
-paragraph in the ordinary tensor construction (blueprint:
-`lem-sf-native-weil-tensor-resolution-model-data`).
-
-Proof plan: choose the degreewise-epimorphic K-flat resolution supplied by
-`CochainComplex.exists_isKFlatResolutionIndependentCoefficients`.  Tensoring its
-augmentation with a K-flat first input is a quasi-isomorphism, so its localized
-map is invertible.  Compose the supplied K-flat model with this inverse to define
-the resolved model.  The localization equations give the displayed transport
-identity.  If the second input is itself K-flat, independence of two resolutions
-and the supplied K-flat naturality square identify this composite with the given
-model, yielding the restriction equation.  The same construction on a common
-K-flat roof supplies the lift property used by the naturality theorem. -/
+/-- The model and its comparison equations obtained by resolving the second input. -/
 theorem native_ordinary_tensor_model_resolution_data
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×

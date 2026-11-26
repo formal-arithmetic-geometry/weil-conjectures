@@ -13,6 +13,20 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 
 This is solely the exactness and shift part of Zheng, Construction 6.6.
 The quotient functors, adjunction, and inclusion maps are already explicitly constructed.
+
+## Implementation details
+
+Each integral left shift is localized through the actual localization comparison using
+canonical rationalization shifts, and `sfLocalizationShiftDescent` descends them to the common
+left morphism; every distinguished triangle is isomorphic to an included finite-stage triangle.
+The right adjoint receives the induced adjoint shift. To recover the supplied finite shifts,
+each endpoint inclusion shift is corrected by localizing its composite with the supplied
+rationalization shift; `P.shiftX` and `P.shiftY` make these corrections independent of the
+compactification. No new functor, adjunction or comparison is chosen.
+
+## References
+
+* [Zheng, Construction 6.6]
 -/
 
 @[expose] public noncomputable section
@@ -46,9 +60,7 @@ variable (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
 
 /-- Shift and exactness structures on the explicitly constructed pair functors.
 There are no functors, adjunctions, comparison maps or transition equations to choose here.
-Endpoint inclusion shifts are chosen once for the whole compactification family.
-Source: Zheng, Construction 6.6, common-field descent step 4
-(blueprint: lem-sf-rational-common-exact-shifts). -/
+Endpoint inclusion shifts are chosen once for the whole compactification family. -/
 structure RationalCommonShiftData where
   inclusionX (i : AlgebraicallyClosedCoefficients.Index l Ω) :
     (commonInclusion.{u, v} l Ω X i).CommShift ℤ
@@ -91,35 +103,7 @@ structure RationalCommonShiftData where
 
 /-- Normalize the shifts of the fixed quotient adjunction, retaining the supplied
 rational operation structures and using endpoint inclusion shifts independent of c.
-This theorem asserts only shift structures and their exactness and compatibility.
-Source: Zheng, Construction 6.6, common-field descent step 4
-(blueprint: lem-sf-rational-common-exact-shifts).
-
-Proof: localize each integral left shift through the actual localization comparison,
-using canonical integral rationalization shifts. Its inverse comparison commutes
-with shifts by the localization construction. Exactness follows from exact
-rationalization, arrow essential surjectivity, and the exactness criterion for
-precomposition with a localization. The finite normalized scalar square gives the
-transition hypothesis of sfLocalizationShiftDescent. Apply that theorem to the
-actual common left morphism. Every distinguished triangle is isomorphic to an
-included finite-stage triangle, so the finite exactness proves common exactness.
-Give the actual right adjoint the induced adjoint shift; the adjunction shift and
-triangulated-adjunction theorems prove its exactness and the unit/counit squares.
-
-To recover the supplied finite shifts, correct each endpoint inclusion shift by
-localizing its composite with canonical rationalization, now using the supplied
-rationalization shift. The localization component formula computes the corrected
-inclusion shift on integral representatives. Paste the normalized and supplied
-localization q shift squares with the normalized stage restriction square. A
-naturality calculation gives the restriction square with corrected inclusions and
-the supplied finite left shift. Residue Tor supplies integral representatives of
-every rational object. P.shiftX and P.shiftY permit evaluating the endpoint
-corrections at one compactification, independently of c. Finally the counit
-component formula identifies the right restriction with the mate of the left
-one, so mate_shift proves its square using the supplied finite right shift. If
-there is no compactification, use canonical inclusion shifts and the other fields
-are vacuous. The localization and integer CommShift laws include zero and negative
-shifts; no new functor, adjunction or comparison is chosen. -/
+This theorem asserts only shift structures and their exactness and compatibility. -/
 theorem exists_rational_common_exact_shifts :
     Nonempty (RationalCommonShiftData.{u, v} l Ω D hl A P) := by
   classical

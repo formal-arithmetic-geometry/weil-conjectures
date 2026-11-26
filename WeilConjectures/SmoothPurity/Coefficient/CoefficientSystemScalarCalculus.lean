@@ -242,16 +242,21 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 /-! # Scalar foundation for coherent coefficient-system evaluation
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YS, 0A95 and 0941;
-Injectives, Tag 079P (blueprint: lem-coef-derived-system-evaluation-calculus).
+This file contains the ordinary tower sections and limit projections, the scalar adjunction
+and quotient comparison, the finite reduction representative, and the uniquely normalized
+scalar tensor comparison used in the evaluation calculus of derived coefficient systems.
 
-This is the unchanged scalar foundation previously declared in
+## Implementation details
+
+This is the scalar foundation previously declared in
 `WeilConjectures.SmoothPurity.Supporting.CoefDerivedSystemEvaluationCalculus`,
-which publicly re-exports it.
-It contains the ordinary tower sections and limit projections, scalar adjunction
-and quotient comparison, finite reduction representative, and uniquely normalized
-scalar tensor comparison. The module split follows profiling and local unfolding
-improvements; no declaration statement or definition body is changed.
+which publicly re-exports it. The module split follows profiling and local unfolding
+improvements.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YS, 0A95 and 0941; Injectives, Tag 079P.
+* Stacks Project, Tags 03CZ, 03D7, 03DA, 03EK, 06YY, 07A4, 07A6, 08J9, 08JA, 0A98.
 -/
 
 @[expose] public section
@@ -285,8 +290,7 @@ attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExi
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- Derived termwise global sections, keeping the strict tower until after deriving.
-Source: Stacks 079P, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- Derived termwise global sections, keeping the strict tower until after deriving. -/
 noncomputable def coefficientTowerSections :
     (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ (ℕᵒᵖ ⥤ AddCommGrpCat.{max u (t+1)}) :=
   (Functor.whiskeringRight ℕᵒᵖ (scalarReductionSource l E W)
@@ -294,35 +298,26 @@ noncomputable def coefficientTowerSections :
       (coefficientOrdinarySections.{u, t+1, t} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W))
 
-/-- Global sections on towers are additive, component by component.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: at every level, Hom from the module unit preserves addition of maps.
-Natural transformations are equal when all components are equal. -/
+/-- Global sections on towers are additive, component by component. -/
 theorem coefficientTowerSections_additive : (coefficientTowerSections l E W).Additive := by
   unfold coefficientTowerSections
   infer_instance
 
-/-- Additivity needed for the total right derived tower-sections functor.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- Additivity needed for the total right derived tower-sections functor. -/
 noncomputable instance coefficientTowerSectionsAdditive :
     (coefficientTowerSections l E W).Additive := coefficientTowerSections_additive l E W
 
 attribute [local irreducible] preadditiveCoyoneda SheafOfModules.unit
 
-/-- The standard derived category of strict abelian-group towers.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The standard derived category of strict abelian-group towers. -/
 noncomputable instance coefficientAbTowersDerived :
     HasDerivedCategory (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) := HasDerivedCategory.standard _
 
-/-- The standard derived category of the mapping complexes' abelian groups.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The standard derived category of the mapping complexes' abelian groups. -/
 noncomputable instance coefficientAbDerived :
     HasDerivedCategory AddCommGrpCat.{r} := HasDerivedCategory.standard _
 
-/-- Abelian-group towers admit simultaneous K-injective resolutions.
-Source: Stacks 079P, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: identify strict towers with abelian sheaves on the sequence site over a point.
-This is Grothendieck abelian, so apply the functorial K-injective resolution theorem. -/
+/-- Abelian-group towers admit simultaneous K-injective resolutions. -/
 theorem coefficientAbTowers_haveKInjectives :
     Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) := by
   classical
@@ -350,46 +345,35 @@ theorem coefficientAbTowers_haveKInjectives :
         (f := fun f : P ⟶ Q ↦ f.app) (fun f g h ↦ NatTrans.ext h)⟩ }
   infer_instance
 
-/-- Simultaneous K-injectives for the mapping-complex towers.
-Source: Stacks 079P, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- Simultaneous K-injectives for the mapping-complex towers. -/
 noncomputable instance coefficientAbTowersKInjectives :
     Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) :=
   coefficientAbTowers_haveKInjectives.{r}
 
-/-- Inverse limit of abelian-group towers preserves addition.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: compose with every limit projection; the two maps become the same sum.
-The projections jointly detect equality. -/
+/-- Inverse limit of abelian-group towers preserves addition. -/
 theorem coefficientAbLimit_additive :
     (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) ⥤ AddCommGrpCat.{r}).Additive := by
   exact Functor.additive_of_preserves_binary_products _
 
-/-- Additivity for the mapping-complex total-limit functor.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- Additivity for the mapping-complex total-limit functor. -/
 noncomputable instance coefficientAbLimitAdditive :
     (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) ⥤ AddCommGrpCat.{r}).Additive :=
   coefficientAbLimit_additive.{r}
 
-/-- The actual total right derived limit on mapping-complex towers.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The actual total right derived limit on mapping-complex towers. -/
 noncomputable abbrev coefficientMappingLimit :
     DerivedCategory (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) ⥤
       DerivedCategory AddCommGrpCat.{r} :=
   (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) ⥤
     AddCommGrpCat.{r}).rightDerivedFunctor
 
-/-- The derived evaluation on strict mapping-complex towers.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The derived evaluation on strict mapping-complex towers. -/
 noncomputable abbrev coefficientMappingEvaluation (n : ℕ) :
     DerivedCategory (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) ⥤
       DerivedCategory AddCommGrpCat.{r} :=
   ((evaluation ℕᵒᵖ AddCommGrpCat.{r}).obj (op n)).mapDerivedCategory
 
-/-- Actual mapping-limit projections, fixed on simultaneous K-injective resolutions.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: apply the ordinary limit projection to a K-injective tower, use the exact
-localization comparison for evaluation, and descend by the derived universal property.
-Every tower has a K-injective representative; hence this characterization is unique. -/
+/-- Actual mapping-limit projections, fixed on simultaneous K-injective resolutions. -/
 theorem coefficientMappingProjection_exists (n : ℕ) :
     ∃! π : coefficientMappingLimit.{r} ⟶ coefficientMappingEvaluation.{r} n,
       ∀ (I : CochainComplex (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) ℤ) [I.IsKInjective],
@@ -442,23 +426,19 @@ theorem coefficientMappingProjection_exists (n : ℕ) :
   apply (cancel_mono (E.mapDerivedCategoryFactors.hom.app I)).mp
   exact (hπ' I).trans (hπ I).symm
 
-/-- The mapping-limit projection defined by its unique K-injective normalization.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The mapping-limit projection defined by its unique K-injective normalization. -/
 noncomputable def coefficientMappingProjection (n : ℕ) :=
   (coefficientMappingProjection_exists.{r} n).choose
 
-/-- The coherent global derived mapping-complex system H_W.
-It derives termwise global sections after exact scalar restriction of the actual
-sequence-site internal Hom, and hence retains all strict transition data.
-Source: Stacks 08JA, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The coherent global derived mapping-complex system `H_W`: termwise derived global
+sections of the exact scalar restriction of the sequence-site internal Hom. -/
 noncomputable def coefficientSequenceGlobalHom :
     (coefficientSequenceDerived l E W)ᵒᵖ × coefficientSequenceDerived l E W ⥤
       DerivedCategory (ℕᵒᵖ ⥤ AddCommGrpCat.{max u (t+1)}) :=
   coefficientSequenceInternalHom l E W ⋙ coefficientSequenceDerivedRestriction l E W ⋙
     (coefficientTowerSections l E W).rightDerivedFunctor
-/-- The base-change map is defined by evaluation and tensor-Hom transposition.
-This definition takes place in the derived categories, before any finite evaluation.
-Source: Stacks 08J9 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The base-change map in the derived categories, defined by evaluation and tensor-Hom
+transposition. -/
 def coefficientBaseChangeHom
     {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]
     {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
@@ -468,10 +448,8 @@ def coefficientBaseChangeHom
   SB.transpose _ (F.obj P) (F.obj Q)
     (μ.inv.app (HA.obj (op P, Q), P) ≫ F.map (SA.evaluation P Q))
 
-/-- Coherence of an evaluation-defined comparison, as actual system-map equations.
-The transpose equation includes evaluation; the composition equation concerns internal
-composition objects, and is stronger than preservation of composition on Hom sets.
-Source: Stacks 08J9, 0A98 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- Coherence of an evaluation-defined comparison, as system-map equations: naturality,
+compatibility with tensor-Hom transposes, and compatibility with internal composition. -/
 structure CoefficientEvaluationCompatible
     {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]
     {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
@@ -496,9 +474,8 @@ structure CoefficientEvaluationCompatible
           (coefficientBaseChangeHom SA SB F μ P Q)) ≫
         SB.composition (F.obj P) (F.obj Q) (F.obj V)
 
-/-- The enriched adjunction map, defined as the adjunct of base change followed
-by internal Hom of the counit. Its invertibility is a conclusion of the calculus.
-Source: Stacks 08J9, 07A6 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The enriched adjunction map: the adjunct of base change followed by internal Hom of
+the counit. -/
 def coefficientEnrichedAdjunctionMap
     {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]
     {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
@@ -519,10 +496,7 @@ private theorem restrictScalars_comp_eq
   exact Functor.ext_of_iso (normalizedDVRRestrictionCompIso f g)
     (fun _ ↦ rfl) (fun _ ↦ rfl)
 
-/-- Successive actual coefficient restrictions equal restriction by the limit projection.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: the limit-cone equation identifies A→B_m→B_n with A→B_n. Restriction
-composition is the identity on every section and every module morphism. -/
+/-- Successive coefficient restrictions equal restriction by the limit projection. -/
 theorem coefficientRestrictionComp {m n : ℕ} (h : n ≤ m) :
     normalizedDVRModuleRes l E W h ⋙ scalarReductionRestriction l E W m =
       scalarReductionRestriction l E W n := by
@@ -538,10 +512,7 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
 section QuotientNaturality
 
-/-- The natural mate of a comparison between composite right adjoints.
-Source: Stacks 03D7 (blueprint: lem-coef-derived-system-evaluation-calculus).
-The component is the transpose of the second adjunction unit followed by the
-inverse restriction comparison. Naturality follows from the two adjunctions. -/
+/-- The natural mate of a comparison between composite right adjoints. -/
 noncomputable def coefficientQuotientNatTrans
     {A : Type a} {B : Type b} {C : Type c}
     [Category.{v} A] [Category.{w} B] [Category.{r} C]
@@ -562,16 +533,14 @@ noncomputable def coefficientQuotientNatTrans
       ((congrArg (adj'.unit.app M ≫ ·) (e.inv.naturality (F'.map f))).trans
         (Category.assoc _ _ _).symm)
 
-/-- The recorded ordinary scalar adjunction, named before taking its components.
-Source: Stacks 03CZ (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The ordinary scalar adjunction, named before taking its components. -/
 noncomputable def coefficientOrdinaryScalarAdjunction (n : ℕ) :
     scalarReductionExtension l E W n ⊣ scalarReductionRestriction l E W n :=
   (scalarReductionExtension_adjunction l E W n).choose
 
 attribute [local irreducible] coefficientOrdinaryScalarAdjunction
 
-/-- The natural scalar quotient map before evaluating it at a module.
-Source: Stacks 06YY, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The natural scalar quotient map, before evaluating it at a module. -/
 noncomputable def coefficientOrdinaryQuotientNaturalTransformation {m n : ℕ} (h : n ≤ m) :
     scalarReductionExtension l E W m ⟶
       scalarReductionExtension l E W n ⋙ normalizedDVRModuleRes l E W h :=
@@ -582,8 +551,7 @@ noncomputable def coefficientOrdinaryQuotientNaturalTransformation {m n : ℕ} (
 
 attribute [local irreducible] coefficientOrdinaryQuotientNaturalTransformation
 
-/-- The ordinary tensor quotient map, as the scalar-extension adjunct of x↦x⊗1.
-Source: Stacks 06YY, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The ordinary tensor quotient map, as the scalar-extension adjunct of `x ↦ x ⊗ 1`. -/
 noncomputable def coefficientOrdinaryQuotientComponent {m n : ℕ} (h : n ≤ m)
     (M : scalarReductionSource l E W) :
     (scalarReductionExtension l E W m).obj M ⟶
@@ -594,10 +562,7 @@ attribute [local irreducible] scalarReductionExtension
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The ordinary quotient components give a unique natural transformation.
-Source: Stacks 06YY, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: naturality follows from the tensor/restriction Hom equivalence and naturality
-of its unit. Its sections send x⊗b to x⊗ρ(b). The component formula gives uniqueness. -/
+/-- The ordinary quotient components form a unique natural transformation. -/
 theorem coefficientOrdinaryQuotient_exists {m n : ℕ} (h : n ≤ m) :
     ∃! τ : scalarReductionExtension l E W m ⟶
       scalarReductionExtension l E W n ⋙ normalizedDVRModuleRes l E W h,
@@ -608,23 +573,17 @@ theorem coefficientOrdinaryQuotient_exists {m n : ℕ} (h : n ≤ m) :
 
 end QuotientNaturality
 
-/-- Strict quotient maps between the actual ordinary tensor reductions.
-Source: Stacks 06YY, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- Strict quotient maps between the ordinary tensor reductions. -/
 noncomputable def coefficientOrdinaryQuotient {m n : ℕ} (h : n ≤ m) :=
   (coefficientOrdinaryQuotient_exists l E W h).choose
 
-/-- The additive structure of the recorded ordinary finite scalar extension.
-This explicit instance exposes its existing structure without unfolding the derived witness.
-Source: Stacks 06YY (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The additive structure of the ordinary finite scalar extension. -/
 noncomputable instance coefficientFiniteExtensionAdditive (n : ℕ) :
     (scalarReductionExtension l E W n).Additive :=
   scalarReductionExtensionAdditive l E W n
 
-/-- Finite reduction's universal counit is invertible on every K-flat representative.
-Source: Stacks 06YY (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: the recorded derived-change-of-rings witness provides its universal left derived
-pair and asserts invertibility of this exact counit on K-flat complexes. Apply that last
-clause to Q and hQ, with the standard localization and actual completion projection. -/
+/-- The universal counit of finite reduction is invertible on every K-flat
+representative. -/
 theorem coefficientFiniteReductionCounit_isIso
     (Q : CochainComplex (scalarReductionSource l E W) ℤ)
     (hQ : CochainComplex.IsKFlatIndependentCoefficients
@@ -633,8 +592,8 @@ theorem coefficientFiniteReductionCounit_isIso
       ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj Q)) := by
   exact (scalarReductionDerivedExistence l E W n).choose_spec.choose_spec.2.2 Q hQ
 
-/-- Localizing an invertible representative counit gives its canonical model isomorphism.
-Source: Stacks 06YY (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- Localizing an invertible representative counit gives its canonical model
+isomorphism. -/
 noncomputable def coefficientLocalizedCounitModel
     {A : Type a} {B : Type b} [Category.{v} A] [Abelian A]
     [Category.{w} B] [Abelian B]
@@ -650,8 +609,7 @@ noncomputable def coefficientLocalizedCounitModel
 
 attribute [local irreducible] coefficientLocalizedCounitModel
 
-/-- The canonical computation of finite derived reduction on a K-flat complex.
-Source: Stacks 06YY (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The canonical computation of finite derived reduction on a K-flat complex. -/
 noncomputable def coefficientFiniteReductionModel
     (Q : CochainComplex (scalarReductionSource l E W) ℤ)
     (hQ : CochainComplex.IsKFlatIndependentCoefficients
@@ -668,17 +626,13 @@ noncomputable def coefficientFiniteReductionModel
 
 attribute [local irreducible] coefficientFiniteReductionModel
 
-/-- A comparison between a composite of three arrows and a composite of two arrows.
-Source: the displayed coefficient comparison squares, Stacks 0941
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- A comparison between a composite of three arrows and a composite of two arrows. -/
 def CoefficientComparisonEquation
     {D : Type a} [Category.{b} D] {X₀ X₁ X₂ X₃ X₄ : D}
     (f : X₀ ⟶ X₁) (g : X₁ ⟶ X₂) (h : X₂ ⟶ X₄)
     (p : X₀ ⟶ X₃) (q : X₃ ⟶ X₄) : Prop := f ≫ g ≫ h = p ≫ q
 
-/-- A comparison between two composites of two arrows.
-Source: the displayed coefficient transition squares, Stacks 0941
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- A comparison between two composites of two arrows. -/
 def CoefficientTransitionEquation
     {D : Type a} [Category.{b} D] {X₀ X₁ X₂ X₃ : D}
     (f : X₀ ⟶ X₁) (g : X₁ ⟶ X₃) (p : X₀ ⟶ X₂) (q : X₂ ⟶ X₃) : Prop :=
@@ -686,10 +640,7 @@ def CoefficientTransitionEquation
 
 attribute [local irreducible] CoefficientComparisonEquation CoefficientTransitionEquation
 
-/-- A chain comparison into a composite, with its target displayed termwise.
-The complex of a composite is definitionally the iterated complex functor. Naming
-this generic conversion avoids unfolding coefficient evaluation when checking a square.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- A chain comparison into a composite, with its target displayed termwise. -/
 noncomputable def coefficientComplexCompositeTransformation
     {A : Type a} {B : Type b} {D : Type c}
     [Category.{v} A] [HasZeroMorphisms A]
@@ -705,10 +656,7 @@ noncomputable def coefficientComplexCompositeTransformation
 
 attribute [local irreducible] coefficientComplexCompositeTransformation
 
-/-- A chain comparison out of a composite, with its source displayed termwise.
-As for the target version, this is the original mapped natural transformation;
-only the definitionally equal source presentation is displayed in the interface.
-Source: Stacks 079P, 08JA (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- A chain comparison out of a composite, with its source displayed termwise. -/
 noncomputable def coefficientComplexCompositeSourceTransformation
     {A : Type a} {B : Type b} {D : Type c}
     [Category.{v} A] [HasZeroMorphisms A]
@@ -724,11 +672,8 @@ noncomputable def coefficientComplexCompositeSourceTransformation
 
 attribute [local irreducible] coefficientComplexCompositeSourceTransformation
 
-/-- Simultaneous K-flat computation of reduction, with its actual strict quotient maps.
-The equality at each level also fixes how the model comparison meets the derived
-finite-reduction comparison, so an unrelated isomorphism of evaluated objects cannot serve.
-Source: Stacks 06YS, 06YY, 0941
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- Simultaneous K-flat computation of reduction, with its strict quotient maps, compatible
+at each level with the derived finite-reduction comparison. -/
 def CoefficientReductionModels
     (R : DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l E W)
     (ρ : ∀ n : ℕ, R ⋙ coefficientSequenceDerivedEvaluation l E W n ≅
@@ -763,10 +708,9 @@ def CoefficientReductionModels
           (coefficientComplexCompositeTransformation
             (scalarReductionExtension l E W n) (normalizedDVRModuleRes l E W h)
             (coefficientOrdinaryQuotient l E W h) Q))
-/-- The pure-tensor formula for a scalar tensor comparison, over general ring sheaves.
-The same chain isomorphism must send every scalar-unit tensor generator to the tensor
-of the scalar-unit sections. Specializing this predicate does not choose another map.
-Source: Stacks 03EK, 07A4 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The pure-tensor formula for a scalar tensor comparison over general ring sheaves: the
+chain isomorphism sends every scalar-unit tensor generator to the tensor of the scalar-unit
+sections. -/
 def CoefficientScalarTensorGenerators
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v u}]
@@ -797,16 +741,13 @@ def CoefficientScalarTensorGenerators
         ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q) p q k hpq V
         (η (P.X p) V x) (η (Q.X q) V y)
 
-/-- Forget scalar restriction on a section, keeping its underlying element unchanged.
-Source: Stacks 03CZ, 03DA (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- Forget scalar restriction on a section, keeping its underlying element. -/
 def coefficientRestrictionSection
     {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
     {A B : Sheaf J RingCat.{r}} (φ : A ⟶ B) (M : SheafOfModules.{r} B) (V : Cᵒᵖ)
     (x : ((SheafOfModules.restrictScalars φ).obj M).val.obj V) : M.val.obj V := x
 
-/-- The recorded integral-to-finite adjunction unit on the underlying local section.
-Scalar restriction changes the action only, so this is the very same unit element.
-Source: Stacks 03CZ, 06YY (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The integral-to-finite adjunction unit on the underlying local section. -/
 noncomputable def coefficientIntegralScalarUnitSection (n : ℕ)
     (M : scalarReductionSource l E W) (V : W.ProEtᵒᵖ) (x : M.val.obj V) :
     ((scalarReductionExtension l E W n).obj M).val.obj V :=
@@ -819,15 +760,8 @@ noncomputable def coefficientIntegralScalarUnitSection (n : ℕ)
 
 attribute [local irreducible] coefficientActualScalarDerivedPair
 
-/-- The ordinary finite scalar-extension tensor comparison is uniquely fixed by
-its unit formula on tensor generators, in every total-degree summand.
-Source: Stacks 03EK, 07A4 (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: extension is sheafification of sectionwise scalar tensor. Send
-b tensor (x tensor y) to (b tensor x) tensor (1 tensor y). Balancing gives the
-inverse (b tensor x) tensor (c tensor y) ↦ bc tensor (x tensor y).
-Both commute with restrictions and the signed total differential. Extension
-preserves coproducts by its normalized adjunction. Sheafification and the tensor
-universal properties make the generator equation determine every component. -/
+/-- The ordinary finite scalar-extension tensor comparison is uniquely determined by its
+unit formula on tensor generators, in every total-degree summand. -/
 theorem coefficientScalarTensorIso_exists (n : ℕ)
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ) :
     ∃! e : ((scalarReductionExtension l E W n).mapHomologicalComplex
@@ -864,17 +798,13 @@ theorem coefficientScalarTensorIso_exists (n : ℕ)
     (coefficientActualScalarDerivedPair_extension l E W n)
     (coefficientActualScalarDerivedPair_ordinaryAdjunction_heq l E W n) P Q
 
-/-- Selection from a unique characterization, retaining the original choice term.
-The predicates used below determine a single comparison isomorphism. This generic
-selection is exactly `ExistsUnique.choose`, so it preserves their prescribed maps.
-Source: Stacks 07A4, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- Selection from a unique characterization, given by `ExistsUnique.choose`. -/
 noncomputable def coefficientUniqueComparisonChoice
     {α : Sort a} {p : α → Prop} (h : ∃! x, p x) : α := h.choose
 
 attribute [local irreducible] coefficientUniqueComparisonChoice
 
-/-- The unique ordinary scalar tensor comparison, with its generator normalization retained.
-Source: Stacks 03EK, 07A4 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+/-- The unique ordinary scalar tensor comparison, with its generator normalization. -/
 noncomputable def coefficientScalarTensorIso (n : ℕ)
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ) :=
   coefficientUniqueComparisonChoice (coefficientScalarTensorIso_exists l E W n P Q)

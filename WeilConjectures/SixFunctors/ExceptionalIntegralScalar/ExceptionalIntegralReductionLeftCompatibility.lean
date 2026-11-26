@@ -11,8 +11,12 @@ import all WeilConjectures.SixFunctors.IntegralSystemRealization.ConstructibleRe
 
 /-! # Left exceptional mate under normalized finite reduction
 
-Source: Zheng, Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-integral-reduction-left-compatibility)
+The canonical finite evaluation of integral reduction intertwines the left exceptional scalar
+mate.
+
+## References
+
+* [Zheng, Lemma 5.22 and Proposition 5.26]
 -/
 
 @[expose] public noncomputable section
@@ -380,20 +384,7 @@ attribute [local irreducible] CategoryTheory.constantSheaf HasDerivedCategory.st
   WeilConjectures.coefficientSequenceCommRingPresheaf
 
 -- The ambient comparison elaborates several dependent coefficient-stage identifications.
-/-- The canonical finite evaluation intertwines the left exceptional scalar mate.
-Source: Zheng, Lemma 5.22 and Proposition 5.26, reduction compatibility.
-Proof: apply the faithful finite full inclusion and substitute the scalar equality
-realizations and the definition of integralReductionEvaluation. The source and target
-finite tensors are related by PurCompactSupport.finiteReductionIso, the unique
-comparison preserving the scalar adjunction units. Substitute d.comparison_normalized:
-the left path becomes the ordinary proper scalar mate followed by the open tensor map.
-The recorded integral compact-support identification identifies its reduction with
-the same proper/open mate. The transport.integral_system_normalized square identifies
-that recorded identification with the reconstruction realization; transport.reductionF_eq
-and transport.evaluation_support then identify the right path with the same map.
-Cancel the finite left realization and the invertible scalar realizations. This uses
-whole-system naturality before evaluation, never faithfulness of finite evaluations.
-(blueprint: lem-sf-exceptional-integral-reduction-left-compatibility). -/
+/-- The canonical finite evaluation intertwines the left exceptional scalar mate. -/
 theorem integralReductionLeftCompatibility
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

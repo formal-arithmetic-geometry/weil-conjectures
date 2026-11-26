@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.LocallyFiniteAdicCompactSupportData
 public import WeilConjectures.CategoryTheory.ArrowHEq.ArrowHEq
 
-/-! # Integral scalar-mate steps for native compact support -/
+/-! # Integral scalar-mate steps for native compact support
+
+## References
+
+* [Bhatt--Scholze, Remark 6.8.15]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -41,9 +46,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (P : CoefficientConstruction l (ULift.{u} (PadicAlgCl l)) D hl (f := f))
   (c : Compactification f)
 
-/-- The first three arrows of the normalized integral compact-support comparison.
-Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: def-sf-native-integral-scalar-boundary-conditions). -/
+/-- The first three arrows of the normalized integral compact-support comparison. -/
 def IntegralSourceBoundary [G : NativeGeometry.{u} l]
     (target : Realization l Y) (E : Index l (PadicAlgCl l))
     (K : finiteTorConstructibleIntegralCategory l (Coefficient.{u} l (PadicAlgCl l) E) X)
@@ -71,9 +74,7 @@ def IntegralSourceBoundary [G : NativeGeometry.{u} l]
                 (Coefficient.{u} l (PadicAlgCl l) E) X).obj K))) ∧
       b = a₀ ≫ a₁ ≫ a₂
 
-/-- The final two arrows of the normalized integral compact-support comparison.
-Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: def-sf-native-integral-scalar-boundary-conditions). -/
+/-- The final two arrows of the normalized integral compact-support comparison. -/
 def IntegralTargetBoundary [G : NativeGeometry.{u} l]
     (source : Realization l X) (E : Index l (PadicAlgCl l))
     (K : finiteTorConstructibleIntegralCategory l (Coefficient.{u} l (PadicAlgCl l) E) X)
@@ -91,9 +92,7 @@ def IntegralTargetBoundary [G : NativeGeometry.{u} l]
       ArrowHEq a₅ ((operationTransport l c).inv.app (source.J.obj input)) ∧
       d = a₄ ≫ a₅
 
-/-- The six-arrow formula with an arbitrary, endpoint-recorded scalar arrow.
-Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: def-sf-native-integral-scalar-boundary-conditions). -/
+/-- The six-arrow formula with an arbitrary, endpoint-recorded scalar arrow. -/
 def IntegralScalarFormula [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (E : Index l (PadicAlgCl l))

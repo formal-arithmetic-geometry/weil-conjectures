@@ -15,8 +15,18 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Local stabilization of open cohomology of the lower truncation tower
 
-Source: Stacks Project, Cohomology, Tag 0D62, lemma-is-limit-per-point.
-(blueprint: lem-pc-pointwise-truncation-open-stabilization).
+Under local bounds, the open-cohomology towers of the lower truncations of a complex of modules
+stabilize.
+
+## Implementation details
+
+For `n` beyond the three local bounds, the successive lower truncation triangle with first object
+`H^(-n-1)(E)[n+1]` and its long exact cohomology sequence make the transitions isomorphisms in
+degrees `m - 1` and `m`, uniformly over the opens in the basis.
+
+## References
+
+* [Stacks Project, Tag 0D62](https://stacks.math.columbia.edu/tag/0D62)
 -/
 
 @[expose] public section
@@ -25,18 +35,7 @@ universe u w v
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry.RingedSpace
 
-/-- The two open-cohomology towers used in the stalk injectivity criterion stabilize.
-Source: Stacks Project, Cohomology, Tag 0D62, lemma-is-limit-per-point, final paragraph.
-(blueprint: lem-pc-pointwise-truncation-open-stabilization).
-
-Proof: Choose a natural N larger than -m, b(m-1)-m, b(m)-m-1 and b(m+1)-m-2.
-For n >= N, apply the successive lower truncation triangle, with first object
-H^(-n-1)(E)[n+1]. Derived sections is triangulated and commutes with shifts.
-Its cohomology in degrees m-1, m and m+1 identifies with open module cohomology
-in nonnegative degrees m+n, m+n+1 and m+n+2 of H^(-n-1)(E).
-These vanish by the bounds at m-1, m and m+1. The long exact sequence consequently
-makes the middle arrow an isomorphism in degrees m-1 and m. The same N works for
-all U in B. Empty B and the zero object satisfy this argument without exceptions. -/
+/-- The two open-cohomology towers used in the stalk injectivity criterion stabilize. -/
 theorem pointwise_truncation_open_stabilization (X : RingedSpace.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{v} AddCommGrpCat.{u}]

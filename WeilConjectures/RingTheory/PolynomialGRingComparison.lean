@@ -17,9 +17,20 @@ import WeilConjectures.RingTheory.RegularComposition
 /-!
 # A comparison local ring for polynomial formal fibres
 
-Source: Stacks Project, More on Algebra, Proposition 07PV, the completion square
-in the second paragraph of the proof.
-(blueprint: lem-weil-pbc-polynomial-g-ring-comparison).
+For a maximal ideal `Q` of `R[x]` over a G-ring `R`, there is a flat local map from `R[x]_Q` to a
+Noetherian local ring `B` such that `R[x]_Q → B̂` is regular.
+
+## Implementation details
+
+With `A = R_p`, the ring `B` is the localization of `Â[x]` at the prime over `Q`. The map
+`R[x]_Q → B` is regular by the G-ring hypothesis, and `B → B̂` is regular by the complete-local
+polynomial formal-fibre theorem. This gives only the bottom and right sides of the comparison
+square; regularity of the completion of `R[x]_Q` still requires completing the comparison map and
+faithfully flat descent.
+
+## References
+
+* [Stacks, Tag 07PV] (the completion square in the second paragraph of the proof)
 -/
 
 @[expose] public section
@@ -27,25 +38,7 @@ in the second paragraph of the proof.
 universe u
 
 /-- At a maximal ideal of a polynomial ring over a G-ring, there is a flat local
-comparison map into a Noetherian local ring whose composite with completion is regular.
-Source: Stacks Project, More on Algebra, Proposition 07PV, the completion square.
-(blueprint: lem-weil-pbc-polynomial-g-ring-comparison).
-
-Proof: Let p be the contraction of Q to R and put A = R_p. The localization
-A[x] at the extension of Q is canonically R[x]_Q; the extended ideal is maximal
-and contracts to the maximal ideal of A. The G-ring hypothesis makes A → Ahat
-regular. The ring Ahat is Noetherian complete local. Base change A → Ahat along
-A → A[x], then localize at the prime Q' of Ahat[x] lying over Q. This prime is
-maximal and contracts to the maximal ideal of Ahat: modulo that ideal the
-polynomial rings and Q are unchanged, since A and Ahat have the same residue
-field. Set B = Ahat[x]_(Q'). The resulting map φ : R[x]_Q → B is regular,
-hence flat, and is local by the contraction identity. Both rings are
-Noetherian. The complete-local polynomial formal-fibre theorem makes B → Bhat
-regular. The fibres of Bhat over R[x]_Q are Noetherian, being localizations of
-quotients of the Noetherian completion Bhat. Composition of regular maps then
-gives regularity of R[x]_Q → Bhat. This is only the bottom and right sides of
-the comparison square; regularity of the completion of R[x]_Q still requires
-completion of φ and faithfully-flat descent. -/
+comparison map into a Noetherian local ring whose composite with completion is regular. -/
 theorem exists_polynomial_flat_local_regular_completion_comparison
     (R : Type u) [CommRing R] (hR : IsGRing R)
     (Q : Ideal (Polynomial R)) [Q.IsMaximal] :

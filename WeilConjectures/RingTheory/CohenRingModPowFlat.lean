@@ -16,7 +16,23 @@ import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Mathlib.Data.ZMod.QuotientRing
 
-/-! # Flatness of the prime-power quotients of a Cohen ring -/
+/-! # Flatness of the prime-power quotients of a Cohen ring
+
+For a Cohen ring `Λ` with residue characteristic `p`, the quotient `Λ/(p^n)` is flat over
+`ℤ/p^n`. This is used in the induction of [Stacks, Tag 0329].
+
+## Implementation details
+
+`Λ` has characteristic zero, so it is torsion-free and hence flat over `ℤ` [Stacks, Tag 0AUW];
+base change along `ℤ → ℤ/p^n` [Stacks, Tag 00HI] gives the claim. Every algebra structure has
+the same integer-cast map, so flatness holds for the given structure.
+
+## References
+
+* [Stacks, Tag 0329]
+* [Stacks, Tag 0AUW]
+* [Stacks, Tag 00HI]
+-/
 
 @[expose] public section
 
@@ -24,17 +40,8 @@ universe u
 
 namespace IsDiscreteValuationRing
 
-/-- Flatness used in the induction of Stacks Project, Algebra, Tag 0329.
-(blueprint: lem-weil-pbc-cohen-ring-mod-pow-flat)
-
-Proof: The domain underlying a Cohen ring has characteristic zero. Indeed p is
-nonzero because its principal ideal is the nonzero maximal ideal of the DVR.
-If another prime q vanished, Bezout for p and q would make p a unit, contradicting
-membership in the maximal ideal. Thus the integer action is torsion-free. A
-torsion-free module over the PID ℤ is flat (Tag 0AUW). Base change along
-ℤ → ℤ/p^n gives flatness of Λ/(p^n) over ℤ/p^n (Tag 00HI), using the tensor
-quotient isomorphism. Identify ℤ/p^n with ZMod (p^n). Every algebra structure
-has this same integer-cast map, so flatness holds for the displayed structure. -/
+/-- For a Cohen ring `Λ` with residue characteristic `p`, the quotient `Λ/(p^n)` is flat over
+`ℤ/p^n`, for any algebra structure. -/
 theorem cohenRing_mod_pow_flat
     (p : ℕ) (Λ : Type u) [CommRing Λ] (hΛ : IsCohenRing p Λ) (n : ℕ)
     [Algebra (ZMod (p ^ n)) (Λ ⧸ Ideal.span {(p : Λ) ^ n})] :

@@ -19,13 +19,12 @@ eigenvalues in degree `2d - i` with the `qᵈ / α` for the eigenvalues `α` in 
 
 `P_{2d-i}(q^{-d} T⁻¹) = (-1)^{bᵢ} T^{-bᵢ} Dᵢ⁻¹ Pᵢ(T)`,  `Dᵢ D_{2d-i} = q^{d bᵢ}`,
 
-and `d χ` is even, `χ = ∑ᵢ (-1)ⁱ bᵢ`: for odd `d` the middle pairing is alternating
-(blueprint `corollary-functional-equation`, `corollary-functional-equation--4`).
+and `d χ` is even, `χ = ∑ᵢ (-1)ⁱ bᵢ`: for odd `d` the middle pairing is alternating.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.duality_reciprocity`: blueprint `corollary-functional-equation--4`.
-- `AlgebraicGeometry.Scheme.reciprocity`: blueprint `corollary-functional-equation`.
+- `AlgebraicGeometry.Scheme.duality_reciprocity`: duality reciprocity for a prime `ℓ ≠ p`.
+- `AlgebraicGeometry.Scheme.reciprocity`: duality reciprocity of the integral Frobenius factors.
 -/
 
 @[expose] public section
@@ -51,9 +50,7 @@ theorem weilDeterminantConstant_eq (P : Polynomial ℤ) :
     weilDeterminantConstant P = (-1) ^ P.natDegree * P.leadingCoeff :=
   rfl
 
-/-- For odd `d`, the middle Betti number `dim H^d(X₀ ⊗ k̄, ℚ̄_ℓ)` is even: by Poincaré duality the
-middle cup-product pairing is perfect and `(-1)^d`-symmetric, hence alternating
-(`corollary-functional-equation--5`). -/
+/-- For odd `d`, the middle Betti number `dim H^d(X₀ ⊗ k̄, ℚ̄_ℓ)` is even. -/
 theorem even_finrank_cohomology_middle (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
     (hd : Odd d) :
     Even (Module.finrank (PadicAlgCl l)
@@ -78,9 +75,8 @@ theorem even_finrank_cohomology_middle (l : ℕ) [Fact l.Prime] [Fact (ringChar 
       LinearMap.separatingRight_iff_flip_ker_eq_bot.2
         (LinearMap.ker_eq_bot.2 (LinearMap.IsPerfPair.bijective_right B).1)⟩
 
-/-- Blueprint `corollary-functional-equation--4` (duality reciprocity): for `X₀` smooth, proper and
-geometrically connected of pure dimension `d`, a prime `ℓ ≠ p`, and the integral Frobenius
-factors `P₀, …, P_{2d}`:
+/-- **Duality reciprocity**: for `X₀` smooth, proper and geometrically connected of pure
+dimension `d`, a prime `ℓ ≠ p`, and the integral Frobenius factors `P₀, …, P_{2d}`:
 
 * Poincaré duality identifies the Frobenius eigenvalues in degree `2d - i` with the `qᵈ / α`,
   `α` running over the eigenvalues in degree `i`, with multiplicity;
@@ -127,8 +123,8 @@ theorem duality_reciprocity (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)
   · rw [natDegree_eq_finrank_of_isIntegralFrobeniusFactor k₀ X (hP m) l, hm]
     exact even_finrank_cohomology_middle k₀ X d l hd
 
-/-- Blueprint `corollary-functional-equation` (duality reciprocity of the factors): for the integral
-Frobenius factors `Pᵢ` of `X₀`, with `bᵢ = deg Pᵢ` and `Dᵢ = (-1)^{bᵢ} [T^{bᵢ}] Pᵢ`,
+/-- **Duality reciprocity of the integral Frobenius factors**: for the integral Frobenius factors
+`Pᵢ` of `X₀`, with `bᵢ = deg Pᵢ` and `Dᵢ = (-1)^{bᵢ} [T^{bᵢ}] Pᵢ`,
 
 `P_{2d-i}(q^{-d} T⁻¹) = (-1)^{bᵢ} T^{-bᵢ} Dᵢ⁻¹ Pᵢ(T)` and `Dᵢ D_{2d-i} = q^{d bᵢ}`,
 

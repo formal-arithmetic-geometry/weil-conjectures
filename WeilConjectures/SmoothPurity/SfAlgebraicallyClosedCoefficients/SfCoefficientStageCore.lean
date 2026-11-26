@@ -19,10 +19,10 @@ import WeilConjectures.SmoothPurity.Scalar.ScalarShiftNormalization
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 import WeilConjectures.SmoothPurity.Rational.RationalAssociatorShiftCompat
 
-/-! Intrinsic finite coefficient stages and their scalar coherence.
-This file contains the finite-stage part of SfAlgebraicallyClosedCoefficients,
-separated so its compilation is independent of the pair-category construction
-(blueprint: lem-pur-intrinsic-coefficient-stage-shift-coherence).
+/-! # Intrinsic finite coefficient stages and their scalar coherence
+
+This file contains the finite-stage part of `SfAlgebraicallyClosedCoefficients`,
+separated so its compilation is independent of the pair-category construction.
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -324,58 +324,49 @@ variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- The specified raw rational stage, using its equivalent small coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The specified raw rational stage, using its equivalent small coefficient model. -/
 noncomputable def Stage (E : Index l Ω) :=
   D.sfRationalCategory l hl (Coefficient.{u} l Ω E) Y
 
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Cache the existing rational stage structure on the named coefficient model. -/
 noncomputable instance stageCategory (E : Index l Ω) :
     Category (Stage D l hl Ω Y E) :=
   ScalarLocalization.category (Padic.coefficientExtensionIntegers l (Coefficient.{u} l Ω E))
     (sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E) Y)
     (Padic.coefficientExtensionUniformizer l (Coefficient.{u} l Ω E))
 
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Cache the existing rational stage structure on the named coefficient model. -/
 noncomputable instance stagePreadditive (E : Index l Ω) :
     Preadditive (Stage D l hl Ω Y E) :=
   inferInstanceAs (Preadditive
     (D.sfRationalCategory l hl (Coefficient.{u} l Ω E) Y))
 
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Cache the existing rational stage structure on the named coefficient model. -/
 noncomputable instance stageZero (E : Index l Ω) :
     HasZeroObject (Stage D l hl Ω Y E) :=
   sfRationalConstructibleZero l (Coefficient.{u} l Ω E) Y
 
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Cache the existing rational stage structure on the named coefficient model. -/
 noncomputable instance stageShift (E : Index l Ω) :
     HasShift (Stage D l hl Ω Y E) ℤ :=
   sfRationalConstructibleShift l (Coefficient.{u} l Ω E) Y
 
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Cache the existing rational stage structure on the named coefficient model. -/
 noncomputable instance stageShiftAdditive (E : Index l Ω) (n : ℤ) :
     (shiftFunctor (Stage D l hl Ω Y E) n).Additive :=
   sfRationalConstructibleShiftAdditive l (Coefficient.{u} l Ω E) Y n
 
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Cache the existing rational stage structure on the named coefficient model. -/
 noncomputable instance stagePretriangulated (E : Index l Ω) :
     Pretriangulated (Stage D l hl Ω Y E) :=
   sfRationalConstructiblePretriangulated l (Coefficient.{u} l Ω E) Y
 
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Cache the existing rational stage structure on the named coefficient model. -/
 noncomputable instance stageTriangulated (E : Index l Ω) :
     IsTriangulated (Stage D l hl Ω Y E) :=
   sfRationalConstructibleTriangulated l (Coefficient.{u} l Ω E) Y
 
-/-- The actual finite-field scalar transition, with both coefficient identifications.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The actual finite-field scalar transition, with both coefficient identifications. -/
 noncomputable def transition (E L : Index l Ω) (h : E ≤ L) :
     Stage D l hl Ω Y E ⥤ Stage D l hl Ω Y L :=
   sfRationalScalarExtension l (Coefficient.{u} l Ω E) Y D.p hl
@@ -384,16 +375,7 @@ noncomputable def transition (E L : Index l Ω) (h : E ≤ L) :
 set_option linter.unusedSectionVars false in
 set_option linter.unusedVariables false in
 /-- The integral transition inherits the ordinary tensor shift through its canonical
-quotient-completion comparison, not through an arbitrary exact-functor witness.
-Source: blueprint order 1462, exact transition clause
-(blueprint: def-weil-algebraically-closed-coefficients).
-Proof: conjugate the ordinary derived tensor shift by sfIntegralOrdinaryComparison.
-The full intrinsic subcategory inherits the ambient shift. The inclusion's shift
-comparisons identify its shifted objects with ambient shifts on both sides. Full
-faithfulness lifts each component and its inverse. Naturality, the zero equation and
-the addition equation follow from the ordinary ones by cancellation of the comparisons.
-The formula fixes all components,
-so extensionality of natural isomorphisms and proof irrelevance prove uniqueness. -/
+quotient-completion comparison, not through an arbitrary exact-functor witness. -/
 theorem integralTransitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L) :
     ∃! c : (sfConstructibleIntegralScalarExtension D.p l hl
         (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
@@ -432,8 +414,7 @@ theorem integralTransitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L
     (sfIntegralOrdinaryComparison l (Coefficient.{u} l Ω E)
       (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) Y).symm
 
-/-- The fixed ordinary-to-completed normalization of the integral transition shift.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The fixed ordinary-to-completed normalization of the integral transition shift. -/
 noncomputable instance integralTransitionCommShift (E L : Index l Ω) (h : E ≤ L) :
     (sfConstructibleIntegralScalarExtension D.p l hl
       (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
@@ -442,14 +423,7 @@ noncomputable instance integralTransitionCommShift (E L : Index l Ω) (h : E ≤
 
 set_option linter.unusedVariables false in
 /-- The rational transition shift is uniquely fixed by localizing the normalized integral
-shift. Source: blueprint order 1462, exact transition clause
-(blueprint: def-weil-algebraically-closed-coefficients).
-Proof: tensor the integral components and inverses with one. On pure tensors, integral
-naturality gives rational naturality; generation gives it on every Hom. The recorded
-rational shift and localization comparison are normalized to the integral shift and
-identity at one. Thus the displayed HEq gives the shift-by-one comparison. Iteration and
-inverse shifts give all integer comparisons and their coherence. A coherent integer-shift
-comparison is determined at one, which also proves uniqueness. -/
+shift. -/
 theorem transitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L) :
     ∃! c : (transition D l hl Ω Y E L h).CommShift ℤ,
       (fun [commInst : (transition D l hl Ω Y E L h).CommShift ℤ] ↦
@@ -465,23 +439,14 @@ theorem transitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L) :
     (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
     (coefficientInclusion l Ω E L h) Y
 
-/-- The canonical, integral-image-normalized shift comparison of the rational transition.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The canonical, integral-image-normalized shift comparison of the rational transition. -/
 noncomputable instance transitionCommShift (E L : Index l Ω) (h : E ≤ L) :
     (transition D l hl Ω Y E L h).CommShift ℤ :=
   (transitionCommShift_existsUnique D l hl Ω Y E L h).exists.choose
 
 section
 
-/-- Exactness for the normalized shift comparison on the recorded intrinsic rational stages.
-Source: blueprint order 1462, exact transition clause
-(blueprint: def-weil-algebraically-closed-coefficients).
-Proof: use the exactness argument of sfScalarExtension_exact_triangulated: the Roos cone
-shift is conjugate through the quotient-completion comparison to the ordinary tensor
-shift. Full intrinsic subcategories inherit distinguished triangles, and rationalization
-has precisely the isomorphic integral image triangles. The preceding normalization is
-that same comparison, so the finite scalar transition preserves distinguished triangles
-including their connecting arrows. -/
+/-- Exactness for the normalized shift comparison on the recorded intrinsic rational stages. -/
 @[instance]
 theorem transitionExact (E L : Index l Ω) (h : E ≤ L) :
     (transition D l hl Ω Y E L h).IsTriangulated := by
@@ -529,15 +494,13 @@ theorem transitionExact (E L : Index l Ω) (h : E ≤ L) :
 
 end
 
-/-- Additivity of the published intrinsic rational scalar-extension functor.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Additivity of the published intrinsic rational scalar-extension functor. -/
 noncomputable instance transitionAdditive (E L : Index l Ω) (h : E ≤ L) :
     (transition D l hl Ω Y E L h).Additive :=
   sfRationalScalarExtension_additive l (Coefficient.{u} l Ω E) Y D.p hl
     (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h)
 
-/-- The canonical scalar associator, with its tensor-generator normalization.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The canonical scalar associator, with its tensor-generator normalization. -/
 noncomputable def associator (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) :
     transition D l hl Ω Y E L h ⋙ transition D l hl Ω Y L M k ≅
       transition D l hl Ω Y E M (h.trans k) :=
@@ -548,8 +511,7 @@ noncomputable def associator (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) :
       (Coefficient.{u} l Ω E) Y D.p hl (Coefficient.{u} l Ω M))
       ((coefficientInclusion_laws l Ω).2 E L M h k))
 
-/-- The normalized scalar unit, transported through the coefficient identifications.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The normalized scalar unit, transported through the coefficient identifications. -/
 noncomputable def unitor (E : Index l Ω) : transition D l hl Ω Y E E le_rfl ≅
     𝟭 (Stage D l hl Ω Y E) :=
   eqToIso (congrArg (sfRationalScalarExtension l
@@ -567,15 +529,7 @@ private theorem associator_eq_corrected (E L M : Index l Ω) (h : E ≤ L) (k : 
   unfold associator correctedAssociator
   rfl
 
-/-- The prescribed finite-stage scalar associator commutes with its normalized shifts.
-Source: the integral/rational normalization step in the common-stage shift argument
-(blueprint: lem-pur-intrinsic-coefficient-stage-shift-coherence).
-Proof: the ordinary derived tensor compositor commutes with shifts. The defining
-comparison equations reflect this square through the fully faithful intrinsic
-integral inclusions, with equality induction for the composite coefficient map.
-Apply the rational localization square to the supplied degree-one normalizations.
-Equality of the whole corrected associators transports that square to the prescribed
-small coefficient models; no component conversion at a Shrink model is needed. -/
+/-- The prescribed finite-stage scalar associator commutes with its normalized shifts. -/
 theorem associator_commShift (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) :
     NatTrans.CommShift (associator D l hl Ω Y E L M h k).hom ℤ := by
   let α := sfIntegralScalarComp l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
@@ -647,11 +601,7 @@ private theorem associator_pentagon
   unfold correctedAssociator at hp
   exact hp
 
-/-- The normalized tensor associators satisfy the stage-system cocycle.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: sfRationalScalar_coherence proves the tensor pentagon. The small
-coefficient inclusions compose by coefficientInclusion_laws. Substitution gives the
-displayed cocycle, including repeated fields and identity inclusions. -/
+/-- The normalized tensor associators satisfy the stage-system cocycle. -/
 theorem associator_cocycle
     (D : WeilConjectures.FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

@@ -11,7 +11,18 @@ import all WeilConjectures.SixFunctors.Integral.IntegralScalarExtensionWellDefin
 
 /-! # Ordinary strict finite coefficient tensor models
 
-Source: the integral-operations tensor associator; Stacks 03EK and 03D7.
+We construct the ordinary strict finite scalar tensor models of good integral complexes and show
+that their sequence transitions agree with the integral scalar transitions.
+
+## Implementation details
+
+The direct functor is built from the cone with `n`-th component `integralScalarRho`, via the
+ordinary ringed sequence projection tensor functor applied degreewise. The transition formula is
+checked on locally sheafified pure tensors `b ⊗ x ↦ red(b) ⊗ x` using tensor hom-ext.
+
+## References
+
+* Stacks 03EK, 03D7, 0941
 -/
 
 @[expose] public noncomputable section
@@ -530,26 +541,9 @@ private def scalarCoefficientDirectEvaluation (n : ℕ) :
 attribute [local semireducible] scalarCoefficientExtension
 attribute [local irreducible] IsCoefficientExtensionStrictTransition
 
-/-- Ordinary strict finite scalar tensors and their quotient transitions.
-
-Source: Stacks 03EK, 03D7 and 0941; step 1 of
-stage3-pur-extension-strict-representatives
-(blueprint: stage3-pur-extension-ordinary-strict-tensor).
-
-Proof: use the cone with nth component integralScalarRho. Its naturality follows
-from the completed-ring limit projections and the finite quotient inclusion
-naturality. Apply the ordinary ringed sequence projection tensor functor and
-pass from strict systems to module sheaves on the sequence site. On each level
-its extensionIso, the identity-on-sections equivalence unit, and
-integralScalarReduction_obj give the natural finite evaluation isomorphism.
-Apply this additive functor degreewise and restrict to good complexes.
-The projection functor's transition formula sends b tensor x to red(b) tensor x.
-The finite evaluation isomorphisms carry those tensor sections to the published
-integralScalarTensorSection. The published integralScalarTransition has exactly
-the same tensor formula. Forget to abelian sheaves and apply tensor hom-ext:
-locally sheafified pure tensors generate, so the two maps agree. Cancel the
-finite evaluation isomorphisms to get the required equality on all sections,
-and hence its HEq formulation. -/
+/-- There is a strict direct-image functor from good integral complexes to complexes of
+coefficient sequence modules, with finite evaluations identified with the finite scalar
+complexes, whose sequence transitions agree with the integral scalar transitions. -/
 theorem coefficientExtensionOrdinaryStrictTensor_exists :
     ∃ (direct : (integralOperationsGoodComplex l E W).FullSubcategory ⥤
         CochainComplex (coefficientSequenceModules l L W) ℤ)

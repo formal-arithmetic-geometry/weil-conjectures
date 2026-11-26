@@ -16,21 +16,33 @@ import Mathlib.Algebra.Algebra.Shrink
 import Mathlib.RingTheory.Finiteness.Small
 import WeilConjectures.RingTheory.LocalizeFilteredRingSystem
 import Mathlib.RingTheory.RingHom.EssFiniteType
+
+/-!
+# Core ring data for directed descent of local algebras
+
+A localization of a finitely presented algebra over the colimit of a directed system of local
+rings descends to a system of local algebras over the stages, with local transition and
+structure maps.
+
+## Implementation details
+
+After shrinking the algebra to the base universe, the stage algebras are the images of
+polynomial evaluation at fixed algebra generators; their directed union is the algebra. This
+system is localized at the inverse images of the maximal ideal of `T`, using that localization
+commutes with filtered colimits.
+
+## References
+
+* [Stacks, Tag 00QV]
+* [Stacks, Tag 037D] (localization-colimit construction)
+-/
+
 @[expose] public section
 universe u p
 open CategoryTheory CategoryTheory.Limits
 namespace RingHom
 /-- Core ring descent assertion, retaining the transition and structure maps but omitting
-explicit representatives of the cocone maps. Source: Stacks Project, Algebra, Tag 00QV,
-using the localization-colimit construction in the proof of Tag 037D.
-(blueprint: lem-weil-pbc-limit-module-ring-data-core)
-
-Proof: Finite presentation implies finite type. After shrinking P to the base universe,
-take the images of polynomial evaluation at fixed algebra generators over each stage.
-Their directed union is P. Localize this system at the inverse images of the maximal
-ideal of T; localization commutes with the filtered colimit. Compose the structure
-maps. The resulting cocone maps are local, so their domains and all transition maps
-are local. Locality of the original cocone and τ implies locality of the structure maps. -/
+explicit representatives of the cocone maps. -/
 theorem exists_limit_module_ring_data_core
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (c : Cocone F) (hc : IsColimit c)

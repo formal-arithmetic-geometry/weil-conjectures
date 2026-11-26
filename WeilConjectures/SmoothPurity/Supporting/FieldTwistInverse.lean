@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Tate.TateTwistLocallyFree
 import Mathlib.Data.Nat.Prime.Infinite
 
 /-! # Inverse evaluation for the recorded field coefficient twists
-
-Source: definition-tate-twists--10, proof steps 9--13.
-(blueprint: lem-weil-field-twist-inverse).
 -/
 
 @[expose] public noncomputable section
@@ -21,26 +18,7 @@ universe u v
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
 
-/-- Opposite signed root lines give inverse twists after rationalization and common stages.
-Source: blueprint definition-tate-twists--10, proof steps 9--13
-(blueprint: lem-weil-field-twist-inverse).
-
-Proof: restrict the exact integral line tensor functors to the intrinsic constructible
-subcategory. Their evaluation maps are inverse isomorphisms, checked on a rank-one
-trivializing cover, and are linear for the canonical coefficient action. Localize these
-functors and their evaluations by integral_twist_rationalization. The normalization of
-rationalDerivedTensor on integral objects and pure localized arrows identifies these
-localized functors with sfRationalTwistingFunctor, yielding its inverse evaluation.
-For every finite extension the ordinary-to-completed scalar comparison identifies
-base change of the line with the corresponding root line. The canonical beta maps
-commute with evaluation, identity extensions and successive extensions by
-integral_twist_base_change and integral_twist_scalar_coherence. Apply
-qbar_twist_common_stage to these normalized rational functors and comparisons.
-Its representative formula is exactly commonStageDerivedTensor with the signed line
-represented at the least finite stage; enlarge to the common stage and cancel the
-beta maps. Thus its descended evaluation is the displayed Qbar inverse. All maps
-are natural on pure localized arrows and extend by additivity. Empty schemes and
-m = 0 use the same unit/evaluation formulas. No discrete field sheaves are introduced. -/
+/-- Opposite signed root lines give inverse twists after rationalization and common stages. -/
 theorem fieldTwist_inverse
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (S : Scheme.{u})

@@ -36,9 +36,7 @@ open CategoryTheory.Limits CategoryTheory.Functor Opposite
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The explicit finite component used by the normalized coherent tensor tower.
-Source: Stacks 0941 and 07A4 (blueprint: def-pur-completed-pullback-tower-realizations).
--/
+/-- The explicit finite component used by the normalized coherent tensor tower. -/
 def pullbackTensorTensorTowerLevel (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     (pullbackTensorRestrictedTower l E W

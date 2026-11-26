@@ -10,7 +10,11 @@ public import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionDualEvaluat
 
 /-! # Extensionality for semilinear maps to internal duals
 
-Source: Stacks Project, Modules on Sites, tensor adjunction (03EK, 03EL).
+A scalar-extension basis detects maps into a restricted internal dual.
+
+## References
+
+* Stacks Project, Modules on Sites, tensor adjunction (Tags 03EK, 03EL).
 -/
 
 @[expose] public noncomputable section
@@ -19,16 +23,7 @@ universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
-/-- A scalar-extension basis detects maps into a restricted internal dual.
-Source: Stacks, Modules on Sites, tensor adjunction (03EK, 03EL).
-(blueprint: lem-pur-scalar-semilinear-dual-ext).
-Proof: extend both semilinear maps to target-linear maps by tensor adjunction.
-Use the supplied isomorphism to identify the dual of Q with the dual of the
-scalar extension of P. The dual tensor-generation theorem reduces equality
-to evaluations on scalar pure tensors in both arguments. Linearity and
-balancing reduce those evaluations to scalar-one tensors, where the hypothesis
-applies. Cancel the dual isomorphism, and evaluate the extended maps on
-scalar-one tensors to recover the original semilinear maps. -/
+/-- A scalar-extension basis detects maps into a restricted internal dual. -/
 theorem scalarSemilinearDualExt
     (T : Scheme.{u}) {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     (α : R ⟶ S) (M P : proEtaleRingModules T R) (Q : proEtaleRingModules T S)

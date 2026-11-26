@@ -99,10 +99,6 @@ set_option linter.privateModule false
 
 /-! # Finite Kummer level of the Tate twist
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-def-purity-conv/lem-pur-finite-kummer-level.md
-(blueprint: lem-pur-finite-kummer-level).
-
 The source is the published inverse-limit/scalar-extension Tate line, not the already
 finite etale line of the purity conventions. The comparison is fixed on local tensors
 by the N-th root projection. The base-change square uses the coordinatewise root map.

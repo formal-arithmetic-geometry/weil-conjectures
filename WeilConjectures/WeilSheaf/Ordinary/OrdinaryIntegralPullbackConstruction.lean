@@ -132,10 +132,6 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 /-!
 # Ordinary integral pullback and its normalized completion comparison
 
-Source: Bhatt--Scholze, Lemma 6.5.9, Proposition 6.6.11 and Remark 6.8.15;
-Stacks Project, Tags 06YY and 08TC
-(blueprint: lem-tw-ordinary-completed-integral-pullback).
-
 The ordinary pullback uses the adjoint of the completed coefficient map fixed by
 all finite projections. The comparison is fixed on flat-term K-flat representatives
 by the quotient augmentation and the zero second coordinate of the strict Roos cone.
@@ -148,6 +144,26 @@ by the quotient augmentation and the zero second coordinate of the strict Roos c
 
 The constructibility and invertibility theorem remains in
 `WeilConjectures.WeilSheaf.Ordinary.OrdinaryCompletedIntegralPullback`.
+
+## Implementation details
+
+* The completed coefficient map is determined by its quotient projections: the
+  constant-section maps commute with quotient transitions, and the direct image preserves limits.
+* Ringed module pullback is the sheafified presheaf module Kan extension along the coefficient
+  ring map, transported from the small site models; it is `B_X ⊗_{f⁻¹ B_Y} f⁻¹(-)`.
+* The total left derived pullback is obtained from the resolving class of flat-term K-flat
+  complexes, on which termwise pullback preserves quasi-isomorphisms.
+* The quotient maps are fixed on generators by `b ⊗ q ↦ 1 ⊗ (q ⊗ π_n(b))`; uniqueness holds
+  because scalar multiples of restrictions of adjunction-unit generators locally generate the
+  pullback.
+* The completion comparison descends through the resolving-class localization; since the strict
+  cone map has zero second coordinate, its naturality already holds on chain maps.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9, Proposition 6.6.11 and
+  Remark 6.8.15.
+* Stacks Project, Tags 03D1, 03D2, 06YY, 08TC and 0H7J.
 -/
 
 @[expose] public noncomputable section
@@ -174,8 +190,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 private instance ordinarySiteSmall (W : Scheme.{u}) :
     EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0} _
 
-/-- The finite constant coefficient map adjoint to the constant-section inverse-image map.
-Source: Stacks 0H7J (blueprint: lem-tw-ordinary-completed-integral-pullback). -/
+/-- The finite constant coefficient map adjoint to the constant-section inverse-image map. -/
 def ordinaryIntegralFiniteDirectRingMap (n : ℕ) :
     integralCoefficientSheaf l E Y n ⟶
       (proEtaleSheafDirectImage f RingCat.{u + 1}).obj (integralCoefficientSheaf l E X n) :=
@@ -224,13 +239,8 @@ private theorem ordinaryConstantMap_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 attribute [local irreducible] constantSheaf HasDerivedCategory.standard
 
-/-- The adjoint completed ring map is uniquely determined by all its quotient projections.
-Its inverse-image adjoint is exactly c_f of the statement.
-Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 06YY
-(blueprint: lem-tw-ordinary-completed-integral-pullback).
-Proof: the constant-section maps commute with quotient transitions, by their
-sheafification universal property. Right adjoint direct image preserves limits.
-The limit universal property supplies the displayed map and proves uniqueness. -/
+/-- The adjoint completed ring map is uniquely determined by all its quotient projections;
+its inverse-image adjoint is the coefficient map `c_f`. -/
 theorem ordinaryIntegralDirectRingMap_existsUnique :
     ∃! ρ : completedIntegralCoefficientSheafUnrestricted l E Y ⟶
         (proEtaleSheafDirectImage f RingCat.{u + 1}).obj
@@ -264,33 +274,25 @@ theorem ordinaryIntegralDirectRingMap_existsUnique :
 
 attribute [local irreducible] limit
 
-/-- The canonical completed coefficient map, in its direct-image adjoint form.
-Source: Bhatt--Scholze, Lemma 6.5.9
-(blueprint: lem-tw-ordinary-completed-integral-pullback). -/
+/-- The canonical completed coefficient map, in its direct-image adjoint form. -/
 def ordinaryIntegralDirectRingMap :=
   (ordinaryIntegralDirectRingMap_existsUnique l E f).exists.choose
 
 attribute [local irreducible] ordinaryIntegralDirectRingMap
 
-/-- The actual sectionwise module direct image with this completed coefficient action.
-Source: Stacks 03D1 (blueprint: lem-tw-ordinary-completed-integral-pullback). -/
+/-- The actual sectionwise module direct image with this completed coefficient action. -/
 def ordinaryIntegralModulePush : integralTowerModules l E X ⥤ integralTowerModules l E Y :=
   SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange f)
     (J := ProEt.topology Y) (K := ProEt.topology X) (ordinaryIntegralDirectRingMap l E f)
 
-/-- The specified pushforward has the sheafified module Kan-extension left adjoint.
-Source: Stacks 03D2 (blueprint: lem-tw-ordinary-completed-integral-pullback).
-Proof: transport to the already recorded small site models, form the presheaf
-module Kan extension along the displayed ring map and sheafify. Transport its
-adjunction back. Its right adjoint is the specified sectionwise module pushforward.
-The left adjoint is B_X tensor over f-inverse B_Y with f-inverse of the module. -/
+/-- The specified pushforward has the sheafified module Kan-extension left adjoint,
+`B_X ⊗_{f⁻¹ B_Y} f⁻¹(-)`. -/
 @[instance] theorem ordinaryIntegralModulePush_isRightAdjoint :
     (ordinaryIntegralModulePush l E f).IsRightAdjoint := by
   exact SheafOfModules.module_pushforward_isRightAdjoint_of_universes.{u + 1, u, u}
     (U := proEtaleBaseChange f) (ordinaryIntegralDirectRingMap l E f)
 
-/-- Ordinary ringed module pullback, fixed by its sheafified Kan-extension adjunction.
-Source: Stacks 03D2 (blueprint: lem-tw-ordinary-completed-integral-pullback). -/
+/-- Ordinary ringed module pullback, fixed by its sheafified Kan-extension adjunction. -/
 def ordinaryIntegralModulePull :
     integralTowerModules l E Y ⥤ integralTowerModules l E X :=
   letI : (SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange f)
@@ -300,8 +302,7 @@ def ordinaryIntegralModulePull :
   SheafOfModules.pullback.{u + 1} (F := proEtaleBaseChange f)
     (J := ProEt.topology Y) (K := ProEt.topology X) (ordinaryIntegralDirectRingMap l E f)
 
-/-- The adjunction supplying the canonical tensor generators of ordinary pullback.
-Source: Stacks 03D2 (blueprint: lem-tw-ordinary-completed-integral-pullback). -/
+/-- The adjunction supplying the canonical tensor generators of ordinary pullback. -/
 def ordinaryIntegralModuleAdjunction :
     ordinaryIntegralModulePull l E f ⊣ ordinaryIntegralModulePush l E f :=
   letI : (SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange f)
@@ -311,10 +312,7 @@ def ordinaryIntegralModuleAdjunction :
   SheafOfModules.pullbackPushforwardAdjunction (F := proEtaleBaseChange f)
     (J := ProEt.topology Y) (K := ProEt.topology X) (ordinaryIntegralDirectRingMap l E f)
 
-/-- Additivity of ordinary module pullback.
-Source: Stacks 03D2 (blueprint: lem-tw-ordinary-completed-integral-pullback).
-Proof: sectionwise pushforward is additive. Its adjunction makes its left adjoint
-additive by the preadditive adjunction criterion. -/
+/-- Additivity of ordinary module pullback. -/
 @[instance] theorem ordinaryIntegralModulePull_additive :
     (ordinaryIntegralModulePull l E f).Additive := by
   have : (ordinaryIntegralModulePush l E f).Additive := by
@@ -469,12 +467,7 @@ private theorem ordinaryTensorDerivedData :
           (ordinaryTensorRingMap l E f)) hI.symm a)
   exact ⟨LF, ε, hLF, fun P ↦ hε P.obj P.property.1 P.property.2⟩
 
-/-- The canonical total left derived functor exists on the unbounded category.
-Source: Stacks 06YY (blueprint: lem-tw-ordinary-completed-integral-pullback).
-Proof: use lem-pc-kflat-resolution with independent site and coefficient sizes.
-Exact inverse image followed by extension of scalars preserves quasi-isomorphisms
-between flat-term K-flat complexes, by ringed-topoi-derived-pullback. Localization
-of this resolving class gives the total left derived functor and its counit. -/
+/-- The canonical total left derived functor exists on the unbounded category. -/
 @[instance] theorem ordinaryIntegralPull_hasLeftDerived :
     ((ordinaryIntegralModulePull l E f).mapHomotopyCategory (.up ℤ) ⋙
       DerivedCategory.Qh).HasLeftDerivedFunctor
@@ -486,15 +479,13 @@ of this resolving class gives the total left derived functor and its counit. -/
     (ordinaryTensorHomotopyIso l E f)
     (HomotopyCategory.quasiIso (integralTowerModules l E Y) (.up ℤ))).mp inferInstance
 
-/-- Ordinary unbounded derived ringed pullback, before completion.
-Source: Stacks 06YY (blueprint: lem-tw-ordinary-completed-integral-pullback). -/
+/-- Ordinary unbounded derived ringed pullback, before completion. -/
 def ordinaryIntegralDerivedPull :=
   ((ordinaryIntegralModulePull l E f).mapHomotopyCategory (.up ℤ) ⋙
     DerivedCategory.Qh).totalLeftDerived DerivedCategory.Qh
       (HomotopyCategory.quasiIso (integralTowerModules l E Y) (.up ℤ))
 
-/-- The counit of the specified ordinary total derived pullback.
-Source: Stacks 06YY (blueprint: lem-tw-ordinary-completed-integral-pullback). -/
+/-- The counit of the specified ordinary total derived pullback. -/
 def ordinaryIntegralPullCounit :
     DerivedCategory.Qh ⋙ ordinaryIntegralDerivedPull l E f ⟶
       (ordinaryIntegralModulePull l E f).mapHomotopyCategory (.up ℤ) ⋙
@@ -503,13 +494,11 @@ def ordinaryIntegralPullCounit :
     DerivedCategory.Qh).totalLeftDerivedCounit DerivedCategory.Qh
       (HomotopyCategory.quasiIso (integralTowerModules l E Y) (.up ℤ))
 
-/-- Termwise ordinary pullback on cochain representatives.
-Source: Stacks 06YY (blueprint: lem-tw-ordinary-completed-integral-pullback). -/
+/-- Termwise ordinary pullback on cochain representatives. -/
 def ordinaryIntegralPullComplex :=
   (ordinaryIntegralModulePull l E f).mapHomologicalComplex (.up ℤ)
 
-/-- The ordinary computation map on a cochain representative, retaining its universal counit.
-Source: Stacks 06YY (blueprint: lem-tw-ordinary-completed-integral-pullback). -/
+/-- The ordinary computation map on a cochain representative, retaining its universal counit. -/
 def ordinaryIntegralPullComplexCounit (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     (ordinaryIntegralDerivedPull l E f).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj ((ordinaryIntegralPullComplex l E f).obj P) :=
@@ -519,11 +508,7 @@ def ordinaryIntegralPullComplexCounit (P : CochainComplex (integralTowerModules 
       (((ordinaryIntegralModulePull l E f).mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
     (DerivedCategory.quotientCompQhIso _).hom.app ((ordinaryIntegralPullComplex l E f).obj P)
 
-/-- The ordinary computation map is invertible on every flat-term K-flat representative.
-Source: Stacks 06YY (blueprint: lem-tw-ordinary-completed-integral-pullback).
-Proof: the resolving-class derived-pullback theorem computes the total left derived
-functor on precisely these complexes. Its counit is invertible there. The remaining
-factors are the canonical cochain-to-homotopy localization isomorphisms. -/
+/-- The ordinary computation map is invertible on every flat-term K-flat representative. -/
 theorem ordinaryIntegralPullComplexCounit_isIso
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :
     IsIso (ordinaryIntegralPullComplexCounit l E f P.obj) := by
@@ -635,17 +620,8 @@ private theorem ordinaryAugmentation_formula
 attribute [local irreducible] ordinaryAmbientComplexIso ordinaryAmbientPullIso
   ordinaryAugmentation
 
-/-- The quotient maps, as one natural map of strict towers, are uniquely fixed on generators.
-The formula is 1 tensor q ↦ 1 tensor (q tensor 1); completed linearity gives
-b tensor q ↦ 1 tensor (q tensor pi_n(b)) on every inverse-image generator.
-Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 06YY, 08TC
-(blueprint: lem-tw-ordinary-completed-integral-pullback).
-Proof: the completed coefficient map commutes with each quotient by its defining
-projection equation. Thus the displayed map is balanced, linear and restriction
-compatible. Sheafification gives the module maps; applying them degreewise gives
-chain maps. Coefficient reduction preserves one, so consecutive transition squares
-commute. The same generator equality proves naturality. Locally the scalar multiples
-of restrictions of adjunction-unit generators generate pullback, giving uniqueness. -/
+/-- The quotient maps, as one natural map of strict towers, are uniquely fixed on generators
+by `b ⊗ q ↦ 1 ⊗ (q ⊗ π_n(b))`. -/
 theorem ordinaryIntegralQuotientAugmentation_existsUnique :
     ∃! a : ordinaryIntegralPullComplex l E f ⋙
         (Functor.const ℕᵒᵖ : CochainComplex (integralTowerModules l E X) ℤ ⥤ _) ⟶
@@ -673,16 +649,13 @@ theorem ordinaryIntegralQuotientAugmentation_existsUnique :
   exact (ha P n.unop i V.unop x).trans
     (ordinaryAugmentation_formula l E f P n.unop i V.unop x).symm
 
-/-- The actual quotient augmentation, with all quotient transitions retained.
-Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 08TC
-(blueprint: lem-tw-ordinary-completed-integral-pullback). -/
+/-- The actual quotient augmentation, with all quotient transitions retained. -/
 def ordinaryIntegralQuotientAugmentation :=
   (ordinaryIntegralQuotientAugmentation_existsUnique l E f).exists.choose
 
 attribute [local irreducible] ordinaryIntegralQuotientAugmentation
 
-/-- The product of the specified quotient maps.
-Source: Stacks 08TC (blueprint: lem-tw-ordinary-completed-integral-pullback). -/
+/-- The product of the specified quotient maps. -/
 def ordinaryIntegralProductAugmentation
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     (ordinaryIntegralPullComplex l E f).obj P ⟶
@@ -702,11 +675,7 @@ private theorem ordinaryTowerAugmentation_zero
   simpa [towerTransitionEndomorphism, towerProductShift,
     integralOperationsTowerStep, Category.assoc] using sub_eq_zero.mpr h
 
-/-- The strict quotient augmentation is killed by 1-s, with zero second cone cochain.
-Source: Stacks 08TC (blueprint: lem-tw-ordinary-completed-integral-pullback).
-Proof: after every product projection, the composite with 1-s is the difference
-between consecutive quotient maps and is zero by the strict tower's naturality.
-The differential of the zero cochain is zero. Product projections are jointly monic. -/
+/-- The strict quotient augmentation is killed by `1 - s`, with zero second cone cochain. -/
 theorem ordinaryIntegralCompletionChain_condition
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     CochainComplex.HomComplex.δ (-1) 0
@@ -733,8 +702,7 @@ theorem ordinaryIntegralCompletionChain_condition
   simp only [CochainComplex.HomComplex.δ_zero, zero_add, hzero,
     CochainComplex.HomComplex.Cochain.ofHom_zero]
 
-/-- The prescribed chain map into Cone(1-s)[-1]: quotient maps and zero, respectively.
-Source: Stacks 08TC (blueprint: lem-tw-ordinary-completed-integral-pullback). -/
+/-- The prescribed chain map into `Cone(1 - s)[-1]`: quotient maps and zero, respectively. -/
 def ordinaryIntegralCompletionChain
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     (ordinaryIntegralPullComplex l E f).obj P ⟶
@@ -888,14 +856,7 @@ private def ordinaryIntegralComparisonOnGood :
 
 attribute [local irreducible] ordinaryIntegralComparisonOnGood ordinaryIntegralPullComplex
 
-/-- The specified chain maps descend to a unique natural transformation.
-Source: Stacks 06YY, 08TC (blueprint: lem-tw-ordinary-completed-integral-pullback).
-Proof: the augmentation is natural on chain maps. Its strict cone map has a zero
-second coordinate, so its naturality holds as chain maps, not just on projections.
-Both representative constructions invert quasi-isomorphisms on the flat-term
-K-flat class by ringed-topoi-derived-pullback and integral-operations-well-defined.
-The resolving-class localization therefore descends the comparison. Its restriction
-on that class is faithful, proving uniqueness and independence of the resolution. -/
+/-- The specified chain maps descend to a unique natural transformation. -/
 theorem ordinaryIntegralCompletionComparison_existsUnique :
     ∃! η : ordinaryIntegralDerivedPull l E f ⟶ integralDerivedPullback l E f,
       ∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,
@@ -925,9 +886,7 @@ theorem ordinaryIntegralCompletionComparison_existsUnique :
     intro P
     exact (hη' P).trans ((ordinaryIntegralComparisonOnGood l E f).property P).symm
 
-/-- The canonical completion comparison, uniquely fixed by the (quotients,0) chain map.
-Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 08TC
-(blueprint: lem-tw-ordinary-completed-integral-pullback). -/
+/-- The canonical completion comparison, uniquely fixed by the (quotients, 0) chain map. -/
 def ordinaryIntegralCompletionComparison :
     ordinaryIntegralDerivedPull l E f ⟶ integralDerivedPullback l E f :=
   (ordinaryIntegralCompletionComparison_existsUnique l E f).exists.choose

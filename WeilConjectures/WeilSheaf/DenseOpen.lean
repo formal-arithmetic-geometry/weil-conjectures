@@ -21,14 +21,13 @@ fundamental group of a dense open of a connected normal scheme surjects onto tha
 lisse sheaves on `X` are determined by their restriction to `U`:
 
 - if `X` is a smooth curve, `j̄_* ℚ̄_ℓ ≅ ℚ̄_ℓ`, from the description of a lisse Weil sheaf as the
-  direct image of its restriction to `U` (blueprint `lemma-boundary-stalk--2`);
+  direct image of its restriction to `U`;
 - if `X` is a smooth curve, the restriction `j^*` is fully faithful on lisse Weil sheaves;
 - if `X` is a smooth geometrically connected curve, the restriction `j^*` carries irreducible
   lisse Weil sheaves to irreducible lisse Weil sheaves.
 
-The last two are part (4) of the blueprint lemma `theorem-purity-real-sheaves-curves` (subsection
-`lemma-boundary-stalk--2`). The geometric versions, for lisse `ℓ`-adic sheaves on the geometric
-curves, are in `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyPullback`
+The geometric versions of the last two, for lisse `ℓ`-adic sheaves on the geometric curves, are
+in `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyPullback`
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.adicUpperStar_map_bijective`,
 `AlgebraicGeometry.ProEtale.IsIrreducibleAdicLocalSystem.adicUpperStar`).
 
@@ -60,9 +59,7 @@ variable [Fact (ringChar k₀ ≠ l)]
 
 /-- For a dense quasi-compact open immersion `j : U ↪ X` of `k₀`-schemes with `X` a smooth curve
 over `k₀`, the pushforward `j̄_* ℚ̄_ℓ` of the constant sheaf of the geometric fiber `Ū` is the
-constant sheaf of `X̄`: the constant Weil sheaf is lisse, hence the direct image of its
-restriction to `U` (`AlgebraicGeometry.WeilSheaf.IsLisse.nonempty_iso_directImage_upperStar`,
-blueprint `lemma-boundary-stalk--2`), and the restriction of `ℚ̄_ℓ` is `ℚ̄_ℓ`. -/
+constant sheaf of `X̄`. -/
 theorem nonempty_adicLowerStar_unit_iso_geometricFiberMap
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (j : U ⟶ X) [IsOpenImmersion j]
@@ -86,10 +83,7 @@ variable [Fact (ringChar k₀ ≠ l)]
 /-- **Restriction to a dense open of a curve is fully faithful on lisse Weil sheaves.** Let `X` be
 a smooth curve over `k₀`, `j : U ↪ X` a quasi-compact open immersion with dense image and `N` a
 lisse Weil sheaf on `X`. Then `Hom(A, N) → Hom(j^* A, j^* N)` is bijective for every Weil sheaf
-`A`: the unit `N ⟶ j_* j^* N` is an isomorphism
-(`AlgebraicGeometry.WeilSheaf.IsLisse.isIso_upperStarLowerStarAdjunction_unit_app`), and under
-the adjunction `j^* f` corresponds to `f` followed by the unit.
-(blueprint: `theorem-purity-real-sheaves-curves`, part (4), subsection `lemma-boundary-stalk--2`) -/
+`A`. -/
 theorem upperStar_map_bijective_of_isLisse
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (j : U ⟶ X) [IsOpenImmersion j]
@@ -103,15 +97,7 @@ theorem upperStar_map_bijective_of_isLisse
 /-- *Restriction to a dense open of a curve preserves irreducibility.* Let `X` be a smooth
 geometrically connected quasi-compact curve over `k₀` and `j : U ↪ X` a dense open immersion.
 The restriction `j^*` carries irreducible lisse Weil sheaves on `X` to irreducible lisse Weil
-sheaves on `U`: the Weil group of `U` surjects onto that of `X`.
-
-A lisse Weil subsheaf `G'` of `j^* M` has a lisse direct image `j_* G'`: on the geometric curves
-this is `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.adicLowerStar_of_mono`, by the surjectivity
-of `π₁(Ū) → π₁(X̄)`. As `j^* j_* G' ≅ G'`, the inclusion `G' ⟶ j^* M` is the restriction of a
-monomorphism `j_* G' ⟶ M` by full faithfulness
-(`AlgebraicGeometry.WeilSheaf.upperStar_map_bijective_of_isLisse`), to which the irreducibility
-of `M` applies.
-(blueprint: `theorem-purity-real-sheaves-curves`, part (4), subsection `lemma-boundary-stalk--2`) -/
+sheaves on `U`. -/
 theorem IsIrreducibleLisse.upperStar_of_isDominant
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]

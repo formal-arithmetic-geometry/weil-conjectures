@@ -18,8 +18,7 @@ public import WeilConjectures.SixFunctors.Finite.Exact
 Let `(A, I)` be a henselian pair, `X` a scheme over `A` with closed fibre `ι : X₀ ⟶ X`, and
 `h : V ⟶ X` a finite morphism with `V` proper over `A`. For a finite abelian group `M`, every
 class of `H¹(X₀, ι^* h_* M)` comes from `H¹(X, h_* M)`. This is the lifting step in the proof
-of the acyclicity of restricted injectives on `ℙ¹` over a strictly henselian ring (blueprint
-`lemma-acyclicity-closed-fibre--1`).
+of the acyclicity of restricted injectives on `ℙ¹` over a strictly henselian ring.
 
 ## Main statements
 

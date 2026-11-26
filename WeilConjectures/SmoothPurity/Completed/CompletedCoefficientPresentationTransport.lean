@@ -68,14 +68,21 @@ import all WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicCoeffic
 
 /-! # Completed coefficient presentation and tensor transport
 
-Source: main-20261015, sec-six-functors-basics/sk-lem-sf-mate,
-fix-prop-adjunctions.proof.md, Step 1; Stacks 099N (2),(5), 03D7, 070I;
-Bhatt--Scholze, Lemma 6.8.2(1).
-(blueprint: def-pur-completed-coefficient-presentation-transport).
+Transport of bounded constructibility and of scalar extension along `E → L` through the
+completed coefficient models `purCoefficientModel`, with ordinary and derived balanced
+tensor comparisons normalized on tensor generators.
 
-The coefficient ring comparison and derived transport are the landed integral
-stratified-perfect interfaces. Only the CommRing lift, its explicit inverse
-restriction model, completeness tests and normalized tensor comparison are supplied here.
+## Implementation details
+
+The coefficient ring comparison and derived transport are the existing integral
+stratified-perfect interfaces. Only the `CommRing` lift, its explicit inverse restriction
+model, completeness tests and the normalized tensor comparison are supplied here.
+
+## References
+
+* Stacks Project, Tags 099N, 03D7, 03EK, 06YY and 070I.
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemmas 6.5.1, 6.8.2(1) and
+  6.8.11(3).
 -/
 
 @[expose] public noncomputable section
@@ -93,14 +100,9 @@ variable (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- Bounded constructibility comparison under exactly the landed geometric bounds.
-Source: Bhatt--Scholze 6.5.1, 6.8.11(3)
-(blueprint: def-pur-completed-coefficient-presentation-transport).
-Proof: apply integralStratifiedPerfectDetailed to the transported object. The
-inverse functor of purCoefficientModel is the landed integralDetailedTransport,
-so its unit identifies the resulting object with K. Both bounded constructible
-predicates are invariant under that isomorphism. The Noetherian, dimension and
-invertibility assumptions are precisely those of the landed characterization. -/
+/-- On a Noetherian scheme of finite dimension on which `l` is invertible, a completed
+complex `K` is bounded constructible iff its coefficient model is integrally
+constructible. -/
 theorem purCoefficientModel_bounded_predicate (W : Scheme.{u}) [IsNoetherian W]
     (_hdim : ∃ n : ℕ, topologicalKrullDim W ≤ n)
     (_hinv : IsUnit (l : Γ(W, ⊤)))
@@ -119,8 +121,7 @@ theorem purCoefficientModel_bounded_predicate (W : Scheme.{u}) [IsNoetherian W]
   exact (ObjectProperty.prop_iff_of_iso
     (PbcIsBoundedConstructibleComplete W (pbcIntegralDatum l E)) e).symm.trans h.symm
 
-/-- The recorded tensor generator for ordinary integral scalar extension.
-Source: Stacks 03EK (blueprint: def-pur-completed-coefficient-presentation-transport). -/
+/-- The tensor generator `a ⊗ x` for ordinary integral scalar extension. -/
 def purRawTensorSection (W : Scheme.{u}) (M : integralTowerModules l E W)
     (U : W.ProEtᵒᵖ) (a : (completedIntegralCommRingSheafUnrestricted l L W).obj.obj U)
     (x : M.val.obj U) : ((integralOrdinaryScalar l E L ι W).obj M).val.obj U :=
@@ -463,14 +464,7 @@ private theorem ordinaryScalarComparison
     rw [map_one]
 
 /-- Coefficient-model transport commutes with ordinary scalar tensor by the specified
-balanced tensor map, on every generator.
-Source: Stacks 03EK, Bhatt--Scholze 6.8.2(1)
-(blueprint: def-pur-completed-coefficient-presentation-transport).
-Proof: every finite projection identifies the scalar coefficient square. Thus its
-completed square commutes. Send a tensor x to the same tensor with a transported
-by the completed ring isomorphism. The inverse uses the inverse ring isomorphism.
-Balancedness, restriction compatibility and the inverse identities hold on tensor
-generators and descend through sheafification. Local generation proves uniqueness. -/
+balanced tensor map, on every generator; this isomorphism is unique. -/
 theorem purOrdinaryScalarModel_existsUnique (W : Scheme.{u}) :
     ∃! e : pbcExtend (pbcScalarCoefficientMap l E L ι W) ⋙
         purOrdinaryCoefficientModel l L W ≅
@@ -489,13 +483,11 @@ theorem purOrdinaryScalarModel_existsUnique (W : Scheme.{u}) :
     (coefficientScalar_square l E L ι W) (integralOrdinaryScalar l E L ι W)
     (purRawTensorSection l E L ι W) aI hI (rawTensor_smul l E L ι W) aG hG aH hH
 
-/-- The ordinary scalar comparison, uniquely fixed on all tensor generators.
-Source: Stacks 03EK (blueprint: def-pur-completed-coefficient-presentation-transport). -/
+/-- The ordinary scalar comparison, uniquely fixed on all tensor generators. -/
 def purOrdinaryScalarModel (W : Scheme.{u}) :=
   (purOrdinaryScalarModel_existsUnique l E L ι W).exists.choose
 
-/-- Termwise transport of the specified ordinary balanced tensor comparison.
-Source: Stacks 06YY (blueprint: def-pur-completed-coefficient-presentation-transport). -/
+/-- Termwise extension of the ordinary balanced tensor comparison to cochain complexes. -/
 def purScalarModelComplexIso (W : Scheme.{u}) :
     (pbcExtend (pbcScalarCoefficientMap l E L ι W)).mapHomologicalComplex (.up ℤ) ⋙
         (purOrdinaryCoefficientModel l L W).mapHomologicalComplex (.up ℤ) ≅
@@ -605,13 +597,7 @@ private theorem scalarDerivedComparison (W : Scheme.{u})
     (Category.comp_id (F.mapDerivedCategoryFactors.hom.app P)).symm
 
 /-- Derived transport of the same scalar comparison, retaining the ordinary comparison
-on every complex (finite-free scalar extension is exact).
-Source: Stacks 06YY, 099N (blueprint: def-pur-completed-coefficient-presentation-transport).
-Proof: the model functors are exact identity-on-sections restrictions. Finite-free
-scalar tensor is exact. On resolving complexes the universal derived tensor counit
-is invertible, and the displayed conjugation of the ordinary tensor comparison
-therefore gives the comparison. It descends through resolving quasi-isomorphisms.
-Every object has a complex representative, so the result is invertible and unique. -/
+on every complex; this isomorphism is unique. -/
 theorem purScalarModel_existsUnique (W : Scheme.{u}) :
     ∃! e : pbcEmbeddingAmbientTensor l E L ι W ⋙ (purCoefficientModel l L W).functor ≅
         (purCoefficientModel l E W).functor ⋙ integralOrdinaryDerivedScalar l E L ι W,
@@ -668,8 +654,7 @@ theorem purScalarModel_existsUnique (W : Scheme.{u}) :
       (((purOrdinaryCoefficientModel l E W).mapHomologicalComplex (.up ℤ)).obj P))).mp
         ((he' P).trans (hNorm P).symm)
 
-/-- The actual derived balanced-tensor comparison between the coefficient models.
-Source: Stacks 06YY (blueprint: def-pur-completed-coefficient-presentation-transport). -/
+/-- The derived balanced-tensor comparison between the coefficient models. -/
 def purScalarModel (W : Scheme.{u}) := (purScalarModel_existsUnique l E L ι W).exists.choose
 
 end WeilConjectures

@@ -15,9 +15,17 @@ import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSectionComplement
 
 /-! # The global coordinate frame of the affine-line zero ideal
 
-Source: the rank-one paragraph of the current blueprint,
-cor-pur-affine-space-zero-section-purity.proof.md
-(blueprint: lem-pur-coordinate-ideal-frame).
+The rank-one Cartier calculation for the zero section of the affine line.
+
+## Implementation details
+
+The closed subscheme cut out by the coordinate has inclusion equal to its projection followed
+by the zero section, and the coordinate vanishes on the zero section, so the two ideal sheaves
+agree; on every affine open the coordinate generates the invertible ideal, hence is a free
+generator. Dualizing this trivialization, the dual of the ideal inclusion is the canonical
+divisor section, with coefficient `t`. Pulled back to the terminal étale object and restricted
+to the coordinate basic open, this frame is identified with the canonical complementary
+section via the torsor action of the coordinate unit.
 -/
 
 @[expose] public section
@@ -28,37 +36,26 @@ open AlgebraicGeometry.Scheme.Modules
 
 namespace WeilConjectures.PurityFiniteSetting
 
-/-- The coordinate open and zero section are complementary.
-Source: the affine-line datum (blueprint: lem-pur-coordinate-ideal-frame). -/
+/-- The coordinate open and zero section are complementary. -/
 theorem coordinateLocalization_complement (T : Scheme.{u}) :
     Set.range (zeroSection T).base = (Set.range (openImmersion T).base)ᶜ := by
   rw [show Set.range (openImmersion T).base = (Set.range (zeroSection T).base)ᶜ from
     AffineSpace.range_basicOpen_ι_coord T, compl_compl]
 
-/-- The coordinate basic open is etale. Source: the affine-line datum
-(blueprint: lem-pur-coordinate-ideal-frame). -/
+/-- The coordinate basic open is etale. -/
 instance coordinateFrameOpenEtale (T : Scheme.{u}) :
     AlgebraicGeometry.Etale (openImmersion T) := by
   dsimp only [openImmersion]
   infer_instance
 
-/-- The coordinate zero section is a closed immersion. Source: the affine-line datum
-(blueprint: lem-pur-coordinate-ideal-frame). -/
+/-- The coordinate zero section is a closed immersion. -/
 instance coordinateFrameZeroClosed (T : Scheme.{u}) :
     IsClosedImmersion (zeroSection T) := by
   dsimp only [zeroSection]
   infer_instance
 
 /-- The coordinate itself generates the zero ideal globally, including over a
-nonaffine base. This is the frame whose dual is the inverse-coordinate frame.
-Source: the rank-one Cartier calculation in the current blueprint
-(blueprint: lem-pur-coordinate-ideal-frame).
-Proof: the closed subscheme cut out by the coordinate has its inclusion equal to
-its projection followed by the zero section, by the affine-space universal
-property. Conversely the coordinate vanishes on the zero section. Their kernel
-ideal sheaves are therefore equal. The coordinate lifts to the ideal sheaf since
-it vanishes on that subscheme. On every affine open its image generates the ideal;
-invertibility of the ideal makes this section a free generator. -/
+nonaffine base. This is the frame whose dual is the inverse-coordinate frame. -/
 theorem coordinateIdealFrame (T : Scheme.{u}) (hI : (zeroSection T).ker.IsInvertible) :
     ∃ e : Γ((zeroSection T).ker.toModules, ⊤),
       (zeroSection T).ker.toModulesι.app ⊤ e = AffineSpace.coord T (ULift.up (0 : Fin 1)) ∧
@@ -142,13 +139,7 @@ private theorem coordinateUnitDualConjugation (T : Scheme.{u})
   rw [(Line T).ringCatSheaf.obj.map_id]
   exact mul_one _
 
-/-- The dual coordinate frame has coefficient t in the canonical divisor section.
-Source: the rank-one Cartier calculation, e=t inverse and tau=t e
-(blueprint: lem-pur-coordinate-ideal-frame).
-Proof: the coordinate generator trivializes the ideal. Dualize this isomorphism
-and the unit internal-Hom comparison. The dual of the ideal inclusion is the
-canonical divisor section; its coefficient in this dual frame is t since the
-original inclusion sends the coordinate generator to t. -/
+/-- The dual coordinate frame has coefficient t in the canonical divisor section. -/
 theorem coordinateDualIdealFrame (T : Scheme.{u})
     (hI : (zeroSection T).ker.IsInvertible) :
     ∃ e : unit (Line T) ≅ dual (zeroSection T).ker.toModules,
@@ -198,15 +189,7 @@ private theorem coordinateDivisorSectionPullback_eq (T : Scheme.{u})
   erw [e.hom.naturality, e.inv_hom_id_app_assoc]
 
 /-- The canonical open Cartier frame is the coordinate acting on a global dual
-frame. This supplies the literal framed-torsor input for the Yoneda sign theorem.
-Source: the rank-one Cartier calculation in the current blueprint
-(blueprint: lem-pur-coordinate-ideal-frame).
-Proof: pull back the dual coordinate trivialization to the terminal etale object
-and restrict it to the coordinate basic open. Restriction of a pulled-back global
-map is its pullback on the smaller object. The torsor action multiplies its source
-by the coordinate unit. Pullback of scalar multiplication is scalar multiplication
-by the pulled coordinate; the global divisor-section equation then identifies
-this frame with the canonical complementary section. -/
+frame. This supplies the literal framed-torsor input for the Yoneda sign theorem. -/
 theorem coordinateDualTorsorFrame (T : Scheme.{u})
     (hI : (zeroSection T).ker.IsInvertible)
     [SheafOfModules.IsInvertible.{u, u, u} (dual (zeroSection T).ker.toModules)] :

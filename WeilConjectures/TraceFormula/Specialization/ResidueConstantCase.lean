@@ -20,7 +20,9 @@ the coordinate back to a uniformizer of the discrete valuation ring `𝒪_{X,ζ}
 field `𝔽_E` of a finite extension `E` of `ℚ_ℓ`, the restricted specialization `Le^* Ψ_X(j_! 𝔽_E)`
 vanishes near `ζ`
 (`ProEtale.CondensedRing.nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_uniformizer`).
-This is blueprint `lemma-vanishing-generic-points-principal-divisor` with coefficients `𝔽_E`.
+This is generic vanishing at the generic points of a principal divisor, with coefficients `𝔽_E`.
+
+## Implementation details
 
 The proof is that of the `ℚ̄_ℓ` case (`GenericDivisorConstantCase.lean`), with coefficients in a
 finite ring `T` killed by `ℓ`:
@@ -70,8 +72,7 @@ variable {k : Type u} [Field k] (k' : Type u) [Field k'] [Algebra k k']
   {X V : Over (Spec (.of k))} (I : X.left.IdealSheafData)
 
 /-- **The open exchange for the defect** (arbitrary coefficients): for an open immersion
-`g : V ⟶ X`, `C_{V, Z ∩ V}(Lg^* L) ≅ Lg_Z^* C_{X,Z}(L)`, the pullback exchanges of the deformations
-of `g` and of `g_Z` being invertible (`isIso_deformationModelHom_pullbackExchange`). -/
+`g : V ⟶ X`, `C_{V, Z ∩ V}(Lg^* L) ≅ Lg_Z^* C_{X,Z}(L)`. -/
 theorem nonempty_specializationDefect_upperStar_iso_of_isOpenImmersion (g : V ⟶ X)
     [IsOpenImmersion g.left]
     (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
@@ -130,12 +131,8 @@ lemma plusEtaleOrigin_nearbyCycles_obj {A A' : Scheme.{u}} (M : NearbyCyclesMode
 variable {k : Type u} [Field k] (k' : Type u) [Field k'] [Algebra k k'] {X X' : Over (Spec (.of k))}
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
 
-/-- **Proper exchange for the defect, with finite coefficients** (blueprint
-`lemma-base-change-cone-x-z`, proper case): for `f : X' ⟶ X` proper and a complex `L'` of étale
-origin on `X'`, `C_{X,Z}(Rf_* L') ≅ Rf_{Z*} C_{X',Z'}(L')`. The pushforward exchanges of the
-deformations of `f` and `f_Z` are invertible by the proper exchange of nearby cycles with finite
-coefficients, and the base change morphisms of the squares of the centres and of the zero sections
-by proper base change with finite coefficients. -/
+/-- **Proper exchange for the defect, with finite coefficients**: for `f : X' ⟶ X` proper and a
+complex `L'` of étale origin on `X'`, `C_{X,Z}(Rf_* L') ≅ Rf_{Z*} C_{X',Z'}(L')`. -/
 theorem nonempty_specializationDefect_lowerStar_iso_finiteCoefficient (f : X' ⟶ X)
     [IsProper f.left] (I : X.left.IdealSheafData)
     (L' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X'.left) Ab.{u + 1})
@@ -186,9 +183,7 @@ theorem nonempty_specializationDefect_lowerStar_iso_finiteCoefficient (f : X' �
 variable (X) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
 
 /-- **The defect kills complexes of étale origin supported on the centre, with finite
-coefficients** (blueprint `lemma-base-change-cone-x-z`): `C_{X,Z}(Ri_* M) = 0` for `M` of
-étale origin on `Z`, by the proper exchange for the closed immersion `i` and the vanishing of the
-defect of the zero ideal. -/
+coefficients**: `C_{X,Z}(Ri_* M) = 0` for `M` of étale origin on `Z`. -/
 theorem isZero_specializationDefect_lowerStar_centreι_finiteCoefficient
     (I : X.left.IdealSheafData)
     (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (centre X I).left) Ab.{u + 1})
@@ -203,11 +198,8 @@ theorem isZero_specializationDefect_lowerStar_centreι_finiteCoefficient
     (I.comap (centreι X I).left) (IdealSheafData.comap_subschemeι I) M)).of_iso e
 
 /-- **The defect is unchanged by extension by zero from the complement, with finite
-coefficients** (blueprint `lemma-base-change-cone-x-z`, last assertion): for the open
-immersion `j : U ⟶ X` of the complement of the centre and `L` of étale origin,
-`C_{X,Z}(j_! Lj^* L) ≅ C_{X,Z}(L)`. Apply `nonempty_specializationDefect_iso_of_distTriang` to the
-open–closed triangle `j_! Lj^* L ⟶ L ⟶ Ri_* Li^* L`: `Li^* j_! = 0`, and the defect of
-`Ri_* Li^* L` vanishes. -/
+coefficients**: for the open immersion `j : U ⟶ X` of the complement of the centre and `L` of
+étale origin, `C_{X,Z}(j_! Lj^* L) ≅ C_{X,Z}(L)`. -/
 theorem nonempty_specializationDefect_lowerShriek_iso_finiteCoefficient
     (I : X.left.IdealSheafData) {U : Over (Spec (.of k))} (j : U ⟶ X) [IsOpenImmersion j.left]
     (hj : IsCompl (Set.range j.left.base) (Set.range (centreι X I).left.base))
@@ -244,8 +236,7 @@ variable {k : Type u} [Field k] {X : Over (Spec (.of k))} [LocallyOfFiniteType X
 global function `h`, `ζ` a generic point of `Z`, and `f₀ : W₀ ⟶ 𝔸¹_k` a smooth morphism on a
 neighbourhood `W₀` of `ζ` such that `f₀^* x` is a uniformizer of the discrete valuation ring
 `𝒪_{X,ζ}`. Then on a smaller neighbourhood `W` of `ζ`, with the restriction `f` of `f₀`,
-`Z ∩ W = f⁻¹ V(x^m)` for some `m ≥ 1`: near `ζ`, `h = (unit) · (f₀^* x)^m`
-(`Scheme.exists_span_eq_span_pow_of_irreducible_germ`). -/
+`Z ∩ W = f⁻¹ V(x^m)` for some `m ≥ 1`. -/
 theorem exists_smooth_comap_polyAffineThickOrigin_of_uniformizer (hX : IsNormalScheme X.left)
     {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}
     (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h}))
@@ -326,9 +317,7 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [Dis
 /-- **The defect of the constant complex vanishes near a point with a smooth chart pulling back a
 thick origin, with finite coefficients**: let `ζ` be a point of `Z = V(I)` with an open
 neighbourhood `W` in `X` and a smooth `f : W ⟶ 𝔸¹_k` such that `Z ∩ W = f⁻¹ V(x^m)`, `m ≥ 1`.
-Then `C_{X,Z}(T̲)` vanishes near `ζ`, for a finite coefficient ring `T` killed by `ℓ ≠ char k'`:
-`C_{W, Z ∩ W}(T̲) = 0` by the smooth exchange and the thick origin, and the open exchange along
-`W ⟶ X` concludes. -/
+Then `C_{X,Z}(T̲)` vanishes near `ζ`, for a finite coefficient ring `T` killed by `ℓ ≠ char k'`. -/
 theorem defectVanishesNear_unit_of_smooth_finiteCoefficient (hT : (ℓ : T) = 0)
     (I : X.left.IdealSheafData) (ζ : (centre X I).left) (W : X.left.Opens)
     (hζW : I.subschemeι ζ ∈ W) (f : overRestrict X W ⟶ polyAffine k 1) [Smooth f.left] {m : ℕ}
@@ -353,10 +342,7 @@ theorem defectVanishesNear_unit_of_smooth_finiteCoefficient (hT : (ℓ : T) = 0)
 
 /-- **The constant case near a point with a smooth chart pulling back a thick origin, with finite
 coefficients**: under the hypotheses of `defectVanishesNear_unit_of_smooth_finiteCoefficient`,
-`Le^* Ψ_X(j_! T̲)` vanishes near `ζ`, for the complement `j : X ∖ Z ⟶ X`. Indeed
-`C_{X,Z}(j_! T̲) ≅ C_{X,Z}(j_! Lj^* T̲) ≅ C_{X,Z}(T̲)` vanishes near `ζ`
-(`nonempty_specializationDefect_lowerShriek_iso_finiteCoefficient`), and since `Li^* j_! = 0`
-this defect is `Le^* Ψ_X(j_! T̲)[1]`. -/
+`Le^* Ψ_X(j_! T̲)` vanishes near `ζ`, for the complement `j : X ∖ Z ⟶ X`. -/
 theorem nearbyCyclesVanishNear_lowerShriek_unit_of_smooth_finiteCoefficient
     (hT : (ℓ : T) = 0) (I : X.left.IdealSheafData) (ζ : (centre X I).left) (W : X.left.Opens)
     (hζW : I.subschemeι ζ ∈ W) (f : overRestrict X W ⟶ polyAffine k 1) [Smooth f.left] {m : ℕ}
@@ -385,12 +371,11 @@ theorem nearbyCyclesVanishNear_lowerShriek_unit_of_smooth_finiteCoefficient
     (hU.of_iso ((L((((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι)^*⟦
       Profinite.continuousMapRingObj.{u} T⟧)).mapIso (e₁ ≪≫ e₂)))
 
-/-- **The constant case of generic vanishing along a divisor, with finite coefficients**
-(blueprint `lemma-vanishing-generic-points-principal-divisor`, for a finite coefficient ring `T`
-killed by `ℓ ≠ char k'`): let `X` be normal, `Z = V(h)` for a nonzero global function `h`,
-`j : X ∖ Z ⟶ X` the complement, `ζ` a generic point of `Z`, and `f₀ : W₀ ⟶ 𝔸¹_k` smooth on a
-neighbourhood `W₀` of `ζ` such that `f₀^* x` is a uniformizer of `𝒪_{X,ζ}`. Then
-`Le^* Ψ_X(j_! T̲)` vanishes near `ζ`. -/
+/-- **The constant case of generic vanishing along a divisor, with finite coefficients** (for a
+finite coefficient ring `T` killed by `ℓ ≠ char k'`): let `X` be normal, `Z = V(h)` for a nonzero
+global function `h`, `j : X ∖ Z ⟶ X` the complement, `ζ` a generic point of `Z`, and
+`f₀ : W₀ ⟶ 𝔸¹_k` smooth on a neighbourhood `W₀` of `ζ` such that `f₀^* x` is a uniformizer of
+`𝒪_{X,ζ}`. Then `Le^* Ψ_X(j_! T̲)` vanishes near `ζ`. -/
 theorem nearbyCyclesVanishNear_lowerShriek_unit_of_uniformizer_finiteCoefficient
     (hT : (ℓ : T) = 0) (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0)
     {I : X.left.IdealSheafData} (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h}))
@@ -418,12 +403,12 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k' ≠ ℓ)]
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-/-- **The constant case of generic vanishing along a divisor, with coefficients `𝔽_E`** (blueprint
-`lemma-vanishing-generic-points-principal-divisor`): let `X` be normal, `Z = V(h)` for a nonzero
-global function `h`, `j : X ∖ Z ⟶ X` the complement, `ζ` a generic point of `Z`, and
-`f₀ : W₀ ⟶ 𝔸¹_k` smooth on a neighbourhood `W₀` of `ζ` such that `f₀^* x` is a uniformizer of the
-discrete valuation ring `𝒪_{X,ζ}`. Then, for the residue field `𝔽_E` of a finite extension `E` of
-`ℚ_ℓ`, the restricted specialization `Le^* Ψ_X(j_! 𝔽_E)` vanishes near `ζ`. -/
+/-- **The constant case of generic vanishing along a divisor, with coefficients `𝔽_E`**: let `X`
+be normal, `Z = V(h)` for a nonzero global function `h`, `j : X ∖ Z ⟶ X` the complement, `ζ` a
+generic point of `Z`, and `f₀ : W₀ ⟶ 𝔸¹_k` smooth on a neighbourhood `W₀` of `ζ` such that
+`f₀^* x` is a uniformizer of the discrete valuation ring `𝒪_{X,ζ}`. Then, for the residue field
+`𝔽_E` of a finite extension `E` of `ℚ_ℓ`, the restricted specialization `Le^* Ψ_X(j_! 𝔽_E)`
+vanishes near `ζ`. -/
 theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_uniformizer
     (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0)
     {I : X.left.IdealSheafData} (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h}))

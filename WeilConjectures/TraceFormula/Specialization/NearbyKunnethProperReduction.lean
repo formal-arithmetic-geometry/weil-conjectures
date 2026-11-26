@@ -27,6 +27,10 @@ zero (`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper_of_isAffine`,
 `WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure`). The proper case is
 `WeilConjectures.TraceFormula.Specialization.NearbyKunnethProper`.
 
+## References
+
+* L. Illusie, *Autour du théorème de monodromie locale*, proof of Thm. 4.7
+
 -/
 
 @[expose] public section
@@ -105,19 +109,11 @@ theorem isIso_kunnethMap_closure_of_forall_isProper
   exact IsPullback.of_hasPullback _ _
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
-/-- **Reduction of Gabber's Künneth formula to proper models, affine case** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Reduction to projective flat families";
-Illusie,
-*Autour du théorème de monodromie locale*, proof of Thm. 4.7): if the Künneth map is an isomorphism
-for all products over the trait of models of finite type along proper structure morphisms, with
-projections compatible with the structure morphisms of the geometric generic fibres to `Spec Ω`,
-then it is an isomorphism for products over the trait of models with affine total spaces.
-
-The Künneth map is that of the models of the total spaces
-(`NearbyCyclesModel.isIso_kunnethMap_of_toGeometricGeneric`); these are restrictions of the
-standard models of projective closures of the total spaces
-(`NearbyCyclesModel.exists_isProper_openImmersion_of_isAffine`), and the coefficients are
-extended by zero (`NearbyCyclesModel.isIso_kunnethMap_toGeometricGeneric_of_closure`). -/
+/-- **Reduction of Gabber's Künneth formula to proper models, affine case**: if the Künneth map
+is an isomorphism for all products over the trait of models of finite type along proper structure
+morphisms, with projections compatible with the structure morphisms of the geometric generic
+fibres to `Spec Ω`, then it is an isomorphism for products over the trait of models with affine
+total spaces. -/
 theorem isIso_kunnethMap_of_forall_isProper_of_isAffine
     (hproper : ∀ {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
       {M : NearbyCyclesModel X X'.left} {N : NearbyCyclesModel Y Y'.left}
@@ -166,19 +162,10 @@ theorem isIso_kunnethMap_of_forall_isProper_of_isAffine
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hB)
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
-/-- **Reduction of Gabber's Künneth formula to proper models** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Reduction to projective flat families";
-Illusie,
-*Autour du théorème de monodromie locale*, proof of Thm. 4.7): if the Künneth map is an isomorphism
-for all products over the trait of models of finite type along proper structure morphisms, with
-projections compatible with the structure morphisms of the geometric generic fibres to `Spec Ω`,
-then it is an isomorphism for all products over the trait.
-
-The assertion is local on the special fibre
-(`NearbyCyclesModel.isIso_kunnethMap_of_forall_exists_restriction`): around each point of the
-special fibre the product restricts to the product `V ×_S W` of affine opens `V`, `W` of the total
-spaces (`NearbyCyclesModel.IsTraitProduct.restrictOpen`), where
-`NearbyCyclesModel.isIso_kunnethMap_of_forall_isProper_of_isAffine` applies. -/
+/-- **Reduction of Gabber's Künneth formula to proper models**: if the Künneth map is an
+isomorphism for all products over the trait of models of finite type along proper structure
+morphisms, with projections compatible with the structure morphisms of the geometric generic
+fibres to `Spec Ω`, then it is an isomorphism for all products over the trait. -/
 theorem isIso_kunnethMap_of_forall_isProper
     (hproper : ∀ {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
       {M : NearbyCyclesModel X X'.left} {N : NearbyCyclesModel Y Y'.left}

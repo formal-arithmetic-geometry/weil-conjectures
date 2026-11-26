@@ -29,10 +29,23 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Data.Nat.Prime.Infinite
 
-/-! # Quasi-compact open extension preserves intrinsic DVR completeness
+/-!
+# Quasi-compact open extension preserves intrinsic DVR completeness
 
-Source: Stacks Tags 0941, 099B and 0A0E; canonical coefficient transport.
-(blueprint: lem-sf-open-dvr-intrinsic-open-transport).
+We transport the completed open-preservation theorem across canonical coefficients: extension by
+zero along a quasi-compact open immersion preserves intrinsic DVR completeness.
+
+## Implementation details
+
+The DVR datum is lifted into the coefficient universe, and the Koszul fiber and its unit are
+transported to `completedAdicIntrinsicUnit`. `completedOpenExchangeComparison` applied to the
+identity cartesian square gives completeness of the completed-coefficient extension;
+uniqueness of left adjoints identifies that extension with the actual one. No commutation with
+arbitrary inverse limits is used.
+
+## References
+
+* [Stacks: Tags 0941, 03DI, 09BP, 099B and 0A0E]
 -/
 
 @[expose] public noncomputable section
@@ -271,23 +284,8 @@ private theorem dvrOpen_complete
   exact (complete_iff_local.{u, u} p l hne E X _).mpr
     (integralLocallyComplete_iso.{u, u} l E X _ b hlocal)
 
-/-- Transport the completed open-preservation theorem across canonical coefficients.
-Source: Stacks Tags 03DI, 09BP and 099B
-(blueprint: lem-sf-open-dvr-intrinsic-open-transport).
-
-Proof: lift the DVR datum into the coefficient universe and compare its quotient
-rings with the lifted quotients, sending the class of a to the lifted class of a.
-The tensor universal property and uniqueness of limits transport the explicit Koszul
-fiber and its degree-zero unit to the completedAdicIntrinsicUnit construction used
-here. Apply completedOpenExchangeComparison to the identity cartesian square with
-horizontal map j. Its first preservation clause gives intrinsic completeness of the
-completed-coefficient extension. Under C_U and C_X, the finite-constant and limit
-projection equations identify its restriction right adjoint with the actual open
-restriction in O. Uniqueness of left adjoints gives an isomorphism from O.jShriek,
-compatible with scalar equivalence. Exact equivalences and this isomorphism transport
-the intrinsic fiber unit, so invertibility of the source unit implies invertibility
-of the displayed target unit. Quasi-compactness is exactly the hypothesis needed for
-completed open preservation; no commutation with arbitrary inverse limits is used. -/
+/-- Extension by zero along a quasi-compact open immersion preserves intrinsic DVR
+completeness, under canonical coefficient transport. -/
 theorem openDvrIntrinsicOpenTransport
     (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))
     (hd : Ideal.span (Set.range (fun _ : Fin 1 ↦

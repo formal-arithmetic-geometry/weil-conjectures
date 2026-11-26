@@ -16,13 +16,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Point
 
 Let `k` be a separably closed field, `T = 𝔸¹_k` and `i : Spec k ⟶ T` the inclusion of the
 origin, the zero section. For a nonzero finite coefficient ring `Λ` whose exponent is invertible
-in `k`, the cohomology sheaf `𝓗²(Ri^! Λ_T)` is nonzero (blueprint `example-closed-support`).
+in `k`, the cohomology sheaf `𝓗²(Ri^! Λ_T)` is nonzero.
 Hence `Ri^!` does not preserve `D^{≤ 0}`, or any `D^{≤ c}` with `c < 2`.
 
-## The argument
+## Implementation details
 
-The blueprint computes `i_* 𝓗²(Ri^! Λ_T) ≅ R¹j_* Λ_U` from the closed support triangle and the
-Galois cohomology of the strictly henselian trait at the origin. Here the nonvanishing is read
+Classically one computes `i_* 𝓗²(Ri^! Λ_T) ≅ R¹j_* Λ_U` from the closed support triangle and
+the Galois cohomology of the strictly henselian trait at the origin. Here the nonvanishing is read
 off from the rank-one purity `Ri^!(Λ_T(1)[2]) ≅ Λ_k`
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineLineZero`), together with
 the trivialization `Λ_T(1) ≅ Λ_T` of the Tate twist over a separably closed field
@@ -130,20 +130,10 @@ theorem nonempty_iso_shift_rightDerivedUpperShriek_affineLineZero_of_isSepClosed
     (R(s)^![Λ]).mapIso ((shiftFunctor _ (2 * 1 : ℤ)).mapIso
       (t.symm ≪≫ (derivedTensorLeftUnitor _ _ _).symm)) ≪≫ e⟩
 
-/-- Blueprint `example-closed-support`: Positive cohomology of a closed exceptional image.
-
-Let `k` be a separably closed field, `T = 𝔸¹_k` and `i : Spec k ⟶ T` the origin (the zero
-section). For a nonzero finite coefficient ring `Λ` with exponent invertible in `k` (for
-instance `Λ = A_{E,n}` with `ℓ ≠ char k`), the cohomology sheaf `𝓗²(Ri^! Λ_T)` is nonzero.
-Thus no bound `Ri^! D^{[a,b]} ⊆ D^{[a-c,b]}` holds for `c < 2`.
-
-The proof uses rank-one purity `Ri^!(Λ_T(1)[2]) ≅ Λ_k`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineLineZero`) and the
-trivialization of the Tate twist over `k`
-(`AlgebraicGeometry.Etale.nonempty_iso_tateObject_constantComplex_of_isSepClosed`), so
-`(Ri^! Λ_T)[2] ≅ Λ_k` and `𝓗²(Ri^! Λ_T) ≅ 𝓗⁰(Λ_k) ≠ 0`; it therefore assumes a normalized
-Tate twist datum, unlike the blueprint proof via the closed support triangle and
-`R¹j_* Λ_U`. -/
+/-- Positive cohomology of a closed exceptional image: let `k` be a separably closed field,
+`T = 𝔸¹_k` and `i : Spec k ⟶ T` the origin (the zero section). For a nonzero finite coefficient ring
+`Λ` with exponent invertible in `k` (for instance `Λ = A_{E,n}` with `ℓ ≠ char k`), the cohomology
+sheaf `𝓗²(Ri^! Λ_T)` is nonzero. Thus no bound `Ri^! D^{[a,b]} ⊆ D^{[a-c,b]}` holds for `c < 2`. -/
 theorem not_isZero_homology_two_rightDerivedUpperShriek_affineLineZero
     [Nontrivial Λ] [HasTateTwist.IsNormalized Λ] :
     ¬ IsZero ((DerivedCategory.homologyFunctor _ 2).obj

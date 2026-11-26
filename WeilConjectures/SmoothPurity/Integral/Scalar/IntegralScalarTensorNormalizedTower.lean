@@ -16,8 +16,11 @@ import WeilConjectures.CategoryTheory.SmoothPurity.FunctorSquareTowerDescent
 /-! # Descent of normalized scalar tensor tower comparisons
 
 The exact scalar factors and the normalized chain maps form coherent squares before
-localization. Source: coefficient-comparison coherence, Stacks 07A4 and 08J9.
-(blueprint: lem-pur-integral-scalar-tensor-normalized-tower).
+localization.
+
+## References
+
+* Stacks Project, Tags 04VK, 07A4 and 08J9.
 -/
 
 @[expose] public noncomputable section
@@ -105,14 +108,7 @@ private theorem tensorNormalizedSquare (W : AlgebraicGeometry.Scheme.{u})
   simp only [tensorRep_hom_app, goodScalarComparison_hom_app, tensorSquare_app]
   exact hα P.1 P.2
 
-/-- Normalized scalar tensor comparisons respect coefficient towers.
-Source: coefficient-comparison coherence, Stacks 04VK, 07A4 and 08J9.
-(blueprint: lem-pur-integral-scalar-tensor-normalized-tower).
-Proof: the specified normalization equations identify the comparison squares on
-good representatives. The scalar associator factorization and the chain tower
-identity give the two representative associator equations. Apply faithful
-localization descent to these three squares. For tensor pairs use the product
-localization, whose restriction is fully faithful in both variables. -/
+/-- Normalized scalar tensor comparisons respect coefficient towers. -/
 theorem integralScalarTensorNormalizedTower
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (j : L →ₐ[ℚ_[l]] F) (W : AlgebraicGeometry.Scheme.{u})

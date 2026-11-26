@@ -23,8 +23,22 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-!
 # Descent of a local algebra and a presented module along a given local-ring system
 
-Source: Stacks Project, Algebra, Tags 00QV, 00QX and 00R1
-(blueprint: lem-weil-pbc-limit-module-essentially-finite-presentation-over-system).
+Given a directed system of local rings with colimit `A`, a localization `T = B_q` of a finitely
+presented `A`-algebra and a finitely presented `T`-module descend to compatible systems of local
+algebras and finite modules over a tail of the system.
+
+## Implementation details
+
+The finitely many coefficients of `B = A[x₁, …, xₙ]/(f₁, …, fₘ)` descend to a common stage, and
+the stage algebras are localized at the inverse-image primes, so all maps are local. Polynomial
+extension and quotient base change identify the scalar extensions, and filtered-colimit criteria
+show that the colimit is `T`. The module is the cokernel of a `t × s` matrix whose entries also
+descend; right exactness of the tensor product identifies the scalar extensions of the stage
+cokernels, and an elementwise criterion over `ℤ` proves the abelian-group colimit assertion.
+
+## References
+
+* [Stacks, Tags 00QV, 00QX, 00R1]
 -/
 
 @[expose] public section
@@ -39,50 +53,6 @@ namespace RingHom
 /-- Descend a localization of a finitely presented algebra and a finite module presentation
 along the given directed system. Scalar-extension maps are specified on pure tensors; the
 module tensors put the new scalar ring first, using tensor symmetry to match the source.
-
-Source: Stacks Project, Algebra, Tags 00QV, 00QX and 00R1
-(blueprint: lem-weil-pbc-limit-module-essentially-finite-presentation-over-system).
-
-Proof:
-1. Write `T = B_q`, where `B = A[x₁,...,xₙ]/(f₁,...,fₘ)`. The prime contracts to the
-   maximal ideal of `A`. Descend the finitely many coefficients to a common stage and
-   localize the resulting algebras at the inverse-image primes. Their contraction to
-   each base stage is maximal, so all structure and transition maps are local.
-   Use [lem-weil-pbc-localization-of-localization] and
-   [lem-weil-pbc-filtered-colimit-algebras-elementwise].
-2. Polynomial extension and quotient base change identify the scalar extensions of
-   these presentations. Their colimit is `B`: lift finite coefficient sets to a stage;
-   relations vanishing in `B` vanish at a later stage after descending their finite
-   witnesses. Localizing at the compatible primes gives colimit `T`. The tail is cofinal.
-   Use [lem-weil-pbc-polynomial-scalar-extension], [lem-weil-pbc-tensor-quotient-base-change],
-   [lem-weil-pbc-filtered-colimit-rings-zero],
-   [lemma-quasi-finite-coordinates--1],
-   [lem-weil-pbc-colimit-initial-full-subcategory] and
-   [lem-weil-pbc-filtered-colimit-modules-criterion].
-3. Base change of localization gives an intermediate localization of the polynomial
-   quotient at each later stage, then localization at the inverse-image prime gives
-   the local stage ring. The same argument applies at the limit. Use
-   [lem-weil-pbc-localization-base-change], [lem-weil-pbc-localization-of-localization]
-   and [lem-weil-pbc-tensor-quotient-base-change].
-4. Descend the finitely many entries of the given `t × s` presentation matrix to one
-   common later stage. Define each stage module as its cokernel, with the induced
-   compatible semilinear transition maps and maps to `N`. These modules are finite.
-   Use [lem-weil-pbc-filtered-colimit-algebras-elementwise] and
-   [def-weil-finitely-generated-module].
-5. Tensoring these presentations is right exact and carries each matrix to the later
-   matrix, so the canonical scalar-extension maps are module isomorphisms, including
-   at the limit. Use [lem-weil-pbc-tensor-right-exact] and
-   [lem-weil-pbc-module-base-change-universal-property].
-6. Every module element is represented by a finite vector and lifts to a common stage.
-   A vector becoming zero is a combination of finitely many matrix columns. Descend
-   its coefficients and then its coordinate equalities to a later stage. The
-   elementwise colimit criterion over `ℤ` proves the abelian-group colimit assertion.
-   Use [lem-weil-pbc-filtered-colimit-algebras-elementwise],
-   [lem-weil-pbc-filtered-colimit-rings-zero] and
-   [lem-weil-pbc-filtered-colimit-modules-criterion].
-
-(blueprint: lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-module)
-(blueprint: lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-module-core)
 -/
 theorem exists_limit_module_essentially_finite_presentation_over_system
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]

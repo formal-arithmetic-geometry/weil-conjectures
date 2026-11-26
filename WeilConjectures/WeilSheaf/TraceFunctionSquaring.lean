@@ -29,10 +29,6 @@ rational points of the source.
   `t_{Rf₀! ℚ̄_ℓ, n}(y) = 1 + χ(y)`.
 - `AlgebraicGeometry.WeilComplex.finsum_traceFunction_derivedLowerShriek_squaring`:
   `∑_y t_{Rf₀! ℚ̄_ℓ, n}(y) = qⁿ`.
-
-## Blueprint
-
-`example-trace-function-squaring`.
 -/
 
 @[expose] public section
@@ -45,16 +41,16 @@ section Arithmetic
 
 variable {F : Type*} [Field F] [Fintype F] [DecidableEq F]
 
-/-- Blueprint `example-trace-function-squaring` (arithmetic part): in a finite field of odd
-characteristic, the number of square roots of `a` is `1 + χ(a)`, `χ` the quadratic character. -/
+/-- In a finite field of odd characteristic, the number of square roots of `a` is `1 + χ(a)`,
+`χ` the quadratic character. -/
 theorem quadraticChar_natCard_sq_eq (hF : ringChar F ≠ 2) (a : F) :
     (Nat.card {x : F // x ^ 2 = a} : ℤ) = 1 + quadraticChar F a := by
   classical
   rw [add_comm, ← quadraticChar_card_sqrts hF a, Nat.card_eq_fintype_card, Set.toFinset_card]
   exact congrArg Nat.cast (Fintype.card_congr (Equiv.refl _))
 
-/-- Blueprint `example-trace-function-squaring` (arithmetic part): the function `1 + χ` sums to
-the number of elements of the finite field, `χ` taking the values `±1` equally often on `F^×`. -/
+/-- In a finite field of odd characteristic, the function `1 + χ` sums to the number of elements
+of the field, `χ` the quadratic character. -/
 theorem sum_one_add_quadraticChar (hF : ringChar F ≠ 2) :
     ∑ a : F, (1 + quadraticChar F a) = Fintype.card F := by
   rw [Finset.sum_add_distrib, quadraticChar_sum_zero hF, add_zero, Finset.sum_const,
@@ -107,9 +103,9 @@ instance affineLine.quasiCompact_squaring : QuasiCompact (affineLine.squaring k�
 
 namespace WeilComplex
 
-/-- **The trace function of the direct image along the squaring map**
-(blueprint `example-trace-function-squaring`): for `k₀` of odd characteristic, `n ≥ 1` and
-`y ∈ 𝔸¹(𝔽_{qⁿ}) = 𝔽_{qⁿ}`, the trace function of `Rf₀! ℚ̄_ℓ` along the squaring map
+/-- **The trace function of the direct image along the squaring map**: for `k₀` of odd
+characteristic, `n ≥ 1` and `y ∈ 𝔸¹(𝔽_{qⁿ}) = 𝔽_{qⁿ}`, the trace function of `Rf₀! ℚ̄_ℓ` along
+the squaring map
 `f₀ : x ↦ x²` is `t(y) = 1 + χ(y)`, `χ` the quadratic character of `𝔽_{qⁿ}`. -/
 theorem traceFunction_derivedLowerShriek_squaring (hq : ringChar k₀ ≠ 2) {n : ℕ} (hn : n ≠ 0)
     [Fintype (FiniteField.galoisExtension k₀ n)] [DecidableEq (FiniteField.galoisExtension k₀ n)]
@@ -135,9 +131,8 @@ theorem traceFunction_derivedLowerShriek_squaring (hq : ringChar k₀ ≠ 2) {n 
     Nat.card_congr e, nsmul_one]
   exact_mod_cast quadraticChar_natCard_sq_eq hL _
 
-/-- Blueprint `example-trace-function-squaring`: summing the trace function `1 + χ` of
-`Rf₀! ℚ̄_ℓ` over `𝔸¹(𝔽_{qⁿ})` gives the number `qⁿ` of rational points of the source, as
-the Grothendieck–Lefschetz formula predicts. -/
+/-- Summing the trace function `1 + χ` of `Rf₀! ℚ̄_ℓ` over `𝔸¹(𝔽_{qⁿ})` gives the number `qⁿ` of
+rational points of the source. -/
 theorem finsum_traceFunction_derivedLowerShriek_squaring (hq : ringChar k₀ ≠ 2) {n : ℕ}
     (hn : n ≠ 0) :
     ∑ᶠ y, ((derivedLowerShriek k₀ l (affineLine.squaring k₀)).obj

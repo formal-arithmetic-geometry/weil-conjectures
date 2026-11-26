@@ -15,7 +15,20 @@ import Mathlib.RingTheory.Nakayama
 
 /-! # Local elimination of the desingularization relations
 
-Source: Stacks Project, Smoothing Ring Maps, final local argument in Tag 07CR.
+A quadratic relation ideal `K` divisible by `π²` vanishes locally where the annihilator
+obstruction is invertible, so smoothness at a prime descends to the quotient by `K`.
+
+## Implementation details
+
+Put `T = S_{q'}`, `J = KT` and `t` the image of `π`. Then `(t)J ≤ (t²)J`, so `(t)J = 0` by
+Nakayama. Flat base change and the hypothesis on `r` give `Ann_T(t²) = Ann_T(t)`, hence
+`Ann_T(t³) = Ann_T(t)`, and every `t²z ∈ J` vanishes. Clearing denominators gives `s ∉ q'`
+annihilating `K`, and localizing at `s` times a smoothness witness gives a smooth neighbourhood
+on which the quotient by `K` is unchanged.
+
+## References
+
+* [Stacks, Tag 07CR] (final local argument)
 -/
 
 @[expose] public section
@@ -134,24 +147,7 @@ private theorem exists_outside_annihilating_ideal
     rw [mul_left_comm, ih, mul_zero]
 
 /-- A quadratic relation ideal divisible by `π²` vanishes locally where the annihilator
-obstruction is invertible; a smooth neighbourhood therefore descends to the quotient.
-
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07CR, final local argument
-(blueprint: lem-weil-pbc-quadratic-relations-smooth-quotient).
-
-Proof: put `q' = q ∩ S` and `T = S_{q'}`. Let `J = KT` and let `t` be the image of `π`.
-Then `J ≤ (t²)` and `(t)J ≤ J² ≤ (t²)J`. The finitely generated ideal `N = (t)J`
-satisfies `N ≤ (t)N`. Since `t` is in the maximal ideal of the Noetherian local ring `T`,
-Nakayama (or Krull intersection) gives `N=0`. Flat base change identifies `Ann_T(t²)`
-and `Ann_T(t)` with the extensions of the corresponding annihilators in `R`. The
-hypothesis on `r` says that `r Ann_R(π²) ≤ Ann_R(π)`. Its image is invertible in `T`,
-so `Ann_T(t²) = Ann_T(t)`. Induction gives `Ann_T(t³) = Ann_T(t)`. Each element of
-`J` is `t²z` and is killed by `t`, whence `t³z=0`, then `tz=0`, then `t²z=0`.
-Thus `J=0`. As `K` is finitely generated, clear finitely many denominators to obtain
-`s ∉ q'` annihilating `K`. Multiply `s` by an element `g ∉ q'` whose principal
-localization of `S` is smooth. The localization at `sg` is still smooth by localization
-and composition; its quotient by `K` is identical since `K` vanishes there. The image
-of `sg` is outside `q` and exhibits the required smoothness of `S/K`. -/
+obstruction is invertible; a smooth neighbourhood therefore descends to the quotient. -/
 theorem smoothAtPrime_quotient_of_quadratic_relations
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing S] (π : R) (K : Ideal S)

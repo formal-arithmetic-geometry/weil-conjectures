@@ -13,7 +13,17 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Finite native realization cocones
 
-Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
+## Implementation details
+
+On the integral full subcategory the realization is derived extension along the specified
+integral coefficient map, with comparisons given by inverse balanced tensor transitivity
+followed by the completed scalar comparison. The integral tensor functor inverts the
+uniformizer, so it factors through the raw rational localization; composing with the
+inverse of the derived native-section equivalence gives the native functors.
+
+## References
+
+* [Bhatt--Scholze, Proposition 6.8.11(3), Proposition 6.8.14(2) and Remark 6.8.15]
 -/
 
 @[expose] public noncomputable section
@@ -45,9 +55,7 @@ variable [IsCommMonObj (abRing l X)] [(sections l X).Additive]
   [PreservesFiniteLimits (sections l X)] [PreservesFiniteColimits (sections l X)]
 
 /-- A finite-field realization cocone. Every comparison is specified before descent;
-no functor on the pair category, Hom descent, or essential-image assertion is assumed.
-Source: Bhatt--Scholze, Proposition 6.8.14
-(blueprint: lem-sf-locally-finite-adic-finite-cocone). -/
+no functor on the pair category, Hom descent, or essential-image assertion is assumed. -/
 structure FiniteCoconeData where
   Φ : ∀ E : Index l (PadicAlgCl l),
     GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) X E ⥤
@@ -73,9 +81,7 @@ structure FiniteCoconeData where
       ObjectProperty.ι (sfIntegralConstructible l (Coefficient.{u} l (PadicAlgCl l) E) X) ⋙
         pbcDerivedExtend.{u} ((C.coefficient E).integralMap l X)
 
-/-- The finite-stage completion-map equation, before pair-category descent.
-Source: Bhatt--Scholze, Proposition 6.8.14, Remark 6.8.15
-(blueprint: lem-sf-locally-finite-adic-finite-cocone). -/
+/-- The finite-stage completion-map equation, before pair-category descent. -/
 @[irreducible] def FiniteCoconeData.normalized (A : FiniteCoconeData l X C) : Prop :=
   ∀ (E L : Index l (PadicAlgCl l)) (h : E ≤ L)
       (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X),
@@ -98,9 +104,7 @@ Source: Bhatt--Scholze, Proposition 6.8.14, Remark 6.8.15
           ((GeneralAlgebraicallyClosedCoefficients.integralTransition l (PadicAlgCl l) X
             E L h).obj K))
 
-/-- The finite realization data with its completion-map equation.
-Source: Bhatt--Scholze, Proposition 6.8.14
-(blueprint: lem-sf-locally-finite-adic-finite-cocone). -/
+/-- The finite realization data with its completion-map equation. -/
 structure FiniteCocone extends FiniteCoconeData l X C where
   normalization : toFiniteCoconeData.normalized l X C
 
@@ -175,28 +179,7 @@ private theorem sixfold_reassoc
 
 -- Keep the named equivalence available when elaborating its shift data.
 set_option cleanup.letToHave false in
-/-- The finite-field tensor realizations form a normalized coherent cocone.
-
-Source: Bhatt--Scholze, Proposition 6.8.11(3), Proposition 6.8.14(2) and Remark 6.8.15;
-native realization proof steps 3--4
-(blueprint: lem-sf-locally-finite-adic-finite-cocone).
-
-Proof in words: on the integral full subcategory use derived extension along the
-specified integral coefficient map. Its explicit comparison for E ≤ L is inverse
-balanced tensor transitivity followed by the completed scalar comparison. Finite-free
-completion makes this an isomorphism. It respects the normalized integral shifts and
-integral scalar associators. The integral tensor functor inverts the uniformizer,
-hence kills uniformizer-torsion cones and factors through the raw rational localization.
-The localization universal property lifts the integral comparisons uniquely. Their
-component formula, naturality, and the localized integral associator prove the rational
-field-tower equation. The localization counit fixes the shifts, so exactness descends
-from integral-image triangles. Compose with the inverse of the derived native-section
-equivalence to obtain the native functors and comparisons. Its counit supplies the
-integral isomorphisms. Counit naturality and the literal-object transport formula for
-the scalar transitions turn the lifted integral-component formula into exactly the
-required HEq normalization. This constructs only the finite cocone; no common-stage
-quotient or descent functor is used.
--/
+/-- The finite-field tensor realizations form a normalized coherent cocone. -/
 theorem finiteCocone_exists
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]
     [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]

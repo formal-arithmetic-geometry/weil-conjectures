@@ -16,8 +16,20 @@ import WeilConjectures.RingTheory.FiniteConeFreeModel
 /-!
 # Pseudo-coherence and degreewise pseudo-coherence
 
-Source: Stacks Project, More on Algebra, Lemma 15.66.5, Tag 064U
-(blueprint: lem-pc-ring-pseudo-coherent-iff-all-m).
+An object of `D(R)` is pseudo-coherent if and only if it is `m`-pseudo-coherent for every `m`.
+
+## Implementation details
+
+The forward direction brutally truncates a bounded above finite free representative. For the
+converse, the degree-zero witness gives an upper cohomology bound; by the distinguished-triangle
+lemma the cones of maps from finite free complexes are pseudo-coherent, and
+`exists_finiteFree_model_of_finite_cones` builds a bounded above finite free model. If the ring
+does not fit in the module universe, every free module there is zero, so all cohomology vanishes
+and the zero complex is the model.
+
+## References
+
+* [Stacks, Tag 064U]
 -/
 
 @[expose] public section
@@ -142,26 +154,7 @@ private theorem brutal_isMPseudoCoherent {R : Type u} [CommRing R]
       ((homologyFunctorFactors (ModuleCat.{v} R) m).hom.app E)).mp inferInstance
 
 
-/-- Pseudo-coherence is equivalent to every fixed-degree approximation condition.
-
-Source: Stacks Project, More on Algebra, Lemma 15.66.5, Tag 064U.
-(blueprint: lem-pc-ring-pseudo-coherent-iff-all-m).
-
-Proof: brutally truncate a bounded above finite free representative in degrees at least
-`m`. Its inclusion is an isomorphism on cohomology above `m` and an epimorphism at `m`;
-compose with the representative's derived isomorphism to obtain the forward implication.
-For the converse, the degree-zero witness supplies an upper cohomology bound. A bounded
-finite free `F` is `(n + 1)`-pseudo-coherent via its identity. Applied to the cone
-triangle of any chain map `F → C`, the distinguished-triangle lemma makes the cone
-`n`-pseudo-coherent. If the cone vanishes above `n`, the finite-cohomology lemma makes
-its degree-`n` cohomology finite. The descending construction
-`exists_finiteFree_model_of_finite_cones` now supplies a bounded above finite free
-complex and a quasi-isomorphism to `C`.
-If the ring does not fit in the module universe, every free module in that universe is
-zero: a nonzero free module has a faithful scalar action, which injects the ring into
-its endomorphism type. Each approximation witness is then zero, so the isomorphism
-condition at degree `i` in the `(i - 1)` witness forces `H^i(C) = 0`. The zero complex
-is the required finite free representative in this case. -/
+/-- Pseudo-coherence is equivalent to every fixed-degree approximation condition. -/
 theorem isPseudoCoherent_iff_forall_isMPseudoCoherent (R : Type u) [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{v} R)]
     (C : CochainComplex (ModuleCat.{v} R) ℤ) :

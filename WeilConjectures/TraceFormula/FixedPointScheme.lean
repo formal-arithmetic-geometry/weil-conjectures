@@ -28,12 +28,11 @@ induce a morphism `∐_{x ∈ X(k)^{Φ_m}} Spec k ⟶ X` equalizing `𝟙` and `
 ## Main statements
 
 - `ProEtale.CondensedRing.IsModelFrobenius.nonempty_isLimit_fixedPointsFork`: this
-  morphism is an equalizer of `𝟙` and `Φ_m`, i.e. the fixed scheme `Fix(Φ_m)` is the disjoint
-  union of copies of `Spec k` indexed by the fixed rational points (blueprint
-  `lemma-frobenius-fixed-scheme--1`). A morphism `g : T ⟶ X` fixed by `Φ_m` is constant near
-  every point of `T` (`ProEtale.CondensedRing.IsModelFrobenius.exists_opens_comp_eq`), so `T`
-  is the disjoint union of the open pieces `g⁻¹(x)`.
-
+  morphism is an equalizer of `𝟙` and `Φ_m`, i.e. the fixed scheme `Fix(Φ_m)` is the disjoint union
+  of copies of `Spec k` indexed by the fixed rational points. A morphism `g : T ⟶ X` fixed by `Φ_m`
+  is constant near every point of `T`
+  (`ProEtale.CondensedRing.IsModelFrobenius.exists_opens_comp_eq`), so `T` is the disjoint union of
+  the open pieces `g⁻¹(x)`.
 -/
 
 @[expose] public section
@@ -158,8 +157,7 @@ variable {X : Over (Spec (.of k))} [IsAlgClosed k] [LocallyOfFiniteType X.hom] {
 
 omit [LocallyOfFiniteType X.hom] in
 /-- A point of `X` with values in a local ring and fixed by `Φ_m` factors through a rational
-point fixed by `Φ_m` (blueprint `lemma-frobenius-fixed-scheme--1`: the fixed scheme is
-reduced). -/
+point fixed by `Φ_m`; in particular the fixed scheme is reduced. -/
 lemma IsModelFrobenius.exists_eq_comp_of_comp_eq_self (hΦ : IsModelFrobenius Φ f₀ p)
     (hm : 1 ≤ m) {A : CommRingCat.{u}} [IsLocalRing A] (t : Spec A ⟶ X.left)
     (ht : t ≫ (frobeniusIterate Φ m).left = t) :
@@ -200,15 +198,10 @@ lemma comp_rationalPoint_apply {U : Scheme.{u}} (s : U ⟶ Spec (.of k)) (x : Ra
   exact Subsingleton.elim _ _
 
 set_option linter.overlappingInstances false in
-/-- **The fixed scheme of a Frobenius** (blueprint `lemma-frobenius-fixed-scheme--1`, a node of
-the six-functor chapter): for the model Frobenius `Φ` of `X = X₀ ×_{k₀} k` and `m ≥ 1`, the
-fixed scheme `Fix(Φ_m)`, the equalizer of `𝟙` and `Φ_m`, is the disjoint union
-`∐ Spec k` of copies of the base point, one for each rational point fixed by `Φ_m` (these
-correspond to the `𝔽_{q^m}`-points of `X₀`, `IsModelFrobenius.fixedPointEquiv`).
-
-A morphism `g : T ⟶ X` fixed by `Φ_m` is locally on `T` constant with value a fixed rational
-point (`IsModelFrobenius.exists_opens_comp_eq`), so `T` is the disjoint union of the open
-pieces `V_x = g⁻¹(x)` and `g` factors uniquely through `∐ Spec k`. -/
+/-- **The fixed scheme of a Frobenius**: for the model Frobenius `Φ` of `X = X₀ ×_{k₀} k` and
+`m ≥ 1`, the fixed scheme `Fix(Φ_m)`, the equalizer of `𝟙` and `Φ_m`, is the disjoint union
+`∐ Spec k` of copies of the base point, one for each rational point fixed by `Φ_m` (these correspond
+to the `𝔽_{q^m}`-points of `X₀`, `IsModelFrobenius.fixedPointEquiv`). -/
 theorem IsModelFrobenius.nonempty_isLimit_fixedPointsFork (hΦ : IsModelFrobenius Φ f₀ p)
     (hm : 1 ≤ m) :
     Nonempty (IsLimit (Fork.ofι (fixedPointsι Φ m) (fixedPointsι_comp Φ m))) := by

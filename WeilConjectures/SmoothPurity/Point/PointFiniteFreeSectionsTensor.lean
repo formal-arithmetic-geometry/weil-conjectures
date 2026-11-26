@@ -44,14 +44,19 @@ import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Finite free sections and tensor comparison at the geometric point
 
-Source: Bhatt--Scholze, Lemma 4.2.12 (p. 30), Lemma 6.8.2(1) (pp. 58--59),
-and the explicit finite-basis calculation in the DAG; Stacks, Tag 03EK
-(blueprint: lem-weil-point-finite-free-sections-tensor).
+## Implementation details
 
 The data structure spells out all clauses of the assertion. Finite products represent
 finite direct sums. Tensor factors are written in the order used by change of rings,
 namely scalar tensor section. All coefficient maps and sheafified tensors are the
-published constructions. Site and coefficient universes are independent.
+published constructions. Site and coefficient universes are independent. The inverse
+formulas fix every coordinate isomorphism, rather than postulating an unrelated abstract
+isomorphism; the choice of basis is confined to these coordinates.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 4.2.12 and Lemma 6.8.2(1).
+* Stacks Project, Tag 03EK.
 -/
 
 @[expose] public noncomputable section
@@ -72,8 +77,7 @@ section PublicTypes
 attribute [local irreducible] completedScalarRelativeDegree integralScalarIntegerInclusion
 attribute [local irreducible] Padic.coefficientExtensionIntegers
 
-/-- The final object s to s of the small pro-etale site, with the presheaf variance.
-Source: DAG statement (blueprint: lem-weil-point-finite-free-sections-tensor). -/
+/-- The final object s to s of the small pro-etale site, with the presheaf variance. -/
 abbrev pointFiniteFreeFinal (k : Type t) [Field k] :=
   op (Scheme.ProEt.mk (𝟙 (Spec (CommRingCat.of k))))
 
@@ -81,8 +85,7 @@ variable (k : Type t) [Field k] (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Evaluation at the final object, transported by the displayed constant-value ring
-identification. No sectionwise tensor assertion is part of this definition.
-Source: DAG statement (blueprint: lem-weil-point-finite-free-sections-tensor). -/
+identification. -/
 abbrev pointFiniteFreeEvaluation
     (e : Padic.coefficientExtensionIntegers l E ≃+*
       (completedIntegralCoefficientSheafUnrestricted l E (Spec (.of k))).obj.obj
@@ -94,13 +97,11 @@ abbrev pointFiniteFreeEvaluation
 variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- Ordinary module scalar extension, using the recorded inclusion of valuation rings.
-Source: DAG statement (blueprint: lem-weil-point-finite-free-sections-tensor). -/
+/-- Ordinary module scalar extension, using the recorded inclusion of valuation rings. -/
 abbrev pointFiniteFreeModuleTensor :=
   ModuleCat.extendScalars.{u, u, max u (t + 1)} (integralScalarIntegerInclusion l E L ι)
 
-/-- Forget commutativity in the actual completed coefficient inclusion.
-Source: DAG statement (blueprint: lem-weil-point-finite-free-sections-tensor). -/
+/-- Forget commutativity in the actual completed coefficient inclusion. -/
 abbrev pointFiniteFreeRingMap :
     completedIntegralCoefficientSheafUnrestricted l E (Spec (.of k)) ⟶
       completedIntegralCoefficientSheafUnrestricted l L (Spec (.of k)) :=
@@ -108,13 +109,11 @@ abbrev pointFiniteFreeRingMap :
     (forget₂ CommRingCat RingCat)).map
       (completedCoefficientMap l E L ι (Spec (.of k)))
 
-/-- Restriction of scalars along the canonical completed coefficient inclusion.
-Source: DAG statement (blueprint: lem-weil-point-finite-free-sections-tensor). -/
+/-- Restriction of scalars along the canonical completed coefficient inclusion. -/
 abbrev pointFiniteFreeRestriction :=
   SheafOfModules.restrictScalars.{max u (t + 1)} (pointFiniteFreeRingMap k l E L ι)
 
-/-- The scalar-extension evaluation functor keeps zero maps.
-Source: Stacks 03EK (blueprint: lem-weil-point-finite-free-sections-tensor). -/
+/-- The scalar-extension evaluation functor keeps zero maps. -/
 instance pointEvaluation_zero
     (e : Padic.coefficientExtensionIntegers l L ≃+*
       (completedIntegralCoefficientSheafUnrestricted l L (Spec (.of k))).obj.obj
@@ -196,11 +195,7 @@ set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- The complete assertion: normalized coefficient identifications, a common global
 basis, local tensor coordinates, the unique linear natural comparison, exactness,
-and its unbounded termwise complex comparison. Each field is a clause of the node.
-The inverse formulas fix every coordinate isomorphism, rather than postulating an
-unrelated abstract isomorphism. The choice of basis is confined to these coordinates.
-Source: Bhatt--Scholze 4.2.12 and 6.8.2(1), Stacks 03EK; DAG statement
-(blueprint: lem-weil-point-finite-free-sections-tensor). -/
+and its unbounded termwise complex comparison. -/
 structure PointFiniteFreeSectionsTensorData where
   coefficientE : Padic.coefficientExtensionIntegers l E ≃+*
     (completedIntegralCoefficientSheafUnrestricted l E (Spec (.of k))).obj.obj

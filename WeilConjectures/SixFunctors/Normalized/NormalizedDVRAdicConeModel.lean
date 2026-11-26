@@ -64,7 +64,27 @@ import WeilConjectures.Algebra.Homology.IndependentExtensionTensor.ExtensionTens
 import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 import WeilConjectures.Algebra.Homology.RegularQuotientCone.RegularQuotientConeBasic
 
-/-! # Strict adic cone model for a normalized DVR Roos limit -/
+/-! # Strict adic cone model for a normalized DVR Roos limit
+
+This file constructs a strict normalized adic complex model of a Roos limit over the ring of
+integers of a DVR coefficient field, together with the bounded-free cone computation of its finite
+scalar extension (`normalizedDVR_adic_cone_model`).
+
+## Implementation details
+
+After choosing a uniformizer, the finite transitions are represented by semilinear chain maps via
+right fractions and K-flat resolutions with flat terms; flatness over each finite quotient gives
+the fields of `IsNormalizedAdicTower`. The given Roos triangle is transported to the strict model
+through the level identifications, without any fullness theorem for derived evaluation.
+Tensoring with the two-term free resolution `[R --ϖ^(n+1)--> R]` commutes with products and the
+Roos cone, so the derived reduction is the homotopy limit of the multiplication cones. No
+invertibility of the resulting projection is used; all exponents are `n+1`.
+
+## References
+
+* [B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Lemmas 3.5.4 and 3.5.5][BS15]
+* [Stacks Project, Tags 06YS, 05RT and 0941][stacks-project]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -579,33 +599,9 @@ private theorem completed_derived_products :
   exact ⟨inferInstance⟩
 
 /-- A strict normalized adic complex model and the bounded-free cone computation
-of a finite scalar extension of a Roos limit.
-Source: Bhatt--Scholze, Lemmas 3.5.4 and 3.5.5, regular-element case; Stacks 06YS,
-05RT and 0941. (blueprint: lem-coef-normalized-dvr-adic-cone-model).
-
-Proof: write the ring of integers as a DVR and choose a uniformizer. Its constant
-action on the completed sheaf gives the indicated linear category. Successively use
-right fractions and K-flat resolutions with flat terms to represent the finite
-transitions by semilinear chain maps. After restriction to the completed sheaf these
-give U; insert the zero complex at index zero. Flatness over each finite quotient
-identifies the kernel of the b-th power with the image of the a-th power at level
-a+b. The adjoint normalization gives quasi-isomorphisms from the termwise quotients
-to the smaller levels. These are the three fields of IsNormalizedAdicTower.
-The level identifications eU cover every positive level and intertwine every
-successor map. Their products
-transport the given Roos triangle to this strict model, retaining projections; no
-fullness theorem for derived evaluation is needed. Remove the finite prefix n+1. Tensoring
-with the two-term free resolution [R --uniformizer^(n+1)--> R] commutes with products
-and the Roos cone, since only two terms and finite sums occur in every degree.
-Consequently the restricted derived reduction of M is the homotopy limit c of the
-cones, giving a. The augmentation of the multiplication cone to the quotient is
-rho followed by desc followed by the normalized cokernel map. The ordinary tensor
-adjunction on pure tensors and its derived normalization show that a, this cone
-projection and the specified level identification compose to the restriction of the adjoint of
-the original limit
-projection. This proves the displayed equation, including all signs and projections.
-No assertion that this map is invertible is used: invertibility follows separately
-from the existing strict adic tower theorem. All exponents are n+1. -/
+of a finite scalar extension of a Roos limit: the derived reduction modulo `ϖ^(n+1)` of the
+limit is the homotopy limit of the multiplication cones, compatibly with the restriction of the
+adjoint of the limit projection. -/
 theorem normalizedDVR_adic_cone_model
     (T : NormalizedDVRTower l E X D hl)
     (M : completedIntegralDerivedCategory l E X D hl)

@@ -17,7 +17,13 @@ import Mathlib.Data.Fin.Tuple.Basic
 /-!
 # Simultaneous rescaling of an existing Artinian coefficient chart
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ, steps 10--13, 15, 23 and 25.
+We rescale a given flat polynomial chart and its Artinian coefficient solution, appending a zero
+parameter, so that the multiplication-kernel conditions and the ideal containments needed in
+the proof of Stacks Lemma 07FJ hold.
+
+## References
+
+* [Stacks, Tag 07FJ] (steps 10--13, 15, 23 and 25 of the proof)
 -/
 
 @[expose] public section
@@ -98,29 +104,7 @@ private theorem padded_span_pow {B : Type*} [CommRing B]
     rintro y ⟨i, rfl⟩
     exact Ideal.subset_span ⟨i.castSucc, by simp⟩
 
-/-- Rescale a given flat polynomial chart and its Artinian coefficient solution.
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ, steps 10--13, 15, 23 and 25.
-(blueprint: lem-weil-pbc-popescu-rescaled-coefficient-chart).
-
-Proof: Use the unpadded coefficient-chart construction for the simultaneous rescaling
-and coefficient inclusion. It supplies d parameters rho, an ideal H extending the
-initial contracted prime, and the coefficient algebra over R/H^(N+d(8c)). The
-parameters generate HQ and the image of H in L is its maximal ideal.
-
-Append zero using Fin.lastCases. For every old index the preceding-parameter ideal
-is unchanged, so both kernel equalities transfer along equality of the quotient
-ideals. For the last index, multiplication by zero and by its square have equal
-kernels. The powered parameter span is unchanged since c*8 is positive.
-
-For any d elements b and exponent e, their span to the power d*e+1 is contained in
-the span of their e-th powers. Prove this by induction on d: split off b_0, apply
-(I+J)^(e+d*e+1) ≤ I^e+J^(d*e+1), and use the singleton-span power identity and
-the induction hypothesis. The empty family gives the zero ideal to a positive
-power. As N>0, n=N+d(8c) is at least d*(c*8)+1. Apply the bound in Q and L, with
-I₀=H^n and K=m_L^n. Ideal maps commute with powers and the two localized
-structural maps agree by the scalar towers. Thus I₀Q⊆JQ, K⊆JL and I₀L=K.
-Take the same n as the positive maximal-ideal-power witness and retain the
-coefficient algebra, smoothness, flat local map and evaluation equalities. -/
+/-- Rescale a given flat polynomial chart and its Artinian coefficient solution. -/
 theorem exists_popescu_rescaled_coefficient_chart
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]

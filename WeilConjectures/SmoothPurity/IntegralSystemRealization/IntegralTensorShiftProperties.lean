@@ -10,9 +10,10 @@ public import WeilConjectures.SixFunctors.Completed.CompletedTensorShiftRight
 
 /-! # Representative formulas for the two tensor slots
 
-Source: blueprint chap-Smooth-purity, theorem-smooth-purity-all-admissible-coefficients, Step 2;
-cochain tensor and mapping-cone conventions of Stacks 011G, 014E and 0941
-(blueprint: def-pur-integral-tensor-shift-properties).
+## References
+
+* Stacks Project, Tags 011G, 012Z, 014E, 06YN, 06YU and 0941 (cochain tensor and
+  mapping-cone conventions).
 -/
 
 @[expose] public noncomputable section
@@ -24,23 +25,20 @@ universe u v w a b c d
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme Opposite
 namespace WeilConjectures.IntegralSystemRealization
 
-/-- Shift only the first operand of a bifunctor.
-Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- Shift only the first operand of a bifunctor. -/
 abbrev tensorShiftFirst (A : Type v) [Category.{w} A] [HasShift A ℤ] (r : ℤ) :
     A × A ⥤ A × A := (shiftFunctor A r).prod (𝟭 A)
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The actual total tensor on complexes of strict systems.
-Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- The actual total tensor on complexes of strict systems. -/
 abbrev systemTotalTensor (W : Scheme.{u}) :=
   coefficientTotalTensor.{u, u + 1, u}
     (coefficientSequenceTopology (Scheme.ProEt.topology W))
     (coefficientSequenceCommRingSheaf l E W)
 
-/-- K-flatness on the actual sequence site.
-Source: Stacks 06YN (blueprint: def-pur-integral-operation-shift-data). -/
+/-- K-flatness on the actual sequence site. -/
 abbrev systemKFlat (W : Scheme.{u})
     (P : CochainComplex (coefficientSequenceModules l E W) ℤ) : Prop :=
   CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
@@ -49,8 +47,7 @@ abbrev systemKFlat (W : Scheme.{u})
 
 /-- The unsigned first-slot formula on every strict-system tensor generator.
 The tower site includes quotient-linear transitions, so the cochain isomorphism
-also fixes all transition squares.
-Source: Stacks 011G, 012Z (blueprint: def-pur-integral-operation-shift-data). -/
+also fixes all transition squares. -/
 def systemTensorLeftFormula (W : Scheme.{u})
     (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ) (r : ℤ)
     (α : (systemTotalTensor l E W).obj (P⟦r⟧, Q) ≅
@@ -68,9 +65,7 @@ def systemTensorLeftFormula (W : Scheme.{u})
         (coefficientSequenceCommRingSheaf l E W) P Q (i + r) (j)
           ((i + r) + (j)) rfl U x y)
 
-/-- Descent of the specified cochain shift on every K-flat pair.
-Source: Stacks 06YU and blueprint Step 2
-(blueprint: def-pur-integral-operation-shift-data). -/
+/-- Descent of the specified cochain shift on every K-flat pair. -/
 def systemTensorLeftProperty (W : Scheme.{u}) (r : ℤ)
     (σ : tensorShiftFirst (System l E W) r ⋙ (calculus l E W).systemClosed.tensor ≅
       (calculus l E W).systemClosed.tensor ⋙ shiftFunctor (System l E W) r) : Prop :=
@@ -99,8 +94,7 @@ def systemTensorLeftProperty (W : Scheme.{u}) (r : ℤ)
 
 /-- The signed second-slot formula on every strict-system tensor generator.
 The tower site includes quotient-linear transitions, so the cochain isomorphism
-also fixes all transition squares.
-Source: Stacks 011G, 012Z (blueprint: def-pur-integral-operation-shift-data). -/
+also fixes all transition squares. -/
 def systemTensorRightFormula (W : Scheme.{u})
     (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ) (r : ℤ)
     (α : (systemTotalTensor l E W).obj (P, Q⟦r⟧) ≅
@@ -118,9 +112,7 @@ def systemTensorRightFormula (W : Scheme.{u})
         (coefficientSequenceCommRingSheaf l E W) P Q (i) (j + r)
           ((i) + (j + r)) rfl U x y)
 
-/-- Descent of the specified cochain shift on every K-flat pair.
-Source: Stacks 06YU and blueprint Step 2
-(blueprint: def-pur-integral-operation-shift-data). -/
+/-- Descent of the specified cochain shift on every K-flat pair. -/
 def systemTensorRightProperty (W : Scheme.{u}) (r : ℤ)
     (σ : completedTensorShiftSecond (System l E W) r ⋙ (calculus l E W).systemClosed.tensor ≅
       (calculus l E W).systemClosed.tensor ⋙ shiftFunctor (System l E W) r) : Prop :=
@@ -147,8 +139,7 @@ def systemTensorRightProperty (W : Scheme.{u}) (r : ℤ)
           (coefficientSequenceCommRingSheaf l E W) (calculus l E W).systemClosed
           P Q hP hQ).hom)
 
-/-- The first-slot finite tensor formula, before the fixed product/cone passage.
-Source: Stacks 011G (blueprint: def-pur-integral-operation-shift-data). -/
+/-- The first-slot finite tensor formula, before the fixed product/cone passage. -/
 def integralTensorLeftFormula (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (r : ℤ)
     (α : (integralOperationsTensorTowerFunctor l E W).obj (P⟦r⟧, Q) ≅
@@ -165,8 +156,7 @@ def integralTensorLeftFormula (W : Scheme.{u})
       (integralOperationsTotalTensorSection l E W n P Q (i + r) j U x y)
 
 /-- First-slot normalization with abstract coefficient and model data.
-The canonical predicate below specializes every parameter to the recorded construction.
-Source: Stacks 014E, 0941 (blueprint: def-pur-integral-tensor-shift-properties). -/
+The canonical predicate below specializes every parameter to the recorded construction. -/
 def integralTensorLeftModelProperty {A : Type a} [Category.{b} A] [Abelian A]
     [HasCountableProducts A] (r : ℤ) (Good : ObjectProperty (CochainComplex A ℤ))
     (T : CochainComplex A ℤ × CochainComplex A ℤ ⥤ ℕᵒᵖ ⥤ CochainComplex A ℤ)
@@ -204,8 +194,7 @@ def integralTensorLeftModelProperty {A : Type a} [Category.{b} A] [Abelian A]
           γ.hom.app
             ((T ⋙ integralOperationsRoosFunctor).obj (P.obj, Q.obj))
 
-/-- First-slot descent through exactly the recorded finite tower and Roos cone.
-Source: Stacks 014E, 0941 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- First-slot descent through exactly the recorded finite tower and Roos cone. -/
 abbrev integralTensorLeftProperty (W : Scheme.{u}) (r : ℤ)
     (σ : tensorShiftFirst (Integral l E W) r ⋙ integralCompletedTensor l E W ≅
       integralCompletedTensor l E W ⋙ shiftFunctor (Integral l E W) r) : Prop :=

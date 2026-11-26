@@ -14,8 +14,19 @@ import Mathlib.Algebra.Field.Shrink
 /-!
 # Regular ring maps and isomorphisms
 
-Source: Stacks Project, More on Algebra, Definition 07BZ, and Algebra, Lemma 0381.
-(blueprint: lem-weil-pbc-regular-ring-map-ring-equiv).
+Regularity of ring maps transports along commuting squares with ring equivalences.
+
+## Implementation details
+
+Ring equivalences identify local rings, residue fields and fibres. A finite purely inseparable
+extension of the second residue field is pulled back to one of the first, represented in the
+universe used by the geometric-regularity criterion by shrinking its finite-dimensional
+underlying vector space. Rings with no primes have a vacuous fibre clause.
+
+## References
+
+* [Stacks, Tag 07BZ]
+* [Stacks, Tag 0381]
 -/
 
 @[expose] public section
@@ -86,26 +97,7 @@ private theorem geometricRegular_of_equiv
     (fun r ↦ (Shrink.algEquiv k L).commutes r) h
   exact IsRegularRing.of_ringEquiv T
 
-/-- A commuting square with horizontal ring equivalences transports regularity.
-Source: Stacks Project, More on Algebra, Definition 07BZ; Algebra, Lemma 0381.
-(blueprint: lem-weil-pbc-regular-ring-map-ring-equiv).
-
-Proof: Write g as b composed with f composed with a inverse. Equivalences are flat,
-so flatness follows by composition. For a prime q of R₂ take p = a inverse(q).
-The induced local-ring equivalence identifies their maximal ideals and hence their
-residue fields. Tensor the residue-field equivalence and b to identify the fibres,
-compatibly with the residue-field actions. Noetherianity transports through the
-fibre equivalence. For a finite purely inseparable extension L of the second residue
-field, pull its scalar action back through the residue-field equivalence. It remains
-finite and purely inseparable: transport a finite basis and use the p-power criterion
-for purely inseparable extensions (in characteristic zero the extension is trivial).
-Represent L in the universe used by the first geometric-regularity criterion by
-shrinking its finite-dimensional underlying vector space. Transport the field and
-algebra structures along that equivalence; finiteness and pure inseparability are
-preserved. The tensor-product equivalence identifies the base-changed fibre with the
-one covered by f's geometric regularity. Regularity of rings transports under this
-equivalence. Thus each fibre of g is geometrically regular, proving the claim.
-No nonzero-ring hypothesis is needed: rings with no primes have a vacuous fibre clause. -/
+/-- A commuting square with horizontal ring equivalences transports regularity. -/
 theorem RingHom.IsRegular.of_ringEquiv
     {R₁ : Type u₁} {R₂ : Type u₂} {S₁ : Type v₁} {S₂ : Type v₂}
     [CommRing R₁] [CommRing R₂] [CommRing S₁] [CommRing S₂]

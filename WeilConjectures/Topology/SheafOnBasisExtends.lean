@@ -15,8 +15,20 @@ import Mathlib.Algebra.Category.Grp.Limits
 /-!
 # Extending a sheaf of abelian groups from a basis
 
-Source: Stacks Project, Sheaves on Spaces, Section 009H, Tags 009N and 009Q
-(blueprint: lem-weil-pbc-sheaf-on-basis-extends).
+A presheaf of abelian groups with unique gluing on an intersection-closed basis extends to a
+sheaf on the space.
+
+## Implementation details
+
+The inclusion of the basis into the opens is cover dense, and the extension is
+`Functor.sheafInducedTopologyEquivOfIsCoverDense`. Cover indices may be empty. The index universe
+contains the universe of all basis opens; coverings with larger index types can be reindexed by
+their image in the basis, since agreement on intersections forces equal sections for repeated
+opens.
+
+## References
+
+* [Stacks Project, Tags 009M, 009N and 009Q](https://stacks.math.columbia.edu/tag/009H)
 -/
 
 @[expose] public section
@@ -30,27 +42,7 @@ open CategoryTheory Opposite TopologicalSpace
 namespace TopologicalSpace.Opens
 
 /-- A presheaf of abelian groups with unique gluing on an intersection-closed basis extends
- to a sheaf on the space, with group isomorphisms on basis opens commuting with restrictions.
-Source: Stacks Project, Section 009H, Tags 009M, 009N and 009Q
-(blueprint: lem-weil-pbc-sheaf-on-basis-extends).
-
-Proof:
-1. Include the basis as a full subcategory of opens. Its range is a topological basis,
-   so Mathlib's `TopCat.Opens.coverDense_iff_isBasis` makes this inclusion cover dense.
-2. For a covering sieve in the induced topology, index all its arrows by their basic
-   domains, lifting the index universe to the one in `hglue`. The pushforward sieve
-   covers the basic open, so these domains cover it. Sieve compatibility implies
-   compatibility on basic intersections. Unique gluing gives the unique amalgamation.
-   The forgetful functor from abelian groups reflects limits, so this also proves
-   the abelian-group-valued sheaf condition.
-3. Mathlib's `Functor.sheafInducedTopologyEquivOfIsCoverDense` constructs the extension.
-   The inverse equivalence is restriction to the basis. The inverse unit isomorphism
-   gives the required group isomorphisms, and its naturality gives their compatibility
-   with restrictions.
-
-Cover indices may be empty. The index universe contains the universe of all basis opens;
-coverings with larger index types can be reindexed by their image in the basis, since agreement
-on intersections forces equal sections for repeated opens. -/
+to a sheaf on the space, with group isomorphisms on basis opens commuting with restrictions. -/
 theorem exists_sheaf_extension_of_basis_gluing
     (X : TopCat.{u}) (B : Set (Opens X)) (hB : IsBasis B)
     (hcap : ∀ U V : B, U.val ⊓ V.val ∈ B)

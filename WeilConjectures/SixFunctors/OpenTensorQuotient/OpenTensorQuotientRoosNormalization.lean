@@ -10,8 +10,13 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonica
 
 /-! # Roos normalization of scalar-unit tensor augmentations
 
-Source: Bhatt--Scholze 3.4.10; Stacks 03EK and 06YN.
-(blueprint: lem-sf-open-quotient-roos-normalization).
+We show that every scalar-unit augmentation is the first coordinate of the fixed normalized Roos
+tensor-completion chain map.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, 3.4.10]
+* [Stacks Project, Tags 03EK, 06YN]
 -/
 
 @[expose] public noncomputable section
@@ -31,17 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Every scalar-unit augmentation is the first coordinate of the fixed normalized
-Roos tensor-completion chain map.
-
-Source: Bhatt--Scholze 3.4.10; Stacks 03EK and 06YN.
-(blueprint: lem-sf-open-quotient-roos-normalization).
-
-Proof: two maps out of the signed direct-sum total tensor agree when they agree
-on each homogeneous summand. Tensor and sheafification extensionality reduce this
-to their values on pure sections. The augmentation section formula is exactly the
-first-coordinate normalization in Tensor.canonical. Equality of chain maps and
-then of their degree components gives RoosNormalization at every level.
-No boundedness, flatness, or geometric preservation condition is needed. -/
+Roos tensor-completion chain map. -/
 theorem augmentation_roos_normalized (W : Scheme.{u})
     (t : OpenFactorCoherence.Tensor l E W)
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ)

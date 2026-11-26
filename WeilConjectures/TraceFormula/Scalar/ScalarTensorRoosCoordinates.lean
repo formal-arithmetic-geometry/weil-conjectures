@@ -13,8 +13,13 @@ import WeilConjectures.CategoryTheory.SignedCoconeShift.SignedMappingCoconeShift
 
 /-! # Tensor coordinates of the two scalar augmentations
 
-Source: Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7;
-Stacks Project, Tags 06YY and 0941.
+Tensor associativity identifies the scalar change of a quotient augmentation with the direct
+augmentation, as strict chain maps.
+
+## References
+
+* Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7.
+* Stacks Project, Tags 06YY and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -213,28 +218,9 @@ private theorem scalarAssociatorCoordinate
     (P.X i)).val.app U _ = _ at hOrd
   rw [hOrd, (completedScalarChainComparison_spec l E F (j.comp ι) X).1]
 
-/-- Tensor associativity identifies the scalar change of a quotient augmentation
-with the direct augmentation. This is entirely a statement about strict chain
-maps, before localization or insertion of a derived counit.
-
-Source: Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1; Stacks 06YY;
-step 3 of lem-trf-scalar-model-iterated-strict-calculation.
-(blueprint: lem-trf-scalar-tensor-roos-coordinates).
-
-Proof in words: the chain comparison from an ordinary scalar complex to its
-quotient Roos tower has zero shifted coordinate. A Roos map induced by a map of
-towers acts separately on the two product coordinates, so the same is true after
-transport by qEL, qEF and the strict sequence scalar associator. For the
-unshifted coordinate, first test on a nested tensor t tensor (s tensor x).
-The qEL normalization and the first augmentation identify its inner coordinate
-with the quotient of s tensored with kappa-inverse(1 tensor x). The system
-scalar associator and qEF multiply the two quotient coefficients. The ordinary
-sheaf associator followed by the direct augmentation gives the same product:
-the quotient of t times the image under j of the quotient of s. The residue
-formula for completedCoefficientMap identifies these coefficients. The hypothesis
-identifying the inner tensor coordinate with y gives the displayed implication.
-All equalities are degreewise strict
-maps and commute with the actual quotient transitions and differentials. -/
+/-- Tensor associativity identifies the scalar change of a quotient augmentation with the direct
+augmentation. This is entirely a statement about strict chain maps, before localization or insertion
+of a derived counit. -/
 theorem scalarTensorRoosCoordinates
     (P : CochainComplex (integralTowerModules l E X) ℤ)
     (C : CochainComplex (coefficientSequenceModules l E X) ℤ)

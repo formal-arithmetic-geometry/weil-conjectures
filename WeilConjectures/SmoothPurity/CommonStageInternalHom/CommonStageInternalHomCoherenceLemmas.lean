@@ -11,10 +11,17 @@ import WeilConjectures.SmoothPurity.Common.CommonStageInternalHomData
 import WeilConjectures.ZetaWeil.SpecifiedHomScalarRationalNaturality
 import WeilConjectures.ZetaWeil.SpecifiedHomScalarTower
 
-/-! Finite-stage scalar Hom coherence and categorical comparison calculations.
+/-! # Common-stage internal Hom coherence
 
-Source: the normalized scalar Hom comparisons in the common-stage internal-Hom paragraph.
-(blueprint: lem-weil-common-stage-internal-hom-scalar-coherence).
+Finite-stage scalar Hom coherence and categorical comparison calculations: the normalized scalar
+Hom comparisons of the common-stage internal Hom.
+
+## Implementation details
+
+The tower law `rationalHomComparison_tower` is proved by identifying the stage associator with
+the scalar associator via its uniqueness specification and transporting
+`specifiedHomScalarRational_tower`. The contravariant pair component is the inverse scalar
+associator; the covariant component is its hom.
 -/
 
 @[expose] public noncomputable section
@@ -75,9 +82,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 namespace CommonStageInternalHom
 
-/-- Extend the two entries of a permitted rational Hom pair and its arrows.
-Source: the specified scalar extension and rational Hom pair construction.
-(blueprint: lem-weil-common-stage-internal-hom-scalar-coherence). -/
+/-- Extend the two entries of a permitted rational Hom pair and its arrows. -/
 def scalarPairs {E L : Index l Ω} (h : E ≤ L) :
     (constructibleRationalHomPairs l (Coefficient.{u} l Ω E) W).FullSubcategory ⥤
       (constructibleRationalHomPairs l (Coefficient.{u} l Ω L) W).FullSubcategory where
@@ -96,9 +101,7 @@ def scalarPairs {E L : Index l Ω} (h : E ≤ L) :
 set_option allowUnsafeReducibility true in
 attribute [local reducible] scalarPairs
 
-/-- The specified rational Hom comparisons, with their prescribed naturality.
-Source: specifiedHomScalarRational_naturality.
-(blueprint: lem-weil-common-stage-internal-hom-scalar-coherence). -/
+/-- The specified rational Hom comparisons, with their prescribed naturality. -/
 def rawComparison {E L : Index l Ω} (h : E ≤ L) :
     rationalDerivedInternalHom l (Coefficient.{u} l Ω E) W ⋙ transition l Ω W E L h ≅
       scalarPairs l Ω W h ⋙ rationalDerivedInternalHom l (Coefficient.{u} l Ω L) W :=
@@ -114,9 +117,7 @@ def rawComparison {E L : Index l Ω} (h : E ≤ L) :
 
 attribute [local irreducible] rawComparison
 
-/-- Pair associator: inverse in the contravariant entry, forward in the covariant entry.
-Source: the prescribed coefficient-stage scalar associator.
-(blueprint: lem-weil-common-stage-internal-hom-scalar-coherence). -/
+/-- Pair associator: inverse in the contravariant entry, forward in the covariant entry. -/
 def scalarPairsAssoc {E L M : Index l Ω} (h : E ≤ L) (k : L ≤ M)
     (P : (constructibleRationalHomPairs l (Coefficient.{u} l Ω E) W).FullSubcategory) :
     (scalarPairs l Ω W k).obj ((scalarPairs l Ω W h).obj P) ≅
@@ -164,15 +165,8 @@ private theorem rawHomTower
   rw [hs]
   exact specifiedHomScalarRational_tower l E L ι W P M j
 
-/-- The specified rational Hom comparison respects two coefficient extensions.
-Source: the normalized scalar Hom tower in the common-stage internal-Hom paragraph;
-`specifiedHomScalarRational_tower` and the prescribed coefficient-stage associator.
-(blueprint: lem-weil-common-stage-internal-hom-scalar-coherence).
-
-Proof: identify the stage associator with the scalar associator using its uniqueness
-specification. The coefficient-inclusion composition law identifies the direct extension.
-Transport the specified rational Hom tower along these equalities. The contravariant
-pair component is the inverse scalar associator; the covariant component is its hom. -/
+/-- The specified rational Hom comparison respects two successive coefficient extensions
+`E ≤ L ≤ M`: it is compatible with the coefficient-stage associator and the pair associator. -/
 theorem rationalHomComparison_tower {E L M : Index l Ω} (h : E ≤ L) (k : L ≤ M)
     (P : (constructibleRationalHomPairs l (Coefficient.{u} l Ω E) W).FullSubcategory) :
     (transition l Ω W L M k).map ((rawComparison l Ω W h).hom.app P) ≫

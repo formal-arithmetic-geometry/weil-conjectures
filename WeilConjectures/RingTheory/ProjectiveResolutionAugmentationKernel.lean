@@ -14,9 +14,19 @@ import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 /-!
 # The bounded resolution of an augmentation kernel
 
-Source: Stacks Project, Algebra, Lemma 0D1U, the successor argument, and
-Lemma 065S (1), applied to the augmentation of the supplied resolution.
-(blueprint: lem-weil-pbc-projective-resolution-augmentation-kernel).
+Removing degree zero from a projective resolution gives a projective resolution of the
+augmentation kernel.
+
+## Implementation details
+
+The truncated complex has new degree `i` equal to old degree `i + 1`. The old differential
+`P_1 → P_0` factors surjectively through the kernel of `P_0 → M`, and the next differential has
+the same kernel after this factorization since the kernel inclusion is monic.
+
+## References
+
+* [Stacks, Tag 0D1U] (the successor argument)
+* [Stacks, Tag 065S] (1)
 -/
 
 @[expose] public section
@@ -29,18 +39,7 @@ open CategoryTheory CategoryTheory.Category CategoryTheory.Limits HomologicalCom
 
 /-- Removing degree zero from a length-`n+1` projective resolution gives a
 length-`n` projective resolution of its augmentation kernel. This works in an
-independent module universe and needs no enough-projectives instance.
-Source: Stacks Project, Algebra, Lemma 0D1U, successor argument; Lemma 065S (1).
-(blueprint: lem-weil-pbc-projective-resolution-augmentation-kernel).
-
-Proof: truncate the given complex by setting the new degree `i` to its old
-degree `i+1`. Factor the old differential `P_1 → P_0` through the kernel of
-`P_0 → M`. Exactness of the augmentation makes this factorization surjective.
-The next differential has the same kernel after this factorization, since the
-kernel inclusion is monic. Thus the truncated augmentation is exact. All higher
-exactness assertions are those of the supplied resolution with indices shifted
-by one, and all terms remain projective. The old vanishing bound `n+1 < i+1`
-is precisely the new bound `n < i`. -/
+independent module universe and needs no enough-projectives instance. -/
 theorem hasProjectiveResolutionLE_augmentation_kernel
     {R : Type u} [CommRing R] {M : ModuleCat.{v} R} (n : ℕ)
     (P : ProjectiveResolution M)

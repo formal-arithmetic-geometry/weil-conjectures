@@ -18,8 +18,23 @@ import WeilConjectures.RingTheory.TorsionExtensionFlatDescent
 /-!
 # Algebraizing formal glueing data
 
-Source: Stacks Project, More on Algebra, Proposition 05ER.
-(blueprint: lem-weil-pbc-formal-glueing-essential-surjectivity).
+If `R → S` is flat and induces an isomorphism modulo `I = (f₁, …, fₜ)`, every formal glueing
+datum `X` is isomorphic to the canonical datum of an `R`-module.
+
+## Implementation details
+
+Let `H` be the module of compatible families of `X`. The chart projections extend to
+isomorphisms `H_{fᵢ} ≃ X.M i`, and tensoring the prime projection gives a morphism
+`Ψ : Can(H) → X`. The kernel and cokernel of `Ψ.prime` vanish after localizing at each `fᵢ`,
+hence are `I`-power torsion; flat base change of torsion submodules shows that `Ψ.prime` is
+injective. Descending the extension of the cokernel `Q` by `S ⊗ H` gives an extension
+`H → E → Q` with `S ⊗ E ≃ X.M'`; as `H → E` is bijective after each localization, the maps
+assemble to an isomorphism `Can(E) ≅ X`. The module `E` lives in the same universe, since the
+construction only uses submodules, quotients and finite products.
+
+## References
+
+* [Stacks, Tag 05ER]
 -/
 
 @[expose] public section
@@ -125,30 +140,8 @@ private theorem cast_comp_heq {S : Type v} [CommRing S]
   cases h
   rfl
 
-/-- Every formal glueing datum is isomorphic to a canonical one.
-Source: Stacks, More on Algebra, Proposition 05ER, second and third paragraphs;
-steps 7–11 of its formal-glueing equivalence node.
-(blueprint: lem-weil-pbc-formal-glueing-essential-surjectivity).
-Proof: let H be the submodule of compatible families in X. Chart projection extends
-uniquely to a bijection H localized at f i to X.M i by the H0 localization lemma.
-Tensor the prime projection with S and use the fraction formulas to obtain a morphism
-Psi from Can(H) to X. Its prime map is bijective after each localization, because the
-chart maps and the comparisons are bijective. Exactness of localization makes its
-kernel and cokernel vanish locally; finitely many annihilating powers of the generators
-make both I-power torsion. Torsion-submodule base change writes an element of the
-kernel as 1 tensor h for a torsion h in H. All chart projections of h vanish, and
-its prime projection vanishes by membership in the kernel, so h = 0. Thus Psi.prime
-is injective. Its cokernel Q identifies with its scalar extension by torsion-module
-base change. Descend the extension of Q extended to S by H extended to S, obtaining
-H -> E -> Q and an isomorphism E extended to S to X.M'. The injection H -> E
-becomes bijective on each localization since Q vanishes there. Combine its localized
-inverses with Psi's chart maps and the prime isomorphism to obtain Can(E) -> X.
-Precomposing the compatibility equations with these local bijections verifies that
-this is a morphism; the componentwise inverse maps satisfy the same equations and
-form its inverse. Bundle E in the stated universe: the construction uses submodules,
-quotients and finite products of modules already in that universe. For t = 0 the
-quotient hypothesis identifies R with S and there are no chart equations; for I = R
-all ideal-power torsion kernel/cokernel terms are zero. -/
+/-- If `R → S` is flat and induces an isomorphism modulo `I = (f₁, …, fₜ)`, then every formal
+glueing datum is isomorphic to the canonical datum of some `R`-module. -/
 theorem canonical_essentially_surjective {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] (φ : R →+* S) (t : ℕ) (f : Fin t → R)
     (Can : ModuleCat.{max u v w} R ⥤ Data.{u, v, max u v w} φ f)

@@ -14,8 +14,18 @@ import Mathlib.RingTheory.HopkinsLevitzki
 /-!
 # Essential finite type for Artinian local algebras
 
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 07DT (blueprint:
-theorem-finite-etale-covers-proper-henselian--2).
+If `S` is Artinian local and the residue field of `S` is essentially of finite type over `R`,
+then `S` is essentially of finite type over `R`. This is the converse direction of
+[Stacks, Tag 07DT], part (3).
+
+## Implementation details
+
+The proof uses finite generation of Artinian local algebras over their residue fields and
+composition of essentially finite type maps.
+
+## References
+
+* [Stacks, Tag 07DT]
 -/
 
 @[expose] public section
@@ -23,13 +33,9 @@ theorem-finite-etale-covers-proper-henselian--2).
 namespace RingHom
 
 /--
-(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 Let `f : R →+* S` be a homomorphism of commutative rings. If `S` is Artinian and
 local, and the induced map from `R` to its residue field is essentially of finite
-type, then `f` is essentially of finite type. This is the converse direction of
-Stacks Project, Lemma Tag 07DT, part (3); its proof uses the finite generation
-statement for Artinian local algebras over their residue fields and composition
-of essentially finite type maps.
+type, then `f` is essentially of finite type.
 -/
 theorem essFiniteType_of_artinian_local_residue
     {R S : Type*} [CommRing R] [CommRing S] (f : R →+* S)

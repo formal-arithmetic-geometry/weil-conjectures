@@ -20,8 +20,23 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlg
 
 /-! # Native derived Hom with normalized product-total representatives
 
-Source: Stacks Tags 0A95 and 08J7; native DerivedHom.lean and BifunctorHom.lean.
-(blueprint: lem-sf-native-standard-hom-representatives)
+The native derived Hom has representatives given by the explicit product-total Hom complex
+`standardHomModel`, for arbitrary sources and K-injective targets.
+
+## Implementation details
+
+The derived extension is obtained from the canonical functorial K-injective replacement in
+the second variable of the native product-total Hom functor, localized along `Q^op × Q`;
+source quasi-isomorphisms into a K-injective target are inverted by
+`quasiIso_bifunctorHomMapLeft`, and target quasi-isomorphisms between K-injectives are homotopy
+equivalences. For a fixed `L` the comparison with `bifunctorRHomOfComplex` uses
+`kInjectiveRep L` and descends through the equivalence from the homotopy category of
+K-injectives to the derived category. The rescaled projections change no underlying complex or
+chain map.
+
+## References
+
+* [Stacks, Tags 0A95, 08J7]
 -/
 
 @[expose] public section
@@ -454,28 +469,9 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ}
   [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Native RHom has representatives for arbitrary sources and K-injective targets, and its
-slice identification is normalized by the actual native K-injective source comparison.
-The complex and its signed projections are the explicitly constructed standardHomModel;
-only the universal derived extension and its normalized representative maps are asserted.
-Source: Stacks 0A95, 08J7; BifunctorHom.lean, bifunctorRHomOfComplexObjIso.
-(blueprint: lem-sf-native-standard-hom-representatives).
-Proof: use the canonical functorial K-injective replacement in the second variable of the
-native product-total Hom functor. It inverts source quasi-isomorphisms into a K-injective
-target by quasiIso_bifunctorHomMapLeft. A target quasi-isomorphism between K-injectives is a
-homotopy equivalence, and postcomposition carries its two homotopies to Hom-complex
-homotopies, so it too is inverted after Q. Localize this bifunctor along Q^op × Q. Its
-factorization isomorphism followed by the inverse of Hom(K, I → I_res) gives the asserted
-representatives. Naturality of the augmentation proves both naturality squares; the same
-invariance proves Representatives.inverts. These equations are the universal property that
-determines the extension and the representative maps up to their unique compatible natural
-isomorphism. For a fixed L, use its actual kInjectiveRep L. Naturality of the representatives
-on K-injectives gives a natural isomorphism after the equivalence from the homotopy category
-of K-injectives to D. Descend through that equivalence and compare with bifunctorRHomOfComplex.
-On each K-injective K its component is exactly the displayed composite: the map induced by
-kInjectiveRepIso L, then the representative isomorphism, then the inverse of the native source
-comparison. This specifies the normalization and proves its naturality for all derived maps.
-The rescaled projections change no underlying complex or chain map. -/
+/-- Native RHom has representatives given by the explicit complex `standardHomModel` for
+arbitrary sources and K-injective targets, and its slice identification is normalized by the
+native K-injective source comparison. -/
 theorem nativeStandardHomRepresentatives
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]

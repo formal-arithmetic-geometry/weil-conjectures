@@ -11,8 +11,13 @@ import all WeilConjectures.SixFunctors.OpenSemilinearTensor.OpenSystemUnitSectio
 
 /-! # Quotient compatibility of the finite open scalar comparisons
 
-Source: Stacks Project, Modules on Sites, Tags 03DI, 03EK, 0941 and 0E8I.
-(blueprint: lem-sf-open-scalar-transition-compatibility).
+This file shows that the finite open scalar comparisons, conjugated to the evaluations of
+the strict functors, commute with the coefficient transitions of the sequence-site
+presheaves.
+
+## References
+
+* Stacks Project, Tags 03DI, 03EK, 0941, 0E8I
 -/
 
 @[expose] public noncomputable section
@@ -101,8 +106,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (o : Operations l E j) (AX : OrdinaryReduction l E X) (AU : OrdinaryReduction l E U)
 
 /-- Conjugate a finite comparison to the evaluations of the two strict functors.
-This definition does not assume that the resulting maps commute with transitions.
-Source: Stacks 0941 (blueprint: lem-sf-open-scalar-transition-compatibility). -/
+This definition does not assume that the resulting maps commute with transitions. -/
 def scalarLevelComparison (tc : IntegralOpenReduction.TensorComparison l E j o) (n : ℕ) :
     (IntegralOpenReduction.extension l E j o ⋙ AX.functor) ⋙
         coefficientSequenceEvaluation l E X n ≅
@@ -337,22 +341,7 @@ private theorem scalarLevelComparison_generator
   exact hext.trans (hmap.trans hnat)
 
 /-- The finite normalized maps commute with every horizontal restriction of the actual
-sequence-site presheaves. No lift to a morphism of systems is asserted here.
-Source: Stacks 03DI, 03EK, 0941 and 0E8I; transition-square step of strict scalar transport
-(blueprint: lem-sf-open-scalar-transition-compatibility).
-
-Proof: conjugate the square by AX.evaluation and AU.evaluation. Their quotient fields
-replace the two source transitions by the actual scalar quotient maps. By the
-open-system adjunction's unit_evaluation equation and identity restrictionEvaluation,
-the target transition sends an original extension summand to the extension of its
-coefficient transition. The section normalization of transportEvaluation identifies
-this with the original finite extension summand. Precompose both composites with the
-scalar-adjunction unit. On every original completed extension summand the two maps
-now agree: both send [x] to [x tensor 1], followed by the coefficient quotient, which
-preserves one. The open-extension Hom equivalence proves equality on the completed
-extension, and the scalar-extension Hom equivalence proves equality on its scalar
-extension. Cancel the evaluation isomorphisms. This gives the displayed section
-identity for every n ≤ m, including identity transitions and the empty open. -/
+sequence-site presheaves. No lift to a morphism of systems is asserted here. -/
 theorem openScalarTransitionCompatibility
     (hrestriction : ∀ (n : ℕ) N V x,
       HEq ((((o.openSystems.restrictionEvaluation n).hom.app N).val.app V) x) x)

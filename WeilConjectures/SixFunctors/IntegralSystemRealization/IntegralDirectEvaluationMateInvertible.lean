@@ -15,8 +15,18 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantOpenS
 
 /-! # Invertibility of canonical system evaluation mate
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 0941
-(blueprint: lem-sf-integral-direct-evaluation-mate-invertible).
+We show that the canonical right mate of normalized pullback evaluation is invertible.
+
+## Implementation details
+
+The proof uses the normalized derived finite-extension left adjoints to evaluation and
+expresses the required right mate as the conjugate of an invertible derived extension mate.
+No flatness of the quotient ring, boundedness or cartesianness is used.
+
+## References
+
+* [Zheng, Construction 4.1 and Lemma 4.10]
+* [Stacks, Tag 03DI], [Stacks, Tag 07A7], [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -150,23 +160,7 @@ private theorem derivedEvaluation_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) 
     exact h
   · exact (pullbackTensorDerivedEvaluation_existsUnique l E f n).exists.choose_spec
 
-/-- The canonical right mate of normalized pullback evaluation is invertible.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941 and 07A7
-(blueprint: lem-sf-integral-direct-evaluation-mate-invertible).
-
-Proof: use the normalized derived finite-extension left adjoints to evaluation.
-The ordinary inverse-image square has as right mate the canonical direct-image
-comparison, by its unit normalization and uniqueness of intrinsic pullback.
-Iterated mates therefore make the ordinary finite-extension mate invertible.
-Intrinsic finite pullback preserves flat-term K-flat complexes, by the ringed
-pullback theorem and the normalized constant-ring realization comparison.
-The normalized extension-mate theorem now makes the derived extension mate
-invertible. Its underlying derived square has exactly the cochain normalization
-of pullbackTensorDerivedEvaluation, so uniqueness identifies the specified maps.
-Finally iterated mates express the required right mate as the conjugate of
-that invertible derived extension mate, using d.adj with its fixed left adjoint.
-This applies to every system, including zero and n = 0; no flatness of the
-quotient ring, boundedness or cartesianness is used. -/
+/-- The canonical right mate of normalized pullback evaluation is invertible. -/
 theorem integralDirectEvaluationMate_invertible {X Y : Scheme.{u}} (f : X ⟶ Y)
     (d : Direct l E f) (n : ℕ) :
     IsIso (mateEquiv d.adj (finiteAdj l E f n)

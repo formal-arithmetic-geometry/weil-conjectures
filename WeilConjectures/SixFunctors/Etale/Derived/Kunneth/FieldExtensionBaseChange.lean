@@ -17,10 +17,15 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.BaseChangeUniver
 Let `L/K` be a field extension and `g : T ⟶ S` a quasi-compact quasi-separated morphism of
 schemes over `K`. For every sheaf `F` on `T` whose geometric stalks are torsion of orders
 invertible in `K`, the base-change map `R^q g_* F |_{S_L} ⟶ R^q g_{L,*} (F|_{T_L})` is an
-isomorphism (blueprint `corollary-open-direct-image-over-field--2`, Stacks 0F1C). After passing to
-perfect closures (a universal homeomorphism does not change the étale sites) the extension is
-separable, hence a filtered colimit of smooth algebras, and smooth base change along limits
-(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth`) applies.
+isomorphism ([Stacks, Tag 0F1C]).
+
+## Implementation details
+
+After passing to perfect closures (a universal homeomorphism does not change the étale sites) the
+extension is separable, hence a filtered colimit of smooth algebras, and smooth base change along
+limits (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth`) applies: `L` is the
+filtered colimit of its smooth finite type `K`-subalgebras `A`, so `S_L` is the limit of the smooth
+`S`-schemes `S ×_K Spec A`.
 
 ## Main statements
 
@@ -55,10 +60,7 @@ lemma Scheme.IsTorsionSheafOfInvertibleOrder.of_hom {S S' T : Scheme.{u}} (b : S
 /-- **Base change along a separable field extension.** Let `L / K` be a separable field
 extension and `g : T ⟶ S` a quasi-compact quasi-separated morphism of schemes over `K`. Then the
 base-change map of the square `T_L = T ×_S S_L` is an isomorphism in every degree, at every sheaf
-on `T` with torsion stalks of orders invertible in `K`. Indeed `L` is the filtered colimit of
-its smooth finite type `K`-subalgebras (blueprint `corollary-open-direct-image-over-field--2`), so
-`S_L` is the limit of the smooth `S`-schemes `S ×_K Spec A`, and blueprint
-`corollary-open-direct-image-over-field--2` applies. -/
+on `T` with torsion stalks of orders invertible in `K`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isSeparableExtension {K L : Type u} [Field K]
     [Field L] [Algebra K L] (hKL : Algebra.IsSeparableExtension K L) {S T S' T' : Scheme.{u}}
     (σ : S ⟶ Spec (.of K)) (g : T ⟶ S) [QuasiCompact g] [QuasiSeparated g] (p : S' ⟶ S)
@@ -120,14 +122,12 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isSeparableExtension {K L : Type u}
   exact Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth' Λ g X pX hc' p
     (fun A ↦ by simp [c', c, pX]) sq q F
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: Direct image commutes with base change
-along field extensions.
-
-Let `L/K` be a field extension, `σ : S ⟶ Spec K` a scheme over `K` and `g : T ⟶ S` a
-quasi-compact quasi-separated morphism. Let `S' = S ×_K L` (the Cartesian square `hS`) and
-`T' = T ×_S S'` (the Cartesian square `sq`). For every sheaf `F` of `Λ`-modules on `T` whose
-geometric stalks are torsion of orders invertible in `K`, the base-change map
-`R^q g_* F |_{S'} ⟶ R^q h_* (F|_{T'})` is an isomorphism in every degree `q`. -/
+/-- Direct image commutes with base change along field extensions: let `L/K` be a field extension,
+`σ : S ⟶ Spec K` a scheme over `K` and `g : T ⟶ S` a quasi-compact quasi-separated morphism. Let
+`S' = S ×_K L` (the Cartesian square `hS`) and `T' = T ×_S S'` (the Cartesian square `sq`). For
+every sheaf `F` of `Λ`-modules on `T` whose geometric stalks are torsion of orders invertible in
+`K`, the base-change map `R^q g_* F |_{S'} ⟶ R^q h_* (F|_{T'})` is an isomorphism in every degree
+`q`. -/
 @[stacks 0F1C]
 theorem Etale.isIso_baseChangeHomologyMap_of_fieldExtension {K L : Type u} [Field K] [Field L]
     [Algebra K L] {S T S' T' : Scheme.{u}} (σ : S ⟶ Spec (.of K)) (g : T ⟶ S)

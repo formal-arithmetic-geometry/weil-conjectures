@@ -37,9 +37,6 @@ nondegenerate alternating form has even rank by
 separate hypothesis: a nondegenerate alternating form on `D.V m`, where `m` is the middle
 index, characterised by `m.rev = m`.
 
-This file formalises the statements of the reciprocity subsection of the blueprint block on
-zeta functions and the Weil conjectures.
-
 ## Main statements
 
 - `TraceDatum.C_det_mul_P_rev_of_pairing`: reciprocity of the factors themselves.
@@ -76,9 +73,8 @@ theorem C_det_mul_P_rev_of_pairing (hp : ∀ i, (p i).IsPerfPair)
   have := hp i
   LinearMap.C_det_mul_charpolyRev_of_similitude (hFG i)
 
-/-- **The Betti number of a self-dual trace datum is a degree.** Both members of a similitude
-pair are invertible, so the reciprocal characteristic polynomial in degree `i` has the full
-degree `dim (D.V i)`. This identifies the two ways of measuring the `i`-th Betti number. -/
+/-- **The Betti number of a self-dual trace datum is a degree.** For a self-dual trace datum,
+the reciprocal characteristic polynomial in degree `i` has degree `dim (D.V i)`. -/
 theorem natDegree_P_of_pairing (hq : 1 < q) (hp : ∀ i, (p i).IsPerfPair)
     (hFG : ∀ i, ∀ v w, p i (D.F i v) (D.F i.rev w) = (q : K) ^ d * p i v w)
     (i : Fin (2 * d + 1)) :
@@ -102,12 +98,8 @@ theorem det_mul_det_rev_of_pairing (hp : ∀ i, (p i).IsPerfPair)
   rw [LinearMap.det_mul_det_of_similitude (hFG i), ← pow_mul, mul_comm d]
 
 /-- **The parity of `d · χ`.** For a trace datum that is self-dual for the similitude factor
-`qᵈ`, the Betti numbers are symmetric, so the Euler characteristic `χ = ∑ᵢ (-1)ⁱ b i` has the
-same parity as the middle Betti number `b d`, where the middle index `m` is characterised by
-`m.rev = m`. For odd `d` the Poincaré duality sign rule makes the middle pairing alternating,
-which is the hypothesis `halt`, and a nondegenerate alternating form has even rank, so `d · χ`
-is even. This is what makes the constant `q ^ (d χ / 2)` of the classical functional equation
-an integer power of `q`. -/
+`qᵈ`, given a nondegenerate alternating pairing on the middle degree `m` (characterised by
+`m.rev = m`) when `d` is odd, `d · χ` is even, where `χ = ∑ᵢ (-1)ⁱ b i`. -/
 theorem even_mul_alternatingNatDegreeSum_of_pairing (hq : 1 < q) (hp : ∀ i, (p i).IsPerfPair)
     (hFG : ∀ i, ∀ v w, p i (D.F i v) (D.F i.rev w) = (q : K) ^ d * p i v w)
     {m : Fin (2 * d + 1)} (hm : m.rev = m)

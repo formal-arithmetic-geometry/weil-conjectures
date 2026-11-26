@@ -10,7 +10,11 @@ import WeilConjectures.CategoryTheory.SixFunctors.TransportedTensorComparison
 
 /-! # Defining squares for the explicit native chain associator
 
-Source: Stacks 06YN, 06YU, 0FPT. Transport the explicit chain models through localization.
+Transport the explicit chain models through localization.
+
+## References
+
+* Stacks Project, Tags 06YN, 06YU, 0FPQ and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -38,10 +42,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 
 set_option linter.style.haveILetI false in
 -- The ringed cochain monoidal structure needs a deep search for its graded tensor instances.
-/-- The explicit preimage associator satisfies its defining ringed model square.
-Source: Stacks 0FPQ (blueprint: lem-sf-native-weil-ringed-associator-complex-square).
-
-Proof: map the full-faithful preimage and cancel the right model inverse. -/
+/-- The explicit preimage associator satisfies its defining ringed model square. -/
 theorem nativeRingedAssociatorComplex_square
     (P Q N : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
     letI := SheafOfModules.isMonoidal_W_independentCoefficients b.R

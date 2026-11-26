@@ -16,8 +16,9 @@ sections. Evaluate the intrinsic extension adjunction unit using this identifica
 The resulting generator is natural in its input module and commutes with coefficient
 restriction, by the published normalized coefficient-square equation.
 
-Source: Stacks 03DI, 03DJ and 00YV.
-(blueprint: lem-sf-intrinsic-open-unit-generators).
+## References
+
+* Stacks Project, Tags 00YV, 03DI and 03DJ.
 -/
 
 @[expose] public noncomputable section
@@ -26,24 +27,18 @@ universe u
 open CategoryTheory Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
-/-- Canonical section-transport construction.
-Source: Stacks 03DI and 00YV.
-(blueprint: lem-sf-intrinsic-open-unit-generators). -/
+/-- Canonical section-transport construction. -/
 abbrev sfOpenGeneratorFixedUnderlying (T : Scheme.{u}) (A : Type u) [CommRing A] :=
   sheafCompose (ProEt.topology T)
     (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} A)) AddCommGrpCat.{u + 1})
 
-/-- Canonical section-transport construction.
-Source: Stacks 03DI and 00YV.
-(blueprint: lem-sf-intrinsic-open-unit-generators). -/
+/-- Canonical section-transport construction. -/
 abbrev sfOpenGeneratorIntrinsicUnderlying (T : Scheme.{u}) (A : Type u) [CommRing A] :=
   SheafOfModules.toSheaf.{u + 1}
     ((sheafCompose (ProEt.topology T)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing T A))
 
-/-- Canonical section-transport construction.
-Source: Stacks 03DI and 00YV.
-(blueprint: lem-sf-intrinsic-open-unit-generators). -/
+/-- Canonical section-transport construction. -/
 def sfOpenGeneratorRealizeMap (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] :
     sfOpenGeneratorFixedUnderlying T A ⟶ (sfIntrinsicModuleEquivalence T A).functor ⋙
       sfOpenGeneratorIntrinsicUnderlying T A where
@@ -54,9 +49,7 @@ def sfOpenGeneratorRealizeMap (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite
       (NatTrans.congr_app (toSheafify_naturality (ProEt.topology T)
         ((sfOpenGeneratorFixedUnderlying T A).map f).hom) V) x
 
-/-- Canonical section-transport identity, proved from units and counits.
-Source: Stacks 03DI and 00YV.
-(blueprint: lem-sf-intrinsic-open-unit-generators). -/
+/-- Canonical section-transport identity, proved from units and counits. -/
 theorem sfOpenGeneratorRealizeMap_isIso (T : Scheme.{u}) (A : Type u)
     [CommRing A] [Finite A] : IsIso (sfOpenGeneratorRealizeMap T A) := by
   rw [NatTrans.isIso_iff_isIso_app]
@@ -66,18 +59,14 @@ theorem sfOpenGeneratorRealizeMap_isIso (T : Scheme.{u}) (A : Type u)
     isIso_toSheafify (ProEt.topology T) ((sfOpenGeneratorFixedUnderlying T A).obj F).property
   exact isIso_of_reflects_iso _ (sheafToPresheaf (ProEt.topology T) AddCommGrpCat.{u + 1})
 
-/-- Canonical section-transport construction.
-Source: Stacks 03DI and 00YV.
-(blueprint: lem-sf-intrinsic-open-unit-generators). -/
+/-- Canonical section-transport construction. -/
 def sfOpenGeneratorRealize (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] :
     sfOpenGeneratorFixedUnderlying T A ≅ (sfIntrinsicModuleEquivalence T A).functor ⋙
       sfOpenGeneratorIntrinsicUnderlying T A :=
   have := sfOpenGeneratorRealizeMap_isIso T A
   asIso (sfOpenGeneratorRealizeMap T A)
 
-/-- Canonical section-transport construction.
-Source: Stacks 03DI and 00YV.
-(blueprint: lem-sf-intrinsic-open-unit-generators). -/
+/-- Canonical section-transport construction. -/
 def sfOpenGeneratorInverse (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] :
     (sfIntrinsicModuleEquivalence T A).inverse ⋙ sfOpenGeneratorFixedUnderlying T A ≅
       sfOpenGeneratorIntrinsicUnderlying T A :=
@@ -85,9 +74,7 @@ def sfOpenGeneratorInverse (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
     Functor.isoWhiskerRight (sfIntrinsicModuleEquivalence T A).counitIso
       (sfOpenGeneratorIntrinsicUnderlying T A)
 
-/-- Canonical section-transport identity, proved from units and counits.
-Source: Stacks 03DI and 00YV.
-(blueprint: lem-sf-intrinsic-open-unit-generators). -/
+/-- Canonical section-transport identity, proved from units and counits. -/
 theorem sfOpenGeneratorInverse_hom (T : Scheme.{u}) (A : Type u)
     [CommRing A] [Finite A] (N : proEtaleRingModules T (proEtaleConstantRing T A))
     (V : T.ProEtᵒᵖ)
@@ -198,9 +185,7 @@ private theorem transported_left_unit
   rw [← e.counitIso.inv.naturality_assoc] at hf
   simpa only [Functor.id_map, Category.assoc] using hf
 
-/-- Canonical section-transport identity, proved from units and counits.
-Source: Stacks 03DI and 00YV.
-(blueprint: lem-sf-intrinsic-open-unit-generators). -/
+/-- Canonical section-transport identity, proved from units and counits. -/
 theorem sfOpenGeneratorTransportedUnit
     {C D B : Type*} [Category C] [Category D] [Category B]
     (e : C ≌ D) {L : D ⥤ B} {R : B ⥤ D} (a : L ⊣ R)
@@ -220,9 +205,7 @@ theorem sfOpenGeneratorTransportedUnit
       congrArg (fun f ↦ f ≫ t.hom.app _) (transported_left_unit e a b r M)
     _ = _ := t.hom.naturality _
 
-/-- Canonical section-transport construction.
-Source: Stacks 03DI and 00YV.
-(blueprint: lem-sf-intrinsic-open-unit-generators). -/
+/-- Canonical section-transport construction. -/
 def sfOpenGeneratorUnderlying {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (A : Type u) [CommRing A] [Finite A] :
     sfIntrinsicOpenRestriction j A ⋙ sfOpenGeneratorIntrinsicUnderlying X A ≅
@@ -273,9 +256,7 @@ private theorem openUnderlying_restriction {X Z : Scheme.{u}} (j : X ⟶ Z)
       ((sfOpenGeneratorInverse Z B).hom.app N) = _
   rw [← Functor.map_comp, inverseUnderlying_restriction Z φ N]
 
-/-- Canonical section-transport construction.
-Source: Stacks 03DI and 00YV.
-(blueprint: lem-sf-intrinsic-open-unit-generators). -/
+/-- Canonical section-transport construction. -/
 def sfOpenGeneratorEvaluate {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (A : Type u) [CommRing A] [Finite A]
     (N : proEtaleRingModules Z (proEtaleConstantRing Z A)) (W : Z.ProEt)
@@ -326,9 +307,7 @@ private theorem openEvaluate_restriction {X Z : Scheme.{u}} (j : X ⟶ Z)
 
 variable {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
 
-/-- Canonical section-transport construction.
-Source: Stacks 03DI and 00YV.
-(blueprint: lem-sf-intrinsic-open-unit-generators). -/
+/-- Canonical section-transport construction. -/
 def sfOpenUnitGenerator (A : Type u) [CommRing A] [Finite A]
     (M : proEtaleRingModules X (proEtaleConstantRing X A)) (W : Z.ProEt)
     (a : W ⟶ IntegralOpenReduction.openObject j)
@@ -338,9 +317,7 @@ def sfOpenUnitGenerator (A : Type u) [CommRing A] [Finite A]
     (((sfIntrinsicExtensionByZeroAdjunction j A).unit.app M).val.app
       (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a))) x)
 
-/-- Canonical section-transport identity, proved from units and counits.
-Source: Stacks 03DI and 00YV.
-(blueprint: lem-sf-intrinsic-open-unit-generators). -/
+/-- Canonical section-transport identity, proved from units and counits. -/
 theorem sfOpenUnitGenerator_map (A : Type u) [CommRing A] [Finite A]
     {M M' : proEtaleRingModules X (proEtaleConstantRing X A)} (f : M ⟶ M')
     (W : Z.ProEt) (a : W ⟶ IntegralOpenReduction.openObject j)
@@ -356,16 +333,7 @@ theorem sfOpenUnitGenerator_map (A : Type u) [CommRing A] [Finite A]
     (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a))) x)
       ((sfIntrinsicExtensionByZeroAdjunction j A).unit.naturality f)).symm
 
-/-- Coefficient restriction preserves the intrinsic adjunction-unit generator.
-Source: Stacks 03DI, 03DJ and 00YV.
-(blueprint: lem-sf-intrinsic-open-unit-generators).
-
-Proof: the sectionwise identity normalization of realization under scalar restriction
-and the equivalence triangles show that inverse realization commutes with scalars.
-Whisker through open restriction to identify the coefficient square on underlying
-abelian sheaves. Evaluation therefore commutes with that square. Naturality of
-evaluation and the published sfOpenRestriction_normalized_unique unit equation
-then give the displayed identity on the evaluated intrinsic adjunction unit. -/
+/-- Coefficient restriction preserves the intrinsic adjunction-unit generator. -/
 theorem sfOpenUnitGenerator_restriction {A B : Type u}
     [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B)
     (M : proEtaleRingModules X (proEtaleConstantRing X B)) (W : Z.ProEt)

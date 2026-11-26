@@ -19,8 +19,9 @@ every finitely generated `Λ`-module `N`, the projection map
 `Rj_* K ⊗ᴸ N_T ⟶ Rj_*(K ⊗ᴸ Lj^* N_T) ≅ Rj_*(K ⊗ᴸ N_U)`
 
 is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle_of_nat`,
-blueprint `proposition-open-direct-image-preserves-finite`).
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle_of_nat`).
+
+## Implementation details
 
 As a functor of `N ∈ D(Λ)`, through the constant complex functor `D(Λ) ⥤ D(T_ét, Λ)`
 (`AlgebraicGeometry.Etale.constantFunctor`), the projection map is a natural transformation
@@ -63,22 +64,12 @@ instance preservesColimitsOfShape_constantFunctor (X : Scheme.{u}) (J : Type*) :
     (isTerminalEtaleTerminal X)).mapDerivedCategoryRightDerivedAdjunction
       ).leftAdjoint_preservesColimits.preservesColimitsOfShape
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: Constant coefficient tensor
-comparison.
-
-Let `Λ` be a noetherian ring (in the blueprint: a finite ring) and `j : U ⟶ T` a morphism of
-schemes (in the blueprint: an open immersion) such that `Rj_*` on the unbounded derived categories
-of étale sheaves of `Λ`-modules preserves countable coproducts. For every `K ∈ D(U_ét, Λ)` and
-every finitely generated `Λ`-module `N`, the projection map
+/-- Constant coefficient tensor comparison: let `Λ` be a noetherian ring (for instance a finite
+ring) and `j : U ⟶ T` a morphism of schemes (for instance an open immersion) such that `Rj_*` on the
+unbounded derived categories of étale sheaves of `Λ`-modules preserves countable coproducts. For
+every `K ∈ D(U_ét, Λ)` and every finitely generated `Λ`-module `N`, the projection map
 `Rj_* K ⊗ᴸ N_T ⟶ Rj_*(K ⊗ᴸ Lj^* N_T)` is an isomorphism; its target is `Rj_*(K ⊗ᴸ N_U)`, as
-`Lj^* N_T ≅ N_U` (`AlgebraicGeometry.Etale.leftDerivedUpperStarSingleConstantSheafIso`).
-
-The projection map, composed with the constant complex functor, is a natural transformation of
-coproduct-preserving triangulated functors out of `D(Λ)` which is an isomorphism at the free
-modules of finite rank
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMapApp_constantSingle_pi`);
-`DerivedCategory.isIso_app_singleFunctor_obj_of_finite` concludes, along a finite free resolution
-of `N` and the telescope of its stupid truncations. -/
+`Lj^* N_T ≅ N_U` (`AlgebraicGeometry.Etale.leftDerivedUpperStarSingleConstantSheafIso`). -/
 theorem isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle_of_nat
     [IsNoetherianRing Λ] {U T : Scheme.{u}} (j : U ⟶ T)
     [PreservesColimitsOfShape (Discrete ℕ) (R((j)_*[ModuleCat.{u + 1} Λ]))]

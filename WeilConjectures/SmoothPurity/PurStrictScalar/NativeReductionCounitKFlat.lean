@@ -133,7 +133,19 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # Computation of the native whole-system reduction counit on K-flat complexes
 
-Source: Stacks 06YY, 0940--0941 and derived adjoint functors.
+## Implementation details
+
+On the ringed sequence site ordinary quotient extension is the composite of constant diagram
+formation and extension to the quotient ring sheaf, and a K-flat complex has a K-flat constant
+diagram. Deriving the extension/limit adjunction identifies the derived left adjoint with
+`S.reduction`, both being left adjoint to `coefficientSequenceLimit`; the isomorphism of right
+adjoints is `reductionRightComparison`. Under adjoint transposition the computing left
+comparison is therefore `systemReductionCounit`, which is thus invertible on K-flat complexes.
+No derived-completeness hypothesis is needed.
+
+## References
+
+* [Stacks Project, Tags 06YY, 0940 and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -222,24 +234,7 @@ private theorem ordinaryReduction_preserves (W : Scheme.{u})
   exact (quasiIso_iff_of_arrow_mk_iso _ _
     (Arrow.isoMk (dc.app P) (dc.app Q) (dc.hom.naturality f).symm)).1 hG
 
-/-- The native reduction mate computes ordinary whole-system quotient extension on K-flats.
-Source: Stacks, sites-cohomology.tex, Lemma derived-base-change (06YY),
-section-derived-limits (0940), Lemma derived-limit-is-ok (0941), and derived.tex,
-Lemma derived-adjoint-functors.
-Proof: on the ringed sequence site ordinary quotient extension is the composite of
-constant diagram formation and extension to the quotient ring sheaf. A K-flat complex
-has a K-flat constant diagram: tensor and acyclicity are detected levelwise.
-Extension of scalars computes its left derived functor on this diagram. Its right
-adjoint is the ordinary inverse limit after coefficient restriction. Deriving this
-adjunction identifies the derived left adjoint with S.reduction, since both are left
-adjoint to the specified coefficientSequenceLimit. The isomorphism of right adjoints
-is reductionRightComparison, normalized by its derived unit on every complex.
-Under adjoint transposition the computing left comparison is therefore precisely
-systemReductionCounit, defined as the mate of that same right-derived unit.
-Its component on the given K-flat complex is consequently invertible. This argument
-uses the full sequence site and all its transitions; it also applies to the zero
-complex and to the empty site, without a derived-completeness hypothesis.
-(blueprint: lem-pur-native-reduction-counit-kflat). -/
+/-- The native reduction mate computes ordinary whole-system quotient extension on K-flats. -/
 theorem nativeReductionCounit_kFlat (W : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (P : CochainComplex (scalarReductionSource l E W) ℤ)

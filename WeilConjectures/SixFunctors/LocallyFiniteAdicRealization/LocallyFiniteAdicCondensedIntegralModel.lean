@@ -10,8 +10,9 @@ public import WeilConjectures.SixFunctors.AdicFiniteRealization.LocallyFiniteAdi
 
 /-! # Section comparisons for integral condensed realizations
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: def-sf-condensed-integral-section-comparisons)
+## References
+
+* [Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2)]
 -/
 
 @[expose] public noncomputable section
@@ -31,41 +32,31 @@ namespace WeilConjectures.LocallyFiniteAdicRealization
 open AlgebraicallyClosedCoefficients (Index Coefficient)
 open AdicFiniteRealization
 
-/-- The two sides of a tensor square agree, allowing the prescribed target transport.
-Source: tensor-comparison naturality, BS 6.8.14(2).
-(blueprint: def-sf-condensed-integral-section-comparisons). -/
+/-- The two sides of a tensor square agree, allowing the prescribed target transport. -/
 def integralTensorSquare {C : Type*} [Category C] {X Y M N N' : C}
     (f : X ⟶ Y) (p : X ≅ M) (q : Y ≅ N) (t : M ⟶ N') : Prop :=
   HEq (f ≫ q.hom) (p.hom ≫ t)
 
 variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 
-/-- Section reconstruction is an exact equivalence, before imposing constructibility.
-Source: the exact section-module equivalence, BS 6.8.2.
-(blueprint: def-sf-condensed-integral-section-comparisons). -/
+/-- Section reconstruction is an exact equivalence, before imposing constructibility. -/
 theorem sectionDerived_isEquivalence
     (R : Sheaf (ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
     (sectionDerived X R).IsEquivalence := by
   unfold sectionDerived
   infer_instance
 
-/-- The fixed section functor for condensed algebraic-closure coefficients.
-Source: exact section reconstruction, BS 6.8.2.
-(blueprint: def-sf-condensed-integral-section-comparisons). -/
+/-- The fixed section functor for condensed algebraic-closure coefficients. -/
 @[irreducible] def integralSections :=
   sectionDerived X (ProEtale.padicAlgClRingObj X l)
 
-/-- The fixed section functor is an equivalence.
-Source: exact section reconstruction, BS 6.8.2.
-(blueprint: def-sf-condensed-integral-section-comparisons). -/
+/-- The fixed section functor is an equivalence. -/
 theorem integralSections_isEquivalence : (integralSections l X).IsEquivalence := by
   unfold integralSections
   exact sectionDerived_isEquivalence X _
 
 /-- Forgetting native scalars and reconstructing sections commute with restriction
-along the actual condensed-to-native coefficient map.
-Source: section reconstruction and exact derived transport, BS 6.8.2.
-(blueprint: def-sf-condensed-integral-section-comparisons). -/
+along the actual condensed-to-native coefficient map. -/
 @[irreducible] def nativeCondensedSectionComparison [IsCommMonObj (abRing l X)]
     [(sections l X).Additive] [PreservesFiniteLimits (sections l X)]
     [PreservesFiniteColimits (sections l X)] :
@@ -84,9 +75,7 @@ Source: section reconstruction and exact derived transport, BS 6.8.2.
     Functor.mapDerivedCategoryNatIso k ≪≫
     (Functor.mapDerivedCategoryCompIso (sections l X) _).symm
 
-/-- The section ring map of an invertible internal coefficient map is invertible.
-Source: functoriality on the literal section rings.
-(blueprint: def-sf-condensed-integral-section-comparisons). -/
+/-- The section ring map of an invertible internal coefficient map is invertible. -/
 theorem sectionRingMap_isIso
     {R S : Sheaf (ProEt.topology X) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
@@ -114,9 +103,7 @@ theorem sectionRingMap_isIso
       (IsIso.inv_hom_id f)) U) r
 
 /-- The section comparison for extension from a finite field to the condensed closure
-is the mate of the identity-on-sections scalar restriction comparison.
-Source: the scalar adjunction under coefficient equivalences, BS 6.8.2.
-(blueprint: def-sf-condensed-integral-section-comparisons). -/
+is the mate of the identity-on-sections scalar restriction comparison. -/
 @[irreducible] def closureSectionScalarComparison
     (E : Index l (PadicAlgCl l)) :
     ProEtale.derivedExtendScalarsToPadicAlgCl X l E ⋙
@@ -150,9 +137,7 @@ Source: the scalar adjunction under coefficient equivalences, BS 6.8.2.
     eE.functor.mapDerivedCategory eC.functor.mapDerivedCategory k).choose
 
 /-- Restriction through two coefficient isomorphisms transports a scalar tensor square.
-All comparisons are the mates of the fixed restriction square.
-Source: adjunction uniqueness for extension and restriction of scalars.
-(blueprint: def-sf-condensed-integral-section-comparisons). -/
+All comparisons are the mates of the fixed restriction square. -/
 @[irreducible] def tensorThroughCoefficientSquare
     {R P V T : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (d : R ≅ P) (q : V ≅ T) (s : R ⟶ V) (c : P ⟶ T)
@@ -172,9 +157,7 @@ Source: adjunction uniqueness for extension and restriction of scalars.
         (coefficientExtensionSquare X d.hom c s q.hom h)
   exact Iso.compInverseIso (H := eq) a
 
-/-- The raw completed coefficient transport is restriction by its CommRing lift.
-Source: the specified integral coefficient transport, BS 6.8.2.
-(blueprint: def-sf-condensed-integral-section-comparisons). -/
+/-- The raw completed coefficient transport is restriction by its CommRing lift. -/
 theorem integralDetailedTransport_eq
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     integralDetailedTransport X l E = pbcDerivedRestrict (purCoefficientIso l E X).hom := by
@@ -184,9 +167,7 @@ theorem integralDetailedTransport_eq
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The actual stage transition has the specified underlying integral object.
-Source: the raw localization and the published stage-transition object equation.
-(blueprint: def-sf-condensed-integral-section-comparisons). -/
+/-- The actual stage transition has the specified underlying integral object. -/
 theorem finiteCondensedStageIntegralObject
     (E L : Index l (PadicAlgCl l)) (h : E ≤ L)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :
@@ -209,9 +190,7 @@ variable [IsNoetherian X]
   [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
 
 /-- The finite condensed closure realization, reconstructed as ordinary section modules,
-is the original continuous realization followed by its specified closure leg.
-Source: the section encoding counit and scalar adjunction, BS 6.8.14(2).
-(blueprint: def-sf-condensed-integral-section-comparisons). -/
+is the original continuous realization followed by its specified closure leg. -/
 @[irreducible] def finiteCondensedClosureSectionComparison (A : FiniteCondensedData l X)
     (E : Index l (PadicAlgCl l)) :
     finiteCondensedClosureFunctor l X A E ⋙
@@ -237,9 +216,7 @@ Source: the section encoding counit and scalar adjunction, BS 6.8.14(2).
       (pbcDerivedExtend (A.closure.leg E))
 
 /-- On integral arrows the continuous realization is its literal tensor formula.
-The components are the specified object equalities, rather than new choices of isomorphisms.
-Source: the integral numerator formula for continuous realization, BS 6.8.14(2).
-(blueprint: def-sf-condensed-integral-section-comparisons). -/
+The components are the specified object equalities, rather than new choices of isomorphisms. -/
 @[irreducible] def continuousIntegralComparison (A : FiniteCondensedData l X)
     (E : Index l (PadicAlgCl l)) :
     pbcStageLocalization l (PadicAlgCl l) X E ⋙ (A.realization E).J ≅

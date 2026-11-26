@@ -12,6 +12,22 @@ public import Mathlib.CategoryTheory.EssentiallySmall
 
 import Mathlib.Algebra.Category.CommAlgCat.FiniteType
 
+/-!
+# Essential smallness of étale algebras trivial modulo an ideal
+
+The category of étale `B`-algebras which are trivial modulo `J` is essentially small.
+
+## Implementation details
+
+Étale algebras are of finite type, so the category embeds fully faithfully into `FGAlgCat B`,
+which Mathlib proves essentially small; essential smallness pulls back along fully faithful
+functors.
+
+## References
+
+* [Stacks, Tag 0A02]
+-/
+
 @[expose] public section
 
 universe u
@@ -20,16 +36,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace RingTheory
 
-/-- Essential smallness of the category of etale algebras trivial modulo the ideal.
-Source: Stacks Project, Tag 0A02, the set-theoretic point in the construction;
-Mathlib `FGAlgCat` and `essentiallySmall_of_fully_faithful`.
-(blueprint: lem-weil-pbc-pair-henselization-essentially-small).
-
-Proof: An etale ring map is finitely presented, hence of finite type. The equivalence
-between rings under `B` and commutative `B`-algebras restricts to a fully faithful functor
-from this full subcategory to `FGAlgCat B`. Mathlib proves that the latter is essentially
-small using quotients of polynomial rings on finitely many variables. Essential smallness
-pulls back along the fully faithful functor; the quotient condition needs no extra argument. -/
+/-- The category of étale `B`-algebras trivial modulo `J` is essentially small. -/
 theorem pair_henselization_essentiallySmall (B : Type u) [CommRing B] (J : Ideal B) :
     EssentiallySmall.{u} (ObjectProperty.FullSubcategory
       (fun C : Under (CommRingCat.of B) ↦

@@ -8,9 +8,14 @@ module
 public import WeilConjectures.SmoothPurity.Finite.FinitePullbackTensorKFlatNormalization
 import WeilConjectures.SmoothPurity.Finite.FinitePullbackTensorOrdinaryQuotientSquarePure
 
-/-! Fixed-degree component of the ordinary quotient/pullback tensor square.
-Source: Stacks Tags 03EL, 06YY and 07A4.
-(blueprint: lem-pur-finite-pullback-tensor-ordinary-quotient-square-component).
+/-! # Fixed-degree component of the ordinary quotient/pullback tensor square
+
+The two comparison composites of the ordinary quotient/pullback tensor square agree in each
+cochain degree.
+
+## References
+
+* [Stacks, Tags 03EL, 06YY and 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -36,10 +41,7 @@ attribute [local instance] sfIntrinsicPullback_additive
 
 /-- Equality of the two comparison composites in one cochain degree.
 This is the component calculation used to prove the chain-map equality; it is the
-ordinary pure-tensor generator calculation after applying the stated normalizations.
-Source: Stacks Tags 03EL, 06YY and 07A4.
-(blueprint: lem-pur-finite-pullback-tensor-ordinary-quotient-square-component).
--/
+ordinary pure-tensor generator calculation after applying the stated normalizations. -/
 theorem finitePullbackTensor_ordinary_quotient_square_component {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]

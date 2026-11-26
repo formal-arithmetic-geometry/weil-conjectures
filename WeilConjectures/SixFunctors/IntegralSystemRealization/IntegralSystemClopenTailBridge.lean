@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralSystemProperOpenBridgeWord
 import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemBridgePushComposition
 
-/-! A factor identity used in proper/open transport. -/
+/-! # A factor identity used in proper/open transport
+
+## References
+
+* [Stacks, Tag 0F7B]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -193,18 +198,7 @@ private theorem native_tail (o : Operations l E) (c : Compositors l E o)
     (native_clopen l E o c a b s M) (native_eq l E o b h M)
     (native_comp l E o c b s q M)
 
-/-- The clopen/compositor tail commutes with the canonical bridge.
-Source: Stacks 0F7B and blueprint fix-prop-coherence.
-
-Proof: Transport the inverse open unit by left-adjoint uniqueness. Its transpose under
-the direct adjunction transports by conjugateIsoEquiv, giving the clopen square.
-The normalized direct compositors agree on ordinary sections by pullbackComp;
-conjugation and the prescribed cochain models lift the agreement to the derived
-compositors. Equality induction handles the lift-composite equality. Map the
-clopen square through the second projection, append this compositor square,
-and use naturality of the direct bridge on the two component morphisms.
-No cartesian or restriction factor is used.
-(blueprint: lem-sf-integral-system-clopen-tail-bridge). -/
+/-- The clopen/compositor tail commutes with the canonical bridge. -/
 theorem clopenTail_bridge (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)

@@ -83,8 +83,20 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Unit equations on flat K-flat pullback tensor representatives
 
-Source: Stacks Project, Tags 07A4, 06YS and 03EL.
-(blueprint: lem-pur-finite-pullback-tensor-unit-representatives).
+We construct a unit comparison for the finite pullback-tensor comparison satisfying both unit
+equations on flat K-flat representatives.
+
+## Implementation details
+
+Each intrinsic tensor unit is identified with the coefficient module in degree zero, using
+uniqueness of closed tensor adjoints. Ordinary pullback preserves this rank-one module, so the
+derived pullback of the unit is isomorphic to the target unit. Tensoring with this object is
+fully faithful, which determines the unit comparison from the right unit equation at the source
+unit; associativity at `(1, 1, M)` and `(M, 1, 1)` then gives the two unit equations.
+
+## References
+
+* Stacks Project, Tags 03EL, 06YS and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -382,22 +394,8 @@ private theorem finitePullbackTensor_unit_object {X Y : Scheme.{u}}
     (DerivedCategory.singleFunctor (scalarReductionTarget.{u, u} l E X n) 0).mapIso j ≪≫
     (finiteUnit_single l E X n).symm⟩
 
-/-- Existence of a single unit comparison satisfying both equations on flat K-flats.
-Source: Stacks 03EL, ordinary pullback tensor product and its rank-one unit;
-07A4, lemma-pullback-tensor-product, total-tensor construction.
-(blueprint: lem-pur-finite-pullback-tensor-unit-representatives).
-Proof: first identify each intrinsic tensor unit with the coefficient module
-in degree zero, using uniqueness of the closed tensor adjoints. Ordinary ringed
-pullback preserves this rank-one module; exact pullback commutes with the
-single-complex functor. Thus the derived pullback of the intrinsic unit is
-isomorphic to the target unit. Extend the existing associativity equation on
-flat K-flat triples to all triples by naturality and flat K-flat resolutions.
-Tensoring with the image of the unit is fully faithful, since this object is
-isomorphic to the target unit. Its full faithfulness determines an isomorphism
-epsilon whose right unit equation holds at the source unit. Associativity at
-(1,1,M), the triangle identity and cancellation imply the left unit equation
-for every M. Associativity at (M,1,1) then implies the right unit equation.
-Specialize both equations to the requested localized representatives. -/
+/-- There is a single unit comparison satisfying both unit equations on flat K-flat
+representatives. -/
 theorem finitePullbackTensor_unit_representatives_exists {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]

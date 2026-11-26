@@ -12,7 +12,12 @@ import all WeilConjectures.TraceFormula.Supporting.AmbientComparisonSystemExiste
 
 /-! # Quotient realization steps
 
-Source: Stacks 07A4 and 0941; scalar/tensor compatibility of quotient substitution.
+Scalar/tensor compatibility of quotient substitution: scalar extension of tensor
+substitution is computed by the normalized strict sigma.
+
+## References
+
+* [Stacks: Tags 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -147,17 +152,7 @@ private theorem tensor_scalar_substitution {W : Scheme.{u}}
   rfl
 
 -- The calculation combines three naturality squares in the system derived category.
-/-- Scalar extension of tensor substitution is computed by the normalized strict sigma.
-Source: Stacks 07A4 and 0941; the tensor step of scalar route coordinates.
-(blueprint: lem-pur-completed-scalar-tensor-substitution).
-
-Proof: take the adjunction transpose of the tensor substitution. Naturality of the
-coherent counit identifies it with tensorReduction followed by the two reduced inputs
-and the inverse system tensor model. The derivedSigma normalization moves this model
-past sigma, and naturality moves the reduced inputs past derivedSigma. The scalar
-limit square identifies the remaining prefix with the prescribed completed tensor
-scalar comparison. Functoriality combines the scalar reductions of the two inputs.
-All equations hold in the derived category of entire systems before total limit. -/
+/-- Scalar extension of tensor substitution is computed by the normalized strict sigma. -/
 theorem completedScalarTensorSubstitution {W : Scheme.{u}}
     [∀ w : W, Invertible (l : W.residueField w)]
     {ρ : IntegralComparisonRoosModel l L W}

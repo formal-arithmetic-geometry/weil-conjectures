@@ -78,8 +78,9 @@ import all WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps
 
 /-! # Internal composition for normalized coefficient tensor presentations
 
-Source: Stacks 0A98, 08JD and 0941.
-(blueprint: lem-pur-canonical-coefficient-composition-laws).
+## References
+
+- Stacks Project, Tags 0A98, 08JD, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -186,28 +187,7 @@ end ModelUniqueness
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- Normalized reduction and finite scalar extension preserve internal composition.
-
-Source: Stacks 0A98 (lemma-internal-hom-composition), 08JD (lemma-dual), 07A4, 0941;
-canonical integral calculus, proof step 3.
-(blueprint: lem-pur-canonical-coefficient-composition-laws).
-
-Proof: use the fixed normalized duality structures on the integral, sequence and
-finite sites. Their associators descend reassociation of the same total tensors.
-Their tensor-Hom adjunctions are ordinary uncurrying on K-flat/K-injective pairs.
-The old pure-tensor reduction and finite scalar maps, conjugated by the adjoint
-comparisons, still have those formulas: transpose the comparisons into the fixed
-Hom resolution and use uniqueness on sheafified tensor generators. Uncurry the
-two sides of the displayed composition equation. On a triple of homogeneous
-sections both reassociate the same tensor and apply the two evaluations in the
-order phi(psi(x)); the total differential has the same Koszul signs on both sides.
-The strict-system calculation is made before evaluation at a finite level.
-Generator uniqueness proves the chain equation. K-flat localization in each
-variable, followed by naturality along resolution isomorphisms, proves the
-identity for all derived inputs. Apply this once to reduction and once at each
-finite level. No claim is made that an arbitrary adjoint comparison is monoidal;
-the normalized associator formulas are essential. The proof includes zero
-objects, the empty scheme, and unbounded complexes. -/
+/-- Normalized reduction and finite scalar extension preserve internal composition. -/
 theorem compositionLaws (S : CoefficientDerivedSystemFibers l E W) :
     let R := reduction l E W S.toCoefficientDerivedSystemReduction
     CompositionLaw R.integralClosed R.systemClosed R.reduction R.reductionTensor ∧

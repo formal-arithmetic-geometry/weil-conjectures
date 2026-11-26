@@ -11,9 +11,17 @@ public import WeilConjectures.CategoryTheory.Tensor.TensorTowerDatum
 
 /-! # Tensor coherence for successive rational scalar extensions
 
-Source: the common-stage tensor argument of prose-03-02,
-using the normalized scalar-extension comparisons of
-lem-pur-integral-operations-scalar-extension; Stacks Project, Tags 07A4 and 08J9.
+The normalized rational tensor scalar tower is coherent.
+
+## Implementation details
+
+The tensor clause of `scalarOperationsOrdinary_tower` is conjugated by `scalarCompletionIso`
+and mapped through raw rational localization. Naturality cancels adjacent completion inverses,
+and the rational component specifications identify all three factors.
+
+## References
+
+* Stacks Project, Tags 07A4 and 08J9.
 -/
 
 @[expose] public noncomputable section
@@ -280,11 +288,7 @@ section RationalTower
 attribute [local simp] sfRationalScalarExtension_obj rationalTensor_obj
   sfRationalConstructibleLocalization ScalarLocalization.localization
 
-/-- Tensor coherence after completion and rationalization.
-Source: scalarOperationsOrdinary_tower, tensor clause, conjugated by scalarCompletionIso
-and mapped through raw rational localization. Naturality cancels adjacent completion
-inverses; the rational component specifications identify all three factors.
-(blueprint: lem-weil-rational-tensor-tower-coherence). -/
+/-- Tensor coherence after completion and rationalization. -/
 private theorem rationalTensor_tower_components
     (M : Type u) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
     (j : L →ₐ[ℚ_[l]] M) (X Y : sfRationalConstructibleCategory l E W) :
@@ -344,9 +348,7 @@ private theorem rationalTensor_tower_components
   simp only [Functor.map_comp] at hi
   exact eq_of_heq (hl.trans ((heq_of_eq hi).trans hr.symm))
 
-/-- The three raw coefficient categories and their prescribed tensor comparisons.
-Source: the normalized rational scalar-tower construction.
-(blueprint: lem-weil-rational-tensor-tower-coherence). -/
+/-- The three raw coefficient categories and their prescribed tensor comparisons. -/
 def rationalTensorTowerDatum
     (M : Type u) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
     (j : L →ₐ[ℚ_[l]] M) :
@@ -370,11 +372,7 @@ def rationalTensorTowerDatum
   q := rationalTensorScalarComparison l L M j W
   r := rationalTensorScalarComparison l E M (j.comp ι) W
 
-/-- The normalized rational tensor scalar tower is coherent.
-Source: scalarOperationsOrdinary_tower, tensor clause, followed by completion
-conjugation and rational localization. The component proof cancels completion
-inverses and identifies localized arrows by their prescribed formulas.
-(blueprint: lem-weil-rational-tensor-tower-coherence). -/
+/-- The normalized rational tensor scalar tower is coherent. -/
 theorem rationalTensor_tower
     (M : Type u) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
     (j : L →ₐ[ℚ_[l]] M) :

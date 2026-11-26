@@ -8,7 +8,20 @@ module
 public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalIntegralScalarMates
 import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalRingTransportCoreLaws
 
-/-! # Core transport assembly for the exceptional ring family -/
+/-! # Core transport assembly for the exceptional ring family
+
+## Implementation details
+
+For each finite coefficient field, the strict-system transport and the normalized
+reconstruction equivalence are applied, and the system adjunction is conjugated through the
+equivalence; the simultaneous proper/open realization gives the prescribed integral left
+realization. The whole-system unit and counit, their finite evaluations and all common bounds
+are retained.
+
+## References
+
+* [Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -53,10 +66,7 @@ private def normalizedEvaluation
   exact Functor.fullyFaithfulCancelRight I (eA ≪≫ eB.symm)
 
 /-- The normalized evaluation lifts the system support evaluation: after the finite
-left realization its finite inclusion is the support evaluation.
-Proof: cancel the full inclusion by `map_preimage`, cancel the finite left
-realization and the finite image comparison, and remove the equality transports.
-Source: Zheng, Proposition 5.26 (blueprint: lem-sf-exceptional-ring-transport-core). -/
+left realization its finite inclusion is the support evaluation. -/
 private theorem normalizedEvaluation_support
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
@@ -109,24 +119,9 @@ private theorem normalizedEvaluation_support
   rfl
 
 /-- The normalized integral system transport can be assembled from the already
-constructed finite and integral operation family. The construction uses the
-reduction/limit equivalences at each finite coefficient field, the actual
-proper/open system realization, and the evaluation/unit/counit comparison maps.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26; this is the transport-data part of the exceptional ring family proof
-(blueprint: lem-sf-exceptional-ring-transport-core).
-
-Proof: for each finite coefficient field, apply the actual strict-system
-transport and normalized reconstruction equivalence. Conjugate its system
-adjunction through the equivalence, and use the simultaneous proper/open
-realization to obtain the prescribed integral left realization. Retain the
-whole-system unit and counit, their finite evaluations, and all common bounds.
-The finite and integral operations supplied by the ring-stage assembly are the
-corresponding reconstructed operations, so these maps satisfy every field of
-`ExceptionalIntegralScalar.Transported`. Empty schemes use the zero adjunction
-and positive finite levels use exponent `n + 1`.
-The left realizations are supplied with their integer shift-compatibility witnesses.
--/
+constructed finite and integral operation family, using the reduction/limit equivalences at
+each finite coefficient field, the actual proper/open system realization, and the
+evaluation/unit/counit comparison maps. -/
 theorem exists_exceptional_transport_for_operations
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

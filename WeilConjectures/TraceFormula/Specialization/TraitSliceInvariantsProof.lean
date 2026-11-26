@@ -31,6 +31,25 @@ with the extra hypothesis that `Lε^* C` extends to a bounded constructible comp
 space; the invertibility of the cartesian step is
 `NearbyCyclesModel.isIso_pullbackExchange_traitSliceGaloisModelHom`.
 
+## Implementation details
+
+In `NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom_of_isIso_cartesian`
+the average is transported along the invertible exchange of the change of trait
+(`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp_of_isIso`, then
+`NearbyCyclesModel.exists_retraction_pullbackExchange_app_of_isIso`), combined in
+`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp_of_isIso_id`.
+
+The action of `P'` on `Ψ_{M''} C` factors through a finite quotient by continuity of the action,
+from the finiteness of `Ψ_{M''} C`; the restriction `Lε^* C` is assumed to extend to a bounded
+constructible complex on the total space for the finiteness of the torsion nearby cycles. The
+idempotent `1 / [P' : V]` times the sum of the actions comes from Hochschild–Serre for the pro-`p`
+cover `Spec Ω_K ⟶ (Spec K⟦t⟧ ×_S Spec Ω)_red`; `[P' : V]` is a power of `p`, invertible in `ℚ̄_ℓ`.
+
+## References
+
+* SGA 4½, [Th. finitude], §3.7
+* SGA 7, Exp. XIII, §1.3
+
 -/
 
 @[expose] public section
@@ -59,12 +78,7 @@ variable [IsSepClosed k'] {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k' ≠ �
 /-- **The exchange of the slice of the change of trait is the inclusion of the invariants, given
 the cartesian step**: the analogue of
 `NearbyCyclesModel.exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian` for the
-exchange `α_θ`, deduced from it through the invertible exchange of the change of trait.
-
-The average is transported along that exchange
-(`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp_of_isIso`, then
-`NearbyCyclesModel.exists_retraction_pullbackExchange_app_of_isIso`), combined in
-`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp_of_isIso_id`. -/
+exchange `α_θ`. -/
 theorem exists_subgroup_pullbackExchange_sliceTraitChangeHom_of_isIso_cartesian [IsAlgClosed K]
     {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
@@ -112,26 +126,14 @@ theorem exists_subgroup_pullbackExchange_sliceTraitChangeHom_of_isIso_cartesian 
 variable [Fact (ringChar k').Prime]
 
 -- the statement involves the actions of `P' ⧸ V` on the concrete slice trait
-/-- **Nearby cycles of the slice of the change of trait are the `P'`-invariants** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Facts about traits", identification (2); SGA
-4½, [Th. finitude], §3.7; SGA 7, Exp. XIII, §1.3). The geometric slice `M''` of `M` is the slice of
-the change of trait `M_T = M ×_S Spec K⟦t⟧` along the section `x` of `𝔸¹_{K⟦t⟧}`
-(`NearbyCyclesModel.geometricSliceTraitChangeHom`). The pro-`p` kernel
-`P' = Gal(Ω_K / Frac K⟦t⟧ · Ω)` of the map of inertia groups (`NearbyCyclesModel.GenericAut`)
-acts on the nearby cycles of both (`NearbyCyclesModel.baseChangeAut`), trivially on those of
-`M_T` by the invariance under change of trait. For bounded constructible `C`:
-* the action of `P'` on `Ψ_{M''} C` factors through a finite quotient: a subgroup `V` of finite
-  index acts trivially (continuity of the action, from the finiteness of `Ψ_{M''} C`);
-* the pullback exchange `α_θ : Ψ_{M_T} C ⟶ Ψ_{M''} C` is the inclusion of the invariants: it is a
-  split monomorphism whose idempotent is `1 / [P' : V]` times the sum of the actions of
-  representatives of `P' ⧸ V` (Hochschild–Serre for the pro-`p` cover
-  `Spec Ω_K ⟶ (Spec K⟦t⟧ ×_S Spec Ω)_red`; `[P' : V]` is a power of `p`, invertible in `ℚ̄_ℓ`).
-
-The restriction `Lε^* C` is assumed to extend to a bounded constructible complex `B` on the total
-space (`eB`), for the finiteness of the torsion nearby cycles. The proof is
-`NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom_of_isIso_cartesian`, given
-the invertibility of the pullback exchange of the cartesian part `N'' ⟶ M` of the slice (the
-slice is the invariant part of its Galois layer, "M1 at `T`"). -/
+/-- **Nearby cycles of the slice of the change of trait are the `P'`-invariants**: the pro-`p`
+kernel `P' = Gal(Ω_K / Frac K⟦t⟧ · Ω)` of the map of inertia groups acts on the nearby cycles of
+the geometric slice `M''` and of the change of trait `M_T = M ×_S Spec K⟦t⟧`. For bounded
+constructible `C` whose restriction `Lε^* C` extends to a bounded constructible complex `B` on the
+total space:
+* a subgroup `V` of finite index of `P'` acts trivially on `Ψ_{M''} C`;
+* the pullback exchange `α_θ : Ψ_{M_T} C ⟶ Ψ_{M''} C` is a split monomorphism whose idempotent is
+  `1 / [P' : V]` times the sum of the actions of representatives of `P' ⧸ V`. -/
 theorem exists_subgroup_pullbackExchange_sliceTraitChangeHom
     {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
@@ -162,17 +164,11 @@ theorem exists_subgroup_pullbackExchange_sliceTraitChangeHom
   exact_mod_proofs key
 
 -- the statement and the averages involve the nearby cycles of the slice
-/-- **The generic-slicing identification of nearby cycles with invariants** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Facts about traits", identification (2)): for
+/-- **The generic-slicing identification of nearby cycles with invariants**: for
 a model `M` over `S = Spec k'⟦t⟧` with a coordinate `b`, a subgroup `V` of finite index of the
 pro-`p` kernel `P'` acts trivially on the nearby cycles `Ψ_{M''} A` of the geometric slice, and the
 slicing exchange `α : Lσ^* Ψ_M A ⟶ Ψ_{M''} A` is a split monomorphism whose idempotent is
-`1 / [P' : V]` times the sum of the actions of representatives of `P' ⧸ V`. It is the composite of
-the exchange of the change of trait, invertible by
-`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`, and of the
-inclusion of the `P'`-invariants
-`NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom`
-(`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp`). -/
+`1 / [P' : V]` times the sum of the actions of representatives of `P' ⧸ V`. -/
 theorem exists_subgroup_pullbackExchange_baseChangeHom_traitSlice
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}

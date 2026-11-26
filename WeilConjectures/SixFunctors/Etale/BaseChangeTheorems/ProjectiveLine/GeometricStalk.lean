@@ -106,18 +106,8 @@ henselisations of `S` at `σ` and of `T` at `τ` — and let `ι : Spec k' ⟶ S
 with `g`. Then the stalk at `τ` of the degree-`q` exchange morphism
 `g⁻¹ Rᵠp_* F ⟶ Rᵠf'_* g'⁻¹ F` (`AlgebraicGeometry.Etale.baseChangeHomologyMap`) is, up to
 isomorphisms of its source and target, the pullback map
-`Hᵠ(ℙ¹_k, F|) ⟶ Hᵠ(ℙ¹_{k'}, F|)` along `ℙ¹_{k'} ⟶ ℙ¹_k`.
-
-The source and target stalks are the cohomologies of `ℙ¹` over the strict henselisations of
-`S` and `T` (the strict henselisation stalk formula), which restrict isomorphically to the
-closed fibres (the strictly henselian comparison for `ℙ¹`); expanding the unit, base change
-and counit composite defining the exchange morphism identifies the induced map with the
-field-extension pullback.
-
-**Form of the statement.** The statement asserts the existence of additive
-isomorphisms of the two stalks with closed-fibre cohomology that make the
-exchange square commute.
-(blueprint: proposition-proper-base-change-projective-line--1)
+`Hᵠ(ℙ¹_k, F|) ⟶ Hᵠ(ℙ¹_{k'}, F|)` along `ℙ¹_{k'} ⟶ ℙ¹_k`: there are additive isomorphisms of
+the two stalks with closed-fibre cohomology making the exchange square commute.
 -/
 theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
@@ -206,12 +196,7 @@ theorem Etale.isIso_baseChangeHomologyMap_projectiveLine
   exact hfun ▸ e₂.symm.bijective.comp (hb.comp e₁.bijective)
 
 /-- **Injective acyclicity of the projective line**: for every scheme `S`, the projection
-`ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasInjectiveAcyclicity`. For an injective
-torsion sheaf `I` the higher direct images `Rᵠp_* I` vanish, and after any base change the
-exchange morphism `g⁻¹ Rᵠp_* I ⟶ Rᵠf'_* g'⁻¹ I` is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine`), so the target
-vanishes too.
-(blueprint: `proposition-proper-base-change-projective-line`) -/
+`ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasInjectiveAcyclicity`. -/
 theorem Etale.hasInjectiveAcyclicity_projectiveLine (S : Scheme.{u}) :
     Etale.HasInjectiveAcyclicity Λ (ProjectiveLine S ↘ S) := by
   intro T X' g f' g' sq I hI _ q hq

@@ -14,9 +14,20 @@ import Mathlib.RingTheory.Localization.LocalizationLocalization
 /-!
 # Composing localization comparisons in a ring tower
 
-Source: Stacks Project, Algebra, Tag 00R7, second paragraph of the proof;
-localization base change and composition.
-(blueprint: lem-weil-pbc-tensor-localization-tower-transition).
+For towers of rings `A → B → C` and `A' → B' → C'`, if the comparison maps `B ⊗[A] A' → B'`
+and `C ⊗[B] B' → C'` are localizations, then so is `C ⊗[A] A' → C'`.
+
+## Implementation details
+
+Put `P = B ⊗[A] A'`. Base changing the localization `P → B'` along `P → C ⊗[B] P` gives a
+localization with target `C ⊗[B] B'`, and the source is identified with `C ⊗[A] A'`.
+Composing with the localization `C ⊗[B] B' → C'` gives the claim, since a composite of
+localizations is a localization. The formula on pure tensors is checked directly.
+
+## References
+
+* [Stacks, Tag 00R7]
+* [Stacks, Tag 00DK]
 -/
 
 @[expose] public section
@@ -27,19 +38,9 @@ open scoped TensorProduct
 
 namespace Module
 
-/-- Two successive transition localization comparisons give the composite comparison.
-Source: Stacks Project, Algebra, proof of Tag 00R7, second paragraph, using localization
-base change (Tag 00DK) and composition of localizations.
-(blueprint: lem-weil-pbc-tensor-localization-tower-transition).
-
-Proof: put P = B tensor over A A'. Base-change the localization P → B' along
-P → C tensor over B P. Its target is C tensor over B B'. The canonical associativity
-and cancellation isomorphism identifies its source with C tensor over A A'. Compose
-this localization with the supplied localization C tensor over B B' → C'. A composite
-of localizations is a localization at the submonoid consisting of numerators of elements
-inverted at the second step. The pure-tensor formulas ensure that the resulting ring map
-sends c tensor a' to t(c) times the image of a' in C'. This calculation can be checked
-on pure tensors; these generate the tensor product additively. -/
+/-- Let `A → B → C` and `A' → B' → C'` be towers of rings with compatible maps `r, s, t`. If
+`B ⊗[A] A' → B'` and `C ⊗[B] B' → C'` (given by `x ⊗ y ↦ s x * y` and `x ⊗ y ↦ t x * y`) are
+localizations, then so is `C ⊗[A] A' → C'`, `c ⊗ a' ↦ t c * a'`. -/
 theorem tensorLocalization_tower_transition
     (A B C A' B' C' : Type u)
     [CommRing A] [CommRing B] [CommRing C]

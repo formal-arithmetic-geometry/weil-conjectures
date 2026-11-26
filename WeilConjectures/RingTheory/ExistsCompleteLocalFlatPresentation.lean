@@ -15,8 +15,22 @@ import WeilConjectures.RingTheory.CompleteLocalMapRegularPresentation
 /-!
 # Flat presentations of maps of complete Noetherian local rings
 
-Source: Stacks Project, More on Algebra, Lemma 15.40.3 (Tag 07NN), its flat-presentation
-consequence (blueprint: lem-weil-pbc-complete-local-flat-presentation).
+A local map of complete Noetherian local rings `A → B` fits into a commutative square with
+surjective vertical maps `R → A`, `S → B` and a flat local upper map `R → S` between complete
+Noetherian local rings.
+
+## Implementation details
+
+Choose Cohen power-series surjections `q : R → A` and `b : S₀ → B`, and lift `f ∘ q` to a local
+map `g : R → S₀` by formal smoothness of power series rings (over `ℚ` in residue characteristic
+zero, over `ℤ` otherwise), using that the kernel of `b` is closed. Adjoin variables `yᵢ` to `S₀`
+sent to zero in `B`, and send each parameter `xᵢ` of `R` to `g(xᵢ) + yᵢ`. The images of the
+parameters of `R` are part of a regular system of parameters of the regular local ring `S`, so
+the upper map is flat by the flatness criterion over regular rings.
+
+## References
+
+* [Stacks, Tag 07NN]
 -/
 
 @[expose] public section
@@ -26,35 +40,7 @@ universe u v
 namespace RingHom
 
 /-- A local map of complete Noetherian local rings admits a commutative square with
-surjective vertical maps and a flat upper map between complete Noetherian local rings.
-Source: Stacks Project, More on Algebra, Lemma 15.40.3 (Tag 07NN).
-(blueprint: lem-weil-pbc-complete-local-flat-presentation)
-
-Proof outline, following the six steps of the blueprint node:
-1. The residue fields of `A` and `B` have the same characteristic. Choose Cohen power-series
-   surjections `q : R → A` and `b : S₀ → B` using
-   `lem-weil-pbc-cohen-structure-power-series-surjection`. The rings are Noetherian, regular,
-   local and complete by `lem-weil-pbc-power-series-field-cohen-regular-complete`.
-   Surjections between local rings are local and map maximal ideals onto maximal ideals.
-2. The kernel of `b` is closed: its sums with powers of the maximal ideal are the inverse
-   images of those powers in `B`, whose intersection is zero by completeness.
-   Lift `f.comp q` to a local map `g : R → S₀` by
-   `lem-weil-pbc-power-series-cohen-formally-smooth-adic` and
-   `lem-weil-pbc-fs-adic-lift-into-complete` (over the rationals in residue characteristic
-   zero, and over the integers otherwise).
-3. Adjoin variables `yᵢ` to `S₀`, obtaining `S`, and send them to zero in `B`, using
-   `lem-weil-pbc-power-series-quotient-variables`. Replace the image of each parameter `xᵢ`
-   of `R` by `g(xᵢ) + yᵢ`, using
-   `lem-weil-pbc-power-series-universal-property-complete`. This map is local; `S` is
-   Noetherian and complete by `lem-weil-pbc-power-series-field-cohen-regular-complete`.
-4. The square commutes on coefficients and parameters, hence on every series by the
-   uniqueness in `lem-weil-pbc-power-series-universal-property-complete`.
-5. The images of the parameters of `R`, together with the remaining parameters of `S₀`,
-   generate the maximal ideal of `S` and form a regular sequence by
-   `lem-weil-pbc-regular-local-generators-regular-sequence`. Their initial segment is still
-   regular, so `lem-weil-pbc-flat-over-regular` makes the upper map flat.
-6. Collect the Noetherian, local and completeness properties, the two surjections,
-   the locality of all maps, flatness, and the equality of composites. -/
+surjective vertical maps and a flat upper map between complete Noetherian local rings. -/
 theorem exists_completeLocal_flat_presentation
     {A : Type u} {B : Type v} [CommRing A] [CommRing B]
     [IsNoetherianRing A] [IsNoetherianRing B] [IsLocalRing A] [IsLocalRing B]

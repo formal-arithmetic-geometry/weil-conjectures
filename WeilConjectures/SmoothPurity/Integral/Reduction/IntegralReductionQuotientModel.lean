@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Quotient transitions on the canonical K-flat finite-reduction model
 
-Source: Stacks 06YY and 0941; Step 4 of the open tensor quotient-model argument.
+## References
+
+* Stacks Project, Tags 06YY and 0941
 -/
 
 @[expose] public noncomputable section
@@ -263,22 +265,7 @@ private theorem ordinary_quotient_mate_eq {m n : ℕ} (h : n ≤ m) :
   exact (ordinary_quotient_eq l E W h).trans
     (coefficientOrdinaryQuotientNaturalTransformation.eq_1 l E W h)
 
-/-- The scalar-unit quotient transition is computed by the ordinary quotient chain map.
-Source: Stacks 06YY (K-flat computation) and 0941 (quotient systems), parent Step 4.
-(blueprint: lem-coef-integral-reduction-quotient-model).
-
-Proof: transpose the left-hand composite under the larger finite scalar adjunction.
-The defining mate formula for integralOpenReductionStep replaces its transpose by
-unit_n followed by inverse successive restriction. Naturality of this restriction
-comparison moves the smaller K-flat model through it. The specified derived unit
-normalization identifies both finite units, through their K-flat models and exact
-restriction factors, with the localized ordinary scalar units. The ordinary quotient
-is itself the transpose of unit_n followed by inverse ordinary successive restriction.
-Exact-localization composition compatibility identifies the two restriction factors.
-The ordinary and derived adjunction bijections therefore identify the two composites.
-Only K-flatness of Q is used, with no flatness assumption on the quotient ring, no
-bound on Q, and no requirement that each term be flat. The same proof applies to
-n=0, zero complexes and empty schemes. -/
+/-- The scalar-unit quotient transition is computed by the ordinary quotient chain map. -/
 theorem integralReductionQuotientModel
     (Q : CochainComplex (scalarReductionSource l E W) ℤ)
     (hQ : CochainComplex.IsKFlatIndependentCoefficients

@@ -11,8 +11,6 @@ public import WeilConjectures.WeilSheaf.Category
 
 The functor from native Weil complexes below forgets derived equivariant morphisms.
 No inverse, fullness, or equivalence of derived categories is asserted.
-
-(blueprint: def-sf-native-derived-pair-cohomology)
 -/
 
 @[expose] public noncomputable section

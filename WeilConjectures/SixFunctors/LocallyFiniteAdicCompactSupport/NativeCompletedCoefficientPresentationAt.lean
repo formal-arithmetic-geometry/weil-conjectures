@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientComplet
 import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientLocalization
 import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidalPresheaf
 
-/-! # Pointwise normalized completed-to-native coefficient presentations -/
+/-! # Pointwise normalized completed-to-native coefficient presentations
+
+## References
+
+* [Bhatt--Scholze, Section 6.8, Lemma 6.8.2]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -220,11 +225,6 @@ private def nativeInclusion [G : NativeGeometry.{u} l]
 /--
 For one scheme, the finite quotient realization of completed coefficients admits a
 normalized coefficient presentation in the native locally finite coefficient ring.
-
-Proof source: Bhatt--Scholze, Lemma 6.8.2 and Section 6.8. Construct the inverse-limit
-identification from the finite quotient realizations, then use the finite constant and
-residue equations to normalize the localization and rational inclusion.
-(blueprint: lem-sf-native-completed-coefficient-presentation-at)
 -/
 theorem exists_native_completed_coefficient_presentation_at
     [G : NativeGeometry.{u} l]

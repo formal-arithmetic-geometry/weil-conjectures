@@ -18,7 +18,19 @@ import WeilConjectures.FieldTheory.SeparableSmoothColimit
 /-!
 # The localized zero-dimensional separable problem
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07FE; its zero-dimensional case.
+The localized Popescu problem is resolvable when the target localization is regular of
+dimension zero with separable residue field.
+
+## Implementation details
+
+Minimality in the global target is unnecessary, and no global domination or delocalization is
+asserted here. The smooth intermediate algebra is a smooth finitely generated subalgebra of the
+residue field, transported to `Shrink S` to land in universe `max u v`.
+
+## References
+
+* [Stacks, Tag 07FE] (zero-dimensional case of the proof)
+* [Stacks, Tag 07BV]
 -/
 
 @[expose] public section
@@ -56,30 +68,7 @@ private theorem exists_smooth_subalgebra_factor
   exact ⟨S.1, S.2.1, S.2.2, fun a ↦ hle (f.mem_range_self a)⟩
 
 /-- The localized problem is resolvable when the target localization is regular of
- dimension zero with separable residue field. Minimality in the global target is unnecessary.
-
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07FE, zero-dimensional
-case in step 2 of the repaired proof; Algebra 07BV.
-(blueprint: lem-weil-pbc-popescu-separable-height-zero-local).
-
-Proof: a regular local ring of dimension zero has maximal ideal zero, hence is a field.
-Its residue-field map is an isomorphism identifying the field and its `k`-algebra structure
-with `κ(q)`. Apply 07BV directly to `κ(q)` to obtain a nonempty directed family of smooth
-finitely generated subalgebras covering the field. The preimage of `q` in the field `k`
-is zero, so its localization `K` is canonically `k`. Consequently `K ⊗[k] A` is of finite
-type over `k`. A finite set of algebra generators has image in one smooth subalgebra `S`
-of the residue field: choose one for each generator, and combine them using directedness.
-Their images generate the range, so the entire map takes values in `S`. Finite type makes
-`S` small in universe `max u v`; transport it to `Shrink S` with its induced algebra
-structure. Composition with the inverse residue-field map gives the target map. Give this
-intermediate ring its `K`-algebra structure via the source map; compatibility follows
-from the factorization. Formal smoothness over `K` follows by restriction of scalars,
-since the localization `k → K` is formally unramified, and finite presentation over `K`
-follows from finite presentation over `k` and finite type of `K/k`. Hence it is smooth
- over `K`. Its singular ideal is the unit ideal: its localization at one is smooth.
-The extended radical ideal is therefore the whole target, containing the starting ideal
-and escaping the proper maximal ideal. This gives the displayed local resolution.
-No global domination or delocalization is asserted here. -/
+dimension zero with separable residue field. -/
 theorem popescu_separable_height_zero_local
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]

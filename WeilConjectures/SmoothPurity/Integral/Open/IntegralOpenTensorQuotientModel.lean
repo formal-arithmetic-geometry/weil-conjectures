@@ -13,9 +13,9 @@ import WeilConjectures.SmoothPurity.Integral.Open.IntegralOpenTensorModuleQuotie
 
 /-! # The scalar quotient square on explicit open tensor models
 
-Source: Stacks Tags 0E8I, 0GL1, 06YY and 0941; the strict-model normalization in
-`lem-sf-integral-open-reduction-comparison`
-(blueprint: lem-sf-integral-open-tensor-quotient-model).
+## References
+
+* Stacks Project, Tags 0E8I, 0GL1, 06YY and 0941
 -/
 
 @[expose] public noncomputable section
@@ -165,33 +165,7 @@ private theorem conjugate_square
   simp only [Category.assoc]
 
 /-- The generator-normalized open scalar square and the scalar-unit quotient square
-on flat tensor models, before any strict-system comparison is chosen.
-Source: Stacks 0E8I, 0GL1, 06YY and 0941; parent proof Steps 1--3.
-(blueprint: lem-sf-integral-open-tensor-quotient-model).
-
-Proof: Naturality of o.systemMap on each horizontal coefficient arrow, together
-with o.systemComponents, gives the commutative square of the finite transport ring
-maps and the two quotient maps. Concrete continuous module pushforward composes
-with scalar restriction by the identity on sections, so this square gives the
-finite transport isomorphism. Compose it with the inverse of RingedOpenScalar's
-extension/scalar comparison to construct ordinary. Its summand-generator formula,
-and the identity on transported sections, prove the displayed HEq of functions.
-To check the ordinary open tensor quotient square, transpose under scalar
-extension/restriction and test on the scalar-unit image of each extension summand.
-Both composites send a section x to the same section at the smaller coefficient
-level, by tensor.generators and the defining scalar-adjunction units. The tensor
-Hom equivalence and the extension/sheafification Hom equivalence then identify the
-maps. Apply this equality degreewise to Q. The canonical K-flat finite-reduction
-model identifies the localization of the ordinary quotient transformation with
-integralOpenReductionStep: transpose the localized scalar unit, using the specified
-derived scalar-adjunction normalization and the successive-restriction comparison.
-Apply the exact-localization composition identities to the finite extensions and
-the two scalar restrictions; these are exactly mapDerivedCategorySquareIso ordinary.
-Cancel the finite-reduction model isomorphisms. This gives the displayed square for
-the explicitly constructed tensor representative iso. No reduction calculus, complete
-object, or choice of strict open comparison is involved. Empty sums and zero terms
-satisfy the same equations, n=0 denotes exponent one, and K-flatness, not boundedness
-or quotient-flatness, justifies the reduction model. -/
+on flat tensor models, before any strict-system comparison is chosen. -/
 theorem integralOpenTensorQuotientModel
     (tensor : IntegralOpenReduction.TensorComparison l E j o) :
     ∃ ordinary : ∀ n : ℕ,

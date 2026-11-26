@@ -34,6 +34,10 @@ this is proper base change with finite coefficients
 (`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_finiteCoefficient`), which needs
 no hypothesis on the characteristic.
 
+## References
+
+* SGA 7 XIII (2.1.7.1) (the proper exchange for the structure morphism)
+
 -/
 
 @[expose] public section
@@ -62,9 +66,8 @@ variable {k' : Type u} [Field k'] {X : Scheme.{u}} {X' : Over (Spec (.of k'))}
   {M : NearbyCyclesModel X X'.left} {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
-/-- **The proper exchange for the structure morphism, with finite coefficients** (blueprint
-`prose-E-03` (2); SGA 7 XIII (2.1.7.1)): for a model `M` of finite type over
-the trait `Spec k'⟦t⟧` along a proper `q`, the pushforward exchange
+/-- **The proper exchange for the structure morphism, with finite coefficients**: for a
+model `M` of finite type over the trait `Spec k'⟦t⟧` along a proper `q`, the pushforward exchange
 `χ : Ψ_S Rg_* K ⟶ R(q_s)_* Ψ_M K` of the structure morphism `(q, g) : M ⟶ S` is an isomorphism at
 every complex `K` on the geometric generic fibre bounded below of étale origin. -/
 theorem IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app_finiteCoefficient
@@ -110,8 +113,7 @@ proper structure morphisms, with projections compatible with the structure morph
 fibres, and the external product of these, are bounded below of étale origin, the direct image
 `R(a_{P_s})_* Π_{A,B}` of the Künneth map of nearby cycles to the point `Spec k'` is an
 isomorphism, given the ordinary Künneth formulas on the special and geometric generic fibres and
-the Künneth map of the trait at `(RΓ(X_η̄, A), RΓ(Y_η̄, B))`. The proper exchanges are
-`IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app_finiteCoefficient`. -/
+the Künneth map of the trait at `(RΓ(X_η̄, A), RΓ(Y_η̄, B))`. -/
 theorem isIso_lowerStar_kunnethMap_finiteCoefficient (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
@@ -219,16 +221,12 @@ set_option hygiene false in
 local notation "𝔽" => Profinite.continuousMapRingObj (PadicAlgCl.integersResidueField ℓ E.1)
 
 -- the composite square identifying the direct image of the Künneth map has large terms
-/-- **The global-sections step of Gabber's Künneth formula with coefficients `𝔽_E`** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, equation (4)): let `P` be the product over the
-henselian trait `Spec k'⟦t⟧`, `k'` separably closed with `ℓ ≠ char k'`, of models `M`, `N` of finite
-type along proper structure morphisms, with projections compatible with the structure morphisms to
-`Spec Ω`. For bounded constructible complexes `A`, `B` of module objects over `𝔽̲_E`, the direct
-image `R(a_{P_s})_* Π_{A,B}` of the Künneth map of nearby cycles to the point `Spec k'` is an
-isomorphism. The inputs of `isIso_lowerStar_kunnethMap_finiteCoefficient` are the ordinary
-Künneth formula with coefficients `𝔽_E` (`isIso_lowerStarKunnethMap'_of_isPullback_residueField`)
-on the special and geometric generic fibres, at complexes of étale origin, and the Künneth
-formula of the trait (`isIso_kunnethMap_traitGenericModel_residueField_lowerStar`). -/
+/-- **The global-sections step of Gabber's Künneth formula with coefficients `𝔽_E`**: let `P`
+be the product over the henselian trait `Spec k'⟦t⟧`, `k'` separably closed with `ℓ ≠ char k'`, of
+models `M`, `N` of finite type along proper structure morphisms, with projections compatible with
+the structure morphisms to `Spec Ω`. For bounded constructible complexes `A`, `B` of module objects
+over `𝔽̲_E`, the direct image `R(a_{P_s})_* Π_{A,B}` of the Künneth map of nearby cycles to the
+point `Spec k'` is an isomorphism. -/
 theorem isIso_lowerStar_kunnethMap_residueField (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))

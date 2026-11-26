@@ -20,7 +20,21 @@ import WeilConjectures.RingTheory.PairHenselizationCompletionData
 /-!
 # The idempotent selecting a finite-algebra completion factor
 
-Source: Stacks Project, Tag 07NC, the finite product decomposition and its selected factor.
+The completion of a finite algebra over a Noetherian local ring decomposes as a finite product
+over the primes above the maximal ideal; we construct the idempotent selecting one factor and
+compare that factor with the completion of the corresponding localization.
+
+## Implementation details
+
+With `q'` the contraction of `q` to `S'`, inverting `g` identifies `S'_{q'}` with `S_q`, giving
+an isomorphism of completions. The factor of the decomposition of `R̂_p ⊗[R] S'` indexed by `q'`
+is compared with `ψ` levelwise; the idempotent `e` and the element `v` are the preimages of the
+tuples supported at `q'` with values `1` and the inverse of the image of `g`. The complementary
+product may be empty.
+
+## References
+
+* [Stacks, Tag 07NC]
 -/
 
 @[expose] public section
@@ -115,33 +129,9 @@ private theorem tensor_factor_idempotent
   apply factor_idempotent E i α F hproj (TensorProduct.tmul R 1 g)
   rwa [hright]
 
-/-- Select the finite completion factor before transferring it to the larger tensor.
-
-Source: Stacks Project, Algebra, proof of Lemma Tag 07NC, the finite-algebra product
-and the unit on the selected factor
-(blueprint: lem-weil-pbc-finite-completion-factor-idempotent).
-
-Proof: put q' = q contracted to S'. Clearing powers of g identifies S' localized
-at q' with S localized at q, since g lies outside the primes. The isomorphism
-identifies maximal ideals and their powers. The quotient isomorphisms commute
-with reduction and give an isomorphism alpha of completions. This isomorphism
-agrees on the images of S' with the natural map to the completion of S_q.
-Apply completion_finite_extension_decomposition to S' at p. The ideal q' is prime and lies
-over p, so it indexes one of the product factors. Compare the factor's map theta
-from the completion of R_p with psi: on each nth quotient represent the coordinate
-of x by a in R_p, apply the levelwise formulas and the local-ring square. Their
-coordinates agree after alpha, hence alpha(theta(x)) = psi(x). Consequently the
-specified phi composed with the tensor inclusion j is alpha composed with this
-factor projection: check on x tensor y by multiplying x tensor 1 and 1 tensor y.
-Let e be the inverse image of the tuple equal to 1 at q' and 0 elsewhere under
-the finite product equivalence. It is idempotent, maps to 1 under phi j, and its
-multiplication kills exactly the kernel of that factor projection. The image of
-gamma at q' is a unit: g is outside q', hence is a unit in the local ring and
-in its completion. Let v be the inverse image of the tuple equal to its inverse
-at q' and 0 elsewhere. Then v gamma = e. The factor projection is surjective:
-for c in the target, take the tuple supported at q' with value alpha inverse(c).
-This also proves the asserted surjectivity of phi j. The complementary product
-can be empty, and the formulas remain valid in that case. -/
+/-- For a finite subalgebra `S'` of `S` with `S'_g ≅ S_g` and `g ∉ q`, there is an idempotent `e`
+of `R̂_p ⊗[R] S'` and an element `v` with `v * (1 ⊗ g) = e`, such that the map to the completion
+of `S_q` sends `e` to `1`, is surjective, and has kernel annihilated by `e`. -/
 theorem finite_completion_factor_idempotent
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] (q : PrimeSpectrum S)

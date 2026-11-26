@@ -97,13 +97,20 @@ public import WeilConjectures.AlgebraicGeometry.DerivedScalarExtensionRestrictio
 
 /-! # Derived reduction and restriction of scalars
 
-Source: Stacks Project, Tags 07A6, 06YY, 03CZ, 09T5 and 0DVC;
-blueprint `prose-03-02`, order 1468
-(blueprint: lem-weil-derived-scalar-extension-restriction-adjunction).
+Derived scalar extension along the completed coefficient projection is left adjoint to
+exact restriction of scalars, with unit normalized on every K-flat representative.
 
-The index n denotes exponent n+1. All constructions use the completed coefficient
-sheaf, with no auxiliary finite-field datum or restriction on the characteristic of Y.
-The derived adjunction is normalized by its unit on every K-flat representative.
+## Implementation details
+
+The index `n` denotes exponent `n + 1`. All constructions use the completed coefficient
+sheaf, with no auxiliary finite-field datum or restriction on the characteristic of `Y`.
+The derived adjunction is obtained by applying Mathlib's derived adjunction to the termwise
+tensor/restriction adjunction: restriction is exact, so its right derived functor is termwise
+restriction, and the left derived tensor functor is absolute, computed on K-flat resolutions.
+
+## References
+
+* Stacks Project, Tags 07A6, 06YY, 03CZ, 09T5 and 0DVC
 -/
 
 @[expose] public section
@@ -585,26 +592,7 @@ attribute [local irreducible] scalarReductionDerivedExistence
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Derived scalar extension is left adjoint to exact restriction, and its unit is
-induced by the completed coefficient projection on every K-flat representative.
-Source: Stacks Tags 07A6, 06YY, 09T5 and 0DVC
-(blueprint: lem-weil-derived-scalar-extension-restriction-adjunction).
-Proof:
-1. Apply the same-site tensor/restriction adjunction, whose unit is x ↦ 1 tensor x.
-2. Restriction is exact: it changes only scalar actions and preserves the same kernels
-and sheafified cokernels. Its right derived functor is therefore termwise restriction.
-3. Derived change of rings along the actual limit projection supplies the universal
-left derived tensor functor, computed on K-flat resolutions, with canonical counit.
-4. Use as resolving class the homotopy objects where the left counit is an
-isomorphism. K-flat resolutions give enough such objects; naturality of the counit
-shows that the tensor functor inverts quasi-isomorphisms between them. The resolving
-class gives essentially constant denominator diagrams. Their split cones remain
-limiting after any functor, so the left derived functor is absolute. Exactness makes
-the right derived comparison, and all its postcomposites, isomorphisms.
-5. Apply Mathlib's derived adjunction to the termwise homotopy adjunction. Its unit
-factorization says that the derived unit followed by restriction of the tensor counit
-is the localized ordinary unit followed by the inverse exact-restriction comparison.
-Compose with that comparison to obtain the displayed equation, in fact on every
-homotopy object. Naturality gives the stated roof on any K-flat resolution. -/
+induced by the completed coefficient projection on every K-flat representative. -/
 theorem derivedScalarExtensionRestrictionAdjunction :
     ∃ adj : scalarReductionDerivedExtension l E Y n ⊣
         scalarReductionDerivedRestriction l E Y n,

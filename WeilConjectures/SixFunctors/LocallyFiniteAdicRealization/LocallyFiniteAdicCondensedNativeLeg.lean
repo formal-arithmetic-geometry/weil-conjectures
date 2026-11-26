@@ -12,8 +12,9 @@ import WeilConjectures.SixFunctors.ProEtale.Adic.AdicConstantSheafLeg
 
 /-! # The finite condensed coefficient leg into native coefficients
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-finite-condensed-native-coefficient-leg)
+## References
+
+* [Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2)]
 -/
 
 @[expose] public noncomputable section
@@ -69,9 +70,7 @@ private lemma finiteLeg_native (ℓ : ℕ) [Fact ℓ.Prime]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The finite closure leg followed by the native coefficient comparison is the
-specified actual field inclusion on continuous functions.
-Source: BS 6.8.2; finite chart normalization and the fixed coefficient cocone.
-(blueprint: lem-sf-finite-condensed-native-coefficient-leg). -/
+specified actual field inclusion on continuous functions. -/
 theorem finiteCondensedNativeLeg (A : FiniteCondensedData l X)
     (E : Index l (PadicAlgCl l))
     (C : CoefficientPresentation l X (Coefficient.{u} l (PadicAlgCl l) E)

@@ -11,7 +11,18 @@ import all WeilConjectures.SixFunctors.Coefficient.CoefficientRingedSequenceSite
 
 /-! # Roos comparison of strict coefficient-extension representatives
 
-Source: the integral-operations tensor associator; Stacks 03EK and 03D7.
+We compare strict coefficient-extension representatives with the restricted finite scalar
+tower.
+
+## Implementation details
+
+Each level of the direct representative is restricted to the completed target ring and
+identified with the finite scalar complex via the canonical restriction-evaluation equality;
+the specified transition formula identifies the successor squares.
+
+## References
+
+* [Stacks Project, Tags 03EK, 03D7, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -100,8 +111,7 @@ private theorem restriction_transition_apply_heq
           ((coefficientSequenceEvaluation l L W n).obj M) V).symm))
   exact hcongr_apply hcod (restriction_transition_heq l L W M h V) hxy
 
-/-- Evaluation of a restricted strict complex, using the actual evaluation equality.
-Source: Stacks 0941 (blueprint: stage3-pur-extension-restricted-tower). -/
+/-- Evaluation of a restricted strict complex, using the actual evaluation equality. -/
 def coefficientRestrictedComplexEvaluation (n : ℕ) :
     (coefficientSequenceRestriction l L W).mapHomologicalComplex (.up ℤ) ⋙
         ((evaluation ℕᵒᵖ (scalarReductionSource l L W)).obj (op n)).mapHomologicalComplex
@@ -164,17 +174,8 @@ private theorem assembleTowerIso
   intro P n
   rfl
 
-/-- The specified strict level comparisons assemble after restriction of scalars.
-Source: Stacks 0941 and the strict quotient construction of integral operations
-(blueprint: stage3-pur-extension-restricted-tower).
-Proof: restrict each level of the direct representative to the completed target
-ring. The canonical restriction-evaluation equality and the given level comparison
-give its isomorphism with the finite scalar complex. The specified transition
-formula identifies the successor squares on every section in every degree.
-Extensionality gives the chain-map squares, and successor naturality gives a map
-of towers. Each level map is invertible, so this map is a tower isomorphism.
-Naturality in the good complex follows from naturality of the level comparisons;
-the evaluations jointly detect this equality. -/
+/-- The specified strict level comparisons assemble, after restriction of scalars, into a natural
+isomorphism of towers. -/
 theorem coefficientExtensionRestrictedTower_exists
     (direct : (integralOperationsGoodComplex l E W).FullSubcategory ⥤
       CochainComplex (coefficientSequenceModules l L W) ℤ)

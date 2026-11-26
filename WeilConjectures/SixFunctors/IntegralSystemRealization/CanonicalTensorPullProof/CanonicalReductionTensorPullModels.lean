@@ -13,7 +13,12 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
 /-! # Representative normalization for coefficient tensor pullback
 
-Source: blueprint fix-prop-coherence, individual coefficient comparisons; Stacks 07A4.
+We normalize the coefficient reduction of the tensor/pullback comparison on flat K-flat
+representatives.
+
+## References
+
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -80,12 +85,7 @@ theorem pull_good {U V : Scheme.{u}} (f : U ⟶ V)
     ((PurCompactSupport.completed l E).ring U)
     ((PurCompactSupport.completed l E).pull f) P.obj P.property.1 P.property.2
 
-/-- Reduction tensor on flat K-flat representatives agrees with the strict tensor map.
-Source: tensorRepresentative and tensorReductionStrictMap_derived_square.
-(blueprint: lem-sf-canonical-reduction-tensor-pull-models).
-
-Proof: compose the tensorRepresentative equation with coefficient reduction and
-apply the already normalized strict reduction tensor square. -/
+/-- Reduction tensor on flat K-flat representatives agrees with the strict tensor map. -/
 theorem mu_model (d : RingedModels l E) (W : Scheme.{u})
     (P Q :
       (proEtaleFlatRepresentatives W ((PurCompactSupport.completed l E).ring W)).FullSubcategory) :

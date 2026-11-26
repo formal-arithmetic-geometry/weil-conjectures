@@ -16,10 +16,16 @@ public import WeilConjectures.Tactic.TransportExact
 The pullback exchanges `α_{p_i}` of the projections of the product of deformation models
 (`ProEtale.CondensedRing.specializationFstExchange`,
 `ProEtale.CondensedRing.specializationSndExchange`), in
-the lax monoidal form used by the first identity of blueprint
-`lemma-nearby-cycles-universal-kernel`: the monoidality of `α_{p₂}`
+the lax monoidal form used by the first identity for the nearby cycles of the universal kernel:
+the monoidality of `α_{p₂}`
 (`ProEtale.CondensedRing.specializationSndExchange_tensor`) and the defining property of the duality
 map `δ_K` (`ProEtale.CondensedRing.whiskerLeft_specializationDualityMap_comp_ev`).
+
+## Implementation details
+
+The monoidality of the restricted pullback exchange is first proved for abstract models
+(`NearbyCyclesModel.Hom.boundedConstructiblePullbackExchange_lax_tensor`), which avoids rewriting
+tensor maps after substituting the deformation models.
 
 -/
 @[expose] public section
@@ -41,8 +47,7 @@ attribute [local instance] specializationLaxMonoidal specializationProdLaxMonoid
 
 namespace NearbyCyclesModel
 
-/-- The restricted pullback exchange respects the lax monoidal tensor maps. Keeping the models
-abstract here avoids rewriting tensor maps after substituting the deformation models. -/
+/-- The restricted pullback exchange respects the lax monoidal tensor maps. -/
 private lemma Hom.boundedConstructiblePullbackExchange_lax_tensor
     {ℓ : ℕ} [Fact ℓ.Prime] {k k' : Type u} [Field k] [Field k']
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

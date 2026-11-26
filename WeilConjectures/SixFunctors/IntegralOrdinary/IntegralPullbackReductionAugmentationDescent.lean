@@ -11,7 +11,14 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Descent of the reduction/pullback augmentation equation
 
-This is the localization step after the good-representative calculation.
+This is the localization step after the good-representative calculation: a normalized
+adjunct equation on the good localization descends to every object of the derived category,
+by the universal property and faithfulness of the good-complex localization.
+
+## References
+
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -26,18 +33,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- A normalized adjunct equation on the good localization descends to every
-object of the derived category.
-Source: Stacks 07A6 and 0941; the localization argument in
-`fix-prop-projection-formula.proof.md`.
-(blueprint: lem-sf-pullback-reduction-augmentation-descent).
-
-Proof: the good-complex localization presents the derived category. Naturality
-of the pullback comparison, the Roos realization, and the candidate natural
-isomorphism transports the equation along localization morphisms. The
-localization universal property and its faithfulness identify the two natural
-transformations on all derived objects from their equal components on good
-representatives.
--/
+object of the derived category. -/
 theorem pullbackReductionAugmentation_of_good {X Y : Scheme.{u}} (f : X ⟶ Y)
     (a : PurCompactSupport.pull (PurCompactSupport.completed l E) f ⋙
         (pullbackTensorCalculus l E X).reduction ≅

@@ -12,11 +12,18 @@ public import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetric
 
 /-! # Intrinsic finite operations for the trace formula
 
-Source: Stacks 07A4, 08J9, and latest blueprint sk-d-six.
-(blueprint: def-trf-finite-derived-operations).
+Exact pullback, internal Hom and the normalized closed tensor for the pro-étale derived
+category with a positive finite coefficient level.
+
+## Implementation details
+
 Only one positive finite coefficient level is used. The closed adjunction and its
 K-flat representative normalization determine the tensor up to its compatible
 natural isomorphism; no integral or rational coefficient-system witness is chosen.
+
+## References
+
+* Stacks Project, Tags 07A4 and 08J9.
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +34,7 @@ namespace WeilConjectures
 
 attribute [local irreducible] HasDerivedCategory.standard
 
-/-- Exact intrinsic pullback at a positive finite level.
-Source: sk-d-six (blueprint: def-trf-finite-derived-operations). -/
+/-- Exact intrinsic pullback at a positive finite level. -/
 abbrev traceFormulaFinitePullback {X Y : Scheme.{u}}
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -38,8 +44,7 @@ abbrev traceFormulaFinitePullback {X Y : Scheme.{u}}
   sfIntrinsicDerivedPullback (Padic.coefficientExtensionRing l E (n + 1)) f
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The intrinsic K-injective internal Hom for the finite constant ring.
-Source: Stacks 08J9 (blueprint: def-trf-finite-derived-operations). -/
+/-- The intrinsic K-injective internal Hom for the finite constant ring. -/
 abbrev traceFormulaFiniteInternalHom (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (W : Scheme.{t}) (n : ℕ) :=
@@ -53,8 +58,7 @@ abbrev traceFormulaFiniteInternalHom (l : ℕ) [Fact l.Prime]
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The normalized closed tensor, uniquely characterized by its closed universal
-property and K-flat comparison up to the compatible isomorphism used downstream.
-Source: Stacks 07A4, 08J9 (blueprint: def-trf-finite-derived-operations). -/
+property and K-flat comparison up to compatible isomorphism. -/
 def traceFormulaFiniteClosed (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (W : Scheme.{t}) (n : ℕ) :
@@ -68,16 +72,14 @@ def traceFormulaFiniteClosed (l : ℕ) [Fact l.Prime]
       (ProEt.topology W) (integralCoefficientCommRingSheaf l E W n)))).choose
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The tensor of the normalized closed structure.
-Source: Stacks 07A4 (blueprint: def-trf-finite-derived-operations). -/
+/-- The tensor of the normalized closed structure. -/
 def traceFormulaFiniteTensor (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (W : Scheme.{t}) (n : ℕ) :=
   (traceFormulaFiniteClosed l E W n).tensor
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The fixed simultaneous K-flat representative comparison and evaluation formula.
-Source: Stacks 08J9 (blueprint: def-trf-finite-derived-operations). -/
+/-- The fixed simultaneous K-flat representative comparison and evaluation formula. -/
 def traceFormulaFiniteTensorModels (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (W : Scheme.{t}) (n : ℕ) :

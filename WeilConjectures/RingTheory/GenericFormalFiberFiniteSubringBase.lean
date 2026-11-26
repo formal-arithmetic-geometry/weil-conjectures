@@ -8,14 +8,28 @@ module
 public import WeilConjectures.RingTheory.GRing
 import WeilConjectures.RingTheory.FormalFibreQuasiFiniteAscent
 import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
+
+/-!
+# Generic formal fibres via a finite subring
+
+Geometric regularity of the generic formal fibre of a Noetherian domain `A` at a prime `P`
+follows from the same property for a Noetherian subring `A₀` over which `A` is finite.
+
+## Implementation details
+
+The result applies quasi-finite formal-fibre ascent to the finite inclusion `A₀ → A` and
+the zero prime contained in `P`.
+
+## References
+
+* [Stacks, Tag 07PS]
+* [Stacks, Tag 07PP]
+-/
+
 @[expose] public section
 universe u
 /-- Generic formal-fibre regularity over the canonical generic residue field, obtained by
-applying quasi-finite formal-fibre ascent to a finite subring.
-Source: Stacks Project, More on Algebra, Proposition 07PS and Lemma 07PP.
-(blueprint: lem-weil-pbc-generic-formal-fibre-finite-subring-base).
-Proof: Apply the quasi-finite formal-fibre ascent theorem to the finite subring inclusion
-and the zero prime contained in P. -/
+applying quasi-finite formal-fibre ascent to a finite subring. -/
 theorem genericFormalFiber_bot_geometricallyRegular_of_finite_subring
     (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A]
     (A₀ : Subring A) [IsNoetherianRing A₀] [Module.Finite A₀ A]

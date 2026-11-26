@@ -13,7 +13,19 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.BaseCh
 
 /-! # Roos comparison of strict coefficient-extension representatives
 
-Source: the integral-operations tensor associator; Stacks 03EK and 03D7.
+The strict quotient representative of a coefficient extension has the specified Roos
+completion on good complexes.
+
+## Implementation details
+
+The comparison is built from strict completed coefficient towers: the evaluated complexes are
+identified with the finite scalar complexes, and the total inverse limit is computed by an
+injective resolution of the strict tower, mapped to the fixed Roos complex (the cone of
+`1 - shift`). No uniqueness of distinguished-triangle fillers is used.
+
+## References
+
+* [Stacks, Tags 03EK, 03D7, 0940, 0941 and 0H9L]
 -/
 
 @[expose] public noncomputable section
@@ -238,21 +250,7 @@ attribute [local irreducible] coefficientSequenceProjection
   coefficientRestrictedEvaluationIso coefficientConstantTowerProjection
   coefficientConstantTowerLimit coefficientSequenceRestriction
 
-/-- The strict quotient representative has the specified Roos completion on good complexes.
-Source: integral operations; Stacks 0940, 0941 and 0H9L
-(blueprint: stage3-pur-extension-representative-roos).
-Proof: apply exact restriction to the strict system representative. Its evaluated
-complexes identify with the published finite scalar complexes. The prescribed
-transition equation makes these comparisons an isomorphism of strict completed
-coefficient towers, natural in each good complex. Compute the total inverse limit
-by resolving this strict tower with injective towers. Countable products of the
-completed-coefficient module sheaves are exact, so the product resolution is a
-quasi-isomorphism. Apply the diagonal maps to the shifted mapping cones of 1 minus
-shift. This gives a natural isomorphism from the completed representative to the
-fixed Roos complex. Its maps to the nth term are the actual product projections,
-since every comparison comes from a strict tower map. Compose with the given
-representative comparison. This gives the displayed isomorphism and its equation;
-no uniqueness of arbitrary distinguished-triangle fillers is used. -/
+/-- The strict quotient representative has the specified Roos completion on good complexes. -/
 theorem coefficientExtensionRepresentativeRoos_exists
     (SE : CoefficientDerivedSystemCalculus l E W)
     (direct : (integralOperationsGoodComplex l E W).FullSubcategory ⥤

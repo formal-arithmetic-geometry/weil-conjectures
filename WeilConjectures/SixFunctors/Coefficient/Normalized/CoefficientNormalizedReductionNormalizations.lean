@@ -16,8 +16,22 @@ import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWh
 
 /-! # Representative normalizations for coefficient reduction
 
-Source: Stacks 06YS, 06YY, 07A4, 07A6 and 0941
-(blueprint: lem-coef-normalized-reduction-models-normalizations).
+We choose normalized tensor comparisons for a coefficient reduction while retaining its core
+reduction model.
+
+## Implementation details
+
+The tensor comparisons are constructed rather than asserted for arbitrary comparisons: negating
+just `finiteTensor` preserves all other fields of the reduction record but changes its
+prescribed representative square. The finite scalar tensor comparisons come from the
+prescribed scalar-derived pairs; the evaluation comparison is obtained by descending the
+natural total-tensor comparison of exact evaluation along K-flat representatives and is
+identified with `coefficientEvaluationTensorIso` by its generator law. All reduction-model
+data, the adjunction and both projection identities are retained.
+
+## References
+
+* [Stacks, Tags 06YS, 06YY, 07A4, 07A6, 0941]
 -/
 
 @[expose] public section
@@ -69,8 +83,7 @@ private theorem actualScalarModel (n : ℕ)
     SheafOfModules.scalarPairComplexComparison
   rfl
 
-/-- Construct the finite tensor comparisons using the prescribed scalar pairs.
-Source: Stacks 06YY and 07A4. -/
+/-- Construct the finite tensor comparisons using the prescribed scalar pairs. -/
 private theorem normalizedFiniteTensor (R : CoefficientDerivedSystemReduction l E W) :
     ∃ μ : ∀ n : ℕ,
       R.integralClosed.tensor ⋙ coefficientFiniteDerivedExtension l E W n ≅
@@ -160,22 +173,7 @@ private theorem normalizedEvaluationTensor (R : CoefficientDerivedSystemReductio
     coefficientFiniteTensorModelIso CoefficientTensorModels.iso
   kernel_exact hn
 
-/-- Choose the normalized tensor comparisons while retaining the core reduction model.
-Source: Stacks 06YY, 07A4 and 0941, normalized reduction construction, step 2.
-
-STATEMENT-DISPUTED: the former assertion for arbitrary comparisons was false (repaired here):
-negating just finiteTensor preserves all fields of the reduction record but changes
-its prescribed representative square. Normalization must therefore construct these
-comparisons, rather than assert it for the original arbitrary comparisons.
-
-Proof: construct finite scalar tensor comparisons from the prescribed scalar-derived
-pairs, identifying their chain comparisons by the unique scalar-unit generator law.
-Descend exact evaluation's natural total-tensor comparison along K-flat representatives;
-its unique generator law identifies it with coefficientEvaluationTensorIso. Choose
-the strict reduction tensor comparison independently. Replace the three comparison
-fields together and paste their representative squares for the evaluation equation.
-All reduction-model data, its adjunction, and both projection identities are retained.
-(blueprint: lem-coef-normalized-reduction-models-normalizations). -/
+/-- Choose the normalized tensor comparisons while retaining the core reduction model. -/
 theorem coefficientNormalizedReductionNormalizations
     (R : CoefficientDerivedSystemReduction l E W) :
     ∃ S : CoefficientDerivedSystemReduction l E W,

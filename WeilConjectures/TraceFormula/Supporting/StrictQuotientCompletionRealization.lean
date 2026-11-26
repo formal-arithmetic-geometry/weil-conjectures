@@ -12,8 +12,21 @@ import WeilConjectures.TraceFormula.Ordinary.OrdinaryQuotientTowerComparison
 
 /-! # Normalized strict quotient completion realization
 
-Source: Stacks 03CZ, 03EK, 06YY, 08TC and 0941; the strict quotient-cone argument
-of `lem-trf-isomorphism-multiplication-cone-descent`.
+The simultaneous reduction calculus has a normalized strict quotient Roos realization on good
+representatives, compatible with every coherent presentation.
+
+## Implementation details
+
+The simultaneous reduction presentation of a flat-term K-flat complex is used, rather than
+separately chosen finite evaluations: its finite presentations induce an isomorphism of strict
+towers `a`, and applying the normalized Roos bridge and then `H(a)` gives the natural
+isomorphism `rho`. Another coherent presentation is compared through its specified maps `e`,
+and functoriality of the bridge gives the same formula. No derived completeness or
+boundedness is used.
+
+## References
+
+* Stacks Project, Tags 03CZ, 03EK, 06YY, 08TC, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -45,26 +58,7 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 attribute [local semireducible] integralOperationsGoodComplex coefficientSequenceLimit
 
 /-- The simultaneous reduction calculus has its normalized strict quotient Roos
-realization on every good representative, tested on coherent presentations.
-Source: Stacks 06YY, 0941 (lemma-derived-limit-is-ok), and steps 2 and 8 of
-lem-trf-isomorphism-multiplication-cone-descent.
-(blueprint: lem-trf-strict-quotient-completion-realization).
-
-Proof in words: use the simultaneous reduction presentation of a flat-term K-flat
-complex, rather than choosing its finite evaluations separately. Restrict its whole
-system to completed modules. Each finite presentation kappa induces a restricted
-isomorphism. The presentation's transition compatibility makes these maps an
-isomorphism of strict towers a; the restriction and evaluation section identifications
-give the stated section formula. Apply the normalized Roos bridge to this entire
-system and then H(a). Naturality of the simultaneous reduction presentation and of
-the bridge makes the result a natural isomorphism rho on good complexes. For another coherent
-presentation, compare the two entire derived systems through their specified maps e.
-The same transition-compatible evaluation maps identify the strict towers. Functoriality
-of the bridge then gives the displayed equation for that presentation too. Equivalently,
-on simultaneous K-injectives this is the ordinary compatible limit tuple with zero
-shifted coordinate; the normalization of r and naturality extend that computation to
-all systems. No choice of unrelated evaluation maps, derived completeness, or
-boundedness is used. -/
+realization on every good representative, tested on coherent presentations. -/
 theorem strictQuotientCompletionRealization
     (W : Scheme.{t}) (S : CoefficientDerivedSystemCalculus l E W)
     (r : IntegralComparisonRoosModel l E W) :

@@ -10,8 +10,18 @@ import WeilConjectures.SixFunctors.Coefficient.CoefficientStrictReductionTensorC
 
 /-! # Strict representative tensor comparison for reduction
 
-Source: Stacks 06YS, 06YY, 07A4 and 0941.
-(blueprint: lem-coef-strict-reduction-tensor-normalization).
+## Implementation details
+
+The strict comparison supplied by the sequence projection is chosen first; its simultaneous
+representative normalization on arbitrary flat-term K-flat inputs then gives the defining
+clauses of the conclusion.
+
+## References
+
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -25,13 +35,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- Reduction admits a tensor comparison computed by a single strict chain map.
-Source: Stacks 07A4, proof of lemma-pullback-tensor-product, with the sequence
-projection construction of 0941 and the K-flat resolution of 06YS.
-Proof: first choose the strict comparison supplied by the sequence projection,
-then apply its simultaneous representative normalization on arbitrary flat-term
-K-flat inputs. This gives precisely the defining clauses of the conclusion.
-(blueprint: lem-coef-strict-reduction-tensor-normalization). -/
+/-- Reduction admits a tensor comparison computed by a single strict chain map. -/
 theorem coefficientStrictReductionTensorNormalization
     (R : CoefficientDerivedSystemReduction l E W) :
     ∃ μ : R.integralClosed.tensor ⋙ R.reduction ≅

@@ -7,9 +7,9 @@ module
 public import WeilConjectures.SmoothPurity.Exceptional.ExceptionalSiteRealization
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 /-! # Derived realization of the actual etale/pro-etale system comparison
-Source: blueprint theorem-f-shriek-finite-coefficients. All ordinary maps are fixed on
-sections or by adjunction transposes; their derived maps retain the localization units.
-(blueprint: def-pur-adic-derived-site-realization).
+
+All ordinary maps are fixed on sections or by adjunction transposes; their derived maps retain
+the localization units.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,8 +22,8 @@ open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits Opposite
   AlgebraicGeometry SheafOfModules
 namespace WeilConjectures
 
--- Since build 2026-10-28 another derived-category instance of the strict levels is in scope here;
--- keep the ones this module was written against.
+-- Another derived-category instance of the strict levels is in scope here;
+-- keep the ones this module uses.
 attribute [local instance 5000] AlgebraicGeometry.strictEtaleSystemDerived
   AlgebraicGeometry.strictEtaleLevelDerived
 private theorem localizationSquare
@@ -246,9 +246,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     (integralExceptionalUniformizer l E))
   (B : IntegralExceptionalComparison l E W P)
 
-/-- The complete inverse realization normalization on all cochain complexes.
-Source: blueprint integral exceptional image
-(blueprint: def-pur-adic-derived-site-realization). -/
+/-- The complete inverse realization normalization on all cochain complexes. -/
 def IsIntegralExceptionalSiteDerivedInverse (n : ℕ)
     (e : (B.derived.level n).inverse ⋙
       (integralExceptionalProRealization l E W n).mapDerivedCategory ≅
@@ -277,11 +275,7 @@ def IsIntegralExceptionalSiteDerivedInverse (n : ℕ)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The exact derived site inverse comparison, fixed on every cochain representative.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-derived-site-realization).
-Proof: apply exact localization to the preceding ordinary inverse comparison and
-compose the two specified factorization isomorphisms. Their square is the displayed
-condition. Every derived arrow is represented by a roof, proving uniqueness. -/
+/-- The exact derived site inverse comparison, fixed on every cochain representative. -/
 theorem integralExceptionalSiteDerivedInverse_existsUnique (n : ℕ) :
     ∃! e : (B.derived.level n).inverse ⋙
       (integralExceptionalProRealization l E W n).mapDerivedCategory ≅
@@ -306,8 +300,7 @@ theorem integralExceptionalSiteDerivedInverse_existsUnique (n : ℕ) :
     (B.derived.level n).inverseFactors
     (integralExceptionalSiteInverse l E W P B n)
 
-/-- The exact inverse comparison, fixed by its universal representative square.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-derived-site-realization). -/
+/-- The exact inverse comparison, fixed by its universal representative square. -/
 @[no_expose] def integralExceptionalSiteDerivedInverse (n : ℕ) :
     (B.derived.level n).inverse ⋙
       (integralExceptionalProRealization l E W n).mapDerivedCategory ≅
@@ -316,8 +309,7 @@ Source: blueprint integral exceptional image (blueprint: def-pur-adic-derived-si
           (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) W).mapDerivedCategory :=
   (integralExceptionalSiteDerivedInverse_existsUnique l E W P B n).choose
 
-/-- The actual cochain-level unit of derived site direct image.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-derived-site-realization). -/
+/-- The actual cochain-level unit of derived site direct image. -/
 def integralExceptionalSiteFixedRightUnit (n : ℕ)
     (J : CochainComplex (Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1}
       (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))) ℤ) :
@@ -336,9 +328,7 @@ def integralExceptionalSiteFixedRightUnit (n : ℕ)
       (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) W).rightDerivedFunctor.map
          ((DerivedCategory.quotientCompQhIso _).hom.app J)
 
-/-- The complete right realization normalization on all cochain complexes.
-Source: blueprint integral exceptional image
-(blueprint: def-pur-adic-derived-site-realization). -/
+/-- The complete right realization normalization on all cochain complexes. -/
 def IsIntegralExceptionalSiteDerivedRight (n : ℕ)
     (e : (B.derived.level n).direct ⋙
       (integralExceptionalEtaleRealization l E W n).mapDerivedCategory ≅
@@ -363,12 +353,7 @@ def IsIntegralExceptionalSiteDerivedRight (n : ℕ)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The derived site direct comparison is fixed by both universal right-derived units.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-derived-site-realization).
-Proof: on K-injective representatives both derived units are invertible and the
-ordinary section comparison determines the map. Exact realization is an equivalence,
-so it preserves K-injective representatives. Universal right derivation extends this
-map uniquely and gives the displayed square on all complexes. -/
+/-- The derived site direct comparison is fixed by both universal right-derived units. -/
 theorem integralExceptionalSiteDerivedRight_existsUnique (n : ℕ) :
     ∃! e : (B.derived.level n).direct ⋙
       (integralExceptionalEtaleRealization l E W n).mapDerivedCategory ≅
@@ -392,8 +377,7 @@ theorem integralExceptionalSiteDerivedRight_existsUnique (n : ℕ) :
     G.mapDerivedCategoryFactors H.mapDerivedCategoryFactors
     (integralExceptionalSiteRight l E W P B n)
 
-/-- The universal-unit-normalized derived site direct comparison.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-derived-site-realization). -/
+/-- The universal-unit-normalized derived site direct comparison. -/
 @[no_expose] def integralExceptionalSiteDerivedRight (n : ℕ) :
     (B.derived.level n).direct ⋙
       (integralExceptionalEtaleRealization l E W n).mapDerivedCategory ≅

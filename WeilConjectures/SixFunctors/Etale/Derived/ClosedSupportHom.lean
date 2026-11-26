@@ -15,7 +15,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 
 Let `i : Z ⟶ X` be a closed immersion with complementary open immersion `j : U ⟶ X`. For every
 `K ∈ D(X_ét, A)` the global derived Hom `RΓ(X, RHom(i_* Λ_Z, K))` is the fibre of the
-restriction map `RΓ(X, K) ⟶ RΓ(U, j^* K)` (blueprint `lemma-cycle-class-cartier-divisor`).
+restriction map `RΓ(X, K) ⟶ RΓ(U, j^* K)`.
+
+## Implementation details
 
 The proof applies `RHom(-, K)` to the open–closed triangle `j_! j^* Λ ⟶ Λ ⟶ i_* i^* Λ ⟶`
 (`AlgebraicGeometry.Etale.exists_distTriang_openClosed`) and identifies
@@ -201,15 +203,13 @@ section ClosedSupport
 
 variable {Z X U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]
 
-/-- Blueprint `lemma-cycle-class-cartier-divisor`: Closed support as a relative section complex.
-
-Let `i : Z ⟶ X` be a closed immersion with complementary open immersion `j : U ⟶ X`. For every
-complex `K` of étale sheaves on `X`, the global derived Hom out of `i_* Λ_Z`,
-`RHom_X(i_* Λ_Z, K) = RΓ(X, RHom(Ri_* Λ_Z, K))`, is the fibre of the restriction map
-`RΓ(X, K) ⟶ RΓ(U, j^* K)`: there is a distinguished triangle
-`RHom_X(i_* Λ_Z, K) ⟶ RΓ(X, K) ⟶ RΓ(U, j^* K) ⟶ RHom_X(i_* Λ_Z, K)[1]`
-whose second map is the restriction map, the unit `K ⟶ Rj_* j^* K` followed by the Leray
-isomorphism `RΓ(X, Rj_* j^* K) ≅ RΓ(U, j^* K)`; that is,
+/-- Closed support as a relative section complex: let `i : Z ⟶ X` be a closed immersion with
+complementary open immersion `j : U ⟶ X`. For every complex `K` of étale sheaves on `X`, the global
+derived Hom out of `i_* Λ_Z`, `RHom_X(i_* Λ_Z, K) = RΓ(X, RHom(Ri_* Λ_Z, K))`, is the fibre of the
+restriction map `RΓ(X, K) ⟶ RΓ(U, j^* K)`: there is a distinguished triangle
+`RHom_X(i_* Λ_Z, K) ⟶ RΓ(X, K) ⟶ RΓ(U, j^* K) ⟶ RHom_X(i_* Λ_Z, K)[1]` whose second map is the
+restriction map, the unit `K ⟶ Rj_* j^* K` followed by the Leray isomorphism
+`RΓ(X, Rj_* j^* K) ≅ RΓ(U, j^* K)`; that is,
 `RHom_X(i_* Λ_Z, K) ≅ Cone(RΓ(X, K) ⟶ RΓ(U, j^* K))[-1]`. -/
 theorem exists_distTriang_rightDerivedGlobalSections_derivedHom_closedImmersion
     {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}

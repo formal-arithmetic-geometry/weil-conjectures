@@ -15,8 +15,19 @@ public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
 /-!
 # Exactness after reduction by a nonzerodivisor
 
-Source: literature/stacks-project/algebra.tex, Lemma Tag 00MZ
-(blueprint: lem-weil-pbc-free-complex-mod-nonzerodivisor-exact).
+Reducing an exact finite free complex over a local ring modulo a nonzerodivisor `x` gives a
+complex that is exact one degree shorter.
+
+## Implementation details
+
+The cycle-lifting argument from the short exact sequence of complexes is carried out directly in
+coordinates, without homology objects: a reduced cycle lifts to `w` with `φ_i(w) = x t`, exactness
+gives `t = φ_i(z)`, and `w - x z` is a cycle with the same reduction (`lift_reduced_cycle`). The
+hypotheses that `R` is local and `x ∈ maximalIdeal R` follow the source but are not used.
+
+## References
+
+* [Stacks, Tag 00MZ]
 -/
 
 @[expose] public section
@@ -61,29 +72,8 @@ private theorem lift_reduced_cycle
     simp only [map_sub, map_mul, hqx, zero_mul, sub_zero]
     exact congrFun hw j
 
-/-- Source: Stacks Project, Algebra, Lemma Tag 00MZ (`lemma-div-x-exact-one-less`).
-
-Given an exact finite free complex over a local ring, reduction modulo a
+/-- Given an exact finite free complex over a local ring, reduction modulo a
 nonzerodivisor is exact one degree shorter.
-
-Proof: unwind the cycle-lifting argument in the short exact sequence of complexes
-of Tag 00MZ directly in coordinates, without constructing homology objects.
-1. Coordinate reduction `q : R → R/(x)` is surjective and commutes with matrix
-   multiplication. A vector reducing to zero is coordinatewise divisible by `x`.
-2. Given a reduced cycle at degree `i ≥ 2`, lift it to `w`, so that
-   `φ_i(w) = x t`. Applying `φ_(i-1)` and cancelling `x` coordinatewise shows
-   `φ_(i-1)(t) = 0`. Exactness in degree `i-1` gives `t = φ_i(z)`.
-   Thus `w - x z` is a cycle with the same reduction. This is the private
-   helper `lift_reduced_cycle`, applied to consecutive matrices.
-3. At degree `e`, injectivity makes this corrected cycle zero. At degrees
-   `2 ≤ i < e`, exactness writes the corrected cycle as `φ_(i+1)(a)`, and
-   reducing `a` supplies the required preimage. Conversely, every reduced
-   boundary is a cycle, by lifting its preimage and reducing `hcomplex`.
-Locality and `x ∈ maximalIdeal R` are retained from the source, although this
-coordinate argument does not use them. The argument also applies to zero ranks.
-The nonzerodivisor hypothesis is Mathlib's `x ∈ nonZeroDivisors R`; in a commutative
-ring it says `x * y = 0 → y = 0` (`mem_nonZeroDivisors_iff`).
-(blueprint: lem-weil-pbc-free-complex-mod-nonzerodivisor-exact)
 -/
 theorem free_complex_mod_nonzerodivisor_exact
     (R : Type u) [CommRing R] [IsLocalRing R]

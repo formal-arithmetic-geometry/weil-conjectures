@@ -17,8 +17,10 @@ set_option linter.privateModule false
 
 /-! # Existence of a normalized compact-support comparison
 
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks 0941, 0F7J
-(blueprint: lem-qcqs-compact-support-normalized-iso-existence).
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6 and Lemma 6.7.7]
+* [Stacks Project, Tags 0941 and 0F7J]
 -/
 
 @[expose] public noncomputable section

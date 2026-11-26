@@ -15,9 +15,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 /-!
 # The transverse boundary configuration
 
-This file sets up the situation of the transverse boundary calculation of the trace formula
-(blueprint `lemma-cohomology-near-two-transverse-divisors`, used by
-`lemma-restriction-punctured-curve` on the curve route `remark-outline-local-computation`).
+This file sets up the situation of the transverse boundary calculation of the trace formula,
+used for the restriction to a punctured curve in the local computation.
 
 Let `Z` be a regular smooth surface over an algebraically closed field `k`, or an étale limit
 with affine transition maps of such surfaces, and let `X, Y ⊆ Z` be regular divisors meeting
@@ -58,8 +57,7 @@ variable {k : Type u} [Field k]
 /-- `aZ : Z ⟶ Spec k` is an *étale limit with affine transition maps of smooth surfaces*: `Z` is
 the limit of a cofiltered diagram of `k`-schemes `Z_i`, smooth of relative dimension `2` over
 `k`, whose transition maps are affine and étale. A smooth surface over `k` is such a limit, over
-the trivial diagram (blueprint `lemma-cohomology-near-two-transverse-divisors`,
-`lemma-vanishing-restrictions-after-blowing-up--1`). -/
+the trivial diagram. -/
 def IsEtaleLimitOfSmoothSurfaces {Z : Scheme.{u}} (aZ : Z ⟶ Spec (.of k)) : Prop :=
   ∃ (I : Type u) (_ : SmallCategory I) (_ : IsCofiltered I) (D : I ⥤ Scheme.{u})
     (a : ∀ i, D.obj i ⟶ Spec (.of k)) (c : Cone D) (_ : IsLimit c) (e : c.pt ≅ Z),
@@ -69,10 +67,10 @@ def IsEtaleLimitOfSmoothSurfaces {Z : Scheme.{u}} (aZ : Z ⟶ Spec (.of k)) : Pr
     (∀ {i i' : I} (f : i ⟶ i'), Etale (D.map f) ∧ IsAffineHom (D.map f))
 
 variable (k) in
-/-- **The transverse corner** (blueprint `lemma-cohomology-near-two-transverse-divisors`): a scheme
-`Z` over `k` which is a smooth surface, or an étale limit with affine transition maps of smooth
-surfaces, with two regular divisors `X` and `Y` meeting transversely at exactly one point `z`,
-together with the open immersions `j : U = Z - Y ⟶ Z` and `i : V = Z - (X ∪ Y) ⟶ U`.
+/-- **The transverse corner**: a scheme `Z` over `k` which is a smooth surface, or an étale limit
+with affine transition maps of smooth surfaces, with two regular divisors `X` and `Y` meeting
+transversely at exactly one point `z`, together with the open immersions
+`j : U = Z - Y ⟶ Z` and `i : V = Z - (X ∪ Y) ⟶ U`.
 
 The surface is regular, in particular locally noetherian. The divisors are regular closed
 immersions of codimension one with regular source; they meet
@@ -137,8 +135,7 @@ variable (ℓ : ℕ) {Λ : Type (u + 1)} [CommRing Λ]
 /-- A sheaf of `Λ`-modules on `V_ét` has *finite `ℓ`-group monodromy* if it is trivialized by a
 finite étale Galois cover of `V` whose group is a finite `ℓ`-group: its pullback to the cover is
 the constant sheaf on a finite `Λ`-module. Such a sheaf is finite locally constant, and on a
-connected `V` its monodromy representation factors through the finite `ℓ`-group (blueprint
-`lemma-cohomology-near-two-transverse-divisors`). -/
+connected `V` its monodromy representation factors through the finite `ℓ`-group. -/
 def HasFiniteEllGroupMonodromy {V : Scheme.{u}}
     (F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop :=
   ∃ (G : Type (u + 1)) (_ : Group G) (_ : Finite G) (_ : IsPGroup ℓ G) (c : V.GaloisCover G)
@@ -149,8 +146,7 @@ def HasFiniteEllGroupMonodromy {V : Scheme.{u}}
 /-- A complex `E ∈ D(V_ét, Λ)` is *bounded with finite `ℓ`-group monodromy* if it is bounded and
 each of its cohomology sheaves has finite `ℓ`-group monodromy
 (`AlgebraicGeometry.Etale.HasFiniteEllGroupMonodromy`): a bounded complex with finite locally
-constant cohomology whose monodromy factors through a finite `ℓ`-group (blueprint
-`lemma-cohomology-near-two-transverse-divisors`). -/
+constant cohomology whose monodromy factors through a finite `ℓ`-group. -/
 def IsBoundedFiniteEllGroupMonodromy {V : Scheme.{u}}
     (E : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : Prop :=
   (∃ a b : ℤ, E.IsGE a ∧ E.IsLE b) ∧
@@ -162,8 +158,8 @@ namespace Scheme.TransverseCorner
 
 variable {k : Type u} [Field k] (C : TransverseCorner k) (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- The complex `M = Rj_* i_! E` on `Z` of the transverse boundary calculation (blueprint
-`lemma-cohomology-near-two-transverse-divisors`), for `E ∈ D(Z - (X ∪ Y), Λ)`. -/
+/-- The complex `M = Rj_* i_! E` on `Z` of the transverse boundary calculation, for
+`E ∈ D(Z - (X ∪ Y), Λ)`. -/
 noncomputable def boundaryComplex
     (E : DerivedCategory (Sheaf C.V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     DerivedCategory (Sheaf C.Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=

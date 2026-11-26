@@ -27,10 +27,9 @@ The sheaf–function compatibility (`ProEtale.CondensedRing.ShriekTraceFunctionA
    the compatibility at `ȳ` follows from the trace formula on the fibre
    (`weilStalkTraceAlternatingSum_weilLowerShriek_eq_finsum_of_fibre`);
 2. the relative affine line `𝔸^{j+1}_k ×_k E ⟶ 𝔸ʲ_k ×_k E`
-   (`ProEtale.CondensedRing.shriekTraceFunctionAt_overProdMap_polyAffineProj`), the composite of
-   the open immersion into `ℙ¹_{𝔸ʲ_k ×_k E}` (`shriekTraceFunctionAt_of_isOpenImmersion`) and of
-   the projection of item 1. This is the case of the affine line in blueprint
-   `theorem-trace-formula-frobenius-correspondence--1`, the geometric base case of the trace
+   (`ProEtale.CondensedRing.shriekTraceFunctionAt_overProdMap_polyAffineProj`), the composite of the
+   open immersion into `ℙ¹_{𝔸ʲ_k ×_k E}` (`shriekTraceFunctionAt_of_isOpenImmersion`) and of the
+   projection of item 1. This is the case of the affine line, the geometric base case of the trace
    formula.
 
 -/
@@ -51,10 +50,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] [Fact (r
   [Fact (ringChar k ≠ ℓ)]
 
 set_option linter.overlappingInstances false in
-/-- **The relative projective line**: the sheaf–function compatibility holds along
-`ℙ¹_B ⟶ B` for the automorphisms `ℙ¹(e_B)` and `e_B`. At a point `ȳ` of degree `n + 1` the
-geometric fibre is `ℙ¹_{k̄}` with the `q^{n+1}`-power Frobenius, a proper smooth curve with a model
-Frobenius, on which the trace formula holds by the Lefschetz–Verdier formula. -/
+/-- **The relative projective line**: the sheaf–function compatibility holds along `ℙ¹_B ⟶ B` for
+the automorphisms `ℙ¹(e_B)` and `e_B`. -/
 theorem shriekTraceFunctionAt_overProjectiveLineProj (B : Over (Spec (.of k)))
     [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom] (eB : B ≅ B) :
     ShriekTraceFunctionAt ℓ (overProjectiveLineIso eB) eB (overProjectiveLineMap_proj eB.hom) := by
@@ -76,11 +73,7 @@ theorem shriekTraceFunctionAt_overProjectiveLineProj (B : Over (Spec (.of k)))
 
 /-- **The affine line**: the sheaf–function compatibility holds along the coordinate projection
 `𝔸^{j+1}_k ×_k E ⟶ 𝔸ʲ_k ×_k E`, the relative affine line over `B = 𝔸ʲ_k ×_k E`, for the
-automorphisms `𝟙 ×_k e_E`. The relative affine line is the open complement of the section at
-infinity in `ℙ¹_B` (`Scheme.overAffineLineι`), so the compatibility is the composite of the one
-along the open immersion (`shriekTraceFunctionAt_of_isOpenImmersion`) and the one along
-`ℙ¹_B ⟶ B` (`shriekTraceFunctionAt_overProjectiveLineProj`); this is the case of the affine
-line in blueprint `theorem-trace-formula-frobenius-correspondence--1`. -/
+automorphisms `𝟙 ×_k e_E`. -/
 theorem shriekTraceFunctionAt_overProdMap_polyAffineProj (j : ℕ) (E : Over (Spec (.of k)))
     [LocallyOfFiniteType E.hom] [QuasiCompact E.hom] [IsSeparated E.hom] (eE : E ≅ E)
     (he : ∃ m : ℕ, eE.pow (m + 1) = Iso.refl E) :

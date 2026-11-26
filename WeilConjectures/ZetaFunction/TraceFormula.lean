@@ -22,25 +22,27 @@ the constant Weil sheaf `ℚ̄_ℓ` every local trace is `1`, and the right hand
 `N_m = #X₀(𝔽_{qᵐ})` of `𝔽_{qᵐ}`-rational points. If `X₀` is proper, compactly supported
 cohomology is ordinary cohomology.
 
-The trace formula over `ℚ̄_ℓ` itself is the blueprint node
-`theorem-grothendieck-lefschetz-trace-formula--8` of the trace formula chapter (subsection
-`theorem-trace-formula-euler-product`); it is stated here for the Weil complexes of this repository,
-whose compactly supported cohomology is
-`AlgebraicGeometry.WeilComplex.compactlySupportedCohomology`, and is proved in that chapter.
+The trace formula over `ℚ̄_ℓ` is stated here for the Weil complexes of this repository, whose
+compactly supported cohomology is `AlgebraicGeometry.WeilComplex.compactlySupportedCohomology`.
 
 ## Main statements
 
 - `AlgebraicGeometry.WeilComplex.finsum_trace_compactlySupportedCohomology_eq`: the trace
-  formula over `ℚ̄_ℓ` (`theorem-grothendieck-lefschetz-trace-formula--8`).
+  formula over `ℚ̄_ℓ`.
 - `AlgebraicGeometry.WeilSheaf.traceFunction_adicConstant`: the trace function of the constant
   Weil sheaf is `1`.
 - `AlgebraicGeometry.WeilSheaf.pointCount_eq_finsum_trace_compactlySupportedCohomology` and
   `AlgebraicGeometry.WeilSheaf.pointCount_eq_finsum_trace_cohomology`: the point-counting
-  trace formula (`corollary-point-counting-zeta-function--2`).
+  trace formula.
 - `AlgebraicGeometry.WeilComplex.sum_traceFunction_eq_finsum_trace` and
   `AlgebraicGeometry.WeilSheaf.pointCount_eq_sum_trace_cohomology`: the Grothendieck–Lefschetz
-  trace formula and its every-iterate form for a smooth proper variety
-  (`theorem-grothendieck-lefschetz-trace-formula--8`).
+  trace formula and its every-iterate form for a smooth proper variety.
+
+## Implementation details
+
+The trace formula over `ℚ̄_ℓ` is deduced from the trace formula for Weil objects
+`ProEtale.CondensedRing.weilTraceFormula`
+(`AlgebraicGeometry.WeilComplex.finsum_trace_compactlySupportedCohomology_eq_of_comparison`).
 -/
 
 @[expose] public section
@@ -60,17 +62,12 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `theorem-grothendieck-lefschetz-trace-formula--8` (Grothendieck–Lefschetz formula over
-`ℚ̄_ℓ`, subsection `theorem-trace-formula-euler-product` of the trace formula chapter): for a Weil
-complex `K` on a separated `k₀`-scheme `X₀` of finite type and every `m ≥ 1`,
+/-- **Grothendieck–Lefschetz trace formula over `ℚ̄_ℓ`**: for a Weil complex `K` on a separated
+`k₀`-scheme `X₀` of finite type and every `m ≥ 1`,
 
 `∑ᵢ (-1)ⁱ Tr(F^m | H_c^i(X₀ ⊗ k̄, K)) = ∑_{y ∈ X₀(𝔽_{qᵐ})} ∑ⱼ (-1)ʲ Tr(F_{y,m} | 𝓗ʲ(K)_ȳ)`.
 
-The inner sum on the right is the trace function `t_K(y)` of `K`; both sums are finite
-(`AlgebraicGeometry.WeilComplex.exists_subsingleton_compactlySupportedCohomology`,
-`AlgebraicGeometry.Scheme.Hom.finite_fieldPoints`). It is deduced from the trace formula for
-Weil objects `ProEtale.CondensedRing.weilTraceFormula`
-(`AlgebraicGeometry.WeilComplex.finsum_trace_compactlySupportedCohomology_eq_of_comparison`). -/
+The inner sum on the right is the trace function `t_K(y)` of `K`. -/
 theorem WeilComplex.finsum_trace_compactlySupportedCohomology_eq (K : WeilComplex k₀ l X)
     {m : ℕ} (hm : 1 ≤ m) :
     ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
@@ -97,8 +94,7 @@ theorem WeilSheaf.trace_frobeniusEnd_stalkAt_congr {F G : WeilSheaf k₀ l X} (e
 
 variable (k₀ l) in
 /-- The stalks `Γ(Spec k̄, s^* ℚ̄_ℓ)` of the constant Weil sheaf are one-dimensional: the unit
-section `ℚ̄_ℓ ⟶ Γ(Spec k̄, s^* ℚ̄_ℓ)` is an isomorphism
-(`AlgebraicGeometry.ProEtale.isIso_unitSection`). -/
+section `ℚ̄_ℓ ⟶ Γ(Spec k̄, s^* ℚ̄_ℓ)` is an isomorphism. -/
 theorem WeilSheaf.finrank_stalkAt_adicConstant
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
@@ -134,9 +130,7 @@ section Constant
 
 variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- The trace function of the constant Weil sheaf `ℚ̄_ℓ` is `1`: its stalks are one-dimensional
-and every local Frobenius is the identity
-(`AlgebraicGeometry.WeilSheaf.adicConstant_stalkAt_frobenius`). -/
+/-- The trace function of the constant Weil sheaf `ℚ̄_ℓ` is `1`. -/
 theorem WeilSheaf.traceFunction_adicConstant (n : ℕ)
     (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
     (WeilSheaf.adicConstant k₀ l X).traceFunction n y = 1 :=
@@ -146,16 +140,10 @@ variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprints `corollary-point-counting-zeta-function--2` and
-`theorem-grothendieck-lefschetz-trace-formula--8` (constant-sheaf clause) (point-counting trace
-formula, subsection `theorem-trace-formula-euler-product` of the trace formula chapter), compactly
-supported form: for a separated `k₀`-scheme `X₀` of finite type and every `m ≥ 1`,
+/-- **Point-counting trace formula**, compactly supported form: for a separated `k₀`-scheme `X₀`
+of finite type and every `m ≥ 1`,
 
-`#X₀(𝔽_{qᵐ}) = ∑ᵢ (-1)ⁱ Tr(Fᵐ | H_c^i(X₀ ⊗ k̄, ℚ̄_ℓ))`.
-
-It is the trace formula
-`AlgebraicGeometry.WeilComplex.finsum_trace_compactlySupportedCohomology_eq` for the constant
-Weil sheaf, whose trace function is `1`. -/
+`#X₀(𝔽_{qᵐ}) = ∑ᵢ (-1)ⁱ Tr(Fᵐ | H_c^i(X₀ ⊗ k̄, ℚ̄_ℓ))`. -/
 theorem WeilSheaf.pointCount_eq_finsum_trace_compactlySupportedCohomology {m : ℕ}
     (hm : 1 ≤ m) :
     ((X ↘ Spec (CommRingCat.of k₀)).pointCount m : PadicAlgCl l) =
@@ -182,14 +170,10 @@ section Proper
 variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
   [IsProper (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprints `corollary-point-counting-zeta-function--2` and
-`theorem-grothendieck-lefschetz-trace-formula--8` (proper clause) (point-counting trace formula),
-proper form: for a proper `k₀`-scheme `X₀` and every `m ≥ 1`,
+/-- **Point-counting trace formula**, proper form: for a proper `k₀`-scheme `X₀` and every
+`m ≥ 1`,
 
-`#X₀(𝔽_{qᵐ}) = ∑ᵢ (-1)ⁱ Tr(Fᵐ | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))`,
-
-compactly supported cohomology being ordinary cohomology
-(`AlgebraicGeometry.WeilComplex.nonempty_equiv_compactlySupportedCohomology_cohomology`). -/
+`#X₀(𝔽_{qᵐ}) = ∑ᵢ (-1)ⁱ Tr(Fᵐ | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))`. -/
 theorem WeilSheaf.pointCount_eq_finsum_trace_cohomology {m : ℕ} (hm : 1 ≤ m) :
     ((X ↘ Spec (CommRingCat.of k₀)).pointCount m : PadicAlgCl l) =
       ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
@@ -200,9 +184,8 @@ theorem WeilSheaf.pointCount_eq_finsum_trace_cohomology {m : ℕ} (hm : 1 ≤ m)
     (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)) i
   exact congrArg _ (e.trace_frobeniusEnd_pow m).symm
 
-/-- Blueprints `theorem-grothendieck-lefschetz-trace-formula--8` and
-`theorem-grothendieck-lefschetz-trace-formula--8` (general clause) (Grothendieck–Lefschetz trace
-formula): for a Weil complex `K` on a separated `k₀`-scheme `Y₀` of finite type and `m ≥ 1`, the sum
+/-- **Grothendieck–Lefschetz trace formula**: for a Weil complex `K` on a separated `k₀`-scheme
+`Y₀` of finite type and `m ≥ 1`, the sum
 over `y ∈ Y₀(𝔽_{qᵐ})` of the local alternating traces `t_K(y)` is the alternating trace of `Fᵐ` on
 `H_c^•(Y₀ ⊗ k̄, K)`; for `K = ℚ̄_ℓ` and a proper `X₀` this specializes to
 `#X₀(𝔽_{qᵐ}) = ∑ᵢ (-1)ⁱ Tr(Fᵐ | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))`. -/
@@ -221,16 +204,10 @@ theorem WeilComplex.finsum_traceFunction_eq_and_pointCount_eq {Y : Scheme.{u}}
   ⟨(K.finsum_trace_compactlySupportedCohomology_eq hm).symm,
     WeilSheaf.pointCount_eq_finsum_trace_cohomology k₀ l X hm⟩
 
-/-- Blueprint `theorem-grothendieck-lefschetz-trace-formula--8` (every-iterate
-Grothendieck–Lefschetz identity), smooth proper case: for `X₀` smooth and proper of pure dimension
-`d` and every `n ≥ 1`,
+/-- **Every-iterate Grothendieck–Lefschetz identity**, smooth proper case: for `X₀` smooth and
+proper of pure dimension `d` and every `n ≥ 1`,
 
-`N_n(X₀) = ∑_{i = 0}^{2d} (-1)ⁱ Tr(Fⁿ | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))`,
-
-the cohomology vanishing outside `[0, 2d]`
-(`AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant`). The general identity for
-a Weil complex on a separated scheme of finite type is
-`AlgebraicGeometry.WeilComplex.finsum_traceFunction_eq_and_pointCount_eq`. -/
+`N_n(X₀) = ∑_{i = 0}^{2d} (-1)ⁱ Tr(Fⁿ | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))`. -/
 theorem WeilSheaf.pointCount_eq_sum_trace_cohomology (d : ℕ)
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] {n : ℕ} (hn : 1 ≤ n) :
     ((X ↘ Spec (CommRingCat.of k₀)).pointCount n : PadicAlgCl l) =

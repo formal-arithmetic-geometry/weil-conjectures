@@ -19,6 +19,27 @@ import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.Algebra.Category.Grp.Ulift
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
+/-!
+# Noetherian local model towers from categorical limit systems
+
+An already specified categorical system of Noetherian local models, with the required transition
+and limit localizations, gives a Noetherian local model tower.
+
+## Implementation details
+
+The elementwise clauses follow because the forgetful functors from commutative rings and abelian
+groups to types preserve filtered colimits. The base transition localization is obtained by
+base-changing the middle-ring transition localization and composing with the top-ring one; the
+limit module localization uses localization-tensor compatibility and tensor associativity.
+
+## References
+
+* [Stacks, Tag 00R7] (first two paragraphs of the proof)
+* [Stacks, Tag 00QU]
+* [Stacks, Tag 00QV]
+* [Stacks, Tag 00QX]
+-/
+
 @[expose] public section
 
 universe u v w t
@@ -29,34 +50,7 @@ open scoped TensorProduct
 namespace Module
 
 /-- Convert an already specified categorical limit system into a Noetherian local model tower.
-There is no finite-presentation hypothesis and no assertion constructing a categorical system.
-Source: Stacks Project, Algebra, proof of Tag 00R7, first two paragraphs, using
-Tags 00QU, 00QV and 00QX for the supplied categorical system.
-(blueprint: lem-weil-pbc-noetherian-local-model-tower-categorical-conversion).
-
-Proof: retain the index preorder and the three stage rings and stage modules of the supplied
-system. Use the natural transformations for stage algebra structures and compose these maps
-for the base-to-top algebra structure; restrict module scalars along them. The local structures
-are supplied. Each base ring is essentially of finite type over the Noetherian ring of integers;
-the middle and top rings are essentially of finite type over their preceding stages, so all
-three are Noetherian. Use functor maps for transitions and compose the cocone maps with
-`ULift.down` for maps into the original rings. Functor laws give the directed-system laws;
-naturality gives the commutation and semilinearity clauses. The forgetful functors from
-commutative rings and abelian groups to sets preserve filtered colimits. Thus every element
-of each limit has a representative and equality of two representatives at one stage holds
-at a later stage; composing with the lift equivalences gives the eight elementwise clauses.
-The fibre transition and module transition are supplied. For the base transition, first
-base-change the middle-ring transition localization along the top-stage ring, then compose
-with the top-ring transition localization; tensor associativity identifies the resulting
-source with the required base-to-top tensor product. For the base localization at the limit,
-use tensor symmetry and the canonical module equivalence from a ring localization to its
-localized module, restricting scalars to the original base ring. For module localization put
-`E = S ⊗[Sᵢ] Tᵢ`, acting on `L = S ⊗[Sᵢ] Nᵢ` by the tensor action. Tensor symmetry and
-transport through `ULift.down` make the supplied top-ring limit map a localization `E → S'`.
-For its inverted submonoid U, localization-tensor compatibility identifies `LocalizedModule U L`
-with `S' ⊗[E] L`. Tensor associativity identifies the latter with `S' ⊗[Tᵢ] Nᵢ`, and the supplied
-module base-change equivalence identifies it with M. Restrict scalars to S in these equivalences.
-All scalar-tower laws follow from composition and the supplied commuting squares. -/
+There is no finite-presentation hypothesis and no assertion constructing a categorical system. -/
 theorem noetherian_localModelTower_of_categoricalLimit
     (R : Type u) (S : Type v) (S' : Type w) (M : Type t)
     [CommRing R] [CommRing S] [CommRing S'] [AddCommGroup M]

@@ -16,6 +16,24 @@ import WeilConjectures.Topology.DerivedLimitStalkInjective
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
+/-!
+# Pointwise truncation reconstruction: the isomorphism part
+
+Under local bounds on the cohomology of its cohomology sheaves, every compatible map from a
+complex of modules to a derived limit of its lower truncations is an isomorphism.
+
+## Implementation details
+
+Near each point the transitions of the truncation tower on open cohomology are eventually
+isomorphisms, which kills the `R¹ lim` term; the derived-limit stalk-injectivity lemma then gives
+injectivity on stalks of cohomology sheaves, and surjectivity follows from the truncation
+isomorphism.
+
+## References
+
+* [Stacks Project, Tag 0D62](https://stacks.math.columbia.edu/tag/0D62)
+-/
+
 @[expose] public section
 
 universe u w
@@ -48,19 +66,8 @@ private theorem tower_isIso_map_of_successor
     rw [he, A.map_comp]
     infer_instance
 
-/-- Isomorphism part of pointwise truncation reconstruction
-(blueprint: lem-pc-ringed-space-pointwise-truncation-limit-isIso).
-
-Proof: fix a compatible map `c`. For each point and cohomological degree, choose a
-truncation index beyond the three local bounds supplied by `hlocal`. The successive
-truncation triangle and its long exact cohomology sequence make the transitions in the
-two adjacent degrees isomorphisms from that index onward. The Roos abelian-group lemma
-then kills the resulting `R¹ lim` term. The derived-limit stalk-injectivity lemma,
-together with the derived global-sections/limit comparison, shows that the map induced
-by `c` on every stalk cohomology group is injective. Its composite with the truncation
-map is the canonical truncation isomorphism, so it is also surjective. Isomorphisms on
-all stalk cohomology groups imply `IsIso c` by the derived-category cohomology
-criterion. This is the uniqueness half of Stacks, Cohomology, Tag 0D62. -/
+/-- Isomorphism part of pointwise truncation reconstruction: under the local bounds `hlocal`,
+every compatible map `c` to the derived limit of the lower truncations is an isomorphism. -/
 theorem pointwise_truncation_limit_isIso (X : RingedSpace.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     (E : DerivedCategory (SheafOfModules.{u} (moduleRings X)))

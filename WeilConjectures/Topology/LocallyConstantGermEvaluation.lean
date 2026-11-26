@@ -12,8 +12,12 @@ public import Mathlib.Topology.LocallyConstant.Basic
 /-!
 # Evaluation of germs of locally constant maps
 
-Source: Stacks Project, Sheaves on Spaces, Definition 6.7.4 (Tag 006W) and
-Example 6.11.3 (Tag 007B) (blueprint: lem-weil-pbc-locally-constant-germ-evaluation).
+Evaluation at a point identifies the stalk of the presheaf of locally constant maps with the
+coefficient set.
+
+## References
+
+* [Stacks Project, Tags 006W and 007B](https://stacks.math.columbia.edu/tag/006W)
 -/
 
 @[expose] public section
@@ -27,23 +31,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace TopCat
 
 /-- Evaluation identifies the germs of locally constant maps with the coefficient set.
-Source: Stacks Project, Tags 006W and 007B
-(blueprint: lem-weil-pbc-locally-constant-germ-evaluation).
-
-The presheaf `L` below is exactly `V ↦ L_R(V)`, the locally constant maps `V → R`, with
-restriction of maps (written inline as in lem-weil-pbc-closed-pushforward-constant-restriction).
-Its stalk `L.stalk x` is by definition the colimit [def-weil-pbc-category-colimit] of `L`
-over the open neighbourhoods of `x` ordered by reverse inclusion, and `L.germ V x hx` is the
-coprojection `g ↦ g_x`.
-
-Proof: Evaluation at `x` commutes with restriction, so the colimit universal property
-[def-weil-pbc-category-colimit] gives a unique map with the displayed value on each germ.
-Every colimit element is represented by a section
-[lem-weil-pbc-filtered-colimit-sets-elementwise]. For surjectivity, the constant section with
-value `r` has a germ evaluating to `r`. For injectivity, representatives with the same value
-at `x` are constant on respective open neighbourhoods of `x`. Their restrictions to the
-intersection agree, so their germs agree by the eventual-equality criterion for filtered
-colimits [lem-weil-pbc-filtered-colimit-sets-elementwise]. -/
+Here `L` is the presheaf `V ↦ L_R(V)` of locally constant maps `V → R`, and `L.germ V x hx` is
+the coprojection `g ↦ g_x` into the stalk `L.stalk x`. -/
 theorem existsUnique_locallyConstant_germ_evaluation (X : TopCat.{u}) (x : X) (R : Type u) :
     let L : X.Presheaf (Type u) :=
       { obj := fun V ↦ LocallyConstant {y : X // y ∈ unop V} R

@@ -18,14 +18,16 @@ Weil sheaf (`AlgebraicGeometry.WeilSheaf.upperStarArtinSchreierMapImageIso`): th
 `AS^* ℒ_ψ ⟶ ℚ̄_ℓ` of the inclusion `ℒ_ψ ⟶ AS_* ℚ̄_ℓ` is a morphism of Weil sheaves whose underlying
 morphism is the geometric trivialisation of `ĀS^* ℒ_ψ`. Hence the pullback of `ℒ_ψ` along any
 `φ` with `φ ≫ AS = φ` is constant; in particular `ℒ_{ψ(0 x)} ≅ ℚ̄_ℓ`
-(`AlgebraicGeometry.nonempty_artinSchreier_zero_iso_adicConstant`, blueprint
-`lemma-artin-schreier-character-sheaf`).
+(`AlgebraicGeometry.nonempty_artinSchreier_zero_iso_adicConstant`).
 
 ## Implementation notes
 
 Declarations mentioning `AS_*` or `image e_ψ` with instance arguments found inline (e.g.
 `QuasiCompact AS` through `IsFinite AS`) make the kernel re-check these instance terms, which
 times out. The instances are therefore given names (and a high local priority) below.
+Rewriting with `AlgebraicGeometry.WeilSheaf.image_artinSchreierIdempotent_eq` replaces the
+instance found elsewhere by the named one: the kernel would otherwise compare `F.obj (image e_ψ)`
+for two instances by unfolding the functor `F`.
 -/
 
 @[expose] public section
@@ -68,20 +70,20 @@ lemma affineLine.smul_zero_comp_artinSchreierMap :
     AffineSpace.artinSchreierMap_appTop_coord, map_sub, map_pow, map_zero, zero_mul]
   simp [Fintype.card_ne_zero]
 
-/-- The Artin–Schreier map is quasi-compact (named, see the implementation notes). -/
+/-- The Artin–Schreier map is quasi-compact. -/
 theorem affineLine.quasiCompact_artinSchreierMap :
     QuasiCompact (affineLine.artinSchreierMap k₀) := inferInstance
 
-/-- The Artin–Schreier map is quasi-separated (named, see the implementation notes). -/
+/-- The Artin–Schreier map is quasi-separated. -/
 theorem affineLine.quasiSeparated_artinSchreierMap :
     QuasiSeparated (affineLine.artinSchreierMap k₀) := inferInstance
 
-/-- The Artin–Schreier map is locally of finite type (named, see the implementation notes). -/
+/-- The Artin–Schreier map is locally of finite type. -/
 theorem affineLine.locallyOfFiniteType_artinSchreierMap :
     LocallyOfFiniteType (affineLine.artinSchreierMap k₀) := inferInstance
 
 omit [Finite k₀] in
-/-- The affine line is locally of finite type over `k₀` (named, see the implementation notes). -/
+/-- The affine line is locally of finite type over `k₀`. -/
 theorem affineLine.locallyOfFiniteType_over :
     LocallyOfFiniteType (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := inferInstance
 
@@ -117,15 +119,13 @@ lemma WeilSheaf.upperStarLift_hom_hom_f {P : WeilSheaf k₀ l Y} {F : WeilSheaf 
 
 end UpperStarLift
 
-/-- The image of the projector `e_ψ` exists (named, see the implementation notes). -/
+/-- The image of the projector `e_ψ` exists. -/
 theorem WeilSheaf.hasImage_artinSchreierIdempotent (ψ : AddChar k₀ (PadicAlgCl l)) :
     HasImage (WeilSheaf.artinSchreierIdempotent ψ) := inferInstance
 
 attribute [local instance high] WeilSheaf.hasImage_artinSchreierIdempotent
 
-/-- The image of `e_ψ` does not depend on the proof that it exists. Rewriting with this equation
-replaces the instance found elsewhere by the named one: the kernel would otherwise compare
-`F.obj (image e_ψ)` for two instances by unfolding the functor `F`. -/
+/-- The image of `e_ψ` does not depend on the proof that it exists. -/
 theorem WeilSheaf.image_artinSchreierIdempotent_eq (ψ : AddChar k₀ (PadicAlgCl l))
     {h : HasImage (WeilSheaf.artinSchreierIdempotent ψ)} :
     @image _ _ _ _ (WeilSheaf.artinSchreierIdempotent ψ) h =
@@ -198,17 +198,16 @@ instance : IsIso (WeilSheaf.upperStarArtinSchreierMapImageHom ψ) := by
     infer_instance
   exact WeilSheaf.isIso_of_isIso_hom_hom_f _
 
-/-- Blueprint `lemma-artin-schreier-character-sheaf`: the pullback of `ℒ_ψ` along the Artin–Schreier
-map is the constant Weil sheaf, `AS^* ℒ_ψ ≅ ℚ̄_ℓ`. -/
+/-- The pullback of `ℒ_ψ` along the Artin–Schreier map is the constant Weil sheaf:
+`AS^* ℒ_ψ ≅ ℚ̄_ℓ`. -/
 noncomputable def WeilSheaf.upperStarArtinSchreierMapImageIso :
     (WeilSheaf.upperStar (affineLine.artinSchreierMap k₀)).obj
         (image (WeilSheaf.artinSchreierIdempotent ψ)) ≅
       WeilSheaf.adicConstant k₀ l (affineLine k₀) :=
   asIso (WeilSheaf.upperStarArtinSchreierMapImageHom ψ)
 
-/-- Blueprint `lemma-artin-schreier-character-sheaf`: if `AS^* L ≅ ℚ̄_ℓ` (e.g. `L = ℒ_ψ`), the
-pullback of `L` along a morphism `φ : X ⟶ 𝔸¹` with `AS ∘ φ = φ` is constant,
-`φ^* L ≅ φ^* AS^* L ≅ φ^* ℚ̄_ℓ ≅ ℚ̄_ℓ`. -/
+/-- If `AS^* L ≅ ℚ̄_ℓ` (e.g. `L = ℒ_ψ`), the pullback of `L` along a morphism `φ : X ⟶ 𝔸¹` with
+`AS ∘ φ = φ` is constant: `φ^* L ≅ ℚ̄_ℓ`. -/
 theorem WeilSheaf.nonempty_iso_upperStar_of_comp_artinSchreierMap {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] (φ : X ⟶ affineLine k₀)
     [φ.IsOver (Spec (CommRingCat.of k₀))] (h : φ ≫ affineLine.artinSchreierMap k₀ = φ)
@@ -239,8 +238,7 @@ theorem WeilSheaf.nonempty_iso_upperStar_upperStar_of_comp_artinSchreierMap {X Y
 
 end Trivialization
 
-/-- Blueprint `lemma-artin-schreier-character-sheaf` (the case `f = 0`): `ℒ_{ψ(0 x)} ≅ ℚ̄_ℓ`, as
-`AS ∘ [0] = [0]`. -/
+/-- The Artin–Schreier sheaf of the zero function is constant: `ℒ_{ψ(0 x)} ≅ ℚ̄_ℓ`. -/
 theorem nonempty_artinSchreier_zero_iso_adicConstant (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty (artinSchreier ψ 0 ≅ WeilSheaf.adicConstant k₀ l (affineLine k₀)) := by
   rw [artinSchreier, WeilSheaf.image_artinSchreierIdempotent_eq]

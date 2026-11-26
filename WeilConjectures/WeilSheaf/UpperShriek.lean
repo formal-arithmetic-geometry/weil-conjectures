@@ -13,15 +13,19 @@ import WeilConjectures.WeilSheaf.ProperLowerStarAdjoint
 
 For a separated morphism of finite type `f : X ⟶ Y` of `k₀`-schemes of finite type, `Y`
 separated over `k₀`, the direct image with compact support `Rf₀!` of Weil complexes
-(`AlgebraicGeometry.WeilComplex.derivedLowerShriek`) has a right adjoint `Rf^!`; this is the
-constructible adjunction `Rf_! ⊣ Rf^!` of the six-functor chapter
-(`theorem-verdier-biduality`), `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek`.
-It is deduced through a compactification from the proper case
+(`AlgebraicGeometry.WeilComplex.derivedLowerShriek`) has a right adjoint `Rf^!`
+(`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek`), the exceptional inverse
+image `AlgebraicGeometry.WeilComplex.upperShriek f`.
+
+## Implementation details
+
+The existence of the right adjoint is deduced through a compactification from the proper case
 `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper`. The exceptional
-inverse image `AlgebraicGeometry.WeilComplex.upperShriek f` is *defined* as that right adjoint,
-which is how the blueprint characterizes it (`theorem-f-shriek-finite-coefficients`); so that no
-data is chosen from the existence statement, it takes the existence of the right adjoint
-(`AlgebraicGeometry.WeilComplex.HasUpperShriek f`) as a hypothesis.
+inverse image is *defined* as that right adjoint, which characterizes it by the adjunction
+`Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)`; so that no data is chosen from the existence statement, it
+takes the existence of the right adjoint (`AlgebraicGeometry.WeilComplex.HasUpperShriek f`) as a
+hypothesis. At the finite stage the exceptional inverse image is
+`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`.
 -/
 
 @[expose] public section
@@ -48,19 +52,15 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 variable (k₀ l) in
 /-- The direct image with compact support `Rf₀!` of Weil complexes along `f` has a right adjoint,
-the exceptional inverse image `Rf^!` (`AlgebraicGeometry.WeilComplex.upperShriek`). That it
-has one when `Y` is separated over `k₀` is
-`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek`. -/
+the exceptional inverse image `Rf^!` (`AlgebraicGeometry.WeilComplex.upperShriek`). -/
 abbrev HasUpperShriek : Prop :=
   (derivedLowerShriek k₀ l f).IsLeftAdjoint
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
-/-- **The constructible exceptional adjunction** (blueprint: `theorem-verdier-biduality`, "the
-constructible adjunction `Rf_! ⊣ Rf^!`"; the exceptional inverse image itself is defined at the
-finite stage as `AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`): for a
-separated morphism of finite type `f : X ⟶ Y` of `k₀`-schemes of finite type, `Y` separated over
-`k₀`, the direct image with compact support `Rf₀!` of Weil complexes has a right adjoint. -/
+/-- **The constructible exceptional adjunction**: for a separated morphism of finite type
+`f : X ⟶ Y` of `k₀`-schemes of finite type, `Y` separated over `k₀`, the direct image with
+compact support `Rf₀!` of Weil complexes has a right adjoint. -/
 theorem isLeftAdjoint_derivedLowerShriek
     [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))] : HasUpperShriek k₀ l f := by
   let c := HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
@@ -90,8 +90,7 @@ variable [HasUpperShriek k₀ l f]
 
 /-- The exceptional inverse image `Rf^!` of Weil complexes along a separated morphism of finite
 type `f : X ⟶ Y` of `k₀`-schemes of finite type: the right adjoint of the direct image with
-compact support `Rf₀!` (blueprint: `theorem-f-shriek-finite-coefficients`, which characterizes
-`Rf^!` by the adjunction `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)` on constructible complexes). -/
+compact support `Rf₀!`. -/
 noncomputable def upperShriek : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X :=
   (derivedLowerShriek k₀ l f).rightAdjoint
 

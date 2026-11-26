@@ -28,9 +28,16 @@ public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 of `H^q(P)` killed by `I^m` is a retract of `H^q(P ⊗ A/I^m)` for a complex `P` of finite
 projective modules.
 
-Source: Bhatt--Scholze, Proposition 6.6.11; step 5 of
-`lem-weil-pbc-adic-tor-implies-flat-cohomology`
-(blueprint: lem-weil-pbc-integral-cohomology-torsion-normal-form).
+## Implementation details
+
+For `exists_levelTor_epi`, tensor `0 → A/π → A/π^{n+2} → A/π^{n+1} → 0` (the first map being
+multiplication by `π^{n+1}`) with the projective resolution `R → M`; the connecting map sends
+`H^{-1}(R ⊗ A/π^{n+1})` onto the kernel of `π^{n+1} : M/πM → M`. For `x : N₀`, `s x` is killed
+by `π^{n+1}`, so its class lies in that kernel, and `r` sends it to `x` modulo `π`.
+
+## References
+
+* [Bhatt–Scholze, Proposition 6.6.11]
 -/
 
 @[expose] public noncomputable section
@@ -519,12 +526,7 @@ theorem projective_projectiveResolution_X {B : Type (u + 1)} [Ring B]
     (inferInstanceAs (Projective ((projectiveResolution M).cochainComplex.X i)))
 
 /-- The module-level consecutive-quotient Tor of a module containing a retract `N₀` killed
-by `π^{n+1}` surjects onto `N₀/πN₀`.
-
-Proof sketch: tensor `0 → A/π --π^{n+1}--> A/π^{n+2} → A/π^{n+1} → 0` with the projective
-resolution `R → M`; the connecting map sends `H^{-1}(R ⊗ A/π^{n+1})` onto the kernel of
-`π^{n+1} : M/πM → M`. For `x : N₀`, `s x` is killed by `π^{n+1}`, so its class lies in that
-kernel, and `r` sends it to `x` modulo `π`. -/
+by `π^{n+1}` surjects onto `N₀/πN₀`. -/
 theorem exists_levelTor_epi [IsDomain A] (π : A) (hπ : π ≠ 0) (hI : I = Ideal.span {π})
     (M : ModuleCat.{u + 1} (A ⧸ I ^ (n + 1 + 1))) (N₀ : ModuleCat.{u + 1} A)
     (s : N₀ →ₗ[A] (ModuleCat.restrictScalars.{u + 1} (Ideal.Quotient.mk (I ^ (n + 1 + 1)))).obj M)

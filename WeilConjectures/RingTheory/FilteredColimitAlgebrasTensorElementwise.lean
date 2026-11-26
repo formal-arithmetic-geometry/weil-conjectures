@@ -18,8 +18,21 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 /-!
 # Base change of a filtered colimit of algebras, elementwise
 
-Source: Stacks Project, Algebra, Tags 00DD, 00D6 and 00D7
-(blueprint: lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise).
+For a filtered colimit `A = colim Aᵢ` of commutative `R`-algebras and an `R`-module `N`, the
+tensor product `A ⊗[R] N` is the colimit of the `Aᵢ ⊗[R] N`, described elementwise: every element
+comes from a stage, and an element of a stage mapping to zero already vanishes at a later stage.
+When `N` is an algebra, the maps involved are ring homomorphisms.
+
+## Implementation details
+
+The algebra colimit is first forgotten to a module colimit
+(`filtered_colimit_algebras_underlying_module`); tensor products commute with colimits, and the
+elementwise description of filtered colimits of modules then applies.
+
+## References
+
+* [Stacks, Tag 00DD], [Stacks, Tag 00D6], [Stacks, Tag 00D7]
+* [Stacks, Tag 00CV], [Stacks, Tag 05G3]
 -/
 
 @[expose] public section
@@ -31,15 +44,8 @@ open scoped TensorProduct
 
 namespace CommAlgCat
 
-/-- The parenthetical module-colimit clause, written as the universal property:
-every compatible family of linear maps factors uniquely through the tensor colimit.
-
-Source: Stacks Project, Algebra, Tag 00DD
-(blueprint: lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise).
-Proof: first forget the filtered algebra colimit to modules using
-`theorem-finite-etale-covers-proper-henselian--2`, then apply
-`lem-weil-pbc-tensor-commutes-with-colimits`. Unpack the resulting `IsColimit`
-using `def-weil-pbc-category-colimit`: compatibility gives a unique factorization. -/
+/-- The tensor product `(colim F) ⊗[R] N` is the colimit of the `F i ⊗[R] N` as modules:
+every compatible family of linear maps factors uniquely through it. -/
 theorem filteredColimit_tensorProduct_universal
     (R : Type uR) [CommRing R]
     {I : Type uI} [SmallCategory I] [IsFiltered I]
@@ -77,21 +83,8 @@ theorem filteredColimit_tensorProduct_universal
 
 /--
 Base change by tensor product preserves the elementwise description of a filtered
-colimit of commutative algebras.
-
-Source: Stacks Project, Algebra, Tags 00DD, 00D6 and 00D7
-(blueprint: lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise).
-Proof:
-1. Apply `theorem-finite-etale-covers-proper-henselian--2` to the algebra
-   diagram and its colimit: forgetting to modules gives a module colimit, in the
-   sense of `def-weil-pbc-category-colimit`.
-2. Apply `lem-weil-pbc-tensor-commutes-with-colimits` (Tag 00DD) to that module
-   diagram and `N`. Its colimit is the tensor product with the stated coprojections.
-3. Apply `lem-weil-pbc-filtered-colimit-modules-elementwise` (Tags 00D6 and 00D7)
-   to this tensor diagram. Every element lifts to a stage, and an element whose
-   image is zero becomes zero along a morphism to a later stage.
-4. For the algebra clause, apply `lem-weil-pbc-algebra-tensor-map-ring-hom` to
-   each coprojection and transition map; this is `Algebra.TensorProduct.rTensor`.
+colimit of commutative algebras: every element of `(colim F) ⊗[R] N` comes from some
+`F i ⊗[R] N`, and an element of `F i ⊗[R] N` mapping to zero vanishes in some `F j ⊗[R] N`.
 -/
 theorem filteredColimit_tensorProduct_elementwise
     (R : Type uR) [CommRing R]
@@ -163,14 +156,7 @@ theorem filteredColimit_tensorProduct_elementwise
     exact ⟨j, u, by simpa [G] using huv⟩
 
 /-- When the tensor factor is a commutative algebra, the tensor coprojections and
-transition maps are underlying maps of ring homomorphisms.
-
-Source: Stacks Project, Algebra, Sections Tags 00CV and 05G3
-(blueprint: lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise).
-Proof: apply `lem-weil-pbc-algebra-tensor-map-ring-hom` to every coprojection and
-transition algebra homomorphism. `Algebra.TensorProduct.rTensor` supplies the algebra
-homomorphism, whose underlying linear map is the displayed `LinearMap.rTensor`.
-Taking `AlgHom.toRingHom` gives the required ring homomorphisms. -/
+transition maps are underlying maps of ring homomorphisms. -/
 theorem filteredColimit_tensorProduct_ringHom
     (R : Type uR) [CommRing R]
     {I : Type uI} [SmallCategory I] [IsFiltered I]

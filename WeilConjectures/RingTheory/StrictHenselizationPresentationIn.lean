@@ -10,11 +10,13 @@ public import WeilConjectures.RingTheory.IsStrictHenselization
 /-!
 # Strict henselization presentations in a universe containing the base ring
 
-Source: Stacks Project, Algebra, Tag 04GW, pointed-algebra description
-(blueprint: def-sc-ring-strict-henselization).
+The diagram of pointed étale algebras used to present a strict henselization, with
+independent base-ring and algebra universes. The algebra universe is at least the base-ring
+universe.
 
-This is the recorded pointed-etale colimit presentation with independent base-ring and
-algebra universes. The common algebra universe is at least the base-ring universe.
+## References
+
+* [Stacks, Tag 04GW]
 -/
 
 @[expose] public section
@@ -25,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace Algebra
 
-/-- The forgetful diagram of pointed etale algebras in any universe containing the base.
-Source: Stacks Project, Tag 04GW (blueprint: def-sc-ring-strict-henselization). -/
+/-- The forgetful diagram of pointed etale algebras in any universe containing the base. -/
 def strictHenselizationPointedDiagramIn (A : Type u) (K : Type (max u v))
     [CommRing A] [CommRing K] [Algebra A K] :
     (ObjectProperty.FullSubcategory

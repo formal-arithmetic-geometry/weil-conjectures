@@ -8,7 +8,14 @@ module
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.LocallyFiniteAdicCompactSupportData
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.FiniteStageActionCanonicalComparison
 
-/-! Canonical constructions used in normalized integral scalar boundaries. -/
+/-! # Rational integral boundary comparisons
+
+Canonical constructions used in normalized integral scalar boundaries.
+
+## References
+
+* [Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -49,9 +56,7 @@ attribute [local irreducible] ScalarLocalization.category
 
 set_option allowUnsafeReducibility true in
 attribute [local reducible] ScalarLocalization.category in
-/-- Integral finite compact support commutes with raw localization.
-Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
-(blueprint: def-sf-native-integral-boundary-rational-construction). -/
+/-- Integral finite compact support commutes with raw localization. -/
 def finiteActionLocalization (E : Index l (PadicAlgCl l)) :
     sfRationalConstructibleLocalization l (Coefficient l (PadicAlgCl l) E) X ⋙
         sfCompactSupportFiniteFunctor l D.k
@@ -68,9 +73,7 @@ def finiteActionLocalization (E : Index l (PadicAlgCl l)) :
     unfold sfCompactSupportFiniteHomMap
     rfl)
 
-/-- The localization comparison has identity components after realization.
-Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
-(blueprint: def-sf-native-integral-boundary-rational-construction). -/
+/-- The localization comparison has identity components after realization. -/
 theorem finiteActionLocalization_map_hom_app [G : NativeGeometry.{u} l]
     (target : Realization l Y) (E : Index l (PadicAlgCl l))
     (K : sfIntegralConstructibleCategory l (Coefficient l (PadicAlgCl l) E) X) :
@@ -83,9 +86,7 @@ theorem finiteActionLocalization_map_hom_app [G : NativeGeometry.{u} l]
     (sections l Y).mapDerivedCategory).map (𝟙 _) = 𝟙 _
   exact CategoryTheory.Functor.map_id _ _
 
-/-- The canonical finite-stage rational boundary comparison.
-Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
-(blueprint: def-sf-native-integral-boundary-rational-construction). -/
+/-- The canonical finite-stage rational boundary comparison. -/
 def sourceRational (stage : StageAction l D hl P c)
     (E : Index l (PadicAlgCl l)) :=
   finiteStageActionComparisonOfOperations l (PadicAlgCl l) X Y stage.system
@@ -95,9 +96,7 @@ def sourceRational (stage : StageAction l D hl P c)
       (Coefficient l (PadicAlgCl l) E))
     (fun E ↦ P.ring.rationalLeft c (finiteField l E)) stage.finite E
 
-/-- The rational boundary component is the prescribed rationalLeft arrow.
-Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
-(blueprint: def-sf-native-integral-boundary-rational-construction). -/
+/-- The rational boundary component is the prescribed rationalLeft arrow. -/
 theorem sourceRational_component [G : NativeGeometry.{u} l]
     (target : Realization l Y) (stage : StageAction l D hl P c)
     (E : Index l (PadicAlgCl l))

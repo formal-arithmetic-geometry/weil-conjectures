@@ -221,20 +221,10 @@ theorem isIso_openKunnethMap_lowerShriek_of_isZero [IsOpenImmersion j.left]
       exact isZero_tensorObj_of_isZero_left h₁ _
     exact ⟨⟨0, h₂.eq_of_src _ _, h₀.eq_of_src _ _⟩⟩
 
-/-- **Vanishing on the boundary** (the remaining content of the ordinary Künneth formula, blueprint
-`lemma-kunneth-one-identity-factor--1`; SGA 4½, [Th. finitude], Corollaire 1.11): for an open
-immersion `j' : V ⟶ X` with closed complement `i : Z ⟶ X`, any morphism `j : U ⟶ Y` and any `L` on
-`V`, the complex `R(𝟙 × j)_* (Rj'_! L ⊠ B)` vanishes on `Z ⨯ Y`.
-
-Following the proof of blueprint `lemma-kunneth-one-identity-factor--1`, `L` and `B` have integral
-models `L₀`, `B₀` over a common `𝒪_E` (`ProEtale.exists_padicAlgCl_iso_integralModel_pair`), the
-extension of scalars `𝒪_E ⟶ ℚ̄_ℓ` commutes with the operations involved
-(`boundedConstructibleUpperStarIntegersToPadicAlgClIso`,
-`boundedConstructibleLowerStarIntegersToPadicAlgClIso`,
-`boundedConstructibleOpenImmersionLowerShriekIntegersToPadicAlgClIso`,
-`boundedConstructibleIntegersToPadicAlgClExternalProductIso`), and the integral statement
-(`PadicIntegersRingObj.isZero_upperStar_prodMap_lowerStar_prodMap_externalProduct`) is deduced
-from finite coefficients. -/
+/-- **Vanishing on the boundary** (the remaining content of the ordinary Künneth formula; SGA 4½,
+[Th. finitude], Corollaire 1.11): for an open immersion `j' : V ⟶ X` with closed complement
+`i : Z ⟶ X`, any morphism `j : U ⟶ Y` and any `L` on `V`, the complex `R(𝟙 × j)_* (Rj'_! L ⊠ B)`
+vanishes on `Z ⨯ Y`. -/
 theorem isZero_upperStar_lowerStar_externalProduct_lowerShriek
     {V : Over (Spec (.of k))} [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
     (j' : V ⟶ X) [IsOpenImmersion j'.left] (L : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -276,12 +266,10 @@ theorem isZero_upperStar_lowerStar_externalProduct_lowerShriek
         (boundedConstructibleLowerStar ℓ (prod.map (𝟙 X) j)).mapIso
           (boundedConstructibleIntegersToPadicAlgClExternalProductIso ℓ E eM eB))).symm
 
-/-- **The ordinary Künneth formula for the extension by zero of a dualizable object**: for an
-open immersion `j' : V ⟶ X` and a dualizable `L ∈ Dᵇc(V)⟦ℚ̲̄_ℓ⟧`, the Künneth map
+/-- **The ordinary Künneth formula for the extension by zero of a dualizable object**: for an open
+immersion `j' : V ⟶ X` and a dualizable `L ∈ Dᵇc(V)⟦ℚ̲̄_ℓ⟧`, the Künneth map
 `Rj'_! L ⊠ Rj_* B ⟶ R(𝟙 × j)_* (Rj'_! L ⊠ B)` is an isomorphism. This is the generator case of the
-ordinary Künneth formula (blueprint `lemma-kunneth-one-identity-factor--1`; SGA 4½, [Th. finitude],
-Corollaire 1.11), the only case not reached by generic base change and the dévissage: it amounts to
-the vanishing of `R(𝟙 × j)_* (Rj'_! L ⊠ B)` on `(X ∖ V) ⨯ Y`. -/
+ordinary Künneth formula (SGA 4½, [Th. finitude], Corollaire 1.11). -/
 theorem isIso_openKunnethMap_lowerShriek_of_isDualizable [IsOpenImmersion j.left]
     {V : Over (Spec (.of k))} [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
     (j' : V ⟶ X) [IsOpenImmersion j'.left]
@@ -292,16 +280,9 @@ theorem isIso_openKunnethMap_lowerShriek_of_isDualizable [IsOpenImmersion j.left
     (isZero_upperStar_lowerStar_externalProduct_lowerShriek ℓ j B j' L)
 
 omit j B in
-/-- **The ordinary Künneth formula along an open immersion**, at the coefficient stage `ℚ̄_ℓ`
-(blueprint `lemma-kunneth-one-identity-factor--1`, section `chap-The-six-operations-on-Dbctf`,
-states it for finite coefficients and a general morphism `f`; here `f = j` is an open immersion).
-For an open immersion `j : U ⟶ Y`, `M ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` and `B ∈ Dᵇc(U)⟦ℚ̲̄_ℓ⟧`, the Künneth map
-`M ⊠ Rj_* B ⟶ R(𝟙 × j)_* (M ⊠ B)` is an isomorphism (SGA 4½, [Th. finitude], Corollaire 1.11).
-
-By dévissage (`isIso_openKunnethMap_of_triangEnvelope`, `triangEnvelope_lisseGenerator`) it
-reduces to the generators `Rg_! Rj'_! L`; the closed pushforward `Rg_!` is removed by
-`isIso_openKunnethMap_lowerStar_of_isClosedImmersion`, and the extension by zero of a dualizable
-object is `isIso_openKunnethMap_lowerShriek_of_isDualizable`. -/
+/-- **The ordinary Künneth formula along an open immersion**, at the coefficient stage `ℚ̄_ℓ`. For
+an open immersion `j : U ⟶ Y`, `M ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` and `B ∈ Dᵇc(U)⟦ℚ̲̄_ℓ⟧`, the Künneth map
+`M ⊠ Rj_* B ⟶ R(𝟙 × j)_* (M ⊠ B)` is an isomorphism (SGA 4½, [Th. finitude], Corollaire 1.11). -/
 theorem isIso_openKunnethMap (j : U ⟶ Y) [IsOpenImmersion j.left]
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

@@ -14,7 +14,21 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 
 /-! # Derived direct image preserves completed-coefficient completeness
 
-Source: Stacks proetale.tex Tag 099N (1),(3), and algebraization.tex Tags 0A0E and 099B.
+The normalized derived direct image along the canonical finite-projection structural map
+preserves derived completeness.
+
+## Implementation details
+
+Completeness is checked through the datum-independent local-completeness criterion. For a
+K-injective representative `J`, the principal-uniformizer completion unit of `J` is a homotopy
+equivalence between K-injective complexes, hence preserved by any additive functor. Module
+pushforward preserves countable products and commutes with cones and shifts, which identifies
+the pushforward of the principal completion with the completion of the image. The argument
+also applies to empty schemes and zero complexes.
+
+## References
+
+* Stacks Project, proetale.tex, Tag 099N (1),(3); algebraization.tex, Tags 0A0E and 099B.
 -/
 
 @[expose] public noncomputable section
@@ -486,31 +500,7 @@ private theorem scalar_chain_push {X Y : Scheme.{t}} (f : X ⟶ Y)
       (((push f c).mapHomologicalComplex (.up ℤ)).obj P)).exists.choose_spec
 
 /-- The normalized direct image along the canonical finite-projection structural
-map preserves derived completeness, independently of choices of total derived model.
-
-Source: Stacks proetale.tex, Tag 099N, lemma-pushforward-Noetherian-case (1),(3)
-(blueprint: lem-pur-completed-direct-image-preserves-completeness).
-Proof:
-1. Extract the datum-independent local-completeness equivalence from the existing
-Roos argument. The converse uses a termwise-flat K-flat representative and the
-principal-cone/quotient comparison, retaining the specified quotient augmentation.
-2. Represent K by a K-injective complex J. The principal-uniformizer completion unit
-of J is a quasi-isomorphism. Its target is also K-injective: each cone level is,
-products of K-injectives are K-injective, and the final shifted cone is K-injective.
-Thus this unit is a homotopy equivalence, preserved by any additive functor.
-3. Module pushforward preserves countable products, as seen after evaluating its
-underlying module presheaves: source evaluation and scalar restriction preserve
-limits. Its termwise functor commutes with cones and shifts. Naturality of the cone comparison
-for the (uniformizer, identity) transition squares gives a product comparison
-conjugating one minus the transition shift. Applying the shifted cone comparison
-identifies pushforward of the principal completion with completion of the image.
-4. The equations hc imply the constant-to-completion square for c. Applying the
-constant sheafification unit to the uniformizer shows that the image scalar is
-the actual target uniformizer. Its principal completion is locally complete by
-the local criterion. Transport completeness through the comparison and the image
-of the source unit, then through F's K-injective computation isomorphism.
-All countable products and positive powers retain their original transitions;
-the argument also applies to empty schemes and zero complexes. -/
+map preserves derived completeness, independently of choices of total derived model. -/
 theorem directImage_preservesComplete (p : ℕ) [Fact p.Prime] (hlp : l ≠ p)
     {X Y : Scheme.{t}} (f : X ⟶ Y)
     (c : R l E Y ⟶ (ringPush.{t, u} f).obj (R l E X))

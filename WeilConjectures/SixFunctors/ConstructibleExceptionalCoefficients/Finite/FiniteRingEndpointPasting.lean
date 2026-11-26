@@ -7,7 +7,13 @@ module
 
 public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteRingFixedCoordinates
 
-/-! # Finite endpoint pasting before cancelling realization coordinates -/
+/-! # Finite endpoint pasting before cancelling realization coordinates
+
+## References
+
+* [Stacks, Tag 00YV]
+* [Stacks, Tag 03D6]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -50,14 +56,7 @@ private theorem endpoint_coordinates
   rw [← P₁.map_comp_assoc (J₁.map a.hom) (o.hom.app (ec.obj M)), ho,
     P₁.map_comp, Category.assoc, reassoc_of% hp, ← reassoc_of% ha]
 
-/-- The open/direct-image coordinates at one finite compactification endpoint.
-Source: compactification-coherence proof, second paragraph; Stacks 00YV and 03D6
-(blueprint: lem-sf-finite-ring-endpoint-pasting).
-
-Proof: apply naturality to the finite open comparison and then to the separately
-derived finite direct-image comparison. The fixed realization comparisons paste
-by the functor associator. The equivalence counit identifies the retained object
-with the original one. This is the generic endpoint_coordinates calculation. -/
+/-- The open/direct-image coordinates at one finite compactification endpoint. -/
 theorem finiteFixedEndpointModelAt
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)

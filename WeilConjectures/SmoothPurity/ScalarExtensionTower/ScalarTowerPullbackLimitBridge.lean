@@ -13,8 +13,14 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Scalar/pullback normalization in fixed Roos coordinates
 
-Source: Stacks 07A4 and 0941; realization step 8 of
-lem-pur-scalar-extension-tower-coherence.
+## Implementation details
+
+`scalarTowerPullbackLimitSquare_mate` keeps the strict tensor/pullback-square hypothesis of
+its original statement, although the proof does not use it.
+
+## References
+
+* Stacks Project, Tags 06YY, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -31,18 +37,7 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- The scalar/pullback mate equation in fixed Roos coordinates.
-Source: Stacks 06YY, 07A4 and 0941
-(blueprint: stage3-pur-scalar-pullback-limit-bridge).
-
-Proof: represent M by a good complex P and choose its coherent strict quotient
-presentation C. The nested quotient coordinate t is invertible: the scalar
-cochain counit computes on pull_E(C), as shown by levelwise K-flatness and
-termwise flatness. The left and right normalization calculations identify both
-maps, after t, with the same explicit ordinary scalarPullbackChain. Cancel t,
-and use the system isomorphism's hom-inverse identity on the right. The original
-strict tensor/pullback-square hypothesis is retained but not used.
--/
+/-- The scalar/pullback mate equation in fixed Roos coordinates. -/
 theorem scalarTowerPullbackLimitSquare_mate (W : Bool → Scheme.{u})
     (ME : CompletedOperations.Models.{u, u} l E W)
     (ML : CompletedOperations.Models.{u, u} l L W)

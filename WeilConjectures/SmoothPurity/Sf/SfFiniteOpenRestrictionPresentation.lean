@@ -12,8 +12,9 @@ import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 /-! # A section-normalized comparison of finite open restriction
 
-Source: Stacks Tags 098K, 03DI and 03DJ.
-(blueprint: lem-sf-finite-open-restriction-presentation).
+## References
+
+* Stacks Project, Tags 00YV, 03DI, 03DJ and 098K.
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +28,7 @@ attribute [local irreducible] Padic.coefficientExtensionIntegers
   Padic.coefficientExtensionUniformizer Padic.coefficientExtensionAbsoluteValue
 
 /-- The section map from the fixed-scalar presentation to its intrinsic realization.
-Both factors are the actual realization unit and counit; no section is chosen.
-Source: Stacks 00YV (blueprint: lem-sf-finite-open-restriction-presentation). -/
+Both factors are the actual realization unit and counit; no section is chosen. -/
 @[irreducible] def sfFixedToIntrinsicSection (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
     (N : proEtaleRingModules T (proEtaleConstantRing T A)) (V : T.ProEtᵒᵖ)
     (x : ((sfIntrinsicModuleEquivalence T A).inverse.obj N).obj.obj V) : N.val.obj V :=
@@ -124,8 +124,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
 
-/-- Recomposition of an object of the open slice gives its original ambient object.
-Source: Stacks 098K (blueprint: lem-sf-finite-open-restriction-presentation). -/
+/-- Recomposition of an object of the open slice gives its original ambient object. -/
 @[irreducible] def sfFiniteOpenSliceObjectIso (V : Over (IntegralOpenReduction.openObject j)) :
     ((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).obj
       ((IntegralOpenReduction.sliceSite j).obj V)) ≅ V.left :=
@@ -319,8 +318,7 @@ private theorem restrictionComparison_forward (n : ℕ) (N : normalizedDVRModule
   rw [Functor.map_preimage]
   simp
 
-/-- The finite open adjunction, with the recorded direct-sum unit.
-Source: Stacks 03DI (blueprint: lem-sf-finite-open-restriction-presentation). -/
+/-- The finite open adjunction, with the recorded direct-sum unit. -/
 @[irreducible] def sfFiniteOpenAdjunction (n : ℕ) :
     IntegralOpenReduction.finiteExtension l E j o n ⊣
       IntegralOpenReduction.finiteRestriction l E j o n :=
@@ -331,8 +329,7 @@ Source: Stacks 03DI (blueprint: lem-sf-finite-open-restriction-presentation). -/
 /-- A right-adjoint comparison preserves the concrete underlying sections. To state
 this without arbitrary inverses on sections, test on the fixed-scalar realization:
 its unit and counit supply every section. Transport out of the chosen slice inverse
-uses its actual counit, and `finiteFunctor` identifies its forward transport.
-Source: Stacks 098K, 00YV (blueprint: lem-sf-finite-open-restriction-presentation). -/
+uses its actual counit, and `finiteFunctor` identifies its forward transport. -/
 @[irreducible] def SfFiniteOpenRestrictionNormalized (n : ℕ)
     (r : IntegralOpenReduction.finiteRestriction l E j o n ≅
       sfIntrinsicOpenRestriction j (Padic.coefficientExtensionRing l E (n + 1))) : Prop :=
@@ -368,23 +365,7 @@ Source: Stacks 098K, 00YV (blueprint: lem-sf-finite-open-restriction-presentatio
 
 /-- At one coefficient, the slice and intrinsic right restrictions have a unique
 section-preserving comparison. This asserts neither extension comparisons nor a
-coefficient square.
-Source: Stacks 098K, 00YV, 03DI and 03DJ
-(blueprint: lem-sf-finite-open-restriction-presentation).
-
-Proof: the slice-to-open equivalence identifies both restrictions with evaluation
-on the same underlying scheme. On fixed-scalar sheaves its comparison is the identity
-on sections, followed by the realization unit. The constant-presheaf unit equation
-`o.finiteConstants` makes this map linear for the restricted coefficient sheaf:
-action by a locally constant scalar is determined locally by its action on constants.
-The equation `o.finiteFunctor` identifies the forward module transport. Its counit
-then transports this comparison back through the slice equivalence, giving r.
-The realization unit on a fixed-scalar sheaf is invertible on underlying abelian
-sheaves, as is the realization counit, so the component maps are invertible.
-Naturality follows from the naturality of the two units and the slice counit.
-For uniqueness, forward transport is faithful, and the realization section maps
-are bijective; the displayed equation therefore determines each component on every
-section. This includes the empty open and requires no quasi-compactness. -/
+coefficient square. -/
 theorem sfFiniteOpenRestriction_presentation (n : ℕ) :
     ∃! r : IntegralOpenReduction.finiteRestriction l E j o n ≅
         sfIntrinsicOpenRestriction j (Padic.coefficientExtensionRing l E (n + 1)),
@@ -473,8 +454,7 @@ theorem sfFiniteOpenRestriction_presentation (n : ℕ) :
   exact (hr N V.unop x).trans (hnorm N V.unop x).symm
 
 /-- The left comparison is constructed by adjunction uniqueness from a supplied
-right comparison. No choice of a left comparison or unproved datum occurs here.
-Source: Stacks 03DI (blueprint: lem-sf-finite-open-restriction-presentation). -/
+right comparison. No choice of a left comparison or unproved datum occurs here. -/
 @[irreducible] def sfFiniteOpenLeftComparison (n : ℕ)
     (r : IntegralOpenReduction.finiteRestriction l E j o n ≅
       sfIntrinsicOpenRestriction j (Padic.coefficientExtensionRing l E (n + 1))) :

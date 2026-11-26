@@ -56,7 +56,7 @@ small étale site of `Z` and on that of `X` respectively. This is not a defect: 
 - `AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex_closed`: the
   `i^*`-image of the open–closed short complex is short exact.
 - `AlgebraicGeometry.Etale.shortExact_openClosedShortComplex`: **the open–closed short complex
-  is short exact** (blueprint: `thm:openclosed-exact`).
+  is short exact**.
 
 -/
 
@@ -82,9 +82,7 @@ variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
 
 include hJZ in
 /-- **`i^*` of the unit of `i^* ⊣ i_*` is an isomorphism** at every sheaf `G` on `X`, for a
-closed immersion `i : Z ⟶ X`: the triangle identity `i^*(η_G) ≫ ε_{i^* G} = 𝟙` exhibits it as
-the inverse of the counit `ε_{i^* G}`, which is an isomorphism by
-`AlgebraicGeometry.Etale.isIso_upperStarLowerStarAdjunction_counit_app`. -/
+closed immersion `i : Z ⟶ X`. -/
 instance Etale.isIso_upperStar_map_upperStarLowerStarAdjunction_unit
     (G : Sheaf X.smallEtaleTopology A) :
     IsIso ((i)^*[A].map ((Etale.upperStarLowerStarAdjunction A i).unit.app G)) := by
@@ -101,14 +99,7 @@ omit [HasSmallSiteSheafify A] in
 
 `0 ⟶ i^* j_! j^* F ⟶ i^* F ⟶ i^* i_* i^* F ⟶ 0`
 
-is exact. Its first term is zero by
-`AlgebraicGeometry.Etale.isZero_upperStar_openImmersionLowerShriek_of_disjoint_range`, and its
-second map `i^*(η_F)` is an isomorphism, being the inverse of the counit of `i^* ⊣ i_*` at
-`i^* F` by `AlgebraicGeometry.Etale.isIso_upperStar_map_upperStarLowerStarAdjunction_unit`.
-
-This is one of the two halves of the reflection argument proving that
-`AlgebraicGeometry.Etale.openClosedShortComplex` is itself short exact; the other half is
-`AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex_open`. -/
+is exact. -/
 lemma Etale.shortExact_map_upperStar_openClosedShortComplex_closed :
     ((Etale.openClosedShortComplex A j i hji F).map (i)^*[A]).ShortExact := by
   have hz := Etale.isZero_upperStar_openImmersionLowerShriek_of_disjoint_range A j i hji
@@ -134,11 +125,7 @@ closed immersion `i : Z ⟶ X` whose range is the complement of the range of `j`
 
 `0 ⟶ j_! j^* F ⟶ F ⟶ i_* i^* F ⟶ 0`
 
-is exact. Both restrictions `j^*` and `i^*` are exact and they jointly reflect isomorphisms, so
-this follows from
-`AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex_open` and
-`AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex_closed`.
-(blueprint: `thm:openclosed-exact`) -/
+is exact. -/
 theorem Etale.shortExact_openClosedShortComplex
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
     (Etale.openClosedShortComplex A j i

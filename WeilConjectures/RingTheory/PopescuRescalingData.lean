@@ -17,9 +17,20 @@ import WeilConjectures.RingTheory.PolynomialParameterQuotientChart
 /-!
 # Rescaling data before polynomial coefficient base change
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ, steps 10--13, 15
-and the coefficient quotient of step 25.
-(blueprint: lem-weil-pbc-popescu-rescaling-data).
+We perform the simultaneous rescaling of the parameters in the proof of Stacks Lemma 07FJ,
+retaining the coefficient quotient and its polynomial identification, before giving the
+polynomial ring over `D'` its algebra structures.
+
+## Implementation details
+
+`exists_popescu_rescaling_data` supplies no algebra structure on `D'[t_i]` over `R/H^n` and
+asserts no essential smoothness for that polynomial ring. The coefficient ring is shrunk to
+`Type (max u v)` by presenting its smooth finite-presentation model and its localization over
+the small ring `P/p₀^n`. The case `d = 0` is included.
+
+## References
+
+* [Stacks, Tag 07FJ] (steps 10--13 and 15 of the proof, and the coefficient quotient of step 25)
 -/
 
 @[expose] public section
@@ -30,68 +41,7 @@ universe u v w
 namespace Algebra
 
 /-- Simultaneous rescaling, retaining the coefficient quotient and its polynomial
-identification, before giving the polynomial ring over D' its algebra structures.
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ, steps 10--13 and 15;
-the coefficient quotient used in step 25.
-(blueprint: lem-weil-pbc-popescu-rescaling-data).
-
-Proof: Write P = k[y] for the given polynomial source and p₀ for the contracted prime.
-Smooth ascent from the field makes P regular. Geometric regularity makes Λ and its
-localization L regular, so the embedding dimension d of L equals its Krull dimension.
-The flat local height formula and the extended-prime equality show that P localized
-at p₀ also has dimension d: its closed fibre in L is the residue field of L.
-Choose d polynomial representatives u_i of a regular
-system of parameters. Their images generate the maximal ideal of L. Every permutation
-is regular. Adjoin variables t_i and put rho_i = u_i t_i. After localization away from
-p₀ this is a regular sequence. On each quotient by preceding (8c)-th powers, use
-regular-sequence powers and Ogoma to multiply the next u_i by an element outside p₀
-so that multiplication by rho_i and its square have the same kernel before localization.
-The preceding ideals and their kernel equalities remain unchanged.
-
-The given flat local g₀ is faithfully flat and injective. Lift the images of the finite
-polynomial generators of A to D₀. The relations vanish by injectivity, so the lift factors
-through A. Regard D₀ as a k-algebra through the old coefficient quotient and retain this
-A-map during all subsequent enlargements. Induct on the parameters to construct the
-units δ_i and the coefficients ell(i,j). Faithfully flat ideal contraction writes u_i^N
-as a sum of the images of a_j times coefficients d_j in the current coefficient ring.
-Lift g(d_j) to c_j in L. The error lies in m_L^n with n = N + d(8c); since m_L^N is
-contained in the singular ideal, it is a sum a_j c'_j with c'_j in m_L^(n-N).
-Multiplication by u_i^N gives u_i^(2N) = sum a_j w_j, where
-w_j = u_i^N(c_j+c'_j), and the correction u_i^N c'_j vanishes modulo m_L^n.
-Thus all w_j have residue in the coefficient ring.
-
-Choose a common denominator s₀ outside q and v_j in Λ with w_j = v_j/s₀, then s₁
-outside q annihilating s₀ u_i^(2N) - sum v_j α(a_j). Put s=s₀s₁ and
-μ_j=s^(2N-1)s₁v_j. Direct multiplication gives (s u_i)^(2N)=sum μ_j α(a_j) in Λ
-and μ_j/s^(2N)=w_j in L. Lemma 07FI includes s^r, for some r>0, in an enlarged
-coefficient ring; replace s by s^r and μ_j by s^(2N(r-1))μ_j. The displayed equation
-and the fractions μ_j/s^(2N)=w_j are preserved, and the new μ_j have residue
-(s^r)^(2N)u_i^N d_j in that ring.
-Apply Ogoma on Λ modulo preceding rescaled parameter powers and use 07FI once more
-to include a positive power of its clearing factor. Their product is δ_i outside q.
-The correspondingly rescaled μ_j are ell(i,j). This supplies the equations, the second
-kernel equalities, and all required coefficient residues, while preserving earlier steps.
-
-Let R=P[t_i] and map it to Λ by the original map on P and t_i to δ_i. Map S to R by
-X_i to u_i t_i, and set H=p₀R. Since t_i maps outside q it is a unit in Q, and the
-u_i generate p₀P_(p₀), giving HQ=(rho_i)Q and HL=m_L. Put B=P/p₀^n. Polynomial
-quotients and Ideal.map_pow identify R/H^n with B[t_i] as k-algebras. The coefficient
-ring after the finite induction is essentially smooth over P_(p₀)/p₀^nP_(p₀), hence
-over B by composition with the localization B→P_(p₀)/p₀^nP_(p₀).
-
-The coefficient ring is essentially of finite type over the small ring B. Shrink its
-smooth finite-presentation model and localization to Type(max u v): present the model
-as a quotient of a finite polynomial ring over B, whose universe is u, and present
-its localization by fractions in that quotient. Both are small in max u v. Transport
-all maps and properties along the resulting algebra equivalence. Reindex the finite old
-and added polynomial variables as Fin m. This gives the stated e. Polynomial coefficient
-mapping sends each rho_i to C(u₀(i))X_i. Evaluation at the included units δ_i agrees
-with R→Λ→L→L/K on coefficients and on every old and added variable; polynomial
-extensionality proves the displayed equality for all z. Locality of g turns the included
-δ_i into units. The retained A-map and chosen coefficients give the final two identities.
-If d=0, the induction is empty, the parameter ideals are zero, and the polynomial
-identification is the zero-variable equivalence. This result supplies no algebra structure
-on D'[t_i] over R/H^n and asserts no essential smoothness for that polynomial ring. -/
+identification, before giving the polynomial ring over D' its algebra structures. -/
 theorem exists_popescu_rescaling_data
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]

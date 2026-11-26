@@ -14,8 +14,19 @@ import WeilConjectures.RingTheory.EtaleSectionIdempotentSplitting
 
 /-! # Lifting a section at an étale algebra to a pair neighbourhood
 
-Source: Stacks Project, More on Algebra, Tag 0A02, verification of condition (2)
-of Tag 09XI (blueprint: lem-weil-pbc-etale-section-neighbourhood-refinement).
+An étale algebra over an étale neighbourhood of the pair `(B, J)` equipped with a section to
+`B/J` admits a refinement which is itself an étale neighbourhood of `(B, J)`.
+
+## Implementation details
+
+With `K = JD`, the section induces a `B/J`-algebra section of the étale `B/J`-algebra `D/K`.
+Idempotent splitting gives `e` with section image `1` and `(D/K)[1/e] ≅ B/J`; lifting `e` to `a`
+in `D`, the localization `D[1/a]` is the required neighbourhood. When `J` is the unit ideal the
+quotient rings are zero, and the argument needs no nontriviality assumption.
+
+## References
+
+* [Stacks, Tag 0A02], verification of condition (2) of [Stacks, Tag 09XI]
 -/
 
 @[expose] public section
@@ -25,25 +36,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace RingTheory
 
 /-- An étale algebra equipped with a section to B/J admits a refinement which is
-itself an étale neighbourhood of (B,J).
-Source: Stacks Project, Tag 0A02, paragraph verifying condition (2) of Tag 09XI
-(blueprint: lem-weil-pbc-etale-section-neighbourhood-refinement).
-
-Proof: Give D its B-algebra structure by composition. It is étale over B because
-both B to C and C to D are étale. Put K=JD. The section kills K and is a
-B-algebra map, so its quotient lift extends scalars along the surjection B to
-B/J to give a B/J-algebra section of D/K. The tensor-quotient equivalence and
-étale base change show that D/K is étale over B/J. Apply idempotent splitting
-to obtain e with section image 1 and localization isomorphic to B/J. Lift e to
-a in D, and put L=D[1/a]. The section extends to L since it sends a to 1.
-Localization is étale, so L is étale over B. Its quotient by JL is the
-localization of D/K at e: use the quotient-localization instance and the
-identity (JD)L=JL. Thus this quotient is B/J as a B/J-algebra, proving that
-the canonical quotient map is bijective. The localization map D to L and
-C to L give k and j; scalar-tower identities prove their compatibility.
-The localization lift equation proves r k=s, and the given B-linearity proves
-r fixes B. When J is the unit ideal the quotient rings are zero rings;
-localization and quotient still commute, and this proof needs no nontriviality. -/
+itself an étale neighbourhood of (B,J). -/
 theorem etale_section_neighbourhood_refinement (B : Type u) [CommRing B] (J : Ideal B)
     (i : ObjectProperty.FullSubcategory (fun C : Under (CommRingCat.of B) ↦
         AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧

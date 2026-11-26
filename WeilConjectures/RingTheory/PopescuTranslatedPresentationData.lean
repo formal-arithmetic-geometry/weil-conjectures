@@ -10,8 +10,12 @@ public import WeilConjectures.RingTheory.StrictlyStandardElement
 
 /-! # Translation preserving a strictly standard witness
 
-Source: Stacks Project, Tag 07CR, the change of generators in the opening paragraph.
-(blueprint: lem-weil-pbc-popescu-translated-presentation-data).
+Translating the generators of a strictly standard presentation by lifts of their images under
+a section gives a strictly standard presentation whose generators vanish under the section.
+
+## References
+
+* [Stacks, Tag 07CR] (the change of generators in the opening paragraph of the proof)
 -/
 
 @[expose] public section
@@ -22,27 +26,7 @@ namespace Algebra
 
 open MvPolynomial
 
-/-- Choose a strictly standard presentation whose generators vanish under the given section.
-
-Source: Stacks Project, Tag 07CR, opening paragraph.
-(blueprint: lem-weil-pbc-popescu-translated-presentation-data).
-
-Proof: unpack strict standardness to obtain a presentation `P`, an integer `c`, minor
-coefficients, and the ideal-square containment. For each generator choose a lift `bᵢ`
-in `R` of its image under `ρ`. Let `τ` substitute `Xᵢ + C bᵢ` for `Xᵢ`; its inverse
-substitutes `Xᵢ - C bᵢ`, since both composites fix constants and variables. The new
-presentation has generator values `P.val i - algebraMap R A (b i)`, relations
-`τ (P.relation j)`, and polynomial lift `τ ∘ P.σ`. Evaluation of a translated
-polynomial at the new values equals the original evaluation, by equality on constants
-and variables. Thus the new relations span the new evaluation kernel and the lift is
-still a right inverse. The new generator values have zero image under `ρ`.
-Polynomial induction, using additivity and the Leibniz rule, gives
-`pderiv i (τ f) = τ (pderiv i f)`; hence evaluating each new Jacobian minor gives
-exactly the old minor. Keep the old minor coefficients. Finally apply `τ` to the
-ideal-square containment: an algebra automorphism preserves ideal spans, sums and
-products, and the transported lift makes the left-hand side its image under `τ`.
-This proves both strictly standard witness conditions for the same new presentation.
-No constant-minor lifting or conclusion about an auxiliary algebra is used. -/
+/-- Choose a strictly standard presentation whose generators vanish under the given section. -/
 theorem exists_popescu_translated_presentation_data
     (R : Type u) (A : Type v) [CommRing R] [CommRing A]
     [Algebra R A] [FinitePresentation R A] (π : R)

@@ -14,8 +14,9 @@ import WeilConjectures.ProperBaseChange.IntegralCoefficientPresentation.Integral
 
 /-! # The completed integral coefficient square
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-condensed-integral-coefficient-square)
+## References
+
+* [Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2)]
 -/
 
 @[expose] public noncomputable section
@@ -158,22 +159,6 @@ private theorem integralCoefficientSquare (F : Type u) [Field F] [Algebra ℚ_[l
 set_option backward.isDefEq.respectTransparency false in
 /-- The two maps out of the raw completed coefficient ring agree before passing to
 module categories. This is a statement only about coefficient ring sheaves.
-
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-condensed-integral-coefficient-square).
-
-Proof in words: first compare the finite quotient identifications. Both the raw
-integral identity and the continuous realization fix every constant section, so their
-maps from the constant finite coefficient sheaf agree by sheafification. Compose with
-every inverse-limit projection. The integral residue equations for the continuous
-realization and C identify both projections with the same residue of a continuous
-integral function. Joint monicity of the limit projections identifies the completed
-maps. The two integral-to-rational inclusions agree pointwise by their normalizations.
-Finally the finiteIso normalization identifies each finite-field function under the
-fixed Shrink equivalence. The closure leg normalization, globalCoefficientIso_fac and
-the native comparison send that function to its actual embedding in PadicAlgCl;
-C.rationalInclusion_normalized specifies precisely this embedding. These identities
-compose to the asserted equality. Empty site objects have the same unique maps.
 -/
 theorem finiteCondensedIntegralCoefficientSquare (A : FiniteCondensedData l X)
     (E : Index l (PadicAlgCl l))

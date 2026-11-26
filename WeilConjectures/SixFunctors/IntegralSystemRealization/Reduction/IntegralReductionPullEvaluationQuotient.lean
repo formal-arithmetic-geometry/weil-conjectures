@@ -7,7 +7,12 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.IntegralSystemCanonicalBridge
 public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 
-/-! # Finite scalar pullback in the canonical quotient coordinates -/
+/-! # Finite scalar pullback in the canonical quotient coordinates
+
+## References
+
+* [Stacks, Tag 07A6]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -62,8 +67,7 @@ private theorem evaluation_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) (n : �
             (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj C)) := by
   exact (pullbackTensorDerivedEvaluation_existsUnique l E f n).exists.choose_spec C
 
-/-- Transport of derived evaluation to the ordinary quotient model.
-Source: Stacks Tag 07A6 (blueprint: lem-sf-integral-reduction-pull-evaluation-quotient). -/
+/-- Transport of derived evaluation to the ordinary quotient model. -/
 theorem integralReductionPullEvaluationQuotient {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     letI := sfIntrinsicPullback_additive (finiteCoefficientRing l E (n + 1)) f

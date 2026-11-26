@@ -31,18 +31,22 @@ canonical maps
   (`AlgebraicGeometry.Etale.rightDerivedUpperShriekTensorMap`)
 
 are isomorphisms for all `N` and `M` (`AlgebraicGeometry.Etale.isExceptionalKunneth`). Together
-they identify `Rh^!(N ⊠ M)` with `Rg^! N ⊠ M`, the exceptional Künneth formula
-(`proposition-exceptional-external-kunneth--1`).
+they identify `Rh^!(N ⊠ M)` with `Rg^! N ⊠ M`, the exceptional Künneth formula.
 
-Following the blueprint proof, the property (`AlgebraicGeometry.Etale.IsExceptionalKunneth`)
-holds for smooth morphisms, by smooth duality
-(`proposition-exceptional-inverse-image-smooth-morphism`) and its base change
-(`proposition-exceptional-inverse-image-smooth-morphism--6`), and for closed immersions, by
+## Implementation details
+
+The property (`AlgebraicGeometry.Etale.IsExceptionalKunneth`) holds for smooth morphisms, by
+smooth duality and its base change, and for closed immersions, by
 localization (`WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.ClosedImmersion`); it
 is stable under composition, by the composition laws of the canonical maps, and local on the source
 for open covers, by the étale locality of the canonical maps. Locally on the source, every `g`
 factors as a closed immersion into an affine space over an affine open of `S`, followed by the
-projection and the open immersion.
+projection and the open immersion. For open covers, the canonical maps of `u_i ≫ g` determine
+`Ru_i^!`, hence `Lu_i^*`, of those of `g`, and isomorphisms descend along the family.
+
+For smooth morphisms the base `S` is only assumed quasi-separated, as in
+`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`,
+rather than of finite type over `k`.
 
 ## Main definitions
 
@@ -191,7 +195,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
 
 include d in
 /-- For a smooth `f` of relative dimension `d`, the canonical map `θ_f` is an isomorphism at every
-object (`proposition-exceptional-inverse-image-smooth-morphism`). -/
+object. -/
 lemma isIso_dualizingComplexTensorMapOfIsIso_of_smoothOfRelativeDimension
     (P : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (dualizingComplexTensorMap Λ f P) := by
@@ -199,8 +203,7 @@ lemma isIso_dualizingComplexTensorMapOfIsIso_of_smoothOfRelativeDimension
   exact h P
 
 include d in
-/-- For a smooth `f` of relative dimension `d`, the dualizing complex `ω_f` is invertible
-(`proposition-exceptional-inverse-image-smooth-morphism`). -/
+/-- For a smooth `f` of relative dimension `d`, the dualizing complex `ω_f` is invertible. -/
 lemma isInvertible_dualizingComplex_of_smoothOfRelativeDimension :
     DerivedCategory.isInvertible Λ X (dualizingComplex Λ f) := by
   obtain ⟨L, hL₁, hL, ⟨e⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
@@ -236,12 +239,7 @@ lemma IsExceptionalKunneth.of_eq {T S : Scheme.{u}} {g g' : T ⟶ S} [HasCompact
 
 variable (Λ k) [HasInvertibleExponent Λ (Spec (.of k))]
 
-/-- **Smooth morphisms** satisfy the exceptional Künneth formula: the base change map is invertible
-by `proposition-exceptional-inverse-image-smooth-morphism--6`, and the tensor maps of the smooth
-base change `h` are invertible since `θ_h` is
-(`proposition-exceptional-inverse-image-smooth-morphism`). The base `S` is quasi-separated, as in
-`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`
-(it is of finite type over `k` in the blueprint). -/
+/-- **Smooth morphisms** satisfy the exceptional Künneth formula. -/
 theorem isExceptionalKunneth_of_smoothOfRelativeDimension {T S : Scheme.{u}}
     [QuasiSeparatedSpace S] (g : T ⟶ S) [HasCompactification g] (d : ℕ)
     [SmoothOfRelativeDimension d g] :
@@ -258,10 +256,7 @@ theorem isExceptionalKunneth_of_smoothOfRelativeDimension {T S : Scheme.{u}}
       (isIso_lowerShriekRightAdjointTensorMap_of_forall _ (projectionMapAssociativity Λ h)
         (isIso_dualizingComplexTensorMapOfIsIso_of_smoothOfRelativeDimension Λ h d) _ _)
 
-/-- **Closed immersions** satisfy the exceptional Künneth formula
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isClosedImmersion`,
-`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekTensorMap_pullback_of_isClosedImmersion`).
--/
+/-- **Closed immersions** satisfy the exceptional Künneth formula. -/
 theorem isExceptionalKunneth_of_isClosedImmersion {T S : Scheme.{u}} (i : T ⟶ S)
     [IsClosedImmersion i] : IsExceptionalKunneth Λ k i := by
   intro W P Q b c _ _ _ _ q r sqP q' h sq _ _
@@ -270,10 +265,7 @@ theorem isExceptionalKunneth_of_isClosedImmersion {T S : Scheme.{u}} (i : T ⟶ 
       (isIso_rightDerivedUpperShriekTensorMap_pullback_of_isClosedImmersion Λ b c sqP i sq N M)⟩
 
 omit [HasInvertibleExponent Λ (Spec (.of k))] in
-/-- **Composition.** The exceptional Künneth property is stable under composition, by the
-composition laws of the base change maps
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff`) and of the
-tensor maps (`AlgebraicGeometry.Etale.isIso_lowerShriekRightAdjointTensorMap_comp`). -/
+/-- **Composition.** The exceptional Künneth property is stable under composition. -/
 theorem IsExceptionalKunneth.comp {T T₂ S : Scheme.{u}} (g₁ : T ⟶ T₂) (g₂ : T₂ ⟶ S)
     [HasCompactification g₁] [HasCompactification g₂] [HasCompactification (g₁ ≫ g₂)]
     [QuasiCompact g₁] [QuasiCompact g₂] (hg₁ : IsExceptionalKunneth Λ k g₁)
@@ -319,8 +311,7 @@ theorem IsExceptionalKunneth.comp {T T₂ S : Scheme.{u}} (g₁ : T ⟶ T₂) (g
 
 /-- **Locality on the source.** If `u_i : U_i ⟶ T` is a jointly surjective family of
 quasi-compact open immersions and every `u_i ≫ g` satisfies the exceptional Künneth formula,
-then so does `g`: through the composition laws, the canonical maps of `u_i ≫ g` determine
-`Ru_i^!`, hence `Lu_i^*`, of those of `g`, and isomorphisms descend along the family. -/
+then so does `g`. -/
 theorem IsExceptionalKunneth.of_jointlySurjective {T S : Scheme.{u}} (g : T ⟶ S)
     [HasCompactification g] [QuasiCompact g] {ι : Type u} {U : ι → Scheme.{u}} (u : ∀ i, U i ⟶ T)
     [∀ i, IsOpenImmersion (u i)] [∀ i, QuasiCompact (u i)] [∀ i, HasCompactification (u i ≫ g)]
@@ -388,9 +379,7 @@ lemma exists_isClosedImmersion_affineSpace {X Y : Scheme.{u}} [IsAffine X] [IsAf
 
 /-- **The exceptional Künneth formula.** Every quasi-compact morphism `g : T ⟶ S` admitting a
 compactification, with `S` of finite type over `k`, satisfies the exceptional Künneth formula
-(`AlgebraicGeometry.Etale.IsExceptionalKunneth`): locally on `T`, `g` is a closed immersion into
-an affine space over an affine open `V` of `S`, followed by the projection and the open
-immersion of `V`. -/
+(`AlgebraicGeometry.Etale.IsExceptionalKunneth`). -/
 theorem isExceptionalKunneth {T S : Scheme.{u}} (g : T ⟶ S) [HasCompactification g]
     [QuasiCompact g] (b : S ⟶ Spec (.of k)) [LocallyOfFiniteType b] [QuasiCompact b] :
     IsExceptionalKunneth Λ k g := by

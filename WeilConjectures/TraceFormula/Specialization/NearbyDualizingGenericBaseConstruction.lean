@@ -13,7 +13,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyCompactSupportEx
 # The dualizing maps of nearby cycles over a generic base
 
 For a trait model `N` of `Y` over the generic base `(F, ι : η ⟶ Spec F)`, the dualizing map
-`θ_N : Ψ_N ω_Y ⟶ ω_{Y'}` (blueprint `prose-E-15` (5)) is the exceptional adjoint of
+`θ_N : Ψ_N ω_Y ⟶ ω_{Y'}` is the exceptional adjoint of
 the compact-support exchange `ν_a : Ra'_! Ψ_N ⟶ Ψ_S Ra_!` of the structure morphism, for the trait
 as a model of the point `Spec F` along `ε₀ = (Spec Ω ⟶ η ⟶ Spec F)`, read through its
 specialization unit (`NearbyCyclesModel.IsTraitModelOfGenericBase.dualizingMap`, an instance of
@@ -62,8 +62,8 @@ variable {Y : Over (Spec (.of F))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.h
   [QuasiCompact Y'.hom] [IsSeparated Y'.hom] {N : NearbyCyclesModel Y.left Y'.left}
   {q : N.total ⟶ trait k'} {g : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
-/-- **The dualizing map of a trait model over a generic base** (blueprint
-`prose-E-15` (5)): `θ_N = β_a(ℚ̄_ℓ) : Ψ_N ω_Y ⟶ ω_{Y'}`, the exceptional adjoint of
+/-- **The dualizing map of a trait model over a generic base**:
+`θ_N = β_a(ℚ̄_ℓ) : Ψ_N ω_Y ⟶ ω_{Y'}`, the exceptional adjoint of
 the compact-support exchange `ν_a`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.compactSupportExchange`), read through the
 specialization unit `σ : ℚ̄_ℓ ≅ Ψ_S ℚ̄_ℓ` of the trait as a model of the point `Spec F` along
@@ -77,8 +77,7 @@ noncomputable def dualizingMap (h : N.IsTraitModelOfGenericBase Y ι q g) :
 -- matching the objects `ω_Y` and `Ra^! ℚ̄_ℓ` of the two sides unfolds the monoidal units
 /-- **The dualizing map of a proper model over a generic base is compatible with the traces**:
 `tr_{Y'} ∘ Ra'_*(θ_N) ∘ χ_a(ω_Y) = σ⁻¹ ∘ Ψ_S(tr_Y)` for `ε₀ = (Spec Ω ⟶ η ⟶ Spec F)`, `q`
-proper and geometric generic fibre all of `Y ×_F Spec Ω` (then `χ_a` is invertible, and
-`ν_a = χ_a⁻¹` under `Ra_! ≅ Ra_*`). -/
+proper and geometric generic fibre all of `Y ×_F Spec Ω`. -/
 theorem pushforwardExchange_app_comp_map_dualizingMap_comp_trace
     [IsProper (CondensedRing.toPoint Y).left] [IsProper (CondensedRing.toPoint Y').left]
     (h : N.IsTraitModelOfGenericBase Y ι q g) [IsProper q]

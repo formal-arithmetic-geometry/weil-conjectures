@@ -12,7 +12,10 @@ import all WeilConjectures.SmoothPurity.Coefficient.CoefficientEvaluationTensorN
 /-! # Extensionality through the intrinsic finite inverse-image adjunction
 
 Maps from pulled-back evaluated total tensors are determined by the units of pure generators.
-Source: Stacks Tags 07A4 and 03D2.
+
+## References
+
+* [Stacks: Tags 03D2, 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -36,15 +39,7 @@ attribute [local instance] sfIntrinsicPullback_additive
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Maps out of an intrinsic pulled-back total tensor are determined by unit pure tensors.
-Source: Stacks Tag 07A4, total-complex pure generators, and Tag 03D2, adjunction
-(blueprint: lem-pur-finite-pullback-tensor-unit-ext).
-Proof: apply degreewise extensionality. Transpose each degree through the intrinsic
-inverse-image adjunction. Its transpose is the original map preceded by the unit.
-The summand inclusions and sheaf pure-tensor generators jointly determine maps
-from the total tensor. Lift finite sections through the surjective evaluation
-section transports, so the assumed equalities identify these transposes.
--/
+/-- Maps out of an intrinsic pulled-back total tensor are determined by unit pure tensors. -/
 theorem finitePullbackTensor_unit_ext {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)
     (H : CochainComplex (normalizedDVRModules l E X n) ℤ)

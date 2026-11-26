@@ -254,15 +254,7 @@ private theorem model_square_to_components
   rw [hx, hy]
   exact h
 
-/-- The finite representative yields the square on included objects.
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-common-projection-inclusion-pullback-tensor-square).
-Proof: apply the stage-morphism coherence law to the change-of-stage isomorphism.
-The representative formula then identifies the two composites between the finite
-models of the common tensors. Rational pullback/tensor naturality moves the two
-source coefficient-unit maps through the rational comparison. The coefficient-unit
-identity identifies their pullbacks with the two target coefficient-unit maps.
-Cancel the tensor-model isomorphisms to obtain the displayed square. -/
+/-- The finite representative yields the square on included objects. -/
 theorem commonProjectionInclusionPullbackTensorSquare
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

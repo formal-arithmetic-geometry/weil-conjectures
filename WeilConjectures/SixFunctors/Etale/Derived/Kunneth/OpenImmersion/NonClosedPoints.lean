@@ -17,16 +17,18 @@ public import WeilConjectures.AlgebraicGeometry.ClosedPointsFiberProduct
 # Base change along open immersions at non-closed points
 
 This file contains the two "stalks over points with positive transcendence degree" steps of the
-proof of blueprint `corollary-open-direct-image-over-field--2`: if the statement holds for all data
-with smaller `dim X + dim Y`, then the base change map is an isomorphism on the geometric stalk at
-every point `z ∈ X ×_K Y` whose image in `X` (resp. in `Y`) is not closed. The proof base changes
-the square to the strict henselization `X' = Spec O^{sh}_{X,x}` (resp. `Y' = Spec O^{sh}_{Y,y}`),
-a limit of étale `X`-schemes (smooth base change in the limit form, blueprint
-`corollary-open-direct-image-over-field--2`), writes it as a limit of affine schemes of finite type
-and smaller dimension over a separably closed field `L` (blueprint
-`corollary-open-direct-image-over-field--2`), and passes to the limit (blueprint
-`corollary-open-direct-image-over-field--2`, with `corollary-open-direct-image-over-field--2` for
-the open `U`).
+proof of base change for open immersions along a product projection: if the statement holds for
+all data with smaller `dim X + dim Y`, then the base change map is an isomorphism on the
+geometric stalk at every point `z ∈ X ×_K Y` whose image in `X` (resp. in `Y`) is not closed.
+
+## Implementation details
+
+The proof base changes the square to the strict henselization `X' = Spec O^{sh}_{X,x}` (resp.
+`Y' = Spec O^{sh}_{Y,y}`), a limit of étale `X`-schemes (smooth base change in the limit form),
+writes it as a limit of affine schemes of finite type and smaller dimension over a separably
+closed field `L`, and passes to the limit. The case of a non-closed image in `Y` also uses base
+change along the field extension `K ⊆ L`. A point of `X ×_K Y` is closed if and only if both of
+its images are closed, so the two steps cover all non-closed points.
 -/
 
 @[expose] public section
@@ -83,10 +85,9 @@ lemma isTorsionSheafOfInvertibleOrder_of_field {K : Type u} [Field K] {X T : Sch
     ?_ F
   simpa using ((isUnit_natCast_Γ_spec_iff (K := K) n).2 hn0).map a.appTop.hom
 
-/-- Proof of blueprint `corollary-open-direct-image-over-field--2`, stalks at points `z` whose image
-`x` in `X` is not closed (so that `trdeg_K κ(x) > 0`): if
-`corollary-open-direct-image-over-field--2` holds for all data with smaller `dim X + dim Y`, the
-base change map is an isomorphism on the geometric stalk at `z`. -/
+/-- Stalks at points `z` whose image `x` in `X` is not closed (so that `trdeg_K κ(x) > 0`): if
+base change for open immersions along the projection holds for all data with smaller
+`dim X + dim Y`, the base change map is an isomorphism on the geometric stalk at `z`. -/
 theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_of_not_isClosed_fst {K : Type u} [Field K]
     {X U Y W V : Scheme.{u}} (aX : X ⟶ Spec (.of K)) (aY : Y ⟶ Spec (.of K))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
@@ -125,7 +126,7 @@ theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_of_not_isClosed_fst {K : Ty
     have H := bX.paste_horiz sq
     rw [← he, hX'W] at H
     exact IsPullback.of_right H (pullback.lift_snd _ _ _) bT
-  -- the side faces satisfy base change (blueprint `corollary-open-direct-image-over-field--2`)
+  -- the side faces satisfy base change
   have hT : IsIso (Etale.baseChangeHomologyMap Λ bT i F) := by
     have := isTorsionSheafOfInvertibleOrder_of_field Λ aX n hn hΛ F
     exact Etale.isIso_baseChangeHomologyMap_of_isPullback_strictLocalization Λ s (𝟙 X) t (𝟙 _)
@@ -169,11 +170,9 @@ theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_of_not_isClosed_fst {K : Ty
       (spec_map_strictHenselizationEval_comp_strictLocalizationToBase s).symm
   exact Etale.isIso_sheafFiber_map_of_isIso_upperStar Λ uX _ key z zb' (pullback.lift_fst _ _ _)
 
-/-- Proof of blueprint `corollary-open-direct-image-over-field--2`, stalks at points `z` whose image
-`y` in `Y` is not closed (so that `trdeg_K κ(y) > 0`): if
-`corollary-open-direct-image-over-field--2` holds for all data with smaller `dim X + dim Y`, the
-base change map is an isomorphism on the geometric stalk at `z`. This step also uses the base change
-along the field extension `K ⊆ L` (blueprint `corollary-open-direct-image-over-field--2`). -/
+/-- Stalks at points `z` whose image `y` in `Y` is not closed (so that `trdeg_K κ(y) > 0`): if
+base change for open immersions along the projection holds for all data with smaller
+`dim X + dim Y`, the base change map is an isomorphism on the geometric stalk at `z`. -/
 theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_of_not_isClosed_snd {K : Type u} [Field K]
     {X U Y W V : Scheme.{u}} (aX : X ⟶ Spec (.of K)) (aY : Y ⟶ Spec (.of K))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
@@ -218,13 +217,12 @@ theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_of_not_isClosed_snd {K : Ty
     have H := bX.paste_horiz sq
     rw [← he, ← hp] at H
     exact IsPullback.of_right H (pullback.lift_snd _ _ _) bT
-  -- base change along the field extension (blueprint `corollary-open-direct-image-over-field--2`)
+  -- base change along the field extension
   have hT : IsIso (Etale.baseChangeHomologyMap Λ bT i F) := by
     have := isTorsionSheafOfInvertibleOrder_of_field Λ (𝟙 (Spec (.of K))) n hn hΛ F
     exact Etale.isIso_baseChangeHomologyMap_of_fieldExtension Λ aX j pX aXL
       (IsPullback.of_hasPullback aX κ) bT i F
-  -- base change along the strict localization (blueprint
-  -- `corollary-open-direct-image-over-field--2`)
+  -- base change along the strict localization
   have hX : IsIso (Etale.baseChangeHomologyMap Λ bX i (((e)^*[ModuleCat.{u + 1} Λ]).obj F)) := by
     have := isTorsionSheafOfInvertibleOrder_of_field Λ (q₁ ≫ aX) n hn hΛ
       (((e)^*[ModuleCat.{u + 1} Λ]).obj F)
@@ -259,11 +257,9 @@ theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_of_not_isClosed_snd {K : Ty
   exact Etale.isIso_sheafFiber_map_of_isIso_upperStar Λ uX _ key z zb' (pullback.lift_fst _ _ _)
 
 variable {Λ} in
-/-- Proof of blueprint `corollary-open-direct-image-over-field--2`, stalks at non-closed points: a
-point of `X ×_K Y` is closed if and only if both of its images are closed (blueprint
-`corollary-open-direct-image-over-field--2`), so the two previous steps give the isomorphism on the
-geometric stalks at all non-closed points, as soon as `corollary-open-direct-image-over-field--2`
-holds for all data with smaller `dim X + dim Y`. -/
+/-- Stalks at non-closed points: if base change for open immersions along the projection holds
+for all data with smaller `dim X + dim Y`, the base change maps are isomorphisms on the
+geometric stalks at all non-closed points of `X ×_K Y`. -/
 theorem Etale.openImmersionBaseChangeAtNonClosed_of_below {N : WithBot ℕ∞}
     (H : Etale.OpenImmersionBaseChangeBelow Λ N) :
     Etale.OpenImmersionBaseChangeAtNonClosed Λ N := by

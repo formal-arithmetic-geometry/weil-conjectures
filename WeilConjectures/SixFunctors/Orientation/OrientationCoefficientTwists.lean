@@ -26,10 +26,9 @@ import Mathlib.Data.Nat.Prime.Infinite
 
 /-! # Canonical positive coefficient-line comparisons
 
-Source: main-20261015, definition-tate-twists, completed tensor and
-scheme pullback conventions (blueprint: def-sf-orientation-scalar-line-comparisons).
-The original coefficient lines are reexported. Their normalized inverse-image
-maps are supplied for arbitrary scheme morphisms, as required by orientations.
+This file reexports the original coefficient lines (Tate twists). Their normalized
+inverse-image maps are supplied for arbitrary scheme morphisms, as required by
+orientations.
 -/
 
 @[expose] public noncomputable section

@@ -110,8 +110,16 @@ import WeilConjectures.SixFunctors.CoefSupportOpenTensor.NativeOpenTensorOrdinar
 
 /-! # The ordinary counit for native open tensor support
 
-Source: Stacks, Modules on Sites, Tag 0E8I.
-(blueprint: lem-coef-native-open-tensor-ordinary-counit).
+The projection-formula counit is invertible for an ordinary tensor with a native open extension.
+
+## Implementation details
+
+The localized extension/tensor construction gives an inverse on the direct-sum generators, and
+the same inverse descends through the coefficient quotients.
+
+## References
+
+* [Stacks, Tag 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -153,11 +161,7 @@ private theorem coefficientSequence_evaluations_reflect_iso
 
 /--
 The projection-formula counit is invertible for an ordinary tensor with a native
-open extension. This is the categorical core of the support argument: the
-localized extension/tensor construction gives an inverse on the direct-sum
-generators, and the same inverse descends through coefficient quotients.
-Source: Stacks, sites-modules.tex, Tag 0E8I, lemma-j-shriek-and-tensor.
-(blueprint: lem-coef-native-open-tensor-ordinary-counit).
+open extension.
 -/
 theorem nativeOpenTensor_ordinary_counit_isIso {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j]

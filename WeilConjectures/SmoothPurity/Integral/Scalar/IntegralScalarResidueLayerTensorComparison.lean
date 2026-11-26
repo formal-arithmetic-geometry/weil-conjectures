@@ -32,10 +32,9 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # The balanced tensor comparison for a uniformizer layer
 
-Source: the first two sentences of the residue-layer argument of
-lem-sf-integral-scalar-residue-layer-constructible; Stacks, Modules on Sites,
-Tag 03EK, and Mathlib's Ideal.quotEquivPowQuotPowSucc.
-(blueprint: lem-sf-integral-scalar-residue-layer-tensor-comparison).
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EK
 -/
 
 @[expose] public noncomputable section
@@ -134,36 +133,7 @@ end TensorComparison
 /-- A uniformizer layer computes scalar extension of the source residue complex,
 with the target finite-quotient action restricted along reduction to its residue field.
 This is a comparison in the derived category, with no constructibility or boundedness
-hypothesis and no choice of a local model.
-
-Source: parent residue-layer argument, the identification of successive powers and
-balanced tensor associativity; Stacks Tag 03EK; Mathlib
-Ideal.quotEquivPowQuotPowSucc.
-(blueprint: lem-sf-integral-scalar-residue-layer-tensor-comparison).
-
-Proof: write O for the target valuation ring, pi for its uniformizer and N=n+1.
-Multiplication by pi^j identifies O/(pi) with (pi^j)/(pi^(j+1)) for j<N:
-it is surjective by divisibility by pi^j; if pi^j*a lies in (pi^(j+1)),
-cancel the nonzero pi^j in the domain O to conclude a lies in (pi).
-Since (pi^N) is contained in (pi^(j+1)), quotienting first by (pi^N)
-gives the same layer. Lift this linear isomorphism through ULift. Its action
-by B=O/(pi^N) is the residue action via q:B->O/(pi).
-The source integer inclusion carries its maximal ideal into (pi), so its action
-on this layer factors through the source residue field; the induced homomorphism
-is integralScalarQuotientMap at level zero. Its compatibility with the completed
-projection follows from the quotient-map transition equations and the limit
-projection equations. Write lambda for the layer isomorphism and f for the source
-residue map. The balanced map sends (b tensor p) tensor v to
-(q(b)*lambda(v)) tensor (1 tensor p). Its inverse sends
-c tensor (a tensor p) to (1 tensor p) tensor lambda^(-1)(c*f(a)). These identify
-the layer tensor with restriction of target residue extension of source reduction.
-The formulas respect the source balancing relations, the B-action, and restrictions;
-therefore they descend through sheafification. They are inverse on tensor generators,
-and naturality in p makes them commute with every differential. The ordinary source
-reduction functor has exactly these tensor objects and maps by its defining witness.
-Localizing the resulting complex isomorphism gives the displayed derived isomorphism.
-For j=0 this is the usual residue quotient; for n=0 it is the regular residue layer.
-The construction is valid for zero complexes and for the empty scheme. -/
+hypothesis and no choice of a local model. -/
 theorem integralScalarResidueLayerTensorComparison
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

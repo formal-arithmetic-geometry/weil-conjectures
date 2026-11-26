@@ -26,9 +26,21 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 
 /-! # Finite coefficient comparisons for compact support
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 03DI, 03DJ, 07A4, 0941.
-This module specializes the ordinary system calculus to the actual pro-etale functors.
-(blueprint: lem-trf-compact-support-finite-coefficient-presentation).
+Finite-coefficient restriction commutes with the actual direct image. This module specializes
+the ordinary system calculus to the actual pro-étale functors.
+
+## Implementation details
+
+On sections the comparison of direct images is the identity, by naturality of the
+constant-section structure maps in the quotient ring. On coefficient-sized small models of the
+sites, the ringed-topos coefficient-acyclicity theorem shows that restricting a K-injective
+complex gives a direct-image-acyclic complex; naturality of the derived unit then gives the
+derived normalization. No preservation of K-injectivity by restriction is needed.
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10.
+* Stacks Project, Tags 03D2, 03DA, 03DI, 03DJ, 07A4 and 0941
 -/
 
 @[expose] public noncomputable section
@@ -456,20 +468,7 @@ private theorem finiteRestriction_acyclic
 
 /-- Finite-coefficient restriction commutes with the actual direct image, with its
 ordinary section and arbitrary-resolution normalizations. This assertion involves
-neither strict systems nor an open immersion.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03D2, 03DA and 07A4
-(blueprint: lem-trf-compact-support-finite-coefficient-presentation).
-Proof: the constant-section structure maps for p are natural in the quotient ring.
-Apply this naturality to B_m → B_n. Restriction of scalars changes only the action,
-so the comparison of sectionwise direct images is the identity on every section.
-Transport the module sheaves to the coefficient-sized small models of the sites.
-There the ringed-topos coefficient-acyclicity theorem shows that restricting a
-K-injective complex gives a direct-image-acyclic complex. Exact module equivalences
-and naturality of the derived unit transport this assertion back to the original
-sites. Apply the normalized derived-square construction to the ordinary comparison.
-For a K-injective J and any K-injective resolution r of its coefficient restriction,
-naturality of the derived unit at r and cancellation give the displayed equality.
-This argument needs no preservation of K-injectivity by restriction and includes n=m. -/
+neither strict systems nor an open immersion. -/
 theorem compactSupportFiniteCoefficientPresentation
     {Z Y : Scheme.{t}} (p : Z ⟶ Y)
     [∀ n : ℕ, (compactSupportLevelDirectImage l E p n).Additive]

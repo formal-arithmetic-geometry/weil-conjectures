@@ -14,8 +14,11 @@ import Mathlib.CategoryTheory.Localization.Prod
 
 /-! # Native comparison part of the native ringed derived square
 
-Source: Stacks 06YU, 0FPT; blueprint steps 2--3 of
-`lem-sf-native-weil-tensor-ringed-derived-square`.
+This file constructs the native comparison part of the native ringed derived tensor square.
+
+## References
+
+* Stacks Project, Tags 06YU and 0FPT.
 -/
 
 @[expose] public section
@@ -204,25 +207,7 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 -- Specializing product localization compares large dependent functor types.
 -- Local irreducibility above avoids expanding the tensor-model implementations.
 /-- The specified one-K-flat models determine a derived tensor-forgetting comparison
-with the full representative square, including both exact-functor factorization maps.
-The argument uses representative naturality and product localization.
-
-Source: Stacks 06YU; the representative-square step of native tensor transport.
-(blueprint: lem-sf-native-weil-tensor-ringed-derived-square-comparison).
-
-Proof: identify the supplied chain comparison with the canonical bifunctor comparison
-on each total summand; its naturality follows. Restrict the two derived bifunctors
-to pairs (Q,P), with Q arbitrary and P native K-flat. Compose the native model,
-exact-forgetting factorization, chain comparison, inverse ordinary model and inverse
-factorizations on Q and P. The model naturality equations make this a natural
-isomorphism on representatives. The product of derived localization in Q and the
-supplied native K-flat localization in P is a localization. Its fully faithful
-restriction of functor categories lifts this isomorphism. The preimage equation
-and cancellation of the ordinary model and factor isomorphisms give the square.
-Faithfulness of the same restriction and cancellation of the two isomorphisms
-on the right of the square also give uniqueness. All comparisons are explicit;
-no resolution or arbitrary existential witness is chosen.
-The argument applies to unbounded and zero complexes and empty sites. -/
+with the full representative square, including both exact-functor factorization maps. -/
 theorem native_weil_tensor_ringed_derived_square_comparison
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

@@ -15,8 +15,12 @@ import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 /-! # Invertibility of discrete integral tensor transport
 
-Source: Stacks Project, `sites-modules.tex`, Tags 03EK and 03EL.
-(blueprint: new-weil-frobenius-integral-discrete-transport-invertible).
+The discrete scalar-extension comparison for integral Tate-twist coefficients along an
+isomorphism of schemes is invertible (`frobeniusIntegralDiscreteTransport_isIso`).
+
+## References
+
+* [Stacks: Tags 03EK, 03EL]
 -/
 
 @[expose] public noncomputable section
@@ -228,24 +232,7 @@ private theorem constantDirect_isIso
   rw [h]
   infer_instance
 
-/-- Invertibility of the discrete scalar-extension comparison.
-
-Source: Stacks Project, `sites-modules.tex`, Tag 03EL, and the inverse-image site
-comparison for a scheme isomorphism.
-Proof: the adjunction unit and the direct image of r are isomorphisms, so
-its adjunct on the root limit is invertible. The constant Z_l and O_E comparisons
-are invertible for the same reason. Their component ring and semilinear module
-maps induce a bijective map of sectionwise tensor products by TensorProduct.congr.
-Naturality holds on pure tensors and then by tensor induction. The sheafification
-unit on X is locally bijective, and precomposition by the cocontinuous base-change
-site equivalence preserves local bijectivity. The given formula identifies the
-composite of the sheafification unit on Y with phi with the raw tensor isomorphism
-followed by this precomposed unit. Both unit maps and the raw tensor map belong to
-the sheafification equivalences W. Their two-out-of-three property puts phi in W;
-a map between sheaves in W is an isomorphism. This argument also covers zero
-section rings and the empty scheme. The construction and scalar compatibility
-of phi are separate from this invertibility assertion.
-(blueprint: new-weil-frobenius-integral-discrete-transport-invertible). -/
+/-- Invertibility of the discrete scalar-extension comparison. -/
 theorem frobeniusIntegralDiscreteTransport_isIso
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

@@ -63,8 +63,7 @@ noncomputable def freeSheafTerminalIso (W : Scheme.{u}) :
 /-- **Free representable sheaves of modules are étale extensions by zero**: for an object `W`
 of the small étale site of `X`, the free sheaf `Λ[W]`, the sheafification of the presheaf
 `V ↦ Λ^{(Hom_X(V, W))}` with restriction by precomposition, is isomorphic to the extension by
-zero `j_{W!} Λ_W` along `j_W : W ⟶ X` of the constant rank-one sheaf `Λ_W` on `W_ét`.
-(blueprint: `lem-weil-pbc-free-etale-module-shriek-comparison`) -/
+zero `j_{W!} Λ_W` along `j_W : W ⟶ X` of the constant rank-one sheaf `Λ_W` on `W_ét`. -/
 noncomputable def freeSheafIsoEtaleLowerShriekConstantSheaf {X : Scheme.{u}} (W : X.Etale) :
     (Etale.freeSheaf Λ X).obj W ≅
       (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) W.hom W.prop).obj

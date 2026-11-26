@@ -18,8 +18,12 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingRoosCompariso
 
 /-! # Descent of the normalized open Roos comparison
 
-Source: Stacks Project, proetale.tex, Tag 099N (2),(5), and Tag 0941.
-(blueprint: lem-sf-open-roos-restriction-descent).
+We show that the strict open restriction comparison descends to the completion and its
+quotient-augmentation unit.
+
+## References
+
+* Stacks Project, Tags 099N (2),(5), 0941, 03DJ, 0G7E and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -96,16 +100,14 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {V W : Scheme.{t}} (e : V ⟶ W) [IsOpenImmersion e]
   (o : IntegralOpenReduction.Operations l E e)
 
-/-- Exactness inherited from the actual ordinary right adjunction.
-Source: Stacks 03DJ (blueprint: lem-sf-open-roos-restriction-descent). -/
+/-- Exactness inherited from the actual ordinary right adjunction. -/
 local instance descentRestrictionLimits :
     PreservesFiniteLimits (IntegralOpenReduction.restriction l E e o) := by
   let : PreservesLimitsOfSize.{0, 0} (IntegralOpenReduction.restriction l E e o) :=
     (IntegralOpenReduction.ordinaryAdjunction l E e o).rightAdjoint_preservesLimits
   infer_instance
 
-/-- Exactness inherited from slice restriction and the coefficient equivalence.
-Source: Stacks 03DJ (blueprint: lem-sf-open-roos-restriction-descent). -/
+/-- Exactness inherited from slice restriction and the coefficient equivalence. -/
 local instance descentRestrictionColimits :
     PreservesFiniteColimits (IntegralOpenReduction.restriction l E e o) := by
   let hL : PreservesFiniteColimits (SheafOfModules.localizedSystemRestriction.{t+1, t,
@@ -127,25 +129,7 @@ private theorem completionUnit_normalization (X : Scheme.{t})
   exact (IntegralOnSlice.completionUnit_existsUnique l E X none).exists.choose_spec P
 
 /-- The strict restriction comparison descends to the published completion and its
-actual quotient-augmentation unit, for any normalized presentation of open operations.
-
-Source: Stacks Project, Tag 099N (2),(5), Tag 0941; the strict tensor comparison of
-Tags 0G7E and 07A4 (blueprint: lem-sf-open-roos-restriction-descent).
-
-Proof: the finite and completed coefficient maps are the canonical slice
-isomorphisms by their normalization equalities, and naturality of systemMap gives
-the finite transition square. Restriction preserves the uniformizer endomorphism
-and its cokernel. The unique cokernel comparisons therefore identify the ordinary
-quotient towers with their actual quotient augmentations. Restriction is a right
-adjoint, so it preserves countable products and the specified scalarRoosMap is
-invertible. Compose this map with the published completionComparison on good
-representatives to obtain c. The tower isomorphism and the good-representative
-comparison on V then give the full completion comparison. Fully faithful
-whiskering along qGood descends it to derived objects. The generic augmented Roos
-map lemma identifies the first coordinates with the quotient units and the shifted
-coordinates with zero. The completionUnit normalization gives the unit square on
-good representatives, and faithfulness gives it on all derived objects. All maps
-are determined by these normalizations, including for the empty open. -/
+actual quotient-augmentation unit, for any normalized presentation of open operations. -/
 theorem restrictionDescent
     (_d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))
     (_hd : _d.ideal = Ideal.span {Padic.coefficientExtensionUniformizer l E}) :

@@ -8,7 +8,17 @@ public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 import WeilConjectures.SmoothPurity.Supporting.NaturalCoherentTensorLevel
 import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
 
-/-! # The natural coherent tensor Roos comparison -/
+/-! # The natural coherent tensor Roos comparison
+
+## Implementation details
+
+The entire natural isomorphism is constructed directly, without invoking detection by
+finite projections.
+
+## References
+
+* Stacks Project, Tags 06YU, 08TC and 0941.
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option linter.all false
@@ -29,13 +39,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] coefficientTotalTensor pullbackTensorCalculus
 
-/-- Combine coherent reduction, the K-flat tensor model and a strict tower comparison.
-Source: Stacks 06YU, 08TC, 0941
-(blueprint: def-pur-coherent-tensor-roos-comparison).
-The product reduction model is followed by the inverse K-flat tensor model,
-exact scalar restriction and the full Roos comparison. Whiskering the supplied
-strict tower isomorphism gives the last factor. This constructs the entire natural
-isomorphism, without invoking detection by finite projections. -/
+/-- Combine coherent reduction, the K-flat tensor model and a strict tower comparison:
+the product reduction model, followed by the inverse K-flat tensor model, exact scalar
+restriction, the full Roos comparison and the whiskered strict tower isomorphism. -/
 def pullbackTensorCoherentTensorRoosComparison (W : Scheme.{u})
     (hR : ∀ P : (integralOperationsGoodComplex l E W).FullSubcategory,
       @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
@@ -97,12 +103,7 @@ def pullbackTensorCoherentTensorRoosComparison (W : Scheme.{u})
   refine c ≪≫ ?_
   exact d
 
-/-- The constructed natural comparison has its prescribed full Roos component.
-Source: Stacks 06YU, 08TC, 0941
-(blueprint: def-pur-coherent-tensor-roos-comparison).
-Proof: evaluate the four whiskered natural isomorphisms. Their component formulas
-are respectively reduction of the two factors, the inverse K-flat tensor model,
-restriction followed by Roos, and the supplied strict tower comparison. -/
+/-- The constructed natural comparison has its prescribed full Roos component. -/
 theorem pullbackTensorCoherentTensorRoosComparison_app (W : Scheme.{u})
     (hR : ∀ P : (integralOperationsGoodComplex l E W).FullSubcategory,
       @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}

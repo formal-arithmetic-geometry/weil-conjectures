@@ -15,8 +15,12 @@ import all WeilConjectures.TraceFormula.Ordinary.OrdinaryQuotientPullbackSuccess
 
 /-! # Private finite-level pullback comparison for ordinary quotient systems
 
-Source: Stacks 06YY, 0941 and 099N(5), the strict quotient-system construction.
-(blueprint: lem-trf-ordinary-quotient-pullback-tower-comparison)
+Private finite-level comparisons between the sequence-site direct image and evaluation, used to
+compare the ordinary pullback of a strict quotient system with the defining pullback tower.
+
+## References
+
+* Stacks Project, Tags 06YY, 0941, 099N
 -/
 
 @[expose] public noncomputable section
@@ -100,11 +104,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   PresheafOfModules.pushforward₀Obj PresheafOfModules.restrictScalars
   PresheafOfModules.restrictScalarsObj ModuleCat.restrictScalars
   coefficientSequenceEvaluation coefficientProEtaleModuleDirectImage in
-/-- Direct image on sequences commutes with evaluation by the identity on sections.
-Source: Stacks 03D1 and 0941 (blueprint: lem-trf-ordinary-quotient-pullback-tower-levels).
-Proof: both functors evaluate M at (n, f-basechange U) with scalar action through
-the same constant-section coefficient map. The identity section maps give the
-natural isomorphism. Sectionwise extensionality proves uniqueness. -/
+/-- Direct image on sequences commutes with evaluation by the identity on sections. -/
 private theorem canonical_exists
     {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
     ∃ e : integralComparisonSequenceDirectImage l E f ⋙ coefficientSequenceEvaluation l E Y n ≅

@@ -10,8 +10,12 @@ public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRinge
 
 /-! # The explicit native one-K-flat model
 
-Source: Stacks 06YU, 0FPT. The model is a composite of supplied isomorphisms,
-not a witness selected from an existence assertion.
+The model is a composite of supplied isomorphisms, not a witness selected from an existence
+assertion.
+
+## References
+
+* Stacks Project, Tags 06YU and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -39,9 +43,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   (cB : RingedDerivedTensorCoherence b.J b.R SB TB βB)
 
 /-- Pull the ringed one-K-flat model back by the fully faithful derived equivalence.
-The counit and exact-functor factorizations are included explicitly.
-Source: Stacks 06YU, 0FPT
-(blueprint: def-sf-native-weil-tensor-ringed-model). -/
+The counit and exact-functor factorizations are included explicitly. -/
 def nativeWeilRingedTensorModel
     (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (hP : NativeTensorKFlat k₀ l X T P) :

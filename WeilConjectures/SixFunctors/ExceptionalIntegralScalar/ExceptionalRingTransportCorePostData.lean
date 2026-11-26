@@ -8,7 +8,16 @@ module
 public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalRingTransportCoreReconstruction
 import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalRingTransportCorePostFunctorData
 
-/-! # Functor and comparison fields for exceptional integral transport -/
+/-!
+# Functor and comparison fields for exceptional integral transport
+
+The transported functors and their comparison maps, assembled once the reconstruction, operation
+and integral realization choices are fixed.
+
+## References
+
+* [Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -18,13 +27,7 @@ namespace WeilConjectures.ExceptionalIntegralScalar
 open ConstructibleExceptionalCoefficients
 
 /-- The transported functors and their comparison maps can be assembled once the
-reconstruction, operation, and integral realization choices are fixed.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26.
-The proof transports the strict-system adjunction through the two reconstruction
- equivalences, identifies its finite evaluations, and uses the proper/open integral
-realization to define the final integral-left comparison.
-(blueprint: new-lem-sf-exceptional-ring-transport-post-data)
--/
+reconstruction, operation, and integral realization choices are fixed. -/
 structure TransportCorePostData
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
@@ -75,12 +78,7 @@ structure TransportCorePostData
         sfCompactSupportFiniteIntegralFunctor l D.k
           (PurCompactSupport.coefficientPrimeUnit l D hl) c E.carrier
 
-/-- Existence of the transported functor and comparison fields.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26.
-The strict-system transport supplies the adjunction, its finite evaluations, and the
-reduction comparisons; the integral compactification realization supplies `integralLeft`.
-(blueprint: new-lem-sf-exceptional-ring-transport-post-data)
--/
+/-- The transported functor and comparison fields exist. -/
 theorem exists_exceptional_transport_post_data
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

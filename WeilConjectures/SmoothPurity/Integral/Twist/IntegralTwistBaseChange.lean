@@ -20,14 +20,12 @@ import WeilConjectures.SmoothPurity.Integral.Twist.IntegralTwistSchemeCompatibil
 
 /-! # Completed integral twist base change
 
-Source: main-20261015 blueprint, sec-six-functors-basics/sk-prop-sf-existence,
-`prop-weil-twist-preserves.proof.md`, first and final sentences
-(blueprint: lem-weil-integral-twist-base-change).
+## Implementation details
 
 The line, coefficient inclusion and scalar-extension isomorphism are the published
-constructions of `definition-tate-twists`. Scheme naturality is expressed
-on their underlying semilinear maps, using the actual inverse-image adjunction.
-The helper predicates specify the pullback identifications by roots, powers and evaluation.
+constructions of the Tate twists. Scheme naturality is expressed on their underlying
+semilinear maps, using the actual inverse-image adjunction. The helper predicates specify
+the pullback identifications by roots, powers and evaluation.
 -/
 
 @[expose] public noncomputable section

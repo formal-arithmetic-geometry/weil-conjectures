@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSectionComplement
 
 /-! # Ordinary finite-coefficient Kummer calculation
 
-Source: Milne, Lectures on Etale Cohomology, Section 14, Proposition 14.3,
-and Section 16, Example 16.3; blueprint sk-prop-a1-kummer, Coefficients.
+## References
+
+* [J. S. Milne, *Lectures on Étale Cohomology*, Proposition 14.3 and Example 16.3]
 -/
 
 @[expose] public noncomputable section

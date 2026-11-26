@@ -14,7 +14,9 @@ import WeilConjectures.WeilSheaf.Ordinary.OrdinaryRingedTensorCoherenceData
 
 /-! # The underived swap across the native ringed bridge
 
-Source: Stacks 03EK, 06YU, 0FPT; the binary mate square and the symmetry square.
+## References
+
+* Stacks Project, Tags 03EK, 06YU and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -326,17 +328,7 @@ private theorem underived_swap_square
   rw [reassoc_of% h₀]
   rfl
 
-/-- The normalized ordinary symmetry determines the native underived swap.
-Source: Stacks 03EK, 06YU and 0FPT; the binary mate and tensor symmetry squares.
-(blueprint: new-sf-native-weil-ringed-swap-underived).
-
-Proof: compare the two underived tensors by their adjunction mates. The native
-uncurrying law, the normalization of e, and the Hom square give the binary square
-across restriction. The defining fully faithful preimage of the native swap,
-the symmetry square for restriction, and naturality of the bridge square then
-identify its image with the ordinary normalized swap. Reflect this equality
-through the faithful ordinary equivalence and apply its pure-tensor equation.
-No complexes, K-flatness, derived tensor models, or localization are used. -/
+/-- The normalized ordinary symmetry determines the native underived swap. -/
 theorem nativeRingedSwapUnderived_forget
     (d : NativeOrdinaryRingedTensorUnderivedData b)
     (P Q : ProEtaleWeilSheaf k₀ l X) :

@@ -28,16 +28,17 @@ with `f` proper, the base change isomorphism `g^* Rf_* K ≅ Rf'_* g'^* K` holds
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerStar_iso_of_isProper`
-  (`theorem-purity-higher-direct-images-under--2`, with the Weil structures of
-  `sec-Weil-complexes`).
+- `AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerStar_iso_of_isProper`: proper
+  base change for Weil complexes.
 - `AlgebraicGeometry.WeilSheaf.nonempty_upperStar_higherLowerStar_iso_of_isProper`: the form for
   higher direct images of Weil sheaves.
 
-## Implementation notes
+## Implementation details
 
 The objectwise statement is the component of the natural isomorphism
 `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerStar_comp_upperStar_iso_of_isProper`.
+The higher-direct-image form is obtained by taking cohomology sheaves, the pullback of Weil
+complexes being induced by the exact pullback of Weil sheaves.
 -/
 
 @[expose] public section
@@ -85,11 +86,9 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (Y' ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y' ↘ Spec (CommRingCat.of k₀))]
 
-/-- **Proper base change for Weil complexes** (blueprint
-`theorem-purity-higher-direct-images-under--2`, the base change isomorphism being a morphism of Weil
-complexes by `sec-Weil-complexes`): for a cartesian square of `k₀`-schemes `X' = X ×_Y Y'` with
-`f : X ⟶ Y` proper, and a Weil complex `K` on `X`, there is an isomorphism of Weil complexes
-`g^* Rf_* K ≅ Rf'_* g'^* K`. -/
+/-- **Proper base change for Weil complexes**: for a cartesian square of `k₀`-schemes
+`X' = X ×_Y Y'` with `f : X ⟶ Y` proper, and a Weil complex `K` on `X`, there is an isomorphism of
+Weil complexes `g^* Rf_* K ≅ Rf'_* g'^* K`. -/
 theorem WeilComplex.nonempty_upperStar_derivedLowerStar_iso_of_isProper
     (hf : IsProper f) (h : IsPullback g' f' f g) (K : WeilComplex k₀ l X) :
     Nonempty ((WeilComplex.upperStar g).obj ((WeilComplex.derivedLowerStar f).obj K) ≅
@@ -98,9 +97,7 @@ theorem WeilComplex.nonempty_upperStar_derivedLowerStar_iso_of_isProper
 
 /-- **Proper base change for higher direct images**: for a cartesian square of `k₀`-schemes
 `X' = X ×_Y Y'` with `f : X ⟶ Y` proper, and a Weil sheaf `F` on `X`, there is an isomorphism of
-Weil sheaves `g^* Rⁱf_* F ≅ Rⁱf'_* g'^* F`: the cohomology sheaves of the proper base change
-isomorphism of Weil complexes, the pullback of Weil complexes being induced by the exact pullback
-of Weil sheaves. -/
+Weil sheaves `g^* Rⁱf_* F ≅ Rⁱf'_* g'^* F`. -/
 theorem WeilSheaf.nonempty_upperStar_higherLowerStar_iso_of_isProper
     (hf : IsProper f) (h : IsPullback g' f' f g) (F : WeilSheaf k₀ l X) (i : ℕ) :
     Nonempty ((WeilSheaf.upperStar g).obj ((WeilSheaf.higherLowerStar f i).obj F) ≅

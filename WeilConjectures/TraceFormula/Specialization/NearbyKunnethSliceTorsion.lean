@@ -18,9 +18,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Projecti
 # The generic-slicing step of Gabber's Künneth formula modulo `ϖ`
 
 Let `P` be the product over `S = Spec k'⟦t⟧` of models `M`, `N` of finite type, `b` a coordinate
-of `M` and `D` a generic slice trait `S'` of `𝔸¹_S`. The generic-slicing step modulo `ϖ` (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, identification (2) and projection formula (3))
-goes in three steps:
+of `M` and `D` a generic slice trait `S'` of `𝔸¹_S`. The generic-slicing step modulo `ϖ` (via the
+slice identification and the projection formula) goes in three steps:
 
 1. from the geometric slice over `Spec K⟦t⟧` to the configuration `M_{S'} ⟵ P_{S'} ⟶ N` of the
    slices over `S'`: the changes of trait have invertible exchanges (Th. finitude 3.7 with
@@ -34,6 +33,10 @@ goes in three steps:
 
 Step 2 is `NearbyCyclesModel.isIso_map_kunnethMap_toGeneric_of_isIso_coordinateSliceTrait` of
 `WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceTorsionGaloisStep`.
+
+## References
+
+* SGA 4½, [Th. finitude], Prop. 3.7
 
 -/
 
@@ -66,8 +69,8 @@ local notation "𝔽" => Profinite.continuousMapRingObj (PadicAlgCl.integersResi
 set_option maxHeartbeats 4000000 in
 -- the Künneth maps of the two product configurations are large terms
 omit [Fact (ringChar k').Prime] in
-/-- **From the geometric slice to the slice over a generic slice trait** (SGA 4½,
-[Th. finitude], 3.7; `𝔽_E`-coefficients): if the Künneth map of the geometric slice of the product
+/-- **From the geometric slice to the slice over a generic slice trait**
+(`𝔽_E`-coefficients): if the Künneth map of the geometric slice of the product
 along `b` is invertible, so is the Künneth map of `M_{S'} ⟵ P_{S'} ⟶ N`, at the restrictions of
 `A`, `B` to the geometric generic fibres. -/
 private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
@@ -159,10 +162,9 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
       (traitMap k' (traitSliceField k')) (Category.comp_id _)).generic) (q := N.ε) rfl).app B).symm
     h₀
 -- the statement and the transport along `τ_s ≫ σ_s` involve large derived pullbacks
-/-- **The generic-slicing step modulo `ϖ`** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, identification (2) and projection formula (3),
-coefficients `𝔽_E`): if the Künneth map of the geometric slice of the product along a coordinate `b`
-of `M` is invertible, so is the pullback of `Π_{A,B}` to the special fibre of the slice of `P`. -/
+/-- **The generic-slicing step modulo `ϖ`** (coefficients `𝔽_E`): if the Künneth map of the
+geometric slice of the product along a coordinate `b` of `M` is invertible, so is the pullback of
+`Π_{A,B}` to the special fibre of the slice of `P`. -/
 theorem isIso_map_kunnethMap_of_isIso_sliceFst_residueField (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))

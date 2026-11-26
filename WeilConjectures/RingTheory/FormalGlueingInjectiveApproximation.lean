@@ -15,8 +15,22 @@ import WeilConjectures.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
 /-!
 # An injective approximation to formal glueing data
 
-Source: Stacks Project, More on Algebra, Proposition 05ER.
-(blueprint: lem-weil-pbc-formal-glueing-injective-approximation).
+For a flat ring map `R → S` inducing an isomorphism modulo `I = (f₁, …, fₜ)`, every formal
+glueing datum `X` receives a morphism from the canonical datum of its module `H` of compatible
+sections, with bijective charts, injective prime map and `I`-power torsion prime cokernel.
+
+## Implementation details
+
+The chart maps are the localized chart projections of `H`, and the prime map is the tensor
+extension of the prime projection; the morphism relations are checked on (double) fractions of
+pure tensors. The localized prime map is bijective, so its kernel and cokernel vanish after
+localizing at every `fᵢ` and hence are `I`-power torsion. Flat base change of torsion
+submodules writes a kernel element as `1 ⊗ h` with `h` torsion, and all projections of `h`
+vanish, so the prime map is injective.
+
+## References
+
+* [Stacks, Tag 05ER]
 -/
 
 @[expose] public section
@@ -91,27 +105,7 @@ private theorem transported_chart_compat {R : Type u} [CommRing R]
 
 /-- The projections of compatible sections extend to a glueing morphism, and its charts
 are bijective. The prime component is specified on the unit pure tensors, after transport
-along the given identification of the prime module.
-
-Source: Stacks Project, More on Algebra, Proposition 05ER, second paragraph.
-(blueprint: lem-weil-pbc-formal-glueing-injective-approximation).
-Proof:
-1. Set H to the submodule of compatible families defining h0. Its prime projection
-   is R-linear. The tensor universal property extends it to the S-linear map
-   s tensor h maps to s times h.val.1.
-2. Each chart projection extends uniquely to H localized at f i, and is bijective
-   by the h0 localization lemma. Transport these maps and the prime map along hobj.
-3. The prime compatibility equation holds on (s tensor h)/1 by the defining
-   prime/chart equation of h0 and the formula for compare. It holds everywhere by
-   tensor induction and the localization universal property.
-4. The overlap equation holds on (h/1)/1 by the defining overlap equation of h0
-   and the formula for swap. Two applications of the localization universal
-   property give the equation on all double fractions. The heterogeneous
-   structural-map equalities in hobj transport these equations to Can.obj H.
-5. Bundle the components with these two equations. The chart maps remain bijective
-   under transport, and the prime formula at 1 tensor h follows from step 1.
-The empty chart family gives just the tensor extension of the prime projection;
-zero localizations cause no exception to the universal-property arguments. -/
+along the given identification of the prime module. -/
 private theorem exists_h0_morphism {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] (φ : R →+* S) (t : ℕ) (f : Fin t → R)
     (Can : ModuleCat.{max u v w} R ⥤ Data.{u, v, max u v w} φ f)
@@ -314,27 +308,8 @@ private theorem prime_cokernel_torsion {R : Type u} {S : Type v}
   simpa [localMap, IsLocalizedModule.map_LocalizedModules, q, restrictMap] using h
 
 /-- Compatible sections give a morphism with bijective charts, injective prime map,
-and ideal-power torsion prime cokernel.
-Source: Stacks Project, More on Algebra, Proposition 05ER, second paragraph.
-(blueprint: lem-weil-pbc-formal-glueing-injective-approximation).
-Proof: take H to be the submodule of compatible families in the prime module times
-all charts. Extend each chart projection across localization using the H0 localization
-lemma. Extend the prime projection by the tensor universal property. The fraction
-formulas for comparison and interchange show these maps satisfy the two morphism
-relations: on a pure tensor fraction the prime relation is the defining prime/chart
-relation of H, and on a double fraction the chart relation is its overlap relation.
-The localized prime map is bijective because it is conjugate to the scalar extension
-of the chart map. Localization exactness therefore makes its kernel and cokernel
-vanish in every chart. For each element choose an annihilating power of each f i;
-the sum of those exponents kills the element by the whole generated ideal power.
-For a kernel element, torsion-submodule base change writes it as 1 tensor h for an
-ideal-power torsion h in H. Its prime projection is zero. Its chart projections are
-zero since torsion localizes to zero and the localized chart projections are
-bijective. Thus h is zero as a compatible family, proving prime injectivity.
-The construction is in universe max u v w, using a finite product and a submodule.
-If t is zero, H is the prime module and the same torsion comparison proves the
-prime map injective; the empty chart conclusions are vacuous. If the ideal is the
-unit ideal, the asserted torsion cokernel is zero. -/
+and ideal-power torsion prime cokernel: under flatness and the quotient isomorphism, every
+formal glueing datum `X` receives a morphism `Can(H) → X` with these properties. -/
 theorem exists_injective_approximation {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] (φ : R →+* S) (t : ℕ) (f : Fin t → R)
     (Can : ModuleCat.{max u v w} R ⥤ Data.{u, v, max u v w} φ f)

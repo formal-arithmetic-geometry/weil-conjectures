@@ -20,7 +20,7 @@ open Set
 variable {Y : Type*} [TopologicalSpace Y]
 
 /-- In a finite `T₀` space, every irreducible closed subset `Z` has exactly one point `η` whose
-closure is `Z`. (blueprint: `lem-weil-pbc-finite-t0-space-sober`) -/
+closure is `Z`. -/
 theorem existsUnique_isGenericPoint_of_finite [Finite Y] [T0Space Y] {Z : Set Y}
     (hZ : IsIrreducible Z) (hZc : IsClosed Z) : ∃! η, η ∈ Z ∧ closure {η} = Z := by
   obtain ⟨W, hW, hZW⟩ := (isIrreducible_iff_sUnion_isClosed.1 hZ)

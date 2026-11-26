@@ -24,9 +24,10 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleObjectInverseImage
 
 /-! # A normalized basis at one finite coefficient level
 
-Source: Stacks Project, Modules on Sites, Tag 04J0; Bhatt--Scholze,
-Definition 3.4.10 and Lemma 6.5.9.
-(blueprint: lem-pur-integral-object-finite-basis).
+## References
+
+* Stacks Project, Modules on Sites, Tags 00VC and 04J0.
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.4.10 and Lemma 6.5.9.
 -/
 
 @[expose] public noncomputable section
@@ -131,32 +132,27 @@ variable (l : ℕ) [Fact l.Prime]
     (SheafOfModules.unit.{u, u + 1, u + 1}
       (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X)).over W)
 
-/-- The single complex of the given module. Source: Stacks Tag 04J0
-(blueprint: lem-pur-integral-object-finite-basis). -/
+/-- The single complex of the given module. -/
 abbrev singleModule :=
   (CochainComplex.singleFunctor (integralTowerModules.{u, u} l E X) 0).obj L
 
-/-- The finite pullback before restriction to the completed coefficient ring.
-Source: Stacks Tag 04J0 (blueprint: lem-pur-integral-object-finite-basis). -/
+/-- The finite pullback before restriction to the completed coefficient ring. -/
 noncomputable def finitePullback (n : ℕ) :=
   ((integralOperationsLevelPullback.{u, u} l E W.hom n).mapHomologicalComplex
     (.up ℤ)).obj ((unrestrictedIntegralFiniteComplex.{u, u} l E X n).obj
       (singleModule l E X L))
 
-/-- The finite regular module placed in degree zero. Source: Stacks Tag 04J0
-(blueprint: lem-pur-integral-object-finite-basis). -/
+/-- The finite regular module placed in degree zero. -/
 abbrev finiteRegular (T : Scheme.{u}) (n : ℕ) :=
   (CochainComplex.singleFunctor (integralOperationsFiniteModules.{u, u} l E T n)
     0).obj (SheafOfModules.unit (integralCoefficientSheaf.{u, u} l E T n))
 
-/-- The degree-zero identification for the regular single complex.
-Source: Stacks Tag 04J0 (blueprint: lem-pur-integral-object-finite-basis). -/
+/-- The degree-zero identification for the regular single complex. -/
 abbrev finiteZero (T : Scheme.{u}) (n : ℕ) :=
   HomologicalComplex.singleObjXSelf (.up ℤ) 0
     (SheafOfModules.unit (integralCoefficientSheaf.{u, u} l E T n))
 
-/-- The section of L[0] supplied by the inverse integral basis on U over W.
-Source: Stacks Tag 04J0 (blueprint: lem-pur-integral-object-finite-basis). -/
+/-- The section of L[0] supplied by the inverse integral basis on U over W. -/
 def basisSection (U : W.left.ProEt) :
     ((singleModule l E X L).X 0).val.obj
       (op ((MorphismProperty.Over.map (f := W.hom) ⊤ W.prop).obj U)) :=
@@ -166,8 +162,7 @@ def basisSection (U : W.left.ProEt) :
         (op ((ProEt.sliceFrom X W).obj U).left)))
 
 /-- The actual inverse-image tensor generator, restricted along the distinguished
-unit U → W ×_X U. No inverse-image or tensor comparison is chosen here.
-Source: Stacks Tags 04J0 and 00VC (blueprint: lem-pur-integral-object-finite-basis). -/
+unit U → W ×_X U. -/
 def basisGenerator (n : ℕ) (U : W.left.ProEt) :
     ((finitePullback l E X W L n).X 0).val.obj (op U) :=
   ((finitePullback l E X W L n).X 0).val.presheaf.map
@@ -424,26 +419,7 @@ private theorem complexBasis_zero (n : ℕ) :
   rw [(integralOperationsLevelPullback l E W.hom n).map_id _, Category.id_comp]
 
 /-- A slice basis induces a normalized basis at one finite coefficient level.
-This asserts no compatibility between distinct coefficient levels.
-
-Source: Stacks Project, Modules on Sites, Tag 04J0, localization of a morphism
-of ringed sites; Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.9.
-(blueprint: lem-pur-integral-object-finite-basis).
-
-Proof: let R be the completed coefficient sheaf and A its quotient of exponent
-n+1. Scalar extension along R → A commutes with localization: identify the
-right adjoints (restriction of scalars followed by the slice pushforward) and
-use uniqueness of left adjoints. Apply the given slice basis and the regular
-multiplication isomorphism A tensor_R R → A. The pro-etale object
-inverse-image/restriction comparison and the equivalence between the slice at
-W and the site of W.left transport this to a finite module isomorphism.
-Apply the single-complex comparison to obtain c. The inverse multiplication
-sends z to z tensor 1. The localization unit is restriction along the
-projection, and the inverse-image comparison is the coprojection indexed by
-U → W ×_X U. Thus the transported inverse at U sends z to z times the
-displayed basisGenerator. This proves the formula without any choice of a
-basis at another exponent. All operations preserve zero objects, so the same
-construction works on the empty scheme and for the zero coefficient ring. -/
+This asserts no compatibility between distinct coefficient levels. -/
 theorem finiteNormalizedBasis (n : ℕ) :
     ∃ c : finitePullback l E X W L n ≅ finiteRegular l E W.left n,
       ∀ (U : W.left.ProEt)

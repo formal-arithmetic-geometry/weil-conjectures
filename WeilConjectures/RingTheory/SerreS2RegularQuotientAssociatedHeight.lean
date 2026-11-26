@@ -18,9 +18,12 @@ import WeilConjectures.RingTheory.DepthLeDimAssociatedPrime
 /-!
 # Associated primes of a regular principal quotient in an S2 ring
 
-Source: Stacks Project, Algebra, Tag 031T, proof of (1), using only S2 and regularity
-of the denominator (the normal-domain hypothesis is not used after obtaining S2).
-(blueprint: lem-weil-pbc-serre-s2-regular-quotient-associated-height).
+In a Noetherian ring satisfying Serre's condition (S2), every associated prime of the quotient
+by a nonzerodivisor has height at most one.
+
+## References
+
+* [Stacks, Tag 031T]
 -/
 
 @[expose] public section
@@ -32,20 +35,7 @@ open scoped Pointwise
 open Module.associatedPrimes
 
 /-- Associated primes of a quotient by a nonzerodivisor in an S2 Noetherian ring
-have height at most one.
-Source: Stacks Project, Algebra, Tag 031T, proof of (1), using only S2
-(blueprint: lem-weil-pbc-serre-s2-regular-quotient-associated-height).
-
-Proof: An associated prime p of R/bR contains b, since b annihilates the whole quotient.
-Localization of associated primes (Tag 0310) makes the maximal ideal of A = R_p
-associated to the localized quotient, canonically A/(b/1). Thus the associated-prime
-depth bound (Tag 0BK4) bounds its depth by the dimension of A/m, which is zero.
-The image of b is regular: if (b/1)(a/s) = 0, a multiplier outside p kills ba,
-and regularity of b forces that multiplier to kill a. It lies in m and A is nonzero.
-The regular-element depth formula (Tag 090R) therefore gives depth(A) = 1.
-Condition S2 at p then gives min(2,height(p)) ≤ 1, which forces height(p) ≤ 1.
-A unit b gives the zero quotient and no associated primes, so this edge case is vacuous.
-No reducedness, domain property, or integral closedness is required. -/
+have height at most one. -/
 theorem Ideal.height_le_one_of_mem_associatedPrimes_regular_quotient
     {R : Type u} [CommRing R] [IsNoetherianRing R] (hS : Ring.IsSerreS R 2)
     (b : R) (hb : b ∈ nonZeroDivisors R) (p : Ideal R)

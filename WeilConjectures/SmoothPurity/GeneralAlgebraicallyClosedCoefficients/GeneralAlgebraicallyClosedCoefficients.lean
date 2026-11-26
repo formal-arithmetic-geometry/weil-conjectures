@@ -12,15 +12,16 @@ public import WeilConjectures.SmoothPurity.GeneralAlgebraicallyClosedCoefficient
 
 /-! # Common-stage coefficients over arbitrary schemes
 
-Source: blueprint sec-smooth-purity/sk-def-sf-operations, order 1462;
-main-20261015 sec-proetale-coefficients/sk-def-sf-operations, order 1821
-(blueprint: def-weil-algebraically-closed-coefficients).
+The common-stage category of constructible coefficients with algebraically closed coefficient
+field over an arbitrary scheme. Objects are literal finite-field pairs, Hom groups are
+directed colimits over common coefficient stages, and no Karoubi completion is taken.
 
-The datum-free intrinsic construction reuses the finite-field interface and its
-legacy coefficient transports. Only preservation proofs mention p; choosing zero
-there imposes no characteristic on Y. Tensor normalization identifies the resulting
-transitions and comparisons with every finite-field specialization. Objects remain
-literal pairs, with directed-colimit Hom groups and no Karoubi completion.
+## Implementation details
+
+The datum-free intrinsic construction reuses the finite-field interface and its coefficient
+transports. Only preservation proofs mention `p`; choosing zero there imposes no
+characteristic on `Y`. Tensor normalization identifies the resulting transitions and
+comparisons with every finite-field specialization.
 -/
 
 @[expose] public section
@@ -426,30 +427,25 @@ attribute [local instance] stageAssociator_commShift
 attribute [local irreducible] stageCategory transition scalarAssociator associator
 
 /-- The upstream common-stage pair category, specialized to the specified rational stages.
-Its objects are literal pairs, and no idempotents are adjoined.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+Its objects are literal pairs, and no idempotents are adjoined. -/
 noncomputable abbrev Pair := (stageSystem l Ω Y).PairCategory
 
-/-- Cache the existing upstream category on the named concrete pair type.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Cache the existing upstream category on the named concrete pair type. -/
 noncomputable instance pairCategory : Category (Pair l Ω Y) :=
   inferInstanceAs (Category (stageSystem l Ω Y).PairCategory)
 
 variable {l Ω Y}
 
-/-- The directed index of common finite coefficient overfields of two pairs.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The directed index of common finite coefficient overfields of two pairs. -/
 abbrev Common (A B : Pair l Ω Y) :=
   {L : Index l Ω // A.stage ≤ L ∧ B.stage ≤ L}
 
-/-- The compositum of the source and target fields supplies a common coefficient stage.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The compositum of the source and target fields supplies a common coefficient stage. -/
 noncomputable instance commonNonempty (A B : Pair l Ω Y) : Nonempty (Common A B) :=
   ⟨⟨Padic.finiteCoefficientCompositum l Ω A.stage B.stage,
     (Padic.finiteCoefficientFields_properties l Ω).1 A.stage B.stage⟩⟩
 
-/-- Composita make the common-overfield poset directed while retaining both lower bounds.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Composita make the common-overfield poset directed while retaining both lower bounds. -/
 noncomputable instance commonDirected (A B : Pair l Ω Y) :
     IsDirectedOrder (Common A B) where
   directed L M :=
@@ -458,32 +454,26 @@ noncomputable instance commonDirected (A B : Pair l Ω Y) :
         L.property.2.trans ((Padic.finiteCoefficientFields_properties l Ω).1 L.val M.val).1⟩,
       (Padic.finiteCoefficientFields_properties l Ω).1 L.val M.val⟩
 
-/-- Hom at one common coefficient field.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Hom at one common coefficient field. -/
 noncomputable def StageHom (A B : Pair l Ω Y) (L : Common A B) :=
   ((stageTransition l Ω Y A.stage L.val L.property.1).obj A.obj ⟶
     (stageTransition l Ω Y B.stage L.val L.property.2).obj B.obj)
 
-/-- Cache the abelian group of a stage Hom before forming the dependent colimit family.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Cache the abelian group of a stage Hom before forming the dependent colimit family. -/
 noncomputable instance stageHomAddCommGroup (A B : Pair l Ω Y) (L : Common A B) :
     AddCommGroup (StageHom A B L) :=
   inferInstanceAs (AddCommGroup
     ((stageTransition l Ω Y A.stage L.val L.property.1).obj A.obj ⟶
       (stageTransition l Ω Y B.stage L.val L.property.2).obj B.obj))
 
-/-- Extend the representative and conjugate by the specified associators.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Extend the representative and conjugate by the specified associators. -/
 noncomputable def transport (A B : Pair l Ω Y) (L M : Common A B) (h : L ≤ M)
     (f : StageHom A B L) : StageHom A B M :=
   ((stageSystem l Ω Y).assoc L.property.1 h).inv.app A.obj ≫
     (stageTransition l Ω Y L.val M.val h).map f ≫
     ((stageSystem l Ω Y).assoc L.property.2 h).hom.app B.obj
 
-/-- Transport is additive and preserves zero.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: scalar extension is additive. Left and right composition by each fixed
-associator component are additive by preadditivity of the rational target stage. -/
+/-- Transport is additive and preserves zero. -/
 theorem transport_additive
     {l : ℕ} [Fact l.Prime]
     {Ω : Type v} [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -497,21 +487,14 @@ theorem transport_additive
   exact stage_transport_additive (stageSystem l Ω Y)
     L.property.1 L.property.2 h A.obj B.obj
 
-/-- The transition homomorphism of the directed Hom system.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The transition homomorphism of the directed Hom system. -/
 noncomputable def transportHom (A B : Pair l Ω Y) (L M : Common A B) (h : L ≤ M) :
     StageHom A B L →+ StageHom A B M where
   toFun := transport A B L M h
   map_zero' := (transport_additive A B L M h).1
   map_add' := (transport_additive A B L M h).2
 
-/-- The actual representative transports form a directed system of abelian groups.
-Source: blueprint order 1462, displayed Hom colimit
-(blueprint: def-weil-algebraically-closed-coefficients).
-Proof: for a reflexive extension, the normalized tensor unit and the two unit coherence
-laws identify the conjugated map with the original map. For two successive extensions,
-expand transport and use the associator cocycle and naturality; the inner inverse
-associators cancel. This gives identity and composition on each representative. -/
+/-- The actual representative transports form a directed system of abelian groups. -/
 @[instance]
 theorem transportSystem (A B : Pair l Ω Y) :
     DirectedSystem (StageHom A B) (fun {L M} h ↦ transportHom A B L M h) := by
@@ -527,37 +510,28 @@ theorem transportSystem (A B : Pair l Ω Y) :
   · intro N M L h k f
     exact StageSystem.tr_tr (S := stageSystem l Ω Y) h k f
 
-/-- Decidable equality is used only to realize Mathlib's algebraic direct limit.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Decidable equality is used only to realize Mathlib's algebraic direct limit. -/
 noncomputable instance commonDecidableEq (A B : Pair l Ω Y) :
     DecidableEq (Common A B) := Classical.decEq _
 
-/-- The actual abelian-group colimit, with no completion of its objects.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The actual abelian-group colimit, with no completion of its objects. -/
 noncomputable def ColimitHom (A B : Pair l Ω Y) :=
   AddCommGroup.DirectLimit (StageHom A B) (transportHom A B)
 
 attribute [local irreducible] unitor
 
-/-- The direct limit's abelian group structure, on the fixed Hom type.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The direct limit's abelian group structure, on the fixed Hom type. -/
 noncomputable instance colimitHomGroup (A B : Pair l Ω Y) : AddCommGroup (ColimitHom A B) :=
   inferInstanceAs (AddCommGroup
     (AddCommGroup.DirectLimit (StageHom A B) (transportHom A B)))
 
-/-- The class of a map over a common finite coefficient field.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The class of a map over a common finite coefficient field. -/
 noncomputable def colimitOf (A B : Pair l Ω Y) (L : Index l Ω)
     (hA : A.stage ≤ L) (hB : B.stage ≤ L)
     (f : StageHom A B ⟨L, hA, hB⟩) : ColimitHom A B :=
   AddCommGroup.DirectLimit.of (StageHom A B) (transportHom A B) ⟨L, hA, hB⟩ f
 
-/-- The upstream quotient Hom has exactly the stated abelian-colimit coordinates.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: send each common-stage representative to its direct-limit class. The tensor
-cocycle and unit law make transport a directed system; the quotient relation is exactly
-equality after extension. The direct-limit representative criterion therefore makes
-this map well-defined and bijective. Every Hom is represented, proving uniqueness. -/
+/-- The upstream quotient Hom has exactly the stated abelian-colimit coordinates. -/
 theorem homCoordinates_existsUnique
     {l : ℕ} [Fact l.Prime]
     {Ω : Type v} [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -575,18 +549,15 @@ theorem homCoordinates_existsUnique
     inferInstance inferInstance (commonDecidableEq A B)
     (transportHom A B) (fun _ _ _ _ ↦ rfl) (transportSystem A B)
 
-/-- The canonical Hom coordinates, fixed on every common-stage representative.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The canonical Hom coordinates, fixed on every common-stage representative. -/
 noncomputable def homCoordinates (A B : Pair l Ω Y) :=
   (homCoordinates_existsUnique A B).exists.choose
 
-/-- The abelian group transported from the specified directed colimit.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The abelian group transported from the specified directed colimit. -/
 noncomputable instance homAddCommGroup (A B : Pair l Ω Y) : AddCommGroup (A ⟶ B) :=
   (homCoordinates A B).addCommGroup
 
-/-- The map represented at L, using the existing upstream quotient constructor.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The map represented at L, using the existing upstream quotient constructor. -/
 noncomputable abbrev ofHom (A B : Pair l Ω Y) (L : Index l Ω)
     (hA : A.stage ≤ L) (hB : B.stage ≤ L)
     (f : StageHom A B ⟨L, hA, hB⟩) : A ⟶ B :=
@@ -615,10 +586,7 @@ private theorem mkHom_zero {A B : Pair l Ω Y} {L : Index l Ω}
     (transportHom A B) (homCoordinates A B)
     (homCoordinates_existsUnique A B).exists.choose_spec L hA hB
 
-/-- The fixed composition is additive in each variable.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: represent the three maps at a common compositum. Colimit structure maps are
-additive and stage composition is bilinear, giving both asserted equations. -/
+/-- The fixed composition is additive in each variable. -/
 theorem composition_bilinear
     {l : ℕ} [Fact l.Prime]
     {Ω : Type v} [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -634,8 +602,7 @@ theorem composition_bilinear
 section
 attribute [local irreducible] homAddCommGroup
 
-/-- Preadditivity uses the actual colimit abelian groups.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Preadditivity uses the actual colimit abelian groups. -/
 noncomputable instance preadditive : Preadditive (Pair l Ω Y) where
   homGroup A B := homAddCommGroup A B
   add_comp A B C f f' g := composition_bilinear.1 A B C f f' g
@@ -643,16 +610,11 @@ noncomputable instance preadditive : Preadditive (Pair l Ω Y) where
 
 end
 
-/-- The existing upstream inclusion of the actual rational finite stage.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The existing upstream inclusion of the actual rational finite stage. -/
 noncomputable abbrev inclusion (E : Index l Ω) : Stage l Ω Y E ⥤ Pair l Ω Y :=
   (stageSystem l Ω Y).ι E
 
-/-- The inclusion preserves the abelian-colimit addition.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: inclusion sends f to its normalized representative, and homCoordinates sends
-that representative to its direct-limit class. Both normalization by fixed unit
-components and the direct-limit structure maps are additive. -/
+/-- The inclusion preserves the abelian-colimit addition. -/
 @[instance]
 theorem inclusion_additive
     {l : ℕ} [Fact l.Prime]
@@ -667,12 +629,7 @@ theorem inclusion_additive
   exact (mkHom_add (l := l) (Ω := Ω) (Y := Y)
     (A := ⟨E, X⟩) (B := ⟨E, Z⟩) le_rfl le_rfl _ _).symm
 
-/-- Every class has a finite representative, and equality is equality at a later stage.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: composita make each common-overfield index nonempty and directed. The normalized
-tensor unit and associator pentagon make transport an actual directed system. Apply
-Mathlib's directed-colimit representation and zero-exactness criteria to the difference
-of two representatives. This gives precisely equality after one further extension. -/
+/-- Every class has a finite representative, and equality is equality at a later stage. -/
 theorem representatives
     {l : ℕ} [Fact l.Prime]
     {Ω : Type v} [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -703,13 +660,11 @@ theorem representatives
       exact (StageSystem.PairCategory.mkHom_eq_mkHom_iff' f g).mpr
         ⟨N.val, hL, hM, he⟩
 
-/-- Stagewise object shift, with the coefficient field unchanged.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Stagewise object shift, with the coefficient field unchanged. -/
 noncomputable def shiftPair (n : ℤ) (A : Pair l Ω Y) : Pair l Ω Y :=
   ⟨A.stage, (shiftFunctor (Stage l Ω Y A.stage) n).obj A.obj⟩
 
-/-- The shifted representative uses the prescribed scalar-extension shift comparison.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The shifted representative uses the prescribed scalar-extension shift comparison. -/
 noncomputable def shiftRepresentative (n : ℤ) (A B : Pair l Ω Y)
     (L : Index l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L)
     (f : StageHom A B ⟨L, hA, hB⟩) :
@@ -719,17 +674,7 @@ noncomputable def shiftRepresentative (n : ℤ) (A B : Pair l Ω Y)
     ((stageTransition l Ω Y B.stage L hB).commShiftIso n).inv.app B.obj
 
 set_option linter.unusedVariables false in
-/-- The induced shift is specified on every object, representative and stage inclusion.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: shift each finite representative using shiftRepresentative. Exact scalar
-extension and associator compatibility with shifts make this independent of stage.
-The finite-stage shift units and addition isomorphisms descend componentwise; equality
-and coherence may be checked after moving the finite diagrams to a common field.
-The inclusion comparisons are identities on the displayed shifted pairs. Thus these
-formulas determine the functors and their coherent comparisons on the generators.
-Every object is literally in its own stage. The identity inclusion comparisons and
-their coherence equations fix the zero and addition comparisons there, hence everywhere.
-This proves uniqueness of the full shift structure, not just its object and arrow maps. -/
+/-- The induced shift is specified on every object, representative and stage inclusion. -/
 theorem shift_existsUnique :
     ∃! s : HasShift (Pair l Ω Y) ℤ,
       (fun [shiftInst : HasShift (Pair l Ω Y) ℤ] ↦
@@ -766,26 +711,19 @@ theorem shift_existsUnique :
     obtain ⟨c, hc⟩ := hs'.2.2.2
     exact pairShift_unique S s' hs'.2.1 hs'.2.2.1 c (fun E n K ↦ hc n E K)
 
-/-- The stagewise shift with the representative formula of shift_existsUnique.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The stagewise shift with the representative formula of shift_existsUnique. -/
 noncomputable instance hasShift : HasShift (Pair l Ω Y) ℤ := shift_existsUnique.exists.choose
 
-/-- Each induced integer shift is additive.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Each induced integer shift is additive. -/
 noncomputable instance shiftAdditive (n : ℤ) :
     (shiftFunctor (Pair l Ω Y) n).Additive := shift_existsUnique.exists.choose_spec.1 n
 
-/-- The normalized exact-stage shift comparison, fixed to identity on shifted pairs.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The normalized exact-stage shift comparison, fixed to identity on shifted pairs. -/
 noncomputable instance inclusionCommShift (E : Index l Ω) :
     (inclusion E : Stage l Ω Y E ⥤ _).CommShift ℤ :=
   shift_existsUnique.exists.choose_spec.2.2.2.choose E
 
-/-- A stage zero object remains zero after forming directed Hom colimits.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: take the zero object at the bottom coefficient field. Every transition is exact
-and therefore preserves zero. At every common field its Hom groups to and from any
-object vanish. Their directed colimits vanish, giving the zero-object universal property. -/
+/-- A stage zero object remains zero after forming directed Hom colimits. -/
 theorem zero_exists : HasZeroObject (Pair l Ω Y) := by
   let E := Padic.finiteCoefficientBase l Ω
   let X : Pair l Ω Y := (inclusion E).obj (0 : Stage l Ω Y E)
@@ -798,11 +736,7 @@ theorem zero_exists : HasZeroObject (Pair l Ω Y) := by
 
 attribute [instance] zero_exists
 
-/-- The canonical coefficient-stage identifications commute with shifts.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: on finite representatives this is scalar-extension shift compatibility and
-sfRationalScalar_coherence. The normalized inclusion comparisons are
-identities on shifted pairs. The cocycle equation identifies both composites. -/
+/-- The canonical coefficient-stage identifications commute with shifts. -/
 @[instance]
 theorem transitionIso_commShift
     {l : ℕ} [Fact l.Prime]
@@ -818,31 +752,24 @@ theorem transitionIso_commShift
       (fun E ↦ inclusionCommShift E) (fun E n K ↦ hs.2.2.2.choose_spec n E K))
     (fun E ↦ inclusionCommShift E) (fun E n K ↦ hs.2.2.2.choose_spec n E K) h
 
-/-- The recorded common-stage distinguished-triangle criterion.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The recorded common-stage distinguished-triangle criterion. -/
 noncomputable abbrev Distinguished (T : Triangle (Pair l Ω Y)) : Prop :=
   (stageSystem l Ω Y).CommonStageDistinguished T
 
-/-- The unique pretriangulation supplied by the common-stage Verdier theorem.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The unique pretriangulation supplied by the common-stage Verdier theorem. -/
 noncomputable instance pretriangulated : Pretriangulated (Pair l Ω Y) :=
   (StageSystem.commonStage_verdier_existsUnique (stageSystem l Ω Y)).exists.choose
 
-/-- The Verdier axiom for the specified common-stage triangles.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- The Verdier axiom for the specified common-stage triangles. -/
 noncomputable instance isTriangulated : IsTriangulated (Pair l Ω Y) :=
   (StageSystem.commonStage_verdier_existsUnique (stageSystem l Ω Y)).exists.choose_spec.2.1
 
-/-- Each actual rational finite-stage inclusion is exact.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+/-- Each actual rational finite-stage inclusion is exact. -/
 noncomputable instance inclusion_exact (E : Index l Ω) :
     (inclusion E : Stage l Ω Y E ⥤ _).IsTriangulated :=
   (StageSystem.commonStage_verdier_existsUnique (stageSystem l Ω Y)).exists.choose_spec.2.2 E
 
-/-- The triangle criterion, exposing the finite-field-of-definition clause.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: this is the distinguished-set clause of commonStage_verdier_existsUnique
-for the actual scalar-extension stage system. -/
+/-- The triangle criterion, exposing the finite-field-of-definition clause. -/
 theorem distinguished_iff
     {l : ℕ} [Fact l.Prime]
     {Ω : Type v} [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -857,8 +784,7 @@ end GeneralAlgebraicallyClosedCoefficients
 
 /-- The algebraically closed coefficient category is the pair category itself.
 No Karoubi envelope occurs: its objects are finite-field pairs and its Hom groups are
-canonically the displayed directed colimits.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
+canonically the displayed directed colimits. -/
 noncomputable abbrev generalAlgebraicallyClosedConstructibleCategory
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -913,15 +839,7 @@ variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- The normalized associator and identity comparison specialize canonically.
-Source: blueprint order 1821, canonical composition clause
-(blueprint: def-weil-algebraically-closed-coefficients).
-Proof: the ordinary balanced tensor associator and multiplication unit contain
-no p. The quotient-completion comparisons are the very same uniquely normalized
-comparisons. Proof irrelevance identifies the integral restrictions. Their
-exists-unique component specifications identify the integral comparisons and
-then their rational images. Substitution through coefficientInclusion_laws
-identifies the displayed stage associators and units, also for repeated fields. -/
+/-- The normalized associator and identity comparison specialize canonically. -/
 theorem specialization_comparisons :
     (∀ (E L M : AlgebraicallyClosedCoefficients.Index l Ω) (h : E ≤ L) (k : L ≤ M),
       HEq (GeneralAlgebraicallyClosedCoefficients.associator l Ω Y E L M h k)
@@ -957,14 +875,7 @@ theorem specialization_comparisons :
       ((AlgebraicallyClosedCoefficients.coefficientInclusion_laws l Ω).1 E)
       Y 0 D.p (Fact.out : l.Prime).ne_zero hl
 
-/-- Equality of the complete normalized stage data, not merely its carriers.
-Source: blueprint order 1821, finite-stage pair construction
-(blueprint: def-weil-algebraically-closed-coefficients).
-Proof: both Stage families reduce to sfRationalConstructibleCategory on the
-same small coefficient fields. specialization_transition and the associator
-clause of specialization_comparisons identify every data field of StageSystem.
-Its remaining cocycle field is a proof. Alternatively apply the uniqueness
-clause of stageSystem_existsUnique to the old system. -/
+/-- Equality of the complete normalized stage data, not merely its carriers. -/
 theorem specialization_stageSystem :
     stageSystem l Ω Y = SfAlgebraicallyClosedCoefficients.stageSystem D l hl Ω Y := by
   set_option backward.isDefEq.respectTransparency false in
@@ -981,8 +892,7 @@ theorem specialization_stageSystem :
             ((specialization_comparisons D l hl Ω Y).1 E L M h k).symm
 
 /-- The canonical identification is equality transport of the normalized systems.
-It preserves all pairs and representative maps; no arbitrary equivalence is chosen.
-Source: blueprint order 1821 (blueprint: def-weil-algebraically-closed-coefficients). -/
+It preserves all pairs and representative maps; no arbitrary equivalence is chosen. -/
 noncomputable def specialization :
     Pair l Ω Y ≌ SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y :=
   Pi.eqToEquivalence (fun S : StageSystem (Stage l Ω Y) ↦ S.PairCategory)

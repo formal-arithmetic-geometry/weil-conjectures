@@ -9,8 +9,17 @@ public import WeilConjectures.SixFunctors.OpenTensorQuotient.OpenQuotientScalarC
 
 /-! # Assembly of the strict open scalar comparison
 
-Source: Stacks Project, Tags 0E8I and 0941.
-(blueprint: lem-sf-open-quotient-scalar-comparison-assembly).
+Compatible finite-level open scalar comparisons assemble to a natural comparison of strict
+towers.
+
+## Implementation details
+
+The assembly is by `NatIso.ofComponents`; successor transition compatibility supplies the
+naturality equation and the component formula descends unchanged to the tower.
+
+## References
+
+* [Stacks: Tags 0E8I, 0941](https://stacks.math.columbia.edu)
 -/
 
 @[expose] public noncomputable section
@@ -25,11 +34,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 /-- Compatible finite-level comparisons assemble to one natural strict-tower
-comparison. The assembly is by `NatIso.ofComponents`; successor transition
-compatibility supplies the naturality equation and the component formula descends
-unchanged to the tower.
-Source: Stacks Tags 0E8I and 0941.
-(blueprint: lem-sf-open-quotient-scalar-comparison-assembly). -/
+comparison. -/
 theorem openQuotientScalarComparisonAssembly
     (o : IntegralOpenReduction.Operations l E j)
     (tc : IntegralOpenReduction.TensorComparison l E j o)

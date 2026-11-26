@@ -8,10 +8,7 @@ module
 public import WeilConjectures.SmoothPurity.Integral.Twist.IntegralTwistBaseChangeDefinitions
 import WeilConjectures.Algebra.Homology.Signed.SignedLineScalarPullbackSquare
 
-/-! Geometric signed compatibility of integral twists.
-Source: main-20261015 blueprint, final sentence of the twist-preservation proof
-(blueprint: lem-weil-integral-twist-scheme-compatibility).
--/
+/-! # Geometric signed compatibility of integral twists -/
 
 @[expose] public noncomputable section
 

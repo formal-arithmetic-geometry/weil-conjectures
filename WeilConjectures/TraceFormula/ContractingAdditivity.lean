@@ -17,11 +17,16 @@ Let `c = (c₁, c₂)` be an endocorrespondence of `(X, K)` and `y` a `k`-point 
 such that the fibre `c₁⁻¹(x)`, `x = c₁(y)`, is the reduced point `y`. Then the closed point `{x}`
 is `c`-invariant and the trace class of `c` is the sum of the trace classes of the induced
 coefficient maps on the pieces `K^Z = Rx_* Lx^* K` and `K^U = j_! Lj^* K` of `K`
-(`ProEtale.CondensedRing.Correspondence.traceClass_eq_add_of_isPullback`, blueprint
-`proposition-additivity-trace-classes--2`, item 1 for `Z = {x}`).
+(`ProEtale.CondensedRing.Correspondence.traceClass_eq_add_of_isPullback`).
 
 This is `Correspondence.traceClass_eq_add_of_distTriang` for the open–closed triangle
 `K^U ⟶ K ⟶ K^Z ⟶`.
+
+## References
+
+* Varshavsky, *Lefschetz–Verdier trace formula and a generalization of a theorem of Fujiwara*,
+  Proposition 1.5.10.
+* SGA 5, III 4.13.
 
 -/
 
@@ -75,13 +80,12 @@ lemma eq_zero_of_lowerShriek_support_of_isPullback {y : RationalPoint c.C}
     ((isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ j (y ≫ c.c₂) hjx
       B).of_iso ((boundedConstructibleUpperStarComp _ ℓ y c.c₂).app _).symm)
 
-/-- **Additivity of trace classes along the pieces of a point with reduced fibre** (blueprint
-`proposition-additivity-trace-classes--2`, item 1, and `proposition-additivity-trace-classes--2`,
-for the `c`-invariant closed subscheme `Z = {x}` of the rational point `x = c₁(y)` of a `k`-point
-`y` of the fixed locus such that `c₁⁻¹(x)` is the reduced point `y`; Varshavsky, Prop. 1.5.10 after
-SGA 5, III 4.13): the trace class of `u` is the sum of the trace classes of the induced
-coefficient maps `u^Z = [x, y]_! u_Z` on `K^Z = Rx_* Lx^* K`, the proper pushforward of the
-restricted coefficient map along `(x, y)`, and `u^U = [j]_! (u|_U)` on `K^U = j_! Lj^* K`. -/
+/-- **Additivity of trace classes along the pieces of a point with reduced fibre**: for the
+`c`-invariant closed subscheme `Z = {x}` of the rational point `x = c₁(y)` of a `k`-point `y` of
+the fixed locus such that `c₁⁻¹(x)` is the reduced point `y`, the trace class of `u` is the sum
+of the trace classes of the induced coefficient maps `u^Z = [x, y]_! u_Z` on `K^Z = Rx_* Lx^* K`,
+the proper pushforward of the restricted coefficient map along `(x, y)`, and `u^U = [j]_! (u|_U)`
+on `K^U = j_! Lj^* K`. -/
 theorem traceClass_eq_add_of_isPullback (F : c.FixedLocus) {y : RationalPoint c.C}
     (hy : y ≫ c.c₁ = y ≫ c.c₂) (sq : IsPullback y (𝟙 (point k)) c.c₁ (y ≫ c.c₁)) :
     c.traceClass F =

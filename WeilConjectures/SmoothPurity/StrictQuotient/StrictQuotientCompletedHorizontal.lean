@@ -10,8 +10,9 @@ import all WeilConjectures.SixFunctors.Coefficient.CoefficientRingedSequenceSite
 
 /-! # Horizontal maps after completed scalar restriction
 
-Source: Stacks Project, Tag 0941.
-(blueprint: lem-pur-strict-quotient-completed-horizontal).
+## References
+
+* Stacks Project, Tag 0941.
 -/
 
 @[expose] public noncomputable section
@@ -33,13 +34,7 @@ private theorem section_map_agrees {C : Type*} [Category* C]
   funext x
   exact (PresheafOfModules.presheaf_map_apply_coe M f x).symm
 
-/-- Completed scalar restriction retains exactly the original horizontal section maps.
-Source: Stacks 0941; the characterization of coefficientSequenceRestriction.
-(blueprint: lem-pur-strict-quotient-completed-horizontal).
-
-Proof: take the horizontal-map clause in the unique characterization of scalar
-restriction. Its right side is the original module-presheaf map. The underlying
-additive presheaf has the same section map, so this is precisely horizontal. -/
+/-- Completed scalar restriction retains exactly the original horizontal section maps. -/
 theorem completedHorizontal {W : Scheme.{t}}
     (M : coefficientSequenceModules l E W) (m n : ℕ) (hmn : n ≤ m)
     (U : W.ProEtᵒᵖ) :

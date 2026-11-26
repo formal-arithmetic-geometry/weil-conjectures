@@ -30,8 +30,8 @@ file constructs the morphisms induced by `φ₁` between the constructions of
   (`NearbyCyclesModel.coordinateSliceTraitMapGeneric_comp_toGaloisLayer_generic`).
 
 These are the first projections of the product configurations through which the generic-slicing
-step of Gabber's Künneth formula descends along the Galois layer (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, projection formula (3)).
+step of Gabber's Künneth formula descends along the Galois layer (projection formula (3) of the
+external Künneth formula for nearby cycles).
 
 -/
 

@@ -14,8 +14,9 @@ import WeilConjectures.Topology.AbelianOpenExtensionByZeroStalks
 
 /-! # Integer coordinates for extension by zero
 
-Source: Stacks Project, Cohomology, Lemma 0A38
-(blueprint: lem-sc-abelian-open-extension-integer-germ-coordinates).
+## References
+
+* Stacks Project, Tags 00A5 and 0A38.
 -/
 
 @[expose] public section
@@ -26,16 +27,8 @@ universe u
 
 namespace TopCat.Sheaf
 
-/-- Source: Stacks Project, Sheaves, Lemma 00A5; Cohomology, Lemma 0A38.
-Proof: The canonical extension-by-zero stalk comparison on U carries the displayed
-unit germ to the unit germ of the constant integer sheaf. Sheafification preserves
-stalks. The constant presheaf has integer stalk: every germ is represented by an
-integer and restriction maps are identities, so equality of germs is equality of
-integers. The neighborhood system at x is nonempty and filtered. Thus multiplication
-of the unit germ by z gives a bijection from the integers to this stalk. The germ
-comparison for any V contained in U is the same one by restriction compatibility.
-The hypothesis x in V excludes empty V and empty U.
-(blueprint: lem-sc-abelian-open-extension-integer-germ-coordinates). -/
+/-- For `x ∈ V ⊆ U`, every element of the stalk at `x` of the extension by zero of the constant
+integer sheaf on `U` is a unique integer multiple of the germ of the canonical unit section. -/
 theorem abelianOpenExtension_integer_germ_coordinates
     (X : TopCat.{u}) (U V : Opens X) (hV : V ≤ U) (x : X) (hx : x ∈ V) :
     let E := (abelianOpenExtensionByZero U).obj

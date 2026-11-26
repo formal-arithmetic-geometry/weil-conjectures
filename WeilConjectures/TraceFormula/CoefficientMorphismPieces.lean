@@ -18,8 +18,7 @@ constructible `K` and an arbitrary, not necessarily invertible, map `ψ : LΦ^* 
 defines the endomorphisms `E_U` and `E_Z` of `RΓ_c(X, Rj_! Lj^* K)` and `RΓ_c(X, Ri_* Li^* K)`
 induced by the restrictions of `ψ` to `U` and `Z`, writes them as `RΓ_c(X, ψ_U) ∘ Φ^♯` and
 `RΓ_c(X, ψ_Z) ∘ Φ^♯` for coefficient maps `ψ_U`, `ψ_Z`, and shows that they are compatible with
-the counit `Rj_! Lj^* K ⟶ K` and the unit `K ⟶ Ri_* Li^* K` of the localization triangle
-(blueprint `lemma-additivity-open-subscheme-complement`).
+the counit `Rj_! Lj^* K ⟶ K` and the unit `K ⟶ Ri_* Li^* K` of the localization triangle.
 
 This is the content of `WeilConjectures.TraceFormula.LocalizationFrobenius`,
 `WeilConjectures.TraceFormula.OpenPieceFrobenius` and
@@ -55,8 +54,8 @@ namespace CoefficientMorphism
 
 -- the coherence of the pullbacks along `Φ_Z ≫ i = i ≫ Φ` is a long elaboration
 omit [IsUniversalHomeomorphism ΦZ.left] [IsUniversalHomeomorphism Φ.left] in
-/-- The operator `RΓ_c(ψ) ∘ Φ^♯` commutes with the pullback to a closed piece (blueprint
-`lemma-additivity-open-subscheme-complement`): for a closed immersion `i` with `Φ_Z ≫ i = i ≫ Φ`,
+/-- The operator `RΓ_c(ψ) ∘ Φ^♯` commutes with the pullback to a closed piece: for a closed
+immersion `i` with `Φ_Z ≫ i = i ≫ Φ`,
 `i^♯ ∘ RΓ_c(X, ψ) ∘ Φ^♯ = RΓ_c(Z, ψ|_Z) ∘ Φ_Z^♯ ∘ i^♯`. -/
 theorem compactPullback_comp_comp_compactPullback (hi : ΦZ ≫ i = i ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -86,8 +85,7 @@ theorem compactPullback_comp_comp_compactPullback (hi : ΦZ ≫ i = i ≫ Φ)
     (weilUpperStarComparison_hom_app ℓ ΦZ Φ i hi K) ψ _ rfl _ _ rfl rfl
 
 variable (ℓ) in
-/-- The operator `E_U` on `RΓ_c(X, Rj_! Lj^* K)` (blueprint
-`lemma-additivity-open-subscheme-complement`): the operator `RΓ_c(U, ψ|_U) ∘ Φ_U^♯` of the
+/-- The operator `E_U` on `RΓ_c(X, Rj_! Lj^* K)`: the operator `RΓ_c(U, ψ|_U) ∘ Φ_U^♯` of the
 restriction of `ψ`, transported along `Ra_{X!} Rj_! ≅ Ra_{U!}`. -/
 noncomputable def openPieceOperator (hj : ΦU ≫ j = j ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -109,8 +107,7 @@ noncomputable def openPieceOperator (hj : ΦU ≫ j = j ≫ Φ)
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)
 
 variable (ℓ) in
-/-- The operator `E_Z` on `RΓ_c(X, Ri_* Li^* K)` (blueprint
-`lemma-additivity-open-subscheme-complement`): the operator `RΓ_c(Z, ψ|_Z) ∘ Φ_Z^♯` of the
+/-- The operator `E_Z` on `RΓ_c(X, Ri_* Li^* K)`: the operator `RΓ_c(Z, ψ|_Z) ∘ Φ_Z^♯` of the
 restriction of `ψ`, transported along `Ra_{X!} Ri_* ≅ Ra_{Z!}`. -/
 noncomputable def closedPieceOperator (hi : ΦZ ≫ i = i ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -133,7 +130,7 @@ noncomputable def closedPieceOperator (hi : ΦZ ≫ i = i ≫ Φ)
 
 -- the closed-piece operator unfolds to a long composite
 omit [IsUniversalHomeomorphism ΦZ.left] [IsUniversalHomeomorphism Φ.left] in
-/-- The square of the closed piece (blueprint `lemma-additivity-open-subscheme-complement`):
+/-- The square of the closed piece:
 `E_Z ∘ RΓ_c(η) = RΓ_c(η) ∘ RΓ_c(ψ) ∘ Φ^♯` for the unit `η : K ⟶ Ri_* Li^* K`. -/
 theorem comp_map_unit_eq_map_unit_comp_closedPieceOperator (hi : ΦZ ≫ i = i ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -174,8 +171,8 @@ theorem comp_map_unit_eq_map_unit_comp_closedPieceOperator (hi : ΦZ ≫ i = i �
 
 -- the open-piece operator unfolds to a long composite
 omit [IsClosedImmersion i.left] in
-/-- The square of the open piece (blueprint `lemma-additivity-open-subscheme-complement`, Step
-2(a)): `RΓ_c(ε) ∘ E_U = RΓ_c(ψ) ∘ Φ^♯ ∘ RΓ_c(ε)` for the counit `ε : Rj_! Lj^* K ⟶ K`. -/
+/-- The square of the open piece: `RΓ_c(ε) ∘ E_U = RΓ_c(ψ) ∘ Φ^♯ ∘ RΓ_c(ε)` for the counit
+`ε : Rj_! Lj^* K ⟶ K`. -/
 theorem openPieceOperator_comp_map_counit (hj : ΦU ≫ j = j ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
@@ -206,10 +203,9 @@ theorem openPieceOperator_comp_map_counit (hj : ΦU ≫ j = j ≫ Φ)
   rw [reassoc_of% hn₁, hn₂]
 
 variable (ℓ) in
-/-- The coefficient `ψ_U : LΦ^* Rj_! Lj^* K ⟶ Rj_! Lj^* K` of the open piece (blueprint
-`lemma-additivity-open-subscheme-complement`): the compact-support base change
-`LΦ^* Rj_! ⟶ Rj_! LΦ_U^*` along the cartesian square `Φ_U ≫ j = j ≫ Φ`, followed by `Rj_!` of the
-restriction of `ψ` to `U`. -/
+/-- The coefficient `ψ_U : LΦ^* Rj_! Lj^* K ⟶ Rj_! Lj^* K` of the open piece: the compact-support
+base change `LΦ^* Rj_! ⟶ Rj_! LΦ_U^*` along the cartesian square `Φ_U ≫ j = j ≫ Φ`, followed by
+`Rj_!` of the restriction of `ψ` to `U`. -/
 noncomputable def openPieceCoefficient (hj : ΦU ≫ j = j ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
@@ -226,8 +222,7 @@ noncomputable def openPieceCoefficient (hj : ΦU ≫ j = j ≫ Φ)
 
 -- the open-piece operator unfolds to a long composite
 omit [IsClosedImmersion i.left] in
-/-- The operator `E_U` of the open piece is `RΓ_c(X, ψ_U) ∘ Φ^♯` on `RΓ_c(X, Rj_! Lj^* K)`
-(blueprint `lemma-additivity-open-subscheme-complement`). -/
+/-- The operator `E_U` of the open piece is `RΓ_c(X, ψ_U) ∘ Φ^♯` on `RΓ_c(X, Rj_! Lj^* K)`. -/
 lemma openPieceOperator_eq (hj : ΦU ≫ j = j ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
@@ -254,8 +249,7 @@ lemma openPieceOperator_eq (hj : ΦU ≫ j = j ≫ Φ)
   simpa only [Category.assoc] using h
 
 omit [IsClosedImmersion i.left] [IsFinite Φ.left] [IsFinite ΦU.left] in
-/-- The coefficient of the open piece is compatible with the counit `ε : Rj_! Lj^* K ⟶ K`
-(blueprint `lemma-additivity-open-subscheme-complement`). -/
+/-- The coefficient of the open piece is compatible with the counit `ε : Rj_! Lj^* K ⟶ K`. -/
 lemma upperStar_map_counit_comp (hj : ΦU ≫ j = j ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
@@ -271,9 +265,8 @@ lemma upperStar_map_counit_comp (hj : ΦU ≫ j = j ≫ Φ)
   rw [hn]
 
 variable (ℓ) in
-/-- The coefficient `ψ_Z : LΦ^* Ri_* Li^* K ⟶ Ri_* Li^* K` of the closed piece (blueprint
-`lemma-additivity-open-subscheme-complement`): the adjoint of the restriction of `ψ` to `Z`, through
-the pullback comparison and the counit of `Li^* ⊣ Ri_*`. -/
+/-- The coefficient `ψ_Z : LΦ^* Ri_* Li^* K ⟶ Ri_* Li^* K` of the closed piece: the adjoint of the
+restriction of `ψ` to `Z`, through the pullback comparison and the counit of `Li^* ⊣ Ri_*`. -/
 noncomputable def closedPieceCoefficient (hi : ΦZ ≫ i = i ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
@@ -290,8 +283,7 @@ noncomputable def closedPieceCoefficient (hi : ΦZ ≫ i = i ≫ Φ)
 
 -- the closed-piece operator unfolds to a long composite
 omit [IsUniversalHomeomorphism Φ.left] [IsUniversalHomeomorphism ΦZ.left] in
-/-- The operator `E_Z` of the closed piece is `RΓ_c(X, ψ_Z) ∘ Φ^♯` on `RΓ_c(X, Ri_* Li^* K)`
-(blueprint `lemma-additivity-open-subscheme-complement`). -/
+/-- The operator `E_Z` of the closed piece is `RΓ_c(X, ψ_Z) ∘ Φ^♯` on `RΓ_c(X, Ri_* Li^* K)`. -/
 lemma closedPieceOperator_eq (hi : ΦZ ≫ i = i ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
@@ -314,8 +306,7 @@ lemma closedPieceOperator_eq (hi : ΦZ ≫ i = i ≫ Φ)
 
 omit [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left] [IsFinite ΦZ.left]
   [IsUniversalHomeomorphism ΦZ.left] [IsClosedImmersion i.left] in
-/-- The coefficient of the closed piece is compatible with the unit `η : K ⟶ Ri_* Li^* K`
-(blueprint `lemma-additivity-open-subscheme-complement`). -/
+/-- The coefficient of the closed piece is compatible with the unit `η : K ⟶ Ri_* Li^* K`. -/
 lemma upperStar_map_unit_comp_closedPieceCoefficient (hi : ΦZ ≫ i = i ≫ Φ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :

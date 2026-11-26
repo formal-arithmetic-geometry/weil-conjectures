@@ -15,7 +15,13 @@ import Mathlib.LinearAlgebra.TensorProduct.Quotient
 /-!
 # Detecting surjectivity modulo a Jacobson ideal
 
-Source: Stacks Project, More on Algebra, Tag 00DV.
+A form of Nakayama's lemma: a linear map onto a finite module is surjective if it is surjective
+after reduction modulo an ideal contained in the Jacobson radical.
+
+## References
+
+* [Stacks, Tag 00DV]
+* [Stacks, Tag 0BCB]
 -/
 
 @[expose] public section
@@ -27,13 +33,7 @@ open CategoryTheory
 namespace ModuleCat
 
 /-- Surjectivity modulo an ideal in the Jacobson radical detects surjectivity onto a finite module.
-Source: Stacks Project, Algebra, Tag 00DV, Nakayama's lemma, applied in Tag 0BCB
-(blueprint: lem-sc-finite-module-surjective-mod-ideal).
-
-Proof: The unit assumption puts I in the Jacobson radical. Identify extension of scalars
-with M/IM and N/IN using the tensor-quotient equivalences. Surjectivity of the reduced
-map gives surjectivity of M → N/IN. Apply Nakayama to the finite target N and the range
-of f to conclude that the range is all of N. -/
+-/
 theorem surjective_of_extendScalars_mod_ideal {R : Type u} [CommRing R]
     (I : Ideal R) (hunits : ∀ x : I, IsUnit (1 + (x : R)))
     (M N : ModuleCat.{max u v} R) [Module.Finite R N] (f : M ⟶ N)

@@ -9,7 +9,9 @@ public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRinge
 
 /-! # The native chain swap obtained from the ringed signed swap
 
-Source: Stacks 06YU and 0FPT, signed total tensor symmetry.
+## References
+
+* Stacks Project, Tags 03EK, 06YU and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -82,11 +84,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   (adj : T ⊣₂ ihomBifunctor k₀ l X)
   (A : NativeWeilRingedTensorComplexes b T adj)
 
-/-- The underived native swap induced by the ringed braiding.
-Source: Stacks 03EK, 06YU.
-(blueprint: new-sf-native-weil-ringed-swap-summand).
-
-This is the fully faithful preimage of an explicit composite of isomorphisms. -/
+/-- The underived native swap induced by the ringed braiding: the fully faithful preimage of an
+explicit composite of isomorphisms. -/
 def nativeRingedSwapUnderived (P Q : ProEtaleWeilSheaf k₀ l X) :
     (T.obj Q).obj P ≅ (T.obj P).obj Q := by
   letI := SheafOfModules.isMonoidal_W_independentCoefficients b.R
@@ -95,15 +94,7 @@ def nativeRingedSwapUnderived (P Q : ProEtaleWeilSheaf k₀ l X) :
   exact b.native.functor.preimageIso (A.underived Q P ≪≫
     β_ (b.native.functor.obj P) (b.native.functor.obj Q) ≪≫ (A.underived P Q).symm)
 
-/-- The native signed chain swap on one homogeneous tensor summand.
-Source: Stacks 06YU, 0FPT.
-(blueprint: new-sf-native-weil-ringed-swap-summand).
-
-Proof: apply the fully faithful ringed equivalence and postcompose by the target
-chain comparison. Its defining square moves the swap to the ringed total. Apply
-the two summand normalizations and the signed braiding formula. The two signs
-on each side agree since p*q=q*p. Cancel the underived comparison and reflect
-the equality through the equivalence. -/
+/-- The native signed chain swap on one homogeneous tensor summand. -/
 theorem nativeRingedSwapComplex_summand
     (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (p q n : ℤ) (hpq : p + q = n) (hqp : q + p = n) :

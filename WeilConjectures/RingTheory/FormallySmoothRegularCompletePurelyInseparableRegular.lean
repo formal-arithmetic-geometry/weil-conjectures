@@ -22,8 +22,21 @@ import Mathlib.RingTheory.Localization.Submodule
 /-!
 # Purely inseparable base changes of a regular complete algebra
 
-Source: Stacks Project, More on Algebra, Proposition 07PM, last two paragraphs.
-(blueprint: lem-weil-pbc-fs-regular-complete-purely-inseparable-regular)
+For a regular formally smooth complete local algebra `C` over a complete regular local domain `A`
+with fraction field `K`, the ring `L ⊗[A] C` is regular for every finite purely inseparable
+extension `L/K`.
+
+## Implementation details
+
+The ring `K ⊗[A] C` is a localization of `C`, hence regular. In characteristic zero `L = K`. In
+characteristic `p` we use strong induction on `[L : K]`: Fields 09HI gives an intermediate field
+`M` with `[L : M] = p`, and the degree-`p` step is
+`isRegularRing_tensorProduct_of_formallySmoothAdic_degree_p`.
+
+## References
+
+* [Stacks, Tag 07PM] (last two paragraphs)
+* [Stacks, Tag 09HI]
 -/
 
 @[expose] public section
@@ -33,21 +46,7 @@ universe u v w
 namespace Algebra
 attribute [-instance] IntermediateField.module' in
 /-- Finite purely inseparable fraction-field base changes of a regular formally
-smooth complete algebra are regular.
-Source: Stacks Project, More on Algebra, Proposition 07PM, final two paragraphs.
-(blueprint: lem-weil-pbc-fs-regular-complete-purely-inseparable-regular)
-
-Proof: Localize the regular ring C at the images of the nonzero elements of A;
-localization base change and localization of regular rings make K tensor_A C
-regular. If K has characteristic zero, a purely inseparable extension is
-separable and therefore trivial. Transport the localized regular ring along
-the induced tensor equivalence. In characteristic p, use strong induction on
-the finite degree [L:K]. If the bottom intermediate field is the top, the
-structure map K -> L is surjective and the same tensor equivalence applies.
-Otherwise Fields 09HI supplies an intermediate M with [M:K] < [L:K] and
-[L:M] = p. Apply the induction hypothesis to M/K. The degree-p ascent lemma
-lem-weil-pbc-fs-complete-degree-p-regular then gives regularity over L.
-This treats degree one, p = 2, and a zero generic fibre without exceptions. -/
+smooth complete algebra are regular. -/
 theorem isRegularRing_tensorProduct_of_formallySmoothAdic_regular_complete_purelyInseparable
     (A : Type u) (C : Type v) (K : Type u) (L : Type w)
     [CommRing A] [IsDomain A] [IsRegularLocalRing A]

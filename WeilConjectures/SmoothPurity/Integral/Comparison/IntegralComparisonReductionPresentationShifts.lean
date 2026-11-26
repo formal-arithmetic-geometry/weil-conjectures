@@ -10,7 +10,12 @@ import WeilConjectures.CategoryTheory.SmoothPurity.CanonicalRightDerivedAdjuncti
 import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitFixedCalculusModels
 import WeilConjectures.TraceFormula.Coherent.CoherentQuotientModelComparison
 
-/-! # Reindexing a coherent quotient presentation -/
+/-! # Reindexing a coherent quotient presentation
+
+## References
+
+* Stacks Project, Tags 014E, 06YY and 0941
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -217,28 +222,7 @@ def integralComparisonShiftedFiniteIso (Y : Scheme.{u})
     m).app C ≪≫ (shiftFunctor _ m).mapIso (κ n) ≪≫
       (((unrestrictedIntegralFiniteComplex l E Y n).commShiftIso m).app P).symm
 
-/-- A coherent reduction presentation remains coherent under the fixed shifts.
-
-Source: Stacks 014E, 06YY and 0941; step 1 of
-lem-sf-integral-pullback-realization-shifts.
-(blueprint: lem-sf-integral-reduction-presentation-shifts).
-
-Proof: compute each total-limit projection on a simultaneous K-injective
-replacement. Its term in degree j after shifting by m is the original term
-in degree j+m. Transpose this equation through the finite scalar adjunction.
-The counit_projection identity identifies its mate with reductionEvaluation;
-the canonical left-adjoint shift is defined by precisely this mate. The
-universal finite scalar counit identifies its representative with termwise
-reindexing. Thus the first presentation equation holds after conjugating e
-by the reduction and localization shifts and kappa by the ordinary termwise
-shifts, exactly as in the two displayed definitions. Apply the shift functor
-to the horizontal equation to obtain the second presentation equation.
-For whole-system coherence shift its strict tensor-unit map b. Its section
-formula is unchanged in degree j+m. The constant-tower/limit adjunction and
-its shift-compatible unit and counit give the entire-tower transpose equation,
-including the exact localization factors. This proves coherence without using
-finite evaluations to detect derived morphisms. Zero shift is identity;
-negative shifts and the zero complex use the same reindexing formulas. -/
+/-- A coherent reduction presentation remains coherent under the fixed shifts. -/
 theorem integralComparisonReductionPresentation_shift (Y : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus l E Y)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory)

@@ -13,11 +13,7 @@ public import WeilConjectures.WeilSheaf.RealPurity
 Let `j : U₀ ⟶ C₀` be a dense open immersion into a smooth geometrically connected curve over
 `k₀ = 𝔽_q` and `ℱ` a lisse Weil sheaf on `U₀`, punctually `ι`-pure of weight `w`. If `ℱ` is
 unramified at a closed point `x` of `C₀`, in the sense that `j_* ℱ` is lisse on an open
-neighbourhood `V₀` of `x`, then the stalk `(j_* ℱ)_x̄` is `ι`-pure of weight `w`
-(blueprint `corollary-unramified-boundary-point--2`, first clause): the restriction `(j_* ℱ)|_{V₀}`
-is a lisse sheaf on the smooth geometrically connected curve `V₀` whose restriction to the dense
-open `U₀ ∩ V₀` is `ℱ|_{U₀ ∩ V₀}`, pure of weight `w`, so it is pure of weight `w` on all of `V₀`
-(`AlgebraicGeometry.WeilSheaf.IsLisse.isPunctuallyPureOfWeight_of_upperStar`).
+neighbourhood `V₀` of `x`, then the stalk `(j_* ℱ)_x̄` is `ι`-pure of weight `w`.
 
 ## Main statements
 
@@ -25,6 +21,14 @@ open `U₀ ∩ V₀` is `ℱ|_{U₀ ∩ V₀}`, pure of weight `w`, so it is pur
   stalks of `j_* ℱ` at the points of `U₀`.
 - `WeilSheaf.IsPunctuallyPureOfWeight.isPureOfWeight_stalk_directImage_of_isLisse`:
   purity at a boundary point near which `j_* ℱ` is lisse.
+
+## Implementation details
+
+The restriction `(j_* ℱ)|_{V₀}` is a lisse sheaf on the smooth geometrically connected curve
+`V₀` whose restriction to the dense open `U₀ ∩ V₀` is `ℱ|_{U₀ ∩ V₀}`, pure of weight `w`, so it
+is pure of weight `w` on all of `V₀`
+(`AlgebraicGeometry.WeilSheaf.IsLisse.isPunctuallyPureOfWeight_of_upperStar`, by boundary
+semicontinuity for it and for its dual).
 -/
 
 @[expose] public section
@@ -54,19 +58,11 @@ theorem IsPunctuallyPureOfWeight.isPureOfWeight_stalk_directImage
   rwa [Scheme.Hom.residueCard, degreeOver_eq_of_isOpenImmersion j, hxy,
     ← Scheme.Hom.residueCard] at h
 
-/-- Blueprint `corollary-unramified-boundary-point--2` (first clause): Purity at an unramified
-boundary point.
-
-Let `j : U₀ ⟶ C₀` be a dense open immersion into a smooth geometrically connected curve and `ℱ`
-a lisse Weil sheaf on `U₀`, punctually `ι`-pure of weight `w`. Let `x` be a closed point of `C₀`
-at which `ℱ` is unramified: `j_* ℱ` is lisse on an open neighbourhood `i : X'₀ ⟶ C₀` of `x`.
-Then the stalk `(j_* ℱ)_x̄` is `ι`-pure of weight `w`.
-
-The lisse sheaf `i^* j_* ℱ` on the smooth geometrically connected curve `X'₀` restricts on the
-dense open `U'₀ = U₀ ×_{C₀} X'₀` to the restriction of `ℱ`, which is pure of weight `w`; hence it
-is pure of weight `w` on `X'₀`
-(`AlgebraicGeometry.WeilSheaf.IsLisse.isPunctuallyPureOfWeight_of_upperStar`, by boundary
-semicontinuity for it and for its dual). -/
+/-- Purity at an unramified boundary point. Let `j : U₀ ⟶ C₀` be a dense open immersion into a
+smooth geometrically connected curve and `ℱ` a lisse Weil sheaf on `U₀`, punctually `ι`-pure of
+weight `w`. Let `x` be a closed point of `C₀` at which `ℱ` is unramified: `j_* ℱ` is lisse on an
+open neighbourhood `i : X'₀ ⟶ C₀` of `x`. Then the stalk `(j_* ℱ)_x̄` is `ι`-pure of weight
+`w`. -/
 theorem IsPunctuallyPureOfWeight.isPureOfWeight_stalk_directImage_of_isLisse
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]

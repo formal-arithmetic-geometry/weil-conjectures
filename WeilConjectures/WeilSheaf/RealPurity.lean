@@ -22,8 +22,7 @@ public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact
 
 Let `C₀` be a smooth geometrically connected curve over a finite field `k₀` and `𝒢₀` an `ι`-real
 lisse Weil sheaf on `C₀`. Every irreducible constituent of `𝒢₀` is punctually `ι`-pure, of its
-determinant weight. This is the main theorem of the blueprint section `chap-Purity-of-real-sheaves`,
-formalised there on the side of representations of the Weil group
+determinant weight. The theorem is first proved on the side of representations of the Weil group
 (`AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal`); this file states
 it for Weil sheaves, with irreducible constituents rendered as irreducible lisse subquotients
 `𝒢₂ / 𝒢₁` of lisse Weil subsheaves `𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢₀`.
@@ -43,15 +42,14 @@ the Frobenius elements, so the eigenvalues and determinants agree.
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight`:
-  blueprint `theorem-purity-real-sheaves-curves--1` (`theorem-purity-real-sheaves-curves--1`).
+  purity of real lisse sheaves on curves, with the determinant weight.
 - `AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel`: the weaker form
   asserting only the existence of a weight.
-- `AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`: blueprint
-  `proposition-weights-j-boundary-points--1` (`proposition-weights-j-boundary-points`).
-- `AlgebraicGeometry.WeilSheaf.IsLisse.isPunctuallyPureOfWeight_of_upperStar`: blueprint
-  `corollary-unramified-boundary-point--2`, consequence clause
-  (`proposition-weights-j-boundary-points`), deduced from boundary semicontinuity applied to the
-  sheaf and to its dual.
+- `AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`: boundary semicontinuity
+  of weights on a curve.
+- `AlgebraicGeometry.WeilSheaf.IsLisse.isPunctuallyPureOfWeight_of_upperStar`: purity extends
+  over the missing points, deduced from boundary semicontinuity applied to the sheaf and to its
+  dual.
 -/
 
 @[expose] public section
@@ -239,11 +237,7 @@ variable {ι : PadicAlgCl l →+* ℂ} {C : Scheme.{u}} [C.Over (Spec (CommRingC
 curve over `k₀` and `𝒢₀` an `ι`-real lisse Weil sheaf on `C₀`. Every irreducible constituent `V`
 of `𝒢₀`, that is, every irreducible lisse quotient `V = 𝒢₂ / 𝒢₁` of lisse Weil subsheaves
 `𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢₀`, is punctually `ι`-pure of its determinant weight `w`: at every closed point `x`,
-`rank(V_x̄) * w` is the `ι`-weight of `det(F_x | V_x̄)`.
-
-The statement is transported from the representation side
-(`AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal`) along the lisse
-sheaf–representation equivalence (`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse`). -/
+`rank(V_x̄) * w` is the `ι`-weight of `det(F_x | V_x̄)`. -/
 theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight
     {𝒢 : WeilSheaf k₀ l C} (h𝒢 : 𝒢.IsLisse) (hreal : 𝒢.IsReal ι) {𝒢₁ 𝒢₂ : WeilSheaf k₀ l C}
     (i : 𝒢₁ ⟶ 𝒢₂) (j : 𝒢₂ ⟶ 𝒢) [Mono i] [Mono j] (h₁ : 𝒢₁.IsLisse) (h₂ : 𝒢₂.IsLisse)
@@ -359,12 +353,10 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight
     rw [show (cokernel i).stalk x = Q.obj.stalk x from rfl,
       FrobeniusModule.det_frobeniusEnd_eq_of_linearEquiv _ f hf, f.finrank_eq, hqx, hγ x]
 
-/-- **Purity of real lisse sheaves on curves**, weak form (blueprint:
-`theorem-purity-real-sheaves-curves--1`). Let `C₀` be a smooth geometrically
+/-- **Purity of real lisse sheaves on curves**, weak form. Let `C₀` be a smooth geometrically
 connected curve over `k₀` and `𝒢₀` an `ι`-real lisse Weil sheaf on `C₀`. Every irreducible
 constituent of `𝒢₀`, that is, every irreducible lisse quotient `𝒢₂ / 𝒢₁` of lisse Weil subsheaves
-`𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢₀`, is punctually `ι`-pure. The weight is the determinant weight by
-`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight`. -/
+`𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢₀`, is punctually `ι`-pure. -/
 theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel {𝒢 : WeilSheaf k₀ l C} (h𝒢 : 𝒢.IsLisse)
     (hreal : 𝒢.IsReal ι) {𝒢₁ 𝒢₂ : WeilSheaf k₀ l C} (i : 𝒢₁ ⟶ 𝒢₂) (j : 𝒢₂ ⟶ 𝒢) [Mono i]
     [Mono j] (h₁ : 𝒢₁.IsLisse) (h₂ : 𝒢₂.IsLisse) (hirr : (cokernel i).IsIrreducibleLisse) :
@@ -376,8 +368,7 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel {𝒢 : WeilSheaf k₀ l
 /-- *Boundary semicontinuity of weights* on a curve: let `j : U₀ ⟶ C₀` be a dense open immersion
 into a smooth geometrically connected curve over `k₀`. If the lisse sheaf `F` on `U₀` has punctual
 weights at most `β`, then so has its direct image `j_*F` at every closed point of `C₀`, including
-the finitely many points outside `U₀`, where it may be singular.
-(blueprint: `proposition-weights-j-boundary-points--1`) -/
+the finitely many points outside `U₀`, where it may be singular. -/
 theorem IsLisse.hasWeightsAtMost_directImage {U C : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
@@ -427,8 +418,7 @@ theorem IsLisse.hasWeightsAtMost_directImage {U C : Scheme.{u}}
 
 /-- *Upper weight bounds extend over the missing points.* Let `G` be a lisse Weil sheaf on a
 smooth geometrically connected curve `C` over `k₀` and `j : U ↪ C` a dense open immersion. If
-`j^*G` has weights at most `w`, then so has `G ≅ j_* j^* G`, by boundary semicontinuity
-(`AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`). -/
+`j^*G` has weights at most `w`, then so has `G`. -/
 theorem IsLisse.hasWeightsAtMost_of_upperStar {ι : PadicAlgCl l →+* ℂ}
     {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
@@ -447,13 +437,7 @@ theorem IsLisse.hasWeightsAtMost_of_upperStar {ι : PadicAlgCl l →+* ℂ}
 /-- **Purity extends over the missing points.** Let `G` be a lisse Weil sheaf on a smooth
 geometrically connected curve `C` over `k₀` and `j : U ↪ C` a dense open immersion such that
 `j^*G` is punctually `ι`-pure of weight `w`. Then `G` is punctually `ι`-pure of weight `w` on all
-of `C`. By boundary semicontinuity applied to `G ≅ j_* j^* G`
-(`AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_of_upperStar`), `G` has weights at most
-`w`, and likewise its dual `G^∨`, whose restriction `j^*G^∨` is pure of weight `-w`, has weights
-at most `-w`; so the eigenvalues of the local Frobenius of `G` are pure of weight `w`.
-(blueprint: `corollary-unramified-boundary-point--2`, consequence clause, subsection
-`proposition-weights-j-boundary-points`)
--/
+of `C`. -/
 theorem IsLisse.isPunctuallyPureOfWeight_of_upperStar {ι : PadicAlgCl l →+* ℂ}
     {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]

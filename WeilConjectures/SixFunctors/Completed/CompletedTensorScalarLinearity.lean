@@ -36,8 +36,12 @@ import Mathlib.CategoryTheory.Linear.FunctorCategory
 
 /-! # Scalar linearity of the completed tensor
 
-Source: Stacks 06YS and 0941; completed tensor-Hom transpose, proof step 3
-(blueprint: lem-coef-completed-tensor-scalar-linearity).
+Completed tensor is linear in its first morphism variable.
+
+## References
+
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -545,17 +549,7 @@ private theorem ambientTensor_smul_id
 
 variable [∀ w : W, Invertible (l : W.residueField w)]
 
-/-- Completed tensor is linear in its first morphism with the second fixed.
-Source: Stacks 06YS and 0941; parent transpose proof step 3.
-Proof: on flat-term K-flat representatives, scalar multiplication acts by the
-constant completed section in each degree. The balanced total tensor sends
-(c f) tensor g to c times (f tensor g), componentwise, with unchanged signs.
-Every quotient and tower transition commutes with the constant section.
-The Roos maps and derived localization preserve this equality. Conjugating by
-the normalized descent comparison gives the equality for all derived arrows.
-Restriction to the constructible full subcategory changes no morphism or scalar.
-Zero objects, zero scalars and arbitrary torsion inputs require no cancellation.
-(blueprint: lem-coef-completed-tensor-scalar-linearity). -/
+/-- Completed tensor is linear in its first morphism with the second fixed. -/
 theorem completedTensor_map_smul_left
     (M M' N N' : sfIntegralConstructibleCategory l E W) (f : M ⟶ M') (g : N ⟶ N')
     (c : Padic.coefficientExtensionIntegers l E) :

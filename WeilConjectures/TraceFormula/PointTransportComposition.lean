@@ -11,14 +11,20 @@ public import WeilConjectures.ProperBaseChange.IntegralFinitePullbackComposition
 /-!
 # Composition of finite-level point transports
 
-Source: Deligne, Weil II (1.1.7), printed pp. 150--151; the finite-level refinement
-of the proof of blueprint lemma-scheme-frobenius-geometric-frobenius--3; Stacks
-Tags 03CE, 06UM, 015F and 0D6D (blueprint: lem-trf-point-transport-composition).
+We identify the intrinsic finite pullback along each power of the fixed geometric Frobenius with
+the recorded tensor pullback (`pointPowerPullbackModel`).
+
+## Implementation details
 
 The helpers spell out the recipe in the statement for each power of the fixed
 geometric Frobenius. The positive coefficient exponent is indexed by n + 1.
 The composition comparison is expressed in the recorded intrinsic finite-module
 presentation, with its ordinary comparison and exact localization comparisons.
+
+## References
+
+* Deligne, *La conjecture de Weil II*, (1.1.7)
+* Stacks Project, Tags 03CE, 06UM, 015F, 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -39,9 +45,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
 /-- The unit-normalized identification of the intrinsic finite pullback with the
 recorded tensor pullback. Both factors are the existing adjunction comparisons;
-no isomorphism is chosen here.
-Source: Stacks 03D3 and 0D6D; the recorded finite composition interface
-(blueprint: lem-trf-point-transport-composition). -/
+no isomorphism is chosen here. -/
 def pointPowerPullbackModel (n : ℕ) {X Y : Scheme.{u}} (f : X ⟶ Y) :
     finiteDerivedPullback l E n f ≅
       proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E (n + 1)) f :=

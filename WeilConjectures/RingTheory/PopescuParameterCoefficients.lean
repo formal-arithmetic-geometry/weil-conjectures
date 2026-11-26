@@ -16,7 +16,13 @@ import WeilConjectures.RingTheory.PopescuParameterCoefficientModel
 /-!
 # Coefficient construction for compatible Popescu parameters
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07FJ.
+We construct the parameters `u_i` and their coefficient equations
+`u_i^(2N) = ∑_j μ_ij f(a_j)` in the coefficient model `D'[t]`, independently of any presented
+standardizer algebra.
+
+## References
+
+* [Stacks, Tag 07FJ] (proof)
 -/
 
 @[expose] public section
@@ -27,22 +33,7 @@ universe u v w
 namespace Algebra
 
 /-- Construct the parameters and their coefficient equations, independently of any presented
-standardizer algebra. Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ,
-items item-NP through item-choose-deltai and item-eighth-resolve.
-(blueprint: lem-weil-pbc-popescu-parameter-coefficients).
-
-Proof: Apply the rescaled-parameter coefficient-model construction (the preceding
-steps of Stacks 07FJ). It supplies an injective map on the constants of D'[t], units
-δ_i, coefficient constants λ_ij, and images X_i = C(u_i)t_i. Its R-algebra evaluation
-map sends t_i to C(δ_i), and the images of A and λ_ij are the prescribed residues.
-Apply the evaluation map to the equation in Λ. Injectivity on constants contracts
-this to (u_i δ_i)^(2N) = sum_j λ_ij f₀(a_j) in D'. Multiply by δ_i^(-2N), using
-δ_i δ_i⁻¹ = 1, to obtain u_i^(2N) = sum_j λ_ij δ_i^(-2N) f₀(a_j).
-Set f = C composed with f₀ and μ_ij = C(λ_ij δ_i^(-2N))t_i^(2N). Preservation
-of powers and sums by C and distributivity give the coefficient equations in D'[t].
-Evaluation sends μ_ij to λ_ij because the powers of δ_i cancel, and sends f(x)
-to the prescribed residue of α(x). Retain the parameters, kernel equalities and
-ideal bounds of the model. No choices become global definitions. -/
+standardizer algebra. -/
 theorem exists_popescu_parameter_coefficients
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]

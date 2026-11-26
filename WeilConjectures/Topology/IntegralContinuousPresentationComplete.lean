@@ -14,24 +14,25 @@ import Mathlib.Tactic.FunProp
 
 A compatible sequence modulo powers of a scalar has a continuous representative
 on a compact extremally disconnected test space.
+
+## Implementation details
+
+The representative and all matrix and divisibility witnesses live in a product of copies of the
+compact coefficient ring, where the congruences are closed conditions. Compactness gives a
+pointwise simultaneous solution, the closed total solution space is compact Hausdorff and
+surjects onto the test space, and extremal disconnectedness splits this surjection
+continuously.
+
+## References
+
+* Hemo, Richarz, Scholbach, *Constructible sheaves on schemes*, Proposition 5.1.
 -/
 
 @[expose] public section
 set_option autoImplicit false
 namespace ContinuousMap
 
-/-- Compatible classes in a continuous finite presentation have a continuous limit.
-Source: Hemo--Richarz--Scholbach, Proposition 5.1, finite-presentation substep.
-(blueprint: lem-sp-integral-continuous-presentation-complete).
-
-Proof. Put the representative and all matrix and divisibility witnesses in a
-product of copies of the compact coefficient ring. The congruences are closed
-conditions. Every finite family is solved by a sufficiently late sequence term
-and its compatibility witnesses. Compactness gives a simultaneous solution over
-each point. The closed total solution space is compact Hausdorff and surjects onto
-the test space. Extremal disconnectedness splits this surjection continuously;
-its coordinates give the required continuous functions. Empty matrices, an empty
-test space, and arbitrary scalars are included. -/
+/-- Compatible classes in a continuous finite presentation have a continuous limit. -/
 theorem exists_matrix_limit_of_compatible
     {S : Type*} {R : Type} [TopologicalSpace S] [CompactSpace S] [T2Space S]
     [ExtremallyDisconnected S] [CommRing R] [TopologicalSpace R]

@@ -13,8 +13,9 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # Normalized maps between finite scalar reductions
 
-Source: Stacks, Modules on Sites, Tags 03CZ and 03EL.
-(blueprint: lem-pur-integral-scalar-finite-reduction-unit-map).
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CZ and 03EL
 -/
 
 -- After pruning, this module only keeps private declarations.

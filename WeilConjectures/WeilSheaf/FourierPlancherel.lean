@@ -30,7 +30,8 @@ with `r = #ι` (`AlgebraicGeometry.affineSpaceFourierTransform`) multiplies it b
 It follows from the Fourier trace formula on `𝔸^ι`
 (`AlgebraicGeometry.WeilComplex.traceFunction_affineSpaceFourierTransform`), the sign `(-1)^r`
 having absolute value one, and the classical Plancherel identity on `𝔽_{qⁿ}^ι`
-(`FiniteField.sum_norm_sq_fourierTransformPi`). The affine line is the case `ι = PUnit`.
+(`FiniteField.sum_norm_sq_fourierTransformPi`); the nontriviality of `ψ` is needed for the
+orthogonality of the characters `y ↦ ψ(Tr⟨x, y⟩)`. The affine line is the case `ι = PUnit`.
 
 ## Main declarations
 
@@ -56,8 +57,7 @@ section
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The trace function of a Weil sheaf placed in degree `0` and shifted by one is the negative
-of the trace function of the sheaf: the only cohomology sheaf is `𝓗⁻¹(F[1]) ≅ F`, in odd
-degree. -/
+of the trace function of the sheaf. -/
 theorem WeilSheaf.traceFunction_shift_toComplex (F : WeilSheaf k₀ l X) (n : ℕ)
     (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
     ((toComplex.obj F)⟦(1 : ℤ)⟧).traceFunction n x = -F.traceFunction n x := by
@@ -68,7 +68,7 @@ theorem WeilSheaf.traceFunction_shift_toComplex (F : WeilSheaf k₀ l X) (n : �
 
 /-- The trace energy `‖f_K‖²_n = ∑_{x ∈ X₀(𝔽_{qⁿ})} |ι t_K(x)|²` of a Weil complex at level
 `n`, the squared `L²`-norm of its trace function on the `𝔽_{qⁿ}`-points, with junk value `0` if
-`X₀` has infinitely many `𝔽_{qⁿ}`-points. (blueprint: `definition-growth-squared-traces`) -/
+`X₀` has infinitely many `𝔽_{qⁿ}`-points. -/
 noncomputable def WeilComplex.traceEnergy (ι : PadicAlgCl l →+* ℂ) (K : WeilComplex k₀ l X)
     (n : ℕ) : ℝ :=
   ∑ᶠ x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n),
@@ -94,10 +94,7 @@ variable {ι : Type u} [Fintype ι]
 complex `K` on the affine space `𝔸^ι` with `r = #ι` and every `n ≥ 1`, the Fourier transform
 multiplies the trace energy at level `n` by `q^{nr}`:
 
-`∑_{y ∈ 𝔽_{qⁿ}^ι} |j t_{FT_ψ(K)}(y)|² = q^{nr} ∑_{x ∈ 𝔽_{qⁿ}^ι} |j t_K(x)|²`.
-
-The nontriviality of `ψ` is needed for the orthogonality of the characters `y ↦ ψ(Tr⟨x, y⟩)`.
-(blueprint: `corollary-plancherel--1`, subsection `corollary-plancherel`) -/
+`∑_{y ∈ 𝔽_{qⁿ}^ι} |j t_{FT_ψ(K)}(y)|² = q^{nr} ∑_{x ∈ 𝔽_{qⁿ}^ι} |j t_K(x)|²`. -/
 theorem WeilComplex.traceEnergy_affineSpaceFourierTransform (ψ : AddChar k₀ (PadicAlgCl l))
     (hψ : ψ ≠ 1) (j : PadicAlgCl l →+* ℂ) (K : WeilComplex k₀ l 𝔸(ι; Spec (CommRingCat.of k₀)))
     {n : ℕ} (hn : 1 ≤ n) :
@@ -129,10 +126,8 @@ by `qⁿ`:
 
 `∑_{y ∈ 𝔽_{qⁿ}} |ι t_{FT_ψ(K)}(y)|² = qⁿ ∑_{x ∈ 𝔽_{qⁿ}} |ι t_K(x)|²`.
 
-The nontriviality of `ψ`, implicit in the blueprint, is needed for the orthogonality of the
-characters `y ↦ ψ(Tr(xy))`. It is the case `ι = PUnit` of
-`AlgebraicGeometry.WeilComplex.traceEnergy_affineSpaceFourierTransform`.
-(blueprint: `corollary-plancherel--1`, subsection `corollary-plancherel`) -/
+It is the case `ι = PUnit` of
+`AlgebraicGeometry.WeilComplex.traceEnergy_affineSpaceFourierTransform`. -/
 theorem WeilComplex.traceEnergy_fourierTransform (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1)
     (ι : PadicAlgCl l →+* ℂ) (K : WeilComplex k₀ l (affineLine k₀)) {n : ℕ} (hn : 1 ≤ n) :
     ((fourierTransform ψ).obj K).traceEnergy ι n = (Nat.card k₀ : ℝ) ^ n * K.traceEnergy ι n := by

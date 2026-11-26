@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.Integ
 import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemCartesianBridgeTransport
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.IntegralSystemOpenRestrictionBridgeTransport
 
-/-! A factor identity used in proper/open transport. -/
+/-! A factor identity used in proper/open transport.
+
+## References
+
+* [Stacks, Tag 0F7B]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -70,19 +75,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
   ProEtale.SemilinearProperOpen.jComp OpenComparisons.unit restrictFactor
   ProEtale.SemilinearProperOpen.restrictFactor
 
-/-- The cartesian and restriction prefix commutes with the canonical bridge.
-Source: Stacks 0F7B and blueprint fix-prop-coherence.
-
-Proof: On ordinary sections the bridges are the identity and the compositors are the
-prescribed pullbackComp maps. Adjoint uniqueness identifies the corresponding
-pull compositors. The cochain normalization lifts this identity to the derived
-operations. Transport the unit defining beta and take its adjoint conjugate to
-obtain the cartesian square. Transport the restriction factor by uniqueness of
-open extension, its inverse open unit, and the normalized open compositor.
-Map this square by the second-projection direct functor and paste with the
-cartesian square. Naturality orders the source-coordinate bridge as displayed.
-This argument uses no clopen comparison or final direct compositor.
-(blueprint: lem-sf-integral-system-proper-open-prefix-bridge). -/
+/-- The cartesian and restriction prefix commutes with the canonical bridge. -/
 theorem properOpenPrefix_bridge (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)

@@ -18,9 +18,21 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDeri
 
 /-! # Coefficient transport of the ordinary relative derived tensor
 
-Source: the internal-Hom paragraph of `lem-fix-weil-operations.proof.md`, and
-steps 2--3 of the native geometric Hom comparison.
-(blueprint: lem-sf-native-coefficient-tensor-comparison).
+The coefficient equivalence carries the ordinary product-total derived tensor to the
+condensed-module derived tensor.
+
+## Implementation details
+
+The natural ordinary Hom representatives determine the right adjoint of the standard derived
+tensor, so uniqueness of left adjoints identifies the specified source tensor with the standard
+derived module tensor. Scalar forgetting followed by restriction along the coefficient ring
+isomorphism is an additive exact monoidal equivalence, so the generic derived monoidal
+comparison (built on K-flat resolutions) is invertible for it. The native derived braiding
+changes the fixed-right source convention to the fixed-left target convention.
+
+## References
+
+* Stacks Project, Tags 06YS and 08J9
 -/
 
 @[expose] public section
@@ -37,27 +49,7 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 /-- The coefficient equivalence carries ordinary product-total derived tensor to
 condensed-module derived tensor. The source tensor is fixed by its K-flat model,
-including the reversed input convention of `ordinaryTensorBifunctor`.
-
-Source: current blueprint, `lem-fix-weil-operations.proof.md`, internal-Hom paragraph;
-`lem-sf-native-geometric-hom-comparison`, proof steps 2--3; Stacks Tags 06YS and 08J9.
-(blueprint: lem-sf-native-coefficient-tensor-comparison).
-
-Proof: The natural ordinary Hom representatives determine the right adjoint of
-standard derived tensor. Uniqueness of left adjoints therefore identifies the
-specified source tensor with the standard derived module tensor. To equip
-ambient scalar forgetting with a monoidal structure, construct its left adjoint
-as free ambient modules followed by extension along the coefficient counit.
-Both factors are strong monoidal. Scalar forgetting is an equivalence, so the
-inverse monoidal structure on this left adjoint transfers back to forgetting
-by uniqueness of right adjoints. Restriction along the coefficient ring
-isomorphism is strong monoidal and an equivalence too. Thus their composite is
-an additive exact monoidal equivalence and preserves flat objects. Apply the
-existing generic derived monoidal comparison, which is invertible for such a
-functor and is built on K-flat resolutions. First use the native derived
-braiding to change the fixed-right source convention to the fixed-left target
-convention. The result applies to unbounded complexes, zero objects and the
-empty scheme. No constructibility or Frobenius datum is used. -/
+including the reversed input convention of `ordinaryTensorBifunctor`. -/
 theorem nativeCoefficient_tensorComparison (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×
       DerivedCategory (ProEtale.AdicSheaf l Y) ⥤

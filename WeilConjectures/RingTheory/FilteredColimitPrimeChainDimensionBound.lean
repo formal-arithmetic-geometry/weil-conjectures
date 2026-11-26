@@ -11,10 +11,21 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 import WeilConjectures.RingTheory.FilteredColimitPrimeChainContraction
 
-/-! Krull-dimension bound for filtered colimits.
+/-!
+# Krull-dimension bound for filtered colimits
 
-Source: Stacks Project, More on Algebra, Tag 06LK.
-(blueprint: lem-sc-filtered-colimit-prime-chain-dimension-bound)
+The Krull dimension of a filtered colimit of rings is at most the supremum of the dimensions of
+its stages.
+
+## Implementation details
+
+Each finite prime chain of the colimit contracts strictly to some stage
+(`CommRingCat.filteredColimit_prime_chain_contraction`); one then takes the supremum in the
+definition of `ringKrullDim`.
+
+## References
+
+* [Stacks, Tag 06LK]
 -/
 
 @[expose] public section
@@ -26,9 +37,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CommRingCat
 
 /-- The Krull dimension of a filtered colimit is bounded by the supremum of the
-dimensions of its stages. This follows by applying finite prime-chain contraction
-to each chain and then taking the supremum in the definition of `ringKrullDim`.
-(blueprint: lem-sc-filtered-colimit-prime-chain-dimension-bound) -/
+dimensions of its stages. -/
 theorem filteredColimit_prime_chain_dimension_bound
     {I : Type u} [SmallCategory I] [IsFiltered I]
     (R : I ⥤ CommRingCat.{u}) :

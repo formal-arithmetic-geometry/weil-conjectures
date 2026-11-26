@@ -15,8 +15,12 @@ import WeilConjectures.RingTheory.SmoothConormalBasisEtalePolynomialChart
 /-!
 # Smooth retracts of standard smooth algebras
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07CH
-(blueprint: lem-weil-pbc-smooth-retract-standard-smooth).
+We show that every smooth `R`-algebra is a retract of a standard smooth `R`-algebra, via a
+smooth inclusion.
+
+## References
+
+* [Stacks, Tag 07CH]
 -/
 
 @[expose] public section
@@ -27,22 +31,7 @@ namespace Algebra
 
 
 /-- Every smooth R-algebra admits an R-algebra inclusion into a standard smooth R-algebra,
-with an R-algebra retraction, and the inclusion itself is smooth.
-Source: Stacks Project, Lemma 07CH
-(blueprint: lem-weil-pbc-smooth-retract-standard-smooth).
-
-Proof. First take the relative global complete intersection retract `C` of Stacks 07CG,
-with its specified conormal basis. Smooth composition makes `C` smooth over `R`.
-The étale polynomial chart lemma (the construction in the proof of 07CH) gives
-`g ∈ C[y]` with constant coefficient one and an étale `R[z]`-algebra `L = C[y]_g`.
-Mathlib identifies étale algebras with standard smooth algebras of relative dimension zero;
-composition with the standard smooth polynomial algebra makes `L` standard smooth over `R`.
-Evaluation at zero sends `g` to one, so the localization universal property extends evaluation
-to an `R`-algebra map `L → C`. Composing with `C → A` gives the retraction; its composite
-with `A → C → L` is the identity because evaluation fixes constants.
-Polynomial extension and principal localization are smooth, so `A → L` is smooth by
-composition. Finally lift `L` to the universe required by the unchanged statement and
-transport these properties along the canonical algebra equivalence. -/
+with an R-algebra retraction, and the inclusion itself is smooth. -/
 theorem Smooth.exists_standardSmooth_retract
     (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A] [Smooth R A] :
     ∃ (B : Type (max u v)) (_ : CommRing B) (_ : Algebra R B),

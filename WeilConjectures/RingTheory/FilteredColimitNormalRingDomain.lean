@@ -14,6 +14,23 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
 import WeilConjectures.RingTheory.FilteredColimitIsDomain
 
+/-!
+# Localizations of filtered colimits of domains
+
+The localization of a filtered colimit of commutative rings at a prime is a domain when every
+stage localization at the contracted prime is a domain. This is the domain part of the proof of
+Stacks, Tag 037D.
+
+## Implementation details
+
+The localization of the colimit is identified with the filtered colimit of the stage
+localizations, and `CommRingCat.isDomain_of_filtered_colimit_cocone` applies.
+
+## References
+
+* [Stacks, Tag 037D]
+-/
+
 @[expose] public section
 
 universe u
@@ -24,12 +41,6 @@ namespace CommRingCat
 
 /-- The localization of a filtered colimit at a prime is a domain when every
 stage localization at a contracted prime is a domain.
-(blueprint: proposition-proper-direct-image-constructible-complexes)
-
-This is the domain part of the proof of Stacks Project, Algebra, Tag 037D.
-Representatives of two factors are lifted to a common stage using filteredness;
-the zero relation is then detected at a later stage, where the stage
-localization is a domain.
 -/
 theorem filtered_colimit_localization_isDomain
     {I : Type u} [SmallCategory I] [IsFiltered I]

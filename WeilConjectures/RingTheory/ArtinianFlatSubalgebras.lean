@@ -18,8 +18,20 @@ import Mathlib.Algebra.Algebra.Subalgebra.Directed
 /-!
 # Flat Artinian subalgebras essentially of finite type
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 16.11.1 (Tag 07FG)
-(blueprint: lem-weil-pbc-popescu-artinian-flat-subalgebras).
+An Artinian local algebra in positive characteristic with finite first cotangent homology of its
+residue field is a directed union of flat Artinian local subalgebras essentially of finite type.
+
+## Implementation details
+
+The coefficient presentation theorem gives a residue-field section, finite maximal-ideal
+generators and finite coefficients; the coefficient descent theorem enlarges the coefficient set
+so that every further finite enlargement has the required properties. The subalgebras are
+indexed by finite sets of residue coefficients, ordered by inclusion. The colimit property is
+obtained from `Subalgebra.iSupLift`.
+
+## References
+
+* [Stacks, Tag 07FG] (Smoothing Ring Maps, Lemma 16.11.1)
 -/
 
 @[expose] public section
@@ -31,25 +43,7 @@ namespace Algebra
 /-- An Artinian local algebra in positive characteristic with finite first cotangent homology
 of its residue field is a directed union of flat Artinian local subalgebras essentially of
 finite type. The final clause spells out the colimit universal property for the inclusion
-maps, using compatible families of algebra maps into any test algebra in `Type (max u v w)`.
-
-Source: Stacks Project, Smoothing Ring Maps, Lemma 16.11.1 (Tag 07FG)
-(blueprint: lem-weil-pbc-popescu-artinian-flat-subalgebras).
-
-Proof:
-1. The coefficient presentation theorem (Tag 07FG, the coefficient-field claim) gives a
-   residue-field section, finite maximal-ideal generators and finite coefficients containing
-   the image of k in the polynomial image. It also gives generation by all residue coefficients.
-2. The coefficient descent theorem (Tag 07FG, the final presentation argument) enlarges the
-   finite coefficient set so every further finite enlargement has all the required properties.
-3. Index the explicitly constructed subalgebras by finite residue coefficient sets. Monotonicity
-   of field and algebra generation gives directedness, with union of finite sets as upper bound.
-   Every ideal generator is in the empty stage and every residue coefficient in a singleton
-   stage. The presentation's generation clause therefore makes their supremum top, and
-   Mathlib's directed-supremum formula gives coverage of Lambda.
-4. For compatible maps on the family, Mathlib's Subalgebra.iSupLift constructs the map on the
-   top subalgebra. Compose with the inverse of topEquiv. Its restrictions are the given maps
-   by iSupLift_mk. Every element belongs to a stage, so agreement there proves uniqueness. -/
+maps, using compatible families of algebra maps into any test algebra in `Type (max u v w)`. -/
 theorem exists_directed_artinian_flat_subalgebras
     (k : Type u) [Field k] (Λ : Type v) [CommRing Λ] [Algebra k Λ]
     [IsArtinianRing Λ] [IsLocalRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)

@@ -17,7 +17,22 @@ import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Symmetry of the evaluation-normalized canonical ordinary comparison
 
-Source: Stacks 03EK and 03EO; inverse Hom mates and pure tensor generators.
+The normalized canonical inverse comparison of internal Homs preserves the balanced swap of
+tensor products.
+
+## Implementation details
+
+Inverse Hom transport evaluated on the identity slice is native evaluation, by the forward
+evaluation identity and the equivalence counit formula. Applying the mate equation to the
+adjunct of the identity of the old relative tensor computes the inverse comparison on pure
+tensors. The ordinary quotient comparison and its standard braiding give a balanced swap. Both
+sides of its comparison square agree on pure tensors, so sheafification and tensor
+extensionality give the square. All statements are underived and allow zero modules and the
+empty site.
+
+## References
+
+* [Stacks, Tags 03EK and 03EO]
 -/
 
 @[expose] public noncomputable section
@@ -249,18 +264,7 @@ private theorem pure_tensor_ext
   exact h V x y
 
 -- Compare the explicit canonical functors and tensor instances.
-/-- The normalized canonical inverse comparison preserves the actual balanced swap.
-Source: Stacks 03EK and 03EO; evaluation on the identity slice and pure tensors.
-(blueprint: new-sf-canonical-ordinary-tensor-symmetry).
-
-Proof: inverse Hom transport evaluated on the identity slice is native evaluation,
-by the forward evaluation identity and the equivalence counit formula. Apply the
-mate equation to the adjunct of the identity of the old relative tensor. This
-computes the inverse comparison on pure tensors. The ordinary quotient comparison
-and its standard braiding give a balanced swap. Both sides of its comparison
-square agree on pure tensors, so sheafification and tensor extensionality give the
-square. All statements are underived and allow zero modules and the empty site.
--/
+/-- The normalized canonical inverse comparison preserves the actual balanced swap. -/
 theorem canonical_ordinary_tensor_symmetry
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : AdicModuleHomComparisonCore l Y) :

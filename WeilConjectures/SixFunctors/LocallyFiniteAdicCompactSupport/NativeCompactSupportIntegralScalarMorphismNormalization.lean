@@ -11,7 +11,14 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.Native
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompactSupportIntegralScalarBoundaries
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-/-! Canonical construction and six-arrow normalization of integral scalar morphisms. -/
+/-! # Normalization of integral scalar morphisms
+
+Canonical construction and six-arrow normalization of integral scalar morphisms.
+
+## References
+
+* [Bhatt--Scholze, Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -75,15 +82,9 @@ private theorem sixArrow_combine
   subst b d
   simp only [Category.assoc]
 
-/-- Construct a normalized integral morphism from a scalar natural transformation.
-Source: Bhatt--Scholze, Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15.
-Proof: compose the finite stage inclusion and rationalLeft comparisons, localization
-of the integral action, the target integral realization, the inverse compact-support
-realization, the supplied scalar map, and the inverse source and operation realizations.
-Full faithfulness of the derived section equivalence lifts this natural composite.
-Evaluating its components and applying associativity gives the displayed factors and
-six prescribed arrows. No invertibility of the supplied scalar map is assumed.
-(blueprint: lem-sf-native-integral-scalar-morphism-normalization). -/
+/-- Construct a normalized integral morphism from a scalar natural transformation, whose
+components are the displayed six prescribed arrows. The supplied scalar map need not be
+invertible. -/
 theorem native_integral_scalar_morphism_normalization [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (stage : StageAction l D hl P c) (E : Index l (PadicAlgCl l))

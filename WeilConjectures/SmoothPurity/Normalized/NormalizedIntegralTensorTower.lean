@@ -14,7 +14,10 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralTensorTransitionCompati
 
 /-! # Normalized strict integral tensor comparison
 
-Source: Stacks 03EL and 07A4; Bhatt--Scholze, Definition 3.4.10.
+## References
+
+* Stacks Project, Tags 03EL and 07A4.
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.4.10.
 -/
 
 @[expose] public noncomputable section
@@ -32,17 +35,7 @@ open AlgebraicGeometry.Scheme
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The tensor-reduction comparison has scalar normalization at every finite level.
-Source: Stacks 03EL, 07A4; Bhatt--Scholze, Definition 3.4.10
-(blueprint: lem-pur-normalized-integral-tensor-tower).
-Proof: choose the existing finite tensor comparisons normalized on pure summands.
-Their quotient-transition compatibility assembles them by NatTrans.ofOpSequence;
-naturality in the pair of complexes assembles a natural isomorphism. Whisker by
-the global slice/unrestricted tower comparison, whose finite components are identity
-maps. Before scalar restriction, finite-coefficient linearity extends the unit-scalar
-formula to every coefficient s, using s tensor z = s times (1 tensor z) and
-bilinearity in the first tensor factor. The assembled components give the formula.
-Uniqueness is proved separately by extensionality on scalar-extended total summands. -/
+/-- The tensor-reduction comparison has scalar normalization at every finite level. -/
 theorem normalizedIntegralTensorTower (W : Scheme.{t}) :
     ∃ d : (coefficientTotalTensor.{u, t + 1, t} (ProEt.topology W)
       (completedIntegralCommRingSheafUnrestricted l E W) ⋙

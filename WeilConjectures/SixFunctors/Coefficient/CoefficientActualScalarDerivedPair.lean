@@ -12,7 +12,20 @@ public import WeilConjectures.SixFunctors.Coefficient.CoefficientRingedSequenceS
 
 /-! # Normalized scalar tensor comparison on unbounded derived categories
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4.
+## Implementation details
+
+The scalar-derived pair is assembled from the specified ordinary and derived adjunctions; the
+object data are the given extension and derived functors, and the homotopy adjunction unit
+formula identifies the derived transpose through the canonical localization comparison. The
+actual integral-to-finite pair takes its ordinary functor from the scalar-extension existence
+theorem, so no arbitrary object is chosen.
+
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0D6D]
+* [Stacks, Tag 03CZ]
 -/
 
 @[expose] public section
@@ -38,10 +51,7 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   (TR : CoefficientTensorModels.{r, c, v, w} J R SR)
   (TS : CoefficientTensorModels.{r, c, v, w} J S SS)
 
-/-- A compatible adjunction-unit square also identifies every transpose.
-Source: Stacks 07A6 (blueprint: lem-coef-actual-scalar-derived-pair).
-Proof: apply the derived adjunction bijection, rewrite both transposes using their
-units, and use naturality of the restriction comparison and the ordinary triangle law. -/
+/-- A compatible adjunction-unit square also identifies every transpose. -/
 theorem adjunctionTranspose_of_unit
     {C : Type a} {D : Type b} {C' : Type c} {D' : Type d}
     [Category.{v} C] [Category.{w} D] [Category.{x} C'] [Category.{y} D']
@@ -139,11 +149,7 @@ theorem scalarPairWithAdjunction_normalization
   rw [hcP]
   exact hh
 
-/-- Construct the scalar-derived pair from the specified ordinary and derived adjunctions.
-Source: Stacks 07A4 and 0D6D (blueprint: lem-coef-actual-scalar-derived-pair).
-The object data are the given extension and derived functors; only their normalization
-proofs are assembled here. The homotopy adjunction unit formula identifies the derived
-transpose, using the canonical localization comparison. -/
+/-- Construct the scalar-derived pair from the specified ordinary and derived adjunctions. -/
 noncomputable def scalarPairWithAdjunction
     (E : scalarModules J R ⥤ scalarModules J S)
     (hobj : ∀ M, E.obj M = changeOfRings a M)
@@ -226,11 +232,7 @@ theorem coefficientFiniteAdjunction_unit (n : ℕ) :
   exact (derivedScalarExtensionRestrictionAdjunction l E W n).choose_spec
 
 -- The normalized unit compares the explicit scalar extension on sections.
-/-- The actual integral-to-finite scalar pair, with the recorded adjunctions.
-Source: Stacks 03CZ, 07A4 (blueprint: lem-coef-actual-scalar-derived-pair).
-The scalar-extension existence theorem determines its ordinary functor by its object
-and morphism equations. Its derived universal property and normalized adjunction then
-supply precisely the fields of the scalar pair; no arbitrary object is chosen. -/
+/-- The actual integral-to-finite scalar pair, with the recorded adjunctions. -/
 noncomputable def coefficientActualScalarDerivedPair (n : ℕ) :
     SheafOfModules.ScalarDerivedPair
       (J := AlgebraicGeometry.Scheme.ProEt.topology W)
@@ -262,23 +264,17 @@ noncomputable def coefficientActualScalarDerivedPair (n : ℕ) :
     (coefficientFiniteAdjunction l E W n)
     (coefficientFiniteAdjunction_unit l E W n)
 
-/-- The constructed pair retains the prescribed ordinary extension.
-Source: Stacks 07A6 (blueprint: lem-coef-actual-scalar-derived-pair).
-Proof: the extension field of scalarPairWithAdjunction is its given extension. -/
+/-- The constructed pair retains the prescribed ordinary extension. -/
 theorem coefficientActualScalarDerivedPair_extension (n : ℕ) :
     (coefficientActualScalarDerivedPair l E W n).extension =
       scalarReductionExtension l E W n := rfl
 
-/-- The ordinary adjunction agrees heterogeneously without unfolding its extension.
-Source: Stacks 07A6 (blueprint: lem-coef-actual-scalar-derived-pair).
-Proof: the adjunction is the supplied normalized adjunction by construction. -/
+/-- The ordinary adjunction agrees heterogeneously without unfolding its extension. -/
 theorem coefficientActualScalarDerivedPair_ordinaryAdjunction_heq (n : ℕ) :
     HEq (coefficientActualScalarDerivedPair l E W n).ordinaryAdjunction
       (scalarReductionExtension_adjunction l E W n).choose := HEq.rfl
 
-/-- The constructed pair retains the prescribed derived extension.
-Source: Stacks 07A6 (blueprint: lem-coef-actual-scalar-derived-pair).
-Proof: the derived field is exactly its supplied functor. -/
+/-- The constructed pair retains the prescribed derived extension. -/
 theorem coefficientActualScalarDerivedPair_derived (n : ℕ) :
     (coefficientActualScalarDerivedPair l E W n).derived =
       coefficientFiniteDerivedExtension l E W n := rfl

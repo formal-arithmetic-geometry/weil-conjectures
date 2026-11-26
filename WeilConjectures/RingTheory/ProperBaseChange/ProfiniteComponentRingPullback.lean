@@ -13,12 +13,27 @@ import WeilConjectures.RingTheory.ProEtale.WContractible
 
 /-! # Profinite change of components of a w-local affine ring
 
-Source: Stacks Project, Tags 097D, 096C, 096T, 0968, 096A, 0906 and 0A0D
-(blueprint: lem-weil-pbc-profinite-component-ring-pullback).
+For a w-local ring `C` and a continuous map `u : T → π₀(Spec C)` from a profinite space, there
+is a w-local, ind-Zariski and ind-étale `C`-algebra `D` identifying local rings whose spectrum is
+the topological pullback `Spec C ×_{π₀(Spec C)} T`.
+
+## Implementation details
 
 The topological pullback is expressed as a subspace of `Spec C × T`. Both homeomorphisms
 are tied to the structure map and to the projection to `T`; the localization condition
 concerns the induced homomorphism itself.
+
+The component quotient of `Spec C` is compact, Hausdorff and totally disconnected, and the
+closed points map homeomorphically to it by w-locality. The spectrum of the ring of locally
+constant functions `T → C` is `T × Spec C`; restricting to the closed union of components
+`u(t) = component(x)` gives the quotient ring `D`. Its closed points form the graph of the
+section selecting the closed point of each component, so `D` is w-local. Evaluation at `t` and
+constants identify the local rings with those of `C`, and a map identifying local rings with
+w-local target is ind-Zariski in the principal-localization sense, hence ind-étale.
+
+## References
+
+* [Stacks, Tags 097D, 096C, 096T, 0968, 096A, 0906, 0A0D]
 -/
 
 @[expose] public section
@@ -27,43 +42,7 @@ universe u
 
 namespace Algebra
 
-/-- Profinite base change of the component space of a w-local affine spectrum.
-Source: Stacks, Tags 097D and 096C, with local-ring identification from 096T and the
-principal-localization refinement of 0A0D
-(blueprint: lem-weil-pbc-profinite-component-ring-pullback).
-
-Proof in words:
-1. The affine spectrum is qcqs and spectral (lem-weil-pbc-affine-scheme-qcqs and
-   lem-weil-pbc-qcqs-scheme-spectral). Its components are separated by clopens
-   (lem-weil-pbc-quasicompact-components-clopen-intersection). Their quotient is
-   compact, Hausdorff and totally disconnected. The closed points map bijectively to
-   it by w-locality; this continuous bijection is closed and hence a homeomorphism.
-   Compactness uses lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact.
-2. Take the actual ring of locally constant functions `T → C`. Its spectrum is
-   `T × Spec C` by lem-weil-pbc-locally-constant-prime-spectrum, and the coefficient
-   map is projection to `Spec C`.
-3. The locus `u(t) = component(x)` is closed and is a union of components. Apply
-   lem-weil-pbc-closed-component-spectrum-restriction to obtain a quotient ring `D`
-   with this spectrum, preserving local rings. Constants give its `C`-algebra structure.
-4. The fibres over `T` are exactly the nonempty connected components. The induced
-   continuous bijection from the component quotient to `T` is closed by compactness,
-   hence a homeomorphism. Its compatibility over the original quotient follows from
-   the graph equation.
-5. A point `(x,t)` of the closed graph is closed exactly when `x` is closed. Thus the
-   closed points are the inverse image of the closed points downstairs. They form the
-   graph of the continuous section selecting the unique closed point in each component,
-   and map homeomorphically to `T`. Each component has exactly one of them, so `D` is w-local.
-6. Evaluation at `t` and constants give inverse maps on the local rings of the locally
-   constant-function ring and `C`: the clopen level set of a function at `t` has an
-   idempotent characteristic function outside the relevant prime. That idempotent
-   becomes one after localization, identifying the function with its constant value.
-   Composing with the quotient's local-ring identification gives exactly the induced
-   map `C_p → D_q` (def-weil-pbc-localization-at-prime).
-7. Apply theorem-pro-etale-refinements-weakly-etale to the map identifying local rings with
-   w-local target. This supplies the finite-products-of-principal-localizations
-   presentation of definition-ind-etale-pro-etale-weakly, which is also ind-etale.
-8. If `u` is surjective, lift the component of any point `x` to `t`; the graph point
-   `(x,t)` lifts `x`. This includes the empty-spectrum case. -/
+/-- Profinite base change of the component space of a w-local affine spectrum. -/
 theorem exists_profinite_component_ring_pullback (C : Type u) [CommRing C] [IsWLocalRing C] :
     CompactSpace (ConnectedComponents (PrimeSpectrum C)) ∧
     T2Space (ConnectedComponents (PrimeSpectrum C)) ∧

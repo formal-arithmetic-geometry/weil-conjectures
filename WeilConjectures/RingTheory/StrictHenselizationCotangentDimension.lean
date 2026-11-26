@@ -18,8 +18,21 @@ import Mathlib.LinearAlgebra.Dimension.Constructions
 /-!
 # Cotangent dimension and strict henselization
 
-Source: Stacks Project, `more-algebra.tex`, Tag 06LN and Tag 07QM
-(blueprint: lem-sc-strict-henselization-cotangent-dimension).
+For a strict henselization `C` of a Noetherian local ring `R`, the canonical base-change map
+of cotangent spaces is an isomorphism; in particular the cotangent spaces of `R` and `C` have
+the same dimension over their residue fields.
+
+## Implementation details
+
+Since `C` is faithfully flat over `R` and `m_R C = m_C`, the conormal base-change map
+`C ⊗[R] (m_R/m_R²) → m_C/m_C²` is bijective. Tensoring with the residue field of `C` gives the
+equality of dimensions; this comparison does not need finite dimensionality.
+
+## References
+
+* [Stacks, Tag 06LN]
+* [Stacks, Tag 07QM]
+* [Stacks, Tag 0473]
 -/
 
 @[expose] public section
@@ -62,7 +75,8 @@ private theorem cotangent_bijective_equiv
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The flat conormal base-change map of Stacks Tag 0473, transported from `C ⊗[R] R`. -/
+/-- For flat `C` over `R` and `J = IC`, the conormal base-change map
+`C ⊗[R] I/I² → J/J²` is bijective. -/
 private theorem flat_cotangent_bijective
     {R C : Type*} [CommRing R] [CommRing C] [Algebra R C] [Module.Flat R C]
     (I : Ideal R) (J : Ideal C) (hIJ : I.map (algebraMap R C) = J)
@@ -134,24 +148,7 @@ private theorem cotangent_finrank_of_bijective
 base-change map `(m_R/m_R²) ⊗ κ^sep → m_C/m_C²` is an isomorphism; it is written as the
 canonical `C`-linear map `C ⊗[R] (m_R/m_R²) → m_C/m_C²` (the same map: `m_R` kills the source,
 `m_R C = m_C`, and the residue field of `C` is `κ^sep`). In particular the cotangent-space
-dimensions agree.
-Source: Stacks Project, More on Algebra, Tag 06LN, using Tag 07QM.
-
-Proof:
-1. `strictHenselization_local_maximalIdeal` supplies locality and the maximal-ideal
-   equality. `IsStrictHenselization.triples_presentation` presents the given algebra
-   as the triples colimit, so `strictHenselization_faithfullyFlat` applies to its
-   original structural map.
-2. Apply `lem-weil-pbc-ideal-cotangent-flat-base-change-ring` to that flat map and
-   the maximal ideal of `R`. This gives bijectivity of the canonical `C`-linear
-   map from `C` tensored over `R` with the cotangent space of `R`.
-3. Tensor the isomorphism with the residue field of `C`. Associativity cancels the
-   intervening extension to `C`. Since the residue maps are surjective, compatible
-   scalar actions identify the source with residue-field extension of the cotangent
-   space of `R`, and identify the target with the cotangent space of `C`.
-   `Module.finrank_baseChange` and invariance under linear equivalence give the
-   dimension equality. This comparison also holds without finite dimensionality.
-(blueprint: lem-sc-strict-henselization-cotangent-dimension). -/
+dimensions agree. -/
 theorem finrank_cotangentSpace_eq_of_isStrictHenselization
     (R K C : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] [Field K]
     [Algebra (IsLocalRing.ResidueField R) K]

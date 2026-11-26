@@ -15,9 +15,26 @@ import all WeilConjectures.TraceFormula.Coherent.CoherentPrimitiveReductionPrese
 
 /-! # Completion-unit normalization on simultaneous quotient presentations
 
-Source: Stacks 0941, the strict quotient augmentation construction and its
-transport to simultaneous flat-term K-flat quotient presentations.
-(blueprint: lem-trf-effective-completion-presentation-models).
+We show that the actual completion unit is the strict quotient augmentation on every whole-system
+coherent flat-term K-flat presentation (`WeilConjectures.effectiveCompletionPresentationModels`).
+
+## Implementation details
+
+We choose `S`, its ordinary quotient tensor/limit adjunction `M` and its compatible derived
+comparison `D` from `CompletionUnit.canonicalModels`; the inverse of `D.roos` is the Roos
+comparison. `strictQuotientCompletionRealization` gives one natural comparison `ρ` normalized on
+every whole-system coherent simultaneous presentation, and for a flat-term K-flat `P`,
+`strictQuotientCompletionUnit` identifies the unit followed by `ρ` with the localization of the
+strict quotient augmentation `b`. For a coherent presentation `C`, the normalization of `ρ` gives
+a strict tower isomorphism `a` from the restriction of `C` to the ordinary quotient tower of `P`;
+we set `v = b ≫ H(a⁻¹)`. The Roos map is diagonal in its two cocone coordinates, so the shifted
+coordinate stays zero, and postcomposing with `Q(H(a))` reduces the derived equality to the
+strict-quotient unit theorem. The construction applies to every coherent presentation and to the
+zero complex, without completeness or bounds.
+
+## References
+
+* [Stacks: Tags 03EK, 07A6, 09T5, 0D6E, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -39,33 +56,7 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
 /-- The actual completion unit is the strict quotient augmentation on every
 whole-system coherent flat-term K-flat presentation, using one fixed reduction calculus
-and one fixed natural Roos comparison.
-
-Source: Stacks 03EK, 07A6, 09T5, 0D6E and 0941; the actual-unit refinement
-lem-trf-strict-quotient-completion-unit and normalized strict presentation comparison
-lem-trf-strict-quotient-completion-realization.
-(blueprint: lem-trf-effective-completion-presentation-models).
-
-Proof: choose S, its ordinary quotient tensor/limit adjunction M and its compatible
-derived comparison D from CompletionUnit.canonicalModels. The inverse of D.roos
-is the Roos comparison: its normalization on K-injective towers follows by
-cancelling the invertible localized ordinary-limit inclusion. Apply
-strictQuotientCompletionRealization to get one natural comparison rho normalized
-on every whole-system coherent simultaneous presentation. For a flat-term K-flat
-P, strictQuotientCompletionUnit identifies the actual unit followed by rho with
-the localization of the strict quotient augmentation b. For any coherent presentation C,
-rho's normalization gives a strict tower isomorphism a from the restriction of C
-to the ordinary quotient tower of P. Set v=b followed by H(a inverse). Its nth
-product coordinate is the ordinary tensor unit followed by Res(kappa inverse)
-and the canonical restriction/evaluation identification. Sectionwise this is
-exactly the required cast of kappa inverse applied to 1 tensor x. The Roos map
-is diagonal in its two cocone coordinates, so the shifted coordinate stays zero.
-Finally postcompose the desired derived equality with Q(H(a)). Its left side
-becomes unit followed by rho, while its right side becomes Q(b), by the inverse
-identity. The strict-quotient unit theorem proves their equality; cancellation
-of the isomorphism proves the required entire derived-morphism equation.
-This construction applies to every coherent presentation and to the zero complex without
-completeness or bounds. -/
+and one fixed natural Roos comparison. -/
 theorem effectiveCompletionPresentationModels
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{t})

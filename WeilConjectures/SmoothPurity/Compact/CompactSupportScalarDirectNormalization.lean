@@ -11,8 +11,19 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Direct.ProEtaleDirectImage
 
 /-! # Unit normalization of scalar direct-image comparison
 
-Source: Stacks Project, Tags 0D6E and 0D6J
-(blueprint: lem-weil-compact-support-scalar-direct-normalization).
+The specified comparison between derived direct image and restriction of scalars along a map
+of finite coefficient rings satisfies the canonical unit normalization.
+
+## Implementation details
+
+The proof compares with the all-complex unit-normalized comparison on K-injective
+representatives: resolving the scalar restriction by a K-injective complex, both comparisons
+satisfy the same resolution equation, and cancelling the direct-image quasi-isomorphism and the
+localization factors identifies them.
+
+## References
+
+* Stacks Project, Tags 0D6E, 0D6J.
 -/
 
 @[expose] public noncomputable section
@@ -29,15 +40,8 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
   constantSheaf presheafToSheaf Functor.leftAdjoint HasDerivedCategory.standard
 
 -- The comparison passes through localization functors and K-injective resolutions.
-/-- The specified scalar direct-image comparison satisfies the canonical unit equation.
-Source: Stacks Project, Tags 0D6E and 0D6J.
-(blueprint: lem-weil-compact-support-scalar-direct-normalization).
-Proof: choose the all-complex unit-normalized comparison. On a K-injective complex,
-resolve its scalar restriction by a K-injective complex. The unit equation and naturality
-of the target unit give the same resolution equation as sfDerivedImageRestriction.
-Cancel the direct-image quasi-isomorphism and the localization factors to identify the
-comparisons on K-injective representatives. Their naturality gives equality on every
-derived object. Substitute this equality into the all-complex normalization equation. -/
+/-- The derived direct-image/restriction-of-scalars comparison `sfDerivedImageRestriction g φ`
+is unit-normalized with respect to the underived comparison. -/
 theorem compactSupportScalarDirectNormalization
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     {Z Y : Scheme.{u}} (g : Z ⟶ Y) (φ : A →+* B) :

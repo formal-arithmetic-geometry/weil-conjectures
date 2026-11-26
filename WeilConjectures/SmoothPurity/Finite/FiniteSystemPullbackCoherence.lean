@@ -14,10 +14,17 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModul
 
 /-! # Coherent composition of finite-coefficient pullback on strict systems
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6D, and sites-modules.tex,
-Tags 03D3, 03D7, 03D8. The strict-system refinement uses componentwise adjunctions
-and coherence before localization
-(blueprint: lem-pod-finite-system-pullback-coherence).
+This file constructs finite-coefficient inverse image on strict systems as the left adjoint of
+the sectionwise direct image, its composition comparisons and their evaluation realizations,
+and proves associativity of the comparisons before and after ordinary localization.
+
+## Implementation details
+
+The strict-system refinement uses componentwise adjunctions and coherence before localization.
+
+## References
+
+* [Stacks, Tags 00W1, 015F, 03D3, 03D7, 03D8, 05RU, 0941, 09A5, 0B65, 0D6D]
 -/
 
 @[expose] public noncomputable section
@@ -39,41 +46,35 @@ namespace WeilConjectures
 -- DS fixes this localization; use it also when inferring exact derived functors.
 attribute [local instance 3000] SemilinearSections.hasDerived
 
-/-- The existing sheafification witness at the specified coefficient universe.
-Source: Stacks 00W1 (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- The existing sheafification witness at the specified coefficient universe. -/
 instance (priority := 4000) finiteSystemRingSheafify (X : Scheme.{u}) :
     HasSheafify (ProEt.topology X) CommRingCat.{u + 1} :=
   integralCoefficientRingSheafify.{u, u} X
 
-/-- The existing small-site witness, retaining the original two site universes.
-Source: Stacks 09A5 (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- The existing small-site witness, retaining the original two site universes. -/
 instance (priority := 4000) finiteSystemSiteSmall (X : Scheme.{u}) :
     EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
 
-/-- Smallness of the sequence site in the very same coefficient universe.
-Source: Stacks 0941 (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- Smallness of the sequence site in the very same coefficient universe. -/
 instance (priority := 4000) finiteSystemSequenceSmall (X : Scheme.{u}) :
     EssentiallySmall.{u + 1} (ℕ × X.ProEt) :=
   SemilinearSections.sequenceSmall.{u + 1, u, u + 1}
 
 variable (A : ℕ → CommRingCat.{u}) (τ : ∀ n, A (n + 1) ⟶ A n)
 
-/-- Strict semilinear systems on the actual ringed sequence site.
-Source: Stacks 0941 (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- Strict semilinear systems on the actual ringed sequence site. -/
 abbrev finiteSystems (X : Scheme.{u}) :=
   AlgebraicGeometry.ProEtale.VaryingRing.Modules
     (fun n ↦ CommRingCat.of (ULift.{u + 1, u} (A n)))
     (fun n ↦ CommRingCat.ofHom ((τ n).hom.ulift)) X
 
-/-- Ordinary unbounded derived systems, rather than diagrams of derived modules.
-Source: Stacks 05RU (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- Ordinary unbounded derived systems, rather than diagrams of derived modules. -/
 abbrev finiteSystemDerived (X : Scheme.{u}) :=
   AlgebraicGeometry.ProEtale.VaryingRing.Derived
     (fun n ↦ CommRingCat.of (ULift.{u + 1, u} (A n)))
     (fun n ↦ CommRingCat.ofHom ((τ n).hom.ulift)) X
 
-/-- Exact evaluation at a coefficient level.
-Source: Stacks 0941 (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- Exact evaluation at a coefficient level. -/
 abbrev finiteSystemEvaluation (X : Scheme.{u}) (n : ℕ) :
     finiteSystems A τ X ⥤ proEtaleRingModules X (proEtaleConstantRing X (A n)) :=
   AlgebraicGeometry.ProEtale.VaryingRing.eval
@@ -81,8 +82,7 @@ abbrev finiteSystemEvaluation (X : Scheme.{u}) (n : ℕ) :
     (fun n ↦ CommRingCat.ofHom ((τ n).hom.ulift)) X n
 
 
-/-- Sectionwise direct image with its specified constant-section scalar action.
-Source: Stacks 03D3, 0941 (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- Sectionwise direct image with its specified constant-section scalar action. -/
 abbrev finiteSystemPushforward {X Y : Scheme.{u}} (f : X ⟶ Y) :
     finiteSystems.{u} A τ X ⥤ finiteSystems.{u} A τ Y :=
   AlgebraicGeometry.ProEtale.VaryingRing.push
@@ -91,27 +91,20 @@ abbrev finiteSystemPushforward {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 
 /-- The universal left adjoint of the explicit sectionwise system direct image.
-Its universal property determines it up to the unique adjunction-compatible iso.
-Source: Stacks 03D3 (blueprint: lem-pod-finite-system-pullback-coherence). -/
+Its universal property determines it up to the unique adjunction-compatible iso. -/
 abbrev finiteSystemPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   AlgebraicGeometry.ProEtale.VaryingRing.pull
     (fun n ↦ CommRingCat.of (ULift.{u + 1, u} (A n)))
     (fun n ↦ CommRingCat.ofHom ((τ n).hom.ulift)) f
 
-/-- The actual system adjunction, fixing its units and all conjugate comparisons.
-Source: Stacks 03D3 (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- The actual system adjunction, fixing its units and all conjugate comparisons. -/
 abbrev finiteSystemAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     finiteSystemPullback A τ f ⊣ finiteSystemPushforward A τ f :=
   AlgebraicGeometry.ProEtale.VaryingRing.moduleAdj
     (fun n ↦ CommRingCat.of (ULift.{u + 1, u} (A n)))
     (fun n ↦ CommRingCat.ofHom ((τ n).hom.ulift)) f
 
-/-- Finite-coefficient inverse image on systems is componentwise exact.
-Source: Stacks 03D3, 0941 (blueprint: lem-pod-finite-system-pullback-coherence).
-Proof: the componentwise adjunction identifies each evaluation with the finite
-constant-coefficient module inverse image. That inverse image is exact by
-prop-weil-pbc-proetale-constant-exact. Kernels, cokernels and addition of strict
-systems are componentwise by lem-coef-semilinear-derived-sections. -/
+/-- Finite-coefficient inverse image on systems is componentwise exact. -/
 theorem finiteSystemPullback_exact [∀ n, Finite (A n)]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (finiteSystemPullback.{u} A τ f).Additive ∧
@@ -123,39 +116,30 @@ theorem finiteSystemPullback_exact [∀ n, Finite (A n)]
     CommRingCat.ofHom ((τ n).hom.ulift)
   exact AlgebraicGeometry.ProEtale.VaryingRing.pull_exact R φ f
 
-/-- Additivity of the actual finite-system inverse image.
-Source: Stacks 0941 (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- Additivity of the actual finite-system inverse image. -/
 instance finiteSystemPullbackAdditive [∀ n, Finite (A n)]
     {X Y : Scheme.{u}} (f : X ⟶ Y) : (finiteSystemPullback.{u} A τ f).Additive :=
   (finiteSystemPullback_exact.{u} A τ f).1
 
-/-- Preservation of finite limits by actual finite-system inverse image.
-Source: Stacks 0941 (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- Preservation of finite limits by actual finite-system inverse image. -/
 instance finiteSystemPullbackLimits [∀ n, Finite (A n)]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (finiteSystemPullback.{u} A τ f) :=
   (finiteSystemPullback_exact.{u} A τ f).2.1
 
-/-- Preservation of finite colimits by actual finite-system inverse image.
-Source: Stacks 0941 (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- Preservation of finite colimits by actual finite-system inverse image. -/
 instance finiteSystemPullbackColimits [∀ n, Finite (A n)]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteColimits (finiteSystemPullback.{u} A τ f) :=
   (finiteSystemPullback_exact.{u} A τ f).2.2
 
-/-- The stipulated exact, termwise functor on ordinary unbounded derived systems.
-Source: Stacks 015F (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- The stipulated exact, termwise functor on ordinary unbounded derived systems. -/
 abbrev finiteSystemDerivedPullback [∀ n, Finite (A n)]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     finiteSystemDerived.{u} A τ Y ⥤ finiteSystemDerived.{u} A τ X :=
   (finiteSystemPullback.{u} A τ f).mapDerivedCategory
 
-/-- The unique ordinary comparison with the sectionwise fibre-product conjugate.
-Source: Stacks 03D8, 0B65 (blueprint: lem-pod-finite-system-pullback-coherence).
-Proof: restriction along the fibre-product isomorphism is natural in sections,
-linear because the coefficient maps preserve constants, and commutes with every
-horizontal transition. It fixes d uniquely. Conjugation through the actual system
-adjunctions gives the unique a; the conjugation bijection proves uniqueness. -/
+/-- The unique ordinary comparison with the sectionwise fibre-product conjugate. -/
 theorem finiteSystemComposition_existsUnique
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) :
     ∃! a : finiteSystemPullback.{u} A τ (h ≫ k) ≅
@@ -185,19 +169,16 @@ theorem finiteSystemComposition_existsUnique
   rw [e.apply_symm_apply]
   exact he.trans (huniq d' hd')
 
-/-- Select the comparison determined uniquely by the full system adjunction.
-Source: Stacks 03D8 (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- Select the comparison determined uniquely by the full system adjunction. -/
 def finiteSystemComposition {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) :=
   (finiteSystemComposition_existsUnique.{u} A τ h k).exists.choose
 
-/-- The comparison on complexes, before localization, applied degreewise.
-Source: Stacks 0D6D (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- The comparison on complexes, before localization, applied degreewise. -/
 def finiteSystemComplexComposition [∀ n, Finite (A n)]
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) :=
   NatIso.mapHomologicalComplex (finiteSystemComposition.{u} A τ h k) (ComplexShape.up ℤ)
 
-/-- The derived comparison is the localization of the specified whole-system map.
-Source: Stacks 0D6D, 015F (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- The derived comparison is the localization of the specified whole-system map. -/
 def finiteSystemDerivedComposition [∀ n, Finite (A n)]
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) :
     finiteSystemDerivedPullback.{u} A τ (h ≫ k) ≅
@@ -206,8 +187,7 @@ def finiteSystemDerivedComposition [∀ n, Finite (A n)]
     (Functor.mapDerivedCategoryCompIso (finiteSystemPullback.{u} A τ k)
       (finiteSystemPullback.{u} A τ h)).symm
 
-/-- Exact evaluation on the ordinary derived system category.
-Source: Stacks 0941 (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- Exact evaluation on the ordinary derived system category. -/
 abbrev finiteSystemDerivedEvaluation (X : Scheme.{u}) (n : ℕ) :
     finiteSystemDerived.{u} A τ X ⥤ proEtaleDerivedCategory.{u} X (A n) :=
   @CategoryTheory.Functor.mapDerivedCategory (finiteSystems.{u} A τ X) _ _ _
@@ -326,13 +306,7 @@ private theorem varyingPullbackEvaluation
   exact (existsUnique_congr (varyingEvaluationUnit_iff R φ f n)).mp
     (AlgebraicGeometry.ProEtale.VaryingRing.moduleEvalG_existsUnique R φ f n)
 
-/-- The component identification is uniquely fixed on adjunction-unit generators.
-Source: Stacks 03D3, 03D7 (blueprint: lem-pod-finite-system-pullback-coherence).
-Proof: restrict the componentwise Hom adjunction to compatible system maps.
-Evaluation of the system unit is the level unit. The level pullback is generated
-locally by these unit sections and their scalar multiples, so a module map
-satisfying this formula is unique. The componentwise construction gives its
-inverse. No test for equality of derived maps is used. -/
+/-- The component identification is uniquely fixed on adjunction-unit generators. -/
 theorem finiteSystemPullbackEvaluation_existsUnique [∀ n, Finite (A n)]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ∃! q : finiteSystemPullback.{u} A τ f ⋙ finiteSystemEvaluation.{u} A τ X n ≅
@@ -350,16 +324,14 @@ theorem finiteSystemPullbackEvaluation_existsUnique [∀ n, Finite (A n)]
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The unit-normalized ordinary component identification.
-Source: Stacks 03D3 (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- The unit-normalized ordinary component identification. -/
 def finiteSystemPullbackEvaluation [∀ n, Finite (A n)]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     finiteSystemPullback.{u} A τ f ⋙ finiteSystemEvaluation.{u} A τ X n ≅
       finiteSystemEvaluation.{u} A τ Y n ⋙ proEtaleConstantRingPullback (A n) f :=
   (finiteSystemPullbackEvaluation_existsUnique.{u} A τ f n).exists.choose
 
-/-- The derived evaluation identification is exactly the termwise localization.
-Source: Stacks 015F (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- The derived evaluation identification is exactly the termwise localization. -/
 def finiteSystemDerivedPullbackEvaluation [∀ n, Finite (A n)]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     finiteSystemDerivedPullback.{u} A τ f ⋙ finiteSystemDerivedEvaluation.{u} A τ X n ≅
@@ -388,16 +360,14 @@ def finiteSystemDerivedPullbackEvaluation [∀ n, Finite (A n)]
 
 /-- The existing canonical module comparison, fixed by its fibre-product conjugate.
 The property in the published existence theorem determines its map uniquely:
-sectionwise restriction fixes the right comparison, and conjugation is bijective.
-Source: Stacks 03D8 (blueprint: lem-pod-finite-system-pullback-coherence). -/
+sectionwise restriction fixes the right comparison, and conjugation is bijective. -/
 def finiteSystemModuleComposition [∀ n, Finite (A n)]
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) (n : ℕ) :
     proEtaleConstantRingPullback (A n) (h ≫ k) ≅
       proEtaleConstantRingPullback (A n) k ⋙ proEtaleConstantRingPullback (A n) h :=
   (proEtaleConstantRingModulePullbackComposition h k (A n)).choose
 
-/-- Complex pullback is termwise on arbitrary unbounded complexes.
-Source: Stacks 015F (blueprint: lem-pod-finite-system-pullback-coherence). -/
+/-- Complex pullback is termwise on arbitrary unbounded complexes. -/
 abbrev finiteSystemComplexPullback [∀ n, Finite (A n)]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (finiteSystemPullback.{u} A τ f).mapHomologicalComplex (ComplexShape.up ℤ)
@@ -1107,29 +1077,7 @@ private theorem systemDerivedEvaluationComposition
 end CanonicalLevelStructures
 
 /-- The finite-system comparisons have their specified levelwise realizations and
-satisfy associativity before and after ordinary localization.
-Source: Stacks 03D3, 03D7, 03D8, 0B65, 015F, 0D6D
-(blueprint: lem-pod-finite-system-pullback-coherence).
-Proof: (1) Constant-section naturality gives compatibility with coefficient maps,
-including the adjoint coefficient square for direct image. Restrict the level
-module adjunctions to transition-compatible families to obtain the system
-adjunction with its componentwise unit. (2) The fibre-product restriction maps
-commute with every sheaf map and scalar action, giving whole-system right-adjoint
-comparisons. Their two triple composites have equal fibre-product projections,
-hence agree. (3) Conjugate these maps under the system adjunctions. Evaluation of
-the unit equation is the level unit equation, so conjugation uniqueness identifies
-each evaluated map with the published canonical module comparison. In particular
-these maps commute with semilinear transitions before deriving. (4) Apply
-leftAdjointCompIso_assoc to the six adjunctions and invert the resulting equation.
-Apply it degreewise to complexes: naturality in the differential makes these
-chain maps, and the equation is an equation of natural transformations of complex
-functors. (5) Exactness permits ordinary termwise localization. The localization
-universal property transports the equation to derived systems. (6) Evaluation is
-exact and termwise. On a flat-term K-flat resolution the published finite derived
-comparison is the localization of precisely the same module map, by Tag 0D6D.
-Exactness preserves the resolution quasi-isomorphisms, so naturality extends this
-identification to every complex. No transition is tensored along a coefficient
-map, and no normalization or boundedness is used. -/
+satisfy associativity before and after ordinary localization. -/
 theorem finiteSystemPullbackCoherence [∀ n, Finite (A n)]
     {Y Z W V : Scheme.{u}} (j : Y ⟶ Z) (h : Z ⟶ W) (k : W ⟶ V) :
     (∀ (M : finiteSystems.{u} A τ V) (n : ℕ),

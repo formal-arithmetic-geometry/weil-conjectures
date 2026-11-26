@@ -13,20 +13,19 @@ public import WeilConjectures.TraceFormula.RelativeFrobeniusComparison
 
 # The Frobenius comparison of the lower shriek for proper morphisms
 
-Let `f : X ⟶ Y` be a morphism of separated `k`-schemes of finite type, with endomorphisms
-`Φ_X`, `Φ_Y`, a cartesian square `sq : p ≫ f = f' ≫ Φ_Y` and a relative Frobenius `r` with
-`r ≫ p = Φ_X` and `r ≫ f' = f`. The Frobenius comparison
-`θ_f : Rf_! ⋙ LΦ_Y^* ≅ LΦ_X^* ⋙ Rf_!` is
-`ProEtale.CondensedRing.weilLowerShriekFrobeniusComparison` (blueprint
-`lemma-comparison-via-relative-frobenius--2`). This file proves that for proper `f`, under the
-identification `Rf_! ≅ Rf_*`, it is the direct-image base change `Ex_*` of the commutative square
-`Φ_X ≫ f = f ≫ Φ_Y`
+Let `f : X ⟶ Y` be a morphism of separated `k`-schemes of finite type, with endomorphisms `Φ_X`,
+`Φ_Y`, a cartesian square `sq : p ≫ f = f' ≫ Φ_Y` and a relative Frobenius `r` with `r ≫ p = Φ_X`
+and `r ≫ f' = f`. The Frobenius comparison `θ_f : Rf_! ⋙ LΦ_Y^* ≅ LΦ_X^* ⋙ Rf_!` is
+`ProEtale.CondensedRing.weilLowerShriekFrobeniusComparison`. This file proves that for proper `f`,
+under the identification `Rf_! ≅ Rf_*`, it is the direct-image base change `Ex_*` of the commutative
+square `Φ_X ≫ f = f ≫ Φ_Y`
 (`ProEtale.CondensedRing.weilLowerShriekFrobeniusComparison_hom_app_comp_isoLowerStar`).
 
-The proof identifies `Ex_!` of `sq` with `Ex_*` (`def-exchange-projection`), and the relative
-pullback along `r` with the exchange of the triangle `r ≫ f' = f`; the two exchanges then paste
-to the exchange of the square `Φ_X ≫ f = f ≫ Φ_Y`
-(`CategoryTheory.Adjunction.exchangeRight_app_paste`).
+## Implementation details
+
+The proof identifies `Ex_!` of `sq` with `Ex_*`, and the relative pullback along `r` with the
+exchange of the triangle `r ≫ f' = f`; the two exchanges then paste to the exchange of the square
+`Φ_X ≫ f = f ≫ Φ_Y` (`CategoryTheory.Adjunction.exchangeRight_app_paste`).
 
 -/
 
@@ -286,8 +285,7 @@ theorem weilLowerShriekFrobeniusComparison_hom_app_comp_isoLowerStar_of_commSq [
       sq.toCommSq W N) K
 
 /-- **The Frobenius comparison of the lower shriek of a proper morphism is the direct-image base
-change** (blueprint `lemma-comparison-via-relative-frobenius--2`, `def-exchange-projection`): for
-proper `f`, under the identification `Rf_! ≅ Rf_*`, the Frobenius comparison
+change**: for proper `f`, under the identification `Rf_! ≅ Rf_*`, the Frobenius comparison
 `θ_f : LΦ_Y^* Rf_! ≅ Rf_! LΦ_X^*` is the base-change morphism `Ex_* : LΦ_Y^* Rf_* ⟶ Rf_* LΦ_X^*` of
 the commutative square `Φ_X ≫ f = f ≫ Φ_Y`. -/
 theorem weilLowerShriekFrobeniusComparison_hom_app_comp_isoLowerStar [IsProper f.left]

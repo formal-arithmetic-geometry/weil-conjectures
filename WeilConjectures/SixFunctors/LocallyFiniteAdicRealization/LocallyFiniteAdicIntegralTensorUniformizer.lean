@@ -15,7 +15,18 @@ import Mathlib.Algebra.Module.NatInt
 
 /-! # Inverting the integral uniformizer in native tensor extension
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
+Native tensor extension inverts the constant integral uniformizer.
+
+## Implementation details
+
+The uniformizer divides `ℓ` in the coefficient DVR, and multiplication by `ℓ` is invertible on
+native adic sheaves, which are linear over the algebraic closure of `ℚ_ℓ`. A factor of an
+invertible product of commuting endomorphisms is invertible.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2 and
+  Proposition 6.8.14(2)
 -/
 
 @[expose] public noncomputable section
@@ -122,20 +133,7 @@ private theorem native_nsmul_isIso
     reflectsIsomorphisms_of_full_and_faithful e.inverse
   exact isIso_of_reflects_iso _ e.inverse
 
-/-- Native tensor extension inverts the constant integral uniformizer.
-
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2)
-(blueprint: lem-sf-native-integral-tensor-uniformizer).
-
-Proof: the uniformizer generates the maximal ideal of the coefficient DVR, and
-ℓ belongs to that ideal since its spectral norm is less than one. Hence the
-uniformizer divides ℓ. Native adic sheaves and their derived category are linear
-over the algebraic closure of the ℓ-adic field, so multiplication by ℓ is invertible.
-The derived section equivalence transports this to the target of integral tensor
-extension. Additivity identifies the image of multiplication by the natural number
-ℓ with this invertible scalar endomorphism. The two scalar factors commute; a factor
-of an invertible product of commuting endomorphisms is invertible.
--/
+/-- Native tensor extension inverts the constant integral uniformizer. -/
 theorem integralTensor_uniformizer_isIso (C : CoefficientSystem l X)
     (E : Index l (PadicAlgCl l))
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :

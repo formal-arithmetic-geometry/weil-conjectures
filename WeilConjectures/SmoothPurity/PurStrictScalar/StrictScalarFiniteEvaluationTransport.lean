@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.WeilSheaf.ProfiniteCoefficientInverseIm
 
 /-! # Transport used to evaluate scalar mates
 
-Source: Stacks 03DA, 0D6E, 0E8I and 0940.
-(blueprint: def-pur-strict-scalar-finite-evaluation-transport).
+## References
+
+* [Stacks Project, Tags 03CO, 03DA, 0D6E, 0E8I and 0940]
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +29,7 @@ namespace WeilConjectures.PurStrictScalar
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Evaluation of the separately derived proper/open functor on constant towers.
-Source: Stacks 0D6E, 0E8I, 0940
-(blueprint: def-pur-strict-scalar-finite-evaluation-transport). -/
+/-- Evaluation of the separately derived proper/open functor on constant towers. -/
 def constantImageEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (n : ℕ) :
     image l E c ⋙ ev (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) Y n ≅
@@ -43,9 +42,7 @@ def constantImageEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y}
     Functor.isoWhiskerRight
       (evalJ (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) c.i n) _
 
-/-- The ring homomorphism defining the constant integral quotient.
-Source: Stacks 03CO
-(blueprint: def-pur-strict-scalar-finite-evaluation-transport). -/
+/-- The ring homomorphism defining the constant integral quotient. -/
 def constantFiniteRingMap (m : ℕ) :
     CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) ⟶
       CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E m)) :=
@@ -54,9 +51,7 @@ def constantFiniteRingMap (m : ℕ) :
       ((Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E m)).comp
         (ULift.ringEquiv : ULift.{u + 1} _ ≃+* _).toRingHom))
 
-/-- The constant integral quotient as a coefficient change at a positive exponent.
-Source: Stacks 03CO
-(blueprint: def-pur-strict-scalar-finite-evaluation-transport). -/
+/-- The constant integral quotient as a coefficient change at a positive exponent. -/
 def constantFiniteChange (m : ℕ) (hm : 1 ≤ m) :
     PurCompactSupport.Change (constants l E) (PurCompactSupport.finite l E m hm) where
   map W := (constantSheaf (ProEt.topology W) CommRingCat.{u + 1}).map
@@ -64,9 +59,7 @@ def constantFiniteChange (m : ℕ) (hm : 1 ≤ m) :
   square g := (proEtaleConstantInverseImageMap_naturality g
     (constantFiniteRingMap l E m)).symm
 
-/-- The completed projection recovers the constant quotient leg.
-Source: Stacks 03CO; the limit cone identity
-(blueprint: def-pur-strict-scalar-finite-evaluation-transport). -/
+/-- The completed projection recovers the constant quotient leg. -/
 theorem constantFiniteChange_projection (W : Scheme.{u}) (m : ℕ) (hm : 1 ≤ m) :
     integralConstantToCompletionOfUniverses l E W ≫
       (sheafCompose (ProEt.topology W) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
@@ -94,9 +87,7 @@ theorem constantFiniteChange_projection (W : Scheme.{u}) (m : ℕ) (hm : 1 ≤ m
     (limit.lift_π (integralConstantConeOfUniverses l E W) (op n))
 
 /-- Restricting first to the completion and then to its constant subring is the
-same normalized restriction as restricting along the constant quotient.
-Source: Stacks 03DA
-(blueprint: def-pur-strict-scalar-finite-evaluation-transport). -/
+same normalized restriction as restricting along the constant quotient. -/
 def positiveRestrictionIdentification (W : Scheme.{u}) (m : ℕ) (hm : 1 ≤ m) :
     positiveRestriction l E W m hm ≅
       pbcDerivedRestrict ((constantFiniteChange l E m hm).map W) := by
@@ -119,9 +110,7 @@ def positiveRestrictionIdentification (W : Scheme.{u}) (m : ℕ) (hm : 1 ≤ m) 
   exact Functor.mapDerivedCategoryNatIso e
 
 /-- Finite proper/open image commutes with the actual positive coefficient
-restriction. The direction here goes from constant-coefficient image to finite image.
-Source: Stacks 0D6E, 0E8I
-(blueprint: def-pur-strict-scalar-finite-evaluation-transport). -/
+restriction. The direction here goes from constant-coefficient image to finite image. -/
 def positiveImageRestriction {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (m : ℕ) (hm : 1 ≤ m) :
     positiveRestriction l E X m hm ⋙ PurCompactSupport.image (constants l E) c ≅
@@ -131,9 +120,7 @@ def positiveImageRestriction {X Y : Scheme.{u}} {f : X ⟶ Y}
     PurCompactSupport.restriction (constantFiniteChange l E m hm) c ≪≫
     Functor.isoWhiskerLeft _ (positiveRestrictionIdentification l E Y m hm).symm
 
-/-- Evaluation of the input reduction before applying any geometric functor.
-Source: Stacks 0940
-(blueprint: def-pur-strict-scalar-finite-evaluation-transport). -/
+/-- Evaluation of the input reduction before applying any geometric functor. -/
 def reductionEvaluation (W : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus.{u, u} l E W) (n : ℕ) :
     reduction l E W S ⋙

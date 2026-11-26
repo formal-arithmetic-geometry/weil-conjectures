@@ -18,8 +18,19 @@ import Mathlib.RingTheory.MvPolynomial.Localization
 /-!
 # Regular-sequence presentations of principal localizations
 
-Source: Stacks Project, Algebra, proofs of Tags 07BV and 00SA
-(blueprint: lem-weil-pbc-regular-sequence-quotient-localization-presentation).
+A principal localization `A[1/g]` of a domain `A = k[X_1, …, X_n]/(f)` presented by a regular
+sequence has a regular-sequence presentation with one extra variable and one extra equation.
+
+## Implementation details
+
+Lift `g` to `h` and use `f` followed by `hT - 1` in `k[X, T]`. Adjoining a variable is faithfully
+flat, so `f` stays regular with quotient `A[T]`, a domain in which `gT - 1` is nonzero; its
+quotient is `A[1/g] ≠ 0`. An empty sequence `f` and `g = 1` are allowed.
+
+## References
+
+* [Stacks, Tag 07BV] (proof)
+* [Stacks, Tag 00SA] (proof)
 -/
 
 @[expose] public section
@@ -106,21 +117,7 @@ private theorem exists_nested_presentation
 
 
 /-- A principal localization of a domain presented by a regular sequence has a
-regular-sequence presentation with one extra variable and one extra equation.
-Source: Stacks Project, Algebra, proof of Tag 07BV (lemma-colimit-syntomic),
-and proof of Tag 00SA (lemma-localize-lci).
-(blueprint: lem-weil-pbc-regular-sequence-quotient-localization-presentation).
-
-Proof: Put R = k[X_1,...,X_n] and A = R/(f). Lift g to h in R. In R[T], use
-f followed by hT - 1. Adjoining a polynomial variable is faithfully flat, so
-f remains regular, and its quotient is A[T]. The image gT - 1 in that quotient
-is nonzero (its constant coefficient is -1). Since A is a domain, A[T] is a
-domain, so this last equation is a nonzerodivisor. Its quotient is A[1/g]:
-send T to the inverse of g, and use the universal property in the reverse
-direction. This localization is nonzero because A is a domain and g is nonzero.
-Consequently the whole sequence is regular. Reindex the n old variables and
-T by Fin (n + 1); the sequence has length f.length + 1. This also handles an
-empty sequence f, and g = 1 gives A itself with a redundant variable T = 1. -/
+regular-sequence presentation with one extra variable and one extra equation. -/
 theorem exists_localizationAway_presentation
     (k : Type u) [Field k] (n : ℕ) (f : List (MvPolynomial (Fin n) k))
     (hf : IsRegular (MvPolynomial (Fin n) k) f)

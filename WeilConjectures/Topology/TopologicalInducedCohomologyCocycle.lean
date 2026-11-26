@@ -12,7 +12,22 @@ public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 import WeilConjectures.Topology.TopologicalInducedEdgeAndMap
 import WeilConjectures.Topology.TopologicalInducedCocycleFormula
 
-/-! # The induced topological cohomology map on cocycles -/
+/-! # The induced topological cohomology map on cocycles
+
+The map induced by a continuous map on the cohomology of its direct image, described on
+injective-resolution cocycles.
+
+## Implementation details
+
+The terminal free abelian sheaf map `a : KX → f_*KZ` is the adjunction unit under the
+identification of the inverse image of `KX` with `KZ`. The cohomology map is obtained from the
+exact inverse-image functor on `Ext`, and is computed on injective resolutions by any comparison
+`J → f_*I`; comparisons are unique up to homotopy.
+
+## References
+
+* [Stacks Project, Tags 01DZ and 01F2](https://stacks.math.columbia.edu/tag/01F2)
+-/
 
 @[expose] public section
 
@@ -23,33 +38,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace CategoryTheory
 
 /-- The map induced by a continuous map on cohomology of its direct image, described on
-arbitrary injective-resolution cocycles. This statement involves no spectral sequence.
-
-Source: Stacks Project, Cohomology of Sheaves, Section 20.2 (Tag 01DZ), the composition
-comparison in Section 20.13 (Tag 01F2), and the resolution definition of the induced map.
-(blueprint: lem-sc-topological-induced-cohomology-cocycle)
-
-Proof: Let KX and KZ be the free abelian terminal sheaves in the displayed formula.
-The inverse-image/direct-image adjunction identifies inverse image of KX with KZ:
-both represent global sections after the sectionwise equality of sections over terminal
-opens. The adjunction unit gives a : KX -> f_*KZ. On the sheafification generators it
-sends h to the inverse-image arrow composed with the equality f^{-1}(X)=Z, giving the
-first equation. This description determines a, since generators determine a presheaf
-map and the sheafification adjunction determines its extension.
-
-The inverse-image functor is exact. Apply its derived functor to Ext(KX,f_*F), then
-precompose with the preceding identification and postcompose with the derived counit
-to obtain Ext(KZ,F). The resulting homomorphisms are natural in F, hence assemble into
-edge. Equivalently compute them on injective resolutions: comparison J -> f_*I over
-F followed by the sectionwise terminal-sections identification gives the map on
-cohomology. Any two comparisons over F are homotopic; their global-section maps are
-homotopic, so the map is independent of comparisons and resolutions. For a cocycle s,
-the equation a >> f_*z = s >> phi says that this comparison sends s precisely to z.
-The Ext computation of cohomology by I.extMk and J.extMk therefore gives the displayed
-second equation. Transport it along hX and hZ. Boundaries go to boundaries by the
-chain-map equation. In degree zero this is the ordinary map on global sections;
-for the identity map it is the identity, and for the zero sheaf both groups vanish.
--/
+arbitrary injective-resolution cocycles. This statement involves no spectral sequence. -/
 theorem exists_topological_induced_cohomology_cocycle
     {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]
     (HX : ℕ → (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))

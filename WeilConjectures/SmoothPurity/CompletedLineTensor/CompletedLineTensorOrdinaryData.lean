@@ -35,15 +35,17 @@ import WeilConjectures.Algebra.Homology.Signed.SignedLineEvaluation
 
 /-! # Ordinary signed coefficient lines and normalized scalar comparisons
 
-Source: Bhatt--Scholze, Definitions 3.4.10 and 3.5.2, Lemma 3.4.12,
-Proposition 3.5.1; blueprint sk-def-sp-tate-twist-locally-free, Proof (3).
-(blueprint: lem-pur-completed-line-ordinary-data)
-
 The signed powers and sheaf evaluations define inverse exact tensor functors.
 Their exact derived functors retain the canonical localization comparisons.
 `PairData` and `IsPairNormalized` record ordinary scalar comparisons and their
 pure-tensor and K-flat-counit equations. Existence of normalized scalar comparisons
 and all completion constructions remain in `CompletedLineTensorCoherence`.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definitions 3.4.10 and 3.5.2,
+  Lemma 3.4.12, Proposition 3.5.1
+* Stacks Project, Tags 03EK, 03EL, 03EO, 06YY
 -/
 
 @[expose] public noncomputable section
@@ -80,8 +82,7 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t})
 
-/-- The signed power of a coefficient line, using the recorded ordinary powers and Hom.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- The signed power of a coefficient line, using the recorded ordinary powers and Hom. -/
 def power (L : integralTowerModules l E X) : ℤ → integralTowerModules l E X
   | .ofNat n => SheafOfModules.scalarTensorPower
       (completedIntegralCommRingSheafUnrestricted l E X) L n
@@ -93,16 +94,14 @@ def power (L : integralTowerModules l E X) : ℤ → integralTowerModules l E X
         (AlgebraicGeometry.Scheme.ProEt.topology X)
         (completedIntegralCommRingSheafUnrestricted l E X)))
 
-/-- Ordinary tensor with the signed power, before deriving or completing.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- Ordinary tensor with the signed power, before deriving or completing. -/
 def sheaf (L : integralTowerModules l E X) (m : ℤ) :
     integralTowerModules l E X ⥤ integralTowerModules l E X :=
   SheafOfModules.siteSheafTensorRight.{t, t + 1, max u (t + 1), max u (t + 1)}
     (A := completedIntegralCommRingSheafUnrestricted l E X)
     (power l E X L m)
 
-/-- Evaluation of signed powers on sections; negative powers are the recorded sheaf Hom.
-Source: Stacks 03EO (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- Evaluation of signed powers on sections; negative powers are the recorded sheaf Hom. -/
 def pairing (L : integralTowerModules l E X) (m : ℤ) (U : X.ProEtᵒᵖ) :
     (power l E X L m).val.obj U → (power l E X L (-m)).val.obj U →
       (completedIntegralCommRingSheafUnrestricted l E X).obj.obj U :=
@@ -113,16 +112,14 @@ def pairing (L : integralTowerModules l E X) (m : ℤ) (U : X.ProEtᵒᵖ) :
   | .ofNat (_n + 1) => fun a b ↦ b.app (op (Over.mk (𝟙 U.unop))) a
   | .negSucc _n => fun a b ↦ a.app (op (Over.mk (𝟙 U.unop))) b
 
-/-- Pure tensor in the exact signed-line functor, with its source and target explicit.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- Pure tensor in the exact signed-line functor, with its source and target explicit. -/
 def tmul (L : integralTowerModules l E X) (m : ℤ) (M : integralTowerModules l E X)
     (U : X.ProEtᵒᵖ) (x : M.val.obj U) (a : (power l E X L m).val.obj U) :
     ((sheaf l E X L m).obj M).val.obj U :=
   SheafOfModules.siteSheafTensorTmul
     (A := completedIntegralCommRingSheafUnrestricted l E X) M (power l E X L m) U x a
 
-/-- The existing module action, with the completed coefficient section type explicit.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- The existing module action, with the completed coefficient section type explicit. -/
 def smul (M : integralTowerModules l E X) (U : X.ProEtᵒᵖ)
     (s : (completedIntegralCommRingSheafUnrestricted l E X).obj.obj U)
     (x : M.val.obj U) : M.val.obj U :=
@@ -169,13 +166,7 @@ end EvaluationLocalProofs
 
 attribute [local irreducible] power pairing
 
-/-- The specified evaluation isomorphism, characterized before localization.
-Source: Stacks 03EO; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-ordinary-data).
-Proof: sheaf Hom evaluation defines the balanced pairing. In a basis and its dual
-it multiplies coefficients, hence is an isomorphism. The resulting local inverse
-glues. Associativity followed by evaluation and the unitor gives the displayed
-natural isomorphism. Pure tensors generate locally, proving uniqueness. -/
+/-- The specified evaluation isomorphism, characterized before localization. -/
 theorem evaluation_existsUnique (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :
     ∃! e : sheaf l E X L m ⋙ sheaf l E X L (-m) ≅ 𝟭 _,
@@ -207,18 +198,12 @@ theorem evaluation_existsUnique (L : integralTowerModules l E X)
 
 end EvaluationProof
 
-/-- The canonical sheaf evaluation; its full section formula determines it uniquely.
-Source: Stacks 03EO (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- The canonical sheaf evaluation; its full section formula determines it uniquely. -/
 def evaluation (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :
     sheaf l E X L m ⋙ sheaf l E X L (-m) ≅ 𝟭 (integralTowerModules l E X) :=
   (evaluation_existsUnique l E X L m).exists.choose
 
-/-- Signed powers are lines, so their ordinary tensor functors are exact and additive.
-Source: Stacks 03EK, 03EO; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-ordinary-data).
-Proof: trivialize L on a covering. Every tensor power and its internal dual is the
-unit there, including exponent zero. Tensor is thus locally the identity. Exactness
-is local, and additivity follows on the sectionwise pure tensors and sheafification. -/
+/-- Signed powers are lines, so their ordinary tensor functors are exact and additive. -/
 theorem exact (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :
     (sheaf l E X L m).Additive ∧ PreservesFiniteLimits (sheaf l E X L m) ∧
       PreservesFiniteColimits (sheaf l E X L m) := by
@@ -235,37 +220,31 @@ theorem exact (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (
     refine ⟨?_, inferInstance, inferInstance⟩
     exact Functor.additive_of_preserves_binary_products T
 
-/-- Additivity of signed line tensor. Source: blueprint Proof (3)
-(blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- Additivity of signed line tensor. -/
 instance additive (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :
     (sheaf l E X L m).Additive := (exact l E X L m).1
 
-/-- Left exactness of signed line tensor. Source: blueprint Proof (3)
-(blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- Left exactness of signed line tensor. -/
 instance finiteLimits (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (m : ℤ) : PreservesFiniteLimits (sheaf l E X L m) := (exact l E X L m).2.1
 
-/-- Right exactness of signed line tensor. Source: blueprint Proof (3)
-(blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- Right exactness of signed line tensor. -/
 instance finiteColimits (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (m : ℤ) : PreservesFiniteColimits (sheaf l E X L m) := (exact l E X L m).2.2
 
-/-- Tensor on all unbounded complexes is termwise tensor by the signed line.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- Tensor on all unbounded complexes is termwise tensor by the signed line. -/
 def complex (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :
     CochainComplex (integralTowerModules l E X) ℤ ⥤
       CochainComplex (integralTowerModules l E X) ℤ :=
   (sheaf l E X L m).mapHomologicalComplex (ComplexShape.up ℤ)
 
-/-- The exact derived tensor functor T, with its canonical localization comparison.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- The exact derived tensor functor T, with its canonical localization comparison. -/
 def tensor (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :
     DerivedCategory (integralTowerModules l E X) ⥤
       DerivedCategory (integralTowerModules l E X) :=
   (sheaf l E X L m).mapDerivedCategory
 
-/-- The evaluation on the unbounded derived category, with the canonical localization units.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- The evaluation on the unbounded derived category, with the canonical localization units. -/
 def epsilon (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :
     tensor l E X L m ⋙ tensor l E X L (-m) ≅ 𝟭 _ :=
   Functor.mapDerivedCategoryCompIso (sheaf l E X L m) (sheaf l E X L (-m)) ≪≫
@@ -275,8 +254,7 @@ def epsilon (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (m 
 variable (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (ι : E →ₐ[ℚ_[l]] F)
 
-/-- The canonical binary tensor comparison; its pure-tensor formula determines it uniquely.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- The canonical binary tensor comparison; its pure-tensor formula determines it uniquely. -/
 def binary : SheafOfModules.ScalarExtensionTensorCore.{t + 1, t, max u (t + 1)}
     (completedIntegralCommRingSheafUnrestricted l E X)
     (completedIntegralCommRingSheafUnrestricted l F X) (completedCoefficientMap l E F ι X) :=
@@ -284,16 +262,14 @@ def binary : SheafOfModules.ScalarExtensionTensorCore.{t + 1, t, max u (t + 1)}
   (completedIntegralCommRingSheafUnrestricted l E X)
   (completedIntegralCommRingSheafUnrestricted l F X) (completedCoefficientMap l E F ι X))
 
-/-- Canonical exact localization factor for the signed-line functor.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- Canonical exact localization factor for the signed-line functor. -/
 def factors (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :
     DerivedCategory.Q ⋙ tensor l E X L m ≅ complex l E X L m ⋙ DerivedCategory.Q :=
   (sheaf l E X L m).mapDerivedCategoryFactors
 
 attribute [local irreducible] sheaf
 
-/-- The ordinary sheaf comparison applied termwise, without derived choices.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- The ordinary sheaf comparison applied termwise, without derived choices. -/
 def comparisonComplex (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1] (m : ℤ)
     (e : sheaf l E X L m ⋙ completedOrdinaryScalarExtension l E F ι X ≅
@@ -319,8 +295,7 @@ def comparisonComplex (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfR
 variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G]
   (j : F →ₐ[ℚ_[l]] G)
 
-/-- Ordinary scalar associativity applied termwise, with explicit complex functors.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- Ordinary scalar associativity applied termwise, with explicit complex functors. -/
 def scalarAssociatorComplex
     (e : completedOrdinaryScalarExtension l E F ι X ⋙
       completedOrdinaryScalarExtension l F G j X ≅
@@ -336,9 +311,7 @@ attribute [local irreducible] binary epsilon tensor complex pairing
   SheafOfModules.ScalarExtensionTensorCore.power SheafOfModules.scalarExtensionSection
 
 /-- Signed-power scalar maps and their specified ordinary derived tensor comparisons.
-All normalization equations are on actual sheafified tensors and the universal counits.
-Source: Stacks 03EL, 03EO, 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-ordinary-data). -/
+All normalization equations are on actual sheafified tensors and the universal counits. -/
 def PairData (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1] :=
   (∀ m : ℤ, SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
@@ -351,16 +324,14 @@ def PairData (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
 
 variable {l E X F ι}
 
-/-- Projection of the canonical ordinary comparison package.
-Source: Stacks 03EL, 06YY (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- Projection of the canonical ordinary comparison package. -/
 def PairData.line {L : integralTowerModules l E X} [L.IsFiniteLocallyFreeOfRank 1]
     {N : integralTowerModules l F X} [N.IsFiniteLocallyFreeOfRank 1]
     (d : PairData l E X F ι L N) :
     ∀ m : ℤ, SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
     (completedCoefficientMap l E F ι X) (power l E X L m) ≅ power l F X N m := d.1
 
-/-- Projection of the canonical ordinary comparison package.
-Source: Stacks 03EL, 06YY (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- Projection of the canonical ordinary comparison package. -/
 def PairData.ordinarySheaf {L : integralTowerModules l E X} [L.IsFiniteLocallyFreeOfRank 1]
     {N : integralTowerModules l F X} [N.IsFiniteLocallyFreeOfRank 1]
     (d : PairData l E X F ι L N) :
@@ -368,8 +339,7 @@ def PairData.ordinarySheaf {L : integralTowerModules l E X} [L.IsFiniteLocallyFr
     sheaf l E X L m ⋙ completedOrdinaryScalarExtension l E F ι X ≅
       completedOrdinaryScalarExtension l E F ι X ⋙ sheaf l F X N m := d.2.1
 
-/-- Projection of the canonical ordinary comparison package.
-Source: Stacks 03EL, 06YY (blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- Projection of the canonical ordinary comparison package. -/
 def PairData.ordinary {L : integralTowerModules l E X} [L.IsFiniteLocallyFreeOfRank 1]
     {N : integralTowerModules l F X} [N.IsFiniteLocallyFreeOfRank 1]
     (d : PairData l E X F ι L N) :
@@ -378,9 +348,7 @@ def PairData.ordinary {L : integralTowerModules l E X} [L.IsFiniteLocallyFreeOfR
 
 variable (l E X F ι)
 
-/-- The complete pure-tensor and K-flat-counit normalization of the ordinary data.
-Source: Stacks 03EL, 03EO, 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-ordinary-data). -/
+/-- The complete pure-tensor and K-flat-counit normalization of the ordinary data. -/
 def IsPairNormalized (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}

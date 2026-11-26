@@ -16,10 +16,6 @@ import WeilConjectures.TraceFormula.Supporting.StrictQuotientCompletionUnit
 /-!
 # The specified inverse-image comparison is the completion unit
 
-Source: literature/blueprint/main-20261015/blueprint/sec-trace-formula/
-  sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md, clauses (2)--(3)
-  (blueprint: lem-weil-isomorphism-derived-pullback-comparison-normalization).
-
 For a scheme isomorphism `g : X ⟶ Y`, the specified comparison
 `inverseImagePullbackComparisonDerived` from exact inverse image `G` to completed
 integral pullback `P_g` is related to `G` of the actual completion unit
@@ -124,9 +120,6 @@ attribute [local irreducible] comparisonFromModel roosModel
 end Model
 
 /-- The specified inverse-image comparison is normalized by the actual completion unit.
-Source: literature/blueprint/main-20261015/blueprint/sec-trace-formula/
-  sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md, clauses (2)--(3)
-  (blueprint: lem-weil-isomorphism-derived-pullback-comparison-normalization).
 
 The hypotheses bind the prime, the finite coefficient extension, the scheme
 isomorphism and invertibility of `l` on both schemes.  `S` with `hS` is the canonical
@@ -136,27 +129,7 @@ simultaneous derived reduction, left adjoint to the specified total limit
 conclusion gives one family `θ` of isomorphisms `P_g M ≅ G (L (R M))` with
 `κ_M ≫ θ_M = G(u_M)` for every ambient `M` (an equality of whole derived morphisms),
 naturality of `θ` in every derived morphism, and, for the derived-complete `N`, a
-two-sided inverse `κinv` of `κ_N` with `κinv ≫ G(u_N) = θ_N`.
-
-Proof:
-1. Choose compatible canonical ordinary and derived completion models and construct
-   the normalized Roos model from the inverse of the derived model's comparison.
-2. Apply multiplication-cone descent to obtain j, eta, rho and the descended natural
-   isomorphism Theta, with their generator, coordinate and representative equations.
-3. On a good representative, identify the actual unit followed by rho with the
-   strict quotient augmentation. The ordinary tensor-unit section formula fixes
-   its first coordinate; both shifted coordinates are zero.
-4. Multiplication cancels each finite pullback generator. The two cone coordinates
-   identify the specified comparison followed by H(j) and eta inverse with the
-   inverse image of this augmentation. Localize this strict equality.
-5. Cancel the representative rho comparison to obtain the normalization on good
-   complexes. Naturality transports it through the very K-flat resolution used by
-   the specified derived comparison, proving equality for every ambient object.
-6. Uniqueness of left adjoints transports the identity from the chosen canonical
-   calculus to the given S, preserving the actual adjunction unit.
-7. The actual reconstruction-maps theorem makes the unit invertible on each
-   derived-complete N. Compose Theta with its inverse and cancel to obtain both
-   inverse identities and the required normalized inverse equation. -/
+two-sided inverse `κinv` of `κ_N` with `κinv ≫ G(u_N) = θ_N`. -/
 theorem isomorphismDerivedPullbackComparisonNormalization
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E]

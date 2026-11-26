@@ -44,6 +44,10 @@ applied to the definitionally equal `AlgebraicGeometry.Scheme.Hom.Etale f`, whos
 type `Y.Etale ⥤ X.Etale` is the one the geometric points of `X` and `Y` come with. Both
 names appear below, each where its instances are available.
 
+The universe-lifted form `AlgebraicGeometry.Etale.upperStarCompUliftSheafFiberIso` is the one
+used elsewhere, since the coefficient categories of the six functor formalism are concrete over
+`Type (u + 1)` while the fibre functor of `pointSmallEtale s` takes values in `Type u`.
+
 -/
 
 @[expose] public section
@@ -63,26 +67,14 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsSepClosed 
   (s : Spec (.of Ω) ⟶ X)
 
 /-- All left Kan extensions of `A`-valued presheaves along the opposite of base change
-`f.Etale` exist. This is an instance of
-`CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize`, restated
-for `AlgebraicGeometry.Scheme.Hom.Etale`; it is what makes the sheaf pullback along
-`f.Etale` available, hence also the fibre functor on sheaves of the point
-`(pointSmallEtale s).comap f.Etale _`. -/
+`f.Etale` exist. -/
 instance Scheme.Hom.hasLeftKanExtension_op_etale (G : Y.Etaleᵒᵖ ⥤ A) :
     f.Etale.op.HasLeftKanExtension G :=
   inferInstance
 
 /-- The stalk of a pullback of étale sheaves is the stalk at the image point: for a morphism
 of schemes `f : X ⟶ Y` and a geometric point `s : Spec Ω ⟶ X`, the stalk of `f^* F` at `s`
-is the stalk of `F` at `s ≫ f`, naturally in the sheaf `F`.
-
-The three steps are the comparison
-`CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso` between `(f)^*[A]` and
-the abstract sheaf pullback along base change, the isomorphism
-`CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso` of the sheaf pullback with
-the fibre functor of the point obtained from `s` by `Point.comap`, and the identification
-`AlgebraicGeometry.Scheme.pointSmallEtaleComapIso` of that point with `s ≫ f`.
-(blueprint: `lemma-openclosed-stalk-upperstar`) -/
+is the stalk of `F` at `s ≫ f`, naturally in the sheaf `F`. -/
 noncomputable def Etale.upperStarCompSheafFiberIso :
     (f)^*[A] ⋙ (pointSmallEtale s).sheafFiber ≅ (pointSmallEtale (s ≫ f)).sheafFiber :=
   Functor.isoWhiskerRight
@@ -94,10 +86,7 @@ noncomputable def Etale.upperStarCompSheafFiberIso :
 
 /-- The universe-lifted form of `AlgebraicGeometry.Etale.upperStarCompSheafFiberIso`: the
 stalk of `f^* F` at the geometric point `s`, taken at the universe of the coefficients, is
-the stalk of `F` at `s ≫ f`. This is the form in which the comparison is used, since the
-coefficient categories of the six functor formalism are concrete over `Type (u + 1)` and the
-fibre functor of `pointSmallEtale s` takes values in `Type u`.
-(blueprint: `lemma-openclosed-stalk-upperstar`) -/
+the stalk of `F` at `s ≫ f`. -/
 noncomputable def Etale.upperStarCompUliftSheafFiberIso :
     (f)^*[A] ⋙ ((pointSmallEtale s).ulift.{u + 1}).sheafFiber ≅
       ((pointSmallEtale (s ≫ f)).ulift.{u + 1}).sheafFiber :=

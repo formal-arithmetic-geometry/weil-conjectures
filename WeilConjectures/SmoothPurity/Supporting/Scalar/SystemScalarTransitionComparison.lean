@@ -112,7 +112,9 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Scalar-extension comparisons and quotient transitions
 
-Source: Stacks 03D7 and 03EK.
+## References
+
+* Stacks Project, Tags 03D7 and 03EK.
 -/
 
 @[expose] public noncomputable section
@@ -221,13 +223,7 @@ private theorem module_iso_inv_hom_sections
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Scalar-extension adjoint comparisons preserve a transition which preserves unit tensors.
-Source: Stacks 03D7 and 03EK (blueprint: lem-pur-system-scalar-transition-comparison).
-Proof: precompose with the inverse model comparison. Scalar-extension Hom
-extensionality reduces equality to unit tensors. Both left-adjoint uniqueness
-comparisons preserve the adjunction units. The defining quotient mate has the
-same unit equation, and scalar restriction leaves every underlying section map
-unchanged. The two maps therefore agree on all local generators. -/
+/-- Scalar-extension adjoint comparisons preserve a transition which preserves unit tensors. -/
 theorem systemScalarTransitionComparison
     {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C)

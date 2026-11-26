@@ -17,8 +17,10 @@ import WeilConjectures.SmoothPurity.Normalized.NormalizedIntegralOrdinaryTensorC
 
 /-! # The ramified finite tensor level comparison
 
-Source: Stacks 03EL, 07A4, 0941 and 08TC; Bhatt--Scholze, Proposition 3.5.1.
-(blueprint: lem-pur-integral-scalar-tensor-ramified-level).
+## References
+
+* Stacks Project, Tags 03EL, 07A4, 0941 and 08TC.
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 3.5.1.
 -/
 
 @[expose] public noncomputable section
@@ -156,25 +158,8 @@ private theorem ramified_reduction (W : AlgebraicGeometry.Scheme.{u}) :
     (b.app (op (e * (n + 1) - 1))) _ _ _ (ha n) (hβ P n)).trans
       (hb (e * (n + 1) - 1))
 
-/-- Scalar extension of one finite tensor level is a later target tensor level.
-Source: Stacks Tags 03EL and 07A4; the cofinal uniformizer calculation in
-lem-pur-integral-scalar-tensor-chain-quasi-iso, proof steps 1 and 2.
-(blueprint: lem-pur-integral-scalar-tensor-ramified-level).
-
-Proof: let e be the positive ramification index of L/E. The image of the chosen
-E-uniformizer generates the e-th power of the L-uniformizer ideal. Put
-m = e * (n + 1) - 1, so m >= n. Completed constant-sheaf reduction identifies
-O_L tensor over O_E with O_E/(pi_E^(n+1)) with O_L/(pi_L^(m+1)).
-Use tensorTowerModel to identify each finite tensor with reduction of the
-ordinary direct-sum total tensor. Associate the coefficient tensor factors,
-apply the preceding quotient identification, and use the normalized ordinary
-scalar tensor isomorphism. These are isomorphisms of complexes: tensor
-association commutes with both signed differentials and scalar extension
-preserves the coproduct totalization. Their composite sends the displayed
-pure generator to the displayed pure generator. This is an ordinary balanced
-tensor calculation and requires neither flatness nor boundedness of P,Q.
-For an unramified extension take m=n. For either zero factor, or the empty
-site, the same maps are the unique isomorphisms of zero complexes. -/
+/-- Scalar extension of one finite tensor level is isomorphic to a later target tensor level,
+compatibly with the displayed pure generators. -/
 theorem integralScalarTensorRamifiedLevel (W : AlgebraicGeometry.Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     ∃ (m : ℕ) (_h : n ≤ m)

@@ -9,23 +9,31 @@ module
 public import WeilConjectures.RingTheory.TorKernelBoundaryConstruction
 import WeilConjectures.RingTheory.TorKernelBoundaryNaturalityOf
 
+/-!
+# The constructed Tor boundary vanishes on the image of `Tor₁(q, M)`
+
+For a surjection `q : F → N`, `torKernelBoundary` vanishes on the image of
+`Tor₁(q, M) : Tor₁(F, M) → Tor₁(N, M)`.
+
+## Implementation details
+
+This follows from naturality of the constructed boundary, applied to the morphism from the
+identity presentation `F → F` to `q : F → N`, whose map on kernels is zero.
+
+## References
+
+* [Stacks, Tag 00LZ]
+* [Stacks, Tag 00M0]
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory
 open scoped TensorProduct
 namespace CategoryTheory
 
-/-- The constructed boundary vanishes on the image of Tor of the quotient map.
-
-Source: Stacks Project, Algebra, Tags 00LZ and 00M0 (naturality of Tor boundaries).
-
-Proof: Apply naturality of the constructed boundary to the square from the
-identity presentation F -> F to the given presentation q : F -> N. The map
-on middle modules is the identity, the map on quotient modules is q, and the
-map ker(id_F) -> ker(q) is zero. Compatibility with the kernel inclusions
-holds because every element of ker(id_F) is zero. Naturality gives
-boundary_q(Tor(q,M)(x)) = (0 tensor 1)(boundary_id(x)) = 0.
-(blueprint: lem-sc-p1-tor-kernel-boundary-construction-exact-left-range) -/
+/-- The constructed boundary vanishes on the image of Tor of the quotient map:
+`torKernelBoundary (Tor₁(q, M) x) = 0` for every `x` in `Tor₁(F, M)`. -/
 theorem tor_kernel_boundary_construction_exact_left_range
     (R : Type u) [CommRing R] (M : ModuleCat.{u} R)
     (F N : ModuleCat.{u} R) (q : F →ₗ[R] N) (hq : Function.Surjective q) :

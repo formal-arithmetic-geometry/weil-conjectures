@@ -19,8 +19,21 @@ import WeilConjectures.RingTheory.N2CharPPurelyInseparableCriterion
 /-!
 # Tate's criterion for an N-2 complete principal domain
 
-Source: Stacks Project, Algebra, Lemma Tag 032P (lemma-tate-japanese),
-lines 45534--45589 (blueprint: lem-weil-pbc-tate-n2-complete-principal).
+A Noetherian normal domain `R`, complete along a principal ideal `(x)` with `R/(x)` an N-2
+domain, is N-2.
+
+## Implementation details
+
+In characteristic zero every finite extension is separable and `IsIntegralClosure.finite`
+applies. In characteristic `p`, `isN2_of_finite_purelyInseparable_integralClosure` reduces to a
+finite purely inseparable extension `L/K`. The integral closure `S` of `R` in `L` is `x`-adically
+Hausdorff (`closure_hausdorff`): an element integral in every `x^n S` has a `p`-power in every
+`x^n R`, by normality, and so vanishes. Finiteness of `S/xS` over `R/xR` then gives finiteness of
+`S` by `Module.finite_and_span_eq_top_of_adicComplete`.
+
+## References
+
+* [Stacks, Tag 032P]
 -/
 
 @[expose] public section
@@ -29,9 +42,9 @@ universe u v
 
 set_option autoImplicit false
 
-/-- An integral element in every x^n S has a p-power in every x^n R.
-Normality puts those powers in R; separatedness of R and the domain property
-then force the element to vanish. This is step 11 of Stacks Tag 032P. -/
+/-- If `R` is a normal domain that is `x`-adically Hausdorff and `L` is a purely inseparable
+extension of its fraction field, then the integral closure of `R` in `L` is `x`-adically
+Hausdorff. -/
 private theorem closure_hausdorff (R : Type u) (K L : Type v)
     [CommRing R] [IsDomain R] [Field K] [Field L] [Algebra R K]
     [IsFractionRing R K] [Algebra K L] [Algebra R L] [IsScalarTower R K L]
@@ -99,18 +112,8 @@ private theorem closure_hausdorff (R : Type u) (K L : Type v)
   have : (s : L) ^ q = 0 := by rw [← hrL, hrzero, map_zero]
   exact (pow_eq_zero_iff hq.ne').mp this
 
-/-- A Noetherian normal domain complete along a principal ideal whose quotient is N-2
-is itself N-2. Source: Stacks Project, Algebra, Lemma Tag 032P (lemma-tate-japanese).
-(blueprint: lem-weil-pbc-tate-n2-complete-principal).
-
-Proof: split by the characteristic of K. In characteristic zero every finite
-extension is separable, so Mathlib's `IsIntegralClosure.finite` applies directly.
-In characteristic p use `isN2_of_finite_purelyInseparable_integralClosure` to
-reduce to a finite purely inseparable extension L/K. Its integral closure S
-is x-adically Hausdorff by the Frobenius-power argument `closure_hausdorff`.
-The closed-fibre lemma gives finiteness of S/xS over R/xR. Apply
-`Module.finite_and_span_eq_top_of_adicComplete` to the complete base R and S.
-This proves finiteness of the integral closure for the criterion. -/
+/-- A Noetherian normal domain, complete along a principal ideal `(x)` such that `R/(x)` is an
+N-2 domain, is itself N-2. -/
 theorem tate_n2_complete_principal (R : Type u) (K : Type v) [CommRing R]
     [IsDomain R] [Field K] [Algebra R K] [IsFractionRing R K]
     [IsNoetherianRing R] (x : R) (hnormal : IsIntegrallyClosed R)

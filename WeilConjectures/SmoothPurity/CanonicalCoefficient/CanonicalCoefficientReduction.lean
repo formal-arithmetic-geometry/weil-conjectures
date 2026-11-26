@@ -11,8 +11,9 @@ public import WeilConjectures.SmoothPurity.CoefficientClosedStructure.Coefficien
 
 /-! # Explicit change of closed presentations in the coefficient calculus
 
-Source: Stacks 07A4, 08J9, 08JD and 0941.
-(blueprint: def-pur-canonical-coefficient-reduction).
+## References
+
+- Stacks Project, Tags 07A4, 08J9, 08JD and 0941.
 -/
 
 @[expose] public noncomputable section

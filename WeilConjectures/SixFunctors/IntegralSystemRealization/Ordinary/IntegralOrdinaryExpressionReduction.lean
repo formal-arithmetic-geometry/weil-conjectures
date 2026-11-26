@@ -8,8 +8,6 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralRealizationAssemblyData
 
 /-! # Ordinary coefficient maps of finite expressions
-
-Source: blueprint fix-prop-coherence, coefficient comparisons of the individual maps.
 -/
 
 @[expose] public noncomputable section
@@ -23,9 +21,7 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The ordinary tensor coefficient comparison, before completion.
-Source: blueprint fix-prop-coherence, tensor reduction; the equality of ordinary tensor models.
-(blueprint: def-sf-integral-ordinary-expression-reduction). -/
+/-- The ordinary tensor coefficient comparison, before completion. -/
 def ordinaryTensorReduction (d : RingedModels l E) (W : Scheme.{u}) :
     (d.tensor W).ordinary.tensor ⋙ (calculus l E W).reduction ⟶
       (calculus l E W).reduction.prod (calculus l E W).reduction ⋙
@@ -33,9 +29,7 @@ def ordinaryTensorReduction (d : RingedModels l E) (W : Scheme.{u}) :
   Functor.whiskerRight (eqToIso (d.tensorClosed W)).hom (calculus l E W).reduction ≫
     (calculus l E W).reductionTensor.hom
 
-/-- The direct-image coefficient map is the mate of inverse pullback reduction.
-Source: blueprint fix-prop-coherence, geometric adjunction compatibility.
-(blueprint: def-sf-integral-ordinary-expression-reduction). -/
+/-- The direct-image coefficient map is the mate of inverse pullback reduction. -/
 def ordinaryPushReduction (o : Operations l E) (m : RealizationModel l E o)
     {U V : Scheme.{u}} (f : U ⟶ V) :
     ringedPush l E f ⋙ (calculus l E V).reduction ⟶
@@ -44,9 +38,7 @@ def ordinaryPushReduction (o : Operations l E) (m : RealizationModel l E o)
 
 /-- Coefficient reduction of an ordinary expression, constructed independently of
 any realization comparison. At an open vertex use the inverse of its fixed reduction mate;
-at compact support use open reduction followed by the proper reduction mate.
-Source: blueprint fix-prop-coherence, finite substitution into individual coefficient maps.
-(blueprint: def-sf-integral-ordinary-expression-reduction). -/
+at compact support use open reduction followed by the proper reduction mate. -/
 def Expression.ordinaryReduction (o : Operations l E) (a : AmbientModels l E o)
     {B : Scheme.{u}} {I : Type u} {X : I → Over B} {W : Over B}
     (e : Expression B I X W) (K : ∀ i, Integral l E (X i).left) :

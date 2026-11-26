@@ -34,12 +34,7 @@ variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
   {C : Type c} [Category.{d} C]
 
 omit [HasCountableProducts A] in
-/-- The two mapping-cocone coordinates determine an incoming chain map.
-Source: Mathlib mappingCocone.id_X and the augmentation proof in coefficient-twist clause 4.
-(blueprint: lem-weil-frobenius-augmentation-cocone-ext).
-Proof: in each degree insert the identity decomposed through the two projections
-and inclusions. The two hypotheses identify the resulting summands. Chain-map
-extensionality then gives the asserted equality. -/
+/-- The two mapping-cocone coordinates determine an incoming chain map. -/
 theorem augmentationCocone_ext {K L M : CochainComplex A ℤ} (phi : K ⟶ L)
     {f g : M ⟶ CochainComplex.mappingCocone phi}
     (hfst : f ≫ CochainComplex.mappingCocone.fst phi =
@@ -201,10 +196,7 @@ private theorem auxiliaryDatum (l : ℕ) : ∃ D : FiniteFieldDatum.{0}, l ≠ D
 
 /-- The exact ordinary inverse image carries the completeness unit to the specified
 augmentation. A natural-isomorphism comparison and a chain factorization suffice;
-no choice of the augmentation is used here.
-Source: expanded DAG definition clause 4 and lem-weil-isomorphism-derived-pullback.
-Proof: apply exact inverse image to the invertible completeness unit, then use the
-ordinary completion-chain comparison and the given augmentation factorization. -/
+no choice of the augmentation is used here. -/
 private theorem augmentation_isIso (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

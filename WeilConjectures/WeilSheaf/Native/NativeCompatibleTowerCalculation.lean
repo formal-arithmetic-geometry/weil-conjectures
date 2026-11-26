@@ -16,14 +16,21 @@ import WeilConjectures.WeilSheaf.Native.Open.NativeOpenProperInterchange
 
 /-! # Native Weil calculation on a compatible proper/open tower
 
-Source: Stacks Project, Tag 0F7J, `lemma-shriek-composition`, the first four
-identifications in its proof; adapted to the native coefficient realization of
-`def-sf-native-weil-derived-framework`.
-(blueprint: lem-sf-native-weil-compatible-tower-calculation)
+For a compatible tower of open immersions `s, t, i` and proper maps `p, pW, q`, the
+compactification functors `F_(j,r) = Rr_* J_j` satisfy `F_(ts,qp) ≅ F_(i,q) F_(s,pW)` on
+bounded constructible native Weil complexes.
+
+## Implementation details
 
 The compactification functors are expanded as termwise native open extension followed
-by native total derived direct image. The three natural isomorphisms below give the
+by native total derived direct image. The three natural isomorphisms give the
 first intermediate identification, the proper/open identification, and their composite.
+This is the native analogue of the first four identifications in the proof of
+[Stacks, Tag 0F7J], not an application of the torsion coefficient result.
+
+## References
+
+* [Stacks, Tag 0F7J]
 -/
 
 @[expose] public section
@@ -37,35 +44,7 @@ namespace AlgebraicGeometry.WeilComplex
 /-- The compatible-tower calculation, on bounded constructible native Weil complexes.
 The first conjunct says that `J_s` preserves the bounded constructible object property.
 The remaining conjuncts are the two intermediate natural isomorphisms and the resulting
-natural isomorphism from `F_(ts,qp)` to `F_(i,q) F_(s,pW)`. Their components and inverses
-are morphisms in the native equivariant derived category.
-
-Source: Stacks Project, Tag 0F7J, `lemma-shriek-composition`, first four displayed
-identifications; native adaptation, not an application of the torsion coefficient result.
-(blueprint: lem-sf-native-weil-compatible-tower-calculation)
-
-Proof:
-1. Compose the quasi-compact open immersions `s,t` and the proper maps `p,q`.
-The permanence statements of `lem-weil-pbc-proper-fp-permanence` and the open and
-finite-type definitions show that `(s ≫ t,p ≫ q)`, `(s,pW)`, and `(i,q)` are the
-specified open/proper factorizations. The Cartesian square gives `t ≫ p = pW ≫ i`,
-so their underlying composites agree. Absolute separatedness is not used.
-2. Apply part (b) of `lem-sf-native-weil-basic-comparisons` to `s`. Thus `J_s K`
-is bounded constructible for every bounded constructible `K` on `V`.
-3. Part (a) of that lemma gives `R(qp)_* ≅ Rq_* Rp_*` on the entire native derived
-category. Part (b) gives `J_t J_s ≅ J_(ts)`. Whisker the inverse of the latter by
-the direct images and compose with the former to obtain the first displayed isomorphism.
-These comparisons impose no boundedness requirement on an intermediate direct image.
-4. Apply `lem-sf-native-weil-open-proper-interchange` with `j'=t`, `p'=pW`,
-`j=i`, and vertical map `p`. Its comparison `J_i RpW_* ≅ Rp_* J_t` has source
-`WC^der(U)`. Restrict it along `J_s`, using step 2, invert it, and whisker by
-`Rq_*`. This is exactly the second intermediate natural isomorphism below.
-5. Compose the natural isomorphisms of steps 3 and 4. Expanding the notation
-`F_(j,r) = Rr_* J_j` identifies its endpoints with the claimed compactification
-functors. Naturality follows by pasting the naturality squares of the comparisons;
-the inverse reverses their order and uses their inverses. All comparisons, their
-inverses, and their functorial images remain in the native derived categories.
--/
+natural isomorphism from `F_(ts,qp)` to `F_(i,q) F_(s,pW)`. -/
 theorem nativeWeilCompatibleTowerCalculation
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] {V U Vbar W Wbar T : Scheme.{u}}

@@ -15,8 +15,20 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 /-!
 # Approximation of a finitely presented algebra map
 
-Source: Stacks Project, proof of Lemma 0GS2, lines 1830–1837; Smoothing Ring Maps,
-Lemma 0AH5, case (2) (blueprint: lem-weil-pbc-henselian-approximation-alg-hom).
+Let `(A, I)` be a henselian pair with `A` a G-ring. Every `A`-algebra map from a finitely
+presented `A`-algebra `R` to the `I`-adic completion of `A` is congruent modulo `I` to an
+`A`-algebra map `R → A` (`exists_algHom_approximation_mod_ideal`).
+
+## Implementation details
+
+The images of the generators of a finite presentation of `R` solve its relations in the
+completion; `henselian_pair_approximation` with `N = 1` gives solutions in `A` with the same
+reduction modulo `I`, which define the required map.
+
+## References
+
+* [Stacks, Tag 0GS2]
+* [Stacks, Tag 0AH5]
 -/
 
 @[expose] public section
@@ -24,19 +36,7 @@ Lemma 0AH5, case (2) (blueprint: lem-weil-pbc-henselian-approximation-alg-hom).
 universe u
 
 /-- Approximate a map from a finitely presented algebra into the completion by an
-algebra map to the original henselian G-ring, with the same reduction modulo I.
-Source: Stacks Project, proof of Lemma 0GS2, lines 1830–1837
-(blueprint: lem-weil-pbc-henselian-approximation-alg-hom).
-
-Proof: choose a finite presentation of R by finitely many variables and relations.
-The images of its generators under c solve these relations in the I-adic completion.
-Apply henselian_pair_approximation with N = 1. The resulting elements of A solve the
-relations, so evaluation factors through the presentation to an A-algebra map σ : R → A.
-Each generator differs from its completed image by an element of IB. The kernel of the
-completion projection to A/I is IB; that projection composed with A → B is the quotient
-map. Consequently the two maps to A/I agree on all generators and on A, and hence on R.
-This argument also covers zero variables or relations; for R = A it gives the identity.
--/
+algebra map to the original henselian G-ring, with the same reduction modulo I. -/
 theorem exists_algHom_approximation_mod_ideal
     {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I] (hA : IsGRing A)
     {R : Type u} [CommRing R] [Algebra A R] [Algebra.FinitePresentation A R]

@@ -34,8 +34,20 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Normalization of strict finite scalar tensors
 
-Source: Stacks 03EK, 03D7, 06YY, 07A6 and 0941; the integral-operations
-coefficient-extension proof, step 3 of stage3-pur-extension-strict-representatives.
+For a good representative with its strict quotient transitions, the derived coefficient
+transitions are computed by the ordinary balanced tensor, and the induced Hom map in the
+normalization predicate is bijective.
+
+## Implementation details
+
+Change of rings sends a good representative to a flat-term K-flat complex over each
+quotient level, even for a ramified extension, so derived extension between levels is
+computed by the ordinary tensor. No boundedness and no flatness of the transition maps
+between quotient levels is used.
+
+## References
+
+* [Stacks: Tags 03D7, 03EK, 06YY, 07A6, 0941](https://stacks.math.columbia.edu)
 -/
 
 @[expose] public noncomputable section
@@ -115,29 +127,7 @@ private theorem strictTransition_localization {m n : ℕ} (h : n ≤ m)
     Category.comp_id]
   rfl
 
-/-- Normalization for a good representative with its actual quotient transitions.
-
-Source: Stacks 03D7, 06YY, 07A6 and 0941; step 3 of
-stage3-pur-extension-strict-representatives
-(blueprint: stage3-pur-extension-strict-tensor-normalized).
-
-Proof: fix m at least n and a good representative P. Change of rings sends P
-to a flat-term K-flat complex over the mth L-quotient, even for a ramified
-extension E to L. Thus derived extension from level m to level n is computed by
-ordinary tensor on that representative. Balanced tensor association gives an
-isomorphism (B_m tensor_R P) tensor_{B_m} B_n to B_n tensor_R P; its inverse
-inserts 1 in the middle factor. Both maps commute with differentials and with
-restriction to objects of the site. Under directEvaluation the successor maps
-are the prescribed quotient tensor maps by htransition. Compose the successor
-equations (and use identity for m=n) to identify the actual m-to-n transition.
-The normalized tensor/restriction adjunction sends this transition to the
-balanced associator just constructed: check on each local tensor b tensor x,
-where both maps reduce b and retain x. Local tensor generation and
-sheafification give the equality of chain maps, and localization preserves it.
-The adjunct is therefore invertible. Composition with its isomorphism followed
-by the derived tensor/restriction Hom equivalence is the Hom map in the
-normalization predicate, so that map is bijective for every target object.
-No boundedness and no flatness of B_m to B_n is used. -/
+/-- Normalization for a good representative with its actual quotient transitions. -/
 theorem coefficientExtensionStrictTensor_normalized
     (direct : (integralOperationsGoodComplex l E W).FullSubcategory ⥤
       CochainComplex (coefficientSequenceModules l L W) ℤ)

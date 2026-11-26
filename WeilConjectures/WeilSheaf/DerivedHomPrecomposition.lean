@@ -15,8 +15,23 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlg
 
 /-! # Native Hom and source quasi-isomorphisms
 
-Source: Stacks Tag 0A95, specialized to the native coefficient modules and Weil structure.
-The proof uses a flat separator and the signed source-cone comparison.
+Precomposition with a quasi-isomorphism is a quasi-isomorphism of native Hom complexes into a
+K-injective Weil complex.
+
+## Implementation details
+
+Forgetting Frobenius is right adjoint to exact integer-orbit induction, so it preserves
+K-injective complexes; it is exact, conservative and preserves products, so it suffices to treat
+the ordinary coefficient-module Hom complex. For a flat separator `P` of the ordinary coefficient
+modules, maps from `P` to `Hom(K, I)` are cochains from `K ⊗ P` to `I` (with the sign
+`(-1)^(p*n)`); if `K` is acyclic, so is `K ⊗ P`, and K-injectivity shows that `Hom(K, I)` is
+acyclic. This is applied to the cone of the quasi-isomorphism, through the signed source-cone
+comparison `Hom(Cone(a), I) ≅ Cone(Hom(a, I))[-1]`.
+
+## References
+
+* [Stacks Project, Tag 0A95](https://stacks.math.columbia.edu/tag/0A95), equivariant analogue
+* [Stacks Project, Tag 08BJ](https://stacks.math.columbia.edu/tag/08BJ)
 -/
 
 @[expose] public section
@@ -361,30 +376,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ}
   {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- Precomposition with a quasi-isomorphism is a quasi-isomorphism of native Hom complexes
-into a K-injective Weil complex.
-
-Source: Stacks Project, Tag 0A95, equivariant analogue, and Tag 08BJ
-(used for `proposition-six-operations-dctf--15`).
-
-Proof: forgetting Frobenius is right adjoint to exact integer-orbit induction, so
-preserves K-injective complexes. It is exact and conservative and preserves products.
-The product comparison identifies the forgotten native Hom complex and its
-precomposition map with the ordinary coefficient-module Hom complex and its map.
-
-Choose a flat separator P in the category of ordinary coefficient modules. Such a
-separator exists by the sheaf flat-resolution theorem and its inheritance by internal
-modules. The coequalizer definitions identify Mod.tensorLeft P with relative tensor
-by P, which is exact. Transposition and tensor-Hom adjunction identify maps from P to
-Hom(K,I) with cochains from K tensor P to I, using the sign (-1)^(p*n). If K is
-acyclic, so is K tensor P; K-injectivity makes each such cocycle a coboundary. Thus
-every map from P to a cycle lifts to the previous degree. The separator property
-then kills the map kernel(d) to cokernel(previous d), proving Hom(K,I) acyclic.
-
-Apply this to Cone(a). The signed source-cone isomorphism identifies Hom(Cone(a),I)
-with Cone(Hom(a,I))[-1]. Shift stability and the cone criterion imply the ordinary
-precomposition map is a quasi-isomorphism. Forgetting reflects this property,
-proving the assertion for the actual native map, with no boundedness or monomorphism
-assumption. -/
+into a K-injective Weil complex. -/
 theorem quasiIso_bifunctorHomMapLeft
     {K L I : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ}
     (a : K ⟶ L) [QuasiIso a] [I.IsKInjective] :

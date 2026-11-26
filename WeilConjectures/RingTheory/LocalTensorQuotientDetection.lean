@@ -17,8 +17,19 @@ import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
 /-!
 # Finite quotient detection by prime localizations
 
-Source: Stacks Project, Algebra, Tag 07N9, quotient decomposition and cofinal ideal powers.
-(blueprint: lem-weil-pbc-local-tensor-quotient-detection)
+For `S` finite over a Noetherian ring `R`, an element of `(R_p/m^n) ⊗_R S` vanishes if its images
+in `S_q/N_q^k` vanish for all primes `q` over `p`, for some sufficiently large `k`.
+
+## Implementation details
+
+`B/m^n B`, for `B = R_p ⊗_R S`, is Artinian and hence the product of the rings `S_q/m^n S_q`.
+In each `S_q` the ideal `m S_q` has radical the maximal ideal `N_q`, so `N_q^{c_q} ⊆ m S_q`; any
+`k ≥ n c_q` for all `q` works.
+
+## References
+
+* [Stacks, Tag 07N9]
+* [Stacks, Tags 00JA, 00CT, 0394]
 -/
 
 @[expose] public section
@@ -27,23 +38,7 @@ universe u v w
 open scoped TensorProduct
 namespace AdicCompletion
 
-/-- Sufficiently deep local maximal-ideal reductions detect any fixed tensor quotient.
-Source: Stacks Project, Algebra, Tag 07N9, using Tags 00JA, 00CT and 0394.
-(blueprint: lem-weil-pbc-local-tensor-quotient-detection)
-
-Proof: Put A = R_p and B = A tensor_R S, a finite Noetherian A-algebra. For fixed n > 0,
-B/m^n B is Artinian, and its canonical product decomposition into its localizations
-at maximal ideals is an isomorphism (Tags 00JA and 00CT). These maximal ideals correspond
-to primes q of S over p, and the factors are S_q/m^n S_q. There are finitely many q.
-In each S_q the ideal m S_q has radical its maximal ideal N_q, since the special fibre
-is a finite-dimensional local algebra over the residue field of A. Noetherianity gives
-a positive c_q with N_q^{c_q} contained in m S_q. Choose k at least n and at least
-n c_q for every q. Then N_q^k is contained in m^n S_q for all q. The assumed vanishings
-therefore kill the image of the finite sum in every factor of B/m^n B; injectivity of
-the product decomposition kills the sum itself. Identify B/m^n B with
-(A/m^n) tensor_R S to obtain the conclusion. For n = 0 the conclusion lies in the zero
-quotient, so take k = 0. If there are no q, the product and the Artinian quotient are
-zero. Empty sums also satisfy the conclusion. -/
+/-- Sufficiently deep local maximal-ideal reductions detect any fixed tensor quotient. -/
 theorem local_tensor_quotient_detection
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] (n : ℕ) :

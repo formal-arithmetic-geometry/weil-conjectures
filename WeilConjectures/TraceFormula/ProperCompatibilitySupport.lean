@@ -14,16 +14,17 @@ public import WeilConjectures.TraceFormula.ShriekTrace
 
 # Exchange of the support isomorphisms along a proper pushforward diagram
 
-For a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` with induced map of fixed loci `h`,
-the support isomorphisms are exchanged by the exchange map `E` of the support square:
+For a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` with induced map of fixed loci `h`, the
+support isomorphisms are exchanged by the exchange map `E` of the support square:
 `Rb^!(RΔ_{Y*} τ_f) ∘ E ∘ Rg_* ζ_c = ζ_b ∘ Ri_{b*} τ_h`
-(`Correspondence.ProperPushforwardDiagram.lowerStar_map_supportIso_comp_exchange`, blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, (2)). Following the blueprint proof, we pass to
-the `Rb_! ⊣ Rb^!` adjoints; the exceptional adjoint of `ζ_c` is the composition law of the fixed
-square followed by the trace `t_d`
-(`ProEtale.CondensedRing.Correspondence.FixedLocus.homEquiv_symm_supportIso_hom`, the last
-assertion of `theorem-proper-pushforward-lefschetz-verdier--1`), and the claim reduces to the
-compatibility of the traces with composition
+(`Correspondence.ProperPushforwardDiagram.lowerStar_map_supportIso_comp_exchange`).
+
+## Implementation details
+
+We pass to the `Rb_! ⊣ Rb^!` adjoints; the exceptional adjoint of `ζ_c` is the composition law of
+the fixed square followed by the trace `t_d`
+(`ProEtale.CondensedRing.Correspondence.FixedLocus.homEquiv_symm_supportIso_hom`), and the claim
+reduces to the compatibility of the traces with composition
 (`ProEtale.CondensedRing.lowerShriekSquareIso_trace_exchange`).
 
 -/
@@ -48,11 +49,10 @@ namespace Correspondence.FixedLocus
 
 variable {c : Correspondence ℓ K} (F : c.FixedLocus)
 
-/-- **The exceptional adjoint of the support isomorphism** (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, item 8, last assertion): the
-`Rc_! ⊣ Rc^!`-adjoint of `ζ_c : Rι_* ω_Fix(c) ⟶ Rc^! RΔ_* ω_X` is
-`Rc_! Rι_* ω ≅ Rc_! Rι_! ω ≅ RΔ_! Rd_! ω ⟶ RΔ_! ω_X ≅ RΔ_* ω_X`, the composition law of the
-fixed square followed by the trace `t_d`. -/
+/-- **The exceptional adjoint of the support isomorphism**: the `Rc_! ⊣ Rc^!`-adjoint of
+`ζ_c : Rι_* ω_Fix(c) ⟶ Rc^! RΔ_* ω_X` is
+`Rc_! Rι_* ω ≅ Rc_! Rι_! ω ≅ RΔ_! Rd_! ω ⟶ RΔ_! ω_X ≅ RΔ_* ω_X`, the composition law of the fixed
+square followed by the trace `t_d`. -/
 theorem homEquiv_symm_supportIso_hom :
     ((boundedConstructibleUpperShriekAdjunction ℓ c.support).homEquiv _ _).symm
         F.supportIso.hom =
@@ -116,10 +116,8 @@ lemma lowerStarDualizingComplexTrace_eq (a : Xc ⟶ Yb) [IsProper a.left] :
         lowerShriekDualizingComplexTrace ℓ a := by
   rw [lowerStarDualizingComplexTrace, lowerShriekDualizingComplexTrace]
 
-/-- The exchange of the support isomorphisms along a map of squares, in terms of the
-exceptional adjoints of the support isomorphisms (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, (2), proof): the two maps
-`Rb_! Rg_* Rιc_* ω ⟶ RΔb_* ω` agree. -/
+/-- The exchange of the support isomorphisms along a map of squares, in terms of the exceptional
+adjoints of the support isomorphisms: the two maps `Rb_! Rg_* Rιc_* ω ⟶ RΔb_* ω` agree. -/
 theorem lowerStar_square_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : ιb ≫ b = db ≫ Δb)
     (wgb : g ≫ b = c ≫ q) (wq : Δc ≫ q = f ≫ Δb) (wh : ιc ≫ g = h ≫ ιb)
     (whd : dc ≫ f = h ≫ db) :
@@ -189,8 +187,7 @@ variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteTy
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y)
   (Fc : c.FixedLocus) (Fb : P.pushforward.FixedLocus)
 
-/-- **Exchange of the support isomorphisms** (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, (2)):
+/-- **Exchange of the support isomorphisms**:
 `Rb^!(RΔ_{Y*} τ_f) ∘ E ∘ Rg_* ζ_c = ζ_b ∘ Ri_{b*} τ_h`, read through `g ∘ i_c = i_b ∘ h`. -/
 theorem lowerStar_map_supportIso_comp_exchange :
     (boundedConstructibleLowerStar ℓ P.g).map Fc.supportIso.hom ≫

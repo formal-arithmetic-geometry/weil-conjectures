@@ -15,12 +15,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Plus
 
 If `j : X ⟶ Z` is a morphism and `i : Z ⟶ Y` a closed immersion of `S`-schemes, the direct
 image along `j ≫ i` is the direct image along `j` followed by the exact direct image along `i`,
-which preserves bounded constructibility and commutes with every base change (`i` is finite,
-`lemma-weil-pbc-finite-exchange`). Hence the generic constructibility and base change property
-of `Rj_* K` over `S` implies that of `R(j ≫ i)_* K`
-(`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.comp_isClosedImmersion`). This is the
-reduction to a dense open immersion in the proof of
-`theorem-generic-constructibility-base-change-rj`.
+which preserves bounded constructibility and commutes with every base change (`i` is finite). Hence
+the generic constructibility and base change property of `Rj_* K` over `S` implies that of
+`R(j ≫ i)_* K` (`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.comp_isClosedImmersion`).
+This is the reduction to a dense open immersion in the proof of
+Deligne's generic constructibility theorem.
 -/
 
 @[expose] public section
@@ -41,7 +40,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- The direct image along a closed immersion into a locally noetherian scheme preserves bounded
 constructibility: it is exact, so it commutes with the homology sheaves, and it preserves
-constructible sheaves (`proposition-proper-direct-image-finite-coefficients`). -/
+constructible sheaves. -/
 lemma boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion {Z Y : Scheme.{u}}
     [IsLocallyNoetherian Y] (i : Z ⟶ Y) [IsClosedImmersion i]
     {K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

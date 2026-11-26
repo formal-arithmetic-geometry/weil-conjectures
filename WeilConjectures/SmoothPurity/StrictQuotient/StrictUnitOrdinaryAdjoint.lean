@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SmoothPurity.StrictQuotient.StrictQuotientExpressions
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
-/-! # Constructor laws for ordinary strict quotient adjuncts -/
+/-! # Constructor laws for ordinary strict quotient adjuncts
+
+## References
+
+* Stacks Project, Tags 07A6 and 03EL.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -209,21 +214,7 @@ private theorem unit_module_adjoint_isIso (W : Scheme.{t})
   rw [← he, Equiv.symm_apply_apply]
   infer_instance
 
-/-- Scalar extension of the strict coefficient unit has invertible ordinary adjunct.
-Source: Stacks Project, sites-cohomology.tex, Tag 07A6 (lemma-adjoint), and
-sites-modules.tex, Tag 03EL; the unit case of quotient normalization step 7.
-(blueprint: lem-pur-strict-unit-ordinary-adjoint).
-
-Proof: the unit complex has its coefficient module in degree zero and zero in all
-other degrees. Its actual horizontal map in degree zero is the ring quotient q.
-The ordinary adjunct sends b tensor c to q(b)c. Multiplication identifies scalar
-extension of the rank-one coefficient module with the smaller coefficient module;
-its inverse sends c to 1 tensor c. Balancing proves both inverse identities.
-The ordinary_unit clause fixes this adjunct for every coefficient calculus, so it
-is the displayed ordinaryAlpha. In other degrees the unique zero map is invertible.
-The degreewise inverses commute with the zero differentials and hence give a chain
-isomorphism. The argument also covers equal levels, zero coefficient sheaves and
-empty schemes and does not assume flatness of the quotient ring map. -/
+/-- Scalar extension of the strict coefficient unit has invertible ordinary adjunct. -/
 theorem strictUnitOrdinaryAdjoint (W : Scheme.{t})
     (S : CoefficientDerivedSystemTensors l E W)
     (D : CoefficientFiniteQuotientCalculus l E W S) {m n : ℕ} (hmn : n ≤ m) :

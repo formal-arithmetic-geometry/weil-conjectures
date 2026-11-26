@@ -12,10 +12,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 
 # The purity map and the exceptional base change map
 
-Let `f : X ⟶ Y` be a morphism of separated `k`-schemes of finite type. On the bounded
-constructible derived categories `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` this file defines the two canonical maps through
-which smooth purity is expressed (blueprint `proposition-exceptional-inverse-image-smooth-morphism`,
-maps (G11) and (G12)):
+Let `f : X ⟶ Y` be a morphism of separated `k`-schemes of finite type. On the bounded constructible
+derived categories `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` this file defines the two canonical maps through which smooth
+purity is expressed:
 
 - the *purity map* (or tensor map) `γ_{f,K} : Lf^* K ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! K`, the exceptional
   adjoint of the projection formula followed by the counit at the unit
@@ -77,9 +76,8 @@ f'         f
 v          v
 Y' --g---> Y
 ```
-(blueprint `proposition-exceptional-inverse-image-smooth-morphism`): the exceptional adjoint of
-`Rf'_! Lg'^* Rf^! L ≅ Lg^* Rf_! Rf^! L --Lg^* ε--> Lg^* L`, the inverse of compact-support base
-change followed by the pulled-back counit of `Rf_! ⊣ Rf^!`. -/
+This is the exceptional adjoint of `Rf'_! Lg'^* Rf^! L ≅ Lg^* Rf_! Rf^! L --Lg^* ε--> Lg^* L`, the
+inverse of compact-support base change followed by the pulled-back counit of `Rf_! ⊣ Rf^!`. -/
 noncomputable def upperShriekBaseChange (sq : IsPullback g' f' f g)
     (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar _ ℓ g').obj ((boundedConstructibleUpperShriek ℓ f).obj L) ⟶

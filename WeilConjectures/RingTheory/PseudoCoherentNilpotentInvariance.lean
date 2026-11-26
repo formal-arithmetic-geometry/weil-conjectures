@@ -20,9 +20,24 @@ import WeilConjectures.RingTheory.NilpotentProjectiveComplexLift
 /-!
 # Pseudo-coherence across a nilpotent quotient
 
-Source: Stacks Project, More on Algebra, Tag 0H76,
-lemma-check-pseudo-coherent-modulo-nilpotent
-(auxiliary; not a blueprint node).
+Pseudo-coherence is detected after derived scalar extension along a surjective ring map with
+nilpotent kernel.
+
+## Implementation details
+
+In the forward direction, a bounded-above finite-free representative is K-flat; to apply this
+with independent ring and module universes, both rings are raised by `ULift` and the
+scalar-extension adjunction is transported through the restriction-of-scalars equivalences.
+
+In the reverse direction, `B` is identified with `A/ker φ`, and nilpotent projective-complex
+lifting gives a bounded-above projective representative `P` reducing to the prescribed
+finite-free complex. Lifting bases and nilpotent Nakayama make each term of `P` finite, and the
+finite-projective freeness criterion modulo a Jacobson ideal makes it free. Empty bases and the
+zero ring require no exception.
+
+## References
+
+* [Stacks, Tag 0H76]
 -/
 
 @[expose] public section
@@ -365,26 +380,7 @@ namespace DerivedCategory
 /-- Pseudo-coherence is detected after derived scalar extension along a surjective ring map
 with nilpotent kernel. The functor `L`, with its universal counit `ε`, is the total left
 derived functor of termwise extension of scalars; thus `L.obj K'` is precisely the derived
-reduction, with no flatness assumption on the quotient.
-
-Source: Stacks Project, More on Algebra, Tag 0H76
-(auxiliary; not a blueprint node).
-
-Proof: In the forward direction use a bounded-above finite-free representative. To apply
-bounded-above K-flatness with independent ring and module universes, raise both rings by
-`ULift`, transport the scalar-extension adjunction and its universal derived counit through
-the restriction-of-scalars equivalences, and apply the module K-flat counit theorem.
-Reflection of isomorphisms returns the counit calculation to the original rings. Termwise
-scalar extension then gives the required bounded-above finite-free representative.
-
-For the reverse direction identify B with A/ker φ and transport the universal derived pair
-through this ring equivalence. The nilpotent projective-complex lifting theorem supplies a
-bounded-above projective representative P whose reduction is the prescribed finite-free
-complex. Lift a finite basis of each reduced term by projectivity of its free source.
-Nilpotent Nakayama makes the resulting map surjective, so each term of P is finite.
-The finite-projective freeness criterion modulo a Jacobson ideal now applies: every
-1 + x with x in the nilpotent ideal is a unit. Hence P is termwise finite free and
-represents the original derived object. Empty bases and the zero ring require no exception. -/
+reduction, with no flatness assumption on the quotient. -/
 theorem isPseudoCoherent_iff_of_surjective_nilpotent_kernel
     {A B : Type u} [CommRing A] [CommRing B]
     [HasDerivedCategory.{w} (ModuleCat.{max u v} A)]

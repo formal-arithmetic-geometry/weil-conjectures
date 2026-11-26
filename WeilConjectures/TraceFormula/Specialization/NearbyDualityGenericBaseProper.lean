@@ -21,18 +21,17 @@ proper part of nearby duality for such models, as for trait models over the base
 (`TraceFormula.Specialization.NearbyDualityCompactification`):
 
 * the proper exchange `χ_a : Ψ_S Ra_* ⟶ Ra'_* Ψ_M` of the structure morphism, for the trait as a
-  model of the point `Spec F` along `ε₀` (`NearbyCyclesModel.IsTraitModelOfGenericBase.toPoint`),
-  is an isomorphism (`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_pushforwardExchange_app`),
-  by the proper exchange of blueprint `prose-E-03` (2)
-  (`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`), the square of geometric
-  generic fibres being cartesian;
-* the global sections `RΓ(X', δ_{M,K})` of the duality map with dualizing map `θ_M` of a family
-  of dualizing maps over generic bases are isomorphisms
-  (`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_lowerStar_nearbyDualityMap_of_isProper`),
-  by the abstract identity `CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper_natTrans`
-  (blueprint `lemma-nearby-duality-proper-direct-image` (1), (3)) with the trace property of `θ_M`
-  for `ε₀ = (Spec Ω ⟶ η ⟶ Spec F)`, global Verdier duality on both fibres and the duality of the
-  trait as a model of a point (`NearbyCyclesModel.isIso_nearbyDualityMap_traitModelOfPoint`);
+  model of the point `Spec F` along `ε₀` (`NearbyCyclesModel.IsTraitModelOfGenericBase.toPoint`), is
+  an isomorphism (`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_pushforwardExchange_app`), by
+  the proper exchange (`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`), the
+  square of geometric generic fibres being cartesian;
+* the global sections `RΓ(X', δ_{M,K})` of the duality map with dualizing map `θ_M` of a family of
+  dualizing maps over generic bases are isomorphisms
+  (`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_lowerStar_nearbyDualityMap_of_isProper`), by
+  the abstract identity `CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper_natTrans` with
+  the trace property of `θ_M` for `ε₀ = (Spec Ω ⟶ η ⟶ Spec F)`, global Verdier duality on both
+  fibres and the duality of the trait as a model of a point
+  (`NearbyCyclesModel.isIso_nearbyDualityMap_traitModelOfPoint`);
 * hence the duality map `δ_{M,K}` is an isomorphism as soon as it is so away from finitely many
   closed points of the special fibre
   (`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_nearbyDualityMap_of_isProper_of_finset`,
@@ -75,9 +74,8 @@ local notation "𝐐" => Profinite.padicAlgClRingObj ℓ
 categories: if the total space of `M` is proper over the trait, `X₁` is proper over `F` and the
 square of geometric generic fibres `𝒳_Ω ⟶ X₁`, `Spec Ω ⟶ Spec F` (along `ε₀`) is cartesian, the
 proper exchange `χ_a : Ψ_S Ra_* K ⟶ Ra'_* Ψ_M K` of the morphism of models
-`NearbyCyclesModel.IsTraitModelOfGenericBase.toPoint` is invertible at every bounded
-constructible `K` (blueprint `prose-E-03` (2),
-`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`). -/
+`NearbyCyclesModel.IsTraitModelOfGenericBase.toPoint` is invertible at every bounded constructible
+`K`. -/
 theorem IsTraitModelOfGenericBase.isIso_pushforwardExchange_app_ambient [Fact (ringChar F ≠ ℓ)]
     [Fact (ringChar k' ≠ ℓ)]
     (h : M.IsTraitModelOfGenericBase X₁ ι q g) [IsProper q]
@@ -125,18 +123,10 @@ variable [IsSepClosed k'] [Fact (ringChar F).Prime] [Fact (ringChar F ≠ ℓ)]
   [QuasiCompact X₁.hom] [IsSeparated X₁.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom]
 
-/-- **Global sections of the duality map of a proper model over a generic base** (blueprint
-`lemma-nearby-duality-proper-direct-image` (1), (3)): if `X₁`, `X'` and the total space of the trait
-model `M` over the generic base are proper and the geometric generic fibre of `M` is all of
-`X₁ ×_F Spec Ω`, then `RΓ(X', δ_{M,K})` is an isomorphism, for the duality map `δ_{M,K}` with
-dualizing map `θ_M` of a family `D` of dualizing maps over generic bases. This is
-`CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper_natTrans` for the proper exchange
-`χ_a` along `ε₀ = (Spec Ω ⟶ η ⟶ Spec F)`
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_pushforwardExchange_app`), its compatibility
-with the lax tensor maps (`NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_tensor`),
-the trace property of `D`, global Verdier duality on both fibres
-(`ProEtale.CondensedRing.isIso_nearbyDualityMap_lowerStar_trace`) and the duality of the trait as
-a model of the point `Spec F` (`NearbyCyclesModel.isIso_nearbyDualityMap_traitModelOfPoint`). -/
+/-- **Global sections of the duality map of a proper model over a generic base**: if `X₁`, `X'` and
+the total space of the trait model `M` over the generic base are proper and the geometric generic
+fibre of `M` is all of `X₁ ×_F Spec Ω`, then `RΓ(X', δ_{M,K})` is an isomorphism, for the duality
+map `δ_{M,K}` with dualizing map `θ_M` of a family `D` of dualizing maps over generic bases. -/
 theorem IsTraitModelOfGenericBase.isIso_lowerStar_nearbyDualityMap_of_isProper
     (D : NearbyDualizingDataOfGenericBase k' ℓ) (h : M.IsTraitModelOfGenericBase X₁ ι q g)
     [IsProper (CondensedRing.toPoint X₁).left] [IsProper (CondensedRing.toPoint X').left]
@@ -167,15 +157,10 @@ theorem IsTraitModelOfGenericBase.isIso_lowerStar_nearbyDualityMap_of_isProper
     (isIso_nearbyDualityMap_lowerStar_trace ℓ X₁ K)
     (isIso_nearbyDualityMap_lowerStar_trace ℓ X' _) this
 
-/-- **Nearby duality for a proper model over a generic base with finite support** (blueprint
-`proposition-nearby-cycles-commute-verdier-duality`, "Dimension induction", last step): if `X₁`,
-`X'` and the total space of the trait model `M` over the generic base are proper and its geometric
-generic fibre is all of `X₁ ×_F Spec Ω`, the duality map `δ_{M,K}` is an isomorphism as soon as it
-is an isomorphism away from finitely many closed points of the special fibre: its global sections
-are isomorphisms
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_lowerStar_nearbyDualityMap_of_isProper`), so
-its cone vanishes
-(`ProEtale.CondensedRing.isIso_of_isIso_upperStar_finsetComplOpens_of_isIso_lowerStar`). -/
+/-- **Nearby duality for a proper model over a generic base with finite support**: if `X₁`, `X'` and
+the total space of the trait model `M` over the generic base are proper and its geometric generic
+fibre is all of `X₁ ×_F Spec Ω`, the duality map `δ_{M,K}` is an isomorphism as soon as it is an
+isomorphism away from finitely many closed points of the special fibre. -/
 theorem IsTraitModelOfGenericBase.isIso_nearbyDualityMap_of_isProper_of_finset
     (D : NearbyDualizingDataOfGenericBase k' ℓ) (h : M.IsTraitModelOfGenericBase X₁ ι q g)
     [IsProper (CondensedRing.toPoint X₁).left] [IsProper (CondensedRing.toPoint X').left]

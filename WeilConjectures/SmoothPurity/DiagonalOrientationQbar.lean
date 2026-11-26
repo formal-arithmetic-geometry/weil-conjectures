@@ -19,12 +19,10 @@ public import WeilConjectures.TraceFormula.PurityTensorMapDualizable
 Let `f : X ⟶ Y` be a morphism of separated `k`-schemes of finite type, with projections
 `p₁, p₂ : X ×_Y X ⟶ X` and diagonal `Δ : X ⟶ X ×_Y X`. This file carries out, on the bounded
 constructible derived categories `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`, the formal part of the diagonal construction of
-the identification `ω_f = Rf^! ℚ̄_ℓ ≅ ℚ̄_ℓ,X(d)[2d]`
-(blueprint `proposition-relative-dualizing-complex--1`):
+the identification `ω_f = Rf^! ℚ̄_ℓ ≅ ℚ̄_ℓ,X(d)[2d]`:
 
 1. `Lp₂^* ω_f ⟶ ω_{p₁}` is the exceptional base change map at the unit
-   (`ProEtale.CondensedRing.diagonalBaseChangeMap`, blueprint
-   `proposition-exceptional-inverse-image-smooth-morphism--7`);
+   (`ProEtale.CondensedRing.diagonalBaseChangeMap`);
 2. `RΔ^! ω_{p₁} ≅ R(𝟙 X)^! ℚ̄_ℓ ≅ ℚ̄_ℓ,X` is the composition isomorphism
    (`ProEtale.CondensedRing.upperShriekDiagonalDualizingIso`);
 3. for a dualizable `T` and a `K` with invertible purity map `LΔ^* K ⊗ RΔ^! ℚ̄_ℓ ⟶ RΔ^! K`
@@ -100,8 +98,7 @@ variable {X Y : Over (Spec (.of k))}
 
 /-- The base change map `Lp₂^* ω_f ⟶ ω_{p₁}` of the relative dualizing complexes for the
 cartesian square of the projections of `X ×_Y X`: the exceptional base change map at the unit
-followed by `Rp₁^!` of `Lf^* ℚ̄_ℓ,Y ⟶ ℚ̄_ℓ,X` (blueprint
-`proposition-exceptional-inverse-image-smooth-morphism--7`). -/
+followed by `Rp₁^!` of `Lf^* ℚ̄_ℓ,Y ⟶ ℚ̄_ℓ,X`. -/
 noncomputable def diagonalBaseChangeMap :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (pullback.snd f f)).obj
         ((boundedConstructibleUpperShriek ℓ f).obj (𝟙_ _)) ⟶
@@ -127,8 +124,7 @@ noncomputable def upperStarDiagonalPullbackSndIso (K : Dᵇc(X.left)⟦Profinite
   ((boundedConstructibleUpperStarCompOfEq ℓ (pullback.diagonal_snd f)).app K).symm ≪≫
     (boundedConstructibleUpperStarId _ ℓ X).app K
 
-/-- Blueprint `proposition-relative-dualizing-complex--1` (`ℚ̄_ℓ`-coefficients, formal part): **the
-identification `ω_f ≅ ℚ̄_ℓ,X(d)[2d]` from the fundamental class of the diagonal**. Given an
+/-- The identification `ω_f ≅ ℚ̄_ℓ,X(d)[2d]` from the fundamental class of the diagonal. Given an
 identification `cl : RΔ^!(ℚ̄_ℓ(d)[2d]) ≅ ℚ̄_ℓ,X` (the fundamental class of the diagonal), and
 assuming the base change map `Lp₂^* ω_f ⟶ ω_{p₁}` and the purity map of `Δ` at `ω_{p₁}` invertible,
 ```

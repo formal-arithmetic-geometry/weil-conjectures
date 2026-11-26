@@ -13,7 +13,9 @@ import all Mathlib.Logic.Small.Defs
 
 /-! # Tensor endpoint identification
 
-Proved helper for restriction tensor representative stage transport.
+We identify the normalized tensor comparison, followed by the input associators, with the
+common-stage pair endpoint. This is used for stage transport of restriction tensor
+representatives.
 -/
 
 @[expose] public noncomputable section
@@ -66,14 +68,7 @@ attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The normalized tensor comparison followed by input associators is the pair endpoint.
-
-Source: lemma-section-normal-bundle--1, common-stage subargument, steps 3–5.
-Proof: Expand the normalized tensor comparison, keeping its transition isomorphisms.
-Functoriality combines the two input corrections with the inverses of the transition
-isomorphisms. This is exactly the defining common-stage tensor endpoint. The calculation
-is the existing tensorStageComparison_endpoint applied to the two stage associators.
-(blueprint: lem-weil-common-stage-tensor-endpoint). -/
+/-- The normalized tensor comparison followed by input associators is the pair endpoint. -/
 theorem commonStageTensor_endpoint
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

@@ -12,7 +12,20 @@ import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedComparisonStrictC
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+We identify the strict pullback/tensor comparison with its coherent completed image, via
+quotient normalization and coherent substitution.
+
+## Implementation details
+
+The equality of the two sequence inverse-image interfaces transports the generator-normalized
+cochain pullback tensor comparison, which is uniquely fixed by its tensor generators. Inserting
+the tensor and pullback primitive realization formulas into the recursive substitutions and
+cancelling effective counits against their inverses leaves the defining
+`canonicalIntegralPullbackTensor` composite.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0D6D.
 -/
 
 @[expose] public noncomputable section
@@ -184,24 +197,7 @@ private theorem naturalComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [integralComparisonIso_app, integralComparisonIso_app] at e'
   exact e'
 
-/-- Identification of the strict comparison and its coherent completed image.
-Source: realization proof steps 2, 3 and 5; Stacks 07A4 and 0D6D
-(blueprint: lem-pur-completed-comparison-canonical-identification).
-
-Proof: the equality of the two sequence inverse-image interfaces transports the
-generator-normalized cochain pullback tensor comparison. Its tensor generators
-uniquely fix it, so it agrees with the recorded sequence cochain comparison.
-The descended system comparison satisfies its K-flat normalization equation.
-Insert the tensor and pullback primitive realization formulas into the recursive
-substitutions at the source and target. Naturality moves each reduction-model
-map through the tensor and inverse-image functors. Effective counits cancel
-against their inverses; the remaining composite is precisely the defining
-canonicalIntegralPullbackTensor composite. Generator normalization also supplies
-the strong monoidal, signed symmetry and composition equations for the three
-pullbacks. Transport along the same interface equality gives StrictCoherence.
-Apply this at both coefficients. Naturality of the descended system comparison,
-primitive natural isomorphisms and counits gives NaturalComparison for arbitrary
-derived input maps, without choosing representatives for those maps. -/
+/-- The strict comparison is identified with its coherent completed image. -/
 theorem completedComparisonCanonicalIdentification
     {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)
     [∀ z : Z, Invertible (l : Z.residueField z)]

@@ -12,10 +12,16 @@ public import WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefine
 /-!
 # Integral, rational, and algebraically closed compact-support functors
 
-Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/
-def-weil-integral-rational-qbar-compact-support.md, node
-def-weil-integral-rational-qbar-compact-support
-(blueprint: def-weil-integral-rational-qbar-compact-support).
+## Implementation details
+
+The natural index `n` denotes the positive exponent `n+1`. Exact countable products of
+completed-coefficient module sheaves supply derived-category products; the integral value
+is a chosen vertex of the resulting Roos triangle (any two such vertices are isomorphic),
+and the recorded constructibility theorem supplies membership in the integral category.
+
+## References
+
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Definition 6.7.6
 -/
 
 @[expose] public section
@@ -31,17 +37,10 @@ variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Y : Scheme.{u}} {f : X ⟶ Y}
 
-/-- The integral compact-support value obtained from the specified derived-limit tower.
-The natural index n denotes the positive exponent n+1, with the same compactification
-at every level. The terms and transitions are sfCompactSupportTerm and
-sfCompactSupportTransition, including the quotient-induced reduction map and the
-normalized compact-support and composite-restriction comparisons. Exact countable
-products of completed-coefficient module sheaves supply derived-category products.
-Choose a vertex of the resulting Roos triangle; any two such vertices are isomorphic.
-The recorded constructibility theorem supplies membership in the integral category.
-Source: blueprint order 1490; Bhatt--Scholze, Definition 6.7.6
-(blueprint: def-weil-integral-rational-qbar-compact-support).
--/
+/-- The integral compact-support value: a derived limit of the tower of finite-level
+compact-support terms `sfCompactSupportTerm` with transitions `sfCompactSupportTransition`,
+using the same compactification at every level, regarded as an object of the integral
+constructible category. -/
 noncomputable def sfIntegralCompactSupportValue
     (K₀ : Type u) [Field K₀] (_hl : IsUnit (l : K₀))
     [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]
@@ -64,8 +63,6 @@ noncomputable def sfIntegralCompactSupportValue
 /-- The rational compact-support value in the localized stage category.
 K is the integral representative of the rational input; raw scalar localization has
 exactly the same objects. Apply the integral value and regard it in that localization.
-Source: blueprint order 1490; Bhatt--Scholze, Definition 6.7.6
-(blueprint: def-weil-integral-rational-qbar-compact-support).
 -/
 noncomputable def sfRationalCompactSupportValue
     (K₀ : Type u) [Field K₀] (_hl : IsUnit (l : K₀))
@@ -82,8 +79,6 @@ noncomputable def sfRationalCompactSupportValue
 K represents the rational object at E₀, using the canonical small coefficient model.
 Keep E₀ as the stage and apply the rational value there. Independence of the integral
 representative, finite stage and compactification remains a separate assertion.
-Source: blueprint order 1490; Bhatt--Scholze, Definition 6.7.6
-(blueprint: def-weil-integral-rational-qbar-compact-support).
 -/
 noncomputable def sfQbarCompactSupportValue
     (K₀ : Type u) [Field K₀] (_hl : IsUnit (l : K₀))

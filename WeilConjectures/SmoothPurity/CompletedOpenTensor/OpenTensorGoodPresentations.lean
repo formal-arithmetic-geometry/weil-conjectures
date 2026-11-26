@@ -8,7 +8,18 @@ module
 public import WeilConjectures.SmoothPurity.CompletedOpenTensor.CompletedOpenTensorRepresentativeData
 import WeilConjectures.SixFunctors.CanonicalOpenRestriction.OpenRestrictionGoodComplex
 
-/-! # Natural tensor presentations on good complexes -/
+/-! # Natural tensor presentations on good complexes
+
+## Implementation details
+
+Exact extension and restriction are lifted from good complexes into the K-flat subcategories;
+the natural canonical tensor models are whiskered by those lifts and composed with the tensor
+of the exact derived-functor representative counits.
+
+## References
+
+* Stacks Project, Tags 0GL1 and 0E8I.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -28,16 +39,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {U V : Scheme.{t}} (j : U ⟶ V) [IsOpenImmersion j]
 
-/-- Natural tensor presentations on pairs of good complexes.
-Source: Stacks sites-cohomology.tex Tag 0GL1 and sites-modules.tex Tag 0E8I;
-canonical derived tensor models, representative part of original step 4.
-(blueprint: lem-pur-open-tensor-good-presentations).
-
-Proof: lift exact extension and restriction from good complexes into the K-flat
-subcategories. Whisker the natural canonical tensor models by those lifts. Compose
-with tensor of the exact derived-functor representative counits and identities.
-The two component equalities are the definitions of sourceRepresentative and
-openRepresentative; the K-flatness witnesses agree by proof irrelevance. -/
+/-- Natural tensor presentations exist on pairs of good complexes. -/
 theorem openTensorGoodPresentations (C : Context l E j) :
     ∃ (cs : ((integralOperationsGoodLocalization l E U).prod
           (integralOperationsGoodLocalization l E V)) ⋙ ordinarySource l E j C ≅

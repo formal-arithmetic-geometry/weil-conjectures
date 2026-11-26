@@ -17,16 +17,14 @@ Let `M` and `N` be models of finite type over the strictly henselian trait `S = 
 (`k'` separably closed) and let `P` be their fibre product over `S`, with the projections
 `φ₁ : P ⟶ M` and `φ₂ : P ⟶ N`
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.IsTraitProduct`).
-**Gabber's Künneth formula** (Illusie, *Autour du théorème de monodromie locale*, Thm. 4.7;
-blueprint `proposition-external-kunneth-formula-nearby-cycles`) says that the Künneth map of nearby
-cycles
+**Gabber's Künneth formula** says that the Künneth map of nearby cycles
 ```
 Π_{A,B} : Ψ_M A ⊠ Ψ_N B ⟶ Ψ_P (A ⊠ B)
 ```
 (`NearbyCyclesModel.kunnethMap`) is an isomorphism for bounded constructible `A` and `B`
 (`NearbyCyclesModel.isIso_kunnethMap`).
 
-## Proof
+## Implementation details
 
 By induction on the chart dimension, simultaneously for all separably closed fields `k'`
 (`NearbyCyclesModel.kunnethFormula`), and after the reduction to proper models with compatible
@@ -39,6 +37,17 @@ nearby cycles of the trait on the cohomology of the geometric generic fibres
 (`NearbyCyclesModel.isIso_kunnethMap_traitGenericModel_of_shiftDecomposition`), the complexes
 on the geometric generic point being finite direct sums of shifts of the unit, and Gabber's formula
 in smaller chart dimension over the traits of the generic slices.
+
+The formula is classically stated for finite `ℓ`-primary coefficients and `D^b_ctf`; the version
+for bounded constructible `ℚ̄_ℓ`-complexes is deduced from the Künneth formula with
+`𝒪_E`-coefficients (`NearbyCyclesModel.integralKunnethFormula`) through integral models of the
+coefficients (`NearbyCyclesModel.kunnethFormula_padicAlgCl_of_integral`).
+
+## References
+
+* L. Illusie, *Autour du théorème de monodromie locale*, Thm. 4.7
+* SGA 7, Exp. XIII
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, §6.8
 
 -/
 
@@ -67,27 +76,17 @@ variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))} {M : NearbyCycle
 variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]
 
-/-- **Gabber's Künneth formula in every chart dimension** (Illusie, *Autour du théorème de
-monodromie locale*, Thm. 4.7; blueprint `proposition-external-kunneth-formula-nearby-cycles`), for
-every separably closed field `k'` (`NearbyCyclesModel.KunnethFormula` with `ℚ̄_ℓ`-coefficients). It
-is deduced from the Künneth formula with `𝒪_E`-coefficients
-(`NearbyCyclesModel.integralKunnethFormula`) through integral models of the coefficients
-(`NearbyCyclesModel.kunnethFormula_padicAlgCl_of_integral`). -/
+/-- **Gabber's Künneth formula in every chart dimension**, for every separably closed field `k'`
+(`NearbyCyclesModel.KunnethFormula` with `ℚ̄_ℓ`-coefficients). -/
 theorem kunnethFormula (n : ℕ) (k' : Type u) [Field k'] [IsSepClosed k']
     [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] :
     KunnethFormula (Profinite.padicAlgClRingObj ℓ) k' n :=
   kunnethFormula_padicAlgCl_of_integral (integralKunnethFormula ℓ n k')
 
-/-- **Gabber's Künneth formula for nearby cycles** (Illusie, *Autour du théorème de monodromie
-locale*, Thm. 4.7; SGA 7 XIII; blueprint `proposition-external-kunneth-formula-nearby-cycles`): for
-the product `P` over the strictly henselian trait `Spec k'⟦t⟧` of two models `M`, `N` of finite type
-and bounded constructible `A`, `B`, the Künneth map of nearby cycles
-`Π_{A,B} : Ψ_M A ⊠ Ψ_N B ⟶ Ψ_P (A ⊠ B)` is an isomorphism. The blueprint node is stated for
-finite `ℓ`-primary coefficients and `D^b_ctf`; the statement here, for bounded constructible
-`ℚ̄_ℓ`-complexes, follows from it by passage to the limit (Bhatt–Scholze, §6.8). The total spaces
-locally embed into affine spaces of some dimension
-(`AlgebraicGeometry.Scheme.Hom.exists_locallyEmbedsInAffineSpace`), so this is
-`NearbyCyclesModel.kunnethFormula`. -/
+/-- **Gabber's Künneth formula for nearby cycles**: for the product `P` over the strictly
+henselian trait `Spec k'⟦t⟧` of two models `M`, `N` of finite type and bounded constructible `A`,
+`B`, the Künneth map of nearby cycles `Π_{A,B} : Ψ_M A ⊠ Ψ_N B ⟶ Ψ_P (A ⊠ B)` is an
+isomorphism. -/
 theorem isIso_kunnethMap {φ₁ : P.Hom M f₁ f₁'} {φ₂ : P.Hom N f₂ f₂'} (h : IsTraitProduct φ₁ φ₂)
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}

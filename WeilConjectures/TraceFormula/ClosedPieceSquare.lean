@@ -14,8 +14,7 @@ public import WeilConjectures.TraceFormula.SourceExchangeKunnethAux
 
 Let `h : X ⟶ X`, `v : Lh^* K ⟶ K` and `x` a rational point fixed by `h`. The closed piece
 coefficient `u^Z = [x, x]_! v_x` on `K^Z = Rx_* Lx^* K` is compatible with `v` along the unit
-`η : K ⟶ Rx_* Lx^* K` (blueprint `proposition-additivity-trace-classes--2`, proof of item 2, step
-(b)):
+`η : K ⟶ Rx_* Lx^* K`:
 ```
 u^Z ∘ Lh^* η = η ∘ v        (up to R(𝟙)^! ≅ 𝟭),
 ```
@@ -23,6 +22,8 @@ u^Z ∘ Lh^* η = η ∘ v        (up to R(𝟙)^! ≅ 𝟭),
 object are deduced in `WeilConjectures.TraceFormula.CurvePiecesAdditivity`).
 By the adjunction `Lx^* ⊣ Rx_*` it suffices to compare the adjoint maps `Lx^* Lh^* K ⟶ Lx^* K`,
 which the triangle identities reduce to `Lx^* v`.
+
+## Implementation details
 
 The intermediate statements mentioning the concrete proper pushforward diagram `(x, x)` are
 private: exporting their statements is expensive.
@@ -138,8 +139,7 @@ variable (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) {h : X ⟶ X}
   (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K)
   {x : RationalPoint X} (hx : x ≫ h = x)
 
-/-- **The closed piece coefficient is compatible with the unit** (blueprint
-`proposition-additivity-trace-classes--2`, proof of item 2, step (b)): for `x` fixed by `h`, the
+/-- **The closed piece coefficient is compatible with the unit**: for `x` fixed by `h`, the
 closed piece coefficient `u^Z = [x, x]_! v_x` satisfies `u^Z ∘ Lh^* η = η ∘ v` for the unit
 `η : K ⟶ Rx_* Lx^* K`, up to `R(𝟙)^! ≅ 𝟭`. -/
 theorem upperStar_map_unit_comp_graphClosedPieceCoeff :

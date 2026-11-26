@@ -44,8 +44,21 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Finite models of the adjoint coefficient shift
 
-Source: Stacks 06YY, 07A6 and 0941; current blueprint
-`sk-thm-sf-compatibility/fix-prop-coherence.proof.md`, coefficient comparisons.
+## Implementation details
+
+For `purReductionFiniteShiftNormalization`, coherent shifts are transported through the
+universal finite cochain counit, which on K-flat complexes is `coefficientFiniteReductionModel`.
+K-flat resolutions and naturality extend the finite scalar unit equation to every complex, and
+the normalized-unit right Kan argument makes the finite scalar adjunction commute with shifts.
+The K-injective normalization of a derived projection shows that the actual
+`coefficientSequenceProjection` commutes with `totalLimitCommShift`. Finally
+`S.counit_projection` identifies that projection with a mate of the inverse
+`reductionEvaluation`, so the latter commutes with shifts as well. No faithfulness of derived
+evaluation, and no finite-field, finite-type, completeness or exact-product hypothesis is used.
+
+## References
+
+* [Stacks Project, Tags 06YY, 07A6 and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -315,34 +328,7 @@ private theorem sequence_projection_shift (n : ℕ) :
 
 -- Unfold coefficient-category aliases when identifying the two forms of the finite shift square.
 /-- The shift of reduction adjoint to the canonical total-limit shift agrees with
-all finite K-flat scalar-extension models and the supplied evaluation isomorphisms.
-Source: Stacks 06YY (derived tensor), 07A6 (derived adjunction), and 0941;
-current blueprint coefficient-comparison sentence
-(blueprint: lem-pur-reduction-finite-shift-normalization).
-
-Proof: transport coherent shifts through the universal finite cochain counit.
-On K-flat complexes it is exactly coefficientFiniteReductionModel, so its shift
-square is the displayed model equation. The recorded finite scalar unit equation
-holds on K-flat complexes; K-flat resolutions and naturality extend it to every
-complex. The normalized-unit right Kan argument then makes the actual finite
-scalar adjunction commute with these shifts.
-
-For a derived projection from a right-derived functor to an exact evaluation,
-its K-injective normalization identifies its composite with the derived unit
-with the localized ordinary projection. K-injective resolutions extend this
-identity to all homotopy objects. The canonical derived unit commutes with shifts
-and is invertible on K-injectives, so the projection commutes with shifts.
-Apply this to tower limit and evaluation, then compose with exact sequence
-restriction and its canonical evaluation comparison. The result is the shift
-square for the actual coefficientSequenceProjection and totalLimitCommShift.
-
-The equation S.counit_projection identifies that projection with the mate of the
-inverse reductionEvaluation under the total and finite scalar adjunctions. Both
-adjunctions commute with shifts, so inverse mates and hence reductionEvaluation
-commute with shifts. No faithfulness of derived evaluation is used. Coherent
-integer shifts include zero, negative and repeated shifts, zero complexes and
-the empty scheme. No finite-field, finite-type, completeness or exact-product
-hypothesis is required. -/
+all finite K-flat scalar-extension models and the supplied evaluation isomorphisms. -/
 theorem purReductionFiniteShiftNormalization
     (S : CoefficientDerivedSystemCalculus l E W)
     (hS : CoefficientDerivedSystemCoherence l E W S) :

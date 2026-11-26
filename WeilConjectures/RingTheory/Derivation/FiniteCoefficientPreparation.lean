@@ -20,8 +20,24 @@ import Mathlib.LinearAlgebra.Dual.Lemmas
 /-!
 # Coefficient preparation for detecting derivations
 
-Source: Stacks Project, More on Algebra, Lemma 07PH, steps 1--5.
-(blueprint: lem-weil-pbc-finite-coefficient-detecting-derivation).
+Let `B` be a domain of characteristic `p` of finite type over a Noetherian complete local
+ring, with fraction field `M`, and `f ∈ B` detected by a derivation of `M`. Then `f` is
+detected by a derivation of `M` that kills a subring `A` of `B` over which `B` is of finite
+type.
+
+## Implementation details
+
+The base is replaced by a power series ring `R` over a field `k` (Cohen structure), and Noether
+normalization gives a polynomial ring over `R` with fraction field `K`, `M/K` finite. Since
+`f` is not a `p`-th power, the coefficient subfields of a `p`-basis of `k` (Tags 07P5, 07P4)
+give a subring `A_J` with `f ∉ M^p K_J`, so the differential of `f` over `K_J` is nonzero, and a
+linear functional nonzero on it gives the derivation. No denominator clearing is used here.
+
+## References
+
+* [Stacks, Tag 07PH]
+* [Stacks, Tag 07P5]
+* [Stacks, Tag 07P4]
 -/
 
 @[expose] public section
@@ -30,27 +46,9 @@ universe u v w
 namespace Derivation
 
 /-- A detecting derivation can be chosen to kill a coefficient subring over which
-`B` is finite type.
-Source: Stacks Project, More on Algebra, Lemma 07PH (`lemma-find-D`).
-(blueprint: lem-weil-pbc-finite-coefficient-detecting-derivation)
-Proof: replace the complete local base by its image, a complete Noetherian local
-characteristic-p domain. Cohen structure makes it finite over a power series ring
-R over a field k. Noether normalization gives a polynomial ring A over R and a
-subring B' of B finite over A, with B'_g = B_g and equal fraction fields M.
-The given detecting derivation implies that f is not a pth power: the Leibniz
-formula D(x^p) = p*x^(p-1)*D(x) is zero in characteristic p. Choose a p-basis
-of k. The coefficient subfields of 07P5 give subrings A_J with A finite over A_J
-and fraction subfields K_J whose intersection is K^p. By 07P4 in the finite
-extension M/K, the intersection of M^p K_J is M^p. Since f is not a pth
-power, it lies outside M^p K_J for some J. The kernel criterion for the
-universal differential over K_J is M^p K_J, so this relative differential
-of f is nonzero.
-A linear functional nonzero on this relative differential, composed with the
-universal derivation, gives δ on M killing A_J and nonzero on f. Regard A_J as a
-subring of B. Since A is finite over A_J, and B is finite type over R and hence
-over A (the original finite algebra generators still generate over the
-larger subring A), transitivity makes B finite type over A_J. This gives the stated
-coefficient subring and derivation. No denominator clearing is used here. -/
+`B` is finite type. Given a derivation of the fraction field `M` nonzero on `f`, there are a
+subring `A` of `B` with `B` of finite type over `A` and a derivation of `M` that kills `A` and
+is nonzero on `f`. -/
 theorem exists_finite_coefficient_derivation
     (p : ℕ) [Fact p.Prime]
     (B : Type u) [CommRing B] [IsDomain B] [CharP B p]

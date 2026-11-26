@@ -9,7 +9,19 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.Locall
 
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Normalized.NormalizedRationalLeftLaws
 
-/-! # The normalized compact-support action on finite coefficient stages -/
+/-! # The normalized compact-support action on finite coefficient stages
+
+## Implementation details
+
+At a stage `E` one takes the rational operation of `P` at `finiteField E`, and for
+`E ≤ L` the comparison `P.fields.rationalComparison` along `coefficientInclusion`. These
+functors and comparisons are transported through the specified transition equalities,
+retaining them as heterogeneous equalities (including the case `E = L`).
+
+## References
+
+* [Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -193,21 +205,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (P : CoefficientConstruction l (ULift.{u} (PadicAlgCl l)) D hl (f := f))
   (c : Compactification f)
 
-/-- Rational compact support with its prescribed scalar comparisons is a stage morphism.
-Source: the coefficient construction and its rational cocycle; blueprint common-field
-comparisons, step 10 of the native compact-support realization.
-(blueprint: lem-sf-locally-finite-compact-support-stage-action).
-
-Proof: at E take the rational operation of P at finiteField E, and for E ≤ L take
-P.fields.rationalComparison along coefficientInclusion. Identify the transition
-functors with GeneralAlgebraicallyClosedCoefficients.transition using the specification
-of stageSystem. The associators are its normalized balanced-tensor associators.
-The composition clause of normalized_rational_left_laws gives the stage morphism equation,
-after identifying the composite coefficient inclusion with the inclusion E ≤ M.
-Transport these functors and comparisons through the specified transition equalities.
-This retains the exact functors and scalar comparisons as heterogeneous equalities,
-including E = L. The coherence proof is a proposition, so introduces no new choices.
-The auxiliary lifted closure does not change the finite coefficient fields. -/
+/-- Rational compact support with its prescribed scalar comparisons is a stage morphism. -/
 theorem locally_finite_compact_support_stage_action :
     Nonempty (StageAction l D hl P c) := by
   obtain ⟨A, ha, hb⟩ := stageAction_exists l (PadicAlgCl l) D hl P c

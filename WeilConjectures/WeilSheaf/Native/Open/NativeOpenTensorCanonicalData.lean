@@ -9,7 +9,12 @@ public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorOperations
 
 /-! # Canonical expressions for the native open tensor data
 
-Source: the native tensor, total tensor, and actual summand insertion definitions.
+The native tensor, total tensor and summand insertion agree with the curried totalization
+expressions.
+
+## References
+
+* Stacks Project, Tag 012Z
 -/
 
 @[expose] public noncomputable section
@@ -20,13 +25,7 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 attribute [local irreducible] nativeDerivedClosedComparison nativeTensorMap tensor
 
-/-- The native tensor data agree with the curried totalization expressions.
-Source: Stacks 012Z and the definitions of nativeTensorBifunctor, nativeTensorTotal,
-and nativeOpenTensorInsertion (blueprint: lem-sf-native-open-tensor-canonical-data).
-Proof: unfold the object and map projections of the flipped tensor bifunctor.
-The total tensor is defined to be its cochain total, and the recorded insertion
-is defined to be the actual homogeneous coproduct insertion for that total.
-All four equalities are therefore reflexive, on arbitrary objects and complexes. -/
+/-- The native tensor data agree with the curried totalization expressions. -/
 theorem native_open_tensor_canonical_data
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :

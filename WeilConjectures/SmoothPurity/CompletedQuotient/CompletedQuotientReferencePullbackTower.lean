@@ -15,7 +15,12 @@ import all WeilConjectures.SmoothPurity.CompletedQuotient.CompletedQuotientPullb
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+This file defines the reference quotient pullback tower, transported to the comparison
+interface, and proves its generator formula on coherent representatives.
+
+## References
+
+* [Stacks, Tags 03D2, 06YY, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -117,11 +122,9 @@ private theorem ordinary_formula {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact congrArg (fun b ↦ (b.f i).val.app (op U)
     (coefficientEvaluationSection l E Y (C.X i) n (op U) x)) hh
 
-/-- The reference quotient pullback tower, transported to the comparison interface.
-Source: Stacks 03D2, 0941; quotient normalization reference step.
-(blueprint: def-pur-completed-quotient-reference-pullback-tower).
-Construction: apply sequence restriction to the inverse of the strict pullback
-bridge, and compose with the fixed integral pullback tower. -/
+/-- The reference quotient pullback tower, transported to the comparison interface: sequence
+restriction of the inverse strict pullback bridge, composed with the fixed integral pullback
+tower. -/
 @[irreducible] def completedQuotientReferencePullbackTower {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (scalarReductionSource l E Y) ℤ) :
     ((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ) ⋙
@@ -133,12 +136,7 @@ bridge, and compose with the fixed integral pullback tower. -/
         ((pullBridge l E f).app (quotient l E P))).symm ≪≫
     pullbackTensorPullbackTower l E f P
 
-/-- Generator formula for the transported reference tower.
-Source: Stacks 06YY, 0941; coherent quotient generator calculation.
-(blueprint: def-pur-completed-quotient-reference-pullback-tower).
-Proof: identify the explicit transported tower with the ordinary tower using
-adjunction mates. The ordinary generator formula and naturality of evaluation
-then give the formula for a coherent representative. -/
+/-- Generator formula for the transported reference tower on a coherent representative. -/
 theorem completedQuotientReferencePullbackTower_generator {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (scalarReductionSource l E Y) ℤ)
     (C : StrictQuotient.Complex l E Y)

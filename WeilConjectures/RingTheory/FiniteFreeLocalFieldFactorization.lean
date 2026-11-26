@@ -17,7 +17,21 @@ import Mathlib.LinearAlgebra.Finsupp.VectorSpace
 /-!
 # Finite free local realization of a finite residue-field extension
 
-Source: Stacks Project, Tag 07NE, specialized to a maximal ideal of a local ring.
+If `rho : A →+* K` is a finite map from a local ring to a field with kernel the maximal ideal,
+then `rho` factors through a finite free local `A`-algebra `B` with `B → K` surjective.
+
+## Implementation details
+
+We induct on finite subsets of `K`, adjoining one element `x` at a time: if `S → K` is the
+current stage, `x` is integral over `S`, and a monic lift `f` of a generator of the evaluation
+kernel modulo `m_S` gives the next stage `S[T] / (f)`, which is finite free and local with
+evaluation kernel `m_S B`. Starting from `A` and a finite set of `A`-module generators of `K`
+gives the result. Neither separability nor Noetherianity is needed.
+
+## References
+
+* [Stacks, Tag 07NE]
+* [Stacks, Tag 0EYB]
 -/
 
 @[expose] public section
@@ -96,29 +110,7 @@ private theorem exists_finite_free_local_monogenic_field_factor
     hlocalMap, eq_maximalIdeal hmax, hphicomp, ?_⟩
   exact ⟨AdjoinRoot.root f, AdjoinRoot.lift_root hfx⟩
 
-/-- A finite field quotient-extension factors through a finite free local algebra.
-
-Source: Stacks Project, Tag 07NE; the locality argument in Tag 0EYB.
-(blueprint: lem-sbc-finite-free-local-field-factorization)
-
-Proof: The kernel identifies the image of rho with A/m. Choose a finite set of
-A-module generators of K. Induct on finite sets of elements to produce a local
-finite free A-algebra mapping to K, with kernel its maximal ideal, whose image
-contains that finite set. Start with A and rho. At an adjoining step, write the
-preceding map as psi : S → K. K is still a finite S-module by restriction of
-scalars, so the new element x is integral over S. The kernel of evaluation
-S[T] → K therefore strictly contains m_S[T]: a monic polynomial vanishes at x,
-whereas its leading coefficient 1 is not in m_S. Polynomial division over S/m_S
-and lifting coefficients supply a monic f with evaluation kernel m_S[T] + (f).
-Take B = S[T]/(f). Its power basis gives finite freeness, and evaluation descends
-with kernel m_SB. This kernel is maximal because K is integral over B. Every
-maximal ideal of B contracts to m_S by integrality, hence contains and equals
-m_SB. Thus B is local, and contraction shows S → B is local. Compose the free
-bases, finite generating sets, structural maps and evaluation maps along this
-finite induction. At the final stage the image contains the chosen A-module
-generators, hence all of K; the evaluation map is surjective. No separability or
-Noetherianity is required; finitely many polynomial quotients remain in Type u.
-This is solely a ring construction, with no scheme or smoothness hypothesis. -/
+/-- A finite field quotient-extension factors through a finite free local algebra. -/
 theorem exists_finite_free_local_field_factorization
     (A K : Type u) [CommRing A] [IsLocalRing A] [Field K]
     (rho : A →+* K) (hfinite : rho.Finite)

@@ -11,8 +11,18 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationNatur
 
 /-! # Finite tensor comparison with condensed coefficients
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-locally-finite-adic-condensed-stage-comparison)
+## Implementation details
+
+The finite realization is the rationalized integral identity equivalence followed by the
+continuous rational realization at the finite field; constructible rational Hom
+comparison makes it fully faithful. The universal property of localization extends the
+integral identification `D.integral` to the raw rational stage. No Hom-surjectivity,
+eventual equality or essential-image claim at the algebraic closure is made.
+
+## References
+
+* [Bhatt--Scholze, Lemma 6.8.2, Proposition 6.8.11(3), Proposition 6.8.14(2) and
+  Remark 6.8.15]
 -/
 
 @[expose] public noncomputable section
@@ -67,36 +77,7 @@ private theorem representative_of_stage_normalization
   rw [reassoc_of% hn, ← Category.assoc, hc A j hA]
   simp only [Category.assoc]
 
-/-- Finite coefficient realization agrees with the normalized native tensor formula.
-
-Source: Bhatt--Scholze, Lemma 6.8.2, Proposition 6.8.11(3), Proposition 6.8.14(2),
-and Remark 6.8.15; the finite-stage identification in the parent Hom-descent proof
-(blueprint: lem-sf-locally-finite-adic-condensed-stage-comparison).
-
-Proof in words: first apply the integral identity equivalence between strict-tower and
-completed integral presentations, and rationalize it. Compose with the continuous rational
-realization at the finite field. The section-ring comparison for that finite condensed
-coefficient identifies continuous modules with internal modules. Constructible rational
-Hom comparison makes this finite realization full and faithful; preservation of local
-finite freeness puts its image in the bounded constructible condensed category. Neither
-essential surjectivity of this finite functor nor a closure Hom quotient is required.
-For E ≤ L, inverse-completion
-scalar coherence, the continuous realization scalar comparison, and balanced tensor
-transitivity give the displayed scalar isomorphism. The finite coefficient inclusion
-followed by condensedNativeMap is the specified rational inclusion of D: both maps evaluate
-a function by the fixed embedding. Integral residue normalization identifies their integral
-maps. Hence D.integral identifies the integral restrictions of both realizations. The
-universal property of localization extends this identification to the raw rational stage,
-giving objectIso. On an integral arrow its naturality is exactly that of D.integral;
-inverse uniformizer powers are preserved by functoriality. The equation D.common_field
-identifies the transition isomorphisms with the same completion and tensor comparisons.
-Write a representative as isoToStage, then a stage arrow, then the inverse isoToStage.
-Mapping this expression proves the representative equation. Identity extensions use the
-unit comparison; repeated fields and zero objects use the same formulas. For the empty
-scheme the categories and formulas are the zero ones. This lemma asserts finite tensor
-normalization only, with no Hom-surjectivity, eventual equality, or essential-image claim
-at the algebraic closure.
--/
+/-- Finite coefficient realization agrees with the normalized native tensor formula. -/
 theorem condensedStageComparison_exists
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]
     [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]

@@ -17,8 +17,9 @@ import WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientScalarModelExiste
 
 /-! # Coherent reduction of the scalar tensor comparison
 
-Source: Stacks Project, Tags 07A4, 0941 and 0FPQ.
-(blueprint: lem-pur-integral-scalar-tensor-coherent-reduction).
+## References
+
+* Stacks Project, Tags 07A4, 0941 and 0FPQ.
 -/
 
 @[expose] public noncomputable section
@@ -48,28 +49,8 @@ attribute [local implicit_reducible] integralScalarExtension integralScalarExten
   integralComparisonDerivedSequenceScalar
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 
--- The proof compares the completed and entire-system derived normalizations.
 /-- The prescribed scalar tensor comparison respects the coherent tensor reductions.
-This assertion contains no braiding or signed-swap equation.
-
-Source: Stacks 07A4 and 0941; the normalization step in
-lem-pur-integral-braiding-scalar-extension-square-reduced.
-(blueprint: lem-pur-integral-scalar-tensor-coherent-reduction).
-
-Proof: use the primitive quotient scalar realization with the two published
-coefficient calculi. Its reduction followed by the coherent counit is natural.
-On a constructible complete input the quotient scalar system is normalized, so
-normalized DVR effectivity makes that counit invertible. This gives p on the
-constructible subcategory. Choose the tensor realizations obtained by transporting
-the fixed completed tensor model to these same calculi. Their reduction maps
-are precisely pullbackTensorIntegralReductionTensor. The scalar tower tensor
-limit square identifies scalarTensorCompleted with the limit of derivedSigma
-and the two tensor reductions. Apply coherent reduction, postcompose with the
-counit and use its naturality. This is the displayed equation. The restricted
-comparison integralTensorScalarComparison has exactly this ambient hom by its
-definition. The construction retains entire systems and every quotient transition;
-it needs no flatness of a quotient coefficient map and applies also to zero inputs,
-the identity coefficient extension and ramified extensions. -/
+This assertion contains no braiding or signed-swap equation. -/
 theorem integralScalarTensorCoherentReduction
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L]

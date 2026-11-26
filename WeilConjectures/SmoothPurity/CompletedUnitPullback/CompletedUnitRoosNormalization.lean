@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.PrimitiveCounit.PrimitiveCounitComparisonModels
 public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 
-/-! # Comparison of the two normalized strict Roos realizations -/
+/-! # Comparison of the two normalized strict Roos realizations
+
+## References
+
+* Stacks Project, Tag 0941
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -202,20 +207,7 @@ private theorem generic_iso_eq_on_kinjective
 attribute [local implicit_reducible] pullbackTensorTowerQ
 
 /-- The primitive resolution-normalized comparison is the tensor Roos comparison
-followed by the actual strict bridge between the two shifted cone presentations.
-Source: Stacks 0941, proof of lemma-derived-limit-is-ok.
-(blueprint: lem-pur-completed-unit-roos-normalization).
-
-Proof: specialize the primitive resolution equation to the identity of a K-injective
-complex and invert it. Its resulting chain map is the termwise-limit isomorphism
-followed by roosι. The two-coordinate mapping-cocone identity identifies this with
-the tensor augmentation: its unshifted coordinate is the family of limit projections
-and its shifted coordinate is zero. These are precisely the defining normalization
-of pullbackTensorRoosModel. The strict bridge is natural because its maps are the
-same diagonal product maps under the two definitions of mapping-cone maps. Finally,
-resolve an arbitrary complex by a K-injective one. Both natural comparisons invert
-that quasi-isomorphism, so naturality and cancellation extend equality to every
-complex. No faithfulness of the individual derived evaluations is used. -/
+followed by the actual strict bridge between the two shifted cone presentations. -/
 theorem primitive_roos_inverse_eq (W : Scheme.{u})
     (ρ : PrimitiveCounit.RoosRealization l E W)
     (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) :

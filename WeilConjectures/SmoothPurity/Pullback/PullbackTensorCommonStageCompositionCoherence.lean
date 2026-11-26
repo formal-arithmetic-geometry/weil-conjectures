@@ -10,17 +10,19 @@ import WeilConjectures.CategoryTheory.BilinearCoefficientDescent.BilinearCoeffic
 import WeilConjectures.SmoothPurity.Pullback.PullbackTensorRationalCompositionCoherence
 import WeilConjectures.SmoothPurity.Pullback.PullbackTensorCommonStageCompositionFiniteRepresentative
 
-/-! Common-stage coefficient component of pullback/tensor composition coherence.
+/-! # Common-stage coefficient component of pullback/tensor composition coherence
 
-Source: Stacks 07A4 and 0941; this is the common-stage part of
-`lem-pur-pullback-tensor-composition-coherence`.
-(blueprint: lem-pur-pullback-tensor-composition-coherence)
+## Implementation details
 
 Choose one finite coefficient field containing the stages of both inputs and all
 objects in the diagram. The representative formulas for common-stage pullback,
 tensor, comparison, and composition reduce both routes to the rational equation.
 The endpoint comparison maps are the same on both routes and the intermediate
 ones cancel; passage to the colimit Hom group then gives the claimed equality.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -39,9 +41,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- Common-stage component of higher pullback/tensor composition coherence.
-Source: Stacks 07A4 and 0941; finite-stage representative descent.
-(blueprint: lem-pur-pullback-tensor-composition-coherence). -/
+/-- Common-stage component of higher pullback/tensor composition coherence. -/
 theorem pullbackTensorCommonStageCompositionCoherence {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]

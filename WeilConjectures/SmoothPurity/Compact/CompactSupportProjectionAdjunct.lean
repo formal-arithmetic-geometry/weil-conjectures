@@ -18,9 +18,20 @@ import Mathlib.Data.ZMod.Basic
 
 /-! # Invertibility of the compact-support projection adjunct
 
-The complete projection-adjunct proof is exposed independently of the chosen
-integral functor predicate, so that its elaboration does not expand that predicate.
-(blueprint: lem-weil-compact-support-projection-adjunct-is-iso).
+For an integral constructible complex `K`, the tensor/restriction adjunct of the `n`-th
+projection out of a derived limit of the compact-support terms of `K` is an isomorphism.
+
+## Implementation details
+
+The proof is stated independently of the chosen integral functor predicate, so that its
+elaboration does not expand that predicate. It normalizes the native output system using the
+finite scalar comparison and quotient cocycle; the normalized coefficient-sequence Roos model
+then makes its projection adjunct invertible, and this is transported to the specified
+compact-support terms along the evaluation isomorphisms and a comparison of Roos triangles.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 6.7.6.
 -/
 
 @[expose] public noncomputable section
@@ -111,17 +122,9 @@ private theorem constantTowerTransition_eq
   rfl
 
 include K₀ hl in
-/-- The tensor/restriction adjunct of a specified Roos projection is invertible.
-Source: blueprint lem-fix-operation-reduction.proof.md, compact-support paragraph;
-Bhatt--Scholze Definition 6.7.6.
-(blueprint: lem-weil-compact-support-projection-adjunct-is-iso).
-Proof: normalize the native output system using the finite scalar comparison and
-quotient cocycle. The normalized coefficient-sequence Roos model and finite-reduction
-theorem make its projection adjunct invertible. Transport its Roos triangle to the
-specified compact-support terms using the evaluation isomorphisms. A comparison
-with the chosen defining Roos triangle preserves the product projection. Adjunction
-naturality identifies the required adjunct with this vertex isomorphism followed
-by the native projection adjunct and the finite evaluation isomorphism. -/
+/-- For a derived limit triangle `M ⟶ ∏ terms ⟶ ∏ terms ⟶ M[1]` of the compact-support
+terms of `K`, the tensor/restriction adjunct of the `n`-th projection `M ⟶ terms n` is an
+isomorphism. -/
 theorem compactSupportProjectionAdjunct_isIso
     (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]

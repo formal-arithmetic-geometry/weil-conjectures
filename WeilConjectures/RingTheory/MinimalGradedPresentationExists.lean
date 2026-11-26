@@ -17,9 +17,16 @@ import WeilConjectures.RingTheory.GradedNakayamaGeneration
 /-!
 # Existence of minimal finite graded free presentations
 
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, graded Nakayama construction of a
-minimal presentation, expanded from the blueprint (blueprint:
-lem-sc-p1-minimal-graded-presentation-exists).
+Every graded module over `k[x₀, x₁]` with a finite homogeneous spanning set admits a minimal
+finite graded free presentation, by graded Nakayama.
+
+## Implementation details
+
+With `I = (x₀, x₁)`, polynomials act on `Q = N/IN` through their constant coefficients, so the
+images of the generators span `Q` over `k`. Homogeneous lifts `nᵢ` of degrees `dᵢ` of a basis of
+`Q` give `q : F = S^r → N`, `q(a) = ∑ aᵢ • nᵢ`, with `F` graded by the shifts `dᵢ`. Graded
+Nakayama makes `q` surjective, and linear independence in `Q` gives minimality. If `Q = 0`, then
+`N = 0` and the presentation is zero.
 -/
 
 @[expose] public section
@@ -129,28 +136,7 @@ private theorem exists_homogeneous_quotient_basis {k : Type u} [Field k]
     rw [heq]
     exact htli.comp e e.injective
 
-/-- Every finite homogeneous spanning set admits a minimal finite graded free presentation.
-Source: step 1 of blueprint node `lem-sc-p1-graded-nakayama-free`, refining the graded Hilbert
-syzygy argument cited in blueprint `theorem-riemann-roch-coherent-serre-duality`. The construction
-below is the standard explicit expansion of that step, rather than a quoted blueprint proof.
-(blueprint: lem-sc-p1-minimal-graded-presentation-exists)
-
-Proof: restrict scalars along the constant-polynomial embedding to give `N` its `k`-module
-structure. Put `I = (x₀,x₁)` and `Q = N/IN`. In `Q`, multiplication by a polynomial equals
-multiplication by its constant coefficient: the difference lies in `I` and acts by zero. Hence
-the images of the given finite homogeneous generating set span `Q` over `k`. Extract a basis
-from this finite spanning family and retain its original homogeneous lifts `nᵢ`, with degrees
-`dᵢ`. Set `F = Fin r → S`. Its degree-`j` subgroup consists of coefficient tuples whose ith
-coordinate is homogeneous of degree `j-dᵢ` (zero if that degree is negative). Decompose every
-polynomial coordinate into its homogeneous components, translate their degrees by `dᵢ`, and sum
-over the finite union of these translated supports. Uniqueness of polynomial homogeneous
-components gives uniqueness of this decomposition; homogeneous multiplication adds degrees.
-The standard basis vector `eᵢ` has degree `dᵢ`. Define `q(a) = ∑ i, aᵢ • nᵢ`. Scalar
-compatibility in `N` shows it preserves degrees. Graded Nakayama generation, applied to the
-chosen lifts, makes `q` surjective. If `q(a)` belongs to `IN`, linear independence of the chosen
-basis of `Q` forces every constant coefficient of `aᵢ` to vanish. Each `aᵢ` then lies in `I`,
-so the finite basis expansion shows `a` belongs to `IF`. This proves minimality. For `Q = 0`,
-the chosen basis is empty; graded Nakayama gives `N = 0`, yielding the zero presentation. -/
+/-- Every finite homogeneous spanning set admits a minimal finite graded free presentation. -/
 theorem exists_minimal_graded_presentation (k : Type u) [Field k]
     (N : Type u) [AddCommGroup N] [Module (MvPolynomial (Fin 2) k) N]
     (ℳ : ℤ → AddSubgroup N) (hℳ : DirectSum.IsInternal ℳ)

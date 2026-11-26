@@ -15,10 +15,8 @@ public import WeilConjectures.TraceFormula.TraceClass
 This file defines the correspondence with the support of a correspondence `c` and another
 coefficient object and map, its trace class on the fixed locus of `c`, and the graph
 correspondences `(𝟙, Φ_m)` with the curve pieces `K^Z = Rx_* Lx^* K` and `K^U = j_! Lj^* K` of a
-Weil object and their coefficient maps `u^Z`, `u^U` (blueprint
-`proposition-frobenius-local-term-curve--1`). The additivity
-`Tr_{c_m}(φ_m) = Tr_{c_m}(u^Z) + Tr_{c_m}(u^U)` of blueprint
-`proposition-additivity-trace-classes--2`, item 2, is
+Weil object and their coefficient maps `u^Z`, `u^U`. The additivity
+`Tr_{c_m}(φ_m) = Tr_{c_m}(u^Z) + Tr_{c_m}(u^U)` is
 `ProEtale.CondensedRing.WeilBoundedConstructible.traceClass_graph_eq_add` in
 `WeilConjectures.TraceFormula.CurvePiecesAdditivity`.
 
@@ -59,7 +57,7 @@ lemma restrict_add (j : U ⟶ X) [IsOpenImmersion j.left] (α β : BorelMooreSec
   simp only [restrict, Functor.map_add, Preadditive.add_comp, Preadditive.comp_add]
 
 omit [LocallyOfFiniteType U.hom] [IsSeparated U.hom] in
-/-- Local terms are additive (blueprint `theorem-proper-pushforward-lefschetz-verdier--3`). -/
+/-- Local terms are additive. -/
 lemma localTerm_add (j : U ⟶ X) [IsOpenImmersion j.left] [IsClosedImmersion j.left]
     [IsProper U.hom] (α β : BorelMooreSection ℓ X) :
     (α + β).localTerm j = α.localTerm j + β.localTerm j := by
@@ -72,7 +70,7 @@ namespace Correspondence
 variable {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c : Correspondence ℓ K)
 
 /-- The correspondence with the support `(c₁, c₂)` of `c` and another coefficient object `K'`
-and coefficient map `u' : Lc₂^* K' ⟶ Rc₁^! K'` (blueprint `definition-correspondence--2`). -/
+and coefficient map `u' : Lc₂^* K' ⟶ Rc₁^! K'`. -/
 noncomputable def withCoeff (K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K' ⟶
       (boundedConstructibleUpperShriek ℓ c.c₁).obj K') :
@@ -113,13 +111,13 @@ variable {Φ : X ⟶ X} (K : WeilBoundedConstructible ℓ Φ) {U : Over (Spec (.
   [IsOpenImmersion j.left]
 
 /-- The graph correspondence `(𝟙, Φ_m)` with the closed curve piece `K^Z = Rx_* Lx^* K` and its
-coefficient map `u^Z` (blueprint `proposition-frobenius-local-term-curve--1`). -/
+coefficient map `u^Z`. -/
 noncomputable abbrev closedPieceGraph (m : ℕ) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) : Correspondence ℓ (K.closedPiece x) :=
   (K.graph m).withCoeff (K.closedPiece x) (K.closedPieceCoeff m x hx)
 
 /-- The graph correspondence `(𝟙, Φ_m)` with the open curve piece `K^U = j_! Lj^* K` and its
-coefficient map `u^U` (blueprint `proposition-frobenius-local-term-curve--1`). -/
+coefficient map `u^U`. -/
 noncomputable abbrev openPieceGraph (m : ℕ) {ΦU : U ⟶ U}
     (sq : IsPullback ΦU j j (frobeniusIterate Φ m)) : Correspondence ℓ (K.openPiece j) :=
   (K.graph m).withCoeff (K.openPiece j)

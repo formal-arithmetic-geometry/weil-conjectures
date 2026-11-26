@@ -14,9 +14,16 @@ import WeilConjectures.WeilSheaf.FourierInversion.UpperStar
 /-!
 # The compact-support trace for a trivial affine-space bundle on Weil complexes
 
-Source: vector-bundle Thom theorem, specialized to a trivial bundle, as used in
-convolution-kernel proof Step 4.
-(blueprint: lem-fd-weil-affine-bundle-trace)
+For a trivial affine-space bundle `π : Y ⟶ X` of rank `n` (given by a cartesian square over the
+standard affine space), the compact-support integral along `π` of a pullback is the Tate twist
+`(-n)` followed by the shift `[-2n]`. This is the Thom isomorphism specialized to a trivial
+bundle, as used in the computation of the Fourier convolution kernel.
+
+## Implementation details
+
+The statement is reduced to the standard affine-space trace by compact-support base change along
+the isomorphism from `Y` to the standard affine space over `X` given by the universal property
+of the cartesian square; only the standard trace calculation remains an input.
 -/
 
 @[expose] public section
@@ -30,20 +37,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.WeilComplex
 
 /-- The compact-support integral of the pullback to a trivial rank-n affine bundle
-is the rank Tate twist and cohomological shift.
-Source: `lemma-integral-linear-character--1` and convolution-kernel proof, Step 4.
-
-Proof: the standard affine-space base-change square and the given cartesian
-square have the same cospan. Their universal property gives an isomorphism from
-`Y` to standard affine space over `X`, with its composite with the standard
-projection equal to `π`. That identity makes the isomorphism a morphism over
-the finite field. Compact-support base change in the square with this top
-isomorphism and the identity on `X` compares the two compact-support images.
-Remove pullback along the identity, and use pullback composition to identify
-the other side with the integral for `π`. Compose the inverse of this natural
-transport comparison with the standard affine-space trace. This proves all
-presentation-independence; only the standard trace calculation remains an input.
-(blueprint: lem-fd-weil-affine-bundle-trace) -/
+is the rank Tate twist and cohomological shift. -/
 theorem nonempty_iso_upperStar_comp_derivedLowerShriek_affineSpace_of_isPullback
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (n : Type u) [Fintype n] {X Y : Scheme.{u}}

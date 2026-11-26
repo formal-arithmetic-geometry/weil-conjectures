@@ -15,9 +15,9 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 
 /-! # Strict completion chains under a scheme isomorphism
 
-Source: the expanded DAG definition prose-10-21, clause 4;
-Stacks Project, Tags 03EL and 08TC.
-(blueprint: lem-pur-isomorphism-ordinary-completion-chain).
+## References
+
+* Stacks Project, Tags 03EL and 08TC.
 -/
 
 @[expose] public noncomputable section
@@ -117,24 +117,7 @@ end GenericAugmentation
 attribute [local irreducible] IntegralOnSlice.ordinaryPull
 
 /-- Reindexing the strict quotient Roos complex along an isomorphism carries its
-specified quotient-map/zero augmentation to the ordinary pullback completion chain.
-
-Source: expanded DAG definition prose-10-21, clause 4, and
-lem-weil-isomorphism-derived-pullback; Stacks Tags 03EL and 08TC.
-(blueprint: lem-pur-isomorphism-ordinary-completion-chain).
-Proof: the pro-etale base-change equivalence identifies ordinary module pullback
-with reindexing, transporting the completed coefficient action by its finite
-projection-normalized ring isomorphism. This equivalence preserves products and
-identifies each scalar quotient with the finite pullback quotient; on an
-adjunction-unit section both augmentations insert the unit scalar. These quotient
-identifications commute with all transitions, since the coefficient maps commute
-with quotient projections. Apply the product comparison in both coordinates of
-the mapping cocone of 1 minus shift. Its inverse uses the inverse product and
-quotient comparisons, so it is a chain isomorphism. The unshifted component of the
-pulled-back augmentation is the product of the same quotient insertions, and the
-shifted component is zero. The mapping-cocone component identity proves the stated
-equality. This uses no completeness, flatness, constructibility, invertibility of
-ell on the schemes, or nonemptiness assumption. -/
+specified quotient-map/zero augmentation to the ordinary pullback completion chain. -/
 theorem isomorphismOrdinaryCompletionChain
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

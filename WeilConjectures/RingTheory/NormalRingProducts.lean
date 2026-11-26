@@ -36,6 +36,16 @@ A commutative ring `R` is *normal* if `R_p` is an integrally closed domain for e
 - `exists_ringEquiv_pi_isDomain_of_isIntegrallyClosedIn`: a reduced ring with finitely many
   minimal primes which is integrally closed in its total ring of fractions is a finite product
   of domains (Stacks, Tag 030C).
+
+## References
+
+* [Stacks, Tag 037B]
+* [Stacks, Tag 0CYA]
+* [Stacks, Tag 0CY8]
+* [Stacks, Tag 0CY9]
+* [Stacks, Tag 034M]
+* [Stacks, Tag 031S]
+* [Stacks, Tag 030C]
 -/
 
 @[expose] public section
@@ -45,8 +55,7 @@ universe w u v
 namespace Pi
 
 /-- A finite product of normal rings is normal: if every localization of every `R i` at a prime
-is an integrally closed domain, then so is every localization of `Π i, R i` at a prime.
-(blueprint: `lem-weil-pbc-finite-product-normal`) -/
+is an integrally closed domain, then so is every localization of `Π i, R i` at a prime. -/
 theorem isDomain_and_isIntegrallyClosed_localization {I : Type u} [Finite I] (R : I → Type v)
     [∀ i : I, CommRing (R i)]
     (hR : ∀ (i : I) (p : Ideal (R i)) [p.IsPrime],
@@ -64,7 +73,7 @@ theorem isDomain_and_isIntegrallyClosed_localization {I : Type u} [Finite I] (R 
   exact ⟨e.toMulEquiv.isDomain_iff.mpr hd, IsIntegrallyClosed.of_equiv e.symm⟩
 
 /-- An element of a finite product of algebras is integral if and only if all its coordinates
-are (Stacks, Tag 0CY8). -/
+are. -/
 theorem isIntegral_iff {I : Type w} [Finite I] {R : I → Type u} {S : I → Type v}
     [∀ i, CommRing (R i)] [∀ i, CommRing (S i)] [∀ i, Algebra (R i) (S i)] (x : ∀ i, S i) :
     IsIntegral (∀ i, R i) x ↔ ∀ i, IsIntegral (R i) (x i) := by
@@ -118,8 +127,7 @@ end Pi
 /-- **Integral closure commutes with finite products.** For ring maps `φ i : R i →+* S i`, the
 integral closure of `Π R i` in `Π S i` is the product of the integral closures of `R i` in
 `S i`; if all `φ i` are injective, `Π R i` is integrally closed in `Π S i` if and only if every
-`R i` is integrally closed in `S i`.
-(blueprint: `lem-weil-pbc-finite-product-integral-closure`) -/
+`R i` is integrally closed in `S i`. -/
 theorem integralClosure_pi {I : Type w} [Finite I]
     (R : I → Type u) (S : I → Type v) [∀ i, CommRing (R i)] [∀ i, CommRing (S i)]
     (φ : ∀ i, R i →+* S i) :
@@ -168,8 +176,7 @@ theorem integralClosure_pi {I : Type w} [Finite I]
 
 /-- **A normal ring is integrally closed in its total ring of fractions.** If every localization
 of `R` at a prime is an integrally closed domain, then every element of `FractionRing R` which is
-integral over `R` comes from `R`.
-(blueprint: `lem-weil-pbc-normal-ring-integrally-closed-total`) -/
+integral over `R` comes from `R`. -/
 theorem exists_algebraMap_eq_of_isIntegral_of_normal (R : Type u) [CommRing R]
     (hnormal : ∀ (p : Ideal R) [p.IsPrime],
       IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p))
@@ -208,8 +215,7 @@ theorem exists_algebraMap_eq_of_isIntegral_of_normal (R : Type u) [CommRing R]
 
 /-- **Local denominators of integral total fractions.** If `x` in the total ring of fractions of
 `R` is integral over `R` and `p` is a prime with `R_p` an integrally closed domain, then
-`s * x = a` for some `s ∉ p` and `a ∈ R`.
-(blueprint: `lem-weil-pbc-integral-total-fraction-local-denominator`) -/
+`s * x = a` for some `s ∉ p` and `a ∈ R`. -/
 theorem IsIntegral.exists_mul_eq_algebraMap_of_atPrime
     {R : Type u} [CommRing R] {x : FractionRing R} (hx : IsIntegral R x)
     (p : Ideal R) [p.IsPrime] [IsDomain (Localization.AtPrime p)]
@@ -368,8 +374,7 @@ private theorem isCoprime_of_mem_minimalPrimes_of_isIntegrallyClosedIn
   exact Ideal.isCoprime_iff_exists.mpr ⟨1 - e, hep, e, heq, by ring⟩
 
 /-- **Domain decomposition.** A reduced ring with finitely many minimal primes which is integrally
-closed in its total ring of fractions is isomorphic to a finite product of domains.
-(blueprint: `lem-weil-pbc-integrally-closed-reduced-finite-domain-decomposition`) -/
+closed in its total ring of fractions is isomorphic to a finite product of domains. -/
 theorem exists_ringEquiv_pi_isDomain_of_isIntegrallyClosedIn
     (R : Type u) [CommRing R] [IsReduced R]
     (hfinite : (minimalPrimes R).Finite)

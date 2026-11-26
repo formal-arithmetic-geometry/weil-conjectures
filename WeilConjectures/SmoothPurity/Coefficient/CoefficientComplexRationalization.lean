@@ -25,13 +25,20 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Rationalization of coefficient-module complexes
 
-Source: blueprint main-20261015, `lemma-perfect-complexes-geometric-point`, final paragraph;
-Stacks Tags 0539, 00HD, 00CX, 015F and 04VG
-(blueprint: lem-weil-coefficient-complex-rationalization).
+The integral, rationalization and field scalar-extension tensors on coefficient modules for a
+finite extension of `ℚ_l`, their exactness, and the normalized comparisons between them.
+
+## Implementation details
 
 The aliases below use Mathlib's coefficient-first convention for the ordinary tensor.
 They allow arbitrary module sizes above the coefficient size. All maps are specified
 on generators before localization; no resolution or boundedness is involved.
+Exactness holds because the valuation rings `O_E`, `O_L` and the fields `E`, `L` are
+torsion-free, hence flat, over the relevant valuation rings.
+
+## References
+
+* [Stacks, Tags 0539, 00HD, 00CX, 05RU, 015F and 04VG]
 -/
 
 @[expose] public section
@@ -53,21 +60,15 @@ variable (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L)
 
-/-- Ordinary integral scalar tensor, using the existing restricted field inclusion.
-Source: blueprint coefficient-point paragraph; Stacks 00CX
-(blueprint: lem-weil-coefficient-complex-rationalization). -/
+/-- Ordinary integral scalar tensor, using the existing restricted field inclusion. -/
 noncomputable abbrev coefficientComplexIntegralTensor :=
   ModuleCat.extendScalars.{u, u, max u v} (integralScalarIntegerInclusion l E L ι)
 
-/-- Ordinary fraction-field tensor, with the recorded valuation subring.
-Source: blueprint coefficient-point paragraph; Stacks 00CX
-(blueprint: lem-weil-coefficient-complex-rationalization). -/
+/-- Ordinary fraction-field tensor, with the recorded valuation subring. -/
 noncomputable abbrev coefficientComplexRationalize :=
   ModuleCat.extendScalars.{u, u, max u v} (Padic.coefficientExtensionIntegers l E).subtype
 
-/-- Ordinary field scalar tensor along the specified coefficient inclusion.
-Source: blueprint coefficient-point paragraph; Stacks 00CX
-(blueprint: lem-weil-coefficient-complex-rationalization). -/
+/-- Ordinary field scalar tensor along the specified coefficient inclusion. -/
 noncomputable abbrev coefficientComplexFieldTensor :=
   ModuleCat.extendScalars.{u, u, max u v} ι.toRingHom
 
@@ -101,16 +102,7 @@ private theorem coefficientIntegerFlat {S : Type u} [CommRing S] [IsDomain S]
     Module.isTorsionFree_iff_algebraMap_injective.mpr hf
   exact inferInstanceAs (Module.Flat (Padic.coefficientExtensionIntegers l E) S)
 
-/-- Exactness of all four coefficient tensors, without finiteness conditions on modules.
-Source: blueprint coefficient-point paragraph; Stacks 0539 and 00HD
-(blueprint: lem-weil-coefficient-complex-rationalization).
-Proof: O_E and O_L are valuation rings, with fraction fields E and L. Their inclusions
-make O_L and E torsion-free over O_E, and L torsion-free over O_L and over E.
-Apply lem-trf-valuation-torsionfree-flat to each, then lem-weil-pbc-flat-tensor-exact.
-Surjectivity follows by lifting pure tensors. Tensor maps add on generators. Exactness
-and additivity preserve kernels, cokernels, zero objects and finite biproducts, hence
-finite limits and colimits. This is steps 1 and 2 of the node's proof.
--/
+/-- Exactness of all four coefficient tensors, without finiteness conditions on modules. -/
 theorem coefficientComplexTensors_exact :
     ((coefficientComplexIntegralTensor.{u, v} l E L ι).Additive ∧
       PreservesFiniteLimits (coefficientComplexIntegralTensor.{u, v} l E L ι) ∧
@@ -140,56 +132,47 @@ theorem coefficientComplexTensors_exact :
   exact ⟨⟨inferInstance, hB, inferInstance⟩, ⟨inferInstance, hE, inferInstance⟩,
     ⟨inferInstance, hL, inferInstance⟩, ⟨inferInstance, hF, inferInstance⟩⟩
 
-/-- Kernel preservation. Source: Stacks 00HD
-(blueprint: lem-weil-coefficient-complex-rationalization). -/
+/-- Kernel preservation. -/
 noncomputable instance coefficientComplexIntegralLimits :
     PreservesFiniteLimits (coefficientComplexIntegralTensor.{u, v} l E L ι) :=
   (coefficientComplexTensors_exact.{u, v} l E L ι).1.2.1
 
-/-- Cokernel preservation. Source: Stacks 00HD
-(blueprint: lem-weil-coefficient-complex-rationalization). -/
+/-- Cokernel preservation. -/
 noncomputable instance coefficientComplexIntegralColimits :
     PreservesFiniteColimits (coefficientComplexIntegralTensor.{u, v} l E L ι) :=
   (coefficientComplexTensors_exact.{u, v} l E L ι).1.2.2
 
-/-- Additivity of rationalization. Source: Stacks 00HD
-(blueprint: lem-weil-coefficient-complex-rationalization). -/
+/-- Additivity of rationalization. -/
 noncomputable instance coefficientComplexRationalAdditive :
     (coefficientComplexRationalize.{u, v} l E).Additive :=
   (coefficientComplexTensors_exact.{u, v} l E E (AlgHom.id (Padic l) E)).2.1.1
 
-/-- Kernel preservation by rationalization. Source: Stacks 00HD
-(blueprint: lem-weil-coefficient-complex-rationalization). -/
+/-- Kernel preservation by rationalization. -/
 noncomputable instance coefficientComplexRationalLimits :
     PreservesFiniteLimits (coefficientComplexRationalize.{u, v} l E) :=
   (coefficientComplexTensors_exact.{u, v} l E E (AlgHom.id (Padic l) E)).2.1.2.1
 
-/-- Cokernel preservation by rationalization. Source: Stacks 00HD
-(blueprint: lem-weil-coefficient-complex-rationalization). -/
+/-- Cokernel preservation by rationalization. -/
 noncomputable instance coefficientComplexRationalColimits :
     PreservesFiniteColimits (coefficientComplexRationalize.{u, v} l E) :=
   (coefficientComplexTensors_exact.{u, v} l E E (AlgHom.id (Padic l) E)).2.1.2.2
 
-/-- Additivity of field extension. Source: Stacks 00HD
-(blueprint: lem-weil-coefficient-complex-rationalization). -/
+/-- Additivity of field extension. -/
 noncomputable instance coefficientComplexFieldAdditive :
     (coefficientComplexFieldTensor.{u, v} l E L ι).Additive :=
   (coefficientComplexTensors_exact.{u, v} l E L ι).2.2.2.1
 
-/-- Kernel preservation by field extension. Source: Stacks 00HD
-(blueprint: lem-weil-coefficient-complex-rationalization). -/
+/-- Kernel preservation by field extension. -/
 noncomputable instance coefficientComplexFieldLimits :
     PreservesFiniteLimits (coefficientComplexFieldTensor.{u, v} l E L ι) :=
   (coefficientComplexTensors_exact.{u, v} l E L ι).2.2.2.2.1
 
-/-- Cokernel preservation by field extension. Source: Stacks 00HD
-(blueprint: lem-weil-coefficient-complex-rationalization). -/
+/-- Cokernel preservation by field extension. -/
 noncomputable instance coefficientComplexFieldColimits :
     PreservesFiniteColimits (coefficientComplexFieldTensor.{u, v} l E L ι) :=
   (coefficientComplexTensors_exact.{u, v} l E L ι).2.2.2.2.2
 
-/-- The standard localization, at arbitrary coefficient-module size.
-Source: Stacks 05RU (blueprint: lem-weil-coefficient-complex-rationalization). -/
+/-- The standard localization, at arbitrary coefficient-module size. -/
 noncomputable instance coefficientComplexModuleDerived (R : Type u) [Ring R] :
     HasDerivedCategory (ModuleCat.{max u v} R) := HasDerivedCategory.standard _
 
@@ -251,16 +234,7 @@ private noncomputable def coefficientModuleBeta :
     (Padic.coefficientExtensionIntegers l L).subtype).symm ≪≫
   ModuleCat.extendScalarsComp (Padic.coefficientExtensionIntegers l E).subtype ι.toRingHom
 
-/-- The uniquely normalized ordinary module comparison.
-Source: blueprint coefficient-point paragraph; Stacks 00CX
-(blueprint: lem-weil-coefficient-complex-rationalization).
-Proof: for C = O_L or E identify (C tensor N) tensor L with L tensor N by
-multiplying the two coefficient factors. The inverse inserts 1 as the inner factor.
-Both maps are additive and balanced twice, are L-linear, and their composites are the
-identity on pure tensors. Compose the inverse E-comparison with the O_L-comparison.
-The formula determines the result by tensor generation and commutes with all module
-maps. This is steps 3 and 4 of the node's proof; no element of N is divided.
--/
+/-- The uniquely normalized ordinary module comparison. -/
 theorem coefficientComplexBeta_existsUnique :
     ∃! β : coefficientComplexIntegralTensor.{u, v} l E L ι ⋙
         coefficientComplexRationalize.{u, v} l L ≅
@@ -303,11 +277,7 @@ theorem coefficientComplexBeta_existsUnique :
 variable (M : Type u) [Field M] [Algebra (Padic l) M] [FiniteDimensional (Padic l) M]
   (κ : L →ₐ[Padic l] M)
 
-/-- Restriction of a composite inclusion is the composite integer map.
-Source: blueprint coefficient-point paragraph, tower clause
-(blueprint: lem-weil-coefficient-complex-rationalization).
-Proof: both maps send an integer a to kappa(iota(a)). Subtype extensionality and
-ring-map extensionality give equality. This is the coefficient-map part of step 7. -/
+/-- Restriction of a composite inclusion is the composite integer map. -/
 theorem coefficientComplexIntegerComp :
     (integralScalarIntegerInclusion l L M κ).comp
       (integralScalarIntegerInclusion l E L ι) =
@@ -315,10 +285,8 @@ theorem coefficientComplexIntegerComp :
   ext x
   rfl
 
-/-- The integral tensor associator is Mathlib's scalar associator, with the actual
-composite integer inclusion. Its forward map multiplies the coefficient factors.
-Source: blueprint coefficient-point paragraph; Stacks 00CX
-(blueprint: lem-weil-coefficient-complex-rationalization). -/
+/-- The integral tensor associator is Mathlib's scalar associator, with the actual composite integer
+inclusion. Its forward map multiplies the coefficient factors. -/
 noncomputable def coefficientComplexIntegralAssoc :
     coefficientComplexIntegralTensor.{u, v} l E L ι ⋙
       coefficientComplexIntegralTensor.{u, v} l L M κ ≅

@@ -14,9 +14,20 @@ import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
 
 /-! # Normalized resolution models for coefficient systems
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 06YY, 07A4, 07A6,
-08J9, 0A95, 0D6E and 0941; the existing sequence-site and semilinear constructions
-(blueprint: lem-coef-derived-system-resolution-models).
+We construct the normalized fiber calculus of a coefficient system together with simultaneous
+models for its global sections and their limit comparison.
+
+## Implementation details
+
+The construction applies the derived adjunctions of the sequence projection, the closed
+symmetric monoidal structure of the ringed derived categories and the semilinear derived
+sections to the actual quotient tower, and transports the results along the uniqueness of
+universal derived comparisons. No projection identity for gamma, composition identity,
+reconstruction isomorphism or invertibility of beta on arbitrary inputs is used.
+
+## References
+
+* [Stacks, Tags 06YS, 06YY, 07A4, 07A6, 08J9, 0A95, 0D6E, 0941]
 -/
 
 @[expose] public section
@@ -250,63 +261,10 @@ private theorem fiberHom_eq_baseChange
   rw [uncurry_formula, ← H.fiber_evaluation M N hM hN n]
   exact ((R.finiteClosed n).transpose _ _ _).symm_apply_apply _ |>.symm
 
-/-- Construct the normalized fiber calculus and the simultaneous sections/limit models.
-The enriched isomorphism field is supplied by the proved closed-adjunction calculation;
-this assertion does not include gamma's projection, naturality, Hom-zero or composition
-identities. It also records ordinary sections projections and the finite scalar
-H-zero normalization, which are separate from the enriched gamma equations.
-Source: Stacks 06YS, 06YY, 07A4, 07A6, 08J9, 0A95, 0D6E, 0941;
-node lem-coef-derived-system-evaluation-calculus, construction steps 1--5
-(blueprint: lem-coef-derived-system-resolution-models).
-
-Proof:
-1. Apply SequenceProjection.derivedAdjunction and pushforwardLimitProjections to
-   the completed coefficient sheaf and its actual quotient tower. Transport across
-   strictSystemSequenceEquivalence and the exact scalar-restriction comparison.
-   Uniqueness of right derived functors identifies their direct image with the
-   specified coefficientSequenceLimit. Transport the adjunction across that isomorphism.
-   The projection normalizations give unit_projection and counit_projection. The
-   left-derived comparison on one flat-term K-flat representative gives reductionModel.
-2. Apply ringedDerived_closed_symmetric_monoidal on the integral, sequence and finite
-   ringed sites. Use its tensor models and the canonical tensor-pullback theorem for
-   reduction, scalar extension and evaluation. On the same representatives their
-   squares are the ordinary pure-tensor squares. The already fixed scalar/evaluation
-   comparisons and their uniqueness identify them with coefficientScalarTensorIso and
-   coefficientEvaluationTensorIso. The strict quotient maps give the reduction square.
-   Iterating scalar extension identifies each reduction transition-adjoint with the
-   associativity isomorphism, so every reduced object is normalized. Apply the same
-   argument to each finite quotient, retaining the ordinary 1 tensor x unit and the
-   localization counit, to obtain quotientCalculus with its three normalizations.
-3. Apply semilinearDerivedSections to the actual ring sequence. Its finite-prefix
-   adjunction identifies Hom on normalized systems with finite internal Hom, with its
-   evaluation and naturality equations. Uniqueness of the closed transpose identifies
-   its actual transitions with the finite quotient comparison and the normalization
-   isomorphisms. The same transpose calculation for the sequence projection gives beta
-   and beta_evaluation; ringedPullbackHomEvaluationComparison gives its evaluation,
-   transpose and composition equations. Componentwise acyclicity gives joint detection
-   of derived isomorphisms.
-4. Use coefficientSequenceGlobalSectionsEvaluation and its normalized derived pairs.
-   Transport the ordinary sections functors by their identity-on-sections isomorphisms
-   to coefficientOrdinarySections. Uniqueness of the universal derived comparisons
-   gives scalarSections and systemSectionsEvaluation with their model equations.
-   Define globalEvaluation as systemSectionsEvaluation followed by sections of fiberHom.
-   This makes globalEvaluation_model its defining composite, without an arbitrary lift.
-5. Apply coefficientSequenceSectionsLimitComparison to those same derived pairs.
-   Identify its limit functors with the prescribed coefficientConstantTowerLimit and
-   coefficientMappingLimit by their universal derived comparison units. The ordinary
-   comparison is coefficientSectionsLimitIso because both commute with every ordinary
-   projection. Whisker by the exact sequence restriction. The resulting comparison is
-   kappa below; the theorem's resolution equation is exactly globalLimit_model after
-   these transports. All scalar-section transports retain their ordinary section
-   formulas and universal-unit equations. Package these comparisons and equations as D.
-   Retain its actual-projection clause as sections_projection for arbitrary M.
-   Normalize finite closed transposition by the Hom-complex evaluation on the chosen
-   K-flat/K-injective pair. On degree-zero cocycle classes the finite enriched scalar
-   comparison is the extension/restriction Hom bijection; the coefficientHomZeroEquiv
-   normalizations give scalar_hom_zero. These are the two ProjectionModels equations.
-   Insert the already proved coefficientClosedEnriched_isIso as the enriched field.
-No projection identity for gamma, composition identity, reconstruction isomorphism, or
-invertibility of beta on arbitrary inputs is used in this construction. -/
+/-- There exist a normalized fiber calculus and simultaneous sections/limit models for the
+coefficient system. The enriched isomorphism field is supplied by the closed-adjunction
+calculation; the statement also records ordinary sections projections and the finite scalar
+H-zero normalization. -/
 theorem coefficientDerivedSystemResolutionModels :
     ∃ (F : CoefficientDerivedSystemFibers l E W)
       (κ : coefficientSequenceLimit l E W ⋙ coefficientIntegralSections l E W ≅

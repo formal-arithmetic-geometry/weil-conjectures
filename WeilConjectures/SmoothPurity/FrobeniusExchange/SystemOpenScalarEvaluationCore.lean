@@ -13,7 +13,17 @@ import all WeilConjectures.SixFunctors.FrobeniusExchange.SystemOpenScalarPullbac
 
 /-! # Inverse-mate reduction for open scalar evaluation
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 07A6.
+## Implementation details
+
+The inverse-mate square is proved by the sectionwise balanced tensor calculation on the
+open, followed by the unit and counit equations of the specified open adjunctions and the
+normalized scalar evaluation maps. Localization preserves these equations for arbitrary
+unbounded systems.
+
+## References
+
+* W. Zheng, Construction 4.1 and Lemma 4.10
+* Stacks Project, Tags 03DI and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -616,16 +626,9 @@ private theorem systemOpenScalarInv_finiteEvaluation_of_cube
     (systemScalarFiniteEvaluation l E L ι Z n) hβZ
     _ rfl (systemOpenScalarInv l E L ι j) (systemOpenScalarInv_eq_iteratedMate l E L ι j) N
 
-/-- The inverse open scalar mate evaluates to the finite open scalar transpose.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 07A6
-(blueprint: lem-sf-system-open-scalar-evaluation).
-
-This is the inverse-mate square used to prove the forward evaluation theorem. It is
-strictly below that theorem: the forward open scalar mate is absent, and the equation
-is before cancellation of its inverse component. The proof is the sectionwise balanced
- tensor calculation on the open, followed by the unit and counit equations of the
-specified open adjunctions and the normalized scalar evaluation maps. Localization
-preserves these equations for arbitrary unbounded systems. -/
+/-- The inverse open scalar mate evaluates to the finite open scalar transpose. This is the
+inverse-mate square used for the forward evaluation theorem, before cancellation of its
+inverse component. -/
 theorem systemOpenScalarInv_finiteEvaluation_core
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L]

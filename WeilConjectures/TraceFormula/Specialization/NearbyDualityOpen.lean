@@ -14,8 +14,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 
 # Nearby duality and open restriction: the concrete inputs
 
-The compatibility of the duality map of nearby cycles with open restriction (blueprint
-`lemma-nearby-duality-proper-direct-image` (2)) is the abstract identity
+The compatibility of the duality map of nearby cycles with open restriction is the abstract identity
 `CategoryTheory.Verdier.nearbyDualityMap_restrict_natTrans`. This file proves its concrete inputs
 for trait models:
 * the duality map of `(G, μ_G, e)` for a lax monoidal `G` is the internal-hom comparison of `G`
@@ -32,6 +31,11 @@ The remaining inputs are the invertibility of the pullback exchange for open imm
 (`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isOpenImmersion`) and the compatibility of the
 dualizing maps with open restriction
 (`NearbyCyclesModel.NearbyDualizingData.map_θ_comp_dualizingComplexUpperStarIso`).
+
+## Implementation details
+
+In the monoidality of `NearbyCyclesModel.liftExchange` (`liftExchange_tensor_aux`) the
+transformation `α` is kept abstract so that the kernel never unfolds the pullback exchange.
 
 -/
 
@@ -140,9 +144,8 @@ lemma μ_boundedConstructibleUpperStar_hom {Z W : Over (Spec (.of k))}
       A B).hom = Functor.LaxMonoidal.μ L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) A.obj B.obj :=
   rfl
 
-/-- The monoidality of `NearbyCyclesModel.liftExchange` of an arbitrary transformation
-`α : Ψ_M ⋙ Lj'^* ⟶ Lj^* ⋙ Ψ_N`, deduced from that of `α`; the transformation is kept abstract so
-that the kernel never unfolds the pullback exchange. -/
+/-- `NearbyCyclesModel.liftExchange` of a monoidal transformation
+`α : Ψ_M ⋙ Lj'^* ⟶ Lj^* ⋙ Ψ_N` is monoidal. -/
 private lemma liftExchange_tensor_aux
     (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
@@ -178,8 +181,7 @@ private lemma liftExchange_tensor_aux
   exact Verdier.lax_of_oplax_aux (M.tensorMap _) (N.tensorMap _) (fun A ↦ α.app A) A.obj B.obj
     (hα A.obj B.obj)
 
-/-- **The pullback exchange is monoidal on bounded constructible complexes**: the restriction of
-`NearbyCyclesModel.Hom.map_tensorMap_comp_pullbackExchange_app`, in the lax form. -/
+/-- **The pullback exchange is monoidal on bounded constructible complexes**, in the lax form. -/
 lemma Hom.boundedConstructiblePullbackExchange_tensor
     (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
@@ -197,11 +199,10 @@ lemma Hom.boundedConstructiblePullbackExchange_tensor
     (φ.map_tensorMap_comp_pullbackExchange_app _) _
     (φ.boundedConstructiblePullbackExchange_eq_liftExchange' hN hM) A B
 
-/-- **Nearby duality and open restriction, on bounded constructible complexes** (blueprint
-`lemma-nearby-duality-proper-direct-image` (2)): for a morphism of models `φ : N ⟶ M` over `j`, `j'`
-whose pullback exchange is given, dualizing maps `θ_M`, `θ_N` compatible with the identifications
-`ρ : j^* ω ⟶ ω_N`, `ρ' : j'^* ω' ⟶ ω'_N`, the restriction of the duality map of `M` is identified
-with the duality map of `N`. -/
+/-- **Nearby duality and open restriction, on bounded constructible complexes**: for a morphism
+of models `φ : N ⟶ M` over `j`, `j'` whose pullback exchange is given, dualizing maps `θ_M`, `θ_N`
+compatible with the identifications `ρ : j^* ω ⟶ ω_N`, `ρ' : j'^* ω' ⟶ ω'_N`, the restriction of
+the duality map of `M` is identified with the duality map of `N`. -/
 theorem nearbyDualityMap_restrict_boundedConstructible
     (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ)) (hM :
         M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
@@ -241,9 +242,8 @@ variable {V W : Over (Spec (.of k'))} [LocallyOfFiniteType V.hom] [QuasiCompact 
   (i : V ⟶ W) [IsOpenImmersion i.left]
 
 -- the instance search goes through the instances on `Mod (Sheaf (ProEt.topology X) Ab) _`
-/-- The projection map of `j_! ⊣ Lj^*` on `Dᵇc` is invertible
-(`isIso_projectionMap_boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction`),
-for the monoidal structure `ObjectProperty.fullMonoidalSubcategory` of `Dᵇc`. -/
+/-- The projection map of `j_! ⊣ Lj^*` on `Dᵇc` is invertible, for the monoidal structure
+`ObjectProperty.fullMonoidalSubcategory` of `Dᵇc`. -/
 private lemma isIso_projectionMap_openImmersion_aux
     (A : Dᵇc(W.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (Functor.Monoidal.projectionMap
@@ -280,8 +280,7 @@ private lemma isIso_projectionMap_openImmersion_aux
   infer_instance
 
 /-- The comparison `j^* D ⟶ D j^*` of the duality functors along an open immersion `j`, for an
-isomorphism `ρ : j^* ω ≅ ω'`, is an isomorphism: it is the internal-hom comparison of `j^*`, which
-is invertible, followed by `ρ`. -/
+isomorphism `ρ : j^* ω ≅ ω'`, is an isomorphism. -/
 lemma isIso_nearbyDualityMap_upperStar_of_isOpenImmersion {Ω :
     Dᵇc(W.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     {Ω' : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (ρ : (boundedConstructibleUpperStar
@@ -302,13 +301,11 @@ variable (ℓ) [IsSepClosed k'] [Algebra k k'] [IsOpenImmersion j.left] [IsOpenI
   {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
   {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
-/-- **Nearby duality and open restriction** (blueprint `lemma-nearby-duality-proper-direct-image`
-(2)): for a morphism `φ : N ⟶ M` of trait models over the base, over open immersions `j : Y ⟶ X` and
-`j' : Y' ⟶ X'`, whose map of total spaces is an open immersion compatible with the structure
-morphisms and whose square of geometric generic fibres is cartesian, the restriction `j'^* δ_{M,K}`
-of the duality map of `M` is an isomorphism if and only if the duality map `δ_{N, j^* K}` of `N`
-is: they are identified up to isomorphisms by `nearbyDualityMap_restrict_boundedConstructible`,
-since the pullback exchange is invertible and `j^*` commutes with internal homs. -/
+/-- **Nearby duality and open restriction**: for a morphism `φ : N ⟶ M` of trait models over the
+base, over open immersions `j : Y ⟶ X` and `j' : Y' ⟶ X'`, whose map of total spaces is an open
+immersion compatible with the structure morphisms and whose square of geometric generic fibres is
+cartesian, the restriction `j'^* δ_{M,K}` of the duality map of `M` is an isomorphism if and only
+if the duality map `δ_{N, j^* K}` of `N` is. -/
 theorem isIso_map_nearbyDualityMap_iff_of_isOpenImmersion (D : NearbyDualizingData k k' ℓ)
     (hM : M.IsTraitModelOfBase k q g)
     (hN : N.IsTraitModelOfBase k qN gN) [IsOpenImmersion φ.total]

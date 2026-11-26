@@ -35,7 +35,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 it is left exact, being the composite of the inclusion into presheaves, the left Kan extension
 along the opposite of base change (a filtered colimit, exact in the Grothendieck abelian `A`)
 and sheafification, and it is right exact, being left adjoint to `g_*`. For `A = Ab` this is
-the exactness of `g⁻¹ : Ab(Y_ét) ⥤ Ab(Z_ét)`. (blueprint: `prop-weil-pbc-inverse-image-exact`) -/
+the exactness of `g⁻¹ : Ab(Y_ét) ⥤ Ab(Z_ét)`. -/
 lemma upperStar_exact :
     PreservesFiniteLimits (g)^*[A] ∧ PreservesFiniteColimits (g)^*[A] :=
   ⟨inferInstance, inferInstance⟩

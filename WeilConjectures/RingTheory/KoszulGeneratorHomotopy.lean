@@ -11,8 +11,17 @@ public import Mathlib.Algebra.Homology.Homotopy
 
 /-! # A Koszul generator acts by a null-homotopic map
 
-Source: Stacks Project, More on Algebra, Tag 0663.
-(blueprint: lem-k3-koszul-generator-homotopy).
+Multiplication by a member `f_i` of the sequence on the Koszul complex is null-homotopic.
+
+## Implementation details
+
+The homotopy is left multiplication by `e_i` in the exterior algebra. The contraction
+recursion `D(e_i ∧ x) = f_i • x - e_i ∧ D x` shows `d h + h d = f_i`. No regularity
+assumption is used.
+
+## References
+
+* [Stacks, Tags 0663, 0626]
 -/
 
 @[expose] public section
@@ -74,20 +83,7 @@ private theorem generatorWedge_zero_identity
   simp
 
 /-- Multiplication by a member of the sequence on its Koszul chain complex is
-homotopic to zero. Source: Stacks Project, Tag 0663, Lemma 15.29.6,
-and its preceding lemma (Tag 0626).
-(blueprint: lem-k3-koszul-generator-homotopy).
-
-Proof: Set E = Fin r →₀ A and e_i = Finsupp.single i 1. In degree q take the
-linear map x ↦ ι(e_i) * x from ⋀^q E to ⋀^(q+1) E; its image lies in that
-exterior power by the multiplication rule for the grading. Take zero components
-for all other pairs of degrees. The contraction recursion gives
-D(ι(e_i) * x) = f_i • x - ι(e_i) * D(x). Thus d h + h d is multiplication
-by f_i. In degree zero the second summand is zero, since contraction kills
-scalars, and the same recursion proves the identity. Restrict the identity to
-exterior powers, using injectivity of their subtype maps, to obtain the
-Homotopy comm field. The off-diagonal components give its zero field.
-No regularity assumption is used; r=0 has no i, and the zero ring is allowed. -/
+homotopic to zero. -/
 theorem koszul_generator_homotopy
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) (i : Fin r) :
     Nonempty (Homotopy ((f i) • 𝟙 (koszulComplex A r f)) 0)  := by

@@ -14,8 +14,9 @@ import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorChai
 
 /-! # Construction of the finite scalar tensor map
 
-Source: Stacks, Modules on Sites, Tags 03CZ and 03EL.
-(blueprint: lem-pur-integral-scalar-tensor-level-construction).
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CZ and 03EL; Homology, Tag 012Z.
 -/
 
 @[expose] public noncomputable section
@@ -119,13 +120,7 @@ private theorem tensorScalarChain_naturality (W : AlgebraicGeometry.Scheme.{u}) 
 
 attribute [local irreducible] tensorScalarChain
 
-/-- The normalized finite scalar tensor comparison exists.
-Source: Stacks Tags 03CZ and 03EL; Homology Tag 012Z.
-(blueprint: lem-pur-integral-scalar-tensor-level-construction).
-Proof: apply the existing signed total-tensor map to the two normalized finite
-reduction maps, restrict through the coefficient square, and transpose through the
-ordinary scalar adjunction on complexes. Naturality is preserved by this
-transposition. The total-tensor generator formula gives the normalization. -/
+/-- The normalized finite scalar tensor comparison exists. -/
 theorem integralScalarTensorLevel_exists (W : AlgebraicGeometry.Scheme.{u}) (n : ℕ) :
     ∃ α : integralOperationsTensorLevel l E W n ⋙
         (integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ) ⟶

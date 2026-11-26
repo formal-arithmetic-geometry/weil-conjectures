@@ -16,8 +16,7 @@ Let `k₀` be a finite field with `q` elements, `k` a field extension of `k₀`,
 `k₀` with structure morphism `f₀`, `X = X₀ ×_{k₀} k` with projection `p : X ⟶ X₀`, and
 `Φ = F₀ × 𝟙` the model Frobenius of `X`. The rational points `x : s ⟶ X` fixed by
 `Φ_m = Φ^m` correspond, through `x ↦ x ≫ p`, to the `k`-points `g : Spec k ⟶ X₀` over `k₀`
-fixed by `Spec σ^m`, where `σ : a ↦ a ^ q` is the arithmetic Frobenius of `k` (blueprint
-`lemma-frobenius-fixed-scheme--1`).
+fixed by `Spec σ^m`, where `σ : a ↦ a ^ q` is the arithmetic Frobenius of `k`.
 
 Indeed, sections of `X ⟶ Spec k` are the `k₀`-morphisms `Spec k ⟶ X₀` by the universal property
 of the pullback, and since `Φ_m ≫ p = p ≫ F₀^m` and the Frobenius commutes with all morphisms,
@@ -80,7 +79,7 @@ omit [Algebra k₀ k] in
 lemma rationalPoint_left_comp_hom (x : RationalPoint X) : x.left ≫ X.hom = 𝟙 _ :=
   Over.w x
 
-/-- **The fixed points of the model Frobenius** (blueprint `lemma-frobenius-fixed-scheme--1`):
+/-- **The fixed points of the model Frobenius**:
 the rational points `x` of `X = X₀ ×_{k₀} k` fixed by `Φ_m` correspond, through
 `x ↦ x ≫ p`, to the `k`-points of `X₀` over `k₀` fixed by the `m`-th power of the arithmetic
 Frobenius `a ↦ a ^ #k₀` of `k`, that is to the points of `X₀` rational over `𝔽_{q^m}`. -/
@@ -116,8 +115,7 @@ lemma frobeniusAlgHom_pow_apply [Fintype k₀] (m : ℕ) (a : k) :
     rw [pow_succ', AlgHom.mul_apply, ih, FiniteField.coe_frobeniusAlgHom]
     simp only [← pow_mul, pow_succ]
 
-/-- For `m ≥ 1` there are finitely many rational points of `X` fixed by `Φ_m` (blueprint
-`lemma-frobenius-fixed-scheme--1`). -/
+/-- For `m ≥ 1` there are finitely many rational points of `X` fixed by `Φ_m`. -/
 theorem IsModelFrobenius.finite_fixedPoint [IsAlgClosed k] [Finite k₀] [QuasiCompact f₀]
     [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p) {m : ℕ} (hm : m ≠ 0) :
     Finite (FixedPoint Φ m) := by
@@ -130,7 +128,7 @@ theorem IsModelFrobenius.finite_fixedPoint [IsAlgClosed k] [Finite k₀] [QuasiC
 /-- **Counting fixed points.** For a function `h` on the points of `X₀` and `m ≥ 1`, the sum of
 `h` over the closed points of `X₀` underlying the rational points of `X` fixed by `Φ_m` is
 `∑_{deg y ∣ m} deg y • h y`: a closed point `y` of degree `d ∣ m` carries exactly `d` fixed
-points (blueprint `lemma-frobenius-fixed-scheme--1`). The sum may be taken over any finite set
+points. The sum may be taken over any finite set
 `T` of closed points containing those of degree dividing `m`. -/
 theorem IsModelFrobenius.sum_fixedPoint [IsAlgClosed k] [Finite k₀]
     (hΦ : IsModelFrobenius Φ f₀ p) {m : ℕ} (hm : m ≠ 0) [Fintype (FixedPoint Φ m)] {M : Type*}

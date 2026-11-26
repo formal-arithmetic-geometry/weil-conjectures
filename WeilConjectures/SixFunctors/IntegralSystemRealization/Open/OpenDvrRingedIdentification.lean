@@ -11,8 +11,11 @@ import all WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenOperatio
 
 /-! # Identification of DVR and ringed open extension
 
-Source: Stacks Tags 03DI, 03DJ and 0941; fixed completed coefficient projections.
-(blueprint: lem-sf-open-dvr-ringed-identification).
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -146,23 +149,7 @@ private def ordinaryRestrictionComparison {X Y : Scheme.{u}} (j : X ⟶ Y)
     (completedIntegralCommRingSheafUnrestricted l E X)
       ((PurCompactSupport.completed l E).pull j)).leftAdjointUniq (a.ofNatIsoRight e)
 
-/-- The projection-normalized DVR open model computes actual ringed extension.
-Source: Stacks 03DI, 03DJ and 0941; fix-prop-coherence, open-factor sentence
-(blueprint: lem-sf-open-dvr-ringed-identification).
-
-Proof: the finite_constants equations identify O.finite with restriction of the
-constant coefficient sheaf, by the sheafification universal property. The limit
-projection equations then identify O.ring with the restriction of the completed
-coefficient pullback in PurCompactSupport.completed. Scalar restriction along
-this isomorphism is O.modules.functor by modules_functor. Its inverse, composed
-with actual open restriction, is consequently naturally isomorphic to the
-ordinary completed-ring pullback integralOrdinaryPull. Compose the scalar
-equivalence adjunction with O.extension.adjunction and transport this right
-adjoint comparison. Both ordinary extension functors are now left adjoint to
-the same actual pullback; left-adjoint uniqueness supplies their natural
-isomorphism. Their exact-functor localizations, together with the composition
-factorization, give the displayed derived isomorphism. No completeness or
-constructibility of inputs is used, and the empty open is included. -/
+/-- The projection-normalized DVR open model computes actual ringed extension. -/
 theorem openDvr_ringed_identification {X Y : Scheme.{u}} (j : X ⟶ Y)
     [IsOpenImmersion j] (O : OpenDvrOpenModel l E j) :
     Nonempty (O.jShriek ≅ ringedOpen l E j) := by

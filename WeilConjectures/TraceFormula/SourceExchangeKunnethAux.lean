@@ -11,10 +11,9 @@ public import WeilConjectures.TraceFormula.SourceExchangeCoherence
 
 # Auxiliary lemmas for the kernel pushforward and the Künneth–Verdier isomorphisms
 
-Abstract categorical identities used for identity (a) of the trace-class source exchange
-(blueprint `theorem-proper-pushforward-lefschetz-verdier--1`, Step 3), and the compatibility of the
-identification `Lq^* Lπ^* ≅ Lp^* Lf^*` of a commutative square with the tensor structures
-(`ProEtale.CondensedRing.upperStarComp_square_tensor_δ`).
+Abstract categorical identities used for identity (a) of the trace-class source exchange, and the
+compatibility of the identification `Lq^* Lπ^* ≅ Lp^* Lf^*` of a commutative square with the tensor
+structures (`ProEtale.CondensedRing.upperStarComp_square_tensor_δ`).
 
 -/
 

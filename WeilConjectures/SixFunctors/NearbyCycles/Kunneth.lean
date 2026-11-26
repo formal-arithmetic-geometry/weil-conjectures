@@ -21,15 +21,14 @@ on the unbounded derived categories of module objects,
 * the *lax tensor map* `μ_Ψ : Ψ A ⊗ Ψ B ⟶ Ψ (A ⊗ B)` of nearby cycles, the restriction to the
   special fibre of `μ_j` (`NearbyCyclesModel.tensorMap`);
 * for two morphisms of models `φ₁ : P ⟶ M` over `f₁` and `φ₂ : P ⟶ N` over `f₂`, the *Künneth
-  map* (`NearbyCyclesModel.kunnethMap`, blueprint
-  `proposition-external-kunneth-formula-nearby-cycles`)
+  map* (`NearbyCyclesModel.kunnethMap`)
   ```
   Π_{A,B} : Lf₁'^* Ψ_M A ⊗ Lf₂'^* Ψ_N B ⟶ Ψ_P (Lf₁^* A ⊗ Lf₂^* B),
   ```
   the tensor product of the pullback exchanges `α_{φ₁}`, `α_{φ₂}` followed by `μ_Ψ`. When `P` is
   the product of `M` and `N` over the trait, `f₁, f₂` and `f₁', f₂'` are the projections and both
-  sides are the external products `Ψ_M A ⊠ Ψ_N B ⟶ Ψ_P (A ⊠ B)`: this is the map `Π_{L,M}` of
-  the blueprint, the restriction to the special fibre of the map
+  sides are the external products `Ψ_M A ⊠ Ψ_N B ⟶ Ψ_P (A ⊠ B)`: this is the map `Π_{L,M}`,
+  the restriction to the special fibre of the map
   `Rj_{X*} L ⊠ Rj_{Y*} M ⟶ Rj_{X × Y *} (L ⊠ M)` defined by the pullback exchanges and the lax
   tensor map of direct image.
 
@@ -97,8 +96,7 @@ variable {X X₁ Y Y₁ Z Z₁ : Scheme.{u}} {f₁ : Z ⟶ X} {f₂ : Z ⟶ Y} {
   {k : Z ⟶ Z₁} {e₁ : Z₁ ⟶ X₁} {e₂ : Z₁ ⟶ Y₁}
 
 /-- The *ordinary Künneth map* `κ_{A,B} : Le₁^* Rg_* A ⊗ Le₂^* Rh_* B ⟶ Rk_* (Lf₁^* A ⊗ Lf₂^* B)`
-of two commutative squares `f₁ ≫ g = k ≫ e₁` and `f₂ ≫ h = k ≫ e₂` (blueprint
-`lemma-kunneth-one-identity-factor--1`, for the squares of a product `f × g`): the tensor product of
+of two commutative squares `f₁ ≫ g = k ≫ e₁` and `f₂ ≫ h = k ≫ e₂`: the tensor product of
 the base change morphisms followed by the lax tensor map of `Rk_*`. -/
 noncomputable def lowerStarKunnethMap' (sq₁ : CommSq f₁ k g e₁) (sq₂ : CommSq f₂ k h e₂)
     (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -155,8 +153,7 @@ lemma tensorMap_natural
 variable {Y Y' Z Z' : Scheme.{u}} {M} {N : NearbyCyclesModel Y Y'} {P : NearbyCyclesModel Z Z'}
   {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-/-- The **Künneth map of nearby cycles** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, the map `Π_{L,M}`): for morphisms of models
+/-- The **Künneth map of nearby cycles** `Π_{L,M}`: for morphisms of models
 `φ₁ : P ⟶ M` over `f₁, f₁'` and `φ₂ : P ⟶ N` over `f₂, f₂'`,
 ```
 Π_{A,B} : Lf₁'^* Ψ_M A ⊗ Lf₂'^* Ψ_N B ⟶ Ψ_P (Lf₁^* A) ⊗ Ψ_P (Lf₂^* B) ⟶ Ψ_P (Lf₁^* A ⊗ Lf₂^* B),

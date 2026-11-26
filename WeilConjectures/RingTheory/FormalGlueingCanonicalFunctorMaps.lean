@@ -12,8 +12,21 @@ import WeilConjectures.AlgebraicGeometry.FormalGlueingCanonicalMaps
 /-!
 # Canonical morphisms between prescribed formal glueing objects
 
-Source: Stacks Project, More on Algebra, Remark 05EL.
-(blueprint: lem-weil-pbc-formal-glueing-canonical-functor-maps).
+Given the canonical formal glueing objects of `R`-modules, we construct the canonical morphisms
+between them, given by base change on the prime module and localization on the charts, and
+prove the functor laws.
+
+## Implementation details
+
+The maps `extendMap φ h` and `localMap (f i) h` are transported along the given equalities of
+prime and chart modules. Compatibility with the comparison maps is checked on fractions with
+denominator one, and compatibility with the swap maps on iterated fractions. Morphisms of
+glueing data consist only of prime and chart components, so the functor laws follow
+componentwise from those of base change and localization.
+
+## References
+
+* [Stacks, Tag 05EL]
 -/
 
 @[expose] public section
@@ -165,26 +178,8 @@ private theorem extend_comp {R : Type u} {S : Type v} [CommRing R] [CommRing S]
   let : Algebra R S := φ.toAlgebra
   exact LinearMap.baseChange_comp _ _
 
-/-- Given canonical glueing objects, construct their canonical morphism assignment.
-This constructs maps; it does not identify maps of an arbitrary functor.
-Source: Stacks Project, More on Algebra, Remark 05EL, construction of `Can` on maps.
-(blueprint: lem-weil-pbc-formal-glueing-canonical-functor-maps).
-Proof: transport extendMap φ h.hom and localMap (f i) h.hom along the given
-prime and chart module equalities. For charts, restriction to R agrees with the
-localized R-action by algebraMap_smul. For prime compatibility, compare_properties
-shows that powers of f_i act
-invertibly on the target. Localization extensionality reduces the equation to
-fractions with denominator one. The defining equation of exists_compare then
-reduces it to naturality of tensoring the localization map, proved by tensor
-induction and the fraction formula for localization maps. The chart compatibility equation sends
-(m/f_i^a)/f_j^b to (h(m)/f_j^b)/f_i^a on both sides, by swap_properties.
-These equations construct a Hom for every h. Tensor base change and localization
-preserve identities and composition (LinearMap.baseChange_id,
-LinearMap.baseChange_comp, IsLocalizedModule.map_id and map_comp'). Hence the
-constructed Homs preserve them componentwise. Hom has only prime and chart data;
-its other fields are proofs, so componentwise equality proves both laws.
-Transport along the fixed object equalities respects these laws. Empty chart
-families and zero localizations cause no exception to these calculations. -/
+/-- Given the canonical formal glueing objects, there is a functorial assignment of morphisms
+whose prime and chart components are `extendMap φ h` and `localMap (f i) h`. -/
 theorem canonical_functor_maps {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] (φ : R →+* S) (t : ℕ) (f : Fin t → R)
     (obj : ModuleCat.{max u v w} R → Data.{u, v, max u v w} φ f)

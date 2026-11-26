@@ -13,8 +13,19 @@ import all WeilConjectures.AlgebraicGeometry.ProjectionTensorCore.SemilinearTens
 
 /-! # Representative square for normalized tensor horizontality
 
-Source: Stacks 07A4 and 0941; Zheng Construction 4.1.
-(blueprint: lem-coef-normalized-tensor-horizontal-representative).
+We prove the horizontal tensor square after choosing simultaneous K-flat representatives.
+
+## Implementation details
+
+The two chosen K-flat complexes are evaluated at level `m` and compared by the ordinary
+pure-tensor quotient comparison, using the representative normalization fields of `hE` and
+`Q.tensor_model`. The two chain maps agree on every local pure tensor, and the total-complex
+summand equations give the localized equality.
+
+## References
+
+* [Zheng, Construction 4.1]
+* [Stacks, Tags 07A4, 0941]
 -/
 
 @[expose] public section
@@ -417,14 +428,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- The horizontal tensor square after choosing simultaneous K-flat representatives.
-Source: Stacks 07A4 and 0941, and Zheng Construction 4.1.
-(blueprint: lem-coef-normalized-tensor-horizontal-representative).
-
-Proof: evaluate the two chosen K-flat complexes at level `m`, apply the ordinary
-pure-tensor quotient comparison, and use the representative normalization fields of
-`hE` and `Q.tensor_model`. The two chain maps agree on every local pure tensor; the
-total-complex summand equations then give the displayed localized equality. -/
+/-- The horizontal tensor square after choosing simultaneous K-flat representatives. -/
 theorem coefficientNormalizedTensorHorizontalRepresentative
     (R : CoefficientDerivedSystemReduction l E W)
     (hE : CoefficientEvaluationTensorNormalization l E W R)

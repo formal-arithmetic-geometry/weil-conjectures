@@ -17,10 +17,8 @@ public import WeilConjectures.TraceFormula.CoefficientMorphismPieces
 For an open immersion `j : U ⟶ X` with closed complement `i : Z ⟶ X`, both stable under the
 Frobenius, and an arbitrary map `ψ : LΦ^* K ⟶ K`, the trace of `RΓ_c(X, ψ) ∘ Φ^♯` is the sum of
 the traces of the corresponding operators of the restrictions of `ψ` to `U` and `Z`
-(`ProEtale.CondensedRing.trace_compactPullback_comp_eq_add`, blueprint
-`lemma-additivity-open-subscheme-complement`, item (3)), and the trace formula in degree one on `U`
-and `Z` gives it on `X` (`ProEtale.CondensedRing.TraceFormulaHolds.of_isCompl`, blueprint
-`theorem-trace-formula-frobenius-correspondence--1`, Step 5).
+(`ProEtale.CondensedRing.trace_compactPullback_comp_eq_add`), and the trace formula in degree one
+on `U` and `Z` gives it on `X` (`ProEtale.CondensedRing.TraceFormulaHolds.of_isCompl`).
 
 -/
 
@@ -51,10 +49,9 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 variable (ℓ) in
 omit [IsUniversalHomeomorphism ΦZ.left] in
 /-- **The operators `E_Z`, `E_U` of a coefficient morphism commute with the connecting morphism
-of the compactly supported localization triangle** (blueprint
-`lemma-additivity-open-subscheme-complement`, Step 3): `E_Z = RΓ_c(ψ_Z) ∘ Φ^♯` and
+of the compactly supported localization triangle**: `E_Z = RΓ_c(ψ_Z) ∘ Φ^♯` and
 `E_U = RΓ_c(ψ_U) ∘ Φ^♯` with coefficients compatible with the unit and the counit of the
-localization triangle, so `map_comp_connecting_eq_of_isCompl` applies. -/
+localization triangle. -/
 theorem CoefficientMorphism.closedPieceOperator_comp_connecting
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (hj : ΦU ≫ j = j ≫ Φ) (hi : ΦZ ≫ i = i ≫ Φ) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -104,7 +101,7 @@ theorem CoefficientMorphism.closedPieceOperator_comp_connecting
 
 omit [IsUniversalHomeomorphism ΦZ.left] in
 /-- **Additivity of the compactly supported Frobenius operator of a coefficient morphism along an
-open–closed decomposition** (blueprint `lemma-additivity-open-subscheme-complement`, item (3)): for
+open–closed decomposition**: for
 an open immersion `j : U ⟶ X` with closed complement `i : Z ⟶ X`, both stable under the Frobenius,
 and an arbitrary map `ψ : LΦ^* K ⟶ K`, the trace of `RΓ_c(X, ψ) ∘ Φ^♯` on `RΓ_c(X, K)` is the
 sum of the traces of the operators `RΓ_c(U, ψ|_U) ∘ Φ_U^♯` and `RΓ_c(Z, ψ|_Z) ∘ Φ_Z^♯` of the
@@ -176,12 +173,9 @@ theorem trace_compactPullback_comp_eq_add [IsSepClosed k]
       Iso.inv_hom_id_app, Category.comp_id]
 
 omit [IsUniversalHomeomorphism ΦZ.left] in
-/-- **The trace formula is additive along open–closed decompositions** (blueprint
-`theorem-trace-formula-frobenius-correspondence--1`, Step 5, from
-`lemma-additivity-open-subscheme-complement`, item (3)): for an open immersion `j : U ⟶ X` with
-closed complement `i : Z ⟶ X`, both stable under the Frobenius, the trace formula in degree one on
-`U` and on `Z` gives it on `X`: the fixed points of `Φ` are those of `Φ_U` and `Φ_Z`, with the same
-stalk maps (`ProEtale.CondensedRing.trace_graphStalkMap_upperStar`). -/
+/-- **The trace formula is additive along open–closed decompositions**: for an open immersion
+`j : U ⟶ X` with closed complement `i : Z ⟶ X`, both stable under the Frobenius, the trace
+formula in degree one on `U` and on `Z` gives it on `X`. -/
 theorem TraceFormulaHolds.of_isCompl [IsSepClosed k]
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (hj : ΦU ≫ j = j ≫ Φ) (hi : ΦZ ≫ i = i ≫ Φ) (hU : TraceFormulaHolds ℓ ΦU)

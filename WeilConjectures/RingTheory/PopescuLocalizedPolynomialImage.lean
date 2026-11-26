@@ -13,8 +13,16 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 /-!
 # The explicit localized polynomial image
 
-Source: Stacks Project, Tags 07FH and 07FI, transcendental case.
-(blueprint: def-weil-pbc-popescu-localized-polynomial-image).
+For a subalgebra `A₀` of a local `k`-algebra `B` and `x ∈ B`, we define the image of the
+localization of `A₀[X]` at the preimage of the maximal ideal under evaluation at `x`.
+
+## Implementation details
+
+The enlargement is defined as a genuine image, with no choice of an existence witness.
+
+## References
+
+* [Stacks, Tag 07FH] and [Stacks, Tag 07FI] (transcendental case)
 -/
 
 @[expose] public section
@@ -25,23 +33,18 @@ namespace Algebra
 variable {k : Type u} {B : Type v} [Field k] [CommRing B] [Algebra k B]
   [IsLocalRing B]
 
-/-- Evaluate polynomials with coefficients in the given subalgebra. 
-(blueprint: def-weil-pbc-popescu-localized-polynomial-image)
--/
+/-- Evaluate polynomials with coefficients in the given subalgebra. -/
 def popescuPolynomialEval (A₀ : Subalgebra k B) (x : B) : Polynomial A₀ →ₐ[k] B :=
   Polynomial.aevalTower A₀.val x
 
-/-- The prime at which polynomial evaluation is localized. 
-(blueprint: def-weil-pbc-popescu-localized-polynomial-image)
--/
+/-- The prime at which polynomial evaluation is localized. -/
 noncomputable def popescuPolynomialPrime (A₀ : Subalgebra k B) (x : B) : Ideal (Polynomial A₀) :=
   (IsLocalRing.maximalIdeal B).comap (popescuPolynomialEval A₀ x).toRingHom
 
 instance (A₀ : Subalgebra k B) (x : B) : (popescuPolynomialPrime A₀ x).IsPrime :=
   Ideal.comap_isPrime _ _
 
-/-- Evaluation extends to the localization because precisely the denominators have unit image. 
-(blueprint: def-weil-pbc-popescu-localized-polynomial-image)
+/-- Evaluation extends to the localization because precisely the denominators have unit image.
 -/
 noncomputable def popescuLocalizedPolynomialMap (A₀ : Subalgebra k B) (x : B) :
     Localization.AtPrime (popescuPolynomialPrime A₀ x) →ₐ[k] B :=
@@ -49,9 +52,8 @@ noncomputable def popescuLocalizedPolynomialMap (A₀ : Subalgebra k B) (x : B) 
     (M := (popescuPolynomialPrime A₀ x).primeCompl)
     (fun s ↦ IsLocalRing.notMem_maximalIdeal.mp s.property)
 
-/-- The enlargement is a genuine image, with no choice of an existence witness.
-Source: Stacks Project, Tag 07FI, transcendental case.
-(blueprint: def-weil-pbc-popescu-localized-polynomial-image). -/
+/-- The image of the localized polynomial evaluation, a local subalgebra containing `A₀` and
+`x`. -/
 noncomputable def popescuLocalizedPolynomialImage (A₀ : Subalgebra k B) (x : B) :
     Subalgebra k B :=
   (popescuLocalizedPolynomialMap A₀ x).range
@@ -61,7 +63,7 @@ instance (A₀ : Subalgebra k B) (x : B) :
   IsLocalRing.of_surjective' (popescuLocalizedPolynomialMap A₀ x).rangeRestrict.toRingHom
     (popescuLocalizedPolynomialMap A₀ x).rangeRestrict_surjective
 
-/-- (blueprint: def-weil-pbc-popescu-localized-polynomial-image) -/
+/-- The localized evaluation map restricts to polynomial evaluation. -/
 lemma popescuLocalizedPolynomialMap_algebraMap (A₀ : Subalgebra k B) (x : B)
     (f : Polynomial A₀) :
     popescuLocalizedPolynomialMap A₀ x
@@ -70,20 +72,20 @@ lemma popescuLocalizedPolynomialMap_algebraMap (A₀ : Subalgebra k B) (x : B)
     (M := (popescuPolynomialPrime A₀ x).primeCompl)
     (fun s ↦ IsLocalRing.notMem_maximalIdeal.mp s.property) f
 
-/-- (blueprint: def-weil-pbc-popescu-localized-polynomial-image) -/
+/-- The localized polynomial image contains `A₀`. -/
 lemma le_popescuLocalizedPolynomialImage (A₀ : Subalgebra k B) (x : B) :
     A₀ ≤ popescuLocalizedPolynomialImage A₀ x := by
   intro a ha
   refine ⟨algebraMap (Polynomial A₀) _ (Polynomial.C ⟨a, ha⟩), ?_⟩
   simp [popescuLocalizedPolynomialMap_algebraMap, popescuPolynomialEval]
 
-/-- (blueprint: def-weil-pbc-popescu-localized-polynomial-image) -/
+/-- The localized polynomial image contains `x`. -/
 lemma mem_popescuLocalizedPolynomialImage (A₀ : Subalgebra k B) (x : B) :
     x ∈ popescuLocalizedPolynomialImage A₀ x := by
   refine ⟨algebraMap (Polynomial A₀) _ Polynomial.X, ?_⟩
   simp [popescuLocalizedPolynomialMap_algebraMap, popescuPolynomialEval]
 
-/-- (blueprint: def-weil-pbc-popescu-localized-polynomial-image) -/
+/-- The localized polynomial image is essentially of finite type if `A₀` is. -/
 lemma essFiniteType_popescuLocalizedPolynomialImage (A₀ : Subalgebra k B) (x : B)
     [EssFiniteType k A₀] : EssFiniteType k (popescuLocalizedPolynomialImage A₀ x) := by
   let D := Localization.AtPrime (popescuPolynomialPrime A₀ x)

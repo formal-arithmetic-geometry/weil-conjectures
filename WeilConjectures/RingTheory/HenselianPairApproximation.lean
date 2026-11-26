@@ -19,16 +19,32 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 /-!
 # Approximation for henselian pairs with a Noetherian G-ring
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 0AH5,
-proof after reduction to a regular completion map.
-(blueprint: lem-weil-pbc-henselian-pair-approximation).
+Let `(A, I)` be a henselian pair with `A` a Noetherian G-ring. Every solution in the `I`-adic
+completion of a finite system of polynomial equations over `A` is approximated to every positive
+order by a solution in `A` (`henselian_pair_approximation`).
+
+## Implementation details
+
+Since `A` is a G-ring, `A → A^` is regular, so by Popescu's theorem the solution factors through
+a smooth `A`-algebra. The induced section to `A ⧸ I^N` lifts to an étale `A`-algebra, and the
+henselian property, through Gabber's root criterion, gives a retraction to `A` agreeing with
+the section modulo `I^N`.
+
+## References
+
+* [Stacks, Tag 0AH5]
+* [Stacks, Tag 0AH2]
+* [Stacks, Tag 07GC]
+* [Stacks, Tag 07M7]
+* [Stacks, Tag 09XI]
 -/
 
 @[expose] public section
 
 universe u
 
-/-- The simple root 1 of the reduced Gabber polynomial lifts by Mathlib Hensel. -/
+/-- The simple root `1` of the reduced Gabber polynomial lifts to a root congruent to `1`
+modulo `I`. -/
 private theorem gabber_roots_of_henselian
     {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I]
     (n : ℕ) (_hn : 1 ≤ n) (a : Fin (n + 1) → A) (ha : ∀ j, a j ∈ I)
@@ -56,17 +72,6 @@ private theorem gabber_roots_of_henselian
 For a henselian pair whose ring is a G-ring, every solution of a finite system
 of polynomial equations in the adic completion is approximated to every
 positive order by a solution in the original ring.
-Source: Stacks Project, Smoothing Ring Maps, Lemma 0AH5 (case (2))
-(blueprint: lem-weil-pbc-henselian-pair-approximation).
-
-Proof: since `A` is a G-ring, `A → A^` is regular (More on Algebra 0AH2); by Popescu's
-theorem (Smoothing 07GC) the solution `ahat`, an `A`-algebra map from
-`A[x]/(f)` to `A^`, factors through a smooth `A`-algebra `B`. Composing with
-`A^ → A/I^N` gives a section `B → A/I^N`, which lifts to an étale `A`-algebra
-(More on Algebra 07M7); the henselian property of the pair gives a retraction to
-`A` (More on Algebra 09XI), agreeing with the section modulo `I^N` by uniqueness of
-`A`-algebra maps to `A/I^N`; the image of the variables is the solution `a`, and the
-congruence holds because the kernel of `A^ → A/I^N` is `I^N A^`.
 -/
 theorem henselian_pair_approximation
     {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I]

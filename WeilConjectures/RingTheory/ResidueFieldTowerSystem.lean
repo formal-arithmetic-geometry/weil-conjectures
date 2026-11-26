@@ -16,7 +16,12 @@ import WeilConjectures.RingTheory.FlatLocalTowerDirectLimit
 /-!
 # A coherent system of flat local rings covering a residue-field extension
 
-Source: Stacks Project, Algebra, Lemma 10.159.1 (Tag 03C3), first four proof paragraphs.
+This follows the first four paragraphs of the proof of [Stacks, Tag 03C3]. No final colimit
+or residue-field isomorphism is asserted here.
+
+## References
+
+* [Stacks, Tag 03C3]
 -/
 
 @[expose] public section
@@ -25,28 +30,10 @@ universe u v
 
 namespace IsLocalRing
 
-/-- Source: Stacks Project, Algebra, Lemma 10.159.1 (Tag 03C3), first four proof paragraphs.
-(blueprint: lem-weil-pbc-residue-field-tower-system)
-
-Proof: Well-order the underlying set of K (lifted to the common universe). At each
-index x take the colimit of the rings already constructed, using R at the first
-index. Their compatible maps to K induce a map on this colimit. Each element is
-represented at a stage: a nonzero image means that its representative is a unit,
-and a zero image means that it belongs to the image of the maximal ideal of R.
-Thus the colimit is local with this maximal ideal. Its underlying R-module is the
-module colimit, by the representative and eventual-equality criteria; filtered
-colimits preserve flatness. Now adjoin the element x. If it is transcendental over
-this ring's residue field, localize the polynomial ring at the extended maximal
-ideal. If it is algebraic, lift the coefficients of its monic minimal polynomial
-and take the monic quotient. The former is flat by freeness and localization;
-the latter is finite free, and integral contraction of maximal ideals shows it
-is local. In both cases evaluation has kernel the extended maximal ideal and
-its image is the simple field extension. Compose all earlier transition maps
-with this new map. Transfinite recursion and induction give the directed-system
-identities and compatibility with R and K. The image at index x contains x,
-so the stage images cover K. The polynomial, quotient and localization
-constructions, and colimits over subsets of K, all stay in Type (max u v).
-No final colimit or residue-field isomorphism is asserted here. -/
+/-- For a local ring `R` and a field extension `ι : κ(R) →+* K`, there is a directed system
+of flat local `R`-algebras indexed by a linear order on `K`, with compatible maps to `K`
+extending `ι`, such that the maximal ideal of `R` generates each maximal ideal, the kernel of
+each map to `K` is the maximal ideal, and the images of the stages cover `K`. -/
 theorem exists_residue_field_tower_system
     (R : Type u) [CommRing R] [IsLocalRing R] (K : Type v) [Field K]
     (ι : ResidueField R →+* K) :

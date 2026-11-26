@@ -14,8 +14,22 @@ import WeilConjectures.RingTheory.HenselizationUniversalProperty
 /-!
 # Henselization of pairs commutes with filtered colimits
 
-Source: Stacks Project, More on Algebra, Tags 0A04 and 0A02
-(blueprint: lem-weil-pbc-henselization-colimit).
+Let `(F i, J i)` be a directed system of pairs with henselizations `G i`. The maps induced by
+the universal property of henselization make the `G i` a directed system
+(`RingTheory.pairHenselization_transition_system`), and the colimit of the `G i` is a
+henselization of the colimit pair (`RingTheory.pairHenselization_colimit`).
+
+## Implementation details
+
+Henselizations are given by colimit cocones over the category of étale neighbourhoods of the
+pair, and colimits are arbitrary colimit cocones. The colimit of the henselian pairs `G i` is
+henselian; maps between it and a henselization of the colimit pair come from the universal
+property, and uniqueness shows that they are mutually inverse.
+
+## References
+
+* [Stacks, Tag 0A02]
+* [Stacks, Tag 0A04]
 -/
 
 @[expose] public section
@@ -118,15 +132,9 @@ private theorem lift_henselization (R B A : CommRingCat.{u}) (J : Ideal R)
     have h'' : e.hom ≫ g' = CommRingCat.ofHom ψ := CommRingCat.hom_ext h'
     simpa [g] using congrArg (fun f => e.inv ≫ f) h''
 
-/-- Clause (1): the unique lifted maps form a directed system of pairs.
-Source: Stacks Project, Tag 0A02, functoriality of the left adjoint, used in Tag 0A04
-(blueprint: lem-weil-pbc-henselization-colimit).
-
-Proof: Each target henselization is henselian by lem-weil-pbc-pair-henselization.
-Apply lem-weil-pbc-henselization-universal-property to the transition map followed by
-its target structure map; extension of ideals gives preservation of the stage ideals.
-Identity and composition both commute with the structure maps, so uniqueness gives the
-identity and composition laws. This is step 1 of the node's proof. -/
+/-- Henselizations of a directed system of pairs form a directed system: the maps induced by the
+universal property are compatible with the structure maps, preserve the extended ideals, and
+satisfy the identity and composition laws. -/
 theorem pairHenselization_transition_system
     {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
     (F : Λ ⥤ CommRingCat.{u}) (J : ∀ i : Λ, Ideal (F.obj i))
@@ -172,26 +180,10 @@ theorem pairHenselization_transition_system
     rw [← Category.assoc, (ht f).1, Category.assoc, (ht g).1]
     simp
 
-/-- Clause (2) and the henselian specialization, for the directed system of clause (1).
-Source: Stacks Project, More on Algebra, Tag 0A04 and the adjunction in Tag 0A02
-(blueprint: lem-weil-pbc-henselization-colimit).
-
-Proof (steps 2--5 of the node):
-2. Each stage henselization is henselian by lem-weil-pbc-pair-henselization.
-   Apply lem-weil-pbc-filtered-colimit-henselian-pair to obtain the colimit ideal,
-   its membership description and henselianness. Transport these to the given colimit
-   cocone. The compatible stage structure maps induce eta-infinity by the ring colimit
-   property. Ideal.map and the membership descriptions show Ih = I.map eta-infinity.
-3. Apply lem-weil-pbc-henselization-universal-property to each map from a stage into
-   a henselization of the base colimit. Uniqueness makes these maps a cocone, giving u.
-   The colimit pair is henselian, so the same universal property gives the reverse map v.
-4. Uniqueness on the base and on each stage proves u and v are inverse.
-   The equality Ih = I.map eta-infinity and u composed with eta-infinity = zeta
-   show that u carries Ih exactly onto the extended base ideal.
-5. If the base colimit pair is henselian, apply the universal property directly to its
-   coprojections to obtain beta_i. Uniqueness proves compatibility. Their induced map beta
-   is inverse to eta-infinity by the same argument, and carries the colimit ideal onto I.
-The colimits here are arbitrary colimit cocones, as in def-weil-pbc-category-colimit. -/
+/-- Henselization of pairs commutes with filtered colimits: if `G i` is a henselization of
+`(F i, J i)`, then a colimit of the `G i`, with the colimit ideal `Ih`, is a henselization of the
+colimit pair `(c.pt, I)`. If `(c.pt, I)` is henselian, the maps `G i → c.pt` from the universal
+property induce an inverse of the comparison map `ηInf`. -/
 theorem pairHenselization_colimit
     {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
     (F G : Λ ⥤ CommRingCat.{u}) (η : F ⟶ G)

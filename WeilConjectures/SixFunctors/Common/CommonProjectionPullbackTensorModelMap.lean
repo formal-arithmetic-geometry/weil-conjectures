@@ -118,13 +118,7 @@ private theorem commonProjectionPullbackStages_β_app
   apply Iso.ext
   rfl
 
-/-- Mapping the finite tensor model through the prescribed coherent pullback.
-Source: thm-sf-pf-field.proof.md, Compatibility; stage-system coherence.
-(blueprint: lem-sf-common-projection-pullback-tensor-model-map).
-Proof: express the tensor model as its object-identification, its change-of-stage
-isomorphism and its finite-stage tensor comparison. The coherent stage morphism
-maps the middle isomorphism to the target change of stage followed by its transition
-comparison. It commutes with inclusion on the final finite-stage arrow. -/
+/-- Mapping the finite tensor model through the prescribed coherent pullback. -/
 theorem commonProjectionPullbackTensorModelMap
     (hc : StageSystem.pairFunctorCoherent (stageSystem l Ω Y) (stageSystem l Ω X)
       (fun E ↦ rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient l Ω E) f)

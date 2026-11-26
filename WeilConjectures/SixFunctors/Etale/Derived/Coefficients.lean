@@ -48,9 +48,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
 
-/-- Blueprint `def-weil-pbc-derived-categories`: Derived categories of etale sheaves
-
-The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`: the localization of
+/-- The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`: the localization of
 the cochain complexes of sheaves of `Λ`-modules on the small étale site at the quasi-isomorphisms
 (`DerivedCategory`). Its subcategories `D⁺(X_ét, Λ)` and `Dᵇ(X_ét, Λ)` are
 `DerivedCategory.Plus` and `DerivedCategory.Bounded`, the objects whose cohomology sheaves
@@ -59,18 +57,13 @@ the cochain complexes of sheaves of `Λ`-modules on the small étale site at the
 abbrev DerivedCategoryModule : Type (u + 2) :=
   DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
 
-/-- Blueprint `definition-constructible-sheaves--6`: Coefficients and sites
-
-The constant complex `Λ_X ∈ D(X_ét, Λ)`: the constant sheaf with value `Λ` placed in degree
-zero, which is the unit of the derived tensor product `AlgebraicGeometry.Etale.derivedTensor`.
-It is the coefficient object every statement of the purity chapter is normalized against. -/
+/-- The constant complex `Λ_X ∈ D(X_ét, Λ)`: the constant sheaf with value `Λ` placed in degree
+zero, which is the unit of the derived tensor product `AlgebraicGeometry.Etale.derivedTensor`. -/
 noncomputable def constantComplex :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   𝟙_ _
 
-/-- Blueprint `definition-constructible-sheaves--6`: Coefficients and sites
-
-An object `K` of `D(X_ét, Λ)` has *Tor amplitude in `[a, b]`* if for every sheaf `F` of
+/-- An object `K` of `D(X_ét, Λ)` has *Tor amplitude in `[a, b]`* if for every sheaf `F` of
 `Λ`-modules on `X_ét` the derived tensor product `K ⊗^L F` has vanishing cohomology outside
 `[a, b]`. -/
 def DerivedCategory.hasTorAmplitudeIn (a b : ℤ) :
@@ -80,9 +73,7 @@ def DerivedCategory.hasTorAmplitudeIn (a b : ℤ) :
       ((((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K)).obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))
 
-/-- Blueprint `definition-constructible-sheaves--6`: Coefficients and sites
-
-The category `D^b_{ctf}(X, Λ)` of the purity chapter, as an object property: bounded with
+/-- The category `D^b_{ctf}(X, Λ)`, as an object property: bounded with
 constructible cohomology sheaves and of finite Tor amplitude. -/
 def DerivedCategory.boundedConstructibleFiniteTor :
     ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=

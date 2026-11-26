@@ -10,10 +10,20 @@ import all WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorConstraints
 
 /-! # Naturality of the normalized rational tensor associator
 
-Source: the proved private integral and rational calculations in
-`WeilConjectures.SmoothPurity.Common.CommonStageTensorLineCoherenceNaturality`,
-extracted to avoid its
-import of the parent comparison theorem. Stacks 06YS, 07A4 and 0941.
+The proved private integral and rational calculations in
+`WeilConjectures.SmoothPurity.Common.CommonStageTensorLineCoherenceNaturality`, extracted to
+avoid its import of the parent comparison theorem.
+
+## Implementation details
+
+Coherent reduction reflects the integral associator square, because its tensor comparison and
+the system associator are natural. For rational arrows the prescribed bilinear tensor formulas
+reduce to three pure scalar tensors, where both sides are the localized integral square with the
+same product of scalars; tensor-product induction extends the equality to arbitrary arrows.
+
+## References
+
+* [Stacks Project, Tags 06YS, 07A4 and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -157,15 +167,7 @@ private theorem integral_naturality
       Functor.prod_obj, ObjectProperty.ι_obj]
     exact (pullbackTensorIntegralAssociator_existsUnique l E W M N P).exists.choose_spec
 
-/-- The prescribed rational tensor associator is natural in all three arrows.
-Source: Stacks 06YS, 07A4, 0941; the proved private calculations of
-`CommonStageTensorLineCoherenceNaturality`.
-(blueprint: lem-pur-rational-pullback-tensor-associator-natural).
-Proof: coherent reduction reflects the integral associator square, because its
-tensor comparison is natural and the system associator is natural. For rational
-arrows, use the prescribed bilinear tensor formulas. On three pure scalar tensors
-both sides are the localized integral square with the same product of scalars.
-Tensor-product induction extends the equality to arbitrary arrows. -/
+/-- The prescribed rational tensor associator is natural in all three arrows. -/
 theorem rationalAssociator_natural
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

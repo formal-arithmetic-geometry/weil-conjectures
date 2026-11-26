@@ -18,12 +18,15 @@ import Mathlib.Topology.LocallyConstant.Basic
 /-!
 # Constant values and prescribed integral bases on connected schemes
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 4.2.12,
-Definition 6.8.1 and Lemma 6.8.2(1), printed pp. 30 and 58--59
-(blueprint: lem-pur-connected-adic-integral-basis).
+## Implementation details
 
-The positive quotient exponent is n+1. The finite direct sum is represented by its
+The positive quotient exponent is `n + 1`. The finite direct sum is represented by its
 finite product in module sheaves. The basis is prescribed, rather than chosen by the theorem.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 4.2.12, Definition 6.8.1 and
+  Lemma 6.8.2(1).
 -/
 
 -- After pruning, this module only keeps private declarations.

@@ -54,16 +54,22 @@ import all WeilConjectures.SmoothPurity.Compact.CompactSupportCoefficientModelHe
 
 /-! # Compatible coefficient models for integral compact support
 
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1);
-Weil blueprint, purity transport, coefficient extension step
-(blueprint: lem-pur-compact-support-coefficient-models).
+Compatible coefficient models for change of coefficients along `E → F`: in the constant
+model, completed scalar extension is ordinary tensor product with the integers of `F`.
 
-The arithmetic basis is fixed before passing to quotients. The scalar comparisons
-are the published normalized comparisons, and the arbitrary ramified quotient is
-handled by derived tensor balancing rather than a flatness assumption.
-The native associator and unit clause is not restated: it is the proved
-`RingedDerivedNative.associator_square`, `leftUnitor_square` and `rightUnitor_square`
-of the cited node lem-sf-ringed-derived-native-tensor.
+## Implementation details
+
+The arithmetic basis is fixed before passing to quotients. The scalar comparisons are the
+normalized comparisons, and an arbitrary ramified quotient is handled by derived tensor
+balancing rather than a flatness assumption. The associator and unit compatibilities are
+not restated here: they are `RingedDerivedNative.associator_square`, `leftUnitor_square`
+and `rightUnitor_square`.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 6.7.6 and
+  Lemmas 6.7.7, 6.8.2(1).
+* Stacks Project, Tags 03EK and 099L.
 -/
 
 @[expose] public noncomputable section
@@ -91,15 +97,9 @@ variable (l : ℕ) [Fact l.Prime]
 
 -- The universe-polymorphic site-size instance gets stuck on the coefficient universe.
 attribute [-instance] WeilConjectures.PrincipalKoszulStrictReplacement.siteSmall in
-/-- In the constant model completed scalar extension is ordinary tensor with B.
-Its normalization uses every local scalar, and is independent of the chosen basis.
-Source: Stacks 03EK, 099L; Bhatt--Scholze 6.8.2(1)
-(blueprint: lem-pur-compact-support-coefficient-models).
-Proof: a single integral basis identifies B with A^r and its completion with the
-r-fold completed module. The scalar-inclusion square makes the tensor map balanced.
-Map `b tensor x` to `completion(b) tensor x`; the coordinate identification proves it
-invertible. Local tensor generators prove uniqueness. Exactness and the K-flat
-computation counits transport this ordinary identification to derived complete objects. -/
+/-- In the constant model, completed scalar extension is ordinary tensor product with the
+integers `B` of `F`: there is a unique isomorphism sending `b ⊗ x` to
+`completion(b) ⊗ x` on local sections. -/
 theorem compactSupportCoefficientModels_ordinary (W : Scheme.{u}) :
     ∃! β : PurStrictScalar.constantRestriction l E W ⋙
         pbcExtend (PurStrictScalar.constantMap l E F i W) ≅

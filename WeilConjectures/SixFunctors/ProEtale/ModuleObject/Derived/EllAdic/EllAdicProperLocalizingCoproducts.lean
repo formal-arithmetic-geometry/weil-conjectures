@@ -20,8 +20,15 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 
 /-! # Proper adic direct image preserves coproducts on the constructible localizing hull
 
-Source: blueprint `theorem-exceptional-inverse-image` (2), with the identity compactification of a
-proper map. (blueprint: lem-sfb-adic-proper-localizing-coproducts)
+For a proper morphism `g`, the derived pushforward `R g_*`, restricted to the localizing hull of
+the bounded constructible complexes, preserves small coproducts.
+
+## Implementation details
+
+A uniform bound on the geometric fibre dimensions of `g` reduces each cohomology degree of the
+target to a fixed finite truncation window of the source, where proper direct image commutes
+with sums. The comparison map comes from the coprojections; its cohomology maps are these
+continuity comparisons, so it is an isomorphism.
 -/
 
 @[expose] public section
@@ -103,37 +110,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 include ℓ k hΛ
 
 /-- Proper derived pushforward, restricted to the source localizing hull, preserves
-small coproducts. The target here is still the full ambient derived category.
-
-Source: blueprint `theorem-exceptional-inverse-image` (2),
-`proposition-proper-direct-image-extension-zero--1`, `sk-lem-proper-unbounded-window-ii`, and
-`proposition-compactness-proper-direct-image--2` (3). (blueprint:
-lem-sfb-adic-proper-localizing-coproducts)
-
-Proof: distinguish the three constructors of the coefficient certificate. The schemes
-and their locally closed strata are Noetherian. For E and Qlbar, identify the library's
-local finite presentations with lisse local models using
-`exists_finiteFree_cover_of_condensedField_lfp` and `condensedQbar_lfp_locally_free`.
-For OE, use `integral_lfp_local_torsion_charts` and
-`integral_lfp_locallyFree_resolution` for the integral constructible comparison and
-finite Tor amplitude. These comparisons concern ordinary module sheaves; they do not
-replace their ambient coproducts by completed coproducts.
-In the E and Qlbar cases, bounded constructibility equals constructibility with finite Tor
-amplitude. The subcategory of complexes with ind-constructible cohomology contains
-bounded constructible complexes and is replete, triangulated and closed under ambient
-sums (`corollary-ambient-ind-derived` (3)). It therefore contains the source hull.
-The proper unbounded-window theorem gives preservation of sums on this larger
-subcategory: a uniform geometric fibre-dimension bound reduces each target cohomology
-degree to a fixed finite truncation window, where proper direct-image continuity
-commutes with sums. For Qlbar use the finite-subextension coefficient convention.
-In the OE case, choose a uniform bound d on geometric fibre dimensions. Integral
-proper finiteness gives the bound [0, 2d+1] on ind-constructible sheaves; the associated
-truncation window gives preservation of sums on ind-constructible complexes and hence
-on the hull (`proposition-compactness-proper-direct-image--2` (1)-(3)). In each case the comparison
-comes from the coprojections. Its cohomology maps are the continuity comparisons just
-proved, so it is an isomorphism and the image cocone is a coproduct cocone. This also
-handles the empty family, for which exact pushforward sends zero to zero.
--/
+small coproducts. The target here is still the full ambient derived category. -/
 theorem ellAdic_localizingLowerStar_preservesCoproducts (I : Type (u + 1)) :
     PreservesColimitsOfShape (Discrete I)
       ((boundedConstructibleLocalizingClosure Λ Z.left).ι ⋙ R((g.left)_*⟦Λ⟧)) := by

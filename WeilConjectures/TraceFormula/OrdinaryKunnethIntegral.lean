@@ -18,11 +18,12 @@ Let `E ⊆ ℚ̄_ℓ` be a finite subextension of `ℚ_ℓ` with ring of integer
 `R(𝟙 × f)_* (N ⊠ B)` vanishes on `Z ⨯ Y`:
 `CondensedRing.PadicIntegersRingObj.isZero_upperStar_prodMap_lowerStar_prodMap_externalProduct`.
 
-Following the proof of blueprint `lemma-kunneth-one-identity-factor--1` (coefficient transport from
-finite coefficients), it is checked after the reduction modulo `ℓ` read on the étale site, which
-detects zero objects (`ProEtale.CondensedRing.isZero_of_isZero_etaleReduction`) and commutes with
-the pullbacks, the tensor product and the pushforward
-(`ProEtale.CondensedRing.etaleReductionUpperStarIso`,
+## Implementation details
+
+By coefficient transport from finite coefficients, the vanishing is checked after the reduction
+modulo `ℓ` read on the étale site, which detects zero objects
+(`ProEtale.CondensedRing.isZero_of_isZero_etaleReduction`) and commutes with the pullbacks, the
+tensor product and the pushforward (`ProEtale.CondensedRing.etaleReductionUpperStarIso`,
 `ProEtale.CondensedRing.nonempty_etaleReductionTensorIso`,
 `ProEtale.CondensedRing.etaleReductionLowerStarIso`). This identifies the reduction with the
 finite-coefficient complex of `Etale.isZero_upperStar_prodMap_lowerStar_prodMap_tensor`
@@ -107,9 +108,7 @@ theorem nonempty_etaleReduction_upperStar_lowerStar_externalProduct_iso (n : ℕ
 /-- **Vanishing on the boundary, integral coefficients**: for morphisms `i : Z ⟶ X` and
 `f : U ⟶ Y` of separated `k`-schemes of finite type, a bounded constructible `𝒪_E`-complex `N` on
 `X` with `Li^* N = 0` and any `B` on `U`, the pullback to `Z ⨯ Y` of `R(𝟙 × f)_* (N ⊠ B)` vanishes.
-Its reduction modulo `ℓ`, read on the étale site, is the finite-coefficient complex of
-`Etale.isZero_upperStar_prodMap_lowerStar_prodMap_tensor` for the reductions of `N` and `B`
-(blueprint `lemma-kunneth-one-identity-factor--1`, coefficient transport). -/
+-/
 theorem isZero_upperStar_prodMap_lowerStar_prodMap_externalProduct (i : Z ⟶ X) (f : U ⟶ Y)
     {N : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧}
     (hN : IsZero ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ i).obj N))

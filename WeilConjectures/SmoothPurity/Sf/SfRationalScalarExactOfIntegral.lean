@@ -9,8 +9,7 @@ public import WeilConjectures.SmoothPurity.Sf.SfRationalizationKaroubi
 
 /-! # Exactness of normalized rational scalar extension from an integral model
 
-This is the rational descent step of the intrinsic transition exactness argument
-(blueprint: lem-route-rational-transition-exact-of-integral).
+This is the rational descent step of the intrinsic transition exactness argument.
 -/
 
 @[expose] public section
@@ -92,17 +91,7 @@ attribute [local irreducible] ScalarLocalization.category sfRationalTriangulatio
   sfRationalScalarExtension ScalarLocalization.composition
 
 /-- An integral-exact scalar transition induces an exact rational transition for its
-specified integral-image-normalized shift comparison.
-Source: blueprint's intrinsic scalar exactness argument, integral-image triangle steps
-(blueprint: lem-route-rational-transition-exact-of-integral).
-Proof: compare rational extension after localization with integral extension followed
-by localization. The pure-tensor formula gives the comparison. The localization
-comparisons at one are identity transports, so the prescribed degree-one equation
-makes this comparison commute with shift at one. Coherent integer shifts extend the
-square to all integers. An integral distinguished triangle therefore has a
-distinguished rational transition image. Every rational distinguished triangle is
-isomorphic to such an integral image; apply the transition to that isomorphism and
-use invariance of distinguished triangles under isomorphism. -/
+specified integral-image-normalized shift comparison. -/
 theorem sfRationalScalarExactOfIntegral
     (p l : ℕ) [Fact l.Prime] (hl : l ≠ p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

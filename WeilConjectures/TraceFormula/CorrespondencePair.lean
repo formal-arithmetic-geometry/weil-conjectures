@@ -12,10 +12,9 @@ public import WeilConjectures.TraceFormula.Product
 # Correspondences between pairs and supported classes
 
 Let `X, Y` be separated `k`-schemes of finite type with `K ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` and
-`L ∈ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`. A *correspondence from `(X, K)` to `(Y, L)`* (blueprint
-`definition-correspondence`) is a scheme `C` with an exceptional leg
-`c₁ : C ⟶ Y`, an ordinary leg `c₂ : C ⟶ X` and a coefficient map `u : Lc₂^* K ⟶ Rc₁^! L`
-(`ProEtale.CondensedRing.CorrespondenceBetween`). Its support map is
+`L ∈ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`. A *correspondence from `(X, K)` to `(Y, L)`* is a scheme `C` with an
+exceptional leg `c₁ : C ⟶ Y`, an ordinary leg `c₂ : C ⟶ X` and a coefficient map
+`u : Lc₂^* K ⟶ Rc₁^! L` (`ProEtale.CondensedRing.CorrespondenceBetween`). Its support map is
 `c = (c₁, c₂) : C ⟶ Z = Y ⨯ X`. An *opposite correspondence* is a correspondence `d` from
 `(Y, L)` to `(X, K)`; its support is turned into a map `d̄ = τ d = (d₂, d₁) : D ⟶ Z` by the
 exchange of factors `τ : X ⨯ Y ≅ Y ⨯ X`, and the *intersection* of `c` and `d` is a specified
@@ -28,7 +27,7 @@ For an endocorrespondence `c` of `(X, K)` and the identity correspondence `Δ_X`
 `ProEtale.CondensedRing.CorrespondenceBetween.Intersection.toFixedLocus`).
 
 A *class supported on `i : T ⟶ Z`* with values in `P ∈ Dᵇc(Z)⟦ℚ̲̄_ℓ⟧` is a morphism
-`Ri_! ℚ̄_ℓ,T ⟶ P` (`ProEtale.CondensedRing.SupportedClass`, blueprint `def-trf-supported-class`).
+`Ri_! ℚ̄_ℓ,T ⟶ P` (`ProEtale.CondensedRing.SupportedClass`).
 
 -/
 
@@ -50,7 +49,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 /-! ### Supported classes -/
 
 /-- The group `H⁰_T(Z, P) = Hom(Ri_! ℚ̄_ℓ,T, P)` of *classes supported on `i : T ⟶ Z`* with values
-in `P` (blueprint `def-trf-supported-class`). The map `i` is part of the data: it need not be an
+in `P`. The map `i` is part of the data: it need not be an
 immersion. -/
 abbrev SupportedClass {T Z : Over (Spec (.of k))} [LocallyOfFiniteType T.hom] [QuasiCompact T.hom]
     [IsSeparated T.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
@@ -62,8 +61,7 @@ abbrev SupportedClass {T Z : Over (Spec (.of k))} [LocallyOfFiniteType T.hom] [Q
 variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- A *correspondence from `(X, K)` to `(Y, L)`* (blueprint
-`definition-correspondence`): a separated `k`-scheme of finite type `C`
+/-- A *correspondence from `(X, K)` to `(Y, L)`*: a separated `k`-scheme of finite type `C`
 with an exceptional leg `c₁ : C ⟶ Y`, an ordinary leg `c₂ : C ⟶ X` (so that the support is
 `c = (c₁, c₂) : C ⟶ Y ⨯ X`) and a coefficient map `u : Lc₂^* K ⟶ Rc₁^! L`. An *opposite
 correspondence* is a correspondence from `(Y, L)` to `(X, K)`, i.e. a term of
@@ -91,7 +89,7 @@ variable {ℓ} {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
   {L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
 
 /-- The *support map* `c = (c₁, c₂) : C ⟶ Z = Y ⨯ X` of a correspondence from `(X, K)` to
-`(Y, L)` (blueprint `definition-correspondence`): `c₁ = c ≫ p₁` and `c₂ = c ≫ p₂`. -/
+`(Y, L)`: `c₁ = c ≫ p₁` and `c₂ = c ≫ p₂`. -/
 noncomputable def support (c : CorrespondenceBetween ℓ K L) : c.C ⟶ Y ⨯ X :=
   prod.lift c.c₁ c.c₂
 
@@ -104,8 +102,7 @@ lemma support_snd (c : CorrespondenceBetween ℓ K L) : c.support ≫ prod.snd =
   prod.lift_snd _ _
 
 /-- The support `d̄ = τ d = (d₂, d₁) : D ⟶ Z = Y ⨯ X` of an opposite correspondence `d` from
-`(Y, L)` to `(X, K)`, with `τ : X ⨯ Y ≅ Y ⨯ X` the exchange of factors (blueprint
-`definition-correspondence`). -/
+`(Y, L)` to `(X, K)`, with `τ : X ⨯ Y ≅ Y ⨯ X` the exchange of factors. -/
 noncomputable def oppositeSupport (d : CorrespondenceBetween ℓ L K) : d.C ⟶ Y ⨯ X :=
   d.support ≫ (prod.braiding X Y).hom
 
@@ -124,7 +121,7 @@ lemma oppositeSupport_snd (d : CorrespondenceBetween ℓ L K) :
   rw [oppositeSupport_eq, prod.lift_snd]
 
 /-- The *intersection* `E(C, D) = C ×_{Z, c, d̄} D` of a correspondence `c` from `(X, K)` to
-`(Y, L)` and an opposite correspondence `d` (blueprint `definition-correspondence`):
+`(Y, L)` and an opposite correspondence `d`:
 a specified separated `k`-scheme of finite type with specified projections forming a cartesian
 square over the supports `c, d̄ : C, D ⟶ Z`. -/
 structure Intersection (c : CorrespondenceBetween ℓ K L) (d : CorrespondenceBetween ℓ L K) where
@@ -142,8 +139,7 @@ structure Intersection (c : CorrespondenceBetween ℓ K L) (d : CorrespondenceBe
 attribute [instance] Intersection.locallyOfFiniteType Intersection.quasiCompact
   Intersection.isSeparated
 
-/-- An endocorrespondence of `(X, K)` is a correspondence from `(X, K)` to `(X, K)` (blueprint
-`definition-correspondence`). -/
+/-- An endocorrespondence of `(X, K)` is a correspondence from `(X, K)` to `(X, K)`. -/
 @[simps]
 def equivCorrespondence : CorrespondenceBetween ℓ K K ≃ Correspondence ℓ K where
   toFun c := ⟨c.C, c.c₁, c.c₂, c.u⟩
@@ -151,7 +147,7 @@ def equivCorrespondence : CorrespondenceBetween ℓ K K ≃ Correspondence ℓ K
 
 variable (K) in
 /-- The *identity correspondence* `(X, Δ_X, 1_K)` of `(X, K)`, with `d₁ = d₂ = 𝟙 X` and
-coefficient map `L(𝟙)^* K ≅ K ≅ R(𝟙)^! K` (blueprint `definition-correspondence`). -/
+coefficient map `L(𝟙)^* K ≅ K ≅ R(𝟙)^! K`. -/
 noncomputable def id : CorrespondenceBetween ℓ K K :=
   equivCorrespondence.symm (Correspondence.ofEnd K (𝟙 K))
 
@@ -165,10 +161,9 @@ lemma id_c₂ : (id K).c₂ = 𝟙 X :=
 lemma id_oppositeSupport : (id K).oppositeSupport = diag X := by
   rw [oppositeSupport_eq, id_c₁, id_c₂]
 
-/-- **The intersection with the identity correspondence is the fixed locus** (blueprint
-`definition-correspondence`): an intersection `E(C, X)` of an endocorrespondence `c`
-with the identity correspondence of `(X, K)` is a fixed locus of `c`, with inclusion the first
-projection. -/
+/-- **The intersection with the identity correspondence is the fixed locus**: an intersection
+`E(C, X)` of an endocorrespondence `c` with the identity correspondence of `(X, K)` is a fixed locus
+of `c`, with inclusion the first projection. -/
 noncomputable def Intersection.toFixedLocus {c : CorrespondenceBetween ℓ K K}
     (E : c.Intersection (id K)) : (equivCorrespondence c).FixedLocus where
   F := E.E
@@ -200,10 +195,9 @@ namespace Correspondence.FixedLocus
 
 variable {ℓ} {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {c : Correspondence ℓ K}
 
-/-- **The fixed locus is the intersection with the identity correspondence** (blueprint
-`definition-correspondence`): `Fix(c) = C ×_{X ⨯ X, c, Δ_X} X = E(C, X)`, the
-intersection of the endocorrespondence `c` with the identity correspondence of `(X, K)`, with
-projections `ι : Fix(c) ⟶ C` and `d : Fix(c) ⟶ X`. -/
+/-- **The fixed locus is the intersection with the identity correspondence**:
+`Fix(c) = C ×_{X ⨯ X, c, Δ_X} X = E(C, X)`, the intersection of the endocorrespondence `c` with the
+identity correspondence of `(X, K)`, with projections `ι : Fix(c) ⟶ C` and `d : Fix(c) ⟶ X`. -/
 noncomputable def toIntersection (F : c.FixedLocus) :
     (CorrespondenceBetween.equivCorrespondence.symm c).Intersection
       (CorrespondenceBetween.id K) where

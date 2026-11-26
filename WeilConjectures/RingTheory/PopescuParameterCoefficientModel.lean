@@ -18,8 +18,20 @@ import Mathlib.RingTheory.RingHom.FaithfullyFlat
 /-!
 # Rescaled parameters and their Artinian coefficient model
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ, items item-NP through
-item-choose-deltai, item-set-map-R, item-sixth-resolve and item-eighth-resolve.
+We construct rescaled parameters together with an essentially smooth Artinian coefficient model
+`E = D'[t_i]`, before solving the polynomial coefficient equations.
+
+## Implementation details
+
+No polynomial coefficient equation in `E` is asserted here: these are proved separately by
+contraction and division by `δ_i^(2N)`. The finite smooth algebras are presented and their
+localizations transported to `Type (max u v)`, with the polynomial variables reindexed by
+`Fin m`. The case `d = 0` is included.
+
+## References
+
+* [Stacks, Tag 07FJ] (the first steps of the proof, through the choice of the `δ_i`, and the
+  sixth and eighth resolution steps)
 -/
 
 @[expose] public section
@@ -46,47 +58,7 @@ private theorem kernel_pow_eq_kernel
         _ ↔ t • x = 0 := by simpa [pow_two, mul_smul] using (h x).symm
 
 /-- Construct rescaled parameters and the coefficient model before solving the polynomial
-coefficient equations. Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ,
-items item-NP through item-choose-deltai and item-eighth-resolve.
-(blueprint: lem-weil-pbc-popescu-parameter-coefficient-model).
-
-Proof: Put e = 8c and n = N + de. Apply 07FH to the images of finite algebra generators
-of A modulo the n-th maximal-ideal power in L. The flat local polynomial model has
-maximal ideal extending to that of L. The flat height formula and regularity give d
-parameters u_i generating both maximal ideals. Adjoin t_i and send X_i to u_i t_i.
-Regular-sequence powers and successive applications of Ogoma rescale the polynomial
-parameters outside their prime until the first and square kernels agree modulo preceding
-e-th powers. Such rescalings preserve generation of both localized maximal ideals.
-
-Contract u_i^N into the singular ideal along the faithfully flat Artinian coefficient
-map. Lift the coefficients to L, correct the error modulo m_L^n using
-m_L^n <= m_L^(n-N) times the singular ideal, and multiply by u_i^N. Clear coefficient
-and equality denominators in Lambda. This gives (delta_i u_i)^(2N) = sum lambda_ij a_j.
-Use 07FI to adjoin suitable positive powers of the clearing units to the Artinian model.
-Ogoma on Lambda modulo preceding e-th powers gives its kernel equalities; use 07FI again
-to include the new rescaling units and coefficients. All earlier conditions persist.
-
-Map t_i to delta_i in Lambda and set ell = lambda. Append zero to the list (u_i t_i)^c.
-Induction from equality of first and square kernels gives equality for all positive
-powers, hence the displayed c-th-power kernels. Set I0 = p^n R and K = m_L^n.
-The t_i are units in Q. The pigeonhole bound for d generators,
-m_L^(d(e-1)+1) <= (u_i^e)L, and its polynomial analogue give the ideal containments.
-The extension of p to L is m_L, so I0 extends into K. When d = 0 the maximal ideal
-is zero and n = N > 0, so the same assertions hold.
-
-Let D' be the enlarged local Artinian coefficient ring. Its faithfully flat local map
-to L/K is injective. The images of A and all lambda_ij and delta_i lie in D'; this
-gives f0 and lambda. Each delta_i is a unit in D' because the coefficient map is local
-and its image is outside the maximal ideal. Put E = D'[t_i]. Its R/I0-algebra is
-essentially smooth: R/I0 maps by localization to the polynomial ring over the localized
-prime-power quotient, and D' is essentially smooth over that quotient. Apply polynomial
-base change and composition. Evaluation at the delta_i defines b; its restriction to
-constants is the injective coefficient map. The defining R and S maps give image(X_i)
-= C(u_i)t_i, and evaluation gives b(t_i) = b(C(delta_i)). The inclusions of A and the
-lambda_ij give the final two image formulas. Present the finite smooth algebras and
-transport their localizations to Type(max u v), then reindex the finite polynomial
-variables to Fin m. No polynomial coefficient equation in E is asserted here: these
-are proved separately by contraction and division by delta_i^(2N). -/
+coefficient equations. -/
 theorem exists_popescu_parameter_coefficient_model
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]

@@ -53,8 +53,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- **Extension by zero along an étale morphism** `v : W ⟶ X`, on `A`-valued sheaves: the
 sheafification of the presheaf `V ↦ ⨁_{s ∈ Hom_X(V, W)} M(V, s)` on `X_ét`, that is, the left
-Kan extension along the localization functor `W_ét ⟶ X_ét` followed by sheafification.
-(blueprint: `lemma-acyclicity-pulled-back-injectives`) -/
+Kan extension along the localization functor `W_ét ⟶ X_ét` followed by sheafification. -/
 noncomputable def Etale.etaleLowerShriek :
     Sheaf W.smallEtaleTopology A ⥤ Sheaf X.smallEtaleTopology A :=
   Functor.sheafPullbackConstruction.sheafPullback (MorphismProperty.Over.map ⊤ h)
@@ -76,11 +75,8 @@ end General
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {W X : Scheme.{u}} (v : W ⟶ X) (h : Etale v)
 
-/-- **Extension by zero along an étale morphism is exact.** Left exactness is the content;
-right exactness holds for every left adjoint. On presheaves, `v_!` sends `M` to
-`V ↦ ⨁_{s ∈ Hom_X(V, W)} M(V, s)`, which is left exact because direct sums of modules are
-exact (`AlgebraicGeometry.SmallSite.preservesFiniteLimits_op_lan_overMap_of_isGrothendieckAbelian`),
-and sheafification is left exact. -/
+/-- **Extension by zero along an étale morphism is exact**: it preserves finite limits (it
+preserves colimits as a left adjoint). -/
 instance Etale.preservesFiniteLimits_etaleLowerShriek :
     PreservesFiniteLimits (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v h) := by
   have heq : Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v h =
@@ -95,10 +91,7 @@ instance Etale.preservesFiniteLimits_etaleLowerShriek :
   exact comp_preservesFiniteLimits _ _
 
 /-- **Étale restriction preserves injectives**: for an étale `v : W ⟶ X`, the pullback `v^*`
-sends injective sheaves of `Λ`-modules to injective sheaves, since it has the exact left
-adjoint `v_!` (`AlgebraicGeometry.Etale.etaleLowerShriekUpperStarAdjunction`,
-`AlgebraicGeometry.Etale.preservesFiniteLimits_etaleLowerShriek`).
-(blueprint: `lemma-acyclicity-pulled-back-injectives`) -/
+sends injective sheaves of `Λ`-modules to injective sheaves. -/
 theorem Etale.injective_upperStar_obj_of_etale [Etale v]
     (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective I] :
     Injective ((v)^*[ModuleCat.{u + 1} Λ].obj I) := by

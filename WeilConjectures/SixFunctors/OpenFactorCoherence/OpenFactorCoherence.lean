@@ -24,7 +24,7 @@ public import WeilConjectures.SixFunctors.Constructible.ConstructibleTensorCompl
 public import WeilConjectures.CategoryTheory.SuppliedExchangeProjection.ExchangeProjectionSuppliedDomains
 public import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenExchangeTransport
 public import WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportCoefficientData
--- Existing reduction and open scalar mate: def-sf-open-reduction-coefficient-mate.
+-- Existing reduction and open scalar mate.
 public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 
 public import WeilConjectures.SixFunctors.OpenFactorCoherence.OpenFactorTensorModel
@@ -36,14 +36,8 @@ import WeilConjectures.SixFunctors.OpenFactorCoherence.OpenFactorExchangeRealiza
 
 /-! # Completion coherence for the open factor
 
-Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, base-change
-paragraph; Bhatt--Scholze, Definition 3.4.10 and Lemmas 6.5.5, 6.5.8; Stacks 099N, 09BN, 0GL1
-(blueprint: lem-sf-pf-open-factor-coherence).
-
-All operations are the published operations. The records below present their
-normalizations, rather than assuming preservation or choosing new operation functors.
-Natural-number level n always means exponent n+1. A tower comparison is an isomorphism
-of strict complex-valued functors, with its components fixed before localization.
+This file proves completed open restriction, constructibility, and the normalization of the
+actual open maps for the open factor of a compactification (`openFactorCoherence`).
 
 ## Main definitions
 
@@ -52,7 +46,21 @@ of strict complex-valued functors, with its components fixed before localization
 
 ## Main statements
 
-- `openFactorCoherence`: the three clauses of the source node.
+- `openFactorCoherence`: completed open restriction, constructibility, and normalization of the
+  actual open maps.
+
+## Implementation details
+
+All operations are the published operations. The records below present their
+normalizations, rather than assuming preservation or choosing new operation functors.
+Natural-number level n always means exponent n+1. A tower comparison is an isomorphism
+of strict complex-valued functors, with its components fixed before localization.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.4.10, 3.5.1--3.5.2,
+  Lemmas 6.5.5, 6.5.8
+* Stacks Project, Tags 099M, 099N, 09BN, 09BP, 0GL1
 -/
 
 @[expose] public noncomputable section
@@ -76,9 +84,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 set_option genSizeOf false in
 set_option genInjectivity false in
 /-- The complete open-factor assertion. Its data are conclusions, and every displayed
-map is fixed by a quotient unit, a strict-tower comparison, or an open-unit transpose.
-Source: blueprint proposition-composition-base-change-rf-shriek--1, base-change paragraph
-(blueprint: lem-sf-pf-open-factor-coherence). -/
+map is fixed by a quotient unit, a strict-tower comparison, or an open-unit transpose. -/
 structure Assertion {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {h : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion j']
     (sq : OpenImmersionSquare a j' j h) where
@@ -215,59 +221,7 @@ private theorem fixedOpen_exists (F : FiniteFieldDatum.{u}) (hl : l ≠ F.p)
   obtain ⟨_, _, _, _, _, _, _, _, _, _, _, rX, rU, _⟩ := hr
   exact openFactorOpenRealization l E j.left SX SU o st AX AU m c q F hl rX rU
 
-/-- Completed open restriction, constructibility, and normalization of the actual open maps.
-Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, base-change
-paragraph; Bhatt--Scholze 3.4.10, 3.5.1--3.5.2, 6.5.5, 6.5.8; Stacks 099M, 099N, 09BN, 09BP, 0GL1
-(blueprint: lem-sf-pf-open-factor-coherence).
-
-Proof plan (the eleven steps of this DAG node):
-1. Finite type over Spec k implies Noetherian and qcqs. Every open is quasi-compact.
-   The coefficient DVR has finite quotients and their two-term finite-free resolutions;
-   its uniformizer ideal therefore satisfies def-weil-pbc-adic-coefficient-datum.
-   Open localization identifies coefficients by every quotient projection.
-2. lem-weil-pbc-constant-completion-equivalence and the ringed Koszul reflector identify
-   the quotient completion and its unit with intrinsic completion. The Roos-triangle
-   predicate IsSfDerivedComplete is equivalent to invertibility of that actual unit:
-   two fibers of the same product-shift are isomorphic, hence intrinsically complete;
-   reflection then makes the actual unit invertible. Do not choose an arbitrary fiber map.
-3. Exact restriction preserves countable products. The augmentation-normalized comparison
-   lem-cbc-exact-product-functor-strict-limit passes it through Roos and its unit. Tensor
-   pullback identifies the entire reduction towers. This gives Pull and open.pull_unit.
-4. lem-sf-open-tensor-normalization fixes the open unit and ambient full faithfulness.
-   lem-cbc-completed-extension-zero-comparison preserves completeness. Restrict this
-   adjunction to the full complete categories to obtain the stated Hom bijection.
-5. Apply the ambient open tensor normalization to B to A_n. Its scalar-adjunction mate is
-   the augmentation-normalized strict comparison. Scalar restriction commutes with
-   direct sums and sheafification defining extension. These are strict-tower maps,
-   yielding Open.tower and tower_unit; tensor generation gives tower_unique.
-6. Exact extension preserves cohomology and each cohomological interval. Extend the finite
-   constructible stratification by the reduced closed complement, on which the extension
-   is zero, using ringed open/closed localization. The same interval works for every
-   reduction. Restricting a partition proves restriction_constructible. No Tor condition.
-7. The ordinary gamma is the inverse open-unit transpose. Its reductions are the finite
-   gamma maps, and tensor balancing (x tensor y) tensor a goes to
-   (x tensor a) tensor (y tensor 1). This formula commutes with every quotient map,
-   including the strict quotient augmentation, before applying derived limits.
-8. proposition-extension-zero-restriction-closed-subscheme and exact countable products give
-Open.commutes,
-   normalized by the actual augmentation. Apply functorial Roos to the strict maps of
-   step 7. The resulting completed map is gamma as defined here. The quotient-augmentation
-   square gives gamma_unit, with precisely the chi of constructible tensor completion.
-9. lem-fix-constructible-tensor-completion makes both chi maps invertible on the domains
-   of step 6. Restrict gamma_unit; ordinary gamma restricts to identity and restriction
-   preserves the actual completion unit. Cancel chi to obtain gamma_restriction.
-10. Apply lem-cbc-completed-extension-zero-comparison to the square. The strict finite
-    exchanges are the inverse open-unit transposes, compatible with every coefficient
-    quotient by lem-cbc-finite-open-exchange-scalars. Pull.tower and Open.commutes retain
-    those strict models and units, so their transported Roos composite is exactly beta.
-11. Reflection makes precomposition with the actual pull-completion unit bijective
-    for the complete target. Thus beta_unique identifies the preceding strict-reduction
-    map with the displayed completion composite, before any evaluation at reductions.
-    Restrict the strict finite inverse-unit formula. Pullback composition and the open
-    units give identity on that system; functorial Roos preserves its equality. The
-    restricted extension/limit comparison is identity on every product projection and
-    both Roos summands. This gives square_unit and beta_restriction as actual equalities,
-    without using evaluation at finite reductions to detect completed morphisms. -/
+/-- Completed open restriction, constructibility, and normalization of the actual open maps. -/
 theorem openFactorCoherence (F : FiniteFieldDatum.{u}) (_hl : l ≠ F.p)
     (U' U X' X : Over (Spec (.of F.k)))
     [LocallyOfFiniteType U'.hom] [QuasiCompact U'.hom]

@@ -15,8 +15,7 @@ For `X₀ = ℙ¹` over a finite field `k = 𝔽_q`, the integral Frobenius fact
 `P₀ = 1 - T`, `P₁ = 1`, `P₂ = 1 - qT` (`AlgebraicGeometry.isWeilFactorization_projectiveLine`,
 `AlgebraicGeometry.isIntegralFrobeniusFactor_projectiveLine`), so `d = 1`, `b₀ = b₂ = 1`,
 `b₁ = 0`, `χ = 2`, `D = D₀ D₂ = 1 · q = q` and `ε = 1`; here `D₀ = det(F₀)` is checked on
-`H⁰`, while `D₂ = det(F₂)` is computed from the factor `P₂`. These are the constants of blueprint
-`example-functional-equation-projective-line`; the functional equation
+`H⁰`, while `D₂ = det(F₂)` is computed from the factor `P₂`. The functional equation
 `Z(ℙ¹, 1/(qT)) = q T² Z(ℙ¹, T)` itself is `AlgebraicGeometry.projectiveLine_functional_equation`.
 
 ## Main statements
@@ -38,8 +37,7 @@ namespace AlgebraicGeometry
 
 variable (k : Type u) [Field k] [Finite k]
 
-/-- The Euler characteristic of the projective line: `χ = b₀ - b₁ + b₂ = 1 - 0 + 1 = 2`
-(blueprint `example-functional-equation-projective-line`). -/
+/-- The Euler characteristic of the projective line: `χ = b₀ - b₁ + b₂ = 1 - 0 + 1 = 2`. -/
 theorem alternatingNatDegreeSum_projectiveLine :
     alternatingNatDegreeSum ![1 - X, 1, 1 - C (Nat.card k : ℤ) * X] = 2 := by
   obtain ⟨-, h0, h1, h2⟩ := isWeilFactorization_projectiveLine k
@@ -49,8 +47,7 @@ theorem alternatingNatDegreeSum_projectiveLine :
   simp_all
 
 /-- The determinant constants `Dᵢ = (-1)^{bᵢ} [T^{bᵢ}] Pᵢ` of the integral Frobenius factors
-`P₀ = 1 - T`, `P₁ = 1`, `P₂ = 1 - qT` of the projective line are `D₀ = 1`, `D₁ = 1`, `D₂ = q`
-(blueprint `example-functional-equation-projective-line`). -/
+`P₀ = 1 - T`, `P₁ = 1`, `P₂ = 1 - qT` of the projective line are `D₀ = 1`, `D₁ = 1`, `D₂ = q`. -/
 theorem weilDeterminantConstant_projectiveLine :
     weilDeterminantConstant (1 - X : ℤ[X]) = 1 ∧ weilDeterminantConstant (1 : ℤ[X]) = 1 ∧
       weilDeterminantConstant (1 - C (Nat.card k : ℤ) * X) = Nat.card k := by
@@ -66,8 +63,7 @@ theorem weilDeterminantConstant_projectiveLine :
   simp [coeff_one]
 
 /-- The determinant of geometric Frobenius on `H⁰(ℙ¹ ⊗ k̄, ℚ̄_ℓ)` is `det(F₀) = 1`, the
-determinant constant `D₀` of `P₀ = 1 - T`: Frobenius acts on `H⁰` of the geometrically
-connected `ℙ¹` as the identity (blueprint `example-functional-equation-projective-line`). -/
+determinant constant `D₀` of `P₀ = 1 - T`. -/
 theorem det_frobeniusEnd_cohomology_zero_projectiveLine (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k ≠ l)] :
     LinearMap.det ((WeilSheaf.adicConstant k l (ProjectiveLine (Spec (.of k)))).cohomology
@@ -75,8 +71,7 @@ theorem det_frobeniusEnd_cohomology_zero_projectiveLine (l : ℕ) [Fact l.Prime]
   rw [FrobeniusModule.frobeniusEnd, WeilSheaf.frobenius_cohomology_zero_adicConstant,
     LinearEquiv.refl_toLinearMap, LinearMap.det_id]
 
-/-- The determinant scalar of the projective line:
-`D = ∏ᵢ Dᵢ^{(-1)ⁱ} = 1 · 1⁻¹ · q = q` (blueprint `example-functional-equation-projective-line`). -/
+/-- The determinant scalar of the projective line: `D = ∏ᵢ Dᵢ^{(-1)ⁱ} = 1 · 1⁻¹ · q = q`. -/
 theorem weilDeterminantScalar_projectiveLine :
     weilDeterminantScalar ![1 - X, 1, 1 - C (Nat.card k : ℤ) * X] = Nat.card k := by
   obtain ⟨hD0, hD1, hD2⟩ := weilDeterminantConstant_projectiveLine k
@@ -88,8 +83,7 @@ theorem weilDeterminantScalar_projectiveLine :
   norm_num
 
 /-- The sign of the functional equation of the projective line: with `d = 1`, `χ = 2` and
-`m = d χ / 2 = 1`, `ε = (-1)^χ q^{-m} D = q⁻¹ q = 1`
-(blueprint `example-functional-equation-projective-line`). -/
+`m = d χ / 2 = 1`, `ε = (-1)^χ q^{-m} D = q⁻¹ q = 1`. -/
 theorem weilSign_projectiveLine :
     weilSign (Nat.card k) 1 ![1 - X, 1, 1 - C (Nat.card k : ℤ) * X] = 1 := by
   have hq : (Nat.card k : ℚ) ≠ 0 := by exact_mod_cast Nat.card_pos.ne'

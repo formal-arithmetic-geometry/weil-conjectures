@@ -28,13 +28,8 @@ attribute [local instance_reducible] PurCompactSupport.completed
 attribute [local implicit_reducible] PurCompactSupport.completed
   completedIntegralCommRingSheafUnrestricted
 
-/-- A completed-coefficient semilinear additive map lifts to a module morphism.
-Source: Stacks Project, Modules on Sites, Tag 03EL.
-Proof: use the sectionwise semilinearity hypothesis to define the map on the
-module pullback through the tensor universal property and sheafification; its
-adjunction transpose has the prescribed values on every site section. Naturality
-follows from semilinearity and the tensor relations.
-(blueprint: new-weil-frobenius-integral-root-transport-module-lift). -/
+/-- A completed-coefficient semilinear additive map lifts to a module morphism whose
+adjunction transpose has the prescribed values on every site section. -/
 theorem frobeniusIntegralRootTransport_moduleLift
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

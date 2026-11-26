@@ -23,7 +23,24 @@ import Mathlib.CategoryTheory.Sites.CoverLifting
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
-/-! # Ordinary completed-coefficient module pullback -/
+/-! # Ordinary completed-coefficient module pullback
+
+We show that the restrictions to a complementary open and closed pair jointly detect
+isomorphisms of modules over the completed coefficient sheaf.
+
+## Implementation details
+
+`ordinaryPull` along the open and closed immersions is identified with ringed inverse image
+with restricted coefficients. The localization sequence `0 → j!j* M → M → i*i* M → 0` is
+built by module sheafification in universe `max u (t+1)`, and the short five lemma gives the
+detection.
+
+## References
+
+* [Stacks, Tag 09AH]
+* [Stacks, Tag 09AG]
+* [Stacks, Tag 09BM]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -183,29 +200,7 @@ private theorem ordinaryOpenSliceComparison
     Functor.isoWhiskerLeft (SheafOfModules.overFunctor R V) q.unitIso.symm ≪≫
     Functor.rightUnitor _
 
-/-- Complementary open and closed restrictions jointly detect module isomorphisms.
-Source: Stacks, Pro-etale Cohomology, Tags 09AH, 09AG and 09BM.
-(blueprint: lem-fix-ordinary-completed-open-closed-detection).
-Proof: the finite-projection identifications of the completed coefficient rings
-identify ordinaryPull along j and i with ringed inverse image with restricted
-coefficients. Present the open inverse image as restriction to the localized site.
-Slice restriction preserves limits, so the finite constant-sheaf identifications
-pass to the completion and its projections. Uniqueness of the direct completed
-ring map identifies this coefficient map with the one defining ordinaryPull;
-uniqueness of left adjoints identifies the module functors.
-Use the ringed open-closed construction in module universe max u (t+1): the site
-has object size t+1, so module sheafification exists in that universe. Extension
-by zero and the localization sequence are constructed by the same sheafification
-of module presheaves as in the source, with no equality of coefficient and site
-universes required. Its exactness proof is local and applies to these coefficients.
-This construction supplies the exact sequence
-0 -> j!j* M -> M -> i*i* M -> 0, with its actual unit and counit maps.
-For a module morphism whose two restrictions are invertible, naturality gives a
-map between the two short exact sequences. Its outer maps are invertible because
-functors preserve isomorphisms. The short five lemma makes the middle map invertible.
-The finite-projection identifications preserve scalar actions and hence transport
-this conclusion to the specified ordinaryPull functors. If either piece is empty,
-the same short exact sequence and argument apply. No derived category occurs. -/
+/-- Complementary open and closed restrictions jointly detect module isomorphisms. -/
 theorem ordinaryCompletedOpenClosedDetection
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

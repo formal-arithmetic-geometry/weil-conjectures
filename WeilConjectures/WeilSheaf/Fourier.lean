@@ -81,6 +81,10 @@ of `ℚ̄_ℓ,X`-modules.
 
 The constructibility statement which makes the tensor product with a lisse sheaf land in Weil
 complexes is reduced by dévissage to the case of a single Weil sheaf, stated with `sorry`.
+
+`AlgebraicGeometry.affinePlane` is notation for the case `ι = PUnit` of
+`AlgebraicGeometry.affineSpacePair`, so that the line and the `𝔸^ι` declarations elaborate to the
+same scheme, with the same `Over` structure and instances.
 -/
 
 @[expose] public section
@@ -245,10 +249,7 @@ lemma affineLine.isIso_sigmaDesc_lift_translation :
 
 /-- The geometric Artin–Schreier map `ĀS` of `𝔸¹_{k̄}` is a `k₀`-torsor: the map
 `∐_{c ∈ k₀} 𝔸¹_{k̄} ⟶ 𝔸¹_{k̄} ×_{ĀS} 𝔸¹_{k̄}`, `(𝟙, σ̄_c)` on the summand indexed by `c`, is an
-isomorphism. It is the base change of
-`AlgebraicGeometry.affineLine.isIso_sigmaDesc_lift_translation` along `𝔸¹_{k̄} ⟶ 𝔸¹`
-(`CategoryTheory.FinitaryPreExtensive.isIso_sigmaDesc_lift_comp`), the square formed by `ĀS` and
-`AS` being cartesian. -/
+isomorphism. -/
 lemma affineLine.isIso_sigmaDesc_lift_geometricTranslation :
     IsIso (Sigma.desc fun c : k₀ ↦ pullback.lift
       (f := affineLine.geometricArtinSchreierMap k₀) (g := affineLine.geometricArtinSchreierMap k₀)
@@ -892,7 +893,7 @@ lemma affineLine.restriction_map_artinSchreierIdempotent (ψ : AddChar k₀ (Pad
   rw [artinSchreierTranslationSheafHom_hom_app]
   rfl
 
--- TODO(unify): lemma-artin-schreier-character-sheaf--1
+-- TODO(unify): unify with the Artin–Schreier character sheaf.
 /-- The Artin–Schreier sheaf `ℒ_{ψ(a x)}` on the affine line: the pullback along `x ↦ a x` of
 the `ψ`-isotypic component `ℒ_ψ` of the pushforward of the constant sheaf along the
 Artin–Schreier cover `u^q - u = x`, which is Galois over the line with group `k₀`, so that its
@@ -1161,9 +1162,7 @@ lemma affineLine.artinSchreierAverageModHom_splitModHom_of_restriction
 
 -- Instance search for the (co)kernels in the category of sheaves of modules is slow.
 /-- The `ψ`-isotypic component `ℒ_ψ` of `AS_* ℚ̄_ℓ`, the image of the projector `e_ψ`, is lisse
-(of rank one): after pullback along the finite étale Galois cover `AS` itself, `AS_* ℚ̄_ℓ`
-becomes `⨁_{c ∈ k₀} ℚ̄_ℓ` with `k₀` permuting the summands by translation, and the image of
-`e_ψ` is the line spanned by `∑_c ψ(c) δ_c`. -/
+(of rank one). -/
 theorem WeilSheaf.isLisse_image_artinSchreierIdempotent (ψ : AddChar k₀ (PadicAlgCl l)) :
     (image (WeilSheaf.artinSchreierIdempotent ψ)).IsLisse := by
   let Φ := ObjectProperty.ι (WeilSheaf.objectProperty k₀ l (affineLine k₀)) ⋙
@@ -1195,9 +1194,7 @@ theorem WeilSheaf.isLisse_image_artinSchreierIdempotent (ψ : AddChar k₀ (Padi
       (biproduct.isoProduct (fun _ : Fin 1 ↦ ProEtale.AdicSheaf.unit l
         (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≪≫ productUniqueIso _).symm⟩⟩
 
-/-- The Artin–Schreier sheaves are lisse: `ℒ_ψ` is lisse
-(`AlgebraicGeometry.WeilSheaf.isLisse_image_artinSchreierIdempotent`), and pullback preserves
-lisse sheaves. -/
+/-- The Artin–Schreier sheaves are lisse. -/
 theorem isLisse_artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
     (artinSchreier ψ a).IsLisse :=
   ProEtale.IsAdicLisseSheaf.upperStar _ (WeilSheaf.isLisse_image_artinSchreierIdempotent ψ)
@@ -1225,18 +1222,14 @@ noncomputable def affineLine.geometricSMul (a : AlgebraicClosure k₀) :
 
 variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
 
--- TODO(unify): definition-weil-representation
+-- TODO(unify): unify with the Weil representation of a lisse Weil sheaf.
 /-- `F.HasLinearArtinSchreierConstituent ψ a j` says that the restriction along `j : U ⟶ 𝔸¹` of
 the geometric linear Artin–Schreier sheaf `ℒ_{ψ(a x)}`, for `a` in the algebraic closure of
 `k₀`, is a constituent of the pullback of `F` to `U ⊗_{k₀} k̄`: a quotient of a lisse subsheaf
 of the underlying sheaf of `F` on `Ū`, that is, a subquotient in the category of lisse sheaves,
-a Jordan–Hölder constituent of the geometric monodromy representation
-(`proposition-fourier-transform-middle-extension`). The geometric sheaf `ℒ_{ψ(a x)}` is the pullback
-of the underlying sheaf of `ℒ_ψ` along the multiplication `x ↦ a x` of `𝔸¹_{k̄}`
-(`AlgebraicGeometry.affineLine.geometricSMul`); it is defined over the finite subextension
-`k₀(a)`, where it is `AlgebraicGeometry.artinSchreier` for the character `ψ ∘ Tr`, but only its
-pullback to the geometric affine line is used here. Being lisse of rank one, it is irreducible,
-so a subquotient isomorphic to it is an irreducible constituent. -/
+a Jordan–Hölder constituent of the geometric monodromy representation. Here the geometric sheaf
+`ℒ_{ψ(a x)}` is the pullback of the underlying sheaf of `ℒ_ψ` along the multiplication `x ↦ a x`
+of `𝔸¹_{k̄}`. -/
 def WeilSheaf.HasLinearArtinSchreierConstituent (F : WeilSheaf k₀ l U)
     (ψ : AddChar k₀ (PadicAlgCl l)) (a : AlgebraicClosure k₀) (j : U ⟶ affineLine k₀)
     [j.IsOver (Spec (CommRingCat.of k₀))] : Prop :=
@@ -1300,10 +1293,7 @@ theorem ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor (A : ProEtaleWeilS
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- **Finiteness for the tensor product with a lisse Weil sheaf, on a single Weil sheaf.** For
 a lisse Weil sheaf `F` and a Weil sheaf `G` placed in degree `0`, the right derived functor of
-`[F, -]` on pro-étale Weil sheaves gives a Weil complex: `[F, -]` is exact
-(`AlgebraicGeometry.ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor`), so the derived
-functor is `[F, G]` placed in degree `0`, and `[F, G]` is constructible
-(`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.ihom_of_isAdicLisseSheaf`). -/
+`[F, -]` on pro-étale Weil sheaves gives a Weil complex. -/
 theorem WeilComplex.objectProperty_rightDerivedFunctor_ihomFunctor_singleFunctor
     (F : WeilSheaf k₀ l X) (hF : F.IsLisse) (G : ProEtaleWeilSheaf k₀ l X)
     (hG : WeilSheaf.objectProperty k₀ l X G) :
@@ -1319,9 +1309,7 @@ theorem WeilComplex.objectProperty_rightDerivedFunctor_ihomFunctor_singleFunctor
 
 /-- **Finiteness for the tensor product with a lisse Weil sheaf.** For a lisse Weil sheaf `F`,
 the right derived functor of `[F, -]` on pro-étale Weil sheaves carries Weil complexes to Weil
-complexes: by dévissage along the truncation triangles (`DerivedCategory.prop_of_bounded`), the
-derived functor being triangulated, this reduces to the case of a single Weil sheaf,
-`AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedFunctor_ihomFunctor_singleFunctor`. -/
+complexes. -/
 theorem WeilComplex.objectProperty_rightDerivedFunctor_ihomFunctor (F : WeilSheaf k₀ l X)
     (hF : F.IsLisse) (K : _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l X))
     (hK : WeilComplex.objectProperty k₀ l X K) :
@@ -1425,9 +1413,8 @@ instance affineSpaceFourierTransform.isTriangulated (ψ : AddChar k₀ (PadicAlg
 end AffineSpaceFourier
 
 /-- `affinePlane k₀` is the affine plane `𝔸¹ ×_{k₀} 𝔸¹` over `k₀`, with its two projections and
-the multiplication map to the affine line: notation for the case `ι = PUnit` of
-`AlgebraicGeometry.affineSpacePair`, so that the line and the `𝔸^ι` declarations elaborate to the
-same scheme and its `Over` structure and instances are those of `affineSpacePair`. -/
+the multiplication map to the affine line: the case `ι = PUnit` of
+`AlgebraicGeometry.affineSpacePair`. -/
 macro "affinePlane " k₀:term:max : term => `(AlgebraicGeometry.affineSpacePair PUnit $k₀)
 
 variable (k₀) in
@@ -1482,8 +1469,7 @@ noncomputable def fourierKernel (ψ : AddChar k₀ (PadicAlgCl l)) :
   affineSpaceFourierKernel PUnit.{u + 1} ψ
 
 /-- The kernel of the Fourier–Deligne transform on the line is the pullback `μ^* ℒ_ψ` of the
-Artin–Schreier sheaf along the multiplication, since for `ι = PUnit` the pairing is the
-multiplication (`AlgebraicGeometry.affineSpacePair.pairing_punit`). -/
+Artin–Schreier sheaf along the multiplication. -/
 noncomputable def fourierKernelIso (ψ : AddChar k₀ (PadicAlgCl l)) :
     fourierKernel ψ ≅ (WeilSheaf.upperStar (affinePlane.mul k₀)).obj (artinSchreier ψ 1) :=
   (WeilSheaf.upperStarCongr (X := affineSpacePair PUnit.{u + 1} k₀)

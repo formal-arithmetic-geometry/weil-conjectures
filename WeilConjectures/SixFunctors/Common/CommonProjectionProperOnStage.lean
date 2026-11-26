@@ -10,8 +10,16 @@ import WeilConjectures.SixFunctors.Common.CommonProjectionProperTensorCompatibil
 
 /-! # Projection comparison equations on finite coefficient models
 
-Source: thm-sf-pf-field.proof.md, Compatibility and the common finite coefficient
-field paragraph, and fix-prop-projection-formula.proof.md, final coherence sentence.
+We prove the proper equation of the projection comparison on two models included from one
+finite coefficient field.
+
+## Implementation details
+
+The finite-stage proper equation is transported along inclusion. The compactification and
+`properIdentity` squares of `commonStageComparison` carry `properIdentification` to its
+common-stage counterpart, and the comparison of direct adjunctions preserves the counit, so the
+normalized canonical tensor/pullback comparisons carry the proper projection mate to the
+common-stage proper projection.
 -/
 
 @[expose] public noncomputable section
@@ -132,20 +140,7 @@ end
 end CommonProjectionProperTransport
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The proper equation on two models included from one finite field.
-Source: thm-sf-pf-field.proof.md, Compatibility and the common coefficient-field
-paragraph, and fix-prop-projection-formula.proof.md, final coherence sentence.
-(blueprint: lem-sf-common-projection-proper-on-stage).
-Proof: Apply inclusion to the finite-stage proper equation. The compactification square
-and properIdentity square of commonStageComparison carry properIdentification to its
-specified common-stage counterpart. The comparison of direct adjunctions preserves
-the counit, so the normalized canonical tensor/pullback comparisons carry the proper
-projection mate itself to the common-stage proper projection. The same comparison
-for the compactification square carries its proper-then-open projection mate to the
-common-stage component. Naturality moves the tensor comparisons past the proper
-identification; cancel the common invertible endpoint comparisons. This is exactly
-the displayed equation. Identity-open compactifications, zero inputs and empty
-schemes use the same adjunction identities and require no separate assumption. -/
+/-- The proper equation on two models included from one finite field. -/
 theorem commonProjectionProper_onStage
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C)

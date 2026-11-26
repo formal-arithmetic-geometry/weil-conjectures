@@ -12,6 +12,17 @@ public import WeilConjectures.RingTheory.SingularIdeal
 import WeilConjectures.RingTheory.RegularLocalSeparableResidueSmooth
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
 
+/-!
+# Smoothness at the generic point over a field
+
+A finite type domain over a field `k` whose fraction field is a separable extension of `k` is
+smooth over `k` at its zero prime.
+
+## References
+
+* [Stacks, Tag 07ND]
+-/
+
 @[expose] public section
 universe u v w
 namespace Algebra
@@ -33,12 +44,9 @@ private theorem separablyGenerated_of_algEquiv
     change (ebase x : K') = e (x : K)
     rfl
 
-/-- Core finitely generated subextension transport used to prove separability of the
-zero-prime residue field. Source: Stacks Project, Algebra, Lemma 07ND. The proof
-identifies the zero-prime residue field with the fraction field, transports the
-finitely generated intermediate field across that identification, and applies
-separable generation supplied by `hsep`.
-(blueprint: lem-weil-pbc-smooth-at-generic-point-over-field-residue-separable-fg) -/
+/-- If the fraction field of a finite type domain `S` over `k` is a separable extension, then
+every finitely generated intermediate field of the residue field at the zero prime of `S` is
+separably generated over `k`. -/
 theorem separableExtension_bot_residueField_finitelyGenerated
     (k : Type u) (S : Type v) (L : Type w)
     [Field k] [CommRing S] [IsDomain S] [Field L]
@@ -56,13 +64,7 @@ theorem separableExtension_bot_residueField_finitelyGenerated
   exact separablyGenerated_of_algEquiv (F.equivMap e.toAlgHom).symm
     (hsep (F.map e.toAlgHom) hmap)
 
-/-- Separability of the fraction field transfers to the residue field at the generic point.
-Source: Stacks Project, Algebra, Lemma 07ND. The proof identifies the residue field at
-the zero prime with the fraction field through the localization and residue-field
-isomorphisms for a domain, then transports `IsSeparableExtension` across that
-field isomorphism. The required compatibility with the given `k`-algebra structures
-follows from the canonical maps in the localization construction.
-(blueprint: lem-weil-pbc-smooth-at-generic-point-over-field-residue-separable) -/
+/-- Separability of the fraction field transfers to the residue field at the generic point. -/
 theorem separableExtension_bot_residueField
     (k : Type u) (S : Type v) (L : Type w)
     [Field k] [CommRing S] [IsDomain S] [Field L]
@@ -73,9 +75,8 @@ theorem separableExtension_bot_residueField
   exact separableExtension_bot_residueField_finitelyGenerated k S L hsep F hF
 
 
-/-- A finite type domain over a field with separable fraction field is smooth at the zero prime.
-Source: Stacks Project, Algebra, Lemma 07ND.
-(blueprint: lem-weil-pbc-smooth-at-generic-point-over-field) -/
+/-- A finite type domain over a field with separable fraction field is smooth at the zero
+prime. -/
 theorem smoothAtPrime_bot_of_isSeparable_fractionRing
     (k : Type u) (S : Type v) (L : Type w)
     [Field k] [CommRing S] [IsDomain S] [Field L]

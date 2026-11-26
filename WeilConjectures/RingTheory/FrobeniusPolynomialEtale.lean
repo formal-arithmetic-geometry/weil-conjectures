@@ -14,8 +14,18 @@ import Mathlib.Algebra.CharP.Lemmas
 /-!
 # Étaleness of the Frobenius polynomial solution algebra
 
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb.
-(blueprint: lem-fd-frobenius-polynomial-etale).
+The solution algebra `R[X₁, …, Xₙ] ⧸ (b_i + X_i - ∑ⱼ a_ij X_j^p)` of a Frobenius-semilinear
+inhomogeneous system in characteristic `p` is étale.
+
+## Implementation details
+
+The presentation pairs each relation with its variable. Derivatives of `p`th powers vanish in
+characteristic `p`, so the Jacobian matrix is the identity and the presentation is submersive;
+this also covers the empty system.
+
+## References
+
+* [Stacks, Tag 0GKU] (proof)
 -/
 
 @[expose] public section
@@ -29,15 +39,6 @@ open MvPolynomial
 namespace Algebra
 
 /-- The solution algebra for a Frobenius-semilinear inhomogeneous system is étale.
-
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb.
-(blueprint: lem-fd-frobenius-polynomial-etale).
-
-Proof: use the displayed finite presentation, with each relation paired to its
-corresponding variable. In characteristic `p`, the derivative of each `p`th power
-vanishes. The Jacobian is therefore the identity matrix and its determinant is one.
-This is a square Jacobian presentation, hence an étale algebra. The empty system
-uses the determinant of the empty identity matrix, again one.
 -/
 theorem frobenius_polynomial_etale
     (R : Type u) [CommRing R] (p : ℕ) [Fact p.Prime] [CharP R p]

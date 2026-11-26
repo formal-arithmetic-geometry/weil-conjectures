@@ -65,13 +65,7 @@ attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The normalized pullback comparison is the prescribed pair endpoint comparison.
-
-Source: lemma-section-normal-bundle--1, common-stage subargument, steps 3–5.
-Proof: Expand both comparisons into the recorded transition isomorphism, the rational
-pullback scalar comparison and the inverse source transition. Their component formulas
-are identical; equality of the hom components gives equality of the isomorphisms.
-(blueprint: lem-weil-common-stage-pullback-endpoint). -/
+/-- The normalized pullback comparison is the prescribed pair endpoint comparison. -/
 theorem commonStagePullback_endpoint
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

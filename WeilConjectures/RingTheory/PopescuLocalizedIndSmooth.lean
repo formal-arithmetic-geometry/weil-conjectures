@@ -15,7 +15,20 @@ import WeilConjectures.RingTheory.TotalFractionFiberDecomposition
 import WeilConjectures.RingTheory.IndSmoothFiniteProductTransport
 
 /-! # Ind-smoothness over a total fraction ring
-Source: Stacks Project, Smoothing Ring Maps, Tag 07F5, third paragraph.
+
+If ind-smoothness holds for regular maps from fields, then for a regular map `R → Λ` from a
+nonzero reduced Noetherian ring, the localization of `Λ` at the nonzerodivisors of `R` is
+ind-smooth over the total fraction ring of `R`.
+
+## Implementation details
+
+The total fraction ring is the finite product of the residue fields at the minimal primes, and
+ind-smoothness is assembled factor by factor. The fields have universe `u`, while the fibres and
+all diagram terms have universe `max u v`.
+
+## References
+
+* [Stacks, Tag 07F5] (third paragraph)
 -/
 
 @[expose] public section
@@ -50,23 +63,7 @@ private theorem regular_of_geometricallyRegular
   exact IsRegularRing.of_ringEquiv
     (Algebra.TensorProduct.cancelBaseChange k K L L A).symm.toRingEquiv
 
-/-- The total-fraction localization inherits an ind-smooth presentation from the field case.
-Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07F5, third paragraph.
-(blueprint: lem-weil-pbc-popescu-standard-nonzerodivisor-aux-localized-ind).
-
-Proof: A reduced Noetherian ring has finitely many minimal primes. Its total fraction
-ring is canonically the product of the localizations at these primes, which are fields
-and canonically their residue fields, by reduced_noetherian_total_ring_fractions.
-Tensoring this compatible product decomposition with Λ identifies its localization
-with the product of the corresponding fibre rings. Localization is base change and
-tensor products distribute over finite products. Regularity makes each fibre
-Noetherian and geometrically regular. A map from its residue field to the fibre is
-flat, and its only fibre is the same algebra, so it is regular. Apply the assumed
-field case to each factor. Induct on the number of factors using ind_smooth_prod,
-then transport the resulting colimit presentation along the two compatible ring
-isomorphisms. Nontriviality ensures there is a minimal prime, so the finite product
-is nonempty. The fields have universe u, the fibres and all diagram terms have
-universe max u v, and the transported presentation retains this universe. -/
+/-- The total-fraction localization inherits an ind-smooth presentation from the field case. -/
 theorem localized_target_is_ind_smooth
     (h : ∀ (k : Type u) (Λ : Type (max u v)) [Field k] [CommRing Λ] [Algebra k Λ]
       [IsNoetherianRing Λ],

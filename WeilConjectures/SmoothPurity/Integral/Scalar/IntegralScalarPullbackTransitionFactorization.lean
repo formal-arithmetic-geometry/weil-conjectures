@@ -18,8 +18,9 @@ import WeilConjectures.SixFunctors.RamifiedPullback.FinitePullbackTransitionGene
 
 /-! # Cofinal diagonal of the finite scalar pullback map
 
-Source: Stacks Tags 07A4 and 0941, and the cofinal uniformizer-filtration
-argument of lem-pur-integral-scalar-pullback-roos-quasi-iso.
+## References
+
+* Stacks Project, Tags 07A4 and 0941
 -/
 
 @[expose] public section
@@ -237,29 +238,7 @@ private theorem scalar_level_hom_ext {X Y : AlgebraicGeometry.Scheme.{u}}
       ((unrestrictedIntegralFiniteComplex l L Y n).obj Q) |>.X i)
     (a.f i) (b.f i) (hab i)
 
-/-- The finite scalar pullback square has a diagonal at sufficiently late levels.
-Source: Stacks, sites-cohomology.tex, Tag 07A4; completed constant sheaf reduction,
-and the uniformizer-filtration argument in the parent node.
-(blueprint: lem-pur-integral-scalar-pullback-transition-factorization).
-
-Proof: let e be the positive ramification index, so the image of the E-uniformizer
-is a unit times the e-th power of the L-uniformizer. The completed coefficient
-quotient at E-level n, extended to L, is the quotient at L-exponent e(n+1).
-Balanced tensor associativity and the pullback adjunction identify the source
-level C_n with the target level D_(e(n+1)-1). Use the quotient map from D_m to
-that level, for m = e(n+1)-1, followed by the inverse identification, to obtain b.
-The generator equation for alpha makes b followed by alpha_n the target
-transition. Applied at level m, the same equation and the compatibility of the
-quotient identifications with transitions make alpha_m followed by b the source
-transition. All these maps commute with the differential: their coefficient
-maps are independent of the cochain degree, and their section formulas commute
-with P's differential. Each equality holds on the nested tensor and pullback
-generators, which locally generate by sheafification and the pullback adjunction.
-The identities therefore hold as maps of complexes. This uses ordinary tensors
-only and needs no flatness or completeness assumption on P. For e=1 one may take
-m=n and the inverse finite-level comparison. Zero complexes and the empty site
-have their unique maps and obey the same formulas. No cone or homotopy is asserted.
--/
+/-- The finite scalar pullback square has a diagonal at sufficiently late levels. -/
 theorem integralScalarPullbackTransitionFactorization {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) (P : CochainComplex (integralTowerModules l E Y) ℤ)
     (α : ((integralOperationsPullbackTowerFunctor l E f).obj P) ⋙

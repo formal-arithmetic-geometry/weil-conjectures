@@ -13,8 +13,18 @@ import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 /-!
 # Geometric points of a Frobenius polynomial solution algebra
 
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb.
-(blueprint: lem-fd-frobenius-polynomial-solution).
+Every inhomogeneous Frobenius polynomial system has a solution over an algebraically closed field
+of characteristic `p`.
+
+## Implementation details
+
+The coefficient matrix defines a Frobenius-semilinear endomorphism of `K^n`, and the
+Lang–Steinberg theorem provides the solution vector; evaluation at it factors through the
+quotient.
+
+## References
+
+* [Stacks, Tag 0GKU] (proof)
 -/
 
 @[expose] public section
@@ -29,16 +39,6 @@ namespace Algebra
 
 /-- Every inhomogeneous Frobenius polynomial system has a solution over an
 algebraically closed field of characteristic `p`.
-
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb.
-(blueprint: lem-fd-frobenius-polynomial-solution).
-
-Proof: the coefficient matrix defines a Frobenius-semilinear endomorphism of the
-finite-dimensional coordinate space over the field. Lang--Steinberg gives a vector
-whose image under this endomorphism minus the identity is the prescribed right-hand
-side. Evaluation at this vector kills all the defining relations, and hence their
-ideal. Its factorization through the quotient is the required algebra homomorphism.
-Rank zero is included, using the unique empty vector.
 -/
 theorem exists_frobenius_polynomial_solution
     (R : Type u) [CommRing R] (K : Type v) [Field K] [Algebra R K] [IsAlgClosed K]

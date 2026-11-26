@@ -60,7 +60,7 @@ Compare `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology
 the proper base change
 theorem, in which the roles of the two legs of the square are exchanged.
 
-The seams of the argument (blueprint `sk-rem-seams`, `rem-seams`): a first failure in degree `q`
+The seams of the argument: a first failure in degree `q`
 produces a universal curve-test datum with `R^q h_* (ℤ/dℤ) ≠ 0`
 (`AlgebraicGeometry.Etale.exists_curveTestDatum`), while the curve-test lane makes this sheaf
 vanish (`AlgebraicGeometry.Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf`), using
@@ -96,9 +96,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X S T Y : Scheme.{u}}
 /-- The base-change property `BC(ε ≫ π, Λ, q)` for an étale morphism `ε : V ⟶ 𝔸^d_U` followed
 by the projection `π : 𝔸^d_U ⟶ U`, with `U` and `V` affine and `n` invertible on `U`, provided
 the property holds for all affine smooth morphisms of relative dimension one with affine source
-and with `n` invertible on the target. By induction on `d`: for `d = 0` the morphism is étale
-and étale locality reduces it to the identity; for `d + 1` write `π` as the relative line
-`𝔸^{d+1}_U ⟶ 𝔸^d_U` followed by `𝔸^d_U ⟶ U`, and use stability under composition. -/
+and with `n` invertible on the target. -/
 theorem Etale.baseChangeProperty_comp_affineSpace (n : ℕ) (q : ℤ)
     (H : ∀ ⦃X' S' : Scheme.{u}⦄ (p' : X' ⟶ S') [IsAffine X'] [IsAffineHom p']
       [SmoothOfRelativeDimension 1 p'], IsUnit (n : Γ(S', ⊤)) →
@@ -133,9 +131,7 @@ theorem Etale.baseChangeProperty_comp_affineSpace (n : ℕ) (q : ℤ)
 
 Let `n` be invertible on `S`. If the base-change property `BC(p', Λ, q)` holds for every affine
 smooth morphism `p' : X' ⟶ S'` of relative dimension one with `X'` affine and `n` invertible
-on `S'`, then it holds for every smooth `p : X ⟶ S`. The property is étale local on `X` and
-`S`, and locally on `X` and `S` a smooth morphism is an étale morphism to an affine space
-followed by the projection. -/
+on `S'`, then it holds for every smooth `p : X ⟶ S`. -/
 theorem Etale.baseChangeProperty_of_smooth_of_relativeDimension_one (n : ℕ) (q : ℤ)
     (H : ∀ ⦃X' S' : Scheme.{u}⦄ (p' : X' ⟶ S') [IsAffine X'] [IsAffineHom p']
       [SmoothOfRelativeDimension 1 p'], IsUnit (n : Γ(S', ⊤)) →
@@ -164,10 +160,7 @@ theorem Etale.baseChangeProperty_of_smooth_of_relativeDimension_one (n : ℕ) (q
     (fun x ↦ ⟨x, hx x⟩) f (fun x ↦ (U₂ x).ι ≫ (U₁ x).ι) w hf g e h sq F
 
 /-- The base-change property for smooth morphisms: if `n` vanishes in `Λ` and is invertible on
-`S`, then `BC(p, Λ, q)` holds for every smooth `p : X ⟶ S` and every `q ≥ 0`. After the
-reduction `AlgebraicGeometry.Etale.baseChangeProperty_of_smooth_of_relativeDimension_one` this
-is `AlgebraicGeometry.Etale.universalBaseChangeProperty_of_smoothOfRelativeDimension_one`,
-specialised along `𝟙 S`. -/
+`S`, then `BC(p, Λ, q)` holds for every smooth `p : X ⟶ S` and every `q ≥ 0`. -/
 theorem Etale.baseChangeProperty_of_smooth (n : ℕ) (hΛ : (n : Λ) = 0)
     (p : X ⟶ S) [Smooth p] (hn : IsUnit (n : Γ(S, ⊤))) (q : ℕ) :
     Etale.BaseChangeProperty Λ p q :=
@@ -177,9 +170,7 @@ theorem Etale.baseChangeProperty_of_smooth (n : ℕ) (hΛ : (n : Λ) = 0)
         q).baseChangeProperty)
     p hn
 
-/-- Blueprint `theorem-smooth-base-change-classical-torsion--1`: Smooth base change.
-
-**The smooth base change theorem** in étale cohomology: for a Cartesian square
+/-- **The smooth base change theorem** in étale cohomology: for a Cartesian square
 
 ```
 Y --e--> T

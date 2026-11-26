@@ -10,9 +10,21 @@ import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemG
 
 /-! # Degree-zero coefficient gamma projection transport
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A6, 08JA, 0D6E and 0941;
-the H⁰ specialization of `enrichedSequenceProjectionFormula`
-(blueprint: lem-coef-derived-system-hom-projection-transport).
+The H⁰ specialization of `enrichedSequenceProjectionFormula`.
+
+## Implementation details
+
+Degree zero is taken in the transported enriched projection identity; the recorded additive H⁰
+Hom equivalences and their naturality, together with `H.scalar_hom_zero`, identify the finite
+scalar adjunct. Naturality of `S.reductionEvaluation` and the counit projection rewrite the
+result as the specified composite in `CoefficientHomProjection`.
+
+## References
+
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 08JA]
+* [Stacks, Tag 0D6E]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -30,15 +42,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /--
 The H⁰ clause of the enriched sequence projection theorem transports to the
 actual coefficient gamma map and its finite mapping-limit projections.
-
-Source: Stacks 07A6, 08JA, 0D6E and 0941, together with
-`SheafOfModules.EnrichedSequenceProjection.enrichedSequenceProjectionFormula`.
-Proof: take degree zero in the transported enriched projection identity; use the
-recorded additive H⁰ Hom equivalences and their naturality, then apply
-`H.scalar_hom_zero` to identify the finite scalar adjunct. Naturality of
-`S.reductionEvaluation` and the counit projection rewrite the result as the
-specified composite in `CoefficientHomProjection`.
-(blueprint: lem-coef-derived-system-hom-projection-transport)
 -/
 theorem coefficientDerivedSystemHomProjectionTransport
     (S : CoefficientDerivedSystemCalculus l E W)

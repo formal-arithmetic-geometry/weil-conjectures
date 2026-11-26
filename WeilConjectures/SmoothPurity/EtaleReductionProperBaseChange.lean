@@ -38,6 +38,14 @@ is transported along the `Precoherent Profinite` proofs (`normalize_precoherent`
 compatibility of `Ex_!` with `Ex_*` on étale sheaves is used as an identity of natural
 transformations: its components carry other instances of the categories of étale sheaves (the
 ring structure of `ModuleCat` through `CommRing`, …), which the kernel compares only very slowly.
+
+The proper case is `CategoryTheory.comp_hom_app_comp_map_eq_of_isProper` applied to `Ex_!` and
+`Ex_*` with `𝒪_E`-coefficients
+(`boundedConstructibleLowerShriekBaseChange_padicIntegers_of_isProper_mateEquiv`), the
+compatibility of the condensed reduction with base change
+(`boundedConstructibleIntegersModPowReduction_baseChange`), the compatibility of the étale reading
+with base change (`finiteEtaleReading_map_baseChange`) and `Ex_!` and `Ex_*` on étale sheaves
+(`Etale.rightDerivedLowerShriekBaseChangeMap_comp_lowerStarIso`).
 -/
 
 @[expose] public section
@@ -189,16 +197,9 @@ set_option maxRecDepth 20000 in
 -- the final `exact` unfolds `etaleReduction` to the condensed reduction followed by the étale
 -- reading
 /-- **The canonical reduction comparisons for proper morphisms are compatible with
-compact-support base change** (blueprint `sk-thm-sf-compatibility`, (7), for the coefficient
-map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ` read on the étale site): for a cartesian square `g' ≫ f = f' ≫ g` with `f`
-and `f'` proper, the comparisons `etaleReductionLowerShriekIso` satisfy
-`EtaleReductionLowerShriekBaseChangeCompatible`. This is
-`CategoryTheory.comp_hom_app_comp_map_eq_of_isProper` for `Ex_!` and `Ex_*` with `𝒪_E`-coefficients
-(`boundedConstructibleLowerShriekBaseChange_padicIntegers_of_isProper_mateEquiv`), the
-compatibility of the condensed reduction with base change
-(`boundedConstructibleIntegersModPowReduction_baseChange`), the compatibility of the étale reading
-with base change (`finiteEtaleReading_map_baseChange`) and `Ex_!` and `Ex_*` on étale sheaves
-(`Etale.rightDerivedLowerShriekBaseChangeMap_comp_lowerStarIso`). -/
+compact-support base change** (for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ` read on the étale
+site): for a cartesian square `g' ≫ f = f' ≫ g` with `f` and `f'` proper, the comparisons
+`etaleReductionLowerShriekIso` satisfy `EtaleReductionLowerShriekBaseChangeCompatible`. -/
 theorem etaleReductionLowerShriekBaseChangeCompatible_of_isProper (sq : IsPullback g' f' f g)
     [IsProper f.left] [IsProper f'.left] :
     haveI := HasCompactification.of_over f

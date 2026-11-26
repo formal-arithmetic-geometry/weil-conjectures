@@ -40,8 +40,8 @@ where `κ : (F_X^N)^* ≅ 𝟭` is the trivialization of the pullback along the 
 
 The absolute Frobenius of a scheme of characteristic `p` acts trivially on its pro-étale topos:
 the relative Frobenius of a weakly étale `V ⟶ X` is an isomorphism, so the base change along the
-absolute Frobenius is isomorphic to the identity on the pro-étale site (blueprint
-`lemma-scheme-frobenius-geometric-frobenius--1`, `ProEtale.upperStarIterateFrobeniusIso`). Writing
+absolute Frobenius is isomorphic to the identity on the pro-étale site
+(`ProEtale.upperStarIterateFrobeniusIso`). Writing
 `#k = p ^ a`, the Frobenius `F_X^N` is the absolute `p ^ (a N)`-power Frobenius. Its
 trivialization on abelian sheaves is monoidal and fixes the coefficient ring `Λ_X`, which is
 pulled back from the point, so it gives `κ : (F_X^N)^* ≅ 𝟭` on `ℚ̲̄_ℓ`-modules
@@ -141,28 +141,18 @@ def IsGaloisCompatibleFrobeniusIsoAt
           (frobeniusIterate (overFrobenius X) N).left).hom.app M ≫
         (σ.hom ≫ y)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map (κ.hom.app M)
 
-/-- **Galois compatibility of a trivialization of the Frobenius pullback** (blueprint
-`lemma-scheme-frobenius-geometric-frobenius--1`, with its comparison with the Galois pullbacks at
-geometric points, blueprint `lemma-scheme-frobenius-geometric-frobenius--1`). Let `X` be a scheme
-over the finite field `k` and `F = F_X^N` its `#k ^ N`-power Frobenius. The pullback `F^*` on
-`ℚ̲̄_ℓ`-modules on the pro-étale site of `X` has a trivialization `κ : F^* ≅ 𝟭`: the relative
-Frobenius of a weakly étale `V ⟶ X` is a weakly étale universal homeomorphism, hence an isomorphism,
-so the base change along `F` is isomorphic to the identity on the pro-étale site.
-
-At a geometric point the canonical trivialization is the trivialization of a Galois pullback:
-let `Ω ⊇ k` be separably closed, `σ` the automorphism of `Spec Ω` inverse to the
-`#k ^ N`-power Frobenius `F_Ω = Spec(y ↦ y ^ (#k ^ N))` (for `Ω = k̄`, the `N`-th power of the
-Galois Frobenius) and `ȳ : Spec Ω ⟶ X`. Writing `ȳ = (σ ≫ ȳ) ≫ F`
-(`comp_comp_frobeniusIterate_overFrobenius_left`), the two identifications
+/-- **Galois compatibility of a trivialization of the Frobenius pullback.** Let `X` be a scheme
+over the finite field `k` and `F = F_X^N` its `#k ^ N`-power Frobenius, and `κ : F^* ≅ 𝟭` a
+trivialization of the pullback `F^*` on `ℚ̲̄_ℓ`-modules on the pro-étale site of `X`. Let `Ω ⊇ k`
+be separably closed, `σ` the automorphism of `Spec Ω` inverse to the `#k ^ N`-power Frobenius
+`F_Ω = Spec(y ↦ y ^ (#k ^ N))` (for `Ω = k̄`, the `N`-th power of the Galois Frobenius) and
+`ȳ : Spec Ω ⟶ X`. Writing `ȳ = (σ ≫ ȳ) ≫ F`, the trivialization `κ` is Galois compatible if, for
+all such `ȳ`, the two identifications
 ```
 ȳ^* M ≅ σ^* ȳ^* M ≅ (σ ≫ ȳ)^* M,
 ȳ^* M = ((σ ≫ ȳ) ≫ F)^* M ≅ (σ ≫ ȳ)^* F^* M --κ--> (σ ≫ ȳ)^* M
 ```
-agree, the first one through the trivialization `τ : σ^* ≅ 𝟭` of `upperStarIsoIdOfIsSepClosed`.
-Indeed `κ` is compatible with pullbacks along morphisms of schemes of characteristic `p`, and on
-`Spec Ω` the trivialization `κ` of `F_Ω^*` is the inverse of `τ` composed with the identity
-`(F_Ω ≫ σ)^* = 𝟙^*`: both are the identity on the sheaves pulled back from the condensed point,
-which are all sheaves on `Spec Ω`. -/
+agree, the first one through the trivialization `τ : σ^* ≅ 𝟭` of `upperStarIsoIdOfIsSepClosed`. -/
 def IsGaloisCompatibleFrobeniusIso
     (κ : ((frobeniusIterate (overFrobenius X) N).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _) :
     Prop :=
@@ -171,14 +161,12 @@ def IsGaloisCompatibleFrobeniusIso
     IsGaloisCompatibleFrobeniusIsoAt ℓ X N κ σ hσ y
       (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom)
 
-/-- **The trivialization of the Frobenius pullback** (blueprint
-`lemma-scheme-frobenius-geometric-frobenius--1`): the pullback along the `#k ^ N`-power Frobenius
-`F = F_X^N` on `ℚ̲̄_ℓ`-modules on the pro-étale site of `X` is trivialized by the relative Frobenius
-isomorphisms. Writing `#k = p ^ a`, the Frobenius `F` is the absolute `p ^ (a N)`-power Frobenius
-(`frobeniusIterate_overFrobenius_left`), whose pullback of abelian sheaves has the monoidal
-trivialization `ProEtale.upperStarIterateFrobeniusIso`; it fixes the coefficient ring `Λ_X`, which
-is pulled back from the point (`ProEtale.upperStarIterateFrobeniusIso_hom_app_upperStarFromPoint`),
-so it induces a trivialization on `Λ_X`-modules (`upperStarIterateFrobeniusIso`). -/
+/-- **The trivialization of the Frobenius pullback**: the pullback along the `#k ^ N`-power
+Frobenius `F = F_X^N` on `ℚ̲̄_ℓ`-modules on the pro-étale site of `X` is trivialized by the
+relative Frobenius isomorphisms. Writing `#k = p ^ a`, the Frobenius `F` is the absolute
+`p ^ (a N)`-power Frobenius, whose pullback of abelian sheaves has the monoidal trivialization
+`ProEtale.upperStarIterateFrobeniusIso`; it fixes the coefficient ring `Λ_X`, which is pulled back
+from the point, so it induces a trivialization on `Λ_X`-modules. -/
 noncomputable def upperStarFrobeniusIso :
     ((frobeniusIterate (overFrobenius X) N).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _ :=
   upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) (frobeniusIterate_overFrobenius_left X N) ≪≫
@@ -319,12 +307,7 @@ lemma isGaloisCompatibleFrobeniusIsoAt_of {Ω : Type u} [Field Ω] [IsSepClosed 
 /-- **The Galois compatibility of the Frobenius trivialization** (`IsGaloisCompatibleFrobeniusIso`):
 at a geometric point `ȳ : Spec Ω ⟶ X`, the trivialization `κ : (F_X^N)^* ≅ 𝟭` of the pullback
 along the `#k ^ N`-power Frobenius restricts to the trivialization `τ : σ^* ≅ 𝟭` of the pullback
-along the automorphism `σ` of `Spec Ω` inverse to the `#k ^ N`-power Frobenius `F_Ω`. It follows
-from the naturality of the Frobenius trivialization along `σ ≫ ȳ`
-(`upperStarComp_hom_app_comp_map_upperStarIterateFrobeniusIso_hom_app`) and from the fact that
-on `Spec Ω` the trivializations `κ_Ω : F_Ω^* ≅ 𝟭` and `τ` are inverse through `F_Ω ≫ σ = 𝟙`
-(`upperStarIterateFrobeniusIso_comp_upperStarIsoIdOfIsSepClosed`), by the coherence of the
-composition isomorphisms (`inv_app_comp_inv_app_eq_aux`). -/
+along the automorphism `σ` of `Spec Ω` inverse to the `#k ^ N`-power Frobenius `F_Ω`. -/
 theorem isGaloisCompatibleFrobeniusIso_upperStarFrobeniusIso :
     IsGaloisCompatibleFrobeniusIso ℓ X N (upperStarFrobeniusIso ℓ X N) := by
   intro Ω' _ _ _ σ hσ y
@@ -350,12 +333,7 @@ section UpperStar
 
 set_option linter.unusedSectionVars false in
 /-- The derived pullback along the base change `π : X̄ ⟶ X` preserves bounded constructible
-complexes (blueprint `proposition-six-operations-dctf`, with the pullback of constructible sheaves
-`prop-constructible-pullback`): `Lπ^*` is computed levelwise by the exact functor `π^*`, so it
-commutes with the homology sheaves, and the pullback of a sheaf which is constructible along a
-finite stratification of `X` by locally closed constructible strata is constructible along the
-preimage stratification of `X̄`
-(`ProEtale.CondensedRing.boundedConstructible_leftDerivedUpperStar_obj_of_scheme`). -/
+complexes. -/
 theorem boundedConstructible_leftDerivedUpperStar_geometricBaseChangeProj_obj
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))

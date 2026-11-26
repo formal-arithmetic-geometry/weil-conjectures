@@ -26,7 +26,7 @@ records, for arbitrary `P`:
   (`AlgebraicGeometry.WeilSheaf.globalSectionsTransport_frobeniusPowStr_comp_upperStar`).
 
 They are used at the generic geometric point and at a strictly henselian neighbourhood of a
-boundary point, for the Frobenius equivariance of blueprint `lemma-boundary-stalk--1`.
+boundary point, for the Frobenius equivariance of the boundary stalk comparison.
 -/
 
 @[expose] public section

@@ -17,14 +17,13 @@ public import WeilConjectures.RingTheory.StrictlyHenselianQuotient
 
 # Vanishing of the middle terms in the strictly local model
 
-In the strictly local model `AlgebraicGeometry.Etale.CurveLocalModel` of blueprint
-`lemma-vanishing-local-term-zero-stalk--1`:
+In the strictly local model `AlgebraicGeometry.Etale.CurveLocalModel`:
 
 - the punctured diagonal `B ∖ Y` maps into `O = T ∖ (G ∪ V)`
   (`AlgebraicGeometry.Etale.CurveLocalModel.ψ`), since in `X ×_k X` the diagonal meets the
   vertical axis `{y} × X` only inside the graph of `h`;
 - for `P ≅ Lτ^*(L ⊠ K)` with `Ly^* K = 0`, the derived global sections `RΓ(T, P)` and
-  `RΓ(B, b^* P)` vanish (blueprint item (ii)): `T` and `B` are strictly local, so these are
+  `RΓ(B, b^* P)` vanish: `T` and `B` are strictly local, so these are
   stalks at the closed point, that is `L_ȳ ⊗ᴸ K_ȳ = 0`.
 
 -/
@@ -233,8 +232,7 @@ lemma isZero_mapDerivedCategoryPlus_obj (g : Spec (.of k) ⟶ M.T) (hg : g ≫ M
     ((M.isZero_leftDerivedUpperStar_obj g hg L K hK P.obj eP).of_iso
       ((leftDerivedUpperStarIsoMapDerivedCategory _ g).app P.obj).symm)
 
-/-- Blueprint `lemma-vanishing-local-term-zero-stalk--1`, item (ii), for `T`: if `P ≅ Lτ^*(L ⊠ K)`
-with `Ly^* K = 0`, then `RΓ(T, P) = 0`. -/
+/-- If `P ≅ Lτ^*(L ⊠ K)` with `Ly^* K = 0`, then `RΓ(T, P) = 0`. -/
 theorem isZero_obj₂_a
     (L K : DerivedCategory (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : IsZero ((L((M.y)^*[ModuleCat.{u + 1} Λ])).obj K))
@@ -249,8 +247,7 @@ theorem isZero_obj₂_a
       exact M.t_apply_closedPoint) P
     (M.isZero_mapDerivedCategoryPlus_obj M.t M.t_comp_τ L K hK P eP)
 
-/-- Blueprint `lemma-vanishing-local-term-zero-stalk--1`, item (ii), for `B`: if `P ≅ Lτ^*(L ⊠ K)`
-with `Ly^* K = 0`, then `RΓ(B, b^* P) = 0`. -/
+/-- If `P ≅ Lτ^*(L ⊠ K)` with `Ly^* K = 0`, then `RΓ(B, b^* P) = 0`. -/
 theorem isZero_obj₂_yB
     (L K : DerivedCategory (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : IsZero ((L((M.y)^*[ModuleCat.{u + 1} Λ])).obj K))

@@ -28,14 +28,8 @@ namespace AlgebraicGeometry
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 /-- **The dual of an Artin–Schreier sheaf.** The dual of the linear Artin–Schreier sheaf
-`ℒ_{ψ(a x)}` on `𝔸¹_{k₀}` is the Artin–Schreier sheaf `ℒ_{ψ⁻¹(a x)}`: this is the clause
-`(ℒ_{ψ,f})^{-1} ≅ ℒ_{ψ,-f} ≅ ℒ_{ψ^{-1},f}` for `f = a x`, the inverse of the rank-one sheaf
-`ℒ_{ψ,f}` being its dual. (blueprint: `lemma-artin-schreier-character-sheaf`, subsection
-`lemma-artin-schreier-character-sheaf` of `chap-The-Fourier-transform`)
-
-On the Artin–Schreier covering of `(x, x)`, a `k₀²`-torsor, `ℒ_{ψ(a x)}` and `ℒ_{ψ⁻¹(a x)}` are
-isotypic components of `π_* ℚ̄_ℓ` for inverse characters, so that
-`AlgebraicGeometry.nonempty_iso_ihom_adicConstant_artinSchreierPlane` applies. -/
+`ℒ_{ψ(a x)}` on `𝔸¹_{k₀}` is the Artin–Schreier sheaf `ℒ_{ψ⁻¹(a x)}`, i.e.
+`(ℒ_{ψ,f})^{-1} ≅ ℒ_{ψ^{-1},f}` for `f = a x`. -/
 theorem nonempty_iso_dual_artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
     Nonempty ((artinSchreier ψ a).dual (isLisse_artinSchreier ψ a) ≅ artinSchreier ψ⁻¹ a) := by
   set t : Γ(affineLine k₀, ⊤) := AffineSpace.coord (Spec (CommRingCat.of k₀)) PUnit.unit

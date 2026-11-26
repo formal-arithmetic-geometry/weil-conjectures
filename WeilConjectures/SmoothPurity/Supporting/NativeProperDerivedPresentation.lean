@@ -11,7 +11,10 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Native.IntegralNati
 
 /-! # Native presentation of derived system direct image
 
-Source: Stacks 03D7, 07A7, 0941; Zheng Construction 4.1 and Lemma 4.10.
+## References
+
+* Stacks Project, Tags 03D7, 07A7 and 0941.
+* Zheng, Construction 4.1 and Lemma 4.10.
 -/
 
 @[expose] public noncomputable section
@@ -27,9 +30,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
   HasDerivedCategory.standard constantSheaf
 
-/-- Native direct-image evaluation in the constant-ring module presentation.
-Source: Stacks 03D7, 07A7, 0941
-(blueprint: lem-native-proper-derived-presentation). -/
+/-- Native direct-image evaluation in the constant-ring module presentation. -/
 def nativeProperConstantEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ProEtale.VaryingRing.P (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) f ⋙
@@ -44,28 +45,7 @@ def nativeProperConstantEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
       (compactSupportDirectModel f (Padic.coefficientExtensionRing l E (n + 1))))
 
 /-- The two derived models of sequence direct image have the same normalized evaluations.
-This is purely a presentation comparison: no reduction or completed coefficients occur.
-
-Source: Stacks 03D7, 07A7, 0941; Zheng Construction 4.1 and Lemma 4.10
-(blueprint: lem-native-proper-derived-presentation).
-
-Proof: the ordinary sequence direct images both send a system M to the sections
-M_n(V times_Y X). Their coefficient maps are the same constant-section maps.
-Use uniqueness of pullbackTensorSequenceRing to identify these ring maps and the
-identity on every underlying module section to identify the direct-image functors.
-The universal right-derived certificates of Direct.model and of the native
-rightDerivedFunctor give a natural isomorphism of their right derived functors.
-Transpose the identity-section comparison under the ordinary geometric adjunctions;
-uniqueness of left adjoints identifies their inverse-image comparisons. Evaluate
-this identity on complexes and use the prescribed cochain normalization of
-pullbackTensorDerivedEvaluation and native evalG. Thus the two evaluated left
-adjoint squares agree. The unit and counit equations of DirectEvaluation and the
-mate definition of native evalP imply that their right-adjoint squares agree,
-after the constant-ring direct-model transport. This is equality of the two
-constructed mates, not an inference from faithfulness of derived evaluations.
-No properness assumption, coefficient change, quotient flatness, completeness,
-or boundedness enters the argument. Zero systems, identity maps, empty schemes
-and n=0 obey the same section identities and adjunction triangles. -/
+This is purely a presentation comparison: no reduction or completed coefficients occur. -/
 theorem nativeProperDerivedPresentation (o : IntegralSystemRealization.Operations l E)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ e : IntegralSystemRealization.Operations.push l E o f ≅

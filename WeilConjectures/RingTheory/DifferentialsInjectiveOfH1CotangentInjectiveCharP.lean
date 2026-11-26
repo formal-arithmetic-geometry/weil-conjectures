@@ -17,8 +17,16 @@ import WeilConjectures.RingTheory.SubsingletonH1CotangentOfCharP
 /-!
 # Residue-field differential injectivity in positive characteristic
 
-Source: Stacks Project, More on Algebra, Proposition Tag 07E5, proof of (3) ⇔ (4)
-(blueprint: lem-weil-pbc-h1-injective-differentials-injective-char-p).
+## Implementation details
+
+Injectivity of `γ` gives injectivity of `H1Cotangent.map k A K K`. The connecting map `∂A` for
+`𝔽_p → A → K` is injective since prime-field `H1` vanishes (`H1Cotangent.exact_map_δ`).
+Connecting-map naturality gives `∂A ∘ H1Cotangent.map k A K K = λ ∘ ∂k`, and if `λ(x) = 0`
+then `x = ∂k(h)` by `H1Cotangent.exact_δ_mapBaseChange`, whence `h = 0` and `x = 0`.
+
+## References
+
+* [Stacks, Tag 07E5], proof of (3) ⇔ (4)
 -/
 
 @[expose] public section
@@ -33,27 +41,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- For a Noetherian local `k`-algebra in positive characteristic, injectivity of the
 canonical map from first cotangent homology to the maximal ideal's conormal module
 implies injectivity of the residue-field base change of the map on prime-field differentials.
-Tensor factors are reversed from the source by the canonical tensor commutativity isomorphisms.
-
-Source: Stacks Project, More on Algebra, Proposition Tag 07E5, proof of (3) ⇔ (4).
-Proof:
-1. Injectivity of `γ` implies injectivity of `H1Cotangent.map k A K K`, by applying
-   the conormal equivalence to an equality of its images.
-2. The connecting map `∂A` for `𝔽_p → A → K` is injective: prime-field H1 vanishes
-   (lem-weil-pbc-field-char-p-h1-cotangent-vanishing), and Mathlib's
-   `H1Cotangent.exact_map_δ` identifies its kernel with the image of that zero module
-   (lem-weil-pbc-jacobi-zariski-middle-exactness).
-3. Connecting-map naturality (lem-weil-pbc-jacobi-zariski-connecting-map-naturality)
-   gives `∂A ∘ H1Cotangent.map k A K K = λ ∘ ∂k`. The comparison map supplied there
-   equals this statement's tensor lift by its formula on universal differentials.
-4. The maps to `Ω[K⁄𝔽_p]` commute with `λ`, as checked on `x ⊗ da` using
-   the universal derivation (def-weil-pbc-kahler-differentials).
-5. If `λ(x) = 0`, step 4 and Mathlib's `H1Cotangent.exact_δ_mapBaseChange`
-   (lem-weil-pbc-jacobi-zariski-middle-exactness) give `x = ∂k(h)`. Step 3 gives
-   `∂A(H1Cotangent.map k A K K h) = 0`. Injectivity from steps 2 and 1 gives
-   `h = 0`, hence `x = 0`.
-
-(blueprint: lem-weil-pbc-h1-injective-differentials-injective-char-p) -/
+Tensor factors are reversed by the canonical tensor commutativity isomorphisms. -/
 theorem differentials_injective_of_h1Cotangent_injective_charP
     (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A]
     [IsLocalRing A] [IsNoetherianRing A] (p : ℕ) [Fact p.Prime] [CharP k p] :

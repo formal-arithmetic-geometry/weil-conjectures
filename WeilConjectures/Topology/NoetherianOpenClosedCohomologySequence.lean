@@ -20,8 +20,19 @@ import WeilConjectures.Topology.InverseImageStalk
 /-!
 # The open-closed exact sequence on a Noetherian space
 
-Source: Stacks Project, Modules, Lemma 02UT; Cohomology, Lemma 02UV and
-Proposition 02UZ (blueprint: lem-sc-noetherian-open-closed-cohomology-sequence).
+For an open `U` of a Noetherian space with closed complement `Z`, the sequence
+`0 → j_!j^*F → F → i_*i^*F → 0` is short exact, and `j_!j^*F` is the pushforward of a sheaf on
+the closure of `U` with the same cohomology.
+
+## Implementation details
+
+The first sheaf is the sheafification of the slice-site extension-by-zero presheaf applied to
+`F.over U`; opens of `U` are precisely the opens of `X` contained in `U`, so this is `j_!j^*F`.
+Exactness is checked on stalks.
+
+## References
+
+* [Stacks Project, Tags 02UT, 02UV and 02UZ](https://stacks.math.columbia.edu/tag/02UV)
 -/
 
 @[expose] public section
@@ -34,27 +45,10 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace TopCat
 
-/-- Source: Stacks Project, Modules, Lemma 02UT; Cohomology, Lemma 02UV and
-Proposition 02UZ (blueprint: lem-sc-noetherian-open-closed-cohomology-sequence).
-
-The first sheaf is the sheafification of the existing slice-site extension-by-zero
-presheaf applied to `F.over U`. Opens of `U` are precisely opens of `X` contained
-in `U`, so this is `j_!j^*F`. The displayed injection formula specifies the
-canonical adjunction map: identity on the sole summand when `V ≤ U`, zero when
-there is no such summand. The second map is the inverse-image adjunction unit
-for the inclusion of the closed complement.
-
-Proof: (1) On `U`, the first map is the identity on stalks and the last sheaf has
-zero stalks, using lem-sc-topological-extension-by-zero-stalks and
-lem-sc-closed-pushforward-abelian-stalks. (2) On the complement, the first stalk
-is zero and the second map is the identity under the inverse-image and closed
-pushforward stalk identifications, using lem-weil-pbc-topological-inverse-image-stalk.
-(3) Apply lem-sc-abelian-sheaf-short-exact-stalkwise. (4) Outside the closure of
-`U`, extension by zero has zero stalks. Its unit map to the closed pushforward
-of its inverse image on that closure is an isomorphism on all stalks, hence an
-isomorphism, using lem-weil-pbc-sets-sheaf-iso-on-stalks. (5) Apply
-lem-sc-cohomology-closed-immersion-pushforward and transport along this isomorphism.
--/
+/-- For an open `U` of a Noetherian space, the canonical map `a : j_!j^*F → F` (the identity on
+the sole summand when `V ≤ U`) and the adjunction unit `F → i_*i^*F` for the closed complement
+form a short exact sequence. Moreover `j_!j^*F` is the pushforward of a sheaf `F'` on the closure
+of `U`, with the same cohomology as `F'`. -/
 theorem noetherian_open_closed_cohomology_sequence
     (X : TopCat.{u}) [NoetherianSpace X] (U : Opens X)
     (F : TopCat.Sheaf AddCommGrpCat.{u} X) :

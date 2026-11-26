@@ -10,8 +10,8 @@ import WeilConjectures.SixFunctors.Compact.CompactSupportQuotientOutputCompositi
 
 /-! # Original presentation of the output quotient cocycle
 
-Source: the current blueprint finite-level coefficient comparison
-(blueprint: lem-coef-compact-support-quotient-raw-output-composition).
+We restate the transported composition law with exactly the original compact-support
+expressions.
 -/
 
 @[expose] public noncomputable section
@@ -82,12 +82,7 @@ private theorem rawOutput_resComp {X Y : Scheme.{u}} {f : X ⟶ Y}
   exact eq_of_heq (rawOutput_app_heq
     (compactSupportQuotientResComp l E Y r m n hrm hmn).hom he)
 
-/-- The transported composition with exactly the original compact-support expressions.
-Source: the normalized coefficient square and naturality
-(blueprint: lem-coef-compact-support-quotient-raw-output-composition).
-Proof: obtain the transported composition from the proved pair of output laws.
-Rewrite each intrinsic functor to the identical ambient presentation and specialize
-that composition to the three levels. No quotient map or equality cast changes. -/
+/-- The transported composition with exactly the original compact-support expressions. -/
 theorem compactSupportQuotient_raw_output_composition
     (k : Type u) [Field k] (_hl : IsUnit (l : k))
     {X Y : Scheme.{u}} {f : X ⟶ Y}

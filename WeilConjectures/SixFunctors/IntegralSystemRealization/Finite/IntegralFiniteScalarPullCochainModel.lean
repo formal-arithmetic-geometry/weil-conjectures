@@ -11,7 +11,12 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.FiniteScalar
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.FiniteScalarPullPbcNormalization
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.FiniteScalarReductionCounitNormalization
 
-/-! # Ordinary and derived finite scalar pullback models -/
+/-! # Ordinary and derived finite scalar pullback models
+
+## References
+
+* [Stacks, Tag 0D6D], [Stacks, Tag 0D6E], [Stacks, Tag 06YY], [Stacks, Tag 07A6]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -42,9 +47,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Scalar/pullback comparison fixed by the actual restriction/direct-image square.
-This is a construction from adjunctions, with no chosen existence witness.
-Source: Stacks 0D6D, 0D6E and 06YY
-(blueprint: lem-sf-integral-finite-scalar-pull-cochain-model). -/
+This is a construction from adjunctions, with no chosen existence witness. -/
 @[irreducible] def integralFiniteScalarPull {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ringedPull l E f ⋙ scalarReductionDerivedExtension l E X n ≅
       scalarReductionDerivedExtension l E Y n ⋙ finiteDerivedPullback l E n f :=
@@ -59,21 +62,7 @@ Source: Stacks 0D6D, 0D6E and 06YY
       (Functor.mapDerivedCategoryNatIso (PurCompactSupport.finitePullbackIso l E n f))
 
 /-- On a flat-term K-flat complex the adjunction-normalized derived scalar square
-is computed by the ordinary scalar square.
-Source: Stacks 07A6, 06YY and 0D6E
-(blueprint: lem-sf-integral-finite-scalar-pull-cochain-model).
-
-Proof: use scalarPull_complex_normalization for the pbc scalar and geometric
-presentations. Normalize the two scalar counits by
-finiteScalarReductionCounitNormalization. Naturality of the finite scalar
-presentation at X and of the geometric computation factor at Y transports these
-identities to the finite scalar presentations. The degreewise
-finiteScalarPullPresentation equation identifies the resulting ordinary comparison
-with ordinaryFiniteScalarPull followed by pullbackTensorLevelIntrinsic. Paste the
-four squares and cancel the finite scalar presentation at the source. The two good
-complex hypotheses provide exactly the scalar computation isomorphisms needed;
-no constructibility or completeness hypothesis is imposed. The proof applies to
-the zero complex and to n=0. -/
+is computed by the ordinary scalar square. -/
 theorem integralFiniteScalarPullCochainModel {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
     (h : integralOperationsGoodComplex l E X

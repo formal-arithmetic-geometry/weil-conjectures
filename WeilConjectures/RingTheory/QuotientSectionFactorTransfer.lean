@@ -15,8 +15,18 @@ import Mathlib.Tactic.Ring
 /-!
 # Transfer of a closed-fibre section factor to a subalgebra
 
-Source: Stacks Project, Tag 09XI, proof of (5) implies (2), decomposition of B''/IB''.
-(blueprint: lem-weil-pbc-quotient-section-factor-transfer)
+A localization isomorphism transfers a specified section factor of a closed fibre to a
+subalgebra.
+
+## Implementation details
+
+Quotienting the localization isomorphism by `I` gives `(D/ID)[1/b] ≅ (B/IB)[1/b] ≅ A/I`, since
+`b` maps to `(1, 0)`. Splitting `D/ID` along the idempotent `b` gives the `b`-corner, identified
+with `A/I` by `σ`, and the complementary corner `C`, which lives in the universe of `D`.
+
+## References
+
+* [Stacks, Tag 09XI] (proof of (5) implies (2))
 -/
 
 @[expose] public section
@@ -100,21 +110,7 @@ private theorem idempotent_mul_eq_of_localization_eq
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A localization isomorphism transfers a specified section factor of the closed fibre,
-provided its parameter is already idempotent in the smaller closed fibre.
-
-Source: Stacks Project, Tag 09XI, proof of (5) implies (2), decomposition of B''/IB''.
-(blueprint: lem-weil-pbc-quotient-section-factor-transfer)
-
-Proof:
-1. Quotient the given localization isomorphism by I. Quotient commutes with
-localization, giving (D/ID)[1/b] isomorphic to (B/IB)[1/b].
-2. Under e the image of b is (1,0), so the latter localization is A/I, by the
-first projection. Thus the b-corner of D/ID maps isomorphically to A/I by σ.
-3. Split D/ID using its idempotent b into its b-corner and (1-b)-corner. Identify
-the first corner using step 2, and use the second as C. The corner projection
-is x mapped to (1-b)x, giving its A/I-algebra structure. Both projections commute
-with scalars; the first projection is σ and the image of b is (1,0).
-The complementary corner lives in the universe of D and hence of B. -/
+provided its parameter is already idempotent in the smaller closed fibre. -/
 theorem quotient_section_factor_transfer
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
     (I : Ideal A) (σ : B →ₐ[A] A ⧸ I)

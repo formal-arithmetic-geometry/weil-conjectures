@@ -15,7 +15,19 @@ import WeilConjectures.WeilSheaf.Ordinary.OrdinaryRelativeTensorIdentification
 import all WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorChainAssociativity
 import all Mathlib.CategoryTheory.Limits.HasLimits
 
-/-! # Coherence of the canonical ordinary section-module comparison -/
+/-! # Coherence of the canonical ordinary section-module comparison
+
+## Implementation details
+
+The statement concerns the canonical section equivalence and the evaluation-normalized Hom
+comparison, not an arbitrary Hom isomorphism; no native tensor, native associator or
+restriction bridge occurs. Associativity on triple pure tensors is extended to sheaf maps
+and then, after totalization with the exchange sign `(-1)^(pq)`, to unbounded complexes.
+
+## References
+
+* Stacks Project, Tags 03EO, 06YS, 06YU and 0FPT
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -29,9 +41,7 @@ attribute [local instance] Mod.monoidalCategoryCochainComplex
 attribute [local implicit_reducible] Mod.monoidalCategoryCochainComplex
   SheafOfModules.cochainModulesMonoidal
 
-/-- Transport the specified Hom comparison through the inverse equivalence.
-Source: equivalence unit and counit formulas
-(blueprint: new-sf-canonical-ordinary-ringed-tensor-coherence). -/
+/-- Transport the specified Hom comparison through the inverse equivalence. -/
 def normalizedInverseHomComparison
     {A B : Type*} [Category A] [Category B] (E : B ≌ A)
     (HA : Aᵒᵖ × A ⥤ A) (HB : Bᵒᵖ × B ⥤ B)
@@ -46,9 +56,7 @@ def normalizedInverseHomComparison
     Functor.isoWhiskerLeft ((E.inverse.op.prod E.inverse) ⋙ HB) E.unitIso.symm ≪≫
     (Functor.rightUnitor _)
 
-/-- The specified forward ordinary Hom comparison of a Frobenius model.
-Source: the model's Hom naturality
-(blueprint: new-sf-canonical-ordinary-ringed-tensor-coherence). -/
+/-- The specified forward ordinary Hom comparison of a Frobenius model. -/
 def frobeniusOrdinaryForwardHom
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -59,9 +67,7 @@ def frobeniusOrdinaryForwardHom
   NatIso.ofComponents (fun MN ↦ A.hom MN.1.unop MN.2)
     (fun fg ↦ A.hom_naturality fg.1.unop fg.2)
 
-/-- Coherence with the actual fixed ordinary Hom maps of the model.
-Source: Stacks 06YS, 06YU, 0FPT
-(blueprint: new-sf-canonical-ordinary-ringed-tensor-coherence). -/
+/-- Coherence with the actual fixed ordinary Hom maps of the model. -/
 def FrobeniusOrdinaryTensorCoherence
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -75,9 +81,7 @@ def FrobeniusOrdinaryTensorCoherence
       (Functor.uncurry.obj (SheafOfModules.homFunctor (R := A.R)))
       (frobeniusOrdinaryForwardHom A))
 
-/-- The canonical small-site forward Hom comparison.
-Source: normalized adic section-module comparison
-(blueprint: new-sf-canonical-ordinary-ringed-tensor-coherence). -/
+/-- The canonical small-site forward Hom comparison. -/
 def canonicalOrdinaryForwardHom (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : ProEtale.AdicModuleHomComparisonCore l Y) :
     Functor.uncurry.obj (SheafOfModules.homFunctor (R := ProEtale.NativeFrobenius.ring Y l)) ⋙
@@ -262,23 +266,7 @@ private theorem ordinary_coherence_of_inverse_associativity
 
 attribute [local irreducible] ProEtale.NativeFrobenius.equivalence
 
-/-- The canonical section-module equivalence retains its normalized tensor coherence.
-Source: the pure-tensor and evaluation equations of the adic module comparison;
-Stacks 03EO, 06YS, 06YU, 0FPT
-(blueprint: new-sf-canonical-ordinary-ringed-tensor-coherence).
-
-Proof: take the proved AdicModuleTensorComparisonCore on the pro-etale site.
-Its tensor_sections equation gives associativity on triple pure tensors. The tensor quotient
-universal property and the sheafification adjunction extend this equality to sheaf maps.
-The evaluation formula for H identifies its Hom map with the mate of this exact tensorator.
-Restrict to the small site, and reverse the equivalence using its unit and counit; this preserves
-normalization and associativity. The uncurrying equation makes every supplied
-underived d equal to this comparison. Totalize degreewise, exchange the two
-parameters with (-1)^(pq), and use the balanced summand normalization of kappa.
-The two triple signs agree by pq+(p+q)r=qr+p(q+r). Total coproduct inclusions
-then prove associativity for unbounded complexes. This statement concerns the
-canonical section equivalence and evaluation-normalized H, not an arbitrary Hom
-isomorphism. No native tensor, native associator, or restriction bridge occurs. -/
+/-- The canonical section-module equivalence retains its normalized tensor coherence. -/
 theorem canonical_ordinary_ringed_tensor_coherence
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : ProEtale.AdicModuleHomComparisonCore l Y) :

@@ -11,10 +11,15 @@ public import Mathlib.Algebra.Category.ModuleCat.Stalk
 /-!
 # Stalk functor for presheaves of modules
 
-Source: Stacks Project, Sheaves, Section 007I and Lemma 007J
-(blueprint: def-weil-pbc-module-stalk).
+The stalk functor from presheaves of modules to modules over the stalk of the ring presheaf.
+
+## Implementation details
 
 The objects and scalar action are Mathlib's stalks, not a second germ construction.
+
+## References
+
+* [Stacks Project, Section 007I and Tag 007J](https://stacks.math.columbia.edu/tag/007J)
 -/
 
 @[expose] public section
@@ -27,17 +32,13 @@ noncomputable section
 
 namespace PresheafOfModules
 
-/-- Stalk module carrier over the stalk of the ring presheaf.
-Source: Stacks Project, Sheaves, Section 007I and Lemma 007J.
-(blueprint: def-weil-pbc-module-stalk) -/
+/-- Stalk module carrier over the stalk of the ring presheaf. -/
 abbrev stalkObj {X : TopCat.{u}} (R : TopCat.Presheaf RingCat.{u} X) (x : X)
     (M : PresheafOfModules.{u} R) :
     ModuleCat.{u} (R.stalk x) :=
   ModuleCat.of (R.stalk x) (TopCat.Presheaf.stalk (C := Ab.{u}) (X := X) M.presheaf x)
 
-/-- Additive map on stalks induced by a presheaf-module morphism.
-Source: Stacks Project, Sheaves, Section 007I and Lemma 007J.
-(blueprint: def-weil-pbc-module-stalk) -/
+/-- Additive map on stalks induced by a presheaf-module morphism. -/
 def stalkAddMap {X : TopCat.{u}} {R : TopCat.Presheaf RingCat.{u} X} {x : X}
     {M N : PresheafOfModules.{u} R} (f : M ⟶ N) :
     TopCat.Presheaf.stalk (C := Ab.{u}) (X := X) M.presheaf x →+
@@ -45,11 +46,7 @@ def stalkAddMap {X : TopCat.{u}} {R : TopCat.Presheaf RingCat.{u} X} {x : X}
   ConcreteCategory.hom ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map
     ((PresheafOfModules.toPresheaf _).map f))
 
-/-- The induced stalk map is linear over the stalk ring.
-Represent the scalar and vector by germs, restrict them to a common neighborhood,
-apply the sectionwise linearity of f, and use germ_ringCat_smul on source and target.
-Source: Stacks Project, Sheaves, Section 007I and Lemma 007J.
-(blueprint: def-weil-pbc-module-stalk) -/
+/-- The induced stalk map is linear over the stalk ring. -/
 theorem stalkMap_linear {X : TopCat.{u}} {R : TopCat.Presheaf RingCat.{u} X} {x : X}
     {M N : PresheafOfModules.{u} R} (f : M ⟶ N) :
     ∀ (r : R.stalk x) (m : TopCat.Presheaf.stalk (C := Ab.{u}) (X := X) M.presheaf x),
@@ -69,9 +66,7 @@ theorem stalkMap_linear {X : TopCat.{u}} {R : TopCat.Presheaf RingCat.{u} X} {x 
   rw [map_smul, germ_ringCat_smul]
   rfl
 
-/-- Linear stalk map induced by a presheaf-module morphism.
-Source: Stacks Project, Sheaves, Section 007I and Lemma 007J.
-(blueprint: def-weil-pbc-module-stalk) -/
+/-- Linear stalk map induced by a presheaf-module morphism. -/
 def stalkMap {X : TopCat.{u}} {R : TopCat.Presheaf RingCat.{u} X} {x : X}
     {M N : PresheafOfModules.{u} R} (f : M ⟶ N) :
     stalkObj R x M ⟶ stalkObj R x N :=
@@ -80,11 +75,7 @@ def stalkMap {X : TopCat.{u}} {R : TopCat.Presheaf RingCat.{u} X} {x : X}
       map_add' := (stalkAddMap f).map_add
       map_smul' := fun r m => stalkMap_linear f r m }
 
-/-- Stalk maps preserve identities.
-The underlying additive stalk map is the image of an identity under toPresheaf
-and the abelian-group stalk functor, so it is the identity on every germ.
-Source: Stacks Project, Sheaves, Section 007I and Lemma 007J.
-(blueprint: def-weil-pbc-module-stalk) -/
+/-- Stalk maps preserve identities. -/
 theorem stalkMap_id {X : TopCat.{u}}
     {R : TopCat.Presheaf RingCat.{u} X} {x : X}
     (M : PresheafOfModules.{u} R) :
@@ -94,11 +85,7 @@ theorem stalkMap_id {X : TopCat.{u}}
   simp [stalkAddMap]
   rfl
 
-/-- Stalk maps preserve composition.
-The underlying additive maps are the images under toPresheaf and the abelian-group
-stalk functor. Both functors preserve composition, so the maps agree on every germ.
-Source: Stacks Project, Sheaves, Section 007I and Lemma 007J.
-(blueprint: def-weil-pbc-module-stalk) -/
+/-- Stalk maps preserve composition. -/
 theorem stalkMap_comp {X : TopCat.{u}}
     {R : TopCat.Presheaf RingCat.{u} X} {x : X}
     {M N P : PresheafOfModules.{u} R}
@@ -109,9 +96,7 @@ theorem stalkMap_comp {X : TopCat.{u}}
   simp [stalkAddMap]
   rfl
 
-/-- The stalk functor on presheaves of modules used in the statement.
-Source: Stacks Project, Sheaves, Section 007I and Lemma 007J.
-(blueprint: def-weil-pbc-module-stalk) -/
+/-- The stalk functor on presheaves of modules. -/
 def moduleStalkFunctor {X : TopCat.{u}}
     (R : TopCat.Presheaf RingCat.{u} X) (x : X) :
     PresheafOfModules.{u} R ⥤ ModuleCat.{u} (R.stalk x) where

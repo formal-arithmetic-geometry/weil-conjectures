@@ -17,13 +17,16 @@ public import WeilConjectures.Compactification.RefinementCategory
 /-!
 # The specified integral compact-support tower
 
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks Tag 0GL0
-(blueprint: def-sf-integral-compact-support-tower).
-
 The finite terms use the chosen compactification. The quotient transitions are the
 scalar-extension adjuncts of the reduction units followed by the normalized
 compact-support coefficient comparisons. Derived limits are properties of arbitrary
 objects, expressed by their Roos triangles.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2, Sections 6.5 and 6.7,
+  Definition 6.7.6 and Lemma 6.7.7.
+* Stacks Project, Tags 015F, 03CO, 03DA, 03EK, 07A6 and 0GL0.
 -/
 
 @[expose] public section
@@ -35,40 +38,29 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Positive coefficient levels are finite. Source: blueprint coefficient extension;
-Bhatt--Scholze, Section 6.7 (blueprint: def-sf-integral-compact-support-tower). -/
+/-- Positive coefficient levels are finite. -/
 noncomputable instance sfCompactSupportCoefficientFinite (n : ℕ) :
     Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
   Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))
 
-/-- Restriction from exponent n+2 to exponent n+1 along the specified quotient map.
-Source: Bhatt--Scholze, Definition 3.5.2
-(blueprint: def-sf-integral-compact-support-tower). -/
+/-- Restriction from exponent n+2 to exponent n+1 along the specified quotient map. -/
 noncomputable abbrev sfCompactSupportFiniteRestriction (T : Scheme.{u}) (n : ℕ) :
     scalarReductionTarget.{u, u} l E T n ⥤ scalarReductionTarget.{u, u} l E T (n + 1) :=
   proEtaleCoefficientRestrictScalars T (Padic.coefficientExtensionTransition l E (n + 1))
 
-/-- Finite quotient restriction is left exact. Source: Stacks Tag 03DA
-(blueprint: def-sf-integral-compact-support-tower). -/
+/-- Finite quotient restriction is left exact. -/
 noncomputable instance sfCompactSupportFiniteRestrictionLimits (T : Scheme.{u}) (n : ℕ) :
     PreservesFiniteLimits (sfCompactSupportFiniteRestriction l E T n) :=
   proEtaleCoefficientRestrictScalars_preservesFiniteLimits T
     (Padic.coefficientExtensionTransition l E (n + 1))
 
-/-- Finite quotient restriction is right exact. Source: Stacks Tag 03DA
-(blueprint: def-sf-integral-compact-support-tower). -/
+/-- Finite quotient restriction is right exact. -/
 noncomputable instance sfCompactSupportFiniteRestrictionColimits (T : Scheme.{u}) (n : ℕ) :
     PreservesFiniteColimits (sfCompactSupportFiniteRestriction l E T n) :=
   proEtaleCoefficientRestrictScalars_preservesFiniteColimits T
     (Padic.coefficientExtensionTransition l E (n + 1))
 
-/-- The completion projections commute with the specified finite quotient transition.
-Source: Stacks Tag 03CO; Bhatt--Scholze, Definition 3.5.2
-(blueprint: def-sf-integral-compact-support-tower).
-Proof: the completed sheaf is the inverse limit of the finite quotient tower.
-Its cone condition identifies the higher projection followed by the quotient map
-with the lower projection. Forgetting commutativity gives exactly this condition
-for ring sheaves; faithfulness lifts it back to commutative ring sheaves. -/
+/-- The completion projections commute with the specified finite quotient transition. -/
 theorem sfCompactSupportProjection_transition (T : Scheme.{u}) (n : ℕ) :
     completedIntegralCommRingProjectionUnrestricted l E T (n + 1) ≫
         (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
@@ -84,8 +76,7 @@ theorem sfCompactSupportProjection_transition (T : Scheme.{u}) (n : ℕ) :
       (homOfLE (Nat.le_succ n)).op
 
 /-- The sectionwise identity composite restriction comparison, supplied by the shared
-commutative ring-sheaf restriction interface. Source: Stacks Tags 03DA and 03CO
-(blueprint: def-sf-integral-compact-support-tower). -/
+commutative ring-sheaf restriction interface. -/
 noncomputable def sfCompactSupportRestrictionComp (T : Scheme.{u}) (n : ℕ) :
     sfCompactSupportFiniteRestriction l E T n ⋙
         scalarReductionRestriction.{u, u} l E T (n + 1) ≅
@@ -96,8 +87,7 @@ noncomputable def sfCompactSupportRestrictionComp (T : Scheme.{u}) (n : ℕ) :
     (completedIntegralCommRingProjectionUnrestricted l E T n)
     (sfCompactSupportProjection_transition l E T n)
 
-/-- Exact restriction composition on derived categories. Source: Stacks Tag 015F
-(blueprint: def-sf-integral-compact-support-tower). -/
+/-- Exact restriction composition on derived categories. -/
 noncomputable def sfCompactSupportDerivedRestrictionComp (T : Scheme.{u}) (n : ℕ) :
     (sfCompactSupportFiniteRestriction l E T n).mapDerivedCategory ⋙
         scalarReductionDerivedRestriction.{u, u} l E T (n + 1) ≅
@@ -109,8 +99,7 @@ noncomputable def sfCompactSupportDerivedRestrictionComp (T : Scheme.{u}) (n : �
 of the lower reduction unit under the higher reduction/restriction adjunction.
 On a K-flat representative it is precisely x tensor a ↦ x tensor rho(a), since that
 adjunction's unit is x ↦ x tensor 1 and the restriction comparison is identity on
-sections. Source: Bhatt--Scholze, Definition 3.5.2; Stacks Tags 03EK and 07A6
-(blueprint: def-sf-integral-compact-support-tower). -/
+sections. -/
 noncomputable def sfCompactSupportReductionTransition (T : Scheme.{u})
     (K : DerivedCategory (scalarReductionSource.{u, u} l E T)) (n : ℕ) :
     (scalarReductionDerivedExtension.{u, u} l E T (n + 1)).obj K ⟶
@@ -125,8 +114,7 @@ noncomputable def sfCompactSupportReductionTransition (T : Scheme.{u})
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
 /-- The actual term Res_n R(c.g)_* c.i_! (K tensor^L A_n), where the natural index
-n denotes exponent n+1. Source: Bhatt--Scholze, Definition 6.7.6
-(blueprint: def-sf-integral-compact-support-tower). -/
+n denotes exponent n+1. -/
 noncomputable def sfCompactSupportTerm
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) (n : ℕ) :
     DerivedCategory (scalarReductionSource.{u, u} l E Y) :=
@@ -137,8 +125,7 @@ noncomputable def sfCompactSupportTerm
 /-- The specified quotient transition: apply compact support at the higher level to
 the reduction map, apply the compact-support restriction comparison, and restrict to
 completed coefficients. The final identity-on-sections comparison identifies the two
-composite restrictions. Source: Bhatt--Scholze, Sections 6.5 and 6.7
-(blueprint: def-sf-integral-compact-support-tower). -/
+composite restrictions. -/
 noncomputable def sfCompactSupportTransition
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) (n : ℕ) :
     sfCompactSupportTerm l E c K (n + 1) ⟶ sfCompactSupportTerm l E c K n :=

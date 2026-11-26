@@ -13,7 +13,21 @@ import WeilConjectures.RingTheory.KoszulGeneratorChainMap
 
 /-! # Alternating Koszul products before conormal descent
 
-Source: Stacks Project, Tags 09PQ and 00LS.
+Before descent modulo `I²`, elements of `I` have alternating products in the `I`-annihilated
+part of the homology of `P ⊗ A/I` for a resolution `P` of `A/I`, realized by Koszul maps.
+
+## Implementation details
+
+A free strictly commutative Tate resolution `Q` of `A/I` is used: each `x ∈ I` has a degree-one
+lift with differential `x`, whose class after tensoring is independent of the lift. Products of
+such classes are multilinear and alternating, since odd elements square to zero in a strictly
+commutative Tate algebra (also in characteristic two). Descent modulo `I²` and independence
+from the chosen Koszul maps are proved in `KoszulConormalCycleRelations`.
+
+## References
+
+* [Stacks, Tag 09PQ]
+* [Stacks, Tag 00LS]
 -/
 
 @[expose] public section
@@ -226,28 +240,7 @@ private theorem linearCombination_update (A : Type u) [CommRing A]
 
 /-- Before descent modulo I², ideal elements have alternating products in the
 I-annihilated part of resolution homology, realized by a suitable family of
-Koszul maps. No factorization through the conormal module is asserted.
-Source: Stacks Project, Tag 09PQ, Lemma 23.6.12; Tag 00LS, part (1).
-(blueprint: new-t4-koszul-ideal-alternating-products).
-
-Proof: Take a free strictly commutative Tate resolution Q of A/I. For each x
-in I choose a degree-one lift with differential x. Its class after tensoring
-is independent of the lift: the difference is a cycle in Q, hence a boundary.
-Adding or scaling lifts proves A-linearity of this assignment on I, without
-yet identifying its kernel. Multiply n such classes in Q tensor A/I. The
-product is multilinear and alternating, since odd elements square to zero
-in a strictly commutative Tate algebra, also in characteristic two. Each
-class is annihilated by I because the tensor factor A/I is. Compare Q with P
-by an augmentation-preserving map and transport the products on homology;
-this gives F with values in the I-torsion submodule. For each tuple g send
-the Koszul generators to its chosen degree-one lifts in Q and compose with
-the comparison to P. These maps b preserve augmentation and evaluate each
-wedge as the product defining F. Linearity handles arbitrary vectors v.
-The actual cycle z is unique for its prescribed image since iCycles is
-monic. For n=0 use the empty product, the quotient unit, which is still
-annihilated by I. If I=A the homology is zero; I=0 and characteristic two
-need no exclusions. Descent modulo I² and independence from the chosen
-family b are proved separately in KoszulConormalCycleRelations. -/
+Koszul maps. No factorization through the conormal module is asserted. -/
 theorem koszul_ideal_alternating_products (A : Type u) [CommRing A]
     (I : Ideal A) (n : ℕ) (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I))) :
     ∃ (b : ∀ (r : ℕ) (g : Fin r → I),

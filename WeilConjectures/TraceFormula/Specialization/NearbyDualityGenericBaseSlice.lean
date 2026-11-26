@@ -23,16 +23,39 @@ generic base `(Frac K⟦t⟧, X₂)` (`NearbyCyclesModel.isTraitModelOfGenericBa
 whose special fibre is the special fibre `𝒳''_s` of the slice (`NearbyCyclesModel.sliceSpecial`).
 
 This file proves the **slice compatibility of nearby duality**
-(`NearbyCyclesModel.isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase`, blueprint
-`lemma-nearby-duality-slice--1` (2) with `lemma-duality-invariants-pro-p--1`): if nearby duality
+(`NearbyCyclesModel.isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase`): if nearby duality
 holds for the generic slice model and the twist equation holds, then the pullback of `δ_{M,L}` to
-`𝒳''_s` is an isomorphism. This is the
-`hslice` hypothesis of the finite-support step
+`𝒳''_s` is an isomorphism. This is the `hslice` hypothesis of the finite-support step
 `NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMapOfGenericBase`.
 
 It also records the instances and finiteness properties needed to state the duality map of the
 generic slice model: the characteristic of `K` and `Frac K⟦t⟧` is that of `k'`, and the base `X₂`
 and the special fibre `𝒳''_s` are separated, quasi-compact and locally of finite type.
+
+## Implementation details
+
+By the invariance of nearby cycles under change of trait and the inertia action on nearby cycles
+(SGA 4½, [Th. finitude], §3), the pullback of `Ψ_M` to `𝒳''_s` is the `P`-invariants of `Ψ_{M''}` of
+the pullback of the coefficients, `P` the pro-`p` kernel of the map of inertia groups of the strict
+localisation of `𝔸¹_S` at the generic point of its special fibre. The pullback of the dualizing
+complex of `X'` to `𝒳''_s` is the dualizing complex twisted by `ℚ̄_ℓ(1)[2]`, and the dualizing maps
+`θ` are compatible with slicing (this is the hypothesis `H`), so that the pullback of `δ_{M,L}` is
+identified with the `P`-invariants of `δ_{M'',L'}(1)[2]`. The `P`-invariants are a direct summand
+cut out by an averaging idempotent (`P` is pro-`p` and `p ≠ ℓ`), and the restriction of an
+isomorphism to the two averaging summands is an isomorphism
+(`CategoryTheory.isIso_comp_comp_map_op_of_averaging`). The formal part is
+`CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_averaging_of_eq`; the geometric inputs are
+`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_averaging_genericSliceExchange`,
+`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_closedHomComparison_sliceSpecialUpperStar`,
+`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_closedHomComparison_genericSliceUpperStar` and
+`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_genericSliceDualizingMap`.
+
+The statement does not depend on the choice of `D_K`, the dualizing maps of trait models over
+generic bases being determined by their trace and open restriction properties.
+
+## References
+
+* SGA 4½, [Th. finitude], §3.
 
 -/
 
@@ -127,38 +150,14 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar F).Prime] [Fact (ringChar 
   [LocallyOfFiniteType X₁.hom] [QuasiCompact X₁.hom] [IsSeparated X₁.hom]
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
 
-/-- **Nearby duality and generic slices** (blueprint `lemma-nearby-duality-slice--1` (2), with
-`lemma-duality-invariants-pro-p--1`): let `M` be a trait model over the generic base, `b : 𝒳 ⟶ 𝔸¹_S`
-a coordinate of its total space, and `M''` the generic slice model of `b`
+/-- **Nearby duality and generic slices**: let `M` be a trait model over the generic base,
+`b : 𝒳 ⟶ 𝔸¹_S` a coordinate of its total space, and `M''` the generic slice model of `b`
 (`NearbyCyclesModel.genericSliceModel`, along `σ : Spec K⟦t⟧ ⟶ 𝔸¹_S`, `K = k'(x)^alg`), a trait
-model over the generic base `(Frac K⟦t⟧, X₂)`. If the duality maps `δ_{M'',L'}` of the slice
-model (with the dualizing maps of a family `D_K` over the trait `Spec K⟦t⟧`) are isomorphisms for
-every `L'`, and the dualizing maps satisfy the twist equation
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`), then the pullback of `δ_{M,L}` to
-the special fibre `𝒳''_s` of the slice along `𝒳''_s ⟶ X'` is an isomorphism for every `L`.
-
-Proof. By the invariance of nearby cycles under change of trait and the
-inertia action on nearby cycles (SGA 4½, [Th. finitude], §3), the pullback of `Ψ_M` to `𝒳''_s` is
-the `P`-invariants of `Ψ_{M''}` of the pullback of the coefficients, `P` the pro-`p` kernel of the
-map of inertia groups of the strict localisation of `𝔸¹_S` at the generic point of its special
-fibre. The pullback of the dualizing complex of `X'` to `𝒳''_s` is the dualizing complex twisted
-by `ℚ̄_ℓ(1)[2]` (blueprint `lemma-double-dual-geometric-generic-fibre`), and the dualizing maps `θ`
-are compatible with slicing (blueprint `lemma-nearby-duality-slice--1`; this is the hypothesis `H`),
-so that the pullback of `δ_{M,L}` is identified with the `P`-invariants of `δ_{M'',L'}(1)[2]`. The
-`P`-invariants are a direct summand cut out by an averaging idempotent (`P` is pro-`p` and
-`p ≠ ℓ`), and the restriction of an isomorphism to the two averaging summands is an isomorphism
-(`CategoryTheory.isIso_comp_comp_map_op_of_averaging`). The formal part is
-`CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_averaging_of_eq`; the geometric inputs are
-`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_averaging_genericSliceExchange`,
-`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_closedHomComparison_sliceSpecialUpperStar`,
-`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_closedHomComparison_genericSliceUpperStar` and
-`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_genericSliceDualizingMap`.
-
-The statement does not depend on the choice of `D_K`, the dualizing maps of trait models over
-generic bases being determined by their trace and open restriction properties. If the base `X₂`
-of the slice is empty, the hypothesis holds trivially, and so does the conclusion: the Milnor
-fibres of `𝒳` at the points of `𝒳''_s` lie over the generic point of `𝔸¹_S`, hence in the slice,
-so both sides of the pullback of `δ_{M,L}` vanish. -/
+model over the generic base `(Frac K⟦t⟧, X₂)`. If the duality maps `δ_{M'',L'}` of the slice model
+(with the dualizing maps of a family `D_K` over the trait `Spec K⟦t⟧`) are isomorphisms for every
+`L'`, and the dualizing maps satisfy the twist equation
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`), then the pullback of `δ_{M,L}` to the
+special fibre `𝒳''_s` of the slice along `𝒳''_s ⟶ X'` is an isomorphism for every `L`. -/
 theorem isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase
     (D : NearbyDualizingDataOfGenericBase k' ℓ)
     (DK : NearbyDualizingDataOfGenericBase (traitSliceField k') ℓ)

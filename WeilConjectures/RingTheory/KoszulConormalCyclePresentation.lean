@@ -11,7 +11,17 @@ public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 
 /-! # A free presentation of the exterior conormal by Koszul wedge cycles
 
-Source: Stacks Project, Tags 0622 and 0623; the exterior universal property.
+The `n`th exterior power of the conormal module `I/I²` is spanned over `A` by wedges of Koszul
+cycles of `A/I`.
+
+## Implementation details
+
+Lift conormal elements to `g_j ∈ I`. After base change to `A/I` all Koszul differentials of
+`g` vanish, so every basis wedge is a cycle and its image is the prescribed conormal wedge.
+
+## References
+
+* [Stacks, Tags 0622, 0623]
 -/
 
 @[expose] public section
@@ -22,10 +32,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 /-- A wedge, its finite tuple of ideal elements, and its actual cycle after
-base change to the quotient. All entries are concrete data, with the last field
-certifying the chosen representative. 
-(blueprint: new-e1-koszul-conormal-cycle-presentation)
--/
+base change to the quotient, with a certificate for the chosen representative. -/
 structure KoszulConormalWedgeCycle (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) where
   r : ℕ
   g : Fin r → I
@@ -36,9 +43,7 @@ structure KoszulConormalWedgeCycle (A : Type u) [CommRing A] (I : Ideal A) (n : 
     (ExteriorAlgebra.koszulComplex A r (fun j ↦ (g j : A)))).iCycles n z =
       (exteriorPower.ιMulti A n v) ⊗ₜ[A] (1 : A ⧸ I)
 
-/-- Evaluate each Koszul wedge-cycle generator at its exterior conormal wedge. 
-(blueprint: new-e1-koszul-conormal-cycle-presentation)
--/
+/-- Evaluate each Koszul wedge-cycle generator at its exterior conormal wedge. -/
 noncomputable def koszulConormalCyclePresentation (A : Type u) [CommRing A]
     (I : Ideal A) (n : ℕ) :
     (KoszulConormalWedgeCycle A I n →₀ A) →ₗ[A] conormalExteriorModule A I n :=
@@ -105,20 +110,7 @@ private theorem tensorKoszul_d_zero (A : Type u) [CommRing A]
       ((ExteriorAlgebra.koszulComplex A r (fun k ↦ (g k : A))).d i j) = 0
     rw [hz, Functor.map_zero]
 
-/-- Koszul wedge cycles generate the exterior conormal over the ambient ring.
-Source: Stacks Project, Tags 0622 and 0623; Mathlib's exterior-power spanning theorem.
-(blueprint: new-e1-koszul-conormal-cycle-presentation).
-
-Proof: Wedges of conormal elements span the exterior power over A/I. Lift every
-conormal element to an element g_j of I. Use the tuple g indexed by Fin n and
-choose v_j to be the j-th standard basis vector. After tensoring its Koszul
-complex with A/I every differential is zero: the contraction formula is a sum
-of terms with a coefficient g_j, and all these coefficients vanish in A/I.
-Thus the tensor of the basis wedge with 1 has a cycle representative. Its
-image under the displayed presentation is the prescribed conormal wedge.
-Finally every coefficient in A/I lifts to A, so the same wedges span over A.
-For n=0 the empty tuple supplies the unit; the argument includes I=0, I=A,
-and rings of characteristic two without modification. -/
+/-- Koszul wedge cycles generate the exterior conormal over the ambient ring. -/
 theorem koszulConormalCyclePresentation_surjective (A : Type u) [CommRing A]
     (I : Ideal A) (n : ℕ) :
     Function.Surjective (koszulConormalCyclePresentation A I n) := by

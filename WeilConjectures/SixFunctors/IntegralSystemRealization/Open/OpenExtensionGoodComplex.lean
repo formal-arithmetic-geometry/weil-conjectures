@@ -11,8 +11,12 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.OpenExtensionG
 
 /-! # Good representatives under completed-ring open extension
 
-Source: Stacks Tags 03DI, 03DJ, 0E8I and 0G7E.
-(blueprint: lem-sf-open-extension-good-complex).
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0G7E]
 -/
 
 @[expose] public noncomputable section
@@ -28,22 +32,7 @@ local instance goodOpen_additive {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersi
     (PurCompactSupport.openExtension (PurCompactSupport.completed l E) j).Additive :=
   (PurCompactSupport.openAdjunction (PurCompactSupport.completed l E) j).left_adjoint_additive
 
-/-- Completed-ring open extension and its restriction preserve good representatives.
-Source: Stacks 03DI, 03DJ, 0E8I and 0G7E; the first step of the localization proof
-(blueprint: lem-sf-open-extension-good-complex).
-
-Proof: present the actual open extension as ringed slice extension, after the
-coefficient and site equivalences of proEtaleOpen_slicePresentation. These are the
-ringed-site equivalences: their sectionwise tensor comparisons identify flatness
-and the acyclic total-tensor tests for K-flatness. Slice extension preserves flat
-terms and K-flatness by ringedOpen_preserves_flat_resolution. Transport its two
-conclusions across the natural isomorphism with the actual open extension;
-termwise natural isomorphisms preserve flatness, and total tensor sends chain
-isomorphisms to chain isomorphisms. This proves the first conjunct. Apply the
-ringed-topos K-flat pullback theorem, including its flat-term conclusion, to the
-completed coefficient inverse image and this extended complex. This proves the
-second conjunct. The slice construction works for every open, including the
-empty and identity opens, and the direct-sum total tensor needs no boundedness. -/
+/-- Completed-ring open extension and its restriction preserve good representatives. -/
 theorem openExtension_goodComplex {X Y : Scheme.{u}}
     (j : X ⟶ Y) [IsOpenImmersion j]
     (P : (integralOperationsGoodComplex l E X).FullSubcategory) :

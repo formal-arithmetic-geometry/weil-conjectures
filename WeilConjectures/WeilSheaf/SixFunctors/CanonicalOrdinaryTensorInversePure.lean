@@ -21,9 +21,11 @@ import all WeilConjectures.WeilSheaf.SixFunctors.CanonicalOrdinaryTensorInverseE
 
 /-! # The inverse tensor comparison on pure tensors
 
-Source: Stacks 03EK and 03EO, pure tensors and evaluation-normalized inverse mates.
-Auxiliary lemmas for `canonical_ordinary_tensor_inverse_associativity`
-(blueprint: new-sf-canonical-ordinary-tensor-inverse-associativity).
+Auxiliary lemmas for `canonical_ordinary_tensor_inverse_associativity`.
+
+## References
+
+* Stacks Project, Tags 03EK and 03EO.
 -/
 
 -- This module only keeps private helpers for the inverse associativity theorem.

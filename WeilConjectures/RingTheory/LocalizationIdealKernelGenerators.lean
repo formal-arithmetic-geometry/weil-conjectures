@@ -15,9 +15,21 @@ import Mathlib.Algebra.Module.LocalizedModule.Submodule
 /-!
 # Localization of ideal multiplication kernels
 
-Source: Stacks Project, Algebra, Tag 00MO, second proof paragraph;
-Tags 00CS and 00DK for localization exactness and tensor compatibility.
-(blueprint: lem-weil-pbc-localization-ideal-kernel-generators)
+The kernel of the multiplication map `J ⊗ (S' ⊗_S M) → S' ⊗_S M` after localization is generated
+by the image of the kernel before localization.
+
+## Implementation details
+
+With `A = S ⊗_R R'`, `N = R' ⊗_R M` and `J = I R'`, tensor cancellation identifies `S' ⊗_S M`
+with a localization of `N` over `A`. Exactness of localization and tensor-localization
+compatibility identify the localized kernel; every element of it is a fraction of an element of
+the original kernel. No flatness, Tor vanishing, finiteness or locality hypotheses are used.
+
+## References
+
+* [Stacks, Tag 00MO] (second proof paragraph)
+* [Stacks, Tag 00CS] (localization exactness)
+* [Stacks, Tag 00DK] (tensor-localization compatibility)
 -/
 
 @[expose] public section
@@ -25,25 +37,7 @@ universe u v w z t
 open scoped TensorProduct
 namespace Module
 
-/-- Localization generates the new kernel from the ordinary base-change kernel.
-Source: Stacks Project, Algebra, Tag 00MO, second proof paragraph, expanded using
-Tags 00CS (localization exactness) and 00DK (tensor-localization compatibility).
-(blueprint: lem-weil-pbc-localization-ideal-kernel-generators)
-
-Proof: set A = S tensor_R R', N = R' tensor_R M and J = IR'. Tensor cancellation
-identifies S' tensor_S M with the localization of N over A. Multiplication
-J tensor_R' N -> N is A-linear, with A acting on N. Exactness of localization
-identifies its localized kernel with the kernel of multiplication into S' tensor_S M.
-Tensor-localization compatibility identifies the localized tensor product with
-J tensor_R' (S' tensor_S M). Construct alpha as tensoring the canonical map
-N -> S' tensor_S M, r' tensor x |-> rho'(r') times (1 tensor x), with J.
-This formula is R'-balanced by the scalar tower identities and S-balanced by
-the tensor relation, and hence defines an R'-linear map. Symmetry puts N first.
-Every element of the localized kernel is a fraction of an element of the original
-kernel. Such a fraction is the image under alpha multiplied by q(w)^{-1},
-an S'-scalar, and therefore lies in the displayed S'-span. No quotient flatness,
-Tor vanishing, finiteness or local hypotheses are used. If the localization set
-contains zero, both the target module and its kernel are zero. -/
+/-- Localization generates the new kernel from the ordinary base-change kernel. -/
 theorem exists_localization_ideal_kernel_generators
     {R : Type u} {S : Type v} {R' : Type w} {S' : Type z}
     [CommRing R] [CommRing S] [CommRing R'] [CommRing S']

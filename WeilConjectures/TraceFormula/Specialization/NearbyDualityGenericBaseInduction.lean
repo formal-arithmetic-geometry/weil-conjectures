@@ -22,10 +22,10 @@ This file proves Gabber's theorem for trait models over a generic base
 measure `μ` of the base `X₁`, which does not increase under dense open immersions (`hμc`) and
 drops under generic slicing unless the slice is empty (`hμs`); the dimension is such a measure.
 
-The induction step (Illusie, *Autour du théorème de monodromie locale*, Thm. 4.2; blueprint
-`proposition-nearby-cycles-commute-verdier-duality`, "Dimension induction"): a trait model `M` of
-`X₁` over the generic base is an open sub-model of a proper one `M̄` over a dense compactification
-`X̄₁` of `X₁`
+## Implementation details
+
+The induction step follows Illusie: a trait model `M` of `X₁` over the generic base is an open
+sub-model of a proper one `M̄` over a dense compactification `X̄₁` of `X₁`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_isProper_openSubmodel_denseRange`), so that
 `μ X̄₁ ≤ μ X₁`. The cone of the duality map of `M̄` has finite support
 (`NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMapOfGenericBase`), since by the
@@ -42,6 +42,10 @@ For trait models over a base field, the duality map is that of the underlying tr
 the generic base (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.θ_eq_θ`), which gives
 `NearbyCyclesModel.isIso_nearbyDualityMap_of_measure` and the finite-support statement
 `NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper_of_measure`.
+
+## References
+
+* Illusie, *Autour du théorème de monodromie locale*, Thm. 4.2.
 
 -/
 
@@ -107,20 +111,12 @@ end Empty
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- **Gabber's theorem for trait models over a generic base, by induction on a measure**
-(Illusie, *Autour du théorème de monodromie locale*, Thm. 4.2; blueprint
-`proposition-nearby-cycles-commute-verdier-duality`, "Dimension induction"). Let `μ` be a measure of
-schemes over fields which does not increase along dense open immersions (`hμc`), and which drops by
-at least one along generic slices of trait models over the generic base, unless the slice is empty
-(`hμs`). Then for every trait model `M` of `X₁` over the generic base and every family `D` of
-dualizing maps over generic bases, the duality map `δ_{M,K}` is an isomorphism for every bounded
-constructible `K`.
-
-By strong induction on `μ X₁`: compactify `M` densely
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_isProper_openSubmodel_denseRange`), prove the
-proper case from finite support (generic slices of restrictions of the compactification, by the
-slice compatibility `NearbyCyclesModel.isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase`
-and the induction hypothesis) and global sections, and restrict back to `M`. -/
+/-- **Gabber's theorem for trait models over a generic base, by induction on a measure**. Let `μ` be
+a measure of schemes over fields which does not increase along dense open immersions (`hμc`), and
+which drops by at least one along generic slices of trait models over the generic base, unless the
+slice is empty (`hμs`). Then for every trait model `M` of `X₁` over the generic base and every
+family `D` of dualizing maps over generic bases, the duality map `δ_{M,K}` is an isomorphism for
+every bounded constructible `K`. -/
 theorem isIso_nearbyDualityMapOfGenericBase_of_measure
     (μ : ∀ {F : Type u} [Field F], Over (Spec (.of F)) → ℕ)
     (hμc : ∀ {F : Type u} [Field F] {X₁ Xc : Over (Spec (.of F))} [LocallyOfFiniteType X₁.hom]
@@ -195,10 +191,9 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   [IsSeparated X'.hom] {M : NearbyCyclesModel X.left X'.left} {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
-/-- The duality map of a trait model over the base is the duality map of the underlying trait
-model over the generic base (`NearbyCyclesModel.IsTraitModelOfBase.isTraitModelOfGenericBase`),
-for any family of dualizing maps over generic bases: the dualizing maps agree
-(`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.θ_eq_θ`). -/
+/-- The duality map of a trait model over the base is the duality map of the underlying trait model
+over the generic base (`NearbyCyclesModel.IsTraitModelOfBase.isTraitModelOfGenericBase`), for any
+family of dualizing maps over generic bases. -/
 lemma nearbyDualityMap_eq_nearbyDualityMapOfGenericBase (D : NearbyDualizingData k k' ℓ)
     (DG : NearbyDualizingDataOfGenericBase k' ℓ) (h : M.IsTraitModelOfBase k q g)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -206,13 +201,9 @@ lemma nearbyDualityMap_eq_nearbyDualityMapOfGenericBase (D : NearbyDualizingData
       nearbyDualityMapOfGenericBase ℓ DG h.isTraitModelOfGenericBase K := by
   rw [nearbyDualityMap, nearbyDualityMapOfGenericBase, DG.θ_eq_θ k D h]
 
-/-- **Gabber's theorem for trait models over the base, from a measure** (Illusie, *Autour du
-théorème de monodromie locale*, Thm. 4.2): for a measure `μ` as in
+/-- **Gabber's theorem for trait models over the base, from a measure**: for a measure `μ` as in
 `NearbyCyclesModel.isIso_nearbyDualityMapOfGenericBase_of_measure`, the duality map `δ_{M,K}` of
-every trait model over the base is an isomorphism. It is the duality map of the underlying trait
-model over the generic base
-(`NearbyCyclesModel.nearbyDualityMap_eq_nearbyDualityMapOfGenericBase`), for the family of
-dualizing maps of `NearbyCyclesModel.nonempty_nearbyDualizingDataOfGenericBase`. -/
+every trait model over the base is an isomorphism. -/
 theorem isIso_nearbyDualityMap_of_measure
     (μ : ∀ {F : Type u} [Field F], Over (Spec (.of F)) → ℕ)
     (hμc : ∀ {F : Type u} [Field F] {X₁ Xc : Over (Spec (.of F))} [LocallyOfFiniteType X₁.hom]
@@ -238,10 +229,8 @@ theorem isIso_nearbyDualityMap_of_measure
     h.isTraitModelOfGenericBase K
 
 /-- **Finite support of the cone of the duality map of a proper model, from a measure**: the
-statement of `NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper`, for
-a measure `μ` as in `NearbyCyclesModel.isIso_nearbyDualityMapOfGenericBase_of_measure`. The duality
-map is an isomorphism (`NearbyCyclesModel.isIso_nearbyDualityMap_of_measure`), so `S = ∅`
-works. -/
+statement of `NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper`, for a
+measure `μ` as in `NearbyCyclesModel.isIso_nearbyDualityMapOfGenericBase_of_measure`. -/
 theorem exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper_of_measure
     (μ : ∀ {F : Type u} [Field F], Over (Spec (.of F)) → ℕ)
     (hμc : ∀ {F : Type u} [Field F] {X₁ Xc : Over (Spec (.of F))} [LocallyOfFiniteType X₁.hom]

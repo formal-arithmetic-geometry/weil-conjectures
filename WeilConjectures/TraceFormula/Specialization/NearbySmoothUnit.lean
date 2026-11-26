@@ -19,11 +19,11 @@ public import WeilConjectures.TraceFormula.Specialization.TraitModelProperExchan
 Let `M` be a nearby-cycles model of finite type over the strictly henselian trait
 `S = Spec k'⟦t⟧` along `q : 𝒳 ⟶ S` (`NearbyCyclesModel.IsTraitModelOver`). If `q` is smooth, the
 specialization unit `σ_M : ℚ̄_ℓ ⟶ Ψ_M(ℚ̄_ℓ)` is an isomorphism
-(`NearbyCyclesModel.IsTraitModelOver.isIso_unit_of_smooth`; blueprint
-`prose-E-03` (1), smooth case, at the unit). The same holds for trait models
+(`NearbyCyclesModel.IsTraitModelOver.isIso_unit_of_smooth`; smooth base change for nearby
+cycles at the unit). The same holds for trait models
 over a generic base (`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_unit_of_smooth`).
 
-## Proof
+## Implementation details
 
 * The structure morphisms `q`, `g` are a morphism from the model `M.toGeneric` of the geometric
   generic fibre to the trait `S` as a model of its geometric generic point
@@ -64,7 +64,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-- If the target of a morphism of models `φ : M ⟶ N` has invertible specialization unit and the
 pullback exchange of `φ` is invertible at the unit, then the specialization unit of `M` is
-invertible, by the unit law of the pullback exchange. -/
+invertible. -/
 lemma Hom.isIso_unit_of_isIso_pullbackExchange_app (φ : M.Hom N f f') [IsIso (N.unit Λ)]
     [IsIso ((φ.pullbackExchange Λ).app (𝟙_ _))] : IsIso (M.unit Λ) := by
   have : IsIso ((leftDerivedUpperStarUnitIso Λ f').hom ≫ M.unit Λ ≫
@@ -76,8 +76,7 @@ lemma Hom.isIso_unit_of_isIso_pullbackExchange_app (φ : M.Hom N f f') [IsIso (N
   exact IsIso.of_isIso_comp_right _ ((M.nearbyCycles Λ).map (leftDerivedUpperStarUnitIso Λ f).inv)
 
 /-- The specialization unit of a model is invertible if that of the model of its geometric generic
-fibre (`NearbyCyclesModel.toGeneric`) is: the two agree up to the invertible pullback exchange of
-`NearbyCyclesModel.toGenericSelfHom`. -/
+fibre (`NearbyCyclesModel.toGeneric`) is. -/
 lemma isIso_unit_of_isIso_unit_toGeneric (M : NearbyCyclesModel X X')
     [IsIso (M.toGeneric.unit Λ)] : IsIso (M.unit Λ) := by
   have h := (toGenericSelfHom M).map_unit_comp_pullbackExchange_app Λ
@@ -152,7 +151,7 @@ theorem isIso_baseChangeMap_affineSpace_traitGenericModel_app [Fact (ringChar k'
 
 /-- **The smooth exchange at the unit**: for a model of finite type over the trait along a smooth
 `q`, the pullback exchange of `q` (from the model of the geometric generic fibre to the trait) is
-invertible at the unit, by smooth base change along the geometric generic point of the trait. -/
+invertible at the unit. -/
 theorem IsTraitModelOver.isIso_pullbackExchange_toTraitGeneric_app_unit
     [Fact (ringChar k').Prime] (hM : M.IsTraitModelOver q g) [Smooth q] :
     IsIso ((hM.toTraitGeneric.pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app (𝟙_ _)) := by
@@ -175,8 +174,8 @@ theorem IsTraitModelOver.isIso_pullbackExchange_toTraitGeneric_app_unit
   intro h₂ h₁
   exact h₁ h₂
 
-/-- **The specialization unit of a smooth model over the trait is invertible** (blueprint
-`prose-E-03` (1), smooth case, at the unit): if `M` is of finite type over
+/-- **The specialization unit of a smooth model over the trait is invertible**: if `M` is of
+finite type over
 the strictly henselian trait `S` along a smooth `q`, then `σ_M : ℚ̄_ℓ ⟶ Ψ_M(ℚ̄_ℓ)` is an
 isomorphism. -/
 theorem IsTraitModelOver.isIso_unit_of_smooth [IsSepClosed k'] [Fact (ringChar k').Prime]

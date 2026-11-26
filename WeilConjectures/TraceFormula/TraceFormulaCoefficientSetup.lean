@@ -18,9 +18,6 @@ public import Mathlib.CategoryTheory.Triangulated.Subcategory
 /-!
 # Finite coefficients and geometric categories for the trace formula
 
-Source: Weil blueprint, sec-trace-formula/sk-d-setup, order 2610
-(blueprint: sk-d-setup), with the geometric-scope correction recorded in the DAG.
-
 For `F : FiniteFieldDatum`, the base is `Spec (.of F.k)`. Geometric schemes are
 objects `X` of `Over (Spec (.of F.k))` with `IsSeparated X.hom`,
 `LocallyOfFiniteType X.hom` and `QuasiCompact X.hom`; their structure maps are
@@ -43,6 +40,14 @@ requires precisely triangulatedness, repleteness and the two preservation proper
 The middle scheme of each compactification is geometric via `c.g ≫ Y.hom`:
 proper morphisms are separated and of finite type, and these properties compose.
 The equality `c.comm` makes its open immersion a map over the base.
+
+## Implementation details
+
+The data of `TraceFormulaCoefficientSetup` are actual compactifications, with their open and
+proper maps, rather than arbitrary functors, and the property uses their actual composite
+`Rg_* j_!` on the whole ordinary unbounded category. No compactification-independence assertion is
+made. Triangulatedness and repleteness concern only geometric schemes, while the ambient and
+finite-Tor definitions still apply to all schemes.
 -/
 
 @[expose] public section
@@ -55,18 +60,10 @@ open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace WeilConjectures
 
-/-- The fixed finite-coefficient geometric package at the positive level `n`.
-The prime is different from the characteristic prime in the global finite-field datum.
-The coefficient ring is the recorded quotient by the chosen uniformizer to power `n`.
-The data are actual compactifications, with their open and proper maps, rather than
-arbitrary functors. The property uses their actual composite `Rg_* j_!` on the whole
-ordinary unbounded category. No compactification-independence assertion is made here;
-that assertion has only the bounded-below etale-origin scope of its dependency.
-Triangulatedness and repleteness concern only geometric schemes, while the existing
-ambient and finite-Tor definitions still apply to all schemes.
-
-Source: Weil blueprint, sec-trace-formula/sk-d-setup, order 2610, as corrected by
-the reviewed DAG's geometric-scope restriction (blueprint: sk-d-setup). -/
+/-- The finite-coefficient geometric package at the positive level `n`, for a prime `l` different
+from the characteristic of the finite field and the coefficient ring `O_E / π^n`: a choice of
+compactifications of compactifiable geometric maps such that the finite-Tor constructible
+subcategories are triangulated and replete and are preserved by pullback and by `Rg_* j_!`. -/
 noncomputable def TraceFormulaCoefficientSetup
     (F : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

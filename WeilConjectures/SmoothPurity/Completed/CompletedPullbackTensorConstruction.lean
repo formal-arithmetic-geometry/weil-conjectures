@@ -64,15 +64,25 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Integral and rational pullback/tensor constructions
 
-Source: `literature/stacks-project/sites-cohomology.tex`, Lemma 21.18.4
-(Tag 07A4, label `lemma-pullback-tensor-product`), together with the integral,
-rational, and algebraically closed coefficient conventions
-(blueprint: def-pur-completed-pullback-tensor-construction).
+We construct the integral pullback/tensor comparison `f^*(K ⊗ L) ≅ f^*K ⊗ f^*L` for completed
+integral coefficients, its rationalization, and its compatibility with change of coefficients
+and scalar extension.
 
 ## Main definitions
 
 * `canonicalIntegralPullbackTensor` is the prescribed comparison.
 * The helper declarations fix its representative normalization.
+
+## Implementation details
+
+The full K-flat normalization of quotient pullback is kept behind the named predicate
+`pullbackTensorQuotientNormalization`, so that selecting its unique isomorphism does not
+repeatedly type-check the full square.
+
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4) (Lemma 21.18.4)
+* [Stacks, Tags 03D2, 06YY, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -107,23 +117,18 @@ section QuotientCompatibility
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Cache additive finite inverse image with the explicitly sized coefficient ring.
-Source: Stacks 03D2 (blueprint: def-pur-completed-pullback-tensor-construction). -/
+/-- Additive instance for finite inverse image with the explicitly sized coefficient ring. -/
 instance pullbackTensorFiniteAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).Additive :=
   sfIntrinsicPullback_additive (finiteCoefficientRing l E (n + 1)) f
 
-/-- Cache the actual quotient extension's published additive structure.
-Source: Stacks 06YY (blueprint: def-pur-completed-pullback-tensor-construction). -/
+/-- Additive instance for the quotient extension of coefficients. -/
 instance pullbackTensorQuotientAdditive (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     (coefficientFiniteQuotientExtension l E W h).Additive :=
   coefficientFiniteQuotientExtensionAdditive l E W h
 
-/-- The quotient/pullback comparison preserves the two actual adjunction units.
-Source: Stacks 06YY and 03D2 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: tensor association and constant inverse image identify the two ordinary
-functors. Both iterated units send x to 1 tensor f*x. Their equality determines
-the comparison on the generators of the two left adjoints, proving uniqueness. -/
+/-- There is a unique comparison between the quotient/pullback composites of ordinary functors
+compatible with the two adjunction units. -/
 theorem pullbackTensorQuotientOrdinary_existsUnique {X Y : Scheme.{u}}
     (f : X ⟶ Y) {m n : ℕ} (h : n ≤ m) :
     ∃! e : sfIntrinsicPullback (finiteCoefficientRing l E (m + 1)) f ⋙
@@ -144,19 +149,14 @@ theorem pullbackTensorQuotientOrdinary_existsUnique {X Y : Scheme.{u}}
           (coefficientFiniteQuotientUnitSection l E Y h M (Opposite.op U) x) := by
   exact completedPullbackTensorQuotientOrdinary l E f h
 
-/-- The unit-normalized ordinary quotient/pullback comparison.
-Source: Stacks 06YY and 03D2 (blueprint: def-pur-completed-pullback-tensor-construction). -/
+/-- The unit-normalized ordinary quotient/pullback comparison. -/
 def pullbackTensorQuotientOrdinary {X Y : Scheme.{u}} (f : X ⟶ Y)
     {m n : ℕ} (h : n ≤ m) :=
   pullbackTensorUniqueChoice (pullbackTensorQuotientOrdinary_existsUnique l E f h)
 
 attribute [local irreducible] pullbackTensorQuotientOrdinary
 
-/-- Finite constant-coefficient inverse image preserves K-flat complexes.
-Source: Stacks 06YY and 07A4 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: use the constant-ring pullback/tensor comparison and exact inverse image.
-Apply the K-flat criterion, or transport the recorded ringed pullback preservation
-along the unit-normalized finite realization. No coefficient Tor-dimension is used. -/
+/-- Finite constant-coefficient inverse image preserves K-flat complexes. -/
 theorem pullbackTensorFiniteGood {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P : CochainComplex (normalizedDVRModules l E Y n) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
@@ -168,8 +168,7 @@ theorem pullbackTensorFiniteGood {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   exact completedPullbackTensorFiniteGood l E f n P hP
 
 /-- The ordinary quotient/pullback comparison on complexes, with both composition
-identifications and all additive instances supplied explicitly.
-Source: Stacks 06YY, 07A4 (blueprint: def-pur-completed-pullback-tensor-construction). -/
+identifications and all additive instances supplied explicitly. -/
 def pullbackTensorQuotientComplex {X Y : Scheme.{u}} (f : X ⟶ Y)
     {m n : ℕ} (h : n ≤ m) :
     (sfIntrinsicPullback
@@ -200,9 +199,7 @@ def pullbackTensorQuotientComplex {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 attribute [local irreducible] pullbackTensorQuotientComplex
 
-/-- The full K-flat normalization of quotient pullback, kept behind a named predicate so
-selecting its unique isomorphism does not repeatedly type-check the full square.
-Source: Stacks 07A4, 0941 (blueprint: def-pur-completed-pullback-tensor-construction). -/
+/-- The full K-flat normalization square of quotient pullback, as a named predicate. -/
 def pullbackTensorQuotientNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) {m n : ℕ} (h : n ≤ m)
     (e : finiteDerivedPullback l E m f ⋙ coefficientFiniteQuotientDerived l E X h ≅
       coefficientFiniteQuotientDerived l E Y h ⋙ finiteDerivedPullback l E n f) : Prop :=
@@ -227,12 +224,7 @@ section QuotientDescent
 attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
 attribute [local irreducible] coefficientFiniteQuotientExtension coefficientFiniteQuotientDerived
 
-/-- The quotient/pullback isomorphism is fixed by its full K-flat counit square.
-Source: Stacks 06YY and 07A4 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: the preceding ordinary comparison on K-flat representatives identifies
-the two derived functors. The universal quotient counit and exact-pullback
-factorization give precisely this square. K-flat localization determines a
-unique natural isomorphism from the displayed squares. -/
+/-- The quotient/pullback isomorphism is uniquely determined by its K-flat counit square. -/
 theorem pullbackTensorQuotient_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y)
     {m n : ℕ} (h : n ≤ m) :
     ∃! e : finiteDerivedPullback l E m f ⋙ coefficientFiniteQuotientDerived l E X h ≅
@@ -244,8 +236,7 @@ theorem pullbackTensorQuotient_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 end QuotientDescent
 
-/-- The derived quotient/pullback comparison with its fixed K-flat normalization.
-Source: Stacks 06YY and 07A4 (blueprint: def-pur-completed-pullback-tensor-construction). -/
+/-- The derived quotient/pullback comparison with its fixed K-flat normalization. -/
 def pullbackTensorQuotient {X Y : Scheme.{u}} (f : X ⟶ Y) {m n : ℕ} (h : n ≤ m) :=
   pullbackTensorUniqueChoice (pullbackTensorQuotient_existsUnique l E f h)
 
@@ -315,15 +306,8 @@ private theorem quotientTensor_square_of_resolutions
     exact h U V hU hV)
   exact NatTrans.congr_app hab (M, N)
 
-/-- The finite comparison commutes with every derived quotient B_m to B_n,
-including m = n. All four change-of-coefficient arrows are the normalized ones.
-Source: Stacks 06YY and 07A4 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: on flat-term K-flat representatives, the representative lemma computes both
-paths by the formula 1 tensor f*(x tensor y) mapping to f*(1 tensor x) tensor
-f*(1 tensor y). The ordinary unit, cochain degree, and derived counit equations
-supply its normalization hypotheses. The two paths are natural transformations.
-Every derived object is isomorphic to a localized flat-term K-flat complex;
-naturality along these resolving isomorphisms extends the square to all inputs. -/
+/-- The finite comparison commutes with every derived quotient `B_m → B_n`,
+including `m = n`, where all four change-of-coefficient arrows are the normalized ones. -/
 theorem canonicalFinitePullbackTensor_quotient {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
@@ -378,13 +362,8 @@ theorem canonicalFinitePullbackTensor_quotient {X Y : Scheme.{u}} (f : X ⟶ Y)
   dsimp only [Functor.comp_obj] at hsq ⊢
   simp only [finiteEvaluationComparison_app, quotientTensorForDescent_app] at hsq ⊢
   exact hsq
-/-- The finite comparison commutes with every derived quotient B_m to B_n,
-including m = n. All four change-of-coefficient arrows are the normalized ones.
-Source: Stacks 06YY and 07A4 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: on a flat K-flat pair the two routes carry 1 tensor f*(x tensor y)
-to f*(1 tensor x) tensor f*(1 tensor y). The quotient tensor comparison is
-normalized on these same generators. Totalize and use the quotient counits
-and K-flat localization to obtain the displayed derived equation. -/
+/-- The finite comparison commutes with every derived quotient `B_m → B_n`,
+including `m = n`, where all four change-of-coefficient arrows are the normalized ones. -/
 def canonicalFinitePullbackTensor_quotient_condition {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
@@ -410,12 +389,8 @@ section LocalizationComparison
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Rationalization fixes the comparison arrow itself, not just its isomorphism class.
-Source: blueprint scalar localization paragraph (blueprint:
-def-pur-completed-pullback-tensor-construction).
-Proof: apply the recorded localization functor to the integral comparison and its
-inverse. Its object formula agrees with the rational operations. The localized
-inverse identities make this an isomorphism; equality of homs determines it uniquely. -/
+/-- There is a unique rational comparison isomorphism given by localizing the integral
+comparison arrow. -/
 theorem canonicalRationalPullbackTensor_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
@@ -457,9 +432,7 @@ theorem canonicalRationalPullbackTensor_existsUnique {X Y : Scheme.{u}} (f : X �
     apply eq_of_heq
     exact he'.trans ((conj_eqToHom_iff_heq _ e.hom hs ht).mp rfl).symm
 
-/-- The localized canonical integral comparison.
-Source: blueprint scalar localization paragraph (blueprint:
-def-pur-completed-pullback-tensor-construction). -/
+/-- The localized canonical integral comparison. -/
 def canonicalRationalPullbackTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :
@@ -476,10 +449,7 @@ variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- The rational comparison in any common finite stage, with all four prescribed
-pullback/tensor transition comparisons included.
-Source: blueprint common-stage paragraph
-(blueprint: def-pur-completed-pullback-tensor-construction).
--/
+pullback/tensor transition comparisons included. -/
 def pullbackTensorAtCommonStage {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
@@ -515,14 +485,8 @@ variable (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L)
 
-/-- Integral scalar extension commutes with the comparison arrow, including
-ramified extensions, under the recorded canonical operation comparisons.
-Source: blueprint scalar-extension paragraph; Stacks 0941 and 07A4
-(blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: use one flat K-flat representative pair and the actual quotient models
-for O_L/varpi_L^m. Both paths send b tensor (x tensor y) to
-(b tensor x) tensor (1 tensor y). The equality respects every quotient map;
-apply the actual coherent-system limit and its normalized substitutions. -/
+/-- Integral scalar extension, including ramified extensions, commutes with the comparison
+arrow under the canonical operation comparisons. -/
 theorem canonicalIntegralPullbackTensor_scalar {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
@@ -604,12 +568,7 @@ attribute [local irreducible] canonicalIntegralPullbackTensor
 attribute [local irreducible] integralPullbackScalarComparison integralTensorScalarComparison
   constructibleIntegralPullback constructibleIntegralTensor sfConstructibleIntegralScalarExtension
 
-/-- The rational scalar-extension square is the localized integral square.
-Source: blueprint scalar-extension paragraph (blueprint:
-def-pur-completed-pullback-tensor-construction).
-Proof: localize the preceding integral equality. Each operation comparison is
-by definition the image of its integral component. Bilinearity then gives the
-same square on every rational input, including identity scalar extensions. -/
+/-- The rational scalar-extension square is the localization of the integral square. -/
 theorem canonicalRationalPullbackTensor_scalar {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
@@ -787,26 +746,15 @@ theorem canonicalRationalPullbackTensor_scalar {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 end RationalScalarProof
 
-/-- Integral scalar extension commutes with the comparison arrow, including
-ramified extensions, under the recorded canonical operation comparisons.
-Source: blueprint scalar-extension paragraph; Stacks 0941 and 07A4
-(blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: use one flat K-flat representative pair and the actual quotient models
-for O_L/varpi_L^m. Both paths send b tensor (x tensor y) to
-(b tensor x) tensor (1 tensor y). The equality respects every quotient map;
-apply the actual coherent-system limit and its normalized substitutions. -/
+/-- Integral scalar extension, including ramified extensions, commutes with the comparison
+arrow under the canonical operation comparisons. -/
 def canonicalIntegralPullbackTensor_scalar_condition {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
     (M N : sfIntegralConstructibleCategory l E Y) : Prop :=
   type_of% (canonicalIntegralPullbackTensor_scalar l E L ι f M N)
 
-/-- The rational scalar-extension square is the localized integral square.
-Source: blueprint scalar-extension paragraph (blueprint:
-def-pur-completed-pullback-tensor-construction).
-Proof: localize the preceding integral equality. Each operation comparison is
-by definition the image of its integral component. Bilinearity then gives the
-same square on every rational input, including identity scalar extensions. -/
+/-- The rational scalar-extension square is the localization of the integral square. -/
 def canonicalRationalPullbackTensor_scalar_condition {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]

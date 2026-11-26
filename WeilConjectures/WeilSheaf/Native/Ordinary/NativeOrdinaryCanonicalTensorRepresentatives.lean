@@ -22,8 +22,12 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSuppleme
 
 /-! # Retaining the canonical localization normalization of ordinary tensor models
 
-Source: Stacks 06YS, 06YT, 0FPT. The tensor model is the existing explicit
-localization tensorator, followed by the inverse signed total comparison.
+The tensor model is the existing explicit localization tensorator, followed by the inverse
+signed total comparison.
+
+## References
+
+* Stacks Project, Tags 06YS, 06YT and 0FPT.
 -/
 
 @[expose] public section
@@ -33,17 +37,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 open WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-/-- Retain the summand formula and the localization tensorator of the canonical model.
-
-Source: Stacks 06YS, 06YT, 0FPT; ordinary tensor transport, step 1.
-(blueprint: lem-sf-native-ordinary-canonical-tensor-representatives).
-
-Proof: use the already constructed ordinaryModel, ordinarySwap and ordinaryTotalIso.
-Their naturality, signed swap and braiding equations are the existing proved ones.
-Precompose ordinaryTotalIso_ι with the balanced quotient tensorπ; tensorComponent_π
-identifies the remaining underived comparison with tensorObjπ. The formula for the
-derived model is its definition, so it also holds on pairs of K-flat complexes.
-No associator identity is inferred from an arbitrarily chosen adjunction. -/
+/-- Retain the summand formula and the localization tensorator of the canonical model. -/
 theorem native_ordinary_canonical_tensor_representatives (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :
     ∃ β : SymmetricCategory (DerivedCategory (ProEtale.AdicSheaf l Y)),
     ∃ model : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,

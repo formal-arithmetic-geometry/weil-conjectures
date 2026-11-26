@@ -7,7 +7,12 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.IntegralFiniteScalarPullOrdinary
 import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
-/-! # Section normalization of scalar restriction and direct image -/
+/-! # Section normalization of scalar restriction and direct image
+
+## References
+
+* [Stacks, Tag 0D6E]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -44,12 +49,7 @@ private theorem whisker_equality_sections
   rw [H.map_id, Category.id_comp]
   exact he N V x
 
-/-- The finite scalar/direct-image comparison is identity on underlying sections.
-Source: Stacks Tag 0D6E
-(blueprint: lem-sf-finite-scalar-restriction-direct-sections).
-Proof: the ringed restriction/direct-image factor is identity on sections by its
-normalization. The finite direct-image equality contributes only an equality
-transport, which is heterogeneously identity by equality induction. -/
+/-- The finite scalar/direct-image comparison is identity on underlying sections. -/
 theorem finiteScalarRestrictionDirect_sections {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (N : normalizedDVRModules l E X n) (V : Y.ProEt)
     (x : N.val.obj (op ((proEtaleBaseChange f).obj V))) :

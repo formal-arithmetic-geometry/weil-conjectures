@@ -14,8 +14,20 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdi
 
 /-! # Integral normalization of the ordinary finite closure comparison
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-finite-ordinary-integral-tensor-transition)
+The ordinary finite closure comparison has the prescribed integral tensor map.
+
+## Implementation details
+
+The proof combines the raw scalar lift equation and the continuous integral normalization,
+whose integral scalar comparison factors cancel, and then pastes the coefficient squares,
+whose scalar-composition comparisons are mates of the same restriction square. It does not
+use condensed section scalar comparisons or their coherence. All maps are fixed on K-flat
+representatives by their counits, and equality descends by the derived universal property.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2 and
+  Proposition 6.8.14(2)
 -/
 
 @[expose] public noncomputable section
@@ -51,9 +63,7 @@ variable [IsNoetherian X]
 
 /-- The ordinary part of the constructed integral model, before section reconstruction.
 The composite consists only of raw integral transport, continuous realization and
-coefficient tensor comparisons; it contains no condensed closure transition.
-Source: BS 6.8.2 and 6.8.14(2).
-(blueprint: lem-sf-finite-ordinary-integral-tensor-transition). -/
+coefficient tensor comparisons; it contains no condensed closure transition. -/
 @[irreducible] def finiteOrdinaryIntegralTensorModel (A : FiniteCondensedData l X)
     (C : CoefficientSystem l X) (E : Index l (PadicAlgCl l)) :
     letI := C.commutative
@@ -172,28 +182,7 @@ private theorem finiteOrdinaryIntegralTensorModel_factor
   simp only [Iso.trans_assoc]
   rfl
 
-/-- The ordinary finite closure comparison has the prescribed integral tensor map.
-
-Source: BS 6.8.14(2), the raw and continuous integral scalar normalizations.
-(blueprint: lem-sf-finite-ordinary-integral-tensor-transition).
-
-Proof in words: expand closureComparison and scalarComparison, and substitute the
-raw scalar_lift equation on K. Substitute the continuous integral normalization
-on the integral identity image of K. The pbcScalarIntegralComparison factors in
-these two equations cancel. The restriction and chi equations of the raw integral
-comparison identify its remaining factor with the prescribed completed scalar
-comparison transported through the coefficient isomorphisms. The integral identity
-and the literal raw object equation give the required target-object transport.
-Finally paste the coefficient squares: their scalar-composition comparisons are
-mates of the same restriction square. Associativity of left-adjoint composition
-identifies their two composites. Naturality moves the completed comparison through
-this tensor square, leaving inverse native balancing followed by extension of
-completedTensorComparison. This argument does not use condensed section scalar
-comparisons or their coherence. All maps are fixed on K-flat representatives by
-their counits; equality descends to K by the derived universal property. Repeated
-fields use multiplication by one and the completion unit, and zero objects have
-the same equations.
--/
+/-- The ordinary finite closure comparison has the prescribed integral tensor map. -/
 theorem finiteOrdinaryIntegralTensorModel_transition
     (A : FiniteCondensedData l X) (C : CoefficientSystem l X) :
     letI := C.commutative

@@ -32,7 +32,9 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # Signed total tensor and ordinary pullback
 
-Source: Stacks 07A4 and 0FNG, item-flip-tensor-product.
+## References
+
+* Stacks Project, Tags 07A4 and 0FNG.
 -/
 
 @[expose] public noncomputable section
@@ -147,16 +149,7 @@ private theorem signedTotal_native (W : Scheme.{u})
   rw [pullbackTensorSignedTotal_eq]
   rfl
 
-/-- Ordinary termwise pullback commutes with the signed total exchange.
-Source: Stacks 07A4, final displayed total map, and 0FNG, item-flip-tensor-product.
-(blueprint: lem-pur-proetale-signed-tensor-pullback-total).
-Proof: restrict to the summand of bidegree (p,q). The ordinary pullback comparison
-sends the unit section of x tensor y to the tensor of the two unit sections.
-Both composites therefore send this generator to (-1)^(p*q) times the flipped
-tensor. The ordinary maps are linear, including for negative integer degrees.
-The adjunction, tensor sheafification, and coproduct injections detect equality,
-so the total chain maps agree. Compose with the two inverse total comparisons
-to obtain the displayed equation. No K-flatness or flat terms are required. -/
+/-- Ordinary termwise pullback commutes with the signed total exchange. -/
 theorem proEtaleSignedTensorPullbackTotal {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

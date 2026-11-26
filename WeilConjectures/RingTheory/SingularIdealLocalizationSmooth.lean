@@ -8,25 +8,22 @@ module
 public import WeilConjectures.RingTheory.SingularIdeal
 import WeilConjectures.RingTheory.SmoothOfLocalizationSpanUniverses
 import Mathlib.RingTheory.Localization.Away.Basic
+
+/-!
+# Smoothness of principal localizations at elements of the singular ideal
+
+## References
+
+* [Stacks, Tag 07EU]
+* [Stacks, Tag 00TC]
+-/
+
 @[expose] public section
 universe u v
 namespace Algebra
 
-/-- The localization smoothness argument from a radical-span relation.
-
-This is the finite-cover reduction: a power of `f` lies in the span of smooth
-principal-localization elements, so those elements generate the unit ideal after
-localizing at `f`; smoothness is then local on that cover. The final span-locality
-step is isolated in `smooth_of_localization_span_universes`.
-(blueprint: lem-weil-pbc-singular-ideal-localization-smooth-radical-span).
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07EU, and Algebra,
-Lemma 00TC. Map the span relation into `A_f`; its left side is a unit, hence the
-images of the smooth elements span the unit ideal. For each smooth element `g`,
-the iterated localizations `(A_g)_f` and `(A_f)_g` are localizations of `A` at
-`f * g`, so the canonical algebra equivalence identifies them. The first is
-smooth by composition with a principal localization. Transport smoothness to
-the second and apply the span-locality criterion. This also covers `n = 0`,
-nilpotent `f`, and the zero ring without any nontriviality assumption. -/
+/-- If a power of `f` lies in the span of the elements with smooth principal localizations,
+then the principal localization at `f` is smooth. -/
 theorem smooth_localization_span_from_radical
     (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A]
     (f : A) (n : ℕ) (hn : f ^ n ∈ Ideal.span (smoothElements R A)) :
@@ -54,9 +51,7 @@ theorem smooth_localization_span_from_radical
   exact Smooth.of_equiv
     ((IsLocalization.algEquiv (Submonoid.powers (f * g)) C D).restrictScalars R)
 
-/-- If an element belongs to the singular ideal, its principal localization is smooth.
-This follows by `Ideal.mem_radical_iff` and the radical-span reduction above.
-(blueprint: lem-weil-pbc-singular-ideal-localization-smooth). -/
+/-- If an element belongs to the singular ideal, its principal localization is smooth. -/
 theorem smooth_localization_of_mem_singularIdeal
     (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A]
     (f : A) (hf : f ∈ singularIdeal R A) : Smooth R (Localization.Away f) := by

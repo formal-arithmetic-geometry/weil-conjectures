@@ -15,7 +15,21 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-! # Locality of the actual algebra adjoining p-th roots
 
-Source: Stacks Project, More on Algebra, Tag 07E5, construction of A'.
+Adjoining finitely many `p`-th roots to a local ring of characteristic `p` gives a local ring,
+and the coefficient map is local.
+
+## Implementation details
+
+Choosing `p`-th roots of the images of the `a_i` in an algebraic closure of the residue field
+gives a ring map from the quotient to a field, so the quotient is nontrivial and the coefficient
+map is local. Every `b` in the quotient satisfies `b^p = c` for a coefficient `c`; since `c` or
+`1 - c` is a unit in `A`, `b` or `1 - b` is a unit. This works unchanged for `n = 0`, nilpotent
+coefficients and nonreduced `A`.
+
+## References
+
+* [Stacks, Tag 07E5] (construction of `A'`)
+* [Stacks, Tag 0BR8]
 -/
 
 @[expose] public section
@@ -24,33 +38,13 @@ universe u
 
 namespace Algebra
 
-/-- The actual polynomial quotient adjoining the specified p-th roots. 
-(blueprint: lem-weil-pbc-pth-root-algebra-local)
--/
+/-- The actual polynomial quotient adjoining the specified p-th roots. -/
 abbrev pthRootAlgebra (p n : ℕ) (A : Type u) [CommRing A] (a : Fin n → A) :=
   MvPolynomial (Fin n) A ⧸ Ideal.span (Set.range (fun i : Fin n ↦
     (MvPolynomial.X i : MvPolynomial (Fin n) A) ^ p - MvPolynomial.C (a i)))
 
 /-- Adjoining finitely many p-th roots to a local ring in characteristic p gives
-another local ring, and the coefficient map is local.
-
-Source: Stacks Project, More on Algebra, Tag 07E5, construction of A' in the proof;
-Algebra, Tag 0BR8 (powers in the coefficient image).
-(blueprint: lem-weil-pbc-pth-root-algebra-local).
-
-Proof: Map A to the algebraic closure of its residue field, and choose p-th roots
-there of the images of the a_i. Evaluation at these roots kills the defining ideal
-and induces a ring map g from the actual quotient to this field. This proves that
-the quotient is nontrivial. Its composite with the coefficient map is the residue
-map followed by the field embedding, so a coefficient whose image in the quotient
-is a unit has nonzero residue and is itself a unit.
-
-The quotient has characteristic p. Polynomial induction, using the defining
-relations and the Frobenius identity for sums, shows that every b in the quotient
-satisfies b^p = c for a coefficient c. In A, either c or 1-c is a unit. Mapping this
-unit to the quotient shows that either b^p or (1-b)^p is a unit, hence either b or
-1-b is a unit. This is the local-ring criterion. The proof works unchanged for
-n = 0, for nilpotent coefficients, and for nonreduced A. -/
+another local ring, and the coefficient map is local. -/
 theorem pthRootAlgebra_local (p n : ℕ) [Fact p.Prime]
     (A : Type u) [CommRing A] [Algebra (ZMod p) A] [IsLocalRing A]
     (a : Fin n → A) :

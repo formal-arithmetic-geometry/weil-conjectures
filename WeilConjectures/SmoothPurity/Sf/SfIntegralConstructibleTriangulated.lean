@@ -21,14 +21,24 @@ import Mathlib.CategoryTheory.Shift.ShiftSequence
 /-!
 # Triangulation of the intrinsic integral constructible category
 
-Source: Bhatt--Scholze, Section 6.5, after Definition 6.5.1, for the uniform-reduction
-variant in blueprint order 1459; Stacks Project, Tag 0999
-(blueprint: lem-weil-integral-constructible-triangulated).
-
 The predicate is the recorded `sfIntegralConstructible`, over the completed coefficient
 sheaf on the small pro-etale site. The two instances below make Mathlib's inherited
 shift, pretriangulation, triangulation and exact full-subcategory inclusion available
 on `sfIntegralConstructibleCategory`.
+
+## Implementation details
+
+Completeness is identified, through the completed-coefficient presentation equivalence, with
+a predicate `P` satisfying `P = P.leftOrthogonal.rightOrthogonal`, which is triangulated by
+Mathlib's orthogonal instances. Each reduction functor is triangulated, so finite-level
+constructibility of the middle vertex follows from the finite-coefficient case; the common
+interval for a triangle with outer intervals `[r', s']`, `[r'', s'']` is
+`[min r' r'', max s' s'']`.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Section 6.5, after Definition 6.5.1.
+* Stacks Project, Tag 0999.
 -/
 
 @[expose] public section
@@ -374,17 +384,7 @@ private theorem triangulated_of_complete (l : ℕ) [Fact l.Prime]
     ((IsSfDerivedComplete l E Y) ⊓ reductionProperty l E Y)
   infer_instance
 
-/-- The intrinsic integral constructible predicate is closed under isomorphisms.
-Source: Bhatt--Scholze, Section 6.5, after Definition 6.5.1; blueprint order 1459
-(blueprint: lem-weil-integral-constructible-triangulated).
-
-Proof: an isomorphism induces isomorphisms of all reductions and intertwines their
-canonical units and transitions. Transport a product witness and its distinguished
-Roos triangle to obtain derived completeness of the isomorphic object. At every
-positive level, cohomology sheaves are isomorphic, preserving finite-torsion
-constructibility and the same uniform cohomological interval. These are precisely
-the defining clauses of `sfIntegralConstructible` (proof steps 2 and 5 of the node).
--/
+/-- The intrinsic integral constructible predicate is closed under isomorphisms. -/
 @[instance]
 theorem sfIntegralConstructible_isClosedUnderIsomorphisms
     (l : ℕ) [Fact l.Prime]
@@ -415,57 +415,7 @@ theorem sfIntegralConstructible_isClosedUnderIsomorphisms
 finite cohomological interval form a triangulated object property. Together with
 isomorphism closure above, this states zero, integer-shift and extension closure
 for the actual predicate. Mathlib's full-subcategory construction supplies the
-inherited distinguished triangles and makes the inclusion exact.
-Source: Bhatt--Scholze, Section 6.5, after Definition 6.5.1, for the variant of
-blueprint order 1459; Stacks Project, Tag 0999
-(blueprint: lem-weil-integral-constructible-triangulated).
-
-Proof:
-1. The recorded completed-coefficient presentation equivalence identifies intrinsic
-completeness with the actual canonical augmented-Roos predicate. It has no geometric
-finiteness hypothesis. Isomorphism closure transports the product, unit components,
-transition endomorphism and connecting map directly.
-2. The intrinsic complete subcategory has its recorded completion reflection and the
-shift comparison commuting with its unit. A generic argument identifies this predicate P
-with P.leftOrthogonal.rightOrthogonal: complete objects belong to that orthogonal;
-the cone of each reflection unit belongs to P.leftOrthogonal by the reflection Hom
-bijections, the shifted bijection and exactness of Hom on a triangle. If the source lies
-in the double orthogonal then so does this cone. Its identity vanishes, so the cone is
-zero and the unit is invertible. Mathlib's orthogonal instances give triangulation.
-3. Exact restriction along the completed coefficient isomorphism is triangulated.
-The counit of the presentation equivalence and the recorded completeness comparison
-identify IsSfDerivedComplete with the inverse image of the intrinsic predicate.
-Mathlib's inverse-image instance transfers the triangulation from step 2.
-4. At each positive exponent the reduction functor
-(`def-weil-integral-derived-reduction`, `scalarReductionDerivedExtension`)
-is exact triangulated by
-`lem-pur-derived-change-of-rings` applied to the identity site and B to B_n.
-It preserves zero, isomorphisms, shifts and distinguished triangles. Flatness of
-B_n over B is not required for a derived functor.
-5. The zero object's reductions have empty support, in [0,0]. Isomorphisms
-preserve cohomology and constructibility. For a shift by m,
-`lem-sp-derived-cohomology-shift` translates a uniform interval [r,s] to
-[r-m,s-m]. `lem-weil-proetale-dbc-triangulated` supplies finite-level zero,
-isomorphism and shift closure. Its constructibility agrees with
-`definition-constructible-sheaves` and
-`def-weil-proetale-constructible-sheaf`: finite locally closed constructible
-partitions, locally constant restrictions with finite stalks, and bounded
-cohomology. Combine this with step 3 and
-`def-weil-derived-complete-integral-detailed` for the integral closure assertions.
-6. Reduce a distinguished triangle with integral constructible outside vertices.
-Each coefficient quotient is finite. Thus
-`lem-weil-proetale-dbc-triangulated` gives bounded constructibility of the middle
-reduction at every level, and step 3 gives completeness of the middle object.
-7. If the outside uniform intervals are [r',s'] and [r'',s''], use
-[min(r',r''),max(s',s'')]. Outside this interval the exact cohomology segment has
-zero outside terms, hence zero middle term, by
-`lem-sf-derived-homology-long-exact`. This proves the common support bound of
-`def-weil-cohomological-support`, independently of the reduction level. No common
-stratification or rank bound across levels is required.
-8. The category is full by definition. The preceding closure properties make its
-object property triangulated and isomorphism-closed. Cone closure follows by
-rotation and shifts. `def-weil-triangulated-subcategory` supplies the inherited
-triangulated structure and exact inclusion. -/
+inherited distinguished triangles and makes the inclusion exact. -/
 @[instance]
 theorem sfIntegralConstructible_isTriangulated
     (l : ℕ) [Fact l.Prime]

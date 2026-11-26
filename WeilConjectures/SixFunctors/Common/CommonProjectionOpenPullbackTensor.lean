@@ -11,7 +11,18 @@ import WeilConjectures.SixFunctors.Common.CommonProjectionOpenPullbackTensorComp
 
 /-! # Inclusion preserves the open tensor/pullback comparison
 
-Source: thm-sf-pf-field.proof.md, Compatibility.
+We show that finite-stage inclusion preserves the inverse tensor/pullback comparison for an
+open immersion.
+
+## Implementation details
+
+The open tensor/pullback comparisons are identified with the canonical ones by
+`rationalOpenTensorPullbackNormalization` and `commonStageOpenTensorPullbackNormalization`.
+The representative equation of `canonicalCommonStagePullbackTensor_existsUnique` is evaluated
+at the field `E` on the included pair; the tensor comparisons there are
+`commonInclusionTensorComparison` and the pullback comparisons are identities by
+`commonStageModelNormalization`. All calculations take place at `E`, so no enlargement or
+arbitrary representative is selected.
 -/
 
 @[expose] public noncomputable section
@@ -75,9 +86,7 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem
 
 /-- The inverse pullback/tensor square for an open factor, on arbitrary inputs.
-It involves only the supplied pullback comparisons and the natural tensorator.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-common-projection-open-pullback-tensor). -/
+It involves only the supplied pullback comparisons and the natural tensorator. -/
 @[irreducible] def OpenPullbackTensorSquare
     {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
@@ -102,29 +111,7 @@ Source: thm-sf-pf-field.proof.md, Compatibility
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite-stage inclusion preserves the inverse tensor/pullback comparison for
 an open immersion. This is a square of tensor and pullback maps only: it uses
-neither an open adjunction nor proper image or support identifications.
-
-Source: thm-sf-pf-field.proof.md, Compatibility, the coefficient comparison for
-pullback and tensor; canonicalCommonStagePullbackTensor_existsUnique, the formula
-at every larger common finite field.
-(blueprint: lem-sf-common-projection-open-pullback-tensor).
-
-Proof: supply invertibility of the coefficient prime on Q.X and Q.Z using the
-base-field structure maps. Transport the rational and common tensor functors and
-pullbacks by their normalization equalities. The open tensor/pullback comparisons
-are the canonical ones by rationalOpenTensorPullbackNormalization and
-commonStageOpenTensorPullbackNormalization. Evaluate the representative equation
-of canonicalCommonStagePullbackTensor_existsUnique at the field E on the included
-pair M,L. The tensor comparisons at this stage, followed by the reflexive scalar
-unit, are exactly commonInclusionTensorComparison; the pullback comparisons are
-the prescribed model comparisons, whose components are identities by
-commonStageModelNormalization. Substitute these descriptions in the representative
-formula. The source and target transition isomorphisms cancel with their inverses,
-leaving the forward tensor/pullback square. Conjugate that square by the two
-canonical tensor/pullback isomorphisms to obtain the displayed inverse square.
-All calculations take place at E, so no enlargement or arbitrary representative
-is selected. The same identity-unit and isomorphism cancellation argument applies
-to the empty scheme, zero inputs and identity pullbacks. -/
+neither an open adjunction nor proper image or support identifications. -/
 theorem commonProjectionOpenPullbackTensor
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)

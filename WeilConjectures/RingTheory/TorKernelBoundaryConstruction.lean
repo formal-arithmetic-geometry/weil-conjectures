@@ -14,7 +14,21 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 /-!
 # Constructing the kernel boundary from a projective resolution
 
-Source: Stacks Project, Algebra, Tags 00LZ and 00M0.
+For a surjection `q : F → N` of `R`-modules, we construct the connecting map
+`Tor₁(N, M) → ker q ⊗ M` explicitly from the chosen projective resolution of `N`: the
+augmentation is lifted through `q`, the lifted differential lands in `ker q`, and its tensor
+with `M` descends to first homology.
+
+## Implementation details
+
+All data are constructed explicitly; no existential exactness theorem is used to choose the
+boundary. The lift of the augmentation is not unique, but the induced map on homology does not
+depend on it.
+
+## References
+
+* [Stacks, Tag 00LZ]
+* [Stacks, Tag 00M0]
 -/
 
 @[expose] public section
@@ -93,9 +107,7 @@ noncomputable def torKernelHomologyBoundary {R : Type u} [CommRing R]
       exact torKernelTensor_boundary M q hq))
 
 /-- Canonical connecting map, using the resolution identification of Tor and the
-cycle formula for the lifted augmentation. All data above are constructed; no
-existential exactness theorem is used to choose a boundary.
-(blueprint: def-sc-p1-tor-kernel-boundary-construction) -/
+cycle formula for the lifted augmentation. -/
 noncomputable def torKernelBoundary {R : Type u} [CommRing R]
     (M : ModuleCat.{u} R) (F N : ModuleCat.{u} R)
     (q : F →ₗ[R] N) (hq : Function.Surjective q) :

@@ -21,8 +21,17 @@ import Mathlib.LinearAlgebra.TensorProduct.Basis
 /-!
 # Differential decomposition of a simple transcendental field extension
 
-Source: Stacks Project, Tags 00RS, 00RX, 00RT, 00S2, and 07FI.
-(blueprint: lem-weil-pbc-simple-transcendental-differential-decomposition).
+For a simple purely transcendental extension `F` of `F₀` over a field `k`, the module `Ω[F/k]`
+splits as `F ⊗[F₀] Ω[F₀/k]` plus a free part spanned by the differential of the transcendental
+generator.
+
+## References
+
+* [Stacks, Tag 00RS]
+* [Stacks, Tag 00RX]
+* [Stacks, Tag 00RT]
+* [Stacks, Tag 00S2]
+* [Stacks, Tag 07FI]
 -/
 
 @[expose] public section
@@ -35,26 +44,7 @@ open scoped TensorProduct
 namespace KaehlerDifferential
 
 /-- The differentials of a simple rational extension split into base differentials
-and the differential of the transcendental generator. Source: Stacks Project,
-Tags 00RS, 00RX, 00RT, and 00S2; Tag 07FI, transcendental case.
-(blueprint: lem-weil-pbc-simple-transcendental-differential-decomposition).
-
-Proof: As m = 1, transcendence makes y algebraically independent. Evaluation
-identifies P = F₀[X_j] with A = F₀[y_j]. The adjoin condition expresses every
-f ∈ F as a quotient of two elements of A. Thus F is a fraction field of A and,
-through evaluation, of P. The map P → F is formally étale. Scalar-extend the
-polynomial basis of Ω[P/F₀] and transport it through the canonical étale
-differential equivalence to obtain a relative basis b_j = D F₀ F (y_j).
-The purely transcendental field extension F/F₀ is formally smooth by Mathlib.
-Jacobi–Zariski and vanishing of H₁(L_{F/F₀}) make the canonical map
-u : F ⊗[F₀] Ω[F₀/k] → Ω[F/k] injective. The first fundamental sequence identifies
-its image with the kernel of v : Ω[F/k] → Ω[F/F₀]. Define the section
-s(c) = sum_j c_j D k F (y_j). Its image under v is the relative basis expansion,
-so v(s(c)) = b.equivFun.symm(c). Hence (x,c) ↦ u(x) + s(c) is injective: apply v
-to determine c, then use injectivity of u to determine x. It is surjective:
-for ω, take c = b.equivFun(v(ω)); then ω − s(c) lies in ker v = range u.
-This gives the required canonical equivalence and formula. The argument works
-in every characteristic and without a finite basis of the base differentials. -/
+and the differential of the transcendental generator. -/
 theorem exists_simple_transcendental_differential_decomposition
     (k : Type u) (F₀ : Type v) (F : Type w) [Field k] [Field F₀] [Field F]
     [Algebra k F₀] [Algebra k F] [Algebra F₀ F] [IsScalarTower k F₀ F]

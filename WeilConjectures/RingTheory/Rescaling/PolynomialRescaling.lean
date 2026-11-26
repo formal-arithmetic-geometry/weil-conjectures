@@ -15,6 +15,10 @@ import Mathlib.Algebra.Polynomial.Inductions
 
 The parameter is the outer univariate polynomial variable. This keeps division by
 that variable an explicit polynomial operation.
+
+## References
+
+* [Furter--Poloni, Lemma 3.1]
 -/
 
 @[expose] public noncomputable section
@@ -338,13 +342,9 @@ private lemma jac_inverse [Fintype σ] [DecidableEq σ]
       ite_false] using h1
 
 /-- Translation followed by rescaling joins any polynomial automorphism to an
-invertible linear map. Source: Furter--Poloni, Lemma 3.1, proof, pp. 5--6.
-Proof: subtract the constant tuple, substitute t*x and divide by t. The inverse
-is obtained by the same operation on the centered inverse; multiplication by t
-reduces both inverse identities to those of the original automorphism. Add t*b
-to restore the endpoint at one. The coefficient of t of a scaled polynomial is
-its linear part. Applying the inverse identities at zero makes its matrix a unit.
-(blueprint: lem-pur-polynomial-rescaling-family). -/
+invertible linear map: there is a ring automorphism of the polynomial ring in an extra
+parameter `t` that is the identity on `t` and on constants, specializes to `e` at `t = 1`,
+and specializes to an invertible linear substitution at `t = 0`. -/
 theorem exists_deformation [Fintype σ] [DecidableEq σ]
     (e : MvPolynomial σ R ≃ₐ[R] MvPolynomial σ R) :
     ∃ (g : Matrix.GeneralLinearGroup σ R)

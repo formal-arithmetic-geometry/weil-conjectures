@@ -9,14 +9,16 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorConstrai
 import WeilConjectures.SmoothPurity.Pullback.PullbackTensorIntegralUnitExistence
 import WeilConjectures.SmoothPurity.Pullback.PullbackTensorIntegralUnitUniqueness
 
-/-! Integral unit coherence for the completed pullback tensor comparison.
+/-!
+# Integral unit coherence for the completed pullback tensor comparison
 
-Source: Stacks Project, Tags 07A4 and 0941; the integral part of
-`lem-pur-pullback-tensor-unit-coherence`.
-(blueprint: lem-pur-pullback-tensor-integral-unit-coherence)
+The integral part of the unit coherence of the pullback tensor comparison. The existence and
+uniqueness halves are supplied by the normalized reduction construction and the cancellation
+lemma, respectively.
 
-The existence and uniqueness halves are supplied by the normalized reduction
-construction and the cancellation lemma, respectively.
+## References
+
+* [Stacks Project, Tags 07A4 and 0941]
 -/
 
 @[expose] public noncomputable section

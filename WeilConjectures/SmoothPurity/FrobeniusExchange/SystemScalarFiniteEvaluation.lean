@@ -13,7 +13,13 @@ import all WeilConjectures.TraceFormula.Integral.IntegralComparisonSequenceSyste
 
 /-! # Normalized finite evaluation of whole-system scalar extension
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 06YY, 07A6 and 0941.
+Finite evaluation of whole-system scalar extension is identified with ordinary derived scalar
+extension along the finite quotient ring maps.
+
+## References
+
+* W. Zheng, Construction 4.1 and Lemma 4.10
+* Stacks Project, Tags 06YY, 07A6 and 0941
 -/
 
 @[expose] public noncomputable section
@@ -31,9 +37,7 @@ variable (l : ℕ) [Fact l.Prime]
   [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L) (W : Scheme.{u})
 
-/-- Consecutive quotient maps commute with coefficient embeddings.
-Source: the quotient-map square in Stacks 0941
-(blueprint: lem-sf-system-scalar-finite-evaluation). -/
+/-- Consecutive quotient maps commute with coefficient embeddings. -/
 theorem scalarQuotient_compatible (n : ℕ) :
     integralScalarQuotientSheafMap l E L ι W (n + 1) ≫
         coefficientSequenceCommRingTransition l L W n =
@@ -51,8 +55,7 @@ theorem scalarQuotient_compatible (n : ℕ) :
   ext x
   exact congrArg (fun q ↦ q x.down) (integralScalarQuotientMap_transition l E L ι n)
 
-/-- The generic scalar-system map is the project's sectionwise quotient map.
-Source: Zheng Construction 4.1 (blueprint: lem-sf-system-scalar-finite-evaluation). -/
+/-- The generic scalar-system map is the project's sectionwise quotient map. -/
 theorem scalarSystemMap_eq :
     systemMap (ProEt.topology W)
         (integralCoefficientCommRingSheaf l E W) (coefficientSequenceCommRingTransition l E W)
@@ -70,8 +73,7 @@ theorem scalarSystemMap_eq :
 
 /-- The fixed universal cochain model admits the tensor-normalized adjunctions.
 The model equality and SystemScalarModel's unit and transpose fields fix every
-piece of data used below. Source: Stacks 06YY and 07A6
-(blueprint: lem-sf-system-scalar-finite-evaluation). -/
+piece of data used below. -/
 theorem finiteEvaluationSystemScalarModel_exists :
     ∃ A : SheafOfModules.SystemScalarModel.{u + 1, u, u + 1}
       (integralComparisonSequenceScalarMap l E L ι W),
@@ -82,8 +84,7 @@ theorem finiteEvaluationSystemScalarModel_exists :
 
 /-- The normalized scalar adjunction for the fixed universal cochain model.
 Its ordinary unit and derived transpose are fixed by the tensor generator and counit,
-respectively. Source: Stacks 06YY and 07A6
-(blueprint: lem-sf-system-scalar-finite-evaluation). -/
+respectively. -/
 def finiteEvaluationSystemScalarAdjunction :
     integralComparisonDerivedSequenceScalar l E L ι W ⊣
       (res (integralComparisonSequenceScalarMap l E L ι W)).mapDerivedCategory := by
@@ -97,9 +98,7 @@ def finiteEvaluationSystemScalarAdjunction :
 /-- Finite evaluation of the fixed scalar model. The two adjoint-uniqueness maps
 transport the normalized generic evaluation to the fixed system and finite models.
 All choices are universal scalar pairs with their normalized transposes, so the
-comparison is fixed by the identity-on-sections restriction square.
-Source: Zheng 4.1 and 4.10; Stacks 06YY and 07A6
-(blueprint: lem-sf-system-scalar-finite-evaluation). -/
+comparison is fixed by the identity-on-sections restriction square. -/
 def systemScalarFiniteEvaluation (n : ℕ) :
     integralComparisonDerivedSequenceScalar l E L ι W ⋙
         coefficientSequenceDerivedEvaluation l L W n ≅

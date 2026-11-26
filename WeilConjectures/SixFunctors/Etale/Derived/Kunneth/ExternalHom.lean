@@ -17,16 +17,15 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braide
 
 Over a field `k`, for a finite coefficient ring `Λ` whose exponent is invertible in `k`, separated
 finite-type `k`-schemes `Z₁`, `Z₂` and `Eᵢ ∈ Dctf(Zᵢ, Λ)`, the external Hom map
-(`AlgebraicGeometry.Etale.externalHomMap`, `lemma-external-duality-trace-morphism` (iii))
+(`AlgebraicGeometry.Etale.externalHomMap`)
 
 `β : RHom(E₁, L₁) ⊠ RHom(E₂, L₂) ⟶ RHom(E₁ ⊠ E₂, L₁ ⊠ L₂)`
 
-is an isomorphism (`AlgebraicGeometry.Etale.isIso_externalHomMap`,
-`lemma-external-duality-trace-morphism--1`).
+is an isomorphism (`AlgebraicGeometry.Etale.isIso_externalHomMap`).
 
-## Strategy
+## Implementation details
 
-Instead of the dévissage of the blueprint along distinguished triangles in the `Eᵢ`, which would
+Instead of a dévissage along distinguished triangles in the `Eᵢ`, which would
 need `β` to be a morphism of triangulated functors in the contravariant variables, we argue by
 Noetherian induction on the support, through the exceptional inverse images along the strata:
 
@@ -193,8 +192,7 @@ lemma range_eq_compl_range_of_isPullback {Y Q Z U ZQ UQ : Scheme.{u}} {i : Z ⟶
 
 /-- **Joint conservativity of `Rj^!` and `Ri^!`.** For a closed immersion `i` and the
 complementary open immersion `j`, a morphism `f` of `D(X_ét, Λ)` is an isomorphism as soon as
-`Rj^! f` and `Ri^! f` are: by the supported localization triangle
-`Ri_! Ri^! ⟶ 𝟭 ⟶ Rj_* Lj^* ⟶`, and `Rj^! ≅ Lj^*`. -/
+`Rj^! f` and `Ri^! f` are. -/
 theorem isIso_of_isIso_rightDerivedUpperShriek_map_of_range_eq_compl {Z X U : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X)
     [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j] [HasCompactification j]
@@ -223,10 +221,7 @@ lemma isIso_of_isEmpty {X : Scheme.{u}} [IsEmpty X]
 
 /-- **Dévissage of `β` in the first variable.** Fix `E₂, L₂` on `Z₂`. If `β(E₁, L₁, E₂, L₂)` is an
 isomorphism whenever `E₁` has a left dual (on any scheme of finite type over `k`), then it is an
-isomorphism for every `E₁ ∈ Dctf(Z₁, Λ)`: by Noetherian induction on the support, `E₁` has a left
-dual on a dense open `V` (`AlgebraicGeometry.Etale.exists_dense_open_exactPairing`), and `Rg^! β`
-for `g` the base change of the inclusion of `V` or of its closed complement is `β` for the
-restricted data (`AlgebraicGeometry.Etale.isIso_map_externalIhomMap_iff_of_isPullback`). -/
+isomorphism for every `E₁ ∈ Dctf(Z₁, Λ)`. -/
 theorem isIso_externalIhomMap_of_forall_exactPairing {Z₂ : Scheme.{u}} (c₂ : Z₂ ⟶ Spec (.of k))
     [LocallyOfFiniteType c₂] [QuasiCompact c₂]
     (E₂ L₂ : _root_.DerivedCategory (Sheaf Z₂.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -308,21 +303,13 @@ end Devissage
 
 variable {k}
 
-/-- Blueprint `lemma-external-duality-trace-morphism--1`: External Hom; the `β` map.
-
-Over a field `k`, for a finite coefficient ring `Λ` of invertible exponent, separated
-finite-type `k`-schemes `Z₁`, `Z₂` and `Eᵢ, Nᵢ ∈ Dctf(Zᵢ, Λ)`, the external Hom map of
-`lemma-external-duality-trace-morphism` (iii) (`AlgebraicGeometry.Etale.externalHomMap`)
+/-- Over a field `k`, for a finite coefficient ring `Λ` of invertible exponent, separated
+finite-type `k`-schemes `Z₁`, `Z₂` and `Eᵢ, Nᵢ ∈ Dctf(Zᵢ, Λ)`, the external Hom map
+(`AlgebraicGeometry.Etale.externalHomMap`)
 
 `β : RHom(E₁, N₁) ⊠ RHom(E₂, N₂) ⟶ RHom(E₁ ⊠ E₂, N₁ ⊠ N₂)`
 
-is an isomorphism. (Only `Eᵢ ∈ Dctf` is used.)
-
-The proof is a dévissage in each variable by Noetherian induction on the support
-(`AlgebraicGeometry.Etale.isIso_externalIhomMap_of_forall_exactPairing`), the second variable
-being reduced to the first by exchanging the factors
-(`CategoryTheory.MonoidalClosed.isIso_externalIhomMap_swap_iff`), down to the case where both `Eᵢ`
-have duals (`CategoryTheory.MonoidalClosed.isIso_externalIhomMap_of_exactPairing`). -/
+is an isomorphism. (Only `Eᵢ ∈ Dctf` is used.) -/
 theorem isIso_externalHomMap [HasInvertibleExponent Λ (Spec (.of k))] {Z₁ Z₂ : Scheme.{u}}
     (c₁ : Z₁ ⟶ Spec (.of k)) (c₂ : Z₂ ⟶ Spec (.of k))
     [IsSeparated c₁] [LocallyOfFiniteType c₁] [QuasiCompact c₁]

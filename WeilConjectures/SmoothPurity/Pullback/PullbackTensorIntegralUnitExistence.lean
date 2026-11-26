@@ -9,16 +9,21 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorConstrai
 import all WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorConstraints
 import all WeilConjectures.SmoothPurity.Pullback.PullbackTensorReductionCalculus
 
-/-! Existence of the integral unit comparison.
+/-!
+# Existence of the integral unit comparison
 
-Source: Stacks Project, Tag 07A4, label lemma-pullback-tensor-product; the
-integral coefficient-level unit coherence construction.
-(blueprint: lem-pur-pullback-tensor-integral-unit-coherence-existence)
+Existence of the integral coefficient-level unit coherence for the pullback tensor comparison.
+
+## Implementation details
 
 The normalized coherent system unit comparison is lifted through the fully
 faithful integral reduction.  Its two system-level unitor equations transport
 along the reduction, tensor, pullback, and unit counits to the displayed
 integral equations.
+
+## References
+
+* [Stacks Project, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -87,10 +92,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Existence half of integral pullback tensor unit coherence.
-Source: Stacks Project, Tag 07A4; normalized coefficient-level unit comparison.
-(blueprint: lem-pur-pullback-tensor-integral-unit-coherence-existence)
--/
+/-- Existence half of integral pullback tensor unit coherence. -/
 theorem canonicalIntegralPullbackTensor_unit_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :

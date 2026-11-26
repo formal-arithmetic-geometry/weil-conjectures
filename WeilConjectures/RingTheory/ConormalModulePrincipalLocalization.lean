@@ -16,8 +16,21 @@ import Mathlib.RingTheory.Localization.BaseChange
 /-!
 # Conormal modules under principal localization
 
-Source: Stacks Project, Algebra, Lemma 00S6 (lemma-conormal-module-localize)
-(blueprint: lem-weil-pbc-conormal-module-principal-localization).
+Given presentations `R[x₁, …, xₙ] → S` with kernel `I` and `R[y₁, …, yₘ] → S_g` with kernel
+`J`, there is an isomorphism `(I/I²)_g ⊕ S_gᵐ ≅ J/J² ⊕ S_gⁿ`.
+
+## Implementation details
+
+Adjoining a variable mapped to `1/g` to the first presentation gives a presentation of `S_g`
+whose naive cotangent complex is that of the first one, localized, plus the contractible
+complex `S_g → S_g` given by multiplication by `g`. Mathlib's `Generators.defaultHom`,
+`Hom.sub`, `Cotangent.map_sub_map` and `CotangentSpace.map_sub_map` give a homotopy
+equivalence with the naive cotangent complex of the second presentation, and a homotopy
+equivalence of two-term complexes yields `K₁ ⊕ L₀ ≅ L₁ ⊕ K₀`.
+
+## References
+
+* [Stacks, Tag 00S6]
 -/
 
 @[expose] public section
@@ -26,29 +39,9 @@ universe u v
 
 namespace Algebra.Extension
 
-/-- Stacks Project, Algebra, Lemma 00S6 (lemma-conormal-module-localize).
-(blueprint: lem-weil-pbc-conormal-module-principal-localization)
-The kernels of the two polynomial presentations give the conormal modules `I/I²` and `J/J²`.
-Their scalar actions are the quotient actions supplied by `Extension.Cotangent.module`.
-
-Proof, following the node's six steps:
-1. Form `K = NL(α) ⊗[S] S_g` and `NL(β)`. The polynomial differential basis theorem
-   (lem-weil-pbc-polynomial-ring-kahler-basis-any-variables) identifies their degree-zero
-   terms with free modules of ranks `n` and `m`. The localization-tensor comparison
-   (lem-weil-pbc-localization-module-tensor) identifies `K₁` with `(I/I²)_g`.
-2. Choose a lift of `g` along `α`. Adjoin a variable mapped to `1/g` to obtain `β'`.
-   By lem-weil-pbc-principal-localization-naive-cotangent, its naive cotangent complex
-   is isomorphic to `K` plus the complex `S_g → S_g` given by multiplication by `g`.
-3. This extra summand is contractible: multiplication by `g⁻¹` is its contracting
-   homotopy. Inclusion and projection give a homotopy equivalence between `K` and `NL(β')`.
-4. Mathlib's `Generators.defaultHom` supplies comparison maps between `β'` and `β`.
-   Its `Hom.sub`, `Cotangent.map_sub_map` and `CotangentSpace.map_sub_map`, applied
-   to identity and composite comparison maps, give the four homotopy identities.
-5. Compose the chain maps. If `u,v` are the inclusion/projection maps, `φ,ψ` the
-   presentation comparison maps, and `h,h',H` the homotopies, use `v₁ h u₀` on `K`
-   and `h' + φ₁ H ψ₀` on `NL(β)` to verify both composite homotopy identities.
-6. Apply lem-weil-pbc-two-term-homotopy-equivalence-direct-sum to obtain
-   `K₁ ⊕ NL(β)₀ ≅ NL(β)₁ ⊕ K₀`, and substitute the identifications of step 1.
+/-- For surjections `α : R[x₁, …, xₙ] → S` with kernel `I` and
+`β : R[y₁, …, yₘ] → S_g` with kernel `J`, there is an `S_g`-linear isomorphism
+`(I/I²)_g ⊕ S_gᵐ ≅ J/J² ⊕ S_gⁿ`.
 -/
 theorem conormalModule_principalLocalization
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]

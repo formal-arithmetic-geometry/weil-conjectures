@@ -32,6 +32,10 @@ reduction and the rationalization
   (`ProEtale.CondensedRing.boundedConstructible_extendScalars_padicAlgCl_obj`),
   invertible by `NearbyCyclesModel.isIso_kunnethMap_padicAlgCl_of_isProper`.
 
+## References
+
+* L. Illusie, *Autour du théorème de monodromie locale*, proof of Thm. 4.7
+
 -/
 
 @[expose] public section
@@ -55,20 +59,12 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   {gM : M.generic ⟶ Spec (.of (traitGenericField k'))} {qN : N.total ⟶ trait k'}
   {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
-/-- **Gabber's Künneth formula for proper models with `𝒪_E`-coefficients** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`; Illusie, *Autour du théorème de monodromie
-locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`,
-`N` of finite type along proper structure morphisms, whose total spaces locally embed into `𝔸ᵐ_S`,
-`𝔸^{m'}_S`, if the generic-slicing step holds in chart dimension `m + m' - 1` with
-`𝒪_E`-coefficients for every `E` and with `ℚ̄_ℓ`-coefficients, the Künneth map `Π_{A,B}` of bounded
-constructible `𝒪_E`-complexes `A`, `B` on noetherian `X`, `Y` is an isomorphism.
-
-This is the cone argument: the cone of `Π_{A,B}` has vanishing reduction and rationalization
-(`ProEtale.CondensedRing.isIso_of_isIso_extendScalars_residueField_padicAlgCl`), since the
-reduction `𝔽_E ⊗ᴸ Π_{A,B}` and the rationalization `ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} Π_{A,B}` are the
-Künneth maps of the reductions and of the rationalizations of `A`, `B`, invertible by
-`NearbyCyclesModel.isIso_kunnethMap_residueField_of_isProper` and
-`NearbyCyclesModel.isIso_kunnethMap_padicAlgCl_of_isProper`. -/
+/-- **Gabber's Künneth formula for proper models with `𝒪_E`-coefficients**: for the product `P`
+over the strictly henselian trait of models `M`, `N` of finite type along proper structure
+morphisms, whose total spaces locally embed into `𝔸ᵐ_S`, `𝔸^{m'}_S`, if the generic-slicing step
+holds in chart dimension `m + m' - 1` with `𝒪_E`-coefficients for every `E` and with
+`ℚ̄_ℓ`-coefficients, the Künneth map `Π_{A,B}` of bounded constructible `𝒪_E`-complexes `A`, `B` on
+noetherian `X`, `Y` is an isomorphism. -/
 theorem isIso_kunnethMap_padicIntegers_of_isProper [IsNoetherian X] [IsNoetherian Y]
     [TopologicalSpace.NoetherianSpace Z] (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)

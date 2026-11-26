@@ -17,9 +17,20 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Transport part of ordinary tensor resolution data
 
-Source: Stacks 06YS, 06YU; blueprint step 1 of
-`lem-sf-native-weil-tensor-ringed-derived-square-ordinary-resolution-extension`.
-(blueprint: lem-sf-native-weil-tensor-resolution-model-transport)
+The K-flat resolution construction supplies an ordinary tensor model on every second
+complex, with its restriction to K-flat inputs and its augmentation transport identity.
+
+## Implementation details
+
+Choose a degreewise-epimorphic K-flat resolution of the second input, tensor its
+augmentation with the K-flat first input, and invert the resulting localized
+quasi-isomorphism. Independence of two such resolutions gives the restriction equation;
+the localization square gives the transport equation. The common-roof assertion is
+separated into `native_ordinary_tensor_model_resolution_roof`.
+
+## References
+
+* Stacks Project, Tags 06YS and 06YU
 -/
 
 @[expose] public section
@@ -135,16 +146,7 @@ private theorem resolving_iso {C D : Type*} [Category C] [Category D]
 /--
 The K-flat resolution construction supplies an ordinary tensor model on every
 second complex, together with its restriction to K-flat inputs and its
-augmentation transport identity.  The common-roof assertion is separated into
-`native_ordinary_tensor_model_resolution_roof`.
-
-Source: Stacks Tags 06YS and 06YU, K-flat replacement and resolution-comparison
-paragraph in the ordinary tensor construction.  Choose a degreewise-epimorphic
-K-flat resolution of the second input, tensor its augmentation with the K-flat
-first input, and invert the resulting localized quasi-isomorphism.  Independence
-of two such resolutions gives the restriction equation.  The localization
-square gives the transport equation.
-(blueprint: lem-sf-native-weil-tensor-resolution-model-transport)
+augmentation transport identity.
 -/
 theorem native_ordinary_tensor_model_resolution_transport
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})

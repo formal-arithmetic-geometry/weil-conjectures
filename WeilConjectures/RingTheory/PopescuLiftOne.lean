@@ -19,8 +19,16 @@ import WeilConjectures.RingTheory.StrictlyStandardElement
 /-!
 # Lifting a Popescu resolution for one element
 
-Source: Stacks Project, Lemma 07F8 (lemma-lift-solution), case r = 1.
-(blueprint: lem-weil-pbc-popescu-lift-one)
+We prove the one-element case of the lifting step for Popescu resolutions.
+
+## Implementation details
+
+The resolving algebra is represented by a finite polynomial presentation over `R`, so that its
+carrier lies in the universe required by `CanBePopescuResolved`.
+
+## References
+
+* [Stacks, Lemma 07F8] (case `r = 1`, using [Stacks, Lemma 07F0])
 -/
 
 @[expose] public section
@@ -30,7 +38,7 @@ universe u v w
 namespace Algebra
 
 /-- Equality of multiplication kernels gives equality of the annihilators of the
-principal ideals, by the annihilator-of-span-singleton criterion. -/
+principal ideals. -/
 private theorem ann_span_eq_of_mul_iff
     {S : Type*} [CommRing S] (a b : S) (h : ∀ x : S, a * x = 0 ↔ b * x = 0) :
     Module.annihilator S (Ideal.span ({a} : Set S)) =
@@ -40,8 +48,7 @@ private theorem ann_span_eq_of_mul_iff
     x ∈ (Ideal.span ({b} : Set S)).annihilator
   simpa only [Submodule.mem_annihilator_span_singleton, smul_eq_mul, mul_comm] using h x
 
-/-- Smoothness after inverting a base parameter makes its image a singular-ideal
-generator: localization of the base is smooth, and smooth maps compose. -/
+/-- If `R_π → B_π` is smooth, then the image of `π` lies in the singular ideal of `B`. -/
 private theorem parameter_mem_singular
     {R : Type*} {B : Type*} [CommRing R] [CommRing B] [Algebra R B] (π : R)
     (hs : @Smooth (Localization.Away π) _ (Localization.Away (algebraMap R B π)) _
@@ -62,9 +69,7 @@ private theorem parameter_mem_singular
   exact Ideal.le_radical (Ideal.subset_span (show algebraMap R B π ∈ smoothElements R B
     from show Smooth R (Localization.Away (algebraMap R B π)) from inferInstance))
 
-/-- Singular ideals map into singular ideals after quotient base change. Smooth
-localization generators remain smooth by tensor base change and the localization
-base-change equivalence; then map the span and its radical. -/
+/-- Singular ideals map into singular ideals after quotient base change. -/
 private theorem singular_quotient_le
     {R : Type*} {A : Type*} [CommRing R] [CommRing A] [Algebra R A] (J : Ideal R) :
     Ideal.map (Ideal.Quotient.mk (Ideal.map (algebraMap R A) J)) (singularIdeal R A) ≤
@@ -93,8 +98,8 @@ private theorem singular_quotient_le
   rw [← he, ← Ideal.map_map]
   exact (Ideal.map_mono hbase).trans (singularIdeal_map_equiv_le e.symm)
 
-/-- Represent a finitely presented intermediate algebra by a finite polynomial
-quotient in the required universe and transport its resolution along that equivalence. -/
+/-- A resolution through a finitely presented intermediate algebra can be transported to a
+finite polynomial quotient in the required universe. -/
 private theorem resolution_resize
     {R : Type u} {A : Type v} {Λ : Type w} {B : Type*}
     [CommRing R] [CommRing A] [CommRing Λ] [CommRing B]
@@ -117,31 +122,7 @@ private theorem resolution_resize
   · simpa only [popescuIdeal_comp_equiv] using h.2.2.1
   · simpa only [popescuIdeal_comp_equiv] using h.2.2.2
 
-/-- The one-element case of lifting a resolution.
-Source: Stacks Project, Lemma 07F8 (lemma-lift-solution), case r = 1, using Lemma 07F0.
-(blueprint: lem-weil-pbc-popescu-lift-one)
-
-Proof:
-1. Unpack the reduced resolution as A/π⁸ → C → Λ/π⁸. For the unique index, the
-preceding-powers ideals are zero. Evaluate the kernel equalities on quotient classes
-and use injectivity of quotient by zero to obtain Ann(π) = Ann(π²) in R and Λ.
-2. Apply popescu_desingularize_lifting_apply to this factorization, these equalities and
-strict standardness. It gives a finitely presented factorization A → B → Λ, smooth
-on inverting π, and inclusion of the image of H(C) in the image of h(B).
-3. Smoothness on inverting π implies π belongs to H(B): compose the smooth map from
-R to R[1/π] with R[1/π] → B[1/π], and identify B[1/π] with the principal localization.
-Thus π⁸Λ is contained in h(B). Since h(B) is radical, its quotient is radical, and the
-containment from step 2 extends to h(C).
-4. Singular ideals map into singular ideals under base change: each generator with
-smooth principal localization retains that property after base change, by smooth base
-change and localization base change; then take radicals. Therefore the image of h(A)
-in Λ/π⁸ lies in h(A/π⁸), hence in h(C), and its inverse image lies in h(B) by step 3.
-5. If h(B) were contained in q, its quotient image would be contained in the reduced
-prime. The containment of h(C) from step 3 contradicts the reduced resolution.
-Thus h(B) is not contained in q, and the factorization is a resolution.
-6. Represent B in universe max u v by a finite polynomial presentation over R,
-transporting both maps and their singular ideals along the resulting algebra equivalence.
-This ensures the carrier bound in CanBePopescuResolved. -/
+/-- The one-element case of lifting a resolution. -/
 theorem popescuEighthPowerLifting_one : PopescuEighthPowerLifting.{u, v, w} 1 := by
   intro R A Λ _ _ _ _ _ _ _ π α q hq hAnnR hAnnΛ hstandard hresolved
   have hR0 := hAnnR 0

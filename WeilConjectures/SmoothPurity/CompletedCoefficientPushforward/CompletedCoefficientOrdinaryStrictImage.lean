@@ -9,8 +9,20 @@ public import WeilConjectures.SmoothPurity.CompletedCoefficientPushforward.Compl
 
 /-! # Ordinary direct image of strict coefficient systems
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E, on sequence ringed topoi.
-(blueprint: lem-pur-completed-coefficient-ordinary-strict-image).
+We construct the ordinary (underived) direct image of strict coefficient systems along a
+morphism of schemes, together with its comparison with completed-module towers.
+
+## Implementation details
+
+At level `n` the direct image is sheaf-module pushforward along the constant structural map
+of the quotient of `systemRing` by the `(n+1)`-st power of `systemUniformizer`; the
+comparisons with the transported finite coefficient rings have identity sections. No
+cartesianness of the transitions is used.
+
+## References
+
+* Zheng, Construction 4.1
+* [Stacks, Tags 03DA and 0D6E](https://stacks.math.columbia.edu/tag/0D6E)
 -/
 
 @[expose] public noncomputable section
@@ -23,10 +35,8 @@ namespace WeilConjectures.CompletedCoefficientPushforward
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Ordinary strict direct image and its comparison with completed-module towers.
-No derived functor, resolution or acyclicity assertion is included.
-Source: Zheng, Construction 4.1; Stacks Project, Tag 03DA
-(blueprint: def-pur-completed-coefficient-ordinary-strict-image-data). -/
+/-- Ordinary strict direct image of coefficient systems along `f` and its comparison with
+completed-module towers. No derived functor, resolution or acyclicity assertion is included. -/
 structure OrdinaryStrictImageData {X Y : Scheme.{t}} (f : X ⟶ Y)
     (C : CoefficientComparisonData l E f) where
   systemPush : Systems l E X ⥤ Systems l E Y
@@ -624,29 +634,8 @@ private def diagramIso {X Y : Scheme.{t}} (f : X ⟶ Y)
     funext n
     exact (diagramEvaluation l E f C n.unop).hom.naturality k)
 
-/-- Construct direct image on strict systems before passing to derived categories.
-Source: Zheng, Construction 4.1; Stacks Project, Tags 03DA and 0D6E
-(blueprint: lem-pur-completed-coefficient-ordinary-strict-image).
-
-Proof: At level n use sheaf-module pushforward along the constant structural map
-of the quotient of systemRing by the (n+1)-st power of systemUniformizer. Naturality
-of constant sheafification with respect to the quotient homomorphism identifies
-pushforward followed by coefficient restriction with coefficient restriction followed
-by pushforward; the comparison is identity on sections. Map each successive transition
-through this comparison. Applying the level functors to component maps defines the
-system functor: the transition square follows from the old square and naturality of
-the comparison. Functoriality and additivity hold componentwise.
-Transport the level coefficient rings by source.finiteIso and target.finiteIso. Their
-generator equations identify the two transported structural maps with finiteStructure:
-precompose with the constant-sheafification unit and check on quotient generators.
-The resulting evaluation isomorphisms have identity sections. Combine these with
-source.systemEvaluation, target.systemEvaluation and the finite ordinary square to
-obtain the components of diagramOrdinary. Each comparison has identity sections. The
-transition equations source.systemTransition and target.systemTransition, together
-with the construction of the image transition, make these components natural in n.
-Naturality of the constituent comparisons gives naturality in the system. They form a natural
-isomorphism of strict completed-module towers with the displayed section identity.
-This argument imposes no cartesianness on the transitions. -/
+/-- Ordinary strict direct image data exists for every morphism `f` with coefficient
+comparison data `C`. -/
 theorem ordinaryStrictImage_exists {X Y : Scheme.{t}} (f : X ⟶ Y)
     (C : CoefficientComparisonData l E f) :
     Nonempty (OrdinaryStrictImageData l E f C) := by

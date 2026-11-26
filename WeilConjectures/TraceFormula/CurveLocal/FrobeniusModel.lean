@@ -19,8 +19,7 @@ model `X₀` over a finite field `k₀` and model Frobenius `Φ` (`IsModelFroben
 `x` be a rational point of `X` fixed by the iterate `Φ_m`, `m ≥ 1`. Then `(X, Φ_m, x)` is a
 strictly local model in the sense of `AlgebraicGeometry.Etale.CurveLocalModel`
 (`AlgebraicGeometry.Etale.CurveLocalModel.ofModelFrobenius`): the contraction
-`Φ_m^♯ 𝔪_x ⊆ 𝔪_x²` is `AlgebraicGeometry.map_maximalIdeal_stalkMap_le_sq_of_isFrobenius`
-(blueprint `lemma-local-term-restriction-map--1`).
+`Φ_m^♯ 𝔪_x ⊆ 𝔪_x²` is `AlgebraicGeometry.map_maximalIdeal_stalkMap_le_sq_of_isFrobenius`.
 
 -/
 
@@ -39,10 +38,9 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {X : Over (Spec (.of k))}
   {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}}
   {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀} {Φ : X ⟶ X}
 
-/-- **The strictly local model at a Frobenius fixed point** (blueprint
-`lemma-local-term-restriction-map--1`): for the model Frobenius `Φ` of a smooth curve `X` over `k`,
-`m ≥ 1` and a rational point `x` fixed by `Φ_m`, the curve `X` with the endomorphism `Φ_m` and
-the fixed point `x`. The contraction `Φ_m^♯ 𝔪_x ⊆ 𝔪_x²` holds since
+/-- **The strictly local model at a Frobenius fixed point**: for the model Frobenius `Φ` of a smooth
+curve `X` over `k`, `m ≥ 1` and a rational point `x` fixed by `Φ_m`, the curve `X` with the
+endomorphism `Φ_m` and the fixed point `x`. The contraction `Φ_m^♯ 𝔪_x ⊆ 𝔪_x²` holds since
 `Φ_m^♯ (t - a) = (t - a)^{q^m}` in a local coordinate. -/
 noncomputable def ofModelFrobenius (hΦ : IsModelFrobenius Φ f₀ p) {m : ℕ} (hm : 1 ≤ m)
     (x : RationalPoint X) (hx : x ≫ frobeniusIterate Φ m = x) : CurveLocalModel k where

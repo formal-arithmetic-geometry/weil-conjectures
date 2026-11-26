@@ -11,7 +11,12 @@ public import Mathlib.Topology.Sheaves.Abelian
 public import WeilConjectures.Topology.AbelianOpenExtensionByZero
 import WeilConjectures.Topology.ConstantSubsheafPositiveRefinementFactor
 
-/-! # Refinement of compact-open integer components -/
+/-! # Refinement of compact-open integer components
+
+## References
+
+* Stacks Project, Tag 0A38.
+-/
 
 @[expose] public section
 
@@ -22,33 +27,7 @@ universe u
 namespace TopCat.Sheaf
 
 /-- Refine an arbitrary finite compact-open component map into positive components,
-retaining a factorization of the given map. No epimorphy assumption or conclusion is used.
-Source: Stacks Project, Cohomology, Lemma 0A38, first proof paragraph.
-https://stacks.math.columbia.edu/tag/0A38
-(blueprint: lem-sc-constant-subsheaf-positive-refinement)
-
-Proof: Compose each coproduct injection with g and evaluate on the canonical unit section.
-Under ι and isoC, this section is a locally constant integer function on U i. Compactness
-makes its range finite. Its fibres are clopen in U i, hence open in X and compact in X.
-Restrict the original section to each nonzero fibre. Negate it on negative fibres, and
-label the resulting section by the positive absolute value. Integer multiplication by
-this section gives a map from the constant presheaf; sheafification and the extension by
-zero counit give the required component f. Naturality of the unit proves the value formula.
-
-For each original domain, use its finite clopen partition to split the extension by zero
-of its constant sheaf into the coproduct of the extensions on its fibres. Explicitly,
-restrict locally constant sections to the fibres; inverse maps extend sections across
-the complementary clopen pieces by zero and add them. These maps descend through
-sheafification and are inverse, as can be checked locally on the partition. Send each
-nonzero fibre to its new coproduct summand with the sign of its original value, and send
-zero fibres to zero. This defines the component of l on each old summand. Its composite
-with Sigma.desc f agrees with the old component on each fibre: the two sign changes
-cancel, and on a zero fibre monicity of ι forces the old section to vanish. Maps out of
-the constant integer sheaf are determined by the unit section (by sheafification and
-integer multiplication); the same holds for its open extension by zero. Thus the maps
-agree on each fibre and therefore globally. Coproduct extensionality gives l ≫ Sigma.desc f
-= g. Enumerate the finite nonzero fibres by Fin n. If there are none, the old components
-are zero and the zero map to the empty coproduct gives the same factorization. -/
+retaining a factorization of the given map. No epimorphy assumption or conclusion is used. -/
 theorem constantSubsheaf_positive_refinement
     (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]
     (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj

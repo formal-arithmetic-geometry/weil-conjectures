@@ -15,13 +15,19 @@ import Mathlib.CategoryTheory.Abelian.Exact
 
 /-! # Cohomology and closed immersion pushforward
 
-Source: literature/stacks-project/cohomology.tex, Lemma 02UV
-(blueprint: lem-sc-cohomology-closed-immersion-pushforward)
-
 ## Main statements
 
 * `cohomology_closed_immersion_pushforward`: cohomology is invariant under
   pushforward along a closed embedding.
+
+## Implementation details
+
+The proof uses exactness of direct image, vanishing of its higher derived functors, and the
+Leray comparison.
+
+## References
+
+* Stacks Project, Tags 02UV and 01AX.
 -/
 
 @[expose] public section
@@ -33,9 +39,8 @@ universe u
 
 namespace TopCat
 
-/-- The epimorphism part of Stacks Tag 01AX for arbitrary closed embeddings.
-At a point of the image, a local lift on `V` pulls back from the ambient open
-`U \ i(Z \ V)`. Off the closed image, the inverse-image open is empty. -/
+/-- The epimorphism part of Stacks Tag 01AX for arbitrary closed embeddings: pushforward along a
+closed embedding preserves epimorphisms of abelian sheaves. -/
 private theorem epi_pushforward_closedEmbedding
     {Z X : TopCat.{u}} (i : Z ⟶ X) (hi : Topology.IsClosedEmbedding i)
     {F G : TopCat.Sheaf AddCommGrpCat.{u} Z} (g : F ⟶ G) [Epi g] :
@@ -80,13 +85,8 @@ private theorem epi_pushforward_closedEmbedding
     rw [map_zero]
     exact hzero.symm
 
-/-- Source: literature/stacks-project/cohomology.tex, Lemma 02UV
-(blueprint: lem-sc-cohomology-closed-immersion-pushforward).
-
-For a closed embedding of topological spaces, the cohomology of an abelian
-sheaf agrees with that of its direct image. The proof uses exactness of direct
-image, vanishing of its higher derived functors, and the Leray comparison.
--/
+/-- For a closed embedding of topological spaces, the cohomology of an abelian
+sheaf agrees with that of its direct image. -/
 theorem cohomology_closed_immersion_pushforward
     {Z X : TopCat.{u}}
     (i : Z ⟶ X) (hi : Topology.IsClosedEmbedding i)

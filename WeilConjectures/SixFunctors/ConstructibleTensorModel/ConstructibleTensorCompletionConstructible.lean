@@ -14,8 +14,16 @@ import WeilConjectures.SixFunctors.Supporting.Tensor.ProjectiveTensorChartComple
 
 /-! # Completeness of ordinary tensor on constructible inputs
 
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50
-(blueprint: lem-fix-constructible-tensor-completion-constructible).
+## Implementation details
+
+Simultaneous projective chart refinement gives a finite open–closed tree with common finite
+covers of its nonempty leaves. On each chart the inputs have bounded finite-projective models,
+so `projectiveTensorChartComplete` gives local completeness, and the finite-tree locality
+criterion gives invertibility of the global completion unit.
+
+## References
+
+* [Bhatt–Scholze, *The pro-étale topology for schemes*, Lemmas 6.5.5 and 6.5.8]
 -/
 
 @[expose] public noncomputable section
@@ -156,16 +164,7 @@ private theorem tensorUnit_onConstructible
       (hloc.2.mpr hcomplete)
 
 /-- The ordinary derived tensor of constructible inputs is complete, with invertible
-canonical completion unit.
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Lemma 6.5.8
-(blueprint: lem-fix-constructible-tensor-completion-constructible).
-
-Proof: simultaneous projective chart refinement gives a finite open--closed tree and
-common finite covers of its nonempty leaves. On each chart the two inputs have
-bounded finite-projective models, so projectiveTensorChartComplete proves local
-completeness. The canonical finite-tree locality criterion gives invertibility of
-the global completion unit and identifies it with derived completeness. Empty leaves
-have empty chart families, and the locality criterion includes an empty root. -/
+canonical completion unit. -/
 theorem tensorComplete_onConstructible
     [CompactSpace W] [QuasiSeparatedSpace W]
     [∀ w : W, Invertible (l : W.residueField w)]

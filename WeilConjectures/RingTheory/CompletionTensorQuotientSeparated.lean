@@ -21,9 +21,24 @@ import WeilConjectures.RingTheory.AdicCompletionNoetherian
 /-!
 # Quotient projections separate a completed finite tensor
 
-Source: Stacks Project, Algebra, Tags 0316, 05GG, 05GI, 00DF and 00IQ,
-as applied to the comparison of Tag 07N9.
-(blueprint: lem-weil-pbc-completion-tensor-quotient-separated)
+For a finite algebra `S` over a Noetherian ring `R` and a prime `p`, an element of
+`R_p^∧ ⊗_R S` vanishing under all maps to `R_p/m^n ⊗_R S` is zero.
+
+## Implementation details
+
+`C = R_p^∧` is Noetherian local with maximal ideal `mC` (Tags 0316, 05GG, 05GI), so the
+finite `C`-module `C ⊗_R S` is `mC`-adically separated (Krull intersection, Tag 00IQ). The
+kernel of `C ⊗_R S → A/m^n ⊗_R S` is `(mC)^n (C ⊗_R S)` by Tag 05GG and right exactness of
+the tensor product (Tag 00DF).
+
+## References
+
+* [Stacks, Tag 07N9]
+* [Stacks, Tag 0316]
+* [Stacks, Tag 05GG]
+* [Stacks, Tag 05GI]
+* [Stacks, Tag 00DF]
+* [Stacks, Tag 00IQ]
 -/
 
 @[expose] public section
@@ -32,22 +47,8 @@ universe u v
 open scoped TensorProduct
 namespace AdicCompletion
 
-/-- The quotient projections jointly detect zero in the completed tensor.
-Source: Stacks Project, Algebra, Tags 0316, 05GG, 05GI, 00DF and 00IQ;
-this is the separation step of the comparison in Tag 07N9.
-(blueprint: lem-weil-pbc-completion-tensor-quotient-separated)
-
-Proof: Put A = R_p, m = its maximal ideal, C = its m-adic completion and
-T = C tensor_R S. A is Noetherian by localization, and C is Noetherian by Tag 0316.
-Tags 05GG and 05GI make C local with maximal ideal mC. Base change makes T finite
-as a C-module. Krull intersection (Tag 00IQ) therefore makes T separated for mC.
-For each n, Tag 05GG identifies the kernel of C -> A/m^n with m^n C; explicitly,
-the completion's module evaluation and ring evaluation differ by the canonical
-identification of quotients, and the module evaluation has kernel m^n times C.
-Right exactness of tensor product (Tag 00DF) identifies the kernel after tensoring
-with S with the extension of m^n C to T. Since mC is the maximal ideal of C, this
-is its nth power times T. Every displayed vanishing thus puts x in that submodule.
-Krull intersection gives x = 0. No nontriviality hypothesis on S or T is needed. -/
+/-- The quotient projections `R_p^∧ ⊗_R S → R_p/m^n ⊗_R S` jointly detect zero: an element
+mapping to zero for every `n` is zero. -/
 theorem completion_tensor_quotient_separated
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :

@@ -10,8 +10,11 @@ import all WeilConjectures.SmoothPurity.IntegralCoherence.IntegralGoodQuotientPr
 
 /-! # Moving the system comparison into scalar/pullback Roos coordinates
 
-Source: Stacks 06YY, 07A4 and 0941. This is the formal system-comparison
-part of the scalar/pullback realization calculation.
+This is the formal system-comparison part of the scalar/pullback realization calculation.
+
+## References
+
+* Stacks Project, Tags 06YY, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -33,18 +36,7 @@ attribute [local irreducible] HasDerivedCategory.standard integralOrdinaryScalar
   integralComparisonSequenceScalarModel coefficientSequenceLimit
 
 -- The coefficient-functor comparisons exceed the default elaboration budget.
-/-- Move the inverse scalar/pullback system comparison through the explicit coordinate.
-Source: Stacks 06YY, 07A4 and 0941; step 2 of stage3-pur-scalar-pullback-left-roos.
-(blueprint: lem-pur-scalar-pullback-roos-coordinate-system).
-
-Proof: finite evaluations identify C with the quotient complexes of the good P.
-Detect K-flatness on those levels. The system comparison therefore computes on C
-by its defining normalized counit equation. Precompose that equation with its
-inverse and cancel. Naturality of the inverse comparison moves the presentation
-map SE.reduction(eP inverse) followed by eC across the comparison. Apply the limit
-functor to the resulting equality and retain the same Roos bridge and strict q.
-This proves the stated entire-system equation before any completed-operation
-normalization. -/
+/-- Move the inverse scalar/pullback system comparison through the explicit coordinate. -/
 theorem scalarPullbackRoosCoordinate_system
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : (integralOperationsGoodComplex.{u, u} l E Y).FullSubcategory)

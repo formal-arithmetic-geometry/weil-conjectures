@@ -47,7 +47,21 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
-/-! # Data of the normalized scalar Roos lift -/
+/-! # Data of the normalized scalar Roos lift
+
+The realization/transpose construction supplies a lift of a zero-shifted Roos map together with its
+two strict conditions.
+
+## Implementation details
+
+The factorization identity is isolated in a separate file; this file records only the construction
+data.
+
+## References
+
+* Stacks Project, Tags 06YY and 0941.
+* Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -578,23 +592,9 @@ def scalarModelRoosZeroLiftCoordinates
           (op (n, U.unop))
           ((completedIntegralCommRingProjectionUnrestricted l F X n).hom.app U s) y)
 
--- The existing statement retains realization choices unused by the strict construction.
+-- The statement retains realization choices unused by the strict construction.
 set_option linter.unusedVariables false in
-/-- The realization/transpose construction supplies a lift with its two strict
-conditions. The factorization identity is deliberately isolated in the next
-stage, so this theorem records only the construction data.
-
-Source: Stacks 06YY, 0941; Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1.
-(blueprint: lem-trf-scalar-model-roos-zero-lift-core)
-
-Proof in words: transpose the normalized quotient-system scalar unit through
-ordinary scalar adjunction to obtain a comparison at each quotient level. Its
-naturality and tensor formula follow from the scalar residue square and the
-normalized units. The vanishing shifted coordinate of f makes its first
-coordinates strictly compatible. Extend these coordinates, compose with the
-levelwise comparisons, and lift their product to the mapping cocone with zero
-shifted cochain. The projection identities and tensor naturality give both
-required properties. -/
+/-- The realization/transpose construction supplies a lift with its two strict conditions. -/
 theorem scalarModelRoosZeroLift_core
     (SL : CoefficientDerivedSystemCalculus l L X)
     (ρL : IntegralComparisonRoosModel l L X)

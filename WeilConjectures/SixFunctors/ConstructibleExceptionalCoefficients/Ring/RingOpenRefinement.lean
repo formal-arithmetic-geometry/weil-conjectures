@@ -11,7 +11,21 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingP
 
 /-! # The open-unit step of ring-stage compactification refinement
 
-Source: Stacks 0F7B and 0F7I; Zheng Section 5, Lemma 5.13 and Constructions 5.14--5.15.
+## Implementation details
+
+For finite coefficients the cone of the open-unit comparison vanishes on bounded constructible
+inputs of etale origin by proper base change on the complement. For completed integral
+coefficients the same word is applied to the normalized strict reduction system of the input;
+conservative system evaluations make the system comparison invertible before total limit, and
+no equality of arrows is inferred from reductions alone. Shift compatibility uses that, on the
+Roos totalizer, the shift by `r` acts by the product shift on the first cone coordinate and by
+`(-1)^r` times that shift on the second.
+
+## References
+
+* [Zheng, Section 5, Lemma 5.13 and Constructions 5.14–5.15]
+* [Stacks, Tag 0F7B]
+* [Stacks, Tag 0F7I]
 -/
 
 @[expose] public noncomputable section
@@ -26,9 +40,7 @@ attribute [local instance] constructionInclusionShift
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- The proper/open word, with explicit components and generic naturality.
-Source: composition and naturality of functor isomorphisms
-(blueprint: lem-sf-ring-open-refinement). -/
+/-- The proper/open word, with explicit components and generic naturality. -/
 def properOpenRefinementWord
     {A B C D Z : Type*}
     [Category A] [Category B] [Category C] [Category D] [Category Z]
@@ -50,9 +62,7 @@ def properOpenRefinementWord
 
 /-- Push the inverse open-unit isomorphism through the outer proper map, after the
 inverse proper compositor. This is an explicit word, independent of any chosen
-exceptional operation or scalar comparison.
-Source: Stacks 0F7B, 0F7I
-(blueprint: lem-sf-ring-open-refinement). -/
+exceptional operation or scalar comparison. -/
 def ringRefinementWord {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c.Refinement d) (s : RingStage.{max u v} l)
     (hg : (s.coefficients l).pull (r.hom ≫ d.g) =
@@ -120,38 +130,8 @@ private theorem properOpenRefinementWord_shift
   infer_instance
 
 /-- The open-unit comparison is an isomorphism on the full finite-Tor ring-stage domain;
-its proper pushforward word preserves the inherited shifts.
-Source: Stacks 0F7B, 0F7I; Zheng 5.13--5.15; the exceptional construction, step 6
-(blueprint: lem-sf-ring-open-refinement).
-
-Proof: for a finite coefficient ring, restrict the proper image of extension by zero
-to the open X. Open restriction and the clopen section in the inverse image of X
-identify this restriction with the input. The adjunct of the inverse identification
-is the open-unit comparison. Proper base change on the complement shows its cone
-vanishes for bounded constructible inputs of etale origin, hence for this finite-Tor
-subcategory. Its transpose is exactly the displayed open unit. All constituents are
-natural, so they define the stated natural isomorphism, rather than unrelated choices
-of objectwise maps. For completed integral coefficients apply the same word to the
-normalized strict reduction system of the finite-Tor input. Finite-level proper
-base change makes its cone vanish at every evaluation; conservative system
-evaluations make the actual system comparison invertible. Apply total limit to
-this isomorphism. The primitive open/proper and generator-map identities of
-integral compactification system realization identify its value with the stated
-ordinary open-unit word, including the transpose normalization. System transport
-and naturality of the primitive realizations assemble the components naturally.
-All these are actual system maps before total limit; no equality of arrows is
-inferred from reductions alone. Canonical exact open
-and proper derived adjunctions, their units and counits, and the pullback
-compositor commute with shifts. Their inverse-transpose word and the conjugate
-proper compositor therefore do too. In the integral case uniqueness of the
-open-unit construction on the shifted normalized system identifies the shifted
-comparison with the comparison on the shifted input. On the Roos totalizer the
-shift by r acts by the product shift on the first cone coordinate and by (-1)^r
-times that shift on the second. Termwise primitive maps respect these formulas;
-the normalization comparison has zero second component, which remains zero.
-Pasting these squares gives shift compatibility
-of the explicit component word ringRefinementWord. The construction applies to identity refinements
-and zero inputs, and requires only relative separatedness of f. -/
+its proper pushforward word preserves the inherited shifts. Only relative separatedness of `f`
+is required. -/
 theorem exists_ring_open_refinement
   (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
   {X Y : Scheme.{max u v}} {f : X ⟶ Y}

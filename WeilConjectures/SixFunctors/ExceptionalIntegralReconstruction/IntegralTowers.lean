@@ -42,9 +42,9 @@ cohomology and Tor amplitude in one interval independent of `n`.
 
 ## Implementation details
 
-The blueprint indexes the reductions by the powers `ℓ^n`; the powers `π^{n+1}` used here contain
-them (`ℓ^n 𝒪_E = π^{en} 𝒪_E` for the ramification index `e`), so the statements below cover the
-blueprint's reductions `K/ℓ^n`. Likewise, the blueprint's hypothesis on `K/ℓ` in
+Reductions are indexed by the powers `π^{n+1}` rather than `ℓ^n`; these contain the powers of
+`ℓ` (`ℓ^n 𝒪_E = π^{en} 𝒪_E` for the ramification index `e`), so the statements below cover the
+reductions `K/ℓ^n`. Likewise, a hypothesis on `K/ℓ` in
 `sfIntegralConstructible_of_isSfDerivedComplete` is the case `π^{m+1} 𝒪_E = ℓ 𝒪_E`, and its
 hypotheses that `T` is of finite type over an algebraic closure of a finite field of
 characteristic `p ≠ ℓ` are not needed there: the residue reduction `K/π` is bounded constructible

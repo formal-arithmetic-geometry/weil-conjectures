@@ -19,9 +19,21 @@ import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 /-!
 # A comparison local ring for the maximal-ideal G-ring criterion
 
-Source: Stacks Project, More on Algebra, proof of Lemma 07PT, up to the
-regularity of the map from the prime localization into the comparison completion.
-(blueprint: lem-weil-pbc-g-ring-maximal-ideal-comparison).
+If the completion maps of the localizations of a Noetherian ring `R` at its maximal ideals are
+regular, then every prime localization `R_p` admits a flat local map to a Noetherian local ring
+`B` whose composite with the completion map of `B` is regular.
+
+## Implementation details
+
+For a maximal ideal `m ⊇ p`, set `A = R_m`; faithful flatness of `A → Â` gives a prime `q` of `Â`
+over `p A`, and `B = Â_q`. The composite `R → A → Â → B → B̂` is regular by composition of
+regular maps (Tag 07QI), using that `Â` is a G-ring (Tag 07PS), and regularity through
+localization gives the claim.
+
+## References
+
+* [Stacks, Tag 07PT] (proof, up to the final application of Tag 07NT)
+* [Stacks, Tags 07QI, 07PS]
 -/
 
 @[expose] public section
@@ -29,29 +41,9 @@ regularity of the map from the prime localization into the comparison completion
 universe w
 
 /-- Maximal-local regularity supplies a flat local comparison map whose composite
-with the comparison ring's completion map is regular.
-
-Source: Stacks Project, More on Algebra, proof of Lemma 07PT, the diagram and
-argument preceding the final application of Lemma 07NT.
-(blueprint: lem-weil-pbc-g-ring-maximal-ideal-comparison).
-
-Proof: Choose a maximal ideal m containing p, and put A = R_m. Extend p to
-its prime ideal pA in A; it contracts to p because p misses the denominators.
-The completion Ahat is Noetherian, local, and complete at its maximal ideal.
-Faithful flatness of A → Ahat gives a prime q lying over pA, hence contracting
-along R → Ahat to p. Put B = Ahat_q, and let φ : R_p → B be the localRingHom
-induced by R → Ahat and this contraction identity.
-
-The localization R → A is regular. By hypothesis A → Ahat is regular, so
-R → Ahat is regular by Tag 07QI. In particular it is flat, and localRingHom
-is flat and local. Since Ahat is complete Noetherian local, Tag 07PS makes
-it a G-ring, giving regularity of B → Bhat. The localization Ahat → B is
-regular. Compose R → Ahat → B → Bhat using Tag 07QI twice more. All needed
-fibres are Noetherian by the Noetherian fibre theorem, since Ahat, B, and
-Bhat are Noetherian. Finally the induced map φ commutes with R → R_p and
-R → B. Thus R → Bhat factors as R → R_p → Bhat, and regularity through
-localization proves regularity of the latter map. Together with flatness
-and locality of φ this proves the assertion. -/
+with the comparison ring's completion map is regular: if the completion maps of all
+localizations at maximal ideals are regular, then for every prime `p` there is a flat local map
+`φ : R_p → B` to a Noetherian local ring `B` such that `R_p → B → B̂` is regular. -/
 theorem exists_flat_local_regular_completion_comparison
     (R : Type w) [CommRing R] [IsNoetherianRing R]
     (h : ∀ (m : Ideal R) [m.IsMaximal],

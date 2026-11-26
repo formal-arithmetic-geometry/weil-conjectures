@@ -17,15 +17,15 @@ a finite ring. If `(U, T)` satisfies the open-complement condition with constant
 (`AlgebraicGeometry.Etale.OpenComplementCondition`), then `Ri^!` carries bounded constructible
 complexes of Tor amplitude in `[a, b]` to bounded constructible complexes of Tor amplitude in
 `[a, b + c + 1]`
-(`AlgebraicGeometry.Etale.boundedConstructible_torAmplitudeIn_rightDerivedUpperShriek`,
-blueprint `theorem-f-shriek-finite-coefficients--1`).
+(`AlgebraicGeometry.Etale.boundedConstructible_torAmplitudeIn_rightDerivedUpperShriek`).
+
+## Implementation details
 
 In the supported localization triangle `Ri_! Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶`, the third term has Tor
 amplitude in `[a, b + c]`: `j^* K` has Tor amplitude in `[a, b]`, and by the projection formula
 with a finite constant coefficient
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle_of_nat`,
-`proposition-open-direct-image-preserves-finite`; `Rj_*` preserves coproducts, having finite
-cohomological dimension) and the residue test (`theorem-f-shriek-finite-coefficients--1`), `Rj_*`
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle_of_nat`;
+`Rj_*` preserves coproducts, having finite cohomological dimension) and the residue test, `Rj_*`
 raises the Tor amplitude by at most `c`. Tor amplitude being two out of three in triangles,
 `Ri_! Ri^! K` has Tor amplitude in `[a, b + c + 1]`, and so has its pullback
 `i^* Ri_! Ri^! K ≅ Ri^! K`.
@@ -65,11 +65,7 @@ lemma preservesColimitsOfShape_rightDerivedLowerStar_of_isZero_higherDirectImage
   preservesColimitsOfShape_of_equiv (Discrete.equivalence Equiv.ulift) _
 
 /-- The direct image along a quasi-compact open immersion `j` with `R^q j_* = 0` for `q > c`
-carries complexes of Tor amplitude in `[a, b]` to complexes of Tor amplitude in `[a, b + c]`.
-This is the argument of `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_finite`,
-with the projection formula with a finite constant coefficient
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle_of_nat`,
-`proposition-open-direct-image-preserves-finite`) and the residue test. -/
+carries complexes of Tor amplitude in `[a, b]` to complexes of Tor amplitude in `[a, b + c]`. -/
 theorem torAmplitudeIn_rightDerivedLowerStar_of_isZero_higherDirectImage (j : U ⟶ T)
     [IsOpenImmersion j] [QuasiCompact j] {c : ℕ}
     (hc : ∀ (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ), c < q →
@@ -106,16 +102,10 @@ variable (i : Z ⟶ T) (j : U ⟶ T) [IsClosedImmersion i] [HasCompactification 
   [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ)
 
 include hij in
-/-- The Tor amplitude part of blueprint `theorem-f-shriek-finite-coefficients--1`: under the
+/-- Tor amplitude of the exceptional inverse image along a closed immersion: under the
 vanishing clause of the open-complement condition with constant `c`, `Ri^!` carries complexes of Tor
 amplitude in `[a, b]` to complexes of Tor amplitude in `[a, b + c + 1]`, for a finite ring `Λ`. No
-constructibility is needed.
-
-In the supported localization triangle `Ri_! Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶`, the second term has Tor
-amplitude in `[a, b]` and the third in `[a, b + c]`
-(`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_isZero_higherDirectImage`), so
-the first has Tor amplitude in `[a, b + c + 1]`, and so has its pullback
-`i^* Ri_! Ri^! K ≅ Ri^! K`. -/
+constructibility is needed. -/
 theorem torAmplitudeIn_rightDerivedUpperShriek {c : ℕ}
     (hc : ∀ (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ), c < q →
       IsZero (higherDirectImage Λ j q M))
@@ -133,18 +123,13 @@ theorem torAmplitudeIn_rightDerivedUpperShriek {c : ℕ}
     (torAmplitudeIn_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) i a (b + c + 1) h₁)
 
 include hij in
-/-- Blueprint `theorem-f-shriek-finite-coefficients--1`: Finite Tor amplitude for closed support.
-
-Let `Λ` be a finite ring (in the blueprint `Λ = 𝒪_E / ϖⁿ`), `i : Z ⟶ T` a closed immersion with
+/-- Finite Tor amplitude for closed support: let `Λ` be a finite ring (for instance
+`Λ = 𝒪_E / ϖⁿ`), `i : Z ⟶ T` a closed immersion with
 quasi-compact open complement `j : U ⟶ T`, such that `R^q j_*` vanishes on all sheaves of
 `Λ`-modules for `q > c` and carries constructible sheaves to constructible sheaves
 (`AlgebraicGeometry.Etale.OpenComplementCondition`). If `K` is bounded constructible with Tor
 amplitude in `[a, b]`, then `Ri^! K` is bounded constructible with Tor amplitude in
-`[a, b + c + 1]`.
-
-Constructibility is `AlgebraicGeometry.Etale.constructibleIn_rightDerivedUpperShriek`
-(`theorem-f-shriek-finite-coefficients--1`), `K` having homology in `[a, b]`; the Tor amplitude is
-`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedUpperShriek`. -/
+`[a, b + c + 1]`. -/
 theorem boundedConstructible_torAmplitudeIn_rightDerivedUpperShriek {c : ℕ}
     (h : OpenComplementCondition Λ j c) {a b : ℤ}
     {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

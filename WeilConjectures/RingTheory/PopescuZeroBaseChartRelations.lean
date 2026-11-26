@@ -12,8 +12,18 @@ import Mathlib.Tactic.Ring
 
 /-! # Redundancy of the full equations in the single zero-base chart
 
-Source: Stacks Project, Tag 07CP, comparison of the conormal expressions on two charts.
-(blueprint: lem-weil-pbc-popescu-zero-base-chart-relations).
+After a scalar extension killing `π` and inverting `a_k`, every relation of the full Popescu
+lifting algebra vanishes in the single-chart quotient.
+
+## Implementation details
+
+No flatness, primes or equality of annihilators is used. The coefficient calculation is
+performed before scalar extension, so it applies to arbitrary `B`, including the zero ring and
+nonflat scalar extensions.
+
+## References
+
+* [Stacks, Tag 07CP] (comparison of the conormal expressions on two charts)
 -/
 
 @[expose] public section
@@ -24,27 +34,7 @@ open scoped TensorProduct
 
 namespace Algebra.PopescuLiftPresentation
 
-/-- Every chart relation vanishes in the localized single-chart quotient over B.
-
-Source: Stacks Project, Tag 07CP, final comparison calculation modulo pi.
-(blueprint: lem-weil-pbc-popescu-zero-base-chart-relations).
-
-Proof: In the single-chart quotient modulo pi all f_l vanish and the
-k-th linear equations hold. For another chart k' put
-b_j=a_k'*h_klj-sum h_k'lj'*h_kj'j. Compare the two cleared expressions for
-a_k*a_k'*f_l in the reduced conormal module. Its specified basis on E_k implies
-b_j=0 in reducedQuotient localized at a_k. Clear its localization denominator:
-a power of a_k times b_j belongs to the reduced ideal. Lift this membership
-to R[x]; the error is a multiple of pi squared. These terms vanish after tensoring
-with B, since every f_l vanishes and pi maps to zero. Therefore b_j vanishes in
-the localized single-chart quotient. Expand
- a_k*p_k'l-a_k'*p_kl+sum h_k'lj'*p_kj'.
-Modulo pi this is sum b_j*z_j. All terms except a_k*p_k'l vanish, so invertibility
-of a_k kills p_k'l as well. The original u_l already vanish by the quotient's
-definition. This proves the assertion for every generator of the full defining
-ideal without flatness, primes or equality of annihilators. The coefficient
-calculation is performed before scalar extension, so it applies to arbitrary B,
-including the zero ring and nonflat scalar extensions. -/
+/-- Every chart relation vanishes in the localized single-chart quotient over B. -/
 theorem zero_base_chart_relations (R : Type a) (Cbar : Type c)
     [CommRing R] [CommRing Cbar] [Algebra R Cbar] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]

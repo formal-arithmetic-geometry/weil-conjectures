@@ -10,7 +10,16 @@ import WeilConjectures.SixFunctors.IntegralHom.TwoTermCoordinates.TwoTermTensorC
 import WeilConjectures.SixFunctors.IntegralHom.TwoTermCoordinates.TwoTermHomCoordinateEvaluation
 import WeilConjectures.SixFunctors.IntegralHom.Tensor.TensorHomEvaluationExt
 
-/-! Evaluation of the two surviving tensor coordinates. Source: Stacks 03EK and 0A8X. -/
+/-! # Evaluation of the two surviving tensor coordinates
+
+We show that a homogeneous signed evaluation map has invertible finite coordinates in the
+two surviving degrees `-1` and `0`.
+
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 0A8X]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -84,19 +93,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 
 variable (Q : CochainComplex (Modules.{t, u} Y R) ℤ)
 
-/-- A homogeneous signed evaluation map has the two invertible finite coordinates.
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1; Stacks 0A8X.
-(blueprint: lem-sf-two-term-coordinate-evaluation).
-Proof: compose with the signed target coordinates and compare with the source
-coordinates. The total coproduct reduces this to coefficient degrees -1 and 0;
-all other source summands vanish. Project to each Hom factor and test on local
-pure tensors. In degree -1, contraction with eNeg and the right unitor gives
-its scalar times the input. The two parity signs cancel. In degree zero the
-same contraction uses eZero and has no sign. The opposite projections vanish.
-Tensor evaluation extensionality and the product universal properties give
-the comparison identity. Both coordinate maps are isomorphisms, hence so is f.
-The proof includes zero modules and the zero ring and assumes nothing about
-the differentials or boundedness of P and I. -/
+/-- A homogeneous signed evaluation map has the two invertible finite coordinates. -/
 theorem twoTermCoordinate_isIso
     (hzero : ∀ k : ℤ, k ≠ -1 → k ≠ 0 → IsZero (Q.X k))
     (eNeg : Q.X (-1) ≅ (𝟙_ (Modules.{t, u} Y R)))

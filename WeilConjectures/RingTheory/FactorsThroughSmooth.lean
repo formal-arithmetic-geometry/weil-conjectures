@@ -12,8 +12,18 @@ import WeilConjectures.RingTheory.FactorsThroughLocalization
 /-!
 # Maps from finitely presented algebras factor through smooth algebras
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07FJ, item-eighth-resolve,
-lines 3062-3074 (blueprint: lem-weil-pbc-essentially-smooth-factors-through-smooth).
+A map from a finitely presented `R`-algebra to an essentially smooth `R`-algebra factors through
+a smooth `R`-algebra.
+
+## Implementation details
+
+Writing the essentially smooth algebra as a localization `S⁻¹P` of a smooth `R`-algebra `P`, the
+map factors through a principal localization `P[1/s]`
+(`factors_through_principal_localization`), which is smooth over `R`.
+
+## References
+
+* [Stacks, Tag 07FJ], proof
 -/
 
 @[expose] public section
@@ -23,25 +33,7 @@ universe u₁ v₁ w
 namespace Algebra
 
 /-- A map from a finitely presented `R`-algebra to an essentially smooth `R`-algebra factors
-through a smooth `R`-algebra. Source: Stacks Project, Smoothing Ring Maps,
-proof of Lemma Tag 07FJ,
-item-eighth-resolve, lines 3062-3074
-(blueprint: lem-weil-pbc-essentially-smooth-factors-through-smooth).
-
-Proof:
-1. By def-weil-pbc-essentially-smooth-ring-map, write `D` as `Localization S` for a
-   smooth `R`-algebra `P`. For each `s ∈ S`, `Localization.Away s` is smooth by
-   lem-weil-pbc-smooth-ring-map-principal-localization.
-2. By theorem-finite-etale-covers-proper-henselian--2, these principal
-   localizations form a filtered diagram with colimit `Localization S`, in the sense of
-   def-weil-pbc-category-colimit. The transition maps and coprojections commute with
-   `P`'s structure map, hence are `R`-algebra maps.
-3. Compose `g` with the presentation isomorphism of `D`. Finite presentation of `C`
-   and lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit give a stage
-   and a map from `C` to that stage whose composite with its coprojection is this map.
-4. Take `T` to be that smooth principal localization. Compose its coprojection with
-   the inverse presentation isomorphism of `D`; the two maps have composite `g`.
--/
+through a smooth `R`-algebra. -/
 theorem essentiallySmooth_factors_through_smooth
     (R : Type u₁) (C : Type v₁) (D : Type w)
     [CommRing R] [CommRing C] [CommRing D]

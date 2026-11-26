@@ -16,10 +16,16 @@ import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 
 /-! # Native open comparison data
 
+Data types for the native open tensor comparison.
+
+## Implementation details
+
 The data types are extracted verbatim from NativeOpenDerivedTensor so that the
 sheaf construction, localization, and normalization can be proved independently.
-Source: Stacks 0E8I and 0GL1
-(blueprint: def-sf-native-open-tensor-presentation-data).
+
+## References
+
+* Stacks 0E8I, 0GL1 and 03D8.
 -/
 
 @[expose] public noncomputable section
@@ -48,11 +54,8 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
 
-/-- All normalizations of the native open tensor isomorphism. These are conclusions
-of the theorem below, not extra hypotheses on the open immersion or its inputs.
-The coefficient localization is the actual adic coefficient pullback used by upperStar.
-Source: Stacks 0E8I, 0GL1, 03D8 and openTensorNormalization
-(blueprint: lem-sf-native-open-derived-tensor). -/
+/-- All normalizations of the native open tensor isomorphism. The coefficient localization is
+the actual adic coefficient pullback used by upperStar. -/
 structure NativeOpenTensorData where
   /-- The equivariant open adjunction. -/
   adj : extensionByZero k₀ l j ⊣ upperStar k₀ l j
@@ -89,8 +92,7 @@ structure NativeOpenTensorData where
   restriction_kflat : ∀ T, NativeIsKFlat k₀ l Z T → NativeIsKFlat k₀ l U
     (((upperStar k₀ l j).mapHomologicalComplex (.up ℤ)).obj T)
 
-/-- Chain and derived comparisons extending the normalized sheaf comparison.
-Source: Stacks 0GL1 (blueprint: lem-sf-native-open-derived-tensor). -/
+/-- Chain and derived comparisons extending the normalized sheaf comparison. -/
 structure NativeOpenDerivedTensorData (sheaves : NativeOpenTensorData k₀ l j) where
   /-- The natural isomorphism on arbitrary ambient derived inputs. -/
   gamma : nativeOpenDerivedLeft k₀ l j ≅ nativeOpenDerivedRight k₀ l j
@@ -120,8 +122,7 @@ structure NativeOpenDerivedTensorData (sheaves : NativeOpenTensorData k₀ l j) 
       (Scheme.Hom.geometricFiberMap j (comp_over j _))).mapExactDerivedCategory restriction gamma)
 
 /-- Every operation and representative in the presentation is the actual native one.
-HEq records equality of dependent presentations without imposing another tensor choice.
-Source: Stacks 0GL1 (blueprint: lem-sf-native-open-derived-tensor). -/
+HEq records equality of dependent presentations without imposing another tensor choice. -/
 def NativeOpenPresentationCompatibility (s : NativeOpenTensorData k₀ l j)
     (d : NativeOpenDerivedTensorData k₀ l j s)
     (c : OpenTensorPresentation (ProEtaleWeilSheaf k₀ l U) (ProEtaleWeilSheaf k₀ l Z)) :

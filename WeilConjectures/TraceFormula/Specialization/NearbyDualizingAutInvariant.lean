@@ -31,6 +31,12 @@ The proof follows the uniqueness of the dualizing maps:
   exchange `α_j` intertwines the two actions
   (`NearbyCyclesModel.Hom.pullbackExchange_app_comp_autAction_of_comm`).
 
+## Implementation details
+
+The auxiliary intertwining and unit-fixing lemmas on bounded constructible complexes are stated
+for arbitrary ambient transformations, kept abstract so that elaboration never unfolds the ambient
+exchanges and actions.
+
 -/
 
 @[expose] public section
@@ -79,8 +85,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k k' : Type u} [Field k] [Fact (ringChar 
   {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
 /-- The intertwining of actions by an exchange on bounded constructible complexes, for arbitrary
-ambient transformations: kept abstract so that elaboration never unfolds the ambient exchanges
-and actions. -/
+ambient transformations. -/
 private lemma comp_map_autAction_aux
     (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
@@ -113,7 +118,7 @@ private lemma comp_map_autAction_aux
 omit [Fact (ringChar k).Prime] [Fact (ringChar k').Prime] [IsSeparated X.hom]
   [IsSeparated X'.hom] in
 /-- The action of a self-map on bounded constructible complexes fixes the specialization unit if
-the ambient one does: kept abstract so that elaboration never unfolds the ambient action. -/
+the ambient one does. -/
 private lemma unit_comp_autAction_aux
     (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (βa : ∀ E, (M.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj E ⟶
@@ -158,8 +163,7 @@ lemma Hom.boundedConstructibleUnit_comp_autAction (s : M.Hom M (𝟙 _) (𝟙 _)
     (fun K ↦ by rw [Hom.boundedConstructibleAutAction_app, ObjectProperty.homMk_hom])
 
 /-- The intertwining of actions by the bounded constructible pullback exchange, for arbitrary
-endomorphisms of the nearby cycles: kept abstract so that elaboration never unfolds the ambient
-actions. -/
+endomorphisms of the nearby cycles. -/
 private lemma pullbackExchange_comp_autAction_aux (φ : M.Hom N f.left f'.left)
     (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
@@ -232,9 +236,7 @@ variable {k' : Type u} [Field k'] {ℓ : ℕ} [Fact ℓ.Prime] [IsSepClosed k']
 
 /-- **Invariance of the dualizing maps of proper models under Galois automorphisms**: for a
 proper model with full geometric generic fibre and a self-map `ψ` which is the identity on the
-total space and `σ` over `η` on the geometric generic point, `ρ(ψ) ≫ θ_M = θ_M`. Both sides have
-the same trace: the proper exchange `χ_a` carries `RΓ(ρ(ψ))` to the action of `σ` on `Ψ_S`, which
-fixes `Ψ_S(tr) ∘ σ_s⁻¹`. -/
+total space and `σ` over `η` on the geometric generic point, `ρ(ψ) ≫ θ_M = θ_M`. -/
 theorem autAction_comp_θ_of_isProper (D : NearbyDualizingDataOfGenericBase k' ℓ)
     {F : Type u} [Field F] [Fact (ringChar F).Prime] [Fact (ringChar F ≠ ℓ)]
     {X₁ : Over (Spec (.of F))} [LocallyOfFiniteType X₁.hom] [QuasiCompact X₁.hom]
@@ -283,17 +285,11 @@ theorem autAction_comp_θ_of_isProper (D : NearbyDualizingDataOfGenericBase k' �
     Functor.map_comp, Category.assoc, reassoc_of% hχ, htr]
   rw [← actS.naturality_assoc, hunit']
 
-/-- **Invariance of the dualizing maps under Galois automorphisms** (blueprint
-`lemma-nearby-duality-slice--1`, "the map `θ`"): for a trait model `M` of `X₁` over the generic
-base and a self-map `ψ` of `M` over the identities which is the identity on the total space and
-acts on the geometric generic point through an automorphism `σ` of `Spec Ω` over `η`
-(`ψ.generic ≫ g = g ≫ σ`), the action `ρ(ψ)` of `ψ` on `Ψ_M ω_{X₁}` fixes the dualizing map:
-`ρ(ψ) ≫ θ_M = θ_M`. The model is an open sub-model of a proper model with full geometric generic
-fibre, to which `ψ` extends (by `σ` on the geometric generic fibre); the dualizing map of the
-proper model is invariant
-(`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.autAction_comp_θ_of_isProper`),
-and open restriction carries this invariance to `M`, the pullback exchange `α_j` intertwining
-the two actions. -/
+/-- **Invariance of the dualizing maps under Galois automorphisms**: for a trait model `M` of `X₁`
+over the generic base and a self-map `ψ` of `M` over the identities which is the identity on the
+total space and acts on the geometric generic point through an automorphism `σ` of `Spec Ω` over
+`η` (`ψ.generic ≫ g = g ≫ σ`), the action `ρ(ψ)` of `ψ` on `Ψ_M ω_{X₁}` fixes the dualizing map:
+`ρ(ψ) ≫ θ_M = θ_M`. -/
 theorem autAction_comp_θ (D : NearbyDualizingDataOfGenericBase k' ℓ)
     {F : Type u} [Field F] [Fact (ringChar F).Prime] [Fact (ringChar F ≠ ℓ)]
     {X₁ : Over (Spec (.of F))} [LocallyOfFiniteType X₁.hom] [QuasiCompact X₁.hom]

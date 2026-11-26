@@ -12,6 +12,18 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 import WeilConjectures.RingTheory.Smooth.AugmentationPolynomialTruncationsSurjective
 
+/-!
+# Injectivity of augmented polynomial truncations
+
+For a formally smooth augmented `B`-algebra `C` and a map `f : B[X₁, ..., Xₙ] → C` sending the
+variables into the augmentation ideal `I`, we show that if `f` is bijective modulo the squares of
+the augmentation ideals, then it is injective modulo all their powers.
+
+## References
+
+* [Stacks, Tag 05D5]
+-/
+
 @[expose] public section
 
 universe u
@@ -220,22 +232,10 @@ private theorem exists_augmented_truncation_inverse_lift
   change e.symm (f₀ (Ideal.Quotient.mk (J ^ r) p)) = _
   exact AlgEquiv.ofBijective_symm_apply_apply f₀ hbij _
 
-/-- Formal smoothness gives injectivity of the augmented polynomial truncations.
-
-Source: Stacks Project, Tag 05D5, lifting and correction in the truncation induction.
-(blueprint: lem-sbc-formally-smooth-augmentation-truncations-injective)
-
-Proof: The surjectivity component gives surjectivity at every degree. At degree zero
-both quotients are zero, and at degree one both augmentations identify the quotients
-with B; degree two is the given bijection. Assume bijectivity at degree r ≥ 2.
-Lift its inverse composed with C → C/I^r to C → B[X]/J^(r+1) by formal smoothness.
-The projection kernel J^r/J^(r+1) is square-zero. Reduction to B shows that this lift
-sends I into J/J^(r+1), so it descends through C/I^(r+1). Its composite with f sends
-each variable Xᵢ to Xᵢ + δᵢ, with δᵢ in J^r/J^(r+1). Substitution Xᵢ ↦ Xᵢ - δᵢ
-inverts this composite: substitution changes a degree-r correction only in degrees
-at least 2r-1 ≥ r+1. Thus the composite is injective, and so is f at degree r+1.
-Combine this with the separately known surjectivity to continue the induction.
-The same calculation uses empty sums for n = 0 and also covers the zero base ring. -/
+/-- Let `C` be formally smooth over `B` with augmentation `ε : C → B` and kernel `I`, and let
+`f : B[X₁, ..., Xₙ] → C` send the variables into `I`. If `f` induces a bijection modulo the
+squares of the augmentation ideals, then it induces injections `B[X]/Jᵏ → C/Iᵏ` for every `k`,
+where `J` is the ideal of the variables. -/
 theorem bijective_augmented_polynomial_truncations_injective
     (B C : Type u) [CommRing B] [CommRing C] [Algebra B C]
     [FormallySmooth B C] (ε : C →ₐ[B] B) (n : ℕ)

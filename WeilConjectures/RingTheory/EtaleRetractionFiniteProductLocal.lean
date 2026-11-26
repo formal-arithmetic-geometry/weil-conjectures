@@ -12,19 +12,41 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 /-!
 # Finite algebras over a local ring with étale retractions
 
-Source: `literature/stacks-project/algebra.tex`, Lemma Tag 04GG (proof of 8 => 10)
-(blueprint: lem-weil-pbc-etale-retraction-finite-product-local).
+Over a local ring `R` for which pointed étale neighbourhoods admit retractions, every finite
+`R`-algebra is a finite product of local rings.
+
+## Implementation details
+
+The proof of `finite_algebra_is_product_local_rings` proceeds as follows.
+
+1. Apply the étale idempotent decomposition of a finite algebra to `R → B` at the maximal ideal:
+   obtain an étale `R'`, a prime `p` over the maximal ideal with bijective residue-field map, and
+   complete orthogonal idempotents `e₁, …, eₙ, e∞` in `C = R' ⊗[R] B`. Every prime over `p`
+   contains `e∞`, and at most one such prime misses each `eᵢ`.
+2. Apply the hypothesis `hR` to obtain a retraction `τ` with the prescribed maximal-ideal comap.
+3. The surjection `φ : C → B`, `r' ⊗ b ↦ τ(r') • b`, pulls primes of `B` over the maximal ideal
+   back to primes of `C` over `p`.
+4. The images `fᵢ = φ(eᵢ)` and `f∞ = φ(e∞)` are complete orthogonal idempotents; every prime of
+   `B` over the maximal ideal contains `f∞`, and at most one misses each `fᵢ`.
+5. Every maximal ideal of the finite algebra `fB` lies over the maximal ideal of `R`, hence
+   `f∞B = 0` and each nonzero `fᵢB` is local.
+6. Discarding the zero `fᵢ`, the remaining idempotents give the algebra isomorphism
+   `b ↦ (fᵢb)`. If `B` is zero, the product is empty.
+
+## References
+
+* [Stacks, Tag 04GG], proof of (8) ⇒ (10)
+* [Stacks, Tag 00UK]
+* [Stacks, Tag 00UL]
 -/
 
 @[expose] public section
 
 universe u v
 
-/-- The final algebra step of Stacks Project, algebra.tex, Lemma Tag 04GG, (8) => (10).
-Discard the zero idempotents. The quotients by `1 - eᵢ` are nonzero, and their maximal
-ideals pull back injectively to maximal ideals missing `eᵢ`; hence each quotient is local.
-Mathlib's complete-orthogonal-idempotent product map identifies the ring with their product.
-The empty family covers the zero ring. -/
+/-- A ring with a complete family of orthogonal idempotents `eᵢ` such that, for each `i`, at most
+one maximal ideal misses `eᵢ`, is isomorphic as an `R`-algebra to a finite product of local
+rings. -/
 private theorem product_local_of_separating_idempotents
     {R : Type u} [CommRing R] {B : Type v} [CommRing B] [Algebra R B]
     {I : Type*} [Fintype I] (e : I → B) (he : CompleteOrthogonalIdempotents e)
@@ -95,33 +117,7 @@ private theorem product_local_of_separating_idempotents
     inferInstance, inferInstance, fun i ↦ hloc _, ⟨E.trans E'⟩⟩
 
 /-- Over a local ring for which pointed étale neighborhoods admit retractions, every
-finite algebra is a finite product of local rings.
-
-Source: Stacks Project, algebra.tex, Lemma Tag 04GG, proof of (8) => (10).
-The proof follows the six steps of the node:
-
-1. Apply `lem-weil-pbc-finite-algebra-etale-idempotent-decomposition` (Tag 00UK,
-   finite case Tag 00UL) to `R → B` at the maximal ideal. Obtain an étale `R'`, a
-   prime `p` over that ideal with bijective residue-field map, and complete
-   orthogonal idempotents `e₁, …, eₙ, e∞` in `C = R' ⊗[R] B`. Every prime over
-   `p` contains `e∞`, and at most one such prime misses each `eᵢ`.
-2. Apply `hR` to obtain the retraction `τ` with the prescribed maximal-ideal comap.
-3. The tensor-product universal property gives the surjection `φ : C → B` sending
-   `r' ⊗ b` to `τ(r') • b`. A prime of `B` over the maximal ideal pulls back to a
-   prime of `C` over `p`; surjectivity recovers the original prime from its preimage.
-4. The images `fᵢ = φ(eᵢ)` and `f∞ = φ(e∞)` are complete orthogonal idempotents.
-   Every prime of `B` over the maximal ideal contains `f∞`; at most one misses `fᵢ`.
-5. For an idempotent `f`, the factor `fB`, with unit `f`, is a finite quotient of
-   `B`. Its primes correspond to primes of `B` missing `f`. By
-   `lem-weil-pbc-finite-algebra-local-radical`, every maximal ideal of this finite
-   algebra lies over the maximal ideal of `R`. Hence `f∞B = 0`, since otherwise it
-   would have a maximal ideal. Each nonzero `fᵢB` has exactly one maximal ideal,
-   and is therefore a local ring.
-6. Discard the zero `fᵢ`. The remaining orthogonal idempotents sum to `1`, giving
-   the algebra isomorphism `b ↦ (fᵢb)`, with inverse the sum of the components.
-   If `B` is zero, no factors remain and the product is empty.
-
-(blueprint: lem-weil-pbc-etale-retraction-finite-product-local) -/
+finite algebra is a finite product of local rings. -/
 theorem finite_algebra_is_product_local_rings
     {R : Type u} [CommRing R] [IsLocalRing R]
     (hR : ∀ (R' : Type (max u v)) [CommRing R'] [Algebra R R'],

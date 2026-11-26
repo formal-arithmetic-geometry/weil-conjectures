@@ -16,8 +16,20 @@ import WeilConjectures.RingTheory.FlatOverRegular
 /-!
 # Miracle flatness
 
-Source: Stacks Project, Algebra, Lemma 10.128.1 (Tag 00R4)
-(blueprint: lem-weil-pbc-miracle-flatness).
+A local homomorphism from a regular local ring to a Cohen–Macaulay local ring is flat when the
+target dimension is the source dimension plus the closed fibre dimension.
+
+## Implementation details
+
+A minimal generating list `x` of the source maximal ideal has length the source dimension. The
+dimension formula says that quotienting by `x.map φ` drops the target dimension by its length,
+so `x.map φ` is regular (Stacks 00N6), and flatness over regular parameters (Stacks 07DY)
+applies.
+
+## References
+
+* [Stacks, Tag 00R4]
+* [Stacks, Tags 00N6, 07DY]
 -/
 
 @[expose] public section
@@ -29,17 +41,6 @@ namespace RingHom
 /-- A local homomorphism from a regular Noetherian local ring to a Cohen–Macaulay
 Noetherian local ring is flat when target dimension is source dimension plus closed
 fibre dimension. The finite dimension `e` records Cohen–Macaulayness by the depth bound.
-Source: Stacks Project, Algebra, Lemma 10.128.1 (Tag 00R4)
-(blueprint: lem-weil-pbc-miracle-flatness).
-
-Proof: choose a finite generating set of the source maximal ideal of minimum cardinality,
-using Mathlib's span rank. Regularity identifies its cardinality with the source dimension.
-List these generators as `x`. Since the homomorphism is local, the list `x.map φ` lies in
-the target maximal ideal, and its generated ideal is the mapped source maximal ideal.
-The assumed dimension formula therefore says that quotienting by this list drops the
-target dimension by the length of the list. The Cohen–Macaulay dimension-drop criterion
-(Stacks, Tag 00N6) shows that `x.map φ` is regular. Apply flatness over regular parameters
-(Stacks, Tag 07DY). This route works also for an empty list and source dimension zero.
 -/
 theorem flat_of_regular_of_depth_ge {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] [IsRegularLocalRing R] [IsLocalRing S] [IsNoetherianRing S]

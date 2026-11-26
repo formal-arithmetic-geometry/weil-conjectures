@@ -10,12 +10,13 @@ public import WeilConjectures.SmoothPurity.IntegralCoherence.SequencePullbackMon
 
 /-! # Composition law of the strict quotient comparisons
 
-Source: Stacks 07A4 and 0D6D
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
-
 The recorded generator-normalized comparisons of strict quotient complexes satisfy the
 composition law with the adjunction-normalized compositor, written with the total tensor
 bifunctor.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -101,12 +102,7 @@ private local instance (priority := 10000) complexMonoidal (V : Scheme.{u}) :
     MonoidalCategory (StrictQuotient.Complex l E V) := inferInstance
 
 /-- The strict comparisons satisfy the cochain composition law, in the form of the total
-tensor bifunctor.
-Source: Stacks 07A4, 0D6D
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
-Proof: the generator-normalized strict comparisons are the components of
-`sequenceComparison`, whose composition law is `sequenceComparison_compositionLaw`;
-the total tensor of two maps is the monoidal tensor of the maps. -/
+tensor bifunctor. -/
 theorem comparison_composition {X Y Z : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)
     (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ) :
     (comparison l E (h ≫ f) P Q).hom ≫

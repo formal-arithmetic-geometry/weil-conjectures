@@ -12,8 +12,15 @@ public import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorG
 
 /-! # The uniquely normalized good scalar tensor isomorphism
 
-Source: Stacks 07A4 and 0941; categories.tex, Tag 04VK.
-(blueprint: def-pur-integral-scalar-tensor-good-iso).
+## Implementation details
+
+The isomorphism is the one determined by the uniqueness theorem through all its hom
+components; no arbitrary existence witness is used. Only its invertibility proofs depend on
+the chain quasi-isomorphism theorem.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941, 08TC and 04VK.
 -/
 
 @[expose] public noncomputable section
@@ -64,20 +71,11 @@ attribute [local implicit_reducible] integralOperationsTensorOnGood
   integralOperationsGoodLocalization integralOperationsTensorComplexFunctor
 
 variable (W : AlgebraicGeometry.Scheme.{u})
-/-- The uniquely normalized good comparison, with its fixed chain-map components.
-Source: Stacks 07A4, 0941 and 08TC.
-(blueprint: def-pur-integral-scalar-tensor-good-iso).
-The proved uniqueness theorem determines this object by all its hom components;
-no arbitrary existence witness is used. Its construction is the NatIso.ofComponents
-construction in that theorem, and only its invertibility proofs depend on the
-chain quasi-isomorphism theorem. -/
+/-- The uniquely normalized good comparison, with its fixed chain-map components. -/
 def integralScalarTensorGoodIso :=
   (integralScalarTensorGoodComparison l E L ι W).exists.choose
 
-/-- The good tensor comparison has exactly the specified localized chain components.
-Source: Stacks 07A4, 0941 and 08TC.
-(blueprint: def-pur-integral-scalar-tensor-good-iso).
-Proof: apply choose_spec of the proved uniqueness theorem used in the definition. -/
+/-- The good tensor comparison has exactly the specified localized chain components. -/
 theorem integralScalarTensorGoodIso_hom_app (P) :
     (integralScalarTensorGoodIso l E L ι W).hom.app P =
       DerivedCategory.Q.map (scalarTensorChain l E L ι W P.1.obj P.2.obj) :=

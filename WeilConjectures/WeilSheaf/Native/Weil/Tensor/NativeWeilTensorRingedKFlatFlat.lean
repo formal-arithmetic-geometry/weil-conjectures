@@ -14,6 +14,17 @@ import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 The K-flat transport is the first independent field of the native ringed tensor
 interface.  Its proof uses the underived tensor comparison and the additive
 native equivalence. No choice of K-flat resolution is needed.
+
+## Implementation details
+
+An arbitrary ringed acyclic test complex is pulled back along the inverse complex
+equivalence; its native tensor with `P` is acyclic by hypothesis, and the total comparison
+and the counit identify the image of this complex with the ringed tensor of the original
+test and the transported `P`. The tensor-Hom adjunction provides the underived comparison.
+
+## References
+
+* Stacks 06YS, 06YU, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -31,18 +42,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, P.HasMapBifunctor Q T]
 
 /--
-Transport acyclic-test K-flatness through the native additive equivalence.
-Source: Stacks 06YS, 06YU and 0FPT.
-(blueprint: lem-sf-native-weil-tensor-ringed-kflat-flat).
-
-Proof: identify the native tensor with the normalized ringed tensor by the
-underived Hom comparison, then transport the acyclic-test condition through
-`b.native`: pull an arbitrary ringed acyclic test back along the inverse
-complex equivalence. Its native tensor with P is acyclic by hypothesis, and
-applying the exact equivalence preserves acyclicity. The total comparison and
-the counit identify this complex with the ringed tensor of the original test
-and the transported P. Transport exactness across that isomorphism degreewise.
-The tensor-Hom adjunction is needed to obtain the underived comparison.
+The native additive equivalence sends complexes that are K-flat for the native tensor to
+K-flat complexes of ringed modules.
 -/
 -- repair: pass the normalized-sign proof required by ChainData (global-build fix)
 theorem native_weil_tensor_ringed_kflat_flat (adj : T ⊣₂ ihomBifunctor k₀ l X) :

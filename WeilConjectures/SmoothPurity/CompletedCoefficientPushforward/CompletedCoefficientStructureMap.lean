@@ -10,7 +10,19 @@ import Mathlib.CategoryTheory.Sites.Limits
 
 /-! # The completed coefficient structural map
 
-Source: Stacks Tags 0D6E and 0A07: constant coefficients and direct image of limits.
+The structural map from the completed coefficient ring sheaf on `Y` to the direct image of
+the completed coefficient ring sheaf on `X`, characterized by the finite constant-section
+maps.
+
+## Implementation details
+
+The map is the universal lift into the direct image of the limit of the finite tower on `X`;
+ring-sheaf direct image preserves limits because after the conservative sheaf-to-presheaf
+functor it is precomposition.
+
+## References
+
+* Stacks Project, Tags 0D6E and 0A07.
 -/
 
 @[expose] public noncomputable section
@@ -126,24 +138,9 @@ private theorem structure_constant
           (ULift.ringEquiv : ULift.{t + 1} _ ≃+* _).toRingHom))
   exact constantPush_naturality.{t, u} f h
 
-/-- The completed structural map is uniquely fixed by the finite constant-section maps.
-
-Source: Stacks sites-cohomology.tex Tags 0D6E and 0A07
-(blueprint: lem-pur-completed-coefficient-structure-map).
-Proof: first transpose naturality of the sheafification unit through the constant-sheaf
-adjunction. Forgetting commutativity gives naturality of the specified constant-section
-maps. Apply this to the actual quotient transition homomorphisms. The limit projections
-on Y followed by these finite maps are therefore a cone over the direct image of the
-finite tower on X. Ring-sheaf direct image preserves limits: after the conservative
-sheaf-to-presheaf functor it is precomposition, which preserves limits pointwise.
-The universal lift of this cone gives c and its finite projection equations. Two such
-maps agree after every projection of the preserved limit, so are equal. For the constant
-integral square, test the two composites at each finite projection. The constant-to-limit
-map is the lift of its actual quotient cone; naturality for that quotient map identifies
-the resulting composites. Thus the uniquely constructed map also makes this square
-commute. This argument
-uses all positive exponents and the actual quotient transitions. On empty sites the
-same limit universal property applies; it also covers identity scheme maps. -/
+/-- There is a unique map `c` from the completed coefficient ring sheaf on `Y` to the direct
+image of that on `X` compatible with the finite structural maps at every level; it also
+commutes with the maps from the constant integral coefficients. -/
 theorem completedStructure_existsUnique :
     ∃! c : R l E Y ⟶ (ringPush.{t, u} f).obj (R l E X),
       (∀ n, c ≫ (ringPush.{t, u} f).map (projection l E X n) =

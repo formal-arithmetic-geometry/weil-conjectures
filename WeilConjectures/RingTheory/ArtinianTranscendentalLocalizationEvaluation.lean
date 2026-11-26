@@ -17,7 +17,22 @@ import Mathlib.RingTheory.HopkinsLevitzki
 /-!
 # A component of the transcendental polynomial localization argument
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07FI.
+For a flat local map `D → S` of Artinian local rings and `x ∈ S` with transcendental residue,
+evaluation at `x` extends to a flat local map from the localization `D[t]_P` at the contraction
+`P` of the maximal ideal of `S`.
+
+## Implementation details
+
+Every polynomial outside `P` evaluates to a unit, so the localization universal property gives a
+local map `D[t]_P → S` sending `t` to `x`. Transcendence identifies `P` with `m_D[t]`, so the
+closed fibre of `D → D[t]_P` is the field `F(t)`, `F = D/m_D`; the Noetherian fibre flatness
+criterion then shows that the map is flat. It is finally composed with the `ULift` ring
+equivalence. For `D` a field this is the extension of evaluation from `D[t]` to its fraction
+field.
+
+## References
+
+* [Stacks, Tag 07FI]
 -/
 
 @[expose] public section
@@ -25,21 +40,9 @@ set_option autoImplicit false
 universe u v z
 namespace Algebra
 
-/-- The flat local evaluation map from the transcendental polynomial localization.
-Source: Stacks Project, Smoothing Ring Maps, Tag 07FI, lines 2642--2675.
-(blueprint: lem-weil-pbc-artinian-transcendental-localization-core-evaluation)
-Proof: Every polynomial outside P evaluates outside m_S, hence to a unit.
-The localization universal property constructs g_0 : D[t]_P -> S. Its
-contraction of m_S is the maximal ideal of D[t]_P, so g_0 is local.
-The universal property gives the factorization over D, and t/1 maps to x.
-As in the structural argument, transcendence identifies P with m_D[t];
-thus the closed fibre of D -> D[t]_P is F(t), where F = D/m_D.
-Apply the Noetherian fibre flatness criterion to D -> D[t]_P -> S with
-module M = S, finite over itself: M is flat over D by hflat and its
-closed fibre is flat over the field F(t). Hence g_0 is flat. Compose
-with the canonical ULift down ring equivalence to obtain g'. This retains
-locality, flatness, the factorization and the image of t/1. For D a field
-this is precisely extension of evaluation from D[t] to its fraction field. -/
+/-- The flat local evaluation map from the transcendental polynomial localization: there is a
+flat local map `g' : D[t]_P → S` over `D` whose image contains `x`, where `P` is the contraction
+of the maximal ideal of `S` along evaluation at `x`. -/
 theorem localization_transcendental_evaluation
     (D : Type u) (S : Type v) [CommRing D] [CommRing S]
     [IsLocalRing D] [IsArtinianRing D] [IsLocalRing S] [IsArtinianRing S]

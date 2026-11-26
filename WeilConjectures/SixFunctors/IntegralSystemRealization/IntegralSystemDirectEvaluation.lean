@@ -13,7 +13,20 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Evaluation of a normalized derived system direct image
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 0941.
+We compute the evaluation of the universal right derived sequence-site direct image,
+including its adjunction and adjacent quotient normalizations.
+
+## Implementation details
+
+Evaluation at `n` has a left derived finite left extension, which commutes with exact
+geometric inverse image; Yoneda then gives the direct-image evaluation isomorphism. The
+transition equations are identities of system morphisms before localization, so evaluation
+faithfulness on derived morphisms is unnecessary.
+
+## References
+
+* [Zheng, Construction 4.1 and Lemma 4.10]
+* [Stacks, Tag 03DI], [Stacks, Tag 07A7], [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -127,30 +140,7 @@ private theorem restrictedDirect_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (n : �
     (Padic.coefficientExtensionTransition l E (n + 1)), HEq.rfl⟩
 
 /-- Evaluation of the universal right derived sequence-site direct image, including
-its adjunction and adjacent quotient normalizations.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941, 07A7
-(blueprint: lem-sf-integral-system-direct-evaluation).
-
-Proof: evaluation at n has a left derived finite left extension. On flat-term
-K-flat representatives the ordinary extension is zero above n and, at q at most n,
-is extension of scalars to the q-th quotient. Exact geometric inverse image
-commutes with this extension: its quotient pure-tensor map preserves balancing,
-transition maps and the zero components. Deriving gives the same interchange,
-without assuming quotient-ring flatness. Transpose through both finite-extension
-adjunctions and the geometric adjunctions. Yoneda gives the displayed direct-image
-evaluation isomorphism. The n-th component of the extension comparison is the
-identity, so the transposed counit is the finite counit; the triangle identities
-give the unit equation. The universal right-derived certificate and the factors
-field identify these adjunctions with d.adj, fixing its normalization.
-For adjacent quotients, take the published scalar-restriction comparison
-sfDerivedImageRestriction itself. The finite-extension interchange commutes
-with the canonical quotient maps: below n both maps send a pure tensor to its
-quotient, and above n the source is zero. Transposing this equality gives exactly
-the transition equation with coefficientSequenceDerivedTransition. These are
-identities of system morphisms before localization, so evaluation faithfulness
-on derived morphisms is unnecessary. Zero complexes and n = 0 obey the same
-formulas; no boundedness, normalization of the input, or invertibility of l on
-the schemes is required. -/
+its adjunction and adjacent quotient normalizations. -/
 theorem integralSystemDirectEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (d : Direct l E f) : Nonempty (DirectEvaluation l E d) := by
   let β (n : ℕ) := (mateEquiv d.adj (finiteAdj l E f n)

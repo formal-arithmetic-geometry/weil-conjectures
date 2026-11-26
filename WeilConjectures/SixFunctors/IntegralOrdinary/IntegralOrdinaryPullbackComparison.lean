@@ -11,10 +11,26 @@ import WeilConjectures.WeilSheaf.Ordinary.OrdinaryCompletedIntegralPullback
 
 /-! # The ordinary ringed pullback completion map
 
-Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 06YY and 08TC.
+We construct the ordinary-to-completed pullback map in the ringed coordinates and show that
+it is invertible on constructible inputs.
 The comparison uses the canonical isomorphism of the two ordinary pullback models.
--/
 
+## Implementation details
+
+The canonical adjunction identifies the ringed module pullback with the ordinary module
+pullback, and exact localization is its total left derived functor, which gives `pullIso`.
+The comparison is `pullIso` followed by `ordinaryIntegralCompletionComparison`, which is
+invertible by `ordinaryCompletedIntegralPullback`.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9 and
+  Proposition 6.6.11]
+* [Stacks, Tag 03D2]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 08TC]
+* [Stacks, Tag 0941]
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -27,8 +43,7 @@ namespace IntegralOrdinary
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Both direct coefficient maps are fixed by their finite quotient projections.
-Source: Stacks 0941 (blueprint: lem-sf-integral-ordinary-pullback-comparison). -/
+/-- Both direct coefficient maps are fixed by their finite quotient projections. -/
 theorem directRing_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
         (sfCompletedCoefficientMap l E f) = ordinaryIntegralDirectRingMap l E f := by
@@ -39,9 +54,7 @@ theorem directRing_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
       ((sfCompletedCoefficientMap_existsUnique l E f).exists.choose_spec n)
   · exact (ordinaryIntegralDirectRingMap_existsUnique l E f).exists.choose_spec
 
-/-- The canonical ordinary ringed and total-left-derived pullback models agree.
-Source: Stacks 03D2 and 06YY
-(blueprint: lem-sf-integral-ordinary-pullback-comparison). -/
+/-- The canonical ordinary ringed and total-left-derived pullback models agree. -/
 @[irreducible] def pullIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PurCompactSupport.pull (PurCompactSupport.completed l E) f ≅
       ordinaryIntegralDerivedPull l E f := by
@@ -73,23 +86,13 @@ Source: Stacks 03D2 and 06YY
       F.mapDerivedCategoryFactorsh.hom ε W
   exact Functor.mapDerivedCategoryNatIso b ≪≫ c
 
-/-- The actual ordinary-to-completed pullback map in the ringed coordinates.
-Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 08TC
-(blueprint: lem-sf-integral-ordinary-pullback-comparison). -/
+/-- The actual ordinary-to-completed pullback map in the ringed coordinates. -/
 @[irreducible] def pullComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PurCompactSupport.pull (PurCompactSupport.completed l E) f ⟶
       integralDerivedPullback l E f :=
   (pullIso l E f).hom ≫ ordinaryIntegralCompletionComparison l E f
 
-/-- The ringed-coordinate completion map is invertible on constructible inputs.
-Source: Bhatt--Scholze, Lemma 6.5.9 and Proposition 6.6.11
-(blueprint: lem-sf-integral-ordinary-pullback-comparison).
-
-Proof: the canonical adjunction identifies the ringed module pullback with the
-ordinary module pullback. Exact localization is its total left derived functor,
-so uniqueness gives pullIso. The comparison is pullIso followed by the specified
-ordinaryIntegralCompletionComparison; its latter factor is invertible by
-ordinaryCompletedIntegralPullback. -/
+/-- The ringed-coordinate completion map is invertible on constructible inputs. -/
 theorem pullComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsNoetherian X] [IsNoetherian Y]
     (hXdim : ∃ n : ℕ, topologicalKrullDim X ≤ n)

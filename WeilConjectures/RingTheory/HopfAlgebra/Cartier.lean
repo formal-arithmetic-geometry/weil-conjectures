@@ -47,8 +47,8 @@ polynomial ring, `⋂ₙ Iⁿ` is a prime ideal, and by Krull's intersection the
 of `k`-points acts on `A` by algebra automorphisms) moves this to every `k`-point, so over an
 algebraically closed field `A` is reduced; the general case follows by base change.
 
-This proves the blueprint's *Cartier step* `𝔫 ⊆ 𝔪²` in a stronger form, and replaces the passage
-through the smoothness of the reduced group by the invariant derivations.
+This proves the inclusion `𝔫 ⊆ 𝔪²` of the nilradical in the square of the augmentation ideal in a
+stronger form, using invariant derivations instead of the smoothness of the reduced group.
 
 ## Main results
 
@@ -64,10 +64,9 @@ through the smoothness of the reduced group by the invariant derivations.
 - `HopfAlgebra.finrank_cotangent_eq_ringKrullDim`: the cotangent space at the identity has the
   dimension of the group.
 
-## Blueprint
+## References
 
-- `proposition-cartier-s-theorem`: Cartier's theorem.
-- `lemma-connected-components-images-homomorphisms--3`: the dimension clause (2).
+* [Waterhouse, *Introduction to Affine Group Schemes*, §11.4]
 -/
 
 @[expose] public section
@@ -842,7 +841,7 @@ theorem HopfAlgebra.isReduced_of_isAlgClosed [IsAlgClosed k] [Algebra.FiniteType
 
 /-- **Cartier's theorem**: over a field of characteristic zero, a finitely generated commutative
 Hopf algebra is reduced. Equivalently, an affine group scheme of finite type over a field of
-characteristic zero is reduced. (blueprint: `proposition-cartier-s-theorem`) -/
+characteristic zero is reduced. -/
 theorem HopfAlgebra.isReduced_of_charZero [Algebra.FiniteType k A] : IsReduced A := by
   have : CharZero (AlgebraicClosure k) :=
     charZero_of_injective_algebraMap (algebraMap k (AlgebraicClosure k)).injective
@@ -853,7 +852,7 @@ theorem HopfAlgebra.isReduced_of_charZero [Algebra.FiniteType k A] : IsReduced A
     (Algebra.TensorProduct.includeRight_injective (algebraMap k (AlgebraicClosure k)).injective)
 
 /-- In characteristic zero, every Hopf ideal of a finitely generated commutative Hopf algebra is
-radical: closed subgroup schemes are reduced. (blueprint: `proposition-cartier-s-theorem`) -/
+radical: closed subgroup schemes are reduced. -/
 theorem Ideal.IsHopfIdeal.isRadical [Algebra.FiniteType k A] (I : Ideal A) [I.IsHopfIdeal k] :
     I.IsRadical := by
   have := HopfAlgebra.isReduced_of_charZero (k := k) (A := A ⧸ I)
@@ -871,9 +870,7 @@ theorem HopfAlgebra.finrank_cotangent_le_ringKrullDim [Algebra.FiniteType k A] :
 variable (k A) in
 /-- **Dimension of a group scheme in characteristic zero.** For a finitely generated commutative
 Hopf algebra `A` over a field `k` of characteristic zero, the cotangent space `𝔪 / 𝔪²` at the
-identity has dimension `dim A`: the group scheme `Spec A` is smooth, so its tangent space at the
-identity has the dimension of the local ring there, and translations make all its local
-dimensions equal. (blueprint: `lemma-connected-components-images-homomorphisms--3`, clause (2)) -/
+identity has dimension `dim A`. -/
 theorem HopfAlgebra.finrank_cotangent_eq_ringKrullDim [Algebra.FiniteType k A] :
     (Module.finrank k (RingHom.ker (counitAlgHom k A)).Cotangent : WithBot ℕ∞) =
       ringKrullDim A :=

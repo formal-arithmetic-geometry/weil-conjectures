@@ -16,8 +16,19 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 /-!
 # A localization as a filtered colimit of principal localizations
 
-Source: Stacks Project, Algebra, Lemma 10.9.9, Tag 00CR, specialized to the ring itself
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
+The localization `S⁻¹P` of a ring at a multiplicative set `S` is the filtered colimit of the
+principal localizations `P_f`, `f ∈ S`, ordered by divisibility.
+
+## Implementation details
+
+The transition maps `P_f → P_g` for `f ∣ g` and the maps `P_f → S⁻¹P` are built with
+`IsLocalization.Away.lift` and are determined on `P`. A cocone is factored through `S⁻¹P` via
+its component at `1` and `IsLocalization.lift`. Uniqueness of colimits identifies the chosen
+colimit with `S⁻¹P`.
+
+## References
+
+* [Stacks, Tag 00CR] (in the ring case)
 -/
 
 @[expose] public section
@@ -28,30 +39,12 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CommRingCat
 
-/-- Stacks Project, Algebra, Tag 00CR, in the ring case.
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
-The divisibility preorder on `S` is directed, and hence filtered. The maps between the
-principal localizations are specified on every fraction, for every choice of the factor `h`.
-The functor and its chosen colimit `colimit F` are identified with these rings and maps by
-the displayed isomorphisms; these merely transport the diagram, rather than change its objects.
-
-Proof (Stacks 00CR's universal-property hint, specialized to rings):
-1. Use divisibility for the preorder. The product `f * g` is a common upper bound,
-   and `1 ∈ S`, so the associated category is filtered.
-2. Construct `rho` by `IsLocalization.Away.lift`: a divisor of the unit `g` is a unit.
-   The fraction formula follows by multiplying by the image of `g^n` and using
-   `IsLocalization.mk'_spec`; the construction does not choose a factor `h`.
-3. Construct `kappa` by the same universal property, since every element of `S` becomes
-   a unit. Its fraction formula follows from `mk'_spec` as well.
-4. Ring homomorphisms out of a localization are determined on the original ring.
-   This proves the identity, composition, and cocone compatibility equations.
-5. For an arbitrary cocone, compose its component at `1` with the map from `P`.
-   Naturality along `1 ≤ f` identifies this composite with the one at every `f`.
-   Thus it sends `f` to a unit, witnessed by the component at `f`, and extends to
-   `S⁻¹P` by `IsLocalization.lift`. Extensionality on `P` proves factorization
-   through every component and uniqueness, giving a colimit cocone.
-6. Take the identity object isomorphisms for the diagram, and use uniqueness of
-   colimits to identify its chosen colimit with `S⁻¹P`, preserving the coprojections. -/
+/-- A localization `S⁻¹P` is the filtered colimit of the principal localizations at elements of
+`S`, ordered by divisibility. The divisibility preorder on `S` is directed, and hence filtered.
+The maps between the principal localizations are specified on every fraction, for every choice
+of the factor `h`. The functor and its chosen colimit `colimit F` are identified with these
+rings and maps by the displayed isomorphisms; these merely transport the diagram, rather than
+change its objects. -/
 theorem localization_colimit_principalLocalizations
     (P : Type u) [CommRing P] (S : Submonoid P) :
     ∃ p : Preorder S,

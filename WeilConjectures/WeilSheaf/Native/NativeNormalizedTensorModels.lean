@@ -10,8 +10,9 @@ public import WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
 
 /-! # Evaluation-normalized native tensor models
 
-Source: Stacks 0A96, 08J9 and 06YN.
-(blueprint: lem-sf-native-normalized-tensor-models).
+## References
+
+* Stacks 0A96, 08J9 and 06YN.
 -/
 
 @[expose] public section
@@ -26,18 +27,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
 attribute [local irreducible] nativeDerivedClosedComparison
 
-/-- The native tensor models retain their evaluation normalization.
-
-Source: Stacks 0A96, 08J9 and 06YN; the K-flat tensor--Hom argument.
-(blueprint: lem-sf-native-normalized-tensor-models).
-
-Proof: the underived adjunction is parametrized by inverse mates. Apply the
-normalized generic K-flat tensor--Hom construction to this adjunction and the
-fixed Hom representatives of nativeDerivedClosedComparison. NativeIsKFlat's
-second test is exactly the required preservation of quasi-isomorphisms. The
-resulting isomorphisms are natural in both complexes and their evaluation maps
-have the signed summand formula. Thus their choice is fixed by the adjunction,
-rather than by naturality alone. -/
+/-- The native tensor models retain their evaluation normalization. -/
 theorem native_normalized_tensor_models :
     ∃ e : ∀ (P T : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ),
       NativeIsKFlat k₀ l X P → NativeIsKFlat k₀ l X T →

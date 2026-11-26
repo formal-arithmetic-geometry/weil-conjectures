@@ -8,7 +8,10 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPu
 import all WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedTensorAssociatorDetection
 
 /-! # Associativity of ordinary pro-étale tensor pullback
-Source: Stacks 03EL and 07A4.
+
+## References
+
+* Stacks Project, Tags 03EL and 07A4.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,13 +29,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
   PresheafOfModules.sheafificationAdjunction SheafOfModules.tensorObjIsoSheafification
   proEtaleOrdinaryTensorPullback proEtaleRingModuleAdjunction
 
-/-- The unit-normalized ordinary pullback tensor comparison respects reassociation.
-Source: Stacks 03EL and 07A4 (blueprint: lem-pur-ordinary-pullback-tensor-associativity).
-Proof: take adjuncts, which makes both maps start at the ordinary triple tensor.
-Move the source associator through the adjunction unit by naturality. Maps out of
-that tensor are determined by local pure triples. The two binary unit formulas,
-tensor-map formula, and ordinary associator formula identify both images with
-the same reassociated triple of unit sections. -/
+/-- The unit-normalized ordinary pullback tensor comparison respects reassociation. -/
 theorem proEtaleOrdinaryTensorPullback_associativity {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

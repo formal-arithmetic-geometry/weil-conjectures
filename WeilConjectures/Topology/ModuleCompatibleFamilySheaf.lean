@@ -13,8 +13,19 @@ import WeilConjectures.Topology.ModuleCompatibleFamilySheafCondition
 
 /-! # The sheaf of compatible local module sections
 
-Source: Stacks Project, Sheaves, Tags 00AL and 00AM.
-(blueprint: lem-weil-pbc-module-compatible-family-sheaf)
+The compatible-family equalizer of local sheaves of modules along overlap maps is represented by
+a sheaf of modules.
+
+## Implementation details
+
+On an open `V` the sections are the families in `Fi i (V ∩ U i)` identified by every overlap
+map; they form a submodule, and gluing is componentwise. To land in universe `max u v`, the
+explicit module of compatible families is shown to be small using a subcover indexed by the
+points of `X`, and then shrunk.
+
+## References
+
+* [Stacks Project, Tags 00AL and 00AM](https://stacks.math.columbia.edu/tag/00AL)
 -/
 
 @[expose] public section
@@ -27,31 +38,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The compatible-family equalizer is represented by a module sheaf with projections.
-No diagonal or cocycle assumption is needed for this construction.
-Source: Stacks Project, Sheaves, Tags 00AL (first proof, construction and sheaf axiom)
-and 00AM (module structure on the equalizer).
-(blueprint: lem-weil-pbc-module-compatible-family-sheaf)
-
-Proof: on an open V take families in Fi i(V ∩ U i) whose restrictions are identified
-by every overlap map. They form a submodule, since the transition maps are linear.
-Restrictions are componentwise and preserve the equalizer by naturality. Gluing is
-componentwise in the local sheaves; the equations hold after gluing by separation
-on the induced covering of each overlap. This proves the sheaf axiom. Projection
-on a component, followed by restriction, defines π i and gives its compatibility.
-A family on all subopens is determined by its component on V ∩ U i; its restriction
-and overlap equations are precisely those of this equalizer. Hence all coherent
-families are evaluations of global sections, and equality of evaluations implies
-equality of sections.
-
-For the universe bound, choose a cover member through each point of X. The resulting
-subcover is indexed in universe u. Compatible families on the full cover inject into
-the product of the components on this subcover: for each original member, its
-components are determined on its intersections with the subcover by the overlap
-isomorphisms, and then by separation. The full compatible-family module is therefore
-small in universe max u v. Shrink this explicit module, transport its restrictions
-and module structures through the shrinking equivalences, and obtain H. This changes
-no equations or universal properties. For the empty space the equalizer is the zero
-module, since every local sheaf has a unique section on the empty open. -/
+No diagonal or cocycle assumption is needed for this construction. -/
 theorem module_compatible_family_sheaf
     (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)
     (hcover : ⨆ i, U i = ⊤)

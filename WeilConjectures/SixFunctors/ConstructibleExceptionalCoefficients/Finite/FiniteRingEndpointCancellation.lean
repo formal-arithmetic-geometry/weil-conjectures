@@ -9,7 +9,13 @@ public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.F
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteRingEndpointPasting
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteRingFixedPushComposition
 
-/-! # Cancellation of the fixed finite endpoint coordinates -/
+/-! # Cancellation of the fixed finite endpoint coordinates
+
+## References
+
+* [Stacks, Tag 03D6]
+* [Stacks, Tag 0F7B]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -76,23 +82,7 @@ private theorem cancel_endpoint_coordinates
     Iso.self_symm_id, Iso.refl_trans, Iso.trans_refl] using hh
 
 /-- The explicit finite open witness has the specified intrinsic endpoint word.
-This is only the endpoint equation, without existence or open-adjunction normalization.
-Source: compactification-coherence proof, second paragraph; Stacks 03D6 and 0F7B
-(blueprint: lem-sf-finite-ring-endpoint-cancellation).
-
-Proof: start with finiteFixedPushIso_composition for r.hom and d.g. Insert the
-explicit definition of finiteFixedRefinementOpenIso. Naturality cancels its two
-inner inverse coordinate pairs, leaving the fixed proper/open map whiskered by
-the outer direct image. At each endpoint apply finiteFixedEndpointModelAt: the
-remaining open/direct-image coordinate is finiteImageIso followed by the inverse
-image of the equivalence counit and fixedCompactModel. Associate the fixed
-compositor at the object, and postcompose by the inverse of the
-endpoint coordinate at d. Cancel the two inverse pairs. The remaining right word is
-finiteImageIso at c followed by intrinsicRefinement: expand recordedRefinementCore
-and apply recordedCore_intrinsic, or use the definition of intrinsicRefinement with
-exactly its original category instances. This argument uses neither hi nor the
-open-unit equation. Identity refinements, zero objects and empty opens use the same
-isomorphism cancellation; no nonvanishing or nonemptiness assumption is required. -/
+This is only the endpoint equation, without existence or open-adjunction normalization. -/
 theorem finiteFixedEndpointCancellation
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)

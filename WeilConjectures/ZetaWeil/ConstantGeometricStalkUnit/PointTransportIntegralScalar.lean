@@ -9,8 +9,8 @@ public import WeilConjectures.ZetaWeil.ConstantGeometricStalkUnit.ConstantGeomet
 
 /-! # Scalar extension of iterated point transport
 
-Source: the constant-sheaf clause of `theorem-grothendieck-lefschetz-trace-formula--8`, reviewed
-expansion step 8 (blueprint: lem-zl-point-transport-integral-scalar).
+Scalar extension of the iterated point transport, for the constant-sheaf case of the
+Grothendieck–Lefschetz trace formula.
 -/
 
 @[expose] public noncomputable section

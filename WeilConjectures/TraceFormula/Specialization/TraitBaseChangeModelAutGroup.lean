@@ -17,9 +17,8 @@ public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAu
 The automorphisms `τ` of the geometric generic point `Spec Ω_K` of the trait `Spec K⟦t⟧` over
 `Spec K⟦t⟧` and over the geometric generic point `Spec Ω` of `S = Spec k'⟦t⟧`
 (`NearbyCyclesModel.GenericAut`) form a group under composition: the kernel `P'` of the map of
-inertia groups of the generic-slicing step of Gabber's Künneth formula (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Facts about traits"). Its action on the
-nearby cycles of a base change model (`NearbyCyclesModel.baseChangeAut`,
+inertia groups in the generic-slicing step of Gabber's Künneth formula for nearby cycles. Its
+action on the nearby cycles of a base change model (`NearbyCyclesModel.baseChangeAut`,
 `NearbyCyclesModel.Hom.autAction`) is an anti-homomorphism
 (`NearbyCyclesModel.autAction_baseChangeAut_mul`) sending `1` to the identity
 (`NearbyCyclesModel.autAction_baseChangeAut_one`). Hence, if a subgroup `V` acts trivially, the sum

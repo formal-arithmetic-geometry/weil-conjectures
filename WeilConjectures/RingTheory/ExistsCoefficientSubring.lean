@@ -19,8 +19,22 @@ import WeilConjectures.RingTheory.CoefficientSubringOfPrincipalSource
 /-!
 # Existence of a coefficient subring
 
-Source: Stacks Project, Algebra, Theorem 032A(1) and Definition 0326
-(blueprint: lem-weil-pbc-cohen-coefficient-ring-exists).
+A complete local ring `R` whose residue field has characteristic `p` contains a coefficient
+subring: a complete local subring `Λ` with maximal ideal `m ∩ Λ = (p)` mapping isomorphically
+onto the residue field of `R`.
+
+## Implementation details
+
+In residue characteristic zero the identity of the residue field is lifted successively through
+the square-zero kernels of `R/mⁿ → R/mⁿ⁻¹` using formal smoothness over `ℚ`, and the lifts are
+passed to the inverse limit. In positive characteristic a Cohen ring with the prescribed residue
+field is mapped to `R` by lifting modulo `pⁿ` and using completeness of `R`; the kernel of this
+map is zero or `(p^N)`, and in both cases the image is complete with maximal ideal `(p)`.
+
+## References
+
+* [Stacks, Tag 0326]
+* [Stacks, Tag 032A], part (1)
 -/
 
 @[expose] public section
@@ -29,27 +43,9 @@ universe u
 
 namespace IsLocalRing
 
-/-- A complete local ring contains a coefficient subring, in the sense of Stacks Project,
-Algebra, Definition 0326; existence is Theorem 032A(1).
-(blueprint: lem-weil-pbc-cohen-coefficient-ring-exists)
-
-Proof: (1) For n ≥ 2 the kernel of R/m^n → R/m^(n-1) is square-zero. In residue
-characteristic zero the quotients are Q-algebras; in characteristic p > 0, R/m^n is a
-Z/p^n-algebra. (2) In characteristic zero, lift the identity of the residue field successively
-through these square-zero kernels using formal smoothness over Q
-(lem-weil-pbc-char-zero-field-extension-formally-smooth and
-theorem-finite-etale-covers-proper-henselian--2). (3) Pass to the inverse limit using
-def-weil-pbc-adic-completion and def-weil-pbc-adically-complete-ring. The resulting section has
-image a field with zero intersection with m, and its reduction is an isomorphism.
-(4) In positive characteristic choose a Cohen ring with the prescribed residue field
-(lem-weil-pbc-cohen-rings-exist). Lift its maps modulo p^n successively using
-lem-weil-pbc-cohen-ring-mod-pn-formally-smooth. (5) Completeness of R gives a map from
-this Cohen ring to R, whose inverse image of m is its ideal (p).
-(6) By lem-weil-pbc-dvr-unit-times-uniformizer-power, its kernel is either zero or (p^N)
-for N ≥ 1. (7) Its image is local with maximal ideal its intersection with m, equal to
-(p), and the induced residue map is bijective. If the kernel is zero, completeness transfers
-from the Cohen ring; otherwise powers of (p) eventually vanish, so the inverse system of
-quotients stabilizes. This verifies all three coefficient-ring conditions. -/
+/-- A complete local ring whose residue field has characteristic `p` contains a coefficient
+subring: a complete local subring `Λ` whose maximal ideal is `m ∩ Λ = (p)` and whose residue
+field maps bijectively onto that of `R`. -/
 theorem exists_coefficient_subring (R : Type u) [CommRing R] [IsLocalRing R]
     [IsAdicComplete (maximalIdeal R) R] (p : ℕ) [CharP (ResidueField R) p] :
     ∃ (Λ : Subring R) (hΛ : IsLocalRing Λ),

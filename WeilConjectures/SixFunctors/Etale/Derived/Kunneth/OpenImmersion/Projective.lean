@@ -14,15 +14,13 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Integral
 /-!
 # Base change along open immersions: the projective case
 
-This file contains the "projective case" of the proof of blueprint
-`corollary-open-direct-image-over-field--2`: if `Y` is proper (e.g. projective) over `K` and the
-base change map is an isomorphism on the geometric stalks at all non-closed points of `X ×_K Y`,
-then it is an isomorphism. After the reduction to a separably closed ground field (blueprint
-`corollary-open-direct-image-over-field--2`), the cone `Q` of the derived base change map is
-supported on closed points, so it vanishes as soon as its cohomology does (blueprint
-`corollary-open-direct-image-over-field--2`), and the base change map induces an isomorphism on
-cohomology by the Künneth formula with one proper factor (blueprint
-`lemma-kunneth-finite-direct-image--1`).
+This file contains the "projective case" of the proof of base change for open immersions along
+a product projection: if `Y` is proper (e.g. projective) over `K` and the base change map is an
+isomorphism on the geometric stalks at all non-closed points of `X ×_K Y`, then it is an
+isomorphism. After the reduction to a separably closed ground field, the cone `Q` of the derived
+base change map is supported on closed points, so it vanishes as soon as its cohomology does,
+and the base change map induces an isomorphism on cohomology by the Künneth formula with one
+proper factor.
 
 The hypothesis on the stalks at non-closed points passes to the base change to `K^sep`
 (`AlgebraicGeometry.Etale.isIso_sheafFiber_baseChangeHomologyMap_cube_iff`), since the
@@ -57,9 +55,8 @@ lemma Scheme.Hom.not_isClosed_singleton_apply_of_isIntegralHom {X Y : Scheme.{u}
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Proof of blueprint `corollary-open-direct-image-over-field--2`, the projective case: for `Y`
-proper over `K`, if the base change map at `F` is an isomorphism on the geometric stalks at all
-non-closed points of `W = X ×_K Y`, then it is an isomorphism. -/
+/-- The projective case: for `Y` proper over `K`, if the base change map at `F` is an isomorphism on
+the geometric stalks at all non-closed points of `W = X ×_K Y`, then it is an isomorphism. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isProper_of_forall_not_isClosed {K : Type u}
     [Field K] {X U Y W V : Scheme.{u}} (aX : X ⟶ Spec (.of K)) (aY : Y ⟶ Spec (.of K))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [IsProper aY]

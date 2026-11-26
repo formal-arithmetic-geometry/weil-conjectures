@@ -12,8 +12,20 @@ import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarQuotientRoosAugme
 
 /-! # Coherent quotient presentations and scalar completion
 
-Source: Stacks 06YY and 0941. This isolates the source-side presentation
-transport in the scalar/pullback realization calculation.
+This isolates the source-side presentation transport in the scalar/pullback realization
+calculation.
+
+## Implementation details
+
+Quotient scalar tensors are associated, level by level, with the quotient of the ordinary scalar
+extension. These associations commute with differentials and quotient transitions, giving an
+isomorphism to the ordinary quotient model along which the normalized comparison is
+transported. The final coherence equation is proved via the reduction/total-limit adjunction on
+the entire sequence site, without faithfulness of individual derived evaluations.
+
+## References
+
+* Stacks Project, Tags 06YY and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -151,33 +163,7 @@ private theorem scalarPresentation_homEquiv
     adj.homEquiv_naturality_right, Equiv.apply_symm_apply]
 
 -- Compose the large derived functor interfaces without unfolding their constructions.
-/-- Scalar completion induces the coherent quotient presentation of ordinary scalar change.
-Source: Stacks 06YY, 0941; scalar normalization and the tensor-unit augmentation
-in step 1 of stage3-pur-scalar-pullback-left-roos.
-(blueprint: lem-pur-scalar-completion-quotient-presentation).
-
-Proof: choose ordinary quotient models for the good complexes P and its ordinary
-scalar extension PS, with their normalized derived reduction presentations (the
-coherent primitive presentation construction). Coherence of (C,eC,kappa) identifies
-C with the first ordinary model. Associate, level by level, quotient scalar tensors
-with the quotient of ordinary scalar extension. These associations commute with
-differentials and every quotient transition, so they give an isomorphism from CS
-to the ordinary quotient model of PS. Transport its normalized comparison and finite
-identifications back along this isomorphism to obtain eS and kappaS. The balanced
-associators send nested unit tensors to 1 tensor (1 tensor x), proving the section
-formula. Their tensor-unit maps also agree before localization, so transporting the
-ordinary adjunction transpose gives both reduction-presentation and whole-system
-coherence equations. Finally apply the reduction/total-limit adjunction to the last
-equality. Scalar normalization of SY identifies its realized side with the scalar
-representative comparison. ScalarCompletionNormalization identifies the ordinary
-scalar source augmentation with that same comparison composed with scalarCompletion.
-The ordinary constant-tower/limit unit and counit identities then identify the two
-transposes. Injectivity of the adjunction equivalence proves the last displayed
-equality in the derived category of the entire sequence site; no faithfulness of
-individual derived evaluations is used.
-No pullback, derived completeness, invertibility of l on Y or flatness of a finite
-quotient coefficient map is used. Empty sites, zero complexes, identity embeddings,
-n=0 and ramified embeddings have the same balanced tensor association. -/
+/-- Scalar completion induces the coherent quotient presentation of ordinary scalar change. -/
 theorem scalarCompletionQuotientPresentation (Y : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E Y)
     (SL : CoefficientDerivedSystemCalculus.{u, u} l L Y)

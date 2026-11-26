@@ -16,8 +16,12 @@ import Mathlib.RingTheory.Smooth.NoetherianDescent
 
 /-! # Smooth algebras over a filtered colimit descend to a finite stage
 
-Source: Stacks Project, Algebra, Lemma Tag 0CAQ
-(blueprint: lem-weil-pbc-smooth-algebra-filtered-colimit-descent).
+A smooth algebra over a filtered colimit of rings is the base change of a smooth algebra over
+some stage of the diagram.
+
+## References
+
+* [Stacks, Tag 0CAQ]
 -/
 
 @[expose] public section
@@ -29,21 +33,9 @@ open scoped TensorProduct
 
 namespace Algebra
 
-/-- Source: Stacks Project, Algebra, Lemma Tag 0CAQ
-(blueprint: lem-weil-pbc-smooth-algebra-filtered-colimit-descent).
-
-Proof, following the node:
-1. By lem-weil-pbc-smooth-algebra-finite-type-model choose a finitely generated
-   subring A₀ of A and a smooth A₀-algebra B₀ whose base change is B.
-2. By lem-weil-pbc-finite-type-ring-map-factors-filtered-colimit, the inclusion
-   A₀ → A factors through a stage Aᵢ: finitely many generators and relations
-   lift to a common stage of the filtered category.
-3. Set Bᵢ = Aᵢ ⊗[A₀] B₀. It is smooth over Aᵢ by
-   lem-weil-pbc-smooth-ring-map-base-change-composition.
-4. By lem-weil-pbc-tensor-cancel-base-change, the further base change of Bᵢ
-   to A is A ⊗[A₀] B₀. Compose the inverse of this cancellation isomorphism
-   with the model isomorphism from step 1 to obtain the asserted A-algebra isomorphism.
--/
+/-- Let `B` be a smooth algebra over the colimit of a filtered diagram `F` of commutative
+rings. Then there are a stage `i` and a smooth `F i`-algebra `Bᵢ` such that `B` is isomorphic,
+as an algebra over the colimit, to the base change of `Bᵢ` along the colimit map. -/
 theorem exists_smooth_algebra_of_filteredColimit
     {I : Type u} [SmallCategory I] [IsFiltered I]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F]

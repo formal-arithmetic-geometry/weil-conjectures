@@ -14,8 +14,21 @@ import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 /-!
 # Height formula at a prime of a fibre ring
 
-Source: Stacks Project, Algebra, Tags 0339, 0337, 00ON and Remark 0H9M.
-(blueprint: proposition-proper-direct-image-constructible-complexes).
+For a flat map `R → S` of Noetherian rings, a prime `p` of `R` and a prime `Q` of the fibre
+ring over `p`, the height of the contraction of `Q` to `S` is `p.height + Q.height`.
+
+## Implementation details
+
+The proof localizes at `p` and at the contraction `q` of `Q`, applies the going-down height
+formula to the maximal ideals of `R_p` and `S_q`, and identifies the closed fibre
+`S_q / p S_q` with the localization of the fibre ring at `Q`.
+
+## References
+
+* [Stacks, Tag 0339]
+* [Stacks, Tag 00ON]
+* [Stacks, Tag 00E6]
+* [Stacks, Tag 0H9M]
 -/
 
 @[expose] public section
@@ -24,19 +37,8 @@ universe u v
 
 namespace RingHom
 
-/-- Height splits into a base term and a fibre term for a flat map.
-Source: Stacks Project, Algebra, proof of Tag 0339, Tag 00ON and Remark 00E6.
-(blueprint: proposition-proper-direct-image-constructible-complexes).
-
-Proof: Localize at p and q = Q.comap includeRight. The induced flat local
-map R_p -> S_q gives a going-down algebra. Apply the height formula of Tag 00ON
-to the maximal ideals of these two Noetherian local rings. Their heights equal
-their Krull dimensions, hence p.height and q.height. The image of the maximal
-ideal of R_p is p S_q, since the denominators outside p are units. The image
-of the maximal ideal of S_q in its quotient is the quotient's maximal ideal,
-whose height equals its dimension. Remark 0H9M identifies this closed fibre
-with (p.Fiber S)_Q; the isomorphism preserves Krull dimension, which equals
-Q.height. Substitute these equalities into the height formula. -/
+/-- Height splits into a base term and a fibre term for a flat map: the height of the
+contraction of a prime `Q` of the fibre ring over `p` is `p.height + Q.height`. -/
 theorem height_eq_add_of_flat_fiber {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] [IsNoetherianRing R] [IsNoetherianRing S]
     [Algebra R S] (hflat : (algebraMap R S).Flat)

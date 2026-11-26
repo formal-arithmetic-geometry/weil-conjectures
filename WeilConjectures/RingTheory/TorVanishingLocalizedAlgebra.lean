@@ -16,8 +16,18 @@ import WeilConjectures.RingTheory.TorLocalizationDenominators
 
 /-! # Tor vanishing after localizing the coefficient algebra
 
-Source: Stacks Project, Tag 0B67, the source-algebra localization part of (1) to (2).
-(blueprint: lem-pc-tor-vanishing-localized-algebra).
+If `Tor_j^A(B, N)` vanishes and `C` is a localization of `B`, then `Tor_j^A(C, N)` vanishes.
+
+## Implementation details
+
+Choose a free `A`-resolution `Q` of `N`; balancedness identifies the Tor group with the `j`-th
+homology of `B ⊗_A Q`. Tensoring over `B` with the localization `C` is exact, so the homology of
+`C ⊗_A Q` is `C ⊗_B H_j(B ⊗_A Q) = 0`. The argument also covers degree zero, the trivial
+localization and localizations at submonoids containing zero.
+
+## References
+
+* [Stacks, Tag 0B67]
 -/
 
 @[expose] public section
@@ -28,20 +38,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace ModuleCat
 
-/-- Localization of the coefficient algebra preserves vanishing of a fixed Tor group.
-Source: Stacks Project, Tag 0B67, `lemma-tor-amplitude-localization`, the
-source-algebra localization step in (1) to (2), expanded here for modules.
-
-Proof: choose a free A-resolution Q of N. Balancedness identifies the Tor' object
-in the hypothesis with the j-th homology of B tensor_A Q. This complex carries its
-termwise B-action. Tensoring it over B with C is exact because C is a localization
-of B, so its j-th homology is C tensor_B H_j(B tensor_A Q), hence zero. The tensor
-associativity maps identify its terms and differentials with C tensor_A Q.
-Balancedness again identifies this homology with the asserted Tor' object.
-All scalar actions are induced by the displayed composite ring homomorphism.
-The proof works also in degree zero, for the trivial localization S = {1},
-and for localizations at a submonoid containing zero (then C is the zero ring).
-(blueprint: lem-pc-tor-vanishing-localized-algebra). -/
+/-- Localization of the coefficient algebra preserves vanishing of a fixed Tor group: if
+`Tor_j^A(B, N) = 0` and `C` is a localization of `B`, then `Tor_j^A(C, N) = 0`. -/
 theorem isZero_tor_localized_algebra
     (A B C : Type u) [CommRing A] [CommRing B] [CommRing C]
     (φ : A →+* B) [Algebra B C] (S : Submonoid B) [IsLocalization S C]

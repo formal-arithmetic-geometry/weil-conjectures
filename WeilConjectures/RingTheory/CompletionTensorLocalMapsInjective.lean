@@ -18,8 +18,23 @@ import WeilConjectures.RingTheory.LocalTensorQuotientDetection
 /-!
 # Injectivity of the local completion comparison
 
-Source: Stacks Project, Algebra, Tag 07N9 (lemma-completion-finite-extension).
-(blueprint: lem-weil-pbc-completion-tensor-local-maps-injective)
+For a finite algebra `S` over a Noetherian ring `R` and a prime `p`, an `S`-algebra map
+`R_p^∧ ⊗[R] S → ∏ q, S_q^∧` compatible with the local maps is injective.
+
+## Implementation details
+
+An element of the tensor product is detected modulo each power of the maximal ideal
+(`completion_tensor_quotient_separated`). Writing it as a finite sum of pure tensors, its
+images in the quotients of the `S_q` vanish, and `local_tensor_quotient_detection` shows the
+corresponding quotient element of the tensor product vanishes.
+
+## References
+
+* [Stacks, Tag 07N9], the quotient product decomposition and the application of
+  [Stacks, Tag 00MA]
+* [Stacks, Tag 00JA]
+* [Stacks, Tag 00CT]
+* [Stacks, Tag 0394]
 -/
 
 @[expose] public section
@@ -28,32 +43,9 @@ universe u v
 open scoped TensorProduct
 namespace AdicCompletion
 
-/-- Local completion maps detect equality of completed tensors.
-Source: Stacks Project, Algebra, Tag 07N9 (lemma-completion-finite-extension),
-the quotient product decomposition and the final application of Tag 00MA.
-(blueprint: lem-weil-pbc-completion-tensor-local-maps-injective)
-
-Proof:
-1. Put A = R_p and B = A tensor_R S. B is finite over the Noetherian local ring A.
-   Localization identifies the primes of B over its maximal ideal m with Q, and
-   their local rings with S_q. Every B/m^n B for n > 0 is Artinian. Its canonical
-   map to the product of S_q/m^n S_q is an isomorphism by Tags 00JA and 00CT.
-2. These canonical maps commute with reduction. Thus the map from the m-adic
-   completion of B into the product of the m-adic completions of S_q is injective:
-   if every component is zero, each quotient coordinate is zero by the quotient
-   product isomorphism, and the original compatible sequence is zero.
-3. In S_q, the extended ideal m S_q has radical q S_q. Noetherianity gives a
-   power of q S_q contained in m S_q; the converse inclusion is immediate.
-   Tag 0394 identifies the two completions by the identity on S_q. Therefore
-   replacing the factors by the maximal-ideal completions preserves injectivity.
-4. Tag 00MA identifies C tensor_A B with the m-adic completion of B, and tensor
-   cancellation identifies C tensor_A B with C tensor_R S. Under this canonical
-   comparison the resulting map sends a tensor s to the tuple g_q(a) times s.
-   The hypothesis on f determines g_q: choose a representative of each quotient
-   coordinate of a and apply the displayed equation, then use extensionality of
-   compatible sequences. S-linearity and tensor induction identify f with this
-   comparison map. Composing the injections proves the claim. The zero algebra
-   and empty Q are included: B/m^n B and its completion are then zero. -/
+/-- Local completion maps detect equality of completed tensors: an `S`-algebra map
+`R_p^∧ ⊗[R] S → ∏ q, S_q^∧` that is levelwise induced by the local maps `R_p → S_q` is
+injective. -/
 theorem completion_tensor_localMaps_injective
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :

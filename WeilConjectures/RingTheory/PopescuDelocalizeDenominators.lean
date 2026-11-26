@@ -16,8 +16,19 @@ import WeilConjectures.RingTheory.PopescuRescaledPresentation
 /-!
 # Denominator data for delocalization
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07F4.
-(blueprint: lem-weil-pbc-popescu-delocalize-denominators).
+The rescaled presentation and the denominators that clear the smooth equations, the inverse of
+the Jacobian minor and the original relations in the delocalization of a smooth factorization.
+
+## Implementation details
+
+The extra variables are rescaled by denominators, which scales the rows of the Jacobian by units.
+Each identity in the localized polynomial ring is cleared by a common denominator together with a
+localization annihilator. No injectivity of a localization map is used; the extra annihilators
+handle its kernel, including when `0 ∈ S`. Empty families are allowed.
+
+## References
+
+* [Stacks, Tag 07F4]
 -/
 
 @[expose] public section
@@ -77,42 +88,7 @@ private theorem unit_minor_certificate
   obtain ⟨a, ha⟩ := Ideal.mem_span_range_iff_exists_fun.mp hq
   exact ⟨s, a₀, a, ha ▸ heq⟩
 
-/-- The rescaling and denominator-clearing data before forming the quotient.
-Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07F4, proof from rescaling the
-extra variables through choosing the elements `sⱼ` and `s'ⱼ`.
-(blueprint: lem-weil-pbc-popescu-delocalize-denominators).
-
-Proof: put `K = Localization S` and `T = R[X]`. For each extra index choose
-`dᵢ ∈ S` and `lᵢ ∈ Λ` with `γ (Q.val i) = lᵢ/dᵢ`; for the first `n` indices
-put `dᵢ = 1` and `lᵢ = α (P.val i)`, using `hfactor` and `hval`. The new generators
-are `dᵢ * Q.val i`. If `qⱼ` are the old relations, substitute `Xᵢ/dᵢ` into them.
-This is an automorphism of `K[X]`, inverse to substitution by `dᵢ * Xᵢ`, so the
-new equations generate the new evaluation kernel. The chain rule scales row `i`
-of the initial Jacobian by `dᵢ⁻¹`; hence its determinant still evaluates to a unit.
-Multiply each equation by a common denominator of its finitely many coefficients,
-obtaining `fⱼ ∈ T`. These multipliers are units in `K`, so the kernel ideal is
-unchanged and the new minor still evaluates to a unit. The new generator values
-map under `γ` to `lᵢ/1`.
-
-Lift the inverse of this minor from `D` to `K[X]` using surjectivity of evaluation.
-Then `1 = b₀ * Δ(f) + ∑ bⱼ * fⱼ` in `K[X]`, because the error lies in the
-relation ideal. Choose a common denominator `d ∈ S` for the finitely many
-coefficients of all `bⱼ`, obtaining polynomials `aⱼ` whose coefficient extensions
-are `d * bⱼ`. The difference `C d - a₀ * Δ(f) - ∑ aⱼ * fⱼ` maps to zero in
-`K[X]`. This polynomial ring is the localization of `T` at the constants from
-`S`, so some `e ∈ S` kills that difference in `T`. Replace each `aⱼ` by
-`C e * aⱼ` and take `s₀ = e * d`, giving the asserted exact identity in `T`.
-
-Each renamed relation of `P` evaluates to zero in `D`: the first `n` generators
-were fixed, and `β` preserves the original relations. Express that polynomial in
-the localized ideal `(f)`. Clear the finitely many coefficients of the expression
-and kill the residual polynomial equality by another localization annihilator,
-just as above; their product is `sgⱼ`. Finally each `fⱼ` evaluates at `l` to zero
-after localization, since it vanishes on the new generators of `D` and `γ` maps
-those generators to `lᵢ/1`. The localization kernel criterion in `Λ` gives `sfⱼ`
-killing this evaluation. Empty families use empty products and determinant `1`.
-No injectivity of a localization map was used; the extra annihilators handle its
-kernel, including when `0 ∈ S`. -/
+/-- The rescaling and denominator-clearing data before forming the delocalized quotient. -/
 theorem exists_delocalization_denominator_data
     {R : Type u} {A : Type v} {Λ : Type w}
     [CommRing R] [CommRing A] [CommRing Λ] [Algebra R A] [Algebra R Λ]

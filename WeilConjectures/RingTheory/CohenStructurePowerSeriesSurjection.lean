@@ -19,8 +19,21 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 /-!
 # Power series presentations of complete local rings
 
-Source: Stacks Project, Algebra, Theorem 032A, part (2) and its proof
-(blueprint: lem-weil-pbc-cohen-structure-power-series-surjection).
+A complete local ring with finitely generated maximal ideal is a quotient of a power series
+ring over a characteristic-zero field or a Cohen ring of the residue characteristic.
+
+## Implementation details
+
+The coefficient map comes from `exists_residue_section` in characteristic zero and from
+`exists_cohenRing` and `exists_cohenRing_lift` otherwise. The map from power series sends the
+variables to generators of the maximal ideal; it is surjective by successive approximation
+(`surjective_of_mk_map_comp_surjective`, [Stacks, Tag 0315]), avoiding the finite-module detour
+through [Stacks, Tag 031D].
+
+## References
+
+* [Stacks, Tag 032A], part (2) and its proof
+* [Stacks, Tag 0315]
 -/
 
 @[expose] public section
@@ -30,27 +43,7 @@ universe u
 namespace IsLocalRing
 
 /-- A complete local ring with finitely generated maximal ideal is a quotient of a power series
-ring over a characteristic-zero field or a Cohen ring of the residue characteristic.
-Source: Stacks Project, Algebra, Theorem 032A, part (2) and the final paragraph of its proof
-(blueprint: lem-weil-pbc-cohen-structure-power-series-surjection).
-
-Proof:
-1. Choose a finite family `y : Fin n → R` spanning the maximal ideal, using its finite
-   generation. Each `y i` lies in that ideal, including the empty family when it is zero.
-2. In characteristic zero use `exists_residue_section` to obtain a map from the residue
-   field into `R` splitting reduction. The residue field is a characteristic-zero field.
-3. In prime characteristic use `exists_cohenRing` and `exists_cohenRing_lift` to obtain
-   a Cohen ring and a map into `R` lifting its prescribed residue isomorphism. Its composite
-   with reduction is surjective. These existing lemmas supply the compatible lifts and limit
-   of the second paragraph of the source proof.
-4. For either coefficient map apply `MvPowerSeries.exists_ringHom_of_isAdicComplete`
-   to obtain `φ` sending constants to their coefficient images and `X i` to `y i`.
-5. Let `I` be the ideal spanned by the variables. Mathlib makes the source `I`-adically
-   complete. Mapping the ideal's generators shows `I.map φ = maximalIdeal R`, so the target
-   is Hausdorff for this mapped ideal. The composite of `φ` with reduction modulo `I.map φ`
-   is surjective: lift a residue by a coefficient and use its constant series. Apply
-   `surjective_of_mk_map_comp_surjective` (Stacks 0315 successive approximation). This gives
-   surjectivity without the finite-module detour through Stacks 031D. -/
+ring over a characteristic-zero field or a Cohen ring of the residue characteristic. -/
 theorem cohen_structure_power_series_surjection
     (R : Type u) [CommRing R] [IsLocalRing R]
     (hfg : (maximalIdeal R).FG) [IsAdicComplete (maximalIdeal R) R]

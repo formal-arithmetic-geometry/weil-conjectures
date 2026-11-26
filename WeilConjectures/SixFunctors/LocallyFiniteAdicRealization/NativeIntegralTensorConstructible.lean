@@ -14,10 +14,23 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Native constructibility of a finite integral tensor model
 
-Source: Bhatt--Scholze, Proposition 6.8.11(3) and Proposition 6.8.14(2).
-(blueprint: lem-sf-native-integral-tensor-constructible).
-The assertion concerns the explicit derived tensor functor, independently of
-any normalized functor on the common-stage category.
+Extension of a constructible complete integral complex to the native coefficient has bounded
+constructible cohomology (`nativeIntegralTensor_constructible`). The assertion concerns the
+explicit derived tensor functor, independently of any normalized functor on the common-stage
+category.
+
+## Implementation details
+
+The integral stratified-perfect characterization gives a bounded complex whose cohomology sheaves
+have stratified finitely presented integral local models. Extension along `C.integralMap` is exact
+(`nativeIntegralCoefficient_flat`), so its left derived functor is computed termwise, preserves the
+bounds and commutes with cohomology; `nativeIntegralCoefficient_heart` handles each cohomology
+sheaf.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2, Proposition 6.8.11(3) and
+  Proposition 6.8.14(2).
 -/
 
 @[expose] public noncomputable section
@@ -54,24 +67,7 @@ private theorem stratifiedFinitelyPresented_of_iso
     ((proEtaleModuleInverseImage (s.immersion j) _).mapIso e.symm) ≪≫ eN⟩⟩
 
 /-- Extension of a constructible complete integral complex to the native coefficient
-has bounded constructible cohomology, read through the section-module equivalence.
-
-Source: Bhatt--Scholze, Proposition 6.8.11(3), Proposition 6.8.14(2) and Lemma 6.8.2.
-(blueprint: lem-sf-native-integral-tensor-constructible).
-
-Proof in words: use the integral stratified-perfect characterization and its detailed
-coefficient transport to obtain a bounded complex whose cohomology sheaves have
-stratified finitely presented integral local models. The transport is exact and faithful,
-so it reflects the bounds. Ordinary extension along C.integralMap is exact by
-nativeIntegralCoefficient_flat and the scalar-extension adjunction. Hence its universal
-left derived functor is canonically isomorphic to its termwise exact derived functor.
-It preserves the bounds and commutes with cohomology. For each cohomology sheaf,
-nativeIntegralCoefficient_heart takes its integral local models to native constructible
-sheaves. The given isomorphism e and the exact section-module equivalence then transfer
-both conclusions to M. The comparison on homology also transports the local-model
-condition along the detailed coefficient isomorphism. Rank zero, the zero complex and
-the empty scheme satisfy the same argument.
--/
+has bounded constructible cohomology, read through the section-module equivalence. -/
 theorem nativeIntegralTensor_constructible
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]
     [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]

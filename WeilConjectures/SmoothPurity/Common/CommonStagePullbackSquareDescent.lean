@@ -9,8 +9,14 @@ public import WeilConjectures.SixFunctors.Common.CommonStagePullbackNormalizedDe
 
 /-! # Descent of a coefficient-compatible pullback square
 
-Source: the Weil-structures paragraph of the open-closed localization proof.
-(blueprint: lem-sf-common-stage-pullback-square-descent).
+This file shows that coefficient-compatible isomorphisms between composites of finite-stage
+pullbacks descend uniquely to the common stage.
+
+## Implementation details
+
+Each of the three pullbacks is descended by normalized common-stage descent; the
+compatible family of isomorphisms descends as a natural transformation, which is then
+conjugated by the composition isomorphisms of the descended functors.
 -/
 
 @[expose] public noncomputable section
@@ -74,20 +80,7 @@ private theorem automorphism_iso_existsUnique_transport
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Compatible isomorphisms of finite-stage pullback composites descend uniquely.
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md,
-Weil-structures paragraph: common-stage b and d.
-(blueprint: lem-sf-common-stage-pullback-square-descent).
-
-Proof: use commonStagePullbackNormalizedDescent for each of the three maps.
-The hypothesis hb is precisely the compatibility equation for a Hom between the
-two composite stage morphisms. Descend that Hom by descNatTrans. It is invertible
-because each finite component is invertible. Conjugate by the two functorCompIso
-comparisons to obtain an isomorphism of the composite descended functors. Their
-components are identity arrows, so the component at a literal pair is the inclusion
-of b at that pair's stage. Extensionality of natural transformations proves
-uniqueness. Identity inclusions and empty schemes use the same construction. -/
+/-- Compatible isomorphisms of finite-stage pullback composites descend uniquely. -/
 theorem commonStagePullbackSquare_existsUnique
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

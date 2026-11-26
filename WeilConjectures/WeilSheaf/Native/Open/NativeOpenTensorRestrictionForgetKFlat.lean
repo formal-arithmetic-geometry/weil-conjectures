@@ -10,8 +10,26 @@ import WeilConjectures.WeilSheaf.Native.NativeRestrictionForgetTotalModel
 
 /-! # Representative restriction/forgetting square
 
-Source: Stacks 0E8I, 0GL1 and 015F.
-(blueprint: lem-sf-native-open-tensor-restriction-forget-kflat).
+## Implementation details
+
+The ordinary total tensor models in `dU.models` and `dZ.models` are fixed by their adjunction
+normalization. On each `(p, q)` summand of the forgotten native total tensors the comparison is
+the underlying balanced tensor map, with a signed exchange for the right-parameter-first
+ordinary total convention. Forgetting preserves K-flat tests: an ordinary acyclic test complex
+is induced by the exact Frobenius orbit-sum left adjoint, and the ordinary tensor test is the
+degree-zero orbit summand, a retract of this acyclic direct sum. Exact open restriction
+preserves K-flatness by its projection formula and extension by zero.
+
+In the formalization, the native part (K-flat forgetting, binary models and summand
+comparison) is `native_restriction_forget_total_model`, giving the normalized total models
+`mZ`, `mU`; the ordinary part (the tensorator normalization) is
+`native_ordinary_restriction_total_model`, applied to the forgotten complexes. Both sides
+followed by `mU` agree, and `mU` is cancelled. The extension to arbitrary derived objects is
+proved separately from the existence of K-flat models.
+
+## References
+
+* Stacks 0E8I, 0GL1, 015F
 -/
 
 @[expose] public noncomputable section
@@ -51,45 +69,7 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
 
 /-- The restriction/forgetting square on two actual K-flat complexes, for the
-ordinary comparison already constructed by normalized tensor--Hom adjunctions.
-
-Source: Stacks 0GL1 (lemma-j-shriek-and-tensor), 0E8I and 015F;
-steps 1--3 of the restriction-forgetting node.
-(blueprint: lem-sf-native-open-tensor-restriction-forget-kflat).
-
-Proof: use the ordinary total tensor models in dU.models and dZ.models. Their
-adjunction normalization fixes the identifications with the standard localization
-tensorator. Forget the actual native total tensors: on each (p,q) summand the
-comparison is the underlying balanced tensor map, with the signed exchange
-needed when reversing the right-parameter-first ordinary total convention.
-Compatibility of nativeDerivedClosedComparison identifies its tensorComparison
-with this total comparison: transpose into a K-injective ordinary target and
-use the product-total Hom representative square; the ordinary normalized
-uncurrying formula and injectivity of transposition give the equality.
-Forgetting preserves the K-flat tests: induce an ordinary acyclic test complex
-by the exact Frobenius orbit-sum left adjoint, apply native K-flatness, and
-forget. The ordinary tensor test is the degree-zero orbit summand, a retract
-of this acyclic direct sum. Repeat in the other tensor variable. Exact open
-restriction preserves K-flatness by its projection formula and extension by zero.
-On every summand, s.restriction_forget identifies the forgotten sheaf map with
-the balanced restriction map. Hence c.restriction_summands identifies the two
-total-complex composites, by the coproduct universal property. Apply Q and
-its exact-functor factorization isomorphisms. The c.restriction_model equation
-then replaces the native localized total map by rho, while the ordinary
-tensorator normalization replaces the other map by
-nativeOrdinaryRestrictionTensor. Naturality of the factorization maps gives
-exactly the displayed equality. Zero complexes, empty opens and unbounded
-diagonals use the same coproduct and localization identities. This statement
-asserts no equality at arbitrary derived objects; that extension is proved
-separately from the existence of K-flat models.
-
-As formalized: the native part of this route (the K-flat forgetting, the binary
-models and the summand comparison) is native_restriction_forget_total_model,
-which gives the normalized total models mZ, mU and the native square followed by
-mU. The ordinary part (the tensorator normalization) is
-native_ordinary_restriction_total_model, applied to the forgotten complexes with
-the exact forgetting factor isomorphisms as inputs; it rewrites the right-hand
-side followed by mU into the same expression. Cancel the isomorphism mU. -/
+ordinary comparison already constructed by normalized tensor--Hom adjunctions. -/
 theorem native_open_tensor_restriction_forget_kflat (s : NativeOpenTensorData k₀ l j)
     (rho : nativeDerivedTensor k₀ l Z ⋙ nativeOpenPull k₀ l j ≅
       (nativeOpenPull k₀ l j).prod (nativeOpenPull k₀ l j) ⋙ nativeDerivedTensor k₀ l U)

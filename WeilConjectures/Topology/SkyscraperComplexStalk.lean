@@ -12,9 +12,12 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 /-!
 # Stalk recovery for skyscraper complexes
 
-Source: Stacks Project, Sheaves, Tag 009A (4), with the neighbourhood-colimit
-calculation of stalks, applied degreewise.
-(blueprint: lem-pc-skyscraper-complex-stalk-recovery)
+The stalk of the termwise skyscraper complex at its point recovers the original complex of stalk
+modules.
+
+## References
+
+* [Stacks Project, Tag 009A](https://stacks.math.columbia.edu/tag/009A)
 -/
 
 @[expose] public section
@@ -42,7 +45,7 @@ private theorem constantGermAdd_eq (X : RingedSpace.{u_complex}) (x : X)
     (homOfLE le_top : U ⟶ ⊤) x hx (fun _ ↦ m)).symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Represent the scalar locally and apply the compatibility of germs with scalar action. -/
+/-- Taking the germ of the constant section is linear over the stalk ring. -/
 private theorem constantGermAdd_linear (X : RingedSpace.{u_complex}) (x : X)
     (M : ModuleCat.{u_complex} (X.presheaf.stalk x)) (r : X.presheaf.stalk x) (m : M) :
     constantGermAdd X x M (r • m) = r • constantGermAdd X x M m := by
@@ -60,8 +63,7 @@ private noncomputable def constantGerm (X : RingedSpace.{u_complex}) (x : X)
       map_add' := (constantGermAdd X x M).map_add
       map_smul' := constantGermAdd_linear X x M }
 
-/-- Germ equality detects constant values; every local section is constant on its
-subsingleton domain of membership proofs. -/
+/-- The constant-section germ map is bijective. -/
 private theorem constantGerm_bijective (X : RingedSpace.{u_complex}) (x : X)
     (M : ModuleCat.{u_complex} (X.presheaf.stalk x)) :
     Function.Bijective (constantGerm X x M) := by
@@ -91,10 +93,8 @@ private theorem constantGerm_naturality (X : RingedSpace.{u_complex}) (x : X)
   erw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
   rfl
 
-/-- Stalk recovery for the termwise skyscraper complex.
-(blueprint: lem-pc-skyscraper-complex-stalk-recovery)
-The neighbourhood colimit defining the stalk is constant at the original module in
- each degree, and the resulting identifications commute with the differentials. -/
+/-- Stalk recovery for the termwise skyscraper complex: its stalk at the point is isomorphic
+to the original complex. -/
 theorem skyscraper_complex_stalk_recovery (X : RingedSpace.{u_complex}) (x : X)
     (M : CochainComplex (ModuleCat.{u_complex} (X.presheaf.stalk x)) ℤ) :
     Nonempty (((RingedSpace.moduleStalkFunctor X x).mapHomologicalComplex

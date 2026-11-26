@@ -18,8 +18,26 @@ import WeilConjectures.RingTheory.EtaleResidueTriplesSurjective
 /-!
 # Strict henselization from etale triples
 
-Source: Stacks Project, Algebra, Lemmas Tags 04GW and 04GP
-(blueprint: lem-weil-pbc-strict-henselization-triples).
+Let `R` be a ring, `p` a point of `Spec R` and `K` a separable closure of `κ(p)`. The category
+of étale residue triples over `(R, p, K)` is filtered, and the colimit `C` of the underlying
+rings is a strictly henselian local ring with residue field `K` and maximal ideal `pC`.
+
+## Implementation details
+
+Triples are étale `R`-algebras pointed in `K`. Tensor products give common successors, and
+parallel maps are equalized by a further étale base change, so the category is filtered. The
+compatible maps to `K` induce `ψ : C → K`; elements with nonzero image become units after
+localization, so `C` is local with maximal ideal `ker ψ`, and the étale prime-generation
+lemma shows `ker ψ = pC`. Simple roots in `K` of monic polynomials over `C` lift via a
+standard étale algebra at a single stage; this gives surjectivity of `ψ` (lift the
+separable minimal polynomial of an element of `K`) and henselianity, and the residue field
+`K` is separably closed.
+
+## References
+
+* [Stacks, Tag 04GW]
+* [Stacks, Tag 04GP]
+* [Stacks, Tag 04GN]
 -/
 
 @[expose] public section
@@ -30,12 +48,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/- The filteredness part of strictHenselization_triples.
-Source: Stacks Project, Algebra, Tag 04GW (lemma-strict-henselization-different).
-(blueprint: lem-weil-pbc-strict-henselization-triples-filtered-part).
-The preceding colimit construction identifies triples with etale algebras equipped with
-an R-algebra map to K, proves essential smallness, and constructs the filtered colimit.
--/
+/- The filteredness part of strictHenselization_triples. -/
 private theorem strictHenselization_triples_filtered
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     [Algebra ((Spec R).residueField p) K] [IsSepClosure ((Spec R).residueField p) K] :
@@ -44,8 +57,7 @@ private theorem strictHenselization_triples_filtered
   exact (etaleResidueTriples_filtered_colimit R p K).1
 
 /- The remaining colimit properties are assembled from the localization, simple-root,
-and surjectivity lemmas above. Source: Stacks Project, Algebra, Tags 04GN and 04GP.
-(blueprint: lem-weil-pbc-strict-henselization-triples-colimit-properties). -/
+and surjectivity lemmas above. -/
 private theorem strictHenselization_triples_colimit_properties
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     [Algebra ((Spec R).residueField p) K] [IsSepClosure ((Spec R).residueField p) K] :
@@ -128,43 +140,7 @@ private theorem strictHenselization_triples_colimit_properties
     rw [Ideal.ker_algebraMap_residueField]
 
 /-- The category of etale residue triples is filtered and its ring colimit is strictly
-henselian with the prescribed separable closure as residue field.
-Source: Stacks Project, Algebra, Lemmas Tags 04GW and 04GP
-(blueprint: lem-weil-pbc-strict-henselization-triples).
-
-Proof:
-1. Triples are etale R-algebras pointed in K, since a map to a field factors uniquely
-through the residue field of its kernel.
-2. Finite presentation gives essential smallness; construct the ring colimit using a
-small skeleton (lem-weil-pbc-affine-etale-essentially-small-cover and
-lem-weil-pbc-colimit-initial-full-subcategory).
-3. Tensor products give common successors, including the identity triple for nonemptiness
-(lem-weil-pbc-etale-ring-base-change, definition-torsion-sheaves--3).
-4. For parallel maps beta1, beta2 : S → S', form E = S' ⊗[S] S' using these maps,
-then S'' = E ⊗[S' ⊗[R] S'] S' using multiplication on the last factor. Both
-base changes are etale by the same base-change and composition lemmas. The two maps
-to K agree, hence extend to S''; its kernel and residue embedding define a triple.
-The rightmost S' → S'' commutes with the maps to K and equalizes beta1 and beta2,
-since beta1(s) ⊗ 1 = 1 ⊗ beta2(s) in E. This gives filteredness.
-5. The compatible maps to K induce psi. Inverting an element with nonzero image shows
-that the colimit is local, with maximal ideal ker psi.
-6. The etale prime-generation lemma lem-weil-pbc-etale-prime-generates-maximal, followed
-by localization away from the pointed prime, shows ker psi = p C: represent an
-element of the kernel by f ∈ q at a stage S. Its image in S_q lies in p S_q; clearing
-denominators gives u ∉ q with u f ∈ p S. The triple S_u makes f lie in p S_u.
-The reverse inclusion follows because the structural map to K kills p.
-7. Descend the finitely many coefficients of a monic polynomial to one stage, and use
-the standard etale algebra localized at its derivative to lift each simple root in K
-(lem-weil-pbc-filtered-colimit-algebras-elementwise and
-lem-weil-pbc-standard-etale-monic-derivative).
-8. The image of psi is a field containing kappa(p). Separability of every element of K
-and step 7 imply surjectivity: lift the coefficients of its monic separable minimal
-polynomial to C, then lift its simple root using step 7. The induced quotient
-isomorphism identifies the residue
-field with K, and contraction of the maximal ideal is p.
-9. Step 7 and lem-weil-pbc-henselian-local-root-lifting give henselianity. The residue
-field is K, hence separably closed, giving strict henselianity.
--/
+henselian with the prescribed separable closure as residue field. -/
 theorem strictHenselization_triples
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     [Algebra ((Spec R).residueField p) K] [IsSepClosure ((Spec R).residueField p) K] :

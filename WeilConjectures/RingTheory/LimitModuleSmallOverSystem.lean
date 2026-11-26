@@ -21,8 +21,23 @@ import Mathlib.Data.Finsupp.Encodable
 import Mathlib.Algebra.Category.Grp.Ulift
 
 /-! # Small-universe module descent over an essentially finite type base system
-Source: Stacks Project, Algebra, Tags 00QV, 00QX and 00R1.
-(blueprint: lem-weil-pbc-limit-module-small-over-system)
+
+Descent of a localized finitely presented algebra and a finitely presented module along a
+directed system of local rings, with the module diagram in the universe of the limit module,
+when the base system is essentially of finite type over `ℤ`.
+
+## Implementation details
+
+The module is lifted to `ULift` in universe `max u v` and
+`exists_limit_module_essentially_finite_presentation_over_system` is applied. Each stage ring
+is essentially of finite type over `ℤ`, hence countable, so each stage module (a quotient of a
+finite power of it) is countable and can be replaced by its `Shrink` in universe `v`. The
+transitions, cocone maps and tensor equivalences are conjugated by these equivalences, and the
+colimit property is transported by lifting test cocones to universe `max u v`.
+
+## References
+
+* [Stacks, Tags 00QV, 00QX, 00R1]
 -/
 
 @[expose] public section
@@ -48,36 +63,6 @@ private theorem countable_of_essFiniteType (R S : Type*) [CommRing R] [CommRing 
 
 /-- Single-ring descent with the module diagram in the universe of the limit module.
 The extra essential finite type hypothesis permits shrinking the finite stage modules.
-
-Source: Stacks Project, Algebra, Tags 00QV, 00QX and 00R1, with the universe transport
-in the proof of `lem-weil-pbc-limit-tower-over-local-system`.
-(blueprint: lem-weil-pbc-limit-module-small-over-system)
-
-Proof: Lift N to ULift in universe max u v, carrying its additive group and T-module
-structure along ULift.down. Compose the given cokernel equivalence with the inverse
-linear equivalence of this lift. Apply
-`exists_limit_module_essentially_finite_presentation_over_system` to the lifted module.
-Keep its tail, stage rings, ring maps, localness, colimit and ring tensor comparisons.
-Each stage ring is essentially of finite type over Z: compose the supplied base
-essential finite type map with the descended structure map. An essentially finite
-type algebra over a countable ring is countable: its finite set of essential generators
-spans a countable polynomial quotient, and its localization consists of fractions
-represented by pairs in that countable quotient. Each descended stage module is a
-quotient of a finite power of this countable ring by its descended matrix range,
-so it is countable and hence small in universe v.
-Choose Shrink in universe v for each of these concrete stage modules, transporting
-its additive group and module structure through equivShrink. Define each transition
-by conjugating the original transition with the two equivalences. Define the cocone
-components by the same conjugation at the source and ULift.down at the target.
-The inverse equivalences show the identity and composition laws and naturality.
-Transport the cokernel and tensor equivalences by these module equivalences;
-semilinearity gives the induced tensor equivalences, and checking pure tensors
-proves the displayed formulas. For the colimit universal property, lift a test cocone
-in universe v to universe max u v, use the original IsColimit, and conjugate its
-descending map back; the component equalities and uniqueness follow by the inverse
-bijections. These operations preserve all returned clauses, including the component
-identifications for the auxiliary maps. Empty Fin s or Fin t are included: their
-finite powers and quotients are still countable, and no nonzero-rank assumption is used.
 -/
 theorem exists_limit_module_small_over_system
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]

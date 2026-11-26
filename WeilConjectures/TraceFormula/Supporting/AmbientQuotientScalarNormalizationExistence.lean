@@ -91,13 +91,24 @@ import all WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Ambient scalar quotient normalization
 
-Source: Stacks 06YY and 0941; the scalar quotient construction in the final
-common-stage transport paragraph of the trace-transport blueprint.
-(blueprint: new-trf-ambient-quotient-scalar-normalization)
+We construct the ambient scalar realization together with its prescribed coherent quotient
+normalization (`WeilConjectures.ambientQuotientScalarModel_normalization_exists`).
 
-Proof: transport the balanced finite quotient tensor association through the
-canonical coherent quotient comparison and the normalized Roos bridge; its
-unit-tensor equation gives the required whole-system normalization.
+## Implementation details
+
+The balanced finite quotient tensor association is transported through the canonical coherent
+quotient comparison and the normalized Roos bridge; its unit-tensor equation gives the
+whole-system normalization. Concretely, we construct ordinary and derived quotient models for the
+supplied calculus (the evaluated quotients of a good complex are K-flat), compose the derived
+scalar counit, the normalized Roos comparison and the ordinary balanced scalar tower association,
+and descend along the good-complex localization. A coherent presentation differs from the
+canonical quotient by a strict isomorphism, which cancels by naturality. The realization must be
+chosen by this construction: an arbitrary realization can be twisted by a scalar unit and need
+not satisfy the normalization.
+
+## References
+
+* [Stacks: Tags 06YY, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -115,20 +126,7 @@ scalar-unit twist preserves being an isomorphism but changes the prescribed Roos
 The corrected theorem below constructs its realization together with normalization. -/
 
 /-- Choose the ambient scalar realization together with its prescribed coherent
-quotient normalization. Source: Stacks 06YY and 0941; strict quotient scalar
-construction in the common-stage transport argument.
-(blueprint: new-trf-ambient-quotient-scalar-normalization).
-
-Proof: construct ordinary and derived quotient models for the supplied calculus.
-The evaluated quotients of a good complex are K-flat, hence their whole system is
-K-flat. Compose the derived scalar counit, the normalized Roos comparison, and
-the ordinary balanced scalar tower association. Descend this natural isomorphism
-along the good-complex localization. A coherent presentation differs from the
-canonical quotient by a strict isomorphism. Naturality of the counit and Roos
-comparison and cancellation of that isomorphism give the required whole-system
-equation, while the ordinary balanced association gives its generator formula.
-The realization must be chosen by this construction: an arbitrary realization
-can be twisted by a scalar unit and need not satisfy normalization. -/
+quotient normalization. -/
 theorem ambientQuotientScalarModel_normalization_exists (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]

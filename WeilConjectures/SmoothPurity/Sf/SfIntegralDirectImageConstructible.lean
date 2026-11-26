@@ -48,9 +48,19 @@ import all WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructible
 /-!
 # Integral direct image preserves bounded constructibility
 
-Source: Bhatt--Scholze, Lemma 6.7.2, with Lemmas 6.5.9 and 6.5.11;
-Stacks Tags 0F10 and 099N
-(blueprint: lem-sf-integral-direct-image-constructible).
+## Implementation details
+
+Completing the one-minus-transition map to a distinguished triangle gives an integral direct
+image, which is complete with the canonical finite reductions. Finite-level constructibility
+comes from the finite-coefficient theorem; a uniform residue-coefficient dimension bound `N`
+propagates to every level by nilpotent coefficient dévissage, turning support `[a, b]` into
+`[a, b + N]`. Over an algebraically closed field `N = 2 dim X`, and `N = 0` for empty `X`.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.7.2, with Lemmas 6.5.9 and
+  6.5.11.
+* Stacks Project, Tags 0F10 and 099N.
 -/
 
 @[expose] public section
@@ -284,34 +294,7 @@ private theorem finite_image_support
 
 set_option linter.unusedVariables false in
 /-- Preservation of constructibility, every canonical reduction comparison, and uniform
-cohomological bounds, including the dimension and empty-source cases.
-Source: Bhatt--Scholze, Lemma 6.7.2; Stacks Tag 0F10
-(blueprint: lem-sf-integral-direct-image-constructible).
-Proof: the derived category has countable products, so completing the prescribed
-one-minus-transition map to a distinguished triangle gives an integral direct image.
-The geometry-independent complete direct-image and reduction theorem gives completeness
-and identifies the canonical finite reductions of every such triangle.
-
-For finite constructibility, use the exact equivalence between fixed-coefficient and
-intrinsic finite-ring module sheaves. It commutes with homology and intertwines the two
-actual derived direct images. The finite-coefficient constructibility theorem therefore
-gives finite intrinsic cohomological support and constructible cohomology at every level.
-The quotient O_E/varpi^(n+1) is killed by l^(n+1), since l lies in the maximal ideal;
-this annihilator is invertible in the base field.
-
-The proved torsion-module dimension theorem and the uniform dimension bound after field
-extension give a nonnegative residue-coefficient bound N. For any qualifying integer N,
-the surjection O_E/varpi^(n+1) -> O_E/varpi has nilpotent kernel. Nilpotent coefficient
-devissage, followed by coefficient change along the resulting quotient-ring isomorphism,
-gives this same N at every level. The finite-ring origin equivalence and the etale-origin
-amplitude theorem now give support [a,b+N] from [a,b]. If a>b, the input is zero in every
-degree; apply that amplitude theorem with an interval above the degree being tested.
-This argument also retains negative qualifying bounds. Transport constructibility and
-support through the canonical reduction isomorphisms and use the definition of integral
-constructibility. Over an algebraically closed field, the explicit torsion-module bound
-is 2 dim X. For empty X its discrete topology has Krull dimension at most zero, giving
-the stated bound zero without assigning the empty scheme a natural-number dimension.
--/
+cohomological bounds, including the dimension and empty-source cases. -/
 theorem sfIntegralDirectImage_constructible
     (K₀ : Type u) [Field K₀] (l : ℕ) [Fact l.Prime] (_hl : IsUnit (l : K₀))
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

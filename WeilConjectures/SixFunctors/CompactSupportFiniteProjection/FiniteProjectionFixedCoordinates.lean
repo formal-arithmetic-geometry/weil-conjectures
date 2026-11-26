@@ -9,7 +9,8 @@ public import WeilConjectures.SixFunctors.CompactSupportFiniteProjection.FiniteP
 
 /-! # Fixed coefficient coordinates for finite projection calculations
 
-Source: the proper-factor calculation of prop-sf-pf-coherence.
+Coefficient coordinates, direct image, adjunction and tensor comparison used in the
+proper-factor calculation of finite projection coherence.
 -/
 
 @[expose] public noncomputable section
@@ -24,21 +25,18 @@ variable {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
   {E : Type u} [Field E] [Algebra (Padic C.l) E]
   [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}
 
-/-- The full constructible inclusion followed by the inverse coefficient realization.
-Source: the proper-factor calculation (blueprint: def-sf-finite-projection-fixed-coordinates). -/
+/-- The full constructible inclusion followed by the inverse coefficient realization. -/
 def coordinates (X : SixFunctorSpace D) :=
   (intrinsicFiniteTorsionConstructible C.l E n hn X.obj.left).ι ⋙
     (realization (C := C) (E := E) (n := n) (hn := hn) X).inverse
 
-/-- Direct image in fixed coefficient coordinates.
-Source: the proper-factor calculation (blueprint: def-sf-finite-projection-fixed-coordinates). -/
+/-- Direct image in fixed coefficient coordinates. -/
 def fixedDirect {X Y : SixFunctorSpace D} (f : X ⟶ Y) :=
   (AlgebraicGeometry.ProEtale.lowerStar
     (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)))
       f.hom.left).rightDerivedFunctor
 
-/-- The canonical fixed coefficient adjunction.
-Source: the proper-factor calculation (blueprint: def-sf-finite-projection-fixed-coordinates). -/
+/-- The canonical fixed coefficient adjunction. -/
 def fixedAdjunction {X Y : SixFunctorSpace D} (f : X ⟶ Y) :
     fixedDerivedPull (C := C) (E := E) (n := n) f ⊣
       fixedDirect (C := C) (E := E) (n := n) f :=
@@ -46,8 +44,7 @@ def fixedAdjunction {X Y : SixFunctorSpace D} (f : X ⟶ Y) :
   AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction
     (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n))) f.hom.left
 
-/-- The tensor coordinate comparison cancels precisely the coefficient unit.
-Source: the proper-factor calculation (blueprint: def-sf-finite-projection-fixed-coordinates). -/
+/-- The tensor coordinate comparison cancels precisely the coefficient unit. -/
 def tensorCoordinates (S : SixFunctorFiniteOperations D C E n hn)
     (X : SixFunctorSpace D) (K : sixFunctorFiniteCategory D C E n hn X)
     (L : finiteTorConstructibleCategory C.l E n hn X.obj.left) :

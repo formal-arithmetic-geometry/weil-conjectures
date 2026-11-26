@@ -11,12 +11,21 @@ import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorNormalizedRestricti
 
 /-! # Native open tensor presentation with normalized comparisons
 
-Source: Stacks 0GL1 and 06YN; native open tensor proof steps 3--6.
-(blueprint: new-sf-native-open-tensor-presentation)
-
 The extension and restriction descents construct their derived comparisons together
 with the required representative equations. Their fields assemble into a presentation
 whose operations and models are the native ones.
+
+## Implementation details
+
+Arbitrary derived comparisons `rho` and `gamma` cannot satisfy the fixed summand and
+representative normalizations, so the comparisons are existential outputs of the
+presentation. The native operations and representative insertions are chosen first;
+degreewise tensor comparisons and exactness identify their normalization maps, and the
+localization universal property proves the required representative equalities.
+
+## References
+
+* Stacks Project, Tags 0GL1 and 06YN
 -/
 
 @[expose] public noncomputable section
@@ -376,19 +385,7 @@ private theorem native_presentation_from_components
     (her)
     (r.rho_compatible)
 
-/-- Construct the native open tensor presentation together with its normalized comparisons.
-
-STATEMENT-DISPUTED (replaced statement): arbitrary derived rho and gamma cannot
-satisfy the fixed summand and representative normalizations. The comparisons
-are existential outputs here; the enclosing localization statement is unchanged.
-
-Source: Stacks 0GL1 and 06YN, totalization, K-flat descent, and localization
-normalization.  The native operations and representative insertions are
-chosen first; degreewise tensor comparisons and exactness identify their
-normalization maps, and the localization universal property proves the
-required representative equalities.
-(blueprint: new-sf-native-open-tensor-presentation)
--/
+/-- There is a native open tensor presentation together with normalized comparisons. -/
 theorem native_open_tensor_presentation_exists (s : NativeOpenTensorData k₀ l j) :
     ∃ (rho : nativeDerivedTensor k₀ l Z ⋙ nativeOpenPull k₀ l j ≅
         (nativeOpenPull k₀ l j).prod (nativeOpenPull k₀ l j) ⋙ nativeDerivedTensor k₀ l U)

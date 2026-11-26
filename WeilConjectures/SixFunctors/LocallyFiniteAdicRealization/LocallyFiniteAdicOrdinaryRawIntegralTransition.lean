@@ -10,8 +10,20 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFi
 
 /-! # Integral normalization of the ordinary finite closure comparison
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-finite-ordinary-raw-integral-transition)
+Raw scalar change commutes with continuous integral realization.
+
+## Implementation details
+
+The inverse closure comparison is expanded into the ordinary coefficient compositor and the
+scalar comparison. The raw scalar lift equation, naturality of
+`continuousIntegralComparison` and the continuous integral normalization reduce the claim, after
+cancelling the common invertible integral scalar comparison, to the inverse
+`coefficientExtensionSquare` for the completed square of the scalar data.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2 and
+  Proposition 6.8.14(2)
 -/
 
 @[expose] public noncomputable section
@@ -45,9 +57,7 @@ variable [IsNoetherian X]
   [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
   [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
 
-/-- Integral realization before flattening either coefficient extension.
-Source: BS 6.8.14(2), the raw integral formula and continuous integral identity.
-(blueprint: lem-sf-finite-ordinary-raw-integral-transition). -/
+/-- Integral realization before flattening either coefficient extension. -/
 @[irreducible] def finiteOrdinaryRawIntegralModel (A : FiniteCondensedData l X)
     (E : Index l (PadicAlgCl l)) :
     sfRationalConstructibleLocalization l (Coefficient.{u} l (PadicAlgCl l) E) X ⋙
@@ -66,9 +76,7 @@ Source: BS 6.8.14(2), the raw integral formula and continuous integral identity.
     (pbcDerivedExtend r ⋙ pbcDerivedExtend (A.closure.leg E))
   exact b ≪≫ d ≪≫ g
 
-/-- The explicit ordinary arrow retaining the raw completed integral comparison.
-Source: BS 6.8.14(2), the completed-to-rational coefficient square.
-(blueprint: lem-sf-finite-ordinary-raw-integral-transition). -/
+/-- The explicit ordinary arrow retaining the raw completed integral comparison. -/
 @[irreducible] def finiteOrdinaryRawIntegralTransition (A : FiniteCondensedData l X)
     {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :=
@@ -90,28 +98,7 @@ Source: BS 6.8.14(2), the completed-to-rational coefficient square.
 
 attribute [local semireducible] sfRationalConstructibleLocalization
 
-/-- Raw scalar change commutes with continuous integral realization.
-Source: BS 6.8.14(2), the raw scalar lift and continuous integral normalization.
-(blueprint: lem-sf-finite-ordinary-raw-integral-transition).
-
-Proof in words: expand the inverse closure comparison as the inverse ordinary
-coefficient compositor followed by extension of scalarComparison inverse.
-Expand scalarComparison as theta inverse followed by realization of beta.
-On the rational localization of K, the raw scalar_lift equation identifies beta
-with the integral scalar comparison followed by the localization of the given
-raw integral arrow. Naturality of continuousIntegralComparison moves this last
-arrow across the target comparison. The integral identity of each raw stage
-identifies the underlying integral object and its detailed coefficient transport.
-The continuous integral normalization then identifies theta followed by the
-source object comparison with realization of the integral scalar comparison
-followed by the target object comparison. Cancel the common invertible integral
-scalar comparison. The raw restriction equation identifies the remaining integral arrow with its
-ambient coefficient comparison. The two remaining ordinary scalar compositors are precisely
-the inverse coefficientExtensionSquare for A.scalar.completed_square. This gives
-the displayed explicit raw transition. The literal stage target equality gives
-the heterogeneous endpoint transport. Identity inclusions, zero complexes and
-empty scheme objects satisfy the same naturality and inverse identities.
--/
+/-- Raw scalar change commutes with continuous integral realization. -/
 theorem finiteOrdinaryRawIntegralModel_transition
     (A : FiniteCondensedData l X)
     (E L : Index l (PadicAlgCl l)) (h : E ≤ L)

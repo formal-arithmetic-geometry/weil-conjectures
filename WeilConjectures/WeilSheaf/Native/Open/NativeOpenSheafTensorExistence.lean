@@ -15,8 +15,22 @@ import WeilConjectures.WeilSheaf.Native.Open.NativeOpenSheafProjectionTensor
 
 /-! # The native sheaf open tensor calculation
 
-Source: Stacks 0E8I and 03DJ; equivariant refinement, steps 1--4 of
-lem-sf-native-open-derived-tensor.
+The extension-by-zero/restriction adjunction along an open immersion and the balanced tensor
+comparisons for pro-étale Weil sheaves, with preservation of K-flatness: an equivariant
+refinement of the corresponding statements for sheaves of modules.
+
+## Implementation details
+
+The open site is identified with the slice site, whose coefficient sheaf is the restriction of
+the ambient one. The extension/restriction adjunction, the restriction/tensor comparison
+`x ⊗ y ↦ x|U ⊗ y|U` and the open tensor comparison `[x] ⊗ y ↦ [x ⊗ y|U]` are lifted to Weil
+sheaves by checking Frobenius equivariance on local sections and pure tensors. Preservation of
+two-sided K-flatness is checked directly on the chain-level comparison, without boundedness or
+flat-term assumptions.
+
+## References
+
+Stacks 0E8I, 03DJ and 03D8.
 -/
 
 @[expose] public noncomputable section
@@ -307,33 +321,7 @@ attribute [local irreducible] NativeIsKFlat
 set_option linter.unusedSectionVars false
 
 /-- The normalized sheaf adjunction and balanced tensor comparisons, with
-preservation of categorical two-sided K-flatness.
-
-Source: Stacks 0E8I, 03DJ, 03D8; steps 1--4 of the native open tensor argument
-(blueprint: lem-sf-native-open-sheaf-tensor-existence).
-
-Proof: Identify the geometric open site with the slice. Its coefficient sheaf is
-the restriction of the ambient coefficient sheaf: both are the same locally
-finite coefficient functions. Lift the extension/restriction adjunction to Weil
-sheaves. On local sections the unit is x maps to [x] and the counit is [x] maps
-to x; Frobenius reindexes the same factoring objects, so both maps intertwine
-the Weil structures. Invertibility of the lifted unit is proved separately in the assembling
-theorem, using faithful conservative forgetting. The restriction/tensor comparison is
-the balanced map taking x tensor y to x|U tensor y|U. The open tensor comparison
-takes [x] tensor y to [x tensor y|U]. Its inverse is the transpose of tensoring
-with the open unit, followed by inverse restriction/tensor comparison. Check
-balancing, inverse identities, naturality, and Frobenius equivariance on pure
-tensors. Apply these maps in each bidegree and take direct sums; both differential
-composites on degree (p,q) are dx tensor y + (-1)^p x tensor dy. This gives the
-natural chain comparison. For a K-flat P on the open, restrict an arbitrary
-ambient quasi-isomorphism, tensor with P, and extend; exactness and the chain
-comparison show that extension preserves K-flatness. For a K-flat ambient T,
-extend a quasi-isomorphism on the open and tensor with T. The chain comparison
-identifies this with extension of its tensor with restriction of T. Restrict
-back, using the invertible open unit, to reflect the quasi-isomorphism. Symmetry
-gives the other tensor variable in each test. Thus the recorded two-sided
-categorical K-flat predicates are preserved; no boundedness or flat-term
-assumption is imposed on these tests. -/
+preservation of categorical two-sided K-flatness. -/
 theorem native_open_sheaf_tensor_existence :
     ∃ (adj : extensionByZero k₀ l j ⊣ upperStar k₀ l j)
       (sheafRestriction : ∀ M N : ProEtaleWeilSheaf k₀ l Z,

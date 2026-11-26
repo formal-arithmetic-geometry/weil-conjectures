@@ -31,9 +31,21 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! # Normalized presentations for compact-support system evaluation
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 03DI, 03DJ, 07A4, 0941.
-This module specializes the ordinary system calculus to the actual pro-etale functors.
-(blueprint: lem-trf-compact-support-normalized-presentation).
+Existence of normalized evaluations for the actual ordinary geometric operations. This module
+specializes the ordinary system calculus to the actual pro-étale functors.
+
+## Implementation details
+
+The section-normalized open-slice calculus is transported along the actual open coefficient
+equivalences. The finite-coefficient presentation and direct-image evaluation results give their
+comparison squares and normalization equations. For the open comparison, the ordinary slice
+restriction-evaluation mate is pasted with the coefficient-equivalence square; exact localization
+preserves its inverse mate, and the mates correspondence gives the open adjunction equations.
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10.
+* [Stacks Project, Tags 03DI, 03DJ, 07A4 and 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -187,24 +199,7 @@ private theorem compactSupportOpenDerivedEvaluation
 
 /-- Existence of normalized evaluations for the actual ordinary geometric operations.
 This assertion constructs the presentation and its adjunction comparisons only; it does
-not compare any tower transitions or construct a compact-support tower isomorphism.
-
-Source: the coherence node's proof steps 1--3 and 6; Zheng 4.1, 4.10;
-Stacks 03DI--03DJ, 07A4, 0941
-(blueprint: lem-trf-compact-support-normalized-presentation).
-Proof: choose the existing section-normalized open-slice calculus and transport
-it along the actual open coefficient equivalences. Construct the additive and
-exact operation instances and the K-injective resolution instances on the actual
-ringed module categories. The finite quotient adjunctions come from the existing
-coefficient system calculus. The independent finite-coefficient presentation and
-direct-image evaluation results give their respective comparison squares and
-normalization equations. For the open comparison, paste the ordinary slice
-restriction-evaluation mate with the coefficient-equivalence square. Its inverse
-mate is extensionEvaluation.inv. Exact localization preserves that inverse mate;
-its left square is exactly compactSupportCanonicalJEvaluation.inv. The unit and
-counit equations of the mates correspondence therefore give both displayed open
-adjunction equations. Assemble these comparisons into D and supply the ten
-normalization clauses in order. -/
+not compare any tower transitions or construct a compact-support tower isomorphism. -/
 theorem compactSupportSystemNormalizedPresentation
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]

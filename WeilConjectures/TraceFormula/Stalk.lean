@@ -36,14 +36,12 @@ and the Frobenius `WeilBoundedConstructible.frobenius` of this Weil object for t
 
 For a point `x` fixed by `Φ_m` the local Frobenius of the iterate `(K, φ_m)` is the operator
 `F_{x,m} = (φ_m)_x̄` on the geometric stalk `K_x̄ = Lx^* K` of the trace formula
-(`ProEtale.CondensedRing.WeilBoundedConstructible.stalkFrobenius`, blueprint
-`definition-frobenius-correspondences-their-operators`).
+(`ProEtale.CondensedRing.WeilBoundedConstructible.stalkFrobenius`).
 
 The stalks at `x` and at its Frobenius translate `x ≫ Φ` are isomorphic Weil objects
 (`ProEtale.CondensedRing.WeilBoundedConstructible.stalkTransport`), so their local Frobenii are
-conjugate and have the same trace (blueprint `theorem-trace-formula-euler-product--1`); and at a
-point fixed by `Φ_d` the operator `F_{x,dn}` is the `n`-th power of `F_{x,d}` (blueprint
-`theorem-trace-formula-euler-product`).
+conjugate and have the same trace; and at a point fixed by `Φ_d` the operator `F_{x,dn}` is the
+`n`-th power of `F_{x,d}`.
 
 ## Main definitions
 
@@ -60,6 +58,12 @@ point fixed by `Φ_d` the operator `F_{x,dn}` is the `n`-th power of `F_{x,d}` (
 - `ProEtale.CondensedRing.WeilBoundedConstructible.stalkFrobenius_mul`: `F_{x,dn} = F_{x,d}ⁿ`.
 - `ProEtale.CondensedRing.WeilBoundedConstructible.trace_stalkFrobenius_comp`:
   `tr(F_{x ≫ Φ, m}) = tr(F_{x,m})`.
+
+## Implementation details
+
+`ProEtale.CondensedRing.WeilBoundedConstructible.stalkTransportIso` is stated on the carrier
+`(K.iterate m).carrier` of the iterate, equal to `K.carrier`; the casts are explicit (`eqToIso`),
+since checking this equality by unfolding is expensive.
 
 -/
 
@@ -135,7 +139,7 @@ the geometric stalk `K_x̄ = Lx^* K`. Explicitly it is the composite
 ```
 Lx^* K ≅ L(𝟙 s)^* Lx^* K ≅ Lx^* LΦ_m^* K --Lx^* φ_m--> Lx^* K
 ```
-(blueprint `definition-frobenius-correspondences-their-operators`). -/
+-/
 noncomputable def stalkFrobenius (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K.carrier ⟶
@@ -382,9 +386,8 @@ lemma stalkFrobenius_add (K : WeilBoundedConstructible ℓ Φ) {a b : ℕ} (x : 
     (frobeniusIterate_add Φ a b) ha hb hab (K.iterate_carrier (a + b)) (K.iterate_carrier a)
     (K.iterate_carrier b) _ _ _ (K.iterateStr_add a b)
 
-/-- **The degree formula** (blueprint `theorem-trace-formula-euler-product`): at a point `x` fixed
-by `Φ_d`, the local Frobenius of degree `d * n` is the `n`-th power of the local Frobenius of
-degree `d`, `F_{x,dn} = F_{x,d}ⁿ`. -/
+/-- **The degree formula**: at a point `x` fixed by `Φ_d`, the local Frobenius of degree `d * n`
+is the `n`-th power of the local Frobenius of degree `d`, `F_{x,dn} = F_{x,d}ⁿ`. -/
 lemma stalkFrobenius_mul (K : WeilBoundedConstructible ℓ Φ) {d : ℕ} {x : RationalPoint X}
     (hx : x ≫ frobeniusIterate Φ d = x) (n : ℕ) :
     K.stalkFrobenius (d * n) x
@@ -442,8 +445,6 @@ lemma iterateStr_comm (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) :
 ```
 L(x ≫ Φ)^* K ≅ Lx^* LΦ^* K --Lx^* φ--> Lx^* K.
 ```
-It is stated on the carrier `(K.iterate m).carrier` of the iterate, equal to `K.carrier`; the
-casts are explicit (`eqToIso`), since checking this equality by unfolding is expensive.
 -/
 noncomputable def stalkTransportIso (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
     (x : RationalPoint X) (hx : x ≫ frobeniusIterate Φ m = x) :
@@ -461,7 +462,7 @@ underlying isomorphism is `stalkTransportIso`,
 ```
 L(x ≫ Φ)^* K ≅ Lx^* LΦ^* K --Lx^* φ--> Lx^* K.
 ```
-It intertwines the local Frobenii since `φ_m` commutes with `φ`. -/
+-/
 noncomputable def stalkTransport (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) :
     K.iterateStalk m (x ≫ Φ) (comp_comp_frobeniusIterate hx) ≅ K.iterateStalk m x hx :=
@@ -488,8 +489,8 @@ noncomputable def stalkTransport (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
       _ _ _ _ _ _ _ _ _ _)
 
 attribute [local instance] boundedConstructibleBraiding in
-/-- **Conjugacy of the local Frobenii** (blueprint `theorem-trace-formula-euler-product--1`): the
-local Frobenii at `x` and at its Frobenius translate `x ≫ Φ` have the same trace. -/
+/-- **Conjugacy of the local Frobenii**: the local Frobenii at `x` and at its Frobenius translate
+`x ≫ Φ` have the same trace. -/
 theorem trace_stalkFrobenius_comp (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
     (x : RationalPoint X) (hx : x ≫ frobeniusIterate Φ m = x)
     [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj

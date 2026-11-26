@@ -9,8 +9,20 @@ public import WeilConjectures.SixFunctors.CanonicalOpenRestriction.OpenSystemCou
 
 /-! # Finite components of ordinary quotient restriction
 
-Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I;
-Cohomology on Sites, Tag 0941.
+We transport restriction-evaluation squares through coefficient equivalences and show that
+evaluation transports a right mate to its finite right mate.
+
+## Implementation details
+
+For the mate statement, apply the inverse finite Hom bijection: naturality moves the finite
+counit past the projection, the evaluated system counit replaces it, and the system mate-counit
+equation gives the finite mate-counit word. Injectivity of the Hom bijection concludes.
+
+## References
+
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -26,9 +38,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGe
 open WeilConjectures.IntegralOpenReduction
 namespace WeilConjectures.CanonicalOpenRestriction
 
-/-- Transport a restriction-evaluation square through the two coefficient equivalences.
-Source: Stacks 03DJ and 0941
-(blueprint: lem-sf-ordinary-open-restriction-evaluation-mate). -/
+/-- Transport a restriction-evaluation square through the two coefficient equivalences. -/
 def transportRestrictionEvaluation
     {A : Type a} {B : Type b} {C : Type c}
     {D : Type d} {E : Type e} {F : Type f}
@@ -50,9 +60,7 @@ def transportRestrictionEvaluation
           Functor.isoWhiskerLeft G q.counitIso ≪≫ Functor.rightUnitor G) V) _ ≪≫
     Functor.isoWhiskerRight ν _ ≪≫ Functor.associator _ _ _
 
-/-- Component formula for transport through two coefficient equivalences.
-Source: Stacks 03DJ and 0941
-(blueprint: lem-sf-ordinary-open-restriction-evaluation-mate). -/
+/-- Component formula for transport through two coefficient equivalences. -/
 theorem transportRestrictionEvaluation_app
     {A : Type a} {B : Type b} {C : Type c}
     {D : Type d} {E : Type e} {F : Type f}
@@ -80,33 +88,22 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j] (o : Operations l E j)
 
-/-- The natural form of the fixed ordinary restriction-evaluation comparison.
-Source: Stacks 03DJ and 0941
-(blueprint: lem-sf-ordinary-open-restriction-evaluation-mate). -/
+/-- The natural form of the fixed ordinary restriction-evaluation comparison. -/
 def ordinaryRestrictionEvaluation (n : ℕ) :
     systemRestriction l E j o ⋙ coefficientSequenceEvaluation l E U n ≅
       coefficientSequenceEvaluation l E X n ⋙ finiteRestriction l E j o n :=
   transportRestrictionEvaluation o.systems (o.finite n) _ _ _ _ _
     (o.transportEvaluation n) (o.openSystems.restrictionEvaluation n)
 
-/-- Its components retain exactly the originally prescribed units and counits.
-Source: Stacks 03DJ and 0941
-(blueprint: lem-sf-ordinary-open-restriction-evaluation-mate). -/
+/-- The components of `ordinaryRestrictionEvaluation` are the prescribed counit
+restriction-evaluation maps `counitRestrictionEvaluation`. -/
 theorem ordinaryRestrictionEvaluation_app (n : ℕ) (N : coefficientSequenceModules l E X) :
     (ordinaryRestrictionEvaluation l E j o n).app N =
       counitRestrictionEvaluation l E j o n N := by
   exact transportRestrictionEvaluation_app o.systems (o.finite n) _ _ _ _ _
     (o.transportEvaluation n) (o.openSystems.restrictionEvaluation n) N
 
-/-- Evaluation transports a right mate to its finite right mate.
-Source: Stacks 03DJ and 0E8I; ordinary adjunction counit calculation.
-(blueprint: lem-sf-ordinary-open-restriction-evaluation-mate).
-
-Proof: apply the inverse finite Hom bijection. Naturality moves the finite counit
-past p, and hε replaces it by the evaluated system counit. Move μ across the mate
-by naturality and use the system mate-counit equation. Move p past the integral
-counit. The inverse form of hr then gives the finite mate-counit word. The Hom
-bijection is injective, so the original maps agree. -/
+/-- Evaluation transports a right mate to its finite right mate. -/
 theorem evaluation_right_mate
     {A : Type a} {B : Type b} {C : Type c} {D : Type d}
     {P : Type e} {Q : Type f}

@@ -11,28 +11,28 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 
 
 /-! # Canonical limiting tensor cocones
-Source: Stacks Project, Algebra, Tag 02JO (3), construction of Ψ, and Tag 00DD.
-(blueprint: lem-weil-pbc-comparison-tensor-canonical-cocones-b4)
+
+Stage diagrams of tensor rings over a directed system admit canonical cocones to the limit
+tensor rings.
+
+## Implementation details
+
+The cocone points are `ULift`s of the limit tensor rings; the legs conjugate the canonical
+tensor maps by the `ULift` equivalences. No comparison transformation is used.
+
+## References
+
+* [Stacks, Tag 02JO] (3), construction of `Ψ`
+* [Stacks, Tag 00DD]
 -/
 @[expose] public section
 open scoped TensorProduct
 open CategoryTheory CategoryTheory.Limits
 universe v w x y
 namespace RingHom
-/-- Attach canonical limiting tensor cocones to arbitrary stage diagrams.
-Source: Stacks Project, Algebra, Tag 00DD; canonical cocones in Tag 02JO (3).
-(blueprint: lem-weil-pbc-comparison-tensor-canonical-cocones-b4)
-
-Proof: take the points to be ULifts of B tensor_P Q and C, with down ring
-equivalences. Define source legs by conjugating μ_j tensor id_Q and target
-legs by conjugating the canonical tensor maps to C. The hypotheses identify
-stage transitions with the canonical maps. The canonical maps to the colimit
-compose with those transitions, by colimit.w and tensor-map composition.
-For the source maps the ring-hom identities also give equality of P-algebra
-maps, hence equality after tensoring with Q. Thus the legs are natural and
-form cocones. Cancellation of the up/down equivalences proves both displayed
-leg identities. This uses no comparison transformation and no property of ψ.
--/
+/-- Stage diagrams `D`, `E` identified with `(F(j) ⊗ B₀) ⊗[P] Q` and `F(j) ⊗ C₀` (with
+transitions the canonical maps) admit cocones to the limit tensor rings `(colim F ⊗ B₀) ⊗[P] Q`
+and `colim F ⊗ C₀`, whose legs are the canonical tensor maps. -/
 theorem exists_comparison_tensor_canonical_cocones
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]

@@ -12,17 +12,13 @@ public import WeilConjectures.TraceFormula.ProperPushforwardKernel
 
 # Exchange lemmas for the proper pushforward of the trace class
 
-For a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` (blueprint
-`definition-pushforward-correspondence--1`), with `q = f × f`:
+For a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)`, with `q = f × f`:
 
-* the kernel class of `[f, g]_! u` is the transported kernel class of `u` (blueprint
-  `theorem-proper-pushforward-lefschetz-verdier--1`; proved in
+* the kernel class of `[f, g]_! u` is the transported kernel class of `u` (proved in
   `WeilConjectures.TraceFormula.SourceExchange`);
-* the evaluation kernels are exchanged by the kernel pushforward (blueprint
-  `theorem-proper-pushforward-lefschetz-verdier--1`, (1); proved in
+* the evaluation kernels are exchanged by the kernel pushforward (proved in
   `WeilConjectures.TraceFormula.ProperCompatibilityEvaluation`);
-* the support isomorphisms are exchanged by the exchange map of the support square (blueprint
-  `theorem-proper-pushforward-lefschetz-verdier--1`, (2); proved in
+* the support isomorphisms are exchanged by the exchange map of the support square (proved in
   `WeilConjectures.TraceFormula.ProperCompatibilitySupport`).
 
 -/
@@ -78,9 +74,8 @@ end Transport
 
 namespace Correspondence
 
-/-- The trace morphism followed by the support isomorphism is the exceptional adjoint of the
-kernel class followed by the evaluation kernel (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, Step 1). -/
+/-- The trace morphism followed by the support isomorphism is the exceptional adjoint of the kernel
+class followed by the evaluation kernel. -/
 lemma mate_comp_traceMap_comp_supportIso (c : Correspondence ℓ K) (F : c.FixedLocus) :
     c.mate ≫ c.traceMap F ≫ F.supportIso.hom =
       (boundedConstructibleUpperShriekAdjunction ℓ c.support).homEquiv _ _

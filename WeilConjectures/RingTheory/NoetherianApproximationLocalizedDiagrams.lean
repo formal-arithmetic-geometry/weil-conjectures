@@ -23,8 +23,22 @@ public import Mathlib.RingTheory.Localization.Defs
 
 /-! # Localized diagrams of a supplied Noetherian approximation
 
-Source: Stacks Project, Algebra, Tags 00RC, 00R1 and 00R6.
-(blueprint: lem-weil-pbc-noetherian-approximation-localized-diagrams)
+Localizing a Noetherian approximation of a module over a local homomorphism at the contracted
+primes gives a directed system of Noetherian local rings and finite modules with the localized
+colimits.
+
+## Implementation details
+
+Localized colimits are obtained by applying `filteredColimitLocalizationAtPrime` to the ring
+diagrams; for modules, a numerator and a denominator are lifted to a common stage, and equality
+of fractions is descended using eventual equality in the original colimit.
+
+## References
+
+* [Stacks, Tag 00RC] (first reduction paragraph)
+* [Stacks, Tag 00QX]
+* [Stacks, Tag 00R1]
+* [Stacks, Tag 00R6]
 -/
 
 @[expose] public section
@@ -38,46 +52,10 @@ namespace Algebra
 
 -- Preserve the named nondependent forall binder in the existing signature.
 set_option linter.unusedVariables false in
-/-- Localization of a supplied Noetherian approximation produces the local diagrams used
-in the stage-flatness criterion. No flatness of the limit is assumed, and no flat stage
-is selected.
-
-Source: Stacks Project, Algebra, Tag 00RC (`theorem-openness-flatness`), first
-reduction paragraph, and Tag 00QX (`lemma-limit-module-essentially-finite-presentation`).
-(blueprint: lem-weil-pbc-noetherian-approximation-localized-diagrams)
-
-Proof:
-1. Contract q to every top stage through the supplied cocone followed by ULift.down,
-   and contract it further through the stage map to the base stage. Naturality and
-   the commuting square show that every transition contracts the later prime to the
-   earlier one. Take the prime localizations of these rings and the localizations of
-   the stage modules. On fractions the transitions send x/s to f(x)/f(s); the
-   contractions ensure that denominators remain invertible. Semilinearity makes these
-   maps compatible with the localized scalar actions.
-2. Apply filteredColimitLocalizationAtPrime to both ring diagrams, transporting the
-   supplied colimits through the canonical lift equivalences. For modules lift a
-   numerator and a denominator to a common stage. Equality of fractions is witnessed
-   by a multiplier outside q; lift that multiplier, and use eventual equality in the
-   original group colimit to descend its zero relation to a later stage. This proves
-   that the localized module cocone is a colimit with limit M_q. Its scalar action is
-   compatible on numerator/denominator representatives. The ring comparison induces
-   the indicated map between the chosen categorical colimits.
-3. The rings before localization are Noetherian by hypothesis. Localizations remain
-   Noetherian, prime localizations are local, and the localized stage modules remain finite.
-   All ring transition maps and the base-to-top maps are local, by the contraction identities.
-4. Localize the supplied ring tensor isomorphism. First localize the two factors at
-   the contracted primes, and then localize at the prime pulled back from the later
-   top ring. The localization universal property gives the displayed pure-tensor
-   formula and the IsLocalization witness. Tensor-localization compatibility applied
-   to the supplied module tensor isomorphism gives the localized module base-change
-   equivalence with its pure-tensor formula.
-5. Identify the base colimit with R_p and the module colimit with M_q. Transport of
-   the R-action along the induced map R → R_p gives the limit module linear
-   equivalence in the statement. At each stage use the canonical map A_i → (A_i)_{p_i}
-   and identify the module with (D_i)_{q_i} as an A_i-module. The localization universal
-   property gives both IsLocalization witnesses. This construction does not use
-   flatness, and neither asserts nor chooses a flat stage.
--/
+/-- Localization of a supplied Noetherian approximation at the primes contracted from `q`
+produces the local diagrams used in the stage-flatness criterion: localized colimits identified
+with `R_p` and `M_q`, Noetherian local stages with finite localized modules, and localized
+transition base changes. No flatness of the limit is assumed, and no flat stage is selected. -/
 theorem exists_localized_noetherian_approximation
     (R : Type u) (S : Type v) (M : Type w)
     [CommRing R] [CommRing S] [Algebra R S]

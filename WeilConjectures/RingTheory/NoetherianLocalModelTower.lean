@@ -16,8 +16,20 @@ public import Mathlib.Order.DirectedInverseSystem
 /-!
 # Noetherian local model towers
 
-Source: Stacks Project, Algebra, proof of Tag 00R7, first two paragraphs.
-(blueprint: def-weil-pbc-noetherian-local-model-tower).
+The directed Noetherian model system used in the proof of the fibre criterion for flatness.
+
+## Implementation details
+
+The ring and module limits are specified elementwise: every element comes from a stage, and two
+elements at one stage that agree in the limit agree at a later stage. Together with the
+compatibility clauses these give the filtered colimit universal property. Both the base-to-top
+and middle-to-top transition localizations are retained, since they are used for the base and
+fibre systems respectively.
+
+## References
+
+* [Stacks, Tag 00R7] (first two paragraphs of the proof)
+* [Stacks, Tag 00R6]
 -/
 
 @[expose] public section
@@ -28,17 +40,9 @@ open scoped TensorProduct
 
 namespace Module
 
-/-- The directed Noetherian model system used in the proof of the fibre criterion.
-Source: Stacks Project, Algebra, proof of Tag 00R7, first two paragraphs; the transition
-localizations are also the hypotheses of Tag 00R6.
-(blueprint: def-weil-pbc-noetherian-local-model-tower).
-
-The ring and module limits are specified elementwise: every element comes from a stage,
-and two elements at one stage that agree in the limit agree at a later stage. These
-conditions, together with the compatibility clauses, are the filtered colimit universal
-property. The last two fields express the limit localization comparisons. No flatness is
-part of these data. Both the base-to-top and middle-to-top transition localizations are
-retained, since they are used for the base and fibre systems respectively. -/
+/-- A directed system of Noetherian local models `R_i → S_i → T_i` with finite modules `N_i`,
+whose filtered colimits are `R`, `S`, `S'` and `M`, with transition maps given by localizations
+of base changes and with the limit localization comparisons. No flatness is part of these data. -/
 structure NoetherianLocalModelTower
     (R : Type u) (S : Type v) (S' : Type w) (M : Type t)
     [CommRing R] [CommRing S] [CommRing S'] [AddCommGroup M]

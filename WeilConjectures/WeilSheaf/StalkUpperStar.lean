@@ -18,6 +18,9 @@ sheaf on `Y`. The stalk of `φ^* F` at a geometric point `t` of `X̄` is the sta
 `t ≫ φ̄`, compatibly with the Frobenius relative to `𝔽_{qᵐ}`
 (`AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalkAt_upperStar`). As a consequence pullback
 preserves punctual purity (`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.upperStar`).
+In particular this applies to the inclusion `X_y ⟶ X` of the fibre of a morphism over a closed
+point `y`: since residue cardinalities do not depend on the base field, purity on `X_y` relative
+to `κ(y)` and relative to `k₀` agree.
 -/
 
 @[expose] public section
@@ -91,8 +94,7 @@ variable {K : Type v} [Field K] [IsAlgClosed K]
 
 /-- If the Frobenius of `N` has the characteristic polynomial of the `r`-th power of the
 Frobenius of `M`, `r ≥ 1`, and `M` is pure of weight `w` relative to `q`, then `N` is pure of
-weight `w` relative to `q ^ r`: every eigenvalue of `F_Mʳ` is the `r`-th power of an eigenvalue
-of `F_M`. -/
+weight `w` relative to `q ^ r`. -/
 theorem IsPureOfWeight.of_charpoly_eq_pow {ι : K →+* ℂ} {q : ℕ} {M N : FrobeniusModule.{u, v} K}
     {w : ℝ} (h : M.IsPureOfWeight ι q w) {r : ℕ} (hr : 0 < r)
     (hMN : N.frobeniusEnd.charpoly = (M.frobeniusEnd ^ r).charpoly) :
@@ -415,14 +417,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
 
 /-- **Punctual purity on a closed fibre.** The pullback `φ^* F` of a sheaf punctually `ι`-pure of
-weight `w` along a morphism `φ : X ⟶ Y` of `k₀`-schemes is punctually `ι`-pure of weight `w`:
-at a closed point `z` of `X` over `x = φ z`, with `r = [κ(z) : κ(x)]`, the local Frobenius of
-`φ^* F` at `z` has the characteristic polynomial of `Fₓʳ`, and `q_z = q_xʳ`.
-
-The blueprint states this for the inclusion `X_y ⟶ X` of the fibre of a morphism `X ⟶ Y` over a
-closed point `y`, with purity on `X_y` relative to `κ(y)`; since residue cardinalities do not
-depend on the base field, purity relative to `κ(y)` and relative to `k₀` agree
-(blueprint: `proposition-weights-under-usual-operations--7`). -/
+weight `w` along a morphism `φ : X ⟶ Y` of `k₀`-schemes is punctually `ι`-pure of weight `w`.
+-/
 theorem IsPunctuallyPureOfWeight.upperStar {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l Y}
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] :

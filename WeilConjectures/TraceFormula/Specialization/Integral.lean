@@ -30,9 +30,7 @@ For the specialization data determined by the support
 exchange `β_c` and dualizing map `θ_X` come from compact-support exchanges `ν_c`, `ν_X`, the
 dualizing map `θ_F` is the dualizing map of the composite of `ν_X` with the compact-support exchange
 `ν_d` whose mate is `β_d`
-(`ProEtale.CondensedRing.Correspondence.TraceSpecialization.θF_ofSupportExchange`;
-
-blueprint `lemma-compatibilities-base-change-maps` (3)).
+(`ProEtale.CondensedRing.Correspondence.TraceSpecialization.θF_ofSupportExchange`).
 
 ## Main definitions
 
@@ -145,10 +143,8 @@ namespace BorelMooreSection
 variable (ℓ) (X : Over (Spec (.of k))) [QuasiCompact X.hom] [IsProper X.hom]
 
 /-- The *unit class* `ℚ̄_ℓ,s ⟶ Ra_{X!} ℚ̄_ℓ,X` of a scheme proper over `s`: the unit of
-`La_X^* ⊣ Ra_{X*}` at `ℚ̄_ℓ`, read through the unit isomorphism of the monoidal functor `La_X^*`
-and the identification `Ra_{X!} ≅ Ra_{X*}`. The integral of a Borel–Moore section `α` is the
-adjoint `α^♭ : Ra_{X!} ℚ̄_ℓ ⟶ ℚ̄_ℓ` of `α` precomposed with the unit class
-(`ProEtale.CondensedRing.BorelMooreSection.integral_eq`). -/
+`La_X^* ⊣ Ra_{X*}` at `ℚ̄_ℓ`, read through the unit isomorphism of the monoidal functor `La_X^*` and
+the identification `Ra_{X!} ≅ Ra_{X*}`. -/
 noncomputable def unitClass :
     𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶
       (boundedConstructibleLowerShriek ℓ (toPoint X)).obj
@@ -250,9 +246,8 @@ noncomputable abbrev fixedLocusToPointCompactSupportExchange :
     (lowerShriekCompOfEq ℓ F'.d (toPoint X') (comp_toPoint F'.d))
     (fixedLocusCompactSupportExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc) νX
 
-/-- **The dualizing map of the fixed locus is the dualizing map of `ν_F`** (blueprint
-`lemma-compatibilities-base-change-maps` (3)): for the specialization data determined by the support
-with `θ_X` the dualizing map of `ν_X`, `θ_F` is the dualizing map of
+/-- **The dualizing map of the fixed locus is the dualizing map of `ν_F`**: for the specialization
+data determined by the support with `θ_X` the dualizing map of `ν_X`, `θ_F` is the dualizing map of
 `fixedLocusToPointCompactSupportExchange`. -/
 theorem θF_ofSupportExchange :
     (ofSupportExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc σC (dualizingExchange ℓ σpt νX)).θF =

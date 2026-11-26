@@ -23,9 +23,6 @@ the normalized rational shifts once its integral model does
 (`rationalPullbackScalarComparison_commShift`).
 
 This is the rational step of the proof of `rationalPullbackTransitionShift`.
-Source: current blueprint sec-smooth-purity/sk-prop-sf-localization,
-prop-sf-open-closed-triangle-all-stages.proof.md, Weil-structures paragraph.
-(blueprint: lem-sf-rational-pullback-transition-shift).
 -/
 
 @[expose] public section
@@ -317,10 +314,7 @@ private theorem rationalPullbackScalarComparison_commShift_of_finiteCoefficients
   exact ⟨J, 𝟙 _, inferInstance⟩
 
 /-- The rational pullback scalar comparison commutes with the normalized rational shifts,
-given the shift compatibility of its integral model.
-Source: current blueprint sec-smooth-purity/sk-prop-sf-localization,
-prop-sf-open-closed-triangle-all-stages.proof.md, Weil-structures paragraph
-(blueprint: lem-sf-rational-pullback-transition-shift). -/
+given the shift compatibility of its integral model. -/
 theorem rationalPullbackScalarComparison_commShift
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

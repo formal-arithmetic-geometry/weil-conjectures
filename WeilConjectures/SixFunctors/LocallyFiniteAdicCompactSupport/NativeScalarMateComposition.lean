@@ -10,8 +10,7 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Composition of the canonical condensed scalar mates
 
-Source: the formal-properties paragraph of the blueprint scalar direct-image proof.
-(blueprint: lem-sf-native-scalar-derived-mate-composition).
+Inverse mates of a pasted restriction square are the successive scalar mates.
 -/
 
 @[expose] public noncomputable section
@@ -71,9 +70,7 @@ attribute [local instance] nativeScalarModuleClosed nativeScalarModuleSymmetric
   nativeScalarModuleFlatResolution nativeScalarModuleLeftColimits nativeScalarModuleRightColimits
   nativeScalarModuleTensorFour nativeScalarModuleGoodTensorLeft nativeScalarModuleGoodTensorRight
 
-/-- The canonical derived extension/restriction adjunction for a condensed coefficient map.
-Source: the existing derived extension/levelwise restriction adjunction.
-(blueprint: lem-sf-native-scalar-derived-mate-composition). -/
+/-- The canonical derived extension/restriction adjunction for a condensed coefficient map. -/
 def nativeScalarDerivedAdjunction
     {Λ Γ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Γ] [IsCommMonObj Γ]
@@ -85,8 +82,7 @@ def nativeScalarDerivedAdjunction
     (coefficientMap b T) _
 
 /-- The inverse restriction/direct-image square, with the published geometric
-functor names retained. Source: the canonical unbounded restriction comparison.
-(blueprint: lem-sf-native-scalar-derived-mate-composition). -/
+functor names retained. -/
 def nativeScalarDerivedRestrictionSquare
     {Λ Γ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Γ] [IsCommMonObj Γ]
@@ -112,8 +108,7 @@ private theorem scalarDerivedMate
   rfl
 
 /-- The composite of the two canonical scalar adjunctions, with the actual composite
-restriction functor as right adjoint. Source: adjunction composition.
-(blueprint: lem-sf-native-scalar-derived-mate-composition). -/
+restriction functor as right adjoint. -/
 def nativeScalarDerivedCompositeAdjunction
     {Λ Γ Δ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Γ] [IsCommMonObj Γ]
@@ -123,18 +118,7 @@ def nativeScalarDerivedCompositeAdjunction
 
 /-- Inverse mates of the pasted restriction square are the successive scalar mates.
 No geometric mate is assumed invertible. The two coefficient maps are flat so that
-the specified unbounded restriction/direct-image comparisons exist.
-
-Source: the formal-properties paragraph of the blueprint scalar direct-image proof;
-Mathlib's mateEquiv_hcomp and the canonical derived extension/restriction adjunctions.
-(blueprint: lem-sf-native-scalar-derived-mate-composition).
-
-Proof in words: identify each derivedPushHom with the inverse mate of the inverse
-restriction comparison, directly from its definition. The mate equivalence respects
-horizontal composition of the right-adjoint squares and vertical composition of
-the left-adjoint squares. Apply this equality to M. The component of vertical pasting
-is the second extension functor applied to the first component, followed by the
-second component at the first extended object. This is exactly the displayed formula. -/
+the specified unbounded restriction/direct-image comparisons exist. -/
 theorem nativeScalarDerivedCompositeMate
     {Λ Γ Δ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Γ] [IsCommMonObj Γ]

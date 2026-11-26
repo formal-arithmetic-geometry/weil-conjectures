@@ -14,9 +14,13 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 /-!
 # The tensor-unit comparison on whole quotient towers
 
-Source: Stacks Project, Tags 03D6 and 0941; blueprint Global powers in
-`sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md`
-(blueprint: def-trf-integral-tower-inverse-image-unit).
+We define the exact inverse image of whole completed-coefficient quotient towers and its
+tensor-unit comparison with the sequence-site pullback, uniquely determined by the sheafified
+tensor unit at all indices, together with its derived version and the diagonal comparison.
+
+## References
+
+* Stacks Project, Tags 03D6, 0941
 -/
 
 @[expose] public noncomputable section
@@ -969,19 +973,16 @@ private theorem towerComparisonPush_apply (n : ℕ) (M : coefficientSequenceModu
             ((proEtaleIsoPostcompose g).obj U) x)) := by
   exact towerComparisonLevel_apply l E g n M U x
 
-/-- Apply the specified exact completed inverse image to every level and transition.
-Source: Stacks 03D6, 0941 (blueprint: def-trf-integral-tower-inverse-image-unit). -/
+/-- Apply the specified exact completed inverse image to every level and transition. -/
 abbrev integralTowerInverseImage :
     (ℕᵒᵖ ⥤ scalarReductionSource l E Y) ⥤ (ℕᵒᵖ ⥤ scalarReductionSource l E X) :=
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj (inverseImageIntegralModules l E g)
 
-/-- Levelwise finite-limit preservation by the exact inverse image.
-Source: Stacks 0941 (blueprint: def-trf-integral-tower-inverse-image-unit). -/
+/-- Levelwise finite-limit preservation by the exact inverse image. -/
 instance integralTowerInverseImageLimits : PreservesFiniteLimits
     (integralTowerInverseImage l E g) := ⟨fun _ _ _ ↦ inferInstance⟩
 
-/-- Levelwise finite-colimit preservation by the exact inverse image.
-Source: Stacks 0941 (blueprint: def-trf-integral-tower-inverse-image-unit). -/
+/-- Levelwise finite-colimit preservation by the exact inverse image. -/
 instance integralTowerInverseImageColimits : PreservesFiniteColimits
     (integralTowerInverseImage l E g) := ⟨fun _ _ _ ↦ inferInstance⟩
 
@@ -1127,17 +1128,7 @@ private theorem towerUnit_existsUnique :
       M U.unop x).symm
 
 /-- The whole-tower unit is uniquely determined by the sheafified tensor unit at
-all indices and all sections. Source: Stacks 03D6, 0941
-(blueprint: def-trf-integral-tower-inverse-image-unit).
-
-Proof: evaluate the actual sequence-pullback adjunction unit at the postcomposition
-of U with g, then restrict along the distinguished comma arrow U to g-star(gU).
-This sends x to x tensor 1. The completed coefficient projection equation proves
-linearity after restriction of scalars. Naturality in restrictions and quotient
-transitions gives a map of entire towers, natural in the quotient system.
-The coefficient map is invertible and the underlying site map is an equivalence,
-so multiplication gives its inverse at each level. Sectionwise equality proves
-uniqueness of the transformation and its inverse. -/
+all indices and all sections. -/
 theorem integralTowerInverseImageUnit_existsUnique :
     ∃! a : coefficientSequenceRestriction l E Y ⋙ integralTowerInverseImage l E g ≅
         integralComparisonSequencePullback l E g ⋙ coefficientSequenceRestriction l E X,
@@ -1154,20 +1145,17 @@ theorem integralTowerInverseImageUnit_existsUnique :
                 ((proEtaleIsoPostcompose g).obj U) x)) := by
   exact towerUnit_existsUnique l E g
 
-/-- The canonical sheafified x tensor 1 map, retaining all quotient transitions.
-Source: Stacks 03D6, 0941 (blueprint: def-trf-integral-tower-inverse-image-unit). -/
+/-- The canonical sheafified x tensor 1 map, retaining all quotient transitions. -/
 def integralTowerInverseImageUnit :=
   (integralTowerInverseImageUnit_existsUnique l E g).exists.choose
 
-/-- Exact inverse image of the entire completed-coefficient tower.
-Source: Stacks 03D6, 0941 (blueprint: def-trf-integral-tower-inverse-image-unit). -/
+/-- Exact inverse image of the entire completed-coefficient tower. -/
 def integralDerivedTowerInverseImage :
     coefficientSequenceRestrictedDerived l E Y ⥤ coefficientSequenceRestrictedDerived l E X :=
   (integralTowerInverseImage l E g).mapDerivedCategory
 
 /-- Localize the same whole-tower tensor-unit map, including the canonical
-composition comparisons of exact derived functors.
-Source: Stacks 03D6, 0941 (blueprint: def-trf-integral-tower-inverse-image-unit). -/
+composition comparisons of exact derived functors. -/
 def integralDerivedTowerInverseImageUnit :
     coefficientSequenceDerivedRestriction l E Y ⋙ integralDerivedTowerInverseImage l E g ≅
       integralComparisonDerivedSequencePullback l E g ⋙
@@ -1176,8 +1164,7 @@ def integralDerivedTowerInverseImageUnit :
     Functor.mapDerivedCategoryNatIso (integralTowerInverseImageUnit l E g) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Exact inverse image commutes with the diagonal by the identity at each level.
-Source: Stacks 0941 (blueprint: def-trf-integral-tower-inverse-image-unit). -/
+/-- Exact inverse image commutes with the diagonal by the identity at each level. -/
 def integralTowerInverseImageDiagonal :
     inverseImageIntegralDerived l E g ⋙ integralComparisonConstantTower l E X ≅
       integralComparisonConstantTower l E Y ⋙ integralDerivedTowerInverseImage l E g :=

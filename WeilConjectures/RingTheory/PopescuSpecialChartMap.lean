@@ -8,15 +8,24 @@ module
 
 public import WeilConjectures.RingTheory.PopescuLiftPresentation
 
+/-!
+# The special-chart map
+
+We define the canonical map from the polynomial algebra over the localized coefficient quotient
+`(Cbar/πCbar)[1/a_k]` to the localized special fibre of the Popescu lifting algebra.
+
+## References
+
+* [Stacks, Tag 07CP] (the displayed polynomial chart modulo `π`)
+-/
+
 @[expose] public section
 
 universe a c
 
 namespace Algebra
 
-/-- The chart coefficient becomes a unit in the localized lifting quotient.
-The compatibility equation `hcmod` identifies its image with the element inverted.
-Source: Stacks Project, Tag 07CP, localization in the special chart. -/
+/-- The chart coefficient becomes a unit in the localized lifting quotient. -/
 theorem popescu_special_chart_coefficient_isUnit (R : Type a) (Cbar : Type c)
     [CommRing R] [CommRing Cbar] [Algebra R Cbar] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]
@@ -45,9 +54,7 @@ theorem popescu_special_chart_coefficient_isUnit (R : Type a) (Cbar : Type c)
   exact IsLocalization.Away.algebraMap_isUnit _
 
 /-- The canonical special-chart map, with coefficients induced by `cmod` and each free
-variable sent to its class in the explicitly constructed lifting quotient.
-Source: Stacks Project, Tag 07CP, displayed polynomial chart modulo pi.
-(blueprint: def-weil-pbc-popescu-special-chart-map). -/
+variable sent to its class in the explicitly constructed lifting quotient. -/
 noncomputable def popescu_special_chart_map (R : Type a) (Cbar : Type c)
     [CommRing R] [CommRing Cbar] [Algebra R Cbar] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]

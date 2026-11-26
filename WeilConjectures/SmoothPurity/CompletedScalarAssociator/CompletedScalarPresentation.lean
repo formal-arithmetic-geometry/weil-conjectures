@@ -54,10 +54,11 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # The recorded scalar extension as a normalized presentation
 
-Source: Stacks Tags 06YY and 07A6; blueprint Proof (3).
-(blueprint: lem-pur-completed-scalar-presentation-exists).
-
 This bundles existing scalar functors and counits without choosing a new model.
+
+## References
+
+* Stacks Project, Tags 06YY and 07A6.
 -/
 
 -- After pruning, this module only keeps private declarations.

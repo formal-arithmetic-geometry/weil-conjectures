@@ -15,8 +15,21 @@ import WeilConjectures.Mathlib.RingTheory.Filtration
 /-!
 # Flatness from flatness modulo every power of an ideal
 
-Source: Stacks Project, Algebra, Lemma 10.99.11 (Tag 0523)
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
+Let `R → S` be a map of Noetherian rings, `I ⊆ R` an ideal and `M` a finite `S`-module such that
+`M / I^n M` is flat over `R / I^n` for all `n ≥ 1`. Then `M_q` is flat over `R` for every prime
+`q` of `S` containing `I S`.
+
+## Implementation details
+
+The proof is the Artin–Rees argument applied to every ideal `J` of `R`: an element of the kernel
+of `M ⊗ J → M` lies in `I^n (M ⊗ J)` for all `n`, by flatness modulo `I^n` and Artin–Rees; the
+Krull intersection theorem then gives `r ∈ I S` with `(1 - r) x = 0`, so the kernel vanishes after
+localizing at `q`, and the ideal criterion gives flatness. In the local case the identity of `M`
+is a localization map at the maximal ideal.
+
+## References
+
+* [Stacks, Tag 0523]
 -/
 
 @[expose] public section
@@ -25,26 +38,10 @@ universe u v w
 
 namespace Module.Flat
 
-/-- Stacks Project, Algebra, Lemma 10.99.11 (Tag 0523)
-(blueprint: theorem-finite-etale-covers-proper-henselian--2). The algebra structure represents the
-ring map `R → S`, and the scalar tower says that the `R`-action on `M` is its restriction.
-
-Proof (the Artin–Rees argument of Stacks Tag 0523, applied to every ideal):
-1. For an ideal `J`, a tensor `x` in the kernel of `M ⊗ J → M` maps to zero in
-   `M ⊗ (R/I^k)`. Flatness of `M/I^k M` gives purity for modules killed by `I^k`.
-   Thus `x` maps to zero in the tensor with the image of `J → R/I^k`. Tensor
-   right exactness puts `x` in the image of `M ⊗ (J ∩ I^k)`.
-2. Artin–Rees for `J ≤ R` gives `J ∩ I^(n+c) ≤ I^n J`. Moving scalars across
-   tensors therefore puts `x` in `I^n (M ⊗ J)` for every `n`.
-3. `M ⊗ J` is finite over `S`, since `J` is finite over `R`. After transferring
-   ideal powers to `S`, Mathlib's elementwise Krull-intersection theorem gives
-   `r ∈ IS` with `r • x = x`. Hence `1-r` annihilates `x` and lies outside `q`.
-4. Tensor-localization compatibility and the kernel criterion for localization
-   give injectivity of `M_q ⊗ J → M_q`: clear the denominator of an element's
-   image first, then apply steps 1–3. The ideal criterion gives flatness of `M_q`.
-5. In a local ring all elements outside the maximal ideal are units. The identity
-   on `M` is therefore itself a localization map there; its localization
-   equivalence, restricted to `R`, transfers flatness back to `M`. -/
+/-- Let `R → S` be a map of Noetherian rings, `I ⊆ R` an ideal and `M` a finite `S`-module with
+`M / I^n M` flat over `R / I^n` for all `n ≥ 1`. Then `M_q` is flat over `R` for every prime `q`
+of `S` containing `I S`, and if `S` is local with `I S` in its maximal ideal, `M` is flat
+over `R`. -/
 theorem flat_of_flat_quotients_powers {R : Type u} {S : Type v} {M : Type w}
     [CommRing R] [CommRing S] [Algebra R S] [AddCommGroup M]
     [Module R M] [Module S M] [IsScalarTower R S M]

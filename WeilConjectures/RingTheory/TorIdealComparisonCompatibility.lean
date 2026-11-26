@@ -18,7 +18,22 @@ import WeilConjectures.RingTheory.TorIdealQuotientChainMap
 import WeilConjectures.RingTheory.TorIdealCycleLift
 
 /-! # Compatibility of Tor connecting formulas
-Source: Stacks Project, Algebra, Tags 00M5 and 00M6.
+Given a ring map `f : R → A` with `J = f(I) A`, an `f`-semilinear map `g : M → N` and free
+resolutions of `M` and `N`, the induced map `Tor₁^R(M, R/I) → Tor₁^A(N, A/J)` is compatible
+with the connecting maps into `I ⊗ M` and `J ⊗ N`.
+
+## Implementation details
+
+A semilinear comparison `φ₀` of the resolutions induces the quotient tensor chain map
+`p ⊗ r ↦ φ₀ p ⊗ f r`; taking first homology gives `τ`. Lifting a cycle to `y` and writing `d y`
+as a finite sum of ideal multiples, the two connecting formulas show `δA (τ t) = θ (δR t)`.
+Injectivity of `δA` shows that every other semilinear comparison induces the same `τ`.
+
+## References
+
+* [Stacks, Tag 00M5]
+* [Stacks, Tag 00M6]
+* [Stacks, Tag 00LS]
 -/
 
 @[expose] public section
@@ -28,27 +43,12 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 open scoped TensorProduct BigOperators
 namespace ModuleCat
 
-/-- Source: Stacks Project, Algebra, functoriality of Tor preceding Tag 00M5,
-Remark 00M6, and the comparison of resolutions in Tag 00LS
-(blueprint: lem-weil-pbc-tor-ideal-comparison-compatibility).
-
-Proof in words: use the supplied semilinear comparison `φ₀` to define the
-quotient tensor chain map, sending `p ⊗ mk r` to `φ₀ p ⊗ mk (f r)`.
-It is well defined because `f(I) ⊆ J` and the tensor balancing relation is
-preserved by semilinearity. The chain identities follow from those of `φ₀`.
-Apply first homology and transport by the resolution isomorphisms to obtain `τ`.
-For any cycle, choose a quotient lift `y` and express `d y` as a finite sum of
-ideal multiples. Such choices exist since tensoring a free module with `R/I`
-gives its quotient by `I` times that module. The image cycle has lift `φ₀ y`
-and differential `∑ f(a j) • φ₀(p j)`. The two assumed connecting formulas,
-augmentation compatibility, and the pure-tensor formula for `θ` give
-`δA (τ t) = θ (δR t)` for all cycle classes, hence all Tor elements.
-For an arbitrary second comparison `φ`, the same construction gives a chain
-map and a map `τφ` satisfying this same identity. Injectivity of `δA` implies
-`τφ = τ`, proving the universal cycle-class formula. No multiplication maps or
-image descriptions are needed here. The argument also covers zero or unit
-ideals, zero modules, and identity or noninjective ring maps.
--/
+/-- Let `f : R → A` be a ring map with `J = f(I) A`, `g : M → N` an `f`-semilinear map, and
+`δR`, `δA` the connecting maps `Tor₁(M, R/I) → I ⊗ M` and `Tor₁(N, A/J) → J ⊗ N` given by the
+cycle-lift formulas, with `δA` injective. Then there is a map
+`τ : Tor₁^R(M, R/I) → Tor₁^A(N, A/J)` with `δA ∘ τ = θ ∘ δR`, which on cycle classes is induced
+by the quotient tensor chain map `p ⊗ r ↦ φ p ⊗ f r` of every semilinear comparison `φ` of the
+resolutions. -/
 theorem exists_tor_ideal_comparison_compatibility
     {R A : Type u} [CommRing R] [CommRing A]
     (f : R →+* A) (I : Ideal R) (J : Ideal A) (hJ : J = Ideal.map f I)

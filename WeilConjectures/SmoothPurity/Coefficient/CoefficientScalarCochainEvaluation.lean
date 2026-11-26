@@ -11,7 +11,9 @@ import WeilConjectures.SmoothPurity.Scalar.ScalarCochainEvaluationOfUnit
 
 /-! # Evaluation of the scalar-extension cochain counit
 
-Source: Stacks 03D7, 06YY and 07A6.
+## References
+
+- Stacks Project, Tags 03D7, 06YY and 07A6.
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +41,7 @@ private theorem evaluation_specialization (n : ℕ) :
 
 variable (A : CoefficientExtensionSystems l E L ι W)
 
-/-- Zero preservation of system scalar extension followed by finite evaluation.
-Source: Stacks 06YY (blueprint: stage3-pur-scalar-cochain-evaluation). -/
+/-- Zero preservation of system scalar extension followed by finite evaluation. -/
 theorem coefficientExtensionSystemEvaluationZero (n : ℕ) :
     (A.scalar.model.E ⋙ coefficientSequenceEvaluation l L W n).PreservesZeroMorphisms :=
   letI := coefficientScalarModelZero A.scalar
@@ -49,8 +50,7 @@ theorem coefficientExtensionSystemEvaluationZero (n : ℕ) :
       (coefficientSequenceEvaluation_additive l L W n)
   Functor.preservesZeroMorphisms_comp _ _
 
-/-- Zero preservation of finite evaluation followed by scalar extension.
-Source: Stacks 06YY (blueprint: stage3-pur-scalar-cochain-evaluation). -/
+/-- Zero preservation of finite evaluation followed by scalar extension. -/
 theorem coefficientExtensionEvaluationFiniteZero (n : ℕ) :
     (coefficientSequenceEvaluation l E W n ⋙ (A.levels n).model.E).PreservesZeroMorphisms :=
   letI := coefficientExtensionFiniteZero l E L ι W A n
@@ -59,9 +59,7 @@ theorem coefficientExtensionEvaluationFiniteZero (n : ℕ) :
       (coefficientSequenceEvaluation_additive l E W n)
   Functor.preservesZeroMorphisms_comp _ _
 
-/-- The ordinary scalar evaluation comparison respects the actual adjunction units.
-Source: Stacks 03D7 and 07A6
-(blueprint: stage3-pur-scalar-cochain-evaluation). -/
+/-- The ordinary scalar evaluation comparison respects the actual adjunction units. -/
 @[irreducible] def IsCoefficientScalarEvaluationUnit
     (ρ : ∀ n : ℕ, A.scalar.model.E ⋙ coefficientSequenceEvaluation l L W n ≅
       coefficientSequenceEvaluation l E W n ⋙ (A.levels n).model.E) : Prop :=
@@ -80,27 +78,7 @@ Source: Stacks 03D7 and 07A6
       (A.levels n).ordinaryAdjunction.unit.app
         ((coefficientSequenceEvaluation l E W n).obj M)
 
-/-- Ordinary evaluation and the universal scalar cochain counit commute.
-
-Source: Stacks sites-modules.tex, lemma-adjoint-pullback-pushforward-modules
-(03D7), and sites-cohomology.tex, derived base change (06YY) and
-lemma-adjoint (07A6); step 2 of stage3-pur-extension-strict-derived-comparison.
-(blueprint: stage3-pur-scalar-cochain-evaluation).
-
-Proof: transpose the identity-on-sections restrictionEvaluation through the
-ordinary scalar adjunctions. On local tensors the inverse comparison sends
-b tensor x to b tensor x. These maps are inverse by tensor-generator
-extensionality and sheafification, hence define rho and satisfy its unit equation.
-Apply them degreewise. For a K-flat system complex, transpose both sides of the
-claimed derived equation. A.transpose_evaluation, the scalar transpose_model at
-system and finite levels, and the ordinary unit equation identify the transposes.
-Evaluation preserves K-flatness, so both scalar computation formulas apply.
-For an arbitrary complex choose an epimorphic flat-term K-flat resolution.
-Naturality of the two universal cochain counits reduces the equation to that
-resolution. Its image under evaluation is a quasi-isomorphism; localization and
-the finite derived extension invert it, so cancellation gives the equation for
-the original complex. No equality of derived system morphisms is inferred from
-finite evaluation. Zero complexes and n=0 are included. -/
+/-- Ordinary evaluation and the universal scalar cochain counit commute. -/
 theorem coefficientScalarCochainEvaluation :
     letI := coefficientScalarModelZero A.scalar
     ∃ ρ : ∀ n : ℕ, A.scalar.model.E ⋙ coefficientSequenceEvaluation l L W n ≅

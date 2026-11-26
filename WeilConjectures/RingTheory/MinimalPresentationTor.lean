@@ -19,10 +19,19 @@ import Mathlib.LinearAlgebra.TensorProduct.Quotient
 /-!
 # Tor one of a minimal finite graded free presentation
 
-Source: stage-1 minimal-presentation refinement of the graded free resolution argument in
-blueprint `theorem-riemann-roch-coherent-serre-duality`, proof;
-Stacks Project, Algebra, Tag 00M0 and Section 00LY
-(blueprint: lem-sc-p1-minimal-presentation-tor).
+For a minimal finite graded free presentation `0 → ker q → F → N → 0` over `S = k[x₀, x₁]`,
+`Tor₁(N, k)` is naturally isomorphic to `ker q / S₊ ker q`.
+
+## Implementation details
+
+Minimality gives `ker q ⊆ S₊F`, so `ker q ⊗ k → F ⊗ k` vanishes and the Tor boundary
+(`exists_tor_kernel_boundary_natural`) is surjective; it is injective since `F` is free. The
+residue field is identified with `S/S₊` via the constant coefficient.
+
+## References
+
+* [Stacks, Tag 00M0]
+* [Stacks, Section 00LY]
 -/
 
 @[expose] public section
@@ -84,27 +93,8 @@ private noncomputable def presentationResidueEquiv (k : Type v) [Field k] :
 /-- Tor one is naturally isomorphic to the kernel modulo the irrelevant ideal for a minimal
 finite graded free presentation. The equivalences are oriented from the kernel quotient to
 Tor. Naturality is stated on quotient generators for every commuting square of graded
-presentations, with `c` its induced kernel map. The zero-module consequence is included explicitly.
-
-Source: stage-1 minimal-presentation refinement of the graded free resolution argument in
-blueprint `theorem-riemann-roch-coherent-serre-duality`, proof;
-Stacks Project, Algebra, Tag 00M0 and Section 00LY.
-
-Proof: (1) Use `exists_tor_kernel_boundary_natural` for the short exact sequence
-`0 → ker q → F → N → 0`, with second variable the residue field. Its boundary
-is exact at Tor one and at the tensor of the kernel, and natural in presentation maps.
-(2) Minimality implies `ker q ⊆ S₊F`. Every scalar in `S₊` has zero constant
-coefficient, so it annihilates the residue field. Induction on ideal multiples shows
-that `ker q ⊗ k → F ⊗ k` is zero. Exactness therefore makes the boundary surjective.
-The homogeneous basis of `F` makes it projective, so its first Tor vanishes;
-exactness at Tor one makes the boundary injective.
-(3) Construct `S/S₊ ≃ₗ[S] k` using constant coefficient, with inverse induced by
-constant polynomials. Compose Mathlib's tensor/quotient equivalence with this residue
-identification and the inverse boundary to obtain the requested equivalences.
-On a quotient generator the inverse tensor identification sends `[x]` to `x ⊗ 1`.
-The boundary naturality square and this formula give the displayed naturality.
-Finally transport subsingletonness along the injective equivalence.
-(blueprint: lem-sc-p1-minimal-presentation-tor) -/
+presentations, with `c` its induced kernel map. The zero-module consequence is included
+explicitly. -/
 theorem exists_minimalPresentationTor_equiv (k : Type v) [Field k] :
     let S := MvPolynomial (Fin 2) k
     let I : Ideal S := Ideal.span (Set.range (X : Fin 2 → S))

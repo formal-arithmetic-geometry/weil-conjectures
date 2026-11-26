@@ -7,6 +7,15 @@ module
 
 public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemEvaluationData
 
+/-! # The H-zero map of the representative scalar-normalization calculation
+
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 079P]
+* [Stacks, Tag 08JA]
+-/
+
 @[expose] public section
 set_option autoImplicit false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
@@ -20,9 +29,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The H-zero map in the representative scalar-normalization calculation.
 It is the image under degree-zero homology of the integral sections of the enriched
 adjunction map, followed by the chosen scalar-sections comparison: the concrete
-composite displayed in the representative transpose theorem.
-Source: Stacks 03CZ, 079P and 08JA.
-(blueprint: def-coef-derived-sections-scalar-hom-zero-map) -/
+composite displayed in the representative transpose theorem. -/
 noncomputable def coefficientDerivedSectionsScalarHomZeroMap
     (R : CoefficientDerivedSystemReduction l E W)
     (D : CoefficientDerivedSystemScalarCoherence l E W)

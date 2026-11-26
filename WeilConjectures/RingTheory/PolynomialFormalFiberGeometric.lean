@@ -16,12 +16,30 @@ import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.Spectrum.Prime.RingHom
 import WeilConjectures.RingTheory.PolynomialLinearFormalFiberPresentation
 import WeilConjectures.RingTheory.PolynomialFormalFiberFiniteReduction
+
+/-!
+# Geometric regularity of polynomial formal fibres
+
+The formal fibres of `A[X]_q` at nonzero primes above zero, over a complete local domain `A`, are
+geometrically regular.
+
+## Implementation details
+
+After a finite purely inseparable residue field extension, the base-changed fibre is a finite
+product of linear-residue formal fibres. Each factor is regular because the coefficient map to
+the completion is formally smooth, hence regular (Tag 07PM), and by the hypersurface derivation
+criterion; a finite product of regular rings is regular, since every prime comes from one factor.
+
+## References
+
+* [Stacks, Tag 07PU]
+* [Stacks, Tag 07PM]
+-/
+
 @[expose] public section
 universe u
 namespace Polynomial
-/-- A finite product is regular: every prime comes from one factor, and projection
-identifies its localization with the factor's localization. This also handles the
-empty product. Source: Stacks Tag 07PU, first proof paragraph. -/
+/-- A finite product of regular rings is regular, including the empty product. -/
 private theorem regular_finite_product (ι : Type*) [Finite ι] (R : ι → Type*)
     [∀ i, CommRing (R i)] [∀ i, IsRegularRing (R i)] : IsRegularRing (∀ i, R i) := by
   classical
@@ -34,9 +52,8 @@ private theorem regular_finite_product (ι : Type*) [Finite ι] (R : ι → Type
     (Localization.AtPrime.mapPiEvalRingHom_bijective q.asIdeal)
   exact IsRegularLocalRing.of_ringEquiv e.symm
 
-/-- The formally smooth coefficient map to the completed polynomial local ring is
-regular by Tag 07PM; its zero fibre is regular by testing the trivial field extension.
-Source: Stacks Tag 07PU, second proof paragraph. -/
+/-- The formally smooth coefficient map to the completed polynomial local ring is regular, and
+its fibre over zero is regular. -/
 private theorem coefficient_generic_fiber_regular
     (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsLocalRing A]
     [IsAdicComplete (IsLocalRing.maximalIdeal A) A]
@@ -82,14 +99,8 @@ private theorem coefficient_generic_fiber_regular
   exact IsRegularRing.of_ringEquiv
     (Algebra.TensorProduct.lid (⊥ : Ideal A).ResidueField ((⊥ : Ideal A).Fiber C)).toRingEquiv
 
-/-- Geometric-regularity component of the formal-fibre theorem.
-Source: Stacks Project, More on Algebra, Lemma 07PU.
-(blueprint: lem-weil-pbc-another-helper-g-ring-geometric-component)
-Proof: after a finite purely inseparable residue-field extension, use the
-completion finite-extension decomposition to write the base-changed fibre as a
-finite product. Each factor is regular by the formally smooth completion and
-derivation quotient lemmas, and a finite product of regular rings is regular;
-this is precisely geometric regularity. -/
+/-- The formal fibre of `A[X]_q` at a nonzero prime above zero, over a complete local domain `A`,
+is geometrically regular. -/
 theorem formalFiber_isGeometricallyRegular_component (A : Type u) [CommRing A] [IsDomain A]
     [IsNoetherianRing A] [IsLocalRing A]
     [IsAdicComplete (IsLocalRing.maximalIdeal A) A]

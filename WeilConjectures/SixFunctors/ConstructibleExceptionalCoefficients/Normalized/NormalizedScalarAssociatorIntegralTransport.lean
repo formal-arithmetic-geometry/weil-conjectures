@@ -9,7 +9,13 @@ public import WeilConjectures.SmoothPurity.ConstructibleExceptionalCoefficients.
 public import WeilConjectures.DeligneLaumon.SfScalarExtensionComposition
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Normalized.NormalizedScalarAssociatorIntegralTransportCore
 
-/-! # Integral transport of a normalized scalar associator -/
+/-! # Integral transport of a normalized scalar associator
+
+## References
+
+* [Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 3.4.10, Lemma 3.4.12 and
+  Proposition 3.5.1]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -20,16 +26,9 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- The integral step of localization transport. The supplied associator is first
-transported along the object equalities induced by its three realization equalities;
-the transported map is then the intrinsic normalized integral associator. This is
-strictly the integral part of the localization statement.
-Source: Definition 3.4.10 and Lemma 3.4.12, pp. 22-23; Proposition 3.5.1, p. 24.
-(blueprint: lem-sf-normalized-scalar-associator-localization-transport-integral).
-Proof: apply the three realization equalities and the inverse-realization normalizations
-to the normalized scalar-composition equation. The resulting equality is the
-unique normalized completed integral associator, by its defining uniqueness.
--/
+/-- The integral step of localization transport. The supplied associator, transported along
+the object equalities induced by its three realization equalities, is the intrinsic normalized
+integral associator. -/
 theorem normalized_scalar_associator_integral_transport
     (E L M : FieldStage.{max u v} l)
     (i : E.carrier →ₐ[Padic l] L.carrier) (j : L.carrier →ₐ[Padic l] M.carrier)

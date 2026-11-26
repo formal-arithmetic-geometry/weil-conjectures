@@ -136,9 +136,9 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 /-! # Exact extension and normalized sections for integral point coefficients
 
-Source: main-20261015 blueprint, sec-six-functors/sk-thm-sf-package,
-lem-pod-point-dualizing-complex.proof.md, second sentence; point comparison,
-third paragraph (blueprint: lem-pod-integral-point-coefficient-adjunction).
+We construct the extension functor from modules over the integral coefficient ring to
+modules over the completed integral coefficient sheaf of a point, show that it is exact and
+left adjoint to sections, and identify its sections.
 
 The coefficient and site universes are independent. All sheaves, scalar maps,
 local tensor generators and adjunction formulas reuse PointDerivedHomModels.
@@ -161,19 +161,13 @@ namespace WeilConjectures.IntegralPointCoefficientAdjunction
 variable (k : Type t) [Field k] (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The existing valuation ring, lifted only into the containing coefficient universe.
-Source: blueprint point coefficients
-(blueprint: lem-pod-integral-point-coefficient-adjunction). -/
+/-- The existing valuation ring, lifted only into the containing coefficient universe. -/
 abbrev R := coefficientRing.{t, u} l E 1 true
 
-/-- The existing completed integral coefficient sheaf on the unchanged small site.
-Source: blueprint point coefficients
-(blueprint: lem-pod-integral-point-coefficient-adjunction). -/
+/-- The existing completed integral coefficient sheaf on the unchanged small site. -/
 abbrev B := coefficientSheaf.{t, u} k l E 1 true
 
-/-- The limit lift of the actual constant residue maps, with commutativity retained.
-Source: blueprint point coefficients
-(blueprint: lem-pod-integral-point-coefficient-adjunction). -/
+/-- The limit lift of the actual constant residue maps, with commutativity retained. -/
 abbrev alpha := coefficientMap.{t, u} k l E 1 true
 
 private theorem finite_transition (n : ℕ)

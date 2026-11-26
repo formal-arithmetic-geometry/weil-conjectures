@@ -33,8 +33,7 @@ arbitrary exact change of coefficients `R` sending injectives to `f_*`-acyclics;
 abstract coefficient categories keeps the kernel from unfolding the concrete pullback and
 pushforward functors.
 
-This is the change of coefficients in the proof of the proper base change theorem (blueprint
-`proposition-proper-base-change-etale-site--1`).
+This is the change of coefficients in the proof of the proper base change theorem.
 -/
 
 @[expose] public section

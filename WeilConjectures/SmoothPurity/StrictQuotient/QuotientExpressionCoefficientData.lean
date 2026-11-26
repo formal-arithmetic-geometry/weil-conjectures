@@ -138,15 +138,14 @@ import WeilConjectures.SmoothPurity.StrictQuotient.StrictQuotientCompletedHorizo
 
 /-! # Prescribed strict quotient-expression towers
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0G7E (lemma-pullback-K-flat)
-and 07A2 (lemma-tensor-product-K-flat), and the extracted finite-expression argument
-of lem-pur-quotient-expression-kflat-normalization
-(blueprint: def-sf-strict-quotient-coefficient-comparisons).
-
 The syntax retains distinct trees. Its interpretation uses the recorded ordinary
 sequence-site operations. Natural-number level n denotes positive exponent n+1.
 The completed-coefficient tower is localized before evaluation. No normalization
 of transition adjoints is asserted.
+
+## References
+
+* Stacks Project, Tags 00VC, 03D2, 03ER, 05RU, 06YN, 07A2, 0941, 09A5, 0G7E and 0H7J.
 -/
 
 @[expose] public noncomputable section
@@ -170,9 +169,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite AlgebraicGeo
 namespace WeilConjectures.StrictQuotient
 
 /-- The finite constructor trees, with no quotient by tensor or pullback identities.
-This refines the recorded Generated predicate by retaining its constructor history.
-Source: finite syntactic expressions in the node, Stacks 07A2 and 0G7E
-(blueprint: def-pur-strict-quotient-expression-data). -/
+This refines the recorded Generated predicate by retaining its constructor history. -/
 inductive Expression {Z X Y : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y) (r : ℕ) :
     (W : Scheme.{t}) → Type (t + 1) where
   | input (i : Fin r) : Expression h f r Y
@@ -188,9 +185,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Interpretation uses exactly the recorded sequence complexes, their direct-sum total
-and termwise module inverse image. It chooses no replacement resolution.
-Source: Stacks 07A2, 0G7E; def-pur-strict-quotient-expressions
-(blueprint: def-pur-strict-quotient-expression-data). -/
+and termwise module inverse image. It chooses no replacement resolution. -/
 def Expression.interpret {Z X Y : Scheme.{t}} {h : Z ⟶ X} {f : X ⟶ Y} {r : ℕ}
     (N : Fin r → Complex l E Y) : {W : Scheme.{t}} → Expression h f r W → Complex l E W
   | _, .input i => N i
@@ -203,9 +198,7 @@ def Expression.interpret {Z X Y : Scheme.{t}} {h : Z ⟶ X} {f : X ⟶ Y} {r : �
   | _, .pullHF A => pull l E (h ≫ f) (A.interpret N)
 
 /-- The specified ring inverse image, on the original small sites and with coefficients
-in the universe containing both the scheme and E. It is Kan extension and sheafification.
-Source: Stacks 00VC and 03D2; def-weil-proetale-inverse-image
-(blueprint: def-sf-strict-quotient-coefficient-comparisons). -/
+in the universe containing both the scheme and E. It is Kan extension and sheafification. -/
 abbrev coefficientInverseImage {V W : Scheme.{t}} (g : V ⟶ W) :=
   Functor.sheafPullbackConstruction.sheafPullback
     (Scheme.coefficientProEtaleModelBaseChange.{t, u} g) CommRingCat.{max u (t + 1)}
@@ -213,17 +206,13 @@ abbrev coefficientInverseImage {V W : Scheme.{t}} (g : V ⟶ W) :=
     (Scheme.coefficientProEtaleModelTopology.{t, u} V)
 
 /-- Transport of the coefficient rings to the equivalent small model; all original
-objects and section maps are retained.
-Source: Stacks 09A5; def-weil-proetale-inverse-image
-(blueprint: def-sf-strict-quotient-coefficient-comparisons). -/
+objects and section maps are retained. -/
 abbrev coefficientToModel (W : Scheme.{t}) :=
   (AsSmall.down : Scheme.coefficientProEtaleSiteModel.{t, u} W ⥤ W.ProEt)
     |>.sheafPushforwardContinuous CommRingCat.{max u (t + 1)}
       (Scheme.coefficientProEtaleModelTopology.{t, u} W) (Scheme.ProEt.topology W)
 
-/-- The actual constant-ring comparison is the adjunct of the constant-section map.
-Source: Stacks 0H7J and 03D2; def-weil-proetale-inverse-image
-(blueprint: def-sf-strict-quotient-coefficient-comparisons). -/
+/-- The actual constant-ring comparison is the adjunct of the constant-section map. -/
 def constantCoefficientMap {V W : Scheme.{t}} (g : V ⟶ W) (n : ℕ) :
     (coefficientInverseImage.{t, u} g).obj
         ((coefficientToModel.{t, u} W).obj (integralCoefficientCommRingSheaf l E W n)) ⟶
@@ -237,15 +226,11 @@ def constantCoefficientMap {V W : Scheme.{t}} (g : V ⟶ W) (n : ℕ) :
         (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom⟩
 
 /-- The actual complex of completed-coefficient towers: restrict the prescribed
-section groups and horizontal maps by the limit projections in each degree.
-Source: Stacks 0941 and the coherent datum in def-coef-normalized-dvr-tower
-(blueprint: def-sf-strict-quotient-coefficient-comparisons). -/
+section groups and horizontal maps by the limit projections in each degree. -/
 abbrev completedTower {W : Scheme.{t}} (K : Complex l E W) :=
   ((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj K
 
-/-- The coefficient section of the actual degree-zero unit complex.
-Source: Stacks 07A2 and 0941; the unit constructor of def-pur-strict-quotient-expressions
-(blueprint: def-sf-strict-quotient-coefficient-comparisons). -/
+/-- The coefficient section of the actual degree-zero unit complex. -/
 def unitSection (W : Scheme.{t}) (n : ℕ) (U : W.ProEt)
     (b : (integralCoefficientCommRingSheaf l E W n).obj.obj (op U)) :
     ((𝟙_ (Complex l E W)).X 0).val.obj (op (n, U)) :=
@@ -253,9 +238,7 @@ def unitSection (W : Scheme.{t}) (n : ℕ) (U : W.ProEt)
     (𝟙_ (coefficientSequenceModules l E W))).inv).val.app (op (n, U)) b
 
 /-- The transition of the derived completed-coefficient tower, descended from its
-actual ordinary arrows by localization, not supplied as independent derived data.
-Source: Stacks 05RU and 0941; def-coef-normalized-dvr-tower, tower_tau
-(blueprint: def-sf-strict-quotient-coefficient-comparisons). -/
+actual ordinary arrows by localization, not supplied as independent derived data. -/
 def completedTowerDerivedTransition (W : Scheme.{t}) {m n : ℕ} (hmn : n ≤ m) :
     coefficientConstantTowerEvaluation l E W m ⟶ coefficientConstantTowerEvaluation l E W n :=
   letI : Localization.Lifting DerivedCategory.Q
@@ -277,9 +260,7 @@ def completedTowerDerivedTransition (W : Scheme.{t}) {m n : ℕ} (hmn : n ≤ m)
       DerivedCategory.Q)
 
 /-- Canonical evaluation of the localized actual completed tower. Its target is
-exactly Res_n QK_n, using the exact-localization comparisons at both steps.
-Source: Stacks 0941; def-coef-normalized-dvr-tower, evaluationIso
-(blueprint: def-sf-strict-quotient-coefficient-comparisons). -/
+exactly Res_n QK_n, using the exact-localization comparisons at both steps. -/
 def completedTowerLevelIso {W : Scheme.{t}} (K : Complex l E W) (n : ℕ) :
     (coefficientConstantTowerEvaluation l E W n).obj
         (DerivedCategory.Q.obj (completedTower l E K)) ≅
@@ -292,9 +273,7 @@ def completedTowerLevelIso {W : Scheme.{t}} (K : Complex l E W) (n : ℕ) :
       ((coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.app K)
 
 /-- Flat terms and K-flatness on the vertical sequence site itself, not after
-restriction to completed coefficients.
-Source: Stacks 03ER, 06YN and 0941
-(blueprint: def-pur-strict-quotient-expression-data). -/
+restriction to completed coefficients. -/
 def SystemGood {W : Scheme.{t}} (K : Complex l E W) : Prop :=
   CochainComplex.IsKFlatIndependentCoefficients
       (R := coefficientSequenceCommRingSheaf l E W) K ∧
@@ -335,10 +314,7 @@ private theorem quotient_horizontal (W : Scheme.{t}) {m n : ℕ} (hmn : n ≤ m)
         hmn (op U)).trans
     (congrArg (fun z ↦ z.hom.app (op U)) (quotient_sequence_map l E W hmn))
 
-/-- The coefficient-map part of the strict quotient tower argument.
-Source: Stacks 0G7E and 07A2; the constant-section comparison and its quotient square.
-(blueprint: lem-pur-quotient-expression-strict-kflat-towers-constant-maps).
--/
+/-- The coefficient-map part of the strict quotient tower argument. -/
 theorem quotientExpressionStrictKFlatTowers_constantMaps
     {Z X Y : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y)
     (_hlZ : ∀ x : Z, IsUnit (l : Z.residueField x))
@@ -390,10 +366,7 @@ theorem quotientExpressionStrictKFlatTowers_constantMaps
     rw [quotient_horizontal l E, quotient_horizontal l E] at hh
     exact hh
 
-/-- The unit-transition part of the strict quotient tower argument.
-Source: Stacks 0941; the degree-zero coefficient unit and quotient transition.
-(blueprint: lem-pur-quotient-expression-strict-kflat-towers-unit-transitions).
--/
+/-- The unit-transition part of the strict quotient tower argument. -/
 theorem quotientExpressionStrictKFlatTowers_unitTransitions
     {Z X Y : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y)
     (_hlZ : ∀ x : Z, IsUnit (l : Z.residueField x))

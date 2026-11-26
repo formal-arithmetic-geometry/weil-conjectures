@@ -14,8 +14,9 @@ import WeilConjectures.CategoryTheory.SixFunctors.TransportedTensorComparison
 
 /-! # Signed swap through the explicit native tensor model
 
-Source: Stacks 06YU, 0FPT; blueprint step 3 of
-`lem-sf-native-weil-tensor-ringed-derived-square-native-data`.
+## References
+
+* Stacks Project, Tags 06YU and 0FPT.
 -/
 
 @[expose] public section
@@ -24,15 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-/-- Conditional localization of the explicit native swap.
-Source: Stacks 06YU and 0FPT, localization of the signed tensor symmetry.
-(blueprint: new-sf-native-weil-ringed-swap-conditional).
-
-Proof: the transported derived braiding is modeled by the native chain swap.
-The underived hypothesis and the signed summand calculation identify its
-forgetful image with the prescribed ordinary chain swap. Naturality of the
-localization comparison moves this chain equation into the derived category.
-Associativity of composition gives the required equality. -/
+/-- Conditional localization of the explicit native swap. -/
 theorem native_weil_tensor_ringed_swap_localization_of_underived
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})
@@ -126,20 +119,7 @@ theorem native_weil_tensor_ringed_swap_localization_of_underived
   simp only [Category.assoc]
   rfl
 
-/-- The explicit localized native model carries the ringed braiding to the signed swap.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 06YU and 0FPT; the summand
-calculation in step 3 of lem-sf-native-weil-tensor-ringed-unit-symmetry-representatives.
-(blueprint: lem-sf-native-weil-tensor-ringed-swap-localization).
-
-Proof: take the ordinary underived comparison determined uniquely by its
-adjunction mate. The binary bridge calculation uses A.uncurry, he and
-b.hom_square to compare it with A across restriction. Restriction symmetry and
-the actual balanced ordinary symmetry retained in b.ordinary_coherence then
-identify the forgotten native swap. Apply the proved conditional localization
-assembly: its signed summand calculation gives the ordinary chain square, and
-its transported-model and localization equations give the stated identity.
-No chosen ordinary derived tensor model or unit comparison is used. -/
+/-- The explicit localized native model carries the ringed braiding to the signed swap. -/
 theorem native_weil_tensor_ringed_swap_localization
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

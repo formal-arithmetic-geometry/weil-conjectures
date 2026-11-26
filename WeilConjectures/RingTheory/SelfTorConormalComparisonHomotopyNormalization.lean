@@ -9,6 +9,17 @@ module
 public import WeilConjectures.RingTheory.SelfTorConormalComparisonTateConstruction
 import WeilConjectures.RingTheory.KoszulAugmentationLiftHomotopy
 
+/-!
+# Homotopy normalization of the self-Tor conormal comparison
+
+A wedge formula for the self-Tor conormal comparison that holds for one augmentation lift of
+a Koszul complex holds for every lift.
+
+## References
+
+* [Stacks, Tag 00LS], part (2)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -17,15 +28,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 /-- A wedge formula for one augmentation lift implies the formula for every
-lift. Source: Stacks Project, Tag 00LS, part (2); additive functors preserve
-homotopies and homotopic maps induce equal maps on homology.
-(blueprint: new-r4-self-tor-conormal-comparison-homotopy-normalization).
-
-Proof: For the same tuple and resolution, compare an arbitrary lift a with
-the lift b supplied by the certificate. Their augmentations agree, so the
-free Koszul complex admits a chain homotopy between them. Tensoring with the
-quotient preserves that homotopy, hence the induced homology maps agree.
-Replace the map of b in the certificate's wedge formula by the map of a. -/
+lift: a Tate comparison certificate for `c` makes `c` a self-Tor conormal comparison. -/
 theorem tate_comparison_homotopy_normalization (A : Type u) [CommRing A]
     (I : Ideal A) (n : ℕ)
     (c : conormalExteriorModule A I n ⟶

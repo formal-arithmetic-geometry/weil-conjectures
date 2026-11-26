@@ -14,6 +14,17 @@ public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
+/-!
+# The prime of the parameter quotient
+
+The parameter quotient has a zero-dimensional localization at its quotient prime, and that
+prime is minimal over every extended singular ideal it contains.
+
+## References
+
+* [Stacks, Tag 07FE] (final paragraph of the proof)
+-/
+
 @[expose] public section
 
 universe u v w
@@ -21,22 +32,7 @@ universe u v w
 namespace Algebra
 
 /-- The parameter quotient has a zero-dimensional localization at its quotient prime,
-and that prime is minimal over every extended singular ideal it contains.
-
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07FE, final paragraph
-(blueprint: lem-weil-pbc-popescu-parameter-quotient-prime-geometry).
-
-Proof: Localization commutes with the quotient, identifying its local ring with
-Λ_q/(φ(x_i)^(8c)). If c=0 and d>0 the quotient is the zero ring, which has no prime.
-If c>0, every prime ideal
-of Λ_q containing these powers contains every φ(x_i), because 8c is positive.
-It therefore contains their span, the maximal ideal,
-and must equal that maximal ideal. Hence the quotient local ring has exactly one prime
-and dimension zero. Primes of the global quotient below q₀ correspond to primes of this
-localization, so q₀ is a minimal prime of the global quotient. If its extended singular
-ideal is contained in q₀, no smaller prime can contain that ideal; thus q₀ is minimal over
-it as well. For d=0 the generation hypothesis says the maximal ideal of Λ_q is zero,
-so Λ_q is a field and the same conclusions hold with zero parameter ideal. -/
+and that prime is minimal over every extended singular ideal it contains. -/
 theorem parameter_quotient_prime_geometry
     {k : Type u} {C : Type v} {Λ : Type w}
     [Field k] [CommRing C] [CommRing Λ] [Algebra k Λ]
