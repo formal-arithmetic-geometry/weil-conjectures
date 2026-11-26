@@ -98,21 +98,37 @@ lemma isMonoidal_extendRestrictAdjunction :
   let := (extendRestrictAdjunction φ).leftAdjointOplaxMonoidal
   exact (inferInstance : (extendRestrictAdjunction φ).IsMonoidal)
 
-set_option synthInstance.maxHeartbeats 100000 in
--- the search for `(extendScalars φ ⋙ extendScalars ψ).LaxMonoidal` first explores braidings
+/-- Monoidality of the transitivity isomorphism for the chosen extension structures. -/
+def extendScalarsCompIsMonoidal : Prop :=
+  let : (extendScalars φ).Monoidal := extendScalarsMonoidal φ
+  let : (extendScalars ψ).Monoidal := extendScalarsMonoidal ψ
+  let : (extendScalars (φ ≫ ψ)).Monoidal := extendScalarsMonoidal (φ ≫ ψ)
+  let : (extendScalars φ ⋙ extendScalars ψ).LaxMonoidal :=
+    Functor.LaxMonoidal.comp (extendScalars φ) (extendScalars ψ)
+  NatTrans.IsMonoidal (extendScalarsComp φ ψ).hom
+
+/-- The monoidality condition uses the composite lax monoidal structure. -/
+theorem extendScalarsCompIsMonoidal_eq :
+    extendScalarsCompIsMonoidal φ ψ =
+      (let : (extendScalars φ).Monoidal := extendScalarsMonoidal φ
+       let : (extendScalars ψ).Monoidal := extendScalarsMonoidal ψ
+       let : (extendScalars (φ ≫ ψ)).Monoidal := extendScalarsMonoidal (φ ≫ ψ)
+       let : (extendScalars φ ⋙ extendScalars ψ).LaxMonoidal :=
+         Functor.LaxMonoidal.comp (extendScalars φ) (extendScalars ψ)
+       NatTrans.IsMonoidal (extendScalarsComp φ ψ).hom) := by
+  rfl
+
 /-- The transitivity isomorphism `T ⊗_R - ≅ T ⊗_S (S ⊗_R -)` of extension of scalars is a
 monoidal natural isomorphism, for the strong monoidal structures `Mod.extendScalarsMonoidal`. -/
-lemma isMonoidal_extendScalarsComp_hom :
-    letI := extendScalarsMonoidal φ
-    letI := extendScalarsMonoidal ψ
-    letI := extendScalarsMonoidal (φ ≫ ψ)
-    NatTrans.IsMonoidal (extendScalarsComp φ ψ).hom := by
+lemma isMonoidal_extendScalarsComp_hom : extendScalarsCompIsMonoidal φ ψ := by
   let := comapLaxMonoidal φ
   let := comapLaxMonoidal ψ
   let := comapLaxMonoidal (φ ≫ ψ)
   let := extendScalarsMonoidal φ
   let := extendScalarsMonoidal ψ
   let := extendScalarsMonoidal (φ ≫ ψ)
+  let : (extendScalars φ ⋙ extendScalars ψ).LaxMonoidal :=
+    Functor.LaxMonoidal.comp (extendScalars φ) (extendScalars ψ)
   have := isMonoidal_extendRestrictAdjunction φ
   have := isMonoidal_extendRestrictAdjunction ψ
   have := isMonoidal_extendRestrictAdjunction (φ ≫ ψ)
