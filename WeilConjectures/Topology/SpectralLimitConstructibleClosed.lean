@@ -62,11 +62,11 @@ theorem isCompact_limit_constructibleClosed
     [tY : ∀ i : I, TopologicalSpace (Y i)] [∀ i : I, SpectralSpace (Y i)]
     (f : ∀ (i j : I), i ≤ j → Y j → Y i)
     (hf : ∀ (i j : I) (h : i ≤ j), IsSpectralMap (f i j h))
-    (hf_id : ∀ (i : I) (x : Y i), f i i le_rfl x = x)
-    (hf_comp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (x : Y k),
+    (_hf_id : ∀ (i : I) (x : Y i), f i i le_rfl x = x)
+    (_hf_comp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (x : Y k),
       f i j hij (f j k hjk x) = f i k (le_trans hij hjk) x)
     {X : Type w} [tX : TopologicalSpace X] (p : ∀ i : I, X → Y i)
-    (hp : ∀ i : I, Continuous (p i))
+    (_hp : ∀ i : I, Continuous (p i))
     (hp_compat : ∀ (i j : I) (h : i ≤ j) (x : X), f i j h (p j x) = p i x)
     (hlimit : ∀ y : (∀ i : I, Y i),
       (∀ (i j : I) (h : i ≤ j), f i j h (y j) = y i) →
@@ -74,7 +74,7 @@ theorem isCompact_limit_constructibleClosed
     (htop : tX = ⨅ i : I, TopologicalSpace.induced (p i) (tY i))
     (Z : ∀ i : I, Set (Y i))
     (hZ : ∀ i : I, IsClosed[constructibleTopology (Y i)] (Z i))
-    (hZ_compat : ∀ (i j : I) (h : i ≤ j), f i j h '' Z j ⊆ Z i) :
+    (_hZ_compat : ∀ (i j : I) (h : i ≤ j), f i j h '' Z j ⊆ Z i) :
     IsCompact {x : X | ∀ i : I, p i x ∈ Z i} ∧ CompactSpace X := by
   classical
   let cY : ∀ i : I, TopologicalSpace (Y i) := fun i ↦ constructibleTopology (Y i)

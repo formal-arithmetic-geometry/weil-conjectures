@@ -50,8 +50,8 @@ theorem nativeRingedAssociatorComplex_square
         (nativeRingedTripleRight b T adj A P Q N).hom =
       (nativeRingedTripleLeft b T adj A P Q N).hom ≫
         (α_ (Ec.obj P) (Ec.obj Q) (Ec.obj N)).hom := by
-  letI := SheafOfModules.isMonoidal_W_independentCoefficients b.R
-  letI := SheafOfModules.monoidalCategory b.R
+  have := SheafOfModules.isMonoidal_W_independentCoefficients b.R
+  let := SheafOfModules.monoidalCategory b.R
   dsimp only [nativeRingedAssociatorComplex]
   exact preimageAssociator_square (b.native.functor.mapHomologicalComplex (.up ℤ))
     (X := (b.native.functor.mapHomologicalComplex (.up ℤ)).obj P)

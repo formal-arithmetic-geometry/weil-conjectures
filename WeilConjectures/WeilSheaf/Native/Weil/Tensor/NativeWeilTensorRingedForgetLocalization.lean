@@ -115,10 +115,10 @@ theorem nativeRingedAssociatorComplex_forget_localization
       (ε.hom.app (nativeTensorComplex T pq N) ≫ qA.map leftTotal.hom) ≫
         qA.map (mC.associator (V.obj P) (V.obj Q) (V.obj N)).hom := by
   classical
-  letI mC : MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l
+  let mC : MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) :=
     Mod.monoidalCategoryCochainComplex
-  letI := mC.toMonoidalCategoryStruct
+  let := mC.toMonoidalCategoryStruct
   intro κ hκ P Q N
   let U := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)
   let V := U.mapHomologicalComplex (.up ℤ)

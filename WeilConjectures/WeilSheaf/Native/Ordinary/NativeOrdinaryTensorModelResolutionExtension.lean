@@ -57,8 +57,8 @@ theorem native_ordinary_tensor_model_resolution_extension
     (hkflat : ∀ (P Q P' Q' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
       (hP : NativeOrdinaryKFlat l Y P)
       (hP' : NativeOrdinaryKFlat l Y P')
-      (hQ : NativeOrdinaryKFlat l Y Q)
-      (hQ' : NativeOrdinaryKFlat l Y Q')
+      (_hQ : NativeOrdinaryKFlat l Y Q)
+      (_hQ' : NativeOrdinaryKFlat l Y Q')
       (f : P ⟶ P') (g : Q ⟶ Q'),
       S.tensor.map
           (X := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P))

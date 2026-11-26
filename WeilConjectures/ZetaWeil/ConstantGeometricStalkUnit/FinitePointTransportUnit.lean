@@ -148,10 +148,10 @@ private theorem chain_unit (D : FiniteFieldDatum.{u}) (m : ℕ) :
   let S : integralOperationsFiniteModules l E (Spec (.of D.k)) m ⥤
       ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E (m + 1))) :=
     pointFiniteSections D.k (Padic.coefficientExtensionRing l E (m + 1))
-  letI : S.Additive := pointFiniteSectionsAdditive D.k _
-  letI : IsIso (inverseImageFiniteCoefficientMap l E (frobeniusPointIso D).hom m) :=
+  let : S.Additive := pointFiniteSectionsAdditive D.k _
+  let : IsIso (inverseImageFiniteCoefficientMap l E (frobeniusPointIso D).hom m) :=
     isoSectionwiseConstantMap_isIso _ _
-  letI : (inverseImageFiniteModules.{u, u} l E (frobeniusPointIso D).hom m).Additive :=
+  let : (inverseImageFiniteModules.{u, u} l E (frobeniusPointIso D).hom m).Additive :=
     isoSectionwiseModuleInverseImage_additive _ _
   have hq : inverseImageFiniteComparisonComplex l E (frobeniusPointIso D).hom m K =
       ((finiteModuleComparison l E (frobeniusPointIso D).hom m).mapHomologicalComplex

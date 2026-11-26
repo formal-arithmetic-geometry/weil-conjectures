@@ -357,11 +357,10 @@ variable (l : ℕ) [Fact l.Prime]
   [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
   (c : Compactification f)
 
--- SY is retained verbatim in the existing public interface.
 /-- The recorded integral comparison has the prescribed native finite projections. -/
 theorem qcqsCompactSupport_strictReductionGamma
     (SX : CoefficientDerivedSystemCalculus l E X)
-    (SY : CoefficientDerivedSystemCalculus l E Y) :
+    (_SY : CoefficientDerivedSystemCalculus l E Y) :
     let N := SX.reduction ⋙ ProEtale.VaryingRing.J (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) c.i ⋙
       ProEtale.VaryingRing.P (compactSupportSystemLevel l E)

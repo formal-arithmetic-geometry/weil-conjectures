@@ -207,7 +207,7 @@ theorem topological_cocycle_naturality
         (φ : J.cocomplex ⟶
           ((TopCat.Sheaf.pushforwardAb f).mapHomologicalComplex
             (ComplexShape.up ℕ)).obj I.cocomplex)
-        (hφ : J.ι.f 0 ≫ φ.f 0 =
+        (_hφ : J.ι.f 0 ≫ φ.f 0 =
           (TopCat.Sheaf.pushforwardAb f).map (I.ι.f 0)) (p : ℕ)
         (s : (presheafToSheaf (Opens.grothendieckTopology X)
           AddCommGrpCat.{u}).obj
@@ -219,7 +219,7 @@ theorem topological_cocycle_naturality
           (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free) ⟶
             I.cocomplex.X p)
         (hz : z ≫ I.cocomplex.d p (p + 1) = 0)
-        (hsz : a ≫ (TopCat.Sheaf.pushforwardAb f).map z = s ≫ φ.f p),
+        (_hsz : a ≫ (TopCat.Sheaf.pushforwardAb f).map z = s ≫ φ.f p),
         τ p F (J.extMk s (p + 1) rfl hs) = I.extMk z (p + 1) rfl hz) :
     ∀ (p : ℕ) {F G : Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}}
       (g : F ⟶ G),

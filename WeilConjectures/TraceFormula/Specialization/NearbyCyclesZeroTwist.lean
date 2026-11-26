@@ -57,7 +57,6 @@ commutes with the shifts (`NearbyCyclesModel.Hom.autAction_shift_comp`, from
 
 universe u
 
-
 open CategoryTheory MonoidalCategory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
@@ -484,7 +483,8 @@ lemma Hom.boundedConstructibleAutAction_tensor (s : M.Hom M (𝟙 _) (𝟙 _))
     Hom.boundedConstructibleAutAction_app, boundedConstructibleTensorMap, ObjectProperty.homMk_hom]
   exact s.autAction_tensor _ A.obj B.obj
 
-
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- **The action of a self-map fixes the specialization map of `ℚ̄_ℓ(0)[n]`**: `σ ∘ ρ(s) = σ`. -/
 lemma zeroTwistSpecializationMap_comp_boundedConstructibleAutAction_app
     (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
@@ -530,6 +530,8 @@ noncomputable def tateTwistDerivedZeroShiftTensorShiftIso (Z : Scheme.{u}) {a b 
       ((tateTwistDerivedZeroIso ℓ Z ⊗ᵢ tateTwistDerivedZeroIso ℓ Z) ≪≫ λ_ _) ≪≫
     (shiftFunctorZero' _ (a + b) h).app _
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- **The twist `ℚ̄_ℓ(0)[n]` is invertible**: its inverse is `ℚ̄_ℓ(0)[-n]`
 (`ProEtale.CondensedRing.tateTwistDerivedZeroShiftTensorShiftIso`). -/
 theorem isInvertible_boundedConstructibleTateTwist_zero (n : ℤ) :

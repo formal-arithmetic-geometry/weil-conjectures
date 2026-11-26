@@ -310,6 +310,8 @@ private theorem completedCoefficientMap_id :
         using 1 <;> rfl
     simp only [hq, Category.id_comp, Category.comp_id]
 
+-- The definition has no explicit type, so it cannot be stated as a `theorem`.
+set_option linter.defProp false in
 /-- The existing universal derived-change-of-rings witness, with standard localizations. -/
 noncomputable def completedScalarChangeData :=
   SheafOfModules.derivedChangeOfRingsIndependentCoefficients

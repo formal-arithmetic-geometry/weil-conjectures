@@ -72,8 +72,8 @@ theorem nativeRingedAssociatorComplex_localization_square
         (τ.hom.app (nativeTensorComplex T P qn) ≫ qB.map r.hom) =
       (τ.hom.app (nativeTensorComplex T pq N) ≫ qB.map l.hom) ≫
         qB.map (α_ (Ec.obj P) (Ec.obj Q) (Ec.obj N)).hom := by
-  letI := SheafOfModules.isMonoidal_W_independentCoefficients b.R
-  letI := SheafOfModules.monoidalCategory b.R
+  have := SheafOfModules.isMonoidal_W_independentCoefficients b.R
+  let := SheafOfModules.monoidalCategory b.R
   let E := nativeWeilRingedDerivedEquivalence b
   let Ec := b.native.functor.mapHomologicalComplex (.up ℤ)
   let τ := b.native.functor.mapDerivedCategoryFactors

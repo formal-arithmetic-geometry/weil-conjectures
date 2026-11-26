@@ -85,6 +85,8 @@ lemma IsModelFrobenius.fixedLocusPoint_graphFixedLocus (hΦ : IsModelFrobenius �
     (((hΦ.graphFixedLocus hm K).isLimit.fac _ WalkingParallelPair.zero).trans
       (sigmaPointι_fixedPointsι Φ m x).symm)
 
+-- The section instances overlap with `[IsProper X.hom]`; dropping them changes the statement.
+set_option linter.overlappingInstances false in
 /-- **The trace formula on a proper smooth curve**: for a proper smooth curve `X` with the model
 Frobenius `Φ`, a Weil object `(K, φ)` and `m ≥ 1`, the trace of the global operator of the graph
 correspondence `c_m = (𝟙, Φ_m)` on `RΓ(X, K)` is the sum over the rational points `x` fixed by `Φ_m`
@@ -122,6 +124,8 @@ theorem WeilBoundedConstructible.trace_globalOperator_graph_eq_sum [IsProper X.h
   exact Correspondence.localTerm_traceClass_frobeniusGraph_eq_trace_of_smooth hΦ hm
     (K.iterateStr m).hom F x.1 x.2 (sigmaPointι k _ x) hB
 
+-- The section instances overlap with `[IsProper X.hom]`; dropping them changes the statement.
+set_option linter.overlappingInstances false in
 /-- **The trace formula on a proper smooth curve**, for the global Frobenius `F_{c,m}` of the
 compactly supported cohomology of the Weil object. -/
 theorem WeilBoundedConstructible.trace_globalOperator_eq_sum_of_smoothOfRelativeDimension_one

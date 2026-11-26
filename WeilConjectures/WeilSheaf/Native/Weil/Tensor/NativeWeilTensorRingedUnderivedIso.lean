@@ -29,6 +29,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, P.HasMapBifunctor Q T]
   (adj : T ⊣₂ ihomBifunctor k₀ l X)
 
+omit [T.Additive] [∀ P, (T.obj P).Additive]
+  [∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, P.HasMapBifunctor Q T] in
 private theorem normalized_uncurry
     (U : NativeWeilRingedTensorUnderivedData b T adj)
     (P Q I : ProEtaleWeilSheaf k₀ l X) (f : (T.obj P).obj Q ⟶ I) :
@@ -65,6 +67,8 @@ private theorem native_hom_naturality
       (b.native.functor.obj I), Category.comp_id] at nh
   exact nh
 
+omit [T.Additive] [∀ P, (T.obj P).Additive]
+  [∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, P.HasMapBifunctor Q T] in
 private theorem parameter_adjunct_map
     (P Q P' Q' : ProEtaleWeilSheaf k₀ l X) (p : P ⟶ P') (q : Q ⟶ Q') :
     (adj.adj P).homEquiv Q _ ((T.map p).app Q ≫ (T.obj P').map q) =
@@ -79,6 +83,8 @@ private theorem parameter_adjunct_map
       ((ihomBifunctor k₀ l X).map p.op).app ((T.obj P').obj Q')) ht
 
 -- The monoidal unfolding of the ringed tensor mate needs extra time.
+omit [T.Additive] [∀ P, (T.obj P).Additive]
+  [∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, P.HasMapBifunctor Q T] in
 private theorem inverse_naturality
     (U : NativeWeilRingedTensorUnderivedData b T adj)
     (P Q P' Q' : ProEtaleWeilSheaf k₀ l X) (p : P ⟶ P') (q : Q ⟶ Q') :
@@ -147,6 +153,8 @@ private theorem inverse_naturality
     _ = _ := compose_naturality (E.map q) (E.map ((adj.adj P').homEquiv Q' _ (𝟙 _)))
       _ _ _ _ nh
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- The pointwise underived comparisons assemble into a bifunctor isomorphism. -/
 theorem native_weil_tensor_ringed_underived_iso
     (U : NativeWeilRingedTensorUnderivedData b T adj) :

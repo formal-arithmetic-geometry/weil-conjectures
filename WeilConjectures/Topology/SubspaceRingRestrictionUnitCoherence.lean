@@ -305,7 +305,7 @@ theorem subspace_sets_restriction_unit_coherence
           c.hom.hom.app (op ⊤) = subspaceSectionMap (Type u) E G V h) ∧
     (∀ (W V : Opens Z) (hWV : W ≤ V) (hEW : E ⊆ W),
       G.obj.map (homOfLE hWV).op ≫ subspaceSectionMap (Type u) E G W hEW =
-        subspaceSectionMap (Type u) E G V (fun x hx ↦ hWV (hEW hx))) := by
+        subspaceSectionMap (Type u) E G V (fun _x hx ↦ hWV (hEW hx))) := by
   exact restriction_coherence (Type u) E G
 
 section Homeomorphism

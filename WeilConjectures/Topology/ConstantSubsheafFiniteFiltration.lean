@@ -162,12 +162,12 @@ theorem constantSubsheaf_finite_filtration
           AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K, Epi g) :
     ∃ (m : ℕ) (F : Fin (m + 1) → Sheaf AddCommGrpCat X)
       (f : ∀ i : Fin m, F i.castSucc ⟶ F i.succ)
-      (hf : ∀ i : Fin m, Mono (f i))
+      (_hf : ∀ i : Fin m, Mono (f i))
       (Q : Fin m → Sheaf AddCommGrpCat X)
-      (S : ∀ i : Fin m, ShortComplex (Sheaf AddCommGrpCat X))
-      (hS : ∀ i : Fin m, (S i).ShortExact)
-      (hQ : ∀ i : Fin m, Nonempty (Q i ≅ cokernel (f i)))
-      (hquot : ∀ i : Fin m, ∃ (U V : Opens X),
+      (S : ∀ _i : Fin m, ShortComplex (Sheaf AddCommGrpCat X))
+      (_hS : ∀ i : Fin m, (S i).ShortExact)
+      (_hQ : ∀ i : Fin m, Nonempty (Q i ≅ cokernel (f i)))
+      (_hquot : ∀ i : Fin m, ∃ (U V : Opens X),
         IsCompact (U : Set X) ∧ IsCompact (V : Set X) ∧ V ≤ U ∧
         Nonempty ((S i).X₁ ≅ (abelianOpenExtensionByZero V).obj
           ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj V))

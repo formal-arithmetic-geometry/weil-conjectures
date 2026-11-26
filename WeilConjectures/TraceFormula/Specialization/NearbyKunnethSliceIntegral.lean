@@ -159,6 +159,8 @@ theorem isIso_pullbackExchange_app_of_isPullback_trait_padicIntegers [IsLocalHom
     (Profinite.padicIntegersRingObj ℓ E.1) φ B₀ (by exact_mod_proofs h)
   exact_mod_proofs h'
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 -- the special fibre of `N` over `κ₁` (`hNi`) does not enter the base change morphism; it is kept
 -- for the uniformity of the statement with
 -- `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait_padicIntegers`
@@ -179,7 +181,7 @@ theorem isIso_map_exchangeRight_app_of_isPullback_trait_residueField_of_plusEtal
     (φ : M.Hom N f f') (q₁ : N.total ⟶ Spec (.of R₁)) [LocallyOfFiniteType q₁]
     [QuasiCompact q₁] [IsSeparated q₁] (g₁ : N.generic ⟶ Spec (.of Ω₁))
     (hNj : IsPullback N.j g₁ q₁ (Spec.map (CommRingCat.ofHom a₁))) (p₁ : Y' ⟶ Spec (.of κ₁))
-    (hNi : IsPullback N.i p₁ q₁ (Spec.map (CommRingCat.ofHom b₁)))
+    (_hNi : IsPullback N.i p₁ q₁ (Spec.map (CommRingCat.ofHom b₁)))
     (q₂ : M.total ⟶ Spec (.of R₂)) (g₂ : M.generic ⟶ Spec (.of Ω₂))
     (hMj : IsPullback M.j g₂ q₂ (Spec.map (CommRingCat.ofHom a₂))) (p₂ : X' ⟶ Spec (.of κ₂))
     (hMi : IsPullback M.i p₂ q₂ (Spec.map (CommRingCat.ofHom b₂)))

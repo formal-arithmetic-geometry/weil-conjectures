@@ -94,7 +94,7 @@ theorem nativeRingedTensorModel_binary
       τ.hom.app (nativeTensorComplex T P Q) ≫ qB.map (A.chain Q P).hom ≫
         (cB.tensorIso (Ec.obj P) (Ec.obj Q) (Or.inr (A.flat Q hQ))).hom := by
   let := SB.monoidal
-  letI := nativeWeilRingedMonoidal b SB
+  let := nativeWeilRingedMonoidal b SB
   let E := nativeWeilRingedDerivedEquivalence b
   let Ec := b.native.functor.mapHomologicalComplex (.up ℤ)
   let τ := b.native.functor.mapDerivedCategoryFactors

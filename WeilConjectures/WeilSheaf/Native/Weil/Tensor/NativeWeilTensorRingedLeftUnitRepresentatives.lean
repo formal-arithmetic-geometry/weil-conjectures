@@ -214,7 +214,7 @@ theorem native_weil_tensor_ringed_left_unit_representatives
     (TA : CoefficientTensorModels.{u + 1, u + 1, u + 1, u + 2} b.K b.Q SA)
     (βA : @SymmetricCategory _ _ SA.monoidal)
     (cA : RingedDerivedTensorCoherence b.K b.Q SA TA βA)
-    (d : RingedForgetTensorTransposition.TensorComparison
+    (_d : RingedForgetTensorTransposition.TensorComparison
       b.J b.R b.K b.Q b.forget b.underived SB TB βB cB SA TA βA cA)
     (ordinaryModel : ∀ (P Q : CochainComplex (ProEtale.AdicSheaf l
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ)
@@ -300,7 +300,7 @@ theorem native_weil_tensor_ringed_left_unit_representatives
           F.map (m.leftUnitor (DerivedCategory.Q.obj P)).hom := by
   classical
   set_option synthInstance.maxSize 4096 in
-  · clear _hnaturality d cA βA TA SA
+  · clear _hnaturality _d cA βA TA SA
     rcases S with ⟨mS, adjS, evS⟩
     change mS = _ at hmonoidal
     subst mS

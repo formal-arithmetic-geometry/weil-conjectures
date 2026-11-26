@@ -596,9 +596,9 @@ def scalarModelRoosZeroLiftCoordinates
 /-- The realization/transpose construction supplies a lift with its two strict conditions. -/
 theorem scalarModelRoosZeroLift_core
     (SL : CoefficientDerivedSystemCalculus l L X)
-    (ρL : IntegralComparisonRoosModel l L X)
+    (_ρL : IntegralComparisonRoosModel l L X)
     (ρF : IntegralComparisonRoosModel l F X)
-    (b : IntegralComparisonScalarModel l L F j X SL ρF)
+    (_b : IntegralComparisonScalarModel l L F j X SL ρF)
     (P : (integralOperationsGoodComplex l E X).FullSubcategory)
     (D : CochainComplex (coefficientSequenceModules l L X) ℤ)
     (f : (completedOrdinaryScalarComplex l E L ι X).obj P.obj ⟶ integralOperationsRoos

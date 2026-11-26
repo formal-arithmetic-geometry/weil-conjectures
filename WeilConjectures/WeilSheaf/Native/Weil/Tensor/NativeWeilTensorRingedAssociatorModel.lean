@@ -85,10 +85,10 @@ theorem nativeRingedAssociatorComplex_model
       DerivedCategory.Q.map (nativeRingedAssociatorComplex b T adj A P Q N).hom ≫
         (rightModel.symm ≪≫ whiskerLeftIso (DerivedCategory.Q.obj P) qnModel.symm).hom := by
   classical
-  letI := SheafOfModules.isMonoidal_W_independentCoefficients b.R
-  letI := SheafOfModules.monoidalCategory b.R
-  letI := SB.monoidal
-  letI := nativeWeilRingedMonoidal b SB
+  let := SheafOfModules.isMonoidal_W_independentCoefficients b.R
+  let := SheafOfModules.monoidalCategory b.R
+  let := SB.monoidal
+  let := nativeWeilRingedMonoidal b SB
   let E := nativeWeilRingedDerivedEquivalence b
   let Ec := b.native.functor.mapHomologicalComplex (.up ℤ)
   let τ := b.native.functor.mapDerivedCategoryFactors

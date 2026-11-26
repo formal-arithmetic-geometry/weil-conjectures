@@ -67,13 +67,13 @@ private theorem integralLiftCommShift_spec (n : ℤ)
 /-- The full subcategory inherits the ordinary derived tensor shift comparison. -/
 theorem integralConstructibleScalarCommShift_existsUnique :
     ∃! c : (integralConstructibleScalarExtension D l hl E L ι Y).CommShift ℤ,
-      (fun [commInst :
+      (fun [_commInst :
           (integralConstructibleScalarExtension D l hl E L ι Y).CommShift ℤ] ↦
         ∀ (n : ℤ) K,
           HEq (((integralConstructibleScalarExtension D l hl E L ι Y).commShiftIso n).hom.app
               K).hom
             (((integralOrdinaryDerivedScalar l E L ι Y).commShiftIso n).hom.app K.obj))
-        (commInst := c) := by
+        (_commInst := c) := by
   refine ⟨integralLiftCommShift D l hl E Y L ι, integralLiftCommShift_spec D l hl E Y L ι, ?_⟩
   intro c hc
   apply Functor.commShift_ext
@@ -205,14 +205,14 @@ private theorem rationalOrdinaryLocalizedCommShift_spec
 /-- The rational shift comparison is the integral one tensored with one. -/
 theorem rationalOrdinaryScalarCommShift_existsUnique :
     ∃! c : (rationalOrdinaryScalarExtension D l hl E Y L ι).CommShift ℤ,
-      (fun [commInst :
+      (fun [_commInst :
           (rationalOrdinaryScalarExtension D l hl E Y L ι).CommShift ℤ] ↦
         ∀ K, HEq
           (((rationalOrdinaryScalarExtension D l hl E Y L ι).commShiftIso (1 : ℤ)).hom.app K)
           ((1 : Localization.Away (Padic.coefficientExtensionUniformizer l L)) ⊗ₜ[
             Padic.coefficientExtensionIntegers l L]
             (((integralConstructibleScalarExtension D l hl E L ι Y).commShiftIso
-              (1 : ℤ)).hom.app K.obj))) (commInst := c) := by
+              (1 : ℤ)).hom.app K.obj))) (_commInst := c) := by
   refine ⟨rationalOrdinaryLocalizedCommShift D l hl E Y L ι,
     rationalOrdinaryLocalizedCommShift_spec D l hl E Y L ι, ?_⟩
   intro c hc
@@ -253,9 +253,9 @@ private theorem rationalOrdinaryScalar_isTriangulated :
 normalized comparison with ordinary tensor commute with every integer shift. -/
 theorem rationalConstructibleScalarCommShift_existsUnique :
     ∃! c : (rationalScalarExtension D l hl E Y L ι).CommShift ℤ,
-      (fun [commInst : (rationalScalarExtension D l hl E Y L ι).CommShift ℤ] ↦
+      (fun [_commInst : (rationalScalarExtension D l hl E Y L ι).CommShift ℤ] ↦
         NatTrans.CommShift (rationalOrdinaryComparison D l hl E Y L ι).hom ℤ)
-        (commInst := c) := by
+        (_commInst := c) := by
   refine ⟨Functor.CommShift.ofIso (rationalOrdinaryComparison D l hl E Y L ι) ℤ,
     Functor.CommShift.ofIso_compatibility _ _, ?_⟩
   intro c hc

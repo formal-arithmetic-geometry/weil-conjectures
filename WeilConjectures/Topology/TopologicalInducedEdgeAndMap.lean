@@ -52,7 +52,7 @@ theorem exists_topological_induced_edge_and_map
       (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤))
     (hZ : ∀ n, HZ n = Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology Z) n ⋙
       (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)) :
-    ∃ edge : ∀ p : ℕ, TopCat.Sheaf.pushforwardAb f ⋙ HX p ⟶ HZ p,
+    ∃ _edge : ∀ p : ℕ, TopCat.Sheaf.pushforwardAb f ⋙ HX p ⟶ HZ p,
       ∃ a : (presheafToSheaf (Opens.grothendieckTopology X)
         AddCommGrpCat.{u}).obj
         (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶

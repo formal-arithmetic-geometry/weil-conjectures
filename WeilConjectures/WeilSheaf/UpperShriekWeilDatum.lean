@@ -81,6 +81,8 @@ abbrev PreservesBoundedConstructibleAdicLowerStar : Prop :=
       ((adicLowerStar l
         (geometricFiberHomCompactification (k₀ := k₀) f).overG.left).rightDerivedFunctor.obj K)
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- `Rḡ_*` preserves bounded constructible adic complexes. -/
 theorem preservesBoundedConstructibleAdicLowerStar :
     PreservesBoundedConstructibleAdicLowerStar k₀ l f := fun _ hK ↦
@@ -96,14 +98,16 @@ along `ī^*` of the right Weil datum of `Rḡ_* ⊣ ḡ^!` of the structure of `
 noncomputable def upperShriekExceptionalDatum
     (hR : PreservesBoundedConstructibleAdicLowerStar k₀ l f)
     {R' : (DerivedCategory.boundedConstructibleAdic l
-        (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left).FullSubcategory ⥤
+        (Over.mk
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left).FullSubcategory ⥤
       (DerivedCategory.boundedConstructibleAdic l
         (geometricFiberHomCompactification (k₀ := k₀) f).overObj.left).FullSubcategory}
     (adjR' : (DerivedCategory.boundedConstructibleAdic l
         (geometricFiberHomCompactification (k₀ := k₀) f).overObj.left).liftFullSubcategory
         (DerivedCategory.boundedConstructibleAdic l
           (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left)
-        (adicLowerStar l (geometricFiberHomCompactification (k₀ := k₀) f).overG.left).rightDerivedFunctor
+        (adicLowerStar l
+          (geometricFiberHomCompactification (k₀ := k₀) f).overG.left).rightDerivedFunctor
         hR ⊣ R')
     (L : WeilComplex k₀ l Y) :
     (WeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategory.obj
@@ -124,17 +128,21 @@ noncomputable def upperShriekExceptionalDatum
           (comp_over (shriekCompactification k₀ f).g _)) _ _
         (WeilSheaf.boundedConstructibleAdic_frobeniusPullback_mapDerivedCategory_obj_iff
           (k₀ := k₀) (l := l) (X := (shriekCompactification k₀ f).Z))
-        (fun K hK ↦ (WeilSheaf.boundedConstructibleAdic_frobeniusPullback_mapDerivedCategory_obj_iff
-          (k₀ := k₀) (l := l) (X := Y) K).2 hK) hR)
+        (fun K hK ↦
+          (WeilSheaf.boundedConstructibleAdic_frobeniusPullback_mapDerivedCategory_obj_iff
+            (k₀ := k₀) (l := l) (X := Y) K).2 hK) hR)
       (ObjectProperty.homMk
         (X := (ObjectProperty.liftFullSubcategory _ _
           (WeilSheaf.frobeniusPullback k₀ l Y).mapDerivedCategory
-          (fun K hK ↦ (WeilSheaf.boundedConstructibleAdic_frobeniusPullback_mapDerivedCategory_obj_iff
-            (k₀ := k₀) (l := l) (X := Y) K).2 hK)).obj
+          (fun K hK ↦
+            (WeilSheaf.boundedConstructibleAdic_frobeniusPullback_mapDerivedCategory_obj_iff
+              (k₀ := k₀) (l := l) (X := Y) K).2 hK)).obj
             ⟨forget.obj L, (WeilComplex.objectProperty_iff _).1 L.property⟩)
         (Y := ⟨forget.obj L, (WeilComplex.objectProperty_iff _).1 L.property⟩)
         ((IsoAlgebra.derivedStrIso _).hom.app L.obj))).hom
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- **The Frobenius structure of the Weil `Rf^!` is the exceptional datum**: for a right adjoint
 `ḡ^!` of `Rḡ_*` on bounded constructible adic complexes and a Weil complex `L` on `Y`, there is
 an identification `θ` of the underlying complex of `Rf^! L` with `ī^* (ḡ^! L̄)` which is
@@ -143,14 +151,16 @@ Frobenius equivariant for the structure of `Rf^! L` and the exceptional datum
 theorem exists_forget_upperShriek_obj_iso_isWeilEquivariant
     (hR : PreservesBoundedConstructibleAdicLowerStar k₀ l f)
     {R' : (DerivedCategory.boundedConstructibleAdic l
-        (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left).FullSubcategory ⥤
+        (Over.mk
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left).FullSubcategory ⥤
       (DerivedCategory.boundedConstructibleAdic l
         (geometricFiberHomCompactification (k₀ := k₀) f).overObj.left).FullSubcategory}
     (adjR' : (DerivedCategory.boundedConstructibleAdic l
         (geometricFiberHomCompactification (k₀ := k₀) f).overObj.left).liftFullSubcategory
         (DerivedCategory.boundedConstructibleAdic l
           (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left)
-        (adicLowerStar l (geometricFiberHomCompactification (k₀ := k₀) f).overG.left).rightDerivedFunctor
+        (adicLowerStar l
+          (geometricFiberHomCompactification (k₀ := k₀) f).overG.left).rightDerivedFunctor
         hR ⊣ R')
     (L : WeilComplex k₀ l Y) :
     ∃ θ : forget.obj ((upperShriek f).obj L) ≅
@@ -216,7 +226,8 @@ theorem exists_forget_upperShriek_obj_iso_isWeilEquivariant
       (WeilComplex.objectProperty_rightDerivedLowerStar c.g) adjg L
   let ci := ProEtale.adicUpperStarGeometricFiberMapCompFrobeniusIso l c.i
     (comp_over c.i (Spec (CommRingCat.of k₀)))
-  let ī := adicUpperStar l (Scheme.Hom.geometricFiberMap c.i (comp_over c.i (Spec (CommRingCat.of k₀))))
+  let ī := adicUpperStar l
+    (Scheme.Hom.geometricFiberMap c.i (comp_over c.i (Spec (CommRingCat.of k₀))))
   -- isomorphisms of Weil complexes are equivariant
   have h₁ : IsWeilEquivariant (WeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategory
       ((IsoAlgebra.derivedStrIso _).hom.app ((upperShriek f).obj L).obj)

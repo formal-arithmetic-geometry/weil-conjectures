@@ -372,13 +372,15 @@ noncomputable def transition (E L : Index l Ω) (h : E ≤ L) :
   sfRationalScalarExtension l (Coefficient.{u} l Ω E) Y D.p hl
     (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h)
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- The integral transition inherits the ordinary tensor shift through its canonical
 quotient-completion comparison, not through an arbitrary exact-functor witness. -/
 theorem integralTransitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L) :
     ∃! c : (sfConstructibleIntegralScalarExtension D.p l hl
         (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
         (coefficientInclusion l Ω E L h) Y).CommShift ℤ,
-      (fun [commInst : (sfConstructibleIntegralScalarExtension D.p l hl
+      (fun [_commInst : (sfConstructibleIntegralScalarExtension D.p l hl
           (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
           (coefficientInclusion l Ω E L h) Y).CommShift ℤ] ↦
         ∀ (n : ℤ) (K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E) Y),
@@ -401,7 +403,7 @@ theorem integralTransitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L
                 (Coefficient.{u} l Ω L) Y)) n).map
                   ((sfIntegralOrdinaryComparison l (Coefficient.{u} l Ω E)
                     (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) Y).hom.app K)))
-        (commInst := c) := by
+        (_commInst := c) := by
   exact normalized_shift_existsUnique
     (sfConstructibleIntegralScalarExtension D.p l hl
       (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) Y)
@@ -423,14 +425,14 @@ noncomputable instance integralTransitionCommShift (E L : Index l Ω) (h : E ≤
 shift. -/
 theorem transitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L) :
     ∃! c : (transition D l hl Ω Y E L h).CommShift ℤ,
-      (fun [commInst : (transition D l hl Ω Y E L h).CommShift ℤ] ↦
+      (fun [_commInst : (transition D l hl Ω Y E L h).CommShift ℤ] ↦
         ∀ K : Stage D l hl Ω Y E,
           HEq (((transition D l hl Ω Y E L h).commShiftIso (1 : ℤ)).hom.app K)
             ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω L) Y).map
               (((sfConstructibleIntegralScalarExtension D.p l hl
                 (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
                 (coefficientInclusion l Ω E L h) Y).commShiftIso (1 : ℤ)).hom.app K.obj)))
-        (commInst := c) := by
+        (_commInst := c) := by
   dsimp only [transition]
   exact sfRationalScalarCommShift_existsUnique D.p l hl
     (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)

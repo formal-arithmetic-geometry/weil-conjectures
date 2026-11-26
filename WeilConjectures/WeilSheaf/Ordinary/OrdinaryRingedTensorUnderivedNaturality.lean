@@ -47,6 +47,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     E₀.functor.op.prod E₀.functor ⋙
       Functor.uncurry.obj (SheafOfModules.homFunctor (R := R)))
 
+omit [E₀.functor.Additive] in
 private theorem normalized_uncurry
     (U : OrdinaryRingedTensorUnderivedData l Y J R E₀ H)
     (P Q I : ProEtale.AdicSheaf l Y) (f : ((ordinaryTensorBifunctor l Y).obj P).obj Q ⟶ I) :
@@ -112,6 +113,7 @@ private theorem parameter_adjunct_map
     congrArg (fun z ↦ z ≫ ((ordinaryIhomBifunctor l Y).map p.op).app
       (((ordinaryTensorBifunctor l Y).obj P').obj Q')) ht
 
+omit [E₀.functor.Additive] in
 private theorem inverse_naturality
     (U : OrdinaryRingedTensorUnderivedData l Y J R E₀ H)
     (P Q P' Q' : ProEtale.AdicSheaf l Y) (p : P ⟶ P') (q : Q ⟶ Q') :

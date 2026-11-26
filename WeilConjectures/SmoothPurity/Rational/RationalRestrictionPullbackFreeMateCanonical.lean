@@ -44,10 +44,10 @@ theorem rationalRestrictionPullback_freeMate_canonical
           (Nat.Prime.ne_zero (Fact.out : l.Prime)) F ι).obj M)) := by
   let TX := sfRationalScalarExtension l E X 0
     (Nat.Prime.ne_zero (Fact.out : l.Prime)) F ι
-  letI : TX.ReflectsIsomorphisms :=
+  have : TX.ReflectsIsomorphisms :=
     rationalScalarExtension_reflects_isomorphisms l E F ι X
   have h := rationalRestrictionPullback_freeMate_after_extension l E F ι f M
-  letI := h
+  have := h
   exact isIso_of_reflects_iso _ TX
 
 end WeilConjectures

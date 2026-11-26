@@ -91,7 +91,7 @@ theorem rationalRestrictionPullback_freeMate
   let bX₀ := rationalScalarExtension_leftAdjunction l E F ι X
   let bY₀ := rationalScalarExtension_leftAdjunction l E F ι Y
   have hc := rationalRestrictionPullback_freeMate_canonical l E F ι f M
-  letI := hc
+  let := hc
   exact inverseMate_component_transport bY bX bY₀ bX₀
     (TwoSquare.mk _ _ _ _ (rationalPullbackScalarComparison l E F ι f).inv)
     (TY.obj M)

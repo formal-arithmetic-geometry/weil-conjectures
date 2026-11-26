@@ -78,6 +78,8 @@ structure NativeWeilRingedTensorUnderivedData where
           (b.native.functor.obj Q) (b.native.functor.obj I)).symm
             (b.native.functor.map f ≫ b.nativeHom.hom.app (op P, I))
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- The underived comparison fixed by the native and ringed tensor-Hom adjunctions. -/
 theorem native_weil_tensor_ringed_underived_data :
     Nonempty (NativeWeilRingedTensorUnderivedData b T adj) := by

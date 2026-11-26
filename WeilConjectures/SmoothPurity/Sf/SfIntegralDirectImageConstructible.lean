@@ -306,7 +306,7 @@ theorem sfIntegralDirectImage_constructible
     (_hK : sfIntegralConstructible l E X K) :
     (∃ hprod : HasProduct (sfDirectImageTerm l E f K),
       @Nonempty (@SfIntegralDirectImage l _ E _ _ _ X Y f K hprod)) ∧
-    (∀ [hprod : HasProduct (sfDirectImageTerm l E f K)]
+    (∀ [_hprod : HasProduct (sfDirectImageTerm l E f K)]
       (L : SfIntegralDirectImage l E f K),
       sfIntegralConstructible l E Y L.obj ∧ IsSfDerivedComplete l E Y L.obj ∧
         (∀ n : ℕ, IsIso (sfDirectImageReductionComparison l E f L n)) ∧

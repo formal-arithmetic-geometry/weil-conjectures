@@ -66,6 +66,8 @@ lemma range_sigmaPointι_eq_liftPoint [IsAlgClosed k] (hΦ : IsModelFrobenius Φ
   rw [Set.mem_singleton_iff, Subsingleton.elim (α := Spec (.of k)) z default]
   rfl
 
+-- The section instances on `X.hom` overlap `[IsProper X.hom]`; keep the statement unchanged.
+set_option linter.overlappingInstances false in
 /-- **The trace formula on a model with given local terms**: for a proper `X` with the model
 Frobenius `Φ` and `m ≥ 1`, if the local term of every map `v : LΦ_m^* K ⟶ K` at every fixed
 rational point `x` is the trace of the stalk map `v_x`, the trace formula in degree one holds for
@@ -94,6 +96,8 @@ theorem traceFormulaHolds_frobeniusIterate_of_localTerm [IsAlgClosed k] [IsPrope
       (fun _ _ h ↦ disjoint_range_sigmaPointι k _ h) (iUnion_range_sigmaPointι k _)]
   exact Finset.sum_congr rfl fun x _ ↦ hLT K v x
 
+-- The section instances on `X.hom` overlap `[IsProper X.hom]`; keep the statement unchanged.
+set_option linter.overlappingInstances false in
 /-- **The trace formula on a proper smooth curve**: for `X` proper and smooth of relative
 dimension one over `k` with the model Frobenius `Φ` of a model over a finite field, the trace
 formula in degree one holds for `Φ_m`, `m ≥ 1`. -/
@@ -106,6 +110,8 @@ theorem traceFormulaHolds_frobeniusIterate_of_smoothOfRelativeDimension_one [IsA
       (Correspondence.ofGraphFixedLocus hΦ hm K v) x.1 x.2 (B := point k)
       (sigmaPointι k (FixedPoint Φ m) x) (range_sigmaPointι_eq_liftPoint hΦ hm K v x)
 
+-- The section instances on `X.hom` overlap `[IsProper X.hom]`; keep the statement unchanged.
+set_option linter.overlappingInstances false in
 /-- **The trace formula on a proper smooth curve**, degree one. -/
 theorem traceFormulaHolds_of_smoothOfRelativeDimension_one [IsAlgClosed k] [IsProper X.hom]
     [SmoothOfRelativeDimension 1 X.hom] [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p)

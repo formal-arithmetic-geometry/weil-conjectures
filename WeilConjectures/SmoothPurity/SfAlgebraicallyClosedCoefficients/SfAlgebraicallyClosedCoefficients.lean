@@ -796,7 +796,7 @@ noncomputable def shiftRepresentative (n : ℤ) (A B : Pair D l hl Ω Y)
 /-- The induced shift is specified on every object, representative and stage inclusion. -/
 theorem shift_existsUnique :
     ∃! s : HasShift (Pair D l hl Ω Y) ℤ,
-      (fun [shiftInst : HasShift (Pair D l hl Ω Y) ℤ] ↦
+      (fun [_shiftInst : HasShift (Pair D l hl Ω Y) ℤ] ↦
         (∀ n : ℤ, (shiftFunctor (Pair D l hl Ω Y) n).Additive) ∧
         (∀ (n : ℤ) (A : Pair D l hl Ω Y),
           (shiftFunctor (Pair D l hl Ω Y) n).obj A = shiftPair n A) ∧
@@ -806,13 +806,13 @@ theorem shift_existsUnique :
             (ofHom (shiftPair n A) (shiftPair n B) L hA hB
               (shiftRepresentative n A B L hA hB f))) ∧
         ∃ c : ∀ E : Index l Ω, (inclusion E : Stage D l hl Ω Y E ⥤ _).CommShift ℤ,
-          (fun [commInst : ∀ E : Index l Ω,
+          (fun [_commInst : ∀ E : Index l Ω,
               (inclusion E : Stage D l hl Ω Y E ⥤ _).CommShift ℤ] ↦
             ∀ (n : ℤ) (E : Index l Ω) (K : Stage D l hl Ω Y E),
               HEq (((inclusion E : Stage D l hl Ω Y E ⥤ _).commShiftIso n).hom.app K)
                 (𝟙 ((inclusion E : Stage D l hl Ω Y E ⥤ _).obj
-                  ((shiftFunctor (Stage D l hl Ω Y E) n).obj K)))) (commInst := c))
-        (shiftInst := s) := by
+                  ((shiftFunctor (Stage D l hl Ω Y E) n).obj K)))) (_commInst := c))
+        (_shiftInst := s) := by
   let S := stageSystem D l hl Ω Y
   let s := StageSystem.PairCategory.hasShift S ℤ
   let := s

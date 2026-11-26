@@ -227,7 +227,7 @@ private theorem projection_formula_transport
       (sY.app (F.obj K)).inv ≫ LY'.map (e.hom.app K) ≫ b' ≫
         H'.map (sX.hom.app K) := by
     apply (cancel_epi (sY.hom.app (F.obj K))).mp
-    simp only [Category.assoc, Iso.app_inv, Iso.hom_inv_id_app_assoc]
+    simp only [Iso.app_inv, Iso.hom_inv_id_app_assoc]
     apply (aY'.homEquiv _ _).injective
     change aY'.unit.app _ ≫ RY'.map _ = _
     simp only [Functor.map_comp, ← Category.assoc]
@@ -236,7 +236,7 @@ private theorem projection_formula_transport
     have hr := rY.hom.naturality b
     dsimp only [Functor.comp_map] at hr
     rw [← reassoc_of% hr]
-    simp only [Functor.comp_map, ← V.map_comp_assoc]
+    simp only [← V.map_comp_assoc]
     change V.map (aY.unit.app _ ≫ RY.map b) ≫ _ = _
     have hbe : aY.unit.app (F.obj K) ≫ RY.map b =
         F.map (aX.unit.app K) ≫ d.hom.app (LX.obj K) :=
@@ -256,7 +256,7 @@ private theorem projection_formula_transport
     dsimp only [Functor.comp_map, Functor.comp_obj] at hd
     simp only [Category.assoc]
     rw [← hd]
-    simp only [← F'.map_comp_assoc, ← F'.map_comp]
+    simp only [← F'.map_comp_assoc]
     rw [huX]
   have : IsIso (Q.map b ≫ h.hom.app (LX.obj K)) := by
     rw [heq]
@@ -321,12 +321,12 @@ private theorem normalized_equivalence_square_exists
       normalized_square F G R S a d := by
   let ηF := derivedCochainRightUnit F F.rightDerivedFunctor F.rightDerivedFunctorUnit
   let ηG := derivedCochainRightUnit G G.rightDerivedFunctor G.rightDerivedFunctorUnit
-  letI : F.rightDerivedFunctor.IsLeftKanExtension ηF :=
+  have : F.rightDerivedFunctor.IsLeftKanExtension ηF :=
     cochainRightUnit_universal F F.rightDerivedFunctor F.rightDerivedFunctorUnit
-  letI : G.rightDerivedFunctor.IsLeftKanExtension ηG :=
+  have : G.rightDerivedFunctor.IsLeftKanExtension ηG :=
     cochainRightUnit_universal G G.rightDerivedFunctor G.rightDerivedFunctorUnit
-  letI : R.asEquivalence.functor.Additive := by change R.Additive; infer_instance
-  letI : S.asEquivalence.functor.Additive := by change S.Additive; infer_instance
+  have : R.asEquivalence.functor.Additive := by change R.Additive; infer_instance
+  have : S.asEquivalence.functor.Additive := by change S.Additive; infer_instance
   obtain ⟨d, hd⟩ := rightDerivedSquare R.asEquivalence S.asEquivalence F G
     F.rightDerivedFunctor G.rightDerivedFunctor ηF ηG a
   refine ⟨d, fun I ↦ ?_⟩
@@ -421,18 +421,15 @@ private theorem normalized_cube
     fr, Functor.map_comp, Functor.map_comp, Functor.map_comp]
   erw [← reassoc_of% nh]
   have haI := congrArg Q.mapDerivedCategory.map (ha I)
-  try simp only [Functor.map_comp, Category.assoc] at haI
+  try simp only [Functor.map_comp] at haI
   erw [reassoc_of% haI]
-  try simp only [Functor.map_comp, Category.assoc]
   erw [reassoc_of% (hh ((R.mapHomologicalComplex (.up ℤ)).obj I))]
-  try simp only [Functor.map_comp, Category.assoc]
   have nb := db.hom.naturality (U.mapDerivedCategoryFactors.hom.app I)
   dsimp only [Functor.comp_map] at nb
   erw [← reassoc_of% nb, reassoc_of% hn]
   have heI := congrArg S'.mapDerivedCategory.map (he I)
-  simp only [Functor.map_comp, Category.assoc] at heI
+  simp only [Functor.map_comp] at heI
   erw [reassoc_of% heI]
-  try simp only [Functor.map_comp, Category.assoc]
   erw [← S'.mapDerivedCategory.map_comp_assoc]
   erw [hb ((U.mapHomologicalComplex (.up ℤ)).obj I)]
   try simp only [Functor.map_comp, Category.assoc]
@@ -471,7 +468,7 @@ private theorem normalized_cube
     ext k
     exact hc (I.X k)
   have hqc := congrArg DerivedCategory.Q.map hc'
-  simp only [Functor.map_comp, Category.assoc] at hqc
+  simp only [Functor.map_comp] at hqc
   erw [reassoc_of% hqc]
   rfl
 
@@ -560,7 +557,7 @@ private theorem coefficient_inverse_image_projection (n : ℕ) :
   change P.map (purCoefficientIso l E Y).inv ≫
       P.map (pbcAdicProjection Y (pbcIntegralDatum l E) n) ≫
       P.map (finite_coefficient_iso l E Y n).hom ≫ _ = _
-  simp only [← P.map_comp_assoc, ← P.map_comp, hh]
+  simp only [← P.map_comp_assoc, hh]
   rfl
 
 private theorem coefficient_direct_image_eq :
@@ -609,8 +606,7 @@ private theorem completed_coefficient_square :
         (purCoefficientIso l E X).hom := by
   dsimp only [coefficient_inverse_image_iso, Iso.trans_hom, Functor.mapIso_hom,
     Iso.symm_hom, asIso_hom]
-  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id,
-    Functor.map_id, Category.id_comp]
+  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
 private noncomputable def finite_inverse_image_iso (n : ℕ) :
@@ -630,8 +626,7 @@ private theorem finite_inverse_image_eq (n : ℕ) :
     (finite_coefficient_iso l E Y n).hom)).mp
   dsimp only [finite_inverse_image_iso, Iso.trans_hom, Functor.mapIso_hom,
     Iso.symm_hom, asIso_hom]
-  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id,
-    Functor.map_id, Category.id_comp]
+  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
   exact (finite_coefficient_square l E f n).symm
 
@@ -951,9 +946,7 @@ private theorem sf_restriction_normalization (n : ℕ)
   erw [hu]
   erw [← hn]
   simp only [canonical_cochain_unit_objQIso, sfDerivedRestrictionComparison,
-    Category.assoc, Iso.inv_hom_id_app_assoc,
-    ← S.mapDerivedCategory.map_comp_assoc, Iso.inv_hom_id, S.mapDerivedCategory.map_id,
-    Category.id_comp]
+    Iso.inv_hom_id_app_assoc]
   rw [← Functor.map_comp_assoc, Iso.inv_hom_id, CategoryTheory.Functor.map_id,
     Category.id_comp]
 
@@ -1000,14 +993,14 @@ private theorem sf_projection_formula (n : ℕ)
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) :
     IsIso (C := DerivedCategory (scalarReductionTarget.{u, u} l E Y n))
       (sf_projection_map l E f n K) := by
-  letI : Abelian.HasKInjectiveResolutions (scalarReductionTarget.{u, u} l E X n) :=
+  have : Abelian.HasKInjectiveResolutions (scalarReductionTarget.{u, u} l E X n) :=
     proEtaleRingModules_hasKInjectiveResolutions X (integralCoefficientCommRingSheaf l E X n)
   let d := pbcIntegralDatum l E
-  letI : Abelian.HasKInjectiveResolutions
+  have : Abelian.HasKInjectiveResolutions
       (pbcModules X ((pbcAdicRings X d).obj (Opposite.op n))) :=
     proEtaleRingModules_hasKInjectiveResolutions X
       ((pbcAdicRings X d).obj (Opposite.op n))
-  letI : Abelian.HasKInjectiveResolutions (pbcModules X (pbcAdicCompletion X d)) :=
+  have : Abelian.HasKInjectiveResolutions (pbcModules X (pbcAdicCompletion X d)) :=
     proEtaleRingModules_hasKInjectiveResolutions X (pbcAdicCompletion X d)
   let R := scalarReductionRestriction.{u, u} l E X n
   let S := scalarReductionRestriction.{u, u} l E Y n
@@ -1023,52 +1016,52 @@ private theorem sf_projection_formula (n : ℕ)
       pbcModules X (pbcAdicCompletion X d) := pbcRestrict (purCoefficientIso l E X).hom
   let Q : scalarReductionSource.{u, u} l E Y ⥤
       pbcModules Y (pbcAdicCompletion Y d) := pbcRestrict (purCoefficientIso l E Y).hom
-  letI : R.Additive := by
+  have : R.Additive := by
     change (pbcRestrict (completedIntegralCommRingProjectionUnrestricted l E X n)).Additive
     exact pbcRestrict_additive _
-  letI : PreservesFiniteLimits R := (scalarReductionRestriction_exact l E X n).1
-  letI : PreservesFiniteColimits R := (scalarReductionRestriction_exact l E X n).2
-  letI : S.Additive := by
+  have : PreservesFiniteLimits R := (scalarReductionRestriction_exact l E X n).1
+  have : PreservesFiniteColimits R := (scalarReductionRestriction_exact l E X n).2
+  have : S.Additive := by
     change (pbcRestrict (completedIntegralCommRingProjectionUnrestricted l E Y n)).Additive
     exact pbcRestrict_additive _
-  letI : PreservesFiniteLimits S := (scalarReductionRestriction_exact l E Y n).1
-  letI : PreservesFiniteColimits S := (scalarReductionRestriction_exact l E Y n).2
-  letI : R'.Additive := by exact pbcRestrict_additive _
-  letI : PreservesFiniteLimits R' := pbcRestrict_limits _
-  letI : PreservesFiniteColimits R' := pbcRestrict_colimits _
-  letI : S'.Additive := by exact pbcRestrict_additive _
-  letI : PreservesFiniteLimits S' := pbcRestrict_limits _
-  letI : PreservesFiniteColimits S' := pbcRestrict_colimits _
+  have : PreservesFiniteLimits S := (scalarReductionRestriction_exact l E Y n).1
+  have : PreservesFiniteColimits S := (scalarReductionRestriction_exact l E Y n).2
+  have : R'.Additive := by exact pbcRestrict_additive _
+  have : PreservesFiniteLimits R' := pbcRestrict_limits _
+  have : PreservesFiniteColimits R' := pbcRestrict_colimits _
+  have : S'.Additive := by exact pbcRestrict_additive _
+  have : PreservesFiniteLimits S' := pbcRestrict_limits _
+  have : PreservesFiniteColimits S' := pbcRestrict_colimits _
   have hu (W : AlgebraicGeometry.Scheme.{u}) :
       (pbcRestrict (finite_coefficient_iso l E W n).hom).IsEquivalence :=
     restriction_isEquivalence ((adicLisseForget W).mapIso (finite_coefficient_iso l E W n))
   have hp (W : AlgebraicGeometry.Scheme.{u}) :
       (pbcRestrict (purCoefficientIso l E W).hom).IsEquivalence :=
     restriction_isEquivalence ((adicLisseForget W).mapIso (purCoefficientIso l E W))
-  letI : U.Additive := pbcRestrict_additive _
-  letI : V.Additive := pbcRestrict_additive _
-  letI : P.Additive := pbcRestrict_additive _
-  letI : Q.Additive := pbcRestrict_additive _
-  letI : PreservesFiniteLimits U := pbcRestrict_limits _
-  letI : PreservesFiniteLimits V := pbcRestrict_limits _
-  letI : PreservesFiniteLimits P := pbcRestrict_limits _
-  letI : PreservesFiniteLimits Q := pbcRestrict_limits _
-  letI : PreservesFiniteColimits U := pbcRestrict_colimits _
-  letI : PreservesFiniteColimits V := pbcRestrict_colimits _
-  letI : PreservesFiniteColimits P := pbcRestrict_colimits _
-  letI : PreservesFiniteColimits Q := pbcRestrict_colimits _
-  letI : U.IsEquivalence := hu X
-  letI : V.IsEquivalence := hu Y
-  letI : P.IsEquivalence := hp X
-  letI : Q.IsEquivalence := hp Y
-  letI : (proEtaleConstantModuleDirectImage f
+  have : U.Additive := pbcRestrict_additive _
+  have : V.Additive := pbcRestrict_additive _
+  have : P.Additive := pbcRestrict_additive _
+  have : Q.Additive := pbcRestrict_additive _
+  have : PreservesFiniteLimits U := pbcRestrict_limits _
+  have : PreservesFiniteLimits V := pbcRestrict_limits _
+  have : PreservesFiniteLimits P := pbcRestrict_limits _
+  have : PreservesFiniteLimits Q := pbcRestrict_limits _
+  have : PreservesFiniteColimits U := pbcRestrict_colimits _
+  have : PreservesFiniteColimits V := pbcRestrict_colimits _
+  have : PreservesFiniteColimits P := pbcRestrict_colimits _
+  have : PreservesFiniteColimits Q := pbcRestrict_colimits _
+  have : U.IsEquivalence := hu X
+  have : V.IsEquivalence := hu Y
+  have : P.IsEquivalence := hp X
+  have : Q.IsEquivalence := hp Y
+  have : (proEtaleConstantModuleDirectImage f
       (Padic.coefficientExtensionRing l E (n + 1))).Additive :=
     proEtaleConstantModuleDirectImage_additive f _
-  letI : (sfCompletedModuleDirectImage l E f).Additive :=
+  have : (sfCompletedModuleDirectImage l E f).Additive :=
     sfCompletedModuleDirectImage_additive l E f
-  letI : (completedFiniteModuleDirectImage f d n).Additive :=
+  have : (completedFiniteModuleDirectImage f d n).Additive :=
     proEtaleRingModuleDirectImage_additive f _ _ _
-  letI : (completedModuleDirectImage f d).Additive := completedModuleDirectImage_additive f d
+  have : (completedModuleDirectImage f d).Additive := completedModuleDirectImage_additive f d
   obtain ⟨de, hde⟩ := normalized_equivalence_square_exists.{u + 2, u + 1, u + 2}
     (eqR := by exact hu X) (eqS := by exact hu Y)
     (addR := by exact pbcRestrict_additive _)
@@ -1087,10 +1080,10 @@ private theorem sf_projection_formula (n : ℕ)
     P Q (completed_ordinary_comparison l E f)
   let r : R ⋙ P ≅ U ⋙ R' := coefficient_restriction_square l E X n
   let s : S ⋙ Q ≅ V ⋙ S' := coefficient_restriction_square l E Y n
-  letI : (R ⋙ P).Additive := by infer_instance
-  letI : (U ⋙ R').Additive := by infer_instance
-  letI : (S ⋙ Q).Additive := by infer_instance
-  letI : (V ⋙ S').Additive := by infer_instance
+  have : (R ⋙ P).Additive := by infer_instance
+  have : (U ⋙ R').Additive := by infer_instance
+  have : (S ⋙ Q).Additive := by infer_instance
+  have : (V ⋙ S').Additive := by infer_instance
   let dr := Functor.mapDerivedCategoryCompIso R P ≪≫
     Functor.mapDerivedCategoryNatIso r ≪≫ (Functor.mapDerivedCategoryCompIso U R').symm
   let ds := Functor.mapDerivedCategoryCompIso S Q ≪≫
@@ -1176,13 +1169,13 @@ private theorem sf_projection_formula (n : ℕ)
           h₁.trans (Category.assoc a.hom c b.inv).symm
         have h₃ : g ≫ b.hom = a.hom ≫ c := (Iso.eq_comp_inv b).mp h₂
         exact h₃.symm.trans (Category.assoc g₁ g₂ b.hom)
-  letI : U.mapDerivedCategory.IsEquivalence := by
+  have : U.mapDerivedCategory.IsEquivalence := by
     exact Functor.isEquivalence_mapDerivedCategory U
-  letI : V.mapDerivedCategory.IsEquivalence := by
+  have : V.mapDerivedCategory.IsEquivalence := by
     exact Functor.isEquivalence_mapDerivedCategory V
-  letI : P.mapDerivedCategory.IsEquivalence := by
+  have : P.mapDerivedCategory.IsEquivalence := by
     exact Functor.isEquivalence_mapDerivedCategory P
-  letI : Q.mapDerivedCategory.IsEquivalence := by
+  have : Q.mapDerivedCategory.IsEquivalence := by
     exact Functor.isEquivalence_mapDerivedCategory Q
   let ax := (derivedScalarExtensionRestrictionAdjunction.{u, u} l E X n).choose
   let ay := (derivedScalarExtensionRestrictionAdjunction.{u, u} l E Y n).choose
@@ -1292,20 +1285,20 @@ private theorem completed_image_complete
     (hK : IsSfDerivedComplete l E X K) :
     IsSfDerivedComplete l E Y ((sfCompletedDerivedDirectImage l E f).obj K) := by
   let F := CompletedCoefficientPushforward.push.{u, u} f D.structureMap
-  letI := D.completedAdditive
-  letI : Abelian.HasKInjectiveResolutions
+  have := D.completedAdditive
+  have : Abelian.HasKInjectiveResolutions
       (CompletedCoefficientPushforward.Mod.{u, u} X
         (CompletedCoefficientPushforward.R l E X)) :=
     sfCompletedHasKInjectiveResolutions l E X
-  letI : (DerivedCategory.Q (C := scalarReductionSource.{u, u} l E X)).IsLocalization
+  have : (DerivedCategory.Q (C := scalarReductionSource.{u, u} l E X)).IsLocalization
       (HomologicalComplex.quasiIso (scalarReductionSource.{u, u} l E X) (.up ℤ)) :=
     inferInstance
-  letI := sfCompletedModuleDirectImage_additive l E f
+  have := sfCompletedModuleDirectImage_additive l E f
   let η := derivedCochainRightUnit F F.rightDerivedFunctor F.rightDerivedFunctorUnit
-  letI : F.rightDerivedFunctor.IsRightDerivedFunctor η
+  have : F.rightDerivedFunctor.IsRightDerivedFunctor η
       (HomologicalComplex.quasiIso (scalarReductionSource.{u, u} l E X) (.up ℤ)) :=
     ⟨cochainRightUnit_universal F F.rightDerivedFunctor F.rightDerivedFunctorUnit⟩
-  letI : D.completedImage.functor.IsRightDerivedFunctor D.completedImage.unit
+  have : D.completedImage.functor.IsRightDerivedFunctor D.completedImage.unit
       (HomologicalComplex.quasiIso (scalarReductionSource.{u, u} l E X) (.up ℤ)) :=
     D.completedImage.universal
   have hF : F = sfCompletedModuleDirectImage l E f := by
@@ -1336,8 +1329,8 @@ private theorem finish_from_projection_formula
   let a (n : ℕ) := (sfDerivedRestrictionComparison l E f n).app
     ((scalarReductionDerivedExtension.{u, u} l E X n).obj K)
   obtain ⟨hprod, δ, hδ⟩ := hK
-  letI := hprod
-  letI : HasProduct (fun n ↦ F.obj ((sfDerivedReductionRestricted l E X n).obj K)) :=
+  have := hprod
+  have : HasProduct (fun n ↦ F.obj ((sfDerivedReductionRestricted l E X n).obj K)) :=
     hasProduct_of_equiv_of_iso (sfDirectImageTerm l E f K) _ (Equiv.refl ℕ) a
   obtain ⟨ε, hε⟩ := map_roos F
     (fun n ↦ (sfDerivedReductionTransition l E X n).app K) K
@@ -1354,7 +1347,7 @@ private theorem finish_from_projection_formula
       (fun n ↦ F.map ((sfDerivedReductionUnit l E X n).app K)) p
     · intro n
       dsimp only [sfDirectImageTransition, a, Iso.app_hom, Iso.app_inv]
-      simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+      simp only [Iso.hom_inv_id_app_assoc]
       rfl
     · intro n
       simp only [p, Iso.refl_hom, Category.id_comp]
@@ -1403,10 +1396,10 @@ theorem sfCompleteDirectImage_reduction
     IsSfDerivedComplete l E Y L.obj ∧
       ∀ n : ℕ, IsIso (sfDirectImageReductionComparison l E f L n) := by
   obtain ⟨p, hp, hprime⟩ := Nat.exists_infinite_primes (l + 1)
-  letI : Fact p.Prime := ⟨hprime⟩
+  have : Fact p.Prime := ⟨hprime⟩
   have hlp : l ≠ p := by omega
   obtain ⟨D⟩ := CompletedCoefficientPushforward.comparison l E f p hlp
-  letI := completed_derived_products l E f
+  have := completed_derived_products l E f
   exact finish_from_projection_formula l E f K hK
     (completed_image_complete l E f D K hK) (fun n ↦ sf_projection_formula l E f n K) L
 

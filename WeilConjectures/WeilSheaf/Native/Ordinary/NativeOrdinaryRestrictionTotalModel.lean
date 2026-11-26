@@ -43,12 +43,12 @@ private theorem exact_total_tensor_square
     F.mapDerivedCategory.map (Functor.LaxMonoidal.μ DerivedCategory.Q P T) ≫
       F.mapDerivedCategoryFactors.hom.app (P ⊗ T) ≫
       DerivedCategory.Q.map (F.mapCochainComplexμIso P T).inv := by
-  letI := F.exactClosedDerivedMonoidal
-  letI := CategoryTheory.Functor.mapHomotopyMonoidal F
-  haveI := CategoryTheory.Functor.derivedFactorsh_monoidal F
-  haveI := CategoryTheory.Functor.mapHomotopyFactors_monoidal F
-  haveI := CategoryTheory.ExactMonoidalEquivalenceDerived.quotientCompQh_monoidal (A := C)
-  haveI := CategoryTheory.ExactMonoidalEquivalenceDerived.quotientCompQh_monoidal (A := D)
+  let := F.exactClosedDerivedMonoidal
+  let := CategoryTheory.Functor.mapHomotopyMonoidal F
+  have := CategoryTheory.Functor.derivedFactorsh_monoidal F
+  have := CategoryTheory.Functor.mapHomotopyFactors_monoidal F
+  have := CategoryTheory.ExactMonoidalEquivalenceDerived.quotientCompQh_monoidal (A := C)
+  have := CategoryTheory.ExactMonoidalEquivalenceDerived.quotientCompQh_monoidal (A := D)
   let e := CategoryTheory.ExactMonoidalEquivalenceDerived.composeFactors
     (DerivedCategory.quotientCompQhIso C) (DerivedCategory.quotientCompQhIso D)
     (F.mapHomotopyCategoryFactors (.up ℤ)) F.mapDerivedCategoryFactorsh
@@ -62,7 +62,7 @@ private theorem exact_total_tensor_square
     erw [DerivedCategory.Qh.map_id]
     simp only [Category.id_comp, Iso.inv_hom_id_app]
     exact Category.comp_id _
-  haveI : NatTrans.IsMonoidal F.mapDerivedCategoryFactors.hom := by
+  have : NatTrans.IsMonoidal F.mapDerivedCategoryFactors.hom := by
     rw [← he]
     exact CategoryTheory.ExactMonoidalEquivalenceDerived.composeFactors_monoidal
       (DerivedCategory.quotientCompQhIso C) (DerivedCategory.quotientCompQhIso D)
@@ -171,19 +171,19 @@ theorem native_ordinary_restriction_total_model
     (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))
   let G := ProEtale.upperStar (WeilCoefficients.{u} l)
     (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))
-  letI : G.Braided :=
+  let : G.Braided :=
     { toMonoidal := inferInstance
       braided X Y := Functor.LaxBraided.braided (F := G) X Y }
-  letI : R.Monoidal := by
+  let : R.Monoidal := by
     dsimp only [R, ProEtale.adicUpperStar, Adjunction.modLeft]
     infer_instance
-  letI : R.PreservesFlat := native_adic_restriction_flat l
+  let : R.PreservesFlat := native_adic_restriction_flat l
     (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))
-  letI : R.IsLeftAdjoint :=
+  let : R.IsLeftAdjoint :=
     (ProEtale.adicUpperStarLowerStarAdjunction l
       (Scheme.Hom.geometricFiberMap j (comp_over j
         (Spec (CommRingCat.of k₀))))).isLeftAdjoint
-  letI := R.exactClosedDerivedMonoidal
+  let := R.exactClosedDerivedMonoidal
   have h := exact_total_tensor_square R P T
   have hfinal := exact_total_tensor_square_transport R.mapDerivedCategory f.hom g.hom
     ((dZ.tensorIso k₀ l).hom.app (M, N))

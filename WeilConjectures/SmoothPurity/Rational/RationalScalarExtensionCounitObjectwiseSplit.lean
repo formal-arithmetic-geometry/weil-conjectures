@@ -114,13 +114,13 @@ private theorem integral_restriction_retract
           ((integralScalarExtension l E F ι W).obj K.obj) ⟶ K.obj,
         i ≫ p = 𝟙 K.obj := by
   classical
-  letI : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W)
+  have : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W)
       AddCommGrpCat.{u + 1} := integralCoefficientAbSheafify.{u, u} W
-  letI : (AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
+  have : (AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
       AddCommGrpCat.{u + 1} := integralCoefficientAbLocallyBijective.{u, u} W
-  letI : EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0} _
-  letI := ι.toAlgebra
-  haveI : FiniteDimensional E F := Module.Finite.right ℚ_[l] E F
+  have : EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0} _
+  let := ι.toAlgebra
+  have : FiniteDimensional E F := Module.Finite.right ℚ_[l] E F
   let d := Module.finrank E F
   have hd : 0 < d := Module.finrank_pos
   let j : Fin d := ⟨0, hd⟩
@@ -131,8 +131,8 @@ private theorem integral_restriction_retract
     · exact (integralCompletedScalarMap_existsUnique l E F ι W).exists.choose_spec
     · exact (completedCoefficientMap_existsUnique l E F ι W).exists.choose_spec
   let R := rationalScalarModuleRestriction l E F ι W
-  haveI : PreservesFiniteLimits R := (rationalScalarModuleRestriction_exact l E F ι W).1
-  haveI : PreservesFiniteColimits R := (rationalScalarModuleRestriction_exact l E F ι W).2
+  have : PreservesFiniteLimits R := (rationalScalarModuleRestriction_exact l E F ι W).1
+  have : PreservesFiniteColimits R := (rationalScalarModuleRestriction_exact l E F ι W).2
   let S := integralOrdinaryScalar l E F ι W
   obtain ⟨β⟩ := completedIntegralFiniteFree.{u, u} l E W F ι φ
     (integralCompletedScalarMap_projection l E F ι W)
@@ -157,7 +157,7 @@ private theorem integral_restriction_retract
         exact congrArg (fun k ↦ (SheafOfModules.restrictScalars _).map
           (eqToHom (integralOrdinaryScalar_obj l E F ι W M)) ≫ k)
           (SheafOfModules.scalarExtensionIso_naturality φ d β.symm f))
-  letI : PreservesFiniteLimits
+  have : PreservesFiniteLimits
       (finitePowerFunctor (A := integralTowerModules l E W) d) :=
     ⟨fun _ _ _ ↦ inferInstance⟩
   let δ := CategoryTheory.Functor.mapDerivedCategoryCompIso S R ≪≫

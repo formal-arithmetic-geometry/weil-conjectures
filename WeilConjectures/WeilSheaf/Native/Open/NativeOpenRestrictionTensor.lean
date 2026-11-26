@@ -117,6 +117,7 @@ private lemma tensor_str (A B : ProEtaleWeilSheaf k₀ l Z) :
   exact Endofunctor.IsoAlgebra.mk_str _ _
 
 -- Retain the existing open-immersion binder of the public interface.
+set_option linter.unusedSectionVars false in
 /-- The balanced restriction/tensor comparison `j^* (N ⊗ M) ≅ j^* N ⊗ j^* M` lifts to Weil
 sheaves, with underlying map the comparison of the underlying `ℓ`-adic sheaves. -/
 theorem native_open_restriction_tensor :

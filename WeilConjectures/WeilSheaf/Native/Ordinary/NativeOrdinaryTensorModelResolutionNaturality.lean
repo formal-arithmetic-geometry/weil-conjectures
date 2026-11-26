@@ -52,14 +52,13 @@ private theorem naturality_of_transport {D : Type v} [Category.{w} D]
     _ = m ≫ (tq ≫ tg) := by rw [htotal]
     _ = q ≫ (e ≫ tg) := by rw [← Category.assoc, ← hsource, Category.assoc]
 
--- Preserve the supplied names of hypotheses that only constrain the proof.
 /-- Resolution transport data imply naturality of the extended ordinary model. -/
 theorem native_ordinary_tensor_model_resolution_naturality
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×
       DerivedCategory (ProEtale.AdicSheaf l Y) ⥤
       DerivedCategory (ProEtale.AdicSheaf l Y))
-    (R : NativeHomRepresentatives (ordinaryIhomBifunctor l Y) H)
+    (_R : NativeHomRepresentatives (ordinaryIhomBifunctor l Y) H)
     (S : CoefficientClosedStructure H)
     (model : ∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
       (_ : NativeOrdinaryKFlat l Y P),
@@ -71,8 +70,8 @@ theorem native_ordinary_tensor_model_resolution_naturality
         DerivedCategory.Q.obj (ordinaryTensorTotal l Y P Q))
     (htransport : ∀ (P Q K : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
       (hP : NativeOrdinaryKFlat l Y P)
-      (hK : NativeOrdinaryKFlat l Y K)
-      (q : K ⟶ Q) (hq : QuasiIso q),
+      (_hK : NativeOrdinaryKFlat l Y K)
+      (q : K ⟶ Q) (_hq : QuasiIso q),
       S.tensor.map
           (X := (DerivedCategory.Q.obj K, DerivedCategory.Q.obj P))
           (Y := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P))
@@ -84,15 +83,15 @@ theorem native_ordinary_tensor_model_resolution_naturality
     (hresolution : ∀ (Q Q' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
       (g : Q ⟶ Q'),
       ∃ (K K' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
-        (hK : NativeOrdinaryKFlat l Y K)
-        (hK' : NativeOrdinaryKFlat l Y K')
+        (_hK : NativeOrdinaryKFlat l Y K)
+        (_hK' : NativeOrdinaryKFlat l Y K')
         (q : K ⟶ Q) (q' : K' ⟶ Q') (u : K ⟶ K'),
         QuasiIso q ∧ QuasiIso q' ∧ Nonempty (Homotopy (u ≫ q') (q ≫ g)))
     (hkflat : ∀ (P Q P' Q' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
       (hP : NativeOrdinaryKFlat l Y P)
       (hP' : NativeOrdinaryKFlat l Y P')
-      (hQ : NativeOrdinaryKFlat l Y Q)
-      (hQ' : NativeOrdinaryKFlat l Y Q')
+      (_hQ : NativeOrdinaryKFlat l Y Q)
+      (_hQ' : NativeOrdinaryKFlat l Y Q')
       (f : P ⟶ P') (g : Q ⟶ Q'),
       S.tensor.map
           (X := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P))

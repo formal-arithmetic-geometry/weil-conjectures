@@ -203,8 +203,7 @@ private noncomputable def diagramSiteModuleArrow
           map_add' := map_add _
           map_smul' := by
             intro r x
-            have H := F.val.map_smul (Prod.mkHom a.unop (𝟙 U.unop)).op r x
-            simpa [constantRing, CategoryTheory.Prod.snd] using H }
+            simp [constantRing, CategoryTheory.Prod.snd] }
       naturality := by
         intro U V f
         ext x

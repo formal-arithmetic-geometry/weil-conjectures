@@ -43,11 +43,11 @@ private theorem transported_braiding
     let μ := transportedTensorComparison E
     E.functor.map (β_ X Y).hom ≫ μ.hom.app (Y, X) =
       μ.hom.app (X, Y) ≫ (β_ (E.functor.obj X) (E.functor.obj Y)).hom := by
-  letI := Monoidal.transport E.symm
-  letI := transportedSymmetric E
-  letI : E.functor.Monoidal :=
+  let := Monoidal.transport E.symm
+  let := transportedSymmetric E
+  let : E.functor.Monoidal :=
     inferInstanceAs (Monoidal.equivalenceTransported E.symm).inverse.Monoidal
-  letI : E.functor.Braided :=
+  let : E.functor.Braided :=
     inferInstanceAs (Monoidal.equivalenceTransported E.symm).inverse.Braided
   change E.functor.map (β_ X Y).hom ≫ Functor.OplaxMonoidal.δ E.functor Y X =
     Functor.OplaxMonoidal.δ E.functor X Y ≫
@@ -108,11 +108,11 @@ private theorem coefficientSymmetry_model_native
         (β_ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom =
       DerivedCategory.Q.map (CochainComplex.Monoidal.braiding P Q).hom ≫
         (c.tensorIso Q P (Or.inr hP)).hom := by
-  letI := SheafOfModules.isMonoidal_W_independentCoefficients R
-  letI := SheafOfModules.monoidalCategory R
-  letI := SheafOfModules.symmetricCategory R
-  letI := S.monoidal
-  letI := β
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
+  let := S.monoidal
+  let := β
   obtain ⟨s, hs, hm⟩ := c.symmetry_model P Q hP hQ
   have he : s.hom = (CochainComplex.Monoidal.braiding P Q).hom := by
     apply HomologicalComplex.hom_ext
@@ -159,13 +159,13 @@ theorem nativeRingedSwapComplex_model
     (nativeWeilRingedTensorModel b T adj A SB TB βB cB Q P hQ).hom ≫
       DerivedCategory.Q.map (nativeRingedSwapComplex b T adj A P Q).hom := by
   classical
-  letI := SheafOfModules.isMonoidal_W_independentCoefficients b.R
-  letI := SheafOfModules.monoidalCategory b.R
-  letI := SheafOfModules.symmetricCategory b.R
-  letI := SB.monoidal
-  letI := βB
-  letI := nativeWeilRingedMonoidal b SB
-  letI := nativeWeilRingedSymmetric b SB βB
+  let := SheafOfModules.isMonoidal_W_independentCoefficients b.R
+  let := SheafOfModules.monoidalCategory b.R
+  let := SheafOfModules.symmetricCategory b.R
+  let := SB.monoidal
+  let := βB
+  let := nativeWeilRingedMonoidal b SB
+  let := nativeWeilRingedSymmetric b SB βB
   let E := nativeWeilRingedDerivedEquivalence b
   let Ec := b.native.functor.mapHomologicalComplex (.up ℤ)
   let τ := b.native.functor.mapDerivedCategoryFactors

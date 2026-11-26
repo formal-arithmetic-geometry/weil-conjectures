@@ -38,7 +38,7 @@ lower truncations lift to a map `c : E ⟶ K` to the derived limit. -/
 theorem pointwise_truncation_limit_exists (X : RingedSpace.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     (E : DerivedCategory (SheafOfModules.{u} (moduleRings X)))
-    (hlocal : ∀ x : X, ∃ (b : ℤ → ℤ) (B : Set (Opens X)),
+    (_hlocal : ∀ x : X, ∃ (b : ℤ → ℤ) (B : Set (Opens X)),
       (∀ U ∈ B, x ∈ U) ∧
       (∀ V : Opens X, x ∈ V → ∃ U ∈ B, U ≤ V) ∧
       (∀ (m : ℤ) (p : ℕ) (U : Opens X), U ∈ B → b m < (p : ℤ) →

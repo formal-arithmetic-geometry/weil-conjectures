@@ -318,7 +318,8 @@ variable
 
 attribute [local irreducible] NativeIsKFlat
 
-
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- The normalized sheaf adjunction and balanced tensor comparisons, with
 preservation of categorical two-sided K-flatness. -/
 theorem native_open_sheaf_tensor_existence :

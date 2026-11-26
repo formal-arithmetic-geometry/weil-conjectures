@@ -40,9 +40,9 @@ private theorem ringedSwap_summand
         (P.X p ⊗ Q.X q) (((coefficientTotalTensor.{u, u, u} J R).obj (Q, P)).X n)).zsmul
         ((p * q).negOnePow : ℤ) ((β_ (P.X p) (Q.X q)).hom ≫
           RingedForgetTensorTransposition.tensorSummand J R Q P q p n hqp) := by
-  letI := SheafOfModules.isMonoidal_W_independentCoefficients R
-  letI := SheafOfModules.monoidalCategory R
-  letI := SheafOfModules.symmetricCategory R
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
   exact CochainComplex.Monoidal.ι_braiding_hom (K := P) (L := Q) p q n hpq
 
 -- Do the composition and scalar algebra with abstract morphisms, before specializing
@@ -102,9 +102,9 @@ theorem nativeRingedSwapComplex_summand
       ((p * q).negOnePow : ℤ) •
         ((nativeRingedSwapUnderived b T adj A (P.X p) (Q.X q)).hom ≫
           HomologicalComplex.ιMapBifunctor P Q T (.up ℤ) p q n hpq) := by
-  letI := SheafOfModules.isMonoidal_W_independentCoefficients b.R
-  letI := SheafOfModules.monoidalCategory b.R
-  letI := SheafOfModules.symmetricCategory b.R
+  let := SheafOfModules.isMonoidal_W_independentCoefficients b.R
+  let := SheafOfModules.monoidalCategory b.R
+  let := SheafOfModules.symmetricCategory b.R
   let E := b.native.functor
   let Ec := E.mapHomologicalComplex (.up ℤ)
   let s := nativeRingedSwapUnderived b T adj A (P.X p) (Q.X q)

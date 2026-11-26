@@ -160,8 +160,8 @@ theorem native_ordinary_tensor_model_resolution_transport
     (hkflat : ∀ (P Q P' Q' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
       (hP : NativeOrdinaryKFlat l Y P)
       (hP' : NativeOrdinaryKFlat l Y P')
-      (hQ : NativeOrdinaryKFlat l Y Q)
-      (hQ' : NativeOrdinaryKFlat l Y Q')
+      (_hQ : NativeOrdinaryKFlat l Y Q)
+      (_hQ' : NativeOrdinaryKFlat l Y Q')
       (f : P ⟶ P') (g : Q ⟶ Q'),
       S.tensor.map
           (X := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P))
@@ -177,12 +177,12 @@ theorem native_ordinary_tensor_model_resolution_transport
         DerivedCategory.Q.obj (ordinaryTensorTotal l Y P Q),
       (∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
         (hP : NativeOrdinaryKFlat l Y P)
-        (hQ : NativeOrdinaryKFlat l Y Q),
+        (_hQ : NativeOrdinaryKFlat l Y Q),
         extendedModel P Q hP = model P Q hP) ∧
       (∀ (P Q K : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
         (hP : NativeOrdinaryKFlat l Y P)
-        (hK : NativeOrdinaryKFlat l Y K)
-        (q : K ⟶ Q) (hq : QuasiIso q),
+        (_hK : NativeOrdinaryKFlat l Y K)
+        (q : K ⟶ Q) (_hq : QuasiIso q),
         S.tensor.map
             (X := (DerivedCategory.Q.obj K, DerivedCategory.Q.obj P))
             (Y := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P))

@@ -86,6 +86,8 @@ lemma exists_iso_affineSpace_geometricFiber_of_isPullback :
     (Equiv.ofUnique (ULift.{u} (Fin 1)) PUnit.{u + 1}), ?_⟩
   simp [NativeBaseChange.geometricMap]
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 include hπ in
 /-- **Homotopy invariance for lisse Weil sheaves**. For the trivial line bundle
 `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` and a lisse Weil sheaf `L` on `X`, the unit `L ⟶ Rπ_* π^* L` of

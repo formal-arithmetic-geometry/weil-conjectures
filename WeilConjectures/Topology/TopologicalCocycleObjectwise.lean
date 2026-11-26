@@ -66,7 +66,7 @@ theorem exists_topological_cocycle_objectwise
         (φ : J.cocomplex ⟶
           ((TopCat.Sheaf.pushforwardAb f).mapHomologicalComplex
             (ComplexShape.up ℕ)).obj I.cocomplex)
-        (hφ : J.ι.f 0 ≫ φ.f 0 =
+        (_hφ : J.ι.f 0 ≫ φ.f 0 =
           (TopCat.Sheaf.pushforwardAb f).map (I.ι.f 0))
         (s : (presheafToSheaf (Opens.grothendieckTopology X)
           AddCommGrpCat.{u}).obj
@@ -78,7 +78,7 @@ theorem exists_topological_cocycle_objectwise
           (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free) ⟶
             I.cocomplex.X p)
         (hz : z ≫ I.cocomplex.d p (p + 1) = 0)
-        (hsz : a ≫ (TopCat.Sheaf.pushforwardAb f).map z = s ≫ φ.f p),
+        (_hsz : a ≫ (TopCat.Sheaf.pushforwardAb f).map z = s ≫ φ.f p),
         τ (J.extMk s (p + 1) rfl hs) = I.extMk z (p + 1) rfl hz := by
   let HX : ℕ → (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤
       AddCommGrpCat.{u}) := fun n => Sheaf.cohomologyPresheafFunctor

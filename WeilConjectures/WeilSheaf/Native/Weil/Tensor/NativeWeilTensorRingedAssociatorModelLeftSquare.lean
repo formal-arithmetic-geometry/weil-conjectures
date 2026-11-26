@@ -92,10 +92,10 @@ theorem nativeRingedAssociatorModel_left_square
       (μ.hom.app (q.obj P, q.obj Q) ▷ E.functor.obj (q.obj N)) ≫
       ((τ.hom.app P ⊗ₘ τ.hom.app Q) ⊗ₘ τ.hom.app N) = eL ≫ lA.hom) := by
   classical
-  letI := SheafOfModules.isMonoidal_W_independentCoefficients b.R
-  letI := SheafOfModules.monoidalCategory b.R
-  letI := SB.monoidal
-  letI := nativeWeilRingedMonoidal b SB
+  let := SheafOfModules.isMonoidal_W_independentCoefficients b.R
+  let := SheafOfModules.monoidalCategory b.R
+  let := SB.monoidal
+  let := nativeWeilRingedMonoidal b SB
   let E := nativeWeilRingedDerivedEquivalence b
   let Ec := b.native.functor.mapHomologicalComplex (.up ℤ)
   let τ := b.native.functor.mapDerivedCategoryFactors
