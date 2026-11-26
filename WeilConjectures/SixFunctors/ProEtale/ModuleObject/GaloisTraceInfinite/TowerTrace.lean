@@ -96,6 +96,7 @@ lemma levelAction_app_comp_levelAction_app (j : T.J) (a b : T.Γ j) :
     (T.levelAction Λ j a).app M ≫ (T.levelAction Λ j b).app M = (T.levelAction Λ j (b * a)).app M :=
   CondensedRing.galoisAction_app_comp_galoisAction_app Λ (T.ρ_g j) (T.ρ_mul j) a b M
 
+omit [WeaklyEtale ginf] in
 lemma levelUnit_app_comp_transport {j j' : T.J} (h : j ≤ j') :
     (T.levelUnit Λ j).app M ≫ T.transport Λ M h = (T.levelUnit Λ j').app M := by
   apply (Mod.forget _).map_injective
@@ -118,6 +119,7 @@ lemma levelUnit_app_comp_infTransport (j : T.J) :
   erw [CategoryTheory.Functor.map_id, id_comp]
   rw [← NatTrans.comp_app_assoc, upperStarLowerStarAdjunction_unit_comp_upperStarLowerStarHom]
 
+omit [WeaklyEtale ginf] in
 lemma levelAction_app_comp_transport {j j' : T.J} (h : j ≤ j') (a : T.Γ j) (b : T.Γ j')
     (hab : T.t h ≫ T.ρ j a = T.ρ j' b ≫ T.t h) :
     (T.levelAction Λ j a).app M ≫ T.transport Λ M h =

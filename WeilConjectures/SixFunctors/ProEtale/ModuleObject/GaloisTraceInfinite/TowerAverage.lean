@@ -120,6 +120,7 @@ lemma mapHomologicalComplex_unit_app_f_eq_infUnit (n : ℤ) :
   rw [Adjunction.mapHomologicalComplex_unit_app_f]
   rfl
 
+omit [WeaklyEtale ginf] in
 /-- The degree `n` component of the unit transport on complexes. -/
 lemma mapHomologicalComplex_unitTransport_app_f (σ : Yinf ⟶ Yinf) (hσ : σ ≫ ginf = ginf)
     (n : ℤ) :

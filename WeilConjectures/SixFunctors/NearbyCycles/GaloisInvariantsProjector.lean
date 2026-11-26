@@ -142,6 +142,7 @@ lemma card_smul_normTrace
   rw [normTrace, normalizedTrace, ← Preadditive.comp_nsmul, ← Category.id_comp (inv _),
     ← Preadditive.nsmul_comp, IsIso.hom_inv_id, Category.comp_id]
 
+omit [WeaklyEtale ginf] in
 /-- The normalized trace followed by the unit at the level `j` is the average of the Galois
 action: `|Γ_j| • (t_j ≫ u_j) = ∑ a, a`. -/
 lemma card_smul_normTrace_comp_levelUnit

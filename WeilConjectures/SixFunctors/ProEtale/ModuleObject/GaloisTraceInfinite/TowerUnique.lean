@@ -378,6 +378,7 @@ lemma mapHomologicalComplex_app_f_aux
     ((NatTrans.mapHomologicalComplex α _).app K).f n = α.app (K.X n) :=
   NatTrans.mapHomologicalComplex_app_f α _ K n
 
+omit [WeaklyEtale ginf] in
 /-- The unit transport along an automorphism `σ` of `Y_∞` over `X`, applied termwise to `M∞`, is
 `GaloisTower.infAction`. -/
 lemma unitTransport_app_f (σ : Yinf ⟶ Yinf) (hσ : σ ≫ ginf = ginf) (n : ℤ) :

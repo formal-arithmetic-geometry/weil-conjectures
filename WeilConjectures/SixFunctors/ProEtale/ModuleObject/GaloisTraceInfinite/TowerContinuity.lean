@@ -88,6 +88,7 @@ noncomputable def complexCocone : Cocone (T.complexDiagram Λ K) where
       naturality _ _ f := HomologicalComplex.hom_ext _ _ fun n ↦
         (T.transport_comp_infTransport Λ (K.X n) (leOfHom f)).trans (comp_id _).symm }
 
+omit [WeaklyEtale ginf] in
 lemma complexDiagram_map_f {j j' : T.J} (f : j ⟶ j') (n : ℤ) :
     ((T.complexDiagram Λ K).map f).f n = T.transport Λ (K.X n) (leOfHom f) := rfl
 

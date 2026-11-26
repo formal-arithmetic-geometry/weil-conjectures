@@ -110,7 +110,8 @@ variable (Y : AlgebraicGeometry.Scheme.{t})
   [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
     AddCommGrpCat.{max u (t + 1)}]
 
-omit [EssentiallySmall.{t + 1} Y.ProEt] in
+-- omitting `EssentiallySmall` here would make the downstream theorems using this one warn
+set_option linter.unusedSectionVars false in
 private theorem total_generator_ext (P Q I : CochainComplex (Modules.{t, u} Y R) ℤ)
     {f g : (coefficientTotalTensor.{u, t + 1, t}
       (AlgebraicGeometry.Scheme.ProEt.topology Y) R).obj (P, Q) ⟶ I}
@@ -144,7 +145,8 @@ attribute [local irreducible] totalTensor totalPair pair projection evaluate hom
 
 open CategoryTheory.RingedDerivedNative
 
-omit [EssentiallySmall.{t + 1} Y.ProEt] in
+-- omitting `EssentiallySmall` here would make the downstream theorems using this one warn
+set_option linter.unusedSectionVars false in
 -- Compare the two Hom-complex models without unfolding the derived internal Hom.
 /-- A chain map `φ : P ⟶ Hom(L, I)` between flat complexes uncurries to a chain map
 `a : P ⊗ L ⟶ I` given on generators by unsigned evaluation, `x ⊗ y ↦ φ(x)(y)`, and after

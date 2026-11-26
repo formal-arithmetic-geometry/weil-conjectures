@@ -1027,7 +1027,8 @@ theorem hasIndConstructibleExtBound_continuousMapRingObj (E : Type) [NormedField
   .of_continuity (hasConstructibleExtContinuity_continuousMapRingObj ℓ E aX)
     (hasUniformConstructibleExtBound_continuousMapRingObj ℓ E aX hk)
 
-omit [Fact (ringChar k ≠ ℓ)] in
+-- omitting `Fact (ringChar k ≠ ℓ)` here would make the downstream theorems using this one warn
+set_option linter.unusedSectionVars false in
 /-- For the coefficient ring `E` of a finite extension
 `E` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`, `k` finite or separably closed, a
 constructible sheaf placed in degree `0` is compact in `Loc(Dᵇc(X)⟦E⟧)`. -/
@@ -1062,7 +1063,8 @@ theorem hasIndConstructibleExtBound_padicIntegersRingObj (E : Type) [Field E]
   .of_continuity (hasConstructibleExtContinuity_padicIntegersRingObj ℓ E aX)
     (hasUniformConstructibleExtBound_padicIntegersRingObj ℓ E aX hk)
 
-omit [Fact (ringChar k ≠ ℓ)] in
+-- omitting `Fact (ringChar k ≠ ℓ)` here would make the downstream theorems using this one warn
+set_option linter.unusedSectionVars false in
 /-- Compactness of constructible sheaves with integral coefficients: for the coefficient ring
 `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`, `k`
 finite or separably closed, a constructible sheaf placed in degree `0` is compact in
@@ -1097,7 +1099,8 @@ theorem hasIndConstructibleExtBound_padicAlgClRingObj {X : Scheme.{u}}
   .of_continuity (hasConstructibleExtContinuity_padicAlgClRingObj ℓ aX)
     (hasUniformConstructibleExtBound_padicAlgClRingObj ℓ aX hk)
 
-omit [Fact (ringChar k ≠ ℓ)] in
+-- omitting `Fact (ringChar k ≠ ℓ)` here would make the downstream theorems using this one warn
+set_option linter.unusedSectionVars false in
 /-- For the coefficient ring `ℚ̄_ℓ` and a separated
 finite-type `k`-scheme `X`, `k` finite or separably closed, a constructible sheaf placed in degree
 `0` is compact in `Loc(Dᵇc(X)⟦ℚ̄_ℓ⟧)`. -/
