@@ -10,8 +10,10 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 import WeilConjectures.SmoothPurity.Coefficient.CoefficientTotalTensorMapGenerators
 
 /-! Pure-generator component calculation for the ordinary quotient/pullback tensor square.
-Source: Stacks Tags 03EL, 06YY and 07A4.
-(blueprint: lem-pur-finite-pullback-tensor-ordinary-quotient-square-pure).
+
+## References
+
+* Stacks Project, Tags 03EL, 06YY and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -318,10 +320,7 @@ private theorem ordinary_quotient_square_calculus {X Y : Scheme.{u}} (f : X ⟶ 
 set_option linter.unusedVariables false in
 /-- Equality of the two comparison composites in one cochain degree.
 This is the component calculation used to prove the chain-map equality; it is the
-ordinary pure-tensor generator calculation after applying the stated normalizations.
-Source: Stacks Tags 03EL, 06YY and 07A4.
-(blueprint: lem-pur-finite-pullback-tensor-ordinary-quotient-square-pure).
--/
+ordinary pure-tensor generator calculation after applying the stated normalizations. -/
 theorem finitePullbackTensor_ordinary_quotient_square_pure {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]

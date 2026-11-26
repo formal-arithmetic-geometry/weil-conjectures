@@ -17,22 +17,31 @@ import Mathlib.RingTheory.SurjectiveOnStalks
 import Mathlib.RingTheory.TensorProduct.Quotient
 import WeilConjectures.RingTheory.LocalCompletionQuotient
 
+/-!
+# Completion of a prime localization under a surjective base change
+
+For a surjection `R → B` with `R` Noetherian and a prime `q` of `B` over `Q`, the completion of
+`B_q` is `B ⊗[R] R_Q^∧`.
+
+## Implementation details
+
+The induced map `R_Q → B_q` is surjective with kernel extended from the kernel of `R → B`, so
+the completion of `B_q` is a quotient of the completion of `R_Q`, which is identified with the
+tensor product.
+
+## References
+
+* [Stacks, Tag 00CT]
+* [Stacks, Tag 00MA], parts (2) and (3)
+-/
+
 @[expose] public section
 
 universe u v
 
 namespace AdicCompletion
 
-/-- Completion of a prime localization commutes with a surjective change of base.
-Source: Stacks Project, Algebra, Tags 00CT and 00MA (2), (3).
-(blueprint: lem-weil-pbc-completion-surjective-base-change)
-
-Proof: The induced local-ring map is surjective and has kernel the extension of the
-kernel of the base map. Its maximal ideal maps onto the target maximal ideal.
-The completion quotient theorem therefore identifies the target completion with the
-source completion modulo the extended kernel, compatibly with the base-ring maps.
-The tensor-quotient equivalence and the first isomorphism theorem for the surjective
-base map identify this quotient with the displayed tensor product. -/
+/-- Completion of a prime localization commutes with a surjective change of base. -/
 theorem nonempty_surjective_baseChange
     (R : Type u) (B : Type v) [CommRing R] [CommRing B] [Algebra R B]
     [IsNoetherianRing R] (hf : Function.Surjective (algebraMap R B))

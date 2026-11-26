@@ -14,7 +14,10 @@ public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 /-!
 # Descent in degree from generators of the irrelevant quotient
 
-Source: the degree-component argument in `lem-sc-p1-graded-nakayama-generation`, step 2.
+If homogeneous elements of a graded `k[x₀,x₁]`-module `N` span `N / (x₀,x₁)N` over `k`, then
+every homogeneous element of degree `j` is an element of their span plus `x₀ a + x₁ b` with
+`a, b` homogeneous of degree `j - 1` (`MvPolynomial.homogeneous_decomposition_of_quotient_span`).
+This is the inductive step of the graded Nakayama lemma; no finiteness assumption is needed.
 -/
 
 @[expose] public section
@@ -24,17 +27,8 @@ universe u v
 namespace MvPolynomial
 
 /-- Generation of the irrelevant quotient yields a one-degree descent for homogeneous elements.
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, expanded graded Nakayama argument,
-steps 1–2 (blueprint: lem-sc-p1-graded-quotient-span-descent).
-
-Proof: write `Q` for the polynomial span of the homogeneous lifts. Lift a linear expression
-for the quotient class of `x` to `q ∈ Q`. Then `x - q` belongs to `(x₀,x₁)N`, so it is
-`x₀ • a + x₁ • b`. The submodule `Q` is homogeneous: expand polynomial coefficients in an
-expression in its homogeneous generators, and use additivity of the component projection.
-Project the equation to degree `j`. The projection of `q` still belongs to `Q`, while the
-projection of `xᵢ • a` is `xᵢ` times the degree `j-1` projection of `a`. These projections of
-`a,b` supply the desired decomposition. This argument requires no finite-generation assumption.
--/
+A homogeneous `x` of degree `j` is `q + x₀ • a + x₁ • b` with `q` in the span of the lifts and
+`a, b` homogeneous of degree `j - 1`. -/
 theorem homogeneous_decomposition_of_quotient_span {k : Type u} [Field k]
     {N : Type v} [AddCommGroup N] [Module (MvPolynomial (Fin 2) k) N]
     [Module k N] [IsScalarTower k (MvPolynomial (Fin 2) k) N]

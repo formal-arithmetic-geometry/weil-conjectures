@@ -11,8 +11,12 @@ import WeilConjectures.SmoothPurity.Finite.FinitePullbackTensorUnitExt
 
 /-! # A unit-generator criterion for the ordinary evaluation square
 
-Source: Stacks Tags 07A4, 0941 and 03D2.
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-ext).
+Two maps out of the evaluated pulled-back tensor product of complexes agree as soon as they
+agree on the images of the adjunction units applied to elementary tensors.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941 and 03D2.
 -/
 
 @[expose] public noncomputable section
@@ -55,16 +59,9 @@ attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
   SheafOfModules.monoidalCategory
 
 -- Keep the target complex abstract while transposing through the evaluation mate.
-/-- A unit-generator criterion for the evaluated pullback tensor square.
-Source: Stacks Tags 07A4, 0941 and 03D2
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-ext).
-Proof: precompose with the inverse evaluation mate and the inverse pulled-back
-Y tensor-evaluation comparison. Use finite adjunction unit-generator
-extensionality. The inverse-unit formula identifies each test element with the
-evaluated sequence adjunction unit, where the assumed equality applies. This
-criterion has arbitrary target H and arbitrary maps a,k; it proves no tensor
-normalization itself.
--/
+/-- A unit-generator criterion for the evaluated pullback tensor square: maps `a` and `k`
+into an arbitrary complex `H` that agree on the adjunction units of elementary tensors are
+identified through the evaluation and tensor-evaluation comparisons. -/
 theorem completedPullbackTensor_evaluation_ext {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     (c : integralOperationsLevelPullback l E f n ≅

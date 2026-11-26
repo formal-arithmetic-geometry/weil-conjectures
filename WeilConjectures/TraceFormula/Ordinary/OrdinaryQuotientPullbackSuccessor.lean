@@ -13,7 +13,12 @@ import all WeilConjectures.TraceFormula.Coherent.CoherentQuotientOrdinaryLift
 
 /-! # Successor compatibility of normalized ordinary pullback comparisons
 
-Source: Stacks 03D2, 0941 and 099N(5), strict quotient-system transitions.
+Normalized level comparisons of the ordinary quotient pullback intertwine the two successor
+transition maps (`ordinaryQuotientPullback_successor`).
+
+## References
+
+* Stacks Project, Tags 03D2, 0941, 099N
 -/
 
 @[expose] public noncomputable section
@@ -318,27 +323,7 @@ attribute [local irreducible] integralOperationsPullbackGenerator
   unrestrictedIntegralTensorSection
 
 -- The generator-level computation through the pullback tower is expensive.
-/-- Normalized level comparisons intertwine the two actual successor maps.
-Source: Stacks sites-modules.tex, inverse-image adjunction (03D7), and
-sites-cohomology.tex, strict sequence limits (0941), applied to the finite
-quotient system of proetale.tex, 099N(5).
-(blueprint: lem-trf-ordinary-quotient-pullback-successor).
-
-Proof: conjugate the source successor by the two level comparisons. Local
-surjectivity of the completed coefficient projection makes completed-linear maps
-between the finite modules finite-linear. The finite inverse-image adjunction
-and the scalar-reduction adjunction detect their equality on pullback images of
-1 tensor x. For each x, the ordinary adjunction unit followed by the inverse-limit
-projections gives compatible sequence sections. Their finite evaluations are
-1 tensor x by M.unit_tensor. Naturality of the sequence inverse-image unit gives
-compatible pullback generators of these sections. The normalization of e sends
-them to the finite pullback generators of 1 tensor x, so the conjugated source
-successor sends the higher generator to the lower one. The defining generator
-equation of integralOperationsPullbackTransition and the tensor formula for
-unrestrictedIntegralTransition give the same result, since coefficient reduction
-preserves 1. Equality on these generators proves the conjugated square, and
-cancellation proves the assertion. The argument is degreewise, includes n=0 and
-zero terms, and uses no boundedness or flatness assumption. -/
+/-- Normalized level comparisons intertwine the two actual successor maps. -/
 theorem ordinaryQuotientPullback_successor {X Y : Scheme.{t}} (f : X ⟶ Y)
     (M : CompletionUnit.OrdinaryModel l E Y)
     (P : CochainComplex (scalarReductionSource l E Y) ℤ) :

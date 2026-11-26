@@ -10,8 +10,13 @@ public import WeilConjectures.SmoothPurity.FinitePullbackTensorRep.FinitePullbac
 
 /-! # The chain map of the intrinsic tensor comparison
 
-Source: Stacks Tags 03EL, 06YY and 07A4.
-(blueprint: lem-pur-finite-pullback-tensor-chain-map-formula).
+The underlying chain map of the explicit intrinsic pullback tensor isomorphism is the
+threefold composite of the inverse realization, the inverse ordinary total comparison and
+the tensor of the two realizations.
+
+## References
+
+* [Stacks, Tags 03EL, 06YY and 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -51,12 +56,7 @@ attribute [local implicit_reducible] FinitePullbackTensorRep.pull
 attribute [local implicit_reducible] finiteIntrinsicDerivedTensor coefficientTotalTensor
   FinitePullbackTensorRep.totalTensor
 
-/-- The underlying map of the explicit intrinsic chain isomorphism.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-pur-finite-pullback-tensor-chain-map-formula).
-Proof: the isomorphism is defined as the inverse realization on the total tensor,
-the inverse ordinary total comparison, and the tensor of the two realizations.
-Taking its hom gives precisely this threefold composite. -/
+/-- The underlying map of the explicit intrinsic chain isomorphism. -/
 theorem finitePullbackTensorChainIso_hom {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P Q : CochainComplex (normalizedDVRModules l E Y n) ℤ) :
     letI : (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).Additive :=

@@ -34,15 +34,7 @@ private theorem fieldContractible (k : Type u) [Field k] [IsAlgClosed k] :
       Submodule.smul_mem (Submodule.span k ({1} : Set k)) x
         (Submodule.subset_span (Set.mem_singleton 1))
 
-/-- A global compatible root basis on a scheme over an algebraically closed field.
-Source: the root tower construction in the Tate twist unit, geometric-field case.
-(blueprint: lem-sf-geometric-tate-line-trivialization)
-
-Proof: the field is weakly contractible. Choose a primitive root of order ell and
-successively lift along ell-th power maps. Distinct powers have invertible
-differences, including after applying the structure map to global sections.
-The existing exponentiation basis therefore gives an isomorphism of the whole
-constant residue and root diagrams, including their transition maps. -/
+/-- A global compatible root basis on a scheme over an algebraically closed field. -/
 private theorem rootDiagram (k : Type u) [Field k] [IsAlgClosed k]
     (X : Scheme.{u}) [X.Over (Spec (.of k))]
     (l : ℕ) [Fact l.Prime] (hl : IsUnit (l : k)) :
@@ -97,16 +89,7 @@ private def unoverIso
         exact congrArg (fun f ↦ f.val.app (i V)) e.inv_hom_id }
 
 /-- Every signed completed coefficient Tate line has a global basis over a
-geometric field. The basis need not respect arithmetic Frobenius.
-Source: the root-tower construction and scalar extension of a rank-one basis.
-(blueprint: lem-sf-geometric-tate-line-trivialization)
-
-Proof: use the global compatible root diagram. Restrict to the terminal object
-of the pro-etale site and compare its root and coefficient diagrams. Taking
-limits gives a basis of the completed integral root module. Extend scalars to
-the given finite coefficient field and take signed powers of the basis. Finally
-restriction to the terminal slice loses no sections or arrows, so the slice
-isomorphism gives an isomorphism of the original module sheaves. -/
+geometric field. The basis need not respect arithmetic Frobenius. -/
 theorem integral_line_trivial (k : Type u) [Field k] [IsAlgClosed k]
     (X : Scheme.{u}) [X.Over (Spec (.of k))]
     (l : ℕ) [Fact l.Prime] (hl : IsUnit (l : k))

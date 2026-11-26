@@ -17,9 +17,16 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Direct.ProEtaleDirectImageRest
 
 /-! # Normalization of the native compact-support system
 
-The native output preserves normalized coefficient systems by the finite scalar
-comparison and quotient cocycle.
-(blueprint: lem-weil-compact-support-native-system-normalized).
+The native compact-support system (open extension followed by proper direct image) of the
+reduction of an integral constructible complex is a normalized coefficient sequence.
+
+## Implementation details
+
+The quotient cocycle identifies the input transition adjunct with an isomorphism, and the finite
+compact-support scalar comparison identifies the output transition adjunct with a composite of
+two isomorphisms. Evaluation naturality transports this back to the system transition; the
+direct quotient restriction and the sequence-site restriction have identical horizontal section
+maps, so their derived transition isomorphism transfers the resulting bijection.
 -/
 
 @[expose] public noncomputable section
@@ -190,16 +197,7 @@ variable (l : ℕ) [Fact l.Prime]
   (c : Compactification f)
 
 /-- Native open extension followed by proper direct image preserves normalization
-for the reduction of an integral constructible complex.
-Source: blueprint lem-fix-operation-reduction.proof.md, compact-support paragraph.
-(blueprint: lem-weil-compact-support-native-system-normalized).
-Proof: use the quotient cocycle to identify the input transition adjunct with an
-isomorphism. Finite constructibility transports across that isomorphism. The finite
-compact-support scalar comparison identifies the output transition adjunct with
-the composite of two isomorphisms. Evaluation naturality transports this result
-back to the system transition. Finally the direct quotient restriction and the
-sequence-site restriction have identical horizontal section maps; their derived
-transition isomorphism transfers the resulting representable bijection. -/
+for the reduction of an integral constructible complex. -/
 theorem compactSupportNativeSystem_normalized
     (K₀ : Type u) [Field K₀] (hl : IsUnit (l : K₀))
     [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]

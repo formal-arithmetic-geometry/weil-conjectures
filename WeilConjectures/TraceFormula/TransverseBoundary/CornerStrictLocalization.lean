@@ -15,8 +15,7 @@ Let `S` be the strict localization of the surface `Z` of a transverse corner
 (`AlgebraicGeometry.Scheme.TransverseCorner`) at a geometric point `z̄`, with the divisors
 `X_S, Y_S`. This file introduces `S - (X_S ∪ Y_S) = S ×_Z (Z - (X ∪ Y))`, with its open immersion
 into `S - Y_S = S ×_Z (Z - Y)` (the scheme `pullback C.j (strictLocalizationToBase zbar)`, also
-called `puncturedStrictLocalization` downstream) and its projection to `Z - (X ∪ Y)`
-(blueprint `lemma-cohomology-near-two-transverse-divisors--1`).
+called `puncturedStrictLocalization` downstream) and its projection to `Z - (X ∪ Y)`.
 
 ## Main definitions
 

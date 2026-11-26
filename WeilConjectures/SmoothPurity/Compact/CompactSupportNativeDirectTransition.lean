@@ -17,8 +17,13 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportRawDirectNormalization
 
 /-! # Coefficient compatibility of native direct evaluation
 
-Source: Stacks 03DI, 0D6E and 0D6J; Zheng 4.1 and 4.10
-(blueprint: lem-weil-compact-support-native-direct-transition).
+This module shows that direct-image evaluation of the native compact-support presentation
+respects the horizontal coefficient maps of a derived system.
+
+## References
+
+* Stacks Project, Tags 03DI, 0D6E and 0D6J
+* Zheng, Construction 4.1 and Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -38,9 +43,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The direct-image part of the specified native evaluation, in constant-module coordinates.
-Source: Stacks 03DI and 0D6E; Zheng, Construction 4.1 and Lemma 4.10.
-(blueprint: lem-weil-compact-support-native-direct-transition). -/
+/-- The direct-image part of the specified native evaluation, in constant-module coordinates. -/
 def compactSupportNativeDirectEvaluation {Z Y : Scheme.{u}} (g : Z ⟶ Y) (n : ℕ) :
     ProEtale.VaryingRing.P (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) g ⋙
@@ -200,27 +203,7 @@ private theorem native_normalized {Z Y : Scheme.{u}} (g : Z ⟶ Y) (n : ℕ) :
     (compactSupportDirectModel g (Padic.coefficientExtensionRing l E (n + 1)))
     (compactSupportRawDirectNormalization R q g n)
 
-/-- Direct-image evaluation respects every horizontal coefficient map of a derived system.
-Source: Stacks 0D6E and 0D6J; Zheng, Construction 4.1 and Lemma 4.10;
-the direct-image step of the native compact-support transition proof.
-(blueprint: lem-weil-compact-support-native-direct-transition).
-Proof: specialize the restriction-transition calculation for simultaneous direct image to
-the positive coefficient sheaves. The all-pair sheaf quotient is the direct quotient by
-compactSupportQuotient_eq, and the horizontal transformation is the actual section map,
-as in compactSupportOrdinaryCoefficientTransition. Identify the native evaluation mate
-with the simultaneous direct-image evaluation using moduleEvalP's identity on sections
-and moduleEvalG's unit normalization. The uniqueness of right-derived comparison makes
-this identification valid on arbitrary unbounded derived systems. For the coefficient
-comparison use the K-injective normalization in systemPushforwardRestrictionTransition:
-choose a K-injective complex at level n and a K-injective replacement of its restriction
-at level m. The inverse comparison is represented by the ordinary direct-image map of
-this replacement. After transport by compactSupportDirectModel, the ordinary coefficient
-comparison is still identity on sections. The normalization specifying
-proEtaleDerivedDirectImage_restrictScalars therefore gives the very same map; its inverse
-is sfDerivedImageRestriction. This compares the named maps, not just their isomorphism
-classes. Naturality transports the equality from K-injective representatives to every
-derived system, giving the displayed square. No preservation of K-injectives by scalar
-restriction or evaluation is used. The calculation includes n=m and noncartesian systems. -/
+/-- Direct-image evaluation respects every horizontal coefficient map of a derived system. -/
 theorem compactSupportNativeDirectTransition
     {Z Y : Scheme.{u}} (g : Z ⟶ Y)
     {m n : ℕ} (h : n ≤ m) (M : coefficientSequenceDerived.{u, u} l E Z) :

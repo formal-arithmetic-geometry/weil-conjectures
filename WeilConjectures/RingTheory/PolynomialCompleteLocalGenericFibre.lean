@@ -24,8 +24,24 @@ import WeilConjectures.RingTheory.RegularLocalLocalization
 /-!
 # Generic polynomial formal fibres of complete local domains
 
-Source: Stacks Project, More on Algebra, proof of Proposition 07PV, paragraphs 3--5.
-(blueprint: lem-weil-pbc-polynomial-complete-local-generic-fibre)
+For a complete local domain `A` and a maximal ideal `q` of `A[X]` over the maximal ideal of `A`,
+the formal fibre of `A[X]_q` over the zero prime is geometrically regular.
+
+## Implementation details
+
+Choose a regular complete local subring `A₀` with `A` finite over `A₀` (Tag 032D); Tag 07PP(1)
+reduces to `A₀`. In characteristic zero the generic fibre is a localization of the regular
+completion of `A₀[X]`. In positive characteristic `A₀` is a power series ring over a field and
+Tag 07PR applies.
+
+## References
+
+* [Stacks, Tag 07PV] (paragraphs 3–5 of the proof)
+* [Stacks, Tag 032D]
+* [Stacks, Tag 07PP]
+* [Stacks, Tag 07NF]
+* [Stacks, Tag 07NY]
+* [Stacks, Tag 07PR]
 -/
 
 @[expose] public section
@@ -143,28 +159,8 @@ private theorem regular_generic_charZero
       (Algebra.TensorProduct.includeRight_bijective hb)
   exact IsRegularRing.of_ringEquiv e.toRingEquiv
 
-/-- The generic formal fibre over a complete local domain is geometrically regular.
-Source: Stacks Project, More on Algebra, proof of Proposition 07PV, paragraphs 3--5.
-(blueprint: lem-weil-pbc-polynomial-complete-local-generic-fibre)
-
-Proof:
-1. Choose a regular complete local subring A₀ of A with A finite over A₀, by 032D.
-   The polynomial extension is finite too. The contraction q₀ of q is maximal and
-   lies over the maximal ideal of A₀: finite integral extensions contract maximal
-   ideals to maximal ideals. The finite polynomial map is quasi-finite at q.
-2. Apply 07PP(1) to the zero primes of A₀[X] and A[X]; injectivity gives contraction
-   zero. It reduces this fibre to the generic formal fibre for A₀ at q₀.
-3. A₀[X] is regular by smooth ascent (07NF). Its local ring at q₀ and its completion
-   are regular, by regular local localization and completion regularity (07NY).
-   Its generic fibre is a localization of that completion, so is regular and
-   Noetherian. In characteristic zero, finite purely inseparable field extensions
-   are trivial, giving geometric regularity.
-4. In positive characteristic the coefficient subring cannot be a power series
-   ring over a Cohen ring, whose nonzero prime-number uniformizer forces
-   characteristic zero. Thus A₀ is a finite-variable power series ring over a field.
-   Apply 07PR with one polynomial variable, and transport the result along the
-   coefficient and univariate/multivariate polynomial isomorphisms. Then 07PP(1)
-   gives the original generic fibre. This covers both characteristics. -/
+/-- The generic formal fibre of `A[X]` at a maximal ideal, over a complete local domain `A`, is
+geometrically regular. -/
 theorem completeLocalGenericFibre
     (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsLocalRing A]
     [IsAdicComplete (IsLocalRing.maximalIdeal A) A]

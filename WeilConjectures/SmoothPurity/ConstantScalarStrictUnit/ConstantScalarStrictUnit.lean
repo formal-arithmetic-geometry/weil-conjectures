@@ -62,12 +62,20 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # The normalized strict scalar unit of the regular completed coefficient complex
 
-Source: Bhatt--Scholze, Definition 3.5.2 and Lemma 6.8.2(1), and the agent-written
-regular-module and strict-cone calculation extracted from blueprint order 1869
-(blueprint: lem-weil-constant-scalar-strict-unit).
+We construct the normalized strict scalar unit `R_L[0] ⟶ R_L ⊗^L_{R_E} R_E[0]` of the regular
+completed coefficient complex and compute the finite scalar extensions and reduction units of
+the regular complex.
 
-Positive exponent m is indexed by n = m-1. The recorded interface is retained;
-site objects have universe t+1, morphisms t, and coefficients max u (t+1).
+## Implementation details
+
+Positive exponent `m` is indexed by `n = m - 1`. Site objects have universe `t+1`, morphisms
+`t`, and coefficients `max u (t+1)`. The strict unit is the pair `(h, 0)` in the mapping
+cocone of `1 - s`, where `h_n(s) = 1 ⊗ π_n(s)`; reduction compatibility shows that the
+product `h` is killed by `1 - s`.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2 and Lemma 6.8.2(1).
 -/
 
 @[expose] public noncomputable section
@@ -84,39 +92,33 @@ namespace WeilConjectures.ConstantScalarStrictUnit
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Y : Scheme.{t})
 
-/-- The single regular complex R_E[0]. Source: blueprint order 1869
-(blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- The single regular complex R_E[0]. -/
 abbrev regularComplex :=
   (CochainComplex.singleFunctor (integralTowerModules l E Y) 0).obj
     (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y))
 
-/-- Its degree-zero identification. Source: blueprint order 1869
-(blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- Its degree-zero identification. -/
 abbrev regularZeroIso :=
   HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0
     (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y))
 
-/-- A section in degree zero. Source: blueprint order 1869
-(blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- A section in degree zero. -/
 def regularSection (V : Y.ProEt)
     (r : (completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj (op V)) :
     ((regularComplex l E Y).X 0).val.obj (op V) :=
   (regularZeroIso l E Y).inv.val.app (op V) r
 
-/-- The finite regular single complex. Source: blueprint order 1869
-(blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- The finite regular single complex. -/
 abbrev finiteRegularComplex (n : ℕ) :=
   (CochainComplex.singleFunctor (integralOperationsFiniteModules l E Y n) 0).obj
     (SheafOfModules.unit (integralCoefficientSheaf l E Y n))
 
-/-- Its degree-zero identification. Source: blueprint order 1869
-(blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- Its degree-zero identification. -/
 abbrev finiteZeroIso (n : ℕ) :=
   HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0
     (SheafOfModules.unit (integralCoefficientSheaf l E Y n))
 
-/-- The linear limit projection, given by the section one of its restricted target.
-Source: blueprint order 1869 (blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- The linear limit projection, given by the section one of its restricted target. -/
 def projectionModule (n : ℕ) :
     SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y) ⟶
       (scalarReductionRestriction l E Y n).obj
@@ -126,8 +128,7 @@ def projectionModule (n : ℕ) :
       (fun U ↦ (1 : (integralCoefficientSheaf l E Y n).obj.obj U))
       (fun {_ _} f ↦ map_one ((integralCoefficientSheaf l E Y n).obj.map f).hom))
 
-/-- The same projection as a single-complex map with restriction transport.
-Source: blueprint order 1869 (blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- The same projection as a single-complex map with restriction transport. -/
 def projectionComplex (n : ℕ) :
     regularComplex l E Y ⟶
       ((scalarReductionRestriction l E Y n).mapHomologicalComplex (.up ℤ)).obj
@@ -141,8 +142,7 @@ def projectionComplex (n : ℕ) :
 variable (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L)
 
-/-- The strict scalar tower's termwise 1-s. Source: blueprint order 1869
-(blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- The strict scalar tower's termwise 1-s. -/
 def boundary :=
   towerTransitionEndomorphism
     (K := fun n ↦ ((integralScalarTowerFunctor l E L ι Y).obj
@@ -150,8 +150,7 @@ def boundary :=
     (integralOperationsTowerStep
       ((integralScalarTowerFunctor l E L ι Y).obj (regularComplex l E Y)))
 
-/-- A degree-zero quotient coordinate of the strict first component.
-Source: blueprint order 1869 (blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- A degree-zero quotient coordinate of the strict first component. -/
 def coordinate
     (η : regularComplex l L Y ⟶
       (integralScalarComplexFunctor l E L ι Y).obj (regularComplex l E Y)) (n : ℕ) :=
@@ -159,8 +158,7 @@ def coordinate
     (Pi.π (fun m ↦ ((integralScalarTowerFunctor l E L ι Y).obj
       (regularComplex l E Y)).obj (op m)) n).f 0
 
-/-- Full section normalization. The API orders tensors z tensor r.
-Source: blueprint order 1869 (blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- Full section normalization. The API orders tensors z tensor r. -/
 def quotientCoordinates
     (η : regularComplex l L Y ⟶
       (integralScalarComplexFunctor l E L ι Y).obj (regularComplex l E Y)) : Prop :=
@@ -171,8 +169,7 @@ def quotientCoordinates
         ((completedIntegralCommRingProjectionUnrestricted l L Y n).hom.app (op V) s)
         (regularSection l E Y V 1)
 
-/-- The equivalent unit-only normalization. Source: blueprint order 1869
-(blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- The equivalent unit-only normalization. -/
 def unitCoordinates
     (η : regularComplex l L Y ⟶
       (integralScalarComplexFunctor l E L ι Y).obj (regularComplex l E Y)) : Prop :=
@@ -181,16 +178,14 @@ def unitCoordinates
       integralScalarTensorSection l E L ι Y n ((regularComplex l E Y).X 0) (op V) 1
         (regularSection l E Y V 1)
 
-/-- Vanishing of the graded shifted component. Source: blueprint order 1869
-(blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- Vanishing of the graded shifted component. -/
 def zeroSecondComponent
     (η : regularComplex l L Y ⟶
       (integralScalarComplexFunctor l E L ι Y).obj (regularComplex l E Y)) : Prop :=
   ∀ i : ℤ, η.f i ≫
     (CochainComplex.mappingCocone.snd (boundary l E Y L ι)).v i (i - 1) (by omega) = 0
 
-/-- Multiplication, inverse and reduction formulas for the finite tensors.
-Source: blueprint order 1869 (blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- Multiplication, inverse and reduction formulas for the finite tensors. -/
 def finiteMultiplication : Prop :=
     (∃ u : ∀ n : ℕ,
       (integralScalarFiniteComplex l E L ι Y n).obj (regularComplex l E Y) ≅
@@ -217,16 +212,14 @@ def finiteMultiplication : Prop :=
         (integralCoefficientSheafTransition l L Y n).hom.app (op V)
           ((((u (n + 1)).hom.f 0 ≫ (finiteZeroIso l L Y (n + 1)).hom).val.app (op V)) x)))
 
-/-- The canonical derived tensor comparison is invertible on the regular complex.
-Source: blueprint order 1869 (blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- The canonical derived tensor comparison is invertible on the regular complex. -/
 def finiteDerivedComputation : Prop :=
     (∀ n : ℕ, IsIso
       (((integralScalarReductionWitness l E L ι Y n).choose_spec.choose_spec
         |>.choose_spec.choose_spec.2.2).choose_spec.choose.app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj (regularComplex l E Y))))
 
-/-- Identity-extension reduction units are precisely the limit projections.
-Source: blueprint order 1869 (blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- Identity-extension reduction units are precisely the limit projections. -/
 def reductionUnits : Prop :=
     (∀ n : ℕ, ∃ v : unrestrictedTowerFiniteComplex l E Y n (regularComplex l E Y) ≅
         finiteRegularComplex l E Y n,
@@ -802,9 +795,7 @@ private theorem strictUnit_unique
   exact cone_component_ext (boundary l E Y L ι) η θ 0
     (congrArg (fun f ↦ f.f 0) hfirst) (hη.2 0) (hθ.2 0)
 
-/-- The regular single complex is good. Source: the K-flat and flat-term calculation
-in the proof plan for `lem-weil-constant-scalar-strict-unit`.
-(blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- The regular single complex is good. -/
 private theorem regular_scalar_strict_unit_good :
     integralOperationsGoodComplex l E Y (regularComplex l E Y) := by
   let R := completedIntegralCommRingSheafUnrestricted l E Y
@@ -836,10 +827,7 @@ private theorem regular_scalar_strict_unit_good :
       change PreservesFiniteLimits _ ∧ PreservesFiniteColimits _
       exact ⟨inferInstance, inferInstance⟩
 
-/-- Finite scalar multiplication and transition formulas for the regular complex.
-Source: the sectionwise tensor calculation in the proof plan for
-`lem-weil-constant-scalar-strict-unit`.
-(blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- Finite scalar multiplication and transition formulas for the regular complex. -/
 private theorem regular_scalar_strict_unit_finite_multiplication :
     finiteMultiplication l E Y L ι := by
   refine ⟨finiteComplexIso l E Y L ι, ?_, ?_, ?_⟩
@@ -910,10 +898,7 @@ private theorem regular_scalar_strict_unit_finite_derived :
     g.assign (Lean.mkApp2 hs P hp)
     Lean.Elab.Tactic.replaceMainGoal []
 
-/-- The identity-extension reduction units are the limit projections.
-Source: the reduction-tower calculation in the proof plan for
-`lem-weil-constant-scalar-strict-unit`.
-(blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- The identity-extension reduction units are the limit projections. -/
 private theorem regular_scalar_strict_unit_reduction_units :
     reductionUnits l E Y := by
   intro n
@@ -930,10 +915,7 @@ private theorem regular_scalar_strict_unit_reduction_units :
       exact (DerivedCategory.Q (C := scalarReductionSource l E Y)).map_id _
     rw [hi, Iso.refl_inv, Category.id_comp]
 
-/-- Existence and uniqueness of the normalized strict scalar unit.
-Source: the strict mapping-cocone calculation in the proof plan for
-`lem-weil-constant-scalar-strict-unit`.
-(blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- Existence and uniqueness of the normalized strict scalar unit. -/
 private theorem regular_scalar_strict_unit_exists_unique :
     ∃! η : regularComplex l L Y ⟶
         (integralScalarComplexFunctor l E L ι Y).obj (regularComplex l E Y),
@@ -944,10 +926,7 @@ private theorem regular_scalar_strict_unit_exists_unique :
   exact strictUnit_unique l E Y L ι η (strictUnit l E Y L ι) hη
     ⟨strictUnit_coordinates l E Y L ι, strictUnit_second l E Y L ι⟩
 
-/-- Full-section and unit-only normalization are equivalent.
-Source: the linearity calculation in the proof plan for
-`lem-weil-constant-scalar-strict-unit`.
-(blueprint: lem-weil-constant-scalar-strict-unit). -/
+/-- Full-section and unit-only normalization are equivalent. -/
 private theorem regular_scalar_strict_unit_normalization :
     ∀ η : regularComplex l L Y ⟶
         (integralScalarComplexFunctor l E L ι Y).obj (regularComplex l E Y),
@@ -966,37 +945,9 @@ private theorem regular_scalar_strict_unit_normalization :
         ((completedIntegralCommRingProjectionUnrestricted l L Y n).hom.app (op V) s) 1
         (regularSection l E Y V 1)).symm
 
-/-- The strict-unit assertion, including all multiplication and reduction formulas.
-Source: Bhatt--Scholze, Definition 3.5.2 and Lemma 6.8.2(1), background for the
-agent-written strict calculation in blueprint order 1869
-(blueprint: lem-weil-constant-scalar-strict-unit).
-
-Proof:
-1. Sectionwise balancing gives M tensor R_E isomorphic to M, with inverse x to x tensor 1.
-The maps commute with restrictions and descend through sheafification. Thus the regular
-and zero sheaves are flat (def-pc-flat-sheaf-modules). The direct-sum total tensor with
-R_E[0] is the original complex with its original differential
-(def-pc-tensor-complex-sheaves), proving K-flatness (def-pc-kflat-complex).
-2. Multiplication sends r tensor z to rho_n(r)z and has inverse z to 1 tensor z.
-Balancing proves inverse identities before and after sheafification
-(def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification). The complexes
-are single complexes. The identity K-flat resolution computes derived scalar extension
-by def-weil-integral-scalar-extension.
-3. Reduction sends rho_(n+1)(r)z to rho_n(r)red(z), proving transition compatibility.
-For the identity coefficient extension gamma sends r to r tensor 1, so multiplication
-composed with gamma is pi_n. With q=id the c_n formula in
- def-weil-integral-reduction-tower is exactly the localized gamma using
- def-weil-integral-derived-reduction.
-4. Set h_n(s)=1 tensor pi_n(s). It is R_L-linear under restriction along pi_n.
-Reduction compatibility gives t_n h_(n+1)=h_n, so its product h is killed by 1-shift.
-Products are sectionwise; no exactness or surjectivity of products is used.
-5. The normalized strict mapping-cocone differential is (dx,(1-s)x-dy).
-The pair (h,0) therefore defines a chain map from R_L[0], with all other source
-components zero (def-weil-abstract-derived-category).
-6. The product coordinates and two graded cone projections determine the map.
-Linearity gives h_n(b)=b h_n(1), proving the equivalent unit-only normalization
-also when 1=0 (situation-conventions).
--/
+/-- The regular single complex `R_E[0]` is good, its finite scalar extensions are computed by
+explicit multiplication and reduction formulas, and there is a unique normalized strict scalar
+unit `R_L[0] ⟶ R_L ⊗^L_{R_E} R_E[0]`, whose full-section and unit-only normalizations agree. -/
 theorem regular_scalar_strict_unit (D : FiniteFieldDatum.{d}) (_hl : l ≠ D.p) :
     integralOperationsGoodComplex l E Y (regularComplex l E Y) ∧
     finiteMultiplication l E Y L ι ∧

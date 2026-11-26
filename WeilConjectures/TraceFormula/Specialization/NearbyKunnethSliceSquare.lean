@@ -16,7 +16,7 @@ Let `P` be the product over `S = Spec k'⟦t⟧` of models `M`, `N` of finite ty
 coordinate of `M`. The restrictions of the nearby cycles of `M`, `N` and `P` to the special fibre
 `s'` of the geometric slice are compared with the nearby cycles of the slice of `M` along `b`, of
 the change of trait of `N`, and of the slice of `P` along `φ₁ ≫ b`, by the pullback exchanges of
-the projections from the base changes (the identifications (E.2) and invariance under change of
+the projections from the base changes (the slice identifications and invariance under change of
 trait). This file shows that, under these identifications, the restriction of the Künneth map
 `Π_{A,B}` over `s'` is the Künneth map of the slices.
 
@@ -25,7 +25,7 @@ trait). This file shows that, under these identifications, the restriction of th
 * `NearbyCyclesModel.map_kunnethMap_sliceSpecial_comp_pullbackExchange`: the restriction of
   `Π_{A,B}` over `s'`, followed by the exchange of the slice of `P`, is the Künneth map of the
   geometric slice precomposed with the exchanges of the slice of `M` and the change of trait
-  of `N`, up to the tensor and pullback comparisons (blueprint `lemma-kunneth-map-slice`).
+  of `N`, up to the tensor and pullback comparisons.
 
 -/
 
@@ -55,15 +55,13 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 set_option maxHeartbeats 800000 in
 -- the statement involves the Künneth maps of the product and of its slice, whose instances
 -- on module objects over the slice need a long search
-/-- **The Künneth map on a slice** (blueprint `lemma-kunneth-map-slice`): for the product `P`
-over the trait `S = Spec k'⟦t⟧` of models `M`, `N` of finite type and a coordinate `b` of `M`,
-identify the restrictions over the special fibre `s'` of the geometric slice of the nearby cycles
-of `A`, `B` and `A ⊠ B` with the nearby cycles of the slice of `M` along `b`, of the change of
-trait of `N` and of the slice of `P` along `φ₁ ≫ b`, through the pullback exchanges of the
-projections (the identifications (E.2) for `b`, invariance under change of trait, and (E.2) for
-`b ∘ pr₁`). Then the restriction of `Π_{A,B}` over `s'` is the Künneth map `Π_{A',B'}` of the
-geometric slice (`NearbyCyclesModel.sliceFst`, `NearbyCyclesModel.sliceSnd`), up to the tensor
-and pullback comparisons. -/
+/-- **The Künneth map on a slice**: for the product `P` over the trait `S = Spec k'⟦t⟧` of models
+`M`, `N` of finite type and a coordinate `b` of `M`, identify the restrictions over the special
+fibre `s'` of the geometric slice of the nearby cycles of `A`, `B` and `A ⊠ B` with the nearby
+cycles of the slice of `M` along `b`, of the change of trait of `N` and of the slice of `P` along
+`φ₁ ≫ b`, through the pullback exchanges of the projections. Then the restriction of `Π_{A,B}`
+over `s'` is the Künneth map `Π_{A',B'}` of the geometric slice (`NearbyCyclesModel.sliceFst`,
+`NearbyCyclesModel.sliceSnd`), up to the tensor and pullback comparisons. -/
 lemma map_kunnethMap_sliceSpecial_comp_pullbackExchange (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))

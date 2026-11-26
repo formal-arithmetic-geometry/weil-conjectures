@@ -15,8 +15,7 @@ For an ind-étale `A ⧸ I`-algebra `C̄`, the lift `H_A(C̄)` of `Algebra.Close
 coreflection of `C̄` into ind-étale `A`-algebras: for every ind-étale `A`-algebra `D`, composition
 with `H_A(C̄) ⟶ C̄` is a bijection `Hom_A(D, H_A(C̄)) ≃ Hom_A(D, C̄)`
 (`Algebra.ClosedLift.homEquiv`, a reformulation of the adjunction
-`Algebra.ClosedLift.exists_natural_homEquiv`, blueprint
-`proposition-extension-zero-restriction-closed-subscheme`).
+`Algebra.ClosedLift.exists_natural_homEquiv`).
 
 Consequences: retractions of faithfully flat ind-étale covers of `C̄` lift to `H_A(C̄)`
 (`Algebra.ClosedLift.exists_retraction`), and every nonempty clopen subset of `Spec H_A(C̄)` meets
@@ -97,9 +96,7 @@ lemma indEtale_tensorProduct (R S T : Type u) [CommRing R] [CommRing S] [CommRin
     (TensorProduct R S T) ((RingHom.IndEtale.algebraMap_iff _ _).mpr inferInstance))
 
 /-- If every faithfully flat ind-étale `C̄`-algebra has a retraction (e.g. `C̄` is
-w-contractible), then every faithfully flat ind-étale `H_A(C̄)`-algebra `T` has a retraction:
-reduce `T` along `H_A(C̄) ⟶ C̄`, retract there, and lift the resulting map `T ⟶ C̄` to `H_A(C̄)`
-by the universal property `Algebra.ClosedLift.homEquiv`; it is a retraction by uniqueness. -/
+w-contractible), then every faithfully flat ind-étale `H_A(C̄)`-algebra `T` has a retraction. -/
 theorem exists_retraction (I : Ideal A) [Algebra (A ⧸ I) C] [IsScalarTower A (A ⧸ I) C]
     [Algebra.IndEtale (A ⧸ I) C]
     (hC : ∀ (T : Type u) [CommRing T] [Algebra C T] [Algebra.IndEtale C T]
@@ -134,9 +131,7 @@ theorem exists_retraction (I : Ideal A) [Algebra (A ⧸ I) C] [IsScalarTower A (
     exact key h
   exact congrArg AlgHom.toRingHom this
 
-/-- Every nonempty clopen subset of `Spec H_A(C̄)` meets the closed fibre `Spec C̄`: a nonzero
-idempotent `e` of `H_A(C̄)` has nonzero image in `C̄`, since otherwise `1 - e` would be a unit
-(`Algebra.ClosedLift.isUnit_of_isUnit_image`). -/
+/-- Every nonempty clopen subset of `Spec H_A(C̄)` meets the closed fibre `Spec C̄`. -/
 theorem exists_comap_mem_of_isClopen {s : Set (PrimeSpectrum (ClosedLift A C))} (hs : IsClopen s)
     (hne : s.Nonempty) :
     ∃ q : PrimeSpectrum C, PrimeSpectrum.comap (toAlgHom A C : ClosedLift A C →+* C) q ∈ s := by

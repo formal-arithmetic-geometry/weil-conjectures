@@ -12,8 +12,6 @@ import all WeilConjectures.SixFunctors.GeneratorReduction.OpenReconstructionEffe
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.Ordinary.IntegralOrdinaryProperOpenCalculus
 
 /-! # Ordinary coefficient squares for proper/open interchange
-
-Source: blueprint fix-prop-coherence, the coefficient comparisons of individual maps.
 -/
 
 @[expose] public noncomputable section
@@ -584,18 +582,7 @@ private theorem gamma_coefficient_square
   simpa only [RealizationModel.openReduction, ringedOpenAdj,
     Category.assoc] using! hm
 
-/-- The ordinary coefficient square for the proper/open interchange.
-Source: blueprint fix-prop-coherence, the canonical proper/open lambda adjunct.
-(blueprint: lem-sf-integral-ordinary-proper-open-square).
-
-Proof: expand gamma as the open adjunct of inverse lambda. The canonical bridge
-identifies the system lambda with the cartesian open-base-change, clopen lift and
-proper-composition factors. The ringed lambda has exactly the independent ringed
-factors. Their coefficient squares follow from pull-composition, open base change,
-clopen adjunction normalization and proper composition. Paste, invert the resulting
-lambda square, and transpose under the actual open adjunction using its counit
-square. Naturality inserts the coefficient map of e. The computation is in whole
-systems and ordinary ringed categories; no completion or expression comparison is used. -/
+/-- The ordinary coefficient square for the proper/open interchange. -/
 theorem ordinaryProperOpenSquare
     (o : Operations l E) (a : AmbientModels l E o)
     {B : Scheme.{u}} {I : Type u} {X : I → Over B}

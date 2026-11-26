@@ -14,38 +14,27 @@ import WeilConjectures.FieldTheory.FinitePresentationSubfieldModel
 /-!
 # Geometric regularity over a directed union of subfields
 
-Source: Stacks Project, Algebra, Lemma 07QG (blueprint:
-lem-weil-pbc-geometrically-regular-over-subfields).
+A Noetherian algebra over a field `k` is geometrically regular if it is geometrically regular
+over every member of a directed family of subfields whose union is `k`.
+
+## Implementation details
+
+A finite purely inseparable extension `k'/k` is finitely presented, so it descends to a
+finite purely inseparable extension `k_i'` of some subfield `K i`, with
+`k ⊗[K i] k_i' ≃ k'`. Then `k' ⊗[k] A ≃ k_i' ⊗[K i] A`, which is regular by hypothesis.
+In the identity printed in the Stacks Project, the left side `k_i` is a misprint for `k'`.
+
+## References
+
+* [Stacks, Tag 07QG]
 -/
 
 @[expose] public section
 
 universe u v w
 
-/-- Geometric regularity over a directed union of subfields. Source: Stacks Project,
-Algebra, Lemma 07QG (blueprint: lem-weil-pbc-geometrically-regular-over-subfields).
-
-Proof:
-1. By theorem-finite-etale-covers-proper-henselian--2, fix a finite purely inseparable field
-extension k'/k. Choose a
-   finite k-basis of k', giving a surjection from a polynomial algebra to k'. The field k
-   is Noetherian (def-weil-pbc-noetherian-ring), and the polynomial algebra is Noetherian
-   by lem-weil-pbc-finite-type-algebra-noetherian. Its kernel is finitely generated, so k'
-   has a finite presentation by polynomial generators and relations.
-2. The relations have finitely many coefficients. By hUnion and hdir, they all lie in
-   one K i; use Nonempty I if there are no coefficients. Let k_i' be the quotient of the
-   polynomial algebra over K i by these relations.
-3. The lemmas lem-weil-pbc-tensor-cancel-base-change,
-   lem-weil-pbc-polynomial-scalar-extension, and lem-weil-pbc-tensor-quotient-base-change
-   identify k tensor over K i with k_i' with k' as k-algebras. In Stacks' printed identity
-   the left side k_i is a misprint for k'.
-4. By theorem-finite-etale-covers-proper-henselian--2, k_i' is a field and is finite
-   purely inseparable over K i (def-weil-pbc-finite-purely-inseparable-extension).
-5. By lem-weil-pbc-tensor-cancel-base-change and symmetry of tensor products, the rings
-   k' tensor over k with A and k_i' tensor over K i with A are isomorphic. The latter is
-   regular by hgeom and theorem-finite-etale-covers-proper-henselian--2. Regularity is preserved by
-   ring isomorphisms. Since k'/k was arbitrary and A is Noetherian, A is geometrically regular over
-   k.
+/-- A Noetherian algebra that is geometrically regular over each subfield in a directed family
+whose union is `k` is geometrically regular over `k`.
 -/
 theorem geometricallyRegular_of_directed_subfields
     (k : Type u) [Field k]

@@ -15,6 +15,24 @@ import WeilConjectures.RingTheory.GeometricallyRegularSmoothAscent
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import WeilConjectures.Mathlib.RingTheory.Etale.Field
 
+/-!
+# Geometric regularity along separable extensions
+
+Geometric regularity of a Noetherian algebra is unchanged when its base field is replaced by
+a separable algebraic extension over which the algebra is already defined.
+
+## Implementation details
+
+Ascent reduces to finite intermediate fields and uses smooth base change and smooth ascent.
+Descent tensors finite purely inseparable extensions with the separable extension and uses
+cancellation of base change.
+
+## References
+
+* [Stacks, Tag 07QH]
+* [Stacks, Tag 0382]
+-/
+
 @[expose] public section
 
 universe u v w
@@ -57,10 +75,7 @@ private theorem finite_separable_ascent
     Algebra.Etale.of_restrictScalars R (TensorProduct k k' R) R
   exact (isGeometricallyRegular_of_smooth φ inferInstance hB.1 hB).2
 
-/-- Forward ascent along a separable algebraic extension. The proof follows the finite
-intermediate-field reduction, smooth multiplication base change, and smooth ascent in
-Stacks Project, Lemma 07QH.
-(blueprint: lem-weil-pbc-geometric-regularity-separable-extension-forward) -/
+/-- Geometric regularity ascends along a separable algebraic extension of the base field. -/
 theorem isGeometricallyRegular_of_isSeparable
     (k : Type u) (k' : Type v) (R : Type w)
     [Field k] [Field k'] [CommRing R]
@@ -89,9 +104,7 @@ theorem isGeometricallyRegular_of_isSeparable
     exact ⟨⟨IntermediateField.adjoin k {x}, inferInstance⟩,
       IntermediateField.subset_adjoin k {x} (by simp)⟩
 
-/-- Descent along a separable algebraic extension. The proof tensors finite purely inseparable
-extensions with the separable extension and uses cancellation, as in Stacks Project,
-Lemma 07QH. (blueprint: lem-weil-pbc-geometric-regularity-separable-extension-backward) -/
+/-- Geometric regularity descends along a separable algebraic extension of the base field. -/
 theorem isGeometricallyRegular_of_isSeparable_rev
     (k : Type u) (k' : Type v) (R : Type w)
     [Field k] [Field k'] [CommRing R]
@@ -114,8 +127,6 @@ theorem isGeometricallyRegular_of_isSeparable_rev
 
 /-- Geometric regularity of a Noetherian algebra is unchanged when its base field is replaced
 by a separable algebraic extension over which the algebra is already defined.
-Source: Stacks Project, Algebra, Lemma 07QH and Definition 0382
-(blueprint: lem-weil-pbc-geometric-regularity-separable-extension).
 -/
 theorem isGeometricallyRegular_iff_of_isSeparable
     (k : Type u) (k' : Type v) (R : Type w)

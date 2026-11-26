@@ -18,7 +18,10 @@ import all WeilConjectures.TraceFormula.Scalar.ScalarModelRoosZeroLiftCore
 
 The strict K-flat calculation is isolated from the later localization and
 completed-limit assembly.
-(blueprint: stage3-pur-scalar-tensor-limit-good-representatives)
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -75,22 +78,7 @@ attribute [local implicit_reducible] tensor integralComparisonDerivedSequenceSca
 
 /-- The normalized scalar/tensor square on good representatives, before inverting
 scalar completion. The bridge is the specified ordinary tensor comparison followed
-by the two completion maps. It is not an arbitrary morphism.
-
-Source: Stacks 07A4 and 0941; scalar/tensor normalization and localization
-(blueprint: stage3-pur-scalar-tensor-limit-good-representatives).
-
-Proof: take the actual whole-system quotient presentations of P and Q. The
-normalizations of TE, TL and SY express the two maps through the same Roos
-comparisons and the coherent reduction counits. Apply the strict equation hstrict
-on flat-term K-flat resolutions of the quotient presentations. Tensor balancing
-sends b tensor (x tensor y) to (b tensor x) tensor (1 tensor y), on both routes.
-This agrees with scalarTensorOrdinary's specified chain normalization. The
-scalarCompletion normalization inserts the quotient augmentation, with zero
-shifted coordinate. Both routes therefore agree on each homogeneous tensor and
-on both Roos coordinates. Naturality of the Roos comparison and localization
-remove the resolutions and yield the displayed equality. No inverse completion
-map, arbitrary bridge, or faithfulness of finite derived evaluations is used. -/
+by the two completion maps. -/
 theorem scalarTowerTensorLimitSquare_on_good_representatives (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)

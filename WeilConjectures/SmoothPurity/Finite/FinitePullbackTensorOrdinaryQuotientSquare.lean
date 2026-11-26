@@ -10,8 +10,17 @@ import WeilConjectures.SmoothPurity.Finite.FinitePullbackTensorOrdinaryQuotientS
 
 /-! # The ordinary total-tensor quotient and pullback square
 
-Source: Stacks Tags 03EL, 06YY and 07A4.
-(blueprint: lem-pur-finite-pullback-tensor-ordinary-quotient-square).
+We show that coefficient change commutes with the ordinary total pullback tensor comparisons.
+
+## Implementation details
+
+The equality of chain maps is checked in every total degree; after the scalar-extension,
+inverse-image and sheafification adjunctions it reduces to pure tensors `x ⊗ y` in one
+bidegree. No derived object, K-flatness or flatness is used.
+
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -35,21 +44,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local instance] sfIntrinsicPullback_additive
   coefficientFiniteQuotientExtensionAdditive
 
-/-- Coefficient change commutes with the ordinary total pullback tensor comparisons.
-Source: Stacks 03EL, 07A4 and 06YY, the ordinary generator calculation
-(blueprint: lem-pur-finite-pullback-tensor-ordinary-quotient-square).
-Proof: equality of chain maps is checked in every total degree. Apply scalar-extension
-adjunction, then inverse-image adjunction, and the tensor sheafification adjunction.
-The direct-sum total inclusions reduce the comparison to pure tensors x tensor y
-in one bidegree. Naturality of the adjunction units moves km and ay through the two
-units. Their generator equations, and those of ax and kn, send this generator on
-both paths to the tensor of the inverse-image units of the quotient units of x
-and y. The equation hc identifies the two iterated units; hcc identifies each
-component of cc with c. Balancing and linearity extend from pure tensors;
-sheafification and the coproduct universal property give equality. The maps
-already commute with the signed total differential, since all four comparisons
-are chain isomorphisms. No derived object, K-flatness, flatness of terms or
-flatness of the coefficient quotient is used. -/
+/-- Coefficient change commutes with the ordinary total pullback tensor comparisons. -/
 theorem finitePullbackTensor_ordinary_quotient_square {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]

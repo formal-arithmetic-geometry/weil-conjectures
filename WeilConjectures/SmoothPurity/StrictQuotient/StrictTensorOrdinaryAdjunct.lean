@@ -9,7 +9,12 @@ public import WeilConjectures.SmoothPurity.StrictQuotient.StrictQuotientExpressi
 import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 import all WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps
 
-/-! # Ordinary tensor factorization for strict quotient adjuncts -/
+/-! # Ordinary tensor factorization for strict quotient adjuncts
+
+## References
+
+* Stacks Project, Tags 07A4 and 07A6.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -361,17 +366,7 @@ private theorem ordinary_tensor {W : Scheme.{t}} (P Q : Complex l E W)
   exact recover_from_inverse F em e en
     ((finiteTensor l E W n).map (Prod.mkHom f g)) z hh
 
-/-- The ordinary tensor adjunct factors through the normalized scalar tensor comparison.
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 07A6.
-(blueprint: lem-pur-strict-tensor-ordinary-adjunct).
-
-Proof: transpose under the ordinary cochain adjunction and test in each degree on
-pure tensor generators. The scalar-unit generator equation and tensor-map
-naturality reduce the left side to the two horizontal factor transitions. The
-evaluation tensor generator equation and horizontal restriction naturality give
-the same sections on the right. Explicit restriction-of-scalars transports keep
-these section comparisons in the quotient coefficient ring. Cancel the source
-evaluation isomorphism to obtain the stated factorization. -/
+/-- The ordinary tensor adjunct factors through the normalized scalar tensor comparison. -/
 theorem strictTensorOrdinaryAdjunct {W : Scheme.{t}} (P Q : Complex l E W)
     (S : CoefficientDerivedSystemTensors l E W)
     (D : CoefficientFiniteQuotientCalculus l E W S) {m n : ℕ} (hmn : n ≤ m)

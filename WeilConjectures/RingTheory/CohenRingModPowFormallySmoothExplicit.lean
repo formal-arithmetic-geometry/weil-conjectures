@@ -9,20 +9,29 @@ public import WeilConjectures.RingTheory.CohenRing
 import WeilConjectures.RingTheory.CohenRingModPowFormallySmoothCore
 import Mathlib.Algebra.Algebra.ZMod
 
+/-!
+# Square-zero lifting for a Cohen ring modulo a prime power
+
+For a Cohen ring `Λ` and `n ≥ 1`, every ring map from `Λ / (p ^ n)` to `D / J`, with
+`p ^ n = 0` in `D` and `J ^ 2 = 0`, lifts to a ring map into `D`
+(`IsDiscreteValuationRing.cohenRing_mod_pow_formallySmooth_explicit`).
+
+## Implementation details
+
+The canonical `ZMod (p ^ n)`-algebra structures on `Λ / (p ^ n)` and `D` make every ring map
+`ZMod (p ^ n)`-linear, so the statement follows from formal smoothness of `Λ / (p ^ n)` over
+`ZMod (p ^ n)`. The argument works in any target universe and when `D` is the zero ring.
+
+## References
+
+* [Stacks, Tag 0329]
+-/
+
 @[expose] public section
 universe u v
 namespace IsDiscreteValuationRing
-/-- The explicit square-zero lifting clause for a Cohen ring modulo a prime power.
-Source: Stacks Project, Algebra, Lemma Tag 0329.
-(blueprint: lem-weil-pbc-cohen-ring-mod-pn-formally-smooth-explicit)
-
-Choose the canonical ZMod (p^n)-algebra structures on Λ/(p^n) and D using
-that their characteristics divide p^n. The core theorem supplies formal smoothness
-of Λ/(p^n). Every ring homomorphism between these algebras commutes with scalars,
-since each element of ZMod (p^n) is an integer cast. Apply
-`Algebra.FormallySmooth.exists_lift` to the square-zero ideal J (nilpotence exponent 2),
-then forget the algebra structure of the lift. This works in any target universe and
-also when D is the zero ring. -/
+/-- The explicit square-zero lifting property of a Cohen ring modulo a prime power: if
+`p ^ n = 0` in `D` and `J ^ 2 = 0`, every ring map `Λ / (p ^ n) → D / J` lifts to `D`. -/
 theorem cohenRing_mod_pow_formallySmooth_explicit
     (p : ℕ) (Λ : Type u) [CommRing Λ] (hΛ : IsCohenRing p Λ)
     (n : ℕ) (hn : 1 ≤ n) :

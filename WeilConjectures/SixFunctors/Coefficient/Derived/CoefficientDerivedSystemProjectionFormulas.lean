@@ -11,9 +11,27 @@ import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemH
 
 /-! # Actual finite projections of coefficient gamma
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A6, 08JA, 0D6E and 0941;
-the evaluated enriched projection formula and its normalized degree-zero calculation
-(blueprint: lem-coef-derived-system-projection-formulas).
+The evaluated enriched projection formula and its normalized degree-zero calculation.
+
+## Implementation details
+
+The calculus data (reduction adjunction, finite evaluations, tensors, internal-Hom fibers and
+sections comparisons) are transported to the generic sequence-site notation of
+`EnrichedSequenceProjection`, and `enrichedSequenceProjectionFormula` is applied. The models
+`D.globalLimit_model`, `D.globalEvaluation_model` and `D.scalarSections_model` identify the
+transported comparisons with the specified ones, and `H.sections_projection` fixes the
+system-sections projection; arbitrary evaluation isomorphisms without this equation would not
+suffice. Taking H-zero and rewriting the finite counit by `S.counit_projection` gives
+`CoefficientHomProjection` for `coefficientGammaZeroMap`. The argument never asserts that
+evaluation preserves K-injective systems, or that reducing an integral mapping complex computes
+finite internal Hom.
+
+## References
+
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 08JA]
+* [Stacks, Tag 0D6E]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -31,45 +49,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Gamma has the actual finite mapping-limit projections and the specified H-zero action.
 This is an identity for any calculus with the two recorded projection-model equations,
 rather than a new choice
-of a mapping equivalence or a construction of the calculus itself.
-Source: Stacks 07A6, 08JA, 0D6E, 0941; the proved
-SheafOfModules.EnrichedSequenceProjection.enrichedSequenceProjectionFormula;
-node lem-coef-derived-system-evaluation-calculus, step 5, final projection calculation
-(blueprint: lem-coef-derived-system-projection-formulas).
-
-Proof:
-1. Use the actual quotient ring sequence, completed coefficient sheaf and the strict
-   system equivalence. Transport the calculus's reduction adjunction, finite evaluations,
-   tensors, internal-Hom fibers and sections comparisons to the generic sequence-site
-   notation of EnrichedSequenceProjection. The pure-tensor model normalizations identify
-   the transported finite tensor comparisons with its normalized scalar comparisons.
-   S.unit_projection is its unit condition and S.reductionTensor_evaluation is its
-   tensor condition. S.reduction_normalized supplies the first normalized input.
-2. Apply enrichedSequenceProjectionFormula. Its finite uncurrying equality says that
-   the enriched adjunct followed by the nth total-limit projection and the Hom-fiber
-   identification is the scalar adjunct of reduced evaluation followed by the evaluated
-   counit. The scalar and closed Hom bijections are injective. Consequently that map
-   equals the finite scalar enriched map after Hom of coefficientSequenceProjection,
-   with the S.reductionEvaluation transport in its first input.
-3. Transport the theorem's right-derived sections and limit pairs to the specified
-   coefficient functors. Their universal comparison units determine the transports.
-   D.globalLimit_model identifies the transported global comparison with S.globalLimit;
-   D.globalEvaluation_model identifies the finite map with S.globalEvaluation, and
-   D.scalarSections_model identifies the scalar sections map. Thus the generic global
-   projection formula is CoefficientGammaProjection for the actual S.gamma.
-   H.sections_projection fixes the system-sections projection used in this transport;
-   arbitrary evaluation isomorphisms without this equation would not suffice.
-4. Apply H-zero to this equality. The coefficientHomZeroEquiv normalizations identify
-   Hom of the total-limit projection with postcomposition by that projection. The
-   normalized scalar adjunction takes h to its scalar extension followed by the
-   finite counit. This is also the last clause of enrichedSequenceProjectionFormula;
-   the ordinary and derived section normalizations in D fix its H-zero transports.
-   Rewrite the finite counit by S.counit_projection and naturality of
-   S.reductionEvaluation. This yields exactly CoefficientHomProjection for the composite
-   coefficientGammaZeroMap; no unrelated Hom equivalence is substituted.
-The argument applies to the empty scheme, the zero object and every positive coefficient
-level. It never asserts that evaluation preserves K-injective systems, or that reducing
-an integral mapping complex computes finite internal Hom. -/
+of a mapping equivalence or a construction of the calculus itself. -/
 theorem coefficientDerivedSystemProjectionFormulas
     (S : CoefficientDerivedSystemCalculus l E W)
     (D : CoefficientDerivedSystemResolutionCoherence l E W S)

@@ -16,35 +16,24 @@ import WeilConjectures.RingTheory.PopescuSolutionModuloChoose
 import WeilConjectures.RingTheory.PopescuAppendFlatParameters
 import Mathlib.LinearAlgebra.Basis.Basic
 
+/-!
+# Flat coordinates in an enlargement of a given admissible subalgebra
+
+Given an admissible subalgebra `A₀`, we find an admissible `A ≥ A₀` together with flat
+polynomial coordinates mapping into `A` whose residue differentials span.
+
+## References
+
+* [Stacks, Tag 07FH] (proof, through property (1)), together with the corrected enlargement
+  lemma `exists_popescu_admissible_differential_basis`
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u v
 namespace Algebra
 
-/-- Flat coordinates in an admissible enlargement of a specified admissible subalgebra.
-Source: Stacks Project, proof of Tag 07FH, through property (1), together with the
-corrected enlargement lemma `exists_popescu_admissible_differential_basis`.
-(blueprint: lem-weil-pbc-popescu-flat-coordinates-given-admissible).
-
-Proof: Apply the corrected enlargement lemma
-PopescuSolutionModuloChoose to A₀. This gives an admissible A containing A₀ (retain A₀ ≤ A in the
-conclusion),
-elements of Λ
-mapping into A whose residue differentials are a basis, and elements of q mapping into A
-which generate qΛ_q. Use the basis elements as the first t polynomial coordinates. By 07E6
-this polynomial localization maps flatly to Λ_q and its closed fibre is regular local.
-Select from the q-generators a minimal set generating the maximal ideal of that fibre.
-Nakayama and regular-local regularity make these a regular system of parameters and a
-regular sequence. Append these elements as further coordinates. Their images generate the
-closed-fibre maximal ideal, giving pΛ_q = qΛ_q. The closed fibre of the extended polynomial
-localization over the first localization is the polynomial ring over κ(p') localized at its
-origin, with parameters the added variables. The regular-sequence flatness criterion 07DY
-makes its map to the regular closed fibre flat. Apply the Noetherian local fibre-flatness
-criterion 00MP to conclude flatness of the extended localization map ψ. All coordinates
-still map into A, and their differentials span because the first t already form a basis.
-The maximal ideal of A is the contraction of the ambient maximal ideal: admissibility puts
-it inside that contraction, which is proper because it excludes 1; maximality gives equality.
-This proves every asserted property. No quotient factorization or étaleness is asserted. -/
+/-- Flat coordinates in an admissible enlargement of a specified admissible subalgebra. -/
 theorem exists_popescu_flat_coordinates_given_admissible
     (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]
     [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)

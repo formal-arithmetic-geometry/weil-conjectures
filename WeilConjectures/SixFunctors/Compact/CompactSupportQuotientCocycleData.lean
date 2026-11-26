@@ -73,12 +73,15 @@ public import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 
 /-! # Unit and cocycle for compact-support coefficient quotients
 
-Source: the current blueprint, lem-coef-integral-compact-support.proof.md,
-finite-level coefficient comparison; Stacks Tags 03EK, 06YS, 06YY and 07A6
-(blueprint: lem-coef-compact-support-quotient-coordinates).
+We set up the quotient coordinates for compact-support coefficient quotients: the quotient maps,
+their identity and composition laws, and the corresponding restriction identifications.
 
 Index n denotes exponent n+1, so every positive coefficient exponent is included.
 All reduction maps are the published normalized adjuncts of the actual quotient maps.
+
+## References
+
+* [Stacks, Tags 03DA, 03EK, 06YS, 06YY, 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -95,18 +98,12 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Equal-level quotients are identity maps.
-Source: Stacks Tag 03EK; blueprint coefficient maps
-(blueprint: lem-coef-compact-support-quotient-coordinates).
-Proof: the quotient factor induced by the identity sends each residue class to itself. -/
+/-- Equal-level quotients are identity maps. -/
 theorem compactSupportQuotient_self (n : ℕ) :
     compactSupportLevelQuotient l E n n le_rfl = RingHom.id _ := by
   exact Ideal.Quotient.factor_eq
 
-/-- Direct and successive quotient factors coincide.
-Source: Stacks Tag 03EK; blueprint coefficient maps
-(blueprint: lem-coef-compact-support-quotient-coordinates).
-Proof: both homomorphisms send the class of a to the class of a in the final quotient. -/
+/-- Direct and successive quotient factors coincide. -/
 theorem compactSupportQuotient_comp (r m n : ℕ) (hrm : m ≤ r) (hmn : n ≤ m) :
     (compactSupportLevelQuotient l E m n hmn).comp
         (compactSupportLevelQuotient l E r m hrm) =
@@ -118,18 +115,14 @@ theorem compactSupportQuotient_comp (r m n : ℕ) (hrm : m ≤ r) (hmn : n ≤ m
     (by unfold Padic.coefficientExtensionIdeal
         exact Ideal.pow_le_pow_right (Nat.add_le_add_right hmn 1))
 
-/-- The identity restriction identification, including the equal-level quotient cast.
-Source: Stacks Tag 03DA; blueprint identity convention
-(blueprint: lem-coef-compact-support-quotient-coordinates). -/
+/-- The identity restriction identification, including the equal-level quotient cast. -/
 def compactSupportQuotientResId (W : Scheme.{u}) (n : ℕ) :
     (proEtaleCoefficientRestrictScalars W
       (compactSupportLevelQuotient l E n n le_rfl)).mapDerivedCategory ≅ 𝟭 _ :=
   compactSupportCoefficientResId W (Padic.coefficientExtensionRing l E (n + 1))
     (compactSupportLevelQuotient l E n n le_rfl) (compactSupportQuotient_self l E n)
 
-/-- The canonical composition identification for all three quotient levels.
-Source: Stacks Tag 03DA; blueprint restriction composition convention
-(blueprint: lem-coef-compact-support-quotient-coordinates). -/
+/-- The canonical composition identification for all three quotient levels. -/
 def compactSupportQuotientResComp (W : Scheme.{u})
     (r m n : ℕ) (hrm : m ≤ r) (hmn : n ≤ m) :
     (proEtaleCoefficientRestrictScalars W

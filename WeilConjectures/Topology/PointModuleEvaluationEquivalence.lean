@@ -12,13 +12,17 @@ import Mathlib.Algebra.Category.Grp.Zero
 /-!
 # Modules on a one-point ringed space
 
-Source: Stacks Project, Sheaves, Tags 009A (4) and 006U; the one-point
-identification used by Cohomology, Section 20.44, Tag 0B6A.
-(blueprint: lem-pc-point-module-evaluation-equivalence)
-
 Evaluation on the whole space identifies module sheaves on a singleton ringed
-space with modules over its global ring. The proof constructs a module sheaf
-from an ordinary module using functions on proofs that an open contains the point.
+space with modules over its global ring.
+
+## Implementation details
+
+A module `M` over the global ring gives the sheaf with sections `PLift (default ∈ U) → M`, that
+is, functions on proofs that an open contains the point.
+
+## References
+
+* [Stacks Project, Tags 009A, 006U and 0B6A](https://stacks.math.columbia.edu/tag/009A)
 -/
 
 @[expose] public section
@@ -180,24 +184,7 @@ private theorem pointEvaluation_faithful : (globalSectionsFunctor Y).Faithful :=
     have := empty_subsingleton Y N
     exact Subsingleton.elim _ _
 
-/-- Evaluation at the whole space is an equivalence for a one-point ringed space.
-Source: Stacks Project, Sheaves, Tags 009A (4) and 006U; the identification of
-one-point module sheaves used in Cohomology, Section 20.44, Tag 0B6A.
-(blueprint: lem-pc-point-module-evaluation-equivalence)
-
-Proof: every open is either the whole point or empty. A module M over the global
-ring gives the sheaf with sections `PLift (default ∈ U) → M`; if the point lies in U,
-the inclusion of the whole space into U transports the scalar action, and otherwise
-this section module is zero. Restrictions precompose membership proofs. On a cover,
-compatibility identifies the values on members containing the point, giving a unique
-gluing; on an open missing the point there is exactly one section. Evaluation of
-this sheaf is linearly isomorphic to M by evaluation at the unique membership proof,
-so evaluation is essentially surjective. A linear map on global sections extends
-by that map on the whole space and by zero on the empty open. Naturality is immediate
-when both opens are the whole space; otherwise the target is empty and its module
-is zero by the sheaf condition for the empty covering. This proves fullness.
-Two sheaf morphisms agreeing globally agree on the whole space and, by the same
-zero-module observation, on the empty open, proving faithfulness. -/
+/-- Evaluation at the whole space is an equivalence for a one-point ringed space. -/
 theorem globalSectionsFunctor_isEquivalence_of_unique :
     (globalSectionsFunctor Y).IsEquivalence := by
   have := pointEvaluation_full Y

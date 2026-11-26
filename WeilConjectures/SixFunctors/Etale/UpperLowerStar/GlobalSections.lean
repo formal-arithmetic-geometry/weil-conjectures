@@ -52,8 +52,7 @@ noncomputable def lowerStarCompGlobalSectionsIso :
 given by the unit `G ⟶ f_* f^* G` of the adjunction `f^* ⊣ f_*` evaluated at the terminal
 object `Y` of the small étale site of `Y`, and the identification of its base change
 `Y ×_Y X` with the terminal object `X` of the small étale site of `X`. For a finite `f` this is
-the pullback `f^♯ a` of a section along a finite morphism.
-(blueprint: `theorem-comparison-over-henselian-pair-degree`) -/
+the pullback `f^♯ a` of a section along a finite morphism. -/
 noncomputable def globalSectionsUpperStarMap :
     (Sheaf.Γ _ A).obj G ⟶ (Sheaf.Γ _ A).obj ((f)^*[A].obj G) :=
   (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).hom.app G ≫
@@ -88,10 +87,7 @@ lemma isIso_terminal_hom (X : Scheme.{u}) : IsIso (⊤_ X.Etale).hom := by
 
 /-- In degree zero the comparison map `AlgebraicGeometry.Etale.cohomologyMap` on étale
 cohomology is bijective if and only if the pullback map on global sections
-`AlgebraicGeometry.Etale.globalSectionsUpperStarMap` is an isomorphism: under
-`H⁰(Y, G) ≅ Hom(ℤ_Y, G)` and `ℤ_X ≅ f^* ℤ_Y`, the comparison map becomes postcomposition with
-the unit `G ⟶ f_* f^* G` of `f^* ⊣ f_*` followed by bijections, and under
-`Hom(ℤ_Y, -) ≅ Γ(Y, -)` this postcomposition is the unit on global sections. -/
+`AlgebraicGeometry.Etale.globalSectionsUpperStarMap` is an isomorphism. -/
 lemma bijective_cohomologyMap_zero_iff {X Y : Scheme.{u}} (f : X ⟶ Y)
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     Function.Bijective (cohomologyMap f G 0) ↔

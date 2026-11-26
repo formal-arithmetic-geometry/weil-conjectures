@@ -10,9 +10,14 @@ public import Mathlib.CategoryTheory.EpiMono
 
 /-! # Transposing the supported coefficient square
 
-Source: blueprint/latest, thm-pur-finite-reduction-of-purity.proof.md, Step 4;
-lem-route-affine-orientation-reduction, proof Step 3.
-(blueprint: lem-pur-affine-reduction-counit-calculation).
+The exceptional transposition step of the finite reduction of purity.
+
+## Implementation details
+
+Apply injectivity of the smaller exceptional counit transpose and precompose with the epic
+compact-support comparison. Counit naturality and naturality of the support comparison move the
+input map and the larger orientation into place, and the reduced-counit normalization replaces
+the remaining pair by the reduction of the larger counit. No flatness assumption is used.
 -/
 
 @[expose] public section
@@ -21,15 +26,7 @@ open CategoryTheory
 
 namespace WeilConjectures.PurityFiniteSetting.FiniteDiagonalReduction
 
-/-- A reduced supported-class square transposes to the orientation square.
-Source: blueprint finite reduction of purity, Step 4, exceptional transposition
-(blueprint: lem-pur-affine-reduction-counit-calculation).
-Proof: apply injectivity of the smaller exceptional counit transpose and precompose
-with the epic compact-support comparison. Counit naturality moves the input map
-past the smaller counit. Naturality of the support comparison moves the larger
-orientation past that comparison. Its reduced-counit normalization then replaces
-the remaining pair by the reduction of the larger counit. The resulting equation
-is exactly the supported-class square. This argument uses no flatness assumption. -/
+/-- A reduced supported-class square transposes to the orientation square. -/
 theorem orientationSquare_of_supportedSquare
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
     (F : C ⥤ D) (G : D ⥤ C) (F' : C' ⥤ D') (G' : D' ⥤ C')

@@ -13,8 +13,18 @@ import Mathlib.RingTheory.Flat.Equalizer
 /-!
 # Vanishing of the left base-change term of the Jacobi-Zariski sequence
 
-Source: Stacks Project, Algebra, Lemma 00S2, final assertion and its proof
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
+If `H₁(L_{B/A}) = 0` and `Ω_{B/A}` is projective, the left base-change term of the
+Jacobi–Zariski sequence for `A → B → B/a` vanishes.
+
+## Implementation details
+
+With `M` the range of the naive cotangent differential `δ`, the exact sequences
+`0 → H₁ → N₁ → M → 0` and `0 → M → N₀ → Ω_{B/A} → 0` have flat right-hand terms, so they stay
+exact after tensoring with `B/a`.
+
+## References
+
+* [Stacks, Tag 00S2]
 -/
 
 @[expose] public section
@@ -25,21 +35,9 @@ open TensorProduct
 
 namespace Algebra
 
-/-- (blueprint: theorem-finite-etale-covers-proper-henselian--2)
-Stacks Project, Algebra, Lemma 00S2, final assertion, specialized to projective differentials
-and zero first cotangent homology. The presentation is the canonical `A[B] → B`.
-The tensor of the kernel inclusion is injective and identifies its source with the kernel
-of the tensored differential; both modules vanish.
-
-Proof: put `M = range δ`. The cokernel of `δ` is `Ω[B⁄A]` by
-`lem-weil-pbc-naive-cotangent-complex-cokernel-kahler`, giving exact sequences
-`0 → H₁ → N₁ → M → 0` and `0 → M → N₀ → Ω[B⁄A] → 0`.
-The latter quotient is projective and hence flat by `lem-weil-pbc-projective-module-flat`;
-`N₀` is free, hence flat. Thus `M` is flat by `lem-weil-pbc-flat-ses-kernel-flat`.
-By `lem-weil-pbc-flat-quotient-tensor-injective`, tensoring both sequences with `B ⧸ a`
-preserves their exactness and their left injections. Factoring the tensored differential
-through `M ⊗[B] (B ⧸ a)` identifies its kernel with the image of the tensored kernel
-inclusion. Finally `H₁ = 0` implies that its tensor is zero, and hence so is this kernel. -/
+/-- If `H₁(L_{B/A}) = 0` and `Ω_{B/A}` is projective, then for the canonical presentation
+`A[B] → B` and an ideal `a`, the tensor of the kernel inclusion with `B ⧸ a` is injective and
+identifies its source with the kernel of the tensored differential; both modules vanish. -/
 theorem jacobiZariski_leftTerm_vanishing
     (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B]
     [Subsingleton (H1Cotangent A B)] [Module.Projective B (KaehlerDifferential A B)]

@@ -15,8 +15,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverConstr
 
 For a cover datum, the points of `T' ∖ (D' ∪ H')` map, under both projections `T' ⟶ C`, into the
 punctured neighbourhood `p⁻¹(W ∖ y)` of `c` over which the terms of the models are trivialized
-(`CoverDatum.ψ₁`, `CoverDatum.ψ₂`; blueprint `lemma-tangent-cones-on-cover` (i): `N' ⊠ Q'` is
-formed on the complement of the axes).
+(`CoverDatum.ψ₁`, `CoverDatum.ψ₂`), so that `N' ⊠ Q'` can be formed on the complement of the axes.
 
 -/
 

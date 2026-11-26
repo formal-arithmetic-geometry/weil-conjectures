@@ -45,14 +45,20 @@ import WeilConjectures.SixFunctors.Integral.IntegralOperationsPreserveConstructi
 
 /-! # Pullback of finite-Tor complexes and the actual coefficient units
 
-Source: main-20261015, sec-six-functors-basics/sk-def-purity-conv,
-lemma-section-normal-bundle--1, the expression Ls* Rg! Lambda_B and its Picard assertion;
-Bhatt--Scholze, Lemma 6.5.9(5); Stacks Tag 099N(5).
-(blueprint: lem-pur-all-stage-ctf-pullback-unit).
+Pullback along a separated morphism of finite type preserves finite-Tor constructibility at
+every finite and integral coefficient stage, and carries the constant coefficient objects to the
+constant coefficient objects, at the rational and common field stages.
 
-Positive exponent j is indexed by n with j = n+1. The integral unit uses the regular
+## Implementation details
+
+Positive exponent `j` is indexed by `n` with `j = n + 1`. The integral unit uses the regular
 completed coefficient sheaf, its strict quotient tower and zero shifted Roos coordinate.
-The two field units are the images of this very arrow in the recorded categories.
+The two field units are the images of this very arrow in the field-stage categories.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(5)
+* [Stacks Project, Tag 099N]
 -/
 
 @[expose] public noncomputable section
@@ -69,10 +75,8 @@ open AlgebraicGeometry.Scheme
 
 namespace WeilConjectures.AllStageCtfPullback
 
-/-- The coefficient prime is invertible in residue fields of the fixed base schemes.
-This transports the recorded local-ring witness along the actual residue morphism.
-Source: purity conventions, ell distinct from p
-(blueprint: lem-pur-all-stage-ctf-pullback-unit). -/
+/-- The coefficient prime `l` is invertible in the residue fields of a scheme over the base
+field `k`. -/
 @[instance_reducible] def residueInvertible (P : PurityFiniteSetting.{u}) (W : Scheme.{u})
     [W.Over (Spec (.of P.field.k))] (w : W) :
     Invertible (P.coefficients.l : W.residueField w) :=
@@ -80,10 +84,8 @@ Source: purity conventions, ell distinct from p
     simpa only [map_natCast] using
       (P.coefficientPrime_isUnit_stalk W (W ↘ Spec (.of P.field.k)) w).map (W.residue w).hom)
 
-/-- The rational unit is exactly the localization of the existing completed integral unit.
-The source comparison is the prescribed unchanged-object equation for rational pullback.
-Source: blueprint field-stage clause; Stacks 099N(5)
-(blueprint: lem-pur-all-stage-ctf-pullback-unit). -/
+/-- The rational unit isomorphism `f^* E_Y ≅ E_X` of constant rational coefficient objects,
+the localization of the completed integral unit. -/
 def rationalUnit (P : PurityFiniteSetting.{u}) (E : Type u) [Field E]
     [Algebra (Padic P.coefficients.l) E] [FiniteDimensional (Padic P.coefficients.l) E]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -100,11 +102,8 @@ def rationalUnit (P : PurityFiniteSetting.{u}) (E : Type u) [Field E]
     (sfRationalConstructibleLocalization P.coefficients.l E X).mapIso
       (ObjectProperty.isoMk _ (ConstantGeometricStalkUnit.integralUnit P.coefficients.l E f))
 
-/-- At every finite field stage, the algebraically closed unit comparison is the
-inclusion of the rationalized completed unit. Both units are literal recorded pairs.
-The unchanged-stage comparison is the defining object equation of common-stage pullback.
-Source: blueprint common-stage paragraph; Stacks 099N(5)
-(blueprint: lem-pur-all-stage-ctf-pullback-unit). -/
+/-- The unit isomorphism of common-stage pullback on the constant algebraically closed
+coefficient objects at a finite field stage `L`, the inclusion of `rationalUnit`. -/
 def commonUnit (P : PurityFiniteSetting.{u})
     (L : AlgebraicallyClosedCoefficients.Index P.coefficients.l P.coefficients.Qbar)
     {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -163,41 +162,12 @@ private theorem goodRepresentative (l : ℕ) [Fact l.Prime]
         (completedIntegralCommRingSheafUnrestricted.{u, u} l E W) (R.X i)).symm (hflat i)
   exact ⟨⟨R, hR, hsite⟩, ⟨asIso (DerivedCategory.Q.map f) ≪≫ e⟩⟩
 
-/-- Pullback preserves the fixed finite Tor interval, the uniform integral Tor interval,
-on the actual completed coefficients. The rational and common-stage functors have
-exactly the full constructible categories as their domains and codomains; their units
-are rationalUnit and commonUnit above, obtained from the reexported
-ConstantGeometricStalkUnit.integralUnit by localization and the same-stage inclusion.
-The exact finite unit is ConstantGeometricStalkUnit.finiteUnit.
-
-Source: main-20261015, lemma-section-normal-bundle--1; Bhatt--Scholze, 6.5.9(5), Stacks 099N(5)
-(blueprint: lem-pur-all-stage-ctf-pullback-unit).
-Proof:
-1. Apply proposition-six-operations-dctf--1 at every positive finite exponent. Its hypotheses
-are finite type and separatedness of f, and finite type of X and Y over k. Transport
-from its tensor-pullback coordinates by the canonical unit-preserving comparison to
-finiteDerivedPullback. The unchanged interval witnesses the finite-Tor restriction.
-2. IntegralOperations_preserve_constructible gives completeness, bounded constructibility
-and invertibility of the actual Roos-projection reduction comparison on every good
-representative. Identifying its finite term with finite inverse image of the reduction
-of K gives the displayed derived isomorphism. Apply step 1 at every n using the SAME
-supplied endpoints a,b. This is exactly finiteTorConstructibleIntegral on X.
-3. Finite constant-ring pullback identifies the regular unit by its adjoint ring map;
-exactness gives ConstantGeometricStalkUnit.finiteUnit in the derived category. The quotient
-maps preserve constant sections, so these unit identifications commute with transitions.
-4. The regular completed sheaf is flat and K-flat, and its finite reductions are the
-regular finite sheaves. Its actual augmentation is a quasi-isomorphism by rank-one
-completeness. The reexported ConstantGeometricStalkUnit.integralChainUnit lemmas fix the strict cone
-comparison and integralUnit. The coefficient-objects constructibility theorem puts these objects
-in the full constructible categories. None is the discrete integral constant sheaf.
-5. Rational pullback acts on integral representatives and tensors morphisms with scalars;
-raw localization of the existing integralUnit is rationalUnit. Common-stage pullback uses the same
-operation over one finite field and the specified scalar comparisons; its commonUnit is
-its image under that stage inclusion. The scalar-extension comparisons are natural,
-identity- and tower-compatible, so these maps are independent of the chosen field stage.
-6. At the field stages finiteTorFieldCoefficientCategory is the full constructible
-category by definition. Empty schemes, identity maps, the zero complex and exponent
-one satisfy the same constructions with their unique maps; no extra hypothesis occurs. -/
+/-- Let `f : X ⟶ Y` be a separated morphism of finite type of schemes of finite type over `k`.
+Finite pullback `f^*` preserves finite-torsion constructibility and Tor amplitude in `[a, b]` at
+every finite exponent `n + 1`, hence finite-Tor constructibility. Integral pullback preserves
+integral constructibility and uniform Tor amplitude in `[a, b]` of the finite reductions, the
+reduction of `f^* K` is the finite pullback of the reduction of `K`, the comparison maps on good
+representatives are isomorphisms, and integral finite-Tor constructibility is preserved. -/
 theorem preserves_ctf_and_unit (P : PurityFiniteSetting.{u})
     (X Y : Over (Spec (.of P.field.k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]

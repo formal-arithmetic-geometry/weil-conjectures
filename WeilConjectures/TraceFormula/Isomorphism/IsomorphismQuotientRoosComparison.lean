@@ -10,8 +10,13 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingRoosCompariso
 
 /-! # Inverse image and the strict quotient Roos cocone
 
-Source: Stacks 03CZ, 03EK, 06YY, 08TC and 0941; the strict quotient-cone argument
-of `lem-trf-isomorphism-multiplication-cone-descent`.
+Exact inverse image under a site equivalence commutes with the strict quotient Roos cocone by the
+diagonal canonical product comparison, naturally in good complexes
+(`isomorphismQuotientRoosComparison`).
+
+## References
+
+* Stacks Project, Tags 03CZ, 03EK, 06YY, 08TC, 0941
 -/
 
 @[expose] public noncomputable section
@@ -147,23 +152,7 @@ private theorem quotientRoosSecond
 attribute [local irreducible] trfQuotientTowerFunctor
 
 /-- Exact inverse image commutes with the actual strict Roos cocone by the diagonal
-canonical product comparison, naturally in good complexes.
-Source: Stacks 0941 (lemma-derived-limit-is-ok), 08TC, and steps 1 and 5 of
-lem-trf-isomorphism-multiplication-cone-descent.
-(blueprint: lem-trf-isomorphism-quotient-roos-comparison).
-
-Proof in words: inverse image under a site equivalence, with action transported through
-the inverse completed coefficient isomorphism, preserves sectionwise products. Its
-product comparison is therefore invertible in every degree. Project onto the nth factor:
-both composites with the tower shift are inverse image of the (n+1)st projection followed
-by the nth transition. Product extensionality and additivity give the difference square.
-On the cocone take this same product comparison in both coordinates, with zero mixed
-entries. The difference square and its chain-map equation imply that the diagonal map
-commutes with d(b,a)=(-db-(1-s)a,da). The inverse diagonal map satisfies the same
-calculation, so it is an isomorphism. Product projection identities and cocone coordinate
-extensionality show naturality in every chain map. The two resulting projection
-equations are exactly the displayed formulas, with the shifted coordinate in degree p.
-This works for the zero complex as well and uses no boundedness or completeness. -/
+canonical product comparison, naturally in good complexes. -/
 theorem isomorphismQuotientRoosComparison
     {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g] :
     (∀ Q : (integralOperationsGoodComplex l E Y).FullSubcategory,

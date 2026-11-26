@@ -20,8 +20,7 @@ on `S`. If every higher direct image `Rᵠf_* 𝔽_ℓ` of the constant sheaf `�
 invertible on `S`, is constructible, then so is every higher direct image `Rᵠf_* M` of the
 constant sheaf with value a finite `Λ`-module `M`
 (`Etale.isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf_of_zmod`).
-This is the dévissage step of the blueprint proof of
-`proposition-proper-direct-image-finite-coefficients`.
+## Implementation details
 
 The proof first changes the coefficients from `Λ` to `ℤ/N`, `N` the characteristic of `Λ`, by
 restriction of scalars: it commutes with constant sheaves, with the derived direct image and
@@ -241,8 +240,7 @@ lemma exists_injective_linearMap_restrictScalars_of_addOrderOf {N ℓ : ℕ} [Ne
 /-- **Dévissage of the coefficients over `ℤ/N`.** Let `f : X ⟶ S` be a morphism and `N ≠ 0`. If
 for every prime `ℓ ∣ N` all the higher direct images `Rᵠf_* 𝔽_ℓ` of the constant sheaf `𝔽_ℓ`
 are constructible, then for every finite `ℤ/N`-module `M` all the higher direct images
-`Rᵠf_* M` are constructible: by induction on the cardinality of `M`, along the extension of
-`M / (ℤ/ℓ) x` by `(ℤ/ℓ) x` for an element `x` of prime order `ℓ` (Cauchy's theorem). -/
+`Rᵠf_* M` are constructible. -/
 theorem constructibleHomology_rightDerivedLowerStar_constantSheaf_zmod {X S : Scheme.{u}}
     (f : X ⟶ S) (N : ℕ) [NeZero N]
     (h : ∀ (ℓ : ℕ) [Fact ℓ.Prime], ℓ ∣ N →
@@ -298,17 +296,12 @@ theorem constructibleHomology_rightDerivedLowerStar_constantSheaf_zmod {X S : Sc
     (fun q ↦ ?_) (ih _ hcard (ModuleCat.of _ (M ⧸ LinearMap.range g)) rfl)
   exact (isConstructibleSheaf_homology_constantSheaf_restrictScalars_iff ψ f _ q).2 (h ℓ hℓN q)
 
-/-- **Dévissage of the coefficients for constant direct images.** This is the dévissage step of
-the blueprint proof of `proposition-proper-direct-image-finite-coefficients`.
+/-- **Dévissage of the coefficients for constant direct images.**
 
 Let `f : X ⟶ S` be a morphism of schemes and `Λ` a finite ring whose exponent is invertible on
 `S`. Suppose that for every prime `ℓ` invertible on `S` every higher direct image `Rᵠf_* 𝔽_ℓ`
 of the constant sheaf `𝔽_ℓ` is constructible. Then for every finite `Λ`-module `M` every higher
-direct image `Rᵠf_* M` of the constant sheaf `M` is constructible. Indeed, restriction of
-scalars along `ℤ/N →+* Λ`, `N` the characteristic of `Λ`, reduces this to a finite `ℤ/N`-module
-(`AlgebraicGeometry.Etale.isConstructibleSheaf_homology_constantSheaf_restrictScalars_iff`), which
-has a filtration with successive quotients `𝔽_ℓ` for primes `ℓ ∣ N`
-(`AlgebraicGeometry.Etale.constructibleHomology_rightDerivedLowerStar_constantSheaf_zmod`). -/
+direct image `Rᵠf_* M` of the constant sheaf `M` is constructible. -/
 theorem isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf_of_zmod
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X S : Scheme.{u}} (f : X ⟶ S)
     [HasInvertibleExponent Λ S]

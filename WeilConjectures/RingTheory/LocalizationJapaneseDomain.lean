@@ -14,8 +14,20 @@ import Mathlib.RingTheory.Localization.LocalizationLocalization
 /-!
 # Localization of N-1 and Japanese domains
 
-Source: Stacks Project, Algebra, Lemma 10.161.3 (Tag 032G), using Lemma 10.36.11
-(Tag 0307) (blueprint: lem-weil-pbc-localization-n2-domain).
+Localizing a domain at a multiplicative set not containing zero preserves its fraction field and
+the N-1 and N-2 conditions.
+
+## Implementation details
+
+For an extension `L/K`, elements of `S` are already units in `L`, so integral closure commuting
+with localization (Stacks 0307) identifies the integral closure of `S⁻¹R` in `L` with the
+localization of `integralClosure R L`; images of finitely many generators still generate. No
+Noetherian or separability assumption is needed.
+
+## References
+
+* [Stacks, Tag 032G]
+* [Stacks, Tag 0307]
 -/
 
 @[expose] public section
@@ -24,11 +36,8 @@ universe u v w
 
 set_option autoImplicit false
 
-/-- The finite-generation step in Stacks Tags 032G and 0307
-(blueprint: lem-weil-pbc-localization-n2-domain).
-The inclusion of integral closures is obtained by extending the base ring. Since the
-chosen denominators are units in `L`, `L` is its own localization. Integral closure
-commutes with localization, and the images of a finite generating set still generate. -/
+/-- If the integral closure of `R` in `L` is finite over `R`, then the integral closure of the
+localization in `L` is finite over the localization. -/
 private theorem finite_integralClosure_localization
     (R : Type u) (Rf : Type w) (L : Type v)
     [CommRing R] [CommRing Rf] [Field L]
@@ -54,23 +63,8 @@ private theorem finite_integralClosure_localization
   exact Module.Finite.of_isLocalization R (integralClosure R L) S
 
 /-- Localizing a domain away from zero preserves its fraction field and the N-1 and N-2
-conditions. Source: Stacks Project, Algebra, Tag 032G, using Tag 0307
-(blueprint: lem-weil-pbc-localization-n2-domain).
-
-Proof: Since `0 ∉ S`, the localization embeds in `K` by `r/s ↦ r/s`, so it is a domain.
-Every nonzero `r/s` is invertible in `K`, and every fraction of elements of `R` is a
-fraction of their images in the localization. Thus `K` is still the fraction field.
-For any extension field `L/K`, elements of `S` are already units in `L`, so localizing
-`L` at `S` leaves it unchanged. Tag 0307
-(`lem-weil-pbc-integral-closure-commutes-localization`) therefore identifies the integral
-closure of the localized ring in `L` with the localization of `integralClosure R L`.
-If `c₁, …, cₙ` generate that closure over `R`, their images generate its localization:
-`c/s = ∑ᵢ (rᵢ/s)(cᵢ/1)` whenever `c = ∑ᵢ rᵢ cᵢ`. This uses
-`def-weil-finitely-generated-module` and `def-weil-pbc-module-localization`.
-Apply this first with `L = K` for N-1, then with every finite extension `L/K` for N-2,
-as in `def-weil-pbc-japanese-domain`. No Noetherian or separability assumption is needed.
-The existential algebra structure is pinned down by the displayed fraction formula;
-it supplies the canonical map rather than assuming the conclusions as instances. -/
+conditions. The existential algebra structure is pinned down by the displayed fraction
+formula; it supplies the canonical map rather than assuming the conclusions as instances. -/
 theorem localization_isN1_isN2 (R : Type u) (K : Type v)
     [CommRing R] [IsDomain R] [Field K] [Algebra R K] [IsFractionRing R K]
     (S : Submonoid R) (hS : (0 : R) ∉ S) :

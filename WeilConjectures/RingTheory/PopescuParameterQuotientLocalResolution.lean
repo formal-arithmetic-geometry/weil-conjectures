@@ -21,6 +21,22 @@ import WeilConjectures.RingTheory.PolynomialOriginRegularLocal
 import Mathlib.RingTheory.Noetherian.Nilpotent
 import Mathlib.Algebra.Algebra.Shrink
 
+/-!
+# Local Popescu resolution of the parameter quotient
+
+After quotienting by powers of the parameters, the quotient map has a Popescu resolution after
+localization at the quotient prime.
+
+## Implementation details
+
+No delocalization is asserted here. The case `d = 0`, where the localized base and target are
+fields, is included.
+
+## References
+
+* [Stacks, Tag 07FE] (steps 9--12 of the proof)
+-/
+
 @[expose] public section
 
 universe u v w
@@ -76,27 +92,7 @@ private theorem powered_parameter_base_nilpotent
     pow_succ, hn, zero_mul]
   exact Ideal.map_bot
 
-/-- The quotient map has a Popescu resolution after localization at the quotient prime.
-
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07FE, steps 9--12
-(blueprint: lem-weil-pbc-popescu-parameter-quotient-local-resolution).
-
-Proof: Put R=k[x_i], e=8c and p=φ⁻¹(q). The parameter hypothesis implies p is the
-origin maximal ideal. The d parameters are a regular sequence in the regular local ring
-Λ_q of dimension d. The polynomial-origin regular-local theorem and flat-over-regular
-criterion give flatness of R_p→Λ_q. Base change gives flatness after quotienting by the
-powered parameters. The reduced base has nilpotent maximal ideal: a monomial of total
-degree d(e-1)+1 is divisible by some x_i^e. Its residue field is k, and the closed fiber
-of the reduced target is κ(q). Separability expresses that fiber as a filtered colimit
-of smooth k-algebras; nilpotent lifting expresses the reduced local target as a filtered
-colimit of smooth algebras over the reduced local base. Factor the finitely presented
-localized source through a smooth stage. A finitely presented stage can be represented
-in the universe of the source and base. Its singular ideal is the unit ideal, so the
-factorization satisfies the domination and escape conditions of a Popescu resolution.
-Canonical quotient/localization isomorphisms identify these maps with the displayed
-ones, since their composites with the quotient maps agree. For d=0 the ideals vanish,
-the localized base and target are fields, and the same separable smooth-colimit
-factorization proves the assertion. No delocalization is asserted here. -/
+/-- The quotient map has a Popescu resolution after localization at the quotient prime. -/
 theorem parameter_quotient_local_resolution
     {k : Type u} {C : Type v} {Λ : Type w}
     [Field k] [CommRing C] [CommRing Λ] [Algebra k Λ]

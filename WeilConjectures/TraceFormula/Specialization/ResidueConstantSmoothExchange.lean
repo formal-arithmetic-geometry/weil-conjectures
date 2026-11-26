@@ -32,9 +32,9 @@ complexes of `T̲`-modules (`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_s
 `ℓ` being invertible on the total space of the deformation.
 
 Consequently, the vanishing of the defect of the unit is stable under smooth pullback
-(`ProEtale.CondensedRing.isZero_specializationDefect_unit_of_smooth_finiteCoefficient`), the
-smooth exchange step of blueprint `lemma-vanishing-generic-points-principal-divisor` with finite
-coefficients.
+(`ProEtale.CondensedRing.isZero_specializationDefect_unit_of_smooth_finiteCoefficient`): this is
+the smooth exchange step, with finite coefficients, in the proof that the defect vanishes at the
+generic points of a principal divisor.
 
 ## Main results
 
@@ -107,9 +107,7 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [Dis
 coefficients**: for the inclusion `j : 𝒴_Ω ⟶ 𝒴` of the geometric generic fibre of the deformation
 model `𝒴 = 𝒟_I Y` and the projection `π : 𝔸ⁿ_𝒴 ⟶ 𝒴`, the base change morphism
 `Lπ^* Rj_* ⟶ Rj'_* Lπ'^*` with coefficients in a finite ring `T` killed by a power of
-`ℓ ≠ char k'` is invertible at every bounded constructible complex: `ℓ`, hence every power of
-`ℓ`, is invertible on `𝒴` (`isUnit_natCast_deformationTotal`), and `j` is quasi-compact and
-quasi-separated. -/
+`ℓ ≠ char k'` is invertible at every bounded constructible complex. -/
 theorem isIso_baseChangeMap_affineSpace_deformationModel_app_finiteCoefficient
     {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
     (I : Y.left.IdealSheafData) (n : ℕ) {r : ℕ} (hT : (ℓ : T) ^ r = 0)
@@ -136,13 +134,11 @@ theorem isIso_baseChangeMap_affineSpace_deformationModel_app_finiteCoefficient
     (by rw [Nat.cast_pow]; exact (isUnit_natCast_deformationTotal k' Y I).pow r)
     (by rwa [Nat.cast_pow]) E hE
 
-/-- **The smooth exchange of nearby cycles with finite coefficients** (blueprint
-`prose-E-03` (1), smooth case, for a finite coefficient ring `T` killed by a
-power of a prime `ℓ ≠ char k'`): for a morphism `φ : 𝒟_J X ⟶ 𝒟_I Y` of deformation models
-whose morphism of total spaces is smooth and whose square of geometric generic fibres is
-cartesian, the pullback exchange `α_φ : Lg_s^* Ψ_Y ⟶ Ψ_X Lg^*` is invertible at every `K` such
-that `Lε^* K` is bounded constructible (e.g. the unit), by smooth base change along the inclusion
-`j` of the geometric generic fibre. -/
+/-- **The smooth exchange of nearby cycles with finite coefficients**: let `T` be a finite
+coefficient ring killed by a power of a prime `ℓ ≠ char k'`. For a morphism `φ : 𝒟_J X ⟶ 𝒟_I Y`
+of deformation models whose morphism of total spaces is smooth and whose square of geometric
+generic fibres is cartesian, the pullback exchange `α_φ : Lg_s^* Ψ_Y ⟶ Ψ_X Lg^*` is invertible at
+every `K` such that `Lε^* K` is bounded constructible (e.g. the unit). -/
 theorem isIso_pullbackExchange_deformationModel_app_of_smooth_finiteCoefficient
     {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
@@ -192,10 +188,7 @@ lemma boundedConstructible_leftDerivedUpperStar_obj_leftDerivedUpperStar_obj_uni
 /-- **Smooth pullback of the vanishing of the defect of the unit, with finite coefficients** (the
 smooth exchange step): let `f : X ⟶ X₀` be smooth,
 `Z₀ = V(I₀) ⊆ X₀` and `Z = f⁻¹ Z₀`. If `C_{X₀,Z₀}(T̲) = 0`, then `C_{X,Z}(T̲) = 0`, for a finite
-coefficient ring `T` killed by a power of `ℓ ≠ char k'`. The smooth exchanges of the deformations
-of `f` and of `f_Z` are invertible at the unit
-(`isIso_pullbackExchange_deformationModel_app_of_smooth_finiteCoefficient`), so that
-`C_{X,Z}(Lf^* T̲) ≅ Lf_Z^* C_{X₀,Z₀}(T̲)`. -/
+coefficient ring `T` killed by a power of `ℓ ≠ char k'`. -/
 theorem isZero_specializationDefect_unit_of_smooth_finiteCoefficient [IsSepClosed k']
     {X X₀ : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     [IsSeparated X.hom] [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom]

@@ -16,9 +16,6 @@ import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComp
 
 /-! # Ordinary scalar associators and units for completed coefficients
 
-Source: Stacks 06YY, 07A4; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-
 The ordinary (uncompleted) derived scalar extensions along completed coefficient maps
 carry an associator and a multiplication unitor, each fixed by its pure-tensor formula
 and the universal K-flat counits. This file records them and proves their two unit laws
@@ -31,6 +28,20 @@ and the pentagon. The completed comparisons are obtained from them by conjugatio
 * `associatorData_derived_source_unit`, `associatorData_derived_target_unit`:
   the two unit laws.
 * `associatorData_derived_pentagon`: the pentagon.
+
+## Implementation details
+
+The sheaf-level associator sends `t ⊗ (s ⊗ x)` to `t * j(s) ⊗ x`, with inverse
+`u ⊗ x ↦ u ⊗ (1 ⊗ x)`; the unitor is multiplication, with inverse `x ↦ 1 ⊗ x`. These maps
+commute with restrictions and differentials. Ordinary extension preserves flat-term K-flat
+complexes and its universal counits are invertible there, so localization with the specified
+counits gives the unique derived comparisons. The unit laws and the pentagon are checked on pure
+tensors at chain level and transported to the derived category through the counit
+normalizations and localization.
+
+## References
+
+* Stacks Project, Tags 03EL, 05RU, 06YY and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -72,9 +83,7 @@ variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G
   (j : F →ₐ[ℚ_[l]] G)
 
 
-/-- Ordinary scalar associativity, fixed on sheafified tensors and universal K-flat counits.
-Source: Stacks 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Ordinary scalar associativity, fixed on sheafified tensors and universal K-flat counits. -/
 def AssociatorData :=
   (completedOrdinaryScalarExtension l E F ι X ⋙
     completedOrdinaryScalarExtension l F G j X ≅
@@ -85,15 +94,13 @@ def AssociatorData :=
 
 variable {l E X F ι G j}
 
-/-- Projection of the canonical ordinary comparison package.
-Source: Stacks 03EL, 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Projection of the canonical ordinary comparison package. -/
 def AssociatorData.sheaf (d : AssociatorData l E X F ι G j) :
     completedOrdinaryScalarExtension l E F ι X ⋙
     completedOrdinaryScalarExtension l F G j X ≅
       completedOrdinaryScalarExtension l E G (j.comp ι) X := d.1
 
-/-- Projection of the canonical ordinary comparison package.
-Source: Stacks 03EL, 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Projection of the canonical ordinary comparison package. -/
 def AssociatorData.derived (d : AssociatorData l E X F ι G j) :
     completedDerivedScalarExtension l E F ι X ⋙
     completedDerivedScalarExtension l F G j X ≅
@@ -101,9 +108,7 @@ def AssociatorData.derived (d : AssociatorData l E X F ι G j) :
 
 variable (l E X F ι G j)
 
-/-- Balanced-tensor multiplication and the universal-counit normalization.
-Source: Stacks 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Balanced-tensor multiplication and the universal-counit normalization. -/
 def IsAssociatorNormalized (d : AssociatorData l E X F ι G j) : Prop :=
   (∀ (M : integralTowerModules l E X) (U : X.ProEtᵒᵖ)
       (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U)
@@ -122,34 +127,21 @@ def IsAssociatorNormalized (d : AssociatorData l E X F ι G j) : Prop :=
       d.derived.hom.app (DerivedCategory.Q.obj P.obj) ≫
         completedScalarCounit l E G (j.comp ι) X P.obj)
 
-/-- Ordinary scalar associators with exactly the prescribed balanced normalization.
-Source: Stacks 06YY, 07A4; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: the balanced map t tensor (s tensor x) mapped to t*j(s) tensor x has inverse
-u tensor x mapped to u tensor (1 tensor x). The two maps commute with restrictions
-and differentials. Sheafification preserves their inverse equations. Ordinary extension
-preserves flat-term K-flat complexes, so localization with the specified counits gives
-the unique derived comparison. Local generation and the localization equivalence prove
-uniqueness of the entire package. -/
+/-- There is a unique ordinary scalar associator with the prescribed balanced normalization. -/
 theorem associatorData_existsUnique :
     ∃! a : AssociatorData l E X F ι G j, IsAssociatorNormalized l E X F ι G j a := by
   delta AssociatorData IsAssociatorNormalized AssociatorData.sheaf
     AssociatorData.derived scalarAssociatorComplex
   exact CompletedScalarAssociator.exists_unique l E X F ι G j
 
-/-- The normalized ordinary scalar associator, including its representative.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The normalized ordinary scalar associator, including its representative. -/
 def associatorData : AssociatorData l E X F ι G j :=
   (associatorData_existsUnique l E X F ι G j).exists.choose
 
 section DerivedUnitProof
 
-/-- The ordinary derived multiplication unitor, fixed by the recorded chain unitor.
-Source: Stacks 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: multiplication and x mapped to 1 tensor x are inverse on module sheaves.
-They commute with differentials and restrictions. Localization with the canonical
-K-flat counit gives the unique derived unitor with the displayed normalization. -/
+/-- There is a unique ordinary derived multiplication unitor normalized by the recorded chain
+unitor. -/
 theorem ordinaryUnit_existsUnique :
     ∃! e : completedDerivedScalarExtension l E E (AlgHom.id ℚ_[l] E) X ≅ 𝟭 _,
       ∀ P : (integralOperationsGoodComplex l E X).FullSubcategory,
@@ -174,8 +166,7 @@ theorem ordinaryUnit_existsUnique :
 
 end DerivedUnitProof
 
-/-- The ordinary multiplication unitor with its prescribed representative.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The ordinary multiplication unitor with its prescribed representative. -/
 def ordinaryUnit :
     completedDerivedScalarExtension l E E (AlgHom.id ℚ_[l] E) X ≅
       𝟭 (DerivedCategory (integralTowerModules l E X)) :=
@@ -183,12 +174,7 @@ def ordinaryUnit :
 
 attribute [local irreducible] associatorData ordinaryUnit
 
-/-- The derived associator normalization holds on every complex, not only on good ones.
-Source: Stacks 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: the normalized associator is the one built from the composed extension-restriction
-adjunctions, whose representative formula holds on all complexes; uniqueness identifies
-it with `associatorData`. -/
+/-- The derived associator normalization holds on every complex, not only on good ones. -/
 theorem associatorData_derived_normalized
     (P : CochainComplex (integralTowerModules l E X) ℤ) :
     (completedDerivedScalarExtension l F G j X).map (completedScalarCounit l E F ι X P) ≫
@@ -210,11 +196,7 @@ theorem associatorData_derived_normalized
   delta scalarAssociatorComplex completedOrdinaryScalarComplex
   rfl
 
-/-- The ordinary unitor is multiplication after the universal counit, on every complex.
-Source: Stacks 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: `ordinaryUnitOnComplexes_exists` gives a unitor with this formula on all complexes;
-it satisfies the good-complex normalization, so it is `ordinaryUnit` by uniqueness. -/
+/-- The ordinary unitor is multiplication after the universal counit, on every complex. -/
 theorem ordinaryUnit_hom_app_Q (P : CochainComplex (integralTowerModules l E X) ℤ) :
     (ordinaryUnit l E X).hom.app (DerivedCategory.Q.obj P) =
       completedScalarCounit l E E (AlgHom.id ℚ_[l] E) X P ≫
@@ -232,8 +214,7 @@ attribute [local semireducible] completedDerivedScalarExtension completedOrdinar
   completedScalarCounit completedOrdinaryScalarComplex completedScalarChangeData
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Universal counits commute with termwise ordinary extension of chain maps.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Universal counits commute with termwise ordinary extension of chain maps. -/
 private theorem counit_naturality {P P' : CochainComplex (integralTowerModules l E X) ℤ}
     (f : P ⟶ P') :
     (completedDerivedScalarExtension l E F ι X).map (DerivedCategory.Q.map f) ≫
@@ -249,8 +230,7 @@ private theorem counit_naturality {P P' : CochainComplex (integralTowerModules l
 
 end CounitNaturality
 
-/-- Natural transformations out of a derived category agree once they agree on complexes.
-Source: Stacks 05RU (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Natural transformations out of a derived category agree once they agree on complexes. -/
 private theorem derived_natTrans_app_eq {A D : Type*} [Category A] [Abelian A]
     [HasDerivedCategory A] [Category D] {F₁ F₂ : DerivedCategory A ⥤ D} (τ τ' : F₁ ⟶ F₂)
     (h : ∀ P, τ.app (DerivedCategory.Q.obj P) = τ'.app (DerivedCategory.Q.obj P))
@@ -260,8 +240,7 @@ private theorem derived_natTrans_app_eq {A D : Type*} [Category A] [Abelian A]
 
 set_option backward.isDefEq.respectTransparency false in
 open scoped ChangeOfRings in
-/-- Sheafified pure tensors are scalar multiples of `1 ⊗ x`.
-Source: Stacks 03EL (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Sheafified pure tensors are scalar multiples of `1 ⊗ x`. -/
 private theorem changeOfRings_tensor_smul
     {R S : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{max u (t + 1)}}
     (φ : R ⟶ S)
@@ -293,8 +272,7 @@ private theorem changeOfRings_tensor_smul
   exact (congrArg k ht).trans (k.hom.map_smul a _)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A pure tensor `a ⊗ x` in an ordinary scalar extension is `a • (1 ⊗ x)`.
-Source: Stacks 03EL (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- A pure tensor `a ⊗ x` in an ordinary scalar extension is `a • (1 ⊗ x)`. -/
 private theorem completedScalarTensorSection_smul (M : integralTowerModules l E X)
     (U : X.ProEtᵒᵖ) (a : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U)
     (x : M.val.obj U) :
@@ -304,15 +282,13 @@ private theorem completedScalarTensorSection_smul (M : integralTowerModules l E 
   exact changeOfRings_tensor_smul X (completedCoefficientMap l E F ι X) M _
     ((completedScalarChangeData l E F ι X).choose_spec.choose M) U a x
 
-/-- The normalized ordinary associator satisfies its defining normalization.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The normalized ordinary associator satisfies its defining normalization. -/
 private theorem associatorData_isNormalized :
     IsAssociatorNormalized l E X F ι G j (associatorData l E X F ι G j) := by
   unfold associatorData
   exact (associatorData_existsUnique l E X F ι G j).exists.choose_spec
 
-/-- The ordinary associator sends `t ⊗ (s ⊗ x)` to `t*j(s) ⊗ x`.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The ordinary associator sends `t ⊗ (s ⊗ x)` to `t*j(s) ⊗ x`. -/
 private theorem associatorData_sheaf_hom_tensor (M : integralTowerModules l E X)
     (U : X.ProEtᵒᵖ) (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U)
     (t : (completedIntegralCommRingSheafUnrestricted l G X).obj.obj U) (x : M.val.obj U) :
@@ -323,8 +299,7 @@ private theorem associatorData_sheaf_hom_tensor (M : integralTowerModules l E X)
         (t * (completedCoefficientMap l F G j X).hom.app U s) x :=
   (associatorData_isNormalized l E X F ι G j).1 M U s t x
 
-/-- The inverse ordinary associator sends `t ⊗ x` to `t ⊗ (1 ⊗ x)`.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The inverse ordinary associator sends `t ⊗ x` to `t ⊗ (1 ⊗ x)`. -/
 private theorem associatorData_sheaf_inv_tensor (M : integralTowerModules l E X)
     (U : X.ProEtᵒᵖ) (t : (completedIntegralCommRingSheafUnrestricted l G X).obj.obj U)
     (x : M.val.obj U) :
@@ -341,9 +316,7 @@ private theorem associatorData_sheaf_inv_tensor (M : integralTowerModules l E X)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- With identity first step, an associator with the inverse tensor formula is the
-extension of multiplication.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: the inverse followed by the extended multiplication fixes every `t ⊗ x`. -/
+extension of multiplication. -/
 private theorem sheaf_source_unit_aux
     (o : completedOrdinaryScalarExtension l E E (AlgHom.id ℚ_[l] E) X ⋙
       completedOrdinaryScalarExtension l E F ι X ≅ completedOrdinaryScalarExtension l E F ι X)
@@ -370,9 +343,7 @@ private theorem sheaf_source_unit_aux
 
 set_option backward.isDefEq.respectTransparency false in
 /-- With identity second step, an associator with the inverse tensor formula is
-multiplication.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: the inverse followed by multiplication sends `t ⊗ x` to `t • (1 ⊗ x) = t ⊗ x`. -/
+multiplication. -/
 private theorem sheaf_target_unit_aux
     (o : completedOrdinaryScalarExtension l E F ι X ⋙
       completedOrdinaryScalarExtension l F F (AlgHom.id ℚ_[l] F) X ≅
@@ -398,9 +369,7 @@ private theorem sheaf_target_unit_aux
   rw [Iso.inv_comp_eq, Category.comp_id] at h
   exact h.symm
 
-/-- Four associators with the balanced tensor formulas satisfy the pentagon on sheaves.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: precomposed with the inverse of the right route, the left route fixes `u ⊗ x`. -/
+/-- Four associators with the balanced tensor formulas satisfy the pentagon on sheaves. -/
 private theorem sheaf_pentagon_aux
     (H : Type u) [Field H] [Algebra ℚ_[l] H] [FiniteDimensional ℚ_[l] H]
     (k : G →ₐ[ℚ_[l]] H) (ρ₁ : E →ₐ[ℚ_[l]] G) (ρ₂ : F →ₐ[ℚ_[l]] H) (ρ : E →ₐ[ℚ_[l]] H)
@@ -464,8 +433,7 @@ section Chain
 attribute [local semireducible] completedOrdinaryScalarComplex
 
 /-- With identity first step, the termwise ordinary associator is the extension of
-multiplication.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+multiplication. -/
 private theorem scalarAssociatorComplex_source_unit
     (P : CochainComplex (integralTowerModules l E X) ℤ) :
     (scalarAssociatorComplex l E X E (AlgHom.id ℚ_[l] E) F ι
@@ -478,8 +446,7 @@ private theorem scalarAssociatorComplex_source_unit
     (((completedScalarIdentityMultiplication l E X).hom.app P).f i)
     (completedScalarIdentityMultiplication_spec l E X P i)
 
-/-- With identity second step, the termwise ordinary associator is multiplication.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- With identity second step, the termwise ordinary associator is multiplication. -/
 private theorem scalarAssociatorComplex_target_unit
     (P : CochainComplex (integralTowerModules l E X) ℤ) :
     (scalarAssociatorComplex l E X F ι F (AlgHom.id ℚ_[l] F)
@@ -494,8 +461,7 @@ private theorem scalarAssociatorComplex_target_unit
     (completedScalarIdentityMultiplication_spec l F X
       ((completedOrdinaryScalarComplex l E F ι X).obj P) i)
 
-/-- The termwise ordinary associators satisfy the pentagon.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The termwise ordinary associators satisfy the pentagon. -/
 private theorem scalarAssociatorComplex_pentagon
     (H : Type u) [Field H] [Algebra ℚ_[l] H] [FiniteDimensional ℚ_[l] H]
     (k : G →ₐ[ℚ_[l]] H) (P : CochainComplex (integralTowerModules l E X) ℤ) :
@@ -518,10 +484,7 @@ private theorem scalarAssociatorComplex_pentagon
 
 end Chain
 
-/-- A derived associator normalized by the unitor's chain formula extends the unitor.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: after the invertible counit both sides become the counits followed by the
-termwise multiplication; localization extends the equality to all objects. -/
+/-- A derived associator normalized by the unitor's chain formula extends the unitor. -/
 private theorem derived_source_unit_aux
     (d : completedDerivedScalarExtension l E E (AlgHom.id ℚ_[l] E) X ⋙
       completedDerivedScalarExtension l E F ι X ≅ completedDerivedScalarExtension l E F ι X)
@@ -557,10 +520,7 @@ private theorem derived_source_unit_aux
     ← cancel_mono (completedScalarCounit l E F ι X P), ← hd, ordinaryUnit_hom_app_Q,
     Functor.map_comp, Category.assoc, hn, hA]
 
-/-- A derived associator normalized by the unitor's chain formula is the unitor.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: after the invertible counit, naturality of the unitor reduces both sides to the
-counits followed by termwise multiplication; localization concludes. -/
+/-- A derived associator normalized by the unitor's chain formula is the unitor. -/
 private theorem derived_target_unit_aux
     (d : completedDerivedScalarExtension l E F ι X ⋙
       completedDerivedScalarExtension l F F (AlgHom.id ℚ_[l] F) X ≅
@@ -598,10 +558,7 @@ private theorem derived_target_unit_aux
     ← cancel_mono (completedScalarCounit l E F ι X P), ← hd, hn, ordinaryUnit_hom_app_Q, hA]
 
 /-- Derived associators normalized by termwise associators satisfying the pentagon satisfy
-the pentagon.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: after the invertible composite counit, the normalizations and counit naturality
-reduce both routes to the counits followed by the two termwise routes. -/
+the pentagon. -/
 private theorem derived_pentagon_aux
     (H : Type u) [Field H] [Algebra ℚ_[l] H] [FiniteDimensional ℚ_[l] H]
     (k : G →ₐ[ℚ_[l]] H) (ρ₁ : E →ₐ[ℚ_[l]] G) (ρ₂ : F →ₐ[ℚ_[l]] H) (ρ : E →ₐ[ℚ_[l]] H)
@@ -668,12 +625,7 @@ private theorem derived_pentagon_aux
     counit_naturality l G X H k _
   rw [reassoc_of% hn, ← Functor.map_comp DerivedCategory.Q, hA, Functor.map_comp]
 
-/-- The ordinary associator with an identity first step is the extension of the unitor.
-Source: Stacks 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: on pure tensors both sheaf maps send t tensor (s tensor x) to t*s tensor x.
-The universal counits are invertible for finite free extensions, so the derived
-equation follows from the chain equation on good complexes and localization. -/
+/-- The ordinary associator with an identity first step is the extension of the unitor. -/
 theorem associatorData_derived_source_unit (K : DerivedCategory (integralTowerModules l E X)) :
     (associatorData l E X E (AlgHom.id ℚ_[l] E) F ι).derived.hom.app K =
       (completedDerivedScalarExtension l E F ι X).map ((ordinaryUnit l E X).hom.app K) :=
@@ -683,11 +635,7 @@ theorem associatorData_derived_source_unit (K : DerivedCategory (integralTowerMo
     (associatorData_derived_normalized l E X E (AlgHom.id ℚ_[l] E) F ι)
     (scalarAssociatorComplex_source_unit l E X F ι) K
 
-/-- The ordinary associator with an identity second step is the unitor.
-Source: Stacks 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: on pure tensors both sheaf maps send t tensor (s tensor x) to t*s tensor x.
-Invertible universal counits and localization give the derived equation. -/
+/-- The ordinary associator with an identity second step is the unitor. -/
 theorem associatorData_derived_target_unit (K : DerivedCategory (integralTowerModules l E X)) :
     (associatorData l E X F ι F (AlgHom.id ℚ_[l] F)).derived.hom.app K =
       (ordinaryUnit l F X).hom.app ((completedDerivedScalarExtension l E F ι X).obj K) :=
@@ -697,13 +645,7 @@ theorem associatorData_derived_target_unit (K : DerivedCategory (integralTowerMo
     (associatorData_derived_normalized l E X F ι F (AlgHom.id ℚ_[l] F))
     (scalarAssociatorComplex_target_unit l E X F ι) K
 
-/-- The ordinary associators satisfy the pentagon.
-Source: Stacks 06YY, 07A4; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: for three transitions both routes send u tensor (t tensor (s tensor x)) to
-u*k(t)*k(j(s)) tensor x. Ordinary extension preserves good complexes and its universal
-counits are invertible, so the counit normalizations transport this chain identity to
-the derived pentagon on good complexes; localization concludes. -/
+/-- The ordinary associators satisfy the pentagon. -/
 theorem associatorData_derived_pentagon
     (H : Type u) [Field H] [Algebra ℚ_[l] H] [FiniteDimensional ℚ_[l] H]
     (k : G →ₐ[ℚ_[l]] H) (K : DerivedCategory (integralTowerModules l E X)) :

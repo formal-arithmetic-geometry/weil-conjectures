@@ -16,7 +16,7 @@ compactification of `f`. This file defines the composition isomorphism
 
 `F.lowerShriekCompIso f g : F.lowerShriek f ⋙ F.lowerShriek g ≅ F.lowerShriek (f ≫ g)`
 
-of blueprint `proposition-composition-base-change-rf-shriek--1` and proves that
+and proves that
 
 - it is computed by any triangle of compactifications, up to the comparison isomorphisms
   `F.shriekIso` (`lowerShriekCompIso_hom_eq`): it is independent of all compactification
@@ -67,7 +67,7 @@ lemma shriekIso_copy {f f' : X ⟶ Y} [HasCompactification f] [HasCompactificati
 /-- **The composition isomorphism** `F.lowerShriek f ⋙ F.lowerShriek g ≅ F.lowerShriek (f ≫ g)`
 for morphisms admitting compactifications with quasi-compact composite: the composition
 isomorphism of the triangle `Compactification.Triangle.ofHasCompactification f g`, compared with
-the chosen compactifications. (blueprint: `proposition-composition-base-change-rf-shriek--1`) -/
+the chosen compactifications. -/
 noncomputable def lowerShriekCompIso (f : X ⟶ Y) (g : Y ⟶ S) [HasCompactification f]
     [HasCompactification g] [HasCompactification (f ≫ g)] [QuasiCompact (f ≫ g)] :
     F.lowerShriek f ⋙ F.lowerShriek g ≅ F.lowerShriek (f ≫ g) :=
@@ -78,9 +78,7 @@ noncomputable def lowerShriekCompIso (f : X ⟶ Y) (g : Y ⟶ S) [HasCompactific
 
 /-- **Independence of all compactification choices**: the composition isomorphism is computed
 by any triangle of compactifications `T` of `(f, g)`, up to the comparison isomorphisms
-`F.shriekIso` between the compactifications of `T` and the chosen ones.
-(blueprint: `proposition-composition-base-change-rf-shriek--1`, via
-`proposition-construction-independence-rf-shriek`) -/
+`F.shriekIso` between the compactifications of `T` and the chosen ones. -/
 theorem lowerShriekCompIso_hom_eq {f : X ⟶ Y} {g : Y ⟶ S} [HasCompactification f]
     [HasCompactification g] [HasCompactification (f ≫ g)] [QuasiCompact f] [QuasiCompact g]
     [QuasiCompact (f ≫ g)] (T : Compactification.Triangle f g) :
@@ -105,8 +103,7 @@ noncomputable def lowerShriekId (X : Scheme.{u}) [HasCompactification (𝟙 X)] 
     F.lowerShriek (𝟙 X) ≅ 𝟭 _ :=
   F.shriekIso _ (Compactification.ofIsProper (𝟙 X)) ≪≫ F.shriekOfIsProperIdIso X
 
-/-- **The left unit law** of the composition isomorphism.
-(blueprint: `proposition-composition-base-change-rf-shriek--1`) -/
+/-- **The left unit law** of the composition isomorphism. -/
 theorem lowerShriekCompIso_id_left (f : X ⟶ Y) [HasCompactification f]
     [HasCompactification (𝟙 X)] [HasCompactification (𝟙 X ≫ f)] [QuasiCompact f] :
     (F.lowerShriekCompIso (𝟙 X) f).hom =
@@ -125,8 +122,7 @@ theorem lowerShriekCompIso_id_left (f : X ⟶ Y) [HasCompactification f]
     Functor.whiskerRight_comp, ← Functor.hcomp_id, ← Functor.hcomp_id]
   simp only [Iso.refl_hom, Category.assoc]
 
-/-- **The right unit law** of the composition isomorphism.
-(blueprint: `proposition-composition-base-change-rf-shriek--1`) -/
+/-- **The right unit law** of the composition isomorphism. -/
 theorem lowerShriekCompIso_id_right (f : X ⟶ Y) [HasCompactification f]
     [HasCompactification (𝟙 Y)] [HasCompactification (f ≫ 𝟙 Y)] [QuasiCompact f] :
     (F.lowerShriekCompIso f (𝟙 Y)).hom =

@@ -11,9 +11,17 @@ public import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Representative data for native derived tensors
 
-Source: Stacks 06YS, 08J9 and 0FPT; the action-site tensor and its localization.
-These data concern the tensor on complexes and its derived model. They contain
+These data concern the action-site tensor on complexes and its derived model. They contain
 no native derived closed adjunction or derived internal-Hom comparison.
+
+## Implementation details
+
+The equations for the explicit native tensor data are kept in a separate `Prop`-valued
+structure, which avoids repeatedly generating large equality tests for their proof fields.
+
+## References
+
+* Stacks Project, Tags 06YS, 08J9 and 0FPT.
 -/
 
 @[expose] public section
@@ -24,8 +32,7 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- A sum-total tensor preserves acyclicity in the other factor.
-Source: Stacks 06YS (blueprint: def-sf-native-weil-tensor-presentation). -/
+/-- A sum-total tensor preserves acyclicity in the other factor. -/
 def NativeTensorKFlat
     (T : ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X ⥤
       ProEtaleWeilSheaf k₀ l X)
@@ -36,11 +43,7 @@ def NativeTensorKFlat
     N.Acyclic → (CochainComplex.mapBifunctor P N T).Acyclic
 
 /-- The native tensor's representative presentation, including normalization
-under ordinary forgetting. The underived adjunction is part of the chain
-calculation; the derived adjunction is not part of these data.
-
-Source: Stacks 06YS, 08J9 and 0FPT; native ringed tensor model, steps 1 and 3.
-(blueprint: def-sf-native-weil-tensor-presentation). -/
+under ordinary forgetting. The derived adjunction is not part of these data. -/
 structure NativeWeilTensorComplexData
     (M : NativeClosedHomModels k₀ l X)
     (S : CoefficientClosedStructure M.ordinaryHom)
@@ -90,10 +93,7 @@ structure NativeWeilTensorComplexData
 attribute [instance] NativeWeilTensorComplexData.tensor_additive
   NativeWeilTensorComplexData.tensor_obj_additive NativeWeilTensorComplexData.total_exists
 
-/-- Equations for the explicit native tensor data. Keeping the equations in Prop
-avoids repeatedly generating large equality tests for their proof fields.
-Source: Stacks 06YS, 08J9, 0FPT
-(blueprint: def-sf-native-weil-tensor-presentation). -/
+/-- Equations for the explicit native tensor data. -/
 structure NativeWeilTensorPresentationAxioms
     (M : NativeClosedHomModels k₀ l X)
     (S : CoefficientClosedStructure M.ordinaryHom)
@@ -179,9 +179,7 @@ structure NativeWeilTensorPresentationAxioms
             (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj Q)
           (preserves_flat P hP)).hom
 
-/-- The native tensor data and their representative equations.
-Source: Stacks 06YS, 08J9, 0FPT
-(blueprint: def-sf-native-weil-tensor-presentation). -/
+/-- The native tensor data and their representative equations. -/
 structure NativeWeilTensorPresentation
     (M : NativeClosedHomModels k₀ l X)
     (S : CoefficientClosedStructure M.ordinaryHom)

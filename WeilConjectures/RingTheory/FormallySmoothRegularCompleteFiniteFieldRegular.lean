@@ -23,9 +23,20 @@ import Mathlib.RingTheory.Localization.Submodule
 /-!
 # Finite field base changes of a formally smooth complete algebra
 
-Source: Stacks Project, More on Algebra, Proposition 07PM, last two paragraphs,
-and Algebra, Lemma 0381.
-(blueprint: lem-weil-pbc-fs-regular-complete-finite-field-regular)
+A formally smooth complete local algebra `C` over a regular complete local domain `A` becomes
+regular after base change to any finite extension of the fraction field of `A`.
+
+## Implementation details
+
+Stacks 07NQ gives flatness and geometric regularity of the closed fibre, so `C` is regular
+(031E, 0AFS). The generic fibre is Noetherian by localization. Purely inseparable extensions are
+handled by `FormallySmoothRegularCompletePurelyInseparableRegular`, which gives geometric
+regularity of the generic fibre; Stacks 0381 then covers arbitrary finite extensions.
+
+## References
+
+* [Stacks, Tag 07PM] (last two paragraphs)
+* [Stacks, Tags 0381, 07NQ, 031E, 0AFS]
 -/
 
 @[expose] public section
@@ -35,21 +46,8 @@ universe u v w
 namespace Algebra
 
 /-- A formally smooth complete local algebra over a regular complete local domain
-becomes regular after every finite extension of the base fraction field.
-Source: Stacks Project, More on Algebra, Proposition 07PM, final two paragraphs,
-and Algebra, Lemma 0381.
-(blueprint: lem-weil-pbc-fs-regular-complete-finite-field-regular)
-
-Proof: Apply 07NQ for flatness and geometric regularity of the closed fibre.
-Taking the trivial field extension in 0381 makes the closed fibre regular;
-as it is local, it is regular local. Apply regular local ascent 031E to obtain
-regular locality of C, then 0AFS to make C regular. Its generic fibre is
-Noetherian by localization base change. For each finite purely inseparable
-extension of K use the characteristic-zero argument and degree induction in
-lem-weil-pbc-fs-regular-complete-purely-inseparable-regular. Tensor cancellation
-identifies the result with the field base change of the generic fibre, proving
-geometric regularity. Finally 0381 makes the base change along any finite L/K
-regular. Tensor cancellation identifies this ring with L tensor_A C. -/
+becomes regular after every finite extension `L` of the base fraction field: `L ⊗[A] C` is
+regular. -/
 theorem isRegularRing_tensorProduct_of_formallySmoothAdic_regular_complete
     (A : Type u) (C : Type v) (K : Type u) (L : Type w)
     [CommRing A] [IsDomain A] [IsRegularLocalRing A]

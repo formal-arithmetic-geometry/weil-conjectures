@@ -28,7 +28,9 @@ normalization and fixed scalar models for the ordinary quotient scalar
 extension. These private helpers are used, via `import all`, by the ordinary
 scalar/pullback calculations.
 
-Source: Stacks 03EK, 03D7, 06YY and 0941, balanced tensor association.
+## References
+
+* Stacks Project, Tags 03EK, 03D7, 06YY and 0941.
 -/
 
 -- All declarations here are private helpers, used by importers via `import all`.
@@ -165,13 +167,7 @@ private theorem finiteUnit_eq (K : scalarReductionSource l E W)
     CoefficientExtensionAssociation.quotientAdjunction
   exact (scalarReductionExtension_adjunction l E W n).choose_spec K U x
 
-/-- The presentation inverse takes the kappa-inverse unit section to M's quotient unit.
-Source: Stacks 03D7, naturality and normalization of the ordinary quotient unit.
-(blueprint: lem-trf-ordinary-quotient-scalar-presentation-unit).
-Proof: invert the presentation comparison equation, evaluate at degree i and
-apply it to 1 tensor x. Evaluation commutes with the presentation inverse, and
-its section casts are HEq to identity. The normalized quotient-adjunction unit
-identifies the finite unit section with 1 tensor x, giving the stated formula. -/
+/-- The presentation inverse takes the kappa-inverse unit section to M's quotient unit. -/
 private theorem presentationUnit
     (M : CompletionUnit.OrdinaryModel l E W)
     (P : CochainComplex (scalarReductionSource l E W) ℤ)
@@ -391,13 +387,7 @@ attribute [local implicit_reducible] integralCoefficientCommRingSheaf
 
 attribute [local irreducible] direct directEvaluation finiteComparison
 
-/-- Assemble the explicit finite balanced comparisons into an all-complex tower.
-Source: Stacks 03D7, 03EK, and successor compatibility on the sequence site.
-(blueprint: lem-trf-ordinary-quotient-scalar-tower-construction).
-Proof: restriction-evaluation followed by the finite comparison defines each level.
-The given successor identity proves their naturality along adjacent arrows; the
-opposite-sequence construction extends this to all arrows. Pointwise inverses
-and naturality in the complex give the natural isomorphism and component formula. -/
+/-- Assemble the explicit finite balanced comparisons into an all-complex tower. -/
 private theorem comparison_exists
     (A : CoefficientExtensionSystems l E L ι W)
     (M : CompletionUnit.OrdinaryModel l E W)
@@ -523,12 +513,7 @@ attribute [local implicit_reducible] direct integralCoefficientCommRingSheaf
   coefficientSequenceCommRingSheaf coefficientSequenceCommRingPresheaf
   HomologicalComplex.complexOfFunctorsToFunctorToComplex
 
-/-- The finite balanced comparison takes scalar multiples of quotient units to tensors.
-Source: Stacks 03D7 and 03EK, the normalized balanced associator.
-(blueprint: lem-trf-ordinary-quotient-scalar-tensor-normalization).
-Proof: apply the forward comparison to its proved inverse-coordinate tensor
-formula and cancel the inverse isomorphism. This calculation holds for every
-completed module, scalar and section, with no flatness condition. -/
+/-- The finite balanced comparison takes scalar multiples of quotient units to tensors. -/
 private theorem finiteComparison_unit
     (A : CoefficientExtensionSystems l E L ι W)
     (M : CompletionUnit.OrdinaryModel l E W)
@@ -772,13 +757,7 @@ private theorem scalarMap_eq :
     (coefficientExtensionQuotient_naturality l E L ι W)).exists.choose_spec
       U.unop.1 (op U.unop.2)
 
-/-- Scalar systems whose sequence model is the prescribed actual cochain model.
-Source: Stacks 03D7 and 03EK.
-(blueprint: lem-trf-ordinary-quotient-fixed-scalar-systems).
-Proof: identify the two sequence ring maps on components, transport the fixed
-model, and use its normalized scalar package. Choose the finite scalar packages
-and apply scalar evaluation transpose. The prescribed model equality and the
-normalized ordinary unit compute the tensor section, including its section casts. -/
+/-- Scalar systems whose sequence model is the prescribed actual cochain model. -/
 private theorem fixedSystems_exists :
     ∃ A : CoefficientExtensionSystems l E L ι W,
       A.scalar.model.E = (integralComparisonSequenceScalarModel l E L ι W).E ∧

@@ -17,13 +17,20 @@ same character gives the reflection `ι' : x ↦ -x`, up to the Tate twist:
 
 `FT_ψ ∘ FT_ψ ≅ ι'^* ((-)(-1))`
 
-(`AlgebraicGeometry.nonempty_iso_fourierTransform_comp_self`; blueprint
-`proposition-fourier-inversion`, `sec-Fourier-inversion`, second formula). On the triple product
+(`AlgebraicGeometry.nonempty_iso_fourierTransform_comp_self`). On the triple product
 `𝔸³` with points `(x, ξ, y)` the composite is `Rr₃!(ℒ_ψ((x + y) ξ) ⊗ r₁^* K)[1][1]`
 (`AlgebraicGeometry.nonempty_iso_fourierTransform_comp_fourierTransform`), and the delta kernel
 computation for the function `x + y` on `𝔸²`, whose zero locus is the antidiagonal
 `x ↦ (x, -x)`, identifies it with `Rι'₀!(K(-1)[-2])[1][1]`; the compact-support direct image
 along the involution `ι'` is the pullback along `ι'`.
+
+## Implementation details
+
+The compact-support direct image along an isomorphism `e` is identified with `(e⁻¹)^*` by
+compact-support base change along `e` itself: `e^* ∘ Re₀! ≅ 𝟙` and `(e⁻¹)^* ∘ e^* ≅ 𝟙`.
+The composite of the two Fourier transforms is computed by composing kernel transforms
+(`AlgebraicGeometry.WeilComplex.nonempty_iso_kernelTransform_comp`) and multiplying the
+kernels, `ℒ_ψ(x ξ) ⊗ ℒ_ψ(ξ y) ≅ ℒ_ψ((x + y) ξ)`.
 -/
 
 @[expose] public section
@@ -110,8 +117,7 @@ theorem affineLine.isPullback_antidiagonal :
 end Reflection
 
 /-- The compact-support direct image along an isomorphism is the pullback along its inverse:
-`Re₀! ≅ (e⁻¹)^*`. By compact-support base change along `e` itself, whose base change along `e`
-is the identity, `e^* ∘ Re₀! ≅ 𝟙`, and `(e⁻¹)^* ∘ e^* ≅ (e ≫ e⁻¹)^* ≅ 𝟙`. -/
+`Re₀! ≅ (e⁻¹)^*`. -/
 theorem WeilComplex.nonempty_iso_derivedLowerShriek_hom_upperStar_inv {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (e : X ≅ Y)
     [e.hom.IsOver (Spec (CommRingCat.of k₀))] [e.inv.IsOver (Spec (CommRingCat.of k₀))]
@@ -143,7 +149,7 @@ theorem WeilComplex.nonempty_iso_derivedLowerShriek_hom_upperStar_inv {X Y : Sch
 
 /-- The two Fourier kernels pulled back to the triple product `𝔸³` with points `(x, ξ, y)`
 multiply to `ℒ_ψ((x + y) ξ)`: tensoring with `r₁₂^* μ^* ℒ_ψ` and then with `r₂₃^* μ^* ℒ_ψ` is
-tensoring with `ℒ_ψ((x + y) ξ)` (blueprint `lemma-artin-schreier-character-sheaf--2`). -/
+tensoring with `ℒ_ψ((x + y) ξ)`. -/
 theorem WeilComplex.nonempty_iso_tensorLisse_upperStar_fourierKernel_comp_add
     (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty (WeilComplex.tensorLisse
@@ -216,14 +222,11 @@ theorem WeilComplex.nonempty_iso_tensorLisse_upperStar_fourierKernel_comp_add
     (isLisse_artinSchreierOf ψ _)
   exact ⟨Functor.isoWhiskerRight eT₁ _ ≪≫ Functor.isoWhiskerLeft _ eT₂ ≪≫ eT₁₂ ≪≫ eT⟩
 
-/-- **`FT_ψ ∘ FT_ψ` on the triple product** (blueprint `proposition-fourier-inversion`). On `𝔸³`
-with points `(x, ξ, y)`,
+/-- **`FT_ψ ∘ FT_ψ` on the triple product.** On `𝔸³` with points `(x, ξ, y)`,
 
 `FT_ψ FT_ψ (K) ≅ Rr₃₀!(ℒ_ψ((x + y) ξ) ⊗ r₁^* K)[1][1]`
 
-naturally in `K`, with `r₁ = r₁₃ ≫ pr₁` and `r₃ = r₁₃ ≫ pr₂`: the composition of kernel
-transforms (`AlgebraicGeometry.WeilComplex.nonempty_iso_kernelTransform_comp`) together with
-`ℒ_ψ(x ξ) ⊗ ℒ_ψ(ξ y) ≅ ℒ_ψ((x + y) ξ)` (blueprint `lemma-artin-schreier-character-sheaf--2`). -/
+naturally in `K`, with `r₁ = r₁₃ ≫ pr₁` and `r₃ = r₁₃ ≫ pr₂`. -/
 theorem nonempty_iso_fourierTransform_comp_fourierTransform
     (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty (fourierTransform (l := l) ψ ⋙ fourierTransform ψ ≅
@@ -249,15 +252,10 @@ theorem nonempty_iso_fourierTransform_comp_fourierTransform
     ((Functor.associator _ _ (D ⋙ S₁ ⋙ S₁)).symm ≪≫
       Functor.isoWhiskerRight eT (D ⋙ S₁ ⋙ S₁))⟩
 
-/-- **`FT_ψ ∘ FT_ψ ≅ ι'^* ((-)(-1))`** (blueprint `proposition-fourier-inversion`,
-`sec-Fourier-inversion`, second formula), with the shifts `[-2][1][1]` left uncancelled: for a
+/-- **`FT_ψ ∘ FT_ψ ≅ ι'^* ((-)(-1))`**, with the shifts `[-2][1][1]` left uncancelled: for a
 nontrivial additive character `ψ` and a Weil complex `K` on the affine line,
 `FT_ψ FT_ψ (K) ≅ ι'^*(K(-1)[-2])[1][1]`, naturally in `K`, where `ι' : x ↦ -x` is the
-reflection. The kernel `ℒ_ψ((x + y) ξ)` of the composite
-(`AlgebraicGeometry.nonempty_iso_fourierTransform_comp_fourierTransform`) is the delta kernel of
-the zero locus of `x + y`, the antidiagonal `x ↦ (x, -x)`
-(`AlgebraicGeometry.WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse_artinSchreierOf_mul`),
-and the compact-support direct image along the involution `ι'` is the pullback along `ι'`. -/
+reflection. -/
 theorem nonempty_iso_fourierTransform_comp_self (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) :
     Nonempty (fourierTransform (l := l) ψ ⋙ fourierTransform ψ ≅
       WeilComplex.tateTwist k₀ l (affineLine k₀) (-1) ⋙ shiftFunctor _ (-2 : ℤ) ⋙

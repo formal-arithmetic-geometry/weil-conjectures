@@ -210,8 +210,9 @@ import all Mathlib.CategoryTheory.Sites.CoverPreserving
 
 /-! # The normalized completion comparison on the resolving class
 
-Source: Stacks 07A6, 08TC and 0941; the primitive quotient/Roos construction
-in completed-operation substitution, steps 1--6.
+## References
+
+* Stacks Project, Tags 07A6, 08TC and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -527,18 +528,7 @@ private theorem completion_from_normalized
 set_option backward.isDefEq.respectTransparency true in
 attribute [local semireducible] actualCompletion actualUnit in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Completion is naturally isomorphic to reduction followed by total derived limit.
-Source: Stacks 07A6, 0941; localization of the normalized strict quotient/Roos model.
-(blueprint: lem-pur-normalized-completion-realization).
-
-Proof: use the ordinary and derived models to obtain the normalized Roos comparison
-on good representatives. Fully faithful whiskering descends this comparison to
-completion. Both strict quotient augmentations send every section x to 1 tensor x,
-so their product coordinates agree and their shifted coordinates are zero.
-Transport of the mapping cocone lift identifies the two augmentations. The strict
-quotient completion-unit theorem gives the unit equation on good representatives.
-The uniqueness characterization of completionUnit extends it to all objects;
-cancel the inverse comparison to obtain the asserted equation. -/
+/-- Completion is naturally isomorphic to reduction followed by total derived limit. -/
 theorem normalizedCompletionRealization
     (C : CoefficientDerivedSystemCalculus l E X)
     (O : CompletionUnit.OrdinaryModel l E X)

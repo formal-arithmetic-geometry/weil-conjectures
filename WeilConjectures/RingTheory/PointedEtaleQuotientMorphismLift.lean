@@ -14,8 +14,20 @@ import Mathlib.RingTheory.RingHom.Surjective
 
 /-! # Lifting morphisms of pointed etale algebras across a quotient
 
-Source: Stacks Project, Tag 04D1, applied relative to a pointed etale algebra;
-the lifting step of Tag 05WS.
+Morphisms out of a base-changed pointed étale algebra lift along a surjective local homomorphism.
+
+## Implementation details
+
+The underlying algebra of the target is étale over the base change `V` of the source `U`, and
+`V = U / ker(U → V)`; the explicit coefficient-lift construction of Tag 04D1 over `U` gives the
+lift `W`, pointed through `T`. Pasting the reduction pushout with the base-change pushout
+identifies the base change of `W` with `T`. No nilpotence or local-ring hypothesis on `U` is
+used, and the lift ring is the explicit Jacobian quotient.
+
+## References
+
+* [Stacks, Tag 04D1]
+* [Stacks, Tag 05WS]
 -/
 
 @[expose] public section
@@ -185,30 +197,9 @@ private theorem pointed_morphism_lift_of_point_bijective
     apply Over.OverMorphism.ext
     exact hg
 
-/-- Lift an etale extension of a base-changed pointed algebra, including its structure map.
-Source: Stacks Project, Tag 04D1; the relative form of the lifting argument of
-`lem-sbc-pointed-etale-quotient-final`.
-(blueprint: lem-sbc-pointed-etale-quotient-morphism-lift)
-
-Proof: Let U be the underlying A-algebra of S and V = H(U). The canonical U -> V
-is surjective, by stability of surjectivity under ring pushouts. Regard the
-underlying algebra of T as a V-algebra via f. It is etale over V: both V and T
-are etale over B, and a map between etale B-algebras is etale, by
-`Etale.of_restrictScalars`. Identify V with U/ker(U -> V). Apply the explicit
-coefficient-lift construction of Tag 04D1 over U to this etale V-algebra. Its
-ring W is etale over U and its reduction is T with its specified V-structure
-map. Composition makes W etale over A.
-
-The canonical K -> H(K) is an isomorphism because ker π acts trivially on K.
-Compose it with c to identify K with L. Point W by W -> T -> L -> K. The
-commutativity of f with the points ensures that U -> W preserves the K-points.
-Thus W is a pointed etale A-algebra S' and the structure map is g:S -> S'.
-The reduction square U -> W, V -> T is a ring pushout. Pasting it with the
-pushout A -> U, B -> V identifies H(W) with T. This identifies the base-changed
-structure map with f. The same point equation gives a pointed isomorphism
-e:F(S') -> T, and hence F(g) followed by e is f. No nilpotence or local-ring
-hypothesis on U is used. The lift ring is the explicit Jacobian quotient,
-not unspecified data selected from a bare existence assertion. -/
+/-- A morphism `f : F(S) → T` from the base change of a pointed étale `A`-algebra `S` to a pointed
+étale `B`-algebra lifts: there are a pointed étale `A`-algebra `S'`, a morphism `g : S → S'` and
+an isomorphism `e : F(S') ≅ T` with `F(g) ≫ e = f`. -/
 theorem pointedEtaleQuotient_morphism_lift
     (A K B L : Type u) [CommRing A] [IsLocalRing A] [Field K]
     [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]

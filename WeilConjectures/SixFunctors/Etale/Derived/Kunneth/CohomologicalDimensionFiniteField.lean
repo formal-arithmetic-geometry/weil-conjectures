@@ -16,9 +16,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDim
 
 Let `k` be a finite field and `Λ` a ring in which a prime `ℓ` vanishes. Then
 `H^q(Spec k, F) = 0` for every `q > 1` and every étale sheaf `F` of `Λ`-modules on `Spec k`; in
-particular `Spec k` has finite cohomological dimension (blueprint
-`lemma-cohomological-dimension-base-field`, in the sense of `definition-cohomological-dimension`,
-i.e. `AlgebraicGeometry.Etale.HasFiniteCohomologicalDimension`).
+particular `Spec k` has finite cohomological dimension in the sense of
+`AlgebraicGeometry.Etale.HasFiniteCohomologicalDimension`.
 
 The cohomology of `F` is that of its underlying abelian sheaf (Stacks 03FD), which is the Galois
 cohomology of its geometric fibre, an `ℓ`-primary discrete module over the absolute Galois group
@@ -35,6 +34,10 @@ No assumption that `ℓ` is invertible in `k` is needed.
 - `AlgebraicGeometry.Etale.isZero_cohomology_spec_of_finite`: the vanishing above degree one.
 - `AlgebraicGeometry.Etale.hasFiniteCohomologicalDimension_of_finite`: the finiteness of the
   cohomological dimension.
+
+## References
+
+* [Stacks, Tag 03FD]
 -/
 
 @[expose] public section
@@ -83,10 +86,8 @@ theorem isZero_cohomology_singleFunctor_iff_subsingleton_sheafH (X : Scheme.{u})
   exact ⟨fun h ↦ h.of_iso (e'.app _ ≪≫ (e.app G).symm),
     fun h ↦ h.of_iso (e.app G ≪≫ (e'.app _).symm)⟩
 
-/-- Blueprint `lemma-cohomological-dimension-base-field`: the étale cohomology of the spectrum of a
-finite field `k` vanishes above degree one, for sheaves of modules over a ring `Λ` killed by a prime
-`ℓ`. The cohomology is the Galois cohomology of the geometric fibre, an `ℓ`-primary discrete module
-over `Gal(k̄/k)` (`FiniteField.subsingleton_H_galois`). -/
+/-- The étale cohomology of the spectrum of a finite field `k` vanishes above degree one, for
+sheaves of modules over a ring `Λ` killed by a prime `ℓ`. -/
 theorem isZero_cohomology_spec_of_finite {k : Type u} [Field k] [Finite k] (ℓ : ℕ)
     [Fact ℓ.Prime] (hΛ : (ℓ : Λ) = 0)
     (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) {q : ℕ} (hq : 1 < q) :
@@ -105,8 +106,7 @@ theorem isZero_cohomology_spec_of_finite {k : Type u} [Field k] [Finite k] (ℓ 
   have := FiniteField.subsingleton_H_galois ℓ _ hM hq
   exact (Scheme.sheafHAddEquivGaloisH k Ω A q).toEquiv.subsingleton
 
-/-- Blueprint `lemma-cohomological-dimension-base-field`: the spectrum of a finite field has finite
-étale cohomological dimension (`definition-cohomological-dimension`), namely at most one, for
+/-- The spectrum of a finite field has finite étale cohomological dimension, namely at most one, for
 sheaves of modules over a ring `Λ` killed by a prime `ℓ`. This covers in particular every finite
 field `Λ` of characteristic `ℓ`; `ℓ` need not be invertible in `k`. -/
 theorem hasFiniteCohomologicalDimension_of_finite {k : Type u} [Field k] [Finite k]

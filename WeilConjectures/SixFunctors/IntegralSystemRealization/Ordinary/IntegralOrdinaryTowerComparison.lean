@@ -11,8 +11,11 @@ public import WeilConjectures.SixFunctors.Coefficient.CoefficientRingedSequenceS
 
 /-! # Direct image on restricted coefficient towers
 
-Source: Stacks Project, Tags 03D7 and 0941.
-(blueprint: lem-sf-integral-ordinary-tower-comparison).
+## References
+
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 03D1]
 -/
 
 @[expose] public noncomputable section
@@ -243,16 +246,7 @@ private theorem towerComparison_component {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 attribute [local irreducible] towerComparison
 
-/-- The normalized finite comparisons form a unique isomorphism of coefficient towers.
-Source: Stacks Project, Tags 03D1 and 0941; primitive realization Step 3.
-(blueprint: lem-sf-integral-ordinary-tower-comparison).
-
-Proof: compose restriction/evaluation, direct-image/evaluation, scalar restriction,
-and the inverse restriction/evaluation comparison at each coefficient level.
-Each factor is the identity on underlying sections. The specified horizontal maps
-of restriction therefore make these isomorphisms natural in the tower index;
-naturality in the input module is inherited from the four factors. This constructs
-the isomorphism of towers. Equality on all component sections proves uniqueness. -/
+/-- The normalized finite comparisons form a unique isomorphism of coefficient towers. -/
 theorem integralOrdinaryTowerComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! e : pullbackTensorSequenceDirect l E f ⋙ coefficientSequenceRestriction l E Y ≅
       coefficientSequenceRestriction l E X ⋙

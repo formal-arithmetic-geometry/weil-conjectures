@@ -27,9 +27,6 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import WeilConjectures.Algebra.Homology.SixFunctors.LocalizedSiteTensorRestrictionSupplement
 
 /-! # Signed powers of a line give inverse tensor functors
-
-Source: definition-tate-twists--10, proof steps 1--2.
-(blueprint: lem-weil-signed-line-tensor-equivalence).
 -/
 
 @[expose] public noncomputable section
@@ -392,21 +389,7 @@ private theorem lineSignedRank (S : Scheme.{u})
   let e := (hU i).some ≪≫ SheafOfModules.freeUniqueIso.{u + 1, u, u + 1} _
   exact ⟨lineSignedOverUnit S R L (U i) e m⟩
 
-/-- Signed tensor powers remain lines, and opposite powers give inverse sheaf tensor functors.
-Source: blueprint definition-tate-twists--10, proof steps 1--2
-(blueprint: lem-weil-signed-line-tensor-equivalence).
-
-Proof: choose a cover on which L is the coefficient unit. Tensor powers restrict to
-powers of the unit; internal Hom restricts to the Hom of the restrictions, so its
-negative powers are units on that same cover. This proves rank one for all signed
-powers, including zero. The evaluation pairings identify the positive power tensored
-with its internal dual with the unit: locally they are multiplication of coefficients.
-For negative exponents the bidual evaluation identifies the other signed power with
-that dual, since evaluation is an isomorphism for a rank-one free module. The local
-inverses of evaluation glue, since the evaluation map is defined before trivializing.
-Associate (M tensor L(m)) tensor L(-m) to M tensor (L(m) tensor L(-m)), apply this
-evaluation and the unit isomorphism. These isomorphisms are natural in M, and give
-the asserted inverse tensor functors. Empty covering members cause no exception. -/
+/-- Signed tensor powers remain lines, and opposite powers give inverse sheaf tensor functors. -/
 theorem signedLineTensor_equivalence (S : Scheme.{u})
     (R : Sheaf (ProEt.topology S) CommRingCat.{u + 1})
     (L : SheafOfModules.{u + 1}

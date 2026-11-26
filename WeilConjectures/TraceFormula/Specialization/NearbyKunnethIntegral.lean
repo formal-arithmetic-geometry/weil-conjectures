@@ -16,8 +16,7 @@ public import WeilConjectures.Tactic.ExactModProofs
 
 # Gabber's Künneth formula with integral coefficients: the induction
 
-Gabber's Künneth formula with `𝒪_E`-coefficients (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`) holds in every chart dimension
+Gabber's Künneth formula with `𝒪_E`-coefficients holds in every chart dimension
 (`NearbyCyclesModel.integralKunnethFormula`). The proof is by induction on the chart dimension,
 simultaneously for all separably closed fields `k'`:
 
@@ -54,12 +53,9 @@ def IntegralKunnethFormula (k' : Type u) [Field k'] (n : ℕ) : Prop :=
 variable {ℓ} {k' : Type u} [Field k'] [IsSepClosed k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]
 
-/-- **The generic-slicing step with `𝒪_E`-coefficients** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Finite support"): if Gabber's Künneth formula
-with `𝒪_E`-coefficients holds in chart dimension `n` over the trait `Spec K⟦t⟧`, `K = k'(x)^alg`, so
-does the generic-slicing step over `Spec k'⟦t⟧`. The induction hypothesis applies to the
-geometric slice of the product (`NearbyCyclesModel.sliceFst`, `NearbyCyclesModel.sliceSnd`), and
-`NearbyCyclesModel.isIso_map_kunnethMap_of_isIso_sliceFst_padicIntegers` concludes. -/
+/-- **The generic-slicing step with `𝒪_E`-coefficients**: if Gabber's Künneth formula with
+`𝒪_E`-coefficients holds in chart dimension `n` over the trait `Spec K⟦t⟧`, `K = k'(x)^alg`, so
+does the generic-slicing step over `Spec k'⟦t⟧`. -/
 theorem sliceKunnethFormula_padicIntegers {n : ℕ}
     (hIH : IntegralKunnethFormula ℓ (traitSliceField k') n)
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
@@ -81,13 +77,9 @@ theorem sliceKunnethFormula_padicIntegers {n : ℕ}
 
 variable (ℓ) in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
-/-- **Gabber's Künneth formula with `𝒪_E`-coefficients in every chart dimension**, by induction
-on the chart dimension `n`, simultaneously for all separably closed fields `k'`
-(`NearbyCyclesModel.IntegralKunnethFormula`). By the reduction to proper models
-(`NearbyCyclesModel.isIso_kunnethMap_of_properKunnethFormula`), this is
-`NearbyCyclesModel.isIso_kunnethMap_padicIntegers_of_isProper`, whose generic-slicing inputs
-come from the induction hypothesis over the trait `Spec K⟦t⟧`, `K = k'(x)^alg`
-(`NearbyCyclesModel.sliceKunnethFormula_padicIntegers`). -/
+/-- **Gabber's Künneth formula with `𝒪_E`-coefficients in every chart dimension**: for every `n`
+and every separably closed field `k'` with `char k'` a prime different from `ℓ`,
+`NearbyCyclesModel.IntegralKunnethFormula ℓ k' n` holds. -/
 theorem integralKunnethFormula (n : ℕ) :
     ∀ (k' : Type u) [Field k'] [IsSepClosed k'] [Fact (ringChar k').Prime]
       [Fact (ringChar k' ≠ ℓ)], IntegralKunnethFormula ℓ k' n := by

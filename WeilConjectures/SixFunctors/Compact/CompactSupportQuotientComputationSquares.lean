@@ -11,8 +11,9 @@ import WeilConjectures.SixFunctors.Compact.CompactSupportQuotientComputationSqua
 
 /-! # Universal comparison squares for quotient chain maps
 
-Source: blueprint coefficient quotient proof, Steps 2 and 3; Stacks Tags 03EK and 06YY.
-(blueprint: lem-coef-compact-support-quotient-computation-squares).
+## References
+
+* [Stacks, Tags 03EK, 06YY]
 -/
 
 @[expose] public noncomputable section

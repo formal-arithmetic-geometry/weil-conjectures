@@ -18,8 +18,20 @@ import Mathlib.RingTheory.Localization.Away.Basic
 /-!
 # Localization description of a fibre of a pair henselization
 
-Source: Stacks Project, More on Algebra, Tags 0AH1 and 0AH3, the product-of-fibres
-calculation. (blueprint: lem-weil-pbc-pair-henselization-fiber-localization).
+For a prime `q` of a Noetherian pair henselization over `A` with contraction `p`, the fibre of
+`q` over `C` is a localization of the fibre of `p` over `C`.
+
+## Implementation details
+
+The fibre over `p` is the finite product of the residue fields of the primes over `p`
+(Tag 0AH1). Tensoring with `C`, the projection to the `q` factor is the localization at the
+idempotent which is one at `q` and zero at the other factors.
+
+## References
+
+* [Stacks, Tag 0AH1]
+* [Stacks, Tag 0AH3]
+* [Stacks, Tag 0A02]
 -/
 
 @[expose] public section
@@ -48,28 +60,8 @@ private theorem localization_of_idempotent_projection
     have h := congrArg f hxy
     simpa only [map_mul, hef, one_mul] using h
 
-/-- The residue extension at a prime of a Noetherian pair henselization is separable,
-and its fibre after any map to C is a localization of the contracted-prime fibre.
-
-Source: Stacks Project, More on Algebra, Tags 0AH1 and 0AH3, displayed fibre product
-and its following paragraph.
-(blueprint: lem-weil-pbc-pair-henselization-fiber-localization).
-
-Proof: The pair-etale indexing category is filtered by Tag 0A02. Transport the colimit
-along the equivalence between rings under A and commutative A-algebras. Reindex
-along a small equivalent category, using essential smallness of the pair-etale
-category (its fully faithful embedding into finitely generated A-algebras). Tag 0AH1
-identifies the fibre over p with the finite product of the residue fields of all
-primes over p, by the canonical component maps, and proves each residue extension
-separable algebraic. Tensor this decomposition over B with C. Tensor cancellation
-identifies the source with p.Fiber C; tensor distribution over the finite product
-identifies the target with the product of the q_i.Fiber C, with the canonical maps.
-The q projection is localization at the idempotent equal to one at q and zero at
-all other factors. Its image in p.Fiber C generates the required submonoid M.
-Indeed denominators map to one, each element of the factor lifts by extending it
-by zero, and the kernel of projection is killed by the idempotent. These are the
-localization axioms. A prime q supplies an index, so an empty product never occurs;
-if q.Fiber C is zero the same localization axioms still hold. -/
+/-- The residue extension at a prime `q` of a Noetherian pair henselization is separable, and
+for any map to `C` the fibre of `q` is a localization of the fibre of the contracted prime. -/
 theorem pair_henselization_fiber_localization
     (A : Type u) [CommRing A] (I : Ideal A)
     (c : Cocone (ObjectProperty.ι

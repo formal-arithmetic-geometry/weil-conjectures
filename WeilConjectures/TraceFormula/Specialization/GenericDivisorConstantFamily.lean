@@ -12,11 +12,9 @@ public import WeilConjectures.TraceFormula.Specialization.PointModel
 
 # The specialization unit of a constant family
 
-For a `k`-scheme `Y`, the constant family `Y × S` over the strictly henselian trait
-`S = Spec k'⟦t⟧` is the deformation of the zero ideal of `Y`
-(`ProEtale.CondensedRing.deformationModel Y ⊥ k'`). Blueprint
-`lemma-nearby-cycles-constant-family--1` asserts that its specialization unit
-`σ_Y : Λ_{Y'} ⟶ Ψ_{Y × S}(Λ)` is an isomorphism.
+For a `k`-scheme `Y`, the constant family `Y × S` over the strictly henselian trait `S = Spec k'⟦t⟧`
+is the deformation of the zero ideal of `Y` (`ProEtale.CondensedRing.deformationModel Y ⊥ k'`). We
+study when its specialization unit `σ_Y : Λ_{Y'} ⟶ Ψ_{Y × S}(Λ)` is an isomorphism.
 
 The projection `Y × S ⟶ S` is a morphism of models from the constant family to the trait
 (`ProEtale.CondensedRing.constantFamilyModelHom`), over the structure morphism `Y ⟶ Spec k`. By the
@@ -51,9 +49,8 @@ open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-/-- **The point case** of blueprint `lemma-nearby-cycles-constant-family--1`, for any commutative
-condensed ring `Λ`: the specialization unit `σ_s : Λ ⟶ Ψ_s Λ` of the strictly henselian trait is an
-isomorphism. -/
+/-- **The point case**, for any commutative condensed ring `Λ`: the specialization unit
+`σ_s : Λ ⟶ Ψ_s Λ` of the strictly henselian trait is an isomorphism. -/
 theorem isIso_traitModel_unit (k : Type u) [Field k] (k' : Type u) [Field k'] [Algebra k k']
     [IsSepClosed k'] : IsIso ((traitModel k k').unit Λ) := by
   have h : UpperStarInvertsLowerStarUnit Λ (traitGenericPoint k') (traitClosedPoint k') :=
@@ -88,12 +85,10 @@ lemma constantFamilyModelHom_generic :
       pullback.snd (deformationTotalToTrait Y ⊥ k') (traitGenericPoint k') :=
   rfl
 
-/-- **Reduction of the constant family case to smooth base change** (blueprint
-`lemma-nearby-cycles-constant-family--1`): if the pullback exchange
+/-- **Reduction of the constant family case to smooth base change**: if the pullback exchange
 `L(Y' ⟶ Spec k')^* Ψ_s(Λ) ⟶ Ψ_{Y × S}(L(Y ⟶ Spec k)^* Λ)` of the projection `Y × S ⟶ S` is an
 isomorphism at the unit, then the specialization unit of the constant family `Y × S` is an
-isomorphism. This follows from the unit law of the pullback exchange and the point case
-`ProEtale.CondensedRing.isIso_traitModel_unit`. -/
+isomorphism. -/
 theorem isIso_deformationModel_bot_unit_of_isIso_pullbackExchange_app [IsSepClosed k']
     [IsIso (((constantFamilyModelHom Y k').pullbackExchange Λ).app (𝟙_ _))] :
     IsIso ((deformationModel Y ⊥ k').unit Λ) := by
@@ -122,11 +117,8 @@ instance [IsIso Y.hom] : IsIso (deformationSpaceToAffineLine Y ⊥) := by
 instance [IsIso Y.hom] : IsIso (deformationTotalToTrait Y ⊥ k') :=
   inferInstanceAs (IsIso (pullback.snd _ _))
 
-/-- **The constant family of a point** (blueprint `lemma-nearby-cycles-constant-family--1`, the case
-`Y ≅ Spec k`): if the structure morphism of `Y` is an isomorphism, the specialization unit of the
-constant family `Y × S` is an isomorphism. The projection `Y × S ⟶ S` is then an isomorphism of
-models, so its pullback exchange is invertible
-(`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isIso`). -/
+/-- **The constant family of a point**: if the structure morphism of `Y` is an isomorphism, the
+specialization unit of the constant family `Y × S` is an isomorphism. -/
 theorem isIso_deformationModel_bot_unit_of_isIso [IsSepClosed k'] [IsIso Y.hom] :
     IsIso ((deformationModel Y ⊥ k').unit Λ) := by
   have : IsIso ((constantFamilyModelHom Y k').pullbackExchange Λ) := by

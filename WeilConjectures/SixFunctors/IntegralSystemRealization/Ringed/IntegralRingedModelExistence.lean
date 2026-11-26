@@ -15,7 +15,13 @@ import all WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupport
 
 /-! # Canonical integral model construction steps
 
-Source: blueprint fix-prop-coherence, strict-system realization.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 099N]
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 09AE]
+* [Stacks, Tag 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -31,28 +37,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [-instance] IntegralAmbient.ambientCxCategory IntegralAmbient.ambientDCategory in
 /-- Completed tensor/pull models and their ordinary open comparisons. The proper/open
-transformation and its adjunct equation are deliberately not part of this assertion.
-Source: Stacks 07A4, 099N, 03DI, 09AE and 0E8I; blueprint fix-prop-coherence,
-last model-construction step of strict-system realization
-(blueprint: lem-sf-integral-ringed-model-existence).
-
-Proof: choose the canonical flat-term K-flat tensor localization, using the same
-integralTensorModel representatives as calculus. The identity on pure tensors
-identifies its ordinary tensor with integralClosed.tensor and identifies their
-representative isomorphisms, giving tensorClosed and tensorRepresentative.
-Apply the quotient Roos augmentation to the ordinary total tensor and pullback
-complexes. The first coordinate is the quotient of each scalar-unit tensor and the
-shifted coordinate is zero. The strict quotient tower equations and localization
-therefore give precisely OpenFactorCoherence.Tensor and Pull with their recorded
-normalizations. Assemble these into RingedModels. Exact open restriction is fully
-faithful after extension, so its actual unit is invertible. The slice base-change
-comparison is invertible for a cartesian open square, and the open projection
-comparison is invertible by the extension-by-zero tensor formula. Specify their
-inverses as the displayed unit/tensor adjunction transposes. For a clopen immersion,
-extension by zero equals direct image; its map is the transpose under the geometric
-adjunction of the inverse open unit. These constructions and equations give
-RingedOpenComparisons. Empty opens, identity opens and zero tensor inputs obey the
-same slice and pure-tensor formulas, with no nonempty assumption. -/
+transformation and its adjunct equation are deliberately not part of this assertion. -/
 theorem integralRingedModelExistence :
     ∃ d : RingedModels l E, Nonempty (RingedOpenComparisons l E d) := by
   classical

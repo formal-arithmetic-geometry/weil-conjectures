@@ -36,23 +36,27 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 /-!
 # Models for completed-coefficient direct image and its strict quotient tower
 
-(blueprint: def-pur-completed-pushforward-models).
+This file records the data used to compare the derived direct image of completed-coefficient
+modules with the derived limit of the direct images of its finite quotient tower.
 
-Source: Stacks Tags 0D6E, 0A07 and 099N (1),(4); blueprint fix-prop-adjunctions, Step 1
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison).
-
-All sites retain their object and morphism universes. The auxiliary records retain
-universal derived units and representative normalizations; their existence is a conclusion.
-The constructions and signatures are the existing completed-coefficient comparison interface.
-They are re-exported by CompletedCoefficientPushforwardComparison; the extraction permits
-its independent proof lemmas to use the interface without an import cycle.
-
-## Main definitions and statement
+## Main definitions
 
 - `RightImage`, `ExactImage`, and `Square`: derived models and their normalized comparisons.
 - `SiteData`: exact scalar restrictions, strict coefficient systems, and derived tower limits.
 - `ComparisonData`: coefficient coherence, strict diagrams, and complete reconstruction.
-- `ComparisonData.completeComparison`: the comparison restricted to complete source objects.
+
+## Implementation details
+
+All sites retain their object and morphism universes. The records store universal derived
+units and representative normalizations; their existence is proved elsewhere. The interface is
+re-exported by `CompletedCoefficientPushforwardComparison`; keeping it in a separate file lets
+the independent proof lemmas use it without an import cycle.
+
+## References
+
+* Zheng, Construction 4.1.
+* Bhatt–Scholze, Definition 3.5.2.
+* Stacks Project, Tags 03CO, 03DA, 03EK, 05RU, 099N (1), (4), 0A07, 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -70,8 +74,8 @@ variable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{d} A]
   {B : Type b} [Category.{bv} B] [Abelian B] [HasDerivedCategory.{d} B]
   (F : A ⥤ B) [F.PreservesZeroMorphisms]
 
-/-- A total right derived image with its universal unit and K-injective computation.
-Source: Stacks Tag 0D6E (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- A total right derived functor of `F` with its universal unit, computed on K-injective
+complexes. -/
 structure RightImage where
   functor : DerivedCategory A ⥤ DerivedCategory B
   unit : F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
@@ -79,14 +83,13 @@ structure RightImage where
   universal : functor.IsRightDerivedFunctor unit (HomologicalComplex.quasiIso A (.up ℤ))
   computes : ∀ I : CochainComplex A ℤ, I.IsKInjective → IsIso (unit.app I)
 
-/-- Exact coefficient restriction is computed termwise on all complexes.
-Source: Stacks Tag 0D6E (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- A derived functor of an exact functor `F`, computed termwise on all complexes. -/
 structure ExactImage where
   functor : DerivedCategory A ⥤ DerivedCategory B
   factors : DerivedCategory.Q ⋙ functor ≅
     F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q
-/-- The unit of exact coefficient restriction, fixed before localization.
-Source: Stacks Tag 0D6E (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- An identification of an exact functor `G` with the identity, together with the induced
+identification of its derived functor, compatible on complexes. -/
 structure ExactIdentity (G : A ⥤ A) [G.PreservesZeroMorphisms] (DG : ExactImage G) where
   ordinary : G ≅ 𝟭 A
   comparison : DG.functor ≅ 𝟭 (DerivedCategory A)
@@ -105,9 +108,8 @@ variable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{d} A]
     [V.PreservesZeroMorphisms]
   (RF : RightImage F) (RG : RightImage G) (DU : ExactImage U) (DV : ExactImage V)
 
-/-- The comparison of the two factorizations of a ringed direct image, including its
-normalization on the common underived composite. Source: Stacks Tag 0D6E
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- A comparison of the two derived factorizations of a commutative square `F ⋙ V ≅ U ⋙ G`,
+normalized on underived complexes by the universal units. -/
 structure Square where
   ordinary : F ⋙ V ≅ U ⋙ G
   comparison : RF.functor ⋙ DV.functor ≅ DU.functor ⋙ RG.functor
@@ -117,8 +119,8 @@ structure Square where
       DV.factors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex ordinary (.up ℤ)).hom.app K) ≫
         RG.unit.app ((U.mapHomologicalComplex (.up ℤ)).obj K)
-/-- Composition of termwise exact restrictions, normalized before localization.
-Source: Stacks Tag 0D6E (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- A composition law `F ⋙ V ≅ H` for exact functors together with the induced comparison
+of derived functors, compatible on complexes. -/
 structure ExactComposition (H : A ⥤ D) [H.PreservesZeroMorphisms]
     (DH : ExactImage H) (E₁ : ExactImage F) (E₂ : ExactImage V) where
   ordinary : F ⋙ V ≅ H
@@ -133,24 +135,19 @@ end Squares
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The recorded module category at any ring sheaf on the original small site.
-Source: Stacks Tag 03DA (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The category of sheaves of `B`-modules on the small pro-étale site of `W`. -/
 abbrev Mod (W : Scheme.{t}) (B : Sheaf (ProEt.topology W) RingCat.{max u (t + 1)}) :=
   ringedSiteModules.{max u (t + 1)} B
 
-/-- A natural map of module sheaves is the identity on the underlying sections.
-The heterogeneous equality just forgets the possibly different scalar actions.
-Source: Stacks Tag 0D6E
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- A natural map of module sheaves is the identity on the underlying sections (as a
+heterogeneous equality, forgetting the possibly different scalar actions). -/
 def IsSectionwiseIdentity (W : Scheme.{t})
     (B : Sheaf (ProEt.topology W) RingCat.{max u (t + 1)})
     {C : Type c} [Category.{cv} C] {F G : C ⥤ Mod W B} (η : F ⟶ G) : Prop :=
   ∀ (M : C) (U : W.ProEtᵒᵖ) (x : (F.obj M).val.obj U),
     HEq ((η.app M).val.app U x) x
 
-/-- Mathlib's abelian structure, with both sheafification universes specified.
-Source: Stacks Tag 03DA
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The abelian structure on `Mod W B`, with both sheafification universes specified. -/
 instance (priority := 20000) modAbelian (W : Scheme.{t})
     (B : Sheaf (ProEt.topology W) RingCat.{max u (t + 1)}) : Abelian (Mod W B) :=
   { @SheafOfModules.instAbelian.{max u (t + 1), t, max u (t + 1), t + 1}
@@ -159,20 +156,17 @@ instance (priority := 20000) modAbelian (W : Scheme.{t})
       (integralCoefficientAbLocallyBijective.{t, u} W) with
     toPreadditive := inferInstance }
 
-/-- The existing standard localization, selected uniformly for ordinary derived models.
-Source: Stacks Tag 05RU
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The standard derived category, selected uniformly for derived models. -/
 instance (priority := 10000) hasDerived {A : Type a} [Category.{av} A] [Abelian A] :
     HasDerivedCategory.{max a av} A := HasDerivedCategory.standard A
 
-/-- Precomposition on ring sheaves in the coefficient universe, with no universe equality.
-Source: Stacks Tag 0D6E (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- Pushforward of ring sheaves along `f` in the coefficient universe. -/
 abbrev ringPush {X Y : Scheme.{t}} (f : X ⟶ Y) :=
   (proEtaleBaseChange f).sheafPushforwardContinuous RingCat.{max u (t + 1)}
     (ProEt.topology Y) (ProEt.topology X)
 
-/-- The constant structural map, obtained by sheafification of constant sections.
-Source: Stacks Tag 0D6E (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The structural map from the constant ring sheaf on `Y` to the pushforward of the constant
+ring sheaf on `X`, obtained by sheafification of constant sections. -/
 def constantPush {X Y : Scheme.{t}} (f : X ⟶ Y) (A : CommRingCat.{max u (t + 1)}) :
     (sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
       ((constantSheaf (ProEt.topology Y) CommRingCat.{max u (t + 1)}).obj A) ⟶
@@ -189,54 +183,44 @@ def constantPush {X Y : Scheme.{t}} (f : X ⟶ Y) (A : CommRingCat.{max u (t + 1
   ⟨Functor.whiskerRight h.hom
     (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})⟩
 
-/-- Module direct image is the actual sectionwise pushforward along its structural map.
-Source: Stacks Tag 0D6E (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- Direct image of module sheaves along `f`, the sectionwise pushforward along the
+structural map `c`. -/
 abbrev push {X Y : Scheme.{t}} (f : X ⟶ Y)
     {R : Sheaf (ProEt.topology Y) RingCat.{max u (t + 1)}}
     {S : Sheaf (ProEt.topology X) RingCat.{max u (t + 1)}}
     (c : R ⟶ (ringPush.{t, u} f).obj S) : Mod X S ⥤ Mod Y R :=
   SheafOfModules.pushforward.{max u (t + 1)} c
 
-/-- The coefficient-ring action in the existing strict coefficient-system category.
-Source: Zheng Construction 4.1 (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The coefficient ring of strict coefficient systems: the integers of `E`, lifted. -/
 abbrev systemRing := ULift.{t + 1} (Padic.coefficientExtensionIntegers l E)
 
-/-- The generator of the principal ideal defining the existing strict coefficient systems.
-Source: Zheng Construction 4.1 (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The uniformizer generating the ideal that defines strict coefficient systems. -/
 abbrev systemUniformizer : systemRing.{t, u} l E :=
   ULift.up (Padic.coefficientExtensionUniformizer l E)
 
-/-- The existing strict semilinear coefficient systems, without a normalization condition.
-Source: Zheng Construction 4.1 (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- Strict semilinear coefficient systems on the pro-étale site of `W`. -/
 abbrev Systems (W : Scheme.{t}) :=
   SheafOfModules.CoefficientSystem.{t + 1, t, max u (t + 1)} (J := ProEt.topology W)
     (systemRing.{t, u} l E) (systemUniformizer.{t, u} l E)
 
-/-- The actual completed coefficient ring, abbreviated only for the comparison signature.
-Source: Stacks Tag 03CO (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The completed integral coefficient ring sheaf on `W`. -/
 abbrev R (W : Scheme.{t}) := completedIntegralCoefficientSheafUnrestricted l E W
 
-/-- The actual constant coefficient ring.
-Source: Stacks Tag 03CO (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The constant integral coefficient ring sheaf on `W`. -/
 abbrev A (W : Scheme.{t}) := integralConstantRingOfUniverses l E W
 
-/-- The actual finite coefficient ring at exponent n+1.
-Source: Stacks Tag 03CO (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The finite coefficient ring sheaf at exponent `n + 1`. -/
 abbrev N (W : Scheme.{t}) (n : ℕ) := integralCoefficientSheaf l E W n
 
-/-- The exact finite-level ring maps are the already recorded tower maps.
-The explicit endpoints keep the sequence implementation out of downstream types.
-Source: blueprint order 1455 (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The transition map `N W m ⟶ N W n` of the finite coefficient tower, for `n ≤ m`. -/
 def quotientMap (W : Scheme.{t}) {m n : ℕ} (h : n ≤ m) : N l E W m ⟶ N l E W n :=
   (integralCoefficientSheafSystem l E W).map (homOfLE h).op
 
-/-- The actual limit projection at exponent n+1.
-Source: Stacks Tag 03CO (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The limit projection from the completed ring to the finite ring at exponent `n + 1`. -/
 abbrev projection (W : Scheme.{t}) (n : ℕ) : R l E W ⟶ N l E W n :=
   limit.π (integralCoefficientSheafSystem l E W) (op n)
 
-/-- The existing quotient sheaf used by strict systems, with commutativity forgotten.
-Source: Zheng Construction 4.1 (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The finite quotient ring sheaf used by strict systems, as a sheaf of rings. -/
 abbrev modelRing (W : Scheme.{t}) (n : ℕ) :
     Sheaf (ProEt.topology W) RingCat.{max u (t + 1)} :=
   (sheafCompose (ProEt.topology W)
@@ -244,23 +228,18 @@ abbrev modelRing (W : Scheme.{t}) (n : ℕ) :
       (SheafOfModules.coefficientQuotientSheaf.{t + 1, t, max u (t + 1)} (J := ProEt.topology W)
         (systemRing.{t, u} l E) (systemUniformizer.{t, u} l E) n)
 
-/-- Transport from the existing strict-system finite coefficient presentation along
-its ring isomorphism; this is restriction along the inverse, with unchanged sections.
-Source: Stacks Tag 03DA (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- Transport of modules from the strict-system finite quotient ring to `N W n` along a ring
+isomorphism `e`: restriction of scalars along `e.inv`. -/
 abbrev model (W : Scheme.{t}) (n : ℕ) (e : modelRing l E W n ≅ N l E W n) :=
   SheafOfModules.restrictScalars.{max u (t + 1)} e.inv
 
-/-- The ordinary limit of strict completed-module towers, with its category fixed before
-instance synthesis. Source: Stacks Tag 0A07
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The ordinary limit of towers of completed-coefficient module sheaves. -/
 abbrev ordinaryTowerLimit (W : Scheme.{t}) :
     (ℕᵒᵖ ⥤ Mod W (R l E W)) ⥤ Mod W (R l E W) := lim
 
 set_option genSizeOf false in
 set_option genInjectivity false in
-/-- Exact coefficient restrictions and their quotient composition laws.
-Source: Stacks Tags 0D6E and 0A07
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- Exact coefficient restrictions on `W` and their quotient composition laws. -/
 structure SiteCoefficientData (W : Scheme.{t}) where
   U : ExactImage (SheafOfModules.restrictScalars.{max u (t + 1)}
     (integralConstantToCompletionOfUniverses l E W))
@@ -301,9 +280,8 @@ structure SiteCoefficientData (W : Scheme.{t}) where
 
 set_option genSizeOf false in
 set_option genInjectivity false in
-/-- The actual restriction of semilinear coefficient systems to strict completed-module towers.
-Source: Stacks Tags 0D6E and 0A07
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The restriction of semilinear coefficient systems to towers of completed-coefficient
+modules, with its evaluations. -/
 structure SystemRestrictionData (W : Scheme.{t}) extends SiteCoefficientData l E W where
   systemRestriction : Systems l E W ⥤ (ℕᵒᵖ ⥤ Mod W (R l E W))
   [systemRestrictionAdditive : systemRestriction.Additive]
@@ -326,9 +304,8 @@ attribute [instance] SystemRestrictionData.systemRestrictionAdditive
 
 set_option genSizeOf false in
 set_option genInjectivity false in
-/-- The ordinary strict-tower limit and its normalized total derived functor.
-Source: Stacks Tags 0D6E and 0A07
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The ordinary tower limit, its total derived functor and the normalized limit
+projections. -/
 structure SiteLimitData (W : Scheme.{t}) where
   [limitAdditive : (ordinaryTowerLimit l E W).Additive]
   limit : RightImage (ordinaryTowerLimit l E W)
@@ -343,31 +320,24 @@ structure SiteLimitData (W : Scheme.{t}) where
 
 set_option genSizeOf false in
 set_option genInjectivity false in
-/-- Site-side coefficient restrictions, strict systems, and total derived limits.
-All functors retain their original universal or termwise normalizations.
-Source: Stacks Tags 0D6E and 0A07
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- Site-side coefficient restrictions, strict systems, and total derived limits on `W`. -/
 structure SiteData (W : Scheme.{t}) extends
     SystemRestrictionData l E W, SiteLimitData l E W where
 
 variable {X Y : Scheme.{t}} (f : X ⟶ Y)
 
-/-- The canonical finite structural map is the constant-section map for the finite ring.
-Source: Stacks Tag 0D6E (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The structural map for the finite coefficient ring at exponent `n + 1`. -/
 abbrev finiteStructure (n : ℕ) :=
   constantPush.{t, u} f
     (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))
 
-/-- The constant integral structural map is the constant-section map for the integer ring.
-Source: Stacks Tag 0D6E (blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The structural map for the constant integral coefficient ring. -/
 abbrev constantStructure :=
   constantPush.{t, u} f
     (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E)))
 
-/-- The augmentation of one strict flat reduction tower: in every degree it is x↦x⊗1.
-This is a property of an actual map into the ordinary limit, not an arbitrary lift in
-an unenhanced triangulated category. Source: Bhatt--Scholze Definition 3.5.2; Stacks 03EK
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- A map `a` from `P` into the ordinary limit of a reduction tower `C` of `P` is the
+augmentation: in every degree and at every level it is `x ↦ x ⊗ 1`. -/
 def IsReductionAugmentation (W : Scheme.{t})
     (P : CochainComplex (Mod W (R l E W)) ℤ)
     (C : CochainComplex (ℕᵒᵖ ⥤ Mod W (R l E W)) ℤ)
@@ -380,9 +350,8 @@ def IsReductionAugmentation (W : Scheme.{t})
 
 set_option genSizeOf false in
 set_option genInjectivity false in
-/-- The actual direct images and the normalized constant and finite coefficient squares.
-Source: Stacks Tags 0D6E and 0A07
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The direct images along `f` and the normalized constant and finite coefficient
+squares. -/
 structure CoefficientImageData where
   source : SiteData l E X
   target : SiteData l E Y
@@ -413,9 +382,7 @@ attribute [instance] CoefficientImageData.completedAdditive
 
 set_option genSizeOf false in
 set_option genInjectivity false in
-/-- The section identities, restriction coherence, and completion-projection compatibility.
-Source: Stacks Tags 0D6E and 0A07
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The section identities, restriction coherence, and completion-projection compatibility. -/
 structure CoefficientComparisonData extends CoefficientImageData l E f where
   constantOrdinary_identity :
     IsSectionwiseIdentity Y (A l E Y) constantSquare.ordinary.hom
@@ -443,9 +410,7 @@ structure CoefficientComparisonData extends CoefficientImageData l E f where
 
 set_option genSizeOf false in
 set_option genInjectivity false in
-/-- The comparison on derived strict coefficient diagrams and its normalized limit projections.
-Source: Stacks Tags 0D6E and 0A07
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- The comparison on derived strict coefficient diagrams and its normalized limit projections. -/
 structure DiagramComparisonData extends CoefficientComparisonData l E f where
   systemPush : Systems l E X ⥤ Systems l E Y
   [systemPushAdditive : systemPush.Additive]
@@ -499,10 +464,8 @@ structure DiagramComparisonData extends CoefficientComparisonData l E f where
 
 set_option genSizeOf false in
 set_option genInjectivity false in
-/-- All coefficient comparisons, strict derived diagrams, and complete reconstruction.
-The inherited records retain every canonical map and normalization.
-Source: Stacks Tags 0D6E and 0A07
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison). -/
+/-- All coefficient comparisons, strict derived diagrams, and the reconstruction of derived
+complete objects from their reduction towers. -/
 structure ComparisonData extends DiagramComparisonData l E f where
   preservesComplete : ∀ K : DerivedCategory (Mod X (R l E X)),
     IsDerivedCompleteUnrestricted l E X K →

@@ -14,9 +14,19 @@ import WeilConjectures.SmoothPurity.Rational.RationalTensorTowerCoherence
 
 /-! # Coherence of the rational tensor scalar comparisons
 
-Source: the common-stage tensor argument of prose-03-02,
-using the normalized scalar-extension comparisons of
-lem-pur-integral-operations-scalar-extension; Stacks Project, Tags 07A4 and 08J9.
+The normalized rational tensor scalar comparisons, expressed through the recorded stage
+transitions, satisfy the coefficient tower equation.
+
+## Implementation details
+
+The tower equation comes from the tensor clause of `scalarOperationsOrdinary_tower`: each
+ordinary scalar extension is conjugated by its `scalarCompletion` comparison, the result is
+restricted to the constructible full subcategories and localized, and the transition and
+associator clauses of `stageSystem_existsUnique` are substituted.
+
+## References
+
+* Stacks Project, Tags 07A4 and 08J9.
 -/
 
 @[expose] public noncomputable section
@@ -167,9 +177,7 @@ variable (l : ℕ) [Fact l.Prime]
 set_option allowUnsafeReducibility true in
 attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory
 
-/-- The normalized tensor comparison, expressed using the recorded stage transitions.
-Source: the common-stage paragraph of prose-03-02.
-(blueprint: lem-weil-rational-tensor-stage-coherence). -/
+/-- The normalized tensor comparison, expressed using the recorded stage transitions. -/
 def rationalTensorStageComparison {E L : Index l Ω} (h : E ≤ L) :
     rationalDerivedTensor l (Coefficient.{u} l Ω E) W ⋙ (stageSystem l Ω W).T h ≅
       ((stageSystem l Ω W).T h).prod ((stageSystem l Ω W).T h) ⋙
@@ -242,26 +250,7 @@ private theorem stageAssociator_heq {E L M : Index l Ω} (h : E ≤ L) (k : L �
   exact ((stageSystem_existsUnique l Ω W).exists.choose_spec.2 E L M h k).trans
     (associator_existsUnique l Ω W E L M h k).exists.choose_spec
 
-/-- The normalized rational tensor comparisons satisfy the coefficient tower equation.
-Source: lem-pur-integral-operations-scalar-extension, coefficient-tower calculation
-(scalarOperationsOrdinary_tower), and the common-stage tensor paragraph of
- prose-03-02; Stacks Project, Tags 07A4 and 08J9.
-(blueprint: lem-weil-rational-tensor-stage-coherence).
-
-Proof: apply the tensor clause of scalarOperationsOrdinary_tower to the three
-coefficient fields and their actual inclusions. Conjugate each ordinary scalar
-extension by its canonical scalarCompletion comparison. Naturality moves these
-comparisons through the tensor functor; the adjacent inverse completion maps
-cancel, giving the completed integral tensor equation with sfIntegralScalarComp.
-Restrict to the constructible full subcategories and apply rational localization.
-The component specifications of rationalTensorScalarComparison and
-sfRationalScalarComp identify the localized maps with the published comparisons.
-The coefficient-inclusion composition law identifies the composite inclusion with
-the direct inclusion. Finally substitute the transition and associator clauses
-of stageSystem_existsUnique. The equality transports in
-rationalTensorStageComparison cancel. This is precisely FamilyTower. The same
-calculation covers repeated fields, identity inclusions, zero objects, and empty
-schemes; it requires no additional geometric or flatness hypothesis. -/
+/-- The normalized rational tensor comparisons satisfy the coefficient tower equation. -/
 theorem rationalTensorStageComparison_coherent :
     BilinearCoefficientDescent.FamilyTower (stageSystem l Ω W) (stageSystem l Ω W)
       (stageSystem l Ω W)

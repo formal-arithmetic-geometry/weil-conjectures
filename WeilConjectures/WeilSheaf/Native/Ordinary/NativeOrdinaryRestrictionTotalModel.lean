@@ -12,8 +12,9 @@ import all WeilConjectures.CategoryTheory.ExactMonoidalEquivalenceDerived
 
 /-! # The ordinary restriction tensorator on representatives
 
-Source: Stacks 0E8I, 0GL1 and 015F.
-(blueprint: lem-sf-native-ordinary-restriction-total-model).
+## References
+
+* Stacks Project, Tags 012Z, 0E8I, 0GL1 and 015F.
 -/
 
 @[expose] public noncomputable section
@@ -115,9 +116,7 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
 
-/-- The canonical balanced restriction isomorphism on ordinary total complexes.
-Source: Stacks 012Z and 0E8I, totalization of the ordinary pullback tensorator.
-(blueprint: lem-sf-native-ordinary-restriction-total-model). -/
+/-- The canonical balanced restriction isomorphism on ordinary total complexes. -/
 def nativeOrdinaryRestrictionTotal
     (P T : CochainComplex (ProEtale.AdicSheaf l
       (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) :
@@ -144,25 +143,7 @@ def nativeOrdinaryRestrictionTotal
 
 -- The native tensor comparisons contain large sheaf and derived-category instances.
 /-- The fixed ordinary derived restriction tensorator is the localization of the
-balanced total restriction map, including arbitrary input identification isomorphisms.
-
-Source: Stacks 0E8I and 015F; the tensor/counit square of
-`residueDerivedMonoidal_counit` transported to the exact derived functor.
-(blueprint: lem-sf-native-ordinary-restriction-total-model).
-
-Proof: install the braided pullback and its induced strong module tensor structure,
-as in nativeOrdinaryRestrictionTensor. The ordinary total restriction is the inverse
-complex tensorator for this very structure. Apply residueDerivedMonoidal_counit on
-the images of P,T in the homotopy category. Substitute the canonical comparison
-from the left derived functor to the exact derived functor. Its counit equation
-identifies the substituted counit with mapDerivedCategoryFactors. The quotient to
-the homotopy category is monoidal with identity tensorator; thus the formula is the
-same for Q and nativeOrdinaryRestrictionTotal. Whisker by dZ.tensorIso and
-(dU.tensorIso).symm; the latter cancels against dU.tensorIso. Finally use naturality
-of the inverse derived tensorator along f and g and functoriality of tensor to move
-the two input isomorphisms into the two factorization maps. This proves the formula
-for arbitrary complexes, so zero complexes and unbounded diagonals require no
-K-flat assumption. -/
+balanced total restriction map, including arbitrary input identification isomorphisms. -/
 theorem native_ordinary_restriction_total_model
     (dU : NativeOrdinaryTensorIdentification k₀ l U)
     (dZ : NativeOrdinaryTensorIdentification k₀ l Z)

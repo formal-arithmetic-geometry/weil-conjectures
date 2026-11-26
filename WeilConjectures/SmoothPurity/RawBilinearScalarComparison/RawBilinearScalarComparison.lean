@@ -10,8 +10,14 @@ import Mathlib.CategoryTheory.EqToHom
 
 /-! # Natural isomorphisms between prescribed raw bilinear scalar extensions
 
-Source: the existing rawBilinearIso_existsUnique proof in DerivedPullbackTensorHom.
-(blueprint: lem-weil-raw-bilinear-scalar-comparison).
+A prescribed raw bilinear scalar extension carries the integral natural isomorphism, uniquely
+determined by its component formula.
+
+## Implementation details
+
+The argument follows `rawBilinearIso_existsUnique` in `DerivedPullbackTensorHom`: each
+localized component of the integral isomorphism is conjugated by the prescribed object
+equalities, and naturality is proved by tensor-product induction in each arrow.
 -/
 
 @[expose] public noncomputable section
@@ -33,15 +39,8 @@ namespace WeilConjectures.RawBilinearScalarComparison
 
 attribute [local irreducible] ScalarLocalization.composition
 
-/-- A prescribed raw bilinear scalar extension carries the integral natural isomorphism.
-Source: the existing rawBilinearIso_existsUnique proof in DerivedPullbackTensorHom.
-(blueprint: lem-weil-raw-bilinear-scalar-comparison).
-Proof: conjugate each localized component of the integral isomorphism by the
-prescribed object equalities. Prove naturality by tensor-product induction in each
-arrow. Additivity handles sums and zero. For pure tensors, substitute both prescribed
-bilinear formulas; localization composition reduces to scalar multiplication and
-integral naturality. These components define a natural isomorphism. The prescribed
-component formula determines every component and hence the whole isomorphism. -/
+/-- A prescribed raw bilinear scalar extension carries a unique natural isomorphism with the
+prescribed components, induced by the integral natural isomorphism. -/
 theorem existsUnique
     {R : Type r} [CommRing R] {S : Type s} [CommRing S]
     {C : Type u₁} [Category.{v₁} C] [Preadditive C] [Linear R C]

@@ -10,19 +10,30 @@ public import WeilConjectures.RingTheory.PopescuDelocalizeWeak
 import WeilConjectures.RingTheory.PopescuHeightZeroAuxiliaryWitnesses
 import Mathlib.RingTheory.KrullDimension.Zero
 
+/-!
+# Resolution data for height-zero delocalization
+
+The data of a Popescu resolution at a prime of height zero over the extended singular ideal.
+
+## Implementation details
+
+The construction uses the weak delocalization lemma, nilpotence in the zero-dimensional
+localization, and the localizations of the auxiliary polynomial algebra.
+
+## References
+
+* [Stacks, Tag 07FA]
+-/
+
 @[expose] public section
 
 universe u v t
 
 namespace Algebra
 
-/-- The construction in Stacks Project, Lemma 07FA, produces a finite presentation
-factorization whose extended singular ideal contains the original one and escapes `q`.
-The detailed construction uses the weak delocalization lemma, nilpotence in the
-zero-dimensional localization, and the auxiliary polynomial algebra localizations.
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FA.
-(blueprint: lem-weil-pbc-popescu-delocalize-height-zero-data)
--/
+/-- At a minimal prime over the extended singular ideal with zero-dimensional localization, there
+is a finitely presented factorization whose extended singular ideal contains the original one and
+is not contained in `q`. -/
 theorem exists_popescu_resolution_data_of_local_height_zero
     {R : Type u} {A : Type v} {Λ : Type t}
     [CommRing R] [CommRing A] [CommRing Λ]

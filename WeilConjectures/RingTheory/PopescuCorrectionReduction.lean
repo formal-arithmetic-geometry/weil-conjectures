@@ -9,7 +9,21 @@ module
 public import Mathlib.RingTheory.Ideal.Over
 public import Mathlib.Algebra.MvPolynomial.Rename
 
-/-! # The explicit corrected polynomial quotient and its reduction -/
+/-! # The explicit corrected polynomial quotient and its reduction
+
+The corrected quotient `A'` of a presentation, obtained by replacing each equation `gᵢ` by
+`gᵢ - ∑ εᵢⱼ δᵢⱼ` with `εᵢⱼ ∈ I` and new variables `δᵢⱼ`, satisfies `A' / I A' ≅ Bbar[δᵢⱼ]`.
+
+## Implementation details
+
+Modulo `I` every `εᵢⱼ` vanishes, and the universal properties of polynomial rings and quotients
+give mutually inverse maps. `ULift` merely relabels the correction variables. Empty sets and the
+zero algebra are allowed; no assumption on `I²` or smoothness is used.
+
+## References
+
+* [Stacks, Tag 07CK]
+-/
 
 @[expose] public section
 
@@ -43,24 +57,7 @@ abbrev PopescuCorrectionQuotient :=
     popescuCorrectionIdeal.{u, w, d} R A I n m N g ε
 
 /-- Reduction of the explicit corrected quotient identifies it with a polynomial
-extension of the quotient by the uncorrected reduced equations.
-
-Source: Stacks Project, Tag 07CK (lemma-lift-once), the equality `A'/IA' = Bbar[δᵢⱼ]`.
-
-Proof: Reduce coefficients and variables modulo `I`. Each coefficient `εᵢⱼ` vanishes,
-so the corrected relations become just the renamed reduced `gᵢ`. The universal
-properties of polynomial rings and ideal quotients give mutually inverse maps between
-the reduced corrected quotient and the polynomial ring in the correction variables
-over the quotient by the reduced `gᵢ`: send old variables to the constant polynomials
-of their classes, correction variables to the new polynomial variables, and coefficients
-to their quotient classes. The reverse map sends coefficient classes and old variables
-to their images in the reduced corrected quotient, and each new variable to the class
-of its correction variable. Membership of every `εᵢⱼ` in `I` makes both maps respect
-the relations. They are inverse on coefficients and every variable, hence everywhere
-by polynomial and quotient extensionality. The maps commute with `R/I`, as can be
-checked on lifts from `R`. `ULift` merely relabels the correction variables. This also
-handles empty sets and the zero algebra; no assumption on `I²` or smoothness is used.
-(blueprint: lem-weil-pbc-popescu-correction-reduction-equiv) -/
+extension of the quotient by the uncorrected reduced equations. -/
 theorem nonempty_popescuCorrectionQuotient_reduction_equiv :
     Nonempty
       ((PopescuCorrectionQuotient.{u, w, d} R A I n m N g ε ⧸

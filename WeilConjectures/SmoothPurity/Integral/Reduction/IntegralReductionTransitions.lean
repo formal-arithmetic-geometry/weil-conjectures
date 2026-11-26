@@ -11,11 +11,7 @@ public import WeilConjectures.SmoothPurity.Normalized.NormalizedDVREffectivity
 
 /-! # Canonical integral reduction adjunction and quotient transitions
 
-Source: Weil conjectures blueprint, order 2132, coherent coefficient comparisons;
-main-20261015, thm-pur-adic-reconstruction, normalized-system transitions.
-(blueprint: def-pur-integral-reduction-transitions).
-
-The two constructions of this node are the published declarations
+The two constructions here are the published declarations
 `normalizedDVRIntegralAdjunction` (the tensor-unit-normalized derived adjunction
 `L_n ⊣ Res_n`, the `.choose` of the published normalized adjunction) and
 `normalizedDVRReductionTransition` (the inverse Hom-adjunction image under `𝔞_m` of

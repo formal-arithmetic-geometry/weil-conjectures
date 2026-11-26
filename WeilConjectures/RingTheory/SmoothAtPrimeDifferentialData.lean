@@ -19,7 +19,19 @@ import WeilConjectures.RingTheory.PrescribedBasisFurtherLocalization
 /-!
 # Differential basis after a common further shrink
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07C6.
+For a smooth presentation with a prescribed conormal basis near a prime, a further
+principal localization makes the Kähler differentials free of complementary rank while
+preserving the conormal basis.
+
+## Implementation details
+
+The split conormal sequence supplies a finite projective complement; a basis of it is spread
+near the prime and the conormal basis is base changed to a common smaller principal open. The
+shrink is necessary: stably free complements of free summands need not be free.
+
+## References
+
+* [Stacks, Tag 07C6]
 -/
 
 @[expose] public section
@@ -29,16 +41,7 @@ universe u
 namespace Algebra
 
 /-- After the prescribed conormal basis is obtained, a further shrink makes the
-Kähler differentials free of complementary rank, preserving that conormal basis.
-Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07C6, proof.
-(blueprint: lem-weil-pbc-smooth-at-prime-free-conormal-basis-differential-data)
-
-The split conormal sequence supplies a finite projective complement. Spread a
-basis of that complement of rank n-c near q, and base change the prescribed
-conormal basis to the common smaller principal open. Lift its defining element
-from the quotient to the polynomial ring.
-The previous assertion on the unchanged open was false: stably free complements
-of free summands need not be free. -/
+Kähler differentials free of complementary rank, preserving that conormal basis. -/
 theorem exists_smoothAtPrime_differential_data
     (R : Type u) [CommRing R] (n m : ℕ)
     (f : Fin m → MvPolynomial (Fin n) R)

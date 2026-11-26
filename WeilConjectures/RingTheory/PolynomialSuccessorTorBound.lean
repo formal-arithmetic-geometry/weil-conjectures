@@ -20,8 +20,18 @@ import Mathlib.Logic.Equiv.Fin.Rotate
 import Mathlib.LinearAlgebra.Finsupp.VectorSpace
 
 /-! # Tor bound for adjoining a single variable
-Source: Weibel, An Introduction to Homological Algebra, Theorem 4.3.7, pp. 101–102.
-(blueprint: lem-pc-polynomial-successor-tor-bound)
+
+Adjoining one polynomial variable raises the Tor bound of a module by at most one.
+
+## Implementation details
+
+With `R = A[x₀, …, xₙ₋₁]`, `S = R[xₙ]` and `E = S ⊗[R] M`, the canonical sequence
+`0 → E → E → M → 0` is exact. Since `S` is free over `R`, `Tor^S_i(E, N)` is `Tor^R_i(M, N)`,
+and the long exact sequence gives the bound. No domain assumption is used.
+
+## References
+
+* [Weibel, *An Introduction to Homological Algebra*, Theorem 4.3.7]
 -/
 
 @[expose] public section
@@ -81,25 +91,8 @@ private theorem tor_isZero_of_shortExact
   exact (h₁'.of_mono (hTN.δ (j + 1) j hij)).of_iso
     (P''.isoLeftDerivedObj F (j + 1))
 
-/-- Adjoining one variable raises a Tor bound by at most one.
-Source: Weibel, An Introduction to Homological Algebra, Theorem 4.3.7, pp. 101–102.
-Proof: put R = A[t_0,...,t_{n-1}] and S = R[t_n], using the coefficient inclusion
-`rename Fin.castSucc`. For L = M restricted to R, let E = S tensor_R L. The maps
-on E given by delta(f tensor m) = t_n f tensor m - f tensor (t_n m) and
-aug(f tensor m) = f m are S-linear and form 0 -> E -> E -> M -> 0.
-To see delta is injective, expand an element as sum t_n^j tensor m_j: its top
-coefficient in delta is the top m_j. To see ker aug = im delta, subtract delta
-of the term one degree lower to eliminate the highest coefficient, then descend
-until the remaining degree-zero coefficient is zero by aug. Aug is surjective
-since aug(1 tensor m) = m. Freeness of S over R means extension of an R-projective
-resolution of L is an S-projective resolution of E. Tensor associativity, and
-exactness of restriction of scalars, identify restricted Tor_i^S(E,N) with
-Tor_i^R(L,N restricted to R). Hence both copies of E have zero Tor above d.
-For i > d+1, the exact segment Tor_i^S(E,N) -> Tor_i^S(M,N) ->
-Tor_{i-1}^S(E,N) has zero ends, proving the conclusion. This argument also covers
-n=0, d=0, the zero module, and the zero ring; no degree of a nonzero scalar
-polynomial and no domain assumption is used.
-(blueprint: lem-pc-polynomial-successor-tor-bound) -/
+/-- Adjoining one variable raises a Tor bound by at most one: if `M` has `Tor` vanishing above
+`d` over `A[x₀, …, xₙ₋₁]`, then it has `Tor` vanishing above `d + 1` over `A[x₀, …, xₙ]`. -/
 theorem polynomial_successor_tor_bound
     {A : Type u} [CommRing A]
     (n : ℕ) (M : ModuleCat.{u} (MvPolynomial (Fin (n + 1)) A)) (d : ℕ)

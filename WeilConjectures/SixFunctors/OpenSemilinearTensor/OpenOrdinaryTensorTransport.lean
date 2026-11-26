@@ -23,8 +23,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-! # Transport of the generator-normalized ordinary open tensor formula
 
-Source: Stacks Project, Tags 03DI, 03EK and 0E8I.
-(blueprint: lem-sf-open-ordinary-tensor-transport).
+We transport the generator-normalized open tensor formula to the completed coefficients.
+
+## References
+
+* Stacks Project, Tags 03DI, 03EK and 0E8I
 -/
 
 @[expose] public noncomputable section
@@ -52,17 +55,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- The completed-coefficient tensor formula for supplied open transports.
-Source: Stacks 03DI, 03EK and 0E8I
-(blueprint: lem-sf-open-ordinary-tensor-transport).
-
-Proof: the concrete slice equivalence is cocontinuous. Apply the normalized
-ringed coefficient tensor transport with the actual completed ring sheaves,
-completedMap, integral equivalence and its recorded forward-functor equality.
-Its native tensor is the recorded ordinary tensor. Its original summand is the
-specified extensionSection, and its restricted section is the integral counit
-in restrictedSection. The two resulting equations are OrdinaryNaturality and
-OrdinaryGenerators. -/
+/-- The completed-coefficient tensor formula for supplied open transports. -/
 theorem openOrdinaryTensorTransport (o : Operations l E j) (hmap : IsIso o.completedMap) :
     ∃ μ : OrdinaryTensorComparison l E j o,
       OrdinaryNaturality l E j o μ ∧ OrdinaryGenerators l E j o μ := by

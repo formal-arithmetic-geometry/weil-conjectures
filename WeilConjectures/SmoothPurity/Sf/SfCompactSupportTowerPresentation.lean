@@ -13,8 +13,18 @@ import WeilConjectures.SmoothPurity.Sf.SfSupportTransitionPresentation
 
 /-! # Slice and intrinsic presentations of the compact-support tower
 
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks Tags 03DI, 0D6E, 0E8I.
-(blueprint: lem-sf-compact-support-slice-intrinsic-towers).
+## Implementation details
+
+The ordinary finite comparison comes from `sfFiniteOpenPresentation`, with adjacent transitions
+from `sfDirectImageTransition_presentation`; the support levels `sfSupportPresentationLevel`
+come from exact localization followed by direct image and restriction, with adjacent squares
+`sfSupportTransition_presentation`. `NatTrans.ofOpSequence` extends the adjacent squares to
+all arrows of `ℕᵒᵖ`.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6 and Lemma 6.7.7.
+* Stacks Project, Tags 03DI, 06YY, 0D6E, 0E8I.
 -/
 
 @[expose] public noncomputable section
@@ -44,20 +54,7 @@ private theorem towerIsoOfSteps
 The proper and support systems are naturally isomorphic to the published ordinary
 and compact-support systems, including all quotient maps. This comparison assumes
 only the section and resolution normalizations of the operation records; it has no
-constructibility conclusion and requires no finite-field hypothesis.
-
-Source: Bhatt--Scholze, Definition 6.7.6; Stacks Tags 03DI, 0D6E, 0E8I and 06YY.
-(blueprint: lem-sf-compact-support-slice-intrinsic-towers).
-
-Proof: use sfFiniteOpenPresentation for the ordinary finite comparison and its
-coefficient square. The ordinary direct-image terms coincide definitionally;
-sfDirectImageTransition_presentation supplies their adjacent transition identity.
-The explicit sfSupportPresentationLevel maps are obtained by exact localization of
-the finite comparison followed by direct image and restriction. Their adjacent
-square is sfSupportTransition_presentation. Finally NatTrans.ofOpSequence extends
-both adjacent squares to all arrows of ℕᵒᵖ. The resulting transformations are
-isomorphisms because every component is invertible. Thus the categorical assembly
-is complete; the three presentation identities are separate named obligations. -/
+constructibility conclusion and requires no finite-field hypothesis. -/
 theorem sfCompactSupportTower_presentation
     (c : Compactification f) (o : IntegralOpenReduction.Operations l E c.i)
     (d : CompactSupportProperImageTower.DirectData l E c.g)

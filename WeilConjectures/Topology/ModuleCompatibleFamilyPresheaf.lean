@@ -11,8 +11,12 @@ public import Mathlib.Algebra.Module.Shrink
 
 /-! # The explicit presheaf of compatible local module sections
 
-Source: Stacks Project, Sheaves, Tags 00AL (first proof) and 00AM.
-(blueprint: lem-weil-pbc-module-compatible-family-sheaf)
+The presheaf of families of local module sections that are compatible with restriction and with
+given overlap maps.
+
+## References
+
+* [Stacks Project, Tags 00AL and 00AM](https://stacks.math.columbia.edu/tag/00AL)
 -/
 
 @[expose] public section
@@ -23,18 +27,14 @@ open CategoryTheory TopologicalSpace Opposite
 
 namespace AlgebraicGeometry
 
-/-- Local sections on every subopen of a cover member inside `V`.
-Source: Stacks, Tag 00AL, first proof, with intersection sections expanded by restriction.
-(blueprint: lem-weil-pbc-module-compatible-family-sheaf) -/
+/-- Local sections on every subopen of a cover member inside `V`. -/
 abbrev OpenModuleFamily (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)
     (Fi : ∀ i : I, SheafOfModules.{max u v} ((moduleRings X).over (U i)))
     (V : Opens X) :=
   ∀ (i : I) (W : Opens X) (hi : W ≤ U i) (_ : W ≤ V),
     (Fi i).val.obj (op (Over.mk (homOfLE hi)))
 
-/-- A local family respects restrictions and the given overlap maps.
-Source: Stacks, Tags 00AL and 00AM, compatible-family equalizer.
-(blueprint: lem-weil-pbc-module-compatible-family-sheaf) -/
+/-- A local family respects restrictions and the given overlap maps. -/
 def OpenModuleFamilyCoherent (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)
     (Fi : ∀ i : I, SheafOfModules.{max u v} ((moduleRings X).over (U i)))
     (φij : ∀ i j : I,
@@ -50,9 +50,7 @@ def OpenModuleFamilyCoherent (X : RingedSpace.{u}) (I : Type w) (U : I → Opens
     (φij i j).hom.val.app (op (Over.mk (homOfLE (le_inf hi hj)))) (a i W hi hWV) =
       a j W hj hWV)
 
-/-- Evaluate a global section through a local projection after restricting it.
-Source: Stacks, Tag 00AL, projection of the compatible-family equalizer.
-(blueprint: lem-weil-pbc-module-compatible-family-sheaf) -/
+/-- Evaluate a global section through a local projection after restricting it. -/
 noncomputable abbrev openModuleFamilyEval
     (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)
     (Fi : ∀ i : I, SheafOfModules.{max u v} ((moduleRings X).over (U i)))
@@ -141,9 +139,7 @@ def coherentOpenModuleRestrict {V W : Opens X} (h : W ≤ V)
     ⟨fun i Z T hi hZW hTZ => a.2.1 i Z T hi (hZW.trans h) hTZ,
       fun i j Z hi hj hZW => a.2.2 i j Z hi hj (hZW.trans h)⟩⟩
 
-/-- The compatible-family presheaf, before shrinking its section types. 
-(blueprint: def-weil-pbc-module-compatible-family-presheaf)
--/
+/-- The compatible-family presheaf, before shrinking its section types. -/
 noncomputable def coherentOpenModulePresheaf :
     PresheafOfModules.{max u v w} (moduleRings X).obj where
   obj V := ModuleCat.of _ (coherentOpenModuleSubmodule X I U Fi φij V.unop)

@@ -17,8 +17,13 @@ import WeilConjectures.RingTheory.RegularRingOfQuotientAway
 /-!
 # Regularity of a root algebra along its root divisor
 
-Source: Stacks Project, Tags 0EYH and 0EYG, the local verification along the divisor.
-(blueprint: lem-sbc-root-algebra-regular-at-root)
+Let `R` be Noetherian and `f ∈ R` a nonzerodivisor with `R/(f)` regular. The root algebra
+`R[X]/(X^n - f)` is regular at every prime containing the root.
+
+## References
+
+* [Stacks, Tag 0EYH]
+* [Stacks, Tag 0EYG]
 -/
 
 @[expose] public section
@@ -84,26 +89,8 @@ private def root_quotient_equiv (R : Type u) [CommRing R] (f : R) (n : ℕ) (hn 
       rw [Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.mem_span_singleton_self t)]
       rw [map_zero, map_zero]
 
-/-- A prime localization containing the root coordinate is regular local.
-
-Source: Stacks Project, Tag 0EYH, the local verification over the divisor;
-Tag 0EYG, the paragraph introducing the finite free root algebra.
-(blueprint: lem-sbc-root-algebra-regular-at-root)
-
-Proof: Put P = X^n-C(f), B = R[X]/(P), and t = the image of X. The positive
-exponent makes P monic, and the monomial basis 1,t,...,t^(n-1) makes B finite
-free over R. In particular B is Noetherian. Injective multiplication by f on R
-therefore gives injective multiplication by its image on B. Since t^n=f,
-multiplication by t is injective, and remains injective after localization.
-Evaluation at X=0 identifies B/(t) with R/(f): imposing X=0 in the defining
-relation imposes exactly f=0. For a prime q containing t, quotienting B_q by t
-commutes with localization and identifies this quotient with the localization
-of R/(f) at the prime induced by q. It is regular local by the regularity of
-R/(f). In a Noetherian local ring a nonzerodivisor in the maximal ideal with
-regular local quotient lifts regularity (Stacks Tag 00NU). Apply this to the
-image of t in B_q. No invertibility of n or regularity of R is needed here.
-The zero ring has no primes, and if f is a unit then t is a unit, so the
-hypothesis t in q is impossible; n=1 reduces to the same lifting argument. -/
+/-- Let `R` be Noetherian, `f ∈ R` a nonzerodivisor with `R/(f)` regular, and `n > 0`. Then
+the localization of `R[X]/(X^n - f)` at any prime containing the root `X` is regular local. -/
 theorem isRegularLocalRing_atPrime_of_root_mem
     (R : Type u) [CommRing R] [IsNoetherianRing R] (f : R)
     (hf : IsSMulRegular R f) [IsRegularRing (R ⧸ Ideal.span {f})]

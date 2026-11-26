@@ -11,7 +11,12 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorIntegra
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+The strict scalar square for the transported quotient comparison, used in the quotient
+normalization and coherent substitution steps of the integral comparison.
+
+## References
+
+* [Stacks, Tags 03EL, 07A4 and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -204,16 +209,7 @@ private theorem comparison_test {X Y : Scheme.{u}} (f : X ⟶ Y)
   unfold comparison pullBridge
   exact hb
 
-/-- The strict scalar square for the transported quotient comparison.
-Source: Stacks 03EL, 07A4, 0941; scalar route coordinate proof step 1.
-(blueprint: lem-pur-completed-scalar-strict-square).
-
-Proof: identify each transported comparison with the generator-normalized comparison
-of ScalarExtensionTower. Equality of the two ring maps identifies the direct images
-and their chosen adjunctions. Transport preserves the tensor-generator formula;
-adjunction transposition and total-tensor generator extensionality give uniqueness.
-The existing strict scalar square then applies, and evaluation at the two complexes
-gives the claimed equality of isomorphisms of whole coefficient systems. -/
+/-- The strict scalar square for the transported quotient comparison. -/
 theorem completedScalarStrictSquare {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : StrictQuotient.Complex l E Y) :
     scalarLeft l E L ι f P Q = scalarRight l E L ι f P Q := by

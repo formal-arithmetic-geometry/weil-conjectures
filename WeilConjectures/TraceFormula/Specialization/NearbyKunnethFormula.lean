@@ -20,18 +20,23 @@ models of finite type:
 
 * `NearbyCyclesModel.KunnethFormula Λ k' n`: Gabber's Künneth formula in chart dimension `n`, i.e.
   the Künneth map of nearby cycles `Π_{A,B} : Ψ_M A ⊠ Ψ_N B ⟶ Ψ_P (A ⊠ B)` is an isomorphism for
-  bounded constructible `A`, `B` (blueprint `proposition-external-kunneth-formula-nearby-cycles`);
+  bounded constructible `A`, `B`;
 * `NearbyCyclesModel.SliceKunnethFormula Λ k' n`: the generic-slicing step in chart dimension `n`,
   i.e. the pullback of `Π_{A,B}` to the special fibre of the generic slice
   `𝒵 ×_{𝔸¹_S} Spec K⟦t⟧` of the product along a coordinate `b` of the first factor is an
   isomorphism, when the slice of `M` and the total space of `N` locally embed into affine spaces of
-  dimensions summing to at most `n` (blueprint `proposition-external-kunneth-formula-nearby-cycles`,
-  "Finite support").
+  dimensions summing to at most `n` (the finite-support step of the proof).
 
 It also defines the projections of the geometric slice of a product
 (`NearbyCyclesModel.sliceFst`, `NearbyCyclesModel.sliceSnd`), the models to which the Künneth
 formula in smaller chart dimension is applied, and derives the slicing step along a coordinate of
 the second factor by symmetry (`NearbyCyclesModel.isIso_map_kunnethMap_baseChangeSpecialMap_snd`).
+
+## Implementation details
+
+`NearbyCyclesModel.SliceKunnethFormula` is a structure rather than a definition so that the
+elaborator does not insert the implicit arguments of the statement when a proof of it is used as a
+term.
 
 -/
 
@@ -119,16 +124,12 @@ noncomputable abbrev sliceSnd :=
 
 end Fst
 
-/-- **The generic-slicing step of Gabber's Künneth formula in chart dimension `n`** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Finite support"), with coefficients `Λ`: for
-every product `P` over the trait `Spec k'⟦t⟧` of models `M`, `N` as in
+/-- **The generic-slicing step of Gabber's Künneth formula in chart dimension `n`**, with
+coefficients `Λ`: for every product `P` over the trait `Spec k'⟦t⟧` of models `M`, `N` as in
 `NearbyCyclesModel.KunnethFormula`, a coordinate `b : 𝒳 ⟶ 𝔸¹_S` of `M` such that the slice of `𝒳`
 along `b` and the total space of `N` locally embed into affine spaces of dimensions `m₁`, `m₂` with
 `m₁ + m₂ ≤ n`, and bounded constructible `A`, `B`, the pullback of the Künneth map `Π_{A,B}` to the
-special fibre of the generic slice `𝒵 ×_{𝔸¹_S} Spec K⟦t⟧` of `P` is an isomorphism.
-
-This is a structure rather than a definition so that the elaborator does not insert the implicit
-arguments of the statement when a proof of it is used as a term. -/
+special fibre of the generic slice `𝒵 ×_{𝔸¹_S} Spec K⟦t⟧` of `P` is an isomorphism. -/
 structure SliceKunnethFormula (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
     [IsCommMonObj Λ] (k' : Type u) [Field k'] (n : ℕ) : Prop where
   isIso : ∀ {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
@@ -173,9 +174,7 @@ lemma comp_coordinate_snd :
 -- rewriting the special map of the swapped product in the slice statement is slow
 include hM hN hpb hP hgen in
 /-- **The generic-slicing step, coordinate of the second factor**: the generic-slicing step
-`NearbyCyclesModel.SliceKunnethFormula` for a coordinate `b` of `N`. It is the slicing step for
-the product with the two factors exchanged, by the symmetry of the Künneth map
-(`NearbyCyclesModel.isIso_map_kunnethMap_iff_swap`). -/
+`NearbyCyclesModel.SliceKunnethFormula` for a coordinate `b` of `N`. -/
 theorem isIso_map_kunnethMap_baseChangeSpecialMap_snd [TopologicalSpace.NoetherianSpace X]
     [TopologicalSpace.NoetherianSpace Y] [TopologicalSpace.NoetherianSpace Z]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]

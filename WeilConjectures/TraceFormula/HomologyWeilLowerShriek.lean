@@ -27,8 +27,7 @@ Hʲ(Rf_!^Weil K) ≅ f_* Hʲ(K)
   (`ProEtale.CondensedRing.weilLowerShriekIsoWeilLowerStar`), through
   `Rf_! ≅ Rf_*` and the identification of the compact-support base change with the direct-image
   base change for proper vertical maps
-  (`boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper`, blueprint
-  `def-exchange-projection`);
+  (`boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper`);
 - `Hʲ(Rf_*^Weil K) ≅ f_* Hʲ(K)` for finite `f`
   (`ProEtale.CondensedRing.nonempty_homologyFunctor_weilLowerStar_iso`): the pushforward along a
   finite morphism is exact, so `Rf_*` is computed levelwise and commutes with homology, and the

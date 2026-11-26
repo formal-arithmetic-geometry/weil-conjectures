@@ -12,7 +12,18 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.IntegralC
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Support.IntegralSupportCounitProjection
 
 /-! # Intermediate assembly data for integral realization
-Source: blueprint fix-prop-coherence.
+
+We prove the coefficient squares of the recursively fixed comparisons and their finite
+support projections.
+
+## Implementation details
+
+All equalities are proved in the derived category of strict systems by induction on the
+canonical-pair derivation; no faithfulness of finite evaluation is used.
+
+## References
+
+* [Stacks, Tag 0941], [Stacks, Tag 07A7], [Stacks, Tags 0F7B--0F7F]
 -/
 
 @[expose] public noncomputable section
@@ -121,29 +132,7 @@ private theorem expression_completion_isIso (D : FiniteFieldDatum.{u})
     infer_instance
 
 /-- Coefficient squares of the recursively fixed comparisons and their finite support
-projections. All equalities are asserted in derived strict systems before evaluation.
-Source: blueprint fix-prop-coherence, generator/context and compactification steps;
-Stacks 0941, 07A7 and 0F7B--0F7F
-(blueprint: lem-sf-integral-expression-coefficient-squares).
-
-Proof: the actual primitive coefficient transpose formulas identify each recursively
-induced coefficient map with R of inverse comparison followed by the actual counit.
-For each basic generator use generator-reduction coherence on its finite word;
-use tensor/pullback normalization and ringed mate calculus for the explicit exchange,
-projection and compactification composites. The proper/open map is pinned by its
-lambda adjunct; bridge uniqueness identifies it with the intrinsic semilinear map.
-Invertible completion maps allow the independently fixed ordinary ringed arrows
-to be transported to completed arrows. Induct on the canonical-pair derivation:
-identities and composition follow by functoriality, unary contexts by naturality
-of the primitive reduction map, and tensor contexts by bifunctoriality. This is an
-equality in the system category; no faithfulness of finite evaluation is used.
-For the support assertion, first compare the open/proper composite on a single
-complete input with the direct comparison of basic realization. Its finite projection
-is the prescribed scalar-adjunction mate. Substitute the inner comparison by
-naturality, apply its normalization, and use the defining finite-image and quotient
-projection equations. The result retains every actual quotient transition and
-applies also to nested support. Induction on expression vertices proves completion
-invertibility on exactly their good intermediate domains. -/
+projections. All equalities are asserted in derived strict systems before evaluation. -/
 theorem integralExpressionCoefficientSquares (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (o : Operations l E) (a : AmbientModels l E o)
     (comparison : ExpressionRecursion.Comparisons l E D o)

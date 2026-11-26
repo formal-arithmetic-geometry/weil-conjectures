@@ -12,8 +12,12 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 
 /-! # Completing normalized left comparisons by their adjunction mates
 
-Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
-(blueprint: lem-sf-exceptional-integral-scalar-mate-completion)
+An invertible counit transpose completes a normalized left comparison to both adjunction
+identities and all the right coherence equations.
+
+## References
+
+* [Zheng, Lemma 5.22 and Propositions 5.24 and 5.26]
 -/
 
 @[expose] public noncomputable section
@@ -58,15 +62,7 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s)}
 
 /-- An invertible counit transpose completes the left comparison to both adjunction
-identities and all the right coherence equations.
-Source: Zheng, Lemma 5.22, coefficient mate calculus.
-Proof: define b as the adjunction mate of inverse q. The Mathlib mate counit formula
-and q inverse identity give the counit equation. Transposing and using the triangles
-gives the unit equation. Mates commute with shifts for the given adjoint shifts.
-The right cocycle follows by transposing the left cocycle, using naturality and the
-two counit equations. The right identity follows by the same transpose test on the
-multiplication unitor. All scalar functors and their normalizations are retained.
-(blueprint: lem-sf-exceptional-integral-scalar-mate-completion). -/
+identities and all the right coherence equations. -/
 theorem exceptionalIntegralScalarMateCompletion
     (z : LeftMates l Ω c operation left)
     (hinv : ∀ {s t : RingStage.{u} l}

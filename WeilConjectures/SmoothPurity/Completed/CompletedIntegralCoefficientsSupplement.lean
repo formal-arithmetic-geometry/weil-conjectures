@@ -24,12 +24,9 @@ public import WeilConjectures.AlgebraicGeometry.CompletedIntegralCoefficients
 /-!
 # Completed integral coefficient sheaves
 
-Source: Weil conjectures blueprint, `chap-Smooth-purity`, `sk-def-sf-operations`, order 1455
-(blueprint: def-weil-completed-integral-coefficients).
-
-The natural-number index `n` stands for the positive exponent `n + 1`. Coefficients are
-lifted into a universe containing the small pro-etale site. The completion is a limit
-of ring sheaves, not the discrete constant sheaf of the valuation ring.
+The completed integral coefficient sheaf is the limit of the finite constant ring sheaves
+`O_E / ϖ^(n+1)` on the small pro-étale site; this file supplies its commutative ring structure
+and limit projections.
 
 ## Main definitions
 
@@ -39,6 +36,16 @@ of ring sheaves, not the discrete constant sheaf of the valuation ring.
 - `completedIntegralModuleSheaves` and `completedIntegralDerivedCategory`: module categories.
 - `completedIntegralCohomology`: cohomology objects of cochain complexes.
 - `completedIntegralRestrictScalars`: restriction along each limit projection.
+
+## Implementation details
+
+The natural-number index `n` stands for the positive exponent `n + 1`. Coefficients are
+lifted into a universe containing the small pro-étale site. The completion is a limit
+of ring sheaves, not the discrete constant sheaf of the valuation ring.
+
+## References
+
+* Bhatt–Scholze, Section 6.5
 -/
 
 @[expose] public section
@@ -59,17 +66,15 @@ variable (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
 
 
-/-- The same completed sheaf with commutativity retained. Forgetting commutativity
-recovers the recorded completed ring sheaf definitionally.
-Source: Bhatt--Scholze, Section 6.5 (blueprint: def-weil-completed-integral-coefficients). -/
+/-- The completed integral coefficient sheaf as a sheaf of commutative rings. Forgetting
+commutativity recovers the completed ring sheaf definitionally. -/
 noncomputable def completedIntegralCommRingSheaf (D : FiniteFieldDatum.{d})
     (hl : l ≠ D.p) :
     Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)} :=
   let _ := hl
   completedIntegralCommRingSheafUnrestricted l E Y
 
-/-- The existing limit projection as a morphism of commutative ring sheaves.
-Source: Bhatt--Scholze, Section 6.5 (blueprint: def-weil-completed-integral-coefficients). -/
+/-- The limit projection as a morphism of commutative ring sheaves. -/
 noncomputable def completedIntegralCommRingProjection (n : ℕ) :
     completedIntegralCommRingSheaf l E Y D hl ⟶ integralCoefficientCommRingSheaf l E Y n :=
   completedIntegralCommRingProjectionUnrestricted l E Y n

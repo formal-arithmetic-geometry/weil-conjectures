@@ -20,9 +20,20 @@ import WeilConjectures.RingTheory.SecondSyzygyTorVanishes
 /-!
 # Graded syzygies over the two-variable polynomial ring
 
-Source: Weil conjectures blueprint, `sec-picard-framework/det-thm-picard-duality`,
-`theorem-riemann-roch-coherent-serre-duality`, proof, first sentence (blueprint:
-lem-sc-p1-graded-syzygy).
+Every finite graded module over `k[x₀,x₁]` has a graded free resolution
+`0 → F₂ → F₁ → F₀ → M → 0` by finite free graded modules
+(`MvPolynomial.exists_graded_free_resolution_two`).
+
+## Implementation details
+
+`homogeneousSubmodule` is the total-degree grading, extended by zero in negative degrees. A finite
+homogeneous basis of degrees `-d a` presents a finite sum of shifts `S(d a)`, with the convention
+`S(d)_n = S_{d+n}`. The index `i : Fin 3` labels `F₀, F₁, F₂`; ranks may be zero and shifts may be
+arbitrary integers.
+
+The resolution is built from two graded free covers (`exists_graded_free_cover`) of `M` and of
+the first kernel. The second kernel has vanishing first Tor with the residue field
+(`second_syzygy_tor_vanishes`) and is therefore free by `graded_nakayama_free`.
 -/
 
 @[expose] public section
@@ -31,28 +42,7 @@ universe u v
 
 namespace MvPolynomial
 
-/-- A finite graded module over `k[x₀,x₁]` has a finite graded free resolution of length two.
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, proof, first sentence
-(blueprint: lem-sc-p1-graded-syzygy).
-
-`homogeneousSubmodule` is the total-degree grading, extended by zero in negative degrees.
-A finite homogeneous basis of degrees `-d a` presents a finite sum of shifts `S(d a)`:
-the convention of `def-weil-pbc-proj-twisting-sheaf` (2) is `S(d)_n = S_{d+n}`.
-The index `i : Fin 3` labels `F₀,F₁,F₂`; ranks may be zero and shifts may be any integer.
-The sheaf conventions of `def-sc-p1-standard` do not enter this module statement.
-
-Proof:
-1. `exists_graded_free_cover` constructs a graded finite free surjection `q₀ : F₀ → M`.
-2. `graded_kernel_internal_finite` makes its kernel internally graded and finite. Apply the
-   cover theorem again to obtain a graded surjection `q₁ : F₁ → ker q₀`.
-3. Apply the kernel theorem again to `q₁`. The theorem `second_syzygy_tor_vanishes`, using
-   the Koszul resolution, Tor symmetry and dimension shifting, gives vanishing first Tor
-   for `ker q₁`. The existing `graded_nakayama_free` gives a finite homogeneous basis.
-4. Set `F₂ = ker q₁`, use its inclusion as `f₂`, and compose `q₁` with the inclusion of
-   `ker q₀` to form `f₁`. Surjectivity of `q₁` identifies the image of `f₁` with `ker q₀`;
-   injectivity of the kernel inclusion identifies `ker f₁` with the image of `f₂`.
-   The inherited gradings give degree preservation. Package the three modules as a
-   dependent family on `Fin 3`, negating the last basis degrees to match the shifts. -/
+/-- A finite graded module over `k[x₀,x₁]` has a finite graded free resolution of length two. -/
 theorem exists_graded_free_resolution_two {k : Type u} [Field k]
     {M : Type v} [AddCommGroup M] [Module (MvPolynomial (Fin 2) k) M]
     [Module.Finite (MvPolynomial (Fin 2) k) M]

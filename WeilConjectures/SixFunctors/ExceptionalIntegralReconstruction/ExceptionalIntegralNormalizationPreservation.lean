@@ -7,9 +7,23 @@ module
 
 public import WeilConjectures.SixFunctors.ExceptionalIntegralReconstruction.ExceptionalIntegralReconstructionInterfaces
 
-/-! # ExceptionalIntegralNormalizationPreservation
-Source: Zheng, Section 5; integral reconstruction, step 2.
-(blueprint: lem-sf-exceptional-integral-normalization-preservation).
+/-!
+# Normalization preservation for exceptional integral systems
+
+The exceptional operations on integral systems preserve normalized coefficient sequences.
+
+## Implementation details
+
+The proof expresses a normalized source system as the reduction of its reconstructed integral
+object via the reconstruction counit. For the left image, integral compact support and its
+successive-quotient comparison identify every scalar-adjoint transition with a composite of
+reduction isomorphisms. For the right image, the normalization clause of the transport data is
+applied in the generic quotient presentation and coordinates are changed back. No
+quotient-flatness assumption is used.
+
+## References
+
+* [Zheng, Section 5, Construction 4.1, Lemma 5.22 and Proposition 5.24]
 -/
 
 @[expose] public noncomputable section
@@ -26,27 +40,8 @@ namespace WeilConjectures.ExceptionalIntegralReconstruction
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The actual quotient transitions stay normalized under both exceptional operations.
-Source: Zheng, Construction 4.1, Lemma 5.22 and Proposition 5.24; the normalization
-part of integral reconstruction step 2.
-(blueprint: lem-sf-exceptional-integral-normalization-preservation).
-
-Proof: express each normalized source system, by the reconstruction counit, as
-reduction of its reconstructed integral object. Integral compact support and its
-successive-quotient comparison identify every scalar-adjoint transition of the
-left image with a composite of reduction isomorphisms. These comparisons concern
-the actual whole-system functor: use the ordinary exact open comparison and the
-proper derived comparison, together with the coordinate counit. Naturality of the
-reconstruction counit transports normalization back to the given input.
-For the right image, the normalized input in sequence coordinates gives normalized
-transitions in the generic quotient presentation: the quotient-ring square and
-the exact-localization evaluation comparisons identify their scalar adjuncts.
-Apply the normalization clause of s.transport and change coordinates back. The
-inverse coordinate counit and the scalar adjunction triangles cancel the two
-coordinate comparisons. The assertion includes every quotient n <= m, including
-n = m and residue level zero, and uses no quotient-flatness assumption. Zero input
-and empty schemes use the same comparisons, so their transitions stay invertible.
--/
+/-- The exceptional operations `s.left` and `s.exceptional` send normalized coefficient
+sequences to normalized coefficient sequences. -/
 theorem exceptionalIntegralNormalizationPreservation
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

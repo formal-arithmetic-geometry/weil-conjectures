@@ -13,7 +13,20 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 /-! # Forgetting the representative-normalized native evaluation
 
-Source: Stacks 08J9 and 0A97; native ringed tensor model, evaluation step.
+We show that forgetting the Frobenius structure preserves evaluation for closed structures
+normalized on the specified tensor and Hom representatives.
+
+## Implementation details
+
+The tensor parameter is represented by a K-flat complex and the target by a K-injective
+complex; the native and ordinary uncurrying normalizations then give the same formula on
+each `(p,q)` tensor summand. The K-flat and K-injective localization equivalences extend
+the equality to all complexes. No associator, unitor, symmetry or unit-object comparison
+is used.
+
+## References
+
+* Stacks Project, Tags 08J9 and 0A97
 -/
 
 @[expose] public section
@@ -202,31 +215,7 @@ private theorem representative_evaluation
 end TensorEvaluation
 
 /-- Forgetting preserves evaluation for closed structures normalized on the
-specified tensor and Hom representatives. This is one square on already
-specified structures; no structure or comparison is constructed here.
-
-Source: Stacks 08J9 and 0A97; native ringed tensor model, step 3, and the
-representative evaluation argument of ringed_forget_normalized_uncurry.
-(blueprint: lem-sf-native-weil-tensor-evaluation).
-
-Proof: represent the tensor parameter by a K-flat complex and the target by a
-K-injective complex. Resolve the source of evaluation by a K-flat complex.
-The native adjunction normalization hW computes its inverse transpose on
-these representatives by componentwise uncurrying. The ordinary normalization
-N.ordinaryNormalization gives the same formula after forgetting. On each
-(p,q) tensor summand, N.underived_uncurry identifies those two arrows, and
-N.chain_summand identifies the comparison on total tensors. The product-Hom
-projection square hχ identifies the curried arrow. Its restriction to
-K-injective source complexes extends to the K-flat source used here by
-naturality of the two Hom representative systems and source replacement;
-Hom into the K-injective target sends that replacement to an isomorphism
-after localization. The model square N.model_forget now gives equality of
-the two localized evaluations on the chosen representatives. Cancel their
-invertible model and resolution maps. Naturality and the K-flat and
-K-injective localization equivalences extend this equality to every K,L.
-Finally inverse transposition of the identity is the counit, which is exactly
-W.evaluation; this gives the stated square. No associator, unitor, symmetry
-or unit-object comparison is used. -/
+specified tensor and Hom representatives. -/
 theorem native_weil_tensor_evaluation
     (M : NativeClosedHomModels k₀ l X)
     (S : CoefficientClosedStructure M.ordinaryHom)

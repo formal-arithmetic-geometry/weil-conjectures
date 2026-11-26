@@ -16,8 +16,7 @@ A sheaf of `Λ`-modules trivialized by a Galois cover `P ⟶ V` with group a fin
 trivialized by the base change `P ×_V W ⟶ W`, a Galois cover with the same group; the same holds
 for bounded complexes with such cohomology
 (`AlgebraicGeometry.Etale.IsBoundedFiniteEllGroupMonodromy`),
-the pullback being exact
-(blueprint `lemma-cohomology-near-two-transverse-divisors--1`).
+the pullback being exact.
 
 ## Main statements
 

@@ -200,7 +200,8 @@ than hypotheses.
 
 ## References
 
-* Stacks Tags 099I and 09C1
+* [Stacks, Tag 099I]
+* [Stacks, Tag 09C1]
 -/
 
 @[expose] public noncomputable section

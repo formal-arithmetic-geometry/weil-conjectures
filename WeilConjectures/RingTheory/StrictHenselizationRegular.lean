@@ -16,8 +16,17 @@ import WeilConjectures.RingTheory.StrictHenselizationNoetherian
 /-!
 # Regularity and strict henselization
 
-Source: Stacks Project, More on Algebra, Lemma 15.46.10 (Tag 06LN), the equivalence
-of its first and third conditions (blueprint: lem-sc-strict-henselization-regular).
+A Noetherian local ring is regular if and only if its strict henselization is regular.
+
+## Implementation details
+
+The strict henselization is Noetherian, has the same Krull dimension, and its cotangent space
+has the same dimension over its residue field; regularity is the equality of these two
+dimensions.
+
+## References
+
+* [Stacks, Tag 06LN], equivalence of conditions (1) and (3)
 -/
 
 @[expose] public section
@@ -28,17 +37,7 @@ namespace Algebra
 
 /-- A Noetherian local ring is regular exactly when its strict henselization is regular.
 Here `C` is the strict henselization of `R` with respect to the separable closure `K` of
-the residue field of `R`.
-Source: Stacks Project, More on Algebra, Lemma 15.46.10 (Tag 06LN).
-
-Proof: `lem-sc-strict-henselization-noetherian` makes the strict henselization Noetherian.
-By `lem-sc-strict-henselization-dimension`, the two rings have equal Krull dimension.
-By `lem-sc-strict-henselization-cotangent-dimension`, extension of the residue field
-identifies the cotangent spaces and preserves their dimensions. Apply
-`lem-weil-pbc-regular-local-cotangent-dimension` to both Noetherian local rings:
-regularity is equality of cotangent-space dimension and Krull dimension. The two
-comparisons therefore give the equivalence.
-(blueprint: lem-sc-strict-henselization-regular). -/
+the residue field of `R`. -/
 theorem isRegularLocalRing_iff_strictHenselization
     (R K C : Type v) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] [Field K]
     [Algebra (IsLocalRing.ResidueField R) K] [IsSepClosure (IsLocalRing.ResidueField R) K]

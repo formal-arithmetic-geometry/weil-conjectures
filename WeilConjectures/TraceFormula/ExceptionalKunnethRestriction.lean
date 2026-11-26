@@ -36,8 +36,8 @@ functors (`traceAux_eq_counit_of_lowerShriekIso`, `traceAux_eq_counit_of_restric
 ## The projection formula of an open immersion
 
 The projection formula of an open immersion used below,
-`boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison` (blueprint
-`prop-sf-pf-coherence`; SGA 4, Exposé XVII, §5), is proved in
+`boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison` (SGA 4, Exposé XVII,
+§5), is proved in
 `WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion`.
 
 ## Implementation notes

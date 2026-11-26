@@ -11,9 +11,6 @@ public import Mathlib.CategoryTheory.Limits.Cones
 
 /-! # The integral reduction tower
 
-Source: Bhatt--Scholze, p. 24, Proposition 3.5.1(1) and Definition 3.5.2;
-Stacks Project, Tag 06YL (blueprint: def-weil-integral-reduction-tower).
-
 The natural-number index n denotes exponent n+1. We use the chosen complex
 representative K and its chosen K-flat resolution q:P→K. The already recorded
 chain-level maps are characterized by the sheafified pure-tensor formulas.
@@ -27,6 +24,12 @@ site and coefficient universes.
 - `canonicalIntegralReductionTower`: the inverse system of restricted finite reductions.
 - `canonicalIntegralReductionTowerMap`: the compatible maps from the represented object.
 - `canonicalIntegralReductionTowerCone`: the augmented reduction tower.
+
+## References
+
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, p. 24,
+  Proposition 3.5.1(1) and Definition 3.5.2
+* Stacks Project, Tag 06YL
 -/
 
 @[expose] public section
@@ -43,9 +46,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
 
 /-- The inverse system of the restricted termwise reductions of P, with transitions
-[id⊗ρ_n]. For a K-flat resolution of K this represents Res_n(K⊗ᴸA_{E,n+1}).
-Source: Bhatt--Scholze, p. 24, Definition 3.5.2; Stacks Tag 06YL
-(blueprint: def-weil-integral-reduction-tower). -/
+[id⊗ρ_n]. For a K-flat resolution of K this represents Res_n(K⊗ᴸA_{E,n+1}). -/
 noncomputable def canonicalIntegralReductionTower
     (P : CochainComplex (scalarReductionSource l E Y) ℤ) :
     ℕᵒᵖ ⥤ DerivedCategory (scalarReductionSource l E Y) :=
@@ -54,9 +55,7 @@ noncomputable def canonicalIntegralReductionTower
     (fun n ↦
     DerivedCategory.Q.map (unrestrictedTowerTransition l E Y P n))
 
-/-- The map c_n=[q]⁻¹≫[γ_n] to the reduction at exponent n+1, where γ_n(x)=x⊗1.
-Source: Bhatt--Scholze, p. 24, Definition 3.5.2; Stacks Tag 06YL
-(blueprint: def-weil-integral-reduction-tower). -/
+/-- The map c_n=[q]⁻¹≫[γ_n] to the reduction at exponent n+1, where γ_n(x)=x⊗1. -/
 noncomputable def canonicalIntegralReductionTowerMap
     {P K : CochainComplex (scalarReductionSource l E Y) ℤ}
     (q : P ⟶ K)

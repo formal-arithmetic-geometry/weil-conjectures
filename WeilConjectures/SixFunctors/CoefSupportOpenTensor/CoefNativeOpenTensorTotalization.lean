@@ -109,8 +109,19 @@ import all WeilConjectures.Algebra.Homology.Ringed.RingedOpenTotalTensorKFlat
 /-! # Totalization of an ordinary open tensor comparison
 
 The direct-sum totalization is natural in both complexes and retains its specified
-summand formula. Source: Stacks 0GL1 and Homology 012Z
-(blueprint: lem-coef-native-open-tensor-totalization).
+summand formula.
+
+## Implementation details
+
+The totalization uses the map-bifunctor totalization of the inverse ordinary comparison: the
+left adjoint preserves the coproducts in each total degree, and naturality for the differentials
+makes the component maps a chain map. Inverting it and cancelling the invertible component in
+the insertion identity gives the summand equation.
+
+## References
+
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 012Z]
 -/
 
 @[expose] public noncomputable section
@@ -129,16 +140,7 @@ attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbe
   SemilinearSections.sequenceSmall SemilinearSections.sliceSmall
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
-/-- Totalize an ordinary natural extension/tensor isomorphism, with its summand equation.
-Source: Stacks, sites-cohomology.tex Tag 0GL1 and Homology Tag 012Z.
-(blueprint: lem-coef-native-open-tensor-totalization).
-
-Proof: use the existing map-bifunctor totalization of the inverse ordinary
-comparison. The left adjoint preserves the coproducts in each total degree;
-naturality for the differentials makes the component maps a chain map.
-Invert this comparison. Cancel its invertible component in the insertion
-identity to obtain the stated summand equation. Invert its simultaneous
-naturality square to get naturality of the resulting chain comparison. -/
+/-- Totalize an ordinary natural extension/tensor isomorphism, with its summand equation. -/
 theorem nativeOpenTensor_totalization_exists
     {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{max c v r})

@@ -16,7 +16,19 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 /-!
 # Lifting maps from bounded projective complexes
 
-Source: Stacks Project, derived.tex, Tag 064E (blueprint: lem-pc-ring-derived-map-lift).
+A bounded complex of projective modules vanishing below `n` lifts maps through a derived
+morphism which is an isomorphism above `n` and an epimorphism in degree `n`.
+
+## Implementation details
+
+Complete `α` to a distinguished triangle; by the long exact cohomology sequence its cone has
+zero cohomology in degrees `≥ n`, so by precise vanishing the composite from `P` to the cone is
+zero. Exactness of Hom into the triangle gives a derived lift, which is represented by a chain
+map.
+
+## References
+
+* [Stacks, Tag 064E]
 -/
 
 @[expose] public section
@@ -29,21 +41,9 @@ open HomologicalComplex
 
 namespace RingTheory
 
-/-- (blueprint: lem-pc-ring-derived-map-lift)
-Let `R` be a ring and `n : ℤ`.  A bounded complex `P` of projective
+/-- Let `R` be a ring and `n : ℤ`. A bounded complex `P` of projective
 `R`-modules which vanishes below `n` lifts maps through a derived morphism
-which is an isomorphism above `n` and an epimorphism in degree `n`.
-The proof follows the Stacks Project Tag 064E argument.  First complete
-`α` to a distinguished triangle by (TR1), represent its cone by a complex,
-and use the long exact cohomology sequence (`lem-sf-derived-homology-long-exact`)
-to show that the cone has zero cohomology in every degree at least `n`.
-Next apply precise vanishing (`lem-pc-ring-precise-vanishing`) to conclude
-that the composite from `P` to the cone is zero.  Exactness of Hom into the
-triangle (`lem-weil-pbc-hom-into-triangle-exact`) then gives a lift
-`δ : Q.obj P ⟶ Q.obj E` of `β`.  Finally, the representative theorem
-(`lem-pc-ring-derived-map-representative`) supplies a chain map `γ : P ⟶ E`
-with `Q.map γ = δ`, yielding the displayed equality.
--/
+which is an isomorphism above `n` and an epimorphism in degree `n`. -/
 theorem derived_map_lift
     (R : Type u) [Ring R]
     (n : ℤ)

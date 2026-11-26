@@ -12,8 +12,10 @@ set_option linter.privateModule false
 
 /-! # Scalar-compatible identity maps before common-stage descent
 
-Source: Bhatt--Scholze, Remark 6.8.15; Stacks Tag 099N.
-(blueprint: lem-sf-coherent-rational-pullback-identity).
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Remark 6.8.15.
+* Stacks Project, Tag 099N.
 -/
 
 @[expose] public noncomputable section

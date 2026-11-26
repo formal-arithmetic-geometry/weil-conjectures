@@ -17,7 +17,17 @@ public import WeilConjectures.WeilSheaf.FourierInversion.Vanishing
 # Fourier inversion: the delta kernel on a trivial line bundle
 
 `Rπ₀!(ℒ_ψ(h s) ⊗ π^* P) ≅ Ri₀!((i^* P)(-1)[-2])` for the trivial line bundle `π` with fibre
-coordinate `s` and the zero locus `i` of a function `h` (blueprint `proposition-fourier-inversion`).
+coordinate `s` and the zero locus `i` of a function `h`; this is the relative form of the key step
+of Fourier inversion.
+
+## Implementation details
+
+Over the open set `h ≠ 0` the left side vanishes by
+`AlgebraicGeometry.WeilComplex.isZero_derivedLowerShriek_tensorLisse_artinSchreierOf_upperStar`
+and base change; over `Z` the kernel is `ℒ_{ψ,0} ≅ ℚ̄_ℓ` and the Thom isomorphism
+`AlgebraicGeometry.WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback`
+applies; the recollement `AlgebraicGeometry.WeilComplex.exists_isIso_app_of_isZero_upperStar`
+glues the two.
 -/
 
 @[expose] public section
@@ -78,20 +88,14 @@ theorem WeilComplex.nonempty_iso_upperStar_tensorLisse_artinSchreierOf_comp_uppe
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight (C₁.symm ≪≫ E ≪≫ C₂) _ ≪≫ Functor.associator _ _ _⟩
 
-/-- **The delta kernel on a trivial line bundle** (the relative form of blueprint
-`proposition-fourier-inversion`). Let `h` be a function on a
+/-- **The delta kernel on a trivial line bundle.** Let `h` be a function on a
 `k₀`-scheme `X` (as a morphism `X ⟶ 𝔸¹`), with zero locus `i : Z ⟶ X` (the base change of
 the zero section along `h`), let `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` be the trivial line bundle with
 fibre coordinate `s`, and let `ψ` be nontrivial. Then
 
 `Rπ₀!(ℒ_ψ(h s) ⊗ π^* P) ≅ Ri₀!((i^* P)(-1)[-2])`
 
-naturally in the Weil complex `P` on `X`. Over the open set `h ≠ 0` the left side vanishes by
-`AlgebraicGeometry.WeilComplex.isZero_derivedLowerShriek_tensorLisse_artinSchreierOf_upperStar`
-and base change; over `Z` the kernel is `ℒ_{ψ,0} ≅ ℚ̄_ℓ` and the Thom isomorphism
-`AlgebraicGeometry.WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback`
-applies; the recollement
-`AlgebraicGeometry.WeilComplex.exists_isIso_app_of_isZero_upperStar` glues the two. -/
+naturally in the Weil complex `P` on `X`. -/
 theorem WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse_artinSchreierOf_mul
     (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) {X Y Z : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]

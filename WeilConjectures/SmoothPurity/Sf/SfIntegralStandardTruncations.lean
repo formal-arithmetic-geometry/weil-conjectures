@@ -16,8 +16,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Standard truncations of intrinsic integral constructible objects
-Source: Bhatt--Scholze, Proposition 6.8.11(3), and blueprint constructible-heart proof
-(blueprint: lem-sf-intrinsic-integral-standard-truncations).
+
+Integral constructible objects are bounded and preserved by standard truncations.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.11(3).
 -/
 
 @[expose] public section
@@ -26,18 +30,7 @@ universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
-/-- Integral constructible objects are bounded and preserved by standard truncations.
-Source: Bhatt--Scholze, Proposition 6.8.11(3); blueprint constructible-heart proof
-(blueprint: lem-sf-intrinsic-integral-standard-truncations).
-
-Proof: finite type over the geometric finite-field base makes Y noetherian of finite
-Krull dimension, with l invertible. The integral stratified-perfect characterization
-identifies the intrinsic uniformly bounded reduction condition with boundedness and
-constructible cohomology after the canonical completed coefficient transport. Standard
-truncation preserves these cohomology conditions. Its inverse transport is exact, so
-commutes with standard truncations. Transport the characterization back to obtain the
-two intrinsic membership statements. The same characterization gives ambient boundedness.
-The zero complex, empty scheme and every integer cutoff are included. -/
+/-- Integral constructible objects are bounded and preserved by standard truncations. -/
 theorem sfIntegralStandardTruncations
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Y : Scheme.{u})

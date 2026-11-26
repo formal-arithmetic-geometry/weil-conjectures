@@ -29,13 +29,21 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! Normalization after transported integral inverse image.
 
-Source: Stacks 07A4, 06YY and 0941; the inverse-image step of
-`lem-trf-transported-reduction-systems-normalized`.
-(blueprint: stage3-trf-transported-pullback-normalized)
+The transported integral inverse image of a normalized reduction is normalized.
+
+## Implementation details
 
 The proof identifies the actual whole-system inverse image with the
 pro-etale inverse-image calculus and transports the normalized transition
-adjunctions through its coefficient and evaluation comparisons. -/
+adjunctions through its coefficient and evaluation comparisons. Each target reduction is
+the inverse image of the source reduction conjugated by these comparisons, which are
+isomorphisms. This works for arbitrary ambient derived objects and does not use flatness of
+quotient-ring maps.
+
+## References
+
+* Stacks Project, Tags 07A4, 06YY, 0941.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -328,16 +336,7 @@ private theorem sequenceComplexIso (W : Scheme.{t})
   rw [ha i A, ha j A]
   exact congrArg (fun f ↦ f.val.app (op A.unop.2) x) ((e A.unop.1).hom.comm i j)
 
-/-- The transported pullback of every normalized reduction is normalized.
-Source: Stacks 07A4, 06YY and 0941; inverse-image step of the parent proof.
-(blueprint: stage3-trf-transported-pullback-normalized)
-Proof: identify the specified whole-system pullback with the inverse-image
-model of the semilinear coefficient calculus.  The pullback transition formula
-expresses each target reduction as the inverse image of the source reduction,
-conjugated by the canonical coefficient and finite-evaluation comparisons.
-These comparisons are isomorphisms, so the bijection defining normalization
-is transported through the conjugation.  This works for arbitrary ambient
-derived objects and does not use flatness of quotient-ring maps. -/
+/-- The transported pullback of every normalized reduction is normalized. -/
 theorem transportedReductionSystems_pullback_normalized
     {X Y : Scheme.{t}} (f : X ⟶ Y)
     (_hlX : ∀ x : X, IsUnit (l : X.residueField x))

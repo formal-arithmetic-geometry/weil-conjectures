@@ -14,10 +14,13 @@ public import WeilConjectures.TraceFormula.KernelPushforwardCoherence
 For a proper morphism `f : X ⟶ Y`, `q = f × f` and `K' = Rf_* K`, the kernel pushforward
 `ρ_f : Rq_* (K ⊠ D_X K) ⟶ K' ⊠ D_Y K'` exchanges the evaluation kernels:
 `e_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* e_K`
-(`ProEtale.CondensedRing.kernelPushforward_comp_evaluationKernel_lowerStar`, blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, (1)). The proof passes to the `LΔ_Y^* ⊣ RΔ_{Y*}`
-and `Lf^* ⊣ Rf_*` adjoints, where it reduces to the coherence of the composition isomorphisms of the
-derived pullbacks (`ProEtale.CondensedRing.upperStarComp_inv_app_comp_prodUpperStarCounit`).
+(`ProEtale.CondensedRing.kernelPushforward_comp_evaluationKernel_lowerStar`).
+
+## Implementation details
+
+The proof passes to the `LΔ_Y^* ⊣ RΔ_{Y*}` and `Lf^* ⊣ Rf_*` adjoints, where it reduces to the
+coherence of the composition isomorphisms of the derived pullbacks
+(`ProEtale.CondensedRing.upperStarComp_inv_app_comp_prodUpperStarCounit`).
 
 -/
 
@@ -44,9 +47,9 @@ section EvaluationExchange
 variable (ℓ) {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
   [IsSeparated Y.hom]
 
-/-- **Exchange of the evaluation kernels** along a proper morphism `f` (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, (1)): with `q = f × f` and `K' = Rf_* K`,
-`e_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* e_K`, read through `Rq_* RΔ_{X*} ≅ RΔ_{Y*} Rf_*`. -/
+/-- **Exchange of the evaluation kernels** along a proper morphism `f`: with `q = f × f` and
+`K' = Rf_* K`, `e_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* e_K`, read through `Rq_* RΔ_{X*} ≅ RΔ_{Y*} Rf_*`.
+-/
 theorem kernelPushforward_comp_evaluationKernel_lowerStar (f : X ⟶ Y) [IsProper f.left]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (hΔ : diag X ≫ prod.map f f = f ≫ diag Y) :
     kernelPushforward ℓ f K ≫ evaluationKernel ℓ ((boundedConstructibleLowerStar ℓ f).obj K) =
@@ -98,9 +101,8 @@ namespace Correspondence.ProperPushforwardDiagram
 variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y)
 
-/-- **Exchange of the evaluation kernels** (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, (1)): `δ_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* δ_K`,
-read through `Rq_* RΔ_{X*} ≅ RΔ_{Y*} Rf_*`. -/
+/-- **Exchange of the evaluation kernels**: `δ_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* δ_K`, read through
+`Rq_* RΔ_{X*} ≅ RΔ_{Y*} Rf_*`. -/
 theorem kernelPushforward_comp_evaluationKernel :
     kernelPushforward ℓ P.f K ≫ evaluationKernel ℓ P.coeff =
       (boundedConstructibleLowerStar ℓ (prod.map P.f P.f)).map (evaluationKernel ℓ K) ≫

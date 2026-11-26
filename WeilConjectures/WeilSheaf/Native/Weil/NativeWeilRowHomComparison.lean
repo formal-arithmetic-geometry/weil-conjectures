@@ -10,8 +10,21 @@ public import WeilConjectures.CategoryTheory.RingedForgetTwoInjective.RingedForg
 
 /-! # Row-sign representatives for the native Hom comparison
 
-Source: Stacks 0A95 and 08J7; native comparison step 4 and step 6
-(blueprint: lem-sf-weil-native-row-hom-comparison).
+We transport the standard-sign representative systems of the native Hom comparison to
+row-sign representatives.
+
+## Implementation details
+
+The comparison is the supplied derived comparison itself; only its representative systems
+and its chain-level square are conjugated by the sign isomorphisms, which multiply degree
+`n`, source index `p` by `(-1)^(n*p)`. An earlier formulation allowing arbitrary
+representative isomorphisms was false (negating the native representative and the derived
+comparison preserves its hypotheses but changes the comparison on a nonzero Hom), so the
+construction uses `m.derived` itself and needs no uniqueness assertion.
+
+## References
+
+* Stacks Project, Tags 0A95 and 08J7
 -/
 
 @[expose] public section
@@ -316,34 +329,9 @@ private noncomputable def rowClosedModel
     m.target m.underlyingHom m.underlyingRepresentatives
 
 /- Convert the supplied standard-sign two-injective comparison to row-sign
-representatives in the native and ordinary module categories.
-
-Source: Stacks 0A95 and 08J7; the native comparison proof, steps 4 and 6,
-and the sign normalization in TwoInjectiveHomModel
-(blueprint: lem-sf-weil-native-row-hom-comparison).
-
-Proof: keep m.hom, m.underlyingHom and m.derived. Compose each representative
-isomorphism with the inverse of the native-to-standard sign map. On the
-ordinary side construct that sign map projectionwise by multiplying degree n,
-source index p by (-1)^(n*p). The product universal property constructs both
-maps. The standard differential equation and the row-sign equation show they
-are chain maps; the square is the identity. This is the same sign computation
-as m.sign_projection, on ordinary modules. Naturality follows on every product
-projection. On source slices the original native identification is m.native;
-on ordinary slices compare the chosen K-injective target and source with the
-recorded bifunctorRHom via their resolution quasi-isomorphisms. Their localized
-Hom maps are invertible, so the comparison is natural on all derived arrows.
-Finally conjugate m.chain by the two sign maps. Forgetting preserves the integer
-scalar, so the signs cancel on each projection, giving the stated HEq. Conjugate
-m.derived_representative by these same maps; its localization factors are
-unchanged. This gives NativeHomRepresentativeCompatibility for m.derived. -/
-/-- Transport both standard-sign representative systems to row-sign systems.
-The comparison is the supplied derived comparison itself; only its representative
-systems and its chain-level square are conjugated by the sign isomorphisms.
-
-Source: Stacks 0A95 and 08J7; native comparison proof, steps 4 and 6
-(blueprint: lem-sf-weil-native-row-hom-comparison).
--/
+representatives in the native and ordinary module categories. -/
+/-- Transport both standard-sign representative systems to row-sign systems, keeping the
+same derived comparison. -/
 theorem native_row_hom_data
     (m : TwoInjectiveHomModel (k₀ := k₀) (l := l) (X := X)) :
     ∃ M : NativeClosedHomModels k₀ l X,
@@ -357,11 +345,7 @@ theorem native_row_hom_data
   exact ⟨rowClosedModel k₀ l X m, m.derived, HEq.rfl, HEq.rfl,
     rowCompatibility k₀ l X m⟩
 
-/- STATEMENT-DISPUTED: the former native_row_hom_eta_eq allowed arbitrary
-representative isomorphisms. Negating the native representative and the derived
-comparison preserves its hypotheses but changes the comparison on a nonzero Hom.
-The false assertion is withdrawn. The construction below uses m.derived itself,
-so its equality clause is reflexive; it needs no uniqueness assertion. -/
+/- The construction below uses `m.derived` itself, so its equality clause is reflexive. -/
 
 theorem native_row_hom_comparison
     (m : TwoInjectiveHomModel (k₀ := k₀) (l := l) (X := X)) :

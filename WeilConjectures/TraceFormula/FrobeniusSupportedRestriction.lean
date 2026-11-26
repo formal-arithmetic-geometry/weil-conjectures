@@ -16,11 +16,9 @@ public import WeilConjectures.TraceFormula.SupportedRestriction
 Let `Φ` be the model Frobenius of `X = X₀ ×_{k₀} k` for a model `X₀` over a finite field `k₀`,
 `m ≥ 1`, `v : LΦ_m^* K ⟶ K` an arbitrary map, and `c = (𝟙, Φ_m)` the graph correspondence with
 coefficient `v`. Every rational point `y` of the fixed locus `Fix(c)` is open and closed in
-`Fix(c)` (the fixed locus is a finite disjoint union of reduced points, blueprint
-`lemma-frobenius-fixed-scheme`), so the local term `LT_y(v)` at `y` is defined, and it is the
-composite of the stalks at `y` of the supported class `[v]`, the supported restriction `ρ_P` from
-graph-supported to `y`-supported cohomology and the evaluation (blueprint
-`lemma-local-term-restriction-map`).
+`Fix(c)` (the fixed locus is a finite disjoint union of reduced points), so the local term `LT_y(v)`
+at `y` is defined, and it is the composite of the stalks at `y` of the supported class `[v]`, the
+supported restriction `ρ_P` from graph-supported to `y`-supported cohomology and the evaluation.
 
 ## Main statements
 
@@ -28,14 +26,13 @@ graph-supported to `y`-supported cohomology and the evaluation (blueprint
   `ProEtale.CondensedRing.Correspondence.FixedLocus.isClosedImmersion_left`: a rational point of
   the Frobenius fixed locus is an open and closed immersion.
 - `Correspondence.localTerm_traceClass_frobeniusGraph_eq_supportedRestriction`: the local
-  term at a fixed point of the Frobenius graph correspondence through the supported restriction
-  (blueprint `lemma-local-term-restriction-map`).
+  term at a fixed point of the Frobenius graph correspondence through the supported restriction.
 
 ## Implementation notes
 
 As in `WeilConjectures.TraceFormula.SupportedRestriction`, the product factors are in the order
-`P = K ⊠ D_X K` of the library and the graph is `(𝟙, Φ_m)`; the blueprint uses the transposed
-graph `γ = (Φ_m, 𝟙)` and `D_X K ⊠ K`. The coefficients are `ℚ̄_ℓ`. The stalk at `y` of the source
+`P = K ⊠ D_X K` of the library and the graph is `(𝟙, Φ_m)`, rather than the transposed graph
+`γ = (Φ_m, 𝟙)` and `D_X K ⊠ K`. The coefficients are `ℚ̄_ℓ`. The stalk at `y` of the source
 `Rc^! P` of `ρ_P` is the graph-supported cohomology `RΓ_Γ(T, P)` on the strict localization `T` of
 `X × X` at `(y, y)`, the stalk of its target `Rd^! LΔ^* P` is `RΓ_y(X, LΔ^* P)`, and the final
 isomorphisms are `RΓ_y(X, ω_X) ≅ RΓ(y, ω_y)` followed by `∫_y`.
@@ -76,7 +73,7 @@ lemma FixedLocus.isClosedImmersion_left {c : Correspondence ℓ K} (F : c.FixedL
 
 /-- A rational point of the fixed locus of the graph correspondence `(𝟙, Φ_m)` of the model
 Frobenius, `m ≥ 1`, is an open immersion: the fixed locus is a finite disjoint union of reduced
-points (blueprint `lemma-frobenius-fixed-scheme`). -/
+points. -/
 lemma FixedLocus.isOpenImmersion_left_of_isModelFrobenius (hΦ : IsModelFrobenius Φ f₀ p)
     (hm : 1 ≤ m) {v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (frobeniusIterate Φ m)).obj K ⟶ K}
@@ -91,11 +88,10 @@ lemma FixedLocus.isOpenImmersion_left_of_isModelFrobenius (hΦ : IsModelFrobeniu
     exact hmem.trans (congrArg y.left.base (Subsingleton.elim (α := Spec (.of k)) _ _))
   exact hgy ▸ hg
 
-/-- **The Frobenius local term as a restriction map** (blueprint
-`lemma-local-term-restriction-map`): let `Φ` be the model Frobenius of a model over a finite
-field, `m ≥ 1`, `v : LΦ_m^* K ⟶ K` an arbitrary map and `y` a rational point of the fixed locus
-of the graph correspondence `c = (𝟙, Φ_m)`, that is a fixed point of `Φ_m`. Then `y` is open and
-closed in the fixed locus, and the local term `LT_y(v)` is the composite in `End(ℚ̄_ℓ,s)`
+/-- **The Frobenius local term as a restriction map**: let `Φ` be the model Frobenius of a model
+over a finite field, `m ≥ 1`, `v : LΦ_m^* K ⟶ K` an arbitrary map and `y` a rational point of the
+fixed locus of the graph correspondence `c = (𝟙, Φ_m)`, that is a fixed point of `Φ_m`. Then `y` is
+open and closed in the fixed locus, and the local term `LT_y(v)` is the composite in `End(ℚ̄_ℓ,s)`
 ```
 ℚ̄_ℓ,s ≅ (ℚ̄_ℓ,C)_y --[v]_y--> (Rc^! P)_y --(ρ_P)_y--> (Rd^! LΔ^* P)_y --ev_y--> (ω_Fix(c))_y
   ≅ Ry^! ω_Fix(c) ≅ ω_s ≅ ℚ̄_ℓ,s

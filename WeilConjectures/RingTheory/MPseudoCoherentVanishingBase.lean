@@ -11,8 +11,12 @@ public import WeilConjectures.RingTheory.MPseudoCoherent
 /-!
 # Vanishing above m gives the m-pseudo-coherent base case
 
-Source: Stacks Project, More on Algebra, Lemma 15.66.7 (Tag 064W), part (1)
-(blueprint: lem-pc-ring-m-pseudo-coherent-vanishing-base).
+If the cohomology of `C` vanishes in all degrees at least `m`, then `C` is `m`-pseudo-coherent,
+witnessed by the zero complex.
+
+## References
+
+* [Stacks, Tag 064W] (part (1))
 -/
 
 @[expose] public section
@@ -23,12 +27,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace DerivedCategory
 
-/-- If all cohomology of `C` in degrees at least `m` vanishes, the zero complex of finite
-free modules maps to `C`; it is an isomorphism on cohomology above `m` and surjective in
-degree `m`. For `i > m`, both cohomology modules are zero, so the induced map is an
-isomorphism. In degree `m`, its target is zero, so it is surjective. Thus the zero
-complex witnesses `IsMPseudoCoherent m C` (Stacks, Tag 064W, part (1)).
-(blueprint: lem-pc-ring-m-pseudo-coherent-vanishing-base) -/
+/-- If all cohomology of `C` in degrees at least `m` vanishes, then `C` is `m`-pseudo-coherent:
+the zero complex of finite free modules maps to `C`, inducing isomorphisms on cohomology above
+`m` and a surjection in degree `m`. -/
 theorem isMPseudoCoherent_of_homology_vanishes {R : Type u₁} [CommRing R]
     [HasDerivedCategory.{w₁} (ModuleCat.{v₁} R)]
     (m : ℤ) (C : DerivedCategory (ModuleCat.{v₁} R))

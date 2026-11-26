@@ -11,8 +11,18 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # Limit acyclicity of restricted K-injective coefficient systems
 
-Source: Stacks 0941, 0D6E, 07A6 and 09T5.
-(blueprint: lem-trf-completion-unit-restriction-acyclicity).
+Restriction of a K-injective coefficient system is acyclic for inverse limit.
+
+## Implementation details
+
+Under the vertical-slice equivalence between modules on the coefficient sequence site and strict
+semilinear systems, `coefficientSequenceRestriction` is the strict-system scalar-restriction
+tower, to which the restricted-tower resolution acyclicity applies. Exact restriction is not used
+to claim that it preserves K-injectives.
+
+## References
+
+* [Stacks Project, Tags 0941, 0D6E, 07A6 and 09T5](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -109,26 +119,7 @@ private theorem restriction_as_strict :
     rfl
 
 /-- Restriction of a K-injective coefficient system is acyclic for inverse limit.
-Only its limit-acyclicity is asserted, not its K-injectivity.
-
-Source: Stacks sites-cohomology.tex, lemma-derived-pushforward-composition (0D6E),
-lemma-derived-limit-is-ok (0941), and the restriction-acyclicity part of step 1 of
-lem-trf-completion-unit-derived-adjunction-comparison.
-(blueprint: lem-trf-completion-unit-restriction-acyclicity).
-
-Proof: Identify modules on the coefficient sequence site with strict semilinear
-systems using the vertical-slice equivalence. This exact equivalence preserves
-K-injectivity. Under it the specified coefficientSequenceRestriction is the
-strict-system scalar-restriction tower: its objects, horizontal maps and maps of
-systems agree by the three characterizing equations of its unique construction.
-Apply lem-coef-restricted-tower-resolution-acyclicity to the identity resolution of
-I and the given K-injective tower resolution j. Its first conclusion states exactly
-that ordinary inverse limit sends j to a quasi-isomorphism. Transport this conclusion
-through the natural isomorphism of restricted towers and their degreewise limits.
-Equivalently factor the sequence projection through the constant ring sequence and
-apply normalized derived pushforward composition. Exact restriction alone is not
-used to claim that it preserves K-injectives. This works for the empty site and zero
-complexes and uses neither boundedness nor any flatness of finite quotient rings. -/
+Only its limit-acyclicity is asserted, not its K-injectivity. -/
 theorem restricted_limit_acyclic
     (I : CochainComplex (coefficientSequenceModules l E W) ℤ) [I.IsKInjective]
     (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) [J.IsKInjective]

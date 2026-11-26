@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPu
 
 /-! # Homogeneous total-tensor generator calculations
 
-Source: Stacks Tags 03EL and 07A4.
-(blueprint: lem-pur-proetale-total-tensor-pullback-generators).
+## References
+
+* Stacks Project, Tags 03EL and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -64,15 +65,7 @@ private theorem generator_ι {W : Scheme.{u}}
         (proEtaleTensorPair W R (P.X p) (Q.X q) V x y) := by
   rfl
 
-/-- The inverse signed-total comparison preserves the inverse-image unit generators.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-pur-proetale-total-tensor-pullback-generators).
-Proof: write a homogeneous generator as the ordinary pure tensor followed by the
-total-summand inclusion. Naturality of the pullback adjunction unit moves that
-inclusion past the unit. The total comparison's defining summand equation reduces
-the claim to the ordinary tensor comparison's prescribed pure-unit equation.
-Apply that equation and the target summand inclusion. All maps preserve bidegree,
-so the signed total differential contributes no extra sign. -/
+/-- The inverse signed-total comparison preserves the inverse-image unit generators. -/
 theorem proEtaleTensorPullbackTotal_generators {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

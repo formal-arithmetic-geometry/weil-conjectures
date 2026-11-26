@@ -18,8 +18,17 @@ import WeilConjectures.Topology.PresheafModuleStalkFunctor
 /-!
 # Stalks commute with direct sums of sheaves of modules
 
-Source: Stacks Project, Sheaves on Spaces, Section 6.29, Tag 009E, items (3) and (5)
-(blueprint: lem-pc-stalk-direct-sums).
+The stalk of a direct sum (coproduct) of sheaves of modules is the direct sum of the stalks.
+
+## Implementation details
+
+The module stalk functor preserves coproducts because, after forgetting module structures, it is
+the forgetful functor to abelian sheaves followed by the abelian stalk functor, and forgetting a
+module structure reflects colimits.
+
+## References
+
+* [Stacks Project, Tag 009E](https://stacks.math.columbia.edu/tag/009E), items (3) and (5)
 -/
 
 @[expose] public section
@@ -32,24 +41,8 @@ open TopCat.Presheaf
 namespace SheafOfModules
 
 open Classical in
-/-- Stacks Project, Tag 009E, item (5) (blueprint: lem-pc-stalk-direct-sums).
-The stalk of the sheaf coproduct is linearly isomorphic to the direct sum of the stalks.
-The equation on germs specifies the canonical comparison in the stated direction.
-
-Proof: compose the forgetful functor to presheaf modules with the linear module stalk
-functor of `def-weil-pbc-module-stalk`. After forgetting its target module structure,
-this is definitionally the forgetful functor to abelian sheaves followed by the abelian
-sheaf stalk functor. The former preserves coproducts by
-`situation-conventions`; the latter preserves colimits by
-Mathlib's stalk-skyscraper adjunction. Since forgetting a module structure reflects
-colimits, the module stalk functor preserves coproducts. Compose its canonical
-coproduct comparison isomorphism with `ModuleCat.coprodIsoDirectSum`, and take the
-associated linear equivalence. The coproduct comparison carries each stalk injection
-to the corresponding categorical injection, and `coprodIsoDirectSum` carries this to
-`DirectSum.lof`. Applying this morphism identity to the germ of a section, and using
-`stalkFunctor_map_germ_apply`, gives the required formula. This argument works for
-arbitrary index sets, including the empty set.
--/
+/-- The stalk of the sheaf coproduct is linearly isomorphic to the direct sum of the stalks.
+The equation on germs specifies the canonical comparison in the stated direction. -/
 theorem exists_stalk_directSum_linearEquiv
     {X : TopCat.{u}} (R : X.Sheaf RingCat.{u}) (I : Type u)
     (F : I → SheafOfModules.{u} R) (x : X) :

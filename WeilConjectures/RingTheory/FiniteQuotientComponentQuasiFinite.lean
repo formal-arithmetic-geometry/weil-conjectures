@@ -14,8 +14,26 @@ import Mathlib.RingTheory.QuasiFinite.Basic
 /-!
 # Quasi-finiteness along a finite quotient component
 
-Source: Stacks Project, More on Algebra, proof of Lemma 15.11.5 (Tag 09XH), first sentence
-(blueprint: lem-weil-pbc-integral-closure-finite-fibre-quasi-finite).
+If `B/IB ≃ C₁ × C₂` with `C₁` finite over `A/I`, then the finite-type `A`-algebra `B` is
+quasi-finite at every prime in the image of `Spec C₁`.
+
+## Main results
+
+* `Algebra.isQuasiFiniteAtPrime_of_finite_quotient_component`
+
+## Implementation details
+
+The surjection `π : B → C₁` induces a closed embedding of spectra whose image is `O ∩ V(IB)`
+for an open `O` of `Spec B`. Finiteness of `C₁` makes the fibres of `Spec C₁ → Spec (A/I)`
+discrete, and the embedding identifies such a fibre with `O ∩ F`, where `F` is the
+corresponding fibre of `Spec B → Spec A`. This gives an open singleton in `F`, which is
+transferred to the spectrum of the fibre ring.
+
+## References
+
+* [Stacks, Tag 09XH] (first sentence of the proof)
+* [Stacks, Tag 00PL]
+* [Stacks, Tag 00PK]
 -/
 
 @[expose] public section
@@ -25,32 +43,9 @@ universe u v w z
 namespace Algebra
 
 /-- A finite-type algebra is quasi-finite at every prime on a quotient component finite
- over the base quotient. Source: Stacks Project, proof of Tag 09XH, first sentence;
- quasi-finiteness is in the sense of Tags 00PL and 00PK (1)
- (blueprint: lem-weil-pbc-integral-closure-finite-fibre-quasi-finite).
-
-The ring isomorphism `e` identifies `B/IB` with `C₁ × C₂`; `hcompat` says the
-`A/I`-algebra structure on `C₁` is the one via `A/I → B/IB → C₁` (the spelling of the
-landed sibling lem-weil-pbc-integral-closure-finite-fibre-image-clopen).
-The idempotent in the statement is `e.symm (1, 0)`; projection onto `C₁` is multiplication
-by that idempotent followed by the identification of its factor with `C₁`. Thus `π` below
-is exactly the quotient projection in the node, and `T` is the image of `Spec C₁`.
-
-Proof:
-1. The surjection `π : B → C₁` induces a closed embedding `f` of prime spectra.
-   Factoring through `B/IB`, the product-spectrum homeomorphism identifies the first
-   factor with an open summand. Thus `range f = O ∩ V(IB)` for some open `O` in `Spec B`.
-2. Write the chosen point as `q = f(r)`, and let `p₀` be the contraction of `r` to
-   `A/I`. Finiteness of `C₁` makes the fibre `S` over `p₀` discrete by Mathlib's
-   quasi-finite fibre theorem. The embedding carries `S` to a discrete subset of
-   `Spec B` containing `q`, so an open `U` meets `f(S)` exactly in `{q}`.
-3. Compatibility identifies the contraction `p` of `q` with the inverse image of
-   `p₀`. Injectivity of the quotient's spectrum map then gives
-   `f(S) = range f ∩ F`, where `F` is the fibre over `p` in `Spec B`.
-   Since `I ⊆ p`, every point of `F` contains `IB`, hence `f(S) = O ∩ F`.
-4. Consequently `U ∩ O` cuts out an open singleton in `F`. The canonical fibre
-   homeomorphism transfers it to the open singleton in the spectrum of the fibre ring
-   required by `IsQuasiFiniteAtPrime`. -/
+over the base quotient: if `e : B/IB ≃ C₁ × C₂` with `C₁` finite over `A/I` (with compatible
+`A/I`-algebra structure `hcompat`), then `B` is quasi-finite at every prime in the image `T`
+of `Spec C₁` under `π : B → C₁`. -/
 theorem isQuasiFiniteAtPrime_of_finite_quotient_component
     (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B]
     [Algebra.FiniteType A B] (I : Ideal A)

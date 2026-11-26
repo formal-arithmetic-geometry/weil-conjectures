@@ -17,10 +17,11 @@ public import WeilConjectures.WeilSheaf.UpperStarId
 /-!
 # The projection formula for `Rf₀!` and lisse Weil sheaves
 
-Blueprint `sec-Weil-complexes` (the projection formula): for a separated quasi-compact morphism
-`f : X ⟶ Y` locally of finite type of `k₀`-schemes and a lisse Weil sheaf `G` on `Y`,
-`G ⊗ Rf₀! K ≅ Rf₀!(f^* G ⊗ K)` naturally in the Weil complex `K`
+For a separated quasi-compact morphism `f : X ⟶ Y` locally of finite type of `k₀`-schemes and a
+lisse Weil sheaf `G` on `Y`, `G ⊗ Rf₀! K ≅ Rf₀!(f^* G ⊗ K)` naturally in the Weil complex `K`
 (`AlgebraicGeometry.WeilComplex.derivedLowerShriekCompTensorLisseIso`).
+
+## Implementation details
 
 The tensor product with `G` is the derived functor of the exact functor `[G^∨, -]`. For the
 chosen compactification `X ⟶[j] Z ⟶[g] Y` of `f`, `Rf₀! = Rg_* ∘ j_!`, and the isomorphism is
@@ -149,11 +150,9 @@ noncomputable def ProEtaleWeilSheaf.rightDerivedLowerShriekCompIhomFunctorIso (f
     Functor.isoWhiskerRight (Functor.rightDerivedFunctorNatIso
       (ProEtaleWeilSheaf.ihomFunctorMapIsoLeft e)) _
 
-/-- Blueprint `sec-Weil-complexes` (the projection formula): for a separated quasi-compact
-morphism `f : X ⟶ Y` locally of finite type of `k₀`-schemes of finite type and a lisse Weil sheaf
-`G` on `Y`, `G ⊗ Rf₀! K ≅ Rf₀!(f^* G ⊗ K)` naturally in the Weil complex `K`
-(`AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerShriekCompIhomFunctorIso` for the chosen
-compactification of `f`, with `(f^* G)^∨ ≅ f^* (G^∨) ≅ j^* g^* (G^∨)`). -/
+/-- **The projection formula**: for a separated quasi-compact morphism `f : X ⟶ Y` locally of
+finite type of `k₀`-schemes of finite type and a lisse Weil sheaf `G` on `Y`,
+`G ⊗ Rf₀! K ≅ Rf₀!(f^* G ⊗ K)` naturally in the Weil complex `K`. -/
 noncomputable def WeilComplex.derivedLowerShriekCompTensorLisseIso (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
     [QuasiCompact f] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]

@@ -11,7 +11,17 @@ public import WeilConjectures.RingTheory.SurjectiveQuotientBaseChange
 
 /-! # Comparing the base-changed separable closures
 
-Source: Stacks Project, Tag 05WS.
+Along a surjective local homomorphism `A → B`, the base change of a separable closure `K` of the
+residue field of `A` is isomorphic to a separable closure `L` of the residue field of `B`.
+
+## Implementation details
+
+The kernel acts by zero on `K`, so the pushout of `A → K` is `K` itself; both `K` and `L` are
+separable closures of the same residue field.
+
+## References
+
+* [Stacks, Tag 05WS]
 -/
 
 @[expose] public section
@@ -62,19 +72,7 @@ private theorem exists_compatible_equiv
   rw [IsLocalRing.ResidueField.map_residue]
   exact (IsScalarTower.algebraMap_apply B (IsLocalRing.ResidueField B) L (π a)).symm
 
-/-- The base change of the chosen separable closure is isomorphic to the new one.
-Source: Stacks Project, Tag 05WS, and step 1 of
-`lem-sbc-pointed-etale-quotient-final`.
-(blueprint: lem-sbc-pointed-etale-quotient-point)
-
-Proof: A surjective map between local rings identifies B with A/ker π and identifies
-its residue field with that of A. The ideal ker π lies in the maximal ideal of A,
-so it acts by zero on K. Consequently the pushout of A -> K along π is K with
-its descended B-action. Transport the residue-field algebra structure of L across
-the residue-field isomorphism. Both K and L are then separable closures of the
-same field. The separable-closure equivalence is a B-algebra equivalence because
-the B-actions factor through that field. Compose this equivalence with the pushout
-identification to obtain the claimed isomorphism. -/
+/-- The base change of the chosen separable closure is isomorphic to the new one. -/
 theorem pointedEtaleQuotient_point_iso
     (A K B L : Type u) [CommRing A] [IsLocalRing A] [Field K]
     [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]

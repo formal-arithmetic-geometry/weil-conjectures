@@ -12,9 +12,19 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 /-!
 # Induced topological cohomology map and terminal generator map
 
-Source: Stacks Project, Cohomology of Sheaves, Sections 01DZ and 20.13 (Tag 01F2).
-The cohomology transformation is constructed using the exact inverse-image functor on Ext.
-(blueprint: lem-sc-topological-induced-edge-and-map)
+A continuous map induces a natural map from direct-image cohomology to source cohomology, and a
+map of terminal free abelian sheaves with the inverse-image generator rule.
+
+## Implementation details
+
+The cohomology transformation is constructed using the exact inverse-image functor on `Ext`:
+apply it to `Ext(KX, f_*F)`, precompose with the map `KZ → f^{-1} KX` and postcompose with the
+adjunction counit `f^{-1} f_* F → F`. Here `KX` and `KZ` are the sheafified free terminal
+representables, maps out of which are identified with terminal sections.
+
+## References
+
+* [Stacks Project, Tags 01DZ and 01F2](https://stacks.math.columbia.edu/tag/01F2)
 -/
 
 @[expose] public section
@@ -34,24 +44,7 @@ private noncomputable def sectionEquiv
 -- The existing existential binder `edge` is intentionally unconstrained in the conclusion.
 set_option linter.unusedVariables false in
 /-- A continuous map induces a natural map from direct-image cohomology to source cohomology,
-and a terminal free abelian sheaf map with the inverse-image generator rule.
-
-Source: Stacks Project, Cohomology of Sheaves, Section 01DZ and the exact inverse-image
-adjunction used in Section 20.13 (Tag 01F2).
-(blueprint: lem-sc-topological-induced-edge-and-map)
-
-Proof: Write KX and KZ for the sheafified free terminal representables. The sheafification,
-free-forgetful and Yoneda adjunctions identify maps from these objects with terminal sections.
-For the exact inverse-image functor L, take the image of the universal generator of KX under
-its adjunction unit. Since the inverse image of the terminal open is terminal, this is a
-terminal section of L(KX); the preceding representation constructs b:KZ -> L(KX).
-Apply L to Ext(KX, f_*F), precompose with b, and postcompose with the adjunction counit
-L(f_*F) -> F. Ext associativity and counit naturality prove naturality in F.
-For a:KX -> f_*KZ, first map each representable generator to its inverse image composed with
-the terminal-open equality, extend by the free abelian functor, and compose with sheafification
-on Z. The sheafification lifting property on X constructs a and proves its generator formula.
-Finally transport the cohomology functors using hX and hZ.
--/
+and a terminal free abelian sheaf map with the inverse-image generator rule. -/
 theorem exists_topological_induced_edge_and_map
     {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]
     (HX : ℕ → (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))

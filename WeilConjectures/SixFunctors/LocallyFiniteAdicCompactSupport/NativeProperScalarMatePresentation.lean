@@ -18,9 +18,22 @@ import Mathlib.Tactic.DefEqTransformations
 
 /-! # Presentation of the native proper scalar mate
 
-Source: Bhatt--Scholze, Lemma 6.8.2; the formal-properties paragraph of the
-current blueprint scalar direct-image proof.
-(blueprint: lem-sf-native-proper-scalar-mate-presentation).
+The native proper scalar mate is identified with the composite of the successive
+integral-to-field and field-to-closure scalar mates.
+
+## Implementation details
+
+The completed coefficient ring is identified with the section ring of the pulled
+condensed integers via finite quotient projections, and the pulled condensed
+algebraic-closure ring with the native ring; transporting modules through the
+internal/section equivalences gives exact additive equivalences at every scheme. The
+restriction cube transports inverse mates by `mateEquiv_vcomp`, and
+`nativeScalarDerivedCompositeMate` (from `mateEquiv_hcomp`) splits the pasted mate into
+the integral mate (`localizedDirectImageComparison`) and the closure mate.
+
+## References
+
+* [Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15]
 -/
 
 @[expose] public noncomputable section
@@ -255,46 +268,7 @@ private theorem scalarPresentationOfModel
 /-- Completion, internal/section transport, and scalar transitivity identify the
 native scalar mate with the successive integral-to-field and field-to-closure mates.
 This is a comparison of arrows for arbitrary morphisms and arbitrary complexes.
-Neither properness nor boundedness, nor invertibility of either mate, is assumed.
-
-Source: Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15; the formal-properties
-paragraph of the current blueprint scalar direct-image proof; the presentation/pasting step of
-lem-sf-native-proper-scalar-mate-bounded-below-restricted.
-(blueprint: lem-sf-native-proper-scalar-mate-presentation).
-
-Proof in words:
-1. Use the normalized continuous integral coefficient realization and the inverse
-limit of finite quotient projections to identify the completed ring for the size
-model Coefficient E with the section ring of the pulled condensed integers of E.
-The algebra equivalence Shrink.algEquiv is bicontinuous by finite dimensionality
-over the complete base field. Uniqueness of the extending absolute value identifies
-the integer rings and their finite quotients, compatibly with the fixed embedding.
-Transporting modules along this ring isomorphism and applying the
-internal/section equivalence gives e. These additive equivalences are exact.
-2. The normalized locally finite coefficient-ring realization identifies the pulled
-condensed algebraic-closure ring with the native ring. The internal/section module
-equivalence followed by this ring isomorphism gives d, again additive and exact.
-3. The completion identification, integral localization inclusion, and finite-field
-inclusion compose to a.map: the finite quotient projections give the integral
-normalization, the localization fixes the integral inclusion, and the finite-field
-normalization fixes the rational inclusion. Thus ha applies to this presentation.
-The normalized inverse-image maps agree as well: after taking adjoints they are
-precomposition of functions. The direct-image comparisons therefore commute with
-the coefficient identifications.
-4. Construct these equivalences at every scheme. The restriction cube transports
-inverse mates by mateEquiv_vcomp and its whiskering formulas. The two transverse
-inverse mates are invertible because their horizontal functors are equivalences;
-this follows from isIso_mateEquiv_of_isEquivalence applied to opposite adjunctions.
-Their components give an isomorphism between the corresponding arrows after the
-closure equivalence. Its inverse carries this arrow isomorphism back to native modules.
-5. Use nativeScalarDerivedCompositeMate, proved from mateEquiv_hcomp: the inverse
-mate of the pasted condensed restriction square is closure extension applied to
-the integral mate, followed by the closure mate at the integrally extended object.
-The integral mate is localizedDirectImageComparison by definition. The native
-inverse mate is properComparison by definition. Substitution into the preceding
-arrow isomorphism gives the asserted conclusion. All constructions use ordinary
-ambient derived categories. Neither geometric scalar mate is inverted. The argument
-applies to empty schemes, identity morphisms and zero complexes. -/
+Neither properness nor boundedness, nor invertibility of either mate, is assumed. -/
 theorem native_proper_scalar_mate_presentation
     (l : ℕ) [Fact l.Prime] [N : NativeRings.{u} l]
     (E : Index l (PadicAlgCl l))

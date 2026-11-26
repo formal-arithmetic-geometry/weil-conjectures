@@ -16,8 +16,23 @@ import Mathlib.Algebra.Algebra.Shrink
 import Mathlib.RingTheory.Finiteness.Small
 /-!
 # Polynomial-quotient descent with localization base change
-Source: Stacks Project, Algebra, Tag 00QV, as used in Tag 00QX.
-(blueprint: lem-limit-module-localization-ring-data)
+
+A localization of a finitely presented algebra over the colimit of a directed system of local
+rings descends to a system of local, essentially finite type algebras over a tail of the system,
+compatibly with base change and localization.
+
+## Implementation details
+
+The given localization is replaced by the localization at the inverse image of the maximal
+ideal of `T`. The finitely many coefficients of the defining relations of a polynomial quotient
+lift to a common stage `i₀`; the stage rings are the corresponding polynomial quotients
+localized at the inverse-image primes, which are maximal over each stage since the maps are
+local. The colimit property is checked elementwise: numerators and denominators lift to a stage,
+and a fraction mapping to zero has a finite ideal-membership witness that lifts to a later stage.
+
+## References
+
+* [Stacks, Tag 00QV] (as used in Tag 00QX)
 -/
 @[expose] public section
 universe u p
@@ -233,27 +248,7 @@ private theorem presentationSystem
     · ext x
       rfl
 
-/-- Descend a localized finitely presented algebra with its ring base-change properties.
-Source: Stacks Project, Algebra, Tag 00QV (proof) and Tag 00QX (ring construction).
-Proof: Replace the given localization of P by localization at the inverse image of
-T's maximal ideal; since T is local this gives the same ring. Write P as a finite
-polynomial quotient. Lift the finitely many coefficients of its defining relations
-along the given colimit to a common index i₀. At each later index take that polynomial
-quotient over F(i), and localize it at the inverse image of T's maximal ideal.
-The contraction to F(i) is maximal because the maps F(i) → c.pt → T are local.
-Hence these rings and their structure, transition and limit maps are local; their
-structure maps are essentially of finite type. Maps of polynomials carry the lifted
-relations to the later relations and induce the required naturality and composition.
-Polynomial and quotient base change give the unlocalized scalar-extension identities.
-Base change of localization followed by localization at the contracted prime proves
-both displayed localization predicates, with the canonical pure-tensor formulas.
-For the ring colimit, lift the finitely many numerator and denominator coefficients
-of any element to a stage; denominators outside the prime remain outside its inverse
-image. A fraction mapping to zero has a finite ideal-membership witness after
-multiplication by a denominator. Lift that witness and its finitely many equalities
-to a later stage, so the fraction is zero there. These two properties give the
-colimit universal property. The tail is cofinal by directedness.
-(blueprint: lem-limit-module-localization-ring-data) -/
+/-- Descend a localized finitely presented algebra with its ring base-change properties. -/
 theorem exists_limit_module_localization_ring_data
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (c : Cocone F) (hc : IsColimit c)

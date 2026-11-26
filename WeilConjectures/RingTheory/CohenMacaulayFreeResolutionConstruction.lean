@@ -19,12 +19,28 @@ import WeilConjectures.RingTheory.FiniteFreeResolution
 universe u v
 open CategoryTheory CategoryTheory.Limits
 
+/-!
+# Finite free resolutions of finite modules over Noetherian rings
+
+For a finite module `M` over a Noetherian ring and any `k`, we construct an exact sequence
+`0 → N → F_{k-1} → ⋯ → F_0 → M → 0` (indexed as `ComposableArrows`) with finite free `F_i`.
+
+## Implementation details
+
+The proof is by induction on `k` for all finite modules simultaneously. The successor step
+chooses a surjection `F → M` from a finite free module, whose kernel is finite since `R` is
+Noetherian, applies the induction hypothesis to the kernel and splices the sequences. All
+modules are lifted into universe `max u v`.
+
+## References
+
+* [Stacks, Tag 00LP]
+-/
+
 namespace IsLocalRing
 
-/-- The zero-step truncation in the finite-free resolution construction.
-Source: Stacks Project, Algebra, Tag 00LP, part (2).
-The identity complex with zero endpoints supplies the base case.
-(blueprint: lem-weil-pbc-cm-local-free-resolution-construction-zero) -/
+/-- The zero-step truncation of the finite-free resolution construction: the identity complex
+on `M` with zero endpoints. -/
 theorem exists_finite_free_resolution_data_zero
     {R : Type u} [CommRing R] [IsNoetherianRing R]
     (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] :
@@ -141,11 +157,8 @@ private theorem tail_free {R : Type u} [Ring R]
     | succ i => exact ih i (by omega)
 
 
-/-- The successor step, adjoining one finite-free presentation to a truncation.
-Source: Stacks Project, Algebra, Tag 00LP, part (2).
-The kernel of a finite free surjection is finite over a Noetherian ring and the
-induction truncation is spliced to that presentation.
-(blueprint: lem-weil-pbc-cm-local-free-resolution-construction-succ) -/
+/-- The successor step of the finite-free resolution construction: a truncation for the kernel of
+a finite free surjection onto `M` is spliced to that presentation. -/
 theorem exists_finite_free_resolution_data_succ
     {R : Type u} [CommRing R] [IsNoetherianRing R]
     (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M]
@@ -238,24 +251,8 @@ theorem exists_finite_free_resolution_data_succ
     exact tail_free F d' U Z ε' (fun j ↦ ⟨inferInstance, inferInstance⟩) k i.val
       (by omega)
 
-/-- A finite free sequence of any prescribed length, with an unrestricted left kernel.
-Source: Stacks Project, Algebra, Tag 00LP, part (2), the finite truncation of its
-successive finite-free-surjection construction
-(blueprint: lem-weil-pbc-cm-local-free-resolution-construction).
-
-Proof: Induct on `k`, for all finite modules `M`, including the zero module.
-At `k = 0`, take `0 → ULift M → ULift M → 0`, with the identity middle map and
-`ULift.moduleEquiv` identifying the penultimate object with `M`. For the successor
-step choose finite generators of `M` and the associated surjection `F → M` from a
-finite free module. Its kernel `N` is finite because it is a submodule of a finite
-module over a Noetherian ring. Apply the induction hypothesis to `N`. Replace that
-sequence's terminal `N → 0` by `N → F → M → 0`, using the kernel inclusion and the
-chosen surjection. Exactness at `N` follows from injectivity of the kernel inclusion;
-at `F` it follows from image(kernel inclusion) = kernel(surjection); at `M` it follows
-from surjectivity. The preceding terms keep their exactness and finite freeness.
-Lift all modules into universe `max u v` and conjugate the maps by the lift
-isomorphisms. This preserves exactness and finite freeness and gives the asserted
-module equivalence. No assertion about depth or Cohen--Macaulayness is involved. -/
+/-- A finite module `M` over a Noetherian ring has an exact sequence of any prescribed length `k`
+ending in `M → 0`, whose `k` terms before `M` are finite free, with an unrestricted left kernel. -/
 theorem exists_finite_free_resolution_data
     {R : Type u} [CommRing R] [IsNoetherianRing R]
     (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M]

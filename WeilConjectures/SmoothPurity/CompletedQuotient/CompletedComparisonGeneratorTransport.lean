@@ -9,8 +9,12 @@ public import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedComparison
 
 /-! # Transport of strict comparison generators
 
-Source: Stacks 07A4 and 0941; the canonical integral comparison realization.
-(blueprint: lem-pur-completed-comparison-generator-transport).
+The generator normalization of the strict monoidal comparison is preserved by transport
+across the sequence pullback bridge.
+
+## References
+
+* [Stacks, Tags 07A4 and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -220,15 +224,7 @@ private theorem mapComplex_eqToIso_symm
   subst G
   rfl
 
-/-- Generator normalization after transport across the sequence pullback bridge.
-Source: Stacks 07A4 and 0941; the generator-normalization step of canonical
-comparison identification (blueprint: lem-pur-completed-comparison-generator-transport).
-Proof: equality of the constant-section ring maps identifies the direct images.
-Eliminate that equality with the right-adjoint and additivity proofs retained as
-parameters. Proof irrelevance identifies these proofs with their recorded values.
-The chosen inverse image, its adjunction unit and the cochain bridge then reduce
-to the same expressions. The assertion is the generator field of the normalized
-strict monoidal comparison. -/
+/-- Generator normalization after transport across the sequence pullback bridge. -/
 theorem completedComparisonGeneratorTransport {X Y : Scheme.{u}} (f : X ⟶ Y)
     (c : IntegralCoherence.PullbackComparison l E f)
     (P Q : StrictQuotient.Complex l E Y) (p q k : ℤ) (hpq : p + q = k)

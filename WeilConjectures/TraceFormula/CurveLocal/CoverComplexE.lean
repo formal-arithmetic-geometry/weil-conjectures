@@ -16,8 +16,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.TensorMonodromy
 # The complex `E'` on the complement of the axes in `T'`
 
 For a cover datum, the pullback of `P = Lτ^*(L ⊠ K)` to `T' ∖ D'` is the extension by zero of a
-complex `E'` on `T' ∖ (D' ∪ H')` with finite `ℓ`-group monodromy (blueprint
-`lemma-tangent-cones-on-cover` (i) and `lemma-vanishing-local-term-zero-stalk--1` (i)):
+complex `E'` on `T' ∖ (D' ∪ H')` with finite `ℓ`-group monodromy:
 
 * `P` vanishes on `H'` when `Ly^* K = 0`, since `H'` lies over the horizontal axis;
 * on `T' ∖ (D' ∪ H')`, both projections to `C` land in the punctured neighbourhood
@@ -178,7 +177,7 @@ lemma isZero_leftDerivedUpperStar_restriction_of_not_mem_range
     (D.leftDerivedUpperStarRestrictionIso L K P s eP)
 
 /-- `P|_{T' ∖ D'}` is the extension by zero of its restriction to `T' ∖ (D' ∪ H')` when
-`Ly^* K = 0` (blueprint `lemma-vanishing-local-term-zero-stalk--1` (i)). -/
+`Ly^* K = 0`. -/
 lemma isIso_counit_app_restriction
     (hKy : IsZero ((L((M.y)^*[ModuleCat.{u + 1} Λ])).obj K))
     (eP : P ≅ (L((M.τ)^*[ModuleCat.{u + 1} Λ])).obj
@@ -234,10 +233,8 @@ lemma exists_galois_trivializes (Q : CochainComplex (Sheaf M.X.smallEtaleTopolog
   exact ⟨C, a, b, h₁, h₂, h₃,
     ⟨upperStarMapHomologicalComplexConstantIso (𝟙 _) D.galois.π (Category.id_comp _).symm e⟩⟩
 
-/-- **The complex `E'`** (blueprint `lemma-tangent-cones-on-cover` (i),
-`lemma-vanishing-local-term-zero-stalk--1` (i)): if `Ly^* K = 0`, the pullback of `P` to `T' ∖ D'`
-is the extension by zero of a bounded complex `E'` on `T' ∖ (D' ∪ H')` with finite `ℓ`-group
-monodromy. -/
+/-- **The complex `E'`**: if `Ly^* K = 0`, the pullback of `P` to `T' ∖ D'` is the extension by zero
+of a bounded complex `E'` on `T' ∖ (D' ∪ H')` with finite `ℓ`-group monodromy. -/
 theorem exists_complexE [Finite Λ]
     (hKy : IsZero ((L((M.y)^*[ModuleCat.{u + 1} Λ])).obj K))
     (hPL : ∃ a b, IsBoundedFlatComplex Λ a b PL) (hPK : ∃ a b, IsBoundedFlatComplex Λ a b PK)

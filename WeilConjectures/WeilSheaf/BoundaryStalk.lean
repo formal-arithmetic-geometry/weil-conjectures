@@ -14,11 +14,10 @@ public import WeilConjectures.WeilSheaf.OpenImmersion
 
 Let `j : U₀ ⟶ C₀` be a dense open immersion into a smooth curve over `k₀` and `F` a lisse Weil
 sheaf on `U₀`. At a closed point `x` of `C₀` the stalk of the middle extension `j_* F` is the
-module of inertia invariants of the geometric generic stalk `F_η̄`, Frobenius-equivariantly
-(blueprint `lemma-boundary-stalk--1`). In particular, if `v` is an eigenvector of the
-local Frobenius on `(j_* F)_x̄`, then `v ^ {⊗ k}` is an inertia invariant eigenvector of
-`F^{⊗ k}`, so the `k`-th powers of the boundary eigenvalues of `j_* F` are boundary eigenvalues
-of `j_* (F^{⊗ k})`.
+module of inertia invariants of the geometric generic stalk `F_η̄`, Frobenius-equivariantly.
+In particular, if `v` is an eigenvector of the local Frobenius on `(j_* F)_x̄`, then `v ^ {⊗ k}`
+is an inertia invariant eigenvector of `F^{⊗ k}`, so the `k`-th powers of the boundary
+eigenvalues of `j_* F` are boundary eigenvalues of `j_* (F^{⊗ k})`.
 
 The proof avoids inertia groups: it is the case of an open immersion of
 `AlgebraicGeometry.WeilSheaf.hasEigenvalue_stalkAt_lowerStar_tensorPow`, which builds the
@@ -44,13 +43,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 /-- **Powers of boundary eigenvalues.** Let `j : U₀ ⟶ C₀` be a quasi-compact open immersion of
 `k₀`-schemes, `F` a lisse Weil sheaf on `U₀` and `x` a closed point of `C₀`. If `α` is an
 eigenvalue of the local Frobenius on the stalk `(j_* F)_x̄`, then `α ^ k` is an eigenvalue of the
-local Frobenius on `(j_* (F^{⊗ k}))_x̄` for every `k`.
-
-The eigenvector `v ^ {⊗ k}` is built from the pairings `j_* F ⊗ j_* F^{⊗ k} ⟶ j_* F^{⊗ (k + 1)}`
-and is nonzero since `v` is the germ of a section `σ` of the lisse sheaf `F` over a pro-étale
-neighbourhood, whose tensor powers do not vanish
-(`AlgebraicGeometry.WeilSheaf.hasEigenvalue_stalkAt_lowerStar_tensorPow`).
-(blueprint: `proposition-weights-j-boundary-points--1`, Step 4) -/
+local Frobenius on `(j_* (F^{⊗ k}))_x̄` for every `k`. -/
 theorem hasEigenvalue_stalk_directImage_tensorPow {U C : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]

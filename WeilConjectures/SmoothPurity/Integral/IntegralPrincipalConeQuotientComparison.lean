@@ -14,8 +14,10 @@ import WeilConjectures.SmoothPurity.Integral.IntegralPrincipalConeQuotientAugmen
 
 /-! # The normalized principal-cone comparison with integral quotients
 
-Source: Stacks Tags 0A0E, 093M and 0941.
-(blueprint: lem-pur-integral-principal-cone-quotient-comparison) -/
+## References
+
+* Stacks Project, Tags 0A0E, 093M and 0941
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -101,21 +103,7 @@ private theorem principalConeComparison
 
 /-- The regular one-generator cone tower and the actual finite quotient tower have
 isomorphic Roos complexes in the derived category, preserving the entire specified unit.
-Only K-flatness is required; the terms need not be flat.
-
-Source: Stacks Tags 0A0E, 093M and 0941.
-(blueprint: lem-pur-integral-principal-cone-quotient-comparison).
-
-Proof: the normalized principal-cone quotient augmentation supplies a strict,
-levelwise quasi-isomorphic comparison, preserving the actual quotient augmentations.
-The product comparison commutes with one minus the two transition shifts. Exact
-countable products make it a quasi-isomorphism. The induced cone-triangle morphism
-has invertible first two components after localization, hence also its third.
-Shift by minus one and localize to obtain c. After every product projection the
-strict augmentation equation identifies the product units. Naturality of the
-zero-homotopy cocone lift proves equality of the entire units, including their zero
-second cochains. Localization preserves this equality. This also covers zero P and
-the first positive exponent. -/
+Only K-flatness is required; the terms need not be flat. -/
 theorem integralPrincipalConeQuotientComparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : AlgebraicGeometry.Scheme.{t})

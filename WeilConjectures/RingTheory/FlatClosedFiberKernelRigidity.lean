@@ -14,8 +14,19 @@ import Mathlib.RingTheory.Nakayama
 
 /-! # Kernel rigidity for a flat closed-fibre presentation
 
-Source: Stacks Project, Tag 07NQ, proof of (2) implies (3), the Nakayama argument
-for the map from the base change of the presentation to the target.
+Given surjections `q : R → A` and `v : T → B` of local rings compatible with `R → T` and a flat
+map `A → B`, with `T` Noetherian and `ker v ⊆ m_R T`, we show `ker v = (ker q) T`, i.e.
+`T ⊗_R A ≃ B`.
+
+## Implementation details
+
+Put `D = T / (ker q) T`. The kernel of the surjection `D → B` lies in `m_A D`, and flatness of
+`B` gives `ker(D → B) ∩ m_A D = m_A ker(D → B)`, so Nakayama kills the kernel. This does not
+require flatness of `R → T` or completeness of any ring.
+
+## References
+
+* [Stacks, Tag 07NQ]
 -/
 
 @[expose] public section
@@ -56,20 +67,8 @@ private theorem injective_of_flat_target_of_ker_le
   exact (RingHom.injective_iff_ker_eq_bot g.toRingHom).mpr hzero
 
 /-- A surjective presentation with no extra closed-fibre kernel has only the equations
-coming from the base, provided the target is flat over the base.
-
-Source: Stacks Project, Tag 07NQ, proof of (2) implies (3), the isomorphism
-`T tensor_R A -> B` and its Nakayama proof.
-(blueprint: lem-weil-pbc-flat-closed-fibre-kernel-rigidity)
-
-Proof: Commutativity gives `(ker q)T ≤ ker v`. Put `D = T/(ker q)T` and use the
-surjection q to identify `R/ker q` with A, giving D its A-algebra structure.
-The descended map D -> B is surjective and its kernel is contained in m_A D.
-Flatness of B gives `ker(D -> B) intersect m_A D = m_A ker(D -> B)`.
-Thus the kernel equals its product with m_A D. It is finitely generated over D,
-and m_A D lies in the maximal ideal of the Noetherian local ring D. Nakayama
-kills it. Pulling back along T -> D gives the required kernel equality.
-This does not require flatness of R -> T or completeness of any ring. -/
+coming from the base, provided the target is flat over the base: if `ker v ⊆ m_R T`, then
+`ker v = (ker q) T`. -/
 theorem ker_eq_map_of_flat_of_ker_le_maximal
     {R : Type u} {A : Type v} {T : Type w} {B : Type x}
     [CommRing R] [CommRing A] [CommRing T] [CommRing B]

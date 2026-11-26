@@ -10,9 +10,27 @@ import WeilConjectures.TraceFormula.Supporting.AmbientQuotientScalarNormalizatio
 
 /-! # Ambient coherent scalar quotient realization
 
-Source: Stacks 06YY and 0941; the scalar quotient construction in the final
-common-stage transport paragraph of the trace-transport blueprint.
-(blueprint: lem-trf-ambient-quotient-scalar-model-existence)
+We show that completed scalar change has a natural realization using the entire reduction system,
+normalized on every whole-system adjunction-coherent quotient presentation
+(`WeilConjectures.ambientQuotientScalarModel_exists`).
+
+## Implementation details
+
+The realization comes from the ordinary quotient extension/restriction adjunction and its derived
+comparison with the supplied reduction calculus. On a flat-term K-flat complex, its strict
+quotient system is extended through the map of quotient coefficient sheaves; at level `n` the
+balanced association sends `(x ⊗ a) ⊗ b` to `x ⊗ ι(a) b`, with inverse `x ⊗ b ↦ (x ⊗ 1) ⊗ b`.
+These chain isomorphisms commute with all quotient transitions and restrictions, and the
+normalized Roos comparison identifies the resulting total limit with the completed scalar tower.
+The derived change-of-rings counit is invertible on K-flat systems, so the comparison descends
+along the localization to the ambient derived category. For a coherent presentation
+`(C, e, κ)`, `e` is the canonical derived comparison followed by the strict quotient isomorphism
+fixed by `κ`, which gives the normalization equation. No invertibility condition on the
+characteristic of the scheme is needed.
+
+## References
+
+* [Stacks: Tags 06YY, 0941]
 -/
 
 @[expose] public section
@@ -22,33 +40,7 @@ open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
 
 /-- Completed scalar change has a natural realization using the entire reduction
-system, normalized on every whole-system adjunction-coherent quotient presentation.
-No invertibility condition on the characteristic of the scheme is needed.
-Source: Stacks 06YY, 0941, and the strict quotient scalar construction in the
-trace-transport common-stage argument.
-(blueprint: lem-trf-ambient-quotient-scalar-model-existence)
-
-Proof: use the ordinary quotient extension/restriction adjunction and its derived
-comparison with the supplied reduction calculus. On a flat-term K-flat complex,
-extend its strict quotient system through the actual map of quotient coefficient
-sheaves. At level n the balanced association sends (x tensor a) tensor b to
-x tensor iota(a)b. Its inverse sends x tensor b to (x tensor 1) tensor b.
-These are chain isomorphisms commuting with all horizontal quotient transitions
-and all vertical restrictions. Applying the fixed normalized Roos comparison
-identifies the resulting total limit with the defining completed scalar tower.
-The derived change-of-rings counit is invertible on these K-flat systems, so this
-comparison is a natural isomorphism on the resolving class. Fully faithful
-whiskering along its localization descends it to a natural realization on the
-ambient derived category. For any coherent presentation (C,e,kappa), the two
-adjunction Hom bijections identify e with the canonical derived comparison
-followed by the unique strict quotient isomorphism fixed by kappa. Transport the
-balanced chain isomorphism along that strict isomorphism. Its value on each
-tensor-unit generator is exactly the specified scalar tensor section; naturality
-of the derived counit and Roos comparison gives the normalization equation in
-the whole derived category. This uses neither faithfulness of finite derived
-evaluation nor flatness of maps between quotient rings. Equal fields, identity
-embeddings, exponent one, zero complexes and the empty scheme satisfy the same
-balanced association and unit equations. -/
+system, normalized on every whole-system adjunction-coherent quotient presentation. -/
 theorem ambientQuotientScalarModel_exists (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]

@@ -13,16 +13,21 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.FibreRingNoetherian
 
-/-! Noetherianity of the generic formal fibre of a regular power-series model.
-(blueprint: new-lem-weil-pbc-generic-formal-fibre-noetherian) -/
+/-!
+# Noetherianity of generic formal fibres
+
+The generic formal fibre of a regular power-series model is Noetherian.
+
+## References
+
+* [Stacks, Tag 07PS]
+-/
 
 @[expose] public section
 
 universe u
 
-/-- The generic formal fibre in the regular power-series case is Noetherian.
-Source: Stacks Project, More on Algebra, Proposition 07PS, first two paragraphs.
-(blueprint: new-lem-weil-pbc-generic-formal-fibre-noetherian) -/
+/-- The generic formal fibre in the regular power-series case is Noetherian. -/
 theorem isNoetherian_genericFormalFiber_of_regular_powerSeries
     (A : Type u) [CommRing A] [IsDomain A] [IsRegularLocalRing A]
     (hmodel :

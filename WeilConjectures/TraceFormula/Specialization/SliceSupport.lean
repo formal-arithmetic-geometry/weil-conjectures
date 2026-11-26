@@ -21,9 +21,11 @@ coordinates are closed points is closed, as for the components of a quasi-finite
 is supported on finitely many closed points
 (`ProEtale.CondensedRing.exists_finset_isZero_of_forall_exists_coordinates`).
 
-This is the assembly of the finite-support step of Gabber's Künneth formula for nearby cycles
-(blueprint `proposition-external-kunneth-formula-nearby-cycles`, "Finite support"): by
-`ProEtale.CondensedRing.exists_finset_isZero_leftDerivedUpperStar_of_isZero_pullback`, `C|_U`
+This is the assembly of the finite-support step of Gabber's Künneth formula for nearby cycles.
+
+## Implementation details
+
+By `ProEtale.CondensedRing.exists_finset_isZero_leftDerivedUpperStar_of_isZero_pullback`, `C|_U`
 vanishes away from the preimage `bᵢ⁻¹(Fᵢ)` of a finite set `Fᵢ` of closed points of the line; the
 support of `C|_U` is contained in `⋂ᵢ bᵢ⁻¹(Fᵢ)`, a closed set of closed points of `U`, hence finite;
 and finitely many such neighbourhoods cover `Y`.
@@ -60,8 +62,7 @@ variable {k : Type u} [Field k]
 
 /-- Vanishing over the generic point of one coordinate line, on an open `U` of `Y`: if the
 pullback of `C|_U` to `U ×_{𝔸¹} Spec K` vanishes for a point `Spec K ⟶ 𝔸¹_k` over the generic
-point, then `C|_U` vanishes away from the preimage of a finite set of closed points
-(`ProEtale.CondensedRing.exists_finset_isZero_leftDerivedUpperStar_of_isZero_pullback`). -/
+point, then `C|_U` vanishes away from the preimage of a finite set of closed points. -/
 lemma exists_finset_isZero_opens_of_isZero_pullback (Y : Over (Spec (.of k)))
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
     {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
@@ -85,19 +86,13 @@ lemma exists_finset_isZero_opens_of_isZero_pullback (Y : Over (Spec (.of k)))
     (Over.mk (U.ι ≫ Y.hom)) b
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hC) ξ ht hz
 
-/-- **Finite support from vanishing over the generic points of coordinate lines** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Finite support"). Let `Y` be of finite type
-over a field `k` and `C` a bounded constructible `ℚ̄_ℓ`-complex on `Y`. Suppose that every point of
-`Y` has an open neighbourhood `U` with finitely many coordinates `bᵢ : U ⟶ 𝔸¹_k`, locally of finite
-type, such that a point of `U` all of whose coordinates are closed is closed, and such that for each
-`i` the pullback of `C|_U` to `U ×_{𝔸¹} Spec Kᵢ` vanishes for some point `Spec Kᵢ ⟶ 𝔸¹_k` over the
-generic point. Then `C` vanishes away from finitely many closed points.
-
-By `ProEtale.CondensedRing.exists_finset_isZero_leftDerivedUpperStar_of_isZero_pullback`, `C|_U`
-vanishes away from `bᵢ⁻¹(Fᵢ)` for finite sets `Fᵢ` of closed points; the set `⋂ᵢ bᵢ⁻¹(Fᵢ)` is
-closed in `U` and consists of closed points, so it is finite
-(`Scheme.finite_of_isClosed_of_forall_isClosed_singleton`), and its points are closed in `Y`
-(`Y` is a Jacobson space). Finitely many of the neighbourhoods `U` cover `Y`. -/
+/-- **Finite support from vanishing over the generic points of coordinate lines**: let `Y` be of
+finite type over a field `k` and `C` a bounded constructible `ℚ̄_ℓ`-complex on `Y`. Suppose that
+every point of `Y` has an open neighbourhood `U` with finitely many coordinates
+`bᵢ : U ⟶ 𝔸¹_k`, locally of finite type, such that a point of `U` all of whose coordinates are
+closed is closed, and such that for each `i` the pullback of `C|_U` to `U ×_{𝔸¹} Spec Kᵢ`
+vanishes for some point `Spec Kᵢ ⟶ 𝔸¹_k` over the generic point. Then `C` vanishes away from
+finitely many closed points. -/
 theorem exists_finset_isZero_of_forall_exists_coordinates (Y : Over (Spec (.of k)))
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
     {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})

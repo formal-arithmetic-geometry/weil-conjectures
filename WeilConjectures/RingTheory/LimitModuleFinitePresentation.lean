@@ -21,8 +21,22 @@ import WeilConjectures.RingTheory.ModuleBaseChangeAcrossPushout
 /-!
 # Finite-presentation approximation of modules
 
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00R1
-(blueprint: lem-weil-pbc-limit-module-finite-presentation).
+A finitely presented algebra over a filtered colimit of rings, together with a finitely
+presented module over it, is the colimit of finite-type algebras and finite modules over the
+stages, compatibly with base change.
+
+## Implementation details
+
+The ring systems come from the algebra case (Stacks 00R0). The finitely many entries of a
+presentation matrix of the module lift to one stage; on the cofinal tail above it, the stage
+modules are the cokernels of the lifted matrices. Right exactness of the tensor product
+identifies their base changes with the later cokernels and with the module, and a
+directed-colimit criterion for base change gives the colimit assertion. The proof follows the
+non-local version of the proof of Stacks 00QX.
+
+## References
+
+* [Stacks, Tags 00R1, 00R0, 00QX]
 -/
 
 @[expose] public section
@@ -57,27 +71,6 @@ private theorem tensorEquivOfPushout
 The three colimits are colimit cocones over the directed set `Λ` (in `CommRingCat` and
 `AddCommGrpCat`); scalar-extension maps are specified on pure tensors, and the module
 tensors put the new scalar ring first (tensor symmetry matches the source).
-
-Source: Stacks Project, Algebra, Tag 00R1 (lemma-limit-module-finite-presentation),
-with the non-local version of the proof of Tag 00QX.
-(blueprint: lem-weil-pbc-limit-module-finite-presentation)
-
-Proof:
-1. Apply `lem-weil-pbc-limit-finite-presentation` (00R0) to obtain the ring systems,
-   their colimits, finite-type properties, and canonical ring base-change isomorphisms.
-2. Choose a finite presentation matrix for M. Lift its finitely many coefficients to
-   one stage using `lem-pc-filtered-colimit-commrings-elementwise` and directedness.
-3. Restrict to the cofinal tail above this stage; ring colimits persist by
-   `lem-weil-pbc-colimit-initial-full-subcategory`.
-4. Take cokernels of the lifted matrices. Their finite generating sets are the images
-   of the standard basis; entrywise transition maps induce compatible semilinear maps.
-5. Apply `lem-weil-pbc-tensor-right-exact` and `lem-weil-pbc-tensor-finite-product`
-   to identify the base changes of these cokernels with the later cokernels and with M.
-6. Apply `lem-weil-pbc-directed-colimit-base-change-elementwise` and transport its
-   representative and eventual-zero criteria through these isomorphisms. Then use
-   `lem-weil-pbc-filtered-colimit-modules-criterion` for abelian groups.
-7. Apply `lem-weil-pbc-module-tensor-cancel-base-change` and the ring base-change
-   isomorphism to identify the base change over Rₗ with M as well.
 -/
 theorem limitModuleFinitePresentation
     (R S : Type u) (M : Type v) [CommRing R] [CommRing S] [Algebra R S]

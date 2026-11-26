@@ -10,6 +10,22 @@ public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Mathlib.Order.ConditionallyCompleteLattice.Indexed
 
+/-!
+# Principal neighborhoods realizing the local dimension
+
+Inside any principal neighborhood of a prime, a smaller principal neighborhood has dimension
+equal to the local topological dimension at that prime.
+
+## Implementation details
+
+No finite-type or Noetherian assumption is needed.
+
+## References
+
+* [Stacks, Definition 0055] and the following remark
+* [Stacks, Tag 00SC] (the choice of `g''` in the proof)
+-/
+
 @[expose] public section
 
 universe u
@@ -17,16 +33,7 @@ universe u
 namespace PrimeSpectrum
 
 /-- Inside any principal neighborhood of a prime, a smaller principal neighborhood
-has dimension equal to the local topological dimension at that prime.
-Source: Stacks Project, Topology, Definition 0055 and the following remark;
-Algebra, Lemma 00SC, the choice of g''.
-(blueprint: lem-weil-pbc-principal-neighborhood-dimension).
-Proof: dimensions take values in the well ordered set WithBot ENat, so the infimum
-of dimensions of open neighborhoods is attained. Choose a basic open about q inside
-such a neighborhood. Intersect it with D(a), obtaining D(a*b). Its dimension is at
-most the chosen minimum by the subspace embedding and at least that minimum by the
-definition of dimension at q. The spectrum of the localization at a*b is homeomorphic
-to this basic open. No finite-type or Noetherian assumption is needed. -/
+has dimension equal to the local topological dimension at that prime. -/
 theorem exists_mul_away_dimension_eq
     (S : Type u) [CommRing S] (q : PrimeSpectrum S) (a : S) (ha : a ∉ q.asIdeal) :
     ∃ b : S, b ∉ q.asIdeal ∧

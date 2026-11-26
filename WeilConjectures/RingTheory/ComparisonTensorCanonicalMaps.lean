@@ -10,26 +10,24 @@ public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.Algebra.Category.Ring.Colimits
 
 /-! # Canonical P-linear maps from tensor stages to the limiting tensor ring
-Source: Stacks Project, Algebra, Tags 02JO (3) and 00DD.
-(blueprint: lem-weil-pbc-comparison-tensor-canonical-maps-b4)
+
+For a directed system of rings `F` with colimit, the canonical maps
+`F(j) ⊗[F(i₀)] B₀ → colim F ⊗[F(i₀)] B₀` are `P`-algebra maps for `j ≥ i`, provided the map from
+stage `i` and the transitions from stage `i` are.
+
+## References
+
+* [Stacks, Tag 02JO] (3)
+* [Stacks, Tag 00DD]
 -/
 @[expose] public section
 open scoped TensorProduct
 open CategoryTheory CategoryTheory.Limits
 universe v w y
 namespace RingHom
-/-- Canonical maps to the limit are P-linear if the initial transitions are.
-Source: Stacks Project, Algebra, Tag 00DD, canonical tensor legs; Tag 02JO (3).
-(blueprint: lem-weil-pbc-comparison-tensor-canonical-maps-b4)
-
-Proof: write ρ_j for the canonical B_j to B map and τ_j for B_i to B_j.
-Tensor-map composition and colimit.w prove ρ_j composed with τ_j equals μB.
-For p in P, τ_j(algebraMap p)=algebraMap p because τ_j equals βs_j,
-which is P-linear. Therefore ρ_j(algebraMap p)=μB(algebraMap p)=algebraMap p.
-Equip the actual canonical ring homomorphism ρ_j with this commutation proof.
-Its underlying ring map is unchanged, so all canonical-map identities hold
-by reflexivity. This constructs the maps without selecting existence data.
--/
+/-- If the canonical map `μB` from stage `i` and the transitions `βs j` from stage `i` to stages
+`j ≥ i` are `P`-algebra maps, then so are the canonical maps
+`F(j) ⊗[F(i₀)] B₀ → colim F ⊗[F(i₀)] B₀` for all `j ≥ i`. -/
 theorem exists_comparison_tensor_canonical_maps
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]

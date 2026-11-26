@@ -13,9 +13,20 @@ import Mathlib.RingTheory.Localization.BaseChange
 /-!
 # Smooth principal localizations of the explicit Popescu auxiliary quotient
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FA (lemma-delocalize-height-zero),
-the auxiliary quotient and its two localizations.
-(blueprint: lem-weil-pbc-popescu-auxiliary-quotient-smooth)
+The explicit auxiliary quotient of height-zero delocalization becomes smooth after inverting
+`z * p` or one of the `a_i * y_i`.
+
+## Implementation details
+
+Inverting `z` forces all `y_i` to vanish and identifies the localization with `C[t, z]_z`;
+inverting `y_i` gives `z = 0` and eliminates the row `t_i` of variables. In the first
+localization the polynomial variables are `t`, correcting the Stacks Project text. The lift of
+`z` fixes the carrier universe without choosing any algebra from an existence theorem. Empty
+generator and relation lists and zero rings are allowed.
+
+## References
+
+* [Stacks, Tag 07FA] (last paragraph of the proof)
 -/
 
 @[expose] public section
@@ -28,31 +39,20 @@ open MvPolynomial
 namespace Algebra
 
 /-- Variable indices `x,y,z,t` for the auxiliary quotient. The lift of `z` fixes the
-carrier universe without choosing any algebra from an existence theorem.
-Source: Stacks Project, Lemma 07FA. 
-(blueprint: lem-weil-pbc-popescu-auxiliary-quotient-smooth)
--/
+carrier universe without choosing any algebra from an existence theorem. -/
 abbrev PopescuAuxVars (ι : Type v) (k m : ℕ) :=
   Fin k ⊕ (ι ⊕ (ULift.{u} Unit ⊕ (ι × Fin m)))
 
-/-- The explicit polynomial ring in the auxiliary variables of Lemma 07FA. 
-(blueprint: lem-weil-pbc-popescu-auxiliary-quotient-smooth)
--/
+/-- The explicit polynomial ring in the auxiliary variables. -/
 abbrev PopescuAuxPoly (A : Type v) [CommRing A] (ι : Type w) (k m : ℕ) :=
   MvPolynomial (PopescuAuxVars.{u} ι k m) A
 
-/-- Include the original polynomial variables into the auxiliary polynomial ring.
-Source: Stacks Project, Lemma 07FA. 
-(blueprint: lem-weil-pbc-popescu-auxiliary-quotient-smooth)
--/
+/-- Include the original polynomial variables into the auxiliary polynomial ring. -/
 noncomputable def popescuAuxIncl (A : Type v) [CommRing A] (ι : Type w) (k m : ℕ) :
     MvPolynomial (Fin k) A →ₐ[A] PopescuAuxPoly.{u} A ι k m :=
   MvPolynomial.aeval fun j ↦ MvPolynomial.X (Sum.inl j)
 
-/-- The relations are `f_j - ∑ y_i t_ij` and `z y_i`.
-Source: Stacks Project, Lemma 07FA. 
-(blueprint: lem-weil-pbc-popescu-auxiliary-quotient-smooth)
--/
+/-- The ideal of relations `f_j - ∑ y_i t_ij` and `z y_i` of the auxiliary quotient. -/
 noncomputable def popescuAuxIdeal (A : Type v) [CommRing A] (ι : Type w) [Fintype ι]
     (k m : ℕ) (f : Fin m → MvPolynomial (Fin k) A) :
     Ideal (PopescuAuxPoly.{u} A ι k m) := by
@@ -65,10 +65,7 @@ noncomputable def popescuAuxIdeal (A : Type v) [CommRing A] (ι : Type w) [Finty
       MvPolynomial.X (Sum.inr (Sum.inr (Sum.inl ⟨()⟩))) *
         MvPolynomial.X (Sum.inr (Sum.inl i))))
 
-/-- The actual auxiliary algebra, a quotient by the displayed relations.
-Source: Stacks Project, Lemma 07FA. 
-(blueprint: lem-weil-pbc-popescu-auxiliary-quotient-smooth)
--/
+/-- The actual auxiliary algebra, a quotient by the displayed relations. -/
 abbrev PopescuAuxQuot (A : Type v) [CommRing A] (ι : Type w) [Fintype ι]
     (k m : ℕ) (f : Fin m → MvPolynomial (Fin k) A) :=
   PopescuAuxPoly.{u} A ι k m ⧸ popescuAuxIdeal A ι k m f
@@ -246,28 +243,9 @@ private theorem std_smooth
       (Localization.Away (algebraMap B (Localization.Away y) (algebraMap A B ai)))
       (Localization.Away (algebraMap A B ai * y))).restrictScalars R)
 
-/-- The two smoothness calculations for the explicit quotient. Neither the evaluation
-into a target algebra nor any annihilator is part of this geometric assertion.
-
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FA (lemma-delocalize-height-zero),
-last paragraph, with the polynomial variables in the first localization corrected to `t`.
-(blueprint: lem-weil-pbc-popescu-auxiliary-quotient-smooth)
-
-Proof: Invert z. The relations z*y_i = 0 force all y_i to vanish, and the other
-relations become f_j = 0. The presentation q therefore identifies this localization
-with C[t_ij,z]_z. The class of p corresponds to q(p). Inverting it as well gives a
-localization of a polynomial algebra over C_(q(p)), smooth over R by hypothesis,
-polynomial smoothness, localization smoothness, and composition. Iterated localization
-identifies this with the localization at z*p. For a fixed i, invert y_i. Then z = 0,
-and each relation uniquely eliminates t_ij in row i as
-(f_j - sum_{h != i} y_h*t_hj)/y_i. The resulting ring is a localization of a polynomial
-algebra over A. Inverting a_i too gives a localization of a polynomial algebra over
-A_(a_i), smooth over R by the same argument. This is the localization at a_i*y_i.
-The index type is nonempty. These identifications are the auxiliary localization calculations in
-lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations, reindexed along a
-finite equivalence. Empty generator and relation lists and zero rings are allowed;
-localization at zero gives the zero ring and the same universal properties apply.
--/
+/-- The two smoothness calculations for the explicit auxiliary quotient: its localization at
+`z * p` and its localizations at `a_i * y_i` are smooth. Neither the evaluation into a target
+algebra nor any annihilator is part of this assertion. -/
 theorem popescuAuxQuot_smooth_localizations
     (R : Type u) (A : Type v) (C : Type (max u v))
     [CommRing R] [CommRing A] [CommRing C]

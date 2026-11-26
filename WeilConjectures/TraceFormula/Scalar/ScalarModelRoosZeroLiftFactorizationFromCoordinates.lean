@@ -12,7 +12,21 @@ import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComp
 import WeilConjectures.TraceFormula.Scalar.ScalarModelRoosZeroLiftUniqueness
 import WeilConjectures.TraceFormula.Scalar.ScalarModelRoosCounitNormalization
 
-/-! # Factorization from normalized scalar Roos coordinates -/
+/-! # Factorization from normalized scalar Roos coordinates
+
+The normalized scalar realization factors a strict zero-shift lift satisfying the
+quotient-coordinate predicate.
+
+## Implementation details
+
+The source map `f` is required to have zero shifted coordinate (`hf`): first-product coordinates
+alone do not control the shifted Roos summand.
+
+## References
+
+* Stacks Project, Tags 06YY and 0941.
+* Bhatt--Scholze, Proposition 3.5.1.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -37,8 +51,7 @@ variable (l : ℕ) [Fact l.Prime]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (ι : E →ₐ[ℚ_[l]] L) (j : L →ₐ[ℚ_[l]] F) (X : Scheme.{u})
 
-/-- Naturality of the universal cochain counit, without expanding scalar-change data.
-Source: Stacks 06YY; the homotopy counit's naturality square. -/
+/-- Naturality of the universal cochain counit, without expanding scalar-change data. -/
 private theorem scalarCounit_natural
     {A B : CochainComplex (integralTowerModules l L X) ℤ} (g : A ⟶ B) :
     (completedDerivedScalarExtension l L F j X).map (DerivedCategory.Q.map g) ≫
@@ -54,23 +67,7 @@ private theorem scalarCounit_natural
         |>.choose_spec.2.2.choose_spec.choose) g
 
 /-- The normalized scalar realization factors a strict zero-shift lift satisfying the
-quotient-coordinate predicate.
-
-Source: Stacks 06YY, 0941; Bhatt--Scholze, Proposition 3.5.1.
-(blueprint: lem-trf-scalar-model-roos-zero-lift-factorization-from-coordinates)
-
-Proof in words: assemble the levelwise scalar extension maps from the core into a
-natural transformation a, and form k by applying ordinary scalar extension to f,
-then scalarRoosMap, then the Roos map of a. Its shifted coordinate is zero by hf.
-Its first coordinate on tensor generators is the prescribed quotient tensor map.
-The coordinate predicate and nested tensor extensionality identify h with k.
-Apply the whole-system scalar counit normalization before inserting f, use the
-naturality of the universal scalar counit, and substitute the equality h = k.
-
-STATEMENT-DISPUTED: the former signature omitted hf on f; it is repaired here.
-First-product coordinates alone do not control the shifted Roos summand. The
-corrected hypothesis is already supplied by the unchanged outer existence theorem.
--/
+quotient-coordinate predicate. -/
 theorem scalarModelRoosZeroLift_factorization_from_coordinates
     (SL : CoefficientDerivedSystemCalculus l L X)
     (ρL : IntegralComparisonRoosModel l L X)

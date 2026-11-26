@@ -13,8 +13,25 @@ import WeilConjectures.SixFunctors.CoefSupportOpenTensor.CoefNativeOpenTensorFin
 
 /-! # Ordinary native open tensor representatives
 
-Source: Stacks 0E8I, 0G7E and Homology 012Z
-(blueprint: lem-coef-native-open-tensor-cochains).
+Existence of native restriction and projection data for an open immersion, on the sequence
+site and for every finite coefficient ring, before derived localization.
+
+## Implementation details
+
+The open pro-étale site is identified with the localization of the ambient site, also after
+product with the coefficient index. Uniqueness of adjoints identifies localized extension and
+restriction with the fixed native functors; the open object is subterminal, so its adjunction
+unit is invertible. Restriction preserves flat sheaves and K-flat complexes. The inverse of
+the ordinary projection is the adjoint of the unit tensor identity followed by the inverse
+restriction-tensor comparison; it is invertible by the ringed-slice projection formula. This
+comparison is totalized using coproduct preservation by the left adjoint extension. The empty
+open, zero rings, `n = 0` and unbounded complexes need no special treatment.
+
+## References
+
+* [Stacks, Tag 012Z]
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0G7E]
 -/
 
 @[expose] public noncomputable section
@@ -38,45 +55,18 @@ attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbe
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Sequence-site specialization of ordinary open tensor data.
-Source: Stacks 0E8I (blueprint: lem-coef-native-open-tensor-cochains). -/
+/-- Sequence-site specialization of ordinary open tensor data. -/
 abbrev SystemOpenCochains {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :=
   WeilConjectures.CoefSupportOpenTensor.NativeOpenTensorPrimitives.SystemOpenCochainsData l E j
 
-/-- Finite-coefficient specialization of ordinary open tensor data.
-Source: Stacks 0E8I (blueprint: lem-coef-native-open-tensor-cochains). -/
+/-- Finite-coefficient specialization of ordinary open tensor data. -/
 abbrev FiniteOpenCochains {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (n : ℕ) :=
   WeilConjectures.CoefSupportOpenTensor.NativeOpenTensorPrimitives.FiniteOpenCochainsData l E j n
 
 set_option linter.unusedVariables false in
 /-- Native restriction and projection data before derived localization.
-Source: Stacks sites-modules.tex, lemma-j-shriek-and-tensor (0E8I),
-sites-cohomology.tex, lemma-pullback-K-flat (0G7E), and Homology 012Z
-(blueprint: lem-coef-native-open-tensor-cochains).
-
-Proof: identify the open pro-etale site with localization of the ambient site,
-and make the same identification after product with the coefficient index.
-The constant-section ring maps identify the open ring with the restricted ring;
-these identifications commute with every quotient transition. Uniqueness of
-adjoints identifies localized extension and restriction with the fixed native
-functors and identifies their units. The open object is subterminal, so its
-adjunction unit is invertible. Restriction of sheafification of sectionwise
-tensor yields pullTensor, its pure-section formula and naturality. Restriction
-preserves flat sheaves and K-flat complexes by 0G7E, giving pullFlat and pullKFlat.
-Take right to be the fixed module direct image and pullAdjunction its native
-adjunction. The inverse of the ordinary projection is the adjoint of unit tensor
-identity followed by pullTensor inverse. The ringed-slice projection formula
-0E8I makes this map invertible: its target is an extension object, and on the
-open it is the specified pure tensor identity. Naturality follows from naturality
-of the unit and of restriction tensor. Totalize this natural comparison using
-coproduct preservation by the left adjoint extension. On each bidegree its map
-is the ordinary comparison followed by the target coproduct insertion. Its
-naturality for each differential makes it commute with d tensor 1 plus
-(-1)^a times 1 tensor d. The same equations give chainNaturality. Apply this
-construction to the sequence site itself, retaining every horizontal map, and
-to each finite coefficient ring. The empty open, zero rings, n=0 (the first
-positive quotient), and unbounded complexes require no exceptions. -/
+Ordinary open tensor data exist on the sequence site and for every finite coefficient ring. -/
 theorem nativeOpenTensor_cochains_exists {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j] :
     ∃ (D : SystemOpenCochains l E j) (Dn : ∀ n : ℕ, FiniteOpenCochains l E j n), True := by

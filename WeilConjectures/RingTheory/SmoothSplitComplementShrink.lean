@@ -21,7 +21,14 @@ import Mathlib.RingTheory.Etale.Kaehler
 /-!
 # Freeness of a smooth differential complement after shrinking
 
-Source: Stacks Project, Tags 07C6 and 0GWM.
+If the differentials of a smooth principal localization `A[1/a]` form a complement of a free
+module of rank `c` in a free module of rank `n`, then after a further principal localization
+around a given prime they are free of rank `n - c`.
+
+## References
+
+* [Stacks, Tag 07C6]
+* [Stacks, Tag 0GWM]
 -/
 
 @[expose] public section
@@ -33,20 +40,7 @@ open scoped TensorProduct
 namespace Algebra
 
 /-- A free summand of the coordinate module determines the rank of the differential
-complement, which is free after a further principal shrink around the chosen prime.
-Source: Stacks Project, Tag 07C6, proof, and Tag 0GWM.
-(blueprint: lem-weil-pbc-smooth-split-complement-shrink)
-
-Proof: Let B = A[1/a]. The displayed splitting makes the differential module a
-finite projective B-module. Localize at the prime of B corresponding to p; the
-complement is finite free over this local ring. The given basis of M and the
-splitting show, by reducing modulo its maximal ideal and adding dimensions, that
-its rank is n-c. Finite projective modules are finitely presented. Spread this
-finite basis using Tag 0GWM. Write the resulting localization element of B as
- t/a^k, where t lies outside p. Inverting a*t in A gives the same further open.
-Localization of differentials identifies the spread module with the differentials
-of A[1/(a*t)]. Smoothness persists under this principal localization. This also
-covers c=n (the complement has rank zero), and c=0. -/
+complement, which is free after a further principal shrink around the chosen prime. -/
 theorem exists_smooth_split_complement_shrink
     (R : Type u) [CommRing R] (A : Type v) [CommRing A] [Algebra R A]
     (a : A) (p : Ideal A) [p.IsPrime] (ha : a ∉ p)

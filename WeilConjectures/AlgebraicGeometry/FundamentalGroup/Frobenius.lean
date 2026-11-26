@@ -38,11 +38,12 @@ A *transport* `τ : F_s ∘ e_* ≅ F_s` of the fibre functor, together with the
 `σ : G → G` with `τ (g • x) = σ g • τ x`, describes how `e` acts on monodromy:
 the monodromy character of the transported torsor is that of the torsor precomposed with `σ`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.monodromy_mapIso`). For the Frobenius of a curve over a
-finite field and the Weil group, `σ` is conjugation by a lift of Frobenius, which is the
-Weil-descent clause of blueprint `lemma-invariant-additive-characters`.
+finite field and the Weil group, `σ` is conjugation by a lift of Frobenius, so the Frobenius
+acts on `H¹(Y, M) = Hom_cont(π₁(Y, s), M)` by `f ↦ (g ↦ f (γ⁻¹ g γ))`, up to the convention
+for the lift `γ`.
 
-The last section proves the cohomological input of the purity of rank-one sheaves
-(blueprint `proposition-no-fixed-class-degree-one--1`): on the geometric fibre of a smooth
+The last section proves the cohomological input of the purity of rank-one sheaves: on the
+geometric fibre of a smooth
 geometrically connected curve over `𝔽_q`, a compatible system of `ℤ / ℓⁿ`-torsors which are
 all fixed by the Frobenius is trivial. The open case reduces to the proper case through the
 smooth compactification and the residue sequence
@@ -68,6 +69,30 @@ Frobenius has finitely many fixed points `J₀(𝔽_q)`
   compatible systems of `ℤ / ℓⁿ`-torsors on a curve over `𝔽̄_q` are trivial.
 - `AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso_of_isProper`: the
   same for a proper curve.
+
+## Implementation details
+
+* `exists_picTorsionPairing` packages the perfect pairing given by cup product and trace
+  `H¹(C, ℤ / ℓⁿ) × H¹(C, μ_{ℓⁿ}) ⟶ H²(C, μ_{ℓⁿ}) = ℤ / ℓⁿ`
+  (`AlgebraicGeometry.Scheme.EtaleTorsor.bijective_curvePairing`) together with the Kummer
+  identification of `H¹(C, μ_{ℓⁿ})` with `Pic(C)[ℓⁿ]`. Compatibility with the Frobenius comes
+  from invariance of cup product and trace, and compatibility with reduction from the
+  compatibility of the Kummer sequences and traces.
+* In the proper case, the pairings and the Jacobian `J₀`
+  (`AlgebraicGeometry.JacobianTorsionDatum.nonempty`) turn a Frobenius-fixed system into a
+  compatible system of Frobenius-invariant characters of `J₀(K̄)[ℓⁿ]`, which vanishes since the
+  Frobenius has only finitely many fixed points `J₀(𝔽_q)` on `J₀(K̄)`.
+* In the open case, the local monodromy at a boundary point `z` factors through the tame inertia,
+  whose `ℓ`-part is `ℤ_ℓ(1)`, so the residue lies in `ℤ / ℓⁿ(-1)`. A power `Φ_Q`, `Q = q ^ m`, of
+  the Frobenius fixes `z` and acts there as multiplication by `Q`, so the residue of a
+  Frobenius-fixed torsor is killed by `Q - 1` (`exists_pow_mul_monodromy_eq_zero`). For a
+  compatible system the residues therefore vanish and the torsors extend over `z`
+  (`exists_pullback_iso_of_isIsomorphic_mapIso`). The kernels of `π₁(U) → π₁(U ∪ {z})` generate
+  the kernel of `π₁(U) → π₁(C)` as a closed subgroup
+  (`AlgebraicGeometry.Scheme.FiniteEtale.fixingSubgroup_le_topologicalClosure_iSup`), so the
+  system descends to `C` (`exists_extension_of_isIsomorphic_mapIso`); the descended torsors are
+  compatible and Frobenius-fixed because torsors on `C` are determined by their restrictions to
+  `U`. A section over `C` restricts to a section over `U`.
 -/
 
 @[expose] public section
@@ -180,15 +205,9 @@ variable [ConnectedSpace Y] (s : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [To
   [IsTopologicalGroup G] [CompactSpace G] [∀ P, MulAction G ((fiber s).obj P)]
   [IsFundamentalGroup (fiber s) G] [TopologicalSpace M] [DiscreteTopology M]
 
-/-- Blueprint `lemma-invariant-additive-characters`: Finite constant torsors and the etale
-fundamental group, the Weil-descent clause.
-
-Let `e` be an automorphism of `Y` and `τ : F_s ∘ e_* ≅ F_s` a transport of the fibre functor,
+/-- Let `e` be an automorphism of `Y` and `τ : F_s ∘ e_* ≅ F_s` a transport of the fibre functor,
 with `σ : G → G` the induced map, `τ (g • x) = σ g • τ x`. Then the monodromy character of the
-transported torsor `e_* P` is `g ↦ f_P (σ g)`. For the Frobenius of a curve over a finite field
-and a lift `γ` of Frobenius to the Weil group, `σ` is conjugation by `γ`, so the Frobenius acts
-on `H¹(Y, M) = Hom_cont(π₁(Y, s), M)` by `f ↦ (g ↦ f (γ⁻¹ g γ))`, up to the convention for
-`γ`. -/
+transported torsor `e_* P` is `g ↦ f_P (σ g)`. -/
 lemma monodromy_mapIso (e : Y ≅ Y) (τ : FiniteEtale.mapIso e ⋙ fiber s ≅ fiber s) (σ : G → G)
     (hσ : ∀ P (g : G) (x : (fiber s).obj ((FiniteEtale.mapIso e).obj P)),
       τ.hom.app P (g • x) = σ g • τ.hom.app P x)
@@ -226,24 +245,16 @@ lemma _root_.AlgebraicGeometry.Scheme.Hom.geometricGaloisFrobenius_hom_eq_geomet
   rw [Scheme.specAlgebraicClosureMap_left, specGeometricFrobenius_hom]
   rfl
 
-/-- Blueprint `proposition-kummer-duality-integral-tate-module--2`: Untwisted integral classes form
-the dual Tate module, at finite level (the isomorphisms (4.3) with `J[ℓⁿ](K̄) = Pic(C)[ℓⁿ]`).
+/-- Let `C₀` be a proper smooth geometrically connected curve over a finite field `K`, `C` its
+geometric fibre and `ℓ ≠ char K`. There are maps `Ψ n` from `ℤ / ℓⁿ`-torsors on `C` to
+characters of `Pic(C)[ℓⁿ]` such that
 
-Let `C₀` be a proper smooth geometrically connected curve over a finite field `K`, `C` its
-geometric fibre and `ℓ ≠ char K`. The cup product followed by the trace
-`H¹(C, ℤ / ℓⁿ) × H¹(C, μ_{ℓⁿ}) ⟶ H²(C, μ_{ℓⁿ}) = ℤ / ℓⁿ` is perfect (blueprint
-`proposition-kummer-duality-integral-tate-module--2`,
-`AlgebraicGeometry.Scheme.EtaleTorsor.bijective_curvePairing`), and Kummer theory identifies
-`H¹(C, μ_{ℓⁿ})` with the `ℓⁿ`-torsion of `Pic(C)` (blueprint
-`proposition-h-1-curve-tate-module--1`). In the torsor model of `H¹(C, ℤ / ℓⁿ)` this gives maps
-`Ψ n` from `ℤ / ℓⁿ`-torsors to characters of `Pic(C)[ℓⁿ]` such that
-
-* a torsor with zero character has a section (nondegeneracy);
+* a torsor with zero character has a section;
 * isomorphic torsors have the same character;
 * the transport along the geometric Galois Frobenius `g` corresponds to pulling back line
-  bundles along `g` (invariance of cup product and trace under the automorphism `g` of `C`);
+  bundles along `g`;
 * the reduction `ℤ / ℓⁿ⁺¹ → ℤ / ℓⁿ` of torsors corresponds to the `ℓ`-th power map
-  `Pic(C)[ℓⁿ⁺¹] → Pic(C)[ℓⁿ]` (the compatibility of the Kummer sequences and traces). -/
+  `Pic(C)[ℓⁿ⁺¹] → Pic(C)[ℓⁿ]`. -/
 theorem exists_picTorsionPairing {C : Scheme.{u}}
     (p : C ⟶ Spec (.of K)) [IsCurve p] [SmoothOfRelativeDimension 1 p] [IsProper p]
     [GeometricallyConnected p] (l : ℕ) [Fact l.Prime] [Fact (ringChar K ≠ l)]
@@ -325,19 +336,9 @@ theorem exists_picTorsionPairing {C : Scheme.{u}}
       ((heq n).le (AddSubgroup.zsmul_mem_torsionBy_pow y.2)))
     exact congrArg _ (Subtype.ext rfl)
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: No fixed compatible `H¹`-system on a
-proper curve.
-
-The proper case of
-`AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso`: on the geometric
-fibre `C` of a proper smooth geometrically connected curve over `𝔽_q`, a compatible system of
-`ℤ / ℓⁿ`-torsors all fixed by the Frobenius is trivial.
-
-Through the pairings `AlgebraicGeometry.Scheme.EtaleTorsor.exists_picTorsionPairing` and the
-Jacobian `J₀` (`AlgebraicGeometry.JacobianTorsionDatum.nonempty`), such a system is a compatible
-system of Frobenius-invariant characters of `J₀(K̄)[ℓⁿ]`. Since the Frobenius has only finitely
-many fixed points on `J₀(K̄)`, namely `J₀(𝔽_q)`, such a system vanishes
-(`AddSubgroup.eq_zero_of_forall_map_eq_of_finite_fixedPoints`). -/
+/-- On the geometric fibre `C` of a proper smooth geometrically connected curve over `𝔽_q`, a
+compatible system of `ℤ / ℓⁿ`-torsors all fixed by the Frobenius is trivial: every torsor has a
+section. -/
 theorem exists_section_of_isIsomorphic_mapIso_of_isProper
     {U : Scheme.{u}} (p : U ⟶ Spec (.of K)) [IsCurve p] [SmoothOfRelativeDimension 1 p]
     [IsProper p] [GeometricallyConnected p] (l : ℕ) [Fact l.Prime] [Fact (ringChar K ≠ l)]
@@ -394,19 +395,11 @@ theorem exists_section_of_isIsomorphic_mapIso_of_isProper
   obtain ⟨x, rfl⟩ := (d.equivTorsion n).surjective y
   exact DFunLike.congr_fun hψ0 x
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: Finite-level residue sequences on an open
-curve, the action of Frobenius on the boundary module.
-
-Let `U₀ ⊆ C₀` be a smooth geometrically connected curve over `K = 𝔽_q` in a smooth proper
+/-- Let `U₀ ⊆ C₀` be a smooth geometrically connected curve over `K = 𝔽_q` in a smooth proper
 compactification `c`, with geometric fibres `U ⊆ C` and `j : U ⟶ C`, and let `V ⊆ C` be an open
 containing `U` with `V \ U = {z}`. There is `v` such that for every Frobenius-fixed
 `ℤ / ℓⁿ`-torsor on `U`, `ℓ ^ v` kills its monodromy on the kernel of `π₁(U) → π₁(V)`, the local
-monodromy at `z`.
-
-Indeed this monodromy factors through the tame inertia at `z`, whose `ℓ`-part is `ℤ_ℓ(1)`: the
-residue of the torsor lies in `ℤ / ℓⁿ(-1)`. A power `Φ_Q`, `Q = q ^ m`, of the Frobenius fixes
-`z` and acts on `ℤ / ℓⁿ(-1)` as multiplication by `Q`, so the residue of a Frobenius-fixed torsor
-is killed by `Q - 1`, and one can take `ℓ ^ v` to be the `ℓ`-part of `Q - 1`. -/
+monodromy at `z`. -/
 theorem exists_pow_mul_monodromy_eq_zero
     {U : Scheme.{u}} (p : U ⟶ Spec (.of K)) [IsCurve p] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] (c : Compactification p) [IsCurve c.g]
@@ -444,17 +437,11 @@ theorem exists_pow_mul_monodromy_eq_zero
   exact hmon hlK' T (ψ' ^ m).asIso (Aut.pow_hom_comp_eq_comp_pow_hom _ ψ' _ hψπ m)
     (fun a ↦ (Aut.pow_hom_comp_eq_comp_pow_hom _ ψ' ψ' (hψv a).symm m).symm) g hg
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: Finite-level residue sequences on an open
-curve, the vanishing of the residue at one boundary point.
-
-Let `U₀ ⊆ C₀` be a smooth geometrically connected curve over `K = 𝔽_q` in a smooth proper
+/-- Let `U₀ ⊆ C₀` be a smooth geometrically connected curve over `K = 𝔽_q` in a smooth proper
 compactification `c`, with geometric fibres `U ⊆ C` and `j : U ⟶ C`, and let `V ⊆ C` be an open
 containing `U` with `V \ U = {z}`. A compatible system of `ℤ / ℓⁿ`-torsors on `U` all fixed by the
 Frobenius extends over `z`: each torsor is, as a finite étale `U`-scheme, the restriction of a
-finite étale `V`-scheme. Indeed, by purity the residues of the system at `z` form a compatible
-system in `lim_n ℤ / ℓⁿ(-1)`, fixed by a power `Φ_Q`, `Q = q ^ m`, of the Frobenius fixing `z`
-and acting there as multiplication by `Q`; so they vanish, and the exact sequence
-`0 → H¹(V) → H¹(U) → ℤ / ℓⁿ(-1)` shows that the torsors extend. -/
+finite étale `V`-scheme. -/
 theorem exists_pullback_iso_of_isIsomorphic_mapIso
     {U : Scheme.{u}} (p : U ⟶ Spec (.of K)) [IsCurve p] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] (c : Compactification p) [IsCurve c.g]
@@ -516,23 +503,10 @@ theorem exists_pullback_iso_of_isIsomorphic_mapIso
   obtain ⟨T, hT⟩ := exists_isIsomorphic_pullback k s hρ (t n) hkill
   exact ⟨T.toFiniteEtale, hT.nonempty_iso⟩
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: Finite-level residue sequences on an open
-curve, the consequence used for compatible Frobenius-fixed systems.
-
-Let `U₀ ⊆ C₀` be a smooth geometrically connected curve over `K = 𝔽_q` in a smooth proper
+/-- Let `U₀ ⊆ C₀` be a smooth geometrically connected curve over `K = 𝔽_q` in a smooth proper
 compactification `c`, with geometric fibres `U ⊆ C` and `j : U ⟶ C`. A compatible system of
 `ℤ / ℓⁿ`-torsors on `U` all fixed by the Frobenius extends to a compatible system of
-Frobenius-fixed torsors on `C`.
-
-The boundary `C \ U` is a finite set of closed points. The torsors extend over each boundary
-point (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_pullback_iso_of_isIsomorphic_mapIso`), so
-their monodromy characters kill the kernels of `π₁(U) → π₁(U ∪ {z})`, which generate the kernel
-of the surjection `π₁(U) → π₁(C)` as a closed subgroup
-(`AlgebraicGeometry.Scheme.FiniteEtale.fixingSubgroup_le_topologicalClosure_iSup`). Hence they
-are base changes of torsors on `C`
-(`AlgebraicGeometry.Scheme.EtaleTorsor.exists_isIsomorphic_pullback`), which are compatible and
-Frobenius-fixed because torsors on `C` are determined by their
-restrictions to `U`. -/
+Frobenius-fixed torsors on `C`. -/
 theorem exists_extension_of_isIsomorphic_mapIso
     {U : Scheme.{u}} (p : U ⟶ Spec (.of K)) [IsCurve p] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] (c : Compactification p) [IsCurve c.g]
@@ -647,27 +621,11 @@ theorem exists_extension_of_isIsomorphic_mapIso
       monodromy_eq_of_isIsomorphic s G (hT n)]
     exact ht n g
 
-/-- No Frobenius-fixed compatible class on an open normal curve.
-
-Let `U₀` be a smooth geometrically connected curve over a finite field `K = 𝔽_q`, let
+/-- Let `U₀` be a smooth geometrically connected curve over a finite field `K = 𝔽_q`, let
 `U = U₀ ×_K K̄` be its geometric fibre with geometric point `s` and fundamental group
-`G = π₁(U, s)`, and let `ℓ ≠ char K`. In the torsor model of `H¹(U, ℤ / ℓⁿ)`, the geometric
-Frobenius acts by transport along the geometric Galois Frobenius `g_U`. A compatible system of
-classes `(z_n) ∈ lim_n H¹(U, ℤ / ℓⁿ)` — torsors `t n` whose monodromy characters are
-compatible under reduction — all of which are fixed by the Frobenius is zero: every `t n` has
-a section.
-
-The proof compares `U` with its smooth compactification `C`: the residue sequence
-`0 → H¹(C) → H¹(U) → ⊕_{x ∈ C - U} ℤ_ℓ(-1)` (blueprint `proposition-no-fixed-class-degree-one--1`)
-reduces to the proper case, where `lim_n H¹(C, ℤ / ℓⁿ)` is the dual of the Tate module of the
-Jacobian by Poincaré duality and Kummer theory (blueprints
-`proposition-kummer-duality-integral-tate-module--2`,
-`proposition-kummer-duality-integral-tate-module--2`), on which Frobenius has no fixed vector
-because `J₀(𝔽_q)` is finite (blueprints `proposition-no-frobenius-fixed-vector`,
-`proposition-no-fixed-class-degree-one--1`). Here the residue step is
-`AlgebraicGeometry.Scheme.EtaleTorsor.exists_extension_of_isIsomorphic_mapIso` and the proper case
-is `AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso_of_isProper`; a
-section of the extended torsor over `C` restricts to a section over `U`. -/
+`G = π₁(U, s)`, and let `ℓ ≠ char K`. A compatible system of classes
+`(z_n) ∈ lim_n H¹(U, ℤ / ℓⁿ)`, given by torsors `t n` whose monodromy characters are compatible
+under reduction, all of which are fixed by the Frobenius, is zero: every `t n` has a section. -/
 theorem exists_section_of_isIsomorphic_mapIso {K : Type u} [Field K] [Finite K]
     {U : Scheme.{u}} (p : U ⟶ Spec (.of K)) [IsCurve p] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] (l : ℕ) [Fact l.Prime] [Fact (ringChar K ≠ l)]

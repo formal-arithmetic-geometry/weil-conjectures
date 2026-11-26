@@ -19,10 +19,13 @@ the model Frobenii. The pushforward `ψ' = Rf_! ψ ∘ θ_f` of a Frobenius coef
 (`ProEtale.CondensedRing.frobeniusCompactOperator_lowerShriekFrobeniusCoefficient`), and its stalk
 map at a fixed point `y` is the global operator of the restriction of `ψ` to the fibre
 (`ProEtale.CondensedRing.stalk_lowerShriekFrobeniusCoefficient_iterate`). Hence the trace formula
-on `Y` and on the fibres gives the trace formula on `X` (blueprint
-`theorem-trace-formula-frobenius-correspondence--1`, Step 4, with
-`lemma-comparison-via-relative-frobenius--4`). The trace formula on the fibres, which are proper in
-the application, is taken as a hypothesis for all proper models.
+on `Y` and on the fibres gives the trace formula on `X`. The trace formula on the fibres, which
+are proper in the application, is taken as a hypothesis for all proper models.
+
+## Implementation details
+
+Proper base change identifies the stalk map at a fixed point `y` of `ψ' = Rf_! ψ ∘ θ_f` with the
+degree-one global operator of the restriction of `ψ` to the fibre `X ×_Y y`.
 
 -/
 
@@ -83,8 +86,7 @@ noncomputable def fixedPointComp (hf : ΦX₁ ≫ f₁ = f₁ ≫ ΦY₁)
   ⟨x.1 ≫ f₁, by rw [Category.assoc, ← hf, ← Category.assoc, x.2]⟩
 
 /-- The rational points of `X` fixed by `Φ_X` lying over a rational point `y` of `Y` fixed by
-`Φ_Y` are the rational points of the fibre `X ×_Y y` fixed by the restriction of `Φ_X`
-(blueprint `lemma-comparison-via-relative-frobenius--4`). -/
+`Φ_Y` are the rational points of the fibre `X ×_Y y` fixed by the restriction of `Φ_X`. -/
 noncomputable def fixedPointCompFibreEquiv (hf : ΦX₁ ≫ f₁ = f₁ ≫ ΦY₁)
     (y : {y : RationalPoint Y₁ // y ≫ ΦY₁ = y}) :
     {x : {x : RationalPoint X₁ // x ≫ ΦX₁ = x} // fixedPointComp hf x = y} ≃
@@ -164,12 +166,10 @@ instance (f : X ⟶ Y) (y : RationalPoint Y) : IsSeparated (pullback f y).hom :=
 
 end FibreFiniteness
 
-/-- **The trace of the stalk map of the pushforward at a fixed point** (blueprint
-`lemma-comparison-via-relative-frobenius--4`): for `y` fixed by `Φ_Y` with proper fibre
-`Z = X ×_Y y`, proper base change identifies the stalk map at `y` of `ψ' = Rf_! ψ ∘ θ_f` with the
-degree-one global operator of the restriction of `ψ` to `Z`; by the trace formula on the proper
-model `Z`, its trace is the sum of the traces of the stalk maps of `ψ` at the fixed points of `X` in
-`Z`. -/
+/-- **The trace of the stalk map of the pushforward at a fixed point**: for `y` fixed by `Φ_Y`
+with proper fibre `Z = X ×_Y y`, if the trace formula holds on proper models, the trace of the
+stalk map at `y` of `ψ' = Rf_! ψ ∘ θ_f` is the sum of the traces of the stalk maps of `ψ` at the
+fixed points of `X` in `Z`. -/
 theorem trace_graphStalkMap_lowerShriekFrobeniusCoefficient [IsAlgClosed k] {k₀ : Type u}
     [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ Y₀ : Scheme.{u}} {fX₀ : X₀ ⟶ Spec (.of k₀)}
     {fY₀ : Y₀ ⟶ Spec (.of k₀)} [LocallyOfFiniteType fX₀] {pX : X.left ⟶ X₀}
@@ -234,14 +234,10 @@ theorem trace_graphStalkMap_lowerShriekFrobeniusCoefficient [IsAlgClosed k] {k�
     hfib k' Z₀ g₀ pZ hZm]
   exact Finset.sum_congr rfl fun z _ ↦ trace_graphStalkMap_upperStar hi K ψ z.1 z.2
 
-/-- **The trace formula along a morphism of models** (blueprint
-`theorem-trace-formula-frobenius-correspondence`, induction on affine coordinates;
-`lemma-comparison-via-relative-frobenius` (3) and (4);
-`theorem-trace-formula-frobenius-correspondence--1`, Step 4, with
-`lemma-comparison-via-relative-frobenius--4`): let `f : X ⟶ Y` be the base change of a morphism
-`f₀ : X₀ ⟶ Y₀` of models over the finite field `k₀`, commuting with the model Frobenii. If the trace
-formula in degree one holds on `Y` and on the fibres of `f` over the rational points of `Y` fixed by
-`Φ_Y`, for every model of these fibres, it holds on `X`. -/
+/-- **The trace formula along a morphism of models**: let `f : X ⟶ Y` be the base change of a
+morphism `f₀ : X₀ ⟶ Y₀` of models over the finite field `k₀`, commuting with the model Frobenii.
+If the trace formula in degree one holds on `Y` and on the fibres of `f` over the rational points
+of `Y` fixed by `Φ_Y`, for every model of these fibres, it holds on `X`. -/
 theorem traceFormulaHolds_of_fibres [IsAlgClosed k] {k₀ : Type u} [Field k₀]
     [Finite k₀] [Algebra k₀ k] {X₀ Y₀ : Scheme.{u}} {fX₀ : X₀ ⟶ Spec (.of k₀)}
     {fY₀ : Y₀ ⟶ Spec (.of k₀)} [LocallyOfFiniteType fX₀] [LocallyOfFiniteType fY₀]

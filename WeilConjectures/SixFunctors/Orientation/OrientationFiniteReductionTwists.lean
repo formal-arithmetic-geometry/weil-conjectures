@@ -11,9 +11,10 @@ import all WeilConjectures.Algebra.Homology.Signed.SignedLineScalarTensorTower
 import WeilConjectures.SmoothPurity.Supporting.SignedTwistFirstReduction
 import all WeilConjectures.AlgebraicGeometry.Pur.PurInverseImageScalarComparison
 
-/-! Canonical finite quotient and realization of the completed root lines.
-Source: definition-tate-twists
-(blueprint: def-sf-orientation-finite-reduction-comparisons). -/
+/-! # Finite reduction of the completed root lines
+
+Canonical finite quotient and realization of the completed root lines.
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
@@ -82,8 +83,7 @@ variable [∀ x : X, Invertible (l : X.residueField x)]
 
 end ReductionProof
 
-/-- Use the published positive-quotient finiteness witness.
-Source: coefficient conventions (blueprint: def-sf-orientation-finite-reduction-comparisons). -/
+/-- The positive-level coefficient quotient rings are finite. -/
 instance sfOrientationQuotientFinite
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (m : ℕ) :

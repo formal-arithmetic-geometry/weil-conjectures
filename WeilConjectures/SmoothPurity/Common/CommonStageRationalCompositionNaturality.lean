@@ -11,8 +11,13 @@ import all Mathlib.Logic.Small.Defs
 
 /-! # Rational pullback compositor naturality
 
-Source: purity/trace equivariance proof Step 1, canonical pullback compositors.
-(blueprint: lem-pur-common-stage-rational-composition-naturality).
+The rational pullback composition comparison is natural in the input morphism.
+
+## Implementation details
+
+A morphism in the localized tensor category is decomposed into zero, pure tensors and sums.
+For a pure tensor, the defining localization formula reduces the claim to naturality of the
+integral pullback compositor.
 -/
 
 @[expose] public noncomputable section
@@ -61,13 +66,7 @@ private theorem normalization_map_heq
   cases h
   rfl
 
-/-- The rational pullback composition comparison is natural in the input morphism.
-Source: blueprint purity/trace equivariance Step 1, rationalized pullback composition.
-(blueprint: lem-pur-common-stage-rational-composition-naturality).
-Proof: decompose a morphism in the localized tensor category into zero, pure tensor,
-and sums. For a pure tensor, the defining localization formula reduces the claim to
-naturality of the integral pullback compositor. The zero and additive cases follow
-from the additive functor structures. Object equalities are transported explicitly. -/
+/-- The rational pullback composition comparison is natural in the input morphism. -/
 theorem commonStageRationalComposition_naturality
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [_root_.Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] {X Y Z : Scheme.{u}}

@@ -16,7 +16,10 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 Finite-level composition and the specified components of the strict tower maps
 prove the tower identity, before applying the additive Roos construction.
-(blueprint: lem-pur-integral-scalar-pullback-tower-composition)
+
+## References
+
+* Stacks Project, Tags 07A4 and 08TC
 -/
 
 @[expose] public noncomputable section
@@ -78,12 +81,7 @@ private theorem pullbackTower_component {X Y : AlgebraicGeometry.Scheme.{u}}
   simpa only [scalarPullbackTower] using
     (scalarPullbackTower_existsUnique l E L ι f).exists.choose_spec P n
 
-/-- The normalized strict scalar pullback towers respect coefficient composition.
-Source: Stacks 07A4 and 08TC; the strict-tower part of the scalar comparison in
-blueprint fix-prop-coherence. At each tower index use the component normalization
-of scalarPullbackTower, apply finite-level composition, and then use natural
-transformation extensionality. No new reduction map or limit comparison is chosen.
-(blueprint: lem-pur-integral-scalar-pullback-tower-composition) -/
+/-- The normalized strict scalar pullback towers respect coefficient composition. -/
 theorem integralScalarPullbackTowerComposition {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     Functor.whiskerRight ((scalarPullbackTower l E L ι f).app P)

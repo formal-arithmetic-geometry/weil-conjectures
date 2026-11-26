@@ -14,21 +14,20 @@ public import WeilConjectures.TraceFormula.Specialization.ZeroSection
 Let `X` be a `k`-scheme, `I` an ideal sheaf on `X` with closed subscheme `i : Z = V(I) ⟶ X`, and
 `k'` a field over `k`. The deformation to the normal cone `𝒟_Z X` of `Z` over the trait
 `S = Spec k'⟦t⟧` (`ProEtale.CondensedRing.deformationModel X I k'`) receives the deformation of the
-zero ideal of `Z`, the *constant family* `Z × S` (`ProEtale.CondensedRing.deformationModel` of
-`⊥`), through the morphism of models `ẽ : Z × S ⟶ 𝒟_Z X` induced by `i`
-(`ProEtale.CondensedRing.zeroSectionDeformationModelHom`, blueprint `prose-E-04`). Its
-special fibre is the zero section `e : Z ⊗ k' ⟶ N_Z X ⊗ k'`.
+zero ideal of `Z`, the *constant family* `Z × S` (`ProEtale.CondensedRing.deformationModel` of `⊥`),
+through the morphism of models `ẽ : Z × S ⟶ 𝒟_Z X` induced by `i`
+(`ProEtale.CondensedRing.zeroSectionDeformationModelHom`). Its special fibre is the zero section
+`e : Z ⊗ k' ⟶ N_Z X ⊗ k'`.
 
-This file defines (blueprint `prose-E-04`)
+This file defines
 * the *zero-section map* `ε_{X,Z}(L) : Le^* Sp_{X,Z}(L) ⟶ Ψ_{Z × S}(Li^* L)`, the pullback exchange
   along `ẽ` (`ProEtale.CondensedRing.zeroSectionMap`);
 * the *defect* `C_{X,Z}(L)`, a cone of `ε_{X,Z}(L)`
   (`ProEtale.CondensedRing.specializationDefect`).
 
-The blueprint composes `ε_{X,Z}(L)` with the inverse of the specialization unit
-`σ_Z(Li^* L) : Li^* L ⟶ Ψ_{Z × S}(Li^* L)` of the constant family, which is an isomorphism
-(blueprint `lemma-nearby-cycles-constant-family--1`); this does not change the cone up to
-isomorphism, and the vanishing statements below do not depend on it.
+One may compose `ε_{X,Z}(L)` with the inverse of the specialization unit
+`σ_Z(Li^* L) : Li^* L ⟶ Ψ_{Z × S}(Li^* L)` of the constant family, which is an isomorphism; this
+does not change the cone up to isomorphism, and the vanishing statements below do not depend on it.
 
 ## Main results
 
@@ -37,11 +36,11 @@ isomorphism, and the vanishing statements below do not depend on it.
 - `ProEtale.CondensedRing.nonempty_specializationDefect_iso`: the defect is invariant under
   isomorphisms of complexes.
 
-## Implementation notes
+## Implementation details
 
-The blueprint forms the cofibre in a derived enhancement, so that `C_{X,Z}` is a functor. Here the
-defect is a chosen cone in the triangulated derived category, so it is only defined up to
-non-unique isomorphism; all statements about it are invariant under isomorphism.
+The defect is not formed as a cofibre in a derived enhancement, which would make `C_{X,Z}` a
+functor. Here the defect is a chosen cone in the triangulated derived category, so it is only
+defined up to non-unique isomorphism; all statements about it are invariant under isomorphism.
 
 -/
 
@@ -99,7 +98,7 @@ noncomputable def zeroSectionSpecialFibreMap :
 
 /-- The morphism of models `ẽ : Z × S ⟶ 𝒟_Z X` from the constant family of `Z = V(I)` (the
 deformation of the zero ideal of `Z`) to the deformation to the normal cone of `Z` in `X`, over
-`i : Z ⟶ X` and the zero section `e` (blueprint `prose-E-04`). -/
+`i : Z ⟶ X` and the zero section `e`. -/
 noncomputable def zeroSectionDeformationModelHom :
     (deformationModel (centre X I) ⊥ k').Hom (deformationModel X I k') (centreι X I).left
       (zeroSectionSpecialFibreMap X I k').left :=
@@ -107,8 +106,8 @@ noncomputable def zeroSectionDeformationModelHom :
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-/-- The *zero-section map* `ε_{X,Z}(L) : Le^* Sp_{X,Z}(L) ⟶ Ψ_{Z × S}(Li^* L)` (blueprint
-`prose-E-04` (2)): the pullback exchange along `ẽ : Z × S ⟶ 𝒟_Z X`. -/
+/-- The *zero-section map* `ε_{X,Z}(L) : Le^* Sp_{X,Z}(L) ⟶ Ψ_{Z × S}(Li^* L)`: the pullback
+exchange along `ẽ : Z × S ⟶ 𝒟_Z X`. -/
 noncomputable def zeroSectionMap
     (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj Λ X.left))) :
@@ -139,8 +138,7 @@ lemma exists_distTriang_zeroSectionMap
       (g : _ ⟶ C) (h : C ⟶ _), Triangle.mk (zeroSectionMap X I k' Λ L) g h ∈ distTriang _ :=
   distinguished_cocone_triangle _
 
-/-- The *defect* `C_{X,Z}(L)` of the specialization (blueprint `prose-E-04` (3)):
-a cone of the zero-section map `ε_{X,Z}(L)`. -/
+/-- The *defect* `C_{X,Z}(L)` of the specialization: a cone of the zero-section map `ε_{X,Z}(L)`. -/
 noncomputable def specializationDefect
     (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj Λ X.left))) :

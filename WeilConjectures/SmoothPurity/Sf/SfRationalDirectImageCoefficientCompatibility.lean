@@ -14,9 +14,23 @@ import all Mathlib.Logic.Small.Defs
 
 /-! # Coefficient-change mates before common-stage descent
 
-Source: Bhatt--Scholze 6.7.2, 6.8.14(2), Remark 6.8.15; the finite-coefficient
-construction of derived direct image in the blueprint.
-(blueprint: lem-sf-rational-direct-image-coefficient-compatibility).
+Coherent coefficient pullback comparisons, and invertibility of the induced direct-image mates
+for supplied right adjoints.
+
+## Implementation details
+
+For `E ⊆ F`, `𝒪_F` is finite free over `𝒪_E`. Scalar extension `T` is left adjoint to
+restriction `Res`, and after rationalization the trace form is nondegenerate, so `Res` is also
+left adjoint to `T`. Pullback commutes with `Res`, and the mate `T R_E ⟶ R_F T` of the inverse
+pullback comparison is conjugate to the invertible comparison `Res L_F ⟶ L_E Res` under the
+composite adjunctions, hence invertible. Only the supplied right adjoints are used, so the
+argument applies to arbitrary scheme maps; the counit equation is obtained by consumers from
+`mateEquiv_counit`.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.7.2, Proposition 6.8.14(2),
+  Remark 6.8.15.
 -/
 
 @[expose] public section
@@ -97,37 +111,7 @@ private theorem rightMate_transport_stage
       (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E F h) f) hi
 
 -- The transported coefficient structures are unfolded with `respectTransparency false`.
-/-- Coherent coefficient pullback comparisons and invertible direct-image mates.
-Source: Bhatt--Scholze 6.8.14(2), Remark 6.8.15; finite-free scalar change
-(blueprint: lem-sf-rational-direct-image-coefficient-compatibility).
-Proof: use the normalized integral scalar/pullback maps and their coefficient-tower
-identity. On simultaneous flat-term K-flat representatives, the two tower composites
-multiply the new coefficients in the same order. Ordinary scalar associativity and
-the normalized completion maps give this identity for completed scalar extension.
-Localize these precise maps and conjugate by operationStageTransitionIso.
-This constructs the stage morphism with the prescribed components. Its functor
-family is fixed literally. Naturality and the displayed component normalization
-fix every comparison natural isomorphism, and proof irrelevance fixes coherence.
-Thus the entire stage morphism is unique, in equality, not just up to isomorphism.
-For an inclusion E into F, O_F is finite free over O_E. Write T for scalar extension
-from E to F and Res for restriction of scalars (exact on finite free coefficients, so it
-preserves constructibility). T is left adjoint to Res, and, after rationalization, the
-trace form of F over E is nondegenerate, so Hom_E(O_F, -) agrees with T and Res is
-also left adjoint to T. Pullback commutes with Res: the mate of the comparison
-L_F T = T L_E under Res left adjoint to T is the comparison Res L_F to L_E Res, invertible
-because derived pullback is computed termwise and forgets the O_F-module structure.
-The mate T R_E to R_F T of the inverse comparison under the given adjunctions a and the
-mate Res L_F to L_E Res are conjugate under the composite adjunctions L_E Res left
-adjoint to T R_E and Res L_F left adjoint to R_F T; a transformation of left adjoints is
-invertible exactly when its conjugate is. This uses only the supplied R and a, not
-any geometric description of a right adjoint, so it holds for arbitrary scheme maps.
-Hence the specified mate is invertible. Here only invertibility is asserted; the
-consumer obtains the counit equation from Mathlib's mateEquiv_counit. This statement
-concerns coefficient change only: it asserts no pointwise adjoint existence, common-stage
-adjunction or Weil lift.
-Repeated fields use the tensor unit; the argument also applies to zero objects,
-empty schemes and arbitrary scheme maps: only coefficient extension is used.
-The right adjoints are supplied, not asserted to exist on arbitrary schemes. -/
+/-- Coherent coefficient pullback comparisons and invertible direct-image mates. -/
 theorem sfRationalDirectImageCoefficientCompatibility
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

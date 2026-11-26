@@ -25,8 +25,14 @@ scalars, so it preserves K-injective complexes, and it commutes with the direct 
 
 For `Λ = 𝒪_E` and `Λ' = 𝒪_E/ϖ` the functor `R coext = RHom_{𝒪_E}(𝒪_E/ϖ, -)` is the reduction
 modulo `ϖ` shifted by `-1`, read in `D(-, 𝒪_E/ϖ)`; this is a first step towards comparing
-the integral and the finite stages of the projection formula
-(`lemma-projection-formula-integral-coefficients`).
+the integral and the finite stages of the projection formula.
+
+## Implementation details
+
+To show that the vanishing of `RHom_Λ(Λ/ϖ, C)` makes `ϖ` act invertibly on `C`, one computes
+with a K-injective resolution `I` of `C` with injective components: the short exact sequence
+`0 ⟶ Hom_Λ(Λ/ϖ, I) ⟶ I ⟶ I ⟶ 0` gives a distinguished triangle whose first vertex is the
+restriction of scalars of `RHom_Λ(Λ/ϖ, C)`.
 -/
 
 @[expose] public section
@@ -155,9 +161,7 @@ lemma shortExact_coextendQuotientComplexShortComplex (hϖ : ϖ ∈ nonZeroDiviso
 
 /-- **The derived coextension detects invertibility of `ϖ`.** For a nonzerodivisor `ϖ` of `Λ`
 and `C ∈ D(X_ét, Λ)`, if `RHom_Λ(Λ/ϖ, C) = 0` in `D(X_ét, Λ/ϖ)` then `ϖ` acts invertibly on
-`C`. Computing with a K-injective resolution `I` of `C` with injective components, the short exact
-sequence `0 ⟶ Hom_Λ(Λ/ϖ, I) ⟶ I ⟶ I ⟶ 0` gives a distinguished triangle whose first vertex is
-the restriction of scalars of `RHom_Λ(Λ/ϖ, C)`. -/
+`C`. -/
 theorem isIso_smul_id_of_isZero_rightDerivedFunctor_coextendScalars
     (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (C : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

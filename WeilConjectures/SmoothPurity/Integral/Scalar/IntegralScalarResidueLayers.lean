@@ -13,9 +13,13 @@ import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarResidueLayerVa
 
 /-! # The residue layers of the target coefficient filtration
 
-Source: Stacks, sites-modules, lemma-tensor-product-locally-constant;
-proetale, lemma-constructible-serre; parent finite-filtration argument.
-(blueprint: lem-sf-integral-scalar-residue-layers).
+We filter the finite target coefficient ring by the powers of a uniformizer and show that each
+successive layer tensor has constructible cohomology in the residue interval.
+
+## References
+
+* Stacks Project, Modules on Sites (tensor products of locally constant sheaves) and
+  Pro-étale Cohomology (constructible complexes form a Serre subcategory).
 -/
 
 @[expose] public noncomputable section
@@ -30,9 +34,7 @@ variable (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- The actual power ideals in the finite target ring, regarded as submodules.
-Source: parent finite-level-bounds proof, explicit uniformizer devissage
-(blueprint: lem-sf-integral-scalar-residue-layers). -/
+/-- The actual power ideals in the finite target ring, regarded as submodules. -/
 def integralScalarPowerFiltration (n : ℕ) :
     Fin (n + 1 + 1) → Submodule
       (ULift.{u + 1} (Padic.coefficientExtensionRing l L (n + 1)))
@@ -42,24 +44,18 @@ def integralScalarPowerFiltration (n : ℕ) :
       (Padic.coefficientExtensionUniformizer l L))} :
         Set (ULift.{u + 1} (Padic.coefficientExtensionRing l L (n + 1))))) ^ (j : ℕ)
 
-/-- Power ideals decrease with the exponent.
-Source: parent finite-level-bounds proof, power ideal filtration
-(blueprint: lem-sf-integral-scalar-residue-layers). -/
+/-- Power ideals decrease with the exponent. -/
 theorem integralScalarPowerFiltration_antitone (n : ℕ) :
     Antitone (integralScalarPowerFiltration l L n) := by
   intro i j hij
   exact Ideal.pow_le_pow_right hij
 
-/-- The first power ideal is the whole coefficient module.
-Source: parent finite-level-bounds proof, power ideal filtration
-(blueprint: lem-sf-integral-scalar-residue-layers). -/
+/-- The first power ideal is the whole coefficient module. -/
 theorem integralScalarPowerFiltration_zero (n : ℕ) :
     integralScalarPowerFiltration l L n 0 = ⊤ := by
   simp [integralScalarPowerFiltration]
 
-/-- The last power ideal vanishes in the defining quotient.
-Source: parent finite-level-bounds proof, power ideal filtration
-(blueprint: lem-sf-integral-scalar-residue-layers). -/
+/-- The last power ideal vanishes in the defining quotient. -/
 theorem integralScalarPowerFiltration_last (n : ℕ) :
     integralScalarPowerFiltration l L n (Fin.last (n + 1)) = ⊥ := by
   have hz : ((Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l L (n + 1)))
@@ -80,28 +76,7 @@ theorem integralScalarPowerFiltration_last (n : ℕ) :
     exact hz
   rw [hu, Ideal.span_singleton_zero]
 
-/-- Each successive layer tensor has constructible cohomology in the residue interval.
-Source: parent lem-sf-integral-scalar-finite-level-bounds, steps 1--2;
-Stacks sites-modules, lemma-tensor-product-locally-constant, and proetale,
-lemma-constructible-serre; finite residue-field specialization.
-(blueprint: lem-sf-integral-scalar-residue-layers).
-Proof: the chosen uniformizer generates the maximal ideal of the target DVR.
-Multiplication by its j-th power identifies the quotient of its j-th and (j+1)-st
-power ideals in A_(L,n+1) with k_L. To check the kernel, lift an equality to O_L
-and cancel the nonzero uniformizer power; since j<n+1, the remainder is divisible
-by the uniformizer. This includes j=n. The coefficient map to this quotient
-factors through k_E, since the local field embedding maps the maximal ideal of
-O_E into that of O_L. K-flat computation of the source derived reduction and
-balanced tensor associativity identify each layer tensor with the extension of
-that reduction from k_E to k_L, followed by restriction to A_(L,n+1).
-Apply finiteFieldSheafScalarExtension: exactness commutes with homology, finite
-models extend to finite models and the interval endpoints are unchanged.
-Restriction from k_L to A_(L,n+1) keeps the same finite constant models and zero
-objects. The finite-model and geometric-stalk constructibility predicates agree
-by trivializing on each stratum. Derived homology agrees with homology of the
-K-flat representative. These identifications prove both clauses at every degree.
-At n=0 there is one layer, the residue field itself; zero inputs and the empty
-scheme give the same comparisons and zero homology. No completeness is used. -/
+/-- Each successive layer tensor has constructible cohomology in the residue interval. -/
 theorem integralScalarResidueLayers_bounds
     (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory)

@@ -19,8 +19,22 @@ import Mathlib.RingTheory.FiniteType
 /-!
 # Cancellation at a supplied unit entry in a bounded free resolution
 
-Source: Stacks Project, Algebra, Tag 00MT, used in the proof of Tag 00OA.
-(blueprint: stage3-j4-bounded-resolution-unit-entry-cancellation)
+Given a bounded finite free resolution with chosen bases and a unit entry of the differential
+`d_{j+1}`, we cancel the corresponding pair of basis vectors to obtain a bounded finite free
+resolution of the same module whose ranks do not increase and whose rank in degree `j` drops
+(`ModuleCat.exists_bounded_resolution_unit_entry_cancellation`).
+
+## Implementation details
+
+The new complex comes from the natural-degree homotopy cancellation theorem, which supplies a
+smaller complex with finite bases and a homotopy equivalence whose forward map is degreewise
+injective; injectivity gives boundedness. The hypothesis `j < d` is kept in the statement,
+although the argument does not need it. The unit pivot is an input, not chosen.
+
+## References
+
+* [Stacks, Tag 00MT]
+* [Stacks, Tag 00OA]
 -/
 
 @[expose] public section
@@ -28,23 +42,9 @@ universe u v
 open CategoryTheory CategoryTheory.Limits
 namespace ModuleCat
 
-/-- Remove a supplied unit pivot, preserving the augmentation and controlling ranks.
-Source: Stacks Project, Algebra, Tag 00MT, used in the proof of Tag 00OA.
-
-Proof: Apply the natural-degree cancellation theorem, which supplies a complementary
-complex, its smaller finite bases, and a homotopy equivalence whose forward map
-is degreewise injective. Finite bases give projectivity; compose the forward
-map with the original augmentation. A homotopy equivalence is a quasi-isomorphism,
-and the composite of quasi-isomorphisms is one, so these data form a projective
-resolution of `M`. In degrees above `d`, injectivity into the original zero
-term makes the complementary term subsingleton and hence zero. Its finite bases
-give finite freeness. Over a nontrivial commutative ring, finrank equals the
-cardinality of each finite basis. At the pivot degrees the smaller sizes plus
-one equal the original sizes, and elsewhere the sizes agree. Natural-number
-arithmetic gives the asserted inequalities. The supplied bound `j < d` is
-retained in the statement, although this argument preserves boundedness even
-without it. No unit pivot is chosen: its indices and invertibility are inputs.
-(blueprint: stage3-j4-bounded-resolution-unit-entry-cancellation) -/
+/-- Cancelling a supplied unit entry of the differential `d_{j+1}` of a bounded finite free
+resolution `P` of `M` gives a bounded finite free resolution of `M` with ranks at most those of
+`P` and strictly smaller rank in degree `j`. -/
 theorem exists_bounded_resolution_unit_entry_cancellation {R : Type u} [CommRing R]
     [Nontrivial R] (M : ModuleCat.{max u v} R) (d : ℕ) (P : ProjectiveResolution M)
     (hzero : ∀ i : ℕ, d < i → IsZero (P.complex.X i))

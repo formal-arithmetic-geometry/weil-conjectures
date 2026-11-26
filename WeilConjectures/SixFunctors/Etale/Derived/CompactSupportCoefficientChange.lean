@@ -12,16 +12,19 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 
 Let `Λ` be a finite coefficient ring (the stage `A = A_{E,n}`), `J` an ideal of `Λ` (so that
 `B = Λ ⧸ J`, for instance `A_{E,m} = A_{E,n} ⧸ ϖ_E^m`, `m ≤ n`) and `f : X ⟶ Y` a morphism admitting
-a compactification. Blueprint `lemma-sp-reduction--1` asserts that the
-canonical coefficient comparison
+a compactification. This file shows that the canonical coefficient comparison
 
 `(Rf_! K) ⊗ᴸ_A B ⟶ Rf_!(K ⊗ᴸ_A B)`
 
-is an isomorphism. As everywhere in the repository (see
+is an isomorphism.
+
+## Implementation details
+
+As everywhere in the repository (see
 `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegralOfSupport`), the reduction
 `K ⊗ᴸ_A B` is realised as the complex `K ⊗ᴸ (Λ ⧸ J)_X` of `Λ`-modules
 (`AlgebraicGeometry.Etale.reductionModIdeal`), the restriction of scalars along `A ⟶ B` of the
-blueprint's `B`-complex, which is how compact support with `B`-coefficients is computed inside
+`B`-complex, which is how compact support with `B`-coefficients is computed inside
 `D(-, A)`. The canonical comparison is the projection map
 `PF : Rf_! K ⊗ᴸ (Λ ⧸ J)_Y ⟶ Rf_!(K ⊗ᴸ Lf^* (Λ ⧸ J)_Y)` of the tensor comparison, followed by
 `Lf^* (Λ ⧸ J)_Y ≅ (Λ ⧸ J)_X`; it is an isomorphism because the projection formula holds at a
@@ -61,33 +64,24 @@ noncomputable abbrev constantQuotient (Y : Scheme.{u}) :
   (_root_.DerivedCategory.singleFunctor _ 0).obj
     ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ (Λ ⧸ J)))
 
-/-- Blueprint `lemma-sp-reduction--1`: Change of finite coefficients for
-compact support, the comparison map.
-
-For a finite coefficient ring `A = Λ` and `B = Λ ⧸ J`, the canonical coefficient comparison
-`(Rf_! K) ⊗ᴸ_A B ⟶ Rf_!(K ⊗ᴸ_A Lf^* B)`, the projection map at the constant complex
-`(Λ ⧸ J)_Y`, is an isomorphism for every `K` (in particular for every bounded constructible `K`
-of finite Tor amplitude). -/
+/-- Change of finite coefficients for compact support, the comparison map: for a finite coefficient
+ring `A = Λ` and `B = Λ ⧸ J`, the canonical coefficient comparison
+`(Rf_! K) ⊗ᴸ_A B ⟶ Rf_!(K ⊗ᴸ_A Lf^* B)`, the projection map at the constant complex `(Λ ⧸ J)_Y`, is
+an isomorphism for every `K` (in particular for every bounded constructible `K` of finite Tor
+amplitude). -/
 theorem hasProjectionFormula_constantQuotient_of_finite
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     HasProjectionFormula (ModuleCat.{u + 1} Λ) f K (constantQuotient Λ J Y) :=
   hasProjectionFormula_of_finite Λ f K _
 
-/-- Blueprint `lemma-sp-reduction--1`: Change of finite coefficients for
-compact support.
-
-Let `Λ` be a finite coefficient ring (`A = A_{E,n}`), `J` an ideal of `Λ` (`B = A_{E,m}`,
-`J = (ϖ_E^m)`, `m ≤ n`) and `f : X ⟶ Y` a morphism admitting a compactification. The canonical
-coefficient comparison is a natural isomorphism
+/-- Change of finite coefficients for compact support: let `Λ` be a finite coefficient ring
+(`A = A_{E,n}`), `J` an ideal of `Λ` (`B = A_{E,m}`, `J = (ϖ_E^m)`, `m ≤ n`) and `f : X ⟶ Y` a
+morphism admitting a compactification. The canonical coefficient comparison is a natural isomorphism
 
 `(Rf_! K) ⊗ᴸ_A B ≅ Rf_!(K ⊗ᴸ_A B)`,
 
 the reductions `- ⊗ᴸ_A B` being realised as complexes of `Λ`-modules
-(`AlgebraicGeometry.Etale.reductionModIdeal`). Its component at `K` is the projection map
-`Rf_! K ⊗ᴸ (Λ ⧸ J)_Y ⟶ Rf_!(K ⊗ᴸ Lf^* (Λ ⧸ J)_Y)`
-(`AlgebraicGeometry.Etale.compactSupportCoefficientChangeIso_hom_app`), an isomorphism by
-`AlgebraicGeometry.Etale.hasProjectionFormula_constantQuotient_of_finite`, followed by the
-identification `Lf^* (Λ ⧸ J)_Y ≅ (Λ ⧸ J)_X`. -/
+(`AlgebraicGeometry.Etale.reductionModIdeal`). -/
 noncomputable def compactSupportCoefficientChangeIso :
     R(f)_![ModuleCat.{u + 1} Λ] ⋙ reductionModIdeal Λ Y J ≅
       reductionModIdeal Λ X J ⋙ R(f)_![ModuleCat.{u + 1} Λ] :=

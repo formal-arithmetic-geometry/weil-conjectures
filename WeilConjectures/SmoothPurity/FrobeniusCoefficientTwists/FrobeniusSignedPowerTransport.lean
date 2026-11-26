@@ -14,6 +14,10 @@ import all WeilConjectures.AlgebraicGeometry.Pur.PurInverseImageHomComparison
 
 The generic internal-Hom argument is separated from its coefficient specializations
 so each module can be compiled within the project's time limit.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -289,14 +293,7 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] ringedHomIso ringedDualMap
 
 /-- A comparison on nonnegative powers extends uniquely to the signed powers by
-conjugating the internal dual. Source: coefficient-twist clause 3 and Stacks, Tag 03EL.
-(blueprint: lem-weil-frobenius-signed-power-transport).
-Proof: inverse image at a scheme isomorphism is an equivalence. Its module adjunction
-therefore has invertible unit and reflects isomorphisms. Transport internal Hom through
-this equivalence and conjugate by the given positive and coefficient comparisons.
-Evaluation proves the specified formula. Its uniqueness follows by the adjunction and
-extensionality of internal Hom after restriction to every object of the slice site.
-Positive and negative integers are disjoint cases, so the maps assemble uniquely. -/
+conjugating the internal dual. -/
 theorem genericSignedProof {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

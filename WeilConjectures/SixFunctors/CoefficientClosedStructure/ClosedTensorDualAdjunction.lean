@@ -12,7 +12,13 @@ import Mathlib.CategoryTheory.HomCongr
 
 /-! # Tensor transposition and contravariant dual adjunction
 
-Source: the tensor-Hom arrows in the current blueprint's closed-costalk-duality proof.
+We define the contravariant dual functor obtained by fixing the target of an internal Hom
+bifunctor, together with auxiliary results on adjunction units used for the tensor-Hom arrows
+in the closed costalk duality argument.
+
+## References
+
+* [Stacks, Tag 08J9]
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +32,7 @@ namespace WeilConjectures.CoefficientClosedStructure
 variable {C : Type u} [Category.{v} C] {H : Cᵒᵖ × C ⥤ C}
   (S : CoefficientClosedStructure H)
 
-/-- Fixing the target of internal Hom gives the usual contravariant dual functor.
-Source: Stacks 08J9, functoriality of derived internal Hom. -/
+/-- Fixing the target of internal Hom gives the usual contravariant dual functor. -/
 def dual (H : Cᵒᵖ × C ⥤ C) (M : C) : Cᵒᵖ ⥤ C :=
   ((𝟭 Cᵒᵖ).prod' ((Functor.const Cᵒᵖ).obj M)) ⋙ H
 

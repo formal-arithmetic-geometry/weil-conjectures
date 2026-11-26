@@ -15,8 +15,19 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 /-!
 # Generator substitution for Koszul complexes
 
-Source: Stacks Project, Tags 0BQY and 0BQZ.
-(blueprint: new-q2-koszul-generator-chain-map).
+A linear map `t : A^r → A^s` compatible with two generating sequences induces a chain map of
+Koszul complexes, given by exterior powers of `t`, that intertwines the normalized
+augmentations.
+
+## Implementation details
+
+`boundary_wedge` identifies the Koszul derivation with `contractLeft` at the zero quadratic
+form, giving the alternating contraction formula on wedges, which is shared by generator
+substitution and top evaluation. No inverse of `t` is used.
+
+## References
+
+* [Stacks, Tags 0BQY, 0BQZ]
 -/
 
 @[expose] public section
@@ -27,16 +38,7 @@ open CategoryTheory
 
 namespace ExteriorAlgebra
 
-/-- The Koszul boundary on a wedge is the alternating contraction sum.
-Source: Stacks Project, Tags 0BQY and 0BQZ; the contraction formula in
-`koszul_differential`. Shared by generator substitution and top evaluation.
-(blueprint: new-q2-koszul-generator-chain-map).
-
-Proof: Uniqueness in koszul_differential identifies its derivation with
-contractLeft at the zero quadratic form, since both kill one and obey the same
-recursion on a generator times an exterior-algebra element. Apply the resulting
-wedge formula and compare the underlying exterior-algebra elements by
-Subtype.ext; scalar multiplication gives the displayed contraction sum. -/
+/-- The Koszul boundary on a wedge is the alternating contraction sum. -/
 theorem boundary_wedge
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (n : ℕ) (v : Fin (n + 1) → (Fin r →₀ A)) :
@@ -64,18 +66,7 @@ theorem boundary_wedge
   simp [l, Algebra.smul_def]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Exterior powers of a generator substitution intertwine normalized augmentations.
-Source: Stacks Project, Tag 0BQZ, finite-free Koszul resolution computation.
-(blueprint: new-q2-koszul-generator-chain-map).
-
-Proof: The degree-n component is exteriorPower.map n t. On a wedge the contraction
-formula is an alternating sum of wedges omitting one vector. The hypothesis on
-the linear combinations makes the coefficients agree, so these components commute
-with every differential. Extend this chain map by zero to integer degrees.
-Degree zero is the identity under zeroEquiv, so the two normalized augmentations
-commute there. Away from zero their target terms are zero. The extension's degree
--r component is the specified exterior power transported by extendXIso.
-This construction includes r=0 and the zero quotient, and uses no inverse of t. -/
+/-- Exterior powers of a generator substitution intertwine normalized augmentations. -/
 theorem exists_koszul_generator_chain_map
     (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f g : Fin r → A)
     (t : (Fin r →₀ A) →ₗ[A] (Fin r →₀ A))

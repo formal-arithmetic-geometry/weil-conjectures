@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.LocallyFiniteAdicCompactSupportData
 
-/-! # Independence of the normalized integral coefficient presentation -/
+/-! # Independence of the normalized integral coefficient presentation
+
+## References
+
+* [Bhatt--Scholze, Lemma 6.8.2]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -30,14 +35,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 /--
 Any two normalized coefficient presentations induce the same integral map into the
-native coefficient sheaf.  This is the finite-quotient uniqueness step in
-Bhatt--Scholze, Lemma 6.8.2.
-(blueprint: lem-sf-native-completed-coefficient-change)
-
-Proof source: compose both maps with every finite quotient projection.  The finite
-constant and residue equations force equality on each projection, and the completed
-coefficient sheaf is the inverse limit of these quotients, so joint monicity gives
-the equality of the original maps.
+native coefficient sheaf.
 -/
 theorem coefficientPresentation_integralMap_eq
     [G : NativeGeometry.{u} l]

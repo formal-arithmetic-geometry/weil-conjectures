@@ -20,8 +20,23 @@ import Mathlib.RingTheory.RingHom.Etale
 /-!
 # The flat split neighbourhood in Gabber's finite-algebra argument
 
-Source: Stacks Project, More on Algebra, Tag 0EM0, proof of `lemma-helper-finite`,
-from lifting the idempotent through choosing the coefficient in the first factor.
+For a finite `A`-algebra `B` with `B / IB ≅ B₁ × B₂` and `b ∈ B` lifting `(1, 0)`, there is a
+flat `A`-algebra `C` with `C / IC ≅ A / I` over which `C ⊗[A] B` splits into two factors: in the
+first, `b - 1` is a scalar from `IC`, and in the second, `b` lies in the extended ideal.
+
+## Implementation details
+
+The idempotent `(1, 0)` lifts over an étale `A`-algebra `A'` preserving `A / I`, which splits
+`A' ⊗[A] B` into two finite factors. Nakayama gives `g ∈ 1 + IA'` annihilating the cokernel of
+`A'` into the first factor; `C` is the localization of `A'` at `g`, which is flat over `A`, and
+over `C` the first structure map is surjective. No polynomial relation or faithful flatness is
+asserted here.
+
+## References
+
+* [Stacks, Tag 0EM0]
+* [Stacks, Tag 07M4]
+* [Stacks, Tag 00DV]
 -/
 
 @[expose] public section
@@ -33,30 +48,7 @@ namespace Algebra
 /-- A flat neighbourhood preserving the quotient splits the finite algebra into two
 factors. The first factor admits a scalar lift of `b - 1`, and `b` in the second factor
 belongs to the extended ideal. The kernels of the two factor projections have zero
-intersection. No polynomial relation or faithful flatness is asserted here.
-Source: Stacks Project, More on Algebra, Tag 0EM0, proof of `lemma-helper-finite`.
-(blueprint: lem-weil-pbc-gabber-flat-split-neighbourhood)
-
-Proof:
-1. Finiteness makes B integral. Apply 07M4 to the idempotent represented by b
-   modulo IB. This gives an etale A-algebra A' preserving A/I, and an idempotent
-   in B tensor_A A' reducing to (1,0).
-2. The idempotent decomposes the tensor algebra into its quotient by (1-e') and
-   its quotient by e'. Both factors are finite over A'. Their reductions are B1
-   and B2, and the image of b reduces respectively to 1 and 0.
-3. The cokernel of A' -> the first factor is finite and equals IA' times itself,
-   because A/I -> B1 is surjective. Nakayama 00DV gives g with g-1 in IA' which
-   annihilates this cokernel. Localize A' and both factors at g to obtain C.
-4. C is flat over A: etale algebras and localizations are flat, and flatness
-   composes. Since g reduces to 1, A/I -> C/IC is still an isomorphism, agreeing
-   with the structure map on representatives.
-5. The first structure map is now surjective: y/g^n is the image of a/g^(n+1)
-   whenever gy is the image of a. Its extended ideal is therefore the image of
-   IC, so lift the first component of b-1 to a in IC. Let K and L be the kernels
-   of the two factor projections from C tensor_A B. Their intersection is zero.
-   The first equality says b-1-a belongs to K. The second component of b is in
-   IC times that factor, equivalently b belongs to L plus the extended ideal.
-   These conclusions also hold when either factor is the zero ring. -/
+intersection. -/
 theorem exists_flat_split_gabber_neighbourhood
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
     [Module.Finite A B] (I : Ideal A)

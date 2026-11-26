@@ -16,8 +16,8 @@ public import Mathlib.CategoryTheory.Preadditive.Opposite
 
 # Duality and invariants under a finite group of invertible order
 
-This file proves the finite-group core of blueprint `lemma-duality-invariants-pro-p--1` ("Verdier
-duality commutes with invariants under a pro-`p` group"). Let `G` be a finite group acting on an
+This file proves the finite-group core of the statement that Verdier duality commutes with
+invariants under a pro-`p` group. Let `G` be a finite group acting on an
 object `E` of an `R`-linear category, `ρ : G →* End E`, with `|G|` invertible in `R`. Then the
 invariants of `E` are the image of the *averaging idempotent*
 ```
@@ -37,9 +37,9 @@ action `h ↦ D(ρ(h⁻¹))` (`CategoryTheory.contragredient`). Then:
   `E^G ⊗ (D E)^G ⟶ ω` is the restriction of the evaluation `E ⊗ D E ⟶ ω` to the two invariant
   direct summands (`CategoryTheory.uncurry_invariantsDualIso_hom`).
 
-For a pro-`p` group `P` acting continuously, the blueprint deduces the statement from the finite
-quotients of `P` by exactness and continuity of `RΓ(P, -)` on prime-to-`p` torsion coefficients;
-that limit argument is not formalised here.
+For a pro-`p` group `P` acting continuously, the statement follows from the finite quotients of
+`P` by exactness and continuity of `RΓ(P, -)` on prime-to-`p` torsion coefficients; that limit
+argument is not formalised here.
 
 -/
 
@@ -82,9 +82,7 @@ variable (R : Type w) [CommRing R] {C : Type u₁} [Category.{v₁} C] [Preaddit
   {G : Type u₃} [Group G] [Fintype G] [Invertible (Fintype.card G : R)]
 
 /-- The **averaging endomorphism** `|G|⁻¹ ∑_{h ∈ G} ρ(h)` of a family of endomorphisms `ρ`
-indexed by a finite group `G` of order invertible in `R`. For an action `ρ : G →* End E` it is
-an idempotent (`CategoryTheory.averaging_comp_averaging`) whose image is the object of
-invariants. -/
+indexed by a finite group `G` of order invertible in `R`. -/
 noncomputable def averaging {E : C} (ρ : G → (E ⟶ E)) : E ⟶ E :=
   ⅟(Fintype.card G : R) • ∑ h, ρ h
 
@@ -142,8 +140,7 @@ def contragredient {E : C} (ρ : G →* End E) : G →* End (D.obj (op E)) where
     rw [mul_inv_rev, map_mul, End.mul_asHom, op_comp, D.map_comp]
 
 /-- **Duality sends the averaging idempotent to the averaging idempotent of the contragredient
-action**, since inversion `h ↦ h⁻¹` permutes the summands. Only additivity of `D` is used: the
-scalar `|G|⁻¹` is recovered from `|G| ⬝ e = ∑ ρ(h)`. -/
+action**, for an additive contravariant functor `D`. -/
 theorem map_averaging_op {E : C} (ρ : G → (E ⟶ E)) :
     D.map (averaging R ρ).op = averaging R (fun h ↦ D.map (ρ h⁻¹).op) := by
   have hS : Fintype.card G • D.map (averaging R ρ).op = ∑ h, D.map (ρ h⁻¹).op := by
@@ -153,10 +150,10 @@ theorem map_averaging_op {E : C} (ρ : G → (E ⟶ E)) :
   conv_rhs => rw [averaging, ← hS]
   rw [← Nat.cast_smul_eq_nsmul R, smul_smul, invOf_mul_self, one_smul]
 
-/-- **Duality commutes with invariants** under a finite group of invertible order (blueprint
-`lemma-duality-invariants-pro-p--1`, finite case): if `ι : E^G ⟶ E`, `π : E ⟶ E^G` split the
-averaging idempotent of `ρ` and `ι'`, `π'` split the averaging idempotent of the contragredient
-action on `D E`, then `(D E)^G ⟶ D E ⟶ D(E^G)` is an isomorphism `(D E)^G ≅ D(E^G)`. -/
+/-- **Duality commutes with invariants** under a finite group of invertible order: if
+`ι : E^G ⟶ E`, `π : E ⟶ E^G` split the averaging idempotent of `ρ` and `ι'`, `π'` split the
+averaging idempotent of the contragredient action on `D E`, then `(D E)^G ⟶ D E ⟶ D(E^G)` is an
+isomorphism `(D E)^G ≅ D(E^G)`. -/
 noncomputable def invariantsDualIso {E I : C} (ρ : G →* End E) {ι : I ⟶ E} {π : E ⟶ I}
     (hιπ : ι ≫ π = 𝟙 I) (hπι : π ≫ ι = averaging R (fun h ↦ (ρ h).asHom))
     {I' : C'} {ι' : I' ⟶ D.obj (op E)}
@@ -182,8 +179,8 @@ open MonoidalCategory MonoidalClosed
 
 variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] [MonoidalClosed C]
 
-/-- **The invariant pairing is the restriction of evaluation** (blueprint
-`lemma-duality-invariants-pro-p--1`): for Verdier duality `D = RHom(-, ω)`, the pairing
+/-- **The invariant pairing is the restriction of evaluation**: for Verdier duality
+`D = RHom(-, ω)`, the pairing
 `E^G ⊗ (D E)^G ⟶ ω` adjoint to `ι' ≫ D(ι) : (D E)^G ⟶ D(E^G)` is the evaluation
 `E ⊗ D E ⟶ ω` restricted along the inclusions `ι ⊗ ι'` of the two invariant direct summands. -/
 lemma uncurry_invariantsDualIso_hom (ω : C) {E I I' : C} (ι : I ⟶ E)

@@ -18,8 +18,16 @@ public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 /-!
 # Polynomial parameters with stable multiplication kernels
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ, items 10--12.
-(blueprint: lem-weil-pbc-popescu-polynomial-kernel-parameters).
+We select polynomial representatives of the parameters and rescale them so that the
+multiplication kernels of the first and second powers agree modulo the preceding powers.
+
+## Implementation details
+
+The case `d = 0`, where the parameter families are empty, is included.
+
+## References
+
+* [Stacks, Tag 07FJ] (the choice and modification of the `π_i` in the proof)
 -/
 
 @[expose] public section
@@ -100,25 +108,7 @@ private theorem exists_local_parameter_numerators
   exact hspan
 
 /-- Select polynomial representatives of the parameters and equalize the polynomial
-multiplication kernels. Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ,
-items `item-choose-pii` and `item-modify-pii`.
-(blueprint: lem-weil-pbc-popescu-polynomial-kernel-parameters).
-
-Proof: The field and its polynomial algebra are regular. Geometric regularity makes
-L regular. The flat height formula applied to the local map with maximal ideal
-extending to the maximal ideal of L gives dimension d for the source localization.
-Choose d generators of its maximal ideal and write them as fractions. Their numerators
-are in the contracted prime and still generate, since their denominators are units.
-Their images generate the maximal ideal of L and are a regular sequence there.
-All permutations of the source parameters are regular. Multiplying them by distinct
-polynomial variables gives a regular sequence over the localized source polynomial
-ring. Induct on the index i. Powers of the earlier terms followed by the current term
-are regular after localization. Ogoma on the quotient by the earlier e-th powers
-supplies a factor outside the contracted prime that equalizes the first and square
-kernels before localization. Multiply only the current parameter by this factor.
-Earlier kernels are unchanged, and the localized parameter ideals and regularity
-are unchanged because the factor is a unit. For d=0 the parameter families are empty;
-the dimension formula makes both maximal ideals zero and all kernel claims vacuous. -/
+multiplication kernels. -/
 theorem exists_popescu_polynomial_kernel_parameters
     {k : Type u} {Λ : Type w}
     [Field k] [CommRing Λ] [Algebra k Λ] [IsNoetherianRing Λ]

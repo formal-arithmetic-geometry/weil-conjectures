@@ -20,7 +20,7 @@ derived tensor product of Weil complexes
 (`AlgebraicGeometry.WeilComplex.nativeConstructibleTensor`) with the Weil complex `ℚ̄_ℓ(m)[n]`
 (`AlgebraicGeometry.WeilComplex.nonempty_nativeConstructibleTensor_iso_tateTwist_comp_shift`).
 
-## Proof
+## Implementation details
 
 Put `b = χ_ℓ(σ)ᵐ`, so that `ℚ̄_ℓ(m)` is the constant twist `ℚ̄_ℓ ⊗ 𝓑_b` and the Tate twist is the
 derived constant twist `T_b` by `b` (`AlgebraicGeometry.WeilComplex.tateTwistCompιIso`). The
@@ -93,8 +93,7 @@ noncomputable def nativeWeilHomTateTwistShiftIso (m n : ℤ) :
       Functor.rightDerivedFunctorIsoMapDerivedCategory _) _
 
 /-- The derived constant twist by `χ_ℓ(σ)ᵐ` followed by the shift `[n]` is left adjoint to the
-derived constant twist by `χ_ℓ(σ)⁻ᵐ` followed by the shift `[-n]`: both are equivalences, inverse
-to each other. -/
+derived constant twist by `χ_ℓ(σ)⁻ᵐ` followed by the shift `[-n]`. -/
 noncomputable def constantTwistShiftAdjunction (b : (PadicAlgCl l)ˣ) (n : ℤ) :
     (constantTwist k₀ l X b).mapDerivedCategory ⋙ shiftFunctor _ n ⊣
       (constantTwist k₀ l X b⁻¹).mapDerivedCategory ⋙ shiftFunctor _ (-n) :=
@@ -113,15 +112,8 @@ noncomputable def constantTwistShiftAdjunction (b : (PadicAlgCl l)ˣ) (n : ℤ) 
             ((Category.comp_id _).trans (Category.id_comp _).symm)))) ≪≫
       (constantTwist k₀ l X b⁻¹).mapDerivedCategory.commShiftIso (-n))
 
-/-- **Tate twists are tensor products** (blueprint: `definition-tate-twists`, where the Tate twist
-`K(m) = K ⊗^L ℚ̄_ℓ(m)` is the derived tensor product with the Tate sheaf): for a Weil complex `K`
-on `X`, the native derived tensor product `K ⊗ ℚ̄_ℓ(m)[n]` is the shifted Tate twist `K(m)[n]`,
-naturally in `K`.
-
-Both functors are left adjoint to `T_{b⁻¹}(-)[-n]`, `b = χ_ℓ(σ)ᵐ`: the native tensor product by
-the tensor–hom adjunction and the computation of the internal hom out of `ℚ̄_ℓ(m)[n]`
-(`AlgebraicGeometry.WeilComplex.nativeWeilHomTateTwistShiftIso`), and the Tate twist since it is
-the derived constant twist `T_b` (`AlgebraicGeometry.WeilComplex.tateTwistCompιIso`). -/
+/-- **Tate twists are tensor products**: for a Weil complex `K` on `X`, the native derived tensor
+product `K ⊗ ℚ̄_ℓ(m)[n]` is the shifted Tate twist `K(m)[n]`, naturally in `K`. -/
 theorem nonempty_nativeConstructibleTensor_iso_tateTwist_comp_shift (m n : ℤ) :
     Nonempty ((𝟭 (WeilComplex k₀ l X)).prod' ((Functor.const (WeilComplex k₀ l X)).obj
         (((tateTwist k₀ l X m).obj

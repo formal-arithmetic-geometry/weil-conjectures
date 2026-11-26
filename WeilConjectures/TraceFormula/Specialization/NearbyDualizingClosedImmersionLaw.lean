@@ -14,8 +14,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
 
 This file provides concrete inputs of the closed-immersion law
 `θ_{Z'} ∘ Ψ_{Z'}(ρ) = ρ' ∘ Ri₂^!(θ_Z) ∘ β_i(ω_{X₁})` of the dualizing maps of trait models over a
-generic base (blueprint `sec-Base-change-for-nearby-cycles` (4), see
-`CategoryTheory.closedImmersionLaw_aux`):
+generic base (see `CategoryTheory.closedImmersionLaw_aux`):
 
 * the composition of traces `tr_Y ∘ Ra_{Y*}(ρ) = tr_X ∘ Ra_{X*}(Ri_* Ri^! ω_X ⟶ ω_X)` for a proper
   `i : Y ⟶ X` of proper `k`-schemes, stated with `NearbyCyclesModel.trace`, `dualizingComplex` and
@@ -24,7 +23,7 @@ generic base (blueprint `sec-Base-change-for-nearby-cycles` (4), see
 * the components of the composition isomorphisms `Rf_* ⋙ Rg_* ≅ Rh_*` on the ambient derived
   categories (`ProEtale.CondensedRing.boundedConstructibleLowerStarCompOfEq_inv_app_hom`).
 
-## Implementation notes
+## Implementation details
 
 The terms `NearbyCyclesModel.trace`, `dualizingComplex` and `upperShriekDualizingComplexIso` are
 definitionally the counit of `Ra_! ⊣ Ra^!`, `Ra^! ℚ̄_ℓ` and the composition isomorphism of
@@ -56,8 +55,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated Y.hom] [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
 
 /-- The composition isomorphism `Rp_* ⋙ Ra₁_* ≅ Ra₃_*` on bounded constructible complexes, for
-`p ≫ a₁ = a₃`, is the conjugate of the composition isomorphism of the derived pullbacks: the
-inverse version of `boundedConstructibleLowerStarCompOfEq_hom_app_hom`. -/
+`p ≫ a₁ = a₃`, is the conjugate of the composition isomorphism of the derived pullbacks. -/
 lemma boundedConstructibleLowerStarCompOfEq_inv_app_hom (p : X ⟶ Y) (a₁ : Y ⟶ P) (a₃ : X ⟶ P)
     (wa : p ≫ a₁ = a₃) (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ((boundedConstructibleLowerStarCompOfEq ℓ p a₁ wa).inv.app M).hom =
@@ -77,8 +75,7 @@ lemma boundedConstructibleLowerStarCompOfEq_inv_app_hom (p : X ⟶ Y) (a₁ : Y 
 `a_X : X ⟶ P` and `a_Y = i ≫ a_X`, objects `ωX = Ra_X^! U`, `ωY = Ra_Y^! U`, traces `tX`, `tY`
 equal to the counits of `Ra_! ⊣ Ra^!` read through `Ra_! ≅ Ra_*`, and `ρ : Ri^! ωX ⟶ ωY` equal to
 the composition isomorphism, `tY ∘ Ra_{Y*}(ρ) = tX ∘ Ra_{X*}(Ri_* Ri^! ωX ⟶ ωX)` through
-`Ra_{Y*} ≅ Ra_{X*} Ri_*`. The equalities are hypotheses so that the instantiation never has to
-unfold `ωX`, `tX`, `ρ` inside the statement (see the implementation notes). -/
+`Ra_{Y*} ≅ Ra_{X*} Ri_*`. -/
 lemma lowerStar_map_comp_trace_of_heq (i : Y ⟶ X) (aX : X ⟶ P) {aY : Y ⟶ P}
     (w : i ≫ aX = aY) [IsProper i.left] [IsProper aX.left] [IsProper aY.left]
     {U : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧}

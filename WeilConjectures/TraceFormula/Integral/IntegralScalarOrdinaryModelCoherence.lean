@@ -16,8 +16,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Coherence of the two ordinary scalar models
 
-Source: Stacks Tags 06YY and 0941; the finite-free tensor normalization.
-(blueprint: lem-trf-integral-scalar-ordinary-model-coherence).
+The counit-normalized comparison of the two ordinary scalar models preserves their specified
+completion maps, units and associators (`integralScalarOrdinaryModelCoherence`).
+
+## References
+
+* Stacks Project, Tags 06YY, 0941
 -/
 
 @[expose] public section
@@ -403,22 +407,7 @@ private theorem scalarModelComparison_associator
       simp only [Functor.map_comp, tc]
 
 /-- The counit-normalized comparison of the ordinary scalar models preserves their
-specified completion maps, units and associators.
-Source: Stacks 06YY, 0941 and the finite-free tensor normalization.
-
-Proof: the ordinary sheaf models are identified by the identity on pure tensors.
-The universal left-derived comparison lifts this identification while preserving
-its cochain counit. Both completion comparisons have the same strict quotient
-augmentation, including zero shifted coordinate, so uniqueness identifies them.
-On tensors the units send s tensor x to sx, and both associators send c tensor
-(b tensor x) to c*j(b) tensor x. Tensor generation and uniqueness give the sheaf
-equations. On a good complex, the universal counits identify the derived units
-and associators with these termwise maps. Their naturality and the factorization
-comparisons for exact derived functors preserve the equations. The last counit
-is invertible on the K-flat representative, so it can be cancelled. Localization
-then gives the equations of natural transformations on all derived objects.
-Identity embeddings, equal fields and zero objects satisfy the same formulas.
-(blueprint: lem-trf-integral-scalar-ordinary-model-coherence). -/
+specified completion maps, units and associators. -/
 theorem integralScalarOrdinaryModelCoherence (l : ℕ) [Fact l.Prime] :
     (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
       (X : Scheme.{u}),

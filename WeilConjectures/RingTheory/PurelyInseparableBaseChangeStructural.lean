@@ -12,18 +12,28 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.LinearAlgebra.Dimension.Finite
 import Mathlib.RingTheory.TensorProduct.Free
 import Mathlib.RingTheory.Noetherian.Basic
+
+/-!
+# Structural properties of a finite field base change
+
+The base change `A ⊗_k k'` along a finite field extension `k'/k` is finite free and flat over
+`A`, and Noetherian if `A` is.
+
+## Implementation details
+
+The finite `k`-basis of `k'` extends to an `A`-basis via `Algebra.TensorProduct.basis`.
+
+## References
+
+* [Stacks, Tag 07E5] (proof of (3) ⇒ (1))
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u v w
 open scoped TensorProduct
 namespace Algebra.TensorProduct
-/-- Finite free, flat, and Noetherian properties of tensor base change.
-Source: Stacks Project, More on Algebra, proof of Proposition Tag 07E5, (3) => (1).
-(blueprint: lem-weil-pbc-purely-inseparable-base-change-structural)
-
-Proof: Extend the finite k-basis of k' to an A-basis of A tensor k' using
-`Algebra.TensorProduct.basis`. A finite basis gives freeness and finite generation.
-Free modules are flat, and a finite algebra over a Noetherian ring is Noetherian. -/
+/-- Finite free, flat, and Noetherian properties of tensor base change. -/
 theorem purelyInseparable_baseChange_structural
     (k : Type u) (k' : Type v) (A : Type w)
     [Field k] [Field k'] [CommRing A] [Algebra k k'] [Algebra k A]

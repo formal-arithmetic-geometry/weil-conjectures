@@ -206,10 +206,7 @@ noncomputable instance (A : Type u') [Category.{u + 1} A] [Abelian A]
 `Hom(i_* Λ_Z, K[a]) ≅ Hom(Λ_Z, Ri^!(K[a])) ≅ Hom(Λ, RΓ(Z, Ri^!(K[a]))) ≅ Hom(Λ, RΓ_Z(X, K)[a])
   ≅ H^a(RΓ_Z(X, K))`,
 
-by the adjunctions `i_* ⊣ Ri^!` and `Λ_Z ⊣ RΓ(Z, -)` (both left adjoints being exact), the
-identification `RΓ(Z, Ri^! -) ≅ RΓ_Z(X, -)`
-(`AlgebraicGeometry.Etale.rightDerivedClosedUpperShriekCompIso`), and `Hom(Λ[0], M[a]) ≅ H^a(M)`
-for complexes of `Λ`-modules. -/
+by the adjunctions `i_* ⊣ Ri^!` and `Λ_Z ⊣ RΓ(Z, -)`. -/
 noncomputable def shiftFunctorCompPreadditiveCoyonedaLowerStarConstantIso (a : ℤ) :
     shiftFunctor (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) a ⋙
         preadditiveCoyoneda.obj (op ((DerivedCategory.singleFunctor _ 0).obj
@@ -240,16 +237,12 @@ noncomputable def shiftFunctorCompPreadditiveCoyonedaLowerStarConstantIso (a : �
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerLeft _ (ModuleCat.preadditiveCoyonedaObjSelfIso Λ)
 
-/-- Blueprint `lemma-sections-support-closed-subscheme--1`: Supported cohomology as morphisms
+/-- Supported cohomology as morphisms: for a closed immersion `i : Z ⟶ X` and a complex `K` of
+étale sheaves of `Λ`-modules on `X`, the cohomology with support is identified as
 
-For a closed immersion `i : Z ⟶ X` and a complex `K` of étale sheaves of `Λ`-modules on `X`, the
-cohomology with support has a natural identification
+`H^a_Z(X, K) ≅ Hom_{D(X, Λ)}(i_* Λ_Z, K[a])`,
 
-`H^a_Z(X, K) ≅ Hom_{D(X, Λ)}(i_* Λ_Z, K[a])`
-
-(naturality: `AlgebraicGeometry.Etale.shiftFunctorCompPreadditiveCoyonedaLowerStarConstantIso`).
-Here `H^a_Z(X, K)` is `AlgebraicGeometry.Etale.derivedSupportCohomology` and `i_* Λ_Z` is the
-pushforward of the constant sheaf, placed in degree `0`. -/
+where `i_* Λ_Z` is the pushforward of the constant sheaf, placed in degree `0`. -/
 noncomputable def derivedSupportCohomologyAddEquiv
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a : ℤ) :
     (derivedSupportCohomology (ModuleCat.{u + 1} Λ) i a).obj K ≃+

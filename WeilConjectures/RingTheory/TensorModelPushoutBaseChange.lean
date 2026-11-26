@@ -10,8 +10,19 @@ public import Mathlib.RingTheory.IsTensorProduct
 
 /-! # Extending a tensor pushout square
 
-Source: Stacks Project, Algebra, Tag 02JO (3), final paragraph, base-change step.
-(blueprint: lem-pc-tensor-model-pushout-base-change)
+A pushout square `P → S ⊗[R] A`, `P → Q`, `S ⊗[R] A → S ⊗[R] B`, `Q → S ⊗[R] B` remains a
+pushout after base change along `S → T`.
+
+## Implementation details
+
+The squares `S, T, S ⊗[R] A, T ⊗[R] A` and `S, T, S ⊗[R] B, T ⊗[R] B` are pushouts by
+cancellation of base change. Pushout cancellation then shows that
+`S ⊗[R] A → T ⊗[R] A` and `S ⊗[R] B → T ⊗[R] B` form a pushout square with `id ⊗ f`, and
+pasting it with the given pushout square over `P` gives the claim.
+
+## References
+
+* [Stacks, Tag 02JO]
 -/
 
 @[expose] public section
@@ -24,28 +35,7 @@ namespace AlgebraicGeometry
 /-- A pushout square between two scalar extensions remains a pushout after another
 scalar extension, with the `P`-structure on `T ⊗[R] A` induced from the given one on
 `S ⊗[R] A` by the transition map. No directed diagram or finite-presentation hypothesis
-is needed.
-
-Source: Stacks Project, Algebra, Tag 02JO (3), final paragraph, base-change step.
-(blueprint: lem-pc-tensor-model-pushout-base-change)
-
-Proof:
-1. Put D0 = S tensor_R A, E0 = S tensor_R B, D1 = T tensor_R A, and
-   E1 = T tensor_R B. Let mD and mE be the tensor transitions. Their square with
-   id tensor f commutes by induction on tensors. The P-structure on D1 is the one
-   through mD and the Q-structure on E1 is the one through mE. The commuting square and the
-   given P-Q-E0 scalar tower prove the P-Q-E1 scalar tower.
-2. The squares S-T-D0-D1 and S-T-E0-E1 are pushouts: transport the canonical
-   tensor pushouts using cancellation of base change. On generators the right
-   inclusion followed by cancellation sends s tensor a to t(s) tensor a, and
-   likewise for B. Thus the transported maps are exactly mD and mE.
-3. Paste the first square with the square D0-E0-D1-E1. The resulting rectangle
-   is the second square, so pushout cancellation shows D0-E0-D1-E1 is a pushout.
-   Flip it to D0-D1-E0-E1. Paste this square with P-D0-Q-E0, which is a pushout
-   by hypothesis. Pushout composition gives P-D1-Q-E1. All scalar towers used
-   in pasting follow from the commuting square; no finite presentation or
-   nonzero-ring hypothesis occurs.
--/
+is needed. -/
 theorem tensor_model_pushout_base_change
     (R : Type u) (S : Type v) (T : Type w) (A : Type x) (B : Type y)
     (P Q : Type z)

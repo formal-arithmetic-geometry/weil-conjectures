@@ -10,8 +10,13 @@ import all WeilConjectures.TraceFormula.QuotientTensor.QuotientTensorInsertion
 
 /-! # Multiplication on the strict quotient tower
 
-Source: Stacks 03CZ, 03EK, 06YY, 08TC and 0941; the strict quotient-cone argument
-of `lem-trf-isomorphism-multiplication-cone-descent`.
+Multiplication identifies the finite pullback tower along a scheme isomorphism with the inverse
+image of all strict quotients, naturally in good complexes
+(`isomorphismStrictQuotientMultiplication`).
+
+## References
+
+* Stacks Project, Tags 03CZ, 03EK, 06YY, 08TC, 0941
 -/
 
 @[expose] public noncomputable section
@@ -109,24 +114,7 @@ private def insertion_iso
       ((unrestrictedIntegralFiniteComplex l E Y n.unop).map f))
 
 /-- Multiplication identifies the actual finite pullback tower with inverse image of
-all strict quotients, naturally in good complexes, with its two unit-generator formulas.
-Source: Stacks 03CZ (lemma-adjointness-tensor-restrict), 03EK, and steps 3--4 of
-lem-trf-isomorphism-multiplication-cone-descent.
-(blueprint: lem-trf-isomorphism-strict-quotient-multiplication).
-
-Proof in words: identify inverse image under the site equivalence with postcomposition.
-At level n apply scalar extension along the finite coefficient isomorphism: multiplication
-is s tensor x to c_n inverse(s) times x, and its inverse is x to 1 tensor x. Tensor
-balancing proves both inverse identities. The completed coefficient projection equation
-proves completed linearity after restriction of scalars. These maps descend uniquely
-through module sheafification; equality is tested before sheafification on pure tensors.
-Naturality of c_n proves commutation with restrictions and differentials. For the actual
-transition, reduction sends s tensor x to reduction(s) tensor tau(x); the coefficient
-reduction square gives c_n inverse(reduction(s)) tau(x) =
-tau(c_(n+1) inverse(s) x). Thus the level isomorphisms assemble into a strict tower
-isomorphism. The same tensor calculation for any chain map proves naturality in Q.
-The canonical comma arrow identifies the unit generator with its postcomposed section,
-so multiplication and its inverse have precisely the two displayed section formulas. -/
+all strict quotients, naturally in good complexes, with its two unit-generator formulas. -/
 theorem isomorphismStrictQuotientMultiplication
     {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g] :
     ∃ (j : (integralOperationsGoodComplex l E Y).ι ⋙

@@ -17,9 +17,22 @@ import WeilConjectures.RingTheory.PopescuCoefficientInduction
 /-!
 # Rescaled parameters and Artinian coefficient lifts
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ, steps 10--13, 15
-and the coefficient quotient of step 25.
-(blueprint: lem-weil-pbc-popescu-coefficient-rescaling).
+The rescaled parameters of the positive characteristic case of the local resolution step in
+Popescu's theorem, with coefficient lifts in an essentially smooth Artinian coefficient ring.
+
+## Implementation details
+
+Polynomial representatives of a regular system of parameters are rescaled by Ogoma's lemma so
+that the first and square kernels agree modulo the preceding `(8 c)`-th powers. Inductively,
+faithfully flat ideal contraction and clearing denominators give `(s π_i)^(2N) = ∑_j μ_j a_j` in
+`Λ`, and Tag 07FI enlarges the coefficient ring. The result is transported to
+`Type (max u v)`. When `d = 0` both inductions are empty. This file does not form `H`, `R / H^n`
+or its polynomial quotient equivalence.
+
+## References
+
+* [Stacks, Tag 07FJ]
+* [Stacks, Tag 07FI]
 -/
 
 @[expose] public section
@@ -63,39 +76,7 @@ private theorem kernel_equiv
   exact hmain
 
 /-- Construct the rescaled parameters and their coefficient lifts, before forming the
-polynomial quotient chart. Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ
-(`lemma-resolve-general`), items `item-choose-pii`, `item-modify-pii`,
-`item-choose-deltai`, and `item-set-map-R`.
-(blueprint: lem-weil-pbc-popescu-coefficient-rescaling).
-
-Proof: Geometric regularity makes L regular. Smooth ascent makes P regular, and the
-flat local height formula, with closed fibre a field, gives the same dimension d for
-P localized at p₀. Choose polynomial representatives uP of a regular system of parameters.
-All their permutations are regular. On P[t], regular-sequence powers and Ogoma successively
-multiply uP_i by elements outside p₀ to equalize the first and square kernels modulo
-preceding (8c)-th powers. Such multiplication preserves parameter generation.
-The flat local map g₀ is faithfully flat, hence injective. Lift the finite generators of A
-to D₀; their relations vanish by injectivity, giving the retained A-map.
-Induct on i. Faithfully flat ideal contraction writes uP_i^N as sum a_j d_j in the
-current coefficient ring. Lift the d_j to L; write the error as sum a_j c'_j with
-c'_j in m_L^(n-N), n=N+d(8c). Multiplying by uP_i^N kills each correction modulo m_L^n
-and gives uP_i^(2N)=sum a_j w_j, with each w_j's residue in the coefficient ring.
-For a common denominator s₀ and v_j with w_j=v_j/s₀, choose s₁ outside q annihilating
-s₀ uP_i^(2N)-sum v_j a_j. Set s=s₀s₁ and mu_j=s^(2N-1)s₁v_j. Then
-(s uP_i)^(2N)=sum mu_j a_j in Λ and mu_j/s^(2N)=w_j in L.
-Use 07FI to include a positive power s^r in an essentially smooth coefficient enlargement;
-replace s by s^r and mu_j by s^(2N(r-1))mu_j. These preserve both identities.
-Apply Ogoma on Λ modulo the preceding rescaled parameter powers. Include a positive power
-of its clearing factor by 07FI; its product with s^r is tΛ_i. Rescale mu_j accordingly
-to obtain ell(i,j), the Λ kernel equality, and coefficient lifts. All earlier identities
-persist under the enlargement. Since g is local, the lifts of tΛ_i are units.
-The finite tower is essentially smooth over P_(p₀)/p₀^n and hence over B=P/p₀^n, by
-localization and composition. A smooth finite-presentation model over the small B and its
-fraction localization are small; transport to Type(max u v) along their algebra equivalence.
-Reindex the old and new variables using Fin(m₀+d) to obtain E, and define the displayed
-algebra structures by evaluation at tΛ and X_i↦uP_i t_i. When d=0 both inductions are empty;
-all parameter and coefficient families are empty and the source parameter ideal is zero.
-This theorem does not form H, R/H^n, or its polynomial quotient equivalence. -/
+polynomial quotient chart. -/
 theorem exists_popescu_coefficient_rescaling
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]

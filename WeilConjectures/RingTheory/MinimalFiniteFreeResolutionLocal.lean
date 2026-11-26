@@ -15,8 +15,20 @@ import WeilConjectures.RingTheory.MinimalizeBoundedFiniteFreeResolution
 /-!
 # Minimal finite free resolutions over a Noetherian local ring
 
-Source: Stacks Project, Algebra, Tags 0CXF and 00MT, as used in the proof of Tag 00OA
-(blueprint: lem-weil-pbc-minimal-finite-free-resolution-local).
+A finite module of finite projective dimension over a Noetherian local ring has a minimal finite
+free resolution of the same length.
+
+## Implementation details
+
+A finite projective module over a local ring is free. For `d ≥ 1`, the `d`-th syzygy of a finite
+free resolution is finite projective, hence free, giving a finite free resolution of length at
+most `d`. If a differential has a unit matrix entry, an identity summand `R → R` splits off;
+each removal decreases the sum of the ranks, so this terminates, and then all entries lie in the
+maximal ideal.
+
+## References
+
+* [Stacks, Tags 0CXF, 00MT] (as used in the proof of Tag 00OA)
 -/
 
 @[expose] public section
@@ -29,28 +41,7 @@ namespace ModuleCat
 
 /-- A finite module over a Noetherian local ring with a projective resolution of length
 at most `d` has a finite free resolution of length at most `d` whose positive-degree
-maps have image in the maximal ideal times the preceding module.
-Source: Stacks Project, Algebra, Tags 0CXF and 00MT, proof of Tag 00OA
-(blueprint: lem-weil-pbc-minimal-finite-free-resolution-local).
-
-Proof:
-1. When `d = 0`, the given resolution makes `M` projective. Since it is finite,
-   `proposition-projective-line-rational-coefficients--1` at the maximal ideal makes it
-   finite free: the localizing element outside that ideal is a unit.
-2. For `d ≥ 1`, choose an infinite finite free resolution using
-   `lem-weil-pbc-finite-free-resolution-noetherian`. Its `d`-th syzygy is projective by
-   `lem-weil-pbc-projective-resolution-kernel-projective` and the given length bound.
-   It is finite by `lem-weil-pbc-noetherian-submodule-finite`.
-3. Apply `proposition-projective-line-rational-coefficients--1` to that syzygy at the
-   maximal ideal, where localization at a unit does nothing. Substituting it as the
-   leftmost term gives a finite free resolution of length at most `d`.
-4. If a differential has a unit matrix entry, use
-   `lem-weil-pbc-free-complex-unit-entry-splits` to remove an identity summand
-   `R → R`. The augmentation annihilates that summand (also in degrees one and zero),
-   so it factors through the remaining complex, which stays exact.
-5. Each removal decreases the sum of the finite ranks. Thus cancellation terminates.
-   All remaining entries are nonunits, hence belong to the maximal ideal. This is
-   precisely the asserted image condition. -/
+maps have image in the maximal ideal times the preceding module. -/
 theorem exists_minimal_finite_free_resolution {R : Type u} [CommRing R]
     [IsNoetherianRing R] [IsLocalRing R] (M : ModuleCat.{max u v} R) [Module.Finite R M]
     (d : ℕ) (h : HasProjectiveResolutionLE M d) :

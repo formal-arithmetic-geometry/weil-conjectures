@@ -14,14 +14,18 @@ import WeilConjectures.TraceFormula.Specialization.NearbyDualityLocal
 
 # Nearby cycles commute with Verdier duality
 
-For a trait model `M` over the base, the duality map `δ_{M,K} : Ψ D_X K ⟶ D_{X'} Ψ K` built from
-the dualizing maps `θ` is an isomorphism (`NearbyCyclesModel.isIso_nearbyDualityMap`). Since the
-dualizing maps exist (`NearbyCyclesModel.nonempty_nearbyDualizingData`), nearby cycles commute
-with Verdier duality (`NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso`, blueprint
-`proposition-nearby-cycles-commute-verdier-duality`), in particular for the specialization to the
-normal cone of a rational point (`ProEtale.CondensedRing.nonempty_specialization_verdierDual_iso`),
-and the specialization of the universal kernel `K ⊠ D K` is the universal kernel of the
-specialization (`ProEtale.CondensedRing.nonempty_specializationProd_externalProduct_iso`).
+For a trait model `M` over the base, the duality map `δ_{M,K} : Ψ D_X K ⟶ D_{X'} Ψ K` built from the
+dualizing maps `θ` is an isomorphism (`NearbyCyclesModel.isIso_nearbyDualityMap`). Since the
+dualizing maps exist (`NearbyCyclesModel.nonempty_nearbyDualizingData`), nearby cycles commute with
+Verdier duality (`NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso`), in particular for the
+specialization to the normal cone of a rational point
+(`ProEtale.CondensedRing.nonempty_specialization_verdierDual_iso`), and the specialization of the
+universal kernel `K ⊠ D K` is the universal kernel of the specialization
+(`ProEtale.CondensedRing.nonempty_specializationProd_externalProduct_iso`).
+
+## References
+
+* Illusie, *Autour du théorème de monodromie locale*, Thm. 4.2.
 
 -/
 
@@ -71,17 +75,11 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
 
 variable (k') (x : RationalPoint X)
 
-/-- **Nearby cycles commute with Verdier duality** (Gabber; Illusie, *Autour du théorème de
-monodromie locale*, Thm. 4.2; blueprint `proposition-nearby-cycles-commute-verdier-duality`), for
-the specialization to the normal cone: `Sp_{X,x}(D_X K) ≅ D(Sp_{X,x} K)`. Here
-`Sp_{X,x} = Li^* Rj_* Lε^*` with `ε : X_Ω ⟶ X` the base change to the geometric
-generic point; the duality on the geometric generic fibre `X_Ω` is relative to `Ω`, and
-`Lε^* D_X ≅ D_{X_Ω} Lε^*` on bounded constructible complexes since `ε` is a base change of
-fields. This only asserts that some isomorphism exists, which is weaker than the node: the node
-asserts that the canonical map `δ_{X,M}`, the adjoint of `θ_X ∘ S_X ev ∘ μ_X`, is an
-isomorphism. It is the instance of `NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso` for
-the deformation model, whose geometric generic fibre is the base change of `X`
-(`ProEtale.CondensedRing.isPullback_deformationModel_ε`). -/
+/-- **Nearby cycles commute with Verdier duality** (Gabber), for the specialization to the normal
+cone: `Sp_{X,x}(D_X K) ≅ D(Sp_{X,x} K)`. Here `Sp_{X,x} = Li^* Rj_* Lε^*` with `ε : X_Ω ⟶ X` the
+base change to the geometric generic point; the duality on the geometric generic fibre `X_Ω` is
+relative to `Ω`. This only asserts that some isomorphism exists, not that the canonical map
+`δ_{X,M}`, the adjoint of `θ_X ∘ S_X ev ∘ μ_X`, is one. -/
 theorem nonempty_specialization_verdierDual_iso
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Nonempty ((specialization k' x).obj (verdierDual ℓ K) ≅
@@ -93,13 +91,9 @@ theorem nonempty_specialization_verdierDual_iso
         deformationTotalToBase_hom X _ k'⟩
       (isPullback_deformationModel_ε k' x.left.ker)) K
 
-/-- **Nearby cycles of the universal kernel**: the specialization of the universal kernel
-`K ⊠ D K` is the universal kernel of the specialization,
-`Ψ_{X×X}(K ⊠ D_X K) ≅ Ψ_X K ⊠ Ψ_X D_X K ≅ Ψ_X K ⊠ D Ψ_X K`, by Gabber's Künneth formula
-(`ProEtale.CondensedRing.isIso_specializationKunnethMap`, blueprint
-`proposition-external-kunneth-formula-nearby-cycles`) and the commutation of nearby cycles with
-Verdier duality (`ProEtale.CondensedRing.nonempty_specialization_verdierDual_iso`, blueprint
-`proposition-nearby-cycles-commute-verdier-duality`). -/
+/-- **Nearby cycles of the universal kernel**: the specialization of the universal kernel `K ⊠ D K`
+is the universal kernel of the specialization,
+`Ψ_{X×X}(K ⊠ D_X K) ≅ Ψ_X K ⊠ Ψ_X D_X K ≅ Ψ_X K ⊠ D Ψ_X K`. -/
 theorem nonempty_specializationProd_externalProduct_iso
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Nonempty ((specializationProd k' x).obj (externalProduct ℓ K (verdierDual ℓ K)) ≅

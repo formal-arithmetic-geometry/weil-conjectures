@@ -12,8 +12,19 @@ import WeilConjectures.SmoothPurity.Pullback.PullbackTensorCommonStageUnitCohere
 
 /-! # Units of the higher pullback tensor comparisons
 
-Source: Stacks Project, Tags 07A4 and 0941, and the recorded blueprint
-coefficient conventions.
+## Implementation details
+
+At the whole-system level inverse image sends the coefficient-ring unit to the coefficient-ring
+unit, and the multiplication maps on pure tensors give both unit equations. The reconstruction
+counit identifies the integral units and unitors with these system units and unitors; the
+system unit comparison is lifted along fully faithful coherent reduction, and uniqueness follows
+by cancelling the invertible comparison and unitor. The integral comparison is then localized
+to give the rational statement, and the common-stage statement is obtained by representing the
+units at a finite field via the scalar unit comparison.
+
+## References
+
+* [Stacks Project, Tags 03EL, 07A4 and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -49,30 +60,7 @@ variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- The prescribed higher tensor comparisons preserve the normalized tensor units.
-
-Source: recorded blueprint, derived-pullback-tensor-hom, completed structural diagrams
-and coefficient descent; Stacks 03EL, 07A4 and 0941.
-(blueprint: lem-pur-pullback-tensor-unit-coherence).
-
-Proof: At the whole-system level inverse image sends the coefficient-ring unit
-to the coefficient-ring unit. The multiplication maps on pure tensors show both
-left and right unit equations, including their quotient transitions. The actual
-reconstruction counit identifies the integral units and unitors with these system
-units and unitors. Lift the system unit comparison along fully faithful coherent
-reduction, conjugating by the tensor and unit reduction isomorphisms. Faithfulness
-gives both unit equations. Uniqueness follows by evaluating the left equation at
-the source unit and canceling the invertible comparison and unitor; tensoring with
-the target unit is faithful because its unitor is a natural isomorphism.
-Localize this integral comparison and the two equations. The normalized object
-formulas and bilinear arrow formulas give the prescribed rational equations;
-the same cancellation gives rational uniqueness. Finally, represent the source
-and target common-stage units at one finite field. The prescribed scalar unit
-comparison identifies them with rational units. Conjugate the rational pullback
-unit comparison by these identifications. Scalar compatibility makes its class
-independent of the finite field. Both common-stage unit equations are represented
-by the rational equations at a common larger field. To show uniqueness, apply the
-same left-unit cancellation in the common-stage category. -/
+/-- The prescribed higher tensor comparisons preserve the normalized tensor units. -/
 theorem pullbackTensorUnitCoherence {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :

@@ -7,10 +7,11 @@ module
 
 public import WeilConjectures.SmoothPurity.StrictQuotient.QuotientExpressionStrictKFlatTowers
 
-/-! K-flat finite models for strict quotient expressions.
+/-! # K-flat finite models for strict quotient expressions
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0G7E, 07A2 and 07A4
-(blueprint: lem-pur-quotient-expression-kflat-normalization).
+## References
+
+* Stacks Project, Tags 0G7E, 07A2 and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -30,11 +31,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The strict tower construction supplies the input models and K-flatness for every
 finite generated expression.  The `Generated` predicate is obtained by forgetting the
-constructor history of `Expression`.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 0G7E, 07A2 and 07A4;
-(blueprint: lem-pur-quotient-expression-kflat-normalization).
--/
+constructor history of `Expression`. -/
 theorem quotientExpressionKFlatModels
     {Z X Y : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y)
     (hlZ : ∀ x : Z, IsUnit (l : Z.residueField x))

@@ -14,14 +14,29 @@ import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.FibreRingNoetherian
 import WeilConjectures.RingTheory.GeometricRegularityFieldIso
 
+/-!
+# Forward implication of the G-ring criterion
+
+For primes `q ⊆ p` of a Noetherian G-ring `R`, the generic formal fibre of the completion of
+`(R ⧸ q)_p` is Noetherian and geometrically regular.
+
+## Implementation details
+
+The quotient `R ⧸ q` is a G-ring, and its formal fibre over the zero ideal is identified with
+the fibre over `q` using the residue-field isomorphism.
+
+## References
+
+* [Stacks, Tag 07PN] (forward half)
+-/
+
 @[expose] public section
 
 universe u
 
-/-- Forward implication in the G-ring criterion by pairs of primes. This is the forward
-half of Stacks Project, More on Algebra, Lemma 07PN, obtained by identifying each quotient
-formal fibre with the corresponding formal fibre of the localization completion.
-(blueprint: theorem-finite-etale-covers-proper-henselian--2) -/
+/-- Forward implication in the G-ring criterion by pairs of primes: for primes `q ⊆ p` of a
+G-ring `R`, the generic formal fibre of the completion of `(R ⧸ q)_p` is Noetherian and
+geometrically regular. -/
 theorem isGRing_pairsOfPrimes_forward (R : Type u) [CommRing R] [IsNoetherianRing R]
     (hR : IsGRing R) :
     ∀ (q p : Ideal R) [q.IsPrime] [p.IsPrime] (hqp : q ≤ p),

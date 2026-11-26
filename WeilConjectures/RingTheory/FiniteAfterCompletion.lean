@@ -20,8 +20,21 @@ import WeilConjectures.RingTheory.ExtendedCompletionModuleReduction
 /-!
 # Finite modules after completion
 
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 0394
-(blueprint: lem-weil-pbc-finite-after-completion).
+For a local homomorphism of local rings `R → S` whose maximal ideals are finitely generated and
+whose special fibre is finite-dimensional, the completion of `S` (at its maximal ideal) agrees
+with its completion at the extended maximal ideal and is finite over the completion of `R`.
+
+## Implementation details
+
+The special fibre is Artinian local, so the maximal ideal `n` of `S` is the only prime above
+`mS`, and `n ^ t ≤ mS` for some `t ≥ 1`; this yields the comparison isomorphism between the two
+completions. Regarding the completion `S'` as the completion of the `R`-module `S`, it is
+complete and separated for the extended ideal with the given finite-dimensional quotient, and
+finiteness over a complete ring finishes the proof.
+
+## References
+
+* [Stacks, Tag 0394]
 -/
 
 @[expose] public section
@@ -34,23 +47,6 @@ namespace AdicCompletion
 For a local homomorphism of local rings whose maximal ideals are finitely generated and whose
 special fibre is finite-dimensional, the completion of the target is the completion for the
 extended maximal ideal and is finite over the completion of the source.
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 0394
-(blueprint: lem-weil-pbc-finite-after-completion).
-Proof (following the seven steps of the node):
-1. The special fibre is Artinian by lem-weil-pbc-finite-dim-algebra-artinian and local;
-   lem-weil-pbc-artinian-local-unique-prime makes n the only prime above mS.
-2. By lem-weil-pbc-zero-locus-eq-iff-radical-eq its radical is n; then
-   lem-weil-pbc-fg-ideal-radical-power gives n^t ≤ mS for some t ≥ 1.
-3. The powers of mS are the extended powers of m. Together with mS ≤ n, this gives
-   the canonical comparison isomorphism by lem-weil-pbc-change-ideal-completion.
-4. Regard S' as the completion of the R-module S. Its canonical R-completion action
-   agrees, through γ and componentwise comparison, with the action through φhat.
-5. By lem-weil-pbc-module-completion-complete and lem-weil-pbc-adic-completion-mod-ideal,
-   S' and R-completion are complete, and their quotients modulo m are S/mS and R/m.
-6. Powers of the extended ideal act as powers of m. Thus S' is separated for that
-   ideal, and its quotient is the given finite-dimensional special fibre.
-7. Apply lem-weil-pbc-finite-over-complete-ring to S' over R-completion; transport
-   finite generation along the comparison isomorphism from step 4.
 -/
 theorem finite_after_completion
     (R : Type u) (S : Type v) [CommRing R] [CommRing S]

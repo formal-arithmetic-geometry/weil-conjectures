@@ -16,8 +16,21 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Internal-Hom fibers of normalized coefficient systems
 
-Source: Stacks 07A4, 08J9, 0A95 and 0941; semilinear finite-prefix adjunction
-(blueprint: lem-coef-normalized-internal-hom-fibers).
+We show that normalized reduction and quotient models give the local internal-Hom calculus of
+normalized coefficient systems.
+
+## Implementation details
+
+Preservation of internal composition follows from tensor associativity and the two closed
+adjunctions by uncurrying. A left adjoint to finite evaluation is built from the derived
+singleton extension, and the tensor projection lemma makes the mate of the evaluated closed
+adjunction invertible. The horizontal transition equation is obtained by uncurrying, so no
+comparison with a separately chosen internal-Hom model, global sections or total inverse limit
+is needed.
+
+## References
+
+* [Stacks, Tags 07A4, 08J9, 0A95, 0A98, 0941]
 -/
 
 @[expose] public section
@@ -33,9 +46,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- Preservation of internal composition for an evaluation-defined comparison.
-Source: Stacks 08J9, 0A98
-(blueprint: lem-coef-normalized-internal-hom-fibers). -/
+/-- Preservation of internal composition for an evaluation-defined comparison. -/
 def CoefficientInternalHomComposition
     {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]
     {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
@@ -51,9 +62,7 @@ def CoefficientInternalHomComposition
 
 attribute [local irreducible] CoefficientInternalHomComposition
 
-/-- The local Hom comparisons, without any global-sections data.
-Source: Stacks 08J9, 0A95 and 0941
-(blueprint: lem-coef-normalized-internal-hom-fibers). -/
+/-- The local Hom comparisons, without any global-sections data. -/
 structure CoefficientNormalizedInternalHomFibers
     (R : CoefficientDerivedSystemReduction l E W)
     (Q : CoefficientFiniteQuotientCalculus l E W R.toCoefficientDerivedSystemTensors) where
@@ -563,24 +572,7 @@ private theorem fiber_transition_of_evaluation
   rw [baseChange_source_target] at hh
   exact hh
 
-/-- Normalized reduction and quotient models give the local internal-Hom calculus.
-Source: Stacks, sites-cohomology.tex, Tags 07A4, 08J9, 0A95 and 0941;
-resolution-model construction, step 3
-(blueprint: lem-coef-normalized-internal-hom-fibers).
-
-Proof:
-The tensor associativity lemma and the two closed adjunctions imply preservation of
-internal composition: uncurry both sides and use associativity and naturality of
-evaluation. Construct a left adjoint to actual finite evaluation from the derived
-singleton extension, transported across the strict-system equivalence. The tensor
-projection lemma makes the mate of the evaluated closed adjunction invertible.
-This gives a natural fiber isomorphism with exactly the displayed evaluation equation.
-Finally uncurry the desired horizontal transition equation. Naturality of the actual
-transition, the tensor horizontal lemma and the fiber evaluation equations identify
-its two sides. Transpose back and cancel the normalized source transition. Thus no
-comparison with a separately chosen internal-Hom model, global sections or total
-inverse limit is needed. The three remaining model arguments are separate tensor
-lemmas; all closed-category and adjunction calculations here are proved. -/
+/-- Normalized reduction and quotient models give the local internal-Hom calculus. -/
 theorem coefficientNormalizedInternalHomFibers
     (R : CoefficientDerivedSystemReduction l E W)
     (hT : CoefficientDerivedSystemTensorCoherence l E W R.toCoefficientDerivedSystemTensors)

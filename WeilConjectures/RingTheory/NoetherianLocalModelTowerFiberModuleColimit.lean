@@ -12,14 +12,20 @@ import Mathlib.Algebra.Module.TransferInstance
 
 /-! # The module colimit of the explicit closed-fibre system
 
-Source: Stacks Project, Algebra, Tag 00R7, proof by Noetherian approximation.
-(blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit)
+The colimit of the closed-fibre modules `N_i / m_i N_i` of a Noetherian local model tower is the
+closed fibre of the limit module, with a compatible scalar action.
 
-The image union of stage ideal-times-module submodules constructs the limit
-submodule. Stage representatives and eventual equality prove the quotient group
-cocone colimiting. Tensor-quotient equivalences construct its additive comparison.
-The top quotient tensor action is transported across these proved equivalences;
-formulas on representatives prove semilinearity and compatibility with fiberPsi.
+## Implementation details
+
+The images of the stage submodules `m_i N_i` give `m_R M`. Stage representatives and eventual
+equality prove the quotient group cocone colimiting, and tensor-quotient equivalences give its
+additive comparison. The top quotient tensor action is transported across these equivalences;
+formulas on representatives prove semilinearity and compatibility with `fiberψ`. No flatness,
+`tlimit_surj` or `tlimit_eq` is used.
+
+## References
+
+* [Stacks, Tag 00R7] (proof by Noetherian approximation)
 -/
 
 @[expose] public section
@@ -88,7 +94,7 @@ attribute [local instance] Module.NoetherianLocalModelTower.preorder
   Module.NoetherianLocalModelTower.towerSTN
 
 omit [IsLocalRing R] [IsScalarTower S S' M] in
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The module transitions are semilinear over the middle-ring transitions. -/
 theorem nmap_smulS (i j : X.ι) (h : i ≤ j) (a : X.S₀ i) (x : X.N₀ i) :
     X.nmap i j h (a • x) = X.smap i j h a • X.nmap i j h x := by
   rw [← algebraMap_smul (X.T₀ i) a x, X.nmap_smul]
@@ -98,7 +104,7 @@ theorem nmap_smulS (i j : X.ι) (h : i ≤ j) (a : X.S₀ i) (x : X.N₀ i) :
   rw [he, algebraMap_smul]
 
 omit [IsLocalRing R] in
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The maps to the limit module are semilinear over the middle-ring limit maps. -/
 theorem nlimit_smulS (i : X.ι) (a : X.S₀ i) (x : X.N₀ i) :
     X.nlimit i (a • x) = algebraMap (X.S₀ i) S a • X.nlimit i x := by
   rw [← algebraMap_smul (X.T₀ i) a x, X.nlimit_smul]
@@ -107,16 +113,16 @@ theorem nlimit_smulS (i : X.ι) (a : X.S₀ i) (x : X.N₀ i) :
     algebraMap S S' (algebraMap (X.S₀ i) S a) at he
   rw [he, algebraMap_smul]
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The submodule `m_i N_i` of the stage module, for the stage closed-fibre ideal of `S_i`. -/
 abbrev FiberSubmoduleS (i : X.ι) : Submodule (X.S₀ i) (X.N₀ i) :=
   X.fiberIdealS i • ⊤
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The submodule `m_R M` of the limit module. -/
 abbrev FiberSubmoduleLimitS : Submodule S M :=
   Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R) • ⊤
 
 omit [IsLocalRing R] [IsScalarTower S S' M] in
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- Module transitions map `m_i N_i` into `m_j N_j`. -/
 theorem fiberSubmoduleS_transition (i j : X.ι) (h : i ≤ j) (x : X.N₀ i)
     (hx : x ∈ X.FiberSubmoduleS i) : X.nmap i j h x ∈ X.FiberSubmoduleS j := by
   refine Submodule.smul_induction_on hx ?_ ?_
@@ -127,7 +133,7 @@ theorem fiberSubmoduleS_transition (i j : X.ι) (h : i ≤ j) (x : X.N₀ i)
     rw [map_add]
     exact Submodule.add_mem _ ha hb
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The maps to the limit send `m_i N_i` into `m_R M`. -/
 theorem fiberSubmoduleS_limit (i : X.ι) (x : X.N₀ i)
     (hx : x ∈ X.FiberSubmoduleS i) : X.nlimit i x ∈
       FiberSubmoduleLimitS (R := R) (S := S) (M := M) := by
@@ -139,7 +145,7 @@ theorem fiberSubmoduleS_limit (i : X.ι) (x : X.N₀ i)
     rw [map_add]
     exact Submodule.add_mem _ ha hb
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- Every element of `m_R M` comes from an element of some `m_i N_i`. -/
 theorem fiberSubmoduleS_limit_rep (m : M)
     (hm : m ∈ FiberSubmoduleLimitS (R := R) (S := S) (M := M)) :
     ∃ i n, n ∈ X.FiberSubmoduleS i ∧ X.nlimit i n = m := by
@@ -159,7 +165,7 @@ theorem fiberSubmoduleS_limit_rep (m : M)
       ((DFunLike.congr_fun (X.nlimit_comm j k hjk) x).trans hx)
   exact hJ hm
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- A stage element whose image lies in `m_R M` lies in `m_j N_j` at a later stage. -/
 theorem fiberN_eventual_zero (i : X.ι) (n : X.N₀ i)
     (hn : X.nlimit i n ∈ FiberSubmoduleLimitS (R := R) (S := S) (M := M)) :
     ∃ j h, X.nmap i j h n ∈ X.FiberSubmoduleS j := by
@@ -175,14 +181,14 @@ theorem fiberN_eventual_zero (i : X.ι) (n : X.N₀ i)
   rw [← hl] at hmem
   simpa only [X.nSystem.map_map] using hmem
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The stage closed-fibre module `D_i` is additively equivalent to `N_i / m_i N_i`. -/
 noncomputable def fiberDQuotEquiv (i : X.ι) :
     X.fiberD.obj i ≃+ X.N₀ i ⧸ X.FiberSubmoduleS i :=
   (X.fiberDEquiv i).trans
     (TensorProduct.quotTensorEquivQuotSMul (X.N₀ i) (X.fiberIdealS i)).toAddEquiv
 
 omit [IsLocalRing R] [IsScalarTower S S' M] in
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The formula for `fiberDQuotEquiv` on pure tensors. -/
 theorem fiberDQuotEquiv_tmul (i : X.ι) (a : X.T₀ i) (n : X.N₀ i) :
     X.fiberDQuotEquiv i (ULift.up (Ideal.Quotient.mk _ a ⊗ₜ[X.T₀ i] n)) =
       Submodule.Quotient.mk (a • n) := by
@@ -190,39 +196,39 @@ theorem fiberDQuotEquiv_tmul (i : X.ι) (a : X.T₀ i) (n : X.N₀ i) :
   rfl
 
 omit [IsLocalRing R] [IsScalarTower S S' M] in
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The inverse of `fiberDQuotEquiv` sends the class of `n` to `1 ⊗ n`. -/
 theorem fiberDQuotEquiv_symm_mk (i : X.ι) (n : X.N₀ i) :
     (X.fiberDQuotEquiv i).symm (Submodule.Quotient.mk n) =
       ULift.up (1 ⊗ₜ[X.T₀ i] n) := by
   apply (X.fiberDQuotEquiv i).injective
   simpa using (X.fiberDQuotEquiv_tmul i 1 n).symm
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The map from a stage module to the limit module, as a semilinear map over `S_i → S`. -/
 def nlimitSLinear (i : X.ι) : X.N₀ i →ₛₗ[algebraMap (X.S₀ i) S] M where
   toAddHom := X.nlimit i
   map_smul' := X.nlimit_smulS i
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The additive map from the stage closed-fibre module `D_i` to `M / m_R M`. -/
 noncomputable def fiberDLimit (i : X.ι) :
     X.fiberD.obj i →+ M ⧸ FiberSubmoduleLimitS (R := R) (S := S) (M := M) :=
   ((X.FiberSubmoduleS i).mapQ
     (FiberSubmoduleLimitS (R := R) (S := S) (M := M)) (X.nlimitSLinear i)
     (X.fiberSubmoduleS_limit i)).toAddMonoidHom.comp (X.fiberDQuotEquiv i).toAddMonoidHom
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The formula for `fiberDLimit` on pure tensors. -/
 theorem fiberDLimit_tmul (i : X.ι) (a : X.T₀ i) (n : X.N₀ i) :
     X.fiberDLimit i (ULift.up (Ideal.Quotient.mk _ a ⊗ₜ[X.T₀ i] n)) =
       Submodule.Quotient.mk (X.nlimit i (a • n)) := by
   simp [fiberDLimit, X.fiberDQuotEquiv_tmul, nlimitSLinear]
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The formula for `fiberDLimit` on classes of stage module elements. -/
 theorem fiberDLimit_mk (i : X.ι) (n : X.N₀ i) :
     X.fiberDLimit i ((X.fiberDQuotEquiv i).symm (Submodule.Quotient.mk n)) =
       Submodule.Quotient.mk (X.nlimit i n) := by
   simp [fiberDLimit, nlimitSLinear]
 
 omit [IsLocalRing R] [IsScalarTower S S' M] in
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The closed-fibre module transitions act on quotient classes as the module transitions. -/
 theorem fiberDQuotEquiv_map_mk (i j : X.ι) (h : i ≤ j) (n : X.N₀ i) :
     X.fiberDQuotEquiv j ((X.fiberD.map (homOfLE h)).hom
       ((X.fiberDQuotEquiv i).symm (Submodule.Quotient.mk n))) =
@@ -232,7 +238,7 @@ theorem fiberDQuotEquiv_map_mk (i j : X.ι) (h : i ≤ j) (n : X.N₀ i) :
   rw [X.fiberNMap_tmul, map_one]
   simpa using X.fiberDQuotEquiv_tmul j 1 (X.nmap i j h n)
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The maps `fiberDLimit` are compatible with the closed-fibre module transitions. -/
 theorem fiberDLimit_naturality (i j : X.ι) (f : i ⟶ j) :
     (X.fiberDLimit j).comp (X.fiberD.map f).hom = X.fiberDLimit i := by
   apply AddMonoidHom.ext
@@ -247,7 +253,7 @@ theorem fiberDLimit_naturality (i j : X.ι) (f : i ⟶ j) :
   exact congrArg Submodule.Quotient.mk (DFunLike.congr_fun
     (X.nlimit_comm i j (leOfHom f)) n)
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The cocone of additive groups from the closed-fibre module system to `M / m_R M`. -/
 noncomputable def fiberDCocone : Cocone X.fiberD where
   pt := AddCommGrpCat.of (ULift.{max u v w t}
     (M ⧸ FiberSubmoduleLimitS (R := R) (S := S) (M := M)))
@@ -261,7 +267,7 @@ noncomputable def fiberDCocone : Cocone X.fiberD where
       intro x
       exact congrArg ULift.up (DFunLike.congr_fun (X.fiberDLimit_naturality i j f) x) }
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The cocone `fiberDCocone` is a colimit. -/
 noncomputable def fiberDCoconeIsColimit : IsColimit X.fiberDCocone := by
   let : PreservesColimit X.fiberD (forget AddCommGrpCat) :=
     preservesColimit_of_preserves_colimit_cocone
@@ -306,14 +312,15 @@ noncomputable def fiberDCoconeIsColimit : IsColimit X.fiberDCocone := by
     apply (Submodule.Quotient.eq _).mpr
     simpa only [map_sub] using hj
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The colimit of the closed-fibre module system is additively equivalent to `M / m_R M`. -/
 noncomputable def fiberDQuotLimitEquiv :
     (colimit X.fiberD : AddCommGrpCat.{max u v w t}) ≃+
       M ⧸ FiberSubmoduleLimitS (R := R) (S := S) (M := M) :=
   ((colimit.isColimit X.fiberD).coconePointUniqueUpToIso
     X.fiberDCoconeIsColimit).addCommGroupIsoToAddEquiv.trans AddEquiv.ulift
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The colimit of the closed-fibre module system is additively equivalent to
+`(S / m_R S) ⊗[S] M`. -/
 noncomputable def fiberDLimitEquiv :
     (colimit X.fiberD : AddCommGrpCat.{max u v w t}) ≃+
       (FiberLimitS (R := R) (S := S) ⊗[S] M) :=
@@ -321,15 +328,15 @@ noncomputable def fiberDLimitEquiv :
     (TensorProduct.quotTensorEquivQuotSMul M
       (Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R))).symm.toAddEquiv
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The extension `m_R S'` of the maximal ideal of `R` to `S'`. -/
 abbrev FiberIdealLimitT : Ideal S' :=
   (Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R)).map (algebraMap S S')
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The closed fibre `S' / m_R S'` of the top limit ring. -/
 abbrev FiberLimitT := S' ⧸ FiberIdealLimitT (R := R) (S := S) (S' := S')
 
 omit [IsScalarTower S S' M] in
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The stage top-ring closed-fibre ideal maps into `m_R S'`. -/
 theorem fiberIdealT_limit (i : X.ι) :
     X.fiberIdealT i ≤
       (FiberIdealLimitT (R := R) (S := S) (S' := S')).comap
@@ -346,11 +353,11 @@ theorem fiberIdealT_limit (i : X.ι) :
   rw [h, ← Ideal.map_map]
   exact Ideal.map_mono (IsLocalRing.map_maximalIdeal_le (algebraMap (X.R₀ i) R))
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The ring map from the stage top closed fibre to `S' / m_R S'`. -/
 def fiberTLimit (i : X.ι) : X.FiberT i →+* FiberLimitT (R := R) (S := S) (S' := S') :=
   Ideal.quotientMap _ (algebraMap (X.T₀ i) S') (X.fiberIdealT_limit i)
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The ring cocone from the top closed-fibre system to `S' / m_R S'`. -/
 def fiberBCocone : Cocone X.fiberB where
   pt := CommRingCat.of (ULift.{max u v w} (FiberLimitT (R := R) (S := S) (S' := S')))
   ι := {
@@ -367,19 +374,19 @@ def fiberBCocone : Cocone X.fiberB where
       exact congrArg (fun s ↦ ULift.up (Ideal.Quotient.mk _ s))
         (RingHom.congr_fun (X.tlimit_comm i j (leOfHom f)) a) }
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The ring map from the colimit of the top closed-fibre system to `S' / m_R S'`. -/
 noncomputable def fiberBDesc : (colimit X.fiberB : CommRingCat.{max u v w}) →+*
     FiberLimitT (R := R) (S := S) (S' := S') :=
   ULift.ringEquiv.toRingHom.comp (colimit.desc X.fiberB X.fiberBCocone).hom
 
 omit [IsScalarTower S S' M] in
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- `fiberBDesc` restricts to `fiberTLimit` on each stage. -/
 theorem fiberBDesc_ι (i : X.ι) (b : X.FiberT i) :
     X.fiberBDesc ((colimit.ι X.fiberB i).hom b) = X.fiberTLimit i b := by
   exact congrArg ULift.down
     (ConcreteCategory.congr_hom (colimit.ι_desc X.fiberBCocone i) b)
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The `S`-linear equivalence `(S' / m_R S') ⊗[S'] M ≃ M / m_R M`. -/
 noncomputable def fiberLimitTQuotEquiv :
     (FiberLimitT (R := R) (S := S) (S' := S') ⊗[S'] M) ≃ₗ[S]
       M ⧸ FiberSubmoduleLimitS (R := R) (S := S) (M := M) :=
@@ -391,7 +398,7 @@ noncomputable def fiberLimitTQuotEquiv :
       (Submodule.quotEquivOfEq _ _ (by
         rw [FiberIdealLimitT, Ideal.smul_restrictScalars, Submodule.restrictScalars_top])))
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The formula for `fiberLimitTQuotEquiv` on pure tensors. -/
 theorem fiberLimitTQuotEquiv_tmul (a : S') (m : M) :
     fiberLimitTQuotEquiv (R := R) (S := S) (S' := S')
       (Ideal.Quotient.mk _ a ⊗ₜ[S'] m) = Submodule.Quotient.mk (a • m) := by
@@ -399,19 +406,21 @@ theorem fiberLimitTQuotEquiv_tmul (a : S') (m : M) :
   rfl
 
 omit [IsScalarTower S S' M] in
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- `fiberAEquiv` restricts to `fiberSLimit` on each stage. -/
 theorem fiberAEquiv_ι (i : X.ι) (a : X.FiberS i) :
     X.fiberAEquiv ((colimit.ι X.fiberA i).hom a) = X.fiberSLimit i a := by
   exact congrArg ULift.down (ConcreteCategory.congr_hom
     (colimit.isoColimitCocone_ι_hom ⟨X.fiberSCocone, X.fiberSCoconeIsColimit⟩ i) a)
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- `fiberDQuotLimitEquiv` restricts to `fiberDLimit` on each stage. -/
 theorem fiberDQuotLimitEquiv_ι (i : X.ι) (x : X.fiberD.obj i) :
     X.fiberDQuotLimitEquiv ((colimit.ι X.fiberD i).hom x) = X.fiberDLimit i x := by
   exact congrArg ULift.down (ConcreteCategory.congr_hom
     (colimit.isoColimitCocone_ι_hom ⟨X.fiberDCocone, X.fiberDCoconeIsColimit⟩ i) x)
 
-/-- (blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit) -/
+/-- The colimit of the closed-fibre module system carries an action of the colimit of the top
+closed-fibre rings with semilinear coprojections, compatible with the closed-fibre action
+through `fiberDLimitEquiv`. -/
 theorem exists_limit_action :
     letI := X.fiberAct
     ∃ act : Module (colimit X.fiberB : CommRingCat.{max u v w})
@@ -502,48 +511,9 @@ end Module.NoetherianLocalModelTower
 
 namespace Module
 
-/-- The module colimit of the explicit closed-fibre system, with its scalar action.
-
-Source: Stacks Project, Algebra, Tag 00R7, quotient systems before the second use of 00R6.
-(blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-module-colimit)
-
-Proof: First derive S_i-semilinearity of nmap and nlimit from their T_i
-semilinearity and the commuting middle-to-top squares. The images of the
-submodules m_i N_i form an S-submodule of M: move summands and scalars to a
-common stage using directedness and slimit_surj. It contains m_R M: the proved
-fiberIdealS_limit_rep represents each coefficient in m_R S at a stage, and
-nlimit_surj represents each module element. Thus every element of m_R M has
-a stage representative in m_i N_i. Using nlimit_eq at a further stage proves
-that a stage element killed in M/m_R M is killed in its later stage quotient.
-
-Identify each fiberD_i with N_i/m_i N_i using fiberDEquiv and
-quotTensorEquivQuotSMul. Descend nlimit to an additive map from this quotient
-to M/m_R M. Its formula on pure tensors and the original nlimit_comm make
-these maps a cocone. Surjectivity follows from nlimit_surj. The eventual-zero
-result, applied to differences, proves eventual equality. The types filtered
-colimit criterion and reflection by forget AddCommGrpCat identify this cocone
-as a group colimit. Compose the colimit comparison with the inverse of
-quotTensorEquivQuotSMul for S/m_R S to construct fiberDLimitEquiv.
-
-Construct the ring cocone from fiberB to S'/m_R S' by descending its limit
-maps, and let fiberBDesc be its universal ring homomorphism from colimit B.
-No assertion that this ring cocone is a colimit is needed. The equivalence
-between the top quotient tensor module and M/m_R M follows by restricting
-the top ideal-times-module quotient to S and using Ideal.smul_restrictScalars.
-Transport its module action to M/m_R M, restrict along fiberBDesc, and transport
-across the proved additive colimit comparison to define the required action.
-The quotient formula mk(b) acting on mk(m) equals mk(b acting on m); applying
-it to pure tensors proves coprojection semilinearity using nlimit_smul.
-
-Finally represent any colimit-A scalar at a stage and any quotient module
-element by an element of M. The coprojection formula for fiberPsi and
-st_limit_comm identify its image under fiberBDesc with the image of the
-canonical fiberAEquiv in the top quotient. The quotient action formula,
-algebraMap_smul, and S-linearity of the tensor-quotient equivalence give the
-asserted scalar compatibility. Package this action and fiberDLimitEquiv.
-All data are explicit or obtained from a proved universal property; no
-flatness, tlimit_surj or tlimit_eq is used.
--/
+/-- The colimit of the explicit closed-fibre module system is additively equivalent to the
+closed fibre `(S / m_R S) ⊗[S] M`, with a scalar action of the colimit of the top closed-fibre
+rings that makes the coprojections semilinear and is compatible with the closed-fibre action. -/
 theorem NoetherianLocalModelTower.fiber_module_colimit
     {R : Type u} {S : Type v} {S' : Type w} {M : Type t}
     [CommRing R] [CommRing S] [CommRing S'] [IsLocalRing R] [AddCommGroup M]

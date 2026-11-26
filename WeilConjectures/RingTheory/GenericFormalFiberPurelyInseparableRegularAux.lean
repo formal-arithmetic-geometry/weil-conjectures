@@ -20,10 +20,13 @@ import WeilConjectures.RingTheory.CompletionRegularLocal
 /-!
 # Regularity of the generic formal fibre in field and Cohen models
 
-Source: Stacks Project, More on Algebra, Proposition Tag 07PS, last two paragraphs,
-and Lemma Tag 07PR in positive characteristic.
-(blueprint: new-lem-generic-formal-fibre-purely-inseparable-regular-field)
-(blueprint: new-lem-generic-formal-fibre-purely-inseparable-regular-cohen)
+Every finite purely inseparable base change of the generic formal fibre is regular, both when
+the complete regular local ring is a power series ring over a field and over a Cohen ring.
+
+## References
+
+* [Stacks, Tag 07PS]
+* [Stacks, Tag 07PR]
 -/
 
 @[expose] public section
@@ -192,10 +195,7 @@ private theorem cohen_charZero (Λ : Type u) [CommRing Λ] (p : ℕ)
       exact Ideal.mem_span_singleton_self _
     exact (IsLocalRing.mem_maximalIdeal _).mp hmem hunit
 
-/-- Regularity of the purely inseparable tensor product in the field-model case.
-Source: Stacks Project, More on Algebra, Proposition 07PS, last two paragraphs.
-This is the field-model branch of the generic formal fibre argument.
-(blueprint: new-lem-generic-formal-fibre-purely-inseparable-regular-field) -/
+/-- Regularity of the purely inseparable tensor product in the field-model case. -/
 theorem isRegular_genericFormalFiber_fieldModel
     (A : Type u) [CommRing A] [IsDomain A] [IsRegularLocalRing A]
     (k : Type u) [Field k] (d : ℕ)
@@ -233,10 +233,7 @@ theorem isRegular_genericFormalFiber_fieldModel
       (f := e.symm.toRingHom) e.symm.injective
     exact regular_genericFiber_charZero A P k'
 
-/-- Regularity of the purely inseparable tensor product in the Cohen-model case.
-Source: Stacks Project, More on Algebra, Proposition 07PS, last two paragraphs.
-This is the Cohen-model branch of the generic formal fibre argument.
-(blueprint: new-lem-generic-formal-fibre-purely-inseparable-regular-cohen) -/
+/-- Regularity of the purely inseparable tensor product in the Cohen-model case. -/
 theorem isRegular_genericFormalFiber_cohenModel
     (A : Type u) [CommRing A] [IsDomain A] [IsRegularLocalRing A]
     (Λ : Type u) [CommRing Λ] (d p : ℕ)

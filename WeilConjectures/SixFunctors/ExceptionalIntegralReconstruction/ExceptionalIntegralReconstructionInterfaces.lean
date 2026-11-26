@@ -32,13 +32,19 @@ public import WeilConjectures.SmoothPurity.ConstructibleExceptionalCoefficients.
 
 /-! # Integral reconstruction of the exceptional adjunction
 
-Source: Zheng, Propositions 2.23, 2.29, 3.16, Lemma 5.22 and Proposition 5.24;
-blueprint exceptional inverse-image construction, integral steps 10--12
-(blueprint: def-sf-exceptional-integral-reconstruction-interfaces).
+This file sets up the interfaces for the integral reconstruction of the exceptional adjunction:
+normalized coefficient systems, reconstructions, exceptional systems, their adjunction and its
+realization by integral operations.
 
 All systems below are strict systems. Level n is the positive exponent n+1.
 The full normalized category imposes common cohomological and Tor bounds, without
 adding a compatible-origin witness to its definition.
+
+## References
+
+* [Zheng, Propositions 2.23, 2.29, 3.16, 4.1, 4.10, 5.15, Lemma 5.22, Proposition 5.24,
+  Construction 5.25]
+* [Stacks, Tag 014E], [Stacks, Tag 099R], [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -62,9 +68,7 @@ open IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The inherited triangulated structure on the recorded integral finite-Tor predicate.
-Source: blueprint integral finite-Tor paragraph
-(blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- The inherited triangulated structure on the recorded integral finite-Tor predicate. -/
 instance integralTriangulated (T : Scheme.{u}) :
     (finiteTorConstructibleIntegral l E T).IsTriangulated :=
   ConstructibleExceptionalCoefficients.integralTriangulated l { carrier := E } T
@@ -72,20 +76,17 @@ instance integralTriangulated (T : Scheme.{u}) :
 attribute [-instance] integralTriangulated
 attribute [local instance] integralTriangulated
 
-/-- The full normalized finite-Tor system category, with common bounds at all levels.
-Source: Zheng 4.1, 5.22 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- The full normalized finite-Tor system category, with common bounds at all levels. -/
 def normalized (T : Scheme.{u}) : ObjectProperty (System l E T) := fun N ↦
   IsNormalizedCoefficientSequence l E T N ∧ LevelBounds l E T N
 
-/-- Change only the quotient-ring coordinates of actual strict systems.
-Source: Zheng 4.1 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- Change only the quotient-ring coordinates of actual strict systems. -/
 def coordinates (T : Scheme.{u}) :=
   letI : (integralExceptionalCoordinates l E T).asEquivalence.functor.Additive :=
     inferInstanceAs (integralExceptionalCoordinates l E T).Additive
   (integralExceptionalCoordinates l E T).asEquivalence.mapDerivedCategory
 
-/-- The localized termwise shift on the quotient coordinate equivalence.
-Source: Stacks 014E (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- The localized termwise shift on the quotient coordinate equivalence. -/
 instance coordinateShift (T : Scheme.{u}) :
     (coordinates l E T).functor.CommShift ℤ := by
   letI : (integralExceptionalCoordinates l E T).asEquivalence.functor.Additive :=
@@ -96,8 +97,7 @@ instance coordinateShift (T : Scheme.{u}) :
 attribute [-instance] coordinateShift
 attribute [local instance] coordinateShift
 
-/-- The localized termwise shift on the inverse quotient coordinate equivalence.
-Source: Stacks 014E (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- The localized termwise shift on the inverse quotient coordinate equivalence. -/
 instance coordinateInverseShift (T : Scheme.{u}) :
     (coordinates l E T).inverse.CommShift ℤ := by
   letI : (integralExceptionalCoordinates l E T).asEquivalence.functor.Additive :=
@@ -109,8 +109,7 @@ attribute [-instance] coordinateInverseShift
 attribute [local instance] coordinateInverseShift
 
 /-- The restriction of the actual reduction/total-limit adjunction. The two comparison
-isomorphisms and their unit/counit equations fix its maps before finite evaluation.
-Source: Zheng 4.1, 5.22 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+isomorphisms and their unit/counit equations fix its maps before finite evaluation. -/
 structure Reconstruction (T : Scheme.{u}) where
   coherence : CoefficientDerivedSystemCoherence l E T (calculus l E T)
   equivalence : finiteTorConstructibleIntegralCategory l E T ≌
@@ -137,8 +136,7 @@ structure Reconstruction (T : Scheme.{u}) where
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
 /-- The specified ordinary-etale system adjunction and its actual pro-etale transport.
-These are conclusions of reconstruction, not additional hypotheses on the schemes.
-Source: Zheng 5.22, 5.24 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+These are conclusions of reconstruction, not additional hypotheses on the schemes. -/
 structure Systems where
   ordinary : StrictEtaleCompactSupport (integralExceptionalIntegers l E)
     (integralExceptionalUniformizer l E) c
@@ -151,21 +149,17 @@ structure Systems where
   comparison : ExceptionalSystemCompactificationComparison ordinary siteX siteY siteZ properOpen
   transport : ExceptionalSystemTransport right siteX siteY siteZ properOpen comparison
 
-/-- The actual proper/open word in the coefficient calculus coordinates.
-Source: Zheng 5.15, 5.22 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- The actual proper/open word in the coefficient calculus coordinates. -/
 def Systems.left (s : Systems l E c) : System l E X ⥤ System l E Y :=
   (coordinates l E X).functor ⋙ exceptionalProSupport s.properOpen ⋙
     (coordinates l E Y).inverse
 
-/-- The transported ordinary-etale exceptional functor on the same strict systems.
-Source: Zheng 5.22 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- The transported ordinary-etale exceptional functor on the same strict systems. -/
 def Systems.exceptional (s : Systems l E c) : System l E Y ⥤ System l E X :=
   (coordinates l E Y).functor ⋙ exceptionalSystemRight s.right s.siteX s.siteY ⋙
     (coordinates l E X).inverse
 
-/-- The shift transported from the specified proper/open system construction.
-Source: Zheng 5.22; blueprint integral step 12
-(blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- The shift transported from the specified proper/open system construction. -/
 instance systemLeftShift (s : Systems l E c) : (s.left l E c).CommShift ℤ :=
   letI := s.transport.val.leftShift
   inferInstanceAs (((coordinates l E X).functor ⋙ exceptionalProSupport s.properOpen ⋙
@@ -174,9 +168,7 @@ instance systemLeftShift (s : Systems l E c) : (s.left l E c).CommShift ℤ :=
 attribute [-instance] systemLeftShift
 attribute [local instance] systemLeftShift
 
-/-- The shift transported from the specified ordinary-etale right adjoint.
-Source: Zheng 5.22; blueprint integral step 12
-(blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- The shift transported from the specified ordinary-etale right adjoint. -/
 instance systemRightShift (s : Systems l E c) :
     (s.exceptional l E c).CommShift ℤ :=
   letI := s.transport.val.rightShift
@@ -189,8 +181,7 @@ attribute [local instance] systemRightShift
 
 /-- Preservation and the normalized whole-system Hom chain. The transpose equation
 is the transport equation, followed by the canonical coordinate counits; it fixes
-both adjunction maps on whole systems, without a faithfulness assumption on evaluation.
-Source: Zheng 5.22, 5.24 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+both adjunction maps on whole systems, without a faithfulness assumption on evaluation. -/
 structure SystemAdjunction (s : Systems l E c) where
   leftStable : ∀ N, normalized l E X N → normalized l E Y (s.left l E c |>.obj N)
   rightStable : ∀ N, normalized l E Y N → normalized l E X (s.exceptional l E c |>.obj N)
@@ -224,9 +215,7 @@ structure SystemAdjunction (s : Systems l E c) where
                 (coordinates l E Y).functor.map h.hom)))
 
 /-- Retain the normalized adjunction while choosing transport shifts on the same
-ordinary, site and proper/open data. Every field is copied from the given adjunction.
-Source: the definition of SystemAdjunction, which uses no transport shift field.
-(blueprint: def-sf-exceptional-integral-reconstruction-interfaces). -/
+ordinary, site and proper/open data. Every field is copied from the given adjunction. -/
 def SystemAdjunction.withTransport (s : Systems l E c) (a : SystemAdjunction l E c s)
     (t : ExceptionalSystemTransport s.right s.siteX s.siteY s.siteZ
       s.properOpen s.comparison) :
@@ -238,41 +227,35 @@ def SystemAdjunction.withTransport (s : Systems l E c) (a : SystemAdjunction l E
   originY := a.originY
   transpose := a.transpose
 
-/-- The literal restriction of the actual system left functor.
-Source: Zheng 5.22 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- The literal restriction of the actual system left functor. -/
 def SystemAdjunction.F (s : Systems l E c) (a : SystemAdjunction l E c s) :=
   (normalized l E Y).lift ((normalized l E X).ι ⋙ s.left l E c)
     (fun N ↦ a.leftStable N.obj N.property)
 
-/-- The literal restriction of the actual system right functor.
-Source: Zheng 5.22 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- The literal restriction of the actual system right functor. -/
 def SystemAdjunction.G (s : Systems l E c) (a : SystemAdjunction l E c s) :=
   (normalized l E X).lift ((normalized l E Y).ι ⋙ s.exceptional l E c)
     (fun N ↦ a.rightStable N.obj N.property)
 
-/-- Integral left operation: total limit of the proper/open operation on reductions.
-Source: Zheng 5.25 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- Integral left operation: total limit of the proper/open operation on reductions. -/
 def integralLeft (rX : Reconstruction l E X) (rY : Reconstruction l E Y)
     (s : Systems l E c) (a : SystemAdjunction l E c s) :=
   rX.equivalence.functor ⋙ a.F l E c s ⋙ rY.equivalence.inverse
 
-/-- Integral exceptional operation: total limit of the exceptional reduction system.
-Source: Zheng 5.25 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- Integral exceptional operation: total limit of the exceptional reduction system. -/
 def integralRight (rX : Reconstruction l E X) (rY : Reconstruction l E Y)
     (s : Systems l E c) (a : SystemAdjunction l E c s) :=
   rY.equivalence.functor ⋙ a.G l E c s ⋙ rX.equivalence.inverse
 
 /-- The adjunction transported by the specified reconstruction equivalences.
 Its unit is u_X followed by L_X(eta) and L_X G(e_Y inverse); its counit is
-L_Y F(e_X) followed by L_Y(epsilon) and u_Y inverse.
-Source: Zheng 5.25 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+L_Y F(e_X) followed by L_Y(epsilon) and u_Y inverse. -/
 def integralAdjunction (rX : Reconstruction l E X) (rY : Reconstruction l E Y)
     (s : Systems l E c) (a : SystemAdjunction l E c s) :
     integralLeft l E c rX rY s a ⊣ integralRight l E c rX rY s a :=
   (rX.equivalence.toAdjunction.comp a.adjunction).comp rY.equivalence.symm.toAdjunction
 
-/-- Inclusion of the literal integral left composite into its ambient realization.
-Source: Zheng 5.25 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- Inclusion of the literal integral left composite into its ambient realization. -/
 def leftComposite (rX : Reconstruction l E X) (rY : Reconstruction l E Y)
     (s : Systems l E c) (a : SystemAdjunction l E c s) :
     integralLeft l E c rX rY s a ⋙ (finiteTorConstructibleIntegral l E Y).ι ≅
@@ -281,8 +264,7 @@ def leftComposite (rX : Reconstruction l E X) (rY : Reconstruction l E Y)
   Functor.isoWhiskerLeft (rX.equivalence.functor ⋙ a.F l E c s) rY.limit ≪≫
     Functor.isoWhiskerRight rX.reduction (s.left l E c ⋙ coefficientSequenceLimit l E Y)
 
-/-- Inclusion of the literal integral right composite into its ambient realization.
-Source: Zheng 5.25 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- Inclusion of the literal integral right composite into its ambient realization. -/
 def rightComposite (rX : Reconstruction l E X) (rY : Reconstruction l E Y)
     (s : Systems l E c) (a : SystemAdjunction l E c s) :
     integralRight l E c rX rY s a ⋙ (finiteTorConstructibleIntegral l E X).ι ≅
@@ -293,8 +275,7 @@ def rightComposite (rX : Reconstruction l E X) (rY : Reconstruction l E Y)
       (s.exceptional l E c ⋙ coefficientSequenceLimit l E X)
 
 /-- Canonical finite evaluation of the actual proper/open word, including the
-coordinate-equivalence counit. Source: Zheng 5.22
-(blueprint: lem-sf-exceptional-integral-reconstruction). -/
+coordinate-equivalence counit. -/
 def Systems.leftEvaluation (s : Systems l E c) (n : ℕ) :
     s.left l E c ⋙ (coordinates l E Y).functor ⋙ s.siteY.proEvaluation.evaluation n ≅
       (coordinates l E X).functor ⋙ s.siteX.proEvaluation.evaluation n ⋙
@@ -307,8 +288,7 @@ def Systems.leftEvaluation (s : Systems l E c) (n : ℕ) :
     Functor.isoWhiskerLeft (coordinates l E X).functor
       (exceptionalProSupportEvaluation s.properOpen n)
 
-/-- Canonical finite evaluation of the transported system exceptional operation.
-Source: Zheng 5.22 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- Canonical finite evaluation of the transported system exceptional operation. -/
 def Systems.rightEvaluation (s : Systems l E c) (n : ℕ) :
     s.exceptional l E c ⋙ (coordinates l E X).functor ⋙ s.siteX.proEvaluation.evaluation n ≅
       (coordinates l E Y).functor ⋙ s.siteY.proEvaluation.evaluation n ⋙
@@ -321,8 +301,7 @@ def Systems.rightEvaluation (s : Systems l E c) (n : ℕ) :
     Functor.isoWhiskerLeft (coordinates l E Y).functor
       (exceptionalSystemRightEvaluation s.right s.siteX s.siteY n)
 
-/-- Regard the existing site comparison in the fixed scalar realization interface.
-Source: Zheng 4.10 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- Regard the existing site comparison in the fixed scalar realization interface. -/
 def Systems.siteRealization (T : Scheme.{u})
     (P : StrictEtaleEvaluation T (integralExceptionalIntegers l E)
       (integralExceptionalUniformizer l E))
@@ -331,15 +310,13 @@ def Systems.siteRealization (T : Scheme.{u})
   evaluation := C.proEvaluation
   derived := C.image
 
-/-- The actual site inverse image, expressed in the calculus coordinates.
-Source: Zheng 4.10 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- The actual site inverse image, expressed in the calculus coordinates. -/
 def Systems.etaleInput (s : Systems l E c)
     (A : DerivedCategory (strictEtaleCoefficientSystem X (integralExceptionalIntegers l E)
       (integralExceptionalUniformizer l E))) :=
   (coordinates l E X).inverse.obj (s.siteX.image.system.inverse.obj A)
 
-/-- The proper mate and open comparison, before any finite evaluation.
-Source: Zheng 5.22 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- The proper mate and open comparison, before any finite evaluation. -/
 def Systems.supportMap (s : Systems l E c)
     (A : DerivedCategory (strictEtaleCoefficientSystem X (integralExceptionalIntegers l E)
       (integralExceptionalUniformizer l E))) :
@@ -353,9 +330,7 @@ def Systems.supportMap (s : Systems l E c)
 
 /-- The canonical finite proper/open projection: scalar-unit coordinates, site
 localization, the etale support realization, and the fixed proper/open site mate.
-Every factor is a published, normalized comparison; no scalar choice is made.
-Source: Zheng 4.10, 5.22 and Stacks 099R
-(blueprint: lem-sf-exceptional-integral-reconstruction). -/
+Every factor is a published, normalized comparison; no scalar choice is made. -/
 def Systems.supportProjection (s : Systems l E c)
     (A : DerivedCategory (strictEtaleCoefficientSystem X (integralExceptionalIntegers l E)
       (integralExceptionalUniformizer l E))) (n : ℕ)
@@ -403,8 +378,7 @@ def Systems.supportProjection (s : Systems l E c)
     (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1)) c).mapIso
       (EX.counitIso.app _)
 
-/-- Canonical reduction comparison for the reconstructed right operation.
-Source: Zheng 5.22, 5.25 (blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- Canonical reduction comparison for the reconstructed right operation. -/
 def rightEvaluation (rX : Reconstruction l E X) (rY : Reconstruction l E Y)
     (s : Systems l E c) (a : SystemAdjunction l E c s) (n : ℕ) :
     integralRight l E c rX rY s a ⋙ rX.equivalence.functor ⋙
@@ -421,9 +395,7 @@ def rightEvaluation (rX : Reconstruction l E X) (rY : Reconstruction l E Y)
     Functor.isoWhiskerLeft (rY.equivalence.functor ⋙ (normalized l E Y).ι)
       (s.rightEvaluation l E c n)
 
-/-- One cohomological and one Tor interval enlargement for every coefficient level.
-Source: Zheng 2.29, 3.16, 5.24
-(blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- One cohomological and one Tor interval enlargement for every coefficient level. -/
 def UniformBounds {T U : Scheme.{u}} (F : System l E T ⥤ System l E U) : Prop :=
   ∃ cMinus cPlus tMinus tPlus : ℤ,
     (∀ (N : System l E T), normalized l E T N → ∀ (n : ℕ) (a b : ℤ),
@@ -445,17 +417,13 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
   [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
-/-- The prescribed reduction-tower compact-support functor, with ambient inclusion.
-Source: blueprint compact-support definition
-(blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- The prescribed reduction-tower compact-support functor, with ambient inclusion. -/
 def prescribed : finiteTorConstructibleIntegralCategory l E X ⥤ Integral l E Y :=
   PurCompactSupport.finiteTorIntegralInclusion l E X ⋙
     sfCompactSupportFiniteIntegralFunctor l D.k (PurCompactSupport.coefficientPrimeUnit l D hl)
       c E ⋙ (sfIntegralConstructible l E Y).ι
 
-/-- The inverse canonical ambient-to-tower realization h_R, restricted to finite Tor.
-Source: blueprint single proper/open word and its quotient-cone normalization
-(blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- The inverse canonical ambient-to-tower realization h_R, restricted to finite Tor. -/
 def prescribedRealization : prescribed l E c D hl ≅
     (finiteTorConstructibleIntegral l E X).ι ⋙ PurCompactSupport.image
       (PurCompactSupport.completed l E) c :=
@@ -463,9 +431,7 @@ def prescribedRealization : prescribed l E c D hl ≅
     (sfQcqsCompactSupportRealization l E D.k
       (PurCompactSupport.coefficientPrimeUnit l D hl) c)).symm
 
-/-- The proper/open ambient shift, using right derivation and exact localization.
-Source: blueprint single proper/open word; Stacks 0941
-(blueprint: lem-sf-exceptional-integral-reconstruction). -/
+/-- The proper/open ambient shift, using right derivation and exact localization. -/
 instance ambientShift : ((finiteTorConstructibleIntegral l E X).ι ⋙
     PurCompactSupport.image (PurCompactSupport.completed l E) c).CommShift ℤ :=
   letI : (PurCompactSupport.image (PurCompactSupport.completed l E) c).CommShift ℤ :=
@@ -478,9 +444,7 @@ attribute [local instance] ambientShift
 
 /-- Additivity, exactness, adjoint shifts, uniform bounds, and the actual integral
 normalization against the prescribed compact-support tower. The primitive equation
-fixes r before the equation involving u; it is not a comparison inferred from levels.
-Source: Zheng 5.22, 5.24, 5.25; blueprint integral steps 10--12
-(blueprint: lem-sf-exceptional-integral-reconstruction). -/
+fixes r before the equation involving u; it is not a comparison inferred from levels. -/
 structure Realization (rX : Reconstruction l E X) (rY : Reconstruction l E Y)
     (s : Systems l E c) (a : SystemAdjunction l E c s) where
   operations : Operations l E

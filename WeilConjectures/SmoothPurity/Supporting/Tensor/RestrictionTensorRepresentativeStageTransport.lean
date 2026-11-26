@@ -18,10 +18,12 @@ import all Mathlib.Logic.Small.Defs
 
 /-! # Stage transport of restriction tensor representatives
 
-Source: lemma-section-normal-bundle--1, common-stage subargument, steps 3--5
-(blueprint: lem-pur-restriction-tensor-representative-transport).
-
 The stage-level transport identity used by the quotient representative theorem.
+
+## Implementation details
+
+Different stages are retained as transition maps; no literal equality of coefficient fields is
+used.
 -/
 
 @[expose] public noncomputable section
@@ -155,14 +157,7 @@ private theorem mixedTensorRepresentative_transport
 /--
 At the level of the finite coefficient stage, the mixed scalar square and the
 naturality of the tensor comparison identify the representative at an extension
-with the stage-system transport of the representative at the original stage.
-This is the component calculation: expand the two endpoint comparisons, use the
-mixed square to move the pullback comparison through the tensor comparison, and
-cancel inverse comparison isomorphisms.  The coefficient tower equations identify
-the remaining comparisons with the direct ones, while the scalar associator
-cocycle and naturality of `mu` identify the outer conjugates.  Different stages
-are retained as transition maps; no literal equality of coefficient fields is
-used. -/
+with the stage-system transport of the representative at the original stage. -/
 theorem restrictionTensorRepresentativeStageTransport
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

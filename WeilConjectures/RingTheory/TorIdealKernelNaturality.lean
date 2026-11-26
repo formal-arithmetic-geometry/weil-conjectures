@@ -22,8 +22,25 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Naturality of the ideal-kernel description of first Tor
 
-Source: Stacks Project, Algebra, Tags 00M6, 00M5, 00MO and 00LS
-(blueprint: lem-weil-pbc-tor-ideal-kernel-naturality).
+For a ring map `f : R → A` with `J = f(I) A` and an `f`-semilinear map `g : M → N`, the
+identifications of `Tor₁(M, R/I)` and `Tor₁(N, A/J)` with the kernels of the multiplication maps
+`I ⊗ M → M` and `J ⊗ N → N` are compatible with the maps induced by `g`.
+
+## Implementation details
+
+The connecting maps come from tensoring `0 → I → R → R/I → 0` (and likewise over `A`) with free
+resolutions and applying the snake lemma; first homology is identified with Tor via
+`ProjectiveResolution.isoLeftDerivedObj`. Restricting scalars of the `A`-resolution along `f`
+lifts `g` to semilinear chain maps `φ`, which send `IP` into `JG` and so induce the quotient
+chain map `ψ`. Comparing the cycle formulas gives `δA ∘ τ = θ ∘ δR`, and injectivity of `δA`
+shows that `τ` is independent of the comparison `φ`.
+
+## References
+
+* [Stacks, Tag 00M5]
+* [Stacks, Tag 00M6]
+* [Stacks, Tag 00MO]
+* [Stacks, Tag 00LS]
 -/
 
 @[expose] public section
@@ -35,41 +52,14 @@ open scoped TensorProduct BigOperators
 
 namespace ModuleCat
 
-/-- Stacks Project, Algebra, Tag 00M6 and the change-of-rings functoriality used in Tag 00MO
-(blueprint: lem-weil-pbc-tor-ideal-kernel-naturality).
+/-- Naturality of the ideal-kernel description of first Tor: there are multiplication maps
+`μR : I ⊗ M → M`, `μA : J ⊗ N → N`, a map `θ : I ⊗ M → J ⊗ N` induced by `f` and `g`, injective
+connecting maps `δR`, `δA` from first Tor onto the multiplication kernels, and a map `τ` on first
+Tor induced by a semilinear comparison of the resolutions, such that `δA ∘ τ = θ ∘ δR`.
 
-The maps `μR`, `μA` and `θ` are specified on pure tensors. The two connecting maps are
-injective with precisely the multiplication kernels as images. Their values on cycles are
-specified for every lift and every finite expression of its differential. The same `τ` is
-induced by every semilinear comparison of the resolutions; thus it is independent of that
-comparison. Tensor quotient generators `p ⊗ 1` represent `p mod IP`, so the condition on
-`ψ` is exactly the induced quotient chain map. Its action on cycle classes specifies its
-map on first homology, using `ProjectiveResolution.isoLeftDerivedObj` to identify Tor.
-
-Proof:
-1. Free terms are projective (`lem-weil-pbc-free-module-projective`) and flat
-   (`lem-weil-pbc-projective-module-flat`). Flat tensor exactness and tensor right
-   exactness (`lem-weil-pbc-flat-tensor-exact`, `lem-weil-pbc-tensor-right-exact`) give
-   the degreewise exact rows obtained by tensoring `0 → I → R → R/I → 0`, and likewise
-   over `A`, with the resolutions. The ideal-tensor terms identify with `IP` and `JG`.
-2. Tensor right exactness identifies the two degree-zero cokernels with `I ⊗ M` and
-   `M`; under these identifications the induced map is multiplication. Likewise for `A`.
-3. Apply `lem-weil-pbc-snake-lemma-modules` to consecutive degrees. Exactness of the
-   resolution identifies the kernel of the connecting map on cycles with boundaries.
-   It therefore descends injectively to first homology with image the multiplication
-   kernel. The snake formula gives the displayed finite-sum formula, independently of
-   both choices. Use `def-weil-pbc-tor-modules` to identify first homology with Tor.
-4. Restrict the scalars of the `A`-resolution along `f` and apply
-   `lem-weil-pbc-free-complex-maps-to-resolution` to lift `g` to the semilinear maps `φ`.
-5. Semilinearity sends `IP` into `JG`, giving the quotient chain map `ψ`. On ideal
-   tensors the comparison sends `p ⊗ a` to `φ(p) ⊗ f(a)` and commutes with both
-   multiplication and the differentials; its degree-zero cokernel map is `θ`.
-6. A lift of a cycle and an ideal-tensor expression of its differential map to valid
-   choices on the `A` side. Choice independence in the snake formula gives
-   `δA ∘ τ = θ ∘ δR`. Injectivity and the image identifications show that `θ` carries
-   kernels into kernels and `τ` is its restriction under those identifications.
-   This formula and injectivity of `δA` give independence of the comparison `φ`.
--/
+The connecting maps are specified on cycle classes for every lift and every finite expression
+of its differential, and the same `τ` is induced on first homology by the quotient chain map
+`ψ` of every semilinear comparison `φ` of the resolutions. -/
 theorem exists_tor_ideal_kernel_naturality
     {R A : Type u} [CommRing R] [CommRing A]
     (f : R →+* A) (I : Ideal R) (J : Ideal A) (hJ : J = Ideal.map f I)

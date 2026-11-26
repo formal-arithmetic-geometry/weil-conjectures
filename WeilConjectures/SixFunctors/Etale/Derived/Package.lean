@@ -22,72 +22,59 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 
 # The six-operations package
 
-This file states the summary theorem of the block: the six operations
+This file states the summary theorem of the six-functor formalism: the six operations
 `Lf^*`, `Rf_*`, `Rf_!`, `Rf^!`, `- ⊗ᴸ -` and `RHom(-, -)` exist on the ambient derived
-categories of étale sheaves, descend to the small categories `Dᵇc` and `Dctf`, and satisfy the
-eight clauses of the blueprint: adjunctions, base change, the projection formula,
+categories of étale sheaves, descend to the small categories `Dᵇc` and `Dctf`, and satisfy
+eight clauses: adjunctions, base change, the projection formula,
 compactification-independence and proper coincidence, the orientation, duality, the relative
 product, and stability of the small categories.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.SixOperationsPackage` (`sk-thm-sf-package`): the eight clauses,
-  one named field each.
+- `AlgebraicGeometry.Etale.SixOperationsPackage`: the eight clauses, one named field each.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.sixOperationsPackage` (`sk-thm-sf-package`): the eight clauses
-  hold.
+- `AlgebraicGeometry.Etale.sixOperationsPackage`: the eight clauses hold.
 
 ## Implementation notes
 
-The package is stated in the setting of `definition-constructible-sheaves--6`: the coefficients are
-`ModuleCat Λ` for a finite ring `Λ` (with a normalized Tate twist datum, for the orientation
-clause) whose exponent is invertible on the base field `k`, and `Y` is separated of finite
-type over `k`. For a general coefficient category the clauses are false: for `Λ = 𝔽_p` over
-`𝔽̄_p`, `Rf_*` of the constant sheaf along `𝔸¹ ⟶ Spec 𝔽̄_p` is not constructible
-(Artin–Schreier).
+The package is stated in the setting of constructible sheaves with finite coefficients: the
+coefficients are `ModuleCat Λ` for a finite ring `Λ` (with a normalized Tate twist datum, for the
+orientation clause) whose exponent is invertible on the base field `k`, and `Y` is separated of
+finite type over `k`. For a general coefficient category the clauses are false: for `Λ = 𝔽_p` over
+`𝔽̄_p`, `Rf_*` of the constant sheaf along `𝔸¹ ⟶ Spec 𝔽̄_p` is not constructible (Artin–Schreier).
 
 Each clause is one of the statements of this directory, and `sixOperationsPackage` is the
-assembly: the clauses are proved from the corresponding statements. Smooth base change for `Rf_*`
-is stated, as in the blueprint, on the bounded below derived categories `D⁺`, where it is the
-smooth base change theorem of the smooth base change chapter; the comparison of the `D⁺` base
-change map with the unbounded `AlgebraicGeometry.Etale.derivedBaseChangeMap` is not available.
+assembly: the clauses are proved from the corresponding statements. Smooth base change for `Rf_*` is
+stated on the bounded below derived categories `D⁺`, where it is the smooth base change theorem; the
+comparison of the `D⁺` base change map with the unbounded
+`AlgebraicGeometry.Etale.derivedBaseChangeMap` is not available. Verdier biduality is proved over
+algebraically closed fields, so `sixOperationsPackage` assumes `k` algebraically closed. The Tate
+twist datum is assumed normalized: for the untwisted datum `Λ_X(m) = Λ_X` the orientation clause
+fails over `ℚ`, where `Rf^! Λ ≅ μ_n[2] ≇ Λ[2]` for `𝔸¹_ℚ ⟶ Spec ℚ`.
 
-The clauses of the blueprint that this statement does not carry are the ones whose content is
-an identity *between canonical comparison transformations* rather than the existence of an
-isomorphism: the naturality clauses, and the compatibilities with finite reduction, scalar
-extension and the pro-étale realization, which would need a change-of-coefficients functor
-between stages; see the module docstring of
-`WeilConjectures.SixFunctors.Etale.Derived.Stability`.
+The clauses of a six-functor formalism that this statement does not carry are the ones whose content
+is an identity *between canonical comparison transformations* rather than the existence of an
+isomorphism: the naturality clauses, and the compatibilities with finite reduction, scalar extension
+and the pro-étale realization, which would need a change-of-coefficients functor between stages; see
+the module docstring of `WeilConjectures.SixFunctors.Etale.Derived.Stability`.
 
-Three further components of the blueprint's duality clause (6) are not collected here, since
+Three further components of the duality clause (6) are not collected here, since
 they need data that the package's `f` does not carry: `𝔻_X K ≅ K^∨(d)[2d]` for perfect `K`
 needs an orientation and is
 `AlgebraicGeometry.Etale.Orientation.nonempty_iso_verdierDual_coefficientDual`, and global
 duality and the derived Poincaré pairing need `X` smooth proper geometrically connected and
 are the two statements of `WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality`.
 
-## Expository remarks of the package
+Related results proved elsewhere:
 
-The following remarks of the blueprint subsection `sk-thm-sf-package` are pointers or scope
-statements and carry no mathematical content beyond the results they cite:
-
-- `rem-sf-yoga` (the dictionary from the axioms of the six-functor datum to the classical duality
-  statements) and `rem-sf-axiom-verification` (each axiom is supplied by the corresponding result
-  of this directory): this is the assembly `sixOperationsPackage` itself.
-- `rem-sf-ctf-descent`, `proposition-six-operations-change-coefficients`,
-  `lemma-change-coefficients-exceptional-inverse-image` and
-  `theorem-exceptional-inverse-image`: the coefficient comparisons of the exceptional
-  adjoint are
+- the coefficient comparisons of the exceptional adjoint are
   `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_and_reductionModIdeal`
-  (`lemma-change-coefficients-exceptional-inverse-image--1`) and
-  `AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`.
-- `theorem-verdier-biduality`, `rem-weil-biduality-boundary-status` and `open-sf-preservation-gaps`:
-  finite-stage biduality is `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`, its
+  and `AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`;
+- finite-stage biduality is `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`, its
   Weil-equivariant form is `AlgebraicGeometry.Etale.WeilComplex.isIso_verdierDualDoubleDual`, and
-  the `ℚ̄_ℓ` stage is `AlgebraicGeometry.ProEtale.CondensedRing.isIso_verdierBiduality`
-  (`theorem-verdier-biduality`).
+  the `ℚ̄_ℓ` stage is `AlgebraicGeometry.ProEtale.CondensedRing.isIso_verdierBiduality`.
 
 The reconstruction of normalized towers, an ingredient of the finite-level comparison, is
 `AlgebraicGeometry.Etale.NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit`.
@@ -114,14 +101,10 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) (aY : Y ⟶ Spec (.of k)) [HasCompacti
   [QuasiCompact f] [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]
   [HasCompactification aY] [HasCompactification (f ≫ aY)]
 
-/-- Blueprint `sk-thm-sf-package`: The six-operations package.
-
-Let `k` be a field, `Λ` a finite ring with a Tate twist datum, `Y` separated of finite type over
-`k` with structure morphism `a_Y`, and `f : X ⟶ Y` separated of finite type, with
-`a_X = f ≫ a_Y`. The twist `Λ_X(d)` of the orientation clause is that of the ambient Tate twist
-datum; the clause is only true for a normalized datum
-(`AlgebraicGeometry.Etale.HasTateTwist.IsNormalized`), which `sixOperationsPackage` assumes.
-The eight clauses of the blueprint, one group of fields each:
+/-- **The six-operations package.** Let `k` be a field, `Λ` a finite ring with a Tate twist datum,
+`Y` separated of finite type over `k` with structure morphism `a_Y`, and `f : X ⟶ Y` separated of
+finite type, with `a_X = f ≫ a_Y`. The twist `Λ_X(d)` of the orientation clause is that of the
+ambient Tate twist datum. The eight clauses, one group of fields each:
 1. **Adjunctions.** `Lf^* ⊣ Rf_*` and `Rf_! ⊣ Rf^!`.
 2. **Base change.** For a Cartesian square
    ```
@@ -142,22 +125,7 @@ The eight clauses of the blueprint, one group of fields each:
    `𝔻_Y Rf_! ≅ Rf_* 𝔻_X`.
 7. **Relative product.** The four Künneth comparisons over `k` are isomorphisms.
 8. **Stability.** `Lf^*`, `- ⊗ᴸ -`, `Rf_*`, `Rf_!`, `Rf^!` and `𝔻_X` carry `Dctf` into
-   `Dctf`.
-See the module docstring for the clauses that are deliberately not carried here.
-
-Blueprint `def-sf-datum`: Six-functor datum, axiomatized
-
-The axioms (A1)–(A4) and (A6) of a six-functor datum, at a finite coefficient stage
-`Λ = A_{E,n}` on the étale sites: the fields of this structure are the adjunctions (A1), the base
-change isomorphisms (A2), the projection formula (A3), the composition law and proper
-coincidence (A4) and Verdier biduality (A6); the compatibilities (A5) with change of coefficients
-are not carried (see the module docstring).
-
-Blueprint `rem-sf-summary`: What a six-functor formalism is
-
-The six-functor formalism summarised by the remark is the conjunction of the clauses of this
-structure: the two adjoint pairs, base change, the projection formula, and proper coincidence
-together with the orientation of a smooth morphism. -/
+   `Dctf`. -/
 structure SixOperationsPackage : Prop where
   /-- (1) The adjunction `Lf^* ⊣ Rf_*`. -/
   upperStarLowerStarAdjunction :
@@ -240,17 +208,9 @@ structure SixOperationsPackage : Prop where
       DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
         ((verdierDual Λ (f ≫ aY)).obj (op K))
 
-/-- Blueprint `sk-thm-sf-package`: The six-operations package.
-
-The eight clauses of `AlgebraicGeometry.Etale.SixOperationsPackage` hold for a finite `Λ` whose
-exponent is invertible on `k`, for `k` algebraically closed as in the blueprint (Verdier
-biduality is proved over algebraically closed fields). Every clause is one of the propositions of
-this directory, and the proof is the assembly: smooth base change is
-`AlgebraicGeometry.Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder`,
-every sheaf of `Λ`-modules being torsion of order invertible on `Y`, and the orientation is
-smooth purity (`AlgebraicGeometry.Etale.Orientation.nonempty`). The Tate twist datum is assumed
-normalized: for the untwisted datum `Λ_X(m) = Λ_X` the orientation clause fails over `ℚ`,
-where `Rf^! Λ ≅ μ_n[2] ≇ Λ[2]` for `𝔸¹_ℚ ⟶ Spec ℚ`. -/
+/-- **The six-operations package.** The eight clauses of
+`AlgebraicGeometry.Etale.SixOperationsPackage` hold for a finite `Λ` with a normalized Tate twist
+datum whose exponent is invertible on `k`, for `k` algebraically closed. -/
 theorem sixOperationsPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
     [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated f] :
     SixOperationsPackage Λ k f aY where
@@ -306,12 +266,10 @@ theorem sixOperationsPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
   ctfVerdierDual _ hK := constructibleFiniteTor_verdierDual Λ (f ≫ aY) hK
 
 omit [HasTateTwist Λ] in
-/-- Blueprint `prop-functor-package`, clause (3): **compactly supported direct image of the
-localization triangle.** For a quasi-compact open immersion `j : U ⟶ X` with closed complement
-`i : Z ⟶ X`, a morphism `f : X ⟶ Y` and finite coefficients, applying `Rf_!` to the open–closed
-triangle `j_! j^* K ⟶ K ⟶ i_* i^* K ⟶` (`AlgebraicGeometry.Etale.exists_distTriang_openClosed`)
-and the composition law (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`)
-gives a distinguished triangle `R(j ≫ f)_! j^* K ⟶ Rf_! K ⟶ R(i ≫ f)_! i^* K ⟶`. -/
+/-- **Compactly supported direct image of the localization triangle.** For a quasi-compact open
+immersion `j : U ⟶ X` with closed complement `i : Z ⟶ X`, a morphism `f : X ⟶ Y` and finite
+coefficients, applying `Rf_!` to the open–closed triangle `j_! j^* K ⟶ K ⟶ i_* i^* K ⟶` and the
+composition law gives a distinguished triangle `R(j ≫ f)_! j^* K ⟶ Rf_! K ⟶ R(i ≫ f)_! i^* K ⟶`. -/
 theorem exists_distTriang_rightDerivedLowerShriek_openClosed {U Z X Y : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (i : Z ⟶ X) [IsClosedImmersion i]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) (f : X ⟶ Y) [HasCompactification f]
@@ -338,29 +296,18 @@ theorem exists_distTriang_rightDerivedLowerShriek_openClosed {U Z X Y : Scheme.{
       (R(i)_![ModuleCat.{u + 1} Λ]).mapIso
         ((leftDerivedUpperStarIsoMapDerivedCategory _ i).app K).symm) ≪≫ (ci.app _).symm
 
-/-- Blueprint `prop-functor-package`: **the coefficient and functor package on the proved
-domains**, at the finite stages `Λ = A_{E,n}`.
-
-For `k` algebraically closed, a finite ring `Λ` with a normalized Tate twist datum whose exponent is
+/-- **The coefficient and functor package**, at the finite stages `Λ = A_{E,n}`. For `k`
+algebraically closed, a finite ring `Λ` with a normalized Tate twist datum whose exponent is
 invertible on `k`, and a separated finite-type morphism `f : X ⟶ Y` of separated finite-type
 `k`-schemes:
 
 * the clauses of the six-operations package hold (`AlgebraicGeometry.Etale.SixOperationsPackage`):
-  compactification independence and the composition law of `Rf_!` and `Rf_! ≅ Rf_*` for proper
-  `f` (clauses (2) and (3)), base change (clause (4)), the projection formula (clause (5)), smooth
-  purity (clause (6)), biduality and the Verdier exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` on `Dctf`
-  (clause (7));
+  compactification independence and the composition law of `Rf_!`, `Rf_! ≅ Rf_*` for proper
+  `f`, base change, the projection formula, smooth purity, biduality and the Verdier exchange
+  `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` on `Dctf`;
 * applying `Rf_!` to the localization triangle of a quasi-compact open immersion and its closed
-  complement gives a distinguished triangle (clause (3),
-  `AlgebraicGeometry.Etale.exists_distTriang_rightDerivedLowerShriek_openClosed`);
-* on `Dctf(Y, Λ)` the exceptional inverse image is `Rf^! = 𝔻_X Lf^* 𝔻_Y` (clause (7),
-  `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar`).
-
-The integral reduction compatibilities of clause (2) are
-`AlgebraicGeometry.Etale.functorPackage_integral`. Clause (1) (finite coefficient-field extension
-and descent to `ℚ̄_ℓ`) and the integral and field stages of clause (7) are not part of this
-statement; for strict Weil complexes over a finite field, clauses (2)–(4) are the statements of
-`WeilConjectures.WeilSheaf.LowerShriekFunctoriality`. -/
+  complement gives a distinguished triangle;
+* on `Dctf(Y, Λ)` the exceptional inverse image is `Rf^! = 𝔻_X Lf^* 𝔻_Y`. -/
 theorem functorPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
     [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated f] :
     SixOperationsPackage Λ k f aY ∧

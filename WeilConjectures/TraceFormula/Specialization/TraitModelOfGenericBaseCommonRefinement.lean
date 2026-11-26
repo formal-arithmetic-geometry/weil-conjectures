@@ -17,9 +17,20 @@ Any two compactifications of a trait model `N` over a generic base `(F, ι : η 
 common refinement
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.Compactification.exists_refinement`), as for trait
 models over a base field
-(`NearbyCyclesModel.IsTraitModelOfBase.Compactification.exists_refinement`). This is the common
-refinement of the proof of blueprint `prose-E-15` ("two compactifications have a
-common proper refinement").
+(`NearbyCyclesModel.IsTraitModelOfBase.Compactification.exists_refinement`). This is the first
+step in showing that the compact-support exchange does not depend on the compactification.
+
+## Implementation details
+
+With `X₃` the closure of the graph of `Y` in `X₁ ×_F X₂`
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.Compactification.exists_common`), the generic fibre
+`V = X₃ ×_F η` is a closed subscheme of `W ×_S η`, `W = 𝒳₁ ×_S 𝒳₂`, through
+`Xᵢ ×_F η ≅ 𝒳ᵢ ×_S η` (it is proper over `η` and a monomorphism, `X₃ ⟶ X₁ ×_F X₂` being one).
+Glue the total space of `N` and `V` along `N_η` and compactify over `W`
+(`AlgebraicGeometry.exists_isProper_isPullback_of_isClosedImmersion`); the compactification is
+`V` over the generic point, and the inclusion of `N` is the inverse image of `N ⊆ 𝒳ᵢ`, as `N_η`
+is the inverse image of `N` in `V`
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.Compactification.isPullback_genericFibre`).
 
 -/
 
@@ -37,19 +48,8 @@ variable {F : Type u} [Field F] {k' : Type u} [Field k']
   {N : NearbyCyclesModel Y.left Y'.left} {q : N.total ⟶ trait k'}
   {g : N.generic ⟶ Spec (.of (traitGenericField k'))} {h : N.IsTraitModelOfGenericBase Y ι q g}
 
-/-- **Common refinement of two compactifications** (the first step of the proof of blueprint
-`prose-E-15`): any two compactifications `C₁`, `C₂` of a trait model over a generic
-base have a common refinement `C₃`.
-
-Construction: with `X₃` the closure of the graph of `Y` in `X₁ ×_F X₂`
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.Compactification.exists_common`), the generic fibre
-`V = X₃ ×_F η` is a closed subscheme of `W ×_S η`, `W = 𝒳₁ ×_S 𝒳₂`, through
-`Xᵢ ×_F η ≅ 𝒳ᵢ ×_S η` (it is proper over `η` and a monomorphism, `X₃ ⟶ X₁ ×_F X₂` being one).
-Glue the total space of `N` and `V` along `N_η` and compactify over `W`
-(`AlgebraicGeometry.exists_isProper_isPullback_of_isClosedImmersion`); the compactification is
-`V` over the generic point, and the inclusion of `N` is the inverse image of `N ⊆ 𝒳ᵢ`, as `N_η`
-is the inverse image of `N` in `V`
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.Compactification.isPullback_genericFibre`). -/
+/-- **Common refinement of two compactifications**: any two compactifications `C₁`, `C₂` of a
+trait model over a generic base have a common refinement `C₃`. -/
 theorem Compactification.exists_refinement (C₁ C₂ : h.Compactification) :
     ∃ C₃ : h.Compactification, Nonempty (C₃.Refinement C₁) ∧ Nonempty (C₃.Refinement C₂) := by
   have hN := h.isTraitModelOver

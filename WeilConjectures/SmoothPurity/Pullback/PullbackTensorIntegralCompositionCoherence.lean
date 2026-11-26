@@ -9,17 +9,19 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorConstrai
 import WeilConjectures.SmoothPurity.Integral.IntegralSystemReductionFullyFaithful
 import WeilConjectures.SmoothPurity.Integral.IntegralPullbackTensorCompositionReduced
 
-/-! Integral coefficient component of pullback/tensor composition coherence.
+/-! # Integral coefficient component of pullback/tensor composition coherence
 
-Source: Stacks 07A4 and 0941; this is the integral part of
-`lem-pur-pullback-tensor-composition-coherence`.
-(blueprint: lem-pur-pullback-tensor-composition-coherence)
+## Implementation details
 
 The proof uses flat-term K-flat representatives in the normalized quotient tower.
 The finite pullback/tensor composition square is the pure-tensor calculation; it
 is preserved by quotient transitions and therefore by the completed realization.
 The coherent reduction identifies the resulting map with the prescribed integral
 comparison, and fully faithful reduction reflects the equality.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -38,9 +40,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Integral component of higher pullback/tensor composition coherence.
-Source: Stacks 07A4 and 0941; quotient-tower composition calculation.
-(blueprint: lem-pur-pullback-tensor-composition-coherence). -/
+/-- Integral component of higher pullback/tensor composition coherence. -/
 theorem pullbackTensorIntegralCompositionCoherence {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]

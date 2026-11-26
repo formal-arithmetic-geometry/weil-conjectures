@@ -10,7 +10,12 @@ public import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionT
 import all WeilConjectures.SixFunctors.Integral.IntegralScalarExtensionWellDefined
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 
-/-! # Scalar completion in a coherent presentation -/
+/-! # Scalar completion in a coherent presentation
+
+## References
+
+* Stacks Project, Tags 06YY and 0941.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -34,15 +39,7 @@ attribute [local implicit_reducible] integralScalarExtension integralScalarExten
   integralComparisonDerivedSequenceScalar integralScalarComplexFunctor
   integralOperationsGoodLocalization integralOperationsRoosFunctor
 
-/-- Completion in any coherent scalar quotient presentation is the normalized realization.
-Source: Stacks 06YY and 0941, coherent quotient comparisons and completion augmentation.
-(blueprint: lem-pur-scalar-completion-presentation-normalization).
-
-Proof: compare the supplied qD with the scalar realization's normalized qD on scalar
-quotient tensor generators. Tensor-generator extensionality makes their quotient maps equal.
-The realization normalization then identifies the presentation composite with its ordinary
-comparison. The defining equation of scalarCompletion and cancellation of the presentation
-isomorphism give the assertion. No inverse to scalarCompletion is used. -/
+/-- Completion in any coherent scalar quotient presentation is the normalized realization. -/
 theorem scalarCompletionPresentationNormalization (X : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus l E X)
     (ρ : IntegralComparisonRoosModel l L X)

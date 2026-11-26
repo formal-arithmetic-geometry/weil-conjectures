@@ -11,8 +11,14 @@ import all Mathlib.Logic.Small.Defs
 
 /-! # The coefficient-unit normalization of common-stage pullback
 
-Source: purity/trace equivariance proof Step 1, canonical pullback compositors.
-(blueprint: lem-pur-common-stage-pullback-coefficient-unit).
+The common-stage pullback comparison at its literal coefficient stage is compatible with the
+transition unitor.
+
+## Implementation details
+
+The equation is obtained by specializing the rational pullback/scalar tower law to three equal
+fields and two identity inclusions, and transporting the result through the recorded
+stage-transition isomorphisms.
 -/
 
 @[expose] public noncomputable section
@@ -227,16 +233,8 @@ private theorem comparison_self (l : ℕ) [Fact l.Prime]
   exact hy.trans (he.trans (stageUnit_app l Ω X P.stage
     (commonStagePullbackObject l Ω f P).obj).symm)
 
-/-- The common-stage pullback comparison at its literal coefficient stage respects
-its actual transition unitor.
-Source: blueprint purity/trace equivariance Step 1, scalar-unit normalization.
-(blueprint: lem-pur-common-stage-pullback-coefficient-unit).
-Proof: specialize the rational pullback/scalar tower law to three equal fields and
-two identity inclusions. Scalar associator-unit coherence and faithfulness give the
-rational coefficient-unit equation. Transport it through the coefficient-inclusion
-identity and the recorded stage-transition isomorphisms. The inverse transition
-comparison cancels its forward comparison. This also applies to zero objects and
-empty schemes; no larger coefficient field or geometric hypothesis is used. -/
+/-- The common-stage pullback comparison at its literal coefficient stage respects its actual
+transition unitor. -/
 theorem commonStagePullbackComparison_self_unit (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     {X Y : Scheme.{u}} (f : X ⟶ Y)

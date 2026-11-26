@@ -11,7 +11,10 @@ import WeilConjectures.SixFunctors.ProEtale.Adic.SectionAction
 
 /-! # Native direct image on sections
 
-Source: Stacks, Tag 03D6; Bhatt--Scholze, Section 6.8.
+## References
+
+* [Stacks, Tag 03D6]
+* [Bhatt--Scholze, Section 6.8]
 -/
 
 @[expose] public noncomputable section
@@ -71,19 +74,8 @@ private theorem lower_sectionAct {U V : Scheme.{u}} (g : U ⟶ V)
   erw [← reassoc_of% hn, reassoc_of% ht]
   rfl
 
-/-- The native and ringed direct images have the same sections and scalar action.
-Source: Stacks, Tag 03D6, and Bhatt--Scholze, Section 6.8.
-(blueprint: lem-sf-native-direct-image-sections).
-
-Proof: evaluate the two functors at an adic module M and a test object W over V.
-Both underlying groups are M evaluated at W times_V U, with the same restriction maps.
-The internal pushforward action is the pushforward tensorator followed by the action
-of M, with scalars restricted along the native precomposition map. The tensorator
-formula on pure section tensors makes this exactly the sectionwise action of the
-ringed direct image. The hypothesis pull_normalized identifies its structural ring map
-with precomposition. The identity underlying maps are consequently linear in both
-directions, natural in W and M, and inverse. Uniqueness follows by extensionality on
-M, W and sections. The zero module and empty test objects require no exception. -/
+/-- The native and ringed direct images have the same sections and scalar action: there is
+a unique comparison isomorphism that is the identity on underlying sections. -/
 theorem native_direct_image_sections [N : NativeRings.{u} l]
     {U V : Scheme.{u}} (g : U ⟶ V) :
     ∃! c : ProEtale.adicLowerStar l g ⋙ sections l V ≅ sections l U ⋙

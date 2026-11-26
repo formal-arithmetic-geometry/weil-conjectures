@@ -14,20 +14,18 @@ import Mathlib.Data.Fintype.BigOperators
 /-!
 # Localizations of the auxiliary algebra in height-zero delocalization
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 16.9.4, Tag 07FA
-(blueprint: lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations).
+The second localization assertion: the auxiliary algebra `B` localized at `y_l` is the
+localization of a polynomial algebra `Q_l` at `y_l`.
 
-The second conjunct asserts an A-algebra equivalence for every l : Fin r between
-the localization away from y_l of Q_l and the localization B_{y_l}. The inverse sends
-z to 0 and t_(l,j) to y_l⁻¹ (f_j − Σ_{i ≠ l} y_i t_(i,j)), with the stated formulas.
-This is the second localization assertion in Stacks Project Tag 07FA; its proof uses
-universal properties of polynomial rings, quotients, and localization and checks generators.
+## Implementation details
 
-(blueprint: lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations-part2).
+The maps are constructed by the universal properties of multivariate polynomial rings, ideal
+quotients, and localization away from one element; the generator formulas and extensionality
+establish the assertion.
 
-Proof: construct the maps by the universal properties of multivariate polynomial rings,
-ideal quotients, and localization away from one element; verify the displayed generator
-formulas and use extensionality on polynomial generators and localization.
+## References
+
+* [Stacks, Tag 07FA]
 -/
 
 @[expose] public section
@@ -40,12 +38,9 @@ open scoped BigOperators
 namespace Algebra
 
 
-/-- This intermediate statement is the corresponding localization conjunct from Stacks
-Project Tag 07FA.
-The maps are constructed by the universal properties of multivariate polynomial rings, ideal
-quotients, and localization away from one element; the displayed generator formulas and
-extensionality on generators establish the assertion.
-(blueprint: lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations-part2). -/
+/-- The second localization of the auxiliary algebra: for every `l`, an `A`-algebra equivalence
+between the localization of `Q_l` away from `y_l` and `B_{y_l}`, whose inverse sends `z` to `0` and
+`t (l, j)` to `y_l⁻¹ (f_j - ∑_{i ≠ l} y_i t (i, j))`. -/
 theorem popescu_auxiliaryAlgebra_localizations_part2
     (A : Type u) [CommRing A] (n m r : ℕ) (hr : 1 ≤ r)
     (f : Fin m → MvPolynomial (Fin n) A) :

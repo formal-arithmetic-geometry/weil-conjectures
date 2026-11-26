@@ -13,8 +13,18 @@ import all WeilConjectures.SmoothPurity.IntegralCoherence.IntegralGoodQuotientPr
 
 /-! # Fixed cochain coordinates for the scalar/pullback calculation
 
-Source: Stacks 06YY, 07A4 and 0941. The coordinates are constructed from the
-ordinary scalar/pullback chain map and a coherent quotient presentation.
+The coordinates are constructed from the ordinary scalar/pullback chain map and a coherent
+quotient presentation.
+
+## Implementation details
+
+The quotient formula hypothesis on `q` in `scalarPullbackRightRoos_normalized` is necessary:
+composing `q` with negation negates the left side while fixing the right side. It fixes the
+nested tensor-unit generators.
+
+## References
+
+* Stacks Project, Tags 06YY, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -36,18 +46,8 @@ attribute [local irreducible] HasDerivedCategory.standard
   integralComparisonSequenceScalarPullback coefficientSequenceLimit
   scalarCompletionIso
 
--- STATEMENT-DISPUTED: the former version allowed arbitrary q. Composing q with
--- negation negates the left side while fixing the right side. The missing hq is
--- supplied by every current caller and fixes the nested tensor-unit generators.
-/-- Right Roos normalization with the specified quotient formula.
-Source: Stacks 06YY, 07A4 and 0941; normalization of the scalar realization
-and pullback model, before the explicit nested quotient identification.
-(blueprint: stage3-pur-scalar-pullback-right-roos-normalized).
-
-The proof compares the normalized scalar model with the pulled normalized model
-on a coherent presentation, using the whole-system counit equation. The quotient
-formula fixes the strict map used at the end of the normalization step.
--/
+/-- Right Roos normalization of the scalar realization and pullback model, for a strict
+comparison `q` satisfying the specified quotient formula. -/
 theorem scalarPullbackRightRoos_normalized (W : Bool → Scheme.{u})
     (ME : CompletedOperations.Models.{u, u} l E W)
     (ρ : IntegralComparisonRoosModel.{u, u} l L (W true))

@@ -15,24 +15,24 @@ public import Mathlib.RingTheory.Nakayama
 /-!
 # Connected components of the fixed locus of a contracting correspondence
 
-Let `c = (c₁, c₂)` be contracting at the rational point `y` of `C`, with `x = c₁(y) = c₂(y)`.
-Blueprint `lemma-fixed-point-scheme-deformation`, first assertion, for `Z = {x}`: a connected
-subscheme `B` of `C` on which the two legs agree and which contains `y` (for instance a connected
-open and closed subscheme of the fixed locus containing `y`) is set-theoretically the point `y`,
-so that `d⁻¹(Z)_red = B_red`.
-
-The proof follows the blueprint. On the local ring `𝒪_{B,y}` the two legs induce the same ideal
-`I = 𝔪_x 𝒪_{B,y}`, and the contraction condition gives `I^n ⊆ I^{n+1}`, so `I^n = 0` by
-Nakayama's lemma. Every generization of `y` in `B` is a prime of `𝒪_{B,y}`, hence contains `I` and
-maps to `x`; as the fibre `c₁⁻¹(x)` is the point `y`, the point `y` has no proper generization.
-A closed point without proper generization of a scheme locally of finite type over a field is
-open (`AlgebraicGeometry.Scheme.isOpen_singleton_of_stableUnderGeneralization`), and `B` is
-connected.
+Let `c = (c₁, c₂)` be contracting at the rational point `y` of `C`, with `x = c₁(y) = c₂(y)`. A
+connected subscheme `B` of `C` on which the two legs agree and which contains `y` (for instance a
+connected open and closed subscheme of the fixed locus containing `y`) is set-theoretically the
+point `y`, so that `d⁻¹(Z)_red = B_red` for `Z = {x}`.
 
 ## Main statements
 
 - `ProEtale.CondensedRing.Correspondence.IsContractingAt.subsingleton_of_connected`
 - `AlgebraicGeometry.ProEtale.CondensedRing.Correspondence.IsContractingAt.subsingleton_component`
+
+## Implementation details
+
+On the local ring `𝒪_{B,y}` the two legs induce the same ideal `I = 𝔪_x 𝒪_{B,y}`, and the
+contraction condition gives `I^n ⊆ I^{n+1}`, so `I^n = 0` by Nakayama's lemma. Every generization of
+`y` in `B` is a prime of `𝒪_{B,y}`, hence contains `I` and maps to `x`; as the fibre `c₁⁻¹(x)` is
+the point `y`, the point `y` has no proper generization. A closed point without proper generization
+of a scheme locally of finite type over a field is open
+(`AlgebraicGeometry.Scheme.isOpen_singleton_of_stableUnderGeneralization`), and `B` is connected.
 -/
 
 @[expose] public section
@@ -109,8 +109,8 @@ lemma Scheme.Hom.map_maximalIdeal_stalkMap_comp_pow_le {B C X : Scheme.{u}} (e :
     _ = _ := by rw [Ideal.map_pow, ← h₁]
 
 /-- Let `e : B ⟶ C` equalize `c₁, c₂ : C ⟶ X`, with `B` locally noetherian, and suppose that
-`(c₂^♯ 𝔪)^n ⊆ (c₁^♯ 𝔪)^{n+1}` in `𝒪_{C, e(s)}`. Then the ideal `I = 𝔪 𝒪_{B, s}` is nilpotent
-(Nakayama), so every generization of `s` has the same image as `s` in `X`. -/
+`(c₂^♯ 𝔪)^n ⊆ (c₁^♯ 𝔪)^{n+1}` in `𝒪_{C, e(s)}`. Then every generization of `s` has the same image as
+`s` in `X`. -/
 lemma Scheme.Hom.apply_eq_of_specializes_of_pow_le {B C X : Scheme.{u}} [IsLocallyNoetherian B]
     (e : B ⟶ C) (c₁ c₂ : C ⟶ X) (he : e ≫ c₁ = e ≫ c₂) (s : B) {n : ℕ}
     (hle : (maximalIdeal (X.presheaf.stalk (c₂ (e s)))).map (c₂.stalkMap (e s)).hom ^ n ≤
@@ -148,11 +148,10 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {c : Correspondence ℓ K}
   {y : RationalPoint c.C}
 
-/-- **Connected components of the fixed locus at a contracting point** (blueprint
-`lemma-fixed-point-scheme-deformation`, first assertion `d⁻¹(Z)_red = F_red`, for `Z = {x}`): if
-`c` is contracting at `y`, then a connected scheme `B`, locally of finite type over `k`, with a
-morphism `e : B ⟶ C` injective on points on which the two legs agree, and a rational point `b`
-over `y`, is set-theoretically the single point `b`. -/
+/-- **Connected components of the fixed locus at a contracting point**: if `c` is contracting at
+`y`, then a connected scheme `B`, locally of finite type over `k`, with a morphism `e : B ⟶ C`
+injective on points on which the two legs agree, and a rational point `b` over `y`, is
+set-theoretically the single point `b`. -/
 theorem subsingleton_of_connected (hc : c.IsContractingAt y) {B : Over (Spec (.of k))}
     [LocallyOfFiniteType B.hom] [ConnectedSpace B.left] (e : B ⟶ c.C)
     (he : e ≫ c.c₁ = e ≫ c.c₂) (hinj : Function.Injective e.left.base) (b : RationalPoint B)
@@ -197,8 +196,7 @@ theorem subsingleton_of_connected (hc : c.IsContractingAt y) {B : Over (Spec (.o
   have h₂ : z₂ ∈ ({s} : Set B.left) := huniv ▸ Set.mem_univ _
   exact h₁.trans h₂.symm
 
-/-- **Connected components of the fixed locus at a contracting point** (blueprint
-`lemma-fixed-point-scheme-deformation`, first assertion, for `Z = {x}`): if `c` is contracting at
+/-- **Connected components of the fixed locus at a contracting point**: if `c` is contracting at
 `y`, a connected subscheme `j : B ⟶ F` of the fixed locus (e.g. a connected open and closed
 subscheme) which is closed in `F` and contains a rational point `b` over `y` is set-theoretically
 the single point `b`; in particular `d = c₁ ∘ ι` maps `B` to `x`. -/

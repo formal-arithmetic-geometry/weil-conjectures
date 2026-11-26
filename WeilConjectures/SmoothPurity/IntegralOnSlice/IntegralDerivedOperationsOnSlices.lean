@@ -177,12 +177,20 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 /-!
 # Completed integral operations on the global site and its slices
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Definition 3.5.2; Stacks Project,
-Tags 06YY and 08TC (blueprint: def-pur-integral-derived-operations).
+## Implementation details
 
 The option is only an index for the two sites in the consumer: none is the global
 site; some U is its actual over-site. Coefficients and quotient projections on the
 latter are sectionwise restrictions. Site object and morphism sizes stay t+1 and t.
+The balanced finite-level identity identifies the completed tensor with the recorded
+two-reduction construction, so on the global site it does not introduce a different
+tensor product.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definitions 3.4.10 and 3.5.2,
+  Section 6.5.
+* Stacks Project, Tags 03DA, 03EK, 04D5, 05RU, 06YN, 06YY, 08J7, 08JD and 08TC.
 -/
 
 @[expose] public noncomputable section
@@ -427,29 +435,25 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (X : AlgebraicGeometry.Scheme.{t})
 
-/-- Global or localized site objects. Source: Stacks 04D5
-(blueprint: def-pur-integral-derived-operations). -/
+/-- Global or localized site objects. -/
 def Site (U : Option X.ProEt) : Type (t + 1) :=
   match U with
   | none => X.ProEt
   | some V => Over V
 
-/-- The original category structure, with Hom universe t. Source: Stacks 04D5
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The original category structure, with Hom universe t. -/
 instance siteCategory (U : Option X.ProEt) : Category.{t} (Site X U) :=
   match U with
   | none => inferInstanceAs (Category X.ProEt)
   | some V => inferInstanceAs (Category (Over V))
 
-/-- The actual topology or its over-topology. Source: Stacks 04D5
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The actual topology or its over-topology. -/
 def topology (U : Option X.ProEt) : GrothendieckTopology (Site X U) :=
   match U with
   | none => AlgebraicGeometry.Scheme.ProEt.topology X
   | some V => (AlgebraicGeometry.Scheme.ProEt.topology X).over V
 
-/-- Sectionwise coefficient restriction. Source: Stacks 04D5
-(blueprint: def-pur-integral-derived-operations). -/
+/-- Sectionwise coefficient restriction. -/
 def restrict (U : Option X.ProEt) :
     Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{max u (t + 1)} ⥤
       Sheaf (topology X U) CommRingCat.{max u (t + 1)} :=
@@ -459,78 +463,64 @@ def restrict (U : Option X.ProEt) :
 
 variable (U : Option X.ProEt)
 
-/-- The existing completed ring on this site. Source: Bhatt--Scholze, Section 6.5
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The existing completed ring on this site. -/
 def ring := (restrict.{t, u} X U).obj (completedIntegralCommRingSheafUnrestricted l E X)
 
-/-- Finite coefficients at exponent n+1. Source: Bhatt--Scholze, Section 6.5
-(blueprint: def-pur-integral-derived-operations). -/
+/-- Finite coefficients at exponent n+1. -/
 def finite (n : ℕ) := (restrict.{t, u} X U).obj (integralCoefficientCommRingSheaf l E X n)
 
-/-- The actual restricted quotient projection. Source: Bhatt--Scholze, Section 6.5
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The actual restricted quotient projection. -/
 def projection (n : ℕ) : ring l E X U ⟶ finite l E X U n :=
   (restrict.{t, u} X U).map (completedIntegralCommRingProjectionUnrestricted l E X n)
 
-/-- Abelian sheafification in a size containing the actual site. Source: Stacks 03DA
-(blueprint: def-pur-integral-derived-operations). -/
+/-- Abelian sheafification in a size containing the actual site. -/
 instance abSheafify : HasSheafify (topology X U) AddCommGrpCat.{max u (t + 1)} :=
   letI : EssentiallySmall.{max u (t + 1)} (Site X U) := essentiallySmallSelf _
   hasSheafifyEssentiallySmallSite _ _
 
-/-- The locally bijective sheafification criterion. Source: Stacks 03DA
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The locally bijective sheafification criterion. -/
 instance abLocallyBijective :
     (topology X U).WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
   letI : EssentiallySmall.{max u (t + 1)} (Site X U) := essentiallySmallSelf _
   GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall (topology X U)
 
-/-- Forget only commutativity, retaining the exact completed ring data. Source: Stacks 06YY
-(blueprint: def-pur-integral-derived-operations). -/
+/-- Forget only commutativity, retaining the exact completed ring data. -/
 abbrev rings := SheafOfModules.derivedChangeRingIndependentCoefficients (topology X U)
   (ring l E X U)
 
-/-- The existing module category. Source: Stacks 06YY
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The existing module category. -/
 abbrev Mod := ringedSiteModules.{max u (t + 1)} (rings l E X U)
 
-/-- Standard derived localization for these modules. Source: Stacks 05RU
-(blueprint: def-pur-integral-derived-operations). -/
+/-- Standard derived localization for these modules. -/
 instance hasDerived : HasDerivedCategory (Mod l E X U) := HasDerivedCategory.standard _
 
-/-- The derived category of all completed-coefficient modules on this site. Source: Stacks 05RU
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The derived category of all completed-coefficient modules on this site. -/
 abbrev D := DerivedCategory (Mod l E X U)
 
-/-- The precise cochain representatives. Source: Stacks 05RU
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The precise cochain representatives. -/
 abbrev Cx := CochainComplex (Mod l E X U) ℤ
 
 set_option linter.defProp false in
-/-- The universal scalar-extension witness along the specified projection. Source: Stacks 06YY
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The universal scalar-extension witness along the specified projection. -/
 def reductionWitness (n : ℕ) :=
   letI := HasDerivedCategory.standard (SheafOfModules.{max u (t + 1)}
     (SheafOfModules.derivedChangeRingIndependentCoefficients (topology X U) (finite l E X U n)))
   SheafOfModules.derivedChangeOfRingsIndependentCoefficients (projection l E X U n)
 
-/-- Ordinary change of rings with the witness's fixed objects and maps. Source: Stacks 06YY
-(blueprint: def-pur-integral-derived-operations). -/
+/-- Ordinary change of rings with the witness's fixed objects and maps. -/
 def reduction (n : ℕ) :
     Mod l E X U ⥤ SheafOfModules.{max u (t + 1)}
       (SheafOfModules.derivedChangeRingIndependentCoefficients
         (topology X U) (finite l E X U n)) :=
   (reductionWitness l E X U n).choose
 
-/-- Additivity supplied by the normalized scalar-extension construction. Source: Stacks 06YY
-(blueprint: def-pur-integral-derived-operations). -/
+/-- Additivity supplied by the normalized scalar-extension construction. -/
 instance reductionAdditive (n : ℕ) : (reduction l E X U n).Additive :=
   (reductionWitness l E X U n).choose_spec.choose_spec.choose_spec.choose
 
 attribute [local irreducible] reductionWitness
 
-/-- Termwise reduction with the completed action restored by the actual projection.
-Source: Stacks 06YY (blueprint: def-pur-integral-derived-operations). -/
+/-- Termwise reduction with the completed action restored by the actual projection. -/
 def level (n : ℕ) : Cx l E X U ⥤ Cx l E X U :=
   (reduction l E X U n).mapHomologicalComplex (ComplexShape.up ℤ) ⋙
     (SheafOfModules.restrictScalars
@@ -538,17 +528,14 @@ def level (n : ℕ) : Cx l E X U ⥤ Cx l E X U :=
         (projection l E X U n))).mapHomologicalComplex
       (ComplexShape.up ℤ)
 
-/-- The normalized scalar-extension functor has the prescribed objects.
-Source: Stacks 06YY (blueprint: def-pur-integral-derived-operations).
-Proof: project the object-normalization clause of the scalar-extension witness. -/
+/-- The normalized scalar-extension functor has the prescribed objects. -/
 theorem reduction_obj (n : ℕ) (M : Mod l E X U) :
     (reduction l E X U n).obj M =
       SheafOfModules.changeOfRings
         (projection l E X U n) M :=
   (reductionWitness l E X U n).choose_spec.choose M
 
-/-- The sheafified generator s tensor x of finite reduction. Source: Stacks 03EK
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The sheafified generator s tensor x of finite reduction. -/
 def generator (n : ℕ) (M : Mod l E X U) (V : (Site X U)ᵒᵖ)
     (s : (finite l E X U n).obj.obj V) (x : M.val.obj V) :
     ((reduction l E X U n).obj M).val.obj V :=
@@ -665,8 +652,7 @@ private theorem levelUnit_apply (n : ℕ) (P : Cx l E X U) (i : ℤ)
       generator l E X U n (P.X i) V 1 x :=
   unitModule_apply l E X U n (P.X i) V x
 
-/-- The coefficient reduction, forgetting commutativity only. Source: Stacks 03EK
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The coefficient reduction, forgetting commutativity only. -/
 def rho (n : ℕ) :
     (sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
       (finite l E X U (n + 1)) ⟶
@@ -762,11 +748,7 @@ private theorem unrestrictedReduction_hom_ext (n : ℕ) (M N : Mod l E X U)
 
 attribute [local irreducible] unrestrictedModuleStep
 
-/-- Consecutive reduction maps are uniquely specified on generators. Source: Stacks 03EK
-(blueprint: def-pur-integral-derived-operations).
-Proof: send s tensor x to rho(s) tensor x. The projection compatibility makes this
-balanced and completed-linear. Restrictions and differentials commute with this
-formula. Sheafification and tensor generation give existence and uniqueness. -/
+/-- Consecutive reduction maps are uniquely specified on generators. -/
 theorem transition_existsUnique (n : ℕ) :
     ∃! τ : level l E X U (n + 1) ⟶ level l E X U n,
       ∀ (P : Cx l E X U) (i : ℤ) (V : (Site X U)ᵒᵖ)
@@ -804,23 +786,17 @@ theorem transition_existsUnique (n : ℕ) :
 
 end TransitionConstruction
 
-/-- The actual transition fixed by the preceding tensor formula. Source: Stacks 03EK
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The actual transition fixed by the preceding tensor formula. -/
 def transition (n : ℕ) : level l E X U (n + 1) ⟶ level l E X U n :=
   (transition_existsUnique l E X U n).exists.choose
 
-/-- The actual strict reduction tower. Source: Bhatt--Scholze, Definition 3.5.2
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The actual strict reduction tower. -/
 def tower : Cx l E X U ⥤ (ℕᵒᵖ ⥤ Cx l E X U) :=
   (Functor.ofOpSequence (X := fun n ↦ level l E X U n) (transition l E X U)).flip
 
 attribute [local irreducible] levelUnit
 
-/-- The unique augmentation has x mapped to 1 tensor x at every positive exponent.
-Source: Bhatt--Scholze, Definition 3.5.2 (blueprint: def-pur-integral-derived-operations).
-Proof: the scalar-extension adjunction unit is completed-linear and natural. Apply
-it degreewise; its compatibility with rho follows because rho preserves one. Pure
-tensor generation and sheafification determine the maps uniquely. -/
+/-- The unique augmentation has x mapped to 1 tensor x at every positive exponent. -/
 theorem augmentation_existsUnique :
     ∃! γ : (Functor.const ℕᵒᵖ : Cx l E X U ⥤ (ℕᵒᵖ ⥤ Cx l E X U)) ⟶ tower l E X U,
       ∀ (P : Cx l E X U) (n : ℕ) (i : ℤ) (V : (Site X U)ᵒᵖ) (x : (P.X i).val.obj V),
@@ -860,31 +836,26 @@ theorem augmentation_existsUnique :
     exact (hγ' P n.unop i V x).trans
       (levelUnit_apply l E X U n.unop P i V x).symm
 
-/-- The canonical reduction augmentation. Source: Bhatt--Scholze, Definition 3.5.2
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The canonical reduction augmentation. -/
 def augmentation :
     (Functor.const ℕᵒᵖ : Cx l E X U ⥤ (ℕᵒᵖ ⥤ Cx l E X U)) ⟶ tower l E X U :=
   (augmentation_existsUnique l E X U).exists.choose
 
 attribute [local irreducible] tower augmentation
 
-/-- K-flat representatives with flat terms. Source: Stacks 06YN
-(blueprint: def-pur-integral-derived-operations). -/
+/-- K-flat representatives with flat terms. -/
 def Good : ObjectProperty (Cx l E X U) := fun P ↦
   CochainComplex.IsKFlatIndependentCoefficients (J := topology X U) (R := ring l E X U) P ∧
     ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{t + 1, t, max u (t + 1), max u (t + 1)}
       (R := ring l E X U) (P.X i)
 
-/-- Localization of the resolving class into the existing derived category. Source: Stacks 06YN
-(blueprint: def-pur-integral-derived-operations). -/
+/-- Localization of the resolving class into the existing derived category. -/
 def qGood := (Good l E X U).ι ⋙ DerivedCategory.Q
 
-/-- The actual Roos complex of the strict quotient tower. Source: Stacks 08TC
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The actual Roos complex of the strict quotient tower. -/
 def roos := tower l E X U ⋙ integralOperationsRoosFunctor
 
-/-- Quotient completion on all good representatives. Source: Stacks 08TC
-(blueprint: def-pur-integral-derived-operations). -/
+/-- Quotient completion on all good representatives. -/
 def roosGood := (Good l E X U).ι ⋙ roos l E X U ⋙ DerivedCategory.Q
 
 private theorem sliceProductsExact :
@@ -942,14 +913,7 @@ private theorem roosGoodInverts :
   change QuasiIso ((level l E X U n).map α.hom)
   exact levelQuasiIso l E X U n α.hom P.property Q.property hα
 
-/-- Completion is the unique descent equipped with its representative comparison.
-Source: Stacks 06YN, 08TC (blueprint: def-pur-integral-derived-operations).
-Proof: restriction has exact underlying sheaves, also on a slice; the pro-etale
-countable-product theorem restricts to its over-site. Reduction carries K-flat
-quasi-isomorphisms to quasi-isomorphisms. Roos preserves these by exact products.
-Every derived object has a good representative. The resolving-class localization
-therefore descends roosGood, and is fully faithful on natural transformations,
-which determines this functor together with its comparison uniquely. -/
+/-- Completion is the unique descent equipped with its representative comparison. -/
 theorem completion_exists :
     ∃ F : D l E X U ⥤ D l E X U,
       Nonempty (qGood l E X U ⋙ F ≅ roosGood l E X U) ∧
@@ -982,29 +946,22 @@ theorem completion_exists :
     apply (cancel_mono e'.hom).1
     simpa using hb
 
-/-- Completion chosen with its determining representative normalization. Source: Stacks 08TC
-(blueprint: def-pur-integral-derived-operations). -/
+/-- Completion chosen with its determining representative normalization. -/
 def completion : D l E X U ⥤ D l E X U :=
   (completion_exists l E X U).choose
 
-/-- The normalized comparison on every good representative. Source: Stacks 08TC
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The normalized comparison on every good representative. -/
 def completionComparison : qGood l E X U ⋙ completion l E X U ≅ roosGood l E X U :=
   (completion_exists l E X U).choose_spec.1.some
 
 attribute [local irreducible] completion completionComparison
 
-/-- The augmentation into the termwise product. Source: Bhatt--Scholze, Definition 3.5.2
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The augmentation into the termwise product. -/
 def productAugmentation (P : Cx l E X U) :
     P ⟶ ∏ᶜ (fun n : ℕ ↦ ((tower l E X U).obj P).obj (op n)) :=
   Pi.lift (fun n ↦ ((augmentation l E X U).app P).app (op n))
 
-/-- The zero homotopy witnesses the strict augmentation's composite with 1-s.
-Source: Stacks 08TC (blueprint: def-pur-integral-derived-operations).
-Proof: postcompose with every product projection. Consecutive quotient augmentations
-agree after transition by naturality of augmentation. Hence c(1-s)=0. The differential
-of the zero cochain and the cochain of the zero chain map are both zero. -/
+/-- The zero homotopy witnesses the strict augmentation's composite with 1-s. -/
 theorem roosUnit_condition (P : Cx l E X U) :
     CochainComplex.HomComplex.δ (-1) 0
       (0 : CochainComplex.HomComplex.Cochain P
@@ -1027,8 +984,7 @@ theorem roosUnit_condition (P : Cx l E X U) :
   rw [h]
   simp
 
-/-- The prescribed quotient unit is the explicit chain map (c,0) into Cone(1-s)[-1].
-Source: Stacks 08TC (blueprint: def-pur-integral-derived-operations). -/
+/-- The prescribed quotient unit is the explicit chain map (c,0) into Cone(1-s)[-1]. -/
 def roosUnit (P : Cx l E X U) :
     P ⟶ integralOperationsRoos ((tower l E X U).obj P) :=
   CochainComplex.mappingCocone.lift
@@ -1078,12 +1034,7 @@ private theorem sliceRoosUnit_natural {P Q : Cx.{t, u} l E X U} (a : P ⟶ Q) :
   exact completedCoconeLift_natural (Mod l E X U) _ _ _ _
     (integralOperationsRoos_square ((tower.{t, u} l E X U).map a)) a _ _ (hz P) (hz Q) hn
 
-/-- The quotient unit descends uniquely with its (c,0) normalization on good representatives.
-Source: Stacks 06YN, 08TC (blueprint: def-pur-integral-derived-operations).
-Proof: the chain-level unit commutes with maps, by its product components and its zero
-second cochain. Its equality survives quasi-isomorphisms between good representatives.
-Fully faithful restriction of transformations along the resolving-class localization
-supplies exactly one natural transformation with the displayed formula. -/
+/-- The quotient unit descends uniquely with its (c,0) normalization on good representatives. -/
 theorem completionUnit_existsUnique :
     ∃! η : 𝟭 (D l E X U) ⟶ completion l E X U,
       ∀ P : (Good l E X U).FullSubcategory,
@@ -1101,8 +1052,7 @@ theorem completionUnit_existsUnique :
   exact normalizedUnit_existsUnique (qGood l E X U) ff
     (completion l E X U) (roosGood l E X U) (completionComparison l E X U) β
 
-/-- The unique completion unit determined on all K-flat flat-term representatives.
-Source: Stacks 08TC (blueprint: def-pur-integral-derived-operations). -/
+/-- The unique completion unit determined on all K-flat flat-term representatives. -/
 def completionUnit : 𝟭 (D l E X U) ⟶ completion l E X U :=
   Classical.choose (α := 𝟭 (D l E X U) ⟶ completion l E X U)
     (p := fun η ↦ ∀ P : (Good l E X U).FullSubcategory,
@@ -1110,20 +1060,16 @@ def completionUnit : 𝟭 (D l E X U) ⟶ completion l E X U :=
         DerivedCategory.Q.map (roosUnit l E X U P.obj))
     (ExistsUnique.exists (completionUnit_existsUnique l E X U))
 
-/-- The ambient internal Hom, with independent site and coefficient sizes. Source: Stacks 08J7
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The ambient internal Hom, with independent site and coefficient sizes. -/
 def hom : (D l E X U)ᵒᵖ × D l E X U ⥤ D l E X U :=
   derivedInternalHomOfUniverses.{t + 1, t, u} (topology X U) (ring l E X U)
 
-/-- The normalized ordinary derived tensor-Hom model. Source: Stacks 08JD
-(blueprint: def-pur-integral-derived-operations). -/
+/-- The normalized ordinary derived tensor-Hom model. -/
 def duality : RingedSiteDualityModel.{t + 1, t, u, (max u (t + 1)) + 1}
     (topology X U) (ring l E X U) :=
   Classical.choice (ringedSiteDualityMaps_exists (topology X U) (ring l E X U))
 
-/-- Completed tensor as quotient completion of ordinary derived tensor. The balanced
-finite-level identity identifies this with the recorded two-reduction construction.
-Source: Bhatt--Scholze, Definition 3.4.10 (blueprint: def-pur-integral-derived-operations). -/
+/-- Completed tensor as quotient completion of ordinary derived tensor. -/
 def completedTensor : (D l E X U) × (D l E X U) ⥤ D l E X U :=
   (duality l E X U).closed.tensor ⋙ completion l E X U
 
@@ -1184,18 +1130,7 @@ private theorem tensorCompletionOnGood :
     (completionComparison l E X none)
   exact ⟨e ≪≫ d⟩
 
-/-- The global specialization computes precisely the recorded finite-tensor Roos model,
-so this extension does not introduce a different global tensor product.
-Source: Bhatt--Scholze, Definition 3.4.10; Stacks 06YY
-(blueprint: def-pur-integral-derived-operations).
-Proof: for flat-term K-flat P,Q, their ordinary tensor is K-flat with flat terms.
-Apply completionComparison to that tensor and the ordinary tensor comparison of
-RingedSiteDualityModel.models. At each finite level reassociate balanced tensors:
-(p tensor a) tensor (q tensor b) maps to (p tensor q) tensor ab, and its inverse
-sends (p tensor q) tensor a to (p tensor 1) tensor (q tensor a). Both maps preserve
-the total differential and every quotient transition. Their strict tower isomorphism
-gives a Roos isomorphism, natural in P,Q. Compose with the representative comparisons.
-The target is exactly integralOperationsTensorOnGood, not an arbitrary derived model. -/
+/-- The global specialization computes precisely the recorded finite-tensor Roos model. -/
 theorem completedTensor_global_comparison :
     Nonempty (((integralOperationsGoodLocalization l E X).prod
       (integralOperationsGoodLocalization l E X)) ⋙ completedTensor l E X none ≅

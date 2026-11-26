@@ -12,9 +12,27 @@ import WeilConjectures.SixFunctors.CanonicalOpenRestriction.OpenSystemCounitEval
 
 /-! # The restriction counit on good complexes
 
-Source: Stacks Project, Tags 0E8I, 0GL1, 03DJ, 06YY and 0941.
+We prove the counit square for a normalized strict restriction comparison on good complexes.
 This isolates the representative construction, independently of reconstruction or
 realization through total limits.
+
+## Implementation details
+
+Fix `Q` and take the augmented presentations supplied by the hypotheses. Their restricted
+complexes have the same integral source but possibly different strict system models; the
+identity on that source and the ordinary integral counit are assembled into strict comparisons
+of models. Degreewise, at every finite coefficient, naturality of the finite counit and the
+triangle identity cancel the finite unit and counit. Ordinary system evaluations are jointly
+faithful, so this gives an equality of strict chain-system maps, which is then localized. No
+detection of arbitrary derived arrows by finite evaluation is used.
+
+## References
+
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -185,28 +203,7 @@ private theorem derivedCounit_calculation
   simp only [Functor.map_comp, Category.assoc]
 
 /-- The counit square for any normalized strict restriction comparison, on good complexes.
-This asserts one equality and does not assert existence or invertibility of a comparison.
-Source: Stacks sites-modules.tex, Tags 03DJ and 0E8I; sites-cohomology.tex,
-Tags 06YY, 0GL1 and 0941; the counit calculation in transport steps 2--4.
-(blueprint: lem-sf-open-restriction-counit-on-good-complexes).
-
-Proof: fix Q and take the augmented presentations supplied by hs and hr. Their
-restricted complexes have the same integral source but may have different strict
-system models. Assemble the identity on that source into a strict comparison
-between the two models. Assemble the ordinary integral counit into a second
-strict map from the extension model to the X model. Naturality of augmented
-presentations identifies the localizations of these two maps with the identity
-on reduction and with reduction of the ordinary counit, respectively.
-
-At every degree and finite coefficient, substitute the extension square from hr
-and the unit/inverse-tensor/counit expression from hs. Naturality of the finite
-counit and the triangle identity cancel the finite unit and counit, followed by
-the tensor isomorphism and its inverse. Ordinary system evaluations are jointly
-faithful, so this proves an equality of strict chain-system maps. Localize that
-equality, substitute the two representative squares and the two augmentation
-identifications, and cancel their isomorphisms. The localization formula for an
-exact adjunction counit gives precisely the two counits in the conclusion.
-No detection of arbitrary derived arrows by finite evaluation is used. -/
+This asserts one equality and does not assert existence or invertibility of a comparison. -/
 theorem openRestrictionCounitOnGoodComplexes
     (r : shriek l E j o ⋙ SX.reduction ≅ SU.reduction ⋙ J l E j o)
     (tensor : TensorComparison l E j o)

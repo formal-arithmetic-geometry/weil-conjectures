@@ -14,8 +14,15 @@ import WeilConjectures.SixFunctors.ConstructibleTensorModel.ConstructibleTensorC
 
 /-! # Constructible tensor completion in the native total-tensor presentation
 
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50
-(blueprint: lem-fix-constructible-tensor-completion-assembly).
+## Implementation details
+
+Simultaneous projective charts give local completeness by `projectiveTensorChartComplete`;
+finite open–closed locality then gives global completeness and invertibility of the canonical
+unit.
+
+## References
+
+* [Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 3.4.10 and Lemma 6.5.5]
 -/
 
 @[expose] public noncomputable section
@@ -39,9 +46,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 attribute [local irreducible] IntegralOnSlice.duality IntegralOnSlice.roosUnit
   IntegralAmbient.tensorTowerIso IntegralAmbient.tensorOperationUnit
 
-/-- The specified 1-s map of the strict finite tensor tower.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: lem-fix-constructible-tensor-completion-assembly). -/
+/-- The specified 1-s map of the strict finite tensor tower. -/
 abbrev completionBoundary (P Q : CochainComplex (integralTowerModules l E W) ℤ) :=
   towerTransitionEndomorphism
     (K := fun n ↦ (integralOperationsTensorLevel l E W n).obj (P, Q))
@@ -49,18 +54,7 @@ abbrev completionBoundary (P Q : CochainComplex (integralTowerModules l E W) ℤ
 
 /-- Assemble the actual ordinary tensor, canonical normalized chain map and completed
 comparison in the native coefficient-total-tensor presentation. The ordinary tensor
-is complete, and its specified comparison is invertible, on constructible pairs.
-
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Definition 3.4.10
-(blueprint: lem-fix-constructible-tensor-completion-assembly).
-
-Proof: use the recorded representative model and canonical tower augmentation, with
-both coordinate equations. The normalized ambient comparison identifies completion
-of the ordinary tensor with completed tensor. Simultaneous projective charts give
-local completeness by projectiveTensorChartComplete; finite open--closed locality
-then gives global completeness and invertibility of the canonical unit. Compose this
-unit with the recorded isomorphism. Its normalization follows by cancelling the
-representative isomorphism. -/
+is complete, and its specified comparison is invertible, on constructible pairs. -/
 theorem constructibleTensorCompletionNative [CompactSpace W] [QuasiSeparatedSpace W]
     [∀ w : W, Invertible (l : W.residueField w)] :
     ∃ (T : DerivedCategory (integralTowerModules l E W) ×

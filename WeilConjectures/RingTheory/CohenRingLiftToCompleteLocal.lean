@@ -12,7 +12,22 @@ import WeilConjectures.RingTheory.CohenRingModPowFormallySmooth
 import Mathlib.RingTheory.AdicCompletion.RingHom
 
 /-! # Lifting a Cohen ring into a complete local ring
-Source: Stacks Project, Algebra, Theorem 032A(1), second proof paragraph. -/
+
+A residue isomorphism `C / p ≃ R / m` from a Cohen ring `C` to the residue field of a complete
+local ring `R` of residue characteristic `p` lifts to a ring map `C → R`
+(`IsLocalRing.exists_cohenRing_lift`).
+
+## Implementation details
+
+Since `p ∈ m`, each `R / m ^ n` is a `ℤ / p ^ n`-algebra. Starting from the residue isomorphism,
+the maps `C / p ^ n → R / m ^ n` are lifted inductively, using formal smoothness of `C / p ^ n`
+over `ℤ / p ^ n` and the square-zero kernel of `R / m ^ (n + 1) → R / m ^ n`. The resulting
+compatible system gives a map into the adic completion of `R`, which is `R`.
+
+## References
+
+* [Stacks, Tag 032A]
+-/
 
 @[expose] public section
 
@@ -40,17 +55,8 @@ private theorem lift_cohen_square_zero (p : ℕ) (C : Type v) [CommRing C]
   ext x
   rfl
 
-/-- A prescribed residue isomorphism of a Cohen ring lifts into a complete local ring.
-Source: Stacks Project, Algebra, Theorem 032A(1), second proof paragraph.
-(blueprint: lem-weil-pbc-cohen-ring-lift-complete-local)
-
-Proof: Since p is zero in the residue field of R, p lies in m and p^n lies in m^n.
-Thus R/m^n is a Z/p^n-algebra. Start with the given residue isomorphism e. Inductively
-lift C/p^n to R/m^n using formal smoothness of C/p^n over Z/p^n and the square-zero
-kernel of R/m^n to R/m^(n-1). The resulting maps commute with the reduction maps.
-Precompose each with C to C/p^n, forming a compatible system. This gives a ring map
-from C into the adic completion of R; completeness identifies the latter with R.
-Its first component is e composed with reduction modulo p, giving the equality. -/
+/-- A prescribed residue isomorphism `C / p ≃ R / m` of a Cohen ring `C` lifts to a ring map
+`C → R` into a complete local ring `R`. -/
 theorem exists_cohenRing_lift (R : Type u) [CommRing R] [IsLocalRing R]
     [IsAdicComplete (maximalIdeal R) R] (p : ℕ) [CharP (ResidueField R) p]
     (C : Type v) [CommRing C] (hC : IsCohenRing p C)

@@ -20,9 +20,9 @@ Let `X` be a noetherian topological space. Every open subset of `X` is quasi-com
 filtered colimit of abelian sheaves on `X` is computed sectionwise
 (`TopCat.Sheaf.isColimitSheafSectionsMapCocone`), a filtered colimit of flasque sheaves is
 flasque (`TopCat.Sheaf.isFlasque_of_isColimit`), and sheaf cohomology `Hⁿ(X, -)` commutes with
-filtered colimits (`TopCat.Sheaf.preservesColimitsOfShape_functorH`, blueprint
-`lemma-uniform-bounds-pro-etale-affines`). The last statement follows by dimension shifting along
-the functorial embedding of a sheaf into its Godement sheaf, which is flasque.
+filtered colimits (`TopCat.Sheaf.preservesColimitsOfShape_functorH`). The last statement follows
+by dimension shifting along the functorial embedding of a sheaf into its Godement sheaf, which is
+flasque.
 -/
 
 @[expose] public section
@@ -382,12 +382,9 @@ theorem hColimitProp (n : ℕ) (D : J ⥤ TopCat.Sheaf AddCommGrpCat.{u} X) : HC
       (ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance)
       fun j ↦ (inferInstance : Presheaf.IsFlasque (godementFunctor.obj (D.obj j)).obj)
 
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: Filtered colimits on a Noetherian Zariski
-site.
-
-On a noetherian topological space `X` (for instance the underlying space of a noetherian
-scheme), sheaf cohomology commutes with filtered colimits of abelian sheaves:
-`colimᵢ Hⁿ(X, Fᵢ) ≅ Hⁿ(X, colimᵢ Fᵢ)` for every `n`. -/
+/-- **Filtered colimits on a noetherian space.** On a noetherian topological space `X` (for
+instance the underlying space of a noetherian scheme), sheaf cohomology commutes with filtered
+colimits of abelian sheaves: `colimᵢ Hⁿ(X, Fᵢ) ≅ Hⁿ(X, colimᵢ Fᵢ)` for every `n`. -/
 theorem preservesColimitsOfShape_functorH (J : Type u) [SmallCategory J] [IsFiltered J]
     (n : ℕ) :
     PreservesColimitsOfShape J (Sheaf.functorH.{u} (Opens.grothendieckTopology X) n) := by

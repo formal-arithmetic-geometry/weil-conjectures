@@ -11,7 +11,22 @@ import all WeilConjectures.WeilSheaf.Native.Weil.NativeWeilUnderivedTensor
 import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorForgetKFlat
 import Mathlib.Algebra.Homology.BifunctorFlip
 
-/-! # The two-sided native K-flat test and ordinary forgetting -/
+/-! # The two-sided native K-flat test and ordinary forgetting
+
+A native complex satisfying the two-sided K-flat test forgets to an ordinary K-flat complex.
+
+## Implementation details
+
+An acyclic complex receives a quasi-isomorphism from the zero complex, so the native test makes
+its total tensor with `P` acyclic. The exact orbit induction of
+`native_weil_tensor_forget_kflat` places any ordinary acyclic test in the underlying native
+category, and the degree-zero orbit summand exhibits its tensor with the forgotten `P` as a
+retract.
+
+## References
+
+* Stacks Project, Tag 06YS.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -57,19 +72,7 @@ private theorem acyclic_of_quasiIso_test
   have : QuasiIsoAt (F.map (0 : Z ⟶ N)) n := (quasiIso_iff _).mp ht n
   exact (quasiIsoAt_iff_exactAt _ n (hz n)).mp this
 
-/-- The canonical native two-sided K-flat test implies the ordinary acyclic tensor test.
-Source: Stacks 06YS and the exact orbit-induction argument of native tensor transport.
-(blueprint: lem-sf-native-two-sided-kflat-forget).
-
-Proof: an acyclic complex N admits a quasi-isomorphism from the zero complex.
-The second quasi-isomorphism test for P sends this map to a quasi-isomorphism;
-additivity sends the zero object to a zero object, so its target is acyclic.
-The total-complex flip identifies that target with the unflipped total tensor of
-P with N. Apply native_weil_tensor_forget_kflat: its exact orbit induction places
-any ordinary acyclic test in the underlying native category, and the degree-zero
-orbit summand exhibits its tensor with the forgotten P as a retract. Exact
-forgetting and that splitting prove ordinary acyclicity. Zero complexes, empty
-sites and unbounded complexes satisfy exactly the same argument. -/
+/-- The canonical native two-sided K-flat test implies the ordinary acyclic tensor test. -/
 theorem native_two_sided_kflat_forget
     (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (hP : NativeIsKFlat k₀ l X P) :

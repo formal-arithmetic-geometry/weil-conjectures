@@ -17,8 +17,13 @@ import all WeilConjectures.SmoothPurity.CompletedOpenTensor.CompletedOpenTensorS
 
 /-! # Single-operation bounds for completed compact support
 
-Source: Stacks 0941, 0F10 and 0F7J; the common-bound argument in
-lem-sf-completed-shriek-composition-laws, steps 7 and 8.
+## References
+
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0F10]
+* [Stacks, Tag 0F7J]
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -265,24 +270,7 @@ private theorem open_normalized {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersio
     (fun {m n} h P ↦ SY.reduction_normalized _ h P) h P
 
 /-- One quasi-compact open letter preserves the system domain and integral
-constructibility, with the same finite cohomology and Tor intervals.
-Source: Stacks 0GL1, 0E8I, 0941; parent proof step 8
-(blueprint: lem-sf-open-support-step-bounds).
-
-Proof: the finite open CTF theorem preserves constructible cohomology and the
-same cohomological and Tor intervals at every level; transport these conclusions
-through the specified open evaluation. For normalization, reconstruct the input
-as the reduction of its total limit using the invertible actual counit. The
-canonical ambient model and the proved open-reduction effectivity theorem identify
-its open extension with an actual reduction system, which is normalized. Uniqueness
-of left adjoints transports this conclusion to the specified operation o.
-For each output level use bounded constructible etale descent after the canonical
-module equivalence. Full faithfulness of that equivalence and of the bounded-below
-etale comparison lifts the actual system transition and proves the two origin
-squares. Finally the canonical open-factor coherence data already prove integral
-constructibility of ringedOpen, independently of the system input. Combine the
-three system properties and this independent integral conclusion. No separatedness
-hypothesis is introduced. -/
+constructibility, with the same finite cohomology and Tor intervals. -/
 theorem openSupportStep_bounds (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (o : Operations l E) {X Y : Over (Spec (CommRingCat.of D.k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]

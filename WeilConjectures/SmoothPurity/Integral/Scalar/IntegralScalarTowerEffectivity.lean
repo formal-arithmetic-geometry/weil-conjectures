@@ -15,8 +15,10 @@ import WeilConjectures.SmoothPurity.Normalized.NormalizedDVREffectivity
 
 /-! # Effectivity of the scalar quotient tower
 
-Source: Bhatt--Scholze, Proposition 3.5.1; integral scalar constructibility proof.
-(blueprint: lem-sf-integral-scalar-tower-effectivity).
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 3.5.1 and
+  Lemmas 3.5.4--3.5.5.
 -/
 
 @[expose] public section
@@ -33,24 +35,7 @@ variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- Effectivity of the specified strict scalar quotient tower on good representatives.
-Source: Bhatt--Scholze, Lemmas 3.5.4--3.5.5; normalized DVR effectivity and the strict
-Roos comparison, steps 2, 6--7 of lem-weil-integral-scalar-extension-constructible.
-(blueprint: lem-sf-integral-scalar-tower-effectivity).
-Proof: termwise scalar tensor of the good complex is K-flat over every finite target
-quotient. For m >= n, the balanced tensor maps (x tensor b) tensor c to x tensor bc
-and x tensor c to (x tensor 1) tensor c identify further derived reduction with the
-specified lower level. These maps commute with the quotient transitions and satisfy
-the cocycle because both iterated maps multiply the same three scalars. They give the
-normalized DVR tower for O_L with its actual restricted scalar transitions. Exact
-countable products compare its strict Roos complex with the derived inverse limit,
-compatibly with all quotient evaluations. The representative comparison in the
-definition of integralScalarExtension identifies its value on Q(P) with precisely this
-Roos complex. Apply normalizedDVRTower_effectivity: its counit comparisons identify
-all reductions with the finite tensor levels, and its last clause gives derived
-completeness. No constructibility, boundedness, completeness of P, or flatness between
-finite coefficient quotients is used. Identity extension and the zero complex are
-included; normalization concerns actual quotient maps, not arbitrary triangle fillers. -/
+/-- Effectivity of the specified strict scalar quotient tower on good representatives. -/
 theorem integralScalarTower_effectivity
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :
     IsDerivedComplete l L Y D hl

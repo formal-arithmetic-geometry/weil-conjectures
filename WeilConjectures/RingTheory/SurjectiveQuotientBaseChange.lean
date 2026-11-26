@@ -10,8 +10,20 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 
 /-! # Extension of scalars along a surjection
 
-Source: Stacks Project, Tag 05WS; the quotient description is the pushout universal
-property for commutative rings.
+Extension of scalars of commutative algebras along a ring map `π : A → B`
+(`Algebra.quotientBaseChange`), and, for surjective `π` with kernel `I`, its identification
+with `C ↦ C ⧸ I C` (`Algebra.quotientBaseChangeObjIso`).
+
+## Implementation details
+
+Extension of scalars is defined by pushout in commutative rings. For surjective `π`, the maps
+`C → C ⧸ I C` and `B → C ⧸ I C` form a pushout: a map `C → T` agreeing with a map `B → T` on
+`A` kills `I C` and so factors uniquely through `C ⧸ I C`. The pushout used in the definition
+is uniquely isomorphic to this explicit one.
+
+## References
+
+* [Stacks, Tag 05WS]
 -/
 
 @[expose] public section
@@ -34,16 +46,7 @@ noncomputable instance {A B : Type u} [CommRing A] [CommRing B] (π : A →+* B)
 
 /-- Extension of scalars along a surjection `π : A → B` with kernel `I` sends `C` to
 `C ⧸ I C`, where `C ⧸ I C` carries a `B`-algebra structure compatible with `π`. Since `π`
-is surjective, this is the structure induced by `π`.
-Source: Stacks Project, Tag 05WS (the ring pushout calculation).
-(blueprint: lem-sbc-surjective-quotient-base-change)
-
-Proof: The maps C -> Q and B -> Q form a pushout: for maps C -> T and B -> T agreeing on
-A, the map C -> T kills IC, and so factors uniquely through Q. The factor respects the
-B-action since this can be checked after π. The pushout used in quotientBaseChange is
-uniquely isomorphic to this explicit pushout. Transport through the equivalence with
-commutative B-algebras yields the claimed isomorphism. This argument includes I = 0 and
-does not assume C is local. -/
+is surjective, this is the structure induced by `π`. -/
 noncomputable def quotientBaseChangeObjIso
     (A B C : Type u) [CommRing A] [CommRing B] [CommRing C] [Algebra A C]
     (π : A →+* B) (hπ : Function.Surjective π)

@@ -18,9 +18,22 @@ import Mathlib.LinearAlgebra.Dimension.Constructions
 /-!
 # Fibre cotangent comparison after localization with generator bound
 
-Source: Stacks Project, Algebra, Tag 00RV (lemma-differentials-base-change),
-followed by localization and tensor comparison in Morphisms, Tag 01V9(4)
-(blueprint: lem-trf-fibre-cotangent-localization-generators).
+For a prime `q` of an `R`-algebra `A` with fibre point `Q`, we compare `(Ω_{A/R})_q ⊗ κ(Q)` with
+the differentials of the fibre ring tensored with `κ(Q)`, and show that `r` generators of
+`(Ω_{A/R})_q` give a spanning family of size `r` of the target.
+
+## Implementation details
+
+The comparison `θ` is a composite of: differential base change (Tag 00RV) giving `beta`, the
+identification of `M_q ⊗[A_q] L` with `L ⊗[A] M`, and the cancellation of scalars along
+`A → F → L`. Modules over `L` on the tensor products are transported through tensor
+commutativity, so that `L` acts on the right factor.
+
+## References
+
+* [Stacks, Tag 00RV]
+* [Stacks, Tag 01V9], part (4)
+* [Stacks, Tag 00CX], [Stacks, Section 07BH]
 -/
 
 @[expose] public section
@@ -36,44 +49,34 @@ namespace KaehlerDifferential.FibreLocalization
 
 variable {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]
 
-/-- The contracted base prime. Source: Stacks 01V9(4)
-(blueprint: lem-trf-fibre-cotangent-localization-generators). -/
+/-- The contracted base prime. -/
 abbrev basePrime (q : Ideal A) : Ideal R := q.comap (algebraMap R A)
 
-/-- The fibre ring, using the existing Mathlib construction. Source: Stacks 01V9(4)
-(blueprint: lem-trf-fibre-cotangent-localization-generators). -/
+/-- The fibre ring, using the existing Mathlib construction. -/
 abbrev fibre (q : Ideal A) [q.IsPrime] := (basePrime (R := R) q).Fiber A
 
-/-- The canonical fibre map to the residue field at the original prime.
-Source: Stacks 00RV and residue field functoriality, Section 07BH
-(blueprint: lem-trf-fibre-cotangent-localization-generators). -/
+/-- The canonical fibre map to the residue field at the original prime. -/
 noncomputable def residueMap (q : Ideal A) [q.IsPrime] :
     fibre (R := R) q →ₐ[R] q.ResidueField :=
   Algebra.TensorProduct.lift
     (Ideal.ResidueField.mapₐ (basePrime (R := R) q) q (Algebra.ofId R A) rfl)
     (IsScalarTower.toAlgHom R A q.ResidueField) (fun _ _ ↦ Commute.all _ _)
 
-/-- The canonical prime in the fibre is the kernel of its residue map.
-Source: Stacks 01V9(4), with Section 07BH
-(blueprint: lem-trf-fibre-cotangent-localization-generators). -/
+/-- The canonical prime in the fibre, the kernel of its residue map. -/
 noncomputable def fibrePoint (q : Ideal A) [q.IsPrime] :
     PrimeSpectrum (fibre (R := R) q) :=
   ⟨RingHom.ker (residueMap (R := R) q).toRingHom,
     RingHom.ker_isPrime (residueMap (R := R) q).toRingHom⟩
 
-/-- The residue field of the canonical fibre prime. Source: Stacks 01V9(4)
-(blueprint: lem-trf-fibre-cotangent-localization-generators). -/
+/-- The residue field of the canonical fibre prime. -/
 noncomputable abbrev fibreField (q : Ideal A) [q.IsPrime] :=
   (fibrePoint (R := R) q).asIdeal.ResidueField
 
-/-- The standard right-factor algebra structure on the fibre.
-Source: Stacks 00CX, 00RV (blueprint: lem-trf-fibre-cotangent-localization-generators). -/
+/-- The standard right-factor algebra structure on the fibre. -/
 noncomputable abbrev fibreAlgebra (q : Ideal A) [q.IsPrime] : Algebra A (fibre (R := R) q) :=
   Algebra.TensorProduct.rightAlgebra
 
-/-- The inverse of the canonical differential base-change isomorphism is beta.
-Source: Stacks 00RV (lemma-differentials-base-change)
-(blueprint: lem-trf-fibre-cotangent-localization-generators). -/
+/-- The inverse of the canonical differential base-change isomorphism. -/
 noncomputable def beta (q : Ideal A) [q.IsPrime] :
     letI := fibreAlgebra (R := R) q
     KaehlerDifferential (basePrime (R := R) q).ResidueField (fibre (R := R) q) ≃ₗ[
@@ -82,10 +85,9 @@ noncomputable def beta (q : Ideal A) [q.IsPrime] :
   (KaehlerDifferential.tensorKaehlerEquiv R (basePrime (R := R) q).ResidueField
     A (fibre (R := R) q)).symm
 
-/-- Exact pure-tensor and generator specification for the canonical comparison,
-using right-factor scalar actions transported through tensor commutativity.
-Source: Stacks 00RV followed by the comparison in 01V9(4)
-(blueprint: lem-trf-fibre-cotangent-localization-generators). -/
+/-- The canonical comparison along `ρ` exists: an `L`-linear equivalence with the given values
+on pure tensors, carrying any `r` generators to a spanning family, so the target is
+finite-dimensional of dimension at most `r`. -/
 def ComparisonAlong (q : Ideal A) [q.IsPrime]
     (ρ : Localization.AtPrime q →+* fibreField (R := R) q) : Prop :=
   letI := fibreAlgebra (R := R) q
@@ -137,30 +139,7 @@ private theorem scalarCancel_symm_tmul
 
 /-- Localizing the relative differentials and then taking the fibre gives the
 canonical comparison with the differentials of the fibre ring; finite generators
-span the target and bound its dimension.
-
-Source: Stacks Project, Algebra, Tag 00RV and Morphisms, Tag 01V9(4)
-(blueprint: lem-trf-fibre-cotangent-localization-generators).
-
-Proof:
-1. The residue map at q has kernel q. The canonical fibre residue map has prime
-   kernel Q with contraction q, so every a outside q has nonzero image in L.
-   The localization universal property supplies rho extending A to L.
-2. Differential base change (00RV) gives beta, whose inverse is F-linear.
-3. The map (omega/a) tensor z to omega tensor (z/a) is well-defined by the
-   fraction relation: multiplying a relation by an invertible denominator in L
-   gives equality. It is Aq-balanced; its inverse sends omega tensor z to
-   (omega/1) tensor z. Both composites are identities on pure tensors.
-4. Reassociate (F tensor_A M) tensor_F L with M tensor_A L using the map
-   (b tensor omega) tensor z to omega tensor (b*z), with inverse
-   omega tensor z to (1 tensor omega) tensor z. Compose with beta inverse
-   tensored with L and the localization comparison. These maps give theta and
-   both displayed formulas; pure tensors generate, so the formulas determine it.
-5. Expressing m as a linear combination of the m_i and balancing tensors shows
-   that the m_i tensor 1 span the source; theta transports the spanning family.
-6. Extract an independent subfamily of the r spanning vectors. Its span is the
-   whole target and its dimension is its cardinality, at most r. For r=0 this
-   says the target is zero, finite-dimensional of dimension zero. -/
+span the target and bound its dimension. -/
 theorem comparison {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]
     (q : Ideal A) [q.IsPrime] :
     ∃ ρ : Localization.AtPrime q →+* fibreField (R := R) q,

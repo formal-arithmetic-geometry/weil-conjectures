@@ -8,7 +8,12 @@ module
 public import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoidal
 /-! # Ordinary complex tensor associativity data
 
-Source: Stacks 07A4 and 0FPT.
+We define the formula fixing the ordinary total associator on triple tensor generators and
+associativity before localization.
+
+## References
+
+* [Stacks, Tags 07A4, 0FPT]
 -/
 
 @[expose] public noncomputable section
@@ -22,8 +27,7 @@ universe c v r wb d vd s wa b vb a va
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 namespace WeilConjectures
 
-/-- The ordinary total associator is fixed by its formula on triple tensor generators.
-Source: Stacks 07A4; (blueprint: def-coef-complex-tensor-associativity). -/
+/-- The ordinary total associator is fixed by its formula on triple tensor generators. -/
 def CoefficientComplexAssociatorFormula
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v r}]
@@ -45,8 +49,7 @@ def CoefficientComplexAssociatorFormula
       ((coefficientTotalTensor.{r, c, v} J R).obj (Q, N)) p qt n hn' V x
       (coefficientTensorGenerator.{r, c, v} J R Q N q t qt hqt V y z)
 
-/-- Associativity before localization, for total associators fixed on tensor generators.
-Source: Stacks 07A4; (blueprint: def-coef-complex-tensor-associativity). -/
+/-- Associativity before localization, for total associators fixed on tensor generators. -/
 def CoefficientComplexTensorAssociativity
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v r}]

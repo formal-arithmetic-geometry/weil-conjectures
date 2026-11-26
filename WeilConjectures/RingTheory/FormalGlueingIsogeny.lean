@@ -19,12 +19,29 @@ import WeilConjectures.RingTheory.FormalGlueingMapFromAlgebraization
 /-!
 # Formal glueing of maps with ideal-power torsion kernel and cokernel
 
-Source: Stacks Project, More on Algebra, Lemma 0ALK, with Lemmas 05EC and 05E9
-(blueprint: lem-weil-pbc-formal-glueing-isogeny).
+Let `R → S` be flat, inducing an isomorphism modulo a finitely generated ideal `I`. An
+`S`-linear map between `S ⊗_R P` and an `S`-module `Q` whose kernel and cokernel are `I`-power
+torsion is the base change of an `R`-linear map with `I`-power torsion kernel and cokernel, and
+the kernels and cokernels are identified with their base changes.
+
+## Implementation details
 
 The tensor factors follow Mathlib's convention `S ⊗[R] M`. Ideal-power torsion
 is expressed elementwise, and the comparison equivalences are specified on
 kernel elements and on representatives of the cokernel.
+
+After localizing at generators `fᵢ` of `I` the given map becomes an isomorphism, so together
+with the canonical comparison maps it defines a formal glueing datum and a morphism, which the
+formal glueing equivalence algebraizes. An element killed by `fᵢ ^ eᵢ` for every `i` is killed
+by `I ^ (1 + ∑ eᵢ)`. Flatness and right exactness identify the base changed kernel and cokernel
+with those of the base changed map, and for `I`-power torsion modules `x ↦ 1 ⊗ x` is an
+isomorphism.
+
+## References
+
+* [Stacks, Tag 0ALK]
+* [Stacks, Tag 05EC]
+* [Stacks, Tag 05E9]
 -/
 
 @[expose] public section
@@ -105,29 +122,10 @@ private theorem torsion_map_comparisons
     rw [hec]
     rfl
 
-/-- Part (1) and the comparisons in part (3) of Stacks, Lemma 0ALK;
-Lemmas 05EC and 05E9 (blueprint: lem-weil-pbc-formal-glueing-isogeny).
-
-Localize at a finite set of generators of `I`: torsion kernels and cokernels
-vanish, so the given map becomes an isomorphism (module localization and its
-exactness, def-weil-pbc-module-localization-away and
-lem-weil-pbc-localization-module-exact). Build the glueing datum using these
-localized isomorphisms and the canonical comparison maps
-(theorem-finite-etale-covers-proper-henselian--2). The formal glueing equivalence
-(prop-weil-pbc-formal-glueing-equivalence) algebraizes the datum and its map;
-comparison of components gives `ψ` and `β`. The localized `ψ` are isomorphisms.
-Thus each element of its kernel and cokernel is killed by a power of every
-generator. Choose positive exponents `eᵢ` killing that element and use degree
-`1 + ∑ eᵢ`: every generating monomial has an exponent at least `eᵢ`, so
-this power of `I` kills the element, including for the empty generating set.
-Flatness identifies the base-changed
-kernel with the kernel of the base-changed map (lem-weil-pbc-flat-tensor-exact);
-right exactness gives the analogous cokernel identification
-(lem-weil-pbc-tensor-right-exact). For ideal-power torsion modules the map
-`x ↦ 1 ⊗ x` is an isomorphism (lem-weil-pbc-torsion-module-flat-base-change-iso).
-These composites are the canonical comparison maps specified below.
-Finally `β` transports their targets to the kernel and cokernel of `φ'`;
-the last two clauses specify these transported comparisons.
+/-- An `S`-linear map `φ' : Q → S ⊗[R] P` with `I`-power torsion kernel and cokernel is, up to
+an isomorphism `β : Q ≃ S ⊗[R] T`, the base change of an `R`-linear map `ψ : T → P` with
+`I`-power torsion kernel and cokernel; moreover the kernels and cokernels of `ψ`, of its base
+change and of `φ'` are identified by the maps `x ↦ 1 ⊗ x`.
 -/
 theorem exists_map_to_of_torsion_baseChange
     (hflat : (algebraMap R S).Flat) (I : Ideal R) (hI : I.FG)
@@ -199,30 +197,10 @@ theorem exists_map_to_of_torsion_baseChange
     rw [hc]
     rfl
 
-/-- Part (2) and the comparisons in part (3) of Stacks, Lemma 0ALK;
-Lemmas 05EC and 05E9 (blueprint: lem-weil-pbc-formal-glueing-isogeny).
-
-Localize at a finite set of generators of `I`: torsion kernels and cokernels
-vanish, so the given map becomes an isomorphism (module localization and its
-exactness, def-weil-pbc-module-localization-away and
-lem-weil-pbc-localization-module-exact). Build the glueing datum using these
-localized isomorphisms and the canonical comparison maps
-(theorem-finite-etale-covers-proper-henselian--2). The formal glueing equivalence
-(prop-weil-pbc-formal-glueing-equivalence) algebraizes the datum and its map;
-comparison of components gives `ψ` and `β`. The localized `ψ` are isomorphisms.
-Thus each element of its kernel and cokernel is killed by a power of every
-generator. Choose positive exponents `eᵢ` killing that element and use degree
-`1 + ∑ eᵢ`: every generating monomial has an exponent at least `eᵢ`, so
-this power of `I` kills the element, including for the empty generating set.
-Flatness identifies the base-changed
-kernel with the kernel of the base-changed map (lem-weil-pbc-flat-tensor-exact);
-right exactness gives the analogous cokernel identification
-(lem-weil-pbc-tensor-right-exact). For ideal-power torsion modules the map
-`x ↦ 1 ⊗ x` is an isomorphism (lem-weil-pbc-torsion-module-flat-base-change-iso).
-These composites are the canonical comparison maps specified below.
-Finally `β` transports their targets to the kernel and cokernel of `φ'`;
-the last two clauses specify these transported comparisons.
-For part (2), use the inverses of the localized maps in the glueing datum.
+/-- An `S`-linear map `φ' : S ⊗[R] P → Q` with `I`-power torsion kernel and cokernel is, up to
+an isomorphism `β : S ⊗[R] T ≃ Q`, the base change of an `R`-linear map `ψ : P → T` with
+`I`-power torsion kernel and cokernel; moreover the kernels and cokernels of `ψ`, of its base
+change and of `φ'` are identified by the maps `x ↦ 1 ⊗ x`.
 -/
 theorem exists_map_from_of_torsion_baseChange
     (hflat : (algebraMap R S).Flat) (I : Ideal R) (hI : I.FG)

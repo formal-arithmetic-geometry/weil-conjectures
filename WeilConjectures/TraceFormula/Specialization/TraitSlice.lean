@@ -21,9 +21,8 @@ Let `k'` be a field, `K` a field extension of `k'` and `x ∈ K`. The ring homom
 the special fibre of `𝔸¹_S` (`AlgebraicGeometry.traitClosedPoint_traitSlice`); if `x` is
 transcendental over `k'` (for instance `K` a separable closure of `k'(x)`), this is the generic
 point of the special-fibre line (`AlgebraicGeometry.isGenericPoint_traitSlicePoint`). This is the
-*generic slice* of Gabber's Künneth formula (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, identification (2)): `Spec K⟦t⟧` is the
-completion of the strict localization of `𝔸¹_S` at the generic point of its special fibre.
+*generic slice* of Gabber's Künneth formula for nearby cycles (identification (2)): `Spec K⟦t⟧`
+is the completion of the strict localization of `𝔸¹_S` at the generic point of its special fibre.
 
 The square of traits `Spec K ⟶ Spec K⟦t⟧`, `Spec k' ⟶ Spec k'⟦t⟧` is cartesian
 (`AlgebraicGeometry.isPullback_traitClosedPoint_traitMap`).
@@ -245,8 +244,7 @@ noncomputable def sliceHom :
   comm_i := hM.isPullback_i.lift_fst _ _ _
   comm_ε := (Category.comp_id _).symm
 
-/-- **The special-fibre square of the slice is cartesian**: `𝒳''_s = 𝒳_s ×_𝒳 𝒳''`. This uses
-that the square of traits `Spec K = Spec K⟦t⟧ ×_{Spec k'⟦t⟧} Spec k'` is cartesian. -/
+/-- **The special-fibre square of the slice is cartesian**: `𝒳''_s = 𝒳_s ×_𝒳 𝒳''`. -/
 lemma isPullback_sliceHom_i :
     IsPullback (sliceSpecialMap x hM hb) (sliceModel x hM hb hγδ).i M.i
       (sliceHom x hM hb hγδ).total := by

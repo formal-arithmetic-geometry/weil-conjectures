@@ -19,10 +19,19 @@ of the direct images with compact support `Ra_{X,0}!`, `Ra_{Y,0}!` of Weil compl
 complex `Q` on `S` put `ω_X = G_X Q` and `ω_Y = G_Y Q`. Then, naturally in the Weil complex `M`
 on `X`,
 
-`RHom(Rf₀! M, ω_Y) ≅ Rf_* RHom(M, ω_X)`
+`RHom(Rf₀! M, ω_Y) ≅ Rf_* RHom(M, ω_X)`.
 
-(blueprint: `lemma-internal-adjunction-two-exchange-formulas--2`). The proof is the Yoneda argument
-of `lemma-internal-adjunction-two-exchange-formulas--1`: for a test Weil complex `T` on `Y`,
+## Main statements
+
+- `AlgebraicGeometry.ProEtaleWeilSheaf.nativeDerivedTensorCurryYonedaIso` and
+  `AlgebraicGeometry.WeilComplex.nativeConstructibleTensorCurryYonedaIso`: the tensor–hom
+  adjunction, natural in both variables.
+- `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_op_comp_iso_of_adjunction`: the
+  exchange, natural in `M`.
+
+## Implementation details
+
+The proof is a Yoneda argument: for a test Weil complex `T` on `Y`,
 
 `Hom(T, RHom(Rf₀! M, ω_Y)) = Hom(Rf₀! M ⊗ T, ω_Y) = Hom(Rf₀!(M ⊗ f^* T), ω_Y)`
 `= Hom(Ra_{X,0}!(M ⊗ f^* T), Q) = Hom(M ⊗ f^* T, ω_X) = Hom(f^* T, RHom(M, ω_X))`
@@ -33,14 +42,6 @@ all natural in `M` and `T`, using the tensor–hom adjunction of the native deri
 projection formula (`AlgebraicGeometry.WeilComplex.nonempty_nativeCompactProjectionLeft_iso`),
 the composition law `Ra_{X,0}! ≅ Ra_{Y,0}! ∘ Rf₀!` and the adjunction `f^* ⊣ Rf_*`. In particular
 no exceptional inverse image `Rf^!` along `f` is needed.
-
-## Main statements
-
-- `AlgebraicGeometry.ProEtaleWeilSheaf.nativeDerivedTensorCurryYonedaIso` and
-  `AlgebraicGeometry.WeilComplex.nativeConstructibleTensorCurryYonedaIso`: the tensor–hom
-  adjunction, natural in both variables.
-- `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_op_comp_iso_of_adjunction`: the
-  exchange, natural in `M`.
 -/
 
 @[expose] public section
@@ -149,9 +150,9 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- **The tensor–hom adjunction for the derived internal hom, natural in both variables**
-(blueprint: `prose-03-02`): `Hom(P ⊗ T, Q) ≅ Hom(T, RHom(P, Q))`,
-naturally in `P` and `T`, the tensor product being the native derived tensor product. -/
+/-- **The tensor–hom adjunction for the derived internal hom, natural in both variables**:
+`Hom(P ⊗ T, Q) ≅ Hom(T, RHom(P, Q))`, naturally in `P` and `T`, the tensor product being the
+native derived tensor product. -/
 noncomputable def nativeDerivedTensorCurryYonedaIso
     (Q : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :
     Functor.curry.obj ((prodOpEquiv _).inverse ⋙ (nativeDerivedTensor k₀ l X).op ⋙
@@ -198,10 +199,8 @@ noncomputable def nativeConstructibleTensorCurryYonedaIso (Q : WeilComplex k₀ 
 variable (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
-/-- **Verdier exchange, natural form** (blueprint:
-`lemma-internal-adjunction-two-exchange-formulas--2`, with
-`lemma-internal-adjunction-two-exchange-formulas--1`): let `a_X = f ≫ a_Y` be morphisms to a base
-`S`, `G_X`, `G_Y` right adjoints of `Ra_{X,0}!` and `Ra_{Y,0}!`, and `Q` a Weil complex on `S`. If
+/-- **Verdier exchange, natural form**: let `a_X = f ≫ a_Y` be morphisms to a base `S`, `G_X`,
+`G_Y` right adjoints of `Ra_{X,0}!` and `Ra_{Y,0}!`, and `Q` a Weil complex on `S`. If
 `RHom(-, G_X Q)` and `RHom(-, G_Y Q)` send Weil complexes to Weil complexes, then
 `RHom(Rf₀! M, G_Y Q) ≅ Rf_* RHom(M, G_X Q)`, naturally in the Weil complex `M`. -/
 theorem nonempty_derivedLowerShriek_op_comp_iso_of_adjunction {S : Scheme.{u}}

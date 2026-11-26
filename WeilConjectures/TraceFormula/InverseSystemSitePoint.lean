@@ -16,15 +16,24 @@ import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 /-!
 # Inverse-system site points
 
-Source: Stacks Project, Sites, Tags 00YC and 00YA, with the inverse-system
-construction in Tag 00YQ (auxiliary; not a blueprint node).
+An inverse system `(U_i)` of objects of a small site whose coverings are jointly surjective on
+`colim_i Hom(U_i, -)` defines a point of the site, with stalk functor `F ↦ colim_i F(U_i)`
+(`inverseSystemSitePoint`).
+
+## Implementation details
 
 The inverse system is represented by a functor from the opposite of a directed
 poset.  Its colimit of representables is the functor `inverseSystemHomFunctor`,
 and the colimit of sections along it is the functor
 `inverseSystemSectionColimitFunctor`.  The site is a precoverage, with sheaves for the
-generated Grothendieck topology, as in the dependency def-weil-pbc-sites-and-cohomology;
-the construction does not need the site axioms `Precoverage.IsSiteForCoverings`.
+generated Grothendieck topology; the construction does not need the site axioms
+`Precoverage.IsSiteForCoverings`. The point is constructed as a Mathlib site point: the functor
+`i ↦ (U_i, [i, id])` to the neighbourhood category is initial, so the stalk is computed by the
+colimit of sections, and the skyscraper sheaves supply the right adjoint.
+
+## References
+
+* Stacks Project, Tags 00YC, 00YA, 00YQ
 -/
 
 @[expose] public section
@@ -37,8 +46,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
 
-/-- The opposite-category diagram of objects in an inverse system.
-Source: Stacks Project, Sites, Tag 00YQ (auxiliary; not a blueprint node). -/
+/-- The opposite-category diagram of objects in an inverse system. -/
 def inverseSystemOppositeDiagram {C : Type u} [Category.{u} C]
     {I : Type u} [PartialOrder I] (U : Iᵒᵖ ⥤ C) : I ⥤ Cᵒᵖ where
   obj i := op (U.obj (op i))
@@ -46,9 +54,7 @@ def inverseSystemOppositeDiagram {C : Type u} [Category.{u} C]
   map_id i := by simp
   map_comp f g := by simp
 
-/-- The diagram of representable functors obtained from an inverse system.
-Source: Stacks Project, Sites, Tags 00YC and 00YQ
-(auxiliary; not a blueprint node). -/
+/-- The diagram of representable functors obtained from an inverse system. -/
 def inverseSystemRepresentableDiagram {C : Type u} [Category.{u} C]
     {I : Type u} [PartialOrder I] (U : Iᵒᵖ ⥤ C) : I ⥤ (C ⥤ Type u) where
   obj i := coyoneda.obj (op (U.obj (op i)))
@@ -57,16 +63,12 @@ def inverseSystemRepresentableDiagram {C : Type u} [Category.{u} C]
   map_comp f g := by simp
 
 /-- The colimit of representables attached to an inverse system,
-`u(W) = colim_i Hom(U_i, W)`.
-Source: Stacks Project, Sites, Tags 00YC and 00YQ
-(auxiliary; not a blueprint node). -/
+`u(W) = colim_i Hom(U_i, W)`. -/
 noncomputable def inverseSystemHomFunctor {C : Type u} [Category.{u} C]
     {I : Type u} [PartialOrder I] (U : Iᵒᵖ ⥤ C) : C ⥤ Type u :=
   colimit (inverseSystemRepresentableDiagram U)
 
-/-- The section diagram `i ↦ F(U_i)` of a sheaf along an inverse system.
-Source: Stacks Project, Sites, Tags 00YA and 00YQ
-(auxiliary; not a blueprint node). -/
+/-- The section diagram `i ↦ F(U_i)` of a sheaf along an inverse system. -/
 def inverseSystemSectionDiagram {C : Type u} [Category.{u} C]
     {I : Type u} [PartialOrder I] {J : GrothendieckTopology C}
     (U : Iᵒᵖ ⥤ C) (F : Sheaf J (Type w)) : I ⥤ Type w :=
@@ -74,9 +76,7 @@ def inverseSystemSectionDiagram {C : Type u} [Category.{u} C]
 
 /-- The functor `F ↦ colim_i F(U_i)` on sheaves of sets, acting on a morphism of
 sheaves by its section maps at the `U_i`; its value at `F` is the colimit of
-`inverseSystemSectionDiagram U F`.
-Source: Stacks Project, Sites, Tags 00YA and 00YQ
-(auxiliary; not a blueprint node). -/
+`inverseSystemSectionDiagram U F`. -/
 noncomputable def inverseSystemSectionColimitFunctor {C : Type u} [Category.{u} C]
     {I : Type u} [PartialOrder I] (J : GrothendieckTopology C) (U : Iᵒᵖ ⥤ C) :
     Sheaf J (Type (max u w)) ⥤ Type (max u w) :=
@@ -199,32 +199,9 @@ private noncomputable def stalkComparison {C : Type u} [Category.{u} C]
       ((Functor.whiskeringLeft _ _ _).obj (Functor.Elements.π (inverseSystemHomFunctor U)).op)
       (Functor.Final.colimIso T)).symm
 
-/-- Inverse-system criterion for a point of a small site.
-Source: Stacks Project, Sites, Tags 00YC (Proposition proposition-point-limits),
-00YA (Lemma lemma-point-site-topos), and 00YQ (Proposition proposition-criterion-points)
-(auxiliary; not a blueprint node).
-
-Proof sketch (the node's steps):
-1. A directed colimit of sets is the quotient of the pairs `(i, a)` by eventual
-   equality at a common later index; every class has a representative.
-2. `u(h)[i, a] = [i, h ∘ a]` is a functor; `Hom(U_i, -)` preserves finite limits and
-   filtered colimits commute with finite limits in sets, so `u` preserves finite limits.
-3. `S(F) = colim_i F(U_i)` preserves finite limits: finite limits of sheaves are
-   computed sectionwise, and the same commutation applies.
-4. The covering hypothesis is joint surjectivity; an empty covering forces `u(W)` empty.
-5. The functor `i ↦ (U_i, [i, id])` to the neighbourhood category is initial:
-   representatives provide arrows to every neighbourhood, and eventual equality
-   equalizes parallel such arrows. Its opposite computes the neighbourhood stalk
-   `T(F)` as `S(F)`, naturally in `F`, by Mathlib's `Functor.Final.colimIso`.
-6. Finite-limit preservation makes the category of elements cofiltered. The
-   covering-lifting property extends to the generated topology by induction on
-   saturation: cofiltered cones and equalizers handle pullbacks, and successive
-   lifts handle transitivity. This constructs a Mathlib site point with fibre `u`.
-7. Mathlib's `Point.skyscraperSheafFunctor` supplies the sheaf
-   `R(E)(W) = Map(u(W), E)` and `Point.skyscraperSheafAdjunction` gives `T ⊣ R`.
-8. Transport this adjunction across `T ≅ S`. With step 3 this is a geometric
-   morphism `Set → Sh(C)` whose inverse image is exactly `S`.
--/
+/-- Inverse-system criterion for a point of a small site: if the coverings are jointly surjective
+on `u(W) = colim_i Hom(U_i, W)`, then `u` preserves finite limits, and there is a geometric
+morphism `Set → Sh(C)` whose inverse image is the functor `F ↦ colim_i F(U_i)`. -/
 theorem inverseSystemSitePoint {C : Type u} [Category.{u} C]
     [HasFiniteLimits C] (J : Precoverage C)
     {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]

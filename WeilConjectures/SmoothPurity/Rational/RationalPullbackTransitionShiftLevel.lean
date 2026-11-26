@@ -24,9 +24,6 @@ Roos scalar/pullback chain comparison commutes with the signed Roos shifts
 (`scalarPullbackRoosChain_commShift`).
 
 This is the level step of the proof of `rationalPullbackTransitionShift`.
-Source: current blueprint sec-smooth-purity/sk-prop-sf-localization,
-prop-sf-open-closed-triangle-all-stages.proof.md, Weil-structures paragraph.
-(blueprint: lem-sf-rational-pullback-transition-shift).
 -/
 
 @[expose] public section

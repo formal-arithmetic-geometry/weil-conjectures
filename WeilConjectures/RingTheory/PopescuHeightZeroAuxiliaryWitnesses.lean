@@ -15,8 +15,19 @@ import WeilConjectures.RingTheory.SingularIdealLocalizationSmooth
 /-!
 # Singular elements in the height-zero auxiliary algebra
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FA, auxiliary algebra construction.
-(blueprint: lem-weil-pbc-popescu-height-zero-auxiliary-witnesses)
+The auxiliary algebra of the height-zero case of Popescu's theorem transports a singular
+element of an intermediate algebra and powers of finitely many singular elements of the
+original algebra.
+
+## Implementation details
+
+The auxiliary algebra is the explicit polynomial quotient
+`B = A[x_k, y_i, z, t_ij]/(f_j - ∑_i y_i t_ij, z y_i)`, where `C = A[x_k]/(f_j)`; no witness
+is chosen as definition data.
+
+## References
+
+* [Stacks, Tag 07FA] (construction and the two localizations in its proof)
 -/
 
 @[expose] public section
@@ -28,34 +39,7 @@ open scoped BigOperators
 namespace Algebra
 
 /-- The auxiliary algebra transports a singular element of an intermediate algebra and
-powers of finitely many singular elements of the original algebra.
-
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FA, construction and the two
-localizations in its proof.
-(blueprint: lem-weil-pbc-popescu-height-zero-auxiliary-witnesses)
-
-Proof: Since A is Noetherian and C is finitely presented over R, the map A to C makes
-C a finitely presented A-algebra. Choose C = A[x_k]/(f_j), and lift c to a polynomial p.
-For the indices i in s, put L = product of the lambda_i. Each lambda_i annihilates
-alpha(a_i)^(n_i), so L does too. Construct the actual quotient
-B = A[x_k,y_i,z,t_ij]/(f_j - sum_i y_i*t_ij, z*y_i).
-Its structure map from A and the evaluation x_k at their images in Lambda, y_i at
-alpha(a_i)^(n_i), z at L, and t_ij at zero give beta and delta; the relations vanish.
-B is finitely presented over R by the finite polynomial presentation and composition.
-Let c' be the class of p. The first auxiliary localization identifies B_z with
-C[t_ij,z]_z, respecting c'. Since c belongs to the singular ideal of C, C_c is smooth
-over R by the singular-ideal localization theorem. Polynomial extension and localization
-are smooth over C_c, so the localization of B at z*c' is smooth over R. Thus z*c'
-belongs to the singular ideal of B. Its image is L*gamma(c), which gives b.
-For each i, the second auxiliary localization identifies B_(y_i) with a localization
-of a polynomial algebra over A. Localizing further at beta(a_i) gives a smooth algebra
-over A_(a_i). Since a_i belongs to the singular ideal of A, A_(a_i) is smooth over R.
-Composition of these smooth maps and the iterated-localization isomorphism show that
-B_(beta(a_i)*y_i) is smooth over R. Thus beta(a_i)*y_i belongs to the singular ideal
-of B. Take this element as d_i: its image is alpha(a_i)^(n_i+1).
-For s empty the construction is C[z] and only b is required; all products are one.
-No witness is chosen as definition data: B is the polynomial quotient just described.
--/
+powers of finitely many singular elements of the original algebra. -/
 theorem exists_popescu_height_zero_auxiliary_witnesses
     {R : Type u} {A : Type v} {Λ : Type t} {C : Type (max u v)}
     [CommRing R] [CommRing A] [CommRing Λ] [CommRing C]

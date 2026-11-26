@@ -21,11 +21,13 @@ import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Common-stage direct image and its induced Weil structure
 
-Source: Bhatt--Scholze 6.8.14(2), 6.8.15; blueprint derived-direct-image convention
-(blueprint: prose-03-02).
 The existing integral tower construction is reexported. Its rational/common-stage
 extension is characterized by the derived inverse-image adjunction. Taking fixed pairs
 uses the mate of the normalized Frobenius pullback square, not a derived category of pairs.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(2), Remark 6.8.15.
 -/
 
 @[expose] public noncomputable section

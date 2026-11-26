@@ -12,7 +12,11 @@ import all WeilConjectures.SmoothPurity.CompletedQuotient.CompletedQuotientPullb
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+Quotient normalization and coherent substitution steps of the integral comparison.
+
+## References
+
+* Stacks Project, Tags 03D2 and 0941
 -/
 
 @[expose] public noncomputable section
@@ -66,13 +70,7 @@ attribute [local irreducible] pullbackTensorCalculus integralDerivedPullback
   integralCompletedTensor coefficientTotalTensor SheafOfModules.monoidalCategory
   CategoryTheory.Functor.leftAdjoint CategoryTheory.Functor.mapDerivedCategory
 
-/-- Completed pullback equation on the fixed reference quotient.
-Source: Stacks 03D2, 0941; quotient normalization reference equation.
-(blueprint: lem-pur-completed-quotient-reference-pullback-equation).
-Proof: naturality of the derived strict-interface transport moves the reference
-reduction through it. Derived factorization and the Roos bridge give the strict
-tower transport. Cancel the bridge with its inverse and apply the normalization
-of the fixed integral pullback realization. -/
+/-- Completed pullback equation on the fixed reference quotient. -/
 theorem completedQuotientReferencePullbackEquation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (ρ : IntegralComparisonRoosModel l E X)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :

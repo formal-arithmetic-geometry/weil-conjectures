@@ -22,7 +22,7 @@ conversely.
 - `AlgebraicGeometry.WeilComplex.HasLocalWeilObjectComparison`: the trace function of `K` is the
   local trace function of a Weil object, through `ι`.
 - `AlgebraicGeometry.WeilComplex.SatisfiesLefschetz`: `K` satisfies the Grothendieck–Lefschetz
-  formula (blueprint `theorem-grothendieck-lefschetz-trace-formula--8`).
+  formula.
 
 ## Main results
 
@@ -69,8 +69,7 @@ def HasLocalWeilObjectComparison
         K.traceFunction (n + 1) y
 
 /-- A Weil complex `K` on `X₀` *satisfies the Grothendieck–Lefschetz formula* if, for every `n`,
-`∑ᵢ (-1)ⁱ Tr(F^{n+1} | H_cⁱ(X, K)) = ∑_{y ∈ X₀(𝔽_{q^{n+1}})} t_K(y)`
-(blueprint `theorem-grothendieck-lefschetz-trace-formula--8`). -/
+`∑ᵢ (-1)ⁱ Tr(F^{n+1} | H_cⁱ(X, K)) = ∑_{y ∈ X₀(𝔽_{q^{n+1}})} t_K(y)`. -/
 def SatisfiesLefschetz (K : WeilComplex k₀ l X) : Prop :=
   ∀ n : ℕ, ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
       ((K.compactlySupportedCohomology i).frobeniusEnd ^ (n + 1)) =
@@ -87,7 +86,7 @@ instance finite_fieldPoints (n : ℕ) :
 
 /-- If the local traces of a Weil object `K'` are, through `ι`, the trace function of `K`, then
 `ι` of the global trace of `K'` in degree `n + 1` is the sum of the trace function of `K` over the
-`𝔽_{q^{n+1}}`-rational points, by the trace formula `weilTraceFormula` for `e = 𝟙`. -/
+`𝔽_{q^{n+1}}`-rational points. -/
 theorem map_weilStalkTraceAlternatingSum_eq_finsum_traceFunction (K : WeilComplex k₀ l X)
     (K' : WeilBoundedConstructible l (Iso.refl (overSpec (k₀ := k₀) X)).hom)
     (hloc : ∀ (n : ℕ)
@@ -111,9 +110,7 @@ theorem map_weilStalkTraceAlternatingSum_eq_finsum_traceFunction (K : WeilComple
     (n + 1), map_sum, ← finsum_eq_sum_of_fintype]
   exact (finsum_congr heqv).trans (finsum_comp_equiv eqv)
 
-/-- **The comparison is the local comparison plus the Grothendieck–Lefschetz formula.** By the
-trace formula for Weil objects, the global clause of the comparison is equivalent, given the
-local clause, to the Grothendieck–Lefschetz formula for `K`. -/
+/-- **The comparison is the local comparison plus the Grothendieck–Lefschetz formula.** -/
 theorem hasWeilObjectComparison_iff (K : WeilComplex k₀ l X) :
     HasWeilObjectComparison ι K ↔ HasLocalWeilObjectComparison ι K ∧ SatisfiesLefschetz K := by
   refine ⟨fun ⟨K', hglob, hloc⟩ ↦ ⟨⟨K', hloc⟩, fun n ↦ ?_⟩, fun ⟨⟨K', hloc⟩, hK⟩ ↦
@@ -175,8 +172,7 @@ theorem of_iso {K L : WeilComplex k₀ l X} (e : K ≅ L) (hK : SatisfiesLefsche
   rw [← finsum_trace_compactlySupportedCohomology_congr e (n + 1), hK n]
   exact finsum_congr fun y ↦ traceFunction_eq_of_iso e (n + 1) y
 
-/-- The Grothendieck–Lefschetz formula for `K` gives it for every shift `K[a]`: both sides are
-multiplied by `(-1)ᵃ`. -/
+/-- The Grothendieck–Lefschetz formula for `K` gives it for every shift `K[a]`. -/
 theorem shift {K : WeilComplex k₀ l X} (hK : SatisfiesLefschetz K) (a : ℤ) :
     SatisfiesLefschetz (K⟦a⟧) := fun n ↦ by
   rw [finsum_trace_compactlySupportedCohomology_shift, hK n, smul_finsum]

@@ -13,8 +13,12 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemExpre
 
 /-! # The pullback evaluation quotient square
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 0941
-(blueprint: lem-sf-integral-pull-evaluation-quotient-square).
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 07A7]
+* [Zheng, Construction 4.1 and Lemma 4.10]
 -/
 
 @[expose] public noncomputable section
@@ -234,22 +238,7 @@ private theorem ordinary_restriction_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (n 
     (Padic.coefficientExtensionTransition l E (n + 1))).symm, HEq.rfl⟩
 
 /-- Pullback evaluation respects adjacent quotient transitions, with the scalar
-comparison obtained by transposing the published restricted direct-image map.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941 and 07A7
-(blueprint: lem-sf-integral-pull-evaluation-quotient-square).
-
-Proof: express both transitions on strict cochain representatives by horizontal
-restriction on the sequence site. The ordinary evaluation/pullback map is the
-mate of the identity on direct-image sections. The scalar-restriction/direct-image
-comparison is also the identity on sections. Its mate is therefore precisely the
-restriction/pullback comparison appearing here. At every component both routes
-apply the same coefficient quotient to a pulled-back section. The equality is
-compatible with differentials and hence descends through exact localization.
-The normalization of pullbackTensorDerivedEvaluation fixes the localized map;
-the K-injective normalization of sfDerivedImageRestriction fixes its mate.
-Consequently the identity holds for every derived system, without any inference
-from equality at evaluations. Zero objects and n = 0 use the same section formula;
-no coefficient-flatness or normalization of the input is needed. -/
+comparison obtained by transposing the published restricted direct-image map. -/
 theorem integralPullEvaluation_quotientSquare {X Y : Scheme.{u}} (f : X ⟶ Y)
     (n : ℕ)
     (r : normalizedDVRRes l E X (Nat.le_succ n) ⋙

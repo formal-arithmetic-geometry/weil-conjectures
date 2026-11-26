@@ -22,11 +22,17 @@ import all WeilConjectures.WeilSheaf.Supporting.CompletedCoefficientRingedCohere
 
 /-! Ordinary completed coefficient geometry, before passage to derived categories.
 
+## Implementation details
+
 The coefficient comparison below follows the finite-tower representation argument at
 `max u (t + 1)`, so the coefficient and scheme universes remain independent. Its
 projection equations identify the resulting cone morphism with the recorded
 `completedRingMap`. The general-universe module inverse-image comparison then
 reduces left exactness to abelian inverse image.
+
+## References
+
+* Stacks Project, Tags 03D2 and 04JC.
 -/
 
 @[expose] public noncomputable section
@@ -441,22 +447,7 @@ private theorem completedCoefficientMapIso
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Ordinary module pullback over the profinite completed coefficient ring is exact.
-Source: Stacks Tags 03D2 and 04JC; profinite coefficient inverse image.
-(blueprint: lem-tw-ordinary-completed-pullback-exact).
-
-Proof. The finite quotient rings of the valuation ring are finite. The profinite
-coefficient inverse-image theorem identifies the inverse image of their limit with
-the limit of the inverse images. Its projection equations identify its comparison
-with completedRingMap. Thus that structural map is invertible. Module inverse
-image over the inverse-image ring is exact: its underlying abelian sheaf is the
-exact abelian inverse image, and the forgetful functor reflects finite exactness.
-The inverse-image comparison respects the ring adjunction units, so it gives the
-unit presentation required by the general-universe module inverse-image theorem.
-That theorem identifies the specified module pullback, after forgetting, with
-abelian inverse image. Reflect its preservation of finite limits through module
-forgetting and unfold the recorded pull. Finite colimits are supplied separately
-by the adjunction adj. -/
+/-- Ordinary module pullback over the profinite completed coefficient ring is exact. -/
 theorem ordinaryCompletedPullbackExact {T W : Scheme.{t}} (g : T ⟶ W) :
     PreservesFiniteLimits (pull l E g) := by
   let F := proEtaleBaseChange g

@@ -20,9 +20,21 @@ public import Mathlib.RingTheory.Nakayama
 /-!
 # Depth is bounded by the dimension at an associated prime
 
-Source: Stacks Project, Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes),
-lines 17985-18020; associated primes Definition Tag 00LA (blueprint:
-lem-weil-pbc-depth-le-dim-associated-prime).
+For a finite module `M` over a Noetherian local ring `R` and an associated prime `p` of `M`,
+`depth M ≤ dim (R/p)`.
+
+## Implementation details
+
+Since `R` is Noetherian, Mathlib's `associatedPrimes R M` are exactly the primes of the form
+`Ann_R(z)` (`isAssociatedPrime_iff`, Tag 00LA). The proof is by induction on the depth: if the
+maximal ideal is associated, the depth is zero. Otherwise pick a regular `x` in the maximal
+ideal outside `p` and a minimal prime `q` over `p + (x)`; then `q` is associated to
+`M/x^n M` for some `n > 0`, this quotient has depth one less, and `dim(R/q) + 1 ≤ dim(R/p)`.
+
+## References
+
+* [Stacks, Tag 0BK4]
+* [Stacks, Tag 00LA]
 -/
 
 @[expose] public section
@@ -53,27 +65,7 @@ private theorem depth_eq_zero_of_maximal_associated
     exact False.elim (hunion hxreg)
 
 /-- For a finite module over a Noetherian local ring, the depth is at most the
-Krull dimension of the quotient by every associated prime. Since `R` is Noetherian,
-Mathlib's `associatedPrimes R M` are exactly the primes `p = Ann_R(z)` for some `z : M`
-(`isAssociatedPrime_iff`), the node's notion (Stacks 00LA). Source: Stacks Project,
-Algebra, Tag 0BK4 (blueprint: lem-weil-pbc-depth-le-dim-associated-prime).
-
-Proof, following the induction of Stacks Tag 0BK4:
-1. An associated prime forces the module to be nonzero. Nakayama makes the
-   maximal-ideal multiple proper, so depth is the supremum of regular-sequence lengths.
-2. If the maximal ideal is associated, every element of it is a zerodivisor;
-   a regular sequence in it must be empty, and depth is zero.
-3. Otherwise choose a regular element in the maximal ideal. The depth-drop theorem
-   gives finite positive depth. Induct on this integer, uniformly over finite modules.
-4. At positive depth choose a regular element x in the maximal ideal; the
-   union-of-associated-primes characterization gives x outside the associated prime p.
-5. Choose any minimal prime q over p + (x), contained in the maximal ideal.
-   The associated-prime power-quotient theorem makes q associated to M/x^n M
-   for some positive n. The power is regular, so this quotient has depth one less.
-6. Apply induction to the quotient and q. The map R/p onto R/q kills the nonzero
-   image of x, a nonzerodivisor in the domain R/p. Mathlib's dimension inequality
-   for such a surjection gives dim(R/q) + 1 ≤ dim(R/p), completing induction.
-   This inequality suffices; no minimal prime attaining a maximal dimension is needed.
+Krull dimension of the quotient by every associated prime.
 -/
 theorem depth_le_ringKrullDim_quotient_of_mem_associatedPrimes
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]

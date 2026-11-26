@@ -24,8 +24,12 @@ import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
 
 /-! # Identifying the native ordinary closed tensor
 
-Source: Stacks Tags 06YS and 08J9, uniqueness of derived tensor-Hom adjoints.
-(blueprint: lem-sf-native-ordinary-tensor-identification).
+This file identifies the tensor right functors of the native ordinary closed tensor using the
+uniqueness of derived tensor-Hom adjoints.
+
+## References
+
+* Stacks Project, Tags 06YS, 08J9 and 0A97.
 -/
 
 @[expose] public section
@@ -308,24 +312,7 @@ end TensorModelComparison
 
 /-- The representative internal Hom determines its tensor right functors.
 This assertion is internal to the native module category and involves no change
-of coefficients or forgetting of ambient scalars.
-
-Source: Stacks Tags 06YS, 08J9 and 0A97; step 2 of
-lem-sf-native-coefficient-tensor-comparison.
-(blueprint: lem-sf-native-ordinary-tensor-identification).
-
-Proof: For a fixed source complex, the product-total ordinary internal Hom into
-K-injectives computes the right adjoint of total relative tensor. The ordinary
-Mod.tensorLeft and the standard module-object tensor both represent balanced
-bilinear maps, hence their right adjoints are naturally isomorphic. Apply this
-comparison in each degree and take products to identify the two Hom complexes.
-The naturality field of R identifies H with this derived right adjoint: first
-on K-injective targets using R.model, then on all derived targets by K-injective
-replacement and localization. Replacing a source by a quasi-isomorphic K-flat
-complex computes the standard derived tensor and extends its adjunction to
-unbounded inputs. S.adjunction has precisely the same right adjoint. Uniqueness
-of left adjoints gives the asserted natural isomorphism. Zero complexes and the
-empty scheme require no exception; no boundedness assumption is used. -/
+of coefficients or forgetting of ambient scalars. -/
 theorem nativeOrdinary_tensorRight_iso (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×
       DerivedCategory (ProEtale.AdicSheaf l Y) ⥤

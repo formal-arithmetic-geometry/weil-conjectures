@@ -10,8 +10,10 @@ public import WeilConjectures.SixFunctors.Sf.SfIntegralReductionTowerSupplement
 /-!
 # Derived completeness without an auxiliary finite-field datum
 
-Source: Bhatt--Scholze, Definition 3.5.2, p. 24; Stacks Tag 06YL
-(blueprint: def-weil-derived-complete).
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2.
+* Stacks Project, Tag 06YL.
 -/
 
 @[expose] public section
@@ -22,9 +24,7 @@ namespace WeilConjectures
 
 /-- Completeness means that the canonical reduction units are the first map in the
 Roos triangle. The existential product witness merely supplies the product used in
-that triangle; no arbitrary completion or comparison map is chosen.
-Source: Bhatt--Scholze, Definition 3.5.2; Stacks Tag 06YL
-(blueprint: def-weil-derived-complete). -/
+that triangle; no arbitrary completion or comparison map is chosen. -/
 noncomputable def IsSfDerivedComplete (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : AlgebraicGeometry.Scheme.{u})

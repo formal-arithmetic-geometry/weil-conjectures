@@ -20,8 +20,11 @@ import WeilConjectures.RingTheory.RegularRingSmoothAscent
 /-!
 # Smooth algebras over normal rings
 
-Source: Stacks Project, Algebra, Lemma Tag 033C
-(blueprint: lem-weil-pbc-smooth-over-normal-ring-normal).
+A smooth algebra over a normal ring is normal.
+
+## References
+
+* [Stacks, Tag 033C]
 -/
 
 @[expose] public section
@@ -64,32 +67,8 @@ private theorem smooth_normal_domain {R : Type uR} {S : Type uS}
   let e' := Localization.localRingEquiv p q e rfl
   exact ⟨e'.symm.injective.isDomain e'.symm, IsIntegrallyClosed.of_equiv e'⟩
 
-/-- A smooth algebra over a normal ring is normal.
-
-Source: Stacks Project, Algebra, Lemma Tag 033C
-(blueprint: lem-weil-pbc-smooth-over-normal-ring-normal)
-
-Proof:
-1. In `smooth_normal_noetherian`, finite type makes S Noetherian. Smoothness
-   gives flatness, and each residue-field fibre is smooth over a field, hence
-   regular by `Algebra.isRegularRing_of_smooth` and normal by
-   `IsRegularRing.isNormalRing`. Apply `normal_of_flat_normal_fibers`.
-2. In `smooth_normal_domain`, use
-   `Smooth.exists_noetherian_normal_model_colimit` to express S as a filtered
-   colimit of smooth algebras over Noetherian normal bases. Apply step 1 at
-   every stage, then `CommRingCat.isNormal_of_filtered_colimit`, and transport
-   normality of prime localizations across the resulting ring equivalence.
-   The approximation theorem constructs the normal bases by normalizing
-   finitely generated subrings containing a descended base R₀, and uses
-   tensor products over R₀ directly; no tensor cancellation is required.
-3. For a prime q of S, contract it to p in R and base change to the normal
-   domain A = R_p. Smooth base change and step 2 give normality of
-   B = A ⊗[R] S. As an S-algebra, B is localization at the image of R minus p.
-   This image is disjoint from q, so q extends to a prime q' of B with
-   contraction q. Localizing B at q' is an S-localization at q. The canonical
-   localization equivalence identifies it with S_q and transports domainhood
-   and integral closedness to S_q.
--/
+/-- A smooth algebra over a normal ring is normal: if every localization of `R` at a prime is
+an integrally closed domain, then so is every localization of `S` at a prime. -/
 theorem Smooth.isNormalRing {R : Type uR} {S : Type uS} [CommRing R] [CommRing S]
     {f : R →+* S} (hf : f.Smooth)
     (hR : ∀ (p : Ideal R) [p.IsPrime],

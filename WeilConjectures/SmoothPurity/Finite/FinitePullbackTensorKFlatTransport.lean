@@ -12,8 +12,12 @@ import WeilConjectures.SmoothPurity.Finite.FinitePullbackTensorRealizationFactor
 
 /-! # Transport of the K-flat tensor square to intrinsic pullback
 
-Source: Stacks Tags 03EL, 06YY and 07A4.
-(blueprint: lem-pur-finite-pullback-tensor-kflat-transport).
+This file transports the ordinary K-flat representative square of the finite pullback-tensor
+comparison through the finite realization to intrinsic pullbacks.
+
+## References
+
+* [Stacks, Tags 03EL, 06YS, 06YY, 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -103,15 +107,7 @@ private theorem finiteTensor_model_naturality (W : Scheme.{u}) (n : ℕ)
       (ObjectProperty.homMk (X := ⟨Q, hQ⟩) (Y := ⟨Q', hQ'⟩) b))
 
 /-- The ordinary K-flat representative square transported through the prescribed
-finite realization. Source: Stacks 06YS and 07A4
-(blueprint: lem-pur-finite-pullback-tensor-kflat-transport).
-Proof: transfer K-flatness of the intrinsic pullbacks to the ordinary ones using
-the degreewise realization isomorphism. Apply the ordinary K-flat square. Naturality
-of the finite tensor model moves the two realization maps past the target model.
-The derived realization factorization identity expresses the intrinsic factors as
-the ordinary factors followed by the localized realization. Postcompose the ordinary
-square with that pair of realization maps and reassociate. The remaining chain map
-is precisely the conjugate defining finitePullbackTensorChainIso. -/
+finite realization, stated for intrinsic pullbacks. -/
 theorem finitePullbackTensor_intrinsic_kflat_square {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] (n : ℕ)

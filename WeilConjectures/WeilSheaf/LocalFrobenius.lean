@@ -24,28 +24,25 @@ The conjugacy class of the local Frobenius does not depend on the embedding `ι`
 
 ## Main definitions
 
-- `AlgebraicGeometry.WeilComplex.stalk` (`definition-trace-function`): the stalk
-  `𝓗ʲ(K)_x̄` at a closed point with its local Frobenius `F_x`.
-- `AlgebraicGeometry.WeilComplex.stalkAtGeometricFiberPoint` (`definition-trace-function`):
-  the stalk `𝓗ʲ(K)_x̄` with the local Frobenius `F_x^{(m)}`, at the geometric point attached to
-  a point with values in a field with `qᵐ` elements and an embedding of that field into `k̄`.
+- `AlgebraicGeometry.WeilComplex.stalk`: the stalk `𝓗ʲ(K)_x̄` at a closed point with its local
+  Frobenius `F_x`.
+- `AlgebraicGeometry.WeilComplex.stalkAtGeometricFiberPoint`: the stalk `𝓗ʲ(K)_x̄` with the
+  local Frobenius `F_x^{(m)}`, at the geometric point attached to a point with values in a field
+  with `qᵐ` elements and an embedding of that field into `k̄`.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilComplex.nonempty_equiv_stalkAtGeometricFiberPoint`
-  (`theorem-trace-formula-euler-product--1`): the local Frobenius operators attached to two
-  embeddings are conjugate.
+- `AlgebraicGeometry.WeilComplex.nonempty_equiv_stalkAtGeometricFiberPoint`: the local Frobenius
+  operators attached to two embeddings are conjugate.
 
-## Implementation notes
+## Implementation details
 
-The blueprint defines `K_x̄ := L x̄^* For(K)` and its trace as the alternating sum of the traces
-on the cohomology sheaves. The local alternating trace `Tr(F_x^{(n)} | K_x̄)` of
-`definition-trace-function` is `AlgebraicGeometry.WeilComplex.traceFunction`
-(`WeilConjectures.WeilSheaf.Stalk`), which takes that alternating sum as the definition: the
-derived stalk is not used.
+Mathematically `K_x̄ := L x̄^* For(K)` and its trace is the alternating sum of the traces on the
+cohomology sheaves. The local alternating trace `Tr(F_x^{(n)} | K_x̄)` is
+`AlgebraicGeometry.WeilComplex.traceFunction` (`WeilConjectures.WeilSheaf.Stalk`), which takes
+that alternating sum as the definition: the derived stalk is not used.
 
-The remark `theorem-trace-formula-euler-product--1` of the blueprint only points to
-`AlgebraicGeometry.WeilComplex.nonempty_equiv_stalkAtGeometricFiberPoint`; it is recorded as
+The independence of the embedding is also recorded as
 `AlgebraicGeometry.WeilComplex.exists_frobeniusEnd_stalkAtGeometricFiberPoint_eq_conj`.
 -/
 
@@ -75,14 +72,10 @@ noncomputable def stalkAtGeometricFiberPoint {K : Type u} [Field K] [Algebra k�
   F.stalkAt _ m (Scheme.Hom.geometricFiberPoint_comp_geometricGaloisFrobenius_pow
     (X ↘ Spec (CommRingCat.of k₀)) ι g hg m hK)
 
-/-- Blueprint `theorem-trace-formula-euler-product--1`: Independence of the local Frobenius
-operator from the embedding.
-
-For a point `g : Spec K ⟶ X` with values in a field `K` with `qᵐ` elements and two embeddings
-`ι, ι' : K ↪ k̄` over `k₀`, the local Frobenius operators `F_x^{(m)}` on the stalks of a Weil
-sheaf at the two attached geometric points are conjugate. Both geometric points lie over the
-image point of `g`, whose residue field embeds into the finite field `K`, so this is an instance
-of `AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalkAt`. -/
+/-- The local Frobenius operator is independent of the embedding: for a point `g : Spec K ⟶ X`
+with values in a field `K` with `qᵐ` elements and two embeddings `ι, ι' : K ↪ k̄` over `k₀`, the
+local Frobenius operators `F_x^{(m)}` on the stalks of a Weil sheaf at the two attached geometric
+points are conjugate. -/
 theorem nonempty_equiv_stalkAtGeometricFiberPoint {K : Type u} [Field K] [Algebra k₀ K]
     [Finite K] (ι ι' : K →ₐ[k₀] AlgebraicClosure k₀) (g : Spec (.of K) ⟶ X)
     (hg : g ≫ (X ↘ Spec (CommRingCat.of k₀)) = Spec.map (CommRingCat.ofHom (algebraMap k₀ K)))
@@ -102,19 +95,15 @@ namespace WeilComplex
 
 variable (K : WeilComplex k₀ l X)
 
-/-- Blueprint `definition-trace-function`: Local Frobenius and local alternating trace.
-
-The stalk `𝓗ʲ(For K)_x̄` of the `j`-th cohomology sheaf of a Weil complex at the geometric
+/-- The stalk `𝓗ʲ(For K)_x̄` of the `j`-th cohomology sheaf of a Weil complex at the geometric
 point over a closed point `x`, with the local Frobenius `F_x`, obtained by iterating the Weil
 isomorphism `deg x` times. The geometric point is attached to an embedding `κ(x) ↪ k̄` chosen
-by `IsAlgClosed.lift` (`AlgebraicGeometry.WeilSheaf.stalk`). -/
+by `IsAlgClosed.lift`. -/
 noncomputable def stalk (j : ℤ) (x : X.finitePoints) :
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   ((homologySheaf j).obj K).stalk x
 
-/-- Blueprint `definition-trace-function`: Local Frobenius and local alternating trace.
-
-The stalk `𝓗ʲ(For K)_x̄` of the `j`-th cohomology sheaf of a Weil complex with the local
+/-- The stalk `𝓗ʲ(For K)_x̄` of the `j`-th cohomology sheaf of a Weil complex with the local
 Frobenius `F_x^{(m)}`, at the geometric point attached to a point `g : Spec K ⟶ X` with values in
 a field `K` with `qᵐ` elements and an embedding `ι : K ↪ k̄` over `k₀`. -/
 noncomputable def stalkAtGeometricFiberPoint (j : ℤ) {K' : Type u} [Field K'] [Algebra k₀ K']
@@ -123,13 +112,10 @@ noncomputable def stalkAtGeometricFiberPoint (j : ℤ) {K' : Type u} [Field K'] 
     (m : ℕ) (hK : Nat.card K' = Nat.card k₀ ^ m) : FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   ((homologySheaf j).obj K).stalkAtGeometricFiberPoint ι g hg m hK
 
-/-- Blueprint `theorem-trace-formula-euler-product--1`: Independence of the local Frobenius
-operator from the embedding.
-
-For a point `g : Spec K' ⟶ X` with values in a field `K'` with `qᵐ` elements, two embeddings
-`ι, ι' : K' ↪ k̄` over `k₀` and `j ∈ ℤ`, the local Frobenius operators `F_x^{(m)}` on the stalks
-of the cohomology sheaf `𝓗ʲ(For K)` at the two attached geometric points are conjugate. For a
-closed point `x` take `K' = κ(x)` and `m = deg x`. -/
+/-- The local Frobenius operator is independent of the embedding: for a point `g : Spec K' ⟶ X`
+with values in a field `K'` with `qᵐ` elements, two embeddings `ι, ι' : K' ↪ k̄` over `k₀` and
+`j ∈ ℤ`, the local Frobenius operators `F_x^{(m)}` on the stalks of the cohomology sheaf
+`𝓗ʲ(For K)` at the two attached geometric points are conjugate. -/
 theorem nonempty_equiv_stalkAtGeometricFiberPoint (j : ℤ) {K' : Type u} [Field K']
     [Algebra k₀ K'] [Finite K'] (ι ι' : K' →ₐ[k₀] AlgebraicClosure k₀) (g : Spec (.of K') ⟶ X)
     (hg : g ≫ (X ↘ Spec (CommRingCat.of k₀)) = Spec.map (CommRingCat.ofHom (algebraMap k₀ K')))
@@ -138,15 +124,9 @@ theorem nonempty_equiv_stalkAtGeometricFiberPoint (j : ℤ) {K' : Type u} [Field
       (K.stalkAtGeometricFiberPoint j ι' g hg m hK)) :=
   ((homologySheaf j).obj K).nonempty_equiv_stalkAtGeometricFiberPoint ι ι' g hg m hK
 
-/-- Blueprint `theorem-trace-formula-euler-product--1`: Pointer to the properties of the local
-Frobenius.
-
-The conjugacy class of the local Frobenius `F_x^{(m)}` on `𝓗ʲ(For K)_x̄` does not depend on the
-embedding `ι : K' ↪ k̄` used to build the geometric point: for two embeddings the two operators
-are conjugate by a linear isomorphism of the stalks. This independence is
-`theorem-trace-formula-euler-product--1`
-(`AlgebraicGeometry.WeilComplex.nonempty_equiv_stalkAtGeometricFiberPoint`), not part of the
-construction. -/
+/-- The conjugacy class of the local Frobenius `F_x^{(m)}` on `𝓗ʲ(For K)_x̄` does not depend on
+the embedding `ι : K' ↪ k̄` used to build the geometric point: for two embeddings the two operators
+are conjugate by a linear isomorphism of the stalks. -/
 theorem exists_frobeniusEnd_stalkAtGeometricFiberPoint_eq_conj (j : ℤ) {K' : Type u} [Field K']
     [Algebra k₀ K'] [Finite K'] (ι ι' : K' →ₐ[k₀] AlgebraicClosure k₀) (g : Spec (.of K') ⟶ X)
     (hg : g ≫ (X ↘ Spec (CommRingCat.of k₀)) = Spec.map (CommRingCat.ofHom (algebraMap k₀ K')))

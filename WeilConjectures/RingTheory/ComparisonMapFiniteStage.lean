@@ -14,8 +14,21 @@ import WeilConjectures.RingTheory.TensorRightFactorFiniteStage
 
 /-! # Finite-stage descent of a compatible tensor comparison
 
-Source: Stacks Project, Algebra, Tags 02JO (3), 00QO and 00DD.
-(blueprint: lem-weil-pbc-comparison-map-finite-stage)
+A comparison map over the colimit of a directed system of rings, defined using finitely
+presented data, descends to a compatible comparison map at a finite stage.
+
+## Implementation details
+
+The structure map `P → colim F ⊗ B₀` factors through a stage since `P` is finitely presented
+over `ℤ`, and the `P`-algebra map `Q → colim F ⊗ C₀` factors through a later stage since `Q` is
+finitely presented over `P`. The descended map is the tensor product universal map. No
+finite-presentation hypothesis on `φ₀` is used.
+
+## References
+
+* [Stacks, Tag 02JO] (3), construction of `Ψ`
+* [Stacks, Tag 00QO]
+* [Stacks, Tag 00DD]
 -/
 
 @[expose] public section
@@ -27,28 +40,11 @@ universe v w x y
 
 namespace RingHom
 
-/-- Descend the two finite presentations to one compatible tensor comparison map.
-
-Source: Stacks Project, Algebra, Tag 02JO (3), construction of Ψ; Tag 00QO,
-finite-presentation factorization, and Tag 00DD, tensor colimits.
-(blueprint: lem-weil-pbc-comparison-map-finite-stage)
-
-Proof: restrict F to the directed upper tail of i₀. The elementwise base-change
-lemma identifies the colimits of the B and C tensor diagrams with the corresponding
-limit tensor rings: maps are defined on representatives, with well-definedness
-from eventual equality; operations are verified at common upper bounds. Factor
-the structure map P → B through a B stage using finite presentation over Z.
-Transport that structure to the upper tail. Give the C stages their P-structure
-by the base change of φ₀. The map Q → C obtained by composing the right tensor
-inclusion with g respects P, by he. Since Q is finitely presented over P, factor
-this P-algebra map through a C stage on this tail. Take that stage i, and let ψ
-be the tensor product universal map of Bᵢ → Cᵢ and the descended Q → Cᵢ.
-Its left restriction is the base change of φ₀. The canonical Bᵢ → B is P-linear
-because the P-structure was descended. The two sides of the limit identity agree
-on Bᵢ by he and on Q by factorization, hence agree by tensor extensionality.
-No finite-presentation hypothesis on φ₀ is used. Zero rings and empty finite
-presentations require no changes: there are still only finitely many relations.
--/
+/-- Let `P → Q` be finitely presented with `P` finitely presented over `ℤ`, and let
+`g : (colim F ⊗ B₀) ⊗[P] Q → colim F ⊗ C₀` restrict to the base change of `φ₀`. Then at some
+stage `i ≥ i₀` there is a `P`-structure on `F(i) ⊗ B₀` and a comparison map
+`ψ : (F(i) ⊗ B₀) ⊗[P] Q → F(i) ⊗ C₀` restricting to the base change of `φ₀` and compatible with
+`g`. -/
 theorem exists_comparison_map_finite_stage
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]

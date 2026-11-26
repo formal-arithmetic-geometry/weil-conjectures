@@ -19,7 +19,11 @@ completed restriction. The PBC completeness theorem and normalized coefficient
 transport then give the SF completeness predicate. The statement is separated
 from finite reduction constructibility because it requires no geometric
 hypothesis on the scheme.
-(blueprint: lem-sf-rational-scalar-restriction-complete)
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(2), Remark 6.8.15.
+* Stacks Project, Tags 03DA, 099N.
 -/
 
 @[expose] public section
@@ -34,8 +38,7 @@ variable (l : ℕ) [Fact l.Prime]
   (ι : E →ₐ[ℚ_[l]] F) (W : AlgebraicGeometry.Scheme.{u})
 
 /-- The normalized integral transport is derived restriction along the CommRing lift
-`purCoefficientIso` of the coefficient comparison.
-Source: Stacks 03DA, 099N (auxiliary; not a blueprint node). -/
+`purCoefficientIso` of the coefficient comparison. -/
 private noncomputable def integralDetailedTransportIsoPbcDerivedRestrict :
     AlgebraicGeometry.Scheme.integralDetailedTransport W l E ≅
       AlgebraicGeometry.Scheme.pbcDerivedRestrict (purCoefficientIso l E W).hom :=
@@ -47,15 +50,7 @@ private noncomputable def integralDetailedTransportIsoPbcDerivedRestrict :
     (fun a ↦ SheafOfModules.restrictScalars.{u + 1} a)
     (congrArg Iso.hom (purCoefficientIso_existsUnique l E W).exists.choose_spec).symm))
 
-/-- Completeness is preserved by the specified completed rational restriction.
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15.
-Proof: transport the object to the normalized PBC coefficient presentation using
-`integralDetailedTransport`. The finite quotient projection square identifies the
-transport of the completed restriction with PBC restriction. Apply
-`pbcScalarRestrictionComplete`, then use `purCoefficientModel_predicates` and
-transport back through the derived equivalence. The construction is independent
-of Noetherian or dimension assumptions on `W`.
-(blueprint: lem-sf-rational-scalar-restriction-complete) -/
+/-- Completeness is preserved by the specified completed rational restriction. -/
 theorem rationalScalarDerivedRestriction_complete
     (K : sfIntegralConstructibleCategory l F W) :
     IsSfDerivedComplete l E W
@@ -89,10 +84,7 @@ theorem rationalScalarDerivedRestriction_complete
       e₁.symm ≪≫ (tE.app _).symm) hE
 
 /-- Completeness is preserved by the specified completed rational restriction, for every
-derived complete object (not necessarily constructible).
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15.
-Proof: as for `rationalScalarDerivedRestriction_complete`, which only uses completeness.
-(blueprint: lem-sf-rational-scalar-restriction-complete) -/
+derived complete object (not necessarily constructible). -/
 theorem rationalScalarDerivedRestriction_isSfDerivedComplete
     (K : DerivedCategory (scalarReductionSource l F W)) (hK : IsSfDerivedComplete l F W K) :
     IsSfDerivedComplete l E W ((rationalScalarDerivedRestriction l E F ι W).obj K) := by

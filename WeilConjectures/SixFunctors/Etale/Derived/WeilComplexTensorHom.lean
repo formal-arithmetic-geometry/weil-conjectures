@@ -39,28 +39,28 @@ With these Frobenii the derived tensor product and the derived internal hom beco
 `- ⊗ᴸ - : WeilD × WeilD ⥤ WeilD` and `RHom(-, -) : WeilDᵒᵖ × WeilD ⥤ WeilD`
 (`AlgebraicGeometry.Etale.WeilComplex.tensor`, `AlgebraicGeometry.Etale.WeilComplex.internalHom`)
 lying over the corresponding bifunctors of `Dctf(X, Λ)`, which are triangulated in each
-covariant variable. These are the Weil-category bifunctors of the blueprint.
+covariant variable.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.derivedTensor`,
   `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.derivedHom`: the derived tensor product and
   the derived internal hom of `Dctf(X, Λ)`.
-- `AlgebraicGeometry.Etale.WeilComplex.tensorFrobenius` (`prose-03-02`) and
-  `AlgebraicGeometry.Etale.WeilComplex.tensor` (`prose-10-20`).
+- `AlgebraicGeometry.Etale.WeilComplex.tensorFrobenius` and
+  `AlgebraicGeometry.Etale.WeilComplex.tensor`.
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarDerivedHomComparison`: the comparison
   `Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)`, used for the internal-Hom Frobenius.
 
 ## Implementation notes
 
-The blueprint states these facts for the Weil category `WeilD(X₀, E)` of pairs `(K, φ_K)` with
+These facts are classically stated for the Weil category `WeilD(X₀, E)` of pairs `(K, φ_K)` with
 `K ∈ D^b_c(X, E)`, `E` a finite extension of `ℚ_ℓ`. The `E`-adic
 categories `D^b_c(X, E)` are not available as categories carrying a derived tensor product and
-internal hom; the Weil category is modelled here by the strict Weil complexes of
-`definition-weil-structure` at a finite coefficient ring `Λ`, on which both operations exist and
-preserve the constructible complexes of finite Tor amplitude (`proposition-six-operations-dctf`,
-`sk-thm-sf-hom-ctf`). The constructions use nothing about `Λ` beyond these stability results,
-and they are the same at every finite stage.
+internal hom; the Weil category is modelled here by the strict Weil complexes
+(`AlgebraicGeometry.Etale.WeilComplex`) at a finite coefficient ring `Λ`, on which both
+operations exist and preserve the constructible complexes of finite Tor amplitude. The
+constructions use nothing about `Λ` beyond these stability results, and they are the same at
+every finite stage.
 -/
 
 @[expose] public section
@@ -113,9 +113,8 @@ instance : IsTriangulated (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X) :=
     (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).FullSubcategory)
 
 
-/-- Blueprint `prose-03-02`: the derived tensor product `- ⊗ᴸ -` of `Dctf(X, Λ)`, the
-restriction of the derived tensor product of `D(X_ét)`, which preserves the constructible
-complexes of finite Tor amplitude (`AlgebraicGeometry.Etale.constructibleFiniteTor_tensor`). -/
+/-- The derived tensor product `- ⊗ᴸ -` of `Dctf(X, Λ)`, the restriction of the derived tensor
+product of `D(X_ét)`. -/
 noncomputable def derivedTensor :
     DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
       DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
@@ -157,10 +156,9 @@ instance isTriangulated_derivedHom_obj
 variable {k : Type u} [Field k] {X} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
   [QuasiCompact aX] [HasInvertibleExponent Λ X]
 
-/-- Blueprint `prose-10-20`: the derived internal hom `RHom(-, -)` of `Dctf(X, Λ)`, for
-`X` of finite type over a field on which the exponent of `Λ` is invertible: the restriction of
-the derived internal hom of `D(X_ét)`, which preserves the constructible complexes of finite Tor
-amplitude (`AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom`). -/
+/-- The derived internal hom `RHom(-, -)` of `Dctf(X, Λ)`, for `X` of finite type over a field on
+which the exponent of `Λ` is invertible: the restriction of the derived internal hom of
+`D(X_ét)`. -/
 noncomputable def derivedHom :
     (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ ⥤
       DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
@@ -314,8 +312,7 @@ namespace WeilComplex
 
 variable {Λ} {X : Scheme.{u}} {g : X ≅ X}
 
-/-- Blueprint `prose-03-02`: the *tensor Frobenius* of two Weil complexes
-`(K, φ_K)` and `(L, φ_L)`, the Weil structure
+/-- The *tensor Frobenius* of two Weil complexes `(K, φ_K)` and `(L, φ_L)`, the Weil structure
 `Lg^*(K ⊗ᴸ L) ≅ Lg^* K ⊗ᴸ Lg^* L ≅ K ⊗ᴸ L` on `K ⊗ᴸ L`, whose second arrow is `φ_K ⊗ φ_L`. -/
 noncomputable def tensorFrobenius (K L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (DerivedCategoryFiniteTor.leftDerivedUpperStar _ g.hom).obj
@@ -350,8 +347,8 @@ lemma tensorFrobenius_hom_hom (K L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
   rfl
 
 variable (Λ g) in
-/-- Blueprint `prose-10-20`: the derived tensor product of Weil complexes. With the
-tensor Frobenius `φ_K ⊗ φ_L` (`AlgebraicGeometry.Etale.WeilComplex.tensorFrobenius`), the
+/-- The derived tensor product of Weil complexes. With the tensor Frobenius `φ_K ⊗ φ_L`
+(`AlgebraicGeometry.Etale.WeilComplex.tensorFrobenius`), the
 derived tensor product of `Dctf(X, Λ)` lifts to a bifunctor `WeilD × WeilD ⥤ WeilD` on Weil
 complexes, lying over the derived tensor product of `Dctf(X, Λ)`
 (`AlgebraicGeometry.Etale.WeilComplex.tensor_obj_obj_obj`, `…tensor_map_app_hom`,

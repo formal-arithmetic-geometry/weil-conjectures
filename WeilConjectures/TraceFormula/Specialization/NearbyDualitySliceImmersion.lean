@@ -26,8 +26,7 @@ measure `AlgebraicGeometry.genericBaseMeasure`). This file discharges both.
 ## Main results
 
 * `NearbyCyclesModel.isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase_traitFibreModel`:
-  the pullback of `δ_{T,L}` to the special fibre of the slice of `T` along `b` is an isomorphism
-  (blueprint `lemma-nearby-duality-slice`).
+  the pullback of `δ_{T,L}` to the special fibre of the slice of `T` along `b` is an isomorphism.
 
 -/
 
@@ -52,19 +51,12 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] {T : Scheme.{u}} {q : T ⟶ trait k'}
   [LocallyOfFiniteType q] [QuasiCompact q] [IsSeparated q]
 
-/-- **Duality for nearby cycles on a slice** (blueprint `lemma-nearby-duality-slice`, the
-invertibility part of (E.17)): let `q : T ⟶ S` be a separated scheme of finite type over the
-strictly henselian trait `S = Spec k'⟦t⟧` with an immersion `c : T ⟶ 𝔸^r_S` over `S`, viewed as
-the generic standard model of its generic fibre (`NearbyCyclesModel.traitFibreModel`), and
-`b : T ⟶ 𝔸¹_S` a coordinate. Then for every bounded constructible `L` on `T_η` the pullback of
-the duality map `δ_{T,L}` to the special fibre `T''_s` of the generic slice of `T` along `b` is an
-isomorphism.
-
-This is `NearbyCyclesModel.isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase` with its two
-hypotheses discharged: the twist equation by quasi-projectivity of `T` over `S`
-(`NearbyCyclesModel.exists_twist_of_isImmersion`, through the standard chart
-`𝔸^r_S ⟶ ℙ^r_S`), and nearby duality for the generic slice model by Gabber's theorem over generic
-bases (`NearbyCyclesModel.isIso_nearbyDualityMapOfGenericBase_of_measure`). -/
+/-- **Duality for nearby cycles on a slice**: let `q : T ⟶ S` be a separated scheme of finite type
+over the strictly henselian trait `S = Spec k'⟦t⟧` with an immersion `c : T ⟶ 𝔸^r_S` over `S`,
+viewed as the generic standard model of its generic fibre (`NearbyCyclesModel.traitFibreModel`),
+and `b : T ⟶ 𝔸¹_S` a coordinate. Then for every bounded constructible `L` on `T_η` the pullback
+of the duality map `δ_{T,L}` to the special fibre `T''_s` of the generic slice of `T` along `b`
+is an isomorphism. -/
 theorem isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase_traitFibreModel
     (D : NearbyDualizingDataOfGenericBase k' ℓ) {ι : Type u} [Finite ι]
     (c : T ⟶ 𝔸(ι; trait k')) [IsImmersion c] (hc : c ≫ 𝔸(ι; trait k') ↘ trait k' = q)

@@ -14,14 +14,14 @@ public import WeilConjectures.TraceFormula.CurveLocal.Model
 
 # The cover datum of the prime-to-`ℓ` covers
 
-The construction of blueprint `lemma-tangent-cones-on-cover` is organised around a
-*cover datum* (`AlgebraicGeometry.Etale.CurveLocalModel.CoverDatum`): a smooth curve `C` with a
-finite morphism `p : C ⟶ X`, a `k`-point `c` over `y` at which `p` has ramification index `e`
-prime to `ℓ`, an open neighbourhood `W` of `y` over whose punctured part `W ∖ y` the morphism `p`
-is étale, and a finite étale Galois cover of `p⁻¹(W ∖ y)` with group a finite `ℓ`-group
-trivializing the terms of flat constructible models of `L` and `K`.
+The construction of the prime-to-`ℓ` covers is organised around a *cover datum*
+(`AlgebraicGeometry.Etale.CurveLocalModel.CoverDatum`): a smooth curve `C` with a finite morphism
+`p : C ⟶ X`, a `k`-point `c` over `y` at which `p` has ramification index `e` prime to `ℓ`, an open
+neighbourhood `W` of `y` over whose punctured part `W ∖ y` the morphism `p` is étale, and a finite
+étale Galois cover of `p⁻¹(W ∖ y)` with group a finite `ℓ`-group trivializing the terms of flat
+constructible models of `L` and `K`.
 
-In the blueprint the covers `X' ⟶ X`, `Y' ⟶ Y` of the strictly local traits are obtained by
+In the classical argument the covers `X' ⟶ X`, `Y' ⟶ Y` of the strictly local traits are obtained by
 normalizing the strictly local traits in the fixed fields of `ℓ`-Sylow subgroups; here one global
 cover of a neighbourhood of `y` serves for both factors: the `ℓ`-Sylow quotient `V ⟶ W ∖ y` of a
 Galois cover trivializing the terms has degree `d` prime to `ℓ`
@@ -63,14 +63,13 @@ lemma isClosed_y : IsClosed ({M.y.base (default : Spec (.of k))} : Set M.X) := b
       exact ⟨_, rfl⟩
   rwa [hr] at h
 
-/-- **The cover datum** of blueprint `lemma-tangent-cones-on-cover` for bounded complexes
-`PL`, `PK` of sheaves on `X` (flat constructible models of `L` and `K`): a smooth curve `C` finite
-over an open neighbourhood `U` of `y`, a `k`-point `c` over `y` with ramification index `e` prime
-to `ℓ` (the image of a uniformizer at `y` is a unit times the `e`-th power of a uniformizer at
-`c`), an open neighbourhood `W` of `y` over whose punctured part `p` is étale, and a finite étale
-Galois cover of `p⁻¹(W ∖ y)` with group a finite `ℓ`-group over which the pullbacks of `PL`,
-`PK` are isomorphic, as complexes, to constant complexes on bounded complexes of finite modules
-(the lisse models with monodromy through the `ℓ`-group). -/
+/-- **The cover datum** for bounded complexes `PL`, `PK` of sheaves on `X` (flat constructible
+models of `L` and `K`): a smooth curve `C` finite over an open neighbourhood `U` of `y`, a `k`-point
+`c` over `y` with ramification index `e` prime to `ℓ` (the image of a uniformizer at `y` is a unit
+times the `e`-th power of a uniformizer at `c`), an open neighbourhood `W` of `y` over whose
+punctured part `p` is étale, and a finite étale Galois cover of `p⁻¹(W ∖ y)` with group a finite
+`ℓ`-group over which the pullbacks of `PL`, `PK` are isomorphic, as complexes, to constant complexes
+on bounded complexes of finite modules (the lisse models with monodromy through the `ℓ`-group). -/
 structure CoverDatum (ℓ : ℕ) {Λ : Type (u + 1)} [CommRing Λ]
     (PL PK : CochainComplex (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) where
   /-- The cover curve. -/

@@ -12,7 +12,15 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstru
 
 /-! # A step of normalized compact-support scalar comparison
 
-Source: proposition-six-operations-change-coefficients, compact-support and final paragraphs.
+The coefficient exchange for compact support along a coefficient field extension `E → L` is
+invertible on integral constructible complexes.
+
+## Implementation details
+
+At every quotient the input has a bounded constructible étale antecedent, and finite
+compact-support scalar transport identifies the evaluated proper/open mate with an isomorphism.
+The semilinear system calculus identifies these evaluations with those of the whole-system mate,
+which is then invertible by joint conservativity. No quotient map is assumed flat.
 -/
 
 @[expose] public noncomputable section
@@ -38,21 +46,8 @@ variable (l : ℕ) [Fact l.Prime]
 
 include hl xo yo xft xqc yft yqc fo fs fft fqc
 
-/-- Realization of the proper/open scalar mate is invertible on integral constructible
-inputs. Source: proposition-six-operations-change-coefficients, compact-support paragraph;
-normalized scalar isomorphisms, proof steps 2--4
-(blueprint: lem-sf-compact-support-coefficient-exchange-invertible).
-Proof: scalar extension preserves bounded integral constructibility. At every quotient,
-choose the bounded constructible etale antecedent of the input. Tensor/pullback
-compatibility identifies its scalar extension with the reduction of the completed
-extension; exact full faithfulness of the etale/pro-etale pullback detects boundedness.
-Finite compact-support scalar transport identifies the evaluated proper/open mate
-with an isomorphism. The semilinear system calculus identifies these evaluations with
-the evaluations of the actual whole-system mate. Joint conservativity proves that
-mate invertible. The source comparison is invertible by normalized effectivity on the
-constructible compact-support output, and the target comparison is the inverse scalar
-reduction isomorphism. Applying the total-limit functor and composing these maps gives
-invertibility of the displayed coefficient exchange. No quotient map is assumed flat. -/
+/-- The coefficient exchange for compact support, the realization of the proper/open scalar
+mate along `ι : E → L`, is an isomorphism on integral constructible inputs. -/
 theorem sfCompactSupportCoefficientExchange_isIso
     (E L : Type u) [Field E] [Field L]
     [Algebra (Padic l) E] [Algebra (Padic l) L]

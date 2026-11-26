@@ -43,11 +43,17 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 /-!
 # Ordinary tensor and completed tensor of constructible integral complexes
 
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50, Definition 3.4.10 and
-Lemma 3.4.12(4), pp. 22--23 (blueprint: lem-fix-constructible-tensor-completion).
 The existential tensor presentation retains its natural K-flat comparison, and the
 completion comparison retains both coordinates of the actual product mapping fiber.
 The index n denotes the positive exponent n+1.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.5, Definition 3.4.10 and
+  Lemma 3.4.12(4)]
+* [Stacks, Tag 098K]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 06YL]
 -/
 
 @[expose] public noncomputable section
@@ -62,39 +68,32 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : AlgebraicGeometry.Scheme.{u})
 
-/-- The existing small-model size at exactly the completed-coefficient universe.
-Source: Stacks 098K (blueprint: lem-fix-constructible-tensor-completion). -/
+/-- The existing small-model size at exactly the completed-coefficient universe. -/
 instance (priority := 3100) constructibleTensorSiteSmall :
     EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0, u, u + 1} _
 
-/-- The existing sheaf tensor on completed coefficients, with no completion applied.
-Source: Stacks 03EK; Bhatt--Scholze Lemma 6.5.5
-(blueprint: lem-fix-constructible-tensor-completion). -/
+/-- The existing sheaf tensor on completed coefficients, with no completion applied. -/
 abbrev constructibleTensorOrdinary :=
   @MonoidalCategory.curriedTensor (integralTowerModules l E W) _
     (SheafOfModules.monoidalCategory (completedIntegralCommRingSheafUnrestricted l E W))
 
-/-- Zero preservation of the existing tensor in its first argument.
-Source: Stacks 03EK (blueprint: lem-fix-constructible-tensor-completion). -/
+/-- Zero preservation of the existing tensor in its first argument. -/
 instance constructibleTensorZero :
     (constructibleTensorOrdinary l E W).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients.{u + 1, u, u + 1}
     (completedIntegralCommRingSheafUnrestricted l E W)
 
-/-- Zero preservation of the existing tensor in its second argument.
-Source: Stacks 03EK (blueprint: lem-fix-constructible-tensor-completion). -/
+/-- Zero preservation of the existing tensor in its second argument. -/
 instance constructibleTensorObjZero (M : integralTowerModules l E W) :
     ((constructibleTensorOrdinary l E W).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients.{u + 1, u, u + 1}
     (completedIntegralCommRingSheafUnrestricted l E W) M
 
-/-- Mathlib's signed direct-sum total tensor, specialized to the completed ring sheaf.
-Source: Stacks 06YL (blueprint: lem-fix-constructible-tensor-completion). -/
+/-- Mathlib's signed direct-sum total tensor, specialized to the completed ring sheaf. -/
 abbrev constructibleTensorTotal :=
   Functor.uncurry.obj ((constructibleTensorOrdinary l E W).map₂CochainComplex)
 
-/-- A homogeneous pure tensor in a direct-sum totalization summand.
-Source: Stacks 03EK and 06YL (blueprint: lem-fix-constructible-tensor-completion). -/
+/-- A homogeneous pure tensor in a direct-sum totalization summand. -/
 def constructibleTensorTotalSection
     (P Q : CochainComplex (integralTowerModules l E W) ℤ)
     (p q : ℤ) (U : W.ProEtᵒᵖ) (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U) :
@@ -112,9 +111,7 @@ def constructibleTensorTotalSection
           ((P.X p).val ⊗ (Q.X q).val)).app U
             (x ⊗ₜ[(completedIntegralCommRingSheafUnrestricted l E W).obj.obj U] y)))
 
-/-- The boundary 1-s for the specified strict finite-tensor quotient tower.
-Source: Bhatt--Scholze Definition 3.4.10
-(blueprint: lem-fix-constructible-tensor-completion). -/
+/-- The boundary 1-s for the specified strict finite-tensor quotient tower. -/
 abbrev constructibleTensorBoundary
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :=
   towerTransitionEndomorphism
@@ -143,31 +140,7 @@ are supplied, rather than assumed. The natural representative isomorphism identi
 with the localization of signed total tensor on flat-term K-flat complexes. The chain
 map chi has the coefficient quotient maps as its first product coordinates and zero
 shifted coordinate, so it is the specified mapping-fiber map, not an arbitrary lift.
-The natural transformation tau descends precisely chi using those comparisons.
-
-Source: Bhatt--Scholze Lemma 6.5.5, pp. 49--50; Definition 3.4.10 and Lemma 3.4.12(4)
-(blueprint: lem-fix-constructible-tensor-completion).
-
-Proof:
-1. Use the recorded ordinary tensor in IntegralOnSlice.duality. Restrict its natural
-K-flat representative comparison to the flat-term K-flat complexes in the statement.
-2. Compose the canonical Roos augmentation with the normalized strict tensor-tower
-isomorphism of IntegralAmbient. Its product coordinates are the quotient maps on
-pure tensors and its shifted coordinate is zero.
-3. Whiskering by the product of the good-complex localizations is fully faithful.
-Descend the whole-tower comparison to an isomorphism from completion of the ordinary
-tensor to the specified completed tensor. Its augmentation equation identifies the
-composite with the canonical completion unit with exactly the chain map in step 2.
-4. Apply simultaneous projective chart refinement to the two constructible objects.
-It supplies a finite qcqs open--closed tree and finite common projective charts on
-every nonempty leaf. Their composite weakly etale arrows form a pro-etale cover:
-they cover on points, have quasi-compact domains, and the index set is finite.
-5. Apply projectiveTensorChartComplete on each chart, using its bounded sheaf models
-and finite-free retracts. The canonical completion locality theorem detects global
-completeness from these chart restrictions. Empty leaves use empty chart families.
-6. The same locality theorem identifies completeness with invertibility of the
-canonical unit. Composing it with the descended isomorphism from step 3 proves
-invertibility of the specified completed-tensor comparison on constructible pairs. -/
+The natural transformation tau descends precisely chi using those comparisons. -/
 theorem constructibleTensorCompletion [CompactSpace W] [QuasiSeparatedSpace W]
     [∀ w : W, Invertible (l : W.residueField w)] :
     ∃ (T : DerivedCategory (integralTowerModules l E W) ×

@@ -11,8 +11,12 @@ public import WeilConjectures.SmoothPurity.Supporting.CoefDerivedSystemEvaluatio
 
 /-! # Factorization through the composite ordinary evaluation mate
 
-Source: Stacks Tags 0941 and 03D2.
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-factors).
+Combines the two ordinary maps in an exact-evaluation factorization of the completed
+pullback/tensor comparison into the composite ordinary evaluation mate.
+
+## References
+
+* [Stacks Project, Tags 0941 and 03D2](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -47,13 +51,8 @@ attribute [local instance] sfIntrinsicPullback_additive
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Combine the two ordinary maps in the supplied exact-evaluation factorization.
-Source: Stacks Tags 0941 and 03D2
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-factors).
-Proof: specialize the supplied factorization equation at A. Functoriality of the
-quotient identifies the two consecutive images with the image of their composite;
-associativity gives the displayed factorization.
--/
+/-- Given the exact-evaluation factorization `he`, its two consecutive ordinary maps at `A`
+combine into the image of their composite. -/
 theorem completedPullbackTensor_evaluation_factors {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     (c : integralOperationsLevelPullback l E f n ≅

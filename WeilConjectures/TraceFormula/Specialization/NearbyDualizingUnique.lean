@@ -14,7 +14,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitModelProperExchan
 # Uniqueness of the dualizing maps of nearby cycles
 
 The two properties of a family of dualizing maps (`NearbyCyclesModel.NearbyDualizingData`)
-determine it (blueprint `prose-E-15`):
+determine it:
 
 * on a proper `k'`-scheme `Z`, a map `A ⟶ ω_Z` is determined by its trace
   `RΓ(A) ⟶ RΓ(ω_Z) ⟶ ℚ̄_ℓ` (`NearbyCyclesModel.eq_of_map_comp_trace_eq`), the trace being the
@@ -46,9 +46,8 @@ namespace NearbyCyclesModel
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
-/-- **A map to the dualizing complex of a proper scheme is determined by its trace**: the
-composite `RΓ(θ) ≫ tr_Z` is the image of `θ` under the adjunction `Ra_! ⊣ Ra^!`, read through
-`Ra_! ≅ Ra_*`. -/
+/-- **A map to the dualizing complex of a proper scheme is determined by its trace**: if
+`RΓ(θ₁) ≫ tr_Z = RΓ(θ₂) ≫ tr_Z` then `θ₁ = θ₂`. -/
 theorem eq_of_map_comp_trace_eq (Z : Over (Spec (.of k))) [LocallyOfFiniteType Z.hom]
     [QuasiCompact Z.hom] [IsSeparated Z.hom] [IsProper (toPoint Z).left]
     {A : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {θ₁ θ₂ : A ⟶ dualizingComplex ℓ Z}
@@ -68,8 +67,7 @@ variable {k' : Type u} [Field k'] [Algebra k k'] [IsSepClosed k'] [Fact (ringCha
   [Fact (ringChar k' ≠ ℓ)]
 
 /-- **Uniqueness of the dualizing maps of proper models**: for a proper model whose geometric
-generic fibre is all of `X ×_k Spec Ω`, two families of dualizing maps agree, both being
-determined by the trace property through the invertible proper exchange `χ_a`. -/
+generic fibre is all of `X ×_k Spec Ω`, two families of dualizing maps agree. -/
 theorem NearbyDualizingData.θ_eq_of_isProper (D₁ D₂ : NearbyDualizingData k k' ℓ)
     {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     [IsSeparated X.hom] {X' : Over (Spec (.of k'))} [LocallyOfFiniteType X'.hom]
@@ -85,11 +83,8 @@ theorem NearbyDualizingData.θ_eq_of_isProper (D₁ D₂ : NearbyDualizingData k
   rw [← h₂, cancel_epi] at h₁
   exact eq_of_map_comp_trace_eq ℓ X' h₁
 
-/-- **Uniqueness of the dualizing maps** (blueprint `prose-E-15`): two families of
-dualizing maps of nearby cycles over the trait agree. The model is an open sub-model of a proper
-model with full geometric generic fibre, on which they agree
-(`NearbyCyclesModel.NearbyDualizingData.θ_eq_of_isProper`), and open restriction determines the
-dualizing map of the sub-model, the exchange `α_j` and the identification `ρ` being invertible. -/
+/-- **Uniqueness of the dualizing maps**: two families of dualizing maps of nearby cycles over
+the trait agree. -/
 theorem NearbyDualizingData.θ_eq (D₁ D₂ : NearbyDualizingData k k' ℓ)
     {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     [IsSeparated X.hom] {X' : Over (Spec (.of k'))} [LocallyOfFiniteType X'.hom]

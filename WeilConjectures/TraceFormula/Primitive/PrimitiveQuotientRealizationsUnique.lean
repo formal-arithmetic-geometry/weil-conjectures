@@ -12,8 +12,12 @@ import all WeilConjectures.SixFunctors.Integral.IntegralScalarExtensionWellDefin
 
 /-! # Uniqueness of representative-normalized primitive realizations
 
-Source: Stacks 06YS, 06YY and 0941; step 6 of
-lem-trf-effective-quotient-model-descent.
+The prescribed quotient-generator normalization determines both primitive natural realization
+isomorphisms uniquely (`primitiveQuotientRealizations_unique`).
+
+## References
+
+* Stacks Project, Tags 06YS, 06YY, 0941
 -/
 
 @[expose] public section
@@ -80,29 +84,7 @@ private theorem abEqToHom_cancel {A B : AddCommGrpCat.{u}} (h : A = B) (x : A) :
 
 -- The two strict tower comparisons elaborate large coefficient-functor types.
 /-- The prescribed quotient-generator normalization determines both primitive
-natural realization isomorphisms uniquely.
-Source: Stacks, sites-cohomology.tex, Tags 06YS, 06YY and 0941; parent node
-step 6, with the representative normalizations of the primitive model interfaces.
-(blueprint: lem-trf-primitive-quotient-realizations-unique).
-
-Proof: fix a flat-term K-flat representative P and choose its simultaneous strict quotient
-presentation from SY.reductionModel. Apply the normalization fields of the two pullback models
-to this same presentation. Their strict tower isomorphisms q coincide: in each degree and at
-each coefficient level their homomorphisms agree on the finite pullback unit generators, by the
-two displayed generator formulas; the inverse-image module adjunction and restriction along an
-epimorphic quotient detect equality on those generators. Thus the normalized Roos factors
-coincide. Cancel these isomorphisms in the two normalization equations to identify the
-realization components at Q(P). For the scalar models, use the same quotient presentation.
-Balanced scalar tensors generate the sheafified finite scalar extension, so their two generator
-formulas similarly identify q degreewise and levelwise. The common postcomparison, including
-the universal cochain counit and Roos factor, is invertible: composing it with either
-realization gives the specified comparison isomorphism by normalization. Cancel that
-postcomparison to identify the scalar realizations at Q(P). Every ambient derived object has a
-flat-term K-flat good representative; naturality along its comparison isomorphism gives
-equality at that object, and natural-transformation extensionality gives equality of the two
-natural isomorphisms. The argument includes zero inputs and equal fields; it compares entire
-strict systems and never uses finite evaluations to detect equality of arbitrary derived
-morphisms. -/
+natural realization isomorphisms uniquely. -/
 theorem primitiveQuotientRealizations_unique
     {X Y : Scheme.{t}} (f : X ⟶ Y)
     (SY : CoefficientDerivedSystemCalculus l E Y)

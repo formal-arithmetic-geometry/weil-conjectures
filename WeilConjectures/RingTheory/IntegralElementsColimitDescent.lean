@@ -15,7 +15,12 @@ import WeilConjectures.AlgebraicGeometry.DirectedColimitBaseChangeElementwise
 /-!
 # Descent of a finite family of integral tensor elements
 
-Source: Stacks Project, Algebra, Tag 07RG, proof of Lemma 10.168.3.
+A finite family of elements that become integral after base change to a directed colimit are
+already integral after base change to some stage.
+
+## References
+
+* [Stacks, Tag 07RG]
 -/
 
 @[expose] public section
@@ -76,25 +81,7 @@ private theorem integral_at_stage
   exact hk
 
 /-- A finite family of elements integral after tensor base change to a directed colimit
-is integral after base change to one common stage.
-Source: Stacks Project, Algebra, Tag 07RG, the coefficient-lifting and eventual-zero
-paragraphs of the proof of Lemma 10.168.3.
-(blueprint: lem-weil-pbc-integral-tensor-generators-colimit-descent).
-
-Proof: For each x in s choose a monic polynomial p over colimit F tensor B₀ annihilating
-1 tensor x. The coefficients below p.natDegree lift to stages by
-directedColimitBaseChangeElementwise for B₀, part (1). Choose one upper bound of these
-stages in the directed upper tail above i₀ and transport the coefficients there.
-Construct X^p.natDegree plus the sum of the lifted lower terms. The degree bound for this
-sum makes the polynomial monic, even when p.natDegree is zero. Tensor transition maps
-commute with the maps induced by φ₀ and fix 1 tensor x,
-as checked on pure tensors, so evaluating these polynomials maps to zero at the colimit.
-Part (2) of directedColimitBaseChangeElementwise for C₀ kills each evaluation at a later
-stage. Choose a common upper bound for this finite family of later stages, and transport
-all coefficients there. The transported monic polynomials still annihilate 1 tensor x,
-by multiplicativity and compatibility of the transition maps. These polynomials witness
-the required integrality. For an empty family choose i₀; no nontriviality assumption on
-any ring is needed. -/
+is integral after base change to one common stage. -/
 theorem exists_integral_tensor_generators_of_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F] (i₀ : I)

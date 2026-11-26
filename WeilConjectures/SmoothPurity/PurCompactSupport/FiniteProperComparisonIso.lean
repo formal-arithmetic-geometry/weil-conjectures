@@ -10,12 +10,13 @@ import WeilConjectures.SmoothPurity.PurCompactSupport.FiniteFreeRestrictionDirec
 
 /-! # Finite proper coefficient comparison invertibility
 
-Source: Stacks Tags 0GL5 and 0GL6.
-(blueprint: lem-pur-compact-support-finite-proper-comparison-iso).
-
 This lower statement isolates invertibility of the proper factor of the finite
 coefficient comparison; the parent comparison theorem combines it with the
 open factorization.
+
+## References
+
+* [Stacks Project, Tags 0GL5 and 0GL6]
 -/
 
 @[expose] public noncomputable section
@@ -25,12 +26,7 @@ universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.PurCompactSupport
 
-/-- The proper scalar mate is invertible for the finite coefficient change.
-Source: Stacks Tags 0GL5 and 0GL6.
-(blueprint: lem-pur-compact-support-finite-proper-comparison-iso).
-Proof: finite freeness identifies the scalar restriction square with a finite
-biproduct comparison; proper direct image preserves the resulting isomorphism,
-and the adjunction mate preserves invertibility. -/
+/-- The proper scalar mate is invertible for the finite coefficient change. -/
 def finiteProperComparison {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (g : U ⟶ V) :
     proEtaleRingDerivedDirectImage g (R.ring V) (R.ring U) (R.pull g) ⋙

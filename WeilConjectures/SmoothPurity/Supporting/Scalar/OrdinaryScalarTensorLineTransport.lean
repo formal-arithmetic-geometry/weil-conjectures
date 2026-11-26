@@ -11,7 +11,9 @@ import all WeilConjectures.Algebra.Homology.Signed.SignedLineScalarTensorTower
 
 /-! # Transporting the ordinary scalar tensor comparison
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL.
+## References
+
+* Stacks Project, Tags 03EK and 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -21,17 +23,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped ChangeOfRings
 namespace WeilConjectures
 
-/-- A chosen presentation of ordinary scalar extension inherits the tensor-line comparison.
-Source: Stacks, Modules on Sites, tensor products and scalar extension (03EK, 03EL).
-(blueprint: lem-pur-ordinary-scalar-tensor-line-transport).
-Proof: identify the chosen functor with the sheafified scalar tensor functor by
-its specified object equalities. The hypothesis on maps makes this identification
-natural. Apply the normalized binary scalar tensor comparison, tensor its second
-factor with the specified line comparison, and conjugate by that natural
-isomorphism. Naturality and the pure-tensor formula follow from the two
-comparison formulas and cancellation of the conjugating isomorphism. The
-scalar-extension sheafification universal property determines maps on pure
-tensors, so it also gives uniqueness of the resulting natural isomorphism. -/
+/-- A chosen presentation of ordinary scalar extension inherits the tensor-line comparison,
+uniquely determined by its pure-tensor formula. -/
 theorem ordinaryScalarTensorLineTransport
     {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{max c v} RingCat.{max c v})]

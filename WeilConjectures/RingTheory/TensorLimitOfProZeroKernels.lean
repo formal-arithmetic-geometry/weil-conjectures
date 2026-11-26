@@ -18,8 +18,24 @@ import WeilConjectures.AlgebraicGeometry.MLSetsTowerLimitNonempty
 /-!
 # Finite tensor comparison for towers with eventually zero tensor kernels
 
-Source: Stacks Project, More on Algebra, proof of Tag 0912; Algebra, Tag 0597.
-(blueprint: lem-weil-pbc-tensor-limit-of-pro-zero-kernels)
+Let `A` be a Noetherian ring and `F` a tower of `A`-modules with surjective transition maps whose
+tensor kernels are essentially zero. Then `Q ⊗ lim F → lim (Q ⊗ F_n)` is bijective for every
+finite `A`-module `Q`.
+
+## Implementation details
+
+Choose a presentation `0 → K → P → Q → 0` with `P` finite free; `K` is finite since `A` is
+Noetherian. Surjectivity holds for every finite module: compatible families are lifted
+recursively to `P ⊗ F_n`, correcting by elements of `K ⊗ F_n` using surjectivity of the
+transition maps, and finite free tensor products commute with limits. For injectivity, an
+element of `P ⊗ lim F` mapping to zero has preimages in each `K ⊗ F_n`; these fibres form a
+Mittag-Leffler tower of nonempty sets by the kernel hypothesis, so
+`Functor.nonempty_sections_of_isMittagLeffler` provides a compatible family of preimages.
+
+## References
+
+* [Stacks, Tag 0912]
+* [Stacks, Tag 0597]
 -/
 
 @[expose] public section
@@ -231,30 +247,10 @@ private theorem compatible_preimages_of_proZero
   intro i j g
   exact congrArg Subtype.val (hb g)
 
-/-- A surjective tower with eventually zero finite tensor kernels commutes with finite tensor.
-Source: Stacks Project, More on Algebra, proof of Tag 0912; Algebra, Tag 0597.
-(blueprint: lem-weil-pbc-tensor-limit-of-pro-zero-kernels)
-
-Proof: choose a finite free presentation 0 → K → P → Q → 0. Noetherianity makes
-K finite. For surjectivity, lift a compatible family in Q ⊗ F_n recursively to
-P ⊗ F_n. Given a lift at n and an arbitrary lift at n+1, their difference at n
-is in the kernel, hence is the image of an element of K ⊗ F_n by tensor right
-exactness. Lift that element along the surjective transition of K ⊗ F and subtract
-it at n+1. This corrects compatibility. Finite free tensor commutes with limits:
-under P=A^d it is the interchange of a finite product with compatible sequences.
-The compatible P-family therefore comes from P ⊗ lim F; mapping it to Q proves
-surjectivity. This part needs no Noetherianity and applies to every finite module.
-For injectivity, lift y ∈ Q ⊗ lim F to z ∈ P ⊗ lim F by tensor right exactness.
-If all coordinates of y vanish, those of z have preimages in K ⊗ F_n. These
-preimage fibres form a tower of nonempty sets. Their differences lie in the tensor
-kernels in hker. For each n choose m whose transition kills that kernel. For any
-other stage k ≥ n, choose a preimage at a common later stage l ≥ m,k. Its image
-at n equals the image of every preimage at m, since their difference at m is killed
-on transition to n. The fibres are thus Mittag--Leffler. Tag 0597, as formalized
-in `Functor.nonempty_sections_of_isMittagLeffler`, supplies compatible preimages.
-The already proved surjectivity for K lifts these to K ⊗ lim F. Their image in
-P ⊗ lim F equals z, by the finite free comparison's injectivity. Thus y=0.
-All identifications send q ⊗ t to (q ⊗ π_n(t))_n, the stated comparison. -/
+/-- Let `A` be Noetherian and `F` a tower of `A`-modules with surjective transition maps such that,
+for every submodule `K` of a finite module `P`, the kernels of `K ⊗ F_m → P ⊗ F_m` form an
+essentially zero system. Then for every finite `A`-module `Q`, the comparison map
+`Q ⊗ lim F → lim (Q ⊗ F_n)`, `q ⊗ t ↦ (q ⊗ π_n t)_n`, is bijective. -/
 theorem tensor_limit_comparison_of_proZero_kernels
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (F : ℕᵒᵖ ⥤ ModuleCat.{v} A)

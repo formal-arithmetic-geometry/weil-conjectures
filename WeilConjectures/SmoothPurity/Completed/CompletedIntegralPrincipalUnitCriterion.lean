@@ -35,8 +35,22 @@ import Mathlib.Data.Nat.Prime.Infinite
 
 /-! # The principal quotient unit for completed integral coefficients
 
-Source: Stacks Project, Tags 093M, 099B and 0A0E; Bhatt--Scholze, Proposition 3.5.1.
-(blueprint: lem-weil-completed-integral-principal-unit-criterion).
+For every principal quotient completion model of integral coefficients, an object of the
+derived category is derived complete if and only if the unit of the completion is an
+isomorphism at it.
+
+## Implementation details
+
+The proof passes to the canonical small model of the pro-étale site in the coefficient
+universe, identifies the completed quotient comparison with the constant residue sheaves
+(including quotient maps and transitions), and applies the regular quotient completion unit
+criterion there; the universal left-derived property then compares an arbitrary model with
+this construction.
+
+## References
+
+* [Stacks, Tags 093M, 099B and 0A0E](https://stacks.math.columbia.edu/tag/099B)
+* Bhatt–Scholze, Proposition 3.5.1
 -/
 
 @[expose] public section
@@ -460,29 +474,8 @@ end QuotientComparison
 attribute [local irreducible] IntegralOnSlice.completion IntegralOnSlice.completionComparison
   IntegralOnSlice.completionUnit PrincipalQuotientCompletion.quotientRoos
 
-/-- Every normalized principal quotient completion computes the same complete locus.
-
-Source: Stacks Project, Tags 093M, 099B and 0A0E; Bhatt--Scholze, Proposition 3.5.1.
-(blueprint: lem-weil-completed-integral-principal-unit-criterion).
-
-Proof: pass to the canonical small model of the pro-etale site in the coefficient
-universe. Restriction is an exact equivalence of module categories, preserves all
-products, and transports the uniformizer and its multiplication map. The completed
-quotient comparison identifies the cokernel of its (n+1)-st power with the actual
-constant residue sheaf; it identifies the quotient maps and all transitions, not
-just the objects. On a flat K-flat representative tensor this presentation with the
-representative. Exact countable products carry the resulting levelwise quasi-isomorphisms
-to the signed Roos cones, with their zero shifted coordinate augmentations. Apply the
-regular quotient completion unit criterion on the small model. Its normalized Roos
-triangle condition is precisely the defining condition of IsDerivedComplete, after
-transport along the resolution map and the representative isomorphism. The auxiliary
-finite-field datum is absent from every ring and map in this calculation. The criterion
-makes the specified unit invertible exactly on that locus and makes its output complete.
-The universal left-derived property compares any supplied Model with this quotient
-construction, preserving its counit and unit on K-flat representatives; localization
-extends both equations to all objects. This proves the assertion for the supplied Model.
-The argument includes the zero complex and the empty scheme and needs no
-boundedness or constructibility assumption. -/
+/-- For a principal quotient completion model `C`, an object `K` is derived complete if and only
+if the unit of `C` at `K` is an isomorphism. -/
 theorem completedIntegralPrincipalUnitCriterion
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})

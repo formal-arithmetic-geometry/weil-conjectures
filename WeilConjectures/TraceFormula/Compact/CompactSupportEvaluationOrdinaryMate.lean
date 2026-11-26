@@ -11,7 +11,18 @@ import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
 /-! # Ordinary evaluation mate for geometric direct image
 
-Source: Zheng, Construction 4.1 and Lemma 4.10.
+The inverse mate of an ordinary direct-image evaluation is invertible.
+
+## Implementation details
+
+The sequence-module pullback evaluation theorem is applied to the product of the pro-étale
+base-change functor with the identity on the natural-number poset. The mate under the
+evaluation/coextension adjunctions acts pointwise by the sectionwise bijection of the ordinary
+comparison, and the iterated-mates identity reflects invertibility back to the inverse mate.
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10.
 -/
 
 @[expose] public noncomputable section
@@ -34,20 +45,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The inverse mate of an ordinary direct-image evaluation is invertible.
-
-Source: Zheng, Construction 4.1 and Lemma 4.10, ordinary inverse-image evaluation.
-Apply the sequence-module pullback evaluation theorem to the product of the
-pro-etale base-change functor with the identity on the natural-number poset.
-Its right coextension to level n has value M at every m with n ≤ m, with scalars
-restricted through the horizontal ring map, and zero otherwise. The mate under
-the evaluation/coextension adjunctions acts pointwise by the sectionwise bijection
-of the supplied ordinary comparison. It is invertible, also below n where both
-coextensions are zero. The iterated-mates identity then reflects this invertibility
-back to the inverse mate under the two geometric adjunctions. The coefficient
-slice identifications are exactly coefficientSequenceEvaluationRing_eq.
-(blueprint: lem-trf-compact-support-evaluation-ordinary-mate).
--/
+/-- The inverse mate of an ordinary direct-image evaluation is invertible. -/
 theorem compactSupportEvaluationOrdinaryMate_isIso
     {Z Y : Scheme.{t}} (p : Z ⟶ Y) (n : ℕ)
     (ordinary : integralComparisonSequenceDirectImage l E p ⋙

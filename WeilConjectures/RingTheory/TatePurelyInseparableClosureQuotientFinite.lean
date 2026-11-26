@@ -18,8 +18,23 @@ import Mathlib.FieldTheory.PurelyInseparable.Exponent
 /-!
 # The closed fibre of a purely inseparable integral closure
 
-Source: Stacks Project, Algebra, Tag 032P (lemma-tate-japanese).
-(blueprint: lem-weil-pbc-tate-purely-inseparable-closure-quotient-finite).
+For a Noetherian normal domain `R` of characteristic `p`, an element `x` with `R/(x)` an N-2
+domain, and a finite purely inseparable extension `L` of the fraction field `K`, the integral
+closure `S` of `R` in `L` satisfies: `S/xS` is finite over `R/(x)`.
+
+## Implementation details
+
+For `x ≠ 0`, choose `q = p^e` with `L^q ⊆ K` and adjoin a `q`-th root `y` of `x`, giving a finite
+extension `L'/K` with integral closure `T ⊇ S`. Normality gives `S ∩ xT = xS`, so `S/xS` injects
+into `T/xT`. The ideal `yT` is a prime lying over `xR`; the residue field extension at `yT` over
+`xR` is finite ([Stacks, Tag 031F]), and the N-2 hypothesis makes `T/yT` finite over `R/(x)`.
+The filtration by the `y^i T` then shows that `T/y^q T = T/xT` is finite. No completeness
+assumption is needed.
+
+## References
+
+* [Stacks, Tag 032P]
+* [Stacks, Tag 031F]
 -/
 
 @[expose] public section
@@ -132,37 +147,9 @@ private theorem finite_closure_quotient_of_extension
   exact Module.Finite.of_surjective (e₁.trans e₂).symm.toLinearMap
     (e₁.trans e₂).symm.surjective
 
-/-- The reduction of a purely inseparable integral closure modulo a prime principal
-ideal is finite. Source: Stacks Project, Algebra, Tag 032P (lemma-tate-japanese),
-proof before the application of Tag 031D.
-(blueprint: lem-weil-pbc-tate-purely-inseparable-closure-quotient-finite).
-
-Proof:
-If x = 0, R/xR is R; transport its N-2 hypothesis to its fraction field K and
-apply it to L. Assume x is nonzero. Choose a common exponent q = p^e by taking
-the maximum of exponents for a finite K-basis of L. Adjoin a q-th root y of x
-inside an algebraic closure to get a finite extension L'/K with (L')^q in K.
-The integral closure S in L embeds in the closure T in L'. For every a in T,
-a^q belongs to R by normality. Also xT intersect R equals xR, by dividing
-by the nonzero x in K and using normality. More generally S intersect xT = xS:
-if a = xb in T and a is in L, then b = a/x is in L and integral over R.
-Consequently S/xS injects R-linearly into T/xT. Since R is Noetherian, it
-suffices to prove that T/xT is finite.
-
-The root y is integral over R. The ideal yT consists exactly of those a in T
-with a^q in xR: the converse follows because (a/y)^q belongs to R and hence
-a/y is integral. This makes yT a prime lying over xR. Localize at xR; the
-principal-ideal height bound gives a one-dimensional Noetherian local domain.
-Tag 031F (lem-weil-pbc-dim-one-residue-field-extensions-finite) gives a finite
-extension of residue fields at yT over xR. Its base is the fraction field of
-R/xR. Every element of T/yT is integral over R/xR and this domain embeds in
-the residue field at yT. Thus it embeds in the integral closure of R/xR in
-that finite field extension. N-2 makes this latter closure finite, and
-Noetherianity makes T/yT finite. Multiplication by y^i identifies T/yT with
-y^i T/y^(i+1) T, because T is a domain and y is nonzero. The finite filtration
-therefore makes T/y^q T = T/xT finite over R. The injection above gives
-finiteness of S/xS over R. Its action factors through R/xR, so it is finite
-over that quotient as asserted. No completeness assumption is needed. -/
+/-- Let `R` be a Noetherian normal domain with fraction field `K` of characteristic `p`, and let
+`x ∈ R` be such that `R/(x)` is an N-2 domain. For a finite purely inseparable extension `L/K`,
+the reduction modulo `x` of the integral closure of `R` in `L` is finite over `R/(x)`. -/
 theorem tate_purely_inseparable_closure_quotient_finite
     (R : Type u) (K L : Type v) [CommRing R] [IsDomain R]
     [Field K] [Field L] [Algebra R K] [IsFractionRing R K]

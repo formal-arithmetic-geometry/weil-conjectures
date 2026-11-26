@@ -12,7 +12,20 @@ import Mathlib.RingTheory.Localization.LocalizationLocalization
 /-!
 # Prime ideals, local rings and residue fields of a localization
 
-Source: Stacks Project, Algebra, Tags 00E3, 00C9 and 07BH.
+A localization `A → A'` at `W` induces a bijection between primes of `A'` and primes of `A`
+disjoint from `W`, together with canonical isomorphisms of the local rings and residue fields.
+
+## Implementation details
+
+The extension of a prime `p` disjoint from `W` consists of fractions with numerator in `p`, and
+the localization kernel condition shows its contraction is `p`. The local ring isomorphism comes
+from uniqueness of localization, since `A'_{q'}` is a localization of `A` at the complement of
+`q`; its ring map is `Localization.localRingHom`. The residue field isomorphism is induced on the
+quotients by the maximal ideals.
+
+## References
+
+* [Stacks, Tags 00E3, 00C9, 07BH]
 -/
 
 @[expose] public section
@@ -22,34 +35,7 @@ universe u v
 namespace IsLocalization
 
 /-- A localization induces the prime-ideal correspondence and canonical isomorphisms of
-local rings and residue fields. Source: Stacks Project, Algebra, Tags 00E3, 00C9 and 07BH.
-
-Proof:
-1. The contraction `q` of `q'` is prime: one does not lie in it and primality pulls back
-   along the ring map. It is disjoint from `W` because every denominator maps to a unit,
-   whereas a proper prime ideal contains no units.
-2. For a prime `p` disjoint from `W`, the extension consists of fractions with numerator
-   in `p`, by bringing finite sums to a common denominator. If the image of `x` is such
-   a fraction `a/w`, the localization kernel condition gives `t * (w*x-a) = 0` for some
-   `t` in `W`. Thus `twx` lies in `p`; since `tw` does not, `x` lies in `p`. This proves
-   that the contraction of the extension is `p` and that the extension is proper.
-3. If a product of two fractions lies in the extension of `p`, its numerator lies in
-   `p` by step 2. Primality of `p` puts one numerator in `p`, proving the extension prime.
-4. A fraction in `q'` has numerator in `q`, giving extension of contraction equal to
-   `q'`. Steps 1-3 and this identity give mutually inverse maps on the indicated primes
-   (Tag 00E3).
-5. Localize `A'` at the complement of `q'` (def-weil-pbc-localization-at-prime).
-   By lem-weil-pbc-localization-of-localization, the composite is a localization at
-   the set of `x` with image `n * image(w)`, where `n` is outside `q'` and `w` is in `W`.
-   This set is exactly the complement of `q`: use `w = 1` in one direction; in the
-   other direction `image(w)` is a unit and primality excludes their product from `q'`.
-   Uniqueness of localization gives the `A`-algebra isomorphism `e`, whose ring map is
-   `Localization.localRingHom`, hence sends `a/s` to `image(a)/image(s)` (Tag 00C9).
-6. These local rings have maximal ideals the extensions of `q` and `q'`
-   (def-weil-pbc-localization-at-prime). The isomorphism carries the unique maximal
-   ideal onto the unique maximal ideal. Passing to their quotients gives the field
-   isomorphism `σ`. It commutes with the residue maps and is an `A`-algebra isomorphism
-   because `e` is one (Tag 07BH). -/
+local rings and residue fields. -/
 theorem prime_localRing_residueField_iso
     (A : Type u) (A' : Type v) [CommRing A] [CommRing A'] [Algebra A A']
     (W : Submonoid A) [IsLocalization W A'] (q' : Ideal A') [q'.IsPrime] :

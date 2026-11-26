@@ -10,7 +10,9 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralComp
 
 /-! # Evaluation diagrams for the system projection
 
-Source: the successive coefficient reductions in fix-prop-projection-formula.proof.md.
+We set up the finite evaluation of coefficient systems and the source and target of the
+system projection of reduced integral inputs, following the successive coefficient
+reductions of the projection formula.
 -/
 
 @[expose] public noncomputable section
@@ -32,36 +34,26 @@ attribute [local irreducible] CategoryTheory.constantSheaf HasDerivedCategory.st
   CompactSupportFiniteProjection.component compactSupportProjectionComponent
   compactSupportProperProjection
 
-/-- A natural tensor comparison, before taking its individual components.
-Source: coefficient tensor associativity
-(blueprint: def-sf-integral-projection-finite-evaluation-data). -/
+/-- A natural tensor comparison, before taking its individual components. -/
 abbrev TensorComparison := ∀ X : SixFunctorSpace D,
   Functor.uncurry.obj (d.higher.integralTensor X) ⋙ reduction d m X ≅
     ((reduction d m X).prod (torReduction d m X)) ⋙
       Functor.uncurry.obj (CompactSupportFiniteProjection.partialTensor (stage d m) X)
 
-/-- The components of a given natural comparison; no new choice is made.
-Source: evaluation of a natural isomorphism
-(blueprint: def-sf-integral-projection-finite-evaluation-data). -/
+/-- The components of a given natural comparison; no new choice is made. -/
 def tensorCoordinates (e : TensorComparison d m) : TensorCoordinates d m :=
   fun X K L ↦ (e X).app (K, L)
 
-/-- Ambient finite evaluation of a whole coefficient system.
-Source: the recorded coefficient evaluation calculus
-(blueprint: def-sf-integral-projection-finite-evaluation-data). -/
+/-- Ambient finite evaluation of a whole coefficient system. -/
 abbrev evaluation (X : SixFunctorSpace D) :=
   coefficientSequenceDerivedEvaluation C.l E X.obj.left m
 
-/-- The full inclusion of the bounded finite category.
-Source: the finite coefficient category
-(blueprint: def-sf-integral-projection-finite-evaluation-data). -/
+/-- The full inclusion of the bounded finite category. -/
 abbrev finiteInclusion (X : SixFunctorSpace D) :=
   (intrinsicFiniteTorsionConstructible C.l E (m + 1)
     (Nat.le_add_left 1 m) X.obj.left).ι
 
-/-- Finite evaluation of the reduction is the actual quotient scalar extension.
-Source: reductionEvaluation of the coefficient calculus
-(blueprint: def-sf-integral-projection-finite-evaluation-data). -/
+/-- Finite evaluation of the reduction is the actual quotient scalar extension. -/
 def reductionEvaluation (X : SixFunctorSpace D)
     (K : sfIntegralConstructibleCategory C.l E X.obj.left) :
     (evaluation (C := C) (E := E) m X).obj
@@ -69,9 +61,7 @@ def reductionEvaluation (X : SixFunctorSpace D)
       (finiteInclusion (C := C) (E := E) m X).obj ((reduction d m X).obj K) :=
   ((calculus C.l E X.obj.left).reductionEvaluation m).app K.obj
 
-/-- The source of the system projection of reduced integral inputs.
-Source: compactificationProjection on coefficient systems
-(blueprint: def-sf-integral-projection-finite-evaluation-data). -/
+/-- The source of the system projection of reduced integral inputs. -/
 abbrev systemSource (o : Operations C.l E) {X Y : SixFunctorSpace D}
     (f : X ⟶ Y) (c : Compactification f.hom.left)
     (K : sfIntegralConstructibleCategory C.l E X.obj.left)
@@ -81,9 +71,7 @@ abbrev systemSource (o : Operations C.l E) {X Y : SixFunctorSpace D}
       ((calculus C.l E X.obj.left).reduction.obj K.obj)),
       (calculus C.l E Y.obj.left).reduction.obj L.obj)
 
-/-- The target of that same system projection.
-Source: compactificationProjection on coefficient systems
-(blueprint: def-sf-integral-projection-finite-evaluation-data). -/
+/-- The target of that same system projection. -/
 abbrev systemTarget (o : Operations C.l E) {X Y : SixFunctorSpace D}
     (f : X ⟶ Y) (c : Compactification f.hom.left)
     (K : sfIntegralConstructibleCategory C.l E X.obj.left)
@@ -95,9 +83,7 @@ abbrev systemTarget (o : Operations C.l E) {X Y : SixFunctorSpace D}
           ((calculus C.l E Y.obj.left).reduction.obj L.obj))))
 
 /-- A proper counit projection expressed in the support coordinates of the
-identity-open compactification. This is an explicit conjugate of the proper map.
-Source: the proper identification in the projection formula
-(blueprint: def-sf-integral-projection-finite-evaluation-data). -/
+identity-open compactification. This is an explicit conjugate of the proper map. -/
 def properViaSupport {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsProper f.hom.left]
     (K : sfIntegralConstructibleCategory C.l E X.obj.left)
     (L : sfIntegralConstructibleCategory C.l E Y.obj.left) :=

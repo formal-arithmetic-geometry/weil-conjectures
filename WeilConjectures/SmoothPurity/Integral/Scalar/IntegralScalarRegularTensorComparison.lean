@@ -34,8 +34,9 @@ import all WeilConjectures.SixFunctors.Integral.IntegralScalarExtensionWellDefin
 
 /-! # Comparing the regular coefficient tensor presentations
 
-Source: Stacks, Tags 03EK and 010V; latest blueprint scalar-extension proof, step (4).
-(blueprint: lem-sf-integral-scalar-regular-tensor-comparison).
+## References
+
+* Stacks Project, Tags 010V, 03EK, 099Y and 09AJ
 -/
 
 @[expose] public noncomputable section
@@ -51,20 +52,7 @@ variable (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- The tensor unit identifies the two regular coefficient complex constructions.
-Source: Stacks, Modules on Sites, Tag 03EK; blueprint scalar-extension proof, step (4).
-(blueprint: lem-sf-integral-scalar-regular-tensor-comparison).
-Proof: the constant sheaf of the regular B-module is the unit B_Y. The tensor
-unitor sends (b tensor p) tensor c to bc tensor p and its inverse inserts 1 in the
-last factor. These balanced linear maps commute with restrictions and descend
-through module sheafification. The two composites are identity on pure tensors,
-hence on their sheafifications. Naturality in P makes them commute with d_P.
-They identify filteredCoefficientTensorComplex with integralScalarFiniteComplex:
-use integralScalarReduction_eqConcrete to expose the latter's sheafified tensor
-construction, and the unit isomorphism of the constant regular B-module to
-remove the last tensor factor. This is a complex isomorphism before localization;
-no flatness, constructibility, completeness, or boundedness is needed. The
-construction also applies to zero P and the empty scheme. -/
+/-- The tensor unit identifies the two regular coefficient complex constructions. -/
 theorem integralScalarRegularTensorIso
     (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) :
     let B := ULift.{u + 1} (Padic.coefficientExtensionRing l L (n + 1))
@@ -105,9 +93,7 @@ theorem integralScalarRegularTensorIso
         (integralScalarRho l E L ι Y n) (P.X i) (P.d i j))).symm
 
 /-- Transport the finite-model constructibility and vanishing predicates across
-this tensor unitor and the localization homology comparison.
-Source: Stacks, Tags 03EK, 010V, 09AJ and 099Y
-(blueprint: lem-sf-integral-scalar-regular-tensor-comparison). -/
+this tensor unitor and the localization homology comparison. -/
 theorem integralScalarRegularTensorComparison
     (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) (i : ℤ) :
     letI := Padic.finite_coefficientExtensionRing l L (n + 1) (by omega)

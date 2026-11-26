@@ -133,8 +133,10 @@ import WeilConjectures.CategoryTheory.Native.NativePrincipalConeCriterion
 
 /-! # The local criterion for a principal cone completion
 
-Source: Stacks Tags 0999, 099B and 0A0E.
-(blueprint: lem-pur-integral-principal-cone-local-criterion) -/
+## References
+
+* Stacks Project, Tags 0999, 099B and 0A0E.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -149,8 +151,7 @@ namespace WeilConjectures.IntegralPrincipalCone
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : AlgebraicGeometry.Scheme.{t})
 
-/-- The localization test on the actual slice, with independent coefficient size.
-Source: Stacks 0999 (blueprint: lem-pur-integral-principal-cone-local-criterion). -/
+/-- The localization test on the actual slice, with independent coefficient size. -/
 def localTest (K : IntegralOnSlice.D l E T none) (U : T.ProEt)
     (s : ((IntegralOnSlice.ring l E T (some U)).obj ⋙ forget CommRingCat).sections) :
     IntegralOnSlice.D l E T (some U) :=
@@ -166,8 +167,7 @@ def localTest (K : IntegralOnSlice.D l E T none) (U : T.ProEt)
       (ringedSectionLocalizationOfUniverses (IntegralOnSlice.ring l E T (some U)) s)),
       ringedSiteDerivedRestrictionOfUniverses (IntegralOnSlice.rings l E T none) U K)
 
-/-- Vanishing for every locally divisible section on every slice.
-Source: Stacks 0999 (blueprint: lem-pur-integral-principal-cone-local-criterion). -/
+/-- Vanishing for every locally divisible section on every slice. -/
 def locallyComplete
     (σ : ∀ U : T.ProEtᵒᵖ, (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj U)
     (K : IntegralOnSlice.D l E T none) : Prop :=
@@ -210,23 +210,7 @@ private theorem locallyComplete_iso
     exact (h U s hs).of_iso (localTestIso l E T e U s)
 
 /-- The principal cone completion is locally complete, and its specified unit is
-invertible exactly for locally complete inputs. The scalar is any natural section;
-no regularity, boundedness or flatness of the input complex is needed.
-
-Source: Stacks Tags 0999, 099B and 0A0E, the singleton Koszul completion reflector.
-(blueprint: lem-pur-integral-principal-cone-local-criterion).
-
-Proof: replace the essentially small ringed site by its small model at coefficient
-universe max(u,t+1). Exact module restriction is an equivalence, preserving the scalar,
-localizations, internal Hom, products and mapping cones. Apply the ringed Koszul
-completion reflector to the singleton scalar. Its negative Koszul tensor complex is
-canonically the cone of scalar multiplication on P, and its (scalar,1) transitions and
-degree-zero unit are those of PrincipalCone. The image ideal of multiplication by the
-scalar consists exactly of the sections locally divisible by that scalar; sheaf image
-and local lifting give the displayed covering-sieve formulation, including on every
-slice. The reflector gives completeness of its output and the unit criterion. Transport
-back through the site equivalence and then through e. For a zero scalar localization
-at every ideal section is zero, and the same construction still applies. -/
+invertible exactly for locally complete inputs. The scalar is any natural section. -/
 theorem localCriterion
     (σ : ∀ U : T.ProEtᵒᵖ, (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj U)
     (_hσ : ∀ {U V : T.ProEtᵒᵖ} (f : U ⟶ V),

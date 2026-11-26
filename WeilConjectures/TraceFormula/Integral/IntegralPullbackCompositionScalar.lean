@@ -13,16 +13,22 @@ import all WeilConjectures.SmoothPurity.Finite.FiniteSystemPullbackCoherence
 
 /-! # Scalar extension carries the integral pullback compositor
 
-Source: Stacks Project, Tags 06YY, 07A4, 0941 and 0D6D; Bhatt--Scholze, Lemma 3.5.7
-(blueprint: lem-pod-integral-pullback-composition-scalar).
+For a coefficient inclusion `E ⟶ L`, completed scalar extension carries the specified
+integral composition comparison at `E` to the one at `L`, conjugated by the canonical
+scalar/pullback comparisons.
 
-For a coefficient inclusion E to L, completed scalar extension carries the specified
-integral composition comparison at E to the one at L, conjugated by the canonical
-scalar/pullback comparisons. Both sides are compared after the fully faithful coherent
+## Implementation details
+
+Both sides are compared after the fully faithful coherent
 reduction at L: the system-level composition clause of integralPullbackComposition at
 E and at L, the system scalar comparison, the pullback/scalar square of
 scalarExtensionTowerCoherence, and whole-system mixed coherence.
 The rationalized statement follows by localization on pure tensors.
+
+## References
+
+* Stacks Project, Tags 06YY, 07A4, 0941, 0D6D
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 3.5.7
 -/
 
 @[expose] public noncomputable section
@@ -104,8 +110,7 @@ private theorem scalar_right_comp_naturality {C D B : Type*}
     F.map f ≫ η.app Y = η.app X ≫ H.map (G.map f) :=
   η.naturality f
 
-/-- Map a composite equation with its factors already expanded.
-Source: functoriality. -/
+/-- Map a composite equation with its factors already expanded. -/
 private theorem scalar_map_three_eq_three {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) {A B C' D' E' F' : C}
     {a : A ⟶ B} {b : B ⟶ C'} {c : C' ⟶ D'}
@@ -114,8 +119,7 @@ private theorem scalar_map_three_eq_three {C D : Type*} [Category C] [Category D
     F.map a ≫ F.map b ≫ F.map c = F.map d ≫ F.map e ≫ F.map f := by
   simpa only [Functor.map_comp] using congrArg F.map h
 
-/-- Map a composite equation with its factors already expanded.
-Source: functoriality. -/
+/-- Map a composite equation with its factors already expanded. -/
 private theorem scalar_map_three_eq_two {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) {A B C' D' E' : C}
     {a : A ⟶ B} {b : B ⟶ C'} {c : C' ⟶ D'} {d : A ⟶ E'} {e : E' ⟶ D'}
@@ -124,7 +128,7 @@ private theorem scalar_map_three_eq_two {C D : Type*} [Category C] [Category D]
   simpa only [Functor.map_comp] using congrArg F.map h
 
 /-- Pasting of the scalar-composition diagram after mapping all of its edges into
-one category. Source: elementary category theory. -/
+one category. -/
 private theorem scalar_composition_paste_mapped
     {D : Type*} [Category D]
     {O0 O1 O2 O3 O4 F0 F1 M1 M2 M3 N1 N2 N3 E0 E2 E3 E4 E5 : D}
@@ -154,7 +158,7 @@ private theorem scalar_composition_paste_mapped
     reassoc_of% hCE, hMix, ← reassoc_of% hIIIhk, hNa, ← reassoc_of% hCL]
 
 /-- The pasting calculation behind integralPullbackComposition_scalar, with all
-morphisms abstract. Source: elementary category theory. -/
+morphisms abstract. -/
 private theorem scalar_composition_paste
     {D DE WL : Type*} [Category D] [Category DE] [Category WL]
     (U : WL ⥤ D) (H : DE ⥤ D)
@@ -377,15 +381,7 @@ private theorem integralCompositionFinite_mixed
     ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k) M
 
 -- Mixed coherence is transported once between the two presentations of reduction systems.
-/-- Scalar extension carries the integral pullback compositor at E to the one at L.
-Source: Stacks 06YY, 07A4, 0941, 0D6D; Bhatt--Scholze, Lemma 3.5.7
-(blueprint: lem-pod-integral-pullback-composition-scalar).
-Proof: apply the faithful coherent reduction at L and cancel the invertible comparison
-beta_h (U_h beta_k)(U_h U_k p). Naturality of beta_h, the pullback/scalar square for k and
-h, naturality of the whole-system scalar/pullback comparison and of p, the system clause
-of integralPullbackComposition at E, whole-system mixed coherence, the pullback/scalar
-square for h k, naturality of the finite-system composition and the system clause at L
-transform one side into the other. -/
+/-- Scalar extension carries the integral pullback compositor at E to the one at L. -/
 theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
     [∀ v : V, Invertible (l : V.residueField v)]
     [∀ w : W, Invertible (l : W.residueField w)]

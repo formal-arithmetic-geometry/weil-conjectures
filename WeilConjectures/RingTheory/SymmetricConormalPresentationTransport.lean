@@ -13,7 +13,21 @@ import Mathlib.Algebra.MvPolynomial.Equiv
 
 /-! # Transport of the symmetric presentation conormal module
 
-Source: Stacks Project, Lemma 07CE, equation (16.3.1.1), at `a = 1`.
+Changing the quotient coefficient ring, its conormal module and the indexing of the polynomial
+variables preserves the conormal module of the canonical polynomial presentation of the
+symmetric algebra (`Algebra.Presentation.symmetric_conormal_presentation_transport`).
+
+## Implementation details
+
+The symmetric algebra over `P.Quotient` is identified with `SymmetricAlgebra A M` via
+`P.quotientEquiv` and the given conormal equivalence, using the universal property. The
+iterated polynomial ring is flattened and its variables reindexed by `finSumFinEquiv`; the
+resulting commuting square of ring equivalences maps one kernel onto the other together with
+its square, and descends to the conormal modules. No projectivity is needed.
+
+## References
+
+* [Stacks, Tag 07CE], the polynomial presentation preceding (16.3.1.1), at `a = 1`
 -/
 
 @[expose] public section
@@ -171,33 +185,7 @@ private noncomputable def conormalQuotientEquiv
 
 /-- Changing the quotient coefficient ring, its conormal module, and the indexing of
 polynomial variables preserves the conormal of the canonical symmetric presentation.
-This transport statement does not assume projectivity or assert freeness.
-
-Source: Stacks Project, Lemma 07CE, the polynomial presentation preceding
-(16.3.1.1), https://stacks.math.columbia.edu/tag/07CE.
-(blueprint: lem-weil-pbc-symmetric-conormal-presentation-transport)
-
-Proof. Identify `P.Quotient` with `A` by `P.quotientEquiv`. On conormal representatives,
-the identity identifies `P.ker.Cotangent` with `P.toExtension.Cotangent`, semilinearly
-for this coefficient equivalence. Compose with `e`. The symmetric algebra universal
-property gives a ring equivalence from the symmetric algebra over `P.Quotient` to
-`SymmetricAlgebra A M`: on coefficients it is the quotient equivalence followed by
-the coefficient embedding, and on degree-one generators it is the conormal equivalence
-followed by `ι`. Applying the universal property to the inverse coefficient and module
-equivalences supplies its inverse. Their compositions fix coefficients and all
-degree-one generators, hence are identities.
-Flatten the iterated polynomial ring with the polynomial sum equivalence, and reindex
-`Fin n ⊕ Fin m` by `finSumFinEquiv`. On constants, old variables, and new variables,
-the resulting commuting square compares exactly the displayed maps `φ` and `f`.
-The domain ring equivalence maps `ker f` onto `ker φ` and maps their squares onto
-one another, because the codomain ring map is injective. Restrict it to the ideals
-and descend it and its inverse to the quotients by their squares. The resulting
-additive equivalence is semilinear for the quotient-ring equivalence. Compose that
-scalar equivalence with the first-isomorphism equivalence induced by the surjective
-map `φ`. Reinterpret its ideal cotangent as the extension cotangent: both are the
-same quotient, and the scalar actions agree on every polynomial representative.
-This gives `ρ` and the asserted equivalence. Neither this argument nor the universal
-properties require projectivity, a nonzero ring, or nonempty variable sets. -/
+This transport statement does not assume projectivity or assert freeness. -/
 theorem symmetric_conormal_presentation_transport
     {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]
     {n m : ℕ} (P : Algebra.Presentation R A (Fin n) (Fin m))

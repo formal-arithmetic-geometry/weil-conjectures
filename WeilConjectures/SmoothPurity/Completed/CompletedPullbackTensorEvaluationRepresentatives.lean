@@ -11,8 +11,19 @@ import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorEvaluationC
 
 /-! # Finite evaluation of coherent pullback tensor representatives
 
-The representative calculation in Stacks 07A4, with the sequence evaluation
-and exact inverse-image normalizations of Stacks 0941 and 03D2.
+Finite evaluation respects the coherent tensor/pullback comparison on K-flat pairs.
+
+## Implementation details
+
+The square is first checked on flat-term K-flat resolutions, where both ordinary composites
+send the evaluated unit section of `x ⊗ y` to the tensor of the two evaluated unit sections on
+each total summand. Descent to arbitrary objects uses resolution isomorphisms and naturality
+separately.
+
+## References
+
+* Stacks Project, Lemma 21.18.4 (Tag 07A4), with the sequence evaluation and exact
+  inverse-image normalizations of Tags 0941 and 03D2.
 -/
 
 @[expose] public noncomputable section
@@ -49,29 +60,7 @@ private theorem finiteEvaluationComparison_app {X Y : Scheme.{u}} (f : X ⟶ Y) 
   unfold finitePullbackTensorConstructionIso finitePullbackTensorConstruction
   rfl
 
-/-- Finite evaluation respects the coherent tensor/pullback comparison on K-flat pairs.
-Source: Stacks, sites-cohomology.tex, Lemma 21.18.4 (Tag 07A4), together with
-Tags 0941 and 03D2 (blueprint: lem-pur-completed-pullback-tensor-evaluation-representatives).
-Proof: choose flat-term K-flat resolutions of the displayed coherent complexes.
-Their quasi-isomorphisms give isomorphisms after the derived quotient. Naturality
-of both paths lets us prove the square on these resolutions and transport it
-back to the displayed pair. Evaluate the resolutions in sequence degree n.
-Exact evaluation preserves their K-flat tensor models, and
-exact constant-coefficient inverse image preserves K-flatness. Insert the
-normalization of the coherent system comparison, the evaluation tensor models,
-and the two prescribed exact-pullback factorization maps. The normalization he
-identifies evaluation after pullback with pullback after evaluation; hc identifies
-the finite ordinary inverse image with the intrinsic one on its adjunction unit.
-On a total summand of bidegree (p,q), both ordinary composites send the evaluated
-unit section of x tensor y to the tensor of the two evaluated unit sections.
-This follows first from the unit formula of pullbackTensorSequenceCochain, then
-from hc and the ordinary evaluation mate's unit formula. Tensor sheafification
-and the total-summand inclusions determine the chain maps, so the composites
-are equal, including their differentials. Apply the derived quotient to this
-chain equality. Naturality of the tensor-model and exact-pullback factorizations
-cancels the inserted intermediate maps, giving the displayed square. Only the
-K-flat representative calculation is asserted here; descent to arbitrary
-objects uses resolution isomorphisms and naturality separately. -/
+/-- Finite evaluation respects the coherent tensor/pullback comparison on K-flat pairs. -/
 theorem completedPullbackTensor_evaluation_representatives {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]

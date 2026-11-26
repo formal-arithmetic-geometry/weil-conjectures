@@ -31,12 +31,16 @@ import WeilConjectures.ZetaWeil.ConstantPullbackUnitQuasiIsomorphism.ConstantPul
 
 /-! # Finite and completed coefficient pullback units
 
-Source: the constant-sheaf clause of `theorem-grothendieck-lefschetz-trace-formula--8`, reviewed
-expansion steps 2, 3, 5 and 6 (blueprint: lem-zl-coefficient-pullback-unit-coordinates).
+This file constructs, for an arbitrary morphism of schemes `f : X ⟶ Y`, the finite coefficient
+units for the pullback of the constant coefficient sheaves and the integral (completed) unit, and
+proves that the integral unit is a quasi-isomorphism. These are used in the constant-sheaf case of
+the Grothendieck–Lefschetz trace formula.
 
-These are the unchanged coefficient-unit constructions formerly in
-`ConstantGeometricStalkUnit`, together with the proved arbitrary-map integral unit
-quasi-isomorphism. They are re-exported there for the geometric stalk calculations.
+## Implementation details
+
+These constructions are re-exported in `ConstantGeometricStalkUnit` for the geometric stalk
+calculations. The strict integral unit is characterized by an existence and uniqueness statement
+(`integralChainUnit_existsUnique`), so that no filler in a triangulated homotopy limit is chosen.
 -/
 
 @[expose] public noncomputable section
@@ -58,8 +62,7 @@ attribute [-instance] coefficientComplexModuleDerived pointScalarModuleDerived
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Multiplication on the finite coefficient unit, as the adjoint of the constant section one.
-Source: reviewed expansion step 2 (blueprint: lem-zl-constant-geometric-stalk-unit). -/
+/-- Multiplication on the finite coefficient unit, as the adjoint of the constant section one. -/
 def finiteUnitHom {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℕ) :
     (sfIntrinsicPullback (Padic.coefficientExtensionRing l E (m + 1)) f).obj
         (SheafOfModules.unit (integralCoefficientSheaf l E Y m)) ⟶
@@ -73,8 +76,7 @@ def finiteUnitHom {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℕ) :
           (fun {_ _} a ↦ map_one ((integralCoefficientSheaf l E X m).obj.map
             ((proEtaleBaseChange f).op.map a)).hom)))
 
-/-- Transposing multiplication computes it on every adjunction generator.
-Source: reviewed expansion step 2 (blueprint: lem-zl-constant-geometric-stalk-unit). -/
+/-- Transposing multiplication computes it on every adjunction generator. -/
 private theorem finiteUnitHom_generator {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℕ)
     (V : Y.ProEt) (a : (integralCoefficientSheaf l E Y m).obj.obj (op V)) :
     letI := Padic.finite_coefficientExtensionRing l E (m + 1) (by omega)
@@ -160,11 +162,7 @@ private theorem finiteUnitHom_tensor {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℕ) 
     ((proEtaleBaseChange f).op.obj U)) = φ.hom.app U 1
   exact (map_one _).symm
 
-/-- The finite multiplication is invertible, including the first positive quotient.
-Source: reviewed expansion step 2 (blueprint: lem-zl-constant-geometric-stalk-unit).
-Proof: in tensor coordinates the map is z tensor b ↦ c_f(z)b; its inverse sends b to
-1 tensor b. The balancing relation makes the two composites identities. The intrinsic
-realization and adjunction preserve this unit-normalized map. -/
+/-- The finite multiplication is invertible, including the first positive quotient. -/
 theorem finiteUnitHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℕ) :
     IsIso (finiteUnitHom l E f m) := by
   let := Padic.finite_coefficientExtensionRing l E (m + 1) (by omega)
@@ -192,8 +190,7 @@ theorem finiteUnitHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℕ) :
     (e.hom.app (SheafOfModules.unit (integralCoefficientSheaf l E Y m)))
     (finiteUnitHom l E f m)
 
-/-- The finite derived unit comparison, with its exact single-complex comparison.
-Source: reviewed expansion step 2 (blueprint: lem-zl-constant-geometric-stalk-unit). -/
+/-- The finite derived unit comparison, with its exact single-complex comparison. -/
 def finiteUnit {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℕ) :
     (finiteDerivedPullback l E m f).obj (finiteConstantCoefficientObject l E Y m) ≅
       finiteConstantCoefficientObject l E X m :=
@@ -208,15 +205,8 @@ section
 attribute [local irreducible] unrestrictedIntegralReductionExistence limit
   chainUnitCandidate pullbackUnitProduct pullbackUnitLevel
 
-/-- The normalized strict unit for arbitrary scheme maps, extending the same owning-node
-construction used for the Weil automorphism.
-Source: reviewed expansion steps 2, 5 and 6
-(blueprint: lem-zl-constant-geometric-stalk-unit).
-Proof: the compatible finite generators are the adjunction images of 1 tensor 1.
-Their product is killed by 1-shift. Use mappingCocone.lift with zero shifted component.
-Maps from the regular module are determined by the global section one; the terminal
-object is a base-change object. This proves existence and uniqueness with the displayed
-normalization, without choosing a filler in a triangulated homotopy limit. -/
+/-- There is a unique normalized strict unit chain map for an arbitrary morphism of schemes,
+extending the construction used for the Weil automorphism. -/
 theorem integralChainUnit_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! η : constantWeilIntegralComplex l E X ⟶
         (integralOperationsPullbackComplexFunctor l E f).obj
@@ -246,24 +236,17 @@ theorem integralChainUnit_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 end
 
-/-- The uniquely specified strict chain map, with real cochain data.
-Source: reviewed expansion step 6 (blueprint: lem-zl-constant-geometric-stalk-unit). -/
+/-- The uniquely specified strict chain map, with real cochain data. -/
 def integralChainUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (integralChainUnit_existsUnique l E f).exists.choose
 
-/-- The strict coefficient unit is a quasi-isomorphism for arbitrary pullback.
-Source: reviewed expansion step 6 (blueprint: lem-zl-constant-geometric-stalk-unit).
-Proof: finite multiplication identifies the entire pulled quotient system with the
-constant quotient system on X, including its actual transitions. Its surjective tower
-has limit the completed ring sheaf. The zero-homotopy map above is its Roos comparison;
-the surjective-tower derived-limit theorem makes it a quasi-isomorphism. -/
+/-- The strict coefficient unit is a quasi-isomorphism for arbitrary pullback. -/
 theorem integralChainUnit_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (DerivedCategory.Q.map (integralChainUnit l E f)) := by
   exact ConstantPullbackUnitQuasiIsomorphism.normalizedChainUnit_isIso l E f
     (integralChainUnit l E f) (integralChainUnit_existsUnique l E f).exists.choose_spec
 
-/-- The integral unit identification uses the inverse normalized strict-cone map.
-Source: reviewed expansion step 6 (blueprint: lem-zl-constant-geometric-stalk-unit). -/
+/-- The integral unit identification, using the inverse normalized strict-cone map. -/
 def integralUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (integralDerivedPullback l E f).obj (integralConstantCoefficientObject l E Y) ≅
       integralConstantCoefficientObject l E X :=
@@ -277,13 +260,8 @@ attribute [local irreducible] coefficientFinitePullIso canonicalCoefficientFinit
 
 end
 
-/-- The generalized strict unit agrees with the recorded canonical integral Weil map.
-Source: reviewed expansion steps 6 and 7
-(blueprint: lem-zl-constant-geometric-stalk-unit).
-Proof: both strict units have the same finite generators and zero shifted component.
-The uniqueness clause of constantWeilChainUnit_existsUnique identifies their chain maps.
-Their good-representative comparisons coincide, and c composed with lambda cancels
-the two inverse coefficient comparisons in constantWeilIntegralTheta. -/
+/-- For an isomorphism `g`, the generalized strict unit agrees with the canonical integral Weil
+map. -/
 theorem integralUnit_canonicalWeil {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     integralUnit l E g = constantWeilIntegralTheta l E g := by
   simp only [constantWeilIntegralTheta, constantWeilIntegralLambda, Iso.trans_assoc,

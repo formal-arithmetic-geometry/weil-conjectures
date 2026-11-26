@@ -14,6 +14,17 @@ import Mathlib.RingTheory.Flat.Localization
 import Mathlib.RingTheory.Localization.Finiteness
 import Mathlib.Algebra.Category.ModuleCat.Projective
 
+/-!
+# Construction of the localization cone step
+
+The finite-free approximation and cone construction used to show that `m`-pseudo-coherence can be
+checked after localizing at the members of a generating family of the unit ideal.
+
+## References
+
+* [Stacks, Tag 066D]
+-/
+
 @[expose] public section
 
 universe w₁ w₂ v₁ u₁
@@ -175,8 +186,7 @@ private theorem exists_top_approximation
     exact (epi_comp_iff_of_isIso _ ((homologyFunctorFactors _ n).hom.app M)).1 this
 
 /-- The algebraic construction of the cone step, before the local pseudo-coherence
-conclusion.  This is the finite-free approximation and cone argument from Tag 066D.
-(blueprint: lem-pc-m-pseudo-coherent-localization-cone-construction). -/
+conclusion: the finite-free approximation and cone argument. -/
 theorem localization_cone_construction
     {A : Type u₁} [CommRing A] [HasDerivedCategory.{w₁} (ModuleCat.{max u₁ v₁} A)]
     (M : CochainComplex (ModuleCat.{max u₁ v₁} A) ℤ)

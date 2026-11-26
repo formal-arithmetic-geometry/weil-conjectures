@@ -18,7 +18,17 @@ import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitOrdinaryAdjunct
 
 This is the finite balanced-tensor and transition part of the strict quotient
 association.  The complex assembly is proved by the parent module.
-(blueprint: stage3-pur-scalar-quotient-association-degree-data)
+
+## Implementation details
+
+The finite association is evaluated through the two `directEvaluation` isomorphisms. On
+generators it sends `b ⊗ (a ⊗ x)` to `(ι(a) * b) ⊗ x`; balancing, the unit identities and the
+fact that coefficient reduction is a ring map give the inverse, differential and transition
+identities.
+
+## References
+
+* Stacks Project, Tags 03D7, 03EK, 03EL and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -41,15 +51,7 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
   (ι : E →ₐ[ℚ_[l]] L)
 
 /-- The glued ordinary association chain sends scalar multiples of quotient units to the
-specified direct-model sections.
-
-Source: Stacks Tags 03D7 and 03EK; the finite balanced association
-(blueprint: stage3-pur-scalar-quotient-association-degree-data).
-
-Proof: evaluate the chain isomorphism at level n. Its defining equation identifies
-it with the finite balanced comparison followed by the inverse direct evaluation,
-and the finite comparison sends c times the evaluated quotient unit of x to the
-tensor c ⊗ x. -/
+specified direct-model sections. -/
 private theorem chainSection (W : Scheme.{u})
     (A : CoefficientExtensionSystems.{u, u} l E L ι W)
     (M : CompletionUnit.OrdinaryModel l E W)
@@ -128,9 +130,7 @@ private theorem chainSection (W : Scheme.{u})
     ((heq_of_eq hmap2).trans
       (OrdinaryScalarTowerProof.sequenceSection_heq l L W _ n U _).symm))
 
-/-- Equal zero-preserving functors give equal termwise images of a cochain complex.
-Source: functoriality of termwise application (blueprint:
-stage3-pur-scalar-quotient-association-degree-data). -/
+/-- Equal zero-preserving functors give equal termwise images of a cochain complex. -/
 private theorem mapHomologicalComplex_obj_eq {C D : Type*} [Category C] [Category D]
     [Limits.HasZeroMorphisms C] [Limits.HasZeroMorphisms D] {F G : C ⥤ D}
     [F.PreservesZeroMorphisms] [G.PreservesZeroMorphisms] (h : F = G)
@@ -139,9 +139,7 @@ private theorem mapHomologicalComplex_obj_eq {C D : Type*} [Category C] [Categor
   subst h
   rfl
 
-/-- Balancing in the sequence-site scalar extension: `b ⊗ (a • y) = (ι(a) * b) ⊗ y`.
-Source: Stacks 03EK, the balanced tensor product
-(blueprint: stage3-pur-scalar-quotient-association-degree-data). -/
+/-- Balancing in the sequence-site scalar extension: `b ⊗ (a • y) = (ι(a) * b) ⊗ y`. -/
 private theorem tensorSection_smul (W : Scheme.{u})
     (N : coefficientSequenceModules.{u, u} l E W) (V : (ℕ × W.ProEt)ᵒᵖ)
     (b : (coefficientSequenceCommRingSheaf.{u, u} l L W).obj.obj V)
@@ -197,17 +195,9 @@ private theorem scalarChainSection (W : Scheme.{u})
       (hT (Q.X i) V c q))
   exact (congrArg (fun y ↦ ((β.hom.app K).f i).val.app V y) he).trans (hβ K n i U c x)
 
-/-- Degreewise normalized association datum for fixed strict quotient representatives.
-
-Source: Stacks Tags 03EL and 07A4; the finite balanced tensor association and its
-successor compatibility.  The finite association is evaluated through the two
-`directEvaluation` isomorphisms, and the resulting maps are compatible with the
-cochain differentials.  The proof is the generator calculation: the map sends
-`b ⊗ (a ⊗ x)` to `(ι(a) * b) ⊗ x`; balancing, unit identities, and the fact that
-coefficient reduction is a ring map prove the inverse, differential, and transition
-identities.  This statement is strictly degreewise; the parent theorem performs
-the whole-complex assembly.
-(blueprint: stage3-pur-scalar-quotient-association-degree-data). -/
+/-- Degreewise normalized association datum for fixed strict quotient representatives: the
+finite balanced tensor associations, compatible with the cochain differentials and the
+quotient transitions. -/
 theorem quotientAssociation_degreeData_exists
     (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)

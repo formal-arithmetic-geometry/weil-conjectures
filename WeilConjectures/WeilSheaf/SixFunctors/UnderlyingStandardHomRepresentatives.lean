@@ -17,8 +17,23 @@ import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-! # Derived representatives for the underlying continuous-coefficient Hom
 
-Source: Stacks Tags 0A95 and 08J7.
-(blueprint: lem-sf-underlying-standard-hom-representatives)
+This file shows that the explicit standard Hom complex of the underlying continuous-coefficient
+modules computes a derived bifunctor, with representatives given by K-injective replacement of
+the target.
+
+## Implementation details
+
+The ordinary continuous-coefficient module category is Grothendieck abelian with functorial
+K-injective resolutions. The derived extension is obtained by applying the product-total Hom to
+an arbitrary source and the canonical K-injective replacement of the target, and localizing at
+quasi-isomorphisms in both variables. The representative equations determine this universal
+derived extension up to a unique compatible natural isomorphism, so no arbitrary module object
+is chosen.
+
+## References
+
+* [Stacks Project, Tag 0A95](https://stacks.math.columbia.edu/tag/0A95)
+* [Stacks Project, Tag 08J7](https://stacks.math.columbia.edu/tag/08J7)
 -/
 
 @[expose] public section
@@ -277,16 +292,14 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ}
   [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- The underlying continuous-coefficient internal Hom is additive in the source.
-Source: Mod.ihomMap_add (blueprint: lem-sf-underlying-standard-hom-representatives). -/
+/-- The underlying continuous-coefficient internal Hom is additive in the source. -/
 instance underlyingHomBifunctor_additive :
     (underlyingHomBifunctor (k₀ := k₀) (l := l) (X := X)).Additive :=
   ⟨by
     intro P Q f g
     exact Mod.ihomMap_add f.unop g.unop⟩
 
-/-- The underlying continuous-coefficient internal Hom is additive in the target.
-Source: Mod.ihom (blueprint: lem-sf-underlying-standard-hom-representatives). -/
+/-- The underlying continuous-coefficient internal Hom is additive in the target. -/
 instance underlyingHomBifunctor_obj_additive
     (P : (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)ᵒᵖ) :
     ((underlyingHomBifunctor (k₀ := k₀) (l := l) (X := X)).obj P).Additive :=
@@ -294,25 +307,7 @@ instance underlyingHomBifunctor_obj_additive
 
 set_option linter.unusedSectionVars false in
 /-- The explicitly specified underlying standard Hom complex computes a derived bifunctor,
-with naturality and replacement invariance for every source and every K-injective target.
-The representative equations determine this universal derived extension up to a unique
-compatible natural isomorphism; no arbitrary module object is being chosen.
-Source: Stacks 0A95, lemma-RHom-well-defined, and 08J7, section-internal-hom.
-(blueprint: lem-sf-underlying-standard-hom-representatives).
-Proof: the ordinary continuous-coefficient module category is Grothendieck abelian and has
-functorial K-injective resolutions. Apply the native product-total Hom to an arbitrary source
-and the canonical K-injective replacement of the target, then localize at quasi-isomorphisms
-in both variables. For a K-injective target, source quasi-isomorphisms are inverted by the
-usual sheaf internal-Hom acyclicity argument: choose a flat separator, transpose its maps
-into the Hom complex to cochains into the K-injective target, and use acyclicity of the
-source tensor the flat separator. Apply this to the mapping cone. Target quasi-isomorphisms
-between K-injectives are homotopy equivalences, which Hom preserves. Thus this is a universal
-derived extension. For a K-injective I, invert the image of its augmentation I → I_res and
-compose with the localization factorization to obtain ρ.iso. Naturality of the augmentation
-gives ρ.naturality in both variables. The two preceding invariance arguments, applied to
-f and g, give ρ.inverts. Rescaling each degree-n, source-p projection by (-1)^(np) changes
-neither the underlying complex nor its functorial maps, so these representatives are exactly
-those of standardHomModel. The construction applies also to zero or acyclic sources. -/
+with naturality and replacement invariance for every source and every K-injective target. -/
 theorem underlyingStandardHomRepresentatives :
     ∃ H : (DerivedCategory (ProEtale.AdicSheaf l
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))ᵒᵖ ×

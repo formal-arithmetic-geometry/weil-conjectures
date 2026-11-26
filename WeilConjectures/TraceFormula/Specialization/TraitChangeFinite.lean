@@ -27,7 +27,7 @@ finite case of the invariance of nearby cycles under change of trait (SGA 4½, [
 `NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`), for the models of the geometric
 generic fibres.
 
-## Proof
+## Implementation details
 
 Consider the commutative square of morphisms of models
 ```
@@ -43,12 +43,11 @@ where `ψ`, `ψ''` are the structure morphisms to the traits
 ```
 Lσ_s^*(χ_ψ) ∘ bc_s ∘ Rq''_{s*}(α_φ) = α_τ(Rq_{η*}) ∘ Ψ_{S'}(bc_η) ∘ χ_{ψ''}.
 ```
-* `χ_ψ`, `χ_{ψ''}` are the proper exchanges (blueprint `prose-E-03` (2),
-  `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`);
+* `χ_ψ`, `χ_{ψ''}` are the proper exchanges
+  (`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`);
 * `bc_s`, `bc_η` are the base change morphisms of the cartesian squares of special and of generic
-  fibres, invertible by proper base change (blueprint
-  `proposition-proper-direct-image-constructible-complexes`,
-  `ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`);
+  fibres, invertible by proper base change
+  (`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`);
 * `α_τ` is the change of trait for the trait itself, invertible on bounded constructible complexes
   (`NearbyCyclesModel.isIso_pullbackExchange_traitGenericModelMap_app`), and `Rq_{η*}` preserves
   them (`boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRingObj`).
@@ -56,6 +55,10 @@ Lσ_s^*(χ_ψ) ∘ bc_s ∘ Rq''_{s*}(α_φ) = α_τ(Rq_{η*}) ∘ Ψ_{S'}(bc_η
 So `Rq''_{s*}(α_φ)` is invertible, hence `α_φ` is, the pushforward along the finite morphism
 `q''_s : N''_s ⟶ Spec K` to a separably closed point being conservative
 (`ProEtale.CondensedRing.isIso_of_isIso_map_rightDerivedLowerStar_of_isFinite`).
+
+## References
+
+* SGA 4½, [Th. finitude], §3.
 
 -/
 
@@ -93,8 +96,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime
   [Fact (ringChar k' ≠ ℓ)] [IsSepClosed K]
 
 /-- The pullback exchange of the morphism of traits `S' ⟶ S` is invertible at bounded
-constructible complexes on `Spec Ω`: both specialization units are invertible, and such complexes
-are finite direct sums of shifts of the unit. -/
+constructible complexes on `Spec Ω`. -/
 theorem isIso_pullbackExchange_traitGenericModelMap_app
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (Spec (.of (traitGenericField k'))))
       Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
@@ -197,8 +199,7 @@ local notation "𝐐" => Profinite.padicAlgClRingObj ℓ
 
 /-- **Change of trait for the model of the geometric generic fibre of a model finite over the
 trait**: the pullback exchange of `N''_η̄ ⟶ N_η̄` is invertible at bounded constructible `A` whose
-nearby cycles are bounded constructible, by the square argument
-(`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_square_of_isProper`). -/
+nearby cycles are bounded constructible. -/
 theorem isIso_pullbackExchange_traitChangeGenericHom_app_of_isFinite [IsFinite q]
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) N.generic))}

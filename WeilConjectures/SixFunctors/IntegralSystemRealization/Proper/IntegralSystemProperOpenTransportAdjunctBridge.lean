@@ -8,7 +8,14 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralCompactificationRealizationData
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralSystemProperOpenLambdaBridge
 
-/-! Bridge cancellation form of the transported adjunct normalization. -/
+/-! Bridge cancellation form of the transported adjunct normalization.
+
+## References
+
+* [Stacks, Tag 0F7B]
+* [Stacks, Tag 07A7]
+* [Zheng, Construction 4.1 and Lemma 4.10]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -59,13 +66,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /--
 The bridge-transported intrinsic gamma has the prescribed adjunct after converting
-its codomain to canonical semilinear coordinates.  This is the mate-cancellation
-step: expand the four bridge factors, apply the intrinsic `gamma_adjunct` equation,
-and identify the resulting composite with `properOpenLambda`; the final item
-cancels the displayed canonical pullback isomorphism.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0F7B and 07A7.
-(blueprint: lem-sf-integral-system-proper-open-transport-adjunct-bridge)
--/
+its codomain to canonical semilinear coordinates. -/
 theorem transportedGamma_adjunct_bridge (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)

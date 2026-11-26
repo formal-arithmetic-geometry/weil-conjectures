@@ -14,6 +14,24 @@ import Mathlib.RingTheory.LocalProperties.Basic
 import Mathlib.RingTheory.Ideal.GoingUp
 public import Mathlib.RingTheory.Localization.LocalizationLocalization
 
+/-!
+# Component maps of a quotient tensor product
+
+The ring `(R_p/m^n) ⊗_R S` embeds into the product of its local factors `S_q/m^n S_q` over the
+primes `q` of `S` above `p`.
+
+## Implementation details
+
+The source is identified with `B/I` for `B = R_p ⊗_R S` and `I = m^n B`, and the component maps
+are constructed by tensor-product lifting followed by quotient maps. Every maximal ideal of `B`
+contracts to `m` by finiteness, so its localization is canonically `S_q`; ideal membership is
+detected at these maximal localizations.
+
+## References
+
+* [Stacks, Tag 07N9] (quotient-product argument)
+-/
+
 @[expose] public section
 
 universe u v
@@ -22,16 +40,7 @@ namespace AdicCompletion
 
 -- The ideal-membership argument also works for n = 0; keep the given signature.
 set_option linter.unusedVariables false in
-/-- The quotient tensor product embeds into the product of its local factors.
-Source: Stacks Project, Tag 07N9, quotient-product argument.
-(blueprint: lem-weil-pbc-local-tensor-quotient-component-map)
-
-Identify the source with B/I, where B = Rₚ ⊗[R] S and I = mⁿB, and construct
-the component maps by tensor-product lifting followed by quotient maps.
-Every maximal ideal of B contracts to m by finiteness over Rₚ, so its
-localization is canonically S_q for a prime q over p. Ideal membership is
-detected at these maximal localizations, proving injectivity. The formula
-on pure tensors follows from the quotient-tensor equivalence and tensor lift. -/
+/-- The quotient tensor product embeds into the product of its local factors. -/
 theorem tensor_quotient_component_map
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime]

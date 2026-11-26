@@ -13,7 +13,14 @@ import WeilConjectures.SixFunctors.Common.CommonProjectionPullbackStageNormaliza
 import WeilConjectures.SixFunctors.Common.CommonProjectionTensorComparisonNormalization
 import all Mathlib.Logic.Small.Defs
 
-/-! # Normalization and finite-stage cancellation for a tensor/pullback component -/
+/-! # Normalization and finite-stage cancellation for a tensor/pullback component
+
+## Implementation details
+
+The proofs expand the normalized tensorators and pullback comparisons at the chosen finite
+coefficient stage and cancel the scalar-unit and transition isomorphisms against the
+finite-stage representative formula, which is the only mathematical input.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -83,15 +90,7 @@ private theorem identityFunctorObject_heq
   rfl
 
 /-- The finite-stage representative formula is the remaining input to the
-normalization argument for `ComparisonCompatible`.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-common-projection-pullback-tensor-compatibility-representative-bridge).
-
-Proof: expand the two normalized tensorators and pullback comparisons, evaluate
-at the chosen finite coefficient stage, and cancel the scalar-unit and transition
-isomorphisms using the representative equation supplied by `hrep`.
-This is the categorical normalization bridge; its only mathematical input is
-the strictly pointwise finite-stage representative formula. -/
+normalization argument for `ComparisonCompatible`. -/
 private theorem normalizedProjectionPullbackTensor_heq
     {A : Type v} [Category.{w} A] {B : Type v'} [Category.{w'} B]
     {F F₀ : B ⥤ A} {TX TX₀ : A ⥤ A ⥤ A} {TY TY₀ : B ⥤ B ⥤ B}
@@ -137,15 +136,8 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] projectionTransportTensorComparison
   canonicalRationalPullbackTensor canonicalCommonStagePullbackTensor
 
-/-- The normalization and finite-stage cancellation for one input pair.
-Source: thm-sf-pf-field.proof.md, Compatibility.
-
-The proof expands both curried tensorators at the common stage E, replaces the
-supplied pullback comparisons by their canonical maps, and cancels the scalar
-unit and transition isomorphisms against the finite-stage representative
-formula.  This is one pointwise component of the comparison-compatible square;
-it is strictly smaller than the universally quantified bridge theorem.
-(blueprint: lem-sf-common-projection-pullback-tensor-compatibility-component). -/
+/-- The normalization and finite-stage cancellation for one input pair: one pointwise
+component of the comparison-compatible square. -/
 theorem projectionTensorComparisonCompatible_component_of_representative_formula
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)

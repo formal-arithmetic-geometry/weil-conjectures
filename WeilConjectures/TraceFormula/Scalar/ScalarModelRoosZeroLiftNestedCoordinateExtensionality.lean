@@ -10,12 +10,14 @@ import WeilConjectures.TraceFormula.Scalar.ScalarModelRoosZeroLiftNestedCoordina
 
 /-! # Nested tensor-coordinate extensionality for scalar Roos maps
 
-Source: Stacks Project, Tag 0941; Bhatt--Scholze, Proposition 3.5.1.
-(blueprint: lem-trf-scalar-model-roos-zero-lift-nested-coordinate-extensionality)
-
 The strict first Roos coordinates agree on all sections once they agree on
 nested scalar tensor generators. This is the tensor-balancing and sheafification
 step used by the zero-shifted lift uniqueness argument.
+
+## References
+
+* Stacks Project, Tag 0941.
+* Bhatt--Scholze, Proposition 3.5.1.
 -/
 
 @[expose] public noncomputable section
@@ -48,18 +50,7 @@ variable (l : ℕ) [Fact l.Prime]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (ι : E →ₐ[ℚ_[l]] L) (j : L →ₐ[ℚ_[l]] F) (X : Scheme.{u})
 
-/-- Nested tensor generators determine the strict unshifted Roos coordinate.
-
-Source: Stacks 0941; Bhatt--Scholze, Proposition 3.5.1; tensor-balancing
-and sheafification step in `lem-trf-scalar-model-roos-zero-lift-uniqueness`.
-
-Proof in words: unfold the two ordinary scalar extensions through their
-change-of-rings witnesses. Apply the sheafification adjunction and the
-module tensor universal property first to the inner E-to-L extension and then
-to the outer L-to-F extension. The resulting pure tensor equalities are exactly
-`hcoord`; tensor induction handles sums and balancing, and separatedness of the
-sheaf target descends the equality from local generators to every section.
-(blueprint: lem-trf-scalar-model-roos-zero-lift-nested-coordinate-extensionality) -/
+/-- Nested tensor generators determine the strict unshifted Roos coordinate. -/
 theorem scalarModelRoosZeroLift_nestedCoordinate_extensionality
     (P : (integralOperationsGoodComplex l E X).FullSubcategory)
     (D : CochainComplex (coefficientSequenceModules l L X) ℤ)

@@ -17,12 +17,16 @@ import WeilConjectures.RingTheory.LocalizedConormalBasisJacobian
 /-!
 # Powers of an element with smooth free localization are strictly standard
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07EZ
-(blueprint: lem-weil-pbc-smooth-free-differentials-strictly-standard-power).
+We show that if `A_a` is smooth over `R` with stably free module of Kähler differentials,
+then all sufficiently large powers of `a` are strictly standard in `A` over `R`.
 
 ## Main statements
 
 * `smooth_free_differentials_strictly_standard_power`.
+
+## References
+
+* [Stacks, Tag 07EZ]
 -/
 
 @[expose] public section
@@ -79,42 +83,7 @@ private theorem clear_matrix_left_inverse {A : Type v} [CommRing A] (a : A)
   exact ⟨V + u, a ^ V • B₀, by rw [Matrix.smul_mul, hclear]⟩
 
 /-- If the localization at `a` is smooth and its module of Kähler differentials is
-stably free, then all sufficiently large powers of `a` are strictly standard.
-Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07EZ, part (e)
-(blueprint: lem-weil-pbc-smooth-free-differentials-strictly-standard-power).
-
-Proof (Stacks Tag 07EZ(e)), following the node's six steps:
-
-1. Choose a finite presentation `A = R[x₁, ..., xₙ]/I` using
-   `def-weil-pbc-finitely-presented-algebra` and `def-weil-pbc-mv-polynomial-ring`.
-   By `lem-weil-pbc-presentation-localized-conormal-split`, the localized conormal
-   sequence splits: `(I/I²)ₐ × Ω[Aₐ/R]` is isomorphic to `Aₐⁿ`. The hypothesis gives
-   `(I/I²)ₐ × Aₐᵗ ≃ Aₐⁿ⁺ˢ`, so the localized conormal module is stably free.
-2. Add `r = t` variables sent to zero. The kernel is `J = (I, xₙ₊₁, ..., xₙ₊ᵣ)`.
-   The isomorphism `J/J² ≃ (I/I²) × Aʳ` sends a relation to its constant term in the
-   new variables and their linear coefficients modulo `I`. Its inverse takes lifts of
-   those coefficients; changes of lifts lie in `J²`. Products of elements of `J` map
-   to zero, so both maps descend. Localizing makes `(J/J²)ₐ` finite free
-   (`def-weil-pbc-module-localization-away`).
-3. Lift a basis of `(J/J²)ₐ` to `f₁, ..., f_c ∈ J`, clearing denominators; extend it
-   to finitely many generators `f₁, ..., f_m` of `J`. Write `N = n + r`.
-   The split conormal injection gives `c ≤ N` by reduction modulo a maximal ideal
-   when `Aₐ` is nonzero; when `Aₐ = 0`, choose the empty basis. Thus `c ≤ min N m`.
-4. The remaining relations lie in the span of the first `c` after localization.
-   Clear denominators and localization torsion to obtain
-   `hᵉ f_j ∈ (f₁, ..., f_c) + J²` for all `j > c` and all `e ≥ e₁`, where `h`
-   lifts `a` (`def-weil-pbc-module-localization-away`). This is the second condition
-   of `theorem-finite-etale-covers-proper-henselian--2` for `aᵉ`.
-5. Let `D` be the Jacobian matrix of the first `c` relations
-   (`def-weil-pbc-polynomial-partial-derivative`). The split conormal injection has a
-   left inverse over `Aₐ`. Clear its denominators and localization torsion to get
-   `B D = a^(e₂) 1_c` over `A`. By `lem-weil-pbc-matrix-left-inverse-minors` (2),
-   `a^(c * e₂)` is a linear combination of the `c` by `c` minors of `D`.
-   Multiplying the coefficients gives this condition for every `e ≥ c * e₂`.
-   For `c = 0`, the empty minor is `1` and this condition is automatic.
-6. Take `e₀ = max 1 (max e₁ (c * e₂))`. Both defining conditions hold for every
-   `e ≥ e₀`, so `aᵉ` is strictly standard by `theorem-finite-etale-covers-proper-henselian--2`.
--/
+stably free, then all sufficiently large powers of `a` are strictly standard. -/
 theorem smooth_free_differentials_strictly_standard_power
     (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A]
     [FinitePresentation R A] (a : A)

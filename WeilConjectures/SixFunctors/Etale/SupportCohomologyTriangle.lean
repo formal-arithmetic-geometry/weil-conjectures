@@ -88,9 +88,7 @@ namespace Etale
 
 variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-
-The distinguished triangle `RΓ_Z(X, K) ⟶ RΓ(X, K) ⟶ RΓ(U, K) ⟶ RΓ_Z(X, K)[1]` of a closed
+/-- The distinguished triangle `RΓ_Z(X, K) ⟶ RΓ(X, K) ⟶ RΓ(U, K) ⟶ RΓ_Z(X, K)[1]` of a closed
 immersion `i : Z ⟶ X` with open complement `U`, as a functor of the bounded below complex `K`
 of étale sheaves on `X`. Its first two maps are induced by the inclusion of the sections with
 support and the restriction to `U`; on a bounded below complex of injectives `I` the
@@ -118,17 +116,13 @@ lemma sectionsWithSupportTriangle_obj (K : Plus (Sheaf X.smallEtaleTopology A)) 
       ((sectionsWithSupportδ A i).app K) :=
   rfl
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-
-The triangle `RΓ_Z(X, K) ⟶ RΓ(X, K) ⟶ RΓ(U, K) ⟶ RΓ_Z(X, K)[1]` is distinguished. -/
+/-- The triangle `RΓ_Z(X, K) ⟶ RΓ(X, K) ⟶ RΓ(U, K) ⟶ RΓ_Z(X, K)[1]` is distinguished. -/
 theorem sectionsWithSupportTriangle_obj_distinguished
     (K : Plus (Sheaf X.smallEtaleTopology A)) :
     (sectionsWithSupportTriangle A i).obj K ∈ distTriang _ :=
   Sheaf.ΓSupportRightDerivedTriangle_obj_distinguished _ _ _ K
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-
-**The long exact sequence, natural in `K`.** For a bounded below complex `K` of étale sheaves
+/-- **The long exact sequence, natural in `K`.** For a bounded below complex `K` of étale sheaves
 on `X` (e.g. a sheaf in degree `0`), the sequence
 
 `⋯ ⟶ H^q_Z(X, K) ⟶ H^q(X, K) ⟶ H^q(U, K) ⟶ H^{q+1}_Z(X, K) ⟶ H^{q+1}(X, K) ⟶ ⋯`
@@ -148,9 +142,7 @@ theorem exact_derivedSupportCohomology_sectionsWithSupportTriangle
           (sectionsWithSupportTriangle_obj_distinguished A i K), Functor.map_zero])).Exact :=
   ShortComplex.exact_homology_rightDerivedTriangle _ K q₀ q₁ h
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-
-**Functoriality in the pair.** For an étale `X`-scheme `V`, the restriction from the pair
+/-- **Functoriality in the pair.** For an étale `X`-scheme `V`, the restriction from the pair
 `(X, U)` to the pair `(V, V ×_X U)` (whose closed complement is the preimage of `Z`) is a
 morphism from `sectionsWithSupportTriangle` to the triangle
 `RΓ_{V ∖ V ×_X U}(V, K) ⟶ RΓ(V, K) ⟶ RΓ(V ×_X U, K) ⟶ ⋯` of the pair, natural in `K`. -/
@@ -167,12 +159,8 @@ namespace ProEtale
 
 variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-
-The distinguished triangle `RΓ_Z(X, K) ⟶ RΓ(X, K) ⟶ RΓ(U, K) ⟶ RΓ_Z(X, K)[1]` on the small
-pro-étale site of `X`, as a functor of the bounded below complex `K` of pro-étale sheaves. The
-argument is the same as on the étale site: the open `U` is a subobject of the terminal object
-of the site. -/
+/-- The distinguished triangle `RΓ_Z(X, K) ⟶ RΓ(X, K) ⟶ RΓ(U, K) ⟶ RΓ_Z(X, K)[1]` on the small
+pro-étale site of `X`, as a functor of the bounded below complex `K` of pro-étale sheaves. -/
 noncomputable def sectionsWithSupportTriangle :
     Plus (Sheaf (Scheme.ProEt.topology X) A) ⥤ Triangle (DerivedCategory A) :=
   Sheaf.ΓSupportRightDerivedTriangle (Scheme.ProEt.topology X) A
@@ -196,17 +184,13 @@ lemma sectionsWithSupportTriangle_obj (K : Plus (Sheaf (Scheme.ProEt.topology X)
       ((sectionsWithSupportδ A i).app K) :=
   rfl
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-
-The pro-étale triangle `RΓ_Z(X, K) ⟶ RΓ(X, K) ⟶ RΓ(U, K) ⟶ RΓ_Z(X, K)[1]` is distinguished. -/
+/-- The pro-étale triangle `RΓ_Z(X, K) ⟶ RΓ(X, K) ⟶ RΓ(U, K) ⟶ RΓ_Z(X, K)[1]` is distinguished. -/
 theorem sectionsWithSupportTriangle_obj_distinguished
     (K : Plus (Sheaf (Scheme.ProEt.topology X) A)) :
     (sectionsWithSupportTriangle A i).obj K ∈ distTriang _ :=
   Sheaf.ΓSupportRightDerivedTriangle_obj_distinguished _ _ _ K
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-
-**The long exact sequence on the pro-étale site, natural in `K`.** For a bounded below complex
+/-- **The long exact sequence on the pro-étale site, natural in `K`.** For a bounded below complex
 `K` of pro-étale sheaves on `X`, the sequence
 
 `⋯ ⟶ H^q_Z(X, K) ⟶ H^q(X, K) ⟶ H^q(U, K) ⟶ H^{q+1}_Z(X, K) ⟶ H^{q+1}(X, K) ⟶ ⋯`
@@ -225,9 +209,7 @@ theorem exact_derivedSupportCohomology_sectionsWithSupportTriangle
           (sectionsWithSupportTriangle_obj_distinguished A i K), Functor.map_zero])).Exact :=
   ShortComplex.exact_homology_rightDerivedTriangle _ K q₀ q₁ h
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-
-**Functoriality in the pair on the pro-étale site.** For a weakly étale `X`-scheme `V`, the
+/-- **Functoriality in the pair on the pro-étale site.** For a weakly étale `X`-scheme `V`, the
 restriction from the pair `(X, U)` to the pair `(V, V ×_X U)` is a morphism of triangles,
 natural in `K`. -/
 noncomputable def sectionsWithSupportTriangleToPair (V : X.ProEt) :

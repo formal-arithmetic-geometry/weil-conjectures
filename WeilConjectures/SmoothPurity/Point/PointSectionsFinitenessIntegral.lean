@@ -20,8 +20,7 @@ import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.AdicCompletion.Topology
 import Mathlib.RingTheory.Noetherian.Basic
 
-/-! Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509
-(blueprint: lem-weil-point-sections-integral-finiteness). -/
+/-! # Finiteness of sections of integral complexes at the geometric point -/
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -33,16 +32,9 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.ProEtale
 namespace WeilConjectures
 
-/-- Strictly separated integral and rational clauses from the point-sections finiteness assertion.
-Proof: obtain bounded support, derived completeness and finite residue from the
-cohomological-control lemma. The coefficient ring is a complete Noetherian DVR,
-using finite_module_adic_complete_and_hom on the ring itself and transport through ULift.
-Apply the derived-complete-module finiteness criterion to each cohomology module.
-The uniformizer localization is flat; flat scalar extension commutes with homology
-and carries each finite generating set to a finite spanning set over E.
-Source: the landing assertion in the finite coefficient point construction;
-(blueprint: lem-weil-point-sections-integral-finiteness).
--/
+/-- The integral and rational clauses of the point-sections finiteness assertion: sections of
+an integral constructible complex are bounded, finitely generated and derived complete, and
+their rationalization has bounded finite-dimensional cohomology. -/
 theorem point_sections_finiteness_integral (D : FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

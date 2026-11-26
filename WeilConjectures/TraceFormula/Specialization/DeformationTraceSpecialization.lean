@@ -22,8 +22,7 @@ compact-support exchanges
 ```
 ν_c : Rc'_! Ψ_C ⟶ Ψ_{X×X} Rc_!,     ν_X : Ra_{X'!} Ψ_X ⟶ Ψ_s Ra_{X!}
 ```
-of the nearby cycles of the deformations to the normal cones (blueprint `prose-E-15`),
-the specialization data of blueprint `proposition-specialization-trace-class`
+of the nearby cycles of the deformations to the normal cones, the specialization data
 (`ProEtale.CondensedRing.Correspondence.IsContractingAt.deformationTraceSpecialization`) has the
 nearby cycles of the deformations as specialization functors, the specialization unit of the
 support, the proper exchange `χ_Δ` of the diagonal, the exceptional exchange `β_c`, the mate of
@@ -35,8 +34,11 @@ Let `B` be an open and closed subscheme of the fixed locus `F`, proper over `k`,
 (proper, one-point) fixed locus `F'` to the class of `B`
 (`ProEtale.CondensedRing.Correspondence.IsContractingAt.SpecializesComponentClass`), then the
 specialization of Borel–Moore sections is injective on `B`
-(`ProEtale.CondensedRing.Correspondence.IsContractingAt.restrict_eq_zero_of_sp_eq_zero`): the
-integral over `F'` of `sp(z)` is the specialization of the integral of `z` over `B`, the
+(`ProEtale.CondensedRing.Correspondence.IsContractingAt.restrict_eq_zero_of_sp_eq_zero`).
+
+## Implementation details
+
+The integral over `F'` of `sp(z)` is the specialization of the integral of `z` over `B`, the
 specialization is injective on `End(ℚ̄_ℓ)` and the integral is injective on the thickened point `B`.
 
 -/
@@ -114,12 +116,11 @@ abbrev PointCompactSupportExchange (x : RationalPoint X) :=
 variable (νc : hc.SupportCompactSupportExchange (ℓ := ℓ) k')
   (νX : PointCompactSupportExchange (ℓ := ℓ) X k' (y ≫ c.c₁)) (F : c.FixedLocus)
 
-/-- **The trace specialization of the deformation to the normal cone** (blueprint
-`proposition-specialization-trace-class`): the specialization data from `c` to the specialized
-correspondence `c'` with the nearby cycles of the deformations to the normal cones
-`Ψ_C = specialization k' y`, `Ψ_X = specialization k' x`, `Ψ_{X×X} = specializationProd k' x`, the
-specialization unit of the support, the proper exchange of the diagonal, the exceptional exchange
-`β_c` of `ν_c` and the dualizing map `θ_X` of `ν_X`
+/-- **The trace specialization of the deformation to the normal cone**: the specialization data from
+`c` to the specialized correspondence `c'` with the nearby cycles of the deformations to the normal
+cones `Ψ_C = specialization k' y`, `Ψ_X = specialization k' x`, `Ψ_{X×X} = specializationProd k' x`,
+the specialization unit of the support, the proper exchange of the diagonal, the exceptional
+exchange `β_c` of `ν_c` and the dualizing map `θ_X` of `ν_X`
 (`TraceSpecialization.ofSupportExchange`). -/
 noncomputable def deformationTraceSpecialization :
     c.TraceSpecialization F (hc.specialCorrespondence k') (hc.specialFixedLocus k') :=
@@ -158,12 +159,8 @@ variable {νc νX F}
 
 
 /-- **The specialization is injective on the component `B`**: if `ν_c` and `ν_X` specialize the
-class of the component `B ∋ y` of the fixed locus, then a Borel–Moore section `z` of the fixed
-locus whose specialization `sp(z)` vanishes restricts to zero on `B`. Indeed
-`∫_{F'} sp(z) = σ_s⁻¹ Ψ_s(∫_B z|_B) σ_s` (`TraceSpecialization.integral_sp_eq`,
-`TraceSpecialization.θF_ofSupportExchange`, `BorelMooreSection.integral_restrict`), `Ψ_s` is
-injective on `End(ℚ̄_ℓ)` (`traitSpecialization_map_eq_zero_iff`) and integration over the
-thickened point `B` is injective (`BorelMooreSection.integral_injective`). -/
+class of the component `B ∋ y` of the fixed locus, then a Borel–Moore section `z` of the fixed locus
+whose specialization `sp(z)` vanishes restricts to zero on `B`. -/
 theorem restrict_eq_zero_of_sp_eq_zero {B : Over (Spec (.of k))} [QuasiCompact B.hom]
     [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
     (hB : Set.range j.left.base =

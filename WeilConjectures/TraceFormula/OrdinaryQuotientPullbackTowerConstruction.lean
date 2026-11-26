@@ -12,8 +12,19 @@ import all WeilConjectures.TraceFormula.OrdinaryQuotientPullbackTowerLevels
 
 /-! # Private strict pullback tower construction
 
-Source: Stacks 06YY, 0941 and 099N(5), the strict quotient-system construction.
-(blueprint: lem-trf-ordinary-quotient-pullback-tower-comparison)
+Private construction of the canonical strict tower comparison between the ordinary pullback of a
+strict quotient system and the defining pullback tower.
+
+## Implementation details
+
+The level maps are the adjunction mates of direct-image evaluation, followed by the fixed quotient
+evaluation. Their tensor-unit formula makes them commute with successor transitions.
+`NatTrans.ofOpSequence` and pointwise inversion assemble the tower isomorphism; naturality is the
+module comparison naturality.
+
+## References
+
+* Stacks Project, Tags 06YY, 0941, 099N
 -/
 
 @[expose] public noncomputable section
@@ -80,13 +91,7 @@ private def towerIso {X Y : Scheme.{t}} (f : X ⟶ Y)
   letI := NatIso.isIso_of_isIso_app a
   exact asIso a
 
-/-- The canonical strict tower comparison, natural in the completed complex.
-Source: Stacks 06YY, 0941 and 099N(5).
-(blueprint: def-trf-ordinary-quotient-pullback-tower-construction).
-Construction: the level maps are the adjunction mates of direct-image evaluation,
-followed by the fixed quotient evaluation. Their tensor-unit formula makes them
-commute with successor transitions. NatTrans.ofOpSequence and pointwise inversion
-assemble the tower isomorphism; naturality is the module comparison naturality. -/
+/-- The canonical strict tower comparison, natural in the completed complex. -/
 private def comparison {X Y : Scheme.{t}} (f : X ⟶ Y)
     (M : CompletionUnit.OrdinaryModel l E Y) :
     M.quotient l E Y ⋙ pullTower l E f ≅ integralOperationsPullbackTowerFunctor l E f :=

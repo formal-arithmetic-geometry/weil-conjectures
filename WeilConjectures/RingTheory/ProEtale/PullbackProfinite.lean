@@ -23,9 +23,8 @@ The ring `LocallyConstant T R` is the filtered colimit of the finite products
 `LocallyConstant S R ≃ (S → R)` over the discrete quotients `S` of `T`, and the
 homeomorphism is the topological incarnation of
 `Spec (colim_S (S → R)) = lim_S (S × Spec R) = T × Spec R`; both facts are however
-proved directly. This is the input for the construction of Stacks Tag 097D
-(`def:modify-pi0-profinite` in the blueprint): modifying the connected components of
-`Spec R` along a continuous map `T → π₀(Spec R)`, see
+proved directly. This is the input for the construction of Stacks Tag 097D: modifying the
+connected components of `Spec R` along a continuous map `T → π₀(Spec R)`, see
 `WContractification.PullbackProfinite` in `Proetale.Algebra.WContractible`.
 
 ## Main declarations

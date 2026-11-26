@@ -13,8 +13,23 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Module.ProEtaleModuleUnitFromA
 
 /-! # Completed module units on closed specialization neighbourhoods
 
-Source: Stacks Project, Pro-etale Cohomology, Tag 09AC; Modules on Sites, Tags 03D2 and 03D3.
-(blueprint: lem-fix-ordinary-completed-specialization-unit).
+We show that on a weakly contractible affine all of whose points specialize to the closed
+fibre, the ordinary completed-module adjunction unit for the closed immersion is bijective
+on sections.
+
+## Implementation details
+
+Inverse image to the closed fibre, evaluated on that fibre, is identified with evaluation at
+the affine, using weak contractibility to split the relevant covers; this carries the
+inverse-image unit to the identity. The completed coefficient map is invertible by
+`qcqsOrdinaryRestrictionExact`, and uniqueness of left adjoints identifies the unit with the
+`ordinaryAdjunction` unit. Sheaves and modules are taken in universe `max u (t+1)`.
+
+## References
+
+* [Stacks, Tag 09AC]
+* [Stacks, Tag 03D2]
+* [Stacks, Tag 03D3]
 -/
 
 @[expose] public noncomputable section
@@ -50,32 +65,7 @@ private theorem abelianPush_isRightAdjoint {X Y : Scheme.{t}} (f : X ⟶ Y) :
       (ProEt.topology Y) (ProEt.topology X)).isRightAdjoint
 
 /-- On a weakly contractible affine whose points specialize to the closed fibre,
-the actual ordinary completed-module adjunction unit is bijective on sections.
-
-Source: Stacks Project, Pro-etale Cohomology, Tag 09AC (lemma-compute-i-star),
-Modules on Sites, Tags 03D2 and 03D3.
-(blueprint: lem-fix-ordinary-completed-specialization-unit).
-
-Proof: restrict to the affine scheme V.left using the equivalence of its pro-etale
-site with the site localized at V. The affine closed-site functors v and u satisfy
-v adjoint to u, with v fully faithful. The counit at V contains the closed fibre
-in its image; flat going-down and the specialization assumption imply that this
-image is all of V. Weak contractibility splits this cover. Full faithfulness and
-the adjunction show that the splitting is its inverse. Covers of the closed fibre
-lift through v to covers of V and similarly split. Thus inverse image to the
-closed fibre, evaluated on that fibre, is naturally evaluation at V. This
-identification carries the abelian inverse-image unit to the identity.
-The same assertion holds for module inverse image: transport scalar multiplication
-through the coefficient inverse-image isomorphism, and use the unit equations in
-the underlying abelian inverse-image adjunction. The completed coefficient map is
-invertible for the closed immersion by qcqsOrdinaryRestrictionExact, and the
-finite-projection characterization identifies its adjoint with
-ordinaryCompletedRingMap. Uniqueness of left adjoints then identifies this unit
-with the specified ordinaryAdjunction unit, up to an invertible map on its target.
-All sheaves and module presentations are taken in max u (t+1). The localized
-sites have size at most t+1, so sheafification exists there; no equality between
-the coefficient-field and scheme universes is used. Empty V gives singleton
-section modules and hence the same bijectivity assertion. -/
+the actual ordinary completed-module adjunction unit is bijective on sections. -/
 theorem ordinaryCompletedSpecializationUnit
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

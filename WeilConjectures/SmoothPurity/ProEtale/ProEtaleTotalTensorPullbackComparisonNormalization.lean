@@ -10,7 +10,10 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullb
 import all WeilConjectures.SmoothPurity.ProEtale.ProEtaleTotalTensorPullbackGenerators
 
 /-! # Normalized natural total tensor pullback comparison
-Source: Stacks 03EL and 07A4; signed total tensor, 06YN.
+
+## References
+
+* Stacks Project, Tags 03EL, 06YN and 07A4.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -75,13 +78,7 @@ private theorem canonical_total_summand
   rw [Iso.symm_hom, he, hμ]
   exact geometric_total_ι f R R' c P Q p q k h
 
-/-- Natural total pullback comparison with its component and summand normalizations.
-Source: Stacks 03EL, 07A4 and 06YN
-(blueprint: lem-pur-total-tensor-pullback-comparison-normalization).
-Proof: the natural total comparison has the prescribed pointwise total isomorphisms.
-Rewrite its components and the ordinary natural comparison by their specified
-normalizations. The existing total-coproduct summand formula gives the equation.
-This uses no associator, flatness, or derived localization. -/
+/-- Natural total pullback comparison with its component and summand normalizations. -/
 theorem proEtaleTotalTensorPullbackComparisonNormalization
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

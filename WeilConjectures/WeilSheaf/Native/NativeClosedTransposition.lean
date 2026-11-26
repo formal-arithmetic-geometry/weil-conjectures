@@ -9,9 +9,7 @@ public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedModels
 
 /-! # Formal consequences of the normalized closed comparison
 
-Source: the evaluation and transposition paragraph of
-prose-10-20, native comparison steps 7--8
-(blueprint: lem-sf-native-closed-transposition).
+Evaluation, transposition and biduality are compatible with a normalized closed comparison.
 -/
 
 @[expose] public section
@@ -67,10 +65,7 @@ private theorem uncurry_hom_map {T P P' Q : D} (f : P' ⟶ P)
       simp
 
 /-- Biduality defined by transposing evaluation is natural, with no reflexivity
-hypothesis. Source: native comparison step 8, naturality of evaluation and symmetry
-(blueprint: lem-sf-native-closed-transposition).
-Proof: uncurry both sides. Move the arrow across the symmetry and use naturality
-of evaluation in its contravariant argument. The adjunction is injective. -/
+hypothesis. -/
 theorem nativeBidual_natural (β : @SymmetricCategory D _ S.monoidal) :
     NativeBidualNaturality S β := by
   intro W K K' f
@@ -110,11 +105,7 @@ variable {C : Type a} [Category.{b} C] {D : Type a} [Category.{b} D]
   (hη : ∀ K L, (η.app (op K, L)).hom = nativeHomComparison SC SD U τ K L)
 
 include hη in
-/-- The canonical Hom comparison preserves evaluation.
-Source: native comparison step 7, the counit equation of the adjunction
-(blueprint: lem-sf-native-closed-transposition).
-Proof: uncurry the defining transpose of mapped evaluation, then cancel the
-invertible tensor comparison. -/
+/-- The canonical Hom comparison preserves evaluation. -/
 theorem nativeComparison_evaluation : NativeEvaluationCompatibility SC SD U τ η := by
   intro K L
   have h := (SD.transpose _ (U.obj K) (U.obj L)).symm_apply_apply
@@ -138,13 +129,7 @@ private theorem uncurry_comparison (M K L : C) (f : M ⟶ HC.obj (op K, L)) :
   rw [← Category.assoc, hn, Category.assoc, ← U.map_comp, ← uncurry_eq]
 
 include hη in
-/-- A symmetric normalized closed comparison preserves the actual bidual arrow.
-Source: native comparison step 8, transposition of evaluation after symmetry
-(blueprint: lem-sf-native-closed-transposition).
-Proof: uncurry the iterated Hom comparison. Its first inverse is in the
-contravariant Hom argument. Symmetry compatibility moves the tensor comparison
-past the braiding; evaluation compatibility cancels the remaining Hom comparison
-with its inverse. Injectivity of the ordinary adjunction concludes. -/
+/-- A symmetric normalized closed comparison preserves the actual bidual arrow. -/
 theorem nativeComparison_bidual
     (βC : @SymmetricCategory C _ SC.monoidal)
     (βD : @SymmetricCategory D _ SD.monoidal)

@@ -16,8 +16,20 @@ import WeilConjectures.RingTheory.HenselianLocalRootLifting
 /-!
 # Henselianity of a module-finite local algebra
 
-Source: Stacks Project, Algebra, Tag 04GH (lemma-finite-over-henselian), part (2).
-(blueprint: lem-weil-pbc-finite-local-henselian)
+A module-finite local algebra over a henselian local ring is henselian.
+
+## Implementation details
+
+The decomposition of a finite algebra over a henselian local ring into a finite product of
+local rings combines the étale retraction and finite-product theorems, after lifting the base
+to the universe of the étale neighbourhood. The same universe adapter appears in
+`FiniteOverHenselianLocalProduct`; importing that module here would be circular, so the
+adapter is reproduced.
+
+## References
+
+* [Stacks, Tag 04GG]
+* [Stacks, Tag 04GH]
 -/
 
 @[expose] public section
@@ -26,10 +38,8 @@ universe u v
 
 namespace HenselianLocalRing
 
-/-- The componentwise lifting argument of Stacks Tags 04GG (10) and 04GH (2).
-The finite-product ideal order isomorphism makes the coordinate quotient maps jointly
-injective. Their targets are nonzero local rings, so idempotents are zero-one vectors;
-the identical vectors lift uniquely. The argument also covers the empty product. -/
+/-- In a finite product of local rings, idempotents modulo an ideal whose coordinate images
+lie in the maximal ideals lift uniquely to idempotents of the product. -/
 private theorem product_idempotent_lifting
     {ι : Type*} [Finite ι] (D : ι → Type*) [∀ i, CommRing (D i)]
     [∀ i, IsLocalRing (D i)] (K : Ideal (∀ i, D i))
@@ -89,11 +99,8 @@ private theorem product_idempotent_lifting
     simp [hi, hj] at hqi
   · exact hi.trans hj.symm
 
-/-- Combine the existing étale retraction and finite-product theorems, as in Stacks
-Tag 04GG (1) => (8) => (10). Lift the base to the neighborhood's universe, transport the
-residue-field map along the lift, and descend the resulting retraction. The universe
-adapter follows the proved assembly in `FiniteOverHenselianLocalProduct`; importing that
-module here would be circular, so only its retraction adapter is reproduced. -/
+/-- A module-finite algebra over a henselian local ring is isomorphic to a finite product of
+local rings. -/
 private theorem finite_product_local
     {R : Type u} [CommRing R] [HenselianLocalRing R]
     {B : Type v} [CommRing B] [Algebra R B] [Module.Finite R B] :
@@ -177,22 +184,7 @@ private theorem finite_product_local
     exact (SetLike.ext_iff.mp (IsLocalRing.maximalIdeal_comap E.toRingHom) (τ x)).symm
   exact finite_algebra_is_product_local_rings hR
 
-/-- A module-finite local algebra over a henselian local ring is henselian.
-Source: Stacks Project, Algebra, Tag 04GH (lemma-finite-over-henselian), part (2).
-(blueprint: lem-weil-pbc-finite-local-henselian)
-
-Proof: let A be the local algebra and let C be any finite A-algebra. It is finite
-as an R-module by transitivity. The henselian etale retraction theorem and the
-finite-algebra product-local theorem decompose C as a finite product of local
-rings C_j. Transport the A-algebra structure to this product. Each projection is
-surjective, so each C_j is finite over A. Its maximal ideal pulls back to the
-maximal ideal n of A by integrality. Thus n C_j is contained in its maximal ideal,
-and C_j / n C_j is a nonzero local ring. Quotienting the product by n C gives
-the product of these quotients. An idempotent in a local ring is zero or one,
-since e (1-e) = 0 and one of e and 1-e is a unit. Hence every idempotent of
-C / n C is a zero-one vector and lifts to the identical vector in the product C.
-The lift is unique, again componentwise. The empty product covers C = 0.
-The idempotent-lifting/simple-root equivalence now gives HenselianLocalRing A. -/
+/-- A module-finite local algebra over a henselian local ring is henselian. -/
 theorem finite_local_henselian
     (R : Type u) (A : Type v) [CommRing R] [CommRing A]
     [HenselianLocalRing R] [IsLocalRing A] [Algebra R A] [Module.Finite R A] :

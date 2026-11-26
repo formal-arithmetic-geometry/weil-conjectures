@@ -15,14 +15,24 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-! # Finite-stage geometric Verdier biduality on the etale site
 
-Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-biduality-general,
-order 2128 (blueprint: theorem-verdier-biduality--1).
+Over an algebraically closed field, the canonical double-dual map is invertible and Verdier
+duality is an exact contravariant anti-equivalence of `Dᵇ_ctf` on the étale site, with
+coefficients the positive-level quotient `A_(E,n)`.
 
-The coefficient ring is the actual positive-level quotient A_(E,n), canonically
+## Implementation details
+
+The coefficient ring is the actual positive-level quotient `A_(E,n)`, canonically
 lifted to the coefficient universe of the small etale site. The conclusion uses
 exactly the recorded constructibility and Tor-amplitude predicates, and the
-canonical evaluation transpose of the source library. Its normalization is
-that of definition-verdier-dual-evaluation--4; the proposition retains the pairing witness.
+canonical evaluation transpose of the Verdier dual; the proposition retains the pairing witness.
+
+The proof identifies the finite-stage bounded-constructible and Tor-amplitude predicates with
+`constructibleFiniteTor` (bounds may be widened to `[min a b, b]`, so this includes the zero
+complex and empty intervals), notes that `l^n` is invertible on the base, and applies
+`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app` and
+`AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`. The anti-equivalence is the
+restriction by `ObjectProperty.liftDualEquivalence`. Exactness comes from the triangulated
+internal-Hom comparison for coefficient change, specialized to the identity scalar extension.
 -/
 
 @[expose] public section
@@ -39,8 +49,7 @@ namespace WeilConjectures
 
 /-- The four categorical clauses of geometric biduality, with the functor and its
 canonical double-dual transformation kept as parameters. This is a presentation of
-invertibility, preservation, the restricted anti-equivalence, and exactness.
-Source: blueprint order 2128 (blueprint: theorem-verdier-biduality--1). -/
+invertibility, preservation, the restricted anti-equivalence, and exactness. -/
 def GeometricBidualityConclusion
     {C : Type*} [Category C] [HasShift C ℤ] [HasZeroObject C] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -55,14 +64,8 @@ def GeometricBidualityConclusion
       Triangle.mk (V.map T.mor₁) (V.map T.mor₂)
         (V.map T.mor₃ ≫ (s.commShiftIso (1 : ℤ)).hom.app T.obj₁) ∈ distTriang C
 
-/-- The finite-stage etale biduality conclusion, using the canonical evaluation transpose.
-The pairing witness determines the evaluation transpose uniquely, so its existence
-is part of the conclusion and imposes no extra assumption. The equivalence comparison
-identifies the restricted functor on both objects and morphisms. Exactness uses the
-ambient distinguished triangles whose vertices lie in the full subcategory; the
-opposite category has the reversed integer shift. The local finite-ring instance
-is the named finiteness theorem applied to the positive-level quotient.
-Source: blueprint order 2128 (blueprint: theorem-verdier-biduality--1). -/
+/-- The finite-stage etale biduality conclusion, using the canonical evaluation transpose, for
+the positive-level quotient coefficient ring. -/
 noncomputable def FiniteEtaleGeometricBiduality
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)
@@ -267,28 +270,7 @@ private theorem finite_geometric_biduality_core
 /-- Finite-stage geometric Verdier biduality: the canonical double-dual map is
 invertible, and Verdier duality is an exact contravariant anti-equivalence of
 Dᵇ_ctf on the ordinary etale site of every separated finite-type scheme over the
-global algebraically closed field. No pro-etale or integral category is substituted.
-Source: blueprint sec-six-functors/sk-prop-sf-biduality-general, order 2128
-(blueprint: theorem-verdier-biduality--1).
-
-Proof:
-1. Identify the finite-stage bounded-constructible and Tor-amplitude predicates
-   with the source library's constructibleFiniteTor predicate. Bounds may be
-   widened to [min a b,b], so this includes the zero complex and empty intervals.
-2. The quotient is finite and is killed by l^n. Since l differs from the residue
-   characteristic, l^n is invertible on the algebraically closed geometric base.
-3. Apply the existing source theorems isIso_verdierDualDoubleDual_app and
-   constructibleFiniteTor_verdierDual in Etale.Derived.VerdierBiduality.
-   Their proof already performs the required geometric induction, so the
-   geometric steps are reused rather than restated as new unproved lemmas.
-4. Restrict the specified Verdier functor by ObjectProperty.liftDualEquivalence.
-   Its inclusion comparison is the identity, on objects and morphisms.
-5. For exactness specialize the triangulated internal-Hom comparison of
-   lem-coef-etale-hom-thick-locus to identity scalar extension. Restriction of
-   scalars along the identity is naturally isomorphic to the identity, hence
-   its left adjoint is an exact equivalence. Reflect triangulatedness through
-   this equivalence and apply map_distinguished with the obtained shift structure.
--/
+global algebraically closed field. -/
 theorem finite_stage_etale_geometric_biduality
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

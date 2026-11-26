@@ -11,8 +11,18 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
 /-! # Associativity of the normalized sequence pullback on cochains
 
-Source: Stacks 07A4 and the total tensor construction, Tag 06YN.
-(blueprint: lem-pur-completed-pullback-tensor-cochain-associativity).
+The normalized sequence pullback commutes with the (unsigned) reassociation of total tensor
+products of cochain complexes.
+
+## Implementation details
+
+The two chain maps are transposed by the inverse-image adjunction and compared on local pure
+triples `x ⊗ y ⊗ z`, using tensor sheafification. The argument uses neither K-flatness nor a
+derived associator.
+
+## References
+
+* [Stacks Project, Tags 07A4 and 06YN](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public noncomputable section
@@ -36,9 +46,8 @@ attribute [local implicit_reducible] pullbackTensorSequenceDirect
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Paste a cochain square through an adjunction unit.
-Source: naturality of the adjunction unit
-(blueprint: lem-pur-completed-pullback-tensor-cochain-associativity). -/
+/-- Paste a square through an adjunction unit: an equation after the unit of `L ⊣ R`
+implies the corresponding equation of maps out of `L`. -/
 private theorem adjunction_comparison_paste {B D : Type*} [Category B] [Category D]
     {L : B ⥤ D} {R : D ⥤ B} (adj : L ⊣ R)
     {P Q : B} {T V T' V' : D} (a : P ⟶ Q)
@@ -55,9 +64,7 @@ private theorem adjunction_comparison_paste {B D : Type*} [Category B] [Category
   rw [← Category.assoc, ← hu]
   simpa only [Category.assoc] using h
 
-/-- Pasting the six pure-section equations requires only function congruence.
-Source: the pure-tensor calculation of Stacks 07A4
-(blueprint: lem-pur-completed-pullback-tensor-cochain-associativity). -/
+/-- Pasting six equations of function values along two composite paths. -/
 private theorem associativitySectionSquare
     {A B C D E F G H : Type*}
     (σ : A → B) (ηB : B → C) (κB : C → D) (tB : D → H)
@@ -68,18 +75,8 @@ private theorem associativitySectionSquare
     tB (κB (ηB (σ x))) = τ (tA (κA (ηA x))) := by
   rw [hσ, hκB, htB, hκA, htA, hτ]
 
-/-- The normalized sequence pullback commutes with cochain reassociation.
-Source: Stacks 07A4, with the unsigned reassociation of Tag 06YN.
-(blueprint: lem-pur-completed-pullback-tensor-cochain-associativity).
-
-Proof: transpose the two chain maps by the inverse-image adjunction. Naturality
-of its unit moves the source associator before the unit. Detect equality on each
-triple total summand and then on local pure triples, using tensor sheafification.
-The specified source associator rebrackets the triple without a sign. Apply the normalized
-binary comparison twice on each side, and its naturality on tensor generators.
-Both sections are x, y, z transported by the three adjunction units, with the
-right parenthesization. The specified target associator gives this same section.
-This argument uses neither K-flatness nor a derived associator. -/
+/-- For associators `aY`, `aX` of total tensor products that rebracket pure triples without a
+sign, the normalized sequence pullback cochain comparison commutes with reassociation. -/
 theorem completedPullbackTensor_cochain_associativity {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q N : CochainComplex (coefficientSequenceModules l E Y) ℤ) :
     let JY := coefficientSequenceTopology (ProEt.topology Y)

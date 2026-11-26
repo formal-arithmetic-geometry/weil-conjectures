@@ -37,8 +37,7 @@ the unit is projective. On shifts of the unit, `Fib_s` is bijective on morphisms
 vanish in nonzero degrees by projectivity, and in degree zero they are `ℚ̄_ℓ`. Hence `Fib_s` is
 fully faithful (`DerivedCategory.homBijective_of_isShiftSum`), and its essential image is the
 bounded complexes with finite-dimensional cohomology
-(`ProEtale.CondensedRing.exists_fiberFunctor_point`, blueprint
-`lemma-perfect-complexes-geometric-point`).
+(`ProEtale.CondensedRing.exists_fiberFunctor_point`).
 -/
 
 @[expose] public section
@@ -336,7 +335,7 @@ lemma exists_pointFiberFunctor_obj_iso
       ⟨(G.commShiftIso n).app K ≪≫ (shiftFunctor _ n).mapIso e⟩⟩)
     ⟨𝟙_ _, ⟨pointFiberFunctorUnitIso ℓ k⟩⟩ hM
 
-/-- **The point category, evaluated** (blueprint `lemma-perfect-complexes-geometric-point`): for `k`
+/-- **The point category, evaluated**: for `k`
 separably closed, evaluation at the geometric point `s = Spec k` is an exact equivalence
 `Fib_s : Dᵇc(s)⟦ℚ̲̄_ℓ⟧ ≃ Dᵇ_fd(ℚ̄_ℓ)` onto the bounded complexes of `ℚ̄_ℓ`-vector spaces with
 finite-dimensional cohomology; it sends the unit `ℚ̲̄_ℓ,s` to `ℚ̄_ℓ[0]`. -/

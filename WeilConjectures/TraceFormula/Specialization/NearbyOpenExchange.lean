@@ -21,8 +21,7 @@ exchange `ν_j : Rj'_! Ψ_N ⟶ Ψ_M Rj_!` adjoint to `α_j⁻¹`
 (`ProEtale.CondensedRing.NearbyCyclesModel.Hom.boundedConstructibleLowerShriekExchange`) and shows:
 
 * its exceptional adjoint is `β_j = α_j⁻¹` through `Rj^! ≅ j^*`
-  (`NearbyCyclesModel.Hom.exceptionalExchange_boundedConstructibleLowerShriekExchange_app`
-  );
+  (`NearbyCyclesModel.Hom.exceptionalExchange_boundedConstructibleLowerShriekExchange_app`);
 * a compactification `M ⊆ P` of a trait model over the base restricts to a compactification
   `N ⊆ P` (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.ofOpen`), along which the
   compact-support exchange of `N` is the composite of `ν_j` and of the compact-support exchange
@@ -479,8 +478,8 @@ omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar k').P
   [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]
   [IsSeparated Y'.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
   [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom] in
-/-- **The composition law of the exchanges `ν_h` of open immersions of models** (blueprint
-`prose-E-15`): `ν_{jι} = ι'_!(ν_j) ∘ ν_ι(j_!)` through the conjugates
+/-- **The composition law of the exchanges `ν_h` of open immersions of models**:
+`ν_{jι} = ι'_!(ν_j) ∘ ν_ι(j_!)` through the conjugates
 `(j ≫ ι)_! ≅ j_! ⋙ ι_!` of the composition isomorphisms of the pullbacks. -/
 theorem NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_openImmersion_app
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
@@ -580,18 +579,12 @@ variable [IsProper (toPoint Z).left] [IsProper (toPoint Z').left]
   {T : NearbyCyclesModel (point k).left (point k').left}
   (hS : T.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
 
-/-- **The compact-support exchanges along an open immersion of compactified models** (blueprint
-`prose-E-15`, compatibility of `ν` with composition): for open immersions of models
+/-- **The compact-support exchanges along an open immersion of compactified models**
+(compatibility of `ν` with composition): for open immersions of models
 `φ : N ⟶ M` over `j`, `j'` and `ψ : M ⟶ P` over `ι`, `ι'`, with `P` proper over the base with
 structure morphism `a` to the trait, the compact-support exchange of the compactification
 `j ≫ ι : N ⊆ P` is the composite of `ν_j` (adjoint to `α_j⁻¹`) and of the compact-support exchange
-of `ι : M ⊆ P`, through the composition isomorphisms `Rb_! ≅ Rj_! ⋙ Ra_!`.
-
-An instance of `ProEtale.CondensedRing.compactSupportExchangeAux_lift_comp_app_of_heq`: the
-first identity is
-`NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app_map_comp`, the other two are
-`compactificationLowerShriekIso_hom_app_hom_comp_map_openImmersionLowerShriekComp` and
-`compactificationLowerShriekIso_inv_app_comp_hom_app_hom`. -/
+of `ι : M ⊆ P`, through the composition isomorphisms `Rb_! ≅ Rj_! ⋙ Ra_!`. -/
 theorem compactSupportExchangeOfCompactification_comp_app
     (a : P.Hom T (toPoint Z).left (toPoint Z').left)
     (ha : IsIsoOn (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
@@ -761,15 +754,11 @@ lemma Compactification.compactSupportExchange_ofOpen (C : hM.Compactification)
         (C.isIsoOn_pushforwardExchange ℓ) :=
   rfl
 
-/-- **The compact-support exchanges along an open sub-model** (blueprint
-`prose-E-15`, `lemma-compatibilities-base-change-maps` (3)): for an open sub-model `N ⊆ M`
+/-- **The compact-support exchanges along an open sub-model**: for an open sub-model `N ⊆ M`
 over open immersions `j`, `j'` and a compactification `M ⊆ P`, the compact-support exchange of
 the restricted compactification `N ⊆ P` is the composite of the exchange `ν_j` (adjoint to
 `α_j⁻¹`) and of the compact-support exchange of `M ⊆ P`, through the composition isomorphisms
-`Ra_N! ≅ Rj_! ⋙ Ra_M!` and `Ra'_N! ≅ Rj'_! ⋙ Ra'_M!`.
-
-An instance of `ProEtale.CondensedRing.compactSupportExchangeOfCompactification_comp_app` at the
-morphisms of models `φ : N ⟶ M` and `C.hom : M ⟶ P`. -/
+`Ra_N! ≅ Rj_! ⋙ Ra_M!` and `Ra'_N! ≅ Rj'_! ⋙ Ra'_M!`. -/
 theorem Compactification.compactSupportExchange_ofOpen_app (C : hM.Compactification)
     (hN : N.IsTraitModelOfBase k q g) (j : Y ⟶ X) [IsOpenImmersion j.left] (j' : Y' ⟶ X')
     [IsOpenImmersion j'.left] (φ : N.Hom M j.left j'.left) [IsOpenImmersion φ.total]

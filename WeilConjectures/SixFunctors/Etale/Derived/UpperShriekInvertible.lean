@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 The derived tensor product of two `⊗`-invertible objects of `D(X_ét)` is invertible. Together
 with the stability of invertible objects under derived pullback
 (`AlgebraicGeometry.Etale.DerivedCategory.isInvertible.leftDerivedUpperStar`), this is used in
-the composition law for cohomologically smooth morphisms (`lem-pur-co-smooth-composition`).
+the composition law for cohomologically smooth morphisms.
 
 ## Main statements
 

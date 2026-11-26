@@ -9,13 +9,13 @@ public import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionT
 
 /-! # Strict representatives for the scalar/tensor limit transport
 
-Source: Stacks 07A4 and 0941; realization step 8 of
-`lem-pur-scalar-extension-tower-coherence`.
-
 This module records the strict representative equation supplied by
 `DerivedSigmaModel`.  It deliberately contains no completed tensor, total
 limit, or constructible object; those are assembled in the transport module.
-(blueprint: stage3-pur-scalar-tensor-limit-strict-witness)
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -44,7 +44,6 @@ open scoped ChangeOfRings
 The equation is exactly the representative equation in `DerivedSigmaModel`.
 It is a lower-level datum: it mentions only cochain complexes and the strict
 tensor models, and has no localization or completed constructible objects.
-Source: Stacks 07A4 and 0941 (blueprint: stage3-pur-scalar-tensor-limit-strict-witness).
 -/
 structure StrictTensorWitness (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
@@ -61,9 +60,7 @@ structure StrictTensorWitness (W : Scheme.{u})
   hsQ : Good l L W ((scalar l E L ι W).obj Q)
   equation : DerivedSigmaModel l E L ι W SE SL α
 
-/-- Extract the strict representative datum from `DerivedSigmaModel`.
-Source: Stacks 07A4 and 0941 (blueprint: stage3-pur-scalar-tensor-limit-strict-witness).
--/
+/-- Extract the strict representative datum from `DerivedSigmaModel`. -/
 theorem strictTensorWitness_of_derivedSigmaModel (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)

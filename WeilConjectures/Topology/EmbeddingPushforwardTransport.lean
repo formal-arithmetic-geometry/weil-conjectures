@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Sites.Equivalence
 /-!
 # Transport of sheaves and direct images along the image of an embedding
 
-Source: Stacks Project, Tag 09ZG, closed-image and universe-transport step.
+## References
+
+* Stacks Project, Tag 09ZG.
 -/
 
 @[expose] public section
@@ -49,29 +51,7 @@ private theorem homeomorph_opens_dense
 
 /-- The homeomorphisms of the ambient spaces and the embedded subspaces give
 compatible equivalences of sheaf categories and of global sections. Only direct
-images occur here; no inverse-image adjunction or restriction unit is used.
-
-Source: Stacks Project, Tag 09ZG, closed-image and universe-transport step.
-(blueprint: theorem-gabber-affine-proper-base-change)
-
-Proof:
-1. The homeomorphism e identifies the frames of opens of X and Y. Its order
-isomorphism and its inverse preserve covers: a family covers an open precisely
-when its union is that open. Precomposition with the opposite open-set functors
-therefore carries sheaves to sheaves. The inverse order isomorphism supplies the
-inverse functor, and the identities of the two composites supply unit and counit.
-Call this equivalence T. The order isomorphism preserves the top open, giving the
-natural isomorphism a on global sections.
-2. Since i is an embedding, it identifies Z homeomorphically with its range.
-Restrict e to D = e inverse-image of range i and compose with the inverse of this
-homeomorphism to obtain D homeomorphic to Z. Apply the same open-set construction
-to obtain the equivalence S of sheaf categories on Z and D.
-3. The square of continuous maps from these two homeomorphisms and i and j
-commutes. Taking inverse images of opens makes the corresponding square of
-open-set functors commute up to the canonical isomorphism. Precomposition of
-presheaves, and then the full inclusion of sheaves, gives the natural isomorphism
-r between the direct-image functors. This construction uses no point of any of
-the spaces and works unchanged when the image or the ambient space is empty. -/
+images occur here; no inverse-image adjunction or restriction unit is used. -/
 theorem embedding_pushforward_transport
     {X Z : TopCat.{u}} (i : Z ⟶ X) (hi : Topology.IsEmbedding i)
     (Y : TopCat.{u + 1}) (e : Y ≃ₜ X) :

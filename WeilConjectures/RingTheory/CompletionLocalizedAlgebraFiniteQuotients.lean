@@ -22,8 +22,24 @@ import Mathlib.RingTheory.TensorProduct.Finite
 /-!
 # Finite quotient comparison for a localized finite algebra
 
-Source: Stacks Project, Algebra, Tags 07N9, 00JA, 00CT and 0394.
-(blueprint: lem-weil-pbc-completion-localized-algebra-finite-quotients)
+For a finite algebra `S` over a Noetherian ring `R`, a prime `p`, `B = R_p ⊗[R] S` and
+`J = pB`, the quotient `B ⧸ J^n` is the product of the quotients `S_q ⧸ K_q^n` over the primes
+`q` above `p`, where `K_q = J S_q` is cofinal with the maximal ideal of `S_q`.
+
+## Implementation details
+
+Since `q` is minimal over `pS` by incomparability, `K_q` has radical the maximal ideal of
+`S_q`, which gives cofinality. For `n > 0`, `B ⧸ J^n` is finite over the Artinian local ring
+`R_p ⧸ m^n`, so it has discrete spectrum and is the product of its localizations at maximal
+ideals; these are identified with the `S_q ⧸ K_q^n` by the local-chart lemma.
+
+## References
+
+* [Stacks, Tag 07N9], second equality
+* [Stacks, Tag 00JA]
+* [Stacks, Tag 00KH]
+* [Stacks, Tag 00CT]
+* [Stacks, Tag 0394]
 -/
 
 @[expose] public section
@@ -32,8 +48,7 @@ universe u v
 open scoped TensorProduct
 namespace AdicCompletion
 
-/-- A positive maximal-ideal-power quotient of a finite algebra has discrete spectrum.
-Source: Stacks Project, Tag 07N9, the finite quotient argument, and Tags 00JA and 00KH. -/
+/-- A positive maximal-ideal-power quotient of a finite algebra has discrete spectrum. -/
 private theorem finite_local_quotient_discrete
     (A : Type*) (B : Type*) [CommRing A] [CommRing B] [Algebra A B]
     [IsLocalRing A] [IsNoetherianRing A] [Module.Finite A B]
@@ -57,23 +72,10 @@ private theorem finite_local_quotient_discrete
     Module.Finite.of_restrictScalars_finite A _ _
   exact Algebra.QuasiFinite.discreteTopology_primeSpectrum (A ⧸ m ^ n) C
 
-/-- The algebraic finite-quotient comparison for a localized finite algebra.
-Source: Stacks Project, Algebra, Tag 07N9, second equality; Tags 00JA and 00CT.
-Proof: The compatibility of psi on the base identifies K_q with the extension
-of pS to S_q. Integral incomparability makes q minimal over pS, so localization
-at this minimal prime gives radical K_q = M_q. The finite algebra S and its
-localizations are Noetherian; finite generation and the radical-power lemma
-therefore give M_q^c contained in K_q for a positive c. Containment K_q in M_q
-follows directly from pS contained in q. For n = 0 both sides are zero rings.
-For n > 0, A/m^n is Artinian local. B/J^n is finite over A/m^n, hence has a
-discrete spectrum. The local-chart lemma identifies Q with its maximal ideals
-and each S_q/K_q^n as the corresponding localization, with the given quotient
-map as its algebra map. Compose the canonical product-of-localizations
-isomorphism, reindexing by Q, and the canonical equivalences of localizations.
-Their commutation with the algebra maps identifies this composite with the
-specified quotient map and proves its bijectivity, including the empty fibre.
-(blueprint: lem-weil-pbc-completion-localized-algebra-finite-quotients)
--/
+/-- The algebraic finite-quotient comparison for a localized finite algebra: for maps
+`ψ q : B → S_q` extending the local maps, each `K_q = J S_q` lies between a power of the
+maximal ideal of `S_q` and that maximal ideal, and for every `n` the induced map
+`B ⧸ J^n → ∏ q, S_q ⧸ K_q^n` is bijective. -/
 theorem completion_localizedAlgebra_finite_quotients
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :

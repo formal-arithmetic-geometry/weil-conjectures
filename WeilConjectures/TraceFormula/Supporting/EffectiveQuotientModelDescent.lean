@@ -36,14 +36,43 @@ import WeilConjectures.SixFunctors.Integral.IntegralScalarExtensionWellDefined
 
 /-! # Effectivity and simultaneous descent of quotient realization models
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0941 and 06YS; current blueprint,
-sec-trace-formula/sk-thm-tf-uniform-formula, integral transport paragraph.
-(blueprint: lem-trf-effective-quotient-model-descent).
+We record the ambient normalization, the reconstruction maps and the primitive normalized
+models for the completed pullback and scalar extension
+(`WeilConjectures.effectiveQuotientModelDescent`), and the bounded constructibility of both
+completed operations and their system realizations
+(`WeilConjectures.effectiveQuotientModelConstructible`).
 
 The ambient assertions keep independent site and coefficient universes. In the
 constructibility assertion, u is a common bound for schemes and coefficient fields,
 as in the recorded intrinsic constructibility predicate. The small site still has
 objects in Type (u+1) and morphisms in Type u. Level n means exponent n+1.
+
+## Implementation details
+
+For `WeilConjectures.effectiveQuotientModelDescent`:
+1. The evaluation calculus makes every reduction normalized, and exact whole-system inverse image
+   preserves its transition adjoints.
+2. Scalar change of the same strict reduction diagram is identified with its normalized scalar
+   quotient model; balanced association commutes with every quotient map, even for ramified
+   extensions.
+3. Normalized reconstruction, applied to both normalized systems, gives completeness and
+   invertibility of the whole-system counits, and invertibility of the unit for complete inputs,
+   without any bounds.
+4. `primitiveQuotientRealizationComparisons` gives the two natural models for these functors and
+   the fixed Roos comparisons, normalized on every K-flat presentation; the counit is identified
+   with the K-injective projections and the unit with the zero-shifted quotient augmentation, so
+   the maps are the specified adjunction maps.
+
+For `WeilConjectures.effectiveQuotientModelConstructible`, the preservation of constructibility
+by the integral operations (`integralOperations_preserve_constructible`) and by integral scalar
+extension is transported through the primitive comparison isomorphisms; completeness,
+constructible reductions and their common finite interval are invariant under these
+isomorphisms, and no bound on the quotient ring map is needed.
+
+## References
+
+* [Stacks: Tags 0941, 06YS, 07A4, 099N]
+* [B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Lemmas 6.5.4 and 6.5.9(5)]
 -/
 
 @[expose] public noncomputable section
@@ -71,25 +100,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- Ambient normalization, actual reconstruction maps, and primitive normalized models.
-Source: Stacks 0941, 06YS, 07A4 and 099N; integral transport in the current blueprint
-(blueprint: lem-trf-effective-quotient-model-descent).
-Proof:
-1. The evaluation calculus makes every reduction normalized. Exact whole-system
-   inverse image preserves its transition adjoints by
-   lem-pur-system-normalized-tensor-closure and prop-weil-pbc-proetale-constant-exact.
-2. lem-pur-coefficient-extension-reduction-model identifies scalar change of that
-   same strict reduction diagram with its normalized scalar quotient model. Balanced
-   association commutes with every quotient map, even for ramified extensions.
-3. Apply lem-pur-normalized-actual-reconstruction-maps to both normalized systems.
-   It gives completeness and invertibility of the actual whole-system counits, and
-   invertibility of the actual unit for complete inputs, without any bounds.
-4. lem-trf-primitive-quotient-realization-comparisons gives the two natural models
-   for these very functors and the fixed Roos comparisons. Its normalization tests
-   every K-flat presentation, including all strict transitions and tensor generators.
-   lem-trf-roos-adjunction-quotient-normalization identifies the counit with the
-   K-injective projections and the unit with the zero-shifted quotient augmentation.
-   Thus the maps here are the specified adjunction maps, not unrelated isomorphisms. -/
+/-- Ambient normalization, actual reconstruction maps, and primitive normalized models. -/
 -- STATEMENT-DISPUTED: inherits the universal-presentation normalization obstruction of
 -- primitiveQuotientRealizationComparisons; finite derived evaluations do not fix the
 -- whole-system presentation isomorphism. See the report and the existing T6 counterexample.
@@ -129,15 +140,7 @@ theorem effectiveQuotientModelDescent
     (purNormalizedReconstructionOfScheme l E Y SY).2 K⟩
 
 /-- Bounded constructibility, with one interval for all reductions, is retained by
-both completed operations and their specified system realizations.
-Source: Bhatt--Scholze, Lemmas 6.5.4 and 6.5.9(5); current blueprint integral transport
-(blueprint: lem-trf-effective-quotient-model-descent).
-Proof: apply lem-pur-integral-operations-preserve-constructible(1) to f and K, and
-lem-weil-integral-scalar-extension-constructible to E into L and K. Transport through
-alpha and beta from lem-trf-primitive-quotient-realization-comparisons. Completeness,
-constructible reductions and their common finite interval are invariant under these
-isomorphisms. This gives precisely def-weil-derived-complete-integral-detailed for
-both realizations, without any bound on the quotient ring map. -/
+both completed operations and their specified system realizations. -/
 theorem effectiveQuotientModelConstructible
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]

@@ -9,16 +9,28 @@ public import WeilConjectures.SmoothPurity.ConstructibleExceptionalCoefficients.
 public import WeilConjectures.Compactification.RefinementCategory
 import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 
-/-! # Normalized compact-support scalar cocycles at ring stages
+/-!
+# Normalized compact-support scalar cocycles at ring stages
 
-Source: current Weil blueprint, exceptional inverse image coefficient normalization;
-Stacks Project, Tags 0GL1, 0D6D and 0E47
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle).
+We show that normalized compact-support scalar comparisons at ring stages satisfy the ambient
+and restricted cocycle and unit identities.
+
+## Implementation details
 
 The input records below package only the realizations stipulated in the statement.
 The categories, full inclusions, scalar associators, multiplication units and proper/open
 comparison are the existing constructions. In particular no preservation or invertibility
 of an ambient proper mate is built into these records.
+
+The restricted cocycle is proved by first establishing the ambient composition and unit
+identities (open tensor normalization on the open part, the ringed coefficient projection
+cocycle on the proper part), then transporting them through the normalization equations and
+faithfulness of the full inclusions. No inverse of an ambient comparison is used, so quotient
+and mixed integral/finite coefficient maps are included.
+
+## References
+
+* [Stacks: Tags 0GL1, 0D6D and 0E47]
 -/
 
 @[expose] public noncomputable section
@@ -37,27 +49,20 @@ variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   {X Y : Scheme.{max u v}} {f : X ⟶ Y} (c : Compactification f)
 
-/-- A supplied compact-support functor and its specified ambient realization.
-Source: blueprint exceptional coefficient normalization, realization paragraph
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle). -/
+/-- A supplied compact-support functor and its specified ambient realization. -/
 structure Support (s : RingStage.{max u v} l) where
   functor : C.{u, v} l Ω X (s.stage l) ⥤ C.{u, v} l Ω Y (s.stage l)
   realization : functor ⋙ RingStage.inclusion.{u, v} l Ω Y s ≅
     RingStage.inclusion.{u, v} l Ω X s ⋙ image (s.coefficients l) c
 
-/-- A supplied scalar functor with its actual ordinary derived scalar realization.
-No exactness or shift structure is an additional input.
-Source: blueprint exceptional coefficient normalization, sigma paragraph
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle). -/
+/-- A supplied scalar functor with its actual ordinary derived scalar realization. -/
 structure Scalar {s t : RingStage.{max u v} l}
     (a : Change (s.coefficients l) (t.coefficients l)) (T : Scheme.{max u v}) where
   functor : C.{u, v} l Ω T (s.stage l) ⥤ C.{u, v} l Ω T (t.stage l)
   realization : functor ⋙ RingStage.inclusion.{u, v} l Ω T t ≅
     RingStage.inclusion.{u, v} l Ω T s ⋙ pbcDerivedExtend (a.map T)
 
-/-- The written normalization of the supplied restricted comparison, component by component.
-Source: blueprint exceptional coefficient normalization, displayed realization equation
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle). -/
+/-- The written normalization of the supplied restricted comparison, component by component. -/
 def Normalized {s t : RingStage.{max u v} l}
     (a : Change (s.coefficients l) (t.coefficients l))
     (A : Support.{u, v} l Ω c s) (B : Support.{u, v} l Ω c t)
@@ -71,9 +76,7 @@ def Normalized {s t : RingStage.{max u v} l}
         (pbcDerivedExtend (a.map Y)).map (A.realization.hom.app K) ≫
         (comparison a c).app ((RingStage.inclusion.{u, v} l Ω X s).obj K)
 
-/-- A supplied restricted associator whose realization is balanced tensor associativity.
-Source: blueprint exceptional coefficient normalization, alpha paragraph
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle). -/
+/-- A supplied restricted associator whose realization is balanced tensor associativity. -/
 structure Associator {s t r : RingStage.{max u v} l}
     {a : Change (s.coefficients l) (t.coefficients l)}
     {b : Change (t.coefficients l) (r.coefficients l)}
@@ -90,9 +93,7 @@ structure Associator {s t r : RingStage.{max u v} l}
           ((RingStage.inclusion.{u, v} l Ω T s).obj K)
 
 /-- A supplied restricted unit whose realization is scalar multiplication.
-The equality h retains arbitrary presentations of the identity ring map.
-Source: blueprint exceptional coefficient normalization, unit paragraph
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle). -/
+The equality h retains arbitrary presentations of the identity ring map. -/
 structure Unit {s : RingStage.{max u v} l}
     {a : Change (s.coefficients l) (s.coefficients l)}
     (h : ∀ W : Scheme.{max u v}, a.map W = 𝟙 _) (T : Scheme.{max u v})
@@ -107,11 +108,7 @@ structure Unit {s : RingStage.{max u v} l}
           ((RingStage.inclusion.{u, v} l Ω T s).obj K)
 
 /-- All five clauses of the normalized ring compact-support scalar assertion.
-The last clause expresses independence of an allowedness proof through uniqueness for
-fixed actual maps and realizations; any alternate presentation is compared via those
-realizations. All coefficient changes are compatible maps of the actual ring sheaves.
-Source: blueprint exceptional coefficient normalization, ambient and restricted cocycles
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle). -/
+The last clause is uniqueness of the restricted comparison for fixed maps and realizations. -/
 structure Laws : Prop where
   ambient_composition {s t r : RingStage.{max u v} l}
       (a : Change (s.coefficients l) (t.coefficients l))
@@ -334,40 +331,7 @@ private theorem allLaws : Laws.{u, v} l Ω c := by
   · exact identityProof.{u, v} l Ω c
   · exact uniqueProof.{u, v} l Ω c
 
-/-- Normalized compact-support scalar comparisons obey the ambient and restricted cocycles.
-Source: current blueprint, exceptional inverse image coefficient normalization;
-Stacks Project, Tags 0GL1, 0D6D, 0E47
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle).
-
-Proof:
-1. Write J_s for open extension and P_s for proper direct image. Open tensor
-normalization identifies the restriction of each beta with identity. Restrict the
-successive and direct beta composites to the open. Coefficient pullback coherence
-identifies both with balanced associativity. Full faithfulness of J_r detects equality.
-Multiplication units give the same open identity law. No flatness or stalk detection
-is involved, including for completed ring sheaves.
-2. Apply the ringed coefficient projection cocycle to the proper factor and the three
-ring sheaves, using the compatible pull identifications. Its chi is the specified
-proper mate. It supplies associativity and multiplication identities without assuming
-invertibility, so quotient and mixed integral/finite maps are included.
-3. Substitute Q_a = P_t(beta_a) chi_a(J_s). Naturality of chi_b at beta_a moves
-P_t(beta_a) across chi_b. Functoriality followed by the open identity of step 1 and
-the proper identity of step 2 yields the ambient composition identity. Apply their
-unit identities in the same order for ambient_identity.
-4. For the restricted comparisons put A_a = H_t(sigma_a^X) r_t(T_a^X) and
-B_a = S_a^Y(r_s) sigma_a^Y(F_s). The hypothesis is A_a I_t(q_a) = Q_a(I_s) B_a.
-Substitute this first for q_b and then q_a. Naturality of sigma_b^Y at q_a and of Q_b
-at sigma_a^X identifies the successive realized comparison with Q_b S_b(Q_a),
-conjugated by the successive A and B isomorphisms.
-5. The two Associator.normalized equations and naturality of r_r identify the realized
-restricted associators with tau_X and tau_Y. Apply the ambient composition identity,
-cancel the A_d isomorphism and use faithfulness of the full inclusion I_r to obtain
-composition at every K.
-6. Unit.normalized, naturality of r_s and of scalar multiplication turn the identity
-normalization into the ambient unit equation. Cancel r_s and use faithfulness for
-identity. Finally Normalized determines I_t(q_a) uniquely by cancelling A_a. Faithfulness
-and extensionality give unique. There is no inverse of the ambient Q_a anywhere.
--/
+/-- Normalized compact-support scalar comparisons obey the ambient and restricted cocycles. -/
 theorem normalizedRingCompactScalarCocycle
     (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

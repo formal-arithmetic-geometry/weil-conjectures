@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Basic
 
 # The pullback of `L ⊠ K` to the strictly local model is an extension by zero
 
-Blueprint `lemma-vanishing-local-term-zero-stalk--1`, item (i): in the strictly local model
+In the strictly local model
 `AlgebraicGeometry.Etale.CurveLocalModel`, if `Ly^* K = 0` then `P = Lτ^*(L ⊠ K)` vanishes on
 the horizontal axis `H = X × {y}` of `T`, so that `P` is the extension by zero of its
 restriction to `T ∖ H`.
@@ -167,9 +167,8 @@ lemma range_hH_eq_compl_range_ι :
   rw [Scheme.Opens.range_ι, Scheme.Hom.openComplement, TopologicalSpace.Opens.coe_mk,
     compl_compl]
 
-/-- Blueprint `lemma-vanishing-local-term-zero-stalk--1`, item (i): if `Ly^* K = 0`, then
-`P = Lτ^*(L ⊠ K)` is the extension by zero of its restriction to `T ∖ H`: the counit
-`j_! j^* P ⟶ P` along `j : T ∖ H ⟶ T` is an isomorphism. -/
+/-- If `Ly^* K = 0`, then `P = Lτ^*(L ⊠ K)` is the extension by zero of its restriction to `T ∖ H`:
+the counit `j_! j^* P ⟶ P` along `j : T ∖ H ⟶ T` is an isomorphism. -/
 theorem isIso_counit_app_openComplement_hH
     (L K : DerivedCategory (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : IsZero ((L((M.y)^*[ModuleCat.{u + 1} Λ])).obj K)) :
@@ -179,8 +178,8 @@ theorem isIso_counit_app_openComplement_hH
   isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_counit_app _ _ M.hH
     M.range_hH_eq_compl_range_ι _ (M.isZero_leftDerivedUpperStar_hH_obj L K hK)
 
-/-- Blueprint `lemma-vanishing-local-term-zero-stalk--1`, item (i): if `Ly^* K = 0`, then
-`P = Lτ^*(L ⊠ K)` is isomorphic to the extension by zero of its restriction to `T ∖ H`. -/
+/-- If `Ly^* K = 0`, then `P = Lτ^*(L ⊠ K)` is isomorphic to the extension by zero of its
+restriction to `T ∖ H`. -/
 theorem nonempty_iso_openImmersionLowerShriek_openComplement_hH
     (L K : DerivedCategory (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : IsZero ((L((M.y)^*[ModuleCat.{u + 1} Λ])).obj K)) :

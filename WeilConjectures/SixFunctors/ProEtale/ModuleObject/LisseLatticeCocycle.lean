@@ -21,20 +21,22 @@ and satisfying the cocycle condition (the values of the transition matrices of a
 fibre products `V_j ×_S V_k` and their inverses have integral entries
 (`AlgebraicGeometry.exists_integral_conj_of_transitionValues`).
 
-The proof: on the single cover `F : ∐ V_k ⟶ S`, the transition values define a continuous
+The same holds on connected Noetherian schemes whose local rings are integrally closed domains
+(`AlgebraicGeometry.exists_integral_conj_of_transitionValues_of_isIntegrallyClosed_stalk`).
+
+## Implementation details
+
+On the single cover `F : ∐ V_k ⟶ S`, the transition values define a continuous
 cocycle `γ : (∐ V_k) ×_S (∐ V_k) → GL_n(E)`, a point of the fibre product being the image of a
 point of a scheme `R` with `a : R ⟶ V_j`, `b : R ⟶ V_k`; it acts on the lattices of `Eⁿ` by a
 descent cocycle. By the lattice theorem on regular schemes
-(`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice`, blueprint
-`lemma-lattices-after-finite-stratification`), it has a lattice-valued twisted section `σ`; the
-bases `g` of the `𝒪_E`-spans of the lattices `σ` (`PadicAlgCl.CompactOpenLattice.integersBasisGL`)
-are locally constant and conjugate `γ` into `GL_n(𝒪_E)`
-(`PadicAlgCl.CompactOpenLattice.norm_integersBasisGL_inv_mul_mul_le_one`).
+(`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice`), it has a lattice-valued
+twisted section `σ`; the bases `g` of the `𝒪_E`-spans of the lattices `σ`
+(`PadicAlgCl.CompactOpenLattice.integersBasisGL`) are locally constant and conjugate `γ` into
+`GL_n(𝒪_E)` (`PadicAlgCl.CompactOpenLattice.norm_integersBasisGL_inv_mul_mul_le_one`).
 
-The proof only uses the existence of lattice-valued twisted sections
-(`AlgebraicGeometry.exists_integral_conj_of_transitionValues_of_forall_exists_isTwistedSection`),
-so it also applies to connected Noetherian schemes whose local rings are integrally closed domains
-(`AlgebraicGeometry.exists_integral_conj_of_transitionValues_of_isIntegrallyClosed_stalk`).
+The argument only uses the existence of lattice-valued twisted sections
+(`AlgebraicGeometry.exists_integral_conj_of_transitionValues_of_forall_exists_isTwistedSection`).
 -/
 
 @[expose] public section

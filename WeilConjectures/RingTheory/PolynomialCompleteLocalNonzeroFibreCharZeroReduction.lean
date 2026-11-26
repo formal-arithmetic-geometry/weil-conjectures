@@ -12,9 +12,23 @@ import WeilConjectures.RingTheory.CompleteLocalDomainFiniteOverRegular
 import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
 import WeilConjectures.RingTheory.FormalFibreQuasiFiniteAscent
 
-/-! Reduction to a regular complete local coefficient subring.
-Source: Stacks Project, More on Algebra, proof of Proposition 07PV, paragraphs 3--4.
-(blueprint: lem-weil-pbc-polynomial-complete-local-nonzero-fibre-char-zero-reduction)
+/-! # Reduction to a regular complete local coefficient subring
+
+The characteristic-zero formal-fibre statement for a complete local domain reduces to a regular
+complete local subring over which the domain is finite.
+
+## Implementation details
+
+The polynomial extension `A₀[X] → A[X]` is finite, hence quasi-finite at `q`, and the contracted
+prime is nonzero by `Ideal.under_ne_bot`. In characteristic zero purely inseparable extensions
+are trivial, so regularity of the contracted fibre is geometric regularity; Tag 07PP(1)
+transfers it to the original fibre.
+
+## References
+
+* [Stacks, Tag 07PV] (paragraphs 3–4 of the proof)
+* [Stacks, Tag 032D]
+* [Stacks, Tag 07PP]
 -/
 
 @[expose] public section
@@ -34,36 +48,9 @@ private theorem geometricallyRegular_charZero
 
 namespace Polynomial
 
-/-- The Cohen-subring and finite-map part of the characteristic-zero formal-fibre argument.
-Source: Stacks Project, More on Algebra, proof of Proposition 07PV, paragraphs 3--4.
-(blueprint: lem-weil-pbc-polynomial-complete-local-nonzero-fibre-char-zero-reduction)
-
-Proof:
-1. By 032D take an actual subring A₀ of A that is regular local, complete at its
-   maximal ideal, and finite in A. It is Noetherian and a domain. The injections
-   A₀ → A → Frac(A) imply CharZero A₀. Its maximal ideal is the contraction of
-   that of A. Use the inherited ring structure and the subring inclusion.
-2. The polynomial extension A₀[X] → A[X] is finite: constant polynomials of a
-   finite A₀-module generating set of A generate A[X] over A₀[X]. In Lean,
-   integrality follows coefficientwise; finite type follows by restricting the
-   A₀-algebra generators of A[X] to A₀[X]. Integral and finite type implies finite,
-   so the extension is quasi-finite at q. Contract q and r to q₀ and r₀.
-   Integral contraction makes q₀ maximal, and contraction preserves primality and
-   containment. Composing coefficient inclusions proves the stated contractions.
-   Moreover r₀ is nonzero by Mathlib Ideal.under_ne_bot: in an integral extension
-   with domain target, a nonzero element of r has an integral equation with nonzero
-   constant term, which gives a nonzero element of the contracted ideal.
-3. Suppose the contracted formal fibre is regular. IsRegularRing itself supplies
-   Noetherianity. Its residue field has characteristic
-   zero: A₀ embeds into A₀[X]/r₀, hence into its fraction field κ(r₀).
-   Every purely inseparable extension of this field is trivial; the algebra map
-   is bijective, so tensoring with it is an isomorphic ring. Regularity transports
-   through that isomorphism. The contracted fibre is therefore geometrically regular.
-4. Apply 07PP(1) to the finite polynomial map and r ≤ q. It transfers this geometric
-   regularity to the original fibre and supplies exactly the displayed implication.
-   The conclusion here constructs no definition from an arbitrary existence witness;
-   the main theorem eliminates this existence statement only to prove a proposition.
--/
+/-- Reduction of the characteristic-zero formal-fibre statement to a regular complete local
+subring `A₀` over which `A` is finite: if the contracted formal fibre over `A₀` is regular, the
+original formal fibre is geometrically regular. -/
 theorem completeLocalNonzeroFibreCharZero_reduction
     (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsLocalRing A]
     [IsAdicComplete (IsLocalRing.maximalIdeal A) A]

@@ -30,11 +30,11 @@ and tensoring with it does nothing.
 
 - `AlgebraicGeometry.affineLine.rationalPoint`: the closed point `x = a` of `𝔸¹_{k₀}`.
 - `AlgebraicGeometry.nonempty_equiv_stalk_homologySheaf_fourierTransform_rationalPoint`: the
-  stalk formula at rational points (blueprint `proposition-base-change-fourier-inversion--3`), by
-  compact support base change along `AlgebraicGeometry.affineLine.rationalPointHom` and the
-  restriction of the kernel to the fibre `AlgebraicGeometry.affineLine.fibreInclusion`.
-- `AlgebraicGeometry.nonempty_iso_artinSchreier_zero`: `ℒ_{ψ(0 · x)} ≅ ℚ̄_ℓ` (blueprint
-  `lemma-artin-schreier-character-sheaf`), from `AS^* ℒ_ψ ≅ ℚ̄_ℓ`.
+  stalk formula at rational points, by compact support base change along
+  `AlgebraicGeometry.affineLine.rationalPointHom` and the restriction of the kernel to the fibre
+  `AlgebraicGeometry.affineLine.fibreInclusion`.
+- `AlgebraicGeometry.nonempty_iso_artinSchreier_zero`: `ℒ_{ψ(0 · x)} ≅ ℚ̄_ℓ`, from
+  `AS^* ℒ_ψ ≅ ℚ̄_ℓ`.
 - `AlgebraicGeometry.WeilComplex.tensorLisseObjIsoOfIso`: tensoring with a Weil sheaf isomorphic
   to `ℚ̄_ℓ` is the identity.
 -/
@@ -63,8 +63,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- The derived internal hom `R𝓗om(F^∨, -)` out of the dual of a Weil sheaf `F ≅ ℚ̄_ℓ` is the
-identity: `F^∨ ≅ 𝓗om(ℚ̄_ℓ, ℚ̄_ℓ) ≅ ℚ̄_ℓ`, the functor `𝓗om(ℚ̄_ℓ, -)` is the identity, and so is
-its derived functor. -/
+identity. -/
 noncomputable def rightDerivedFunctorIhomFunctorDualIsoOfIso (F : WeilSheaf k₀ l X)
     (hF : F.IsLisse) (e : F ≅ WeilSheaf.adicConstant k₀ l X) :
     (ProEtaleWeilSheaf.ihomFunctor k₀ l X (F.dual hF).obj).rightDerivedFunctor ≅
@@ -86,10 +85,7 @@ noncomputable def tensorLisseObjIsoOfIso (F : WeilSheaf k₀ l X) (hF : F.IsLiss
 end WeilComplex
 
 /-- `ℒ_{ψ(0 · x)}`, the Artin–Schreier sheaf of the zero function, is the constant Weil sheaf
-`ℚ̄_ℓ`: over the zero function the Artin–Schreier cover is split, `#k₀` copies of the line with
-trivial Frobenius, so all the isotypic summands of the pushforward are constant. It is the unit
-of the kernel family `ℒ_{ψ(a x)}`. (blueprint: `lemma-artin-schreier-character-sheaf`, the case
-`f = 0`) -/
+`ℚ̄_ℓ`. -/
 theorem nonempty_iso_artinSchreier_zero (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty (artinSchreier ψ 0 ≅ WeilSheaf.adicConstant k₀ l (affineLine k₀)) :=
   nonempty_artinSchreier_zero_iso_adicConstant ψ
@@ -209,8 +205,7 @@ theorem nonempty_iso_upperStar_fibreInclusion_fourierKernel (ψ : AddChar k₀ (
   exact ⟨(WeilSheaf.upperStar (affineLine.fibreInclusion k₀ a)).mapIso (fourierKernelIso ψ) ≪≫ e⟩
 
 /-- **The fibre of the Fourier transform over a rational point**: pulled back to the point
-`a : Spec k₀ ⟶ 𝔸¹`, the transform `FT_ψ(K)` is `RΓ_c(𝔸¹, K ⊗ ℒ_{ψ(a x)})[1]`, by compact support
-base change along `a` and the restriction `ℒ_{ψ(a x)}` of the kernel to the fibre. -/
+`a : Spec k₀ ⟶ 𝔸¹`, the transform `FT_ψ(K)` is `RΓ_c(𝔸¹, K ⊗ ℒ_{ψ(a x)})[1]`. -/
 theorem nonempty_iso_fourierTransform_comp_upperStar_rationalPointHom
     (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
     Nonempty (fourierTransform ψ ⋙ WeilComplex.upperStar (affineLine.rationalPointHom k₀ a) ≅
@@ -247,12 +242,7 @@ theorem nonempty_iso_fourierTransform_comp_upperStar_rationalPointHom
 
 /-- **Stalks of the Fourier transform are fibre integrals**, at the `k₀`-rational points of the
 dual line: for a Weil complex `K` on `𝔸¹` and `a ∈ k₀`, the stalk of `𝓗ʳ FT_ψ(K)` at the point
-`a` is `H_c^{r+1}(𝔸¹ ⊗ k̄, K ⊗ ℒ_{ψ(a x)})`, with its Frobenius. The fibre of the second
-projection over `a` is the line `x ↦ (x, a)`, along which the kernel `μ^* ℒ_ψ` restricts to
-`ℒ_{ψ(a x)}`, and compact support base change along `a : Spec k₀ ⟶ 𝔸¹` identifies the stalk of
-`Rpr₂!` with the compactly supported cohomology of the fibre, compatibly with the Weil
-structures; the shift `[1]` of the transform moves `r` to `r + 1`.
-(blueprint: `proposition-base-change-fourier-inversion--3`) -/
+`a` is `H_c^{r+1}(𝔸¹ ⊗ k̄, K ⊗ ℒ_{ψ(a x)})`, with its Frobenius. -/
 theorem nonempty_equiv_stalk_homologySheaf_fourierTransform_rationalPoint
     (ψ : AddChar k₀ (PadicAlgCl l)) (K : WeilComplex k₀ l (affineLine k₀)) (a : k₀) (r : ℤ) :
     Nonempty ((((WeilComplex.homologySheaf r).obj ((fourierTransform ψ).obj K)).stalk

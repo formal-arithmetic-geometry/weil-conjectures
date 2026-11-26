@@ -11,8 +11,25 @@ import WeilConjectures.SixFunctors.CoefSupportOpenTensor.CoefNativeOpenTensorMod
 
 /-! # Native normalized open tensor models and evaluation
 
-Source: Stacks 0E8I, 0GL1 and 07A4
-(blueprint: lem-coef-native-open-tensor-models-existence).
+We show that native open tensor models exist at the sequence and finite levels, and that the
+prescribed finite evaluation comparisons identify their gamma transformations.
+
+## Implementation details
+
+The restriction tensor comparison on ordinary module sheaves sends `x ⊗ y` to the tensor of the
+restrictions; the inverse open comparison is the adjoint transpose of the open unit followed by
+the inverse restriction comparison, an isomorphism by [Stacks, Tag 0E8I]. Its summands are
+totalized using coproduct preservation by open extension, and K-flat resolutions identify the
+total tensor with the prescribed derived tensors. The same construction is done over each finite
+coefficient ring; exact evaluation preserves all ingredients, so both sides of `GammaEvaluation`
+are the same chain map on homogeneous generators. No flatness of a quotient map or boundedness
+is required.
+
+## References
+
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -35,31 +52,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Native open tensor models exist at the sequence and finite levels, and the
-prescribed finite evaluation comparisons identify their gamma transformations.
-Source: Stacks, sites-modules.tex, lemma-j-shriek-and-tensor (Tag 0E8I);
-sites-cohomology.tex, lemma-j-shriek-and-tensor (Tag 0GL1) and
-lemma-pullback-tensor-product (Tag 07A4); support-open-tensor steps 5--6.
-(blueprint: lem-coef-native-open-tensor-models-existence).
-
-Proof: construct the restriction tensor comparison on ordinary module sheaves
-by the pure-tensor map x tensor y to their restrictions. The inverse open
-comparison is the adjoint transpose of the open unit followed by the inverse
-restriction comparison. Stacks 0E8I makes this an isomorphism. Totalize its
-summands using coproduct preservation by open extension. Naturality in the two
-differentials proves the chain equation, including the sign (-1)^a. Use a
-flat-term K-flat resolution of the second factor. A K-flat refinement of the
-arbitrary first factor and the acyclic-cone criterion identify this total tensor
-with the prescribed derived tensors; tensor descent gives the ambient and open
-one-flat-factor comparisons, their naturality, and the derived_model equation.
-The inverse transpose fixes gamma_inverse. Do the same construction over each
-finite coefficient ring. The given calculus pins its evaluationTensor to the
-same ordinary pure-tensor maps. Exact evaluation preserves the ordinary open
-unit, restriction comparison and every total summand; it preserves the K-flat
-representatives by the vertical pullback theorem. Consequently the two sides of
-GammaEvaluation are the same chain map on homogeneous generators. Bilinearity,
-sheafification, coproduct uniqueness and tensor descent prove their equality on
-all derived objects. All horizontal quotient restrictions commute with these
-module maps; no flatness of a quotient map or boundedness is required. -/
+prescribed finite evaluation comparisons identify their gamma transformations. -/
 theorem nativeOpenTensorModels_exists {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (SX : CoefficientDerivedSystemCalculus.{u, u} l E X)
     (SZ : CoefficientDerivedSystemCalculus.{u, u} l E Z) :

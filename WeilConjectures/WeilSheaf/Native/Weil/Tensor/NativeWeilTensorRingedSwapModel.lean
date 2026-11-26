@@ -15,7 +15,9 @@ set_option linter.privateModule false
 
 /-! # The signed native chain swap represents the transported derived braiding
 
-Source: Stacks 06YU and 0FPT, the K-flat symmetry model.
+## References
+
+* Stacks Project, Tags 06YU and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -148,19 +150,7 @@ variable [HasDerivedCategory.{u + 2}
   (βB : @SymmetricCategory _ _ SB.monoidal)
   (cB : RingedDerivedTensorCoherence b.J b.R SB TB βB)
 
-/-- The explicit native chain swap represents the transported derived braiding.
-Source: Stacks 06YU and 0FPT; the ringed symmetry model and monoidal transport.
-(blueprint: new-sf-native-weil-ringed-swap-model).
-
-Proof: apply the fully faithful native derived equivalence. Its oplax tensorator
-is the transported counit comparison. The two binary model squares identify the
-models with the localized ringed comparisons. Apply `cB.symmetry_model` to the
-images of P and Q, K-flat by `A.flat`. Its signed generator formula identifies
-the supplied swap with the canonical cochain braiding by pure-tensor and coproduct
-extensionality. `cB.tensorIso_both` identifies its simultaneous models with the
-one-K-flat models. Naturality of the localization factor applied to the defining
-square of `nativeRingedSwapComplex` completes the equality; cancel the invertible
-model and tensor comparisons and reflect equality through the equivalence. -/
+/-- The explicit native chain swap represents the transported derived braiding. -/
 theorem nativeRingedSwapComplex_model
     (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (hP : NativeTensorKFlat k₀ l X T P) (hQ : NativeTensorKFlat k₀ l X T Q) :

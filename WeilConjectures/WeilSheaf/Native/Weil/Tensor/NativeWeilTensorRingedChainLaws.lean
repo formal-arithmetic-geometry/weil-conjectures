@@ -11,7 +11,9 @@ import Mathlib.CategoryTheory.CommSq
 
 /-! # Laws for the normalized native ringed total comparison
 
-Source: Stacks 06YN and 06YU (blueprint: lem-sf-native-weil-tensor-ringed-chain-data).
+## References
+
+* Stacks Project, Tags 06YN and 06YU
 -/
 
 @[expose] public noncomputable section
@@ -97,13 +99,7 @@ private theorem chain_comparison_naturality
     (CommSq.vert_comp (CommSq.mk hc) (CommSq.mk hf)).w
 
 -- The total-complex coproducts of the ringed tensor are found by a deep search.
-/-- The signed summand and bifunctor naturality laws for the canonical total map.
-Source: Stacks 06YN and 06YU (blueprint: lem-sf-native-weil-tensor-ringed-chain-data).
-
-Proof: expand the generic `mapBifunctorComparison` and the total-complex flip
-isomorphism.  The former gives naturality and the latter gives the Koszul scalar
-on each homogeneous summand; the normalized underived comparison identifies the
-component with `U.underived`. -/
+/-- The signed summand and bifunctor naturality laws for the canonical total map. -/
 theorem native_weil_tensor_ringed_chain_laws
     (U : NativeWeilRingedTensorUnderivedData b T adj)
     (sign : ∀ (_p _q : ℤ)

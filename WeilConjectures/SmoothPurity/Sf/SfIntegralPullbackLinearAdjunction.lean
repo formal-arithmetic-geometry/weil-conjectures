@@ -11,8 +11,13 @@ import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # The integral constructible adjunction before scalar localization
 
-Source: Stacks Project Tag 099N(2), Bhatt--Scholze Lemma 6.7.2.
-(blueprint: lem-sf-integral-pullback-linear-adjunction).
+Integral pullback has a coefficient-linear right adjoint on constructible objects, namely the
+actual system direct image restricted to the full constructible subcategories.
+
+## References
+
+* Stacks Project, Tag 099N(2).
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemmas 6.5.9 and 6.7.2.
 -/
 
 @[expose] public section
@@ -55,18 +60,7 @@ universe u
 namespace WeilConjectures
 open FrobeniusExchange
 
-/-- Integral pullback has a coefficient-linear right adjoint on constructible objects.
-Source: Stacks Project Tag 099N(2); Bhatt--Scholze 6.5.9, 6.7.2
-(blueprint: lem-sf-integral-pullback-linear-adjunction).
-Proof: use the actual whole-system reduction/limit adjunction and system pullback
-adjunction. Its reconstruction unit is invertible on complete constructible objects,
-so reduction composed with the full inclusion is fully faithful. The normalized
-pullback realization gives the natural comparison needed by restrictFullyFaithful.
-The existing system direct image preserves constructibility, so it restricts to the
-recorded full subcategories. Its additive and O_E-linear structures are supplied by
-the sectionwise direct-image action and its derived limit. The resulting right
-functor is the actual directImageFunctor, not data chosen from existence. No
-rationalization, coefficient-change mate, common-stage or Weil result is used. -/
+/-- Integral pullback has a coefficient-linear right adjoint on constructible objects. -/
 theorem sfIntegralPullbackLinearAdjunction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

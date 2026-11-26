@@ -9,9 +9,20 @@ public import WeilConjectures.SixFunctors.IntegralOpenReduction.IntegralOpenRedu
 
 /-! # Ordinary open evaluation mate for compact support
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 03DI, 03DJ, 07A4, 0941.
-This module specializes the ordinary system calculus to the actual pro-etale functors.
-(blueprint: lem-trf-compact-support-open-ordinary-mate).
+The ordinary open restriction-evaluation square has the specified inverse mate. This module
+specializes the ordinary system calculus to the actual pro-étale functors.
+
+## Implementation details
+
+Restriction to the open slice is transported through the system and finite coefficient
+equivalences. The inverse mate is characterized by its unit equation, which follows from the
+`unit_evaluation` formula of the open systems after cancelling the unit/counit pairs of the
+coefficient equivalences.
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10.
+* [Stacks Project, Tags 03DI, 03DJ, 07A4 and 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -101,22 +112,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The ordinary open restriction-evaluation square has the specified inverse
 mate. This is an underived assertion for a single coefficient level; it asserts
-no derived comparison, direct image, or coefficient transition compatibility.
-Source: Stacks 03DI--03DJ and 0941; Zheng Construction 4.1
-(blueprint: lem-trf-compact-support-open-ordinary-mate).
-Proof: transport restriction to the open slice using the inverse of the system
-coefficient equivalence and the inverse finite coefficient equivalence. The
-transportEvaluation comparison identifies their evaluations. Compose this with
-the given openSystems.restrictionEvaluation. The resulting right square is an
-isomorphism, since each of its factors is. The equivalence adjunctions have the
-usual evaluation and coevaluation as unit and counit. The ordinary localized
-extension adjunction is normalized by its summand Hom correspondence. Substitute
-the openSystems unit_evaluation formula in the unit of the composite system
-adjunction, then cancel the coefficient equivalence unit/counit pairs. The result
-is the unit equation characterizing the inverse mate of the constructed right
-square as extensionEvaluation.inv. Injectivity of the finite adjunction Hom
-bijection proves the equation. The empty and identity open, and level zero,
-use the same summand calculation. -/
+no derived comparison, direct image, or coefficient transition compatibility. -/
 theorem compactSupportOpenOrdinaryMate
     {X Z : Scheme.{t}} (j : X ⟶ Z) [IsOpenImmersion j]
     (o : IntegralOpenReduction.Operations l E j) (n : ℕ) :

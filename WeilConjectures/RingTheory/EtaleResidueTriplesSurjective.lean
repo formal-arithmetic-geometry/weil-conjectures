@@ -14,9 +14,20 @@ import WeilConjectures.RingTheory.EtaleResidueTriplesPolynomialLift
 /-!
 # The residue map of the pointed etale colimit is surjective
 
-Source: Stacks Project, Algebra, Tag 04GW (lemma-strict-henselization-different),
-last paragraph, and Tag 00UH (lemma-make-etale-map-prescribed-residue-field).
-(blueprint: lem-weil-pbc-etale-triples-colimit-surjective).
+If the residue map `ψ` from a colimit of pointed étale residue triples to a separable closure `K`
+detects units and simple roots lift along it, then `ψ` is surjective.
+
+## Implementation details
+
+The image of `ψ` is a field containing the image of `κ(p)`. Each `α` in `K` is a simple root of
+its separable minimal polynomial over `κ(p)`, whose coefficients are lifted to a monic polynomial
+over the colimit; the root-lifting hypothesis then produces a preimage of `α`. Injectivity of
+`R → c.pt` is not used, and the prime `p` need not be maximal.
+
+## References
+
+* [Stacks, Tag 04GW], last paragraph
+* [Stacks, Tag 00UH]
 -/
 
 @[expose] public section
@@ -27,19 +38,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Algebra, Tag 04GW (lemma-strict-henselization-different),
-last paragraph, and Tag 00UH (lemma-make-etale-map-prescribed-residue-field).
-
-Proof: The image of ψ is a field: if ψ(x) is nonzero, x is a unit by the hypothesis,
-so its inverse has image ψ(x)⁻¹. The image contains the image of R in K by cocone
-compatibility and the compatibility defining each triple. It therefore contains the
-image of κ(p), the fraction field of R/p. For any α in K its minimal polynomial over
-κ(p) is monic and separable. Lift its coefficients from the image field to the colimit,
-choosing leading coefficient 1. The resulting monic polynomial has α as a simple root
-under ψ, since the minimal polynomial is separable. The root-lifting hypothesis gives
-a root a in the colimit with ψ(a)=α. Thus ψ is surjective. No injectivity of R → C is
-used; the argument applies to every prime p, including nonmaximal primes.
-(blueprint: lem-weil-pbc-etale-triples-colimit-surjective). -/
+/-- Let `c` be a colimit of pointed étale residue triples with compatible map `ψ : c.pt → K`.
+If every element with nonzero image under `ψ` is a unit and every simple root in `K` of a monic
+polynomial over `c.pt` lifts to a root in `c.pt`, then `ψ` is surjective. -/
 theorem etaleResidueTriples_colimit_surjective
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     [Algebra ((Spec R).residueField p) K] [IsSepClosure ((Spec R).residueField p) K]

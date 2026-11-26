@@ -15,7 +15,16 @@ import Mathlib.RingTheory.Extension.ExtendScalars
 
 /-! # The snake sequence of absolute residue conormal rows
 
-Source: Stacks Project, More on Algebra, Tag 07E5, the big conormal diagram.
+For a local homomorphism of local algebras over the prime field `𝔽_p`, the absolute residue
+differential comparison fits into an exact snake sequence built from the conormal rows of the
+two local rings and the differential comparison of their residue fields.
+
+## References
+
+* [Stacks, Tag 07E5]
+* [Stacks, Tag 00S1]
+* [Stacks, Tag 00S2]
+* [Stacks, Tag 0322]
 -/
 
 @[expose] public section
@@ -26,19 +35,7 @@ open scoped TensorProduct
 
 namespace Algebra
 
-/-- Field Jacobi-Zariski identifies the two defects of absolute differential comparison.
-
-Source: Stacks Project, Algebra, Tags 00S2 and 0322; More on Algebra, Tag 07E5.
-
-Proof: In Jacobi-Zariski for F_p -> K -> L, H1(L/F_p) is zero because a
-field extension of a perfect field is formally smooth. Exactness therefore makes
-H1(L/K) -> L tensor_K Omega[K/F_p] injective with image the kernel of gamma.
-Restrict this connecting map to its image to obtain the first equivalence.
-The right exact differential sequence identifies the image of gamma with the
-kernel of the surjection Omega[L/F_p] -> Omega[L/K]. The first isomorphism
-theorem gives the second equivalence. No separability assumption on L/K is used:
-purely inseparable extensions may have nonzero H1(L/K). For K=L both defects
-are zero, as are H1(K/K) and Omega[K/K]. -/
+/-- Field Jacobi-Zariski identifies the two defects of absolute differential comparison. -/
 private theorem primeField_differential_defects
     (p : ℕ) [Fact p.Prime] (K : Type u) (L : Type v)
     [Field K] [Field L] [Algebra (ZMod p) K] [Algebra K L]
@@ -133,22 +130,7 @@ private theorem local_conormal_row
   exact e.symm.surjective.comp_exact_iff_exact.mpr hex
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The two short exact conormal rows commute with the residue differential comparison.
-
-Source: Stacks Project, More on Algebra, Tag 07E5, big conormal diagram.
-
-Proof: Apply Jacobi-Zariski to F_p -> A -> K. H1(K/F_p) vanishes, so the
-connecting map is injective; identify its source H1(K/A) with m_A/m_A² using the
-surjective presentation. Its cokernel is Omega[K/F_p]. Tensor this short exact
-row with L over K, which preserves exactness and injection since K is a field.
-Tensor cancellation identifies the middle module with L tensor_A Omega[A/F_p].
-Apply the same construction to B -> L. For the right square, both composites
-send l tensor da to l tensor d(residue(a)); these elements span the source,
-proving equality. Exactness now puts beta a in ker d = range c. Factor beta a through the
-inverse of the
-injective arrow c onto its range to define alpha and prove the left square. The quotient
-maps in both rows are surjective by the right exact differential sequence.
-This also covers A and B fields, when their conormal spaces are zero. -/
+/-- The two short exact conormal rows commute with the residue differential comparison. -/
 private theorem residue_conormal_snake_rows
     (p : ℕ) [Fact p.Prime] (A : Type u) (B : Type v)
     [CommRing A] [CommRing B] [Algebra (ZMod p) A] [Algebra A B]
@@ -306,28 +288,7 @@ private theorem module_snake
     exact ⟨β.range.mkQ y, rfl⟩
 
 /-- The absolute residue comparison fits into the conormal snake sequence for any
-local homomorphism of local algebras over the positive prime field.
-
-Source: Stacks Project, More on Algebra, Tag 07E5, proof of (2) ⇒ (4), big diagram;
-Algebra, Tags 00S1 and 0322 for the conormal rows and prime-field homology vanishing.
-(blueprint: lem-weil-pbc-residue-conormal-snake-sequence).
-
-Proof: Write K and L for the residue fields. The Jacobi-Zariski sequence for
-F_p -> A -> K, prime-field H1 vanishing, and the identification H1(K/A) = m/m²
-produce a short exact conormal row. Tensor it with L over K; field extensions
-are flat, and tensor cancellation identifies its middle term with L tensor_A
-Omega[A/F_p]. The analogous row for B has middle term L tensor_B Omega[B/F_p].
-Compatibility of differential maps with residue maps gives the square for beta
-and the field differential comparison gamma: on generators both composites send
-1 tensor df to d(residue(f)). Exactness puts beta a in the range of the injective
-lower conormal arrow c. Factoring through c defines alpha and gives the first
-commuting square without a connecting-map naturality theorem. Apply the module
-snake lemma to these two short exact rows. Jacobi-Zariski for F_p -> K -> L
-identifies ker gamma with H1(L/K), because H1(L/F_p) vanishes, and identifies coker gamma with
-Omega[L/K].
-Transport the snake maps through these two linear equivalences. This gives the
-five displayed maps, their four exactness assertions, and the endpoint injection
-and surjection. No finiteness or regularity is needed for this exact sequence. -/
+local homomorphism of local algebras over the positive prime field. -/
 theorem residue_conormal_snake_sequence
     (p : ℕ) [Fact p.Prime] (A : Type u) (B : Type v)
     [CommRing A] [CommRing B] [Algebra (ZMod p) A] [Algebra A B]

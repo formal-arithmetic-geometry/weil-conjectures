@@ -17,8 +17,21 @@ import WeilConjectures.RingTheory.TwoTermKernelBaseChange
 /-!
 # The full Jacobi–Zariski homology sequence
 
-Source: Stacks Project, Algebra, Tag 00S2, `lemma-exact-sequence-NL`
-(blueprint: lem-weil-pbc-jacobi-zariski-homology-sequence).
+For ring maps `A → B → C`, the Jacobi–Zariski sequence
+`C ⊗ H₁(L_{B/A}) → H₁(L_{C/A}) → H₁(L_{C/B}) → C ⊗ Ω_{B/A} → Ω_{C/A} → Ω_{C/B} → 0` is exact.
+
+## Implementation details
+
+The sequence is obtained from the snake lemma applied to the presentation complexes of the
+canonical polynomial presentations: the row of free differential modules is split exact and
+the conormal row is right exact. The kernel term is identified using presentation independence
+of `H₁` and a two-term complex base-change lemma (the degree-zero term is free and Tor vanishes
+in degrees one and two). The connecting map is computed by lifting each coefficient `b` of a
+polynomial in `B[C]` to the variable `[b]` in `A[B, C]`.
+
+## References
+
+* [Stacks, Tag 00S2]
 -/
 
 @[expose] public section
@@ -158,41 +171,15 @@ private theorem liftBaseChange_eq_on_cotangent_kernel
   exact sub_eq_zero.mp Hx
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Algebra, Tag 00S2, `lemma-exact-sequence-NL`
-(blueprint: lem-weil-pbc-jacobi-zariski-homology-sequence).
+/-- The full Jacobi–Zariski homology sequence of `A → B → C` is exact, and the kernel comparison
+map `t` is bijective when the displayed `Tor₁` and `Tor₂` over `B` vanish.
 
 The presentations are the canonical polynomial presentations. Tensor products are written
 with `C` on the left, using the symmetry over `B`. The equations for `u` and `t` specify their
 ambient conormal maps and hence their well-defined restrictions to the kernels. The maps
 `v`, `w`, `z`, and the snake connecting map are Mathlib's canonical maps. The coefficient
 formula specifies the connecting map on every polynomial representative. ULift only puts
-both Tor arguments in a common module universe.
-
-Proof (the node's ten steps). (1) Use the polynomial differential basis to identify the
-canonical cotangent complexes with the presentation complexes. (2) Include A[B] into
-A[B,C] and map A[B,C] to B[C]; these commute with the differentials and have zero composite
-on conormals. (3) The row of free differential modules is split exact by its B- and C-bases.
-(4) The conormal row is right exact: the coefficient map has kernel I A[B,C], whose image
-modulo K squared is exactly the image of C tensor I/I squared.
-(5) Apply the module snake lemma to obtain the six-term kernel/cokernel sequence.
-(6) Identify its cokernels with Kahler differentials by the conormal exact sequence and
-right exactness of tensor product. (7) Compare A[B,C] with A[C] in both directions;
-presentation independence of H1 identifies their kernels and the specified maps u and v.
-(8) Transport snake exactness across this isomorphism. (9) Apply the two-term complex
-kernel base-change lemma: the degree-zero term is free, and Tor in degrees one and two
-vanishes, so the natural kernel tensor map is bijective. (10) Lift each coefficient b of
-a polynomial in B[C] to the variable [b] in A[B,C]. Its differential in the B-directions
-is the coefficient-derivative sum displayed below, and its C-directions vanish because
-the representative is a cycle. This computes the snake connecting map.
-Dependency nodes by step: (1), (3), (10)
-`lem-weil-pbc-polynomial-ring-kahler-basis-any-variables`; (1), (2), (7)
-`lem-weil-pbc-nl-presentation-h1-functoriality`; (4)
-`lem-weil-pbc-polynomial-coefficient-map-kernel`; (5), (10)
-`lem-weil-pbc-snake-lemma-modules`; (6), (9)
-`lem-weil-pbc-jacobi-zariski-differential-maps`; (6)
-`lem-weil-pbc-tensor-right-exact`; (9)
-`lem-weil-pbc-two-term-complex-kernel-base-change` and `def-weil-pbc-tor-modules`.
-Step (8) is elementary transport of images and kernels through an isomorphism. -/
+both Tor arguments in a common module universe. -/
 theorem jacobiZariski_homology_sequence
     (A : Type u) (B : Type v) (C : Type w)
     [CommRing A] [CommRing B] [CommRing C]

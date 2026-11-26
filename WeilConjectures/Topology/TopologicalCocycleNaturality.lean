@@ -10,7 +10,23 @@ public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 import all WeilConjectures.Topology.TopologicalResolutionCocycleLift
 
-/-! # Naturality of topological cocycle comparisons -/
+/-! # Naturality of topological cocycle comparisons
+
+The objectwise comparison maps from the cohomology of a direct image to the cohomology of the
+source, defined through resolution cocycles, are natural in the coefficient sheaf.
+
+## Implementation details
+
+Both paths around the naturality square are computed on a cycle of a resolution of the direct
+image, using the resolution-cocycle lifting theorem; two comparison maps into a complex of
+injectives with the same augmentation differ by a homotopy, so the matching cycles have the same
+`Ext` class.
+
+## References
+
+* [Stacks Project, Tag 01DZ](https://stacks.math.columbia.edu/tag/01DZ)
+* Stacks Project, Derived Categories, Lemmas 13.18.6 and 13.18.7
+-/
 
 @[expose] public section
 universe u
@@ -160,33 +176,7 @@ private theorem comparison_extMk_eq
 
 -- The two proof witnesses in the cocycle-formula hypothesis have their original names.
 set_option linter.unusedVariables false in
-/-- The objectwise comparison maps are natural in the coefficient sheaf.
-Source: Stacks Project, Cohomology, Section 20.2 (Tag 01DZ); Derived Categories,
-Section 13.18, Lemmas 13.18.6 and 13.18.7, applied to the coefficient-map square.
-(blueprint: lem-sc-topological-cocycle-naturality)
-
-Proof: Represent an arbitrary class by a cycle s in a resolution J of f_*F.
-Lift g:F -> G between resolutions I and I', and f_*g between resolutions J and J'.
-The resolution-cocycle lifting theorem supplies comparisons phi:J -> f_*I and
-phi':J' -> f_*I' and matching cycles z and z' (the latter for s followed by the
-lift of f_*g). The composites J -> f_*I' have the same augmentation. Their difference
-is zero on the augmentation, and the target terms are injective. Exactness of J
-therefore factors its degree-zero component through d^0. Inductively, subtract the
-previous homotopy term composed with the target differential and factor the remainder
-through the next source differential. Precomposing with s kills the source-differential
-term: in degree zero the result is zero, and in a positive degree it is a boundary.
-
-The sheafification, free-forgetful and Yoneda adjunctions represent terminal sections.
-The generator equation ha and naturality identify z mapping to a followed by f_*z
-with restriction along the equality f^{-1}(X)=Z, hence this map is bijective in every
-coefficient sheaf. Transfer the boundary just found through that bijection. Thus z'
-and z followed by the resolution lift of g have the same Ext class, using
-InjectiveResolution.sub_extMk and extMk_eq_zero_iff (and direct equality in degree zero).
-Apply hτ to both matching cycles. InjectiveResolution.extMk_comp_mk₀ computes both
-coefficient maps on their classes, so the two paths agree on s. Surjectivity of extMk
-and extensionality of additive homomorphisms finish the naturality square. The argument
-uses no exactness of f_*I' and covers degree zero and zero coefficient maps.
--/
+/-- The objectwise comparison maps are natural in the coefficient sheaf. -/
 theorem topological_cocycle_naturality
     {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]
     (a : (presheafToSheaf (Opens.grothendieckTopology X)

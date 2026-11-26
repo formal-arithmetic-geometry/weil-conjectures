@@ -14,7 +14,12 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
 /-! # Lifting a Koszul augmentation to a projective resolution
 
-Source: Stacks Project, Tag 00LS, part (1).
+A finite tuple in an ideal `I` gives a map from its Koszul complex to any projective resolution
+of `A/I`, compatible with the augmentations.
+
+## References
+
+* [Stacks, Tag 00LS]
 -/
 
 @[expose] public section
@@ -43,17 +48,8 @@ private theorem koszulBoundary_zero_formula (A : Type u) [CommRing A]
   exact LinearMap.congr_fun he x
 
 /-- A finite tuple in an ideal has an augmentation-preserving Koszul lift to any
-projective resolution of the quotient. Source: Stacks Project, Tag 00LS, part (1).
-(blueprint: new-e1-koszul-augmentation-lift-exists).
-
-Proof: Every term of the Koszul complex is free, hence projective. Lift its
-quotient augmentation through the epimorphism in degree zero of P. The first
-Koszul differential has image in I, so its composite with that augmentation is
-zero; exactness of P in degree zero lifts the resulting map to degree one.
-Inductively the chain-map equation in the preceding degree and d squared equal
-to zero show that the next map lands in the cycles of P. Exactness and
-projectivity lift it one degree further. ChainComplex.mkHom assembles these
-lifts. Neither regularity nor generation of the whole ideal is needed. -/
+projective resolution of the quotient. Neither regularity nor generation of the whole ideal
+is needed. -/
 theorem koszul_augmentation_lift_exists (A : Type u) [CommRing A]
     (I : Ideal A) (r : ℕ) (g : Fin r → I)
     (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I))) :

@@ -13,8 +13,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Comparing constant integer open extensions
 
-Source: Stacks Project, Cohomology, Proposition 02UZ, the final short exact sequence
-(blueprint: new-node-constant-integer-open-extension-comparison).
+## References
+
+* Stacks Project, Tag 02UZ.
 -/
 
 @[expose] public section
@@ -25,16 +26,9 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace TopCat
 
-/-- Source: Stacks Project, Cohomology, Proposition 02UZ, the final short exact sequence.
-(blueprint: new-node-constant-integer-open-extension-comparison).
-
-Proof: inverse image along the open inclusion preserves constant sheaves. The literal
-restriction of the constant sheaf on X to U is therefore canonically the constant sheaf
-on U. On the slice of opens over U, an open V contained in U has inverse image V in U;
-restriction followed by this identification is the slice restriction of the original
-constant sheaf. These identifications commute with all restriction maps. Apply the
-slice-site extension-by-zero functor, then sheafification, to this presheaf isomorphism.
-The resulting isomorphism is the one displayed below. This works also for empty U. -/
+/-- The extension by zero of the constant integer sheaf on an open `U` is isomorphic to the
+sheafified slice-site extension by zero of the constant integer sheaf on `X` restricted to `U`.
+-/
 theorem constant_integer_open_extension_comparison (X : TopCat.{u}) (U : Opens X) :
     Nonempty
       (((TopCat.Sheaf.abelianOpenExtensionByZero U).obj

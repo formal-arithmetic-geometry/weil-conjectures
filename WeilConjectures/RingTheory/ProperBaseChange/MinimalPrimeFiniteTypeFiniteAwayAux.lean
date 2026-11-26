@@ -15,8 +15,23 @@ import Mathlib.RingTheory.KrullDimension.Zero
 import Mathlib.RingTheory.Localization.Integral
 import Mathlib.RingTheory.FiniteStability
 
-/-! An explicit finite spanning family after shrinking at a minimal prime.
-(blueprint: lem-weil-pbc-minimal-prime-finite-type-algebra-finite-away-aux)
+/-!
+# An explicit finite spanning family at a minimal prime
+
+A finite-type ring map with only finitely many primes over a minimal prime admits an explicit
+finite spanning family after one principal localization.
+
+## Implementation details
+
+The finite-spectrum fibre theorem gives finite-dimensionality over the residue field. Monic
+annihilating equations are lifted through the prime localization; local nilpotence of the
+extended minimal prime gives powers that vanish; the finitely many denominators and annihilators
+are cleared by an element outside the prime, and monomials are reduced by the resulting monic
+equations.
+
+## References
+
+* [Stacks, Tag 02ML]
 -/
 
 @[expose] public section
@@ -71,20 +86,7 @@ namespace RingHom
 
 /-- The coefficient-lifting and monic-polynomial argument for generic finiteness produces
 an explicit finite spanning family after one principal localization.  This is the strict
-finite-spanning intermediate form used by the generic-finiteness theorem.
-
-Source: Stacks Project, Algebra, Tag 02ML, `lemma-generically-finite`.  The proof chooses
-finite algebra generators, obtains monic equations in the localization at the minimal
-prime from finite-dimensionality of the fibre, clears their finitely many denominators,
-and reduces monomials by those equations.
-
-(blueprint: lem-weil-pbc-minimal-prime-finite-type-algebra-finite-away-aux).
-
-Proof: The finite-spectrum fibre theorem gives finite-dimensionality over the residue field.
-Lift monic annihilating equations through the prime localization, use local nilpotence of the
-extended minimal prime to obtain powers that vanish, clear the finitely many denominators and
-annihilators by multiplying an element outside the prime, and reduce monomials by the resulting
-monic equations. -/
+finite-spanning intermediate form used by the generic-finiteness theorem. -/
 theorem exists_finite_span_awayMap_of_finite_fiber_minimalPrime
     {R : Type u} {S : Type v} [CommRing R] [CommRing S]
     (φ : R →+* S) (hφ : φ.FiniteType) (p : Ideal R) (hp : p ∈ minimalPrimes R)

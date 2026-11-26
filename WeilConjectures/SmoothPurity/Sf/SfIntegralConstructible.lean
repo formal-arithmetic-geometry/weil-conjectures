@@ -13,8 +13,8 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 /-!
 # The integral bounded constructible predicate over arbitrary base fields
 
-Source: Weil blueprint, order 1459
-(blueprint: def-weil-derived-complete-integral-detailed).
+Derived complete integral objects with constructible reductions in one common finite
+cohomological interval, and the full subcategory they span.
 -/
 
 @[expose] public section
@@ -24,9 +24,7 @@ open CategoryTheory AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
 /-- The same integral constructible category: completeness and constructible reductions
-with one common finite cohomological interval. No finite-field datum enters this notion.
-Source: Weil blueprint, order 1459
-(blueprint: def-weil-derived-complete-integral-detailed). -/
+with one common finite cohomological interval. No finite-field datum enters this notion. -/
 noncomputable def sfIntegralConstructible (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : AlgebraicGeometry.Scheme.{u}) :
@@ -39,9 +37,7 @@ noncomputable def sfIntegralConstructible (l : ℕ) [Fact l.Prime]
         proEtaleCohomologicalSupport
           ((scalarReductionDerivedExtension.{u, u} l E X n).obj K) ⊆ Set.Icc a b
 
-/-- The full subcategory of bounded constructible derived-complete integral objects.
-Source: Weil blueprint, order 1459
-(blueprint: def-weil-derived-complete-integral-detailed). -/
+/-- The full subcategory of bounded constructible derived-complete integral objects. -/
 noncomputable abbrev sfIntegralConstructibleCategory (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : AlgebraicGeometry.Scheme.{u}) :=

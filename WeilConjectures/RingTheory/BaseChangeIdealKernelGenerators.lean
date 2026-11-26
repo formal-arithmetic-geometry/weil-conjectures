@@ -16,8 +16,22 @@ import WeilConjectures.RingTheory.FlatQuotientPresentationIntersection
 /-!
 # Ideal multiplication kernels under ordinary base change
 
-Source: Stacks Project, Algebra, Tags 00MO, 00MM, 00MN and 00M6.
-(blueprint: lem-weil-pbc-base-change-ideal-kernel-generators)
+If `(R/I) ⊗ M` is flat over `R/I`, the kernel of the multiplication map `I ⊗ M → M` generates
+the corresponding kernel after any base change `R → R'`.
+
+## Implementation details
+
+The kernels are identified with `Tor_1` via connecting maps, and the canonical surjections
+`Tor_1(M, Q) ⊗_Q Q' → Tor_1(M, Q')` (`Q = R/I`, `Q' = R'/IR'`) and the change-of-rings
+surjection give the generation statement. The map `θ` is constructed from its pure-tensor
+formula rather than chosen from an existence assertion.
+
+## References
+
+* [Stacks, Tag 00MO], third proof paragraph
+* [Stacks, Tag 00MM]
+* [Stacks, Tag 00MN]
+* [Stacks, Tag 00M6]
 -/
 
 @[expose] public section
@@ -121,24 +135,9 @@ private theorem idealTensorChange_naturality {A B X Y : Type*}
   | tmul a x => simp [idealTensorChange_tmul]
   | add x y hx hy => simp [hx, hy]
 
-/-- Ordinary base change generates the ideal multiplication kernel when the quotient is flat.
-Source: Stacks Project, Algebra, Tag 00MO, third proof paragraph, using Tags 00MM,
-00MN and the connecting-map description of Tag 00M6.
-(blueprint: lem-weil-pbc-base-change-ideal-kernel-generators)
-
-Proof: write Q = R/I, J = IR', Q' = R'/J and N = R' tensor_R M.
-Construct theta by the balanced bilinear rule a tensor x |-> rho(a) tensor (1 tensor x).
-Tag 00MM for R -> Q -> Q' gives a canonical surjection from Tor_1(M,Q) tensor_Q Q'
-to Tor_1(M,Q'); the flatness assumption is exactly the hypothesis of that tag.
-Compose with the change-of-rings surjection of Tag 00MN. The connecting maps of
-Tag 00M6 identify the target with ker(J tensor N -> N) and the original Tor with
-ker(I tensor M -> M). Naturality identifies the map on generators with theta.
-Since I annihilates the original Tor, tensoring this kernel over Q with Q' equals
-tensoring it over R with R'. Every tensor is a finite sum of pure tensors, whose
-images are R'-scalar multiples of theta(k). Tensor symmetry transfers this
-statement into the displayed span. This constructs theta from its pure-tensor
-formula, rather than choosing unspecified data from an existence assertion.
-The zero ideal, unit ideal and zero base-change ring all give zero kernels. -/
+/-- If `(R/I) ⊗ M` is flat over `R/I`, then for any `R`-algebra `R'` the kernel of
+`IR' ⊗[R'] (R' ⊗[R] M) → R' ⊗[R] M` is spanned over `R'` by the images `θ(k)` of the kernel of
+`I ⊗[R] M → M`, where `θ(a ⊗ x) = a ⊗ (1 ⊗ x)`. -/
 theorem exists_baseChange_ideal_kernel_generators
     {R : Type u} {R' : Type w} [CommRing R] [CommRing R'] [Algebra R R']
     (I : Ideal R) (M : Type t) [AddCommGroup M] [Module R M]

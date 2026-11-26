@@ -16,7 +16,19 @@ import WeilConjectures.RingTheory.ProjectiveResolutionSuccSplice
 
 Mathlib defines projective dimension by Ext vanishing. This module constructs the
 bounded projective resolution needed to compare it with the explicit resolution predicate.
-Source: Stacks Project, Algebra, Lemma 065R.
+
+## Implementation details
+
+The reverse implication of `ModuleCat.hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE`
+constructs an actual bounded projective resolution, by induction on the bound: at zero use the
+identity resolution of a projective object; at a successor use dimension shifting for the kernel
+of a projective epimorphism and augment its shorter resolution. The forward implication
+represents Ext classes by cocycles on the zero resolution terms and applies
+`HasProjectiveDimensionLT.mk`.
+
+## References
+
+* [Stacks, Tag 065R]
 -/
 
 @[expose] public section
@@ -24,15 +36,8 @@ universe u v
 open CategoryTheory
 namespace ModuleCat
 /-- The explicit bounded-resolution predicate agrees with Mathlib's projective-dimension
-predicate. Unlike the Ext criteria already in Mathlib, the reverse implication constructs
-an actual bounded projective resolution. Induct on the bound: at zero use the identity
-resolution of a projective object; at a successor use Mathlib's dimension shifting for
-the kernel of a projective epimorphism and augment its shorter resolution. Exactness,
-projectivity and the support bound of the augmented complex give the required resolution.
-The forward implication represents Ext classes by cocycles on the zero resolution terms
-and applies Mathlib's `HasProjectiveDimensionLT.mk`.
-Source: Stacks Project, Algebra, Lemma 065R, parts (1)--(3).
-(blueprint: lem-weil-pbc-projective-resolution-ext-degree). -/
+predicate: `X` has a projective resolution of length at most `n` if and only if it has
+projective dimension at most `n`. -/
 theorem hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE
     {R : Type u} [CommRing R] (X : ModuleCat.{max u v} R) (n : ℕ) :
     HasProjectiveResolutionLE X n ↔ HasProjectiveDimensionLE X n := by
@@ -65,7 +70,7 @@ theorem exists_hasProjectiveResolutionLE_iff
   exists_congr fun n ↦ hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE X n
 
 /-- If `d` is the least length of a projective resolution of a nonzero module `X`, then the
-projective dimension of `X` is `d`. Source: Stacks Project, Algebra, Lemma 065R. -/
+projective dimension of `X` is `d`. -/
 theorem projectiveDimension_eq_of_hasProjectiveResolutionLE
     {R : Type u} [CommRing R] (X : ModuleCat.{max u v} R) (hX : ¬ Limits.IsZero X) (d : ℕ)
     (hd : HasProjectiveResolutionLE X d) (hmin : ∀ m < d, ¬ HasProjectiveResolutionLE X m) :

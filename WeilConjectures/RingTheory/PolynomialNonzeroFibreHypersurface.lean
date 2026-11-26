@@ -15,9 +15,21 @@ import Mathlib.FieldTheory.Separable
 /-!
 # A hypersurface presentation of a nonzero polynomial fibre
 
-Source: Stacks Project, More on Algebra, proof of Lemma 07PU, second paragraph,
-with the characteristic-zero separability argument in the proof of Proposition 07PV.
-(blueprint: lem-weil-pbc-polynomial-nonzero-fibre-hypersurface)
+For a nonzero prime `r` of `A[X]` over zero, with `A` a domain of characteristic zero, the fibre
+of `r` over any `A[X]`-algebra `S` is a hypersurface `R / (f)` in the ring `R` obtained by
+inverting the nonzero constants, and `f'` is a unit in it.
+
+## Implementation details
+
+The extension of `r` to `K[X]` is a nonzero prime with an irreducible generator `g`, and
+`K[X] / (g)` is the residue field of `r`. In characteristic zero `g` is separable, so a Bezout
+identity between `g` and `g'` descends to `R / (f)`. The zero `S`-algebra is allowed, and `R` is
+an explicit localization.
+
+## References
+
+* [Stacks, Tag 07PU] (second paragraph of the proof)
+* [Stacks, Tag 07PV]
 -/
 
 @[expose] public section
@@ -26,8 +38,7 @@ universe u v
 
 namespace Polynomial
 
-/-- Choose a denominator-cleared generator using Mathlib's residue-field polynomial PID lemma.
-The extended ideal is nonzero by injectivity and prime by disjointness from base constants. -/
+/-- A denominator-cleared element of `r` whose image generates `r K[X]` and is irreducible. -/
 private theorem exists_irreducible_fibre_generator
     (A : Type u) [CommRing A] [IsDomain A]
     (r : Ideal (Polynomial A)) [r.IsPrime] (hr : r ≠ ⊥)
@@ -62,8 +73,8 @@ private theorem exists_irreducible_fibre_generator
     rw [← hf, h, Ideal.span_singleton_zero]
   exact ((Ideal.span_singleton_prime hf0).mp (hf.symm ▸ hprime)).irreducible
 
-/-- Evaluate the fraction-field Bezout identity in the localization quotient.
-The coefficient map exists because every nonzero base constant is inverted. -/
+/-- The fraction-field Bezout identity makes the derivative of the generator a unit in the
+localized quotient. -/
 private theorem isUnit_derivative_of_separable_fraction
     (A : Type u) [CommRing A] [IsDomain A]
     (S : Type v) [CommRing S] [Algebra (Polynomial A) S]
@@ -100,10 +111,7 @@ private theorem isUnit_derivative_of_separable_fraction
   rw [derivative_map, heval, heval, hz] at hcop
   exact isCoprime_zero_left.mp hcop
 
-/-- Construct the fibre presentation from a specified irreducible fraction-field generator.
-The field K[X]/rK[X] shows that every polynomial outside r maps to a unit in the quotient.
-The residue-field, tensor-product, localization and quotient universal properties give
-maps in both directions. Their composites agree with the identity on the generating maps. -/
+/-- The fibre presentation constructed from a specified irreducible fraction-field generator. -/
 private theorem fibre_equiv_of_fraction_generator
     (A : Type u) [CommRing A] [IsDomain A]
     (S : Type v) [CommRing S] [Algebra (Polynomial A) S]
@@ -252,28 +260,7 @@ private theorem fibre_equiv_of_fraction_generator
     exact fun x ↦ DFunLike.congr_fun h x
 
 /-- A nonzero polynomial prime over zero gives a hypersurface after inverting the
-nonzero base elements, and its equation has invertible derivative in that quotient.
-Source: Stacks Project, More on Algebra, proof of Lemma 07PU, second paragraph,
-and proof of Proposition 07PV, regular-base characteristic-zero case.
-(blueprint: lem-weil-pbc-polynomial-nonzero-fibre-hypersurface)
-
-Proof:
-Let K be the fraction field of A. Since r contracts to zero, its extension to K[X]
-is prime; since localization of the domain A[X] is injective, it is nonzero.
-The principal ideal domain K[X] gives an irreducible generator g. Clear its finitely
-many coefficient denominators and the denominator expressing g in the extended ideal
-to obtain f in r whose image generates r K[X]. Multiplication by the resulting
-nonzero scalar does not change this ideal. The contraction of (g) is r.
-The quotient K[X]/(g) is a field and is the residue field of r: localizing A[X]/r
-at nonzero constants already gives this field, so inverting all other nonzero
-classes changes nothing. Thus, for any A[X]-algebra S, tensoring with this field
-identifies r.Fiber S with R/(image f), where R inverts the nonzero constants in S.
-In characteristic zero the irreducible g is separable, hence g and g' are coprime.
-The scalar multiple representing f is also coprime to its derivative. A Bezout
-identity in K[X] descends to R/(image f) and supplies an inverse for image(f').
-These statements also hold for the zero S-algebra: all rings in the presentation
-are zero, and zero is a unit in the zero ring. No choice of a ring construction is
-made from this existence statement; R is the explicit localization below. -/
+nonzero base elements, and its equation has invertible derivative in that quotient. -/
 theorem nonzero_fibre_hypersurface_presentation
     (A : Type u) [CommRing A] [IsDomain A] [CharZero A]
     (S : Type v) [CommRing S] [Algebra (Polynomial A) S]

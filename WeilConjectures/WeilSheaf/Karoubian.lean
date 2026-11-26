@@ -22,9 +22,8 @@ the category of Weil complexes is idempotent complete and its canonical functor 
 envelope is an exact equivalence.
 
 The category `AlgebraicGeometry.WeilComplex k₀ l Y` is directly the common-stage `ℚ̄_ℓ`-category
-of the blueprint (see `WeilConjectures.WeilSheaf.Category`), so no passage to the colimit over the
-finite coefficient fields `E` is needed: the argument the blueprint runs at each finite stage
-applies to it as is.
+(see `WeilConjectures.WeilSheaf.Category`), so no passage to the colimit over the finite
+coefficient fields `E` is needed: the argument for each finite stage applies to it as is.
 
 ## Main definitions
 
@@ -56,19 +55,13 @@ lemma tStructure_bounded (K : WeilComplex k₀ l Y) : (tStructure k₀ l Y).boun
   exact ⟨⟨a, (tStructure_isGE_iff K a).2 ha⟩,
     ⟨b, (tStructure_isLE_iff K b).2 hb⟩⟩
 
-/-- Idempotent completeness of the common-stage Weil category
-
-The triangulated category of Weil complexes on `Y` is idempotent complete: it carries the bounded
-t-structure `AlgebraicGeometry.WeilComplex.tStructure`, whose heart is the abelian category of
-Weil sheaves, and a triangulated category with a bounded t-structure is Karoubian. -/
+/-- The triangulated category of Weil complexes on `Y` is idempotent complete. -/
 instance isIdempotentComplete : IsIdempotentComplete (WeilComplex k₀ l Y) :=
   (tStructure k₀ l Y).isIdempotentComplete_of_bounded (tStructure_bounded k₀ l Y)
 
-/-- Idempotent completeness of the common-stage Weil category
-
-The canonical functor `D^b_{c,W}(Y, ℚ̄_ℓ) ⥤ Kar(D^b_{c,W}(Y, ℚ̄_ℓ))` from the Weil complexes on `Y`
-into their Karoubi envelope is an exact equivalence: an equivalence of categories which is a
-triangulated functor. -/
+/-- The canonical functor `D^b_{c,W}(Y, ℚ̄_ℓ) ⥤ Kar(D^b_{c,W}(Y, ℚ̄_ℓ))` from the Weil complexes
+on `Y` into their Karoubi envelope is an exact equivalence: an equivalence of categories which is
+a triangulated functor. -/
 theorem isEquivalence_toKaroubi_and_isTriangulated :
     (Idempotents.toKaroubi (WeilComplex k₀ l Y)).IsEquivalence ∧
       (Idempotents.toKaroubi (WeilComplex k₀ l Y)).IsTriangulated :=

@@ -142,8 +142,8 @@ import Mathlib.CategoryTheory.Limits.Preserves.Limits
 /-!
 # Finite free completed scalar comparison
 
-Source: Bhatt--Scholze, Lemma 6.8.2(1), Definition 3.4.10 and Lemma 3.4.12
-(blueprint: lem-weil-finite-free-completed-scalar-comparison).
+We compare completed scalar extension along a finite extension of `ℓ`-adic coefficient fields
+with ordinary derived scalar extension.
 
 ## Main definitions
 
@@ -159,6 +159,31 @@ Source: Bhatt--Scholze, Lemma 6.8.2(1), Definition 3.4.10 and Lemma 3.4.12
 
 - `finiteFreeCompletedScalarComparison`: finite freeness, invertibility of the
   comparison on complete inputs, completeness of ordinary extension, and identity normalization.
+
+## Implementation details
+
+The chain comparison tensors the target quotient maps with `P`; the residue equations of the
+completed coefficient map make these maps balanced and linear, compatible with the transitions
+and natural in `P`. Their product is killed strictly by `1 - s`, so `mappingCocone.lift` with
+zero degree `-1` cochain gives the map, determined uniquely by its two projections; in
+particular no triangle filler is chosen. The derived comparison is its descent along good
+representatives, so it is independent of the chosen resolutions. The completeness unit is
+constructed in the same way from the tensor units `x ↦ 1 ⊗ x`, independently of the comparison.
+
+For `finiteFreeCompletedScalarComparison`: with uniformizers `t` of `𝒪_E` and `v` of `𝒪_L`,
+`t = u v^e` for a unit `u`, and `𝒪_L` is free of rank `[L : E]` over `𝒪_E`; the basis commutes
+with quotients and constant sheafification, giving `R^d = S` on completed coefficients. For a
+flat-term K-flat resolution `P` of `K`, the Koszul unit criterion and the basis show that the
+ordinary extension is locally `t`-complete, hence locally `v`-complete since the Čech complexes
+for `t` and `v` agree. Associativity identifies the quotient unit with the chain comparison,
+including its zero shifted component. For the identity inclusion, multiplication identifies the
+chain comparison with the reduction unit. The basis is only used to check invertibility.
+
+## References
+
+* [B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2(1), Definition 3.4.10,
+  Lemma 3.4.12, Definition 3.5.2 and Proposition 3.5.1]
+* [Stacks: Tags 06YY, 08TC, 093M]
 -/
 
 @[expose] public section
@@ -192,13 +217,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) (Y : AlgebraicGeometry.Scheme.{t})
 
-/-- The unique completed coefficient map with the prescribed finite reductions.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-weil-finite-free-completed-scalar-comparison).
-Proof: the quotient inclusion maps commute with transitions. Their composites with
-source limit projections are a cone. The target limit property gives the map;
-joint monicity of its projections gives uniqueness. Forgetting commutativity is
-faithful, so the same construction gives the commutative-ring sheaf map. -/
+/-- The unique completed coefficient map with the prescribed finite reductions. -/
 theorem completedCoefficientMap_existsUnique :
     ∃! φ : completedIntegralCommRingSheafUnrestricted l E Y ⟶
         completedIntegralCommRingSheafUnrestricted l L Y,
@@ -258,9 +277,7 @@ theorem completedCoefficientMap_existsUnique :
   have h := congrArg forgetComm.map ((hψ n.unop).trans (hφ n.unop).symm)
   simpa only [Functor.map_comp, hproj] using h
 
-/-- The canonical completed coefficient map, uniquely fixed by its residues.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
+/-- The canonical completed coefficient map, uniquely fixed by its residues. -/
 noncomputable def completedCoefficientMap :
     completedIntegralCommRingSheafUnrestricted l E Y ⟶
       completedIntegralCommRingSheafUnrestricted l L Y :=
@@ -294,8 +311,7 @@ private theorem completedCoefficientMap_id :
     simp only [hq, Category.id_comp, Category.comp_id]
 
 set_option linter.defProp false in
-/-- The existing universal derived-change-of-rings witness, with standard localizations.
-Source: Stacks Tag 06YY (blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
+/-- The existing universal derived-change-of-rings witness, with standard localizations. -/
 noncomputable def completedScalarChangeData :=
   SheafOfModules.derivedChangeOfRingsIndependentCoefficients
     (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
@@ -303,14 +319,12 @@ noncomputable def completedScalarChangeData :=
     (O' := completedIntegralCommRingSheafUnrestricted l L Y)
     (completedCoefficientMap l E L ι Y)
 
-/-- Ordinary sheafified extension along the canonical completed coefficient map.
-Source: Stacks Tag 06YY (blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
+/-- Ordinary sheafified extension along the canonical completed coefficient map. -/
 noncomputable def completedOrdinaryScalarExtension :
     integralTowerModules l E Y ⥤ integralTowerModules l L Y :=
   (completedScalarChangeData l E L ι Y).choose
 
-/-- Additivity of ordinary extension from the canonical tensor witness.
-Source: Stacks Tag 06YY (blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
+/-- Additivity of ordinary extension from the canonical tensor witness. -/
 noncomputable instance completedOrdinaryScalarExtension_additive :
     (completedOrdinaryScalarExtension l E L ι Y).Additive :=
   (completedScalarChangeData l E L ι Y).choose_spec.choose_spec.choose_spec.choose
@@ -335,20 +349,17 @@ private theorem completedOrdinaryScalarExtension_map
   simpa only [completedOrdinaryScalarExtension] using
     (completedScalarChangeData l E L ι Y).choose_spec.choose_spec.choose f
 
-/-- Termwise ordinary extension, before any completion.
-Source: Stacks Tag 06YY (blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
+/-- Termwise ordinary extension, before any completion. -/
 noncomputable def completedOrdinaryScalarComplex :=
   (completedOrdinaryScalarExtension l E L ι Y).mapHomologicalComplex (ComplexShape.up ℤ)
 
-/-- Ordinary derived scalar extension with its universal K-flat computation.
-Source: Stacks Tag 06YY (blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
+/-- Ordinary derived scalar extension with its universal K-flat computation. -/
 noncomputable def completedDerivedScalarExtension :
     DerivedCategory (integralTowerModules l E Y) ⥤
       DerivedCategory (integralTowerModules l L Y) :=
   (completedScalarChangeData l E L ι Y).choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose
 
-/-- The universal counit on a complex, invertible when that complex is K-flat.
-Source: Stacks Tag 06YY (blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
+/-- The universal counit on a complex, invertible when that complex is K-flat. -/
 noncomputable def completedScalarCounit
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     (completedDerivedScalarExtension l E L ι Y).obj (DerivedCategory.Q.obj P) ⟶
@@ -357,8 +368,7 @@ noncomputable def completedScalarCounit
     ((completedScalarChangeData l E L ι Y).choose_spec.choose_spec.choose_spec.choose_spec.2.2
       |>.choose_spec.choose.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))
 
-/-- Sheafified s tensor x in the ordinary extension, with the witness's canonical transport.
-Source: Stacks Tag 06YY (blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
+/-- Sheafified s tensor x in the ordinary extension, with the witness's canonical transport. -/
 noncomputable def completedScalarTensorSection
     (M : integralTowerModules l E Y) (U : Y.ProEtᵒᵖ)
     (s : (completedIntegralCommRingSheafUnrestricted l L Y).obj.obj U) (x : M.val.obj U) :
@@ -370,8 +380,7 @@ noncomputable def completedScalarTensorSection
           (s ⊗ₜ[(completedIntegralCommRingSheafUnrestricted l E Y).obj.obj U,
             ((completedCoefficientMap l E L ι Y).hom.app U).hom] x))
 
-/-- The strict transition endomorphism of the coefficient-extension tower.
-Source: Stacks Tag 08TC (blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
+/-- The strict transition endomorphism of the coefficient-extension tower. -/
 noncomputable def completedScalarRoosEndomorphism
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :=
   towerTransitionEndomorphism
@@ -650,14 +659,7 @@ private theorem towerZeroLift_exists
     exact CochainComplex.mappingCocone.lift_f_snd_v (φ P) (α P) 0
       (by simp [hα]) i (i - 1) (by omega)
 
-/-- The uniquely specified chain comparison to the strict product cone.
-Source: Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1
-(blueprint: lem-weil-finite-free-completed-scalar-comparison).
-Proof: tensor the target quotient maps with P. The completed coefficient map's residue
-equations make these maps balanced and S-linear; they commute with transitions and
-are natural in P. Their product is killed strictly by 1-s. Apply mappingCocone.lift
-with zero degree -1 cochain. The two projections determine the map uniquely in every
-degree. This also proves naturality without any choice of a triangle filler. -/
+/-- The uniquely specified chain comparison to the strict product cone. -/
 theorem completedScalarChainComparison_existsUnique :
     ∃! b : completedOrdinaryScalarComplex l E L ι Y ⟶
         integralScalarComplexFunctor l E L ι Y,
@@ -733,9 +735,7 @@ theorem completedScalarChainComparison_existsUnique :
   have hs := (hb'.2 P i).trans (hb.2 P i).symm
   exact cocone_degree_ext φ (b'.app P) (b.app P) i hf hs
 
-/-- The canonical chain comparison, with both cone components fixed by the theorem.
-Source: Bhatt--Scholze, Proposition 3.5.1
-(blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
+/-- The canonical chain comparison, with both cone components fixed by the theorem. -/
 noncomputable def completedScalarChainComparison :
     completedOrdinaryScalarComplex l E L ι Y ⟶ integralScalarComplexFunctor l E L ι Y :=
   (completedScalarChainComparison_existsUnique l E L ι Y).exists.choose
@@ -954,14 +954,7 @@ private theorem localization_descent_with_comparison
       (α.app P ≫ e.inv.app P) ≫ e.hom.app P
     rw [hχ' P, Category.assoc, e.inv_hom_id_app, Category.comp_id]
 
-/-- Descent of the specific chain comparison, not an arbitrary map to a derived limit.
-Source: Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1
-(blueprint: lem-weil-finite-free-completed-scalar-comparison).
-Proof: the derived-change-of-rings counit is invertible on good representatives.
-Compose it with the localized chain comparison and the inverse of the normalized
-strict-extension comparison. Naturality holds on chain maps by the two universal
-comparisons and the chain comparison. Good representatives localize to D(R); hence
-these maps descend uniquely. This proves independence of every chosen resolution. -/
+/-- Descent of the specific chain comparison, not an arbitrary map to a derived limit. -/
 theorem completedScalarComparison_existsUnique :
     ∃! χ : completedDerivedScalarExtension l E L ι Y ⟶
         integralScalarExtensionOfUniverses l E L ι Y,
@@ -988,9 +981,7 @@ theorem completedScalarComparison_existsUnique :
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The canonical completion map χ, natural on the entire derived category.
-Source: Bhatt--Scholze, Proposition 3.5.1
-(blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
+/-- The canonical completion map χ, natural on the entire derived category. -/
 noncomputable def completedScalarComparison :
     completedDerivedScalarExtension l E L ι Y ⟶ integralScalarExtensionOfUniverses l E L ι Y :=
   (completedScalarComparison_existsUnique l E L ι Y).exists.choose
@@ -1005,9 +996,7 @@ private theorem completedScalarComparison_spec :
 
 attribute [local irreducible] completedScalarComparison
 
-/-- The relative field degree for the given inclusion.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
+/-- The relative field degree for the given inclusion. -/
 noncomputable def completedScalarRelativeDegree : ℕ :=
   letI := ι.toAlgebra
   Module.finrank E L
@@ -1061,13 +1050,7 @@ private theorem scalarMultiplication_existsUnique
   intro U x s
   exact (hν P i U s x).trans (hμ P i U s x).symm
 
-/-- Multiplication identifies ordinary scalar extension along the identity with P.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: lem-weil-finite-free-completed-scalar-comparison).
-Proof: the residue equations identify the completed identity map with the identity.
-The balanced maps s tensor x ↦ s*x and x ↦ 1 tensor x are inverse, linear, commute
-with restrictions and differentials, and are natural in P. Sheafification preserves
-the inverse equations. Pure tensors generate locally, proving uniqueness. -/
+/-- Multiplication identifies ordinary scalar extension along the identity with P. -/
 theorem completedScalarIdentityMultiplication_existsUnique :
     ∃! μ : completedOrdinaryScalarComplex l E E (AlgHom.id ℚ_[l] E) Y ≅
         𝟭 (CochainComplex (integralTowerModules l E Y) ℤ),
@@ -1085,9 +1068,7 @@ theorem completedScalarIdentityMultiplication_existsUnique :
     (completedOrdinaryScalarExtension_map l E E (AlgHom.id ℚ_[l] E) Y)
     (completedCoefficientMap_id l E Y)
 
-/-- The actual multiplication isomorphism, fixed on every pure tensor.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
+/-- The actual multiplication isomorphism, fixed on every pure tensor. -/
 noncomputable def completedScalarIdentityMultiplication :
     completedOrdinaryScalarComplex l E E (AlgHom.id ℚ_[l] E) Y ≅
       𝟭 (CochainComplex (integralTowerModules l E Y) ℤ) :=
@@ -1173,13 +1154,7 @@ private theorem identityInverseChainComparison_properties :
     exact (Category.assoc _ _ _).trans
       ((congrArg ((μ.inv.app P).f i ≫ ·) (hβ.2 P i)).trans comp_zero)
 
-/-- The completeness unit directly from the reductions of P and zero shifted component.
-Source: Bhatt--Scholze, Definition 3.5.2 and Proposition 3.5.1
-(blueprint: lem-weil-finite-free-completed-scalar-comparison).
-Proof: the canonical tensor units send x to 1 tensor x at every level. The transitions
-send this to the next unit, hence the product map is killed by 1-s. The mapping cocone
-lift with zero cochain supplies the chain map, natural in P. The two cone projections
-and local generation by the tensor units determine it uniquely. -/
+/-- The completeness unit directly from the reductions of P and zero shifted component. -/
 theorem completedScalarIdentityUnit_existsUnique :
     ∃! η : 𝟭 (CochainComplex (integralTowerModules l E Y) ℤ) ⟶
         integralScalarComplexFunctor l E E (AlgHom.id ℚ_[l] E) Y,
@@ -1221,9 +1196,7 @@ theorem completedScalarIdentityUnit_existsUnique :
     (hη'.2 P i).trans (hη.2 P i).symm
   exact cocone_degree_ext φ (η'.app P) (η.app P) i hf hs
 
-/-- The specified completeness unit before localization, constructed independently of χ.
-Source: Bhatt--Scholze, Definition 3.5.2
-(blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
+/-- The specified completeness unit before localization, constructed independently of χ. -/
 noncomputable def completedScalarIdentityUnit :
     𝟭 (CochainComplex (integralTowerModules l E Y) ℤ) ⟶
       integralScalarComplexFunctor l E E (AlgHom.id ℚ_[l] E) Y :=
@@ -1372,35 +1345,7 @@ private theorem scalar_ramification :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Finite freeness, invertibility of the specified comparison on derived-complete
-inputs, and derived completeness of ordinary extension.
-Source: Bhatt--Scholze, Lemma 6.8.2(1), Definition 3.4.10, Lemma 3.4.12 and
-Proposition 3.5.1 (blueprint: lem-weil-finite-free-completed-scalar-comparison).
-Proof: uniqueness of extending absolute values gives O_E = E intersect O_L and
- t = u v^e for a unit u and e positive. Completeness of E identifies O_E with its
- t-adic limit. Finite quotients and the finite-over-complete-ring criterion give
- O_L finite over O_E; torsion-freeness and the DVR theorem give a basis of size [L:E].
-The basis and its coordinate inverse commute with quotients and constant
-sheafification. Taking inverse limits over the cofinal exponents en gives R^d = S,
-with exactly the displayed R-action. Stacks 093M identifies completed quotients
-with the finite constant coefficient sheaves and proves regularity of t and v.
-Resolve K by a flat-term K-flat complex P. Its ordinary extension Q is K-flat.
-The regular Koszul-to-quotient comparison identifies the specified quotient unit
-with the Koszul reflector unit. The Roos completeness assumption first implies
-local t-completeness of K, so this specific unit is invertible. The basis identifies
-Q, its quotients, products, cone and unit over R with d finite copies of those of P.
-Restriction detects acyclicity, so Q is locally t-complete over S. The augmented
-Cech complexes [S -> S[1/t]] and [S -> S[1/v]] are canonically identical since
- t = u v^e. Their reflectors give local v-completeness, and the Koszul unit criterion
-makes the specific v-quotient unit invertible. Associativity sends
-(p tensor s) tensor z to p tensor residue(s)z; its inverse sends p tensor z to
-(p tensor 1) tensor z. These commute with all transitions and units, identifying
-the quotient unit with exactly the chain comparison above, including its zero
-shifted component. The normalized descent gives the asserted χ and completeness.
-For the identity inclusion, multiplication identifies the chain comparison with
-the directly constructed reduction unit: both have quotient components x ↦ 1 tensor x
-and zero shifted component. Their two-projection uniqueness gives the final equality.
-All maps commute with chain maps; localization extends this to arbitrary derived
-morphisms. The basis checks invertibility only and never chooses χ. -/
+inputs, and derived completeness of ordinary extension. -/
 theorem finiteFreeCompletedScalarComparison :
     Nonempty
       (((SheafOfModules.restrictScalars

@@ -11,9 +11,9 @@ public import WeilConjectures.TraceFormula.QuotientTensor.QuotientTensorInsertio
 
 /-! # Finite-level normalization of the ordinary completion augmentation
 
-Source: Stacks Tags 03D2 and 03EL; expanded clause 4 of
-prose-10-21.
-(blueprint: lem-pur-isomorphism-ordinary-finite-augmentation).
+## References
+
+* Stacks Project, Tags 03D2 and 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -71,14 +71,7 @@ private theorem finitePullbackGenerator_counit
     exact congrArg Quiver.Hom.op (adj.right_triangle_components V)
   exact mapCompIdApply N.val.presheaf _ _ ht _
 
-/-- The finite quotient augmentation agrees on each degree after the two comparisons.
-Source: Stacks Tags 03D2 and 03EL; expanded clause 4 of the coefficient-twist definition.
-(blueprint: lem-pur-isomorphism-ordinary-finite-augmentation).
-Proof: test equality on an ordinary adjunction-unit section. The normalized module
-comparison restricts it along the site counit. Naturality of the quotient augmentation
-moves this restriction to the reduced section. The insertion formula and naturality
-of the finite pullback unit then cancel the site unit and counit by the right triangle.
-Both remaining sections are the finite pullback generator of the unit tensor. -/
+/-- The finite quotient augmentation agrees on each degree after the two comparisons. -/
 theorem isomorphismOrdinaryFiniteAugmentation
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

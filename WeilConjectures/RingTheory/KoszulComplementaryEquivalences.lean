@@ -13,9 +13,20 @@ import Mathlib.LinearAlgebra.Dual.Basis
 /-!
 # Signed complementary Koszul equivalences
 
-Source: Stacks Project, Tag 0BQZ, proof of lemma-regular-immersion-ext,
-complementary contraction on the ordered top wedge.
-(blueprint: lem-sc-koszul-complementary-equivalences).
+The ordered top wedge of `A^r` gives a perfect pairing between complementary exterior powers.
+The resulting signed equivalences `Hom_A(∧^j A^r, A) ≃ ∧^(r-j) A^r` intertwine the dual Koszul
+differentials with the Koszul differentials.
+
+## Implementation details
+
+The pairing of basis wedges indexed by `S` and `T` vanishes unless `T` is the complement of
+`S`, in which case it is the sign of the shuffle, a unit. Since contraction is a graded
+derivation, `P_j(d x, y) = (-1)^j P_(j+1)(x, d y)`; twisting the equivalences by `(-1)^j`
+makes them commute with the signed dual differential. No regularity is used.
+
+## References
+
+* [Stacks, Tag 0BQZ]
 -/
 
 @[expose] public section
@@ -26,17 +37,14 @@ open CategoryTheory
 
 namespace ExteriorAlgebra
 
-/-- The coefficient of the ordered top wedge in the standard exterior-algebra basis.
-Source: Stacks Project, Tag 0BQZ, complementary contraction calculation. -/
+/-- The coefficient of the ordered top wedge in the standard exterior-algebra basis. -/
 private noncomputable def koszulTopCoefficient (A : Type u) [CommRing A] (r : ℕ) :
     ExteriorAlgebra A (Fin r →₀ A) →ₗ[A] A :=
   (Finsupp.basisSingleOne : Module.Basis (Fin r) A (Fin r →₀ A)).ExteriorAlgebra.coord
     Finset.univ
 
 /-- Pair a complementary wedge with a degree-`j` wedge by taking the coefficient of
-its product on the ordered top wedge. This is a concrete construction, independent
-of the sequence and of any assertion of invertibility.
-Source: Stacks Project, Tag 0BQZ, complementary contraction calculation. -/
+its product on the ordered top wedge. -/
 private noncomputable def koszulComplementaryPairing (A : Type u) [CommRing A] (r j : ℕ)
     (_f : Fin r → A) :
     (⋀[A]^(r - j) (Fin r →₀ A)) →ₗ[A]
@@ -63,20 +71,7 @@ private noncomputable def koszulComplementaryPairing (A : Type u) [CommRing A] (
       a • koszulTopCoefficient A r (_ * ↑y)
     simp
 
-/-- The complementary top-wedge pairing is perfect in every degree up to `r`.
-Source: Stacks Project, Tag 0BQZ, lemma-regular-immersion-ext, complementary
-contraction on the ordered top wedge.
-
-Proof: Use the exterior-power bases of the standard basis of `A^r`. The pairing
-of basis wedges indexed by `S` and `T` is zero unless `T` is the complement of
-`S`: overlapping factors give zero, and disjoint sets of cardinalities `j` and
-`r-j` have union all of `Fin r`. In the complementary case the coefficient is
-the sign of the shuffle ordering `S` followed by its complement, hence is a
-unit whose square is one. The pairing matrix is therefore an invertible signed
-permutation matrix. Equivalently, send the coordinate functional at `S` to
-that sign times the basis wedge of the complement. Basis expansion verifies
-both inverse identities. For `r=0` the pairing is multiplication in `A`, and
-for the zero ring the same inverse identities hold. No regularity is used. -/
+/-- The complementary top-wedge pairing is perfect in every degree up to `r`. -/
 private theorem koszulComplementaryPairing_bijective (A : Type u) [CommRing A] (r j : ℕ)
     (f : Fin r → A) (hj : j ≤ r) :
     Function.Bijective (koszulComplementaryPairing A r j f) := by
@@ -227,26 +222,7 @@ private theorem complementary_pairing_differential
     using hc'.symm
 
 /-- The signed complementary-wedge equivalences commute with the Koszul differentials.
-No regularity is assumed.
-Source: Stacks Project, Tag 0BQZ, proof of lemma-regular-immersion-ext, the map
-sending a dual contraction monomial to its value on the ordered top wedge.
-(blueprint: lem-sc-koszul-complementary-equivalences).
-
-Proof: Let E = A^r with ordered basis e_i and top wedge w. For 0 <= j <= r,
-let P_j(x,y) be the coefficient of w in x wedge y, with x in wedge^j E and
-y in wedge^(r-j) E. The finite exterior-power bases show that P_j is perfect:
-the dual of e_S maps to sign(S,S-complement) times e_(S-complement). Call
-this isomorphism T'_j. Contraction d is a graded derivation. For x of degree
-j+1 and y of degree r-j, x wedge y vanishes in degree r+1, so
-P_j(d x,y) = (-1)^j P_(j+1)(x,d y). The signed dual differential is
-delta_j(phi) = (-1)^(j+1) phi composed with d. Consequently
-T'_(j+1) delta_j = -d T'_j. Set T_j = (-1)^j T'_j; then
-T_(j+1) delta_j = d T_j. Multiplication by the unit (-1)^j preserves
-invertibility. These T_j give e and the displayed differential identity,
-with natural-number subtraction justified by j < r. When r = 0 the only
-map is Hom_A(A,A) to A by evaluation at 1 and there are no differential
-identities to check. Over the zero ring every term is zero and the same
-basis construction and signs apply. -/
+No regularity is assumed. -/
 theorem exists_koszul_complementary_equivalences
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) :
     ∃ e : ∀ (j : ℕ), j ≤ r →

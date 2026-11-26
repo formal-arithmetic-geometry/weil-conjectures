@@ -26,7 +26,7 @@ is induced by the inverse tensorator `F(P ⊗ T) ≅ F P ⊗ F T` of complexes
 We apply this to the pullback `f^*ᵃ[l]` of `ℓ`-adic sheaves along an arbitrary morphism of
 schemes: it preserves flat objects (`AlgebraicGeometry.ProEtale.adicUpperStar_preservesFlat`),
 since it preserves K-flat complexes. This is the ordinary side of the comparison of the native
-and the ordinary pullback/tensor comparisons (blueprint: fix-prop-projection-formula).
+and the ordinary pullback/tensor comparisons used in the projection formula.
 -/
 
 @[expose] public noncomputable section

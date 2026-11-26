@@ -11,9 +11,22 @@ import all WeilConjectures.SmoothPurity.Coefficient.CoefficientEvaluationTensorN
 import WeilConjectures.TraceFormula.Integral.IntegralComparisonRealizationModels
 import all WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps
 
-/-! The adjacent transition square for the normalized coherent tensor tower.
+/-! # The adjacent transition square for the coherent tensor tower
 
-Source: Stacks 0941 and 07A4 (blueprint: lem-pur-completed-pullback-tower-level-transition).
+Consecutive level components `pullbackTensorTensorTowerLevel` of the coherent tensor tower
+comparison commute with the quotient transitions `n + 1 → n`.
+
+## Implementation details
+
+The proof first compares reduction evaluation with the quotient transition, using that the
+finite scalar-extension unit sends `x` to `1 ⊗ x` and that local surjectivity of the
+completion projection lets the scalar adjunction detect equality on the unit. It then
+evaluates the defining factors of the level comparison on homogeneous pure tensors, and
+finally reduces equality of cochain maps to finite homogeneous tensor generators.
+
+## References
+
+* Stacks Project, Tags 0941 and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -434,30 +447,7 @@ private theorem reductionInverse_transition_section (W : Scheme.{u})
   exact (congrArg (fun z ↦ (((a n).inv.f k).val.app U) z) hc).symm.trans hh
 
 /-- Consecutive components of the normalized tensor tower comparison commute with the
-actual quotient transitions `n + 1 → n`.
-Source: Stacks 0941 and 07A4 (blueprint: lem-pur-completed-pullback-tower-level-transition).
-Proof: first compare reduction evaluation with the quotient transition. The finite
-scalar-extension unit sends x to 1 tensor x, so its consecutive transition is the
-next unit. Local surjectivity of the completion projection lets us regard each
-completed-linear map between finite modules as a finite-linear map. The scalar
-adjunction therefore detects equality on the unit. The specified transpose of
-reduction evaluation and the limit-cone identity prove the required square,
-degreewise; composing with the inverse isomorphisms proves the inverse square.
-
-Next evaluate the three defining factors of the level comparison on homogeneous
-pure tensors. The restriction/evaluation isomorphism identifies the section types,
-the normalized tensor-evaluation comparison evaluates each factor, and the total
-tensor map applies inverse reduction evaluation to each factor. Naturality of the
-sheafification unit and of the direct-sum inclusions shows that a horizontal
-restriction of a tensor generator restricts its two factors.
-
-Finally precompose by the inverse level comparison at n+1. Local surjectivity of
-the completion projection reduces equality to finite homogeneous tensor generators.
-Every evaluated section has a sequence-section preimage. On their generators the
-source transition restricts the two sequence sections; the inverse reduction
-square identifies these with their finite quotient transitions. The prescribed
-target tensor transition applies exactly these two transitions, proving equality
-on every summand and degree, hence equality of cochain maps. -/
+quotient transitions `n + 1 → n`. -/
 theorem pullbackTensorTensorTowerLevel_transition
     (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :

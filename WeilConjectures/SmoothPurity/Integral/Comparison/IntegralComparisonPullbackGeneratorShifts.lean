@@ -13,7 +13,12 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 import all WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import all WeilConjectures.PoincareDuality.Integral.IntegralPullbackStrictFiniteComponent
 
-/-! # Shift compatibility on the finite pullback generators -/
+/-! # Shift compatibility on the finite pullback generators
+
+## References
+
+* Stacks Project, Tags 03EL, 014E and 0941
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -182,28 +187,7 @@ def IntegralComparisonPullbackGeneratorEquation {X Y : Scheme.{u}} (f : X ⟶ Y)
         (((κ n).hom.f i).val.app (op U)
           (coefficientEvaluationSection l E Y (C.X i) n (op U) x))
 
-/-- Finite generator normalization fixes the signed Roos shift square.
-
-Source: Stacks 03EL, 014E and 0941; step 2 and the signed coordinate calculation
-in step 4 of lem-sf-integral-pullback-realization-shifts.
-(blueprint: lem-sf-integral-pullback-generator-shifts).
-
-Proof: conjugate q shifted by m by the ordinary termwise restriction and
-pullback shift isomorphisms. At coefficient level n in degree j, its value
-on the pullback unit generator is the old value in degree j+m, with kappa
-conjugated by exactly the finite termwise shifts. Thus it has the same
-specified generator values as q_m. The inverse-image adjunction and the
-universal property of sheafification show equality on every finite module;
-restriction along the quotient projection detects equality. Degreewise and
-levelwise extensionality identify the entire strict tower maps, including
-all transitions. The induced product square commutes after each projection.
-Apply the two mapping-cocone coordinate equations: the first coordinate has
-this product square and the second has the same square multiplied by
-(-1)^m. The two cocone inclusions jointly determine the chain map, proving
-the stated equality. No localization, realization model, reduction
-adjunction or K-flatness is needed for this calculation. For m=0 both
-comparisons are identity; for m=1 and m=-1 the second coordinate changes
-sign. Zero complexes and zero finite quotients obey the same formulas. -/
+/-- Finite generator normalization fixes the signed Roos shift square. -/
 theorem integralComparisonPullbackGenerator_shift {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (scalarReductionSource l E Y) ℤ)
     (C : CochainComplex (coefficientSequenceModules l E Y) ℤ)

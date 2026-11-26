@@ -44,8 +44,20 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Coherence of the canonical finite tensor/pullback comparison
 
-Source: Stacks 07A4, lemma-pullback-tensor-product, with the prescribed
-coefficient conventions (blueprint: def-pur-finite-pullback-tensor-comparison).
+We prove that the canonical finite comparison `f^*(M ⊗^L N) ≅ f^*M ⊗^L f^*N` is compatible
+with the associators, unitors, signed braidings and composition of pullbacks.
+
+## Implementation details
+
+The canonical comparison is the small-site specialization of
+`ringedTopoiCanonicalDerivedTensorComparison` with the prescribed unit-normalized realization;
+its K-flat square is `proEtaleCanonicalTensorPullback`. The coherence equations are checked on
+simultaneous flat K-flat representatives, where both routes are given by explicit formulas on
+local sections, and then localized.
+
+## References
+
+* Stacks Project, Tags 00YV, 03EL, 06YS, 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -222,11 +234,7 @@ section FiniteCanonical
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The canonical finite tensor comparison, using the small-site specialization of
-ringedTopoiCanonicalDerivedTensorComparison and the prescribed unit-normalized
-realization. Its K-flat square is proEtaleCanonicalTensorPullback; the tensor
-representative comparisons are exactly finiteIntrinsicTensorModels.
-Source: Stacks 07A4 (blueprint: def-pur-finite-pullback-tensor-comparison). -/
+/-- The canonical finite tensor comparison `f^*(M ⊗^L N) ≅ f^*M ⊗^L f^*N`. -/
 def canonicalFinitePullbackTensor {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :
@@ -236,12 +244,7 @@ def canonicalFinitePullbackTensor {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
 -- Keep the constructed comparison sealed while elaborating its coherence equations.
 attribute [local irreducible] canonicalFinitePullbackTensor
 
-/-- Associativity is the tensor-functor square for the actual comparison μ.
-Source: Stacks 07A4, signed-total proof (blueprint: def-pur-finite-pullback-tensor-comparison).
-Proof: choose simultaneous flat K-flat representatives for the three inputs.
-Both routes carry the pullback of (x tensor y) tensor z to
-f*x tensor (f*y tensor f*z), with the same total differential. Localize the
-strict equality and use the recorded representative comparisons. -/
+/-- Associativity is the tensor-functor square for the actual comparison μ. -/
 theorem canonicalFinitePullbackTensor_associativity {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -280,12 +283,7 @@ theorem canonicalFinitePullbackTensor_associativity {X Y : Scheme.{u}}
   unfold canonicalFinitePullbackTensor
   exact NatTrans.congr_app hab (M, N, P)
 
-/-- The unit comparison is uniquely determined by the two unit squares on μ.
-Source: Stacks 03EL and 07A4 (blueprint: def-pur-finite-pullback-tensor-comparison).
-Proof: on module representatives the unit map identifies f*O_Y with O_X by
-sending the inverse-image unit to 1. The two squares hold on pure tensors;
-localization gives the displayed squares. For uniqueness, take M to be the
-unit, and cancel the unitors and the invertible tensor comparison. -/
+/-- The unit comparison is uniquely determined by the two unit squares on μ. -/
 theorem canonicalFinitePullbackTensor_unit {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -342,12 +340,7 @@ theorem canonicalFinitePullbackTensor_unit {X Y : Scheme.{u}}
     exact unitMap_unique F μ ε' ε (fun M ↦ (hε' M).2)
       (fun M ↦ NatTrans.congr_app hR M)
 
-/-- Composition of pullbacks acts on the same canonical tensor comparison.
-Source: Stacks 07A4 and 00YV (blueprint: def-pur-finite-pullback-tensor-comparison).
-Proof: on flat K-flat representatives both sides are the sheaf pullback tensor
-map for h followed by that for f, with the canonical adjunction composition
-inserted. The unit formulas for the inverse images agree on every local
-section. Totalize and localize this equality. -/
+/-- Composition of pullbacks acts on the same canonical tensor comparison. -/
 theorem canonicalFinitePullbackTensor_composition {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -389,8 +382,7 @@ theorem canonicalFinitePullbackTensor_composition {X Y Z : Scheme.{u}}
   unfold canonicalFinitePullbackTensor
   exact NatTrans.congr_app hab (M, N)
 
-/-- Proposition form of the finite associativity equation, for use by the main statement.
-Source: Stacks 07A4 (blueprint: def-pur-finite-pullback-tensor-comparison). -/
+/-- Proposition form of the finite associativity equation. -/
 def canonicalFinitePullbackTensor_associativity_condition
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -413,8 +405,7 @@ def canonicalFinitePullbackTensor_associativity_condition
         ((finiteDerivedPullback l E n f).obj N)
         ((finiteDerivedPullback l E n f).obj P)).hom
 
-/-- Proposition form of the finite unit equation, for use by the main statement.
-Source: Stacks 03EL, 07A4 (blueprint: def-pur-finite-pullback-tensor-comparison). -/
+/-- Proposition form of the finite unit equation. -/
 def canonicalFinitePullbackTensor_unit_condition
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -438,8 +429,7 @@ def canonicalFinitePullbackTensor_unit_condition
       (finiteDerivedPullback l E n f).map
         ((finiteIntrinsicClosed l E Y n).monoidal.rightUnitor M).hom)
 
-/-- Proposition form of finite pullback composition, for use by the main statement.
-Source: Stacks 07A4 (blueprint: def-pur-finite-pullback-tensor-comparison). -/
+/-- Proposition form of finite pullback composition. -/
 def canonicalFinitePullbackTensor_composition_condition
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Z ⟶ X) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -467,11 +457,7 @@ section FiniteSymmetry
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The canonical finite comparison commutes with the signed derived braiding.
-Source: Stacks 07A4 and 06YS (blueprint: def-pur-finite-pullback-tensor-comparison).
-Proof: on homogeneous generators of degrees p,q both composites send the
-pullback of x tensor y to (-1)^(pq) f*y tensor f*x. The representative
-normalizations and K-flat descent give the displayed equation for all inputs. -/
+/-- The canonical finite comparison commutes with the signed derived braiding. -/
 theorem canonicalFinitePullbackTensor_braiding {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
@@ -509,8 +495,7 @@ theorem canonicalFinitePullbackTensor_braiding {X Y : Scheme.{u}} (f : X ⟶ Y) 
   exact NatTrans.congr_app hab (M,N)
 end FiniteSymmetry
 
-/-- Proposition form of finite signed braiding, for use by the main statement.
-Source: Stacks 06YS, 07A4 (blueprint: def-pur-finite-pullback-tensor-comparison). -/
+/-- Proposition form of finite signed braiding. -/
 def canonicalFinitePullbackTensor_braiding_condition
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

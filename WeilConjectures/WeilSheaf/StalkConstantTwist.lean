@@ -19,8 +19,7 @@ relative to `𝔽_{qᵐ}` is `bᵐ` times that of `F`.
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_constantTwist`: at a closed point of degree
-  `m`, the stalk of `F ⊗ 𝓑_b` is the stalk of `F` with its local Frobenius multiplied by `bᵐ`
-  (blueprint: `proposition-twisting-weight-zero-adding-dual--2`).
+  `m`, the stalk of `F ⊗ 𝓑_b` is the stalk of `F` with its local Frobenius multiplied by `bᵐ`.
 -/
 
 @[expose] public section
@@ -142,8 +141,7 @@ lemma nonempty_equiv_stalkAt_constantTwist (F : WeilSheaf k₀ l X) (b : (PadicA
       (M := F.stalkAt s m hs) (pow_ne_zero _ b.ne_zero) v).symm)⟩
 
 /-- At a closed point `x` of degree `m`, the stalk of the constant twist `F ⊗ 𝓑_b` is the stalk
-of `F` with its local Frobenius multiplied by `bᵐ`. (blueprint:
-`proposition-twisting-weight-zero-adding-dual--2`) -/
+of `F` with its local Frobenius multiplied by `bᵐ`. -/
 theorem nonempty_equiv_stalk_constantTwist (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ)
     (x : X.finitePoints) :
     Nonempty (((F.constantTwist b).stalk x).Equiv ((F.stalk x).rescale

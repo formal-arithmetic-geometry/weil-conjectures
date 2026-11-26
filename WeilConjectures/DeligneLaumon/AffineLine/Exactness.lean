@@ -35,8 +35,8 @@ Purity of the middle term is not needed: only the outer two terms enter the weig
 The curve is assumed separated, quasi-compact and geometrically connected over `k₀`, the
 hypotheses under which boundary semicontinuity
 (`AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`) is stated; quasi-compactness
-is also needed for the derived direct image `Rj_*` to be defined. The blueprint reduces the
-general case to this one by restricting to a connected affine neighbourhood of the missing point
+is also needed for the derived direct image `Rj_*` to be defined. The general case reduces to
+this one by restricting to a connected affine neighbourhood of the missing point
 and replacing `k₀` by its algebraic closure in the function field; neither the compatibility of
 `j_*` and `R¹j_*` with restriction to opens nor the change of the base field of Weil sheaves is
 available, and the case needed (`C₀ = 𝔸¹_{k₀}`) satisfies these hypotheses.

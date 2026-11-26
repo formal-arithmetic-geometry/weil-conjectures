@@ -15,12 +15,13 @@ import all WeilConjectures.SmoothPurity.Finite.FiniteSystemPullbackCoherence
 
 /-! # Scalar extension carries the integral pullback compositor: heterogeneous-equality lemmas
 
-Source: Stacks Project, Tags 06YY, 07A4, 0941 and 0D6D; Bhatt--Scholze, Lemma 3.5.7
-(blueprint: lem-pod-integral-pullback-composition-scalar).
+For a coefficient inclusion `E ⟶ L`, completed scalar extension carries the specified
+integral composition comparison at `E` to the one at `L`, conjugated by the canonical
+scalar/pullback comparisons.
 
-For a coefficient inclusion E to L, completed scalar extension carries the specified
-integral composition comparison at E to the one at L, conjugated by the canonical
-scalar/pullback comparisons. Both sides are compared after the fully faithful coherent
+## Implementation details
+
+Both sides are compared after the fully faithful coherent
 reduction at L: the system-level composition clause of integralPullbackComposition at
 E and at L, the system scalar comparison, the pullback/scalar square of
 scalarExtensionTowerCoherence, and whole-system mixed coherence.
@@ -28,6 +29,11 @@ The rationalized statement follows by localization on pure tensors.
 
 This file holds the compositor/derived heterogeneous-equality lemmas used by
 IntegralPullbackCompositionScalar.
+
+## References
+
+* Stacks Project, Tags 06YY, 07A4, 0941, 0D6D
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 3.5.7
 -/
 
 @[expose] public noncomputable section
@@ -47,9 +53,7 @@ section Composition
 universe v₁ v₂ v₃ w₁ w₂ w₃ in
 /-- Mates under equal right adjoints, stated across two presentations of the categories:
 if the right-adjoint data agree up to the displayed equalities and the two mates agree,
-then the left-adjoint comparisons agree. Source: elementary category theory
-(blueprint: lem-pod-integral-pullback-composition-scalar). Proof: substitute all
-equalities and use injectivity of conjugateIsoEquiv. -/
+then the left-adjoint comparisons agree. -/
 private theorem compositor_heq {C C' : Type w₁} {D D' : Type w₂} {F F' : Type w₃}
     {iC : Category.{v₁} C} {iD : Category.{v₂} D} {iF : Category.{v₃} F}
     {iC' : Category.{v₁} C'} {iD' : Category.{v₂} D'} {iF' : Category.{v₃} F'}
@@ -86,10 +90,7 @@ private theorem compositor_heq {C C' : Type w₁} {D D' : Type w₂} {F F' : Typ
 -- own presentations, so no cross-presentation unification is needed.
 /-- The ordinary composition comparisons of finite-system and integral-comparison inverse
 image agree (heterogeneous form): both are the conjugate of the same sectionwise
-fibre-product comparison.
-Source: Stacks 03D8, 0D6D (blueprint: lem-pod-integral-pullback-composition-scalar).
-Proof: the direct images agree definitionally; apply compositor_heq to the two
-defining mate equations and compare the direct-image composites sectionwise. -/
+fibre-product comparison. -/
 theorem finiteSystemComposition_heq_integralComparison {V W Z : Scheme.{u}}
     (h : Z ⟶ W) (k : W ⟶ V) :
     HEq (finiteSystemComposition (integralSystemRings l E) (integralSystemTransition l E) h k)
@@ -135,9 +136,7 @@ theorem finiteSystemComposition_heq_integralComparison {V W Z : Scheme.{u}}
   exact (e1.2 M U.unop.1 U.unop.2 x).trans (e2.2 M U.unop.1 U.unop.2 x).symm
 
 /-- The ordinary composition comparisons of finite-system and integral-comparison inverse
-image agree: both are the conjugate of the same sectionwise fibre-product comparison.
-Source: Stacks 03D8, 0D6D (blueprint: lem-pod-integral-pullback-composition-scalar).
-Proof: finiteSystemComposition_heq_integralComparison. -/
+image agree: both are the conjugate of the same sectionwise fibre-product comparison. -/
 theorem finiteSystemComposition_eq_integralComparison {V W Z : Scheme.{u}}
     (h : Z ⟶ W) (k : W ⟶ V) :
     finiteSystemComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
@@ -145,8 +144,7 @@ theorem finiteSystemComposition_eq_integralComparison {V W Z : Scheme.{u}}
   eq_of_heq (finiteSystemComposition_heq_integralComparison l E h k)
 
 universe v₁ v₂ v₃ w₁ w₂ w₃ t₁ t₂ t₃ in
-/-- Derived composition comparisons across two presentations. Source: elementary
-(blueprint: lem-pod-integral-pullback-composition-scalar). Proof: substitute. -/
+/-- Derived composition comparisons across two presentations. -/
 private theorem derivedCompositor_heq {C C' : Type w₁} {D D' : Type w₂} {E' E'' : Type w₃}
     [iC : Category.{v₁} C] [iC' : Category.{v₁} C'] [iD : Category.{v₂} D]
     [iD' : Category.{v₂} D'] [iE : Category.{v₃} E'] [iE' : Category.{v₃} E'']
@@ -239,9 +237,7 @@ private theorem finiteSystemPullback_heq_integralComparison {X Y : Scheme.{u}} (
   apply HEq.rfl
 
 /-- The finite-system composition comparison of integral pullback is the whole-system
-comparison of the integral comparison sequence systems.
-Source: Stacks 03D8, 0D6D (blueprint: lem-pod-integral-pullback-composition-scalar).
-Proof: both are the localizations of the same ordinary comparison. -/
+comparison of the integral comparison sequence systems. -/
 theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}}
     (h : Z ⟶ W) (k : W ⟶ V) :
     finiteSystemDerivedComposition (integralSystemRings l E) (integralSystemTransition l E) h k =

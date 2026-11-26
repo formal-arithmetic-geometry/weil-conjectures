@@ -18,13 +18,14 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 For a ring homomorphism `f : R →+* S`, an `R`-module `M` and an `S`-module `P` we construct the
 natural isomorphism `M ⊗_R P ≅ (S ⊗_R M) ⊗_S P` of `R`-modules
 (`ModuleCat.tensorRestrictScalarsIso`) and deduce, for `M` flat and a complex `N` of `S`-modules,
-`M ⊗ᴸ_R N ≅ (S ⊗_R M) ⊗ᴸ_S N` in `D(R)` (`DerivedCategory.changeOfRingsTensorIso`, blueprint
-`lem-kun-change-of-rings-tensor`).
+`M ⊗ᴸ_R N ≅ (S ⊗_R M) ⊗ᴸ_S N` in `D(R)` (`DerivedCategory.changeOfRingsTensorIso`).
 
-For a homomorphism of commutative rings `f : R →+* S`, a flat `R`-module `M` and a complex `N`
-of `S`-modules, `M ⊗ᴸ_R N ≅ (S ⊗_R M) ⊗ᴸ_S N` in `D(R)`
-(`DerivedCategory.changeOfRingsTensorIso`, blueprint `lem-kun-change-of-rings-tensor`). The
-module-level input is `ModuleCat.tensorRestrictScalarsIso`: `M ⊗_R P ≅ (S ⊗_R M) ⊗_S P`.
+## Implementation details
+
+Both derived tensor products are computed termwise, `M` and `S ⊗_R M` being flat, and
+`M ⊗_R N^i ≅ (S ⊗_R M) ⊗_S N^i` (`ModuleCat.tensorRestrictScalarsIso`). The case of interest is
+`R = ℤ/n`, `S = ℤ/ℓ` (`ℓ` a prime dividing `n`) and `N` a complex of `R`-modules annihilated by
+`ℓ`, i.e. a complex of `𝔽_ℓ`-vector spaces; there `S ⊗_R M ≅ M/ℓM`.
 -/
 
 @[expose] public section
@@ -98,16 +99,9 @@ namespace DerivedCategory
 variable {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S)
   [HasDerivedCategory.{u} (ModuleCat.{u} R)] [HasDerivedCategory.{u} (ModuleCat.{u} S)]
 
-/-- Blueprint `lem-kun-change-of-rings-tensor`: change of rings for the derived tensor
-product. Let `f : R →+* S` be a homomorphism of commutative rings, `M` a flat `R`-module and `N`
-a complex of `S`-modules, viewed as a complex of `R`-modules by restriction of scalars. Then
-`M ⊗ᴸ_R N ≅ (S ⊗_R M) ⊗ᴸ_S N` canonically in `D(R)`: both derived tensor products are computed
-termwise, `M` and `S ⊗_R M` being flat, and `M ⊗_R N^i ≅ (S ⊗_R M) ⊗_S N^i`
-(`ModuleCat.tensorRestrictScalarsIso`).
-
-The blueprint states the case `R = ℤ/n`, `S = ℤ/ℓ` (`ℓ` a prime dividing `n`) and `N` a complex
-of `R`-modules annihilated by `ℓ`, i.e. a complex of `𝔽_ℓ`-vector spaces; there
-`S ⊗_R M ≅ M/ℓM`. -/
+/-- Change of rings for the derived tensor product: let `f : R →+* S` be a homomorphism of
+commutative rings, `M` a flat `R`-module and `N` a complex of `S`-modules, viewed as a complex of
+`R`-modules by restriction of scalars. Then `M ⊗ᴸ_R N ≅ (S ⊗_R M) ⊗ᴸ_S N` canonically in `D(R)`. -/
 noncomputable def changeOfRingsTensorIso (M : ModuleCat.{u} R) [Module.Flat R M]
     (N : CochainComplex (ModuleCat.{u} S) ℤ) :
     (singleFunctor _ 0).obj M ⊗ (ModuleCat.restrictScalars f).mapDerivedCategory.obj (Q.obj N) ≅

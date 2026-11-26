@@ -10,7 +10,21 @@ import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorPresentationExisten
 
 /-! # Localizing the native open tensor comparison
 
-Source: Stacks 0GL1, 06YN; steps 3--6 of the native open tensor proof.
+The sheaf-level open tensor comparisons are totalized and localized to the unbounded native
+derived categories.
+
+## Implementation details
+
+The fixed sheaf comparison and its inverse are applied in every bidegree; the signed
+differential `dx ⊗ y + (-1)^p x ⊗ dy` makes these natural chain isomorphisms. Extension by
+zero and restriction preserve flat terms and K-flatness, hence the resolving subcategories of
+flat-term equivariant K-flat resolutions on the twisted action site, so the chain comparisons
+localize; the native K-flat tensor models give the two representative normalization squares of
+`OpenTensorPresentation`.
+
+## References
+
+* Stacks Project, Tags 0GL1 and 06YN.
 -/
 
 @[expose] public noncomputable section
@@ -40,34 +54,9 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
 
 -- The dependent presentation fields require a larger elaboration budget.
-/-- Totalize the fixed sheaf maps and descend them, with the prescribed models,
-to the unbounded ambient derived categories.
-
-Source: Stacks 0GL1 and 06YN; native open tensor proof steps 3--6
-(blueprint: lem-sf-native-open-tensor-localization).
-
-Proof: Apply the fixed sheaf comparison and its inverse in every bidegree. The
-coproducts are created by forgetting Weil structures. The signed differential
-calculation dx tensor y + (-1)^p x tensor dy makes these maps natural chain
-isomorphisms and pins every summand to s.sheafGamma. Totalize s.sheafRestriction
-in the same way, pinning every restriction summand. Use the twisted action-site
-presentation and its flat-term equivariant K-flat resolutions. Its coefficients
-agree with the native locally finite coefficient functions: finitely many
-spanning values lie in a finite subextension, and a quasi-compact test object
-needs only finitely many such neighborhoods. The finite compositum gives the
-same coefficient sheaf. Check flat terms in the two functors as well as the
-K-flatness already recorded in s. For extension, restrict a short exact sequence,
-tensor with a flat sheaf, and extend. For restriction, extend a short exact
-sequence, tensor with a flat ambient sheaf, and restrict back using the open
-unit. The sheaf tensor comparisons identify these sequences, proving flatness.
-Thus both exact functors preserve the resolving subcategories. Localize the
-natural chain comparisons and their inverses in each variable. The native
-K-flat tensor models and exact-functor factorization isomorphisms give precisely
-the two representative normalization squares in OpenTensorPresentation. The
-localization universal property supplies naturality on all derived objects,
-independence of resolutions, and the inverse identities. Record the actual
-native functors, K-flat predicates, models and insertions as the remaining
-fields; their compatibility equalities are reflexive. -/
+/-- The fixed sheaf comparisons, totalized and descended to the unbounded ambient derived
+categories, give derived comparisons `rho` and `gamma` and an open tensor presentation whose
+fields are the native functors, K-flat predicates, models and insertions. -/
 theorem native_open_tensor_localization (s : NativeOpenTensorData k₀ l j) :
     ∃ (rho : nativeDerivedTensor k₀ l Z ⋙ nativeOpenPull k₀ l j ≅
         (nativeOpenPull k₀ l j).prod (nativeOpenPull k₀ l j) ⋙ nativeDerivedTensor k₀ l U)

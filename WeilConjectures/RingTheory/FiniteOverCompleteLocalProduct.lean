@@ -17,8 +17,12 @@ import Mathlib.RingTheory.Ideal.GoingUp
 
 /-! # Finite algebras over complete local rings
 
-Source: literature/stacks-project/algebra.tex, Lemma Tag 0325
-(blueprint: lem-weil-pbc-finite-over-complete-local-product)
+A finite algebra over a complete Noetherian local ring is a finite product of complete
+Noetherian local rings.
+
+## References
+
+* [Stacks, Tag 0325]
 -/
 
 @[expose] public section
@@ -27,35 +31,10 @@ universe u v
 
 namespace Algebra
 
-/-- A finite algebra over a complete Noetherian local ring is a finite product of
-complete Noetherian local rings, with the domain case as stated in Tag 0325.
-
-Proof:
-1. A finite algebra over a Noetherian ring is Noetherian (`IsNoetherianRing.of_finite`).
-2. Put `m = maximalIdeal R`, `L = R_m` and `C = AdicCompletion (maximalIdeal L) L`.
-   Every denominator of `L` is a unit in `R`, giving `R ≃ₐ[R] L`. Transport maximal
-   ideals and adic completeness along this equivalence. The canonical completion
-   equivalence of `L` therefore gives `R ≃ₐ[R] C`.
-3. Apply `completion_finite_extension` at `m`. Its factors `D q` are the maximal-ideal
-   completions of `S_q`, indexed by the finite type of primes over `m`. Tensoring the
-   equivalence of step 2 with `S` and composing with the completion product equivalence
-   gives `S ≃ₐ[R] ∀ q, D q`. Each maximal ideal of `S` contracts to `m` by integrality;
-   the resulting injection into the primes over `m` proves finiteness of maximal ideals.
-4. Every `S_q` is Noetherian and local. Its completion is Noetherian by
-   `AdicCompletion.isNoetherianRing`, and local and complete by Mathlib's completion
-   instances. Reindex the product by `Fin (Fintype.card Q)`. An empty index type gives
-   the zero ring, so no nontriviality hypothesis on `S` is needed here.
-5. If `S` is a domain, the index type is nonempty: an empty product would force `1 = 0`.
-   If two indices were distinct, their characteristic and complementary characteristic
-   functions would give two nonzero elements with zero product. Transport them back
-   to `S` to contradict the domain hypothesis. Thus the index type has exactly one
-   element, and evaluation gives a ring equivalence `S ≃+* D q`.
-6. Transport localness and completeness along this ring equivalence. The maximal ideal
-   contracts to `m` by integrality. Every prime over `m` is maximal by integrality, and
-   hence equals the unique maximal ideal of `S`.
-Source: literature/stacks-project/algebra.tex, Lemma Tag 0325
-(blueprint: lem-weil-pbc-finite-over-complete-local-product)
--/
+/-- A finite algebra over a complete Noetherian local ring is Noetherian, has finitely many
+maximal ideals, and is a finite product of complete Noetherian local rings. If it is a domain,
+it is itself a complete Noetherian local ring whose maximal ideal is the only prime over the
+maximal ideal of the base. -/
 theorem finite_over_complete_local_product
     (R : Type u) (S : Type v) [CommRing R] [CommRing S]
     [IsNoetherianRing R] [IsLocalRing R]

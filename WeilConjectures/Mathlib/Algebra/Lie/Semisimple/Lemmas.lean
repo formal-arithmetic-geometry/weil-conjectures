@@ -17,20 +17,6 @@ A finite-dimensional Lie algebra over a field of characteristic zero which admit
 semisimple finite-dimensional representation is *reductive*: its radical is central, and the
 algebra is the sum of its centre and its derived subalgebra.
 
-Mathlib does not (yet) have a `LieModule.IsSemisimple` class, so "`M` is a semisimple
-representation of `L`" is spelled here as `ComplementedLattice (LieSubmodule k L M)`, i.e. the
-lattice of Lie submodules of `M` is complemented; `LieModule.IsSemisimple` below is an `abbrev`
-for that. This mirrors `IsSemisimpleModule`, which is by definition
-`ComplementedLattice (Submodule R M)`.
-
-The two halves are stated separately, and each under the hypotheses it needs. Centrality of the
-radical matches Mathlib's irreducible case
-`LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful`, including its
-`[LieModule.IsTriangularizable k L M]` hypothesis; like that lemma it cannot be an instance,
-because the representation `M` does not appear in the conclusion. The reductive decomposition
-`L = Z(L) + [L, L]` needs no module at all: it holds for every finite-dimensional
-characteristic-zero Lie algebra with central radical.
-
 ## Main declarations
 
 * `LieModule.IsSemisimple`: `M` is a semisimple representation of `L`.
@@ -45,13 +31,26 @@ characteristic-zero Lie algebra with central radical.
 * `LieAlgebra.radical_eq_center_and_center_sup_derivedSeries_eq_top`: both conclusions for a
   Lie algebra with a faithful semisimple finite-dimensional representation.
 
-## Blueprint
+## Implementation details
 
-`LieAlgebra.hasCentralRadical_of_isFaithful` and `LieAlgebra.center_sup_derivedSeries_eq_top`
-implement `proposition-lie-algebras-faithful-semisimple-representation`. The first also implements
-`proposition-lie-algebras-faithful-semisimple-representation--1`;
-`LieAlgebra.hasTrivialRadical_quotient_center` together with the second implements
-`proposition-lie-algebras-faithful-semisimple-representation--2`.
+Mathlib does not (yet) have a `LieModule.IsSemisimple` class, so "`M` is a semisimple
+representation of `L`" is spelled here as `ComplementedLattice (LieSubmodule k L M)`, i.e. the
+lattice of Lie submodules of `M` is complemented; `LieModule.IsSemisimple` below is an `abbrev`
+for that. This mirrors `IsSemisimpleModule`, which is by definition
+`ComplementedLattice (Submodule R M)`.
+
+The two halves are stated separately, and each under the hypotheses it needs. Centrality of the
+radical matches Mathlib's irreducible case
+`LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful`, including its
+`[LieModule.IsTriangularizable k L M]` hypothesis; like that lemma it cannot be an instance,
+because the representation `M` does not appear in the conclusion. The reductive decomposition
+`L = Z(L) + [L, L]` needs no module at all: it holds for every finite-dimensional
+characteristic-zero Lie algebra with central radical.
+
+On an irreducible summand of `M` the radical acts by scalars, so `⁅L, rad L⁆` acts as zero and
+vanishes by faithfulness. For the decomposition, the quotient `L ⧸ Z(L)` has trivial radical (the
+inverse image of an abelian ideal is solvable, hence contained in `rad L = Z(L)`), so its Killing
+form is non-degenerate and it is perfect; lifting brackets gives `L = Z(L) + [L, L]`.
 -/
 
 @[expose] public section
@@ -71,8 +70,7 @@ variable (k L M : Type*) [Field k] [CharZero k] [LieRing L] [LieAlgebra k L] [Mo
 
 /-- On an irreducible finite-dimensional module `M` over a field of characteristic zero on which
 `L` acts triangularizably, the radical of `L` acts by scalars, so every bracket `⁅x, y⁆` with
-`y ∈ radical k L` acts as zero. The module need not be faithful.
-(blueprint: part of `proposition-lie-algebras-faithful-semisimple-representation--1`) -/
+`y ∈ radical k L` acts as zero. The module need not be faithful. -/
 lemma toEnd_lie_eq_zero_of_mem_radical [IsIrreducible k L M] [IsTriangularizable k L M] (x : L)
     {y : L} (hy : y ∈ LieAlgebra.radical k L) :
     toEnd k L M ⁅x, y⁆ = 0 := by
@@ -98,10 +96,7 @@ end LieModule
 namespace LieAlgebra
 
 /-- A finite-dimensional Lie algebra over a field of characteristic zero admitting a faithful
-semisimple finite-dimensional representation `M` has central radical: on each irreducible
-summand of `M` the bracket `⁅L, rad L⁆` acts as zero, so it vanishes by faithfulness.
-(blueprint: `proposition-lie-algebras-faithful-semisimple-representation`,
-`proposition-lie-algebras-faithful-semisimple-representation--1`) -/
+semisimple finite-dimensional representation `M` has central radical. -/
 theorem hasCentralRadical_of_isFaithful (k L M : Type*) [Field k] [CharZero k]
     [LieRing L] [LieAlgebra k L] [Module.Finite k L]
     [AddCommGroup M] [Module k M] [LieRingModule L M] [LieModule k L M] [Module.Finite k M]
@@ -139,9 +134,7 @@ private lemma mkCenter_eq_zero_iff {k L : Type*} [CommRing k] [LieRing L] [LieAl
   LieSubmodule.Quotient.mk_eq_zero (center k L)
 
 /-- If the radical of a finite-dimensional Lie algebra `L` over a field is central, then the
-quotient `L ⧸ Z(L)` has trivial radical: the inverse image of an abelian ideal of the quotient is
-solvable, hence contained in `rad L = Z(L)`.
-(blueprint: part of `proposition-lie-algebras-faithful-semisimple-representation--2`) -/
+quotient `L ⧸ Z(L)` has trivial radical. -/
 theorem hasTrivialRadical_quotient_center (k L : Type*) [Field k] [LieRing L] [LieAlgebra k L]
     [Module.Finite k L] [HasCentralRadical k L] :
     HasTrivialRadical k (L ⧸ center k L) := by
@@ -171,11 +164,7 @@ theorem hasTrivialRadical_quotient_center (k L : Type*) [Field k] [LieRing L] [L
   exact mkCenter_eq_zero_iff.mpr (hJZ ha)
 
 /-- A finite-dimensional Lie algebra over a field of characteristic zero whose radical is central
-is *reductive*: it is the sum of its centre `Z(L)` and its derived subalgebra `[L, L]`.
-The quotient `L ⧸ Z(L)` has trivial radical, so its Killing form is non-degenerate and it is
-perfect; lifting brackets gives the decomposition.
-(blueprint: `proposition-lie-algebras-faithful-semisimple-representation`,
-`proposition-lie-algebras-faithful-semisimple-representation--2`) -/
+is *reductive*: it is the sum of its centre `Z(L)` and its derived subalgebra `[L, L]`. -/
 theorem center_sup_derivedSeries_eq_top (k L : Type*) [Field k] [CharZero k]
     [LieRing L] [LieAlgebra k L] [Module.Finite k L] [HasCentralRadical k L] :
     center k L ⊔ derivedSeries k L 1 = ⊤ := by

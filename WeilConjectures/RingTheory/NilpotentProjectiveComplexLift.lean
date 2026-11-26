@@ -24,15 +24,25 @@ import WeilConjectures.RingTheory.NilpotentProjectiveModuleLift
 /-!
 # Lifting a prescribed projective complex through a nilpotent quotient
 
-Source: Stacks Project, More on Algebra, Tag 09AR, lemma-lift-complex-projectives
-(auxiliary; not a blueprint node).
+For a nilpotent ideal `I`, a bounded-above projective complex modelling the derived reduction of
+a complex `C` lifts to a projective complex representing `C`, as a complex and not merely as a
+derived object.
 
-The proof uses the ordinary-module filtration argument already proved in
-`NilpotentDerivedUpperBound`. Its public theorem is formulated on a one-object site;
-`import all` also makes its proved ordinary-module helper available here.
-The tensor API has equal ring and module universes. Restriction along the ring equivalence
-`ULift A ≃+* A` transports that API to the larger module universe of this statement.
-Uniqueness of universal derived functors handles the independently chosen derived categories.
+## Implementation details
+
+The class of all projective modules satisfies the lifting conditions of Stacks 0BCA: it is closed
+under sums and summands, nilpotence reflects surjectivity modulo `I`, and each term of `E` lifts
+to a projective module. The cohomology of `C` vanishes above an upper bound of `E`, by the
+ordinary-module filtration argument of `NilpotentDerivedUpperBound` (made available by
+`import all`), so `C` has a bounded-above projective model. The tensor API has equal ring and
+module universes; restriction along `ULift A ≃+* A` transports it to the larger module universe
+of this statement, and uniqueness of universal derived functors handles the independently chosen
+derived categories.
+
+## References
+
+* [Stacks, Tag 09AR]
+* [Stacks, Tag 0BCA]
 -/
 
 @[expose] public section
@@ -427,29 +437,12 @@ private theorem surjective_of_nilpotent_reduction
   exact (Submodule.Quotient.mk_eq_zero S).mp hy
 
 /-- A bounded-above projective model of derived reduction lifts as a complex, not merely
-as a derived object. Source: Stacks Project, More on Algebra, Tag 09AR
-(auxiliary; not a blueprint node).
+as a derived object.
 
 The functor `L`, with its universal counit `ε`, is the total left derived functor of
-termwise extension of scalars, as in `lem-pur-derived-change-of-rings` on the one-object
-site. Thus `L.obj C` is `C ⊗ᴸ A/I`; no boundedness of `C` is assumed.
-Extension of scalars along the quotient map is canonically the termwise quotient by `I`.
-
-Proof:
-1. Take the class of all projective A-modules. The lifting property of
-   `def-weil-pbc-projective-module` gives closure under sums and summands. If T/IT = 0,
-   then T = IT = ... = I^N T = 0. Apply this to a cokernel to see that a map which is
-   surjective modulo I is surjective. These verify conditions (1), (2), (3) of Tag 0BCA.
-2. By `lem-weil-pbc-nilpotent-projective-module-lift`, lift every E^i to a projective
-   A-module. Together with the upper bound on E, this verifies condition (4).
-3. Choose an upper bound b on E. Its cohomology vanishes above b, hence so does that
-   of the derived reduction of C. By `lem-weil-pbc-nilpotent-derived-upper-bound`, the
-   cohomology of C vanishes above b as well.
-4. Apply `lem-weil-pbc-bounded-above-projective-model` to obtain a bounded-above
-   projective representative of C, verifying condition (5), without assuming
-   pseudo-coherence or finite Tor amplitude.
-5. Apply `lem-sc-complex-lift-class-projective`. It supplies P representing C and a
-   complex isomorphism between its termwise reduction and the prescribed E. -/
+termwise extension of scalars on the one-object site. Thus `L.obj C` is `C ⊗ᴸ A/I`; no
+boundedness of `C` is assumed. Extension of scalars along the quotient map is canonically the
+termwise quotient by `I`. -/
 theorem exists_projective_lift_of_nilpotent
     (A : Type u) [CommRing A] (I : Ideal A)
     (hI : ∃ N : ℕ, 1 ≤ N ∧ I ^ N = ⊥)

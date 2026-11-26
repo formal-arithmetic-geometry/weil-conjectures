@@ -18,12 +18,12 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 Let `a : X ⟶ S` admit a compactification, `ω_X = Ra^! Λ_S` and `𝔻_X = RHom(-, ω_X)`. This file
 records the formal properties of the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`
 (`AlgebraicGeometry.Etale.verdierDualDoubleDual`) used in the dévissage proof of Verdier
-biduality (blueprint subsection `sk-prop-sf-biduality-general`).
+biduality.
 
 ## Main statements
 
-Blueprint `definition-verdier-dual-evaluation--4` (`δ` commutes with shifts and is a morphism of
-distinguished triangles), for a general coefficient category `A`:
+`δ` commutes with shifts and is a morphism of distinguished triangles, for a general coefficient
+category `A`:
 
 - `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_shift_iff`: `δ_{K⟦n⟧}` is an
   isomorphism if and only if `δ_K` is;
@@ -32,8 +32,7 @@ distinguished triangles), for a general coefficient category `A`:
 - `AlgebraicGeometry.Etale.verdierBidualityLocus_isTriangulated`: the complexes `K` with `δ_K`
   an isomorphism form a triangulated subcategory of `D(X_ét)`.
 
-Blueprints `corollary-verdier-exchange-formulas--5` and
-`lemma-internal-adjunction-two-exchange-formulas--4`, formal core:
+Compatibility of `δ` with the Verdier exchange formulas, formal core:
 
 - `CategoryTheory.MonoidalClosed.map_toIhomIhom_comp_dualComparison`: for a lax braided functor
   `G` and `e : G W ⟶ W'`, the comparison `G [X, W] ⟶ [G X, W']` carries `G δ_X` to `δ_{G X}`;
@@ -42,7 +41,7 @@ Blueprints `corollary-verdier-exchange-formulas--5` and
 - `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_of_surjective`: biduality descends
   along a surjective étale morphism once `Lj^* δ_K` is identified with `δ_{Lj^* K}`.
 
-## Implementation notes
+## Implementation details
 
 The exactness of `RHom(-, ω_X)` available in the repository
 (`AlgebraicGeometry.Etale.exists_distTriang_derivedHom_left`) only provides *some* third
@@ -64,8 +63,7 @@ adjunction (`CategoryTheory.Adjunction.isIso_unit_app_iff_of_iso`).
 
 ## TODO
 
-To deduce `corollary-verdier-exchange-formulas--5` and
-`lemma-internal-adjunction-two-exchange-formulas--4` from
+To deduce the compatibility of `δ` with the Verdier exchange formulas for `Lj^*` and `Rf_*` from
 `CategoryTheory.MonoidalClosed.mapToIhomIhomArrowIso`, two inputs are missing from the repository:
 
 - the derived pullback `Lg^*`, with its monoidal structure
@@ -93,8 +91,8 @@ namespace Adjunction
 
 variable {C D : Type*} [Category* C] [Category* D]
 
-/-- Blueprint `definition-verdier-dual-evaluation--4` (auxiliary): whether the unit of an adjunction
-is an isomorphism at an object only depends on the left adjoint up to isomorphism. -/
+/-- Whether the unit of an adjunction is an isomorphism at an object only depends on the left
+adjoint up to isomorphism. -/
 lemma isIso_unit_app_iff_of_iso {F₁ F₂ : C ⥤ D} {G₁ G₂ : D ⥤ C} (adj₁ : F₁ ⊣ G₁)
     (adj₂ : F₂ ⊣ G₂) (e : F₁ ≅ F₂) (X : C) :
     IsIso (adj₁.unit.app X) ↔ IsIso (adj₂.unit.app X) := by
@@ -115,11 +113,9 @@ namespace MonoidalClosed
 
 variable {C : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C] [MonoidalClosed C]
 
-/-- Blueprint `definition-verdier-dual-evaluation--4`: the double-dual morphism as a unit. The
-contravariant functor `[-, W]` is adjoint to itself on the right: maps `M ⟶ [X, W]`
+/-- The contravariant functor `[-, W]` is adjoint to itself on the right: maps `M ⟶ [X, W]`
 correspond to maps `X ⊗ M ⟶ W`, hence through the braiding to maps `M ⊗ X ⟶ W`, hence to maps
-`X ⟶ [M, W]`. Its unit is the double-dual map `CategoryTheory.MonoidalClosed.toIhomIhom`
-(`CategoryTheory.MonoidalClosed.ihomFlipSelfAdjunction_unit_app`). -/
+`X ⟶ [M, W]`. Its unit is the double-dual map `CategoryTheory.MonoidalClosed.toIhomIhom`. -/
 noncomputable def ihomFlipSelfAdjunction (W : C) :
     (internalHom.flip.obj W).rightOp ⊣ internalHom.flip.obj W :=
   Adjunction.mkOfHomEquiv
@@ -146,21 +142,15 @@ noncomputable def ihomFlipSelfAdjunction (W : C) :
         rw [uncurry_pre_app, uncurry_curry, uncurry_curry, uncurry_natural_left,
           BraidedCategory.braiding_naturality_left_assoc] }
 
-/-- Blueprint `definition-verdier-dual-evaluation--4`: the unit of the self-adjunction of `[-, W]`
-is the double-dual map `X ⟶ [[X, W], W]`. -/
+/-- The unit of the self-adjunction of `[-, W]` is the double-dual map `X ⟶ [[X, W], W]`. -/
 lemma ihomFlipSelfAdjunction_unit_app (W X : C) :
     (ihomFlipSelfAdjunction W).unit.app X = toIhomIhom W X := by
   change curry ((β_ _ X).hom ≫ uncurry (𝟙 _)) = _
   rw [uncurry_id_eq_ev]
   rfl
 
-/-- Blueprint `definition-verdier-dual-evaluation--4`, compatibility with shifts (formal core).
-Biduality relative to `W` is invariant under twisting by an invertible object: for `L`
-invertible, the double-dual map of `X ⊗ L` is an isomorphism if and only if that of `X` is.
-
-The functor `- ⊗ L` is an autoequivalence of `C`, `[-, L]` one of `Cᵒᵖ`, and internal currying
-`[X ⊗ L, W] ≅ [L, [X, W]]` intertwines them with `[-, W]`; the units of the two composite
-adjunctions are then isomorphisms at the same objects. -/
+/-- Biduality relative to `W` is invariant under twisting by an invertible object: for `L`
+invertible, the double-dual map of `X ⊗ L` is an isomorphism if and only if that of `X` is. -/
 theorem isIso_toIhomIhom_tensor_iff (W X : C) {L : C} (hL : IsInvertible L) :
     IsIso (toIhomIhom W (X ⊗ L)) ↔ IsIso (toIhomIhom W X) := by
   obtain ⟨L', ⟨e⟩, ⟨e'⟩⟩ := hL
@@ -194,18 +184,15 @@ section Functor
 variable {D : Type*} [Category* D] [MonoidalCategory D] [BraidedCategory D] [MonoidalClosed D]
   (G : C ⥤ D) [G.LaxBraided] {W : C} {W' : D} (e : G.obj W ⟶ W')
 
-/-- Blueprints `corollary-verdier-exchange-formulas--5` and
-`lemma-internal-adjunction-two-exchange-formulas--4`: the comparison
-`G [X, W] ⟶ [G X, G W] ⟶ [G X, W']` of duals along a lax monoidal functor `G` and a map
-`e : G W ⟶ W'`. For the derived direct image along a proper morphism and the trace `Rf_* ω_X ⟶ ω_Y`
-it is the Verdier exchange `Rf_* 𝔻_X ⟶ 𝔻_Y Rf_*`; for the restriction to an open subscheme and
-`j^* ω_Y ≅ ω_W` it is `j^* 𝔻_Y ⟶ 𝔻_W j^*`. -/
+/-- The comparison `G [X, W] ⟶ [G X, G W] ⟶ [G X, W']` of duals along a lax monoidal functor `G` and
+a map `e : G W ⟶ W'`. For the derived direct image along a proper morphism and the trace
+`Rf_* ω_X ⟶ ω_Y` it is the Verdier exchange `Rf_* 𝔻_X ⟶ 𝔻_Y Rf_*`; for the restriction to an open
+subscheme and `j^* ω_Y ≅ ω_W` it is `j^* 𝔻_Y ⟶ 𝔻_W j^*`. -/
 noncomputable def dualComparison (X : C) : G.obj ((ihom X).obj W) ⟶ (ihom (G.obj X)).obj W' :=
   (Functor.LaxMonoidal.ihomComparison G X).app W ≫ (ihom (G.obj X)).map e
 
-/-- Blueprints `corollary-verdier-exchange-formulas--5` and
-`lemma-internal-adjunction-two-exchange-formulas--4` (formal core): the double-dual map is
-compatible with lax braided functors: for `G` lax braided and `e : G W ⟶ W'`, the square
+/-- The double-dual map is compatible with lax braided functors: for `G` lax braided and
+`e : G W ⟶ W'`, the square
 ```
        G X ─────────── G δ_X ──────────→ G [[X, W], W]
         │                                     │
@@ -228,10 +215,8 @@ lemma map_toIhomIhom_comp_dualComparison (X : C) :
     BraidedCategory.braiding_naturality_left_assoc, MonoidalCategory.whiskerLeft_comp_assoc,
     ihom.ev_naturality, Functor.LaxMonoidal.ihomComparison_ev_assoc]
 
-/-- Blueprints `corollary-verdier-exchange-formulas--5` and
-`lemma-internal-adjunction-two-exchange-formulas--4`: if the dual comparisons of `X` and of `[X, W]`
-along a lax braided functor `G` are isomorphisms, then `G δ_X` is isomorphic, as an arrow, to the
-double-dual map of `G X` relative to `W'`. -/
+/-- If the dual comparisons of `X` and of `[X, W]` along a lax braided functor `G` are isomorphisms,
+then `G δ_X` is isomorphic, as an arrow, to the double-dual map of `G X` relative to `W'`. -/
 noncomputable def mapToIhomIhomArrowIso (X : C) [IsIso (dualComparison G e X)]
     [IsIso (dualComparison G e ((ihom X).obj W))] :
     Arrow.mk (G.map (toIhomIhom W X)) ≅ Arrow.mk (toIhomIhom W' (G.obj X)) :=
@@ -241,10 +226,8 @@ noncomputable def mapToIhomIhomArrowIso (X : C) [IsIso (dualComparison G e X)]
       (asIso ((pre (dualComparison G e X)).app W')).symm)
     (by simp [map_toIhomIhom_comp_dualComparison_assoc])
 
-/-- Blueprints `corollary-verdier-exchange-formulas--5` and
-`lemma-internal-adjunction-two-exchange-formulas--4`: if the dual comparisons of `X` and of `[X, W]`
-along a lax braided functor `G` are isomorphisms, then `G δ_X` is an isomorphism if and only if the
-double-dual map of `G X` relative to `W'` is. -/
+/-- If the dual comparisons of `X` and of `[X, W]` along a lax braided functor `G` are isomorphisms,
+then `G δ_X` is an isomorphism if and only if the double-dual map of `G X` relative to `W'` is. -/
 theorem isIso_map_toIhomIhom_iff (X : C) [IsIso (dualComparison G e X)]
     [IsIso (dualComparison G e ((ihom X).obj W))] :
     IsIso (G.map (toIhomIhom W X)) ↔ IsIso (toIhomIhom W' (G.obj X)) :=
@@ -259,15 +242,11 @@ namespace Pretriangulated
 variable {C : Type*} [Category* C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
   [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
 
-/-- Blueprint `definition-verdier-dual-evaluation--4` (formal core): a five lemma for a natural
-transformation `δ : 𝟭 ⟶ F` to an endofunctor `F` which sends distinguished triangles to
-triangles that are distinguished for *some* third morphism. If `δ` is an isomorphism at `T.obj₁`,
-`T.obj₃`, `T.obj₁⟦1⟧` and `T.obj₃⟦-1⟧` for a distinguished triangle `T`, then it is an
-isomorphism at `T.obj₂`.
-
-No compatibility of `δ` with the third morphisms is needed: the argument only uses the
-exactness of `Hom(Y, F -)` at the middle terms of the images of `T` and of its rotations, the
-connecting maps being `F` applied to those of `T`. -/
+/-- A five lemma for a natural transformation `δ : 𝟭 ⟶ F` to an endofunctor `F` which sends
+distinguished triangles to triangles that are distinguished for *some* third morphism. If `δ` is an
+isomorphism at `T.obj₁`, `T.obj₃`, `T.obj₁⟦1⟧` and `T.obj₃⟦-1⟧` for a distinguished triangle `T`,
+then it is an isomorphism at `T.obj₂`. No compatibility of `δ` with the third morphisms is needed.
+-/
 theorem isIso_app_obj₂_of_distTriang (F : C ⥤ C) (δ : 𝟭 C ⟶ F)
     (hF : ∀ T ∈ distTriang C, ∃ w, Triangle.mk (F.map T.mor₁) (F.map T.mor₂) w ∈ distTriang C)
     (T : Triangle C) (hT : T ∈ distTriang C) [IsIso (δ.app T.obj₁)] [IsIso (δ.app T.obj₃)]
@@ -336,8 +315,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
-/-- Blueprint `definition-verdier-dual-evaluation--4` (auxiliary): the Verdier dual on morphisms is
-`RHom(-, ω_X)`. -/
+/-- The Verdier dual on morphisms is `RHom(-, ω_X)`. -/
 lemma verdierDual_map
     {K K' : (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))ᵒᵖ}
     (f : K ⟶ K') :
@@ -346,10 +324,8 @@ lemma verdierDual_map
 
 /-- The double internal hom `RHom(RHom(-, ω), ω)` into an object `ω` carries a distinguished
 triangle to a triangle whose first two maps are induced by those of the given triangle and which
-is distinguished for a suitable third map: `RHom(-, ω)` is exact
-(`AlgebraicGeometry.Etale.exists_distTriang_derivedHom_left`), applied twice. It is stated for a
-general coefficient category `A`, where the kernel checks it without unfolding the derived
-categories of `ModuleCat Λ`. -/
+is distinguished for a suitable third map. It is stated for a general coefficient category `A`,
+where the kernel checks it without unfolding the derived categories of `ModuleCat Λ`. -/
 theorem exists_distTriang_derivedHom_flip_derivedHom_flip
     (ω : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))
@@ -361,11 +337,9 @@ theorem exists_distTriang_derivedHom_flip_derivedHom_flip
   obtain ⟨w', hw'⟩ := exists_distTriang_derivedHom_left ω _ hw
   exact ⟨w', hw'⟩
 
-/-- Blueprint `definition-verdier-dual-evaluation--4`: the double dual `𝔻_X 𝔻_X` carries a
-distinguished triangle `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁⟦1⟧` to a triangle `𝔻𝔻K₁ ⟶ 𝔻𝔻K₂ ⟶ 𝔻𝔻K₃ ⟶ 𝔻𝔻K₁⟦1⟧` whose
-first two maps are induced by those of the given triangle and which is distinguished for a suitable
-third map: `RHom(-, ω_X)` is exact (`AlgebraicGeometry.Etale.exists_distTriang_derivedHom_left`,
-blueprint `definition-verdier-dual-evaluation--3`), applied twice. -/
+/-- The double dual `𝔻_X 𝔻_X` carries a distinguished triangle `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁⟦1⟧` to a triangle
+`𝔻𝔻K₁ ⟶ 𝔻𝔻K₂ ⟶ 𝔻𝔻K₃ ⟶ 𝔻𝔻K₁⟦1⟧` whose first two maps are induced by those of the given triangle and
+which is distinguished for a suitable third map. -/
 theorem exists_distTriang_verdierDual_verdierDual
     (T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))))
     (hT : T ∈ distTriang _) :
@@ -375,19 +349,16 @@ theorem exists_distTriang_verdierDual_verdierDual
     (RHom(X)[ModuleCat.{u + 1} Λ]).flip.obj (dualizingComplex Λ a) from rfl]
   exact exists_distTriang_derivedHom_flip_derivedHom_flip _ (dualizingComplex Λ a) T hT
 
-/-- Blueprint `definition-verdier-dual-evaluation--4`: the double-dual morphism `δ_K` is natural, so
-whether it is an isomorphism only depends on `K` up to isomorphism. -/
+/-- The double-dual morphism `δ_K` is natural, so whether it is an isomorphism only depends on `K`
+up to isomorphism. -/
 theorem isIso_verdierDualDoubleDual_app_iff_of_iso
     {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (e : K ≅ K') :
     IsIso ((verdierDualDoubleDual Λ a).app K) ↔ IsIso ((verdierDualDoubleDual Λ a).app K') :=
   NatTrans.isIso_app_iff_of_iso _ e
 
-/-- Blueprint `definition-verdier-dual-evaluation--4`: the double-dual morphism is compatible with
-shifts, `δ_{K⟦n⟧}` is an isomorphism if and only if `δ_K` is.
-
-As `K⟦n⟧ ≅ K ⊗ᴸ Λ_X⟦n⟧` with `Λ_X⟦n⟧` invertible, this is the invariance of biduality under
-twisting by an invertible object, `CategoryTheory.MonoidalClosed.isIso_toIhomIhom_tensor_iff`. -/
+/-- The double-dual morphism is compatible with shifts, `δ_{K⟦n⟧}` is an isomorphism if and only if
+`δ_K` is. -/
 theorem isIso_verdierDualDoubleDual_app_shift_iff
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ) :
     IsIso ((verdierDualDoubleDual Λ a).app (K⟦n⟧)) ↔
@@ -400,15 +371,9 @@ theorem isIso_verdierDualDoubleDual_app_shift_iff
   exact MonoidalClosed.isIso_toIhomIhom_tensor_iff _ _
     (AlgebraicGeometry.Etale.DerivedCategory.isInvertible_shift isInvertible_unit n)
 
-/-- Blueprint `definition-verdier-dual-evaluation--4`: the double-dual morphism is compatible with
-distinguished triangles. For a distinguished triangle `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁⟦1⟧` of `D(X_ét)`, if
-`δ_{K₁}` and `δ_{K₃}` are isomorphisms, then so is `δ_{K₂}`.
-
-This is the triangulated five lemma
-(`CategoryTheory.Pretriangulated.isIso_app_obj₂_of_distTriang`) for the natural
-transformation `δ : 𝟭 ⟶ 𝔻_X 𝔻_X`, using the exactness of `𝔻_X 𝔻_X`
-(`AlgebraicGeometry.Etale.exists_distTriang_verdierDual_verdierDual`) and the compatibility of
-`δ` with shifts (`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_shift_iff`). -/
+/-- The double-dual morphism is compatible with distinguished triangles. For a distinguished
+triangle `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁⟦1⟧` of `D(X_ét)`, if `δ_{K₁}` and `δ_{K₃}` are isomorphisms, then so is
+`δ_{K₂}`. -/
 theorem isIso_verdierDualDoubleDual_app_obj₂
     (T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))))
     (hT : T ∈ distTriang _) (h₁ : IsIso ((verdierDualDoubleDual Λ a).app T.obj₁))
@@ -418,34 +383,30 @@ theorem isIso_verdierDualDoubleDual_app_obj₂
   have := (isIso_verdierDualDoubleDual_app_shift_iff Λ a T.obj₃ (-1)).2 h₃
   exact isIso_app_obj₂_of_distTriang _ _ (exists_distTriang_verdierDual_verdierDual Λ a) T hT
 
-/-- Blueprint `definition-verdier-dual-evaluation--4`: the *biduality locus*, the complexes `K` of
-`D(X_ét)` whose double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism. It is a triangulated
-subcategory (`AlgebraicGeometry.Etale.verdierBidualityLocus_isTriangulated`). -/
+/-- The *biduality locus*, the complexes `K` of `D(X_ét)` whose double-dual morphism
+`δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism. It is a triangulated subcategory
+(`AlgebraicGeometry.Etale.verdierBidualityLocus_isTriangulated`). -/
 def verdierBidualityLocus :
     ObjectProperty (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
   fun K ↦ IsIso ((verdierDualDoubleDual Λ a).app K)
 
-/-- Blueprint `definition-verdier-dual-evaluation--4`: the biduality locus is closed under
-isomorphisms. -/
+/-- The biduality locus is closed under isomorphisms. -/
 instance verdierBidualityLocus_isClosedUnderIsomorphisms :
     (verdierBidualityLocus Λ a).IsClosedUnderIsomorphisms :=
   ⟨fun e h ↦ (isIso_verdierDualDoubleDual_app_iff_of_iso Λ a e).1 h⟩
 
-/-- Blueprint `definition-verdier-dual-evaluation--4`: the biduality locus is stable under
-shifts. -/
+/-- The biduality locus is stable under shifts. -/
 instance verdierBidualityLocus_isStableUnderShift :
     (verdierBidualityLocus Λ a).IsStableUnderShift ℤ :=
   ⟨fun n ↦ ⟨fun K hK ↦ (isIso_verdierDualDoubleDual_app_shift_iff Λ a K n).2 hK⟩⟩
 
-/-- Blueprint `definition-verdier-dual-evaluation--4`: the biduality locus is closed under
-extensions. -/
+/-- The biduality locus is closed under extensions. -/
 instance verdierBidualityLocus_isTriangulatedClosed₂ :
     (verdierBidualityLocus Λ a).IsTriangulatedClosed₂ :=
   .mk' fun T hT h₁ h₃ ↦ isIso_verdierDualDoubleDual_app_obj₂ Λ a T hT h₁ h₃
 
 open ZeroObject in
-/-- Blueprint `definition-verdier-dual-evaluation--4`: the biduality locus contains the zero object,
-whose double dual is zero. -/
+/-- The biduality locus contains the zero object, whose double dual is zero. -/
 instance verdierBidualityLocus_containsZero : (verdierBidualityLocus Λ a).ContainsZero where
   exists_zero := by
     refine ⟨0, isZero_zero _, ?_⟩
@@ -454,9 +415,9 @@ instance verdierBidualityLocus_containsZero : (verdierBidualityLocus Λ a).Conta
       isZero_ihom_obj_of_isZero (isZero_ihom_obj_of_isZero (isZero_zero _) _) _
     exact ⟨⟨0, (isZero_zero _).eq_of_src _ _, h.eq_of_src _ _⟩⟩
 
-/-- Blueprint `definition-verdier-dual-evaluation--4`: since the double-dual morphism commutes with
-shifts and is a morphism of distinguished triangles, the complexes `K` for which `δ_K` is an
-isomorphism form a triangulated subcategory of `D(X_ét)`. -/
+/-- Since the double-dual morphism commutes with shifts and is a morphism of distinguished
+triangles, the complexes `K` for which `δ_K` is an isomorphism form a triangulated subcategory of
+`D(X_ét)`. -/
 instance verdierBidualityLocus_isTriangulated :
     (verdierBidualityLocus Λ a).IsTriangulated where
 
@@ -465,16 +426,10 @@ section Localization
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X U S : Scheme.{u}} (a : X ⟶ S) (b : U ⟶ S)
   [HasCompactification a] [HasCompactification b] (j : U ⟶ X) [Etale j] [Surjective j]
 
-/-- Blueprint `corollary-verdier-exchange-formulas--5`: biduality is local for the étale topology,
-the descent step. Let `j : U ⟶ X` be étale and surjective (for instance the disjoint union of the
-members of an open cover). If `Lj^* δ_K` is identified, as an arrow, with the double-dual
-morphism `δ_{Lj^* K}` of `U` and the latter is an isomorphism, then `δ_K` is an isomorphism,
-isomorphisms descending along `j`
-(`AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_map_of_surjective`).
-
-The identification of `Lj^* δ_K` with `δ_{Lj^* K}` is the content of the blueprint lemma; its
-formal core is `CategoryTheory.MonoidalClosed.mapToIhomIhomArrowIso`, see the module
-docstring for what remains to apply it to `Lj^*`. -/
+/-- Biduality is local for the étale topology, the descent step. Let `j : U ⟶ X` be étale and
+surjective (for instance the disjoint union of the members of an open cover). If `Lj^* δ_K` is
+identified, as an arrow, with the double-dual morphism `δ_{Lj^* K}` of `U` and the latter is an
+isomorphism, then `δ_K` is an isomorphism, isomorphisms descending along `j`. -/
 theorem isIso_verdierDualDoubleDual_app_of_surjective
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (e : Arrow.mk ((L((j)^*[ModuleCat.{u + 1} Λ])).map

@@ -18,7 +18,16 @@ import all WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import all WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
 
-/-! # Hom representative comparison with an unrestricted source -/
+/-! # Hom representative comparison with an unrestricted source
+
+The projection-normalized native Hom comparison extends from two K-injective complexes to an
+arbitrary source and a K-injective target, by replacing the source with a K-injective complex
+through a monomorphic quasi-isomorphism.
+
+## References
+
+* [Stacks, Tag 0A97]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -250,18 +259,7 @@ private theorem hom_square_all
 end TensorEvaluation
 
 /-- The projection-normalized native Hom comparison extends from two K-injective
-complexes to an arbitrary source and a K-injective target.
-
-Source: Stacks 0A97; source-replacement step in the representative evaluation
-argument for the native tensor model.
-(blueprint: lem-sf-native-hom-evaluation-square-all-sources).
-
-Proof: construct the forgotten product-Hom comparison explicitly by its product
-projections. The supplied projection condition identifies its witness with this
-comparison on K-injective sources. For an arbitrary source choose a monomorphic
-quasi-isomorphism to a K-injective complex. Naturality of both representative
-systems, the derived factorization, and the canonical comparison propagates the
-square to the source; cancel the invertible localized replacement map. -/
+complexes to an arbitrary source and a K-injective target. -/
 theorem native_hom_evaluation_square_all_sources
     (M : NativeClosedHomModels k₀ l X)
     (χ : M.weilHom ⋙ nativeForget k₀ l X ≅

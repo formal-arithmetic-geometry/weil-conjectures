@@ -14,9 +14,16 @@ import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 /-!
 # Filteredness of pointed etale algebras
 
-The proof constructs successors and equalizers directly by algebra pushouts.
-Source: Stacks Project, Algebra, Tag 04GW, filteredness paragraphs
-(blueprint: lem-sc-pointed-etale-filtered).
+The category of étale `R`-algebras pointed into a fixed `K` is filtered.
+
+## Implementation details
+
+Successors are given by tensor products and equalizers by the iterated tensor construction,
+both built directly as algebra pushouts.
+
+## References
+
+* [Stacks, Tag 04GW]
 -/
 
 @[expose] public section
@@ -74,10 +81,7 @@ private lemma etale_comp_map {R : Type u} [CommRing R]
   have : Etale A B := hf
   exact Etale.comp R A B
 
-/-- Filteredness follows from identity, tensor-product successors, and the iterated
- tensor equalizer construction of Stacks Tag 04GW.
-Source: Stacks Project, Algebra, Tag 04GW.
-(blueprint: lem-sc-pointed-etale-filtered). -/
+/-- The category of étale `R`-algebras pointed into a fixed `K` is filtered. -/
 theorem pointedEtale_filtered
     (R K : Type u) [CommRing R] [IsLocalRing R] [Field K]
     [Algebra (IsLocalRing.ResidueField R) K]

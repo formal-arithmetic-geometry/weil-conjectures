@@ -11,7 +11,9 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 
 /-! # Cancellation of the specified comparison on a strict quotient cone
 
-Source: blueprint main-20261015, rational Frobenius integral model, proof (2)--(3).
+Multiplication and the product comparison identify the specified inverse-image comparison on a
+strict quotient cone with the inverse image of the strict quotient augmentation
+(`isomorphismRoosUnitCancellation`).
 -/
 
 @[expose] public noncomputable section
@@ -131,9 +133,7 @@ private theorem image_shift_zero
   rw [Category.assoc, he, ← F.map_comp_assoc, hv, F.map_zero, zero_comp]
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- Multiplication fixes every actual finite pullback unit generator.
-Source: Stacks 03D6; blueprint rational Frobenius integral model (2).
-(blueprint: def-trf-multiplication-generator-normalized). -/
+/-- Multiplication fixes every actual finite pullback unit generator. -/
 def TrfMultiplicationGeneratorNormalized
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -228,25 +228,7 @@ private theorem lift_roos_cancel
 -- Normalize scalar-extension presentations before the generic cone calculation.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Multiplication and the product comparison identify the specified comparison
-with inverse image of the actual strict quotient augmentation.
-
-Source: blueprint main-20261015, sec-trace-formula/sk-d-weil/
-prop-trf-rational-frobenius-integral-model.proof.md (2)--(3), step 3 of
-lem-weil-isomorphism-derived-pullback-comparison-normalization; Stacks 03D6,
-08TC, and 0941.
-(blueprint: lem-trf-isomorphism-roos-unit-cancellation).
-
-Proof: let v be the actual strict quotient augmentation. Its first coordinate
-is the tuple of actual quotient units and its shifted coordinate is zero.
-The specified comparison has first coordinate the finite comparison tuple and
-shifted coordinate zero. Multiplication j cancels each finite generator, so the
-first coordinate of the specified comparison followed by H(j) agrees with that
-of G(v) followed by eta. The shifted coordinate of the former vanishes by the
-Roos-map coordinate formula. The latter vanishes by the shifted coordinate
-formula for eta and additivity of exact inverse image. The mapping-cocone
-identity decomposition gives equality of the two whole chain maps. Cancel eta
-to obtain the asserted identity. This calculation uses no completion calculus
-or completedness assumption. -/
+with inverse image of the actual strict quotient augmentation. -/
 theorem isomorphismRoosUnitCancellation
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -10,10 +10,17 @@ public import WeilConjectures.DeligneLaumon.SfScalarExtensionComposition
 import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 import WeilConjectures.CategoryTheory.IntegerShiftFromOne
 
-/-! Normalized integer shifts on rational scalar extension.
-This extracts the proved scalar-localization argument from the pair-category module
-so both files compile separately within the time limit
-(blueprint: lem-pur-intrinsic-rational-scalar-shift-normalization).
+/-! # Normalized integer shifts on rational scalar extension
+
+Rational scalar extension has a unique coherent integer-shift comparison with prescribed
+localized integral component at degree one.
+
+## Implementation details
+
+This extracts the scalar-localization argument from the pair-category module so that both
+files compile separately within the time limit. The degree-one comparison tensors the integral
+comparison and its inverse with one; the zero and addition equations force all other
+components, which gives uniqueness.
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -273,14 +280,7 @@ private theorem scalarShift_existsUnique
   exact eq_of_heq ((hs' K).trans (hs K).symm)
 
 /-- Rational scalar extension has a unique coherent integer-shift comparison with the
-prescribed localized integral component at degree one.
-Source: intrinsic scalar localization normalization in the common-stage shift argument
-(blueprint: lem-pur-intrinsic-rational-scalar-shift-normalization).
-Proof: construct the degree-one comparison by tensoring the integral comparison and
-its inverse with one. Tensor induction proves naturality and the inverse equations.
-Transport along the stated degree-one shift-functor equalities and extend to every
-integer using the integer-shift construction. The zero and addition equations force
-all other comparisons from degree one, which also proves uniqueness. -/
+prescribed localized integral component at degree one. -/
 theorem sfRationalScalarCommShift_existsUnique
     (p l : ℕ) [Fact l.Prime] (hl : l ≠ p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

@@ -24,11 +24,10 @@ change of a morphism `f₀ : X₀ ⟶ Y₀`, then `r_m` is the base change of th
   `AlgebraicGeometry.ProEtale.CondensedRing.isUniversalHomeomorphism_frobeniusIterate_left`:
   iterates of finite (universally homeomorphic) endomorphisms.
 - `AlgebraicGeometry.ProEtale.CondensedRing.IsModelFrobenius.relativeFrobenius_frobeniusIterate`:
-  the relative Frobenius `r_m` is a finite universal homeomorphism with `p_m ∘ r_m = Φ_X ^ m`
-  and `f'_m ∘ r_m = f` (blueprint `lemma-comparison-via-relative-frobenius--1`).
+  the relative Frobenius `r_m` is a finite universal homeomorphism with `p_m ∘ r_m = Φ_X ^ m` and
+  `f'_m ∘ r_m = f`.
 - `AlgebraicGeometry.ProEtale.CondensedRing.IsModelFrobenius.isPullback_relativeFrobenius_left`:
-  `r_m` is the base change of the relative `#k₀ ^ m`-power Frobenius of a model `f₀`
-  (blueprint `lemma-comparison-via-relative-frobenius--text-1`).
+  `r_m` is the base change of the relative `#k₀ ^ m`-power Frobenius of a model `f₀`.
 -/
 
 @[expose] public section
@@ -43,15 +42,13 @@ section Iterate
 
 variable {k : Type u} [Field k] {X : Over (Spec (.of k))} (Φ : X ⟶ X)
 
-/-- The iterates `Φ_m` of a finite endomorphism are finite (blueprint
-`lemma-comparison-via-relative-frobenius--1`). -/
+/-- The iterates `Φ_m` of a finite endomorphism are finite. -/
 instance isFinite_frobeniusIterate_left [IsFinite Φ.left] (m : ℕ) :
     IsFinite (frobeniusIterate Φ m).left := by
   rw [frobeniusIterate_left]
   exact MorphismProperty.endAsHom_pow_mem @IsFinite ‹_› m
 
-/-- The iterates `Φ_m` of a universal homeomorphism are universal homeomorphisms (blueprint
-`lemma-comparison-via-relative-frobenius--1`). -/
+/-- The iterates `Φ_m` of a universal homeomorphism are universal homeomorphisms. -/
 instance isUniversalHomeomorphism_frobeniusIterate_left [IsUniversalHomeomorphism Φ.left]
     (m : ℕ) : IsUniversalHomeomorphism (frobeniusIterate Φ m).left := by
   rw [frobeniusIterate_left]
@@ -65,11 +62,10 @@ variable {k : Type u} [Field k] {X Y : Over (Spec (.of k))} {ΦX : X ⟶ X} {ΦY
   {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ Y₀ : Scheme.{u}}
   {fX₀ : X₀ ⟶ Spec (.of k₀)} {fY₀ : Y₀ ⟶ Spec (.of k₀)} {pX : X.left ⟶ X₀} {pY : Y.left ⟶ Y₀}
 
-/-- **Relative Frobenius** (blueprint `lemma-comparison-via-relative-frobenius--1`,
-`lemma-comparison-via-relative-frobenius` (1)). Let `Φ_X`, `Φ_Y` be model Frobenii of models `X₀`,
-`Y₀` locally of finite type over `k₀`, and `f : X ⟶ Y` with `Φ_X ≫ f = f ≫ Φ_Y`. For every `m`, the
-relative Frobenius `r_m = (f, Φ_X ^ m) : X ⟶ Y ×_{Φ_Y ^ m, Y, f} X` is finite and a universal
-homeomorphism, and `p_m ∘ r_m = Φ_X ^ m`, `f'_m ∘ r_m = f`. -/
+/-- **Relative Frobenius**. Let `Φ_X`, `Φ_Y` be model Frobenii of models `X₀`, `Y₀` locally of
+finite type over `k₀`, and `f : X ⟶ Y` with `Φ_X ≫ f = f ≫ Φ_Y`. For every `m`, the relative
+Frobenius `r_m = (f, Φ_X ^ m) : X ⟶ Y ×_{Φ_Y ^ m, Y, f} X` is finite and a universal homeomorphism,
+and `p_m ∘ r_m = Φ_X ^ m`, `f'_m ∘ r_m = f`. -/
 theorem IsModelFrobenius.relativeFrobenius_frobeniusIterate [LocallyOfFiniteType fX₀]
     [LocallyOfFiniteType fY₀] (hX : IsModelFrobenius ΦX fX₀ pX)
     (hY : IsModelFrobenius ΦY fY₀ pY) (f : X ⟶ Y) (hf : ΦX ≫ f = f ≫ ΦY) (m : ℕ) :
@@ -88,11 +84,10 @@ theorem IsModelFrobenius.relativeFrobenius_frobeniusIterate [LocallyOfFiniteType
   have := hY.isUniversalHomeomorphism m
   exact ⟨inferInstance, inferInstance, relativeFrobenius_snd .., relativeFrobenius_fst ..⟩
 
-/-- **The relative Frobenius factorization** (blueprint
-`lemma-comparison-via-relative-frobenius--text-1`, in `Over`). Let `Φ_X`, `Φ_Y` be model Frobenii of
-models `X₀`, `Y₀` over `k₀`, and let `f : X ⟶ Y` with `Φ_X ≫ f = f ≫ Φ_Y` be the base change of
-`f₀ : X₀ ⟶ Y₀` (`f ≫ p_Y = p_X ≫ f₀`). Put `Q = #k₀ ^ m`. There are the `Q`-power Frobenii `F_X`,
-`F_Y` of `X₀`, `Y₀` (the `m`-th powers of the `#k₀`-power Frobenii) and a morphism
+/-- **The relative Frobenius factorization**. Let `Φ_X`, `Φ_Y` be model Frobenii of models `X₀`,
+`Y₀` over `k₀`, and let `f : X ⟶ Y` with `Φ_X ≫ f = f ≫ Φ_Y` be the base change of `f₀ : X₀ ⟶ Y₀`
+(`f ≫ p_Y = p_X ≫ f₀`). Put `Q = #k₀ ^ m`. There are the `Q`-power Frobenii `F_X`, `F_Y` of `X₀`,
+`Y₀` (the `m`-th powers of the `#k₀`-power Frobenii) and a morphism
 `g : X'_m ⟶ X₀^{(Q)} = Y₀ ×_{F_Y, Y₀, f₀} X₀`, the product of `p_Y` and `p_X`, exhibiting
 `X'_m = Y ×_{Φ_Y ^ m, Y, f} X` as the base change `X₀^{(Q)} ×_{k₀} k`, such that `r_m` is the base
 change of the relative `Q`-power Frobenius `F_{X₀/Y₀} = (f₀, F_X)`. -/

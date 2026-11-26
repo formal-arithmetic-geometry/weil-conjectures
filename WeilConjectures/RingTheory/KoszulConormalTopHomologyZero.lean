@@ -8,19 +8,20 @@ module
 
 public import WeilConjectures.RingTheory.KoszulConormalComparison
 
-/-! Rank-zero top homology comparison.
+/-!
+# Top homology of the conormal comparison in rank zero
 
-(blueprint: lem-sc-koszul-conormal-top-homology-zero).
+For `r = 0`, a determinant-normalized comparison from the dual Koszul complex to the normal
+determinant induces an isomorphism on cohomology in degree zero.
 
-Proof in words: Evaluate the signed dual Koszul complex on the empty wedge; the incoming
-differential is zero and the determinant normalization is the identity, hence the induced map is
-an isomorphism.
-Source: Stacks Project, Tag 0BQZ, lemma-regular-immersion-ext.
-(blueprint: lem-sc-koszul-conormal-top-homology-zero).
+## Implementation details
 
-The proof is the empty determinant calculation: the zero exterior power is the
-coefficient module and both the incoming differential and determinant sign are
-trivial.
+The zero exterior power is the coefficient module, the incoming differential is zero and the
+determinant sign is trivial, so the induced map is the identity up to identifications.
+
+## References
+
+* [Stacks, Tag 0BQZ]
 -/
 
 @[expose] public section
@@ -62,9 +63,8 @@ private theorem positive_wedge_subsingleton (R M : Type u) [CommRing R]
   intro x
   exact congrArg (fun t : (⋀[R]^n M) →ₗ[R] (⋀[R]^n M) ↦ t x) h
 
-/-- Rank-zero top homology determinant calculation. The empty signed dual Koszul wedge has zero
-incoming differential, and determinant normalization is the identity, hence the induced map is an
-isomorphism. (blueprint: lem-sc-koszul-conormal-top-homology-zero). -/
+/-- In rank zero, a determinant-normalized conormal comparison induces an isomorphism on
+top cohomology. -/
 theorem koszul_conormal_comparison_isIso_top_homology_zero
     (A : Type u) [CommRing A] (I : Ideal A) (f : Fin 0 → A)
     (hf : Ideal.span (Set.range f) = I)

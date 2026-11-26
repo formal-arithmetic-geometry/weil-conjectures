@@ -12,9 +12,12 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Canonical finite-free mate calculation
 
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15;
-finite-free trace coordinates on the canonical restriction adjunction.
-(blueprint: new-sf-rational-restriction-pullback-free-mate-canonical).
+Finite-free trace coordinates on the canonical restriction adjunction: the normalized mate is
+invertible on scalar-extended objects.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(2), Remark 6.8.15.
 -/
 
 @[expose] public section
@@ -25,17 +28,7 @@ open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
 
 /-- The normalized mate is invertible on scalar-extended objects for the
-canonical restriction adjunction supplied by finite rational scalar extension.
-
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15.
-
-Proof: choose an E-basis of F and its trace-dual basis. On a K-flat
-representative, finite-free completion identifies the canonical restriction
-and extension adjunction with the ordinary tensor/restriction adjunction.
-Pullback preserves the finite coordinate sums, and the two dual-basis
-identities show that the inverse normalized scalar comparison has an invertible
-mate on the scalar extension of every E-object. Localization and the recorded
-normalization transport this equality to the raw rational categories. -/
+canonical restriction adjunction supplied by finite rational scalar extension. -/
 theorem rationalRestrictionPullback_freeMate_canonical
     (l : ℕ) [Fact l.Prime]
     (E F : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

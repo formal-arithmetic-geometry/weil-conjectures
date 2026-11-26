@@ -146,14 +146,19 @@ import WeilConjectures.SixFunctors.SequenceScalarConstruction.SystemScalarOrdina
 /-!
 # Realization of integral pullback comparisons
 
-Source: Stacks Project, Tags 099N(2),(5), 0D6D, 06YY and 0941; blueprint
-`sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md`,
-final common-stage transport paragraph
-(blueprint: def-trf-integral-comparison-sequence-systems).
+We define the pullback and the scalar change on the sequence site of whole quotient towers, and
+their derived functors, together with the composition, unit and scalar–pullback comparisons
+between them, on sequences and on systems.
+
+## Implementation details
 
 The sequence site retains the whole quotient diagram. Its pullback is the left
 adjoint of the actual sectionwise direct image. Scalar change is the universal
 derived change of rings for the actual map of quotient coefficient sheaves.
+
+## References
+
+* Stacks Project, Tags 099N, 0D6D, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -190,25 +195,19 @@ open AlgebraicGeometry.Scheme
 namespace WeilConjectures
 open scoped ChangeOfRings
 
-/-- Base change on the actual sequence site. Source: Stacks 0941, 09A5
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- Base change on the actual sequence site. -/
 def integralComparisonSequenceBaseChange {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (ℕ × Y.ProEt) ⥤ (ℕ × X.ProEt) :=
   (𝟭 ℕ).prod (proEtaleBaseChange f)
 
-/-- Base change is continuous on the sequence site. Source: Stacks 0941, 09A5
-(blueprint: def-trf-integral-comparison-sequence-systems).
-Proof: a covering is a vertical covering at its index. Base change preserves the
-vertical covering, by continuity on the small pro-etale site. Thus the restriction
-of a sheaf is a sheaf, which is exactly the asserted continuity. -/
+/-- Base change is continuous on the sequence site. -/
 theorem integralComparisonSequenceBaseChange_continuous {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (integralComparisonSequenceBaseChange f).IsContinuous
       (coefficientSequenceTopology (ProEt.topology Y))
       (coefficientSequenceTopology (ProEt.topology X)) := by
   exact AmbientPullbackTensor.baseContinuous f none
 
-/-- Continuity of the actual sequence-site base change. Source: Stacks 0941
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- Continuity of the actual sequence-site base change. -/
 instance integralComparisonSequenceBaseChangeContinuous {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (integralComparisonSequenceBaseChange f).IsContinuous
       (coefficientSequenceTopology (ProEt.topology Y))
@@ -218,9 +217,7 @@ instance integralComparisonSequenceBaseChangeContinuous {X Y : Scheme.{t}} (f : 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The component of the constant-section map on the product site.
-Source: Stacks 03D2, 0941
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- The component of the constant-section map on the product site. -/
 def integralComparisonSequenceRingComponent {X Y : Scheme.{t}} (f : X ⟶ Y)
     (A : (ℕ × Y.ProEt)ᵒᵖ) :
     (coefficientSequenceCommRingPresheaf l E Y).obj A ⟶
@@ -241,12 +238,7 @@ private theorem sequenceConstantMap_naturality {X Y : Scheme.{t}} (f : X ⟶ Y)
   exact AmbientPullbackTensor.constantMap_naturality f a
 
 /-- The constant-section coefficient maps commute with horizontal quotients and
-vertical restrictions. Source: Stacks 03D2, 0941
-(blueprint: def-trf-integral-comparison-sequence-systems).
-Proof: on constant sections both composites send a residue class to the same
-constant section at the smaller exponent. Sheafification gives horizontal
-naturality. Naturality of each coefficient map gives vertical naturality. Every
-arrow in the product site factors into a horizontal and a vertical arrow. -/
+vertical restrictions. -/
 theorem integralComparisonSequenceRing_naturality {X Y : Scheme.{t}} (f : X ⟶ Y)
     {A B : (ℕ × Y.ProEt)ᵒᵖ} (g : A ⟶ B) :
     (coefficientSequenceCommRingPresheaf l E Y).map g ≫
@@ -256,9 +248,7 @@ theorem integralComparisonSequenceRing_naturality {X Y : Scheme.{t}} (f : X ⟶ 
           ((integralComparisonSequenceBaseChange f).op.map g) := by
   exact AmbientPullbackTensor.ringComponent_naturality l E f none g
 
-/-- Actual constant coefficients on the sequence site, with their quotient transitions.
-Source: Stacks 03D2, 0941
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- Actual constant coefficients on the sequence site, with their quotient transitions. -/
 def integralComparisonSequenceRingMap {X Y : Scheme.{t}} (f : X ⟶ Y) :
     coefficientSequenceCommRingSheaf l E Y ⟶
       ((integralComparisonSequenceBaseChange f).sheafPushforwardContinuous
@@ -270,9 +260,7 @@ def integralComparisonSequenceRingMap {X Y : Scheme.{t}} (f : X ⟶ Y) :
     { app := integralComparisonSequenceRingComponent l E f
       naturality := fun {_ _} g ↦ integralComparisonSequenceRing_naturality l E f g }
 
-/-- Sectionwise direct image with the prescribed quotient coefficient action.
-Source: Stacks 03D2, 0941
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- Sectionwise direct image with the prescribed quotient coefficient action. -/
 def integralComparisonSequenceDirectImage {X Y : Scheme.{t}} (f : X ⟶ Y) :
     coefficientSequenceModules l E X ⥤ coefficientSequenceModules l E Y :=
   SheafOfModules.pushforward.{max u (t + 1)}
@@ -286,63 +274,44 @@ def integralComparisonSequenceDirectImage {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ⟨Functor.whiskerRight (integralComparisonSequenceRingMap l E f).hom
       (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})⟩
 
-/-- The ordinary system inverse image exists. Source: Stacks 03D2, 0941
-(blueprint: def-trf-integral-comparison-sequence-systems).
-Proof: module sheaves on the sequence site form a Grothendieck abelian category,
-so they have a small coseparating family and are complete and well-powered.
-Direct image preserves limits: after evaluation it is evaluation on the source
-followed by restriction of scalars, both of which preserve limits. Evaluation
-jointly reflects limits. The special adjoint functor theorem supplies the left
-adjoint, with the original independent scheme and coefficient universes. -/
+/-- The ordinary system inverse image exists. -/
 theorem integralComparisonSequenceDirectImage_isRightAdjoint
     {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (integralComparisonSequenceDirectImage l E f).IsRightAdjoint := by
   exact AmbientPullbackTensor.pushRightAdjoint l E f none
 
-/-- The adjunction structure whose right side is the actual sectionwise direct image.
-Source: Stacks 03D2 (blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- The adjunction structure whose right side is the actual sectionwise direct image. -/
 instance integralComparisonSequenceRightAdjoint {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (integralComparisonSequenceDirectImage l E f).IsRightAdjoint :=
   integralComparisonSequenceDirectImage_isRightAdjoint l E f
 
-/-- The canonical ordinary inverse image of strict quotient systems.
-Source: Stacks 03D2, 0941
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- The canonical ordinary inverse image of strict quotient systems. -/
 def integralComparisonSequencePullback {X Y : Scheme.{t}} (f : X ⟶ Y) :=
   (integralComparisonSequenceDirectImage l E f).leftAdjoint
 
-/-- Exactness of constant-coefficient system inverse image. Source: Stacks 03D2, 0941
-(blueprint: def-trf-integral-comparison-sequence-systems).
-Proof: evaluate at each positive exponent. The unit-normalized inverse-image
-adjunction is the finite constant-coefficient adjunction, which is exact.
-Kernels, cokernels and addition in the system category are levelwise. -/
+/-- Exactness of constant-coefficient system inverse image. -/
 theorem integralComparisonSequencePullback_exact {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (integralComparisonSequencePullback l E f).Additive ∧
       PreservesFiniteLimits (integralComparisonSequencePullback l E f) ∧
       PreservesFiniteColimits (integralComparisonSequencePullback l E f) := by
   exact AmbientPullbackTensor.pullExact l E f none
 
-/-- Additivity of system inverse image. Source: Stacks 0941
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- Additivity of system inverse image. -/
 instance integralComparisonSequencePullbackAdditive {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (integralComparisonSequencePullback l E f).Additive :=
   (integralComparisonSequencePullback_exact l E f).1
 
-/-- Finite limits are computed levelwise. Source: Stacks 0941
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- Finite limits are computed levelwise. -/
 instance integralComparisonSequencePullbackLimits {X Y : Scheme.{t}} (f : X ⟶ Y) :
     PreservesFiniteLimits (integralComparisonSequencePullback l E f) :=
   (integralComparisonSequencePullback_exact l E f).2.1
 
-/-- Finite colimits are computed levelwise. Source: Stacks 0941
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- Finite colimits are computed levelwise. -/
 instance integralComparisonSequencePullbackColimits {X Y : Scheme.{t}} (f : X ⟶ Y) :
     PreservesFiniteColimits (integralComparisonSequencePullback l E f) :=
   (integralComparisonSequencePullback_exact l E f).2.2
 
-/-- Exact inverse image on the derived category of entire strict quotient systems.
-Source: Stacks 0941, 0D6D
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- Exact inverse image on the derived category of entire strict quotient systems. -/
 def integralComparisonDerivedSequencePullback {X Y : Scheme.{t}} (f : X ⟶ Y) :
     coefficientSequenceDerived l E Y ⥤ coefficientSequenceDerived l E X :=
   (integralComparisonSequencePullback l E f).mapDerivedCategory
@@ -350,20 +319,13 @@ def integralComparisonDerivedSequencePullback {X Y : Scheme.{t}} (f : X ⟶ Y) :
 variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- Inclusion of the actual quotient rings on the sequence site.
-Source: Stacks 06YY, 0941
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- Inclusion of the actual quotient rings on the sequence site. -/
 def integralComparisonSequenceScalarComponent (X : Scheme.{t}) (A : (ℕ × X.ProEt)ᵒᵖ) :
     (coefficientSequenceCommRingPresheaf l E X).obj A ⟶
       (coefficientSequenceCommRingPresheaf l L X).obj A :=
   (integralScalarQuotientSheafMap l E L ι X A.unop.1).hom.app (op A.unop.2)
 
-/-- Quotient coefficient inclusions are natural on the entire sequence site.
-Source: Stacks 06YY, 0941
-(blueprint: def-trf-integral-comparison-sequence-systems).
-Proof: the horizontal square is integralScalarQuotientMap_transition. The vertical
-square is naturality of constant sheafification. Factor a product-site arrow into
-these two arrows and paste the squares. -/
+/-- Quotient coefficient inclusions are natural on the entire sequence site. -/
 theorem integralComparisonSequenceScalar_naturality (X : Scheme.{t})
     {A B : (ℕ × X.ProEt)ᵒᵖ} (g : A ⟶ B) :
     (coefficientSequenceCommRingPresheaf l E X).map g ≫
@@ -391,9 +353,7 @@ theorem integralComparisonSequenceScalar_naturality (X : Scheme.{t})
     (Functor.uncurry.map (Functor.whiskerRight τ
       (sheafToPresheaf (ProEt.topology X) CommRingCat)))).naturality g
 
-/-- The specified morphism of quotient coefficient sheaves, before deriving.
-Source: Stacks 06YY, 0941
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- The specified morphism of quotient coefficient sheaves, before deriving. -/
 def integralComparisonSequenceScalarMap (X : Scheme.{t}) :
     coefficientSequenceCommRingSheaf l E X ⟶ coefficientSequenceCommRingSheaf l L X where
   hom :=
@@ -401,18 +361,14 @@ def integralComparisonSequenceScalarMap (X : Scheme.{t}) :
       naturality := fun {_ _} g ↦ integralComparisonSequenceScalar_naturality l E L ι X g }
 
 /-- The universal, cochain-normalized derived coefficient change on the sequence site.
-The universal counit determines the pair up to the unique compatible isomorphism.
-Source: Stacks 06YY, 0941
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+The universal counit determines the pair up to the unique compatible isomorphism. -/
 def integralComparisonSequenceScalarModel (X : Scheme.{t}) :=
   Classical.choice (SheafOfModules.nonempty_derivedChangeOfRingsCochainModel
     (integralComparisonSequenceScalarMap l E L ι X))
 
 attribute [local irreducible] integralComparisonSequenceScalarModel
 
-/-- Derived scalar extension of whole strict coefficient systems, retaining homotopies.
-Source: Stacks 06YY, 0941
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- Derived scalar extension of whole strict coefficient systems, retaining homotopies. -/
 def integralComparisonDerivedSequenceScalar (X : Scheme.{t}) :
     coefficientSequenceDerived l E X ⥤ coefficientSequenceDerived l L X :=
   (integralComparisonSequenceScalarModel l E L ι X).T
@@ -436,9 +392,7 @@ private theorem sequenceScalarAdjunction (X : Scheme.{t}) :
     (integralComparisonSequenceScalarMap l E L ι X)
     (integralComparisonSequenceScalarModel l E L ι X)
 
-/-- The system pullback generator is the actual adjunction unit on sections.
-Source: Stacks 03D2, 0941
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- The system pullback generator is the actual adjunction unit on sections. -/
 def integralComparisonSequenceGenerator {Y Z : Scheme.{t}} (f : Z ⟶ Y)
     (M : coefficientSequenceModules l E Y) (n : ℕ) (U : Y.ProEt)
     (x : M.val.obj (op (n, U))) :=
@@ -464,13 +418,7 @@ private theorem sequenceDirectComp_apply {V W Z : Scheme.{t}}
 
 attribute [local irreducible] sequenceDirectComp
 
-/-- The ordinary compositor is determined by fibre-product pasting and mates.
-Source: Stacks 0D6D, 03D3
-(blueprint: def-trf-integral-comparison-sequence-systems).
-Proof: direct images compose by the displayed sectionwise fibre-product map.
-The coefficient actions agree because both send constant sections to themselves.
-This gives the unique d. Take its mate under the actual adjunctions; mates
-preserve isomorphisms and their bijection proves uniqueness of a. -/
+/-- The ordinary compositor is determined by fibre-product pasting and mates. -/
 theorem integralComparisonSequenceComposition_existsUnique
     {V W Z : Scheme.{t}} (h : Z ⟶ W) (k : W ⟶ V) :
     ∃! a : integralComparisonSequencePullback l E (h ≫ k) ≅
@@ -504,15 +452,12 @@ theorem integralComparisonSequenceComposition_existsUnique
     exact (hd' M U.unop.1 U.unop.2 x).trans
       (sequenceDirectComp_apply l E h k M U x).symm
 
-/-- The canonical ordinary composition map, retaining every quotient transition.
-Source: Stacks 0D6D (blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- The canonical ordinary composition map, retaining every quotient transition. -/
 def integralComparisonSequenceComposition {V W Z : Scheme.{t}}
     (h : Z ⟶ W) (k : W ⟶ V) :=
   (integralComparisonSequenceComposition_existsUnique l E h k).exists.choose
 
-/-- Derived composition is the localization of that one strict system map.
-Source: Stacks 0D6D, 0941
-(blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- Derived composition is the localization of that one strict system map. -/
 def integralComparisonSystemComposition {V W Z : Scheme.{t}}
     (h : Z ⟶ W) (k : W ⟶ V) :
     integralComparisonDerivedSequencePullback l E (h ≫ k) ≅
@@ -522,8 +467,7 @@ def integralComparisonSystemComposition {V W Z : Scheme.{t}}
     (Functor.mapDerivedCategoryCompIso (integralComparisonSequencePullback l E k)
       (integralComparisonSequencePullback l E h)).symm
 
-/-- An actual scalar-unit section in sequence-site change of rings.
-Source: Stacks 06YY (blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- An actual scalar-unit section in sequence-site change of rings. -/
 def integralComparisonSequenceTensorSection (Y : Scheme.{t})
     (M : coefficientSequenceModules l E Y) (U : (ℕ × Y.ProEt)ᵒᵖ)
     (s : (coefficientSequenceCommRingSheaf l L Y).obj.obj U) (x : M.val.obj U) :
@@ -619,12 +563,7 @@ private theorem sequenceScalarPullbackRight_inv_app {Y Z : Scheme.{t}} (f : Z �
 attribute [local irreducible] sequenceScalarPullbackRight
 
 /-- The ordinary scalar/pullback associator of whole quotient diagrams is fixed
-on adjunction-unit tensor generators. Source: Stacks 06YY, 03D3
-(blueprint: def-trf-integral-comparison-sequence-systems).
-Proof: both functors sheafify the same scalar-balanced generators. Send the
-specified unit tensor to the specified pullback of the unit tensor; multiply
-scalars for the inverse. These formulas commute with vertical restrictions and
-horizontal quotients, and local tensor generators prove uniqueness. -/
+on adjunction-unit tensor generators. -/
 theorem integralComparisonSequenceScalarPullback_existsUnique
     {Y Z : Scheme.{t}} (f : Z ⟶ Y) :
     ∃! a : integralComparisonSequencePullback l E f ⋙
@@ -689,8 +628,7 @@ theorem integralComparisonSequenceScalarPullback_existsUnique
   rw [sequenceScalarPullbackRight_inv_app, hY, hZ]
   exact (hb N U.unop.1 U.unop.2 x).symm
 
-/-- The generator-normalized ordinary scalar comparison.
-Source: Stacks 06YY (blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- The generator-normalized ordinary scalar comparison. -/
 def integralComparisonSequenceScalarPullback {Y Z : Scheme.{t}} (f : Z ⟶ Y) :=
   (integralComparisonSequenceScalarPullback_existsUnique l E L ι f).exists.choose
 
@@ -803,13 +741,7 @@ private theorem sequencePullback_kflatgood {Y Z : Scheme.{t}} (f : Z ⟶ Y)
   exact (hK.2.2.2 P ⟨hP, hf⟩).1
 
 /-- The derived scalar comparison is the localization of that same entire-diagram
-map; the equation uses the universal scalar counits, not only finite evaluations.
-Source: Stacks 06YY, 0D6D
-(blueprint: def-trf-integral-comparison-sequence-systems).
-Proof: exact constant-coefficient inverse image preserves flat-term K-flat
-complexes. Localize the ordinary tensor associator on K-flat resolutions using
-the two universal scalar counits. Roofs give naturality and independence of
-resolutions; their localization universal property gives uniqueness. -/
+map; the equation uses the universal scalar counits, not only finite evaluations. -/
 theorem integralComparisonSystemScalarPullback_existsUnique
     {Y Z : Scheme.{t}} (f : Z ⟶ Y) :
     ∃! a : integralComparisonDerivedSequencePullback l E f ⋙
@@ -871,8 +803,7 @@ theorem integralComparisonSystemScalarPullback_existsUnique
     (fun X h ↦ (integralComparisonSequenceScalarModel l E L ι Z).computes _
       (sequencePullback_kflatgood l E f X h.1 h.2))
 
-/-- The localized entire-diagram scalar associator.
-Source: Stacks 06YY (blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- The localized entire-diagram scalar associator. -/
 def integralComparisonSystemScalarPullback {Y Z : Scheme.{t}} (f : Z ⟶ Y) :=
   (integralComparisonSystemScalarPullback_existsUnique l E L ι f).exists.choose
 
@@ -890,13 +821,7 @@ private theorem sequenceDirectId_apply (Y : Scheme.{t})
 
 attribute [local irreducible] sequenceDirectId
 
-/-- The ordinary identity pullback is fixed by its adjunction-unit formula.
-Source: Stacks 03D3, 0D6D
-(blueprint: def-trf-integral-comparison-sequence-systems).
-Proof: the pullback of the identity scheme map is naturally the identity by
-the universal property of fibre products. The unit formula defines the mate
-between the ordinary module inverse images. The adjunction bijection gives
-uniqueness, and the inverse fibre-product map gives its inverse. -/
+/-- The ordinary identity pullback is fixed by its adjunction-unit formula. -/
 theorem integralComparisonSequenceUnit_existsUnique (Y : Scheme.{t}) :
     ∃! a : integralComparisonSequencePullback l E (𝟙 Y) ≅ 𝟭 _,
       ∀ (M : coefficientSequenceModules l E Y) (n : ℕ) (U : Y.ProEt)
@@ -926,8 +851,7 @@ theorem integralComparisonSequenceUnit_existsUnique (Y : Scheme.{t}) :
   ext U x
   exact (hb M U.unop.1 U.unop.2 x).trans (ha M U.unop.1 U.unop.2 x).symm
 
-/-- The specified identity inverse-image comparison on whole derived diagrams.
-Source: Stacks 0D6D (blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- The specified identity inverse-image comparison on whole derived diagrams. -/
 def integralComparisonSystemUnit (Y : Scheme.{t}) :
     integralComparisonDerivedSequencePullback l E (𝟙 Y) ≅ 𝟭 _ :=
   Functor.mapDerivedCategoryNatIso
@@ -960,12 +884,7 @@ private theorem sequenceScalarMapComp (Y : Scheme.{t}) :
   exact congrArg (fun α ↦ α.hom.app (op U.unop.2)) (hs U.unop.1)
 
 /-- The ordinary scalar associator is fixed on sheafified tensor generators
-on the whole sequence site. Source: Stacks 06YY, 0941
-(blueprint: def-trf-integral-comparison-sequence-systems).
-Proof: send c tensor (b tensor x) to c*j(b) tensor x, with inverse c tensor x
-to c tensor (1 tensor x). Balanced relations and sheafification extend these
-formulas uniquely. The quotient maps are ring maps, so all horizontal squares
-commute, and vertical restrictions commute by tensor functoriality. -/
+on the whole sequence site. -/
 theorem integralComparisonSequenceScalarComposition_existsUnique (Y : Scheme.{t}) :
     ∃! a : (integralComparisonSequenceScalarModel l E L ι Y).E ⋙
         (integralComparisonSequenceScalarModel l L M j Y).E ≅
@@ -986,8 +905,7 @@ theorem integralComparisonSequenceScalarComposition_existsUnique (Y : Scheme.{t}
     (integralComparisonSequenceScalarModel l L M j Y)
     (integralComparisonSequenceScalarModel l E M (j.comp ι) Y)
 
-/-- The strict scalar associator used before realization.
-Source: Stacks 06YY (blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- The strict scalar associator used before realization. -/
 def integralComparisonSequenceScalarComposition (Y : Scheme.{t}) :=
   (integralComparisonSequenceScalarComposition_existsUnique l E L ι M j Y).exists.choose
 
@@ -996,8 +914,7 @@ end WeilConjectures
 namespace WeilConjectures
 open scoped ChangeOfRings
 
-/-- The chosen ordinary identity inverse-image map, prior to localization.
-Source: Stacks 0D6D, 03D3 (blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- The chosen ordinary identity inverse-image map, prior to localization. -/
 def integralComparisonSequenceUnit (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{t}) :=
@@ -1029,12 +946,7 @@ private theorem sequenceScalarMapId (l : ℕ) [Fact l.Prime]
   ext U : 3
   exact congrArg (fun α ↦ α.hom.app (op U.unop.2)) (hs U.unop.1)
 
-/-- Multiplication determines the identity scalar extension on whole quotient systems.
-Source: Stacks 06YY (blueprint: def-trf-integral-comparison-sequence-systems).
-Proof: multiplication of a scalar and a module section is balanced and commutes with
-all quotient transitions and restrictions. Sheafification extends it to scalar change.
-The inverse inserts the scalar one. The tensor relations give both inverse equations,
-and local generation by tensors gives uniqueness. -/
+/-- Multiplication determines the identity scalar extension on whole quotient systems. -/
 theorem integralComparisonSequenceScalarUnit_existsUnique (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{t}) :
@@ -1049,8 +961,7 @@ theorem integralComparisonSequenceScalarUnit_existsUnique (l : ℕ) [Fact l.Prim
     (sequenceScalarMapId l E X)
     (integralComparisonSequenceScalarModel l E E (AlgHom.id ℚ_[l] E) X)
 
-/-- Multiplication on the actual quotient systems is the scalar unit.
-Source: Stacks 06YY (blueprint: def-trf-integral-comparison-sequence-systems). -/
+/-- Multiplication on the actual quotient systems is the scalar unit. -/
 def integralComparisonSequenceScalarUnit (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{t}) :=

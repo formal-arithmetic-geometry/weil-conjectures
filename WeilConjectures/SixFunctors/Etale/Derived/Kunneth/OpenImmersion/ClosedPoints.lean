@@ -13,20 +13,21 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveMorphism
 /-!
 # Base change along open immersions: the minimal counterexample
 
-This file contains the "minimal counterexample" step of the proof of blueprint
-`corollary-open-direct-image-over-field--2`: if, for all data with `dim X + dim Y ≤ N`, the base
+This file contains the "minimal counterexample" step of the proof of base change for open
+immersions along a product projection: if, for all data with `dim X + dim Y ≤ N`, the base
 change maps are isomorphisms on the geometric stalks at non-closed points, then they are
 isomorphisms. To check the stalk at a closed point `z`, restrict to affine open neighbourhoods `X₀`
 and `Y₀` of the images of `z` (étale base change), compactify `Y₀` into a projective `K`-scheme of
-the same dimension (blueprint `corollary-open-direct-image-over-field--2`), and apply the projective
-case.
+the same dimension, and apply the projective case.
 
 In the formalisation, the restriction to the affine open neighbourhoods is done by étale
 locality of the base change map
 (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_etale_cover`),
 applied to the open cover of `X ×_K Y` by the products `X₀ ×_K Y₀` of affine opens; on each
 of them the base change map is the restriction of the base change map over `X₀ ×_K Ȳ`, which
-is an isomorphism by the projective case.
+is an isomorphism by the projective case. For an affine second factor `Y`, compactify `Y` into
+a projective `K`-scheme `Ȳ` of the same dimension, apply the projective case to `X ×_K Ȳ`, and
+restrict to the open subscheme `X ×_K Y`.
 -/
 
 @[expose] public section
@@ -41,12 +42,10 @@ open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- The minimal counterexample step of blueprint `corollary-open-direct-image-over-field--2` for an
-affine second factor: if the base change maps are isomorphisms on the geometric stalks at non-closed
-points for all data with `dim X + dim Y ≤ N`, then `corollary-open-direct-image-over-field--2` holds
-for data with `dim X + dim Y ≤ N` and `Y` affine. Compactify `Y` into a projective `K`-scheme `Ȳ` of
-the same dimension (blueprint `corollary-open-direct-image-over-field--2`), apply the projective
-case to `X ×_K Ȳ`, and restrict to the open subscheme `X ×_K Y`. -/
+/-- The minimal counterexample step for an affine second factor: if the base change maps are
+isomorphisms on the geometric stalks at non-closed points for all data with `dim X + dim Y ≤ N`,
+then base change for open immersions along the projection holds for data with
+`dim X + dim Y ≤ N` and `Y` affine. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_atNonClosed_of_isAffine {N : WithBot ℕ∞}
     (H : Etale.OpenImmersionBaseChangeAtNonClosed Λ N) {K : Type u} [Field K]
     {X U Y W V : Scheme.{u}} (aX : X ⟶ Spec (.of K)) (aY : Y ⟶ Spec (.of K))
@@ -78,10 +77,9 @@ theorem Etale.isIso_baseChangeHomologyMap_of_atNonClosed_of_isAffine {N : WithBo
   exact Etale.isIso_baseChangeHomologyMap_of_etale_restriction Λ sq₂ sq₁ sq (sq₂.lift_fst _ _ _)
     (pullback.lift_fst _ _ _) i F hF₂
 
-/-- Proof of blueprint `corollary-open-direct-image-over-field--2`, the minimal counterexample: if
-for all data with `dim X + dim Y ≤ N` the base change maps are isomorphisms on the geometric stalks
-at the non-closed points of `X ×_K Y`, then `corollary-open-direct-image-over-field--2` holds for
-all data with `dim X + dim Y ≤ N`. -/
+/-- The minimal counterexample: if for all data with `dim X + dim Y ≤ N` the base change maps are
+isomorphisms on the geometric stalks at the non-closed points of `X ×_K Y`, then base change for
+open immersions along the projection holds for all data with `dim X + dim Y ≤ N`. -/
 theorem Etale.openImmersionBaseChangeAtMost_of_atNonClosed {N : WithBot ℕ∞}
     (H : Etale.OpenImmersionBaseChangeAtNonClosed Λ N) :
     Etale.OpenImmersionBaseChangeAtMost Λ N := by

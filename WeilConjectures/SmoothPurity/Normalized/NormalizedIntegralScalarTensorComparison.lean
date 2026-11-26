@@ -13,8 +13,9 @@ import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorRepresen
 
 /-! # Descent of the normalized integral scalar tensor comparison
 
-Source: Stacks 07A4 and 0941; categories.tex, Tag 04VK.
-(blueprint: lem-pur-normalized-integral-scalar-tensor-descent).
+## References
+
+* Stacks Project, Tags 04VK, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -65,17 +66,7 @@ attribute [local implicit_reducible] integralOperationsTensorOnGood
   integralOperationsGoodLocalization integralOperationsTensorComplexFunctor
 
 variable (W : AlgebraicGeometry.Scheme.{u})
-/-- The normalized tensor comparison descends uniquely from good representatives.
-Source: Stacks 07A4 and 0941; categories.tex, Tag 04VK.
-(blueprint: lem-pur-normalized-integral-scalar-tensor-descent).
-Proof: whisker the prescribed strict scalar Roos transformation with the two
-inclusions of good complexes and with derived localization. The chain
-quasi-isomorphism theorem makes its components invertible. The two normalized
-tensor representative comparisons and the exact scalar representative comparison
-form the source and target sides of a functor square. The product good-complex
-localization makes restriction fully faithful, so functorSquareRepresentativeDescent
-lifts that square uniquely. Its defining component equation is exactly the
-specified Roos normalization. No new comparison map or theorem hole is chosen. -/
+/-- The normalized tensor comparison descends uniquely from good representatives. -/
 theorem normalizedIntegralScalarTensorComparison :
     ∃! α : integralCompletedTensor l E W ⋙ integralOrdinaryDerivedScalar l E L ι W ≅
       (integralOrdinaryDerivedScalar l E L ι W).prod

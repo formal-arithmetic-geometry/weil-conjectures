@@ -15,9 +15,8 @@ import WeilConjectures.SmoothPurity.Common.CommonStagePullbackRepresentativeLine
 
 /-! # Rational and common-stage automorphism shift comparisons
 
-Source: current blueprint, Weil-structures paragraph of the open-closed triangle.
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence).
-The finite and integral constructions are re-exported from the stage core.
+The rational and common-stage automorphism square comparisons and their compatibility with
+shifts. The finite and integral constructions are re-exported from the stage core.
 -/
 
 @[expose] public noncomputable section
@@ -386,14 +385,7 @@ private theorem normalized_transition_shift
   let := r L
   exact rationalPullbackTransitionShift l Ω f E L h hE hL nE.1 nL.1
 
-/-- The rational and common-stage square comparisons preserve the descended shifts.
-Source: Weil-structures paragraph, rationalization and coherent finite-field descent
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence).
-Proof: extend the integral shift comparisons and square components by linearity
-on pure tensors. Their equations remain equalities after rationalization.
-At algebraically closed coefficients represent each arrow at one finite common
-stage. The scalar/compositor and scalar/shift squares identify every enlargement
-with the same equation. Thus the shift-compatible square descends. -/
+/-- The rational and common-stage square comparisons preserve the descended shifts. -/
 theorem automorphismConstructibleStage_descended_shifts
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

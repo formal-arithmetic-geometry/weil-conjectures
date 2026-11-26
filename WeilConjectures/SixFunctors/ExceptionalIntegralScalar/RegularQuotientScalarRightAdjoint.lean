@@ -13,13 +13,25 @@ import WeilConjectures.SixFunctors.Regular.RegularQuotientRestrictionComplete
 
 /-! # Regular quotient extension is a right adjoint on finite-Tor categories
 
-Source: Zheng Lemma 5.22 and Proposition 5.26, integral reduction part of sk-thm-sf-compatibility.
-Stacks Tags 0A70 and 0A71 (perfect coefficient duality and coinduction), 06YY and 07A6 (derived
-change of coefficients and its normalized adjunction). The precise ring-level regular-quotient
-duality formula is Stacks Lemma 47.13.10 (0BZH), using perfect-algebra evaluation in Lemma 47.13.9
-(0BZE). Its realization on the specified sheaf categories is part of this argument, not supplied
-by the ring statement alone.
-(blueprint: lem-sf-regular-quotient-scalar-right-adjoint). -/
+Regular quotient extension, restricted to the prescribed finite-Tor categories, has a left
+adjoint, namely restriction followed by `[-1]`.
+
+## Implementation details
+
+The quotient `B = A/π^(n+1)` of the completed coefficient sheaf `A` has a locally free
+resolution of length one, whose algebra-valued dual is `B[-1]`; hence derived coinduction is
+derived extension followed by `[-1]`. Restriction of a bounded finite-Tor constructible
+`B`-complex is derived complete, and its reductions stay constructible with Tor interval enlarged
+by at most one, so the adjunction restricts to the finite-Tor categories. The realization of the
+ring-level duality formula on the specified sheaf categories is part of this argument.
+
+## References
+
+* [Zheng, Lemma 5.22 and Proposition 5.26]
+* [Stacks, Tag 0A70], [Stacks, Tag 0A71] (perfect coefficient duality and coinduction)
+* [Stacks, Tag 06YY], [Stacks, Tag 07A6] (derived change of coefficients)
+* [Stacks, Tag 0BZH], [Stacks, Tag 0BZE] (regular-quotient duality, perfect-algebra evaluation)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -125,32 +137,7 @@ private theorem regularQuotientScalarRightAdjoint_of_trace
     (finiteTorConstructibleIntegral l E.carrier T).le_shift (-1 : ℤ) _ (hU K))
 
 /-- Regular quotient extension, restricted to the prescribed finite-Tor categories,
-has a left adjoint. This assertion contains no geometric operation or compactification.
-Source: Zheng, Lemma 5.22 and Proposition 5.26; Stacks Tags 0A70, 0A71 and 07A6.
-Proof: write A for the completed coefficient sheaf and B for its quotient by
-pi^(n+1). The normalized principal quotient sequence is a locally free resolution
-of B of length one. Its algebra-valued dual is canonically B[-1]. Construct ordinary
-sheaf coinduction as the internal module-object equalizer and transport it to the
-actual ring-sheaf module category using the section-module equivalence. Derive the
-restriction/coinduction adjunction using exactness of restriction and K-injective
-resolutions. Perfect evaluation for the two-term resolution, with its quotient
-action retained, identifies derived coinduction with derived extension followed
-by [-1]. The augmentation and trace fix this comparison. Compose with the inverse
-shift adjunction: restriction followed by [-1] is left adjoint to extension.
-Restriction of a bounded finite-Tor constructible B-complex is annihilated by a
-fixed power of pi. On every slice the finite geometric series in the nilpotent
-scalar shift inverts one minus that shift; hence its localization internal Hom
-vanishes. Normalized coefficient completeness transport identifies this condition
-with the prescribed augmented reduction Roos triangle, so it is derived complete.
-Tensor its local finite-free
-models with the length-one quotient resolution: their finite reductions remain
-constructible, with one common cohomological and Tor interval enlarged by at most
-one. Hence shifted restriction lands in the integral finite-Tor category. Restrict
-the ambient adjunction along the two fully faithful inclusions. Finally transport
-its right functor through S.realization; this proves the assertion for the specified
-S, independently of its presentation. The exponent n+1 is positive even for n=0;
-the same resolution and equations apply to zero objects and empty schemes.
-(blueprint: lem-sf-regular-quotient-scalar-right-adjoint). -/
+has a left adjoint. This assertion contains no geometric operation or compactification. -/
 theorem regularQuotientScalarRightAdjoint
     (l : ℕ) [Fact l.Prime]
     (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

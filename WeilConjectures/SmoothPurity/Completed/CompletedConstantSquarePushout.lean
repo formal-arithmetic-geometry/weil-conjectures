@@ -18,6 +18,16 @@ import Mathlib.LinearAlgebra.TensorProduct.Basis
 The finite-free completion comparison identifies the completed coefficient square
 with the sectionwise pushout of the constant coefficient map and the two
 constant-to-completion maps.
+
+## Implementation details
+
+At every pro-étale object, an integral `E`-basis of `F` from the finite-free comparison
+identifies the completed coefficient ring of `F` with a finite direct sum of copies of that of
+`E`; the pushout condition then follows from the universal property of the tensor product.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2(1)
 -/
 
 @[expose] public noncomputable section
@@ -228,22 +238,9 @@ private theorem constantPresentation_completion (W : Scheme.{u}) :
   rw [hX, Category.id_comp] at h
   exact h
 
-/-- The completed coefficient square is a sectionwise pushout.
-
-Source: Bhatt--Scholze, Lemma 6.8.2(1), together with the finite-free completed
-scalar comparison.  At every pro-etale object, choose the integral E-basis of F
-from the finite-free comparison.  Its compatible reductions identify the target
-completed coefficient ring with the finite direct sum of copies of the source
-completion indexed by that basis.  The resulting multiplication map is the
-pushout of the constant map and the two constant-to-completion maps.  The
-identification is compatible with restrictions because the coefficient maps are
-constant and their residue normalizations determine the completion map uniquely;
-therefore the sectionwise pushout condition follows from the universal property
-of tensor product.  For an empty site object all four section rings are zero; for the identity
-field extension the square is the identity square.  Both satisfy the same
-universal property.
-(blueprint: new-completed-constant-square-pushout).
--/
+/-- On every pro-étale object `U`, the square formed by the constant coefficient map, the
+two constant-to-completion maps and the completed coefficient map is a pushout of commutative
+rings. -/
 theorem completedConstantSquare_isPushout (W : Scheme.{u}) :
     ∀ U : W.ProEtᵒᵖ,
       IsPushout

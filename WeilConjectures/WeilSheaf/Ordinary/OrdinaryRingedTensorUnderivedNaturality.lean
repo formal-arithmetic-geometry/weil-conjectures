@@ -7,7 +7,18 @@ module
 
 public import WeilConjectures.WeilSheaf.Ordinary.OrdinaryRingedTensorCoherenceData
 
-/-! Naturality of an evaluation-normalized ordinary tensor comparison. -/
+/-! Naturality of an evaluation-normalized ordinary tensor comparison.
+
+## Implementation details
+
+Naturality of the mate-normalized comparison `d` is obtained from the naturality of `H`, of the
+braiding and of the ringed tensor-Hom equivalence, and injectivity of that equivalence. The
+components `E(b(Q,P))⁻¹ ≫ d(Q,P)` then assemble into `ν`.
+
+## References
+
+* Stacks Project, Tags 03EO and 0FPQ.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -204,19 +215,7 @@ private theorem quotient_naturality
 
 end
 
-/-- The mate-normalized underived comparison is natural in both tensor factors.
-Source: Stacks 03EO and 0FPQ.
-(blueprint: new-sf-ordinary-ringed-tensor-underived-naturality).
-
-Proof: the quotient equation and epimorphic quotient maps give naturality of `b`.
-Precomposition on ordinary internal Hom is the mate of the tensor map, so the
-ordinary adjunction is natural in its parameter. Rewrite the inverse of `d` using
-its uncurrying equation, and do the same for the identity of the target tensor.
-Naturality of `H`, of braiding and of the ringed tensor-Hom equivalence identifies
-the two transposes. Injectivity of that equivalence proves naturality of `d` in
-both variables. The components `E(b(Q,P))⁻¹ ≫ d(Q,P)` therefore assemble into `ν`;
-cancellation of `E(b)` with its inverse proves the quotient normalization.
--/
+/-- The mate-normalized underived comparison is natural in both tensor factors. -/
 theorem ordinary_ringed_tensor_underived_naturality
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     {C : Type (u + 1)} [SmallCategory C] (J : GrothendieckTopology C)

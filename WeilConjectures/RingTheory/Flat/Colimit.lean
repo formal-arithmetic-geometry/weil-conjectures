@@ -26,8 +26,7 @@ open CategoryTheory Limits
 namespace RingHom
 
 /-- Let `R = colim_i R_i` be a filtered colimit of commutative rings and `ψ : R → S` a ring map
-such that each composite `R_i → R → S` is flat. Then `ψ` is flat.
-(blueprint: `lem-weil-pbc-colimit-rings-flat`) -/
+such that each composite `R_i → R → S` is flat. Then `ψ` is flat. -/
 theorem Flat.of_isColimit_of_forall_comp {J : Type u} [SmallCategory J] [IsFiltered J]
     {F : J ⥤ CommRingCat.{u}} {c : Cocone F} (hc : IsColimit c) {S : CommRingCat.{u}}
     (ψ : c.pt ⟶ S) (h : ∀ j, (c.ι.app j ≫ ψ).hom.Flat) : ψ.hom.Flat := by

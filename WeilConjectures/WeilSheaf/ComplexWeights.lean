@@ -16,8 +16,8 @@ The definition of the weights of a Weil complex has two halves. A Weil complex `
 weights at most `w + j`; it has *weights at least* `w` if its Verdier dual `D_Y K` has weights
 at most `-w`. The upper half is `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost`
 (`WeilConjectures.DeligneLaumon.Reduction.Weights`), with cohomological indexing so that the
-bound in degree `j` is `w + j`; this file records that it is the upper half of the blueprint
-definition and proves that shifting by `n` raises the bound by `n`.
+bound in degree `j` is `w + j`; this file records that it is the upper half of the definition
+and proves that shifting by `n` raises the bound by `n`.
 
 The lower half is not formalised. It needs, at the level of Weil complexes, the dualizing Weil
 complex `ω_Y` (the exceptional inverse image `Ra_Y^! ℚ̄_ℓ` with its canonical Weil structure)
@@ -57,8 +57,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 /-- *Weights at most `w` of a Weil complex.* A Weil complex `K` has weights at most `w` if and
 only if for every `j ∈ ℤ` its cohomology sheaf `𝓗ʲK` is `ι`-mixed of weights at most `w + j`.
-This is the upper half of the blueprint definition; its lower half, through the Verdier dual,
-is not available for Weil complexes (see the module docstring). -/
+This is the upper half of the definition of the weights of a Weil complex. -/
 theorem isMixedOfWeightsAtMost_iff :
     K.IsMixedOfWeightsAtMost ι w ↔
       ∀ j : ℤ, ((homologySheaf j).obj K).IsMixedOfWeightsAtMost ι (w + j) :=

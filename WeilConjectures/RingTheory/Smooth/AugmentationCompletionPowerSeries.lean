@@ -18,8 +18,13 @@ import Mathlib.RingTheory.MvPowerSeries.Equiv
 /-!
 # Power-series coordinates on the completion of a smooth augmented algebra
 
-Source: Stacks Project, Tag 05D5.
-(blueprint: lem-sbc-smooth-augmentation-completion-power-series)
+The completion of a smooth `B`-algebra `C` over a local ring `B` along the kernel of an
+augmentation `ε : C →ₐ[B] B` is isomorphic to a multivariate power-series ring over `B`,
+compatibly with the augmentation.
+
+## References
+
+* [Stacks, Tag 05D5]
 -/
 
 @[expose] public section
@@ -38,18 +43,7 @@ private theorem eval_factor {R S : Type u} [CommRing R] [CommRing S]
     simp only [AdicCompletion.evalₐ_mk]
     exact AdicCompletion.Ideal.mk_eq_mk I h a
 
-/-- Compatible bijections on all polynomial truncations induce completion coordinates.
-
-Source: Stacks Project, Tag 05D5, final inverse-limit paragraph.
-
-Proof: Put I = ker ε and J the variables ideal. The truncation bijections are
-compatible by construction, because they are all induced by the same evaluation map f.
-Taking inverse limits gives an algebra equivalence between the I-adic completion of C
-and the J-adic completion of the multivariate polynomial ring. The canonical equivalence
-`MvPowerSeries.toAdicCompletionAlgEquiv` identifies the latter with the multivariate
-power-series ring. Under the quotient maps modulo I, respectively J, the evaluation map
-is the identity on B; applying constant coefficient therefore gives ε on every element
-of C. This also covers n = 0, where both inverse systems have positive levels B. -/
+/-- Compatible bijections on all polynomial truncations induce completion coordinates. -/
 private theorem exists_completion_algEquiv_of_bijective_truncations
     (B C : Type u) [CommRing B] [CommRing C] [Algebra B C]
     (ε : C →ₐ[B] B) (n : ℕ)
@@ -146,23 +140,7 @@ private theorem exists_completion_algEquiv_of_bijective_truncations
   exact (MvPowerSeries.coeff_zero_eq_constantCoeff_apply t).symm
 
 /-- The augmentation-adic completion of a smooth algebra over a local ring has
-power-series coordinates preserving the augmentation.
-
-Source: Stacks Project, Tag 05D5, including its explicit choice of generators.
-(blueprint: lem-sbc-smooth-augmentation-completion-power-series)
-
-Proof: Put I = ker ε. The split conormal sequence identifies I/I² with
-Ω[C/B] ⊗[C,ε] B, a finite projective B-module. Over the local ring it is free
-of some finite rank n. Lift a basis to I. Sending the variables to these lifts
-induces Ψ : B[[X₁,...,Xₙ]] → Ĉ. Modulo the squares of the two ideals Ψ is an
-isomorphism. Inductively, formal smoothness lifts the inverse modulo the k-th
-power to the next power. The resulting composite on truncated power series
-sends Xᵢ to Xᵢ plus a term of degree at least k; subtracting these terms gives
-its inverse. Surjectivity of Ψ on each truncation then makes the lifted map an
-inverse of Ψ. These inverses are compatible, so inverse limits give an algebra
-isomorphism. Take its inverse for e. Because the chosen lifts lie in I,
-constant coefficient after e agrees with ε on C. Rank zero is allowed and
-produces the constant power-series ring. -/
+power-series coordinates preserving the augmentation. -/
 theorem exists_augmented_completion_powerSeries
     (B C : Type u) [CommRing B] [IsLocalRing B] [CommRing C] [Algebra B C]
     [Smooth B C] (ε : C →ₐ[B] B) :

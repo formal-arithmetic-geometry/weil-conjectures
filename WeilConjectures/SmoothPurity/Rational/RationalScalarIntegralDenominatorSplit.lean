@@ -16,7 +16,20 @@ import WeilConjectures.NumberTheory.Padics.CoefficientExtensionUniformizerPow
 /-! # Ambient finite separable trace retraction
 
 This is the ambient derived-category part of the coefficient-retract argument.
-(blueprint: lem-sf-rational-scalar-integral-denominator-split).
+
+## Implementation details
+
+`Res K` is derived complete, so the finite-free completed comparison identifies `Ext (Res K)`
+with the ordinary extension `𝒪_F ⊗_{𝒪_E} Res K`. The map `μ` is the counit `z ⊗ k ↦ z k`.
+Choose an `E`-basis `b_i` of `F` with trace-dual basis `c_i`, so that `∑ i, c_i ⊗ b_i` is the
+separability idempotent of `F ⊗_E F`, and clear denominators: `δ c_i, b_i ∈ 𝒪_F` with
+`δ = u ϖ_F ^ n`. Then `s : k ↦ ∑ i, u⁻¹ δ c_i ⊗ b_i k` is `𝒪_F`-linear and `μ ∘ s = ϖ_F ^ n`.
+These are termwise formulas on complexes of sheaves, so they descend to the derived category.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(2), Remark 6.8.15.
+* Stacks Project, Tags 090W and 02FL (separability idempotent).
 -/
 
 @[expose] public section
@@ -30,27 +43,7 @@ namespace WeilConjectures
 For a derived-complete complex `K` of completed `𝒪_F`-modules, let `Res K` be its derived
 restriction to `𝒪_E` and `Ext (Res K)` its completed scalar extension back to `𝒪_F`.
 Then there are integral morphisms `s : K ⟶ Ext (Res K)` and `μ : Ext (Res K) ⟶ K` with
-`s ≫ μ = ϖ_F ^ n • 𝟙 K` for some `n`.
-
-Mathematics: `Res K` is derived complete, so the finite-free completed comparison
-identifies `Ext (Res K)` with the ordinary extension `𝒪_F ⊗_{𝒪_E} Res K`. The map `μ` is the
-counit `z ⊗ k ↦ z k` of extension ⊣ restriction. Choose an `E`-basis `b_i` of `F` and its
-trace-dual basis `c_i`, so that `∑ i, b_i c_i = 1` and `∑ i, c_i ⊗ b_i` is the separability
-idempotent of `F ⊗_E F`. Clear denominators: `δ c_i, b_i ∈ 𝒪_F` with `δ = u ϖ_F ^ n`. Then
-`s : k ↦ ∑ i, u⁻¹ δ c_i ⊗ b_i k` is `𝒪_F`-linear by the centralizing identity of the
-separability idempotent, and `μ ∘ s = ϖ_F ^ n`. These are termwise formulas on complexes of
-sheaves, so they descend to the derived category.
-
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15; Stacks Project Tags 090W and
-02FL (separability idempotent).
-(blueprint: lem-sf-rational-scalar-integral-denominator-split).
-
-Proof: `rationalScalarIntegral_unit_comp_counit` gives natural maps of module sheaves whose
-composite is multiplication by an integer `N = c ϖ_F ^ n`, `c` a unit (the Frobenius unit of
-the completed coefficient map followed by the multiplication counit, rescaled). Applied
-termwise to a representative complex of `K` they give the composite `N • 𝟙 K`; the exact
-ordinary extension is identified with the completed one on the complete object `Res K`
-(`isIso_completedScalarComparison_app`). Rescaling by `c⁻¹` gives the claim. -/
+`s ≫ μ = ϖ_F ^ n • 𝟙 K` for some `n`. -/
 theorem rationalScalarIntegral_trace_split
     (l : ℕ) [Fact l.Prime]
     (E F : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -106,16 +99,7 @@ theorem rationalScalarIntegral_trace_split
     Units.inv_mul_cancel_left]
 
 /-- The finite separable trace construction gives an ambient retract after
-restriction of coefficients.  Constructibility is handled separately.
-
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15; Stacks Project
-Tags 090W and 02FL.
-(blueprint: lem-sf-rational-scalar-integral-denominator-split).
-
-Proof: use the trace-dual basis of the finite separable extension F/E.  Restrict
-K along the completed coefficient map.  The trace-dual section and multiplication
-retraction are defined on the derived representatives and descend through scalar
-localization; their composite is the identity by the two dual-basis identities. -/
+restriction of coefficients. -/
 theorem rationalScalar_ambient_trace_retract
     (l : ℕ) [Fact l.Prime]
     (E F : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -100,13 +100,9 @@ variable {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- **The proper direct image of Weil complexes is a left adjoint** (blueprint
-`theorem-verdier-biduality`, the constructible adjunction `Rf_! ⊣ Rf^!` for a proper `f`):
-for a proper morphism `g : Z ⟶ Y` of `k₀`-schemes, `Y` separated of finite type over `k₀`, the
-derived direct image `Rg_*` of Weil complexes has a right adjoint. The adjunction `Rḡ_* ⊣ ḡ^!` on
-`Dᵇc(-, ℚ̄_ℓ)` over `k̄₀` lifts to Weil complexes
-(`CategoryTheory.Endofunctor.IsoAlgebra.isLeftAdjoint_liftFullSubcategory_rightDerivedFunctor`),
-`Rḡ_*` commuting with bounded below coproducts. -/
+/-- **The proper direct image of Weil complexes is a left adjoint**: for a proper morphism
+`g : Z ⟶ Y` of `k₀`-schemes, `Y` separated of finite type over `k₀`, the derived direct image
+`Rg_*` of Weil complexes has a right adjoint. -/
 theorem WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper :
     (derivedLowerStar (k₀ := k₀) (l := l) g).IsLeftAdjoint := by
   have : IsProper (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))) :=

@@ -22,9 +22,13 @@ import WeilConjectures.SmoothPurity.IntegralSystemRealization.IntegralTensorRigh
 
 /-! # Representative-normalized shifts for integral realization operations
 
-Source: blueprint chap-Smooth-purity, theorem-smooth-purity-all-admissible-coefficients, Step 2;
-cochain tensor and mapping-cone conventions of Stacks 011G, 014E and 0941
-(blueprint: def-pur-integral-operation-shift-data).
+## Implementation details
+
+No endpoint isomorphism is accepted without its representative characterization.
+
+## References
+
+* Stacks Project, Tags 011G, 012Z, 014E, 03D2, 03DI, 06YU, 06YY, 07A5 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -40,9 +44,7 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Both tensor slots, with the actual K-flat and Roos normalizations.
-No endpoint isomorphism is accepted without its representative characterization.
-Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- Both tensor slots, with the actual K-flat and Roos normalizations. -/
 structure TensorShifts where
   systemLeft (W : Scheme.{u}) (r : ℤ) :
     tensorShiftFirst (System l E W) r ⋙ (calculus l E W).systemClosed.tensor ≅
@@ -79,22 +81,7 @@ private theorem tensorShifts_ext (s t : TensorShifts l E)
   rfl
 
 set_option linter.unusedVariables false in
-/-- The representative formulas uniquely determine the four tensor comparisons.
-Source: Stacks 011G, 012Z, 014E, 06YU, 0941 and blueprint Step 2
-(blueprint: def-pur-integral-operation-shift-data).
-
-Proof: on total complexes, reindex the first slot with coefficient 1 and the
-second (i,j)-summand with coefficient (-1)^(ri). The signed differentials give
-chain isomorphisms, natural in both complexes. Shifts preserve K-flatness and
-termwise flatness. The same maps commute with every coefficient transition.
-For completed tensor pass to products and to Cone(1-s), using diagonal
-coefficients (1,(-1)^r), then shift by -1. This gives exactly the two displayed
-completed properties. The K-flat model comparisons descend the strict-system
-maps, giving their displayed properties. Every object has the recorded resolving
-representatives. Total tensor generators and the two cone summands determine
-the cochain maps, while localization determines their derived maps on all roofs.
-Thus each natural comparison is unique. Proof irrelevance identifies all the
-normalization witnesses, and extensionality identifies the four families. -/
+/-- The representative formulas uniquely determine the four tensor comparisons. -/
 theorem tensorShifts_existsUnique : ∃! s : TensorShifts l E, True := by
   classical
   let sl := fun W r ↦ (systemTensorLeftShift_existsUnique l E W r).exists.choose
@@ -134,50 +121,43 @@ theorem tensorShifts_existsUnique : ∃! s : TensorShifts l E, True := by
       (t.integralRight_normalized W r) (s.integralRight_normalized W r)
   exact tensorShifts_ext l E t s hsl hsr hil hir
 
-/-- The tensor shifts chosen from a characterization that determines every map.
-Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- The tensor shifts chosen from a characterization that determines every map. -/
 def tensorShifts : TensorShifts l E := (tensorShifts_existsUnique l E).exists.choose
 
-/-- Canonical exact-restriction/right-derived-limit shift, with unchanged universes.
-Source: Stacks 0941 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- Canonical exact-restriction/right-derived-limit shift, with unchanged universes. -/
 @[instance_reducible]
 def limitShift (W : Scheme.{u}) : (coefficientSequenceLimit l E W).CommShift ℤ := by
   dsimp [coefficientSequenceLimit, coefficientSequenceDerivedRestriction,
     coefficientConstantTowerLimit]
   infer_instance
 
-/-- The reduction shift is the mate through the actual reconstruction adjunction.
-Source: Stacks 06YY, 0941 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- The reduction shift is the mate through the actual reconstruction adjunction. -/
 @[instance_reducible]
 def reductionShift (W : Scheme.{u}) : ((calculus l E W).reduction).CommShift ℤ :=
   letI := limitShift l E W
   (calculus l E W).adjunction.leftAdjointCommShift ℤ
 
-/-- Exact inverse image has its localized termwise cochain shift.
-Source: Stacks 03D2 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- Exact inverse image has its localized termwise cochain shift. -/
 @[instance_reducible]
 def systemPullShift {U V : Scheme.{u}} (f : U ⟶ V) : (pull l E f).CommShift ℤ := by
   dsimp [pull, pullbackTensorSequenceDerived]
   infer_instance
 
-/-- Direct image has the mate of that shift through its specified derived adjunction.
-Source: Stacks 07A5 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- Direct image has the mate of that shift through its specified derived adjunction. -/
 @[instance_reducible]
 def systemPushShift (o : Operations l E) {U V : Scheme.{u}} (f : U ⟶ V) :
     (Operations.push l E o f).CommShift ℤ :=
   letI := systemPullShift l E f
   (o.direct f).adj.rightAdjointCommShift ℤ
 
-/-- Exact open extension has the localized termwise shift.
-Source: Stacks 03DI (blueprint: def-pur-integral-operation-shift-data). -/
+/-- Exact open extension has the localized termwise shift. -/
 @[instance_reducible]
 def systemOpenShift (o : Operations l E) {U V : Scheme.{u}} (j : U ⟶ V)
     [IsOpenImmersion j] : (Operations.shriek l E o j).CommShift ℤ := by
   dsimp [Operations.shriek, Open.derived]
   infer_instance
 
-/-- The fixed shifts on strict-system operations and their actual composites.
-Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- The fixed shifts on strict-system operations and their actual composites. -/
 def systemShifts (o : Operations l E) : InterpretationShifts (systemInterpretation l E o) where
   pull := systemPullShift l E
   push := systemPushShift l E o
@@ -191,8 +171,7 @@ def systemShifts (o : Operations l E) : InterpretationShifts (systemInterpretati
   tensorRight := (tensorShifts l E).systemRight
 
 /-- The fixed integral shifts: completed pullback uses its signed Roos descent;
-proper image and open extension use right derivation and exact localization.
-Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data). -/
+proper image and open extension use right derivation and exact localization. -/
 def integralShifts : InterpretationShifts (integralInterpretation l E) where
   pull := fieldIntegralPullShift l E
   push f := by
@@ -207,8 +186,7 @@ def integralShifts : InterpretationShifts (integralInterpretation l E) where
   tensorLeft := (tensorShifts l E).integralLeft
   tensorRight := (tensorShifts l E).integralRight
 
-/-- The ambient source of the recorded realization, with independent input labels.
-Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- The ambient source of the recorded realization, with independent input labels. -/
 def IndependentExpression.source {B : Scheme.{u}} {I : Type u} {X : I → Over B}
     (o : Operations l E) {W : Over B} (e : IndependentExpression B I X W) :
     (∀ i, Integral l E (X i).left) ⥤ Integral l E W.left :=
@@ -216,13 +194,7 @@ def IndependentExpression.source {B : Scheme.{u}} {I : Type u} {X : I → Over B
     coefficientSequenceLimit l E W.left
 
 open Classical in
-/-- Reduction commutes with replacement of an independently labelled input.
-This equality involves the actual reduction functor, not a selected representative.
-Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data).
-
-Proof: the inputReduction functor is pointwise reduction. At the selected index
-its updated value is reduction of P, and at all other indices it is unchanged.
-The independent-context evaluation identity therefore gives the claimed equality. -/
+/-- Reduction commutes with replacement of an independently labelled input. -/
 theorem IndependentExpression.reductionContext_evaluate {B : Scheme.{u}} {I : Type u}
     {X : I → Over B} (o : Operations l E) {W : Over B}
     (e : IndependentExpression B I X W) (K : ∀ i, Integral l E (X i).left)
@@ -244,8 +216,7 @@ theorem IndependentExpression.reductionContext_evaluate {B : Scheme.{u}} {I : Ty
 
 open Classical in
 /-- Source shift: the reduction mate, the exact/proper/open/signed-tensor context,
-and finally total limit's canonical shift, with their actual evaluation endpoints.
-Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data). -/
+and finally total limit's canonical shift, with their actual evaluation endpoints. -/
 def IndependentExpression.sourceShift {B : Scheme.{u}} {I : Type u} {X : I → Over B}
     (o : Operations l E) {W : Over B} (e : IndependentExpression B I X W)
     (K : ∀ i, Integral l E (X i).left) (i : I) (r : ℤ) :
@@ -267,8 +238,7 @@ def IndependentExpression.sourceShift {B : Scheme.{u}} {I : Type u} {X : I → O
         ((e.val.evaluate (systemInterpretation l E o)).obj ((inputReduction l E X).obj K))
 
 open Classical in
-/-- Integral shift through the exact same independent slot and expression context.
-Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- Integral shift through the exact same independent slot and expression context. -/
 def IndependentExpression.integralShift {B : Scheme.{u}} {I : Type u} {X : I → Over B}
     {W : Over B} (e : IndependentExpression B I X W)
     (K : ∀ i, Integral l E (X i).left) (i : I) (r : ℤ) :
@@ -276,8 +246,7 @@ def IndependentExpression.integralShift {B : Scheme.{u}} {I : Type u} {X : I →
       ((e.val.evaluate (integralInterpretation l E)).obj K)⟦r⟧ :=
   e.shift (integralInterpretation l E) (integralShifts l E) K i r
 
-/-- The components for a single-input shift, on the ambient family category.
-Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- The components for a single-input shift, on the ambient family category. -/
 def IndependentExpression.sourceShiftComponent {B : Scheme.{u}} {I : Type u}
     {X : I → Over B} (o : Operations l E) {W : Over B}
     (e : IndependentExpression B I X W) (K : ∀ i, Integral l E (X i).left)
@@ -287,8 +256,7 @@ def IndependentExpression.sourceShiftComponent {B : Scheme.{u}} {I : Type u}
   (e.source l E o).mapIso (eqToIso (inputShift_obj _ K i r)) ≪≫
     e.sourceShift l E o K i r
 
-/-- The corresponding components on the actual integral expression functor.
-Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- The corresponding components on the actual integral expression functor. -/
 def IndependentExpression.integralShiftComponent {B : Scheme.{u}} {I : Type u}
     {X : I → Over B} {W : Over B} (e : IndependentExpression B I X W)
     (K : ∀ i, Integral l E (X i).left) (i : I) (r : ℤ) :
@@ -302,14 +270,12 @@ attribute [local irreducible] reductionShift limitShift systemShifts integralShi
 attribute [local irreducible] IndependentExpression.sourceShiftComponent
   IndependentExpression.integralShiftComponent
 
-/-- The actual strict completed-coefficient tower underlying a system complex.
-Source: Stacks 0941 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- The actual strict completed-coefficient tower underlying a system complex. -/
 abbrev restrictedTower (W : Scheme.{u})
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) :=
   (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C).asFunctor
 
-/-- The exact ordinary coefficient restriction at one positive level.
-Source: Stacks 0941 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- The exact ordinary coefficient restriction at one positive level. -/
 abbrev levelRestriction (W : Scheme.{u}) (n : ℕ) :=
   coefficientSequenceRestriction l E W ⋙
     (evaluation ℕᵒᵖ (scalarReductionSource l E W)).obj (op n)

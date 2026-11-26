@@ -9,8 +9,19 @@ public import WeilConjectures.SmoothPurity.CanonicalCoefficient.CanonicalCoeffic
 
 /-! # Representative laws after changing closed tensor presentations
 
-Source: Stacks 07A4 and 0941; cancellation in the simultaneous representative squares.
-(blueprint: lem-pur-canonical-coefficient-representative-laws).
+Conjugating the tensor-model comparisons keeps their ordinary strict representative
+normalizations.
+
+## Implementation details
+
+Every new tensor-model comparison is the old one followed by the adjoint comparison; in each
+representative square functoriality cancels the conjugation and naturality moves it past the
+representative identifications, leaving the old square. These are identities in the derived
+sequence category, not deductions from equality of evaluations.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +36,7 @@ namespace WeilConjectures.CanonicalCoefficient
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- Only the representative normalization equations for the explicit conjugated data.
-No fiber-Hom, internal composition, global sections or enriched assertion occurs here. -/
+/-- The representative normalization equations for the conjugated data. -/
 structure RepresentativeLaws (S : CoefficientDerivedSystemFibers l E W) : Prop where
   reduction_tensor : CoefficientReductionTensorNormalization l E W
     (reduction l E W S.toCoefficientDerivedSystemReduction)
@@ -41,23 +51,7 @@ structure RepresentativeLaws (S : CoefficientDerivedSystemFibers l E W) : Prop w
     (quotientData l E W S.toCoefficientDerivedSystemTensors
       S.quotientCalculus.toCoefficientFiniteQuotientData)
 
-/-- Conjugating the comparisons keeps their ordinary strict representative normalizations.
-
-Source: Stacks 07A4, 0941; canonical integral calculus, proof step 2.
-(blueprint: lem-pur-canonical-coefficient-representative-laws).
-
-Proof: every new tensor-model comparison is the old one followed by the adjoint
-comparison. In a representative square substitute F(a inverse); mu; b for mu.
-Functoriality cancels a with its inverse. Naturality of b moves it past the two
-representative identifications; the remaining equation is precisely the old square,
-postcomposed with b. This is tensorSquare, for finite scalar extension, evaluation,
-quotient extension, and the simultaneous strict reduction map. Retain all the old
-strict complexes, quotient identifications, chain maps and pure-tensor equations.
-For reduction_evaluation, expand the three conjugations; naturality at the two
-reduction evaluations and cancellation of the sequence comparison identify the
-new equation with the old one, conjugated at its source and target. These are
-identities in the actual derived sequence category, not deductions from equality
-of evaluations. The argument needs neither boundedness nor nonempty sites. -/
+/-- Conjugating the comparisons keeps their ordinary strict representative normalizations. -/
 theorem representativeLaws (S : CoefficientDerivedSystemFibers l E W) :
     RepresentativeLaws l E W S := by
   refine ⟨?_, ?_, ?_, ?_, ?_⟩

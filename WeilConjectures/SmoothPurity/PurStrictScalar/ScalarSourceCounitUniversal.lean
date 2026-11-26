@@ -11,8 +11,21 @@ public import WeilConjectures.SmoothPurity.PurStrictScalar.NativeConstantSupport
 
 /-! # Universal whole-cochain scalar reduction counit
 
-Source: Stacks 06YY and 0940--0941; the whole-sequence derived balancing construction.
-(blueprint: lem-pur-scalar-source-counit-universal).
+The whole-sequence derived balancing construction, on the source side.
+
+## Implementation details
+
+On the sequence site, ordinary quotient extension is left adjoint to the ordinary completed
+limit; this adjunction is derived using K-flat replacements on the left and K-injective
+replacements on the right, and the normalized right-derived limit comparison of
+`NativeConstantSupportModel` identifies its mate with the displayed cochain counit. Restriction
+to constant integral coefficients and finite free tensor by `B` preserve the relevant acyclic
+replacements, so the composite computes the total left derived functor, giving the right Kan
+extension along `Q`. No finite-evaluation faithfulness is used.
+
+## References
+
+* [Stacks Project, Tags 06YY, 0940 and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -206,23 +219,7 @@ variable (l : ℕ) [Fact l.Prime]
   (i : E →ₐ[ℚ_[l]] F)
 
 /-- Tensor by the finite free constant coefficient ring preserves the universal
-whole-system reduction counit, prior to finite evaluation.
-Source: Stacks 06YY (derived extension of scalars), 0940--0941 (the ringed sequence site).
-Proof: on the sequence site, ordinary quotient extension is left adjoint to the
-ordinary completed limit. Derive this adjunction using K-flat replacements for the
-left adjoint and K-injective replacements for the right adjoint. The normalized
-right-derived limit comparison in NativeConstantSupportModel identifies its mate
-with the displayed cochain counit. Restriction from quotient coefficients to
-constant integral coefficients leaves underlying complexes unchanged and takes a
-K-flat quotient extension to a complex acyclic for this composite. Tensor by B is
-finite free, hence exact and preserves these acyclic replacements. Thus the
-composite computes the total left derived functor of ordinary reduction followed
-by constant tensor, with precisely the displayed counit. Its derived universal
-property on the homotopy category also holds along Q on cochain complexes,
-since every functor to a derived category and every comparison here identifies
-chain homotopic maps. This gives the stated right Kan extension, including
-naturality in every cochain map. No finite-evaluation faithfulness is used.
-(blueprint: lem-pur-scalar-source-counit-universal). -/
+whole-system reduction counit, prior to finite evaluation. -/
 theorem scalarSourceCounit_universal (W : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus.{u, u} l E W) :
     letI := (tensor_exact l E F i W).1

@@ -10,7 +10,10 @@ import WeilConjectures.SmoothPurity.ProEtale.ProEtaleOrdinaryTensorPullbackNatur
 import WeilConjectures.SmoothPurity.ProEtale.ProEtaleTotalTensorPullbackComparisonNormalization
 
 /-! # Coherent natural total tensor pullback comparison
-Source: Stacks 03EL and 07A4; signed total tensor, 06YN.
+
+## References
+
+* Stacks Project, Tags 03EL, 06YN and 07A4.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -58,13 +61,7 @@ private theorem inverse_assoc {B : Type b} [Category.{vb} B] [MonoidalCategory B
   exact h
 
 -- Totalization identifies the two standard tensor functor presentations.
-/-- The natural total comparison retains its component normalization and associativity.
-Source: Stacks 03EL, 07A4 and 06YN
-(blueprint: lem-pur-coherent-total-tensor-pullback-comparison).
-Proof: take the existing natural total pullback comparison. Its components are the
-specified total comparison, hence satisfy the summand formula. Ordinary pullback
-associativity gives inverse associativity. The general ringed chain comparison
-lemma then proves the asserted equation for every pure-triple model associator. -/
+/-- The natural total comparison retains its component normalization and associativity. -/
 theorem proEtaleCoherentTotalTensorPullbackComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (Scheme.ProEt.topology Y) CommRingCat.{u + 1})
     (R' : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})

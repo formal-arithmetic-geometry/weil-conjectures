@@ -13,14 +13,12 @@ public import WeilConjectures.TraceFormula.SourceExchangeKunnethUnit
 # Base change along the Künneth square of a proper morphism
 
 For a proper morphism `f : X ⟶ Y` and `q = f × f : X × X ⟶ Y × Y`, the base change along the
-non-cartesian square `q ≫ p₁' = p₁ ≫ f` (the mate of its composition isomorphism) is compared
-with the compact-support base changes of the product squares of `X` and `Y` (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, Step 3). This is the base-change input of the
-exceptional Künneth part of identity (a) of the trace-class source exchange
-(`ProEtale.CondensedRing.unit_comp_lowerShriek_map_prodBaseChangeIso`). The comparison goes
-through the factorization `q = (1 × f) ≫ (f × 1)` and the cartesian squares
-`(f × 1) ≫ p₁' = p_X ≫ f` and `(1 × f) ≫ p_Y = p₂ ≫ f`, using the pasting laws of `Ex_!`
-(blueprint `proposition-composition-base-change-rf-shriek`).
+non-cartesian square `q ≫ p₁' = p₁ ≫ f` (the mate of its composition isomorphism) is compared with
+the compact-support base changes of the product squares of `X` and `Y`. This is the base-change
+input of the exceptional Künneth part of identity (a) of the trace-class source exchange
+(`ProEtale.CondensedRing.unit_comp_lowerShriek_map_prodBaseChangeIso`). The comparison goes through
+the factorization `q = (1 × f) ≫ (f × 1)` and the cartesian squares `(f × 1) ≫ p₁' = p_X ≫ f` and
+`(1 × f) ≫ p_Y = p₂ ≫ f`, using the pasting laws of `Ex_!`.
 
 -/
 
@@ -220,8 +218,7 @@ lemma upperStar_map_upperStar_map_comp_εIso_inv {S : Over (Spec (.of k))}
   simp only [Functor.comp_map] at hn
   rw [← hu, eqToHom_refl, Category.comp_id, ← reassoc_of% hn, Iso.inv_hom_id_app_assoc]
 
-/-- **Base change along the Künneth square of a proper morphism** (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, Step 3): the unit of `Lq^* ⊣ Rq_!` for
+/-- **Base change along the Künneth square of a proper morphism**: the unit of `Lq^* ⊣ Rq_!` for
 `q = f × f`, followed by the composition isomorphism of `q ≫ p₁' = p₁ ≫ f`, the transported counit,
 the compact-support base change of the product square of `X` and the counit of `Ra_X! ⊣ Ra_X^!`, is
 the compact-support base change of the product square of `Y` followed by

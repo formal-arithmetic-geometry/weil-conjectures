@@ -14,8 +14,21 @@ import WeilConjectures.RingTheory.FormalGlueingH0ChartPowerLift
 /-!
 # Localization of compatible sections of formal glueing data
 
-Source: Stacks Project, More on Algebra, proof of Proposition 05ER, second paragraph,
-using Lemmas 05EQ and 05EP (blueprint: lem-weil-pbc-formal-glueing-H0-localization).
+For a formal glueing datum `X` over a flat ring map, the projection from the module `H⁰` of
+compatible sections to the `i`-th chart induces an isomorphism `H⁰_{fᵢ} ≃ X.M i`.
+
+## Implementation details
+
+The projection is shown to be a localization map (`IsLocalizedModule`): a compatible section
+with zero `i`-th coordinate vanishes after localization at `fᵢ` by injectivity of `alpha i` and
+the overlap equations, and every chart element lifts after multiplication by a power of `fᵢ`.
+
+## References
+
+* [Stacks, Tag 05EL]
+* [Stacks, Tag 05EQ]
+* [Stacks, Tag 05EP]
+* [Stacks, Tag 05ER]
 -/
 
 @[expose] public section
@@ -26,9 +39,7 @@ namespace FormalGlueing
 
 variable {R : Type uL} {S : Type vL} [CommRing R] [CommRing S]
 
-/-- Membership in `h0` gives the two families of compatibility equations.
-Source: Stacks Project, Remark 05EL
-(blueprint: lem-weil-pbc-formal-glueing-H0-localization). -/
+/-- Membership in `h0` gives the two families of compatibility equations. -/
 private theorem h0_equations {t : ℕ} (φ : R →+* S) (f : Fin t → R)
     (X : Data.{uL, vL, wL} φ f) (h : h0 φ f X) :
     let : Algebra R S := φ.toAlgebra
@@ -44,9 +55,7 @@ private theorem h0_equations {t : ℕ} (φ : R →+* S) (f : Fin t → R)
     LocalizedModule.mkLinearMap_apply, LinearEquiv.coe_coe] at hh
   exact hh
 
-/-- A compatible section with zero `i` coordinate is killed by a power of `f i`.
-Source: Stacks Project, Proposition 05ER, second paragraph
-(blueprint: lem-weil-pbc-formal-glueing-H0-localization). -/
+/-- A compatible section with zero `i` coordinate is killed by a power of `f i`. -/
 private theorem h0_projection_kernel {t : ℕ} (φ : R →+* S) (f : Fin t → R)
     (X : Data.{uL, vL, wL} φ f) (i : Fin t) (h : h0 φ f X)
     (hz : h.val.2 i = 0) : ∃ s : Submonoid.powers (f i), s • h = 0 := by
@@ -72,27 +81,7 @@ private theorem h0_projection_kernel {t : ℕ} (φ : R →+* S) (f : Fin t → R
   refine ⟨s, Subtype.ext ?_⟩
   simpa using hs
 
-/-- The projection to a chart extends uniquely across localization and is bijective.
-Source: Stacks Project, More on Algebra, proof of Proposition 05ER, second paragraph,
-using Lemmas 05EQ and 05EP (blueprint: lem-weil-pbc-formal-glueing-H0-localization).
-
-Proof:
-1. Extract the prime/chart and overlap equations from membership in the
-   intersection of kernels defining `h0`.
-2. If a compatible section has zero `i` coordinate, its prime coordinate vanishes
-   after localization at `f i`, by injectivity of `alpha i`. All its chart
-   coordinates vanish there by the `(i,j)` overlap equations. Mathlib's finite
-   product localization instances give one power killing the entire section.
-3. The power-lifting lemma constructs, for every chart element `x`, a compatible
-   section whose `i` coordinate is `(f i)^n • x`
-   [lem-weil-pbc-formal-glueing-H0-chart-power-lift].
-4. Multiplication by powers of `f i` is invertible on the chart. Step 3 gives the
-   denominator-surjectivity axiom for the chart projection. Step 2, applied to
-   a difference of sections, gives the equality-clearing axiom. Thus the chart
-   projection is an `IsLocalizedModule` map.
-5. Mathlib's canonical linear equivalence between two localizations gives the
-   desired bijective map. Its formula on sections and uniqueness are precisely
-   the localization universal property. -/
+/-- The projection to a chart extends uniquely across localization and is bijective. -/
 theorem exists_unique_bijective_h0_localization {t : ℕ} (φ : R →+* S)
     (hflat : φ.Flat) (f : Fin t → R) (X : Data.{uL, vL, wL} φ f) (i : Fin t) :
     ∃ π : LocalizedModule.Away (f i) (h0 φ f X) →ₗ[R] piece (f i) (X.M i),

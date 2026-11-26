@@ -17,9 +17,19 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-!
 # Module structure on the topological inverse image
 
-Source: Stacks Project, Tags 008X and 008Y (blueprint: def-pc-topological-inverse-image-module).
-The underlying abelian sheaf and ring sheaf use the explicit left-Kan-extension followed
-by sheafification construction, rather than an abstract chosen left adjoint.
+The inverse image of a sheaf of modules along a continuous map, as a sheaf of modules over the
+inverse-image ring sheaf.
+
+## Implementation details
+
+The underlying abelian sheaf and ring sheaf use the explicit construction by left Kan extension
+followed by sheafification, rather than an abstract chosen left adjoint. The module instances on
+sections are obtained by multiplying germ representatives over a common open of the filtered
+colimit and extending uniquely along sheafification.
+
+## References
+
+* [Stacks Project, Tags 008X, 008Y and 0089](https://stacks.math.columbia.edu/tag/008X)
 -/
 
 @[expose] public section
@@ -37,8 +47,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 variable {X Y : TopCat.{u}} (f : X ⟶ Y)
 
-/-- Inverse image computed by presheaf inverse image and sheafification.
-Source: Stacks, Tag 008X (blueprint: def-pc-topological-inverse-image-module). -/
+/-- Inverse image computed by presheaf inverse image and sheafification. -/
 def inverseImageConstruction (A : Type (u + 1)) [Category.{u} A]
     [HasColimits.{u} A] [HasWeakSheafify (Opens.grothendieckTopology X) A] :
     CategoryTheory.Sheaf (Opens.grothendieckTopology Y) A ⥤
@@ -47,8 +56,7 @@ def inverseImageConstruction (A : Type (u + 1)) [Category.{u} A]
 
 variable (R : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) CommRingCat.{u})
 
-/-- The inverse-image ring sheaf. Source: Stacks, Tag 008X
-(blueprint: def-pc-topological-inverse-image-module). -/
+/-- The inverse-image ring sheaf. -/
 def inverseImageRing := (inverseImageConstruction f CommRingCat.{u}).obj R
 
 set_option hygiene false in
@@ -58,19 +66,12 @@ local notation "𝓡" R =>
 
 variable (M : SheafOfModules.{u} (𝓡 R))
 
-/-- The abelian inverse image, before supplying its module structure. Source: Stacks, Tag 008X
-(blueprint: def-pc-topological-inverse-image-module). -/
+/-- The abelian inverse image, before supplying its module structure. -/
 def inverseImageAb :=
   (inverseImageConstruction f AddCommGrpCat.{u}).obj ((SheafOfModules.toSheaf (𝓡 R)).obj M)
 
 /-- The canonical module instances on the sections of the inverse image exist, are
-compatible with restriction, and make the inverse-image unit semilinear.
-Source: Stacks, Tag 008X (blueprint: def-pc-topological-inverse-image-module).
-Proof: first form the colimits of the section rings and modules over opens containing
-`f(U)`. Represent two germs over a common open and multiply their representatives there;
-filteredness makes this independent of representatives and proves the module laws.
-Sheafification extends this action uniquely by local representatives (Stacks 0089).
-Restriction and the unit preserve these representatives, giving the two asserted laws. -/
+compatible with restriction, and make the inverse-image unit semilinear. -/
 theorem exists_inverseImageModuleInstances :
     ∃ d : ∀ U : (Opens X)ᵒᵖ,
       Module ((inverseImageRing f R).obj.obj U) ((inverseImageAb f R M).obj.obj U),
@@ -130,8 +131,7 @@ theorem exists_inverseImageModuleInstances :
     have hh := congrArg (φ.app ((Opens.map f).op.obj V)) (hu V r m)
     exact hh.trans (hs _ _ _)
 
-/-- Canonical section module instances, supplied by the preceding existence theorem.
-Source: Stacks, Tag 008X (blueprint: def-pc-topological-inverse-image-module). -/
+/-- Canonical section module instances, supplied by the preceding existence theorem. -/
 @[instance_reducible]
 def inverseImageModuleInstances (U : (Opens X)ᵒᵖ) :
     Module ((inverseImageRing f R).obj.obj U) ((inverseImageAb f R M).obj.obj U) :=
@@ -139,8 +139,7 @@ def inverseImageModuleInstances (U : (Opens X)ᵒᵖ) :
 
 attribute [local instance] inverseImageModuleInstances
 
-/-- The inverse-image module, with the actual abelian inverse-image sections and restrictions.
-Source: Stacks, Tag 008X (blueprint: def-pc-topological-inverse-image-module). -/
+/-- The inverse-image module, with the actual abelian inverse-image sections and restrictions. -/
 def inverseImageModule : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X)
       (forget₂ CommRingCat.{u} RingCat.{u})).obj (inverseImageRing f R)) where
   val := @PresheafOfModules.ofPresheaf _ _ _ (inverseImageAb f R M).obj
@@ -149,11 +148,7 @@ def inverseImageModule : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTo
       (Classical.choose_spec (exists_inverseImageModuleInstances f R M)).1 i r m)
   isSheaf := (inverseImageAb f R M).property
 
-/-- The inverse image of a linear map is linear for the canonical instances.
-Source: Stacks, Tag 008X (blueprint: def-pc-topological-inverse-image-module).
-Proof: on local representatives this is the original linearity identity; the inverse
-image map is induced by the colimit map followed by sheafification. Equality is local,
-so the identity descends to all sections. -/
+/-- The inverse image of a linear map is linear for the canonical instances. -/
 theorem inverseImageMap_smul {N : SheafOfModules.{u} (𝓡 R)} (a : M ⟶ N)
     (U : (Opens X)ᵒᵖ) (r : (inverseImageRing f R).obj.obj U)
     (m : (inverseImageModule f R M).val.obj U) :
@@ -203,8 +198,7 @@ theorem inverseImageMap_smul {N : SheafOfModules.{u} (𝓡 R)} (a : M ⟶ N)
       rw [hn, hn, (a.val.app V).hom.map_smul, huN])
     U r m
 
-/-- Inverse image on module morphisms, using the inverse image on abelian sheaves.
-Source: Stacks, Tag 008X (blueprint: def-pc-topological-inverse-image-module). -/
+/-- Inverse image on module morphisms, using the inverse image on abelian sheaves. -/
 def inverseImageModuleMap {N : SheafOfModules.{u} (𝓡 R)} (a : M ⟶ N) :
     inverseImageModule f R M ⟶ inverseImageModule f R N :=
   ⟨PresheafOfModules.homMk

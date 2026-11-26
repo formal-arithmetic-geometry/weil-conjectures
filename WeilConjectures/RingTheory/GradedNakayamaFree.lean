@@ -23,8 +23,14 @@ import Mathlib.RingTheory.Finiteness.Basic
 /-!
 # Graded Nakayama freeness criterion
 
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, proof, graded Nakayama criterion
-applied to `K_2` (blueprint: lem-sc-p1-graded-nakayama-free).
+A finitely generated graded `k[x₀,x₁]`-module whose first Tor with the residue field `k`
+vanishes is free with a finite homogeneous basis (`MvPolynomial.graded_nakayama_free`).
+
+## Implementation details
+
+The proof takes a minimal finite graded free presentation. The first Tor is identified with the
+kernel modulo the irrelevant ideal, so its vanishing and graded Nakayama show that the kernel is
+zero and the presentation is an isomorphism.
 -/
 
 @[expose] public section
@@ -75,17 +81,7 @@ private theorem homogeneous_submodule_internal {R M : Type u} [Ring R]
     exact DirectSum.sum_support_decompose ℳ x.val
 
 /-- A finitely generated graded module over `k[x₀,x₁]` whose first Tor with the residue
-field vanishes has a finite homogeneous basis.
-
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, proof, graded Nakayama criterion
-applied to `K_2`.
-
-Proof: choose homogeneous lifts of a basis modulo the irrelevant ideal and form the minimal
-finite graded free presentation. The minimal-presentation Tor calculation identifies the first
-Tor with the kernel modulo the irrelevant ideal. Its vanishing and finite graded generation of
-the kernel imply that the kernel is zero by graded Nakayama, so the presentation is an
-isomorphism. The source basis then gives the asserted finite homogeneous basis.
-(blueprint: lem-sc-p1-graded-nakayama-free) -/
+field vanishes has a finite homogeneous basis. -/
 theorem graded_nakayama_free (k : Type u) [Field k]
     (N : Type u) [AddCommGroup N] [Module (MvPolynomial (Fin 2) k) N]
     (ℳ : ℤ → AddSubgroup N) (hℳ : DirectSum.IsInternal ℳ)

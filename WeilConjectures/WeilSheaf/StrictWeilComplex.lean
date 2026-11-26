@@ -10,8 +10,7 @@ public import WeilConjectures.WeilSheaf.FrobeniusDerived
 /-!
 # From Weil complexes to strict Weil complexes
 
-Blueprint `definition-weil-structure` and `definition-weil-structure` (paragraph "Strict Weil
-complexes"): a *strict Weil complex* on a `k₀`-scheme `X` is a pair `(K, θ)` of a complex `K` of
+A *strict Weil complex* on a `k₀`-scheme `X` is a pair `(K, θ)` of a complex `K` of
 `ℓ`-adic pro-étale sheaves on the geometric fiber `X̄` and an isomorphism
 `θ : Lg_X^* K ≅ K`, where `g_X = Fr_X` is the geometric Frobenius of `X̄`. A Weil complex `K`
 gives the strict Weil complex `(For(K), θ_K)`, where `θ_K` is its derived Frobenius
@@ -23,7 +22,7 @@ zero) it is fully faithful, and its essential image consists of the pairs `(F[0]
 a constructible sheaf. It is not faithful (see
 `WeilConjectures.WeilSheaf.StrictWeilComplexNotFaithful`).
 
-## Design
+## Implementation details
 
 The category of strict Weil complexes is `AlgebraicGeometry.StrictWeilComplex k₀ l X`, the
 category `IsoAlgebra (D(Fr_X^*))` of pairs `(K, θ : D(Fr_X^*) K ≅ K)` with `K` in the whole
@@ -222,10 +221,7 @@ section
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `definition-weil-structure` and `definition-weil-structure` (strict Weil
-complexes).
-
-The category of *strict Weil complexes* on `X`: pairs `(K, θ)` of an object `K` of the derived
+/-- The category of *strict Weil complexes* on `X`: pairs `(K, θ)` of an object `K` of the derived
 category of `ℓ`-adic pro-étale sheaves on the geometric fiber `X̄` and an isomorphism
 `θ : Lg_X^* K ≅ K`, where `Lg_X^* = D(Fr_X^*)` is the (exact) Frobenius pullback; a morphism is a
 morphism of complexes commuting with the `θ`'s. -/
@@ -246,14 +242,10 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 namespace WeilComplex
 
-/-- Blueprint `definition-weil-structure` and `definition-weil-structure` (strict Weil
-complexes).
-
-The functor from Weil complexes to strict Weil complexes, `K ↦ (For(K), θ_K)`, where
+/-- The functor from Weil complexes to strict Weil complexes, `K ↦ (For(K), θ_K)`, where
 `For(K)` is the underlying complex of `ℓ`-adic sheaves (`AlgebraicGeometry.WeilComplex.forget`)
 and `θ_K : Lg_X^* For(K) ≅ For(K)` its derived Frobenius
-(`AlgebraicGeometry.WeilComplex.frobeniusIso`). It is an equivalence on the hearts
-(`AlgebraicGeometry.WeilSheaf.toStrictWeilComplex`) but not faithful. -/
+(`AlgebraicGeometry.WeilComplex.frobeniusIso`). -/
 noncomputable def toStrictWeilComplex : WeilComplex k₀ l X ⥤ StrictWeilComplex k₀ l X :=
   IsoAlgebra.lift forget (frobeniusIso X)
 
@@ -285,8 +277,7 @@ namespace ProEtaleWeilSheaf
 
 variable (k₀ l X) in
 /-- A pro-étale Weil sheaf `(F, φ)` placed in degree zero, as the strict Weil complex
-`(F[0], φ[0])`: the transport along the fully faithful functor `F ↦ F[0]`, which commutes with
-the Frobenius pullback. -/
+`(F[0], φ[0])`. -/
 noncomputable def toStrictWeilComplex : ProEtaleWeilSheaf k₀ l X ⥤ StrictWeilComplex k₀ l X :=
   IsoAlgebra.mapOfNatIso ((WeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategorySingleFunctor 0)
 
@@ -301,9 +292,7 @@ end ProEtaleWeilSheaf
 namespace WeilSheaf
 
 variable (k₀ l X) in
-/-- Blueprint `definition-weil-structure` (strict Weil complexes on the heart).
-
-The functor from Weil sheaves to strict Weil complexes, `F ↦ (F[0], θ_{F[0]})`, the restriction
+/-- The functor from Weil sheaves to strict Weil complexes, `F ↦ (F[0], θ_{F[0]})`, the restriction
 of `AlgebraicGeometry.WeilComplex.toStrictWeilComplex` to the heart. -/
 noncomputable abbrev toStrictWeilComplex : WeilSheaf k₀ l X ⥤ StrictWeilComplex k₀ l X :=
   toComplex ⋙ WeilComplex.toStrictWeilComplex
@@ -323,10 +312,8 @@ noncomputable def toStrictWeilComplexIso :
       (((IsoAlgebra.forget _).mapDerivedCategorySingleFunctor 0).hom.naturality f.hom)))
 
 variable (k₀ l X) in
-/-- Blueprint `definition-weil-structure`: on the hearts, the functor from Weil complexes to
-strict Weil complexes is fully faithful, being isomorphic to the composite of the fully
-faithful inclusion of Weil sheaves into pro-étale Weil sheaves and the fully faithful
-`(F, φ) ↦ (F[0], φ[0])`. -/
+/-- On the hearts, the functor from Weil complexes to strict Weil complexes is fully
+faithful. -/
 noncomputable def fullyFaithfulToStrictWeilComplex :
     (toStrictWeilComplex k₀ l X).FullyFaithful :=
   ((ObjectProperty.fullyFaithfulι _).comp
@@ -339,10 +326,8 @@ instance : (toStrictWeilComplex k₀ l X).Faithful :=
   (fullyFaithfulToStrictWeilComplex k₀ l X).faithful
 
 variable (k₀ l X) in
-/-- Blueprint `definition-weil-structure` (equivalence on the hearts): the essential image of the
-functor from Weil sheaves to strict Weil complexes is the heart, the pairs `(K, θ)` with
-`K ≅ F[0]` for a constructible sheaf `F`. Given such a pair, `θ` corresponds, `F ↦ F[0]` being
-fully faithful, to a unique Weil structure `φ : Fr_X^* F ≅ F` with `θ ≅ φ[0]`. -/
+/-- The essential image of the functor from Weil sheaves to strict Weil complexes is the heart,
+the pairs `(K, θ)` with `K ≅ F[0]` for a constructible sheaf `F`. -/
 theorem essImage_toStrictWeilComplex :
     (toStrictWeilComplex k₀ l X).essImage = StrictWeilComplex.heart k₀ l X := by
   ext K
@@ -375,9 +360,9 @@ instance : (toStrictWeilComplexHeart k₀ l X).IsEquivalence where
     exact ⟨F, ⟨ObjectProperty.isoMk _ i⟩⟩⟩
 
 variable (k₀ l X) in
-/-- Blueprint `definition-weil-structure` (equivalence on the hearts): the functor from Weil
-complexes to strict Weil complexes induces an equivalence between Weil sheaves and the heart of
-the strict Weil complexes, the pairs `(F[0], θ)` with `F` a constructible sheaf. -/
+/-- The functor from Weil complexes to strict Weil complexes induces an equivalence between Weil
+sheaves and the heart of the strict Weil complexes, the pairs `(F[0], θ)` with `F` a
+constructible sheaf. -/
 noncomputable def strictWeilComplexHeartEquivalence :
     WeilSheaf k₀ l X ≌ (StrictWeilComplex.heart k₀ l X).FullSubcategory :=
   (toStrictWeilComplexHeart k₀ l X).asEquivalence

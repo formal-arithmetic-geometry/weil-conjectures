@@ -17,8 +17,18 @@ import WeilConjectures.SmoothPurity.ConstantScalarStrictUnit.ConstantScalarStric
 
 /-! # The finite quotient of the normalized integral coefficient unit
 
-Source: Stacks 099N(5) and the normalized strict Roos construction of the constant unit.
-(blueprint: lem-pur-integral-constant-unit-reduction).
+We show that reducing the normalized integral constant unit, built by the strict Roos
+construction, gives the finite multiplication map.
+
+## Implementation details
+
+The computation uses the regular K-flat representative: the reduction comparison is adjoint to
+the `n`th Roos projection, and the strict unit sends the section one to the finite pullback
+generator, which finite multiplication sends to one.
+
+## References
+
+* Stacks Project, Tag 099N(5).
 -/
 
 @[expose] public noncomputable section
@@ -48,19 +58,7 @@ attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExi
   finiteRegularIso finiteSingleRegularIso finiteRingUnit finiteChainUnit
 attribute [local implicit_reducible] integralConstantReduction
 
-/-- Reducing the normalized integral unit gives the finite multiplication map.
-
-Source: Stacks 099N(5); normalized Roos-unit construction, finite quotient clause.
-(blueprint: lem-pur-integral-constant-unit-reduction).
-
-Proof: compute with the regular K-flat representative. The reduction comparison is
-adjoint to the nth Roos projection. The strict unit's projection formula sends the
-section one to the finite pullback generator. After the regular reduction isomorphism,
-finite multiplication sends that generator to one. Adjunction and regular-module
-extensionality identify the two maps before localization. The good-representative
-comparison and the universal scalar-reduction counit give the displayed equation
-on the canonical regular representative. This is a single-arrow quotient normalization;
-it asserts neither composition of integral units nor a Frobenius square. -/
+/-- Reducing the normalized integral unit gives the finite multiplication map. -/
 theorem integralUnit_reduction
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} (f : X ⟶ Y)

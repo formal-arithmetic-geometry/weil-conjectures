@@ -15,8 +15,13 @@ import Mathlib.RingTheory.Finiteness.Ideal
 /-!
 # Detecting torsion kernels and cokernels on finite localization charts
 
-Source: Stacks Project, More on Algebra, proof of Lemma 0ALK and Proposition 05ER
-(blueprint: lem-weil-pbc-ideal-power-torsion-localization-criterion).
+A linear map has kernel and cokernel killed by powers of a finitely generated ideal exactly when
+it becomes bijective after localizing at each generator.
+
+## References
+
+* [Stacks, Tag 0ALK]
+* [Stacks, Tag 05ER]
 -/
 
 @[expose] public section
@@ -65,20 +70,8 @@ private theorem localMap_injective_iff_kernel_subsingleton
   rw [e.toEquiv.subsingleton_congr, Submodule.subsingleton_iff_eq_bot,
     LinearMap.ker_eq_bot]
 
-/-- A map is bijective on the charts of a finitely generated ideal exactly when its
-kernel and cokernel are ideal-power torsion.
-Source: Stacks Project, More on Algebra, proof of Lemma 0ALK, first sentence of part (1),
-and Proposition 05ER, the torsion argument for the kernel and cokernel.
-(blueprint: lem-weil-pbc-ideal-power-torsion-localization-criterion).
-
-Proof: Localization commutes with kernels and cokernels. An ideal-power torsion
-module localizes to zero at each generator: a power of the generator belongs to
-that ideal power and kills every given numerator. Conversely, a numerator that
-vanishes in each localization is killed by a power of each generator. Its
-annihilator therefore contains every generator in its radical, hence contains a
-power of their finitely generated ideal. This also handles the empty generating
-family: the ideal is zero, so its first power annihilates every element. Apply this
-module criterion to the kernel and cokernel, using exactness of localization. -/
+/-- A map is bijective after localizing at each generator `f i` of an ideal exactly when its
+kernel and cokernel are ideal-power torsion. -/
 theorem idealPowerTorsion_iff_localMap_bijective
     {R : Type u} [CommRing R] {M : Type v} {N : Type w}
     [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N]

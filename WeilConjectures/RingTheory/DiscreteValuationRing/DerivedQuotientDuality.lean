@@ -17,10 +17,16 @@ public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
 Let `R` be a domain and `ϖ ≠ 0` (for instance `R = 𝒪_E` and `ϖ` a uniformizer), and
 `T = R ⧸ ϖ`. The ordinary dual of `T` vanishes, while the derived dual is a shift of `T`:
 `RHom_R(T, R) ≅ T[-1]` and `RHom_R(RHom_R(T, R), R) ≅ T` in `D(R)`
-(`IsDiscreteValuationRing.quotient_dual_derivedDual`, blueprint
-`rem-weil-biduality-coefficients`). The derived dual is computed from the distinguished triangle
+(`IsDiscreteValuationRing.quotient_dual_derivedDual`). The derived dual is computed from the
+distinguished triangle
 `R ──ϖ──▶ R ⟶ T ⟶ R[1]` of the resolution `0 ⟶ R ⟶ R ⟶ T ⟶ 0`, the internal hom of `D(R)`
 being exact in its first variable (`DerivedCategory.exists_distinguished_ihom_pre`).
+
+## Implementation details
+
+The isomorphisms depend on the chosen `ϖ`, so only their existence is stated. The canonical
+derived evaluation `T ⟶ RHom_R(RHom_R(T, R), R)` is an isomorphism because `T` is perfect
+(`DerivedCategory.IsPerfect.isIso_toIhomIhomUnit`).
 -/
 
 @[expose] public section
@@ -143,15 +149,9 @@ lemma nonempty_ihom_quotientObj_iso (hϖ : ϖ ≠ 0) :
   exact ⟨(shiftFunctorCompIsoId _ (1 : ℤ) (-1) (by simp)).symm.app _ ≪≫
     (shiftFunctor _ (-1 : ℤ)).mapIso e₃.symm⟩
 
-/-- Blueprint `rem-weil-biduality-coefficients`: Ordinary, derived, and geometric biduality.
-
-For a domain `R` (e.g. `R = 𝒪_E`), `ϖ ≠ 0` (e.g. a uniformizer) and `T = R ⧸ ϖ`, ordinary
-duality kills `T`, `T^* = Hom_R(T, R) = 0`, whereas the resolution `0 ⟶ R ──ϖ──▶ R ⟶ T ⟶ 0`
-gives `RHom_R(T, R) ≅ T[-1]` and `RHom_R(RHom_R(T, R), R) ≅ T` in `D(R)`. These
-identifications depend on the chosen `ϖ`, whence the mere existence of isomorphisms; the
-canonical derived evaluation `T ⟶ RHom_R(RHom_R(T, R), R)` is an isomorphism because `T` is
-perfect (`DerivedCategory.IsPerfect.isIso_toIhomIhomUnit`,
-`lemma-perfect-complexes-geometric-point--8`). -/
+/-- Ordinary and derived duals of `T = R ⧸ ϖ` for a domain `R` and `ϖ ≠ 0`: the ordinary dual
+`Hom_R(T, R)` vanishes, while `RHom_R(T, R) ≅ T[-1]` and `RHom_R(RHom_R(T, R), R) ≅ T` in
+`D(R)`. -/
 theorem quotient_dual_derivedDual (hϖ : ϖ ≠ 0) :
     (∀ φ : Module.Dual R (R ⧸ Ideal.span {ϖ}), φ = 0) ∧
       Nonempty ((ihom (quotientObj ϖ)).obj (𝟙_ _) ≅ (quotientObj ϖ)⟦(-1 : ℤ)⟧) ∧

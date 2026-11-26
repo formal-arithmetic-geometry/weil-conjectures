@@ -13,9 +13,17 @@ import Mathlib.RingTheory.LocalProperties.Basic
 /-!
 # Prime membership in a finite free module after localization
 
-Source: Stacks Project, Algebra, Definition Tag 00CO and the localization at a prime;
-the coordinate calculation underlying Lemma Tag 00NX
-(blueprint: lem-sc-free-prime-membership).
+Membership in `p R^n` is coordinatewise membership in `p`, and it is detected after localizing
+at the prime `p`.
+
+## Implementation details
+
+Localization commutes with ideal scalar products, so membership of `s / 1` in `p (R^n)_p` yields
+`t s ∈ p R^n` for some `t ∉ p`; primality then puts every coordinate of `s` in `p`.
+
+## References
+
+* [Stacks, Tags 00CO, 07JZ, 00NX]
 -/
 
 @[expose] public section
@@ -25,26 +33,8 @@ universe u
 namespace Module
 
 /-- Prime membership in `R^n` is detected after localization at the same prime, and each
-coordinate satisfies the corresponding scalar criterion.
-
-Source: Stacks Project, Algebra, Definition Tag 00CO, module localization Tag 07JZ,
-and the finite-free coordinate calculation underlying Lemma Tag 00NX
-(blueprint: lem-sc-free-prime-membership).
-
-Here `F = Fin n → R`, `S = p.primeCompl`, `F_p = LocalizedModule S F`
-[def-weil-pbc-module-localization], and `R_p = Localization.AtPrime p`
-[def-weil-pbc-localization-at-prime]. The extended ideal `p.map (algebraMap R R_p)`
-acting on the top submodule is `pF_p`; `p • ⊤` is `pF`.
-
-Proof (the node's single step): membership in `pR^n` is coordinatewise membership in `p`:
-use induction on ideal scalar products in one direction and the finite sum of standard
-coordinate vectors in the other. Localization commutes with ideal scalar products, so
-membership of `s/1` in `pF_p` gives a fraction `v/t` with `v ∈ pR^n` equal to `s/1`.
-Equality of fractions supplies another denominator `a`, with `at • s = a • v`.
-Every coordinate of `at • s` therefore lies in `p`. Since `at ∉ p`, primality forces
-each coordinate of `s` into `p`. Conversely, represent `s/1` with denominator `1`.
-For the scalar clause use the localization ideal criterion: `s_i/1 ∈ pR_p` iff
-some `u ∉ p` has `u s_i ∈ p`, and apply primality or use denominator `1`.
+coordinate satisfies the corresponding scalar criterion: for `s : Fin n → R`, the image of `s`
+in `(R^n)_p` lies in `p (R^n)_p` iff `s ∈ p R^n`, and `s_i / 1 ∈ p R_p` iff `s_i ∈ p`.
 -/
 theorem free_prime_mem_localized_iff
     {R : Type u} [CommRing R] (n : ℕ) (s : Fin n → R) (p : Ideal R) [p.IsPrime] :

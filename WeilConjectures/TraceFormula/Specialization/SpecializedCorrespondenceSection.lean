@@ -14,17 +14,15 @@ public import WeilConjectures.Tactic.TransportExact
 # The section defined by the specialized correspondence
 
 For a correspondence `c` contracting at `y`, with compact-support exchanges `ν_c` of the support
-and `ν_{p₁}` of the first projection, this file restates the identities of blueprint
-`lemma-section-specialized-correspondence` of `KernelPullbackDeformation` with the first
-universal-kernel identity `𝔥 S(λ_K) = λ_{K'} ρ` discharged by
+and `ν_{p₁}` of the first projection, this file restates the identities of
+`KernelPullbackDeformation` describing the section defined by the specialized correspondence,
+with the first universal-kernel identity `𝔥 S(λ_K) = λ_{K'} ρ` discharged by
 `ProEtale.CondensedRing.map_kunnethVerdierMap_comp_eq`, for the exceptional exchange
 `β_{p₁}` of `ν_{p₁}` and the specialization `𝔥` of the internal hom
 (`ProEtale.CondensedRing.homSpecialization`). The remaining hypotheses are the compatibility
-`hκ` of `β_{p₁}` with the exceptional Künneth maps (blueprint
-`lemma-base-change-maps-external-duality--1`) and the compatibility `hβ` of `β_c` with the
-projection formula (blueprint `lemma-compatibilities-base-change-maps` (2)). The section of the
-specialized coefficient is written with the specialization unit `σ_C` of the support, as in the
-blueprint: `k_{u_s} = c_s^! ρ β_c Ψ_C(k_u) σ_C`.
+`hκ` of `β_{p₁}` with the exceptional Künneth maps and the compatibility `hβ` of `β_c` with the
+projection formula. The section of the specialized coefficient is written with the
+specialization unit `σ_C` of the support: `k_{u_s} = c_s^! ρ β_c Ψ_C(k_u) σ_C`.
 
 ## Main results
 
@@ -60,11 +58,10 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   {x : RationalPoint X}
 
-/-- **Nearby cycles of the universal kernel**, first identity (blueprint
-`lemma-nearby-cycles-universal-kernel`), for the specialization `𝔥` of the internal hom built from
-the exceptional exchange `β_{p₁}` of a compact-support exchange `ν_{p₁}`: `𝔥 Sp(λ_K) = λ_{K'} ρ`,
-given the compatibility `hκ` of `β_{p₁}` with the exceptional Künneth maps (blueprint
-`lemma-base-change-maps-external-duality--1`). -/
+/-- **Nearby cycles of the universal kernel**, first identity, for the specialization `𝔥` of the
+internal hom built from the exceptional exchange `β_{p₁}` of a compact-support exchange `ν_{p₁}`:
+`𝔥 Sp(λ_K) = λ_{K'} ρ`, given the compatibility `hκ` of `β_{p₁}` with the exceptional Künneth
+maps. -/
 theorem map_kunnethVerdierMap_comp_homSpecialization
     (νp : ProdFstCompactSupportExchange (ℓ := ℓ) k' x)
     (D : NearbyCyclesModel.NearbyDualizingData k k' ℓ)
@@ -137,13 +134,9 @@ local notation "𝛃" => exceptionalExchange ℓ c.support (𝛄)
 set_option quotPrecheck false in
 local notation "𝐒𝐏" => specializationProd (ℓ := ℓ) k' (y ≫ c.c₁)
 
-/-- **The specialized coefficient as a section of the kernel** (blueprint
-`lemma-section-specialized-correspondence`, (E.19)):
-`𝔥_c Ψ_C(λ_{c_η,K}) = λ_{c_s,K'} c_s^! ρ β_c(P_X)`. This is
-`map_exceptionalHomIso_inv_comp_supportHomSpecialization` with the first universal-kernel identity
-discharged by `map_kunnethVerdierMap_comp_homSpecialization`; the remaining hypotheses are the
-compatibility `hκ` of `β_{p₁}` with the exceptional Künneth maps and the compatibility `hβ` of
-`β_c` with the projection formula. -/
+/-- **The specialized coefficient as a section of the kernel**:
+`𝔥_c Ψ_C(λ_{c_η,K}) = λ_{c_s,K'} c_s^! ρ β_c(P_X)`, given the compatibility `hκ` of `β_{p₁}` with
+the exceptional Künneth maps and the compatibility `hβ` of `β_c` with the projection formula. -/
 theorem map_exceptionalHomIso_inv_comp_supportHomSpecialization_of_kunneth
     (νc : hc.SupportCompactSupportExchange (ℓ := ℓ) k')
     (νp : ProdFstCompactSupportExchange (ℓ := ℓ) k' (y ≫ c.c₁))
@@ -172,14 +165,10 @@ theorem map_exceptionalHomIso_inv_comp_supportHomSpecialization_of_kunneth
   map_exceptionalHomIso_inv_comp_supportHomSpecialization νc νp D
     (map_kunnethVerdierMap_comp_homSpecialization νp D K hκ) hβ
 
-/-- **The section defined by the specialized correspondence** (blueprint
-`lemma-section-specialized-correspondence`, second part): if `u : c^* p₂^* K ⟶ c^! p₁^! K`
+/-- **The section defined by the specialized correspondence**: if `u : c^* p₂^* K ⟶ c^! p₁^! K`
 corresponds to the section `k_u : ℚ̄_ℓ ⟶ c^! (K ⊠ D K)`, then the specialized coefficient
 `u_s = β_{c₁} ∘ Ψ_C(u) ∘ α_{c₂}` corresponds to the section
-`k_{u_s} = c_s^! ρ ∘ β_c ∘ Ψ_C(k_u) ∘ σ_C`, with `σ_C` the specialization unit of the support.
-This is `curry_comp_eq_unit_comp_map_comp` with the first universal-kernel identity discharged by
-`map_kunnethVerdierMap_comp_homSpecialization` and the unit `ε` of the lax monoidal structure
-rewritten as `σ_C` (`laxMonoidal_ε_specialization`). -/
+`k_{u_s} = c_s^! ρ ∘ β_c ∘ Ψ_C(k_u) ∘ σ_C`, with `σ_C` the specialization unit of the support. -/
 theorem curry_comp_eq_supportSpecializationUnit_comp_map_comp
     (νc : hc.SupportCompactSupportExchange (ℓ := ℓ) k')
     (νp : ProdFstCompactSupportExchange (ℓ := ℓ) k' (y ≫ c.c₁))

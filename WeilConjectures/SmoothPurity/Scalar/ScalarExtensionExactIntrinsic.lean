@@ -19,9 +19,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHo
 import Mathlib.CategoryTheory.Shift.Localization
 /-! # Exactness of intrinsic finite scalar extension
 
-Source: literature/blueprint/master/blueprint/sec-smooth-purity/
-`sk-prop-sf-pf-reduction/lem-weil-scalar-extension-exact-triangulated.md`
-(blueprint: lem-weil-scalar-extension-exact-triangulated).
+Exactness of finite scalar extension for the intrinsic rational constructible categories.
 -/
 
 -- After pruning, this module only keeps private declarations.

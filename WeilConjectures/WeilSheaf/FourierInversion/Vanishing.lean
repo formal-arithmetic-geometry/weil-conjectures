@@ -18,8 +18,7 @@ public import WeilConjectures.WeilSheaf.TraceFunctionVanishing
 # Fourier inversion: relative vanishing
 
 The compactly supported direct image of `ℒ_ψ(a s) ⊗ π^* P` along a trivial line bundle
-`π` with fibre coordinate `s` vanishes, for `a` a unit and `ψ` nontrivial (blueprint
-`lemma-integral-linear-character--2`).
+`π` with fibre coordinate `s` vanishes, for `a` a unit and `ψ` nontrivial.
 
 ## Proof
 
@@ -170,9 +169,7 @@ theorem exists_isIso_shear_of_isPullback
 /-- **Translation invariance.** For the trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` with
 fibre coordinate `s`, a unit `a` on `X` and a Weil complex `P` on `X`, the pullback of
 `M = Rπ₀!(ℒ_ψ(a s) ⊗ π^* P)` to `Y` is invariant under tensoring with `ℒ_ψ(s)`:
-`π^* M ≅ ℒ_ψ(s) ⊗ π^* M`. Over `Y`, the shear `(s₁, s₂) ↦ (s₁ + a⁻¹ s₂, s₂)` of `Y ×_X Y`
-turns `ℒ_ψ(a s₁)` into `ℒ_ψ(a s₁ + s₂) ≅ ℒ_ψ(s₂) ⊗ ℒ_ψ(a s₁)`; compact-support base change
-and the projection formula conclude. -/
+`π^* M ≅ ℒ_ψ(s) ⊗ π^* M`. -/
 theorem WeilComplex.nonempty_iso_upperStar_derivedLowerShriek_tensorLisse_artinSchreierOf
     (ψ : AddChar k₀ (PadicAlgCl l)) [π.IsOver (Spec (CommRingCat.of k₀))]
     (hπ : IsPullback π s (X ↘ Spec (CommRingCat.of k₀))
@@ -300,12 +297,9 @@ theorem WeilComplex.nonempty_iso_upperStar_derivedLowerShriek_tensorLisse_artinS
 
 end LineBundle
 
-/-- **Relative vanishing** (blueprint `lemma-integral-linear-character--2`, in the relative
-form used in the proofs of `lemma-fourier-transform-constant-sheaf` and
-`proposition-fourier-inversion`). Let `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` be the trivial line bundle with
+/-- **Relative vanishing**. Let `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` be the trivial line bundle with
 fibre coordinate `s`, let `a` be a unit on `X` and `ψ` nontrivial. Then `Rπ₀!(ℒ_ψ(a s) ⊗ π^* P) = 0`
-for every Weil complex `P` on `X`: on the fibre over a geometric point `x̄` this is
-`P_x̄ ⊗ RΓ_c(𝔸¹_x̄, ℒ_ψ(a(x̄) s)) = 0`, `a(x̄) ≠ 0`. -/
+for every Weil complex `P` on `X`. -/
 theorem WeilComplex.isZero_derivedLowerShriek_tensorLisse_artinSchreierOf_upperStar
     (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) {Y : Scheme.{u}}
     [Y.Over (Spec (CommRingCat.of k₀))] (π : Y ⟶ X) (s : Y ⟶ affineLine k₀)

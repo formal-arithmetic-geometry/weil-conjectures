@@ -186,12 +186,9 @@ private lemma pushforwardExchange_tensor_restricted_aux
     (boundedConstructibleTensorMap hM) (boundedConstructibleTensorMap hN)
     (fun x y ↦ boundedConstructibleTensorMap_natural hM x y) β χ hχ hβ A B
 
-/-- **The pushforward exchange is compatible with the lax tensor maps** (blueprint
-`lemma-nearby-duality-proper-direct-image` (1), "the lax products commute through proper exchange"):
-with the lax monoidal structures of `Rf_*` and `Rf'_*` (`boundedConstructibleLowerStarLaxMonoidal`),
-`Rf'_*(μ_M) ∘ μ_{Rf'_*} ∘ (χ ⊗ χ) = χ ∘ Ψ_N(μ_{Rf_*}) ∘ μ_N`. Both sides have the same adjoint,
-the tensor product of the generic-open counits, by the monoidality of the pullback exchange
-(`CategoryTheory.Verdier.pushforwardExchange_tensor_aux`). -/
+/-- **The pushforward exchange is compatible with the lax tensor maps**: with the lax monoidal
+structures of `Rf_*` and `Rf'_*` (`boundedConstructibleLowerStarLaxMonoidal`),
+`Rf'_*(μ_M) ∘ μ_{Rf'_*} ∘ (χ ⊗ χ) = χ ∘ Ψ_N(μ_{Rf_*}) ∘ μ_N`. -/
 lemma Hom.boundedConstructiblePushforwardExchange_tensor (A B :
     Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ((φ.boundedConstructiblePushforwardExchange ℓ hM hN).app A ⊗ₘ
@@ -218,13 +215,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] (Z : Over (Spec (.of k))) [LocallyOfFiniteType Z.hom]
   [QuasiCompact Z.hom] [IsSeparated Z.hom] [IsProper (toPoint Z).left]
 
-/-- **Global Verdier duality** (blueprint `lemma-nearby-duality-proper-direct-image` (3), "global
-Verdier duality"): for a proper `k`-scheme `Z` with structure morphism `a`, the duality map
-`Ra_* D_Z K ⟶ RHom(Ra_* K, ℚ̄_ℓ)` of `(Ra_*, μ, tr_Z)` (`μ` the lax structure
+/-- **Global Verdier duality**: for a proper `k`-scheme `Z` with structure morphism `a`, the duality
+map `Ra_* D_Z K ⟶ RHom(Ra_* K, ℚ̄_ℓ)` of `(Ra_*, μ, tr_Z)` (`μ` the lax structure
 `boundedConstructibleLowerStarLaxMonoidal`, `tr_Z` the trace `NearbyCyclesModel.trace`) is an
-isomorphism: read through `Ra_! ≅ Ra_*` it is the Verdier exchange morphism
-(`CategoryTheory.Verdier.nearbyDualityMap_comp_pre_eq_exchange`), an isomorphism by
-`ProEtale.CondensedRing.isIso_verdierExchange`. -/
+isomorphism. -/
 theorem isIso_nearbyDualityMap_lowerStar_trace (K : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (Verdier.nearbyDualityMap
       (letI := boundedConstructibleLowerStarLaxMonoidal ℓ

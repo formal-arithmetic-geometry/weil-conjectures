@@ -12,8 +12,10 @@ import WeilConjectures.SmoothPurity.Sf.SfDirectImageRestrictionPasting
 
 /-! # The ordinary direct-image adjacent coefficient identity
 
-Source: Stacks Tags 03EK, 06YY, 0D6E and 0D6J; Bhatt--Scholze, Definition 3.5.2.
-(blueprint: lem-sf-direct-image-adjacent-presentation).
+## References
+
+* Stacks Project, Tags 03EK, 06YY, 0D6E and 0D6J.
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2.
 -/
 
 @[expose] public noncomputable section
@@ -51,25 +53,7 @@ private theorem presentationOfPasting
 /-- The completed restriction square transports the canonical reduction map to the
 finite direct-image coefficient square. This is an identity of adjacent arrows for
 an arbitrary completed-coefficient complex; it does not construct an inverse system
-or assume that the complex is derived complete.
-
-Source: Stacks Tags 03EK, 06YY, 0D6E and 0D6J; Bhatt--Scholze, Definition 3.5.2.
-(blueprint: lem-sf-direct-image-adjacent-presentation).
-
-Proof: compute on a K-flat representative of K. The adjunction defining reductionMap
-has unit x ↦ 1 tensor x, so its adjunct sends a tensor x to the quotient of a tensor x.
-After completed scalar restriction and its composition comparison this is precisely
-sfDerivedReductionTransition, by its characterization on K-flat representatives.
-The two finite direct images are definitionally equal: both coefficient maps are the
-sheafification transpose of the constant-section map. The ordinary completed/finite
-restriction squares and d.ordinary preserve these sections by their normalizations.
-Their composite pastes agree on sections. Derive the pastes using a K-injective
-representative, resolving its restriction once more when necessary. The equations
-sfDerivedRestrictionComparison_existsUnique and d.normalization identify these pastes
-with the displayed derived comparisons. Cancel the invertible comparison maps and
-apply functoriality to the preceding reduction identity; this gives the claimed
-formula. K-flat localization and naturality extend it to arbitrary K. The proof never
-assumes that restriction preserves K-injectives and applies to zero complexes too. -/
+or assume that the complex is derived complete. -/
 theorem sfDirectImageTransition_presentation
     (d : CompactSupportProperImageTower.DirectData l E p)
     (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :

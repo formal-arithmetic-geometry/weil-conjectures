@@ -15,10 +15,18 @@ import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 
 /-! # The canonical integral pullback/tensor comparison
 
-Source: Stacks 07A4 and 0941. The existing coherent-counit construction is
-separated from its scalar compatibility proof to allow that proof to use the
-strict quotient realization lemmas without an import cycle.
-(blueprint: def-pur-completed-pullback-tensor-integral-construction).
+This module constructs the canonical integral pullback/tensor comparison from the coherent
+system comparison and the reduction/limit counits.
+
+## Implementation details
+
+The coherent-counit construction is separated from its scalar compatibility proof so that the
+proof can use the strict quotient realization lemmas without an import cycle.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941
+* Bhatt--Scholze, 3.4.12
 -/
 
 @[expose] public noncomputable section
@@ -64,13 +72,7 @@ private theorem pullbackTensorSequenceRing_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
 attribute [local irreducible] pullbackTensorIntegralTensorNormalization
 
 /-- The systems used in the integral comparison are normalized, so the actual
-reduction/limit counits on them are invertible.
-Source: Stacks 0941; Bhatt--Scholze 3.4.12 (blueprint:
-def-pur-completed-pullback-tensor-construction).
-Proof: the reduction systems of constructible inputs are normalized. Tensor and
-constant-coefficient inverse image preserve the Cartesian quotient comparisons
-by their flat K-flat models, including ramified transitions. The normalized DVR
-effectivity theorem identifies the displayed counits as equivalences. -/
+reduction/limit counits on them are invertible. -/
 theorem pullbackTensorComparisonCounits {X Y : Scheme.{u}} (f : X ⟶ Y)
     [_hX : ∀ x : X, Invertible (l : X.residueField x)]
     [_hY : ∀ y : Y, Invertible (l : Y.residueField y)]
@@ -110,8 +112,7 @@ theorem pullbackTensorComparisonCounits {X Y : Scheme.{u}} (f : X ⟶ Y)
   · exact h₃
 
 /-- The integral comparison in coherent coordinates is exactly Rlim of the
-canonical system comparison, conjugated only by the specified coherent counits.
-Source: Stacks 0941 and 07A4 (blueprint: def-pur-completed-pullback-tensor-construction). -/
+canonical system comparison, conjugated only by the specified coherent counits. -/
 def pullbackTensorReferenceComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
@@ -150,8 +151,7 @@ attribute [local irreducible] pullbackTensorReferenceComparison
 
 /-- The canonical completed integral comparison, transported from the actual
 coherent-system Rlim map to the recorded completed operations and their full
-constructible subcategories.
-Source: Stacks 07A4 and 0941 (blueprint: def-pur-completed-pullback-tensor-construction). -/
+constructible subcategories. -/
 def canonicalIntegralPullbackTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :

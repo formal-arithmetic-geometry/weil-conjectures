@@ -226,15 +226,21 @@ import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPullbackTensorDa
 
 /-! # Prescribed strict quotient-expression towers
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0G7E (lemma-pullback-K-flat)
-and 07A2 (lemma-tensor-product-K-flat), and the extracted finite-expression argument
-of lem-pur-quotient-expression-kflat-normalization
-(blueprint: lem-pur-quotient-expression-strict-kflat-towers).
+For finitely many K-flat complexes with flat terms over the completed integral coefficient
+ring, we construct strict towers of their ordinary reductions and interpret every finite
+expression built from them by tensor products, pullbacks and units as a strict system with flat
+terms which is K-flat both levelwise and as a system, together with its comparison data.
 
-The syntax retains distinct trees. Its interpretation uses the recorded ordinary
-sequence-site operations. Natural-number level n denotes positive exponent n+1.
-The completed-coefficient tower is localized before evaluation. No normalization
-of transition adjoints is asserted.
+## Implementation details
+
+The syntax retains distinct trees. Its interpretation uses the recorded ordinary sequence-site
+operations. Natural-number level `n` denotes positive exponent `n + 1`. The
+completed-coefficient tower is localized before evaluation. No normalization of transition
+adjoints is asserted.
+
+## References
+
+* Stacks Project, Tags 0G7E, 07A2 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -518,38 +524,9 @@ private theorem system_comparisons {W : Scheme.{t}} (K : Complex l E W)
   · exact completed_horizontal_model l E K
   · exact completed_localization_model l E K
 
-/-- The strict-system construction and all expression-level comparison data.
-Source: Stacks 0G7E, 07A2 and 0941; structural induction on strict expressions.
-(blueprint: lem-pur-quotient-expression-strict-kflat-towers).
-
-Proof:
-1. Form the ordinary scalar reductions of each input at all positive levels. The
-   quotient natural transformations give their semilinear chain maps, commuting
-   with differentials and satisfying identity and composition. Realize these strict
-   systems on the vertical sequence site. Evaluation yields the isomorphisms κ,
-   and the K-flat reduction counit followed by Q(κ.inv) is the generator comparison.
-2. Induct on the finite expression tree. Scalar extension preserves K-flatness and
-   flat terms at input leaves; a coefficient unit is free in degree zero. Direct-sum
-   total tensor preserves both properties by the K-flat total tensor theorem.
-   Geometric inverse image uses the coefficient-ring comparison and the ringed
-   pullback K-flat theorem. The tensor and pullback transition formulas hold on the
-   defining generators and extend by balancing, sums and sheafification.
-3. Horizontal identity and composition are the presheaf functor laws. Evaluating
-   tensor with an exact system sequence is exact by finite-level flatness, and
-   evaluation detects exactness, proving termwise system flatness. For an acyclic
-   test complex, evaluation commutes with the total tensor and is acyclic by
-   finite-level K-flatness. Detection of acyclicity proves system K-flatness.
-4. Evaluation and restriction are exact, so their derived-factor isomorphisms
-   compute the displayed complexes. The completed tower retains the same sections
-   and horizontal maps after scalar restriction. Its level comparison is exactly
-   completedTowerLevelIso, and its derived transition equation is the defining
-   localization-lift naturality equation, with no normalization of adjoints.
-5. Apply the system K-flat tensor model and its finite-level evaluation comparison
-   to the two interpreted expressions. For each allowed geometric arrow, evaluate
-   the actual sequence pullback to identify it with the level module pullback on
-   generators. Exact inverse image computes its universal left derived functor on
-   every complex, giving PullbackComputes and the specified derived-factor map.
--/
+/-- The strict-system construction together with all expression-level comparison data: the
+strict towers `N` of ordinary reductions with their identifications `κ`, and for every
+prescribed expression its level and system comparisons. -/
 theorem quotientExpressionStrictKFlatTowers_towerData
     {Z X Y : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y)
     (_hlZ : ∀ x : Z, IsUnit (l : Z.residueField x))
@@ -708,54 +685,7 @@ theorem quotientExpressionStrictKFlatTowers_towerData
 
 /-- Every prescribed expression has its actual strict quotient maps, flat terms and
 K-flatness both at each finite level and as a system. All comparisons use these
-representatives, and the completed tower retains the actual arrows.
-
-Source: Stacks Project, Tags 0G7E (lemma-pullback-K-flat), 07A2
-(lemma-tensor-product-K-flat), and the extracted strict-expression argument
-(blueprint: lem-pur-quotient-expression-strict-kflat-towers).
-
-Proof:
-1. The constant-coefficient comparison is invertible. Identify the coefficient map
-   with the constant-section adjunct, as in prop-weil-pbc-proetale-constant-ring-map.
-   Exactness is prop-weil-pbc-proetale-constant-exact. On constants the two quotient
-   composites agree; sheafification and adjunction give the coefficient square.
-2. Construct all generator reductions simultaneously. On x tensor b the transition
-   is x tensor q(b), balanced by q pi_m = pi_n. The unit transition is q.
-   Both commute with restrictions and differentials, even for an empty generator list.
-3. Tensor sends each total summand u tensor v to t(u) tensor t(v). Balancing moves
-   the same scalar q(a) on either side. The degree-zero maps commute with the total
-   differential du tensor v + (-1)^p u tensor dv; extend by sums and sheafification.
-4. Pullback sends s tensor gamma_m(u) to q(s) tensor gamma_n(t(u)). The coefficient
-   square of step 1 gives balancing. Naturality and d(s tensor u)=s tensor du give
-   the restriction and chain equations on the prescribed module pullback.
-5. Structural induction gives identity and cocycle. They are the quotient equations
-   on leaves, the two induction hypotheses on tensors, and q_mn q_km=q_kn together
-   with the input induction hypothesis on pullback generators. Equality extends by
-   tensor balancing, Kan extension, sheafification and direct sums. Scalar restriction
-   composes by the identity on sections, so these are the strict required equations.
-6. Induct for flat terms and K-flatness. Generators use ringed pullback along pi_n
-   and lem-pur-derived-change-of-rings. Units have one free term. Tensor uses
-   lem-pur-kflat-total-tensor-model; geometry uses
-   lem-weil-pbc-ringed-pullback-preserves-kflat and
-   lem-weil-pbc-ringed-topoi-derived-tensor-pullback. No quotient is assumed flat.
-7. The strict-system/sequence-site equivalence realizes the constructed complexes.
-   Tensor and sums evaluate componentwise because covers are vertical, so the
-   actual total tensor evaluates to its displayed level total tensor, with step 3's maps.
-8. Tensor any exact system sequence with a term of the prescribed complex: every
-   evaluation is exact by level flatness. Componentwise detection gives system
-   flatness. For an acyclic test system complex, evaluations of its total tensor are
-   acyclic by level K-flatness; componentwise detection gives system K-flatness.
-9. Exact derived evaluation is termwise (lem-coef-semilinear-derived-sections).
-   The total-tensor theorem on the sequence site computes derived system tensor on
-   these K-flat representatives. Exact geometric inverse image computes its derived
-   functor on every complex (lem-weil-pbc-exact-functor-derived-functor). Their
-   evaluations are exactly step 6's comparisons, with no new resolutions.
-10. Restriction along pi_n makes t completed-linear, since q pi_m=pi_n. Localize
-    this actual complex of towers. Exact restriction and evaluation carry its
-    objects to Res_n QK_n and its arrows to the localized actual transitions, as in
-    situation-conventions. This is the coherent tower datum only;
-    invertibility of transition adjoints is a separate theorem.
--/
+representatives, and the completed tower retains the actual arrows. -/
 theorem quotientExpressionStrictKFlatTowers
     {Z X Y : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y)
     (_hlZ : ∀ x : Z, IsUnit (l : Z.residueField x))

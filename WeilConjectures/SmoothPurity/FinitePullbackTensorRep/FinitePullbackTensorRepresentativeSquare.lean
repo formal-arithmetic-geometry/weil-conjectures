@@ -9,8 +9,20 @@ public import WeilConjectures.SmoothPurity.FinitePullbackTensorRep.FinitePullbac
 
 /-! # The finite tensor representative square
 
-Source: Stacks 07A4 and 00YV.
-(blueprint: lem-pur-finite-pullback-tensor-representative-square).
+We show that the constructed finite pullback-tensor comparison satisfies the single-pullback
+representative square.
+
+## Implementation details
+
+The proof starts from the defining representative square of
+`proEtaleCanonicalTensorComparison`, composes the source representative with
+`pullbackTensorFiniteModelIso`, and uses naturality of `mapDerivedCategoryNatIso` and of the
+target model identification to cancel the realization against its inverse in both tensor
+factors.
+
+## References
+
+* Stacks Project, Tags 00YV and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -74,16 +86,7 @@ attribute [local instance] modules_abelian modules_derived ordinary_additive
   ordinary_limits ordinary_colimits
 attribute [local implicit_reducible] modules_abelian modules_derived
 
-/-- The constructed finite comparison satisfies the single-pullback representative square.
-Source: Stacks 07A4 and 00YV
-(blueprint: lem-pur-finite-pullback-tensor-representative-square).
-Proof: use the defining representative square of proEtaleCanonicalTensorComparison.
-Compose the source representative with pullbackTensorFiniteModelIso. Naturality of
-mapDerivedCategoryNatIso moves the inverse realization across this source map.
-Naturality of the target model identification moves it across the two computation
-maps. The realization and its inverse cancel in both tensor factors. What remains
-is exactly the original canonical square, followed by the target model identification.
-The two flatness witnesses are the preservation witnesses in that original square. -/
+/-- The constructed finite comparison satisfies the single-pullback representative square. -/
 theorem square {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]

@@ -72,10 +72,20 @@ import WeilConjectures.SmoothPurity.StrictQuotient.StrictPullbackAdjointConstruc
 import Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
-/-! Normalization and operation-adjoint laws for strict quotient expressions.
+/-! # Operation-adjoint laws for strict quotient expressions
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 07A6
-(blueprint: lem-pur-quotient-expression-kflat-normalization).
+Normalization and the tensor/pullback adjoint equations for strict quotient expressions, by
+induction on `Generated`.
+
+## Implementation details
+
+Levelwise goodness alone permits zero horizontal maps and does not imply normalization, so
+the main theorem takes the actual quotient-transition compatibility (`P`, `κ`, `hκ`) as a
+hypothesis.
+
+## References
+
+* Stacks Project, Tags 07A4 and 07A6.
 -/
 
 @[expose] public noncomputable section
@@ -416,17 +426,9 @@ private theorem pull_adjoint_isIso {V W : Scheme.{t}} (g : V ⟶ W)
   rw [hh]
   exact (e ≪≫ en.symm).isIso_hom
 
-/-- Given the strict K-flat models and their actual quotient maps, the derived
-normalization and the tensor/pullback adjoint equations follow by induction on
-`Generated`. This is the operation part of the simultaneous normalization argument.
-
-STATEMENT-DISPUTED: the earlier signature omitted actual quotient-transition
-compatibility. Levelwise Goodness permits zero horizontal maps and does not imply normalization.
-The data P, κ and hκ restore the actual-quotient hypothesis supplied by the caller.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 07A6;
-(blueprint: lem-pur-quotient-expression-kflat-operations).
--/
+/-- Given strict K-flat models `P` whose levels are identified by `κ` with the actual quotient
+maps, every `Generated` expression is a normalized coefficient sequence and satisfies the
+tensor and pullback adjoint equations. -/
 theorem quotientExpressionKFlatOperations
     {Z X Y : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y)
     (r : ℕ) (N : Fin r → Complex l E Y)

@@ -16,7 +16,17 @@ import Mathlib.RingTheory.Localization.BaseChange
 /-!
 # Prescribed bases persist under a further principal localization
 
-Source: Stacks Project, Algebra, Section 10.9 (localization of modules), and Tag 07C6.
+A basis of `M_a` represented by specified elements of `M` persists on `D(a * t)`.
+
+## Implementation details
+
+No finiteness, projectivity, smoothness or prime hypothesis is needed; nilpotent `a` or `t` and
+the empty index type are covered.
+
+## References
+
+* [Stacks, Section 10.9] (localization of modules)
+* [Stacks, Tag 07C6]
 -/
 
 @[expose] public section
@@ -27,17 +37,7 @@ open scoped TensorProduct
 
 namespace Module.Basis
 
-/-- A basis represented by specified original module elements persists on D(a*t).
-Source: Stacks Project, Algebra, Section 10.9 (localization of modules), and Tag 07C6.
-(blueprint: lem-weil-pbc-prescribed-basis-further-localization)
-
-Proof: Give A[1/(a*t)] its A[1/a]-algebra structure, since a is a unit after
-inverting a*t. Base change the given basis. Associativity of tensor products and
-the localization-tensor equivalence identify this base change with
-LocalizedModule.Away (a*t) M. The resulting basis vectors are m i divided by one,
-as follows on elementary tensors. No finiteness, projectivity, smoothness or prime
-hypothesis is needed. If a or t is nilpotent, the resulting zero ring and zero
-module still admit the base changed basis. The empty index type is also covered. -/
+/-- A basis represented by specified original module elements persists on D(a*t). -/
 theorem exists_prescribed_basis_away_mul
     {A : Type u} [CommRing A] {M : Type v} [AddCommGroup M] [Module A M]
     {ι : Type*} (a t : A) (m : ι → M)

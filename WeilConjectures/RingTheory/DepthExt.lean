@@ -18,8 +18,20 @@ import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 /-!
 # Depth via Ext from the residue field
 
-Source: Stacks Project, Algebra, Lemma 10.72.5 (Tag 00LW)
-(blueprint: lem-weil-pbc-depth-ext).
+For a nonzero finite module `M` over a Noetherian local ring `R`, the depth of `M` is the least
+`i` with `Ext^i(R/𝔪, M) ≠ 0`.
+
+## Implementation details
+
+The proof uses Mathlib's Rees theorem (`Mathlib.RingTheory.Depth.Rees`): a regular sequence of
+length `d` gives vanishing of `Ext` below `d`, and vanishing in degrees `< d + 1` would give a
+regular sequence of length `d + 1`. The `ULift`s place the residue field and the module in one
+universe without restricting either carrier; `ULift.moduleEquiv` identifies each lift with
+the original module.
+
+## References
+
+* [Stacks, Tag 00LW]
 -/
 
 @[expose] public section
@@ -31,25 +43,7 @@ open CategoryTheory CategoryTheory.Abelian
 namespace IsLocalRing
 
 /-- For a nonzero finite module over a Noetherian local ring, depth is the least degree
-of nonzero Ext from the residue field (Stacks, Tag 00LW;
-(blueprint: lem-weil-pbc-depth-ext)). The `ULift`s place the residue field and the module
-in one universe without restricting either carrier; `ULift.moduleEquiv` identifies each
-lift with the original module.
-
-Proof (using Mathlib's Rees theorem, `Mathlib.RingTheory.Depth.Rees`):
-1. Nakayama gives `m M ≠ M`, so depth is the supremum of regular-sequence lengths.
-   The support-dimension bound and finite local Krull dimension make it a natural
-   number `d`. The empty sequence ensures the set is nonempty; a finite supremum
-   in `ℕ∞` belongs to the set, giving a regular sequence of length `d`.
-2. Lift `M` and the residue field to the common universe already used in the statement.
-   `ULift.moduleEquiv` preserves regularity and support. The lifted residue field
-   has support exactly `V(m)`, and Nakayama also gives `m (ULift M) ≠ ULift M`.
-3. Rees, `ModuleCat.subsingleton_ext_of_exists_isRegular`, applied to the sequence
-   of length `d`, gives vanishing of the stated Ext groups in all degrees below `d`.
-4. If Ext in degree `d` were also zero, all degrees below `d+1` would vanish.
-   Rees, `ModuleCat.exists_isRegular_of_exists_subsingleton_ext`, would give a
-   regular sequence of length `d+1`. Transporting it back to `M` contradicts the
-   supremum defining depth. Thus degree `d` is nonzero, including when `d=0`. -/
+of nonzero Ext from the residue field (with both arguments lifted to a common universe). -/
 theorem exists_depth_eq_ext_degree {R : Type u} [CommRing R] [IsNoetherianRing R]
     [IsLocalRing R] (M : Type v) [AddCommGroup M] [Module R M]
     [Module.Finite R M] [Nontrivial M] :

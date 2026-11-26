@@ -33,11 +33,8 @@ generic connectedness of fibres (`exists_ne_zero_forall_connectedSpace_fiber`) a
 - `Ideal.ringKrullDim_le_height_of_isMaximal`: in a domain finitely generated over a field,
   maximal ideals have height at least the Krull dimension.
 - `exists_ne_zero_forall_connectedSpace_quotient`: generic members of a linear system with
-  finite base locus cut a finite cover in a connected scheme.
-
-## Blueprint
-
-- `lemma-curve-preserving-finite-cover--1`: the Bertini lemma for finite covers.
+  finite base locus cut a finite cover in a connected scheme. This is an input of the Bertini
+  lemma for finite covers.
 -/
 
 @[expose] public section
@@ -47,9 +44,7 @@ universe u
 open MvPolynomial TensorProduct
 
 /-- In a domain `B` finitely generated over a field `k`, every maximal ideal has height at least
-the Krull dimension of `B`: by Noether normalization `B` is finite over a polynomial ring, which is
-normal, so going down holds, and maximal ideals of a polynomial ring in `n` variables have
-height `n`. -/
+the Krull dimension of `B`. -/
 theorem Ideal.ringKrullDim_le_height_of_isMaximal (k : Type*) {B : Type*} [Field k] [CommRing B]
     [IsDomain B] [Algebra k B] [Algebra.FiniteType k B] (q : Ideal B) [q.IsMaximal] :
     ringKrullDim B ≤ q.height := by
@@ -369,14 +364,7 @@ set_option backward.isDefEq.respectTransparency true in
 algebraically closed field, `A` a finitely generated `k`-domain of Krull dimension `≥ 2` and `B`
 a domain which is a finite torsion-free `A`-algebra. Let `v₁, …, v_M ∈ A` have common zero locus
 a finite nonempty set `S` of closed points of `Spec A`. Then there is a nonzero polynomial `a` in
-the parameters such that `Spec (B ⧸ (∑ bᵢ vᵢ))` is connected whenever `a(b) ≠ 0`.
-
-This is an input of the Bertini lemma for finite covers
-(blueprint: `lemma-curve-preserving-finite-cover--1`). The universal member
-`D = B[X₁, …, X_M] ⧸ (∑ vᵢ Xᵢ)` over `k[X₁, …, X_M]` has a unique minimal prime
-(`BertiniConnected.exists_isPrime_forall_le`), since the base locus has codimension `≥ 2` in
-`Spec B`; so its generic fibre is irreducible, a point of `S` provides a section, and generic
-connectedness of fibres (`exists_ne_zero_forall_connectedSpace_fiber`) concludes. -/
+the parameters such that `Spec (B ⧸ (∑ bᵢ vᵢ))` is connected whenever `a(b) ≠ 0`. -/
 theorem exists_ne_zero_forall_connectedSpace_quotient {k A B : Type u} [Field k]
     [IsAlgClosed k] [CommRing A] [IsDomain A] [Algebra k A] [Algebra.FiniteType k A]
     [CommRing B] [IsDomain B] [Algebra A B] [Module.Finite A B] [Module.IsTorsionFree A B]

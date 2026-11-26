@@ -11,8 +11,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHom
 /-!
 # The double dual along a monoidal functor, up to an invertible twist
 
-This file contains the formal part of blueprint `lemma-double-dual-geometric-generic-fibre--1`: a
-comparison `g^* ω_X ≅ ω_{X'} ⊗ L` with `L` invertible identifies `g^* δ_K` with `δ_{g^* K}`,
+This file contains the formal part of the double dual comparison on the geometric generic fibre:
+a comparison `g^* ω_X ≅ ω_{X'} ⊗ L` with `L` invertible identifies `g^* δ_K` with `δ_{g^* K}`,
 as soon as the internal-hom comparisons of `g^*` at `(K, ω_X)` and at `(𝔻_X K, ω_X)` are
 isomorphisms; the invertible twist cancels after dualising twice.
 
@@ -54,14 +54,9 @@ namespace CategoryTheory.MonoidalClosed
 
 variable {C : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C] [MonoidalClosed C]
 
-/-- Blueprint `lemma-double-dual-geometric-generic-fibre--1` (formal core): biduality is invariant
-under twisting the dualizing object by an invertible object. For `L` invertible, the double-dual map
-`X ⟶ [[X, W ⊗ L], W ⊗ L]` is an isomorphism if and only if `X ⟶ [[X, W], W]` is.
-
-The canonical isomorphisms `[X, W] ⊗ L ≅ [X, W ⊗ L]`
-(`CategoryTheory.MonoidalClosed.isIso_ihomTensorToIhom`) identify the self-adjunction of
-`[-, W ⊗ L]` with that of `[-, W]` followed by the autoequivalence `- ⊗ L` of `Cᵒᵖ`, and the units
-of the two adjunctions are isomorphisms at the same objects. -/
+/-- Biduality is invariant under twisting the dualizing object by an invertible object. For `L`
+invertible, the double-dual map `X ⟶ [[X, W ⊗ L], W ⊗ L]` is an isomorphism if and only if
+`X ⟶ [[X, W], W]` is. -/
 theorem isIso_toIhomIhom_tensor_right_iff (W X : C) {L : C} (hL : IsInvertible L) :
     IsIso (toIhomIhom (W ⊗ L) X) ↔ IsIso (toIhomIhom W X) := by
   obtain ⟨L', ⟨e⟩, ⟨e'⟩⟩ := hL
@@ -81,13 +76,10 @@ theorem isIso_toIhomIhom_tensor_right_iff (W X : C) {L : C} (hL : IsInvertible L
 
 variable {D : Type*} [Category* D] [MonoidalCategory D] [BraidedCategory D] [MonoidalClosed D]
 
-/-- Blueprint `lemma-double-dual-geometric-generic-fibre--1` (formal core): let `G` be a lax braided
-functor between braided monoidal closed categories, and let `G W ≅ W' ⊗ L` with `L` invertible.
-If the internal-hom comparisons `G [X, W] ⟶ [G X, G W]` and `G [[X, W], W] ⟶ [G [X, W], G W]`
-of `G` are isomorphisms, then `G δ_X` is an isomorphism if and only if the double-dual map
-`δ_{G X} : G X ⟶ [[G X, W'], W']` is: the twist by `L` cancels after dualising twice
-(`CategoryTheory.MonoidalClosed.isIso_toIhomIhom_tensor_right_iff`), and the comparison along
-`G` is `CategoryTheory.MonoidalClosed.isIso_map_toIhomIhom_iff`. -/
+/-- Let `G` be a lax braided functor between braided monoidal closed categories, and let
+`G W ≅ W' ⊗ L` with `L` invertible. If the internal-hom comparisons `G [X, W] ⟶ [G X, G W]` and
+`G [[X, W], W] ⟶ [G [X, W], G W]` of `G` are isomorphisms, then `G δ_X` is an isomorphism if and
+only if the double-dual map `δ_{G X} : G X ⟶ [[G X, W'], W']` is. -/
 theorem isIso_map_toIhomIhom_iff_of_iso_tensor (G : C ⥤ D) [G.LaxBraided] {W : C} {W' L : D}
     (hL : IsInvertible L) (e : G.obj W ≅ W' ⊗ L) (X : C)
     (h₁ : IsIso ((Functor.LaxMonoidal.ihomComparison G X).app W))
@@ -143,9 +135,7 @@ invertible and the internal-hom comparisons
 `Lg^* RHom(K, ω_X) ⟶ RHom(Lg^* K, Lg^* ω_X)` and
 `Lg^* RHom(RHom(K, ω_X), ω_X) ⟶ RHom(Lg^* RHom(K, ω_X), Lg^* ω_X)` are isomorphisms, then
 `Lg^*` of the double-dual map `K ⟶ RHom(RHom(K, ω_X), ω_X)` is an isomorphism if and only if the
-double-dual map of `Lg^* K` into `ω_{X'}` is. It is stated for a general coefficient category
-`A`, where the kernel checks it without unfolding the derived categories of `ModuleCat Λ`; see
-`AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff`. -/
+double-dual map of `Lg^* K` into `ω_{X'}` is. -/
 theorem isIso_leftDerivedUpperStar_map_derivedHomToIhomIhomNatTrans_app_iff
     {X X' : Scheme.{u}} (ωX : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (ωX' : _root_.DerivedCategory (Sheaf X'.smallEtaleTopology A)) (g : X' ⟶ X)
@@ -160,8 +150,7 @@ theorem isIso_leftDerivedUpperStar_map_derivedHomToIhomIhomNatTrans_app_iff
   let := leftDerivedUpperStarLaxBraided A g hbr
   exact isIso_map_toIhomIhom_iff_of_iso_tensor L((g)^*[A]) hL e K h₁ h₂
 
-/-- Blueprint `lemma-double-dual-geometric-generic-fibre--1`, formal part: **the double dual along a
-derived pullback, up to an invertible twist.**
+/-- **The double dual along a derived pullback, up to an invertible twist.**
 
 Let `g : X' ⟶ X`, let `a : X ⟶ S` and `a' : X' ⟶ S'` admit compactifications, with dualizing
 complexes `ω_X`, `ω_{X'}` and Verdier double-dual maps `δ`, and let
@@ -169,10 +158,8 @@ complexes `ω_X`, `ω_{X'}` and Verdier double-dual maps `δ`, and let
 `Lg^* RHom(K, ω_X) ⟶ RHom(Lg^* K, Lg^* ω_X)` and
 `Lg^* RHom(𝔻_X K, ω_X) ⟶ RHom(Lg^* 𝔻_X K, Lg^* ω_X)`
 (`AlgebraicGeometry.Etale.derivedHomUpperStarComparison`) are isomorphisms, then
-`Lg^* δ_K` is an isomorphism if and only if `δ_{Lg^* K}` is
-(`AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_map_derivedHomToIhomIhomNatTrans_app_iff`).
-
-The hypothesis `hbr` (the braided axiom for `Lg^*`) is not yet available in the repository. -/
+`Lg^* δ_K` is an isomorphism if and only if `δ_{Lg^* K}` is. The braided axiom `hbr` for `Lg^*`
+is assumed. -/
 theorem isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff {X X' S S' : Scheme.{u}}
     (a : X ⟶ S) (a' : X' ⟶ S') [HasCompactification a] [HasCompactification a'] (g : X' ⟶ X)
     (hbr : LeftDerivedUpperStarBraided (ModuleCat.{u + 1} Λ) g)

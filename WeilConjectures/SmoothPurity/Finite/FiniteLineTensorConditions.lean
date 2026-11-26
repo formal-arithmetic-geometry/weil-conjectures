@@ -54,8 +54,16 @@ import WeilConjectures.ConstructibleSheaf.Monoidal
 
 /-! # Finiteness under exact tensor by a finite coefficient line
 
-Source: definition-tate-twists--10, proof steps 4--5.
-(blueprint: lem-weil-finite-line-tensor-conditions).
+We show that exact tensor by a rank-one sheaf of finite coefficient modules preserves
+constructibility and Tor amplitude intervals.
+
+## Implementation details
+
+A rank-one trivialization over the constant coefficient ring is a constant rank-one module
+model, so the line is locally constant; refining a constructible stratification by a
+trivializing cover gives models `M ⊗ A ≅ M`. For Tor amplitude, flat-term K-flat models `P`
+of `K` and `Q` of a test module are used: tensor by the line is exact, `P ⊗ L` is again K-flat
+with flat terms, and associativity and symmetry identify `(P ⊗ L) ⊗ Q` with `(P ⊗ Q) ⊗ L`.
 -/
 
 @[expose] public noncomputable section
@@ -405,24 +413,7 @@ private theorem finite_line_tor (S : Scheme.{u}) (A : Type u) [CommRing A]
           ((SheafOfModules.siteSheafTensorRightIso R L).app M).symm hML }
   exact (hamp _).2 (DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj F ((hamp K).1 hK))
 
-/-- Exact tensor by a rank-one sheaf preserves constructible sheaves and every Tor interval.
-Source: blueprint definition-tate-twists--10, proof steps 4--5
-(blueprint: lem-weil-finite-line-tensor-conditions).
-
-Proof: a rank-one trivialization over the constant coefficient ring is a constant
-rank-one module model; hence the line is locally constant. Pull a trivializing cover
-back to each member of a constructible stratification and refine its locally constant
-models. The tensor then has model M tensor A, canonically isomorphic to M. Thus it
-has the same finite stalks and the same finite partition, including on the empty scheme.
-For Tor amplitude choose flat-term K-flat models P for K and Q for a test module M.
-Tensor by the line is exact, so it preserves acyclic complexes and the vanishing of
-cohomology in each degree. Associativity and symmetry identify
-(P tensor L) tensor Q with (P tensor Q) tensor L. Tensor by L preserves the direct
-sums in total tensor, being a left adjoint. The complex P tensor L is still K-flat
-and has flat terms: its tensor with an acyclic complex is an exact line twist of
-an acyclic tensor. Consequently this rebracketing computes both derived tensors.
-Apply the assumed Tor interval of K to M, then exact line tensor; the same ordered
-interval works for all module sheaves M, with no constructibility assumption on M. -/
+/-- Exact tensor by a rank-one sheaf preserves constructible sheaves and every Tor interval. -/
 theorem finiteLineTensor_conditions (S : Scheme.{u}) (A : Type u)
     [CommRing A] [Finite A]
     (L : proEtaleRingModules S (proEtaleConstantRing S A))

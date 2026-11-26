@@ -9,7 +9,12 @@ public import WeilConjectures.TraceFormula.Supporting.QuotientSystemMixedCoheren
 
 /-! # A component of strict quotient-system coherence
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6D.
+Any two bracketings of a finite path of composable morphisms give the same comparison isomorphism,
+for composition and unit isomorphisms satisfying the associativity and unit laws.
+
+## References
+
+* Stacks Project, Tag 0D6D.
 -/
 
 @[expose] public noncomputable section
@@ -132,16 +137,10 @@ private theorem sequenceNormalMap_comp
 
 end Normalization
 
-/-- Source: Stacks Project, sites-cohomology.tex, Tag 0D6D.
-(blueprint: lem-trf-sequence-finite-bracketing-coherence).
-Proof: Define the right-associated word of a path and its comparison recursively, using the
-identity comparison for the empty path. Induction on concatenation proves that its comparison is
-the composite comparison followed by the two whiskered path comparisons: the empty case is the
-right-unit law and the successor case is three-arrow associativity. The left-unit law treats
-singleton paths. Induct on a binary bracketing to identify its comparison with this path
-comparison. The functors of both bracketings identify with the same right-associated functor;
-compose these identifications and cancel the second one to obtain the asserted equality. Equality
-transports commute with whiskering by equality induction. -/
+/-- Finite bracketing coherence: for a pseudofunctor-like family of functors `U` with composition
+isomorphisms `c` and unit isomorphisms `e` satisfying the associativity and unit laws, any two
+bracketings of a path of composable morphisms have the same functor and the same comparison
+isomorphism. -/
 theorem sequenceFiniteCoherence
     (D : Scheme.{t} → Type a) [∀ X, Category.{v} (D X)]
     (U : ∀ {X Y : Scheme.{t}}, (X ⟶ Y) → (D Y ⥤ D X))

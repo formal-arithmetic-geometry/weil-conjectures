@@ -11,9 +11,19 @@ import WeilConjectures.RingTheory.DerivedCompleteProductsTriangles
 /-!
 # Derived completeness of limits of nilpotent torsion complexes
 
-Source: Stacks Project, More on Algebra, Tag 091W, `lemma-naive-derived-completion`,
-with tensor factor `A[0]`
-(auxiliary; not a blueprint node).
+A derived limit of a tower of complexes on which every element of `I` acts nilpotently at each
+level is derived `I`-complete.
+
+## Implementation details
+
+For fixed `a ∈ I` and a level annihilated by `a^e`, the shift `s` on the product of the constant
+tower satisfies `s^e = 0`, so `1 - s` is invertible in the Roos triangle and each level is derived
+complete. Closure of derived complete complexes under products and triangles then handles the
+given tower; no uniform exponent over levels is needed.
+
+## References
+
+* [Stacks, Tag 091W] (with tensor factor `A[0]`)
 -/
 
 @[expose] public section
@@ -25,27 +35,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace DerivedCategory
 
 /-- A derived limit of a tower on which each element of `I` acts nilpotently at each
-level is derived `I`-complete. The exponent may depend on the element and the level.
-Source: Stacks Project, Tag 091W, `lemma-naive-derived-completion`, with tensor factor
-`A[0]` (auxiliary; not a blueprint node).
-
-Proof:
-1. Products of modules are exact: kernels are coordinatewise, and tuples lift across
-products of surjections by choice. Apply `lemma-reduction-derived-nakayama` to obtain
-countable products and derived limits in `D(A)`, unique up to isomorphism.
-2. Fix a level and `a ∈ I`, and choose `e ≥ 1` annihilating that level. On the product
-of the constant tower, its shift `s` satisfies `pr_j s^r = a^r pr_{j+r}`, by induction
-and the product universal property `def-weil-category-product`. Hence `s^e = 0`, and
-`1 + s + ... + s^(e-1)` inverts `1 - s` in `def-weil-derived-limit`'s Roos triangle.
-3. In that triangle the first and last maps vanish since the middle map is invertible.
-Rotate backwards using `def-weil-triangulated-category`. Exactness of Hom into this
-triangle (`lem-weil-pbc-hom-into-triangle-exact`) factors the identity of the derived
-limit through a zero map, so the derived limit is zero. Thus each level is derived
-complete by `def-weil-point-derived-complete-module-complex`.
-4. By clause (1) of `lem-weil-pbc-module-derived-complete-products-triangles`, the
-product of all levels is derived complete. The Roos triangle for the given tower has
-this product as both remaining vertices. Clause (2) of that closure lemma makes its
-first vertex derived complete. No uniform exponent over levels is required. -/
+level is derived `I`-complete. The exponent may depend on the element and the level. -/
 theorem isDerivedComplete_of_isDerivedLimit_of_nilpotent
     {A : Type u} [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{v} A)]
     (I : Ideal A) (L : ℕ → DerivedCategory (ModuleCat.{v} A)) [HasProduct L]

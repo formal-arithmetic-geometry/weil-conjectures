@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.OpenProjectionRoos.OpenProjectionRoosC
 import WeilConjectures.SixFunctors.SfOpenRoos.SfOpenRoosExtensionComparison
 import WeilConjectures.SixFunctors.SfOpenRoos.SfOpenRoosRestrictionUnit
 
-/-! # Transport of the ordinary open tensor and signed Roos comparisons -/
+/-! # Transport of the ordinary open tensor and signed Roos comparisons
+
+## References
+
+* Stacks Project, Tags 09BP, 03DI, 0GL1
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -40,23 +45,10 @@ attribute [local irreducible] integralOperationsTensorTowerFunctor
   completedIntegralCommRingSheafUnrestricted completedIntegralCoefficientSheafUnrestricted
   unrestrictedIntegralComplexFunctor scalarReductionExistence unrestrictedIntegralReductionExistence
 
-/-- Ordinary descent and signed Roos comparison in the global coefficient presentation.
-Source: Stacks 09BP, 03DI, 0GL1; the open-factor blueprint argument
-(blueprint: lem-sf-open-projection-ordinary-roos).
-
-Proof: identify the open pro-etale site with the slice at the open object, using the
-coefficient equivalence in o. Finite type over the field makes both schemes
-Noetherian, so j is quasi-compact. Apply the normalized extension and restriction
-Roos comparisons, then transport along o.integral. The product projection identities
-and both signed coordinates are preserved by this exact equivalence. The strict
-augmentation has coordinates (lift a,0); transport gives the augmentation clauses.
-The slice unit is invertible, and its localization gives the derived unit. Good
-complexes are flat-term K-flat complexes; the flatness and extension-preservation
-maps are supplied separately, and restriction preserves them by exact monoidal
-restriction.
-Descend m.totalComparison.chain through the two resolving localizations, using
-q.tensorX.ordinary and q.tensorU.ordinary. The descent comparison on representatives
-is exactly the displayed chain identity. All these constructions precede completion. -/
+/-- Ordinary descent and signed Roos comparison in the global coefficient presentation:
+there are Roos comparisons for open extension and restriction, the module and derived
+open units are isomorphisms, restriction preserves good complexes, and there is an ordinary
+open tensor comparison satisfying the ordinary representative equation. -/
 theorem openProjectionOrdinaryRoos
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     [U.Over (Spec (.of D.k))] [X.Over (Spec (.of D.k))]

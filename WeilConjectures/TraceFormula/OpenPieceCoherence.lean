@@ -16,13 +16,13 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImme
 
 For an open immersion `j : U ⟶ X` stable under the Frobenius, the extension by zero commutes with
 the pullbacks along the Frobenii on compactly supported cohomology. This is the first square of
-the open piece in blueprint `lemma-additivity-open-subscheme-complement` (Steps 2(a) and 3).
+the open piece in the additivity of the trace along an open subscheme and its closed complement.
 
-## Main input
+## Implementation details
 
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion`:
   for vertical open immersions, `Ex_!` is the extension-by-zero base change through
-  `Rj_! ≅ j_!` (blueprint `def-exchange-projection`). It is computed with the trivial
+  `Rj_! ≅ j_!`. It is computed with the trivial
   compactification `j = 𝟙 ∘ j`
   (`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_comp_isoOpen`).
 
@@ -90,9 +90,7 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- **`Ex_!` for open immersions is the extension-by-zero base change** (blueprint
-`def-exchange-projection`: `Ex_!` is represented, for the compactification `f = 𝟙 ∘ f` of an open
-immersion, by the canonical identification `Lg^* f_! ≅ f'_! Lg'^*`): through `Rf_! ≅ f_!`, the
+/-- **`Ex_!` for open immersions is the extension-by-zero base change**: through `Rf_! ≅ f_!`, the
 compact-support base change of a cartesian square with vertical open immersions is the inverse of
 the extension-by-zero exchange morphism. -/
 theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion
@@ -167,9 +165,8 @@ lemma weilUpperStarComparison_hom_app_eq {Φ : X ⟶ X} {ΦU : U ⟶ U} (hj : Φ
         sq).hom.app K := by
   rw [weilUpperStarComparison_hom_app, boundedConstructiblePullbackSquareComparison_hom_app]
 
-/-- **The extension by zero commutes with the pullbacks along the Frobenii** (blueprint
-`lemma-additivity-open-subscheme-complement`, Step 2(a), the open piece): for `Φ_U ≫ j = j ≫ Φ`, the
-map `RΓ_c(U, Lj^* K) ≅ RΓ_c(X, Rj_! Lj^* K) --RΓ_c(ε)--> RΓ_c(X, K)` intertwines `Φ_U^♯`
+/-- **The extension by zero commutes with the pullbacks along the Frobenii**: for `Φ_U ≫ j = j ≫ Φ`,
+the map `RΓ_c(U, Lj^* K) ≅ RΓ_c(X, Rj_! Lj^* K) --RΓ_c(ε)--> RΓ_c(X, K)` intertwines `Φ_U^♯`
 (followed by the Frobenius comparison of the pullback) and `Φ^♯`. -/
 lemma compToPoint_inv_app_comp_counit_comp_compactPullback {Φ : X ⟶ X} {ΦU : U ⟶ U}
     [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left] [IsFinite ΦU.left]

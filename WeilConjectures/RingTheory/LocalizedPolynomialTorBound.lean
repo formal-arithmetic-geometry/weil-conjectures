@@ -19,8 +19,18 @@ import WeilConjectures.RingTheory.PolynomialTorBound
 import WeilConjectures.RingTheory.TorVanishingLocalizedBase
 
 /-! # Transfer of Tor bounds to localized polynomial rings
-Source: Stacks Project, Tag 068X.
-(blueprint: lem-pc-localized-polynomial-tor-bound)
+
+A Tor bound over the base ring for a module over a prime localization of a polynomial ring in
+`n` variables gives a Tor bound, larger by at most `n`, over the localized polynomial ring.
+
+## Implementation details
+
+The polynomial Tor bound is applied to the restriction of each localized test module, without
+finiteness, and the localization comparison transfers the vanishing to the localized ring.
+
+## References
+
+* [Stacks, Tag 068X]
 -/
 
 @[expose] public section
@@ -32,14 +42,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace ModuleCat
 
 /-- Transfer the base Tor bound to a Tor bound over the localized polynomial ring.
-Source: Stacks Project, Tag 068X, lemma-recognize-perfect-over-base.
-Proof: restrict the localized module to the polynomial ring. The polynomial Tor bound
-increases the base bound by at most n, without needing this restricted module to be finite.
-For each localized test module, apply that bound to its polynomial-ring restriction.
-The proved localization comparison then transfers this vanishing to the localized ring.
-Successive restriction to the base is definitionally restriction along the composite in
-hTor. This argument also covers n=0, d=0, and the zero module.
-(blueprint: lem-pc-localized-polynomial-tor-bound)
 -/
 theorem localizedPolynomial_tor_bound_of_base_tor_bound
     {A : Type u} [CommRing A] [IsNoetherianRing A]

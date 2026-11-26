@@ -10,9 +10,6 @@ import WeilConjectures.CategoryTheory.StageSystem.Functor
 
 /-! # Pullback of a common-stage model comparison
 
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-common-stage-pullback-model-map).
-
 This computes the pullback of the comparison between an object and a finite-stage model.
 The proof identifies the prescribed pullback functor with coherent stage-system descent.
 -/
@@ -150,15 +147,7 @@ private theorem commonPullback_isoToStage
     have he := eq_of_heq (hb h K).1
     exact heq_of_eq (hi.trans (by rw [he]))
 
-/-- Pullback maps a model comparison to its rational representative.
-
-Source: thm-sf-pf-field.proof.md, Compatibility, passage to a common coefficient field.
-(blueprint: lem-sf-common-stage-pullback-model-map).
-
-Proof: the uniquely prescribed common pullback equals descent of the coherent rational
-pullback comparisons. Its action on `isoToStage` is the transition comparison, by
-coherence, and its action on an included arrow is the included rational pullback.
-Functoriality composes these two formulas. -/
+/-- Pullback maps a model comparison to its rational representative. -/
 theorem commonStageDerivedPullback_map_model
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] {X Y : Scheme.{u}} (f : X ⟶ Y)

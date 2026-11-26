@@ -11,8 +11,17 @@ import WeilConjectures.SixFunctors.Common.CommonProjectionTensorCompatibility
 
 /-! # Projection comparison equations on finite coefficient models
 
-Source: thm-sf-pf-field.proof.md, Compatibility and the common finite coefficient
-field paragraph, and fix-prop-projection-formula.proof.md, final coherence sentence.
+We prove the composition equation of the projection comparison on two models included from one
+finite coefficient field.
+
+## Implementation details
+
+The finite-stage composition equation is transported along inclusion using the canonical
+common-stage tensor comparisons and the normalized pullback-tensor comparisons. The
+`composition` and `pullComposition` equations of `commonStageComparison` identify the support
+compositor and the final pullback compositor, after which both sides are conjugates of the
+included finite-stage equation with the same endpoints. No equality is reflected through
+inclusion.
 -/
 
 @[expose] public noncomputable section
@@ -32,20 +41,7 @@ open CategoryTheory.SuppliedExchangeProjection
 namespace WeilConjectures
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The composition equation on two models included from one finite field.
-Source: thm-sf-pf-field.proof.md, Compatibility and the common coefficient-field
-paragraph, and fix-prop-projection-formula.proof.md, final coherence sentence.
-(blueprint: lem-sf-common-projection-composition-on-stage).
-Proof: Apply inclusion to the finite-stage composition equation at the given two models.
-Use the canonical common-stage tensor comparisons and the normalized pullback-tensor
-comparisons. Preservation of the proper counit and the open adjunction identifies each
-finite projection mate with the common-stage projection under these comparisons.
-Move the support and tensor comparisons past each projection by naturality.
-The composition and pullComposition equations of commonStageComparison identify the
-support compositor and the final pullback compositor. Both sides are now conjugates
-of the two sides of the included finite-stage equation, with the same endpoints.
-Cancel the endpoint isomorphisms. The calculation includes identities, repeated
-fields, zero objects and empty schemes; no equality is reflected through inclusion. -/
+/-- The composition equation on two models included from one finite field. -/
 theorem commonProjectionComposition_onStage
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C)

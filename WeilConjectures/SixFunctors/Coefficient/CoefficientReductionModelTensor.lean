@@ -12,7 +12,22 @@ import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionCompa
 
 /-! # Tensor comparison from the strict K-flat reduction model
 
-Source: Stacks 06YS, 06YY, 07A4 and 0941.
+## Implementation details
+
+On flat-term K-flat representatives the strict model identifies reduction with ordinary
+extension to the sequence ring, which has a natural total-tensor comparison obtained by
+sheafifying `b ⊗ (x ⊗ y) ↦ (b ⊗ x) ⊗ (1 ⊗ y)`. Extension to the sequence ring preserves
+K-flatness and flat terms, so `tensorComparisonDescent` applies to the two prescribed tensor
+models. The resulting sequence extension is identified with `L` by uniqueness of left adjoints
+to `coefficientSequenceLimit`. No unit/counit projection equation is needed, and no
+invertibility of quotient ring maps is used.
+
+## References
+
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -28,28 +43,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The simultaneous strict K-flat reduction model is compatible with tensor,
 for a left adjoint of the specified total limit, before choosing tensor maps.
-Source: Stacks 07A4, lemma-pullback-tensor-product, and 0941.
-
-Proof: use flat-term K-flat representatives for both arguments. The strict model
-identifies reduction on these representatives with ordinary extension to the
-sequence ring. Ordinary extension has a natural total-tensor comparison, obtained
-by sheafifying the formula b tensor (x tensor y) maps to (b tensor x) tensor
-(1 tensor y). Its inverse multiplies the two coefficient sections. These are
-inverse maps on pure tensors, hence on the sheafified tensor and every total-degree
-summand, with the same signs in the two differentials. Extension to the sequence
-ring preserves K-flatness and flat terms: the tensor/restriction adjunction proves
-the acyclic tensor test, and the ordinary tensor comparison proves termwise
-flatness. Apply tensorComparisonDescent to the two prescribed tensor models and
-the universal left-derived sequence extension counit. Flat-term K-flat resolutions
-make restriction to representatives fully faithful, so this gives an isomorphism
-on all derived objects. Identify the resulting sequence extension with L by
-uniqueness of left adjoints
-to coefficientSequenceLimit; the sequence projection theorem gives the adjunction
-for the constructed extension. Conjugate its derived tensor comparison by this
-natural isomorphism. No unit/counit projection equation or normalized-object
-assertion is needed. The construction
-uses no invertibility of quotient ring maps and treats zero and equal levels too.
-(blueprint: lem-coef-reduction-model-tensor)
 -/
 theorem coefficientReductionModelTensor_exists
     (T : CoefficientDerivedSystemTensors l E W)

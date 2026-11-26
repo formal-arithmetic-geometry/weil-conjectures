@@ -15,7 +15,7 @@ public import WeilConjectures.Tactic.TransportExact
 
 For the specialization `Sp` to the normal cone of a rational point `x` of `X`, the Künneth–Verdier
 maps `λ_K : K ⊠ D K ⟶ RHom(p₂^* K, p₁^! K)` (`ProEtale.CondensedRing.kunnethVerdierMap`) satisfy
-the first identity of blueprint `lemma-nearby-cycles-universal-kernel`,
+the first identity for the nearby cycles of the universal kernel,
 
 `𝔥 ∘ Sp(λ_K) = λ_{K'} ∘ ρ`,
 
@@ -23,10 +23,13 @@ with `K' = Sp K` and `ρ = (1 ⊠ δ_K) ∘ Π⁻¹` (`ProEtale.CondensedRing.un
 (`ProEtale.CondensedRing.map_kunnethVerdierMap_comp_eq`). It is the instance of the abstract
 `CategoryTheory.map_curry_kunnethPairing_comp_eq`. Its inputs are proved here: the monoidality of
 `α_{p₂}`, the definition of `δ_K`, the symmetry of the lax tensor maps of nearby cycles, and
-`Π = (α_{p₁} ⊗ α_{p₂}) ≫ μ`. The exceptional exchange `β_{p₁}` and its compatibility with the
-exceptional Künneth maps (blueprint `lemma-base-change-maps-external-duality--1`) are hypotheses:
-`β_{p₁}` needs the compact-support exchange `ν_{p₁}` of blueprint `prose-E-15` (3) for the
-non-proper projection, which is only constructed for compactified morphisms of models.
+`Π = (α_{p₁} ⊗ α_{p₂}) ≫ μ`.
+
+## Implementation details
+
+The exceptional exchange `β_{p₁}` and its compatibility with the exceptional Künneth maps are
+hypotheses: `β_{p₁}` needs the compact-support exchange `ν_{p₁}` for the non-proper projection,
+which is only constructed for compactified morphisms of models.
 
 -/
 
@@ -54,10 +57,9 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   (x : RationalPoint X) (D : NearbyCyclesModel.NearbyDualizingData k k' ℓ)
 
 -- the abstract statement is matched against the concrete functors
-/-- **Nearby cycles of the universal kernel**, first identity (blueprint
-`lemma-nearby-cycles-universal-kernel`): for an exceptional exchange
-`β_{p₁} : Sp_{X×X} p₁^! ⟶ p_{1s}^! Sp_X` compatible with the exceptional Künneth maps (`hκ`,
-blueprint `lemma-base-change-maps-external-duality--1`) and the map
+/-- **Nearby cycles of the universal kernel**, first identity: for an exceptional exchange
+`β_{p₁} : Sp_{X×X} p₁^! ⟶ p_{1s}^! Sp_X` compatible with the exceptional Künneth maps (`hκ`)
+and the map
 `𝔥 : Sp_{X×X} RHom(p₂^* K, p₁^! K) ⟶ RHom(p_{2s}^* K', p_{1s}^! K')` adjoint to
 `(α_{p₂} ⊗ 1) ≫ μ ≫ Sp(ev) ≫ β_{p₁}`, the Künneth–Verdier maps satisfy `𝔥 ∘ Sp(λ_K) = λ_{K'} ∘ ρ`,
 with `K' = Sp_{X,x} K` and `ρ = (1 ⊠ δ_K) ∘ Π⁻¹`. -/

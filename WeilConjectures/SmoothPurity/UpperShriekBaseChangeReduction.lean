@@ -88,6 +88,10 @@ It amounts to two coherences for `red = ρ ∘ red^{cond}`: the pullback compari
 and the pushforward comparison of the étale reading
 (`ProEtale.CondensedRing.finiteEtaleReadingLowerStarIso`) is the mate of its pullback
 comparison.
+
+## References
+
+* SGA 4, Exposé XVIII, Théorèmes 2.9 (Var 4) and 3.2.5.
 -/
 
 @[expose] public section
@@ -108,10 +112,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 coefficients: let `j : X ⟶ Z` be an open immersion and `p : Z ⟶ Y` a morphism such that
 `j ≫ p` is smooth of relative dimension `d`, let `g : Y' ⟶ Y` be a morphism with base change
 `p' : Z' ⟶ Y'` of `p`, and let `o : X'' ⟶ Z'` be the base change of `j`. Then `Lo^*` of the
-exceptional base change map `Lg'^* Rp^! K ⟶ Rp'^! Lg^* K` of `p` is an isomorphism: through the
-composition law of base change maps (`isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff`) it is
-`Ro^! ≅ Lo^*` of it, and the base change maps of `j ≫ p` and of `j` are isomorphisms by smooth
-base change (`isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`). -/
+exceptional base change map `Lg'^* Rp^! K ⟶ Rp'^! Lg^* K` of `p` is an isomorphism. -/
 theorem isIso_leftDerivedUpperStar_map_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion
     {X Z Y X'' Z' Y' : Scheme.{u}} [QuasiSeparatedSpace Y] [QuasiSeparatedSpace Z]
     [HasInvertibleExponent Λ X] (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y) (d : ℕ)
@@ -332,11 +333,7 @@ theorem isIso_map_upperShriekBaseChange_of_isIso_map_padicSubfield
 /-- **From integral to `ℚ̄_ℓ`-coefficients, after pullback**: let `o : Z ⟶ X'` be a morphism. If,
 for every finite subextension `E ⊆ ℚ̄_ℓ`, the pullback `Lo^*` of the exceptional base change map
 with `𝒪_E`-coefficients is an isomorphism, then so is `Lo^*` of the one with `ℚ̄_ℓ`-coefficients.
-Every bounded constructible `ℚ̄_ℓ`-complex `L` is the extension of scalars of an integral model
-(`ProEtale.exists_padicAlgCl_iso_integralModel`), the coefficient changes `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`
-commute with `Lo^*` and carry the exceptional base change maps to each other
-(`isIso_map_upperShriekBaseChange_padicSubfield_of_isIso_map`,
-`isIso_map_upperShriekBaseChange_of_isIso_map_padicSubfield`). -/
+-/
 theorem isIso_upperStar_map_upperShriekBaseChange_of_forall_integral
     (sq : IsPullback g' f' f g) {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom]
     [QuasiCompact Z.hom] [IsSeparated Z.hom] (o : Z ⟶ X')
@@ -385,9 +382,9 @@ section Reduction
 variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] (n : ℕ)
 
-/-- **Compatibility of the reduction modulo `ℓⁿ` with compact-support base change** (blueprint
-`sk-thm-sf-compatibility`, (7), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ` read on the étale
-site): for comparisons `γ_f : Rf_! ⋙ red_Y ≅ red_X ⋙ Rf_!` and `γ_{f'}`, the reduction of
+/-- **Compatibility of the reduction modulo `ℓⁿ` with compact-support base change** (for the
+coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ` read on the étale site): for comparisons
+`γ_f : Rf_! ⋙ red_Y ≅ red_X ⋙ Rf_!` and `γ_{f'}`, the reduction of
 compact-support base change `Ex_!` with `𝒪_E`-coefficients, read through `γ_{f'}` and the
 pullback comparison for `g'` (`etaleReductionUpperStarIso`), is the étale compact-support base
 change `Etale.rightDerivedLowerShriekBaseChangeMap` of the reduction, read through the pullback
@@ -426,9 +423,8 @@ comparisons `γ_f`, `γ_{f'}` of the reduction modulo `ℓ` with `Rf_!` and `Rf'
 `(Rf^! K)_{𝒪_E ⧸ ℓ} ⟶ Rf^! (K_{𝒪_E ⧸ ℓ})` are invertible and which are compatible with
 compact-support base change (`EtaleReductionLowerShriekBaseChangeCompatible`), the reduction of
 the exceptional base change map `Lg'^* Rf^! P ⟶ Rf'^! Lg^* P` is, up to isomorphisms, the étale
-exceptional base change map of the reduction of `P`
-(`CategoryTheory.Adjunction.map_mateEquiv_app_comp_of_hom_eq`). So every functor `G` which
-inverts the latter inverts the former. -/
+exceptional base change map of the reduction of `P`. So every functor `G` which inverts the
+latter inverts the former. -/
 theorem isIso_map_etaleReduction_map_upperShriekBaseChange_integral (sq : IsPullback g' f' f g)
     [HasCompactification f.left] [HasCompactification f'.left]
     (γf : PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E f ⋙ etaleReduction ℓ E 1 Y ≅
@@ -489,12 +485,7 @@ theorem isIso_map_etaleReduction_map_upperShriekBaseChange_integral (sq : IsPull
 modulo `ℓ` with `Rf_!` and `Rf'_!` whose transposes `(Rf^! K)_{𝒪_E ⧸ ℓ} ⟶ Rf^! (K_{𝒪_E ⧸ ℓ})`
 are invertible and which are compatible with compact-support base change
 (`EtaleReductionLowerShriekBaseChangeCompatible`). Then the exceptional base change map
-`Lg'^* Rf^! P ⟶ Rf'^! Lg^* P` with `𝒪_E`-coefficients is an isomorphism: its reduction is
-identified with the étale exceptional base change map of the reduction
-(`isIso_map_etaleReduction_map_upperShriekBaseChange_integral`), invertible by smooth base change
-with finite coefficients
-(`Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`), and the
-reduction reflects isomorphisms (`isIso_of_isIso_etaleReduction_map`). -/
+`Lg'^* Rf^! P ⟶ Rf'^! Lg^* P` with `𝒪_E`-coefficients is an isomorphism. -/
 theorem isIso_upperShriekBaseChange_integral_of_compatible (sq : IsPullback g' f' f g) (d : ℕ)
     [SmoothOfRelativeDimension d f.left] [HasCompactification f.left]
     [HasCompactification f'.left]
@@ -544,16 +535,13 @@ def HasEtaleReductionLowerShriekBaseChangeCompatible (sq : IsPullback g' f' f g)
 end Reduction
 
 /-- **Smooth base change for `Rf^!` along any morphism, given the compatibility of the reduction
-modulo `ℓ` with compact-support base change** (SGA 4, Exposé XVIII, Théorème 3.2.5 and
-Théorème 2.9 (Var 4); blueprint `proposition-compatibility-purity-base-change`): for a cartesian
-square `g' ≫ f = f' ≫ g` of separated `k`-schemes of finite type with `f` smooth of relative
-dimension `d` and `g` arbitrary, the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` with
+modulo `ℓ` with compact-support base change**: for a cartesian square `g' ≫ f = f' ≫ g` of
+separated `k`-schemes of finite type with `f` smooth of relative dimension `d` and `g`
+arbitrary, the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` with
 `ℚ̄_ℓ`-coefficients is an isomorphism for every `L`, provided that, for every finite subextension
-`E ⊆ ℚ̄_ℓ`, the reduction modulo `ℓ` admits comparisons with `Rf_!` and `Rf'_!` (with invertible
-transposes) compatible with compact-support base change
-(`HasEtaleReductionLowerShriekBaseChangeCompatible`). The `ℚ̄_ℓ` map comes from the `𝒪_E` maps
-(`isIso_upperShriekBaseChange_of_forall_isIso_integral`), which are invertible by smooth base
-change with finite coefficients (`isIso_upperShriekBaseChange_integral_of_compatible`). -/
+`E ⊆ ℚ̄_ℓ`, the reduction modulo `ℓ` admits
+comparisons with `Rf_!` and `Rf'_!` (with invertible transposes) compatible with compact-support
+base change (`HasEtaleReductionLowerShriekBaseChangeCompatible`). -/
 theorem isIso_upperShriekBaseChange_of_etaleReductionCompatible (sq : IsPullback g' f' f g)
     (d : ℕ) [SmoothOfRelativeDimension d f.left]
     (h : ∀ E : FiniteIntermediateField ℓ, HasEtaleReductionLowerShriekBaseChangeCompatible ℓ E.1 sq)
@@ -582,24 +570,15 @@ def EtaleReductionProperBaseChangeCompatible (E : Type) [Field E] [Algebra E (Pa
     (etaleReductionLowerShriekIso ℓ E 1 f')
 
 /-- **Smooth base change for `Rf^!` along any morphism, given the compatibility of the canonical
-reduction comparison for proper morphisms with compact-support base change** (SGA 4, Exposé
-XVIII, Théorème 3.2.5; blueprint `proposition-compatibility-purity-base-change`): let
-`g' ≫ f = f' ≫ g` be a cartesian square of separated `k`-schemes of finite type with `f` smooth of
-relative dimension `d` and `g` arbitrary, and write `f = j ≫ p` for the chosen compactification
-(`compactificationOverField`), with `j` an open immersion and `p` proper. If, for every finite
-subextension `E ⊆ ℚ̄_ℓ`, the canonical comparisons of the reduction modulo `ℓ` with `Rp_!` and with
-the lower shriek of the base change of `p` along `g` are compatible with compact-support base change
-(`EtaleReductionProperBaseChangeCompatible`), then the exceptional base change map
-`Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` with `ℚ̄_ℓ`-coefficients is an isomorphism for every `L`.
-
-The map for `f` is the restriction along the open immersion `o : X' ⟶ Z ⨯_Y Y'` of the map for
-`p` (`isIso_upperStar_map_upperShriekBaseChange_iff`); it comes from `𝒪_E`-coefficients
-(`isIso_upperStar_map_upperShriekBaseChange_of_forall_integral`), where the reduction modulo `ℓ`
-reflects isomorphisms and identifies it with the étale map
-(`isIso_map_etaleReduction_map_upperShriekBaseChange_integral`), whose restriction along `o` is
-invertible by smooth base change for `f` with finite coefficients
-(`Etale.isIso_leftDerivedUpperStar_map_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion`).
--/
+reduction comparison for proper morphisms with compact-support base change**: let
+`g' ≫ f = f' ≫ g` be a cartesian square of separated `k`-schemes of finite type with `f`
+smooth of relative dimension `d` and `g` arbitrary, and write `f = j ≫ p`
+for the chosen compactification (`compactificationOverField`), with `j` an open immersion and `p`
+proper. If, for every finite subextension `E ⊆ ℚ̄_ℓ`, the canonical comparisons of the reduction
+modulo `ℓ` with `Rp_!` and with the lower shriek of the base change of `p` along `g` are
+compatible with compact-support base change (`EtaleReductionProperBaseChangeCompatible`), then
+the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` with `ℚ̄_ℓ`-coefficients is an
+isomorphism for every `L`. -/
 theorem isIso_upperShriekBaseChange_of_etaleReductionProperCompatible
     (sq : IsPullback g' f' f g) (d : ℕ) [SmoothOfRelativeDimension d f.left]
     (h : ∀ E : FiniteIntermediateField ℓ, EtaleReductionProperBaseChangeCompatible ℓ E.1
@@ -664,9 +643,7 @@ compact-support base change**: if the canonical reduction comparisons for proper
 compatible with compact-support base change (`EtaleReductionProperBaseChangeCompatibleAll`), then
 for every cartesian square `g' ≫ f = f' ≫ g` of separated `k`-schemes of finite type with `f`
 smooth, the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` with `ℚ̄_ℓ`-coefficients
-is an isomorphism for every `L`. On the opens where `f` has constant relative dimension
-(`isIso_upperShriekBaseChange_of_forall_smoothOfRelativeDimension`) this is
-`isIso_upperShriekBaseChange_of_etaleReductionProperCompatible`. -/
+is an isomorphism for every `L`. -/
 theorem isIso_upperShriekBaseChange_of_smooth_of_etaleReductionProperCompatibleAll
     (hcompat : EtaleReductionProperBaseChangeCompatibleAll ℓ k) (sq : IsPullback g' f' f g)
     [Smooth f.left] (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

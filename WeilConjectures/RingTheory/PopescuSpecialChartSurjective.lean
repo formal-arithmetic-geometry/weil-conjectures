@@ -8,6 +8,21 @@ module
 
 public import WeilConjectures.RingTheory.PopescuSpecialChartMap
 
+/-!
+# Surjectivity of the special-chart map
+
+The canonical map from the polynomial algebra over `(Cbar/πCbar)[1/a_k]` to the localized
+special fibre of the Popescu lifting algebra is surjective.
+
+## Implementation details
+
+No preparation, conormal independence, normalization or smoothness assumption is needed.
+
+## References
+
+* [Stacks, Tag 07CP] (polynomial elimination modulo `π`)
+-/
+
 @[expose] public section
 
 universe a c b
@@ -15,8 +30,7 @@ universe a c b
 namespace Algebra
 
 /-- Polynomial compatibility in an arbitrary target algebra: equality on the original
-variables extends to every polynomial. This generalizes the quotient-valued helper
-in PopescuLiftChartFlat and is used here with the localized quotient map. -/
+variables extends to every polynomial. -/
 private theorem polynomial_value {R : Type a} {Cbar : Type c} {B : Type b}
     [CommRing R] [CommRing Cbar] [CommRing B] [Algebra R Cbar] [Algebra R B] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]
@@ -39,27 +53,7 @@ private theorem polynomial_value {R : Type a} {Cbar : Type c} {B : Type b}
     simpa only [PopescuLiftPresentation.includeX, MvPolynomial.rename_X] using hc i
   exact DFunLike.congr_fun heq p
 
-/-- The canonical special-chart map is surjective.
-Source: Stacks Project, Tag 07CP, polynomial elimination modulo pi
-and comparison of the other chart relations.
-(blueprint: lem-weil-pbc-popescu-special-chart-map-surjective).
-
-Proof: Write T for the localized lifting quotient and A for the localized
-coefficient quotient. The canonical map sends every free variable z_j,
-j in E_k, to its class in T and sends A by the localized coefficient map.
-Each original variable x_i is in its image by hc and hcmod. Constants from R
-are in its image because the maps are algebra maps. Polynomial induction on
-R[x] therefore identifies the image of any original polynomial with its
-coefficient image. In T the defining k-th relation, reduced modulo pi, reads
-a_k z_l = sum over j in E_k of h_klj z_j. The image of a_k is invertible,
-and its inverse is the image of the inverse in A. Thus every auxiliary z_l
-is in the map's image, including those outside E_k. Polynomial induction on
-R[x,z] shows that every element of the unlocalized lifting algebra is in the
-image after passing through its defining quotient and ULift. Surjectivity of
-the quotient by pi gives the same claim for D/pi D. Finally every element
-of T is a fraction whose denominator is a power of the image of a_k; that
-inverse already lies in the image. This proves surjectivity. No preparation,
-conormal independence, normalization, or smoothness assumption is needed. -/
+/-- The canonical special-chart map is surjective. -/
 theorem popescu_special_chart_map_surjective (R : Type a) (Cbar : Type c)
     [CommRing R] [CommRing Cbar] [Algebra R Cbar] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]

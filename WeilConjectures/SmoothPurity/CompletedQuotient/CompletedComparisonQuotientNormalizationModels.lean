@@ -14,9 +14,12 @@ import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 
 /-! # Good quotient expression models and invertible substitutions
 
-Source: Stacks 07A2, 0G7E and 0941. This is the already-proved model part of
-completed quotient normalization, separated from its naturality calculation.
-(blueprint: lem-pur-completed-comparison-quotient-models).
+The model part of completed quotient normalization, separated from its naturality
+calculation.
+
+## References
+
+* Stacks Project, Tags 07A2, 0G7E and 0941
 -/
 
 @[expose] public noncomputable section
@@ -266,14 +269,7 @@ private theorem substitution_iso {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y
       ((pullbackTensorCalculus l E Y).reduction.mapIso (φ i).symm ≪≫
         (pullbackTensorReductionModel l E Y).app (P i))).isIso_hom
 
-/-- The normalized quotient models and all their recursive substitutions are good.
-Source: Stacks 07A2, 0G7E and 0941
-(blueprint: lem-pur-completed-comparison-quotient-models).
-Proof: reduce the prescribed flat-term K-flat representatives levelwise. Induct
-on the expression constructors using tensor and inverse-image preservation.
-Derived completeness gives the leaf reconstruction isomorphisms, and normalized
-effective counits give the tensor and pullback substitutions. The original
-reduction presentation theorem identifies the resulting finite levels. -/
+/-- The normalized quotient models and all their recursive substitutions are good. -/
 theorem completedComparisonQuotientModels
     {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)
     [∀ z : Z, Invertible (l : Z.residueField z)]

@@ -15,17 +15,16 @@ public import WeilConjectures.ZetaFunction.TraceFormulaExamples
 # Frobenius on the projective line
 
 For `X₀ = ℙ¹` over `k₀ = 𝔽_q`, constant coefficients `ℚ̄_ℓ` and `m ≥ 1`, both sides of the trace
-formula for the `m`-th power of Frobenius are `1 + qᵐ` (blueprint
-`example-frobenius-projective-line`): `Φ_m` has the `qᵐ + 1` fixed points of `ℙ¹(𝔽_{qᵐ})`,
-geometric Frobenius `F` acts on the line `H⁰(ℙ¹ ⊗ k̄, ℚ̄_ℓ)` by `1` and on the line `H²` by
-`q`, `H¹ = 0`, and `∑ᵢ (-1)ⁱ Tr(Fᵐ | Hⁱ) = 1 + qᵐ`.
+formula for the `m`-th power of Frobenius are `1 + qᵐ`: `Φ_m` has the `qᵐ + 1` fixed points of
+`ℙ¹(𝔽_{qᵐ})`, geometric Frobenius `F` acts on the line `H⁰(ℙ¹ ⊗ k̄, ℚ̄_ℓ)` by `1` and on the line
+`H²` by `q`, `H¹ = 0`, and `∑ᵢ (-1)ⁱ Tr(Fᵐ | Hⁱ) = 1 + qᵐ`.
 
 ## Main statements
 
-- `AlgebraicGeometry.projectiveLine_frobenius_trace_formula`: blueprint
-  `example-frobenius-projective-line`.
+- `AlgebraicGeometry.projectiveLine_frobenius_trace_formula`: the trace formula for Frobenius on the
+  projective line.
 
-## Implementation notes
+## Implementation details
 
 The local side is stated as the point count `#ℙ¹(𝔽_{qᵐ})`, the number of fixed points of `Φ_m`,
 each of local term `1` for the constant sheaf; the global side is the alternating trace of `Fᵐ`
@@ -45,7 +44,7 @@ namespace AlgebraicGeometry
 
 variable (k : Type u) [Field k] [Finite k] (l : ℕ) [Fact l.Prime] [Fact (ringChar k ≠ l)]
 
-/-- Blueprint `example-frobenius-projective-line`: let `X₀ = ℙ¹` over `k = 𝔽_q` and `m ≥ 1`.
+/-- The trace formula for the projective line: let `X₀ = ℙ¹` over `k = 𝔽_q` and `m ≥ 1`.
 
 * (local side) the fixed points of the `m`-th power of Frobenius are the points of
   `ℙ¹(𝔽_{qᵐ})`, and there are `qᵐ + 1` of them;

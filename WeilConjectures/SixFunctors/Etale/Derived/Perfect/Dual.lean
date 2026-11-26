@@ -20,10 +20,8 @@ dualizability; see `WeilConjectures.SixFunctors.Etale.Derived.Perfect` for the c
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.DerivedCategory.coefficientDual` (`theorem-poincare-duality--3`):
-  `K ↦ K^∨ = RHom(K, Λ_X)`.
-- `AlgebraicGeometry.Etale.DerivedCategory.coefficientEvaluation`
-  (`theorem-poincare-duality--3`): the evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X`.
+- `AlgebraicGeometry.Etale.DerivedCategory.coefficientDual`: `K ↦ K^∨ = RHom(K, Λ_X)`.
+- `AlgebraicGeometry.Etale.DerivedCategory.coefficientEvaluation`: the evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X`.
 - `AlgebraicGeometry.Etale.DerivedCategory.coefficientDualIsoOfExactPairing`: `K^∨ ≅ L` for a
   left dual `L` of `K`.
 - `AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorMap`: the canonical map
@@ -38,18 +36,21 @@ dualizability; see `WeilConjectures.SixFunctors.Etale.Derived.Perfect` for the c
 ## Main statements
 
 - `AlgebraicGeometry.Etale.DerivedCategory.isDualizable_coefficientDual`
-  (`theorem-poincare-duality--4`)
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_coefficientDual`
-  (`theorem-poincare-duality--4`)
-- `AlgebraicGeometry.Etale.DerivedCategory.isIso_coefficientDualDoubleDual_app`
-  (`theorem-poincare-duality--4`, `theorem-poincare-duality--2`): the biduality `K ⟶ K^∨∨` of a
-  perfect `K` is an isomorphism.
+- `AlgebraicGeometry.Etale.DerivedCategory.isIso_coefficientDualDoubleDual_app`: the biduality
+  `K ⟶ K^∨∨` of a perfect `K` is an isomorphism.
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_tensor`
-  (`theorem-poincare-duality--4`, `theorem-poincare-duality--5`)
 - `AlgebraicGeometry.Etale.DerivedCategory.isIso_derivedHomTensorMap`
-  (`theorem-poincare-duality--2`)
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_derivedHom_tensor`
-  (`theorem-poincare-duality--2`)
+
+## Implementation details
+
+The right dual of a dualizable complex is also its left dual because the derived tensor product
+of `D(X_ét)` is symmetric monoidal (with the Koszul sign rule), for the braiding given by
+`DerivedCategory.nonempty_braidedCategory`. The maps are written with
+`AlgebraicGeometry.Etale.derivedTensor`, so that they can be used at `A = ModuleCat Λ` without
+the kernel comparing two monoidal instances (see the implementation notes of
+`WeilConjectures.SixFunctors.Etale.Derived.TensorStructure`).
 -/
 
 @[expose] public section
@@ -72,10 +73,8 @@ variable (X : Scheme.{u})
 
 namespace Etale.DerivedCategory
 
-/-- Blueprint `theorem-poincare-duality--3` (Coefficient dual on `X`) and
-`theorem-poincare-duality--3`: the coefficient dual `K^∨ = RHom(K, Λ_X)` of a complex of étale
-sheaves, where `Λ_X` is the monoidal unit of `D(X_ét)`. The Verdier dual of
-`theorem-poincare-duality--3` is `AlgebraicGeometry.Etale.verdierDual`. -/
+/-- The coefficient dual `K^∨ = RHom(K, Λ_X)` of a complex of étale sheaves, where `Λ_X` is the
+monoidal unit of `D(X_ét)`. -/
 noncomputable def coefficientDual :
     (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))ᵒᵖ ⥤
       _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
@@ -83,9 +82,7 @@ noncomputable def coefficientDual :
 
 variable {A X}
 
-/-- Blueprint `theorem-poincare-duality--3`: Coefficient dual on `X`, the evaluation.
-
-The *evaluation* `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X`: the counit at `Λ_X` of the adjunction
+/-- The *evaluation* `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X`: the counit at `Λ_X` of the adjunction
 `K ⊗ᴸ - ⊣ RHom(K, -)` (`AlgebraicGeometry.Etale.derivedTensorHomAdjunction`). -/
 noncomputable def coefficientEvaluation
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
@@ -93,12 +90,7 @@ noncomputable def coefficientEvaluation
   (derivedTensorHomAdjunction A K).counit.app (𝟙_ _)
 
 /-- An exact pairing in `D(X_ét)` can be swapped: if `K` and `K'` form an exact pairing, so do
-`K'` and `K`. In other words, the right dual of a dualizable complex is also its left dual.
-
-This holds because the derived tensor product of `D(X_ét)` is symmetric monoidal (with the
-Koszul sign rule), and in a braided monoidal category exact pairings can be swapped
-(`CategoryTheory.BraidedCategory.exactPairing_swap`). The braiding is the one given by
-`DerivedCategory.nonempty_braidedCategory`. -/
+`K'` and `K`. In other words, the right dual of a dualizable complex is also its left dual. -/
 theorem nonempty_exactPairing_swap
     (K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) [ExactPairing K K'] :
     Nonempty (ExactPairing K' K) := by
@@ -112,10 +104,7 @@ noncomputable def coefficientDualIsoOfExactPairing
     (coefficientDual A X).obj (op K) ≅ L :=
   MonoidalClosed.ihomObjUnitIso L K
 
-/-- Blueprint `theorem-poincare-duality--4`: Biduality of a perfect complex.
-This is also blueprint `theorem-poincare-duality--4` (Perfect complexes are dualizable).
-
-The coefficient dual of a dualizable complex is again dualizable. The evaluation
+/-- The coefficient dual of a dualizable complex is again dualizable. The evaluation
 `K ⊗ᴸ K^∨ ⟶ Λ_X` is `AlgebraicGeometry.Etale.DerivedCategory.coefficientEvaluation`. -/
 theorem isDualizable_coefficientDual
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
@@ -125,9 +114,7 @@ theorem isDualizable_coefficientDual
   exact ⟨{ rightDual := K
            exact := exactPairingCongrLeft (coefficientDualIsoOfExactPairing Kᘁ K) }⟩
 
-/-- Blueprint `theorem-poincare-duality--4`: Biduality of a perfect complex.
-
-For a dualizable `K` the biduality map `K ⟶ K^∨∨` into the double coefficient dual is an
+/-- For a dualizable `K` the biduality map `K ⟶ K^∨∨` into the double coefficient dual is an
 isomorphism. -/
 theorem nonempty_iso_coefficientDual_coefficientDual
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
@@ -137,10 +124,7 @@ theorem nonempty_iso_coefficientDual_coefficientDual
   exact ⟨(coefficientDualIsoOfExactPairing K Kᘁ).symm ≪≫
     (coefficientDual A X).mapIso (coefficientDualIsoOfExactPairing Kᘁ K).op⟩
 
-/-- Blueprint `theorem-poincare-duality--4`: Biduality of a perfect complex.
-This is also blueprint `theorem-poincare-duality--5` (Internal Hom through the coefficient dual).
-
-For a dualizable `K` and every `M` the canonical map `K^∨ ⊗ᴸ M ⟶ RHom(K, M)` is an
+/-- For a dualizable `K` and every `M` the canonical map `K^∨ ⊗ᴸ M ⟶ RHom(K, M)` is an
 isomorphism. -/
 theorem nonempty_iso_coefficientDual_tensor
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)
@@ -151,9 +135,7 @@ theorem nonempty_iso_coefficientDual_tensor
   exact ⟨whiskerRightIso (coefficientDualIsoOfExactPairing Kᘁ K) M ≪≫
     (MonoidalClosed.ihomObjIsoTensor Kᘁ K M).symm⟩
 
-/-- Blueprint `theorem-poincare-duality--2`: Internal Hom with an invertible twist.
-
-For a dualizable `K`, an invertible twist `T` — in the `ℓ`-adic formalism a Tate twist
+/-- For a dualizable `K`, an invertible twist `T` — in the `ℓ`-adic formalism a Tate twist
 `Λ(m)_X` — and any `M`, the canonical map `RHom(K, M ⊗ᴸ T) ⟶ RHom(K, M) ⊗ᴸ T` is an
 isomorphism. In particular `RHom(K, Λ_X(m)) ≅ K^∨(m)`. -/
 theorem nonempty_iso_derivedHom_tensor
@@ -166,24 +148,15 @@ theorem nonempty_iso_derivedHom_tensor
 
 /-- The canonical map `RHom(K, M) ⊗ᴸ T ⟶ RHom(K, M ⊗ᴸ T)`: the transpose of
 `K ⊗ᴸ (RHom(K, M) ⊗ᴸ T) ≅ (K ⊗ᴸ RHom(K, M)) ⊗ᴸ T ⟶ M ⊗ᴸ T`, built from the evaluation
-(`CategoryTheory.MonoidalClosed.ihomTensorToIhom`).
-
-It is written with `AlgebraicGeometry.Etale.derivedTensor`, so that it can be used at
-`A = ModuleCat Λ` without the kernel comparing two monoidal instances (see the implementation
-notes of `WeilConjectures.SixFunctors.Etale.Derived.TensorStructure`). -/
+(`CategoryTheory.MonoidalClosed.ihomTensorToIhom`). -/
 noncomputable def derivedHomTensorMap
     (K M T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ((derivedTensor A X).obj ((RHom(X)[A].obj (op K)).obj M)).obj T ⟶
       (RHom(X)[A].obj (op K)).obj (((derivedTensor A X).obj M).obj T) :=
   MonoidalClosed.ihomTensorToIhom K M T
 
-/-- Blueprint `theorem-poincare-duality--2`: Internal Hom with an invertible twist.
-
-For an invertible twist `T` and all `K`, `M`, the canonical map
-`RHom(K, M) ⊗ᴸ T ⟶ RHom(K, M ⊗ᴸ T)`, the transpose of `ev ⊗ 1_T`, is an isomorphism. The map
-`RHom(K, M ⊗ᴸ T) ⟶ RHom(K, M) ⊗ᴸ T` of the blueprint is its inverse,
-`AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorIso`. No hypothesis on `K` is
-needed. -/
+/-- For an invertible twist `T` and all `K`, `M`, the canonical map
+`RHom(K, M) ⊗ᴸ T ⟶ RHom(K, M ⊗ᴸ T)`, the transpose of `ev ⊗ 1_T`, is an isomorphism. -/
 theorem isIso_derivedHomTensorMap
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     {T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hT : IsInvertible T)
@@ -191,9 +164,7 @@ theorem isIso_derivedHomTensorMap
     IsIso (derivedHomTensorMap K M T) :=
   MonoidalClosed.isIso_ihomTensorToIhom K M hT
 
-/-- Blueprint `theorem-poincare-duality--2`: Internal Hom with an invertible twist.
-
-The canonical isomorphism `RHom(K, M ⊗ᴸ T) ≅ RHom(K, M) ⊗ᴸ T` for an invertible `T`: the
+/-- The canonical isomorphism `RHom(K, M ⊗ᴸ T) ≅ RHom(K, M) ⊗ᴸ T` for an invertible `T`: the
 inverse of the canonical map `RHom(K, M) ⊗ᴸ T ⟶ RHom(K, M ⊗ᴸ T)`
 (`AlgebraicGeometry.Etale.DerivedCategory.isIso_derivedHomTensorMap`). -/
 noncomputable def derivedHomTensorIso
@@ -205,9 +176,7 @@ noncomputable def derivedHomTensorIso
   haveI := isIso_derivedHomTensorMap K hT M
   (asIso (derivedHomTensorMap K M T)).symm
 
-/-- Blueprint `theorem-poincare-duality--2`: Internal Hom with an invertible twist.
-
-The case `M = Λ_X` of the interchange: for an invertible `T` (in the `ℓ`-adic formalism
+/-- The case `M = Λ_X` of the interchange: for an invertible `T` (in the `ℓ`-adic formalism
 `Λ_X(m)[n]`), `RHom(K, T) ≅ K^∨ ⊗ᴸ T`. -/
 noncomputable def derivedHomIsoCoefficientDualTensor
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
@@ -247,10 +216,7 @@ lemma coefficientDualDoubleDual_app (K : _root_.DerivedCategory (Sheaf X.smallEt
     (coefficientDualDoubleDual A X).app K = MonoidalClosed.toIhomIhomUnit K :=
   rfl
 
-/-- Blueprint `theorem-poincare-duality--4`: Biduality of a perfect complex.
-This is also the biduality clause of blueprint `theorem-poincare-duality--2`.
-
-For a dualizable `K` the coefficient biduality `K ⟶ K^∨∨` is an isomorphism. -/
+/-- For a dualizable `K` the coefficient biduality `K ⟶ K^∨∨` is an isomorphism. -/
 theorem isIso_coefficientDualDoubleDual_app
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
     IsIso ((coefficientDualDoubleDual A X).app K) :=

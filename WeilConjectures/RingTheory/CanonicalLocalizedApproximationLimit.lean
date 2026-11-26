@@ -16,8 +16,20 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Comparison of canonical localized approximation colimits
 
-Source: Stacks Project, Algebra, Tag 00RC, first reduction, and Tag 037D.
-(blueprint: lem-weil-pbc-canonical-localized-approximation-limit)
+Localization at a prime commutes with filtered colimit presentations of a ring map and a module.
+
+## Implementation details
+
+The ring statements follow since localization commutes with filtered colimits [Stacks, Tag 037D],
+transported through `ULift` ring equivalences. For modules, numerators and denominators lift to
+a common stage, and zero relations descend by eventual equality in the additive-group colimit.
+The supplied `ψ` and action agree with the canonical ones on every coprojection, hence
+everywhere. The argument covers zero modules, singleton diagrams and noninjective transitions.
+
+## References
+
+* [Stacks, Tag 00RC], first reduction
+* [Stacks, Tag 037D]
 -/
 
 @[expose] public section
@@ -29,33 +41,10 @@ open scoped TensorProduct
 
 namespace Algebra
 
-/-- The colimit comparison for the explicitly constructed fraction diagrams.
-
-Source: Stacks Project, Algebra, Tag 037D; Tag 00RC, first reduction paragraph.
-(blueprint: lem-weil-pbc-canonical-localized-approximation-limit)
-
-Proof:
-Contract the prime of S along ULift.down and the stage cocone maps. Localization
-commutes with the two supplied filtered ring colimits (Tag 037D); transport the
-comparison through the ULift ring equivalences. For modules, lift a numerator and
-denominator in M_q to a common stage, using joint surjectivity of the original
-ring and group cocones. The denominator remains outside the contracted prime.
-If two fractions agree, lift a multiplier outside q killing their cross difference
-and descend that zero relation to a later stage by eventual equality in the
-original additive-group colimit. Thus the fraction cocone to M_q is a colimit.
-Transport the S_q action across its additive comparison with the chosen colimit.
-Any localized scalar and module element come from a common stage, so the assumed
-coprojection scalar formula identifies the supplied act with this transported
-fraction action. Likewise the supplied ψ equals the canonical map R_(q∩R) to S_q:
-the two maps agree on every coprojection, which uniquely determines a colimit map.
-Compose R→R_(q∩R) with the inverse base-ring comparison to obtain ρ. This is an
-IsLocalization because the base comparison is a ring isomorphism intertwining
-these maps. On fractions the comparisons preserve multiplication by the image
-of R in S: IsScalarTower identifies that action with the original R-action on M.
-Thus the inverse additive comparison M_q→colimit Dₗ is R-linear for the action
-restricted first through ψ and then through ρ. This proves the linear equivalence.
-The argument also covers zero modules, singleton diagrams, and noninjective
-transitions. The ring map and action are supplied rather than chosen here. -/
+/-- Given filtered colimit presentations of `R → S` and of the `S`-module `M`, and a prime `q`
+of `S`, localizing every stage at the contracted primes gives colimit presentations of
+`R_(q∩R) → S_q` and of `M_q`, compatible with the module actions. The ring map and the action
+are supplied rather than chosen. -/
 theorem canonical_localized_approximation_limit
     (R : Type u) (S : Type v) (M : Type w)
     [CommRing R] [CommRing S] [Algebra R S]

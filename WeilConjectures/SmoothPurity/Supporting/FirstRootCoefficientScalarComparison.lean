@@ -13,8 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.Pur.PurTwistCoefficientRingsSupplem
 
 /-! # Root-normalized scalar extension in exponent one
 
-Source: coefficient Tate twists, scalar extension of the integral first line;
-Stacks Project, Modules on Sites, Tags 03EK and 03EL.
+## References
+
+* Stacks Project, Tags 03EK and 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -428,26 +429,7 @@ private theorem firstRootCoefficientIso_tmul
 attribute [local irreducible] firstRootCoefficientIso
 
 /-- Extension of the first integral root line is the first target root line.
-The root-tensor formula also determines its semilinear adjunct among all maps.
-Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
-sk-def-sp-tate-twist/def-coefficient-twists-detailed.md, the integral first line;
-Stacks Project, Modules on Sites, Tags 03EK and 03EL.
-(blueprint: lem-pur-first-root-coefficient-scalar-comparison).
-Proof: the finite quotient projections identify the completed coefficient map
-with the discrete integer inclusion on constants. The two completed Z_l maps
-then agree by finite-factor extensionality and their constant restrictions.
-Reuse the canonical isomorphism from the completed extension of the common
-root-limit module to each integral line, constructed in the integral local-model
-proof. Extend the inverse source isomorphism, apply the scalar-tower isomorphism,
-transport along the completed coefficient equality, and apply the target
-isomorphism. Their pure-tensor formulas give the asserted normalization.
-For uniqueness restrict the competing maps to the discrete integer action.
-The canonical forgetful isomorphism identifies the source with its original
-sheafified tensor presentation. Tensor and sheafification extensionality then
-identify the two maps from their values on pure tensors, and equality of the
-restricted maps is equality of the original maps. No invertibility of a competing
-map or global lifting of sheafified sections is used. The constructions and
-universal properties also apply to the empty scheme and the identity inclusion. -/
+The root-tensor formula also determines its semilinear adjunct among all maps. -/
 theorem firstRootCoefficientScalarComparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (S : Scheme.{u})

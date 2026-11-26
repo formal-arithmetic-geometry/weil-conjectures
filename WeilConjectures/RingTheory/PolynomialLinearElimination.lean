@@ -12,8 +12,18 @@ import Mathlib.Algebra.MvPolynomial.Eval
 
 /-! # Eliminating linear polynomial variables
 
-Source: Stacks Project, Tag 07CP, last line of the single-chart calculation modulo pi.
-(blueprint: lem-weil-pbc-polynomial-linear-elimination).
+A system of linear relations with unit leading coefficient, normalized on a set `E` of free
+variables, eliminates all other variables of a polynomial ring.
+
+## Implementation details
+
+The inverse sends each dependent variable to `a⁻¹` times the corresponding combination of the
+free variables. The argument also works when `E` is empty, when `E` contains all variables, and
+over the zero ring.
+
+## References
+
+* [Stacks, Tag 07CP] (last line of the single-chart calculation modulo `π`)
 -/
 
 @[expose] public section
@@ -22,20 +32,9 @@ universe u v
 
 namespace MvPolynomial
 
-/-- A normalized system with unit leading coefficient leaves exactly the free variables.
-
-Source: Stacks Project, Tag 07CP, last line of the single-chart calculation modulo pi.
-(blueprint: lem-weil-pbc-polynomial-linear-elimination).
-
-Proof: Map each free variable to its quotient class. In the reverse direction send
-free variables to themselves and each other variable to a inverse times the sum
-of its coefficients times the free variables. Normalization makes the free-variable
-relations zero; substitution kills all the remaining relations. The quotient lift
-therefore exists. The first composite fixes each free variable. For the other
-composite the defining relation and invertibility of a show that each dependent
-variable is fixed as well. Both composites fix coefficients, so polynomial and
-quotient extensionality prove they are identities. This also works when E is empty,
-when E contains all variables, and over the zero ring. -/
+/-- Quotienting `K[X_σ]` by the linear relations `a X_l - ∑_{j ∈ E} h l j X_j`, normalized on the
+free variables `E` with unit leading coefficient `a`, leaves the polynomial ring in the free
+variables `E`. -/
 theorem linear_elimination (K : Type u) [CommRing K] (σ : Type v) [DecidableEq σ]
     (E : Finset σ) (a : Kˣ) (h : σ → σ → K)
     (hnorm : ∀ l : E, ∀ j : E, h l j = if l = j then (a : K) else 0) :

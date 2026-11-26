@@ -21,8 +21,18 @@ import Mathlib.Algebra.Ring.ULift
 /-!
 # Initial coefficient algebra over the unlocalized polynomial quotient
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ, steps 9 and 25.
-(blueprint: lem-weil-pbc-popescu-coefficient-start).
+The initial Artinian coefficient solution of the local resolution step, viewed over the
+unlocalized polynomial quotient, receives a map from `A`.
+
+## Implementation details
+
+The localized polynomial quotient is a localization of the unlocalized one, hence essentially
+smooth over it. Injectivity of the flat local map `g₀` lifts `A` through its polynomial
+presentation. The coefficient ring is replaced by its `ULift` to universe `max u v w`.
+
+## References
+
+* [Stacks, Tag 07FJ]
 -/
 
 @[expose] public section
@@ -32,25 +42,8 @@ set_option autoImplicit false
 universe u v w
 namespace Algebra
 
-/-- Put the initial local coefficient solution over the unlocalized quotient and lift A.
-Source: Stacks Project, Lemma 07FJ, steps 9 and 25; Algebra, localization base change.
-(blueprint: lem-weil-pbc-popescu-coefficient-start).
-
-Proof: Identify the two extended prime ideals with the respective local maximal ideals.
-The positive power of each maximal ideal is proper, so the target quotient is local.
-The polynomial quotient B maps to the localized polynomial quotient Q because the
-image of p₀^n is zero. Localization commutes with quotient, so Q is a localization of B,
-hence essentially smooth over B. Compose this map with the essentially smooth Q to D₀
-map. Give D₀ its k-algebra structure through B and Q; all scalar diagrams commute by
-hψ₀ and hfactor₀. The flat local map g₀ is faithfully flat, and therefore injective.
-Choose lifts in D₀ of the images of the specified polynomial generators of A, using
-hinc₀. Evaluation defines a k-algebra homomorphism from the polynomial presentation to
-D₀. Its composite with g₀ equals the given map on constants and generators. Injectivity
-of g₀ implies that its kernel contains the presentation kernel, so the surjective
-presentation map gives a unique k-algebra map A to D₀. Its composite is the required
-A-map into the quotient. Replace D₀ by its ULift to universe max u v w; transport its
-ring, local and Artinian structures, the two algebra structures, the scalar tower,
-and the maps. This merely changes the carrier, and all identities persist. -/
+/-- Put the initial local coefficient solution over the unlocalized polynomial quotient and lift
+`A` to it. -/
 theorem exists_popescu_coefficient_start
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]

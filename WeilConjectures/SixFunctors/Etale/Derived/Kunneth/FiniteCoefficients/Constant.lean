@@ -14,18 +14,17 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficien
 /-!
 # Constant complexes, the constant-tensor comparison and the Künneth morphism
 
-For a commutative ring `Λ` (in the blueprint `Λ = 𝒪_E/ϖⁿ` or a finite field `𝔽_{ℓ^r}`) and a
+For a commutative ring `Λ` (typically `Λ = 𝒪_E/ϖⁿ` or a finite field `𝔽_{ℓ^r}`) and a
 scheme `W`, the constant complex functor `c_W : D(Mod_Λ) ⥤ D(W_ét, Λ)` is left adjoint to the
 derived sections `RΓ_W` (`AlgebraicGeometry.Etale.constantComplexAdjunction`), and comes with a
 monoidal comparison `c_W(M ⊗ᴸ N) ⟶ c_W M ⊗ᴸ c_W N`
 (`AlgebraicGeometry.Etale.constantComplexTensorComparison`), the derived comonoidal structure of
 the exact monoidal constant sheaf functor. With these we define
 
-- `AlgebraicGeometry.Etale.constantProjectionMap` (`pur7710-def-constant-projection`):
-  `RΓ_W K ⊗ᴸ M ⟶ RΓ_W (K ⊗ᴸ c_W M)`;
-- `AlgebraicGeometry.Etale.globalSectionsKunnethMap` (`definition-kunneth-map--1`) and
-  `AlgebraicGeometry.Etale.globalSectionsKunnethMapFiniteField`
-  (`definition-kunneth-map--1`): `RΓ_X K ⊗ᴸ RΓ_Y L ⟶ RΓ_Z (K ⊠ᴸ L)`.
+- `AlgebraicGeometry.Etale.constantProjectionMap`: `RΓ_W K ⊗ᴸ M ⟶ RΓ_W (K ⊗ᴸ c_W M)`;
+- `AlgebraicGeometry.Etale.globalSectionsKunnethMap` and
+  `AlgebraicGeometry.Etale.globalSectionsKunnethMapFiniteField`:
+  `RΓ_X K ⊗ᴸ RΓ_Y L ⟶ RΓ_Z (K ⊠ᴸ L)`.
 
 ## Implementation notes
 
@@ -78,10 +77,9 @@ noncomputable def derivedConstantSheafCompLeftDerivedUpperStarIso {Y Z : Scheme.
     Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (constantSheafCompUpperStarNatIso A g)
 
-/-- The adjunction `c_W ⊣ RΓ_W` between constant complexes and derived sections (blueprint
-`pur7710-lem-constant-adjunction`) for `A`-valued sheaves: the derived adjunction of
-`constantSheaf ⊣ Γ`, the total left derived functor of the exact constant sheaf functor being
-identified with the levelwise functor. -/
+/-- The adjunction `c_W ⊣ RΓ_W` between constant complexes and derived sections for `A`-valued
+sheaves: the derived adjunction of `constantSheaf ⊣ Γ`, the total left derived functor of the exact
+constant sheaf functor being identified with the levelwise functor. -/
 noncomputable def derivedConstantSheafAdjunction (W : Scheme.{u}) :
     (constantSheaf W.smallEtaleTopology A).mapDerivedCategory ⊣
       rightDerivedGlobalSections A W :=
@@ -122,9 +120,8 @@ noncomputable def leftDerivedConstantSheafTensorHom (M N : DerivedCategory A) :
     (constantSheaf W.smallEtaleTopology A).leftDerivedFunctorIsoMapDerivedCategory.hom.app N
 
 /-- The monoidal comparison `c_W(M ⊗ᴸ N) ⟶ c_W M ⊗ᴸ c_W N` of constant complexes of objects of
-`A` (blueprint `pur7710-lem-constant-monoidal`): the derived comonoidal structure
-`CategoryTheory.Functor.leftDerivedTensorComparison` of the exact monoidal constant sheaf
-functor, transported along `L((-)_W) ≅ c_W`. -/
+`A`: the derived comonoidal structure `CategoryTheory.Functor.leftDerivedTensorComparison` of the
+exact monoidal constant sheaf functor, transported along `L((-)_W) ≅ c_W`. -/
 noncomputable def derivedConstantSheafTensorComparison (M N : DerivedCategory A) :
     (constantSheaf W.smallEtaleTopology A).mapDerivedCategory.obj (M ⊗ N) ⟶
       (constantSheaf W.smallEtaleTopology A).mapDerivedCategory.obj M ⊗
@@ -211,18 +208,18 @@ instance preservesFlat_constantSheaf (W : Scheme.{u}) :
     ObjectProperty.prop_of_iso _
       ((pointSmallEtale s).ulift.{u + 1}.sheafFiberConstantSheafIso M).symm hM
 
-/-- The adjunction `c_W ⊣ RΓ_W` between constant complexes and derived sections (blueprint
-`pur7710-lem-constant-adjunction`): the derived adjunction of `constantSheaf ⊣ Γ`, the total
-left derived functor of the exact constant sheaf functor being identified with the levelwise
-functor (`AlgebraicGeometry.Etale.derivedConstantSheafAdjunction` for `A = ModuleCat Λ`). -/
+/-- The adjunction `c_W ⊣ RΓ_W` between constant complexes and derived sections: the derived
+adjunction of `constantSheaf ⊣ Γ`, the total left derived functor of the exact constant sheaf
+functor being identified with the levelwise functor
+(`AlgebraicGeometry.Etale.derivedConstantSheafAdjunction` for `A = ModuleCat Λ`). -/
 noncomputable def constantComplexAdjunction (W : Scheme.{u}) :
     constantComplexFunctor Λ W ⊣ rightDerivedGlobalSectionsModule Λ W :=
   derivedConstantSheafAdjunction (ModuleCat.{u + 1} Λ) W
 
-/-- The monoidal comparison `c_W(M ⊗ᴸ N) ⟶ c_W M ⊗ᴸ c_W N` of constant complexes (blueprint
-`pur7710-lem-constant-monoidal`): the derived comonoidal structure
-`CategoryTheory.Functor.leftDerivedTensorComparison` of the exact monoidal constant sheaf
-functor, transported along `L(constantSheaf) ≅ D(constantSheaf)`. It is an isomorphism. -/
+/-- The monoidal comparison `c_W(M ⊗ᴸ N) ⟶ c_W M ⊗ᴸ c_W N` of constant complexes: the derived
+comonoidal structure `CategoryTheory.Functor.leftDerivedTensorComparison` of the exact monoidal
+constant sheaf functor, transported along `L(constantSheaf) ≅ D(constantSheaf)`. It is an
+isomorphism. -/
 noncomputable def constantComplexTensorComparison (W : Scheme.{u})
     (M N : DerivedCategory (ModuleCat.{u + 1} Λ)) :
     (constantComplexFunctor Λ W).obj (M ⊗ N) ⟶
@@ -230,15 +227,13 @@ noncomputable def constantComplexTensorComparison (W : Scheme.{u})
         ((constantComplexFunctor Λ W).obj N) :=
   derivedConstantSheafTensorComparison (ModuleCat.{u + 1} Λ) W M N
 
-/-- Blueprint `pur7710-def-constant-projection`: the constant-tensor comparison.
-
-For a scheme `W`, `K ∈ D(W_ét, Λ)` and `M ∈ D(Mod_Λ)`, the morphism
-`P_{W,K,M} : RΓ_W K ⊗ᴸ M ⟶ RΓ_W (K ⊗ᴸ c_W M)` corresponding under `c_W ⊣ RΓ_W`
+/-- The constant-tensor comparison: for a scheme `W`, `K ∈ D(W_ét, Λ)` and `M ∈ D(Mod_Λ)`, the
+morphism `P_{W,K,M} : RΓ_W K ⊗ᴸ M ⟶ RΓ_W (K ⊗ᴸ c_W M)` corresponding under `c_W ⊣ RΓ_W`
 (`AlgebraicGeometry.Etale.constantComplexAdjunction`) to the composite
 `c_W(RΓ_W K ⊗ᴸ M) ⟶ c_W RΓ_W K ⊗ᴸ c_W M ⟶ K ⊗ᴸ c_W M` of the monoidal comparison
 (`AlgebraicGeometry.Etale.constantComplexTensorComparison`) and of `ε_K ⊗ 1`
-(`AlgebraicGeometry.Etale.derivedConstantSheafProjectionMap` for `A = ModuleCat Λ`). Here `⊗ᴸ`
-is the tensor product of the monoidal category `D(W_ét, Λ)`, that is
+(`AlgebraicGeometry.Etale.derivedConstantSheafProjectionMap` for `A = ModuleCat Λ`). Here `⊗ᴸ` is
+the tensor product of the monoidal category `D(W_ét, Λ)`, that is
 `AlgebraicGeometry.Etale.derivedTensor`. -/
 noncomputable def constantProjectionMap (W : Scheme.{u})
     (K : DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -248,11 +243,10 @@ noncomputable def constantProjectionMap (W : Scheme.{u})
         (((-⊗ᴸ-(W)[ModuleCat.{u + 1} Λ]).obj K).obj ((constantComplexFunctor Λ W).obj M)) :=
   derivedConstantSheafProjectionMap (ModuleCat.{u + 1} Λ) W K M
 
-/-- Blueprint `definition-kunneth-map--1`: the ordinary Künneth morphism at finite level.
-
-For schemes `X`, `Y` over `S` (in the blueprint `S = Spec k`), `Z = X ×_S Y` with projections
-`p_X`, `p_Y`, and `K ∈ D(X_ét, Λ)`, `L ∈ D(Y_ét, Λ)`, the morphism
-`Kun_{K,L} : RΓ_X K ⊗ᴸ RΓ_Y L ⟶ RΓ_Z (K ⊠ᴸ L)` corresponding under `c_Z ⊣ RΓ_Z` to the composite
+/-- The ordinary Künneth morphism at finite level: for schemes `X`, `Y` over `S` (typically
+`S = Spec k`), `Z = X ×_S Y` with projections `p_X`, `p_Y`, and `K ∈ D(X_ét, Λ)`, `L ∈ D(Y_ét, Λ)`,
+the morphism `Kun_{K,L} : RΓ_X K ⊗ᴸ RΓ_Y L ⟶ RΓ_Z (K ⊠ᴸ L)` corresponding under `c_Z ⊣ RΓ_Z` to the
+composite
 ```
 c_Z(RΓ_X K ⊗ᴸ RΓ_Y L) ⟶ c_Z RΓ_X K ⊗ᴸ c_Z RΓ_Y L
   ≅ Lp_X^* c_X RΓ_X K ⊗ᴸ Lp_Y^* c_Y RΓ_Y L ⟶ Lp_X^* K ⊗ᴸ Lp_Y^* L
@@ -268,8 +262,7 @@ noncomputable def globalSectionsKunnethMap {S X Y : Scheme.{u}} (f : X ⟶ S) (g
       (rightDerivedGlobalSectionsModule Λ (pullback f g)).obj (exteriorProduct Λ f g K L) :=
   derivedConstantSheafKunnethMap (ModuleCat.{u + 1} Λ) (pullback.fst f g) (pullback.snd f g) K L
 
-/-- Blueprint `definition-kunneth-map--1`: the ordinary Künneth morphism with finite-field
-coefficients `F = 𝔽_{ℓ^r}`: the construction of
+/-- The ordinary Künneth morphism with finite-field coefficients `F = 𝔽_{ℓ^r}`: the construction of
 `AlgebraicGeometry.Etale.globalSectionsKunnethMap` with `F` in place of `Λ`,
 `RΓ_X K ⊗ᴸ_F RΓ_Y L ⟶ RΓ_Z (K ⊠ᴸ_F L)`. -/
 noncomputable abbrev globalSectionsKunnethMapFiniteField (F : Type (u + 1)) [Field F] [Finite F]

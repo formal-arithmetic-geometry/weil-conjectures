@@ -71,13 +71,20 @@ import WeilConjectures.SmoothPurity.StrictQuotient.QuotientExpressionKFlatOperat
 
 /-! # Simultaneous K-flat normalization of strict quotient expressions
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0G7E, 07A2, 07A4 and 07A6;
-quotient-expression refinement of integral coherence, proof step 1
-(blueprint: lem-pur-quotient-expression-kflat-normalization).
+Given finitely many K-flat complexes with flat terms over the completed integral coefficient
+ring, we construct strict towers of K-flat models whose levels are their ordinary reductions,
+and show that every expression generated from them by tensor products, pullbacks and the
+degree-zero units is a normalized coefficient sequence with compatible derived adjoints.
 
-All transitions belong to strict sequence complexes before localization. The
-ordinary and derived adjoints below are adjoints of those actual maps. No assertion
-that inverse image commutes with the completed coefficient limit is made.
+## Implementation details
+
+All transitions belong to strict sequence complexes before localization. The ordinary and
+derived adjoints are adjoints of those actual maps. No assertion that inverse image commutes
+with the completed coefficient limit is made.
+
+## References
+
+* Stacks Project, Tags 0G7E, 07A2, 07A4 and 07A6.
 -/
 
 @[expose] public noncomputable section
@@ -95,53 +102,12 @@ namespace WeilConjectures.StrictQuotient
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Simultaneous strict quotient normalization. Fin r is an arbitrary finite list,
-including r=0. The isomorphisms kappa identify the generator towers with the specified
-ordinary reductions, including every actual quotient transition. Generated records
-only finite uses of the three named arrows, tensor, and the three degree-zero units.
-
-Source: Stacks Project, Tags 0G7E, 07A2, 07A4 and 07A6
-(blueprint: lem-pur-quotient-expression-kflat-normalization).
-
-Proof:
-1. Constant-ring inverse-image comparisons commute with quotients, because both
-   maps agree on constant sections and hence after sheafification. Work on the
-   compatible small representatives of def-weil-proetale-inverse-image.
-2. For each P_i, lem-pur-kflat-change-of-rings preserves flat terms and K-flatness
-   along R_Y to B_(Y,n); lem-pur-derived-change-of-rings computes its localization.
-   The unit is K-flat, with one free term and zero terms in the other degrees.
-3. Induct on Generated. The direct-sum total tensor case is exactly
-   lem-pur-kflat-total-tensor-model, including unbounded inputs and flat total terms.
-4. The pullback case follows from lem-weil-pbc-ringed-topoi-derived-tensor-pullback
-   and the constant-ring comparisons. Termwise pullback computes derived pullback.
-5. The generator transitions are id tensor q, and the units have transition q.
-   Tensor transitions send u tensor v to t(u) tensor t(v). Pullback sends
-   s tensor u to q(s) tensor g-inverse-image(t)(u). Balancing, restriction,
-   and the signed total differentials commute with these formulas. Quotient
-   identity and cocycle therefore hold before localization. Restricting along
-   the completion projections makes a complex of strict R_W-towers.
-6. Apply lem-pur-sheaf-ring-derived-coefficient-adjunction to the actual transition.
-   Its ordinary adjoint sends z tensor a to a times t(z), and its localization,
-   through the universal K-flat counit, is precisely the derived adjoint.
-7. On a generator the ordinary adjoint sends (x tensor b) tensor a to
-   x tensor q(b)a. Its inverse sends x tensor a to (x tensor 1) tensor a.
-   The two composites are identities by balancing and q pi_m=pi_n.
-   The unit case is multiplication with inverse a to 1 tensor a.
-8. For tensor expressions use lem-pur-cochain-pullback-tensor-coherence at q:
-   (u tensor v) tensor a maps to (u tensor a) tensor (v tensor 1).
-   Compose with the two factor adjoints. Its pure-tensor formula is precisely
-   the ordinary adjunct from step 6; its inverse contracts the two scalars.
-   Localization gives the strong monoidal comparison followed by the two alphas.
-9. For pullback use lem-sfb-kflat-scalar-comparison-normalization. Its insertion
-   unit equation identifies the transported pullback of the factor adjoint with
-   this ordinary adjunct, by uniqueness under the tensor/restriction adjunction.
-   Localization is the canonical scalar-change comparison and g-inverse-image(alpha).
-10. All these adjoints are chain isomorphisms. Step 6 gives AdjointModel for every
-    normalized coefficient calculus. The universal Hom criterion gives
-    IsNormalizedCoefficientSequence, exactly the normalization of
-    def-coef-normalized-dvr-tower for the specified coherent strict system.
-    Empty lists, zero inputs, empty schemes and m=n require no separate choices.
--/
+/-- Simultaneous strict quotient normalization: for a finite family `P` of K-flat complexes
+with flat terms, there are strict towers `N i` with isomorphisms `κ` identifying their levels
+with the ordinary reductions of `P i`, compatibly with all quotient transitions, such that every
+expression generated from the `N i` by tensor products, pullbacks along `h` and `f`, and the
+degree-zero units is levelwise K-flat, is a normalized coefficient sequence, and has derived
+adjoints computed by the ordinary adjoints of its transitions. -/
 theorem quotientExpressionKFlatNormalization
     {Z X Y : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y)
     (_hlZ : ∀ x : Z, IsUnit (l : Z.residueField x))

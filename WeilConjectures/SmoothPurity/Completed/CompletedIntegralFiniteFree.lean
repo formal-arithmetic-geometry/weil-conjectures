@@ -13,10 +13,17 @@ import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-! # Finite freeness of the specified completed integral coefficient inclusion
 
+The completed target coefficient sheaf is free of the relative field degree over the
+completed integral coefficients, with the action given by the specified completed map.
+
+## Implementation details
+
 The coefficient and site universes are independent. The coefficient map is fixed by its
 finite reductions, so the transported basis has the specified scalar action.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-weil-completed-integral-finite-free).
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2(1).
 -/
 
 @[expose] public section
@@ -446,16 +453,7 @@ private theorem finitePresentation_scalar (n : ℕ)
   rfl
 
 /-- The completed target coefficient sheaf is free of the relative field degree, with
-its action given by the unique map having the prescribed finite reductions.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-weil-completed-integral-finite-free).
-Proof: an integral basis gives a basis over the integer DVR. Its uniformizer maps to a
-unit times a positive power of the target uniformizer. Lift the basis to the coefficient
-universe and apply the adic basis limit theorem. The quotient equivalences commute with
-all transitions and the finite scalar maps. Their limit isomorphisms therefore identify
-the adic scalar map with the specified completed map, by joint monicity of the limit
-projections. Restricting along the ring isomorphisms transports the basis and its action.
--/
+its action given by the unique map having the prescribed finite reductions. -/
 theorem completedIntegralFiniteFree
     (φ : completedIntegralCommRingSheafUnrestricted l E Y ⟶
       completedIntegralCommRingSheafUnrestricted l L Y)

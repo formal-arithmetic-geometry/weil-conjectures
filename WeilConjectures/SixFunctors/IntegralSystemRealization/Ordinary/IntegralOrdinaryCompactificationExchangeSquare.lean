@@ -11,8 +11,6 @@ import all WeilConjectures.SixFunctors.GeneratorReduction.OpenReconstructionEffe
 import all WeilConjectures.SixFunctors.GeneratorReduction.GeneratorKind.TensorAdjunctionReductionSquares
 
 /-! # Ordinary coefficient compatibility for compactification exchange
-
-Source: blueprint fix-prop-coherence, the coefficient comparisons of individual maps.
 -/
 
 @[expose] public noncomputable section
@@ -476,33 +474,7 @@ private theorem compactificationCoefficientOnObjects
     let result ← Lean.Meta.mkAppM ``Eq.mp #[e, result]
     Lean.Elab.Tactic.closeMainGoal `exact result
 
-/-- Ordinary coefficient compatibility with the fixed compactification exchange.
-Source: blueprint fix-prop-coherence, the prescribed proper/open exchange composite.
-(blueprint: lem-sf-integral-ordinary-compactification-exchange-square).
-
-Proof: write L for the ringed interpretation of e, M for its system interpretation,
-and q : R(L) ⟶ M for its ordinary coefficient map. The coefficient of the open
-image is the inverse open-reduction component followed by open extension of q.
-The helper properPullCoeff supplies the pullback coefficient boundary; applying
-matePastingSquare with the actual ringed and system direct-image adjunctions
-transposes it to the proper-exchange coefficient square on the open image.
-Naturality of properExchange inserts the open-image coefficient. The helper
-open_beta_coeff supplies the open base-change square for the same q, obtained
-from the inverse-open mate unit equation and open_beta_inverse_square by inverse
-cancellation. It applies to every compactification open, without quasi-compactness.
-Apply ordinaryPushReduction.naturality to the ringed open base-change component.
-Functoriality now pastes these three equalities: proper exchange, proper image
-of open base change, and transport of the open coefficient. Expanding the
-prescribed compactificationExchangeFromData and ringedCompactificationExchange
-identifies precisely the two fixed composites in this statement. Reassociate and
-use map_comp to obtain the displayed equality. No completion comparison is used.
-
-The final pasting uses a generic categorical helper and whole-transformation
-normalizations. Infer its dependent function type, then transport the proved
-proper and open coefficient squares and its conclusion using explicit congruence.
-The congruence algorithm follows the private utility in IntegralOrdinaryProperOpenSquare;
-its generated equality proofs are checked by the kernel.
--/
+/-- Ordinary coefficient compatibility with the fixed compactification exchange. -/
 theorem ordinaryCompactificationExchangeSquare
     (o : Operations l E) (a : AmbientModels l E o)
     {B : Scheme.{u}} {I : Type u} {X : I → Over B}

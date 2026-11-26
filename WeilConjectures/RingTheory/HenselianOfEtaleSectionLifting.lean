@@ -16,15 +16,25 @@ import Mathlib.RingTheory.Ideal.GoingUp
 /-!
 # Henselian pairs from lifting sections of étale algebras
 
-Source: Stacks Project, More on Algebra, Lemma Tag 09XI, (2) ⇒ (4) ⇒ (3)
-(blueprint: lem-weil-pbc-etale-section-lifting-henselian-pair).
+Let `(A, I)` be a pair such that every `A`-algebra map from an étale `A`-algebra to `A ⧸ I` lifts
+to an `A`-algebra map to `A`. Then `I` lies in the Jacobson radical, `(A, I)` is henselian, and
+idempotents lift uniquely modulo `I` in every finite `A`-algebra
+(`henselianRing_of_etale_section_lifting`).
+
+## Implementation details
+
+The Jacobson condition comes from lifting sections of the localizations `A[1 / (xy + 1)]`, and
+root lifting from sections of standard étale algebras. Idempotents of `B ⧸ IB` are lifted to an
+étale neighbourhood and descended to `B` along a section supplied by the hypothesis.
+
+## References
+
+* [Stacks, Tag 09XI]
 -/
 
 @[expose] public section
 
 universe u v
-
-/-! Proof plan is recorded on the blueprint node. -/
 
 private theorem lift_small_etale_section
     (A : Type u) [CommRing A] (I : Ideal A)
@@ -40,13 +50,8 @@ private theorem lift_small_etale_section
   have hx := DFunLike.congr_fun hτ (E.symm x)
   simpa using hx
 
-/-- The radical and root-lifting part of Stacks Tag 09XI.
-Source: Stacks Project, More on Algebra, Lemma Tag 09XI, (2) ⇒ (4) ⇒ (3)
-(blueprint: lem-weil-pbc-etale-section-lifting-radical-and-henselian).
-
-Proof: apply the open-localization argument for the Jacobson radical, then the
-finite-algebra idempotent descent through the étale neighbourhood and the section
-supplied by the hypothesis; uniqueness follows from congruence modulo the radical. -/
+/-- If sections of étale algebras lift from `A ⧸ I` to `A`, then `I` lies in the Jacobson radical
+and `(A, I)` is henselian. -/
 theorem etale_section_lifting_radical_and_henselian (A : Type u) [CommRing A] (I : Ideal A)
     (h : ∀ (A' : Type (max u v)) [CommRing A'] [Algebra A A'] [Algebra.Etale A A']
       (σ : A' →ₐ[A] A ⧸ I), ∃ τ : A' →ₐ[A] A, (Ideal.Quotient.mkₐ A I).comp τ = σ) :
@@ -81,13 +86,8 @@ theorem etale_section_lifting_radical_and_henselian (A : Type u) [CommRing A] (I
     have he := DFunLike.congr_fun hτ P.X
     simpa using he
 
-/-- The finite-algebra idempotent-lifting part
-(blueprint: lem-weil-pbc-etale-section-lifting-idempotents) of Stacks Tag 09XI.
-Source: Stacks Project, More on Algebra, Lemma Tag 09XI, (4) ⇒ (3).
-
-Proof: apply the étale idempotent lifting construction and descend along the
-section supplied by the hypothesis; uniqueness follows from congruence modulo
-the radical. -/
+/-- If sections of étale algebras lift from `A ⧸ I` to `A`, then for every finite `A`-algebra `B`
+each idempotent of `B ⧸ IB` lifts uniquely to an idempotent of `B`. -/
 theorem etale_section_lifting_idempotents (A : Type u) [CommRing A] (I : Ideal A)
     (h : ∀ (A' : Type (max u v)) [CommRing A'] [Algebra A A'] [Algebra.Etale A A']
       (σ : A' →ₐ[A] A ⧸ I), ∃ τ : A' →ₐ[A] A, (Ideal.Quotient.mkₐ A I).comp τ = σ) :
@@ -142,7 +142,9 @@ theorem etale_section_lifting_idempotents (A : Type u) [CommRing A] (I : Ideal A
     (I.map (algebraMap A B)) hJB he.1 (he'.map φ)
   exact Ideal.Quotient.eq.mp (he.2.trans hlift.symm)
 
-/-- (blueprint: lem-weil-pbc-etale-section-lifting-henselian-pair) -/
+/-- If sections of étale algebras lift from `A ⧸ I` to `A`, then `I` lies in the Jacobson radical,
+`(A, I)` is henselian, and idempotents lift uniquely modulo `IB` in every finite `A`-algebra `B`.
+-/
 theorem henselianRing_of_etale_section_lifting (A : Type u) [CommRing A] (I : Ideal A)
     (h : ∀ (A' : Type (max u v)) [CommRing A'] [Algebra A A'] [Algebra.Etale A A']
       (σ : A' →ₐ[A] A ⧸ I), ∃ τ : A' →ₐ[A] A, (Ideal.Quotient.mkₐ A I).comp τ = σ) :

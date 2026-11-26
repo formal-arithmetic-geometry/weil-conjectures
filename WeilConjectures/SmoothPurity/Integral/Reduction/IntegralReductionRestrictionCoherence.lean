@@ -8,11 +8,7 @@ module
 public import WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTransitions
 import WeilConjectures.SixFunctors.Normalized.NormalizedDVRCompletedRestrictionCoherence
 
-/-! # Coherence of restriction from finite to completed coefficients
-
-Source: blueprint transport Step 1 and coefficient tower composition comparisons.
-(blueprint: lem-pur-integral-reduction-restriction-coherence).
--/
+/-! # Coherence of restriction from finite to completed coefficients -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -33,18 +29,7 @@ private theorem inverse_comparison
   simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id_assoc,
     Iso.inv_hom_id]
 
-/-- The canonical completed restriction comparisons respect identity and composition.
-Source: blueprint transport Step 1, retained source-object argument Step 7, and
-coefficient tower comparisons (blueprint: lem-pur-integral-reduction-restriction-coherence).
-
-Proof: before derived localization, restriction keeps the underlying section groups
-and morphisms. Each comparison is the identity on these sections; its scalar-linearity
-is supplied by the corresponding equality between the actual quotient maps and
-completion projections. Both identity and composition equations therefore hold by
-extensionality on sections. Apply the exact derived functor construction to these
-natural-transformation equalities. Its identity and composition comparisons identify
-the resulting equations with the displayed equations. This argument concerns arbitrary
-finite-coefficient objects and uses no adjunction unit or integral-source reduction. -/
+/-- The canonical completed restriction comparisons respect identity and composition. -/
 theorem integralReductionRestriction_coherence
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

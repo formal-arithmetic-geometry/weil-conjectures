@@ -11,7 +11,9 @@ import WeilConjectures.WeilSheaf.IhomLisse.UpperStar
 
 /-! # Equivariant balanced tensor restriction
 
-Source: Stacks 03EL, 0E8I and the native open tensor argument, step 2.
+## References
+
+Stacks Project, sites-modules.tex, Tags 03EL and 0E8I.
 -/
 
 @[expose] public noncomputable section
@@ -116,22 +118,8 @@ private lemma tensor_str (A B : ProEtaleWeilSheaf k₀ l Z) :
 
 -- Retain the existing open-immersion binder of the public interface.
 set_option linter.unusedSectionVars false in
-/-- The actual balanced restriction/tensor comparison lifts to Weil sheaves.
-
-Source: Stacks Project, sites-modules.tex, Tags 03EL and 0E8I; step 2 of
-lem-sf-native-open-sheaf-tensor-existence.
-(blueprint: lem-sf-native-open-restriction-tensor).
-
-Proof: the ordinary coefficient pullback is the map on locally finite functions
-induced by precomposition. Its balanced tensor comparison sends a pulled-back
-pure tensor to the tensor of its two pullbacks. Apply this formula before and
-after Frobenius. Both maps pull back the same two sections and then apply their
-Weil structures, since j is defined over the finite field. The equality descends
-through the balanced quotient and sheafification. Lift this ordinary comparison
-and its inverse to the category of invertible Frobenius algebras. The inverse
-identities and naturality follow by faithful forgetting from the ordinary ones.
-This proves the stated underlying-map normalization as well. The construction
-works on the empty open, the identity open and zero inputs without alteration. -/
+/-- The balanced restriction/tensor comparison `j^* (N ⊗ M) ≅ j^* N ⊗ j^* M` lifts to Weil
+sheaves, with underlying map the comparison of the underlying `ℓ`-adic sheaves. -/
 theorem native_open_restriction_tensor :
     ∃ rho : ∀ M N : ProEtaleWeilSheaf k₀ l Z,
       (upperStar k₀ l j).obj (tensor k₀ l Z N M) ≅

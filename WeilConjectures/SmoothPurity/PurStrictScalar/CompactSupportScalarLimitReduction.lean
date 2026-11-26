@@ -105,9 +105,6 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedIntegralFiniteFree
 
 /-! # Normalized compact-support scalar limits and their finite reductions
 
-Source: Stacks Tags 0941, 07A6 and 0GL6; auxiliary comparison Steps 5--6
-(blueprint: lem-pur-compact-support-scalar-limit-reduction).
-
 The helpers specify the total limit and its projections, the tensor and cofinal
 maps, completed/constant coefficient transports, and projection-adjoint reductions.
 The main theorem is `compactSupportScalarLimitReduction`; strict augmentation
@@ -115,6 +112,10 @@ preservation is `scalarLimitArrow_augmentation`.
 
 All limits below are total right derived limits of strict towers. Natural-number
 index `n` denotes positive exponent `n+1`, including in arithmetic subsequences.
+
+## References
+
+* [Stacks Project, Tags 0941, 07A6 and 0GL6]
 -/
 
 @[expose] public noncomputable section
@@ -142,8 +143,7 @@ attribute [-instance] WeilConjectures.SemilinearSections.abelianSheafify
   WeilConjectures.SemilinearSections.locallyBijective WeilConjectures.SemilinearSections.hasDerived
 attribute [local irreducible] scalarCompletion
 
-/-- The unit-normalized Roos presentation of the actual total right-derived limit.
-Source: Stacks 0941 (blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+/-- The unit-normalized Roos presentation of the actual total right-derived limit. -/
 def scalarRoosComparison (W : Scheme.{u}) :=
   (scalarRoosComparison_existsUnique l E W).choose
 

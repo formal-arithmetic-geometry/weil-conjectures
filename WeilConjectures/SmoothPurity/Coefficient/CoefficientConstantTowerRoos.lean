@@ -12,8 +12,12 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerTriangle
 
 /-! # Canonical Roos triangle of a completed-coefficient tower
 
-Source: Stacks Tags 0941, 079P, 0BK6 and 0BK7.
-(blueprint: lem-coef-constant-tower-roos).
+The canonical total limit of a completed-coefficient derived tower has the Roos triangle with
+its resolution-normalized projections.
+
+## References
+
+* Stacks Project, Tags 0941, 079P, 0BK6 and 0BK7.
 -/
 
 @[expose] public noncomputable section
@@ -134,20 +138,7 @@ set_option synthInstance.maxSize 4096
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 /-- The canonical total limit of a completed-coefficient derived tower has the Roos
-triangle with its resolution-normalized projections.
-Source: Stacks Tags 0941, 079P, 0BK6 and 0BK7.
-(blueprint: lem-coef-constant-tower-roos).
-
-Proof: choose a simultaneous K-injective complex representing the tower. Evaluation
-preserves K-injectivity. Its ordinary limit complex is the degreewise limit cone,
-so the proved tower-limit Roos theorem gives a distinguished triangle. Exact
-countable products on the pro-etale site supply both AB4-star and the products in
-the derived category. Transport the triangle through the derived evaluation and
-right-derived limit comparison isomorphisms. On each projection the normalization
-formula for coefficientConstantTowerProjection identifies the transported first
-arrow with the specified projection; localization of evaluation identifies the
-successor transitions. Naturality transports the same equations from the chosen
-K-injective representative to the original tower. -/
+triangle with its resolution-normalized projections. -/
 theorem coefficientConstantTower_roos
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})

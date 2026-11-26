@@ -10,9 +10,18 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 import WeilConjectures.Topology.ModuleCompatibleFamilySheaf
 
-/-! Auxiliary descent theorem assuming diagonal transition maps are identities.
-Source: Stacks Project, Sheaves, Lemmas 00AL and 00AM.
-(blueprint: lem-weil-pbc-module-object-open-descent-aux-diagonal)
+/-! # Open-cover descent for sheaves of modules with trivial diagonal
+
+Auxiliary descent theorem assuming diagonal transition maps are identities.
+
+## Implementation details
+
+The descended module is the sheaf of compatible families, glued componentwise; the diagonal
+assumption shows that the projection and reconstruction maps are mutual inverses.
+
+## References
+
+* [Stacks Project, Tags 00AL and 00AM](https://stacks.math.columbia.edu/tag/00AL)
 -/
 
 @[expose] public section
@@ -24,14 +33,7 @@ open CategoryTheory TopologicalSpace Opposite
 namespace AlgebraicGeometry
 
 -- The dependent Over-site naturality and scalar restrictions require extra elaboration.
-/-- Descent of module objects when the diagonal transition maps are identities.
-The proof constructs compatible families on each open and glues them componentwise;
-the diagonal assumption is used to show the projection and reconstruction maps are
-mutual inverses.
-(blueprint: lem-weil-pbc-module-object-open-descent-aux-diagonal)
-Proof: construct the compatible-family sheaf componentwise, glue sections using local
-sheaf axioms, and use diagonal and cocycle identities to prove projection and
-reconstruction are inverse. -/
+/-- Descent of module objects when the diagonal transition maps are identities. -/
 theorem module_object_open_descent_aux
     (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)
     (hcover : ⨆ i, U i = ⊤)

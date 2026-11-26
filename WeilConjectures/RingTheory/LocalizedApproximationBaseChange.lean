@@ -14,8 +14,21 @@ import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 /-! # Transition base changes after localization at compatible primes
 
-Source: Stacks Project, Algebra, Tag 02JO, first paragraph, and Tag 00QX.
-(blueprint: lem-pc-localized-approximation-base-change)
+Localizing the transition base-change isomorphisms of an approximation system at compatible
+primes gives a localization of ring base change and an isomorphism of module base change.
+
+## Implementation details
+
+Tensor-localization compatibility, applied to `B_i ⊗_{A_i} A_j ≃ B_j` after inverting the
+complements of the contracted primes, identifies `B_{i,q_i} ⊗_{A_{i,p_i}} A_{j,p_j}` with a
+localization of `B_j`; further inverting the complement of `q_j` gives `B_{j,q_j}`. The module
+statement follows in the same way by tensor-localization compatibility and cancellation. No
+colimit or flatness hypothesis is used.
+
+## References
+
+* [Stacks, Tag 02JO] (first paragraph)
+* [Stacks, Tag 00QX]
 -/
 
 @[expose] public section
@@ -177,29 +190,6 @@ private theorem primeModuleMap_baseChange
 
 /-- Localization of transition tensor isomorphisms gives a localization of ring
 base change and an isomorphism of module base change. It uses no colimit or flatness.
-
-Source: Stacks Project, Algebra, Tag 02JO, first paragraph; Tag 00QX.
-(blueprint: lem-pc-localized-approximation-base-change)
-
-Proof:
-1. For i to j, write p_i and q_i for the contracted primes of A_i and B_i.
-   The local map A_i,p_i to B_i,q_i and both transition maps are the canonical
-   fraction maps. The original tensor formula shows that their square commutes.
-2. Apply tensor-localization compatibility to the original isomorphism
-   B_i tensor over A_i with A_j to B_j. First invert the images of the complements
-   of p_i and q_i, and then those of p_j in A_j. The result identifies
-   B_i,q_i tensor over A_i,p_i with A_j,p_j with the localization of B_j at the
-   corresponding multiplicative set. These elements avoid q_j by naturality.
-3. Further invert every element of B_j outside q_j. The composite localization
-   is B_j,q_j. Its preimage multiplicative set in the preceding tensor product
-   gives W, and the composite comparison gives the displayed ring homomorphism.
-   The original pure-tensor formula, followed by localization, gives its formula.
-4. Localize B_j tensor over B_i with D_i to D_j at the complement of q_j.
-   Since each element outside q_i maps outside q_j, the localized tensor factors
-   through D_i,q_i. Tensor-localization compatibility and cancellation identify
-   its domain with B_j,q_j tensor over B_i,q_i with D_i,q_i. This gives the
-   displayed linear equivalence, with its pure-tensor formula inherited from the
-   original equivalence. This holds also for zero modules and identity transitions.
 -/
 theorem localized_approximation_baseChange
     {S : Type u} [CommRing S]

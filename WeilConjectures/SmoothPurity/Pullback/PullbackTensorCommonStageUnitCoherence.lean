@@ -11,15 +11,17 @@ import all WeilConjectures.SmoothPurity.Pullback.PullbackTensorReductionCalculus
 import WeilConjectures.SmoothPurity.Pullback.PullbackTensorRationalUnitCoherence
 import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorNaturality
 
-/-! Common-stage unit coherence for the completed pullback tensor comparison.
+/-! # Common-stage unit coherence for the completed pullback tensor comparison
 
-Source: Stacks Project, Tags 07A4 and 0941; the common-stage part of
-`lem-pur-pullback-tensor-unit-coherence`.
-(blueprint: lem-pur-pullback-tensor-common-stage-unit-coherence)
+## Implementation details
 
 The proof represents source and target units at a common finite coefficient
 field, transports the rational unit equations, and proves independence of the
 field by scalar compatibility. Uniqueness is obtained by unit cancellation.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -306,22 +308,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The prescribed common-stage comparison preserves the coefficient-ring unit uniquely.
-
-Source: Stacks 07A4 and 0941, and the coefficient descent in the parent unit-coherence proof.
-(blueprint: lem-pur-pullback-tensor-common-stage-unit-coherence).
-
-Proof: At any finite stage conjugate the uniquely normalized rational unit comparison by
-its unit and pullback stage isomorphisms, and include it in the pair category. Substitution
-of the tensor, pullback, comparison and unitor representative formulas reduces both unit
-squares to rational unit coherence, using rational comparison and unitor naturality.
-Fix this map at a stage containing the source unit tensor square. Its left square at the
-source unit determines it: cancel the comparison and left unitor; identify the pulled-back
-source unit with the target unit; cancel tensoring using naturality of the right unitor.
-For an arbitrary object enlarge the stage to include all four left and right tensor
-objects. The map there satisfies both squares and agrees with the fixed map by the same
-unit-square cancellation. Thus both equations hold for every object, and the comparison
-is unique. No separate scalar compatibility choice is required. -/
+/-- The prescribed common-stage comparison preserves the coefficient-ring unit uniquely. -/
 theorem pullbackTensorCommonStageUnitCoherence {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :

@@ -20,8 +20,19 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 /-!
 # Krull dimension of a strict henselization
 
-Source: Stacks Project, More on Algebra, Tag 06LK
-(blueprint: lem-sc-strict-henselization-dimension).
+A strict henselization of a local ring has the same Krull dimension as the ring.
+
+## Implementation details
+
+The lower bound comes from faithful flatness of the local map to the strict henselization
+(going down). For the upper bound, every finite chain of primes in the filtered colimit over
+étale triples contracts to a chain in some stage, which survives in the localization of that
+stage at the pointed prime; that localization has the dimension of `R` since the stage is
+étale. The argument needs no finite-dimensionality assumption.
+
+## References
+
+* [Stacks, Tag 06LK]
 -/
 
 @[expose] public section
@@ -36,9 +47,8 @@ private theorem dimension_atPrime_congr {S : Type u} [CommRing S]
   subst q'
   rfl
 
-/-- Contract a finite chain to one stage, then lift it through the prime correspondence
-for localization at the contraction of the colimit maximal ideal. Taking the supremum
-of chain lengths gives the bound, without a finite-dimensionality assumption. -/
+/-- The Krull dimension of a local filtered colimit of rings is at most `d` if every stage,
+localized at the contraction of the maximal ideal, has dimension at most `d`. -/
 private theorem local_colimit_dimension_bound
     {I : Type u} [SmallCategory I] [IsFiltered I]
     (D : I ⥤ CommRingCat.{u}) (c : Cocone D) (hc : IsColimit c)
@@ -110,10 +120,7 @@ private noncomputable def dimensionTriplesToPointedRings (R : CommRingCat.{u}) (
   map_id t := by ext; rfl
   map_comp f g := by ext; rfl
 
-/-- Every map of pointed étale rings comes from a map of triples.
-This private comparison is the fully faithful construction used in
-`EtaleResidueTriplesExistsColimit`; it supplies the small skeleton needed by the
-prime-chain lemma without changing any public instance. -/
+/-- Every map of pointed étale rings comes from a map of triples. -/
 private noncomputable def dimensionTriplesToPointedRingsFullyFaithful
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     (χ : (Spec R).residueField p ⟶ CommRingCat.of K) :
@@ -136,8 +143,8 @@ private noncomputable def dimensionTriplesToPointedRingsFullyFaithful
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Evaluation into the field has kernel equal to the pointed prime. The étale local
- dimension lemma then bounds this stage localization by the dimension of the base. -/
+/-- Each stage of the triples presentation, localized at the contraction of the maximal ideal,
+has Krull dimension at most that of `R`. -/
 private theorem dimension_triples_stage
     (R : CommRingCat.{u}) [IsLocalRing R] (p : Spec R)
     (hp : p.asIdeal = IsLocalRing.maximalIdeal R)
@@ -189,20 +196,7 @@ namespace Algebra
 
 /-- Strict henselization preserves the Krull dimension of any local commutative ring.
 Here `C` is the strict henselization of `R` with respect to the separable closure `K` of
-the residue field of `R`.
-Source: Stacks Project, More on Algebra, Tag 06LK
-(blueprint: lem-sc-strict-henselization-dimension).
-
-Proof: The canonical local map is faithfully flat
-(lem-sc-strict-henselization-faithfully-flat), so going down gives the lower bound
-(lem-sc-faithfully-flat-local-dimension). For the upper bound, use the filtered étale
-triples presentation (lem-weil-pbc-strict-henselization-triples). Every finite strict
-chain of primes contracts to a strict chain in some stage
-(lem-sc-filtered-colimit-prime-chain-dimension). All contracted primes lie below the
-pointed prime at that stage, so the chain survives in its localization. Étale local
-dimension invariance (lem-sc-etale-local-dimension) identifies that localization's
-dimension with that of `R`. Every finite chain length is therefore bounded by
-`ringKrullDim R`, which gives the upper bound, including when the dimension is infinite. -/
+the residue field of `R`. -/
 theorem ringKrullDim_eq_of_isStrictHenselization
     (R K C : Type u) [CommRing R] [IsLocalRing R] [Field K]
     [Algebra (IsLocalRing.ResidueField R) K] [IsSepClosure (IsLocalRing.ResidueField R) K]

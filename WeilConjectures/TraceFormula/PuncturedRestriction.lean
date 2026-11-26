@@ -24,23 +24,32 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 Let `Z` be a smooth surface over an algebraically closed field `k` (or an étale limit of such),
 `X, Y ⊆ Z` regular divisors meeting transversely at exactly one point `z`, `j : Z - Y ⟶ Z` and
 `i : Z - (X ∪ Y) ⟶ Z - Y` the open immersions, and `E` a bounded complex of `Λ`-modules on
-`Z - (X ∪ Y)` with finite `ℓ`-group monodromy, `Λ` a finite `ℓ`-primary ring. Put
-`M = Rj_* i_! E`. The transverse boundary calculation (blueprint
-`lemma-cohomology-near-two-transverse-divisors`, stated here as
-`AlgebraicGeometry.Etale.transverseBoundary`) gives `M_z = 0` and, for `Y` connected, that the
-restriction `RΓ(Y, M|_Y) ⟶ M_s` is zero at every closed point `s ≠ z` of `Y`.
+`Z - (X ∪ Y)` with finite `ℓ`-group monodromy, `Λ` a finite `ℓ`-primary ring. Put `M = Rj_* i_! E`.
+The transverse boundary calculation (`AlgebraicGeometry.Etale.transverseBoundary`) gives `M_z = 0`
+and, for `Y` connected, that the restriction `RΓ(Y, M|_Y) ⟶ M_s` is zero at every closed point
+`s ≠ z` of `Y`.
 
-From this we deduce (blueprint `lemma-restriction-punctured-curve`) that for a closed curve
-`C ⊆ Z` with `C ∩ Y = {s}` the restriction map
+From this we deduce that for a closed curve `C ⊆ Z` with `C ∩ Y = {s}` the restriction map
 ```
 RΓ(Z - Y, i_! E) ⟶ RΓ(C_(s) - s, (i_! E)|_{C_(s) - s})
 ```
-to the punctured strict localization of `C` at `s` is zero. Following the blueprint
-(`lemma-restriction-punctured-curve--1`), the restriction factors through the restriction
-`RΓ(Y, M|_Y) ⟶ M_s` to the stalk at `s`; here the stalk `M_s` is computed on the strictly local
-scheme `C_(s)` itself rather than on the strict localization of `Z`. In fact only this is used of
-`C_(s) - s`: it maps to `Z - Y` through a strictly local scheme `S` over `Z` whose closed point
-maps to `s` (`AlgebraicGeometry.Etale.globalSectionsRestriction_eq_zero_of_strictlyLocal`).
+to the punctured strict localization of `C` at `s` is zero.
+
+## Implementation details
+
+The restriction factors through the restriction `RΓ(Y, M|_Y) ⟶ M_s` to the stalk at `s`; here the
+stalk `M_s` is computed on the strictly local scheme `C_(s)` itself rather than on the strict
+localization of `Z`. In fact only this is used of `C_(s) - s`: it maps to `Z - Y` through a strictly
+local scheme `S` over `Z` whose closed point maps to `s`
+(`AlgebraicGeometry.Etale.globalSectionsRestriction_eq_zero_of_strictlyLocal`).
+
+The transverse boundary calculation `AlgebraicGeometry.Etale.transverseBoundary` is
+`AlgebraicGeometry.Scheme.TransverseCorner.transverse_boundary` for the transverse corner
+`AlgebraicGeometry.Scheme.TransverseCorner.ofRegularDivisors`, with the derived pullbacks `Lf^*`
+replaced by the levelwise pullbacks `D(f^*)`. Its codimension two hypothesis `hXY` is needed:
+without it `Z` could be the spectrum of a discrete valuation ring (an étale limit of smooth
+surfaces, the local ring of a surface at the generic point of a curve) with `X = Y` its closed
+point, and then `M_z` contains `Λ` in degree `0`.
 -/
 
 @[expose] public section
@@ -56,16 +65,15 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {ℓ : ℕ} [Fact ℓ.Prime]
   {Z : Over (Spec (.of k))} {X Y : Scheme.{u}} {iX : X ⟶ Z.left} {iY : Y ⟶ Z.left}
   {UY UXY : Z.left.Opens}
 
-/-- The complex `M = Rj_* i_! E` on `Z` of the transverse boundary calculation (blueprint
-`lemma-cohomology-near-two-transverse-divisors`), for `j : Z - Y ⟶ Z` and
-`i : Z - (X ∪ Y) ⟶ Z - Y`. -/
+/-- The complex `M = Rj_* i_! E` on `Z` of the transverse boundary calculation, for `j : Z - Y ⟶ Z`
+and `i : Z - (X ∪ Y) ⟶ Z - Y`. -/
 noncomputable abbrev transverseBoundaryComplex (hXY : UXY ≤ UY)
     (E : DerivedCategory (Sheaf UXY.toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     DerivedCategory (Sheaf Z.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   ((UY.ι)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctor.obj
     (((Z.left.homOfLE hXY)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E)
 
-/-- **Transverse boundary calculation** (blueprint `lemma-cohomology-near-two-transverse-divisors`).
+/-- **Transverse boundary calculation**.
 
 Let `Z` be a regular, locally noetherian scheme over the algebraically closed field `k` of
 characteristic `≠ ℓ` which is a smooth surface, or an étale limit with affine transition maps of
@@ -78,17 +86,8 @@ bounded complex of `Λ`-modules on `Z - (X ∪ Y)` with finite locally constant 
 monodromy factors through a finite `ℓ`-group. Put `M = Rj_* i_! E`. Then
 1. `M_z = 0`: the pullback of `M` to every geometric point over `z` vanishes;
 2. `M|_{Y - z}` has finite locally constant cohomology;
-3. if `Y` is connected, then for every closed point `s ≠ z` of `Y` and every geometric point
-   `s̄` over `s`, the restriction map `RΓ(Y, M|_Y) ⟶ M_s = RΓ(s̄, s̄^* M|_Y)` is zero.
-
-This is `AlgebraicGeometry.Scheme.TransverseCorner.transverse_boundary` for the transverse corner
-`AlgebraicGeometry.Scheme.TransverseCorner.ofRegularDivisors`, with the derived pullbacks `Lf^*`
-replaced by the levelwise pullbacks `D(f^*)`.
-
-The codimension two hypothesis `hXY` is needed: without it `Z` could be the spectrum of a
-discrete valuation ring (an étale limit of smooth surfaces, the local ring of a surface at the
-generic point of a curve) with `X = Y` its closed point, and then `M_z` contains `Λ` in degree
-`0`. -/
+3. if `Y` is connected, then for every closed point `s ≠ z` of `Y` and every geometric point `s̄`
+   over `s`, the restriction map `RΓ(Y, M|_Y) ⟶ M_s = RΓ(s̄, s̄^* M|_Y)` is zero. -/
 theorem transverseBoundary (hℓ : (ℓ : k) ≠ 0) (hΛ : IsNilpotent (ℓ : Λ))
     (hZ : IsEtaleLimitOfSmoothSurfaces Z) [IsLocallyNoetherian Z.left] [IsRegular Z.left]
     (hX : IsRegularDivisor iX) (hY : IsRegularDivisor iY)
@@ -183,10 +182,8 @@ lemma globalSectionsRestriction_eq_zero_of_comp {X₁ X₂ X₃ : Scheme.{u}} (f
   rw [← cancel_mono (globalSectionsRestriction g (((f)^*[A]).mapDerivedCategory.obj K)),
     zero_comp, ← hc]
 
-/-- Let `j : U ⟶ Z` be a morphism and `F` a complex on `U`. If the restriction of
-`Rj_* F` along `ι ≫ j` vanishes, so does the restriction of `F` along `ι`: the restriction of
-`Rj_* F` along `j` followed by the counit `j^* Rj_* F ⟶ F` is the Leray isomorphism
-`RΓ(Z, Rj_* F) ≅ RΓ(U, F)` (`globalSectionsRestriction_comp_map_counit`). -/
+/-- Let `j : U ⟶ Z` be a morphism and `F` a complex on `U`. If the restriction of `Rj_* F` along
+`ι ≫ j` vanishes, so does the restriction of `F` along `ι`. -/
 lemma globalSectionsRestriction_eq_zero_of_lowerStar {U Z W : Scheme.{u}} (j : U ⟶ Z)
     (ι : W ⟶ U) (F : DerivedCategory (Sheaf U.smallEtaleTopology A))
     (h : globalSectionsRestriction (ι ≫ j) (((j)_*[A]).rightDerivedFunctor.obj F) = 0) :
@@ -216,18 +213,11 @@ lemma globalSectionsRestriction_eq_zero_of_factor {A : Type*} [Category.{u + 1} 
   rw [← hι] at hjc
   exact globalSectionsRestriction_eq_zero_of_lowerStar _ _ _ hjc
 
-/-- **Restriction to a strictly local scheme centred on the boundary vanishes** (blueprint
-`lemma-restriction-punctured-curve--1` and the proof of `lemma-restriction-punctured-curve`,
-with the stalk `M_s` computed on the strictly local scheme `S` instead of the strict localization
-of `Z`). In the situation of the transverse boundary calculation
-(`AlgebraicGeometry.Etale.transverseBoundary`) with `Y` connected, let `c : S = Spec R ⟶ Z` be a
-morphism from a strictly local scheme whose closed point maps to a closed point `s` of `Y`. Then
-the restriction map `RΓ(Z, M) ⟶ RΓ(S, c^* M)` is zero, `M = Rj_* i_! E`.
-
-Indeed `RΓ(S, c^* M) ⟶ M_s` is an isomorphism (`S` is strictly local), so it suffices that the
-restriction `RΓ(Z, M) ⟶ M_s` vanishes. If `s = z` its target `M_z` is zero; otherwise it factors
-through the restriction `RΓ(Y, M|_Y) ⟶ M_s`, which is zero by the transverse boundary
-calculation. -/
+/-- **Restriction to a strictly local scheme centred on the boundary vanishes**. In the situation of
+the transverse boundary calculation (`AlgebraicGeometry.Etale.transverseBoundary`) with `Y`
+connected, let `c : S = Spec R ⟶ Z` be a morphism from a strictly local scheme whose closed point
+maps to a closed point `s` of `Y`. Then the restriction map `RΓ(Z, M) ⟶ RΓ(S, c^* M)` is zero,
+`M = Rj_* i_! E`. -/
 theorem globalSectionsRestriction_transverseBoundaryComplex_eq_zero (hℓ : (ℓ : k) ≠ 0)
     (hΛ : IsNilpotent (ℓ : Λ)) (hZ : IsEtaleLimitOfSmoothSurfaces Z)
     [IsLocallyNoetherian Z.left] [IsRegular Z.left] (hX : IsRegularDivisor iX)
@@ -283,10 +273,9 @@ theorem globalSectionsRestriction_transverseBoundaryComplex_eq_zero (hℓ : (ℓ
       rw [← Scheme.Hom.comp_apply, hfac, ha]
 
 /-- **Restriction through a strictly local scheme vanishes**: in the situation of
-`globalSectionsRestriction_transverseBoundaryComplex_eq_zero`, for every `ι : W ⟶ Z - Y` such
-that `W ⟶ Z - Y ⟶ Z` factors through `c : S ⟶ Z`, the restriction map
-`RΓ(Z - Y, i_! E) ⟶ RΓ(W, ι^* i_! E)` is zero: it factors as
-`RΓ(Z - Y, i_! E) = RΓ(Z, M) ⟶ RΓ(S, c^* M) ⟶ RΓ(W, ...)`. -/
+`globalSectionsRestriction_transverseBoundaryComplex_eq_zero`, for every `ι : W ⟶ Z - Y` such that
+`W ⟶ Z - Y ⟶ Z` factors through `c : S ⟶ Z`, the restriction map
+`RΓ(Z - Y, i_! E) ⟶ RΓ(W, ι^* i_! E)` is zero. -/
 theorem globalSectionsRestriction_eq_zero_of_strictlyLocal (hℓ : (ℓ : k) ≠ 0)
     (hΛ : IsNilpotent (ℓ : Λ)) (hZ : IsEtaleLimitOfSmoothSurfaces Z)
     [IsLocallyNoetherian Z.left] [IsRegular Z.left] (hX : IsRegularDivisor iX)
@@ -346,17 +335,14 @@ noncomputable def puncturedStrictLocalizationMap (iC : C ⟶ Z.left) [IsClosedIm
     (puncturedStrictLocalization s').toScheme ⟶ UY.toScheme :=
   IsOpenImmersion.lift UY.ι _ (range_puncturedStrictLocalization_subset iC s hCY s' hs' hUY)
 
-/-- **Restriction to a transverse punctured curve**
-(blueprint `lemma-restriction-punctured-curve`). In the situation of the transverse boundary
+/-- **Restriction to a transverse punctured curve**. In the situation of the transverse boundary
 calculation (`AlgebraicGeometry.Etale.transverseBoundary`) with `Y` connected, let `C ⊆ Z` be a
-closed subscheme (in the blueprint a curve) with `C ∩ Y = {s}`, and let `C_(s)` be its strict
+closed subscheme (for instance a curve) with `C ∩ Y = {s}`, and let `C_(s)` be its strict
 localization at a geometric point over `s`. Then the restriction map
 ```
 RΓ(Z - Y, i_! E) ⟶ RΓ(C_(s) - s, (i_! E)|_{C_(s) - s})
 ```
-is zero. This is `AlgebraicGeometry.Etale.globalSectionsRestriction_eq_zero_of_strictlyLocal` for
-the strictly local scheme `C_(s)`, whose closed point maps to `s`; the point `s` is closed in `Y`,
-being cut out by the closed subscheme `C`. -/
+is zero. -/
 theorem puncturedRestriction_eq_zero (hℓ : (ℓ : k) ≠ 0) (hΛ : IsNilpotent (ℓ : Λ))
     (hZ : IsEtaleLimitOfSmoothSurfaces Z) [IsLocallyNoetherian Z.left] [IsRegular Z.left]
     (hX : IsRegularDivisor iX) (hY : IsRegularDivisor iY)

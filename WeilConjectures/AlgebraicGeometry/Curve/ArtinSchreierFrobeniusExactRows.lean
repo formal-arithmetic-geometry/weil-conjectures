@@ -21,7 +21,31 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 
-/-! # Compatible coherent Frobenius models for Artin--Schreier exact rows -/
+/-! # Compatible coherent Frobenius models for Artin--Schreier exact rows
+
+For a smooth proper connected curve `C` over an algebraically closed field `k` of characteristic
+`p` and its base change `C'` to an algebraically closed extension `k'`, we construct the
+Artin--Schreier exact sequences `0 → ℤ/p → G → G → 0` on `C` and `C'`, compatible under
+pullback, together with a finite-dimensional `k`-vector space `V` modelling `H¹(C, G)` on which
+the Artin--Schreier map acts as `F - 1` for a `p`-linear `F`, compatibly with base change to
+`k' ⊗ V` (`AlgebraicGeometry.IsCurve.exists_artinSchreier_frobenius_exact_rows`).
+
+## Implementation details
+
+`G` and `G'` are the universe-lifted additive structure sheaves, with `wp` and `wp'` acting by
+`x ↦ x ^ p - x`. The degree-zero maps are surjective because the global sections of a smooth
+proper connected curve over an algebraically closed field are the field itself. `V` is coherent
+`H¹(C, O_C)`, which is finite-dimensional by proper coherent finiteness; the identifications
+`b` and `b'` come from the étale/Zariski comparison and flat coherent base change. The
+sectionwise `p`-th power maps induce the semilinear `F` and `F'`, since `(c x) ^ p = c ^ p x ^ p`.
+These comparisons commute with sectionwise powers even though Frobenius is not `O`-linear. If
+`C` has dimension zero then `C = Spec k` and coherent `H¹` vanishes.
+
+## References
+
+* [Stacks, Tag 0A3P]
+* [Stacks, Tag 02KH]
+-/
 
 @[expose] public section
 
@@ -130,30 +154,12 @@ theorem exists_frobenius_model
   change b (Sheaf.H.map wp 1 x) = ψ (b x) - b x
   rw [hψ, Sheaf.H.map_add_apply, Sheaf.H.map_id_apply, map_add, add_sub_cancel_right]
 
-/-- Coherent Frobenius models and compatible Artin--Schreier exact rows under base change.
-Source: Stacks Project, Tag 0A3P, proof, and Tag 02KH, flat coherent base change.
-(blueprint: lem-pbc-artin-schreier-frobenius-exact-rows)
-
-Proof: Take G and G' to be the universe-lifted additive structure sheaves on C and C'.
-Use the Artin--Schreier sequence on each scheme, transporting the constant term on C'
-through the inverse-image constant-sheaf isomorphism. The maps i and i' send a locally
-constant prime-field section to that section times 1; wp and wp' act by x^p-x.
-The structure-ring pullback gives q from the inverse image of G to G', and the formula
-for constant sections gives the asserted square. The degree-zero maps are onto:
-smoothness implies reducedness, and proper connectedness over an algebraically closed
-field identifies the global sections with the field; x^p-x is onto that field. The
-base-changed curve is again smooth, proper and connected, so the same argument applies.
-Take V to be coherent H¹(C,O_C), with its actual scalar action. Proper coherent finiteness
-makes it finite-dimensional. The etale/Zariski comparison gives b, while flat coherent
-base change and the comparison on C' give b'. The sectionwise p-th power endomorphisms
-induce semilinear F and F', since (cx)^p=c^p x^p. Naturality of powers under structure-ring
-pullback gives the identity on pure tensors. Additivity of cohomology gives the formulas
-for wp and wp'. The canonical flat base-change map sends a cohomology class v to 1 tensor v;
-use the same affine-cover Cech comparisons on both schemes to obtain the last identity.
-These comparisons commute with sectionwise powers even though Frobenius is not O-linear.
-If C has dimension zero, smooth proper connected C is Spec k and coherent H¹ vanishes;
-use the zero vector space, with the same degree-zero and exact-row arguments. This
-statement supplies no degree-one kernel equivalence and uses no fixed-point invariance. -/
+/-- Coherent Frobenius models and compatible Artin--Schreier exact rows under base change: for
+a smooth proper connected curve `C` over `k` and its base change `C'` to `k'`, there are
+Artin--Schreier short exact sequences on `C` and `C'` compatible under pullback, surjective on
+`H⁰`, and a finite-dimensional `V ≃ H¹(C, G)` with `p`-linear `F` and `F'` on `V` and `k' ⊗ V`
+such that the Artin--Schreier maps act on `H¹` as `F - 1` and `F' - 1`, compatibly with
+base change. -/
 theorem exists_artinSchreier_frobenius_exact_rows
     {k k' : Type u}
     [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k']

@@ -31,11 +31,6 @@ coming from the shift `[r]`, the classical Fourier transform of the trace functi
 
 `t_{FT_ψ(K)}(y) = (-1)^r ∑_{x ∈ 𝔽_{qⁿ}^ι} t_K(x) ψ(Tr_{𝔽_{qⁿ}/k₀}⟨x, y⟩)`.
 
-The proof is base change of `Rpr₂!` along the point `y`, the Grothendieck–Lefschetz formula on
-the fibre of `pr₂` over `y`, whose `𝔽_{qⁿ}`-points are the pairs `(φ, x)` of a `k₀`-embedding
-`φ` of `𝔽_{qⁿ}` and a vector `x`, and the trace function of the Artin–Schreier sheaf pulled back
-along the pairing.
-
 On the affine line `𝔸¹ = 𝔸^PUnit` (`ι = PUnit`, `r = 1`) the rational points are the elements of
 `𝔽_{qⁿ}` (`AlgebraicGeometry.AffineSpace.fieldPointsEquiv`) and the formula reads
 
@@ -56,10 +51,14 @@ and *trace-level inversion*, `t_{FT_{ψ⁻¹} FT_ψ(K)}(y) = q^{nr} t_K(y)`.
   `AlgebraicGeometry.WeilComplex.traceFunction_fourierTransform_inv_fourierTransform`, its case
   `ι = PUnit`.
 
-## Blueprint
+## Implementation details
 
-The `sk-*` labels quoted below are block names of the *sketch* blueprint, a separate
-repository; they are not labels of `blueprint/src` and so are not checked by the build.
+The Fourier trace formula is proved by base change of `Rpr₂!` along the point `y`, the
+Grothendieck–Lefschetz formula on the fibre of `pr₂` over `y`, whose `𝔽_{qⁿ}`-points are the
+pairs `(φ, x)` of a `k₀`-embedding `φ` of `𝔽_{qⁿ}` and a vector `x`, and the trace function of
+the Artin–Schreier sheaf pulled back along the pairing. Trace-level inversion is the Fourier
+trace formula applied twice, the signs `(-1)^r` cancelling, followed by classical Fourier
+inversion (`FiniteField.fourierTransformPi_inv_fourierTransformPi`).
 -/
 
 @[expose] public section
@@ -202,8 +201,7 @@ theorem finsum_traceFunction_upperStar_affineSpaceFourierIntegrand
 `t_{FT_ψ(K)}(y) = (-1)^r ∑_{x ∈ 𝔽_{qⁿ}^ι} t_K(x) ψ(Tr_{𝔽_{qⁿ}/k₀}⟨x, y⟩)`:
 
 up to the sign coming from the shift `[r]`, the trace function of the transform is the
-classical Fourier transform of the trace function of `K`.
-(sketch blueprint: `sec-The-Plancherel-formula`; blueprint: `sec-The-Plancherel-formula`) -/
+classical Fourier transform of the trace function of `K`. -/
 theorem traceFunction_affineSpaceFourierTransform (ψ : AddChar k₀ (PadicAlgCl l))
     (K : WeilComplex k₀ l 𝔸(ι; Spec (CommRingCat.of k₀))) {n : ℕ} (hn : n ≠ 0)
     [Fintype (FiniteField.galoisExtension k₀ n)] (y : ι → FiniteField.galoisExtension k₀ n) :
@@ -246,11 +244,7 @@ omit [DecidableEq ι] in
 /-- **Trace-level Fourier inversion on `𝔸^ι`.** For a nontrivial additive character `ψ` of
 `k₀`, a Weil complex `K` on `𝔸^ι` with `r = #ι`, `n ≥ 1` and `y ∈ 𝔽_{qⁿ}^ι`,
 
-`t_{FT_{ψ⁻¹} FT_ψ(K)}(y) = q^{nr} t_K(y)`.
-
-It is the Fourier trace formula applied twice, the signs `(-1)^r` cancelling, followed by
-classical Fourier inversion (`FiniteField.fourierTransformPi_inv_fourierTransformPi`).
-(sketch blueprint: `det-prop-double-trace`) -/
+`t_{FT_{ψ⁻¹} FT_ψ(K)}(y) = q^{nr} t_K(y)`. -/
 theorem traceFunction_affineSpaceFourierTransform_inv {ψ : AddChar k₀ (PadicAlgCl l)}
     (hψ : ψ ≠ 1) (K : WeilComplex k₀ l 𝔸(ι; Spec (CommRingCat.of k₀))) {n : ℕ} (hn : n ≠ 0)
     (y : ι → FiniteField.galoisExtension k₀ n) :
@@ -373,8 +367,7 @@ the affine line, `n ≥ 1` and `y ∈ 𝔽_{qⁿ}`,
 
 up to the sign coming from the shift `[1]`, the trace function of the transform is the
 classical Fourier transform of the trace function of `K`. It is the case `ι = PUnit` of
-`AlgebraicGeometry.WeilComplex.traceFunction_affineSpaceFourierTransform`.
-(sketch blueprint: `sec-The-Plancherel-formula`; blueprint: `sec-The-Plancherel-formula`) -/
+`AlgebraicGeometry.WeilComplex.traceFunction_affineSpaceFourierTransform`. -/
 theorem traceFunction_fourierTransform (ψ : AddChar k₀ (PadicAlgCl l))
     (K : WeilComplex k₀ l (affineLine k₀)) {n : ℕ} (hn : n ≠ 0)
     [Fintype (FiniteField.galoisExtension k₀ n)] (y : FiniteField.galoisExtension k₀ n) :
@@ -390,8 +383,7 @@ complex `K` on the affine line, `n ≥ 1` and `y ∈ 𝔽_{qⁿ}`,
 `t_{FT_{ψ⁻¹} FT_ψ(K)}(y) = qⁿ t_K(y)`,
 
 which is the trace function of the Tate twist `K(-1)` at points of degree `n`. It is the case
-`ι = PUnit` of `AlgebraicGeometry.WeilComplex.traceFunction_affineSpaceFourierTransform_inv`.
-(sketch blueprint: `det-prop-double-trace`) -/
+`ι = PUnit` of `AlgebraicGeometry.WeilComplex.traceFunction_affineSpaceFourierTransform_inv`. -/
 theorem traceFunction_fourierTransform_inv_fourierTransform {ψ : AddChar k₀ (PadicAlgCl l)}
     (hψ : ψ ≠ 1) (K : WeilComplex k₀ l (affineLine k₀)) {n : ℕ} (hn : n ≠ 0)
     (y : FiniteField.galoisExtension k₀ n) :

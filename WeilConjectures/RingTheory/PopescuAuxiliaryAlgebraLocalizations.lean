@@ -16,8 +16,26 @@ import WeilConjectures.RingTheory.PopescuAuxiliaryAlgebraLocalizationsPart2
 /-!
 # Localizations of the auxiliary algebra in height-zero delocalization
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 16.9.4, Tag 07FA
-(blueprint: lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations).
+The auxiliary algebra `B` of the height-zero delocalization step becomes, after inverting `z` or
+one of the `y_l`, a localization of an explicit polynomial algebra.
+
+## Implementation details
+
+The statement is written without `let`. The variable indices of
+`S = MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A` are, in order, `x`, `y`, `z`
+and `t`; `B` is `S` modulo the span of the `f_j - ∑ y_i t_ij` and the `z y_i`, `C` is
+`MvPolynomial (Fin n) A` modulo the span of the `f_j`, and the variable indices of
+`T = MvPolynomial ((Fin r × Fin m) ⊕ Unit) C` are `t` and `z`. In
+`Q_l = MvPolynomial (Fin n ⊕ (Fin r ⊕ ({i // i ≠ l} × Fin m))) A` the row of `t`
+indexed by `l` is omitted.
+
+In `B_z` the relations `z y_i = 0` give `y = 0`; in `B_{y_l}` one has `z = 0` and
+`t (l, j) = y_l⁻¹ (f_j - ∑_{i ≠ l} y_i t (i, j))`. The maps come from the universal properties of
+polynomial rings, quotients and localizations.
+
+## References
+
+* [Stacks, Tag 07FA]
 -/
 
 @[expose] public section
@@ -29,36 +47,9 @@ open scoped BigOperators
 
 namespace Algebra
 
-/-- The two localizations of the auxiliary algebra in Stacks Project, Tag 07FA.
-(blueprint: lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations)
-
-The statement is written without `let`. The variable indices of
-`S = MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A` are, in order, `x`, `y`, `z`
-and `t`; `B` is `S` modulo the span of the `f_j - ∑ y_i t_ij` and the `z y_i`, `C` is
-`MvPolynomial (Fin n) A` modulo the span of the `f_j`, and the variable indices of
-`T = MvPolynomial ((Fin r × Fin m) ⊕ Unit) C` are `t` and `z`. In
-`Q_l = MvPolynomial (Fin n ⊕ (Fin r ⊕ ({i // i ≠ l} × Fin m))) A` the row of `t`
-indexed by `l` is omitted.
-
-Proof (the seven steps of the node):
-1. Use the universal properties of multivariate polynomials, quotients, and localization
-away from an element (the three statement dependencies).
-2. Evaluate `x` in `C`, `y` at zero, and `z,t` at the corresponding variables in `Tz`.
-Both families of defining relations vanish. Descend to `phi : B →ₐ[A] Tz` and localize at `z`.
-3. In `Bz`, the relations `z*y = 0` give `y = 0`, and hence every `f j` vanishes.
-Thus the map from the original polynomial ring factors through `C`; adjoining `t,z`
-and inverting `z` constructs the reverse map.
-4. The composites fix every generator. Quotient and localization uniqueness show they
-are identity maps. This proves the first equivalence, with its prescribed images.
-5. For each `l`, evaluate the variables of `Q` at their classes in `B` and localize at `y l`.
-6. Construct the reverse map by sending `z` to zero and each omitted `t (l,j)` to
-`(y l)⁻¹ * (f j - ∑ i ≠ l, y i * t (i,j))`. The defining relations vanish, so it
-descends to `B` and then localizes at `y l`.
-7. In `By`, `z = 0` and the relation for `f j` determines `t (l,j)` by precisely this
-formula. Both composites fix the generators, proving the second equivalence.
-The polynomial, quotient, and localization notions are respectively
-`def-weil-pbc-mv-polynomial-ring`, `def-weil-pbc-algebra-hom-quotient`, and
-`def-weil-ring-localization-away`. -/
+/-- The two localizations of the auxiliary algebra `B` of height-zero delocalization: `B_z` is
+the localization at `z` of `C[t, z]`, and for each `l`, `B_{y_l}` is the localization at `y_l` of
+the polynomial ring `Q_l` in which the row of `t` indexed by `l` is omitted. -/
 theorem popescu_auxiliaryAlgebra_localizations
     (A : Type u) [CommRing A] (n m r : ℕ) (hr : 1 ≤ r)
     (f : Fin m → MvPolynomial (Fin n) A) :

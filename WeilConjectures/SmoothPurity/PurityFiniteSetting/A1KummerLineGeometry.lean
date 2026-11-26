@@ -10,7 +10,17 @@ public import WeilConjectures.AlgebraicGeometry.KummerLine.KummerLineGeometry
 public import Mathlib.Algebra.MvPolynomial.Equiv
 
 /-! # Polynomial spectra and the actual relative affine line
-Source: det-prop-a1-kummer.proof.md, Reduction to a geometric fibre.
+
+The identification of the polynomial model with the actual relative affine line and punctured
+line, used to reduce Kummer computations on `𝔸¹` to a geometric fibre.
+
+## Implementation details
+
+The polynomial model is identified with the affine line by the one-variable algebra
+equivalence, which sends the unique multivariable variable to `X`. The affine-space pullback
+square is transported along this absolute isomorphism, and the punctured-line square is
+obtained by the open immersion pullback criterion, since the affine-space map pulls the
+coordinate back to the coordinate.
 -/
 
 @[expose] public noncomputable section
@@ -20,17 +30,14 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace WeilConjectures.PurityFiniteSetting
 
-/-- The polynomial model is the actual affine line, by the one-variable algebra equivalence.
-Source: det-prop-a1-kummer.proof.md (blueprint: new-pur-a1-kummer-line-geometry). -/
+/-- The polynomial model is the actual affine line, by the one-variable algebra equivalence. -/
 noncomputable def a1KummerAbsoluteLineIso (k : Type u) [Field k] :
     AlgebraicGeometry.KummerLine.curve k false ≅ Line (Spec (.of k)) :=
   Scheme.Spec.mapIso
     (MvPolynomial.uniqueAlgEquiv k (ULift.{u} (Fin 1))).toRingEquiv.toCommRingCatIso.op ≪≫
     (AffineSpace.SpecIso (ULift.{u} (Fin 1)) (.of k)).symm
 
-/-- The polynomial-line identification is over the ground field.
-Source: det-prop-a1-kummer.proof.md (blueprint: new-pur-a1-kummer-line-geometry).
-Proof: the one-variable algebra equivalence fixes scalar constants. -/
+/-- The polynomial-line identification is over the ground field. -/
 theorem a1KummerAbsoluteLineIso_over (k : Type u) [Field k] :
     (a1KummerAbsoluteLineIso k).hom ≫ lineProjection (Spec (.of k)) =
       AlgebraicGeometry.KummerLine.structureMap k false := by
@@ -47,10 +54,7 @@ theorem a1KummerAbsoluteLineIso_over (k : Type u) [Field k] :
   exact congrArg (fun p : Polynomial k ↦ p.coeff n)
     ((MvPolynomial.uniqueAlgEquiv k (ULift.{u} (Fin 1))).commutes a)
 
-/-- The actual affine coordinate pulls back to the polynomial variable.
-Source: det-prop-a1-kummer.proof.md (blueprint: new-pur-a1-kummer-line-geometry).
-Proof: apply naturality of global functions of Spec to the variable, using that the
-one-variable algebra equivalence sends the unique multivariable variable to X. -/
+/-- The actual affine coordinate pulls back to the polynomial variable. -/
 theorem a1KummerAbsoluteLineIso_coordinate (k : Type u) [Field k] :
     (a1KummerAbsoluteLineIso k).hom.appTop (coordinate (Spec (.of k))) =
       (Scheme.ΓSpecIso (.of (Polynomial k))).inv Polynomial.X := by
@@ -76,10 +80,7 @@ theorem a1KummerAbsoluteLineIso_coordinate (k : Type u) [Field k] :
     simp [MvPolynomial.uniqueAlgEquiv_apply]] at h
   exact h.symm
 
-/-- The actual affine line is the polynomial family's pullback square.
-Source: det-prop-a1-kummer.proof.md (blueprint: new-pur-a1-kummer-line-geometry).
-Proof: transport the affine-space pullback square along the absolute polynomial-line
-isomorphism. Its scalar compatibility is the previously proved over-base identity. -/
+/-- The actual affine line is the polynomial family's pullback square. -/
 theorem a1KummerLine_isPullback {k : Type u} [Field k] {Y : Scheme.{u}}
     (a : Y ⟶ Spec (.of k)) :
     IsPullback
@@ -94,18 +95,13 @@ theorem a1KummerLine_isPullback {k : Type u} [Field k] {Y : Scheme.{u}}
     rfl
   · simp
 
-/-- The canonical pullback-presentation isomorphism, determined by its two projections.
-Source: det-prop-a1-kummer.proof.md (blueprint: new-pur-a1-kummer-line-geometry). -/
+/-- The canonical pullback-presentation isomorphism, determined by its two projections. -/
 noncomputable def a1KummerLineFamilyIso {k : Type u} [Field k] {Y : Scheme.{u}}
     (a : Y ⟶ Spec (.of k)) :
     pullback (AlgebraicGeometry.KummerLine.structureMap k false) a ≅ Line Y :=
   (a1KummerLine_isPullback a).isoPullback.symm
 
-/-- The family isomorphism preserves the projection and the actual coordinate.
-Source: det-prop-a1-kummer.proof.md (blueprint: new-pur-a1-kummer-line-geometry).
-Proof: the universal pullback isomorphism preserves both projections. The affine-space
-map preserves its coordinate; the absolute comparison sends it to X. Apply appTop to
-the first-projection identity and compose these two coordinate identities. -/
+/-- The family isomorphism preserves the projection and the actual coordinate. -/
 theorem a1KummerLineFamilyIso_normalization {k : Type u} [Field k] {Y : Scheme.{u}}
     (a : Y ⟶ Spec (.of k)) :
     (a1KummerLineFamilyIso a).hom ≫ lineProjection Y =
@@ -135,12 +131,7 @@ theorem a1KummerLineFamilyIso_normalization {k : Type u} [Field k] {Y : Scheme.{
           (pullback.fst (AlgebraicGeometry.KummerLine.structureMap k false) a).appTop
           (a1KummerAbsoluteLineIso_coordinate k)
 
-/-- The actual punctured-line square is cartesian for every base map.
-Source: det-prop-a1-kummer.proof.md, Base change on Y
-(blueprint: new-pur-a1-kummer-line-geometry).
-Proof: the affine-space map pulls the coordinate back to the coordinate, hence its
-inverse image of the coordinate basic open is the coordinate basic open. The open
-immersion pullback criterion gives the open square; paste with the affine-line square. -/
+/-- The actual punctured-line square is cartesian for every base map. -/
 theorem a1KummerPunctured_isPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsPullback (puncturedMap f) (puncturedProjection X) (puncturedProjection Y) f := by
   have : IsOpenImmersion (openImmersion X) := by
@@ -161,11 +152,7 @@ theorem a1KummerPunctured_isPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
       rw [Scheme.preimage_basicOpen_top, AffineSpace.map_appTop_coord]
   exact ho.paste_vert (AffineSpace.isPullback_map (n := ULift.{u} (Fin 1)) f)
 
-/-- The actual punctured-line map preserves the actual coordinate unit.
-Source: det-prop-a1-kummer.proof.md, Base change on Y
-(blueprint: new-pur-a1-kummer-line-geometry).
-Proof: take global sections of the defining equality with the open immersions and
-use preservation of the affine coordinate. Units are determined by their values. -/
+/-- The actual punctured-line map preserves the actual coordinate unit. -/
 theorem a1KummerPuncturedMap_coordinate {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Units.map (puncturedMap f).appTop.hom.toMonoidHom (coordinateUnit Y) =
       coordinateUnit X := by

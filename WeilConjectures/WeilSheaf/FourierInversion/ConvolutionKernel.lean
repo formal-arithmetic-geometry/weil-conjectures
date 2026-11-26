@@ -15,8 +15,7 @@ public import WeilConjectures.WeilSheaf.UpperStarConstant
 For lisse Weil sheaves `𝒦`, `𝒦'` on `𝔸¹ ×_{k₀} 𝔸¹`, the *convolution*
 `𝒦' ∗ 𝒦 = Rr₁₃!(r₁₂^* 𝒦 ⊗ r₂₃^* 𝒦')` is a Weil complex on `𝔸¹ ×_{k₀} 𝔸¹`
 (`AlgebraicGeometry.WeilComplex.kernelConvolution`), the triple product `𝔸³` having points
-`(x, ξ, y)`. For the Fourier kernels `𝒦_ψ = μ^* ℒ_ψ` and a nontrivial character `ψ`
-(blueprint `proposition-fourier-inversion`):
+`(x, ξ, y)`. For the Fourier kernels `𝒦_ψ = μ^* ℒ_ψ` and a nontrivial character `ψ`:
 
 * `𝒦_{ψ⁻¹} ∗ 𝒦_ψ ≅ RΔ!(ℚ̄_ℓ(-1)[-2])`, the constant sheaf on the diagonal
   (`AlgebraicGeometry.nonempty_iso_kernelConvolution_fourierKernel_inv`);
@@ -48,9 +47,8 @@ noncomputable def WeilComplex.upperStarAdicConstantIso {X Y : Scheme.{u}}
     WeilSheaf.toComplex.mapIso (WeilSheaf.upperStarAdicConstantIso φ)
 
 /-- The *convolution* `𝒦' ∗ 𝒦 = Rr₁₃!(r₁₂^* 𝒦 ⊗ r₂₃^* 𝒦')` of two lisse Weil sheaves on
-`𝔸¹ ×_{k₀} 𝔸¹`, a Weil complex on `𝔸¹ ×_{k₀} 𝔸¹` (blueprint `proposition-fourier-inversion`); the
-tensor product `r₁₂^* 𝒦 ⊗ r₂₃^* 𝒦'` is that of the constant complex `ℚ̄_ℓ` on the triple product
-with the two lisse sheaves. -/
+`𝔸¹ ×_{k₀} 𝔸¹`, a Weil complex on `𝔸¹ ×_{k₀} 𝔸¹`; the tensor product `r₁₂^* 𝒦 ⊗ r₂₃^* 𝒦'` is that
+of the constant complex `ℚ̄_ℓ` on the triple product with the two lisse sheaves. -/
 noncomputable def WeilComplex.kernelConvolution (𝒦 𝒦' : WeilSheaf k₀ l (affinePlane k₀))
     (h𝒦 : 𝒦.IsLisse) (h𝒦' : 𝒦'.IsLisse) : WeilComplex k₀ l (affinePlane k₀) :=
   (WeilComplex.derivedLowerShriek k₀ l (affineTripleProduct.proj₁₃ k₀)).obj
@@ -60,17 +58,13 @@ noncomputable def WeilComplex.kernelConvolution (𝒦 𝒦' : WeilSheaf k₀ l (
         (h𝒦.upperStar _)).obj
         (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affineTripleProduct k₀)))))
 
-/-- **The convolution of the Fourier kernels is the delta kernel** (blueprint
-`proposition-fourier-inversion`, first formula): for a nontrivial
+/-- **The convolution of the Fourier kernels is the delta kernel**: for a nontrivial
 additive character `ψ`,
 
 `𝒦_{ψ⁻¹} ∗ 𝒦_ψ ≅ RΔ!(ℚ̄_ℓ(-1)[-2])`,
 
 the constant sheaf with Tate twist `(-1)` and shift `[-2]` extended by zero along the diagonal
-`Δ : 𝔸¹ ⟶ 𝔸¹ ×_{k₀} 𝔸¹`. The integrand on `𝔸³` is `ℒ_ψ((x - y) ξ)`
-(`AlgebraicGeometry.WeilComplex.nonempty_iso_tensorLisse_upperStar_fourierKernel_comp_sub`), and
-the compact-support direct image along `r₁₃` concentrates it on the zero locus of `x - y`
-(`AlgebraicGeometry.WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse_artinSchreierOf_mul`).
+`Δ : 𝔸¹ ⟶ 𝔸¹ ×_{k₀} 𝔸¹`.
 -/
 theorem nonempty_iso_kernelConvolution_fourierKernel_inv (ψ : AddChar k₀ (PadicAlgCl l))
     (hψ : ψ ≠ 1) :
@@ -94,17 +88,13 @@ theorem nonempty_iso_kernelConvolution_fourierKernel_inv (ψ : AddChar k₀ (Pad
       ((shiftFunctor _ (-2 : ℤ)).mapIso ((WeilComplex.tateTwist k₀ l (affineLine k₀) (-1)).mapIso
         (WeilComplex.upperStarAdicConstantIso (affineLine.diagonal k₀))))⟩
 
-/-- **The convolution of the Fourier kernel with itself** (blueprint
-`proposition-fourier-inversion`, second formula): for a nontrivial
+/-- **The convolution of the Fourier kernel with itself**: for a nontrivial
 additive character `ψ`,
 
 `𝒦_ψ ∗ 𝒦_ψ ≅ R((1 × ι') ∘ Δ)!(ℚ̄_ℓ(-1)[-2])`,
 
 the constant sheaf with Tate twist `(-1)` and shift `[-2]` extended by zero along the
-antidiagonal `x ↦ (x, -x)`, the image of the diagonal under `1 × ι'`. The integrand on `𝔸³` is
-`ℒ_ψ((x + y) ξ)`
-(`AlgebraicGeometry.WeilComplex.nonempty_iso_tensorLisse_upperStar_fourierKernel_comp_add`), and
-the compact-support direct image along `r₁₃` concentrates it on the zero locus of `x + y`. -/
+antidiagonal `x ↦ (x, -x)`, the image of the diagonal under `1 × ι'`. -/
 theorem nonempty_iso_kernelConvolution_fourierKernel (ψ : AddChar k₀ (PadicAlgCl l))
     (hψ : ψ ≠ 1) :
     Nonempty (WeilComplex.kernelConvolution (fourierKernel ψ) (fourierKernel ψ)

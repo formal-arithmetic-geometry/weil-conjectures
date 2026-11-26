@@ -15,12 +15,11 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperSta
 
 # The left side of the base-change core of the source exchange
 
-For a proper morphism `f`, the left side of the base-change core of the exceptional Künneth part
-of the source exchange, transposed along `Lf^* ⊣ Rf_*`, is the compact-support base change
-followed by the projection formula of `z` (`ProEtale.CondensedRing.sourceExchange_leftTranspose`).
-The ingredient is the compatibility of the exceptional projection morphism with the
-compact-support base change (`ProEtale.CondensedRing.exceptionalProjection_baseChange`,
-blueprint `prop-sf-pf-coherence`), the componentwise form of
+For a proper morphism `f`, the left side of the base-change core of the exceptional Künneth part of
+the source exchange, transposed along `Lf^* ⊣ Rf_*`, is the compact-support base change followed by
+the projection formula of `z` (`ProEtale.CondensedRing.sourceExchange_leftTranspose`). The
+ingredient is the compatibility of the exceptional projection morphism with the compact-support base
+change (`ProEtale.CondensedRing.exceptionalProjection_baseChange`), the componentwise form of
 `ProEtale.CondensedRing.pfBaseChange_boundedConstructibleExceptionalProjection`.
 
 -/
@@ -167,9 +166,8 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- **The exceptional projection morphism commutes with the compact-support base change**
-(blueprint `prop-sf-pf-coherence`, compatibility with base change): for a cartesian square
-`g' ≫ f = f' ≫ g`, the square
+/-- **The exceptional projection morphism commutes with the compact-support base change**: for a
+cartesian square `g' ≫ f = f' ≫ g`, the square
 ```
 Lg^*(Rf_!T ⊗ M) ──Lg^* PF──▶ Lg^*Rf_!(T ⊗ Lf^*M) ──Ex_!──▶ Rf'_!Lg'^*(T ⊗ Lf^*M)
        │                                                          │

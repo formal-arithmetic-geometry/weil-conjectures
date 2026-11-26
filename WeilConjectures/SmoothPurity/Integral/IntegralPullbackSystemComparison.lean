@@ -18,8 +18,11 @@ import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedQuotientPullbackR
 
 /-! # Integral pullback and coherent finite-system reduction
 
-Source: Stacks Project, Tags 099N(5) and 0941; Bhatt--Scholze, Lemma 3.5.7
-(blueprint: lem-pod-integral-pullback-system-comparison).
+## References
+
+* Stacks Project, Tags 099N(5) and 0941
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Lemmas 3.5.7 and
+  6.5.9(5)
 -/
 
 @[expose] public noncomputable section
@@ -37,9 +40,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 The first factor is the actual projection-adjoint map, whose invertibility is precisely
 part (1) of integralOperations_preserve_constructible. The other factors only change
 finite pullback presentation and identify the reduction of the representative with
-that of K through the universal reduction counit.
-Source: Stacks Tag 099N(5); Bhatt--Scholze, Lemma 6.5.9(5)
-(blueprint: lem-pod-integral-pullback-system-comparison). -/
+that of K through the universal reduction counit. -/
 def integralSystemPullbackReductionIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -78,26 +79,7 @@ set_option backward.isDefEq.respectTransparency.types true
 /-- Integral pullback reduces to exact inverse image on coherent finite systems, with the
 whole-system value of the comparison recorded.
 The evaluated comparison is the adjoint of the actual Roos projection, for every
-flat-term K-flat representative. No composition comparison is asserted here.
-Source: Stacks 099N(5), 0941; Bhatt--Scholze, Lemma 3.5.7
-(blueprint: lem-pod-integral-pullback-system-comparison).
-
-Proof: reduce one flat-term K-flat representative with the strict quotient maps.
-Change of rings preserves its K-flatness; quotient tensor reassociation and finite
-inverse image preserve normalization. The strict Roos comparison, natural on chain
-maps and their localization, identifies the actual integral pullback with total
-limit of this pulled-back reduction system, preserving its projections. Apply the
-reduction/total-limit adjunction counit to this identification. Normalized DVR
-effectivity makes its evaluations invertible; the evaluation criterion in the
-coefficient calculus makes the system map invertible. Naturality of the adjunction
-and Roos comparison gives a natural system isomorphism. The counit projection
-formula identifies its evaluation with the scalar adjoint of the defining tower
-projection. Transport through the unit-normalized finite pullback presentation
-and the universal reduction counit gives exactly the displayed formula, for every
-representative and every positive uniformizer exponent.
-The second clause records the whole-system value: the comparison is the coherent
-reduction of the Roos-normalized realization `completedQuotientPullbackRealization`
-followed by the coherent counit, not only its finite evaluations. -/
+flat-term K-flat representative. No composition comparison is asserted here. -/
 theorem integralPullbackSystemComparison :
     ∃ β : ∀ {X Y : Scheme.{u}}
         [∀ x : X, Invertible (l : X.residueField x)]

@@ -26,6 +26,14 @@ with these Weil structures
 - `AlgebraicGeometry.WeilSheaf.directImage`, `AlgebraicGeometry.WeilSheaf.extensionByZero` and
   `AlgebraicGeometry.WeilSheaf.extensionByZeroToDirectImage`: the two extensions along an open
   immersion and the canonical map between them.
+
+## Implementation details
+
+Constructibility of `j_! F` comes from
+`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.openImmersionLowerShriek`: locally on `X̄`,
+the strata of `Ū`, together with the closed complement of `Ū` on which `j̄_! F` vanishes,
+stratify `X̄`. Without quasi-compactness of `j` this fails: near a boundary point `Ū` may need
+infinitely many strata.
 -/
 
 @[expose] public section
@@ -68,7 +76,7 @@ noncomputable def ProEtaleWeilSheaf.extensionByZeroToLowerStar (j : U ⟶ X) [Is
 
 namespace WeilSheaf
 
--- TODO(unify): lemma-boundary-stalk--1
+-- TODO(unify): unify with the boundary stalk computation.
 /-- The *ordinary* sheaf direct image `j_*` along a quasi-compact open immersion `j` into a
 `k₀`-scheme locally of finite type: the pushforward `WeilSheaf.lowerStar j`. Its stalks at the
 missing points are the inertia invariants. -/
@@ -77,7 +85,7 @@ noncomputable abbrev directImage (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact
     WeilSheaf k₀ l U ⥤ WeilSheaf k₀ l X :=
   lowerStar j
 
--- TODO(unify): lemma-boundary-stalk--1
+-- TODO(unify): unify with the boundary stalk computation.
 -- TODO: the isomorphism `higherDirectImage j 0 ≅ directImage j` (`R⁰j_* = j_*`), from
 -- `H⁰ ∘ Rf_* ∘ single 0 ≅ f_*` for pro-étale Weil sheaves along an arbitrary `f`.
 /-- The higher direct image `Rⁱj_*` along a quasi-compact open immersion `j`: the higher direct
@@ -91,11 +99,7 @@ noncomputable abbrev higherDirectImage (j : U ⟶ X) [IsOpenImmersion j] [QuasiC
 
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- The extension by zero of a constructible sheaf along a quasi-compact open immersion is
-constructible: locally on `X̄`, the strata of `Ū`, together with the closed complement of `Ū`,
-on which `j̄_! F` vanishes, stratify `X̄`
-(`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.openImmersionLowerShriek`). Without
-quasi-compactness of `j` this fails: near a boundary point `Ū` may need infinitely many
-strata. -/
+constructible. -/
 theorem isAdicConstructibleSheaf_extensionByZero (j : U ⟶ X) [IsOpenImmersion j]
     [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] (F : ProEtaleWeilSheaf k₀ l U)
     (hF : WeilSheaf.objectProperty k₀ l U F) :
@@ -103,7 +107,7 @@ theorem isAdicConstructibleSheaf_extensionByZero (j : U ⟶ X) [IsOpenImmersion 
   ProEtale.IsAdicConstructibleSheaf.openImmersionLowerShriek
     (Scheme.Hom.geometricFiberMap j (comp_over j _)) hF
 
--- TODO(unify): proposition-extension-zero-restriction-closed-subscheme
+-- TODO(unify): unify with the restriction of extension by zero to closed subschemes.
 /-- Extension by zero `j_!` of Weil sheaves along a quasi-compact open immersion `j`: the
 extension by zero along the base change `j̄ : Ū ⟶ X̄`, with the transported Weil structure. -/
 noncomputable def extensionByZero (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
@@ -136,7 +140,7 @@ lemma extensionByZero_map_hom_hom_f {F G : WeilSheaf k₀ l U} (α : F ⟶ G) :
       (Scheme.Hom.geometricFiberMap j (comp_over j _))_!ᵃ[l].map α.hom.hom.f :=
   rfl
 
--- TODO(unify): proposition-extension-zero-restriction-closed-subscheme
+-- TODO(unify): unify with the restriction of extension by zero to closed subschemes.
 omit [QuasiCompact j] in
 instance : (ProEtaleWeilSheaf.extensionByZero k₀ l j).Additive :=
   IsoAlgebra.additive_mapOfNatIso _
@@ -154,7 +158,7 @@ instance : (extensionByZero (k₀ := k₀) (l := l) j).Additive :=
 
 end ExtensionByZero
 
--- TODO(unify): proposition-extension-zero-restriction-closed-subscheme
+-- TODO(unify): unify with the restriction of extension by zero to closed subschemes.
 /--
 The canonical map `j_! ⟶ j_*`, whose cokernel is the boundary sheaf `B` supported on the
 complement of `U`:
@@ -185,7 +189,7 @@ lemma extensionByZeroToDirectImage_app_hom_hom_f (j : U ⟶ X) [IsOpenImmersion 
         (Scheme.Hom.geometricFiberMap j (comp_over j _))).app F.obj.carrier :=
   rfl
 
--- TODO(unify): proposition-extension-zero-restriction-closed-subscheme
+-- TODO(unify): unify with the restriction of extension by zero to closed subschemes.
 /-- **The comparison `j_! F ⟶ j_* F` of Weil sheaves is a monomorphism**: on underlying
 pro-étale sheaves it is the comparison along the base change `j̄ : Ū ⟶ X̄`, which is a
 monomorphism (`AlgebraicGeometry.ProEtale.mono_adicOpenImmersionLowerShriekToLowerStar_app`). -/

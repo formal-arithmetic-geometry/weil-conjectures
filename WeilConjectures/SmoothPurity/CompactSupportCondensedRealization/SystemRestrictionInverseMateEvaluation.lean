@@ -13,8 +13,20 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Evaluation of scalar-restriction inverse mates
 
-The generic coefficient-tower argument for the compact-support coefficient comparison.
-(blueprint: lem-pur-system-restriction-inverse-mate-evaluation). -/
+This file shows that the inverse mate of scalar restriction along a map of coefficient towers
+becomes invertible after evaluation at each coefficient level; this is the generic tower
+argument used for the compact-support coefficient comparison.
+
+## Implementation details
+
+The six sectionwise identity comparisons form a commuting direct-image cube; taking mates gives
+the inverse-image cube, and the evaluation comparisons and the fixed-ring scalar pullback
+comparison are invertible, so cancellation proves the claim.
+
+## References
+
+* Stacks Project, Tag 03EK.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -251,11 +263,7 @@ private theorem res_section_type_general
 
 -- Elaborate the six normalized section maps and their adjunction mate cube together.
 /-- The inverse mate of normalized scalar restriction commutes with geometric pullback
-at every coefficient level. Source: blueprint theorem-smooth-purity-all-admissible-coefficients,
-Step 10; Stacks 03EK. (blueprint: lem-pur-system-restriction-inverse-mate-evaluation).
-Proof: the six sectionwise identity comparisons form a commuting direct-image cube.
-Taking mates gives the inverse-image cube. The canonical evaluation comparisons and
-fixed-ring scalar pullback comparison are invertible, so cancellation proves the claim. -/
+at every coefficient level: its evaluation at level `n` is an isomorphism. -/
 theorem restriction_inverse_mate_eval_isIso
     (CE CF : ℕ → CommRingCat.{u + 1})
     (τE : ∀ n, CE (n + 1) ⟶ CE n) (τF : ∀ n, CF (n + 1) ⟶ CF n)

@@ -19,6 +19,18 @@ import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Integral
 
 This partial datum contains only finite and integral stages. Field-stage operations,
 localization comparisons and common-field comparisons are constructed separately.
+
+## Implementation details
+
+The literal scalar restrictions are chosen once for each endpoint, independently of the
+compactification. Finite stages restrict finite compact support and the finite exceptional
+functor to the full finite-Tor categories; the finite-operation bounds depend only on the
+compactification. Integral stages use strict-system transport and integral reconstruction with
+these uniform bounds, and the integral scalar-mate construction supplies the scalar data.
+
+## References
+
+* [Zheng, Lemma 5.22, Construction 5.25 and Proposition 5.24]
 -/
 
 @[expose] public noncomputable section
@@ -318,34 +330,8 @@ private theorem integralOperation (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D
   intro K
   exact congr_app (ff.map_preimage eambient.hom) K
 
-/-- Construct the finite and integral stages, without any field-stage adjunction.
-Source: Zheng, Lemma 5.22, Construction 5.25 and Proposition 5.24; coefficient
-construction steps 1--4 (blueprint: lem-sf-ring-stage-assembly).
-
-Proof: choose the literal scalar restrictions once for each endpoint, independently of
-compactification. Restrict finite compact support and the specified finite exceptional
-functor to the actual full finite-Tor categories. Transport the ordinary etale adjunction
-through the site comparison and give its right functor the adjoint shift structure.
-Choose the finite realization and its inverse image of the canonical proper/open scalar
-map; the counit transpose is invertible even for a nonflat quotient. The finite-operation
-bounds depend only on the compactification, not the coefficient level.
-
-Apply strict-system transport before taking evaluations, and integral reconstruction to
-its normalized finite-Tor outputs with these uniform bounds. Transport the adjunction,
-unit and counit through the reconstruction equivalence. The canonical ambient proper/open
-realization and its published tower realization give left and integralLeft with exactly
-the displayed normalization. Their inherited shifts give leftShift.
-
-Apply the integral scalar-mate construction with these transported adjunctions and the
-same ambient realizations. For finite targets use the literal ambient derived extension;
-for completed integral extensions use the published strict-tower scalar functor. Ramified
-cofinality gives the required generator comparisons. The scalar-only assertion includes
-the normalized tensor unitor. Transport the tensor associator through the full inclusion
-to prove scalarComposition.
-All endpoint scalar choices are the fixed restrictions, so they are shared by every
-compactification. Repeat for each compactification; this assertion includes no rational
-localization and no common-field descent. Empty source uses zero operations and positive
-coefficient levels include the residue level. -/
+/-- Construct the finite and integral stages, without any field-stage adjunction, rational
+localization or common-field descent. -/
 theorem exists_ring_stage_assembly (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} (f : X ⟶ Y)
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

@@ -14,8 +14,10 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralConstructibleLinear
 
 /-! # Constant-scalar linearity of the normalized integral pullback
 
-Source: the rational paragraph of `prose-03-02`;
-Bhatt--Scholze, Lemma 6.5.9(4), and Stacks Tag 099N(5).
+## References
+
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(4)
+* Stacks Project, Tag 099N(5)
 -/
 
 @[expose] public section
@@ -290,28 +292,7 @@ private theorem pullComplex_action {X Y : Scheme.{u}} (f : X ⟶ Y)
 end Representatives
 
 /-- The normalized integral pullback preserves addition and the published constant
-valuation-ring action on ambient derived morphisms.
-Source: blueprint `prose-03-02`, rational paragraph;
-Bhatt--Scholze, Lemma 6.5.9(4), and Stacks Tag 099N(5).
-(blueprint: lem-sf-integral-derived-pullback-linear).
-
-Proof: use the good flat-term K-flat representatives and the natural comparison
-`integralDerivedPullbackComparison`. On each finite reduction the constant scalar a
-acts by its quotient class. Reduction, exact finite inverse image and restriction of
-scalars preserve addition and multiplication by this class. The quotient transition
-maps commute with these scalar actions. Thus the diagonal map on the two product
-coordinates of the shifted cone defining the Roos complex preserves addition and
-the constant scalar a, including the signed differential. Localization of complexes
-preserves the same action by `integralCoefficientLinear_existsUnique`. The good
-localization inverts quasi-isomorphisms and presents the entire ambient derived
-category. Addition descends through this localization; scalar multiplication is
-composition with the natural scalar endomorphism a times the identity, which is
-preserved on good representatives and hence on inverses and composites of localized
-maps. Finally conjugate by the specified natural representative comparison. Its
-components commute with the constant scalar action by linearity of composition.
-This proves both equations for the existing normalized descent, without selecting
-another pullback functor. The argument works for the zero object, identity maps,
-zero scalars and arbitrary scheme morphisms, and uses no coefficient flatness. -/
+valuation-ring action on ambient derived morphisms. -/
 theorem integralDerivedPullback_linear (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :

@@ -9,9 +9,11 @@ public import WeilConjectures.SmoothPurity.PurStrictScalar.CompactSupportScalarL
 
 /-! # Ordinary constant-to-completed scalar associativity
 
-Source: Stacks 03EK and 07A6. Successive adjunction transposes reduce the
-associativity square to the tensor units.
-(blueprint: lem-pur-constant-completed-ordinary-associativity).
+Successive adjunction transposes reduce the associativity square to the tensor units.
+
+## References
+
+* [Stacks Project, Tags 03EK and 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -26,9 +28,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.PurStrictScalar
 
-/-- The ordinary associator fixed by tensor-unit normalized adjunctions.
-Source: Stacks 03EK, 07A6
-(blueprint: def-pur-ordinary-scalar-associator). -/
+/-- The ordinary associator fixed by tensor-unit normalized adjunctions. -/
 def ordinaryScalarAssociator {W : Scheme.{u}}
     {R S T : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}
     (a : R ⟶ S) (b : S ⟶ T) (d : R ⟶ T) (h : a ≫ b = d) :

@@ -11,7 +11,12 @@ public import WeilConjectures.RingTheory.TorKernelBoundaryConstruction
 /-!
 # Naturality of the constructed Tor kernel boundary
 
-Source: Stacks Project, Algebra, Tags 00LZ and 00M0.
+We show that the boundary map `torKernelBoundary` is natural in the presentation.
+
+## References
+
+* [Stacks, Tag 00LZ]
+* [Stacks, Tag 00M0]
 -/
 
 @[expose] public section
@@ -74,15 +79,9 @@ private theorem boundary_cycles_naturality
   exact (sub_eq_zero.mp ht).symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The constructed boundary is natural; exactness alone is not a naturality hypothesis.
-
-Source: Stacks Project, Algebra, Tags 00LZ and 00M0.
-Proof: lift b between the projective resolutions. The difference between the two
-augmentation lifts factors through ker(q'). Its contribution to the boundary
-factors through the differential and hence vanishes on tensor cycles. The cycle
-maps thus commute, so their descents to homology commute. Resolution comparison
-identifies the induced homology map with Tor₁(b,M).
-(blueprint: lem-sc-p1-tor-kernel-boundary-naturality-of) -/
+/-- The constructed Tor kernel boundary is natural: for a morphism of surjections `q → q'`
+with induced map `c` on kernels, the boundary of `Tor₁(b, M) t` is the image under
+`c ⊗ M` of the boundary of `t`. -/
 theorem tor_kernel_boundary_naturality_of
     (R : Type u) [CommRing R] (M : ModuleCat.{u} R) :
     ∀ (F N F' N' : ModuleCat.{u} R) (q : F →ₗ[R] N) (q' : F' →ₗ[R] N')

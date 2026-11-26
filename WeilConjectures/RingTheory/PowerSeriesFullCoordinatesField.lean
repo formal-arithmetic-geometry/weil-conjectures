@@ -18,7 +18,11 @@ import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 
 /-! # Full parameter coordinates over a field
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07NM (1).
+A regular system of parameters of a power series ring over a field gives coordinates on it.
+
+## References
+
+* [Stacks, Tag 07NM] (part (1))
 -/
 
 @[expose] public section
@@ -29,25 +33,7 @@ set_option autoImplicit false
 
 namespace MvPowerSeries
 
-/-- A full regular parameter system gives coordinates on field power series.
-Source: Stacks Project, More on Algebra, Lemma Tag 07NM (1).
-(blueprint: lem-weil-pbc-power-series-full-coordinates-field)
-
-Proof: Obtain completeness, domain structure, dimension n and the variables' maximal
-ideal from `power_series_field_cohen_regular_complete`. Each entry of t is in the
-maximal ideal. Apply `exists_ringHom_of_isAdicComplete` to the coefficient inclusion
-and the entries of t, giving a ring endomorphism f which fixes constants and carries
-the standard variables to t. The image of the variables ideal is the maximal ideal
-because t generates it. Modulo that ideal the map is surjective: every series is
-congruent to its constant coefficient, by `quotient_first_variables`. The source is
-complete for the variables ideal and the target separated for its image. Mathlib's
-`surjective_of_mk_map_comp_surjective` gives surjectivity of f. A nonzero kernel element
-in this domain would be a nonzero divisor, so
-`ringKrullDim_succ_le_of_surjective` would give n+1 <= n, a contradiction. Thus f is
-bijective. Its constant values make it a K-algebra map, giving an algebra equivalence.
-Finally rename Fin t.length to Fin n using hlen and check the variable images.
-The argument includes n=0 and the empty parameter system.
--/
+/-- A full regular parameter system gives coordinates on field power series. -/
 theorem exists_algEquiv_full_parameters_field
     (K : Type u) [Field K] (n : ℕ) (t : List (MvPowerSeries (Fin n) K))
     (hparams : IsLocalRing.IsRegularSystemOfParameters t) (hlen : t.length = n) :

@@ -25,7 +25,7 @@ A *family of dualizing maps over a generic base*
 (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase`) is a map `θ_M : Ψ_M ω_{X₁} ⟶ ω_{X'}` for
 every trait model over a generic base, with the trace property for proper models with full
 generic fibre and the open restriction property, as for the dualizing maps of trait models over
-a base field (`NearbyCyclesModel.NearbyDualizingData`). Its existence is the node lemma
+a base field (`NearbyCyclesModel.NearbyDualizingData`). Its existence is
 `NearbyCyclesModel.nonempty_nearbyDualizingDataOfGenericBase`, proved downstream in
 `TraceFormula.Specialization.NearbyDualizingGenericBaseExistence` from the compact-support
 exchanges of compactifications. It restricts to a family of dualizing maps
@@ -98,10 +98,8 @@ variable (k' : Type u) [Field k'] (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k']
 
 /-- A *family of dualizing maps* of nearby cycles over the trait `S = Spec k'⟦t⟧` over generic
 bases: a map `θ_M : Ψ_M ω_{X₁} ⟶ ω_{X'}` for every trait model `M` of an `F`-scheme `X₁` over the
-generic base `(F, X₁)`, with the two characteristic properties of the dualizing maps
-`θ_M = β_a(ℚ̄_ℓ)` of blueprint `prose-E-15` (see
-`NearbyCyclesModel.nonempty_nearbyDualizingDataOfGenericBase`). This is the analogue over generic
-bases of `NearbyCyclesModel.NearbyDualizingData`. -/
+generic base `(F, X₁)`, with the trace property for proper models and the open restriction
+property. This is the analogue over generic bases of `NearbyCyclesModel.NearbyDualizingData`. -/
 structure NearbyDualizingDataOfGenericBase where
   /-- the dualizing map `θ_M : Ψ_M ω_{X₁} ⟶ ω_{X'}`. -/
   θ {F : Type u} [Field F] [Fact (ringChar F).Prime] [Fact (ringChar F ≠ ℓ)]
@@ -163,8 +161,7 @@ variable {k' ℓ} (D : NearbyDualizingDataOfGenericBase k' ℓ)
   (k : Type u) [Field k] [Algebra k k'] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 /-- A family of dualizing maps over generic bases restricts to a family of dualizing maps over
-the base field `k`, along `IsTraitModelOfBase.isTraitModelOfGenericBase`: for `ι : η ⟶ S ⟶ Spec k`
-the trait model of the base point is the trait as a model of the point along its `ε`. -/
+the base field `k`, along `IsTraitModelOfBase.isTraitModelOfGenericBase`. -/
 noncomputable def toNearbyDualizingData : NearbyDualizingData k k' ℓ where
   θ h := D.θ h.isTraitModelOfGenericBase
   pushforwardExchange_comp_map_θ_comp_trace h _ hgen := by

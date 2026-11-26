@@ -9,28 +9,26 @@ module
 public import Mathlib.RingTheory.MvPolynomial.Ideal
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
+/-!
+# Surjectivity of augmented polynomial truncations
+
+If a polynomial map `B[X₁, …, Xₙ] → C` compatible with an augmentation `ε : C → B` is
+surjective modulo the square of the augmentation ideal, it is surjective modulo every power.
+
+## References
+
+* [Stacks, Tag 05D5], surjectivity in the finite-truncation induction
+-/
+
 @[expose] public section
 
 universe u
 
 namespace Algebra
 
-/-- First-order surjectivity propagates to every augmented polynomial truncation.
-
-Source: Stacks Project, Tag 05D5, surjectivity in the finite-truncation induction.
-(blueprint: lem-sbc-formally-smooth-augmentation-truncations-surjective)
-
-Proof: Write I = ker ε and J for the variables ideal. Since f preserves augmentation,
-surjectivity modulo I² implies that every element of I is congruent modulo I² to
-f(p) for some p in J: the constant coefficient of p must vanish. Therefore every
-product of r elements of I is congruent modulo I^(r+1) to an image of a product of
-r elements of J. Expanding finite sums gives the same assertion for every element
-of I^r. Here coefficients in C can be replaced by their augmentations in B, since
-the difference is in I. Start at degree one, where constants represent every class
-because c - algebraMap B C (ε c) lies in I. Given a representative modulo I^r,
-correct its error in I^r by the polynomial just constructed to obtain a representative
-modulo I^(r+1). Degree zero is the zero quotient. This induction proves surjectivity
-for every r, including n = 0 and the zero base ring; formal smoothness is not used. -/
+/-- First-order surjectivity propagates to every augmented polynomial truncation: if
+`B[X]/J² → C/I²` is surjective, where `I = ker ε` and `J` is the variables ideal, then
+`B[X]/J^k → C/I^k` is surjective for every `k`. -/
 theorem bijective_augmented_polynomial_truncations_surjective
     (B C : Type u) [CommRing B] [CommRing C] [Algebra B C]
     (ε : C →ₐ[B] B) (n : ℕ)

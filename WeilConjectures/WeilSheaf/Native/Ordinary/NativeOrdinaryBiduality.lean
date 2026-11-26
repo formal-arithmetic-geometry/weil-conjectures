@@ -24,6 +24,18 @@ The biduality morphisms `M ⟶ 𝓗om(𝓗om(M, N), N)` of sheaves of `ℚ̄_ℓ
 (`AlgebraicGeometry.ProEtaleWeilSheaf.ordinaryBifunctorEvaluation`), hence define the double-dual
 morphism `M ⟶ Hom(Hom(M, I), I)` of hom complexes of `ℓ`-adic sheaves
 (`CochainComplex.bifunctorHomBidual`).
+
+## Implementation details
+
+Verdier biduality at the level of hom complexes is deduced from the constructible
+biduality `ProEtale.CondensedRing.isIso_verdierBiduality` of the condensed model. The
+derived double-dual morphism is the unit of the self-adjunction
+`RHom(-, I).rightOp ⊣ RHom(-, I)` (`DerivedCategory.bifunctorRHomSelfAdjunction`), and
+`ProEtale.CondensedRing.verdierBiduality` is the unit of the self-adjunction of `[-, ω_Z]`
+in the condensed model. The coefficient equivalence `ordinaryToCondensed` intertwines the two
+functors (`ProEtaleWeilSheaf.ordinaryRHomCondensedIso`), so the two units are isomorphisms at
+the same objects (`ProEtaleWeilSheaf.isIso_bifunctorRHomBidual_app_iff`); no comparison of
+the two double-dual morphisms themselves is needed.
 -/
 
 @[expose] public section
@@ -59,23 +71,12 @@ noncomputable abbrev ordinaryToCondensed :
   (ProEtale.AdicSheaf.forgetAb l Z.left ⋙
     Mod.comap (ProEtale.nativeModuleCoefficientIso l Z.left).hom).mapDerivedCategory
 
-/-- **Verdier biduality for `ℓ`-adic complexes, at the level of hom complexes** (blueprint:
-`theorem-verdier-biduality`, case (iv), for the model of `ℓ`-adic sheaves as sheaves of
-`ℚ̄_ℓ,Z`-modules). Let `Z` be a separated scheme of finite type over a field `k` of characteristic
-`≠ ℓ`, `I` a K-injective complex of `ℓ`-adic sheaves representing the dualizing complex
-`ω_Z = Ra_Z^! ℚ̄_ℓ` (`ProEtale.CondensedRing.dualizingComplex`), and `M` a complex of `ℓ`-adic
-sheaves which is bounded with constructible cohomology. Then the double-dual morphism
-`M ⟶ Hom(Hom(M, I), I)` of hom complexes is a quasi-isomorphism.
-
-This is the constructible biduality `ProEtale.CondensedRing.isIso_verdierBiduality` of the
-condensed model, read in the model of `ℓ`-adic sheaves. The derived double-dual morphism is the
-unit of the self-adjunction `RHom(-, I).rightOp ⊣ RHom(-, I)`
-(`DerivedCategory.bifunctorRHomSelfAdjunction`), and `ProEtale.CondensedRing.verdierBiduality`
-is the unit of the self-adjunction of `[-, ω_Z]` in the closed structure of the condensed model.
-The coefficient equivalence `ordinaryToCondensed` intertwines the two functors
-(`ProEtaleWeilSheaf.ordinaryRHomCondensedIso`), so the two units are isomorphisms at the same
-objects (`ProEtaleWeilSheaf.isIso_bifunctorRHomBidual_app_iff`); no comparison of the two
-double-dual morphisms themselves is needed. -/
+/-- **Verdier biduality for `ℓ`-adic complexes, at the level of hom complexes**, for the model
+of `ℓ`-adic sheaves as sheaves of `ℚ̄_ℓ,Z`-modules. Let `Z` be a separated scheme of finite type
+over a field `k` of characteristic `≠ ℓ`, `I` a K-injective complex of `ℓ`-adic sheaves
+representing the dualizing complex `ω_Z = Ra_Z^! ℚ̄_ℓ` (`ProEtale.CondensedRing.dualizingComplex`),
+and `M` a complex of `ℓ`-adic sheaves which is bounded with constructible cohomology. Then the
+double-dual morphism `M ⟶ Hom(Hom(M, I), I)` of hom complexes is a quasi-isomorphism. -/
 theorem quasiIso_bifunctorHomBidual_ordinary {M I : CochainComplex (ProEtale.AdicSheaf l Z.left) ℤ}
     [I.IsKInjective]
     (eI : Nonempty ((ordinaryToCondensed Z).obj (DerivedCategory.Q.obj I) ≅

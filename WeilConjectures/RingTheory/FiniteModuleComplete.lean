@@ -15,8 +15,12 @@ import Mathlib.RingTheory.Finiteness.Small
 /-!
 # Completeness of finite modules over complete Noetherian rings
 
-Source: Stacks Project, Algebra, Lemmas 031B and 00MA (3)
-(blueprint: lem-weil-pbc-finite-module-complete-over-complete-noetherian).
+A finite module over a Noetherian `J`-adically complete ring is `J`-adically complete.
+
+## References
+
+* [Stacks, Tag 031B]
+* [Stacks, Tag 00MA]
 -/
 
 @[expose] public section
@@ -44,17 +48,7 @@ private theorem finiteModuleCompleteSameUniverse
   exact (AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian J N).comp
     e.bijective
 
-/-- A finite module over a Noetherian adically complete ring is adically complete.
-Source: Stacks Project, Algebra, Lemmas 031B and 00MA (3)
-(blueprint: lem-weil-pbc-finite-module-complete-over-complete-noetherian).
-Proof: identify the completed ring with `R` using the hypothesis that `R` is
-`J`-adically complete. Tensoring this identification with `N` identifies
-`N` with `AdicCompletion J R ⊗[R] N`. Since `R` is Noetherian and `N` is
-finite, the completion-tensor theorem (Stacks 00MA (3), represented by
-`lem-weil-pbc-completion-finite-module-tensor`) identifies this tensor product
-with `AdicCompletion J N`. Under these identifications the canonical map is
-the composite of the two canonical maps, so it is bijective; by
-`AdicCompletion.of_bijective_iff`, this is `IsAdicComplete J N`. -/
+/-- A finite module over a Noetherian adically complete ring is adically complete. -/
 theorem finite_module_complete_over_complete_noetherian
     (R : Type u) [CommRing R] [IsNoetherianRing R]
     (J : Ideal R) [IsAdicComplete J R]

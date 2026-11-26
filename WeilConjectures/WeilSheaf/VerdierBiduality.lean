@@ -26,9 +26,9 @@ This file constructs the double-dual natural transformation `𝟭 ⟶ D_W D_W`
 (`AlgebraicGeometry.WeilComplex.toDualDual`) and shows that it is an isomorphism when the
 underlying `ℓ`-adic complex of `W` on the geometric fibre `X̄` is the dualizing complex of `X̄`
 (`AlgebraicGeometry.WeilComplex.nonempty_iso_dual_rightOp_comp_dual`). This is Verdier biduality
-for Weil complexes (blueprint: `theorem-verdier-biduality`).
+for Weil complexes.
 
-## Construction
+## Implementation details
 
 * The biduality morphisms `A ⟶ [[A, B], B]` of pro-étale Weil sheaves
   (`AlgebraicGeometry.ProEtaleWeilSheaf.bidual`) are those of the underlying `ℓ`-adic sheaves,
@@ -37,20 +37,16 @@ for Weil complexes (blueprint: `theorem-verdier-biduality`).
 * The double-dual morphisms of hom complexes then descend to the derived category
   (`DerivedCategory.bifunctorRHomBidual`), giving `toDualDual`.
 
-## Proof of biduality
-
 Forgetting the Weil structure reflects isomorphisms. It carries the double-dual morphism of hom
 complexes of pro-étale Weil sheaves to that of `ℓ`-adic sheaves
 (`CochainComplex.map_bifunctorHomBidual`), which is a quasi-isomorphism on bounded constructible
 complexes when the target represents the dualizing complex of `X̄`
 (`AlgebraicGeometry.ProEtaleWeilSheaf.quasiIso_bifunctorHomBidual_ordinary`).
 
-## The dualizing complex
-
 The underlying complex on `X̄` of `Ra_X^! ℚ̄_ℓ`, for the exceptional inverse image of Weil
 complexes, is the dualizing complex of `X̄`
-(`AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_of_adjunction`, blueprint
-`prose-10-20`, in `WeilConjectures.WeilSheaf.UpperShriekGeometric`).
+(`AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_of_adjunction`, in
+`WeilConjectures.WeilSheaf.UpperShriekGeometric`).
 
 The constructible biduality of hom complexes of `ℓ`-adic sheaves
 (`AlgebraicGeometry.ProEtaleWeilSheaf.quasiIso_bifunctorHomBidual_ordinary`) is read off from the
@@ -189,9 +185,9 @@ noncomputable def toDualDual : 𝟭 (WeilComplex k₀ l X) ⟶ (dual W).rightOp 
       (ProEtaleWeilSheaf.precompQuasiIso k₀ l X
         (DerivedCategory.kInjectiveRep W.obj))).naturality f.hom)
 
-/-- **Verdier biduality for Weil complexes** (blueprint: `theorem-verdier-biduality`): if the
-underlying complex on the geometric fibre `X̄` of the Weil complex `W` is the dualizing complex
-of `X̄`, the double-dual morphism `K ⟶ D_W D_W K` is an isomorphism. -/
+/-- **Verdier biduality for Weil complexes**: if the underlying complex on the geometric fibre `X̄`
+of the Weil complex `W` is the dualizing complex of `X̄`, the double-dual morphism
+`K ⟶ D_W D_W K` is an isomorphism. -/
 theorem isIso_toDualDual_app
     (hW : Nonempty ((ProEtaleWeilSheaf.nativeGeometricForget k₀ l X).obj W.obj ≅
       (ObjectProperty.ι _).obj (CondensedRing.dualizingComplex l (geometricFiberOver X))))
@@ -235,8 +231,7 @@ theorem isIso_toDualDual_app
     exact ObjectProperty.prop_of_iso _ ((ProEtaleWeilSheaf.nativeGeometricForget k₀ l X).mapIso
       e.symm ≪≫ F.mapDerivedCategory.mapIso (U.mapDerivedCategoryFactors.app M)) hK
 
-/-- **Verdier biduality for Weil complexes** (blueprint: `theorem-verdier-biduality`), as a
-natural isomorphism `𝟭 ≅ D_W D_W`. -/
+/-- **Verdier biduality for Weil complexes**, as a natural isomorphism `𝟭 ≅ D_W D_W`. -/
 theorem nonempty_iso_dual_rightOp_comp_dual
     (hW : Nonempty ((ProEtaleWeilSheaf.nativeGeometricForget k₀ l X).obj W.obj ≅
       (ObjectProperty.ι _).obj (CondensedRing.dualizingComplex l (geometricFiberOver X)))) :

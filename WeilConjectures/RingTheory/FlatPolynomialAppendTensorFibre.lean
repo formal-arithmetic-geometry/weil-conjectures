@@ -19,8 +19,24 @@ import WeilConjectures.RingTheory.FlatOverRegular
 /-!
 # Flatness of the polynomial-append closed-fibre map
 
-Source: Stacks Project, Smoothing Ring Maps, Tag 07FH, lemma-solution-modulo,
-property (1); Algebra, Tags 00OP and 07DY.
+Let `Λ` be a Noetherian `k`-algebra, `q` a prime of `Λ`, `x_j ∈ Λ`, and `z_i ∈ q` whose images
+form a regular sequence on the closed fibre of `k[X_j]_{p₀} → Λ_q`. Then `Λ_q`, tensored with the
+closed fibre of `k[X_j]_{p₀} → k[X_j, Y_i]_{p₁}`, is flat over that closed fibre.
+
+## Implementation details
+
+Reduction by `p₀` identifies the closed fibre `A₁ / m₀ A₁` with the localization of
+`κ(p₀)[Y_i]` at its origin ideal, since `p₁ = p₀ P₁ + (Y_i)`. This is a regular local ring
+with parameters `Y_i`, which map to the given regular sequence on `S = Λ_q / p₀ Λ_q`, so the
+induced map is flat. The quotient-tensor equivalence identifies the tensor fibre with `S`. No
+initial flatness or regularity hypothesis on `S` is used. The equality `hc` fixes the
+canonical inclusion map; by proof irrelevance its choice is immaterial.
+
+## References
+
+* [Stacks, Tag 07FH], property (1)
+* [Stacks, Tag 00OP]
+* [Stacks, Tag 07DY]
 -/
 
 @[expose] public section
@@ -31,30 +47,7 @@ universe u v
 namespace Algebra
 
 /-- The closed fibre of adjoining polynomial coordinates is flat on a target where
-those coordinates form a regular sequence on the original closed fibre.
-Source: Stacks Project, Tag 07FH, lemma-solution-modulo, property (1);
-Algebra, Tags 00OP and 07DY.
-(blueprint: lem-weil-pbc-flat-polynomial-append-tensor-fibre).
-
-Proof: Write A₀ = k[X_j]_{p₀}, A₁ = k[X_j,Y_i]_{p₁}, and L = Λ_q.
-Reduction by p₀ identifies A₁/m₀A₁ with κ(p₀)[Y_i] localized at its
-origin ideal. Modulo q every new coordinate is zero. Polynomial evaluation therefore gives
-p₁ = p₀P₁ + (Y_i): the constant-in-Y term is in the kernel exactly when its
-coefficient lies in p₀. Inverting P₀ \ p₀ and reducing modulo p₀ leaves
-κ(p₀)[Y_i] with contracted prime precisely (Y_i).
-Localization and quotient universal properties give the canonical comparison,
-carrying the variable images to the standard origin parameters. By Tag 00OP
-the source fibre is regular local of dimension e, with these e generators of
-its maximal ideal. Let S = L/p₀L. The induced local map from the source fibre
-to S takes the origin parameters to the given regular sequence. The final
-quotient is nonzero by regularity; thus S is a Noetherian local ring. Tag 07DY
-makes this map flat. The quotient-tensor equivalence identifies
-(A₁/m₀A₁) ⊗[A₁] L with S as modules over A₁/m₀A₁, since the localized
-first-coordinate map is the composite of α and β. Transport the flatness
-along that equivalence. For e = 0 the source fibre is κ(p₀) and flatness is
-flatness over a field. No initial flatness, generation, or regular-local
-hypothesis on S is used. The equality hc fixes the canonical inclusion map;
-proof irrelevance makes its choice immaterial. -/
+those coordinates form a regular sequence on the original closed fibre. -/
 theorem flat_tensor_fibre_polynomial_append_of_regular_sequence
     (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]
     [IsNoetherianRing Λ] (q : Ideal Λ) [q.IsPrime]

@@ -13,8 +13,21 @@ import all WeilConjectures.SmoothPurity.Compact.CompactSupportOpenScalarRestrict
 
 /-! # Ordinary open evaluation and horizontal coefficient maps
 
-Source: Stacks Project, Tags 03DI, 03DA and 0941; Zheng 4.1 and 4.10.
-(blueprint: lem-weil-compact-support-ordinary-open-transition).
+For an open immersion `j`, we define the ordinary open evaluation comparison between extension
+by zero of coefficient systems and levelwise extension by zero, and show that it commutes with
+the horizontal coefficient transition maps.
+
+## Implementation details
+
+Ordinary open evaluation is defined as the inverse of the normalized restriction mate,
+transported by the unit-preserving single-level comparison. The compatibility with horizontal
+maps is checked on transposes under the extension-by-zero/restriction adjunction; no flatness
+or cartesian condition is used.
+
+## References
+
+* [Stacks, Tags 03DI, 03DA and 0941](https://stacks.math.columbia.edu/tag/03DI)
+* Zheng, 4.1 and 4.10
 -/
 
 @[expose] public noncomputable section
@@ -109,11 +122,7 @@ private theorem inverseMate_unit
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Invertibility of the ordinary open-evaluation mate, before localization.
-Source: Stacks 03DI; Zheng 4.1 and 4.10.
-(blueprint: lem-weil-compact-support-ordinary-open-transition).
-Proof: use the native coefficientwise open-extension mate theorem for the specified
-coefficient rings and quotient maps. -/
+/-- The ordinary open-evaluation mate is an isomorphism (before localization). -/
 theorem compactSupportOrdinaryOpenMate_isIso
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (n : ℕ) :
     IsIso ((mateEquiv
@@ -126,9 +135,7 @@ theorem compactSupportOrdinaryOpenMate_isIso
     (compactSupportSystemQuotient l E) j n
 
 /-- Ordinary open evaluation, defined as the inverse of the normalized restriction mate,
-then transported by the unit-preserving single-level comparison.
-Source: Stacks 03DI; Zheng 4.1 and 4.10.
-(blueprint: lem-weil-compact-support-ordinary-open-transition). -/
+then transported by the unit-preserving single-level comparison. -/
 def compactSupportOrdinaryOpenEvaluation {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j] (n : ℕ) :
     ProEtale.VaryingRing.extension (compactSupportSystemLevel l E)
@@ -238,21 +245,8 @@ private theorem nativeOpenTransition {X Z : Scheme.{u}} (j : X ⟶ Z)
     (compactSupportOrdinaryPullbackTransition l E j h)
     (scalarJ_unit j (compactSupportLevelQuotient l E m n h)) M
 
-/-- Horizontal compatibility before passing to complexes and localization.
-Source: Stacks 03DI, lemma-extension-by-zero; 03DA and 0941; Zheng 4.1 and 4.10.
-(blueprint: lem-weil-compact-support-ordinary-open-transition).
-Proof: transpose both sides under extension by zero and restriction to the open.
-The inverse-mate definition of ordinary evaluation identifies its transpose with
-restriction evaluation followed by the evaluated system unit. In literal open-site
-coordinates, evaluation and restriction merely precompose the section functor.
-The two horizontal maps are therefore the same restriction along (n,V) to (m,V).
-Their equality with the system unit follows from naturality of that unit at this
-arrow. The single-level comparison compactSupportOpenModel preserves the open
-units. The identity on section carriers defining the realization comparisons, and
-the unit normalization of sfOpenRestriction, identify the resulting coefficient
-comparison with the published sfOpenRestriction. The adjunction Hom equivalence
-is injective, so equality of these transposes gives the asserted square. No flatness
-or cartesian condition is used, including when m=n or either scheme is empty. -/
+/-- Ordinary open evaluation commutes with the horizontal coefficient transitions
+`B_m → B_n`, before passing to complexes and localization. -/
 theorem compactSupportOrdinaryOpenTransition
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     {m n : ℕ} (h : n ≤ m) (M : coefficientSequenceModules.{u, u} l E X) :

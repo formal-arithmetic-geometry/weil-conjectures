@@ -15,9 +15,8 @@ import WeilConjectures.PoincareDuality.PullbackIdentitiesScalarExtension
 
 /-! # Normalized inverse comparisons at integral and field coefficient stages
 
-This is the independently compiled inverse-comparison argument from the automorphism
-stage-equivalence node, retaining its actual integral, rational and pair components.
-(blueprint: lem-sf-automorphism-inverse-comparison-descent).
+Common setting for the normalized inverse comparisons of the automorphism stage equivalence,
+with its integral, rational and pair components.
 -/
 
 @[expose] public noncomputable section

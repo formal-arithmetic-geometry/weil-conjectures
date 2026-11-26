@@ -16,8 +16,7 @@ public import WeilConjectures.Topology.Sheaves.SectionSupport
 Let `X` be a noetherian topological space of dimension `d` in which every irreducible closed
 subset has a generic point (for instance the underlying space of a noetherian scheme). Then
 `Hᵠ(X, F) = 0` for every abelian sheaf `F` on `X` and every `q > d`
-(`TopCat.Sheaf.subsingleton_H_of_topologicalKrullDim_lt`, blueprint
-`lemma-uniform-bounds-pro-etale-affines`).
+(`TopCat.Sheaf.subsingleton_H_of_topologicalKrullDim_lt`).
 -/
 
 @[expose] public section
@@ -309,13 +308,11 @@ theorem subsingleton_H_of_isSupportedIn (n : ℕ) :
 end Vanishing
 
 
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: The Zariski dimension bound (Grothendieck
-vanishing).
-
-Let `X` be a noetherian topological space of dimension at most `d`, in which every irreducible
-closed subset has a generic point. Then `Hᵠ(X, F) = 0` for every abelian sheaf `F` on `X` and
-every `q > d`. The blueprint states this for the underlying space of a noetherian scheme, which
-is quasi-sober (`AlgebraicGeometry.Scheme.subsingleton_H_of_topologicalKrullDim_lt`). -/
+/-- **Grothendieck vanishing.** Let `X` be a noetherian topological space of dimension at most
+`d`, in which every irreducible closed subset has a generic point. Then `Hᵠ(X, F) = 0` for every
+abelian sheaf `F` on `X` and every `q > d`. This applies to the underlying space of a noetherian
+scheme, which is quasi-sober (`AlgebraicGeometry.Scheme.subsingleton_H_of_topologicalKrullDim_lt`).
+-/
 @[stacks 02UZ]
 theorem subsingleton_H_of_topologicalKrullDim_lt [NoetherianSpace X] [QuasiSober X]
     (F : TopCat.Sheaf AddCommGrpCat.{u} X) {q : ℕ}

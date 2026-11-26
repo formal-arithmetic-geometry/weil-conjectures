@@ -11,8 +11,17 @@ import Mathlib.CategoryTheory.Limits.MorphismProperty
 
 /-! # Small indices for ind-étale presentations
 
-Source: the universe reduction in the final paragraph of the continuity-map detail,
-sec-proetale-coefficients/sk-def-pe-classical-definition.
+An ind-étale ring map presented by a filtered diagram indexed in a larger universe admits a
+presentation indexed in the small universe.
+
+## Implementation details
+
+Let `E` be the category of finitely presented étale `R`-algebras with a map to `B`; it is
+essentially small, has finite colimits (coequalizers of étale algebras are étale since the
+diagonal of an étale map is open and closed), hence is filtered. Its colimit `C` is ind-étale
+with a map `p : C → B`, and the given large presentation supplies a section `s : B → C`. So `B`
+is a retract of `C`, and a retract of an ind-étale algebra is ind-étale: `B` is the colimit of
+the sequence `C → C → …` along the idempotent `s ∘ p`. Zero rings need no special treatment.
 -/
 
 @[expose] public section
@@ -75,33 +84,8 @@ private theorem ind_retract {C : Type*} [Category C] [LocallySmall.{u} C]
   exact hD
 
 set_option backward.defeqAttrib.useBackward true in
-/-- A filtered étale presentation with a larger index admits a small presentation.
-Source: the final paragraph of the continuity-map detail and its finite-presentation
-universe reduction (auxiliary; not a blueprint node).
-
-Proof: Fix a universe-u map R → B and its larger filtered presentation. Let E be the
-category of finitely presented étale R-algebras equipped with a map to B. Finite
-presentations and their maps into B give E a universe-u skeleton. E has finite
-colimits: the initial object is R, coproducts are tensor products, and coequalizers
-are étale quotients. For the last assertion, the equalizer of two maps between affine
-étale R-schemes is the pullback of an affine étale diagonal; that diagonal is both
-open and closed, so the equalizer is again affine étale. These constructions retain
-the maps to B. Thus E is filtered. Form its small ring colimit C, an ind-étale
-R-algebra, with the canonical map p : C → B.
-
-The original stages and their maps to B define objects of E, hence a compatible
-cocone to C. The given large colimit property supplies s : B → C. On every original
-stage p ∘ s is the given map to B, so p ∘ s = id. All maps respect R because the
-nonempty index supplies a stage. Consequently B is a retract of C as an R-algebra.
-A retract of an ind-étale algebra is ind-étale: if e = s ∘ p, the countable diagram
-C --e--> C --e--> ... has colimit B, with projections p. Indeed a cocone with
-components a_n satisfies a_n = a_(n+1) e; idempotence implies a_n e = a_n and then
-all a_n coincide, and a_0 s is the unique factorization through p. Countable
-filtered colimits of ind-étale algebras are ind-étale by flattening their small
-presentations (ObjectProperty.ind_ind, using finite presentation of étale algebras).
-This gives a universe-u presentation of B. The argument also includes zero rings
-and empty spectra: the zero algebra is étale and the indexing category has the
-initial object R, so neither nonemptiness nor the coequalizer argument excludes them. -/
+/-- A ring map that is ind-étale with respect to filtered diagrams in universe `u + 1` is
+ind-étale with respect to filtered diagrams in universe `u`. -/
 theorem CommRingCat.ind_etale_small_index :
     MorphismProperty.ind.{u + 1} CommRingCat.etale.{u} ≤
       MorphismProperty.ind.{u} CommRingCat.etale.{u} := by

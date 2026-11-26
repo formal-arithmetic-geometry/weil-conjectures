@@ -43,6 +43,10 @@ Writing `T` as the limit of the `X_U ×_{𝔸ʳ} V` over the affine étale neigh
 of `X` along the étale map `U ×_{𝔸ʳ} V ⟶ Y` through which `ȳ` lifts, so the transition map is
 injective on the stalk at `ȳ`
 (`AlgebraicGeometry.Etale.injective_sheafFiber_map_higherDirectImageTransition`).
+
+## References
+
+* [Stacks, Tag 0F0X]
 -/
 
 @[expose] public section
@@ -227,11 +231,7 @@ theorem Etale.isZero_sheafFiber_higherDirectImage_of_isAffineOpen
 finite type, where `Y` is separated and locally of finite type over a field `k`, let `Λ` be a
 finite ring of exponent invertible in `k` and `G` an étale sheaf of `Λ`-modules on `X`. If
 `dim X ≤ N` and `y ∈ Y` has `dim {y}⁻ = r`, then the stalk of `R^q f_* G` at `y` vanishes for
-`q + r > N`.
-
-This is the stalk form of Stacks, Lemma 59.95.8 (Tag `0F0X`): `R^q f_*` carries sheaves supported
-in dimension `≤ N` to sheaves supported in dimension `≤ N - q`. It is the input to the cosupport
-side of Artin–Gabber (blueprint `lem-per-artin-gabber-affine-curve`, Step 3). -/
+`q + r > N`. This is the input to the cosupport side of Artin–Gabber. -/
 @[stacks 0F0X]
 theorem Etale.isZero_sheafFiber_higherDirectImage_of_isAffineHom
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f] [LocallyOfFiniteType f]

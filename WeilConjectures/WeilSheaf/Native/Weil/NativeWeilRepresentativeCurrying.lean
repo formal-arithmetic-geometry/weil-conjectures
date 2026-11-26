@@ -10,7 +10,21 @@ import all WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryRepresentativ
 
 /-! # Derived currying from native tensor representatives
 
-Source: Stacks 08J9 and 0A97; native ringed tensor model, adjunction step.
+This is the adjunction step of the native ringed tensor model.
+
+## Implementation details
+
+The generic `NativeCurrying` chain and homotopy equivalences are applied to the presentation's
+underived parameterized adjunction; its acyclic-test K-flats make `Hom(P, I)` K-injective. The
+derived Hom bijection into a K-injective target, combined with the tensor model and the Hom
+representatives, is natural in all three complex variables, and is extended through
+precomposition with the product of the relevant localizations, which is fully faithful. The
+preimage equation fixes the representative uncurrying formula. No forgetting comparison or
+monoidal coherence is needed.
+
+## References
+
+* Stacks 08J9, 0A97
 -/
 
 @[expose] public noncomputable section
@@ -286,22 +300,7 @@ private theorem result (N : Presentation H₀)
 end PresentedCurrying
 
 /-- The presented native total tensor has natural derived currying, with its
-componentwise uncurrying formula on K-flat sources and K-injective targets.
-
-Source: Stacks 08J9 and 0A97; native ringed tensor model, step 2.
-(blueprint: lem-sf-native-weil-representative-currying).
-
-Proof: apply the existing generic NativeCurrying chain and homotopy equivalences
-to the presentation's underived parameterized adjunction. Its acyclic-test
-K-flats make Hom(P,I) K-injective. Combine the derived Hom bijection into a
-K-injective target with the presentation's tensor model and the supplied Hom
-representatives. The two representative naturality squares make this bijection
-natural in all three complex variables. Precomposition with the product of
-the ordinary localization, the presented K-flat localization and K-injective
-localization is fully faithful. Extend the natural isomorphism of Hom functors
-through it. Its preimage equation fixes the representative uncurrying formula;
-the generic chain calculation supplies its unsigned degree-zero components.
-No forgetting comparison or monoidal coherence is needed for this proof. -/
+componentwise uncurrying formula on K-flat sources and K-injective targets. -/
 theorem native_weil_representative_currying
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]

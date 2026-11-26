@@ -18,8 +18,7 @@ For global functions `a, b` on a `k₀`-scheme `X`, the underlying sheaves on `X
 any scheme over `𝔸¹_{k̄}` becomes trivial over the base change of the geometric Artin–Schreier
 covering, so that `𝓗om(h^* ℒ_ψ, N) ⊗ h^* ℒ_ψ ≅ N`
 (`AlgebraicGeometry.nonempty_tensorLeft_ihom_upperStar_artinSchreier`). Together they give
-`ℒ_{ψ,a} ⊗ ℒ_{ψ,b} ≅ ℒ_{ψ,a+b}` for the underlying sheaves (blueprint
-`lemma-artin-schreier-character-sheaf`).
+`ℒ_{ψ,a} ⊗ ℒ_{ψ,b} ≅ ℒ_{ψ,a+b}` for the underlying sheaves.
 -/
 
 @[expose] public section
@@ -49,15 +48,14 @@ lemma affineLine.eq_homOfSection {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 omit [Fact (ringChar k₀ ≠ l)] in
-/-- An isomorphism `A ≅ 𝓗om(B, C)` of pro-étale Weil sheaves gives one of the underlying sheaves
-(blueprint `lemma-artin-schreier-character-sheaf`). -/
+/-- An isomorphism `A ≅ 𝓗om(B, C)` of pro-étale Weil sheaves gives one of the underlying sheaves. -/
 lemma ProEtaleWeilSheaf.nonempty_carrier_iso_ihom_of_iso {A B C : ProEtaleWeilSheaf k₀ l X}
     (e : A ≅ ProEtaleWeilSheaf.ihom k₀ l X B C) :
     Nonempty (A.carrier ≅ (ProEtale.AdicSheaf.ihom B.carrier).obj C.carrier) :=
   ⟨(Endofunctor.IsoAlgebra.forget _).mapIso e⟩
 
 /-- `ℒ_{ψ,a} ≅ 𝓗om(ℒ_{ψ,b}, ℒ_{ψ,a+b})` for the underlying sheaves on `X̄`, for global functions
-`a, b` on `X` (blueprint `lemma-artin-schreier-character-sheaf`). -/
+`a, b` on `X`. -/
 theorem nonempty_iso_ihom_carrier_artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l))
     (a b : Γ(X, ⊤)) :
     Nonempty ((artinSchreierOf ψ a).obj.carrier ≅ (ProEtale.AdicSheaf.ihom
@@ -91,7 +89,7 @@ theorem artinSchreierOf_obj_carrier (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X
   rw [artinSchreierOf_eq, WeilSheaf.upperStar_obj_obj_carrier]
 
 /-- `ḡ₁^* ℒ_ψ ≅ 𝓗om(ḡ₂^* ℒ_ψ, ḡ₃^* ℒ_ψ)` on `X̄` for morphisms `g₁, g₂, g₃ : X ⟶ 𝔸¹` given by
-functions `a`, `b` and `a + b` (blueprint `lemma-artin-schreier-character-sheaf`). -/
+functions `a`, `b` and `a + b`. -/
 theorem nonempty_iso_ihom_upperStar_artinSchreier_of_eq (ψ : AddChar k₀ (PadicAlgCl l))
     (a b : Γ(X, ⊤)) (g₁ g₂ g₃ : X ⟶ affineLine k₀) [g₁.IsOver (Spec (CommRingCat.of k₀))]
     [g₂.IsOver (Spec (CommRingCat.of k₀))] [g₃.IsOver (Spec (CommRingCat.of k₀))]
@@ -137,7 +135,7 @@ lemma ProEtale.nonempty_upperStar_upperStar_upperStar_iso_unit {P Y A A' B : Sch
     (ProEtale.adicUpperStar l q).mapIso t.symm ≪≫ ProEtale.adicUpperStarUnitIso l q⟩
 
 /-- For `h : Y ⟶ 𝔸¹_{k̄}`, the sheaf `h^* ℒ_ψ` becomes trivial on the base change along `h` of the
-geometric Artin–Schreier covering `ĀS` (blueprint `lemma-artin-schreier-character-sheaf`). -/
+geometric Artin–Schreier covering `ĀS`. -/
 theorem nonempty_upperStar_upperStar_artinSchreier_iso_unit (ψ : AddChar k₀ (PadicAlgCl l))
     {Y : Scheme.{u}} (h : Y ⟶ Ā) :
     Nonempty ((pullback.fst (h ≫ Scheme.Hom.geometricFiberMap (affineLine.smul k₀ 1)
@@ -151,8 +149,7 @@ theorem nonempty_upperStar_upperStar_artinSchreier_iso_unit (ψ : AddChar k₀ (
       ((ProEtale.adicUpperStar l ĀS).mapIso (affineLine.artinSchreierCarrierIso ψ)).symm)
 
 /-- Tensoring with `h^* ℒ_ψ` inverts `𝓗om(h^* ℒ_ψ, -)`: `𝓗om(h^* ℒ_ψ, N) ⊗ h^* ℒ_ψ ≅ N`, as
-`h^* ℒ_ψ` is trivial on a quasi-compact surjective étale covering
-(blueprint `lemma-artin-schreier-character-sheaf`). -/
+`h^* ℒ_ψ` is trivial on a quasi-compact surjective étale covering. -/
 theorem nonempty_tensorLeft_ihom_upperStar_artinSchreier (ψ : AddChar k₀ (PadicAlgCl l))
     {Y : Scheme.{u}} (h : Y ⟶ Ā) (N : ProEtale.AdicSheaf l Y) :
     Nonempty ((Mod.tensorLeft ((h)^*ᵃ[l].obj (artinSchreier ψ 1).obj.carrier)).obj

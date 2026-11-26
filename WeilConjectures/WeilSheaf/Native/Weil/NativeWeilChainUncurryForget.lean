@@ -8,7 +8,12 @@ module
 public import WeilConjectures.WeilSheaf.NativeWeilTensorPresentation.NativeWeilTensorPresentation
 import all WeilConjectures.WeilSheaf.Native.NativeHomEvaluationSquareAllSources
 
-/-! # Forgetting homogeneous uncurrying maps -/
+/-! # Forgetting homogeneous uncurrying maps
+
+## References
+
+* Stacks Project, Tags 08J9 and 0A97.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -37,18 +42,7 @@ private theorem uncurry_summand_comparison
 
 -- Comparing total components instantiates the two native tensor-Hom adjunctions.
 /-- Forgetting the two normalized chain-level uncurrying maps gives the same map
-after the total-tensor comparison.
-
-Source: Stacks 08J9 and 0A97; native tensor-model evaluation argument, computation
-on homogeneous tensor summands.
-(blueprint: lem-sf-native-weil-chain-uncurry-forget).
-
-Proof: test the two chain maps on every coproduct inclusion in each degree.
-Cancel the underived tensor isomorphism and use N.chain_summand to identify the
-inverse total comparison on that inclusion. Apply the two supplied component
-normalizations. The projection condition on c identifies the curried components,
-and N.underived_uncurry identifies their uncurrying. The coproduct universal
-property and degreewise extensionality conclude the chain-map equality. -/
+after the total-tensor comparison. -/
 theorem native_weil_chain_uncurry_forget
     (M : NativeClosedHomModels k₀ l X)
     (S : CoefficientClosedStructure M.ordinaryHom)

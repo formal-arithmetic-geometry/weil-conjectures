@@ -29,12 +29,19 @@ import all WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 /-!
 # Constant coefficient objects are bounded constructible
 
-Source: Weil blueprint, ordinary and compactly supported cohomology, order 1510;
-Bhatt--Scholze, Sections 3.5, 6.5 and Definition 6.8.1, Lemma 6.8.2
-(blueprint: lem-weil-constant-coefficient-objects-constructible).
 The finite and completed coefficient objects are the regular module sheaves in degree zero.
-All positive levels are indexed by n : ℕ, denoting exponent n+1. Rationalization is raw,
-and algebraically closed coefficients use the recorded small finite-field models.
+
+## Implementation details
+
+All positive levels are indexed by `n : ℕ`, denoting exponent `n + 1`. Rationalization is raw,
+and algebraically closed coefficients use the recorded small finite-field models. Exact
+restriction commutes with placing a sheaf in degree zero via Mathlib's specified
+single-functor comparison.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Sections 3.5, 6.5,
+  Definition 6.8.1 and Lemma 6.8.2.
 -/
 
 @[expose] public section
@@ -127,26 +134,20 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- The finite constant ring sheaf, as its regular module in degree zero.
-Source: blueprint order 1510; Bhatt--Scholze, Section 6.5
-(blueprint: lem-weil-constant-coefficient-objects-constructible). -/
+/-- The finite constant ring sheaf, as its regular module in degree zero. -/
 noncomputable def finiteConstantCoefficientObject (n : ℕ) :
     proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E (n + 1)) :=
   (DerivedCategory.singleFunctor _ 0).obj
     (SheafOfModules.unit (integralCoefficientSheaf l E Y n))
 
-/-- The completed coefficient ring, as its regular module in degree zero.
-Source: Bhatt--Scholze, Definition 6.8.1, Lemma 6.8.2(1)
-(blueprint: lem-weil-constant-coefficient-objects-constructible). -/
+/-- The completed coefficient ring, as its regular module in degree zero. -/
 noncomputable def integralConstantCoefficientObject :
     DerivedCategory (scalarReductionSource l E Y) :=
   (DerivedCategory.singleFunctor _ 0).obj
     (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y))
 
 /-- The completed-ring projection as a linear map into the restricted quotient module.
-The image of 1 is the compatible section 1, so its sectionwise formula is precisely π_n.
-Source: Bhatt--Scholze, Sections 3.5 and 6.5
-(blueprint: lem-weil-constant-coefficient-objects-constructible). -/
+The image of `1` is the compatible section `1`, so its sectionwise formula is `π_n`. -/
 noncomputable def constantCoefficientProjection (n : ℕ) :
     SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y) ⟶
       (scalarReductionRestriction l E Y n).obj
@@ -157,10 +158,7 @@ noncomputable def constantCoefficientProjection (n : ℕ) :
       (fun {_ _} f ↦ map_one ((integralCoefficientSheaf l E Y n).obj.map f).hom))
 
 /-- The canonical derived reduction map: transpose the actual coefficient projection
-through the normalized derived tensor/restriction adjunction. Exact restriction commutes
-with placing a sheaf in degree zero via Mathlib's specified single-functor comparison.
-Source: Bhatt--Scholze, Sections 3.5 and 6.5
-(blueprint: lem-weil-constant-coefficient-objects-constructible). -/
+through the normalized derived tensor/restriction adjunction. -/
 noncomputable def constantCoefficientReductionMap (n : ℕ) :
     (scalarReductionDerivedExtension l E Y n).obj
         (integralConstantCoefficientObject l E Y) ⟶ finiteConstantCoefficientObject l E Y n :=
@@ -169,18 +167,8 @@ noncomputable def constantCoefficientReductionMap (n : ℕ) :
       ((scalarReductionRestriction l E Y n).mapDerivedCategorySingleFunctor 0).inv.app
         (SheafOfModules.unit (integralCoefficientSheaf l E Y n)))
 
-/-- Part 1: the finite constant object is bounded constructible, and its underlying
-sheaf is locally constant on Y itself, with finite stalks isomorphic to A_{E,n+1}.
-Source: blueprint order 1510; Bhatt--Scholze, Section 6.5
-(blueprint: lem-weil-constant-coefficient-objects-constructible).
-Proof: the integer ring is a DVR with finite residue field, so all its positive-power
-quotients are finite (lem-weil-valued-dvr-finite-quotients). Use the single stratum Y,
-with identity immersion; Y is locally closed and constructible in itself. The identity
-cover trivializes the constant regular module. The constant germ calculation
-(lem-weil-proetale-constant-sheaf-stalk) identifies each geometric stalk with the
-coefficient ring, hence makes it finite. A single complex has this constructible sheaf
-as H^0 and zero cohomology in every other degree. This is exactly the finite-torsion
-constructibility condition. The empty scheme has no geometric points and is allowed. -/
+/-- The finite constant object is bounded constructible, and its underlying sheaf is locally
+constant on `Y` itself, with finite stalks isomorphic to `A_{E,n+1}`. -/
 theorem finiteConstantCoefficient_constructible (n : ℕ) :
     intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) Y
         (finiteConstantCoefficientObject l E Y n) ∧
@@ -224,23 +212,9 @@ theorem finiteConstantCoefficient_constructible (n : ℕ) :
   exact eM.hom.hom.map_smul _ _
 
 -- The normalized adjunction comparison traverses several localization isomorphisms.
-/-- Part 2, with the same integral membership in both recorded presentations.
-Source: blueprint order 1510; Bhatt--Scholze, Definition 3.5.2, Section 6.5,
-Definition 6.8.1 and Lemma 6.8.2(1)
-(blueprint: lem-weil-constant-coefficient-objects-constructible).
-Proof: the regular module in degree zero is K-flat, since tensoring with it is the
-identity on complexes. Compute each reduction by this representative: multiplication
-R_n tensor_R R → R_n is the unit isomorphism and is the transpose of π_n. Thus the
-specified reduction map is invertible. Its target is the finite constant object of
-Part 1; all reductions have cohomology supported in [0,0]. Their transition maps are
-the quotient reductions and are surjective: locally lift a constant quotient section
-from the integer ring. Restriction of scalars leaves the underlying sheaf unchanged.
-Their ordinary inverse limit is the completed coefficient sheaf by its construction.
-Apply lem-weil-proetale-surjective-tower-derived-limit to obtain its Roos triangle
-with the actual projections. These are exactly the canonical reduction units, so
-both recorded completeness predicates hold. Together with Part 1 and the common
-interval [0,0], this proves membership in both recorded integral full subcategories.
-This does not assert uniqueness of an arbitrary lift to a triangulated homotopy limit. -/
+/-- The completed constant coefficient object is bounded constructible and derived complete,
+with the same integral membership in both recorded presentations, and each of its derived
+reduction maps is invertible onto the finite constant object. -/
 theorem integralConstantCoefficient_constructible
     (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p) :
     boundedConstructibleDerivedCompleteIntegral D l hl E Y

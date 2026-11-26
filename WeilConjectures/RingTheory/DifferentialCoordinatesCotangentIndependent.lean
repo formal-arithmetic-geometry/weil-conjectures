@@ -22,8 +22,25 @@ import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 /-!
 # Cotangent independence from differential coordinates
 
-Source: Stacks Project, More on Algebra, Tag 07E6, proof before the final application
-of Algebra, Tags 07DY and 00NQ.
+A residue differential basis preserves independence of cotangent classes from the polynomial
+localization `A₀ = k[y]_p` after extending coefficients to the residue field of `A`.
+
+## Implementation details
+
+The residue comparison `Ω[A₀/k] ⊗ K₀ → Ω[K₀/k]` is an isomorphism, since the given basis
+detects relations. `A₀` is geometrically regular, so `H₁(L[K₀/k]) → m₀/m₀²` is an isomorphism.
+A commutative square with bottom `H₁(L[K/k]) → m/m²` (compatibility of presentation morphisms
+with the surjection-to-conormal equivalences) then shows that `m₀/m₀² ⊗ K → m/m²` is
+injective. Arbitrary independent sets, empty sets and an empty differential basis are allowed;
+no finiteness of `K` over `k` is assumed.
+
+## References
+
+* [Stacks, Tag 07E6]
+* [Stacks, Tag 07E5]
+* [Stacks, Tag 07E2]
+* [Stacks, Tag 07DY]
+* [Stacks, Tag 00NQ]
 -/
 
 @[expose] public section
@@ -62,38 +79,7 @@ private theorem residueCotangentEquiv_mk
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A residue differential basis preserves independence of cotangent classes from the
-polynomial localization after extending coefficients to the target residue field.
-Source: Stacks Project, More on Algebra, Tag 07E6, proof, the differential comparison
-and the commutative square, before extending a regular system of parameters.
-(blueprint: lem-weil-pbc-differential-coordinates-cotangent-independent).
-
-Proof: Write R = k[y], p = φ⁻¹(m), A₀ = R_p, and K₀ for the residue field of A₀.
-The restriction equation for ψ identifies its residue-field map with the embedding
-of Frac(R/p) in K. Its image lies in F because the residue images of the variables
-lie in F. Polynomial differentials and localization identify Ω[A₀/k] with a free
-module on dy_i. The residue comparison Ω[A₀/k] ⊗ K₀ → Ω[K₀/k] is surjective.
-A relation among d(y_i) in Ω[K₀/k] maps to a relation in Ω[F/k]; the supplied basis
-makes every coefficient zero. Thus this comparison is an isomorphism.
-The ring A₀ is geometrically regular: after a finite purely inseparable field
-extension it is a localization of a polynomial ring over that field, hence regular.
-Proposition 07E5 gives injectivity of H₁(L[K₀/k]) → m₀/m₀². Jacobi-Zariski and the
-isomorphic residue differential comparison give surjectivity, hence an isomorphism.
-The right-hand comparison sends the class of z tensored with c to c times the class
-of ψ(z). The square with bottom H₁(L[K/k]) → m/m² commutes as follows. The two
-composites from the presentation k[K₀] to A[K] factor respectively through A₀[K₀]
-and k[K]. They induce the same map on H₁ by independence of presentation morphisms
-and compatibility with composition. The surjection-to-conormal equivalences are
-compatible with these maps: choose a section of A → K agreeing on K₀ with ψ of a
-section of A₀ → K₀. Evaluation of a relation then gives ψ of its old evaluation,
-so its conormal class maps to the class of ψ(z). Tensoring yields the square.
-Its top is an isomorphism; its left is injective by 07E2 and its bottom by 07E5
-for A. Thus its right is injective, because every source element comes from the
-top and equality of its images forces equality along the left and bottom.
-An independent family of classes in m₀/m₀² stays independent under field scalar
-extension. The injective right-hand map therefore takes it to independent cotangent
-classes in m/m², proving the assertion. Arbitrary independent sets are allowed: the
-same argument applies to each finite relation. Empty sets and an empty differential
-basis are included; no finiteness of K over k is assumed. -/
+polynomial localization after extending coefficients to the target residue field. -/
 theorem linearIndepOn_of_residue_differential_basis
     (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A]
     [IsLocalRing A] [IsNoetherianRing A] (pchar : ℕ) [Fact pchar.Prime] [CharP k pchar]

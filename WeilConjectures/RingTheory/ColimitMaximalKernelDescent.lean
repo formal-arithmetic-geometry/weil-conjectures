@@ -22,9 +22,26 @@ import WeilConjectures.RingTheory.FiniteIdealKernelDescent
 /-!
 # Descent of the maximal-ideal multiplication kernel
 
-Source: Stacks Project, Algebra, Tag 00R6 (lemma-colimit-eventually-flat),
-proof of eventual vanishing of the maximal-ideal multiplication kernel.
-(blueprint: lem-weil-pbc-colimit-maximal-kernel-descent)
+For a directed system of maps `A i → B i` of noetherian rings, with `A i` local, and a compatible
+system of finite `B i`-modules `N i` whose colimit is flat over the colimit of `A`, the kernel of
+the multiplication map `mᵢ ⊗ Nᵢ → Nᵢ` at any stage `i` dies after base change to some later
+stage (`RingTheory.exists_stage_maximal_kernel_vanishes`).
+
+## Implementation details
+
+The kernel is a finite `Bᵢ`-module, so it has finitely many generators. Flatness of the colimit
+module, applied to the exact sequence `ker s → domain s → codomain s` for the multiplication map
+`s` over the colimit ring, writes the image of each generator as a finite sum of elements of
+`ker s` tensored with module elements. These finitely many elements and relations descend to a
+common later stage, where the generators map to zero; since the canonical map is semilinear
+over `Bᵢ`, the whole kernel maps to zero. No localization or tensor base-change hypothesis, nor
+locality of the transition maps, is used.
+
+## References
+
+* [Stacks, Tag 00R6]
+* [Stacks, Tag 00MO]
+* [Stacks, Tag 00M6]
 -/
 
 @[expose] public section
@@ -36,32 +53,8 @@ open scoped TensorProduct
 
 namespace RingTheory
 
-/-- The maximal-ideal multiplication kernel at any fixed stage dies after base change
-at a later stage. The forgetful functor to sets preserves the colimit of `A`.
-Source: Stacks Project, Algebra, Tag 00R6, proof preceding the
-application of Tag 00MO; ideal-tensor description in Remark 00M6.
-(blueprint: lem-weil-pbc-colimit-maximal-kernel-descent)
-
-Proof: Restrict to the cofinal directed set above `i`. The maximal ideal of `A_i`
-is finite since `A_i` is Noetherian. Its tensor product with `N_i` is finite over
-`B_i`, and the multiplication kernel is finite since `B_i` is Noetherian. Choose
-finitely many generators. Regard all later rings and modules as `A_i`-modules.
-Their colimits remain the given ring and additive-group colimits, by the
-representative and eventual-equality criteria for filtered colimits. Tensoring
-with the maximal ideal commutes with these colimits. Write `s` for multiplication
-from the maximal ideal tensored with the limit ring to the limit ring. Flatness
-of the limit module implies that every image of a chosen kernel generator is a
-finite sum of elements of `ker s` tensored with limit-module elements, using
-exactness of tensoring the sequence `ker s → domain s → codomain s`.
-Descend those finitely many elements to a common stage. Descend the equations
-`s(k)=0`, and then the expressions for the chosen generators, to one later
-stage using eventual vanishing in the ring and module colimits. Mapping to the
-extended ideal tensored with the stage module kills each expression: the image
-of `k` is `s(k)`, which is zero. The canonical map is semilinear over `B_i`, so
-it kills the whole kernel. This gives exactly `θ` and its
-pure-tensor formula and kernel vanishing. No localization or tensor base-change
-hypothesis, or locality of the transition maps, is used in this descent argument.
--/
+/-- The kernel of the maximal-ideal multiplication map `mᵢ ⊗ Nᵢ → Nᵢ` at a fixed stage `i`
+dies after base change to some later stage `j`. -/
 theorem exists_stage_maximal_kernel_vanishes
     {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
     (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})

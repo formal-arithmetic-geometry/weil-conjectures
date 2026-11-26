@@ -9,6 +9,22 @@ public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerived
 import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroCycleUnitor
 import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroCycleFormal
 
+/-! # The scalar transpose formula for an explicit zero-cycle representative
+
+## Implementation details
+
+The finite tensor comparison square is applied to the fixed Hom-complex representative; the
+uncurrying models identify evaluation with the scalar extension transpose, and the ordinary
+scalar-section formula and the normalized zero-cycle equivalences turn the resulting chain-map
+equality into the displayed derived-category equality.
+
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 079P]
+* [Stacks, Tag 08JA]
+-/
+
 @[expose] public section
 set_option autoImplicit false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
@@ -21,13 +37,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 -- The assembly elaborates several large localized composites at once.
 /-- The scalar transpose formula for one explicit zero-cycle representative.
-Source: Stacks 03CZ, 079P and 08JA.
-Proof: apply the finite tensor comparison square to the fixed Hom-complex
-representative, use the uncurrying models to identify evaluation with the scalar
-extension transpose, and then use the ordinary scalar-section formula. The
-normalized zero-cycle equivalences turn the resulting chain-map equality into the
-displayed derived-category equality.
-(blueprint: lem-coef-derived-sections-normalization-scalar-hom-zero-cycle-representative)
 -/
 theorem coefficientDerivedSectionsScalarHomZero_cycle_representative
     (R : CoefficientDerivedSystemReduction l E W)

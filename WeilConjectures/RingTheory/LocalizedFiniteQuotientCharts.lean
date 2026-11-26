@@ -19,8 +19,21 @@ import Mathlib.RingTheory.Ideal.GoingUp
 /-!
 # Local charts of the finite algebra quotient
 
-Source: Stacks Project, Tags 07N9, 00E3 and 00CT.
-(blueprint: lem-weil-pbc-localized-finite-quotient-charts)
+For `S` finite over `R` and `n > 0`, the local factors of `(R_p ⊗_R S)/J^n`, with `J` the
+extension of the maximal ideal, are the rings `S_q/K_q^n` for the primes `q` of `S` over `p`.
+
+## Implementation details
+
+`B = R_p ⊗_R S` is the localization of `S` at the image of `R ∖ p`, so primes of `B` containing
+`J` correspond to primes of `S` over `p`; they are maximal since `B` is finite over `R_p`.
+Localizing `B` at the extension of `q` is `S_q` by localization in stages, and localization
+commutes with quotients.
+
+## References
+
+* [Stacks, Tag 07N9] (prime correspondence in the proof)
+* [Stacks, Tag 00E3] (localization prime correspondence)
+* [Stacks, Tag 00CT] (quotients and localization)
 -/
 
 @[expose] public section
@@ -29,26 +42,7 @@ universe u v
 open scoped TensorProduct
 namespace AdicCompletion
 
-/-- The local factors of a positive finite-algebra quotient are its localizations.
-Source: Stacks Project, Tag 07N9, prime correspondence in the proof;
-Tags 00E3 (localization prime correspondence) and 00CT (quotients and localization).
-(blueprint: lem-weil-pbc-localized-finite-quotient-charts)
-
-Proof: The tensor algebra B is the localization of S at the image of R minus p.
-Extension and contraction identify primes of B containing J with primes of S
-whose contraction is p. Indeed their contraction contains p, and disjointness
-from R minus p gives the reverse inclusion. A prime contains J^n exactly when
-it contains J, since n is positive. The quotient correspondence therefore gives
-an equivalence between Q and the primes of B/J^n. These primes are maximal:
-B is finite over R_p, and the quotient is integral over the quotient of R_p
-by its maximal-ideal power, which has only its maximal ideal as a prime.
-The equivalence sends q to the quotient of its extension to B; its displayed
-contraction formula determines it uniquely. Localizing B at that extension is
-S_q: both invert precisely the elements outside q, by localization in stages.
-The S-algebra property determines psi on S, and on inverses of the denominators,
-so psi is this canonical localization map. Localization commutes with quotient,
-and map preserves powers, giving the stated localization structure on S_q/K_q^n.
-If Q is empty, B/J^n is the zero ring and both indexing types are empty. -/
+/-- The local factors of a positive finite-algebra quotient are its localizations. -/
 theorem localized_finite_quotient_charts
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [Module.Finite R S] (p : Ideal R) [p.IsPrime] :

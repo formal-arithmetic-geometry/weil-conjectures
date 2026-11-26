@@ -37,10 +37,6 @@ import WeilConjectures.SmoothPurity.Scalar.ScalarSemilinearDualExt
 
 /-! # Coefficient Tate twists
 
-Source: blueprint `sec-smooth-purity/sk-def-sf-admissible/def-coefficient-twists-detailed.md`,
-order 1505; current main-20261015 source: `sec-proetale-coefficients/sk-def-sp-tate-twist/`,
-order 1864 (blueprint: definition-tate-twists).
-
 The intrinsic rational and common-stage functors are provided by
 `WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCoefficientTwistsUnrestricted`;
 this module supplies their shared signed lines and ordinary tensor/scalar comparison.
@@ -54,6 +50,15 @@ this module supplies their shared signed lines and ordinary tensor/scalar compar
 - `WeilConjectures.IsCanonicalTwistScalarMaps`
 - `WeilConjectures.twistSheafScalarComparison`
 
+## Implementation details
+
+The integral line is flat, so termwise tensor computes derived tensor for every unbounded
+complex. The scalar-map normalization specifies maps rather than merely coherent
+isomorphisms; uniqueness statements follow from local generation by pure tensors.
+
+## References
+
+* [Stacks Project, Tags 03EK, 03RV, 03PK]
 -/
 
 @[expose] public noncomputable section
@@ -106,8 +111,7 @@ attribute [local instance 3000] integralTowerHasDerivedCategory
 
 variable (X : Scheme.{u})
 
-/-- Tensor powers of the coefficient line, with the unit at exponent zero.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- Tensor powers of the coefficient line, with the unit at exponent zero. -/
 abbrev coefficientTwistPower {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (L : SheafOfModules.{u + 1}
       ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :
@@ -115,8 +119,7 @@ abbrev coefficientTwistPower {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
       ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) :=
   SheafOfModules.scalarTensorPower R L
 
-/-- Positive powers and internal duals of the coefficient line.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- Positive powers and internal duals of the coefficient line. -/
 def coefficientTwistLine {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (L : SheafOfModules.{u + 1}
       ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :
@@ -126,13 +129,7 @@ def coefficientTwistLine {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
   | Int.negSucc n => SheafOfModules.homObj.{u + 1, u, u + 1, u + 1} (R := R)
       (coefficientTwistPower X L (n + 1)) (SheafOfModules.unit.{u, u + 1, u + 1} _)
 
-/-- Tensor with an integer power or dual of a rank-one line is exact and additive.
-Source: blueprint order 1505; Stacks Tags 03EK and 03RV
-(blueprint: definition-tate-twists).
-Proof: on a cover trivializing L, each positive tensor power is the unit module,
-and internal Hom into the unit is also the unit. Thus tensor with every integer
-power is locally the identity. Exactness can be checked locally; additivity follows
-on sectionwise tensor generators and passes through sheafification. -/
+/-- Tensor with an integer power or dual of a rank-one line is exact and additive. -/
 theorem coefficientTwistLine_exact
     {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (L : SheafOfModules.{u + 1}
@@ -173,28 +170,22 @@ variable (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠
   [FiniteDimensional (Padic ℓ) E] (S : Scheme.{u})
   [∀ x : S, Invertible (ℓ : S.residueField x)]
 
-/-- The published integral first line has rank one; reuse its recorded theorem.
-Source: blueprint order 1505; Stacks 03PK
-(blueprint: definition-tate-twists). -/
+/-- The integral coefficient line has rank one. -/
 instance coefficientTwistIntegralRank :
     (purTwistIntegralModule S ℓ E).IsFiniteLocallyFreeOfRank 1 :=
   (pur_twist_sheaf_locally_free.{u, 0} S ℓ E).2.2.1.2.2.1
 
-/-- The published ordinary finite reduction has rank one.
-Source: blueprint order 1505; Stacks 03PK
-(blueprint: definition-tate-twists). -/
+/-- The finite reductions of the coefficient line have rank one. -/
 instance coefficientTwistFiniteRank (n : ℕ) :
     (purTwistFiniteOne S ℓ E n).IsFiniteLocallyFreeOfRank 1 :=
   ((pur_twist_sheaf_locally_free.{u, 0} S ℓ E).2.2.1.2.2.2 n).2.1
 
-/-- The finite coefficient twist at quotient exponent n+1.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- The finite coefficient twist at quotient exponent n+1. -/
 abbrev finiteCoefficientTwist (n : ℕ) (m : ℤ) :
     SheafOfModules.{u + 1} (integralCoefficientSheaf ℓ E S n) :=
   coefficientTwistLine S (purTwistFiniteOne S ℓ E n) m
 
-/-- Derived tensor by the finite twisting line.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- Derived tensor by the finite twisting line. -/
 def finiteComplexTwist (n : ℕ) (m : ℤ) :
     proEtaleDerivedCategory S (Padic.coefficientExtensionRing ℓ E (n + 1)) ⥤
       proEtaleDerivedCategory S (Padic.coefficientExtensionRing ℓ E (n + 1)) := by
@@ -205,56 +196,44 @@ def finiteComplexTwist (n : ℕ) (m : ℤ) :
     (A := integralCoefficientCommRingSheaf ℓ E S n)
     (finiteCoefficientTwist ℓ E S n m)).mapDerivedCategory
 
-/-- Tensor by the completed integral line on module sheaves.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- Tensor by the completed integral line on module sheaves. -/
 def integralSheafTwist (m : ℤ) : integralTowerModules ℓ E S ⥤ integralTowerModules ℓ E S :=
   SheafOfModules.siteSheafTensorRight
     (A := completedIntegralCommRingSheafUnrestricted ℓ E S)
     (coefficientTwistLine S
       (R := completedIntegralCommRingSheafUnrestricted ℓ E S) (purTwistIntegralModule S ℓ E) m)
 
-/-- Additivity of tensor with the integral line.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- Additivity of tensor with the integral line. -/
 instance integralSheafTwist_additive (m : ℤ) : (integralSheafTwist ℓ E S m).Additive :=
   (coefficientTwistLine_exact S
     (R := completedIntegralCommRingSheafUnrestricted ℓ E S) (purTwistIntegralModule S ℓ E) m).1
 
-/-- Tensor with the integral line preserves finite limits.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- Tensor with the integral line preserves finite limits. -/
 instance integralSheafTwist_finiteLimits (m : ℤ) :
     PreservesFiniteLimits (integralSheafTwist ℓ E S m) :=
   (coefficientTwistLine_exact S
     (R := completedIntegralCommRingSheafUnrestricted ℓ E S) (purTwistIntegralModule S ℓ E) m).2.1
 
-/-- Tensor with the integral line preserves finite colimits.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- Tensor with the integral line preserves finite colimits. -/
 instance integralSheafTwist_finiteColimits (m : ℤ) :
     PreservesFiniteColimits (integralSheafTwist ℓ E S m) :=
   (coefficientTwistLine_exact S
     (R := completedIntegralCommRingSheafUnrestricted ℓ E S) (purTwistIntegralModule S ℓ E) m).2.2
 
-/-- Derived tensor by the completed integral twisting line. Since the line is flat,
-termwise tensor already computes derived tensor for every unbounded complex.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- Derived tensor by the completed integral twisting line. -/
 def integralComplexTwist (m : ℤ) :
     completedIntegralDerivedCategory ℓ E S D hℓ ⥤
       completedIntegralDerivedCategory ℓ E S D hℓ :=
   (integralSheafTwist ℓ E S m).mapDerivedCategory
 
-/-- The integral twist placed in degree zero.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- The integral twist placed in degree zero. -/
 def integralCoefficientTwist (m : ℤ) :
     completedIntegralDerivedCategory ℓ E S D hℓ :=
   (DerivedCategory.singleFunctor _ 0).obj
     (coefficientTwistLine S
       (R := completedIntegralCommRingSheafUnrestricted ℓ E S) (purTwistIntegralModule S ℓ E) m)
 
-/-- Every integral twist is bounded constructible and derived complete.
-Source: blueprint order 1505 (blueprint: definition-tate-twists).
-Proof: trivialize on a primitive-root pro-etale cover. Powers and duals are again
-rank-one lines, and their finite reductions are finite locally constant with common
-support interval [0,0]. The compatible finite reductions recover the completed line,
-so its canonical derived-completeness comparison is invertible. -/
+/-- Every integral twist is bounded constructible and derived complete. -/
 theorem integralCoefficientTwist_constructible (m : ℤ) :
     boundedConstructibleDerivedCompleteIntegral D ℓ hℓ E S
       (integralCoefficientTwist D ℓ hℓ E S m) := by
@@ -291,8 +270,7 @@ theorem integralCoefficientTwist_constructible (m : ℤ) :
   subst i
   exact ⟨le_rfl, le_rfl⟩
 
-/-- The coefficient line as a module sheaf, for every integer exponent.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- The coefficient line as a module sheaf, for every integer exponent. -/
 abbrev integralTwistLine (m : ℤ) : integralTowerModules ℓ E S :=
   coefficientTwistLine S
     (R := completedIntegralCommRingSheafUnrestricted ℓ E S) (purTwistIntegralModule S ℓ E) m
@@ -302,16 +280,14 @@ section ScalarComparison
 variable (L : Type u) [Field L] [Algebra (Padic ℓ) L]
   [FiniteDimensional (Padic ℓ) L] (ι : E →ₐ[Padic ℓ] L)
 
-/-- The constant integer inclusion induced by the specified coefficient embedding.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- The constant integer inclusion induced by the specified coefficient embedding. -/
 def twistConstantIntegerMap : purTwistIntegralConstant S ℓ E ⟶
     purTwistIntegralConstant S ℓ L :=
   (constantSheaf (ProEt.topology S) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
       ((integralScalarIntegerInclusion ℓ E L ι).comp ULift.ringEquiv.toRingHom)))
 
-/-- Semilinear maps from the E-lines to the L-lines, before scalar extension.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- Semilinear maps from the E-lines to the L-lines, before scalar extension. -/
 abbrev TwistScalarMaps := ∀ m : ℤ,
   integralTwistLine ℓ E S m ⟶
     (SheafOfModules.restrictScalars.{u + 1}
@@ -319,9 +295,8 @@ abbrev TwistScalarMaps := ∀ m : ℤ,
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
         (integralCompletedScalarMap ℓ E L ι S))).obj (integralTwistLine ℓ L S m)
 
-/-- The roots-of-unity, unit, tensor-power and dual-evaluation normalization.
-These equations specify maps, rather than merely coherent isomorphisms.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- The roots-of-unity, unit, tensor-power and dual-evaluation normalization of a family
+of semilinear line maps. -/
 def IsCanonicalTwistScalarMaps (c : TwistScalarMaps ℓ E S L ι) : Prop :=
   (∀ (U : S.ProEtᵒᵖ) (a : (completedIntegralCommRingSheafUnrestricted ℓ E S).obj.obj U),
     (c 0).val.app U a = (integralCompletedScalarMap ℓ E L ι S).hom.app U a) ∧
@@ -489,33 +464,17 @@ private theorem twistScalarComparison_data :
       (Opposite.op (Over.mk (𝟙 U.unop))) z) hx.symm).trans
         ((hd.2.2.2 n U f x).trans (hc.2.2.2 n U f x).symm)
 
-/-- There is exactly one normalized semilinear family on the signed Tate lines.
-Source: blueprint order 1505 (blueprint: definition-tate-twists).
-Proof: at zero take the completed coefficient inclusion. At one send the root
-limit tensor b to the same root limit tensor its integer image. The balanced
-relations agree by the finite residue characterizations of the completed actions.
-For positive powers tensor these maps recursively. For negative powers use the
-unique dual map whose evaluation is the image of the original evaluation.
-On a cover trivializing the root line these maps are the coefficient inclusion,
-so the positive maps generate the target line and the dual map is unique.
-The formulas commute with restrictions and glue; tensor sheafification and the
-local generation of each positive line prove uniqueness in every degree. -/
+/-- There is exactly one normalized semilinear family on the signed Tate lines. -/
 theorem twistScalarMaps_existsUnique :
     ∃! c : TwistScalarMaps ℓ E S L ι, IsCanonicalTwistScalarMaps ℓ E S L ι c := by
   obtain ⟨B, hc, hu⟩ := twistScalarComparison_data ℓ E S L ι
   exact ⟨_, hc, hu⟩
 
-/-- The signed scalar maps fixed by root tensors, powers and dual evaluation.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- The signed scalar maps fixed by root tensors, powers and dual evaluation. -/
 def twistScalarMaps : TwistScalarMaps ℓ E S L ι :=
   (twistScalarMaps_existsUnique ℓ E S L ι).exists.choose
 
-/-- Scalar extension of each line is the target line, with the specified map.
-Source: blueprint order 1505 (blueprint: definition-tate-twists).
-Proof: extend the semilinear map by balancing, sending s tensor x to s times c(x).
-On a trivializing cover this is multiplication R_L tensor R_E to R_L and has
-inverse z to z tensor one. Glue the local inverses. Pure tensors generate locally,
-so the displayed formula uniquely determines the isomorphism, also at zero. -/
+/-- Scalar extension of each line is the target line, with the specified map. -/
 theorem twistLineScalarIso_existsUnique (m : ℤ) :
     ∃! c : (integralOrdinaryScalar ℓ E L ι S).obj (integralTwistLine ℓ E S m) ≅
         integralTwistLine ℓ L S m,
@@ -572,20 +531,13 @@ theorem twistLineScalarIso_existsUnique (m : ℤ) :
     e.hom.val.app U (integralOrdinaryTensorSection ℓ E L ι S _ U 1 x)
   rw [he', he]
 
-/-- The canonical scalar-extension isomorphism for the signed line.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- The canonical scalar-extension isomorphism for the signed line. -/
 def twistLineScalarIso (m : ℤ) :
     (integralOrdinaryScalar ℓ E L ι S).obj (integralTwistLine ℓ E S m) ≅
       integralTwistLine ℓ L S m :=
   (twistLineScalarIso_existsUnique ℓ E S L ι m).exists.choose
 
-/-- Tensor and scalar extension commute by the normalized balanced map.
-Source: blueprint order 1505 (blueprint: definition-tate-twists).
-Proof: send s tensor (x tensor y) to (s tensor x) tensor c(y), with c the
-normalized semilinear line map. Its inverse is the ordinary tensor associator
-followed by the inverse canonical line comparison. The balanced formulas commute
-with restrictions and module maps. They sheafify to a natural isomorphism.
-Local pure-tensor generation uniquely determines every component. -/
+/-- Tensor and scalar extension commute by the normalized balanced map. -/
 theorem twistSheafScalarComparison_existsUnique (m : ℤ) :
     ∃! b : integralSheafTwist ℓ E S m ⋙ integralOrdinaryScalar ℓ E L ι S ≅
         integralOrdinaryScalar ℓ E L ι S ⋙ integralSheafTwist ℓ L S m,
@@ -614,8 +566,7 @@ theorem twistSheafScalarComparison_existsUnique (m : ℤ) :
       simpa only [twistLineScalarIso, one_smul] using
         (twistLineScalarIso_existsUnique ℓ E S L ι m).exists.choose_spec U 1 y)
 
-/-- The ordinary natural comparison fixed on local pure tensors.
-Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
+/-- The ordinary natural comparison fixed on local pure tensors. -/
 def twistSheafScalarComparison (m : ℤ) :
     integralSheafTwist ℓ E S m ⋙ integralOrdinaryScalar ℓ E L ι S ≅
       integralOrdinaryScalar ℓ E L ι S ⋙ integralSheafTwist ℓ L S m :=

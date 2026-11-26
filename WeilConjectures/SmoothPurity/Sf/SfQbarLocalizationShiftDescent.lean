@@ -12,9 +12,8 @@ import all WeilConjectures.SmoothPurity.Sf.SfFrameworkCommonStageDescent
 
 /-! # Shift descent on the general rational coefficient stages
 
-Source: the algebraically closed-stage localization argument, coefficient
-comparison and adjunction compatibility steps.
-(blueprint: lem-sf-qbar-localization-shift-descent).
+Coherent finite shift comparisons of a family of coefficient-stage functors induce a shift
+comparison of the pair functor on the general rational coefficient stages.
 -/
 
 @[expose] public noncomputable section
@@ -33,22 +32,7 @@ open AlgebraicallyClosedCoefficients (Index Coefficient)
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- Coherent finite shift comparisons induce a shift comparison of the pair functor.
-Source: localization proof, algebraically closed-stage step 4.
-(blueprint: lem-sf-qbar-localization-shift-descent).
-
-Proof: at an object (E,K), compose the inverse source inclusion shift comparison,
-the inclusion of the finite functor shift map, and the target inclusion shift
-comparison. For a representative over L, write it as the conjugate of an
-included arrow by the two scalar transition isomorphisms. The finite beta
-shift square and the transition-isomorphism shift squares identify both
-naturality composites with the finite functor shift naturality square at L.
-All objects are included, so finite zero and addition shift laws give the
-corresponding laws for this natural isomorphism. This constructs CommShift.
-Its component formula gives the asserted shift square for the inclusion
-comparison. Identity and repeated coefficient fields use the normalized
-unit comparisons; zero objects and negative shifts use the same formula.
--/
+/-- Coherent finite shift comparisons induce a shift comparison of the pair functor. -/
 theorem sfLocalizationShiftDescent {V W : Scheme.{u}}
     (F : (stageSystem l Ω V).Morphism (stageSystem l Ω W))
     (c : ∀ E, (F.Φ E).CommShift ℤ)

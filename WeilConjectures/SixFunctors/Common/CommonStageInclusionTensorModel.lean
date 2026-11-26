@@ -9,7 +9,7 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 
 /-! # Finite-stage models of the common tensor
 
-Source: thm-sf-pf-field.proof.md, Compatibility and the common coefficient field.
+We extend the common tensor of two included objects back to their finite coefficient stage.
 -/
 
 @[expose] public noncomputable section
@@ -46,9 +46,7 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω
   [∀ x : W, Invertible (l : W.residueField x)] (E : Index l Ω)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The common tensor on two included objects, extended back to their finite stage.
-Source: thm-sf-pf-field.proof.md, common finite coefficient field paragraph
-(blueprint: def-sf-common-stage-inclusion-tensor-model). -/
+/-- The common tensor on two included objects, extended back to their finite stage. -/
 @[irreducible] def commonInclusionTensorModel (K L : Stage l Ω W E) :
     (commonStageDerivedTensor l Ω W).obj
         ((inclusion (l := l) (Ω := Ω) (Y := W) E).obj K,

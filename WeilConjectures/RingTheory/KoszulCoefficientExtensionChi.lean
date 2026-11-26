@@ -13,10 +13,14 @@ public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.RingTheory.Localization.Defs
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
-/-! # KoszulCoefficientExtensionChi
+/-! # Coefficient extension of the dual Koszul complex
 
-Source: Stacks Project, Tag 0BQZ, coefficient formulas in the finite free
-Koszul calculation (blueprint: new-lem-sc-koszul-coefficient-extension-chi).
+For a ring map `A → S`, applying the ring map to coefficients in the exterior bases gives a
+cochain map from the dual Koszul complex of `f` over `A` to that of the image of `f` over `S`.
+
+## References
+
+* [Stacks, Tag 0BQZ]
 -/
 
 @[expose] public section
@@ -192,23 +196,8 @@ private theorem coefficientDegreeMap_comm
   erw [← coefficientFunctional_eval A S r n x.hom (v ∘ i.succAbove)]
   rfl
 
-/-- The coefficient extension cochain map with its evaluation formula.
-Source: Stacks Project, Tag 0BQZ, finite free Koszul computation.
-(blueprint: new-lem-sc-koszul-coefficient-extension-chi)
-
-Proof: Write e_J for the increasing standard basis wedges of degree n. For a
-functional x, define its extension by sending e_J over S to the image of x(e_J).
-The exterior basis makes this a unique S-linear functional, and the assignment
-is A-linear in x. Expanding any wedge in that basis expresses its coefficients
-as minors of the vector-coordinate matrix. Ring maps preserve these minors,
-which proves the evaluation formula. On a basis wedge the contraction is the
-alternating sum of f(i) times the wedge omitting i. Applying A -> S to this
-formula gives contraction for the image sequence. The signed dual differential
-is precomposition with this contraction times (-1)^(n+1); the ring map preserves
-that sign. Thus the degreewise extensions commute with every differential and
-form chi. For n > r both exterior terms are zero; for n = 0 the single empty
-basis wedge gives scalar extension A -> S. No regularity or localization assumption
-is needed for this component. -/
+/-- The coefficient extension cochain map `χ` from the dual Koszul complex over `A` to that
+over `S`, with its evaluation formula. No regularity or localization assumption is needed. -/
 theorem exists_koszul_coefficient_extension_chi
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (S : Type u) [CommRing S] [Algebra A S] :

@@ -15,12 +15,14 @@ public import WeilConjectures.TraceFormula.TraceClassAdditivity
 
 For `X` proper over `s = Spec k` and an endocorrespondence `c = (C, c₁, c₂, u)` of `(X, K)` with
 proper ordinary leg, the trace of the global operator is the integral of the trace class
-(blueprint `theorem-proper-pushforward-lefschetz-verdier--2`):
 ```
 tr(T_c(u) | RΓ_c(X, K)) = ∫_Fix(c) Tr_c(u).
 ```
-Following the blueprint proof, `(a_X, a_C) : (C, c) ⟶ (s, (𝟙, 𝟙))` is a proper pushforward
-diagram (`ProEtale.CondensedRing.Correspondence.toPointDiagram`) and
+
+## Implementation details
+
+The map `(a_X, a_C) : (C, c) ⟶ (s, (𝟙, 𝟙))` is a proper pushforward diagram
+(`ProEtale.CondensedRing.Correspondence.toPointDiagram`) and
 
 1. the pushed coefficient map `[a_X, a_C]_! u` is the global operator `T_c(u)`, read through
    `Ra_{X!} ≅ Ra_{X*}` (`Correspondence.globalOperator_eq_pushforwardCoeff`): its ordinary half
@@ -87,8 +89,8 @@ lemma unit_map_comp_conjugateIsoEquiv_hom_app {L R : P ⥤ P} (adj : L ⊣ R) (�
   rw [reassoc_of% h1, reassoc_of% h2, Adjunction.counit_naturality,
     Adjunction.left_triangle_components_assoc]
 
-/-- Abstract form of the ordinary half of the global operator: the unit of `L_c ⊣ R_c` read
-through the lower shriek functors `S_f, S_c, S_g` (`ι : S ≅ R`) and the composition isomorphism
+/-- Abstract form of the ordinary half of the global operator: the unit of `L_c ⊣ R_c` read through
+the lower shriek functors `S_f, S_c, S_g` (`ι : S ≅ R`) and the composition isomorphism
 `κ : S_g ≅ S_c ⋙ S_f` is the unit of `L_g ⊣ R_g` followed by the counit of `L_f ⊣ R_f`, up to
 `Θ : L_1 ≅ 𝟭`. -/
 lemma map_unit_comp_inv_eq_aux {Lf : P ⥤ X} {Rf Sf : X ⥤ P} {Lc : X ⥤ C} {Rc Sc : C ⥤ X}
@@ -125,8 +127,8 @@ lemma mateEquiv_app_eq {D E : Type*} [Category* D] [Category* E] {G : C ⥤ D} {
   simp [mateEquiv_apply]
 
 /-- Abstract form of the exceptional half of the global operator: the mate of the composition
-isomorphism `Ξ = S_1 ι_g⁻¹ ≫ κ₁⁻¹ ≫ e ≫ κ₂ ≫ ι_f`, read through `R_1 ≅ 𝟭` and the
-identifications `ι`, is the composition isomorphism followed by the counit. -/
+isomorphism `Ξ = S_1 ι_g⁻¹ ≫ κ₁⁻¹ ≫ e ≫ κ₂ ≫ ι_f`, read through `R_1 ≅ 𝟭` and the identifications
+`ι`, is the composition isomorphism followed by the counit. -/
 lemma mateEquiv_app_comp_eq_aux {Sg Rg Sg' Sg'' : C ⥤ P} {S1 U1 : P ⥤ P} {Sc1 : C ⥤ X}
     {Uc1 : X ⥤ C} {Sf Rf : X ⥤ P} (adj1 : S1 ⊣ U1) (adjc1 : Sc1 ⊣ Uc1) (Λ : S1 ≅ 𝟭 P)
     (ιg : Sg ≅ Rg) (ιf : Sf ≅ Rf) (κ1 : Sg' ≅ Sg ⋙ S1) (θ1 : Sg ⟶ Sg')
@@ -215,10 +217,8 @@ lemma boundedConstructibleLowerShriekComp_padicAlgCl_id_right_inv_app (f : X ⟶
     eqToHom_trans, eqToHom_refl]
 
 variable (ℓ) in
-/-- The ordinary half of the global operator (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--2`, proof): for `c₂ ≫ f = g`, the unit of
-`Lc₂^* ⊣ Rc₂_*` read on `Rf_!` is the ordinary half `γ` of the coefficient pushforward along
-`(f, g)`. -/
+/-- The ordinary half of the global operator: for `c₂ ≫ f = g`, the unit of `Lc₂^* ⊣ Rc₂_*` read on
+`Rf_!` is the ordinary half `γ` of the coefficient pushforward along `(f, g)`. -/
 lemma lowerShriek_map_unit_eq_pushforwardCoeffUnit_aux (c₂ : C ⟶ X) (f : X ⟶ Y) (g : C ⟶ Y)
     [IsProper c₂.left] [IsProper f.left] [IsProper g.left] (hg : c₂ ≫ f = g)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -258,10 +258,9 @@ lemma lowerShriek_map_unit_eq_pushforwardCoeffUnit_aux (c₂ : C ⟶ X) (f : X �
     (boundedConstructibleUpperStarId _ ℓ Y) K
 
 variable (ℓ) in
-/-- The exceptional half of the global operator (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--2`, proof): for a square `g ≫ 𝟙 = c₁ ≫ f`, the
-exchange map `E : Rg_* Rc₁^! ⟶ R(𝟙)^! Rf_*`, read on `Rg_!` and `Rf_!` through `R(𝟙)^! ≅ 𝟭`, is the
-composition isomorphism followed by the counit of `Rc₁_! ⊣ Rc₁^!`. -/
+/-- The exceptional half of the global operator: for a square `g ≫ 𝟙 = c₁ ≫ f`, the exchange map
+`E : Rg_* Rc₁^! ⟶ R(𝟙)^! Rf_*`, read on `Rg_!` and `Rf_!` through `R(𝟙)^! ≅ 𝟭`, is the composition
+isomorphism followed by the counit of `Rc₁_! ⊣ Rc₁^!`. -/
 lemma lowerStarUpperShriekExchange_app_id_aux (c₁ : C ⟶ X) (f : X ⟶ Y) (g : C ⟶ Y)
     [IsProper f.left] [IsProper g.left] (w : g ≫ 𝟙 Y = c₁ ≫ f)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -313,8 +312,7 @@ instance isProper_C_hom [IsProper c.c₂.left] : IsProper c.C.hom := by
   rw [← Over.w c.c₂]
   infer_instance
 
-/-- The proper pushforward diagram `(a_X, a_C) : (C, c) ⟶ (s, (𝟙, 𝟙))` to the point
-(blueprint `theorem-proper-pushforward-lefschetz-verdier--2`, proof). -/
+/-- The proper pushforward diagram `(a_X, a_C) : (C, c) ⟶ (s, (𝟙, 𝟙))` to the point. -/
 noncomputable abbrev toPointDiagram [IsProper c.c₂.left] :
     c.ProperPushforwardDiagram (point k) where
   f := toPoint X
@@ -325,10 +323,9 @@ noncomputable abbrev toPointDiagram [IsProper c.c₂.left] :
   w₁ := toPoint_ext _ _
   w₂ := toPoint_ext _ _
 
-/-- The exceptional half of the global operator (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--2`, proof): the exceptional half `δ` of the
-coefficient pushforward along `(a_X, a_C)`, read on `Ra_{C!}` and `Ra_{X!}`, is the composition
-isomorphism followed by the counit of `Rc₁_! ⊣ Rc₁^!`. -/
+/-- The exceptional half of the global operator: the exceptional half `δ` of the coefficient
+pushforward along `(a_X, a_C)`, read on `Ra_{C!}` and `Ra_{X!}`, is the composition isomorphism
+followed by the counit of `Rc₁_! ⊣ Rc₁^!`. -/
 lemma lowerShriekIsoLowerStar_hom_app_comp_pushforwardCoeffCounit [IsProper c.c₂.left] :
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint c.C)).hom.app _ ≫
         c.toPointDiagram.pushforwardCoeffCounit ≫
@@ -346,10 +343,8 @@ lemma lowerShriekIsoLowerStar_hom_app_comp_pushforwardCoeffCounit [IsProper c.c�
   rw [e1, e2]
   exact lowerStarUpperShriekExchange_app_id_aux ℓ c.c₁ (toPoint X) (toPoint c.C) _ K
 
-/-- The ordinary half of the global operator (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--2`, proof): the unit of `Lc₂^* ⊣ Rc₂_*` read on
-`Ra_{X!}` and `Ra_{C!}` is the ordinary half `γ` of the coefficient pushforward along
-`(a_X, a_C)`. -/
+/-- The ordinary half of the global operator: the unit of `Lc₂^* ⊣ Rc₂_*` read on `Ra_{X!}` and
+`Ra_{C!}` is the ordinary half `γ` of the coefficient pushforward along `(a_X, a_C)`. -/
 lemma lowerShriek_map_unit_eq_pushforwardCoeffUnit [IsProper c.c₂.left] :
     (boundedConstructibleLowerShriek ℓ (toPoint X)).map
         ((boundedConstructibleUpperStarLowerStarAdjunction ℓ c.c₂).unit.app K) ≫
@@ -377,8 +372,7 @@ lemma lowerShriek_map_unit_eq_pushforwardCoeffUnit [IsProper c.c₂.left] :
   exact lowerShriek_map_unit_eq_pushforwardCoeffUnit_aux ℓ c.c₂ (toPoint X) (toPoint c.C)
     (comp_toPoint _) K
 
-/-- **The pushed coefficient map is the global operator** (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--2`, proof): the coefficient pushforward
+/-- **The pushed coefficient map is the global operator**: the coefficient pushforward
 `[a_X, a_C]_! u` of `u` along the diagram to the point is the global operator `T_c(u)`, read through
 `Ra_{X!} ≅ Ra_{X*}` and `L(𝟙)^* ≅ 𝟭 ≅ R(𝟙)^!`. -/
 theorem globalOperator_eq_pushforwardCoeff [IsProper c.c₂.left] :
@@ -395,17 +389,10 @@ theorem globalOperator_eq_pushforwardCoeff [IsProper c.c₂.left] :
       c.lowerShriek_map_unit_eq_pushforwardCoeffUnit c.u
       c.lowerShriekIsoLowerStar_hom_app_comp_pushforwardCoeffCounit)
 
-/-- **The Lefschetz–Verdier formula** (blueprint `theorem-proper-pushforward-lefschetz-verdier--2`,
-`theorem-proper-pushforward-lefschetz-verdier--2`): for `X` proper over `s`, an endocorrespondence
+/-- **The Lefschetz–Verdier formula**: for `X` proper over `s`, an endocorrespondence
 `c` with proper ordinary leg `c₂` and proper fixed locus,
 the trace of the global operator is the integral of the trace class,
-`tr(T_c(u) | RΓ_c(X, K)) = ∫_Fix(c) Tr_c(u)`.
-
-The proof pushes `c` forward to the point along `(a_X, a_C)`: the pushed coefficient map is the
-global operator (`globalOperator_eq_pushforwardCoeff`), the proper pushforward compatibility
-(`ProperPushforwardDiagram.traceClassPushforward_eq`) identifies the pushforward
-`(a_Fix)_* Tr_c(u)`, which is the integral, with the trace class of the pushed correspondence,
-and the point normalization (`integral_traceClass_ofEnd`) gives its trace. -/
+`tr(T_c(u) | RΓ_c(X, K)) = ∫_Fix(c) Tr_c(u)`. -/
 theorem trace_globalOperator_eq_integral_traceClass [IsProper c.c₂.left]
     (F : c.FixedLocus) [IsProper F.F.hom]
     [HasRightDual
@@ -442,8 +429,7 @@ theorem trace_globalOperator_eq_integral_traceClass [IsProper c.c₂.left]
     BorelMooreSection.pushforward_congr (toPoint_ext (toPoint F.F) (c.toPointDiagram.fixMap F Fb)),
     h₂, h₃]
 
-/-- **The Lefschetz–Verdier trace comparison** (blueprint
-`theorem-proper-pushforward-lefschetz-verdier`): for `X` proper over `s`, an endocorrespondence with
+/-- **The Lefschetz–Verdier trace comparison**: for `X` proper over `s`, an endocorrespondence with
 proper ordinary leg and a fixed locus which is the disjoint union of finitely many open and closed
 subschemes `j_β : B_β ⟶ Fix(c)` proper over `s`, the trace of the global operator is the sum of the
 local terms, `tr(T_c(u) | RΓ_c(X, K)) = ∑_β LT_β(u)`. It is the fixed-point localization

@@ -14,7 +14,20 @@ import WeilConjectures.SmoothPurity.CompletedCoefficientPushforward.CompletedDir
 
 /-! # Completed-coefficient direct image and reconstruction
 
-Source: Stacks Tags 0D6E, 0A07 and 099N.
+The canonical completed/constant and finite-coefficient direct-image comparisons, with
+restriction coherence, strict derived diagrams and complete reconstruction.
+
+## Implementation details
+
+A strict diagram of complexes is realized as a complex of diagrams degreewise, with identity
+maps as the strict realization isomorphism. The reduction augmentation is the unique chain map
+into the inverse limit induced by the tensor units `x ↦ 1 ⊗ x`. Reconstruction of a complete
+object combines this augmentation with the normalized derived-limit unit and
+`limitComparison`.
+
+## References
+
+* Stacks Project, Tags 0D6E, 0A07 and 099N (1),(4).
 -/
 
 @[expose] public noncomputable section
@@ -127,35 +140,7 @@ private theorem reductionAugmentation_existsUnique (W : Scheme.{t})
   exact (ha' n.unop i U x).trans (haug n.unop i U x).symm
 
 /-- The canonical completed/constant and finite-coefficient direct-image comparisons,
-including restriction coherence, strict derived diagrams and complete reconstruction.
-All existing interface records and the comparison statement are unchanged.
-
-Source: Stacks Tags 0D6E, 0A07, 099N (1),(4); blueprint fix-prop-adjunctions Step 1
-(blueprint: lem-pur-completed-coefficient-pushforward-comparison).
-Proof:
-1. Construct the exact scalar restrictions, strict system restriction and normalized
-inverse-limit models on source and target using siteData_exists. Construct the unique
-completed structural map, its finite projection equations and its constant-scalar
-compatibility by completedStructure_existsUnique. The coherent coefficient direct-image
-and diagram comparisons extend this map and these models by directImageDiagrams_exists.
-2. A strict diagram of complexes is a complex of diagrams: take each degree and
-its differential componentwise. Identity maps in every degree give the required
-strict realization isomorphism.
-3. The tensor units x mapped to 1 tensor x commute with the specified reduction
-transitions. Compose their compatible cone with the inverse strict realization and
-apply the ordinary inverse-limit universal property in every degree. Compatibility
-with the differentials makes this a chain map. The projection formula proves its
-section normalization. Any two such maps agree after every limit projection and
-hence agree, proving the required existence and uniqueness of the augmentation.
-4. For a complete object on the supplied flat-term K-flat representative,
-reductionAugmentation_isIso makes this particular augmentation followed by the
-normalized source derived-limit unit invertible. Apply the completed derived image
-to that map and compose with limitComparison. Both factors are invertible, giving
-exactly the reconstruction composite in ComparisonData.
-5. directImage_preservesComplete applies to the structural map and its finite
-projection equations retained by the diagram data. Assemble preservation, strict
-realization, the unique augmentation and reconstruction with those diagram data.
-The coefficient and limit projection normalizations are retained verbatim. -/
+including restriction coherence, strict derived diagrams and complete reconstruction. -/
 theorem comparison (p : ℕ) [Fact p.Prime] (_hlp : l ≠ p) :
     Nonempty (ComparisonData l E f) := by
   obtain ⟨source⟩ := siteData_exists l E X

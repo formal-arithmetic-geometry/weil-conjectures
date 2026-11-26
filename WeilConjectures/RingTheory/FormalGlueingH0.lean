@@ -11,8 +11,11 @@ public import WeilConjectures.RingTheory.FormalGlueingData
 /-!
 # The zeroth module of formal glueing data
 
-Source: Stacks Project, More on Algebra, Remark 05EL
-(blueprint: def-weil-pbc-formal-glueing-H0).
+We define the module `H⁰` of compatible sections of a formal glueing datum.
+
+## References
+
+* [Stacks, Tag 05EL]
 -/
 
 @[expose] public section
@@ -26,9 +29,7 @@ open scoped TensorProduct
 variable {R : Type u} {S : Type v} [CommRing R] [CommRing S]
 
 /-- The module of compatible sections, as the intersection of kernels of the
-compatibility differences. Tensor factors are in Mathlib's order `S ⊗[R] M`.
-Source: Stacks Project, More on Algebra, Remark 05EL, displayed definition of
-`H^0` (blueprint: def-weil-pbc-formal-glueing-H0). -/
+compatibility differences. Tensor factors are in Mathlib's order `S ⊗[R] M`. -/
 noncomputable def h0 {t : ℕ} (φ : R →+* S) (f : Fin t → R) (X : Data.{u, v, w} φ f) :
     Submodule R (restrict φ X.M' × ∀ i : Fin t, piece (f i) (X.M i)) :=
   letI : Algebra R S := φ.toAlgebra

@@ -16,7 +16,19 @@ import WeilConjectures.RingTheory.TorIdealHomologyFormula
 import WeilConjectures.RingTheory.TorIdealHomologyExactness
 
 /-! # The ideal connecting map for first Tor
-Source: Stacks Project, Algebra, Tags 00M5 and 00M6.
+For an ideal `I` of `R` and an `R`-module `M`, the connecting map gives an isomorphism of
+`Tor₁(M, R/I)` onto the kernel of the multiplication map `I ⊗ M → M`, computed explicitly on
+cycles of a free resolution.
+
+## Implementation details
+
+Tensoring `0 → I → R → R/I → 0` with a free resolution of `M` and applying the snake lemma in
+degrees one and zero sends a cycle lifted to `y` with `d y = ∑ aⱼ • pⱼ` to `∑ aⱼ ⊗ π(pⱼ)`.
+
+## References
+
+* [Stacks, Tag 00M5]
+* [Stacks, Tag 00M6]
 -/
 
 @[expose] public section
@@ -26,23 +38,10 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 open scoped TensorProduct BigOperators
 namespace ModuleCat
 
-/-- Source: Stacks Project, Algebra, proof of Tag 00M5 and Remark 00M6
-(blueprint: lem-weil-pbc-tor-ideal-connecting-formula).
-
-Proof in words: tensor `0 → I → R → R/I → 0` with each free resolution term.
-Flatness makes the ideal inclusion injective, and right exactness identifies the
-quotient with the tensor by `R/I`. The snake lemma in degrees one and zero sends
-an input cycle, lifted to `y`, to the class of an ideal tensor preimage of `d y`.
-Tensor right exactness identifies the degree-zero cokernel of the ideal-tensor
-complex with `I ⊗ M`; its map to the degree-zero cokernel of the original complex
-is `μ`, by the specified formula on pure tensors. Exactness of the resolution in
-degree one identifies the kernel of the snake map with boundaries. Descending to
-homology is therefore injective, with range `ker μ`. Transport along
-`P.isoLeftDerivedObj` identifies this homology with Tor. An ideal tensor preimage
-of `d y = ∑ a j • p j` is `∑ p j ⊗ a j`, which gives the stated value after
-symmetry and augmentation. Independence of both choices is the snake lemma's
-well-definedness. This includes the zero ideal, unit ideal, and zero module.
--/
+/-- For an ideal `I` and a free resolution `P` of `M`, there is an injective linear map
+`δR : Tor₁(M, R/I) → I ⊗ M` with range the kernel of the multiplication map `μR : I ⊗ M → M`,
+sending the class of a cycle lifted to `y` with `d y = ∑ j, a j • p j` to
+`∑ j, a j ⊗ π (p j)`. -/
 theorem exists_tor_ideal_connecting_formula
     {R : Type u} [CommRing R] (I : Ideal R) (M : ModuleCat.{u} R)
     (P : ProjectiveResolution M) (hP : ∀ n : ℕ, Module.Free R (P.complex.X n))

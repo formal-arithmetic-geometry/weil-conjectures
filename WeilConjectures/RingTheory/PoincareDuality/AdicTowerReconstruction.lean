@@ -13,8 +13,22 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 /-!
 # Reconstruction from an adic tower
 
-Source: Stacks Project, Algebra, Lemma 09B8 (lemma-limit-complete)
-(blueprint: lem-pod-adic-tower-reconstruction).
+An inverse limit `L` of a tower of modules `N n` over `A / I^(n+1)`, with `I` finitely generated
+and transitions inducing `N (n+1) / I^(n+1) ≅ N n`, is `I`-adically complete with
+`L / I^(n+1) L ≅ N n`.
+
+## Implementation details
+
+Here `N n` denotes `M_{n+1}` in the Stacks Project. The canonical map from `L` to its completion
+has a left inverse, so `L` is complete as a retract of a complete module (Tags 05GG, 09B7). The
+kernels `K n = ker (p n)` then satisfy `K n = I^(n+1) L`, since the inverse limit of the
+surjective tower `K n / (K n ∩ I^(n+1) L)` vanishes.
+
+## References
+
+* [Stacks, Tag 09B8]
+* [Stacks, Tag 09B7]
+* [Stacks, Tag 05GG]
 -/
 
 @[expose] public section
@@ -53,25 +67,10 @@ private theorem map_pow_mem {A : Type u} [CommRing A] (I : Ideal A)
     exact smul_mono_right _ le_top
   exact h (Submodule.mem_map.mpr ⟨x, hx, rfl⟩)
 
-/-- Source: Stacks Project, Algebra, Lemma 09B8 (lemma-limit-complete)
-(blueprint: lem-pod-adic-tower-reconstruction).
-Here `N n` denotes the paper's `M_{n+1}`. A module over `A / I^(n+1)` is expressed as
-an `A`-module annihilated by `I^(n+1)`. The surjectivity and kernel conditions on `t`
-say precisely that its induced quotient map is an isomorphism. The maps `p` present
-`L` as the inverse limit: every compatible family is the image of exactly one element.
-The infimum of the topologies induced by `p n` from the discrete topology is the
-inverse-limit topology.
-
-Proof: (1) Surjective transitions allow recursive lifts, so each projection is surjective;
-it kills `I^(n+1) L`. (2) The canonical map from `L` to its completion has a left inverse
-obtained from these projections. Completion along a finitely generated ideal is complete
-(lem-weil-pbc-module-completion-complete, Stacks 05GG), and completeness passes to this
-retract, as in Stacks 09B7. (3) Put `K n = ker (p n)`. The quotient transition hypothesis
-makes the transitions on `K n / (K n ∩ I^(n+1) L)` surjective. Their inverse limit is the
-kernel of the map from the completion to `L`, hence zero by (2). Surjectivity then forces
-every term to vanish, so `K n = I^(n+1) L`. (4) Thus the induced quotient maps are
-isomorphisms, and intersection of the kernels is zero. (5) These same kernels are the
-basic zero neighborhoods of the inverse-limit topology and of the adic topology. -/
+/-- Let `I` be a finitely generated ideal and `N n` a tower of `A`-modules annihilated by
+`I^(n+1)` with surjective transitions whose kernels are `I^(n+1) N (n+1)`. If `L` is the inverse
+limit of the tower via the maps `p`, then `p n` induces `L / I^(n+1) L ≃ N n`, `L` is `I`-adically
+complete and Hausdorff, and the inverse-limit topology on `L` is the `I`-adic topology. -/
 theorem adic_tower_reconstruction
     {A : Type u} [CommRing A] (I : Ideal A) (hI : I.FG)
     (N : ℕ → Type v) [∀ n, AddCommGroup (N n)] [∀ n, Module A (N n)]

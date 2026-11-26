@@ -10,8 +10,8 @@ public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-! # CompactSupportScalarExtensionLaws
 
-A proved generic calculation for the compact-support finite action.
-(blueprint: lem-weil-compact-support-scalar-extension-laws).
+Scalar extension of the Hom maps of an `R`-linear functor to `R[1/p]` preserves identities
+and composition, used for the compact-support finite action.
 -/
 
 @[expose] public noncomputable section
@@ -19,14 +19,9 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits TensorProduct
 namespace WeilConjectures
 
-/-- The base-changed map sends a pure tensor a tensor f to a tensor F(f).
-Source: blueprint lem-fix-operation-reduction.proof.md, final paragraph;
-finite-action proof step 2, scalar extension of Hom maps.
-(blueprint: lem-weil-compact-support-scalar-extension-laws).
-Proof: The base-changed map sends a pure tensor a tensor f to a tensor F(f).
-The identity equation is the functor identity law. For composition, induct on
-both tensor factors, use the prescribed bilinear composition formula on pure
-tensors and the functor composition law, then use additivity. -/
+/-- For an `R`-linear functor `F`, the base change to `R[1/p]` of the map on Hom modules,
+`a ⊗ f ↦ a ⊗ F(f)`, sends identities to identities and is compatible with the scalar-localized
+composition. -/
 theorem compactSupportScalarExtensionLaws
     {R : Type*} [CommRing R] {C D : Type*} [Category C] [Category D]
     [Preadditive C] [Preadditive D] [Linear R C] [Linear R D]

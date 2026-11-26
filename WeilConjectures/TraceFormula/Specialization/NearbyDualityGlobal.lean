@@ -13,9 +13,8 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityExchange
 
 For a trait model `M` over the base with proper `X`, `X'` and proper total space, the global
 sections `RΓ(X', δ_{M,K})` of the duality map are compared with the duality map of the trait by
-the abstract identity `CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper` (blueprint
-`lemma-nearby-duality-proper-direct-image` (1), (3)), applied to `G = Ra_*`, `G' = Ra'_*` and the
-proper exchange `χ_a`. Its concrete inputs, proved in
+the abstract identity `CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper`, applied to
+`G = Ra_*`, `G' = Ra'_*` and the proper exchange `χ_a`. Its concrete inputs, proved in
 `TraceFormula.Specialization.NearbyDualityLaxMonoidal` and
 `TraceFormula.Specialization.NearbyDualityExchange`, are:
 
@@ -32,12 +31,19 @@ proper exchange `χ_a`. Its concrete inputs, proved in
   isomorphism (`ProEtale.CondensedRing.isIso_nearbyDualityMap_lowerStar_trace`). The
   identification uses that the exceptional projection morphism of a proper morphism is the
   projection morphism of `Lf^* ⊣ Rf_!`
-  (`ProEtale.CondensedRing.upperStar_map_exceptionalProjection_comp_counit`, blueprint
-  `prop-sf-pf-coherence`).
+  (`ProEtale.CondensedRing.upperStar_map_exceptionalProjection_comp_counit`).
 
 With these, `RΓ(X', δ_{M,K})` is an isomorphism as soon as the proper exchange `χ_a` is invertible
 and the duality map of the trait is invertible at `Ra_* K`
 (`NearbyCyclesModel.isIso_lowerStar_nearbyDualityMap_of_isIso`).
+
+## Implementation details
+
+The invertibility of `χ_a` needs the geometric generic fibre of `M` to be all of `X ×_k Spec Ω`
+(not only an open of it, as `NearbyCyclesModel.IsTraitModelOfBase` allows): for
+`X = Spec k ⊔ Spec k` and the trait `S` itself as total space, mapping to the first copy, `χ_a`
+kills `Ψ_S Ra_*` of the unit of the second copy. It is therefore a hypothesis of
+`NearbyCyclesModel.isIso_lowerStar_nearbyDualityMap_of_isIso`.
 
 -/
 
@@ -68,10 +74,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X X' : Scheme.{u}} (M : NearbyCyclesModel X X')
 
 /-- The lax monoidal structure of the nearby cycles `Ψ = Li^* ∘ Rj_* ∘ Lε^*`: the composite of the
-monoidal functors `Lε^*`, `Li^*` and of the lax monoidal right adjoint `Rj_*`
-(`CategoryTheory.Adjunction.rightAdjointLaxMonoidal`). Its tensor maps are the lax tensor maps
-`NearbyCyclesModel.tensorMap` (`NearbyCyclesModel.nearbyCyclesLaxMonoidal_μ`). It is not an
-instance. -/
+monoidal functors `Lε^*`, `Li^*` and of the lax monoidal right adjoint `Rj_*`. -/
 @[instance_reducible]
 noncomputable def nearbyCyclesLaxMonoidal : (M.nearbyCycles Λ).LaxMonoidal :=
   @Functor.LaxMonoidal.comp _ _ _ _ _ _ _ _ _ L((M.ε)^*⟦Λ⟧) (R((M.j)_*⟦Λ⟧) ⋙ L((M.i)^*⟦Λ⟧)) _
@@ -98,9 +101,7 @@ section Trait
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   (k : Type u) [Field k] (k' : Type u) [Field k'] [IsSepClosed k'] [Algebra k k']
 
-/-- The unit map of the lax monoidal structure of the nearby cycles of the trait is invertible:
-after restriction to the closed point, the unit `Λ_S ⟶ Rη̄_* Lη̄^* Λ_S` is invertible
-(`ProEtale.CondensedRing.isIso_upperStar_traitClosedPoint_map_derivedUnit_app_unit`). -/
+/-- The unit map of the lax monoidal structure of the nearby cycles of the trait is invertible. -/
 lemma isIso_nearbyCyclesLaxMonoidal_ε_traitModel :
     IsIso (@Functor.LaxMonoidal.ε _ _ _ _ _ _ ((traitModel k k').nearbyCycles Λ)
       ((traitModel k k').nearbyCyclesLaxMonoidal Λ)) := by
@@ -111,8 +112,7 @@ lemma isIso_nearbyCyclesLaxMonoidal_ε_traitModel :
     L(((traitModel k k').i)^*⟦Λ⟧) (derivedUpperStarLowerStarAdjunction Λ (traitModel k k').j)
 
 /-- The tensor maps of the nearby cycles of the trait are invertible at `(A, B)` if `Lε^* A` is a
-finite direct sum of shifts of the unit
-(`ProEtale.CondensedRing.isIso_upperStar_map_lowerStarTensorMap'_of_shiftDecomposition`). -/
+finite direct sum of shifts of the unit. -/
 lemma isIso_tensorMap_traitModel
     (A B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (point k).left) Ab.{u + 1})
       (condensedRingObj Λ (point k).left)))
@@ -143,9 +143,7 @@ local notation "𝐐" => Profinite.padicAlgClRingObj ℓ
 
 /-- The nearby cycles on bounded constructible complexes are strong monoidal, with tensor maps the
 lax tensor maps of nearby cycles, as soon as these and the unit map of
-`NearbyCyclesModel.nearbyCyclesLaxMonoidal` are invertible: the restriction
-(`CategoryTheory.ObjectProperty.laxMonoidalLift`) of `NearbyCyclesModel.nearbyCyclesLaxMonoidal`.
--/
+`NearbyCyclesModel.nearbyCyclesLaxMonoidal` are invertible. -/
 @[instance_reducible]
 noncomputable def boundedConstructibleNearbyCyclesMonoidal
     (hP : M.PreservesBoundedConstructible 𝐐)
@@ -200,12 +198,7 @@ omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] 
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
 /-- **The nearby cycles of the trait are monoidal on the base point**: the nearby cycles
 `Ψ_S : Dᵇc(Spec k) ⥤ Dᵇc(Spec k')` of the trait `S` as a model of `Spec k` are a monoidal functor
-with tensor maps the lax tensor maps of nearby cycles (`boundedConstructibleTensorMap`):
-`NearbyCyclesModel.boundedConstructibleNearbyCyclesMonoidal`. The tensor maps are invertible as
-`Lε^* A` is a finite direct sum of shifts of the unit on the geometric generic point `Spec Ω`
-(`nonempty_shiftDecomposition_of_boundedConstructible`,
-`NearbyCyclesModel.isIso_tensorMap_traitModel`), and the unit map is invertible
-(`NearbyCyclesModel.isIso_nearbyCyclesLaxMonoidal_ε_traitModel`). -/
+with tensor maps the lax tensor maps of nearby cycles (`boundedConstructibleTensorMap`). -/
 theorem exists_monoidal_traitSpecialization :
     ∃ L : (boundedConstructibleNearbyCycles
         (preservesBoundedConstructible_traitModel (k := k) (k' := k') ℓ)).Monoidal,
@@ -223,15 +216,10 @@ theorem exists_monoidal_traitSpecialization :
 
 omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
-/-- **The duality map of the trait itself** (blueprint `lemma-nearby-duality-proper-direct-image`
-(3), "with `θ_S` the identity of `A` the normalized pairing on `S` is ordinary evaluation"): for the
-trait `S` as a model of the base point `Spec k`, with the lax tensor map of its nearby cycles and
-the inverse of the specialization unit as dualizing map, the duality map
-`δ_{S,N} : Ψ_S RHom(N, ℚ̄_ℓ) ⟶ RHom(Ψ_S N, ℚ̄_ℓ)` is an isomorphism for every bounded
-constructible `N` on `Spec k`: `Ψ_S` is monoidal (`exists_monoidal_traitSpecialization`), `N` is
-dualizable (`ProEtale.CondensedRing.nonempty_hasLeftDual_point`), monoidal functors commute with
-duals (`CategoryTheory.Verdier.isIso_nearbyDualityMap_of_monoidal`), and the dualizing map
-`σ_s⁻¹` differs from the inverse of the unit map of `Ψ_S` by an automorphism of the unit. -/
+/-- **The duality map of the trait itself**: for the trait `S` as a model of the base point
+`Spec k`, with the lax tensor map of its nearby cycles and the inverse of the specialization unit
+as dualizing map, the duality map `δ_{S,N} : Ψ_S RHom(N, ℚ̄_ℓ) ⟶ RHom(Ψ_S N, ℚ̄_ℓ)` is an
+isomorphism for every bounded constructible `N` on `Spec k`. -/
 theorem isIso_nearbyDualityMap_traitModel
     (N : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (Verdier.nearbyDualityMap
@@ -258,23 +246,11 @@ theorem isIso_nearbyDualityMap_traitModel
   rw [e₂, ← Verdier.nearbyDualityMap_comp_ihom_map]
   infer_instance
 
-/-- **Global sections of the duality map of a proper model, reduced to the trait** (blueprint
-`lemma-nearby-duality-proper-direct-image` (1) and (3)): if `X`, `X'` and the total space of the
-trait model `M` over the base are proper, then `RΓ(X', δ_{M,K})` is an isomorphism as soon as the
-proper exchange `χ_a : Ψ_S Ra_* ⟶ Ra'_* Ψ_M` of the structure morphism is invertible (it is used at
-`K` and `D_X K`), and the duality map of the trait `S` itself (lax tensor map of its nearby cycles,
-dualizing map the inverse of the specialization unit `σ_s`) is invertible at `Ra_* K`. This is
-`CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper'`, with the compatibility of `χ_a`
-with the lax tensor maps (`NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_tensor`),
-the proper axiom of the dualizing maps
-(`NearbyCyclesModel.NearbyDualizingData.pushforwardExchange_comp_map_θ_comp_trace`) and global
-Verdier duality on both fibres (`ProEtale.CondensedRing.isIso_nearbyDualityMap_lowerStar_trace`).
-
-The invertibility of `χ_a` needs the geometric generic fibre of `M` to be all of `X ×_k Spec Ω`
-(not only an open of it, as `NearbyCyclesModel.IsTraitModelOfBase` allows): for
-`X = Spec k ⊔ Spec k` and the trait `S` itself as total space, mapping to the first copy, `χ_a`
-kills `Ψ_S Ra_*` of the unit of the second copy.
--/
+/-- **Global sections of the duality map of a proper model, reduced to the trait**: if `X`, `X'`
+and the total space of the trait model `M` over the base are proper, then `RΓ(X', δ_{M,K})` is an
+isomorphism as soon as the proper exchange `χ_a : Ψ_S Ra_* ⟶ Ra'_* Ψ_M` of the structure morphism
+is invertible and the duality map of the trait `S` itself (lax tensor map of its nearby cycles,
+dualizing map the inverse of the specialization unit `σ_s`) is invertible at `Ra_* K`. -/
 theorem isIso_lowerStar_nearbyDualityMap_of_isIso (D : NearbyDualizingData k k' ℓ)
     (h : M.IsTraitModelOfBase k q g) [IsProper (toPoint X).left] [IsProper (toPoint X').left]
     [IsProper q] (hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k'))

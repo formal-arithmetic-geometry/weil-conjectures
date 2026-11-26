@@ -20,8 +20,7 @@ hypothesis of
 `AlgebraicGeometry.ProEtaleWeilSheaf.exists_nativeOpenPull_nativeDerivedTensor_iso_of_nativeIsKFlat`
 holds: the balanced sheaf comparison `p^*(M ⊗ N) ≅ p^* M ⊗ p^* N` descends to a natural isomorphism
 `p^*(A ⊗ B) ≅ p^* A ⊗ p^* B` of native derived tensor products, for every `p`. This is the
-pullback/tensor comparison entering the proper projection formula (blueprint:
-`fix-prop-projection-formula`).
+pullback/tensor comparison entering the proper projection formula.
 -/
 
 @[expose] public section

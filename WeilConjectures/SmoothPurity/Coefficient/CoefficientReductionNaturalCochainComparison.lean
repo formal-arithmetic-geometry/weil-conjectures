@@ -15,7 +15,20 @@ import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitFiniteMateCompa
 
 /-! # The natural cochain comparison for completed-coefficient reduction
 
-Source: Stacks 07A6, 09T5, 0D6E and 0941.
+We construct the natural cochain counit of completed-coefficient reduction, before changing the
+coefficient field.
+
+## Implementation details
+
+The comparison is the transpose, through the reduction adjunction, of the localized ordinary
+tensor unit followed by the system limit unit (the right-derived limit unit transported along
+the termwise-limit isomorphism). It therefore has exactly the ordinary-unit transpose required
+by `CompletionUnit.finiteComparison_of_unit`, which computes its finite values on flat-term
+K-flat complexes. No new derived adjunction or universal left-derived functor is constructed.
+
+## References
+
+* [Stacks Project, Tags 07A6, 09T5, 0D6E, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -143,24 +156,7 @@ private theorem constantLimitUnit_normalization
 
 end ReductionCochainComparison
 
-/-- Reduction's cochain counit, before changing the coefficient field.
-
-Source: Stacks sites-cohomology.tex, lemma-adjoint (07A6),
-lemma-derived-pushforward-composition (0D6E), and derived.tex,
-lemma-derived-adjoint-functors (09T5); step 1 of
-stage3-pur-extension-strict-derived-comparison.
-(blueprint: stage3-pur-reduction-natural-cochain-comparison).
-
-Proof: take the standard right-derived limit unit, transported along the canonical
-termwise-limit isomorphism. Compose with the exact restriction comparison and
-M.limitComparison to obtain the system limit unit. Localize the ordinary tensor
-unit and follow it by this system unit. Transpose this natural transformation
-through S.adjunction; naturality follows from naturality of its Hom equivalence.
-The resulting comparison has exactly the ordinary-unit transpose required by
-CompletionUnit.finiteComparison_of_unit. Apply that lemma to compute its finite
-values on flat-term K-flat complexes. No construction of a new derived adjunction
-or universal left-derived functor is needed. The construction applies to every
-scheme, unbounded complexes, zero complexes, and n = 0. -/
+/-- Reduction has a natural cochain counit, before changing the coefficient field. -/
 theorem coefficientReductionNaturalCochainComparison
     (S : CoefficientDerivedSystemCalculus l E W)
     (M : CompletionUnit.OrdinaryModel l E W) :

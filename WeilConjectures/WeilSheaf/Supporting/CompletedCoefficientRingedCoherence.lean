@@ -53,13 +53,32 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 /-!
 # Composition and slice localization of completed coefficient ring maps
 
-Source: Stacks Project, Tag 04J0; Bhatt--Scholze, Proposition 6.6.11 and Remark 6.8.15
-(blueprint: lem-tw-completed-coefficient-ringed-coherence).
+This file constructs the structural ring maps between the completed coefficient rings on small
+pro-étale sites, their composition compatibility, and their compatibility with slice
+localization.
+
+## Implementation details
 
 The small pro-etale site keeps object universe t+1 and morphism universe t.
 Coefficient values live in max u (t+1); the two input universes are independent.
 Index n denotes the positive exponent n+1. All coefficient maps are fixed by
 projections, and all geometric comparisons by their adjunction mates.
+
+The structural map `completedRingMap` is obtained from the sectionwise limit universal property:
+the constant-section adjuncts commute with reductions, so composing the pulled-back projections
+with them gives a cone in the target site. No infinite-limit preservation by inverse image is
+used.
+
+For `completedRingMap_slice`, weakly-étale localization of `U` and its base change gives
+compatible finite-level identifications; slice restriction is sectionwise, so it preserves the
+inverse limit. The localized direct-image comparison is restriction along
+`H ×_U (U ×_W T) ≅ H ×_W T`, and its inverse-image mate sends a constant to the same constant,
+so it is the defining adjunct; joint limit uniqueness gives the completed identity.
+
+## References
+
+* [Stacks, Tags 00VC, 03CO, 04J0, 09A5, 0H7J]
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.6.11 and Remark 6.8.15.
 -/
 
 @[expose] public noncomputable section
@@ -73,24 +92,21 @@ open CategoryTheory CategoryTheory.Category CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
-/-- The recorded Kan-extension/sheafification inverse image at the coefficient size.
-Source: Stacks 00VC, 09A5 (blueprint: lem-tw-completed-coefficient-ringed-coherence). -/
+/-- The recorded Kan-extension/sheafification inverse image at the coefficient size. -/
 abbrev completedRingPull {X Y : Scheme.{t}} (f : X ⟶ Y) :=
   letI : HasColimitsOfSize.{t, t + 1} CommRingCat.{max u (t + 1)} :=
     hasColimitsOfSizeShrink.{t, t + 1, max u (t + 1), max u (t + 1)} _
   Functor.sheafPullbackConstruction.sheafPullback (proEtaleBaseChange f)
     CommRingCat.{max u (t + 1)} (ProEt.topology Y) (ProEt.topology X)
 
-/-- Its specified Kan-extension/sheafification adjunction.
-Source: Stacks 00VC, 09A5 (blueprint: lem-tw-completed-coefficient-ringed-coherence). -/
+/-- Its specified Kan-extension/sheafification adjunction. -/
 abbrev completedRingAdj {X Y : Scheme.{t}} (f : X ⟶ Y) :=
   letI : HasColimitsOfSize.{t, t + 1} CommRingCat.{max u (t + 1)} :=
     hasColimitsOfSizeShrink.{t, t + 1, max u (t + 1), max u (t + 1)} _
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (proEtaleBaseChange f)
     CommRingCat.{max u (t + 1)} (ProEt.topology Y) (ProEt.topology X)
 
-/-- Constant-section structural map, using the recorded constant-section adjunct.
-Source: Stacks 0H7J (blueprint: lem-tw-completed-coefficient-ringed-coherence). -/
+/-- Constant-section structural map, using the recorded constant-section adjunct. -/
 def completedRingConstantMap {X Y : Scheme.{t}} (f : X ⟶ Y)
     (A : CommRingCat.{max u (t + 1)}) :
     (completedRingPull.{t, u} f).obj
@@ -144,14 +160,7 @@ attribute [-instance] completedWeakSheafify
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The projection equations determine exactly one structural ring map.
-Source: Stacks 03CO, 04J0; Bhatt--Scholze 6.6.11
-(blueprint: lem-tw-completed-coefficient-ringed-coherence).
-Proof: the constant-section adjuncts commute with reductions, since their two
-extensions agree on every constant. Compose the pulled-back projections with
-these maps to obtain a cone in the target site. The sectionwise limit universal
-property supplies the map and proves its uniqueness. No infinite-limit
-preservation by inverse image is used. -/
+/-- The projection equations determine exactly one structural ring map. -/
 theorem completedRingMap_existsUnique {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ∃! c : (completedRingPull.{t, u} f).obj
         (completedIntegralCommRingSheafUnrestricted l E Y) ⟶
@@ -209,15 +218,13 @@ theorem completedRingMap_existsUnique {X Y : Scheme.{t}} (f : X ⟶ Y) :
     F.map m ≫ F.map (completedIntegralCommRingProjectionUnrestricted l E X n.unop)
   rw [← F.map_comp, ← F.map_comp, hm', hm]
 
-/-- The unique projection-defined completed coefficient map, with no extra choices.
-Source: Stacks 04J0 (blueprint: lem-tw-completed-coefficient-ringed-coherence). -/
+/-- The unique projection-defined completed coefficient map, with no extra choices. -/
 def completedRingMap {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (completedRingPull.{t, u} f).obj (completedIntegralCommRingSheafUnrestricted l E Y) ⟶
       completedIntegralCommRingSheafUnrestricted l E X :=
   (completedRingMap_existsUnique l E f).exists.choose
 
-/-- The geometric inverse-image compositor, the mate of fibre-product associativity.
-Source: Stacks 09A5 (blueprint: lem-tw-completed-coefficient-ringed-coherence). -/
+/-- The geometric inverse-image compositor, the mate of fibre-product associativity. -/
 def completedRingComp {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     completedRingPull.{t, u} (f ≫ g) ≅
       completedRingPull.{t, u} g ⋙ completedRingPull.{t, u} f :=
@@ -280,8 +287,7 @@ private theorem completedDirect_comp {T W Z : Scheme.{t}} (h : T ⟶ W) (k : W �
   exact hn.symm.trans (Category.id_comp _)
 
 /-- Slice restriction under the recorded equivalence Over U ≌ ProEt U.left.
-It is exactly sectionwise restriction, in the coefficient universe.
-Source: Stacks 04J0 (blueprint: lem-tw-completed-coefficient-ringed-coherence). -/
+It is exactly sectionwise restriction, in the coefficient universe. -/
 abbrev completedRingRestriction {W : Scheme.{t}} (U : W.ProEt) :
     Sheaf (ProEt.topology W) CommRingCat.{max u (t + 1)} ⥤
       Sheaf (ProEt.topology U.left) CommRingCat.{max u (t + 1)} :=
@@ -291,14 +297,12 @@ abbrev completedRingRestriction {W : Scheme.{t}} (U : W.ProEt) :
   (MorphismProperty.Over.map ⊤ U.prop).sheafPushforwardContinuous
     CommRingCat.{max u (t + 1)} (ProEt.topology U.left) (ProEt.topology W)
 
-/-- The base-changed object's morphism to the original object.
-Source: Stacks 04J0 (blueprint: lem-tw-completed-coefficient-ringed-coherence). -/
+/-- The base-changed object's morphism to the original object. -/
 abbrev completedRingSliceArrow {T W : Scheme.{t}} (g : T ⟶ W) (U : W.ProEt) :
     ((proEtaleBaseChange g).obj U).left ⟶ U.left :=
   pullback.fst U.hom g
 
-/-- The actual geometric identification H ×_U (U ×_W T) ≅ H ×_W T over T.
-Source: Stacks 04J0 (blueprint: lem-tw-completed-coefficient-ringed-coherence). -/
+/-- The actual geometric identification H ×_U (U ×_W T) ≅ H ×_W T over T. -/
 def completedRingSlicePointIso {T W : Scheme.{t}} (g : T ⟶ W) (U : W.ProEt)
     (H : U.left.ProEt) :
     (MorphismProperty.Over.map ⊤ ((proEtaleBaseChange g).obj U).prop).obj
@@ -823,23 +827,7 @@ private theorem completedSliceMap_eq {T W : Scheme.{t}} (g : T ⟶ W)
 end SliceProof
 
 /-- Slice identifications preserve constants and every completed projection; the
-localized structural map is precisely the completed map of the base change.
-Source: Stacks 04J0; Bhatt--Scholze 6.6.11, 6.8.15
-(blueprint: lem-tw-completed-coefficient-ringed-coherence).
-Proof:
-1. Apply weakly-etale localization to U and its base change. Its equivalences are
-sliceFrom and sliceTo, and its constant-ring comparison is identity on constants.
-Naturality in quotient reduction gives compatible finite-level identifications.
-2. Slice restriction is sectionwise, so it preserves this inverse limit. The
-finite comparisons induce the completed identifications and commute with pi_n.
-3. Localize the ringed-site morphism (Stacks 04J0). The direct-image comparison
-on H is restriction along H ×_U (U ×_W T) ≅ H ×_W T. Its inverse-image mate is the
-unit/comparison/counit composite displayed below and is invertible.
-4. Under the constant comparisons, its finite structural adjunct sends a constant
-a to the same constant on the same fibre product. It is therefore the defining
-adjunct for c_v. Naturality of the mate at pi_n gives the finite projection
-identity; joint limit uniqueness gives the completed identity. No flatness or
-invertibility assumption on any structural coefficient map enters. -/
+localized structural map is precisely the completed map of the base change. -/
 theorem completedRingMap_slice {T W : Scheme.{t}} (g : T ⟶ W) (U : W.ProEt) :
     ∃ (eU : (completedRingRestriction.{t, u} U).obj
           (completedIntegralCommRingSheafUnrestricted l E W) ≅

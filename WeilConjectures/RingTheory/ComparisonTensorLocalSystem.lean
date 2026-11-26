@@ -15,35 +15,32 @@ import WeilConjectures.RingTheory.ComparisonTensorCanonicalMaps
 import WeilConjectures.RingTheory.ComparisonTensorCanonicalCocones
 
 /-! # Local tensor comparison system
-Source: Stacks Project, Algebra, Tag 02JO (3), construction of Ψ, and Tag 00DD.
-(blueprint: lem-weil-pbc-comparison-tensor-local-system-j3)
+
+Given a comparison map at one stage `i` of a directed system of rings, we construct a compatible
+system of comparison maps at all later stages by base change.
+
+## Implementation details
+
+The ring `F(j) ⊗ B₀` gets the `P`-structure induced from `F(i) ⊗ B₀` by the tensor transition.
+The tensor rings are lifted to a common universe, and the comparison components are obtained by
+base-changing `ψ` from `F(i)` to `F(j)` and cancelling iterated tensor products. Tensor
+cancellation identifies the vertices at `k` with base changes of the vertices at `j`, so the
+transition squares are pushouts by the universal property of the tensor product.
+
+## References
+
+* [Stacks, Tag 02JO] (3), construction of `Ψ`
+* [Stacks, Tag 00DD]
 -/
 @[expose] public section
 open scoped TensorProduct
 open CategoryTheory CategoryTheory.Limits
 universe v w x y
 namespace RingHom
-/-- Construct the comparison system without a global comparison map.
-Source: Stacks Project, Algebra, Tags 02JO (3) and 00DD.
-(blueprint: lem-weil-pbc-comparison-tensor-local-system-j3)
-
-Proof: give B_j the P-structure induced from B_i by the tensor transition.
-Lift the tensor rings to the common universe and conjugate their canonical
-transition maps by the ULift equivalences. Base-change ψ from F(i) to F(j)
-and cancel the iterated tensors to obtain the comparison components.
-On b tensor q the component is φ_j(b) times the image of ψ(1 tensor q).
-The identity hψ gives P-balancedness, left compatibility and naturality.
-Take the cocone points to be the ULifts of the limit tensor rings, with legs
-the canonical tensor maps. If t_ij : B_i → B_j is the canonical transition,
-the P-action on B_j is p ↦ t_ij(algebraMap P B_i p). Cocone naturality gives
-μ_j composed with t_ij = μB, so μB's P-linearity proves μ_j's P-linearity.
-The tensor-map composition formulas
-prove the leg and transition identities. On the Q-inclusion every comparison
-has the same image in the limit, namely μC_i(ψ(1 tensor q)), proving the last
-clause. Finally tensor cancellation identifies both vertices at k with base
-changes of the vertices at j along B_j to B_k; the tensor universal property
-therefore proves the transition squares are pushouts. No global ζ is used.
--/
+/-- Given `φ₀ : B₀ → C₀` over `F(i₀)` and a comparison `ψ : (F(i) ⊗ B₀) ⊗[P] Q → F(i) ⊗ C₀`
+extending `φ₀`, there is a system over the indices `j ≥ i` of comparison maps
+`(F(j) ⊗ B₀) ⊗[P] Q → F(j) ⊗ C₀` with cocones to the colimit, whose transition squares are
+pushouts. No global comparison map is needed. -/
 theorem exists_comparison_tensor_local_system
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]

@@ -18,22 +18,22 @@ public import WeilConjectures.TraceFormula.Specialization.ResidueConstantCase
 
 # The constant case of generic vanishing along a divisor, with coefficients `𝔽_E`
 
-Let `X` be normal of finite type over `k`, `Z = V(h)` a principal divisor, `j : X ∖ Z ⟶ X` and `ζ`
-a generic point of `Z`. Then `Le^* Ψ_X(j_! 𝔽_E)` vanishes near `ζ`
-(`ProEtale.CondensedRing.nearbyCyclesVanishNear_lowerShriek_unit_residueField`, blueprint
-`lemma-vanishing-generic-points-principal-divisor`).
+Let `X` be normal of finite type over `k`, `Z = V(h)` a principal divisor, `j : X ∖ Z ⟶ X` and `ζ` a
+generic point of `Z`. Then `Le^* Ψ_X(j_! 𝔽_E)` vanishes near `ζ`
+(`ProEtale.CondensedRing.nearbyCyclesVanishNear_lowerShriek_unit_residueField`).
+
+## Implementation details
 
 Over a perfect field `k`, the local ring `𝒪_{X,ζ}` is a discrete valuation ring, so `X` is
 smooth at `ζ` and some uniformizer defines a smooth morphism to `𝔸¹_k` near `ζ`
 (`exists_smooth_polyAffine_irreducible_germ`); the constant case with such a chart is
 `nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_uniformizer`.
 
-Over an imperfect field `X` need not be smooth at `ζ` (for instance `X = 𝔸¹_{k(a^{1/p})}`), and
-the blueprint assumes `k` algebraically closed. We base change to the perfect closure `K₀` of `k`
-inside `K = (k')^alg`: `X ×_k K₀ ⟶ X` is a universal homeomorphism, the normalization of the
-reduction of `X ×_k K₀` is a finite universal homeomorphism onto it, the perfect case applies
-there, and the vanishing descends to `X` by the invariance of nearby cycles under the change of
-trait `Spec K⟦t⟧ ⟶ Spec k'⟦t⟧`
+Over an imperfect field `X` need not be smooth at `ζ` (for instance `X = 𝔸¹_{k(a^{1/p})}`). We base
+change to the perfect closure `K₀` of `k` inside `K = (k')^alg`: `X ×_k K₀ ⟶ X` is a universal
+homeomorphism, the normalization of the reduction of `X ×_k K₀` is a finite universal homeomorphism
+onto it, the perfect case applies there, and the vanishing descends to `X` by the invariance of
+nearby cycles under the change of trait `Spec K⟦t⟧ ⟶ Spec k'⟦t⟧`
 (`ProEtale.CondensedRing.nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_not_perfectField`).
 
 -/
@@ -56,11 +56,8 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
-/-- **The constant case over a perfect field** (blueprint
-`lemma-vanishing-generic-points-principal-divisor`, `k` perfect): the local ring at a generic point
-`ζ` of the divisor `V(h)` of the normal scheme `X` is a discrete valuation ring, so a uniformizer
-near `ζ` is a smooth morphism to `𝔸¹_k` (`exists_smooth_polyAffine_irreducible_germ`), and the
-constant case with a smooth uniformizer applies. -/
+/-- **The constant case over a perfect field**: over a perfect field `k`, `Le^* Ψ_X(j_! 𝔽_E)`
+vanishes near a generic point `ζ` of the divisor `V(h)` of the normal scheme `X`. -/
 theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_perfectField [PerfectField k]
     (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}
     (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h}))
@@ -86,15 +83,9 @@ theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_perfectField [Pe
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
 /-- **The constant case after a universal homeomorphism onto a normal scheme, over a perfect
-field** (blueprint `lemma-vanishing-generic-points-principal-divisor`): let `X₀` be separated of
-finite type over a perfect field `k`, with a universal homeomorphism `π : X₀ ⟶ Y` onto a normal
-scheme `Y`, and `Z₀ = V(h₀)` with `h₀` not nilpotent. Then `Le^* Ψ_{X₀}(j_! 𝔽_E)` vanishes near
-every generic point `ζ₀` of `Z₀`. The normalization `ν : X₀' ⟶ X₀` of the reduction of `X₀` is
-finite and normal (`Scheme.exists_isNormalScheme_isFinite_of_irreducibleSpace`); it is a universal
-homeomorphism, since `X₀' ⟶ Y` is integral and universally injective on a dense open
-(`Scheme.Hom.isUniversalHomeomorphism_of_universallyInjective_comp`). The constant case over the
-perfect field `k` holds at the generic points of `ν⁻¹ Z₀`, and descends along `ν`
-(`nearbyCyclesVanishNear_lowerShriek_unit_of_isUniversalHomeomorphism`). -/
+field**: let `X₀` be separated of finite type over a perfect field `k`, with a universal
+homeomorphism `π : X₀ ⟶ Y` onto a normal scheme `Y`, and `Z₀ = V(h₀)` with `h₀` not nilpotent. Then
+`Le^* Ψ_{X₀}(j_! 𝔽_E)` vanishes near every generic point `ζ₀` of `Z₀`. -/
 theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_isUniversalHomeomorphism
     [PerfectField k] {X₀ : Over (Spec (.of k))} [LocallyOfFiniteType X₀.hom]
     [QuasiCompact X₀.hom] [IsSeparated X₀.hom] {Y : Scheme.{u}} (hY : IsNormalScheme Y)
@@ -158,15 +149,8 @@ theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_isUniversalHomeo
     hζ'g E
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
-/-- **The constant case over an imperfect field** (blueprint
-`lemma-vanishing-generic-points-principal-divisor`, which assumes `k` algebraically closed). Let `K`
-be an algebraic closure of `k'`, purely inseparable over `k'`, and `K₀ ⊆ K` the perfect closure of
-`k`. The base change `π : X₀ = X ×_k K₀ ⟶ X` is a universal homeomorphism, so `X₀` satisfies the
-constant case over the perfect field `K₀` with the trait `Spec K⟦t⟧`
-(`nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_isUniversalHomeomorphism`), and the
-vanishing descends to `X` by the invariance of nearby cycles under change of trait
-(`nearbyCyclesVanishNear_of_overBaseChange`); `Lπ^* j_! 𝔽_E ≅ j₀_! 𝔽_E`
-(`nonempty_leftDerivedUpperStar_openImmersionLowerShriek_unit_iso`). -/
+/-- **The constant case over an imperfect field**: if `k` is not perfect, `Le^* Ψ_X(j_! 𝔽_E)`
+vanishes near a generic point `ζ` of the divisor `V(h)` of the normal scheme `X`. -/
 theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_not_perfectField
     (_hk : ¬ PerfectField k)
     (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}
@@ -257,9 +241,9 @@ theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_not_perfectField
   exact (e.apply_symm_apply ζ).symm
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
-/-- **The constant case of generic vanishing along a divisor, with coefficients `𝔽_E`** (blueprint
-`lemma-vanishing-generic-points-principal-divisor`): `Le^* Ψ_X(j_! 𝔽_E)` vanishes near a generic
-point `ζ` of the divisor `V(h)` of a normal scheme `X`. -/
+/-- **The constant case of generic vanishing along a divisor, with coefficients `𝔽_E`**:
+`Le^* Ψ_X(j_! 𝔽_E)` vanishes near a generic point `ζ` of the divisor `V(h)` of a normal scheme `X`.
+-/
 theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField
     (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}
     (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h}))

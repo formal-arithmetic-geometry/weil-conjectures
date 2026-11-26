@@ -21,12 +21,18 @@ import WeilConjectures.RingTheory.RegularLocalComplementaryTorLengthData
 /-!
 # Tor for complementary regular local quotients
 
-Source: Stacks Project, `intersection.tex`, Tag 0B1I, proof of
-`intersection-lemma-transversal`.
-(blueprint: lem-trf-regular-local-complementary-quotients-tor)
+Complementary regular local quotients `A/I` and `A/J` meeting in the residue field have no
+higher Tor.
+
+## Implementation details
 
 The Koszul augmentations and the degree-zero Tor identification are normalized
-by the quotient and residue maps. Empty parameter prefixes are permitted.
+by the quotient and residue maps. Empty parameter prefixes are permitted. The proof combines
+`regularLocal_complementary_koszul_data` and `regularLocal_complementary_tor_length_data`.
+
+## References
+
+* [Stacks, Tag 0B1I]
 -/
 
 @[expose] public section
@@ -41,24 +47,7 @@ open scoped TensorProduct
 namespace RingTheory
 
 /-- Complementary regular local quotients meeting in the residue field have no higher Tor;
-their Koszul resolution remains acyclic in positive degrees after tensoring.
-Source: Stacks Project, `intersection.tex`, Tag 0B1I, proof of
-`intersection-lemma-transversal`.
-(blueprint: lem-trf-regular-local-complementary-quotients-tor)
-
-Proof:
-1. `regularLocal_complementary_koszul_data`
-   (`new-d3-regular-local-complementary-koszul-data`) gives the parameters `f`, the
-   prefix `g` generating `I`, regularity over `A` and over `A/J`, the finite free
-   Koszul terms vanishing above `r`, the normalized quotient augmentation `ε`, positive
-   tensor-homology vanishing, the normalized augmentation `δ` and the residue map `e`.
-2. `regularLocal_complementary_tor_length_data`
-   (`new-d3-regular-local-complementary-tor-length-data`), applied to `g`, the span
-   equality, the positive tensor-homology vanishing, the freeness of the Koszul terms
-   and the quasi-isomorphism `ε` of step 1, gives positive Tor vanishing, the
-   normalized degree-zero tensor and Tor isomorphisms, finite lengths and the
-   alternating sum. The conclusion is the conjunction of both lists of clauses.
--/
+their Koszul resolution remains acyclic in positive degrees after tensoring. -/
 theorem regularLocal_complementary_quotients_tor
     (A : Type u) [CommRing A] [IsRegularLocalRing A]
     (r s : ℕ) (hdim : ringKrullDim A = ((r + s : ℕ) : WithBot ℕ∞))

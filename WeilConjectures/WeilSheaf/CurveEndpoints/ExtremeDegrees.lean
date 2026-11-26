@@ -18,8 +18,8 @@ bundles the three clauses proved in `WeilConjectures.WeilSheaf.CurveEndpoints`.
 
 ## Main statements
 
-- `AlgebraicGeometry.compactlySupportedCohomology_directImage_extremeDegrees`: blueprint
-  `lemma-extreme-degrees-affine-curve`.
+- `AlgebraicGeometry.compactlySupportedCohomology_directImage_extremeDegrees`: the extreme
+  degrees on an affine curve.
 -/
 
 @[expose] public section
@@ -41,21 +41,19 @@ local instance : LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀)) :=
   have := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
   inferInstance
 
-/-- Blueprint `lemma-extreme-degrees-affine-curve`: the extreme degrees on an affine curve.
+/-- The extreme degrees on an affine curve.
 
 Let `j : U₀ ↪ C₀` be a dense open in a smooth geometrically connected affine curve over a finite
 field `k₀`, and let `F` be a lisse Weil sheaf on `U₀`. Then
 1. `H_c^r(C, j_*F) = 0` for `r ≠ 1, 2`
    (`AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage` and
-   `AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage_zero`, blueprint
-   `lemma-extreme-degrees-affine-curve--1`);
+   `AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage_zero`);
 2. `H_c^2(C, j_*F) ≃ V_{π₁(U)}(-1)`, Frobenius-equivariantly, where `V_{π₁(U)}` are the geometric
    coinvariants of `F`
-   (`AlgebraicGeometry.nonempty_equiv_compactlySupportedCohomology_directImage_two`, blueprint
-   `lemma-extreme-degrees-affine-curve--2`);
+   (`AlgebraicGeometry.nonempty_equiv_compactlySupportedCohomology_directImage_two`);
 3. if `F` is punctually `ι`-pure of weight `w`, then `H_c^2(C, j_*F)` is `ι`-pure of weight
-   `w + 2` (`AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two`,
-   blueprint `lemma-extreme-degrees-affine-curve--3`). -/
+   `w + 2`
+   (`AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two`). -/
 theorem compactlySupportedCohomology_directImage_extremeDegrees
     [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] (hF : F.IsLisse) :

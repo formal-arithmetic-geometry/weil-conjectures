@@ -48,12 +48,14 @@ public import WeilConjectures.AlgebraicGeometry.IntegralDerivedReduction
 
 /-! # Integral derived reduction
 
-Source: Bhatt--Scholze, Section 6.5, Definition 6.5.1 and Lemma 6.5.4;
-Stacks Project, Tags 06YS and 06YY (blueprint: def-weil-integral-derived-reduction).
-
 The natural-number index n denotes the positive exponent n+1. The functor is chosen
 from the universal derived-change-of-rings pair, not from an arbitrary existence
 statement: the universal property determines it up to unique compatible isomorphism.
+
+## References
+
+* [Bhatt--Scholze, Section 6.5, Definition 6.5.1 and Lemma 6.5.4]
+* [Stacks, Tag 06YS], [Stacks, Tag 06YY]
 -/
 
 @[expose] public section
@@ -68,8 +70,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
   (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p) (n : ℕ)
 
-/-- Standard localization for completed coefficient module sheaves.
-Source: Stacks, Tag 06YY (blueprint: def-weil-integral-derived-reduction). -/
+/-- Standard localization for completed coefficient module sheaves. -/
 noncomputable instance integralReductionSourceHasDerivedCategory :
     HasDerivedCategory (completedIntegralModuleSheaves l E Y D hl) :=
   HasDerivedCategory.standard _
@@ -77,8 +78,7 @@ noncomputable instance integralReductionSourceHasDerivedCategory :
 set_option linter.defProp false in
 /-- The recorded derived-change-of-rings theorem applied to the actual limit projection.
 It includes the fixed sectionwise tensor action, its derived universal property,
-exactness, and its counit isomorphism on every K-flat complex.
-Source: Stacks, Tag 06YY (blueprint: def-weil-integral-derived-reduction). -/
+exactness, and its counit isomorphism on every K-flat complex. -/
 noncomputable def integralReductionExistence :=
   letI := HasDerivedCategory.standard (SheafOfModules.{max u (t + 1)}
     (SheafOfModules.derivedChangeRingIndependentCoefficients
@@ -95,15 +95,13 @@ noncomputable def integralReductionExistence :=
     (completedIntegralCommRingProjection l E Y D hl n)
 
 /-- Ordinary change of rings along the coefficient projection, with objects and morphisms
-fixed by the sectionwise tensor product and sheafification.
-Source: Stacks, Tag 06YY (blueprint: def-weil-integral-derived-reduction). -/
+fixed by the sectionwise tensor product and sheafification. -/
 noncomputable def integralReductionChangeOfRings :
     completedIntegralModuleSheaves l E Y D hl ⥤
       SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n) :=
   (integralReductionExistence l E Y D hl n).choose
 
-/-- Additivity of the chosen ordinary tensor functor, supplied by its defining witness.
-Source: Stacks, Tag 06YY (blueprint: def-weil-integral-derived-reduction). -/
+/-- Additivity of the chosen ordinary tensor functor, supplied by its defining witness. -/
 theorem integralReductionChangeOfRingsAdditive :
     (integralReductionChangeOfRings l E Y D hl n).Additive :=
   (integralReductionExistence l E Y D hl n).choose_spec.choose_spec.choose_spec.choose
@@ -112,8 +110,7 @@ attribute [local instance] integralReductionChangeOfRingsAdditive
 
 set_option linter.defProp false in
 /-- The full derived pair supplied by the general change-of-rings theorem.
-Its universal property, exactness and K-flat computation fix the construction.
-Source: Stacks, Tag 06YY (blueprint: def-weil-integral-derived-reduction). -/
+Its universal property, exactness and K-flat computation fix the construction. -/
 noncomputable def integralReductionDerivedExistence :
     ∃ (LF : completedIntegralDerivedCategory l E Y D hl ⥤
         DerivedCategory
@@ -133,16 +130,13 @@ noncomputable def integralReductionDerivedExistence :
   (integralReductionExistence l E Y D hl n).choose_spec.choose_spec.choose_spec.choose_spec.2.2
 
 /-- Derived reduction modulo the (n+1)-st power of the chosen uniformizer, the exact
-left derived functor of change of rings along the completed coefficient projection.
-Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.4; Stacks, Tag 06YY
-(blueprint: def-weil-integral-derived-reduction). -/
+left derived functor of change of rings along the completed coefficient projection. -/
 noncomputable def integralDerivedReduction :
     completedIntegralDerivedCategory l E Y D hl ⥤
       DerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n)) :=
   scalarReductionDerivedExtension l E Y n
 
-/-- The universal comparison to termwise change of rings on homotopy complexes.
-Source: Stacks, Tag 06YY (blueprint: def-weil-integral-derived-reduction). -/
+/-- The universal comparison to termwise change of rings on homotopy complexes. -/
 noncomputable def integralDerivedReductionCounit :
     DerivedCategory.Qh ⋙ integralDerivedReduction l E Y D hl n ⟶
       (integralReductionChangeOfRings l E Y D hl n).mapHomotopyCategory
@@ -150,8 +144,7 @@ noncomputable def integralDerivedReductionCounit :
   (integralReductionDerivedExistence l E Y D hl n).choose_spec.choose
 
 /-- The universal left-derived-functor structure; it determines the functor uniquely
-up to the unique isomorphism respecting this counit.
-Source: Stacks, Tag 06YY (blueprint: def-weil-integral-derived-reduction). -/
+up to the unique isomorphism respecting this counit. -/
 theorem integralDerivedReductionUniversal :
     (integralDerivedReduction l E Y D hl n).IsLeftDerivedFunctor
       (integralDerivedReductionCounit l E Y D hl n)
@@ -161,13 +154,7 @@ theorem integralDerivedReductionUniversal :
 
 attribute [local instance] integralDerivedReductionUniversal
 
-/-- The universal counit computes reduction on every K-flat complex.
-Source: Stacks, Tag 06YY (blueprint: def-weil-integral-derived-reduction).
-Proof: the last conjunct of the defining derived-change-of-rings witness says
-that its counit is an isomorphism at the homotopy image of every K-flat complex.
-The named reduction and its counit are exactly that witness's two projections;
-the completed commutative ring sheaf has the same underlying ring sheaf.
-Substituting the given P and its K-flatness gives this assertion. -/
+/-- The universal counit computes reduction on every K-flat complex. -/
 theorem integralDerivedReduction_counit_isIso
     (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients
@@ -180,9 +167,7 @@ theorem integralDerivedReduction_counit_isIso
 /-- The canonical computation on a K-flat representative is the counit isomorphism.
 For a resolution P → G, precompose this with the inverse of the image of P → G.
 Comparisons between resolutions are composites through this same derived object,
-so are canonical and compatible with a third resolution.
-Source: Bhatt--Scholze, Section 6.5; Stacks, Tag 06YY
-(blueprint: def-weil-integral-derived-reduction). -/
+so are canonical and compatible with a third resolution. -/
 noncomputable def integralDerivedReductionKFlatIso
     (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients

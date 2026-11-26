@@ -12,7 +12,19 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 /-! # Coherent strict presentations of primitive reduction
 
-Source: Stacks, Tags 06YY, 07A6 and 0941; the canonical strict quotient construction.
+Every good complex admits a strict quotient presentation whose comparison is the adjunction
+transpose of the strict tensor-unit map.
+
+## Implementation details
+
+The ordinary quotient-system tensor functor, with transitions induced by the quotient maps, is
+left adjoint to coefficient restriction followed by limit. Its derived adjunction is built from
+flat-term K-flat resolutions and simultaneous K-injective systems, and compared with the given
+reduction by the unique isomorphism of left adjoints whose right mate is the identity.
+
+## References
+
+* [Stacks Project, Tags 06YY, 07A6 and 0941](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public section
@@ -282,30 +294,7 @@ private theorem constantUnit_eq (Y : Scheme.{t})
 
 -- Coefficient adjunctions involve large, independently chosen comparison functors.
 /-- Every good complex admits a strict quotient presentation whose comparison is
-the actual adjunction transpose of the strict tensor-unit map.
-
-Source: Stacks, sites-cohomology.tex, Tags 06YY, 07A6 and 0941; the first step of
-lem-trf-primitive-quotient-realizations-unique after the whole-system coherence repair.
-(blueprint: lem-trf-coherent-primitive-reduction-presentation).
-
-Proof: construct the ordinary quotient-system tensor functor, with transitions induced
-by the quotient maps, and its adjunction to coefficient restriction followed by limit.
-Its unit sends a section x to the compatible family of sections 1 tensor x. Apply this
-functor termwise to P to obtain C. Its evaluation identifications give kappa and their
-horizontal compatibility. Derive the ordinary adjunction using flat-term K-flat
-resolutions and simultaneous K-injective systems. Exact coefficient restriction and
-derived composition identify the right adjoint with coefficientSequenceLimit. Compare
-the resulting left adjoint with S.reduction by the unique isomorphism of left adjoints
-whose right mate is the identity. The derived comparison on P is invertible because P
-is flat-term K-flat, giving e. Transposing its finite evaluations and using
-S.counit_projection identifies them with the normalized finite tensor comparisons;
-this proves CoefficientReductionPresentation. The derived Hom formula identifies the
-transpose of e with the localization of the ordinary tensor-unit tower map b. Its
-section formula is exactly the displayed formula in IsIntegralComparisonPresentationCoherent:
-the finite evaluation identifications and their inverses cancel. Transposing through
-the constant-tower/limit adjunction yields the required entire-tower equation for b,
-not merely its finite evaluations. These arguments are unbounded, work for arbitrary
-S by uniqueness of adjoints, and include zero complexes and exponent one. -/
+the actual adjunction transpose of the strict tensor-unit map. -/
 theorem coherentPrimitiveReductionPresentation {Y : Scheme.{t}}
     (S : CoefficientDerivedSystemCalculus l E Y)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :

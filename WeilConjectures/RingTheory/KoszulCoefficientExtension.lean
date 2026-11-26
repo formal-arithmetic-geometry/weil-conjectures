@@ -14,7 +14,12 @@ import WeilConjectures.RingTheory.KoszulCoefficientExtensionNu
 
 /-! # Coefficient extension of the dual Koszul complex and normal determinant
 
-Source: Stacks Project, Tag 0BQZ, the finite free Koszul computation.
+For a Koszul-regular sequence `f` generating `I` and a localization `S` of `A`, the dual Koszul
+complex and the normal determinant of `I` extend coefficientwise to those over `S`.
+
+## References
+
+* [Stacks, Tag 0BQZ]
 -/
 
 @[expose] public section
@@ -25,25 +30,9 @@ open CategoryTheory
 
 namespace ExteriorAlgebra
 
-/-- Coefficient extension of the finite dual Koszul terms and conormal determinant.
-Source: Stacks Project, Tag 0BQZ, finite free Koszul computation and its localization
-(blueprint: lem-sc-koszul-coefficient-extension).
-
-Proof: In each exterior degree, take the exterior basis of the standard basis
-of A^r. Extend a dual vector by applying algebraMap A S to each of its coefficients
-in the dual exterior basis. The exterior determinant formula gives the asserted
-evaluation on all image wedges. The contraction differential has coefficients
-f i with its fixed degreewise sign, so applying the ring map to its matrix gives
-the localized differential; the coefficient maps form the asserted cochain map.
-For the determinant, the conormal classes of f form a basis over A/I. Flat
-localization preserves Koszul regularity, so their images are the corresponding
-basis over S/IS. Extend the dual basis by the quotient map q and then take its
-rth exterior power. Evaluate on basis wedges using the determinant formula;
-the quotient-map equation gives compatibility on image generators, and
-multilinearity gives the displayed equation for arbitrary vectors. These
-constructions work for r=0, where the empty determinant is 1, and for zero
-quotients, where all determinant values are zero. This lemma constructs only
-the coefficient maps, and asserts no compatibility of normalized comparisons. -/
+/-- Coefficient extension of the finite dual Koszul terms and conormal determinant along a
+localization `A → S`, with the displayed evaluation formulas. Only the coefficient maps are
+constructed; no compatibility of normalized comparisons is asserted. -/
 theorem exists_koszul_coefficient_extension
     (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)
     (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I)

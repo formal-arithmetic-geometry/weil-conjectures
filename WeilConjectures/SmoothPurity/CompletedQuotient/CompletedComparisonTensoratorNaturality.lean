@@ -9,8 +9,12 @@ public import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedComparison
 
 /-! # Naturality of normalized strict tensor comparisons
 
-Source: Stacks 07A4 and 0941; the canonical integral comparison realization.
-(blueprint: lem-pur-completed-comparison-tensorator-naturality).
+The normalized strong monoidal comparison of the canonical integral comparison realization is
+natural for the total coefficient tensor bifunctor.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941
 -/
 
 @[expose] public noncomputable section
@@ -155,13 +159,7 @@ private theorem normalizedTensor_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
   rfl
 
 /-- The normalized strong monoidal comparison is natural for the actual total
-coefficient tensor bifunctor.
-Source: Stacks 07A4; the strong monoidal naturality step of canonical comparison
-identification (blueprint: lem-pur-completed-comparison-tensorator-naturality).
-Proof: the project total tensor bifunctor and the monoidal tensor bifunctor have
-an identity-component natural isomorphism, whose naturality is tensorHom_def.
-Conjugate Mathlib's monoidal tensorator natural isomorphism by these two identity
-comparisons. Its component is exactly the normalized tensor comparison. -/
+coefficient tensor bifunctor. -/
 theorem completedComparisonTensoratorNaturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     (c : IntegralCoherence.PullbackComparison l E f) :
     ∃ e : coefficientTotalTensor.{u, u+1, u}

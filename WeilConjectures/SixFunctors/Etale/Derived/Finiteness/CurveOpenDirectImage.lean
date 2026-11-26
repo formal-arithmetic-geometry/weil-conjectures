@@ -16,31 +16,31 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.OpenComplemen
 
 Let `T` be a scheme of finite type and of dimension at most one over a field `k`, `j : U ⟶ T` an
 open immersion and `Λ` a torsion ring. Then `R^q j_* M = 0` for `q > 1` and every étale sheaf
-`M` of `Λ`-modules on `U` (`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isOpenImmersion`,
-blueprint `thm-exc-curve-open-dimension-general`), and for `Λ` finite of exponent invertible in
-`k` every `R^q j_*` preserves constructibility
-(`AlgebraicGeometry.Etale.isConstructibleSheaf_higherDirectImage_of_isOpenImmersion`, blueprint
-`corollary-open-direct-image-over-field--1`). So `(U, T)` satisfies the open-complement condition
-with constant `1` (`AlgebraicGeometry.Etale.openComplementCondition_one`).
+`M` of `Λ`-modules on `U` (`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isOpenImmersion`),
+and for `Λ` finite of exponent invertible in `k` every `R^q j_*` preserves constructibility
+(`AlgebraicGeometry.Etale.isConstructibleSheaf_higherDirectImage_of_isOpenImmersion`). So `(U, T)`
+satisfies the open-complement condition with constant `1`
+(`AlgebraicGeometry.Etale.openComplementCondition_one`).
 
-The blueprint proves the vanishing on the geometric stalks, which are the cohomology of the
-punctured strict localization: a finite union of spectra of fraction fields of strictly henselian
-discrete valuation rings, whose Galois groups have `ℓ`-cohomological dimension one. We argue
-instead with affine opens, which avoids the local Galois theory:
+## Implementation details
+
+Instead of computing the geometric stalks (the cohomology of the punctured strict localization,
+a finite union of spectra of fraction fields of strictly henselian discrete valuation
+rings with Galois groups of `ℓ`-cohomological dimension one), we argue with affine opens, which
+avoids the local Galois theory:
 
 * by the limit argument `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_forall_isSepClosed`
   it suffices to treat the composite `U_L ⟶ U ⟶ T` for a separably closed field `L` over `k`;
 * every point of an étale `T`-scheme `W` has an affine open neighbourhood `V` with `V ×_T U`
   affine (`AlgebraicGeometry.Scheme.exists_isAffineOpen_inf_isAffineOpen`), so `V ×_T U_L` is an
   affine `L`-scheme of finite type and of dimension at most one; by the affine Artin vanishing
-  theorem (`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine`, blueprint
-  `lemma-uniform-bounds-pro-etale-affines`) its torsion cohomological dimension is at most one;
+  theorem (`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine`) its torsion
+  cohomological dimension is at most one;
 * the local criterion `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_forall_exists`
   concludes.
 
 The constructibility is the finite-type constructibility theorem
-`AlgebraicGeometry.Etale.isConstructibleSheaf_higherDirectImage`
-(`proposition-six-operations-dctf--2`).
+`AlgebraicGeometry.Etale.isConstructibleSheaf_higherDirectImage`.
 -/
 
 @[expose] public section
@@ -107,20 +107,11 @@ theorem isZero_higherDirectImage_comp_of_isSepClosed (hΛ : IsAddTorsion Λ) {k 
     ((pullback.snd (V'.ι ≫ W.hom) (p₁ ≫ j)).topologicalKrullDim_le_of_etale.trans hPd)
   simpa using this
 
-/-- Blueprint `thm-exc-curve-open-dimension-general`: Open direct-image dimension on arbitrary
-curves.
+/-- Open direct-image dimension on arbitrary curves.
 
 Let `T` be a scheme of finite type and of dimension at most one over a field `k`, let
 `j : U ⟶ T` be an open immersion and let `Λ` be a ring which is torsion as an additive group.
-Then `R^q j_* M = 0` for every `q > 1` and every étale sheaf `M` of `Λ`-modules on `U`. The
-blueprint takes for `k` a finite field or its algebraic closure, and `Λ` finite and killed by a
-power of a prime invertible on `T`; none of this is needed.
-
-By the limit argument `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_forall_isSepClosed`
-this reduces to the separably closed case
-`AlgebraicGeometry.Etale.isZero_higherDirectImage_comp_of_isSepClosed`, where the higher direct
-images are computed locally on affine opens `V` of étale `T`-schemes with `V ×_T U` affine, of
-cohomological dimension at most one by affine Artin vanishing. -/
+Then `R^q j_* M = 0` for every `q > 1` and every étale sheaf `M` of `Λ`-modules on `U`. -/
 theorem isZero_higherDirectImage_of_isOpenImmersion (hΛ : IsAddTorsion Λ) {k : Type u} [Field k]
     {T U : Scheme.{u}} (aT : T ⟶ Spec (.of k)) [LocallyOfFiniteType aT] [QuasiCompact aT]
     (hT : topologicalKrullDim T ≤ 1) (j : U ⟶ T) [IsOpenImmersion j]
@@ -138,20 +129,12 @@ theorem isZero_higherDirectImage_of_isOpenImmersion (hΛ : IsAddTorsion Λ) {k :
 
 variable [Finite Λ]
 
-/-- Blueprint `corollary-open-direct-image-over-field--1`: Open direct-image constructibility on
-arbitrary curves.
+/-- Open direct-image constructibility on arbitrary curves.
 
 Let `T` be a scheme of finite type and of dimension at most one over a field `k`, let
 `j : U ⟶ T` be an open immersion and let `Λ` be a finite ring whose exponent is invertible in
 `k`. For a constructible étale sheaf `F` of `Λ`-modules on `U`, every `R^q j_* F` is
-constructible. The blueprint takes for `k` a finite field or its algebraic closure.
-
-This is the finite-type constructibility theorem
-`AlgebraicGeometry.Etale.isConstructibleSheaf_higherDirectImage`
-(`proposition-six-operations-dctf--2`); the dimension hypothesis is not needed. The blueprint
-argues instead with the degree-zero case `thm-fin-open-degree-zero`, the vanishing
-`thm-exc-curve-open-dimension-general` above degree one and the finiteness of the degree-one
-stalks at the boundary points. -/
+constructible. -/
 theorem isConstructibleSheaf_higherDirectImage_of_isOpenImmersion {k : Type u} [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] {T U : Scheme.{u}} (aT : T ⟶ Spec (.of k))
     [LocallyOfFiniteType aT] [QuasiCompact aT] (_hT : topologicalKrullDim T ≤ 1) (j : U ⟶ T)
@@ -166,13 +149,8 @@ theorem isConstructibleSheaf_higherDirectImage_of_isOpenImmersion {k : Type u} [
 
 /-- The open-complement condition with constant `1` on curves: for `T` of finite type and of
 dimension at most one over a field `k`, an open immersion `j : U ⟶ T` and a finite ring `Λ`
-whose exponent is invertible in `k`, `(U, T)` satisfies the open-complement condition of
-`theorem-f-shriek-finite-coefficients--1` with `c = 1`. This is the case `d = 1` of
-`theorem-f-shriek-finite-coefficients--1` with the sharper constant of
-`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isOpenImmersion`
-(`thm-exc-curve-open-dimension-general`) and
-`AlgebraicGeometry.Etale.isConstructibleSheaf_higherDirectImage_of_isOpenImmersion`
-(`corollary-open-direct-image-over-field--1`). -/
+whose exponent is invertible in `k`, `(U, T)` satisfies the open-complement condition with
+`c = 1`. -/
 theorem openComplementCondition_one {k : Type u} [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] {T U : Scheme.{u}} (aT : T ⟶ Spec (.of k))
     [LocallyOfFiniteType aT] [QuasiCompact aT] (hT : topologicalKrullDim T ≤ 1) (j : U ⟶ T)

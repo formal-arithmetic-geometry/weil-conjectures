@@ -11,16 +11,14 @@ public import WeilConjectures.CategoryTheory.Ringed.RingedStrictTowerHomotopyLim
 /-!
 # Compact-support reduction tower datum
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-int-brown,
-def-weil-integral-rational-qbar-compact-support.md, the displayed derived-limit formula;
-coherent transition construction of lem-weil-compact-support-reduction-tower-functor
-(blueprint: def-weil-compact-support-reduction-tower-datum).
+The datum `CompactSupportReductionTowerConstruction` of a coherent compact-support tower,
+its level evaluations, and the right-derived inverse limit used to define integral
+compact-support pushforward.
 
-This is the construction-owned interface used by the six-functor datum.  The
-tower, its evaluations, and the derived inverse-limit functor are fields of one
-datum, so downstream definitions do not choose them independently from an
-existence proposition.
-The fully qualified declaration is `WeilConjectures.CompactSupportReductionTowerConstruction`.
+## Implementation details
+
+The tower, its evaluations, and the derived inverse-limit functor are fields of one datum,
+so downstream definitions do not choose them independently from an existence proposition.
 -/
 
 @[expose] public noncomputable section
@@ -32,12 +30,10 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 
 namespace WeilConjectures
 
-/-- The coherent tower and normalized derived limit used for compact support.
-The transition equation is retained at every pair of levels, and the limit is
-the supplied right-derived inverse limit with its normalized projections.
-Source: blueprint `lem-weil-compact-support-reduction-tower-functor`, steps 1--8
-(blueprint: def-weil-compact-support-reduction-tower-datum).
--/
+/-- The coherent tower and normalized derived limit used for compact support: a linear
+triangulated tower functor whose evaluations are the restricted compact-support levels,
+compatibly with transitions at every pair of levels, together with a right-derived inverse
+limit and its normalized projections. -/
 structure CompactSupportReductionTowerConstruction
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E]
@@ -52,9 +48,7 @@ structure CompactSupportReductionTowerConstruction
     tower ⋙ pbcTowerEvaluation Y (completedIntegralCommRingSheafUnrestricted l E Y) m ≅
       compactSupportRestrictedLevel l E c m
   /-- The evaluation isomorphisms carry every tower transition to the
-  prescribed quotient and compact-support transition.  This is part of the
-  construction datum, so the tower is not merely a family of unrelated
-  evaluations. -/
+  prescribed quotient and compact-support transition. -/
   transition_compatibility :
     ∀ (m n : ℕ) (h : n ≤ m) (K : DerivedCategory (scalarReductionSource l E X)),
       (pbcTowerTransition Y (completedIntegralCommRingSheafUnrestricted l E Y)

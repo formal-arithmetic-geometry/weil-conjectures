@@ -25,9 +25,10 @@ U  --j-->  C
 with `j` a quasi-compact open immersion and `ι` a quasi-compact open immersion. For a Weil sheaf
 `F` on `U` and a closed point `y` of `X'`, the stalk of `j_* F` at `ι y` is the stalk of
 `j'_* (ι'^* F)` at `y`, compatibly with the local Frobenius
-(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_directImage_of_isPullback`). This is Step 0
-of the proof of `proposition-weights-j-boundary-points--1`: the formation of `j_*` commutes with
-restriction to an open.
+(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_directImage_of_isPullback`): the formation of
+`j_*` commutes with restriction to an open.
+
+## Implementation details
 
 The proof goes through the Weil sheaf `j_* ι'_* ι'^* F = ι_* j'_* ι'^* F`. The image under
 `ι^* j_*` of the unit `F ⟶ ι'_* ι'^* F` is an isomorphism: by the weakly étale base change
@@ -162,10 +163,7 @@ variable {C X' U U' : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))]
 omit [QuasiCompact ι] [IsOpenImmersion j'] [QuasiCompact j']
   [LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀))] in
 /-- For a cartesian square `j' ≫ ι = ι' ≫ j` of quasi-compact open immersions, the image under
-`ι^* j_*` of the unit `F ⟶ ι'_* ι'^* F` is an isomorphism. On the geometric fibres, weakly étale
-base change `ῑ^* j̄_* ≅ j̄'_* ῑ'^*` (`AlgebraicGeometry.ProEtale.adicBaseChangeMap`) turns it into
-`j̄'_*` of `ῑ'^*` of the unit, an isomorphism by the triangle identity since the counit of
-`ῑ'^* ⊣ ῑ'_*` is one. -/
+`ι^* j_*` of the unit `F ⟶ ι'_* ι'^* F` is an isomorphism. -/
 theorem isIso_upperStar_map_lowerStar_map_unit (h : IsPullback j' ι' ι j)
     (F : WeilSheaf k₀ l U) :
     IsIso ((upperStar ι).map ((lowerStar j).map
@@ -232,15 +230,10 @@ private lemma nonempty_iso_lowerStar_lowerStar (h : j' ≫ ι = ι' ≫ j) (G : 
     (ProEtaleWeilSheaf.lowerStarCompIso k₀ l ι' j).app G.obj ≪≫ c ≪≫
       ((ProEtaleWeilSheaf.lowerStarCompIso k₀ l j' ι).app G.obj).symm ≪≫ eqToIso e₂)⟩
 
-/-- **The direct image commutes with restriction to an open** (Step 0 of the proof of
-`proposition-weights-j-boundary-points--1`). For a cartesian square `j' ≫ ι = ι' ≫ j` of
-quasi-compact open immersions of `k₀`-schemes, a Weil sheaf `F` on `U` and a closed point `y` of
-`X'` over the closed point `x = ι y` of `C`, the stalk of `j_* F` at `x` is the stalk of
-`j'_* (ι'^* F)` at `y`, compatibly with the local Frobenius.
-
-Both are stalks of `ι^* j_* F`, resp. of `ι_* j'_* ι'^* F = j_* ι'_* ι'^* F`, and `ι^* j_*`
-of the unit `F ⟶ ι'_* ι'^* F` is an isomorphism
-(`AlgebraicGeometry.WeilSheaf.isIso_upperStar_map_lowerStar_map_unit`). -/
+/-- **The direct image commutes with restriction to an open.** For a cartesian square
+`j' ≫ ι = ι' ≫ j` of quasi-compact open immersions of `k₀`-schemes, a Weil sheaf `F` on `U` and a
+closed point `y` of `X'` over the closed point `x = ι y` of `C`, the stalk of `j_* F` at `x` is
+the stalk of `j'_* (ι'^* F)` at `y`, compatibly with the local Frobenius. -/
 theorem nonempty_equiv_stalk_directImage_of_isPullback (h : IsPullback j' ι' ι j)
     (F : WeilSheaf k₀ l U) (y : X'.finitePoints) (x : C.finitePoints) (hyx : ι.base y.1 = x.1) :
     Nonempty ((((directImage j).obj F).stalk x).Equiv

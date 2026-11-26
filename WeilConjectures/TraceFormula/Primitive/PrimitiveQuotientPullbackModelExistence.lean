@@ -11,11 +11,14 @@ import WeilConjectures.TraceFormula.Ordinary.OrdinaryQuotientPullbackTowerCompar
 
 /-! # Primitive quotient pullback model existence
 
-This is the pullback conjunct split from
-`primitiveQuotientRealizationComparisons`.
+The strict K-flat construction and the normalized Roos comparison produce the required
+realization of the primitive quotient pullback (`primitiveQuotientPullbackModelExistence`). This
+is the pullback conjunct split from `primitiveQuotientRealizationComparisons`.
 The comparison tests whole-system adjunction-coherent quotient presentations.
-Source: Stacks 099N(5), 06YY and 0941.
-(blueprint: lem-trf-primitive-quotient-pullback-model-existence)
+
+## References
+
+* Stacks Project, Tags 099N, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -33,18 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The strict K-flat construction and the normalized Roos comparison produce the
-required realization. Source: Stacks 099N(2),(5), 06YS, 0G7E and 0941.
-Proof: choose the flat-term K-flat representative supplied by the reduction
-calculus. Apply independent-coefficient change of rings at every quotient level,
-identify the resulting strict pullback tower with the defining Roos tower, and
-apply the fixed normalized Roos comparison. The resulting isomorphism is natural
-on the whole derived category by descent from the K-flat class. The remaining
-normalization equation is checked on every whole-system coherent reduction
-presentation by naturality of the fixed comparisons and cancellation of the
-strict quotient isomorphism. Finite evaluations are not used to detect derived maps.
-This theorem is the pullback
-conjunct split from `primitiveQuotientRealizationComparisons`.
-(blueprint: lem-trf-primitive-quotient-pullback-model-existence) -/
+required realization. -/
 theorem primitiveQuotientPullbackModelExistence
     {X Y : Scheme.{t}} (f : X ⟶ Y)
     (_hlX : ∀ x : X, IsUnit (l : X.residueField x))

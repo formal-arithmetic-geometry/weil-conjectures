@@ -11,9 +11,12 @@ import WeilConjectures.SmoothPurity.Ringed.RingedDerivedTensorComparisonAssociat
 
 /-! # Associativity for coherent pullback tensor representatives
 
-Source: Stacks 07A4, `lemma-pullback-tensor-product`, and 07A2,
-`lemma-tensor-product-K-flat`.
-(blueprint: lem-pur-completed-pullback-tensor-associativity-representatives).
+This module proves associativity of the coherent pullback tensor comparison on localized
+K-flat representatives.
+
+## References
+
+* Stacks Project, Tags 07A4 and 07A2
 -/
 
 @[expose] public noncomputable section
@@ -40,9 +43,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCateg
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The selected calculus retains the system normalization from its resolution model.
-Source: Stacks 07A4 and 0941
-(blueprint: lem-pur-completed-pullback-tensor-associativity-representatives). -/
+/-- The selected calculus retains the system normalization from its resolution model. -/
 private theorem pullbackTensor_systemTensorCoherence (W : Scheme.{u}) :
     ∃ β : @SymmetricCategory (coefficientSequenceDerived l E W) _
       (pullbackTensorCalculus l E W).systemClosed.monoidal,
@@ -54,9 +55,7 @@ private theorem pullbackTensor_systemTensorCoherence (W : Scheme.{u}) :
   unfold pullbackTensorCalculus
   exact (coefficientDerivedSystemEvaluationCalculus l E W).choose_spec.some.systemTensorCoherence
 
-/-- A natural localization comparison transports a pasted chain-map square.
-Source: naturality and functoriality in Stacks 07A4
-(blueprint: lem-pur-completed-pullback-tensor-associativity-representatives). -/
+/-- A natural localization comparison transports a pasted chain-map square. -/
 private theorem localization_comparison_paste
     {C B D A : Type*} [Category C] [Category B] [Category D] [Category A]
     (F : C ⥤ B) (G : D ⥤ A) (U : B ⥤ A) (V : C ⥤ D)
@@ -73,9 +72,7 @@ private theorem localization_comparison_paste
   simpa only [Functor.map_comp, Category.assoc] using
     congrArg (fun f ↦ e.hom.app P ≫ G.map f) h
 
-/-- Categorical pasting, from naturality and cancellation.
-Source: Stacks 07A4
-(blueprint: lem-pur-completed-pullback-tensor-associativity-representatives). -/
+/-- Categorical pasting, from naturality and cancellation. -/
 private theorem left_square {B : Type*} [Category B] [MonoidalCategory B]
     {A : Type*} [Category A] [MonoidalCategory A]
     (F : B ⥤ A)
@@ -106,9 +103,7 @@ private theorem left_square {B : Type*} [Category B] [MonoidalCategory B]
       simp only [← tensorHom_id, tensorHom_comp_tensorHom, Category.comp_id, Category.assoc]
     _ = _ := by rw [hj]; simp only [Category.assoc]
 
-/-- Categorical pasting, from naturality and cancellation.
-Source: Stacks 07A4
-(blueprint: lem-pur-completed-pullback-tensor-associativity-representatives). -/
+/-- Categorical pasting, from naturality and cancellation. -/
 private theorem right_square {B : Type*} [Category B] [MonoidalCategory B]
     {A : Type*} [Category A] [MonoidalCategory A]
     (F : B ⥤ A)
@@ -139,9 +134,7 @@ private theorem right_square {B : Type*} [Category B] [MonoidalCategory B]
       simp only [← id_tensorHom, tensorHom_comp_tensorHom, Category.comp_id, Category.assoc]
     _ = _ := by rw [hj]; simp only [Category.assoc]
 
-/-- Categorical pasting, from naturality and cancellation.
-Source: Stacks 07A4
-(blueprint: lem-pur-completed-pullback-tensor-associativity-representatives). -/
+/-- Categorical pasting, from naturality and cancellation. -/
 private theorem associativity_transport
     {B : Type*} [Category B] [MonoidalCategory B]
     {A : Type*} [Category A] [MonoidalCategory A]
@@ -181,24 +174,8 @@ private theorem associativity_transport
       simp only [Category.assoc]
       rfl
 
-/-- Associativity on three localized coherent K-flat representatives.
-Source: Stacks 07A4, total tensor construction; 07A2, K-flat tensor products.
-(blueprint: lem-pur-completed-pullback-tensor-associativity-representatives).
-Proof: total tensors of K-flat complexes are K-flat: reassociate an acyclic
-test tensor and apply the two K-flat criteria. Apply the normalization of the
-coherent comparison to (A,B), (B,C), (A tensor B,C) and (A,B tensor C), and
-use preservation of K-flatness by the sequence inverse image. In every triple
-degree both ordinary paths send the adjunction-unit image of (x tensor y)
-tensor z to the tensor of the unit images of x, y and z, with parentheses on
-the right. Naturality of the unit and the two normalized pure-tensor formulas
-identify these sections. Reassociation introduces no permutation or extra sign
-and commutes with all three signed differential terms. Tensor sheafification
-and the total coproduct injections detect equality, so the chain maps agree.
-Apply the derived quotient and insert the fixed tensor-model and exact-pullback
-factorization isomorphisms. Their naturality cancels the intermediate maps;
-the model associators identify the remaining reassociation maps with the
-specified derived associators. This proves the equation on the displayed
-representatives; extension to arbitrary derived objects is a separate step. -/
+/-- The pullback tensor comparison is compatible with the associators on three localized
+coherent K-flat representatives. -/
 theorem completedPullbackTensor_associativity_representatives {X Y : Scheme.{u}}
     (f : X ⟶ Y) (A B C : CochainComplex (coefficientSequenceModules l E Y) ℤ)
     (hA : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}

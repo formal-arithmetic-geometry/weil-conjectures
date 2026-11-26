@@ -17,7 +17,22 @@ import WeilConjectures.RingTheory.MPseudoCoherentLocalizationConeLocal
 /-!
 # Lowering the cohomology bound in pseudo-coherent localization descent
 
-Source: Stacks Project, Tag 066D, proof, second and third paragraphs.
+A finite-free approximation of top cohomology lowers the cohomological upper bound by one while
+preserving `m`-pseudo-coherence of every localization; this is the induction step for descending
+pseudo-coherence along localizations.
+
+## Implementation details
+
+Local `m`-pseudo-coherence gives finite generation of local degree-`n` cohomology (Stacks 064S),
+hence of `Hⁿ(M)` (Stacks 00EO). A finite free module surjecting onto `Hⁿ(M)` gives a chain map
+from a single-term complex `E`, and its mapping cone `N` has `Hʲ(N) = 0` for `j > n - 1`. Since
+localization is exact and commutes with cones, the first clause of Stacks 064R shows that every
+localization of `N` is `m`-pseudo-coherent.
+
+## References
+
+* [Stacks, Tag 066D] (proof, second and third paragraphs)
+* [Stacks, Tags 064S, 00EO, 064R]
 -/
 
 @[expose] public section
@@ -29,23 +44,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace DerivedCategory
 
 /-- A finite-free top-cohomology approximation lowers the bound by one and preserves the
-fixed-degree pseudo-coherence of every localization. Only a single induction step is asserted.
-Source: Stacks Project, Tag 066D, proof, second and third paragraphs, using Tags 064S,
-00EO (2), and 064R.
-(blueprint: lem-pc-m-pseudo-coherent-localization-cone-step).
-
-Proof: For `n ≥ m`, a bounded finite-free witness to local `m`-pseudo-coherence also
-witnesses local `n`-pseudo-coherence. Exact localization identifies local cohomology with
-localized global cohomology, so the upper bound gives local vanishing above `n`.
-Tag 064S gives finite generation of local degree-`n` cohomology. Tag 00EO (2) then gives
-finite generation of `Hⁿ(M)` over `A`. Choose a finite free module surjecting onto `Hⁿ(M)`.
-Its projectivity lifts the map through cycles, giving a chain map from the single-term
-complex `E` in degree `n` to `M`. Let `N` be the explicit mapping cone of this chain map,
-and take its distinguished triangle after applying `Q`. The long exact sequence and
-surjectivity in degree `n` show that `Hʲ(N) = 0` for `j > n - 1`. The bounded finite-free
-complex `E` is `k`-pseudo-coherent for every `k` using its identity. Its localization is
-also bounded finite free. Localization is exact and commutes with cones, so the first
-clause of Tag 064R shows that every localization of `N` is `m`-pseudo-coherent. -/
+fixed-degree pseudo-coherence of every localization. Only a single induction step is asserted. -/
 theorem isMPseudoCoherent_localization_cone_step
     {A : Type u₁} [CommRing A] [HasDerivedCategory.{w₁} (ModuleCat.{max u₁ v₁} A)]
     (M : CochainComplex (ModuleCat.{max u₁ v₁} A) ℤ)

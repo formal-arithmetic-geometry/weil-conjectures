@@ -9,18 +9,23 @@ module
 public import WeilConjectures.RingTheory.PopescuResolution
 import WeilConjectures.RingTheory.SingularIdealMapEquiv
 
+/-!
+# The Popescu ideal under precomposition with an equivalence
+
+Precomposition with an algebra equivalence preserves the extended singular ideal.
+
+## References
+
+* [Stacks, Situation 07F7]
+-/
+
 @[expose] public section
 
 universe u v w
 
 namespace Algebra
 
-/-- Precomposition with an algebra equivalence preserves the extended singular ideal.
-Source: Stacks Project, Smoothing Ring Maps, Situation 07F7
-(blueprint: lem-weil-pbc-popescu-ideal-comp-equiv).
-Proof: Applying singularIdeal_map_equiv_le to the equivalence and its inverse gives
-equality of the transported singular ideals. Ideal maps compose, so their images in
-the target agree; taking radicals proves the result. -/
+/-- Precomposition with an algebra equivalence preserves the extended singular ideal. -/
 theorem popescuIdeal_comp_equiv
     {R : Type u} {A : Type v} {B : Type w} {Λ : Type*}
     [CommRing R] [CommRing A] [CommRing B] [CommRing Λ]

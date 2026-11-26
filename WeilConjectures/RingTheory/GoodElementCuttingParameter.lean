@@ -16,8 +16,21 @@ import Mathlib.RingTheory.Support
 /-!
 # Prime avoidance for a good element and a prescribed parameter
 
-Source: Stacks Project, Algebra, Tag 00N5, the choice of the auxiliary element h.
-(blueprint: lem-weil-pbc-good-element-cutting-parameter)
+Prime avoidance supplies an element that is good for a given maximal regular sequence and
+also cuts the support modulo a prescribed parameter.
+
+## Implementation details
+
+The element is chosen in the maximal ideal outside the finitely many minimal primes of the
+supports after the first `i` regular elements and of `Supp(M) ∩ V(g)`; none of these is the
+maximal ideal, since all these supports have positive dimension. Intersecting with `V(x)`
+then drops each dimension by exactly one. No regularity of `x` or Cohen-Macaulayness of its
+quotient is used.
+
+## References
+
+* [Stacks, Tag 00N5]
+* [Stacks, Tag 00DS]
 -/
 
 @[expose] public section
@@ -73,24 +86,7 @@ private theorem exists_avoid_minimalPrimes
     (Set.mem_iUnion₂.mpr ⟨I, hI, hp⟩), hxp⟩
 
 /-- Prime avoidance supplies an element good for a given maximal regular sequence
-which also cuts the support modulo a prescribed parameter.
-Source: Stacks Project, Algebra, Tag 00N5, auxiliary-element paragraph, using Tag 00DS.
-(blueprint: lem-weil-pbc-good-element-cutting-parameter)
-
-Proof: The supports after the first i regular elements have dimensions n+2-i,
-by the support formula for quotients and the dimension formula for regular sequences.
-For i from 0 through n+1 they have positive dimension. Collect the finitely many
-minimal primes of these closed sets and of Supp(M) intersect V(g), whose dimension
-is n+1. The maximal ideal cannot be minimal in any of these supports: all support
-primes lie below it, so its minimality would make that support a singleton of
-dimension zero. Every minimal prime in this finite family is therefore strictly
-below the maximal ideal. Finite prime avoidance chooses x in the maximal
-ideal outside all of them. Intersecting each closed set with V(x) drops its dimension
-by exactly one: avoidance gives the upper bound and the principal ideal dimension
-bound gives the lower bound. Applied to the successive regular quotients, these are
-the goodness equalities; applied to Supp(M) intersect V(g), this gives dimension n.
-The restriction to dimension at least two ensures that the latter set has positive
-dimension. No claim of regularity of x or Cohen--Macaulayness of its quotient is used. -/
+which also cuts the support modulo a prescribed parameter. -/
 theorem exists_good_element_cutting_parameter
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M]

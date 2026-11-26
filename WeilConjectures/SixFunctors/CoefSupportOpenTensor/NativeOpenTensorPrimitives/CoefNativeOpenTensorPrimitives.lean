@@ -10,10 +10,13 @@ public import WeilConjectures.SixFunctors.CoefSupportOpenTensor.OpenTensorCochai
 
 /-! # Primitive native open tensor cochain types
 
-These are the explicit specializations previously written in
-`CoefNativeOpenTensorCochains`, shared with the two existence lemmas.
-Source: Stacks 0E8I and 0GL1
-(blueprint: def-coef-native-open-tensor-primitives).
+Explicit specializations of ordinary open tensor data to the sequence site and to finite
+coefficient rings.
+
+## References
+
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0GL1]
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +37,7 @@ attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbe
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Sequence-site specialization of ordinary open tensor data.
-Source: Stacks 0E8I (blueprint: def-coef-native-open-tensor-primitives). -/
+/-- Sequence-site specialization of ordinary open tensor data. -/
 abbrev SystemOpenCochainsData {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :=
   letI := ProEtale.VaryingRing.extensionAdditive
     (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) j
@@ -66,8 +68,7 @@ abbrev SystemOpenCochainsData {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion 
       (compactSupportSystemQuotient l E) j)
     (ProEtale.VaryingRing.baseChange j) (pullSection l E j)
 
-/-- Finite-coefficient specialization of ordinary open tensor data.
-Source: Stacks 0E8I (blueprint: def-coef-native-open-tensor-primitives). -/
+/-- Finite-coefficient specialization of ordinary open tensor data. -/
 abbrev FiniteOpenCochainsData {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (n : ℕ) :=
   letI := ProEtale.StrictTower.moduleJ_additive (compactSupportSystemLevel l E n) j

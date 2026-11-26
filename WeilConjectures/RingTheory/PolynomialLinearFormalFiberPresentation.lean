@@ -21,8 +21,20 @@ import WeilConjectures.RingTheory.PolynomialLinearFiberQuotient
 /-!
 # Linear polynomial formal fibres as hypersurfaces
 
-Source: Stacks Project, More on Algebra, proof of Lemma 07PU, second paragraph.
-(blueprint: lem-weil-pbc-polynomial-linear-formal-fibre-presentation)
+If the residue field of a prime of `A[X]` above zero is the fraction field of `A`, the formal
+fibre is `R / (f)` for the coefficient generic fibre `R` of the completion and an element `f`
+with `D f = 1` for an `A`-derivation `D` of `R`.
+
+## Implementation details
+
+The derivation `d/dX` extends to the localization, to the completion (Tag 07PE) and then to
+`R`. The hypotheses `hr` and `hrA` are retained; the fraction-field hypothesis alone suffices
+for the argument.
+
+## References
+
+* [Stacks, Tag 07PU] (second paragraph of the proof)
+* [Stacks, Tag 07PE]
 -/
 
 @[expose] public section
@@ -64,23 +76,7 @@ private theorem extend_absolute_derivation {B S : Type u} [CommRing B] [CommRing
 
 /-- If the residue field of a polynomial prime above zero is a fraction field of the
 coefficient domain, its completed fibre is a hypersurface with derivative one in the
-coefficient generic fibre.
-Source: Stacks Project, More on Algebra, proof of Lemma 07PU, second paragraph.
-(blueprint: lem-weil-pbc-polynomial-linear-formal-fibre-presentation)
-
-Proof:
-Set K = κ(0_A), and use the canonical fraction-field isomorphism e : κ(r) → K.
-Write ξ = e(X), x for the image of X in C, and f = 1 tensor x - ξ tensor 1.
-The general linear-fibre quotient theorem gives R/(f) ≃ κ(r) tensor over A[X] with C:
-it constructs inverse tensor maps using the single relation X = ξ. Extend d/dX first
-to A[X]_q using the localization derivation construction, then to C using Tag 07PE.
-The coefficient generic fibre R is a localization of C at nonzero elements of A by
-localization base change, so extend once more to R. The extension formulas show that
-D(x) = 1 and D annihilates A. The two derivations from K to R, k ↦ D(k tensor 1)
-and the zero derivation, agree on A; localization derivation uniqueness makes them
-equal. Thus D(ξ tensor 1) = 0 and D(f) = 1. All constructions work in the zero-fibre
-case as well. The assumptions hr and hrA are preserved; the fraction-field hypothesis
-alone suffices for the actual argument. -/
+coefficient generic fibre. -/
 theorem linear_formalFiber_hypersurface
     (A : Type u) [CommRing A] [IsDomain A]
     (q : Ideal (Polynomial A)) [q.IsPrime]

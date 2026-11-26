@@ -14,8 +14,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitModelProperExchan
 
 For a trait model `M` over the base with proper `X`, `X'` and proper total space,
 `NearbyCyclesModel.isIso_lowerStar_nearbyDualityMap_of_isIso` shows that `RΓ(X', δ_{M,K})` is an
-isomorphism. This file keeps the underlying identity (blueprint
-`lemma-nearby-duality-proper-direct-image`, (E.14)): under the proper exchange
+isomorphism. This file keeps the underlying identity: under the proper exchange
 `χ_a : Ψ_S Ra_* ⟶ Ra'_* Ψ_M`, global Verdier duality on both fibres (the duality maps of
 `(Ra_*, μ, tr_X)` and `(Ra'_*, μ, tr_{X'})`) and the duality map of the trait itself,
 `RΓ(X', δ_{M,K})` is the composite of these canonical isomorphisms.
@@ -26,11 +25,22 @@ isomorphism. This file keeps the underlying identity (blueprint
   `CategoryTheory.Verdier.nearbyDualityMap_proper'` for an exchange given as a natural
   transformation, with implicit categories.
 * `NearbyCyclesModel.pushforwardExchange_comp_lowerStar_map_nearbyDualityMap`: the square
-  `χ ∘ RΓ(δ_{M,K}) ∘ δ_{a'} ∘ D(χ) = Ψ_S(δ_a) ∘ δ_S` (blueprint
-  `lemma-nearby-duality-proper-direct-image`, (E.14)).
+  `χ ∘ RΓ(δ_{M,K}) ∘ δ_{a'} ∘ D(χ) = Ψ_S(δ_a) ∘ δ_S`.
 * `NearbyCyclesModel.lowerStar_map_nearbyDualityMap_eq`: `RΓ(X', δ_{M,K})` as the composite of
   the inverse of `χ_a`, Verdier duality on `X`, the duality map of the trait, `D(χ_a)⁻¹` and
   the inverse of Verdier duality on `X'`.
+
+## Implementation details
+
+In `CategoryTheory.Verdier.nearbyDualityMap_proper_natTrans` and
+`CategoryTheory.Verdier.pre_app_comp_pre_inv_app` the categories and their monoidal structures
+are implicit, found by unification (from the compatibility with the lax tensor maps, given first,
+as in `CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper_natTrans`). The identity is
+`CategoryTheory.Verdier.nearbyDualityMap_proper` for `G = Ra_*`, `G' = Ra'_*`, with the
+compatibility of `χ_a` with the lax tensor maps
+(`NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_tensor`) and the proper axiom of
+the dualizing maps
+(`NearbyCyclesModel.NearbyDualizingData.pushforwardExchange_comp_map_θ_comp_trace`).
 
 -/
 
@@ -45,9 +55,7 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace CategoryTheory.Verdier
 
 /-- `CategoryTheory.Verdier.nearbyDualityMap_proper'` for an exchange given as a natural
-transformation `χ : G ⋙ Ψ_Y ⟶ Ψ_X ⋙ G'`, its compatibility with the lax tensor maps given first.
-The categories and their monoidal structures are implicit, found by unification from that
-compatibility (as in `CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper_natTrans`). -/
+transformation `χ : G ⋙ Ψ_Y ⟶ Ψ_X ⋙ G'`, its compatibility with the lax tensor maps given first. -/
 theorem nearbyDualityMap_proper_natTrans {C : Type*} {_ : Category C}
     {_ : MonoidalCategory C} {_ : MonoidalClosed C} {C' : Type*} {_ : Category C'}
     {_ : MonoidalCategory C'} {_ : MonoidalClosed C'} {D : Type*} {_ : Category D}
@@ -72,8 +80,7 @@ theorem nearbyDualityMap_proper_natTrans {C : Type*} {_ : Category C}
   nearbyDualityMap_proper' μX μY θX θY μG μG' tr tr' (fun A ↦ χ.app A) hμG' hμY
     (fun g ↦ χ.naturality g) hμ hθ M
 
-/-- The transposes `D(f)` and `D(f⁻¹)` of an isomorphism `f` are inverse. The categories and their
-monoidal structures are implicit, found by unification. -/
+/-- The transposes `D(f)` and `D(f⁻¹)` of an isomorphism `f` are inverse. -/
 @[reassoc]
 lemma pre_app_comp_pre_inv_app {C : Type*} {_ : Category C} {_ : MonoidalCategory C}
     {_ : MonoidalClosed C} {A B : C} (f : A ⟶ B) [IsIso f] (W : C) :
@@ -102,25 +109,15 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated X'.hom] {M : NearbyCyclesModel X.left X'.left} {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
-/-- **Global sections of the duality map of a proper model** (blueprint
-`lemma-nearby-duality-proper-direct-image`, (E.14); `lemma-nearby-duality-proper-direct-image` (1),
-(3)): if `X`, `X'` and the total space of the trait model `M` over the base are proper, then
+/-- **Global sections of the duality map of a proper model**: if `X`, `X'` and the total space of
+the trait model `M` over the base are proper, then
 ```
 χ_a ≫ RΓ(X', δ_{M,K}) ≫ δ_{a'} ≫ D(χ_a) = Ψ_S(δ_a) ≫ δ_S
 ```
 where `χ_a : Ψ_S Ra_* ⟶ Ra'_* Ψ_M` is the proper exchange of the structure morphism
 (`NearbyCyclesModel.IsTraitModelOfBase.pushforwardExchange`), `δ_a`, `δ_{a'}` are global Verdier
-duality on `X` and `X'` (the duality maps of `(Ra_*, μ, tr)`, isomorphisms by
-`ProEtale.CondensedRing.isIso_nearbyDualityMap_lowerStar_trace`), and `δ_S` is the duality map of
-the trait at `RΓ(X_η̄, K)`, the canonical isomorphism of the monoidal functor `Ψ_S` with duals
-(`NearbyCyclesModel.isIso_nearbyDualityMap_traitModel`). That is, `RΓ(X', δ_{M,K})` is identified
-with the identity of `RHom(RΓ(X_η̄, K), ℚ̄_ℓ)`.
-
-This is `CategoryTheory.Verdier.nearbyDualityMap_proper` for `G = Ra_*`, `G' = Ra'_*`, with the
-compatibility of `χ_a` with the lax tensor maps
-(`NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_tensor`) and the proper axiom of
-the dualizing maps
-(`NearbyCyclesModel.NearbyDualizingData.pushforwardExchange_comp_map_θ_comp_trace`). -/
+duality on `X` and `X'` (the duality maps of `(Ra_*, μ, tr)`), and `δ_S` is the duality map of
+the trait at `RΓ(X_η̄, K)`. -/
 theorem pushforwardExchange_comp_lowerStar_map_nearbyDualityMap (D : NearbyDualizingData k k' ℓ)
     (h : M.IsTraitModelOfBase k q g) [IsProper (toPoint X).left] [IsProper (toPoint X').left]
     [IsProper q] (hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k'))
@@ -158,8 +155,7 @@ theorem pushforwardExchange_comp_lowerStar_map_nearbyDualityMap (D : NearbyDuali
       Functor.LaxMonoidal.μ_natural_right _ A y)
     (fun x y ↦ boundedConstructibleTensorMap_natural _ x y) K).symm
 
-/-- **Global sections of the duality map of a proper model, solved** (blueprint
-`lemma-nearby-duality-proper-direct-image`, (E.14)): in the situation of
+/-- **Global sections of the duality map of a proper model, solved**: in the situation of
 `NearbyCyclesModel.pushforwardExchange_comp_lowerStar_map_nearbyDualityMap`, `RΓ(X', δ_{M,K})`
 (`δ_{M,K} = NearbyCyclesModel.nearbyDualityMap ℓ D h K`, unfolded) is the composite of the
 canonical isomorphisms

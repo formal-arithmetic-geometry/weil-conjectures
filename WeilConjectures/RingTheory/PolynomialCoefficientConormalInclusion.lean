@@ -12,9 +12,19 @@ import WeilConjectures.RingTheory.PolynomialCoefficientTensorQuotient
 
 /-! # The conormal inclusion for polynomial coefficient reduction
 
-Source: Stacks Project, Algebra, Tag 00S2, proof of lemma-exact-sequence-NL;
-Smoothing Ring Maps, Tag 07CE, equation-sequence.
-(blueprint: lem-weil-pbc-polynomial-coefficient-conormal-inclusion)
+For `Q = P[y]`, `H = ker(Q → (P/I)[y])` and `J = ker(Q → C)`, coefficient expansion identifies
+`C ⊗[P/I] (I/I²)` with `H / H J`, and the conormal map to `J/J²` is injective exactly when
+`H ∩ J² = H J`.
+
+## Implementation details
+
+The map descends from the inclusion `H ≤ J`; its kernel is `(H ∩ J²) / H J`. The argument also
+applies to an empty variable set and to `I = P`.
+
+## References
+
+* [Stacks, Tag 00S2]
+* [Stacks, Tag 07CE]
 -/
 
 @[expose] public section
@@ -25,27 +35,9 @@ open scoped TensorProduct
 
 namespace Algebra
 
-/-- Coefficient expansion identifies the source of the conormal inclusion, its image,
-and its injectivity criterion, without any projectivity assumption.
-Source: Stacks Project, Algebra, Tag 00S2, proof of lemma-exact-sequence-NL;
-Smoothing Ring Maps, Tag 07CE, equation-sequence.
-(blueprint: lem-weil-pbc-polynomial-coefficient-conormal-inclusion)
-
-Proof. Put Q = P[y], H = ker(Q → (P/I)[y]), J = ker φ, and A = P/I.
-Compatibility gives H ≤ J. Coefficient expansion identifies the P-module H with
-Q ⊗_P I: a polynomial in H has all coefficients in I, and its inverse sums the
-monomial tensors of those coefficients. Reducing modulo HJ identifies H/HJ with
-C ⊗_P I, because Q/J = C. Since I acts as zero on C, tensoring the quotient
-I → I/I² identifies C ⊗_P I with C ⊗_A (I/I²). These identifications send
-c ⊗ [x] to the class of a lift of c times the constant polynomial x.
-Inclusion H ≤ J followed by J → J/J² kills HJ, hence descends to the required
-C-linear map i. Its image is exactly the image of H in J/J², which is the stated
-submodule equality after restriction to Q. Its kernel, under the identifications,
-is (H ∩ J²)/HJ: the class of h vanishes in J/J² exactly when h lies in J².
-Thus i is injective exactly when H ∩ J² = HJ. The representative formula is the
-formula for the composite, and is independent of the chosen lifts since their
-differences lie in J. The argument also applies to an empty variable set and to
-I = P, when C and the tensor module are zero. -/
+/-- Coefficient expansion identifies the source of the conormal inclusion
+`C ⊗[P/I] (I/I²) → J/J²`, its image, and its injectivity criterion `H ∩ J² = H J`, without any
+projectivity assumption. -/
 theorem polynomial_coefficient_conormal_inclusion
     (P : Type u) [CommRing P] (I : Ideal P) (m : ℕ)
     (C : Type v) [CommRing C] [Algebra (P ⧸ I) C]

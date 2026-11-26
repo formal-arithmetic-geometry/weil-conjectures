@@ -211,12 +211,21 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralTensorTransitionCompati
 
 /-! # Ambient completion presentations of integral operations
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY, 0G7E, 07A4 and 0941;
-sites-modules.tex, Tags 03D7 and 03EL
-(blueprint: lem-pur-integral-ambient-operation-models).
+Completion of ordinary ambient pullback and tensor is the recorded finite-quotient integral
+pullback and completed tensor, naturally on all derived objects.
+
+## Implementation details
 
 All towers and finite operations below are the recorded constructions. The completed
 coefficient map is specified by its projections, not by an identification of rings.
+The shared package `ambientPackage` is determined by literal equality to
+`rawAmbientPackage` (proved by reflexivity), rather than by selecting unspecified
+operation data.
+
+## References
+
+* Stacks Project, Tags 05RU, 06YY, 07A2, 07A4, 08TC, 0941 and 0G7E (Cohomology on Sites,
+  Derived Categories); Tags 03D7 and 03EL (Modules on Sites).
 -/
 
 @[expose] public noncomputable section
@@ -247,8 +256,7 @@ attribute [local irreducible] constantSheaf
 
 attribute [local irreducible] HasDerivedCategory.standard
 
-/-- The source tensor tower uses the direct-sum total tensor complex.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The source tensor tower uses the direct-sum total tensor complex. -/
 def tensorTower (W : Scheme.{t}) :
     (CochainComplex (integralTowerModules l E W) ℤ ×
       CochainComplex (integralTowerModules l E W) ℤ) ⥤
@@ -295,13 +303,7 @@ private theorem tensorLevel_hom_ext (W : Scheme.{t})
   intro p q hpq V s x y
   convert h p q hpq V s x y using 1 <;> rfl
 
-/-- The normalized balanced-tensor isomorphism of whole strict tensor towers.
-Source: Stacks 03EL, 07A4 (blueprint: lem-pur-integral-ambient-operation-models).
-Proof: in bidegree (p,q) send (x tensor y) tensor a to
-(x tensor a) tensor (y tensor 1); the inverse multiplies the two coefficients.
-The tensor universal property and direct sums extend these inverse maps. Both
-sides have differential dx tensor y + (-1)^p x tensor dy, with unchanged a.
-The formulas commute with all quotient transitions and with both input chain maps. -/
+/-- The normalized balanced-tensor isomorphism of whole strict tensor towers. -/
 theorem tensorTowerModel (W : Scheme.{t}) :
     ∃! d : tensorTower l E W ≅ integralOperationsTensorTowerFunctor l E W,
       ∀ (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) (p q : ℤ)
@@ -331,21 +333,18 @@ theorem tensorTowerModel (W : Scheme.{t}) :
   exact (hd' Z.1 Z.2 n.unop p q V s x y).trans
     (hd Z.1 Z.2 n.unop p q V s x y).symm
 
-/-- The uniquely normalized strict pullback comparison.
-Source: Stacks 03EL, 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The uniquely normalized strict pullback comparison. -/
 def pullTowerIso {X Y : Scheme.{t}} (f : X ⟶ Y) :
     pullTower l E f ≅ integralOperationsPullbackTowerFunctor l E f :=
   (pullTowerModel l E f).exists.choose
 
-/-- The uniquely normalized strict tensor comparison.
-Source: Stacks 03EL, 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The uniquely normalized strict tensor comparison. -/
 def tensorTowerIso (W : Scheme.{t}) :
     tensorTower l E W ≅ integralOperationsTensorTowerFunctor l E W :=
   (tensorTowerModel l E W).exists.choose
 
 /-- The operation augmentation, with finite components given by scalar insertion.
-The preceding normalization gives (r tensor x) ↦ pi_n(r) tensor (x tensor 1).
-Source: Stacks 03EL, 0941 (blueprint: lem-pur-integral-ambient-operation-models). -/
+The preceding normalization gives (r tensor x) ↦ pi_n(r) tensor (x tensor 1). -/
 def pullOperationUnit {X Y : Scheme.{t}} (f : X ⟶ Y)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     (pullComplex l E f).obj P ⟶
@@ -354,8 +353,7 @@ def pullOperationUnit {X Y : Scheme.{t}} (f : X ⟶ Y)
     integralOperationsRoosFunctor.map ((pullTowerIso l E f).hom.app P)
 
 /-- The tensor operation augmentation, with finite components
-x tensor y ↦ (x tensor 1) tensor (y tensor 1).
-Source: Stacks 03EL, 07A4, 0941 (blueprint: lem-pur-integral-ambient-operation-models). -/
+x tensor y ↦ (x tensor 1) tensor (y tensor 1). -/
 def tensorOperationUnit (W : Scheme.{t})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     (coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
@@ -494,12 +492,7 @@ private theorem ambientRoosUnit_coordinates (W : Scheme.{t})
   · exact roosUnit_map_snd l E W P a
 
 /-- The pullback tower comparison carries the quotient augmentation to the operation
-augmentation, including its zero shifted-product coordinate.
-Source: Stacks 03EL, 0941 (blueprint: lem-pur-integral-ambient-operation-models).
-Proof: the nth quotient unit sends z to z tensor 1. The normalized scalar association
-sends this to the defining finite pullback insertion. Strict tower maps induce the
-same product map on both cone coordinates. They therefore preserve the zero second
-cochain, while the unshifted coordinate is the product of the finite insertions. -/
+augmentation, including its zero shifted-product coordinate. -/
 theorem pullOperationUnit_coordinates {X Y : Scheme.{t}} (f : X ⟶ Y)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     pullOperationUnit l E f P ≫ CochainComplex.mappingCocone.fst
@@ -520,11 +513,7 @@ theorem pullOperationUnit_coordinates {X Y : Scheme.{t}} (f : X ⟶ Y)
     ambientRoosUnit_coordinates l E X ((pullComplex l E f).obj P)
       ((pullTowerIso l E f).hom.app P)
 
-/-- The analogous tensor augmentation equation retains the zero shifted-product part.
-Source: Stacks 03EL, 07A4, 0941 (blueprint: lem-pur-integral-ambient-operation-models).
-Proof: x tensor y maps to (x tensor y) tensor 1, hence under the normalized comparison
-to (x tensor 1) tensor (y tensor 1). The strict Roos map is diagonal on product
-coordinates, so its shifted-product component remains zero in every degree. -/
+/-- The analogous tensor augmentation equation retains the zero shifted-product part. -/
 theorem tensorOperationUnit_coordinates (W : Scheme.{t})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     tensorOperationUnit l E W P Q ≫ CochainComplex.mappingCocone.fst
@@ -549,11 +538,7 @@ theorem tensorOperationUnit_coordinates (W : Scheme.{t})
         (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q))
       ((tensorTowerIso l E W).hom.app (P, Q))
 
-/-- Ordinary pullback carries flat-term K-flat representatives to such representatives.
-Source: Stacks 0G7E (blueprint: lem-pur-integral-ambient-operation-models).
-Proof: the module inverse image is the geometric inverse image followed by scalar
-extension along coefficientMap. Apply ringed-topos K-flat pullback to this presentation;
-flatness of its terms follows from the same ringed pullback theorem. -/
+/-- Ordinary pullback carries flat-term K-flat representatives to such representatives. -/
 theorem pull_good {X Y : Scheme.{t}} (f : X ⟶ Y)
     (P : CochainComplex (integralTowerModules l E Y) ℤ)
     (hP : integralOperationsGoodComplex l E Y P) :
@@ -606,11 +591,7 @@ theorem pull_good {X Y : Scheme.{t}} (f : X ⟶ Y)
 
 attribute [local semireducible] coefficientTotalTensor
 
-/-- The direct-sum total tensor of two good representatives is good.
-Source: Stacks 07A2, 07A4 (blueprint: lem-pur-integral-ambient-operation-models).
-Proof: the total tensor of K-flat complexes is K-flat. Its terms are direct sums
-of tensor products of flat module sheaves and are therefore flat. No boundedness
-or product totalization is involved. -/
+/-- The direct-sum total tensor of two good representatives is good. -/
 theorem tensor_good (W : Scheme.{t})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ)
     (hP : integralOperationsGoodComplex l E W P)
@@ -633,8 +614,7 @@ set_option maxHeartbeats 200000
 
 set_option genSizeOfSpec false in
 set_option genInjectivity false in
-/-- Shared category and functor data of the recorded tensor comparison.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Shared category and functor data of the recorded tensor comparison. -/
 structure AmbientTensorPresentation where
   Cx : Type a₁
   [cxCategory : Category.{b₁} Cx]
@@ -648,9 +628,7 @@ structure AmbientTensorPresentation where
   tensor : D × D ⥤ D
   comparison : Flat.ι.prod Flat.ι ⋙ totalTensor ⋙ Q ≅
     (Flat.ι ⋙ Q).prod (Flat.ι ⋙ Q) ⋙ tensor
-/-- Capture the categories, functors and comparison in one record.
-Source: Stacks 06YY, 07A4, 08TC
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Capture the categories, functors and comparison in one record. -/
 def AmbientTensorPresentation.ofComparison
     {C : Type a₁} [cc : Category.{b₁} C]
     {D : Type c₁} [dd : Category.{d₁} D]
@@ -661,15 +639,13 @@ def AmbientTensorPresentation.ofComparison
   { Cx := C, cxCategory := cc, D := D, dCategory := dd,
     Flat := K, Good := G, good_flat := hG,
     totalTensor := T, Q := Q, tensor := S, comparison := cmp }
-/-- Capture the actual data used by the existing tensor model once.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Capture the actual data used by the existing tensor model once. -/
 @[irreducible] def ambientTensorPresentation (W : Scheme.{t}) :=
   AmbientTensorPresentation.ofComparison
     (IntegralOnSlice.duality l E W none).models.comparison
     (IntegralOnSlice.Good l E W none) (fun _ h ↦ h.1)
 
-/-- The recorded ambient cochain category.
-Source: Stacks 05RU (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded ambient cochain category. -/
 def ambientCx (W : Scheme.{t}) := (ambientTensorPresentation l E W).Cx
 
 set_option warn.classDefReducibility false in
@@ -678,172 +654,142 @@ set_option warn.classDefReducibility false in
 
 attribute [instance 5000] ambientCxCategory
 
-/-- Good complexes in the recorded ambient cochain category.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Good complexes in the recorded ambient cochain category. -/
 def ambientGood (W : Scheme.{t}) : ObjectProperty (ambientCx l E W) :=
   (ambientTensorPresentation l E W).Good
 
-/-- K-flat complexes in the recorded ambient cochain category.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- K-flat complexes in the recorded ambient cochain category. -/
 abbrev ambientFlat (W : Scheme.{t}) : ObjectProperty (ambientCx l E W) :=
   (ambientTensorPresentation l E W).Flat
 
-/-- Every good representative belongs to the recorded K-flat class.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Every good representative belongs to the recorded K-flat class. -/
 theorem ambientGoodFlat (W : Scheme.{t}) (P : ambientCx l E W)
     (h : ambientGood l E W P) : ambientFlat l E W P :=
   (ambientTensorPresentation l E W).good_flat P h
 
-/-- The recorded ambient derived category.
-Source: Stacks 05RU (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded ambient derived category. -/
 def ambientD (W : Scheme.{t}) := (ambientTensorPresentation l E W).D
 
 set_option warn.classDefReducibility false in
-/-- Share its recorded category structure throughout the comparisons.
-Source: Stacks 05RU (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Share its recorded category structure throughout the comparisons. -/
 @[irreducible] def ambientDCategory (W : Scheme.{t}) : Category (ambientD l E W) :=
   (ambientTensorPresentation l E W).dCategory
 
 attribute [instance 5000] ambientDCategory
 
-/-- The localization functor of the recorded ambient derived category.
-Source: Stacks 05RU (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The localization functor of the recorded ambient derived category. -/
 def ambientQ (W : Scheme.{t}) : ambientCx l E W ⥤ ambientD l E W :=
   by with_unfolding_all exact (ambientTensorPresentation l E W).Q
 
-/-- Its class of quasi-isomorphisms, taken from the same localization data.
-Source: Stacks 05RU (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Its class of quasi-isomorphisms, taken from the same localization data. -/
 def ambientQuasiIso (W : Scheme.{t}) : MorphismProperty (ambientCx l E W) := by
   with_unfolding_all exact ((fun {C : Type _} [c : Category C] (V : MorphismProperty C)
     (_ : MorphismProperty.HasLocalization V) => V) _
       (IntegralOnSlice.hasDerived l E W none))
 
-/-- The recorded ambient functor is a localization.
-Source: Stacks 05RU (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded ambient functor is a localization. -/
 @[instance] theorem ambientQ_isLocalization (W : Scheme.{t}) :
     (ambientQ l E W).IsLocalization (ambientQuasiIso l E W) := by
   with_unfolding_all exact
     @MorphismProperty.HasLocalization.hL _ _ _ (IntegralOnSlice.hasDerived l E W none)
 
-/-- Ordinary pullback in the recorded ambient cochain presentation.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Ordinary pullback in the recorded ambient cochain presentation. -/
 @[irreducible] def ambientPullComplex {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ambientCx l E Y ⥤ ambientCx l E X := by
   with_unfolding_all exact pullComplex l E f
 
-/-- The ordinary total tensor of the recorded slice coefficient presentation.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The ordinary total tensor of the recorded slice coefficient presentation. -/
 @[irreducible] def ambientTotalTensor (W : Scheme.{t}) :
     ambientCx l E W × ambientCx l E W ⥤ ambientCx l E W :=
   by with_unfolding_all exact (ambientTensorPresentation l E W).totalTensor
 
-/-- Pullback preserves the recorded good complexes.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Pullback preserves the recorded good complexes. -/
 theorem ambientPullGood {X Y : Scheme.{t}} (f : X ⟶ Y) (P : ambientCx l E Y)
     (hP : ambientGood l E Y P) : ambientGood l E X ((ambientPullComplex l E f).obj P) := by
   with_unfolding_all exact pull_good l E f P hP
 
-/-- Ordinary total tensor preserves the recorded good complexes.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Ordinary total tensor preserves the recorded good complexes. -/
 theorem ambientTensorGood (W : Scheme.{t}) (P Q : ambientCx l E W)
     (hP : ambientGood l E W P) (hQ : ambientGood l E W Q) :
     ambientGood l E W ((ambientTotalTensor l E W).obj (P, Q)) := by
   with_unfolding_all exact tensor_good l E W P Q hP hQ
 
-/-- The Roos functor on the same ambient cochain category.
-Source: Stacks 08TC (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The Roos functor on the same ambient cochain category. -/
 def ambientRoos (W : Scheme.{t}) :
     (ℕᵒᵖ ⥤ ambientCx l E W) ⥤ ambientCx l E W := by
   with_unfolding_all exact
     integralOperationsRoosFunctor (A := IntegralOnSlice.Mod l E W none)
 
-/-- The ordinary quotient tower in the captured cochain category.
-Source: Stacks 0941 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The ordinary quotient tower in the captured cochain category. -/
 @[irreducible] def ambientQuotientTower (W : Scheme.{t}) :
     ambientCx l E W ⥤ (ℕᵒᵖ ⥤ ambientCx l E W) := by
   with_unfolding_all exact IntegralOnSlice.tower l E W none
 
-/-- Its Roos complex functor, with the captured category data.
-Source: Stacks 08TC (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Its Roos complex functor, with the captured category data. -/
 def ambientRoosComplex (W : Scheme.{t}) : ambientCx l E W ⥤ ambientCx l E W :=
   ambientQuotientTower l E W ⋙ ambientRoos l E W
 
-/-- The quotient augmentation into this Roos complex.
-Source: Stacks 08TC (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The quotient augmentation into this Roos complex. -/
 @[irreducible] def ambientRoosUnit (W : Scheme.{t}) (P : ambientCx l E W) :
     P ⟶ (ambientRoosComplex l E W).obj P := by
   with_unfolding_all exact IntegralOnSlice.roosUnit l E W none P
 
-/-- The recorded finite pullback tower in this cochain presentation.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded finite pullback tower in this cochain presentation. -/
 @[irreducible] def ambientRecordedPullTower {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ambientCx l E Y ⥤ (ℕᵒᵖ ⥤ ambientCx l E X) := by
   with_unfolding_all exact integralOperationsPullbackTowerFunctor l E f
 
-/-- The recorded finite tensor tower in this cochain presentation.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded finite tensor tower in this cochain presentation. -/
 @[irreducible] def ambientRecordedTensorTower (W : Scheme.{t}) :
     ambientCx l E W × ambientCx l E W ⥤ (ℕᵒᵖ ⥤ ambientCx l E W) := by
   with_unfolding_all exact integralOperationsTensorTowerFunctor l E W
 
-/-- The recorded finite pullback Roos complex.
-Source: Stacks 08TC (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded finite pullback Roos complex. -/
 def ambientRecordedPullComplex {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ambientCx l E Y ⥤ ambientCx l E X :=
   ambientRecordedPullTower l E f ⋙ ambientRoos l E X
 
-/-- The recorded finite tensor Roos complex.
-Source: Stacks 08TC (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded finite tensor Roos complex. -/
 def ambientRecordedTensorComplex (W : Scheme.{t}) :
     ambientCx l E W × ambientCx l E W ⥤ ambientCx l E W :=
   ambientRecordedTensorTower l E W ⋙ ambientRoos l E W
 
-/-- The specified pullback tower comparison, sharing its source category data.
-Source: Stacks 03EL (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The specified pullback tower comparison, sharing its source category data. -/
 @[irreducible] def ambientPullTowerIso {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ambientPullComplex l E f ⋙ ambientQuotientTower l E X ≅
       ambientRecordedPullTower l E f := by
   with_unfolding_all exact pullTowerIso l E f
 
-/-- The specified tensor tower comparison, sharing its source category data.
-Source: Stacks 03EL (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The specified tensor tower comparison, sharing its source category data. -/
 @[irreducible] def ambientTensorTowerIso (W : Scheme.{t}) :
     ambientTotalTensor l E W ⋙ ambientQuotientTower l E W ≅
       ambientRecordedTensorTower l E W := by
   with_unfolding_all exact tensorTowerIso l E W
 
-/-- The recorded derived pullback in this derived category.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded derived pullback in this derived category. -/
 @[irreducible] def ambientPull {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ambientD l E Y ⥤ ambientD l E X := by
   with_unfolding_all exact integralDerivedPullback l E f
 
-/-- The recorded completed tensor in this derived category.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded completed tensor in this derived category. -/
 @[irreducible] def ambientCompletedTensor (W : Scheme.{t}) :
     ambientD l E W × ambientD l E W ⥤ ambientD l E W := by
   with_unfolding_all exact integralCompletedTensor l E W
 
-/-- Localization restricted to the good representatives.
-Source: Stacks 06YY, 07A4, 08TC
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Localization restricted to the good representatives. -/
 def ambientGoodLocalization (W : Scheme.{t}) :
     (ambientGood l E W).FullSubcategory ⥤
       ambientD l E W :=
   (ambientGood l E W).ι ⋙ (ambientQ l E W)
 
-/-- The finite pullback operation on good representatives.
-Source: Stacks 06YY, 07A4, 08TC
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The finite pullback operation on good representatives. -/
 def ambientPullOnGood {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (ambientGood l E Y).FullSubcategory ⥤
       ambientD l E X :=
   (ambientGood l E Y).ι ⋙
     ambientRecordedPullComplex l E f ⋙ (ambientQ l E X)
 
-/-- The finite tensor operation on pairs of good representatives.
-Source: Stacks 06YY, 07A4, 08TC
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The finite tensor operation on pairs of good representatives. -/
 def ambientTensorOnGood (W : Scheme.{t}) :
     (ambientGood l E W).FullSubcategory ×
       (ambientGood l E W).FullSubcategory ⥤
@@ -852,52 +798,43 @@ def ambientTensorOnGood (W : Scheme.{t}) :
     (ambientGood l E W).ι) ⋙
       ambientRecordedTensorComplex l E W ⋙ (ambientQ l E W)
 
-/-- The Roos completion on good representatives.
-Source: Stacks 06YY, 07A4, 08TC
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The Roos completion on good representatives. -/
 def ambientCompletionOnGood (W : Scheme.{t}) :
     (ambientGood l E W).FullSubcategory ⥤ ambientD l E W :=
   (ambientGood l E W).ι ⋙ ambientRoosComplex l E W ⋙ ambientQ l E W
 
-/-- The recorded pullback comparison on good representatives.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded pullback comparison on good representatives. -/
 @[irreducible] def ambientPullComparison {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ambientGoodLocalization l E Y ⋙ ambientPull l E f ≅ ambientPullOnGood l E f := by
   with_unfolding_all exact integralDerivedPullbackComparison l E f
 
-/-- The recorded tensor comparison on good representatives.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded tensor comparison on good representatives. -/
 @[irreducible] def ambientTensorComparison (W : Scheme.{t}) :
     (ambientGoodLocalization l E W).prod (ambientGoodLocalization l E W) ⋙
       ambientCompletedTensor l E W ≅ ambientTensorOnGood l E W := by
   with_unfolding_all exact integralCompletedTensorComparison l E W
 
-/-- Completion in the recorded ambient derived category.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Completion in the recorded ambient derived category. -/
 @[irreducible] def ambientCompletion (W : Scheme.{t}) : ambientD l E W ⥤ ambientD l E W := by
   with_unfolding_all exact IntegralOnSlice.completion l E W none
 
-/-- The recorded completion comparison.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded completion comparison. -/
 @[irreducible] def ambientCompletionComparison (W : Scheme.{t}) :
     ambientGoodLocalization l E W ⋙ ambientCompletion l E W ≅
       ambientCompletionOnGood l E W := by
   with_unfolding_all exact IntegralOnSlice.completionComparison l E W none
 
-/-- The recorded completion unit.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded completion unit. -/
 @[irreducible] def ambientCompletionUnit (W : Scheme.{t}) :
     𝟭 (ambientD l E W) ⟶ ambientCompletion l E W :=
   by with_unfolding_all exact IntegralOnSlice.completionUnit l E W none
 
-/-- Ordinary derived tensor in the recorded ambient category.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Ordinary derived tensor in the recorded ambient category. -/
 @[irreducible] def ambientOrdinaryTensor (W : Scheme.{t}) :
     ambientD l E W × ambientD l E W ⥤ ambientD l E W :=
   by with_unfolding_all exact (ambientTensorPresentation l E W).tensor
 
-/-- The whole ordinary tensor model comparison, with its category data shared once.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The whole ordinary tensor model comparison, with its category data shared once. -/
 @[irreducible] def ambientTensorModelComparison (W : Scheme.{t}) :
     ((ambientFlat l E W).ι.prod (ambientFlat l E W).ι) ⋙
       ambientTotalTensor l E W ⋙ ambientQ l E W ≅
@@ -910,15 +847,7 @@ attribute [local irreducible] integralOperationsLevelPullback
   Scheme.coefficientProEtaleModulePullback unrestrictedIntegralReductionFunctor
   IntegralOnSlice.reduction IntegralOnSlice.reductionWitness
 
-/-- Construct the universal ambient pullback counit.
-Source: Stacks 06YY and 0G7E
-(blueprint: lem-pur-integral-ambient-operation-models).
-
-Proof: present pullback using independent-universe inverse image and scalar extension.
-Uniqueness of left adjoints identifies it with the recorded pullback. Apply the
-ringed derived-pullback theorem, transport its universal counit from homotopy
-representatives to cochains, then transport along that left-adjoint isomorphism.
-Good complexes remain good under pullback, so the counit is an isomorphism there. -/
+/-- Construct the universal ambient pullback counit. -/
 theorem rawAmbientDerivedData {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ∃ (F : ambientD l E Y ⥤
         ambientD l E X)
@@ -985,9 +914,7 @@ theorem rawAmbientDerivedData {X Y : Scheme.{t}} (f : X ⟶ Y) :
   · intro P
     with_unfolding_all exact hεc P
 
-/-- The defining augmentation law of the recorded completion unit.
-Source: Stacks 06YY, 07A4, 08TC
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The defining augmentation law of the recorded completion unit. -/
 theorem rawAmbientCompletionUnit_app (W : Scheme.{t})
     (P : (ambientGood l E W).FullSubcategory) :
     (ambientCompletionUnit l E W).app ((ambientGoodLocalization l E W).obj P) ≫
@@ -998,8 +925,7 @@ theorem rawAmbientCompletionUnit_app (W : Scheme.{t})
     ((IntegralOnSlice.completionUnit_existsUnique l E W none).exists.choose_spec
       (show (IntegralOnSlice.Good l E W none).FullSubcategory from P))
 
-/-- Good representatives localize to the ambient derived category.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Good representatives localize to the ambient derived category. -/
 theorem rawAmbientGoodLocalization (W : Scheme.{t}) :
     (ambientGoodLocalization l E W).IsLocalization
       ((ambientQuasiIso l E W).inverseImage (ambientGood l E W).ι) := by
@@ -1011,9 +937,7 @@ universe a₂ b₂ c₂ d₂ e₂ f₂
 set_option genSizeOfSpec false in
 set_option genInjectivity false in
 /-- The operation constructions with their compatibility laws. Carrier categories
-and good objects are fixed parameters, so the laws share exactly the same functors.
-Source: Stacks 06YY, 07A4, 08TC
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+and good objects are fixed parameters, so the laws share exactly the same functors. -/
 structure AmbientOperationData
     (I : Type a₂) [Category.{b₂} I]
     (C : I → Type c₂) [cc : ∀ W, Category.{d₂} (C W)]
@@ -1058,27 +982,20 @@ structure AmbientOperationData
     ∃ (F : D Y ⥤ D X) (ε : Q Y ⋙ F ⟶ pullComplex f ⋙ Q X),
       F.IsRightKanExtension ε ∧ ∀ Z : (P Y).FullSubcategory, IsIso (ε.app Z.obj)
 
-/-- Equality to a constructed value specifies it uniquely.
-Source: equality reflexivity (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Equality to a constructed value specifies it uniquely. -/
 theorem operationDataCopy_existsUnique {A : Type*} (a : A) : ∃! b : A, b = a :=
   ⟨a, rfl, fun _ h ↦ h⟩
 
-/-- Share a constructed value through its proved specification.
-Source: the preceding unique construction
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Share a constructed value through its proved specification. -/
 @[irreducible] def operationDataCopy {A : Type*} (a : A) : A :=
   (operationDataCopy_existsUnique a).exists.choose
 
-/-- The shared value is the original constructed value.
-Source: the preceding unique construction
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The shared value is the original constructed value. -/
 theorem operationDataCopy_eq {A : Type*} (a : A) : operationDataCopy a = a := by
   unfold operationDataCopy
   exact (operationDataCopy_existsUnique a).exists.choose_spec
 
-/-- Package the recorded constructions and their already proved compatibility laws.
-Source: Stacks 06YY, 07A4, 08TC
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Package the recorded constructions and their already proved compatibility laws. -/
 def rawAmbientPackage : AmbientOperationData Scheme
     (ambientCx l E) (ambientD l E) (ambientGood l E) (ambientFlat l E)
       (ambientQuasiIso l E) where
@@ -1110,143 +1027,113 @@ def rawAmbientPackage : AmbientOperationData Scheme
     obtain ⟨F, ε, hF, hε⟩ := rawAmbientDerivedData l E f
     exact ⟨F, ε, hF.isRightKanExtension, hε⟩
 
-/-- The same recorded operations, shared as one specified record.
-Source: the preceding constructed package
-(blueprint: lem-pur-integral-ambient-operation-models).
-
-The specifying theorem is proved by reflexivity. It determines the entire record by
-literal equality to rawAmbientPackage, rather than selecting unspecified operation data. -/
+/-- The same recorded operations, shared as one specified record. -/
 @[irreducible] def ambientPackage := operationDataCopy (rawAmbientPackage l E)
 
-/-- No operation is changed by sharing the package.
-Source: the preceding unique construction
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- No operation is changed by sharing the package. -/
 theorem ambientPackage_eq : ambientPackage l E = rawAmbientPackage l E := by
   unfold ambientPackage
   exact operationDataCopy_eq _
-/-- The localization functor of the recorded ambient derived category.
-Source: Stacks 05RU (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The localization functor of the recorded ambient derived category. -/
 def modelQ (W : Scheme.{t}) : ambientCx l E W ⥤ ambientD l E W :=
   (ambientPackage l E).Q W
 
-/-- Ordinary pullback in the recorded ambient cochain presentation.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Ordinary pullback in the recorded ambient cochain presentation. -/
 def modelPullComplex {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ambientCx l E Y ⥤ ambientCx l E X :=
   (ambientPackage l E).pullComplex f
 
-/-- The ordinary total tensor of the recorded slice coefficient presentation.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The ordinary total tensor of the recorded slice coefficient presentation. -/
 def modelTotalTensor (W : Scheme.{t}) :
     ambientCx l E W × ambientCx l E W ⥤ ambientCx l E W :=
   (ambientPackage l E).totalTensor W
 
-/-- Pullback preserves the recorded good complexes.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Pullback preserves the recorded good complexes. -/
 theorem modelPullGood {X Y : Scheme.{t}} (f : X ⟶ Y) (P : ambientCx l E Y)
     (hP : ambientGood l E Y P) : ambientGood l E X ((modelPullComplex l E f).obj P) :=
   (ambientPackage l E).pullGood f P hP
 
-/-- Ordinary total tensor preserves the recorded good complexes.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Ordinary total tensor preserves the recorded good complexes. -/
 theorem modelTensorGood (W : Scheme.{t}) (P Q : ambientCx l E W)
     (hP : ambientGood l E W P) (hQ : ambientGood l E W Q) :
     ambientGood l E W ((modelTotalTensor l E W).obj (P, Q)) :=
   (ambientPackage l E).tensorGood W P Q hP hQ
 
-/-- The Roos functor on the same ambient cochain category.
-Source: Stacks 08TC (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The Roos functor on the same ambient cochain category. -/
 def modelRoos (W : Scheme.{t}) :
     (ℕᵒᵖ ⥤ ambientCx l E W) ⥤ ambientCx l E W :=
   (ambientPackage l E).roos W
 
-/-- The ordinary quotient tower in the captured cochain category.
-Source: Stacks 0941 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The ordinary quotient tower in the captured cochain category. -/
 def modelQuotientTower (W : Scheme.{t}) :
     ambientCx l E W ⥤ (ℕᵒᵖ ⥤ ambientCx l E W) :=
   (ambientPackage l E).quotientTower W
 
-/-- Its Roos complex functor, with the captured category data.
-Source: Stacks 08TC (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Its Roos complex functor, with the captured category data. -/
 def modelRoosComplex (W : Scheme.{t}) : ambientCx l E W ⥤ ambientCx l E W :=
   modelQuotientTower l E W ⋙ modelRoos l E W
 
-/-- The quotient augmentation into this Roos complex.
-Source: Stacks 08TC (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The quotient augmentation into this Roos complex. -/
 def modelRoosUnit (W : Scheme.{t}) (P : ambientCx l E W) :
     P ⟶ (modelRoosComplex l E W).obj P :=
   (ambientPackage l E).roosUnit W P
 
-/-- The recorded finite pullback tower in this cochain presentation.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded finite pullback tower in this cochain presentation. -/
 def modelRecordedPullTower {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ambientCx l E Y ⥤ (ℕᵒᵖ ⥤ ambientCx l E X) :=
   (ambientPackage l E).recordedPullTower f
 
-/-- The recorded finite tensor tower in this cochain presentation.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded finite tensor tower in this cochain presentation. -/
 def modelRecordedTensorTower (W : Scheme.{t}) :
     ambientCx l E W × ambientCx l E W ⥤ (ℕᵒᵖ ⥤ ambientCx l E W) :=
   (ambientPackage l E).recordedTensorTower W
 
-/-- The recorded finite pullback Roos complex.
-Source: Stacks 08TC (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded finite pullback Roos complex. -/
 def modelRecordedPullComplex {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ambientCx l E Y ⥤ ambientCx l E X :=
   modelRecordedPullTower l E f ⋙ modelRoos l E X
 
-/-- The recorded finite tensor Roos complex.
-Source: Stacks 08TC (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded finite tensor Roos complex. -/
 def modelRecordedTensorComplex (W : Scheme.{t}) :
     ambientCx l E W × ambientCx l E W ⥤ ambientCx l E W :=
   modelRecordedTensorTower l E W ⋙ modelRoos l E W
 
-/-- The specified pullback tower comparison, sharing its source category data.
-Source: Stacks 03EL (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The specified pullback tower comparison, sharing its source category data. -/
 def modelPullTowerIso {X Y : Scheme.{t}} (f : X ⟶ Y) :
     modelPullComplex l E f ⋙ modelQuotientTower l E X ≅
       modelRecordedPullTower l E f :=
   (ambientPackage l E).pullTowerIso f
 
-/-- The specified tensor tower comparison, sharing its source category data.
-Source: Stacks 03EL (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The specified tensor tower comparison, sharing its source category data. -/
 def modelTensorTowerIso (W : Scheme.{t}) :
     modelTotalTensor l E W ⋙ modelQuotientTower l E W ≅
       modelRecordedTensorTower l E W :=
   (ambientPackage l E).tensorTowerIso W
 
-/-- The recorded derived pullback in this derived category.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded derived pullback in this derived category. -/
 def modelPull {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ambientD l E Y ⥤ ambientD l E X :=
   (ambientPackage l E).derivedPull f
 
-/-- The recorded completed tensor in this derived category.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded completed tensor in this derived category. -/
 def modelCompletedTensor (W : Scheme.{t}) :
     ambientD l E W × ambientD l E W ⥤ ambientD l E W :=
   (ambientPackage l E).completedTensor W
 
-/-- Localization restricted to the good representatives in the shared data.
-Source: Stacks 06YY, 07A4, 08TC
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Localization restricted to the good representatives in the shared data. -/
 def modelGoodLocalization (W : Scheme.{t}) :
     (ambientGood l E W).FullSubcategory ⥤
       ambientD l E W :=
   (ambientGood l E W).ι ⋙ (modelQ l E W)
 
-/-- The recorded finite pullback on good representatives in the shared data.
-Source: Stacks 06YY, 07A4, 08TC
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded finite pullback on good representatives in the shared data. -/
 def modelPullOnGood {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (ambientGood l E Y).FullSubcategory ⥤
       ambientD l E X :=
   (ambientGood l E Y).ι ⋙
     modelRecordedPullComplex l E f ⋙ (modelQ l E X)
 
-/-- The recorded finite tensor on pairs of good representatives in the shared data.
-Source: Stacks 06YY, 07A4, 08TC
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded finite tensor on pairs of good representatives in the shared data. -/
 def modelTensorOnGood (W : Scheme.{t}) :
     (ambientGood l E W).FullSubcategory ×
       (ambientGood l E W).FullSubcategory ⥤
@@ -1255,9 +1142,7 @@ def modelTensorOnGood (W : Scheme.{t}) :
     (ambientGood l E W).ι) ⋙
       modelRecordedTensorComplex l E W ⋙ (modelQ l E W)
 
-/-- The ordinary tensor as a functor into good representatives.
-Source: Stacks 06YY, 07A4, 08TC
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The ordinary tensor as a functor into good representatives. -/
 def modelTensorGoodLift (W : Scheme.{t}) :
     (ambientGood l E W).FullSubcategory ×
       (ambientGood l E W).FullSubcategory ⥤
@@ -1267,60 +1152,49 @@ def modelTensorGoodLift (W : Scheme.{t}) :
       modelTotalTensor l E W)
     (fun P ↦ modelTensorGood l E W P.1.obj P.2.obj P.1.property P.2.property)
 
-/-- The ordinary pullback as a functor into good representatives.
-Source: Stacks 06YY, 07A4, 08TC
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The ordinary pullback as a functor into good representatives. -/
 def modelPullGoodLift {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (ambientGood l E Y).FullSubcategory ⥤ (ambientGood l E X).FullSubcategory :=
   (ambientGood l E X).lift ((ambientGood l E Y).ι ⋙ modelPullComplex l E f)
     (fun P ↦ modelPullGood l E f P.obj P.property)
 
-/-- The quotient-tower Roos completion on good representatives.
-Source: Stacks 06YY, 07A4, 08TC
-(blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The quotient-tower Roos completion on good representatives. -/
 def modelCompletionOnGood (W : Scheme.{t}) :
     (ambientGood l E W).FullSubcategory ⥤ ambientD l E W :=
   (ambientGood l E W).ι ⋙ modelRoosComplex l E W ⋙ modelQ l E W
 
-/-- The recorded pullback comparison on good representatives.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded pullback comparison on good representatives. -/
 def modelPullComparison {X Y : Scheme.{t}} (f : X ⟶ Y) :
     modelGoodLocalization l E Y ⋙ modelPull l E f ≅ modelPullOnGood l E f :=
   (ambientPackage l E).pullComparison f
 
-/-- The recorded tensor comparison on good representatives.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded tensor comparison on good representatives. -/
 def modelTensorComparison (W : Scheme.{t}) :
     (modelGoodLocalization l E W).prod (modelGoodLocalization l E W) ⋙
       modelCompletedTensor l E W ≅ modelTensorOnGood l E W :=
   (ambientPackage l E).tensorComparison W
 
-/-- Completion in the recorded ambient derived category.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Completion in the recorded ambient derived category. -/
 def modelCompletion (W : Scheme.{t}) : ambientD l E W ⥤ ambientD l E W :=
   (ambientPackage l E).completion W
 
-/-- The recorded completion comparison.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded completion comparison. -/
 def modelCompletionComparison (W : Scheme.{t}) :
     modelGoodLocalization l E W ⋙ modelCompletion l E W ≅
       modelCompletionOnGood l E W :=
   (ambientPackage l E).completionComparison W
 
-/-- The recorded completion unit.
-Source: Stacks 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded completion unit. -/
 def modelCompletionUnit (W : Scheme.{t}) :
     𝟭 (ambientD l E W) ⟶ modelCompletion l E W :=
   (ambientPackage l E).completionUnit W
 
-/-- Ordinary derived tensor in the recorded ambient category.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Ordinary derived tensor in the recorded ambient category. -/
 def modelOrdinaryTensor (W : Scheme.{t}) :
     ambientD l E W × ambientD l E W ⥤ ambientD l E W :=
   (ambientPackage l E).ordinaryTensor W
 
-/-- The derived image of the recorded pullback tower comparison.
-Source: Stacks 03EL (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The derived image of the recorded pullback tower comparison. -/
 def modelPullTowerMap {X Y : Scheme.{t}} (f : X ⟶ Y)
     (P : ambientCx l E Y) :
     (modelQ l E X).obj ((modelRoosComplex l E X).obj
@@ -1330,8 +1204,7 @@ def modelPullTowerMap {X Y : Scheme.{t}} (f : X ⟶ Y)
   exact ((modelQ l E X).map
     ((modelRoos l E X).map ((modelPullTowerIso l E f).hom.app P)))
 
-/-- The derived image of the specified pullback augmentation.
-Source: Stacks 08TC (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The derived image of the specified pullback augmentation. -/
 def modelPullUnitMap {X Y : Scheme.{t}} (f : X ⟶ Y)
     (P : ambientCx l E Y) :
     (modelQ l E X).obj ((modelPullComplex l E f).obj P) ⟶
@@ -1341,8 +1214,7 @@ def modelPullUnitMap {X Y : Scheme.{t}} (f : X ⟶ Y)
     (modelRoosUnit l E X ((modelPullComplex l E f).obj P) ≫
       (modelRoos l E X).map ((modelPullTowerIso l E f).hom.app P)))
 
-/-- The derived image of the specified strict tensor tower map.
-Source: Stacks 03EL (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The derived image of the specified strict tensor tower map. -/
 def modelTensorTowerMap (W : Scheme.{t}) (P Q : ambientCx l E W) :
     (modelQ l E W).obj
       ((modelRoosComplex l E W).obj ((modelTotalTensor l E W).obj (P, Q))) ⟶
@@ -1351,8 +1223,7 @@ def modelTensorTowerMap (W : Scheme.{t}) (P Q : ambientCx l E W) :
   exact ((modelQ l E W).map
     ((modelRoos l E W).map ((modelTensorTowerIso l E W).hom.app (P, Q))))
 
-/-- The derived image of the specified tensor augmentation.
-Source: Stacks 08TC (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The derived image of the specified tensor augmentation. -/
 def modelTensorUnitMap (W : Scheme.{t}) (P Q : ambientCx l E W) :
     (modelQ l E W).obj ((modelTotalTensor l E W).obj (P, Q)) ⟶
       (modelQ l E W).obj ((modelRecordedTensorComplex l E W).obj (P, Q)) := by
@@ -1361,8 +1232,7 @@ def modelTensorUnitMap (W : Scheme.{t}) (P Q : ambientCx l E W) :
     (modelRoosUnit l E W ((modelTotalTensor l E W).obj (P, Q)) ≫
       (modelRoos l E W).map ((modelTensorTowerIso l E W).hom.app (P, Q))))
 
-/-- The whole ordinary tensor model comparison, with its category data shared once.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The whole ordinary tensor model comparison, with its category data shared once. -/
 def modelTensorModelComparison (W : Scheme.{t}) :
     ((ambientFlat l E W).ι.prod (ambientFlat l E W).ι) ⋙
       modelTotalTensor l E W ⋙ modelQ l E W ≅
@@ -1370,8 +1240,7 @@ def modelTensorModelComparison (W : Scheme.{t}) :
           ((ambientFlat l E W).ι ⋙ modelQ l E W)) ⋙ modelOrdinaryTensor l E W :=
   (ambientPackage l E).tensorModelComparison W
 
-/-- Localization for the shared ambient operation record.
-Source: Stacks 05RU (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- Localization for the shared ambient operation record. -/
 @[instance] theorem modelQ_isLocalization (W : Scheme.{t}) :
     (modelQ l E W).IsLocalization (ambientQuasiIso l E W) :=
   (ambientPackage l E).qLocalization W
@@ -1391,8 +1260,7 @@ private theorem modelCompletionUnit_app (W : Scheme.{t})
         (modelQ l E W).map (modelRoosUnit l E W P.obj) :=
   (ambientPackage l E).unitLaw W P
 
-/-- The recorded ordinary tensor comparison on good representatives.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
+/-- The recorded ordinary tensor comparison on good representatives. -/
 def tensorRepresentative (W : Scheme.{t})
     (P Q : (ambientGood l E W).FullSubcategory) :
     (modelQ l E W).obj ((modelTotalTensor l E W).obj (P.obj, Q.obj)) ≅
@@ -1693,25 +1561,7 @@ set_option maxHeartbeats 200000
 finite-quotient integral pullback and completed tensor, naturally on all derived objects.
 The equalities specify that these are the derived limits of modelPullTowerIso and
  modelTensorTowerIso, and identify both operation augmentations, including their zero
-shifted-product coordinates recorded above.
-Source: Stacks 06YY, 0G7E, 07A4, 0941; sites-modules.tex, 03EL
-(blueprint: lem-pur-integral-ambient-operation-models).
-
-Proof: present ordinary pullback by independent-universe algebraic inverse image
-and scalar extension. Uniqueness of left adjoints identifies this presentation with
-pull. Apply the ringed derived-pullback theorem and transport its universal counit
-from homotopy representatives to cochains. The counit is invertible on good complexes.
-On those representatives, compose its image under completion, completionComparison,
-and the Roos image of modelPullTowerIso. Fully faithful whiskering along good localization
-descends this comparison against modelPullComparison.
-For tensor, restrict the specified ordinary tensor model to good complexes, invert
-its comparison, and compose completionComparison with the Roos image of modelTensorTowerIso.
-Fully faithful whiskering along the product localization descends this comparison
-against modelTensorComparison. Evaluating the two descent equations gives
-the stated normalizations. Finally, naturality of completionUnit and its defining
-equation on good complexes identify both augmentations; functoriality of Q combines
-the Roos unit with the strict tower map. No boundedness, completeness, or
-constructibility condition is imposed. -/
+shifted-product coordinates recorded above. -/
 theorem integralAmbientOperationModels {X Y : Scheme.{t}} (f : X ⟶ Y)
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
     (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :

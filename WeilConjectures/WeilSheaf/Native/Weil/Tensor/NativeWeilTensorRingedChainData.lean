@@ -15,6 +15,17 @@ import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 This module records the total comparison, its homogeneous summand formula, and
 naturality.  The scalar sign is a parameter so this interface can be used with
 the item module's specified normalization.
+
+## Implementation details
+
+An unrestricted sign parameter would be too strong, since an arbitrary endomorphism
+assignment need not preserve isomorphisms; the sign is therefore required to be the
+normalized Koszul scalar action. The underived comparisons are assembled into a bifunctor
+isomorphism, to which the generic total comparison and the total-complex flip apply.
+
+## References
+
+* Stacks Project, Tags 06YN and 06YU
 -/
 
 @[expose] public noncomputable section
@@ -73,14 +84,8 @@ structure NativeWeilRingedTensorChainData
           (Prod.mkHom ((b.native.functor.mapHomologicalComplex (.up ℤ)).map g)
             ((b.native.functor.mapHomologicalComplex (.up ℤ)).map f))
 
-/-- The total comparison, summand equation, and naturality.
-Source: Stacks 06YN and 06YU (blueprint: lem-sf-native-weil-tensor-ringed-chain-data).
-
-The unrestricted sign parameter in the imported interface is too strong: an
-arbitrary endomorphism assignment need not preserve isomorphisms.  We therefore
-require it to be the normalized Koszul scalar action.  The proof first assembles
-the underived comparisons into a bifunctor isomorphism, applies the generic total
-comparison, and then uses the total-complex flip isomorphism. -/
+/-- The total comparison, summand equation, and naturality, for the normalized Koszul
+scalar action. -/
 theorem native_weil_tensor_ringed_chain_data
     (U : NativeWeilRingedTensorUnderivedData b T adj)
     (sign : ∀ (_p _q : ℤ)

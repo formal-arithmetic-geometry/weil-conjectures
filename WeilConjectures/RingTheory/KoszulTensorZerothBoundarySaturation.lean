@@ -13,8 +13,17 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basic
 /-!
 # Saturation of the degree-zero Koszul boundaries
 
-Source: Stacks Project, Tag 062F, the degree-zero quotient calculation.
-(blueprint: lem-weil-pbc-koszul-tensor-zeroth-boundary-saturation).
+If `t` is a nonzerodivisor on `M/(f)M`, then the degree-zero boundaries of `K(f) ⊗ M` are
+saturated with respect to `t`.
+
+## Implementation details
+
+The degree-one differential sends `e_i ⊗ m` to `f_i • m`, so its image is `(f) • ⊤` and the
+zeroth term modulo boundaries is `M/(f)M`.
+
+## References
+
+* [Stacks, Tags 062F, 0623]
 -/
 
 @[expose] public section
@@ -89,19 +98,8 @@ private theorem tensorZeroEquiv_boundary_range {R : Type u} [CommRing R]
     simp only [LinearMap.comp_apply, LinearEquiv.coe_coe]
     rw [tensorZeroEquiv_boundary_tmul, LinearEquiv.apply_symm_apply, hx]
 
-/-- Source: Stacks Project, Tag 062F, and the Koszul differential of Tag 0623
-(blueprint: lem-weil-pbc-koszul-tensor-zeroth-boundary-saturation).
-
-Proof: identify the zeroth exterior power with `R` and then `R ⊗ M` with `M`.
-Under this linear identification, the degree-one differential sends `e_i ⊗ m`
-to `f_i • m`. These tensors span the degree-one term, so its image is exactly
-`Ideal.ofList (List.ofFn f) • ⊤`. Thus the zeroth term modulo boundaries is
-linearly isomorphic to the displayed quotient of `M`. If `t • b` is a boundary,
-the class of `b` in this quotient is killed by `t`. The assumed injectivity
-forces that class to be zero. Consequently `b` belongs to the image of the
-boundary, which supplies the required preimage. For an empty sequence the
-boundary image is zero and this is precisely injectivity of `t` on `M`;
-for the zero module both claims hold without any nontriviality assumption. -/
+/-- If `t` is a nonzerodivisor on `M/(f)M` and `t • b` is a degree-zero boundary of
+`K(f) ⊗ M`, then `b` is a degree-zero boundary. -/
 theorem koszulTensor_zeroth_boundary_saturation {R : Type u} [CommRing R]
     (M : Type v) [AddCommGroup M] [Module R M] {r : ℕ} (f : Fin r → R) (t : R)
     (h : IsSMulRegular (M ⧸ (Ideal.ofList (List.ofFn f) • ⊤ : Submodule R M)) t) :

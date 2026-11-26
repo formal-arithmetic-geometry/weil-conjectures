@@ -10,7 +10,19 @@ import WeilConjectures.SmoothPurity.CompletedOpenTensor.OpenTensorGoodComparison
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import Mathlib.CategoryTheory.Localization.Prod
 
-/-! # Descent of the ordinary open total tensor comparison -/
+/-! # Descent of the ordinary open total tensor comparison
+
+## Implementation details
+
+The comparison is natural for arbitrary derived inputs; only its computation uses flat-term
+K-flat inputs, on which it is given by `strictOpen.totalComparison.chain` and descended by the
+two-variable localization universal property. No completion, quotient reduction or total-limit
+assertions are made in this step.
+
+## References
+
+* Stacks Project, Tags 0GL1 and 0E8I
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -29,24 +41,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {U V : Scheme.{t}} (j : U ⟶ V) [IsOpenImmersion j]
 
-/-- The ordinary open total-tensor chain map descends with its representative counits.
-Source: Stacks sites-cohomology.tex Tag 0GL1 and sites-modules.tex Tag 0E8I;
-step 4 of lem-pur-completed-open-tensor-representatives.
-(blueprint: lem-pur-open-tensor-ordinary-descent).
-
-Proof: exact open restriction is the scalar-normalized slice inverse image. The existing
-restriction theorem preserves
-flat-term K-flat complexes. Restrict both inputs to the resolving categories of such complexes.
-The derived tensor model comparisons, the exact extension/restriction representative
-counits, and strictOpen.totalComparison.chain give a natural isomorphism between
-restrictions of the two ordinary derived bifunctors. TotalComparison.naturality
-proves naturality before localization. The two-variable localization universal
-property descends this natural isomorphism uniquely. Its map-preimage equation is
-exactly the displayed square with sourceRepresentative and openRepresentative.
-The comparison is natural for arbitrary derived inputs; only its computation uses
-flat-term K-flat inputs. There are no completion, quotient reduction or total-limit
-assertions in this step. Zero complexes and empty or identity open immersions obey
-the same chain formulas and require no additional hypothesis. -/
+/-- The ordinary open total-tensor chain map descends with its representative counits. -/
 theorem openTensorOrdinaryDescent (C : Context l E j) :
     ∃ γ : OrdinaryMap l E j C,
       ∀ (P : CochainComplex (scalarReductionSource l E U) ℤ)

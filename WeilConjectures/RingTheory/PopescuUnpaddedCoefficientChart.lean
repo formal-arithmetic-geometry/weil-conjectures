@@ -18,7 +18,17 @@ import WeilConjectures.RingTheory.EssentiallySmoothBaseChange
 /-!
 # Simultaneous rescaling of an existing Artinian coefficient chart
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ, steps 10--13, 15, 23 and 25.
+We construct the rescaled coefficient algebra `E = D'[t_i]`, essentially smooth over `R/H^n`,
+before padding the parameter list and comparing powers of its parameter ideals.
+
+## Implementation details
+
+The algebra structures on `E` are defined explicitly through the identification
+`R/H^n ≃ B[t_i]`. No positive-dimension assumption is used.
+
+## References
+
+* [Stacks, Tag 07FJ] (steps 10--13, 15 and 25 of the proof)
 -/
 
 @[expose] public section
@@ -78,34 +88,7 @@ private theorem essentiallySmooth_polynomial
   exact essentiallySmooth_equiv_target eQ (essentiallySmooth_baseChange h)
 
 /-- Construct the rescaled coefficient algebra before padding the parameter list and
-comparing powers of its parameter ideals. Source: Stacks Project, Smoothing Ring Maps,
-Lemma 07FJ, steps 10--13, 15 and 25.
-(blueprint: lem-weil-pbc-popescu-unpadded-coefficient-chart).
-
-Proof: The rescaling-data theorem gives the parameters, kernel equalities, ideal H,
-coefficient ring D', its flat local map and coefficient lifts. It also retains a
-coefficient quotient B, essential smoothness of D' over B, and the k-algebra
-identification e : R/H^n ≃ B[t_i], with n = N+d(8c). It supplies polynomial
-coefficient-map and evaluation identities, without algebra structures on D'[t_i].
-
-Set E=D'[t_i]. The coefficient homomorphism B[t_i]→E composed with e defines
-θ:R/H^n→E as a k-algebra homomorphism. Its composite χ with the quotient map gives
-the R-algebra structure. Composition with S→R gives the S-algebra structure.
-These explicit maps prove the R→R/H^n→E and S→R→E scalar towers; k-linearity
-proves the k→S→E tower. The canonical polynomial structure supplies k→D'→E.
-
-Base change of the essentially smooth B-algebra D' gives an essentially smooth
-B[t_i]-algebra B[t_i]⊗_B D'. Tensor commutativity followed by the polynomial tensor
-identification is a B[t_i]-algebra equivalence from this tensor product to E, with
-structure map given by coefficient mapping. Transport the smooth localization
-presentation to E. Restrict it along e: the equivalence R/H^n→B[t_i] is smooth,
-and smooth composition gives a smooth R/H^n-algebra presentation of the same
-localization. This proves essential smoothness of E over R/H^n.
-
-The supplied polynomial identities are now exactly the required S-generator and
-R-evaluation identities by the definitions of θ, χ and the S-map. Retain the
-A-map, coefficient lifts, localness and flatness unchanged. No positive-d assumption
-is used: the zero-variable polynomial tensor equivalence also applies when d=0. -/
+comparing powers of its parameter ideals. -/
 theorem exists_popescu_unpadded_coefficient_chart
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]

@@ -19,8 +19,9 @@ import Mathlib.RingTheory.Etale.Kaehler
 /-!
 # Dimension of differentials at a smooth point over a field
 
-Source: Stacks Project, Algebra, Lemma 00TT, implication (1) implies (3)
-(blueprint: lem-weil-pbc-smooth-over-field-dimension-differentials).
+## References
+
+* [Stacks, Tag 00TT]
 -/
 
 @[expose] public section
@@ -82,30 +83,7 @@ private theorem normalized_presentation {R B : Type*} [CommRing R] [CommRing B]
 /-- At a smooth prime of a finite type algebra over a field, the fibre of the module of
 Kähler differentials is finite-dimensional, with dimension equal to the topological
 Krull dimension at that point. Scalar extension places the residue field on the left;
-the tensor-product commutor identifies this with `Ω[S⁄k] ⊗[S] κ(q)`.
-Source: Stacks Project, Algebra, Lemma 00TT, implication (1) implies (3)
-(blueprint: lem-weil-pbc-smooth-over-field-dimension-differentials).
-
-Proof:
-1. A finite type algebra over a field is finitely presented. The smooth principal
-   neighbourhood in `IsSmoothAtPrime` puts `q` in Mathlib's smooth locus. Apply
-   `IsSmoothAt.exists_notMem_isStandardSmooth` to obtain `f ∉ q` and a standard smooth
-   presentation of `B = S_f`. Reindex its variables as the disjoint union of the
-   Jacobian variables and their complement, obtaining `Fin n`, `Fin c` and the map
-   `Fin.castLE hnc` required by the standard smooth dimension theorem.
-2. Write `K = κ(q)`. Since the image of `f` in `K` is nonzero, the residue map extends
-   to `B`. Let `Q` be the inverse image of the zero prime of `K`. The scalar-tower
-   identity and the kernel of the original residue map show that `Q` maps to `q`.
-   The spectrum map for a principal localization is an open embedding, hence preserves
-   dimension at a point. The standard smooth dimension theorem gives `dim_q Spec S = n-c`.
-3. Localization is formally étale, so Mathlib's differential base-change equivalence
-   identifies `Ω[B⁄k]` with `B ⊗[S] Ω[S⁄k]`. Extend this equivalence to `K` and cancel
-   the intermediate base change to identify the two differential fibres. Base change
-   the basis `P.basisKaehler` to `K` and carry it across this equivalence.
-4. The resulting basis of `K ⊗[S] Ω[S⁄k]` has finite index type, giving finite
-   dimensionality. Its cardinality is the number of variables minus the cardinality
-   of the range of the injective relation-variable map, namely `n-c`. Comparing this
-   finrank with step 2 proves the required equality. -/
+the tensor-product commutor identifies this with `Ω[S⁄k] ⊗[S] κ(q)`. -/
 theorem finiteDimensional_and_finrank_kaehlerDifferential_eq_of_isSmoothAtPrime
     {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S] [FiniteType k S]
     (q : PrimeSpectrum S) (h : IsSmoothAtPrime k q) :

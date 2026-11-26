@@ -26,8 +26,16 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 
 /-! # Acyclicity input for completed tower pushforward
 
-Source: Stacks Project, Cohomology on Sites, Tags 0A07 and 0D6E.
-(blueprint: lem-pur-completed-coefficient-tower-limit-acyclic-aux).
+The inverse-limit functor sends a quasi-isomorphism from the levelwise pushforward of a
+K-injective completed tower to a K-injective target tower to a quasi-isomorphism.
+
+## Implementation details
+
+The proof uses the K-flat pullback and tower-localization argument.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 0A07 and 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -269,10 +277,7 @@ private theorem towerLimit_push_acyclic_comm {X Y : Scheme.{t}} (f : X ⟶ Y)
 /--
 The inverse-limit functor sends a quasi-isomorphism between a levelwise pushforward
 of a K-injective completed tower and a K-injective target tower to a
-quasi-isomorphism.  This is the acyclicity input used in the normalized derived
-limit argument; it is proved by the K-flat pullback and tower-localization
-argument of Stacks Tags 0A07 and 0D6E.
-(blueprint: lem-pur-completed-coefficient-tower-limit-acyclic-aux)
+quasi-isomorphism.
 -/
 theorem towerLimit_push_acyclic_aux {X Y : Scheme.{t}} (f : X ⟶ Y)
     (c : R l E Y ⟶ (ringPush.{t, u} f).obj (R l E X))

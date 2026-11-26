@@ -22,15 +22,12 @@ product `q = f₁ × f₂ : X₁ ⨯ X₂ ⟶ Y₁ ⨯ Y₂`. The *Künneth map*
 ```
 Π : Rf₁* B₁ ⊠ Rf₂* B₂ ⟶ Rq_* (B₁ ⊠ B₂)
 ```
-(`ProEtale.CondensedRing.prodLowerStarExternalProduct`, blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, item 5) is the adjoint for `Lq^* ⊣ Rq_*` of the
+(`ProEtale.CondensedRing.prodLowerStarExternalProduct`) is the adjoint for `Lq^* ⊣ Rq_*` of the
 monoidal structure of `Lq^*` followed by the counits of `Lfᵢ^* ⊣ Rfᵢ*`, transported along the
 projections (`ProEtale.CondensedRing.prodUpperStarCounit`). This file proves that `Π` is an
-isomorphism for proper `f₁`, `f₂` (`ProEtale.CondensedRing.isIso_prodLowerStarExternalProduct`,
-blueprint `lemma-kunneth-formula-compact-supports--1`, in the form `Rf_! ≅ Rf_*` for proper
-morphisms used in `lemma-external-duality-trace-morphism` (i)).
+isomorphism for proper `f₁`, `f₂` (`ProEtale.CondensedRing.isIso_prodLowerStarExternalProduct`).
 
-## Proof
+## Implementation details
 
 Write `q = r ≫ s` with `r = f₁ × 1 : X₁ ⨯ X₂ ⟶ Y₁ ⨯ X₂` and `s = 1 × f₂ : Y₁ ⨯ X₂ ⟶ Y₁ ⨯ Y₂`,
 base changes of `f₁` and `f₂`. By `CategoryTheory.Adjunction.isIso_homEquiv_δ_tensorHom`, `Π` is
@@ -282,16 +279,14 @@ theorem isIso_homEquiv_δ_tensorHom_prodUpperStarCounit {q : P ⟶ Q} {p₁ : P 
 
 variable (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂)
 
-/-- The *Künneth map* `Π : Rf₁* B₁ ⊠ Rf₂* B₂ ⟶ R(f₁ × f₂)_* (B₁ ⊠ B₂)` (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, item 5): the adjoint for `Lq^* ⊣ Rq_*`,
-`q = f₁ × f₂`, of
+/-- The *Künneth map* `Π : Rf₁* B₁ ⊠ Rf₂* B₂ ⟶ R(f₁ × f₂)_* (B₁ ⊠ B₂)`: the adjoint for
+`Lq^* ⊣ Rq_*`, `q = f₁ × f₂`, of
 ```
 Lq^* (Lp₁^* Rf₁* B₁ ⊗ Lp₂^* Rf₂* B₂) ≅ Lq^* Lp₁^* Rf₁* B₁ ⊗ Lq^* Lp₂^* Rf₂* B₂
   ⟶ Lp₁^* B₁ ⊗ Lp₂^* B₂,
 ```
-the monoidal structure of `Lq^*` followed by the counits. For proper `f_i` it is the inverse of
-the `!`-Künneth isomorphism `Ku_!` of `lemma-external-duality-trace-morphism` (i) under
-`Rq_* ≅ Rq_!`. -/
+the monoidal structure of `Lq^*` followed by the counits. For proper `f_i` it is the inverse of the
+`!`-Künneth isomorphism `Ku_!` under `Rq_* ≅ Rq_!`. -/
 noncomputable def prodLowerStarExternalProduct
     (B₁ : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B₂ : Dᵇc(X₂.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -303,12 +298,8 @@ noncomputable def prodLowerStarExternalProduct
       (prodUpperStarCounit ℓ (prod.map_fst f₁ f₂) B₁ ⊗ₘ
         prodUpperStarCounit ℓ (prod.map_snd f₁ f₂) B₂))
 
-/-- **The relative product theorem for proper morphisms** (blueprint
-`lemma-kunneth-formula-compact-supports--1`, compatibility with `Rf_! ≅ Rf_*` for proper `f`, as
-used in `lemma-external-duality-trace-morphism` (i)): for proper `f₁`, `f₂` the Künneth map
-`Rf₁* B₁ ⊠ Rf₂* B₂ ⟶ R(f₁ × f₂)_* (B₁ ⊠ B₂)` is an isomorphism. It is the Künneth map of the
-factorization `f₁ × f₂ = (f₁ × 1) ≫ (1 × f₂)` into base changes of `f₁` and `f₂`
-(`isIso_homEquiv_δ_tensorHom_prodUpperStarCounit`). -/
+/-- **The relative product theorem for proper morphisms**: for proper `f₁`, `f₂` the Künneth map
+`Rf₁* B₁ ⊠ Rf₂* B₂ ⟶ R(f₁ × f₂)_* (B₁ ⊠ B₂)` is an isomorphism. -/
 instance isIso_prodLowerStarExternalProduct [IsProper f₁.left] [IsProper f₂.left]
     (B₁ : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B₂ : Dᵇc(X₂.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

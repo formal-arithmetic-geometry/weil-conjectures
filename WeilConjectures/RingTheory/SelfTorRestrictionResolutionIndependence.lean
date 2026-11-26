@@ -11,8 +11,13 @@ import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 
 /-! # Independence of self-Tor restriction certificates from resolutions
 
-Source: Stacks Project, Tag 00LS (augmentation comparison).
-(blueprint: new-q1-self-tor-restriction-resolution-independence). -/
+We show that a self-Tor restriction certificate given by a tensor comparison on one pair of
+projective resolutions of the quotients yields one on every such pair.
+
+## References
+
+* [Stacks, Tag 00LS]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -71,25 +76,7 @@ private theorem resolution_lift_cycle_class
   exact hn.symm
 
 /-- A tensor comparison on one pair of projective quotient resolutions certifies
-its Tor map on every pair of projective quotient resolutions.
-Source: Stacks Project, Tag 00LS, augmentation comparison and homotopy uniqueness.
-(blueprint: new-q1-self-tor-restriction-resolution-independence).
-
-Proof: Given another pair P', Q', lift the quotient identity to u : P' → P
-and v : Q → Q'. Compose the given augmented comparison with u and restriction
-of v, and compose its quotient tensor map with the tensor maps of u and v.
-The quotient ring map is unchanged; the pure tensor equation follows by applying
-the three pure tensor equations in order. The augmentation equation follows
-from the identity augmentation equations for u and v. To check the cycle
-formula, transport a P' cycle through tensor u and the given comparison, then
-through tensor v. Maps of complexes carry cycles to cycles. Naturality of
-homologyπ gives the homology classes of these transported cycles. Naturality
-of isoLeftDerivedObj for lifts of the identity identifies their Tor classes.
-The hypothesis for P,Q therefore proves the required formula for P',Q'.
-Injectivity of the Q' cycles inclusion identifies the transported target cycle
-with any w occurring in the certificate. No flatness of the ring map is used:
-restriction of scalars is exact, and u,v are same-ring resolution comparisons.
-Zero quotients and degree zero use the same equations. -/
+its Tor map on every pair of projective quotient resolutions. -/
 theorem selfTor_restriction_certificate_of_resolution
     (A B : Type u) [CommRing A] [CommRing B] (I : Ideal A) (J : Ideal B)
     (φ : A →+* B) (n : ℕ)

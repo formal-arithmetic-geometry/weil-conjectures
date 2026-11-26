@@ -13,9 +13,19 @@ import WeilConjectures.RingTheory.StrictHenselizationSurjectiveQuotient
 
 /-! # Divisor quotients of algebraic strict henselizations of prime localizations
 
-Source: Stacks Project, Tag 05WS (strict henselization of a quotient), and localization
-of a quotient, as in Mathlib.RingTheory.Localization.Ideal.
-(blueprint: lem-sbc-algebraic-strict-henselization-localized-divisor-quotient)
+Let `C` be a strict henselization of `R_q` and `f ∈ q`. Then `C ⧸ (f)` is a strict
+henselization of `(R ⧸ (f))_p`, where `p` is the image of `q`.
+
+## Implementation details
+
+With `A = R_q` and `I = fA`, the localization of a quotient gives `A ⧸ I ≅ (R ⧸ (f))_p`, and
+the result follows from the compatibility of strict henselization with surjective local
+quotients. This works for `f = 0` as well; no regularity, Noetherianity or nonzerodivisor
+hypothesis is needed.
+
+## References
+
+* [Stacks, Tag 05WS]
 -/
 
 @[expose] public section
@@ -27,17 +37,7 @@ namespace Algebra
 Let `p` be the image of `q` in `R ⧸ (f)`, i.e. the prime with `p.comap (mk (f)) = q`
 (this forces `f ∈ q`). Then `C ⧸ (b f)`, with the `(R ⧸ (f))_p`-algebra structure
 induced by `b` (the hypothesis `hcomp`), is the strict henselization of `(R ⧸ (f))_p` with
-respect to any separable closure `L` of its residue field.
-Source: Stacks Project, Tag 05WS, with localization of quotients.
-(blueprint: lem-sbc-algebraic-strict-henselization-localized-divisor-quotient)
-
-Proof: Set A = R_q and I = f A. Since
-p.comap = q, the quotient localization theorem gives the canonical ring isomorphism
-A/I = (R/(f))_p, sending the class of r/s to the fraction of the classes of r and s.
-The composite π : A → (R/(f))_p is surjective with kernel I. The compatibility hbase
-identifies IC with (b(f)), and hcomp says the given action on C/(b f) is induced by π.
-Tag 05WS (`IsStrictHenselization.surjective_quotient`) concludes. This works for f = 0
-as well; no regularity, Noetherianity, or nonzerodivisor hypothesis enters. -/
+respect to any separable closure `L` of its residue field. -/
 theorem IsStrictHenselization.localized_divisor_quotient
     (R C : Type u) [CommRing R] [CommRing C]
     (q : Ideal R) [q.IsPrime]

@@ -19,8 +19,7 @@ Let `π : S' ⟶ S` be finite, surjective and radicial (universally injective), 
 its base changes are universal homeomorphisms. If, after base change along `π`, the derived
 direct image along `j : X ⟶ Y` is bounded constructible and commutes with every base change from
 a noetherian scheme, then the same holds over `S`
-(`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.of_isFinite_of_surjective`,
-blueprint `lemma-universal-homeomorphism-base--1`).
+(`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.of_isFinite_of_surjective`).
 
 For a noetherian `T` over `S`, the base change `T' = T ×_S S'` is noetherian and
 `a : Y_{T'} ⟶ Y_T` is a universal homeomorphism, along which pullback is an equivalence of the
@@ -129,8 +128,8 @@ lemma isIso_derivedBaseChangeMapPlus_app_paste_horiz_iff {X'' X' X Y'' Y' Y : Sc
     Functor.comp_obj] at e
   rw [e, isIso_comp_left_iff, isIso_comp_right_iff]
 
-/-- Blueprint `lemma-universal-homeomorphism-base--1`: Descending the exchange property through a
-universal homeomorphism, for a bounded below complex.
+/-- Descending the exchange property through a universal homeomorphism, for a bounded below
+complex.
 
 Let `π : S' ⟶ S` be finite, surjective and radicial (universally injective), let `j : X ⟶ Y` be a
 morphism of `S`-schemes and `K` a bounded below complex on `X`. Form the base changes
@@ -219,8 +218,7 @@ theorem HasDirectImageBaseChangeOnPlus.of_isFinite_of_surjective
       ((isIso_derivedBaseChangeMapPlus_app_paste_horiz_iff sqT.toCommSq ha'.toCommSq _ K
         inferInstance).1 hI)
 
-/-- Blueprint `lemma-universal-homeomorphism-base--1`: Descending the exchange property through a
-universal homeomorphism, for a sheaf: the case of
+/-- Descending the exchange property through a universal homeomorphism, for a sheaf: the case of
 `AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.of_isFinite_of_surjective` for a sheaf
 placed in degree `0`. -/
 theorem HasConstructibleDirectImageBaseChangeOn.of_isFinite_of_surjective'

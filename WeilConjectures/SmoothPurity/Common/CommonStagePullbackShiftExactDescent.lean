@@ -10,8 +10,8 @@ import all WeilConjectures.SmoothPurity.Sf.SfFrameworkCommonStageDescent
 
 /-! # Exact descent of normalized pullback shifts
 
-Source: the Weil-structures paragraph of the current blueprint.
-(blueprint: lem-sf-common-stage-pullback-shift-exact-descent).
+This file shows that exact, transition-compatible finite-stage pullbacks descend to an exact
+common-stage pullback with the same normalized shift components.
 -/
 
 @[expose] public noncomputable section
@@ -122,15 +122,7 @@ private theorem pair_pullback_exact
           GeneralAlgebraicallyClosedCoefficients.Stage l Ω X E ⥤ _) M.functor).symm.app V)
 
 /-- Exact, transition-compatible finite-stage pullbacks induce an exact common-stage
-pullback with the same normalized shift components.
-Source: current blueprint Weil-structures paragraph and normalized common-stage descent.
-(blueprint: lem-sf-common-stage-pullback-shift-exact-descent).
-Proof: the coherent transition comparisons define the stage-system morphism. Its pair
-shift is obtained by restricting to each stage and using transition compatibility.
-Every distinguished triangle is isomorphic to the inclusion of a distinguished triangle
-at one finite stage. The restriction isomorphism identifies its image with the exact
-finite-stage pullback, proving exactness. Transport along normalized descent identifies
-the resulting functor with the prescribed common-stage pullback. -/
+pullback with the same normalized shift components. -/
 theorem commonStagePullbackShiftExactDescent
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

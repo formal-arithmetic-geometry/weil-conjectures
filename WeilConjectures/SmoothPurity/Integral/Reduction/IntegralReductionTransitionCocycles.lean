@@ -11,8 +11,9 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Identity and composition for actual integral reduction transitions
 
-Source: blueprint coefficient datum, normalized quotient maps; Stacks 06YY.
-(blueprint: lem-pur-integral-reduction-transition-cocycles).
+## References
+
+* Stacks Project, Tag 06YY
 -/
 
 @[expose] public noncomputable section
@@ -78,23 +79,7 @@ private theorem transition_comp
       rw [ht]
       simpa only [Category.assoc] using congrArg (fun k ↦ aa.unit.app M ≫ k) h
 
-/-- The units of the normalized reduction adjunctions induce a coherent semilinear tower.
-Source: blueprint coefficient datum and source-object argument, Step 7; Stacks 06YY
-(blueprint: lem-pur-integral-reduction-transition-cocycles).
-
-Proof: apply the Hom bijection of the scalar-extension/restriction adjunction at the
-largest index. By definition the transpose of the transition to n is the reduction
-unit at n followed by the inverse restriction compositor. At equal indices the
-restriction unit identifies this with the unit at that same index, whose inverse
-transpose is the identity. For three indices, naturality of the intermediate unit
-and the adjunction triangle identities turn the transpose of the two transitions
-into the smallest-index unit followed by the two inverse compositors. The canonical
-restriction compositors satisfy their associativity equation: at the module level
-all are the identity on sections, with the scalar action identified by composition
-of the actual quotient maps; exact derived localization preserves the equation.
-Thus this is the transpose of the direct transition. Injectivity of the Hom bijection
-gives the composition equation. The argument uses no boundedness, constructibility,
-completeness or normalization assumption on the object. -/
+/-- The units of the normalized reduction adjunctions induce a coherent semilinear tower. -/
 theorem integralReductionTransition_cocycles
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

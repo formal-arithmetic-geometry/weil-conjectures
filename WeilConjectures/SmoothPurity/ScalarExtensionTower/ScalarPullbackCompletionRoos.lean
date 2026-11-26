@@ -19,8 +19,12 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Fixed cochain coordinates for the scalar/pullback calculation
 
-Source: Stacks 06YY, 07A4 and 0941. The coordinates are constructed from the
-ordinary scalar/pullback chain map and a coherent quotient presentation.
+The coordinates are constructed from the ordinary scalar/pullback chain map and a coherent
+quotient presentation.
+
+## References
+
+* Stacks Project, Tags 06YY, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -127,32 +131,7 @@ private theorem completion_roos_composite
   simp only [← Q.map_comp, hk]
 
 -- Keep the nested derived comparison functors folded during the calculation.
-/-- The scalar completion augmentation respects the pulled coherent quotient tower.
-Source: Stacks 06YY, 07A4 and 0941; the quotient calculation in step 1 of
-stage3-pur-scalar-pullback-right-roos-normalized.
-(blueprint: lem-pur-scalar-pullback-completion-roos).
-
-Proof: transpose the reduction of eR followed by pullbackReduction through the
-reduction/limit adjunction. Its counit cancels the reduction of the E-pullback
-realization. Pullback normalization identifies the remaining transpose with the
-strict pullback tensor-unit tower map attached to (C,eC,kappa). Coherence of
-(D,eD,kappaD) identifies its source with the strict quotient tower of R.
-At each level, associate the scalar tensors and apply the inverse-image unit.
-The scalar/pullback association sends 1 tensor gamma(x) to gamma(1 tensor x).
-The formulas hqD and hq identify the two resulting strict tower maps: balancing
-and the inverse-image adjunction reduce equality to these nested unit sections.
-Every map used is a map of quotient systems, so these equalities preserve all
-horizontal transitions before localization. Apply the Roos construction to this
-strict equality. The unshifted coordinates are the finite quotient projections
-of the scalar completion augmentation; both shifted coordinates are zero.
-The scalar/Roos product map followed by scalarPullbackTower is scalarPullbackChain.
-Naturality of the K-injective-normalized Roos bridges transports this calculation
-to derived limits. The comparison eR and then eP give the ordinary derived maps
-on the right. The scalar cochain counit is inverted only through the supplied
-isomorphism epsilonD. No scalar realization model, scalar completion inverse,
-derived completeness, constructibility of the pulled object, or faithfulness of
-finite derived evaluations is used. Zero complexes, identity maps, exponent one,
-empty sites and ramified coefficient embeddings use the same balanced tensors. -/
+/-- The scalar completion augmentation respects the pulled coherent quotient tower. -/
 theorem scalarPullbackCompletionRoos (W : Bool → Scheme.{u})
     (ME : CompletedOperations.Models.{u, u} l E W)
     (ρ : IntegralComparisonRoosModel.{u, u} l L (W true))

@@ -21,8 +21,19 @@ import WeilConjectures.RingTheory.ConormalModulePrincipalLocalization
 /-!
 # Local comparison of conormals of two polynomial presentations
 
-Source: Stacks Project, Algebra, Tag 00S6 (lemma-conormal-module-localize),
-base changed to the local ring as in the last paragraph of Tag 00SC (lemma-lci).
+The stable comparison of the conormal modules of two polynomial presentations, of `S` and of a
+principal localization `S_g`, base changed to the local ring at a prime of `S` not containing
+`g`.
+
+## Implementation details
+
+The statement has no complete intersection or dimension hypothesis, and no freeness or
+cancellation of a free summand is used.
+
+## References
+
+* [Stacks, Tag 00S6]
+* [Stacks, Tag 00SC] (last paragraph of the proof)
 -/
 
 @[expose] public section
@@ -36,38 +47,7 @@ namespace Ideal
 attribute [local instance] LocalizedModule.moduleOfIsLocalization
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The stable presentation comparison base changed to a prime of the original quotient.
-This statement has no complete intersection or dimension hypothesis.
-
-Source: Stacks Project, Algebra, Tag 00S6 (lemma-conormal-module-localize), and
-Tag 00SC (lemma-lci), last paragraph, the localization of its displayed isomorphism.
-(blueprint: lem-weil-pbc-principal-localization-conormal-at-prime-base-change)
-
-Proof:
-1. Apply `Algebra.Extension.conormalModule_principalLocalization` to the quotient
-map k[x] → S = k[x]/I and the composite k[y] → T = k[y]/J → S_g.
-Both maps are surjective. Their extension kernels are I and J: use the quotient
-kernel identity for the first and injectivity of e for the second.
-2. `cotangentEquivCotangentKer` and `Ideal.Cotangent.equivOfEq` identify the first
-extension conormal with I.Cotangent over k[x]. Surjectivity of k[x] → S extends
-this equivalence to an S-linear one. The module-localization universal property
-identifies its localization away from g with S_g tensor_S I.Cotangent.
-3. The image of g in R = S_q is a unit because g is outside q. Extend S → R
-uniquely to S_g → R. Tensor the comparison of step 1 with R over S_g.
-For the left conormal term, use the equivalence of step 2, tensor cancellation
-R tensor_Sg (S_g tensor_S I.Cotangent) = R tensor_S I.Cotangent,
-and the module-localization universal property at q.
-4. For the right conormal term use Extension.cotangentEquiv, which identifies
-D.Cotangent with S_g tensor_Q D.ker. Tensor cancellation and the kernel equality
-identify its base change with R tensor_Q J. The quotient tensor equivalence
-T tensor_Q J = J/J², extended from Q to T using quotient surjectivity, and tensor
-cancellation identify this with R tensor_T J.Cotangent. All the algebra towers
-are the composites of the quotient map, e, and the localization lift; their
-commutativity is the lift identity and definitional equality.
-5. Tensor distributes over products and finite powers of S_g. Compose these
-maps with the left and right conormal identifications to obtain the claimed
-R-linear equivalence. The empty-variable case uses the same finite-product maps.
-No freeness or cancellation of a free summand is used. -/
+/-- The stable presentation comparison base changed to a prime of the original quotient. -/
 theorem principalLocalization_conormal_atPrime_baseChange
     {k : Type u} [Field k] (n : ℕ) (I : Ideal (MvPolynomial (Fin n) k))
     (q : PrimeSpectrum (MvPolynomial (Fin n) k ⧸ I))

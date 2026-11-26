@@ -18,7 +18,21 @@ public import WeilConjectures.CategoryTheory.CanonicalFiltration
 import WeilConjectures.CategoryTheory.SpectralObjectBottomFiltration
 import WeilConjectures.Topology.TopologicalLeraySpectralObjectAugmentation
 
-/-! # Cartan--Eilenberg Leray construction on cocycles -/
+/-! # Cartan--Eilenberg Leray construction on cocycles
+
+The Leray pages and finite filtration for a continuous map, with their bottom composite computed
+on injective-resolution cocycles.
+
+## Implementation details
+
+This is the Cartan--Eilenberg Grothendieck construction for direct image followed by terminal
+sections, using the second filtration on the total complex. The bottom composite is computed on
+a cocycle by the total augmentation in resolution degree zero.
+
+## References
+
+* [Stacks Project, Tags 015N, 015J and 01F2](https://stacks.math.columbia.edu/tag/015N)
+-/
 
 @[expose] public section
 
@@ -89,34 +103,7 @@ private theorem spectral_object_page_stabilizes
   exact ⟨i ≪≫ j ≪≫ k ≪≫ l.symm⟩
 
 /-- Construct the Leray pages and finite filtration, computing their bottom composite
-on injective-resolution cocycles, without any prescribed cohomology map.
-
-Source: Stacks Project, Tags 015N, 015J and 01F2, the second Cartan--Eilenberg
-spectral sequence and its resolution-degree-zero augmentation.
-(blueprint: lem-sc-topological-leray-cartan-eilenberg-cocycle)
-
-Proof: Use direct image followed by terminal sections. Both functors are additive and
-left exact; direct image preserves injectives, which are sections-acyclic. Apply the
-Cartan--Eilenberg Grothendieck construction. Its E2 comparison identifies the terms
-with R^b f_* followed by HX a. The equality of terminal sections of f_*F and F,
-and the canonical injective-resolution cohomology computation, identify its abutment
-with HZ. Transport these comparisons along hX and hZ. Resolution comparisons induce
-page maps independent of the lifts from page two onward and preserve the total
-comparison and image filtration, so pages, comparisons and filtration assemble in
-the functor category. Use the second filtration on the total complex for T and g.
-The first-quadrant bounds give top in step zero and bottom in step n+1. Differentials
-vanish once r > max(p,q+1), so the stated pageInfinity convention stabilizes.
-The bottom outgoing differential is zero; invert iCycles and compose with homology
-projection and the next-page comparison to form t. Iterate from the identity for b.
-The bottom filtration quotient has zero denominator, yielding k and its quotient
-identity. The canonical derived-zero comparison gives e0. The total augmentation
-in resolution degree zero computes this bottom composite on a cocycle s by the
-comparison phi into f_*I. Terminal-section representation, with its generator map
-specified by ha, identifies its image with z when a composed with f_*z equals
-s composed with phi. The canonical abutment comparison identifies this class with
-I.extMk z; this proves the displayed equation for every comparison and every cocycle.
-No conclusion equating a prescribed edge with this composite is asserted here.
--/
+on injective-resolution cocycles, without any prescribed cohomology map. -/
 theorem exists_topological_leray_cartan_eilenberg_cocycle
     {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]
     (HX : ℕ → (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))

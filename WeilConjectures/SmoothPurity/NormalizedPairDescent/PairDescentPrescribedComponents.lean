@@ -9,8 +9,10 @@ public import WeilConjectures.CategoryTheory.StageSystem.StageSystemFunctorDesce
 
 /-! # Specified components of the normalized coefficient-pair functor
 
-Source: the existing pairDescent_with_components proof in DerivedPullbackTensorHom.
-(blueprint: lem-weil-pair-descent-prescribed-components).
+## Implementation details
+
+The argument follows the existing `pairDescent_with_components` proof in
+DerivedPullbackTensorHom.
 -/
 
 @[expose] public noncomputable section
@@ -29,19 +31,11 @@ variable {I : Type*} [Preorder I] [IsDirectedOrder I]
   {D : I → Type*} [∀ i, Category* (D i)]
   (S : StageSystem C) (T : StageSystem D) (φ : ∀ i, C i ⥤ D i)
 
-/-- The literal output pair of the stagewise functors.
-Source: coefficient-pair descent.
-(blueprint: lem-weil-pair-descent-prescribed-components). -/
+/-- The literal output pair of the stagewise functors. -/
 abbrev object (P : S.PairCategory) : T.PairCategory :=
   ⟨P.stage, (φ P.stage).obj P.obj⟩
 
-/-- Coherent coefficient-pair descent with the prescribed comparison components.
-Source: the existing pairDescent_with_components proof in DerivedPullbackTensorHom.
-(blueprint: lem-weil-pair-descent-prescribed-components).
-Proof: apply coefficient-pair descent. The output pair is definitionally the stagewise
-output. For each pair of represented objects, substitute the given hom and inverse
-component equalities into the generic representative formula. Conversely, substitute
-these equalities backwards to recover the generic prescription and its uniqueness. -/
+/-- Coherent coefficient-pair descent with the prescribed comparison components. -/
 theorem existsUnique
     (b : ∀ {i j} (h : i ≤ j), φ i ⋙ T.T h ≅ S.T h ⋙ φ j)
     (hcoh : StageSystem.pairFunctorCoherent S T φ b)

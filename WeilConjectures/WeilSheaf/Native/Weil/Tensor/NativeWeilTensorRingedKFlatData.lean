@@ -14,6 +14,17 @@ import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedKFlatL
 The two homological clauses are independent of the construction of the
 underived and total comparison maps, so they are recorded as a separate
 intermediate interface.
+
+## Implementation details
+
+Acyclic tests are transported through the additive equivalence `b.native` using the ringed
+tensor total. The resolution theorem for sheaves of modules gives flat-term K-flat
+replacements; restriction to the native image and the homotopy localization criterion then give
+the localization.
+
+## References
+
+* Stacks Project, Tags 06YS, 06YU and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -42,16 +53,7 @@ structure NativeWeilRingedTensorKFlatData
       ((HomologicalComplex.quasiIso (ProEtaleWeilSheaf k₀ l X) (.up ℤ)).inverseImage
         (ObjectProperty.ι (NativeTensorKFlat k₀ l X T)))
 
-/-- The transport of K-flatness and the resolving localization.
-Source: Stacks 06YS, 06YU and 0FPT
-(blueprint: lem-sf-native-weil-tensor-ringed-kflat-data).
-
-Proof: transport acyclic tests through the additive equivalence `b.native`,
-using the ringed tensor total.  The resolution theorem for sheaves of modules
-gives flat-term K-flat replacements; restriction to the native image and the
-homotopy localization criterion then give the displayed localization.  The
-argument applies to unbounded complexes and does not use the chosen chain map.
--/
+/-- The transport of K-flatness and the resolving localization. -/
 theorem native_weil_tensor_ringed_kflat_data :
     Nonempty (NativeWeilRingedTensorKFlatData b T adj) := by
   refine ⟨{ flat := native_weil_tensor_ringed_kflat_flat b T adj

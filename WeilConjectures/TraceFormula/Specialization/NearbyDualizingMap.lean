@@ -22,15 +22,14 @@ is the base change `X ×_k Spec Ω`. Such a model maps to the trait model of the
 (`NearbyCyclesModel.IsTraitModelOfBase.toTrait`), with proper exchange
 `χ_a : Ψ_S Ra_* ⟶ Ra'_* Ψ_X` (`NearbyCyclesModel.IsTraitModelOfBase.pushforwardExchange`).
 
-The *dualizing map* `θ_X : Ψ_X ω_X ⟶ ω_{X'}` (blueprint `prose-E-15` (5),
-`θ_X = β_{a_X}(A)`) is the exceptional adjoint of the compact-support exchange `ν_{a_X}`, read
+The *dualizing map* `θ_X = β_{a_X}(ℚ̄_ℓ) : Ψ_X ω_X ⟶ ω_{X'}` is the
+exceptional adjoint of the compact-support exchange `ν_{a_X}`, read
 through the specialization unit of the trait and the base change `Lε^* ω_{X/k} ≅ ω_{𝒳_Ω/Ω}`.
 The compact-support exchange is built from a relative compactification of `𝒳` over `S`, and is
 independent of the choice (`NearbyCyclesModel.IsTraitModelOfBase.dualizingMap`, downstream).
 A family of maps `θ` with the two properties
 that characterize the dualizing maps is a `NearbyCyclesModel.NearbyDualizingData`, and its
-existence is the node lemma `NearbyCyclesModel.nonempty_nearbyDualizingData` (blueprint
-`prose-E-15` and the composition law `sec-Base-change-for-nearby-cycles` (4)):
+existence is `NearbyCyclesModel.nonempty_nearbyDualizingData`:
 
 * **proper models**: for `q` proper and geometric generic fibre all of `X ×_k Spec Ω`,
   `ν_{a} = χ_a⁻¹` under `Ra_! ≅ Ra_*`, so `θ_X` is the unique
@@ -46,6 +45,12 @@ one whose geometric generic fibre is all of `X̄ ×_k Spec Ω`
 (`NearbyCyclesModel.IsTraitModelOfBase.exists_isProper_openSubmodel`), the proper exchange `χ_a`
 is then invertible, and maps
 `A ⟶ ω_{X'}` are determined by their traces.
+
+## Implementation details
+
+The structure `NearbyCyclesModel.IsTraitModelOfBase` only asks the geometric generic fibre to be
+an open of `X_Ω`: it is all of `X_Ω` for the deformation to the normal cone, and an open of it for
+restrictions of models to opens of the total space.
 
 -/
 
@@ -70,9 +75,7 @@ over the base* along `q : 𝒳 ⟶ S` and `g : 𝒳_Ω ⟶ Spec Ω` if it is of 
 `S = Spec k'⟦t⟧` along `q` and `g`, its identification `ε` factors through a morphism `e : 𝒳 ⟶ X`
 of `k`-schemes (`e ≫ (X ⟶ Spec k) = q ≫ (S ⟶ Spec k)`), and
 `(ε, g) : 𝒳_Ω ⟶ X ×_k Spec Ω` is an open immersion into the base change of `X` along
-`Spec Ω ⟶ S ⟶ Spec k`, so that the geometric generic fibre is an open of `X_Ω` (it is all of `X_Ω`
-for the deformation to the normal cone, and an open of it for restrictions of models to opens of
-the total space). -/
+`Spec Ω ⟶ S ⟶ Spec k`. -/
 structure IsTraitModelOfBase {X : Over (Spec (.of k))} {X' : Over (Spec (.of k'))}
     (M : NearbyCyclesModel X.left X'.left) (q : M.total ⟶ trait k')
     (g : M.generic ⟶ Spec (.of (traitGenericField k'))) : Prop where
@@ -171,8 +174,8 @@ variable (k k')
 
 /-- A *family of dualizing maps* of nearby cycles over the trait `S = Spec k'⟦t⟧`: a map
 `θ_M : Ψ_M ω_X ⟶ ω_{X'}` for every trait model `M` of a `k`-scheme `X` over the base, with the
-two characteristic properties of the dualizing maps `θ_M = β_a(ℚ̄_ℓ)` of blueprint
-`prose-E-15` (see `NearbyCyclesModel.nonempty_nearbyDualizingData`). -/
+trace property for proper models and the open restriction property, the two characteristic
+properties of the dualizing maps `θ_M = β_a(ℚ̄_ℓ)`. -/
 structure NearbyDualizingData where
   /-- the dualizing map `θ_M : Ψ_M ω_X ⟶ ω_{X'}`. -/
   θ {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]

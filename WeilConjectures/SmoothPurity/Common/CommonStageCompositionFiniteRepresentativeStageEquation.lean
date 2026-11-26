@@ -10,14 +10,16 @@ import WeilConjectures.SmoothPurity.Pullback.PullbackTensorRationalCompositionCo
 import WeilConjectures.SmoothPurity.Common.CommonStageRationalCompositionNaturality
 import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorNaturality
 
-/-! Fixed-stage square for the common-stage pullback/tensor composition representative.
+/-! # Fixed-stage square for the common-stage pullback/tensor composition representative
 
-Source: Stacks 07A4 and 0941, and the finite coefficient-field paragraph of the
-common-stage composition proof.  At one coefficient field containing all stages,
-the prescribed representative formulas reduce the two composites to the rational
-pullback/tensor composition equation.  This theorem records that fixed-stage
-calculation separately from the choice of a representative for the first route.
-(blueprint: lem-pur-pullback-tensor-common-stage-composition-finite-representative-stage-equation).
+At one coefficient field containing all stages, the prescribed representative formulas reduce
+the two composites to the rational pullback/tensor composition equation. This file records
+that fixed-stage calculation separately from the choice of a representative for the first
+route.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -123,16 +125,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /--
 At a fixed common coefficient stage, the rational composition square identifies
 the representative of the right route with any representative of the left route.
-
-Source: Stacks 07A4 and 0941, finite coefficient representative calculation.
-Proof: enlarge the coefficient field until it contains every object stage and the
-chosen representative.  Expand common-stage pullback, tensor, comparison, and
-composition maps using their prescribed formulas.  Adjacent comparison
-isomorphisms cancel, leaving exactly
-`canonicalRationalPullbackTensor_composition` at that finite coefficient.  The
-rational composition theorem proves the resulting stage equality, and the
-common-stage quotient constructor transports it to the displayed `HEq`.
-(blueprint: lem-pur-pullback-tensor-common-stage-composition-finite-representative-stage-equation).
 -/
 theorem commonStageCompositionFiniteRepresentative_stageEquation {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)

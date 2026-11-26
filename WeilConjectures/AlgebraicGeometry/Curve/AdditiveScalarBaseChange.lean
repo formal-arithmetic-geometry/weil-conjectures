@@ -16,7 +16,27 @@ import WeilConjectures.AlgebraicGeometry.Curve.AdditiveCohomologyLinearBaseChang
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
-/-! # Scalar-compatible flat base change for additive first cohomology -/
+/-! # Scalar-compatible flat base change for additive first cohomology
+
+For a smooth proper connected curve `C` over an algebraically closed field `k` and an
+algebraically closed extension `k'`, the first étale cohomology of the additive sheaf is a
+finite-dimensional `k`-vector space whose base change to `k'` is the first cohomology of the
+additive sheaf on `C_{k'}`, compatibly with scalars and the canonical base-change map.
+
+## Implementation details
+
+The scalar action on `H¹` comes from multiplying sections by images of scalars. Finiteness
+follows from the comparison with coherent `H¹(C, 𝒪_C)` and proper coherent finiteness; the base
+change statement uses flat base change for coherent cohomology. No Artin–Schreier exactness or
+Frobenius invariance is used.
+
+## References
+
+* [Stacks, Tag 0A3P]
+* [Stacks, Tag 02KH] (flat base change)
+* [Stacks, Tag 03P2] (quasi-coherent comparison)
+* [Stacks, Tag 02O6] (proper coherent finiteness)
+-/
 
 @[expose] public section
 
@@ -129,29 +149,10 @@ theorem exists_additive_cohomology_scalar_action
 
 
 
-/-- The first cohomology comparison for additive structure sheaves preserves scalars
-and the canonical base-change map. No Frobenius or constant-sheaf assertion is made.
-Source: Stacks Project, Tags 0A3P (first sentence of proof), 02KH (flat base change),
-03P2 (quasi-coherent comparison), and 02O6 (proper coherent finiteness).
-(blueprint: lem-pbc-additive-scalar-base-change)
-
-Proof: The natural section equivalences identify G and G' with the lifted additive
-structure sheaves. Multiplication by the structural image of c is additive and
-commutes with restriction, so defines μ on each sheaf. Applying additive cohomology
-to the zero, identity, sum and product relations supplies the actual scalar action
-on H¹. Compare it with coherent H¹(C,O_C) using the etale/Zariski comparison;
-proper coherent finiteness makes the resulting k-module V finite-dimensional.
-On the base change, use the same comparison and the canonical flat base-change
-isomorphism, with tensor factors interchanged, to obtain b'. The two scalar actions
-agree with multiplication on coherent cohomology by naturality in module maps.
-For the last formula, compute on a finite affine cover of C and its pulled-back
-cover. The adjoint section formula for q says precisely that its cochain map is
-structural pullback, hence is s ↦ 1 tensor s under the affine-section tensor
-identifications. Flat tensor product preserves kernels and images. The Cech
-comparison therefore induces the displayed equality on H¹, in the specified Ext
-model, using the natural Ext/derived comparison. If C has dimension zero,
-coherent H¹ is zero and all these formulas still hold. This argument uses neither
-Artin--Schreier exactness nor semilinear Frobenius invariance. -/
+/-- The first cohomology of the additive sheaf of a smooth proper connected curve is a
+finite-dimensional `k`-vector space `V`, the first cohomology of the additive sheaf of the base
+change to `k'` is identified with `k' ⊗[k] V`, these identifications are compatible with the scalar
+actions, and the canonical base-change map becomes `x ↦ 1 ⊗ x`. -/
 theorem exists_additive_scalar_base_change
     {k k' : Type u}
     [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k']

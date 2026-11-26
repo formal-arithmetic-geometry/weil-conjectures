@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 If `P` is a bounded flat model in degrees `[a, b]` of `K ∈ D(X_ét, Λ)`, its termwise reduction
 `P / I P` is a bounded flat model in degrees `[a, b]` of the reduction `K_m = K ⊗ᴸ (Λ ⧸ I)`,
-over `Λ ⧸ I` (`lem-sf-reduction-flat-model`).
+over `Λ ⧸ I`.
 
 ## Main statements
 
@@ -39,10 +39,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [Abelian.HasFunctorialFlatResolution A] {X : Scheme.{u}}
 
 /-- For a bounded complex `P` of flat étale sheaves, the derived tensor product `P ⊗ᴸ F[0]` is
-computed by the tensor product of complexes `P ⊗ F`. This is
-`DerivedCategory.QObjTensorSingleFunctorObjIso`, stated with
-`AlgebraicGeometry.Etale.derivedTensor` so that it specialises to `A = ModuleCat Λ` without
-comparing monoidal instances. -/
+computed by the tensor product of complexes `P ⊗ F`. -/
 noncomputable def derivedTensorQObjSingleFunctorObjIso {a b : ℤ}
     (P : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [P.IsStrictlyGE a] [P.IsStrictlyLE b]
     (hP : ∀ n, ObjectProperty.flat (P.X n)) (F : Sheaf X.smallEtaleTopology A) :
@@ -58,7 +55,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ] {X : Scheme.{u}
 
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small étale site take
 -- long to synthesize
-/-- Blueprint `lem-sf-reduction-flat-model`: Reduction of the flat model.
+/-- Reduction of the flat model.
 
 Let `Λ` be Noetherian (for instance `Λ = A_{E,n}`), `I` an ideal (for instance `ϖ^m`, so that
 `Λ ⧸ I = A_{E,m}`), `K ∈ D^b_c(X_ét, Λ)` and `P ≅ K` a bounded flat model of `K` in degrees
@@ -70,12 +67,7 @@ Let `Λ` be Noetherian (for instance `Λ = A_{E,n}`), `I` an ideal (for instance
 * the reduction `K_m = K ⊗ᴸ (Λ ⧸ I)` (`AlgebraicGeometry.Etale.reductionModIdeal`) is computed
   by the tensor product of complexes `P ⊗ (Λ ⧸ I)`;
 * `K_m` is the restriction of scalars of `Q(P') ∈ D(X_ét, Λ ⧸ I)`;
-* consequently `Q(P')`, the reduction `K_m` read over `Λ ⧸ I`, has Tor amplitude in `[a, b]`.
-
-`P` is K-flat, so `K ⊗ᴸ (Λ ⧸ I)` is `P ⊗ (Λ ⧸ I)`, which is `P'` with scalars restricted; the
-terms of `P'` are flat by the relation criterion for flatness
-(`CategoryTheory.Sheaf.flat_quotSMulTop_obj`), and a bounded complex of flat sheaves in degrees
-`[a, b]` has Tor amplitude in `[a, b]`. -/
+* consequently `Q(P')`, the reduction `K_m` read over `Λ ⧸ I`, has Tor amplitude in `[a, b]`. -/
 theorem reductionModIdeal_flatModel (I : Ideal Λ) {a b : ℤ}
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (_hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)

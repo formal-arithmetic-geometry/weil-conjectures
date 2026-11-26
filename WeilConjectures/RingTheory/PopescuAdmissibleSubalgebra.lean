@@ -14,8 +14,13 @@ public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 /-!
 # Admissible subalgebras in the Popescu construction
 
-Source: Stacks Project, proof of Tag 07FH
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
+The admissible subalgebras used in the proof of Popescu's theorem: Artinian local subalgebras,
+essentially of finite type over the base field, flat in the ambient ring, whose maximal ideal
+generates a specified ideal.
+
+## References
+
+* [Stacks, Tag 07FH]
 -/
 
 @[expose] public section
@@ -26,8 +31,7 @@ namespace Subalgebra
 
 /-- An admissible subalgebra is Artinian local, essentially of finite type over the base,
 flatly included in the ambient ring, with its maximal ideal generating the specified ambient
-ideal. Source: Stacks Project, proof of Tag 07FH
-(blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
+ideal. -/
 def IsPopescuAdmissible {k : Type uA} {B : Type vA} [Field k] [CommRing B] [Algebra k B]
     (A : Subalgebra k B) (m : Ideal B) : Prop :=
   IsArtinianRing A ∧ Algebra.EssFiniteType k A ∧

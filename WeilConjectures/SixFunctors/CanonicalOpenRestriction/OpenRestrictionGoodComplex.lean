@@ -77,7 +77,21 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Good complexes under open restriction
 
-Source: Stacks Project, Cohomology on Sites, Tag 0E8K; Modules on Sites, Tag 03DJ.
+Open restriction preserves flat-term K-flat complexes.
+
+## Implementation details
+
+One first restricts to the ringed slice, where restriction is exact and commutes with tensor
+products and direct sums. For an acyclic test complex on the slice, its extension by zero is
+acyclic; the projection formula and K-flatness of the original complex show that its tensor with
+the restricted complex is acyclic, and extension by zero reflects acyclicity. The result is then
+transported along the monoidal slice/open equivalence. No completeness, boundedness or
+nonemptiness assumption is needed.
+
+## References
+
+* [Stacks, Tag 0E8K]
+* [Stacks, Tag 03DJ]
 -/
 
 @[expose] public noncomputable section
@@ -170,21 +184,7 @@ private theorem completedMap_eq :
   exact congrArg (fun f ↦ (((sheafCompose _ (forget₂ CommRingCat.{max u (t+1)}
     RingCat.{max u (t+1)})).map f).hom.app V).hom x) h
 
-/-- Open restriction preserves flat-term K-flat complexes in the prescribed transports.
-Source: Stacks, Cohomology on Sites, Tag 0E8K, and Modules on Sites, Tag 03DJ.
-(blueprint: lem-sf-open-restriction-good-complex).
-
-Proof: first restrict to the ringed slice. Restriction is exact and commutes with
-tensor and direct sums. For an acyclic test complex on the slice, its exact extension
-by zero is acyclic; the projection tensor isomorphism and K-flatness of the original
-complex show that its tensor with the restricted complex is acyclic. Extension by
-zero reflects acyclicity, proving K-flatness. The same argument for a single flat
-module proves preservation of flat terms. The forward equivalence o.integral is
-the continuous pushforward along the slice/open equivalence and the normalized
-completed coefficient isomorphism. Its inverse therefore preserves tensor, direct
-sums, and exact sequences. Transporting the previous acyclicity tests along this
-monoidal equivalence proves the asserted good-complex predicate. This does not
-require completeness, bounds or a nonempty open. -/
+/-- Open restriction preserves flat-term K-flat complexes in the prescribed transports. -/
 theorem restriction_preservesGood
     (Q : CochainComplex (scalarReductionSource l E X) ℤ)
     (hQ : integralOperationsGoodComplex l E X Q) :

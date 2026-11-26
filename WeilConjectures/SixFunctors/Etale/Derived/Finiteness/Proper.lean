@@ -16,23 +16,22 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
 Let `k` be a field and `Λ` a finite ring killed by an integer invertible in `k`. For a proper
 morphism `f : X ⟶ S` with `S` of finite type over `k`:
 
-- `AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_isProper`
-  (`proposition-proper-direct-image-finite-coefficients`): `𝒞(f)` holds. The proof is Noetherian
-  induction on closed subsets of `X`, using a projective modification given by Chow's lemma
-  (`AlgebraicGeometry.exists_projective_modification`), the projective case and the transfer
+- `AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_isProper`: `𝒞(f)` holds. The proof is
+  Noetherian induction on closed subsets of `X`, using a projective modification given by Chow's
+  lemma (`AlgebraicGeometry.exists_projective_modification`), the projective case and the transfer
   along modifications `AlgebraicGeometry.Etale.HasConstructibleDirectImages.of_modification`.
-- `AlgebraicGeometry.Etale.isConstructibleSheaf_homology_rightDerivedLowerStar_of_isProper`
-  (`proposition-proper-direct-image-finite-coefficients`): moreover `Rᵠf_* F = 0` for `q > 2d` if
-  the geometric fibres have dimension at most `d`. The vanishing is checked at geometric points, by
-  proper base change (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`) and
-  the cohomological dimension of the geometric fibres.
-- `AlgebraicGeometry.Etale.isIso_homology_derivedBaseChangeMapPlus_of_isProper`
-  (`obl-fin-comparison`): the comparison with the cohomology of geometric fibres.
-- `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper`
-  (`theorem-results-from-etale-theory--3`): `Rf_*` preserves `D^b_c`. The blueprint uses the
-  hypercohomology spectral sequence; we use the dévissage along truncation triangles
-  `AlgebraicGeometry.Etale.boundedConstructible_obj_of_forall_singleFunctor`, the fibre
-  dimensions being uniformly bounded by `AlgebraicGeometry.exists_topologicalKrullDim_pullback_le`.
+- `AlgebraicGeometry.Etale.isConstructibleSheaf_homology_rightDerivedLowerStar_of_isProper`:
+  moreover `Rᵠf_* F = 0` for `q > 2d` if the geometric fibres have dimension at most `d`. The
+  vanishing is checked at geometric points, by proper base change
+  (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`) and the cohomological
+  dimension of the geometric fibres.
+- `AlgebraicGeometry.Etale.isIso_homology_derivedBaseChangeMapPlus_of_isProper`: the comparison
+  with the cohomology of geometric fibres.
+- `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper`: `Rf_*`
+  preserves `D^b_c`. Instead of the hypercohomology spectral sequence, we use the dévissage along
+  truncation triangles `AlgebraicGeometry.Etale.boundedConstructible_obj_of_forall_singleFunctor`,
+  the fibre dimensions being uniformly bounded by
+  `AlgebraicGeometry.exists_topologicalKrullDim_pullback_le`.
 -/
 
 @[expose] public section
@@ -54,8 +53,7 @@ open _root_.DerivedCategory
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   [HasInvertibleExponent Λ (Spec (.of k))]
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Proper direct-image
-constructibility.
+/-- Proper direct-image constructibility.
 
 Let `Λ` be a finite ring killed by an integer invertible in the field `k`. Every proper morphism
 `f : X ⟶ S` with `S` of finite type over `k` satisfies `𝒞(f)`: the higher direct images
@@ -112,9 +110,7 @@ theorem hasConstructibleDirectImages_of_isProper {X S : Scheme.{u}} (aS : S ⟶ 
 /-- The cohomology of the geometric fibre of a proper morphism vanishes above twice the
 dimension of the fibre: for `f : X ⟶ S` proper, a point `s : Spec Ω ⟶ S` with `Ω` separably
 closed whose fibre `X_s` has dimension at most `d`, and a sheaf `F` of `Λ`-modules on `X`,
-`Hᵠ(X_s, F|_{X_s}) = 0` for `q > 2d`
-(`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt`, blueprint
-`proposition-proper-direct-image-finite-coefficients`). -/
+`Hᵠ(X_s, F|_{X_s}) = 0` for `q > 2d`. -/
 lemma isZero_homology_fibre_of_isProper {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f]
     {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S) (d : ℕ)
     (hd : topologicalKrullDim (pullback f s : Scheme.{u}) ≤ (d : WithBot ℕ∞))
@@ -145,11 +141,7 @@ noncomputable def homologyRightDerivedLowerStarSingleIsoPlus {X S : Scheme.{u}} 
 
 /-- **Vanishing of proper direct images above twice the fibre dimension.** For `f : X ⟶ S`
 proper all of whose geometric fibres have dimension at most `d`, `Rᵠf_* F = 0` for `q > 2d` and
-every sheaf `F` of `Λ`-modules: at a geometric point `s`, proper base change identifies
-`s^* Rᵠf_* F` with `Hᵠ(X_s, F|_{X_s})`
-(`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`), which vanishes by
-`AlgebraicGeometry.Etale.isZero_homology_fibre_of_isProper`, and geometric points detect zero
-sheaves. -/
+every sheaf `F` of `Λ`-modules. -/
 lemma isZero_homology_rightDerivedLowerStar_of_isProper {X S : Scheme.{u}} (f : X ⟶ S)
     [IsProper f] (d : ℕ) (hd : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S),
       topologicalKrullDim (pullback f s : Scheme.{u}) ≤ (d : WithBot ℕ∞))
@@ -169,8 +161,7 @@ lemma isZero_homology_rightDerivedLowerStar_of_isProper {X S : Scheme.{u}} (f : 
       (Plus.homologyFunctor _ q).mapIso
         (asIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)))
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: The proper case: direct images
-of proper morphisms.
+/-- The proper case: direct images of proper morphisms.
 
 Let `f : X ⟶ S` be a proper morphism with `S` of finite type over `k`, all of whose geometric
 fibres have dimension at most `d`, and let `F` be a constructible sheaf of `Λ`-modules on `X_ét`,
@@ -189,7 +180,7 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_of_isProper {X S : S
     isZero_homology_rightDerivedLowerStar_of_isProper f d hd F⟩
 
 
-/-- Blueprint `obl-fin-comparison`: The comparison and finitude of proper direct images.
+/-- The comparison and finitude of proper direct images.
 
 Let `f : X ⟶ S` be a proper morphism with `S` of finite type over `k`, whose geometric fibres
 have dimension at most `d`, and let `F` be a constructible sheaf of `Λ`-modules on `X_ét`, for a
@@ -242,8 +233,7 @@ theorem isIso_homology_derivedBaseChangeMapPlus_of_isProper {X S : Scheme.{u}}
       (asIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)))
 
 
-/-- Blueprint `theorem-results-from-etale-theory--3`: Bounded constructible complexes under a
-proper direct image.
+/-- Bounded constructible complexes under a proper direct image.
 
 Let `b : Y ⟶ S` be proper with `S` of finite type over `k`, and let `Λ` be a finite ring killed
 by an integer invertible in `k`. For `K ∈ D^b_c(Y, Λ)`, the derived direct image `Rb_* K` lies in

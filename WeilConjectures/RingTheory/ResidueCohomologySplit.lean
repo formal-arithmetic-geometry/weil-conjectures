@@ -17,7 +17,12 @@ import Mathlib.Algebra.Category.ModuleCat.Projective
 /-!
 # Splitting a complex over a field into its cohomology
 
-Source: Stacks Project, More on Algebra, Tag 0BCC, first paragraph of the proof.
+A complex with zero differentials whose terms have the dimensions of the cohomology of a
+complex over a field maps quasi-isomorphically to that complex.
+
+## References
+
+* [Stacks, Tag 0BCC], first paragraph of the proof
 -/
 
 @[expose] public section
@@ -29,18 +34,7 @@ open CategoryTheory
 namespace CochainComplex
 
 /-- A zero-differential complex with prescribed finite cohomology dimensions maps
-quasi-isomorphically to the original complex over a field.
-Source: Stacks Project, More on Algebra, Tag 0BCC, first paragraph of the proof
-(blueprint: lem-sc-residue-cohomology-zero-complex).
-
-Proof: In degree i the finite-dimensional term E_i and H^i(C) have equal dimension,
-so choose a linear isomorphism e_i between them. Vector spaces are projective;
-therefore e_i lifts through the epimorphism Z^i(C) → H^i(C) to a map s_i into
-cycles. Compose s_i with the cycle inclusion into C_i. These maps form a chain
-map E → C because E has zero differentials and the images lie in cycles.
-Naturality of the homology projection identifies its induced cohomology map
-with e_i, through the cycle and homology isomorphisms of the zero-differential
-complex E. Thus it is a quasi-isomorphism. No boundedness is needed. -/
+quasi-isomorphically to the original complex over a field. -/
 theorem exists_quasiIso_from_zeroDifferential
     {κ : Type u} [Field κ]
     (C E : CochainComplex (ModuleCat.{max u v} κ) ℤ) (d : ℤ → ℕ)

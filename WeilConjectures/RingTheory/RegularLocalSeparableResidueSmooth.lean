@@ -18,8 +18,21 @@ import WeilConjectures.RingTheory.RegularLocalFibreFinrank
 /-!
 # Regularity with separable residue field characterizes smoothness over a field
 
-Source: Stacks Project, Algebra, Lemma Tag 00TV (lemma-separable-smooth, line 38740)
-(blueprint: lem-weil-pbc-regular-local-separable-residue-smooth).
+For a finite type algebra over a field and a prime with separable residue field, smoothness at
+the prime is equivalent to regularity of the local ring.
+
+## Implementation details
+
+The local ring is Noetherian with finitely generated separable residue field. The
+Jacobi–Zariski sequence is short exact on cotangent spaces by separability, and its dimension
+count (regular-local cotangent criterion, transcendence degree of separably generated fields,
+localization of differentials) compares `dim_K (K ⊗ Ω[S/k])` with the dimension of `Spec S` at
+`q`, with equality exactly when the local ring is regular. The dimension criteria for smoothness
+give both implications.
+
+## References
+
+* [Stacks, Tag 00TV]
 -/
 
 @[expose] public section
@@ -29,29 +42,7 @@ universe u v
 namespace Algebra
 
 /-- For a finite type algebra over a field, smoothness at a prime is equivalent to
-regularity of the local ring when the residue field is separable over the base.
-Source: Stacks Project, Algebra, Lemma Tag 00TV (lemma-separable-smooth, line 38740)
-(blueprint: lem-weil-pbc-regular-local-separable-residue-smooth).
-Proof steps (from the cited Stacks proof) are: (1) localize at `q`, observe that the
-result is Noetherian local and that its residue field is finitely generated and
-separable over `k`; (2) apply the Jacobi--Zariski sequence and injectivity for a
-separable residue field to obtain a short exact cotangent sequence; (3) compute its
-dimension using the regular-local cotangent criterion and the transcendence-degree
-formula for separably generated fields; (4) identify differentials after localization
-and tensoring with the residue field; (5) compare this dimension with the dimension
-of `Spec S` at `q`, with equality exactly when the local ring is regular; (6) use the
-dimension criterion for smoothness to deduce smoothness from regularity; and (7) use
-the converse smoothness dimension criterion to deduce regularity. These steps use the
-dependency nodes `lem-weil-pbc-jacobi-zariski-differential-maps`,
-`lem-weil-pbc-separable-residue-cotangent-injective`,
-`lem-weil-pbc-regular-local-cotangent-dimension`,
-`lem-weil-pbc-separably-generated-differentials-dimension`,
-`lem-weil-pbc-kahler-differentials-localization`,
-`lem-weil-pbc-dimension-at-point-local-ring-trdeg`,
-`lem-weil-pbc-differentials-dimension-bound-smooth-at-prime`, and
-`lem-weil-pbc-smooth-over-field-dimension-differentials` (along with the cited
-localization, separability, and regular-local definitions).
--/
+regularity of the local ring when the residue field is separable over the base. -/
 theorem regularLocal_iff_smoothAtPrime
     (k : Type u) (S : Type v) [Field k] [CommRing S] [Algebra k S]
     [Algebra.FiniteType k S] (q : Ideal S) [q.IsPrime]

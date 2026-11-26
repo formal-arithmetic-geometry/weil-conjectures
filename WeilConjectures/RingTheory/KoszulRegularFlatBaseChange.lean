@@ -14,8 +14,17 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Flat base change of Koszul regularity
 
-Source: Stacks Project, More on Algebra, Lemma 15.31.5 (Tag 062H),
-flat base change of Koszul regular sequences.
+Koszul regularity of a sequence is preserved by flat base change.
+
+## Implementation details
+
+The Koszul complex of the image sequence is identified degreewise with the base change of the
+original complex using the exterior bases; flatness identifies homology with the base change of
+the original homology.
+
+## References
+
+* [Stacks, Tag 062H]
 -/
 
 @[expose] public section
@@ -24,20 +33,7 @@ universe u
 
 namespace RingTheory.Sequence
 
-/-- Flat base change preserves Koszul regularity.
-Source: Stacks Project, More on Algebra, Lemma 15.31.5 (Tag 062H), flat base change
-of the Koszul complex (blueprint: lem-sc-koszul-regular-flat-base-change).
-
-Proof: Identify the Koszul complex on the images of the generators with the
-base change of the original complex: in degree n, send a scalar times a basis
-wedge to the same scalar times the wedge of the image basis vectors. The inverse
-uses the same finite exterior bases. Evaluation of the contraction differential
-on those wedges proves that these maps commute with the differentials. Flat
-tensoring preserves kernels and images of the short complexes in each degree,
-hence identifies homology with the tensor product of the original homology.
-For every positive degree the latter is zero by hreg. Transport that vanishing
-across the degreewise complex isomorphism. This also covers the empty sequence
-and the zero ring, and imposes no proper-ideal hypothesis. -/
+/-- Flat base change preserves Koszul regularity. -/
 theorem isKoszulRegular_of_flat
     (A S : Type u) [CommRing A] [CommRing S] [Algebra A S] [Module.Flat A S]
     (r : ℕ) (f : Fin r → A) (hreg : IsKoszulRegular f) :

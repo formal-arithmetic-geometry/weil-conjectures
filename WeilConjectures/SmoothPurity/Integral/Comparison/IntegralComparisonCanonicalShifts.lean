@@ -14,8 +14,10 @@ import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 The limit uses its actual right-derived shift, reduction uses its adjoint mate,
 and scalar change uses its universal cochain counit. These constructions fix
 one common shift before studying either realization comparison.
-Source: Stacks Tags 014E, 06YY and 0941.
-(blueprint: def-sf-integral-comparison-canonical-shifts).
+
+## References
+
+* Stacks Project, Tags 014E, 06YY and 0941
 -/
 
 @[expose] public noncomputable section
@@ -34,31 +36,26 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The shift on the actual sequence limit, through exact restriction and Rlim.
-Source: Stacks 0941 (blueprint: def-sf-integral-comparison-canonical-shifts). -/
+/-- The shift on the actual sequence limit, through exact restriction and Rlim. -/
 @[instance_reducible] def integralComparisonLimitShift (X : Scheme.{u}) :
     (coefficientSequenceLimit l E X).CommShift ℤ := by
   unfold coefficientSequenceLimit coefficientSequenceDerivedRestriction
     coefficientConstantTowerLimit
   infer_instance
 
-/-- Exact sequence pullback carries the termwise derived shift.
-Source: Stacks 014E (blueprint: def-sf-integral-comparison-canonical-shifts). -/
+/-- Exact sequence pullback carries the termwise derived shift. -/
 @[instance_reducible] def integralComparisonSequencePullbackShift {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (integralComparisonDerivedSequencePullback l E f).CommShift ℤ := by
   unfold integralComparisonDerivedSequencePullback
   infer_instance
 
-/-- Reduction carries the adjoint mate of the fixed total-limit shift.
-Source: Stacks 0941 (blueprint: def-sf-integral-comparison-canonical-shifts). -/
+/-- Reduction carries the adjoint mate of the fixed total-limit shift. -/
 @[instance_reducible] def integralComparisonReductionShift (X : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus l E X) : S.reduction.CommShift ℤ := by
   letI := integralComparisonLimitShift l E X
   exact S.adjunction.leftAdjointCommShift ℤ
 
-/-- The universal scalar cochain counit determines the coherent scalar shift.
-Source: Stacks 06YY and 014E
-(blueprint: def-sf-integral-comparison-canonical-shifts). -/
+/-- The universal scalar cochain counit determines the coherent scalar shift. -/
 theorem integralComparisonSequenceScalarShift_exists
     (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
     (ι : E →ₐ[ℚ_[l]] L) (X : Scheme.{u}) :
@@ -72,8 +69,7 @@ theorem integralComparisonSequenceScalarShift_exists
     (Functor.IsLeftDerivedFunctor.isRightKanExtension _ _
       (HomologicalComplex.quasiIso _ (.up ℤ)))
 
-/-- The uniquely counit-normalized scalar shift, independently of pullback.
-Source: Stacks 06YY (blueprint: def-sf-integral-comparison-canonical-shifts). -/
+/-- The uniquely counit-normalized scalar shift, independently of pullback. -/
 @[instance_reducible] def integralComparisonSequenceScalarShift
     (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
     (ι : E →ₐ[ℚ_[l]] L) (X : Scheme.{u}) :

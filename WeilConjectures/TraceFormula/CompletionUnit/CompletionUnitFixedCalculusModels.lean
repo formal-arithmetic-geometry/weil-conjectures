@@ -12,8 +12,19 @@ import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitFiniteMateCompa
 
 /-! # Completion models for a specified coefficient calculus
 
-Source: Stacks 07A6, 09T5, 0D6E and 0941. The construction only uses coefficient
-adjunctions, so no invertibility condition on the characteristic of the scheme is needed.
+The ordinary quotient adjunction and a compatible derived model exist for any specified
+coefficient calculus.
+
+## Implementation details
+
+The construction only uses coefficient adjunctions, so no invertibility condition on the
+characteristic of the scheme is needed. The ordinary quotient tensor/limit adjunction is derived
+on flat-term K-flat complexes and K-injective systems, and its left adjoint is compared with
+`S.reduction` by uniqueness of left adjoints to the fixed total limit.
+
+## References
+
+* [Stacks Project, Tags 07A6, 09T5, 0D6E and 0941](https://stacks.math.columbia.edu/tag/07A6)
 -/
 
 @[expose] public noncomputable section
@@ -133,16 +144,7 @@ private theorem fixedDerivedComparison
     rfl
 
 /-- Construct the ordinary quotient adjunction and its compatible derived model for
-any specified calculus. Source: Stacks 07A6, 09T5, 0D6E and 0941.
-(blueprint: lem-trf-completion-unit-fixed-calculus-models).
-
-Proof: derive the ordinary quotient tensor/limit adjunction on flat-term K-flat
-complexes and K-injective systems. Compare its left adjoint with S.reduction by
-uniqueness of left adjoints to the fixed total limit. Transport its universal
-comparison and Hom equation. Finite adjunction mates give reduction_evaluation.
-The canonical right-derived limit unit and strict Roos comparison supply the
-remaining fields. All constructions are over the coefficient sheaf, so they
-also apply in residue characteristic l and to the empty scheme. -/
+any specified calculus. -/
 theorem fixedCalculusModels (S : CoefficientDerivedSystemCalculus l E W) :
     ∃ M : OrdinaryModel l E W, Nonempty (DerivedModel l E W S M) := by
   obtain ⟨M⟩ := ordinaryModel_exists l E W

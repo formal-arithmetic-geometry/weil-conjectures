@@ -9,8 +9,15 @@ public import Mathlib.CategoryTheory.Functor.Currying
 
 /-! # Forward open pullback/tensor square for common-stage inclusion
 
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-common-projection-open-pullback-tensor-forward).
+We prove the forward form of the open tensor/pullback square from a representative
+compatibility equation.
+
+## Implementation details
+
+The compatibility equation is an explicit hypothesis: without it the statement fails, e.g.
+for `SingleObj (Multiplicative Bool)` with identity functors and comparisons and first
+projections as tensor functors, where the equation reduces to `mu = mu'`. The inverse square
+follows from the compatibility equation by cancelling the two displayed isomorphisms.
 -/
 
 @[expose] public noncomputable section
@@ -28,21 +35,8 @@ open CategoryTheory
 
 namespace WeilConjectures
 
-/-- The forward form of the open tensor/pullback square.
-
-STATEMENT-DISPUTED (repaired): The original theorem quantified over arbitrary `mu` and `mu'`
-with no compatibility hypothesis. Take all four categories to be `SingleObj (Multiplicative
-Bool)`, all four functors and comparison isomorphisms to be identities, and take `TA` and
-`TB` to be the first projection functor from the product category (likewise `TA'` and
-`TB'`). Then the displayed equation reduces to `mu = mu'`; choosing the two distinct
-endomorphisms `false` and `true` gives a counterexample. A valid forward transport lemma
-needs the canonical compatibility equation (or hypotheses that imply it).
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-common-projection-open-pullback-tensor-forward).
-
-The compatibility equation is now an explicit hypothesis. This is the strictly
-smaller representative equation from which the inverse square follows by cancelling
-the two displayed isomorphisms. -/
+/-- The forward form of the open tensor/pullback square, assuming the canonical compatibility
+equation. -/
 theorem commonProjectionOpenPullbackTensor_forward
     {A : Type v} [Category.{w} A] {B : Type v'} [Category.{w'} B]
     {A' : Type v} [Category.{w} A'] {B' : Type v'} [Category.{w'} B']

@@ -18,9 +18,26 @@ import WeilConjectures.RingTheory.FormalGlueingData
 /-!
 # Algebraization of a map that is an isomorphism away from an ideal
 
-Source: Stacks Project, More on Algebra, Lemma 0ALK, proof of part (2),
-using Remark 05EL and Proposition 05ER 
-(blueprint: lem-weil-pbc-formal-glueing-map-from-algebraization).
+Let `R → S` be flat, inducing an isomorphism modulo a finitely generated ideal `I`. An
+`S`-linear map `S ⊗_R P → Q` with `I`-power torsion kernel and cokernel is the base change of an
+`R`-linear map `P → T` with `I`-power torsion kernel and cokernel.
+
+## Implementation details
+
+Choose generators `fᵢ` of `I`; localizing the given map at each `fᵢ` is bijective. Replacing the
+prime component of the canonical datum of `P` by `Q` gives a glueing datum with a morphism from
+the canonical datum, which essential surjectivity and fullness of the canonical functor
+algebraize. The kernel and cokernel of the resulting map vanish after localization at every
+generator, so `I` lies in the radical of the annihilator of each of their elements, and a power
+of `I` kills it. No comparison equivalences are asserted here; they are proved separately using
+flat tensor exactness and torsion base change.
+
+## References
+
+* [Stacks, Tag 0ALK]
+* [Stacks, Tag 05EL]
+* [Stacks, Tag 05ER]
+* [Stacks, Tag 00IM]
 -/
 
 @[expose] public section
@@ -186,29 +203,10 @@ private theorem transport_map {A B A' B' : ModuleCat.{w} R}
   subst A' B'
   simpa using eq_of_heq hk
 
-/-- Algebraize the map and retain ideal-power torsion of its kernel and cokernel.
-Source: Stacks Project, More on Algebra, Lemma 0ALK, proof of part (2),
-with Remark 05EL and Proposition 05ER 
-(blueprint: lem-weil-pbc-formal-glueing-map-from-algebraization).
-
-Choose a finite generating family of I. A direct fraction argument proves that
-localizing the given map at each generator is bijective: for injectivity, clear
-a denominator and then annihilate the resulting kernel element; for surjectivity,
-annihilate the class of a numerator in the cokernel and lift the resulting multiple.
-Apply exists_replace_prime to the canonical datum of P and the given map. This
-replaces its prime component by Q and gives a morphism with bijective chart maps.
-Essential surjectivity algebraizes this datum. Fullness lifts its morphism, composed
-with the inverse algebraization isomorphism, to psi. Taking prime components proves
-the displayed factorization; taking chart components shows each localization of
-psi is bijective. Its kernel and cokernel therefore vanish after localization at
-every generator, as follows directly on fractions. For each element x of either
-module, every generator belongs to the radical of the annihilator of x. Thus I
-lies in that radical. Mathlib's finitely generated ideal criterion (Stacks 00IM)
-supplies a power of I contained in the annihilator. This also covers I = 0 and
-an empty generating family. All auxiliary scalar-action identifications are proved
-by module extensionality and the scalar-tower law. No comparison equivalence is
-asserted here; those are proved separately using flat tensor exactness and torsion
-base change.
+/-- Algebraize the map and retain ideal-power torsion of its kernel and cokernel: an
+`S`-linear map `φ' : S ⊗[R] P → Q` with `I`-power torsion kernel and cokernel is, up to an
+isomorphism `β : S ⊗[R] T ≃ Q`, the base change of an `R`-linear map `ψ : P → T` with `I`-power
+torsion kernel and cokernel.
 -/
 theorem exists_map_from_algebraization
     (hflat : (algebraMap R S).Flat) (I : Ideal R) (hI : I.FG)

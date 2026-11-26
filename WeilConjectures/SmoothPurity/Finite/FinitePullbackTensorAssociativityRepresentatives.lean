@@ -14,8 +14,18 @@ import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorMo
 
 /-! # Associativity on flat K-flat pullback tensor representatives
 
-Source: Stacks Project, Tags 07A4, 06YS and 03EL.
-(blueprint: lem-pur-finite-pullback-tensor-associativity-representatives).
+We prove associativity of the canonical finite pullback tensor comparison on localized
+flat K-flat triples.
+
+## Implementation details
+
+Total tensors of flat K-flat complexes are again flat K-flat. On each tridegree summand both
+routes send the pullback of `(x ⊗ y) ⊗ z` to `f^*x ⊗ (f^*y ⊗ f^*z)`, with no extra Koszul
+sign; the resulting equality of chain maps is localized.
+
+## References
+
+* Stacks Project, Tags 03EL, 06YS, 07A2, 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -107,22 +117,7 @@ private theorem canonical_representative_square {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact h
 
 -- The four model squares involve several concrete derived-category instances.
-/-- Associativity for the canonical comparison on localized flat K-flat triples.
-Source: Stacks 07A4, lemma-pullback-tensor-product, its total-tensor construction;
-06YS and 07A2 for the flat K-flat total-tensor representatives.
-(blueprint: lem-pur-finite-pullback-tensor-associativity-representatives).
-Proof: total tensors of flat K-flat complexes are again flat K-flat. Apply the
-representative normalization square to (A,B), (B,C) and their total tensors.
-On each tridegree summand, ordinary pullback tensor comparison sends the
-pullback of (x tensor y) tensor z to f*x tensor (f*y tensor f*z) along both
-routes. The ordinary associator only changes parentheses, so this equality
-has no extra Koszul sign. It respects the signed total differential.
-Tensor generators, sheafification and the total coproduct injections determine
-the chain maps. Apply the derived quotient to their equality and insert the
-specified finite tensor-model comparisons and unit-normalized realization.
-The representative associators and the natural comparison isomorphisms cancel
-the intermediate conjugations, giving precisely the displayed equation.
-This calculation only treats the displayed flat K-flat triples. -/
+/-- Associativity for the canonical comparison on localized flat K-flat triples. -/
 theorem finitePullbackTensor_associativity_representatives {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]

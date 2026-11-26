@@ -15,9 +15,20 @@ import all WeilConjectures.RingTheory.KoszulBaseChangeIso
 
 /-! # Basis calculation for quotient-coefficient Koszul homology
 
-Source: Stacks Project, Tags 0623 and 062I; the quotient-coefficient Koszul
-calculation used in Tag 09PQ.
-(blueprint: new-d3-koszul-quotient-tensor-homology-basis). -/
+The homology of `K(f) ⊗_A A/I` in degree `n` is identified with `⋀^n_{A/I} (I/I²)`, sending
+the exterior basis induced by a conormal basis to the standard Koszul wedges.
+
+## Implementation details
+
+Every matrix coefficient of the contraction with `f` lies in `I`, so all differentials of the
+tensored complex vanish and homology equals the terms. Regularity is not needed, only that the
+generators lie in `I`; the normalization of the conormal basis is used later, when comparing
+with the canonical self-Tor map.
+
+## References
+
+* [Stacks, Tags 0623, 062I, 09PQ]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -30,27 +41,7 @@ open ExteriorAlgebra
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The quotient-coefficient Koszul homology has the standard exterior basis.
-Regularity is unnecessary: the generators only have to belong to the quotient ideal.
-The input basis can be any basis of the conormal module; its normalization is used
-later, when comparing this isomorphism to the canonical self-Tor map.
-
-Source: Stacks Project, Tags 0623 (Koszul differential), 062I (conormal basis),
-and 09PQ (computing Tor by tensoring a free resolution).
-(blueprint: new-d3-koszul-quotient-tensor-homology-basis).
-
-Proof: Write B=A/I and E=A^r. Tensor the exterior basis of wedge^n E with B,
-using the tensor commutor to put the coefficient module on the left. Its vectors
-are e_S tensor 1, indexed by n-element subsets S of Fin r. Contraction with f
-has every matrix coefficient in I, so the tensor differential is zero in every
-degree. The cycle inclusion is thus invertible, and the homology projection is
-invertible since the incoming differential is also zero. Compose these two
-isomorphisms with the basis equivalence from wedge^n_B I/I^2 to wedge^n_A E
-tensor_A B, sending the exterior basis induced by b to e_S tensor 1. This
-basis equivalence is B-linear, hence A-linear after restriction. The inverse
-cycle inclusion gives the stated cycles and the homology projection gives
-the stated formula. If n>r both bases are empty. For n=0 the empty wedge is
-1, for r=0 the same construction applies, and for B=0 both sides are zero.
-No nontrivial-ring assumption or properness of I is used. -/
+Regularity is unnecessary: the generators only have to belong to the quotient ideal. -/
 theorem exists_koszul_quotient_tensor_homology_basis
     (A : Type u) [CommRing A] (I : Ideal A) (n r : ℕ) (f : Fin r → A)
     (hf : Ideal.span (Set.range f) = I)

@@ -13,8 +13,12 @@ import WeilConjectures.RingTheory.FormalGlueingCanonicalFunctorMaps
 /-!
 # Construction of the canonical formal glueing functor
 
-Source: Stacks Project, More on Algebra, Remark 05EL.
-(blueprint: lem-weil-pbc-formal-glueing-canonical-functor).
+We assemble the canonical formal glueing objects and maps into the canonical functor from
+`R`-modules to formal glueing data, without any flatness or quotient hypothesis.
+
+## References
+
+* [Stacks, Tag 05EL]
 -/
 
 @[expose] public section
@@ -26,23 +30,8 @@ open CategoryTheory
 namespace FormalGlueing
 
 /-- The prescribed objects and maps form the canonical functor, without any flatness
-or quotient hypothesis.
-Source: Stacks Project, More on Algebra, Remark 05EL; steps 1–2 of the proof of
-[ prop-weil-pbc-formal-glueing-equivalence ].
-(blueprint: lem-weil-pbc-formal-glueing-canonical-functor).
-Proof: equip the scalar extension and the localized chart modules with comparison
-and swap linear equivalences, using their bijectivity from the canonical-map lemma.
-The restricted module of each chart equals the original localized R-module: their
-additive groups agree, and algebraMap_smul identifies their scalar actions. Transport
-along these equalities to type the structural maps. The square sends every double
-fraction of a pure tensor to the same swapped fraction of that tensor on both paths;
-tensor induction and additivity give equality. Each cocycle path reverses the order
-of the same three denominators. For a linear map use its scalar extension and its
-localizations; the comparison and swap fraction formulas prove both morphism equations.
-Localization and base change preserve identity maps and composition, so the prescribed
-maps satisfy the functor laws componentwise. Equality of Hom structures follows from
-equality of prime and chart components, since the remaining fields are proofs. These
-arguments include an empty chart family, zero generators and zero localizations. -/
+or quotient hypothesis: it sends `M` to `S ⊗_R M` with charts `M_{f i}`, glued by the
+comparison and swap maps, and sends a linear map to its base change and localizations. -/
 theorem exists_canonical_functor {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] (φ : R →+* S) (t : ℕ) (f : Fin t → R) :
     ∃ Can : ModuleCat.{max u v w} R ⥤ Data.{u, v, max u v w} φ f,

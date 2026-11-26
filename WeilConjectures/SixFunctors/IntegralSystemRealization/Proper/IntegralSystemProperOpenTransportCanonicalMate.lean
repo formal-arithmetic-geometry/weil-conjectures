@@ -7,7 +7,14 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralSystemProperOpenTransportAdjunct
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
-/-! Normalized mate used by the canonical proper/open transport equation. -/
+/-! Normalized mate used by the canonical proper/open transport equation.
+
+## References
+
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0F7B]
+* [Zheng, Construction 4.1 and Lemma 4.10]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -16,13 +23,7 @@ universe u₁ u₂ u₃ u₄ v₁ v₂ v₃ v₄
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 
 /-- Transport a mate across comparison isomorphisms of the two adjunctions and the
-vertical functors.
-
-Source: Stacks Project, Tags 07A7 and 0F7B; the mate transport calculation used in
-canonical proper/open bridge coordinates.
-Proof: factor the square through the middle comparison square, apply the mate
-whiskering and conjugation identities, then use naturality of the conjugated
-comparison and the inverse/hom cancellation of the vertical isomorphism. -/
+vertical functors. -/
 private theorem mate_transport
     {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄}
     [Category.{v₁} A] [Category.{v₂} B] [Category.{v₃} C] [Category.{v₄} D]
@@ -99,11 +100,7 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The transported mate of the intrinsic semilinear alpha in bridge coordinates.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 07A7.
-(blueprint: lem-sf-integral-system-proper-open-transport-core-canonical-mate).
-Proof: expand the mate under the four canonical bridge isomorphisms and use the
-adjunction-conjugacy formula. -/
+/-- The transported mate of the intrinsic semilinear alpha in bridge coordinates. -/
 def properOpenTransportMate (o : Operations l E) (b : CanonicalBridge l E o)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)
     (p : V ⟶ Z) (i : W ⟶ Z) [IsOpenImmersion k] [IsOpenImmersion i]
@@ -231,13 +228,7 @@ private theorem canonicalMate_eq_transportedGamma
     (model_mate_normalized l E k r p i h)
     (transport_mate_normalized l E o b k r p i h) M
 
-/-- The transported mate has the prescribed proper/open adjunct.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 07A7.
-(blueprint: lem-sf-integral-system-proper-open-transport-core-canonical-mate-adjunct).
-Proof: expand the mate under the canonical bridge, transpose with the open
-adjunction, and cancel the bridge isomorphisms against the defining proper/open
-lambda. The resulting equation is the adjunct characterization of the displayed
-transported mate. -/
+/-- The transported mate has the prescribed proper/open adjunct. -/
 theorem properOpenTransportMate_adjunct (o : Operations l E)
     (c : Compositors l E o) (a : OpenComparisons l E o c)
     (b : CanonicalBridge l E o)
@@ -251,11 +242,7 @@ theorem properOpenTransportMate_adjunct (o : Operations l E)
   rw [canonicalMate_eq_transportedGamma l E o b k r p i h M]
   exact transportedGamma_adjunct l E o c a b k r p i h M
 
-/-- The adjunct-normalized gamma is this transported mate.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 07A7.
-(blueprint: lem-sf-integral-system-proper-open-transport-core-canonical-mate-normalized).
-Proof: transpose the gamma with the chosen open adjunction, identify its prescribed
-proper/open lambda, and apply uniqueness of mates after canonical bridge transport. -/
+/-- The adjunct-normalized gamma is this transported mate. -/
 theorem properOpenTransportMate_normalized (o : Operations l E)
     (c : Compositors l E o) (a : OpenComparisons l E o c)
     (b : CanonicalBridge l E o)

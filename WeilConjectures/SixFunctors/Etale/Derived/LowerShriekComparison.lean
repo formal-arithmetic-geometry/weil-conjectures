@@ -59,7 +59,7 @@ D(d.i)_! ⋙ R(d.g)_*
   `(r.hom)_* ⋙ (d.g)_* ≅ (c.g)_*` of pushforwards attached to a refinement.
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison`: the
-  comparison `Rf_!(d)[A]+ ⟶ Rf_!(c)[A]+` above. (blueprint: `BA43-RHO`)
+  comparison `Rf_!(d)[A]+ ⟶ Rf_!(c)[A]+` above.
 
 ## Main results
 

@@ -13,9 +13,18 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Exact localization of completed scalar extension
 
-Source: Stacks Tags 03EK and 06YY. The constant/completed balancing detects
-exactness after forgetting to abelian sheaves.
-(blueprint: lem-pur-completed-scalar-extension-exact).
+The constant/completed balancing detects exactness after forgetting to abelian sheaves.
+
+## Implementation details
+
+Constant scalar extension and constant restriction are exact, and the fixed ordinary balancing
+identifies their composite with completed scalar extension followed by restriction. That
+restriction leaves underlying abelian sheaves unchanged, and the functor to abelian sheaves
+reflects finite limits and colimits.
+
+## References
+
+* [Stacks Project, Tags 03EK and 06YY]
 -/
 
 @[expose] public noncomputable section
@@ -37,14 +46,7 @@ variable (l : ℕ) [Fact l.Prime]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (i : E →ₐ[ℚ_[l]] F) (W : Scheme.{u})
 
-/-- Completed scalar extension is exact, detected on underlying abelian sheaves.
-Source: Stacks 03EK, 06YY
-(blueprint: lem-pur-completed-scalar-extension-exact).
-Proof: constant scalar extension and constant restriction are exact. The fixed
-ordinary balancing identifies their composite with completed scalar extension
-followed by restriction. The latter restriction leaves underlying abelian sheaves
-unchanged, and the functor to abelian sheaves reflects finite limits and colimits.
-Thus completed scalar extension preserves both. -/
+/-- Completed scalar extension is exact, detected on underlying abelian sheaves. -/
 theorem completedTensor_exact :
     PreservesFiniteLimits (pbcExtend (completedCoefficientMap l E F i W)) ∧
       PreservesFiniteColimits (pbcExtend (completedCoefficientMap l E F i W)) := by
@@ -68,8 +70,7 @@ theorem completedTensor_exact :
   exact ⟨preservesFiniteLimits_of_reflects_of_preserves _ (SheafOfModules.toSheaf R),
     preservesFiniteColimits_of_reflects_of_preserves _ (SheafOfModules.toSheaf R)⟩
 
-/-- The exact termwise model, fixed by the universal derived counit.
-Source: Stacks 06YY (blueprint: def-pur-completed-scalar-exact-model). -/
+/-- The exact termwise model, fixed by the universal derived counit. -/
 def completedTensorModel :
     pbcDerivedExtend (completedCoefficientMap l E F i W) ≅
       (letI := (completedTensor_exact l E F i W).1
@@ -87,8 +88,7 @@ def completedTensorModel :
     (pbcExtend (completedCoefficientMap l E F i W)).mapDerivedCategoryFactorsh.hom
     (HomotopyCategory.quasiIso (scalarReductionSource l E W) (.up ℤ))
 
-/-- The exact localization comparison preserves the computation counit on complexes.
-Source: Stacks 06YY (blueprint: lem-pur-completed-scalar-model-counit). -/
+/-- The exact localization comparison preserves the computation counit on complexes. -/
 theorem completedTensorModel_counit (P : CochainComplex (scalarReductionSource l E W) ℤ) :
     (letI := (completedTensor_exact l E F i W).1
      have := (completedTensor_exact l E F i W).2

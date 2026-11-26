@@ -20,9 +20,8 @@ the traces of the `m`-th power of the geometric Frobenius on the compactly suppo
 `H_c^i(X ⊗ k̄, F)` is the sum, over the `𝔽_{qᵐ}`-points `y` of `X`, of the traces of the local
 Frobenius `F_{y, m}` on the geometric stalks: grouping the `𝔽_{qᵐ}`-points by the closed point
 `x` of `X` they lie over, a closed point of degree `e ∣ m` carries `e` such points, each with
-local Frobenius `F_x^{m / e}`. This is blueprint `theorem-grothendieck-lefschetz-trace-formula--8`
-of the trace formula chapter, in the case of a Weil sheaf in degree zero; it is deduced from the
-trace formula for Weil complexes,
+local Frobenius `F_x^{m / e}`. This is the case of a Weil sheaf in degree zero of the trace
+formula for Weil complexes,
 `WeilComplex.sum_trace_compactlySupportedCohomology_eq_sum_traceFunction`.
 -/
 
@@ -38,8 +37,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- **The Grothendieck–Lefschetz trace formula** (blueprint:
-`theorem-grothendieck-lefschetz-trace-formula--8`, for a Weil sheaf placed in degree zero): for
+/-- **The Grothendieck–Lefschetz trace formula** (for a Weil sheaf placed in degree zero): for
 every `m ≥ 1`,
 
 `∑ᵢ (-1)ⁱ tr (Fᵐ ∣ H_c^i(X ⊗ k̄, F)) = ∑_{y ∈ X(𝔽_{qᵐ})} tr (F_{y, m} ∣ F_ȳ)

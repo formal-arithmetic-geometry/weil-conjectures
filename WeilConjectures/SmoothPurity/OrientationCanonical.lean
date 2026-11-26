@@ -21,12 +21,11 @@ relative dimension `d`. An *orientation* of `f` is an isomorphism
   subextension `ℚ_ℓ` of `ℚ̄_ℓ`, of the non-canonical integral isomorphism
   `𝒪_X(d)[2d] ≅ Rf^! 𝒪_Y` (`ProEtale.CondensedRing.nonempty_iso_integralTateTwist_upperShriekUnit`).
 - `ProEtale.CondensedRing.IsCanonicalSmoothOrientation`: the property of a morphism
-  `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` of being the *canonical* orientation (blueprint
-  `definition-trace-map`, `prose-09-24`): the extension of scalars of an integral morphism
-  `φ₀ : 𝒪_X(d)[2d] ⟶ Rf^! 𝒪_Y` whose reductions modulo `ℓⁿ`, `n ≥ 1`, read on the small étale
-  site, are the inverses of the canonical finite orientations `Rf^! Λ_Y ≅ Λ_X(d)[2d]`,
-  `Λ = ℤ ⧸ ℓⁿ` (`Etale.dualizingComplexTwistShiftIso`, blueprint
-  `proposition-relative-dualizing-complex--1`, built from the fundamental class of the diagonal).
+  `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` of being the *canonical* orientation: the extension of
+  scalars of an integral morphism `φ₀ : 𝒪_X(d)[2d] ⟶ Rf^! 𝒪_Y` whose reductions modulo `ℓⁿ`,
+  `n ≥ 1`, read on the small étale site, are the inverses of the canonical finite orientations
+  `Rf^! Λ_Y ≅ Λ_X(d)[2d]`, `Λ = ℤ ⧸ ℓⁿ` (`Etale.dualizingComplexTwistShiftIso`, built from the
+  fundamental class of the diagonal).
 - `ProEtale.CondensedRing.smoothOrientationOfSmooth`: the canonical orientation if there is one,
   and otherwise the non-canonical one; it is an isomorphism
   (`ProEtale.CondensedRing.isIso_smoothOrientationOfSmooth`).
@@ -34,9 +33,9 @@ relative dimension `d`. An *orientation* of `f` is an isomorphism
 ## The canonical orientation
 
 The canonical finite orientations are compatible with the reductions `ℤ ⧸ ℓⁿ⁺¹ ⟶ ℤ ⧸ ℓⁿ` (SGA 4,
-Exposé XVIII; blueprint `proposition-compatibility-purity-change-coefficients`, formalised in the
-étale setting up to the compatibilities of the constituents of the construction in
-`Etale.SupportedCoefficientChange.map_dualizingComplexTwistShiftIso`). A compatible family of
+the construction in `Etale.SupportedCoefficientChange.map_dualizingComplexTwistShiftIso`). A
+compatible family of morphisms of reductions into the derived complete complex `Rf^! 𝒪_Y` lifts
+uniquely to a
 morphisms of reductions into the derived complete complex `Rf^! 𝒪_Y` lifts uniquely to a
 morphism `φ₀` (`ProEtale.existsUnique_derivedReduction_map_eq`), so the canonical orientation
 exists and is unique, and `IsCanonicalSmoothOrientation` determines it. The existence of the
@@ -133,7 +132,7 @@ dualizing complex `Rf^! 𝒪_{E,Y}` are identified, through the canonical compar
 `etaleReductionIntegralTateTwistIso`, `etaleReductionUpperShriekIso` and `etaleReductionUnitIso`,
 with `Λ_X(d)[2d]` and `Rf^! Λ_Y`, `Λ = 𝒪_E ⧸ ℓⁿ`, and the isomorphism is the inverse of the
 orientation `Rf^! Λ_Y ≅ Λ_X(d)[2d]` of the diagonal argument (`Etale.dualizingComplexTwistShiftIso`,
-for the Kummer classes of `μ_{ℓⁿ} ⊗ Λ`, blueprint `proposition-relative-dualizing-complex--1`). -/
+for the Kummer classes of `μ_{ℓⁿ} ⊗ Λ`). -/
 noncomputable def etaleReductionSmoothOrientationIso (n : ℕ) [SmoothOfRelativeDimension d f.left] :
     (shiftFunctor _ (2 * d : ℤ)).obj ((finiteEtaleReading ℓ E.1 n X).obj
         ((boundedConstructibleIntegersModPowReduction X.left ℓ E.1 n).obj
@@ -157,10 +156,7 @@ noncomputable def etaleReductionSmoothOrientationIso (n : ℕ) [SmoothOfRelative
 /-- A morphism `φ₀ : 𝒪_{E,X}(d)[2d] ⟶ Rf^! 𝒪_{E,Y}` **lifts the canonical finite orientations**
 if for every `n ≥ 1` its reduction modulo `ℓⁿ`, read on the small étale site, is the canonical
 finite orientation `etaleReductionSmoothOrientationIso` (through the commutation of the
-reduction and the étale reading with the shift). Such a lift is unique: a morphism into the
-derived complete complex `Rf^! 𝒪_{E,Y}` is determined by its reductions
-(`ProEtale.existsUnique_derivedReduction_map_eq`), which are determined by their étale readings,
-the reading being fully faithful. -/
+reduction and the étale reading with the shift). -/
 def IsIntegralSmoothOrientation [SmoothOfRelativeDimension d f.left]
     (φ₀ : (shiftFunctor (Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) (2 * d : ℤ)).obj
         (integralTateTwistBoundedConstructible ℓ E.1 X.hom d) ⟶
@@ -173,18 +169,11 @@ def IsIntegralSmoothOrientation [SmoothOfRelativeDimension d f.left]
       ((finiteEtaleReading ℓ E.1 (n + 1) X).commShiftIso (2 * d : ℤ)).hom.app _ ≫
       (etaleReductionSmoothOrientationIso ℓ E f d (n + 1)).hom
 
-/-- Blueprint `definition-trace-map`, `prose-09-24`: a morphism
-`φ : ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` is the **canonical orientation** of `f` (smooth of pure relative
-dimension `d`) if it is the extension of scalars (`extendScalarsIntegralOrientation`) of a
-morphism `φ₀ : 𝒪_X(d)[2d] ⟶ Rf^! 𝒪_Y`, `𝒪 = ℤ_ℓ` the integers of the smallest finite
-subextension `ℚ_ℓ` of `ℚ̄_ℓ`, lifting the canonical finite orientations
-(`IsIntegralSmoothOrientation`, built from `Etale.dualizingComplexTwistShiftIso`).
-
-The canonical finite orientations are compatible with the reductions `ℤ ⧸ ℓⁿ⁺¹ ⟶ ℤ ⧸ ℓⁿ`
-(SGA 4, Exposé XVIII; blueprint `proposition-compatibility-purity-change-coefficients`) and
-therefore lift, uniquely, to `φ₀` (`ProEtale.existsUnique_derivedReduction_map_eq`); hence a
-morphism with this property exists and is unique. Only uniqueness is used implicitly, the existence
-of the lift is not formalised. -/
+/-- A morphism `φ : ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` is the **canonical orientation** of `f` (smooth
+of pure relative dimension `d`) if it is the extension of scalars
+(`extendScalarsIntegralOrientation`) of a morphism `φ₀ : 𝒪_X(d)[2d] ⟶ Rf^! 𝒪_Y`, `𝒪 = ℤ_ℓ` the
+integers of the smallest finite subextension `ℚ_ℓ` of `ℚ̄_ℓ`, lifting the canonical finite
+orientations (`IsIntegralSmoothOrientation`). -/
 def IsCanonicalSmoothOrientation [SmoothOfRelativeDimension d f.left]
     (φ : boundedConstructibleTateTwist ℓ X d (2 * d) ⟶
       (boundedConstructibleUpperShriek ℓ f).obj
@@ -195,8 +184,7 @@ def IsCanonicalSmoothOrientation [SmoothOfRelativeDimension d f.left]
 /-- The **orientation** `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` of a morphism `f` smooth of pure relative
 dimension `d`: the canonical orientation (`IsCanonicalSmoothOrientation`) when an isomorphism with
 this property is known to exist, and otherwise a non-canonical isomorphism
-(`nonempty_iso_tateTwist_upperShriekUnit`). Mathematically the canonical orientation always
-exists and is an isomorphism (SGA 4, Exposé XVIII); its existence is not formalised. -/
+(`nonempty_iso_tateTwist_upperShriekUnit`). -/
 noncomputable def smoothOrientationOfSmooth [SmoothOfRelativeDimension d f.left] :
     boundedConstructibleTateTwist ℓ X d (2 * d) ⟶
       (boundedConstructibleUpperShriek ℓ f).obj

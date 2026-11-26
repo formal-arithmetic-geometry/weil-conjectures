@@ -8,16 +8,22 @@ module
 public import WeilConjectures.RingTheory.GRing
 public import Mathlib.RingTheory.Localization.FractionRing
 import WeilConjectures.RingTheory.GeometricRegularityFieldIso
+
+/-!
+# Transporting geometric regularity along a choice of fraction field
+
+Geometric regularity of the generic fibre of an `A`-algebra does not depend on the chosen model of
+the fraction field of `A`.
+
+## References
+
+* [Stacks, Tag 07PS]
+-/
+
 @[expose] public section
 universe u
-/-- Geometric regularity over a domain is preserved after changing the chosen
-fraction field. Source: Stacks Project, More on Algebra, Proposition 07PS.
-(blueprint: lem-weil-pbc-fraction-field-geometric-regularity-transport).
-Proof: construct the unique A-algebra equivalence between K and the canonical
-fraction field using the universal property of IsFractionRing. Transport finite
-purely inseparable extensions and regularity across this equivalence, and identify
-the resulting tensor products by the induced tensor equivalence.
--/
+/-- Geometric regularity of the generic fibre over a Noetherian domain `A` transfers from the
+canonical fraction field `(⊥ : Ideal A).ResidueField` to any fraction field `K` of `A`. -/
 theorem fractionField_geometricallyRegular_tensorProduct_transport
     (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A]
     (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K]

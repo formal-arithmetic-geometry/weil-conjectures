@@ -32,8 +32,8 @@ Consequently:
   killed by primes (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isTorsionSheaf`),
   and a sheaf of `Λ`-modules killed by `p` is a sheaf of `Λ_p`-modules.
 
-This is the change of coefficients in the proof of the reduction of proper base change to the
-projective line (blueprint `proposition-proper-base-change-etale-site--1`).
+This is the change of coefficients in the reduction of proper base change to the projective
+line.
 -/
 
 @[expose] public section
@@ -129,10 +129,7 @@ theorem Etale.HasTorsionBaseChange.of_ringHom {Λ' : Type (u + 1)} [CommRing Λ'
   exact hf sq _ (Etale.DerivedCategory.Plus.moduleTorsionHomology_restrictScalars φ K hK)
 
 /-- **Base change property for a quotient coefficient ring.** If `f` satisfies the base change
-property with `Λ`-coefficients, then also with `Λ ⧸ NΛ`-coefficients: restriction of scalars
-along `Λ ⟶ Λ ⧸ NΛ` is conservative, sends complexes of `Λ ⧸ NΛ`-modules to complexes with
-torsion cohomology, and carries the derived base change map over `Λ ⧸ NΛ` to the one over `Λ`.
-(blueprint: `proposition-proper-base-change-etale-site--1`, change of coefficients) -/
+property with `Λ`-coefficients, then also with `Λ ⧸ NΛ`-coefficients. -/
 theorem Etale.HasTorsionBaseChange.quotient {X Y : Scheme.{u}} {f : X ⟶ Y}
     (hf : Etale.HasTorsionBaseChange Λ f) (N : ℕ) :
     Etale.HasTorsionBaseChange (Λ ⧸ Ideal.span {(N : Λ)}) f := by
@@ -143,9 +140,7 @@ theorem Etale.HasTorsionBaseChange.quotient {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- **Base change property from prime coefficient rings.** Let `f` be quasi-compact and
 quasi-separated. If `f` satisfies the base change property with `Λ ⧸ pΛ`-coefficients for every
-prime `p`, then also with `Λ`-coefficients.
-(blueprint: `proposition-proper-base-change-etale-site--1`, change of coefficients;
-`theorem-pbc-injective-acyclicity--1`, from prime to arbitrary torsion) -/
+prime `p`, then also with `Λ`-coefficients. -/
 theorem Etale.hasTorsionBaseChange_of_forall_prime {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] [QuasiSeparated f]
     (h : ∀ p : ℕ, p.Prime → Etale.HasTorsionBaseChange (Λ ⧸ Ideal.span {(p : Λ)}) f) :
@@ -184,11 +179,7 @@ theorem Etale.hasTorsionBaseChange_of_forall_prime {X Y : Scheme.{u}} (f : X ⟶
 
 /-- **Injective acyclicity implies the base change property.** If a proper morphism
 `f : X ⟶ Y` has injective acyclicity with `Λ ⧸ pΛ`-coefficients for every prime `p`, then it
-satisfies the base change property with `Λ`-coefficients: for the torsion rings `Λ ⧸ pΛ` this is
-`AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity`, and the passage to `Λ`
-is `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_forall_prime`.
-(blueprint: `theorem-pbc-injective-acyclicity--1`, `IA_r(f)` for every prime `r` implies
-`PBC(f)`) -/
+satisfies the base change property with `Λ`-coefficients. -/
 @[stacks 0A4B]
 theorem Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsProper f]

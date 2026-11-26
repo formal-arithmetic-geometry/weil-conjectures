@@ -49,13 +49,23 @@ is what contradicts it.
 
 ## Implementation notes
 
-The blueprint reduces the coefficient sheaf on the geometric point `Spec K` to a constant sheaf
+The reference argument reduces the coefficient sheaf on the geometric point `Spec K` to a
+constant sheaf
 `ℤ/dℤ` by decomposing a `ℤ/nℤ`-module as a sum of cyclic modules. Over a general coefficient
 ring `Λ` with `n = 0` in `Λ` a `Λ`-module is not a sum of the `Λ/dΛ`, so this step is recorded
 as `AlgebraicGeometry.Etale.exists_not_isZero_higherDirectImage_constantModSheaf`, which
 compares the higher direct images through their underlying abelian sheaves. It is applied
 after the normalisation step, where the base-change map is already known to be injective, so
 that only the nonvanishing of its target has to be transported.
+
+The universal curve-test datum is obtained as follows. A counterexample over a field `K₀`
+exists by `AlgebraicGeometry.Etale.nonempty_fieldFailure_of_not_universalBaseChangeProperty`.
+It survives the integral surjective base change to an algebraic closure `K` of `K₀`
+(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isIntegralHom_of_surjective`) and the
+replacement of `S'` by the normalisation of `S'` in `Spec K`
+(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_iff_of_isIntegralHom`). The base-change
+map of the resulting square is injective (`AlgebraicGeometry.Etale.mono_baseChangeHomologyMap`)
+and not an isomorphism, so its target is nonzero.
 
 ## References
 
@@ -88,36 +98,36 @@ the right-hand column being `Spec` of an extension `i` of the function field of 
 followed by the inclusion of the generic point. Normality of `S₀` is spelled out as integral
 closedness of all its stalks, there being no `IsNormal` predicate on schemes. -/
 structure Etale.CurveTestDatum where
-  /-- the base of the test curve -/
+  /-- The base of the test curve -/
   S₀ : Scheme.{u}
   [isAffine_base : IsAffine S₀]
   [isIntegral_base : IsIntegral S₀]
-  /-- the base is normal: all its stalks are integrally closed -/
+  /-- The base is normal: all its stalks are integrally closed -/
   isIntegrallyClosed_stalk (x : S₀) : IsIntegrallyClosed (S₀.presheaf.stalk x)
   [isAlgClosed_functionField : IsAlgClosed S₀.functionField]
-  /-- the total space of the test curve -/
+  /-- The total space of the test curve -/
   X₀ : Scheme.{u}
-  /-- the test curve -/
+  /-- The test curve -/
   f₀ : X₀ ⟶ S₀
   [isAffineHom : IsAffineHom f₀]
   [smoothOfRelativeDimension_one : SmoothOfRelativeDimension 1 f₀]
-  /-- the algebraically closed field of the geometric generic point -/
+  /-- The algebraically closed field of the geometric generic point -/
   K : Type u
   [field : Field K]
   [isAlgClosed : IsAlgClosed K]
   /-- `K` is an extension of the function field of the base -/
   i : S₀.functionField ⟶ CommRingCat.of K
-  /-- the geometric generic fibre of the test curve -/
+  /-- The geometric generic fibre of the test curve -/
   Y₀ : Scheme.{u}
-  /-- the projection of the fibre to the geometric generic point -/
+  /-- The projection of the fibre to the geometric generic point -/
   e : Y₀ ⟶ Spec (CommRingCat.of K)
-  /-- the projection of the fibre to the total space -/
+  /-- The projection of the fibre to the total space -/
   h : Y₀ ⟶ X₀
-  /-- the fibre square is Cartesian -/
+  /-- The fibre square is Cartesian -/
   isPullback : IsPullback e h (Spec.map i ≫ S₀.fromSpecStalk (genericPoint S₀)) f₀
-  /-- the torsion order -/
+  /-- The torsion order -/
   d : ℕ
-  /-- the torsion order is invertible on the base -/
+  /-- The torsion order is invertible on the base -/
   isUnit_d : IsUnit (d : Γ(S₀, ⊤))
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (p : X ⟶ S)
@@ -126,8 +136,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (p : X ⟶ S)
 `K` over it: the spectrum `S''` of the integral closure of `Γ(S', ⊤)` in `K`. It is affine,
 integral and normal, its function field is algebraically closed
 (`IsFractionRing.isAlgClosed_integralClosure`), the morphism `S'' ⟶ S'` is integral, and the
-given point `Spec K ⟶ S'` lifts to a geometric generic point of `S''`. 
-(blueprint: lem-sbc-normalization-algclosed-field)
+given point `Spec K ⟶ S'` lifts to a geometric generic point of `S''`.
 -/
 theorem Etale.exists_normalization_of_isAlgClosed {S' : Scheme.{u}} [IsAffine S'] {K : Type u}
     [Field K] [IsAlgClosed K] (g : Spec (.of K) ⟶ S') :
@@ -182,19 +191,10 @@ lemma Etale.isIso_baseChangeHomologyMap_congr {T Y : Scheme.{u}} {e : Y ⟶ T} {
   subst hg
   rfl
 
-/-- The reduction of the coefficients to a constant sheaf `Λ/dΛ` in the proof of blueprint
-`lemma-reduction-curve-over-normal-base--1`.
-
-Let `K` be algebraically closed, `e : Y ⟶ Spec K` and `h : Y ⟶ X` with `h` quasi-compact and
-quasi-separated, and let `n ≠ 0` annihilate `Λ`. If `R^q h_* e⁻¹ F` is nonzero for a sheaf `F`
-of `Λ`-modules on `(Spec K)_ét`, then `R^q h_* (Λ/dΛ)` is nonzero for some `d ∣ n`.
-
-The sheaf `F` is constant with value its global sections `M`, so `e⁻¹ F` is the constant sheaf
-`M` on `Y`. The higher direct images of a sheaf of `Λ`-modules are those of its underlying
-abelian sheaf, and `R^q h_*` commutes with direct sums as `h` is quasi-compact and
-quasi-separated. As an abelian group `M` is a direct sum of cyclic groups `ℤ/ℓ^k`, with `ℓ`
-dividing the characteristic `m` of `Λ`, so by dévissage `R^q h_* (ℤ/ℓ) ≠ 0` for a prime
-`ℓ ∣ m`; and `Λ/ℓΛ` is a nonzero `𝔽_ℓ`-vector space, whence `R^q h_* (Λ/ℓΛ) ≠ 0`. -/
+/-- **Reduction to constant coefficients `Λ/dΛ`.** Let `K` be algebraically closed,
+`e : Y ⟶ Spec K` and `h : Y ⟶ X` with `h` quasi-compact and quasi-separated, and let `n ≠ 0`
+annihilate `Λ`. If `R^q h_* e⁻¹ F` is nonzero for a sheaf `F` of `Λ`-modules on `(Spec K)_ét`,
+then `R^q h_* (Λ/dΛ)` is nonzero for some `d ∣ n`. -/
 theorem Etale.exists_not_isZero_higherDirectImage_constantModSheaf {K : Type u} [Field K]
     [IsAlgClosed K] {Y : Scheme.{u}} (e : Y ⟶ Spec (.of K)) (h : Y ⟶ X) [QuasiCompact h]
     [QuasiSeparated h] (n : ℕ) (hn : n ≠ 0) (hΛ : (n : Λ) = 0) (q : ℤ)
@@ -208,24 +208,12 @@ theorem Etale.exists_not_isZero_higherDirectImage_constantModSheaf {K : Type u} 
   exact hnonzero
     (Etale.isZero_prime_cyclic_higherDirectImage_of_quotient Λ h q r hr hunit hzero)
 
-/-- Blueprint `lemma-reduction-curve-over-normal-base--1`: Universal curve-test datum for a failure.
-
-Let `n` be invertible on `S` with `n = 0` in `Λ`, and let `q ≥ 1`. If `BC(p, Λ, q')` holds
+/-- **Universal curve-test datum for a failure.** Let `n` be invertible on `S` with `n = 0` in
+`Λ`, and let `q ≥ 1`. If `BC(p, Λ, q')` holds
 universally for all `q' < q` but `BC(p, Λ, q)` does not hold universally, there is a base
 change `p' : X' ⟶ S'` of `p` with `S'` affine, integral and normal with algebraically closed
 function field, an algebraically closed extension `K` of that function field, and `d ∣ n` such
-that `R^q h_* (Λ/dΛ) ≠ 0` for the fibre `h : Y ⟶ X'` of `p'` over `Spec K`.
-
-A counterexample over a field `K₀` exists by
-`AlgebraicGeometry.Etale.nonempty_fieldFailure_of_not_universalBaseChangeProperty`. It survives
-the integral surjective base change to an algebraic closure `K` of `K₀`
-(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isIntegralHom_of_surjective`) and the
-replacement of `S'` by the normalisation of `S'` in `Spec K`
-(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_iff_of_isIntegralHom`). The base-change
-map of the resulting square is injective (`AlgebraicGeometry.Etale.mono_baseChangeHomologyMap`)
-and not an isomorphism, so its target is nonzero, and
-`AlgebraicGeometry.Etale.exists_not_isZero_higherDirectImage_constantModSheaf` reduces the
-coefficients to a constant sheaf `Λ/dΛ`. -/
+that `R^q h_* (Λ/dΛ) ≠ 0` for the fibre `h : Y ⟶ X'` of `p'` over `Spec K`. -/
 @[stacks 0F08]
 theorem Etale.exists_isPullback_not_isZero_higherDirectImage (n : ℕ)
     (hn : IsUnit (n : Γ(S, ⊤))) (hΛ : (n : Λ) = 0) (q : ℤ) (hq : 1 ≤ q)
@@ -294,17 +282,12 @@ theorem Etale.exists_isPullback_not_isZero_higherDirectImage (n : ℕ)
   exact ⟨S'', _, π ≫ F.a, _, _, hpb, inferInstance, inferInstance, hnorm, inferInstance, K,
     inferInstance, inferInstance, i, _, _, _, sq'', d, hd, hne⟩
 
-/-- Blueprint `lemma-reduction-curve-over-normal-base`: Universal curve-test datum for a failure.
-
-Let `p : X ⟶ S` be an affine smooth relative curve with `X` affine, and let `n` be invertible
-on `S` and annihilate `Λ`. If `BC(p, Λ, q')` holds universally for all `q' < q` but
+/-- **Universal curve-test datum for a failure.** Let `p : X ⟶ S` be an affine smooth relative
+curve with `X` affine, and let `n` be invertible on `S` and annihilate `Λ`. If `BC(p, Λ, q')`
+holds universally for all `q' < q` but
 `BC(p, Λ, q)` fails for some `q ≥ 1`, there is a curve-test datum `D` which is a base change of
 `p`, whose torsion order `D.d` divides `n`, and on whose geometric generic fibre the higher
-direct image `R^q h_* (Λ/D.d Λ)` of the constant sheaf does not vanish.
-
-This is `AlgebraicGeometry.Etale.exists_isPullback_not_isZero_higherDirectImage`: affine
-smooth morphisms of relative dimension one are stable under base change, and `d` is invertible
-on the new base since it divides `n`. -/
+direct image `R^q h_* (Λ/D.d Λ)` of the constant sheaf does not vanish. -/
 @[stacks 0F08]
 theorem Etale.exists_curveTestDatum [IsAffine X] [IsAffineHom p]
     [SmoothOfRelativeDimension 1 p] (n : ℕ) (hn : IsUnit (n : Γ(S, ⊤))) (hΛ : (n : Λ) = 0)

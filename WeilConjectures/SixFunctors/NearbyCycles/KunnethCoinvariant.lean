@@ -12,10 +12,9 @@ public import WeilConjectures.SixFunctors.NearbyCycles.KunnethAverage
 
 # Invariants commute with the Künneth map: the coinvariant form
 
-The generic-slicing step of Gabber's Künneth formula (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, identification (2) and projection formula (3))
-compares the pullback of the Künneth map `Π` to a slice with the Künneth map `Π'` of the pullback
-models, in the square of `NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange`
+The generic-slicing step of Gabber's Künneth formula (identification (2) and projection formula
+(3)) compares the pullback of the Künneth map `Π` to a slice with the Künneth map `Π'` of the
+pullback models, in the square of `NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange`
 ```
 Lρ'^* Π ≫ a = δ ≫ (u_M ⊗ u_N) ≫ Π'.
 ```
@@ -24,7 +23,7 @@ When `u_M` and `a` are the inclusions of the invariants of a pro-`p` group and `
 `NearbyCyclesModel.isTensorRetract_of_average` proves this when the group acts through a finite
 quotient. This file proves it from the following *coinvariant* property of the projector
 `e_M = r_M ≫ u_M` of the first summand, which holds for infinite pro-`p` groups by continuity
-of the action (SGA 4½, [Th. finitude], Lemme 3.4): on the cohomology sheaves of
+of the action ([SGA 4½, Th. finitude, Lemme 3.4][sga4half]): on the cohomology sheaves of
 `T₁ ⊗ T₂ = Lf₁'^* Ψ_{M'} A ⊗ Lf₂'^* Ψ_{N'} B`, every map invariant under the action on the first
 factor is fixed by `e_M ⊗ 𝟙`. Of the projector of the second summand `a`, only its invariance
 is used.
@@ -34,6 +33,10 @@ is used.
 - `CategoryTheory.isIso_of_tensor_coinvariant`: the abstract statement, in a monoidal preadditive
   category with a jointly conservative family of functors.
 - `NearbyCyclesModel.isIso_map_kunnethMap_of_coinvariant`: the statement for nearby cycles.
+
+## References
+
+* [P. Deligne, *SGA 4½*, Th. finitude, Lemme 3.4][sga4half]
 
 -/
 
@@ -105,13 +108,12 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 set_option maxHeartbeats 1600000 in
 -- the Künneth maps of the two products are large terms
-/-- **Invariants under a pro-`p` group commute with the Künneth map**, coinvariant form (blueprint
-`prose-E-10`, in the form used in the generic-slicing step of
-`proposition-external-kunneth-formula-nearby-cycles`). In the square of the Künneth maps and
-pullbacks (`NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange`) for morphisms of models
-`ρ_M : M' ⟶ M`, `ρ_N : N' ⟶ N`, `ρ_P : P' ⟶ P`, let families of automorphisms `σM i`, `σN i`,
-`σP i` of the pullback models act on nearby cycles, with the Künneth map `Π'` of the pullback
-models equivariant and the action on the second factor trivial. Suppose:
+/-- **Invariants under a pro-`p` group commute with the Künneth map**, coinvariant form. In the
+square of the Künneth maps and pullbacks (`NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange`)
+for morphisms of models `ρ_M : M' ⟶ M`, `ρ_N : N' ⟶ N`, `ρ_P : P' ⟶ P`, let families
+of automorphisms `σM i`, `σN i`, `σP i` of the pullback models act on nearby cycles, with the
+Künneth map `Π'` of the pullback models equivariant and the action on the second factor trivial.
+Suppose:
 * the exchange `α_{ρ_N}(B)` is invertible;
 * the exchange `α_{ρ_M}(A)` has a retraction `r_M` whose projector `r_M ≫ α_{ρ_M}`, tensored with
   the second factor, fixes on cohomology sheaves every map invariant under the action on the first

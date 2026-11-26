@@ -17,8 +17,20 @@ import WeilConjectures.RingTheory.IndSmoothFinitePresentationFactorization
 /-!
 # Filtered colimits of standard smooth algebras
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 16.3.5, Tag 07CI
-(blueprint: lem-weil-pbc-colimit-standard-smooth-algebras).
+A filtered colimit of smooth algebras is a filtered colimit of standard smooth algebras.
+
+## Implementation details
+
+Algebras and index categories live in universe `max u v`, so that the category of finitely
+presented `R`-algebras with maps to the colimit is small. Every map from a finitely presented
+algebra to the colimit factors through a smooth algebra, which is a retract of a standard smooth
+algebra; the factorization criterion for filtered colimits then applies.
+
+## References
+
+* [Stacks, Tag 07CI]
+* [Stacks, Tag 07CH]
+* [Stacks, Tag 07C3]
 -/
 
 @[expose] public section
@@ -30,27 +42,7 @@ open CategoryTheory
 namespace Algebra
 
 /-- A filtered colimit of smooth `R`-algebras is a filtered colimit of standard smooth
-`R`-algebras. `ObjectProperty.ind` supplies a small nonempty filtered index category,
-a diagram of commutative `R`-algebras and a colimit presentation of `Λ`.
-Algebras and index categories live in universe `max u v`, as in
-theorem-finite-etale-covers-proper-henselian--2, so that the index of step 4 (finitely
-presented algebras over `R` with maps to `Λ`) is small.
-
-Source: Stacks Project, Smoothing Ring Maps, Lemma 16.3.5, Tag 07CI
-(blueprint: lem-weil-pbc-colimit-standard-smooth-algebras).
-
-Proof:
-1. Let `E` be all standard smooth algebras in the given universe. Its members are
-   finitely presented; the factorization criterion handles small representatives internally.
-2. A map from a finitely presented algebra `A` to `Λ` factors through a smooth algebra `B`
-   by `exists_smooth_factorization_of_ind_smooth`, which handles the underlying-ring
-   colimit and finite-presentation factorization.
-3. Apply lem-weil-pbc-smooth-retract-standard-smooth (Tag 07CH) to obtain `B → C → B`
-   with composite the identity and `C` standard smooth. Associativity and the retraction
-   identity give the required factorization `A → B → C → B → Λ` through a member of `E`.
-4. Apply lem-weil-pbc-factorization-criterion-filtered-colimit (Tag 07C3) to `E` and these
-   factorizations, and package its filtered diagram and colimit witness as
-   `ObjectProperty.ind` of standard smoothness. -/
+`R`-algebras (both in the sense of `ObjectProperty.ind`). -/
 theorem ind_isStandardSmooth_of_ind_smooth
     (R : Type u) [CommRing R] (Λ : CommAlgCat.{max u v} R)
     (h : ObjectProperty.ind.{max u v} (fun B : CommAlgCat.{max u v} R ↦ Smooth R B) Λ) :

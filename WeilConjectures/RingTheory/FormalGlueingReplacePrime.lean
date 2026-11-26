@@ -12,8 +12,21 @@ import WeilConjectures.AlgebraicGeometry.FormalGlueingCanonicalMaps
 /-!
 # Replacing the prime component of a glueing datum
 
-Source: Stacks Project, More on Algebra, Lemma 0ALK, proof of part (2),
-and Remark 05EL (blueprint: lem-weil-pbc-formal-glueing-replace-prime).
+Given a glueing datum `X` and an `S`-linear map `γ : X.M' → Q` that is bijective on every
+chart, we construct a glueing datum with prime component `Q` and a morphism from `X` to it
+whose chart components are bijective.
+
+## Implementation details
+
+The new datum keeps the chart modules and overlap equivalences of `X`; the comparison on
+chart `i` is `X.alpha i` composed with the inverse of the localized map of `γ`. The square
+identity follows from naturality of the swap isomorphism. The construction allows the empty
+chart family and zero chart generators; no flatness or quotient hypothesis is required.
+
+## References
+
+* [Stacks, Tag 0ALK], proof of part (2)
+* [Stacks, Tag 05EL]
 -/
 
 @[expose] public section
@@ -47,25 +60,9 @@ private theorem swap_natural {R : Type u} [CommRing R]
       simp only [LinearMap.comp_apply, localMap, IsLocalizedModule.map_LocalizedModules,
         (swap_properties M a b).2.2.1, (swap_properties N a b).2.2.1]
 
-/-- Replace the prime component along a map that is invertible on every chart.
-Source: Stacks Project, More on Algebra, Lemma 0ALK, proof of part (2),
-and Remark 05EL (blueprint: lem-weil-pbc-formal-glueing-replace-prime).
-
-Proof: Keep all chart modules and overlap equivalences of X. Set the new prime
-module to Q. On chart i use X.alpha i composed with the inverse of the localized
-map gamma. The localized map is S-linear by localMap_smul, and its inverse is
-S-linear by applying its injectivity to the required scalar identity. Hence the
-new alpha has the required scalar compatibility. Naturality of swap follows
-by writing an element as a double fraction: both composites send x/(fi^a fj^b)
-to gamma(x)/(fj^b fi^a). Localization preserves compositions and inverses.
-Precompose the proposed new square with the double localization of gamma.
-Cancel the inverse localized maps; naturality of swap reduces both sides to
-the square for X. This precomposition is bijective, so the new square holds.
-The cocycle equation is unchanged. The prime component gamma and identity
-chart maps give mu: its prime compatibility cancels the localized inverse,
-and its overlap compatibility is the identity law. These chart maps are
-bijective. The construction works also for the empty chart family and for
-zero chart generators; no flatness or quotient hypothesis is required. -/
+/-- Replace the prime component along a map that is invertible on every chart: if
+`γ : X.M' → Q` is bijective on every chart, there is a glueing datum `Y` with prime component
+`Q` and a morphism `μ : X ⟶ Y` with prime component `γ` and bijective chart components. -/
 theorem exists_replace_prime {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] (φ : R →+* S) {t : ℕ} (f : Fin t → R)
     (X : Data.{u, v, max u v w} φ f) (Q : ModuleCat.{max u v w} S)

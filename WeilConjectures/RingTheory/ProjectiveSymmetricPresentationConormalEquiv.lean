@@ -16,8 +16,20 @@ import WeilConjectures.AlgebraicGeometry.CotangentComplexSymmetricAlgebra
 
 /-! # The conormal module of a split symmetric-algebra presentation
 
-Source: Stacks Project, More on Algebra, Tag 07EV, restricted to a projective quotient;
-Smoothing Ring Maps, proof of Tag 07CE.
+For a projective module `M` and a surjection `q : A^m → M`, the conormal module of the induced
+presentation `A[y₁, …, yₘ] → Sym_A(M)` is `Sym_A(M) ⊗_A ker q`.
+
+## Implementation details
+
+The general symmetric-algebra conormal theorem (Stacks 07EV) gives a surjective linear map
+`lam`. Projectivity splits `q`, so the base-changed inclusion of `ker q` is injective; in the
+polynomial Kähler basis `dy_j` the composite `δ ∘ lam` is that inclusion, so `lam` is injective.
+This also works for the zero ring and for an empty family of generators.
+
+## References
+
+* [Stacks, Tag 07EV]
+* [Stacks, Tag 07CE]
 -/
 
 @[expose] public section
@@ -28,20 +40,9 @@ open scoped TensorProduct
 
 namespace Algebra
 
-/-- Source: Stacks Project, More on Algebra, proof of Tag 07EV, and Smoothing Ring Maps,
-proof of Tag 07CE, lines 393–414.
-(blueprint: lem-weil-pbc-projective-symmetric-presentation-conormal-equiv)
-
-Proof. The general symmetric-algebra conormal theorem (Stacks 07EV, restricted to
-its true surjectivity assertion) constructs a surjective linear map `lam` with the
-specified formula. Projectivity splits `q`, giving a retraction of `ker q ↪ A^m`.
-Tensoring that retraction with `C = Sym_A(M)` proves injectivity of the base-changed
-inclusion. The differential formula in the general theorem, expressed in the
-polynomial Kähler basis `dy_j`, identifies the composite `δ ∘ lam` with that inclusion:
-its coordinates on `c ⊗ k` are `c k_j`. Both coordinate identifications are the
-base-changed basis equivalences. Thus `lam` is injective, and its existing surjectivity
-upgrades it to a linear equivalence. The generator formula is unchanged. This argument
-also works for the zero ring and for an empty family of generators. -/
+/-- For a projective module `M` and a surjection `q : A^m → M`, the conormal module of the
+presentation `α : A[y₁, …, yₘ] → Sym_A(M)` is `Sym_A(M) ⊗_A ker q`, via the map sending
+`c ⊗ k` to `c` times the class of `∑ k_j y_j`. -/
 theorem projective_symmetric_presentation_conormal_equiv
     (A M : Type u) [CommRing A] [AddCommGroup M] [Module A M]
     [Module.Projective A M] (m : ℕ)

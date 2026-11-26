@@ -18,8 +18,12 @@ import all WeilConjectures.SmoothPurity.Scalar.ScalarExtensionComposition
 
 /-! # The Roos augmentation of a coherent scalar quotient presentation
 
-Source: Stacks 06YY and 0941. The reduction adjunction unit is calculated
-on both mapping-cocone coordinates for a specified coefficient calculus.
+The reduction adjunction unit is calculated on both mapping-cocone coordinates for a specified
+coefficient calculus.
+
+## References
+
+* Stacks Project, Tags 06YY and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -181,28 +185,7 @@ private theorem coherent_roos_augmentation (X : Scheme.{u})
     exact congrArg DerivedCategory.Q.map (Category.comp_id b).symm
 
 -- Compare both Roos coordinates through the large ordinary tensor interfaces.
-/-- A coherent scalar quotient augmentation has the prescribed entire Roos map.
-Source: Stacks 06YY and 0941; the tensor-unit augmentation in step 2 of
-lem-pur-scalar-completion-quotient-presentation.
-(blueprint: lem-pur-scalar-quotient-roos-augmentation).
-
-Proof: unfold coherence and denote its strict constant-tower map by b. Transpose
-its whole-system equation under the constant-tower/limit adjunction. The ordinary
-transpose of b followed by the right-derived limit unit is therefore the reduction
-adjunct of eS, after the exact-restriction comparison. The normalization of rho
-identifies that unit followed by the Roos bridge with the localization of the
-limit-tuple map whose shifted coordinate is zero. This holds on K-injective
-towers by rho.computes and extends to every tower by a K-injective resolution
-and naturality. After composing with q, the nth tuple coordinate on the ordinary
-scalar generator 1 tensor x is determined by coherence, hκS and hq with s=1.
-It is exactly the scalar quotient tensor unit. Completed-coefficient linearity
-extends this to every s tensor x; sheafification and tensor generation identify
-all coordinate maps. The shifted coordinate is zero on both sides. The two
-mapping-cocone coordinates thus identify the strict chain map with
-integralScalarCompletionChain. Localization gives the displayed equality.
-This proof uses no chosen scalar realization or scalar-completion comparison,
-no derived evaluation faithfulness and no completeness assumption. The same
-coordinate proof includes zero complexes, empty schemes and the first quotient. -/
+/-- A coherent scalar quotient augmentation has the prescribed entire Roos map. -/
 theorem scalarQuotientRoosAugmentation (Y : Scheme.{u})
     (SL : CoefficientDerivedSystemCalculus.{u, u} l L Y)
     (ρ : IntegralComparisonRoosModel.{u, u} l L Y)

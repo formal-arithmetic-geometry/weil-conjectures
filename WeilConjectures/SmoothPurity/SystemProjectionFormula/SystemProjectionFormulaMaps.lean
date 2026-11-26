@@ -10,13 +10,18 @@ public import WeilConjectures.Compactification.Triangle
 
 /-! # Geometric system projection and composition maps
 
-Source: main-20261015, fix-prop-projection-formula.proof.md, the composition and
-same-projection-map sentences; Stacks 0F7J and 0B56
-(blueprint: def-pur-system-projection-formula-maps).
+## Implementation details
 
 The compact-support compositor is the existing graph-refinement word, not a lift
 chosen from its finite evaluations. The intrinsic proper/open mate fixes all comparison factors
-before evaluation. Level n means exponent n+1.
+before evaluation; no independently chosen finite lift occurs. `compositorAlong` keeps the
+triangle as a parameter, which permits the word calculation without unfolding the canonical
+compactification construction. Level `n` means exponent `n + 1`.
+
+## References
+
+* Stacks Project, Tags 0F7J, 0ATU, 0B56 and 0E8I.
+* Zheng, Construction 4.1 and Lemma 4.10.
 -/
 
 @[expose] public noncomputable section
@@ -35,23 +40,17 @@ namespace WeilConjectures.SystemProjectionFormula
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Invert a comparison exactly on its isomorphism domain, and extend by zero elsewhere.
-Source: Stacks 0F7J, refinement comparison on the normalized finite-Tor domain
-(blueprint: def-pur-system-projection-formula-maps). -/
+/-- Invert a comparison exactly on its isomorphism domain, and extend by zero elsewhere. -/
 def inverseOnDomain {C : Type v} [Category.{w} C] [HasZeroMorphisms C]
     {K M : C} (b : K ⟶ M) : M ⟶ K :=
   open Classical in
   if h : IsIso b then @inv _ _ _ _ b h else 0
 
-/-- Compact support in the specified simultaneous geometric section presentation.
-Source: Zheng 4.1, 4.10; Stacks 0F7J
-(blueprint: def-pur-system-projection-formula-maps). -/
+/-- Compact support in the specified simultaneous geometric section presentation. -/
 abbrev support (o : Operations l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) := Operations.shriek l E o c.i ⋙ Operations.push l E o c.g
 
-/-- Reverse refinement: the intrinsic proper/open mate and direct-image compositor.
-Source: Stacks 0F7J; the node's specified geometric compact-support comparison
-(blueprint: def-pur-system-projection-formula-maps). -/
+/-- Reverse refinement: the intrinsic proper/open mate and direct-image compositor. -/
 def refinement (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     (q : ProperOpenCoherence l E o c a b)
@@ -72,8 +71,7 @@ def refinement (o : Operations l E) (c : Compositors l E o)
         eqToHom (congrArg (Operations.push l E o) r.hom_g))
 
 /-- Transport through the canonical graph common refinement, taking the actual inverse
-on the comparison's isomorphism domain. Source: Stacks 0F7J and 0ATU
-(blueprint: def-pur-system-projection-formula-maps). -/
+on the comparison's isomorphism domain. -/
 def change (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     (q : ProperOpenCoherence l E o c a b)
@@ -84,9 +82,7 @@ def change (o : Operations l E) (c : Compositors l E o)
     inverseOnDomain
       ((refinement l E o c a b q (Compactification.infSnd d e)).app M)
 
-/-- The actual proper/open word in a compatible triangle, including its equality casts.
-Source: Stacks 0F7J; compatible-triangle compositor normalization
-(blueprint: def-pur-system-projection-formula-maps). -/
+/-- The actual proper/open word in a compatible triangle, including its equality casts. -/
 def triangleWord (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     (q : ProperOpenCoherence l E o c a b)
@@ -109,11 +105,7 @@ def triangleWord (o : Operations l E) (c : Compositors l E o)
       ((c.pushComp l E T.p T.cg.g).hom ≫
         eqToHom (congrArg (Operations.push l E o) T.p_g))
 
-/-- The geometric compositor word along an explicit compatible triangle.
-Source: Stacks 0F7J, four compact-support identifications and graph refinement.
-(blueprint: def-pur-system-projection-formula-maps).
-Keeping the triangle as a parameter permits the word calculation without unfolding
-the canonical compactification construction. -/
+/-- The geometric compositor word along an explicit compatible triangle. -/
 def compositorAlong (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     (q : ProperOpenCoherence l E o c a b)
@@ -127,9 +119,7 @@ def compositorAlong (o : Operations l E) (c : Compositors l E o)
     (triangleWord l E o c a b q T).app M ≫ change l E o c a b q T.cfg cfg M
 
 /-- The proper counit projection followed by the open tensor comparison, in the same
-simultaneous geometric section model. No independently chosen finite lift occurs.
-Source: def-exchange-projection; Stacks 0B56, 0E8I
-(blueprint: def-pur-system-projection-formula-maps). -/
+simultaneous geometric section model. -/
 def projection (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (d : Compactification f)

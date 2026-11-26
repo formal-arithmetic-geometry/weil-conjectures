@@ -233,8 +233,20 @@ import WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorCancella
 
 /-! # Arbitrary K-flatness for the actual finite tower pullback
 
-Source: Stacks Project, Cohomology on Sites, Tags 0DEN and 0DEP.
-(blueprint: lem-pur-completed-tower-finite-pullback-kflat)
+The finite pullback `integralOperationsLevelPullback` in the strict tower preserves
+K-flat complexes, without flatness, boundedness, constructibility or invertibility
+hypotheses.
+
+## Implementation details
+
+The pullback is compared, via uniqueness of left adjoints, with the algebraic inverse image
+on the pro-étale topoi followed by scalar extension along the constant-ring comparison.
+Both steps preserve K-flatness, the first by the stalk criterion on a conservative family of
+points.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 0DEN and 0DEP.
 -/
 
 @[expose] public noncomputable section
@@ -252,18 +264,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.integralOperationsSiteSmall in
-/-- The actual finite pullback in the strict tower preserves every K-flat complex.
-Source: Stacks 0DEN and 0DEP
-(blueprint: lem-pur-completed-tower-finite-pullback-kflat).
-Proof: use the specified algebraic inverse image on the pro-etale topoi. The
-conservative family of target points and the stalk criterion preserve K-flatness.
-Scalar extension along the constant-ring comparison also preserves K-flatness.
-The right adjoint of this composite has exactly the constant-section coefficient
-map used by coefficientProEtaleModuleDirectImage. The adjunction Hom equivalence
-identifies these maps. Uniqueness of left adjoints therefore compares the
-composite with integralOperationsLevelPullback. Apply that natural isomorphism
-degreewise and transport acyclicity of every total tensor test. No flat-term,
-boundedness, constructibility or invertibility hypothesis is used. -/
+/-- The actual finite pullback in the strict tower preserves every K-flat complex. -/
 theorem completedTowerFinitePullbackKFlat {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P : CochainComplex (normalizedDVRModules l E Y n) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}

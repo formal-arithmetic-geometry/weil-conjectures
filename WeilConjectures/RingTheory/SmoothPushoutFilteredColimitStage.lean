@@ -17,8 +17,15 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Eventual smoothness of pushouts of a finitely presented ring map
 
-Source: Stacks Project, Tag 0C0B, applied to the fixed map A → B.
-(blueprint: lem-sbc-smooth-pushout-filtered-colimit-stage)
+We show that if the base change of a finitely presented ring map `A → B` to the colimit of a
+filtered diagram of `A`-algebras is smooth, then its base change to some stage of the diagram is
+already smooth.
+
+## References
+
+* [Stacks, Tag 0C0B]
+* [Stacks, Tag 0CAQ]
+* [Stacks, Tag 01ZM]
 -/
 
 @[expose] public section
@@ -31,23 +38,9 @@ open AlgebraicGeometry
 namespace CommRingCat
 
 set_option backward.defeqAttrib.useBackward true in
-/-- Smoothness after a filtered colimit is already true at one pushout stage.
-
-Source: Stacks Project, Tag 0C0B; alternatively Tags 0CAQ and 01ZM(2)-(3).
-Proof: the given squares identify Cᵢ with B ⊗[A] Fᵢ and L with B ⊗[A] colim F.
-Identify the chosen colimit with the categorical colimit. Tag 0CAQ gives
-an index i and a smooth finitely presented algebra Eᵢ whose colimit base change
-is L. The algebra isomorphism and colimit comparison identify its base change
-with L over the chosen colimit. The original Cᵢ and Eᵢ are both finitely presented
-over Fᵢ. Apply 01ZM(2)
-to their affine spectra to descend the comparison isomorphism and its inverse
-from the limit, and 01ZM(3) to descend the two inverse identities. At a common
-later index their base changes are isomorphic. Smoothness is invariant under
-isomorphisms and stable under base change, so the original pushout is smooth.
-All spectra and all stage bases in this argument are affine, hence qcqs.
-Cofiltered spectra correspond to the filtered ring diagram, and the nonempty
-index needed above exists by filteredness. Zero rings are allowed.
-(blueprint: lem-sbc-smooth-pushout-filtered-colimit-stage) -/
+/-- Let `A → B` be finitely presented and let `F` be a filtered diagram of `A`-algebras with
+colimit `colim F`. If the pushout `B ⊗[A] colim F` is smooth over `colim F`, then already some
+pushout stage `B ⊗[A] F j` is smooth over `F j`. -/
 theorem exists_smooth_pushout_stage {I : Type u} [SmallCategory I] [IsFiltered I]
     (F : I ⥤ CommRingCat.{u}) (c : Cocone F) (hc : IsColimit c)
     {A B : CommRingCat.{u}} (f : A ⟶ B) (hf : f.hom.FinitePresentation)

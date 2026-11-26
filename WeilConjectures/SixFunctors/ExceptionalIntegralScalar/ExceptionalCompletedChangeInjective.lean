@@ -8,7 +8,16 @@ module
 public import WeilConjectures.SmoothPurity.ConstructibleExceptionalCoefficients.ConstructibleExceptionalAdjunctionCoefficientsData
 import all WeilConjectures.SmoothPurity.Supporting.ConnectedAdicIntegralBasis
 
-/-! # Actual completed coefficient changes determine their field embeddings -/
+/-!
+# Actual completed coefficient changes determine their field embeddings
+
+A completed coefficient change, given at all schemes, determines the underlying field embedding.
+
+## References
+
+* [Bhatt--Scholze, Section 6.8]
+* [Serre, Local Fields, Chapter II, Section 2]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -18,15 +27,7 @@ open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme Opposite
 namespace WeilConjectures.ExceptionalIntegralScalar
 open ConstructibleExceptionalCoefficients
 
-/-- A completed coefficient change at all schemes determines its coefficient embedding.
-Source: Bhatt--Scholze, Section 6.8; Serre, Local Fields, Chapter II, Section 2.
-
-Proof: evaluate the maps on the connected scheme Spec E. Constant completed sections
-identify with the valuation rings. The maps on those constants are exactly the
-restrictions of the two field embeddings. The target constant-section identification
-is injective, so their restrictions to the valuation ring agree. Since E is the fraction
-field of that valuation ring, the two field homomorphisms agree.
-(blueprint: lem-sf-completed-change-injective). -/
+/-- A completed coefficient change at all schemes determines its coefficient embedding. -/
 theorem completedChange_injective (l : ℕ) [Fact l.Prime]
     (E L : FieldStage.{u} l) :
     Function.Injective (PurCompactSupport.completedChange l E.carrier L.carrier) := by

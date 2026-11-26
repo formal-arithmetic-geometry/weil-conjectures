@@ -8,19 +8,28 @@ module
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Localization.Away.Basic
+
+/-!
+# The eliminated variable in the localized linear-relation algebra
+
+For `B = A[x₁, …, x_r]/(∑ f_j x_j - 1)` and an equivalence of `B_{f_i}` with a polynomial algebra
+over `A_{f_i}` fixing the free variables, the eliminated variable `x_i` corresponds to
+`f_i⁻¹ (1 - ∑_{j ≠ i} f_j X_j)`.
+
+## Implementation details
+
+Apply the inverse to the relation `∑ f_j x_j = 1` and isolate the `i` term.
+
+## References
+
+* [Stacks, Tag 07EU]
+-/
+
 @[expose] public section
 universe u
 namespace MvPolynomial
-/-- Formula for the eliminated variable in the localization equivalence.
-
-The source is Stacks Project, Tag 07EU, `lemma-final-solve`, whose omitted
-calculation gives this identity. Apply the inverse to the relation
-`∑ j, fⱼ xⱼ = 1` in the quotient. The assumed inverse formulas replace each
-free `xⱼ` by `X j`; isolating the `i` term gives
-`fᵢ xᵢ = 1 - ∑ j ≠ i, fⱼ X j`. Multiplication by the inverse of `fᵢ` in
-`Af` yields exactly the displayed expression. Algebra equivalence operations
-preserve these coefficients and sums, so the computation holds in `Bf`.
-(blueprint: theorem-finite-etale-covers-proper-henselian--2) -/
+/-- Formula for the eliminated variable in the localization equivalence:
+the inverse sends `x_i` to `f_i⁻¹ (1 - ∑_{j ≠ i} f_j X_j)`. -/
 theorem linearEquationLocalizationPolynomialFormula (A : Type u) [CommRing A]
     (r : ℕ) (f : Fin r → A) (i : Fin r) :
     let I : Ideal (MvPolynomial (Fin r) A) :=

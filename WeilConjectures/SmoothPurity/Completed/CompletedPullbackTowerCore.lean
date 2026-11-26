@@ -71,16 +71,26 @@ import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitDerivedAdjuncti
 
 /-! # Coherent reduction and strict pullback tower core
 
-Source: `literature/stacks-project/sites-cohomology.tex`, Lemma 21.18.4
-(Tag 07A4, label `lemma-pullback-tensor-product`), together with the integral,
-rational, and algebraically closed coefficient conventions
-(blueprint: def-pur-completed-pullback-tower-core).
+The ringed sequence site of coefficient systems, its inverse and direct images, coherent
+reduction, and the strict finite-pullback tower comparison used to build the completed
+pullback/tensor comparison.
 
 ## Main definitions
 
 * `pullbackTensorOrdinaryReduction` and its adjunction fix coherent reduction.
 * `pullbackTensorRoosModel` fixes the total-limit/Roos normalization.
 * `pullbackTensorPullbackTower` fixes the strict finite-pullback tower comparison.
+
+## Implementation details
+
+Most constructions are selected by `pullbackTensorUniqueChoice` from a unique-existence
+statement fixing them on generators, adjunction units or cochain representatives.
+`pullbackTensorSequenceRingMap` is made irreducible at the end of the file, so that
+importers see `pullbackTensorSequenceRing` as opaque.
+
+## References
+
+* Stacks Project, Tag 07A4 (and Tags 03D1, 03D2, 06YY, 08TC, 0941, 099N).
 -/
 
 @[expose] public noncomputable section
@@ -111,8 +121,7 @@ attribute [local irreducible] Scheme.residueField
   HasDerivedCategory.standard CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory
 
-/-- Select the uniquely normalized object without repeating its predicate.
-Source: classical unique choice (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- Select the uniquely normalized object without repeating its predicate. -/
 def pullbackTensorUniqueChoice {A : Sort*} {P : A → Prop} (h : ∃! x, P x) : A :=
   h.exists.choose
 
@@ -291,27 +300,21 @@ open CategoryTheory.Limits CategoryTheory.Functor Opposite
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The sequence site's actual object and morphism universes are u+1 and u.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The sequence site's actual object and morphism universes are u+1 and u. -/
 instance (priority := 3000) pullbackTensorSequenceSmall (W : Scheme.{u}) :
     EssentiallySmall.{u + 1} (ℕ × W.ProEt) :=
   essentiallySmallSelf.{0, u, u + 1} _
 
-/-- The recorded coefficient reduction/limit adjunction and tensor models.
-Source: Stacks 0941 and 07A6 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The recorded coefficient reduction/limit adjunction and tensor models. -/
 def pullbackTensorCalculus (W : Scheme.{u}) :=
   (coefficientDerivedSystemEvaluationCalculus l E W).choose
 
-/-- Base change on the actual ringed sequence site.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- Base change on the actual ringed sequence site. -/
 def pullbackTensorSequenceBase {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ℕ × Y.ProEt ⥤ ℕ × X.ProEt :=
   (𝟭 ℕ).prod (proEtaleBaseChange f)
 
-/-- Base change preserves the vertical covering condition.
-Source: Stacks 0941, 098K (blueprint: def-pur-completed-pullback-tower-core).
-Proof: a vertical slice of a pulled-back sieve is the base change of its
-vertical slice; pro-etale covers are stable under scheme base change. -/
+/-- Base change preserves the vertical covering condition. -/
 @[instance] theorem pullbackTensorSequenceBase_continuous {X Y : Scheme.{u}}
     (f : X ⟶ Y) :
     (pullbackTensorSequenceBase f).IsContinuous
@@ -319,12 +322,7 @@ vertical slice; pro-etale covers are stable under scheme base change. -/
       (coefficientSequenceTopology (ProEt.topology X)) := by
   exact integralComparisonSequenceBaseChange_continuous f
 
-/-- The sequence-ring map is fixed at every level by the constant-section map.
-Source: Stacks 0941 and 0H7J (blueprint: def-pur-completed-pullback-tower-core).
-Proof: take the existing constant-section morphism at every positive quotient.
-Its naturality in quotient ring maps proves naturality also in the sequence
-direction. These components define the ring-sheaf morphism; componentwise
-extensionality proves uniqueness. -/
+/-- The sequence-ring map is fixed at every level by the constant-section map. -/
 theorem pullbackTensorSequenceRing_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! ρ : coefficientSequenceCommRingSheaf l E Y ⟶
       ((pullbackTensorSequenceBase f).sheafPushforwardContinuous CommRingCat.{u + 1}
@@ -345,10 +343,7 @@ theorem pullbackTensorSequenceRing_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y)
     funext V
     exact eq_of_heq (hρ V.unop.1 V.unop.2)
 
-/-- The explicit levelwise constant-section components of the sequence ring map.
-It is exported as irreducible at the end of this file, so that importers see
-`pullbackTensorSequenceRing` as opaque as the former unique choice.
-Source: Stacks 0941 and 0H7J (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The explicit levelwise constant-section components of the sequence ring map. -/
 def pullbackTensorSequenceRingMap {X Y : Scheme.{u}} (f : X ⟶ Y) :
     coefficientSequenceCommRingSheaf l E Y ⟶
       ((pullbackTensorSequenceBase f).sheafPushforwardContinuous CommRingCat.{u + 1}
@@ -371,8 +366,7 @@ def pullbackTensorSequenceRingMap {X Y : Scheme.{u}} (f : X ⟶ Y) :
         exact (congrArg ((coefficientSequenceCommRingPresheaf l E Y).map g ≫ ·) hB).symm.trans
           ((ρ.hom.naturality g).trans (congrArg (· ≫ _) hA)) }
 
-/-- The actual levelwise constant-section map on sequence rings.
-Source: Stacks 0941 and 0H7J (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The actual levelwise constant-section map on sequence rings. -/
 def pullbackTensorSequenceRing {X Y : Scheme.{u}} (f : X ⟶ Y) :
     coefficientSequenceCommRingSheaf l E Y ⟶
       ((pullbackTensorSequenceBase f).sheafPushforwardContinuous CommRingCat.{u + 1}
@@ -381,8 +375,7 @@ def pullbackTensorSequenceRing {X Y : Scheme.{u}} (f : X ⟶ Y) :
           (coefficientSequenceCommRingSheaf l E X) :=
   pullbackTensorSequenceRingMap l E f
 
-/-- Module direct image on the ringed sequence site, with the actual coefficient action.
-Source: Stacks 03D1 and 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- Module direct image on the ringed sequence site, with the actual coefficient action. -/
 def pullbackTensorSequenceDirect {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   SheafOfModules.pushforward.{u + 1} (F := pullbackTensorSequenceBase f)
     (J := coefficientSequenceTopology (ProEt.topology Y))
@@ -394,34 +387,22 @@ def pullbackTensorSequenceDirect {X Y : Scheme.{u}} (f : X ⟶ Y) :=
     ⟨Functor.whiskerRight (pullbackTensorSequenceRing l E f).hom
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
 
-/-- Module Kan extension followed by sheafification is left adjoint to this direct image.
-Source: Stacks 03D2 and 0941 (blueprint: def-pur-completed-pullback-tower-core).
-Proof: pass to a small model in coefficient universe u + 1. The free module
-presheaf presentation constructs inverse image with extension of scalars;
-module sheafification gives its adjunction. Transport back to the stated
-sequence sites. The right adjoint and its coefficient map are the displayed ones. -/
+/-- Module Kan extension followed by sheafification is left adjoint to this direct image. -/
 @[instance] theorem pullbackTensorSequenceDirect_rightAdjoint {X Y : Scheme.{u}}
     (f : X ⟶ Y) : (pullbackTensorSequenceDirect l E f).IsRightAdjoint := by
   change (integralComparisonSequenceDirectImage l E f).IsRightAdjoint
   exact integralComparisonSequenceDirectImage_isRightAdjoint l E f
 
-/-- Canonical module inverse image on coefficient systems, retaining its adjunction.
-Source: Stacks 03D2 and 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- Canonical module inverse image on coefficient systems, retaining its adjunction. -/
 def pullbackTensorSequenceInverse {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (pullbackTensorSequenceDirect l E f).leftAdjoint
 
-/-- The defining sequence-module adjunction, including its unit.
-Source: Stacks 03D2 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The defining sequence-module adjunction, including its unit. -/
 def pullbackTensorSequenceAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     pullbackTensorSequenceInverse l E f ⊣ pullbackTensorSequenceDirect l E f :=
   Adjunction.ofIsRightAdjoint _
 
-/-- Sequence inverse image is additive and exact, without a boundedness restriction.
-Source: Stacks 03D2, 0941 (blueprint: def-pur-completed-pullback-tower-core).
-Proof: on every vertical slice the ring map is the constant-ring comparison,
-so inverse image is the exact ordinary constant-coefficient inverse image.
-Kernels and cokernels of sequence modules are levelwise, giving exactness.
-The additive adjunction criterion gives additivity. -/
+/-- Sequence inverse image is additive and exact, without a boundedness restriction. -/
 theorem pullbackTensorSequenceInverse_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (pullbackTensorSequenceInverse l E f).Additive ∧
       PreservesFiniteLimits (pullbackTensorSequenceInverse l E f) ∧
@@ -432,43 +413,32 @@ theorem pullbackTensorSequenceInverse_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
   rw [heq]
   exact integralComparisonSequencePullback_exact l E f
 
-/-- The additive structure of sequence inverse image.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The additive structure of sequence inverse image. -/
 instance pullbackTensorSequenceInverse_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (pullbackTensorSequenceInverse l E f).Additive :=
   (pullbackTensorSequenceInverse_exact l E f).1
 
-/-- Finite-limit preservation of sequence inverse image.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- Finite-limit preservation of sequence inverse image. -/
 instance pullbackTensorSequenceInverse_limits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (pullbackTensorSequenceInverse l E f) :=
   (pullbackTensorSequenceInverse_exact l E f).2.1
 
-/-- Finite-colimit preservation of sequence inverse image.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- Finite-colimit preservation of sequence inverse image. -/
 instance pullbackTensorSequenceInverse_colimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteColimits (pullbackTensorSequenceInverse l E f) :=
   (pullbackTensorSequenceInverse_exact l E f).2.2
 
-/-- The unbounded derived inverse image on the coherent sequence category itself.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The unbounded derived inverse image on the coherent sequence category itself. -/
 def pullbackTensorSequenceDerived {X Y : Scheme.{u}} (f : X ⟶ Y) :
     coefficientSequenceDerived l E Y ⥤ coefficientSequenceDerived l E X :=
   (pullbackTensorSequenceInverse l E f).mapDerivedCategory
 
-/-- The ordinary inverse limit of a coefficient system with its completed scalar action.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The ordinary inverse limit of a coefficient system with its completed scalar action. -/
 def pullbackTensorOrdinaryLimit (W : Scheme.{u}) :
     coefficientSequenceModules l E W ⥤ integralTowerModules l E W :=
   coefficientSequenceRestriction l E W ⋙ lim
 
-/-- Ordinary coherent reduction is left adjoint to the specified ordinary limit.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core).
-Proof: send a completed module P to the system of its actual quotients
-B_n tensor P. The quotient units form a map P to the limit after scalar
-restriction. A system map from these quotients is equivalent, by the ordinary
-scalar-extension adjunctions and their compatibility, to a map P to that limit.
-This is the required natural Hom bijection. -/
+/-- Ordinary coherent reduction is left adjoint to the specified ordinary limit. -/
 @[instance] theorem pullbackTensorOrdinaryLimit_rightAdjoint (W : Scheme.{u}) :
     (pullbackTensorOrdinaryLimit l E W).IsRightAdjoint := by
   have : IsGrothendieckAbelian.{u + 1} (coefficientSequenceModules l E W) :=
@@ -496,21 +466,16 @@ This is the required natural Hom bijection. -/
   exact isRightAdjoint_of_preservesLimits_of_isCoseparating
     (isCoseparator_coseparator (coefficientSequenceModules l E W)) _
 
-/-- Ordinary coherent reduction, fixed by its adjunction to the ordinary limit.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- Ordinary coherent reduction, fixed by its adjunction to the ordinary limit. -/
 def pullbackTensorOrdinaryReduction (W : Scheme.{u}) :=
   (pullbackTensorOrdinaryLimit l E W).leftAdjoint
 
-/-- The ordinary reduction/limit adjunction and its canonical quotient units.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The ordinary reduction/limit adjunction and its canonical quotient units. -/
 def pullbackTensorOrdinaryAdjunction (W : Scheme.{u}) :
     pullbackTensorOrdinaryReduction l E W ⊣ pullbackTensorOrdinaryLimit l E W :=
   Adjunction.ofIsRightAdjoint _
 
-/-- Additivity of ordinary coherent reduction and ordinary limit.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core).
-Proof: restriction, limits and the scalar quotient functors are additive.
-Alternatively use the additive-adjunction criterion for the displayed adjunction. -/
+/-- Additivity of ordinary coherent reduction and ordinary limit. -/
 theorem pullbackTensorOrdinary_additive (W : Scheme.{u}) :
     (pullbackTensorOrdinaryReduction l E W).Additive ∧
       (pullbackTensorOrdinaryLimit l E W).Additive := by
@@ -520,53 +485,44 @@ theorem pullbackTensorOrdinary_additive (W : Scheme.{u}) :
     infer_instance
   exact ⟨(pullbackTensorOrdinaryAdjunction l E W).left_adjoint_additive, inferInstance⟩
 
-/-- The additive structure on ordinary coherent reduction.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The additive structure on ordinary coherent reduction. -/
 instance pullbackTensorOrdinaryReduction_additive (W : Scheme.{u}) :
     (pullbackTensorOrdinaryReduction l E W).Additive :=
   (pullbackTensorOrdinary_additive l E W).1
 
-/-- The additive structure on the ordinary limit with completed coefficients.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The additive structure on the ordinary limit with completed coefficients. -/
 instance pullbackTensorOrdinaryLimit_additive (W : Scheme.{u}) :
     (pullbackTensorOrdinaryLimit l E W).Additive :=
   (pullbackTensorOrdinary_additive l E W).2
 
-/-- The ordinary limit with its completed-module source recorded explicitly.
-Source: Stacks 08TC (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The ordinary limit with its completed-module source recorded explicitly. -/
 def pullbackTensorConstantLimit (W : Scheme.{u}) :
     (ℕᵒᵖ ⥤ integralTowerModules l E W) ⥤ integralTowerModules l E W := lim
 
-/-- The additive structure of the explicitly typed constant-tower limit.
-Source: Stacks 08TC (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The additive structure of the explicitly typed constant-tower limit. -/
 instance pullbackTensorConstantLimit_additive (W : Scheme.{u}) :
     (pullbackTensorConstantLimit l E W).Additive :=
   coefficientConstantTowerLimitAdditive l E W
 
-/-- The standard derived localization instance for the completed-module tower category.
-Source: Stacks 05RU (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The standard derived localization instance for the completed-module tower category. -/
 instance pullbackTensorTowerHasDerived (W : Scheme.{u}) :
     HasDerivedCategory (ℕᵒᵖ ⥤ integralTowerModules l E W) := HasDerivedCategory.standard _
 
-/-- The additive finite inverse-image functor with both size parameters fixed.
-Source: Stacks 03D2 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The additive finite inverse-image functor with both size parameters fixed. -/
 instance pullbackTensorLevelAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (integralOperationsLevelPullback l E f n).Additive :=
   integralOperationsLevelPullback_additive l E f n
 
-/-- K-injective resolutions in the explicitly sized tower category.
-Source: Stacks 079P and 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- K-injective resolutions in the explicitly sized tower category. -/
 instance pullbackTensorTowerKInjectives (W : Scheme.{u}) :
     Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ integralTowerModules l E W) :=
   coefficientConstantTowersKInjectives l E W
 
-/-- The standard localization functor for completed-coefficient towers.
-Source: Stacks 05RU (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The standard localization functor for completed-coefficient towers. -/
 def pullbackTensorTowerQ (W : Scheme.{u}) :=
   @DerivedCategory.Q (ℕᵒᵖ ⥤ integralTowerModules l E W) _ _ (HasDerivedCategory.standard _)
 
-/-- The canonical comparison from ordinary limit to the already specified total limit.
-Source: Stacks 0941 and 08TC (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The canonical comparison from ordinary limit to the already specified total limit. -/
 def pullbackTensorLimitUnit (W : Scheme.{u})
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) :
     DerivedCategory.Q.obj
@@ -587,8 +543,7 @@ private theorem pullbackSequenceRing_map_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     pullbackTensorSequenceRing l E f = integralComparisonSequenceRingMap l E f := by
   rfl
 
-/-- The ordinary scalar-extension adjunction of the actual finite reduction.
-Source: Stacks 06YY (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The ordinary scalar-extension adjunction of the actual finite reduction. -/
 def pullbackTensorFiniteAdjunction (W : Scheme.{u}) (n : ℕ) :
     unrestrictedIntegralReductionFunctor l E W n ⊣ scalarReductionRestriction l E W n :=
   (scalarReductionExtension_adjunction l E W n).choose
@@ -626,13 +581,7 @@ private theorem pullbackTensorReductionEvaluation_normalization (W : Scheme.{u})
           ((pullbackTensorOrdinaryReduction l E W).obj M))) ha)
 
 /-- Evaluation of ordinary coherent reduction is the actual quotient extension,
-with its adjunction unit rather than a chosen component map.
-Source: Stacks 0941 and 06YY (blueprint: def-pur-completed-pullback-tower-core).
-Proof: take the adjoint of the ordinary reduction/limit unit followed by its
-nth limit projection. The scalar-extension adjunction identifies this map with
-B_n tensor P to the nth coherent quotient. The section formula sends 1 tensor x
-to 1 tensor x, giving an isomorphism. Naturality follows from the two adjunctions;
-the displayed transpose determines all components uniquely. -/
+with its adjunction unit rather than a chosen component map. -/
 theorem pullbackTensorReductionEvaluation_existsUnique (W : Scheme.{u}) (n : ℕ) :
     ∃! e : unrestrictedIntegralReductionFunctor l E W n ≅
       pullbackTensorOrdinaryReduction l E W ⋙ coefficientSequenceEvaluation l E W n,
@@ -667,18 +616,13 @@ theorem pullbackTensorReductionEvaluation_existsUnique (W : Scheme.{u}) (n : ℕ
     apply ((pullbackTensorFiniteAdjunction l E W n).homEquiv M _).injective
     exact (he' M).trans (he M).symm
 
-/-- The unit-normalized quotient evaluation isomorphism.
-Source: Stacks 0941 and 06YY (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The unit-normalized quotient evaluation isomorphism. -/
 def pullbackTensorReductionEvaluation (W : Scheme.{u}) (n : ℕ) :=
   pullbackTensorUniqueChoice (pullbackTensorReductionEvaluation_existsUnique l E W n)
 
 attribute [local implicit_reducible] pullbackTensorSequenceBase
   integralComparisonSequenceBaseChange integralComparisonSequenceDirectImage in
-/-- Direct image on sequences commutes with evaluation by the identity on sections.
-Source: Stacks 03D1 and 0941 (blueprint: def-pur-completed-pullback-tower-core).
-Proof: both functors evaluate M at (n, f-basechange U) with scalar action through
-the same constant-section coefficient map. The identity section maps give the
-natural isomorphism. Sectionwise extensionality proves uniqueness. -/
+/-- Direct image on sequences commutes with evaluation by the identity on sections. -/
 theorem pullbackTensorSequenceDirectEvaluation_existsUnique
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ∃! e : pullbackTensorSequenceDirect l E f ⋙ coefficientSequenceEvaluation l E Y n ≅
@@ -693,8 +637,7 @@ theorem pullbackTensorSequenceDirectEvaluation_existsUnique
   rw [pullbackSequenceRing_map_eq]
   exact integralComparisonSequenceDirectEvaluation_existsUnique l E f n
 
-/-- The sectionwise direct-image/evaluation comparison.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The sectionwise direct-image/evaluation comparison. -/
 def pullbackTensorSequenceDirectEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   pullbackTensorUniqueChoice (pullbackTensorSequenceDirectEvaluation_existsUnique l E f n)
 
@@ -702,11 +645,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   pullbackTensorSequenceBase pullbackTensorSequenceDirect pullbackTensorSequenceInverse
   pullbackTensorSequenceAdjunction coefficientSequenceEvaluation integralOperationsLevelPullback in
 /-- The inverse-image/evaluation comparison is the adjunction mate of the
-sectionwise direct-image comparison.
-Source: Stacks 03D2 and 0941 (blueprint: def-pur-completed-pullback-tower-core).
-Proof: transpose the displayed map under the finite module adjunction. The two
-inverse-image functors are computed levelwise, so the resulting natural map is
-invertible. The adjunction Hom bijection fixes its components and proves uniqueness. -/
+sectionwise direct-image comparison. -/
 theorem pullbackTensorSequenceInverseEvaluation_existsUnique
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ∃! e : coefficientSequenceEvaluation l E Y n ⋙
@@ -760,13 +699,11 @@ theorem pullbackTensorSequenceInverseEvaluation_existsUnique
   apply (adjn.homEquiv _ _).injective
   exact (he' M).trans (he M).symm
 
-/-- The canonical mate comparing sequence inverse image with finite inverse image.
-Source: Stacks 03D2 and 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The canonical mate comparing sequence inverse image with finite inverse image. -/
 def pullbackTensorSequenceInverseEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   pullbackTensorUniqueChoice (pullbackTensorSequenceInverseEvaluation_existsUnique l E f n)
 
-/-- Reordering a restricted sequence complex into a tower preserves its finite slices.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- Reordering a restricted sequence complex into a tower preserves its finite slices. -/
 def pullbackTensorRestrictedLevel (W : Scheme.{u})
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) (n : ℕ) :
     ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.obj
@@ -783,15 +720,13 @@ def pullbackTensorRestrictedLevel (W : Scheme.{u})
     (Iso.refl (coefficientSequenceEvaluation l E W n ⋙
       scalarReductionRestriction l E W n)) (.up ℤ)).app C).symm
 
-/-- The actual complex-to-tower reordering after completed scalar restriction.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The actual complex-to-tower reordering after completed scalar restriction. -/
 def pullbackTensorRestrictedTower (W : Scheme.{u})
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) :=
   HomologicalComplex.complexOfFunctorsToFunctorToComplex.obj
     (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C)
 
-/-- The canonical augmentation of the ordinary inverse limit into its strict Roos model.
-Source: Stacks 08TC (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The canonical augmentation of the ordinary inverse limit into its strict Roos model. -/
 def pullbackTensorRoosAugmentation (W : Scheme.{u})
     (P : CochainComplex (ℕᵒᵖ ⥤ integralTowerModules l E W) ℤ) :
     ((pullbackTensorConstantLimit l E W).mapHomologicalComplex (.up ℤ)).obj P ⟶
@@ -799,11 +734,7 @@ def pullbackTensorRoosAugmentation (W : Scheme.{u})
           (HomologicalComplex.complexOfFunctorsToFunctorToComplex.obj P).obj (op n)) :=
   Pi.lift (fun n ↦ (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app P)
 
-/-- The strict limit projections give a zero homotopy for the Roos augmentation.
-Source: Stacks 08TC (blueprint: def-pur-completed-pullback-tower-core).
-Proof: after every product projection the composite with 1-s is the difference
-of consecutive compatible limit projections. It vanishes. The zero cochain has
-zero differential, which is the displayed mapping-cocone lifting condition. -/
+/-- The strict limit projections give a zero homotopy for the Roos augmentation. -/
 theorem pullbackTensorRoosAugmentation_condition (W : Scheme.{u})
     (P : CochainComplex (ℕᵒᵖ ⥤ integralTowerModules l E W) ℤ) :
     CochainComplex.HomComplex.δ (-1) 0
@@ -840,8 +771,7 @@ theorem pullbackTensorRoosAugmentation_condition (W : Scheme.{u})
     simp only [CochainComplex.HomComplex.δ_zero, zero_add,
       CochainComplex.HomComplex.Cochain.ofHom_zero]
 
-/-- The specified (limit-projections, zero) chain map into Cone(1-s)[-1].
-Source: Stacks 08TC (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The specified (limit-projections, zero) chain map into Cone(1-s)[-1]. -/
 def pullbackTensorRoosUnit (W : Scheme.{u})
     (P : CochainComplex (ℕᵒᵖ ⥤ integralTowerModules l E W) ℤ) :
     ((pullbackTensorConstantLimit l E W).mapHomologicalComplex (.up ℤ)).obj P ⟶
@@ -859,13 +789,7 @@ def pullbackTensorRoosUnit (W : Scheme.{u})
     (pullbackTensorRoosAugmentation_condition l E W P)
 
 /-- The canonical total-limit/Roos isomorphism is fixed on K-injectives by the
-actual right-derived comparison and the specified zero-homotopy augmentation.
-Source: Stacks 08TC (blueprint: def-pur-completed-pullback-tower-core).
-Proof: exact products identify the Roos construction with the total derived
-limit. For a K-injective tower the ordinary limit computes that derived limit;
-the displayed formula fixes the comparison there. Resolve any tower complex
-by a K-injective one. Naturality and invertibility on quasi-isomorphisms extend
-this formula uniquely, giving the natural isomorphism on all tower complexes. -/
+actual right-derived comparison and the specified zero-homotopy augmentation. -/
 theorem pullbackTensorRoosModel_existsUnique (W : Scheme.{u}) :
     ∃! e : pullbackTensorTowerQ l E W ⋙ coefficientConstantTowerLimit l E W ≅
       HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙
@@ -893,8 +817,7 @@ theorem pullbackTensorRoosModel_existsUnique (W : Scheme.{u}) :
     intro I hI
     exact (he' I).trans (he I).symm
 
-/-- The uniquely normalized total-limit/Roos model, including both cone coordinates.
-Source: Stacks 08TC (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The uniquely normalized total-limit/Roos model, including both cone coordinates. -/
 def pullbackTensorRoosModel (W : Scheme.{u}) :=
   pullbackTensorUniqueChoice (pullbackTensorRoosModel_existsUnique l E W)
 
@@ -904,8 +827,7 @@ private theorem pullbackTensorSequenceRing_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     pullbackTensorSequenceRing l E f = integralComparisonSequenceRingMap l E f := by
   rfl
 
-/-- The ordinary quotient evaluation comparison on cochain complexes.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The ordinary quotient evaluation comparison on cochain complexes. -/
 def pullbackTensorReductionEvaluationComplex (W : Scheme.{u}) (n : ℕ) :
     unrestrictedIntegralFiniteComplex l E W n ≅
       (pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ) ⋙
@@ -915,8 +837,7 @@ def pullbackTensorReductionEvaluationComplex (W : Scheme.{u}) (n : ℕ) :
       (Iso.refl (pullbackTensorOrdinaryReduction l E W ⋙
         coefficientSequenceEvaluation l E W n)) (.up ℤ)).symm
 
-/-- The unit-normalized inverse-image evaluation comparison on cochain complexes.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The unit-normalized inverse-image evaluation comparison on cochain complexes. -/
 def pullbackTensorInverseEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     letI := integralOperationsLevelPullback_additive l E f n
     (coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ) ⋙
@@ -937,8 +858,7 @@ def pullbackTensorInverseEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
         (Iso.refl (pullbackTensorSequenceInverse l E f ⋙
           coefficientSequenceEvaluation l E X n)) (.up ℤ)).symm
 
-/-- Each slice of the coherent pullback model is the recorded strict finite pullback.
-Source: Stacks 0941 and 099N (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- Each slice of the coherent pullback model is the recorded strict finite pullback. -/
 def pullbackTensorPullbackTowerLevel {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) :
     (pullbackTensorRestrictedTower l E X
@@ -1060,15 +980,7 @@ attribute [local irreducible] pullbackTensorCalculus
 
 /-- On flat K-flat complexes the adjunction mate of the ordinary quotient unit
 is the canonical comparison with coherent derived reduction. The formula takes
-place in the system derived category, before evaluation.
-Source: Stacks 0941, 07A6 and 09T5 (blueprint: def-pur-completed-pullback-tower-core).
-Proof: use the ordinary quotient model with the selected reduction functor and
-its adjunction. Transport the canonical right-derived limit unit through the
-termwise limit comparison. Cancelling that comparison with its inverse gives
-exactly pullbackTensorLimitUnit. The existing fixed-calculus derived comparison
-is invertible on flat-term K-flat complexes. Its Hom equation at the identity
-gives the displayed transpose. Injectivity of that Hom equivalence and natural-
-transformation extensionality prove uniqueness. -/
+place in the system derived category, before evaluation. -/
 theorem pullbackTensorReductionModel_existsUnique (W : Scheme.{u}) :
     ∃! e : integralOperationsGoodLocalization l E W ⋙
         (pullbackTensorCalculus l E W).reduction ≅
@@ -1154,8 +1066,7 @@ theorem pullbackTensorReductionModel_existsUnique (W : Scheme.{u}) :
   apply ((pullbackTensorCalculus l E W).adjunction.homEquiv _ _).injective
   exact (he' P).trans (he P).symm
 
-/-- The uniquely adjunction-normalized coherent reduction model.
-Source: Stacks 0941 and 09T5 (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The uniquely adjunction-normalized coherent reduction model. -/
 def pullbackTensorReductionModel (W : Scheme.{u}) :=
   pullbackTensorUniqueChoice (pullbackTensorReductionModel_existsUnique l E W)
 
@@ -1286,13 +1197,7 @@ private theorem pullbackTensorPullbackTower_component {X Y : Scheme.{u}}
     (pullbackTensorOrdinaryModel l E Y O) P n i).trans
       (pullbackTensorPullbackTower_degree l E f O P n i)
 
-/-- The slice comparisons form one strict tower isomorphism, fixed at every level.
-Source: Stacks 0941 and 099N (blueprint: def-pur-completed-pullback-tower-core).
-Proof: the quotient maps and inverse-image maps were fixed by their ordinary
-adjunction units. Apply the two adjunction Hom bijections: both composites
-across a quotient transition become the same quotient unit. Thus the level
-comparisons commute strictly with transitions. They form a tower isomorphism;
-its prescribed components give uniqueness by natural-transformation extensionality. -/
+/-- The slice comparisons form one strict tower isomorphism, fixed at every level. -/
 theorem pullbackTensorPullbackTower_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     ∃! e : pullbackTensorRestrictedTower l E X
@@ -1320,8 +1225,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward false in
 set_option synthInstance.maxSize 768 in
-/-- The unit-normalized strict pullback tower comparison.
-Source: Stacks 0941 and 099N (blueprint: def-pur-completed-pullback-tower-core). -/
+/-- The unit-normalized strict pullback tower comparison. -/
 def pullbackTensorPullbackTower {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :=
   pullbackTensorUniqueChoice (pullbackTensorPullbackTower_existsUnique l E f P)

@@ -10,7 +10,18 @@ public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRinge
 
 import WeilConjectures.WeilSheaf.Ordinary.OrdinaryRingedTensorCoherenceData
 
-/-! # Normalization of the ordinary comparison on tensor complexes -/
+/-! # Normalization of the ordinary comparison on tensor complexes
+
+## Implementation details
+
+The comparison is obtained from the ordinary coherence retained in the bridge, applied to
+the balanced-summand normalization of `κ` and the underived mate `d`; it is not inferred
+from naturality of an arbitrary Hom map.
+
+## References
+
+* Stacks 06YS, 06YU, 0FPT
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -25,9 +36,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (b : NativeWeilTensorRingedBridge k₀ l X)
 
-/-- The normalized ordinary comparison for a native bridge.
-Source: Stacks 06YU, 0FPT
-(blueprint: new-sf-native-ordinary-ringed-tensor-chain-comparison). -/
+/-- The normalized ordinary comparison for a native bridge. -/
 abbrev NativeOrdinaryRingedTensorChainComparison
     (κ : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ,
@@ -41,14 +50,7 @@ abbrev NativeOrdinaryRingedTensorChainComparison
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- The ordinary equivalence has its evaluation-normalized associative comparison
-on unbounded tensor complexes.
-Source: Stacks 06YS, 06YU and 0FPT
-(blueprint: new-sf-native-ordinary-ringed-tensor-chain-comparison).
-
-Proof: apply the ordinary coherence retained in the bridge to the supplied
-balanced-summand normalization of `κ` and the specified underived mate `d`.
-The bridge existence proof retains this property from the canonical section
-model. This does not infer coherence from naturality of an arbitrary Hom map. -/
+on unbounded tensor complexes. -/
 theorem native_ordinary_ringed_tensor_chain_comparison
     (κ : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ,

@@ -50,8 +50,6 @@ square isomorphism followed by `Lg'^*` of the counit of `Lf^* ⊣ Rf_*`
 composite with the unit of `Lf^* ⊣ Rf_*` is the unit of `Lf'^* ⊣ Rf'_*` followed by `Rf'_*` of
 the derived square isomorphism (`AlgebraicGeometry.Etale.map_unit_derivedBaseChangeMap_app`).
 
-(blueprint: `def:weil-pbc-derived-exchange-unbounded`)
-
 ## TODO
 
 * Show that `AlgebraicGeometry.Etale.derivedBaseChangeMap` restricts on `D⁺` to
@@ -109,7 +107,7 @@ noncomputable abbrev derivedBaseChangeSquare (sq : CommSq g' f' f g) :
 on the unbounded derived categories of étale sheaves, as a natural transformation
 `Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*`: the mate of the derived square isomorphism
 `AlgebraicGeometry.Etale.derivedSquareUpperStarIso` with respect to the derived adjunctions
-`Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`. This is the exchange map `Ex_*` of `sk-def-sf-exchanges`.
+`Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`.
 
 ```
   D(X) --Lg'^*--> D(X')
@@ -117,9 +115,7 @@ on the unbounded derived categories of étale sheaves, as a natural transformati
   Rf_*   ⇓ Ex_*   Rf'_*
    ↓               ↓
   D(Y) --Lg^*---> D(Y')
-```
-
-(blueprint: `def:weil-pbc-derived-exchange-unbounded`) -/
+``` -/
 noncomputable def derivedBaseChangeMap (sq : CommSq g' f' f g) :
     R((f)_*[A]) ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ R((f')_*[A]) :=
   (derivedBaseChangeSquare A sq)
@@ -134,9 +130,7 @@ by the counit: for `K` in `D(X_ét)` the following square commutes.
   derivedSquareUpperStarIso                 ε_{f'}
           ↓                                   ↓
   Lg'^* Lf^* Rf_* K ---Lg'^*(ε_f K)-------> Lg'^* K
-```
-
-(blueprint: `def:weil-pbc-derived-exchange-unbounded`) -/
+``` -/
 @[reassoc]
 lemma derivedUpperStar_map_derivedBaseChangeMap_app_counit (sq : CommSq g' f' f g)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :

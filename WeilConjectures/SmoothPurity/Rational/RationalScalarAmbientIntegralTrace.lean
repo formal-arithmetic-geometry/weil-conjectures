@@ -17,7 +17,20 @@ import WeilConjectures.CategoryTheory.Adjunction.HomEquivCompAppOfIsIso
 
 This is the integral derived part of the ambient trace argument. It is kept
 separate from the denominator-clearing transport through scalar localization.
-(blueprint: new-sf-rational-scalar-ambient-integral-trace).
+
+## Implementation details
+
+Restriction along `𝒪_E^∧ ⟶ 𝒪_F^∧` is always left adjoint to coextension
+`M ↦ Hom_{𝒪_E^∧}(𝒪_F^∧, M)`. Choosing an `𝒪_E`-basis `(b_i)` of `𝒪_F` and a Frobenius form
+`t : 𝒪_F → 𝒪_E` with dual basis `(b_i^*)`, the unit `n ↦ ∑ b_i ⊗ b_i^* n` and the counit
+`s ⊗ m ↦ t(s) m` exhibit restriction as left adjoint to the finite free extension of scalars
+`𝒪_F^∧ ⊗_{𝒪_E^∧} -`; the triangle identities are the dual-basis identities.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.4.10, Proposition 3.5.1,
+  Lemma 6.8.2(1), Proposition 6.8.14(2), Remark 6.8.15.
+* Stacks Project, Tags 03CZ, 03EK, 06YY.
 -/
 
 @[expose] public noncomputable section
@@ -31,9 +44,7 @@ variable (l : ℕ) [Fact l.Prime]
   (W : AlgebraicGeometry.Scheme.{u})
 
 /-- The two specified completed coefficient maps `𝒪_E^∧ ⟶ 𝒪_F^∧` coincide: both are
-characterised by their composites with the finite quotient projections.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.8.2(1)
-(blueprint: new-sf-rational-scalar-ambient-integral-trace). -/
+characterised by their composites with the finite quotient projections. -/
 theorem completedCoefficientMap_eq_integralCompletedScalarMap
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (ι : E →ₐ[ℚ_[l]] F) :
@@ -43,8 +54,7 @@ theorem completedCoefficientMap_eq_integralCompletedScalarMap
     (integralCompletedScalarMap_existsUnique l E F ι W).exists.choose_spec
 
 /-- The two specified ordinary sheafified scalar extensions along `𝒪_E^∧ ⟶ 𝒪_F^∧` are
-equal: both have the change-of-rings objects and maps along the same coefficient map.
-Source: Stacks Tag 03EK (blueprint: new-sf-rational-scalar-ambient-integral-trace). -/
+equal: both have the change-of-rings objects and maps along the same coefficient map. -/
 theorem completedOrdinaryScalarExtension_eq_integralOrdinaryScalar
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (ι : E →ₐ[ℚ_[l]] F) :
@@ -60,8 +70,7 @@ theorem completedOrdinaryScalarExtension_eq_integralOrdinaryScalar
     rw [hFm, hGm]
     simp)
 
-/-- The exact ordinary derived scalar extension is the universal derived scalar extension.
-Source: Stacks Tag 06YY (blueprint: new-sf-rational-scalar-ambient-integral-trace). -/
+/-- The exact ordinary derived scalar extension is the universal derived scalar extension. -/
 noncomputable def integralOrdinaryDerivedScalarIso
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (ι : E →ₐ[ℚ_[l]] F) :
@@ -85,9 +94,7 @@ noncomputable def integralOrdinaryDerivedScalarIso
       rw [Functor.mapHomotopyCategory_congr (ComplexShape.up ℤ)
         (completedOrdinaryScalarExtension_eq_integralOrdinaryScalar l E W F ι)]))
 
-/-- The completed scalar comparison is invertible on derived complete objects.
-Source: Bhatt--Scholze, Proposition 3.5.1
-(blueprint: new-sf-rational-scalar-ambient-integral-trace). -/
+/-- The completed scalar comparison is invertible on derived complete objects. -/
 theorem isIso_completedScalarComparison_app
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (ι : E →ₐ[ℚ_[l]] F) (K : DerivedCategory (scalarReductionSource.{u, u} l E W))
@@ -111,25 +118,7 @@ theorem isIso_completedScalarComparison_app
 
 /-- Frobenius reciprocity for the finite free completed coefficient extension: exact
 restriction of scalars along `𝒪_E^∧ ⟶ 𝒪_F^∧` is left adjoint to the ordinary (sheafified)
-extension of scalars `𝒪_F^∧ ⊗_{𝒪_E^∧} -`.
-
-Mathematics: restriction is always left adjoint to coextension
-`M ↦ Hom_{𝒪_E^∧}(𝒪_F^∧, M)`. Choose an `𝒪_E`-basis `(b_i)` of `𝒪_F` and a Frobenius form
-`t : 𝒪_F → 𝒪_E`, i.e. a generator of the rank one free `𝒪_F`-module `Hom_{𝒪_E}(𝒪_F, 𝒪_E)`
-(the inverse different is principal; `Module.exists_bijective_comp_mulLeft`), with dual
-basis `(b_i^*)`, `t(b_i b_j^*) = δ_ij`. Since `𝒪_F^∧ = 𝒪_F ⊗_{𝒪_E} 𝒪_E^∧` is finite free
-(`completedIntegralFiniteFree`), the unit `N ⟶ 𝒪_F^∧ ⊗ N`, `n ↦ ∑ b_i ⊗ b_i^* n`, and
-the counit `𝒪_F^∧ ⊗ M ⟶ M`, `s ⊗ m ↦ t(s) m`, are well-defined maps of sheaves of modules
-and satisfy the triangle identities by the dual-basis identities.
-
-Source: Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(2) and
-Remark 6.8.15 (finite coefficient extension); Stacks Tags 03CZ, 03EK (restriction and
-extension of scalars for sheaves of modules); the constant-coefficient analogue is used in
-`WeilConjectures.PurStrictScalar.scalarTensor_preservesKInjective`.
-(blueprint: new-sf-rational-scalar-ambient-integral-trace).
-
-Proof: `integralOrdinaryScalar_restrictScalars_adjunction`, the Frobenius-system adjunction
-for the completed coefficient sheaves. -/
+extension of scalars `𝒪_F^∧ ⊗_{𝒪_E^∧} -`. -/
 theorem pbcRestrict_integralCompletedScalarMap_adjunction
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (ι : E →ₐ[ℚ_[l]] F) :
@@ -137,20 +126,8 @@ theorem pbcRestrict_integralCompletedScalarMap_adjunction
       integralOrdinaryScalar l E F ι W) :=
   integralOrdinaryScalar_restrictScalars_adjunction l E F ι W
 
-/-- Integral trace data, before passing to the scalar-localized categories.
-Source: Bhatt--Scholze, Proposition 6.8.14(2), finite separable trace and
-finite-free completed scalar comparison.
-(blueprint: new-sf-rational-scalar-ambient-integral-trace).
-
-Proof: choose a trace-dual basis for the finite separable extension F/E. The
-usual restriction/coextension unit and counit are finite sums, so one common
-integral denominator makes them maps of completed coefficient sheaves. The
-trace-dual identities prove the two triangles on complexes and on roofs in the
-derived category. Exactness of restriction and finite-free extension carries
-the construction through the chosen derived restriction; the comparison for a
-complete E-object identifies the finite-free extension with the recorded
-integral scalar extension. The same formulas commute with every constructible
-map, giving the displayed naturality equation. -/
+/-- Integral trace data for the finite separable extension `F/E`, before passing to the
+scalar-localized categories. -/
 theorem rationalScalarAmbientIntegralTrace
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (ι : E →ₐ[ℚ_[l]] F)

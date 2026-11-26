@@ -12,7 +12,8 @@ import WeilConjectures.WeilSheaf.Native.NativeNormalizedActionHom
 
 /-! # Inverse Hom comparisons across the normalized restriction square
 
-Source: the native ringed bridge's Hom step and equivalence unit/counit identities.
+The comparison combines the Hom step of the native ringed bridge with the unit and counit
+identities of the equivalences.
 -/
 
 @[expose] public section
@@ -43,20 +44,7 @@ private theorem normalizedInverseHomComparison_map
 
 attribute [local irreducible] normalizedInverseHomComparison
 
-/-- Transport the specified Hom comparisons through inverse equivalences.
-Source: native ringed bridge step 2; normalized action-site Hom comparison.
-(blueprint: new-sf-native-coherent-inverse-hom-square).
-
-Proof: retain the supplied ordinary coherence for the explicit inverse Hom comparison.
-Take the square to be the ordinary equivalence unit followed by the
-ordinary inverse image of the native equivalence counit. Transport both forward
-Hom comparisons through the inverse equivalences. Apply the faithful ordinary
-equivalence to the required equation. Naturality of the forward Hom comparison
-and the inverse-Hom normalization formula reduce it to naturality of Hom
-precomposition. Combine the source maps and target maps separately. The unit
-and counit identities identify each with the ordinary counit or its inverse.
-The ordinary coherence property is retained unchanged; the square calculation
-itself uses no tensor or complex calculation. -/
+/-- Transport the specified Hom comparisons through inverse equivalences. -/
 theorem native_coherent_inverse_hom_square
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}

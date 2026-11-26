@@ -14,9 +14,6 @@ import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComp
 
 /-! # Normalized ordinary comparisons between scalar extension and line tensor
 
-Source: Stacks 03EL, 03EO, 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-
 For a comparison `b` between the scalar extension of a line `L` and a line `N`, there is
 a unique `PairData` satisfying `IsPairNormalized`. Its derived comparison satisfies the
 counit normalization on every complex, and the comparisons for a three-field tower
@@ -26,6 +23,10 @@ are compatible with the ordinary associator.
 
 * `pairData_exists`, `pairData_unique`: existence and uniqueness of normalized data.
 * `pairData_ordinary_tower`: compatibility with the ordinary associator.
+
+## References
+
+* [Stacks, Tags 03EK, 03EL, 03EO, 05Q2 and 06YY]
 -/
 
 @[expose] public noncomputable section
@@ -72,8 +73,7 @@ attribute [local semireducible] completedOrdinaryScalarExtension completedScalar
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The recorded ordinary extension is the sheafified scalar extension.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The recorded ordinary extension is the sheafified scalar extension. -/
 private theorem extension_obj_eq (M : integralTowerModules l E X) :
     (completedOrdinaryScalarExtension l E F ι X).obj M =
       SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
@@ -82,8 +82,7 @@ private theorem extension_obj_eq (M : integralTowerModules l E X) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The identification sends the recorded pure section to the scalar-extension section.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The identification sends the recorded pure section to the scalar-extension section. -/
 private theorem extension_obj_eq_section (M : integralTowerModules l E X) (U : X.ProEtᵒᵖ)
     (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U) (x : M.val.obj U) :
     (eqToHom (extension_obj_eq l E X F ι M)).val.app U
@@ -104,8 +103,7 @@ private theorem extension_obj_eq_section (M : integralTowerModules l E X) (U : X
 
 end Identification
 
-/-- The inverse identification sends the scalar-extension section to the recorded one.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The inverse identification sends the scalar-extension section to the recorded one. -/
 private theorem extension_obj_eq_symm_section (M : integralTowerModules l E X)
     (U : X.ProEtᵒᵖ) (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U)
     (x : M.val.obj U) :
@@ -119,8 +117,7 @@ private theorem extension_obj_eq_symm_section (M : integralTowerModules l E X)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Tensoring with an isomorphism in the second variable.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Tensoring with an isomorphism in the second variable. -/
 private def tensorSecondIso (M : integralTowerModules l F X) {N N' : integralTowerModules l F X}
     (e : N ≅ N') :
     (SheafOfModules.siteSheafTensorRight N).obj M ≅
@@ -149,8 +146,7 @@ private def tensorSecondIso (M : integralTowerModules l F X) {N N' : integralTow
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The ordinary scalar–line comparison at one module: binary tensor comparison followed by
-the signed-power comparison on the second factor.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+the signed-power comparison on the second factor. -/
 private def sheafComponent (L : integralTowerModules l E X) (N : integralTowerModules l F X)
     (m : ℤ) (B : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1),
       max u (t + 1)} (completedCoefficientMap l E F ι X) (power l E X L m) ≅ power l F X N m)
@@ -165,8 +161,7 @@ private def sheafComponent (L : integralTowerModules l E X) (N : integralTowerMo
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Pure-tensor formula of `sheafComponent`.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Pure-tensor formula of `sheafComponent`. -/
 private theorem sheafComponent_tmul (L : integralTowerModules l E X)
     (N : integralTowerModules l F X)
     (m : ℤ) (B : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1),
@@ -215,8 +210,7 @@ private theorem sheafComponent_tmul (L : integralTowerModules l E X)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Naturality of `sheafComponent` in the module.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Naturality of `sheafComponent` in the module. -/
 private theorem sheafComponent_naturality (L : integralTowerModules l E X)
     (N : integralTowerModules l F X)
     (m : ℤ) (B : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1),
@@ -257,8 +251,7 @@ private theorem sheafComponent_naturality (L : integralTowerModules l E X)
       (congrArg (fun y ↦ SheafOfModules.siteSheafTensorTmul _ (power l F X N m) U y b) hr3)))
   exact hL.trans hR.symm
 
-/-- The ordinary scalar–line comparison as a natural isomorphism.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The ordinary scalar–line comparison as a natural isomorphism. -/
 private def sheafComparison (L : integralTowerModules l E X) (N : integralTowerModules l F X)
     (m : ℤ) (B : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1),
       max u (t + 1)} (completedCoefficientMap l E F ι X) (power l E X L m) ≅ power l F X N m) :
@@ -272,21 +265,18 @@ section CounitNaturality
 attribute [local semireducible] completedOrdinaryScalarExtension completedDerivedScalarExtension
   completedScalarCounit completedOrdinaryScalarComplex completedScalarChangeData
 
-/-- The recorded cochain model computes the ordinary derived scalar extension.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The recorded cochain model computes the ordinary derived scalar extension. -/
 private theorem model_functor :
     (completedScalarCochainModel l E F ι X).T = completedDerivedScalarExtension l E F ι X := by
   rfl
 
-/-- The recorded cochain model extends termwise by the ordinary scalar extension.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The recorded cochain model extends termwise by the ordinary scalar extension. -/
 private theorem model_complex :
     (completedScalarCochainModel l E F ι X).E.mapHomologicalComplex (.up ℤ) =
       completedOrdinaryScalarComplex l E F ι X := by
   rfl
 
-/-- The cochain model counit is the universal counit.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The cochain model counit is the universal counit. -/
 private theorem model_counit (P : CochainComplex (integralTowerModules l E X) ℤ) :
     HEq ((completedScalarCochainModel l E F ι X).ε.app P)
       (completedScalarCounit l E F ι X P) :=
@@ -294,8 +284,7 @@ private theorem model_counit (P : CochainComplex (integralTowerModules l E X) �
 
 end CounitNaturality
 
-/-- Naturality transported along equalities of functors.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Naturality transported along equalities of functors. -/
 private theorem naturality_of_heq {A B : Type*} [Category A] [Abelian A] [Category B]
     [Abelian B] [HasDerivedCategory A] [HasDerivedCategory B]
     (G G' : CochainComplex A ℤ ⥤ CochainComplex B ℤ)
@@ -309,8 +298,7 @@ private theorem naturality_of_heq {A B : Type*} [Category A] [Abelian A] [Catego
   rw [← eq_of_heq (hc P), ← eq_of_heq (hc P')]
   exact ε.naturality f
 
-/-- Naturality of the universal counit of ordinary scalar extension along chain maps.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Naturality of the universal counit of ordinary scalar extension along chain maps. -/
 private theorem counit_naturality {P P' : CochainComplex (integralTowerModules l E X) ℤ}
     (f : P ⟶ P') :
     (completedDerivedScalarExtension l E F ι X).map (DerivedCategory.Q.map f) ≫
@@ -321,8 +309,7 @@ private theorem counit_naturality {P P' : CochainComplex (integralTowerModules l
     (model_complex l E X F ι) (model_functor l E X F ι) (completedScalarCounit l E F ι X)
     (model_counit l E X F ι) f
 
-/-- The universal counit as a natural isomorphism; finite free extension inverts it.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The universal counit as a natural isomorphism; finite free extension inverts it. -/
 private def counitIso :
     DerivedCategory.Q ⋙ completedDerivedScalarExtension l E F ι X ≅
       completedOrdinaryScalarComplex l E F ι X ⋙ DerivedCategory.Q :=
@@ -331,8 +318,7 @@ private def counitIso :
   NatIso.ofComponents (fun P ↦ asIso (completedScalarCounit l E F ι X P))
     (fun f ↦ counit_naturality l E X F ι f)
 
-/-- Descend a termwise comparison through the localization, given invertible counits.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Descend a termwise comparison through the localization, given invertible counits. -/
 private theorem exists_derived_comparison {A B : Type*} [Category A] [Abelian A] [Category B]
     [Abelian B] [HasDerivedCategory A] [HasDerivedCategory B]
     (TA : DerivedCategory A ⥤ DerivedCategory A) (TB : DerivedCategory B ⥤ DerivedCategory B)
@@ -369,14 +355,7 @@ private theorem exists_derived_comparison {A B : Type*} [Category A] [Abelian A]
     (Category.comp_id (DerivedCategory.Q.map (γ.hom.app P))).symm
 
 /-- Normalized ordinary comparisons exist; the derived comparison satisfies the counit
-normalization on every complex, not only on good ones.
-Source: Stacks 03EL, 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: take the normalized signed-power comparisons. The binary tensor comparison followed
-by the power comparison on the second factor gives the sheaf comparison with the displayed
-pure-tensor formula. Finite free extension has invertible universal counits on every
-complex, and line tensor is exact, so the composite of the localized termwise comparison
-with these invertible maps descends through the localization to the derived category. -/
+normalization on every complex, not only on good ones. -/
 theorem pairData_exists (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
@@ -406,13 +385,7 @@ theorem pairData_exists (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeO
   · intro m P
     exact hD m P
 
-/-- Normalized ordinary comparisons are unique.
-Source: Stacks 03EL, 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: the signed-power comparisons are unique by `line_unique`. The sheaf comparison is
-fixed on pure tensors, which generate locally. On good complexes the counit at the source
-and the target are invertible, so the derived comparison is fixed on the good
-localization, which determines natural transformations. -/
+/-- Normalized ordinary comparisons are unique. -/
 theorem pairData_unique (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
@@ -468,8 +441,7 @@ variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The ordinary associator inverts to `u ⊗ y ↦ u ⊗ (1 ⊗ y)`.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The ordinary associator inverts to `u ⊗ y ↦ u ⊗ (1 ⊗ y)`. -/
 private theorem associator_inv_section (M : integralTowerModules l E X) (U : X.ProEtᵒᵖ)
     (u : (completedIntegralCommRingSheafUnrestricted l G X).obj.obj U) (y : M.val.obj U) :
     (((associatorData l E X F ι G j).sheaf.inv.app M).val.app U
@@ -485,9 +457,7 @@ private theorem associator_inv_section (M : integralTowerModules l E X) (U : X.P
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The termwise tower identity for the ordinary scalar–line comparisons.
-Source: blueprint Proof (3), final sentence
-(blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The termwise tower identity for the ordinary scalar–line comparisons. -/
 private theorem sheaf_tower (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (P : integralTowerModules l G X) [P.IsFiniteLocallyFreeOfRank 1]
@@ -570,8 +540,7 @@ private theorem sheaf_tower (L : integralTowerModules l E X) [L.IsFiniteLocallyF
 
 /-- Abstract form of the derived tower identity: the counit normalizations of three
 scalar–line comparisons and of the associator, together with the termwise identity, give the
-derived identity on localized objects.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+derived identity on localized objects. -/
 private theorem derived_tower_of_formulas {KA KB KC DA DB DC : Type*} [Category KA]
     [Category KB] [Category KC] [Category DA] [Category DB] [Category DC]
     (QA : KA ⥤ DA) (QB : KB ⥤ DB) (QC : KC ⥤ DC)
@@ -628,8 +597,7 @@ private theorem derived_tower_of_formulas {KA KB KC DA DB DC : Type*} [Category 
   rw [hchain]
 
 /-- A tower identity of natural isomorphisms that holds on the image of a localization
-functor holds everywhere.
-Source: Stacks 05Q2 (blueprint: lem-pur-completed-line-tensor-coherence). -/
+functor holds everywhere. -/
 private theorem tower_of_localization {KA DA DB DC : Type*} [Category KA] [Category DA]
     [Category DB] [Category DC] (Λ : KA ⥤ DA) (W : MorphismProperty KA) [Λ.IsLocalization W]
     (TA : DA ⥤ DA) (TB : DB ⥤ DB) (TC : DC ⥤ DC)
@@ -653,9 +621,7 @@ attribute [local semireducible] completedOrdinaryScalarComplex
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The chain-level tower identity, termwise `sheaf_tower`.
-Source: blueprint Proof (3), final sentence
-(blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The chain-level tower identity, termwise `sheaf_tower`. -/
 private theorem chain_tower (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (P : integralTowerModules l G X) [P.IsFiniteLocallyFreeOfRank 1]
@@ -696,8 +662,7 @@ private theorem chain_tower (L : integralTowerModules l E X) [L.IsFiniteLocallyF
 
 end ChainTower
 
-/-- The counit normalization of normalized data holds on every complex.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The counit normalization of normalized data holds on every complex. -/
 private theorem pairData_counit {L : integralTowerModules l E X} [L.IsFiniteLocallyFreeOfRank 1]
     {N : integralTowerModules l F X} [N.IsFiniteLocallyFreeOfRank 1]
     {b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
@@ -715,13 +680,7 @@ private theorem pairData_counit {L : integralTowerModules l E X} [L.IsFiniteLoca
   obtain rfl := pairData_unique l E X F ι L N b h0 hd
   exact hf m Q
 
-/-- The ordinary derived line comparisons commute with the ordinary associator.
-Source: blueprint Proof (3), final sentence
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: on pure tensors both sheaf paths send t tensor (s tensor (x tensor a)) to
-(t j(s) tensor x) tensor b_20(1 tensor a), by `line_tower`. The counit normalizations of
-the line comparisons (on every complex) and of the associator transport this termwise
-identity to the derived identity on good complexes; localization concludes. -/
+/-- The ordinary derived line comparisons commute with the ordinary associator. -/
 theorem pairData_ordinary_tower (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (P : integralTowerModules l G X) [P.IsFiniteLocallyFreeOfRank 1]

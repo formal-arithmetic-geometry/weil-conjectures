@@ -20,8 +20,19 @@ import WeilConjectures.RingTheory.RegularThroughLocalization
 /-!
 # The regular comparison localization for a polynomial ring over a G-ring
 
-Source: Stacks Project, More on Algebra, Proposition 07PV, second paragraph.
-(blueprint: lem-weil-pbc-polynomial-g-ring-regular-comparison).
+For a maximal ideal `Q` of `R[x]` over a G-ring `R`, contracting to `p`, there is a regular local
+map from `R[x]_Q` to the localization of `Â[x]` at a maximal ideal over the closed point, where
+`Â` is the completion of `A = R_p`.
+
+## Implementation details
+
+The G-ring hypothesis makes `A → Â` regular; base change gives `A[x] → Â[x]` regular, and the
+composite with localization factors through `A[x]_q ≃ R[x]_Q`. Since `A` and `Â` have the same
+residue field, the prime over `q` is maximal. Regularity after completion is a separate step.
+
+## References
+
+* [Stacks, Tag 07PV] (second paragraph of the proof)
 -/
 
 @[expose] public section
@@ -86,31 +97,7 @@ private theorem regular_localRingHom
   exact RingHom.isRegular_of_comp_algebraMap_localization p.primeCompl hAC
 
 /-- A polynomial localization over a G-ring maps regularly and locally to a polynomial
-localization over a complete Noetherian local ring, at a maximal ideal over its closed point.
-
-Source: Stacks Project, More on Algebra, Proposition 07PV, second paragraph, the bottom
-map of the completion square.
-(blueprint: lem-weil-pbc-polynomial-g-ring-regular-comparison).
-
-Proof: Contract Q to p in R and let A = R_p. Extend Q to A[x], obtaining a maximal
-ideal q whose contraction is the maximal ideal of A: coefficient localization
-misses Q, and its quotient remains the field R[x]/Q. Localization at q identifies
-A[x]_q with R[x]_Q by the universal properties of successive localization and
-polynomial extension. Set S = Ahat, the completion at the maximal ideal m of A.
-It is Noetherian and local, with maximal ideal mS. It is complete for mS because
-m is finitely generated; thus it is complete at its own maximal ideal. Its
-residue field agrees with that of A. Thus q modulo the maximal ideal of A determines
-a maximal ideal q' in S[x] modulo the maximal ideal of S, and its inverse image Q'
-is maximal and contracts to the maximal ideal of S. The G-ring assumption says
-A → S is regular. Base change along the finite type map A → A[x] gives a regular
-map A[x] → S[x], using the canonical tensor-product identification. Compose with
-the regular localization S[x] → S[x]_(Q'); the composite has Noetherian fibres,
-since its target is Noetherian. Its denominators outside q become units, so it
-factors through A[x]_q. Regularity through localization makes this factored map
-regular. Transport along A[x]_q ≃ R[x]_Q to obtain φ. The contraction of Q' to
-A[x] is q (the residue-field identification), so the induced map on localizations
-sends the maximal ideal into the maximal ideal, proving the asserted locality.
-This constructs only the bottom map; regularity after completion is a separate step. -/
+localization over a complete Noetherian local ring, at a maximal ideal over its closed point. -/
 theorem exists_polynomial_regular_local_comparison
     (R : Type u) [CommRing R] (hR : IsGRing R)
     (Q : Ideal (Polynomial R)) [Q.IsMaximal] :

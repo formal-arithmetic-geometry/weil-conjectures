@@ -11,7 +11,12 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.Native
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeIntegralCanonicalTargetTransition
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeIntegralTargetBoundaryFormula
 
-/-! # Integral scalar-mate steps for native compact support -/
+/-! # Integral scalar-mate steps for native compact support
+
+## References
+
+* [Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -51,15 +56,7 @@ private theorem app_arrow_congr {C D : Type*} [Category C] [Category D]
   exact ArrowHEq.refl _
 
 -- The formulas compare cached finite-stage and native coefficient presentations.
-/-- The final two-arrow boundary respects the canonical common-field scalar arrow.
-Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
-Proof: the endpoint-aware component equations identify both boundaries with compact
-support of the inverse integral realization followed by inverse operationTransport.
-The common_field equation writes the realized stage transition as the integral
-realization, nativeScalarTransition, and inverse integral realization. Naturality of
-operationTransport moves the realized transition through its inverse. Cancel the
-integral realization and its inverse. The remaining equation is precisely this square.
-(blueprint: lem-sf-native-integral-target-boundary-transition). -/
+/-- The final two-arrow boundary respects the canonical common-field scalar arrow. -/
 theorem integralTargetBoundary_transition [G : NativeGeometry.{u} l]
     (source : Realization l X) (i E : Index l (PadicAlgCl l)) (h : i ≤ E)
     (K : finiteTorConstructibleIntegralCategory l (Coefficient.{u} l (PadicAlgCl l) i) X)

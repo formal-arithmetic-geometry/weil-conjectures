@@ -14,8 +14,11 @@ import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorEvaluationF
 
 /-! # The total diagonal through exact-functor factorizations
 
-Source: Stacks Tags 07A4, 0941 and 03D2.
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-diagonal).
+The ordinary cochain square descends through the exact-functor factorization maps.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941 and 03D2.
 -/
 
 @[expose] public noncomputable section
@@ -65,15 +68,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 -- The chosen exact-functor factorizations have large implicit coefficient types.
-/-- Descend the ordinary cochain square through the exact-functor factorization maps.
-Source: Stacks Tags 07A4, 0941 and 03D2
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-diagonal).
-Proof: apply the derived quotient to the ordinary cochain compatibility. Naturality
-of the exact finite-pullback factorization moves evaluation of the ordinary tensor
-map through that factorization. The supplied equation he then replaces the evaluated
-sequence pullback by the intrinsic finite pullback. Finally use naturality of the
-X evaluation factorization. Associativity pastes these three squares.
--/
+/-- Descend the ordinary cochain square through the exact-functor factorization maps. -/
 theorem completedPullbackTensor_evaluation_diagonal {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     (c : integralOperationsLevelPullback l E f n ≅

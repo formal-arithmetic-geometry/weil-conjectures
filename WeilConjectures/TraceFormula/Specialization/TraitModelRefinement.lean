@@ -28,10 +28,11 @@ A *refinement* `C₃ ⟶ C₁` of compactifications
 `P₃ ⟶ P₁` over proper morphisms `X₃ ⟶ X₁`, `X₃' ⟶ X₁'`, compatible with the inclusions of `N`,
 over which `N` is cartesian: `N = P₃ ×_{P₁} N` on the total spaces, the geometric generic fibres
 and the special fibres, and `Y = X₃ ×_{X₁} Y`. Any two compactifications have a common refinement
-(`NearbyCyclesModel.IsTraitModelOfBase.Compactification.exists_refinement`). This is the common
-refinement of the proof of blueprint `prose-E-15` ("two compactifications have a
-common proper refinement"), used to show that the compact-support exchange, and hence the
-dualizing map of nearby cycles, does not depend on the compactification.
+(`NearbyCyclesModel.IsTraitModelOfBase.Compactification.exists_refinement`). This is used to show
+that the compact-support exchange, and hence the dualizing map of nearby cycles, does not depend
+on the compactification.
+
+## Implementation details
 
 The common refinement is built from a proper model `B` over `(X₃ ×_k S) ×_S 𝒳₁ ×_S 𝒳₂`, with
 `X₃` the closure of the graph of `Y` in `X₁ ×_k X₂`
@@ -41,7 +42,18 @@ refinements are induced by morphisms of total spaces
 (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.nonempty_refinement`); the cartesian
 square of total spaces comes from the description of `N` over the generic point of the trait
 (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.isPullback_traitGenericSpec`) and a
-density argument (`AlgebraicGeometry.isPullback_id_of_dense`).
+density argument (`AlgebraicGeometry.isPullback_id_of_dense`). The key point there is that
+`(e, q) : 𝒳 ⟶ X ×_k S` restricts on `N ×_S Spec K` to `N ⟶ Y ⟶ X`, as it does on the geometric
+generic fibre, which is faithfully flat over `N ×_S Spec K`.
+
+In `NearbyCyclesModel.IsTraitModelOfBase.Compactification.exists_refinement`, `X₃` is a dense
+compactification of `(ι₁, ι₂) : Y ⟶ X₁ ×_k X₂` (so that `Y = X₃ ×_{X₁} Y`, `Y` being closed in
+the inverse image of `Y ×_k X₂` as the section of a separated morphism, and open and dense); the
+total space of `N` and the generic fibre `X₃ ×_k K` (`K = Frac k'⟦t⟧`) are glued along `N_K` and
+compactified over `(X₃ ×_k S) ×_S 𝒳₁ ×_S 𝒳₂`, where `𝒳ᵢ ×_S K ≅ Xᵢ ×_k K` by fpqc descent from
+the geometric generic fibres; the compactification is an isomorphism `X₃ ×_k K` over the generic
+point, and the inclusion of `N` is the inverse image of `N ⊆ P_i`, being open and closed in it
+and dense.
 
 -/
 
@@ -107,7 +119,7 @@ attribute [instance] Compactification.locallyOfFiniteType Compactification.quasi
   Compactification.isOpenImmersion_ι' Compactification.isOpenImmersion_hom_total
 
 /-- Every trait model over the base of a separated `k`-scheme of finite type has a
-compactification (`NearbyCyclesModel.IsTraitModelOfBase.exists_isProper_openSubmodel`). -/
+compactification. -/
 lemma nonempty_compactification [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
     [IsSeparated Y.hom] (h : N.IsTraitModelOfBase k q g) : Nonempty h.Compactification := by
   obtain ⟨X, _, _, _, _, X', _, _, _, _, P, qP, gP, hP, hgen, _, ι, _, ι', _, φ, _, hφ, hq, hg⟩ :=
@@ -116,8 +128,7 @@ lemma nonempty_compactification [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
 
 variable {h : N.IsTraitModelOfBase k q g}
 
-/-- The structure morphism of `Y` is quasi-compact as soon as `N` has a compactification: `Y` is
-open in the noetherian scheme `X`. -/
+/-- The structure morphism of `Y` is quasi-compact as soon as `N` has a compactification. -/
 lemma Compactification.quasiCompact_hom (C : h.Compactification) : QuasiCompact Y.hom := by
   have := LocallyOfFiniteType.isLocallyNoetherian C.X.hom
   rw [← Over.w C.ι]
@@ -138,8 +149,7 @@ noncomputable def Compactification.toCompactification (C : h.Compactification) :
 
 /-- **Common compactification of `Y`.** For two compactifications `C₁`, `C₂` of `N` there is a
 proper `k`-scheme `X₃` containing `Y` as an open, with proper morphisms `X₃ ⟶ X₁`, `X₃ ⟶ X₂`
-under `Y` over which `Y` is cartesian: the closure of the graph of `Y` in `X₁ ×_k X₂`
-(`AlgebraicGeometry.Compactification.inf`). -/
+under `Y` over which `Y` is cartesian. -/
 lemma Compactification.exists_common (C₁ C₂ : h.Compactification) :
     ∃ (X₃ : Over (Spec (.of k))) (_ : IsProper X₃.hom) (ι₃ : Y ⟶ X₃)
       (_ : IsOpenImmersion ι₃.left) (p₁ : X₃ ⟶ C₁.X) (p₂ : X₃ ⟶ C₂.X) (_ : IsProper p₁.left)
@@ -258,8 +268,7 @@ attribute [instance] Compactification.Refinement.isProper_p
 compactifications `C₃`, `C` of `N` over the trait, compatible with the inclusions of `N`, over
 a proper `p : X₃ ⟶ X` under `Y` with `Y = X₃ ×_X Y`, compatible with the factorisations of the
 identifications `ε` on the geometric generic fibres, and with `N = 𝒳₃ ×_𝒳 N`, induces a
-refinement `C₃ ⟶ C`: the morphisms of geometric generic and special fibres are the base changes
-of `π`, and the remaining cartesian squares are base changes of `N = 𝒳₃ ×_𝒳 N`. -/
+refinement `C₃ ⟶ C`. -/
 lemma Compactification.nonempty_refinement {C₃ C : h.Compactification} (p : C₃.X ⟶ C.X)
     [IsProper p.left] (hι : C₃.ι ≫ p = C.ι)
     (hιpb : IsPullback C₃.ι.left (𝟙 Y.left) p.left C.ι.left)
@@ -324,9 +333,7 @@ lemma Compactification.nonempty_refinement {C₃ C : h.Compactification} (p : C�
 
 /-- **The generic fibre of `N` in a compactification.** Over the generic point `Spec K` of the
 trait, `N` is the inverse image of `N ⊆ 𝒳` along `X₃ ×_k Spec K ⟶ X ×_k Spec K ≅ 𝒳 ×_S Spec K`,
-for `p : X₃ ⟶ X` under `Y` with `Y = X₃ ×_X Y`. The key point is that `(e, q) : 𝒳 ⟶ X ×_k S`
-restricts on `N ×_S Spec K` to `N ⟶ Y ⟶ X`, as it does on the geometric generic fibre, which is
-faithfully flat over `N ×_S Spec K`. -/
+for `p : X₃ ⟶ X` under `Y` with `Y = X₃ ×_X Y`. -/
 lemma Compactification.isPullback_traitGenericSpec (C : h.Compactification)
     {eN : N.total ⟶ Y.left} (heN : N.j ≫ eN = N.ε) (heN' : eN ≫ Y.hom = q ≫ traitToBase k k')
     {X₃ : Over (Spec (.of k))} {ι₃ : Y ⟶ X₃} {p : X₃ ⟶ C.X} (hι : ι₃ ≫ p = C.ι)
@@ -393,17 +400,8 @@ lemma Compactification.isPullback_traitGenericSpec (C : h.Compactification)
           hnC_snd, Category.comp_id]
   simpa using htop.paste_vert hbot
 
-/-- **Common refinement of two compactifications** (the first step of the proof of blueprint
-`prose-E-15`): any two compactifications `C₁`, `C₂` of a trait model over the base
-have a common refinement `C₃`.
-
-Construction: with `X₃` a dense compactification of `(ι₁, ι₂) : Y ⟶ X₁ ×_k X₂` (so that
-`Y = X₃ ×_{X₁} Y`, `Y` being closed in the inverse image of `Y ×_k X₂` as the section of a
-separated morphism, and open and dense), glue the total space of `N` and the generic fibre
-`X₃ ×_k K` (`K = Frac k'⟦t⟧`) along `N_K` and compactify over
-`(X₃ ×_k S) ×_S 𝒳₁ ×_S 𝒳₂`, where `𝒳ᵢ ×_S K ≅ Xᵢ ×_k K` by fpqc descent from the geometric
-generic fibres; the compactification is an isomorphism `X₃ ×_k K` over the generic point, and the
-inclusion of `N` is the inverse image of `N ⊆ P_i`, being open and closed in it and dense. -/
+/-- **Common refinement of two compactifications**: any two compactifications `C₁`, `C₂` of a
+trait model over the base have a common refinement `C₃`. -/
 theorem Compactification.exists_refinement (C₁ C₂ : h.Compactification) :
     ∃ C₃ : h.Compactification, Nonempty (C₃.Refinement C₁) ∧ Nonempty (C₃.Refinement C₂) := by
   have hN := h.isTraitModelOver

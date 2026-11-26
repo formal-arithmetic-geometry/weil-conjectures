@@ -16,7 +16,9 @@ import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorEvaluation
 
 /-! # A normalized ringed tensor model before comparison with a supplied left adjoint
 
-Source: Stacks 06YS, 08J9 and 0FPT; native constraint lifting, geometric model step.
+## References
+
+* Stacks Project, Tags 06YS, 08J9 and 0FPT.
 -/
 
 @[expose] public section
@@ -191,29 +193,7 @@ attribute [local irreducible] TensorModelConclusion
 
 /-- The action-site tensor model and its normalized comparisons, before imposing
 any supplied native tensor bifunctor or adjunction. In particular no assertion
-about constraints on an arbitrary T is included.
-
-Source: native constraint lifting, steps 1 and 3; Stacks 06YS, 08J9, 0FPT
-(blueprint: lem-sf-native-weil-ringed-tensor-model).
-
-Proof: obtain the symmetric native tensor, coherent tensor comparison, units
-and explicit complex presentation from native_weil_tensor_geometry. Independently
-construct chi for the prescribed Hom representatives by rebasing the existing
-standard two-injective comparison through the row-sign isomorphisms. Apply
-native_weil_representative_currying to the presentation: the underived adjunction
-and the K-flat and K-injective localizations give natural derived currying,
-including the homogeneous uncurrying formula. Construct W by
-closed_of_natural_currying; its transpose is precisely this descended bijection.
-The representative formula therefore supplies its adjunction normalization.
-Apply native_weil_tensor_evaluation to obtain the forgotten evaluation square.
-For any f:A to Hom(K,L), inverse transposition is tensor(f,identity) followed
-by evaluation. Naturality of t and its inverse cancel the tensor comparison,
-so this evaluation square gives the full normalized uncurrying identity.
-Specialize to the adjunction unit at A. Its inverse transpose is identity by
-the triangle identity, leaving exactly the displayed formula for t inverse.
-The geometry step already supplies the four coherence equations and the
-precise coefficient-unit factorization. No change to the target statement,
-source categories, unboundedness or zero/empty-site cases is made. -/
+about constraints on an arbitrary `T` is included. -/
 theorem native_weil_ringed_tensor_model
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]

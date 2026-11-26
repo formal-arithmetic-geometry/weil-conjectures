@@ -12,10 +12,21 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
-/-! Finite prime-chain contraction in filtered colimits.
+/-!
+# Finite prime-chain contraction in filtered colimits
 
-Source: Stacks Project, More on Algebra, Tag 06LK.
-(blueprint: lem-sc-filtered-colimit-prime-chain-contraction)
+A finite strict chain of primes in a filtered colimit of rings contracts to a strict chain of
+primes at some stage.
+
+## Implementation details
+
+One chooses elements separating consecutive primes, represents them at stages, and uses
+filteredness to dominate the finitely many stages. Contractions of primes remain prime, and the
+separating representatives preserve strictness.
+
+## References
+
+* [Stacks, Tag 06LK]
 -/
 
 @[expose] public section
@@ -26,11 +37,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CommRingCat
 
-/-- A finite prime chain in a filtered colimit contracts strictly at one stage.
-The proof chooses separating elements, represents them in stages, and uses filteredness
-to dominate the finitely many stages. Contractions of primes remain prime, and the
-separating representatives preserve strictness.
-(blueprint: lem-sc-filtered-colimit-prime-chain-contraction) -/
+/-- A finite prime chain in a filtered colimit contracts strictly at one stage. -/
 theorem filteredColimit_prime_chain_contraction
     {I : Type u} [SmallCategory I] [IsFiltered I]
     (R : I ⥤ CommRingCat.{u}) :

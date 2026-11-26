@@ -19,8 +19,21 @@ import Mathlib.Algebra.CharP.Lemmas
 /-!
 # Differential basis enlargement after clearing denominators
 
-Source: Stacks Project, proofs of Tags 07FH and 07FI; the denominator and differential
-argument in steps 5–14 of lem-weil-pbc-popescu-quotient-basis-enlargement.
+An admissible subalgebra can be enlarged to capture a positive power of a common denominator of
+the lifts of a residue differential basis, with a residue differential basis lifted from the
+original ring.
+
+## Implementation details
+
+`exists_popescu_unscaled_unit_basis` gives a unit `z` with `z π(s)^Q - 1` nilpotent; Frobenius
+(`capture_unit_power`) turns this into `c = π(s)^N` with `c` a `p`-th power of a unit, so `dc = 0`.
+The left basis vectors are scaled by the residue of `c` using `Module.Basis.isUnitSMul`. Either
+summand may be empty.
+
+## References
+
+* [Stacks, Tag 07FH]
+* [Stacks, Tag 07FI]
 -/
 
 @[expose] public section
@@ -66,29 +79,7 @@ private theorem capture_unit_power
 
 /-- Given a residue differential basis whose lifts have a common denominator, enlarge the
 admissible subalgebra so that it captures a positive power of that denominator and has a
-residue differential basis lifted from the original ring. No ideal generators are chosen.
-Source: Stacks Project, proofs of Tags 07FH and 07FI, and steps 5–14 of
-lem-weil-pbc-popescu-quotient-basis-enlargement.
-(blueprint: lem-weil-pbc-popescu-denominator-basis-enlargement).
-
-Proof: Apply `exists_popescu_unscaled_unit_basis` to obtain an admissible A
-containing A₀, a positive Q and a unit z of A such that z π(s)^Q - 1 is nilpotent,
-and an unscaled residue differential basis. The basis has the original residue
-differentials on its left summand and lifts of π(s) on its right summand.
-
-For ε = z π(s)^Q - 1 choose r with ε^r = 0. Since p is prime, r ≤ p^(r+1).
-Frobenius gives z^(p^(r+1)) π(s)^(Q p^(r+1)) = 1. Set N = Q p^(r+1) ≥ 1 and
-c = (z⁻¹^(p^r))^p in A. Cancellation proves c = π(s)^N in the ambient ring.
-This explicit c is a p-th power of a unit, so its residue γ is a nonzero unit and
-dγ = 0. This Frobenius argument is proved in `capture_unit_power`.
-
-For every original index j take a_j = inclusion(a₀ j) c and xs_j = μ_j s^(N-1).
-The common-denominator equations and N ≥ 1 prove a_j = π(xs_j). The Leibniz rule
-and dγ = 0 give d(residue a_j) = γ d(residue inclusion(a₀ j)). Scale the left
-basis vectors by γ and leave the right basis vectors unchanged, using
-`Module.Basis.isUnitSMul`. On the right use the supplied lifts of π(s) and take
-xs_j = s. Reindex the resulting sum-indexed basis with `finSumFinEquiv`.
-The construction permits either summand to be empty and also works for N = 1. -/
+residue differential basis lifted from the original ring. No ideal generators are chosen. -/
 theorem exists_popescu_denominator_basis_enlargement
     (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]
     [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)

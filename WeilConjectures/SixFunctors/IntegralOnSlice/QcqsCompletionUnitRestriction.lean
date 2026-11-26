@@ -29,8 +29,28 @@ import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsOrdinaryRestrictionModels
 import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionComparisonDescent
 import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionUnitCriterion
 
-/-! Source: Stacks Tags 099M, 09BL and 09BM; blueprint: lem-fix-qcqs-completion-unit-restriction.
-This is a separately stated component of the locality argument. -/
+/-! # Restriction of the canonical completion unit
+
+We show that a normalized restriction comparison along a weakly étale map or a closed
+immersion carries the canonical completion unit to the canonical completion unit, and hence
+preserves derived completeness. This is a separately stated component of the locality
+argument for completion units.
+
+## Implementation details
+
+A weakly étale map is factored through the identity immersion, and a closed immersion after
+the identity weakly étale map, so that the normalized restriction models apply. The two Roos
+coordinates give chain-level unit compatibility, which localizes on good representatives.
+
+## References
+
+* [Stacks, Tag 099M]
+* [Stacks, Tag 09BL]
+* [Stacks, Tag 09BM]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0941]
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.8]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -100,19 +120,7 @@ attribute [local irreducible] ordinaryPull ordinaryDerivedPull
   completionComparison completionUnit
 
 /-- A normalized restriction comparison carries the specified unit to the specified
-unit and consequently preserves completeness.
-
-Source: Stacks Tags 09BL, 09BM, 06YY, 0941 and Bhatt--Scholze Lemma 6.5.8
-(blueprint: lem-fix-qcqs-completion-unit-restriction).
-Proof: factor a weakly etale map through the identity immersion, and a closed
-immersion after the identity weakly etale map. Apply the normalized restriction
-models. The finite coefficient projection identity follows by the two naturality
-identities for the ring inverse-image adjunction and the defining finite projections
-of the completed ring map. The two Roos coordinates imply chain-unit compatibility;
-localization on good representatives then gives derived-unit compatibility.
-An invertible source unit stays invertible under restriction and the completion
-comparison. The canonical-unit criterion on the source and target gives preservation
-of derived completeness. -/
+unit and consequently preserves completeness. -/
 theorem qcqsCompletionUnitRestriction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -208,12 +216,7 @@ theorem qcqsCompletionUnitRestriction
   infer_instance
 
 /-- The actual unit on a composite weakly etale/immersion restriction is invertible
-exactly when the pulled original unit is invertible.
-Source: Bhatt--Scholze Lemma 6.5.8; Stacks 0941
-(blueprint: lem-fix-qcqs-completion-unit-restriction).
-Proof: use the normalized models for the composite, and the proved unit equation.
-Postcomposition with the component of the completion comparison, which is an
-isomorphism, preserves and reflects invertibility. -/
+exactly when the pulled original unit is invertible. -/
 theorem ordinaryCompositeCompletionUnit_isIso
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -25,7 +25,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstru
 
 /-! # Restriction of signed integral line tensor
 
-(blueprint: lem-pur-integral-line-restrictions).
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 3.4.12, Proposition 3.5.1
+  and Definition 3.5.2.
 -/
 
 @[expose] public noncomputable section
@@ -278,27 +281,7 @@ private theorem preserves_integral
   exact ⟨hO, ObjectProperty.prop_of_iso _ (asIso ((comparison l E X L m).app K.obj)) hO⟩
 
 /-- Ordinary signed-line tensor preserves completeness, and its evaluations restrict
-and transport to the integral category through the actual completion comparisons.
-Source: Bhatt--Scholze 3.4.12, 3.5.1 and 3.5.2; blueprint proof (3).
-(blueprint: lem-pur-integral-line-restrictions).
-
-Proof: the opposite-line pairing makes exact tensor a triangulated equivalence,
-which preserves products. Balance tensor past each reduction, with its quotient
-transitions and reduction units. Transport the canonical augmented Roos triangle:
-the first map is still exactly the reduction units and the second is 1 minus the
-quotient shift. Thus ordinary tensor preserves completeness. For each finite
-reduction its cohomology is the old cohomology tensored with the finite signed
-line. Refine a finite constructible partition by a line-trivializing cover; its
-finite model is M tensor A, isomorphic to M. Hence constructibility and the same
-uniform support interval are preserved. The actual completion comparison is an
-isomorphism on these complete objects, giving the completed membership statement
-and the natural comparison c. Localize the ordinary evaluations on good models;
-association and evaluation give the stated chain evaluation formula. The two
-triangle identities hold on pure tensors and descend by localization. Fullness
-restricts this equivalence and both evaluations to the integral subcategory.
-Conjugate by c to obtain the completed functors and evaluations. Naturality cancels
-successive inverse comparisons in both triangle identities. These are precisely
-the two displayed evaluation equations in CompletedRestriction. -/
+and transport to the integral category through the actual completion comparisons. -/
 theorem integral_line_restrictions
     (hl : ∀ x : X, Invertible (l : X.residueField x))
     (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1]

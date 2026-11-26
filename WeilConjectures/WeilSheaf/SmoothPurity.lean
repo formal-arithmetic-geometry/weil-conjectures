@@ -24,50 +24,31 @@ import WeilConjectures.WeilSheaf.SmoothPurityOrientationOfTateEncoding
 
 For a smooth separated morphism `f : X ⟶ Y` of pure relative dimension `d` of `k₀`-schemes of
 finite type, the exceptional inverse image of Weil complexes is the twisted shifted pullback,
-`Rf^! ≅ f^*(d)[2d]`. Since `Rf^!` is characterized as the right adjoint of the direct image with
-compact support `Rf₀!` (`theorem-f-shriek-finite-coefficients`), this is the statement that
-`f^*(d)[2d]` is right adjoint to `Rf₀!`
-(`AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth`, the Weil stage
-`Λ = ℚ̄_ℓ` of `theorem-smooth-purity-all-admissible-coefficients`).
+`Rf^! ≅ f^*(d)[2d]`; equivalently, `f^*(d)[2d]` is right adjoint to the direct image with compact
+support `Rf₀!`
+(`AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth`).
 
-## Proof
+## Implementation details
 
-`Rf₀!` has a right adjoint `Rf^!`
-(`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek`), so it suffices to show
-`f^*(d)[2d] ≅ Rf^!`. Forgetting the Weil structure, the underlying complex of `Rf^! L` on the
-geometric fibre `X̄` is `Rf̄^!` of that of `L`
-(`WeilComplex.nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriek`).
-Through this identification, the purity map `γ_{f,L} : f^* L(d)[2d] ⟶ Rf^! L` of Weil complexes
-is the geometric purity map `f̄^* L̄ ⊗ Rf̄^! ℚ̄_ℓ ⟶ Rf̄^! L̄`
-(`AlgebraicGeometry.WeilComplex.exists_natTrans_forget_eq_upperShriekUnitTensorMap`),
-which is an isomorphism by smooth purity over `k̄`
-(`AlgebraicGeometry.ProEtale.CondensedRing.isIso_upperShriekUnitTensorMap_of_smooth`). Forgetting
-the Weil structure reflects isomorphisms
-(`CategoryTheory.Endofunctor.IsoAlgebra.isIso_of_isIso_forget_mapDerivedCategory_map`), so `γ_f`
-is an isomorphism.
+Forgetting the Weil structure, the underlying complex of `Rf^! L` on the geometric fibre `X̄` is
+`Rf̄^!` of that of `L`. Through this identification, the purity map
+`γ_{f,L} : f^* L(d)[2d] ⟶ Rf^! L` of Weil complexes is the geometric purity map
+`f̄^* L̄ ⊗ Rf̄^! ℚ̄_ℓ ⟶ Rf̄^! L̄`, which is an isomorphism by smooth purity over `k̄`; since
+forgetting the Weil structure reflects isomorphisms, `γ_f` is an isomorphism.
 
-As in the blueprint (`proposition-smooth-purity-finite-coefficients--1`), `γ_f` is the composite
-`f^* L(d)[2d] ≅ f^* L ⊗ ℚ̄_ℓ(d)[2d] ≅ f^* L ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! L` of
-- the identification of the Tate twist with a tensor product
-  (`AlgebraicGeometry.WeilComplex.nonempty_nativeConstructibleTensor_iso_tateTwist_comp_shift`);
-- the inverse of the Weil orientation `Rf^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]`
-  (`AlgebraicGeometry.WeilComplex.nonempty_upperShriek_obj_adicConstant_iso_of_smooth`);
-- the co-projection map of Weil complexes, which lies over the geometric one
-  (`AlgebraicGeometry.WeilComplex.exists_coprojection_forget_eq_upperShriekUnitTensorMap`).
+The map `γ_f` is the composite `f^* L(d)[2d] ≅ f^* L ⊗ ℚ̄_ℓ(d)[2d] ≅ f^* L ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! L`
+of the identification of the Tate twist with a tensor product, the inverse of the Weil
+orientation `Rf^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` and the co-projection map of Weil complexes.
 
-## Unfinished
+The Frobenius-equivariant orientation is proved from the native Tate encoding and the
+invertibility of the exceptional unit base change along `k₀ ⟶ k̄₀` (by Verdier duality). The
+co-projection map still rests on a statement with `sorry`: the Weil projection formula
+`AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso`.
 
-The identification of the Tate twist with a tensor product is proved, and so is the
-Frobenius-equivariant orientation
-(`AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`,
-`proposition-purity-trace-commute-frobenius`), from the native Tate encoding (A3) and the
-invertibility of the exceptional unit base change along `k₀ ⟶ k̄₀` (A1', by Verdier duality).
-The remaining input of `γ_f` rests on a statement with `sorry`:
-- the co-projection map needs the compatibility of forgetting the Weil structure with the native
-  tensor product, the projection formula and the counit of `Rf₀! ⊣ Rf^!`. The Weil projection
-  formula is only known to exist, through the proper projection formula
-  `AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso`, which is
-  itself stated with `sorry`.
+The general statement `nonempty_derivedLowerShriek_adjunction_of_smooth` (no separatedness of the
+base) is stated with `sorry`; the separated case
+`nonempty_derivedLowerShriek_adjunction_of_smooth_of_isSeparated` is proved and is the one used by
+`AlgebraicGeometry.Scheme.weil_conjectures`.
 -/
 
 @[expose] public section
@@ -96,32 +77,10 @@ variable [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [HasUpperShriek k₀ l f]
 
-/-- **Frobenius equivariance of the orientation of a smooth morphism** (blueprint:
-`proposition-purity-trace-commute-frobenius`, the purity square at `K = ℚ̄_ℓ`): for a smooth
-separated morphism `f : X ⟶ Y` of pure relative dimension `d`, there is an isomorphism
+/-- **Frobenius equivariance of the orientation of a smooth morphism**: for a smooth separated
+morphism `f : X ⟶ Y` of pure relative dimension `d`, there is an isomorphism
 `Rf̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` of the underlying complexes on the geometric fibre `X̄` which commutes
-with the Frobenius structures `Fr_X^* (-) ≅ (-)` of the two Weil complexes
-(`CategoryTheory.Endofunctor.IsoAlgebra.derivedStrIso`).
-
-Mathematically, this is the canonical orientation. Under the identification of the underlying
-complex of `Rf^! ℚ̄_ℓ` with `Rf̄^! ℚ̄_ℓ`
-(`WeilComplex.nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriek`), the
-Frobenius structure of `Rf^! ℚ̄_ℓ` is the exceptional datum
-`Fr_X^* Rf̄^! ℚ̄_ℓ ⟶ Rf̄^! Fr_Y^* ℚ̄_ℓ ≅ Rf̄^! ℚ̄_ℓ` of the cartesian Frobenius square. The
-canonical orientation is compatible with base change along this square
-(`proposition-compatibility-purity-base-change--1`), so it carries the exceptional datum to the Tate
-datum (`definition-weil-structure--1`), which is the Frobenius structure of `ℚ̄_ℓ(d)[2d]`.
-Equivalently, geometric Frobenius acts on `R^{2d} f̄_! ℚ̄_ℓ` by `q^d` through the trace.
-
-Proof: the native Tate encoding `α` (A3,
-`AlgebraicGeometry.WeilSheaf.purity_nonempty_toCondensedTateDescentIso`: the Tate twist sheaf is
-the descent of the finite-base root-defined Tate sheaf) and the invertibility of the exceptional
-base change map at the unit along `k₀ ⟶ k̄₀` for every smooth `f` (A1',
-`isIso_smoothUnitBaseChange_descendedShriekGeometricExchange` in
-`AlgebraicGeometry.ProEtale.CondensedRing`, by Verdier duality) produce the orientation as an
-isomorphism of native Weil complexes
-(`exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_tateEncoding`), so it
-commutes with the Frobenius structures. -/
+with the Frobenius structures `Fr_X^* (-) ≅ (-)` of the two Weil complexes. -/
 theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso (d : ℕ)
     [SmoothOfRelativeDimension d f] :
     ∃ g : forget.obj ((upperShriek f).obj
@@ -137,21 +96,9 @@ theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso (d : ℕ)
   obtain ⟨α⟩ := WeilSheaf.purity_nonempty_toCondensedTateDescentIso k₀ l X d
   exact exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_tateEncoding f d α
 
-/-- **The Weil orientation of a smooth morphism** (blueprint:
-`corollary-dualizing-complex-smooth-scheme--1`, at the coefficient stage `ℚ̄_ℓ` with Weil
-structures): for a smooth separated morphism `f : X ⟶ Y` of pure relative dimension `d`, the
-relative dualizing complex `Rf^! ℚ̄_ℓ` is isomorphic to `ℚ̄_ℓ(d)[2d]` as a Weil complex.
-
-On the geometric fibre this is the smooth purity isomorphism `Rf̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]`
-(`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso`). The content is that the orientation
-commutes with the Frobenius structures, as in the finite-coefficient statement over `Spec k₀`
-`AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism`
-(`AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`).
-A Frobenius-equivariant isomorphism of underlying complexes lifts to an isomorphism of Weil
-complexes (`CategoryTheory.Endofunctor.IsoAlgebra.nonempty_iso_of_forget_mapDerivedCategory_iso`).
-
-`AlgebraicGeometry.WeilComplex.nonempty_rightAdjoint_obj_adicConstant_iso_of_smooth` is the same
-statement for an arbitrary right adjoint of `Rf₀!`, deduced from smooth purity. -/
+/-- **The Weil orientation of a smooth morphism**: for a smooth separated morphism `f : X ⟶ Y` of
+pure relative dimension `d`, the relative dualizing complex `Rf^! ℚ̄_ℓ` is isomorphic to
+`ℚ̄_ℓ(d)[2d]` as a Weil complex. -/
 theorem nonempty_upperShriek_obj_adicConstant_iso_of_smooth (d : ℕ)
     [SmoothOfRelativeDimension d f] :
     Nonempty ((upperShriek f).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)) ≅
@@ -162,31 +109,11 @@ theorem nonempty_upperShriek_obj_adicConstant_iso_of_smooth (d : ℕ)
   obtain ⟨e⟩ := Endofunctor.IsoAlgebra.nonempty_iso_of_forget_mapDerivedCategory_iso _ g hg
   exact ⟨ObjectProperty.isoMk _ e⟩
 
-/-- **Weil equivariance of the purity map** (blueprint:
-`proposition-purity-trace-commute-frobenius`, at the coefficient stage `ℚ̄_ℓ`): let
-`f : X ⟶ Y` be smooth separated of pure relative dimension `d`, and let `φ_L` identify the
-underlying complex on `X̄` of `Rf^! L` with `Rf̄^!` of the underlying complex `L̄` of `L` (such
-identifications exist by
-`WeilComplex.nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriek`).
-Then there is a natural morphism of Weil complexes `γ_{f,L} : f^* L(d)[2d] ⟶ Rf^! L` which,
-read through `φ_L`, is the geometric purity map
-`γ_{f̄,L̄} : f̄^* L̄ ⊗ Rf̄^! ℚ̄_ℓ ⟶ Rf̄^! L̄`
-(`AlgebraicGeometry.ProEtale.CondensedRing.upperShriekUnitTensorMap`) up to an isomorphism `ψ_L`
-of the sources.
-
-The source isomorphism `ψ_L` is the comparison of pullback, Tate twist and shift with forgetting
-the Weil structure, followed by the smooth purity isomorphism `Rf̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]`
-(`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso`); here it is only required to exist.
-The content is the construction of `γ_f` as a morphism of Weil complexes: the geometric purity map
-must commute with the Frobenius structures. As in the blueprint
-(`proposition-smooth-purity-finite-coefficients--1`), `γ_f` is the co-projection map
-(`AlgebraicGeometry.WeilComplex.exists_coprojection_forget_eq_upperShriekUnitTensorMap`)
-precomposed with the Weil orientation
-(`AlgebraicGeometry.WeilComplex.nonempty_upperShriek_obj_adicConstant_iso_of_smooth`) and the
-identification of the Tate twist with a tensor product
-(`AlgebraicGeometry.WeilComplex.nonempty_nativeConstructibleTensor_iso_tateTwist_comp_shift`).
-Since the geometric purity map is an isomorphism, the identification of the targets coming with
-the co-projection map can be replaced by `φ_L`. -/
+/-- **Weil equivariance of the purity map**: let `f : X ⟶ Y` be smooth separated of pure
+relative dimension `d`, and let `φ_L` identify the underlying complex on `X̄` of `Rf^! L` with
+`Rf̄^!` of the underlying complex `L̄` of `L`. Then there is a natural morphism of Weil complexes
+`γ_{f,L} : f^* L(d)[2d] ⟶ Rf^! L` which, read through `φ_L`, is the geometric purity map
+`γ_{f̄,L̄} : f̄^* L̄ ⊗ Rf̄^! ℚ̄_ℓ ⟶ Rf̄^! L̄` up to an isomorphism `ψ_L` of the sources. -/
 theorem exists_natTrans_forget_eq_upperShriekUnitTensorMap (d : ℕ)
     [SmoothOfRelativeDimension d f]
     (φ : ∀ L : WeilComplex k₀ l Y, (adicSheafDerivedEquivCondensedMod l
@@ -211,19 +138,10 @@ theorem exists_natTrans_forget_eq_upperShriekUnitTensorMap (d : ℕ)
   exact exists_natTrans_forget_eq_upperShriekUnitTensorMap_of_orientation
     (k₀ := k₀) (l := l) f d θ φ
 
-/-- **The purity map of Weil complexes** (blueprint: `proposition-purity-trace-commute-frobenius`
-and `theorem-smooth-purity-all-admissible-coefficients`, at the coefficient stage `ℚ̄_ℓ` with Weil
-structures): for a smooth separated morphism `f : X ⟶ Y` of pure relative dimension `d` of
-`k₀`-schemes of finite type, there is a natural morphism of Weil complexes
-`γ_{f,L} : f^* L(d)[2d] ⟶ Rf^! L` which is an isomorphism on the underlying `ℓ`-adic complexes on
-the geometric fibre `X̄`.
-
-The underlying complex of `Rf^! L` is `Rf̄^!` of that of `L`
-(`WeilComplex.nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriek`),
-and through this identification `γ_f` is the geometric purity map
-(`AlgebraicGeometry.WeilComplex.exists_natTrans_forget_eq_upperShriekUnitTensorMap`),
-an isomorphism by smooth purity
-(`AlgebraicGeometry.ProEtale.CondensedRing.isIso_upperShriekUnitTensorMap_of_smooth`). -/
+/-- **The purity map of Weil complexes**: for a smooth separated morphism `f : X ⟶ Y` of pure
+relative dimension `d` of `k₀`-schemes of finite type, there is a natural morphism of Weil
+complexes `γ_{f,L} : f^* L(d)[2d] ⟶ Rf^! L` which is an isomorphism on the underlying `ℓ`-adic
+complexes on the geometric fibre `X̄`. -/
 theorem exists_natTrans_upperShriek_isIso_forget_of_smooth (d : ℕ)
     [SmoothOfRelativeDimension d f] :
     ∃ γ : upperStar f ⋙ tateTwist k₀ l X d ⋙ shiftFunctor (WeilComplex k₀ l X) (2 * d : ℤ) ⟶
@@ -248,14 +166,10 @@ theorem exists_natTrans_upperShriek_isIso_forget_of_smooth (d : ℕ)
 
 end Geometric
 
-/-- **Smooth purity for Weil complexes** (blueprint:
-`theorem-smooth-purity-all-admissible-coefficients`, at the coefficient stage `ℚ̄_ℓ` with Weil
-structures): for a smooth separated morphism `f : X ⟶ Y` of pure relative dimension `d` of
-`k₀`-schemes of finite type, the twisted shifted pullback `K ↦ f^* K(d)[2d]` of Weil complexes is
-right adjoint to the direct image with compact support `Rf₀!`; that is, `Rf^! ≅ f^*(d)[2d]`. The
-purity map `f^*(d)[2d] ⟶ Rf^!`
-(`AlgebraicGeometry.WeilComplex.exists_natTrans_upperShriek_isIso_forget_of_smooth`) is an
-isomorphism, since forgetting the Weil structures reflects isomorphisms. -/
+/-- **Smooth purity for Weil complexes** (separated base): for a smooth separated morphism
+`f : X ⟶ Y` of pure relative dimension `d` of `k₀`-schemes of finite type, the twisted shifted
+pullback `K ↦ f^* K(d)[2d]` of Weil complexes is right adjoint to the direct image with compact
+support `Rf₀!`; that is, `Rf^! ≅ f^*(d)[2d]`. -/
 theorem nonempty_derivedLowerShriek_adjunction_of_smooth_of_isSeparated (d : ℕ)
     [SmoothOfRelativeDimension d f] [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
     Nonempty (derivedLowerShriek k₀ l f ⊣
@@ -277,20 +191,10 @@ theorem nonempty_derivedLowerShriek_adjunction_of_smooth_of_isSeparated (d : ℕ
   have : IsIso γ := NatIso.isIso_of_isIso_app γ
   exact ⟨(derivedLowerShriekUpperShriekAdjunction f).ofNatIsoRight (asIso γ).symm⟩
 
-/-- **Smooth purity for Weil complexes** (blueprint:
-`theorem-smooth-purity-all-admissible-coefficients`, at the coefficient stage `ℚ̄_ℓ` with Weil
-structures): for a smooth separated morphism `f : X ⟶ Y` of pure relative dimension `d` of
-`k₀`-schemes of finite type, the twisted shifted pullback `K ↦ f^* K(d)[2d]` of Weil complexes is
-right adjoint to the direct image with compact support `Rf₀!`; that is, `Rf^! ≅ f^*(d)[2d]`.
-
-This input of the chapter on smooth purity is not formalized for Weil complexes yet; it is stated
-with `sorry` (cross-section rule). 
-
-This is the statement of slopmaster2 (no separatedness of the base). The separated case is proved
-in `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth_of_isSeparated`,
-which is what the main theorem uses (the affine-line (Thom) route of
-`WeilConjectures.WeilSheaf.AffineLineSmoothAdjunction` assumes a separated base). This general form
-is kept as stated, with `sorry`, and is not used by `AlgebraicGeometry.Scheme.weil_conjectures`. -/
+/-- **Smooth purity for Weil complexes**: for a smooth separated morphism `f : X ⟶ Y` of pure
+relative dimension `d` of `k₀`-schemes of finite type, the twisted shifted pullback
+`K ↦ f^* K(d)[2d]` of Weil complexes is right adjoint to the direct image with compact support
+`Rf₀!`; that is, `Rf^! ≅ f^*(d)[2d]`. -/
 theorem nonempty_derivedLowerShriek_adjunction_of_smooth (d : ℕ)
     [SmoothOfRelativeDimension d f] :
     Nonempty (derivedLowerShriek k₀ l f ⊣
@@ -298,12 +202,9 @@ theorem nonempty_derivedLowerShriek_adjunction_of_smooth (d : ℕ)
   sorry
 
 variable {f} in
-/-- **The exceptional inverse image of `ℚ̄_ℓ` along a smooth morphism** (blueprint:
-`corollary-dualizing-complex-smooth-scheme--1`, at the coefficient stage `ℚ̄_ℓ`): for a
-smooth separated morphism `f : X ⟶ Y` of pure relative dimension `d`, and any right adjoint `G` of
-`Rf₀!`, `G ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]`. This is smooth purity
-(`AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth`) applied to
-`ℚ̄_ℓ`, with `f^* ℚ̄_ℓ ≅ ℚ̄_ℓ`. -/
+/-- **The exceptional inverse image of `ℚ̄_ℓ` along a smooth morphism**: for a smooth separated
+morphism `f : X ⟶ Y` of pure relative dimension `d` and any right adjoint `G` of `Rf₀!`,
+`G ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]`. -/
 theorem nonempty_rightAdjoint_obj_adicConstant_iso_of_smooth (d : ℕ)
     [SmoothOfRelativeDimension d f] [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
     {G : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X}

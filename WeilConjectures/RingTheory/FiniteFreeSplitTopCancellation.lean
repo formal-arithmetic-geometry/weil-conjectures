@@ -17,8 +17,21 @@ import Mathlib.RingTheory.Finiteness.Prod
 /-!
 # Cancelling a split top differential of a finite free complex
 
-Source: Stacks Project, More on Algebra, Tag 064U, finite-free replacement construction
-(blueprint: lem-pc-finite-free-split-top-cancellation).
+If a complex `P` of finite free modules vanishes above degree `n` and its top differential
+`P.X (n - 1) → P.X n` is split surjective, then `P` is quasi-isomorphic to a complex of finite
+free modules vanishing above degree `n - 1`.
+
+## Implementation details
+
+With `T = P.X n` and `A = P.X (n - 1) ≅ ker d ⊕ T`, we remove the contractible identity complex
+on `T` in degrees `n - 1, n` and add the contractible identity complex on `T` in degrees
+`n - 2, n - 1`. The new top term is `ker d ⊕ T ≅ A` and the term in degree `n - 2` is
+`P.X (n - 2) ⊕ T`. The comparison map is the projection off the added summand followed by the
+inclusion into `P`; the argument also works when `T` is zero.
+
+## References
+
+* [Stacks, Tag 064U]
 -/
 
 @[expose] public section
@@ -56,24 +69,7 @@ private theorem freeFinite_biprod {R : Type u} [CommRing R] (M N : ModuleCat.{v}
   apply freeFinite_iso (ModuleCat.biprodIsoProd M N)
   exact ⟨inferInstance, inferInstance⟩
 
-/-- A split top differential can be cancelled while keeping every term finite free.
-Source: Stacks Project, More on Algebra, Tag 064U, finite-free replacement construction,
-with the split-summand cancellation in step 3 of
-lem-pc-pseudo-coherent-bounded-finite-free-model
-(blueprint: lem-pc-finite-free-split-top-cancellation).
-
-Proof: Put `T = P.X n`, `A = P.X (n - 1)` and `d = P.d (n - 1) n`. The supplied
-section splits `A` as `ker d ⊕ T`. Since `P` vanishes above `n`, remove the
-contractible identity complex on `T` in degrees `n - 1,n`. The resulting complex
-has top term `ker d` in degree `n - 1`; all lower terms agree with `P`. Add the
-contractible identity complex on `T` in degrees `n - 2,n - 1`. Its new top term
-is `ker d ⊕ T`, isomorphic to `A`, and its term in degree `n - 2` is
-`P.X (n - 2) ⊕ T`. Thus every term is finite free and all terms above `n - 1`
-vanish. Project off the newly added contractible summand and include the
-remaining kernel summand into `P`. These are chain maps because `d² = 0`.
-The composite is a quasi-isomorphism: the projection has contractible kernel,
-and the inclusion has contractible cokernel. This argument also works when
-`T` is zero, and places no lower bound on the complex. -/
+/-- A split top differential can be cancelled while keeping every term finite free. -/
 theorem exists_finiteFree_cancel_split_top
     {R : Type u} [CommRing R] (P : CochainComplex (ModuleCat.{v} R) ℤ) (n : ℤ)
     (hbound : P.IsStrictlyLE n)

@@ -11,38 +11,31 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 import WeilConjectures.Topology.TopologicalLeraySpectralObjectAugmentation
 
-/-! # Objectwise topological cocycle comparison -/
+/-! # Objectwise topological cocycle comparison
+
+Additive maps from the cohomology of the direct image `f_*F` to the cohomology of `F`, defined
+through comparisons of injective resolutions and independent of the choices.
+
+## Implementation details
+
+Direct image preserves injectives, so the identity of `f_*F` extends to a comparison from an
+injective resolution of `f_*F` into the direct image of one of `F`. The free, sheafification and
+Yoneda adjunctions identify maps out of the free sheaf on the terminal open with global sections;
+under these identifications the generator condition on `a` identifies the two global-section
+complexes. Comparisons into bounded-below complexes of injectives are unique up to homotopy.
+
+## References
+
+* [Stacks Project, Tag 01DZ](https://stacks.math.columbia.edu/tag/01DZ)
+* Stacks Project, Derived Categories, Lemmas 13.18.6 and 13.18.7
+-/
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace CategoryTheory
 set_option linter.unusedVariables false in
-/-- Objectwise additive maps on canonical cohomology, independent of comparisons.
-Source: Stacks Project, Cohomology, Section 20.2 (Tag 01DZ); Derived Categories,
-Section 13.18, Lemmas 13.18.6 and 13.18.7 (comparison and homotopy uniqueness).
-(blueprint: lem-sc-topological-cocycle-objectwise)
-
-Proof: Direct image preserves injectives since its left adjoint is exact. Choose an
-injective resolution of F and of f_*F and extend the identity on f_*F to a comparison
-into f_*I. Apply global sections and the terminal-sections identification represented
-by a. Chain maps preserve cycles and boundaries, so this gives an additive map on
-cohomology. The Ext computation identifies this map with the displayed homomorphism.
-Any other pair of resolutions is linked to the chosen pair by comparison maps over
-identity maps. Comparisons into a bounded-below complex of injectives are homotopic;
-thus the resulting cohomology map is independent of resolutions and comparisons.
-The free/sheafification/Yoneda adjunction identifies Hom(KX,G) with G(X),
-and Hom(KZ,T) with T(Z). Under these identifications, the generator condition
-on a says that z maps to the same terminal section through f_*. Consequently
-z maps to a >> f_*z by a bijection natural in T. In each degree this identifies
-the two global-section complexes, including their differentials. Thus every
-image of a source cycle has a unique z, which is a cycle; boundaries correspond
-as well. This also shows that the displayed property uniquely determines tau,
-since every Ext class is represented by s and each s has such a z. Hence a >> f_*z = s >> phi
-gives the stated equality of Ext classes.
-Zero sheaves and zero cocycles give zero, degree zero gives ordinary sections, and
-for an identity continuous map this construction gives the identity.
--/
+/-- Objectwise additive maps on canonical cohomology, independent of comparisons. -/
 theorem exists_topological_cocycle_objectwise
     {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]
     (a : (presheafToSheaf (Opens.grothendieckTopology X)

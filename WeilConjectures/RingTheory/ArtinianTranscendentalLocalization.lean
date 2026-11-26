@@ -18,7 +18,21 @@ import WeilConjectures.RingTheory.ArtinianTranscendentalLocalizationEvaluation
 /-!
 # The polynomial localization for a transcendental residue element
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07FI, transcendental case.
+For a local map `D → S` of Artinian local rings and `x ∈ S` with transcendental residue,
+localizing `D[t]` at the inverse image of the maximal ideal of `S` gives an Artinian local,
+essentially smooth factorization `D → D[t]_P → S` sending `t` to `x`.
+
+## Implementation details
+
+Transcendence gives `P = m_D[t]`, so `T = D[t]_P` is Noetherian local with nilpotent maximal
+ideal, hence Artinian. Evaluation at `x` extends to `T → S` by the universal property of
+localization, and is flat by the fibre criterion since `T/m_D T = F(t)` is a field. The
+statement uses the universe lift of `T`. Injectivity of evaluation at `x` is not needed.
+
+## References
+
+* [Stacks, Tag 07FI] (Smoothing Ring Maps, proof, transcendental case)
+* [Stacks, Tag 00MP]
 -/
 
 @[expose] public section
@@ -29,23 +43,7 @@ universe u v z
 namespace Algebra
 
 /-- Localizing D[t] at the inverse image of the target maximal ideal gives an Artinian
-local essentially smooth factorization when the residue of x is transcendental.
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07FI, transcendental case,
-with flatness justified by Algebra, Tag 00MP.
-(blueprint: lem-weil-pbc-artinian-transcendental-localization).
-
-Proof: Let θ : D[t] → S evaluate t at x. The contracted prime P contains m_D[t] because
-D → S is local. Modulo m_D[t], its map to the residue field K of S evaluates F[t] at the
-residue α of x. Transcendence means that this evaluation is injective, so P = m_D[t].
-Thus T = D[t]_P is Noetherian and local, and its maximal ideal equals m_D T and is
-nilpotent, making T Artinian. The structure map D → T is local and essentially smooth,
-since the polynomial algebra is smooth. Every polynomial outside P evaluates to a unit
-of S, so the localization universal property extends θ to g' : T → S. This map is
-local, factors D → S, and sends t/1 to x. Its flatness follows from the Noetherian fibre
-criterion for D → T → S, M = S: S is flat over D, and T/m_D T = F(t) is a field, so the
-fibre module is flat. The statement uses the canonical universe lift of T, preserving
-all these properties.
-This construction does not require θ to be injective. -/
+local essentially smooth factorization when the residue of x is transcendental. -/
 theorem artinian_transcendental_polynomial_localization
     (D : Type u) (S : Type v) [CommRing D] [CommRing S]
     [IsLocalRing D] [IsArtinianRing D] [IsLocalRing S] [IsArtinianRing S]

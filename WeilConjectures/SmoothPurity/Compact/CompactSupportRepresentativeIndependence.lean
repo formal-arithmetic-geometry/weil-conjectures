@@ -34,9 +34,10 @@ import all WeilConjectures.SixFunctors.Integral.IntegralScalarExtensionWellDefin
 /-!
 # Compact support and specified rational identifications
 
-Source: Weil blueprint, sec-smooth-purity/sk-def-sf-operations, order 1494;
-main-20261015, sec-six-functors-basics/sk-thm-sf-pf-field, order 1853
-(blueprint: lem-weil-compact-support-representative-independence).
+This module shows that specified rational identifications induce coherent compact-support
+comparisons.
+
+## Implementation details
 
 The comparison is a single simultaneous family indexed by specified input
 isomorphisms, realized by the scalar extension of an integral linear functor with
@@ -359,42 +360,11 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 -- The coherence proof unfolds the restricted transitions at every finite level.
-/-- Specified rational identifications induce coherent compact-support comparisons.
-The compactification c is fixed at every finite coefficient level, exactly as in
-sfIntegralCompactSupportValue. The index of each reduction is the positive exponent n+1.
-Source: Weil blueprint, order 1494, and main-20261015, order 1853
-(blueprint: lem-weil-compact-support-representative-independence).
-
-Proof (the five steps of the DAG):
-1. Use the supplied compactification c and the exact choices of the coherent tower
-T, its evaluation comparisons e, and the total right derived limit RF with unit η.
-Descend the ordinary limit projections through the universal property of RF. This
-normalizes the resulting projections on every complex. Compare RF with the standard
-right derived inverse limit and apply the proved canonical Roos-triangle construction.
-2. Identify the tower theorem's scalar action with the published integral action by
-its constant finite residues, then by localization and uniqueness of the derived
-scalar action. Ordinary inverse limit is linear by its projections. The existing
-K-injective right-derived-linearity proof applies to its standard derived functor;
-uniqueness transfers linearity and additivity to the prescribed RF.
-3. The tower's successor transitions are exactly sfCompactSupportTransition. Transport
-its normalized Roos triangle by e. Rotate this triangle and the chosen triangle in
-sfIntegralCompactSupportValue; an isomorphism extending the identity on the common
-transition arrow gives an isomorphism of vertices preserving projections. Conjugate
-maps of T followed by RF by these vertex isomorphisms to obtain F with exactly the
-prescribed objects. Cancellation proves functoriality, and bilinearity proves
-additivity and linearity. Constructibility is already part of those object values.
-4. Extend this integral functor on the raw tensor Hom groups of
- def-weil-rationalization-karoubi and def-weil-linear-scalar-localization by
- u tensor e mapping to F(u) tensor e. The tensor balancing of
- def-weil-module-base-change follows from integral linearity. Functoriality follows
- on pure tensors from F(vu)=F(v)F(u) and F(1)=1, then on sums by bilinearity.
- Any linear extension has that pure-tensor formula, so the extension is unique
- for the fixed integral functor. Its object values are sfRationalCompactSupportValue.
-5. Take beta(alpha) to be the image of alpha, with inverse the image of its inverse.
- The functor laws give the identity and composition clauses. For presentations
- a and a' of M the input is a followed by the inverse of a', hence the comparison
- is beta(a followed by inverse a'). Cancelling the middle presentation gives the
- final cocycle. No choice-independent comparison of bare isomorphism classes is used. -/
+/-- Specified rational identifications induce coherent compact-support comparisons: a family
+of comparisons indexed by isomorphisms of inputs, compatible with identities and composition and
+satisfying the cocycle condition for presentations of a common rational object. The
+compactification `c` is fixed at every finite coefficient level, as in
+`sfIntegralCompactSupportValue`, and the reduction at level `n` has exponent `n + 1`. -/
 theorem exists_compactSupportRepresentativeComparison
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

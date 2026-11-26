@@ -11,6 +11,10 @@ import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalTranspor
 /-! # Reconstruction choices for exceptional integral transport
 
 This is the reconstruction subproblem isolated from the core transport record.
+
+## References
+
+* [Zheng, Construction 5.25 and Proposition 5.26]
 -/
 
 @[expose] public noncomputable section
@@ -36,14 +40,7 @@ structure TransportCorePreData
   reconstruction : ∀ E : FieldStage.{u} l, ∀ side : Bool,
     Reconstruction l E (endpoint X Y side)
 
-/-- The normalized reduction/limit reconstructions can be chosen at both endpoints.
-Source: Zheng, Construction 5.25 and Proposition 5.26.
-The proof applies the normalized reduction/limit theorem to the coefficient sequence at
-`X` and `Y`, restricts to the replete subcategories with the common finite and Tor
-bounds, and records the resulting equivalence, unit, counit, and evaluation maps.
-(blueprint: new-lem-sf-exceptional-ring-transport-reconstructions)
-The left realizations are supplied with their integer shift-compatibility witnesses.
--/
+/-- The normalized reduction/limit reconstructions can be chosen at both endpoints. -/
 theorem exists_exceptional_transport_reconstructions
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

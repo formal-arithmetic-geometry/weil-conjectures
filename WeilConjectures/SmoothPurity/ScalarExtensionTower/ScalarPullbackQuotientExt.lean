@@ -12,8 +12,12 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # Uniqueness of strict scalar/pullback quotient comparisons
 
-Source: Stacks 03D3, 06YY and 07A4. Three ordinary adjunctions detect strict
-comparison maps on their nested tensor-unit generators.
+Three ordinary adjunctions detect strict comparison maps on their nested tensor-unit
+generators.
+
+## References
+
+* Stacks Project, Tags 03D3, 06YY and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -107,22 +111,7 @@ private theorem pulledScalarGenerators_ext {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
   change a.val.app _ _ = b.val.app _ _
   exact hab U.unop x
 
-/-- Nested tensor-unit pullback generators determine the strict tower comparison.
-Source: Stacks 03D3, 06YY, 07A4; the generator comparison in step 2 of
-stage3-pur-scalar-pullback-left-roos.
-(blueprint: lem-pur-scalar-pullback-quotient-ext).
-
-Proof: compare q inverse followed by q' with the identity, degreewise and at each
-level n. By the inverse-image adjunction it suffices to compare maps on the pullback
-unit sections. Ordinary scalar extension and finite quotient extension are generated
-locally by pure tensors; their balancing relations reduce these sections to scalar
-multiples of the nested unit sections in the hypothesis. Completed-to-finite scalar
-projection is locally surjective, so a completed-linear map of these finite modules
-is already finite-linear. The two maps therefore coincide on every section after
-sheafification. Equality at each degree gives chain-map equality; equality at all
-levels gives equality of natural transformations, and then of isomorphisms. All
-quotient transitions are retained. Zero complexes, empty schemes, n=0 and ramified
-coefficient embeddings require no extra hypothesis. -/
+/-- Nested tensor-unit pullback generators determine the strict tower comparison. -/
 theorem scalarPullbackQuotient_ext {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : (integralOperationsGoodComplex.{u, u} l E Y).FullSubcategory)
     (C : CochainComplex (coefficientSequenceModules.{u, u} l E Y) ℤ)

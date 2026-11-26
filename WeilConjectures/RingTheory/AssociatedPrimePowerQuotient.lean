@@ -15,8 +15,19 @@ public import Mathlib.RingTheory.Ideal.MinimalPrime.Colon
 /-!
 # Associated primes of quotients by powers of an element
 
-Source: Stacks Project, Algebra, Lemma 0CN5 (lemma-inherit-minimal-primes)
-(blueprint: lem-weil-pbc-associated-prime-power-quotient).
+Over a Noetherian local ring, a prime minimal over `p + (x)`, with `p` associated to a finite
+module `M`, is associated to `M / x^n M` for some positive `n`.
+
+## Implementation details
+
+Choose `z` with annihilator `p`. Artin–Rees for `(x)` and `N = Rz` gives a constant `c` with
+`N ∩ x^(c+1) M ⊆ xN`, so the annihilator `A` of the image of `z` in `M / x^(c+1) M` satisfies
+`p ⊆ A ⊆ p + (x)` and contains `x^(c+1)`. Hence `q` is minimal over `A`, and a prime minimal over
+the annihilator of a single element is associated.
+
+## References
+
+* [Stacks, Tag 0CN5]
 -/
 
 @[expose] public section
@@ -25,27 +36,8 @@ universe u v
 
 namespace Module
 
-/-- Source: Stacks Project, Algebra, Lemma 0CN5
-(blueprint: lem-weil-pbc-associated-prime-power-quotient).
-A prime minimal over `p + (x)`, with `p` associated to `M`, is associated to
-`M / x^n M` for some positive `n`.
-
-Proof:
-1. Choose `z` with annihilator `p`; its cyclic submodule `N = Rz` is isomorphic to `R/p`,
-   and `N/xN` is isomorphic to `R/(p + (x))`.
-2. Apply Artin--Rees (lem-weil-pbc-artin-rees) to `(x)` and `N` inside `M`.
-   If its constant is `c`, take `n = c + 1`, giving `N ∩ x^n M ⊆ xN`.
-3. Let `Nbar` be the image of `N` in `M/x^n M`. It is finite and isomorphic to
-   `N/(N ∩ x^n M)`. By lem-weil-pbc-associated-prime-submodule it suffices to
-   show that `q` is associated to `Nbar`.
-4. The inclusion in step 2 gives a surjection `Nbar → R/(p + (x))`, so
-   `Ann(Nbar) ⊆ p + (x) ⊆ q`. By lem-weil-pbc-finite-module-support-annihilator,
-   `q` belongs to the support of `Nbar`.
-5. Both `p` and `x^n` annihilate `Nbar`. Any prime in its support contained in `q`
-   therefore contains `p` and `x`, hence equals `q` by minimality over `p + (x)`.
-   Thus `q` is minimal in the support, using the support-annihilator lemma again.
-6. By lem-weil-pbc-minimal-support-prime-associated, `q` is associated to `Nbar`;
-   the submodule lemma then puts it in the associated primes of `M/x^n M`. -/
+/-- A prime minimal over `p + (x)`, with `p` associated to `M`, is associated to
+`M / x^n M` for some positive `n`. -/
 theorem exists_mem_associatedPrimes_quotient_pow
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     {M : Type v} [AddCommGroup M] [Module R M] [Module.Finite R M]

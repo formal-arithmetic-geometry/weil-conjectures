@@ -14,8 +14,18 @@ import Mathlib.LinearAlgebra.Dimension.Constructions
 
 /-! # The reduced-monomial dimension bound for a root quotient
 
-Source: Stacks Project, More on Algebra, Tag 07E5, proof of (2) ⇒ (4), first paragraph;
-monic polynomial division.
+The quotient `k[X_1, …, X_n]/(X_i^p - a_i)` is finite-dimensional, of dimension at most `p^n`.
+
+## Implementation details
+
+Writing each exponent as `e_i = p d_i + r_i` with `0 ≤ r_i < p`, the relations reduce every
+monomial to a multiple of a reduced monomial `X^r`, so the `p^n` reduced monomials span the
+quotient. The division uses `p > 0` and works for arbitrary coefficients and for `n = 0`.
+
+## References
+
+* [Stacks, Tag 07E5] (proof of (2) ⇒ (4))
+* [Stacks, Tag 00G3]
 -/
 
 @[expose] public section
@@ -25,20 +35,7 @@ universe u
 namespace Algebra
 
 /-- The quotient adjoining roots is finite-dimensional, with dimension at most the
-number of reduced monomials. No characteristic or independence hypothesis is required.
-
-Source: Stacks Project, More on Algebra, Tag 07E5, proof of (2) ⇒ (4), first paragraph;
-Algebra, monic division as in Tag 00G3.
-(blueprint: lem-weil-pbc-pth-root-monomial-dimension).
-
-Proof: Let q be the quotient map. Its relations give q(X_i)^p = q(C(a_i)). For a
-monomial X^e, write each exponent e_i = p*d_i+r_i with 0 <= r_i < p. In the quotient
-its image is the coefficient product of a_i^d_i times the image of X^r. Thus every
-polynomial class is in the k-span of the images of the monomials indexed by
-Fin n -> Fin p. There are p^n such monomials. The resulting surjective linear map
-from the p^n-dimensional coordinate space to the quotient proves finiteness and
-the dimension bound. The division algorithm uses p > 0, and works for arbitrary
-coefficients, including zero. For n = 0 it says constants span the quotient. -/
+number of reduced monomials. No characteristic or independence hypothesis is required. -/
 theorem pthRootAlgebra_finite_finrank_le
     (k : Type u) [Field k] (p n : ℕ) (hp : 0 < p) (a : Fin n → k) :
     Module.Finite k (pthRootAlgebra p n k a) ∧

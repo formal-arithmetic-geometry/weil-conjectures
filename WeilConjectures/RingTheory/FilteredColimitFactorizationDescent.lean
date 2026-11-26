@@ -18,6 +18,25 @@ import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Mathlib.Algebra.Polynomial.Lifts
 
+/-!
+# Descending factorizations along filtered colimits
+
+Let `A` be a directed colimit of rings `Aᵢ` with compatible ideals `Jᵢ`, and `I` the union of
+their images. A factorization of a monic polynomial modulo `I` into coprime monic factors
+descends to a factorization modulo `Jᵢ` at a single stage.
+
+## Implementation details
+
+Finitely many coefficients, together with Bezout witnesses for coprimality, are lifted to one
+common stage keeping leading coefficients equal to `1`; the coefficients of `f - g h` and of the
+Bezout relation map into `I`, hence lie in the stage ideal at a later stage. When `A ⧸ I` is
+zero, one moves to a stage where `1 ∈ Jᵢ` and takes both factors equal to `1`.
+
+## References
+
+* [Stacks, Tag 0FWT], second paragraph of the proof
+-/
+
 @[expose] public section
 
 universe u
@@ -125,26 +144,9 @@ private theorem finite_polynomial_relations_stage
       ⟨k, Finset.mem_univ _, Finset.mem_image.mpr
         ⟨m, Polynomial.mem_support_iff.mpr hm, rfl⟩⟩)
 
-/-- Finite monic factorization data modulo the union of compatible ideals descends to
-one stage. No henselian hypothesis is needed.
-Source: Stacks Project, More on Algebra, Lemma 0FWT, second paragraph of the proof.
-(blueprint: lem-weil-pbc-filtered-colimit-factorization-descent)
-
-Proof: every colimit element has a stage representative. Finitely many representatives
-can be moved to one common stage. If a stage element maps into I, express its image as
-the image of an element of some J j; equality in a filtered colimit holds at a later
-stage, where compatibility puts the original element into the stage ideal. The same
-holds simultaneously for finitely many elements.
-If A/I is nonzero, write f and its two monic factors as powers of X plus lower terms.
-Choose representatives in A of the lower coefficients of the factors and of two Bezout
-polynomials witnessing coprimality. Descend these and the lower coefficients of f to
-one stage, keeping the leading coefficients exactly 1. The coefficients of F-GH and
-1-GG'-HH' map into I; move further until all lie in the stage ideal. Reduction there
-gives the required factorization and Bezout relation. Mapping back gives the prescribed
-factors. If A/I is zero, first move to a stage where 1 belongs to J (using the preceding
-membership argument applied to 1); descend f monically and take G=H=1. The stage quotient
-and A/I are zero rings, so all factorization, coprimality and image requirements hold.
-If A itself is zero, f=0 and one can take F=1 at the chosen stage. -/
+/-- If a monic `f` over the colimit factors modulo the union `I` of compatible stage ideals as a
+product of coprime monic polynomials, then `f` and this factorization descend to a factorization
+into coprime monic factors modulo `J i` at a single stage `i`. -/
 theorem filteredColimit_factorization_descent
     {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
     (F : Λ ⥤ CommRingCat.{u}) [HasColimit F]

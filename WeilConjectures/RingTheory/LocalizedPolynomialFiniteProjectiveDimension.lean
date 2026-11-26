@@ -18,8 +18,20 @@ import WeilConjectures.RingTheory.LocalizedPolynomialTorBound
 import WeilConjectures.RingTheory.FiniteProjectiveDimensionOfTorBound
 
 /-! # Finite projective dimension over a localized polynomial ring
-Source: Stacks Project, Tag 068X.
-(blueprint: lem-pc-localized-polynomial-finite-projective-dimension)
+
+A finite module over a prime localization of a polynomial ring over a Noetherian ring has finite
+projective dimension if it has finite Tor dimension over the base.
+
+## Implementation details
+
+The base map is flat and its nonzero fibres have global dimension at most `n`, so Stacks 068X
+makes the module perfect. A syzygy beyond its Tor amplitude is flat and finitely presented,
+hence projective, giving a bounded projective resolution and the vanishing of `Ext` above its
+length.
+
+## References
+
+* [Stacks, Tag 068X]
 -/
 
 @[expose] public section
@@ -32,17 +44,6 @@ namespace ModuleCat
 
 /-- A finite module over a prime localization of a polynomial ring is perfect if it
 has finite Tor dimension over the base.
-Source: Stacks Project, Tag 068X, applied to a module concentrated in degree zero.
-Proof: the polynomial ring and its localization are Noetherian by the Hilbert basis
-theorem. A finite module is thus pseudo-coherent. The map from the base ring to the
-localized polynomial ring is flat. Each nonzero fibre is a localization of a polynomial
-ring in n variables over a field and has global dimension at most n. Tag 068X therefore
-makes the module perfect. Take its finite free resolution and a syzygy beyond its Tor
-amplitude. Dimension shifting makes this syzygy flat; it is finitely presented by
-Noetherianity, hence projective. Truncate there to obtain a bounded projective resolution.
-Its Ext groups vanish above its length, giving the asserted natural bound. For the zero
-module use bound zero; when n = 0 the same argument applies to a localization of the base.
-(blueprint: lem-pc-localized-polynomial-finite-projective-dimension)
 -/
 theorem localizedPolynomial_finiteProjectiveDimension_of_finiteTor
     {A : Type u} [CommRing A] [IsNoetherianRing A]

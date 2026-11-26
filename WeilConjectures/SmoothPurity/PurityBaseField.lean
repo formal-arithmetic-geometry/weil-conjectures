@@ -13,21 +13,11 @@ public import Mathlib.Algebra.CharP.Algebra
 /-!
 # Base fields for purity
 
-Source: blueprint sk-def-purity-conv, def-pur-conventions (ℓ distinct from the
-characteristic); definition-constructible-sheaves--6 and lemma-fourier-transform-constant-sheaf (a
-base field finite or algebraically closed); Houyi #1396 (blueprint: def-pur-base-field). The Fourier
-nodes lemma-integral-linear-character, proposition-fourier-inversion and
-proposition-fourier-inversion are stated over `k₀`-schemes.
-
-Lead decision (Houyi #1396): the purity constructions (Kummer classes, frame gluing, Chern
-and Thom classes, the trace) are stated over a general base field. Proofs may reduce to
-the algebraic closure by base change. In the iface tree the field `P.field.k` is used only
-for three things: (a) invertibility of `ℓ`, which needs only `ringChar K` prime and `≠ ℓ`;
-(b) finite type, which only gives the Noetherian instance of
-`VectorBundleZeroSection.scheme`; (c) the six-functor wrappers, whose field-general core
-`CurrentCompactKunneth.operationsOver` needs `Finite K ∨ IsAlgClosed K`. This file records
-exactly these hypotheses as `PurityBaseField`. It is specialised to the closure `P.field.k`
-(`geometricBase`) and to the finite field `P.field.k₀` (`arithmeticBase`).
+The purity constructions (Kummer classes, frame gluing, Chern and Thom classes, the trace) are
+stated over a base field of prime characteristic different from `ℓ` which is finite or
+algebraically closed. This file records exactly these hypotheses as `PurityBaseField`, and
+specialises it to the closure `P.field.k` (`geometricBase`) and to the finite field
+`P.field.k₀` (`arithmeticBase`).
 
 ## Main definitions
 
@@ -37,6 +27,14 @@ exactly these hypotheses as `PurityBaseField`. It is specialised to the closure 
 * `PurityBaseField.ofDatum`: the geometric field of a finite-field datum.
 * `PurityFiniteSetting.geometricBase`, `PurityFiniteSetting.arithmeticBase`,
   `PurityFiniteSetting.closureMap`.
+
+## Implementation details
+
+Proofs may reduce to the algebraic closure by base change. The field `P.field.k` is used only
+for three things: (a) invertibility of `ℓ`, which needs only `ringChar K` prime and `≠ ℓ`;
+(b) finite type, which only gives the Noetherian instance of
+`VectorBundleZeroSection.scheme`; (c) the six-functor wrappers, whose field-general core
+`CurrentCompactKunneth.operationsOver` needs `Finite K ∨ IsAlgClosed K`.
 -/
 
 @[expose] public section
@@ -53,9 +51,7 @@ namespace WeilConjectures
 
 /-- A base field for purity at the coefficient prime `ell`. Its characteristic is a prime
 different from `ell`, and the field is finite or algebraically closed. This is exactly the
-scope of the existing field-general six-functor data `CurrentCompactKunneth.operationsOver`.
-Source: blueprint def-pur-conventions (ℓ ≠ p) and proposition-composition-base-change-rf-shriek--1
-(finite or algebraically closed base) (blueprint: def-pur-base-field). -/
+scope of the existing field-general six-functor data `CurrentCompactKunneth.operationsOver`. -/
 structure PurityBaseField (ell : ℕ) where
   K : Type u
   [field : Field K]
@@ -71,8 +67,7 @@ variable {ell : ℕ} [Fact ell.Prime] (K : PurityBaseField.{u} ell)
 
 /-- The geometric field `D.k` of a finite-field datum, as a purity base field for a coefficient
 prime `ell ≠ D.p`. Characteristic facts are derived from `D` as in `sectionInvariant`; the
-field is algebraically closed since it is an algebraic closure of `D.k₀`.
-Source: def-pur-conventions, fixed geometric field (blueprint: def-pur-base-field). -/
+field is algebraically closed since it is an algebraic closure of `D.k₀`. -/
 def ofDatum (D : WeilConjectures.FiniteFieldDatum.{u}) (ell : ℕ) (hell : ell ≠ D.p) :
     PurityBaseField.{u} ell :=
   letI : Fintype D.k₀ := Fintype.ofFinite D.k₀

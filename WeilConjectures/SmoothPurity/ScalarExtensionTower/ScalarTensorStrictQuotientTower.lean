@@ -17,7 +17,12 @@ import all WeilConjectures.TraceFormula.Ordinary.OrdinaryQuotientPullbackTowerCo
 import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorLevelReduction
 import all WeilConjectures.SmoothPurity.IntegralCoherence.IntegralGoodQuotientPresentation
 
-/-! # The strict scalar tensor square on quotient towers -/
+/-! # The strict scalar tensor square on quotient towers
+
+## References
+
+* Stacks Project, Tags 03EL, 07A4 and 0941.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -231,19 +236,7 @@ private theorem scalar_tensor_level_ext (W : AlgebraicGeometry.Scheme.{u})
   exact (congrArg ((a.f (p + q)).val.app U) hs).trans
     ((hab p q U x y).trans (congrArg ((b.f (p + q)).val.app U) hs.symm))
 
-/-- The tensor quotient maps and the scalar comparison give the specified strict tower map.
-Source: Stacks 03EL, 07A4 and 0941; the pure tensor calculation in
-stage3-pur-scalar-tensor-limit-good-representatives.
-(blueprint: lem-pur-scalar-tensor-strict-quotient-tower).
-
-Proof: at each level transpose through ordinary scalar extension and test each
-homogeneous tensor summand on quotient units. The inverse E tensor identification
-sends these units to the tensor of the sections specified by kappa inverse. The
-ordinary scalar comparison and the scalar restriction map send its coefficient 1
-to 1. Strict sigma separates that unit tensor into the two scalar unit tensors.
-The L tensor identification and the two scalar presentation formulas give exactly
-the normalized scalarTensorLevel formula. Extensionality gives equality of level
-chain maps and then of the strict tower maps, retaining every transition. -/
+/-- The tensor quotient maps and the scalar comparison give the specified strict tower map. -/
 theorem scalarTensorStrictQuotientTower (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ)
     (C D : Complex l E W)

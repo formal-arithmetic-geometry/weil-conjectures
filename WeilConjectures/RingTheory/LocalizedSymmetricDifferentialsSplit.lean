@@ -18,8 +18,20 @@ import WeilConjectures.AlgebraicGeometry.CotangentComplexSymmetricAlgebra
 
 /-! # Differentials of a localized symmetric algebra
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07CE, lines 419–440
-(blueprint: lem-weil-pbc-localized-symmetric-differentials-split).
+On the smooth locus `S = A_a`, the differentials of the localized symmetric algebra
+`T = S ⊗_A Sym_A(M)` split as the sum of `T ⊗_S (S ⊗_A M)` and `T ⊗_S Ω_{S/R}`.
+
+## Implementation details
+
+`T` is identified with `Sym_S(N)` for the finite projective module `N = S ⊗_A M`, so it is smooth
+over `S` with `Ω_{T/S} ≃ T ⊗_S N` (Kähler base change for the localization pushout and tensor
+cancellation). The Jacobi–Zariski sequence for `R → S → T` is then short exact, since
+`H₁(L_{T/S}) = 0`, and splits since its right term is projective.
+
+## References
+
+* [Stacks, Tag 07CE] (proof)
+* [Stacks, Tags 00S2, 031K, 07EV]
 -/
 
 @[expose] public section
@@ -30,22 +42,7 @@ open scoped TensorProduct
 namespace SymmetricAlgebra
 
 /-- On the smooth locus, the differentials of a symmetric algebra split into the conormal
-and base differential summands.
-
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07CE, lines 419–440;
-Algebra, Tags 00S2 and 031K; More on Algebra, Tag 07EV
-(blueprint: lem-weil-pbc-localized-symmetric-differentials-split).
-
-Proof: write `S = A_a` and `N = S ⊗[A] M`. Base change and tensor localization identify
-`T` with `Sym_S(N)`. Since `N` is finite projective, this symmetric algebra is smooth over
-`S`. The cotangent lemma gives `Ω[C/A] ≃ C ⊗[A] M`. Mathlib's Kähler base-change
-equivalence for the localization pushout, followed by tensor cancellation, identifies the
-relative differentials `Ω[T/S]` with `T ⊗[S] N`.
-The Jacobi–Zariski sequence for `R → S → T` is therefore short exact: its left obstruction
-is `H₁(L_{T/S}) = 0`. Its right term is projective by base change of `N`, so the sequence
-splits. Commuting the two summands and distributing tensor products over their product
-gives the displayed linear equivalence. All identifications use the canonical localized
-algebra structure; the zero module and zero localization satisfy the same argument. -/
+and base differential summands. -/
 theorem localized_differentials_equiv
     (R : Type u) (A : Type v) (M : Type w)
     [CommRing R] [CommRing A] [Algebra R A] [AddCommGroup M] [Module A M]

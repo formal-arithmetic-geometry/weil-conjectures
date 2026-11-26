@@ -19,9 +19,21 @@ public import Mathlib.RingTheory.Flat.Localization
 /-!
 # Local pseudo-coherence of a localization cone
 
-Source: Stacks Project, More on Algebra, Tag 066D, local cone step,
-and Tag 064R, first distinguished-triangle assertion.
-(blueprint: lem-pc-m-pseudo-coherent-localization-cone-local).
+Exact localization transports pseudo-coherence across the cone constructed in
+`localization_cone_construction`.
+
+## Implementation details
+
+Localization is flat, so extension of scalars is exact and induces a triangulated functor
+commuting with cohomology. It carries an `m`-approximation, which is also an
+`(m + 1)`-approximation, to a bounded finite-free witness. The second object of the localized
+triangle is `m`-pseudo-coherent by hypothesis, and the first clause of Stacks 064R gives
+`m`-pseudo-coherence of the third.
+
+## References
+
+* [Stacks, Tag 066D] (local cone step)
+* [Stacks, Tag 064R] (first distinguished-triangle assertion)
 -/
 
 @[expose] public section
@@ -133,18 +145,7 @@ private theorem pseudoCoherent_scalar
 -- The unused hypotheses belong to the unchanged interface of the cone construction.
 set_option linter.unusedVariables false in
 /-- Exact localization transports pseudo-coherence across the cone constructed in
-`localization_cone_construction` (Stacks, Tag 066D).
-(blueprint: lem-pc-m-pseudo-coherent-localization-cone-local).
-
-Proof: an `m`-approximation is also an `(m + 1)`-approximation, since its cohomology map
-in degree `m + 1` is an isomorphism. Localization is flat, so extension of scalars is
-exact and induces a triangulated functor commuting with cohomology. Apply this functor
-to a bounded finite-free witness for `E`; boundedness and finite freeness persist, as do
-the cohomology isomorphisms and epimorphism. Thus the first object of the localized
-triangle is `(m + 1)`-pseudo-coherent. Its second object is `m`-pseudo-coherent by
-`hlocal`, after the canonical comparison with termwise localization. The first clause
-of Tag 064R now gives `m`-pseudo-coherence of its third object. The same canonical
-comparison identifies that object with the termwise localization of `N`. -/
+`localization_cone_construction`. -/
 theorem localization_cone_local
     {A : Type u₁} [CommRing A] [HasDerivedCategory.{w₁} (ModuleCat.{max u₁ v₁} A)]
     (M : CochainComplex (ModuleCat.{max u₁ v₁} A) ℤ)

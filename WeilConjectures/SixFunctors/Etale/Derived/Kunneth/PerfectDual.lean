@@ -13,18 +13,17 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Pullback
 
 # Duality of external products of perfect complexes on smooth schemes
 
-The remark `rem-sf-kv-formal` (`sk-rem-sf-kv-formal`) observes that the statement
-`𝔻_{X × Y} (M ⊠ N) ≅ 𝔻_X M ⊠ 𝔻_Y N`, equivalent to the Künneth–Verdier isomorphism, is *formal*
-for perfect `M`, `N` on smooth `X`, `Y`: under orientations the Verdier dual of a perfect complex
-is its twisted shifted coefficient dual (`theorem-poincare-duality--2`), and the coefficient dual of
-an external product of perfect complexes is the external product of the coefficient duals
-(`theorem-poincare-duality--4`). This file records that formal case.
+The statement `𝔻_{X × Y} (M ⊠ N) ≅ 𝔻_X M ⊠ 𝔻_Y N`, equivalent to the Künneth–Verdier
+isomorphism, is *formal* for perfect `M`, `N` on smooth `X`, `Y`: under orientations the Verdier
+dual of a perfect complex is its twisted shifted coefficient dual, and the coefficient dual of
+an external product of perfect complexes is the external product of the coefficient duals. This
+file records that formal case. It is the base of the induction, not a substitute for it: for
+non-perfect complexes the statement needs the exceptional Künneth formula.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.Orientation.nonempty_iso_verdierDual_externalProduct`
-  (`sk-rem-sf-kv-formal`, `rem-sf-kv-formal`): `𝔻(P ⊠ Q) ≅ 𝔻P ⊠ 𝔻Q` for perfect `P`, `Q`, given
-  orientations of `X`, `Y` and `X × Y`.
+- `AlgebraicGeometry.Etale.Orientation.nonempty_iso_verdierDual_externalProduct`:
+  `𝔻(P ⊠ Q) ≅ 𝔻P ⊠ 𝔻Q` for perfect `P`, `Q`, given orientations of `X`, `Y` and `X × Y`.
 
 -/
 
@@ -93,21 +92,13 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
 variable [HasTateTwist Λ]
 
-/-- Blueprint `sk-rem-sf-kv-formal`, `rem-sf-kv-formal`: the formal case of duality of external
-products.
-
-Let `a : X ⟶ S` and `b : Y ⟶ S` carry orientations of relative dimensions `d` and `e`, and let
-the structure morphism of `X ×_S Y` carry one of relative dimension `d + e` (by smooth purity,
-`proposition-smooth-purity-finite-coefficients`, orientations exist for smooth `X`, `Y` over a
+/-- The formal case of duality of external products: let `a : X ⟶ S` and `b : Y ⟶ S` carry
+orientations of relative dimensions `d` and `e`, and let the structure morphism of `X ×_S Y` carry
+one of relative dimension `d + e` (by smooth purity, orientations exist for smooth `X`, `Y` over a
 field, `AlgebraicGeometry.Etale.Orientation.nonempty`). Then for perfect (dualizable) `P` on `X` and
 `Q` on `Y`,
 
-`𝔻_{X ×_S Y} (P ⊠ Q) ≅ 𝔻_X P ⊠ 𝔻_Y Q`.
-
-Indeed `𝔻 K ≅ K^∨ ⊗ᴸ Λ(c)[2c]` for perfect `K` (`theorem-poincare-duality--2`), the coefficient dual
-of `P ⊠ Q = p^* P ⊗ᴸ q^* Q` is `P^∨ ⊠ Q^∨` (`theorem-poincare-duality--4`), and
-`Λ(d)[2d] ⊠ Λ(e)[2e] ≅ Λ(d + e)[2(d + e)]`. This is the base of the induction, not a substitute
-for it: for non-perfect complexes the statement needs the exceptional Künneth formula. -/
+`𝔻_{X ×_S Y} (P ⊠ Q) ≅ 𝔻_X P ⊠ 𝔻_Y Q`. -/
 theorem Orientation.nonempty_iso_verdierDual_externalProduct {X Y S : Scheme.{u}} (a : X ⟶ S)
     (b : Y ⟶ S) [HasCompactification a] [HasCompactification b]
     [HasCompactification (pullback.fst a b ≫ a)] [HasInvertibleExponent Λ S] {d e : ℕ}

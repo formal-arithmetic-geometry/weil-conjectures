@@ -13,8 +13,20 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-! # Openness of a fixed projective-dimension bound
 
-Source: Stacks Project, Algebra, Tag 00NX, and More on Algebra, Tag 068V.
-(blueprint: lem-pc-projective-dimension-locus-open).
+For a finitely presented module, the set of primes at which the localization has projective
+dimension at most `n` is open.
+
+## Implementation details
+
+Induct on `n`. At `n = 0`, projectivity over the local ring is freeness, so the locus is the
+free locus of a finitely presented module. For `n + 1`, choose a finite free surjection onto `M`
+with finite kernel `K`; dimension shifting identifies the bound `n + 1` for `M` with the bound
+`n` for `K`. No uniform dimension assumption on `R` is used.
+
+## References
+
+* [Stacks, Tag 00NX]
+* [Stacks, Tag 068V]
 -/
 
 @[expose] public section
@@ -25,18 +37,7 @@ open CategoryTheory
 
 namespace ModuleCat
 
-/-- The locus of prime localizations of projective dimension at most n is open.
-Source: Stacks Project, Algebra, Tag 00NX, and More on Algebra, Tag 068V.
-
-Proof: Induct on n. At n = 0, projectivity is equivalent to freeness over the
-local ring, so the locus is the free locus of a finitely presented module,
-which is open. For n + 1 choose a finite free surjection onto M with finite
-kernel K. Its localization is short exact at every prime. Since its middle
-term is projective, dimension shifting identifies the projective-dimension
-bound n + 1 for M with the bound n for K. The latter locus is open by the
-induction hypothesis. No uniform dimension assumption on R is used, and
-the zero module and zero ring satisfy the same induction.
-(blueprint: lem-pc-projective-dimension-locus-open). -/
+/-- The locus of prime localizations of projective dimension at most n is open. -/
 theorem isOpen_hasProjectiveDimensionLE_locus
     {R : Type u} [CommRing R] [IsNoetherianRing R]
     (M : ModuleCat.{u} R) [Module.Finite R M] (n : ℕ) :

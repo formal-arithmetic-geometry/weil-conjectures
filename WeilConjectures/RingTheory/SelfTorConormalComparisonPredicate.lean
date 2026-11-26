@@ -12,6 +12,18 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.CategoryTheory.Monoidal.Tor
 
+/-!
+# The self-Tor conormal comparison predicate
+
+This file defines the Koszul normalization `IsSelfTorConormalComparison` of a map from the
+exterior powers of the conormal module `I/I²` to `Tor_n^A(A/I, A/I)`.
+
+## References
+
+* [Stacks, Tag 09PQ]
+* [Stacks, Tag 062I]
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -23,11 +35,7 @@ namespace AlgebraicGeometry
 its Koszul augmentation to any projective resolution of the quotient. A degree-n wedge,
 after tensoring with the quotient, is a cycle. Its image in resolution homology is
 the value of the comparison on the wedge of the corresponding conormal classes.
-This fixes the comparison, since these wedges generate the exterior power.
-Source: Stacks Project, Tags 09PQ and 062I.
-(blueprint: new-r4-self-tor-conormal-comparison). 
-(blueprint: new-r4-self-tor-conormal-predicate)
--/
+This fixes the comparison, since these wedges generate the exterior power. -/
 def IsSelfTorConormalComparison (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ)
     (c : conormalExteriorModule A I n ⟶
       ((Tor' (ModuleCat.{u} A) n).obj (ModuleCat.of A (A ⧸ I))).obj

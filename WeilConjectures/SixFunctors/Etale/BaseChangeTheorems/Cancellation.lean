@@ -175,10 +175,7 @@ open Scheme Etale
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- **Composition stability of the base change property.** For a torsion coefficient ring `Λ`,
-if `f : X ⟶ Y` and `h : Y ⟶ Z` satisfy the base change property, so does `f ≫ h`. For a
-torsion ring the property is `AlgebraicGeometry.Etale.IsBaseChangeIso`, which is stable under
-composition by the vertical pasting law of the derived base change map.
-(blueprint: `lemma-composition-cancellation--1`) -/
+if `f : X ⟶ Y` and `h : Y ⟶ Z` satisfy the base change property, so does `f ≫ h`. -/
 @[stacks 0A4D]
 theorem Etale.HasTorsionBaseChange.comp (hΛ : IsAddTorsion Λ) {X Y Z : Scheme.{u}}
     {f : X ⟶ Y} {h : Y ⟶ Z} (hf : Etale.HasTorsionBaseChange Λ f)
@@ -190,7 +187,7 @@ theorem Etale.HasTorsionBaseChange.comp (hΛ : IsAddTorsion Λ) {X Y Z : Scheme.
 
 /-- **Composition stability of injective acyclicity.** For a torsion coefficient ring `Λ` and
 proper morphisms `f : X ⟶ Y`, `h : Y ⟶ Z` with injective acyclicity, `f ≫ h` has injective
-acyclicity. (blueprint: `lemma-composition-cancellation--1`) -/
+acyclicity. -/
 theorem Etale.HasInjectiveAcyclicity.comp (hΛ : IsAddTorsion Λ) {X Y Z : Scheme.{u}}
     {f : X ⟶ Y} {h : Y ⟶ Z} [IsProper f] [IsProper h] (hf : Etale.HasInjectiveAcyclicity Λ f)
     (hh : Etale.HasInjectiveAcyclicity Λ h) : Etale.HasInjectiveAcyclicity Λ (f ≫ h) :=
@@ -253,12 +250,8 @@ theorem Etale.isIso_baseChangeMap_app_of_hasTorsionBaseChange (hΛ : IsAddTorsio
   exact NatTrans.isIso_app_of_isIso_Qh_map_mapHomotopyCategoryPlus_app _ J h₄
 
 /-- **The retract supplied by a surjection.** Let `f : X ⟶ Y` be surjective, let `I` be a sheaf
-on `Y` and `ι : f^* I ⟶ J` a monomorphism. Then the adjoint map `I ⟶ f_* J` is a monomorphism:
-at a geometric point `ȳ` of `Y`, choose a geometric point `x̄` of `X` above it; the stalk map
-`I_ȳ ⟶ (f_* J)_ȳ` followed by the restriction to `J_x̄` is the injection
-`I_ȳ = (f^* I)_x̄ ⟶ J_x̄`. Geometric stalks are conservative. If `I` is injective, the
-monomorphism splits, so `I` is a direct summand of `f_* J`.
-(blueprint: `lemma-composition-cancellation--2`) -/
+on `Y` and `ι : f^* I ⟶ J` a monomorphism. Then the adjoint map `I ⟶ f_* J` is a monomorphism.
+In particular, if `I` is injective, then `I` is a direct summand of `f_* J`. -/
 theorem Etale.mono_homEquiv_of_surjective {X Y : Scheme.{u}} (f : X ⟶ Y) [Surjective f]
     {I : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     {J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
@@ -317,9 +310,7 @@ theorem Etale.isIso_baseChangeMap_of_hasTorsionBaseChange_comp (hΛ : IsAddTorsi
   exact NatIso.isIso_of_isIso_app _
 
 /-- **Vanishing descends to a retract.** If `I` is a retract of `M` and the higher direct images
-of `M` along `h` vanish in degree `q`, then so do those of `I`: the higher direct image functors
-are additive, so `Rᵠh_* I` is a retract of `Rᵠh_* M = 0`.
-(blueprint: `lemma-composition-cancellation--2`) -/
+of `M` along `h` vanish in degree `q`, then so do those of `I`. -/
 theorem Etale.isZero_homology_rightDerivedFunctorPlus_of_retract {X Y : Scheme.{u}}
     (h : X ⟶ Y) {I M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (s : I ⟶ M)
     (r : M ⟶ I) (hsr : s ≫ r = 𝟙 I) (q : ℤ)
@@ -341,16 +332,7 @@ theorem Etale.isZero_homology_rightDerivedFunctorPlus_of_retract {X Y : Scheme.{
 
 /-- **Cancellation of injective acyclicity along a surjection.** For a torsion coefficient ring
 `Λ`, let `f : X ⟶ Y` be surjective with the base change property and let `h : Y ⟶ Z` be such
-that `f ≫ h` has injective acyclicity. Then `h` has injective acyclicity.
-
-Let `I` be an injective sheaf on `Y`; embed `f^* I` into an injective `J` on `X`. By
-`AlgebraicGeometry.Etale.mono_homEquiv_of_surjective` the sheaf `I` is a direct summand of
-`f_* J`. After a base change `Z' ⟶ Z`, the underived exchange of `f` at `J`
-(`AlgebraicGeometry.Etale.isIso_baseChangeMap_app_of_hasTorsionBaseChange`) identifies the base
-change of `f_* J` with `f'_*` of the base change of `J`, whose higher direct images along `h'`
-vanish since `Rh'_* ∘ Rf'_* = R(h'f')_*`, the base change of `J` is `f'_*`-acyclic and
-`IA(f ≫ h)` holds. The vanishing descends to the direct summand.
-(blueprint: `lemma-composition-cancellation--2`) -/
+that `f ≫ h` has injective acyclicity. Then `h` has injective acyclicity. -/
 @[stacks 0A4C]
 theorem Etale.HasInjectiveAcyclicity.of_comp (hΛ : IsAddTorsion Λ) {X Y Z : Scheme.{u}}
     {f : X ⟶ Y} {h : Y ⟶ Z} [Surjective f]
@@ -382,12 +364,7 @@ theorem Etale.HasInjectiveAcyclicity.of_comp (hΛ : IsAddTorsion Λ) {X Y Z : Sc
 
 /-- **Cancellation of the base change property along a surjection.** For a torsion coefficient
 ring `Λ`, let `f : X ⟶ Y` be surjective and `h : Y ⟶ Z`. If `f` and `f ≫ h` satisfy the base
-change property, so does `h`: by `AlgebraicGeometry.Etale.HasInjectiveAcyclicity.of_comp` the
-morphism `h` has injective acyclicity, its underived exchange is an isomorphism by
-`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_hasTorsionBaseChange_comp`, and the two together
-give the base change property
-(`AlgebraicGeometry.Etale.HasInjectiveAcyclicity.hasTorsionBaseChange_of_isIso_baseChangeMap`).
-(blueprint: `lemma-composition-cancellation--2`) -/
+change property, so does `h`. -/
 @[stacks 0A4C]
 theorem Etale.HasTorsionBaseChange.of_comp (hΛ : IsAddTorsion Λ) {X Y Z : Scheme.{u}}
     {f : X ⟶ Y} {h : Y ⟶ Z} [Surjective f]
@@ -399,10 +376,7 @@ theorem Etale.HasTorsionBaseChange.of_comp (hΛ : IsAddTorsion Λ) {X Y Z : Sche
 
 /-- **Target locality of the base change property.** A morphism `f : X ⟶ Y` satisfies the base
 change property as soon as its restrictions `f ∣_ U : f ⁻¹ᵁ U ⟶ U` over all affine opens `U`
-of `Y` do: the derived base change map of a cartesian square over `Y` is an isomorphism as soon
-as its pullbacks over the members of the open cover of the base change by the preimages of
-the `U` are (`AlgebraicGeometry.Etale.isIso_baseChange_app_of_etale_cover`).
-(blueprint: `proposition-proper-base-change-etale-site--1`) -/
+of `Y` do. -/
 theorem Etale.hasTorsionBaseChange_of_affineOpens {X Y : Scheme.{u}} (f : X ⟶ Y)
     (h : ∀ U : Y.affineOpens, Etale.HasTorsionBaseChange Λ (f ∣_ (U : Y.Opens))) :
     Etale.HasTorsionBaseChange Λ f := by

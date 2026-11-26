@@ -13,9 +13,20 @@ import WeilConjectures.RingTheory.PseudoCoherentIffAllM
 /-!
 # Pseudo-coherence from pseudo-coherent cohomology
 
-Source: Stacks Project, More on Algebra, Tag 066B, lemma-cohomology-pseudo-coherent,
-pseudo-coherent clause
-(auxiliary; not a blueprint node).
+A cohomologically bounded-above object of `D(R)` whose cohomology modules are pseudo-coherent is
+pseudo-coherent.
+
+## Implementation details
+
+Choose a representative `C` and put `T_q = τ≤q C`. For fixed `m`, each shifted cohomology
+module `H^q(K)[-q]` is `m`-pseudo-coherent, and `T_(m-1)` is `m`-pseudo-coherent by vanishing.
+Inducting on `q` along the truncation triangles `T_(q-1) → T_q → H^q(K)[-q]`, the
+distinguished-triangle lemma makes every `T_q` `m`-pseudo-coherent, and `T_q ≅ K` for large `q`.
+Since `m` was arbitrary, `K` is pseudo-coherent.
+
+## References
+
+* [Stacks, Tag 066B]
 -/
 
 @[expose] public section
@@ -63,26 +74,7 @@ private theorem pseudoCoherent_shift
   exact ⟨Module.Free.of_equiv e, Module.Finite.equiv e⟩
 
 /-- A cohomologically bounded-above object whose cohomology modules, placed in degree zero,
-are pseudo-coherent is pseudo-coherent.
-
-Source: Stacks Project, More on Algebra, Tag 066B, lemma-cohomology-pseudo-coherent,
-pseudo-coherent clause
-(auxiliary; not a blueprint node).
-
-Proof: choose a representative complex C and put T_q = τ≤q C. Its cohomology equals that
-of K through q and vanishes above q; hence Q(T_q) ≅ K for q ≥ b. Fix an integer m.
-Shift a bounded-above finite-free representative of H^q(K)[0] by -q. Its terms
-remain finite free, so H^q(K)[-q] is pseudo-coherent, hence m-pseudo-coherent by
-lem-pc-ring-pseudo-coherent-iff-all-m. Put B = max(b,m-1). At q = m-1, T_q has zero
-cohomology in every degree ≥ m, so lem-pc-ring-m-pseudo-coherent-vanishing-base applies.
-Induct for q = m,...,B using theorem-pbc-injective-acyclicity: its outer vertices are
-T_(q-1) and H^q(K)[-q]. The second clause of
-lem-pc-ring-pseudo-coherent-distinguished-triangle gives m-pseudo-coherence of T_q.
-At B ≥ b, transport the finite-free approximation across Q(T_B) ≅ K; cohomology
-functors preserve its isomorphisms and the degree-m surjection, as required by
-def-pc-ring-m-pseudo-coherent. Since m was arbitrary, apply the converse of
-lem-pc-ring-pseudo-coherent-iff-all-m to C to obtain a bounded-above finite-free model.
-This finite induction also covers b < m, zero cohomology, and arbitrary lower tails. -/
+are pseudo-coherent is pseudo-coherent. -/
 theorem isPseudoCoherent_of_homology
     (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{v} R)]
     (K : DerivedCategory (ModuleCat.{v} R))

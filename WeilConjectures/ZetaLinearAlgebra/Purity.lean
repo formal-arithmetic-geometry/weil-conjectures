@@ -19,16 +19,8 @@ shadow of Poincaré duality used in `WeilConjectures.ZetaLinearAlgebra.Functiona
 then the upper bound in degree `2 * d - i` is a lower bound in degree `i`, and the two bounds
 meet.
 
-Since this repository has no étale cohomology yet, the cohomological family `(V i, F i, P i)`
-of the blueprint is modelled by a `TraceDatum`, its reciprocal characteristic polynomials
-`TraceDatum.P` and a perfect pairing with similitude factor `qᵈ`. The sheaf-theoretic clauses
-of the blueprint weight input — purity of the constant Weil sheaf, mixedness of compactly
-supported cohomology and the comparison with ordinary cohomology — belong to the six-functor
-and weight blocks and enter here as the hypothesis `hmixed`.
-
-This file formalises the two statements of the smooth-proper purity subsection and of the
-absolute case of the weight-input subsection of the blueprint block on zeta functions and the
-Weil conjectures.
+The two statements are the smooth-proper purity statement and the absolute case of the weight
+input for zeta functions and the Weil conjectures.
 
 ## Main statements
 
@@ -38,6 +30,14 @@ Weil conjectures.
 - `TraceDatum.norm_eq_of_mem_roots_charpoly_map` and
   `TraceDatum.norm_eq_of_mem_roots_charpoly_map_of_pairing`: purity in degree `i` says that
   every complex eigenvalue of the `i`-th endomorphism has absolute value `q ^ (i / 2)`.
+
+## Implementation details
+
+The cohomological family `(V i, F i, P i)` is modelled by a `TraceDatum`, its reciprocal
+characteristic polynomials `TraceDatum.P` and a perfect pairing with similitude factor `qᵈ`. The
+sheaf-theoretic clauses of the weight input — purity of the constant Weil sheaf, mixedness of
+compactly supported cohomology and the comparison with ordinary cohomology — belong to the
+six-functor and weight files and enter here as the hypothesis `hmixed`.
 
 ## References
 
@@ -54,12 +54,10 @@ namespace TraceDatum
 variable {K : Type u} [Field K] [CharZero K] {q d : ℕ} (D : TraceDatum.{u, v} K (2 * d))
   {p : ∀ i : Fin (2 * d + 1), D.V i →ₗ[K] D.V i.rev →ₗ[K] K}
 
-/-- **Smooth-proper purity.** Duality supplies the lower bound missing from Deligne's estimate.
-If the reciprocal characteristic polynomials of a trace datum of length `2 * d` are mixed of
-weight at most `i` in degree `i`, and Frobenius acts on a perfect pairing between `D.V i` and
-`D.V (2 * d - i)` by the similitude factor `qᵈ`, then the estimate in degree `2 * d - i` bounds
-the reciprocal roots in degree `i` from above by `q ^ (i / 2)`, so `D.P i` is pure of
-weight `i`. -/
+/-- **Smooth-proper purity.** If the reciprocal characteristic polynomials of a trace datum of
+length `2 * d` are mixed of weight at most `i` in degree `i`, and Frobenius acts on a perfect
+pairing between `D.V i` and `D.V (2 * d - i)` by the similitude factor `qᵈ`, then `D.P i` is pure
+of weight `i`. -/
 theorem isPureOfWeight_map_P_of_pairing (hq : 1 < q) (ι : K →+* ℂ)
     (hp : ∀ i, (p i).IsPerfPair)
     (hFG : ∀ i, ∀ v w, p i (D.F i v) (D.F i.rev w) = (q : K) ^ d * p i v w)
@@ -99,8 +97,7 @@ omit [CharZero K] in
 /-- **The weight estimate in eigenvalue form.** If the reciprocal characteristic polynomial in
 degree `i` is pure of weight `i` and the `i`-th endomorphism is invertible, then every complex
 eigenvalue of that endomorphism — every root of the complexified characteristic polynomial —
-has absolute value `q ^ (i / 2)`. The eigenvalues are taken in `ℂ` rather than in `K`, which is
-not assumed algebraically closed. -/
+has absolute value `q ^ (i / 2)`. -/
 theorem norm_eq_of_mem_roots_charpoly_map (ι : K →+* ℂ) {i : Fin (2 * d + 1)}
     (hdet : IsUnit (LinearMap.det (D.F i))) (hpure : ((D.P i).map ι).IsPureOfWeight q i.1)
     {z : ℂ} (hz : z ∈ ((D.F i).charpoly.map ι).roots) :

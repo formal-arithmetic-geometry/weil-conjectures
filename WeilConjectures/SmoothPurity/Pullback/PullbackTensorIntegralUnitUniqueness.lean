@@ -7,15 +7,21 @@ module
 
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorConstraints
 
-/-! Uniqueness of the integral unit comparison.
+/-!
+# Uniqueness of the integral unit comparison
 
-Source: Stacks Project, Tag 07A4, label lemma-pullback-tensor-product; cancellation
-with the tensor unitors in the integral constructible category.
-(blueprint: lem-pur-pullback-tensor-integral-unit-coherence-uniqueness)
+The integral unit comparison for the pullback tensor comparison is determined by the two unit
+equations.
+
+## Implementation details
 
 Applying coherent reduction to either pair of unit equations and cancelling the
 invertible comparison and unitor identifies the two candidate unit maps.
 Faithfulness of coherent reduction then reflects equality of the original maps.
+
+## References
+
+* [Stacks Project, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -142,10 +148,7 @@ private theorem unitIso_unique_integral
   rw [hn, hn] at he
   exact Iso.ext ((cancel_epi (lu A).hom).mp he)
 
-/-- The two integral unit equations determine their comparison isomorphism.
-Source: Stacks Project, Tag 07A4; unit cancellation after coherent reduction.
-(blueprint: lem-pur-pullback-tensor-integral-unit-coherence-uniqueness)
--/
+/-- The two integral unit equations determine their comparison isomorphism. -/
 theorem canonicalIntegralPullbackTensor_unit_unique {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]

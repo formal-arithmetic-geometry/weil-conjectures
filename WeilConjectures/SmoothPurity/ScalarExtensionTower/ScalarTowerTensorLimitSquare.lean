@@ -10,8 +10,9 @@ import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarTowerTensorLimitS
 
 /-! # Canonical scalar comparison in total-limit coordinates
 
-Source: Stacks 07A4 and 0941; realization step 8 of
-lem-pur-scalar-extension-tower-coherence.
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -35,25 +36,7 @@ attribute [local irreducible]
 
 /-- The tensor scalar comparison in its specified total-limit coordinates.
 This is the tensor word calculation before coherent-reduction adjunction; it
-neither constructs realization models nor asserts the pullback word calculation.
-Source: Stacks 07A4, 0941; original realization step 8
-(blueprint: stage3-pur-scalar-tensor-limit-square).
-
-Proof: resolve M and N simultaneously by flat-term K-flat complexes and take
-their actual quotient systems. Scalar change and signed total tensor preserve the
-resolving class. The normalization fields of TE, TL and SY identify the two word
-coordinates with Roos maps of these same strict systems. Tensor balancing sends
-b tensor (x tensor y) to (b tensor x) tensor (1 tensor y); its inverse multiplies
-the coefficient factors. Both maps preserve each bidegree, the signed differential
-and every quotient transition. The representative equation characterizing
-DerivedSigmaModel identifies the localization of this strict map with derivedSigma.
-The prescribed scalarTensorOrdinary normalization uses precisely its total-tensor
-Roos map; scalarCompletionIso inserts the same quotient augmentation and zero
-shifted coordinate. Thus scalarTensorCompleted has exactly this limit coordinate.
-Naturality of Roos and localization in both good-representative variables yield
-the displayed equation on M,N. The choice of hT is proof irrelevant. Zero inputs,
-identity coefficients and ramification obey the same balancing calculation; no
-flatness of the quotient coefficient homomorphism or limit interchange is used. -/
+neither constructs realization models nor asserts the pullback word calculation. -/
 theorem scalarTowerTensorLimitSquare (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)

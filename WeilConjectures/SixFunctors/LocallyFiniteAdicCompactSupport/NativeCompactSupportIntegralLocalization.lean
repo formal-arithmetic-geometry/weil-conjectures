@@ -10,7 +10,12 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompact
 import WeilConjectures.SixFunctors.Integral.IntegralResidueTor
 import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationNaturalIso
 
-/-! # Localization of the normalized integral scalar comparison -/
+/-! # Localization of the normalized integral scalar comparison
+
+## References
+
+* [Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -44,19 +49,8 @@ attribute [local irreducible] IntegralComponent
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Extend the invertible integral scalar morphism to the actual raw rational stage.
-Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15; localization universal
-property, applied to steps 3--8 of the native finite-comparison plan.
-(blueprint: lem-sf-native-compact-support-integral-localization).
-
-Proof: use the integral natural morphism and its two invertible outer factors.
-The actual middle scalar mate is invertible by its coefficient-change theorem.
-The derived section equivalence reflects these component isomorphisms. Residue Tor
-identifies every integral constructible input with a finite-Tor input, so the integral
-natural morphism is a natural isomorphism on the entire integral category. Apply the
-existing raw scalar-localization natural-isomorphism theorem, using the integral
-linear shift instances. Its component equation preserves the six-arrow normalization
-by equality transport. No field-transition coherence is asserted or used here. -/
+/-- Extend the invertible integral scalar morphism to the actual raw rational stage, as a
+natural isomorphism whose components retain the six-arrow normalization. -/
 theorem native_compact_support_integral_localization [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (stage : StageAction l D hl P c)

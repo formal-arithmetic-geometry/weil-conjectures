@@ -11,12 +11,20 @@ import WeilConjectures.SmoothPurity.Coefficient.CoefficientExtensionStrictRepres
 
 /-! Normalization after transported coefficient extension.
 
-Source: Stacks 07A4, 06YY and 0941; the scalar-extension step of
-`lem-trf-transported-reduction-systems-normalized`.
-(blueprint: stage3-trf-transported-scalar-normalized)
+The transported coefficient extension of a normalized reduction is normalized.
+
+## Implementation details
 
 The proof compares the specified scalar model with the normalized
-semilinear coefficient-extension model on the entire quotient system. -/
+semilinear coefficient-extension model on the entire quotient system: the universal
+counit-compatible comparison with `integralComparisonSequenceScalarModel` is an isomorphism
+commuting with all evaluations and transitions, and the normalization bijections are
+conjugated through it. Ramified and identity extensions are included.
+
+## References
+
+* Stacks Project, Tags 07A4, 06YY, 0941.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -92,16 +100,7 @@ private theorem coefficientSequenceNormalized_of_iso (W : Scheme.{t})
     simp only [Category.assoc, ← G.map_comp, Iso.hom_inv_id_assoc]
     exact hs
 
-/-- The transported scalar extension of every normalized reduction is normalized.
-Source: Stacks 07A4, 06YY and 0941; scalar-extension step of the parent proof.
-(blueprint: stage3-trf-transported-scalar-normalized)
-Proof: choose the semilinear coefficient-extension reduction model for the
-actual quotient-ring map.  Its normalized field supplies the transition
-bijections for the scalar extension of the source reduction.  The universal
-counit-compatible comparison with `integralComparisonSequenceScalarModel` is
-an isomorphism commuting with all evaluations and transitions.  Conjugating
-the bijections through this comparison gives normalization of the specified
-whole-system scalar functor, including ramified and identity extensions. -/
+/-- The transported scalar extension of every normalized reduction is normalized. -/
 theorem transportedReductionSystems_scalar_normalized
     {Y : Scheme.{t}}
     (_hlY : ∀ y : Y, IsUnit (l : Y.residueField y))

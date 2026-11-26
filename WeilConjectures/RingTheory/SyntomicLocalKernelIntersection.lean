@@ -16,8 +16,19 @@ import Mathlib.RingTheory.SurjectiveOnStalks
 /-!
 # Flat localized kernel intersection
 
-Source: Stacks Project, Tag 00SY, proof of (3) implies (2), flatness paragraph.
-(blueprint: lem-weil-pbc-syntomic-local-kernel-intersection).
+For a polynomial presentation of `S` and a prime `q` of `S` at which `S` is flat over `R`, the
+localized kernel meets the extension of the base prime exactly in their product.
+
+## Implementation details
+
+The localized surjection `A = P_Q → B = S_q` has kernel `IA`. Tensoring its short exact sequence
+with `R_p / pR_p` and using flatness of `B` over `R_p` gives `K ∩ mA = mK` for `K = IA` and
+`m = pR_p`; the `R_p`-submodule `mK` is the underlying submodule of the ideal product `(pA)K`.
+No finite-generation or complete-intersection hypothesis is needed.
+
+## References
+
+* [Stacks, Tag 00SY], proof of (3) ⇒ (2)
 -/
 
 set_option autoImplicit false
@@ -28,20 +39,9 @@ universe u v
 
 namespace Algebra
 
-/-- Flatness identifies the intersection of the localized presentation kernel with
-base-prime multiples. Source: Stacks Project, Tag 00SY, proof of (3) implies (2),
-flatness paragraph.
-(blueprint: lem-weil-pbc-syntomic-local-kernel-intersection).
-
-Proof: Put p = q ∩ R, Q = φ⁻¹(q), A = P_Q and B = S_q. The localized surjection
-A → B has kernel IA, by exactness of localization and the quotient-localization
-comparison. Give A and B their compatible R_p-algebra structures. The hypothesis
-makes B flat over R_p. Apply the flat-kernel identity K ∩ mA = mK to the surjective
-R_p-linear map A → B and m = pR_p. This identity follows by tensoring its short
-exact sequence with R_p/m: flatness of B makes the kernel tensor injective.
-The image of m in A is pA. The R_p-submodule mK is the underlying submodule of
-the ideal product (pA)K, since K is an A-ideal. Thus IA ∩ pA = (pA)(IA).
-No finite-generation or complete-intersection hypothesis is needed. -/
+/-- Let `φ : P = R[x_1, …, x_n] → S` be surjective with kernel `I`, and let `q` be a prime of `S`
+with `S_q` flat over `R_p`, where `p = q ∩ R`. Then `IA ∩ pA = (pA)(IA)` in `A = P_Q`,
+`Q = φ⁻¹(q)`. -/
 theorem syntomic_local_kernel_intersection
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (q : PrimeSpectrum S) (n : ℕ) (φ : MvPolynomial (Fin n) R →ₐ[R] S)

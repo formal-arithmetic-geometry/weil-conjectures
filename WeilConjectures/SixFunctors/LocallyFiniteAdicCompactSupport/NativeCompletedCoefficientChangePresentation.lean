@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.LocallyFiniteAdicCompactSupportData
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompletedCoefficientPresentationAt
 
-/-! # Existence of normalized completed-to-native coefficient maps -/
+/-! # Existence of normalized completed-to-native coefficient maps
+
+## References
+
+* [Bhatt--Scholze, Section 6.8, Lemma 6.8.2]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -32,12 +37,6 @@ variable (l : ℕ) [Fact l.Prime]
 /--
 There is a family of maps from completed coefficients to native coefficients which is
 represented by normalized coefficient presentations.
-
-Proof source: Bhatt--Scholze, Lemma 6.8.2 and Section 6.8. Construct the maps by the
-finite quotient realization of the completed coefficient sheaf, and use the finite
-constant and residue normalizations of the presentations to identify each component.
-The pullback compatibility is deliberately left to the separate square theorem.
-(blueprint: lem-sf-native-completed-coefficient-change-presentation)
 -/
 theorem exists_native_completed_coefficient_presentation
     [G : NativeGeometry.{u} l]

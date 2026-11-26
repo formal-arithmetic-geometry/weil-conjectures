@@ -14,10 +14,7 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 /-!
 # The principal closed-open datum
 
-Source: blueprint sec-smooth-purity/sk-prop-an/def-pur-frame-class.md,
-“Put D_j = V(f_j); the function f_j is a unit on U minus D_j”
-(blueprint: def-pur-principal-closed-open).
-
+For a function `f`, put `D = V(f)`; then `f` is a unit on the complement of `D`.
 The datum packages the canonical principal zero-locus closed immersion, the inclusion
 of its complementary basic open, and the localization unit. All three constructions
 are the existing scheme constructions, with no choice of a replacement closed subscheme.
@@ -40,11 +37,7 @@ on affine opens it is `Spec (R / fR)`. Its complementary open is the basic open 
 The unit is precisely the restriction of `f` to this open, supplied by `basicOpenUnit`.
 The two inclusions carry the existing closed- and open-immersion predicates.
 No nonemptiness, regularity, or nonzero assumption is made: units, nilpotent functions
-(including zero), and the empty scheme are all permitted.
-
-Source: blueprint sec-smooth-purity/sk-prop-an/def-pur-frame-class.md, the individual
-principal factor `D_j = V(f_j)` and its unit on the complement
-(blueprint: def-pur-principal-closed-open). -/
+(including zero), and the empty scheme are all permitted. -/
 noncomputable def principalClosedOpenDatum (P : WeilConjectures.PurityFiniteSetting.{u})
     (X : Over (Spec (CommRingCat.of P.field.k))) (f : Γ(X.left, ⊤)) :
     {i : X.left.zeroLocusSubscheme {f} ⟶ X.left // IsClosedImmersion i} ×

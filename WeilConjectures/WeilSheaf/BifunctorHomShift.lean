@@ -21,7 +21,7 @@ latter with the shift of `CategoryTheory.Pretriangulated.Opposite`, commute with
 (`CochainComplex.bifunctorHomOpFunctor`).
 
 This is the first step towards the exactness of the derived hom `RHom(-, L)`, used for the
-Verdier dual of Weil complexes (blueprint `theorem-verdier-biduality`).
+Verdier dual of Weil complexes.
 -/
 
 @[expose] public section

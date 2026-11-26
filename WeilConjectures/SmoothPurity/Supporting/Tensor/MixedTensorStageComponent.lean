@@ -73,15 +73,7 @@ private theorem mixed_component
   simpa only [a, z, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
     Functor.map_comp, Iso.prod_hom, Category.assoc] using hs.symm
 
-/-- The mixed tensor square transports a conjugate with coherent pullback endpoints.
-
-Source: lemma-section-normal-bundle--1, common-stage subargument, steps 3–5.
-Proof: Use tensor comparison naturality on the inverse endpoint maps. Pullback tower
-coherence cancels these inverses. Apply the mixed scalar square, followed by naturality
-of the tensor/pullback isomorphism along the source associators. Finally cancel the
-invertible target endpoint. The two input coherence equations come from the specified
-stage-system pair functor coherence law.
-(blueprint: lem-weil-mixed-tensor-stage-component). -/
+/-- The mixed tensor square transports a conjugate with coherent pullback endpoints. -/
 theorem mixedTensorStageComponent
     {I : Type*} [Preorder I]
     {C : I → Type*} [∀ i, Category* (C i)]

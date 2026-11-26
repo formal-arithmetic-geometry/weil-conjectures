@@ -19,8 +19,12 @@ For an arbitrary object `K` of the derived category of the completed coefficient
 cohomological support of the residue reduction in `[a,b]` gives Tor amplitude `[a,b]` of
 every finite reduction. No constructibility or completeness of `K` is needed.
 
-Source: Weil conjectures blueprint, `lemma-bounds-finite-reductions--2` (blueprint:
-lemma-bounds-finite-reductions--2).
+## Implementation details
+
+The finite reduction is represented by a cochain complex with a K-flat resolution;
+`integralReduction_residue_homology_zero_iff` identifies its residue derived tensor cohomology
+with the cohomology of the residue reduction of `K`, and the pro-étale residue Tor test
+gives the amplitude bound.
 -/
 
 @[expose] public section
@@ -34,15 +38,7 @@ open CategoryTheory AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
 /-- If the cohomological support of the residue reduction of `K` lies in `[a,b]`, then every
-finite reduction of `K` has Tor amplitude in `[a,b]`. The index `n` denotes exponent `n+1`.
-
-Source: Weil conjectures blueprint, `lemma-bounds-finite-reductions--2`
-(blueprint: lemma-bounds-finite-reductions--2).
-
-Proof: represent the finite reduction by a cochain complex with a K-flat resolution. The
-coefficient comparison `integralReduction_residue_homology_zero_iff` identifies its residue
-derived tensor cohomology with the cohomology of the residue reduction of `K`, which vanishes
-outside `[a,b]`. The pro-etale residue Tor test gives amplitude `[a,b]`. -/
+finite reduction of `K` has Tor amplitude in `[a,b]`. The index `n` denotes exponent `n+1`. -/
 theorem scalarReductionDerivedExtension_torAmplitude_of_residue_support
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (X : AlgebraicGeometry.Scheme.{u})

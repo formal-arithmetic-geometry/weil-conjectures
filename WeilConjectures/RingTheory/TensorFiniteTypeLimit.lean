@@ -14,8 +14,13 @@ public import Mathlib.RingTheory.Nilpotent.Defs
 
 /-! # Finite-type reduction for tensor products
 
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma 00I3
-(algebra-lemma-limit-argument) (blueprint: lem-weil-pbc-tensor-finite-type-limit)
+Non-reducedness and the existence of nonzero zero divisors in a tensor product `R ⊗[k] S` of
+algebras over a field are detected on `R' ⊗[k] S'` for finite type subalgebras `R' ⊆ R` and
+`S' ⊆ S`.
+
+## References
+
+* [Stacks, Tag 00I3]
 -/
 
 @[expose] public section
@@ -81,29 +86,9 @@ private theorem zero_divisors_comm
   · simpa only [ne_eq, EmbeddingLike.map_eq_zero_iff] using hy
   · rw [← map_mul, hxy, map_zero]
 
-/-- Finite-type reduction for tensor products, clauses (1) and (2) of Stacks Algebra,
-Lemma 00I3 (algebra-lemma-limit-argument).
-
-Proof:
-1. The finitely generated subalgebras of each factor form a directed system:
-   adjoining the union of two finite generating sets gives a common upper bound,
-   and each element belongs to the subalgebra it generates. Their filtered colimits
-   are the full algebras; use `lem-weil-pbc-filtered-colimit-algebras-elementwise`.
-2. For a nonzero nilpotent z with z^n = 0, first descend z to a finitely generated
-   subalgebra of R with S fixed, and enlarge that stage until its nth power is zero.
-   Then fix that stage and descend the element and its zero nth power to a finitely
-   generated subalgebra of S. Use the representative and eventual-zero clauses of
-   `lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise` twice (with tensor
-   symmetry on the second pass). Each representative is nonzero because its image
-   is z. Thus the smaller tensor product is not reduced.
-3. For nonzero x and y with xy = 0, descend both to a common finitely generated
-   R-stage with S fixed, then enlarge it until their product vanishes. Next descend
-   both to a common finitely generated S-stage with that R-stage fixed, and enlarge
-   it until the product vanishes. Use the same tensor-colimit node's representative
-   and eventual-zero assertions. Both resulting factors stay nonzero because their
-   images are x and y, so the smaller tensor product has a nonzero zero-divisor.
-
-(blueprint: lem-weil-pbc-tensor-finite-type-limit) -/
+/-- Finite-type reduction for tensor products over a field `k`: if `R ⊗[k] S` is not reduced,
+then neither is `R' ⊗[k] S'` for some finite type subalgebras `R' ⊆ R` and `S' ⊆ S`; and if
+`R ⊗[k] S` has nonzero zero divisors, then so does some such `R' ⊗[k] S'`. -/
 theorem tensor_finite_type_limit
     (k : Type u) [Field k]
     (R : Type v) [CommRing R] [Algebra k R]

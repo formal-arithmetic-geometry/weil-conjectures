@@ -15,11 +15,19 @@ import all WeilConjectures.ProperBaseChange.IntegralCoefficientPresentation.Inte
 /-! # Finite scalar mates for qcqs compact support
 
 This is the finite-mate component of the qcqs compact-support comparison theorem.
-Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.1.13; Stacks Tags 0E8I and 0F7J
-(blueprint: lem-qcqs-compact-support-finite-comparison).
+
+## Implementation details
 
 The proof is split from derived completeness because the finite quotient mate is a
-separate normalized proper/open calculation.
+separate normalized proper/open calculation. The input is represented by a K-flat complex, the
+quotient tensor map is identified with the extension-by-zero summand map, and the perfect
+two-term quotient resolution is used. The normalized open mate is invertible, and proper direct
+image and the ordered proper/open factorization give the comparison map and its inverse.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Lemmas 6.1.13 and 6.7.7]
+* [Stacks Project, Tags 0E8I and 0F7J]
 -/
 
 @[expose] public noncomputable section
@@ -349,18 +357,8 @@ include K₀ hl Xbase Ybase Xft Xqc Yft Yqc fbase fs fft fqc
 attribute [-instance] CompletedCoefficientPushforward.modAbelian
   CompletedCoefficientPushforward.hasDerived in
 set_option linter.unusedSectionVars false in
-/-- Every positive finite scalar-adjunction mate for the completed proper/open image is invertible.
-
-Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.1.13; Stacks Tags 0E8I and 0F7J.
-Proof: represent the input by a K-flat complex, identify the quotient tensor map
-with the extension-by-zero summand map, and use the perfect two-term quotient
-resolution. The normalized open mate is invertible; applying proper direct image
-and the ordered proper/open factorization gives the displayed comparison map and
-its inverse. The identity and zero compactification cases reduce to the scalar
-adjunction identity and zero map respectively.
-(blueprint: lem-qcqs-compact-support-finite-comparison).
-(blueprint: lem-qcqs-compact-support-finite-mates).
--/
+/-- Every positive finite scalar-adjunction mate for the completed proper/open image is
+invertible. -/
 theorem sfQcqsCompactSupport_finiteMates
     (K : sfIntegralConstructibleCategory l E X) :
     ∀ n : ℕ, IsIso

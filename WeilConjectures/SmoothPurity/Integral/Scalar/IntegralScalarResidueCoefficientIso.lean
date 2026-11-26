@@ -13,9 +13,12 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # The coefficient module of one uniformizer layer
 
-Source: Serre, Local Fields, Chapter I, section 1, and the scalar residue-layer
-argument of the blueprint. Multiplication by a uniformizer power identifies a
-successive layer with the first quotient, with its actual quotient coefficient action.
+Multiplication by a uniformizer power identifies a successive layer with the first
+quotient, with its actual quotient coefficient action.
+
+## References
+
+* J.-P. Serre, *Local Fields*, Chapter I, Section 1
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +31,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The first coefficient quotient is a field because its defining ideal is maximal.
-Source: Serre, Local Fields, Chapter I, section 1.
-(blueprint: lem-sf-integral-scalar-residue-coefficient-iso). -/
+/-- The first coefficient quotient is a field because its defining ideal is maximal. -/
 @[reducible] noncomputable instance integralScalarResidueField :
     Field (Padic.coefficientExtensionRing l E 1) := by
   have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
@@ -44,9 +45,7 @@ Source: Serre, Local Fields, Chapter I, section 1.
     exact hmax
   exact @Ideal.Quotient.field _ _ _ hm
 
-/-- Reduction from a positive quotient to the residue quotient.
-Source: Serre, Local Fields, Chapter I, section 1.
-(blueprint: lem-sf-integral-scalar-residue-coefficient-iso). -/
+/-- Reduction from a positive quotient to the residue quotient. -/
 def integralScalarResidueRingProjection (n : ℕ) :
     Padic.coefficientExtensionRing l E (n + 1) →+*
       Padic.coefficientExtensionRing l E 1 :=
@@ -54,9 +53,7 @@ def integralScalarResidueRingProjection (n : ℕ) :
 
 variable (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- The constant ring-sheaf residue projection.
-Source: Serre, Local Fields, Chapter I, section 1.
-(blueprint: lem-sf-integral-scalar-residue-coefficient-iso). -/
+/-- The constant ring-sheaf residue projection. -/
 def integralScalarResidueProjection (n : ℕ) :
     integralCoefficientCommRingSheaf l E Y n ⟶ integralCoefficientCommRingSheaf l E Y 0 :=
   (constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map
@@ -120,9 +117,7 @@ private theorem scalar_residue_projection (n : ℕ) :
     induction x using Quotient.inductionOn' with
     | h x => rfl
 
-/-- The action on a target residue layer factors through the source residue quotient.
-Source: the defining limit projections and the quotient map of integer rings.
-(blueprint: lem-sf-integral-scalar-residue-coefficient-iso). -/
+/-- The action on a target residue layer factors through the source residue quotient. -/
 theorem integralScalarResidue_triangle (n : ℕ) :
     completedIntegralCommRingProjectionUnrestricted l E Y 0 ≫
       integralScalarQuotientSheafMap l E L ι Y 0 =
@@ -277,21 +272,7 @@ private theorem constantRestrictedUnitIso
   exact ⟨asIso h⟩
 
 /-- A uniformizer-filtration layer is the restricted regular residue module sheaf.
-This is a statement about coefficients alone, independent of any complex or interval.
-Source: Serre, Local Fields, Chapter I, section 1; the multiplication-and-cancellation
-step in lem-sf-integral-scalar-residue-layers.
-(blueprint: lem-sf-integral-scalar-residue-coefficient-iso).
-Proof: put A = O_L and pi equal to its chosen uniformizer. Multiplication by pi^j
-maps A onto (pi^j)/(pi^(j+1)). Its kernel is (pi): divisibility of pi^j*x by
-pi^(j+1) allows cancellation of the nonzero pi^j in the domain A. Passing first to
-A/(pi^(n+1)) gives the displayed layer, because j < n+1 and the extra ideal
-(pi^(n+1)) is contained in (pi^(j+1)). These maps therefore identify the layer with
-A/(pi), linearly over B via the quotient projection. Apply the constant module
-sheaf functor to this module isomorphism. Restriction of scalars commutes with
-constant sheafification, since its underlying additive sheafification is the same,
-and the constant regular residue module is the residue ring sheaf unit. Compose
-these isomorphisms. For n=0 and j=0 the map is the usual quotient unit map;
-no cancellation by zero occurs, and the empty scheme presents no exception. -/
+This is a statement about coefficients alone, independent of any complex or interval. -/
 theorem integralScalarResidueCoefficientIso (n : ℕ)
     (F : Fin (n + 1 + 1) → Submodule
       (ULift.{u + 1} (Padic.coefficientExtensionRing l L (n + 1)))

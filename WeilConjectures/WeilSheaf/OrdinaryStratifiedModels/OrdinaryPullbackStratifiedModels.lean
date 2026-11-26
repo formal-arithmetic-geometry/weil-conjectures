@@ -68,13 +68,22 @@ import all WeilConjectures.WeilSheaf.FiniteProjectivePullback.FiniteProjectiveMo
 /-!
 # Ordinary pullback of stratified perfect models
 
-Source: Bhatt--Scholze, Proposition 6.6.11 and Remark 6.8.15; Stacks Project,
-Tags 0D6D, 04IF, 06YQ and 06YY
-(blueprint: lem-tw-ordinary-pullback-stratified-models).
+We construct the ordinary (uncompleted) ringed pullback comparisons used for stratified
+perfect models: the completed coefficient map, its compatibility with composition, the
+generator-normalized tensor comparison and its derived square comparison.
 
-All functors below are ordinary ringed pullback, before completion. The published
+## Implementation details
+
+All functors below are ordinary ringed pullback, before completion. The existing
 ordinary coefficient map and its total derived functor are reused verbatim.
 The comparisons retain their ordinary generators and derived computation counits.
+The ordinary model comparison is natural in every splitting and idempotent matrix over `R`,
+so it restricts to the same finite-projective summand.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.6.11 and Remark 6.8.15
+* Stacks Project, Tags 03CB, 03D2, 03EK, 04IF, 06YQ, 06YY, 0D6D and 0H7J
 -/
 
 @[expose] public noncomputable section
@@ -126,9 +135,7 @@ private theorem modelCompose (T : Scheme.{u}) :
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The canonical completed coefficient map in inverse-image form.
-Source: the projection formula defining c_f in the statement; Stacks 06YY
-(blueprint: lem-tw-ordinary-pullback-stratified-models). -/
+/-- The canonical completed coefficient map in inverse-image form. -/
 def coefficientMap {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (proEtaleSheafInverseImage f RingCat.{u + 1}).obj
         (completedIntegralCoefficientSheafUnrestricted l E Y) ⟶
@@ -136,8 +143,7 @@ def coefficientMap {X Y : Scheme.{u}} (f : X ⟶ Y) :
   ((proEtaleSheafAdjunction f RingCat.{u + 1}).homEquiv _ _).symm
     (ordinaryIntegralDirectRingMap l E f)
 
-/-- The inverse-image compositor, the mate of fibre-product associativity on direct image.
-Source: Stacks 03CB (blueprint: lem-tw-ordinary-pullback-stratified-models). -/
+/-- The inverse-image compositor, the mate of fibre-product associativity on direct image. -/
 def inverseComp {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ Z) :
     proEtaleSheafInverseImage (h ≫ k) RingCat.{u + 1} ≅
       proEtaleSheafInverseImage k RingCat.{u + 1} ⋙
@@ -230,14 +236,8 @@ private theorem coefficientMate
   rw [← unit_conjugateEquiv_symm b a d.hom A, Category.assoc, ← d.hom.naturality]
   simp only [Category.assoc]
 
-/-- Completed coefficient composition and all its finite projections.
-Source: Stacks 03CB, 0H7J and the inverse limit defining B
-(blueprint: lem-tw-ordinary-pullback-stratified-models).
-Proof: apply constant-coefficient-composition at R/t^(n+1). Substitute the defining
-projection equations for c_h and c_k. Naturality of the inverse-image compositor
-identifies the result with the finite projection of c_(h k). Limit projections are
-jointly monic, proving the coefficient equality. This also proves the displayed
-projection equations. Apply this to the two equal composites of the pullback square. -/
+/-- Completed coefficient maps are compatible with composition, together with all their
+finite projections. -/
 theorem coefficientMap_comp {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ Z) :
     coefficientMap l E (h ≫ k) =
       (inverseComp h k).hom.app (completedIntegralCoefficientSheafUnrestricted l E Z) ≫
@@ -284,27 +284,19 @@ theorem coefficientMap_comp {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ Z) :
     simp only [a, coefficientMap, Equiv.apply_symm_apply]
     exact directProjection l E (h ≫ k) n
 
-/-- The existing constant-to-completion map, retaining commutativity.
-Source: the constant quotient cone in completed coefficients
-(blueprint: lem-tw-ordinary-pullback-stratified-models). -/
+/-- The constant-to-completion map, retaining commutativity. -/
 def scalar (T : Scheme.{u}) :
     adicLisseConstantRing T (PbcIntegralRing l E) ⟶
       completedIntegralCommRingSheafUnrestricted l E T :=
   (sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).preimage
     (integralConstantToCompletionOfUniverses l E T)
 
-/-- B_T tensor_R N, using the existing constant-module and scalar-extension functors.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-tw-ordinary-pullback-stratified-models). -/
+/-- B_T tensor_R N, using the existing constant-module and scalar-extension functors. -/
 def modelModule (T : Scheme.{u}) :
     ModuleCat.{u + 1} (PbcIntegralRing l E) ⥤ integralTowerModules l E T :=
   adicLisseConstantModules T (PbcIntegralRing l E) ⋙ completedConstantExtension T (scalar l E T)
 
-/-- Additivity of the existing constant-module realization and scalar extension.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-tw-ordinary-pullback-stratified-models).
-Proof: the constant presheaf, its additive sheafification and extension of scalars
-are additive. Their composite therefore preserves addition on module morphisms. -/
+/-- Additivity of the constant-module realization followed by scalar extension. -/
 @[instance] theorem modelModule_additive (T : Scheme.{u}) :
     (modelModule l E T).Additive := by
   have := AlgebraicGeometry.Scheme.CompletedConstantReduction.constant_additive T
@@ -312,18 +304,13 @@ are additive. Their composite therefore preserves addition on module morphisms. 
   unfold modelModule
   infer_instance
 
-/-- Termwise realization of a scalar complex; this uses ordinary sheaf tensor product.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-tw-ordinary-pullback-stratified-models). -/
+/-- Termwise realization of a scalar complex; this uses ordinary sheaf tensor product. -/
 def modelComplex (T : Scheme.{u}) :
     CochainComplex (ModuleCat.{u + 1} (PbcIntegralRing l E)) ℤ ⥤
       CochainComplex (integralTowerModules l E T) ℤ :=
   completedConstantMapComplex (modelModule l E T) inferInstance
 
-/-- The published scalar-extension witness has exactly the sheaf tensor objects.
-Source: Stacks 03EK, 06YY (blueprint: lem-tw-ordinary-pullback-stratified-models).
-Proof: this is the object specification in derived-change-of-rings, applied to
-scalar; compose that specification with the constant-module functor. -/
+/-- The scalar-extension witness has exactly the sheaf tensor objects. -/
 theorem modelModule_obj (T : Scheme.{u}) (N : ModuleCat.{u + 1} (PbcIntegralRing l E)) :
     (modelModule l E T).obj N = SheafOfModules.changeOfRings (scalar l E T)
       ((adicLisseConstantModules T (PbcIntegralRing l E)).obj N) := by
@@ -336,9 +323,7 @@ theorem modelModule_obj (T : Scheme.{u}) (N : ModuleCat.{u + 1} (PbcIntegralRing
     (scalar l E T)).choose_spec.choose ((adicLisseConstantModules T
       (PbcIntegralRing l E)).obj N)
 
-/-- The actual section b tensor x of the ordinary constant realization.
-Source: Stacks 03EK; Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-tw-ordinary-pullback-stratified-models). -/
+/-- The actual section b tensor x of the ordinary constant realization. -/
 def modelSection (T : Scheme.{u}) (N : ModuleCat.{u + 1} (PbcIntegralRing l E))
     (W : T.ProEtᵒᵖ) (b : (completedIntegralCommRingSheafUnrestricted l E T).obj.obj W)
     (x : N) : ((modelModule l E T).obj N).val.obj W :=
@@ -461,18 +446,8 @@ end ModelComparison
 attribute [local irreducible] modelFunctorIso
   FiniteProjectivePullback.allComparison
 
-/-- The ordinary model comparison, uniquely normalized on constant generators.
-Its naturality applies to every splitting and every idempotent matrix over R, so
-it restricts to precisely the same finite-projective summand.
-Source: Bhatt--Scholze, Proposition 6.6.11 and Remark 6.8.15; Stacks 03EK
-(blueprint: lem-tw-ordinary-pullback-stratified-models).
-Proof: on a finite free module send b tensor (a e_j) to b c_f(a) e_j, with
-inverse b e_j mapped to b tensor e_j. The coefficient map preserves every constant
-R-scalar at every finite projection, hence preserves the matrix of an idempotent.
-Restrict both inverse maps to its image. More generally the same balanced-tensor
-formula works for every scalar module, and commutes with every scalar linear map.
-Sheafification gives the natural isomorphism. The adjunction-unit images generate
-pullback locally, proving uniqueness from the displayed equation. -/
+/-- The ordinary model comparison, a natural isomorphism uniquely normalized on constant
+generators by `b ⊗ (a e_j) ↦ b c_f(a) e_j`. -/
 theorem modelPullback_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! γ : modelModule l E Y ⋙ ordinaryIntegralModulePull l E f ≅ modelModule l E X,
       ∀ (N : ModuleCat.{u + 1} (PbcIntegralRing l E)) (W : Y.ProEt) (x : N),
@@ -521,21 +496,16 @@ theorem modelPullback_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
   exact (hδ N (⊤_ Y.ProEt) x).trans (hn N (⊤_ Y.ProEt) x).symm
 
-/-- The uniquely generator-normalized ordinary model isomorphism.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-tw-ordinary-pullback-stratified-models). -/
+/-- The uniquely generator-normalized ordinary model isomorphism. -/
 def modelPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (modelPullback_existsUnique l E f).exists.choose
 
-/-- Its degreewise application, retaining the same scalar differential and idempotents.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-tw-ordinary-pullback-stratified-models). -/
+/-- Its degreewise application, retaining the same scalar differential and idempotents. -/
 def modelPullbackComplex {X Y : Scheme.{u}} (f : X ⟶ Y) :
     modelComplex l E Y ⋙ ordinaryIntegralPullComplex l E f ≅ modelComplex l E X :=
   NatIso.mapHomologicalComplex (modelPullback l E f) (.up ℤ)
 
-/-- The actual fibre-product associativity comparison on the two covering slices.
-Source: Stacks 03CB, 04IF (blueprint: lem-tw-ordinary-pullback-stratified-models). -/
+/-- The actual fibre-product associativity comparison on the two covering slices. -/
 def squareSite {X Y S : Scheme.{u}} (f : X ⟶ Y) (i : S ⟶ Y) :
     proEtaleBaseChange i ⋙ proEtaleBaseChange (pullback.snd f i) ≅
       proEtaleBaseChange f ⋙ proEtaleBaseChange (pullback.fst f i) :=
@@ -544,8 +514,7 @@ def squareSite {X Y S : Scheme.{u}} (f : X ⟶ Y) (i : S ⟶ Y) :
     (hfg := pullback.condition)).symm ≪≫
   MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) (pullback.fst f i) f
 
-/-- The canonical inverse-image generator 1 tensor x, given by the module adjunction unit.
-Source: Stacks 03D2 (blueprint: lem-tw-ordinary-pullback-stratified-models). -/
+/-- The canonical inverse-image generator 1 tensor x, given by the module adjunction unit. -/
 def pullGenerator {X Y : Scheme.{u}} (f : X ⟶ Y) (M : integralTowerModules l E Y)
     (W : Y.ProEt) (x : M.val.obj (op W)) :
     ((ordinaryIntegralModulePull l E f).obj M).val.obj
@@ -619,15 +588,8 @@ private theorem modelDirectSquare_sections {X Y S : Scheme.{u}} (f : X ⟶ Y) (i
   rw [← Functor.map_comp]
   rfl
 
-/-- The ordinary square comparison is uniquely fixed on iterated inverse-image generators.
-Source: Stacks 03CB, 03D2 and 0D6D
-(blueprint: lem-tw-ordinary-pullback-stratified-models).
-Proof: coefficientMap_comp identifies the structural maps of the two equal composites,
-including all finite projections. Compose the ordinary tensor pullback comparisons.
-On iterated generators both composites insert one twice, and squareSite gives the
-canonical restriction between the iterated fibre products. Tensor relations and
-sheafification give the isomorphism. These generators locally span the pullback
-module, so their displayed values determine its components and the natural isomorphism. -/
+/-- The ordinary square comparison exists and is uniquely fixed on iterated inverse-image
+generators. -/
 theorem moduleSquare_existsUnique {X Y S : Scheme.{u}} (f : X ⟶ Y) (i : S ⟶ Y) :
     ∃! γ : ordinaryIntegralModulePull l E i ⋙
           ordinaryIntegralModulePull l E (pullback.snd f i) ≅
@@ -685,13 +647,11 @@ theorem moduleSquare_existsUnique {X Y S : Scheme.{u}} (f : X ⟶ Y) (i : S ⟶ 
   ext x
   exact (hδ M W.unop x).trans (normalize M W.unop x).symm
 
-/-- The generator-normalized square comparison of ordinary module functors.
-Source: Stacks 03D2, 0D6D (blueprint: lem-tw-ordinary-pullback-stratified-models). -/
+/-- The generator-normalized square comparison of ordinary module functors. -/
 def moduleSquare {X Y S : Scheme.{u}} (f : X ⟶ Y) (i : S ⟶ Y) :=
   (moduleSquare_existsUnique l E f i).exists.choose
 
-/-- Its termwise action on cochain complexes.
-Source: Stacks 0D6D (blueprint: lem-tw-ordinary-pullback-stratified-models). -/
+/-- Its termwise action on cochain complexes. -/
 def complexSquare {X Y S : Scheme.{u}} (f : X ⟶ Y) (i : S ⟶ Y) :
     ordinaryIntegralPullComplex l E i ⋙ ordinaryIntegralPullComplex l E (pullback.snd f i) ≅
       ordinaryIntegralPullComplex l E f ⋙ ordinaryIntegralPullComplex l E (pullback.fst f i) :=
@@ -785,15 +745,8 @@ private instance exactComplexCounit_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     exact ordinaryCounitExact l E f P
   exact NatIso.isIso_of_isIso_app _
 
-/-- The ordinary derived square comparison retains its computation-counit equation.
-Source: Stacks 0D6D and 06YY
-(blueprint: lem-tw-ordinary-pullback-stratified-models).
-Proof: choose a flat-term K-flat resolution. Ordinary ringed pullback preserves this
-class. Apply the two ordinary derived composition comparisons and the two-isomorphism
-transport for the equal composites, using moduleSquare for their termwise comparison.
-The normalized comparison on representatives gives the displayed counit equation.
-Descent gives it for arbitrary complexes. On good resolutions all computation maps
-are invertible; every derived object has such a resolution. This proves uniqueness. -/
+/-- The ordinary derived square comparison exists, satisfies the computation-counit
+equation, and is unique with this property. -/
 theorem derivedSquare_existsUnique {X Y S : Scheme.{u}} (f : X ⟶ Y) (i : S ⟶ Y) :
     ∃! β : ordinaryIntegralDerivedPull l E f ⋙
           ordinaryIntegralDerivedPull l E (pullback.fst f i) ≅
@@ -854,16 +807,13 @@ theorem derivedSquare_existsUnique {X Y S : Scheme.{u}} (f : X ⟶ Y) (i : S ⟶
       Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
       asIso_hom, exactComplexCounit_app, Category.assoc] using hγ P
 
-/-- The unique ordinary derived square comparison with this representative normalization.
-Source: Stacks 0D6D (blueprint: lem-tw-ordinary-pullback-stratified-models). -/
+/-- The unique ordinary derived square comparison with this representative normalization. -/
 def derivedSquare {X Y S : Scheme.{u}} (f : X ⟶ Y) (i : S ⟶ Y) :=
   (derivedSquare_existsUnique l E f i).exists.choose
 
 /-- The canonical local composition and covering-slice restriction comparison.
 The covering object U is a weakly etale scheme over the stratum S; its pullback
-is literally the chart V = (X times_Y S) times_S U.
-Source: Stacks 0D6D, 04IF; Bhatt--Scholze, Remark 6.8.15
-(blueprint: lem-tw-ordinary-pullback-stratified-models). -/
+is literally the chart V = (X times_Y S) times_S U. -/
 def localExchange {X Y S : Scheme.{u}} (f : X ⟶ Y) (i : S ⟶ Y)
     (U : S.ProEt) (K : DerivedCategory (integralTowerModules l E Y)) :
     (ordinaryIntegralDerivedPull l E
@@ -880,9 +830,7 @@ def localExchange {X Y S : Scheme.{u}} (f : X ⟶ Y) (i : S ⟶ Y)
       ((ordinaryIntegralDerivedPull l E i).obj K)
 
 /-- The specified local-model map: composition and slice comparisons, the given
-chart isomorphism, the ordinary K-flat counit, and the termwise tensor comparison.
-Source: Bhatt--Scholze, Proposition 6.6.11 and Remark 6.8.15
-(blueprint: lem-tw-ordinary-pullback-stratified-models). -/
+chart isomorphism, the ordinary K-flat counit, and the termwise tensor comparison. -/
 def localComparison {X Y S : Scheme.{u}} (f : X ⟶ Y) (i : S ⟶ Y)
     (U : S.ProEt) (K : DerivedCategory (integralTowerModules l E Y))
     (L : CochainComplex (ModuleCat.{u + 1} (PbcIntegralRing l E)) ℤ)

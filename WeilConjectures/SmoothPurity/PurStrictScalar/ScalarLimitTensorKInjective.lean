@@ -16,7 +16,17 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedIntegralFiniteFree
 
 The Frobenius form on the finite extension of integral coefficient rings identifies
 strict scalar extension with a right adjoint of exact restriction.
-(blueprint: lem-pur-compact-support-scalar-limit-tensor-kinjective).
+
+## Implementation details
+
+The integral coefficient rings are principal ideal domains, and their finite free extension has
+a Frobenius form identifying extension with coextension. Its two adjunctions are transported
+through the constant-module encoding equivalences, and the K-injective criterion is applied to
+exact restriction on strict towers.
+
+## References
+
+* [Stacks Project, Tags 03CY and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -80,13 +90,7 @@ variable (l : ℕ) [Fact l.Prime]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (i : E →ₐ[ℚ_[l]] F)
 
-/-- Finite-free strict scalar extension preserves K-injective complexes.
-Source: Stacks 03CY and 0941; dual-basis tensor/restriction argument.
-(blueprint: lem-pur-compact-support-scalar-limit-tensor-kinjective).
-Proof: the integral coefficient rings are principal ideal domains. Their finite
-free extension has a Frobenius form, identifying extension with coextension.
-Transport its two adjunctions through the constant-module encoding equivalences,
-then apply the K-injective criterion to exact restriction on strict towers. -/
+/-- Finite-free strict scalar extension preserves K-injective complexes. -/
 theorem scalarTensor_preservesKInjective (W : Scheme.{u}) :
     (tensor l E F i W).PreservesKInjectiveComplexes := by
   classical

@@ -13,15 +13,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficien
 /-!
 # Residue scalar extension
 
-Let `ρ : Λ ⟶ Λ ⧸ I` be the reduction modulo an ideal (in the blueprint, `𝒪_E/ϖⁿ ⟶ 𝒪_E/ϖ`, that is
-`I` is the maximal ideal `(ϖ)`). Extension of scalars `M ↦ (Λ ⧸ I) ⊗_Λ M` is right exact but not
+Let `ρ : Λ ⟶ Λ ⧸ I` be the reduction modulo an ideal (typically `𝒪_E/ϖⁿ ⟶ 𝒪_E/ϖ`, that is `I`
+is the maximal ideal `(ϖ)`). Extension of scalars `M ↦ (Λ ⧸ I) ⊗_Λ M` is right exact but not
 exact; its total left derived functors, computed on K-flat resolutions, are
 
-- `AlgebraicGeometry.Etale.residueScalarExtension` (`definition-sp-scalar-extension--1`):
+- `AlgebraicGeometry.Etale.residueScalarExtension`:
   `D(W_ét, Λ) ⥤ D(W_ét, Λ ⧸ I)`, deriving `M ↦ (Λ ⧸ I)_W ⊗_{Λ_W} M`
   (`CategoryTheory.Sheaf.quotSMulTop`);
-- `AlgebraicGeometry.Etale.residueScalarExtensionModule`
-  (`lemma-kunneth-one-identity-factor`): `D(Mod_Λ) ⥤ D(Mod_{Λ ⧸ I})`, deriving
+- `AlgebraicGeometry.Etale.residueScalarExtensionModule`: `D(Mod_Λ) ⥤ D(Mod_{Λ ⧸ I})`, deriving
   `M ↦ M / I M` (`ModuleCat.quotSMulTop`).
 
 The only input is that these functors send quasi-isomorphisms between K-flat complexes to
@@ -60,11 +59,9 @@ instance preservesKFlatQuasiIso_sheafQuotSMulTop (W : Scheme.{u}) :
       ((NatIso.mapHomologicalComplex (Sheaf.quotSMulTopCompRestrictScalarsIso I) _).app K).symm
   exact (ShortComplex.exact_map_iff_of_faithful _ ι).1 (h n)
 
-/-- Blueprint `definition-sp-scalar-extension--1`: residue scalar extension of sheaf complexes.
-
-For a scheme `W` and the reduction `ρ : Λ ⟶ Λ ⧸ I` (in the blueprint `𝒪_E/ϖⁿ ⟶ 𝒪_E/ϖ`), the
-functor `- ⊗ᴸ_Λ Λ ⧸ I : D(W_ét, Λ) ⥤ D(W_ét, Λ ⧸ I)` is the total left derived functor, computed
-on K-flat resolutions, of the sheaf functor `M ↦ (Λ ⧸ I)_W ⊗_{Λ_W} M`
+/-- Residue scalar extension of sheaf complexes: for a scheme `W` and the reduction
+`ρ : Λ ⟶ Λ ⧸ I`, the functor `- ⊗ᴸ_Λ Λ ⧸ I : D(W_ét, Λ) ⥤ D(W_ét, Λ ⧸ I)` is the total left derived
+functor, computed on K-flat resolutions, of the sheaf functor `M ↦ (Λ ⧸ I)_W ⊗_{Λ_W} M`
 (`CategoryTheory.Sheaf.quotSMulTop`, the sheafification of `U ↦ M(U) / I M(U)`), whose target
 carries its `Λ ⧸ I`-module structure. -/
 noncomputable def residueScalarExtension (W : Scheme.{u}) :
@@ -84,12 +81,10 @@ instance preservesKFlatQuasiIso_moduleCatQuotSMulTop :
         K).symm
   exact (ShortComplex.exact_map_iff_of_faithful _ ι).1 (h n)
 
-/-- Blueprint `lemma-kunneth-one-identity-factor`: residue scalar extension of module
-complexes.
-
-The functor `- ⊗ᴸ_Λ Λ ⧸ I : D(Mod_Λ) ⥤ D(Mod_{Λ ⧸ I})` (in the blueprint for
-`𝒪_E/ϖⁿ ⟶ 𝒪_E/ϖ`) is the total left derived functor, computed on K-flat resolutions of complexes
-of `Λ`-modules, of `M ↦ Λ ⧸ I ⊗_Λ M = M / I M` (`ModuleCat.quotSMulTop`). -/
+/-- Residue scalar extension of module complexes: the functor
+`- ⊗ᴸ_Λ Λ ⧸ I : D(Mod_Λ) ⥤ D(Mod_{Λ ⧸ I})` is the total left derived functor, computed on K-flat
+resolutions of complexes of `Λ`-modules, of `M ↦ Λ ⧸ I ⊗_Λ M = M / I M` (`ModuleCat.quotSMulTop`).
+-/
 noncomputable def residueScalarExtensionModule :
     DerivedCategory (ModuleCat.{u + 1} Λ) ⥤ DerivedCategory (ModuleCat.{u + 1} (Λ ⧸ I)) :=
   L(ModuleCat.quotSMulTop.{u + 1} I)

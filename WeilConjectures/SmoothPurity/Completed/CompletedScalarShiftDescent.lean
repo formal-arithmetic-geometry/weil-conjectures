@@ -58,8 +58,13 @@ set_option linter.privateModule false
 
 /-! # Normalized descent of the strict scalar shift
 
-Source: Stacks Project, Tags 011G, 014E, 06YS, 06YT and 08TC.
-(blueprint: lem-weil-completed-scalar-shift-descent)
+Auxiliary results for descending the shift structure of the strict scalar extension along
+the localization at good complexes: good complexes are stable under shifts, and a functor
+through a localization with fully faithful whiskering inherits a compatible shift.
+
+## References
+
+* Stacks Project, Tags 011G, 014E, 06YS, 06YT and 08TC.
 -/
 
 @[expose] public section

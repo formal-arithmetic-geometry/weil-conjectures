@@ -22,8 +22,7 @@ and smooth of pure relative dimension `d`, with `X₁` proper and smooth of pure
 dimension `d` over `F`, and whose geometric generic fibre is all of `X₁ ×_F Spec Ω`. This file
 proves that the dualizing map `θ_N : Ψ_N ω_{X₁} ⟶ ω_{X'}` of a family of dualizing maps over
 generic bases (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase`) is an isomorphism
-(`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.isIso_θ_of_smooth`; blueprint
-`prose-E-15`, smooth case).
+(`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.isIso_θ_of_smooth`).
 
 * **Global sections**
   (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.isIso_lowerStar_map_θ_of_smooth`):
@@ -40,13 +39,15 @@ generic bases (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase`) is an isomo
   Ψ_N ω_{X₁} ≅ Ψ_N ℚ̄_ℓ(d)[2d] ≅ Ψ_N(ℚ̄_ℓ ⊗ ℚ̄_ℓ(d)[2d]) ≅ Ψ_N ℚ̄_ℓ ⊗ ℚ̄_ℓ(d)[2d]
     ≅ ℚ̄_ℓ ⊗ ℚ̄_ℓ(d)[2d] ≅ ℚ̄_ℓ(d)[2d] ≅ ω_{X'}
   ```
-  of smooth purity on both fibres (`ProEtale.CondensedRing.isIso_smoothPurityMap`, an input of
-  the smooth purity section), the commutation of nearby cycles with Tate twists
+  of smooth purity on both fibres (`ProEtale.CondensedRing.isIso_smoothPurityMap`), the
+  commutation of nearby cycles with Tate twists
   (`NearbyCyclesModel.nearbyCyclesTateTwistIso`, with the pullbacks of the Tate twists
   `ProEtale.upperStarTateTwistDerivedIso`) and the invertible specialization
   unit.
 * **Invertibility**: the endomorphism `ψ⁻¹ ∘ θ_N` of `ω_{X'}` is invertible on global sections,
   hence invertible (`ProEtale.CondensedRing.isIso_of_isIso_lowerStar_map_dualizingComplex`).
+
+## Implementation details
 
 The isomorphism `θ_N` is not identified with the composite above: this would need the
 compatibility of the purity isomorphisms with base change and of the trace with specialization,
@@ -86,8 +87,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {F : Type u} [Field F] {k' : Type u} [Fiel
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
 /-- The unit `ε_Ψ` of the lax monoidal structure of nearby cycles of a smooth trait model over a
-generic base is invertible: it is the specialization unit
-(`NearbyCyclesModel.boundedConstructibleNearbyCyclesLaxMonoidal_ε`). -/
+generic base is invertible. -/
 lemma IsTraitModelOfGenericBase.isIso_laxMonoidal_ε_of_smooth
     (h : M.IsTraitModelOfGenericBase X₁ ι q g) [Smooth q] :
     IsIso (@Functor.LaxMonoidal.ε _ _ _ _ _ _
@@ -98,8 +98,7 @@ lemma IsTraitModelOfGenericBase.isIso_laxMonoidal_ε_of_smooth
 
 omit [IsSepClosed k'] [Fact (ringChar F).Prime] [Fact (ringChar k').Prime]
   [LocallyOfFiniteType X₁.hom] [LocallyOfFiniteType X'.hom] in
-/-- The schemes of a trait model over a generic base are quasi-compact and quasi-separated, so
-that the pullbacks along `ε`, `j` and `i` commute with sequential limits. -/
+/-- The schemes of a trait model over a generic base are quasi-compact and quasi-separated. -/
 lemma IsTraitModelOfGenericBase.compactSpace_quasiSeparatedSpace
     (h : M.IsTraitModelOfGenericBase X₁ ι q g) :
     (CompactSpace X₁.left ∧ QuasiSeparatedSpace X₁.left) ∧
@@ -189,11 +188,7 @@ variable {ℓ} (D : NearbyDualizingDataOfGenericBase k' ℓ)
 
 /-- **Global sections of the dualizing map of a smooth proper model**: for a trait model `N`
 over a generic base with `q` smooth and proper, `X₁` and `X'` proper and full geometric generic
-fibre, `Ra'_*(θ_N)` is invertible: global sections of the duality map at the unit are invertible
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_lowerStar_nearbyDualityMap_of_isProper`), and
-the unit `ε_Ψ` of nearby cycles is invertible
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_laxMonoidal_ε_of_smooth`), so
-`CategoryTheory.Verdier.isIso_map_of_isIso_map_nearbyDualityMap_unit` applies. -/
+fibre, `Ra'_*(θ_N)` is invertible. -/
 theorem isIso_lowerStar_map_θ_of_smooth (h : M.IsTraitModelOfGenericBase X₁ ι q g)
     [IsProper (CondensedRing.toPoint X₁).left] [IsProper (CondensedRing.toPoint X').left]
     [IsProper q] [Smooth q] (hgen : IsPullback M.ε g X₁.hom (traitGenericPointToSpec k' ≫ ι)) :
@@ -210,9 +205,7 @@ theorem isIso_lowerStar_map_θ_of_smooth (h : M.IsTraitModelOfGenericBase X₁ �
   exact Verdier.isIso_map_of_isIso_map_nearbyDualityMap_unit _ _ _ h₁
 
 /-- **The dualizing map of a smooth proper model is an isomorphism**, given some isomorphism
-`ψ : Ψ_N ω_{X₁} ≅ ω_{X'}`: the endomorphism `ψ⁻¹ ∘ θ_N` of `ω_{X'}` is invertible on global
-sections (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.isIso_lowerStar_map_θ_of_smooth`),
-hence invertible (`ProEtale.CondensedRing.isIso_of_isIso_lowerStar_map_dualizingComplex`). -/
+`ψ : Ψ_N ω_{X₁} ≅ ω_{X'}`. -/
 theorem isIso_θ_of_iso (h : M.IsTraitModelOfGenericBase X₁ ι q g)
     [IsProper (CondensedRing.toPoint X₁).left] [IsProper (CondensedRing.toPoint X').left]
     [IsProper q] [Smooth q] (hgen : IsPullback M.ε g X₁.hom (traitGenericPointToSpec k' ≫ ι))
@@ -227,8 +220,8 @@ theorem isIso_θ_of_iso (h : M.IsTraitModelOfGenericBase X₁ ι q g)
   have := isIso_of_isIso_lowerStar_map_dualizingComplex ℓ X' (ψ.inv ≫ D.θ h)
   exact IsIso.of_isIso_comp_left ψ.inv _
 
-/-- **The dualizing map of a smooth proper model is an isomorphism** (blueprint
-`prose-E-15`, smooth case): for a trait model `N` over a generic base whose
+/-- **The dualizing map of a smooth proper model is an isomorphism**:
+for a trait model `N` over a generic base whose
 structure morphism `q` is proper and smooth of pure relative dimension `d`, with `X₁` proper and
 smooth of pure relative dimension `d` over `F` and full geometric generic fibre, the dualizing
 map `θ_N : Ψ_N ω_{X₁} ⟶ ω_{X'}` is an isomorphism. -/

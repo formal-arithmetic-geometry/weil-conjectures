@@ -10,8 +10,9 @@ import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperation
 
 /-! # The canonical tensor-completion chain map
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5
-(blueprint: lem-fix-constructible-tensor-completion-chain).
+## References
+
+* [Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 3.4.10 and Lemma 6.5.5]
 -/
 
 @[expose] public noncomputable section
@@ -35,9 +36,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 attribute [local irreducible] IntegralOnSlice.duality IntegralOnSlice.roosUnit
   IntegralAmbient.tensorTowerIso IntegralAmbient.tensorOperationUnit
 
-/-- Compose a natural augmentation with a natural comparison of its target towers.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5
-(blueprint: lem-fix-constructible-tensor-completion-chain). -/
+/-- Compose a natural augmentation with a natural comparison of its target towers. -/
 def completionChainOfTower
     {C B S : Type*} [Category* C] [Category* B] [Category* S]
     (F : B ⥤ C) (U : C ⥤ S) (V : B ⥤ S) (R : S ⥤ C)
@@ -52,9 +51,7 @@ def completionChainOfTower
     rw [← Category.assoc, hη, Category.assoc, ← R.map_comp, hb,
       R.map_comp, ← Category.assoc]
 
-/-- Naturality of the existing Roos unit, in the native cochain category.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: lem-fix-constructible-tensor-completion-chain). -/
+/-- Naturality of the existing Roos unit, in the native cochain category. -/
 theorem tensorRoosUnit_natural
     {P Q : CochainComplex (integralTowerModules l E W) ℤ} (f : P ⟶ Q) :
     f ≫ IntegralOnSlice.roosUnit l E W none Q =
@@ -63,9 +60,7 @@ theorem tensorRoosUnit_natural
   with_unfolding_all
     exact WeilConjectures.IntegralOnSlice.sliceRoosUnit_natural l E W none f
 
-/-- The actual Roos augmentation followed by the normalized tensor-tower comparison.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5
-(blueprint: lem-fix-constructible-tensor-completion-chain). -/
+/-- The actual Roos augmentation followed by the normalized tensor-tower comparison. -/
 @[irreducible] def tensorCompletionChain : totalTensor l E W ⟶
     integralOperationsTensorComplexFunctor l E W := by
   let F := totalTensor l E W
@@ -80,9 +75,7 @@ Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5
   exact completionChainOfTower F U (integralOperationsTensorTowerFunctor l E W) R η
     (IntegralAmbient.tensorTowerIso l E W)
 
-/-- The component is the actual normalized tensor operation unit.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5
-(blueprint: lem-fix-constructible-tensor-completion-chain). -/
+/-- The component is the actual normalized tensor operation unit. -/
 theorem tensorCompletionChain_app
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     (tensorCompletionChain l E W).app (P, Q) = tensorCompletionUnitMap l E W P Q := by

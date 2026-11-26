@@ -29,8 +29,6 @@ namespace WeilConjectures
 open GeneralAlgebraicallyClosedCoefficients
 
 /-- The equation for one pair of inputs in a tensor comparison square.
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: def-sf-projection-pullback-tensor-operations).
 This is the expanded equation defining comparison compatibility, without its
 universal quantifiers over the two inputs. -/
 @[reducible] def projectionTensorComparisonComponent
@@ -55,9 +53,7 @@ universal quantifiers over the two inputs. -/
       (TB'.map (a.inv.app M)).app (G.obj (I.obj N)) ≫
       (TB'.obj (J.obj (F.obj M))).map (a.inv.app N)
 
-/-- Transport a tensor/pullback comparison along the recorded functor equalities.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: def-sf-projection-pullback-tensor-operations). -/
+/-- Transport a tensor/pullback comparison along the recorded functor equalities. -/
 def projectionTransportTensorComparison
     {A B : Type*} [Category* A] [Category* B]
     {F F' : A ⥤ B} {T T' : B ⥤ B ⥤ B} {U U' : A ⥤ A ⥤ A}
@@ -71,9 +67,7 @@ def projectionTransportTensorComparison
   subst U'
   exact φ
 
-/-- The supplied tensor/pullback comparison in the named operation coordinates.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: def-sf-projection-pullback-tensor-operations). -/
+/-- The supplied tensor/pullback comparison in the named operation coordinates. -/
 @[irreducible] def projectionPullbackTensor
     {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
@@ -84,9 +78,7 @@ Source: thm-sf-pf-field.proof.md, Compatibility
         (S.pull Q.p)).obj (T Q.Z) :=
   projectionTransportTensorComparison A.properPull A.tensorBar A.tensorY A.stage.tensorPullback
 
-/-- The curried version of an uncurried natural tensor comparison.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: def-sf-projection-pullback-tensor-operations). -/
+/-- The curried version of an uncurried natural tensor comparison. -/
 @[irreducible] def projectionCurriedTensorComparison
     {A B : Type*} [Category* A] [Category* B]
     (V : A ⥤ B) (T : A ⥤ A ⥤ A) (T' : B ⥤ B ⥤ B)
@@ -100,9 +92,7 @@ Source: thm-sf-pf-field.proof.md, Compatibility
       ext b
       simpa using t.hom.naturality (Prod.mkHom f (𝟙 b)))
 
-/-- The pullback/tensor square, with all its operation data supplied explicitly.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: def-sf-projection-pullback-tensor-operations). -/
+/-- The pullback/tensor square, with all its operation data supplied explicitly. -/
 @[irreducible] def projectionTensorComparisonCompatible
     {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type*} [∀ X, Category* (B X)]

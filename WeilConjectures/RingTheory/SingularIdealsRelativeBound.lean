@@ -14,8 +14,13 @@ import Mathlib.RingTheory.Smooth.Flat
 /-!
 # Relative singular-ideal containment from an annihilator bound
 
-Source: Stacks Project, Tag 07CT, second paragraph.
-(blueprint: lem-weil-pbc-singular-ideals-relative-bound).
+Under an annihilator bound for an element `π` of a Noetherian base ring, the singular ideal of
+a finitely presented map `D → B` contains the image of the singular ideal of `D`.
+
+## References
+
+* [Stacks, Tag 07CT]
+* [Stacks, Tag 07T8]
 -/
 
 @[expose] public section
@@ -23,7 +28,7 @@ Source: Stacks Project, Tag 07CT, second paragraph.
 universe u v w
 namespace Algebra
 
-/-- The base annihilator equality persists under a flat algebra map, by Tag 07T8. -/
+/-- The base annihilator equality persists under a flat algebra map. -/
 private theorem annihilator_eq_of_flat
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     [Module.Flat R S] (π : R) (hR : ∀ r : R, r * π = 0 ↔ r * π ^ 2 = 0) :
@@ -85,18 +90,11 @@ private theorem exists_uniform_power
   intro x hx
   simpa only [LinearMap.mem_ker, LinearMap.mulLeft_apply, mul_assoc] using hle hx
 
-/-- Relative singular-ideal containment from an annihilator bound.
-
-Source: Stacks Project, Tag 07CT, second paragraph. For a smooth localization element
-`g`, flat base change identifies the annihilators of `π` and `π²` in `D_g`.
-Thus each element of `Ann_D(π²)` is killed by `π` after localization. Clear the
-localization denominators, and use finite generation of that ideal over the Noetherian
-ring `D` to obtain one power of `g` which annihilates all these products. This power
-belongs to the set in the assumed bound. Hence the image of every smooth generator
-belongs to the radical relative singular ideal. Span and radical monotonicity give
-containment for the entire singular ideal.
-(blueprint: lem-weil-pbc-singular-ideals-relative-bound)
--/
+/-- Relative singular-ideal containment from an annihilator bound. Let `R` be Noetherian with
+`r * π = 0 ↔ r * π² = 0`, and let `D → B` be a finitely presented map of `R`-algebras with `D`
+finitely presented. If the singular ideal of `B` over `D` contains the image of every `r ∈ D`
+with `r * π * x = 0` whenever `π² * x = 0`, then it contains the image of the singular ideal of
+`D` over `R`. -/
 theorem singularIdeal_map_le_relative_of_annihilator_bound
     (R : Type u) (D : Type v) (B : Type w)
     [CommRing R] [CommRing D] [CommRing B]

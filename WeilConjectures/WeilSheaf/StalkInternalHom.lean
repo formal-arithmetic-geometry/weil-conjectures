@@ -24,11 +24,8 @@ lisse Weil sheaf, `[G^∨, F]` is the tensor product `G ⊗ F`, and the trace fu
 multiplicative: `t_{[G^∨, F]} = t_G t_F`
 (`AlgebraicGeometry.WeilSheaf.traceFunction_ihom_dual`).
 
-## Blueprint
-
 These are the stalk computations behind "the trace of a tensor product is the product of the
-traces" in the proof of the Fourier trace formula (sketch blueprint
-`sec-The-Plancherel-formula`).
+traces" in the proof of the Fourier trace formula.
 -/
 
 @[expose] public section

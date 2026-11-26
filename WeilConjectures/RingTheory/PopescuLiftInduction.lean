@@ -12,8 +12,12 @@ public import WeilConjectures.RingTheory.StrictlyStandardElement
 /-!
 # The induction claim for lifting Popescu resolutions
 
-Source: Stacks Project, Lemma 07F8 (lemma-lift-solution), induction on the list length.
-(blueprint: def-weil-pbc-popescu-lift-induction)
+We state the assertion proved by induction on the length of the list of elements in the
+lifting step of Popescu's theorem.
+
+## References
+
+* [Stacks, Lemma 07F8] (induction on the list length)
 -/
 
 @[expose] public section
@@ -23,8 +27,7 @@ universe u v w
 namespace Algebra
 
 /-- Resolution data for the total eighth-power quotient, with its maps compatible with the
-original map. Source: Stacks Project, Lemma 07F8 (lemma-lift-solution).
-(blueprint: def-weil-pbc-popescu-lift-induction) -/
+original map. -/
 def PopescuEighthPowerQuotientResolved
     {R : Type u} {A : Type v} {Λ : Type w}
     [CommRing R] [CommRing A] [CommRing Λ] [Algebra R A] [Algebra R Λ]
@@ -40,9 +43,7 @@ def PopescuEighthPowerQuotientResolved
     PrimeSpectrum.comap (Ideal.Quotient.mk J_Λ) q₀ = q ∧
     CanBePopescuResolved α₀ q₀
 
-/-- The universally quantified induction assertion for Lemma 07F8.
-Source: Stacks Project, Lemma 07F8 (lemma-lift-solution), induction on `r`.
-(blueprint: def-weil-pbc-popescu-lift-induction)
+/-- The universally quantified induction assertion for Lemma 07F8, indexed by the length `r`.
 -/
 def PopescuEighthPowerLifting
     (r : ℕ) : Prop :=

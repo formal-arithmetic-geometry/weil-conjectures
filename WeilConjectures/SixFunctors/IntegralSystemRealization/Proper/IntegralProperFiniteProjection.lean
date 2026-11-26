@@ -11,7 +11,13 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.IntegralFini
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.IntegralFiniteProperMate
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 
-/-! # Proper finite projection in scalar reduction coordinates -/
+/-! # Proper finite projection in scalar reduction coordinates
+
+## References
+
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,9 +37,7 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Proper scalar comparison in the published finite constant-ring coordinates.
-Source: Stacks 07A7; normalized proper mate in fix-prop-coherence
-(blueprint: lem-sf-integral-proper-finite-projection). -/
+/-- Proper scalar comparison in the published finite constant-ring coordinates. -/
 @[irreducible] def properFiniteReduction {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ringedPush l E f ⋙ scalarReductionDerivedExtension l E Y n ⟶
       scalarReductionDerivedExtension l E X n ⋙
@@ -160,25 +164,7 @@ private theorem finitePullback_normalization (o : Operations l E)
   exact integralFinitePullback_onGood l E o model f P n
 
 /-- Finite projection of the proper realization, before any open extension.
-There is no completeness or constructibility assumption on the system M.
-Source: Stacks 07A7 and 0941; fix-prop-coherence.proof.md, preservation of
-adjunction units and counits; Step 1 of integral support projection transport
-(blueprint: lem-sf-integral-proper-finite-projection).
-
-Proof: first identify inverse pullback/reduction in finite coordinates on a
-flat-term K-flat representative, by integralFinitePullback_onGood. Naturality
-and the essential surjectivity of good-complex localization extend that equality
-to arbitrary integral derived objects. integralFiniteProperMate identifies the
-canonical proper finite comparison by its geometric-adjunction counit equation.
-Transpose the desired equality through the finite geometric adjunction. Naturality
-moves the finite coordinate isomorphisms past model.push and the geometric
-counits. The conjugateEquiv_counit identity for the two composite adjunctions
-then cancels the inverse reduction/pullback comparison against the comparison
-whose conjugate defines model.push. DirectEvaluation.counit identifies the
-remaining finite transpose. Injectivity of the adjunction bijection gives the
-claimed equality. This is the explicit private projection_mate calculation.
-No faithfulness of derived evaluations or invertible reconstruction unit is used;
-the zero system and exponent one obey the same adjunction identities. -/
+There is no completeness or constructibility assumption on the system M. -/
 theorem integralProperFiniteProjection (o : Operations l E)
     (model : RealizationModel l E o) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : System l E X) (n : ℕ) :
