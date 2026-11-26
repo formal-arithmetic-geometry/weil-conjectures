@@ -152,7 +152,6 @@ end Transport
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 -- The unchanged signature keeps d, which the shorter categorical proof does not use.
-set_option linter.unusedVariables false in
 /-- The degree-zero calculation for the left unit of the native tensor comparison. -/
 theorem native_weil_tensor_ringed_left_unit_representatives
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]

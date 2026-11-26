@@ -53,7 +53,6 @@ private theorem naturality_of_transport {D : Type v} [Category.{w} D]
     _ = q ≫ (e ≫ tg) := by rw [← Category.assoc, ← hsource, Category.assoc]
 
 -- Preserve the supplied names of hypotheses that only constrain the proof.
-set_option linter.unusedVariables false in
 /-- Resolution transport data imply naturality of the extended ordinary model. -/
 theorem native_ordinary_tensor_model_resolution_naturality
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})

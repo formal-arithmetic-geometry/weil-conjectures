@@ -34,7 +34,6 @@ complexes. Comparisons into bounded-below complexes of injectives are unique up 
 universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace CategoryTheory
-set_option linter.unusedVariables false in
 /-- Objectwise additive maps on canonical cohomology, independent of comparisons. -/
 theorem exists_topological_cocycle_objectwise
     {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]

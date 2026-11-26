@@ -45,7 +45,6 @@ noncomputable abbrev rationalConstructibleCategory :=
     (boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y)
     (Padic.coefficientExtensionUniformizer l E)
 
-set_option linter.defProp false in
 /-- The recorded raw scalar-localization theorem supplies precisely the induced shift
 and image triangles, with exact localization and no new objects. -/
 noncomputable def rationalTriangulationDatum :=

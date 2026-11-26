@@ -53,7 +53,6 @@ noncomputable abbrev sfRationalConstructibleCategory (l : ℕ) [Fact l.Prime]
     (sfIntegralConstructibleCategory l E Y)
     (Padic.coefficientExtensionUniformizer l E)
 
-set_option linter.defProp false in
 /-- The recorded raw scalar-localization theorem supplies precisely the induced shift
 and image triangles, with exact localization and no new objects. -/
 noncomputable def sfRationalTriangulationDatum :=

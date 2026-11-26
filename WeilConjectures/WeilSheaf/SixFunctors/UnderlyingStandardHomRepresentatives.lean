@@ -305,7 +305,6 @@ instance underlyingHomBifunctor_obj_additive
     ((underlyingHomBifunctor (k₀ := k₀) (l := l) (X := X)).obj P).Additive :=
   inferInstanceAs (Mod.ihom P.unop).Additive
 
-set_option linter.unusedSectionVars false in
 /-- The explicitly specified underlying standard Hom complex computes a derived bifunctor,
 with naturality and replacement invariance for every source and every K-injective target. -/
 theorem underlyingStandardHomRepresentatives :

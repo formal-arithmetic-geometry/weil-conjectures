@@ -19,7 +19,6 @@ import all WeilConjectures.CategoryTheory.ExactMonoidalEquivalenceDerived
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 attribute [local irreducible]
   AlgebraicGeometry.ProEtaleWeilSheaf.nativeDerivedClosedComparison
 universe u a b

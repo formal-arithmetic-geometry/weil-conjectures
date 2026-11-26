@@ -33,7 +33,6 @@ maps in the second variable.
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf

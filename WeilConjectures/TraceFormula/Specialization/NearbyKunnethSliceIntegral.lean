@@ -159,8 +159,6 @@ theorem isIso_pullbackExchange_app_of_isPullback_trait_padicIntegers [IsLocalHom
     (Profinite.padicIntegersRingObj ℓ E.1) φ B₀ (by exact_mod_proofs h)
   exact_mod_proofs h'
 
-set_option linter.unusedSectionVars false in
-set_option linter.unusedVariables false in
 -- the special fibre of `N` over `κ₁` (`hNi`) does not enter the base change morphism; it is kept
 -- for the uniformity of the statement with
 -- `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait_padicIntegers`
@@ -227,8 +225,6 @@ theorem isIso_map_exchangeRight_app_of_isPullback_trait_residueField_of_plusEtal
     isIso_map_exchangeRight_app_of_isIso_pullbackExchange_toGenericWithSpecial _ φ _ _ _ _ h
   transport_exact h'
 
-set_option linter.unusedSectionVars false in
-set_option linter.unusedVariables false in
 -- the special fibre of `N` over `κ₁` (`hNi`) does not enter the pullback exchange; it is kept for
 -- the uniformity of the statement with
 -- `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait_padicIntegers`

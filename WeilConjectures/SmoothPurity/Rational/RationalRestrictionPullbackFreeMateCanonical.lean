@@ -22,7 +22,6 @@ invertible on scalar-extended objects.
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures

@@ -358,7 +358,6 @@ variable (l : ℕ) [Fact l.Prime]
   (c : Compactification f)
 
 -- SY is retained verbatim in the existing public interface.
-set_option linter.unusedVariables false in
 /-- The recorded integral comparison has the prescribed native finite projections. -/
 theorem qcqsCompactSupport_strictReductionGamma
     (SX : CoefficientDerivedSystemCalculus l E X)

@@ -284,7 +284,6 @@ attribute [local irreducible] sfCompletedModuleDirectImage sheafCompose
   RingCat.instConcreteCategoryRingHomCarrier
 
 -- Inference shares the coefficient-category interfaces with the abstract lemma.
-set_option linter.defProp false in
 private def derivedBase
     (d : CompactSupportProperImageTower.DirectData l E p) (n : ℕ) :=
   let := d
@@ -319,7 +318,6 @@ private def derivedBase
     Fn Fm G PX RX QX PY RY QY
 
 -- Retain that shared interface when supplying the concrete normalizations.
-set_option linter.defProp false in
 private def completePasting
     (d : CompactSupportProperImageTower.DirectData l E p) (n : ℕ) :=
   let := d

@@ -271,8 +271,6 @@ private theorem restriction_coherence
 
 end Coefficients
 
-set_option linter.unusedVariables false in
-set_option linter.unusedVariables false in
 /-- Open restriction, unique composition through an open neighbourhood and nested
 neighbourhood coherence for sheaves of sets. -/
 theorem subspace_sets_restriction_unit_coherence

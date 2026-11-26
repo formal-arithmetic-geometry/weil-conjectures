@@ -57,7 +57,6 @@ commutes with the shifts (`NearbyCyclesModel.Hom.autAction_shift_comp`, from
 
 universe u
 
-set_option linter.unusedSectionVars false
 
 open CategoryTheory MonoidalCategory Limits
 

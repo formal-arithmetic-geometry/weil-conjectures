@@ -48,7 +48,6 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace TopCat
 
-set_option linter.unusedVariables false in
 /-- Lower-dimensional vanishing kills the integer extension-by-zero generators
 on an irreducible Noetherian space.
 on an irreducible Noetherian space. -/

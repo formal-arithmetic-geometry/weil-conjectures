@@ -92,7 +92,6 @@ theorem noetherian_vanishing_irreducible
   exact hall d X hdim F q hq
 
 -- Preserve the existing names of the unused binders inside `hIrred`.
-set_option linter.unusedVariables false in
 /-- The component induction step in Grothendieck vanishing for Noetherian spaces. -/
 theorem noetherian_vanishing_of_irreducible_components
     (hIrred : ∀ (Y : Type u) [TopologicalSpace Y] [NoetherianSpace Y]

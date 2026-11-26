@@ -162,7 +162,6 @@ private theorem extension_integer_section (X : TopCat.{u})
   rfl
 
 -- The existing statement names an existential witness whose predicate is True.
-set_option linter.unusedVariables false in
 /-- Construct a finite signed partition and positive component maps, without yet
 constructing a morphism between the coproducts. -/
 theorem positive_refinement_data

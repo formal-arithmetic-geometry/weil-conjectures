@@ -35,7 +35,6 @@ separated into `native_ordinary_tensor_model_resolution_roof`.
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf

@@ -38,11 +38,6 @@ then compares the prescribed triangle with the pushed one. No functorial cone is
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.unreachableTactic false
-set_option linter.unusedTactic false
-set_option linter.style.haveILetI false
-set_option linter.unusedSimpArgs false
-set_option linter.style.longLine false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true

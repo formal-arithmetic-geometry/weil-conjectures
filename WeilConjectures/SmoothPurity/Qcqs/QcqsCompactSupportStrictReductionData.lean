@@ -148,7 +148,6 @@ private theorem compactSupportSystemEvaluation_coordinates (n : ℕ)
 
 include K₀ hl
 -- The existing statement retains the geometric hypotheses of its source.
-set_option linter.unusedSectionVars false in
 
 /-- The strict comparison map exists and has the prescribed finite coordinate identity. -/
 theorem qcqsCompactSupport_strictReductionData :

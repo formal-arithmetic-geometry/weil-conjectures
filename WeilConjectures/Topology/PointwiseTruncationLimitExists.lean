@@ -33,7 +33,6 @@ triangle lifts this family. No local cohomology bounds are needed for existence.
 universe u w
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry.RingedSpace
-set_option linter.unusedVariables false in
 /-- Existence part of pointwise truncation reconstruction: the canonical maps from `E` to its
 lower truncations lift to a map `c : E ⟶ K` to the derived limit. -/
 theorem pointwise_truncation_limit_exists (X : RingedSpace.{u})

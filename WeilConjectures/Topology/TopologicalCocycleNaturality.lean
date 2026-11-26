@@ -175,7 +175,6 @@ private theorem comparison_extMk_eq
     exact (I.extMk_eq_zero_iff _ _ rfl _ n rfl).2 ⟨c, hboundary⟩
 
 -- The two proof witnesses in the cocycle-formula hypothesis have their original names.
-set_option linter.unusedVariables false in
 /-- The objectwise comparison maps are natural in the coefficient sheaf. -/
 theorem topological_cocycle_naturality
     {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]

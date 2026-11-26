@@ -70,7 +70,6 @@ private noncomputable def sequenceComponent
     (sequenceRing K O).obj F.val
   isSheaf := (sequenceSheaf_iff K F.val.presheaf).1 F.isSheaf j.unop
 
-set_option linter.unnecessarySimpa false in
 /-- Horizontal structure map on the component modules. -/
 private noncomputable def sequenceArrow
     {C : Type c} [Category.{v} C]

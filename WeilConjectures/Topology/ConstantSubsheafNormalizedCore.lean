@@ -47,7 +47,6 @@ structure NormalizedPresentationData
   divisor : ∀ x : X, x ∈ iSup A →
     ∃ i, x ∈ A i ∧ ∀ j, x ∈ A j → c i ∣ c j
 
-set_option linter.unusedVariables false in
 /-- Existence of the finite normalized presentation data. -/
 theorem constantSubsheaf_normalized_core
     (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]
@@ -96,7 +95,6 @@ private theorem normalized_positive_bound (p a B : ℕ) (hp : 0 < p) (ha : a ≤
     ⟨w.down, by simpa using (congrArg ULift.down hw).symm⟩
   exact (Nat.le_of_dvd (Nat.pos_of_ne_zero ha0) hdiv).trans ha
 
-set_option linter.unusedVariables false in
 /-- Completion of normalized presentation data to the normalized presentation, with the
 canonical generating sections and their constant values. -/
 theorem constantSubsheaf_normalized_completion

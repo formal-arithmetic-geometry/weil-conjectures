@@ -42,7 +42,6 @@ variable {C₁ C₂ C₃ : Type*} [Category* C₁] [Category* C₂] [Category* C
   [P₃.IsStableUnderShift ℤ] {F₁₂ : C₁ ⥤ C₂} {F₂₃ : C₂ ⥤ C₃} {F₁₃ : C₁ ⥤ C₃}
   [F₁₂.CommShift ℤ] [F₂₃.CommShift ℤ] [F₁₃.CommShift ℤ]
 
-set_option linter.flexible false in
 /-- A natural transformation between functors of full subcategories induced by functors
 commuting with the shifts, which is given componentwise by a natural transformation commuting
 with the shifts, commutes with the shifts. -/

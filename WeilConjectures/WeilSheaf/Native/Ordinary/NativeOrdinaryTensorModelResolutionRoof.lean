@@ -23,7 +23,6 @@ open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 open scoped ZeroObject
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-set_option linter.unusedVariables false in
 /--
 Every map of second complexes admits a common K-flat roof whose two
 augmentations are quasi-isomorphisms and whose comparison commutes up to a

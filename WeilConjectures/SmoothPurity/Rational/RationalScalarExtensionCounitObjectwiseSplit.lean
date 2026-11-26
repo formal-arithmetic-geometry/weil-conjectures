@@ -23,7 +23,6 @@ coordinates.
 -/
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 attribute [local irreducible] HasDerivedCategory.standard
   WeilConjectures.completedIntegralCoefficientSheafUnrestricted
 universe u v

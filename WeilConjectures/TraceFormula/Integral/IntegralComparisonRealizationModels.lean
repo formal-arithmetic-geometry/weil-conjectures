@@ -190,7 +190,6 @@ private noncomputable def diagramSiteModuleComponent
   isSheaf := (verticalDiagramSite_isSheaf_iff J C K F.val.presheaf).1 F.isSheaf j.unop
 
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unnecessarySimpa false in
 /-- Horizontal structure map on the component modules. -/
 private noncomputable def diagramSiteModuleArrow
     {J : Type j} {C : Type c} [Category.{hj} J] [Category.{hc} C]

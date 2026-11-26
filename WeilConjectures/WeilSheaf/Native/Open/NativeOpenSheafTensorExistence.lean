@@ -318,7 +318,6 @@ variable
 
 attribute [local irreducible] NativeIsKFlat
 
-set_option linter.unusedSectionVars false
 
 /-- The normalized sheaf adjunction and balanced tensor comparisons, with
 preservation of categorical two-sided K-flatness. -/

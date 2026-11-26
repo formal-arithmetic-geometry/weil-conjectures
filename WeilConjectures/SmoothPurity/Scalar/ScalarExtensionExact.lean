@@ -64,7 +64,6 @@ private theorem integralLiftCommShift_spec (n : ℤ)
     (integralOrdinaryDerivedScalar l E L ι Y)
     (fun K ↦ integralOrdinaryDerivedScalar_constructible D l hl E L ι Y K.obj K.property) n K
 
-set_option linter.unusedVariables false in
 /-- The full subcategory inherits the ordinary derived tensor shift comparison. -/
 theorem integralConstructibleScalarCommShift_existsUnique :
     ∃! c : (integralConstructibleScalarExtension D l hl E L ι Y).CommShift ℤ,
@@ -203,7 +202,6 @@ private theorem rationalOrdinaryLocalizedCommShift_spec
   refine (heq_of_eq (Category.comp_id (obj := rationalConstructibleCategory D l hl L Y) _)).trans ?_
   exact comp_eqToHom_heq _ _
 
-set_option linter.unusedVariables false in
 /-- The rational shift comparison is the integral one tensored with one. -/
 theorem rationalOrdinaryScalarCommShift_existsUnique :
     ∃! c : (rationalOrdinaryScalarExtension D l hl E Y L ι).CommShift ℤ,
@@ -251,7 +249,6 @@ private theorem rationalOrdinaryScalar_isTriangulated :
         rationalConstructibleLocalization D l hl L Y)
       (rationalOrdinaryScalarExtension D l hl E Y L ι))
 
-set_option linter.unusedVariables false in
 /-- The published completed functor carries the unique shift comparison making its
 normalized comparison with ordinary tensor commute with every integer shift. -/
 theorem rationalConstructibleScalarCommShift_existsUnique :

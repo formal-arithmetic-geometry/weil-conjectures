@@ -81,7 +81,6 @@ abbrev PreservesBoundedConstructibleAdicLowerStar : Prop :=
       ((adicLowerStar l
         (geometricFiberHomCompactification (k₀ := k₀) f).overG.left).rightDerivedFunctor.obj K)
 
-set_option linter.unusedSectionVars false in
 /-- `Rḡ_*` preserves bounded constructible adic complexes. -/
 theorem preservesBoundedConstructibleAdicLowerStar :
     PreservesBoundedConstructibleAdicLowerStar k₀ l f := fun _ hK ↦
@@ -91,7 +90,6 @@ theorem preservesBoundedConstructibleAdicLowerStar :
 
 variable {f} [HasUpperShriek k₀ l f]
 
-set_option linter.style.longLine false in
 /-- **The exceptional datum.** For a right adjoint `ḡ^!` of `Rḡ_*` on bounded constructible adic
 complexes (`adjR'`) and a Weil complex `L` on `Y`, the Weil datum on `ī^* (ḡ^! L̄)`: the transport
 along `ī^*` of the right Weil datum of `Rḡ_* ⊣ ḡ^!` of the structure of `L`. -/
@@ -137,8 +135,6 @@ noncomputable def upperShriekExceptionalDatum
         (Y := ⟨forget.obj L, (WeilComplex.objectProperty_iff _).1 L.property⟩)
         ((IsoAlgebra.derivedStrIso _).hom.app L.obj))).hom
 
-set_option linter.style.longLine false in
-set_option linter.unusedSectionVars false in
 /-- **The Frobenius structure of the Weil `Rf^!` is the exceptional datum**: for a right adjoint
 `ḡ^!` of `Rḡ_*` on bounded constructible adic complexes and a Weil complex `L` on `Y`, there is
 an identification `θ` of the underlying complex of `Rf^! L` with `ī^* (ḡ^! L̄)` which is

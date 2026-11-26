@@ -55,7 +55,6 @@ theorem IsSpectralMap.continuous_constructibleTopology
 namespace Topology
 
 -- These diagram axioms are redundant for compactness; keep the existing interface.
-set_option linter.unusedVariables false in
 /-- For an inverse system of spectral spaces indexed by any preorder, constructibly closed
 compatible subsets have a quasi-compact limit, and the whole limit is quasi-compact. -/
 theorem isCompact_limit_constructibleClosed

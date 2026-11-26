@@ -87,7 +87,6 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_isEmpty
   exact (boundedConstructible _).ι.map_isZero
     ((boundedConstructibleOpenImmersionLowerShriek _ ℓ _).map_isZero hN)
 
-set_option linter.unusedVariables false in
 -- The lisse generator data are part of the interface of the reduction.
 /-- **The codimension-one core**: the hypotheses of
 `exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator_of_mem_closure`, with the closure

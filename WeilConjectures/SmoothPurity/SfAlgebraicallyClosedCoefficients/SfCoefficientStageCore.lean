@@ -372,8 +372,6 @@ noncomputable def transition (E L : Index l Ω) (h : E ≤ L) :
   sfRationalScalarExtension l (Coefficient.{u} l Ω E) Y D.p hl
     (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h)
 
-set_option linter.unusedSectionVars false in
-set_option linter.unusedVariables false in
 /-- The integral transition inherits the ordinary tensor shift through its canonical
 quotient-completion comparison, not through an arbitrary exact-functor witness. -/
 theorem integralTransitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L) :
@@ -421,7 +419,6 @@ noncomputable instance integralTransitionCommShift (E L : Index l Ω) (h : E ≤
       (coefficientInclusion l Ω E L h) Y).CommShift ℤ :=
   (integralTransitionCommShift_existsUnique D l hl Ω Y E L h).exists.choose
 
-set_option linter.unusedVariables false in
 /-- The rational transition shift is uniquely fixed by localizing the normalized integral
 shift. -/
 theorem transitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L) :

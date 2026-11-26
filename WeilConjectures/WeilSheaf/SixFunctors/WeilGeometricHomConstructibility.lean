@@ -79,7 +79,6 @@ abbrev nativeGeometricForget (k₀ : Type u) [Field k₀] [Finite k₀]
       Mod.comap (ProEtale.nativeModuleCoefficientIso ℓ
         (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber).hom).mapDerivedCategory
 
-set_option linter.style.haveILetI false in
 /-- **Geometric constructibility and internal Hom.** For a separated `k₀`-scheme of finite type
 `X₀`: a native Weil complex is bounded constructible iff its underlying complex on the geometric
 fibre is; its cohomology vanishes outside `[a, b]` iff that of the underlying complex does; and

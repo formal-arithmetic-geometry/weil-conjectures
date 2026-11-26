@@ -142,7 +142,6 @@ private theorem constantSubsheaf_filtration_of_stalk_bound
       simpa only [F', Fin.snoc_castSucc] using hzero
     · exact ⟨by simpa [F'] using Iso.refl K⟩
 
-set_option linter.unusedVariables false in
 /-- A finitely generated subsheaf of the constant integer sheaf admits a finite filtration
 whose successive quotients are quotients of extensions by zero `j_! ℤ_U` of constant integer
 sheaves on quasi-compact opens by extensions by zero `j'_! ℤ_V` of smaller opens. -/

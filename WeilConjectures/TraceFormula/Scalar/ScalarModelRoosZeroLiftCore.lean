@@ -593,7 +593,6 @@ def scalarModelRoosZeroLiftCoordinates
           ((completedIntegralCommRingProjectionUnrestricted l F X n).hom.app U s) y)
 
 -- The statement retains realization choices unused by the strict construction.
-set_option linter.unusedVariables false in
 /-- The realization/transpose construction supplies a lift with its two strict conditions. -/
 theorem scalarModelRoosZeroLift_core
     (SL : CoefficientDerivedSystemCalculus l L X)

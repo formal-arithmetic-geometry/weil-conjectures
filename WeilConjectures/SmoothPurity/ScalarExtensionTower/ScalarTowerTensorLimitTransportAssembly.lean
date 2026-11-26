@@ -40,7 +40,6 @@ attribute [local irreducible]
   integralComparisonDerivedSequenceScalar integralComparisonDerivedSequencePullback
   pullbackReduction scalarReduction tensorReduction
 
-set_option linter.unusedVariables false in
 /-- Assemble strict representative witnesses into the completed limit square.
 The hypothesis has only strict cochain data; in particular it contains no asserted equality
 between the two completed composites in the conclusion. -/

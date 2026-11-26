@@ -96,16 +96,13 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
   [QuasiCompact f]
 
-set_option linter.style.longLine false in
 instance : CompactSpace ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
   QuasiCompact.compactSpace_of_compactSpace
     ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
 
-set_option linter.style.longLine false in
 instance : IsNoetherian ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
   ⟨⟩
 
-set_option linter.style.longLine false in
 variable (k₀) in
 /-- The lift of the condensed Frobenius `(Fr_S⁻¹)_*` to bounded constructible condensed
 complexes. -/
@@ -157,7 +154,6 @@ noncomputable def condensedOpenImmersionGeometricExchange :
       ((IsoAlgebra.derivedExactCommIso (condensedOpenImmersionShriekExchange k₀ l f)).hom.naturality
         φ.hom))
 
-set_option linter.style.longLine false in
 variable (k₀) in
 /-- The adjunction `f̄_! ⊣ f̄^!` for `f̄_! = Rḡ_* ∘ D(ī_!)` and `f̄^! = ī^* ∘ ḡ^!`, condensed model. -/
 noncomputable abbrev condensedCompactifiedAdjunction :=
@@ -177,7 +173,6 @@ noncomputable def condensedCompactifiedExchange :=
     Functor.isoWhiskerRight (condensedOpenImmersionGeometricExchange k₀ l f) _ ≪≫
     Functor.associator _ _ _
 
-set_option linter.style.longLine false in
 lemma condensedCompactifiedExchange_hom_app (K) :
     (condensedCompactifiedExchange k₀ l f).hom.app K =
       (IsoAlgebra.liftedDerivedCommIso (condensedProperExchange k₀ l f) _ _
@@ -198,7 +193,6 @@ lemma condensedCompactifiedExchange_hom_app (K) :
         ((condensedOpenImmersionGeometricExchange k₀ l f).hom.app K) := by
   simp [condensedCompactifiedExchange]
 
-set_option linter.unusedSectionVars false in
 /-- The exchange of `D(ī_!)` is the left mate of the exchange of `ī^*`, at the level of
 isomorphisms. -/
 lemma condensedOpenImmersionShriekExchange_eq :
@@ -292,7 +286,6 @@ lemma isWeilEquivariant_condensedForgetObjIso_hom (L : WeilComplex k₀ l X) :
 
 variable {f} [HasUpperShriek k₀ l f]
 
-set_option linter.style.longLine false in
 /-- **The Weil orientation from the trace square, condensed model**: let
 `o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` be an orientation on `X̄` in the condensed model
 (`f̄^! = ī^* ∘ ḡ^!` for the compactification, `ℚ̄_ℓ(d)[2d]` the condensed model of the Tate twist),

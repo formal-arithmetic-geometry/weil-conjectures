@@ -292,7 +292,6 @@ private theorem finite_image_support
       obtain ⟨h₁, h₂⟩ := hs hz
       exact (by omega)) i (Or.inl (by omega)))
 
-set_option linter.unusedVariables false in
 /-- Preservation of constructibility, every canonical reduction comparison, and uniform
 cohomological bounds, including the dimension and empty-source cases. -/
 theorem sfIntegralDirectImage_constructible

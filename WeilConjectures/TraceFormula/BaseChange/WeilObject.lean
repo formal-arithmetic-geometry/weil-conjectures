@@ -331,7 +331,6 @@ variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar �
 
 section UpperStar
 
-set_option linter.unusedSectionVars false in
 /-- The derived pullback along the base change `π : X̄ ⟶ X` preserves bounded constructible
 complexes. -/
 theorem boundedConstructible_leftDerivedUpperStar_geometricBaseChangeProj_obj
