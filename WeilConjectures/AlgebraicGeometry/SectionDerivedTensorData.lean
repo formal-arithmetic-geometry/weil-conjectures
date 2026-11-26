@@ -248,7 +248,8 @@ def internalDerivedPushforward {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory (internalModules Λ X) ⥤ DerivedCategory (internalModules Λ Y) :=
   comparisonSource (CondensedRing.rightDerivedLowerStarIso Λ f)
 
-omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
+-- `omit` would drop this argument from the definitions built on this lemma.
+set_option linter.unusedSectionVars false in
 /-- The fixed section equivalence functor is additive. -/
 theorem sectionFunctorAdditive (X : Scheme.{u}) :
     (equivalence Λ X).functor.Additive :=
@@ -442,7 +443,8 @@ def totalTensor [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
       CochainComplex (modules Λ X) ℤ :=
   cochainTotalFunctor (curriedTensor (modules Λ X))
 
-omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
+-- `omit` would drop this argument from `sectionOrdinaryTensorMap`, which uses this lemma.
+set_option linter.unusedSectionVars false in
 /-- Naturality of the fixed ordinary tensor comparison. -/
 theorem sectionOrdinaryTensorNaturality (X : Scheme.{u})
     (M M' N N' : internalModules Λ X) (f : M ⟶ M') (g : N ⟶ N') :
@@ -466,14 +468,12 @@ theorem sectionOrdinaryTensorNaturality (X : Scheme.{u})
       funext N
       simpa using sectionOrdinaryTensorNaturality Λ X M M' N N f (𝟙 N) }
 
-omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 /-- Each ordinary comparison component is invertible. -/
 theorem sectionOrdinaryTensorMap_isIso (X : Scheme.{u})
     (M N : internalModules Λ X) : IsIso (((sectionOrdinaryTensorMap Λ X).app M).app N) := by
   unfold sectionOrdinaryTensorMap
   infer_instance
 
-omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 /-- The curried comparison has the prescribed ordinary components. -/
 theorem sectionOrdinaryTensorMap_app (X : Scheme.{u})
     (M N : internalModules Λ X) :
@@ -496,7 +496,6 @@ This is the canonical signed map induced by the ordinary natural comparison. -/
         (curriedTensor (modules Λ X)) :=
   HomologicalComplex.mapBifunctorComparison (sectionOrdinaryTensorMap Λ X) (.up ℤ) P Q
 
-omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 /-- The canonical total map equals the existing uniquely normalized comparison. -/
 theorem sectionTotalComparison_eq (X : Scheme.{u})
     (P Q : CochainComplex (internalModules Λ X) ℤ) :
