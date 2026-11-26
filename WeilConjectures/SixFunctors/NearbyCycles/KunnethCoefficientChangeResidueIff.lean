@@ -59,8 +59,36 @@ theorem isIso_map_kunnethMap_iff_residueField (φ₁ : P.Hom M f₁ f₁') (φ�
   (MorphismProperty.isomorphisms _).arrow_mk_iso_iff
     (nonempty_arrowIso_map_kunnethMap_residueField ℓ E φ₁ φ₂ A₀ B₀ n m).some
 
-set_option maxHeartbeats 1000000 in
--- elaborating the Künneth maps of the derived categories of module objects is slow
+/-- Invertibility of the coefficient-changed restricted Künneth map. -/
+def restrictedResidueKunnethIsIso (φ₁ : P.Hom M f₁ f₁')
+    (φ₂ : P.Hom N f₂ f₂') {W : Scheme.{u}} (h : W ⟶ Z')
+    (A₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
+    (B₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y))) : Prop :=
+  IsIso (L((h)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧).map
+    (kunnethMap (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) φ₁ φ₂
+      ((Mod.extendScalars (coefficientMap
+        (Profinite.padicIntegersRingObjToResidueField ℓ E.1) X)).leftDerivedFunctor.obj A₀)
+      ((Mod.extendScalars (coefficientMap
+        (Profinite.padicIntegersRingObjToResidueField ℓ E.1) Y)).leftDerivedFunctor.obj B₀)))
+
+/-- The named restricted Künneth condition is the original invertibility condition. -/
+theorem restrictedResidueKunnethIsIso_eq (φ₁ : P.Hom M f₁ f₁')
+    (φ₂ : P.Hom N f₂ f₂') {W : Scheme.{u}} (h : W ⟶ Z')
+    (A₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
+    (B₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y))) :
+    restrictedResidueKunnethIsIso ℓ E φ₁ φ₂ h A₀ B₀ =
+      IsIso (L((h)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧).map
+        (kunnethMap (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) φ₁ φ₂
+          ((Mod.extendScalars (coefficientMap
+            (Profinite.padicIntegersRingObjToResidueField ℓ E.1) X)).leftDerivedFunctor.obj A₀)
+          ((Mod.extendScalars (coefficientMap
+            (Profinite.padicIntegersRingObjToResidueField ℓ E.1) Y)).leftDerivedFunctor.obj
+              B₀))) := rfl
+
 /-- **The restricted Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: under the hypotheses of
 `NearbyCyclesModel.isIso_map_kunnethMap_iff_residueField`, for every `h : W ⟶ Z'`,
 `𝔽_E ⊗ᴸ Lh^* Π_{A₀,B₀}` is invertible if and only if `Lh^* Π_{𝔽_E ⊗ᴸ A₀, 𝔽_E ⊗ᴸ B₀}` is. -/
@@ -77,13 +105,7 @@ theorem isIso_map_map_kunnethMap_iff_residueField (φ₁ : P.Hom M f₁ f₁')
         (Profinite.padicIntegersRingObjToResidueField ℓ E.1) W)).leftDerivedFunctor.map
         (L((h)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).map
           (kunnethMap (Profinite.padicIntegersRingObj ℓ E.1) φ₁ φ₂ A₀ B₀))) ↔
-      IsIso (L((h)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧).map
-        (kunnethMap (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) φ₁ φ₂
-          ((Mod.extendScalars (coefficientMap
-            (Profinite.padicIntegersRingObjToResidueField ℓ E.1) X)).leftDerivedFunctor.obj A₀)
-          ((Mod.extendScalars (coefficientMap
-            (Profinite.padicIntegersRingObjToResidueField ℓ E.1) Y)).leftDerivedFunctor.obj
-              B₀))) :=
+      restrictedResidueKunnethIsIso ℓ E φ₁ φ₂ h A₀ B₀ :=
   (MorphismProperty.isomorphisms _).arrow_mk_iso_iff
     (nonempty_arrowIso_map_map_kunnethMap_residueField ℓ E φ₁ φ₂ h A₀ B₀ n m).some
 
