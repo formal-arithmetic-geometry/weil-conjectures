@@ -317,7 +317,6 @@ private theorem ordinary_quotient_square_calculus {X Y : Scheme.{u}} (f : X ⟶ 
     (hay p q i hpq U x y)
 
 -- The public interface retains invertibility; the ordinary unit calculation does not need it.
-set_option linter.unusedVariables false in
 /-- Equality of the two comparison composites in one cochain degree.
 This is the component calculation used to prove the chain-map equality; it is the
 ordinary pure-tensor generator calculation after applying the stated normalizations. -/

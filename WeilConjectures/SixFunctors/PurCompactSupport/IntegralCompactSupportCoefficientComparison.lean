@@ -235,7 +235,6 @@ import WeilConjectures.CategoryTheory.Constant.ConstantSpecifiedBasis
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true

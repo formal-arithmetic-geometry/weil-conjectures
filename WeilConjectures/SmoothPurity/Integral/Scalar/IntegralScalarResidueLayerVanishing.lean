@@ -168,7 +168,6 @@ variable (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u})
 
-set_option linter.unusedVariables false in
 /-- The out-of-interval vanishing part of the residue-layer estimate. -/
 theorem integralScalarResidueLayer_vanishing
     (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)

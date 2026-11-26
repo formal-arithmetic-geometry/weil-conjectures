@@ -22,8 +22,6 @@ import WeilConjectures.Algebra.Homology.SmoothPurity.DiagonalConeTransitionHomot
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures

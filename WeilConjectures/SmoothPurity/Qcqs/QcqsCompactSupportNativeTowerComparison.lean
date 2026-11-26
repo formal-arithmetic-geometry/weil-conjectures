@@ -175,7 +175,6 @@ private theorem nativePresentation_comparison
         (coefficientFiniteDerivedRestriction l E Y n).map z) hf
 
 -- Retain the original base-compatibility instance binder.
-set_option linter.unusedSectionVars false in
 /-- Compare the whole recorded reduction tower with native proper/open reduction. -/
 theorem qcqsCompactSupport_nativeTowerComparison
     (SX : CoefficientDerivedSystemCalculus l E X) :

@@ -673,7 +673,6 @@ noncomputable def shiftRepresentative (n : ℤ) (A B : Pair l Ω Y)
     (shiftFunctor (Stage l Ω Y L) n).map f ≫
     ((stageTransition l Ω Y B.stage L hB).commShiftIso n).inv.app B.obj
 
-set_option linter.unusedVariables false in
 /-- The induced shift is specified on every object, representative and stage inclusion. -/
 theorem shift_existsUnique :
     ∃! s : HasShift (Pair l Ω Y) ℤ,

@@ -191,7 +191,6 @@ zero-homotopy comparison, rather than an unspecified derived-limit lift.
 
 @[expose] public section
 
-set_option linter.unusedSectionVars false
 set_option linter.privateModule false
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048

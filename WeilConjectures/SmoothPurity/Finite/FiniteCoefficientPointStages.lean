@@ -1005,7 +1005,6 @@ noncomputable def pointRationalNormalization
 variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Scalar tensor commutes with carrier lift by the prescribed pure-tensor map. -/

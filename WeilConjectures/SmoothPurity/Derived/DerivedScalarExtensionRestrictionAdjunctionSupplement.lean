@@ -332,7 +332,6 @@ end SheafOfModules.ScalarReductionProof
 
 namespace ScalarReductionDerivedProof
 
-set_option linter.style.haveILetI false in
 private theorem ind_of_eventually_constant {J C : Type*} [Category* J] [Category* C]
     [IsFiltered J] (F : J ⥤ C) (j₀ : J)
     (hevent : F.IsEventuallyConstantFrom j₀) :
@@ -353,7 +352,6 @@ private theorem ind_of_eventually_constant {J C : Type*} [Category* J] [Category
     rw [← Category.assoc, c.ι.naturality a]
     simp
 
-set_option linter.style.haveILetI false in
 private theorem exactFunctor_ind_essentialConstancy
     {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B]
@@ -572,7 +570,6 @@ attribute [local instance] scalarReductionRestrictionLimits
 attribute [local instance] scalarReductionRestrictionColimits
 
 
-set_option linter.defProp false in
 attribute [local instance] scalarReductionExtensionAdditive
 
 attribute [local irreducible] scalarReductionExistence scalarReductionExtension
@@ -580,7 +577,6 @@ attribute [local irreducible] scalarReductionExistence scalarReductionExtension
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option linter.defProp false in
 attribute [local semireducible] scalarReductionExtension
 
 

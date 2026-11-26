@@ -37,7 +37,6 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-set_option linter.unusedVariables false in
 /-- The actual derived system direct image admits a finite-image Roos object. -/
 theorem systemDirectImage_roosExistence
     {X Y : Scheme.{u}} (f : X ⟶ Y)

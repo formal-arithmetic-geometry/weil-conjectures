@@ -338,7 +338,6 @@ attribute [local irreducible] scalarReductionExistence HasDerivedCategory.standa
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
 
-set_option linter.defProp false in
 private noncomputable def unrestrictedCoefficientStep (n : ℕ) :
     integralCoefficientCommRingSheaf l E Y (n + 1) ⟶ integralCoefficientCommRingSheaf l E Y n :=
   (constantSheaf _ CommRingCat.{max u (t + 1)}).map

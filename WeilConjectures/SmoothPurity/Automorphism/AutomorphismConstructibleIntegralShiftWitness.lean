@@ -310,7 +310,6 @@ private theorem composition_shift
   exact NatTrans.CommShift.of_whiskerRight c.hom (sfIntegralConstructible l E Z).ι
 
 -- The unchanged statement names instance binders that occur only through typeclass inference.
-set_option linter.unusedVariables false in
 /-- The normalized integral shift data, together with compatibility of the prescribed
 composition square with shifts. -/
 theorem automorphismConstructibleStage_integral_shift_witness

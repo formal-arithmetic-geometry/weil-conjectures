@@ -25,12 +25,9 @@ condition is imposed on the given representatives.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option linter.privateModule false
-set_option linter.unusedSimpArgs false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 2048
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.integralOperationsSiteSmall
 universe u

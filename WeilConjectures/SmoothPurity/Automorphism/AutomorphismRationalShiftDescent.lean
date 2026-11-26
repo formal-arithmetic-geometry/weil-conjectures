@@ -18,7 +18,6 @@ This module proves the rational localization step before common-stage descent.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedVariables false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency true

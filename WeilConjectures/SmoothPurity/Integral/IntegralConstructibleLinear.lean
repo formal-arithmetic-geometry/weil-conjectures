@@ -253,7 +253,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (Y : AlgebraicGeometry.Scheme.{u})
 
-set_option linter.unusedVariables false in
 /-- The coefficient action is the unique linear structure whose scalar maps are
 multiplication by the actual constant sections of the completed coefficient sheaf. -/
 theorem integralCoefficientLinear_existsUnique :

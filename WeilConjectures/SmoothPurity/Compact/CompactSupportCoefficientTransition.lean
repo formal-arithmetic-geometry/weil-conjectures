@@ -25,7 +25,6 @@ transitions.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u

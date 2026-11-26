@@ -51,7 +51,6 @@ variable (l : ℕ) [Fact l.Prime]
 
 include K₀ hl Xbase Ybase Xft Xqc Yft Yqc fbase fs fft fqc
 
-set_option linter.unusedSectionVars false in
 attribute [-instance] CompletedCoefficientPushforward.modAbelian
   CompletedCoefficientPushforward.hasDerived in
 /-- The proper direct image of a complete completed-coefficient complex is

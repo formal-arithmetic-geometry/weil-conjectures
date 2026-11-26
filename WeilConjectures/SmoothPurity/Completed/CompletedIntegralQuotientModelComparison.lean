@@ -95,11 +95,6 @@ finite basis or boundedness is used.
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
-set_option linter.unusedSimpArgs false
-set_option linter.style.haveILetI false
-set_option linter.style.whitespace false
-set_option linter.unusedVariables false
 set_option synthInstance.maxSize 4096
 set_option maxRecDepth 2048
 set_option backward.defeqAttrib.useBackward true

@@ -63,7 +63,6 @@ transport, including repeated indices. No idempotent completion is used.
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedSectionVars false
 set_option Elab.async false
 
 universe u v

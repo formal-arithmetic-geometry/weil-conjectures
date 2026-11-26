@@ -31,7 +31,6 @@ or preservation of K-injectives by scalar restriction is used.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.FrobeniusExchange

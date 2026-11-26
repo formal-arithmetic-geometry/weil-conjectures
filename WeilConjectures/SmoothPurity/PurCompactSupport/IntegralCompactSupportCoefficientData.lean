@@ -213,7 +213,6 @@ The definitions that other statements use, moved out of
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.style.haveILetI false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u a b
@@ -642,7 +641,6 @@ structure ProjectionComparisons (R : Coefficients.{u})
   openProjection_eq : ∀ M N,
     (openProjection.hom.app M).app N = (projectionOpenFactor R c a b hc M N).hom
 
-set_option linter.unusedVariables false in
 /-- These comparison data exist uniquely, since their components were independently fixed. -/
 theorem projectionComparisons_existsUnique (R : Coefficients.{u})
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

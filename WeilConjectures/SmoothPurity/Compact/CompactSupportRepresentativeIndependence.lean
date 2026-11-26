@@ -54,7 +54,6 @@ object. It does not assert uniqueness of an isomorphism between bare objects.
 set_option autoImplicit false
 
 set_option synthInstance.maxSize 4096
-set_option linter.unusedVariables false
 
 universe u
 

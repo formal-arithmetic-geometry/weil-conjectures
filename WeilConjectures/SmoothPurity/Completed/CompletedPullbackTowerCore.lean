@@ -96,11 +96,6 @@ importers see `pullbackTensorSequenceRing` as opaque.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.unusedSectionVars false
-set_option linter.unusedVariables false
-set_option linter.all false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedTactic false
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true

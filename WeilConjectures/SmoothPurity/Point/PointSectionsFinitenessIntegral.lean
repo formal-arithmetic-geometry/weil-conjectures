@@ -25,7 +25,6 @@ import Mathlib.RingTheory.Noetherian.Basic
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
   AlgebraicGeometry.Scheme

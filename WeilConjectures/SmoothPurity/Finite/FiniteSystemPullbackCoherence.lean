@@ -30,8 +30,6 @@ The strict-system refinement uses componentwise adjunctions and coherence before
 @[expose] public noncomputable section
 set_option autoImplicit false
 -- Replaying sectionwise transport proofs for tactic linting is expensive.
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false

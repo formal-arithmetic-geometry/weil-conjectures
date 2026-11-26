@@ -34,9 +34,6 @@ pullback tensor comparisons, and their coherence with the canonical comparisons.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedSectionVars false
-set_option linter.unusedVariables false
 set_option linter.privateModule false
 set_option Elab.async false
 set_option backward.isDefEq.respectTransparency true

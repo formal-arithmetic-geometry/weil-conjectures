@@ -118,7 +118,6 @@ def intrinsicQbarScalarAction (α : Ω)
   StageSystem.qbarScalarHom l Ω (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y)
     (intrinsicQbarScalarCompatible l Ω Y) α f
 
-set_option linter.unusedVariables false in
 /-- The specified scalar formula determines the linear structure uniquely, on the
 existing colimit abelian-group structures. -/
 theorem intrinsicQbarLinear_existsUnique :

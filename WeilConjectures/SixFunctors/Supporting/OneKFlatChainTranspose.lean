@@ -338,7 +338,6 @@ structure OneKFlatChainTransposeData where
 section
 
 set_option maxRecDepth 1024
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 

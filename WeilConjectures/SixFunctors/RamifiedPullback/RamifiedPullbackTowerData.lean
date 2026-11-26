@@ -63,7 +63,6 @@ abbrev ring {W : Scheme.{t}} (R : Sheaf (Scheme.ProEt.topology W)
 abbrev Mod {W : Scheme.{t}} (R : Sheaf (Scheme.ProEt.topology W)
     CommRingCat.{max u (t + 1)}) := SheafOfModules.{max u (t + 1)} (ring.{t, u} R)
 
-set_option linter.defProp false in
 /-- The existing canonical tensor witness, with standard derived localizations.
 Only its ordinary functor is used here. -/
 def scalarWitness {W : Scheme.{t}}

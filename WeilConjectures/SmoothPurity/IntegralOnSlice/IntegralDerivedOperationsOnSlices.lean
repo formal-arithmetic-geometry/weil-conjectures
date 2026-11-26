@@ -500,7 +500,6 @@ abbrev D := DerivedCategory (Mod l E X U)
 /-- The precise cochain representatives. -/
 abbrev Cx := CochainComplex (Mod l E X U) ℤ
 
-set_option linter.defProp false in
 /-- The universal scalar-extension witness along the specified projection. -/
 def reductionWitness (n : ℕ) :=
   letI := HasDerivedCategory.standard (SheafOfModules.{max u (t + 1)}

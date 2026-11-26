@@ -231,7 +231,6 @@ operation data.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.all false
 
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
