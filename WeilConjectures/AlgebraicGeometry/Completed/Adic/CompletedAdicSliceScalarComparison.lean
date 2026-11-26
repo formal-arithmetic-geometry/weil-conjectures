@@ -17,7 +17,6 @@ public import WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicSlic
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.style.haveILetI false
 universe t
 open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry.ProEtale
@@ -43,20 +42,20 @@ theorem completedAdic_slice_scalarComparison (X : Scheme.{t}) (U : X.ProEt)
   let O_S := (sheafCompose (ProEt.topology X)
     (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S
   let A := SheafOfModules O_R
-  letI : (SheafOfModules.overFunctor O_R U).Additive := by
+  let : (SheafOfModules.overFunctor O_R U).Additive := by
     exact (ringedOverFunctor_exactGeneral O_R U).1
-  letI : (SheafOfModules.overFunctor O_S U).Additive := by
+  let : (SheafOfModules.overFunctor O_S U).Additive := by
     exact (ringedOverFunctor_exactGeneral O_S U).1
-  letI : (completedAdicChange X f).Additive := completedAdicChange_additive X f
-  letI : (completedAdicSliceChange X U f).Additive :=
+  let : (completedAdicChange X f).Additive := completedAdicChange_additive X f
+  let : (completedAdicSliceChange X U f).Additive :=
     completedAdicSliceChange_additive X U f
-  letI : HasDerivedCategory A := HasDerivedCategory.standard _
-  letI : HasDerivedCategory (SheafOfModules O_S) := HasDerivedCategory.standard _
-  letI : HasDerivedCategory (SheafOfModules (O_R.over U)) :=
+  let : HasDerivedCategory A := HasDerivedCategory.standard _
+  let : HasDerivedCategory (SheafOfModules O_S) := HasDerivedCategory.standard _
+  let : HasDerivedCategory (SheafOfModules (O_R.over U)) :=
     HasDerivedCategory.standard _
-  letI : HasDerivedCategory (SheafOfModules (O_S.over U)) :=
+  let : HasDerivedCategory (SheafOfModules (O_S.over U)) :=
     HasDerivedCategory.standard _
-  letI : HasDerivedCategory
+  let : HasDerivedCategory
       (SheafOfModules.{t + 1}
         (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
           ((ProEt.topology X).over U)
@@ -84,8 +83,8 @@ theorem completedAdic_slice_scalarComparison (X : Scheme.{t}) (U : X.ProEt)
         rw [← NatTrans.mapHomotopyCategory_comp, e₀.inv_hom_id,
           NatTrans.mapHomotopyCategory_id] } DerivedCategory.Qh
   obtain ⟨α, α', hα, hα'⟩ := completedAdic_slice_scalarComparison_derived_data X U f
-  letI := hα
-  letI := hα'
+  let := hα
+  let := hα'
   exact ⟨Functor.leftDerivedNatIso L_U L α α'
     (HomotopyCategory.quasiIso A (.up ℤ)) e⟩
 

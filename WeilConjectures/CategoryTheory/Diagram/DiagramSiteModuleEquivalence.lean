@@ -38,7 +38,6 @@ noncomputable def diagramSiteModuleComponent
   isSheaf := (diagramSite_isSheaf_iff J C K F.val.presheaf).1 F.isSheaf (op j)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unnecessarySimpa false in
 /-- Horizontal structure map on the component modules. -/
 noncomputable def diagramSiteModuleArrow
     {J C : Type u} [SmallCategory J] [SmallCategory C]
@@ -52,8 +51,7 @@ noncomputable def diagramSiteModuleArrow
           map_add' := map_add _
           map_smul' := by
             intro r x
-            have H := F.val.map_smul (Prod.mkHom a.op (𝟙 U.unop)).op r x
-            simpa [diagramSiteRing, Prod.snd] using H }
+            simp [diagramSiteRing, Prod.snd] }
       naturality := by
         intro U V f
         ext x

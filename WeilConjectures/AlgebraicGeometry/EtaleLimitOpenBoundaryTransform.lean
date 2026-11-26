@@ -299,7 +299,6 @@ private theorem algebraic_boundary_transport
 
 set_option backward.isDefEq.respectTransparency true in
 -- The large dependent cohomology signature and its transports require additional elaboration steps.
-set_option linter.unusedVariables false in
 /-- Construct the difference and boundary maps, leaving the restriction row supplied
 (Stacks, Tags 0A50 and 09YQ). -/
 theorem etale_limit_open_boundary_transform

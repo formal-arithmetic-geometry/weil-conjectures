@@ -77,8 +77,6 @@ private theorem proZero_of_exact_realization
   rw [Functor.map_comp, Functor.map_comp, hzE, zero_comp] at hn
   exact (cancel_epi (DerivedCategory.Q.map (e m).hom)).1 (hn.symm.trans (by simp))
 
--- Preserve the inherited name hq in the statement.
-set_option linter.unusedVariables false in
 /-- The strict tensor augmentation cone is eventually zero at each fixed level
 in the derived category. No product, Roos fibre or derived limit occurs here. -/
 theorem completedKoszulTensorQuotientConeProZero
@@ -90,7 +88,7 @@ theorem completedKoszulTensorQuotientConeProZero
       completedAdicKoszulTensorUnit T d r a P n ≫
         (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (β.app P)).app (op n) =
           completedQuotientTensorUnit T d P n)
-    (hz : ∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (hq : q ≠ 0),
+    (hz : ∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (_hq : q ≠ 0),
       completedKoszulTensorSummand T d r a P n p q ≫
           ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
             (β.app P)).app (op n)).f (p + q) = 0)

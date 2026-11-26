@@ -111,8 +111,6 @@ private theorem projective_ample_affine_open (m : ℕ) (S X : Scheme.{u})
   have hL := Scheme.Modules.IsInvertible.of_iso e'
   exact ⟨hL, (Scheme.Modules.isAmple_iff_of_iso e').mp hample⟩
 
--- The original existential invertibility witness is independent of both conjuncts.
-set_option linter.unusedVariables.funArgs false in
 /-- Auxiliary component of the Chow relative ampleness theorem.
 The pulled-back twist is invertible, and its restrictions to the preimages of affine opens
 of `S` and of `Z` are invertible and ample (Stacks, Tag 02O5). -/
@@ -121,7 +119,7 @@ theorem chow_relative_ample_twist_properties (m : ℕ) (S Z X' : Scheme.{u})
     (j : X' ⟶ ℙ(ULift.{u} (Fin (m + 1)); S))
     [IsProper g] [IsProper π] [IsImmersion j]
     (hj : π ≫ g = j ≫ (ℙ(ULift.{u} (Fin (m + 1)); S) ↘ S)) :
-      ∃ hL : ((Scheme.Modules.tensorPullback j).obj
+      ∃ _hL : ((Scheme.Modules.tensorPullback j).obj
           ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt
             (ULift.{u} (Fin (m + 1))) S)).obj
             (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))

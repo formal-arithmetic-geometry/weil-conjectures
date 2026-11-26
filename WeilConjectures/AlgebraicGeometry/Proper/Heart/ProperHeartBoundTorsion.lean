@@ -183,7 +183,6 @@ structure when comparing with fixed finite-coefficient sheaves.
 
 @[expose] public noncomputable section
 
-set_option linter.unusedVariables false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false

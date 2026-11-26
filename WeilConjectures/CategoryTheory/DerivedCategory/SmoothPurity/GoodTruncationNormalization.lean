@@ -67,7 +67,7 @@ private theorem truncation_cycles_inclusion (A : CochainComplex C ℤ) :
   erw [reassoc_of% hop]
   rfl
 
-set_option linter.unusedSectionVars false in
+omit [HasDerivedCategory C] in
 /-- The quotient of cycles kills the incoming differential of the good truncation.
 Source: Stacks Tag 0118. -/
 theorem goodTruncationProjection_condition (A : CochainComplex C ℤ) (i : ℤ)
@@ -126,6 +126,7 @@ private theorem homology_injective {K L : DerivedCategory C} {M N : C}
   apply homology_injective_single
   simp only [CategoryTheory.Functor.map_comp, h]
 
+omit [HasDerivedCategory C] in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
@@ -300,15 +301,13 @@ theorem goodTruncationNormalization_exact_concentrated (F : C ⥤ D) [F.Additive
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
--- The inherited hypothesis on L is retained; χ is natural without concentration.
-set_option linter.unusedVariables false in
 /-- The roof normalization commutes with the canonical exact-functor comparisons χ and σ;
 χ is natural on all derived morphisms in the full subcategory.
 Source: Stacks Tags 010N, 0118, 015F. -/
 theorem goodTruncationNormalization_exact (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] (K L : DerivedCategory C)
     (hK : ∀ n : ℤ, n ≠ 0 → IsZero ((homologyFunctor C n).obj K))
-    (hL : ∀ n : ℤ, n ≠ 0 → IsZero ((homologyFunctor C n).obj L)) (a : K ⟶ L) :
+    (_hL : ∀ n : ℤ, n ≠ 0 → IsZero ((homologyFunctor C n).obj L)) (a : K ⟶ L) :
     (goodTruncationNormalization (F.mapDerivedCategory.obj K)
       (goodTruncationNormalization_exact_concentrated F K hK)).hom =
       F.mapDerivedCategory.map (goodTruncationNormalization K hK).hom ≫

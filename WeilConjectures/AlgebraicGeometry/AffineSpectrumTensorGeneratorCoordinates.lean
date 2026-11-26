@@ -80,7 +80,6 @@ def affineSpectrumTensorAdditiveIso
         (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0).symm
   H
 
-set_option linter.unusedVariables false in
 /-- Affine stalk coordinates and the formula for the canonical additive comparison
 on pure tensors (Stacks, Tags 0098, 0096 and 0DJ8). -/
 theorem exists_affineSpectrum_tensor_generator_coordinates
@@ -90,18 +89,18 @@ theorem exists_affineSpectrum_tensor_generator_coordinates
     [IsAffine X] [IsAffine X'] [IsAffine S] [IsAffine S']
     (sq0 : IsPullback (Spec.map g'.appTop) (Spec.map f'.appTop)
       (Spec.map f.appTop) (Spec.map g.appTop))
-    (z0 : Spec Γ(X', ⊤)) (i : ℤ)
+    (z0 : Spec Γ(X', ⊤)) (_i : ℤ)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     let z := X'.isoSpec.inv z0
     let P0 := ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
       (.up ℤ)).obj P
-    let Pg := ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P
+    let _Pg := ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P
     let j := X'.isoSpec.inv
-    let S0 := RingedSpace.moduleStalkFunctor (Spec Γ(X', ⊤)).toRingedSpace z0
-    let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk z)) AddCommGrpCat.{u}
-    let F0 := forget₂ (ModuleCat.{u} ((Spec Γ(X', ⊤)).presheaf.stalk z0))
+    let _S0 := RingedSpace.moduleStalkFunctor (Spec Γ(X', ⊤)).toRingedSpace z0
+    let _F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk z)) AddCommGrpCat.{u}
+    let _F0 := forget₂ (ModuleCat.{u} ((Spec Γ(X', ⊤)).presheaf.stalk z0))
       AddCommGrpCat.{u}
-    let alpha := (NatIso.mapHomologicalComplex
+    let _alpha := (NatIso.mapHomologicalComplex
       ((Scheme.Modules.tensorPullbackCompositionIso (Spec.map g'.appTop) X.isoSpec.inv
         ((Spec.map g'.appTop) ≫ X.isoSpec.inv) rfl).symm ≪≫
       Scheme.Modules.tensorPullbackCompositionIso j g'
@@ -126,7 +125,7 @@ theorem exists_affineSpectrum_tensor_generator_coordinates
     let D0 := C z0
     let Q := stalkComplex g' z P
     let Q0 := stalkComplex (Spec.map g'.appTop) z0 P0
-    let V0 := tensorComplex (Spec.map f.appTop) (Spec.map f'.appTop)
+    let _V0 := tensorComplex (Spec.map f.appTop) (Spec.map f'.appTop)
       (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0
     let H := affineSpectrumTensorAdditiveIso f f' g g' sq sq0 z0 P
     ∃ (eR : R f g' z ≃+* R0) (eA : A g' z ≃+* A0)

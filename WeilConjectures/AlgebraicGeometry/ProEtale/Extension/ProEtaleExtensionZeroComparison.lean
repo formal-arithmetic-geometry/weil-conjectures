@@ -213,7 +213,6 @@ private noncomputable def resComp :
     A (ProEt.topology V) (ProEt.topology U) (ProEt.topology X)).symm
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option linter.flexible false in
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 private lemma resComp_conj :
     conjugateEquiv (openImmersionRestrictionLowerStarAdjunction A (k ≫ j))
@@ -223,11 +222,22 @@ private lemma resComp_conj :
   ext G : 2
   apply Sheaf.hom_ext
   refine NatTrans.ext (funext fun W ↦ ?_)
-  simp [conjugateEquiv_apply_app, openImmersionRestrictionLowerStarAdjunction,
-    localizationRestrictionLowerStarAdjunction, resComp, lowerStarComp,
-    MorphismProperty.Over.mapPullbackAdj, Functor.sheafPushforwardContinuousComp',
-    Functor.sheafPushforwardContinuousComp, Functor.sheafPushforwardContinuousIso,
-    openImmersionRestriction, localizationRestriction, lowerStar, ← Functor.map_comp]
+  simp only [lowerStar, sheafPushforwardContinuous_obj_obj_obj, comp_obj,
+    openImmersionRestriction, localizationRestriction, openImmersionRestrictionLowerStarAdjunction,
+    localizationRestrictionLowerStarAdjunction, MorphismProperty.Over.mapPullbackAdj, id_obj,
+    MorphismProperty.Over.map_obj_left, const_obj_obj, MorphismProperty.Over.map_obj_hom, resComp,
+    sheafPushforwardContinuousComp', sheafPushforwardContinuousComp,
+    sheafPushforwardContinuousIso, Iso.symm_inv, Iso.symm_hom, Iso.refl_trans, Iso.symm_mk,
+    conjugateEquiv_apply_app, Adjunction.comp_unit_app, Functor.comp_map, ← map_comp,
+    Category.assoc, ObjectProperty.FullSubcategory.comp_hom, sheafPushforwardContinuous_map_hom,
+    sheafPushforwardContinuousNatTrans_app_hom, ObjectProperty.ι_obj, whiskerLeft_comp,
+    whiskerLeft_twice, Iso.hom_inv_id_assoc, NatTrans.comp_app,
+    Adjunction.sheafPushforwardContinuous_unit_app_hom_app,
+    sheafPushforwardContinuous_obj_obj_map, Quiver.Hom.unop_op, op_obj, whiskerLeft_app,
+    MorphismProperty.Over.pullback_obj_left, MorphismProperty.Over.pullback_obj_hom,
+    associator_inv_app, whiskerRight_app, NatTrans.op_app,
+    Adjunction.sheafPushforwardContinuous_counit_app_hom_app, associator_hom_app,
+    Category.comp_id, Category.id_comp, lowerStarComp]
   congr 1
   apply Quiver.Hom.unop_inj
   ext
@@ -329,7 +339,6 @@ private lemma etComp_conj (Λ : Type (u + 1)) [CommRing Λ] :
     h.symm
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.flexible false in
 -- Both right-adjoint routes are the same restriction on sections.
 private lemma comparison_paste (Λ : Type (u + 1)) [CommRing Λ] :
     isoWhiskerRight
@@ -376,11 +385,18 @@ private lemma comparison_paste (Λ : Type (u + 1)) [CommRing Λ] :
     funext M
     apply Sheaf.hom_ext
     refine NatTrans.ext (funext fun W ↦ ?_)
-    simp [comparisonLowerStarOpenImmersionRestrictionIso, resComp, etResComp,
-      Etale.localizationRestrictionComp, Functor.sheafPushforwardContinuousComp',
-      Functor.sheafPushforwardContinuousComp, Functor.sheafPushforwardContinuousIso,
-      comparisonLowerStar, Etale.openImmersionRestriction, Etale.localizationRestriction,
-      openImmersionRestriction, localizationRestriction]
+    simp only [openImmersionRestriction, localizationRestriction, comparisonLowerStar, comp_obj,
+      Etale.openImmersionRestriction, Etale.localizationRestriction,
+      comparisonLowerStarOpenImmersionRestrictionIso, Iso.refl_symm, Iso.refl_hom,
+      NatTrans.id_app, ObjectProperty.FullSubcategory.id_hom, resComp,
+      sheafPushforwardContinuousComp', sheafPushforwardContinuousComp,
+      sheafPushforwardContinuousIso, Iso.symm_inv, Iso.symm_hom, Iso.refl_trans, Iso.symm_mk,
+      etResComp, Etale.localizationRestrictionComp, Iso.trans_hom, isoWhiskerRight_hom,
+      isoWhiskerLeft_hom, NatTrans.comp_app, whiskerRight_app, associator_hom_app,
+      whiskerLeft_app, associator_inv_app, Category.id_comp,
+      ObjectProperty.FullSubcategory.comp_hom, sheafPushforwardContinuous_map_hom,
+      sheafPushforwardContinuousNatTrans_app_hom, ObjectProperty.ι_obj, op_obj, NatTrans.op_app,
+      sheafPushforwardContinuous_obj_obj_map, Quiver.Hom.unop_op]
     change 𝟙 _ = M.obj.map
       ((MorphismProperty.Over.mapComp (P := @WeaklyEtale) ⊤
         (inferInstance : WeaklyEtale k) (inferInstance : WeaklyEtale j)).inv.app
@@ -393,7 +409,9 @@ private lemma comparison_paste (Λ : Type (u + 1)) [CommRing Λ] :
     refine (M.obj.map_id _).symm.trans (congrArg M.obj.map ?_)
     apply Quiver.Hom.unop_inj
     apply MorphismProperty.Over.Hom.ext
-    simp [MorphismProperty.Over.mapComp, Scheme.toProEt]
+    simp only [unop_id, MorphismProperty.Comma.id_hom, Comma.id_left, comp_obj, unop_comp,
+      Quiver.Hom.unop_op, MorphismProperty.Comma.comp_hom, toProEt_map_hom, Comma.comp_left,
+      MorphismProperty.Over.mapComp_hom_app_left, MorphismProperty.Over.mapComp_inv_app_left]
     change 𝟙 _ = 𝟙 _ ≫ 𝟙 _
     simp
 -- Identity restriction and its compatibility with the canonical pullback unit.
@@ -404,7 +422,6 @@ private noncomputable def resId (X : Scheme.{u}) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option linter.flexible false in
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 private lemma resId_conj (X : Scheme.{u}) :
     conjugateIsoEquiv Adjunction.id (openImmersionRestrictionLowerStarAdjunction A (𝟙 X))
@@ -443,7 +460,6 @@ private noncomputable def etResId (X : Scheme.{u}) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option linter.flexible false in
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 private lemma etResId_conj (X : Scheme.{u}) :
     conjugateIsoEquiv Adjunction.id (Etale.openImmersionRestrictionLowerStarAdjunction A (𝟙 X))
@@ -473,7 +489,6 @@ private lemma et_up_res_id (X : Scheme.{u}) :
       (Etale.upperStarIsoOpenImmersionRestriction A (𝟙 X)) = Iso.refl _ := by
     exact Iso.ext (conjugateEquiv_leftAdjointUniq_hom _ _)
   rw [h, Iso.trans_refl]
-set_option linter.flexible false in
 -- Conjugation transfers the sectionwise identity law to extension by zero.
 private lemma comparison_identity (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u}) :
     openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) (𝟙 X) ≪≫
@@ -518,11 +533,17 @@ private lemma comparison_identity (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.
     funext M
     apply Sheaf.hom_ext
     refine NatTrans.ext (funext fun W ↦ ?_)
-    simp [comparisonLowerStarOpenImmersionRestrictionIso, resId, etResId,
-      Functor.sheafPushforwardContinuousId', Functor.sheafPushforwardContinuousId,
-      Functor.sheafPushforwardContinuousIso, comparisonLowerStar,
-      Etale.openImmersionRestriction, Etale.localizationRestriction,
-      openImmersionRestriction, localizationRestriction]
+    simp only [comparisonLowerStar, Etale.openImmersionRestriction, Etale.localizationRestriction,
+      comp_obj, openImmersionRestriction, localizationRestriction, resId,
+      sheafPushforwardContinuousId', sheafPushforwardContinuousIso, sheafPushforwardContinuousId,
+      Iso.trans_refl, Iso.symm_mk, comparisonLowerStarOpenImmersionRestrictionIso, Iso.refl_symm,
+      Iso.trans_hom, Iso.symm_hom, isoWhiskerRight_hom, Iso.refl_hom, NatTrans.comp_app, id_obj,
+      leftUnitor_inv_app, whiskerRight_app, NatTrans.id_app, Category.id_comp,
+      ObjectProperty.FullSubcategory.comp_hom, sheafPushforwardContinuous_map_hom,
+      sheafPushforwardContinuousNatTrans_app_hom, ObjectProperty.ι_obj,
+      ObjectProperty.FullSubcategory.id_hom, whiskerLeft_app, op_obj, NatTrans.op_app, etResId,
+      isoWhiskerLeft_hom, rightUnitor_inv_app, op_unop, sheafPushforwardContinuous_obj_obj_map,
+      Quiver.Hom.unop_op]
     change M.obj.map
         ((MorphismProperty.Over.mapId (P := @WeaklyEtale) (Q := ⊤) X).hom.app
           ((toProEt X).obj (unop W))).op ≫ 𝟙 _ =

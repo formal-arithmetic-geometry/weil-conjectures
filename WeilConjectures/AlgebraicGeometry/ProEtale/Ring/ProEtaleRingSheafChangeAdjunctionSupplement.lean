@@ -1212,7 +1212,6 @@ noncomputable def proEtaleRingRestrictionDerivedDirectImage :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.style.haveILetI false in
 /-- Exact restriction reflects derived isomorphisms, and the canonical coefficient
 comparisons intertwine the canonical derived adjunctions. -/
 theorem proEtaleRingSheafChangeAdjunction :
@@ -1229,8 +1228,8 @@ theorem proEtaleRingSheafChangeAdjunction :
             ((proEtaleRingDerivedAdjunction f SV SU cS).homEquiv M N t) ≫
           (proEtaleRingRestrictionDerivedDirectImage
             f RV SV RU SU aV aU cR cS comm).hom.app N := by
-  letI hU := (proEtaleRingRestrictScalars_properties aU).2.2
-  letI hV := (proEtaleRingRestrictScalars_properties aV).2.2
+  let hU := (proEtaleRingRestrictScalars_properties aU).2.2
+  let hV := (proEtaleRingRestrictScalars_properties aV).2.2
   have hDerivedU :
       (proEtaleRingRestrictScalars aU).mapDerivedCategory.ReflectsIsomorphisms := by
     refine ⟨fun g _ ↦ ?_⟩

@@ -27,7 +27,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-set_option linter.unusedVariables false in
 /-- A connecting-map ladder lowers a successor-degree descent problem by one
 (Stacks, Tags 09YP and 09YQ). -/
 theorem etale_limit_cohomology_connecting_ladder
@@ -57,7 +56,7 @@ theorem etale_limit_cohomology_connecting_ladder
     (L : Cocone G) (hL : IsColimit L) (n : ℕ)
     (H : I ⥤ AddCommGrpCat.{u + 1})
     (eH : ∀ i : I, H.obj i ≅ AddCommGrpCat.of (Sheaf.H (F i) (n + 1)))
-    (hH : ∀ (i j : I) (f : i ⟶ j), H.map f =
+    (_hH : ∀ (i j : I) (f : i ⟶ j), H.map f =
       (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (D.map f.op) (F i) (n + 1)) ≫
         AddCommGrpCat.ofHom (Sheaf.H.map (φ f) (n + 1)) ≫ (eH j).inv)
     (B : Cocone H) (eB : B.pt ≅ AddCommGrpCat.of (Sheaf.H L.pt (n + 1)))
@@ -67,10 +66,10 @@ theorem etale_limit_cohomology_connecting_ladder
     ∃ (FR : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (φR : ∀ {i j : I} (f : i ⟶ j),
       (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FR i) ⟶ FR j)
-    (hidentityR : ∀ i : I, φR (𝟙 i) =
+    (_hidentityR : ∀ i : I, φR (𝟙 i) =
       (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app
         (FR i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FR i))
-    (hcompositionR : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
+    (_hcompositionR : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
       φR (f ≫ g) =
         (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)
           (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FR i) ≫
@@ -78,19 +77,19 @@ theorem etale_limit_cohomology_connecting_ladder
     (GR : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})
     (eGR : ∀ i : I, GR.obj i ≅
       (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (FR i))
-    (hGR : ∀ (i j : I) (f : i ⟶ j), GR.map f =
+    (_hGR : ∀ (i j : I) (f : i ⟶ j), GR.map f =
       (eGR i).hom ≫
         (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)
           (c.π.app (op i)) (c.w f.op).symm).hom.app (FR i) ≫
         (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φR f) ≫ (eGR j).inv)
-    (LR : Cocone GR) (hLR : IsColimit LR)
+    (LR : Cocone GR) (_hLR : IsColimit LR)
     (HR : I ⥤ AddCommGrpCat.{u + 1})
     (eHR : ∀ i : I, HR.obj i ≅ AddCommGrpCat.of (Sheaf.H (FR i) n))
-    (hHR : ∀ (i j : I) (f : i ⟶ j), HR.map f =
+    (_hHR : ∀ (i j : I) (f : i ⟶ j), HR.map f =
       (eHR i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (D.map f.op) (FR i) n) ≫
         AddCommGrpCat.ofHom (Sheaf.H.map (φR f) n) ≫ (eHR j).inv)
     (BR : Cocone HR) (eBR : BR.pt ≅ AddCommGrpCat.of (Sheaf.H LR.pt n))
-    (hBR : ∀ i : I, BR.ι.app i ≫ eBR.hom =
+    (_hBR : ∀ i : I, BR.ι.app i ≫ eBR.hom =
       (eHR i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (FR i) n) ≫
         AddCommGrpCat.ofHom (Sheaf.H.map ((eGR i).inv ≫ LR.ι.app i) n)),
       ∃ (δ : BR.pt ⟶ B.pt) (δstage : ∀ i : I, HR.obj i ⟶ H.obj i),

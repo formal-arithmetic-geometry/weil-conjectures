@@ -20,7 +20,6 @@ open CategoryTheory CategoryTheory.Limits
 open scoped ZeroObject
 open scoped CategoryTheory.Obj
 
-set_option linter.style.haveILetI false
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -53,7 +52,7 @@ private lemma module_isZero_of_isEmpty {Y : Scheme.{u}} [IsEmpty Y]
   have hX : IsZero N.X := by
     refine Sheaf.isZero_of_isZero_obj _ ?_
     rintro ⟨V⟩
-    letI : IsEmpty V.left := ⟨fun v ↦ by
+    let : IsEmpty V.left := ⟨fun v ↦ by
       have : Y := V.hom.base v
       exact isEmptyElim this⟩
     exact (Scheme.ProEt.isTerminalSectionsOfIsEmpty N.X V).isZero

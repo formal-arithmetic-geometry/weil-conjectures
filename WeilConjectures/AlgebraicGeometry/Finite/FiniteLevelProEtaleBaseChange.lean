@@ -28,7 +28,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientExc
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 
 universe u
 
@@ -110,14 +109,14 @@ theorem finiteLevelProEtaleBaseChange [IsProper f]
     (_W : FiniteEtaleOriginWitness X Λ K) :
     IsIso ((finiteCoefficientExchange Λ sq).app K) := by
   let a := (finiteOriginConstantIso Y' Λ).hom
-  letI : (proEtaleRingRestrictScalars a).Additive := inferInstance
-  letI : PreservesFiniteLimits (proEtaleRingRestrictScalars a) :=
+  let : (proEtaleRingRestrictScalars a).Additive := inferInstance
+  let : PreservesFiniteLimits (proEtaleRingRestrictScalars a) :=
     (proEtaleRingRestrictScalars_properties a).1
-  letI : PreservesFiniteColimits (proEtaleRingRestrictScalars a) :=
+  let : PreservesFiniteColimits (proEtaleRingRestrictScalars a) :=
     (proEtaleRingRestrictScalars_properties a).2.1
-  letI : (proEtaleRingRestrictScalars a).ReflectsIsomorphisms :=
+  let : (proEtaleRingRestrictScalars a).ReflectsIsomorphisms :=
     (proEtaleRingRestrictScalars_properties a).2.2
-  letI : (proEtaleRingRestrictScalars a).mapDerivedCategory.ReflectsIsomorphisms :=
+  let : (proEtaleRingRestrictScalars a).mapDerivedCategory.ReflectsIsomorphisms :=
     { reflects := fun f _ ↦ by
         rw [DerivedCategory.isIso_iff]
         intro n

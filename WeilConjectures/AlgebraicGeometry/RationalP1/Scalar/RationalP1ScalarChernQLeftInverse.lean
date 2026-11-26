@@ -136,7 +136,6 @@ private theorem second_exchange_iso
   unfold secondTraceExchange
   infer_instance
 
-set_option linter.unusedVariables false in
 -- Preserve the common displayed P2 setup in the fixed statement.
 /-- The explicit scalar Q biproduct map has a left inverse. -/
 theorem scalar_q_chern_left_inverse
@@ -163,10 +162,10 @@ theorem scalar_q_chern_left_inverse
       ((DerivedCategory.singleFunctor (Modules Λ X) 0).obj (L X)) ⟦(2 : ℤ)⟧
     let uq := scalarTwistedUnit Λ (ProjectiveLine Y ↘ Y) (T Y) (T (ProjectiveLine Y))
       (scalarQLineIso l c k p hpl Y)
-    let u₂ := scalarTwistedUnit Λ (secondProjection Y)
+    let _u₂ := scalarTwistedUnit Λ (secondProjection Y)
       (T (ProjectiveLine Y)) (T (diagonalSurface Y)) (secondLineComparison l c k p hpl Y)
     let cq := scalarQChern l c Y r a
-    let c₂ := scalarP2Chern l c Y r b
+    let _c₂ := scalarP2Chern l c Y r b
     ∃ v, v ≫ biprod.desc uq cq = 𝟙 _ := by
   let Λ := (coefficient l c).X
   let T := fun X : Scheme.{u} ↦

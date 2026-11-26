@@ -55,15 +55,12 @@ theorem properPerfect_preserves_compact
     let _ : HasCoproducts.{u} (schemeDerivedQCohCategory Y) := derivedQCohDirectSums Y
     ∀ P : schemeDerivedQCohCategory X, IsCompactObject P → IsCompactObject (R.obj P) := by
   dsimp
-  set_option linter.style.haveILetI false in
-    letI : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X
+  have : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X
   intro P hP
   obtain ⟨hX⟩ := noetherian_open_derived_categories_exists X
   obtain ⟨hY⟩ := noetherian_open_derived_categories_exists Y
-  set_option linter.style.haveILetI false in
-    letI := hX
-  set_option linter.style.haveILetI false in
-    letI := hY
+  let := hX
+  let := hY
   exact properPerfect_transport_compact f hTor R eR P
     (compact_isPerfect_of_isNoetherian X P hP)
 

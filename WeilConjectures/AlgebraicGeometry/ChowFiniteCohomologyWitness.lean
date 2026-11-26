@@ -41,7 +41,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option linter.unusedVariables false in
 /-- The Chow construction supplies one coherent module with finite cohomology on each
 integral closed support, with its generic stalk the one-dimensional residue-field module
 (Stacks, Tag 02O5). -/
@@ -53,7 +52,7 @@ theorem exists_chow_finite_cohomology_witness {X T : Scheme.{u}}
       (∀ a ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk (i.base (genericPoint W))),
         ∀ v : (RingedSpace.moduleStalkFunctor X.toRingedSpace
           (i.base (genericPoint W))).obj G, a • v = 0) ∧
-      (∃ inst : Module (X.residueField (i.base (genericPoint W)))
+      (∃ _inst : Module (X.residueField (i.base (genericPoint W)))
         ((RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint W))).obj G),
         (∀ (a : X.presheaf.stalk (i.base (genericPoint W)))
           (v : (RingedSpace.moduleStalkFunctor X.toRingedSpace

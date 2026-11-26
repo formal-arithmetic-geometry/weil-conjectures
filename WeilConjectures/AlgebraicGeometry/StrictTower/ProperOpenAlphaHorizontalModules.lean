@@ -22,7 +22,6 @@ import all WeilConjectures.CategoryTheory.ExactDerivedPasting.ExactDerivedPastin
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedSimpArgs false
 
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
@@ -119,7 +118,7 @@ theorem singleAlpha_horizontal {A C E B₀ D F : Scheme.{u}}
   dsimp only [Functor.comp_map] at ho
   rw [reassoc_of% ho]
   rw [← (modulePullback B r).map_comp, moduleOpenUnitInv_comp]
-  simp only [Functor.map_comp, Category.assoc]
+  simp only [Functor.map_comp]
   rw [← reassoc_of% (moduleSquare_pasting_inv B q p r j i l k h₂ h₁ h
     ((moduleJ B j).obj ((moduleJ B i).obj M)))]
   rw [moduleOpenUnitInv_comp B k l ((modulePullback B r).obj M)]

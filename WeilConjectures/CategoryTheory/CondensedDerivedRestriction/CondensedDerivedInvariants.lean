@@ -144,12 +144,6 @@ variable {A G} {H : Type u} [Group H] [TopologicalSpace H] [IsTopologicalGroup H
       (forgetExact A G).2.1
   exact preservesFiniteColimits_of_reflects_of_preserves _ U
 
-section Derived
-variable [HasDerivedCategory.{u + 1} (Modules A)]
-  [HasDerivedCategory.{u + 1} (Equivariant A G)]
-  [HasDerivedCategory.{u + 1} (Equivariant A H)]
-
-set_option linter.unusedSectionVars false in
 /-- The invariant inclusion uniquely determines the underived restriction map. -/
 theorem invariantRestrictionExist (V : Invariants A G) (W : Invariants A H) (v : H →ₜ* G) :
     ∃! b : V.functor ⟶ inflate (R := A.toMon) v ⋙ W.functor,
@@ -180,6 +174,11 @@ theorem invariantRestrictionExist (V : Invariants A G) (W : Invariants A H) (v :
     rw [W.untranspose]
     erw [Equiv.symm_apply_apply]
     exact (hb' N).trans (hc N).symm
+
+section Derived
+variable [HasDerivedCategory.{u + 1} (Modules A)]
+  [HasDerivedCategory.{u + 1} (Equivariant A G)]
+  [HasDerivedCategory.{u + 1} (Equivariant A H)]
 
 /-- The unique map into the invariant subsheaf; uniqueness fixes the actual arrow. -/
 def invariantRestriction (V : Invariants A G) (W : Invariants A H) (v : H →ₜ* G) :

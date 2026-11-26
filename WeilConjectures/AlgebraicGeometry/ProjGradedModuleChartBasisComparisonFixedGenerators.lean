@@ -38,7 +38,6 @@ local instance localizedModuleHomogeneousScalarsBasisComparisonFixedGenerators (
     (algebraMap (HomogeneousLocalization 𝒜 T) (Localization T))
 
 set_option quotPrecheck false
-set_option linter.unusedVariables false
 
 local notation "Fidx" => {p : S × ℕ // 0 < p.2 ∧ p.1 ∈ 𝒜 p.2}
 local notation "R[" f "]" => HomogeneousLocalization.Away 𝒜 (f).val.1
@@ -118,8 +117,8 @@ theorem gradedModuleChart_basisComparison_fixed_generators
     (Z : ∀ f : Fidx, Submodule R[f] N[f])
     (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])
     (rho : ∀ (f g : Fidx), D[g] ≤ D[f] → Z f →+ Z g)
-    (U : ∀ (f g : Fidx), R[f])
-    (hU : ∀ (f g : Fidx), (U f g).val = Localization.mk (g.val.1 ^ f.val.2)
+    (U : ∀ (f _g : Fidx), R[f])
+    (_hU : ∀ (f g : Fidx), (U f g).val = Localization.mk (g.val.1 ^ f.val.2)
       (⟨f.val.1 ^ g.val.2, ⟨g.val.2, rfl⟩⟩ : Submonoid.powers f.val.1))
     (theta : ∀ (f g : Fidx), D[g] ≤ D[f] →
       LocalizedModule.Away (U f g) (Z f) ≃+ Z g)
@@ -130,7 +129,7 @@ theorem gradedModuleChart_basisComparison_fixed_generators
       (∀ q : Z f, theta f g i (mk q 1) = rho f g i q) ∧
       (∀ (r : Localization.Away (U f g)) (q : LocalizedModule.Away (U f g) (Z f)),
         theta f g i (r • q) = thetaS f g i r • theta f g i q))
-    (hcanonical : ∀ (f g : Fidx) (i : D[g] ≤ D[f]),
+    (_hcanonical : ∀ (f g : Fidx) (i : D[g] ≤ D[f]),
       ∃ l : Localization.Away f.val.1 →+* Localization.Away g.val.1,
         (∀ a : S, l (algebraMap S (Localization.Away f.val.1) a) =
           algebraMap S (Localization.Away g.val.1) a) ∧

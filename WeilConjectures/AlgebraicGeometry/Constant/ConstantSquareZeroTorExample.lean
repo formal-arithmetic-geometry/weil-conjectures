@@ -27,7 +27,6 @@ public import Mathlib.Order.CompletePartialOrder
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 open CategoryTheory Limits
 open scoped CategoryTheory.Obj MonoidalCategory ZeroObject
@@ -45,6 +44,8 @@ private def chain (n : ℕ) (hsq : (n • (𝟙 (𝟙_ C))) ≫ (n • (𝟙 (�
     ChainComplex C ℕ :=
   ChainComplex.of (fun _ ↦ 𝟙_ C) (fun _ ↦ n • 𝟙 _) (fun _ ↦ hsq)
 
+omit [IsGrothendieckAbelian.{v} C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory C] in
 private theorem chain_d (n : ℕ) (hsq) (i : ℕ) :
     (chain (C := C) n hsq).d (i + 1) i = n • (𝟙 (𝟙_ C)) := by
   exact ChainComplex.of_d (fun _ : ℕ ↦ 𝟙_ C) (fun _ ↦ n • (𝟙 (𝟙_ C))) i
@@ -54,6 +55,8 @@ private noncomputable def augmentation (n : ℕ) (hsq) :
   (ChainComplex.toSingle₀Equiv _ _).symm
     ⟨cokernel.π _, by rw [chain_d, cokernel.condition]⟩
 
+omit [IsGrothendieckAbelian.{v} C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory C] in
 private theorem augmentation_quasiIso (n : ℕ) (hsq)
     (hex : (ShortComplex.mk (n • (𝟙 (𝟙_ C))) (n • (𝟙 (𝟙_ C))) hsq).Exact) :
     QuasiIso (augmentation (C := C) n hsq) := by
@@ -77,6 +80,8 @@ private theorem augmentation_quasiIso (n : ℕ) (hsq)
       simpa only [chain_d] using hex
     · exact ChainComplex.exactAt_succ_single_obj _ _
 
+omit [IsGrothendieckAbelian.{v} C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory C] in
 private theorem residue_annihilated (n : ℕ) :
     n • (𝟙 (cokernel (n • (𝟙 (𝟙_ C))))) = 0 := by
   apply (cancel_epi (cokernel.π (n • (𝟙 (𝟙_ C))))).1
@@ -84,6 +89,8 @@ private theorem residue_annihilated (n : ℕ) :
     Category.comp_id, Category.id_comp, comp_zero] using
     cokernel.condition (n • (𝟙 (𝟙_ C)))
 
+omit [IsGrothendieckAbelian.{v} C] [MonoidalClosed C] [BraidedCategory C]
+  [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory C] in
 private theorem residue_tensor_zero (n : ℕ) :
     (n • (𝟙 (𝟙_ C))) ▷ cokernel (n • (𝟙 (𝟙_ C))) = 0 := by
   let F := cokernel (n • (𝟙 (𝟙_ C)))
@@ -164,6 +171,8 @@ private theorem not_finite_tor (n : ℕ) (hsq)
   exact hnz (((DerivedCategory.isGE_iff _ a).1 (hab F).1
     (-(q : ℤ)) (by omega)).of_iso eh.symm)
 
+omit [IsGrothendieckAbelian.{v} C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory C] in
 private theorem residue_nonzero (n : ℕ) (hsq :
     (n • (𝟙 (𝟙_ C))) ≫ (n • (𝟙 (𝟙_ C))) = 0) (hnz : ¬ IsZero (𝟙_ C)) :
     ¬ IsZero (cokernel (n • (𝟙 (𝟙_ C)))) := by
@@ -179,10 +188,14 @@ private theorem residue_nonzero (n : ℕ) (hsq :
 private noncomputable def twoTerm (f : 𝟙_ C ⟶ 𝟙_ C) : CochainComplex C ℤ :=
   HomologicalComplex.double f (show (ComplexShape.up ℤ).Rel (-1) 0 by simp)
 
+omit [IsGrothendieckAbelian.{v} C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory C] in
 private theorem twoTerm_ge (f : 𝟙_ C ⟶ 𝟙_ C) : (twoTerm f).IsStrictlyGE (-1) :=
   ((twoTerm f).isStrictlyGE_iff _).2 fun i hi ↦
     HomologicalComplex.isZero_double_X _ _ i (by omega) (by omega)
 
+omit [IsGrothendieckAbelian.{v} C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory C] in
 private theorem twoTerm_le (f : 𝟙_ C ⟶ 𝟙_ C) : (twoTerm f).IsStrictlyLE 0 :=
   ((twoTerm f).isStrictlyLE_iff _).2 fun i hi ↦
     HomologicalComplex.isZero_double_X _ _ i (by omega) (by omega)

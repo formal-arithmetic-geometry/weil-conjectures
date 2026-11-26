@@ -15,7 +15,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Monoida
 open CategoryTheory.Pretriangulated.Opposite Opposite
 namespace AlgebraicGeometry.Etale
 
-set_option linter.style.haveILetI false
 
 /-- Evaluation transposes commute with the normalized opposite shifts.
 See Stacks Project, Tags 08JC and 08J9. -/
@@ -51,8 +50,8 @@ theorem etaleHomComparison_reversedExact_commShift
           (sB.commShiftIso n).hom.app (op ((scalarExtension φ X).obj K))) :
     letI := etaleHomScalarCommShift X φ
     NatTrans.CommShift v ℤ := by
-  letI := _chiPhi
-  letI := _chiPsi
+  let := _chiPhi
+  let := _chiPsi
   apply NatTrans.CommShift.of_core
   intro n
   exact etaleHomComparison_reversedExact_commShift_core X φ M v hv sA sB

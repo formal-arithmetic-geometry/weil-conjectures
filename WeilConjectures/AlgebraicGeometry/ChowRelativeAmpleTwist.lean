@@ -20,7 +20,6 @@ open scoped AlgebraicGeometry
 attribute [local instance] MvPolynomial.gradedAlgebra
 namespace AlgebraicGeometry
 
-set_option linter.unusedVariables false in
 /-- Twisting and ampleness consequences.
 
 The two twists by `O(1)` pulled back along `j` and along the base-changed immersion are
@@ -41,7 +40,7 @@ theorem chow_relative_ample_twist (m : ℕ) (S Z X' : Scheme.{u})
               (ULift.{u} (Fin (m + 1))) Z)).obj
               (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))
                 (ULift.{u} ℤ)) 1)))) ∧
-      ∃ hL : ((Scheme.Modules.tensorPullback j).obj
+      ∃ _hL : ((Scheme.Modules.tensorPullback j).obj
           ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt
             (ULift.{u} (Fin (m + 1))) S)).obj
             (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))

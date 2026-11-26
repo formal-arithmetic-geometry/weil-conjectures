@@ -808,14 +808,12 @@ private theorem combineRootMaps {X : Scheme.{u}} (Y : Over X)
       (σ (Multiplicative.ofAdd a)).asIso.hom.left (Over.w _) = (ψ a.1 * ψ a.2) • φs
     simpa only [AddChar.map_add_eq_mul] using hφs a
 
--- The nontriviality hypothesis is part of the recorded statement but is not needed.
-set_option linter.unusedVariables false in
 /-- The tensor sheaf and the sum-function sheaf have normalized eigenmaps into the
 same finite etale direct image, with character (a,b) ↦ ψ(a)ψ(b). -/
 theorem condensed_artinSchreier_tensor_eigenmaps
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] [Fintype k]
-    (ψ : AddChar k (MonObj.Γ Λ)) (hψ : ψ ≠ 1)
+    (ψ : AddChar k (MonObj.Γ Λ)) (_hψ : ψ ≠ 1)
     (hq : IsUnit (Fintype.card k : MonObj.Γ Λ))
     (X : Scheme.{u}) [X.Over (Spec (.of k))] (f g : Γ(X, ⊤)) :
     ∃ Y : Over X, IsFinite Y.hom ∧ Etale Y.hom ∧

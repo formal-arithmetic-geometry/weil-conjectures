@@ -38,8 +38,6 @@ attribute [local implicit_reducible] CategoryTheory.Prod.sectL CategoryTheory.Pr
   CategoryTheory.ScalarLocalization.extension
 attribute [local instance 2000] DivisionSemiring.to_moduleIsTorsionFree
 
-set_option linter.unusedSectionVars false
-
 universe r u v u' v' u₂ v₂ u₃ v₃ w
 
 open CategoryTheory TensorProduct
@@ -1048,6 +1046,7 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type w) [Field Ω]
 @[no_expose] def Integers (E : Padic.FiniteCoefficientFields l Ω) : Subring E.val :=
   Padic.coefficientExtensionIntegers l E.val
 
+omit [IsAlgClosure (Padic l) Ω] in
 /-- The named integer ring is exactly the recorded coefficient-extension subring. -/
 theorem Integers_eq (E : Padic.FiniteCoefficientFields l Ω) :
     Integers l Ω E = Padic.coefficientExtensionIntegers l E.val := by
@@ -1055,6 +1054,7 @@ theorem Integers_eq (E : Padic.FiniteCoefficientFields l Ω) :
 
 
 
+omit [IsAlgClosure (Padic l) Ω] in
 /-- The recorded uniformizer belongs to the named integer subring. -/
 theorem uniformizer_mem (E : Padic.FiniteCoefficientFields l Ω) :
     (Padic.coefficientExtensionUniformizer l E.val : E.val) ∈ Integers l Ω E := by
@@ -1065,7 +1065,6 @@ theorem uniformizer_mem (E : Padic.FiniteCoefficientFields l Ω) :
 @[no_expose] def uniformizer (E : Padic.FiniteCoefficientFields l Ω) : Integers l Ω E :=
   ⟨(Padic.coefficientExtensionUniformizer l E.val : E.val), uniformizer_mem l Ω E⟩
 
-set_option linter.unusedSectionVars false in
 attribute [local irreducible] Padic.finiteCoefficientCompositum uniformizer
 
 /-- The chosen output field is exactly the compositum, including the base-field case. -/

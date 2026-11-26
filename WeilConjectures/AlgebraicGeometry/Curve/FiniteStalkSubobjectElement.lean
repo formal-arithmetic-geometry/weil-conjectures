@@ -107,7 +107,6 @@ private theorem finite_subobject_element_of_equivalence
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option linter.style.haveILetI false in
 /-- Every element of the geometric stalk of a torsion sheaf over a field comes from
 one finite-stalk subobject. -/
 theorem torsion_exists_finite_stalk_subobject_element
@@ -137,7 +136,7 @@ theorem torsion_exists_finite_stalk_subobject_element
     Action.forget (ModuleCat.{u + 1} ℤ) (Gal(SeparableClosure K/K)) ⋙
     forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat
   let A := E.functor.obj M
-  letI : Module ℤ A.obj.V := A.obj.hV2
+  let : Module ℤ A.obj.V := A.obj.hV2
   have ht : IsAddTorsion (R.obj A) := IsAddTorsion.of_surjective
     (f := (i.inv.app M).hom) (ConcreteCategory.bijective_of_isIso _).2
     ((isTorsion_iff_isAddTorsion_sheafFiber M).mp hM _

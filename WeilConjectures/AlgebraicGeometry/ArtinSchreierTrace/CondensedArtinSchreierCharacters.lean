@@ -39,8 +39,6 @@ specified by its actual image inclusions, which fixes the canonical decompositio
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.style.haveILetI false
-set_option linter.unusedVariables false
 
 universe u v
 
@@ -68,7 +66,7 @@ abbrev qlbarTraceSheafOf (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime]
 /-- Tensor addition and the tensor inverse, with inverse-character identification,
 for the trace character psi=Psi o Tr. Both tensor orders express the inverse object. -/
 theorem qlbar_artinSchreier_trace_tensor_properties
-    (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (hpℓ : p ≠ ℓ)
+    (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (_hpℓ : p ≠ ℓ)
     (k : Type u) [Field k] [Fintype k] [Algebra (ZMod p) k]
     (Ψ : AddChar (ZMod p) (PadicAlgCl ℓ)) (hΨ : Ψ ≠ 1)
     (X : Scheme.{u}) [X.Over (Spec (.of k))] (f g : Γ(X, ⊤)) :
@@ -79,13 +77,13 @@ theorem qlbar_artinSchreier_trace_tensor_properties
     Nonempty (qlbarTraceSheafOf p ℓ k Ψ X (-f) ⊗ qlbarTraceSheafOf p ℓ k Ψ X f ≅
       Mod.regular (ProEtale.padicAlgClRingObj X ℓ)) ∧
     Nonempty (qlbarTraceSheafOf p ℓ k Ψ⁻¹ X f ≅ qlbarTraceSheafOf p ℓ k Ψ X (-f))   := by
-  letI : CharP k p := (Algebra.charP_iff (ZMod p) k p).mp inferInstance
+  let : CharP k p := (Algebra.charP_iff (ZMod p) k p).mp inferInstance
   have hq : IsUnit (Fintype.card k : MonObj.Γ (Profinite.padicAlgClRingObj ℓ)) := by
     have hk : IsUnit (Fintype.card k : PadicAlgCl ℓ) := by
       apply isUnit_iff_ne_zero.mpr
       exact_mod_cast (Fintype.card_ne_zero : Fintype.card k ≠ 0)
     simpa only [map_natCast] using (Profinite.PadicAlgCl.constRingHom ℓ).isUnit_map hk
-  letI : Nontrivial (MonObj.Γ (Profinite.padicAlgClRingObj ℓ)) :=
+  let : Nontrivial (MonObj.Γ (Profinite.padicAlgClRingObj ℓ)) :=
     ⟨⟨1, 0, fun h ↦ Profinite.PadicAlgCl.one_ne_zero_end_regular ℓ
       (by rw [← map_one Mod.regularEndRingHom, h, map_zero])⟩⟩
   have hχ : qlbarCharacter ℓ Ψ ≠ 1 := by

@@ -119,7 +119,6 @@ namespace CategoryTheory
 
 variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
 
-set_option linter.flexible false in
 /-- `H⁰` of the map of single complexes induced by a natural transformation `τ` at `X` is
 isomorphic, as an arrow, to `τ.app X`. -/
 noncomputable def arrowIsoHomologyMapMapHomologicalComplexSingle (G G' : C ⥤ D) [G.Additive]
@@ -134,9 +133,11 @@ noncomputable def arrowIsoHomologyMapMapHomologicalComplexSingle (G G' : C ⥤ D
     ext i
     by_cases hi : i = 0
     · subst hi
-      simp [e, e', HomologicalComplex.singleMapHomologicalComplex,
-        HomologicalComplex.single_map_f_self, HomologicalComplex.singleObjXSelf,
-        HomologicalComplex.singleObjXIsoOfEq]
+      simp only [Functor.mapHomologicalComplex_obj_X, NatTrans.mapHomologicalComplex_app_f,
+        Functor.comp_obj, HomologicalComplex.singleMapHomologicalComplex, NatIso.ofComponents.app,
+        HomologicalComplex.comp_f, ↓reduceDIte, eqToHom_refl, HomologicalComplex.single_map_f_self,
+        HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl,
+        Iso.refl_hom, Iso.refl_inv, Category.id_comp, Category.comp_id, e, e']
       erw [Category.comp_id]
       rfl
     · exact (G.map_isZero (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi)).eq_of_src _ _

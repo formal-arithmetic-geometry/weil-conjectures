@@ -211,14 +211,12 @@ def pbcAdicQuotient (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (b a : ℕ) (hab : a ≤ b) :=
   (pbcAdicRings X d).map (homOfLE hab).op
 
-set_option linter.defProp false in
 /-- Projection followed by quotient reduction is the lower projection. -/
 theorem pbcAdicProjection_comp (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (b a : ℕ) (hab : a ≤ b) :
     pbcAdicProjection X d b ≫ pbcAdicQuotient X d b a hab = pbcAdicProjection X d a := by
   exact limit.w (pbcAdicRings X d) (homOfLE hab).op
 
-set_option linter.defProp false in
 /-- Quotient maps satisfy the full quotient cocycle. -/
 theorem pbcAdicQuotient_comp (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (c b a : ℕ) (hab : a ≤ b) (hbc : b ≤ c) :

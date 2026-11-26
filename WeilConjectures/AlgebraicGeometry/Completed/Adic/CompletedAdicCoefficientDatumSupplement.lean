@@ -452,7 +452,6 @@ def completedAdicCommProjection (T : Scheme.{t}) (d : AdicCoefficientDatum A) (n
       naturality := fun _ _ f ↦ (forget₂ CommRingCat RingCat).map_injective
         ((completedAdicProjection T d n).hom.naturality f) }
 
-set_option linter.defProp false in
 /-- K tensor^L_(A_T) (P_(n+1))_T with its quotient coefficient action retained.
 The main reduction functor is its scalar restriction; no constant coefficient category
 is identified with the completed category. -/

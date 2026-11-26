@@ -32,7 +32,6 @@ is asserted.
 -/
 
 @[expose] public noncomputable section
-set_option linter.style.haveILetI false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency.types false
@@ -407,7 +406,7 @@ theorem modulePi_components {U X C : Scheme.{u}} (s : U ⟶ X) (c : C ⟶ X)
       (pull R φ c).map ((modulePi R φ s).app M) = 0 := by
   refine ⟨?_, ?_⟩
   · have hu := moduleJAdj_unit_isIso R φ s
-    letI _inst : IsIso (moduleOpenToP R φ s) := moduleOpenToP_isIso R φ s
+    let _inst : IsIso (moduleOpenToP R φ s) := moduleOpenToP_isIso R φ s
     let t : Adjunction.Triple (extension R φ s) (pull R φ s) (push R φ s) :=
       ⟨moduleJAdj R φ s, moduleAdj R φ s⟩
     let ff := (moduleJAdj R φ s).fullyFaithfulLOfIsIsoUnit

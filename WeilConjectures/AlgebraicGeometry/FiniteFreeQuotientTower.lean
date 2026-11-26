@@ -25,10 +25,6 @@ set_option linter.privateModule false
 
 @[expose] public noncomputable section
 set_option autoImplicit false
--- Avoid traversing the large dependent tensor transports for tactic style linting.
-set_option linter.unusedVariables false
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true

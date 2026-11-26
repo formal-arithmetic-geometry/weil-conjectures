@@ -26,15 +26,13 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace DerivedCategory
 
--- The fixed interface includes `hab`; the generic equivalence needs no interval ordering.
-set_option linter.unusedVariables false in
 /-- For a commutative ring `A`, a cochain complex `M` of `A`-modules and integers `a ≤ b`, the
 complex `M` has Tor amplitude in `[a, b]` (that is, `H^i(M ⊗ᴸ_A N) = 0` for every `A`-module `N`
 and every `i ∉ [a, b]`) if and only if there is a cochain complex `P` of flat `A`-modules with
 `P^i = 0` for `i ∉ [a, b]` and an isomorphism `M ≅ P` in `D(A)`. -/
 theorem module_torAmplitudeIn_iff_exists_flat_model {A : Type u} [CommRing A]
     [HasDerivedCategory.{w} (ModuleCat.{u} A)]
-    (M : CochainComplex (ModuleCat.{u} A) ℤ) (a b : ℤ) (hab : a ≤ b) :
+    (M : CochainComplex (ModuleCat.{u} A) ℤ) (a b : ℤ) (_hab : a ≤ b) :
     torAmplitudeIn (ModuleCat.{u} A) a b (Q.obj M) ↔
       ∃ P : CochainComplex (ModuleCat.{u} A) ℤ,
         (∀ i : ℤ, Module.Flat A (P.X i)) ∧

@@ -71,8 +71,6 @@ public import WeilConjectures.RingTheory.ProperBaseChange.IndEtaleStability
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
@@ -587,8 +585,6 @@ set_option backward.isDefEq.respectTransparency.types false
 
 attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleAdjunction
   proEtaleConstantRingComparison
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 
 private theorem cancel_mapped_iso {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) {M N : C} (e : M ≅ N) {P : D} {a b : F.obj N ⟶ P}

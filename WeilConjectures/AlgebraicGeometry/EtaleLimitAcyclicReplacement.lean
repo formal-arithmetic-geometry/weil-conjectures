@@ -28,7 +28,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-set_option linter.unusedVariables false in
 /-- Compatible injective embeddings give a short exact limit sequence with acyclic middle term
 (Stacks, Tags 09YP, 0EXZ, 0739, 09YQ, 09YN, 0EYL and 04HR). -/
 theorem etale_limit_acyclic_replacement
@@ -59,10 +58,10 @@ theorem etale_limit_acyclic_replacement
     ∃ (FR : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (φR : ∀ {i j : I} (f : i ⟶ j),
       (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FR i) ⟶ FR j)
-    (hidentityR : ∀ i : I, φR (𝟙 i) =
+    (_hidentityR : ∀ i : I, φR (𝟙 i) =
       (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app
         (FR i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FR i))
-    (hcompositionR : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
+    (_hcompositionR : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
       φR (f ≫ g) =
         (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)
           (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FR i) ≫
@@ -70,12 +69,12 @@ theorem etale_limit_acyclic_replacement
     (GR : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})
     (eGR : ∀ i : I, GR.obj i ≅
       (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (FR i))
-    (hGR : ∀ (i j : I) (f : i ⟶ j), GR.map f =
+    (_hGR : ∀ (i j : I) (f : i ⟶ j), GR.map f =
       (eGR i).hom ≫
         (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)
           (c.π.app (op i)) (c.w f.op).symm).hom.app (FR i) ≫
         (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φR f) ≫ (eGR j).inv)
-    (LR : Cocone GR) (hLR : IsColimit LR)
+    (LR : Cocone GR) (_hLR : IsColimit LR)
     (E : Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})
     (a : L.pt ⟶ E) (b : E ⟶ LR.pt) (w : a ≫ b = 0)
     (hE : (ShortComplex.mk a b w).ShortExact)

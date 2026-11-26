@@ -70,7 +70,6 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedVariables false in
 /-- Pullback preserves the given finite constant module models on the base-changed cover.
 The arrows to `ProEt.mk (𝟙 V)` are unique, hence are precisely the structure maps of the
 base-changed objects. The conclusion retains the same modules `M i`, not just their sizes. -/
@@ -83,7 +82,7 @@ theorem proEtaleConstantModulePullback_locallyConstant
     (a : ∀ i : I, U i ⟶ ProEt.mk (𝟙 X))
     (hcover : Presieve.ofArrows U a ∈ (ProEt.precoverage X).coverings _)
     (M : I → ModuleCat.{u + 1} (ULift.{u + 1, u} A))
-    (hfinite : ∀ i : I, Finite (M i))
+    (_hfinite : ∀ i : I, Finite (M i))
     (htrivial : ∀ i : I,
       Nonempty (F.over (U i) ≅ proEtaleConstantModuleSheafOver X A (U i) (M i))) :
     ∃ b : ∀ i : I, (proEtaleBaseChange f).obj (U i) ⟶ ProEt.mk (𝟙 V),

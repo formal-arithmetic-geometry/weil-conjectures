@@ -51,8 +51,6 @@ its completed coefficient map is the recorded limit lift of the finite projectio
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.all false
-set_option linter.unusedVariables false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -367,6 +365,7 @@ def UnitRestriction [IsNoetherianRing A] (r : ℕ) (a : Fin r → A) : Prop :=
       ConstantCompletion.IsComplete (ConstantCompletion.projection K A I 0)
         ((completedPull F V adj A I).obj M))
 
+omit [PreservesFiniteLimits L] in
 private theorem rings_preserveTowers [PreservesLimitsOfShape ℕᵒᵖ L] :
     PreservesLimitsOfShape ℕᵒᵖ F.rings := by
   let UJ := sheafCompose J (CategoryTheory.forget CommRingCat.{v})
@@ -401,6 +400,7 @@ private theorem rings_preserveTowers [PreservesLimitsOfShape ℕᵒᵖ L] :
 
 attribute [local semireducible] ConstantCompletion.completed
 
+omit [PreservesFiniteLimits L] in
 private theorem completedMap_isIso [PreservesLimitsOfShape ℕᵒᵖ L] :
     IsIso (ConstantCompletion.completedMap F A I) := by
   have := rings_preserveTowers F
@@ -476,8 +476,8 @@ private theorem derivedPull_computes {R : Sheaf J CommRingCat.{v}}
     {S : Sheaf K CommRingCat.{v}} (c : F.rings.obj R ⟶ S) [IsIso c]
     (P : ConstantCompletion.Cx R) :
     IsIso ((ConstantCompletion.derivedPull F V adj c).comparison.app P) := by
-  letI := HasDerivedCategory.standard (ConstantCompletion.Mod R)
-  letI := HasDerivedCategory.standard (ConstantCompletion.Mod S)
+  let := HasDerivedCategory.standard (ConstantCompletion.Mod R)
+  let := HasDerivedCategory.standard (ConstantCompletion.Mod S)
   have : PreservesFiniteLimits (ConstantCompletion.pull F c) :=
     ConstantCompletion.pull_finiteLimits_of_isIso F c
   obtain ⟨G, eG, aM, haM⟩ := ConstantCompletion.module_adjunction_exists V adj F c
@@ -505,9 +505,9 @@ private theorem koszul_unit_criterion [IsNoetherianRing A] (r : ℕ) (a : Fin r 
       ConstantCompletion.IsComplete (ConstantCompletion.projection J A I 0) M := by
   obtain ⟨P₀, ⟨e₀, he₀⟩, _, _, hcrit⟩ :=
     ConstantCompletion.koszul_quotient_reflector J A I true r a ha
-  letI := HasDerivedCategory.standard
+  let := HasDerivedCategory.standard
     (ConstantCompletion.Mod (ConstantCompletion.completed J A I))
-  letI := HasDerivedCategory.standard
+  let := HasDerivedCategory.standard
     (ℕᵒᵖ ⥤ ConstantCompletion.Mod (ConstantCompletion.completed J A I))
   let O := ConstantCompletion.completed J A I
   let : Category.{v + 1} (ringedSiteDerived O) :=
@@ -542,7 +542,7 @@ private theorem complete_of_unit_comparison [IsNoetherianRing A]
     (hM : ConstantCompletion.IsComplete (ConstantCompletion.projection J A I 0) M) :
     ConstantCompletion.IsComplete (ConstantCompletion.projection K A I 0)
       ((completedPull F V adj A I).obj M) := by
-  haveI := (koszul_unit_criterion A I r a ha PX M).mpr hM
+  have := (koszul_unit_criterion A I r a ha PX M).mpr hM
   apply (koszul_unit_criterion A I r a ha PS _).mp
   rw [← he M]
   infer_instance
@@ -555,7 +555,7 @@ private theorem unitRestriction_of_exact [IsNoetherianRing A]
       (ConstantCompletion.Mod (ConstantCompletion.completed K A I))]
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = I) :
     UnitRestriction F V adj A I r a := by
-  haveI := completedMap_isIso F A I
+  have := completedMap_isIso F A I
   have hK := ConstantCompletion.exactCompletedKoszulPullback F V adj A I r a
   refine ⟨inferInstance, derivedPull_computes F V adj _, hK,
     finiteComparison_normalized F V adj A I, ?_⟩
@@ -654,7 +654,7 @@ theorem adicStratumCompletionUnit_detection (X : Scheme.{u}) [IsNoetherian X]
         ConstantCompletion.IsComplete
           (ConstantCompletion.projection ((proEtaleModelTopology (s.domain α)).over U) A I 0)
           ((stratumSlicePull s F A I α U).obj M) := by
-  letI : ∀ α, IsImmersion (s.immersion α) := s.isImmersion
+  let : ∀ α, IsImmersion (s.immersion α) := s.isImmersion
   have h := adicStratumCompletionUnit X A I r a ha
   have hS (α : Fin s.n) := h.1 (s.domain α) (s.immersion α) (F α)
   have hU (α : Fin s.n) (U : proEtaleSiteModel (s.domain α)) :=
@@ -672,9 +672,9 @@ theorem adicStratumCompletionUnit_detection (X : Scheme.{u}) [IsNoetherian X]
     obtain ⟨PX, _⟩ := ConstantCompletion.koszul_quotient_reflector
       (proEtaleModelTopology X) A I true r a ha
     apply (koszul_unit_criterion A I r a ha PX M).mp
-    haveI : ∀ α, IsIso (ConstantCompletion.completedMap (F α) A I) :=
+    have : ∀ α, IsIso (ConstantCompletion.completedMap (F α) A I) :=
       fun α ↦ (hS α).1
-    haveI : ∀ α U, IsIso (ConstantCompletion.completedMap
+    have : ∀ α U, IsIso (ConstantCompletion.completedMap
         (sliceAlgebra (proEtaleModelTopology (s.domain α)) U) A I) :=
       fun α U ↦ (hU α U).1
     apply adicStratumCoverConservativity X A I s V hV

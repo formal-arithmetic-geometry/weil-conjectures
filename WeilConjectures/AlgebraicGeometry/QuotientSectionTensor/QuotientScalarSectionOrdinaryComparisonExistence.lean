@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientScalarSec
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.style.haveILetI false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
 
@@ -63,8 +62,8 @@ theorem scalar_section_ordinary_comparison_exists (T : Scheme.{u})
       letI := hIso M
       exact asIso (ordinary.app M)) (by
       intro M N f
-      letI := hIso M
-      letI := hIso N
+      let := hIso M
+      let := hIso N
       exact (ordinary.naturality f).trans (by simp))
   refine ⟨comparison, ?_⟩
   intro M W m

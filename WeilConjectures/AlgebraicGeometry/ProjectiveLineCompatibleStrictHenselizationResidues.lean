@@ -25,7 +25,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenseliza
 
 universe u
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 
 open CategoryTheory Limits
 
@@ -78,12 +77,12 @@ theorem Etale.projectiveLine_compatibleStrictHenselizationResidues
   obtain ⟨A, B, cA, cB, hA, hB, sA, sB, φ, hφ, eA, eB, ρA, ρB,
       hUA, hUB, hbase, hρA, hρB, _⟩ :=
     Etale.projectiveLine_compatibleStrictHenselizationResidues_core σ τ ι hι hσ hτ ν
-  letI := cA
-  letI := cB
-  letI := hA
-  letI := hB
-  letI := sA
-  letI := sB
+  let := cA
+  let := cB
+  let := hA
+  let := hB
+  let := sA
+  let := sB
   obtain ⟨ψ, hψ, hbase', hres⟩ :=
     Etale.compatibleStrictHenselization_residue_square
       σ τ ι hι ν eA eB ρA ρB hρA hρB
