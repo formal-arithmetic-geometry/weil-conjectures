@@ -22,7 +22,6 @@ open CategoryTheory.Limits
 
 namespace CategoryTheory
 
-set_option linter.style.haveILetI false
 
 /-- The Gabriel--Popescu abelian presentation and the compact triangulated source use
 one and the same module category, linked by a triangulated equivalence.
@@ -74,11 +73,11 @@ theorem grothendieckDerived_gabriel_popescu_presentation
         IsIso adj₀.counit := by
     exact gabriel_popescu_abelian_core (A := A)
   obtain ⟨S, rS, hD, F, U, adj₀, addF, limF, colimF, hc⟩ := hcore
-  letI := rS
-  letI := hD
-  letI := addF
-  letI := limF
-  letI := colimF
+  let := rS
+  let := hD
+  let := addF
+  let := limF
+  let := colimF
   refine ⟨S, rS, hD, F, U, adj₀, addF, limF, colimF, hc, ?_⟩
   exact compact_derived_source_core (A := A) (S := S)
 

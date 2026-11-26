@@ -718,8 +718,6 @@ end GeometricConstruction
 
 open GeometricConstruction
 
--- Keep the pre-existing named nondependent forall binder `hRing` unchanged.
-set_option linter.unusedVariables false in
 -- The statement records every operation and its underlying comparison.
 /-- Construct the transported module functors and their operation comparisons.
 Source: Stacks Project, Tags 03D1 and 03D2
@@ -745,7 +743,7 @@ theorem geometric_module_construction
         (CategoryTheory.forget CommRingCat.{u})).obj A)
         ((sheafCompose K (CategoryTheory.forget CommRingCat.{u})).obj A)) ⟶
         ((sheafCompose K (CategoryTheory.forget CommRingCat.{u})).obj A))
-    (hRing : (∀ (W : Cᵒᵖ) (x : (((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).obj R) ⨯
+    (_hRing : (∀ (W : Cᵒᵖ) (x : (((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).obj R) ⨯
         ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).obj R)).obj.obj W),
         addR.hom.app W x = @Add.add (R.obj.obj W) inferInstance (((prod.fst : ((sheafCompose J
           (CategoryTheory.forget CommRingCat.{u})).obj R) ⨯ ((sheafCompose J (CategoryTheory.forget

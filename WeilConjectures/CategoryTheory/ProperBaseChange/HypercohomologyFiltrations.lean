@@ -437,7 +437,6 @@ attribute [local irreducible] TruncationCouple.bridgeIso
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 / -- The three spectral sequences have the stated E₂ terms, finite filtrations, and unconditional
   convergence, the first couple is the truncation couple for f_*
   through `TruncationCouple.bridgeIso`, and the middle one is the exact inverse image of the

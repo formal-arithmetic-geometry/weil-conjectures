@@ -314,6 +314,7 @@ private theorem slice_pushforward_colimits
   exact preservesColimits_of_reflects_of_preserves (SheafOfModules.pushforward.{z} φ) T
 
 -- Infer the native specialization once, before its representative equation is used.
+-- The statement is inferred from the tactic block; a `theorem` would need it written out.
 set_option linter.defProp false in
 private def nativeTensorRestrictionComparison := by
   let := nativeModules.{c, v, u} J A

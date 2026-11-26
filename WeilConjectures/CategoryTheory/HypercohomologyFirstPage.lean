@@ -37,7 +37,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Functor
 
-set_option linter.unusedVariables false in
 /-- The second-degree filtration of a Cartan--Eilenberg total complex gives the first
 hypercohomology spectral sequence, with its induced differential and derived abutment.
 Source: Stacks Project, Tags 0130 and 015H. -/
@@ -52,10 +51,10 @@ theorem exists_hypercohomology_firstPage
     (hbelow : ∃ b : ℤ, ∀ s : ℤ, s < b → IsZero (I.X s))
     (hterms : ∀ (s : ℤ) (r : ℕ), Injective ((I.X s).X r))
     (hrows : ∀ s : ℤ, QuasiIso (a.f s))
-    (hinjective : ∀ (s : ℤ) (r : ℕ),
+    (_hinjective : ∀ (s : ℤ) (r : ℕ),
       Injective ((I.cycles s).X r) ∧
       Injective ((image (I.d (s - 1) s)).X r) ∧ Injective ((I.homology s).X r))
-    (hquasi : ∀ s : ℤ,
+    (_hquasi : ∀ s : ℤ,
       QuasiIso (HomologicalComplex.cyclesMap a s) ∧
       QuasiIso (image.map (Arrow.homMk' (a.f (s - 1)) (a.f s) (a.comm (s - 1) s))) ∧
       QuasiIso (HomologicalComplex.homologyMap a s)) :

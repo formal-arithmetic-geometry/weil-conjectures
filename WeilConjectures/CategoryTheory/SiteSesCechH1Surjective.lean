@@ -225,7 +225,6 @@ private lemma site_compatible {C : Type u} [Category.{v} C]
   have hfb := face 0 h₀ b (fun k ↦ by fin_cases k; simp only [eqToHom_refl, Category.comp_id]; rfl)
   exact hfa.symm.trans (h.symm.trans hfb)
 
-set_option linter.unusedVariables false in
 /-- A short exact sequence of abelian sheaves on a site is surjective on sections over `U`
 if the kernel has vanishing Čech H¹ on a cofinal system of coverings.
 Source: Stacks Project, Cohomology on Sites, Lemma 03F8. -/
@@ -234,7 +233,7 @@ theorem surjective_sections_of_site_cech_h1_vanishing
     [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks]
     (S : ShortComplex (Sheaf J.toGrothendieck AddCommGrpCat.{max u v r}))
     (hS : S.ShortExact) (U : C)
-    (Cov : ∀ (I : Type (max u v w)) (V : I → C) (f : ∀ i, V i ⟶ U), Prop)
+    (Cov : ∀ (I : Type (max u v w)) (V : I → C) (_f : ∀ i, V i ⟶ U), Prop)
     (hcover : ∀ (I : Type (max u v w)) (V : I → C) (f : ∀ i, V i ⟶ U),
       Cov I V f → Presieve.ofArrows V f ∈ J U)
     (hcofinal : ∀ (I : Type (max u v w)) (V : I → C) (f : ∀ i, V i ⟶ U),

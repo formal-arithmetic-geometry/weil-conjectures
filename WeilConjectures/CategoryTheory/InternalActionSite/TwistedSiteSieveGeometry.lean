@@ -241,13 +241,12 @@ private theorem generated_topology (J : Precoverage C) (X : Object K) (S : Sieve
         (sieveEquiv K (Object.mk (K := K) X) S) ∈ _ at hh
       rwa [(sieveEquiv K (Object.mk (K := K) X)).symm_apply_apply] at hh
 
-set_option linter.unusedVariables false in
 /-- Labeled pullbacks, normalization, sieve correspondence and generated covering topology.
 
 Source: Stacks Sites 00VH, 00Z4, 00ZD for the background axioms. -/
 theorem sieve_geometry [HasFiniteLimits C] (J : Precoverage C)
     (hJ : J.IsSiteForCoverings)
-    (hK : Presheaf.IsSheaf J.toGrothendieck (K ⋙ forget GrpCat.{u})) :
+    (_hK : Presheaf.IsSheaf J.toGrothendieck (K ⋙ forget GrpCat.{u})) :
     (∀ (X : Object K) (a : K.obj (op X.base)),
       (Arrow.mk (𝟙 X.base) a : X ⟶ X) ≫ Arrow.mk (𝟙 X.base) a⁻¹ = 𝟙 X ∧
       (Arrow.mk (𝟙 X.base) a⁻¹ : X ⟶ X) ≫ Arrow.mk (𝟙 X.base) a = 𝟙 X) ∧

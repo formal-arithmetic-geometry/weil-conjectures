@@ -24,7 +24,6 @@ Source: Stacks Project, Algebra, Tag 00CM; Modules on Sites, Tags 03CY and 03EK.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 2048
 set_option maxRecDepth 2048
 universe uC vC u v w uD vD uT vT uB vB r a b
@@ -83,6 +82,7 @@ private abbrev localizationInvAux
     ringedSectionLocalizationCarrierOfUniverses O s X :=
   IsLocalization.Away.invSelf (R := O.obj.obj X) (sectionValueAux O s X)
 
+omit [EssentiallySmall.{u, vC, uC} C] in
 private theorem localization_map_invAux
     (s : (O.obj ⋙ forget CommRingCat).sections) {X Y : Cᵒᵖ} (g : X ⟶ Y) :
     ringedSectionLocalizationMapOfUniverses O s g
@@ -114,6 +114,7 @@ private def fractionMapAux
         change ringedSectionLocalizationMapOfUniverses O s g _ = _
         rw [map_pow, localization_map_invAux]))
 
+omit [EssentiallySmall.{u, vC, uC} C] in
 private theorem fractionMap_applyAux
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ)
     (X : Cᵒᵖ) (a : O.obj.obj X) :
@@ -123,12 +124,15 @@ private theorem fractionMap_applyAux
   change a • localizationInvAux O s X ^ n = _
   exact Algebra.smul_def a _
 
+omit [EssentiallySmall.{u, vC, uC} C] [HasSheafify J AddCommGrpCat]
+    [J.WEqualsLocallyBijective AddCommGrpCat] [HasSheafify J CommRingCat] in
 private theorem scalar_applyAux
     (s : (O.obj ⋙ forget CommRingCat).sections) (X : Cᵒᵖ) (a : O.obj.obj X) :
     (regularScalarAux O s).asHom.val.app X a = a * sectionValueAux O s X := by
   change a • sectionValueAux O s X = _
   rfl
 
+omit [EssentiallySmall.{u, vC, uC} C] in
 private theorem fractionMap_stepAux
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
     (regularScalarAux O s).asHom.val ≫ fractionMapAux O s (n + 1) = fractionMapAux O s n := by
@@ -208,6 +212,7 @@ private def localizationSheafMapAux
       (PresheafOfModules.sheafificationAdjunction
         (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).obj)).unit.app _)
 
+omit [EssentiallySmall.{u, vC, uC} C] in
 private theorem localizationSheafMap_stepAux
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
     (regularScalarAux O s).asHom ≫ localizationSheafMapAux O s (n + 1) =
@@ -258,12 +263,14 @@ private def localizationSheafCoconeIsColimitAux
     rw [Adjunction.homEquiv_unit, ← Category.assoc]
     exact congrArg (fun f ↦ U.map f) (hm n)
 
+omit [EssentiallySmall.{u, vC, uC} C] in
 private theorem localizationSheafMap_zeroAux
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     localizationSheafMapAux O s 0 = ringedSectionLocalizationUnitOfUniverses O s := by
   unfold localizationSheafMapAux ringedSectionLocalizationUnitOfUniverses
   congr 2
 
+omit [EssentiallySmall.{u, vC, uC} C] in
 /-- The localization of the regular module is its multiplication colimit, with
 zeroth leg the localization unit.
 Source: Stacks Project, Algebra, Tag 00CM, and Modules on Sites, Tag 03CY. -/
@@ -446,7 +453,6 @@ private theorem tensor_scalar_colimitAux
   · intro n
     simp only [Linear.smul_comp, Linear.comp_smul, Category.id_comp, Category.comp_id]
 
-set_option linter.style.whitespace false in
 -- The sectionwise tensor normalization has a large elaborated type.
 /-- The fraction legs exhibit restricted scalar extension as the module-sheaf colimit.
 Source: Stacks Project, algebra.tex Tag 00CM; sites-modules.tex Tags 03CY and 03EK. -/
@@ -623,7 +629,6 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
   [HasSheafify J CommRingCat.{u}]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
-set_option linter.style.whitespace false in
 /-- The ordinary sequential colimit of a scalar sequence of complexes.
 Source: Stacks Project, algebra.tex, Tag 00CM; sites-modules.tex, Tags 03CY and 03EK. -/
 theorem scalarLocalization_complexColimitOfUniverses

@@ -20,7 +20,6 @@ compatible with tensor balancing (on both sides) and with the multiplication uni
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 4096
 universe u w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -44,10 +43,10 @@ theorem pbcTensor_ext (M : pbcModules T R) (N : pbcModules T S)
     (h : ∀ (U : T.ProEtᵒᵖ) (x : M.val.obj U),
       f.val.app U (pbcTensorSection φ M U 1 x) = g.val.app U (pbcTensorSection φ M U 1 x)) :
     f = g := by
-  haveI : HasWeakSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+  have : HasWeakSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
     (WeilConjectures.integralCoefficientAbSheafify.{u, 0} T).isRightAdjoint
-  haveI := WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
-  haveI := AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sectionRingHasSheafCompose
+  have := WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  have := AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sectionRingHasSheafCompose
     (ProEt.topology T)
   exact RamifiedPullback.TensorProof.tensorSection_ext.{u + 1, u, u + 1} φ (pbcExtend φ)
     (pbcExtensionExistence φ).choose_spec.choose M N f g h
@@ -57,10 +56,10 @@ theorem pbcTensor_map {M N : pbcModules T R} (f : M ⟶ N) (U : T.ProEtᵒᵖ)
     (s : S.obj.obj U) (x : M.val.obj U) :
     ((pbcExtend φ).map f).val.app U (pbcTensorSection φ M U s x) =
       pbcTensorSection φ N U s (f.val.app U x) := by
-  haveI : HasWeakSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+  have : HasWeakSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
     (WeilConjectures.integralCoefficientAbSheafify.{u, 0} T).isRightAdjoint
-  haveI := WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
-  haveI := AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sectionRingHasSheafCompose
+  have := WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  have := AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sectionRingHasSheafCompose
     (ProEt.topology T)
   exact RamifiedPullback.TensorProof.tensorSection_map.{u + 1, u, u + 1} φ (pbcExtend φ)
     (pbcExtensionExistence φ).choose_spec.choose

@@ -46,7 +46,6 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
   (a : F ⊣ U) (E : DerivedCategory C ⥤ DerivedCategory D)
   (ad : E ⊣ U.mapDerivedCategory)
 
-set_option linter.flexible false in
 private theorem single_unit_formula (M : C) :
     (ad.homEquiv _ _).symm
       ((DerivedCategory.singleFunctor _ 0).map (a.unit.app M) ≫
@@ -77,9 +76,15 @@ private theorem single_unit_formula (M : C) :
   refine HomologicalComplex.hom_ext _ _ fun i => ?_
   by_cases hi : i = 0
   · subst hi
-    simp [Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctors,
+    simp only [Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctors,
       HomologicalComplex.single_map_f_self, HomologicalComplex.singleObjXSelf,
-      HomologicalComplex.singleObjXIsoOfEq]
+      HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
+      Functor.id_obj, Functor.mapHomologicalComplex_obj_X, Functor.comp_obj,
+      HomologicalComplex.comp_f, Adjunction.mapHomologicalComplex_unit_app_f,
+      Functor.mapHomologicalComplex_map_f,
+      HomologicalComplex.singleMapHomologicalComplex_hom_app_self, Functor.map_comp,
+      Adjunction.unit_naturality_assoc, Category.id_comp,
+      HomologicalComplex.singleMapHomologicalComplex_inv_app_self, Category.assoc]
     change a.unit.app M ≫ (𝟙 _ ≫ U.map (𝟙 _)) = a.unit.app M ≫ U.map (𝟙 _)
     rw [Category.id_comp]
   · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi).eq_of_src _ _
@@ -151,7 +156,6 @@ private lemma singleCochainTensorIso_naturality'
     CochainComplex.ιTensorObj_whiskerLeft_f]
   simp [HomologicalComplex.single, Category.assoc]
 
-set_option linter.flexible false in
 open AlgebraicGeometry.Etale in
 private theorem single_tensor_map (M N : C) :
     ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) F).app
@@ -181,9 +185,13 @@ private theorem single_tensor_map (M N : C) :
   simp only [tensorHom_def, HomologicalComplex.comp_f, Category.assoc]
   erw [CochainComplex.Monoidal.ι_whiskerRight_assoc,
     CochainComplex.ιTensorObj_whiskerLeft_f_assoc]
-  simp [HomologicalComplex.mapBifunctorComparisonApp, Functor.OplaxMonoidal.δNatTrans,
-    HomologicalComplex.single,
-    HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq]
+  simp only [HomologicalComplex.mapBifunctorComparisonApp, Functor.OplaxMonoidal.δNatTrans,
+    HomologicalComplex.single, HomologicalComplex.singleObjXSelf,
+    HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
+    ↓dreduceIte, Functor.comp_obj, Functor.mapHomologicalComplex_obj_X,
+    CategoryTheory.Functor.map_id, curriedTensor_obj_obj,
+    HomologicalComplex.singleMapHomologicalComplex_hom_app_self, id_whiskerRight, whiskerLeft_id,
+    Category.id_comp, ↓reduceDIte, eqToHom_refl, Category.comp_id]
   have hs := congrArg (fun f ↦ f.f (0 : ℤ))
     (singleCochainTensorIso (F.obj M) (F.obj N)).inv_hom_id
   simp only [HomologicalComplex.comp_f, singleCochainTensorIso_inv_f',

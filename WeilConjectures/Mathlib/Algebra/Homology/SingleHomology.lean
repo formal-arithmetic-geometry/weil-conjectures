@@ -46,7 +46,6 @@ namespace Functor
 variable (F : C ⥤ D) [F.Additive] [F.PreservesHomology] {ι : Type*} (c : ComplexShape ι)
   (j : ι) [DecidableEq ι]
 
-set_option linter.flexible false in
 /-- The isomorphism `H_j(F(A[j])) ≅ F(H_j(A[j]))` is compatible with the identifications
 `H_j(A[j]) ≅ A` and `F(A[j]) ≅ F(A)[j]`. -/
 lemma mapHomologicalComplexHomologyIso_hom_app_single (A : C) :
@@ -58,8 +57,13 @@ lemma mapHomologicalComplexHomologyIso_hom_app_single (A : C) :
   have hμ : (F.mapHomologicalComplexHomologyIso c j).hom.app
       ((HomologicalComplex.single C c j).obj A) =
       ((((HomologicalComplex.single C c j).obj A).sc j).mapHomologyIso F).hom := by
-    simp [mapHomologicalComplexHomologyIso, mapHomologicalComplexCompShortComplexFunctorIso,
-      ShortComplex.homologyFunctorIso]
+    simp only [comp_obj, mapHomologicalComplexHomologyIso,
+      mapHomologicalComplexCompShortComplexFunctorIso, isoWhiskerRight_refl,
+      ShortComplex.homologyFunctorIso, Iso.refl_trans, Iso.trans_hom, isoWhiskerLeft_hom,
+      Iso.symm_hom, isoWhiskerRight_hom, NatTrans.comp_app, whiskerLeft_app,
+      HomologicalComplex.homologyFunctorIso_hom_app, associator_inv_app, mapShortComplex_obj,
+      associator_hom_app, NatIso.ofComponents_hom_app, whiskerRight_app,
+      HomologicalComplex.homologyFunctorIso_inv_app, id_comp]
     erw [Category.id_comp, Category.id_comp, Functor.map_id, Category.comp_id]
   rw [hμ, ← cancel_epi (((HomologicalComplex.single C c j).obj A).sc j |>.map F).homologyπ]
   have h₁ := ShortComplex.homologyπ_mapHomologyIso_hom F

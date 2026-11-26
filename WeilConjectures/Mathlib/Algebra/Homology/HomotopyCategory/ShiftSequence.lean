@@ -26,7 +26,6 @@ namespace CategoryTheory.Functor
 variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
   (F : C ⥤ D) [F.Additive] [F.PreservesHomology]
 
-set_option linter.flexible false in
 /-- The isomorphisms `H^a(F(K)) ≅ F(H^a(K))` are compatible with the isomorphisms
 `H^a(K⟦n⟧) ≅ H^{a'}(K)` for `n + a = a'`. -/
 lemma mapHomologicalComplexHomologyIso_hom_app_shiftIso (n a a' : ℤ) (h : n + a = a')
@@ -53,13 +52,28 @@ lemma mapHomologicalComplexHomologyIso_hom_app_shiftIso (n a a' : ℤ) (h : n + 
       (CochainComplex.shiftShortComplexFunctorIso D n a a' h).hom.app
         ((F.mapHomologicalComplex (.up ℤ)).obj K) := by
     ext <;>
-      (simp [Functor.map_units_smul, HomologicalComplex.XIsoOfEq, eqToHom_map]
+      (simp only [comp_obj, mapShortComplex_obj, ShortComplex.map_X₁, ShortComplex.map_X₂,
+        ShortComplex.map_X₃, ShortComplex.comp_τ₁, ShortComplex.comp_τ₂, ShortComplex.comp_τ₃,
+        HomologicalComplex.shortComplexFunctor_map_τ₁,
+        HomologicalComplex.shortComplexFunctor_map_τ₂,
+        HomologicalComplex.shortComplexFunctor_map_τ₃,
+        mapHomologicalComplex_commShiftIso_inv_app_f, CochainComplex.shiftFunctor_obj_X',
+        mapHomologicalComplex_obj_X, mapShortComplex_map_τ₁, mapShortComplex_map_τ₂,
+        mapShortComplex_map_τ₃, CochainComplex.shiftShortComplexFunctorIso_hom_app_τ₁,
+        CochainComplex.shiftShortComplexFunctorIso_hom_app_τ₂,
+        CochainComplex.shiftShortComplexFunctorIso_hom_app_τ₃, HomologicalComplex.XIsoOfEq,
+        eqToIso.hom, map_units_smul, eqToHom_map, Linear.comp_units_smul, smul_left_cancel_iff]
        erw [Category.id_comp])
   have hμ (L : CochainComplex C ℤ) (b : ℤ) :
       (F.mapHomologicalComplexHomologyIso (.up ℤ) b).hom.app L =
         ((L.sc b).mapHomologyIso F).hom := by
-    simp [mapHomologicalComplexHomologyIso, mapHomologicalComplexCompShortComplexFunctorIso,
-      ShortComplex.homologyFunctorIso]
+    simp only [comp_obj, mapHomologicalComplexHomologyIso,
+      mapHomologicalComplexCompShortComplexFunctorIso, isoWhiskerRight_refl,
+      ShortComplex.homologyFunctorIso, Iso.refl_trans, Iso.trans_hom, isoWhiskerLeft_hom,
+      Iso.symm_hom, isoWhiskerRight_hom, NatTrans.comp_app, whiskerLeft_app,
+      HomologicalComplex.homologyFunctorIso_hom_app, associator_inv_app, mapShortComplex_obj,
+      associator_hom_app, NatIso.ofComponents_hom_app, whiskerRight_app,
+      HomologicalComplex.homologyFunctorIso_inv_app, id_comp]
     erw [Category.id_comp, Category.id_comp, Functor.map_id, Category.comp_id]
   rw [hμ, hμ, e₁, e₂, ← ShortComplex.mapHomologyIso_hom_naturality, ← key,
     ShortComplex.homologyMap_comp, Category.assoc]
