@@ -387,6 +387,7 @@ abbrev pbcStageLocalization (E : Padic.FiniteCoefficientFields l Ω) :=
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem pbcStageCoefficientMap_eq (h : E ≤ F) :
     pbcCompletedScalarMap l Ω T h =
       pbcScalarCoefficientMap l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω F)
@@ -424,6 +425,7 @@ private theorem pbcStageCoefficientMap_eq (h : E ≤ F) :
     exact (pbcScalarCoefficientMap_exists l (pbcFiniteField.{u} l Ω E)
       (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) T).exists.choose_spec n
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- Finite coefficient extension preserves the three defining integral conditions. -/
 theorem pbcAmbientScalarExtension_preserves (h : E ≤ F)
     [IsNoetherian T] (_hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)
@@ -466,6 +468,7 @@ private theorem pbcStageLocalization_isLocalization (E : Padic.FiniteCoefficient
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem pbcIntegralScalarExtension_eq (h : E ≤ F) :
     pbcIntegralScalarExtension l Ω T hdim hl h =
       pbcEmbeddingIntegralTensor l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω F)
@@ -499,6 +502,7 @@ private theorem pbcStageFunctor_ext
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] ULift.module in
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- Integral tensor extension has a unique factorization through raw localization.
 The equality fixes objects as well as integral morphisms; inverses of uniformizer
 multiples then fix every fraction. No arbitrary functor is chosen. -/
@@ -590,7 +594,7 @@ theorem pbcCompletedScalarMap_comp (h : E ≤ F) (k : F ≤ G) :
   · exact (pbcCompletedScalarMap_exists l Ω T (h.trans k)).exists.choose_spec
 
 set_option backward.isDefEq.respectTransparency false in
-omit [IsNoetherian T] in
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian T] in
 private theorem pbcCompletedScalarMap_id (E : Padic.FiniteCoefficientFields l Ω) :
     pbcCompletedScalarMap l Ω T (le_refl E) = 𝟙 _ := by
   have hi : pbcIntegerInclusion.{u} l Ω (le_refl E) = RingHom.id _ := by
@@ -1535,6 +1539,7 @@ theorem pbcScalarSystem_units (h : E ≤ F) :
       (pbcTransportIso_heq
         (congrArg (fun B ↦ pbcScalarExtension l Ω T hdim hl h ⋙ B) hsF) _)
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- Rationalized tensor extension is additive. -/
 @[instance] theorem pbcScalarExtension_additive (h : E ≤ F) :
     (pbcScalarExtension l Ω T hdim hl h).Additive := by

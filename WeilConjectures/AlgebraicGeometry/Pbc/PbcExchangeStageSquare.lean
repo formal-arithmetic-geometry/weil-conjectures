@@ -160,6 +160,7 @@ variable (T : Scheme.{u}) [IsNoetherian T] (hdim : ∃ m : ℕ, topologicalKrull
   (hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
   {E F : Padic.FiniteCoefficientFields l Ω}
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- Integral scalar extension of the stages is the embedding tensor of the small fields. -/
 theorem pbcIntegralScalarExtension_eq_tensor (h : E ≤ F) :
     pbcIntegralScalarExtension l Ω T hdim hl h =
@@ -170,6 +171,7 @@ theorem pbcIntegralScalarExtension_eq_tensor (h : E ≤ F) :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] ULift.module in
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- The rational embedding tensor is compatible with localization, objectwise literally. -/
 theorem pbcStageLocalization_comp_rationalScalarExtension (h : E ≤ F) :
     pbcStageLocalization l Ω T E ⋙ pbcRationalScalarExtension l (pbcFiniteField.{u} l Ω E)
@@ -190,6 +192,7 @@ theorem pbcStageLocalization_comp_rationalScalarExtension (h : E ≤ F) :
   simp only [map_one]
   rfl
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- For distinct stages the chosen scalar extension is the rational embedding tensor. -/
 theorem pbcScalarExtension_eq_rational (h : E ≤ F) (hEF : E ≠ F) :
     pbcScalarExtension l Ω T hdim hl h =

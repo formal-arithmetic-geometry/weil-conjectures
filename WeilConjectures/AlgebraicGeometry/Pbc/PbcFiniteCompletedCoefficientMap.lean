@@ -132,8 +132,7 @@ def pbcFiniteScalarMap (h : E ≤ F) (n : ℕ) :
       (CommRingCat.ofHom (pbcQuotientInclusion l Ω h n)) ≫
     (pbcLevelConstantComparison T (pbcStageDatum.{u} l Ω F) n).hom
 
--- Omitting the unused `[IsAlgClosure ℚ_[l] Ω]` would cascade into downstream statements.
-set_option linter.unusedSectionVars false in
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- The finite projections determine a unique map of completed coefficient sheaves. -/
 theorem pbcCompletedScalarMap_exists (h : E ≤ F) :
     ∃! c : pbcAdicCompletion T (pbcStageDatum.{u} l Ω E) ⟶

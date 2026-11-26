@@ -190,12 +190,14 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω
   [IsAlgClosure (Padic l) Ω]
   (T : Scheme.{u}) {E F : Padic.FiniteCoefficientFields l Ω}
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- Ordinary finite coefficient extension between stages preserves finite limits. -/
 theorem pbcExtend_completedScalarMap_preservesFiniteLimits (h : E ≤ F) :
     PreservesFiniteLimits (pbcExtend (pbcCompletedScalarMap l Ω T h)) := by
   rw [pbcStageCoefficientMap_eq l Ω T h]
   exact (WeilConjectures.scalarExtension_exact l _ _ _ T).1
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- Ordinary finite coefficient extension between stages preserves finite colimits. -/
 theorem pbcExtend_completedScalarMap_preservesFiniteColimits (h : E ≤ F) :
     PreservesFiniteColimits (pbcExtend (pbcCompletedScalarMap l Ω T h)) := by

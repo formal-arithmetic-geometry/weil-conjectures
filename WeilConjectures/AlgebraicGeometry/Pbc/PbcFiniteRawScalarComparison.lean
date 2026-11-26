@@ -120,7 +120,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-omit [IsNoetherian T] dT iT in
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian T] dT iT in
 private theorem rawScalar_coefficientMap :
     pbcCompletedScalarMap l Ω T h =
       pbcScalarCoefficientMap l (pbcFiniteField.{u} l Ω E)
@@ -150,6 +150,7 @@ private theorem rawScalar_coefficientMap :
     exact (pbcScalarCoefficientMap_exists l (pbcFiniteField.{u} l Ω E)
       (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) T).exists.choose_spec n
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem rawScalar_integralTensor :
