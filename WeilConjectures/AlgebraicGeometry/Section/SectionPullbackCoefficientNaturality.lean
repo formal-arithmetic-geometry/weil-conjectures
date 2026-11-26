@@ -162,7 +162,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.privateModule false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 universe u uB
@@ -183,7 +182,7 @@ attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint
 
 attribute [local irreducible] leftDerivedUpperStarComp leftDerivedUpperStarCompSectionIso
 
-private theorem inverse_square {C : Type*} [Category C] {X Y Z W : C}
+theorem inverse_square {C : Type*} [Category C] {X Y Z W : C}
     (u : X ⟶ Y) (s : Y ≅ Z) (t : X ≅ W) (v : W ≅ Z)
     (h : u ≫ s.hom = t.hom ≫ v.hom) :
     v.inv ≫ t.inv ≫ u = s.inv := by
