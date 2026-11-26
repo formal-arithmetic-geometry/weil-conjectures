@@ -16,7 +16,6 @@ Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.all false
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false

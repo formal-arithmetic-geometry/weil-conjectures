@@ -17,7 +17,6 @@ Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.all false
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
@@ -37,9 +36,6 @@ open AdicFiniteRealization
 set_option allowUnsafeReducibility true in
 attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.Stage
   GeneralAlgebraicallyClosedCoefficients.stageCategory
-  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_1
-  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_3
-  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_5
   closureRing finiteCondensedClosureFunctor ProEtale.constructibleToPadicAlgCl
   pbcFiniteField pbcFiniteFieldField pbcFiniteFieldAlgebra
   sfRationalConstructibleLocalization
@@ -160,7 +156,7 @@ theorem finiteCondensedIntegralTensorTransition
             (AlgebraicallyClosedCoefficients.coefficientInclusion l (PadicAlgCl l) E L h)).app
               K.obj)
       integralTensorSquare (S.map f) ((q E).app K) ((q L).app B) (R.map t) := by
-  letI := C.commutative
+  have := C.commutative
   intro R S q E L h K
   let B :=
     (((GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X).T h).obj

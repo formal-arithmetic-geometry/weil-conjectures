@@ -105,7 +105,6 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
-set_option linter.all false
 
 attribute [local irreducible] HasDerivedCategory.standard
 
@@ -142,8 +141,8 @@ def nativeCondensedModules (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :=
 
 instance nativeCondensedModules_isEquivalence (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     (nativeCondensedModules l X).IsEquivalence := by
-  letI := ProEtale.nativeScalarForgetting_isEquivalence l X
-  letI : (Mod.comap (condensedNativeMap l X)).IsEquivalence :=
+  have := ProEtale.nativeScalarForgetting_isEquivalence l X
+  have : (Mod.comap (condensedNativeMap l X)).IsEquivalence :=
     (Mod.comapEquivalenceOfIsIso (condensedNativeMap l X)).isEquivalence_functor
   unfold nativeCondensedModules
   infer_instance

@@ -20,7 +20,6 @@ Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.all false
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
@@ -103,9 +102,6 @@ attribute [local semireducible] sfRationalConstructibleLocalization
 set_option allowUnsafeReducibility true in
 attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.Stage
   GeneralAlgebraicallyClosedCoefficients.stageCategory
-  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_1
-  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_3
-  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_5
   sfRationalConstructibleLocalization
   closureRing pbcFiniteField pbcFiniteFieldField pbcFiniteFieldAlgebra ringSheaf
   ProEtale.sheafMonoidalCategory ProEtale.sheafBraidedCategory
@@ -239,7 +235,7 @@ theorem finiteOrdinaryIntegralTensorModel_transition
             (AlgebraicallyClosedCoefficients.coefficientInclusion l (PadicAlgCl l) E L h)).app
               K.obj)
       integralTensorSquare f ((q E).app K) ((q L).app B) (R.map t) := by
-  letI := C.commutative
+  have := C.commutative
   intro R q E L h K B T f t
   have hB : B = T := finiteCondensedStageIntegralObject l X E L h K
   obtain ⟨hV, hN⟩ :=

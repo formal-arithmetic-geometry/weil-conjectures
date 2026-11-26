@@ -23,7 +23,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 set_option genSizeOf false
 set_option genInjectivity false
-set_option linter.all false
 attribute [local irreducible] HasDerivedCategory.standard
 
 universe u
@@ -74,6 +73,8 @@ abbrev integralTensorW (E : Index l (PadicAlgCl l)) :=
       (Coefficient.{u} l (PadicAlgCl l) E)))
     (sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X)
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- The published tensor-Hom rationalization is the Verdier localization at torsion.
 Source: Stacks Tag 05R6 (blueprint: lem-sf-native-integral-tensor-localization). -/
 @[instance] theorem integralTensor_localization (E : Index l (PadicAlgCl l)) :
@@ -94,7 +95,7 @@ theorem integralTensor_inverts (E : Index l (PadicAlgCl l)) :
     induction n with
     | zero => simp only [pow_zero, one_smul]; infer_instance
     | succ n ih =>
-      letI := ih
+      have := ih
       have : IsIso (F.map (t • 𝟙 Z)) := integralTensor_uniformizer_isIso l X C E Z
       have he : t ^ (n + 1) • 𝟙 Z = (t ^ n • 𝟙 Z) ≫ (t • 𝟙 Z) := by
         simp only [Linear.smul_comp, Linear.comp_smul, Category.id_comp,

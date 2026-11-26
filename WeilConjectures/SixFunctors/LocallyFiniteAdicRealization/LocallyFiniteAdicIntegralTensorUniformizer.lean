@@ -22,7 +22,6 @@ Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.all false
 attribute [local irreducible] HasDerivedCategory.standard
 
 universe u
@@ -95,16 +94,16 @@ variable [IsCommMonObj (abRing l X)] [(sections l X).Additive]
 
 private theorem native_nsmul_isIso
     (Z : DerivedCategory (pbcModules X (ringSheaf l X))) : IsIso (l • 𝟙 Z) := by
-  letI := ProEtale.nativeScalarForgetting_isEquivalence l X
-  haveI : (sections l X).IsEquivalence := by unfold sections; infer_instance
+  have := ProEtale.nativeScalarForgetting_isEquivalence l X
+  have : (sections l X).IsEquivalence := by unfold sections; infer_instance
   let e : DerivedCategory (ProEtale.AdicSheaf l X) ≌
       DerivedCategory (pbcModules X (ringSheaf l X)) :=
     (sections l X).mapDerivedCategory.asEquivalence
-  haveI : e.functor.Additive :=
+  have : e.functor.Additive :=
     inferInstanceAs ((sections l X).mapDerivedCategory.Additive)
-  haveI : e.inverse.Additive := Equivalence.inverse_additive e
-  haveI : e.inverse.Full := Equivalence.full_inverse e
-  haveI : e.inverse.Faithful := Equivalence.faithful_inverse e
+  have : e.inverse.Additive := Equivalence.inverse_additive e
+  have : e.inverse.Full := Equivalence.full_inverse e
+  have : e.inverse.Faithful := Equivalence.faithful_inverse e
   let R := ULift.{u + 1} (PadicAlgCl l)
   have h0 : (l : R) ≠ 0 := by
     intro he
@@ -112,15 +111,14 @@ private theorem native_nsmul_isIso
     have he'' : (l : ℚ_[l]) = 0 :=
       (algebraMap ℚ_[l] (PadicAlgCl l)).injective (by simpa only [map_natCast, map_zero] using he')
     exact (Nat.cast_ne_zero.mpr (Fact.out : l.Prime).ne_zero) he''
-
-  haveI : IsIso ((l : R) • 𝟙 (e.inverse.obj Z)) := by
+  have : IsIso ((l : R) • 𝟙 (e.inverse.obj Z)) := by
     refine ⟨⟨(l : R)⁻¹ • 𝟙 _, ?_, ?_⟩⟩ <;>
       simp only [Linear.smul_comp, Linear.comp_smul, Category.id_comp,
         smul_smul, mul_inv_cancel₀ h0, inv_mul_cancel₀ h0, one_smul]
-  haveI : IsIso (e.inverse.map (l • 𝟙 Z)) := by
+  have : IsIso (e.inverse.map (l • 𝟙 Z)) := by
     rw [e.inverse.map_nsmul, e.inverse.map_id, ← Nat.cast_smul_eq_nsmul R]
     infer_instance
-  letI : e.inverse.ReflectsIsomorphisms :=
+  have : e.inverse.ReflectsIsomorphisms :=
     reflectsIsomorphisms_of_full_and_faithful e.inverse
   exact isIso_of_reflects_iso _ e.inverse
 

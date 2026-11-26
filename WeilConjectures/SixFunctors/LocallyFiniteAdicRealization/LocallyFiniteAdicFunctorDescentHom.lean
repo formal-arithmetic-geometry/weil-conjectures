@@ -23,7 +23,6 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
-set_option linter.all false
 
 attribute [local irreducible] HasDerivedCategory.standard
 
@@ -40,9 +39,9 @@ attribute [local irreducible] sections CoefficientPresentation.integralMap
 private theorem finiteCondensed_faithful (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)) :
     (ProEtale.constructibleToPadicAlgCl X l E).Faithful := by
-  letI := ProEtale.faithful_leftDerivedExtendScalarsToPadicAlgCl X l E
+  have := ProEtale.faithful_leftDerivedExtendScalarsToPadicAlgCl X l E
   let I := (ProEtale.boundedConstructible (ProEtale.padicAlgClRingObj X l)).ι
-  haveI : (ProEtale.constructibleToPadicAlgCl X l E ⋙ I).Faithful :=
+  have : (ProEtale.constructibleToPadicAlgCl X l E ⋙ I).Faithful :=
     inferInstanceAs (((ProEtale.boundedConstructible
       (ProEtale.padicSubfieldRingObj X l E)).ι ⋙
         ProEtale.derivedExtendScalarsToPadicAlgCl X l E).Faithful)
@@ -88,11 +87,11 @@ theorem normalizedFunctor_descent_hom
     have he := (cancel_mono
       ((ProEtale.constructibleToPadicAlgClCompIso X l hL).hom.app
         ((C.finite L.stage).obj L.obj))).mp he
-    letI := finiteCondensed_faithful l X M
+    have := finiteCondensed_faithful l X M
     have he := (ProEtale.constructibleToPadicAlgCl X l M).map_injective he
     have he := (cancel_epi ((C.scalar hK).hom.app K.obj)).mp he
     have he := (cancel_mono ((C.scalar hL).inv.app L.obj)).mp he
-    letI := C.faithful M
+    have := C.faithful M
     have he := (C.finite M).map_injective he
     exact congrArg (StageSystem.PairCategory.mkHom M hK hL) he
   · intro f
@@ -109,7 +108,7 @@ theorem normalizedFunctor_descent_hom
         ((C.finite L.stage).obj L.obj) f'
     dsimp only [ProEtale.constructibleCocone] at g hg
     let t := (C.scalar hK).inv.app K.obj ≫ g ≫ (C.scalar hL).hom.app L.obj
-    letI := C.full M
+    have := C.full M
     let u := (C.finite M).preimage t
     refine ⟨StageSystem.PairCategory.mkHom M hK hL u, ?_⟩
     apply (nativeCondensedDerived l X).map_injective
@@ -117,7 +116,7 @@ theorem normalizedFunctor_descent_hom
     have hu : (C.scalar hK).hom.app K.obj ≫ (C.finite M).map u ≫
         (C.scalar hL).inv.app L.obj = g := by
       simp only [u, t, Functor.map_preimage, Category.assoc,
-        Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app, Category.comp_id]
+        Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app]
       erw [Category.comp_id]
     have hh :
         (ProEtale.constructibleToPadicAlgClCompIso X l hK).inv.app
