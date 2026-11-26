@@ -420,8 +420,6 @@ attribute [local instance] openModuleOver_isThin
 attribute [local irreducible] Scheme.Modules.overEquiv
 attribute [local irreducible] SheafOfModules.tensorHomEquiv
 
--- Preserve the established names of the nondependent forall hypotheses.
-set_option linter.unusedVariables false in
 /-- Open-site transport of contraction by an arbitrary module-valued dual input.
 (Stacks, Tags 08DL, 08DQ and 03EO) -/
 theorem openModule_contraction_transport (X : Scheme.{u}) (U : X.Opens) :
@@ -432,13 +430,13 @@ theorem openModule_contraction_transport (X : Scheme.{u}) (U : X.Opens) :
     ∀ (e : ∀ A B : localEvaluationModules X U,
       L.obj (SheafOfModules.homObj (R := X.sheaf.over U) A B) ≅
         SheafOfModules.homObj (R := U.toScheme.sheaf) (L.obj A) (L.obj B))
-    (he : ∀ (A A' B B' : localEvaluationModules X U) (f : A' ⟶ A) (g : B ⟶ B'),
+    (_he : ∀ (A A' B B' : localEvaluationModules X U) (f : A' ⟶ A) (g : B ⟶ B'),
       L.map (SheafOfModules.homObjMap (R := X.sheaf.over U) f g) ≫ (e A' B').hom =
         (e A B).hom ≫
           SheafOfModules.homObjMap (R := U.toScheme.sheaf) (L.map f) (L.map g))
     (m : L.CoreMonoidal)
-    (hunit : m.εIso = Scheme.Modules.overEquivFunctorObjUnitIso U)
-    (hsymm : ∀ A B : localEvaluationModules X U,
+    (_hunit : m.εIso = Scheme.Modules.overEquivFunctorObjUnitIso U)
+    (_hsymm : ∀ A B : localEvaluationModules X U,
       L.map (β_ A B).hom ≫ (m.μIso B A).inv =
         (m.μIso A B).inv ≫ (β_ (L.obj A) (L.obj B)).hom)
     (A B V B' : localEvaluationModules X U)
@@ -449,10 +447,10 @@ theorem openModule_contraction_transport (X : Scheme.{u}) (U : X.Opens) :
     (v' : W ⟶ SheafOfModules.homObj (R := U.toScheme.sheaf) (L.obj A)
       (𝟙_ (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))))
     (k' : L.obj B ⟶ L.obj B')
-    (hv : h ≫ L.map v ≫ (e A (𝟙_ (localEvaluationModules X U))).hom ≫
+    (_hv : h ≫ L.map v ≫ (e A (𝟙_ (localEvaluationModules X U))).hom ≫
       SheafOfModules.homObjMap (R := U.toScheme.sheaf) (𝟙 (L.obj A))
         (Scheme.Modules.overEquivFunctorObjUnitIso U).inv = v')
-    (hk : L.map k = k'),
+    (_hk : L.map k = k'),
     (𝟙 (L.obj B) ⊗ₘ h) ≫ (m.μIso B V).hom ≫
       L.map (SheafOfModules.tensorHomEquiv (R := X.sheaf.over U) A _ _
         ((β_ A (B ⊗ V)).hom ≫ (α_ B V A).hom ≫

@@ -89,7 +89,6 @@ private theorem additive_comparisonIntoPullback_naturality
     congrArg F.map hn
 
 
-set_option linter.unusedVariables false in
 /-- The open comparison square when the restricted representative data are supplied.
 Invertibility of `comparisonIntoPullback` is never assumed. -/
 theorem exists_open_restricted_comparison_square
@@ -109,7 +108,7 @@ theorem exists_open_restricted_comparison_square
     ∃ η : H ≅ derivedPullback (pullback.fst g' U.ι) ⋙ HU,
       ∀ (K : schemeDerivedCategory X)
         (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-        (hP : P.IsKFlatTensor)
+        (_hP : P.IsKFlatTensor)
         (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
         (eP : DerivedCategory.Q.obj P ≅ K),
       let Q : CochainComplex

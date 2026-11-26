@@ -154,6 +154,7 @@ private theorem depCongrHEq {A : Sort*} {B : A → Sort*}
   cases h
   rfl
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem ambientTensor_eq (T : Scheme.{u}) [IsNoetherian T]
@@ -164,6 +165,7 @@ private theorem ambientTensor_eq (T : Scheme.{u}) [IsNoetherian T]
   unfold pbcAmbientScalarExtension pbcEmbeddingAmbientTensor
   rw [pbcStageCoefficientMap_eq l Ω T h]
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem ambientScalarShift_heq (T : Scheme.{u}) [IsNoetherian T]
@@ -196,7 +198,7 @@ private theorem actualPushShift_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-omit dX iX dY iY in
+omit dX iX dY iY [IsAlgClosure ℚ_[l] Ω] in
 private theorem ambientPushShift_exists (f : X ⟶ Y)
     {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) :
     letI : (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)).CommShift ℤ :=

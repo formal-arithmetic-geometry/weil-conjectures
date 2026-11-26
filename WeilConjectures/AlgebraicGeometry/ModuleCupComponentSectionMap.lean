@@ -36,7 +36,6 @@ attribute [local instance] cupRealizationMonoidalCategory cupRealizationSymmetri
   cupRealizationHasFunctorialFlatResolution cupRealizationIsGrothendieckAbelian
   cupRealizationDerivedMonoidal cupRealizationQLax
 
-set_option linter.unusedSectionVars false in
 private def pairingPresheaf {F G : X.Modules} (D : CupResolutionPairing F G)
     (p q : ℕ) : (D.left.K.X p).val ⊗ (D.right.K.X q).val ⟶
       (D.target.K.X (p + q)).val where
@@ -49,14 +48,13 @@ private def pairingPresheaf {F G : X.Modules} (D : CupResolutionPairing F G)
         (D.target.K.X (p + q)).val.map f (D.pair p q V.unop a b)
     exact (D.restriction p q V.unop W.unop (leOfHom f.unop) a b).symm
 
-set_option linter.unusedSectionVars false in
 private def pairingSheaf {F G : X.Modules} (D : CupResolutionPairing F G)
     (p q : ℕ) : D.left.K.X p ⊗ D.right.K.X q ⟶ D.target.K.X (p + q) :=
   (SheafOfModules.tensorObjIsoSheafification (D.left.K.X p) (D.right.K.X q)).hom ≫
     ((PresheafOfModules.sheafificationAdjunction
       (𝟙 X.ringCatSheaf.obj)).homEquiv _ _).symm (pairingPresheaf D p q)
 
-set_option linter.unusedSectionVars false in
+omit [HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] in
 private theorem pairingSheaf_apply {F G : X.Modules} (D : CupResolutionPairing F G)
     (p q : ℕ) (V : X.Opens) (a : Γ(D.left.K.X p, V))
     (b : Γ(D.right.K.X q, V)) :
@@ -85,6 +83,7 @@ private def pairingSummand {F G : X.Modules} (D : CupResolutionPairing F G)
     else 0
   else 0
 
+omit [HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] in
 /-- Sheaf tensor linearization and coproduct assembly provide the component maps and their
 section formula (Stacks, Tag 0FKU). -/
 theorem moduleCup_component_section_map_exists {F G : X.Modules} (D : CupResolutionPairing F G) :

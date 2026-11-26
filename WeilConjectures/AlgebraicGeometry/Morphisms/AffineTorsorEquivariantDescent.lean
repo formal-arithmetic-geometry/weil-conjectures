@@ -28,8 +28,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FixedOrbitProductEquiv
 @[expose] public section
 universe u
 set_option autoImplicit false
-set_option linter.unreachableTactic false
-set_option linter.unusedTactic false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 

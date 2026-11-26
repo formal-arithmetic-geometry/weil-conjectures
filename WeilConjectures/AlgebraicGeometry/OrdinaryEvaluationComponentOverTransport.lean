@@ -48,8 +48,6 @@ private theorem ordinaryTransport_congrMiddle
   subst g
   rfl
 
--- These two forall hypotheses are used after `intro` in the proof below.
-set_option linter.unusedVariables false in
 /-- A fixed normalized tensor comparison transports all ordinary evaluation components
 (Stacks, Tags 0A8X, 08DQ and 08DL). -/
 theorem ordinaryEvaluation_component_over_transport (X : Scheme.{u}) (U : X.Opens)
@@ -65,7 +63,7 @@ theorem ordinaryEvaluation_component_over_transport (X : Scheme.{u}) (U : X.Open
         SheafOfModules.homObj (R := U.toScheme.sheaf)
           (L.obj A)
           (L.obj B))
-    (he : ∀ (A A' B B' : localEvaluationModules X U) (f : A' ⟶ A) (g : B ⟶ B'),
+    (_he : ∀ (A A' B B' : localEvaluationModules X U) (f : A' ⟶ A) (g : B ⟶ B'),
       L.map
           (SheafOfModules.homObjMap (R := X.sheaf.over U) f g) ≫
           (e A' B').hom =
@@ -78,7 +76,7 @@ theorem ordinaryEvaluation_component_over_transport (X : Scheme.{u}) (U : X.Open
         homComplex (R := U.toScheme.sheaf)
           (T.obj P)
           (T.obj M))
-    (hπ : ∀ (M : CochainComplex (localEvaluationModules X U) ℤ)
+    (_hπ : ∀ (M : CochainComplex (localEvaluationModules X U) ℤ)
           (n r s : ℤ) (h : r + n = s),
         (b M).hom.f n ≫
             (Classical.choose (homComplex_projections_exists (R := U.toScheme.sheaf)))

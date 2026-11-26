@@ -62,7 +62,6 @@ private theorem dualProjection_comp_transport
 attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
   Scheme.Modules.overEquivFunctorObjUnitIso HomologicalComplex.singleMapHomologicalComplex
 
-set_option linter.unusedVariables false in
 /-- The inverse transported dual comparison recovers the unit-valued projection
 (Stacks, Tags 0A8X and 08DL). -/
 theorem ordinaryEvaluation_over_dual_projection (X : Scheme.{u}) (U : X.Opens)
@@ -78,7 +77,7 @@ theorem ordinaryEvaluation_over_dual_projection (X : Scheme.{u}) (U : X.Opens)
         SheafOfModules.homObj (R := U.toScheme.sheaf)
           (L.obj A)
           (L.obj B))
-    (he : ∀ (A A' B B' : localEvaluationModules X U) (f : A' ⟶ A) (g : B ⟶ B'),
+    (_he : ∀ (A A' B B' : localEvaluationModules X U) (f : A' ⟶ A) (g : B ⟶ B'),
       L.map
           (SheafOfModules.homObjMap (R := X.sheaf.over U) f g) ≫
           (e A' B').hom =
@@ -91,7 +90,7 @@ theorem ordinaryEvaluation_over_dual_projection (X : Scheme.{u}) (U : X.Opens)
         homComplex (R := U.toScheme.sheaf)
           (T.obj P)
           (T.obj M))
-    (hπ : ∀ (M : CochainComplex (localEvaluationModules X U) ℤ)
+    (_hπ : ∀ (M : CochainComplex (localEvaluationModules X U) ℤ)
           (n r s : ℤ) (h : r + n = s),
         (b M).hom.f n ≫
             (Classical.choose (homComplex_projections_exists.{u, u, u, u} (R := U.toScheme.sheaf)))

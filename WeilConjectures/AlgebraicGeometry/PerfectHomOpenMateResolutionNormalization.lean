@@ -226,7 +226,6 @@ private local instance schemeKInjectiveInstance (Z : Scheme.{u}) :
 attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
   DerivedCategory.Qh
 
-set_option linter.all false in
 -- Avoid repeated lint traversal of fixed adjunction data after kernel checking.
 set_option cleanup.letToHave false in
 set_option backward.isDefEq.lazyProjDelta false in
@@ -306,7 +305,7 @@ theorem perfectHomOpenComparison_counit_resolution
     exact normalizedDirectImageSquare_unit f f' B.ι b he
   have hm : (Functor.exactMateComparison F K G H
       (asIso (perfectHomOpenModuleMate s B r))).hom =
-      ((mateEquiv ah₀ ag₀).symm (TwoSquare.mk _ _ _ _ ed.hom)).natTrans := by
+      ((mateEquiv ah₀ ag₀).symm (TwoSquare.mk _ _ _ _ ed.hom)) := by
     exact Functor.exactMateComparison_eq F K G H P Q
       (Scheme.Modules.restrictAdjunction b) (schemeOpenModuleAdjunction Y B)
       (perfectHomOpenModuleComposition s B r) (asIso (perfectHomOpenModuleMate s B r))

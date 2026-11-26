@@ -114,7 +114,6 @@ public import WeilConjectures.AlgebraicGeometry.InternalSectionTensorLocalizatio
 set_option autoImplicit false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
-set_option linter.unusedSectionVars false
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -233,6 +232,7 @@ private local instance : HasColimitsOfSize.{0, 0} B := hasColimitsOfSizeShrink B
 private local instance (P Q : GradedObject ℤ A) : P.HasTensor Q := inferInstance
 private local instance (P Q : GradedObject ℤ B) : P.HasTensor Q := inferInstance
 
+omit [Abelian.HasFunctorialFlatResolution A] [Abelian.HasFunctorialFlatResolution B] in
 private theorem total_eq_native (P Q : CochainComplex A ℤ)
     (c : (F.mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q) ≅
       (F.mapHomologicalComplex (.up ℤ)).obj P ⊗
@@ -472,6 +472,7 @@ private theorem ringed_normalized : Nonempty (RingedNormalizationData J R F raw)
   exact NativeDescentData.normalized_with F d P Q (raw P Q)
     (total_eq_native F P Q (raw P Q) (hraw P Q))
 
+omit [F.IsEquivalence] in
 include hraw in
 private theorem ringed_normalized_transport
     (B : Sheaf J CommRingCat.{u + 1}) (e : R = B)
@@ -551,6 +552,7 @@ private local instance sectionFunctorEquivalence :
 private def SectionMonoidalData :=
   OrdinaryMonoidalData _ (comparison_tensorIso J R)
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}] in
 private theorem section_monoidal_data : Nonempty (SectionMonoidalData.{u} J R) := by
   exact ordinary_monoidal_data _ (comparison_tensorIso J R) (comparison_unitIso J R)
     (comparison_tensorIso_natural J R) (comparison_tensorIso_assoc J R)
@@ -573,6 +575,7 @@ private local instance internalComplexTensor
     P.HasMapBifunctor Q (curriedTensor _) :=
   InternalAbelianSheafModule.comparison_internalTotalExists J R P Q
 
+omit sourceClosed sourceGroth sourceFlat in
 private theorem ordinary_raw_summand (m : SectionMonoidalData.{u} J R)
     (P Q : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u + 1}) R) ℤ)
     (p q n : ℤ) (h : p + q = n) :
@@ -619,7 +622,7 @@ private theorem section_normalized
     inferInstance (sectionRingSheaf.{u + 1, u + 1, u} J R)
     (Mod (Sheaf J AddCommGrpCat.{u + 1}) R) inferInstance inferInstance sourceGroth
     inferInstance sourceClosed inferInstance inferInstance sourceFlat
-    (sectionModuleFunctor.{u + 1, u + 1, u} J R) inferInstance inferInstance
+    (sectionModuleFunctor.{u + 1, u + 1, u} J R) inferInstance
     m.monoidal (ordinaryComplexTensorIsoForSite J R)
     (ordinary_raw_summand J R m) B e E inferInstance inferInstance he t ht
 

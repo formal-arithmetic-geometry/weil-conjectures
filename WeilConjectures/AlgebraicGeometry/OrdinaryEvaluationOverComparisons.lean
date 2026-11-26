@@ -34,8 +34,6 @@ namespace AlgebraicGeometry
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
--- The public existential dual witness is intentionally independent of the tensor witness.
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency true in
 -- Compare the chosen Hom bifunctors without unfolding their existence proofs.
 /-- Compatible comparisons for ordinary Hom, its dual and ordinary evaluation
@@ -59,7 +57,7 @@ theorem exists_ordinaryEvaluation_over_comparisons (X : Scheme.{u}) (U : X.Opens
             (b N).hom =
           (b M).hom ≫
             ((homComplexFunctor (R := U.toScheme.sheaf)).obj (op P')).map (T.map a)) ∧
-      ∃ d : T.obj (localEvaluationDual X U P) ≅ D',
+      ∃ _d : T.obj (localEvaluationDual X U P) ≅ D',
         ∀ F : CochainComplex (localEvaluationModules X U) ℤ,
           ∃ t : T.obj (localEvaluationTensor X U P F) ≅
               pullbackTensorTotal U.toScheme (T.obj F) D',

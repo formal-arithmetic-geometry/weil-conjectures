@@ -36,8 +36,6 @@ family. The comparison equations are not part of this data.
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
-set_option linter.unusedVariables false
 universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
@@ -124,11 +122,11 @@ theorem picard_derived_fibre_residue_model_data
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
     [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)]
     [∀ i, LocallyOfFinitePresentation (fi i)]
-    (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i)
+    (ui : ∀ i, Xi i ⟶ X) (_hui : ∀ i, ui i ≫ f = fi i)
     (L : X.Modules) [L.IsInvertible]
     (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k]
-    (w : W) (s : S) (hw : k w = s)
-    (τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅
+    (w : W) (s : S) (_hw : k w = s)
+    (_τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅
       SheafOfModules.unit (pullback f (S.fromSpecResidueField s)).ringCatSheaf) :
     let E := (schemeDerivedDirectImage (pullback.snd f k)).obj
       ((DerivedCategory.singleFunctor
@@ -141,7 +139,7 @@ theorem picard_derived_fibre_residue_model_data
             ((Modules.tensorPullback (ui i)).obj L)))
     ∃ (U : W.Opens) (hwU : w ∈ U), IsAffineOpen U ∧
       ∃ (p : Ideal Γ(W, U)) (_ : p.IsPrime)
-        (hp : p = RingHom.ker (W.evaluation U w hwU).hom)
+        (_hp : p = RingHom.ker (W.evaluation U w hwU).hom)
         (K : CochainComplex
           (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)
         (C : Fin n → CochainComplex
@@ -166,7 +164,7 @@ theorem picard_derived_fibre_residue_model_data
           ((Modules.tensorPullback (ui i)).obj L)))
   have hEperf : IsPerfect W E := by
     let G := (Modules.tensorPullback (pullback.fst f k)).obj L
-    letI : Modules.IsInvertible G := tensorPullback_invertible_local _ _
+    let : Modules.IsInvertible G := tensorPullback_invertible_local _ _
     dsimp [E]
     exact perfect_of_invertible_directImage (pullback.snd f k)
       G
@@ -174,9 +172,9 @@ theorem picard_derived_fibre_residue_model_data
     intro i
     let M := (Modules.tensorPullback (pullback.fst (fi i) k)).obj
       ((Modules.tensorPullback (ui i)).obj L)
-    letI : Modules.IsInvertible ((Modules.tensorPullback (ui i)).obj L) :=
+    let : Modules.IsInvertible ((Modules.tensorPullback (ui i)).obj L) :=
       tensorPullback_invertible_local _ _
-    letI : Modules.IsInvertible M := tensorPullback_invertible_local _ _
+    let : Modules.IsInvertible M := tensorPullback_invertible_local _ _
     dsimp [Ei, M]
     exact perfect_of_invertible_directImage (pullback.snd (fi i) k) M
   obtain ⟨U₀, hw₀, K₀, hK₀, eK₀⟩ := hEperf w
