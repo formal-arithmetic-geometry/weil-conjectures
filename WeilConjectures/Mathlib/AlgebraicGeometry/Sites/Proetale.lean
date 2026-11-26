@@ -66,7 +66,6 @@ This file provides the site-theoretic inputs for the pro-étale six functors of 
 
 @[expose] public section
 
-set_option linter.style.show false
 
 universe w u' u
 
@@ -309,9 +308,9 @@ instance isCocontinuous_overMap :
         MorphismProperty.Over.homMk (𝟙 (Z i).left) hY
       have hge : (MorphismProperty.Over.map ⊤ h).map (φ' i) = e ≫ φ i := by
         apply MorphismProperty.Over.Hom.ext
-        show (φ i).left = 𝟙 (Z i).left ≫ (φ i).left
+        change (φ i).left = 𝟙 (Z i).left ≫ (φ i).left
         exact (Category.id_comp _).symm
-      show S.arrows ((MorphismProperty.Over.map ⊤ h).map (φ' i))
+      change S.arrows ((MorphismProperty.Over.map ⊤ h).map (φ' i))
       rw [hge]
       exact S.downward_closed (hle _ _ ⟨i⟩) e
 

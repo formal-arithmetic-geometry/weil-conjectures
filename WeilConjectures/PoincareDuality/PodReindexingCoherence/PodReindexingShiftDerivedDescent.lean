@@ -92,8 +92,6 @@ private def comparisonAt {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     rw [hid] at h
     exact h)
 
--- Keep the original unused proof-binder name in the representative hypothesis.
-set_option linter.unusedVariables false in
 open SheafOfModules in
 /-- Descent of the representative signed-shift equation through localization.
 
@@ -106,7 +104,7 @@ theorem derived_shift_descent {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (SX : Closed l E X s) (SY : Closed l E Y s)
     (TX : Models l E X s SX) (TY : Models l E Y s SY)
     (c : Comparison l E g s SX SY TX TY)
-    (hmodel : ∀ (P I : K l E Y s) (hI : I.IsKInjective) (a b : ℤ),
+    (hmodel : ∀ (P I : K l E Y s) (_hI : I.IsKInjective) (a b : ℤ),
       derivedShiftEquation l E g s SX SY TX TY c
         ((podReindexingQ l E Y s).obj P)
         ((podReindexingQ l E Y s).obj I) a b) :

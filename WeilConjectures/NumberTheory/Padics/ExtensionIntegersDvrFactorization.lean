@@ -23,8 +23,6 @@ irreducible generator, and its fraction-field version gives the integer-power ex
 
 @[expose] public section
 
-set_option linter.style.haveILetI false
-
 namespace Padic
 
 /-- In a domain DVR, generators of a fixed nonzero maximal ideal are associated and every
@@ -37,8 +35,8 @@ theorem extension_integers_dvr_factorization (E : Type*) [Field E] (O : Subring 
       Ideal.span ({π'} : Set O) = m → ∃ v : Oˣ, π' = (v : O) * π) ∧
     (∀ π : O, Ideal.span ({π} : Set O) = m → ∀ x : Eˣ,
       ∃ p : Oˣ × ℤ, (x : E) = ((p.1 : O) : E) * (π : E) ^ p.2) := by
-  letI : IsDiscreteValuationRing O := hDVR
-  letI : IsFractionRing O E := hfrac
+  have : IsDiscreteValuationRing O := hDVR
+  have : IsFractionRing O E := hfrac
   have hm_eq : m = IsLocalRing.maximalIdeal O := IsLocalRing.eq_maximalIdeal hmax
   have hirr_of_gen : ∀ {π : O}, Ideal.span ({π} : Set O) = m → Irreducible π := by
     intro π hπ
