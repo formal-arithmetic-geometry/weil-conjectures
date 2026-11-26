@@ -17,7 +17,20 @@ import WeilConjectures.AlgebraicGeometry.Iso.IsoSectionwiseInverseImage
 import WeilConjectures.PoincareDuality.Integral.IntegralPullbackComparisonRealization
 import WeilConjectures.PoincareDuality.Isomorphism.IsomorphismPullbackRationalExact
 
-/-! # Normalized exact and t-exact pullback at a finite coefficient stage -/
+/-! # Normalized exact and t-exact pullback at a finite coefficient stage
+
+Pullback along an isomorphism of schemes is exact and t-exact at integral and rational
+coefficients over a finite coefficient field, with normalized comparisons and shifts.
+
+## Implementation details
+
+The inverse image along the pro-étale isomorphism is an exact, integral-linear functor on
+modules; the normalized reconstruction comparison identifies its derived functor with integral
+pullback on constructible objects, and its termwise shift is transported through this comparison.
+Exact inverse image commutes with homology, so it preserves both standard halves. The rational
+statements follow by scalar localization, since every rational half is the isomorphism closure of
+the corresponding integral half.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -257,26 +270,11 @@ private theorem rationalStandardClass_pullback
 
 end CoefficientProof
 
-/-- Normalized exact and t-exact pullback at a single finite coefficient field.
-Source: current blueprint sec-poincare-duality/sk-thm-frobenius,
-prop-constructible-truncations.proof.md, final automorphism sentence;
-steps 1--3 and 6 of lem-pod-isomorphism-pullback-texact-coefficients.
-(blueprint: lem-pod-isomorphism-pullback-raw-stage).
-
-Proof: the pro-etale isomorphism reindexes sheaves and their completed coefficient
-rings. At each quotient it fixes constant coefficients, hence also at their inverse
-limit. The induced exact functor on modules is integral-linear on complexes and
-therefore on derived morphisms. The normalized reconstruction unit and comparison
-identify its derived functor with completed integral pullback on constructible inputs.
-Transport its termwise shift through this comparison and the fully faithful inclusion.
-This preserves distinguished triangles. Exact inverse image commutes with homology,
-so it preserves the vanishing conditions for both integral standard halves in every
-degree. Apply semilinear scalar localization to this linear exact functor. Its object
-and pure-tensor formulas uniquely identify it with the prescribed rational pullback;
-the induced degree-one shift has the displayed normalization. Every rational half is
-the isomorphism closure of the corresponding integral half, so its preservation follows
-by applying pullback to an integral representative and its witnessing isomorphism.
-The argument includes the zero object, torsion morphisms and empty schemes. -/
+/-- At a finite coefficient field, integral pullback along an isomorphism `g` has a shift for
+which it is linear, triangulated and t-exact, with a shift-compatible comparison `e` to the
+derived inverse image normalized by `inverseImagePullbackComparisonDerived`; the rational
+pullback has a shift with the localized degree-one normalization for which it is triangulated
+and t-exact. -/
 theorem isomorphismPullbackRawStage
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

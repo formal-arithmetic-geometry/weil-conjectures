@@ -183,8 +183,6 @@ private theorem isZero_comparison_rightDerived_of_affine_sections
     exact isZero_affine_section_homology i hi F I n U (h U hU)
   exact hz.of_iso (I.isoRightDerivedObj P n)
 
--- Preserve the names of the original hypothesis binders.
-set_option linter.unusedVariables false in
 /-- The comparison and Leray step turns the affine bound into the bound for a
 finite-type scheme. -/
 theorem subsingleton_H_of_two_mul_add_lt_of_affine_bound
@@ -192,8 +190,8 @@ theorem subsingleton_H_of_two_mul_add_lt_of_affine_bound
     {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
     (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
     (hAffine : ∀ {Y : Scheme.{u}} (b : Y ⟶ Spec (.of K)) [LocallyOfFiniteType b]
-      [QuasiCompact b] [IsAffine Y] (hY : topologicalKrullDim Y ≤ (d : WithBot ℕ∞))
-      (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : G.IsTorsion) (n : ℕ),
+      [QuasiCompact b] [IsAffine Y] (_hY : topologicalKrullDim Y ≤ (d : WithBot ℕ∞))
+      (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (_hG : G.IsTorsion) (n : ℕ),
       d + c < n → Subsingleton (Sheaf.H G n))
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
     (hq : 2 * d + c < q) : Subsingleton (Sheaf.H F q) :=

@@ -185,7 +185,6 @@ private theorem local_kFlat_tensor_invariance (X : Scheme.{u}) (U : X.Opens)
   exact ⟨(cF.app P).symm ≪≫ DF.mapIso eA ≪≫ cF.app A ≪≫
     (cG.app N).symm ≪≫ DG.mapIso eB ≪≫ cG.app B⟩
 
-set_option linter.unusedVariables false in
 -- The unchanged interface assumes B strictly perfect; K-flatness of A already suffices.
 -- Localized-site tensor comparisons require additional elaboration steps.
 /-- On a fixed open, prescribed strictly perfect models compute the restriction of the
@@ -198,7 +197,7 @@ theorem strictPerfect_tensor_localComparison (X : Scheme.{u}) (U : X.Opens)
     (hN : CochainComplex.IsKFlatTensor (R := X.sheaf) N)
     (A B : CochainComplex
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
-    (hA : Scheme.IsStrictlyPerfect X U A) (hB : Scheme.IsStrictlyPerfect X U B)
+    (hA : Scheme.IsStrictlyPerfect X U A) (_hB : Scheme.IsStrictlyPerfect X U B)
     (eA : Nonempty ((SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj (DerivedCategory.Q.obj P) ≅
         DerivedCategory.Q.obj A))

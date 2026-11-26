@@ -26,10 +26,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 /-!
 # Global derived Hom out of a stratum extension
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-prop-sf-localization,
-sk-lem-formal-closed-support-stratum-hom.md
-(blueprint: lemma-sections-support-closed-subscheme--3).
-
 The global Hom functor is derived into abelian groups, rather than internal Hom.
 All coefficient modules and derived categories are the existing module-object categories.
 -/

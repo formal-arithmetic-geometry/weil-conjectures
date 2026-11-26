@@ -56,7 +56,6 @@ comparison, along `q = (𝟙_Z × j) ≫ (g × 𝟙_Y)`; the rest of the proof i
 ## Main statements
 
 - `ProEtale.CondensedRing.isIso_homEquiv_δ_tensorHom_prodUpperStarCounit_prodMap_id_comp`
-
 -/
 
 @[expose] public section
@@ -87,8 +86,7 @@ suppose that `c₁` comes from `d₁ : S' U ⟶ W` up to `i₁ : R' W ⟶ A₁`.
 U ⊗ V ⟶ S W ⊗ V ⟶ S (W ⊗ S' V) ⟶ S (W ⊗ R A₂) ⟶ S R (R' W ⊗ A₂) ⟶ S R (A₁ ⊗ A₂) ≅ Q (A₁ ⊗ A₂)
 ```
 of the transpose of `d₁`, the projection morphism of `S`, the transpose `h₂` of
-`Q' V ≅ R' S' V ⟶ A₂`, the left projection morphism of `R` and `i₁`. This is the mirror image of
-`CategoryTheory.Adjunction.homEquiv_δ_tensorHom_eq`. -/
+`Q' V ≅ R' S' V ⟶ A₂`, the left projection morphism of `R` and `i₁`. -/
 lemma homEquiv_δ_tensorHom_eq_right (e : Q' ≅ S' ⋙ R')
     (he : ∀ U V : C₃, δ Q' U V ≫ (e.hom.app U ⊗ₘ e.hom.app V) =
       e.hom.app (U ⊗ V) ≫ R'.map (δ S' U V) ≫ δ R' (S'.obj U) (S'.obj V))

@@ -125,8 +125,7 @@ variable (hU : ∀ (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf 
   Nonempty ((U.proj y)^*ᵃ[l].obj G.obj ≅ ⨁ fun _ : Fin n ↦ AdicSheaf.unit l (U.cover y)))
 
 include hU in
-/-- **The monodromy representations are continuous** (blueprint:
-`proposition-lattices-representations-normal-scheme`): `φ(ρ(g) v)` is the value of a continuous
+/-- **The monodromy representations are continuous**: `φ(ρ(g) v)` is the value of a continuous
 function on `Ỹ_t ×_Y Ỹ_t` at the point `(t̃, g⁻¹ t̃)`. -/
 theorem lisseMonodromy_continuous_rep (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
     (G : LisseSheaf l Y)

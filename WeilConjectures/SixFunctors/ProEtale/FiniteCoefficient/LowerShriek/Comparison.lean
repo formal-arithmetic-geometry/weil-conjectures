@@ -110,12 +110,7 @@ lemma ProEtale.openImmersionLowerShriekToLowerStar_app
 
 set_option backward.isDefEq.respectTransparency false in
 /-- **`j^*` of the comparison `j_! ⟶ j_*` is an isomorphism**, for any open immersion `j`
-and with no hypothesis on the range of `j`.
-
-Both factors of `ProEtale.openImmersionLowerShriekToLowerStar_app` become invertible after
-applying `j^*`: the first is `j_!` of an isomorphism, and the second is
-`ProEtale.isIso_openImmersionRestriction_map_lowerShriekAdjunction_counit`, which holds
-because `j_!` is fully faithful along an open immersion. -/
+and with no hypothesis on the range of `j`. -/
 instance ProEtale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar
     (F : Sheaf (Scheme.ProEt.topology U) A) :
     IsIso ((ProEtale.openImmersionRestriction A j).map

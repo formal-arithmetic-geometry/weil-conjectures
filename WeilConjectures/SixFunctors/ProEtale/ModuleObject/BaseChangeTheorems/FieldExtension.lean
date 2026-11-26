@@ -194,13 +194,12 @@ theorem isIso_baseChangeMap_app_padicIntegers_of_fieldExtension [QuasiCompact g]
   exact t r₃
 
 include σ σ' hS in
-/-- **`ℓ`-adic direct images commute with base change along field extensions** (Stacks 0F1C,
-`ℚ̄_ℓ`-coefficients): let `p : S' ⟶ S` be the base change of `σ : S ⟶ Spec k` along a field
+/-- **`ℓ`-adic direct images commute with base change along field extensions**
+(`ℚ̄_ℓ`-coefficients): let `p : S' ⟶ S` be the base change of `σ : S ⟶ Spec k` along a field
 extension `k ⟶ k'`, with `S`, `S'`, `T'` quasi-compact and quasi-separated, `g` quasi-compact and
 quasi-separated, `T` noetherian and `ℓ` invertible in `k`. Then the base change map
 `Lp^* Rg_* K ⟶ Rh_* Le^* K` with coefficients `ℚ̄_ℓ` is an isomorphism at every bounded
-constructible `K`. By integral models, this is
-`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicIntegers_of_fieldExtension`. -/
+constructible `K`. -/
 theorem isIso_baseChangeMap_app_padicAlgCl_of_fieldExtension [QuasiCompact g]
     [QuasiSeparated g] [CompactSpace S] [QuasiSeparatedSpace S] [CompactSpace S']
     [QuasiSeparatedSpace S'] [CompactSpace T'] [QuasiSeparatedSpace T'] [IsNoetherian T]

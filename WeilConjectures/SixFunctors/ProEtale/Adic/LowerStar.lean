@@ -28,9 +28,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 Let `K` be an algebraically closed field of characteristic different from `ℓ`, `Y` a scheme
 locally of finite type over `K` and `f : X ⟶ Y` a quasi-compact, quasi-separated morphism
 locally of finite type. The *finiteness theorem* (SGA 4½, *Th. finitude*, Th. 1.1, with
-`ℓ`-adic coefficients as in Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8, and the
-blueprint `proposition-six-operations-dctf` (3), the `ℚ̄_ℓ` stage of the
-finite-coefficient `sk-prop-sf-finiteness`) asserts that for a constructible `ℓ`-adic sheaf `F` on
+`ℓ`-adic coefficients as in Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8) asserts
+that for a constructible `ℓ`-adic sheaf `F` on
 `X_proét` the derived pushforward `Rf_*(F[0])` has constructible cohomology sheaves, and is
 bounded if `Y` is quasi-compact. The theorem itself is proved in
 `WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarFiniteness`, by comparison with the module
@@ -41,7 +40,7 @@ general statement to an affine source and an affine target:
   (`AlgebraicGeometry.ProEtale.finiteLowerStar`), so the statement is stable under extensions,
   kernels and cokernels and extends to bounded complexes with constructible cohomology
   (`AlgebraicGeometry.ProEtale.finiteLowerStar_of_bounded`);
-- the **Čech step** of `sk-prop-sf-finiteness`: a Mayer–Vietoris argument
+- the **Čech step**: a Mayer–Vietoris argument
   (`AlgebraicGeometry.ProEtale.finiteLowerStar_of_openCover`) and an induction over finite
   affine covers reduce a quasi-compact quasi-separated source to an affine one, first for a
   source with affine diagonal (`AlgebraicGeometry.ProEtale.FiniteFor.of_isAffineHom_diagonal`),
@@ -51,6 +50,11 @@ general statement to an affine source and an affine target:
   images commute with restriction to an open subscheme of `Y`
   (`AlgebraicGeometry.ProEtale.mapDerivedCategoryUpperStarRightDerivedFunctorLowerStarIso`),
   which reduces to an affine target.
+
+## References
+
+* SGA 4½, *Th. finitude*, Th. 1.1
+* Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8
 -/
 
 
@@ -147,15 +151,10 @@ noncomputable def rightDerivedFunctorLowerStarObjQIso {Z : Scheme.{u}} (j : Z �
     (Functor.rightDerivedFunctorCompIso' (j)_*ᵃ[l] (f)_*ᵃ[l] (adicLowerStarComp l j f)).app _ ≪≫
     (j ≫ f)_*ᵃ[l].rightDerivedFunctor.mapIso (((j)^*ᵃ[l].mapDerivedCategoryFactors).app I).symm
 
-/-- **Mayer–Vietoris for the finiteness theorem** (the Čech step of `sk-prop-sf-finiteness`):
+/-- **Mayer–Vietoris for the finiteness theorem:**
 let `X = U ∪ V` be an open cover. An object `K` of the derived category of `ℓ`-adic sheaves on
 `X` has bounded constructible derived pushforward along `f` as soon as its restrictions to
-`U`, `V` and `U ∩ V` have, along the restrictions of `f`.
-
-The unit `K ⟶ Rj_{U*} K|_U` has a cone `C` vanishing on `U`, hence `C ≅ Rj_{V*} C|_V`
-(`AlgebraicGeometry.ProEtale.isIso_Q_map_unit_of_isZero`); restricting the triangle to `V`
-and computing `(Rj_{U*} K|_U)|_V` on `U ∩ V` by open base change, `C|_V` sits in a triangle
-with `K|_V` and the pushforward of `K|_{U ∩ V}`. -/
+`U`, `V` and `U ∩ V` have, along the restrictions of `f`. -/
 theorem finiteLowerStar_of_openCover [IsLocallyNoetherian Y] {U V : Scheme.{u}} (jU : U ⟶ X)
     (jV : V ⟶ X) [IsOpenImmersion jU] [IsOpenImmersion jV]
     (hcov : ∀ x, x ∈ Set.range jU.base ∨ x ∈ Set.range jV.base) {W : Scheme.{u}}

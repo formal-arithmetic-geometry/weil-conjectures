@@ -14,7 +14,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalPul
 import WeilConjectures.AlgebraicGeometry.Projection.ProjectionFormulaCompactified
 import all WeilConjectures.Algebra.Homology.ProperBaseChange.OpenImmersionTensorPiece
 
-/-! Isomorphism of the proper counit after restriction to the distinguished open. -/
+/-! Isomorphism of the proper counit after restriction to the distinguished open.
+
+## References
+
+* Stacks Project, Tags `0F7B`, `0F7I`
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -168,13 +173,10 @@ variable (R : Coefficients.{u})
   (hi : R.pull (c.i ≫ r.hom) = proEtaleRingCompositeCoefficients c.i r.hom
     (R.ring d.Z) (R.ring c.Z) (R.ring X) (R.pull r.hom) (R.pull c.i))
 
-/--
-Source: Stacks 0F7B and 0F7I, clopen distinguished-section calculation.
-The proper counit becomes invertible after pulling back along the distinguished
+/-- The proper counit becomes invertible after pulling back along the distinguished
 open immersion because the refinement fibre product decomposes into that clopen
 section and its complement; extension by zero has zero restriction to the
 complement and the counit is invertible on the section.
-(blueprint: lem-sf-refinement-open-restriction-proper-counit-is-iso).
 -/
 theorem refinementProperCounit_isIso
     (M : DerivedCategory (pbcModules X (R.ring X))) :
@@ -235,13 +237,9 @@ theorem refinementProperCounit_isIso
     (TwoSquare.mk _ _ _ _ (RingedRestrictionExchange.pullSquare q).hom))) at hβ
   exact restrictionCounit ar ap ag aS ac bS k (RingedRestrictionExchange.pullSquare q) M
 
-/--
-Source: the definition of `refinementRestriction` in the coefficient comparison
-construction, with the pullback compositor of Tags 03D8 and 0D6D.
-The specified component is exactly the compositor followed by the pulled-back
+/-- The specified component is exactly the compositor followed by the pulled-back
 proper counit; this is the formal factorization used to reduce the component
 isomorphism to the geometric counit calculation.
-(blueprint: lem-sf-refinement-open-restriction-factorization).
 -/
 theorem refinementRestriction_factorization
     (M : DerivedCategory (pbcModules X (R.ring X))) :

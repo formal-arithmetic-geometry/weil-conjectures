@@ -45,6 +45,9 @@ they are the generic constructions `D(-)`, `D+(-)` and `R+(-)` of the folder
   `ν_*`-acyclic objects
   (`AlgebraicGeometry.ProEtale.rightAcyclic_comparisonUpperStar_obj_of_injective`).
 
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Corollary 5.1.6
 -/
 
 @[expose] public section
@@ -80,8 +83,7 @@ noncomputable example :
 
 /-- An object of the derived category of pro-étale sheaves is *bounded below of étale origin*
 if it is isomorphic to `D(ν^*) K'` for a bounded below complex `K'` of étale sheaves. This is the
-class of objects on which the exceptional adjunction of blueprint
-`theorem-existence-exceptional-inverse-image` (c) holds. -/
+class of objects on which the exceptional adjunction holds. -/
 def DerivedCategory.plusEtaleOrigin :
     ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
   DerivedCategory.TStructure.t.plus.map D(ν^*(X)[A])
@@ -128,12 +130,9 @@ noncomputable def derivedComparisonAdjunction : D(ν^*(X)[A]) ⊣ R(ν_*(X)[A]) 
   (comparisonAdjunction A X).derivedAdjunction.ofNatIsoLeft
     (ν^*(X)[A]).leftDerivedFunctorIsoMapDerivedCategory
 
-/-- Blueprint `theorem-bounded-below-cohomology-comparison`: The pro-étale comparison
-
-*Full faithfulness on `D⁺`.* For a bounded below complex `M` of étale sheaves, the unit
+/-- For a bounded below complex `M` of étale sheaves, the unit
 `M ⟶ Rν_* ν^* M` of the comparison adjunction is an isomorphism: this is the assertion
-`id ≅ Rν_{T*} ν_T^*` on `D⁺(T_ét)` of the blueprint (Bhatt–Scholze, *The pro-étale topology for
-schemes*, Corollary 5.1.6), which makes `ν^* : D⁺(X_ét) ⥤ D(X_proét)` fully faithful. -/
+`id ≅ Rν_{T*} ν_T^*` on `D⁺(T_ét)`, which makes `ν^* : D⁺(X_ét) ⥤ D(X_proét)` fully faithful. -/
 theorem isIso_derivedComparisonAdjunction_unit_app
     (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
     (hM : DerivedCategory.TStructure.t.plus M) :

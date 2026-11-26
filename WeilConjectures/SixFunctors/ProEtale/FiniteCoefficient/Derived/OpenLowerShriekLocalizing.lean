@@ -22,8 +22,8 @@ closures (`CategoryTheory.ObjectProperty.localizingClosure`).
 
 - `AlgebraicGeometry.ProEtale.constructibleFiniteTor_mapDerivedCategory_openImmersionLowerShriek`:
   `j_!` preserves `Dctf`.
-- `AlgebraicGeometry.ProEtale.localizingClosure_constructibleFiniteTor_openImmersionLowerShriek`
-  (`proposition-proper-direct-image-extension-zero`, finite coefficient stages).
+- `AlgebraicGeometry.ProEtale.localizingClosure_constructibleFiniteTor_openImmersionLowerShriek`:
+  `j_!` preserves `Loc(Dctf)`.
 
 ## Implementation notes
 
@@ -32,8 +32,7 @@ On the pro-étale site, bounded constructibility at a finite coefficient ring is
 `Dctf(U_proét, Λ)` is `ν^* K'` with `K'` in `Dctf(U_ét, Λ)` (the comparison `ν^*` detects Tor
 amplitude), and `j_! ν^* K' ≅ ν^* j_! K'`, so the statement reduces to its étale counterpart (in the
 namespace `AlgebraicGeometry.Etale`)
-`boundedConstructible_and_torAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek`
-(`proposition-proper-direct-image-extension-zero--8`).
+`boundedConstructible_and_torAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek`.
 -/
 
 @[expose] public section
@@ -52,9 +51,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U X : Scheme.{u}} (j : U
   [IsOpenImmersion j] [QuasiCompact j]
 
 /-- For a finite ring `Λ` and a quasi-compact open immersion `j : U ⟶ X`, the extension by zero
-`j_!` carries `Dctf(U_proét, Λ)` into `Dctf(X_proét, Λ)`. Writing an object of `Dctf(U_proét, Λ)`
-as `ν^* K'` for some `K'` in `Dctf(U_ét, Λ)`, this follows from `j_! ν^* K' ≅ ν^* j_! K'` and the
-étale case `proposition-proper-direct-image-extension-zero--8`. -/
+`j_!` carries `Dctf(U_proét, Λ)` into `Dctf(X_proét, Λ)`. -/
 theorem constructibleFiniteTor_mapDerivedCategory_openImmersionLowerShriek
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) U K) :
@@ -85,16 +82,9 @@ instance (J : Type w) :
     (ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction _ j).leftAdjoint_preservesColimits
   this.preservesColimitsOfShape
 
-/-- Blueprint `proposition-proper-direct-image-extension-zero`: Extension by zero on the localizing
-categories.
-
-Let `Λ` be a finite ring (a finite coefficient stage `A`) and `j : U ⟶ X` a quasi-compact open
+/-- Let `Λ` be a finite ring and `j : U ⟶ X` a quasi-compact open
 immersion. Then the extension by zero `j_! : D(U_proét, Λ) ⥤ D(X_proét, Λ)` maps `Dctf(U, Λ)`
-into `Dctf(X, Λ)`, preserves direct sums, and maps `Loc(Dctf(U, Λ))` into `Loc(Dctf(X, Λ))`.
-The functor `j_!` is exact (`Functor.mapDerivedCategory` of an exact functor is triangulated),
-so its restriction `Loc(Dctf(U, Λ)) ⥤ Loc(Dctf(X, Λ))` is exact and preserves direct sums. The
-last assertion is `proposition-proper-direct-image-extension-zero`
-(`CategoryTheory.ObjectProperty.localizingClosure_le_inverseImage`) applied to the first two. -/
+into `Dctf(X, Λ)`, preserves direct sums, and maps `Loc(Dctf(U, Λ))` into `Loc(Dctf(X, Λ))`. -/
 theorem localizingClosure_constructibleFiniteTor_openImmersionLowerShriek :
     DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) U ≤
         (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).inverseImage

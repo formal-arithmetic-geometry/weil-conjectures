@@ -10,7 +10,9 @@ public import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-! # The normalized sheet-sum formula for an internal finite etale trace
 
-Source: the stratified lattice proof, "Pushing down by the trace".
+## References
+
+* Stacks Project, Tag 04HN
 -/
 
 @[expose] public noncomputable section
@@ -23,9 +25,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 attribute [local irreducible] upperStar lowerStar upperStarComp upperStarLowerStarAdjunction
 
-/-- A finite splitting chart, allowing the empty splitting.
-Source: Stacks Project, Tag 04HN.
-(blueprint: def-sfb-internal-finite-etale-trace-formula) -/
+/-- A finite splitting chart, allowing the empty splitting. -/
 structure FiniteEtaleModuleChart {X U : Scheme.{u}} (p : U ⟶ X) where
   base : Scheme.{u}
   map : base ⟶ X
@@ -38,9 +38,7 @@ structure FiniteEtaleModuleChart {X U : Scheme.{u}} (p : U ⟶ X) where
 
 attribute [instance] FiniteEtaleModuleChart.weaklyEtale
 
-/-- The canonical sheet comparison has a uniquely specified value.
-Source: the inverse-image composition comparison.
-(blueprint: def-sfb-internal-finite-etale-trace-formula) -/
+/-- The canonical sheet comparison has a uniquely specified value. -/
 theorem finiteEtaleTraceSheetComparison_exists
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U Y : Scheme.{u}} (p : U ⟶ X)
@@ -51,9 +49,7 @@ theorem finiteEtaleTraceSheetComparison_exists
 
 /-- The canonical sheet comparison, frozen using its proved singleton specification.
 Its exact equation below fixes all its components. This avoids kernel reduction
-through the large composite adjunction when components are compared.
-Source: the inverse-image composition comparison.
-(blueprint: def-sfb-internal-finite-etale-trace-formula) -/
+through the large composite adjunction when components are compared. -/
 @[irreducible]
 def finiteEtaleTraceSheetComparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -62,9 +58,7 @@ def finiteEtaleTraceSheetComparison
     upperStar Λ g ≅ upperStar Λ p ⋙ upperStar Λ t :=
   Classical.choose (finiteEtaleTraceSheetComparison_exists Λ p g t w)
 
-/-- The frozen comparison is exactly the original canonical composition comparison.
-Source: the proved specification above.
-(blueprint: def-sfb-internal-finite-etale-trace-formula) -/
+/-- The frozen comparison is exactly the original canonical composition comparison. -/
 theorem finiteEtaleTraceSheetComparison_eq
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U Y : Scheme.{u}} (p : U ⟶ X)
@@ -74,9 +68,7 @@ theorem finiteEtaleTraceSheetComparison_eq
   unfold finiteEtaleTraceSheetComparison
   exact Classical.choose_spec (finiteEtaleTraceSheetComparison_exists Λ p g t w)
 
-/-- The actual sum of the normalized counit projections on a finite list of sheets.
-Source: blueprint, stratified lattice proof, local computation.
-(blueprint: def-sfb-internal-finite-etale-trace-formula) -/
+/-- The actual sum of the normalized counit projections on a finite list of sheets. -/
 @[irreducible]
 def finiteEtaleTraceSheetSum
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -94,9 +86,7 @@ def finiteEtaleTraceSheetSum
 
 /-- The trace becomes the sum of canonical sheet projections on every split chart.
 Each projection is formed from the pullback composition comparison and the actual
-pullback/direct-image counit; thus this condition fixes the normalization of trace.
-Source: blueprint, stratified lattice proof, "Pushing down by the trace".
-(blueprint: def-sfb-internal-finite-etale-trace-formula) -/
+pullback/direct-image counit; thus this condition fixes the normalization of trace. -/
 def FiniteEtaleTraceFormula
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}} (p : U ⟶ X)

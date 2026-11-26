@@ -31,6 +31,13 @@ import WeilConjectures.Topology.IntegralContinuousPresentationSeparated
 /-! # Separation of ordinary integral quotients of finitely presented modules
 
 The proof uses compact continuous matrix solutions on w-contractible affine tests.
+
+## References
+
+* Hemo, Richarz, Scholbach, Proposition 5.1
+* Hemo, Richarz, Scholbach, Proposition 7.6
+* Hemo, Richarz, Scholbach, Theorem 7.7
+* Bhatt, Scholze, Section 6.1
 -/
 
 @[expose] public section
@@ -299,18 +306,7 @@ private theorem terminal_component_zero
   rw [ha] at h
   exact h
 
-/-- Finite-presentation separatedness for ordinary integral quotients.
-
-Source: Hemo--Richarz--Scholbach, Propositions 5.1 and 7.6 and Theorem 7.7;
-Bhatt--Scholze, Section 6.1.
-(blueprint: lem-sp-original-integral-ordinary-quotient-kernel-separated-finite-presentation).
-
-Proof. On a w-contractible affine test, the regular module is projective.
-A finite presentation and the quotient-zero hypothesis give continuous matrix
-approximations on its component space. Pointwise Krull intersection and compact
-projectivity give an exact continuous relation. Thus every section of the
-morphism is zero on the test. Weakly etale pullback is restriction, and the
-sheaf axiom detects zero on the cover by such tests. -/
+/-- Finite-presentation separatedness for ordinary integral quotients. -/
 theorem originalIntegralOrdinaryQuotientKernel_separated_finitePresentation
     (ell : ℕ) [Fact ell.Prime]
     (E : IntermediateField ℚ_[ell] (PadicAlgCl ell))

@@ -29,7 +29,6 @@ stalk exchange to a local model and residue-field pullback to the chosen fields.
 
 universe u
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 
 open CategoryTheory Limits
 
@@ -104,15 +103,15 @@ theorem Etale.projectiveLine_strictLocal_modelComparison
   obtain ⟨A, B, cA, cB, hA, hB, sA, sB, φ, hφ, eA, eB,
       ρA, ρB, hUA, hUB, hbase, hρA, hρB, hρ⟩ :=
     Etale.projectiveLine_compatibleStrictHenselizationResidues σ τ ι hι hσ hτ ν
-  letI := cA
-  letI := cB
-  letI : HenselianLocalRing A := hA
-  letI : HenselianLocalRing B := hB
-  letI : IsSepClosed (IsLocalRing.ResidueField A) := sA
-  letI : IsSepClosed (IsLocalRing.ResidueField B) := sB
-  letI := hφ
-  letI := hUA
-  letI := hUB
+  let := cA
+  let := cB
+  let : HenselianLocalRing A := hA
+  let : HenselianLocalRing B := hB
+  let : IsSepClosed (IsLocalRing.ResidueField A) := sA
+  let : IsSepClosed (IsLocalRing.ResidueField B) := sB
+  let := hφ
+  let := hUA
+  let := hUB
   let F₀ := (ProjectiveSpace.map _ (eA.hom ≫ strictLocalizationToBase s))^*[
     ModuleCat.{u + 1} Λ].obj F
   have hF₀ : IsTorsionModuleSheaf F₀ := inferInstance

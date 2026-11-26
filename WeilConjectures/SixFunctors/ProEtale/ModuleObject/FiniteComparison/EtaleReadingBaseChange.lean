@@ -40,8 +40,7 @@ of the pullback comparisons with pullback squares
 base change map `Ex_*` of bounded constructible condensed `𝒪_E ⧸ ℓⁿ`-complexes to the étale
 base change map `Etale.derivedBaseChangeMap`
 (`ProEtale.CondensedRing.finiteEtaleReading_map_baseChange`). This is the `ρ`-part of the
-compatibility of reduction modulo `ℓⁿ` with proper base change (blueprint
-`proposition-compatibility-purity-base-change`).
+compatibility of reduction modulo `ℓⁿ` with proper base change.
 -/
 
 @[expose] public section

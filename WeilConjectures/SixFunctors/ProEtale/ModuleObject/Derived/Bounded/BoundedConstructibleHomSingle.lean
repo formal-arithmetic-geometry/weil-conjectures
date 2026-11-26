@@ -20,7 +20,15 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 
-/-! # Internal Hom of constructible sheaves in degree zero -/
+/-!
+# Internal Hom of constructible sheaves in degree zero
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15 and
+  Propositions 6.6.11 and 6.8.11(3)
+* SGA 4½, Th. finitude 1.6
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -48,29 +56,7 @@ private theorem boundedConstructible_hom_single_of_isMonoidalClosed
       (boundedConstructible_shift_single _ M hM 0)
   exact (boundedConstructible _).prop_ihom (hsingle F hF) (hsingle G hG)
 
-/-- Internal Hom of two constructible `ℚ̄_ℓ`-sheaves is bounded constructible.
-
-Source: Bhatt--Scholze, Remark 6.8.15 and Propositions 6.6.11 and 6.8.11(3);
-SGA 4½, Th. finitude 1.6, for finite-coefficient internal Hom on finite-type
-schemes over a field with the coefficient prime invertible.
-(blueprint: lem-sfb-dc-hom-single)
-
-Proof: For integral coefficients, the finite scalar local models identify each input
-with a derived complete complex with constructible residue. Derived Hom into a
-complete object remains complete. Its derived residue is the residue internal Hom
-by the evaluation-transpose reduction comparison. Finite-coefficient internal-Hom
-finiteness on a finite-dimensional finite-type scheme gives bounded constructible
-residue with finite Tor amplitude. The cohomological adic criterion gives bounded
-constructible integral Hom. This includes torsion finitely presented integral
-modules, which have two-term finite free scalar resolutions. For finite field
-extensions of Q_l, choose integral constructible lattices, apply the integral case,
-and use the canonical internal-Hom comparison after inverting l. For Qbar_l,
-descend both inputs to one finite extension and apply the internal-Hom coefficient
-comparison and constructible Hom continuity. Isometric coefficient isomorphisms
-cover arbitrary finite normed extensions and their closed unit balls. Characteristic
-zero is included: the finite-coefficient finiteness theorem requires invertibility
-of l, which follows from the characteristic condition. Empty schemes and zero
-modules use the same comparisons and vanishing bounds. -/
+/-- Internal Hom of two constructible `ℚ̄_ℓ`-sheaves is bounded constructible. -/
 theorem boundedConstructible_hom_single
     (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
     (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
@@ -90,8 +76,7 @@ theorem boundedConstructible_hom_single
 namespace ContinuousMapRingObj
 
 /-- Internal Hom of two constructible `E`-sheaves is bounded constructible, for a finite
-subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` (blueprint: lem-sfb-dc-hom-single; see the `ℚ̄_ℓ` version for the
-sources and the proof sketch). -/
+subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. -/
 theorem boundedConstructible_hom_single
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {k : Type u} [Field k]
     [Fact (ringChar k).Prime]
@@ -114,8 +99,7 @@ end ContinuousMapRingObj
 namespace PadicIntegersRingObj
 
 /-- Internal Hom of two constructible `𝒪_E`-sheaves is bounded constructible, for a finite
-subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` (blueprint: lem-sfb-dc-hom-single; see the `ℚ̄_ℓ` version for the
-sources and the proof sketch). -/
+subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. -/
 theorem boundedConstructible_hom_single
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]

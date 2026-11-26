@@ -14,8 +14,9 @@ import Mathlib.LinearAlgebra.Dimension.Constructions
 
 /-! # Coordinates of already free sheet modules
 
-Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2.
-(blueprint: lem-sfb-continuous-free-sheet-frames)
+## References
+
+* Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public noncomputable section
@@ -187,35 +188,7 @@ private def empty_presentation_rank
     exact isEmptyElim (show Y from B.hom z)
 
 /-- Globally free rational and integral modules give coordinates for the actual sheet maps.
-There is no covering or splitting assertion here, and no assertion about ranges.
-
-Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2;
-Bhatt--Scholze, Section 6.8, continuous coefficients and changes of free bases.
-(blueprint: lem-sfb-continuous-free-sheet-frames)
-
-Proof. Choose a finite free rational frame on Y and a finite free integral frame
-for each pulled-back module t_j*M. Scalar extension carries a finite biproduct
-of integral regular modules to the same biproduct of rational regular modules.
-The given e, the scalar pullback comparison, and upperStarComp identify these
-rationalized frames with g*P. The encoded rational frames are finite products
-of the continuous coefficient sheaf. Evaluate the resulting isomorphism at the
-terminal pro-etale object Y, and then at a point of Y: invariant basis number
-over E identifies each integral frame rank with the rational rank r. The entries
-of the isomorphism and its inverse are the coordinates of the constant basis
-vectors on Y, hence are continuous functions on Y. Their composite identities
-give pointwise inverse matrices G_j. If Y is empty, every section on every test
-object is zero, so choose the rational rank and use the unique presentations
-and identity matrices; this also covers rank zero.
-
-For an open W, restrict these same frames. The continuous coefficient encoding
-commutes with this restriction, so it gives the presentations c and b_j. Apply
-naturality to each frame vector and expand any integral section in this finite
-basis. The scalar extension unit sends its integral coordinates to the same
-coordinates in E. Naturality of comapUpperStarIso, the coefficient pullback
-comparison and upperStarComp identifies the normalized composite with precisely
-finiteEtaleLatticeSheetEmbedding. This yields the displayed forward equation
-for every test object B and section x. This argument does not require p to be
-finite, etale or surjective, or the t_j to split a pullback. -/
+There is no covering or splitting assertion here, and no assertion about ranges. -/
 theorem continuousFreeSheet_frames
     (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

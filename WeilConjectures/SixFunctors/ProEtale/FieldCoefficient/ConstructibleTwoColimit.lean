@@ -198,13 +198,8 @@ noncomputable def boundedFieldConstructibleStageSystem :
       (continuous_algebraMap_intermediateField' l _) X K
 
 /-- Algebraically closed coefficients for `D^b_c`: the common-stage category
-`D^b_c(X, ℚ̄_ℓ) = 2-colim_E D^b_c(X, E)`.
-
-The pair category of
-`AlgebraicGeometry.ProEtale.DerivedCategory.boundedFieldConstructibleStageSystem`:
-objects are the pairs `(E, K)` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and `K ∈ D^b_c(X, E)`,
-and the morphisms `(E, K) ⟶ (E', K')` form the filtered colimit over the common finite stages
-`F ⊇ E, E'` of the morphisms `F ⊗_E K ⟶ F ⊗_{E'} K'`. -/
+`D^b_c(X, ℚ̄_ℓ) = 2-colim_E D^b_c(X, E)`. Its objects are the pairs `(E, K)` of a finite extension
+`E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and `K ∈ D^b_c(X, E)`. -/
 abbrev ConstructibleTwoColimit :=
   (boundedFieldConstructibleStageSystem l X).PairCategory
 
@@ -288,16 +283,9 @@ instance (n : ℤ) : (constructibleTwoColimitGE l X n).IsClosedUnderIsomorphisms
   StageSystem.eventually_isClosedUnderIsomorphisms (S := boundedFieldConstructibleStageSystem l X)
     (P := fun E ↦ boundedFieldConstructibleGE l X E n) (fun h ↦ boundedFieldConstructibleGE_T h n)
 
-/-- Constructible heart, stage `Λ = ℚ̄_ℓ`.
-
-The constructible heart `Sh_c(X, ℚ̄_ℓ) = D^{≤ 0}_c(X, ℚ̄_ℓ) ∩ D^{≥ 0}_c(X, ℚ̄_ℓ)` of the standard
-`t`-structure on the common-stage category `D^b_c(X, ℚ̄_ℓ) = 2-colim_E D^b_c(X, E)`
-(`AlgebraicGeometry.ProEtale.DerivedCategory.ConstructibleTwoColimit`). By
-`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTwoColimitHeart_eq` its objects are the
-pairs `(E, K)` with `F ⊗_E K` in the constructible heart `Sh_c(X, F)` of some finite stage
-(`AlgebraicGeometry.ProEtale.DerivedCategory.fieldConstructibleHeart`), and by
-`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTwoColimitHeartEquiv` it is the
-`2`-colimit of the hearts `Sh_c(X, E)` of the finite stages. -/
+/-- The constructible heart `Sh_c(X, ℚ̄_ℓ) = D^{≤ 0}_c(X, ℚ̄_ℓ) ∩ D^{≥ 0}_c(X, ℚ̄_ℓ)` of the
+standard `t`-structure on the common-stage category `D^b_c(X, ℚ̄_ℓ) = 2-colim_E D^b_c(X, E)`
+(`AlgebraicGeometry.ProEtale.DerivedCategory.ConstructibleTwoColimit`). -/
 def constructibleTwoColimitHeart : ObjectProperty (ConstructibleTwoColimit l X) :=
   constructibleTwoColimitLE l X 0 ⊓ constructibleTwoColimitGE l X 0
 

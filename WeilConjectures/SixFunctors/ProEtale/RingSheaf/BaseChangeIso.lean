@@ -15,7 +15,7 @@ Let `B` be a sheaf of `R`-algebras on `X_proét`, `i : Z ⟶ X` a closed immersi
 quasi-compact open complement `j : U ⟶ X`, `g : X' ⟶ X` a morphism, and `i' : Z' ⟶ X'`,
 `j' : U' ⟶ X'`, `g_Z : Z' ⟶ Z`, `g_U : U' ⟶ U` the base changes, with `i' ≫ g = g_Z ≫ i` and
 `j' ≫ g = g_U ≫ j`. This file constructs the canonical isomorphisms of functors on module
-sheaves of part (4) of blueprint `proposition-extension-zero-restriction-closed-subscheme`:
+sheaves:
 
 * `ProEtale.RingSheaf.openImmersionLowerShriekBaseChangeIso`: `j'_! ∘ g_U^* ≅ g^* ∘ j_!`;
 * `ProEtale.RingSheaf.lowerStarBaseChangeIso`: `g^* ∘ i_* ≅ i'_* ∘ g_Z^*`.
@@ -115,16 +115,12 @@ theorem isIso_openImmersionLowerShriekBaseChangeHom :
     exact IsIso.comp_isIso' (Functor.map_isIso _ _) (IsIso.comp_isIso' this (IsIso.id _))
   exact NatIso.isIso_of_isIso_app _
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (4), and the base
-change assertion of blueprint `proposition-extension-zero-restriction-closed-subscheme` for `j_!`:
-for a sheaf of `R`-algebras `B` on `X_proét`, a quasi-compact open immersion `j : U ⟶ X` with closed
-complement `i`, a morphism `g : X' ⟶ X` and the base changes `j' : U' ⟶ X'`, `i' : Z' ⟶ X'`,
+/-- For a sheaf of `R`-algebras `B` on `X_proét`, a quasi-compact open immersion `j : U ⟶ X` with
+closed complement `i`, a morphism `g : X' ⟶ X` and the base changes `j' : U' ⟶ X'`, `i' : Z' ⟶ X'`,
 `g_U : U' ⟶ U`, `g_Z : Z' ⟶ Z`, the canonical isomorphism `j'_! g_U^* ≅ g^* j_!` of functors from
 `j^* B`-module sheaves on `U_proét` to `g^* B`-module sheaves on `X'_proét`. Here `g_U^* N` is a
 `j'^* g^* B`-module along the isomorphism of coefficient rings
-`ProEtale.RingSheaf.squareCoeffHom`. It is adjoint to the identification
-`j'^* g^* j_! ≅ g_U^* j^* j_! ≅ g_U^*`, and invertible since `g^* j_! N` is supported on
-`U'`. -/
+`ProEtale.RingSheaf.squareCoeffHom`. -/
 noncomputable def openImmersionLowerShriekBaseChangeIso :
     (upperStar _ gU ⋙ Mod.comap (squareCoeffHom B g j j' gU hj)) ⋙
         openImmersionLowerShriek _ i' j' hij' ≅
@@ -179,16 +175,12 @@ theorem isIso_lowerStarBaseChangeHom :
   exact NatIso.isIso_of_isIso_app _
 
 omit [QuasiCompact j] in
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (4), and the base
-change assertion of blueprint `proposition-extension-zero-restriction-closed-subscheme` for `i_*`:
-for a sheaf of `R`-algebras `B` on `X_proét`, a closed immersion `i : Z ⟶ X` with quasi-compact open
-complement `j`, a morphism `g : X' ⟶ X` and the base changes `i' : Z' ⟶ X'`, `j' : U' ⟶ X'`,
-`g_Z : Z' ⟶ Z`, `g_U : U' ⟶ U`, the canonical isomorphism `g^* i_* ≅ i'_* g_Z^*` of functors from
-`i^* B`-module sheaves on `Z_proét` to `g^* B`-module sheaves on `X'_proét`. Here `g_Z^* G` is
-an `i'^* g^* B`-module along the isomorphism of coefficient rings
-`ProEtale.RingSheaf.squareCoeffHom`. It is the unit `g^* i_* ⟶ i'_* i'^* g^* i_*`, invertible
-since `g^* i_* G` is supported on `Z'`, followed by `i'_*` of the identification
-`i'^* g^* i_* ≅ g_Z^* i^* i_* ≅ g_Z^*`. -/
+/-- For a sheaf of `R`-algebras `B` on `X_proét`, a closed immersion `i : Z ⟶ X` with
+quasi-compact open complement `j`, a morphism `g : X' ⟶ X` and the base changes `i' : Z' ⟶ X'`,
+`j' : U' ⟶ X'`, `g_Z : Z' ⟶ Z`, `g_U : U' ⟶ U`, the canonical isomorphism `g^* i_* ≅ i'_* g_Z^*`
+of functors from `i^* B`-module sheaves on `Z_proét` to `g^* B`-module sheaves on `X'_proét`.
+Here `g_Z^* G` is an `i'^* g^* B`-module along the isomorphism of coefficient rings
+`ProEtale.RingSheaf.squareCoeffHom`. -/
 noncomputable def lowerStarBaseChangeIso :
     lowerStar B i ⋙ upperStar B g ≅
       (upperStar _ gZ ⋙ Mod.comap (squareCoeffHom B g i i' gZ hi)) ⋙ lowerStar _ i' :=

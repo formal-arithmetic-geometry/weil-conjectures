@@ -12,7 +12,10 @@ import all Mathlib.Algebra.Homology.Localization
 
 The general derived tensor counit equation is written on complex representatives,
 with the quotient and prolonged-functor objects in their native presentations.
-(blueprint: lem-sfb-coefficient-scalar-tensor-homotopy-complex)
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -42,15 +45,7 @@ attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.
   Localization.Monoidal.tensorBifunctor
 
 -- Compare the homotopy and complex presentations of the same tensor counit face.
-/-- The general derived tensor counit equation on internal complex representatives.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, derived tensor compatibility.
-Apply Functor.leftDerivedTensorComparison_app_app_comp_tensorHom to the two
-homotopy quotient objects. The quotient tensorator is an identity, so its tensor
-object is the quotient of the complex tensor. Prolongation to the homotopy
-category sends a quotient complex to the quotient of its prolongation. The
-homotopy oplax tensor map is the quotient of the complex oplax tensor map.
-These identifications give exactly the displayed complex formula.
-(blueprint: lem-sfb-coefficient-scalar-tensor-homotopy-complex). -/
+/-- The general derived tensor counit equation on internal complex representatives. -/
 private theorem coefficientScalarTensor_homotopyComplex_private (Z : Scheme.{u})
     (P Q : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
     let := internalScalarMonoidal a Z

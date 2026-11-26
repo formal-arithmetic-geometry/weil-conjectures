@@ -31,9 +31,8 @@ projection formula with coefficients `Λ'` holds at `(T K, T M)` as soon as it h
 coefficients `Λ` at `(K, M)` and (Push) is invertible at `K` and at `K ⊗ᴸ Lf^* M`
 (`ProEtale.CondensedRing.isIso_projectionMap_app_app_extendScalars`).
 
-This is the formal part of blueprint `proposition-proper-direct-image-constructible-complexes` (3),
-deducing the projection formula with coefficients `E` and `ℚ̄_ℓ` from the one with coefficients
-`𝒪_E`.
+This is the formal part of deducing the projection formula with coefficients `E` and `ℚ̄_ℓ` from
+the one with coefficients `𝒪_E`.
 -/
 
 @[expose] public section
@@ -128,11 +127,7 @@ variable [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coeffici
 
 /-- The derived (Pull) isomorphism `Lf^* ⋙ T ≅ T ⋙ Lf^*` is compatible with the tensor
 comparisons of the derived pullbacks (`leftDerivedUpperStarTensor`) and of the derived extensions
-of scalars (`derivedExtendScalarsTensorIso`): it is the isomorphism of composites of left derived
-functors induced by the underived (Pull) isomorphism
-(`derivedPullIso_eq_leftDerivedFunctorCompNatIso`), which is monoidal
-(`isMonoidal_pullIso_hom`), so this is
-`Functor.map_leftDerivedTensorComparison_comp_eq_of_iso`. -/
+of scalars (`derivedExtendScalarsTensorIso`). -/
 theorem comparisonCompatible_derivedPullIso :
     Adjunction.ComparisonCompatible (derivedPullIso a f).symm
       (leftDerivedUpperStarTensor Λ f) (leftDerivedUpperStarTensor Λ' f)

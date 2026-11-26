@@ -107,19 +107,7 @@ private theorem canonical_unit_components {X S : Scheme.{u}}
 
 /-- The canonical pullback compositor followed by the identity comparison has the
 canonical composite oplax unit as its component at the tensor unit. The comparison
-is supplied with its canonical defining equality so its named functors stay folded.
-
-Source: the second identity in blueprint
-sec-six-functors-basics/sk-prop-p1-adjunction-rational/
-sk-prop-p1-adjunction-rational-triangle.proof.md; the component equations are
-`leftDerivedUpperStarComp_hom_app_unit` and `leftDerivedUpperStarId_hom_app_unit`.
-(blueprint: lem-sfb-canonical-derived-pullback-section-unit).
-
-Proof: equality induction transports the unit comparison along the section equation.
-Compose this equation with the identity unit equation. Cancel the pullback compositor
-using its inverse and the composition unit equation. The result is the mapped unit
-of the retraction followed by the unit of the section. This is exactly the canonical
-unit map of the composite pullback. -/
+is supplied with its canonical defining equality so its named functors stay folded. -/
 theorem leftDerivedUpperStarSection_hom_app_unit {X S : Scheme.{u}}
     (g : X ⟶ S) (p : S ⟶ X) (h : g ≫ p = 𝟙 X)
     (s : moduleObjectDerivedPullback Λ p ⋙ moduleObjectDerivedPullback Λ g ≅

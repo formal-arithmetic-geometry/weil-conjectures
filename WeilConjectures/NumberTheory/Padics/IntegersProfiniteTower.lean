@@ -14,8 +14,8 @@ import WeilConjectures.NumberTheory.Padics.IntegersCosetBasis
 /-!
 # The profinite tower of the integers in a finite p-adic extension
 
-Stacks Project, Tags 08ZU, 0ET8, 08ZY and 08ZZ
-(auxiliary; not a blueprint node).
+We identify the ring of integers of a finite extension of `ℚ_[l]` with the inverse limit of
+its finite quotients, as rings and as topological spaces.
 
 ## Main definitions and statements
 
@@ -24,6 +24,18 @@ Stacks Project, Tags 08ZU, 0ET8, 08ZY and 08ZZ
 * `Padic.coefficientExtensionPositiveLimitTopology`: the discrete-product subspace topology.
 * `Padic.coefficientExtension_integers_profinite_tower`: the canonical ring and topological
   identification, profiniteness, and eventual unique factorization through finite levels.
+
+## Implementation details
+
+Membership in the `n`th power of the maximal ideal is the condition `|x| ≤ r ^ n` for the
+absolute value `r < 1` of the uniformizer, so these cosets form a clopen neighbourhood basis.
+Injectivity of the reduction map follows from this estimate, and surjectivity from
+completeness, since representatives of a compatible family are Cauchy. Compactness comes from
+properness of `E`, and factorization of maps to finite discrete sets from compactness.
+
+## References
+
+* Stacks Project, Tags 08ZU, 0ET8, 08ZY and 08ZZ.
 -/
 
 @[expose] public section
@@ -34,10 +46,7 @@ namespace Padic
 
 /-- The compatible-family subring of the positive coefficient levels. Coordinate `n` is
 the quotient at exponent `n + 1`; equalizers impose precisely the successive reductions.
-Ring operations are inherited coordinatewise from the product.
-
-Stacks Tag 08ZY
-(auxiliary; not a blueprint node). -/
+Ring operations are inherited coordinatewise from the product. -/
 noncomputable def coefficientExtensionPositiveLimit (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     Subring (∀ n : ℕ, coefficientExtensionRing l E (n + 1)) :=
@@ -47,9 +56,7 @@ noncomputable def coefficientExtensionPositiveLimit (l : ℕ) [Fact l.Prime]
     (Pi.evalRingHom (fun k : ℕ ↦ coefficientExtensionRing l E (k + 1)) n)
 
 /-- The topology on the integers induced from the spectral absolute value on `E`.
-This is the extending absolute value recorded by the coefficient-extension dependency.
-
-(auxiliary; not a blueprint node). -/
+This is the extending absolute value recorded by the coefficient-extension dependency. -/
 @[instance_reducible]
 noncomputable def coefficientExtensionIntegersTopology (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
@@ -58,10 +65,7 @@ noncomputable def coefficientExtensionIntegersTopology (l : ℕ) [Fact l.Prime]
   TopologicalSpace.induced (fun x : coefficientExtensionIntegers l E ↦ (x : E))
     inferInstance
 
-/-- The subspace topology from the product of the discrete positive coefficient rings.
-
-Stacks Tag 08ZY
-(auxiliary; not a blueprint node). -/
+/-- The subspace topology from the product of the discrete positive coefficient rings. -/
 @[instance_reducible]
 noncomputable def coefficientExtensionPositiveLimitTopology (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
@@ -72,33 +76,7 @@ noncomputable def coefficientExtensionPositiveLimitTopology (l : ℕ) [Fact l.Pr
 
 /-- The reductions identify the integers with their profinite tower as rings and spaces.
 They are compact, Hausdorff and totally disconnected. Every continuous surjection to
-a finite discrete set factors uniquely through every sufficiently high positive level.
-
-Stacks Tags 08ZU, 0ET8, 08ZY and 08ZZ
-(auxiliary; not a blueprint node).
-
-Proof: (1) By lem-weil-l-adic-extension-integers-dvr the uniformizer has absolute value
-`r` with `0 < r < 1`, and units have value one. Nonarchimedeanness from
-lem-weil-l-adic-extension-absolute-value gives membership in its nth ideal power exactly
-when the absolute value is at most `r ^ n`. These cosets are clopen and form a neighbourhood
-basis. Lem-weil-valued-dvr-finite-quotients supplies finite quotients and surjective
-transitions. (2) Compatible reductions define a ring homomorphism. If two elements have
-the same reductions, their difference has value at most every `r ^ n`, hence is zero.
-(3) Representatives of a compatible family are Cauchy by the same estimate. Completeness
-from lem-weil-l-adic-extension-complete gives a limit in the closed unit ball. Each of
-its reductions is the specified coordinate. This proves surjectivity and hence the ring
-isomorphism. (4) Coordinate cylinders form a basis on the inverse limit: dominate the
-finitely many restricted coordinates by their maximum. Their inverse images are exactly
-the coset basis, proving continuity in both directions. (5) Properness from
-lem-weil-l-adic-extension-proper makes the closed unit ball compact. (6) The metric is
-Hausdorff; distinct points have distinct reductions, so a clopen coset separates them.
-Thus every connected subset has at most one point. (7) The open fibres of the finite discrete
-map contain coset neighbourhoods. Compactness gives finitely many of them covering the
-integers. Their maximum exponent ensures that the map is constant on every coset at
-that level, defining its factorization. The cover is nonempty since it covers zero.
-(8) Surjectivity of reduction makes the factor unique. Composing with reduction from
-any higher level gives its factorization there, again unique by surjectivity.
--/
+a finite discrete set factors uniquely through every sufficiently high positive level. -/
 theorem coefficientExtension_integers_profinite_tower (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     (∃ e : coefficientExtensionIntegers l E ≃+* coefficientExtensionPositiveLimit l E,

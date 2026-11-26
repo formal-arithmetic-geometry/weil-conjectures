@@ -27,9 +27,6 @@ so type checking does not repeatedly expand the total tensor construction.
 set_option autoImplicit false
 set_option Elab.async false
 set_option linter.privateModule false
--- As in FiniteFreeQuotientTower, avoid expanding dependent total-tensor transports
--- solely to check unused section variables.
-set_option linter.unusedVariables false
 set_option maxErrors 4
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency true

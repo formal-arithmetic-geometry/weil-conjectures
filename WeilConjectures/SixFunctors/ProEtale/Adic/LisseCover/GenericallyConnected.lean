@@ -292,10 +292,7 @@ lemma isGenericallyConnected_SpecMap_comp_fromSpec {Y : Scheme.{u}} [IsLocallyNo
 /-- **Generically connected covers.** Let `Y` be a normal locally Noetherian scheme, `η` a
 point of `Y` specializing to every point, and `f : V ⟶ Y` weakly étale with `V`
 quasi-compact. There is a flat surjective submersive morphism `j : W ⟶ V` from an affine
-scheme such that `j ≫ f` is generically connected relative to `η`: cover `V` by finitely many
-affine opens `Spec B` mapping to affine opens `Spec R` of `Y`, and take `W = ∐ Spec C` for
-faithfully flat ind-étale `B`-algebras `C` which are ind-étale over `R` (Stacks 097Z,
-`Algebra.WeaklyEtale.exists_indEtale`). -/
+scheme such that `j ≫ f` is generically connected relative to `η`. -/
 theorem exists_isGenericallyConnected_cover_of_isIntegrallyClosed_stalk {Y V : Scheme.{u}}
     [IsLocallyNoetherian Y]
     (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y))

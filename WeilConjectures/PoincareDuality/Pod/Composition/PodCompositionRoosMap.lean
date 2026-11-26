@@ -9,7 +9,20 @@ public import WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingRoosComparison
 import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperationModels
 
-/-! # Composition of projection-normalized Roos maps -/
+/-! # Composition of projection-normalized Roos maps
+
+A normalized additive Roos comparison respects any compositor of additive functors.
+
+## Implementation details
+
+Both Roos coordinates reduce the equality to a product identity given by naturality of the
+compositor; the mapping-cocone identity expresses every degree as the sum of the two
+coordinate inclusions. No preservation or derived hypotheses are needed.
+
+## References
+
+* [Stacks, Tag 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -19,18 +32,7 @@ namespace WeilConjectures
 attribute [local implicit_reducible] integralOperationsRoos
   CochainComplex.mappingCocone
 
-/-- A normalized additive Roos comparison respects any compositor of additive functors.
-Source: Stacks 0941; blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: lem-pod-composition-roos-map).
-
-Proof: project the product comparison to every tower level. Naturality of the
-compositor makes its product component followed by the two successive product maps
-equal the single product map followed by the levelwise compositor. The first and
-second Roos coordinates reduce the desired equality to this product identity and
-naturality of the compositor at each coordinate. The mapping-cocone identity
-expresses every degree as the sum of the two coordinate inclusions, so equality of
-both coordinates gives equality of the entire cochain maps. This works for arbitrary
-towers, including zero towers, and requires no preservation or derived hypotheses. -/
+/-- A normalized additive Roos comparison respects any compositor of additive functors. -/
 theorem podCompositionRoosMap
     {A B D : Type*} [Category A] [Category B] [Category D]
     [Abelian A] [Abelian B] [Abelian D]

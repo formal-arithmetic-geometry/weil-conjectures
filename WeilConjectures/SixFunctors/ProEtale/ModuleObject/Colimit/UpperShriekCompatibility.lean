@@ -17,7 +17,7 @@ Let `ℓ` be a prime, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`, and 
 for the extension of scalars `ℚ̄_ℓ,X ⊗ᴸ_{E_X} -` on bounded constructible complexes
 (`ProEtale.CondensedRing.boundedConstructibleToPadicAlgCl`, the functor
 `ProEtale.constructibleToPadicAlgCl` typed on the categories `Dᵇc(X)⟦Λ⟧`). This file treats the
-clause on `f^!` of blueprint `proposition-six-operations-change-coefficients` for the coefficient
+clause on `f^!` of the compatibility of the six operations with the coefficient
 change `E ⟶ ℚ̄_ℓ`. The comparisons (Pull), (Push) and (Shriek) for open immersions are in
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClCompatibility`.
 

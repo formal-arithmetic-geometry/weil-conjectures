@@ -23,7 +23,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 attribute [local irreducible] Mod.derivedExtendMapDerivedCategoryAdjunction
   Adjunction.mapDerivedCategoryAdjunction Mod.extendRestrictAdjunction
   AlgebraicGeometry.ProEtale.upperStarFromPoint AlgebraicGeometry.ProEtale.upperStar
-set_option linter.style.haveILetI false
 
 private lemma sigma_desc_comp_sigma_desc
     {C : Type u} [Category.{v} C] {I : Type w} {A B P : C}
@@ -131,7 +130,7 @@ private lemma qbar_isIso_unit_on_complex
     preservesColimit_of_preserves_colimit_cocone (coproductIsCoproduct _)
       ((isColimitMapCoconeCofanMkEquiv _ _ _).symm
         (DerivedCategory.isColimitCofanMkQObj (coproductIsCoproduct _)))
-  letI : PreservesColimit (Discrete.functor (fun _ : I ↦ K)) Q' :=
+  let : PreservesColimit (Discrete.functor (fun _ : I ↦ K)) Q' :=
     preservesColimit_of_natIso _ (DerivedCategory.quotientCompQhIso (Mod C R)).symm
   have hmap : IsIso (Sigma.desc (fun i ↦ Q'.map (f i))) := by
     rw [← sigmaComparison_map_desc]
@@ -232,7 +231,7 @@ private lemma qbar_isIso_unit
   obtain ⟨K, _, ⟨e₀⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective M
   let QK := (HomotopyCategory.quotient _ (.up ℤ) ⋙ DerivedCategory.Qh).obj K
   let e := e₀ ≪≫ (DerivedCategory.quotientCompQhIso _).symm.app K
-  letI : HasCoproduct (fun _ : I ↦ QK) :=
+  let : HasCoproduct (fun _ : I ↦ QK) :=
     hasCoproduct_of_equiv_of_iso (fun _ : I ↦ M)
       (fun _ : I ↦ QK) (Equiv.refl I) (fun _ ↦ e.symm)
   let u (N : DerivedCategory (Mod C R)) (i : I) :=
@@ -273,11 +272,11 @@ private lemma qbar_isIso_unit
   have hcomp : IsIso (Sigma.desc (fun i : I ↦ u QK i) ≫
       (Mod.comap φ).mapDerivedCategory.map
         ((Mod.extendScalars φ).leftDerivedFunctor.map e.inv)) := by
-    letI := hQ'
+    let := hQ'
     infer_instance
   rw [hdesc] at hcomp
-  letI := hs
-  letI := hcomp
+  let := hs
+  let := hcomp
   exact IsIso.of_isIso_comp_left s _
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -313,9 +312,9 @@ theorem condensedQbar_scalar_basis_unit_of_sections
   intro Z M hM
   let A := Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
     (condensedRingObj (Profinite.continuousMapRingObj E) Z)
-  letI : HasCoproducts.{u + 1} A := fun J ↦
+  let : HasCoproducts.{u + 1} A := fun J ↦
     HasColimitsOfShape.of_small.{u + 1, u + 1} A (Discrete J)
-  letI := hexact Z
+  let := hexact Z
   exact qbar_isIso_unit _ (b Z) (fun N ↦ h Z N) M
 
 end AlgebraicGeometry.ProEtale.CondensedRing

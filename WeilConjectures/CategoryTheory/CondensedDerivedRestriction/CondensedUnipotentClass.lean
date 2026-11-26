@@ -156,9 +156,8 @@ private lemma sectionMap_natural {M N : Modules A} (k : M ⟶ N)
     N.X.obj.map f.op (sectionMap (A := A) k S x) = sectionMap (A := A) k T (M.X.obj.map f.op x) :=
   ConcreteCategory.congr_hom (k.hom.hom.naturality f.op).symm x
 
-set_option linter.unusedVariables false in
 /-- There is a unique unipotent action with the displayed two coordinates. -/
-theorem unipotentActionExist (a : Character A G) : ∃! d : UnipotentAction a, True := by
+theorem unipotentActionExist (a : Character A G) : ∃! _d : UnipotentAction a, True := by
   let d : UnipotentAction a :=
     { act := fun S ↦
         { toFun := fun g ↦ shear S (a.app S g)

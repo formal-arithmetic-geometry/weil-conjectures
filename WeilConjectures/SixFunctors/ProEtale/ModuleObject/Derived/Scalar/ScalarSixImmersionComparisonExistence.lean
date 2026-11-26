@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.ScalarSixDefinitions
 
 /-! # Normalized scalar comparisons for individual immersions
 
-Source: blueprint latest, det-prop-scalar-six-pullback.proof.md, (2).
+This file defines the normalized scalar comparison for a single immersion.
 -/
 
 @[expose] public noncomputable section

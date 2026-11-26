@@ -26,9 +26,6 @@ import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 @[expose] public section
 
 set_option autoImplicit false
--- Replaying the sectionwise transport tactics for linting is expensive.
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 2048

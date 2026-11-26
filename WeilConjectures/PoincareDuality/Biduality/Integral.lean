@@ -20,8 +20,6 @@ objects of the Verdier formalism of `WeilConjectures.PoincareDuality.Verdier`:
 - `ProEtale.CondensedRing.PadicIntegersRingObj.dualizingComplex`: `ω_X = Ra_X^! 𝒪_E`;
 - `ProEtale.CondensedRing.PadicIntegersRingObj.verdierBiduality`: the double-dual morphism
   `δ_K : K ⟶ 𝔻_X 𝔻_X K`, `𝔻_X = RHom(-, ω_X)`.
-
-These are the integral stage `Λ = 𝒪_E` of blueprint `theorem-verdier-biduality`.
 -/
 
 @[expose] public section

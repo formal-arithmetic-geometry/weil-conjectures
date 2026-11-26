@@ -23,10 +23,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperIm
 /-!
 # Extending proper base change to the localizing closure
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-extension.md
-(blueprint: proposition-proper-base-change-localizing-categories--1).
-
 The exchange is the existing canonical ambient mate, transported to the exact termwise
 inverse images. The ambient category is ordinary and unbounded; the generators are bounded
 constructible objects of finite Tor amplitude. All six coefficient cases are retained,
@@ -82,10 +78,8 @@ variable {X' X Y' Y : Scheme.{u}}
 The comparison `Lu^* ≅ D(u^*)` is the canonical exact-functor comparison, and both
 adjunctions are transported along it. Consequently the transported mate inserts the unit
 for `p'`, applies the termwise square comparison built from `upperStarComp` and `sq.w`,
-and contracts the counit for `p`, exactly as in the displayed formula of the source.
-This is a change of presentation of `condensedAmbientExchange`, with no new choice of map.
-Source: blueprint main-20261015, unbounded base-change extension, displayed beta
-(blueprint: proposition-proper-base-change-localizing-categories--1). -/
+and contracts the counit for `p`, as in the usual formula for the exchange map.
+This is a change of presentation of `condensedAmbientExchange`, with no new choice of map. -/
 def termwiseCondensedAmbientExchange
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (sq : ChosenCartesianSquare g' p' p g) :
@@ -100,9 +94,7 @@ def termwiseCondensedAmbientExchange
 /-- The extension implication for one coefficient ring: the specified base-change map
 being invertible on every bounded constructible finite-Tor object implies its invertibility
 on every object of their localizing closure. Both quantifiers range over the same ordinary
-unbounded derived category of internal modules over the pulled-back condensed ring.
-Source: blueprint main-20261015, unbounded base-change extension, final sentence
-(blueprint: proposition-proper-base-change-localizing-categories--1). -/
+unbounded derived category of internal modules over the pulled-back condensed ring. -/
 def UnboundedBaseChangeExtension
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (sq : ChosenCartesianSquare g' p' p g) : Prop :=
@@ -141,23 +133,7 @@ private theorem comparison_comp_commShift
   infer_instance
 
 /-- The isomorphism locus of the specified ambient exchange is triangulated.
-No properness or finiteness hypothesis is required for this exactness assertion.
-Source: blueprint main-20261015, proposition-proper-base-change-localizing-categories--1,
-steps 2--4 (blueprint: proposition-proper-base-change-localizing-categories--1).
-
-Proof: transport the termwise coherent shifts to each total inverse image through
-`leftDerivedUpperStarIsoMapDerivedCategory`. Transport its exactness through the same
-isomorphism. For the two derived adjunctions, equip the right adjoints with the unique
-compatible shifts; the triangulated right-adjoint theorem supplies their exactness.
-The pullback comparison commutes with shifts: after the exact-functor comparisons it
-is the localization of the termwise comparison induced by `upperStarComp` and the square
-equality. In each degree its component on a shifted complex is its component at the
-shifted degree, and additivity respects the signed differential. The derived comparison
-is built by precisely these exact-functor identifications. The units and counits commute
-with these chosen shifts. Expand `mateEquiv`: its whiskered units, comparison and counit,
-and its associators and unitors, all commute with shifts, so their composite does too.
-The two composite functors are triangulated. The standard isomorphism-locus theorem
-then gives closure under zero, all integer shifts and distinguished triangles. -/
+No properness or finiteness hypothesis is required for this exactness assertion. -/
 private theorem condensedAmbientExchange_isoLocus_triangulated
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X' X Y' Y : Scheme.{u}}
@@ -267,41 +243,10 @@ private theorem extension_of_preservation
       _root_.DerivedCategory.finiteTorAmplitude _ M)).2.2.2.1
 
 /-- Proper base change extends from Dctf to its localizing closure, for every admissible
-coefficient in the source's list. The last coefficient is specifically the ring of
+coefficient in the list of coefficient cases. The last coefficient is specifically the ring of
 continuous functions valued in some finite subextension, rather than all continuous
 functions into the algebraic closure. Finite rings are represented in `Type 0`, which
-includes a representative of every finite coefficient ring.
-Source: blueprint main-20261015, unbounded base-change extension
-(blueprint: proposition-proper-base-change-localizing-categories--1).
-
-Proof plan, following the five steps of the DAG node:
-1. Properness of `p'` follows from properness under base change
-   (lem-weil-pbc-proper-base-change). By proposition-proper-direct-image-extension-zero--1 both
-   proper pushforwards carry localizing closures to localizing closures and preserve ambient
-   small sums. By proposition-proper-base-change-localizing-categories--1 the two inverse images do
-   so too. Hence both composites restrict to sum-preserving functors. Fullness identifies
-   coproducts in these subcategories with the ambient coproducts
-   (definition-localizing-subcategory).
-2. Cartesian coefficients make inverse images exact (lemma-inverse-image-coefficient-sheaves).
-   The exact-functor comparison of sk-def-sfb-derived-categories transports the adjunctions
-   of sk-def-sfb-module-derived-pushpull to the termwise inverse images. Equip their right
-   adjoints with the unique compatible coherent shifts
-   (lem-weil-pbc-adjunction-shift-compatibility-unique); they are exact by
-   lem-sf-triangulated-right-adjoint. Restrict and compose these exact functors using
-   situation-conventions and -composite. These auxiliary structures
-   change neither the underlying functors nor the exchange map.
-3. The comparison from def-sfb-module-upper-star-comp commutes with integer shifts
-   degreewise: its degree-r component on a shifted complex is its component in degree
-   r+n on the original complex. Additivity respects the shifted differential. Localization
-   preserves this equality (def-weil-abstract-derived-category).
-4. The unit and counit commute with the shifts of step 2. Whiskering and composition
-   preserve compatibility (lem-weil-pbc-commshift-nattrans-comp-whisker), so the specified
-   exchange restricts to a shift-compatible natural transformation of the two exact
-   sum-preserving functors on the full localizing subcategories.
-5. Apply lemma-checking-isomorphisms-constructible-complexes--1. Its generator hypothesis is exactly
-the antecedent of
-   UnboundedBaseChangeExtension, and its conclusion is the desired assertion on the closure.
--/
+includes a representative of every finite coefficient ring. -/
 theorem unboundedBaseChangeExtension
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

@@ -194,10 +194,6 @@ private theorem ratModInt_dyadic_not_killed (k : ℕ) (hk : 0 < k) :
   have hzlt : z < (1 : ℤ) := by exact_mod_cast (he ▸ hlt)
   omega
 
--- The inherited statement names a nondependent index binder `n`.
-
--- The inherited statement names a nondependent index binder `n`.
-set_option linter.unusedVariables false in
 /-- The constant sheaf `ℚ/ℤ` is torsion, but for nonempty `T` its sections over the countable
 disjoint union of copies of `T` (the product of countably many copies of `ℚ/ℤ`) contain a
 non-torsion element. -/
@@ -206,7 +202,7 @@ theorem constant_ratModIntSheaf_sections_not_torsion (T : Scheme.{u}) :
         (AddCommGrpCat.of (ULift.{u + 1} (ℚ ⧸ AddSubgroup.zmultiples (1 : ℚ))))) ∧
       (Nonempty T →
         ∃ (U : T.Etale) (e : U.left ≅ ∐ (fun _ : ℕ+ ↦ T))
-          (j : ∀ n : ℕ+, Scheme.Etale.mk (𝟙 T) ⟶ U),
+          (j : ∀ _n : ℕ+, Scheme.Etale.mk (𝟙 T) ⟶ U),
           U.hom = e.hom ≫ Sigma.desc (fun _ : ℕ+ ↦ 𝟙 T) ∧
           (∀ n : ℕ+, (j n).left = Sigma.ι (fun _ : ℕ+ ↦ T) n ≫ e.inv) ∧
           Function.Bijective (fun s : ((constantSheaf T.smallEtaleTopology

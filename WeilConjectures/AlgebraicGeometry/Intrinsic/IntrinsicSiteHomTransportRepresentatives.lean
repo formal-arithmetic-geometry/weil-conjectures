@@ -86,7 +86,6 @@ open CategoryTheory Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.ProEtale
 
-set_option linter.style.haveILetI false
 
 /-- Representative-level coefficient transport, for fixed representatives `Lc` and `Ic` of the
 source and target derived objects with `Ic` K-injective. -/
@@ -106,8 +105,8 @@ theorem intrinsicSiteHom_transport_representatives (X : Scheme.{u}) (A : Type u)
             (finiteCoefficientIntrinsicRealization X A).mapDerivedCategory.obj
               (DerivedCategory.Q.obj Ic))) := by
   let F := finiteCoefficientIntrinsicRealization X A
-  letI : F.IsEquivalence := (finiteCoefficientIntrinsicRealization_exact X A).1
-  letI : F.PreservesKInjectiveComplexes :=
+  let : F.IsEquivalence := (finiteCoefficientIntrinsicRealization_exact X A).1
+  let : F.PreservesKInjectiveComplexes :=
     Functor.preservesKInjectiveComplexes_of_isEquivalence F
   obtain ⟨e₁⟩ := intrinsicSiteHom_transport_chain X A Lc Ic
   obtain ⟨e₂⟩ := derivedInternalHomOfUniverses_obj_iso.{u + 1, u, u}

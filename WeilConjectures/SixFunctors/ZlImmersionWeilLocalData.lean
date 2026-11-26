@@ -19,10 +19,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Normalized clause data for immersion local behavior
 
-Source: main-20261015, sec-deligne-laumon-general/sk-l-dl-general-excision,
-lem-zl-morphism-open-closed-reduction.proof.md, Restriction and Part 2
-(blueprint: def-zl-immersion-weil-local-data).
-
 The auxiliary structures package the clauses of this statement. No operation is chosen
 from their existence. All stalks are the recorded point fibres, and normalization on every
 finite stage specifies the local operators and the pullback comparison themselves.
@@ -31,7 +27,7 @@ finite stage specifies the local operators and the pullback comparison themselve
 
 - `ZlWeilExactOperation`: exact-heart restriction and the normalized Weil cohomology maps.
 - `ZlWeilLocalOperators`: the specified local geometric Frobenius on actual stalks.
-- `ZlImmersionPullback` and `ZlOpenExtension`: the two clauses of the node.
+- `ZlImmersionPullback` and `ZlOpenExtension`: the two clauses of the statement.
 - `zlOpenStalkIso`: the inside-open stalk comparison constructed from restriction and unit.
 -/
 
@@ -60,9 +56,7 @@ variable (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
 variable (Y₀ : Over (Spec (.of D.k₀)))
   [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
 
-/-- The recorded Frobenius endofunctor, with the fixed coefficient datum.
-Source: Restriction, induced Weil structures
-(blueprint: def-zl-immersion-weil-local-data). -/
+/-- The recorded Frobenius endofunctor, with the fixed coefficient datum. -/
 abbrev zlFrobenius := sfCommonStageWeilFrobeniusPullback D c.l c.different Y₀ c.Qbar
 
 variable {Y₀}

@@ -24,10 +24,6 @@ import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 * [Stacks, Tag 00FV]
 -/
 
-set_option linter.style.haveILetI false
-set_option linter.unnecessarySimpa false
-set_option linter.style.longLine false
-
 @[expose] public section
 
 universe v
@@ -49,14 +45,14 @@ theorem zeroDimensional_baseChange_geometry
       (∀ c : C, c ∈ closedPoints C ∧
         IsIso ((C ↘ Spec (.of k)).residueFieldMap c)) := by
   let f : C ⟶ Spec (.of k) := C ↘ Spec (.of k)
-  letI : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
-  letI : IsLocallyArtinian C := IsLocallyArtinian.of_topologicalKrullDim_le_zero hC
-  letI : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
-  letI : IsArtinianScheme C := ⟨⟩
+  let : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  let : IsLocallyArtinian C := IsLocallyArtinian.of_topologicalKrullDim_le_zero hC
+  let : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
+  let : IsArtinianScheme C := ⟨⟩
   refine ⟨inferInstance, inferInstance, ?_⟩
   intro c
   have hc : IsClosed ({c} : Set C) := isClosed_discrete _
-  refine ⟨by simpa [closedPoints] using hc, ?_⟩
+  refine ⟨by simp [closedPoints], ?_⟩
   have hbase : IsIso ((Spec (.of k)).fromSpecResidueField (f c)) := by
     have he := SpecMap_residueFieldIsoBase_inv (𝟙 (Spec (.of k))) (f c)
       (isClosed_discrete _)
@@ -70,7 +66,7 @@ theorem zeroDimensional_baseChange_geometry
     infer_instance
   have hmap : IsIso (Spec.map (f.residueFieldMap c)) :=
     (isIso_comp_right_iff _ _).mp hcomp
-  letI : IsIso (Scheme.Spec.map (f.residueFieldMap c).op) := hmap
+  let : IsIso (Scheme.Spec.map (f.residueFieldMap c).op) := hmap
   have hop : IsIso (f.residueFieldMap c).op :=
     isIso_of_reflects_iso (f.residueFieldMap c).op Scheme.Spec
   exact isIso_of_op _

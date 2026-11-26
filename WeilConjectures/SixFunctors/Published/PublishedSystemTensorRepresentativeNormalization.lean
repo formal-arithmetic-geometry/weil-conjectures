@@ -62,8 +62,10 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import all WeilConjectures.SixFunctors.System.SystemPullbackCompositorIdentification
 
 /-! Representative normalization for the transported ambient tensor comparison.
-Source: Stacks 03D3, 03EL, 07A4 and 07A7.
-(blueprint: lem-sf-published-system-tensor-identification-representative).
+
+## References
+
+* Stacks Project, Tags `03D3`, `03EL`, `07A4`, `07A7`, `06YU`
 -/
 
 @[expose] public noncomputable section
@@ -179,8 +181,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Transport the ambient tensor comparison back along the specified inverse-image
-identification. Its representative normalization is the remaining chain-level step
-in the proof of the published-system tensor identification. -/
+identification. -/
 noncomputable def publishedSystemTransportedTensor {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (pullbackTensorCalculus l E Y).systemClosed.tensor ⋙
         pullbackTensorSequenceDerived l E f ≅
@@ -202,27 +203,7 @@ attribute [local irreducible] AmbientPullbackTensor.tensorData AmbientPullbackTe
   pullbackTensorSequenceInverse Functor.leftAdjoint
 
 /-- The ambient representative rectangle on flat-term K-flat complexes. This is the
-flat representative part of the descent argument for arbitrary K-flat complexes.
-Source: Stacks 03D3, 03EL, 07A4 and 07A7.
-(blueprint: lem-sf-published-system-tensor-identification-representative-flat).
-
-Proof: the constant-section coefficient formulas identify the two direct images,
-so their chosen left adjoints and the adjunction units agree after transport.
-The ambient ordinary comparison sends the unit of a pure tensor to the tensor
-of the two units. On a total summand in degrees p,q, its chain model is the
-inverse of this ordinary comparison followed by the pulled-back summand inclusion.
-Naturality of the adjunction unit at that inclusion therefore shows that the inverse
-chain map satisfies the unit formula defining pullbackTensorSequenceCochain. The
-signed total differential is already built into both chain maps. Adjunction and
-pure-tensor extensionality in every summand, or the uniqueness clause of that
-cochain comparison, identify the inverse chain map with the specified cochain map.
-In the ambient model's derived equation, invert the chain isomorphism and cancel
-the four model and exact-localization isomorphisms to obtain the forward rectangle.
-Finally transport back along sequence_inverse_eq; the induced equality on exact
-derived functors is publishedSystemAmbientPullIso, so its component transports
-are precisely those in publishedSystemTransportedTensor. K-flat preservation
-identifies the target model, independently of its proof witness.
--/
+flat representative part of the descent argument for arbitrary K-flat complexes. -/
 theorem publishedSystemTransportedTensor_normalized_flat {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)
@@ -476,18 +457,7 @@ set_option linter.unusedVariables false in
 /-- The flat representative rectangle determines the transported comparison by
 K-flat tensor descent. The conclusion is an equality of tensor comparison isomorphisms,
 which is then used to extend the flat representative equation to all independent
-K-flat complexes.
-Source: Stacks 06YU and 07A4.
-(blueprint: lem-sf-published-system-tensor-identification-representative-descent).
-
-Proof: restriction to pairs of flat-term K-flat representatives is faithful by
-cochain tensor model rigidity. For each such pair, the assumed forward rectangle
-and the canonical comparison's defining rectangle have the same right-hand side.
-Cancel the derived image of the source tensor-model isomorphism on the left,
-and tensor applied to the two exact-factorization isomorphisms on the right.
-The resulting component equalities prove equality of the restricted hom maps;
-faithfulness and isomorphism extensionality give the stated equality.
--/
+K-flat complexes. -/
 theorem publishedSystemTransportedTensor_eq_of_flat_normalized {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     (hflat : ∀ (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)
@@ -529,13 +499,7 @@ theorem publishedSystemTransportedTensor_eq_of_flat_normalized {X Y : Scheme.{u}
   exact (pullbackTensorSystemComparison_existsUnique l E f).exists.choose_spec P Q hP hQ
 
 /-- On flat K-flat representatives, the transported ambient comparison has the
-same inverse representative rectangle as `pullbackTensorSystemComparison`.
-Source: Stacks 03D3, 03EL, 07A4 and 07A7, representative normalization of the
-pullback tensor comparison. The proof identifies the ordinary pure-tensor map,
-its signed total complex map, and the exact-localization model maps on every
-summand; the `sequence_inverse_eq` transport removes the ambient presentation.
-(blueprint: lem-sf-published-system-tensor-identification-representative).
--/
+same inverse representative rectangle as `pullbackTensorSystemComparison`. -/
 theorem publishedSystemTransportedTensor_normalized {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)

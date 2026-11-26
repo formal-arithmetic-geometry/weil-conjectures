@@ -110,14 +110,8 @@ lemma openImmersionLowerShriekAdjunction_unit_app_comp_map_lowerShriekToLowerSta
 
 /-- The idempotent `e_U : 𝟭 ⟶ 𝟭` of the clopen subscheme `U` on pro-étale sheaves on `X`, for an
 open immersion `j : U ⟶ X` with closed range: the composite
-
-```
-  𝟭 ──η──▶ j_* j^* ≃ j_! j^* ──ε──▶ 𝟭
-```
-
-of the unit of `j^* ⊣ j_*`, the inverse of the comparison `j_! ⟶ j_*` and the counit of
-`j_! ⊣ j^*`. Its image on derived categories is `AlgebraicGeometry.ProEtale.clopenIdempotent`
-(`AlgebraicGeometry.ProEtale.clopenIdempotent_app_Qh_obj`). -/
+`𝟭 ⟶ j_* j^* ≃ j_! j^* ⟶ 𝟭` of the unit of `j^* ⊣ j_*`, the inverse of the comparison
+`j_! ⟶ j_*` and the counit of `j_! ⊣ j^*`. -/
 noncomputable def clopenIdempotentSheaf (hj : IsClosed (Set.range j.base)) :
     𝟭 (Sheaf (Scheme.ProEt.topology X) A) ⟶ 𝟭 _ :=
   have := isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range A j hj
@@ -196,14 +190,8 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
   [Abelian.HasFunctorialFlatResolution A]
 
 /-- The idempotent `e_U : 𝟭 ⟶ 𝟭` of the clopen subscheme `U` on `D(X_proét)`, for an open
-immersion `j : U ⟶ X` with closed range: the composite
-
-```
-  𝟭 ──η──▶ Rj_* Lj^* ≃ j_! j^* ──ε──▶ 𝟭
-```
-
-of the unit of `Lj^* ⊣ Rj_*`, `Lj^* ≃ j^*`, `rightDerivedLowerStarIsoOfIsClosedRange` and
-the counit of the derived adjunction `j_! ⊣ j^*`. -/
+immersion `j : U ⟶ X` with closed range: the composite `𝟭 ⟶ Rj_* Lj^* ≃ j_! j^* ⟶ 𝟭` of the
+unit of `Lj^* ⊣ Rj_*`, `Lj^* ≃ j^*` and the counit of the derived adjunction `j_! ⊣ j^*`. -/
 noncomputable def clopenIdempotent (hj : IsClosed (Set.range j.base)) :
     𝟭 (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) ⟶ 𝟭 _ :=
   (derivedUpperStarLowerStarAdjunction A j).unit ≫

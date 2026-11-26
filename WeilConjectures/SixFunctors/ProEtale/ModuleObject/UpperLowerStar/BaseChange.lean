@@ -20,7 +20,6 @@ schemes, on module objects over a condensed ring `Λ` on the pro-étale sites
 pullbacks. It is an isomorphism when the horizontal maps are isomorphisms
 (`ProEtale.CondensedRing.isIso_lowerStarBaseChange_of_isIso`), and the base-change morphisms of
 horizontally pasted squares paste (`ProEtale.CondensedRing.lowerStarBaseChange_app_paste`).
-
 -/
 
 @[expose] public section
@@ -137,14 +136,7 @@ variable {X'' Y'' : Scheme.{u}} {h : Y'' ⟶ Y'} {h' : X'' ⟶ X'} {f'' : X'' �
 
 /-- **Pasting law of the pullback comparisons**: the comparison of the outer square of two
 horizontally pasted squares is the pasting of their comparisons, through the composition
-isomorphisms `upperStarComp`. The squares are
-```
-X'' --h'--> X' --g'--> X
- |f''       |f'        |f
- v          v          v
-Y'' --h---> Y' --g---> Y
-```
--/
+isomorphisms `upperStarComp`, for squares `sq₁` (right) and `sq₂` (left). -/
 lemma upperStarSquareComparison_paste (sq₁ : CommSq g' f' f g) (sq₂ : CommSq h' f'' f' h)
     (sq : CommSq (h' ≫ g') f'' f (h ≫ g))
     (N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
@@ -168,14 +160,7 @@ lemma upperStarSquareComparison_paste (sq₁ : CommSq g' f' f g) (sq₂ : CommSq
 
 /-- **Pasting law of the base-change morphisms**: the base-change morphism of the outer square of
 two horizontally pasted squares is the pasting of their base-change morphisms, through the
-composition isomorphisms `upperStarComp`. The squares are
-```
-X'' --h'--> X' --g'--> X
- |f''       |f'        |f
- v          v          v
-Y'' --h---> Y' --g---> Y
-```
--/
+composition isomorphisms `upperStarComp`, for squares `sq₁` (right) and `sq₂` (left). -/
 lemma lowerStarBaseChange_app_paste (sq₁ : CommSq g' f' f g) (sq₂ : CommSq h' f'' f' h)
     (sq : CommSq (h' ≫ g') f'' f (h ≫ g))
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :

@@ -43,8 +43,7 @@ theorem colimit_site_covering_axioms_HasIsos
   have _ := hfinite
   have _ := hcover
   have _ := hpullback
-  set_option linter.style.haveILetI false in
-    letI : IsIso f := hf
+  let : IsIso f := hf
   obtain ⟨j, X, R, h, hR, hmap⟩ :=
     filtered_colimit_iso_presieve_representation J F P V hobjects harrows f
   exact (hQ T (Presieve.singleton f)).2 ⟨j, X, R, h, hR, hmap⟩

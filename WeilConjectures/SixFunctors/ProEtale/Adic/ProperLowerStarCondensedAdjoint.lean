@@ -118,13 +118,10 @@ theorem exists_adjunction_boundedConstructibleAdicRightDerivedLowerStar
 
 variable (k₀) in
 include k₀ in
-/-- **The proper direct image on `Dᵇc(-, ℚ̄_ℓ)` is a left adjoint** (blueprint
-`theorem-exceptional-inverse-image--17`, in the model of `ℓ`-adic sheaves): for a
+/-- **The proper direct image on `Dᵇc(-, ℚ̄_ℓ)` is a left adjoint**: for a
 proper morphism `f : Y ⟶ X`, with `X` separated of finite type over an algebraic closure `k` of a
 finite field `k₀` with `ringChar k ≠ ℓ`, the direct image `Rf_* : Dᵇc(Y, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` has
-a right adjoint. It is transported from the condensed model
-(`ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`) by
-`AlgebraicGeometry.ProEtale.exists_adjunction_boundedConstructibleAdicRightDerivedLowerStar`. -/
+a right adjoint. -/
 theorem isLeftAdjoint_boundedConstructibleAdicRightDerivedLowerStar_of_isProper [IsAlgClosed k]
     {X Y : Scheme.{u}} (s : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType s]
     [QuasiCompact s] [IsSeparated s] (hk : ringChar k ≠ ℓ) (f : Y ⟶ X) [IsProper f] :

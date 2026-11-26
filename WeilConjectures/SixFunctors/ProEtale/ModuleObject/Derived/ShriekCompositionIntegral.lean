@@ -78,11 +78,7 @@ lemma boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicInteger
 
 /-- **Interchanging proper direct image and extension by zero** for bounded constructible
 `𝒪_E`-sheaves: the exchange morphism `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'`
-proper is an isomorphism. The argument is that of
-`isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_of_isIso`: over the open `X`
-it follows from the mate calculus and proper base change for `𝒪_E`-sheaves
-(`isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers`), and over the closed complement
-of `X` both sides vanish. -/
+proper is an isomorphism. -/
 theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicIntegers
     [IsProper p'.left] (sq : IsPullback p i' j p') :
     IsIso (PadicIntegersRingObj.boundedConstructibleLowerStarOpenImmersionLowerShriekExchange

@@ -69,11 +69,9 @@ variable {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Categor
 
 /-- **Mates of restrictions to full subcategories.** Consider adjunctions `E₁ ⊣ Res₁ : A ⇄ B` and
 `E₂ ⊣ Res₂ : A' ⇄ B'`, functors `L₁ : A ⥤ A'`, `L₂ : B ⥤ B'` and an isomorphism
-`e : L₂ ⋙ Res₂ ≅ Res₁ ⋙ L₁`, all of which preserve full subcategories `PA`, `PB`, `PA'`, `PB'`,
-so that the adjunctions restrict to the full subcategories (`Adjunction.restrictFullyFaithful`).
+`e : L₂ ⋙ Res₂ ≅ Res₁ ⋙ L₁`, all of which preserve full subcategories `PA`, `PB`, `PA'`, `PB'`.
 If `e'` is an isomorphism of the restricted functors which is `e` on the underlying objects, then
-the mate `L₁ ⋙ E₂ ⟶ E₁ ⋙ L₂` of `e'` (`Adjunction.pushHomOfComapIso`) is, on the underlying
-objects, the mate of `e`. -/
+the mate `L₁ ⋙ E₂ ⟶ E₁ ⋙ L₂` of `e'` is, on the underlying objects, the mate of `e`. -/
 lemma pushHomOfComapIso_restrictFullyFaithful_app_hom
     (e' : PB'.lift (PB.ι ⋙ L₂) hL₂ ⋙ PA'.lift (PB'.ι ⋙ Res₂) hRes₂ ≅
       PA.lift (PB.ι ⋙ Res₁) hRes₁ ⋙ PA'.lift (PA.ι ⋙ L₁) hL₁)

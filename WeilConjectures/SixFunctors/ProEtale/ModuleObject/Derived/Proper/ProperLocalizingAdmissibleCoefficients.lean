@@ -20,16 +20,14 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 /-!
 # Proper direct-image hypotheses for the recorded admissible coefficients
 
-Source: blueprint main-20261015, proposition-construction-independence-rf-shriek, proper-image
-paragraph. (blueprint: det-sf-comp-proper-admissible-hypotheses).
+The admissible coefficient predicate splits into six cases. In each case the proper-image
+hypotheses are transported across the displayed coefficient-ring isomorphism and the existing
+coefficient theorem `proper_image_localizing_proper_coefficients` is applied.
 
-Proof plan: split the admissible coefficient predicate into its six cases. In each
-case transport the proper-image hypotheses across the displayed coefficient-ring
-isomorphism; the finite, integral, rational, and finite-extension cases invoke
-`proper_image_localizing_proper_coefficients`, as does the finite-subextension
-algebraic-closure case. The transport argument uses the induced
-equivalences of module and derived categories, which preserve
-finite Tor amplitude, constant constructibility, localizing closure, and colimits.
+## Implementation details
+
+The transport argument uses the induced equivalences of module and derived categories, which
+preserve finite Tor amplitude, constant constructibility, localizing closure, and colimits.
 -/
 
 @[expose] public section
@@ -169,17 +167,7 @@ private theorem properHypotheses_comap {X Y : Scheme.{u}} (p : X ⟶ Y)
     exact preservesColimit_of_natIso D e
 
 /-- Proper direct image preserves the Dctf generators and ambient coproducts for
-every isomorphism class of recorded admissible coefficient.
-
-Source: blueprint proposition-construction-independence-rf-shriek, second proof paragraph, with the
-coefficient convention of definition-localizing-subcategory.
-(blueprint: det-sf-comp-proper-admissible-hypotheses).
-
-Proof: restriction along a coefficient isomorphism is an exact monoidal equivalence.
-It preserves finite presentations, finite constant local models, Tor intervals and
-localizing closures. The derived restriction/direct-image comparison conjugates the
-pushforwards, so their preservation properties transfer. Split admissibility into its
-six representatives and apply the existing coefficient theorem to each. -/
+every isomorphism class of recorded admissible coefficient. -/
 theorem properLocalizingHypotheses_admissible
     (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

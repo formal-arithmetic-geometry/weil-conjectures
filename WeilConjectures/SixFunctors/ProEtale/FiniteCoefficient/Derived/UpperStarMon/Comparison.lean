@@ -57,18 +57,10 @@ variable [ProEtale.UpperStarPreservesFlat A]
 attribute [local instance] isLeftDerivedFunctor₂_derivedTensor_leftDerivedUpperStar
   isLeftDerivedFunctor₂_leftDerivedUpperStar_derivedTensor
 
-/-- The comparison `Lg^*(K ⊗ᴸ M) ⟶ Lg^*K ⊗ᴸ Lg^*M` of bifunctors,
-of type `D(Y_proét) ⥤ D(Y_proét) ⥤ D(Z_proét)`, obtained by deriving the oplax monoidal
-structure `δ` of `g^*`. It is the unique natural transformation such that, for `K, M` in
-`K(Y_proét)`, the square
-```
-  Lg^*(Qh K ⊗ᴸ Qh M) ──comparison──▶ Lg^*(Qh K) ⊗ᴸ Lg^*(Qh M)
-          │                                    │
-          │ Lg^*(μ Qh) ≫ counit                │ derivedTensorLeftDerivedUpperStarCounit
-          ▼                                    ▼
-   Qh(g^*(K ⊗ M)) ─────────Qh(δ g^*)──────▶ Qh(g^*K ⊗ g^*M)
-```
-commutes, the left vertical arrow being `leftDerivedUpperStarDerivedTensorCounit`. -/
+/-- The comparison `Lg^*(K ⊗ᴸ M) ⟶ Lg^*K ⊗ᴸ Lg^*M` of bifunctors
+`D(Y_proét) ⥤ D(Y_proét) ⥤ D(Z_proét)`, obtained by deriving the oplax monoidal structure `δ` of
+`g^*`. It is the unique natural transformation compatible with `δ` on `K(Y_proét)` via the counits
+`leftDerivedUpperStarDerivedTensorCounit` and `derivedTensorLeftDerivedUpperStarCounit`. -/
 noncomputable def leftDerivedUpperStarTensorComparison :
     leftDerivedUpperStarDerivedTensor A g ⟶ derivedTensorLeftDerivedUpperStar A g :=
   Functor.leftDerived₂NatTrans _ (derivedTensorLeftDerivedUpperStarCounit A g)

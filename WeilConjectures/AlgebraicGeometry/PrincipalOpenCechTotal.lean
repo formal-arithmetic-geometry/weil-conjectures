@@ -453,14 +453,13 @@ private theorem principalCech_transport_naturality
   subst k
   simp
 
-set_option linter.unusedVariables false in
 /-- The Čech totalization extends to an additive functor, with componentwise maps.
 Its augmentation restricts sections of the union to the singleton rows and is zero
 on all larger subsets (Stacks, Tag 08D2). -/
 theorem principalCechFunctor_exists :
     ∃ (C : CochainComplex
       (SheafOfModules.{uC} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ ⥤
-        CochainComplex (ModuleCat.{uC} A) ℤ) (hC : C.Additive),
+        CochainComplex (ModuleCat.{uC} A) ℤ) (_hC : C.Additive),
       (∀ F, C.obj F = principalCechTotal r f F) ∧
       (∀ (F G : CochainComplex
         (SheafOfModules.{uC} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) (g : F ⟶ G)

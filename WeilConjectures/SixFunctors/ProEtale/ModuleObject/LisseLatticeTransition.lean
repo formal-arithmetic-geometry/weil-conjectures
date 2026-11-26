@@ -208,8 +208,8 @@ lemma upperStarComp_inv_app_comp_congr_comp_hom_app {Q X Z : Scheme.{u}} (c : Q 
   subst p
   simp [upperStarCongr_self]
 
-/-- The congruence isomorphisms compose. The composite equality is an independent hypothesis,
-so that no new equality proofs are built (comparing such proofs can make the kernel time out). -/
+/-- The congruence isomorphisms compose, for an independent hypothesis on the composite
+equality. -/
 @[reassoc]
 lemma upperStarCongr_hom_app_trans' {X Z : Scheme.{u}} {x y z : X ⟶ Z} (p : x = y) (p' : y = z)
     (p'' : x = z) (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
@@ -225,8 +225,7 @@ lemma upperStarCongr_hom_app_self {X Z : Scheme.{u}} {x : X ⟶ Z} (p : x = x)
   rw [upperStarCongr_self]
   rfl
 
-/-- The congruence isomorphism does not depend on the proof of the equality; rewriting with this
-lemma replaces one proof by another syntactically. -/
+/-- The congruence isomorphism does not depend on the proof of the equality. -/
 lemma upperStarCongr_hom_app_congr {X Z : Scheme.{u}} {x y : X ⟶ Z} (p q : x = y)
     (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
     (upperStarCongr Λ p).hom.app M = (upperStarCongr Λ q).hom.app M := by

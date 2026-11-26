@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionModuleOplaxNormalized
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 open CategoryTheory.MonoidalCategory
@@ -84,14 +83,14 @@ theorem ringFamilyGlobalExtension_module_monoidal
       letI := mon
       Functor.OplaxMonoidal.η (ringFamilyGlobalExtension O) =
         ringFamilyGlobalExtensionUnit O := by
-  letI : MonoidalCategory (SheafOfModules ((sheafCompose J
+  let : MonoidalCategory (SheafOfModules ((sheafCompose J
       (forget₂ CommRingCat RingCat)).obj O)) := SheafOfModules.monoidalCategory O
-  letI : MonoidalCategory (RingSiteModules (ringFamilyGlobalRing O)) :=
+  let : MonoidalCategory (RingSiteModules (ringFamilyGlobalRing O)) :=
     SheafOfModules.monoidalCategory (CochainComplex.onePointRingSheaf (ringFamilyGlobalRing O))
   obtain ⟨oplax, hη, hδ, hunit⟩ := ringFamilyGlobalExtension_oplax_normalized O
-  letI := oplax
-  letI : IsIso (Functor.OplaxMonoidal.η (ringFamilyGlobalExtension O)) := hη
-  letI : ∀ M N, IsIso (Functor.OplaxMonoidal.δ (ringFamilyGlobalExtension O) M N) := hδ
+  let := oplax
+  have : IsIso (Functor.OplaxMonoidal.η (ringFamilyGlobalExtension O)) := hη
+  have : ∀ M N, IsIso (Functor.OplaxMonoidal.δ (ringFamilyGlobalExtension O) M N) := hδ
   refine ⟨Functor.Monoidal.ofOplaxMonoidal (ringFamilyGlobalExtension O), ?_⟩
   exact hunit
 

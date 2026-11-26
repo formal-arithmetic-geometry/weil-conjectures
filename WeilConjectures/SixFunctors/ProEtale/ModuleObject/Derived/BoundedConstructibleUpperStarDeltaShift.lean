@@ -40,14 +40,9 @@ variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [Monoida
   (hF : ∀ X : P.FullSubcategory, Q (F.obj X.obj))
 
 /-- Let `G = Q.lift (P.ι ⋙ F)` be the restriction of `F` to full monoidal subcategories. A natural
-transformation `τ : (- ⊗ Y) ⋙ G ⟶ G ⋙ (- ⊗ G Y)` commutes with the shifts if its components are
-those of a natural transformation `σ : (- ⊗ Y) ⋙ F ⟶ F ⋙ (- ⊗ F Y)` commuting with the shifts:
-```
-G (X ⊗ Y) ──τ_X──▶ G X ⊗ G Y
-    ‖                  ‖
-F (X ⊗ Y) ──σ_X──▶ F X ⊗ F Y
-```
-(that is, `Q.ι` maps `τ_X` to `σ_X`). -/
+transformation `τ : (- ⊗ Y) ⋙ G ⟶ G ⋙ (- ⊗ G Y)` commutes with the shifts if `Q.ι` maps its
+components `τ_X` to those of a natural transformation `σ : (- ⊗ Y) ⋙ F ⟶ F ⋙ (- ⊗ F Y)`
+commuting with the shifts. -/
 lemma commShift_of_lift_flip_app [∀ X : C, ((curriedTensor C).flip.obj X).CommShift A]
     [∀ X : D, ((curriedTensor D).flip.obj X).CommShift A] (Y : P.FullSubcategory)
     (τ : (curriedTensor P.FullSubcategory).flip.obj Y ⋙ Q.lift (P.ι ⋙ F) hF ⟶
@@ -90,14 +85,9 @@ lemma commShift_of_lift_flip_app [∀ X : C, ((curriedTensor C).flip.obj X).Comm
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
 
 /-- Let `G = Q.lift (P.ι ⋙ F)` be the restriction of `F` to full monoidal subcategories. A natural
-transformation `τ : (Y ⊗ -) ⋙ G ⟶ G ⋙ (G Y ⊗ -)` commutes with the shifts if its components are
-those of a natural transformation `σ : (Y ⊗ -) ⋙ F ⟶ F ⋙ (F Y ⊗ -)` commuting with the shifts:
-```
-G (Y ⊗ X) ──τ_X──▶ G Y ⊗ G X
-    ‖                  ‖
-F (Y ⊗ X) ──σ_X──▶ F Y ⊗ F X
-```
-(that is, `Q.ι` maps `τ_X` to `σ_X`). -/
+transformation `τ : (Y ⊗ -) ⋙ G ⟶ G ⋙ (G Y ⊗ -)` commutes with the shifts if `Q.ι` maps its
+components `τ_X` to those of a natural transformation `σ : (Y ⊗ -) ⋙ F ⟶ F ⋙ (F Y ⊗ -)`
+commuting with the shifts. -/
 lemma commShift_of_lift_app [∀ X : C, ((curriedTensor C).obj X).CommShift A]
     [∀ X : D, ((curriedTensor D).obj X).CommShift A] (Y : P.FullSubcategory)
     (τ : (curriedTensor P.FullSubcategory).obj Y ⋙ Q.lift (P.ι ⋙ F) hF ⟶

@@ -20,9 +20,7 @@ categories of pro-étale sheaves of `R`-modules, the direct image `Ri_*` has the
 every `K` the counit of `Ri_* ⊣ Ri^!` and the unit of `Lj^* ⊣ Rj_*` extend to a distinguished
 triangle
 
-`Ri_* Ri^! K ⟶ K ⟶ Rj_* Lj^* K ⟶ (Ri_* Ri^! K)[1]`
-
-(blueprint `lemma-local-cohomology-right-adjoint--2`). No constructibility is involved.
+`Ri_* Ri^! K ⟶ K ⟶ Rj_* Lj^* K ⟶ (Ri_* Ri^! K)[1]`. No constructibility is involved.
 
 The proof is formal from the following sheaf-level facts:
 
@@ -46,7 +44,7 @@ then `Lj^* K' = 0`, so `K'` lies in the essential image of `Ri_*`, and
 - `AlgebraicGeometry.ProEtale.subsingleton_hom_shift_rightDerivedFunctor_lowerStar`:
   `Hom((Ri_* M)[n], Rj_* N) = 0`.
 - `AlgebraicGeometry.ProEtale.exists_distTriang_derivedLowerStarClosedUpperShriekAdjunction_counit`:
-  the closed-support triangle (blueprint `lemma-local-cohomology-right-adjoint--2`).
+  the closed-support triangle.
 -/
 
 @[expose] public section
@@ -135,14 +133,9 @@ lemma isZero_mapDerivedCategoryUpperStar_obj_rightDerivedFunctor_lowerStar [Quas
     M).of_iso (D((j)^*[ModuleCat.{u + 1} R]).mapIso
       (((i)_*[ModuleCat.{u + 1} R]).rightDerivedFunctorIsoMapDerivedCategory.app M))
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Pro-etale closed-support triangle before
-constructible restriction (the vanishing used in the proof).
-
-For a closed immersion `i` whose range is the complement of the range of the quasi-compact open
+/-- For a closed immersion `i` whose range is the complement of the range of the quasi-compact open
 immersion `j`, `Hom((Ri_* M)[n], Rj_* N) = 0` for all `M ∈ D(Z_proét)`, `N ∈ D(U_proét)` and
-`n ∈ ℤ`: by `D(j^*) ⊣ Rj_*` it is `Hom(D(j^*)((Ri_* M)[n]), N)`, and `D(j^*) Ri_* = 0`
-(`AlgebraicGeometry.ProEtale.isZero_mapDerivedCategoryUpperStar_obj_rightDerivedFunctor_lowerStar`).
--/
+`n ∈ ℤ`. -/
 theorem subsingleton_hom_shift_rightDerivedFunctor_lowerStar [QuasiCompact j]
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (M : DerivedCategory (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} R)))
@@ -176,12 +169,7 @@ theorem isZero_of_isZero_mapDerivedCategoryUpperStar_of_isCompl [QuasiCompact j]
 
 /-- An object `E` of `D(X_proét)` with `D(j^*) E = 0` lies in the essential image of `Ri_*`,
 for a closed immersion `i` whose range is the complement of the range of the quasi-compact open
-immersion `j`.
-
-The unit `E ⟶ D(i_*) D(i^*) E` of the adjunction `D(i^*) ⊣ D(i_*)` (both functors are exact) is
-an isomorphism: its cone is killed by `D(i^*)`, which inverts the unit because the counit
-`i^* i_* ⟶ 𝟭` is invertible, and by `D(j^*)`, as both ends of the unit are killed by `D(j^*)`;
-so the cone vanishes (`isZero_of_isZero_mapDerivedCategoryUpperStar_of_isCompl`). -/
+immersion `j`. -/
 theorem rightDerivedFunctor_lowerStar_essImage_of_isZero [QuasiCompact j]
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     {E : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))}
@@ -210,29 +198,15 @@ theorem rightDerivedFunctor_lowerStar_essImage_of_isZero [QuasiCompact j]
     ⟨((i)_*[ModuleCat.{u + 1} R]).rightDerivedFunctorIsoMapDerivedCategory.app _ ≪≫
       (asIso (adj.unit.app E)).symm⟩⟩
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Pro-etale closed-support triangle before
-constructible restriction
-
-Let `i : Z ⟶ X` be a closed immersion whose range is the complement of the range of the
-quasi-compact open immersion `j : U ⟶ X` (for instance, `X` noetherian), and let
-`Ri^!` be the right adjoint of the direct image `Ri_*` on the unbounded derived categories of
-pro-étale sheaves of `R`-modules
-(`AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`). For every `K`, the
-counit of `Ri_* ⊣ Ri^!` and the unit of `Lj^* ⊣ Rj_*` extend to a distinguished triangle
-
+/-- Let `i : Z ⟶ X` be a closed immersion whose range is the complement of the range of the
+quasi-compact open immersion `j : U ⟶ X` (for instance, `X` noetherian), and let `Ri^!` be the
+right adjoint of the direct image `Ri_*` on the unbounded derived categories of pro-étale sheaves
+of `R`-modules. For every `K`, the counit of `Ri_* ⊣ Ri^!` and the unit of `Lj^* ⊣ Rj_*` extend
+to a distinguished triangle
 ```
-  Ri_* Ri^! K --ε_K--> K --η_K--> Rj_* Lj^* K --w--> (Ri_* Ri^! K)[1].
+Ri_* Ri^! K --ε_K--> K --η_K--> Rj_* Lj^* K --w--> (Ri_* Ri^! K)[1].
 ```
-
-No constructibility of `Ri^! K` is involved.
-
-Complete `η_K` to a distinguished triangle `K' ⟶ K ⟶ Rj_* Lj^* K ⟶ K'[1]`. As `Lj^*` inverts
-`η_K` (`Rj_*` is fully faithful), `Lj^* K' = 0`, so `K'` is in the essential image of `Ri_*`
-(`AlgebraicGeometry.ProEtale.rightDerivedFunctor_lowerStar_essImage_of_isZero`). Since `Ri_*`
-is fully faithful and `Hom((Ri_* M)[n], Rj_* Lj^* K) = 0`
-(`AlgebraicGeometry.ProEtale.subsingleton_hom_shift_rightDerivedFunctor_lowerStar`), the
-counit `ε_K` identifies `Ri_* Ri^! K` with `K'`
-(`CategoryTheory.Pretriangulated.exists_distTriang_counit_of_subsingleton`). -/
+No constructibility of `Ri^! K` is involved. -/
 theorem exists_distTriang_derivedLowerStarClosedUpperShriekAdjunction_counit [QuasiCompact j]
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))) :
@@ -257,14 +231,10 @@ theorem exists_distTriang_derivedLowerStarClosedUpperShriekAdjunction_counit [Qu
     (rightDerivedFunctor_lowerStar_essImage_of_isZero i j hij hK')
 
 /-- The *closed-support triangle* of `K` with connecting map `w`:
-
 ```
-  Ri_* Ri^! K --ε_K--> K --η_K--> Rj_* Lj^* K --w--> (Ri_* Ri^! K)[1]
+Ri_* Ri^! K --ε_K--> K --η_K--> Rj_* Lj^* K --w--> (Ri_* Ri^! K)[1]
 ```
-
-where `ε` is the counit of `Ri_* ⊣ Ri^!`
-(`AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`) and `η` the unit of
-`Lj^* ⊣ Rj_*`. -/
+where `ε` is the counit of `Ri_* ⊣ Ri^!` and `η` the unit of `Lj^* ⊣ Rj_*`. -/
 noncomputable abbrev closedSupportTriangle [QuasiCompact j]
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)))
@@ -275,14 +245,8 @@ noncomputable abbrev closedSupportTriangle [QuasiCompact j]
   Triangle.mk ((derivedLowerStarClosedUpperShriekAdjunction i j hij).counit.app K)
     ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} R) j).unit.app K) w
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Pro-etale closed-support triangle before
-constructible restriction (uniqueness of the connecting map).
-
-The connecting map of the closed-support triangle
-`AlgebraicGeometry.ProEtale.closedSupportTriangle` is unique [BBD, 1.1.9]: for two choices
-`w`, `w'`, the morphism of triangles extending `𝟙 K` has components `(𝟙, 𝟙, 𝟙)`, because
-`Hom((Ri_* Ri^! K)[1], Rj_* Lj^* K) = 0`
-(`AlgebraicGeometry.ProEtale.subsingleton_hom_shift_rightDerivedFunctor_lowerStar`). -/
+/-- The connecting map of the closed-support triangle
+`AlgebraicGeometry.ProEtale.closedSupportTriangle` is unique. -/
 theorem existsUnique_distTriang_closedSupportTriangle [QuasiCompact j]
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))) :
@@ -304,10 +268,7 @@ theorem existsUnique_distTriang_closedSupportTriangle [QuasiCompact j]
   erw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp] at h
   exact h
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Pro-etale closed-support triangle before
-constructible restriction (naturality).
-
-For `φ : K ⟶ K'` and distinguished closed-support triangles of `K` and `K'`, the triple
+/-- For `φ : K ⟶ K'` and distinguished closed-support triangles of `K` and `K'`, the triple
 `(Ri_* Ri^! φ, φ, Rj_* Lj^* φ)` is a morphism of triangles, and it is the only morphism of
 triangles with middle component `φ`
 (`CategoryTheory.Pretriangulated.triangleHom_ext_of_subsingleton`). -/

@@ -29,7 +29,6 @@ set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.unusedSimpArgs false
 
 universe u₁ u₂ u₃ v₁ v₂ v₃ w
 
@@ -47,8 +46,8 @@ private theorem oppositeShiftAdd_inv {D : Type*} [Category D] [HasShift D ℤ]
   rw [shiftFunctorAdd'_op_inv_app _ r s (r + s) rfl (-r) (-s) (-(r + s))
     (by omega) (by omega) (by omega)]
   simp only [shiftFunctorOpIso, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
-    NatTrans.id_app, Category.id_comp, Category.comp_id, CategoryTheory.Functor.map_id,
-    unop_comp, Quiver.Hom.unop_op, unop_id]
+    NatTrans.id_app, Category.id_comp, CategoryTheory.Functor.map_id,
+    unop_comp, Quiver.Hom.unop_op]
   erw [unop_id, Category.id_comp]
 
 private theorem oppositeShift_map_unop {D : Type*} [Category D] [HasShift D ℤ]
@@ -75,18 +74,18 @@ private noncomputable def shiftInv (K : CochainComplex A ℤ) (r : ℤ) :
     subst m
     apply bifunctorHomObj_hom_ext
     intro p q hpq
-    simp only [Category.assoc, bifunctorHomLift_π_assoc,
+    simp only [Category.assoc,
       shiftFunctor_obj_d']
     rw [bifunctorHomObj_d_π H (K⟦r⟧) I n (n + 1) p q hpq (q - 1)
       (p + 1) (by omega) (by omega)]
-    simp only [Linear.comp_units_smul, Preadditive.comp_sub, Category.assoc,
+    simp only [Linear.comp_units_smul, Preadditive.comp_sub,
       Linear.units_smul_comp]
     erw [bifunctorHomLift_π_assoc, bifunctorHomLift_π_assoc, bifunctorHomLift_π]
     simp only [Linear.comp_units_smul, Linear.units_smul_comp]
     rw [bifunctorHomObj_d_π H K I (n + -r) (n + 1 + -r) (p + r) q
       (by omega) (q - 1) (p + 1 + r) (by omega) (by omega)]
     simp only [shiftFunctor_obj_d', Units.smul_def, op_zsmul, Functor.map_zsmul,
-      NatTrans.app_zsmul, Preadditive.comp_zsmul, Preadditive.zsmul_comp,
+      NatTrans.app_zsmul, Preadditive.comp_zsmul,
       smul_sub, smul_smul]
     have h₁ : (-r).negOnePow * (shiftSign r p * (p + r).negOnePow) =
         p.negOnePow * shiftSign r p := by
@@ -136,9 +135,8 @@ private theorem shiftHom_inv_id (K : CochainComplex A ℤ) (r n : ℤ) :
   dsimp only [shiftHomX]
   erw [bifunctorHomLift_π]
   have e : p + r - r = p := by omega
-  simp only [e, Linear.units_smul_comp, smul_smul, Int.units_mul_self, one_smul,
-    HomologicalComplex.XIsoOfEq_rfl, Iso.refl_inv, op_id, Functor.map_id,
-    NatTrans.id_app, Category.comp_id, Category.id_comp]
+  simp only [e, smul_smul, Int.units_mul_self, one_smul,
+    Category.id_comp]
   exact projection_reindex H I (K⟦r⟧) n p (p + r - r) q e hpq
 
 private noncomputable def shiftIso (K : CochainComplex A ℤ) (r : ℤ) :
@@ -173,7 +171,7 @@ private noncomputable def ordinaryShiftIso (r : ℤ) :
         bifunctorHomπ H (K⟦r⟧) I n p q hpq
     dsimp only [HomologicalComplex.comp_f, shiftInv]
     simp only [Category.assoc, bifunctorHomLift_π, bifunctorHomMapLeft_f_π,
-      bifunctorHomLift_π_assoc, bifunctorHomMapLeft_f_π_assoc,
+      bifunctorHomLift_π_assoc,
       shiftFunctor_map_f', Linear.comp_units_smul, Linear.units_smul_comp])
 
 private theorem projection_transport (K : CochainComplex A ℤ)
@@ -193,9 +191,9 @@ private theorem ordinaryShiftIso_zero :
   rw [Functor.CommShift.isoZero_hom_app]
   apply Quiver.Hom.unop_inj
   rw [shiftFunctorZero_op_inv_app]
-  simp only [shiftFunctorOpIso, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
-    NatTrans.id_app, Category.comp_id, Category.id_comp, unop_comp,
-    Quiver.Hom.unop_op, unop_id]
+  simp only [shiftFunctorOpIso, eqToIso_refl, Iso.refl_inv,
+    NatTrans.id_app, unop_comp,
+    Quiver.Hom.unop_op]
   erw [unop_id, Category.id_comp]
   change shiftInv H I K 0 =
     (shiftFunctorZero (CochainComplex C ℤ) ℤ).hom.app (bifunctorHomObj H K I) ≫
@@ -255,7 +253,7 @@ private theorem ordinaryShiftIso_add (r s : ℤ) :
     shiftFunctorAdd'_hom_app_f', shiftFunctorAdd_hom_app_f, shiftFunctor_map_f']
   dsimp only [shiftInv]
   erw [bifunctorHomLift_π, bifunctorHomLift_π_assoc]
-  simp only [Linear.comp_units_smul, Linear.units_smul_comp, Category.assoc]
+  simp only [Linear.comp_units_smul, Linear.units_smul_comp]
   erw [bifunctorHomLift_π_assoc]
   simp only [Linear.comp_units_smul, Linear.units_smul_comp, smul_smul,
     ← shiftSign_add]
@@ -296,14 +294,13 @@ private theorem oppositeCoconeBoundary_f {X Y : CochainComplex C ℤ}
   dsimp only [oppositeCoconeTriangle, triangleOpEquivalence,
     TriangleOpEquivalence.functor, Triangle.mk]
   simp only [unop_comp, shiftFunctor_op_map _ 1 (-1) (by omega), shiftFunctorOpIso,
-    eqToIso_refl, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, Category.comp_id,
+    eqToIso_refl, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
     Category.id_comp, Quiver.Hom.unop_op]
   dsimp only [opShiftFunctorEquivalence, shiftFunctorOpIso]
-  simp only [unop_comp, Quiver.Hom.unop_op, Category.comp_id, Iso.trans_inv,
+  simp only [unop_comp, Quiver.Hom.unop_op, Iso.trans_inv,
     NatTrans.comp_app, Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app,
-    eqToIso_refl, Iso.refl_inv, NatTrans.id_app, Category.comp_id,
+    eqToIso_refl, Iso.refl_inv, NatTrans.id_app,
     Iso.trans_hom, Iso.symm_hom, NatIso.op_inv, Iso.symm_inv, NatTrans.op_app,
-    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
     HomologicalComplex.comp_f, shiftFunctor_map_f', mappingCocone.triangle,
     mappingCone.triangle, Triangle.mk, shiftFunctorCompIsoId,
     shiftFunctorAdd'_hom_app_f', shiftFunctorZero_inv_app_f,
@@ -312,8 +309,7 @@ private theorem oppositeCoconeBoundary_f {X Y : CochainComplex C ℤ}
     unop_id, HomologicalComplex.id_f]
   simp only [Category.assoc, Category.id_comp, mappingCocone, XIsoOfEq_shift,
     HomologicalComplex.XIsoOfEq_hom_comp_XIsoOfEq_hom,
-    HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.comp_id,
-    Functor.opId, Iso.refl_inv, NatTrans.id_app, unop_id, HomologicalComplex.id_f]
+    Functor.opId, Iso.refl_inv, NatTrans.id_app]
   erw [unop_id, HomologicalComplex.id_f, Category.comp_id, Category.id_comp,
     HomologicalComplex.XIsoOfEq_hom_comp_XIsoOfEq_hom,
     HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.comp_id]
@@ -361,9 +357,9 @@ private theorem cone_boundary {K L : CochainComplex A ℤ} (f : K ⟶ L)
   have hxy := hx
   have hyy := hy
   dsimp only [bifunctorHomConeX, bifunctorHomConeY, shiftFunctorObjXIso] at hxy hyy
-  simp only [HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.id_comp] at hxy hyy
+  simp only [HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom] at hxy hyy
   dsimp only [shiftFunctor_obj_X', shiftFunctor_obj_X] at hxy hyy
-  simp only [Category.id_comp, Category.assoc] at hxy hyy
+  simp only [Category.id_comp] at hxy hyy
   apply coneTarget_ext t n
   · apply bifunctorHomObj_hom_ext
     intro p q hpq
@@ -375,11 +371,10 @@ private theorem cone_boundary {K L : CochainComplex A ℤ} (f : K ⟶ L)
     erw [bifunctorHomLift_π_assoc]
     dsimp only [t]
     simp only [Linear.units_smul_comp, coneTriangle_boundary_f, op_neg,
-      Functor.map_neg, NatTrans.app_neg, Preadditive.comp_neg, Preadditive.neg_comp,
-      Category.assoc]
+      Functor.map_neg, NatTrans.app_neg, Preadditive.comp_neg, Preadditive.neg_comp]
     erw [← NatTrans.comp_app, ← Functor.map_comp, ← op_comp, mappingCone.inr_f_fst_v]
     simp only [op_zero, Functor.map_zero, NatTrans.app_zero, comp_zero, smul_zero,
-      neg_zero, mappingCone.inr_f_fst_v_assoc, zero_comp]
+      neg_zero]
     erw [mappingCone.inr_f_fst_v_assoc, zero_comp]
   · apply bifunctorHomObj_hom_ext
     intro p q hpq
@@ -387,20 +382,17 @@ private theorem cone_boundary {K L : CochainComplex A ℤ} (f : K ⟶ L)
     dsimp only [HomologicalComplex.comp_f]
     simp only [Category.assoc]
     erw [hyy n p q (by omega)]
-    simp only [Linear.comp_units_smul, Linear.units_smul_comp]
+    simp only [Linear.comp_units_smul]
     erw [bifunctorHomMapLeft_f_π_assoc]
     dsimp only [shiftInv]
     erw [bifunctorHomLift_π_assoc]
     dsimp only [t]
     simp only [Linear.units_smul_comp, smul_smul, coneTriangle_boundary_f,
-      op_neg, Functor.map_neg, NatTrans.app_neg, Preadditive.comp_neg,
-      ← NatTrans.comp_app, ← Functor.map_comp, ← op_comp,
-      mappingCone.inl_v_fst_v, op_id, Functor.map_id, NatTrans.id_app,
-      Category.comp_id, mappingCone.inr_f_snd_v_assoc, Category.id_comp]
-    simp only [Preadditive.neg_comp, Preadditive.comp_neg, Category.assoc]
+      op_neg, Functor.map_neg, NatTrans.app_neg]
+    simp only [Preadditive.neg_comp, Preadditive.comp_neg]
     erw [← NatTrans.comp_app, ← Functor.map_comp, ← op_comp,
       mappingCone.inl_v_fst_v]
-    simp only [op_id, Functor.map_id, NatTrans.id_app, Category.comp_id,
+    simp only [op_id,
       smul_neg]
     have hs : p.negOnePow * shiftSign 1 p = -1 := by
       simp only [shiftSign, one_mul, Int.reduceAdd, Int.reduceDiv, ← Int.negOnePow_add]
@@ -434,9 +426,8 @@ private theorem ordinaryConeTriangle {K L : CochainComplex A ℤ} (f : K ⟶ L) 
       HomComplex.Cocycle.homOf_f, HomComplex.Cocycle.leftShift_coe,
       HomComplex.Cochain.leftShift_v _ (-1) 0 (add_neg_cancel 1)
         n n (add_zero n) (n - 1) (by omega),
-      HomComplex.Cochain.units_smul_v, Int.negOnePow_one, Units.neg_smul,
-      one_smul, neg_neg, bifunctorHomConeX, shiftFunctorObjXIso,
-      HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.id_comp]
+      bifunctorHomConeX, shiftFunctorObjXIso,
+      HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom]
     norm_num
   · apply Quiver.Hom.unop_inj
     simp only [Iso.refl_hom, CategoryTheory.Functor.map_id, Category.comp_id]

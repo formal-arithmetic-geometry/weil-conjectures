@@ -28,7 +28,6 @@ attribute [local irreducible] coefficient line diagram trace singleUnitIso
 attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 attribute [local irreducible] firstProjection secondProjection square condensedAmbientExchange
 
-set_option linter.unusedVariables false in
 /-- The scalar exchange preserves the positive Chern generator equation.
 
 This is a strict component of scalar_chern_base_change. Its finite-coefficient
@@ -57,9 +56,9 @@ theorem scalar_chern_base_change_chern
     let L := line l c
     let T := fun X : Scheme.{u} ↦
       ((DerivedCategory.singleFunctor (Modules Λ X) 0).obj (L X)) ⟦(2 : ℤ)⟧
-    let uq := scalarTwistedUnit Λ (ProjectiveLine Y ↘ Y) (T Y) (T (ProjectiveLine Y))
+    let _uq := scalarTwistedUnit Λ (ProjectiveLine Y ↘ Y) (T Y) (T (ProjectiveLine Y))
       (scalarQLineIso l c k p hpl Y)
-    let u₂ := scalarTwistedUnit Λ (secondProjection Y)
+    let _u₂ := scalarTwistedUnit Λ (secondProjection Y)
       (T (ProjectiveLine Y)) (T (diagonalSurface Y)) (secondLineComparison l c k p hpl Y)
     let cq := scalarQChern l c Y r a
     let c₂ := scalarP2Chern l c Y r b

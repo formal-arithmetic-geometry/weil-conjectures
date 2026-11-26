@@ -10,11 +10,14 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Topologi
 
 /-! # Integral lattices on finite strata of normal Noetherian schemes.
 
-Source: blueprint `lemma-lattices-after-finite-stratification`, extended as directed by
-Wei Yang, Zulip #1412, answer 17 (2026-11-01), for clause (4) of
-`proposition-lattices-representations-normal-scheme`. This keeps the original finite-type theorem
-and supplies the normal-Noetherian instance required by its dense-open argument.
-(blueprint: lemma-lattices-after-finite-stratification).
+A lisse rational module on a normal Noetherian scheme admits an embedded lisse integral lattice
+on each stratum of a finite locally closed stratification, with no base field, characteristic
+or separatedness assumption.
+
+## References
+
+* [Stacks, Tag 07RY](https://stacks.math.columbia.edu/tag/07RY)
+* [Stacks, Tag 07RZ](https://stacks.math.columbia.edu/tag/07RZ)
 -/
 
 @[expose] public noncomputable section
@@ -27,29 +30,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 /-- A lisse rational module on a normal Noetherian scheme admits an embedded
 lisse integral lattice on each stratum of a finite locally closed stratification.
 There is no base field, characteristic restriction, separatedness assumption,
-connectedness assumption, or assumption that `l` is invertible on the scheme.
-
-Source: blueprint `lemma-lattices-after-finite-stratification`, sheaf of lattices and trace proof;
-Wei Yang #1412, answer 17, normal-Noetherian extension; Stacks 07RY and 07RZ.
-
-Proof. The scheme has Noetherian underlying space and is qcqs. Split into the
-finitely many locally constant rank pieces. The qcqs lattice-scheme theorem
-represents lattices by a separated surjective etale scheme with its universal
-lattice. Choose finitely many affine opens with images covering the base; their
-disjoint union is a qcqs separated etale surjection. Stacks 07RY and 07RZ give a
-finite locally closed stratification on which this cover is finite etale. Pull
-back the universal lattice and its scalar-extension comparison to each cover.
-The image under the sheet-sum trace is a locally free integral lattice on the
-stratum: on splitting charts it is a finite sum of lattices. Exact scalar
-extension and naturality of the localization counit show that the adjoint of
-this actual inclusion is an isomorphism. These are precisely the atlas,
-stratification and trace steps of exists_topologicalStratifiedLatticeData,
-with the spectral norm and its valuation subring. No cover degree is inverted.
-Normality is retained here for the expert-requested specialization, although
-the construction itself only needs a Noetherian underlying space. Empty schemes,
-zero rank, varying ranks, and residue characteristic `l` are included.
-(blueprint: lemma-lattices-after-finite-stratification).
--/
+connectedness assumption, or assumption that `l` is invertible on the scheme. -/
 theorem exists_stratified_lisse_integral_lattice_of_normal
     (l : ℕ) [Fact l.Prime] (E : Type) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

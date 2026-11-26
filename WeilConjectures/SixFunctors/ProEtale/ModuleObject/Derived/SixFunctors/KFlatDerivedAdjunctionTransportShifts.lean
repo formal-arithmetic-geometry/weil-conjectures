@@ -22,15 +22,14 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 /-!
 # Transport and fixed shifts of the K-flat module derived adjunction
 
-Source: Stacks Project, derived.tex, Tags 0DVC and 0FND; blueprint main-20261015,
-proper base change rational proof, paragraph (3)
-(blueprint: lem-sfb-kflat-derived-adjunction-transport-shifts).
-
 The two adjunctions below are the specified constructions from the same ordinary module
 adjunction. Both use `rightDerivedFunctorUnit` as their right derived comparison. The
 comparison and the pullback and pushforward shift structures are the existing canonical
-ones recorded by `def-sfb-module-derived-comparison-shifts` in
-`ModuleDerivedFunctorCompositorShifts`; no adjoint shift is installed here.
+ones recorded in `ModuleDerivedFunctorCompositorShifts`; no adjoint shift is installed here.
+
+## References
+
+* Stacks Project, Tags 0DVC and 0FND
 -/
 
 @[expose] public noncomputable section
@@ -49,31 +48,7 @@ variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
 /-- The specified K-flat/K-injective adjunction is the transport of the canonical
 exact-left/K-injective-right adjunction, and its unit and counit commute with all fixed
-integer shifts. Source: Stacks Project, derived.tex, Tags 0DVC and 0FND, canonical derived
-adjunction; blueprint proper base change rational proof, paragraph (3)
-(blueprint: lem-sfb-kflat-derived-adjunction-transport-shifts).
-
-Proof: (1) Apply `lem-sfb-abstract-derived-unit-factorization` to the two derived-unit
-lifts, using the termwise adjunction of `lem-weil-pbc-termwise-adjunction-homotopy` and
-the same right comparison beta. The exact factorization is invertible by
-`situation-conventions`; the K-flat factorization is its
-composite with the canonical exact comparison. Postcomposing either invertible
-factorization with the right derived functor gives a universal left-derived pair by
-the fully faithful descent of `lem-weil-pbc-localization-universal-property`.
-(2) Substitute alphaP = c followed by alphaA in the two unit equations and cancel
-G(alphaA). Localization faithfulness extends the resulting equality from localized
-complexes to every derived object. Compose with G(c inverse) to obtain the unit formula.
-(3) The proposed counit c followed by epsilonA has transpose the identity, by the unit
-formula and the right triangle identity for the exact-left adjunction. The specified
-counit has the same transpose; injectivity of the adjunction bijection identifies them.
-The unit and counit formulas determine transport of the whole adjunction.
-(4) `lem-sp-canonical-right-derived-adjunction-shift` gives shift compatibility for the
-exact-left adjunction with the fixed K-injective shifts. The pullback shift is transported
-along c. In the unit square substitute step (2), use naturality of the pushforward shift
-along c and the transport equation, then cancel shifted G(c). In the counit square
-substitute step (3), use naturality of c along the pushforward shift and the same transport
-equation, and finish with the exact-left counit square. This works for every integer,
-including zero and negative integers, with the original shift on G throughout. -/
+integer shifts. -/
 theorem kflat_derived_adjunction_transport_shifts :
     (∀ M : DerivedCategory
         (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj R.X Y)),

@@ -10,7 +10,12 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResidueProjectionNormalization
 import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapDualizable
 
-/-! # Perfect integral residue coefficient comparisons -/
+/-! # Perfect integral residue coefficient comparisons
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(3).
+-/
 
 @[expose] public section
 
@@ -27,30 +32,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 /-- Perfect residue change admits coherent pull comparisons whose direct-image mates
-are invertible on the unbounded ambient derived categories.
-
-Source: Bhatt--Scholze, Lemma 6.5.9(3), with the two-term perfect coefficient resolution;
-Remark 6.8.15 for the pull-composition constraints.
-(blueprint: lem-weil-pbc-integral-residue-comparisons)
-
-Proof. Derive the underived scalar-pull comparison on K-flat resolutions. It identifies
-A_X tensor f* K with f* (A_Y tensor K) by associativity of relative tensor and the
-canonical coefficient pullback isomorphism. The associativity pentagon and the
-coefficientMap composition equations give precisely the displayed composition law,
-with the library's leftDerivedUpperStarComp constraints. These equalities can be checked
-on K-flat representatives using uniqueness of the derived functor comparison.
-
-The assumed tensor description identifies restriction of scalar reduction with derived
-tensor by the residue regular module in degree zero. The direct-image mate of the
-preceding canonical pull comparison becomes, after exact restriction, the usual perfect
-projection comparison. For a dualizable coefficient this comparison is invertible:
-use the coefficient dual's tensor adjunction to identify both sides as right adjoints
-of the same tensor-pull functor. Its conjugate isomorphism is the projection map by
-the counit characterization of mates. Apply the supplied perfectness to A_Y, and the
-canonical coefficient-pull isomorphism identifies its pullback with A_X. Finally exact
-faithful restriction of scalars reflects derived isomorphisms by its homology comparison.
-Thus every actual push mate is invertible. This uses no boundedness, constructibility,
-properness or Cartesian square. Empty schemes and zero complexes are allowed. -/
+are invertible on the unbounded ambient derived categories. -/
 theorem integralResidue_comparisons
     (hPerfect : ∀ T : Scheme.{u},
       IsDualizable ((DerivedCategory.singleFunctor _ 0).obj

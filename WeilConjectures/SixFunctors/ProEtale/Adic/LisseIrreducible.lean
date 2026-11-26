@@ -25,9 +25,7 @@ stalk functor at `t` is faithful on lisse sheaves; the *rank*
 * The rank is additive in short exact sequences of lisse sheaves, and a lisse sheaf of rank zero
   is zero.
 * Among infinitely many irreducible lisse subsheaves `T₀, T₁, …` of a lisse sheaf `V`, two are
-  isomorphic (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_iso_of_mono`): as long as
-  `T_k` is not isomorphic to an earlier `T_j`, it meets the sum `P_k` of the earlier ones
-  trivially, so that the rank of `P_k` grows with `k`.
+  isomorphic (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_iso_of_mono`).
 * For an irreducible lisse `S`, a lisse `V` and an autoequivalence `Φ` of `ℓ`-adic sheaves
   commuting with scalars, together with `Φ S ≅ S` and `Φ V ≅ V`, there is a monomorphism
   `S ⟶ V` which is an eigenvector of the induced `ℚ̄_ℓ`-linear operator on the

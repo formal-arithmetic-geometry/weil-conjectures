@@ -124,17 +124,16 @@ private lemma mapped_cone_bounded
     ⟨HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 P (i + 1) (by omega),
       HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 Q i (by omega)⟩
 
-set_option linter.unusedVariables false in
 /-- The sectionwise image of the pulled-back finite-free complex is K-flat.
 
 The theorem's independent-coefficient clause
 is transported back along the fixed equivalence, giving the displayed complex.
 -/
 theorem finiteFreeScalarDerivedComparison_kflat
-    (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}
+    (_D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}
     (a : Λ ⟶ Λ') (S : ShortComplex (PointModules Λ))
-    (t : S.X₃ ≅ (Mod.comap a.hom.hom).obj (Mod.regular Λ'.X))
-    (hS : S.ShortExact) (r : ℕ)
+    (_t : S.X₃ ≅ (Mod.comap a.hom.hom).obj (Mod.regular Λ'.X))
+    (_hS : S.ShortExact) (r : ℕ)
     (e₁ : S.X₁ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))
     (e₂ : S.X₂ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))
     (Z : Scheme.{u}) :

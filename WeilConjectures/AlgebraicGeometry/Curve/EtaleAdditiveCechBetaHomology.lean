@@ -43,13 +43,12 @@ private theorem mapHomologyIso_inv_π
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedVariables false in
 /-- Beta lifts cycles additively and descends to a bijective additive homology map. -/
 theorem exists_additiveCechBeta_homology
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     {ι : Type u} [Finite ι] (U : ι → X.Opens)
     (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l)))
-    (hcover : iSup U = ⊤)
+    (_hcover : iSup U = ⊤)
     (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ) :
     ∃ c : (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).cycles n →+
       (additiveCechTotal U I).cycles n,

@@ -156,8 +156,6 @@ noncomputable def supportedTotalTensorGeneric (X : Scheme.{u})
     (P Q : CochainComplex (Sheaf (Scheme.ProEt.topology X) C) ℤ) :=
   HomologicalComplex.tensorObj (C := Sheaf (Scheme.ProEt.topology X) C) (c := .up ℤ) P Q
 
--- Retain the existing flat-resolution parameter for compatibility with callers.
-set_option linter.unusedSectionVars false in
 /-- Tensor two sheaf morphisms using the upstream bifunctor.
 -/
 noncomputable def supportedSheafTensorMapGeneric (X : Scheme.{u})

@@ -45,7 +45,6 @@ by chaining the following isomorphisms, with `Rd_! ≅ Rd_*` on both sides (`d` 
   `Rd_* ⋙ red_Y ≅ red_Z ⋙ Rd_*` for a closed immersion `d`.
 * `ProEtale.CondensedRing.etaleReductionLowerShriekIsoOfIsClosedImmersion`:
   `Rd_! ⋙ red_Y ≅ red_Z ⋙ Rd_!` for a closed immersion `d`.
-
 -/
 
 @[expose] public section
@@ -80,12 +79,7 @@ noncomputable def boundedConstructibleLowerShriekIsoLowerStar_padicIntegers (f :
       (Profinite.padicIntegersRingObj ℓ E) ℓ f) _ ≪≫ Functor.leftUnitor _)
 
 /-- **Reduction modulo `ℓⁿ`, read on the étale site, commutes with `Rd_*` for a closed
-immersion `d`**: `Rd_* ⋙ red_Y ≅ red_Z ⋙ Rd_*`, where `red = etaleReduction`. It chains the
-commutation of `Rd_*` with the condensed reduction
-(`boundedConstructibleLowerStarIntegersModPowReductionIso`), with the inclusion of bounded
-constructible complexes, with the finite-coefficient comparison
-(`ProEtale.finiteCoefficientDerivedLowerStarIso`) and with `Rν_*`
-(`ProEtale.rightDerivedLowerStarCompComparisonLowerStarIso`). -/
+immersion `d`**: `Rd_* ⋙ red_Y ≅ red_Z ⋙ Rd_*`, where `red = etaleReduction`. -/
 @[no_expose]
 noncomputable def etaleReductionLowerStarIsoOfIsClosedImmersion (d : Z ⟶ Y)
     [IsClosedImmersion d.left] :

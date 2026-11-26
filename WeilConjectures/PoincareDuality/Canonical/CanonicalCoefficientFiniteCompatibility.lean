@@ -16,11 +16,17 @@ set_option linter.privateModule false
 /-!
 # Compatibility of canonical finite coefficient projections
 
-Source: Stacks Tags 03D6 and 08TC; the regular-unit and Roos APIs in
-`WeilConjectures.SmoothPurity.Supporting.ConstantWeilStructure`.
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction).
+This module contains comparison results and private helpers for the canonical coefficient
+pullback comparison.
 
-This module contains proved comparison results and private helpers for the coefficient comparison.
+## Implementation details
+
+The proofs use the regular-unit and Roos APIs in
+`WeilConjectures.SmoothPurity.Supporting.ConstantWeilStructure`.
+
+## References
+
+* Stacks Project, Tags 03D6 and 08TC.
 -/
 
 @[expose] public noncomputable section

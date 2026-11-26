@@ -153,8 +153,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {X₀ : Scheme.{u}} (f : X�
   [HasInvertibleExponent Λ f.geometricFiber]
   [HasCompactification f.geometricFiberToAlgebraicClosure]
 
-set_option maxHeartbeats 400000 in
--- the final `exact` unfolds the twist-and-shift of the geometric fibre
 /-- Frobenius equivariance of the smooth orientation of the geometric fibre
 `a : X ⟶ Spec k̄` of a smooth separated `𝔽_q`-scheme of finite type and relative dimension `d`,
 in untwisted form: there is an isomorphism `o : Λ_X[2d] ≅ ω = Ra^! Λ_{k̄}` such that

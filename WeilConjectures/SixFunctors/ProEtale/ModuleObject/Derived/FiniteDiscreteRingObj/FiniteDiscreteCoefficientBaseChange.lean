@@ -41,7 +41,6 @@ along the pullback comparison `boundedConstructiblePullbackSquareComparison` (st
   `CategoryTheory.Adjunction.exchangeRight` of `θ_sq`.
 - `boundedConstructibleBaseChange_adjunct`: the adjunct of `BC_sq` under `Lf'^* ⊣ Rf'_*` is
   `θ_sq` followed by `Lg'^*` of the counit of `Lf^* ⊣ Rf_*`.
-
 -/
 
 @[expose] public section
@@ -141,11 +140,8 @@ noncomputable def boundedConstructibleBaseChangeCounitStep :
 variable {f g f' g'} in
 /-- The *base-change morphism* `BC_sq : Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` of a commutative square
 `g' ≫ f = f' ≫ g` of schemes on the bounded constructible derived categories of module objects
-over `Λ`, assembled as the composite of the unit insertion, the square transport, and the
-counit contraction (`T`-coefficient).
-
-Proper base change asserts that this morphism is an isomorphism for a cartesian square with `f`
-proper; no such hypothesis is built into the definition. -/
+over `Λ` (`T`-coefficient). It is the composite of the unit insertion, the square transport,
+and the counit contraction. -/
 @[no_expose]
 noncomputable def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
     boundedConstructibleLowerStar ℓ T f ⋙ boundedConstructibleUpperStar
@@ -279,11 +275,8 @@ noncomputable def boundedConstructibleBaseChangeCounitStep :
 variable {f g f' g'} in
 /-- The *base-change morphism* `BC_sq : Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` of a commutative square
 `g' ≫ f = f' ≫ g` of schemes on the bounded constructible derived categories of module objects
-over `Λ`, assembled as the composite of the unit insertion, the square transport, and the
-counit contraction (`O`-coefficient).
-
-Proper base change asserts that this morphism is an isomorphism for a cartesian square with `f`
-proper; no such hypothesis is built into the definition. -/
+over `Λ` (`O`-coefficient). It is the composite of the unit insertion, the square transport,
+and the counit contraction. -/
 @[no_expose]
 noncomputable def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
     boundedConstructibleLowerStar ℓ O f ⋙ boundedConstructibleUpperStar

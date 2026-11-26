@@ -1189,7 +1189,6 @@ theorem pbcCompleteInclusion_coherent (h : E ≤ F) (k : F ≤ G) :
     with_unfolding_all
       exact htf
 
-set_option linter.unusedSectionVars false in
 /-- Pair category of the finite-stage ambient Karoubi categories, followed by outer Karoubi. -/
 abbrev pbcAmbientCompleteQbarCategory :=
   Idempotents.Karoubi (pbcAmbientCompleteSystem l Ω W).PairCategory

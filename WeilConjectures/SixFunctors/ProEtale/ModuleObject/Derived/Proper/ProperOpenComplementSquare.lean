@@ -20,9 +20,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 /-!
 # The proper square of an open subscheme and its closed complement
 
-Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, proof (3)
-(blueprint: lem-sfb-proper-open-complement-square).
-
 The closed complement is arbitrary with the prescribed point set; no reducedness is assumed.
 Vanishing takes place in the ordinary unbounded derived category of internal modules.
 -/
@@ -40,28 +37,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Pulling back a complementary open and closed pair along a proper map gives the
 complementary pair on the source, with separated finite-type schemes and vanishing mixed
-restriction of open extension by zero on every unbounded coefficient-module complex.
-
-Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, proof (3)
-(blueprint: lem-sfb-proper-open-complement-square).
-
-Proof: (1) Base change the quasi-compact open immersion and the closed immersion to W;
-base change r to Y and Z. Open and closed immersions, quasi-compactness and properness
-are preserved (lem-weil-pbc-open-immersion-base-change, lem-pc-quasi-compact-base-change,
-lem-weil-pbc-proper-fp-permanence).
-(2) Closed immersions are proper, hence separated and finite type. Compose the structure
-maps of Z, U and T using separated permanence and lem-sfb-finite-type-composition-base-change.
-(3) The open image is the inverse image of the original open image by
-lem-weil-pbc-open-preimage-fibre-product. For the closed image, a point w over c(Z) gives a
-residue-field point by lem-weil-pbc-morphism-from-spec-field. It factors through Z by
-lem-weil-pbc-field-point-factors-through-closed-immersion, and the fibre-product universal
-property lifts it to T. Thus the two images are complementary without reducing Z or T.
-(4) Represent B by a cochain complex C. Extension by zero acts termwise. By
-prose-03-02 and def-sfb-left-derived-exact, the specified total
-pullback agrees with exact termwise pullback, also for unbounded complexes.
-(5) By lem-sfb-internal-open-extension-disjoint-vanishing and (3), each term of a^*j_!C
-is zero. Its unique maps to the zero complex give a complex isomorphism, which descends
-to the asserted vanishing in the derived category. -/
+restriction of open extension by zero on every unbounded coefficient-module complex. -/
 theorem proper_open_complement_square
     (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

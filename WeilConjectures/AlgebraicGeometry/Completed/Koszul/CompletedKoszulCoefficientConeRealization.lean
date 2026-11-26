@@ -63,7 +63,6 @@ private theorem mapToExtendedSingle_ext
   apply HomologicalComplex.to_single_hom_ext
   simp only [HomologicalComplex.comp_f, hzero]
 
-set_option linter.unusedVariables false in
 /-- Finite exact realization identifies the algebraic augmentation cones with the
 completed coefficient cones, including their actual strict transition maps. There
 is no arbitrary complex P, K-flatness, eventual vanishing, or inverse limit here. -/
@@ -101,7 +100,7 @@ theorem completedKoszulCoefficientConeRealization
     (hsA : ∀ n m h k, (sA n m h).f k = ModuleCat.ofHom
       (exteriorPower.map k (Finsupp.linearCombination (ULift.{t + 1} A)
         (fun i ↦ Finsupp.single i ((ULift.up (a i) : ULift.{t + 1} A) ^ (m - n))))))
-    (hqA : ∀ n m h,
+    (_hqA : ∀ n m h,
       ModuleCat.ofHom ((Ideal.span (Set.range
           (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A)))) ^ (m + 1)).mkQ ≫
         (qA n m h).f 0 = ModuleCat.ofHom ((Ideal.span (Set.range
@@ -119,7 +118,7 @@ theorem completedKoszulCoefficientConeRealization
       completedAdicKoszulTensorUnit T d r a _ n ≫
           (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map γ).app (op n) =
         completedQuotientTensorUnit T d _ n)
-    (hz : ∀ (n : ℕ) (p q : ℤ) (_hq : q ≠ 0),
+    (_hz : ∀ (n : ℕ) (p q : ℤ) (_hq : q ≠ 0),
       completedKoszulTensorSummand T d r a _ n p q ≫
           ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map γ).app (op n)).f
             (p + q) = 0) :

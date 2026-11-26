@@ -87,10 +87,7 @@ variable {Λ} (g : W ⟶ V)
 /-- **Zero loci are pro-étale locally weakly étale.** Let `t` be a continuous function on
 `V' : V.ProEt` vanishing on the image of `φ : U ⟶ V' ×_V W`. Then every point of `U` has an open
 neighbourhood `O` on which `φ` factors through `V'' ×_V W` for a morphism `a : V'' ⟶ V'` of the
-pro-étale site with `t ∘ a = 0`. On an affine open `Spec R ⊆ V'`, the zero locus of `t` is the
-intersection of the clopen subsets `|t| < 1 / (n + 1)` (the field `Λ` being ultrametric),
-cut out by idempotents `e n`, and `V''` is the spectrum of the localization of `R` at the `e n`,
-which is weakly étale over `R`. -/
+pro-étale site with `t ∘ a = 0`. -/
 lemma exists_opens_factor_of_eq_zero_field (V' : V.ProEt) (t : C(V'.left, Λ))
     (U : W.ProEt)
     (φ : U ⟶ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj V')
@@ -173,10 +170,7 @@ lemma exists_opens_factor_of_eq_zero_field (V' : V.ProEt) (t : C(V'.left, Λ))
 /-- **The sections of `Λ_W` are locally pulled back from `Λ_V`.** Every point of
 `U : W.ProEt` has an affine open neighbourhood `Spec B` on which a continuous function `s`
 on `U` is `t ∘ fst ∘ φ` for some `V' : V.ProEt`, a continuous function `t` on `V'` and
-`φ : Spec B ⟶ V' ×_V W`. Here `V'` is the constant profinite scheme `Spec R × K` over an affine
-open `Spec R ⊆ V`, with `K = s(Spec B)` compact in `Λ`,
-that is the spectrum of the weakly étale `R`-algebra `LocallyConstant K R`; `t` is the
-projection to `K`, and `φ` is given by `s` (`LocallyConstant.liftPrimeSpectrum`). -/
+`φ : Spec B ⟶ V' ×_V W`. -/
 lemma exists_openImmersion_eq_comp_fst_field (U : W.ProEt)
     (s : fieldFunctions Λ U.left)
     (x : U.left) :

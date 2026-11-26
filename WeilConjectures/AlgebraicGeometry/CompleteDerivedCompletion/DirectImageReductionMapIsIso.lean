@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageRe
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 
 universe u
 

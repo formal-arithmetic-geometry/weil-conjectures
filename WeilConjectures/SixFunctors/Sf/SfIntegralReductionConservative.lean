@@ -10,9 +10,14 @@ import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 
 /-! # Finite reductions detect integral constructible isomorphisms
 
-Source: Bhatt--Scholze, Definition 3.5.2 and Sections 6.5--6.7; the adic
-projection proof, conservativity step (blueprint: lem-sf-intrinsic-reduction-conservative).
+A morphism of integral constructible objects is an isomorphism as soon as all its finite
+reductions are.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2 and Sections 6.5--6.7
 -/
+
 
 @[expose] public section
 set_option autoImplicit false
@@ -22,16 +27,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace WeilConjectures
 
-/-- Finite reductions detect isomorphisms on the actual integral constructible domain.
-Source: Bhatt--Scholze, Definition 3.5.2; blueprint adic projection proof, Step 3
-(blueprint: lem-sf-intrinsic-reduction-conservative).
-
-Proof: take a distinguished cone. Integral constructibles are triangulated, so its
-cone is complete. Exact reduction sends its triangle to a triangle whose first map
-is invertible; every reduced cone is therefore zero. Restriction of scalars preserves
-zero objects. In the canonical augmented Roos triangle for the cone, both products
-are now zero, by product extensionality. The cone is zero, and its original map is
-invertible. This includes zero objects, empty schemes, torsion and arbitrary intervals. -/
+/-- Finite reductions detect isomorphisms on the actual integral constructible domain. -/
 theorem sfIntegralReduction_conservative
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

@@ -23,7 +23,6 @@ set_option linter.privateModule false
 set_option autoImplicit false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
-set_option linter.unusedSectionVars false
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -299,6 +298,7 @@ private local instance sectionFunctorEquivalence :
 private def SectionMonoidalData :=
   OrdinaryMonoidalData _ (comparison_tensorIso J R)
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}] in
 private theorem section_monoidal_data : Nonempty (SectionMonoidalData.{u} J R) := by
   exact ordinary_monoidal_data _ (comparison_tensorIso J R) (comparison_unitIso J R)
     (comparison_tensorIso_natural J R) (comparison_tensorIso_assoc J R)

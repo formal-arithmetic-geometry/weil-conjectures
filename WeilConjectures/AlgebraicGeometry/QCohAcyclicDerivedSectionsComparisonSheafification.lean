@@ -19,14 +19,13 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-set_option linter.unusedVariables false in
 /-- Sheafification of the full section cohomology presheaf computes the cohomology
 sheaf of derived direct image (Stacks, Tags 0D5X and 0BKJ). -/
 theorem qcoh_acyclic_derived_sections_comparison_sheafification {X Y : Scheme.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
-    (hacyc : ∀ (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)),
+    (_hacyc : ∀ (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)),
       F.IsQuasicoherent → ∀ (p : ℤ), 0 < p →
         IsZero ((schemeModuleHigherDirectImage f p).obj F))
     (i : ℤ) :

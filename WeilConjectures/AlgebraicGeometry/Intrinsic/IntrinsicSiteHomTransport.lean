@@ -80,7 +80,6 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 
@@ -106,8 +105,8 @@ theorem intrinsicSiteHom_transport (X : Scheme.{u}) (A : Type u)
   let Mc := DerivedCategory.Q.objPreimage L
   obtain ⟨Ic, hIc, j, _, hj⟩ :=
     Abelian.HasKInjectiveResolutions.exists_isKInjective Mc
-  letI := hIc
-  letI := hj
+  let := hIc
+  let := hj
   let eK : DerivedCategory.Q.obj Lc ≅ K := DerivedCategory.Q.objObjPreimageIso K
   let eL : DerivedCategory.Q.obj Ic ≅ L :=
     (asIso (DerivedCategory.Q.map j)).symm ≪≫ DerivedCategory.Q.objObjPreimageIso L

@@ -135,8 +135,6 @@ private theorem affineEtaleBaseChange_cover_pullback_continuous {T T' : Scheme.{
       (hc X R (hJ ▸ hR))
   exact ⟨hc, fun _ _ _ _ _ _ _ _ ↦ inferInstance, hu⟩
 
--- The existential continuity witness is used only through instance synthesis.
-set_option linter.unusedVariables false in
 /-- Base change along an affine morphism is a continuous functor of the full affine étale sites
 (Stacks, Tags 0EYL, 04HR, 00WV, 00WX, 00X1 and 03Q1). -/
 theorem affineEtaleSiteBaseChange {T T' : Scheme.{u}} (h : T' ⟶ T)
@@ -149,7 +147,7 @@ theorem affineEtaleSiteBaseChange {T T' : Scheme.{u}} (h : T' ⟶ T)
       R ∈ Scheme.fullAffineEtalePrecoverage T X →
       ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →
         PreservesLimit (cospan f g) (Scheme.affineEtaleBaseChange h)) ∧
-    ∃ (hu : (Scheme.affineEtaleBaseChange h).IsContinuous (Scheme.fullAffineEtaleTopology T)
+    ∃ (_hu : (Scheme.affineEtaleBaseChange h).IsContinuous (Scheme.fullAffineEtaleTopology T)
         (Scheme.fullAffineEtaleTopology T')),
       Nonempty
         (Functor.sheafPullbackConstruction.sheafPullback (Scheme.affineEtaleBaseChange h)

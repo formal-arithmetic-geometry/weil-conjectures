@@ -15,8 +15,11 @@ import all WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionOrdinaryMod
 
 /-! # Completeness of ordinary tensor on a projective chart
 
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Stacks, Tags 07A4 and 0941
-(blueprint: lem-fix-projective-tensor-chart-complete).
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* Bhatt--Scholze, Lemma 6.5.5
 -/
 
 @[expose] public noncomputable section
@@ -160,28 +163,7 @@ attribute [local irreducible] IntegralOnSlice.duality
 
 /-- Bounded finite-projective models of both ordinary restrictions make the restriction
 of their ordinary tensor complete. No constructibility or completeness of the inputs
-is assumed.
-
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Stacks, Tags 07A4 and 0941
-(blueprint: lem-fix-projective-tensor-chart-complete).
-
-Proof:
-1. The two ordinary pullback presentations use the same completed coefficient map:
-   both direct maps are characterized by their finite quotient projections. Uniqueness
-   of these maps identifies the module adjunctions. Uniqueness of left derived
-   functors identifies ordinaryIntegralDerivedPull with ordinaryDerivedPull.
-2. Apply the canonical ringed-topos derived tensor pullback comparison to the ordinary
-   tensor models of IntegralOnSlice.duality. Its normalization on flat-term K-flat
-   complexes identifies the pullback of the ordinary tensor with the ordinary tensor
-   of the two pullbacks. Transport along the supplied representative isomorphisms.
-3. Apply bounded_projective_tensor_complete to P and Q. It proves that their terms
-   are flat, both complexes and their signed total tensor are K-flat, and the
-   completion unit on that total tensor is invertible. The representative comparison
-   of IntegralOnSlice.duality identifies this total tensor with its ordinary tensor.
-   Naturality of the completion unit transports invertibility along both isomorphisms.
-4. The canonical completion-unit criterion converts invertibility to the stated
-   Roos-triangle completeness. Empty schemes, zero ranks, and zero complexes are
-   included in the bounded-projective theorem and in that criterion. -/
+is assumed. -/
 theorem projectiveTensorChartComplete
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

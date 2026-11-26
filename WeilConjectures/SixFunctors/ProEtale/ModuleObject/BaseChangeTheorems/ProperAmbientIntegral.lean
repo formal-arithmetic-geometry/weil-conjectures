@@ -113,8 +113,7 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight_padicIn
   · convert hres using 3
     all_goals rfl
 
-/-- **Proper base change on the ambient derived categories** (blueprint
-`proposition-proper-direct-image-constructible-complexes` (3), for `𝒪_E`-coefficients): for a
+/-- **Proper base change on the ambient derived categories** (for `𝒪_E`-coefficients): for a
 cartesian square `g' ≫ f = f' ≫ g` of separated `k`-schemes of finite type with `f` proper, the base
 change map `Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` of the ambient derived categories of module objects over
 `𝒪̲_E` is an isomorphism for every bounded constructible `K`. As for `ℚ̄_ℓ`, the underlying square

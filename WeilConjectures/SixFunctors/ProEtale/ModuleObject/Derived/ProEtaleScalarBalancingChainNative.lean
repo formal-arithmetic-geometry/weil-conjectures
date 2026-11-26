@@ -15,9 +15,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PullIsoMonoidal
 
 /-! # Condensed scalar balancing and its unbounded chain normalization
 
-Source: lemma-sp-reduction--1, proof Step 1, ordinary pullback/tensor comparison
-(blueprint: lem-sp-proetale-scalar-balancing-chain).
-
 The scalar-last tensor is the recorded relative tensor with the restricted regular coefficient
 module. Its scalar-first presentation uses the existing projection formula and symmetry.
 -/
@@ -38,21 +35,15 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
   (a : Λ ⟶ Λ') [IsMonHom a]
 
-/-- The coefficient `r_Z S_Z`, with its canonical restricted regular action.
-Source: lemma-sp-reduction--1, Step 1
-(blueprint: lem-sp-proetale-scalar-balancing-chain). -/
+/-- The coefficient `r_Z S_Z`, with its canonical restricted regular action. -/
 abbrev balancingCoefficient (Z : Scheme.{u}) :
     Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z) :=
   (Mod.comap (coefficientMap a Z)).obj (Mod.regular (condensedRingObj Λ' Z))
 
-/-- The ordinary scalar-last tensor, using the existing relative tensor functor.
-Source: lemma-sp-reduction--1, Step 1
-(blueprint: lem-sp-proetale-scalar-balancing-chain). -/
+/-- The ordinary scalar-last tensor, using the existing relative tensor functor. -/
 abbrev balancingTensor (Z : Scheme.{u}) := tensorRight (balancingCoefficient a Z)
 
-/-- The scalar-last to scalar-first presentation, with the scalar action on the scalar factor.
-Source: lemma-sp-reduction--1, Step 1
-(blueprint: lem-sp-proetale-scalar-balancing-chain). -/
+/-- The scalar-last to scalar-first presentation, with the scalar action on the scalar factor. -/
 def balancingExtensionIso (Z : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
     M ⊗ balancingCoefficient a Z ≅
@@ -68,8 +59,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The full pairing equation for the inverse-image unit-section formula. Applying the sheaf
 inverse-image adjunction and then evaluating pure local tensors gives exactly
 `f⁻¹(x ⊗ s) ↦ f⁻¹x ⊗ α_S(f⁻¹s)`; this equation also covers tensors which are only locally pure.
-Source: lemma-sp-reduction--1, Step 1
-(blueprint: lem-sp-proetale-scalar-balancing-chain). -/
+-/
 def IsCondensedScalarBalancing
     (t : balancingTensor a Y ⋙ upperStar Λ f ≅ upperStar Λ f ⋙ balancingTensor a X) : Prop :=
   ∀ M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y),
@@ -354,25 +344,7 @@ private lemma balancingChain_normalization
 
 -- The proof compares several presentations of the degree-zero coefficient total.
 /-- Ordinary condensed scalar balancing, its transported scalar action and chain normalization.
-Source: lemma-sp-reduction--1, proof Step 1
-(blueprint: lem-sp-proetale-scalar-balancing-chain).
-
-Proof:
-1. Naturality of the coefficient comparison gives the coefficient square. Transport extension
-   along each coefficient isomorphism to restriction along its inverse. The two actions then
-   agree by that square, and beta is the identity on the inverse-image sheaf.
-2. The strong monoidal abelian inverse image preserves coequalizers. Its relative tensor
-   comparison, followed by the coefficient isomorphism on the second factor, gives t.
-3. The tensorator's adjunction-unit equation gives the full pairing equation below. Adjunction
-   and the balanced tensor universal property show this determines t uniquely.
-4. After projection to the scalar-first presentations, t beta respects the scalar action:
-   both action pairings send (m,s,b) to m tensor sb. Descend through the tensor coequalizers.
-5. Naturality at each differential gives the chain equation and the inverse equation. The
-   components and their inverses therefore give a natural chain isomorphism for every complex.
-6. In total tensor with the coefficient in degree zero only (i,0) contributes in degree i;
-   its differential is d tensor 1. Hence the signed-total comparison is this degreewise map.
-No flatness, K-flatness, torsion or boundedness is used.
--/
+No flatness, K-flatness, torsion or boundedness is used. -/
 theorem condensedScalarBalancingChain :
     ((f)^*[Ab.{u + 1}].map (coefficientMap a Y) ≫ condensedPullbackHom Λ' f =
       condensedPullbackHom Λ f ≫ coefficientMap a X) ∧

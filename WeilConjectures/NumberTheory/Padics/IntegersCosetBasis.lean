@@ -9,7 +9,14 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtension
 /-!
 # Uniformizer cosets form a neighbourhood basis
 
-(auxiliary; not a blueprint node).
+We show that the cosets of the positive powers of the uniformizer ideal form a neighbourhood
+basis in the ring of integers of a finite extension of `ℚ_[l]`.
+
+## Implementation details
+
+An integral element lies in the `n`th uniformizer ideal exactly when its absolute value is at
+most `r ^ n`, where `r < 1` is the absolute value of the uniformizer. By the ultrametric
+inequality each coset is open, and since `r ^ n → 0` every metric neighbourhood contains one.
 -/
 
 @[expose] public section
@@ -20,20 +27,7 @@ universe u
 
 namespace Padic
 
-/-- The positive uniformizer-power cosets form a neighbourhood basis in the ring of integers.
-
-parent node lem-sfb-integers-profinite-tower, proof step 1
-(auxiliary; not a blueprint node).
-
-Proof: Let r be the absolute value of the chosen uniformizer. The DVR theorem gives
-0 < r < 1. An integral element belongs to the nth uniformizer ideal exactly when its
-absolute value is at most r^n: divide by the nonzero uniformizer power and use the
-characterization of the integer ring as the closed unit ball. By the ultrametric
-inequality, each such coset is open, since it contains a ball of radius r^n around
-each of its points. It is a neighbourhood of its centre. Conversely r^(n+1) tends to
-zero, so every metric neighbourhood of the centre contains one of these cosets.
-This proves the asserted filter basis, including at the first positive exponent.
--/
+/-- The positive uniformizer-power cosets form a neighbourhood basis in the ring of integers. -/
 theorem coefficientExtension_integers_coset_basis (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     letI := spectralNorm.normedField (Padic l) E

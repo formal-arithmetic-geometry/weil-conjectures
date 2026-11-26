@@ -292,13 +292,9 @@ instance ProEtale.openImmersionRestriction_additive :
 
 namespace ProEtale
 
-/-- Blueprint `def-weil-extension-by-zero`: Extension by zero. It is the sheafification of the
-left Kan extension of the presheaf along the localization functor, whose value at `V ⟶ X` is
-`M(V ⟶ U)` if `V ⟶ X` factors through `U` and zero otherwise
-(`AlgebraicGeometry.ProEtale.mem_essImage_or_isEmpty_costructuredArrow_op_overMap`).
-
-The lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for the small
-pro-étale sites. -/
+/-- Extension by zero: the lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for
+the small pro-étale sites. It is the sheafification of the presheaf whose value at `V ⟶ X` is
+`M(V ⟶ U)` if `V ⟶ X` factors through `U` and zero otherwise. -/
 noncomputable def openImmersionLowerShriek :
     Sheaf (Scheme.ProEt.topology U) A ⥤ Sheaf (Scheme.ProEt.topology X) A :=
   ProEtale.localizationLowerShriek A j inferInstance
@@ -327,15 +323,8 @@ instance ProEtale.openImmersionLowerShriek_additive : (j)_!open[A].Additive :=
   (ProEtale.openImmersionLowerShriekAdjunction A j).left_adjoint_additive
 
 /-- The extension by zero `j_!` along an open immersion on pro-étale sheaves with values in
-an abelian category is exact. This is the left exactness half.
-
-`j_!` is the presheaf-level left Kan extension followed by sheafification, and both factors
-are left exact: the first by
-`AlgebraicGeometry.ProEtale.preservesFiniteLimits_op_lan_overMap`, the second by
-the left exactness of sheafification, which is the content of `HasSheafify` beyond the
-`HasWeakSheafify` needed to define `j_!`; both are provided for the Grothendieck abelian
-coefficient category `A`, the second by the instance of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. -/
+an abelian category is exact. This is the left exactness half: `j_!` is the presheaf-level left
+Kan extension followed by sheafification, and both factors are left exact. -/
 instance ProEtale.preservesFiniteLimits_openImmersionLowerShriek :
     PreservesFiniteLimits (j)_!open[A] := by
   have heq : (j)_!open[A] =

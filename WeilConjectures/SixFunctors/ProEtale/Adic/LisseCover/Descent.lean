@@ -57,10 +57,7 @@ lemma adicUpperStarCongr_inv_app_hom {Q P : Scheme.{u}} {x y : Q ⟶ P} (p : x =
 étale, surjective and quasi-compact, and `M` an `ℓ`-adic sheaf on `T`. A morphism
 `v : ℚ̄_ℓ,W ⟶ f^* M` whose pullbacks along any two `a b : W' ⟶ W` with `a ≫ f = b ≫ f` agree
 (under `a^* f^* M ≅ (a ≫ f)^* M = (b ≫ f)^* M ≅ b^* f^* M`) is the pullback of a morphism
-`ℚ̄_ℓ,T ⟶ M`. The morphism `f^* ℚ̄_ℓ,T ≅ ℚ̄_ℓ,W ⟶ f^* M` of underlying sheaves descends
-(`AlgebraicGeometry.ProEtale.exists_hom_of_upperStar`), and the image of `1` under the descended
-morphism is a global section of `M`, whose morphism out of `ℚ̄_ℓ,T`
-(`AlgebraicGeometry.ProEtale.bijective_globalSectionOfModHom`) pulls back to `v`. -/
+`ℚ̄_ℓ,T ⟶ M`. -/
 theorem exists_upperStar_map_eq_of_cover (f : W ⟶ T) [WeaklyEtale f] [Surjective f]
     [QuasiCompact f] {M : AdicSheaf l T} (v : unit l W ⟶ (f)^*ᵃ[l].obj M)
     (hv : ∀ {W' : Scheme.{u}} (a b : W' ⟶ W) [WeaklyEtale a] [WeaklyEtale b]

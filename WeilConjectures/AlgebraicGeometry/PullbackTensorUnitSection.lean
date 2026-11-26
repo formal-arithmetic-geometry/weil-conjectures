@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.longLine false
 universe u
 open CategoryTheory MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules

@@ -18,18 +18,15 @@ filtered colimits indexed by essentially `u + 1`-small categories
 (`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_lowerStar`,
 `AlgebraicGeometry.ProEtale.preservesColimitsOfShape_rightDerived_lowerStar`), and with direct
 sums (`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_discrete_lowerStar`,
-`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_discrete_rightDerived_lowerStar`). This is
-the complement of the blueprint node `corollary-continuity-cohomology` (for the constant ring sheaf
-`ℤ`), in the case of complexes concentrated in degree `0` of the blueprint node
-`corollary-continuity-cohomology--2`. In degree `0` this is
-`AlgebraicGeometry.ProEtale.isColimit_lowerStar_mapCocone`; the induction step
-`CategoryTheory.Functor.preservesColimitsOfShape_rightDerived_succ` uses that filtered colimits
-of injective sheaves are `f_*`-acyclic
-(`AlgebraicGeometry.ProEtale.rightAcyclic_lowerStar_of_isColimit_of_injective`).
+`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_discrete_rightDerived_lowerStar`).
 
 We deduce that filtered colimits and direct sums of `f_*`-acyclic sheaves are `f_*`-acyclic
 (`AlgebraicGeometry.ProEtale.rightAcyclic_lowerStar_of_isColimit`,
 `AlgebraicGeometry.ProEtale.rightAcyclic_lowerStar_of_isColimit_discrete`).
+
+## References
+
+* [Stacks, Tag 0739](https://stacks.math.columbia.edu/tag/0739)
 -/
 
 @[expose] public section
@@ -55,16 +52,10 @@ theorem preservesColimitsOfShape_lowerStar (J : Type v) [Category.{w} J]
     ⟨fun {_} ↦ ⟨fun hc ↦ ⟨(isColimit_lowerStar_mapCocone f hc).some⟩⟩⟩
   exact preservesColimitsOfShape_of_equiv (equivSmallModel J).symm _
 
-/-- **Higher direct images commute with filtered colimits** (blueprint
-`corollary-continuity-cohomology--2`, sub-node of `corollary-continuity-cohomology`, in the case
-of complexes concentrated in degree `0` and of the ring sheaf `ℤ`; [Stacks 0739] on the
-pro-étale site): for a quasi-compact quasi-separated morphism `f` and a filtered diagram `(Kᵢ)`
-of abelian sheaves on `X_proét` indexed by an essentially `u + 1`-small category, the canonical
-map `colim Rᵠf_* Kᵢ ⟶ Rᵠf_* (colim Kᵢ)` is an isomorphism. In degree `0` this is
-`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_lowerStar`; the induction step
-`CategoryTheory.Functor.preservesColimitsOfShape_rightDerived_succ` needs filtered colimits of
-injective sheaves to be `f_*`-acyclic
-(`AlgebraicGeometry.ProEtale.rightAcyclic_lowerStar_of_isColimit_of_injective`). -/
+/-- **Higher direct images commute with filtered colimits**: for a quasi-compact quasi-separated
+morphism `f` and a filtered diagram `(Kᵢ)` of abelian sheaves on `X_proét` indexed by an
+essentially `u + 1`-small category, the canonical map `colim Rᵠf_* Kᵢ ⟶ Rᵠf_* (colim Kᵢ)` is an
+isomorphism. -/
 theorem preservesColimitsOfShape_rightDerived_lowerStar (J : Type v) [Category.{w} J]
     [EssentiallySmall.{u + 1} J] [IsFiltered J] (q : ℕ) :
     PreservesColimitsOfShape J (((f)_*[Ab.{u + 1}]).rightDerived q) := by

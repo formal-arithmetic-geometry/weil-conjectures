@@ -36,7 +36,6 @@ set_option backward.isDefEq.respectTransparency.types false
 
 namespace AlgebraicGeometry
 
-set_option linter.unusedVariables false in
 /-- Tensor coordinates for the given representative, with a chain-level stalk square. -/
 theorem exists_tensorStalk_chain_coordinates
     [∀ Y : Scheme.{u},
@@ -66,7 +65,7 @@ theorem exists_tensorStalk_chain_coordinates
     let F := (ModuleCat.extendScalars.{u, u, u}
       ((algebraMap (TensorProduct R A B) C).comp
         (algebraMap A (TensorProduct R A B)))).mapHomologicalComplex (.up ℤ)
-    let G := ModuleCat.extendScalars.{u, u, u} (algebraMap (TensorProduct R A B) C)
+    let _G := ModuleCat.extendScalars.{u, u, u} (algebraMap (TensorProduct R A B) C)
     let S := (RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapHomologicalComplex
       (.up ℤ)
     let U := SingleComplexBaseChange.stalkComplex g' z P

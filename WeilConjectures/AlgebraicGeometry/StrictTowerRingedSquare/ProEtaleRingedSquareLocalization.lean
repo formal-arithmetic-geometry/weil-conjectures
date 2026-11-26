@@ -21,8 +21,6 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 universe t
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme

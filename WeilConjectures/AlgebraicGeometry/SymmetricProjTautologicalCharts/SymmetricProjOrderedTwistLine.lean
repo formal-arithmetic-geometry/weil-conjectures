@@ -42,19 +42,18 @@ private theorem boundary_adjunction_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
       M (op U) m)
     (Classical.choose_spec (Scheme.Modules.existsUnique_tensorPullbackSectionAdjunction g)).1
 
-set_option linter.unusedVariables false in
 /-- The local normalized affine comparisons glue to a global line isomorphism. -/
 theorem exists_ordered_twist_line (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E)
     (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r ≅ E)
     (eRel : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj ≅
       RelativeProjectiveSpace.scheme S r)
-    (hRel : eRel.hom ≫ RelativeProjectiveSpace.π S r =
+    (_hRel : eRel.hom ≫ RelativeProjectiveSpace.π S r =
       (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom)
     (hAffine : ∀ V : S.affineOpens,
       ProjectiveBundleQuotientGeometry.AffineFreeComparison r b eRel V)
     (θ : RelativeProjectiveSpace.scheme S r ≅ ℙ(ULift.{u} (Fin (r + 1)); S))
-    (hθ : θ.hom ≫ (ℙ(ULift.{u} (Fin (r + 1)); S) ↘ S) =
+    (_hθ : θ.hom ≫ (ℙ(ULift.{u} (Fin (r + 1)); S) ↘ S) =
       RelativeProjectiveSpace.π S r)
     (hθAffine : ∀ V : S.affineOpens, RelativeProjectiveSpace.IsIntegralProjComparison
       S r V (RelativeProjectiveSpace.affineToIntegral S r θ V)) :

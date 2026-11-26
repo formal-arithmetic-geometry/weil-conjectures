@@ -16,9 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLo
 
 Let `p : Z ⟶ Y` be a proper morphism to a noetherian scheme. For the `ℓ`-adic coefficient rings
 `Λ = 𝒪_E, E, ℚ̄_ℓ`, the derived direct image `Rp_*` maps `Dᵇc(Z)⟦Λ⟧` into `Dᵇc(Y)⟦Λ⟧` as soon as it
-does so with the residue field coefficients `𝔽_{E'}` of the finite subextensions `E' ⊆ ℚ̄_ℓ`
-(blueprint `proposition-proper-direct-image-constructible-complexes` (1),
-`proposition-proper-direct-image-constructible-complexes` (1)):
+does so with the residue field coefficients `𝔽_{E'}` of the finite subextensions `E' ⊆ ℚ̄_ℓ`:
 
 * `boundedConstructible_rightDerivedLowerStar_padicIntegersRingObj_of_residueField`: for `𝒪_E`,
   the integral case `boundedConstructible_rightDerivedLowerStar_padicIntegers_of_residueField`
@@ -76,8 +74,8 @@ def ResidueFieldFiniteness : Prop :=
         (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) Y
         ((R((p)_*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])).obj L)
 
-/-- Blueprint `proposition-proper-direct-image-constructible-complexes` (1), from the residue field
-input: for `E ⊆ ℚ̄_ℓ` finite over `ℚ_ℓ`, `Rp_*` maps `Dᵇc(Z)⟦𝒪_E⟧` into `Dᵇc(Y)⟦𝒪_E⟧`. -/
+/-- From the residue field input: for `E ⊆ ℚ̄_ℓ` finite over `ℚ_ℓ`, `Rp_*` maps `Dᵇc(Z)⟦𝒪_E⟧` into
+`Dᵇc(Y)⟦𝒪_E⟧`. -/
 theorem boundedConstructible_rightDerivedLowerStar_padicIntegersRingObj_of_residueField
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
@@ -92,8 +90,8 @@ theorem boundedConstructible_rightDerivedLowerStar_padicIntegersRingObj_of_resid
     (fun K hK ↦ boundedConstructible_rightDerivedLowerStar_padicIntegers_of_residueField ℓ E' p
       (hp E') K hK) K hK
 
-/-- Blueprint `proposition-proper-direct-image-constructible-complexes` (1) for the finite
-subextensions: `Rp_*` maps `Dᵇc(Z)⟦𝒪_E⟧` into `Dᵇc(Y)⟦𝒪_E⟧` for `E ⊆ ℚ̄_ℓ` a finite subextension. -/
+/-- For the finite subextensions: `Rp_*` maps `Dᵇc(Z)⟦𝒪_E⟧` into `Dᵇc(Y)⟦𝒪_E⟧` for `E ⊆ ℚ̄_ℓ` a
+finite subextension. -/
 lemma boundedConstructible_rightDerivedLowerStar_padicIntegers_of_residueFieldFiniteness
     (hp : ResidueFieldFiniteness ℓ p) (E : FiniteIntermediateField ℓ)
     (K₀ : Dᵇc(Z)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
@@ -103,8 +101,8 @@ lemma boundedConstructible_rightDerivedLowerStar_padicIntegers_of_residueFieldFi
   boundedConstructible_rightDerivedLowerStar_padicIntegers_of_residueField ℓ E p (hp E) K₀.obj
     K₀.property
 
-/-- Blueprint `proposition-proper-direct-image-constructible-complexes` (1), from the residue field
-input: for a finite extension `E` of `ℚ_ℓ`, `Rp_*` maps `Dᵇc(Z)⟦E⟧` into `Dᵇc(Y)⟦E⟧`. -/
+/-- From the residue field input: for a finite extension `E` of `ℚ_ℓ`, `Rp_*` maps `Dᵇc(Z)⟦E⟧`
+into `Dᵇc(Y)⟦E⟧`. -/
 theorem boundedConstructible_rightDerivedLowerStar_continuousMapRingObj_of_residueField
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (hp : ResidueFieldFiniteness ℓ p)
@@ -119,8 +117,7 @@ theorem boundedConstructible_rightDerivedLowerStar_continuousMapRingObj_of_resid
       ℓ p E' (boundedConstructible_rightDerivedLowerStar_padicIntegers_of_residueFieldFiniteness
         ℓ p hp E') ⟨K, hK⟩) K hK
 
-/-- Blueprint `proposition-proper-direct-image-constructible-complexes` for `ℚ̄_ℓ`, from the residue
-field input: `Rp_*` maps `Dᵇc(Z)⟦ℚ̄_ℓ⟧` into `Dᵇc(Y)⟦ℚ̄_ℓ⟧`. -/
+/-- From the residue field input, for `ℚ̄_ℓ`: `Rp_*` maps `Dᵇc(Z)⟦ℚ̄_ℓ⟧` into `Dᵇc(Y)⟦ℚ̄_ℓ⟧`. -/
 theorem boundedConstructible_rightDerivedLowerStar_padicAlgClRingObj_of_residueField
     (hp : ResidueFieldFiniteness ℓ p)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
@@ -152,9 +149,8 @@ include aY
 
 omit [IsNoetherian Y]
 
-/-- Blueprint `proposition-proper-direct-image-constructible-complexes` (1): for `p : Z ⟶ Y` proper
-with `Y` of finite type over a field `k` in which `ℓ` is invertible, `Rp_*` maps `Dᵇc(Z)⟦𝒪_E⟧` into
-`Dᵇc(Y)⟦𝒪_E⟧`. -/
+/-- For `p : Z ⟶ Y` proper with `Y` of finite type over a field `k` in which `ℓ` is invertible,
+`Rp_*` maps `Dᵇc(Z)⟦𝒪_E⟧` into `Dᵇc(Y)⟦𝒪_E⟧`. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_isProper_padicIntegersRingObj_of_finiteType
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
@@ -166,9 +162,8 @@ theorem boundedConstructible_rightDerivedLowerStar_of_isProper_padicIntegersRing
   boundedConstructible_rightDerivedLowerStar_padicIntegersRingObj_of_residueField ℓ p E
     (residueFieldFiniteness_of_isNoetherian ℓ p aY) K hK
 
-/-- Blueprint `proposition-proper-direct-image-constructible-complexes` (1): for `p : Z ⟶ Y` proper
-with `Y` of finite type over a field `k` in which `ℓ` is invertible, `Rp_*` maps `Dᵇc(Z)⟦E⟧` into
-`Dᵇc(Y)⟦E⟧`. -/
+/-- For `p : Z ⟶ Y` proper with `Y` of finite type over a field `k` in which `ℓ` is invertible,
+`Rp_*` maps `Dᵇc(Z)⟦E⟧` into `Dᵇc(Y)⟦E⟧`. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_isProper_continuousMapRingObj_of_finiteType
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
@@ -179,9 +174,8 @@ theorem boundedConstructible_rightDerivedLowerStar_of_isProper_continuousMapRing
   boundedConstructible_rightDerivedLowerStar_continuousMapRingObj_of_residueField ℓ p E
     (residueFieldFiniteness_of_isNoetherian ℓ p aY) K hK
 
-/-- Blueprint `proposition-proper-direct-image-constructible-complexes`: for `p : Z ⟶ Y` proper with
-`Y` of finite type over a field `k` in which `ℓ` is invertible, `Rp_*` maps `Dᵇc(Z)⟦ℚ̄_ℓ⟧` into
-`Dᵇc(Y)⟦ℚ̄_ℓ⟧`. -/
+/-- For `p : Z ⟶ Y` proper with `Y` of finite type over a field `k` in which `ℓ` is invertible,
+`Rp_*` maps `Dᵇc(Z)⟦ℚ̄_ℓ⟧` into `Dᵇc(Y)⟦ℚ̄_ℓ⟧`. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_isProper_padicAlgClRingObj_of_finiteType
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) Z)))

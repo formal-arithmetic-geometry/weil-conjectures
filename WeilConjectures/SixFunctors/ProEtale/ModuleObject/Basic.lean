@@ -208,8 +208,7 @@ lemma profiniteToProEt_obj_left (S : Profinite.{u}) :
 -- map on profinite components. Characteristic functions identify their values after
 -- localization; conversely, `liftPrimeSpectrum` glues integers along clopen partitions.
 -- This constructs a left adjoint to `profiniteToCommRingCatOp`, avoiding tensor-product
--- and equalizer computations. Source: the module's profinite-test-object construction
--- and `LocallyConstant.homeomorphPrimeSpectrum` / `LocallyConstant.liftPrimeSpectrum`.
+-- and equalizer computations.
 private noncomputable def profiniteSpectrumProjection {S : Profinite.{u}} {R : Type u} [CommRing R]
     (φ : LocallyConstant S ℤ →+* R) : C(PrimeSpectrum R, S) :=
   ⟨fun p ↦ ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm

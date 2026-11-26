@@ -31,10 +31,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactificatio
 /-!
 # Open restriction of the Brown exceptional inverse image
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-sf-mate,
-proposition-composition-open-restriction-compactifications-f, clauses (1)--(3) and proof
-(blueprint: proposition-composition-open-restriction-compactifications-f).
-
 The exceptional functors are arbitrary right adjoints of the recorded compactification
 lower shrieks, hence include the compactification-independent Brown adjoints. All comparison
 isomorphisms below are characterized by explicit adjunction equations. The target equation
@@ -94,19 +90,7 @@ private theorem normalized_conjugate
 
 /-- Open extension is left adjoint to exact restriction on precisely Loc(Dctf). The Hom
 bijection is the restriction of the existing termwise open adjunction. Every Brown right
-adjoint is identified with restriction by the unique counit-compatible isomorphism.
-Source: blueprint proposition-composition-open-restriction-compactifications-f (1)
-(blueprint: proposition-composition-open-restriction-compactifications-f).
-
-Proof: The existing exact derived open adjunction already supplies the ambient Hom
-bijections. Obtain open-extension preservation from openImmersionLowerShriek_localizing.
-For pullback, use openPullback_generators and the defining intersection of the localizing
-closure: inverse images of the replete triangulated sum-closed candidates are again such
-candidates, since exact termwise pullback is also a left adjoint. Restrict the ambient
-adjunction using restrictFullyFaithful, retaining its Hom formula. Transport extension
-preservation and the adjunction along mateOpenTrivialLowerShriek for (j,id). The canonical
-rightAdjointUniq has precisely the displayed counit equation; injectivity of the inverse
-Hom equivalence proves that it is the only such isomorphism. -/
+adjoint is identified with restriction by the unique counit-compatible isomorphism. -/
 theorem mateOpenImmersion
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpℓ : p ≠ ℓ)

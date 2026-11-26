@@ -9,9 +9,13 @@ public import WeilConjectures.SixFunctors.Normalized.NormalizedDVRTower
 
 /-! # Strict composites in a system of restriction functors
 
-Source: Stacks Tag 03DA; blueprint DVR effectivity, composition of strict finite models.
-(blueprint: lem-coef-strict-restriction-tower-composites).
+Composition of strict finite models and the corresponding restriction comparisons.
+
+## References
+
+* [Stacks, Tag 03DA](https://stacks.math.columbia.edu/tag/03DA)
 -/
+
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -25,8 +29,7 @@ section RestrictionComposition
 variable {C : Type a} [Category.{b} C] {J : GrothendieckTopology C}
   {R S T : Sheaf J RingCat.{r}}
 
-/-- Canonical composition of scalar restriction, keeping the coefficient equality abstract.
-Source: Stacks Tag 03DA; blueprint DVR effectivity, restriction comparison. -/
+/-- Canonical composition of scalar restriction, keeping the coefficient equality abstract. -/
 def normalizedDVRRestrictionComp (f : R ⟶ S) (g : S ⟶ T) (q : R ⟶ T)
     (e : f ≫ g = q) :
     SheafOfModules.restrictScalars.{w} g ⋙ SheafOfModules.restrictScalars.{w} f ≅
@@ -269,15 +272,7 @@ def step : ∀ j : ℕ, syst.complex P (j + 1) ⟶ syst.complex P j
 def tower : ℕᵒᵖ ⥤ CochainComplex (SheafOfModules.{w} completed) ℤ :=
   Functor.ofOpSequence (syst.step P g)
 
-/-- Finite semilinear composites restrict to the actual strict tower maps.
-Source: Stacks Tag 03DA; blueprint strict finite-model construction.
-(blueprint: lem-coef-strict-restriction-tower-composites).
-
-Proof: the finite composite starts with the given successor map. Naturality of the
-restriction comparison and associativity of its identity maps on sections show
-that completed restriction carries each recursive composite to the corresponding
-composite of completed successor maps. Apply the abstract functor calculation,
-which inducts on the number of successors using the sequence functor's map law. -/
+/-- Finite semilinear composites restrict to the actual strict tower maps. -/
 theorem tower_map (n k : ℕ) :
     (syst.tower P g).map
       (homOfLE (Nat.succ_le_succ (Nat.le_add_right n (k + 1)))).op =
