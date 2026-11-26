@@ -1,0 +1,668 @@
+[QTC-DECL] DerivedCategory type=(C : Type u) →
+  [inst : CategoryTheory.Category.{v, u} C] →
+    [inst_1 : @CategoryTheory.Abelian.{v, u} C inst] → [@HasDerivedCategory.{w, v, u} C inst inst_1] → Type (max u v)
+[QTC-VALUE] DerivedCategory value=fun (C : Type u) [inst : CategoryTheory.Category.{v, u} C]
+    [inst_1 : @CategoryTheory.Abelian.{v, u} C inst] [inst_2 : @HasDerivedCategory.{w, v, u} C inst inst_1] =>
+  @HomologicalComplexUpToQuasiIso.{v, u, 0, w} C inst Int
+    (@ComplexShape.up.{0} Int Int.instAdd HasDerivedCategory._proof_1
+      (@AddMonoidWithOne.toOne.{0} Int
+        (@AddGroupWithOne.toAddMonoidWithOne.{0} Int (@Ring.toAddGroupWithOne.{0} Int Int.instRing))))
+    (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v, u} C inst
+      (@CategoryTheory.Abelian.toPreadditive.{v, u} C inst inst_1))
+    (@CategoryTheory.categoryWithHomology_of_abelian.{v, u} C inst inst_1) inst_2
+[QTC-DECL] DerivedCategory.Q type={C : Type u} →
+  [inst : CategoryTheory.Category.{v, u} C] →
+    [inst_1 : @CategoryTheory.Abelian.{v, u} C inst] →
+      [inst_2 : @HasDerivedCategory.{w, v, u} C inst inst_1] →
+        @CategoryTheory.Functor.{v, w, max u v, max u v}
+          (@CochainComplex.{v, u, 0} C inst
+            (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v, u} C inst
+              (@CategoryTheory.Abelian.toPreadditive.{v, u} C inst inst_1))
+            Int
+            (@AddRightCancelMonoid.toAddRightCancelSemigroup.{0} Int
+              (@AddCancelMonoid.toAddRightCancelMonoid.{0} Int (@AddGroup.toAddCancelMonoid.{0} Int Int.instAddGroup)))
+            (@AddMonoidWithOne.toOne.{0} Int
+              (@AddGroupWithOne.toAddMonoidWithOne.{0} Int (@Ring.toAddGroupWithOne.{0} Int Int.instRing))))
+          (@HomologicalComplex.instCategory.{v, u, 0} Int C inst
+            (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v, u} C inst
+              (@CategoryTheory.Abelian.toPreadditive.{v, u} C inst inst_1))
+            (@ComplexShape.up.{0} Int
+              (@AddSemigroup.toAdd.{0} Int
+                (@AddRightCancelSemigroup.toAddSemigroup.{0} Int
+                  (@AddRightCancelMonoid.toAddRightCancelSemigroup.{0} Int
+                    (@AddCancelMonoid.toAddRightCancelMonoid.{0} Int
+                      (@AddGroup.toAddCancelMonoid.{0} Int Int.instAddGroup)))))
+              (@AddRightCancelSemigroup.toIsRightCancelAdd.{0} Int
+                (@AddRightCancelMonoid.toAddRightCancelSemigroup.{0} Int
+                  (@AddCancelMonoid.toAddRightCancelMonoid.{0} Int
+                    (@AddGroup.toAddCancelMonoid.{0} Int Int.instAddGroup))))
+              (@AddMonoidWithOne.toOne.{0} Int
+                (@AddGroupWithOne.toAddMonoidWithOne.{0} Int (@Ring.toAddGroupWithOne.{0} Int Int.instRing)))))
+          (@DerivedCategory.{w, v, u} C inst inst_1 inst_2)
+          (@instCategoryDerivedCategory.{w, u, v} C inst inst_1 inst_2)
+[QTC-VALUE] DerivedCategory.Q value=fun {C : Type u} [inst : CategoryTheory.Category.{v, u} C]
+    [inst_1 : @CategoryTheory.Abelian.{v, u} C inst] [inst_2 : @HasDerivedCategory.{w, v, u} C inst inst_1] =>
+  @HomologicalComplexUpToQuasiIso.Q.{v, u, 0, w} C inst Int
+    (@ComplexShape.up.{0} Int
+      (@AddSemigroup.toAdd.{0} Int
+        (@AddRightCancelSemigroup.toAddSemigroup.{0} Int
+          (@AddRightCancelMonoid.toAddRightCancelSemigroup.{0} Int
+            (@AddCancelMonoid.toAddRightCancelMonoid.{0} Int (@AddGroup.toAddCancelMonoid.{0} Int Int.instAddGroup)))))
+      DerivedCategory.Q._proof_1
+      (@AddMonoidWithOne.toOne.{0} Int
+        (@AddGroupWithOne.toAddMonoidWithOne.{0} Int (@Ring.toAddGroupWithOne.{0} Int Int.instRing))))
+    (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v, u} C inst
+      (@CategoryTheory.Abelian.toPreadditive.{v, u} C inst inst_1))
+    (@CategoryTheory.categoryWithHomology_of_abelian.{v, u} C inst inst_1) inst_2
+[QTC-DECL] DerivedCategory.Qh type={C : Type u} →
+  [inst : CategoryTheory.Category.{v, u} C] →
+    [inst_1 : @CategoryTheory.Abelian.{v, u} C inst] →
+      [inst_2 : @HasDerivedCategory.{w, v, u} C inst inst_1] →
+        @CategoryTheory.Functor.{v, w, max u v, max u v}
+          (@HomotopyCategory.{v, u, 0} Int C inst (@CategoryTheory.Abelian.toPreadditive.{v, u} C inst inst_1)
+            (@ComplexShape.up.{0} Int Int.instAdd
+              (@instIsRightCancelAddOfAddRightReflectLE.{0} Int Int.instAdd
+                (@SemilatticeInf.toPartialOrder.{0} Int (@Lattice.toSemilatticeInf.{0} Int instLatticeInt))
+                (@addRightReflectLE_of_addLeftReflectLE.{0} Int Int.instAddCommSemigroup
+                  (@Preorder.toLE.{0} Int
+                    (@PartialOrder.toPreorder.{0} Int
+                      (@SemilatticeInf.toPartialOrder.{0} Int (@Lattice.toSemilatticeInf.{0} Int instLatticeInt))))
+                  (@IsLeftCancelAdd.addLeftReflectLE_of_addLeftReflectLT.{0} Int
+                    (@AddCommMagma.toAdd.{0} Int (@AddCommSemigroup.toAddCommMagma.{0} Int Int.instAddCommSemigroup))
+                    (@AddLeftCancelSemigroup.toIsLeftCancelAdd.{0} Int
+                      (@AddLeftCancelMonoid.toAddLeftCancelSemigroup.{0} Int
+                        (@AddCancelCommMonoid.toAddLeftCancelMonoid.{0} Int
+                          (@AddCommGroup.toAddCancelCommMonoid.{0} Int Int.instAddCommGroup))))
+                    (@SemilatticeInf.toPartialOrder.{0} Int (@Lattice.toSemilatticeInf.{0} Int instLatticeInt))
+                    (@contravariant_lt_of_covariant_le.{0} Int
+                      (fun (x1 x2 : Int) =>
+                        @HAdd.hAdd.{0, 0, 0} Int Int Int
+                          (@instHAdd.{0} Int
+                            (@AddCommMagma.toAdd.{0} Int
+                              (@AddCommSemigroup.toAddCommMagma.{0} Int Int.instAddCommSemigroup)))
+                          x1 x2)
+                      Int.instLinearOrder Int.instAddLeftMono))))
+              (@AddMonoidWithOne.toOne.{0} Int
+                (@AddGroupWithOne.toAddMonoidWithOne.{0} Int (@Ring.toAddGroupWithOne.{0} Int Int.instRing)))))
+          (@instCategoryHomotopyCategory.{v, u, 0} Int C inst
+            (@CategoryTheory.Abelian.toPreadditive.{v, u} C inst inst_1)
+            (@ComplexShape.up.{0} Int Int.instAdd
+              (@instIsRightCancelAddOfAddRightReflectLE.{0} Int Int.instAdd
+                (@SemilatticeInf.toPartialOrder.{0} Int (@Lattice.toSemilatticeInf.{0} Int instLatticeInt))
+                (@addRightReflectLE_of_addLeftReflectLE.{0} Int Int.instAddCommSemigroup
+                  (@Preorder.toLE.{0} Int
+                    (@PartialOrder.toPreorder.{0} Int
+                      (@SemilatticeInf.toPartialOrder.{0} Int (@Lattice.toSemilatticeInf.{0} Int instLatticeInt))))
+                  (@IsLeftCancelAdd.addLeftReflectLE_of_addLeftReflectLT.{0} Int
+                    (@AddCommMagma.toAdd.{0} Int (@AddCommSemigroup.toAddCommMagma.{0} Int Int.instAddCommSemigroup))
+                    (@AddLeftCancelSemigroup.toIsLeftCancelAdd.{0} Int
+                      (@AddLeftCancelMonoid.toAddLeftCancelSemigroup.{0} Int
+                        (@AddCancelCommMonoid.toAddLeftCancelMonoid.{0} Int
+                          (@AddCommGroup.toAddCancelCommMonoid.{0} Int Int.instAddCommGroup))))
+                    (@SemilatticeInf.toPartialOrder.{0} Int (@Lattice.toSemilatticeInf.{0} Int instLatticeInt))
+                    (@contravariant_lt_of_covariant_le.{0} Int
+                      (fun (x1 x2 : Int) =>
+                        @HAdd.hAdd.{0, 0, 0} Int Int Int
+                          (@instHAdd.{0} Int
+                            (@AddCommMagma.toAdd.{0} Int
+                              (@AddCommSemigroup.toAddCommMagma.{0} Int Int.instAddCommSemigroup)))
+                          x1 x2)
+                      Int.instLinearOrder Int.instAddLeftMono))))
+              (@AddMonoidWithOne.toOne.{0} Int
+                (@AddGroupWithOne.toAddMonoidWithOne.{0} Int (@Ring.toAddGroupWithOne.{0} Int Int.instRing)))))
+          (@DerivedCategory.{w, v, u} C inst inst_1 inst_2)
+          (@instCategoryDerivedCategory.{w, u, v} C inst inst_1 inst_2)
+[QTC-VALUE] DerivedCategory.Qh value=fun {C : Type u} [inst : CategoryTheory.Category.{v, u} C]
+    [inst_1 : @CategoryTheory.Abelian.{v, u} C inst] [inst_2 : @HasDerivedCategory.{w, v, u} C inst inst_1] =>
+  @HomologicalComplexUpToQuasiIso.Qh.{v, u, 0, w} C inst Int
+    (@ComplexShape.up.{0} Int Int.instAdd HasDerivedCategory._proof_1
+      (@AddMonoidWithOne.toOne.{0} Int
+        (@AddGroupWithOne.toAddMonoidWithOne.{0} Int (@Ring.toAddGroupWithOne.{0} Int Int.instRing))))
+    (@CategoryTheory.Abelian.toPreadditive.{v, u} C inst inst_1)
+    (@CategoryTheory.categoryWithHomology_of_abelian.{v, u} C inst inst_1) inst_2
+    (@DerivedCategory.Qh._proof_1.{v, u} C inst inst_1)
+[QTC-DECL] HomologicalComplexUpToQuasiIso.Q type={C : Type u_1} →
+  [inst : CategoryTheory.Category.{v_1, u_1} C] →
+    {ι : Type u_2} →
+      {c : ComplexShape.{u_2} ι} →
+        [inst_1 : @CategoryTheory.Limits.HasZeroMorphisms.{v_1, u_1} C inst] →
+          [inst_2 : @CategoryTheory.CategoryWithHomology.{v_1, u_1} C inst inst_1] →
+            [inst_3 :
+                @CategoryTheory.MorphismProperty.HasLocalization.{u_3, max u_2 v_1, max (max u_1 u_2) v_1}
+                  (@HomologicalComplex.{v_1, u_1, u_2} ι C inst inst_1 c)
+                  (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst inst_1 c)
+                  (@HomologicalComplex.quasiIso.{v_1, u_1, u_2} ι C inst inst_1 c inst_2)] →
+              @CategoryTheory.Functor.{max u_2 v_1, u_3, max (max u_2 u_1) v_1, max (max u_2 u_1) v_1}
+                (@HomologicalComplex.{v_1, u_1, u_2} ι C inst inst_1 c)
+                (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst inst_1 c)
+                (@HomologicalComplexUpToQuasiIso.{v_1, u_1, u_2, u_3} C inst ι c inst_1 inst_2 inst_3)
+                (@CategoryTheory.MorphismProperty.instCategoryLocalization'.{u_3, max u_2 v_1, max (max u_1 u_2) v_1}
+                  (@HomologicalComplex.{v_1, u_1, u_2} ι C inst inst_1 c)
+                  (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst inst_1 c)
+                  (@HomologicalComplex.quasiIso.{v_1, u_1, u_2} ι C inst inst_1 c inst_2) inst_3)
+[QTC-VALUE] HomologicalComplexUpToQuasiIso.Q value=fun {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C]
+    {ι : Type u_2} {c : ComplexShape.{u_2} ι} [inst_1 : @CategoryTheory.Limits.HasZeroMorphisms.{v_1, u_1} C inst]
+    [inst_2 : @CategoryTheory.CategoryWithHomology.{v_1, u_1} C inst inst_1]
+    [inst_3 :
+      @CategoryTheory.MorphismProperty.HasLocalization.{u_3, max u_2 v_1, max (max u_1 u_2) v_1}
+        (@HomologicalComplex.{v_1, u_1, u_2} ι C inst inst_1 c)
+        (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst inst_1 c)
+        (@HomologicalComplex.quasiIso.{v_1, u_1, u_2} ι C inst inst_1 c inst_2)] =>
+  @CategoryTheory.MorphismProperty.Q'.{u_3, max u_2 v_1, max (max u_1 u_2) v_1}
+    (@HomologicalComplex.{v_1, u_1, u_2} ι C inst inst_1 c)
+    (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst inst_1 c)
+    (@HomologicalComplex.quasiIso.{v_1, u_1, u_2} ι C inst inst_1 c inst_2) inst_3
+[QTC-DECL] HomologicalComplexUpToQuasiIso.Qh type={C : Type u_1} →
+  [inst : CategoryTheory.Category.{v_1, u_1} C] →
+    {ι : Type u_2} →
+      {c : ComplexShape.{u_2} ι} →
+        [inst_1 : @CategoryTheory.Preadditive.{v_1, u_1} C inst] →
+          [inst_2 :
+              @CategoryTheory.CategoryWithHomology.{v_1, u_1} C inst
+                (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1)] →
+            [inst_3 :
+                @CategoryTheory.MorphismProperty.HasLocalization.{u_3, max u_2 v_1, max (max u_1 u_2) v_1}
+                  (@HomologicalComplex.{v_1, u_1, u_2} ι C inst
+                    (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                  (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst
+                    (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                  (@HomologicalComplex.quasiIso.{v_1, u_1, u_2} ι C inst
+                    (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c inst_2)] →
+              [@ComplexShape.QFactorsThroughHomotopy.{u_2, v_1, u_1} ι c C inst inst_1 inst_2] →
+                @CategoryTheory.Functor.{max u_2 v_1, u_3, max (max u_2 u_1) v_1, max (max u_2 u_1) v_1}
+                  (@HomotopyCategory.{v_1, u_1, u_2} ι C inst inst_1 c)
+                  (@instCategoryHomotopyCategory.{v_1, u_1, u_2} ι C inst inst_1 c)
+                  (@HomologicalComplexUpToQuasiIso.{v_1, u_1, u_2, u_3} C inst ι c
+                    (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) inst_2 inst_3)
+                  (@CategoryTheory.MorphismProperty.instCategoryLocalization'.{u_3, max u_2 v_1, max (max u_1 u_2) v_1}
+                    (@HomologicalComplex.{v_1, u_1, u_2} ι C inst
+                      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                    (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst
+                      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                    (@HomologicalComplex.quasiIso.{v_1, u_1, u_2} ι C inst
+                      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c inst_2)
+                    inst_3)
+[QTC-VALUE] HomologicalComplexUpToQuasiIso.Qh value=fun {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C]
+    {ι : Type u_2} {c : ComplexShape.{u_2} ι} [inst_1 : @CategoryTheory.Preadditive.{v_1, u_1} C inst]
+    [inst_2 :
+      @CategoryTheory.CategoryWithHomology.{v_1, u_1} C inst
+        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1)]
+    [inst_3 :
+      @CategoryTheory.MorphismProperty.HasLocalization.{u_3, max u_2 v_1, max (max u_1 u_2) v_1}
+        (@HomologicalComplex.{v_1, u_1, u_2} ι C inst
+          (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+        (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst
+          (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+        (@HomologicalComplex.quasiIso.{v_1, u_1, u_2} ι C inst
+          (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c inst_2)]
+    [inst_4 : @ComplexShape.QFactorsThroughHomotopy.{u_2, v_1, u_1} ι c C inst inst_1 inst_2] =>
+  @CategoryTheory.Quotient.lift.{max u_2 v_1, max (max u_1 u_2) v_1, u_3, max (max u_1 u_2) v_1}
+    (@HomologicalComplex.{v_1, u_1, u_2} ι C inst
+      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+    (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst
+      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+    (@homotopic.{v_1, u_1, u_2} ι C inst inst_1 c)
+    (@HomologicalComplexUpToQuasiIso.{v_1, u_1, u_2, u_3} C inst ι c
+      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) inst_2 inst_3)
+    (@CategoryTheory.MorphismProperty.instCategoryLocalization'.{u_3, max u_2 v_1, max (max u_1 u_2) v_1}
+      (@HomologicalComplex.{v_1, u_1, u_2} ι C inst
+        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+      (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst
+        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+      (@HomologicalComplex.quasiIso.{v_1, u_1, u_2} ι C inst
+        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c inst_2)
+      inst_3)
+    (@HomologicalComplexUpToQuasiIso.Q.{v_1, u_1, u_2, u_3} C inst ι c
+      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) inst_2 inst_3)
+    (@HomologicalComplexUpToQuasiIso.Qh._proof_3.{v_1, u_1, u_2, u_3} C inst ι c inst_1 inst_2 inst_3 inst_4)
+[QTC-DECL] HomologicalComplexUpToQuasiIso.quotientCompQhIso type=(C : Type u_1) →
+  [inst : CategoryTheory.Category.{v_1, u_1} C] →
+    {ι : Type u_2} →
+      (c : ComplexShape.{u_2} ι) →
+        [inst_1 : @CategoryTheory.Preadditive.{v_1, u_1} C inst] →
+          [inst_2 :
+              @CategoryTheory.CategoryWithHomology.{v_1, u_1} C inst
+                (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1)] →
+            [inst_3 :
+                @CategoryTheory.MorphismProperty.HasLocalization.{u_3, max u_2 v_1, max (max u_1 u_2) v_1}
+                  (@HomologicalComplex.{v_1, u_1, u_2} ι C inst
+                    (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                  (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst
+                    (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                  (@HomologicalComplex.quasiIso.{v_1, u_1, u_2} ι C inst
+                    (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c inst_2)] →
+              [inst_4 : @ComplexShape.QFactorsThroughHomotopy.{u_2, v_1, u_1} ι c C inst inst_1 inst_2] →
+                @CategoryTheory.Iso.{max (max (max u_1 u_2) v_1) u_3, max (max (max (max u_1 u_2) v_1) u_3) u_2 v_1}
+                  (@CategoryTheory.Functor.{max u_2 v_1, u_3, max (max u_1 u_2) v_1, max (max u_1 u_2) v_1}
+                    (@HomologicalComplex.{v_1, u_1, u_2} ι C inst
+                      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                    (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst
+                      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                    (@HomologicalComplexUpToQuasiIso.{v_1, u_1, u_2, u_3} C inst ι c
+                      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) inst_2 inst_3)
+                    (@CategoryTheory.MorphismProperty.instCategoryLocalization'.{u_3, max u_2 v_1,
+                          max (max u_1 u_2) v_1}
+                      (@HomologicalComplex.{v_1, u_1, u_2} ι C inst
+                        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                      (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst
+                        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                      (@HomologicalComplex.quasiIso.{v_1, u_1, u_2} ι C inst
+                        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c inst_2)
+                      inst_3))
+                  (@CategoryTheory.Functor.category.{max u_2 v_1, u_3, max (max u_1 u_2) v_1, max (max u_1 u_2) v_1}
+                    (@HomologicalComplex.{v_1, u_1, u_2} ι C inst
+                      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                    (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst
+                      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                    (@HomologicalComplexUpToQuasiIso.{v_1, u_1, u_2, u_3} C inst ι c
+                      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) inst_2 inst_3)
+                    (@CategoryTheory.MorphismProperty.instCategoryLocalization'.{u_3, max u_2 v_1,
+                          max (max u_1 u_2) v_1}
+                      (@HomologicalComplex.{v_1, u_1, u_2} ι C inst
+                        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                      (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst
+                        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                      (@HomologicalComplex.quasiIso.{v_1, u_1, u_2} ι C inst
+                        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c inst_2)
+                      inst_3))
+                  (@CategoryTheory.Functor.comp.{max u_2 v_1, max u_2 v_1, u_3, max (max u_1 u_2) v_1,
+                        max (max u_1 u_2) v_1, max (max u_1 u_2) v_1}
+                    (@HomologicalComplex.{v_1, u_1, u_2} ι C inst
+                      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                    (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst
+                      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                    (@HomotopyCategory.{v_1, u_1, u_2} ι C inst inst_1 c)
+                    (@instCategoryHomotopyCategory.{v_1, u_1, u_2} ι C inst inst_1 c)
+                    (@HomologicalComplexUpToQuasiIso.{v_1, u_1, u_2, u_3} C inst ι c
+                      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) inst_2 inst_3)
+                    (@CategoryTheory.MorphismProperty.instCategoryLocalization'.{u_3, max u_2 v_1,
+                          max (max u_1 u_2) v_1}
+                      (@HomologicalComplex.{v_1, u_1, u_2} ι C inst
+                        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                      (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst
+                        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+                      (@HomologicalComplex.quasiIso.{v_1, u_1, u_2} ι C inst
+                        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c inst_2)
+                      inst_3)
+                    (@HomotopyCategory.quotient.{v_1, u_1, u_2} ι C inst inst_1 c)
+                    (@HomologicalComplexUpToQuasiIso.Qh.{v_1, u_1, u_2, u_3} C inst ι c inst_1 inst_2 inst_3 inst_4))
+                  (@HomologicalComplexUpToQuasiIso.Q.{v_1, u_1, u_2, u_3} C inst ι c
+                    (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) inst_2 inst_3)
+[QTC-VALUE] HomologicalComplexUpToQuasiIso.quotientCompQhIso value=fun (C : Type u_1)
+    [inst : CategoryTheory.Category.{v_1, u_1} C] {ι : Type u_2} (c : ComplexShape.{u_2} ι)
+    [inst_1 : @CategoryTheory.Preadditive.{v_1, u_1} C inst]
+    [inst_2 :
+      @CategoryTheory.CategoryWithHomology.{v_1, u_1} C inst
+        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1)]
+    [inst_3 :
+      @CategoryTheory.MorphismProperty.HasLocalization.{u_3, max u_2 v_1, max (max u_1 u_2) v_1}
+        (@HomologicalComplex.{v_1, u_1, u_2} ι C inst
+          (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+        (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst
+          (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+        (@HomologicalComplex.quasiIso.{v_1, u_1, u_2} ι C inst
+          (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c inst_2)]
+    [inst_4 : @ComplexShape.QFactorsThroughHomotopy.{u_2, v_1, u_1} ι c C inst inst_1 inst_2] =>
+  @CategoryTheory.Quotient.lift.isLift.{max u_2 v_1, max (max u_1 u_2) v_1, u_3, max (max u_1 u_2) v_1}
+    (@HomologicalComplex.{v_1, u_1, u_2} ι C inst
+      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+    (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst
+      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+    (@homotopic.{v_1, u_1, u_2} ι C inst inst_1 c)
+    (@HomologicalComplexUpToQuasiIso.{v_1, u_1, u_2, u_3} C inst ι c
+      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) inst_2 inst_3)
+    (@CategoryTheory.MorphismProperty.instCategoryLocalization'.{u_3, max u_2 v_1, max (max u_1 u_2) v_1}
+      (@HomologicalComplex.{v_1, u_1, u_2} ι C inst
+        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+      (@HomologicalComplex.instCategory.{v_1, u_1, u_2} ι C inst
+        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c)
+      (@HomologicalComplex.quasiIso.{v_1, u_1, u_2} ι C inst
+        (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) c inst_2)
+      inst_3)
+    (@HomologicalComplexUpToQuasiIso.Q.{v_1, u_1, u_2, u_3} C inst ι c
+      (@CategoryTheory.Preadditive.preadditiveHasZeroMorphisms.{v_1, u_1} C inst inst_1) inst_2 inst_3)
+    (@HomologicalComplexUpToQuasiIso.Qh._proof_3.{v_1, u_1, u_2, u_3} C inst ι c inst_1 inst_2 inst_3 inst_4)
+[QTC-DECL] CategoryTheory.DerivedMonoidal type={C : Type u_1} →
+  {D : Type u_2} →
+    [inst : CategoryTheory.Category.{u_3, u_1} C] →
+      [inst_1 : CategoryTheory.Category.{u_4, u_2} D] →
+        @CategoryTheory.Functor.{u_3, u_4, u_1, u_2} C inst D inst_1 →
+          @CategoryTheory.MorphismProperty.{u_3, u_1} C (@CategoryTheory.Category.toCategoryStruct.{u_3, u_1} C inst) →
+            Type u_2
+[QTC-VALUE] CategoryTheory.DerivedMonoidal value=fun {C : Type u_1} {D : Type u_2}
+    [CategoryTheory.Category.{u_3, u_1} C] [CategoryTheory.Category.{u_4, u_2} D]
+    (x : @CategoryTheory.Functor.{u_3, u_4, u_1, u_2} C inst D inst_1)
+    (x_1 :
+      @CategoryTheory.MorphismProperty.{u_3, u_1} C (@CategoryTheory.Category.toCategoryStruct.{u_3, u_1} C inst)) =>
+  D
+[QTC-DECL] CategoryTheory.toDerivedMonoidal type={C : Type u_1} →
+  {D : Type u_2} →
+    [inst : CategoryTheory.Category.{u_3, u_1} C] →
+      [inst_1 : CategoryTheory.Category.{u_4, u_2} D] →
+        (L : @CategoryTheory.Functor.{u_3, u_4, u_1, u_2} C inst D inst_1) →
+          (W :
+              @CategoryTheory.MorphismProperty.{u_3, u_1} C
+                (@CategoryTheory.Category.toCategoryStruct.{u_3, u_1} C inst)) →
+            @CategoryTheory.Functor.{u_3, u_4, u_1, u_2} C inst
+              (@CategoryTheory.DerivedMonoidal.{u_1, u_2, u_3, u_4} C D inst inst_1 L W)
+              (@CategoryTheory.instCategoryDerivedMonoidal.{u_1, u_2, u_3, u_4} C D inst inst_1 L W)
+[QTC-VALUE] CategoryTheory.toDerivedMonoidal value=fun {C : Type u_1} {D : Type u_2}
+    [CategoryTheory.Category.{u_3, u_1} C] [CategoryTheory.Category.{u_4, u_2} D]
+    (L : @CategoryTheory.Functor.{u_3, u_4, u_1, u_2} C inst D inst_1)
+    (W : @CategoryTheory.MorphismProperty.{u_3, u_1} C (@CategoryTheory.Category.toCategoryStruct.{u_3, u_1} C inst)) =>
+  L
+[QTC-DECL] CategoryTheory.MorphismProperty.Q type={C : Type uC} →
+  [inst : CategoryTheory.Category.{uC', uC} C] →
+    (W : @CategoryTheory.MorphismProperty.{uC', uC} C (@CategoryTheory.Category.toCategoryStruct.{uC', uC} C inst)) →
+      @CategoryTheory.Functor.{uC', max uC uC', uC, uC} C inst
+        (@CategoryTheory.MorphismProperty.Localization.{uC', uC} C inst W)
+        (@CategoryTheory.MorphismProperty.instCategoryLocalization.{uC, uC'} C inst W)
+[QTC-VALUE] CategoryTheory.MorphismProperty.Q value=fun {C : Type uC} [inst : CategoryTheory.Category.{uC', uC} C]
+    (W : @CategoryTheory.MorphismProperty.{uC', uC} C (@CategoryTheory.Category.toCategoryStruct.{uC', uC} C inst)) =>
+  @CategoryTheory.Functor.mk.{uC', max uC uC', uC, uC} C inst
+    (@CategoryTheory.MorphismProperty.Localization.{uC', uC} C inst W)
+    (@CategoryTheory.MorphismProperty.instCategoryLocalization.{uC, uC'} C inst W)
+    (fun (X : C) =>
+      @CategoryTheory.Functor.obj.{max uC uC', max uC uC', uC, uC}
+        (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+        (@CategoryTheory.Paths.categoryPaths.{uC', uC}
+          (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+          (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W))
+        (@CategoryTheory.Quotient.{max uC uC', uC}
+          (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.Paths.categoryPaths.{uC', uC}
+            (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+            (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.Localization.Construction.relations.{uC', uC} C inst W))
+        (@CategoryTheory.Quotient.category.{max uC uC', uC}
+          (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.Paths.categoryPaths.{uC', uC}
+            (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+            (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.Localization.Construction.relations.{uC', uC} C inst W))
+        (@CategoryTheory.Quotient.functor.{max uC uC', uC}
+          (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.Paths.categoryPaths.{uC', uC}
+            (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+            (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.Localization.Construction.relations.{uC', uC} C inst W))
+        (@Prefunctor.obj.{uC', max uC uC', uC, uC}
+          (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+          (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W)
+          (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.CategoryStruct.toQuiver.{max uC uC', uC}
+            (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+            (@CategoryTheory.Category.toCategoryStruct.{max uC uC', uC}
+              (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+              (@CategoryTheory.Paths.categoryPaths.{uC', uC}
+                (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+                (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W))))
+          (@CategoryTheory.Paths.of.{uC', uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+            (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.Localization.Construction.LocQuiver.mk.{uC', uC} C inst W X)))
+    (fun {X Y : C}
+        (f :
+          @Quiver.Hom.{uC', uC} C
+            (@CategoryTheory.CategoryStruct.toQuiver.{uC', uC} C
+              (@CategoryTheory.Category.toCategoryStruct.{uC', uC} C inst))
+            X Y) =>
+      @CategoryTheory.Functor.map.{max uC uC', max uC uC', uC, uC}
+        (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+        (@CategoryTheory.Paths.categoryPaths.{uC', uC}
+          (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+          (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W))
+        (@CategoryTheory.Quotient.{max uC uC', uC}
+          (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.Paths.categoryPaths.{uC', uC}
+            (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+            (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.Localization.Construction.relations.{uC', uC} C inst W))
+        (@CategoryTheory.Quotient.category.{max uC uC', uC}
+          (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.Paths.categoryPaths.{uC', uC}
+            (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+            (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.Localization.Construction.relations.{uC', uC} C inst W))
+        (@CategoryTheory.Quotient.functor.{max uC uC', uC}
+          (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.Paths.categoryPaths.{uC', uC}
+            (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+            (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.Localization.Construction.relations.{uC', uC} C inst W))
+        (@Prefunctor.obj.{uC', max uC uC', uC, uC}
+          (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+          (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W)
+          (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.CategoryStruct.toQuiver.{max uC uC', uC}
+            (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+            (@CategoryTheory.Category.toCategoryStruct.{max uC uC', uC}
+              (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+              (@CategoryTheory.Paths.categoryPaths.{uC', uC}
+                (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+                (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W))))
+          (@CategoryTheory.Paths.of.{uC', uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+            (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.Localization.Construction.LocQuiver.mk.{uC', uC} C inst W X))
+        (@Prefunctor.obj.{uC', max uC uC', uC, uC}
+          (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+          (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W)
+          (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.CategoryStruct.toQuiver.{max uC uC', uC}
+            (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+            (@CategoryTheory.Category.toCategoryStruct.{max uC uC', uC}
+              (CategoryTheory.Paths.{uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W))
+              (@CategoryTheory.Paths.categoryPaths.{uC', uC}
+                (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+                (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W))))
+          (@CategoryTheory.Paths.of.{uC', uC} (@CategoryTheory.Localization.Construction.LocQuiver.{uC', uC} C inst W)
+            (@CategoryTheory.Localization.Construction.instQuiverLocQuiver.{uC', uC} C inst W))
+          (@CategoryTheory.Localization.Construction.LocQuiver.mk.{uC', uC} C inst W Y))
+        (@CategoryTheory.Localization.Construction.ψ₁.{uC', uC} C inst W X Y f))
+    (@CategoryTheory.MorphismProperty.Q._proof_1.{uC, uC'} C inst W)
+    (@CategoryTheory.MorphismProperty.Q._proof_2.{uC', uC} C inst W)
+[QTC-DECL] CategoryTheory.MorphismProperty.Q' type={C : Type u} →
+  [inst : CategoryTheory.Category.{v, u} C] →
+    (W : @CategoryTheory.MorphismProperty.{v, u} C (@CategoryTheory.Category.toCategoryStruct.{v, u} C inst)) →
+      [inst_1 : @CategoryTheory.MorphismProperty.HasLocalization.{w, v, u} C inst W] →
+        @CategoryTheory.Functor.{v, w, u, u} C inst
+          (@CategoryTheory.MorphismProperty.Localization'.{w, v, u} C inst W inst_1)
+          (@CategoryTheory.MorphismProperty.instCategoryLocalization'.{w, v, u} C inst W inst_1)
+[QTC-VALUE] CategoryTheory.MorphismProperty.Q' value=fun {C : Type u} [inst : CategoryTheory.Category.{v, u} C]
+    (W : @CategoryTheory.MorphismProperty.{v, u} C (@CategoryTheory.Category.toCategoryStruct.{v, u} C inst))
+    [inst_1 : @CategoryTheory.MorphismProperty.HasLocalization.{w, v, u} C inst W] =>
+  @CategoryTheory.MorphismProperty.HasLocalization.L.{w, v, u} C inst W inst_1
+[QTC-DECL] CategoryTheory.MorphismProperty.hasLocalizationOfLocallySmall type={C : Type u₁} →
+  [inst : CategoryTheory.Category.{v₁, u₁} C] →
+    (W : @CategoryTheory.MorphismProperty.{v₁, u₁} C (@CategoryTheory.Category.toCategoryStruct.{v₁, u₁} C inst)) →
+      {D : Type u₁} →
+        [inst_1 : CategoryTheory.Category.{v₂, u₁} D] →
+          [@CategoryTheory.LocallySmall.{w, v₂, u₁} D inst_1] →
+            (L : @CategoryTheory.Functor.{v₁, v₂, u₁, u₁} C inst D inst_1) →
+              [@CategoryTheory.Functor.IsLocalization.{v₁, u₁, v₂, u₁} C D inst inst_1 L W] →
+                @CategoryTheory.MorphismProperty.HasLocalization.{w, v₁, u₁} C inst W
+[QTC-VALUE] CategoryTheory.MorphismProperty.hasLocalizationOfLocallySmall value=fun {C : Type u₁}
+    [inst : CategoryTheory.Category.{v₁, u₁} C]
+    (W : @CategoryTheory.MorphismProperty.{v₁, u₁} C (@CategoryTheory.Category.toCategoryStruct.{v₁, u₁} C inst))
+    {D : Type u₁} [inst_1 : CategoryTheory.Category.{v₂, u₁} D]
+    [inst_2 : @CategoryTheory.LocallySmall.{w, v₂, u₁} D inst_1]
+    (L : @CategoryTheory.Functor.{v₁, v₂, u₁, u₁} C inst D inst_1)
+    [inst_3 : @CategoryTheory.Functor.IsLocalization.{v₁, u₁, v₂, u₁} C D inst inst_1 L W] =>
+  @CategoryTheory.MorphismProperty.HasLocalization.mk.{w, v₁, u₁} C inst W (CategoryTheory.ShrinkHoms.{u₁} D)
+    (@CategoryTheory.ShrinkHoms.instCategory.{w, v₂, u₁} D inst_1 inst_2)
+    (@CategoryTheory.Functor.comp.{v₁, v₂, w, u₁, u₁, u₁} C inst D inst_1 (CategoryTheory.ShrinkHoms.{u₁} D)
+      (@CategoryTheory.ShrinkHoms.instCategory.{w, v₂, u₁} D inst_1 inst_2) L
+      (@CategoryTheory.Equivalence.functor.{v₂, w, u₁, u₁} D (CategoryTheory.ShrinkHoms.{u₁} D) inst_1
+        (@CategoryTheory.ShrinkHoms.instCategory.{w, v₂, u₁} D inst_1 inst_2)
+        (@CategoryTheory.ShrinkHoms.equivalence.{w, v₂, u₁} D inst_1 inst_2)))
+    (@CategoryTheory.MorphismProperty.hasLocalizationOfLocallySmall._proof_1.{v₁, u₁, w, v₂} C inst W D inst_1 inst_2 L
+      inst_3)
+[QTC-DECL] CategoryTheory.Quotient.lift type={C : Type u_1} →
+  [inst : CategoryTheory.Category.{v_1, u_1} C] →
+    (r :
+        @HomRel.{u_1, v_1} C
+          (@CategoryTheory.CategoryStruct.toQuiver.{v_1, u_1} C
+            (@CategoryTheory.Category.toCategoryStruct.{v_1, u_1} C inst))) →
+      {D : Type u_2} →
+        [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →
+          (F : @CategoryTheory.Functor.{v_1, v_2, u_1, u_2} C inst D inst_1) →
+            (H :
+                ∀ (x y : C)
+                  (f₁ f₂ :
+                    @Quiver.Hom.{v_1, u_1} C
+                      (@CategoryTheory.CategoryStruct.toQuiver.{v_1, u_1} C
+                        (@CategoryTheory.Category.toCategoryStruct.{v_1, u_1} C inst))
+                      x y),
+                  @r x y f₁ f₂ →
+                    @Eq.{v_2 + 1}
+                      (@Quiver.Hom.{v_2, u_2} D
+                        (@CategoryTheory.CategoryStruct.toQuiver.{v_2, u_2} D
+                          (@CategoryTheory.Category.toCategoryStruct.{v_2, u_2} D inst_1))
+                        (@CategoryTheory.Functor.obj.{v_1, v_2, u_1, u_2} C inst D inst_1 F x)
+                        (@CategoryTheory.Functor.obj.{v_1, v_2, u_1, u_2} C inst D inst_1 F y))
+                      (@CategoryTheory.Functor.map.{v_1, v_2, u_1, u_2} C inst D inst_1 F x y f₁)
+                      (@CategoryTheory.Functor.map.{v_1, v_2, u_1, u_2} C inst D inst_1 F x y f₂)) →
+              @CategoryTheory.Functor.{v_1, v_2, u_1, u_2} (@CategoryTheory.Quotient.{v_1, u_1} C inst r)
+                (@CategoryTheory.Quotient.category.{v_1, u_1} C inst r) D inst_1
+[QTC-VALUE] CategoryTheory.Quotient.lift value=fun {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C]
+    (r :
+      @HomRel.{u_1, v_1} C
+        (@CategoryTheory.CategoryStruct.toQuiver.{v_1, u_1} C
+          (@CategoryTheory.Category.toCategoryStruct.{v_1, u_1} C inst)))
+    {D : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} D]
+    (F : @CategoryTheory.Functor.{v_1, v_2, u_1, u_2} C inst D inst_1)
+    (H :
+      ∀ (x y : C)
+        (f₁ f₂ :
+          @Quiver.Hom.{v_1, u_1} C
+            (@CategoryTheory.CategoryStruct.toQuiver.{v_1, u_1} C
+              (@CategoryTheory.Category.toCategoryStruct.{v_1, u_1} C inst))
+            x y),
+        @r x y f₁ f₂ →
+          @Eq.{v_2 + 1}
+            (@Quiver.Hom.{v_2, u_2} D
+              (@CategoryTheory.CategoryStruct.toQuiver.{v_2, u_2} D
+                (@CategoryTheory.Category.toCategoryStruct.{v_2, u_2} D inst_1))
+              (@CategoryTheory.Functor.obj.{v_1, v_2, u_1, u_2} C inst D inst_1 F x)
+              (@CategoryTheory.Functor.obj.{v_1, v_2, u_1, u_2} C inst D inst_1 F y))
+            (@CategoryTheory.Functor.map.{v_1, v_2, u_1, u_2} C inst D inst_1 F x y f₁)
+            (@CategoryTheory.Functor.map.{v_1, v_2, u_1, u_2} C inst D inst_1 F x y f₂)) =>
+  @CategoryTheory.Functor.mk.{v_1, v_2, u_1, u_2} (@CategoryTheory.Quotient.{v_1, u_1} C inst r)
+    (@CategoryTheory.Quotient.category.{v_1, u_1} C inst r) D inst_1
+    (fun (a : @CategoryTheory.Quotient.{v_1, u_1} C inst r) =>
+      @CategoryTheory.Functor.obj.{v_1, v_2, u_1, u_2} C inst D inst_1 F
+        (@CategoryTheory.Quotient.as.{v_1, u_1} C inst r a))
+    (fun {X Y : @CategoryTheory.Quotient.{v_1, u_1} C inst r}
+        (hf :
+          @Quiver.Hom.{v_1, u_1} (@CategoryTheory.Quotient.{v_1, u_1} C inst r)
+            (@CategoryTheory.CategoryStruct.toQuiver.{v_1, u_1} (@CategoryTheory.Quotient.{v_1, u_1} C inst r)
+              (@CategoryTheory.Category.toCategoryStruct.{v_1, u_1} (@CategoryTheory.Quotient.{v_1, u_1} C inst r)
+                (@CategoryTheory.Quotient.category.{v_1, u_1} C inst r)))
+            X Y) =>
+      @Quot.liftOn.{v_1 + 1, v_2 + 1}
+        (@Quiver.Hom.{v_1, u_1} C
+          (@CategoryTheory.CategoryStruct.toQuiver.{v_1, u_1} C
+            (@CategoryTheory.Category.toCategoryStruct.{v_1, u_1} C inst))
+          (@CategoryTheory.Quotient.as.{v_1, u_1} C inst r X) (@CategoryTheory.Quotient.as.{v_1, u_1} C inst r Y))
+        (@Quiver.Hom.{v_2, u_2} D
+          (@CategoryTheory.CategoryStruct.toQuiver.{v_2, u_2} D
+            (@CategoryTheory.Category.toCategoryStruct.{v_2, u_2} D inst_1))
+          (@CategoryTheory.Functor.obj.{v_1, v_2, u_1, u_2} C inst D inst_1 F
+            (@CategoryTheory.Quotient.as.{v_1, u_1} C inst r X))
+          (@CategoryTheory.Functor.obj.{v_1, v_2, u_1, u_2} C inst D inst_1 F
+            (@CategoryTheory.Quotient.as.{v_1, u_1} C inst r Y)))
+        (@CategoryTheory.HomRel.CompClosure.{v_1, u_1} C inst r (@CategoryTheory.Quotient.as.{v_1, u_1} C inst r X)
+          (@CategoryTheory.Quotient.as.{v_1, u_1} C inst r Y))
+        hf
+        (fun
+            (f :
+              @Quiver.Hom.{v_1, u_1} C
+                (@CategoryTheory.CategoryStruct.toQuiver.{v_1, u_1} C
+                  (@CategoryTheory.Category.toCategoryStruct.{v_1, u_1} C inst))
+                (@CategoryTheory.Quotient.as.{v_1, u_1} C inst r X)
+                (@CategoryTheory.Quotient.as.{v_1, u_1} C inst r Y)) =>
+          @CategoryTheory.Functor.map.{v_1, v_2, u_1, u_2} C inst D inst_1 F
+            (@CategoryTheory.Quotient.as.{v_1, u_1} C inst r X) (@CategoryTheory.Quotient.as.{v_1, u_1} C inst r Y) f)
+        (@CategoryTheory.Quotient.lift._proof_1.{v_1, u_1, v_2, u_2} C inst r D inst_1 F H X Y))
+    (@CategoryTheory.Quotient.lift._proof_3.{v_1, u_1, v_2, u_2} C inst r D inst_1 F)
+    (@CategoryTheory.Quotient.lift._proof_2.{v_1, u_1, v_2, u_2} C inst r D inst_1 F H)
+[QTC-DECL] CategoryTheory.ShrinkHoms.functor type=(C : Type u) →
+  [inst : CategoryTheory.Category.{v, u} C] →
+    [inst_1 : @CategoryTheory.LocallySmall.{w, v, u} C inst] →
+      @CategoryTheory.Functor.{v, w, u, u} C inst (CategoryTheory.ShrinkHoms.{u} C)
+        (@CategoryTheory.ShrinkHoms.instCategory.{w, v, u} C inst inst_1)
+[QTC-VALUE] CategoryTheory.ShrinkHoms.functor value=fun (C : Type u) [inst : CategoryTheory.Category.{v, u} C]
+    [inst_1 : @CategoryTheory.LocallySmall.{w, v, u} C inst] =>
+  @CategoryTheory.Functor.mk.{v, w, u, u} C inst (CategoryTheory.ShrinkHoms.{u} C)
+    (@CategoryTheory.ShrinkHoms.instCategory.{w, v, u} C inst inst_1)
+    (fun (X : C) => @CategoryTheory.ShrinkHoms.toShrinkHoms.{u} C X)
+    (fun {X Y : C}
+        (f :
+          @Quiver.Hom.{v, u} C
+            (@CategoryTheory.CategoryStruct.toQuiver.{v, u} C (@CategoryTheory.Category.toCategoryStruct.{v, u} C inst))
+            X Y) =>
+      @DFunLike.coe.{max (v + 1) (w + 1), v + 1, w + 1}
+        (Equiv.{v + 1, w + 1}
+          (@Quiver.Hom.{v, u} C
+            (@CategoryTheory.CategoryStruct.toQuiver.{v, u} C (@CategoryTheory.Category.toCategoryStruct.{v, u} C inst))
+            X Y)
+          (@Shrink.{w, v}
+            (@Quiver.Hom.{v, u} C
+              (@CategoryTheory.CategoryStruct.toQuiver.{v, u} C
+                (@CategoryTheory.Category.toCategoryStruct.{v, u} C inst))
+              X Y)
+            (@CategoryTheory.instSmallHomOfLocallySmall.{w, v, u} C inst inst_1 X Y)))
+        (@Quiver.Hom.{v, u} C
+          (@CategoryTheory.CategoryStruct.toQuiver.{v, u} C (@CategoryTheory.Category.toCategoryStruct.{v, u} C inst)) X
+          Y)
+        (fun
+            (x :
+              @Quiver.Hom.{v, u} C
+                (@CategoryTheory.CategoryStruct.toQuiver.{v, u} C
+                  (@CategoryTheory.Category.toCategoryStruct.{v, u} C inst))
+                X Y) =>
+          @Shrink.{w, v}
+            (@Quiver.Hom.{v, u} C
+              (@CategoryTheory.CategoryStruct.toQuiver.{v, u} C
+                (@CategoryTheory.Category.toCategoryStruct.{v, u} C inst))
+              X Y)
+            (@CategoryTheory.instSmallHomOfLocallySmall.{w, v, u} C inst inst_1 X Y))
+        (@EquivLike.toFunLike.{max (v + 1) (w + 1), v + 1, w + 1}
+          (Equiv.{v + 1, w + 1}
+            (@Quiver.Hom.{v, u} C
+              (@CategoryTheory.CategoryStruct.toQuiver.{v, u} C
+                (@CategoryTheory.Category.toCategoryStruct.{v, u} C inst))
+              X Y)
+            (@Shrink.{w, v}
+              (@Quiver.Hom.{v, u} C
+                (@CategoryTheory.CategoryStruct.toQuiver.{v, u} C
+                  (@CategoryTheory.Category.toCategoryStruct.{v, u} C inst))
+                X Y)
+              (@CategoryTheory.instSmallHomOfLocallySmall.{w, v, u} C inst inst_1 X Y)))
+          (@Quiver.Hom.{v, u} C
+            (@CategoryTheory.CategoryStruct.toQuiver.{v, u} C (@CategoryTheory.Category.toCategoryStruct.{v, u} C inst))
+            X Y)
+          (@Shrink.{w, v}
+            (@Quiver.Hom.{v, u} C
+              (@CategoryTheory.CategoryStruct.toQuiver.{v, u} C
+                (@CategoryTheory.Category.toCategoryStruct.{v, u} C inst))
+              X Y)
+            (@CategoryTheory.instSmallHomOfLocallySmall.{w, v, u} C inst inst_1 X Y))
+          (@Equiv.instEquivLike.{v + 1, w + 1}
+            (@Quiver.Hom.{v, u} C
+              (@CategoryTheory.CategoryStruct.toQuiver.{v, u} C
+                (@CategoryTheory.Category.toCategoryStruct.{v, u} C inst))
+              X Y)
+            (@Shrink.{w, v}
+              (@Quiver.Hom.{v, u} C
+                (@CategoryTheory.CategoryStruct.toQuiver.{v, u} C
+                  (@CategoryTheory.Category.toCategoryStruct.{v, u} C inst))
+                X Y)
+              (@CategoryTheory.instSmallHomOfLocallySmall.{w, v, u} C inst inst_1 X Y))))
+        (@equivShrink.{w, v}
+          (@Quiver.Hom.{v, u} C
+            (@CategoryTheory.CategoryStruct.toQuiver.{v, u} C (@CategoryTheory.Category.toCategoryStruct.{v, u} C inst))
+            X Y)
+          (@CategoryTheory.instSmallHomOfLocallySmall.{w, v, u} C inst inst_1 X Y))
+        f)
+    (@CategoryTheory.ShrinkHoms.functor._proof_1.{w, u, v} C inst inst_1)
+    (@CategoryTheory.ShrinkHoms.functor._proof_3.{v, u, w} C inst inst_1)
