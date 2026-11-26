@@ -428,7 +428,6 @@ instance : Fact (IsAffineOpen c.W) := ⟨c.isAffineOpen⟩
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
   (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf F]
 
--- instance search through `SeparableClosure` and its integral closures is slow
 /-- For a dense open `j : U₀ ⟶ C₀` of a smooth curve over a finite field, a boundary point `z` with
 an affine chart `c`, and a finite locally constant sheaf `F` of modules over a finite ring on `U₀`,
 the stalk of the middle extension `j_* F` at the geometric point `x̄` over `z` given by the point
@@ -461,19 +460,18 @@ lemma boundaryStalkEquiv_apply (hz : z ∉ Set.range j.base)
     (c.boundaryStalkEquiv F hz y).1 = boundarySpecialization j c.point F y :=
   rfl
 
-set_option synthInstance.maxHeartbeats 200000 in
--- instance search through `SeparableClosure` and its integral closures is slow
 /-- For `σ` in the decomposition group of `Q`, the identification `(j_* F)_x̄ ≃ F_η^I` intertwines
 the action of `σ` on `F_η^I` with the action on `(j_* F)_x̄` of the automorphism of the geometric
 point `x̄` induced by the residue automorphism of `σ`. For `σ` a residue Frobenius lift, this is the
 action of the geometric Frobenius of `κ(z)` on the boundary stalk. -/
 theorem boundaryStalkEquiv_boundaryStalkMap (hz : z ∉ Set.range j.base) {σ : Gal(Ω/C.functionField)}
-    (hσ : σ ∈ MulAction.stabilizer Gal(Ω/C.functionField) c.point)
+    (hσ : σ ∈ affineIdealStabilizer c.isAffineOpen c.point)
     (y : ((pointSmallEtale (boundaryGeometricPoint c.point)).sheafFiber.obj
         ((j)_*[ModuleCat.{u + 1} Λ].obj F) : ModuleCat.{u + 1} Λ)) :
     (c.boundaryStalkEquiv F hz (boundaryStalkMap c.point hσ F y)).1 =
       galoisStalkMap F σ (c.boundaryStalkEquiv F hz y).1 :=
-  ConcreteCategory.congr_hom (boundaryStalkMap_comp_boundarySpecialization j c.point hσ F) y
+  ConcreteCategory.congr_hom (boundaryStalkMap_comp_boundarySpecialization j c.point
+    ((mem_affineIdealStabilizer c.isAffineOpen c.point σ).1 hσ) F) y
 
 section Representation
 
@@ -515,14 +513,12 @@ noncomputable def boundaryStalkEquivInvariants (hz : z ∉ Set.range j.base) :
   (c.boundaryStalkEquiv F hz).trans (LinearEquiv.ofSubmodules _ _ _
     (c.map_inertiaInvariants_transport F sU GU))
 
-set_option synthInstance.maxHeartbeats 200000 in
--- instance search through `SeparableClosure` and its integral closures is slow
 /-- For `σ` in the decomposition group of `Q`, the identification of the boundary stalk with the
 inertia invariants in `F_{s_U}` intertwines the action of the residue automorphism of `σ` on
 `(j_* F)_x̄` with the action of the image of `σ` in `π₁(U₀, s_U)`. -/
 theorem boundaryStalkEquivInvariants_boundaryStalkMap (hz : z ∉ Set.range j.base)
     {σ : Gal(Ω/C.functionField)}
-    (hσ : σ ∈ MulAction.stabilizer Gal(Ω/C.functionField) c.point)
+    (hσ : σ ∈ affineIdealStabilizer c.isAffineOpen c.point)
     (y : ((pointSmallEtale (boundaryGeometricPoint c.point)).sheafFiber.obj
         ((j)_*[ModuleCat.{u + 1} Λ].obj F) : ModuleCat.{u + 1} Λ)) :
     (c.boundaryStalkEquivInvariants F sU GU hz (boundaryStalkMap c.point hσ F y)).1 =

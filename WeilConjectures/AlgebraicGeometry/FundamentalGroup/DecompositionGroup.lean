@@ -115,3 +115,54 @@ theorem galoisToAut_hom_app_eq_of_mem_inertia [ConnectedSpace Y]
   exact this
 
 end AlgebraicGeometry.Scheme.FiniteEtale
+
+namespace AlgebraicGeometry.Scheme.FiniteEtale
+
+open scoped Pointwise
+
+/-- The Galois action on ideals of the integral closure over an affine open. -/
+@[instance_reducible]
+noncomputable def affineIdealAction {C : Scheme.{u}} [IsIntegral C]
+    [ConnectedSpace C] {W : C.Opens} [Nonempty W]
+    {Ω : Type u} [Field Ω] [Algebra C.functionField Ω] [Algebra Γ(C, W) Ω]
+    [IsScalarTower Γ(C, W) C.functionField Ω] [IsGalois C.functionField Ω]
+    [IsSepClosed Ω] [_hFraction : IsFractionRing Γ(C, W) C.functionField] :
+    MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, W) Ω)) :=
+  (Ideal.pointwiseDistribMulAction (M := Gal(Ω/C.functionField))
+    (R := integralClosure Γ(C, W) Ω)).toMulAction
+
+/-- The named action agrees with the pointwise action on ideals. -/
+lemma affineIdealAction_eq {C : Scheme.{u}} [IsIntegral C]
+    [ConnectedSpace C] {W : C.Opens} [Nonempty W]
+    {Ω : Type u} [Field Ω] [Algebra C.functionField Ω] [Algebra Γ(C, W) Ω]
+    [IsScalarTower Γ(C, W) C.functionField Ω] [IsGalois C.functionField Ω]
+    [IsSepClosed Ω] [hFraction : IsFractionRing Γ(C, W) C.functionField] :
+    affineIdealAction (C := C) (W := W) (Ω := Ω) (_hFraction := hFraction) =
+      (Ideal.pointwiseDistribMulAction (M := Gal(Ω/C.functionField))
+        (R := integralClosure Γ(C, W) Ω)).toMulAction := rfl
+
+/-- The decomposition group of an ideal over an affine open in a Galois integral closure. -/
+noncomputable def affineIdealStabilizer {C : Scheme.{u}} [IsIntegral C]
+    [ConnectedSpace C] {W : C.Opens} (hW : IsAffineOpen W) [Nonempty W]
+    {Ω : Type u} [Field Ω] [Algebra C.functionField Ω] [Algebra Γ(C, W) Ω]
+    [IsScalarTower Γ(C, W) C.functionField Ω] [IsGalois C.functionField Ω]
+    [IsSepClosed Ω] (Q : Ideal (integralClosure Γ(C, W) Ω)) :
+    Subgroup Gal(Ω/C.functionField) :=
+  @MulAction.stabilizer _ _ _
+    (affineIdealAction
+      (_hFraction := functionField_isFractionRing_of_isAffineOpen C W hW)) Q
+
+/-- Membership in the decomposition group is equivalent to fixing the ideal. -/
+lemma mem_affineIdealStabilizer {C : Scheme.{u}} [IsIntegral C]
+    [ConnectedSpace C] {W : C.Opens} (hW : IsAffineOpen W) [Nonempty W]
+    {Ω : Type u} [Field Ω] [Algebra C.functionField Ω] [Algebra Γ(C, W) Ω]
+    [IsScalarTower Γ(C, W) C.functionField Ω] [IsGalois C.functionField Ω]
+    [IsSepClosed Ω] (Q : Ideal (integralClosure Γ(C, W) Ω))
+    (σ : Gal(Ω/C.functionField)) :
+    σ ∈ affineIdealStabilizer hW Q ↔
+      @SMul.smul Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, W) Ω))
+        (affineIdealAction
+          (_hFraction := functionField_isFractionRing_of_isAffineOpen C W hW)).toSMul σ Q = Q :=
+  Iff.rfl
+
+end AlgebraicGeometry.Scheme.FiniteEtale
