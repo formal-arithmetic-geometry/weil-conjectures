@@ -56,7 +56,6 @@ private theorem finite_fraction_transport
     (by ext a; exact IsFractionRing.algEquiv_commutes e f a)
 
 /-- A prime over a principal prime in a finite extension of fraction fields has
-finite quotient fraction field extension.
 finite quotient fraction field extension. -/
 theorem principal_prime_quotient_fraction_finite
     (R : Type uR) (S : Type uS) (K : Type uK) (L : Type uL)

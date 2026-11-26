@@ -430,7 +430,6 @@ namespace RingHom
 
 /-- Stability under base change, composition and filtered colimits of ind-etale and principal
 ind-Zariski maps; weak etaleness of ind-etale maps; the relative ind-etale assertion; and
-composition and base-change stability of weakly etale maps.
 composition and base-change stability of weakly etale maps. -/
 theorem indEtale_principalZariski_stability :
     RingHom.IsStableUnderBaseChange (@RingHom.IndEtale.{u}) ∧

@@ -44,7 +44,6 @@ open CategoryTheory
 namespace ModuleCat
 
 /-- A resolution of length at most `n` is equivalent both to vanishing of Ext in degree
-`n + 1` against every module and to vanishing in every degree at least `n + 1`.
 `n + 1` against every module and to vanishing in every degree at least `n + 1`. -/
 theorem hasProjectiveResolutionLE_iff_ext_vanishing
     {R : Type u} [CommRing R] (X : ModuleCat.{max u v} R) (n : ℕ) :

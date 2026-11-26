@@ -251,8 +251,9 @@ private theorem modelPullback {a b : S} (f : W a ⟶ W b)
       ((coefficientSequenceLimit l E (W b)).obj N)).2.1
 
 /-- Simultaneous quotient and Roos models with primitive normalization exist for any
-family of schemes. This makes no assertion about finite expressions, naturality of their
-recursive comparisons, simultaneous substitution, or transport of structural maps. -/
+family of schemes on which `l` is invertible in every residue field. This makes no assertion
+about finite expressions, naturality of their recursive comparisons, simultaneous
+substitution, or transport of structural maps. -/
 theorem normalizedCompletedOperationModels {S : Type s} (W : S → Scheme.{t})
     (_hl : ∀ (a : S) (x : W a), IsUnit (l : (W a).residueField x)) :
     ∃ M : Models l E W, PrimitiveLaws l E M := by

@@ -40,7 +40,6 @@ namespace Algebra
 /-- A normal commutative `k`-algebra remains normal after a separable field extension `K/k`.
 Separability means that every finitely generated intermediate field is separably generated.
 Normality means that every prime localization is an integrally closed domain.
-There is no algebraicity, finite-generation, domain or nonzero assumption on the algebra.
 There is no algebraicity, finite-generation, domain or nonzero assumption on the algebra. -/
 theorem isNormal_tensorProduct_of_separableExtension
     (k : Type u) (B : Type v) (K : Type w)

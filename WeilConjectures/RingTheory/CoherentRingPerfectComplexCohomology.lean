@@ -42,7 +42,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- Every cohomology module of a bounded complex of finite projective modules over a
-commutative coherent ring is finitely presented.
 commutative coherent ring is finitely presented. -/
 theorem finitePresentation_homology_of_coherent
     {R : Type u} [CommRing R]

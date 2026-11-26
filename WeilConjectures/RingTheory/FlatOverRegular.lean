@@ -95,7 +95,6 @@ private theorem regular_quotient_tail {R : Type u} [CommRing R] (r : R) (rs : Li
   exact (e'.isRegular_congr _).mp ((RingTheory.Sequence.isRegular_cons_iff' R r rs).mp h).2
 
 /-- A local homomorphism of Noetherian local rings is flat if a regular system of parameters
-of the regular local source maps to a regular sequence in the target.
 of the regular local source maps to a regular sequence in the target. -/
 theorem flat_of_regular_parameters {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] [IsRegularLocalRing R] [IsLocalRing S] [IsNoetherianRing S]

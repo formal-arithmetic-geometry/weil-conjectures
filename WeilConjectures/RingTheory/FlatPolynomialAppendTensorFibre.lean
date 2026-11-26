@@ -47,7 +47,6 @@ universe u v
 namespace Algebra
 
 /-- The closed fibre of adjoining polynomial coordinates is flat on a target where
-those coordinates form a regular sequence on the original closed fibre.
 those coordinates form a regular sequence on the original closed fibre. -/
 theorem flat_tensor_fibre_polynomial_append_of_regular_sequence
     (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]

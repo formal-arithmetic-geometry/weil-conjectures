@@ -47,7 +47,6 @@ open CategoryTheory AlgebraicGeometry
 namespace RingHom
 
 /-- Every ring has a bounded faithfully flat ind-etale extension splitting all faithfully
-flat weakly etale extensions, and its spectrum is a singleton pro-etale cover.
 flat weakly etale extensions, and its spectrum is a singleton pro-etale cover. -/
 theorem exists_bounded_wContractible_extension (A : Type u) [CommRing A]
     (κ : Cardinal.{u}) (hκ : Cardinal.aleph0 ≤ κ) (hA : Cardinal.mk A ≤ κ) :

@@ -36,7 +36,6 @@ namespace Module
 
 /-- A family in a flat module over a local ring with nilpotent maximal ideal is a basis
 if and only if its reductions form a basis over the residue field. No finite generation
-of the module or finiteness of the index type is assumed.
 of the module or finiteness of the index type is assumed. -/
 theorem basis_iff_basisQuotient_of_nilpotent
     {R : Type u} [CommRing R] [IsLocalRing R]

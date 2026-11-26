@@ -43,7 +43,6 @@ universe u
 namespace IsLocalRing
 
 /-- A complete local ring with finitely generated maximal ideal is a quotient of a power series
-ring over a characteristic-zero field or a Cohen ring of the residue characteristic.
 ring over a characteristic-zero field or a Cohen ring of the residue characteristic. -/
 theorem cohen_structure_power_series_surjection
     (R : Type u) [CommRing R] [IsLocalRing R]

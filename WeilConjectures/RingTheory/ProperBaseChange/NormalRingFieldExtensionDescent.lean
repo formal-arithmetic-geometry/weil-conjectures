@@ -76,7 +76,6 @@ private theorem integrallyClosed_of_faithfullyFlat
   exact (map_ne_zero_iff (algebraMap A K) (IsFractionRing.injective A K)).mpr hb0
 
 /-- Normality of a commutative algebra descends along an arbitrary scalar field extension.
-Normality means that every prime localization is an integrally closed domain.
 Normality means that every prime localization is an integrally closed domain. -/
 theorem normal_ring_of_normal_tensor_field
     (F : Type u) (E : Type v) (B : Type w)

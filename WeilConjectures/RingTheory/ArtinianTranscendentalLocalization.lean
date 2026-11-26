@@ -43,7 +43,6 @@ universe u v z
 namespace Algebra
 
 /-- Localizing D[t] at the inverse image of the target maximal ideal gives an Artinian
-local essentially smooth factorization when the residue of x is transcendental.
 local essentially smooth factorization when the residue of x is transcendental. -/
 theorem artinian_transcendental_polynomial_localization
     (D : Type u) (S : Type v) [CommRing D] [CommRing S]

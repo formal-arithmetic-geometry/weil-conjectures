@@ -28,9 +28,10 @@ absolute singular ideal of `B` over `R`.
 universe u v w
 namespace Algebra
 
-/-- Let `R` be Noetherian, `D` a finitely presented `R`-algebra and `D → B` a finitely presented
-`R`-algebra map. If the image of the annihilator bound for `π` lies in the relative singular
-ideal of `D → B`, then the image of the singular ideal of `R → D` lies in that of `R → B`. -/
+/-- Let `R` be Noetherian, `π : R` with `r * π = 0 ↔ r * π² = 0` for all `r`, `D` a finitely
+presented `R`-algebra and `D → B` a finitely presented `R`-algebra map. If the image of
+the annihilator bound for `π` lies in the relative singular ideal of `D → B`, then the image
+of the singular ideal of `R → D` lies in that of `R → B`. -/
 theorem singularIdeal_map_le_absolute_of_annihilator_bound
     (R : Type u) (D : Type v) (B : Type w)
     [CommRing R] [CommRing D] [CommRing B]
