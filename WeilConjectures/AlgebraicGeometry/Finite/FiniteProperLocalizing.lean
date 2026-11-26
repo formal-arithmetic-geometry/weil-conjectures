@@ -66,7 +66,6 @@ set_option Elab.async false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
-set_option linter.style.haveILetI false
 
 universe u v w u' v'
 
@@ -144,16 +143,16 @@ private theorem maps_localizingClosure
       (∀ i : I, P (J.obj ⟨i⟩)) → PreservesColimit J F) :
     ∀ K, localizingClosure S K → localizingClosure T (F.obj K) := by
   let Q := localizingClosure T
-  letI : P.IsTriangulated := hP.1
-  letI : P.IsClosedUnderIsomorphisms := hP.2.1
-  letI : Q.IsTriangulated := hT.1
-  letI : Q.IsClosedUnderIsomorphisms := hT.2.1
+  let : P.IsTriangulated := hP.1
+  let : P.IsClosedUnderIsomorphisms := hP.2.1
+  let : Q.IsTriangulated := hT.1
+  let : Q.IsClosedUnderIsomorphisms := hT.2.1
   let R := P ⊓ Q.inverseImage F
   have hR : IsLocalizingSubcategory R := by
     refine ⟨inferInstance, inferInstance, ?_⟩
     intro I J hJ hJR
-    letI := hJ
-    letI := hsums I J (fun i ↦ (hJR i).1)
+    let := hJ
+    let := hsums I J (fun i ↦ (hJR i).1)
     exact ⟨hP.2.2 J hJ (fun i ↦ (hJR i).1),
       Q.prop_of_iso (preservesColimitIso F J).symm
         (hT.prop_colimit (J ⋙ F) inferInstance (fun i ↦ (hJR i).2))⟩
@@ -179,10 +178,10 @@ private theorem preserves_of_localizing
   let : P.IsClosedUnderColimitsOfShape (Discrete I) :=
     hP.isClosedUnderColimitsOfShape_discrete I
   let L := P.lift K (fun j ↦ hK j.as)
-  letI : HasColimit (L ⋙ P.ι) := hcol
-  letI : CreatesColimit L P.ι :=
+  let : HasColimit (L ⋙ P.ι) := hcol
+  let : CreatesColimit L P.ι :=
     createsColimitFullSubcategoryInclusionOfClosed (Discrete I) P L
-  letI : HasColimit L := hasColimit_of_created L P.ι
+  let : HasColimit L := hasColimit_of_created L P.ι
   have hh := isColimitOfPreserves (P.ι ⋙ F) (colimit.isColimit L)
   exact preservesColimit_of_preserves_colimit_cocone
     (isColimitOfPreserves P.ι (colimit.isColimit L)) hh
@@ -201,18 +200,18 @@ private theorem preserves_on_subcategory
   let M := fun j : I ↦ J.obj ⟨j⟩
   have hJ : Discrete.functor M ≅ J := Discrete.natIso (fun _ ↦ Iso.refl _)
   suffices h : PreservesColimit (Discrete.functor M) (P.ι ⋙ F) by
-    letI := h
+    let := h
     exact preservesColimit_of_iso_diagram (P.ι ⋙ F) hJ
-  letI := hs (fun j ↦ (M j).obj) (fun j ↦ (M j).property)
-  letI : PreservesColimit (Discrete.functor M ⋙ P.ι ⋙ e.functor) G :=
+  let := hs (fun j ↦ (M j).obj) (fun j ↦ (M j).property)
+  let : PreservesColimit (Discrete.functor M ⋙ P.ι ⋙ e.functor) G :=
     preservesColimit_of_iso_diagram
       (K₁ := Discrete.functor (fun j ↦ e.functor.obj (M j).obj))
       G (Discrete.natIso (fun _ ↦ Iso.refl _))
-  letI : PreservesColimit (Discrete.functor M) (P.ι ⋙ e.functor) :=
+  let : PreservesColimit (Discrete.functor M) (P.ι ⋙ e.functor) :=
     comp_preservesColimit P.ι e.functor
-  letI : PreservesColimit (Discrete.functor M) ((P.ι ⋙ e.functor) ⋙ G) :=
+  let : PreservesColimit (Discrete.functor M) ((P.ι ⋙ e.functor) ⋙ G) :=
     comp_preservesColimit _ _
-  letI : PreservesColimit (Discrete.functor M) ((P.ι ⋙ F) ⋙ t.functor) :=
+  let : PreservesColimit (Discrete.functor M) ((P.ι ⋙ F) ⋙ t.functor) :=
     preservesColimit_of_natIso _
       ((Functor.associator _ _ _) ≪≫ Functor.isoWhiskerLeft P.ι i.symm ≪≫
         (Functor.associator _ _ _).symm)
@@ -264,7 +263,7 @@ private theorem ordinary_preserves_coproduct
     (hM : ∀ i, DerivedCategory.etaleOriginHomology B Z (M i)) :
     PreservesColimit (Discrete.functor M)
       (lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctor := by
-  letI := isIso_sigmaComparison_rightDerivedLowerStar_of_etaleOriginHomology
+  let := isIso_sigmaComparison_rightDerivedLowerStar_of_etaleOriginHomology
     B f aZ aT hf M hM
   exact PreservesCoproduct.of_iso_comparison _ M
 
@@ -338,10 +337,10 @@ noncomputable instance finiteDiscreteCondensedCoefficient_isCommMonObj
     (A : Type u) [CommRing A] [Finite A] :
     IsCommMonObj (finiteDiscreteCondensedCoefficient A) := by
   unfold finiteDiscreteCondensedCoefficient
-  letI : TopologicalSpace A := ⊥
-  letI : DiscreteTopology A := ⟨rfl⟩
-  letI : IsTopologicalRing A := by infer_instance
-  letI : MonObj (Profinite.continuousMapRingObjOfUniverse.{u, u} A) :=
+  let : TopologicalSpace A := ⊥
+  let : DiscreteTopology A := ⟨rfl⟩
+  let : IsTopologicalRing A := by infer_instance
+  let : MonObj (Profinite.continuousMapRingObjOfUniverse.{u, u} A) :=
     Profinite.continuousMapRingObjOfUniverseMonObj.{u, u} A
   exact Profinite.isCommMonObj_continuousMapRingObjOfUniverse.{u, u} A
 
@@ -443,24 +442,24 @@ theorem finiteProperLocalizing (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper
     finiteCoefficientLocalizingProperties (finiteDiscreteCondensedCoefficient A)
       (f)_*⟦finiteDiscreteCondensedCoefficient A⟧.rightDerivedFunctor := by
   classical
-  letI : Fact ℓ.Prime := ⟨hℓ⟩
-  letI : Fact (ringChar k).Prime :=
+  let : Fact ℓ.Prime := ⟨hℓ⟩
+  let : Fact (ringChar k).Prime :=
     ⟨by simpa only [ringChar.eq k p] using
       ((CharP.char_is_prime_or_zero k p).resolve_right (Nat.ne_of_gt hp))⟩
-  letI : Fact (ringChar k ≠ ℓ) := ⟨by simpa only [ringChar.eq k p] using hpℓ⟩
-  letI : TopologicalSpace A := ⊥
-  letI : DiscreteTopology A := ⟨rfl⟩
-  letI : IsTopologicalRing A := by infer_instance
+  let : Fact (ringChar k ≠ ℓ) := ⟨by simpa only [ringChar.eq k p] using hpℓ⟩
+  let : TopologicalSpace A := ⊥
+  let : DiscreteTopology A := ⟨rfl⟩
+  let : IsTopologicalRing A := by infer_instance
   change finiteCoefficientLocalizingProperties (FiniteDiscreteOrdinary.coefficient A)
     (CondensedRing.lowerStar (FiniteDiscreteOrdinary.coefficient A) f).rightDerivedFunctor
   let SX : Over (Spec (.of k)) := Over.mk (X ↘ Spec (.of k))
   let SY : Over (Spec (.of k)) := Over.mk (Y ↘ Spec (.of k))
-  letI : LocallyOfFiniteType SX.hom := ‹LocallyOfFiniteType (X ↘ Spec (.of k))›
-  letI : QuasiCompact SX.hom := ‹QuasiCompact (X ↘ Spec (.of k))›
-  letI : IsSeparated SX.hom := ‹IsSeparated (X ↘ Spec (.of k))›
-  letI : LocallyOfFiniteType SY.hom := ‹LocallyOfFiniteType (Y ↘ Spec (.of k))›
-  letI : QuasiCompact SY.hom := ‹QuasiCompact (Y ↘ Spec (.of k))›
-  letI : IsSeparated SY.hom := ‹IsSeparated (Y ↘ Spec (.of k))›
+  let : LocallyOfFiniteType SX.hom := ‹LocallyOfFiniteType (X ↘ Spec (.of k))›
+  let : QuasiCompact SX.hom := ‹QuasiCompact (X ↘ Spec (.of k))›
+  let : IsSeparated SX.hom := ‹IsSeparated (X ↘ Spec (.of k))›
+  let : LocallyOfFiniteType SY.hom := ‹LocallyOfFiniteType (Y ↘ Spec (.of k))›
+  let : QuasiCompact SY.hom := ‹QuasiCompact (Y ↘ Spec (.of k))›
+  let : IsSeparated SY.hom := ‹IsSeparated (Y ↘ Spec (.of k))›
   let E (T : Scheme.{u}) := (FiniteDiscreteOrdinary.encoding_exists A T).some
   let P : ObjectProperty (DerivedCategory (FiniteDiscreteOrdinary.Internal A X)) :=
     (DerivedCategory.etaleOriginHomology (ULift.{u + 1} A) X).inverseImage
@@ -476,7 +475,7 @@ theorem finiteProperLocalizing (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper
     apply isLocalizingSubcategory_of_locallySmall.{u + 1}
     refine ⟨hPsmall, hPiso, ?_⟩
     intro I D hD hobj
-    letI := hD
+    let := hD
     exact (DerivedCategory.etaleOriginHomology (ULift.{u + 1} A) X).prop_of_isColimit
       (isColimitOfPreserves (E X).fixedDerived.functor (colimit.isColimit D))
       (fun i ↦ hobj i.as)
@@ -492,7 +491,7 @@ theorem finiteProperLocalizing (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper
     FiniteDiscreteOrdinary.encodingDerivedPushforwardIso A f (E Y) (E X)
   have hs : ∀ (I : Type (u + 1)), PreservesColimitsOfShape (Discrete I) (P.ι ⋙ F) := by
     intro I
-    letI : HasColimitsOfShape (Discrete I)
+    let : HasColimitsOfShape (Discrete I)
         (DerivedCategory (FiniteDiscreteOrdinary.Internal A X)) :=
       Adjunction.hasColimitsOfShape_of_equivalence (E X).fixedDerived.functor
     let : P.IsClosedUnderColimitsOfShape (Discrete I) :=
@@ -517,14 +516,14 @@ theorem finiteProperLocalizing (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper
   let ff : SX ⟶ SY := Over.homMk f (by
     change f ≫ (Y ↘ Spec (.of k)) = X ↘ Spec (.of k)
     exact comp_over f _)
-  letI : IsProper ff.left := ‹IsProper f›
+  let : IsProper ff.left := ‹IsProper f›
   have hpres := CondensedRing.continuous_finiteProper_preserves A ℓ
     (by obtain ⟨n, _, hn⟩ := hA; exact ⟨n, hn⟩) k
     SX SY ff
   have hQ := (localizingClosure_exists (FiniteDiscreteOrdinary.coefficient A) Y
     (constantModelBoundedConstructible (FiniteDiscreteOrdinary.coefficient A) Y ⊓
       fun K ↦ _root_.DerivedCategory.finiteTorAmplitude _ K)).2.2.2.1
-  letI : F.IsTriangulated := inferInstance
+  let : F.IsTriangulated := inferInstance
   refine ⟨?_, ?_, ?_, ?_⟩
   · intro K hK
     exact hpres ⟨K, hK⟩

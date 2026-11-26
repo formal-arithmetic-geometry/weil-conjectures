@@ -25,9 +25,6 @@ shifted-cone coordinates `(u,v)`, giving `d(x,y)=(dx,(1-s)x-dy)`.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
--- Avoid repeatedly traversing the complete comparison specification.
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true

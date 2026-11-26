@@ -99,7 +99,6 @@ private theorem product_cocone_certificate
   exact StageCohomologyComparison.comp (StageCohomologyComparison.iso ep)
     (StageCohomologyComparison.prod hU hV)
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency true in
 /-- The positive-degree Mayer--Vietoris segment before descent of its squares
 (Stacks, Tags 09YQ and 0A50). -/
@@ -153,7 +152,7 @@ theorem etale_limit_binary_successor_cocone_segment
       ∃ (directed : IsDirected J (· ≤ ·)) (nonempty : Nonempty J),
       letI := directed
       letI := nonempty
-      ∃ (t : J ⥤ I) (ht : t.Final),
+      ∃ (t : J ⥤ I) (_ht : t.Final),
       ∃ (K₁ K₂ K₄ : J ⥤ AddCommGrpCat.{u + 1})
         (a : K₁ ⟶ K₂) (b : K₂ ⟶ t ⋙ H) (r : t ⋙ H ⟶ K₄)
         (C₁ : Cocone K₁) (C₂ : Cocone K₂)

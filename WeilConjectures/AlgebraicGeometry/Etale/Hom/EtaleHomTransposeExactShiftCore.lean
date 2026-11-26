@@ -11,7 +11,6 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated MonoidalCategory
 open CategoryTheory.Pretriangulated.Opposite Opposite
@@ -38,9 +37,9 @@ private theorem scalar_extension_exact
     (scalarExtension φ X).IsTriangulated := by
   let adj := Adjunction.ofIsRightAdjoint
     (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)
-  letI : (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ).leftAdjoint.CommShift ℤ :=
+  let : (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ).leftAdjoint.CommShift ℤ :=
     adj.leftAdjointCommShift ℤ
-  letI : adj.CommShift ℤ := adj.commShift_of_rightAdjoint ℤ
+  let : adj.CommShift ℤ := adj.commShift_of_rightAdjoint ℤ
   exact adj.isTriangulated_leftAdjoint
 
 private theorem opposite_composite_component
@@ -93,24 +92,24 @@ theorem etaleHomComparison_reversedExact_shiftCore
          @Functor.CommShift.comp _ _ _ _ _ _ _ _ ℤ _ _ _ _
            (Pretriangulated.Opposite.commShiftFunctorOpInt (scalarExtension φ X)) sB
        (EtaleHomRight X φ M).IsTriangulated) := by
-  letI := etaleHomScalarCommShift X φ
+  let := etaleHomScalarCommShift X φ
   obtain ⟨sA, hA, hTriA⟩ := etaleHom_normalizedShift_exists (ModuleCat.{u + 1} A) X M
   obtain ⟨sB, hB, hTriB⟩ := etaleHom_normalizedShift_exists (ModuleCat.{u + 1} B) X
     ((scalarExtension φ X).obj M)
-  letI : ((derivedHom (ModuleCat.{u + 1} A) X).flip.obj M).CommShift ℤ := sA
-  letI : ((derivedHom (ModuleCat.{u + 1} B) X).flip.obj
+  let : ((derivedHom (ModuleCat.{u + 1} A) X).flip.obj M).CommShift ℤ := sA
+  let : ((derivedHom (ModuleCat.{u + 1} B) X).flip.obj
     ((scalarExtension φ X).obj M)).CommShift ℤ := sB
-  haveI : ((derivedHom (ModuleCat.{u + 1} A) X).flip.obj M).IsTriangulated := hTriA
-  haveI : ((derivedHom (ModuleCat.{u + 1} B) X).flip.obj
+  have : ((derivedHom (ModuleCat.{u + 1} A) X).flip.obj M).IsTriangulated := hTriA
+  have : ((derivedHom (ModuleCat.{u + 1} B) X).flip.obj
     ((scalarExtension φ X).obj M)).IsTriangulated := hTriB
-  haveI : (scalarExtension φ X).IsTriangulated := scalar_extension_exact X φ
+  have : (scalarExtension φ X).IsTriangulated := scalar_extension_exact X φ
   refine ⟨sA, sB, hA, hB, ?_, ?_, ?_⟩
   · intro K n
     exact opposite_composite_component (scalarExtension φ X)
       ((derivedHom (ModuleCat.{u + 1} B) X).flip.obj ((scalarExtension φ X).obj M)) K n
   · exact inferInstanceAs (((derivedHom (ModuleCat.{u + 1} A) X).flip.obj M ⋙
       scalarExtension φ X).IsTriangulated)
-  · letI : (scalarExtension φ X).op.CommShift ℤ :=
+  · let : (scalarExtension φ X).op.CommShift ℤ :=
       Pretriangulated.Opposite.commShiftFunctorOpInt (scalarExtension φ X)
     exact inferInstanceAs (((scalarExtension φ X).op ⋙
       (derivedHom (ModuleCat.{u + 1} B) X).flip.obj

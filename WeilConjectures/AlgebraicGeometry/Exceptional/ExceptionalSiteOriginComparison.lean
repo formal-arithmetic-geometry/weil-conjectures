@@ -24,7 +24,6 @@ set_option genSizeOfSpec false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite SheafOfModules
 namespace AlgebraicGeometry
@@ -49,7 +48,7 @@ theorem exceptionalSiteOriginComparison
   obtain ⟨N, hN, ⟨e⟩⟩ := hM.2 n
   obtain ⟨b, hb⟩ := hN
   have heval : ((C.proEvaluation.evaluation n).obj M).IsGE b := by
-    haveI : ((C.image.level n).inverse.obj N).IsGE b :=
+    have : ((C.image.level n).inverse.obj N).IsGE b :=
       exceptionalSiteOriginComparison_level_inverse_bound O ell T PE C n N b hb
     exact DerivedCategory.TStructure.t.isGE_of_iso e b
   exact ⟨⟨b, heval⟩, N, ⟨b, hb⟩, ⟨e⟩⟩

@@ -39,7 +39,6 @@ private theorem biprod_prod_snd (A B : AddCommGrpCat.{u + 1}) :
       AddCommGrpCat.ofHom (AddMonoidHom.snd A B) = biprod.snd := by
   rw [← AddCommGrpCat.biprodIsoProd_inv_comp_snd, Iso.hom_inv_id_assoc]
 
-set_option linter.unusedVariables false in
 -- The dependent scheme and sheaf identifications exhaust the default elaboration budget.
 set_option backward.isDefEq.respectTransparency false in
 /-- The degree-zero restriction row on a cofinal tail (Stacks, Tags 09YQ and 0A50). -/
@@ -92,7 +91,7 @@ theorem etale_limit_binary_zero_restriction_row
       ∃ (directed : IsDirected J (· ≤ ·)) (nonempty : Nonempty J),
       letI := directed
       letI := nonempty
-      ∃ (t : J ⥤ I) (ht : t.Final),
+      ∃ (t : J ⥤ I) (_ht : t.Final),
       ∃ (K₄ : J ⥤ AddCommGrpCat.{u + 1}) (r : t ⋙ H ⟶ K₄)
         (v₄ : colimit K₄ ⟶ B₄),
         (∀ j, Function.Injective (r.app j)) ∧

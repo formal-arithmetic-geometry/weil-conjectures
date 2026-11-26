@@ -16,7 +16,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleGraphInterchangeData
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 set_option backward.isDefEq.respectTransparency false
 
 universe u

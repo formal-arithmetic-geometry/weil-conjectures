@@ -62,8 +62,6 @@ private theorem cohomology_composition_transport {X Y Z : Scheme.{u}}
   subst h
   exact ((cohomologyPullbackFunctorial f g F n).2.1 x).symm
 
--- The existential witness `hH` is intentionally unused in the following conclusion.
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- Cohomology functoriality constructs the canonical comparison diagram in any degree
 (Stacks, Tags 01F7 and 09YQ). -/
@@ -92,7 +90,7 @@ theorem etale_limit_canonical_cohomology_diagram
     (L : Cocone G) (n : ℕ) :
     ∃ (H : I ⥤ AddCommGrpCat.{u + 1})
     (eH : ∀ i : I, H.obj i ≅ AddCommGrpCat.of (Sheaf.H (F i) n))
-    (hH : ∀ (i j : I) (f : i ⟶ j), H.map f =
+    (_hH : ∀ (i j : I) (f : i ⟶ j), H.map f =
       (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (D.map f.op) (F i) n) ≫
         AddCommGrpCat.ofHom (Sheaf.H.map (φ f) n) ≫ (eH j).inv)
     (B : Cocone H) (eB : B.pt ≅ AddCommGrpCat.of (Sheaf.H L.pt n))

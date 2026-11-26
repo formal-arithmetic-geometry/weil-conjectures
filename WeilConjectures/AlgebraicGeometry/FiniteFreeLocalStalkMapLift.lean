@@ -26,7 +26,6 @@ open CategoryTheory TopologicalSpace Opposite
 
 namespace AlgebraicGeometry.RingedSpace
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A stalk-linear map composed with a finite free local-source morphism lifts
@@ -39,7 +38,7 @@ theorem exists_finiteFree_local_stalkMap_lift
       (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf).over U) I ⟶ F.over U)
     (χ : (moduleStalkFunctor X x).obj F →ₗ[X.presheaf.stalk x]
       (moduleStalkFunctor X x).obj G) :
-    ∃ (V : Opens X) (hxV : x ∈ V) (i : V ⟶ U)
+    ∃ (V : Opens X) (_hxV : x ∈ V) (i : V ⟶ U)
       (ψ : (SheafOfModules.overMap ((sheafCompose (Opens.grothendieckTopology X)
       (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf) i).obj
         (SheafOfModules.free (R := ((sheafCompose (Opens.grothendieckTopology X)

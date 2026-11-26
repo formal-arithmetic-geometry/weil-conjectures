@@ -201,7 +201,6 @@ private theorem cech_map_of_transport
   let α : EP ⟶ EQ := { app n := m n.len, naturality _ _ g := (hnat g).symm }
   exact fun n r ↦ ((AlgebraicTopology.alternatingCofaceMapComplex A).map α).comm n r
 
-set_option linter.unusedVariables false in
 /-- The prescribed tuple maps commute with the Čech differential.
 (Stacks, Tags 09YP and 03AM) -/
 theorem etale_limit_finite_cech_coefficient_differential
@@ -221,7 +220,7 @@ theorem etale_limit_finite_cech_coefficient_differential
     (eU : (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj U₀ ≅ U)
     (eV : ∀ k,
       (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj (V₀ k) ≅ V k)
-    (he : ∀ k,
+    (_he : ∀ k,
       (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).map (f₀ k) ≫
         eU.hom = (eV k).hom ≫ f k) :
     let J := {j : I // i₀ ≤ j}
@@ -229,7 +228,7 @@ theorem etale_limit_finite_cech_coefficient_differential
       MorphismProperty.Over.pullback @Etale ⊤ (D.map (homOfLE j.property).op)
     let Blim := MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))
     let Uj := fun j : J ↦ (B j).obj U₀
-    let Vj := fun (j : J) (k : K) ↦ (B j).obj (V₀ k)
+    let _Vj := fun (j : J) (k : K) ↦ (B j).obj (V₀ k)
     let fj := fun (j : J) (k : K) ↦ (B j).map (f₀ k)
     let W₀ := fun (n : ℕ) (t : Fin (n + 1) → K) ↦
       (∏ᶜ fun a ↦ Over.mk (f₀ (t a))).left
@@ -259,22 +258,22 @@ theorem etale_limit_finite_cech_coefficient_differential
       (δ : ∀ (j : J) (n : ℕ) (t : Fin (n + 1) → K),
         (MorphismProperty.Over.pullback @Etale ⊤
           (c.π.app (op j.val))).obj (Wj j n t) ≅ Wlim n t)
-      (hNj : ∀ (j : J) (n : ℕ) (t : Fin (n + 1) → K) (a : Fin (n + 1)),
+      (_hNj : ∀ (j : J) (n : ℕ) (t : Fin (n + 1) → K) (a : Fin (n + 1)),
         (eNj j n t).hom ≫ (Pi.π (fun a ↦ Over.mk (fj j (t a))) a).left =
           (B j).map (pr₀ n t a))
-      (hNlim : ∀ (n : ℕ) (t : Fin (n + 1) → K) (a : Fin (n + 1)),
+      (_hNlim : ∀ (n : ℕ) (t : Fin (n + 1) → K) (a : Fin (n + 1)),
         (eNlim n t).hom ≫ (Pi.π (fun a ↦ Over.mk (f (t a))) a).left =
           Blim.map (pr₀ n t a) ≫ (eV (t a)).hom)
-      (hγ : ∀ (j k : J) (a : j ⟶ k) (n : ℕ) (t : Fin (n + 1) → K),
+      (_hγ : ∀ (j k : J) (a : j ⟶ k) (n : ℕ) (t : Fin (n + 1) → K),
         (γ j k a n t).hom.left ≫
             pullback.fst (W₀ n t).hom (D.map (homOfLE k.property).op) =
           pullback.fst (Wj j n t).hom (D.map (show j.val ⟶ k.val from a).op) ≫
             pullback.fst (W₀ n t).hom (D.map (homOfLE j.property).op))
-      (hδ : ∀ (j : J) (n : ℕ) (t : Fin (n + 1) → K),
+      (_hδ : ∀ (j : J) (n : ℕ) (t : Fin (n + 1) → K),
         (δ j n t).hom.left ≫ pullback.fst (W₀ n t).hom (c.π.app (op i₀)) =
           pullback.fst (Wj j n t).hom (c.π.app (op j.val)) ≫
             pullback.fst (W₀ n t).hom (D.map (homOfLE j.property).op)),
-      ∀ (m : ∀ (j k : J) (a : j ⟶ k) (n : ℕ), (Cj j).X n ⟶ (Cj k).X n)
+      ∀ (m : ∀ (j k : J) (_a : j ⟶ k) (n : ℕ), (Cj j).X n ⟶ (Cj k).X n)
         (l : ∀ (j : J) (n : ℕ), (Cj j).X n ⟶ CX.X n),
       (∀ (j k : J) (a : j ⟶ k) (n : ℕ) (t : Fin (n + 1) → K),
         (m j k a n) ≫

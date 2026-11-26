@@ -331,14 +331,12 @@ private theorem comparison_evaluation
   simp only [Category.assoc]
   exact support_paste hn ho hp hl
 
--- Keep the original interface assumptions; the construction only needs hX.
-set_option linter.unusedVariables false in
 /-- The canonical proper/open comparison has the bounded-origin properties. -/
 theorem exceptionalProperOpenOriginProperties
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
     (hX : ExceptionalSystemSiteEquivalence CX)
-    (hY : ExceptionalSystemSiteEquivalence CY)
-    (hZ : ExceptionalSystemSiteEquivalence CZ)
+    (_hY : ExceptionalSystemSiteEquivalence CY)
+    (_hZ : ExceptionalSystemSiteEquivalence CZ)
     (P : ExceptionalProCompactSupport O ell c
       CX.proEvaluation CY.proEvaluation CZ.proEvaluation)
     (R : ExceptionalSystemCompactificationComparison S CX CY CZ P) :
