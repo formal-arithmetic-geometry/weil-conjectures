@@ -161,8 +161,8 @@ lemma specMap_comp_eq_comp_geometricGaloisFrobenius_pow {A R : CommRingCat.{u}}
       Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure,
       hhalg, hσε, ← Category.assoc, hhalg]
 
-omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))] [ConnectedSpace C]
-  [Smooth (C ↘ Spec (.of K))] in
+omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))]
+  [ConnectedSpace C] [Smooth (C ↘ Spec (.of K))] in
 private lemma comp_pullback_snd_eq_genericGeomPoint {A R : CommRingCat.{u}}
     (g : Spec R ⟶ C) (alg : R ⟶ A) (ε : CommRingCat.of (AlgebraicClosure K) ⟶ A)
     (ι : A ⟶ CommRingCat.of Ω) (ζ : R ⟶ CommRingCat.of Ω)
@@ -186,9 +186,7 @@ private lemma comp_pullback_snd_eq_genericGeomPoint {A R : CommRingCat.{u}}
     simp only [Category.assoc]
     rw [← pullback.condition_assoc, hhalg, reassoc_of% hfst, ← Spec.map_comp, hε]
 
-set_option synthInstance.maxHeartbeats 200000 in
--- instance search through `SeparableClosure` and its integral closures is slow
-omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))] [ConnectedSpace C]
+omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))]
   [Smooth (C ↘ Spec (.of K))] in
 /-- **The Frobenius lift on `Spec B_Q^{I_Q}`.** Let `σ_F` be an element of the decomposition
 group of `Q` acting on the image of an embedding `ε₀ : k̄ ↪ Ω`, contained in `B_Q^{I_Q}` through
@@ -197,7 +195,7 @@ group of `Q` acting on the image of an embedding `ε₀ : k̄ ↪ Ω`, contained
 geometric Galois Frobenius of `C̄`, compatibly with `Spec r` and the generic point. -/
 theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen W) [Nonempty W]
     (Q : Ideal (integralClosure Γ(C, W) Ω)) [Q.IsMaximal]
-    {σF : Gal(Ω/C.functionField)} (hσF : σF ∈ MulAction.stabilizer Gal(Ω/C.functionField) Q)
+    {σF : Gal(Ω/C.functionField)} (hσF : σF ∈ affineIdealStabilizer hW Q)
     (ε₀ : AlgebraicClosure K →+* Ω)
     (ε : AlgebraicClosure K →+* Ideal.inertiaInvariants C.functionField Q)
     (r : Ideal.inertiaInvariants C.functionField Q →+* AlgebraicClosure K)
@@ -260,8 +258,6 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
       (specMap_commutes_of_ringHom _ _ _ hrσc)
   · exact specMap_commutes_of_ringHom _ _ _ htfc
 
-set_option synthInstance.maxHeartbeats 200000 in
--- instance search through `SeparableClosure` and its integral closures is slow
 omit [GeometricallyConnected (C ↘ Spec (.of K))] in
 /-- **A strictly henselian neighbourhood of a boundary point from a compatible point.** Let `c`
 be an affine chart at the boundary point `z` with closed point `x`, `Q` a maximal ideal over `z`
@@ -277,7 +273,8 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
     (hQ : ∀ a : Γ(C, c.W), ∃ b ∈ Q, (b : Ω) =
       genericEmb (U ↘ Spec (.of K)) j ((C ↘ Spec (.of K)).geometricFiberPointEmb x
         (sectionsResidue x (hx ▸ c.mem) a)) - algebraMap Γ(C, c.W) Ω a)
-    (σF : Gal(Ω/C.functionField)) (hσF : σF ∈ MulAction.stabilizer Gal(Ω/C.functionField) Q)
+    (σF : Gal(Ω/C.functionField))
+    (hσF : σF ∈ affineIdealStabilizer c.isAffineOpen Q)
     (hσFk : ∀ y, σF (genericEmb (U ↘ Spec (.of K)) j y) = genericEmb (U ↘ Spec (.of K)) j
       (letI := Fintype.ofFinite K
        (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^

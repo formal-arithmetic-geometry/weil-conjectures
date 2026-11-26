@@ -154,8 +154,6 @@ abbrev sliceModules {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max u r}) (Z : C) :=
   ringedSiteModules.{max u r} ((ring.{u, r} R).over Z)
 
-set_option synthInstance.maxHeartbeats 100000 in
--- Additivity of the composite restriction functor is found by a deep search.
 /-- The sectionwise identity for iterated restriction, on complexes.
 Source: Stacks 03DH. -/
 def restrictionComp {C : Type u} [SmallCategory C] [HasFiniteLimits C]
@@ -164,8 +162,22 @@ def restrictionComp {C : Type u} [SmallCategory C] [HasFiniteLimits C]
     (SheafOfModules.overFunctor.{max u r} (ring R) X).mapHomologicalComplex (.up ℤ) ≅
       (SheafOfModules.overFunctor.{max u r} (ring R) Y).mapHomologicalComplex (.up ℤ) ⋙
         (SheafOfModules.overMap.{max u r} (ring R) f).mapHomologicalComplex (.up ℤ) :=
+  let : ((SheafOfModules.overFunctor.{max u r} (ring.{u, r} R) Y) ⋙
+      (SheafOfModules.overMap.{max u r} (ring.{u, r} R) f)).PreservesZeroMorphisms :=
+    ⟨by intro P Q; simp only [Functor.comp_map, Functor.map_zero]⟩
   NatIso.mapHomologicalComplex
     (SheafOfModules.overFunctorMap.{max u r} (ring R) f).symm (.up ℤ)
+
+/-- The complex restriction comparison is the lift of the sectionwise comparison. -/
+theorem restrictionComp_eq {C : Type u} [SmallCategory C] [HasFiniteLimits C]
+    {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{max u r})
+    {X Y : C} (f : X ⟶ Y) :
+    let : ((SheafOfModules.overFunctor.{max u r} (ring.{u, r} R) Y) ⋙
+        (SheafOfModules.overMap.{max u r} (ring.{u, r} R) f)).PreservesZeroMorphisms :=
+      ⟨by intro P Q; simp only [Functor.comp_map, Functor.map_zero]⟩
+    restrictionComp R f = NatIso.mapHomologicalComplex
+      (SheafOfModules.overFunctorMap.{max u r} (ring R) f).symm (.up ℤ) := by
+  rfl
 
 universe d vd wd
 
