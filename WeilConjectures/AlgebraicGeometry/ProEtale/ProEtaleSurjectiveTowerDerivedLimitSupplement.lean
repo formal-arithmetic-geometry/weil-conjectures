@@ -376,8 +376,6 @@ private theorem map_towerTransitionEndomorphism_comp_comparison
     ((congrArg (fun q ↦ q ≫ S.map (t n)) (he (n + 1))).symm.trans
       (Category.assoc _ _ _))
 
--- Preserve the original name of the product-instance binder, used only by typeclass search.
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- A surjective tower of module sheaves has its ordinary limit as a derived limit,
 with its canonical projections and the triangle of its short exact Roos sequence.
@@ -404,7 +402,7 @@ theorem proEtale_surjectiveTower_derivedLimit
       Nonempty (IsLimit (Fan.mk ((DerivedCategory.singleFunctor.{w} _ 0).obj (∏ᶜ F))
         (fun n : ℕ ↦ (DerivedCategory.singleFunctor.{w} _ 0).map (Pi.π F n)))) ∧
       hSES.singleTriangle ∈ distTriang _ ∧
-      (∀ [hprod : HasProduct (fun n : ℕ ↦
+      (∀ [_hprod : HasProduct (fun n : ℕ ↦
           (DerivedCategory.singleFunctor.{w} _ 0).obj (F n))],
         ∃ e : (DerivedCategory.singleFunctor.{w} _ 0).obj (∏ᶜ F) ≅
             ∏ᶜ (fun n : ℕ ↦ (DerivedCategory.singleFunctor.{w} _ 0).obj (F n)),

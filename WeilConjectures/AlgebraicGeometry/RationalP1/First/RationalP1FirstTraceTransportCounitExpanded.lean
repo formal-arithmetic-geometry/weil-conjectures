@@ -23,7 +23,6 @@ set_option Elab.async false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 4096
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor

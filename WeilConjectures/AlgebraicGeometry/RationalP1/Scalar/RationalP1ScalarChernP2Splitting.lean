@@ -19,7 +19,6 @@ set_option Elab.async false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
@@ -143,11 +142,11 @@ theorem scalar_p2_chern_splitting
     let L := line l c
     let T := fun X : Scheme.{u} ↦
       ((DerivedCategory.singleFunctor (Modules Λ X) 0).obj (L X)) ⟦(2 : ℤ)⟧
-    let uq := scalarTwistedUnit Λ (ProjectiveLine Y ↘ Y) (T Y) (T (ProjectiveLine Y))
+    let _uq := scalarTwistedUnit Λ (ProjectiveLine Y ↘ Y) (T Y) (T (ProjectiveLine Y))
       (scalarQLineIso l c k p hpl Y)
     let u₂ := scalarTwistedUnit Λ (secondProjection Y)
       (T (ProjectiveLine Y)) (T (diagonalSurface Y)) (secondLineComparison l c k p hpl Y)
-    let cq := scalarQChern l c Y r a
+    let _cq := scalarQChern l c Y r a
     let c₂ := scalarP2Chern l c Y r b
     IsIso (biprod.desc u₂ c₂) := by
   let Λ := (coefficient l c).X

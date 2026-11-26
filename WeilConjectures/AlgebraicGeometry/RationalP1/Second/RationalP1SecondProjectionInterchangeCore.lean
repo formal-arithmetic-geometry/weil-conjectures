@@ -20,9 +20,6 @@ set_option Elab.async false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
-set_option linter.style.haveILetI false
-set_option linter.unusedVariables false
-set_option linter.unusedSimpArgs false
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
@@ -90,7 +87,7 @@ The statement is independent of the projective-line projection and is the
 coherence calculation needed before inserting the fixed projection maps. -/
 theorem secondTraceStrength_naturality
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
-    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)
+    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (_hpl : p ≠ l)
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]
     (K V : DerivedCategory (Modules (coefficient l c).X Y))
     (Q R Z : DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y)))
@@ -111,8 +108,8 @@ theorem secondTraceStrength_naturality
   let H := twist Λ (ProjectiveLine Y) (line l c (ProjectiveLine Y))
   let T := ((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj
     (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧
-  letI := secondTracePullMonoidal Λ Y
-  letI := secondTraceBraided Λ Y
+  let := secondTracePullMonoidal Λ Y
+  let := secondTraceBraided Λ Y
   have hstrength :
       (secondTraceStrength Λ Y (line l c (ProjectiveLine Y)) K V).hom ≫
           H.map ((secondTraceTensorIso Λ Y K V).inv ≫ (F.obj K ◁ z)) =
@@ -132,7 +129,7 @@ theorem secondTraceStrength_naturality
       (ProjectiveLine Y)
       (line l c (ProjectiveLine Y))
       ((moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).obj K ◁ z)]
-    simp only [tensorHom_id, Category.id_comp]
+    simp only [tensorHom_id]
     simpa only [secondTraceTensorIso, Functor.Monoidal.μIso, tensorIso,
       Iso.refl_hom, tensorHom_id, id_tensorHom] using
       conjugatedTail_naturality

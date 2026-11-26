@@ -267,7 +267,6 @@ private theorem exists_polynomial_isQuasiFiniteAtPrime_of_fibre_dimension
   change IsOpen ({E ⟨q, rfl⟩} : Set _)
   simpa only [Set.image_singleton] using E.isOpenMap _ ho
 
-set_option linter.unusedVariables false in
 /-- A finite type algebra is locally quasi-finite over a polynomial algebra in its fibre
  dimension. -/
 theorem exists_quasiFinite_over_polynomial_algebra
@@ -278,7 +277,7 @@ theorem exists_quasiFinite_over_polynomial_algebra
       (X := PrimeSpectrum ((q.comap (algebraMap R S)).asIdeal.Fiber S))
       ((PrimeSpectrum.preimageHomeomorphFiber R S (q.comap (algebraMap R S)))
         ⟨q, rfl⟩) = (n : WithBot ℕ∞)) :
-    ∃ (g : S) (hg : g ∉ q.asIdeal)
+    ∃ (g : S) (_hg : g ∉ q.asIdeal)
       (f : MvPolynomial (Fin n) R →ₐ[R] Localization.Away g)
       (hft : @Algebra.FiniteType (MvPolynomial (Fin n) R) (Localization.Away g)
         _ _ f.toRingHom.toAlgebra),

@@ -341,6 +341,7 @@ private def localRestrictionIso {X Y : Scheme.{u}} (i : Y ⟶ X)
     (localFunctor i R U).mapDerivedCategory.mapIso
       (DerivedCategory.Q.objObjPreimageIso K)
 
+-- The Prop is inferred from the body; a `theorem` would need the long type spelled out.
 set_option linter.defProp false in
 attribute [-instance] WeilConjectures.integralReductionSiteEssentiallySmall
   ProjectionRestriction.derivedOver ProjectionRestriction.derivedOverModules in

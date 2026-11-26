@@ -28,8 +28,6 @@ The direct-image maps are their actual mates, without an invertibility assumptio
 
 @[expose] public noncomputable section
 
-set_option linter.all false
-set_option linter.unusedVariables false
 set_option backward.defeqAttrib.useBackward true
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -74,6 +72,8 @@ namespace CategoryTheory
 
 end CategoryTheory
 
+-- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
+set_option linter.deprecated false in
 private theorem mate_rectangle
     {A₀ A₁ A₂ A₃ B₀ B₁ B₂ B₃ : Type*}
     [Category* A₀] [Category* A₁] [Category* A₂] [Category* A₃]
@@ -95,10 +95,10 @@ private theorem mate_rectangle
       lc.app (rf.obj J) ≫
         T₂.map ((mateEquiv af ag (TwoSquare.mk _ _ _ _ sa)).natTrans.app J) ≫
         (mateEquiv ag bg (TwoSquare.mk _ _ _ _ lg)).natTrans.app (a.obj J) := by
-  let r := (mateEquiv af bf (TwoSquare.mk _ _ _ _ lf)).natTrans
-  let t := (mateEquiv ag bg (TwoSquare.mk _ _ _ _ lg)).natTrans
-  let e := (mateEquiv af ag (TwoSquare.mk _ _ _ _ sa)).natTrans
-  let eb := (mateEquiv bf bg (TwoSquare.mk _ _ _ _ sb)).natTrans
+  let r := (mateEquiv af bf (TwoSquare.mk _ _ _ _ lf))
+  let t := (mateEquiv ag bg (TwoSquare.mk _ _ _ _ lg))
+  let e := (mateEquiv af ag (TwoSquare.mk _ _ _ _ sa))
+  let eb := (mateEquiv bf bg (TwoSquare.mk _ _ _ _ sb))
   have hr := mateEquiv_counit af bf (TwoSquare.mk _ _ _ _ lf) J
   have ht := mateEquiv_counit ag bg (TwoSquare.mk _ _ _ _ lg) (a.obj J)
   have he := mateEquiv_counit af ag (TwoSquare.mk _ _ _ _ sa) J
@@ -107,7 +107,7 @@ private theorem mate_rectangle
   change gb.map (t.app (a.obj J)) ≫ bg.counit.app _ = _ at ht
   change g.map (e.app J) ≫ ag.counit.app _ = _ at he
   change gb.map (eb.app (T₁.obj J)) ≫ bg.counit.app _ = _ at heb
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans] at hr ht he heb
+  dsimp only [TwoSquare.mk] at hr ht he heb
   apply (bg.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, CategoryTheory.Functor.map_comp, Category.assoc]
   change gb.map (cb.map (r.app J)) ≫ gb.map (eb.app (T₁.obj J)) ≫
@@ -134,6 +134,8 @@ private theorem mate_rectangle
   rw [reassoc_of% coh]
   rfl
 
+-- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
+set_option linter.deprecated false in
 private theorem mate_rectangle_of_eq
     {A₀ A₁ A₂ A₃ B₀ B₁ B₂ B₃ : Type*}
     [Category* A₀] [Category* A₁] [Category* A₂] [Category* A₃]
@@ -162,6 +164,8 @@ private theorem mate_rectangle_of_eq
   subst eb
   exact mate_rectangle af ag bf bg lf lg la lc sa sb coh J
 
+-- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
+set_option linter.deprecated false in
 private theorem mate_transport
     {A₀ A₁ A₂ A₃ B₀ B₁ B₂ B₃ : Type*}
     [Category* A₀] [Category* A₁] [Category* A₂] [Category* A₃]
@@ -241,6 +245,8 @@ private theorem compositionCoherence_eq
   subst k
   simpa only [eqToIso_refl, Iso.refl_trans] using hy
 
+-- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
+set_option linter.deprecated false in
 private theorem mate_transport_of_eq
     {A₀ A₁ A₂ A₃ B₀ B₁ B₂ B₃ : Type*}
     [Category* A₀] [Category* A₁] [Category* A₂] [Category* A₃]
@@ -293,11 +299,11 @@ private theorem left_route_algebra
   simp only [CategoryTheory.Functor.map_comp, Category.assoc]
   rw [reassoc_of% hq]
   have hb' := congrArg q.map hb
-  simp only [CategoryTheory.Functor.map_comp, Category.assoc] at hb'
+  simp only [CategoryTheory.Functor.map_comp] at hb'
   rw [hb']
   rw [reassoc_of% he, reassoc_of% hn, reassoc_of% hp]
   have hr' := congrArg p.map hr
-  simp only [CategoryTheory.Functor.map_comp, Category.assoc] at hr'
+  simp only [CategoryTheory.Functor.map_comp] at hr'
   rw [reassoc_of% hr']
 
 private theorem left_route_realization
@@ -376,7 +382,7 @@ private theorem right_route_algebra
   simp only [CategoryTheory.Functor.map_comp, Category.assoc]
   rw [reassoc_of% hr, hn, reassoc_of% hs]
   have he' := congrArg S.map he
-  simp only [CategoryTheory.Functor.map_comp, Category.assoc] at he'
+  simp only [CategoryTheory.Functor.map_comp] at he'
   rw [reassoc_of% he']
   rw [reassoc_of% hb, reassoc_of% hl]
 
@@ -483,7 +489,7 @@ private theorem iso_square_transport
     yb.inv.app (E₀.obj M)) (hy M)
   have hh' : E₃.map (y.inv.app M) ≫ jh.hom.app M =
       jg.hom.app (c.obj M) ≫ gb.map (jc.hom.app M) ≫ yb.inv.app (E₀.obj M) := by
-    simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app,
+    simp only [Category.assoc, Iso.hom_inv_id_app,
       ← CategoryTheory.Functor.map_comp_assoc, Iso.inv_hom_id_app] at hh
     simpa [Category.assoc] using hh
   rw [reassoc_of% hh']
@@ -510,6 +516,8 @@ private theorem iso_square_transport_to
   subst tt
   exact iso_square_transport jf ja jc jg jh x xb y yb hx hy M
 
+-- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
+set_option linter.deprecated false in
 private theorem ambient_mate
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]
@@ -521,6 +529,10 @@ private theorem ambient_mate
   unfold scalarAmbientExchange
   rfl
 
+-- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
+set_option linter.deprecated false in
+omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
+    [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)] in
 private theorem scalar_rho_mate (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V : Scheme.{u}} (h : U ⟶ V)
     (b : D φ V ⋙ L Λ' h ≅ L Λ h ⋙ D φ U) :
@@ -529,6 +541,8 @@ private theorem scalar_rho_mate (φ : Λ ⟶ Λ') [IsMonHom φ]
   unfold rho
   rfl
 
+-- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
+set_option linter.deprecated false in
 private theorem section_exchange_mate
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]
@@ -547,6 +561,8 @@ private theorem section_exchange_mate
   unfold sectionRectangleExchange
   rfl
 
+-- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
+set_option linter.deprecated false in
 private theorem scalar_derived_mate
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]
@@ -746,11 +762,11 @@ private theorem left_route_section (φ : Λ ⟶ Λ') [IsMonHom φ]
     (rho_section φ f (s X) (s Y) (b f) (p f) J)
     (sectionRectangleTarget φ a f' (s X') J).hom
     (sectionRectangleSource φ f c (s Y) J).hom ?_ ?_
-  · simp only [sectionRectangleTarget, Iso.trans_hom, Iso.app_hom, Iso.app,
-      Functor.mapIso_hom, Functor.map_comp, Functor.comp_obj, Category.assoc,
+  · simp only [sectionRectangleTarget, Iso.trans_hom, Iso.app,
+      Functor.mapIso_hom, Functor.map_comp, Functor.comp_obj,
       ModuleRingedComparison.derivedEquivalence, Functor.asEquivalence]
-  · simp only [sectionRectangleSource, Iso.trans_hom, Iso.app_hom, Iso.app,
-      Functor.mapIso_hom, Functor.map_comp, Functor.comp_obj, Category.assoc,
+  · simp only [sectionRectangleSource, Iso.trans_hom, Iso.app,
+      Functor.mapIso_hom, Functor.map_comp, Functor.comp_obj,
       ModuleRingedComparison.derivedEquivalence, Functor.asEquivalence]
 private theorem right_route_section (φ : Λ ⟶ Λ') [IsMonHom φ]
     {X' X C Y : Scheme.{u}} {a : X' ⟶ X} {c : C ⟶ Y}
@@ -788,10 +804,10 @@ private theorem right_route_section (φ : Λ ⟶ Λ') [IsMonHom φ]
     (exchange_section Λ sq J)
     (sectionRectangleTarget φ a f' (s X') J).hom
     (sectionRectangleSource φ f c (s Y) J).hom ?_ ?_
-  · simp only [sectionRectangleTarget, Iso.trans_hom, Iso.app_hom, Iso.app,
-      Functor.mapIso_hom, Functor.map_comp, Functor.comp_obj, Category.assoc,
+  · simp only [sectionRectangleTarget, Iso.trans_hom, Iso.app,
+      Functor.mapIso_hom, Functor.map_comp, Functor.comp_obj,
       ModuleRingedComparison.derivedEquivalence, Functor.asEquivalence]
-  · simp only [sectionRectangleSource, Iso.trans_hom, Iso.app_hom, Iso.app,
+  · simp only [sectionRectangleSource, Iso.trans_hom, Iso.app,
       Functor.mapIso_hom, Functor.map_comp, Functor.comp_obj, Category.assoc,
       ModuleRingedComparison.derivedEquivalence, Functor.asEquivalence]
 attribute [local irreducible] rho SectionPullNormalized SectionScalarNormalized

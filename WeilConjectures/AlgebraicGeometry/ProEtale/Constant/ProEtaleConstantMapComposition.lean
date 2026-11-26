@@ -47,7 +47,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 namespace Scheme
 
-set_option linter.unusedVariables false in
 /-- The constant-coefficient structure map is compatible with composition of morphisms.
 -/
 theorem proEtaleConstantInverseImageMap_comp
@@ -55,8 +54,8 @@ theorem proEtaleConstantInverseImageMap_comp
     (A : Type (u + 1)) [CommRing A] :
     let D := ModuleCat.{u + 1} A
     let M := ModuleCat.of A A
-    let A_X := (constantSheaf (ProEt.topology X) D).obj M
-    let A_Y := (constantSheaf (ProEt.topology Y) D).obj M
+    let _A_X := (constantSheaf (ProEt.topology X) D).obj M
+    let _A_Y := (constantSheaf (ProEt.topology Y) D).obj M
     let A_Z := (constantSheaf (ProEt.topology Z) D).obj M
     proEtaleConstantInverseImageMap (f ≫ g) D M =
       (ProEtale.upperStarComp D f g).hom.app A_Z ≫

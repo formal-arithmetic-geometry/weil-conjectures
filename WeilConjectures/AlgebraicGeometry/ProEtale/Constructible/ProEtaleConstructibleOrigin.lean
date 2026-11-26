@@ -55,7 +55,6 @@ noncomputable abbrev originCoefficientRing : Sheaf (Scheme.ProEt.topology T) Rin
 noncomputable abbrev OriginModules :=
   ringedSiteModules.{u + 1} (originCoefficientRing T B)
 
-set_option linter.unusedSectionVars false in
 
 /-- The recorded canonical inverse image on module sheaves. -/
 noncomputable abbrev originComparison :

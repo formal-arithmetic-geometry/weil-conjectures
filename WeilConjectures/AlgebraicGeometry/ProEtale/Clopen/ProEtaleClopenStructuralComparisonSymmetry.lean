@@ -22,9 +22,6 @@ set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option autoImplicit false
-set_option linter.style.haveILetI false
-set_option linter.unnecessarySimpa false
-set_option linter.unusedVariables false
 universe t u w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open WeilConjectures
@@ -37,8 +34,8 @@ Koszul symmetry clause on each summand. -/
 theorem clopen_structural_comparison_symmetry
     (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]
-    (hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k))))
-    (hcover : ∀ x : X, ∃ i, x ∈ Set.range (j i))
+    (_hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k))))
+    (_hcover : ∀ x : X, ∃ i, x ∈ Set.range (j i))
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
     (i : I) (h : (ClopenData.clopenTensorRestriction.{t, u} (j i) R).Braided)
     (b : coefficientTotalTensor.{u, t + 1, t} (topology X) R ⋙
@@ -65,7 +62,7 @@ theorem clopen_structural_comparison_symmetry
                 q p n hqp) := by
   intro P Q p q n hqp
   let F := (ClopenData.clopenTensorRestriction.{t, u} (j i) R)
-  letI : F.Additive := ClopenData.clopenTensorRestrictionAdditive (j i) R
+  let : F.Additive := ClopenData.clopenTensorRestrictionAdditive (j i) R
   change F.map ((p * q).negOnePow • ((β_ (P.X p) (Q.X q)).hom ≫
       ClopenData.clopenTotalTensorSummand.{t, u} R Q P q p n hqp)) ≫
       (b.hom.app (Q, P)).f n = _
@@ -77,10 +74,9 @@ theorem clopen_structural_comparison_symmetry
       (ClopenData.clopenTensorComparison.{t, u} (j i) R h (P.X p) (Q.X q)).hom ≫
         (β_ ((ClopenData.clopenTensorRestriction.{t, u} (j i) R).obj (P.X p))
           ((ClopenData.clopenTensorRestriction.{t, u} (j i) R).obj (Q.X q))).hom := by
-    letI := h
+    let := h
     apply (cancel_mono (Functor.LaxMonoidal.μ F (Q.X q) (P.X p))).1
-    simpa [ClopenData.clopenTensorComparison, Category.assoc] using
-      (Functor.LaxBraided.braided (F := F) (P.X p) (Q.X q)).symm
+    simp [ClopenData.clopenTensorComparison, Category.assoc]
   have hμ' :
       F.map ((β_ (P.X p) (Q.X q)).hom) ≫
           (ClopenData.clopenTensorComparison.{t, u} (j i) R h (Q.X q) (P.X p)).hom =

@@ -28,7 +28,6 @@ attribute [local irreducible] coefficient line diagram trace singleUnitIso
 attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 attribute [local irreducible] firstProjection secondProjection square condensedAmbientExchange
 
-set_option linter.unusedVariables false
 /-- The scalar Q unit/Chern splitting isomorphism. -/
 theorem scalar_q_chern_splitting
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -54,10 +53,10 @@ theorem scalar_q_chern_splitting
       ((DerivedCategory.singleFunctor (Modules Λ X) 0).obj (L X)) ⟦(2 : ℤ)⟧
     let uq := scalarTwistedUnit Λ (ProjectiveLine Y ↘ Y) (T Y) (T (ProjectiveLine Y))
       (scalarQLineIso l c k p hpl Y)
-    let u₂ := scalarTwistedUnit Λ (secondProjection Y)
+    let _u₂ := scalarTwistedUnit Λ (secondProjection Y)
       (T (ProjectiveLine Y)) (T (diagonalSurface Y)) (secondLineComparison l c k p hpl Y)
     let cq := scalarQChern l c Y r a
-    let c₂ := scalarP2Chern l c Y r b
+    let _c₂ := scalarP2Chern l c Y r b
     IsIso (biprod.desc uq cq) := by
   dsimp
   obtain ⟨vr, hr⟩ := scalar_q_chern_right_inverse l c k p hpl Y δ family r a ha b hb
