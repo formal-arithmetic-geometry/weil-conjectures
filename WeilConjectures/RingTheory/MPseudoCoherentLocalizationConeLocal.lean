@@ -142,8 +142,6 @@ private theorem pseudoCoherent_scalar
     simp only [Functor.map_comp]
     infer_instance
 
--- The unused hypotheses belong to the unchanged interface of the cone construction.
-set_option linter.unusedVariables false in
 /-- Exact localization transports pseudo-coherence across the cone constructed in
 `localization_cone_construction`. -/
 theorem localization_cone_local
@@ -152,9 +150,9 @@ theorem localization_cone_local
     (r : ℕ) (f : Fin r → A)
     [∀ i : Fin r, HasDerivedCategory.{w₂} (ModuleCat.{max u₁ v₁}
       (Localization.Away (f i)))]
-    (hf : Ideal.span (Set.range f) = ⊤)
-    (m n : ℤ) (hmn : m ≤ n)
-    (hvan : ∀ j : ℤ, n < j → IsZero
+    (_hf : Ideal.span (Set.range f) = ⊤)
+    (m n : ℤ) (_hmn : m ≤ n)
+    (_hvan : ∀ j : ℤ, n < j → IsZero
       ((homologyFunctor (ModuleCat.{max u₁ v₁} A) j).obj (Q.obj M)))
     (hlocal : ∀ i : Fin r, IsMPseudoCoherent m (Q.obj ((Functor.mapHomologicalComplex
       (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i))))
@@ -164,7 +162,7 @@ theorem localization_cone_local
     (c : Q.obj N ⟶ (Q.obj E)⟦(1 : ℤ)⟧)
     (hT : Triangle.mk a b c ∈ distTriang (DerivedCategory (ModuleCat.{max u₁ v₁} A)))
     (hE : IsMPseudoCoherent m (Q.obj E))
-    (hN : ∀ j : ℤ, n - 1 < j → IsZero
+    (_hN : ∀ j : ℤ, n - 1 < j → IsZero
       ((homologyFunctor (ModuleCat.{max u₁ v₁} A) j).obj (Q.obj N))) :
     ∀ i : Fin r, IsMPseudoCoherent m (Q.obj ((Functor.mapHomologicalComplex
       (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i))))
