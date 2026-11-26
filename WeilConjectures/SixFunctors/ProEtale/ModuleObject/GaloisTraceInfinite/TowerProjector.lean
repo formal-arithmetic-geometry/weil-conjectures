@@ -89,6 +89,7 @@ lemma levelAvg_eq (j : T.J) (H : Subgroup (T.Γ j))
     T.levelAvg Λ M hd j H = subgroupAvg (fun a ↦ (T.levelAction Λ j a).app M) H :=
   rfl
 
+omit [WeaklyEtale ginf] in
 /-- **Compatibility of averages with the transition maps**: if the restriction maps `H'` onto
 `H` (in the sense of the lifts of the Galois actions along `t`), then the averages commute with
 the transport `M_j ⟶ M_{j'}`. -/

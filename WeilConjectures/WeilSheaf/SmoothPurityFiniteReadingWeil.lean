@@ -59,7 +59,8 @@ noncomputable def purityFiniteReadWeilDatum (g : X.left ⟶ X.left)
     (purityFiniteEtaleReadingUpperStarIso ℓ E n g)
     (ObjectProperty.homMk (X := (purityBoundedConstructiblePullback _ g).obj K) (Y := K) φ)
 
-omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
+-- omitting the `Fact` instances here would make the downstream theorems using this one warn
+set_option linter.unusedSectionVars false in
 /-- An equivariant isomorphism on the small étale site lifts to an equivariant
 isomorphism of the ambient finite condensed complexes, also for semilinear Frobenius. -/
 theorem exists_finite_equivariant_iso_of_etale_reading (g : X.left ⟶ X.left)

@@ -164,6 +164,7 @@ lemma levelAction_app_comp_normTrace (j : T.J) (a : T.Γ j) :
     (fun a b ↦ T.levelAction_app_comp_levelAction_app Λ M j a b)
     (by simpa [NatTrans.app_sum] using congr_app (T.levelTrace_comp_levelUnit Λ j) M) a
 
+omit [WeaklyEtale ginf] in
 lemma transport_comp_normTrace {j j' : T.J} (h : j ≤ j') :
     T.transport Λ M h ≫ T.normTrace Λ M hd j' = T.normTrace Λ M hd j := by
   have := hd j M
